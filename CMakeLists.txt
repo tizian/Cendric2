@@ -18,14 +18,14 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 endif()
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/SFML-2.2")
-include_directories("${PROJECT_SOURCE_DIR}/SFML-2.2/include")
+include_directories("${PROJECT_SOURCE_DIR}/SFML-2.2/include" "${PROJECT_SOURCE_DIR}/include")
 
-file(GLOB ALL_SOURCES *.cpp)
-file(GLOB ALL_INCLUDES *.h)
+file(GLOB_RECURSE Cendric_FILES
+	"${PROJECT_SOURCE_DIR}/include/*.h"
+	"${PROJECT_SOURCE_DIR}/src/*.cpp"
+)
 
-set(ALL_CODE ${ALL_SOURCES} ${ALL_INCLUDES})
-
-add_executable(Cendric2 ${ALL_CODE})
+add_executable(Cendric2 ${Cendric_FILES})
 
 if(WIN32)
 	target_link_libraries(Cendric2 sfml-system sfml-window sfml-graphics sfml-audio)
