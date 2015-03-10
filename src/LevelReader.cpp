@@ -193,7 +193,6 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 	if (pLevelFile == NULL)
 	{
 		printf("Level: Error at opening file %s \n", fileName);
-		system("PAUSE");
 		return false;
 	}
 
@@ -210,12 +209,6 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 
 	// fill buffer array
 	returnedFileSize = fread(charBuffer, sizeof(char), fileSize, pLevelFile);
-//	if (!feof(pLevelFile))
-//	{
-//		printf("LevelReader: Error at reading file %s, eof not reached \n", fileName);
-//		system("PAUSE");
-//		return false;
-//	}
 
 	long bufferContentLength = returnedFileSize;
 
@@ -267,7 +260,6 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 		}
 		else {
 			printf("LevelReader: Error, unknown tag found in file %s \n", fileName);
-			system("PAUSE");
 			return false;
 		}
 

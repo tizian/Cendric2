@@ -22,6 +22,5 @@ int main(int argc, char* argv[])
 	window.display();
   }
 
-  system("PAUSE");
   return 0;
 }

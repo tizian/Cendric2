@@ -5,7 +5,6 @@ bool TileMap::load(const std::string &filepath, sf::Vector2i tileSize, vector<ve
 	if (!m_tileset.loadFromFile(filepath))
 	{
 		printf("TileMap: Error at opening file %s \n", filepath.c_str());
-		system("PAUSE");
 		return false;
 	}
 
