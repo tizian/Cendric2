@@ -16,7 +16,7 @@ struct LevelData
 	Vector2i tileSize;
 	Vector2i startPos;
 	string tileSetPath;
-	vector<vector<int>> layers;
+	vector<vector<int> > layers;
 };
 
 class LevelReader

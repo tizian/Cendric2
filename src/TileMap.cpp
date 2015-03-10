@@ -1,10 +1,10 @@
 #include "stdafx.h"
 
-bool TileMap::load(const std::string &filepath, sf::Vector2i tileSize, vector<vector<int>> layers, int width, int height)
+bool TileMap::load(const std::string &filepath, sf::Vector2i tileSize, vector<vector<int> > layers, int width, int height)
 {
 	if (!m_tileset.loadFromFile(filepath))
 	{
-		printf("TileMap: Error at opening file %s \n", filepath);
+		printf("TileMap: Error at opening file %s \n", filepath.c_str());
 		system("PAUSE");
 		return false;
 	}

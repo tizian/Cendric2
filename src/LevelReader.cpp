@@ -210,12 +210,12 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 
 	// fill buffer array
 	returnedFileSize = fread(charBuffer, sizeof(char), fileSize, pLevelFile);
-	if (!feof(pLevelFile))
-	{
-		printf("LevelReader: Error at reading file %s, eof not reached \n", fileName);
-		system("PAUSE");
-		return false;
-	}
+//	if (!feof(pLevelFile))
+//	{
+//		printf("LevelReader: Error at reading file %s, eof not reached \n", fileName);
+//		system("PAUSE");
+//		return false;
+//	}
 
 	long bufferContentLength = returnedFileSize;
 

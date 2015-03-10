@@ -1,14 +1,12 @@
 
 #pragma once
 
-#include <Windows.h>
 #include <cstdio>
 #include <cmath>
 #include <map>
 #include <cmath>
 #include <assert.h>
 #include <sstream>
-#include <conio.h>
 #include <algorithm>
 #include <iostream>
 
