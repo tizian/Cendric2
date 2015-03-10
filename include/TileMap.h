@@ -1,14 +1,12 @@
-#pragma once
-
-#include <SFML/Graphics.hpp>
+#include "stdafx.h"
 
 class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
-	bool load(const std::string &filepath, sf::Vector2i tilesize, const int *tiles, int width, int height);
+	bool load(const std::string &filepath, sf::Vector2i tilesize, vector<vector<int>> layers, int width, int height);
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 private:
-	sf::VertexArray m_vertices;
+	vector<sf::VertexArray> m_layers;
 	sf::Texture m_tileset;
 };
