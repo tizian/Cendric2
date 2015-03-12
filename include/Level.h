@@ -17,6 +17,7 @@ public:
 
 private:
 	TileMap m_tileMap;
+	vector<bool> m_collidableTiles;
 	std::string m_name;
 	sf::Vector2i m_startPos;
 };

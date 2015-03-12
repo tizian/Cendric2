@@ -84,6 +84,16 @@ bool LevelReader::checkData(LevelData& data)
 			return false;
 		}
 	}
+	if (data.collidableTiles.empty())
+	{
+		printf("LevelReader: Error in level data: collidable layer is empty \n");
+		return false;
+	}
+	if (data.collidableTiles.size() != data.mapSize.x * data.mapSize.y)
+	{
+		printf("LevelReader: Error in level data: collidable layer has not correct size (map size) \n");
+		return false;
+	}
 	
 	return true;
 }
@@ -145,7 +155,7 @@ bool LevelReader::readTileSize(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayer(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data)
 {
 	// add a new layer into data
 	vector<int> layer;
@@ -168,6 +178,30 @@ bool LevelReader::readLayer(char* start, char* end, LevelData& data)
 	}
 	
 	data.layers.push_back(layer);
+	return true;
+}
+
+bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data)
+{
+	data.collidableTiles.clear();
+
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+
+	while (startData != NULL)
+	{
+		data.collidableTiles.push_back(1 == atoi(startData));
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+
 	return true;
 }
 
@@ -245,12 +279,12 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 		}
 		else if (strncmp(pos, __LAYER_COLLIDABLE, strlen(__LAYER_COLLIDABLE)) == 0) {
 			printf("LevelReader: Found tag %s \n", __LAYER_COLLIDABLE);
-			// TODO
+			readLayerCollidable(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, __LAYER_BACKGROUND, strlen(__LAYER_BACKGROUND)) == 0) {
 			printf("LevelReader: Found tag %s \n", __LAYER_BACKGROUND);
-			readLayer(pos, end, data);
+			readLayerBackground(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, __CENDRIC_STARTPOS, strlen(__CENDRIC_STARTPOS)) == 0) {

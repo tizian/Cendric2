@@ -21,6 +21,7 @@ bool Level::loadFromFile(char* fileName)
 	m_startPos = data.startPos;
 	m_name = data.name;
 	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
+	m_collidableTiles = data.collidableTiles;
 
 	return true;
 }

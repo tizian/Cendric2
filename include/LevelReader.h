@@ -17,6 +17,7 @@ struct LevelData
 	Vector2i startPos;
 	string tileSetPath;
 	vector<vector<int> > layers;
+	vector<bool> collidableTiles;
 };
 
 class LevelReader
@@ -37,7 +38,8 @@ private:
 	bool readTilesetPath(char* start, char* end, LevelData& data);
 	bool readMapSize(char* start, char* end, LevelData& data);
 	bool readTileSize(char* start, char* end, LevelData& data);
-	bool readLayer(char* start, char* end, LevelData& data);
+	bool readLayerBackground(char* start, char* end, LevelData& data);
+	bool readLayerCollidable(char* start, char* end, LevelData& data);
 	bool readStartPos(char* start, char* end, LevelData& data);
 
 	// \brief check level bean for validity before loading the level
