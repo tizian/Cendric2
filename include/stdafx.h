@@ -16,6 +16,7 @@
 #include <vector>
 #include <queue>
 #include <stack>
+#include <unordered_map>
 using namespace std;
 
 
@@ -27,6 +28,7 @@ using namespace sf;
 #include "TileMap.h"
 #include "Level.h"
 #include "LevelReader.h"
+#include "InputController.h"
 
 // extern Game* g_Game;
 
