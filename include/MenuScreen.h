@@ -14,7 +14,7 @@ public:
 	struct MenuItem
 	{
 	public:
-		sf::Rect<int> rect;
+		sf::Rect<float> rect;
 		MenuResult action;
 	};
 
@@ -22,6 +22,6 @@ public:
 
 private:
 	MenuResult getMenuResponse(sf::RenderWindow& window);
-	MenuResult handleClick(sf::Vector2i pos);
+	MenuResult handleClick(sf::Vector2f pos);
 	std::list<MenuItem> m_menuItems;
 };

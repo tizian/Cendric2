@@ -33,20 +33,21 @@ MenuScreen::MenuResult MenuScreen::show(sf::RenderWindow& window)
 	m_menuItems.push_back(playButton);
 	m_menuItems.push_back(exitButton);
 
+	window.clear();
 	window.draw(sprite);
 	window.display();
 
 	return getMenuResponse(window);
 }
 
-MenuScreen::MenuResult MenuScreen::handleClick(sf::Vector2i pos)
+MenuScreen::MenuResult MenuScreen::handleClick(sf::Vector2f pos)
 {
 	std::list<MenuItem>::iterator it;
-	printf("MenuScreen: Mouse click at %d,%d \n", pos.x, pos.y);
+	printf("MenuScreen: Mouse click at %f,%f \n", pos.x, pos.y);
 
 	for (it = m_menuItems.begin(); it != m_menuItems.end(); it++)
 	{
-		sf::Rect<int> menuItemRect = (*it).rect;
+		sf::Rect<float> menuItemRect = (*it).rect;
 		if (menuItemRect.contains(pos))
 		{
 			return (*it).action;
@@ -58,17 +59,22 @@ MenuScreen::MenuResult MenuScreen::handleClick(sf::Vector2i pos)
 
 MenuScreen::MenuResult  MenuScreen::getMenuResponse(sf::RenderWindow& window)
 {
-	sf::Event menuEvent;
+	sf::Event event;
 
 	while (true)
 	{
-		while (window.pollEvent(menuEvent))
+		while (window.pollEvent(event))
 		{
-			if (menuEvent.type == sf::Event::MouseButtonPressed)
+			if (event.type == sf::Event::MouseButtonPressed)
 			{
-				return handleClick(Vector2i(menuEvent.mouseButton.x, menuEvent.mouseButton.y));
+				// get the current mouse position in the window
+				sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+
+				// convert it to world coordinates
+				sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+				return handleClick(worldPos);
 			}
-			if (menuEvent.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed)
 			{
 				return MenuResult::Exit;
 			}
