@@ -11,7 +11,7 @@ InputController::~InputController()
 void InputController::update()
 {
 	// LEFT
-	m_keyActiveMap[Key::Left] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Left));
+    m_keyActiveMap[Key::Left] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Left));
 	// RIGHT
 	m_keyActiveMap[Key::Right] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Right));
 	// JUMP

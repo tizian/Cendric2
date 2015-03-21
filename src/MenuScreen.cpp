@@ -39,7 +39,7 @@ MenuScreen::MenuResult MenuScreen::show(sf::RenderWindow& window)
 	return getMenuResponse(window);
 }
 
-MenuScreen::MenuResult MenuScreen::handleClick(sf::Vector2i& pos)
+MenuScreen::MenuResult MenuScreen::handleClick(sf::Vector2i pos)
 {
 	std::list<MenuItem>::iterator it;
 	printf("MenuScreen: Mouse click at %d,%d \n", pos.x, pos.y);
