@@ -194,7 +194,7 @@ bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data)
 
 	while (startData != NULL)
 	{
-		data.collidableTiles.push_back(1 == atoi(startData));
+		data.collidableTiles.push_back(0 != atoi(startData));
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
@@ -280,11 +280,13 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 		else if (strncmp(pos, __LAYER_COLLIDABLE, strlen(__LAYER_COLLIDABLE)) == 0) {
 			printf("LevelReader: Found tag %s \n", __LAYER_COLLIDABLE);
 			readLayerCollidable(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, __LAYER_BACKGROUND, strlen(__LAYER_BACKGROUND)) == 0) {
 			printf("LevelReader: Found tag %s \n", __LAYER_BACKGROUND);
 			readLayerBackground(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, __CENDRIC_STARTPOS, strlen(__CENDRIC_STARTPOS)) == 0) {

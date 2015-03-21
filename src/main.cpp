@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[])
 {
-  sf::RenderWindow window(sf::VideoMode(1024, 512), "Cendric 2 :D"); 
+  sf::RenderWindow window(sf::VideoMode(1600, 960), "Cendric 2 :D"); 
 
   Level level;
   level.loadFromFile("res/level/testlevel.dric");

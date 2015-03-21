@@ -23,11 +23,14 @@ bool TileMap::load(const std::string &filepath, sf::Vector2i tileSize, vector<ve
 			{
 				int tileNumber = layers[count][i + j * width];
 
-				if (tileNumber == -1)
+				if (tileNumber == 0)
 				{
 					// there is no tile
 					continue;
 				}
+
+				// we start with tiles at 1 in the .dric format, but need 0 here
+				tileNumber--;
 
 				int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
 				int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
