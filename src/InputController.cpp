@@ -11,35 +11,35 @@ InputController::~InputController()
 void InputController::update()
 {
 	// LEFT
-	m_keyActiveMap[Key::LEFT] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::LEFT));
+	m_keyActiveMap[Key::Left] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Left));
 	// RIGHT
-	m_keyActiveMap[Key::RIGHT] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::RIGHT));
+	m_keyActiveMap[Key::Right] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Right));
 	// JUMP
-	m_keyActiveMap[Key::JUMP] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::JUMP));
+	m_keyActiveMap[Key::Jump] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Jump));
 }
 
 void InputController::init()
 {
 	m_keyActiveMap.insert(
 		{
-			{ Key::LEFT, false },
-			{ Key::RIGHT, false },
-			{ Key::JUMP, false }
+			{ Key::Left, false },
+			{ Key::Right, false },
+			{ Key::Jump, false }
 		});
 	m_keyMap.insert(
 		{
-			{ Key::LEFT, sf::Keyboard::Left },
-			{ Key::RIGHT, sf::Keyboard::Right },
-			{ Key::JUMP, sf::Keyboard::Space }
+			{ Key::Left, sf::Keyboard::Left },
+			{ Key::Right, sf::Keyboard::Right },
+			{ Key::Jump, sf::Keyboard::Space }
 		});
 }
 
-unordered_map<Key, bool> InputController::getKeyActiveMap() 
+map<Key, bool> InputController::getKeyActiveMap() 
 {
 	return m_keyActiveMap;
 }
 
-unordered_map<Key, sf::Keyboard::Key> InputController::getKeyMap()
+map<Key, sf::Keyboard::Key> InputController::getKeyMap()
 {
 	return m_keyMap;
 }
