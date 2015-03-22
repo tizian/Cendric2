@@ -17,14 +17,17 @@
 #include <queue>
 #include <stack>
 #include <map>
+#include <memory>
 using namespace std;
 
 
 // Graphic Engine SFML
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 using namespace sf;
 
 // own classes
+
 #include "TileMap.h"
 #include "Level.h"
 #include "LevelReader.h"
@@ -32,13 +35,13 @@ using namespace sf;
 #include "Game.h"
 #include "SplashScreen.h"
 #include "MenuScreen.h"
-#include "GameObject.h"
 #include "Animation.h"
 #include "AnimatedSprite.h"
-#include "ResourceLoader.h"
+#include "ResourceManager.h"
 #include "GameState.h"
 #include "Object.h"
 #include "GameStateController.h"
+#include "GameObject.h"
 
 
 
