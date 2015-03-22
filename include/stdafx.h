@@ -36,7 +36,9 @@ using namespace sf;
 #include "Animation.h"
 #include "AnimatedSprite.h"
 #include "ResourceLoader.h"
-
+#include "GameState.h"
+#include "Object.h"
+#include "GameStateController.h"
 
 
 
