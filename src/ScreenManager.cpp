@@ -10,7 +10,7 @@ ScreenManager::ScreenManager(Screen *initialScreen)
 
 void ScreenManager::update(float dt)
 {
-	cout << "(ScreenManager::update): current screen is " << m_currentScreen << endl;
+	//cout << "(ScreenManager::update): current screen is " << m_currentScreen << endl;
 	m_currentScreen->update(dt);
 }
 

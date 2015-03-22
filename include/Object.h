@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 
+// an abstract object with a gamestate and a bounding box
 class Object
 {
 public:
