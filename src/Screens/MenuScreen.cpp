@@ -12,10 +12,8 @@ MenuScreen::MenuScreen()
 	cout << "...done." << endl;
 }
 
-Screen* MenuScreen::update(float dt)
+Screen* MenuScreen::update(sf::Time frameTime)
 {
-	cout << "Menu update" << endl;
-	// TODO: not sure if it is a good idea to poll events separately for every Screen...
 	if (Keyboard::isKeyPressed(Keyboard::Unknown) || Mouse::isButtonPressed(Mouse::Button::Left))
 	{
 		return new GameScreen();

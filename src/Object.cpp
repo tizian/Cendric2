@@ -3,7 +3,7 @@
 Object::Object() {}
 Object::~Object() {}
 
-void Object::update(float dt) {}
+void Object::update(sf::Time frameTime) {}
 void Object::render(sf::RenderTarget &renderTarget) const {}
 
 void Object::setScreen(Screen *screen)

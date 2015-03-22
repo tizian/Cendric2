@@ -17,13 +17,11 @@
 #include <queue>
 #include <stack>
 #include <map>
-#include <memory>
 using namespace std;
 
 
 // Graphic Engine SFML
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 using namespace sf;
 
 // own classes
@@ -44,5 +42,9 @@ using namespace sf;
 #include "ScreenManager.h"
 #include "GameObject.h"
 #include "Game.h"
+#include "MainCharacter.h"
+
+// TODO evil?
+extern ResourceManager* g_resourceManager;
 
 

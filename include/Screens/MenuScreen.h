@@ -5,7 +5,7 @@ class MenuScreen : public Screen
 public:
 	MenuScreen();
 
-	Screen* update(float dt) override;
+	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) const override;
 
 private:

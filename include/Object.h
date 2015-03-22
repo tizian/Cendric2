@@ -9,7 +9,7 @@ public:
 	Object();
 	virtual ~Object();
 
-	virtual void update(float dt);
+	virtual void update(sf::Time frameTime);
 	virtual void render(sf::RenderTarget &renderTarget) const;
 
 	void setScreen(Screen *screen);

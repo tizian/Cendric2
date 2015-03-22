@@ -12,9 +12,8 @@ SplashScreen::SplashScreen()
 	cout << "...done." << endl;
 }
 
-Screen* SplashScreen::update(float dt)
+Screen* SplashScreen::update(sf::Time frameTime)
 {
-	// TODO: not sure if it is a good idea to poll events separately for every Screen...
 	if (Keyboard::isKeyPressed(Keyboard::Unknown) || Mouse::isButtonPressed(Mouse::Button::Left))
 	{
 		cout << "(SplashScreen::update): Change Screen" << endl;

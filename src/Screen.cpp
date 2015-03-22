@@ -7,11 +7,11 @@ Screen::Screen()
 
 Screen::~Screen() {}
 
-Screen* Screen::update(float dt)
+Screen* Screen::update(sf::Time frameTime)
 {
 	for (Object *obj : m_objects)
 	{
-		obj->update(dt);
+		obj->update(frameTime);
 	}
 	return this;
 }

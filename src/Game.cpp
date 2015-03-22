@@ -11,6 +11,8 @@ Game::Game()
 
 void Game::run()
 {
+	sf::Clock frameClock;
+
 	while (m_running)
 	{
 		sf::Event e;
@@ -22,8 +24,8 @@ void Game::run()
 			}
 		}
 
-		float dt = 0.0f; // TODO: frame time
-		m_screenManager.update(dt);
+		sf::Time frameTime = frameClock.restart();
+		m_screenManager.update(frameTime);
 
 		m_mainWindow.clear();
 

@@ -5,7 +5,7 @@ class SplashScreen : public Screen
 public:
 	SplashScreen();
 
-	Screen* update(float dt) override;
+	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) const override; 
 
 	virtual void onEnter(Screen *previousScreen);

@@ -11,7 +11,7 @@ public:
 	Screen();
 	virtual ~Screen();
 
-	virtual Screen* update(float dt);
+	virtual Screen* update(sf::Time frameTime);
 	virtual void render(sf::RenderTarget &renderTarget) const;
 
 	virtual void onEnter(Screen *previousScreen);

@@ -8,7 +8,7 @@ public:
 	ScreenManager();
 	ScreenManager(Screen *initialScreen);
 
-	void update(float dt);
+	void update(sf::Time frameTime);
 	void render(sf::RenderTarget &renderTarget) const;
 
 	Screen *getCurrentScreen();
