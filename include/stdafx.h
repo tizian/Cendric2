@@ -32,6 +32,8 @@ using namespace sf;
 #include "Game.h"
 #include "SplashScreen.h"
 #include "MenuScreen.h"
-
+#include "GameState.h"
+#include "Object.h"
+#include "GameStateController.h"
 
 
