@@ -11,10 +11,10 @@ public:
 	virtual void update(float dt);
 	virtual void render(sf::RenderTarget &renderTarget) const;
 
-	void setGameState(GameState *gameState);
+	void setScreen(Screen *screen);
 
 private:
-	GameState *m_gameState;
+	Screen *m_screen;
 
 	IntRect m_boundingBox;
 };

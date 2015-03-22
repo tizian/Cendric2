@@ -6,7 +6,7 @@ Object::~Object() {}
 void Object::update(float dt) {}
 void Object::render(sf::RenderTarget &renderTarget) const {}
 
-void Object::setGameState(GameState *gameState)
+void Object::setScreen(Screen *screen)
 {
-	m_gameState = gameState;
+	m_screen = screen;
 }

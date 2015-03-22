@@ -1,97 +1,36 @@
 #include "stdafx.h"
 
-void Game::init()
+Game::Game()
 {
-	m_mainWindow.create(sf::VideoMode(__WINDOW_WIDTH, __WINDOW_HEIGHT), "Cendric");
+	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
+	m_screenManager = ScreenManager(new SplashScreen());
+	m_inputController.init();
 
-	m_currentLevel.loadFromFile("res/level/testlevel.dric");
-	m_controller.init();
-	m_gameState = GameState::ShowingScreenSplash;
+	m_running = true;
 }
 
-void Game::start(void)
+void Game::run()
 {
-	if (m_gameState != GameState::Uninitialized)
-		return;
-
-	init();
-
-	while (!isExiting())
+	while (m_running)
 	{
-		gameLoop();
+		sf::Event e;
+		while (m_mainWindow.pollEvent(e))
+		{
+			if (e.type == sf::Event::Closed || (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Escape))
+			{
+				m_running = false;
+			}
+		}
+
+		float dt = 0.0f; // TODO: frame time
+		m_screenManager.update(dt);
+
+		m_mainWindow.clear();
+
+		m_screenManager.render(m_mainWindow);
+
+		m_mainWindow.display();
 	}
 
 	m_mainWindow.close();
 }
-
-bool Game::isExiting()
-{
-	return (m_gameState == GameState::Exiting);
-}
-
-void Game::gameLoop()
-{
-	sf::Event currentEvent;
-	while (m_mainWindow.pollEvent(currentEvent))
-	{
-		switch (m_gameState)
-		{
-		case GameState::ShowingScreenMenu:
-		{
-			showMenuScreen();
-			break;
-		}
-		case GameState::ShowingScreenSplash:
-		{
-			showSplashScreen();
-			break;
-		}
-		case GameState::PlayingLevel:
-		{
-			m_controller.update();
-
-			m_mainWindow.clear();
-			m_mainWindow.draw(m_currentLevel.getTilemap());
-			m_mainWindow.display();
-
-			if (currentEvent.type == sf::Event::Closed || (currentEvent.type == sf::Event::KeyPressed && currentEvent.key.code == sf::Keyboard::Escape))
-			{
-				m_gameState = GameState::Exiting;
-			}
-			break;
-		}
-		}
-	}
-}
-
-void Game::showSplashScreen()
-{
-	SplashScreen splashScreen;
-	splashScreen.show(m_mainWindow);
-	m_gameState = GameState::ShowingScreenMenu;
-}
-
-void Game::showMenuScreen()
-{
-	MenuScreen mainMenu;
-	MenuScreen::MenuResult result = mainMenu.show(m_mainWindow);
-	switch (result)
-	{
-	case MenuScreen::MenuResult::Exit:
-	{
-		m_gameState = GameState::Exiting;
-		break;
-	}
-	case MenuScreen::MenuResult::Play:
-	{
-		m_gameState = GameState::PlayingLevel;
-		break;
-	}
-	}
-}
-
-
-Game::GameState Game::m_gameState = GameState::Uninitialized;
-sf::RenderWindow Game::m_mainWindow;
-Level Game::m_currentLevel;
-InputController Game::m_controller;

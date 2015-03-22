@@ -29,16 +29,16 @@ using namespace sf;
 #include "Level.h"
 #include "LevelReader.h"
 #include "InputController.h"
-#include "Game.h"
-#include "SplashScreen.h"
-#include "MenuScreen.h"
+#include "Screen.h"
+#include "Screens/SplashScreen.h"
+#include "Screens/MenuScreen.h"
+#include "Screens/GameScreen.h"
 #include "GameObject.h"
 #include "Animation.h"
 #include "AnimatedSprite.h"
 #include "ResourceLoader.h"
-#include "GameState.h"
 #include "Object.h"
-#include "GameStateController.h"
-
+#include "ScreenManager.h"
+#include "Game.h"
 
 

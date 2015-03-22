@@ -2,7 +2,8 @@
 
 int main(int argc, char* argv[])
 {
-	Game::start();
+	Game game;
+	game.run();
 
 	return 0;
 }
