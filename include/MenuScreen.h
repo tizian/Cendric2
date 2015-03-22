@@ -14,7 +14,7 @@ public:
 	struct MenuItem
 	{
 	public:
-		sf::Rect<float> rect;
+		sf::FloatRect rect;
 		MenuResult action;
 	};
 

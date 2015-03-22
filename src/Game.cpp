@@ -54,21 +54,7 @@ void Game::gameLoop()
 			m_mainWindow.draw(m_currentLevel.getTilemap());
 			m_mainWindow.display();
 
-			// debug output for testing
-			if (m_controller.getKeyActiveMap().at(Key::Left))
-			{
-				printf("main: Left Key pressed \n");
-			}
-			if (m_controller.getKeyActiveMap().at(Key::Right))
-			{
-				printf("main: Right Key pressed \n");
-			}
-			if (m_controller.getKeyActiveMap().at(Key::Jump))
-			{
-				printf("main: Jump Key pressed \n");
-			}
-
-			if (currentEvent.type == sf::Event::Closed)
+			if (currentEvent.type == sf::Event::Closed || (currentEvent.type == sf::Event::KeyPressed && currentEvent.key.code == sf::Keyboard::Escape))
 			{
 				m_gameState = GameState::Exiting;
 			}
