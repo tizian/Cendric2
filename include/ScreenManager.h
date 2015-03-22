@@ -17,4 +17,5 @@ public:
 
 private:
 	Screen *m_currentScreen = nullptr;
+	Screen *m_nextScreen = nullptr;
 };
