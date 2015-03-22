@@ -9,8 +9,13 @@ ScreenManager::ScreenManager(Screen *initialScreen)
 
 void ScreenManager::update(float dt)
 {
-	//cout << "(ScreenManager::update): current screen is " << m_currentScreen << endl;
-	m_currentScreen = m_currentScreen->update(dt);
+	Screen* nextScreen = m_currentScreen->update(dt);
+	if (m_currentScreen != nextScreen) {
+		m_currentScreen->onExit(nextScreen);
+		nextScreen->onEnter(m_currentScreen);
+		delete m_currentScreen;
+		m_currentScreen = nextScreen;
+	}
 }
 
 void ScreenManager::render(sf::RenderTarget &renderTarget) const
