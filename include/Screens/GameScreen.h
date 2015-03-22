@@ -5,7 +5,7 @@ class GameScreen : public Screen
 public:
 	GameScreen();
 
-	void update(float dt) override;
+	Screen* update(float dt) override;
 	void render(sf::RenderTarget &renderTarget) const override;
 
 private:

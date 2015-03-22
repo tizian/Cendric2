@@ -7,12 +7,13 @@ Screen::Screen()
 
 Screen::~Screen() {}
 
-void Screen::update(float dt)
+Screen* Screen::update(float dt)
 {
 	for (Object *obj : m_objects)
 	{
 		obj->update(dt);
 	}
+	return this;
 }
 
 void Screen::render(sf::RenderTarget &renderTarget) const
@@ -39,9 +40,4 @@ void Screen::addObject(Object *object)
 {
 	object->setScreen(this);
 	m_objects.push_back(object);
-}
-
-void Screen::setScreenManager(ScreenManager *manager)
-{
-	m_screenManager = manager;
 }

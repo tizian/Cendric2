@@ -7,9 +7,9 @@ GameScreen::GameScreen()
 	cout << "...done." << endl;
 }
 
-void GameScreen::update(float dt)
+Screen* GameScreen::update(float dt)
 {
-
+	return this;
 }
 
 void GameScreen::render(sf::RenderTarget &renderTarget) const

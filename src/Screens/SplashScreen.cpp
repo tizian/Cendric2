@@ -12,14 +12,15 @@ SplashScreen::SplashScreen()
 	cout << "...done." << endl;
 }
 
-void SplashScreen::update(float dt)
+Screen* SplashScreen::update(float dt)
 {
 	// TODO: not sure if it is a good idea to poll events separately for every Screen...
 	if (Keyboard::isKeyPressed(Keyboard::Unknown) || Mouse::isButtonPressed(Mouse::Button::Left))
 	{
 		cout << "(SplashScreen::update): Change Screen" << endl;
-		m_screenManager->changeScreenTo(new MenuScreen());	// TODO: this looks dangerous... Maybe try sth like screenManager->ChangeScreen<MenuScreen>();
+		return new MenuScreen();
 	}
+	return this;
 }
 
 void SplashScreen::render(sf::RenderTarget &renderTarget) const

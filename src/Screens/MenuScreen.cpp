@@ -12,14 +12,15 @@ MenuScreen::MenuScreen()
 	cout << "...done." << endl;
 }
 
-void MenuScreen::update(float dt)
+Screen* MenuScreen::update(float dt)
 {
 	cout << "Menu update" << endl;
 	// TODO: not sure if it is a good idea to poll events separately for every Screen...
 	if (Keyboard::isKeyPressed(Keyboard::Unknown) || Mouse::isButtonPressed(Mouse::Button::Left))
 	{
-		m_screenManager->changeScreenTo(new GameScreen());	// TODO: this looks dangerous... Maybe try sth like screenManager->ChangeScreen<MenuScreen>();
+		return new GameScreen();
 	}
+	return this;
 }
 
 void MenuScreen::render(sf::RenderTarget &renderTarget) const
