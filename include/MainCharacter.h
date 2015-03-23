@@ -7,7 +7,7 @@ public:
 	MainCharacter();
 	~MainCharacter();
 
-	void load(std::string tag) override;
+	void load() override;
 
 private:
 	

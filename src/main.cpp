@@ -3,7 +3,7 @@
 int main(int argc, char* argv[])
 {
 	g_resourceManager = new ResourceManager();
-	g_resourceManager->load();
+	g_resourceManager->init();
 
 	Game game;
 	game.run();

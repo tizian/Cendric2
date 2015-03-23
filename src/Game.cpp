@@ -3,6 +3,7 @@
 Game::Game()
 {
 	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
+	m_mainWindow.setFramerateLimit(60);
 	m_screenManager = ScreenManager(new SplashScreen());
 	m_inputController.init();
 

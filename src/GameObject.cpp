@@ -9,9 +9,9 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::load(std::string tag)
+void GameObject::load()
 {
-
+	//nop
 }
 
 void GameObject::setCurrentAnimation(Animation& animation)

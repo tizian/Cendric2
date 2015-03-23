@@ -7,8 +7,8 @@ public:
 	GameObject();
 	~GameObject();
 
-	// \brief loads animation from resource manager
-	virtual void load(std::string tag);
+	// \brief loads animations using the resource manager
+	virtual void load();
 
 	void render(sf::RenderTarget &renderTarget) const override;
 	void update(sf::Time frameTime) override;

@@ -1,16 +1,28 @@
 #include "stdafx.h"
 
+enum class ResourceID
+{
+	Texture_mainChar,
+	Level_testLevel
+};
+
 class ResourceManager
 {
 public:
 	ResourceManager();
 	~ResourceManager();
 
-	// \brief loads resources. TODO: should be specified with IDs to load
-	void load();
+	// \brief initializes the filename map
+	void init();
 
-	Texture& getTexture(const std::string& mId);
+	const Texture& getTexture(ResourceID id);
+	char* getFilename(ResourceID id);
+
+	void deleteResource(ResourceID id);
 
 private:
-	map<std::string, Texture*> m_textures;
+	map<ResourceID, sf::Texture> m_textures;
+
+	// \brief a map that is filled with all ResourceTags and the corresponding filenames
+	map <ResourceID, std::string> m_fileNames;
 };

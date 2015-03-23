@@ -3,9 +3,9 @@
 GameScreen::GameScreen()
 {
 	cout << "Init GameScreen...";
-	m_currentLevel.loadFromFile("res/level/testlevel.dric");
+	m_currentLevel.loadFromFile(g_resourceManager->getFilename(ResourceID::Level_testLevel));
 	MainCharacter* mainChar = new MainCharacter();
-	mainChar->load("main_character");
+	mainChar->load();
 	addObject(mainChar);
 	cout << "...done." << endl;
 }

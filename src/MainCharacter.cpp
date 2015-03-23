@@ -3,12 +3,10 @@
 MainCharacter::MainCharacter() {}
 MainCharacter::~MainCharacter() {}
 
-void MainCharacter::load(std::string tag)
+void MainCharacter::load()
 {
-	Texture* cendricTexture = &(g_resourceManager->getTexture("main_character"));
-	
 	Animation walkingAnimationRight;
-	walkingAnimationRight.setSpriteSheet(Texture(*cendricTexture));
+	walkingAnimationRight.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
 	walkingAnimationRight.addFrame(sf::IntRect(0, 0, 80, 120));
 	walkingAnimationRight.addFrame(sf::IntRect(80, 0, 80, 120));
 	walkingAnimationRight.addFrame(sf::IntRect(160, 0, 80, 120));
@@ -21,7 +19,7 @@ void MainCharacter::load(std::string tag)
 	addAnimation("walking_right", walkingAnimationRight);
 
 	Animation walkingAnimationLeft;
-	walkingAnimationLeft.setSpriteSheet(Texture(*cendricTexture));
+	walkingAnimationLeft.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
 	walkingAnimationLeft.addFrame(sf::IntRect(0, 120, 80, 120));
 	walkingAnimationLeft.addFrame(sf::IntRect(80, 120, 80, 120));
 	walkingAnimationLeft.addFrame(sf::IntRect(160, 120, 80, 120));
