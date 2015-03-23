@@ -6,9 +6,9 @@ m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused)
 
 }
 
-void AnimatedSprite::setAnimation(const Animation& animation)
+void AnimatedSprite::setAnimation(Animation* animation)
 {
-	m_animation = &animation;
+	m_animation = animation;
 	m_texture = m_animation->getSpriteSheet();
 	m_currentFrame = 0;
 	setFrame(m_currentFrame);
@@ -24,9 +24,9 @@ void AnimatedSprite::play()
 	m_isPaused = false;
 }
 
-void AnimatedSprite::play(const Animation& animation)
+void AnimatedSprite::play(Animation* animation)
 {
-	if (getAnimation() != &animation)
+	if (getAnimation() != animation)
 		setAnimation(animation);
 	play();
 }

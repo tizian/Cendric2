@@ -13,9 +13,9 @@ public:
 	void render(sf::RenderTarget &renderTarget) const override;
 	void update(sf::Time frameTime) override;
 
-	void setCurrentAnimation(Animation &animation);
+	void setCurrentAnimation(Animation* animation);
 	void addAnimation(std::string tag, Animation &animation);
-	Animation getAnimation(std::string tag);
+	Animation* getAnimation(std::string tag);
 	
 	AnimatedSprite m_animatedSprite;
 

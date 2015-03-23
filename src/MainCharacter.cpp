@@ -30,8 +30,9 @@ void MainCharacter::load()
 	walkingAnimationLeft.addFrame(sf::IntRect(560, 120, 80, 120));
 
 	addAnimation("walking_left", walkingAnimationLeft);
-	setCurrentAnimation(getAnimation("walking_right"));
-
 	m_animatedSprite.setFrameTime(sf::seconds(0.1));
+
 	m_animatedSprite.setPosition(sf::Vector2f(800, 450));
+
+	setCurrentAnimation(getAnimation("walking_right"));
 }

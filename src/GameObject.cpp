@@ -14,7 +14,7 @@ void GameObject::load()
 	//nop
 }
 
-void GameObject::setCurrentAnimation(Animation& animation)
+void GameObject::setCurrentAnimation(Animation* animation)
 {
 	m_animatedSprite.setAnimation(animation);
 	m_animatedSprite.play();
@@ -24,9 +24,9 @@ void GameObject::addAnimation(std::string tag, Animation& animation)
 {
 	m_animations.insert({ tag, animation });
 }
-Animation GameObject::getAnimation(std::string tag)
+Animation* GameObject::getAnimation(std::string tag)
 {
-	return m_animations.at(tag);
+	return &m_animations[tag];
 }
 
 void GameObject::render(sf::RenderTarget &renderTarget) const
