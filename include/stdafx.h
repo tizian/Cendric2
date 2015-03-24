@@ -44,7 +44,8 @@ using namespace sf;
 #include "Game.h"
 #include "MainCharacter.h"
 
-// TODO evil?
+// extern objects
 extern ResourceManager* g_resourceManager;
+extern InputController* g_inputController;
 
 

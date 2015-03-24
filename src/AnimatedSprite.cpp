@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 AnimatedSprite::AnimatedSprite(sf::Time frameTime, bool paused, bool looped) :
-m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL)
+m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL), m_isFlipped(false)
 {
 
 }
@@ -48,6 +48,11 @@ void AnimatedSprite::setLooped(bool looped)
 	m_isLooped = looped;
 }
 
+void AnimatedSprite::setFlipped(bool flipped)
+{
+	m_isFlipped = flipped;
+}
+
 void AnimatedSprite::setColor(const sf::Color& color)
 {
 	// Update the vertices' color
@@ -82,6 +87,11 @@ bool AnimatedSprite::isLooped() const
 	return m_isLooped;
 }
 
+bool AnimatedSprite::isFlipped() const
+{
+	return m_isFlipped;
+}
+
 bool AnimatedSprite::isPlaying() const
 {
 	return !m_isPaused;
@@ -108,11 +118,21 @@ void AnimatedSprite::setFrame(std::size_t newFrame, bool resetTime)
 		float right = left + static_cast<float>(rect.width);
 		float top = static_cast<float>(rect.top);
 		float bottom = top + static_cast<float>(rect.height);
-
-		m_vertices[0].texCoords = sf::Vector2f(left, top);
-		m_vertices[1].texCoords = sf::Vector2f(left, bottom);
-		m_vertices[2].texCoords = sf::Vector2f(right, bottom);
-		m_vertices[3].texCoords = sf::Vector2f(right, top);
+		
+		if (m_isFlipped) 
+		{
+			m_vertices[0].texCoords = sf::Vector2f(right, top);
+			m_vertices[1].texCoords = sf::Vector2f(right, bottom);
+			m_vertices[2].texCoords = sf::Vector2f(left, bottom);
+			m_vertices[3].texCoords = sf::Vector2f(left, top);
+		} 
+		else 
+		{
+			m_vertices[0].texCoords = sf::Vector2f(left, top);
+			m_vertices[1].texCoords = sf::Vector2f(left, bottom);
+			m_vertices[2].texCoords = sf::Vector2f(right, bottom);
+			m_vertices[3].texCoords = sf::Vector2f(right, top);
+		}
 	}
 
 	if (resetTime)

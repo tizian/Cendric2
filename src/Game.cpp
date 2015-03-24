@@ -3,10 +3,8 @@
 Game::Game()
 {
 	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
-	m_mainWindow.setFramerateLimit(60);
+	m_mainWindow.setFramerateLimit(FRAME_RATE);
 	m_screenManager = ScreenManager(new SplashScreen());
-	m_inputController.init();
-
 	m_running = true;
 }
 
@@ -25,13 +23,18 @@ void Game::run()
 			}
 		}
 
+		// time
 		sf::Time frameTime = frameClock.restart();
+
+		// input
+		g_inputController->update();
+
+		// game updates
 		m_screenManager.update(frameTime);
 
+		// render
 		m_mainWindow.clear();
-
 		m_screenManager.render(m_mainWindow);
-
 		m_mainWindow.display();
 	}
 

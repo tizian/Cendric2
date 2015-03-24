@@ -3,36 +3,83 @@
 MainCharacter::MainCharacter() {}
 MainCharacter::~MainCharacter() {}
 
+void MainCharacter::update(sf::Time frameTime)
+{
+	handleInput();
+	GameObject::update(frameTime);
+	
+}
+
+void MainCharacter::handleInput()
+{
+	GameObjectState newState = m_state;
+	bool newDirectionRight = m_isFacingRight;
+	bool anyKeyPressed = false;
+	if (g_inputController->isKeyActive(Key::Left))
+	{
+		newState = GameObjectState::Walking;
+		newDirectionRight = false;
+		anyKeyPressed = true;
+	}
+	if (g_inputController->isKeyActive(Key::Right))
+	{
+		newState = GameObjectState::Walking;
+		newDirectionRight = true;
+		anyKeyPressed = true;
+	}
+	if (g_inputController->isKeyActive(Key::Jump))
+	{
+		newState = GameObjectState::Jumping;
+		anyKeyPressed = true;
+	}
+	if (!anyKeyPressed)
+	{
+		newState = GameObjectState::Idle;
+	}
+
+	// only update animation if we need to
+	if (m_state != newState || newDirectionRight != m_isFacingRight) 
+	{
+		m_isFacingRight = newDirectionRight;
+		m_state = newState;
+		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	}
+}
+
 void MainCharacter::load()
 {
-	Animation walkingAnimationRight;
-	walkingAnimationRight.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	walkingAnimationRight.addFrame(sf::IntRect(0, 0, 80, 120));
-	walkingAnimationRight.addFrame(sf::IntRect(80, 0, 80, 120));
-	walkingAnimationRight.addFrame(sf::IntRect(160, 0, 80, 120));
-	walkingAnimationRight.addFrame(sf::IntRect(240, 0, 80, 120));
-	walkingAnimationRight.addFrame(sf::IntRect(320, 0, 80, 120));
-	walkingAnimationRight.addFrame(sf::IntRect(400, 0, 80, 120));
-	walkingAnimationRight.addFrame(sf::IntRect(480, 0, 80, 120));
-	walkingAnimationRight.addFrame(sf::IntRect(560, 0, 80, 120));
+	Animation walkingAnimation;
+	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	walkingAnimation.addFrame(sf::IntRect(0, 0, 80, 120));
+	walkingAnimation.addFrame(sf::IntRect(80, 0, 80, 120));
+	walkingAnimation.addFrame(sf::IntRect(160, 0, 80, 120));
+	walkingAnimation.addFrame(sf::IntRect(240, 0, 80, 120));
+	walkingAnimation.addFrame(sf::IntRect(320, 0, 80, 120));
+	walkingAnimation.addFrame(sf::IntRect(400, 0, 80, 120));
+	walkingAnimation.addFrame(sf::IntRect(480, 0, 80, 120));
+	walkingAnimation.addFrame(sf::IntRect(560, 0, 80, 120));
 
-	addAnimation("walking_right", walkingAnimationRight);
+	addAnimation(GameObjectState::Walking, walkingAnimation);
 
-	Animation walkingAnimationLeft;
-	walkingAnimationLeft.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	walkingAnimationLeft.addFrame(sf::IntRect(0, 120, 80, 120));
-	walkingAnimationLeft.addFrame(sf::IntRect(80, 120, 80, 120));
-	walkingAnimationLeft.addFrame(sf::IntRect(160, 120, 80, 120));
-	walkingAnimationLeft.addFrame(sf::IntRect(240, 120, 80, 120));
-	walkingAnimationLeft.addFrame(sf::IntRect(320, 120, 80, 120));
-	walkingAnimationLeft.addFrame(sf::IntRect(400, 120, 80, 120));
-	walkingAnimationLeft.addFrame(sf::IntRect(480, 120, 80, 120));
-	walkingAnimationLeft.addFrame(sf::IntRect(560, 120, 80, 120));
+	Animation idleAnimation;
+	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	idleAnimation.addFrame(sf::IntRect(640, 0, 80, 120));
 
-	addAnimation("walking_left", walkingAnimationLeft);
-	m_animatedSprite.setFrameTime(sf::seconds(0.1));
+	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	m_animatedSprite.setPosition(sf::Vector2f(800, 450));
+	Animation jumpingAnimation;
+	jumpingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	jumpingAnimation.addFrame(sf::IntRect(720, 0, 80, 120));
 
-	setCurrentAnimation(getAnimation("walking_right"));
+	addAnimation(GameObjectState::Jumping, jumpingAnimation);
+
+	setFrameTime(sf::seconds(0.1));
+
+	setPosition(sf::Vector2f(800, 450));
+
+	// initial values
+	m_state = GameObjectState::Idle;
+	m_isFacingRight = true;
+	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	playCurrentAnimation(true);
 }

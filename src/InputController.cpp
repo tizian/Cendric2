@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+InputController* g_inputController;
+
 InputController::InputController()
 {
 }
@@ -34,14 +36,9 @@ void InputController::init()
 		});
 }
 
-map<Key, bool> InputController::getKeyActiveMap() 
+bool InputController::isKeyActive(const Key key)
 {
-	return m_keyActiveMap;
-}
-
-map<Key, sf::Keyboard::Key> InputController::getKeyMap()
-{
-	return m_keyMap;
+	return m_keyActiveMap[key];
 }
 
 

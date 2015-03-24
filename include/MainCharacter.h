@@ -8,7 +8,10 @@ public:
 	~MainCharacter();
 
 	void load() override;
+	void update(sf::Time frameTime) override;
 
 private:
-	
+	void handleInput();
+	bool m_isFacingRight;
+	GameObjectState m_state;
 };

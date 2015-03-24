@@ -14,19 +14,19 @@ void GameObject::load()
 	//nop
 }
 
-void GameObject::setCurrentAnimation(Animation* animation)
+void GameObject::setCurrentAnimation(Animation* animation, bool isFlipped)
 {
+	m_animatedSprite.setFlipped(isFlipped);
 	m_animatedSprite.setAnimation(animation);
-	m_animatedSprite.play();
 }
 
-void GameObject::addAnimation(std::string tag, Animation& animation)
+void GameObject::addAnimation(GameObjectState state, Animation& animation)
 {
-	m_animations.insert({ tag, animation });
+	m_animations.insert({ state, animation });
 }
-Animation* GameObject::getAnimation(std::string tag)
+Animation* GameObject::getAnimation(GameObjectState state)
 {
-	return &m_animations[tag];
+	return &m_animations[state];
 }
 
 void GameObject::render(sf::RenderTarget &renderTarget) const
@@ -37,5 +37,37 @@ void GameObject::render(sf::RenderTarget &renderTarget) const
 void GameObject::update(sf::Time frameTime)
 {
 	m_animatedSprite.update(frameTime);
+}
+
+void GameObject::setPosition(Vector2f& position)
+{
+	m_animatedSprite.setPosition(position);
+}
+
+const Vector2f& GameObject::getPosition()
+{
+	return m_animatedSprite.getPosition();
+}
+
+void GameObject::setFrameTime(sf::Time time) 
+{
+	m_animatedSprite.setFrameTime(time);
+}
+
+void GameObject::playCurrentAnimation(bool play)
+{
+	if (play)
+	{
+		m_animatedSprite.play();
+	}
+	else 
+	{
+		m_animatedSprite.pause();
+	}
+}
+
+void GameObject::loopCurrentAnimation(bool loop)
+{
+	m_animatedSprite.setLooped(loop);
 }
 

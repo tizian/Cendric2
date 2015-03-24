@@ -16,9 +16,7 @@ public:
 	InputController();
 	~InputController();
 
-	// getters
-	map<Key, bool> getKeyActiveMap();
-	map<Key, sf::Keyboard::Key> getKeyMap();
+	bool isKeyActive(const Key key);
 
 	// \brief refreshes the keymap
 	void update();

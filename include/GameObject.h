@@ -1,5 +1,13 @@
 #include "stdafx.h"
 
+// TODO maybe move to movable game object.
+enum class GameObjectState
+{
+	Idle,
+	Walking,
+	Jumping
+};
+
 // A game object with animations
 class GameObject : public Object
 {
@@ -13,12 +21,16 @@ public:
 	void render(sf::RenderTarget &renderTarget) const override;
 	void update(sf::Time frameTime) override;
 
-	void setCurrentAnimation(Animation* animation);
-	void addAnimation(std::string tag, Animation &animation);
-	Animation* getAnimation(std::string tag);
+	void setCurrentAnimation(Animation* animation, bool isFlipped);
+	void addAnimation(GameObjectState state, Animation& animation);
+	void setPosition(Vector2f& position);
+	void setFrameTime(sf::Time time);
+	void playCurrentAnimation(bool play);
+	void loopCurrentAnimation(bool loop);
+	Animation* getAnimation(GameObjectState state);
+	const Vector2f& getPosition();
 	
-	AnimatedSprite m_animatedSprite;
-
 private:
-	map<std::string,  Animation> m_animations;	
+	map<GameObjectState, Animation> m_animations;
+	AnimatedSprite m_animatedSprite;
 };

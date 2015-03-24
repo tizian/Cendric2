@@ -18,12 +18,10 @@ Screen* Screen::update(sf::Time frameTime)
 
 void Screen::render(sf::RenderTarget &renderTarget) const
 {
-	// TODO: If everything on the screen is an object, something like this would work...
-
-	//for (Object *obj : m_objects)
-	//{
-	//	obj->render(renderTarget);
-	//}
+	for (Object *obj : m_objects)
+	{
+		obj->render(renderTarget);
+	}
 }
 
 void Screen::onEnter(Screen *previousScreen)

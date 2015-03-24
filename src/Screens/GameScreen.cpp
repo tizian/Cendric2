@@ -12,18 +12,11 @@ GameScreen::GameScreen()
 
 Screen* GameScreen::update(sf::Time frameTime)
 {
-	for (Object *obj : m_objects)
-	{
-		obj->update(frameTime);
-	}
-	return this;
+	return Screen::update(frameTime);
 }
 
 void GameScreen::render(sf::RenderTarget &renderTarget) const
 {
 	m_currentLevel.draw(renderTarget, RenderStates::Default);
-	for (Object *obj : m_objects)
-	{
-		obj->render(renderTarget);
-	}
+	Screen::render(renderTarget);
 }
