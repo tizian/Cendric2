@@ -3,12 +3,7 @@
 MenuScreen::MenuScreen()
 {
 	cout << "Init MenuScreen...";
-	if (!m_screenTexture.loadFromFile("res/screens/screen_menu.png"))
-	{
-		printf("SplashScreen: Error at opening file res/screens/screen_menu.png \n");
-		// TODO: what to do if resource loading fails in constructor?
-	}
-	m_screenSprite = sf::Sprite(m_screenTexture);
+	m_screenSprite = sf::Sprite(g_resourceManager->getTexture(ResourceID::Texture_menuScreen));
 	cout << "...done." << endl;
 }
 
@@ -24,4 +19,15 @@ Screen* MenuScreen::update(sf::Time frameTime)
 void MenuScreen::render(sf::RenderTarget &renderTarget) const
 {
 	renderTarget.draw(m_screenSprite);
+}
+
+void MenuScreen::onEnter(Screen *previousScreen)
+{
+	cout << "Enter MenuScreen" << endl;
+}
+
+void MenuScreen::onExit(Screen *nextScreen)
+{
+	g_resourceManager->deleteResource(ResourceID::Texture_menuScreen);
+	cout << "Exit MenuScreen" << endl;
 }

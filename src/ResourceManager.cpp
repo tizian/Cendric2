@@ -16,7 +16,9 @@ void ResourceManager::init()
 	m_fileNames.insert(
 	{
 		{ ResourceID::Level_testLevel, "res/level/testlevel.dric" },
-		{ ResourceID::Texture_mainChar, "res/assets/cendric/cendric_spritesheet.png" }
+		{ ResourceID::Texture_mainChar, "res/assets/cendric/cendric_spritesheet.png" },
+		{ ResourceID::Texture_splashScreen, "res/screens/screen_splash.png" },
+		{ ResourceID::Texture_menuScreen, "res/screens/screen_menu.png" }
 	});
 }
 

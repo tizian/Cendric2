@@ -3,7 +3,9 @@
 enum class ResourceID
 {
 	Texture_mainChar,
-	Level_testLevel
+	Level_testLevel,
+	Texture_splashScreen,
+	Texture_menuScreen
 };
 
 class ResourceManager

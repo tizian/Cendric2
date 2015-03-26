@@ -11,7 +11,6 @@ public:
 	virtual void onEnter(Screen *previousScreen);
 	virtual void onExit(Screen *nextScreen);
 
-private:
-	sf::Texture m_screenTexture;	// TODO: take from resource manager
+private:	
 	sf::Sprite m_screenSprite;
 };
