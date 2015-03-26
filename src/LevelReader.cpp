@@ -56,6 +56,11 @@ bool LevelReader::checkData(LevelData& data)
 		printf("LevelReader: Error in level data: tile size not set / invalid \n");
 		return false;
 	}
+	if (data.startPos.x < 0 || data.startPos.x > data.mapSize.x || data.startPos.y < 0 || data.startPos.y > data.mapSize.y)
+	{
+		printf("LevelReader: Error in level data: invalid start position, must be in range of map \n");
+		return false;
+	}
 	if (data.name.empty())
 	{
 		printf("LevelReader: Error in level data: level name not set / empty \n");
@@ -214,7 +219,7 @@ bool LevelReader::readStartPos(char* start, char* end, LevelData& data)
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int y = atoi(startData);
-	Vector2i pos(x, y);
+	Vector2f pos(x, y);
 	data.startPos = pos;
 	return true;
 }
@@ -317,5 +322,35 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 		return false;
 	}
 
+	updateData(data);
+
 	return true;
+}
+
+void LevelReader::updateData(LevelData& data) 
+{
+	// update start pos
+	data.startPos.x = data.startPos.x * data.tileSize.x;
+	data.startPos.y = data.startPos.y * data.tileSize.y;
+
+	int x = 0;
+	int y = 0;
+
+	// calculate collidable tiles
+	for (std::vector<bool>::iterator it = data.collidableTiles.begin(); it != data.collidableTiles.end(); ++it) {
+		if (*it)
+		{
+			// add a collidable rect
+			data.collidableTileRects.push_back(sf::IntRect(x*data.tileSize.x, y*data.tileSize.y, data.tileSize.x, data.tileSize.y));
+		}
+		if (x + 1 >= data.mapSize.x) 
+		{
+			x = 0;
+			y++;
+		}
+		else
+		{
+			x++;
+		}
+	}
 }

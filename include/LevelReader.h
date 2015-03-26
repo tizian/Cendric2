@@ -14,10 +14,11 @@ struct LevelData
 	string name;
 	Vector2i mapSize;
 	Vector2i tileSize;
-	Vector2i startPos;
+	Vector2f startPos;
 	string tileSetPath;
 	vector<vector<int> > layers;
 	vector<bool> collidableTiles;
+	vector<sf::IntRect> collidableTileRects;
 };
 
 class LevelReader
@@ -44,4 +45,7 @@ private:
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data);
+
+	// \brief update data to prepare it for the level
+	void updateData(LevelData& data);
 };

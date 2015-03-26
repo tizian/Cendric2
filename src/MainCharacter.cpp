@@ -1,17 +1,29 @@
 #include "stdafx.h"
 
-MainCharacter::MainCharacter() {}
+MainCharacter::MainCharacter(Level* level) 
+{
+	MovableGameObject::MovableGameObject();
+	m_level = level;
+	load();
+	setPosition(m_level->getStartPos());
+}
 MainCharacter::~MainCharacter() {}
 
-void MainCharacter::update(sf::Time frameTime)
+void MainCharacter::update(sf::Time& frameTime)
 {
 	handleInput();
-	GameObject::update(frameTime);
-	
+	checkCollisions(m_nextPosition);
+	MovableGameObject::update(frameTime);
+}
+
+void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
+{
+
 }
 
 void MainCharacter::handleInput()
 {
+
 	GameObjectState newState = m_state;
 	bool newDirectionRight = m_isFacingRight;
 	bool anyKeyPressed = false;
@@ -48,6 +60,9 @@ void MainCharacter::handleInput()
 
 void MainCharacter::load()
 {
+	setBoundingBox(sf::IntRect(0, 0, 46, 100));
+	setSpriteOffset(sf::Vector2f(-17, -20));
+
 	Animation walkingAnimation;
 	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
 	walkingAnimation.addFrame(sf::IntRect(0, 0, 80, 120));
@@ -74,8 +89,6 @@ void MainCharacter::load()
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	setFrameTime(sf::seconds(0.1));
-
-	setPosition(sf::Vector2f(800, 450));
 
 	// initial values
 	m_state = GameObjectState::Idle;

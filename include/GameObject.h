@@ -1,6 +1,5 @@
 #include "stdafx.h"
 
-// TODO maybe move to movable game object.
 enum class GameObjectState
 {
 	Idle,
@@ -16,21 +15,23 @@ public:
 	~GameObject();
 
 	// \brief loads animations using the resource manager
+	// also defines bounding box and sprite offset
 	virtual void load();
 
-	void render(sf::RenderTarget &renderTarget) const override;
-	void update(sf::Time frameTime) override;
+	void render(sf::RenderTarget& renderTarget) const override;
+	void update(sf::Time& frameTime) override;
 
 	void setCurrentAnimation(Animation* animation, bool isFlipped);
 	void addAnimation(GameObjectState state, Animation& animation);
-	void setPosition(Vector2f& position);
+	void setPosition(const Vector2f& position) override;
+	void setSpriteOffset(sf::Vector2f& spriteOffset);
 	void setFrameTime(sf::Time time);
 	void playCurrentAnimation(bool play);
 	void loopCurrentAnimation(bool loop);
 	Animation* getAnimation(GameObjectState state);
-	const Vector2f& getPosition();
 	
 private:
 	map<GameObjectState, Animation> m_animations;
 	AnimatedSprite m_animatedSprite;
+	sf::Vector2f m_spriteOffset;
 };

@@ -8,6 +8,8 @@ public:
 
 	// getters
 	TileMap getTilemap();
+	Vector2f& getStartPos();
+	vector<sf::IntRect>& getCollidableTiles();
 
 	// \brief loads a .dric file
 	bool loadFromFile(char* fileName);
@@ -17,7 +19,7 @@ public:
 
 private:
 	TileMap m_tileMap;
-	vector<bool> m_collidableTiles;
+	vector<sf::IntRect> m_collidableTiles;
 	std::string m_name;
-	sf::Vector2i m_startPos;
+	sf::Vector2f m_startPos;
 };

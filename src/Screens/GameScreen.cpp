@@ -4,8 +4,7 @@ GameScreen::GameScreen()
 {
 	cout << "Init GameScreen...";
 	m_currentLevel.loadFromFile(g_resourceManager->getFilename(ResourceID::Level_testLevel));
-	MainCharacter* mainChar = new MainCharacter();
-	mainChar->load();
+	MainCharacter* mainChar = new MainCharacter(&m_currentLevel);
 	addObject(mainChar);
 	cout << "...done." << endl;
 }

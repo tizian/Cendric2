@@ -42,7 +42,9 @@ using namespace sf;
 #include "ScreenManager.h"
 #include "GameObject.h"
 #include "Game.h"
+#include "MovableGameObject.h"
 #include "MainCharacter.h"
+
 
 // extern objects
 extern ResourceManager* g_resourceManager;

@@ -34,19 +34,15 @@ void GameObject::render(sf::RenderTarget &renderTarget) const
 	renderTarget.draw(m_animatedSprite);
 }
 
-void GameObject::update(sf::Time frameTime)
+void GameObject::update(sf::Time& frameTime)
 {
 	m_animatedSprite.update(frameTime);
 }
 
-void GameObject::setPosition(Vector2f& position)
+void GameObject::setPosition(const Vector2f& position)
 {
-	m_animatedSprite.setPosition(position);
-}
-
-const Vector2f& GameObject::getPosition()
-{
-	return m_animatedSprite.getPosition();
+	Object::setPosition(position);
+	m_animatedSprite.setPosition(position + m_spriteOffset);
 }
 
 void GameObject::setFrameTime(sf::Time time) 
@@ -69,5 +65,10 @@ void GameObject::playCurrentAnimation(bool play)
 void GameObject::loopCurrentAnimation(bool loop)
 {
 	m_animatedSprite.setLooped(loop);
+}
+
+void GameObject::setSpriteOffset(sf::Vector2f& spriteOffset)
+{
+	m_spriteOffset = spriteOffset;
 }
 

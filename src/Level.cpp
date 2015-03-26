@@ -21,7 +21,7 @@ bool Level::loadFromFile(char* fileName)
 	m_startPos = data.startPos;
 	m_name = data.name;
 	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
-	m_collidableTiles = data.collidableTiles;
+	m_collidableTiles = data.collidableTileRects;
 
 	return true;
 }
@@ -34,4 +34,9 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states) const
 TileMap Level::getTilemap() 
 {
 	return m_tileMap;
+}
+
+Vector2f& Level::getStartPos()
+{
+	return m_startPos;
 }
