@@ -35,7 +35,7 @@ void MovableGameObject::calculateNextPosition(sf::Time& frameTime, sf::Vector2f&
 
 void MovableGameObject::calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
 {
-	nextVel.x = (m_velocity.x + m_acceleration.x * frameTime.asSeconds()) * DAMPING;
+	nextVel.x = (m_velocity.x + m_acceleration.x * frameTime.asSeconds()) * (m_velocity.y == 0.0f ? DAMPING_GROUND : DAMPING_AIR);
 	nextVel.y = m_velocity.y + m_acceleration.y * frameTime.asSeconds();
 
 	// check bounds
