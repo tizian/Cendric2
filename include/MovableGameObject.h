@@ -3,7 +3,7 @@
 const float GRAVITY_ACCELERATION = 600.0f;
 const float MAX_VELOCITY_X = 1000.0f;
 const float MAX_VELOCITY_Y = 1000.0f;
-const float DAMPING = 0.9f;
+const float DAMPING = 0.8f;
 
 // A movable game object with physics
 class MovableGameObject : public GameObject

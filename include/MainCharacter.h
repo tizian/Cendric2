@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-const float WALK_ACCELERATION = 2000.0f;
+const float WALK_ACCELERATION = 3000.0f;
 const float JUMP_BOOST = -15000.0f;
 
 // Cendric
