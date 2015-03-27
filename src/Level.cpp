@@ -40,3 +40,8 @@ Vector2f& Level::getStartPos()
 {
 	return m_startPos;
 }
+
+vector<sf::FloatRect>& Level::getCollidableTiles()
+{
+	return m_collidableTiles;
+}

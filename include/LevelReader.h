@@ -18,7 +18,7 @@ struct LevelData
 	string tileSetPath;
 	vector<vector<int> > layers;
 	vector<bool> collidableTiles;
-	vector<sf::IntRect> collidableTileRects;
+	vector<sf::FloatRect> collidableTileRects;
 };
 
 class LevelReader

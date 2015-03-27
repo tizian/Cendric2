@@ -341,7 +341,7 @@ void LevelReader::updateData(LevelData& data)
 		if (*it)
 		{
 			// add a collidable rect
-			data.collidableTileRects.push_back(sf::IntRect(x*data.tileSize.x, y*data.tileSize.y, data.tileSize.x, data.tileSize.y));
+			data.collidableTileRects.push_back(sf::FloatRect(x*data.tileSize.x, y*data.tileSize.y, data.tileSize.x, data.tileSize.y));
 		}
 		if (x + 1 >= data.mapSize.x) 
 		{

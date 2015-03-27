@@ -7,55 +7,116 @@ MainCharacter::MainCharacter(Level* level)
 	load();
 	setPosition(m_level->getStartPos());
 }
-MainCharacter::~MainCharacter() {}
+MainCharacter::~MainCharacter() 
+{
+	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
+}
 
 void MainCharacter::update(sf::Time& frameTime)
 {
 	handleInput();
+	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
+	updateAnimation();
 }
 
 void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
-{
+{	
+	// check collisions with collidable tiles
+	vector<sf::FloatRect> collidableTiles = m_level->getCollidableTiles();
+	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
+	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
+	bool willCollideX = false;
+	bool willCollideY = false;
+	for (std::vector<sf::FloatRect>::iterator it = collidableTiles.begin(); it != collidableTiles.end(); ++it) {
+		// check for collision on x axis
+		if (!willCollideX && (*it).intersects(nextBoundingBoxX))
+		{
+			if ((*it).left < (nextBoundingBoxX.left + nextBoundingBoxX.width) || nextBoundingBoxX.left < ((*it).left + (*it).width))
+			{
+				setAccelerationX(0.0f);
+				setVelocityX(0.0f);
+				willCollideX = true;
+			}
+		}
+
+		// check for collision on y axis
+		if (!willCollideY && (*it).intersects(nextBoundingBoxY))
+		{
+			if ((nextBoundingBoxY.top + nextBoundingBoxY.height) > (*it).top)
+			{
+				if (!m_isGrounded)
+				{
+					if (abs(getVelocity().y <= 10.0f))
+					{
+						m_isGrounded = true;
+					}
+				}
+				setAccelerationY(0.0f);
+				setVelocityY(0.0f);
+				willCollideY = true;
+			}
+			else if (nextBoundingBoxY.top < ((*it).top + (*it).height))
+			{
+				setAccelerationY(GRAVITY_ACCELERATION);
+				setVelocityY(0.0f);
+				willCollideY = true;
+			}
+		}
+	}
+
+	if (abs(getVelocity().y) > 10.0f)
+	{
+		m_isGrounded = false;
+	}
+}
+
+void MainCharacter::updateAnimation()
+{
+	// calculate new game state and set animation.
+	GameObjectState newState = GameObjectState::Idle;
+
+	if (abs(getVelocity().x) > 20.0f)
+	{
+		newState = GameObjectState::Walking;
+	}
+	if (!m_isGrounded)
+	{
+		newState = GameObjectState::Jumping;
+	}	
+
+	// only update animation if we need to
+	if (m_state != newState || m_nextIsFacingRight != m_isFacingRight)
+	{
+		m_isFacingRight = m_nextIsFacingRight;
+		m_state = newState;
+		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	}
 }
 
 void MainCharacter::handleInput()
 {
+	float newAccelerationX = 0;
+	float newAccelerationY = GRAVITY_ACCELERATION;
 
-	GameObjectState newState = m_state;
-	bool newDirectionRight = m_isFacingRight;
-	bool anyKeyPressed = false;
 	if (g_inputController->isKeyActive(Key::Left))
 	{
-		newState = GameObjectState::Walking;
-		newDirectionRight = false;
-		anyKeyPressed = true;
+		m_nextIsFacingRight = false;
+		newAccelerationX -= WALK_ACCELERATION;
 	}
 	if (g_inputController->isKeyActive(Key::Right))
 	{
-		newState = GameObjectState::Walking;
-		newDirectionRight = true;
-		anyKeyPressed = true;
+		m_nextIsFacingRight = true;
+		newAccelerationX += WALK_ACCELERATION;
 	}
-	if (g_inputController->isKeyActive(Key::Jump))
+	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
 	{
-		newState = GameObjectState::Jumping;
-		anyKeyPressed = true;
-	}
-	if (!anyKeyPressed)
-	{
-		newState = GameObjectState::Idle;
+		newAccelerationY = JUMP_BOOST;
 	}
 
-	// only update animation if we need to
-	if (m_state != newState || newDirectionRight != m_isFacingRight) 
-	{
-		m_isFacingRight = newDirectionRight;
-		m_state = newState;
-		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
-	}
+	setAcceleration(Vector2f(newAccelerationX, newAccelerationY));
 }
 
 void MainCharacter::load()
@@ -88,7 +149,7 @@ void MainCharacter::load()
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	setFrameTime(sf::seconds(0.1));
+	setFrameTime(sf::seconds(0.1f));
 
 	// initial values
 	m_state = GameObjectState::Idle;
