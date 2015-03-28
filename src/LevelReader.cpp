@@ -353,4 +353,10 @@ void LevelReader::updateData(LevelData& data)
 			x++;
 		}
 	}
+
+	// calculate level rect
+	data.levelRect.left = 0;
+	data.levelRect.top = 0;
+	data.levelRect.height = data.tileSize.y * data.mapSize.y;
+	data.levelRect.width = data.tileSize.x * data.mapSize.x;
 }

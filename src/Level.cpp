@@ -22,13 +22,18 @@ bool Level::loadFromFile(char* fileName)
 	m_name = data.name;
 	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
 	m_collidableTiles = data.collidableTileRects;
-
+	m_levelRect = data.levelRect;
 	return true;
 }
 
 void Level::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	m_tileMap.draw(target, states);
+}
+
+FloatRect& Level::getLevelRect()
+{
+	return m_levelRect;
 }
 
 TileMap Level::getTilemap() 

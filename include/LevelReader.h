@@ -19,6 +19,7 @@ struct LevelData
 	vector<vector<int> > layers;
 	vector<bool> collidableTiles;
 	vector<sf::FloatRect> collidableTileRects;
+	FloatRect levelRect;
 };
 
 class LevelReader

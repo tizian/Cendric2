@@ -9,6 +9,7 @@ public:
 	// getters
 	TileMap getTilemap();
 	Vector2f& getStartPos();
+	FloatRect& getLevelRect();
 	vector<sf::FloatRect>& getCollidableTiles();
 
 	// \brief loads a .dric file
@@ -19,6 +20,7 @@ public:
 
 private:
 	TileMap m_tileMap;
+	FloatRect m_levelRect;
 	vector<sf::FloatRect> m_collidableTiles;
 	std::string m_name;
 	sf::Vector2f m_startPos;

@@ -9,6 +9,11 @@ GameScreen::GameScreen()
 	cout << "...done." << endl;
 }
 
+GameScreen::~GameScreen()
+{
+	g_resourceManager->deleteResource(ResourceID::Level_testLevel);
+}
+
 Screen* GameScreen::update(sf::Time frameTime)
 {
 	return Screen::update(frameTime);

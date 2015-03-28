@@ -23,14 +23,45 @@ void MainCharacter::update(sf::Time& frameTime)
 
 void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 {	
-	// check collisions with collidable tiles
-	vector<sf::FloatRect> collidableTiles = m_level->getCollidableTiles();
+	
+	bool willCollideX = false;
+	bool willCollideY = false;
+
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
-	bool willCollideX = false;
-	bool willCollideY = false;
-	for (std::vector<sf::FloatRect>::iterator it = collidableTiles.begin(); it != collidableTiles.end(); ++it) {
+	// check collisions with  level rect
+	sf::FloatRect levelRect = m_level->getLevelRect();
+
+	// check for collision on x axis
+	if (levelRect.left > nextBoundingBoxX.left || (levelRect.left + levelRect.width) < nextBoundingBoxX.left + nextBoundingBoxX.width) 
+	{
+		setAccelerationX(0.0f);
+		setVelocityX(0.0f);
+		willCollideX = true;
+	}
+
+	// check for collision on y axis
+	if (levelRect.top > nextBoundingBoxY.top) 
+	{
+		setAccelerationY(GRAVITY_ACCELERATION);
+		setVelocityY(0.0f);
+		willCollideY = true;
+	}
+	else if ((levelRect.top + levelRect.height) < (nextBoundingBoxY.top + nextBoundingBoxY.height))
+	{
+		setAccelerationY(0.0f);
+		setVelocityY(0.0f);
+		// abezie!
+		setPositionY((levelRect.top + levelRect.height) - nextBoundingBoxY.height);
+		m_isGrounded = true;
+		willCollideY = true;
+	}
+
+	// check collisions with collidable tiles
+	vector<sf::FloatRect> collidableTiles = m_level->getCollidableTiles();
+	
+	for (std::vector<sf::FloatRect>::iterator it = collidableTiles.begin(); it != collidableTiles.end() && (!willCollideX || !willCollideY); ++it) {
 		// check for collision on x axis
 		if (!willCollideX && (*it).intersects(nextBoundingBoxX))
 		{
