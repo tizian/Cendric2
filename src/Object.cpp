@@ -32,3 +32,13 @@ void Object::setPosition(const sf::Vector2f& pos)
 	m_boundingBox.left = pos.x;
 	m_boundingBox.top = pos.y;
 }
+
+void Object::setPositionX(float posX)
+{
+	m_position.x = posX;
+}
+
+void Object::setPositionY(float posY)
+{
+	m_position.y = posY;
+}

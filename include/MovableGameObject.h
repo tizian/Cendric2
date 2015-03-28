@@ -1,10 +1,10 @@
 #include "stdafx.h"
 
 const float GRAVITY_ACCELERATION = 600.0f;
-const float MAX_VELOCITY_X = 1000.0f;
-const float MAX_VELOCITY_Y = 1000.0f;
+const float MAX_VELOCITY_X = 700.0f;
+const float MAX_VELOCITY_Y = 700.0f;
 const float DAMPING_GROUND = 0.8f;
-const float DAMPING_AIR = 0.9f;
+const float DAMPING_AIR = 0.85f;
 
 // A movable game object with physics
 class MovableGameObject : public GameObject

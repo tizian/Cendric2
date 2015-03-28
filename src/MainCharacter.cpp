@@ -47,15 +47,11 @@ void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 		{
 			if ((nextBoundingBoxY.top + nextBoundingBoxY.height) > (*it).top)
 			{
-				if (!m_isGrounded)
-				{
-					if (abs(getVelocity().y <= 10.0f))
-					{
-						m_isGrounded = true;
-					}
-				}
 				setAccelerationY(0.0f);
 				setVelocityY(0.0f);
+				// abezie!
+				setPositionY((*it).top - nextBoundingBoxY.height);
+				m_isGrounded = true;
 				willCollideY = true;
 			}
 			else if (nextBoundingBoxY.top < ((*it).top + (*it).height))
@@ -67,7 +63,7 @@ void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 		}
 	}
 
-	if (abs(getVelocity().y) > 10.0f)
+	if (abs(getVelocity().y) > 0.0f)
 	{
 		m_isGrounded = false;
 	}

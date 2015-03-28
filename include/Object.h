@@ -15,6 +15,8 @@ public:
 	void setScreen(Screen *screen);
 	void setBoundingBox(sf::IntRect& rect);
 	virtual void setPosition(const sf::Vector2f& pos);
+	void setPositionX(float posX);
+	void setPositionY(float posY);
 	const sf::Vector2f& getPosition();
 	sf::IntRect* getBoundingBox();
 
