@@ -58,12 +58,7 @@ sf::Texture* ResourceManager::getTexture(ResourceID id)
 
 void ResourceManager::deleteResource(ResourceID id)
 {
-	// delete texture
-	std::map<std::string, sf::Texture>::iterator textureIt = m_textures.find(m_fileNames[id]);
-	if (textureIt != m_textures.end())
-		m_textures.erase(textureIt);
-
-	// delete sound etc...
+	deleteResource(m_fileNames[id]);
 }
 
 void ResourceManager::deleteResource(std::string filename)
