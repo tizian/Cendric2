@@ -3,7 +3,7 @@
 SplashScreen::SplashScreen()
 {
 	cout << "Init SplashScreen...";
-	m_screenSprite = sf::Sprite(g_resourceManager->getTexture(ResourceID::Texture_splashScreen));
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_splashScreen)));
 	cout << "...done." << endl;
 }
 
@@ -17,7 +17,7 @@ Screen* SplashScreen::update(sf::Time frameTime)
 	return this;
 }
 
-void SplashScreen::render(sf::RenderTarget &renderTarget) const
+void SplashScreen::render(sf::RenderTarget &renderTarget)
 {
 	renderTarget.draw(m_screenSprite);
 }

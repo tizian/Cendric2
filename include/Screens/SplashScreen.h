@@ -6,7 +6,7 @@ public:
 	SplashScreen();
 
 	Screen* update(sf::Time frameTime) override;
-	void render(sf::RenderTarget &renderTarget) const override; 
+	void render(sf::RenderTarget &renderTarget) override; 
 
 	virtual void onEnter(Screen *previousScreen);
 	virtual void onExit(Screen *nextScreen);

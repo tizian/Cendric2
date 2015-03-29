@@ -30,8 +30,8 @@ void InputController::init()
 		});
 	m_keyMap.insert(
 		{
-			{ Key::Left, sf::Keyboard::Left },
-			{ Key::Right, sf::Keyboard::Right },
+			{ Key::Left, sf::Keyboard::A },
+			{ Key::Right, sf::Keyboard::D },
 			{ Key::Jump, sf::Keyboard::Space }
 		});
 }

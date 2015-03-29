@@ -26,6 +26,8 @@ using namespace sf;
 
 // own classes
 
+#include "ResourceManager.h"
+#include "BackgroundLayer.h"
 #include "TileMap.h"
 #include "Level.h"
 #include "LevelReader.h"
@@ -37,7 +39,6 @@ using namespace sf;
 #include "Screens/GameScreen.h"
 #include "Animation.h"
 #include "AnimatedSprite.h"
-#include "ResourceManager.h"
 #include "Object.h"
 #include "ScreenManager.h"
 #include "GameObject.h"

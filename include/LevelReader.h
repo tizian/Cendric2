@@ -7,6 +7,7 @@
 #define __TILESET_PATH "tileset.path"
 #define __LAYER_COLLIDABLE "layer.collidable"
 #define __LAYER_BACKGROUND "layer.background"
+#define __LAYER_IMAGE "layer.image"
 #define __CENDRIC_STARTPOS "cendric.startpos"
 
 struct LevelData
@@ -16,6 +17,7 @@ struct LevelData
 	Vector2i tileSize;
 	Vector2f startPos;
 	string tileSetPath;
+	vector<BackgroundLayer> backgroundLayers;
 	vector<vector<int> > layers;
 	vector<bool> collidableTiles;
 	vector<sf::FloatRect> collidableTileRects;
@@ -43,6 +45,7 @@ private:
 	bool readLayerBackground(char* start, char* end, LevelData& data);
 	bool readLayerCollidable(char* start, char* end, LevelData& data);
 	bool readStartPos(char* start, char* end, LevelData& data);
+	bool readLayerImage(char* start, char* end, LevelData& data);
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data);

@@ -16,7 +16,7 @@ Screen* Screen::update(sf::Time frameTime)
 	return this;
 }
 
-void Screen::render(sf::RenderTarget &renderTarget) const
+void Screen::render(sf::RenderTarget &renderTarget)
 {
 	for (Object *obj : m_objects)
 	{

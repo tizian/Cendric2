@@ -17,13 +17,15 @@ public:
 	// \brief initializes the filename map
 	void init();
 
-	const Texture& getTexture(ResourceID id);
+	Texture* getTexture(ResourceID id);
+	Texture* getTexture(std::string& filename);
 	char* getFilename(ResourceID id);
 
 	void deleteResource(ResourceID id);
+	void deleteResource(std::string filename);
 
 private:
-	map<ResourceID, sf::Texture> m_textures;
+	map<std::string, sf::Texture> m_textures;
 
 	// \brief a map that is filled with all ResourceTags and the corresponding filenames
 	map <ResourceID, std::string> m_fileNames;

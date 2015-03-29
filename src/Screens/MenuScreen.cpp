@@ -3,7 +3,7 @@
 MenuScreen::MenuScreen()
 {
 	cout << "Init MenuScreen...";
-	m_screenSprite = sf::Sprite(g_resourceManager->getTexture(ResourceID::Texture_menuScreen));
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_menuScreen)));
 	cout << "...done." << endl;
 }
 
@@ -16,7 +16,7 @@ Screen* MenuScreen::update(sf::Time frameTime)
 	return this;
 }
 
-void MenuScreen::render(sf::RenderTarget &renderTarget) const
+void MenuScreen::render(sf::RenderTarget &renderTarget) 
 {
 	renderTarget.draw(m_screenSprite);
 }

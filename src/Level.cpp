@@ -6,13 +6,23 @@ Level::Level()
 
 Level::~Level()
 {
+	dispose();
 }
 
-bool Level::loadFromFile(char* fileName) 
+void Level::dispose()
+{
+	m_tileMap.dispose();
+	for (int i = 0; i < m_backgroundLayers.size(); i++)
+	{
+		m_backgroundLayers[i].dispose();
+	}
+}
+
+bool Level::load(ResourceID id) 
 {
 	LevelReader reader;
 	LevelData data;
-	if (!reader.readLevel(fileName, data))
+	if (!reader.readLevel(g_resourceManager->getFilename(id), data))
 	{
 		return false;
 	}
@@ -23,11 +33,16 @@ bool Level::loadFromFile(char* fileName)
 	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
 	m_collidableTiles = data.collidableTileRects;
 	m_levelRect = data.levelRect;
+	m_backgroundLayers = data.backgroundLayers;
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states) const
+void Level::draw(sf::RenderTarget &target, sf::RenderStates states)
 {
+	for (int i = 0; i < m_backgroundLayers.size(); i++)
+	{
+		m_backgroundLayers[i].render(target);
+	}
 	m_tileMap.draw(target, states);
 }
 

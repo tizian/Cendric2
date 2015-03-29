@@ -1,12 +1,9 @@
 #include "stdafx.h"
 
-bool TileMap::load(const std::string &filepath, sf::Vector2i tileSize, vector<vector<int> > layers, int width, int height)
+bool TileMap::load(std::string &filepath, sf::Vector2i tileSize, vector<vector<int> > layers, int width, int height)
 {
-	if (!m_tileset.loadFromFile(filepath))
-	{
-		printf("TileMap: Error at opening file %s \n", filepath.c_str());
-		return false;
-	}
+	m_tilesetPath = filepath;
+	m_tileset = g_resourceManager->getTexture(filepath);
 
 	m_layers.clear();
 
@@ -32,8 +29,8 @@ bool TileMap::load(const std::string &filepath, sf::Vector2i tileSize, vector<ve
 				// we start with tiles at 1 in the .dric format, but need 0 here
 				tileNumber--;
 
-				int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-				int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
+				int tu = tileNumber % (m_tileset->getSize().x / tileSize.x);
+				int tv = tileNumber / (m_tileset->getSize().x / tileSize.x);
 
 				sf::Vertex *quad = &layer[(i + j * width) * 4];
 
@@ -58,9 +55,14 @@ bool TileMap::load(const std::string &filepath, sf::Vector2i tileSize, vector<ve
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	states.texture = &m_tileset;
+	states.texture = m_tileset;
 	for (int i = 0; i < m_layers.size(); i++)
 	{
 		target.draw(m_layers[i], states);
 	}
+}
+
+void TileMap::dispose()
+{
+	g_resourceManager->deleteResource(m_tilesetPath);
 }

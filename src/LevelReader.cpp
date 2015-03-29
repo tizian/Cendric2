@@ -133,6 +133,27 @@ bool LevelReader::readTilesetPath(char* start, char* end, LevelData& data)
 	return true;
 }
 
+bool LevelReader::readLayerImage(char* start, char* end, LevelData& data)
+{
+	char* startData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	int distance = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	string path(startData);
+	int count = countToNextChar(startData, end, '"');
+	if (count == -1) {
+		return false;
+	}
+	path = path.substr(0, count);
+
+	BackgroundLayer layer;
+	layer.load(path, distance);
+	data.backgroundLayers.push_back(layer);
+	return true;
+}
+
 bool LevelReader::readMapSize(char* start, char* end, LevelData& data)
 {
 	char* startData;
@@ -297,6 +318,11 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 		else if (strncmp(pos, __CENDRIC_STARTPOS, strlen(__CENDRIC_STARTPOS)) == 0) {
 			printf("LevelReader: Found tag %s \n", __CENDRIC_STARTPOS);
 			readStartPos(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, __LAYER_IMAGE, strlen(__LAYER_IMAGE)) == 0) {
+			printf("LevelReader: Found tag %s \n", __LAYER_IMAGE);
+			readLayerImage(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {

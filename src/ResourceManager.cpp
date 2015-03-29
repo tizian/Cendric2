@@ -15,51 +15,67 @@ void ResourceManager::init()
 {
 	m_fileNames.insert(
 	{
-		{ ResourceID::Level_testLevel, "res/level/testlevel.dric" },
+		{ ResourceID::Level_testLevel, "res/level/testlevel/testlevel.dric" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/cendric_spritesheet.png" },
 		{ ResourceID::Texture_splashScreen, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_menuScreen, "res/screens/screen_menu.png" }
 	});
 }
 
-const sf::Texture& ResourceManager::getTexture(ResourceID id)
+sf::Texture* ResourceManager::getTexture(std::string& filename)
 {
 	// does the texture exist yet?
-	for (std::map<ResourceID, sf::Texture>::const_iterator it = m_textures.begin();
+	for (std::map<std::string, sf::Texture>::iterator it = m_textures.begin();
 		it != m_textures.end();
 		++it)
 	{
-		if (id == it->first)
+		if (filename.compare(it->first) == 0)
 		{
-			return it->second;
+			return &(it->second);
 		}
 	}
 
 	// the texture doesn't exist. Create and save it.
 	sf::Texture texture;
 
-	// Search project's main directory
-	if (texture.loadFromFile(m_fileNames[id]))
+	// search project's main directory
+	if (texture.loadFromFile(filename))
 	{
-		m_textures[id] = texture;
-		std::cout << "ResourceManager: " << m_fileNames[id] << ": loading texture.\n";
-		return m_textures[id];
+		m_textures[filename] = texture;
+		std::cout << "ResourceManager: " << filename << ": loading texture.\n";
+		return &m_textures[filename];
 	}
 
-	std::cout << "ResourceManager: ERROR: Texture could not be loaded from file: " << m_fileNames[id] << ".\n";
-	m_textures[id] = texture;
-	return m_textures[id];
+	std::cout << "ResourceManager: ERROR: Texture could not be loaded from file: " << filename << ".\n";
+	m_textures[filename] = texture;
+	return &m_textures[filename];
+}
+
+sf::Texture* ResourceManager::getTexture(ResourceID id)
+{
+	return getTexture(m_fileNames[id]);
 }
 
 void ResourceManager::deleteResource(ResourceID id)
 {
 	// delete texture
-	std::map<ResourceID, sf::Texture>::const_iterator it = m_textures.find(id);
-	if (it != m_textures.end())
-		m_textures.erase(it);
+	std::map<std::string, sf::Texture>::iterator textureIt = m_textures.find(m_fileNames[id]);
+	if (textureIt != m_textures.end())
+		m_textures.erase(textureIt);
 
 	// delete sound etc...
 }
+
+void ResourceManager::deleteResource(std::string filename)
+{
+	// delete texture
+	std::map<std::string, sf::Texture>::iterator textureIt = m_textures.find(filename);
+	if (textureIt != m_textures.end())
+		m_textures.erase(textureIt);
+
+	// delete sound etc...
+}
+
 
 char* ResourceManager::getFilename(ResourceID id)
 {
