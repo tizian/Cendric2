@@ -138,7 +138,7 @@ bool LevelReader::readLayerImage(char* start, char* end, LevelData& data)
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
 	startData++;
-	int distance = atoi(startData);
+	float distance = atof(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	string path(startData);

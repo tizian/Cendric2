@@ -3,7 +3,7 @@ level.name:"Testlevel"
 map.size:"25,15"
 map.tilesize:"50,50"
 tileset.path:"res/tilesets/tileset_test.png"
-layer.image:"-1,res/level/testlevel/layer_0.png"
+layer.image:"-1.0,res/level/testlevel/layer_0.png"
 layer.background:"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
