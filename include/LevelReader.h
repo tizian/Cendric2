@@ -6,8 +6,8 @@
 #define __MAP_TILESIZE "map.tilesize"
 #define __TILESET_PATH "tileset.path"
 #define __LAYER_COLLIDABLE "layer.collidable"
+#define __LAYER_TILES "layer.tiles"
 #define __LAYER_BACKGROUND "layer.background"
-#define __LAYER_IMAGE "layer.image"
 #define __CENDRIC_STARTPOS "cendric.startpos"
 
 struct LevelData
@@ -45,7 +45,7 @@ private:
 	bool readLayerBackground(char* start, char* end, LevelData& data);
 	bool readLayerCollidable(char* start, char* end, LevelData& data);
 	bool readStartPos(char* start, char* end, LevelData& data);
-	bool readLayerImage(char* start, char* end, LevelData& data);
+	bool readLayerTiles(char* start, char* end, LevelData& data);
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data);

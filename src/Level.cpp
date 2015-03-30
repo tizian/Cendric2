@@ -37,12 +37,30 @@ bool Level::load(ResourceID id)
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states)
+void Level::draw(sf::RenderTarget &target, sf::RenderStates states, Vector2f* center_)
 {
+	Vector2f center(center_->x, center_->y);
+	delete center_;
+	cout <<  center.x << endl;
+	sf::View view;
+	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	for (int i = 0; i < m_backgroundLayers.size(); i++)
 	{
+		// handle case for layer at infinity
+		if (m_backgroundLayers[i].getDistance() == -1.0f) 
+		{
+			view.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+			target.setView(view);
+		}
+		else
+		{
+			view.setCenter((center.x * m_backgroundLayers[i].getDistance()) + (WINDOW_WIDTH / 3.4), WINDOW_HEIGHT / 2);
+			target.setView(view);
+		}
 		m_backgroundLayers[i].render(target);
 	}
+	view.setCenter(center.x, WINDOW_HEIGHT / 2);
+	target.setView(view);
 	m_tileMap.draw(target, states);
 }
 

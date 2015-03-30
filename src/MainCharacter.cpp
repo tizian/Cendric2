@@ -146,6 +146,13 @@ void MainCharacter::handleInput()
 	setAcceleration(Vector2f(newAccelerationX, newAccelerationY));
 }
 
+Vector2f* MainCharacter::getCenter()
+{
+	return new Vector2f(
+		getBoundingBox()->left + (getBoundingBox()->width / 2), 
+		getBoundingBox()->top + (getBoundingBox()->height / 2));
+}
+
 void MainCharacter::load()
 {
 	setBoundingBox(sf::IntRect(0, 0, 46, 100));

@@ -133,13 +133,13 @@ bool LevelReader::readTilesetPath(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayerImage(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data)
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
 	startData++;
 	float distance = atof(startData);
-	startData = gotoNextChar(startData, end, ',');
+	startData = gotoNextChar(start, end, ',');
 	startData++;
 	string path(startData);
 	int count = countToNextChar(startData, end, '"');
@@ -181,7 +181,7 @@ bool LevelReader::readTileSize(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerTiles(char* start, char* end, LevelData& data)
 {
 	// add a new layer into data
 	vector<int> layer;
@@ -309,9 +309,9 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __LAYER_BACKGROUND, strlen(__LAYER_BACKGROUND)) == 0) {
-			printf("LevelReader: Found tag %s \n", __LAYER_BACKGROUND);
-			readLayerBackground(pos, end, data);
+		else if (strncmp(pos, __LAYER_TILES, strlen(__LAYER_TILES)) == 0) {
+			printf("LevelReader: Found tag %s \n", __LAYER_TILES);
+			readLayerTiles(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
@@ -320,9 +320,9 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 			readStartPos(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __LAYER_IMAGE, strlen(__LAYER_IMAGE)) == 0) {
-			printf("LevelReader: Found tag %s \n", __LAYER_IMAGE);
-			readLayerImage(pos, end, data);
+		else if (strncmp(pos, __LAYER_BACKGROUND, strlen(__LAYER_BACKGROUND)) == 0) {
+			printf("LevelReader: Found tag %s \n", __LAYER_BACKGROUND);
+			readLayerBackground(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {

@@ -18,8 +18,8 @@ public:
 	// deletes the resources
 	void dispose();
 
-	// \brief draws the level. At the moment, only its tilemap.
-	void draw(sf::RenderTarget &target, sf::RenderStates states);
+	// \brief draws the level. Background layers, tilemap, foreground layers.
+	void draw(sf::RenderTarget &target, sf::RenderStates states, Vector2f* center);
 
 private:
 	TileMap m_tileMap;

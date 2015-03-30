@@ -4,8 +4,8 @@ GameScreen::GameScreen()
 {
 	cout << "Init GameScreen...";
 	m_currentLevel.load(ResourceID::Level_testLevel);
-	MainCharacter* mainChar = new MainCharacter(&m_currentLevel);
-	addObject(mainChar);
+	m_mainChar = new MainCharacter(&m_currentLevel);
+	addObject(m_mainChar);
 	cout << "...done." << endl;
 }
 
@@ -21,6 +21,7 @@ Screen* GameScreen::update(sf::Time frameTime)
 
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
-	m_currentLevel.draw(renderTarget, RenderStates::Default);
+	// parallax 
+	m_currentLevel.draw(renderTarget, RenderStates::Default, m_mainChar->getCenter());
 	Screen::render(renderTarget);
 }

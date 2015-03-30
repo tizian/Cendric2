@@ -9,6 +9,7 @@ public:
 	void load(std::string& filename, float distance);
 	void dispose();
 	void render(sf::RenderTarget &target);
+	float getDistance();
 
 private:
 	// distance to camera. -1 means infinity.

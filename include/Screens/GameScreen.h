@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+class MainCharacter;
+
 class GameScreen : public Screen
 {
 public:
@@ -11,4 +13,5 @@ public:
 
 private:
 	Level m_currentLevel;
+	MainCharacter* m_mainChar;
 };
