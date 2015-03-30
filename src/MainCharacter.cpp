@@ -146,9 +146,9 @@ void MainCharacter::handleInput()
 	setAcceleration(Vector2f(newAccelerationX, newAccelerationY));
 }
 
-Vector2f* MainCharacter::getCenter()
+Vector2f MainCharacter::getCenter()
 {
-	return new Vector2f(
+	return Vector2f(
 		getBoundingBox()->left + (getBoundingBox()->width / 2), 
 		getBoundingBox()->top + (getBoundingBox()->height / 2));
 }

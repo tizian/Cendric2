@@ -13,7 +13,7 @@ public:
 	void load() override;
 	void update(sf::Time& frameTime) override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
-	Vector2f* getCenter();
+	Vector2f getCenter();
 	
 
 private:

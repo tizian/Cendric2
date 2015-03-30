@@ -37,11 +37,8 @@ bool Level::load(ResourceID id)
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states, Vector2f* center_)
+void Level::draw(sf::RenderTarget &target, sf::RenderStates states, Vector2f& center)
 {
-	Vector2f center(center_->x, center_->y);
-	delete center_;
-	cout <<  center.x << endl;
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	for (int i = 0; i < m_backgroundLayers.size(); i++)
