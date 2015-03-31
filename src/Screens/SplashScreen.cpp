@@ -9,7 +9,7 @@ SplashScreen::SplashScreen()
 
 Screen* SplashScreen::update(sf::Time frameTime)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Unknown) || Mouse::isButtonPressed(Mouse::Button::Left))
+	if (Keyboard::isKeyPressed(Keyboard::Return) || Mouse::isButtonPressed(Mouse::Button::Left))
 	{
 		cout << "(SplashScreen::update): Change Screen" << endl;
 		return new MenuScreen();

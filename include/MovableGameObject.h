@@ -14,7 +14,7 @@ public:
 	~MovableGameObject();
 
 	void update(sf::Time& frameTime) override;
-	void setAcceleration(sf::Vector2f& acceleration);
+	void setAcceleration(const sf::Vector2f& acceleration);
 	void setAccelerationX(float accelerationX);
 	void setAccelerationY(float accelerationY);
 	void setVelocity(sf::Vector2f& velocity);

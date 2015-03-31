@@ -24,7 +24,7 @@ public:
 	void setCurrentAnimation(Animation* animation, bool isFlipped);
 	void addAnimation(GameObjectState state, Animation& animation);
 	void setPosition(const Vector2f& position) override;
-	void setSpriteOffset(sf::Vector2f& spriteOffset);
+	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void setFrameTime(sf::Time time);
 	void playCurrentAnimation(bool play);
 	void loopCurrentAnimation(bool loop);

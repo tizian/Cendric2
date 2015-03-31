@@ -45,7 +45,7 @@ void MovableGameObject::calculateNextVelocity(sf::Time& frameTime, sf::Vector2f&
 	if (nextVel.y < -MAX_VELOCITY_Y) nextVel.y = -MAX_VELOCITY_Y;
 }
 
-void MovableGameObject::setAcceleration(sf::Vector2f& acceleration)
+void MovableGameObject::setAcceleration(const sf::Vector2f& acceleration)
 {
 	m_acceleration = acceleration;
 }

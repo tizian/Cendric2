@@ -13,7 +13,7 @@ public:
 	virtual void render(sf::RenderTarget& renderTarget) const;
 
 	void setScreen(Screen *screen);
-	void setBoundingBox(sf::IntRect& rect);
+	void setBoundingBox(const sf::IntRect& rect);
 	virtual void setPosition(const sf::Vector2f& pos);
 	void setPositionX(float posX);
 	void setPositionY(float posY);

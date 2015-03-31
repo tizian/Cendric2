@@ -9,7 +9,7 @@ MenuScreen::MenuScreen()
 
 Screen* MenuScreen::update(sf::Time frameTime)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Unknown) || Mouse::isButtonPressed(Mouse::Button::Left))
+	if (Keyboard::isKeyPressed(Keyboard::Return) || Mouse::isButtonPressed(Mouse::Button::Left))
 	{
 		return new GameScreen();
 	}

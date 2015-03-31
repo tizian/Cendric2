@@ -37,7 +37,7 @@ bool Level::load(ResourceID id)
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states, Vector2f& center)
+void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const Vector2f& center)
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

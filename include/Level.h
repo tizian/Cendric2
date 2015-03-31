@@ -19,7 +19,7 @@ public:
 	void dispose();
 
 	// \brief draws the level. Background layers, tilemap, foreground layers.
-	void draw(sf::RenderTarget &target, sf::RenderStates states, Vector2f& center);
+	void draw(sf::RenderTarget &target, sf::RenderStates states, const Vector2f& center);
 
 private:
 	TileMap m_tileMap;

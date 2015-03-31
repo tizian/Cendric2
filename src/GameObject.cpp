@@ -67,7 +67,7 @@ void GameObject::loopCurrentAnimation(bool loop)
 	m_animatedSprite.setLooped(loop);
 }
 
-void GameObject::setSpriteOffset(sf::Vector2f& spriteOffset)
+void GameObject::setSpriteOffset(const sf::Vector2f& spriteOffset)
 {
 	m_spriteOffset = spriteOffset;
 }
