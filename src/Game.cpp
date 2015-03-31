@@ -11,10 +11,15 @@ Game::Game()
 void Game::run()
 {
 	sf::Clock frameClock;
-
+	sf::Time frameTime;
+	frameTime = frameClock.restart();
 	while (m_running)
 	{
 		sf::Event e;
+		sf::Time deltaTime;
+		
+		// don't count this loop into the frametime!
+		deltaTime = frameClock.restart();
 		while (m_mainWindow.pollEvent(e))
 		{
 			if (e.type == sf::Event::Closed || (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Escape))
@@ -22,9 +27,11 @@ void Game::run()
 				m_running = false;
 			}
 		}
-
+		
 		// time
-		sf::Time frameTime = frameClock.restart();
+		frameClock.restart();
+		frameTime = deltaTime;
+		cout << frameTime.asMilliseconds() << endl;
 
 		// input
 		g_inputController->update();
