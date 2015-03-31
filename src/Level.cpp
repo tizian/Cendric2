@@ -51,12 +51,17 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states, Vector2f& ce
 		}
 		else
 		{
-			view.setCenter((center.x * m_backgroundLayers[i].getDistance()) + (WINDOW_WIDTH / 3.4), WINDOW_HEIGHT / 2);
+			float d = m_backgroundLayers[i].getDistance();
+			float camCenterX = center.x / d;
+			float camCenterY = WINDOW_HEIGHT / 2.f;
+			view.setCenter(camCenterX, camCenterY);
 			target.setView(view);
 		}
-		m_backgroundLayers[i].render(target);
+		m_backgroundLayers[i].render(target, states);
 	}
-	view.setCenter(center.x, WINDOW_HEIGHT / 2);
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x));
+	float camCenterY = WINDOW_HEIGHT / 2.f;
+	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
 	m_tileMap.draw(target, states);
 }

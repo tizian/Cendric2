@@ -8,7 +8,7 @@ public:
 
 	void load(std::string& filename, float distance);
 	void dispose();
-	void render(sf::RenderTarget &target);
+	void render(sf::RenderTarget &target, sf::RenderStates states);
 	float getDistance();
 
 private:

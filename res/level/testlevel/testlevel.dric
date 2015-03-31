@@ -4,7 +4,7 @@ map.size:"50,15"
 map.tilesize:"50,50"
 tileset.path:"res/tilesets/tileset_test.png"
 layer.background:"-1.0,res/level/testlevel/layer_0.png"
-layer.background:"0.4,res/level/testlevel/layer_1.png"
+layer.background:"2.0,res/level/testlevel/layer_1.png"
 layer.tiles:"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

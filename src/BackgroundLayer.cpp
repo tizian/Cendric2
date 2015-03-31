@@ -20,9 +20,9 @@ void BackgroundLayer::load(std::string& filename, float distance)
 	m_sprite = sf::Sprite((*g_resourceManager->getTexture(m_fileName)));
 }
 
-void BackgroundLayer::render(sf::RenderTarget &target) 
+void BackgroundLayer::render(sf::RenderTarget &target, sf::RenderStates states)
 {
-	target.draw(m_sprite);
+	target.draw(m_sprite, states);
 }
 
 float BackgroundLayer::getDistance()
