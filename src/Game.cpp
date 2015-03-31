@@ -31,7 +31,6 @@ void Game::run()
 		// time
 		frameClock.restart();
 		frameTime = deltaTime;
-		cout << frameTime.asMilliseconds() << endl;
 
 		// input
 		g_inputController->update();
