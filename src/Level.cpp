@@ -52,9 +52,8 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const Vector
 		else
 		{
 			float d = m_backgroundLayers[i].getDistance();
-			float ominoeseNr = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
-			float camCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x)) / d) + ominoeseNr;
-			cout << camCenterX << endl;
+			float ominoeseOffset = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
+			float camCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x)) / d) + ominoeseOffset;
 			float camCenterY = WINDOW_HEIGHT / 2.f;
 			view.setCenter(camCenterX, camCenterY);
 			target.setView(view);

@@ -30,11 +30,14 @@ void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
+	bool isMovingDown = nextPosition.y > getBoundingBox()->top; // cendric is always moving either up or down, because of gravity. There are very, very rare cases where they just cancel out.
+	bool isMovingX = nextPosition.x != getBoundingBox()->left;
+
 	// check collisions with  level rect
 	sf::FloatRect levelRect = m_level->getLevelRect();
 
 	// check for collision on x axis
-	if (levelRect.left > nextBoundingBoxX.left || (levelRect.left + levelRect.width) < nextBoundingBoxX.left + nextBoundingBoxX.width) 
+	if (isMovingX && (levelRect.left > nextBoundingBoxX.left || (levelRect.left + levelRect.width) < nextBoundingBoxX.left + nextBoundingBoxX.width)) 
 	{
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
@@ -42,13 +45,13 @@ void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 	}
 
 	// check for collision on y axis
-	if (levelRect.top > nextBoundingBoxY.top) 
+	if (!isMovingDown && levelRect.top > nextBoundingBoxY.top) 
 	{
-		setAccelerationY(GRAVITY_ACCELERATION);
+		setAccelerationY(0.0);
 		setVelocityY(0.0f);
 		willCollideY = true;
 	}
-	else if ((levelRect.top + levelRect.height) < (nextBoundingBoxY.top + nextBoundingBoxY.height))
+	else if (isMovingDown && (levelRect.top + levelRect.height) < (nextBoundingBoxY.top + nextBoundingBoxY.height))
 	{
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
@@ -63,7 +66,7 @@ void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 	
 	for (std::vector<sf::FloatRect>::iterator it = collidableTiles.begin(); it != collidableTiles.end() && (!willCollideX || !willCollideY); ++it) {
 		// check for collision on x axis
-		if (!willCollideX && (*it).intersects(nextBoundingBoxX))
+		if (isMovingX && !willCollideX && (*it).intersects(nextBoundingBoxX))
 		{
 			if ((*it).left < (nextBoundingBoxX.left + nextBoundingBoxX.width) || nextBoundingBoxX.left < ((*it).left + (*it).width))
 			{
@@ -76,19 +79,19 @@ void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 		// check for collision on y axis
 		if (!willCollideY && (*it).intersects(nextBoundingBoxY))
 		{
-			if ((nextBoundingBoxY.top + nextBoundingBoxY.height) > (*it).top)
+			if (!isMovingDown && nextBoundingBoxY.top < ((*it).top + (*it).height))
+			{
+				setAccelerationY(0.0);
+				setVelocityY(0.0f);
+				willCollideY = true;
+			}
+			else if (isMovingDown && (nextBoundingBoxY.top + nextBoundingBoxY.height) > (*it).top)
 			{
 				setAccelerationY(0.0f);
 				setVelocityY(0.0f);
 				// abezie!
 				setPositionY((*it).top - nextBoundingBoxY.height);
 				m_isGrounded = true;
-				willCollideY = true;
-			}
-			else if (nextBoundingBoxY.top < ((*it).top + (*it).height))
-			{
-				setAccelerationY(GRAVITY_ACCELERATION);
-				setVelocityY(0.0f);
 				willCollideY = true;
 			}
 		}
