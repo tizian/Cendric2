@@ -20,7 +20,7 @@ struct LevelData
 	vector<BackgroundLayer> backgroundLayers;
 	vector<vector<int> > layers;
 	vector<bool> collidableTiles;
-	vector<sf::FloatRect> collidableTileRects;
+	vector<vector<bool>> collidableTileRects;
 	FloatRect levelRect;
 };
 

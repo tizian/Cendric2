@@ -362,17 +362,18 @@ void LevelReader::updateData(LevelData& data)
 	int x = 0;
 	int y = 0;
 
+	vector<bool> xLine;
+
 	// calculate collidable tiles
 	for (std::vector<bool>::iterator it = data.collidableTiles.begin(); it != data.collidableTiles.end(); ++it) {
-		if (*it)
-		{
-			// add a collidable rect
-			data.collidableTileRects.push_back(sf::FloatRect(x*data.tileSize.x, y*data.tileSize.y, data.tileSize.x, data.tileSize.y));
-		}
+		
+		xLine.push_back((*it));
 		if (x + 1 >= data.mapSize.x) 
 		{
 			x = 0;
 			y++;
+			data.collidableTileRects.push_back(xLine); // push back creates a copy of that vector.
+			xLine.clear();
 		}
 		else
 		{

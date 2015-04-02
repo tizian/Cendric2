@@ -82,7 +82,101 @@ Vector2f& Level::getStartPos()
 	return m_startPos;
 }
 
-vector<sf::FloatRect>& Level::getCollidableTiles()
+bool Level::collidesX(const sf::FloatRect& boundingBox)
 {
-	return m_collidableTiles;
+	// check for collision with level rect
+	if (boundingBox.left < m_levelRect.left || boundingBox.left + boundingBox.width > m_levelRect.left + m_levelRect.width) 
+	{
+		return true;
+	}
+
+	float tileWidth = m_tileMap.getTilesize().x;
+	float tileHeight = m_tileMap.getTilesize().y;
+
+	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
+	int bottomY = floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight);
+	int rightX = floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth);
+	Vector2i topLeft(floor(boundingBox.left / tileWidth), floor(boundingBox.top / tileHeight));
+	Vector2i topRight(rightX, floor(boundingBox.top / tileHeight));
+	Vector2i bottomLeft(floor(boundingBox.left / tileWidth), bottomY);
+	Vector2i bottomRight(rightX, bottomY);
+
+	// check left side
+	int x = topLeft.x;
+	for (int y = topLeft.y; y <= bottomLeft.y; y++)
+	{
+		if (m_collidableTiles[y][x])
+		{
+			return true;
+		}
+	}
+
+	// check right side
+	x = topRight.x;
+	for (int y = topRight.y; y <= bottomRight.y; y++)
+	{
+		if (m_collidableTiles[y][x])
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Level::collidesY(const sf::FloatRect& boundingBox)
+{
+	// check for collision with level rect
+	if (boundingBox.top < m_levelRect.top || boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height)
+	{
+		return true;
+	}
+	
+	float tileWidth = m_tileMap.getTilesize().x;
+	float tileHeight = m_tileMap.getTilesize().y;
+
+	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
+	int bottomY = floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight);
+	int rightX = floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth);
+	Vector2i topLeft(floor(boundingBox.left / tileWidth), floor(boundingBox.top / tileHeight));
+	Vector2i topRight(rightX, floor(boundingBox.top / tileHeight));
+	Vector2i bottomLeft(floor(boundingBox.left / tileWidth), bottomY);
+	Vector2i bottomRight(rightX, bottomY);
+
+	// check top side
+	int y = topLeft.y;
+	for (int x = topLeft.x; x <= topRight.x; x++)
+	{
+		if (m_collidableTiles[y][x])
+		{
+			return true;
+		}
+	}
+
+	// check bottom side
+	y = bottomLeft.y;
+	for (int x = bottomLeft.x; x <= bottomRight.x; x++)
+	{
+		if (m_collidableTiles[y][x])
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+float Level::getGround(const sf::FloatRect& boundingBox)
+{
+	// check if ground is level ground
+	if (boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height) 
+	{
+		return (m_levelRect.top + m_levelRect.height) - boundingBox.height; // we don't set cendric directly into the ground, but 1 pixel above it.
+	}
+
+	// then, a collidable tile in the grid must be the ground
+	float tileHeight = m_tileMap.getTilesize().y;
+	int y = floor((boundingBox.top + boundingBox.height) / tileHeight);
+
+	return (y*tileHeight) - boundingBox.height;
 }

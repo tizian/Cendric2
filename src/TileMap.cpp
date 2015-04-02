@@ -4,6 +4,7 @@ bool TileMap::load(std::string &filepath, sf::Vector2i tileSize, vector<vector<i
 {
 	m_tilesetPath = filepath;
 	m_tileset = g_resourceManager->getTexture(filepath);
+	m_tilesize = Vector2i(tileSize.x, tileSize.y);
 
 	m_layers.clear();
 
@@ -65,4 +66,9 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const
 void TileMap::dispose()
 {
 	g_resourceManager->deleteResource(m_tilesetPath);
+}
+
+Vector2i& TileMap::getTilesize() 
+{
+	return m_tilesize;
 }

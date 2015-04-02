@@ -23,78 +23,32 @@ void MainCharacter::update(sf::Time& frameTime)
 
 void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 {	
-	
-	bool willCollideX = false;
-	bool willCollideY = false;
-
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
-	bool isMovingDown = nextPosition.y > getBoundingBox()->top; // cendric is always moving either up or down, because of gravity. There are very, very rare cases where they just cancel out.
+	bool isMovingDown = nextPosition.y > getBoundingBox()->top; // cendric is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
 
-	// check collisions with  level rect
-	sf::FloatRect levelRect = m_level->getLevelRect();
-
 	// check for collision on x axis
-	if (isMovingX && (levelRect.left > nextBoundingBoxX.left || (levelRect.left + levelRect.width) < nextBoundingBoxX.left + nextBoundingBoxX.width)) 
+	if (isMovingX && m_level->collidesX(nextBoundingBoxX))
 	{
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
-		willCollideX = true;
 	}
-
 	// check for collision on y axis
-	if (!isMovingDown && levelRect.top > nextBoundingBoxY.top) 
+	bool collidesY = m_level->collidesY(nextBoundingBoxY);
+	if (!isMovingDown && collidesY) 
 	{
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
-		willCollideY = true;
 	}
-	else if (isMovingDown && (levelRect.top + levelRect.height) < (nextBoundingBoxY.top + nextBoundingBoxY.height))
+	else if (isMovingDown && collidesY)
 	{
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
-		// abezie!
-		setPositionY((levelRect.top + levelRect.height) - nextBoundingBoxY.height);
+		// set cendric down.
+		setPositionY(m_level->getGround(nextBoundingBoxY));
 		m_isGrounded = true;
-		willCollideY = true;
-	}
-
-	// check collisions with collidable tiles
-	vector<sf::FloatRect> collidableTiles = m_level->getCollidableTiles();
-	
-	for (std::vector<sf::FloatRect>::iterator it = collidableTiles.begin(); it != collidableTiles.end() && (!willCollideX || !willCollideY); ++it) {
-		// check for collision on x axis
-		if (isMovingX && !willCollideX && (*it).intersects(nextBoundingBoxX))
-		{
-			if ((*it).left < (nextBoundingBoxX.left + nextBoundingBoxX.width) || nextBoundingBoxX.left < ((*it).left + (*it).width))
-			{
-				setAccelerationX(0.0f);
-				setVelocityX(0.0f);
-				willCollideX = true;
-			}
-		}
-
-		// check for collision on y axis
-		if (!willCollideY && (*it).intersects(nextBoundingBoxY))
-		{
-			if (!isMovingDown && nextBoundingBoxY.top < ((*it).top + (*it).height))
-			{
-				setAccelerationY(0.0);
-				setVelocityY(0.0f);
-				willCollideY = true;
-			}
-			else if (isMovingDown && (nextBoundingBoxY.top + nextBoundingBoxY.height) > (*it).top)
-			{
-				setAccelerationY(0.0f);
-				setVelocityY(0.0f);
-				// abezie!
-				setPositionY((*it).top - nextBoundingBoxY.height);
-				m_isGrounded = true;
-				willCollideY = true;
-			}
-		}
 	}
 
 	if (abs(getVelocity().y) > 0.0f)
