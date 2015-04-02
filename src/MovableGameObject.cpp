@@ -35,7 +35,11 @@ void MovableGameObject::calculateNextPosition(sf::Time& frameTime, sf::Vector2f&
 
 void MovableGameObject::calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
 {
-	nextVel.x = (m_velocity.x + m_acceleration.x * frameTime.asSeconds()) * (m_velocity.y == 0.0f ? DAMPING_GROUND : DAMPING_AIR);
+	// distinguish damping in the air and at the ground
+	float dampingPerSec = (m_velocity.y == 0.0f) ? DAMPING_GROUND_PER_S : DAMPING_AIR_PER_S;
+	// don't damp when there is active acceleration 
+	if (m_acceleration.x != 0.0f) dampingPerSec = 0;
+	nextVel.x = (m_velocity.x + m_acceleration.x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
 	nextVel.y = m_velocity.y + m_acceleration.y * frameTime.asSeconds();
 
 	// check bounds

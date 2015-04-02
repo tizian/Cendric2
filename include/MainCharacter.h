@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
-const float WALK_ACCELERATION = 3000.0f;
-const float JUMP_BOOST = -15000.0f;
+const float WALK_ACCELERATION = 1500.0f;
+const float JUMP_VEL_Y = -600.0f;
 
 // Cendric
 class MainCharacter : public MovableGameObject
@@ -13,6 +13,7 @@ public:
 	void load() override;
 	void update(sf::Time& frameTime) override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
+	void calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
 	Vector2f getCenter();
 	
 

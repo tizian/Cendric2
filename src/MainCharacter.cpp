@@ -97,7 +97,7 @@ void MainCharacter::handleInput()
 	}
 	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
 	{
-		newAccelerationY = JUMP_BOOST;
+		newAccelerationY = JUMP_VEL_Y * 6000; // first jump vel will always be max jump y vel.
 	}
 
 	setAcceleration(Vector2f(newAccelerationX, newAccelerationY));
@@ -147,4 +147,10 @@ void MainCharacter::load()
 	m_isFacingRight = true;
 	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	playCurrentAnimation(true);
+}
+
+void MainCharacter::calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
+{
+	MovableGameObject::calculateNextVelocity(frameTime, nextVel);
+	if (nextVel.y < JUMP_VEL_Y) nextVel.y = JUMP_VEL_Y;
 }

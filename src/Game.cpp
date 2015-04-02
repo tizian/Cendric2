@@ -3,7 +3,7 @@
 Game::Game()
 {
 	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
-	m_mainWindow.setFramerateLimit(FRAME_RATE);
+	m_mainWindow.setFramerateLimit(MAX_FRAME_RATE);
 	m_screenManager = ScreenManager(new SplashScreen());
 	m_running = true;
 }
@@ -15,6 +15,7 @@ void Game::run()
 	frameTime = frameClock.restart();
 	while (m_running)
 	{
+		
 		sf::Event e;
 		sf::Time deltaTime;
 		
