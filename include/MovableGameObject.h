@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 const float GRAVITY_ACCELERATION = 700.0f;
-const float MAX_VELOCITY_X = 500.0f;
+const float MAX_VELOCITY_X = 200.0f;
 const float MAX_VELOCITY_Y = 700.0f;
 // choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
 const float DAMPING_GROUND_PER_S = 0.999f;
