@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "GameObject.h"
 
 GameObject::GameObject()
 {
@@ -39,7 +39,7 @@ void GameObject::update(sf::Time& frameTime)
 	m_animatedSprite.update(frameTime);
 }
 
-void GameObject::setPosition(const Vector2f& position)
+void GameObject::setPosition(const sf::Vector2f& position)
 {
 	Object::setPosition(position);
 	m_animatedSprite.setPosition(position + m_spriteOffset);

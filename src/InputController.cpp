@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "InputController.h"
 
 InputController* g_inputController;
 

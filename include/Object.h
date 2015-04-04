@@ -1,6 +1,8 @@
 #pragma once
 
-#include "stdafx.h"
+#include "global.h"
+
+class Screen;
 
 // an abstract object with a gamestate and a bounding box
 class Object
@@ -22,7 +24,7 @@ public:
 
 private:
 	Screen *m_screen;
-	FloatRect m_boundingBox;
+	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 };

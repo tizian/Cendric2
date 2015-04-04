@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#include "ResourceManager.h"
+
+using namespace std;
 
 ResourceManager* g_resourceManager;
 
@@ -42,11 +44,11 @@ sf::Texture* ResourceManager::getTexture(std::string& filename)
 	if (texture.loadFromFile(filename))
 	{
 		m_textures[filename] = texture;
-		std::cout << "ResourceManager: " << filename << ": loading texture.\n";
+		cout << "ResourceManager: " << filename << ": loading texture.\n";
 		return &m_textures[filename];
 	}
 
-	std::cout << "ResourceManager: ERROR: Texture could not be loaded from file: " << filename << ".\n";
+	cout << "ResourceManager: ERROR: Texture could not be loaded from file: " << filename << ".\n";
 	m_textures[filename] = texture;
 	return &m_textures[filename];
 }

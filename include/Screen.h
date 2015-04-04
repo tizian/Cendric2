@@ -1,6 +1,10 @@
 #pragma once
 
-#include "stdafx.h"
+#include <vector>
+#include <iostream>
+
+#include "global.h"
+#include "Object.h"
 
 class Object;
 class ScreenManager;
@@ -20,5 +24,5 @@ public:
 	void addObject(Object *object);
 	
 protected:
-	vector<Object *> m_objects;
+	std::vector<Object *> m_objects;
 };

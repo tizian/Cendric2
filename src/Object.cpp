@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "Object.h"
 
 Object::Object() {}
 Object::~Object() {}
@@ -21,7 +21,7 @@ sf::FloatRect* Object::getBoundingBox()
 	return &m_boundingBox;
 }
 
-const Vector2f& Object::getPosition()
+const sf::Vector2f& Object::getPosition()
 {
 	return m_position;
 }

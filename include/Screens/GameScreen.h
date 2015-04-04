@@ -1,4 +1,12 @@
-#include "stdafx.h"
+#pragma once
+
+#include <iostream>
+
+#include "global.h"
+#include "Level.h"
+#include "MainCharacter.h"
+#include "Screen.h"
+#include "ResourceManager.h"
 
 class MainCharacter;
 

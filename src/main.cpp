@@ -1,4 +1,7 @@
-#include "stdafx.h"
+#include "global.h"
+#include "Game.h"
+#include "ResourceManager.h"
+#include "InputController.h"
 
 int main(int argc, char* argv[])
 {

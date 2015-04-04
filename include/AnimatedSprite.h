@@ -1,4 +1,7 @@
-#include "stdafx.h"
+#pragma once
+
+#include "global.h"
+#include "Animation.h"
 
 ////////////////////////////////////////////////////////////
 //

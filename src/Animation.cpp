@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "Animation.h"
 
 Animation::Animation() : m_texture(NULL)
 {
@@ -20,12 +20,12 @@ const sf::Texture* Animation::getSpriteSheet() const
 	return m_texture;
 }
 
-std::size_t Animation::getSize() const
+size_t Animation::getSize() const
 {
 	return m_frames.size();
 }
 
-const sf::IntRect& Animation::getFrame(std::size_t n) const
+const sf::IntRect& Animation::getFrame(size_t n) const
 {
 	return m_frames[n];
 }

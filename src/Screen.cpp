@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#include "Screen.h"
+
+using namespace std;
 
 Screen::Screen()
 {

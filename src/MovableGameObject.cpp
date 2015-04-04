@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "MovableGameObject.h"
 
 MovableGameObject::MovableGameObject()
 {
@@ -12,7 +12,7 @@ MovableGameObject::~MovableGameObject()
 
 void MovableGameObject::update(sf::Time& frameTime)
 {
-	Vector2f position;
+	sf::Vector2f position;
 	calculateNextPosition(frameTime, position);
 	setPosition(position);
 	calculateNextVelocity(frameTime, m_velocity);
@@ -26,8 +26,8 @@ void MovableGameObject::checkCollisions(sf::Vector2f nextPosition)
 
 void MovableGameObject::calculateNextPosition(sf::Time& frameTime, sf::Vector2f& nextPos)
 {
-	Vector2f position = getPosition();
-	Vector2f nextVel;
+	sf::Vector2f position = getPosition();
+	sf::Vector2f nextVel;
 	calculateNextVelocity(frameTime, nextVel);
 	nextPos.x = position.x + nextVel.x * frameTime.asSeconds();
 	nextPos.y = position.y + nextVel.y * frameTime.asSeconds();

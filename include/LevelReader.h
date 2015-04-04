@@ -1,4 +1,9 @@
-#include <stdafx.h>
+#pragma once
+
+#include "global.h"
+#include "BackgroundLayer.h"
+
+class Level;
 
 #define __COMMENT_MARKER '#'
 #define __LEVEL_NAME "level.name"
@@ -12,16 +17,16 @@
 
 struct LevelData
 {
-	string name;
-	Vector2i mapSize;
-	Vector2i tileSize;
-	Vector2f startPos;
-	string tileSetPath;
-	vector<BackgroundLayer> backgroundLayers;
-	vector<vector<int> > layers;
-	vector<bool> collidableTiles;
-	vector<vector<bool>> collidableTileRects;
-	FloatRect levelRect;
+	std::string name;
+	sf::Vector2i mapSize;
+	sf::Vector2i tileSize;
+	sf::Vector2f startPos;
+	std::string tileSetPath;
+	std::vector<BackgroundLayer> backgroundLayers;
+	std::vector<std::vector<int>> layers;
+	std::vector<bool> collidableTiles;
+	std::vector<std::vector<bool>> collidableTileRects;
+	sf::FloatRect levelRect;
 };
 
 class LevelReader

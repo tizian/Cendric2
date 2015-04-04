@@ -1,4 +1,8 @@
-#include "stdafx.h"
+#pragma once
+
+#include "global.h"
+#include "ScreenManager.h"
+#include "InputController.h"
 
 class Game
 {

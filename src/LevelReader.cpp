@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#include "LevelReader.h"
+
+using namespace std;
 
 //constructor
 LevelReader::LevelReader()
@@ -163,7 +165,7 @@ bool LevelReader::readMapSize(char* start, char* end, LevelData& data)
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int height = atoi(startData);
-	Vector2i size(width, height);
+	sf::Vector2i size(width, height);
 	data.mapSize = size;
 	return true;
 }
@@ -176,7 +178,7 @@ bool LevelReader::readTileSize(char* start, char* end, LevelData& data)
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int height = atoi(startData);
-	Vector2i size(width, height);
+	sf::Vector2i size(width, height);
 	data.tileSize = size;
 	return true;
 }
@@ -240,7 +242,7 @@ bool LevelReader::readStartPos(char* start, char* end, LevelData& data)
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int y = atoi(startData);
-	Vector2f pos(static_cast<float>(x), static_cast<float>(y));
+	sf::Vector2f pos(static_cast<float>(x), static_cast<float>(y));
 	data.startPos = pos;
 	return true;
 }

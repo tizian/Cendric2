@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#include "Screens\GameScreen.h"
+
+using namespace std;
 
 GameScreen::GameScreen()
 {
@@ -22,6 +24,6 @@ Screen* GameScreen::update(sf::Time frameTime)
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
 	// parallax 
-	m_currentLevel.draw(renderTarget, RenderStates::Default, m_mainChar->getCenter());
+	m_currentLevel.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	Screen::render(renderTarget);
 }

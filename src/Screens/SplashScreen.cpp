@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#include "Screens\SplashScreen.h"
+
+using namespace std;
 
 SplashScreen::SplashScreen()
 {
@@ -9,7 +11,7 @@ SplashScreen::SplashScreen()
 
 Screen* SplashScreen::update(sf::Time frameTime)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Return) || Mouse::isButtonPressed(Mouse::Button::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
 		cout << "(SplashScreen::update): Change Screen" << endl;
 		return new MenuScreen();

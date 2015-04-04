@@ -1,4 +1,7 @@
-#include "stdafx.h"
+#pragma once
+
+#include "global.h"
+#include "GameObject.h"
 
 const float GRAVITY_ACCELERATION = 1000.0f;
 const float MAX_VELOCITY_X = 200.0f;

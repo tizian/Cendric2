@@ -1,4 +1,9 @@
-#include "stdafx.h"
+#pragma once
+
+#include "global.h"
+#include "MovableGameObject.h"
+#include "Level.h"
+#include "InputController.h"
 
 const float WALK_ACCELERATION = 1500.0f;
 const float JUMP_VEL_Y = -600.0f;
@@ -14,7 +19,7 @@ public:
 	void update(sf::Time& frameTime) override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
 	void calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
-	Vector2f getCenter();
+	sf::Vector2f getCenter();
 	
 
 private:

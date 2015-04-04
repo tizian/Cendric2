@@ -1,4 +1,8 @@
-#include "stdafx.h"
+#pragma once
+
+#include <map>
+
+#include "global.h"
 
 enum class Key
 {
@@ -25,9 +29,9 @@ public:
 	void init();
 
 private:
-	map<Key, bool> m_keyActiveMap;
+	std::map<Key, bool> m_keyActiveMap;
 
 	// TODO: this map has to be loaded from an .ini file later so it can be changed in the game options.
 	// Another problem: Mouse keys can't be set in this map yet.
-	map<Key, sf::Keyboard::Key> m_keyMap;
+	std::map<Key, sf::Keyboard::Key> m_keyMap;
 };

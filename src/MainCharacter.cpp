@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "MainCharacter.h"
 
 MainCharacter::MainCharacter(Level* level) 
 {
@@ -100,12 +100,12 @@ void MainCharacter::handleInput()
 		newAccelerationY = JUMP_VEL_Y * 6000; // first jump vel will always be max jump y vel.
 	}
 
-	setAcceleration(Vector2f(newAccelerationX, newAccelerationY));
+	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
 }
 
-Vector2f MainCharacter::getCenter()
+sf::Vector2f MainCharacter::getCenter()
 {
-	return Vector2f(
+	return sf::Vector2f(
 		getBoundingBox()->left + (getBoundingBox()->width / 2), 
 		getBoundingBox()->top + (getBoundingBox()->height / 2));
 }

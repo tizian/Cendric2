@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "ScreenManager.h"
 
 ScreenManager::ScreenManager() {}
 

@@ -1,4 +1,10 @@
-#include "stdafx.h"
+#pragma once
+
+#include <map>
+
+#include "global.h"
+#include "Object.h"
+#include "AnimatedSprite.h"
 
 enum class GameObjectState
 {
@@ -23,7 +29,7 @@ public:
 
 	void setCurrentAnimation(Animation* animation, bool isFlipped);
 	void addAnimation(GameObjectState state, Animation& animation);
-	void setPosition(const Vector2f& position) override;
+	void setPosition(const sf::Vector2f& position) override;
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void setFrameTime(sf::Time time);
 	void playCurrentAnimation(bool play);
@@ -31,7 +37,7 @@ public:
 	Animation* getAnimation(GameObjectState state);
 	
 private:
-	map<GameObjectState, Animation> m_animations;
+	std::map<GameObjectState, Animation> m_animations;
 	AnimatedSprite m_animatedSprite;
 	sf::Vector2f m_spriteOffset;
 };

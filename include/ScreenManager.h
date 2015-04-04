@@ -1,6 +1,10 @@
 #pragma once
 
-#include "stdafx.h"
+#include "global.h"
+#include "Screen.h"
+#include "Screens\SplashScreen.h"
+#include "Screens\MenuScreen.h"
+#include "Screens\GameScreen.h"
 
 class ScreenManager
 {

@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#include "Screens\MenuScreen.h"
+
+using namespace std;
 
 MenuScreen::MenuScreen()
 {
@@ -9,7 +11,7 @@ MenuScreen::MenuScreen()
 
 Screen* MenuScreen::update(sf::Time frameTime)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Return) || Mouse::isButtonPressed(Mouse::Button::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
 		return new GameScreen();
 	}

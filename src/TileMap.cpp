@@ -1,10 +1,12 @@
-#include "stdafx.h"
+#include "TileMap.h"
 
-bool TileMap::load(std::string &filepath, sf::Vector2i tileSize, vector<vector<int> > layers, int width, int height)
+using namespace std;
+
+bool TileMap::load(string &filepath, sf::Vector2i tileSize, vector<vector<int> > layers, int width, int height)
 {
 	m_tilesetPath = filepath;
 	m_tileset = g_resourceManager->getTexture(filepath);
-	m_tilesize = Vector2i(tileSize.x, tileSize.y);
+	m_tilesize = sf::Vector2i(tileSize.x, tileSize.y);
 	float tileWidth = static_cast<float>(tileSize.x);
 	float tileHeight = static_cast<float>(tileSize.y);
 
@@ -12,7 +14,7 @@ bool TileMap::load(std::string &filepath, sf::Vector2i tileSize, vector<vector<i
 
 	for (int count = 0; count < layers.size(); count++)
 	{
-		VertexArray layer;
+		sf::VertexArray layer;
 
 		layer.setPrimitiveType(sf::Quads);
 		layer.resize(width * height * 4);
@@ -70,7 +72,7 @@ void TileMap::dispose()
 	g_resourceManager->deleteResource(m_tilesetPath);
 }
 
-Vector2i& TileMap::getTilesize() 
+sf::Vector2i& TileMap::getTilesize() 
 {
 	return m_tilesize;
 }

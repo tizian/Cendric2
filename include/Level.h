@@ -1,4 +1,13 @@
-#include "stdafx.h"
+#pragma once
+
+#include <vector>
+#include <math.h>
+
+#include "global.h"
+#include "TileMap.h"
+#include "BackgroundLayer.h"
+#include "LevelReader.h"
+#include "ResourceManager.h"
 
 class Level 
 {
@@ -8,8 +17,8 @@ public:
 
 	// getters
 	TileMap getTilemap();
-	Vector2f& getStartPos();
-	FloatRect& getLevelRect();
+	sf::Vector2f& getStartPos();
+	sf::FloatRect& getLevelRect();
 
 	// checks collision with the collidable grid of that level
 	bool collidesX(const sf::FloatRect& boundingBox);
@@ -24,13 +33,13 @@ public:
 	void dispose();
 
 	// draws the level. Background layers, tilemap, foreground layers.
-	void draw(sf::RenderTarget &target, sf::RenderStates states, const Vector2f& center);
+	void draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center);
 
 private:
 	TileMap m_tileMap;
-	FloatRect m_levelRect;
-	vector<vector<bool>> m_collidableTiles;
-	vector<BackgroundLayer> m_backgroundLayers;
+	sf::FloatRect m_levelRect;
+	std::vector<std::vector<bool>> m_collidableTiles;
+	std::vector<BackgroundLayer> m_backgroundLayers;
 	std::string m_name;
 	sf::Vector2f m_startPos;
 

@@ -1,4 +1,6 @@
-#include "stdafx.h"
+#include "BackgroundLayer.h"
+
+using namespace std;
 
 BackgroundLayer::BackgroundLayer()
 {
@@ -13,7 +15,7 @@ void BackgroundLayer::dispose()
 	g_resourceManager->deleteResource(m_fileName);
 }
 
-void BackgroundLayer::load(std::string& filename, float distance)
+void BackgroundLayer::load(string& filename, float distance)
 {
 	m_fileName = filename;
 	m_distance = distance;

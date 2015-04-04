@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "Level.h"
 
 Level::Level()
 {
@@ -37,7 +37,7 @@ bool Level::load(ResourceID id)
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const Vector2f& center)
+void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center)
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -67,7 +67,7 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const Vector
 	m_tileMap.draw(target, states);
 }
 
-FloatRect& Level::getLevelRect()
+sf::FloatRect& Level::getLevelRect()
 {
 	return m_levelRect;
 }
@@ -77,7 +77,7 @@ TileMap Level::getTilemap()
 	return m_tileMap;
 }
 
-Vector2f& Level::getStartPos()
+sf::Vector2f& Level::getStartPos()
 {
 	return m_startPos;
 }
@@ -96,10 +96,10 @@ bool Level::collidesX(const sf::FloatRect& boundingBox)
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
 	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
 	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
-	Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
-	Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
-	Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
-	Vector2i bottomRight(rightX, bottomY);
+	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
+	sf::Vector2i bottomRight(rightX, bottomY);
 
 	// check left side
 	int x = topLeft.x;
@@ -138,10 +138,10 @@ bool Level::collidesY(const sf::FloatRect& boundingBox)
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
 	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
 	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
-	Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
-	Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
-	Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
-	Vector2i bottomRight(rightX, bottomY);
+	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
+	sf::Vector2i bottomRight(rightX, bottomY);
 
 	// check top side
 	int y = topLeft.y;
