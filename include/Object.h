@@ -13,16 +13,16 @@ public:
 	virtual void render(sf::RenderTarget& renderTarget) const;
 
 	void setScreen(Screen *screen);
-	void setBoundingBox(const sf::IntRect& rect);
+	void setBoundingBox(const sf::FloatRect& rect);
 	virtual void setPosition(const sf::Vector2f& pos);
 	void setPositionX(float posX);
 	void setPositionY(float posY);
 	const sf::Vector2f& getPosition();
-	sf::IntRect* getBoundingBox();
+	sf::FloatRect* getBoundingBox();
 
 private:
 	Screen *m_screen;
-	IntRect m_boundingBox;
+	FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 };

@@ -112,8 +112,8 @@ Vector2f MainCharacter::getCenter()
 
 void MainCharacter::load()
 {
-	setBoundingBox(sf::IntRect(0, 0, 46, 100));
-	setSpriteOffset(sf::Vector2f(-17, -20));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 46.f, 100.f));
+	setSpriteOffset(sf::Vector2f(-17.f, -20.f));
 
 	Animation walkingAnimation;
 	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));

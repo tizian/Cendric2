@@ -11,12 +11,12 @@ void Object::setScreen(Screen *screen)
 	m_screen = screen;
 }
 
-void Object::setBoundingBox(const sf::IntRect& rect)
+void Object::setBoundingBox(const sf::FloatRect& rect)
 {
 	m_boundingBox = rect;
 }
 
-sf::IntRect* Object::getBoundingBox()
+sf::FloatRect* Object::getBoundingBox()
 {
 	return &m_boundingBox;
 }

@@ -5,6 +5,8 @@ bool TileMap::load(std::string &filepath, sf::Vector2i tileSize, vector<vector<i
 	m_tilesetPath = filepath;
 	m_tileset = g_resourceManager->getTexture(filepath);
 	m_tilesize = Vector2i(tileSize.x, tileSize.y);
+	float tileWidth = static_cast<float>(tileSize.x);
+	float tileHeight = static_cast<float>(tileSize.y);
 
 	m_layers.clear();
 
@@ -35,15 +37,15 @@ bool TileMap::load(std::string &filepath, sf::Vector2i tileSize, vector<vector<i
 
 				sf::Vertex *quad = &layer[(i + j * width) * 4];
 
-				quad[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
-				quad[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
-				quad[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
-				quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+				quad[0].position = sf::Vector2f(i * tileWidth, j * tileHeight);
+				quad[1].position = sf::Vector2f((i + 1) * tileWidth, j * tileHeight);
+				quad[2].position = sf::Vector2f((i + 1) * tileWidth, (j + 1) * tileHeight);
+				quad[3].position = sf::Vector2f(i * tileWidth, (j + 1) * tileHeight);
 
-				quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
-				quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
-				quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
-				quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
+				quad[0].texCoords = sf::Vector2f(tu * tileWidth, tv * tileHeight);
+				quad[1].texCoords = sf::Vector2f((tu + 1) * tileWidth, tv * tileHeight);
+				quad[2].texCoords = sf::Vector2f((tu + 1) * tileWidth, (tv + 1) * tileHeight);
+				quad[3].texCoords = sf::Vector2f(tu * tileWidth, (tv + 1) * tileHeight);
 			}
 		}
 

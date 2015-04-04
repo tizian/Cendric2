@@ -138,7 +138,7 @@ bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data)
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
 	startData++;
-	float distance = atof(startData);
+	float distance = static_cast<float>(atof(startData));
 	startData = gotoNextChar(start, end, ',');
 	startData++;
 	string path(startData);
@@ -240,7 +240,7 @@ bool LevelReader::readStartPos(char* start, char* end, LevelData& data)
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int y = atoi(startData);
-	Vector2f pos(x, y);
+	Vector2f pos(static_cast<float>(x), static_cast<float>(y));
 	data.startPos = pos;
 	return true;
 }
@@ -268,7 +268,7 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 	char* charBuffer = new char[fileSize];
 
 	// fill buffer array
-	returnedFileSize = fread(charBuffer, sizeof(char), fileSize, pLevelFile);
+	returnedFileSize = static_cast<long>(fread(charBuffer, sizeof(char), fileSize, pLevelFile));
 
 	long bufferContentLength = returnedFileSize;
 
@@ -384,6 +384,6 @@ void LevelReader::updateData(LevelData& data)
 	// calculate level rect
 	data.levelRect.left = 0;
 	data.levelRect.top = 0;
-	data.levelRect.height = data.tileSize.y * data.mapSize.y;
-	data.levelRect.width = data.tileSize.x * data.mapSize.x;
+	data.levelRect.height = static_cast<float>(data.tileSize.y * data.mapSize.y);
+	data.levelRect.width = static_cast<float>(data.tileSize.x * data.mapSize.x);
 }
