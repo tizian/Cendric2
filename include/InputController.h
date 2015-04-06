@@ -8,6 +8,8 @@ enum class Key
 {
 	Left,
 	Right, 
+	Up,
+	Down,
 	Jump, 
 	Fire, 
 	SpellFire, 

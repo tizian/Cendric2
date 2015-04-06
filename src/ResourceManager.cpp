@@ -17,8 +17,10 @@ void ResourceManager::init()
 {
 	m_fileNames.insert(
 	{
+		{ ResourceID::Map_testMap, "res/map/testmap/testmap.dricmap" },
 		{ ResourceID::Level_testLevel, "res/level/testlevel/testlevel.dric" },
-		{ ResourceID::Texture_mainChar, "res/assets/cendric/cendric_spritesheet.png" },
+		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
+		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
 		{ ResourceID::Texture_splashScreen, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_menuScreen, "res/screens/screen_menu.png" }
 	});
@@ -68,7 +70,11 @@ void ResourceManager::deleteResource(std::string filename)
 	// delete texture
 	std::map<std::string, sf::Texture>::iterator textureIt = m_textures.find(filename);
 	if (textureIt != m_textures.end())
+	{
 		m_textures.erase(textureIt);
+		cout << "ResourceManager: " << filename << ": releasing texture.\n";
+	}
+		
 
 	// delete sound etc...
 }

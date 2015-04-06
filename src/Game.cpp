@@ -15,7 +15,6 @@ void Game::run()
 	frameTime = frameClock.restart();
 	while (m_running)
 	{
-		
 		sf::Event e;
 		sf::Time deltaTime;
 		

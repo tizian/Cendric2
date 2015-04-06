@@ -21,9 +21,21 @@ sf::FloatRect* Object::getBoundingBox()
 	return &m_boundingBox;
 }
 
+sf::Vector2f Object::getCenter()
+{
+	return sf::Vector2f(
+		m_boundingBox.left + (m_boundingBox.width / 2),
+		m_boundingBox.top + (m_boundingBox.height / 2));
+}
+
 const sf::Vector2f& Object::getPosition()
 {
 	return m_position;
+}
+
+Screen* Object::getScreen()
+{
+	return m_screen;
 }
 
 void Object::setPosition(const sf::Vector2f& pos)

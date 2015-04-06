@@ -18,9 +18,7 @@ public:
 	void load() override;
 	void update(sf::Time& frameTime) override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
-	void calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
-	sf::Vector2f getCenter();
-	
+	void calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;	
 
 private:
 	// handle input and calculate the next position

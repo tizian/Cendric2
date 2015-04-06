@@ -2,11 +2,12 @@
 
 using namespace std;
 
-GameScreen::GameScreen()
+GameScreen::GameScreen(ResourceID levelID)
 {
 	cout << "Init GameScreen...";
-	m_currentLevel.load(ResourceID::Level_testLevel);
+	m_currentLevel.load(levelID);
 	m_mainChar = new MainCharacter(&m_currentLevel);
+	m_mainChar->setScreen(this);
 	addObject(m_mainChar);
 	cout << "...done." << endl;
 }
@@ -14,6 +15,7 @@ GameScreen::GameScreen()
 GameScreen::~GameScreen()
 {
 	m_currentLevel.dispose();
+	delete m_mainChar;
 }
 
 Screen* GameScreen::update(sf::Time frameTime)

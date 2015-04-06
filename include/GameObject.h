@@ -9,7 +9,15 @@
 enum class GameObjectState
 {
 	Idle,
+	Idle_up,
+	Idle_down,
+	Idle_left,
+	Idle_right,
 	Walking,
+	Walking_up,
+	Walking_down,
+	Walking_right,
+	Walking_left,
 	Jumping
 };
 

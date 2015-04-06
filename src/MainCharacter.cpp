@@ -82,6 +82,7 @@ void MainCharacter::updateAnimation()
 
 void MainCharacter::handleInput()
 {
+	// movement input
 	float newAccelerationX = 0;
 	float newAccelerationY = GRAVITY_ACCELERATION;
 
@@ -97,17 +98,13 @@ void MainCharacter::handleInput()
 	}
 	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
 	{
-		newAccelerationY = JUMP_VEL_Y * 6000; // first jump vel will always be max jump y vel.
+		newAccelerationY = JUMP_VEL_Y * 6000; // first jump vel will always be max jump y vel. 6000 is the max framerate.
 	}
 
 	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
-}
 
-sf::Vector2f MainCharacter::getCenter()
-{
-	return sf::Vector2f(
-		getBoundingBox()->left + (getBoundingBox()->width / 2), 
-		getBoundingBox()->top + (getBoundingBox()->height / 2));
+	// handle attack input
+	
 }
 
 void MainCharacter::load()

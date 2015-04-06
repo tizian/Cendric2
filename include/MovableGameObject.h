@@ -29,6 +29,7 @@ public:
 	virtual void checkCollisions(sf::Vector2f nextPosition);
 
 	sf::Vector2f& getVelocity();
+	sf::Vector2f& getAcceleration();
 
 private:
 	sf::Vector2f m_velocity;

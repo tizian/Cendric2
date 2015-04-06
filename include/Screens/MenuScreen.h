@@ -5,7 +5,7 @@
 #include "global.h"
 #include "ResourceManager.h"
 #include "Screen.h"
-#include "GameScreen.h"
+#include "MapScreen.h"
 
 class MenuScreen : public Screen
 {

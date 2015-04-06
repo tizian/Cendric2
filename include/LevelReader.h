@@ -3,8 +3,6 @@
 #include "global.h"
 #include "BackgroundLayer.h"
 
-class Level;
-
 #define __COMMENT_MARKER '#'
 #define __LEVEL_NAME "level.name"
 #define __MAP_SIZE "map.size"
@@ -38,7 +36,6 @@ public:
 	bool readLevel(char* fileName, LevelData& data);
 
 private:
-	Level* m_pLevel;
 
 	char* gotoNextChar(char* buffer, char* end, char goal);
 	int countToNextChar(char* buffer, char* end, char goal);

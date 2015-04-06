@@ -4,7 +4,7 @@
 
 class Screen;
 
-// an abstract object with a gamestate and a bounding box
+// an abstract object with a gamestate, a screen and a bounding box
 class Object
 {
 public:
@@ -21,6 +21,8 @@ public:
 	void setPositionY(float posY);
 	const sf::Vector2f& getPosition();
 	sf::FloatRect* getBoundingBox();
+	sf::Vector2f Object::getCenter();
+	Screen* getScreen();
 
 private:
 	Screen *m_screen;

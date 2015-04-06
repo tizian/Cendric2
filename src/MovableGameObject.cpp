@@ -83,3 +83,8 @@ sf::Vector2f& MovableGameObject::getVelocity()
 {
 	return m_velocity;
 }
+
+sf::Vector2f& MovableGameObject::getAcceleration()
+{
+	return m_acceleration;
+}

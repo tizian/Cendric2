@@ -10,7 +10,8 @@ ScreenManager::ScreenManager(Screen *initialScreen)
 void ScreenManager::update(sf::Time frameTime)
 {
 	Screen* nextScreen = m_currentScreen->update(frameTime);
-	if (m_currentScreen != nextScreen) {
+	if (m_currentScreen != nextScreen) 
+	{
 		m_currentScreen->onExit(nextScreen);
 		nextScreen->onEnter(m_currentScreen);
 		delete m_currentScreen;

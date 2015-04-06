@@ -6,9 +6,12 @@
 #include "global.h"
 
 enum class ResourceID
-{
-	Texture_mainChar,
+{	
+	Void,
+	Map_testMap,
 	Level_testLevel,
+	Texture_mainChar,
+	Texture_mapMainChar,
 	Texture_splashScreen,
 	Texture_menuScreen
 };

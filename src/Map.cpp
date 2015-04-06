@@ -1,91 +1,68 @@
-#include "Level.h"
+#include "Map.h"
 
-Level::Level()
+Map::Map()
 {
 }
 
-Level::~Level()
+Map::~Map()
 {
 	dispose();
 }
 
-void Level::dispose()
+void Map::dispose()
 {
 	m_tileMap.dispose();
-	for (int i = 0; i < m_backgroundLayers.size(); i++)
-	{
-		m_backgroundLayers[i].dispose();
-	}
 }
 
-bool Level::load(ResourceID id) 
+bool Map::load(ResourceID id)
 {
-	LevelReader reader;
-	LevelData data;
-	if (!reader.readLevel(g_resourceManager->getFilename(id), data))
+	MapReader reader;
+	MapData data;
+	if (!reader.readMap(g_resourceManager->getFilename(id), data))
 	{
 		return false;
 	}
 
-	// load level
+	// load map
 	m_startPos = data.startPos;
 	m_name = data.name;
 	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
 	m_collidableTiles = data.collidableTileRects;
-	m_levelRect = data.levelRect;
-	m_backgroundLayers = data.backgroundLayers;
+	m_mapRect = data.mapRect;
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center)
+void Map::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center)
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	for (int i = 0; i < m_backgroundLayers.size(); i++)
-	{
-		// handle case for layer at infinity
-		if (m_backgroundLayers[i].getDistance() == -1.0f) 
-		{
-			view.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-			target.setView(view);
-		}
-		else
-		{
-			float d = m_backgroundLayers[i].getDistance();
-			float ominoeseOffset = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
-			float camCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x)) / d) + ominoeseOffset;
-			float camCenterY = WINDOW_HEIGHT / 2.f;
-			view.setCenter(camCenterX, camCenterY);
-			target.setView(view);
-		}
-		m_backgroundLayers[i].render(target, states);
-	}
-	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x));
-	float camCenterY = WINDOW_HEIGHT / 2.f;
+
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_mapRect.width - WINDOW_WIDTH / 2.f, center.x));
+	float camCenterY = std::max(WINDOW_HEIGHT / 2.f, std::min(m_mapRect.height - WINDOW_HEIGHT / 2.f, center.y));
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
 	m_tileMap.draw(target, states);
 }
 
-sf::FloatRect& Level::getLevelRect()
+sf::FloatRect& Map::getMapRect()
 {
-	return m_levelRect;
+	return m_mapRect;
 }
 
-TileMap Level::getTilemap() 
+TileMap Map::getTilemap()
 {
 	return m_tileMap;
 }
 
-sf::Vector2f& Level::getStartPos()
+sf::Vector2f& Map::getStartPos()
 {
 	return m_startPos;
 }
 
-bool Level::collidesX(const sf::FloatRect& boundingBox)
+bool Map::collidesX(const sf::FloatRect& boundingBox)
 {
 	// check for collision with level rect
-	if (boundingBox.left < m_levelRect.left || boundingBox.left + boundingBox.width > m_levelRect.left + m_levelRect.width) 
+	if (boundingBox.left < m_mapRect.left || boundingBox.left + boundingBox.width > m_mapRect.left + m_mapRect.width)
 	{
 		return true;
 	}
@@ -124,14 +101,14 @@ bool Level::collidesX(const sf::FloatRect& boundingBox)
 	return false;
 }
 
-bool Level::collidesY(const sf::FloatRect& boundingBox)
+bool Map::collidesY(const sf::FloatRect& boundingBox)
 {
 	// check for collision with level rect
-	if (boundingBox.top < m_levelRect.top || boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height)
+	if (boundingBox.top < m_mapRect.top || boundingBox.top + boundingBox.height > m_mapRect.top + m_mapRect.height)
 	{
 		return true;
 	}
-	
+
 	float tileWidth = static_cast<float>(m_tileMap.getTilesize().x);
 	float tileHeight = static_cast<float>(m_tileMap.getTilesize().y);
 
@@ -166,17 +143,15 @@ bool Level::collidesY(const sf::FloatRect& boundingBox)
 	return false;
 }
 
-float Level::getGround(const sf::FloatRect& boundingBox)
+ResourceID Map::checkLevelEntry(const sf::FloatRect& boundingBox)
 {
-	// check if ground is level ground
-	if (boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height) 
+	
+	if (boundingBox.contains(sf::Vector2f(50*1, 50*32)))
 	{
-		return (m_levelRect.top + m_levelRect.height) - boundingBox.height; 
+		return ResourceID::Level_testLevel;
 	}
-
-	// then, a collidable tile in the grid must be the ground
-	float tileHeight = static_cast<float>(m_tileMap.getTilesize().y);
-	int y = static_cast<int>(floor((boundingBox.top + boundingBox.height)) / tileHeight);
-
-	return (y * tileHeight) - boundingBox.height;
+	else 
+	{
+		return ResourceID::Void;
+	}
 }

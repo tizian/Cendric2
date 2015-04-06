@@ -13,7 +13,7 @@ Screen* MenuScreen::update(sf::Time frameTime)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
-		return new GameScreen();
+		return new MapScreen();
 	}
 	return this;
 }
