@@ -17,12 +17,14 @@ void ResourceManager::init()
 {
 	m_fileNames.insert(
 	{
-		{ ResourceID::Map_testMap, "res/map/testmap/testmap.dricmap" },
-		{ ResourceID::Level_testLevel, "res/level/testlevel/testlevel.dric" },
+		{ ResourceID::Map_testmap, "res/map/testmap/testmap.dricmap" },
+		{ ResourceID::Level_testlevel, "res/level/testlevel/testlevel.dric" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
-		{ ResourceID::Texture_splashScreen, "res/screens/screen_splash.png" },
-		{ ResourceID::Texture_menuScreen, "res/screens/screen_menu.png" }
+		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
+		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
+		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
+		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" }
 	});
 }
 

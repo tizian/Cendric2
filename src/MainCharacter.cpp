@@ -151,3 +151,8 @@ void MainCharacter::calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nex
 	MovableGameObject::calculateNextVelocity(frameTime, nextVel);
 	if (nextVel.y < JUMP_VEL_Y) nextVel.y = JUMP_VEL_Y;
 }
+
+Level* MainCharacter::getLevel()
+{
+	return m_level;
+}

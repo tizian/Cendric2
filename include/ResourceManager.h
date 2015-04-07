@@ -8,12 +8,14 @@
 enum class ResourceID
 {	
 	Void,
-	Map_testMap,
-	Level_testLevel,
+	Map_testmap,
+	Level_testlevel,
 	Texture_mainChar,
 	Texture_mapMainChar,
-	Texture_splashScreen,
-	Texture_menuScreen
+	Texture_spell_fire,
+	Texture_spell_ice,
+	Texture_screen_splash,
+	Texture_screen_menu
 };
 
 class ResourceManager
