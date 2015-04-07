@@ -148,7 +148,7 @@ ResourceID Map::checkLevelEntry(const sf::FloatRect& boundingBox)
 	
 	if (boundingBox.contains(sf::Vector2f(50*1, 50*32)))
 	{
-		return ResourceID::Level_testLevel;
+		return ResourceID::Level_testlevel;
 	}
 	else 
 	{

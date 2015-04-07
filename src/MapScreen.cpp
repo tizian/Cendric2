@@ -5,7 +5,7 @@ using namespace std;
 MapScreen::MapScreen()
 {
 	cout << "Init MapScreen...";
-	m_currentMap.load(ResourceID::Map_testMap);
+	m_currentMap.load(ResourceID::Map_testmap);
 	m_mainChar = new MapMainCharacter(&m_currentMap);
 	addObject(m_mainChar);
 	cout << "...done." << endl;

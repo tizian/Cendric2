@@ -5,7 +5,7 @@ using namespace std;
 MenuScreen::MenuScreen()
 {
 	cout << "Init MenuScreen...";
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_menuScreen)));
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_menu)));
 	cout << "...done." << endl;
 }
 
@@ -30,6 +30,6 @@ void MenuScreen::onEnter(Screen *previousScreen)
 
 void MenuScreen::onExit(Screen *nextScreen)
 {
-	g_resourceManager->deleteResource(ResourceID::Texture_menuScreen);
+	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
 	cout << "Exit MenuScreen" << endl;
 }

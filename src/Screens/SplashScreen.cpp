@@ -5,7 +5,7 @@ using namespace std;
 SplashScreen::SplashScreen()
 {
 	cout << "Init SplashScreen...";
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_splashScreen)));
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_splash)));
 	cout << "...done." << endl;
 }
 
@@ -31,6 +31,6 @@ void SplashScreen::onEnter(Screen *previousScreen)
 
 void SplashScreen::onExit(Screen *nextScreen)
 {
-	g_resourceManager->deleteResource(ResourceID::Texture_splashScreen);
+	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash);
 	cout << "Exit SplashScreen" << endl;
 }

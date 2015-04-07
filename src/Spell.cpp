@@ -1,19 +1,12 @@
 #include "Spell.h"
 
-Spell::Spell(MainCharacter* mainChar, sf::Vector2f startAcceleration)
+void Spell::load(MainCharacter* mainChar, sf::Vector2f direction)
 {
-	MovableGameObject::MovableGameObject();
 	m_isDisposed = false;
 	m_mainChar = mainChar;
 	m_level = mainChar->getLevel();
-	load();
 	setPosition(mainChar->getPosition() + getConfiguredPositionOffset());
-	setAcceleration(startAcceleration);
-}
-
-Spell::~Spell()
-{
-	// spell texture is deleted when a level is.
+	setAcceleration(direction);
 }
 
 void Spell::update(sf::Time& frameTime)
@@ -41,10 +34,5 @@ void Spell::checkCollisions(sf::Vector2f nextPosition)
 	{
 		m_isDisposed = true;
 	}
-}
-
-void Spell::load()
-{
-	// nop
 }
 

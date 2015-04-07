@@ -5,9 +5,7 @@
 #include "Map.h"
 #include "InputController.h"
 
-const float MAP_WALK_ACCELERATION = 1500.0f;
-
-// Cendric on that map
+// Cendric on the map
 class MapMainCharacter : public MovableGameObject
 {
 public:
@@ -17,9 +15,15 @@ public:
 	void load() override;
 	void update(sf::Time& frameTime) override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
-	void calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
+	void calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
+
+	const float getConfiguredMaxVelocityY() override;
+	const float getConfiguredMaxVelocityX() override;
 
 private:
+	const float WALK_ACCELERATION = 1500.0f;
+	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
+	const float DAMPING_PER_S = 0.999f;
 	// handle input and calculate the next position
 	void handleInput();
 	// update animation based on the current velocity

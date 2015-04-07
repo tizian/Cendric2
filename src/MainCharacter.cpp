@@ -2,7 +2,6 @@
 
 MainCharacter::MainCharacter(Level* level) 
 {
-	MovableGameObject::MovableGameObject();
 	m_level = level;
 	load();
 	setPosition(m_level->getStartPos());
@@ -98,12 +97,12 @@ void MainCharacter::handleInput()
 	}
 	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
 	{
-		newAccelerationY = JUMP_VEL_Y * 6000; // first jump vel will always be max jump y vel. 6000 is the max framerate.
+		newAccelerationY = getConfiguredMaxVelocityY() * -6000; // first jump vel will always be max y vel. 6000 is the max framerate.
 	}
 
 	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
 
-	// handle attack input
+	// TODO: handle attack input
 	
 }
 
@@ -146,10 +145,24 @@ void MainCharacter::load()
 	playCurrentAnimation(true);
 }
 
-void MainCharacter::calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
+void MainCharacter::calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
 {
-	MovableGameObject::calculateNextVelocity(frameTime, nextVel);
-	if (nextVel.y < JUMP_VEL_Y) nextVel.y = JUMP_VEL_Y;
+	// distinguish damping in the air and at the ground
+	float dampingPerSec = (getVelocity().y == 0.0f) ? DAMPING_GROUND_PER_S : DAMPING_AIR_PER_S;
+	// don't damp when there is active acceleration 
+	if (getAcceleration().x != 0.0f) dampingPerSec = 0;
+	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
+	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
+}
+
+const float MainCharacter::getConfiguredMaxVelocityY() 
+{
+	return 600.0f;
+}
+
+const float MainCharacter::getConfiguredMaxVelocityX()
+{
+	return 200.0f;
 }
 
 Level* MainCharacter::getLevel()

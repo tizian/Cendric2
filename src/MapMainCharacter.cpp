@@ -2,7 +2,6 @@
 
 MapMainCharacter::MapMainCharacter(Map* map)
 {
-	MovableGameObject::MovableGameObject();
 	m_map = map;
 	load();
 	setPosition(m_map->getStartPos());
@@ -115,22 +114,22 @@ void MapMainCharacter::handleInput()
 
 	if (g_inputController->isKeyActive(Key::Left))
 	{
-		newAccelerationX -= MAP_WALK_ACCELERATION;
+		newAccelerationX -= WALK_ACCELERATION;
 		m_isFacingRight = false;
 	}
 	if (g_inputController->isKeyActive(Key::Right))
 	{
-		newAccelerationX += MAP_WALK_ACCELERATION;
+		newAccelerationX += WALK_ACCELERATION;
 		m_isFacingRight = true;
 	}
 	if (g_inputController->isKeyActive(Key::Up))
 	{
-		newAccelerationY -= MAP_WALK_ACCELERATION;
+		newAccelerationY -= WALK_ACCELERATION;
 		m_isFacingUp = true;
 	}
 	if (g_inputController->isKeyActive(Key::Down))
 	{
-		newAccelerationY += MAP_WALK_ACCELERATION;
+		newAccelerationY += WALK_ACCELERATION;
 		m_isFacingUp = false;
 	}
 
@@ -202,7 +201,7 @@ void MapMainCharacter::load()
 
 	addAnimation(GameObjectState::Idle_up, idleAnimationUp);
 
-	setFrameTime(sf::seconds(0.2f));
+	setFrameTime(sf::seconds(0.15f));
 
 	// initial values
 	m_state = GameObjectState::Idle_right;
@@ -212,14 +211,18 @@ void MapMainCharacter::load()
 	playCurrentAnimation(true);
 }
 
-void MapMainCharacter::calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
+void MapMainCharacter::calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
 {
-	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - DAMPING_GROUND_PER_S, frameTime.asSeconds());
-	nextVel.y = (getVelocity().y + getAcceleration().y * frameTime.asSeconds()) * pow(1 - DAMPING_GROUND_PER_S, frameTime.asSeconds());
+	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - DAMPING_PER_S, frameTime.asSeconds());
+	nextVel.y = (getVelocity().y + getAcceleration().y * frameTime.asSeconds()) * pow(1 - DAMPING_PER_S, frameTime.asSeconds());
+}
 
-	// check bounds
-	if (nextVel.x > MAX_VELOCITY_X) nextVel.x = MAX_VELOCITY_X;
-	if (nextVel.x < -MAX_VELOCITY_X) nextVel.x = -MAX_VELOCITY_X;
-	if (nextVel.y > MAX_VELOCITY_Y) nextVel.y = MAX_VELOCITY_Y;
-	if (nextVel.y < -MAX_VELOCITY_Y) nextVel.y = -MAX_VELOCITY_Y;
+const float MapMainCharacter::getConfiguredMaxVelocityY()
+{
+	return 200.0f;
+}
+
+const float MapMainCharacter::getConfiguredMaxVelocityX()
+{
+	return 200.0f;
 }
