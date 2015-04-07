@@ -44,10 +44,10 @@ bool TileMap::load(string &filepath, sf::Vector2i tileSize, vector<vector<int> >
 				quad[2].position = sf::Vector2f((i + 1) * tileWidth, (j + 1) * tileHeight);
 				quad[3].position = sf::Vector2f(i * tileWidth, (j + 1) * tileHeight);
 
-				quad[0].texCoords = sf::Vector2f(tu * tileWidth, tv * tileHeight);
-				quad[1].texCoords = sf::Vector2f((tu + 1) * tileWidth, tv * tileHeight);
-				quad[2].texCoords = sf::Vector2f((tu + 1) * tileWidth, (tv + 1) * tileHeight);
-				quad[3].texCoords = sf::Vector2f(tu * tileWidth, (tv + 1) * tileHeight);
+				quad[0].texCoords = sf::Vector2f(tu * (tileWidth + 2) + 1, tv * (tileHeight + 2) + 1);
+				quad[1].texCoords = sf::Vector2f((tu + 1) * (tileWidth + 2), tv * (tileHeight + 2) + 1);
+				quad[2].texCoords = sf::Vector2f((tu + 1) * (tileWidth + 2), (tv + 1) * (tileHeight + 2));
+				quad[3].texCoords = sf::Vector2f(tu * (tileWidth + 2) + 1, (tv + 1) * (tileHeight + 2));
 			}
 		}
 
