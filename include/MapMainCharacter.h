@@ -31,7 +31,4 @@ private:
 	GameObjectState m_state;
 	sf::Vector2f m_nextPosition;
 	Map* m_map;
-
-	bool m_isFacingUp;
-	bool m_isFacingRight;
 };

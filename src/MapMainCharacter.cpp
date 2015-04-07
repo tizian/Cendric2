@@ -46,59 +46,46 @@ void MapMainCharacter::checkCollisions(sf::Vector2f nextPosition)
 void MapMainCharacter::updateAnimation()
 {
 	// calculate new game state and set animation.
-	GameObjectState newState;
+	GameObjectState newState = m_state;
 	// check if char walks up
-	if (m_isFacingUp && (abs(getVelocity().x) < abs(getVelocity().y)))
+	if (getVelocity().y < 0.0f && (abs(getVelocity().x) < abs(getVelocity().y)))
 	{
-		if (getVelocity().y < -20.f) 
-		{
-			newState = GameObjectState::Walking_up;
-		}
-		else
-		{
-			newState = GameObjectState::Idle_up;
-		}
+		newState = GameObjectState::Walking_up;
 	}
-	else if (!m_isFacingUp && (abs(getVelocity().x) < abs(getVelocity().y)))
+	else if (getVelocity().y >= 0.0f && (abs(getVelocity().x) < abs(getVelocity().y)))
 	{
-		if (getVelocity().y > 20.f)
-		{
-			newState = GameObjectState::Walking_down;
-		}
-		else
+		newState = GameObjectState::Walking_down;
+	}
+	else if (getVelocity().x < 0.0f && (abs(getVelocity().x) > abs(getVelocity().y)))
+	{
+		newState = GameObjectState::Walking_left;
+	}
+	else if (getVelocity().x >= 0.0f && (abs(getVelocity().x) > abs(getVelocity().y)))
+	{
+		newState = GameObjectState::Walking_right;
+	}
+
+	// check if cendric is standing still
+	if (getVelocity().x == 0.0f && getVelocity().y == 0.0f) 
+	{
+		if (m_state == GameObjectState::Walking_down) 
 		{
 			newState = GameObjectState::Idle_down;
 		}
-	}
-	else if (!m_isFacingRight && (abs(getVelocity().x) > abs(getVelocity().y)))
-	{
-		if (getVelocity().x < -20.f)
+		else if (m_state == GameObjectState::Walking_up)
 		{
-			newState = GameObjectState::Walking_left;
+			newState = GameObjectState::Idle_up;
 		}
-		else
+		else if (m_state == GameObjectState::Walking_right)
+		{
+			newState = GameObjectState::Idle_right;
+		}
+		else if (m_state == GameObjectState::Walking_left)
 		{
 			newState = GameObjectState::Idle_left;
 		}
 	}
-	else
-	{
-		if (getVelocity().x > 20.f)
-		{
-			newState = GameObjectState::Walking_right;
-		}
-		else
-		{
-			newState = GameObjectState::Idle_right;
-		}
-	}
 
-	// keep state if vel is 0
-	if (getVelocity().x == 0.f && getVelocity().y == 0.f)
-	{
-		return;
-	}
-	
 	// only update animation if we need to
 	if (m_state != newState)
 	{
@@ -115,22 +102,18 @@ void MapMainCharacter::handleInput()
 	if (g_inputController->isKeyActive(Key::Left))
 	{
 		newAccelerationX -= WALK_ACCELERATION;
-		m_isFacingRight = false;
 	}
-	if (g_inputController->isKeyActive(Key::Right))
+	else if (g_inputController->isKeyActive(Key::Right))
 	{
 		newAccelerationX += WALK_ACCELERATION;
-		m_isFacingRight = true;
 	}
-	if (g_inputController->isKeyActive(Key::Up))
+	else if (g_inputController->isKeyActive(Key::Up))
 	{
 		newAccelerationY -= WALK_ACCELERATION;
-		m_isFacingUp = true;
 	}
-	if (g_inputController->isKeyActive(Key::Down))
+	else if (g_inputController->isKeyActive(Key::Down))
 	{
 		newAccelerationY += WALK_ACCELERATION;
-		m_isFacingUp = false;
 	}
 
 	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
@@ -205,16 +188,29 @@ void MapMainCharacter::load()
 
 	// initial values
 	m_state = GameObjectState::Idle_right;
-	m_isFacingRight = true;
-	m_isFacingUp = false;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(true);
 }
 
 void MapMainCharacter::calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
 {
-	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - DAMPING_PER_S, frameTime.asSeconds());
-	nextVel.y = (getVelocity().y + getAcceleration().y * frameTime.asSeconds()) * pow(1 - DAMPING_PER_S, frameTime.asSeconds());
+	if (getAcceleration().x == 0.0f)
+	{
+		nextVel.x = 0;
+	}
+	else
+	{
+		nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds());
+	}
+
+	if (getAcceleration().y == 0.0f)
+	{
+		nextVel.y = 0;
+	}
+	else 
+	{
+		nextVel.y = (getVelocity().y + getAcceleration().y * frameTime.asSeconds());
+	}
 }
 
 const float MapMainCharacter::getConfiguredMaxVelocityY()
