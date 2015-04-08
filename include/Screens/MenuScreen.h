@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "Screen.h"
 #include "LoadingScreen.h"
+#include "SplashScreen.h"
 
 class MenuScreen : public Screen
 {
@@ -13,8 +14,8 @@ public:
 	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
 
-	virtual void onEnter(Screen *previousScreen);
-	virtual void onExit(Screen *nextScreen);
+	void onEnter(Screen *previousScreen) override;
+	void onExit(Screen *nextScreen) override;
 
 private:
 	sf::Sprite m_screenSprite;

@@ -18,6 +18,7 @@ Screen* SplashScreen::update(sf::Time frameTime)
 
 void SplashScreen::render(sf::RenderTarget &renderTarget)
 {
+	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 }
 

@@ -11,10 +11,12 @@ class MapScreen : public Screen
 {
 public:
 	MapScreen(ResourceID map);
-	~MapScreen();
 
 	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
+
+	virtual void onEnter(Screen *previousScreen);
+	virtual void onExit(Screen *nextScreen);
 
 private:
 	Map m_currentMap;

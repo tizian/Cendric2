@@ -26,14 +26,6 @@ void Screen::render(sf::RenderTarget &renderTarget)
 	}
 }
 
-void Screen::onEnter(Screen *previousScreen)
-{
-}
-
-void Screen::onExit(Screen *nextScreen)
-{
-}
-
 void Screen::addObject(Object *object)
 {
 	object->setScreen(this);

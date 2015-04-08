@@ -12,10 +12,12 @@ class GameScreen : public Screen
 {
 public:
 	GameScreen(ResourceID levelID);
-	~GameScreen();
 
 	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
+
+	void onEnter(Screen *previousScreen) override;
+	void onExit(Screen *nextScreen) override;
 
 private:
 	Level m_currentLevel;

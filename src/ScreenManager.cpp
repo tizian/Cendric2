@@ -19,7 +19,7 @@ void ScreenManager::update(sf::Time frameTime)
 	}
 }
 
-void ScreenManager::render(sf::RenderTarget &renderTarget) const
+void ScreenManager::render(sf::RenderTarget &renderTarget) 
 {
 	m_currentScreen->render(renderTarget);
 }

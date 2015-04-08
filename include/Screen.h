@@ -23,8 +23,8 @@ public:
 	virtual Screen* update(sf::Time frameTime);
 	virtual void render(sf::RenderTarget &renderTarget);
 
-	virtual void onEnter(Screen *previousScreen);
-	virtual void onExit(Screen *nextScreen);
+	virtual void onEnter(Screen *previousScreen) = 0;
+	virtual void onExit(Screen *nextScreen) = 0;
 
 	void addObject(Object *object);
 	

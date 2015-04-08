@@ -18,6 +18,7 @@ Screen* MenuScreen::update(sf::Time frameTime)
 
 void MenuScreen::render(sf::RenderTarget &renderTarget) 
 {
+	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 }
 

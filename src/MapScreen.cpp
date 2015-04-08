@@ -9,12 +9,6 @@ MapScreen::MapScreen(ResourceID map)
 	addObject(m_mainChar);
 }
 
-MapScreen::~MapScreen()
-{
-	m_currentMap.dispose();
-	delete m_mainChar;
-}
-
 Screen* MapScreen::update(sf::Time frameTime)
 {
 	ResourceID id = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
@@ -23,9 +17,19 @@ Screen* MapScreen::update(sf::Time frameTime)
 		return Screen::update(frameTime);
 	} 
 	else
-	{
-		return new LoadingScreen(ScreenID::Screen_game, id);
+	{ 
+		return new LoadingScreen(ScreenID::Screen_game, ResourceID::Level_testlevel);
 	}
+}
+
+void MapScreen::onEnter(Screen *previousScreen)
+{
+}
+
+void MapScreen::onExit(Screen *nextScreen)
+{
+	m_currentMap.dispose();
+	delete m_mainChar;
 }
 
 void MapScreen::render(sf::RenderTarget &renderTarget)

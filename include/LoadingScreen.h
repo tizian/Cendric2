@@ -14,13 +14,12 @@ public:
 	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
 
-	virtual void onEnter(Screen *previousScreen);
-	virtual void onExit(Screen *nextScreen);
+	virtual void onEnter(Screen *previousScreen) override;
+	virtual void onExit(Screen *nextScreen) override;
 
 private:
 	sf::Sprite m_screenSprite;
 	ScreenID m_screenToLoad;
 	// depicts the map or level to load
 	ResourceID m_resource;
-	bool m_isLoading;
 };

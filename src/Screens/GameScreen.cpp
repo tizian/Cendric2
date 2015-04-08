@@ -10,7 +10,11 @@ GameScreen::GameScreen(ResourceID levelID)
 	addObject(m_mainChar);
 }
 
-GameScreen::~GameScreen()
+void GameScreen::onEnter(Screen *previousScreen)
+{
+}
+
+void GameScreen::onExit(Screen *nextScreen)
 {
 	m_currentLevel.dispose();
 	delete m_mainChar;
@@ -23,7 +27,7 @@ Screen* GameScreen::update(sf::Time frameTime)
 
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
-	// parallax 
+	// parallax, maybe forground + background layers?
 	m_currentLevel.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	Screen::render(renderTarget);
 }

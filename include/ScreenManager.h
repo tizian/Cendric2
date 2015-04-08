@@ -13,7 +13,7 @@ public:
 	ScreenManager(Screen *initialScreen);
 
 	void update(sf::Time frameTime);
-	void render(sf::RenderTarget &renderTarget) const;
+	void render(sf::RenderTarget &renderTarget);
 
 	Screen *getCurrentScreen();
 
