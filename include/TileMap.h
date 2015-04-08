@@ -14,6 +14,8 @@ public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 private:
+	// there is a border around each tile of size 1, to avoid rounding problems
+	const int TILE_BORDER = 1;
 	std::vector<sf::VertexArray> m_layers;
 	sf::Texture* m_tileset;
 	sf::String m_tilesetPath;
