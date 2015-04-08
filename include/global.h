@@ -3,6 +3,9 @@
 // Graphic Engine SFML
 #include <SFML/Graphics.hpp>
 
+// std library
+#include <iostream>
+
 // TODO these values should not be const, but loaded from an .ini file.
 #define WINDOW_WIDTH 1250
 #define WINDOW_HEIGHT 750

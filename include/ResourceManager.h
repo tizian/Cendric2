@@ -1,7 +1,6 @@
 #pragma once
 
 #include<map>
-#include<iostream>
 
 #include "global.h"
 
@@ -15,6 +14,7 @@ enum class ResourceID
 	Texture_spell_fire,
 	Texture_spell_ice,
 	Texture_screen_splash,
+	Texture_screen_loading,
 	Texture_screen_menu
 };
 

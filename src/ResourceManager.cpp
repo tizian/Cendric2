@@ -24,6 +24,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
 		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
+		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" }
 	});
 }

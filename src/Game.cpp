@@ -30,7 +30,8 @@ void Game::run()
 		
 		// time
 		frameClock.restart();
-		frameTime = deltaTime;
+		// hard bound: dt should not exeed 50ms (20fps)
+		frameTime = deltaTime.asMilliseconds() > 50 ? sf::milliseconds(50) : deltaTime;
 
 		// input
 		g_inputController->update();

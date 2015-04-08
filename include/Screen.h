@@ -1,13 +1,18 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
 
 #include "global.h"
 #include "Object.h"
 
 class Object;
 class ScreenManager;
+
+enum class ScreenID
+{
+	Screen_map,
+	Screen_game
+};
 
 class Screen
 {

@@ -2,13 +2,11 @@
 
 using namespace std;
 
-MapScreen::MapScreen()
+MapScreen::MapScreen(ResourceID map)
 {
-	cout << "Init MapScreen...";
-	m_currentMap.load(ResourceID::Map_testmap);
+	m_currentMap.load(map);
 	m_mainChar = new MapMainCharacter(&m_currentMap);
 	addObject(m_mainChar);
-	cout << "...done." << endl;
 }
 
 MapScreen::~MapScreen()
@@ -26,7 +24,7 @@ Screen* MapScreen::update(sf::Time frameTime)
 	} 
 	else
 	{
-		return new GameScreen(id);
+		return new LoadingScreen(ScreenID::Screen_game, id);
 	}
 }
 

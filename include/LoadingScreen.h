@@ -3,12 +3,13 @@
 #include "global.h"
 #include "ResourceManager.h"
 #include "Screen.h"
-#include "LoadingScreen.h"
+#include "MapScreen.h"
+#include "Screens/GameScreen.h"
 
-class MenuScreen : public Screen
+class LoadingScreen : public Screen
 {
 public:
-	MenuScreen();
+	LoadingScreen(ScreenID screenToLoad, ResourceID level);
 
 	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
@@ -18,4 +19,8 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
+	ScreenID m_screenToLoad;
+	// depicts the map or level to load
+	ResourceID m_resource;
+	bool m_isLoading;
 };

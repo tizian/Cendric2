@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "global.h"
 #include "ResourceManager.h"
 #include "Screen.h"

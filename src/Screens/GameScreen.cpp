@@ -4,12 +4,10 @@ using namespace std;
 
 GameScreen::GameScreen(ResourceID levelID)
 {
-	cout << "Init GameScreen...";
 	m_currentLevel.load(levelID);
 	m_mainChar = new MainCharacter(&m_currentLevel);
 	m_mainChar->setScreen(this);
 	addObject(m_mainChar);
-	cout << "...done." << endl;
 }
 
 GameScreen::~GameScreen()

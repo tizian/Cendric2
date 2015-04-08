@@ -28,12 +28,10 @@ void Screen::render(sf::RenderTarget &renderTarget)
 
 void Screen::onEnter(Screen *previousScreen)
 {
-	cout << "Enter" << endl;
 }
 
 void Screen::onExit(Screen *nextScreen)
 {
-	cout << "Exit" << endl;
 }
 
 void Screen::addObject(Object *object)

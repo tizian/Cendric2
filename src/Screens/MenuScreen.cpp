@@ -4,16 +4,14 @@ using namespace std;
 
 MenuScreen::MenuScreen()
 {
-	cout << "Init MenuScreen...";
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_menu)));
-	cout << "...done." << endl;
 }
 
 Screen* MenuScreen::update(sf::Time frameTime)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) || sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
-		return new MapScreen();
+		return new LoadingScreen(ScreenID::Screen_map, ResourceID::Map_testmap);
 	}
 	return this;
 }
@@ -25,11 +23,9 @@ void MenuScreen::render(sf::RenderTarget &renderTarget)
 
 void MenuScreen::onEnter(Screen *previousScreen)
 {
-	cout << "Enter MenuScreen" << endl;
 }
 
 void MenuScreen::onExit(Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
-	cout << "Exit MenuScreen" << endl;
 }

@@ -1,18 +1,16 @@
 #pragma once
 
-#include <iostream>
-
 #include "global.h"
 #include "Map.h"
 #include "MapMainCharacter.h"
 #include "Screen.h"
 #include "ResourceManager.h"
-#include "Screens\GameScreen.h"
+#include "LoadingScreen.h"
 
 class MapScreen : public Screen
 {
 public:
-	MapScreen();
+	MapScreen(ResourceID map);
 	~MapScreen();
 
 	Screen* update(sf::Time frameTime) override;
