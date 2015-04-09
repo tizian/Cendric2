@@ -17,6 +17,7 @@ void Level::dispose()
 		m_backgroundLayers[i].dispose();
 	}
 	// delete spell resources
+	g_resourceManager->deleteResource(ResourceID::Texture_spell_chop);
 	g_resourceManager->deleteResource(ResourceID::Texture_spell_fire);
 	g_resourceManager->deleteResource(ResourceID::Texture_spell_ice);
 }

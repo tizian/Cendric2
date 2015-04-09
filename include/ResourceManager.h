@@ -11,6 +11,7 @@ enum class ResourceID
 	Level_testlevel,
 	Texture_mainChar,
 	Texture_mapMainChar,
+	Texture_spell_chop,
 	Texture_spell_fire,
 	Texture_spell_ice,
 	Texture_screen_splash,

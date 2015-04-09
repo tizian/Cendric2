@@ -2,37 +2,52 @@
 
 #include "global.h"
 #include "MovableGameObject.h"
+#include "ResourceManager.h"
 #include "InputController.h"
-#include "MainCharacter.h"
+#include "Level.h"
+
+enum class SpellID
+{
+	Chop,
+	Fire,
+	Ice
+};
+
+struct SpellBean
+{
+	int damage;
+	sf::FloatRect boundingBox;
+	int reflectCount;
+	sf::Time cooldown;
+	float startVelocity;
+};
 
 // A spell cendric can cast
 class Spell : public MovableGameObject
 {
 public:
 
-	// the direction should be a normalized vector.
-	virtual void load(MainCharacter* mainChar, sf::Vector2f direction);
-	void update(sf::Time& frameTime) override;
+	// called by the spell manager
+	void init(SpellBean& bean);
+	void loadSpell(Level* level, const sf::Vector2f& position, bool isFacingRight);
+	virtual void update(sf::Time& frameTime) override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
-	
-	// TODO: adds a modifier to the spell
-	//void addModifier(Modifier& modifier);
 
-	// the offset of the spells start position, as seen from the upper left corner of cendrics bounding box.
-	virtual sf::Vector2f getConfiguredPositionOffset() = 0;
-	
-	// these values are implemented by the subclasses. 
-	virtual int getConfiguredDamage() = 0;
-	virtual sf::Vector2f getConfiguredSpeed() = 0;
-	virtual sf::Time getConfiguredCoolDown() = 0;
-	virtual int getConfiguredReflectCount() = 0;
+	// the offset of the spells start position, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
+	virtual sf::Vector2f getConfiguredPositionOffset();
 
 	// returns whether the spell object should be deleted
-	void isDisposed();
+	bool isDisposed();
+	void setDisposed();
+
+	int getDamage();
 
 private:
-	sf::Vector2f m_nextPosition;
-	MainCharacter* m_mainChar;
 	Level* m_level;
+	sf::Vector2f m_nextPosition;
 	bool m_isDisposed;
+
+	int m_damage;
+	int m_reflectCount;
+	float m_speed;
 };

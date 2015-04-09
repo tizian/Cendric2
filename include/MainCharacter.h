@@ -4,6 +4,8 @@
 #include "MovableGameObject.h"
 #include "Level.h"
 #include "InputController.h"
+#include "SpellManager.h"
+#include "Screen.h"
 
 // Cendric in a level
 class MainCharacter : public MovableGameObject
@@ -21,13 +23,14 @@ public:
 	const float getConfiguredMaxVelocityX() override;
 
 	Level* getLevel();
+	Spell* getFiredSpell();
 
 private:
 	const float WALK_ACCELERATION = 1500.0f;
 	const float GRAVITY_ACCELERATION = 1000.0f;
 	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
 	const float DAMPING_GROUND_PER_S = 0.999f;
-	const float DAMPING_AIR_PER_S = 0.9f;
+	const float DAMPING_AIR_PER_S = 0.7f;
 
 	// handle input and calculate the next position
 	void handleInput();
@@ -39,4 +42,7 @@ private:
 	bool m_isGrounded;
 	sf::Vector2f m_nextPosition;
 	Level* m_level;
+	Spell* m_firedSpell;
+
+	SpellManager* m_spellManager;
 };

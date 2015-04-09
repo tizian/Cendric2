@@ -14,7 +14,6 @@ public:
 	virtual void update(sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget) const;
 
-	void setScreen(Screen *screen);
 	void setBoundingBox(const sf::FloatRect& rect);
 	virtual void setPosition(const sf::Vector2f& pos);
 	void setPositionX(float posX);
@@ -22,10 +21,8 @@ public:
 	const sf::Vector2f& getPosition();
 	sf::FloatRect* getBoundingBox();
 	sf::Vector2f Object::getCenter();
-	Screen* getScreen();
 
 private:
-	Screen *m_screen;
 	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;

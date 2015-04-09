@@ -23,6 +23,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
 		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
 		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
+		{ ResourceID::Texture_spell_chop, "res/assets/spells/spritesheet_spell_chop.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" }
@@ -81,7 +82,6 @@ void ResourceManager::deleteResource(std::string filename)
 
 	// delete sound etc...
 }
-
 
 char* ResourceManager::getFilename(ResourceID id)
 {

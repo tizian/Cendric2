@@ -6,11 +6,6 @@ Object::~Object() {}
 void Object::update(sf::Time& frameTime) {}
 void Object::render(sf::RenderTarget& renderTarget) const {}
 
-void Object::setScreen(Screen *screen)
-{
-	m_screen = screen;
-}
-
 void Object::setBoundingBox(const sf::FloatRect& rect)
 {
 	m_boundingBox = rect;
@@ -31,11 +26,6 @@ sf::Vector2f Object::getCenter()
 const sf::Vector2f& Object::getPosition()
 {
 	return m_position;
-}
-
-Screen* Object::getScreen()
-{
-	return m_screen;
 }
 
 void Object::setPosition(const sf::Vector2f& pos)

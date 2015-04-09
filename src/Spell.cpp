@@ -1,12 +1,38 @@
 #include "Spell.h"
 
-void Spell::load(MainCharacter* mainChar, sf::Vector2f direction)
+void Spell::loadSpell(Level* level, const sf::Vector2f& position, bool isFacingRight)
+{
+	m_level = level;
+	
+	sf::Vector2f offset;
+	if (isFacingRight) 
+	{
+		offset = sf::Vector2f(getConfiguredPositionOffset());
+	}
+	else
+	{
+		offset = sf::Vector2f(-getConfiguredPositionOffset().x - getBoundingBox()->width, getConfiguredPositionOffset().y);
+	}
+
+	sf::Vector2f absolutePosition = position + offset;
+	sf::Vector2f direction = g_inputController->getMousePosition() - absolutePosition;
+	// normalize dir
+	float len = sqrt(direction.x * direction.x + direction.y * direction.y);
+	direction.x = (len == 0) ? 0 : direction.x / len;
+	direction.y = (len == 0) ? 0 : direction.y / len;
+	
+	setVelocity(m_speed * direction);
+	setPosition(absolutePosition);
+}
+
+void Spell::init(SpellBean& bean) 
 {
 	m_isDisposed = false;
-	m_mainChar = mainChar;
-	m_level = mainChar->getLevel();
-	setPosition(mainChar->getPosition() + getConfiguredPositionOffset());
-	setAcceleration(direction);
+	m_damage = bean.damage;
+	m_reflectCount = bean.reflectCount;
+	m_speed = bean.startVelocity;
+	setBoundingBox(bean.boundingBox); 
+	load();
 }
 
 void Spell::update(sf::Time& frameTime)
@@ -14,6 +40,11 @@ void Spell::update(sf::Time& frameTime)
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
+}
+
+sf::Vector2f Spell::getConfiguredPositionOffset()
+{
+	return sf::Vector2f(20.f, 0.f);
 }
 
 void Spell::checkCollisions(sf::Vector2f nextPosition)
@@ -34,5 +65,15 @@ void Spell::checkCollisions(sf::Vector2f nextPosition)
 	{
 		m_isDisposed = true;
 	}
+}
+
+bool Spell::isDisposed()
+{
+	return m_isDisposed;
+}
+
+void Spell::setDisposed()
+{
+	m_isDisposed = true;
 }
 

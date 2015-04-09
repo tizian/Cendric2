@@ -5,15 +5,20 @@ MainCharacter::MainCharacter(Level* level)
 	m_level = level;
 	load();
 	setPosition(m_level->getStartPos());
+	m_spellManager = new SpellManager();
+	m_firedSpell = nullptr;
 }
 MainCharacter::~MainCharacter() 
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
+	delete m_spellManager;
+	delete m_firedSpell;
 }
 
 void MainCharacter::update(sf::Time& frameTime)
 {
 	handleInput();
+	m_spellManager->update(frameTime);
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
@@ -102,8 +107,24 @@ void MainCharacter::handleInput()
 
 	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
 
-	// TODO: handle attack input
-	
+	// handle attack input
+	if (g_inputController->isMouseJustPressedLeft()) 
+	{
+		Spell* spell = m_spellManager->getSpell();
+		if (spell != nullptr) 
+		{
+			sf::Vector2f position(getPosition().x + (getBoundingBox()->width / 2), getPosition().y);
+			spell->loadSpell(getLevel(), position, m_isFacingRight);
+			m_firedSpell = spell;
+		}
+	}
+}
+
+Spell* MainCharacter::getFiredSpell()
+{
+	Spell* firedSpell = m_firedSpell;
+	m_firedSpell = nullptr;
+	return firedSpell;
 }
 
 void MainCharacter::load()

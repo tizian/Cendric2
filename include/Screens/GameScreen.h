@@ -6,8 +6,6 @@
 #include "Screen.h"
 #include "ResourceManager.h"
 
-class MainCharacter;
-
 class GameScreen : public Screen
 {
 public:
@@ -19,7 +17,10 @@ public:
 	void onEnter(Screen *previousScreen) override;
 	void onExit(Screen *nextScreen) override;
 
+	void addSpell(Spell* spell);
+
 private:
 	Level m_currentLevel;
 	MainCharacter* m_mainChar;
+	std::vector<Spell *> m_spells;
 };

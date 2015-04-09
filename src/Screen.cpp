@@ -28,6 +28,5 @@ void Screen::render(sf::RenderTarget &renderTarget)
 
 void Screen::addObject(Object *object)
 {
-	object->setScreen(this);
 	m_objects.push_back(object);
 }
