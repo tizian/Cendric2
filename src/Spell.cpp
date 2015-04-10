@@ -28,10 +28,10 @@ void Spell::loadSpell(Level* level, const sf::Vector2f& position, bool isFacingR
 void Spell::init(SpellBean& bean) 
 {
 	m_isDisposed = false;
+	m_activeCoolDown = bean.maxActiveTime;
 	m_damage = bean.damage;
 	m_reflectCount = bean.reflectCount;
 	m_speed = bean.startVelocity;
-	setBoundingBox(bean.boundingBox); 
 	load();
 }
 
@@ -40,6 +40,11 @@ void Spell::update(sf::Time& frameTime)
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
+	m_activeCoolDown = m_activeCoolDown - frameTime;
+	if (m_activeCoolDown.asMilliseconds() <= 0)
+	{
+		setDisposed();
+	}
 }
 
 sf::Vector2f Spell::getConfiguredPositionOffset()

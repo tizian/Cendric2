@@ -3,6 +3,7 @@
 void FireSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
+	setBoundingBox(sf::FloatRect(0, 0, 30, 30));
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fire));

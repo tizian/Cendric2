@@ -19,21 +19,21 @@ void SpellManager::init()
 {
 	// TODO these values should come from a staff. they are hardcoded for now.
 	SpellBean fireSpell;
-	fireSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
+	fireSpell.maxActiveTime = sf::milliseconds(5000);
 	fireSpell.cooldown = sf::milliseconds(1000);
 	fireSpell.damage = 10;
 	fireSpell.reflectCount = 0;
 	fireSpell.startVelocity = 500.f;
 
 	SpellBean chopSpell;
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 60);
+	chopSpell.maxActiveTime = sf::milliseconds(100);
 	chopSpell.cooldown = sf::milliseconds(200);
 	chopSpell.damage = 2;
 	chopSpell.reflectCount = 0;
 	chopSpell.startVelocity = 100.f;
 
 	SpellBean iceSpell;
-	iceSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
+	iceSpell.maxActiveTime = sf::milliseconds(5000);
 	iceSpell.cooldown = sf::milliseconds(1000);
 	iceSpell.damage = 6;
 	iceSpell.reflectCount = 0;

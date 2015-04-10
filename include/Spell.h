@@ -13,12 +13,13 @@ enum class SpellID
 	Ice
 };
 
+/* unlike the values loaded in load() these values here are modifiable by crystal modifiers */
 struct SpellBean
 {
 	int damage;
-	sf::FloatRect boundingBox;
 	int reflectCount;
 	sf::Time cooldown;
+	sf::Time maxActiveTime;
 	float startVelocity;
 };
 
@@ -45,6 +46,7 @@ public:
 private:
 	Level* m_level;
 	sf::Vector2f m_nextPosition;
+	sf::Time m_activeCoolDown;
 	bool m_isDisposed;
 
 	int m_damage;
