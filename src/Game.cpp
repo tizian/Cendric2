@@ -27,6 +27,10 @@ void Game::run()
 			{
 				m_running = false;
 			}
+			else if (e.type == sf::Event::Resized)
+			{
+				g_inputController->setCurrentWindowSize(e.size.width, e.size.height);
+			}
 		}
 		
 		// time

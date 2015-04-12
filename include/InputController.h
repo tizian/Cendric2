@@ -35,6 +35,7 @@ public:
 	void init();
 
 	void setWindow(sf::RenderWindow* window);
+	void setCurrentWindowSize(int width, int height);
 
 	// returns mouse position relative to window
 	sf::Vector2f getMousePosition();
@@ -51,4 +52,7 @@ private:
 	bool m_isMouseReleasedRight;
 	bool m_isMouseJustPressedLeft;
 	bool m_isMouseJustPressedRight;
+
+	// current window size. Used for mouse position and dependent on resize events
+	sf::Vector2i m_windowSize;
 };
