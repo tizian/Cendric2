@@ -88,7 +88,6 @@ void MainCharacter::handleInput()
 {
 	// movement input
 	float newAccelerationX = 0;
-	float newAccelerationY = GRAVITY_ACCELERATION;
 
 	if (g_inputController->isKeyActive(Key::Left))
 	{
@@ -102,10 +101,10 @@ void MainCharacter::handleInput()
 	}
 	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
 	{
-		newAccelerationY = getConfiguredMaxVelocityY() * -6000; // first jump vel will always be max y vel. 6000 is the max framerate.
+		setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
 	}
 
-	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
+	setAcceleration(sf::Vector2f(newAccelerationX, GRAVITY_ACCELERATION));
 
 	// handle attack input
 	if (g_inputController->isMouseJustPressedLeft()) 

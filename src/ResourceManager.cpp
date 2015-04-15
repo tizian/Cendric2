@@ -26,6 +26,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_chop, "res/assets/spells/spritesheet_spell_chop.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
+		{ ResourceID::Texture_screen_error, "res/screens/screen_error.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" }
 	});
 }

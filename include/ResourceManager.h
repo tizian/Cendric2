@@ -16,6 +16,7 @@ enum class ResourceID
 	Texture_spell_ice,
 	Texture_screen_splash,
 	Texture_screen_loading,
+	Texture_screen_error,
 	Texture_screen_menu
 };
 

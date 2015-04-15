@@ -4,7 +4,7 @@ using namespace std;
 
 GameScreen::GameScreen(ResourceID levelID)
 {
-	m_currentLevel.load(levelID);
+	m_errorOccurred = !(m_currentLevel.load(levelID));
 	m_mainChar = new MainCharacter(&m_currentLevel);
 	addObject(m_mainChar);
 }
@@ -27,6 +27,10 @@ void GameScreen::addSpell(Spell* spell)
 
 Screen* GameScreen::update(sf::Time frameTime)
 {
+	if (m_errorOccurred) 
+	{
+		return new ErrorScreen();
+	}
 	// delete disposed spells
 	for (std::vector<Spell*>::iterator it = m_spells.begin(); it != m_spells.end(); /* DON'T increment here*/)
 	{

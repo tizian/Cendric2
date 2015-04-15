@@ -5,6 +5,7 @@
 #include "MainCharacter.h"
 #include "Screen.h"
 #include "ResourceManager.h"
+#include "ErrorScreen.h"
 
 class GameScreen : public Screen
 {
@@ -23,4 +24,5 @@ private:
 	Level m_currentLevel;
 	MainCharacter* m_mainChar;
 	std::vector<Spell *> m_spells;
+	bool m_errorOccurred;
 };

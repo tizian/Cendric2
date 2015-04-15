@@ -6,6 +6,7 @@
 #include "Screen.h"
 #include "ResourceManager.h"
 #include "LoadingScreen.h"
+#include "ErrorScreen.h"
 
 class MapScreen : public Screen
 {
@@ -21,4 +22,5 @@ public:
 private:
 	Map m_currentMap;
 	MapMainCharacter* m_mainChar;
+	bool m_errorOccurred;
 };
