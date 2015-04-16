@@ -112,8 +112,7 @@ void MainCharacter::handleInput()
 		Spell* spell = m_spellManager->getSpell();
 		if (spell != nullptr) 
 		{
-			sf::Vector2f position(getPosition().x + (getBoundingBox()->width / 2), getPosition().y);
-			spell->loadSpell(getLevel(), position, m_isFacingRight);
+			spell->loadSpell(getLevel(), this);
 			m_firedSpell = spell;
 		}
 	}
@@ -188,4 +187,9 @@ const float MainCharacter::getConfiguredMaxVelocityX()
 Level* MainCharacter::getLevel()
 {
 	return m_level;
+}
+
+bool MainCharacter::getIsFacingRight()
+{
+	return m_isFacingRight;
 }

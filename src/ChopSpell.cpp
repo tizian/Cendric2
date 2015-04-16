@@ -25,10 +25,15 @@ sf::Vector2f ChopSpell::getConfiguredPositionOffset()
 
 const float ChopSpell::getConfiguredMaxVelocityY()
 {
-	return 100.0f;
+	return 0.f;
 }
 
 const float ChopSpell::getConfiguredMaxVelocityX()
 {
-	return 100.0f;
+	return 0.f;
+}
+
+bool ChopSpell::getConfiguredIsAttachedToMainChar()
+{
+	return true;
 }

@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Spell.h"
 
-class ChopSpell : public Spell
+class ForcefieldSpell : public Spell
 {
 public:
 	void load() override;

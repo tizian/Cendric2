@@ -15,7 +15,8 @@ enum class Key
 	Fire, 
 	SpellFire, 
 	SpellIce,
-	SpellChop
+	SpellChop,
+	SpellForcefield
 };
 
 class InputController

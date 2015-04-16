@@ -24,6 +24,7 @@ public:
 
 	Level* getLevel();
 	Spell* getFiredSpell();
+	bool getIsFacingRight();
 
 private:
 	const float WALK_ACCELERATION = 1500.0f;

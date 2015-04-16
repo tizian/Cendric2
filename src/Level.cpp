@@ -16,10 +16,11 @@ void Level::dispose()
 	{
 		m_backgroundLayers[i].dispose();
 	}
-	// delete spell resources
+	// delete spell resources TODO: move this into resource manager
 	g_resourceManager->deleteResource(ResourceID::Texture_spell_chop);
 	g_resourceManager->deleteResource(ResourceID::Texture_spell_fire);
 	g_resourceManager->deleteResource(ResourceID::Texture_spell_ice);
+	g_resourceManager->deleteResource(ResourceID::Texture_spell_forcefield);
 }
 
 bool Level::load(ResourceID id) 

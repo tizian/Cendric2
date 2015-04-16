@@ -8,6 +8,7 @@
 #include "FireSpell.h"
 #include "ChopSpell.h"
 #include "IceSpell.h"
+#include "ForcefieldSpell.h"
 
 // a class that decides whether a spell can be cast or not and adds modifiers. It also draws a part of the gui.
 class SpellManager

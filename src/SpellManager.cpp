@@ -30,7 +30,14 @@ void SpellManager::init()
 	chopSpell.cooldown = sf::milliseconds(200);
 	chopSpell.damage = 2;
 	chopSpell.reflectCount = 0;
-	chopSpell.startVelocity = 100.f;
+	chopSpell.startVelocity = 0.f;
+
+	SpellBean forcefieldSpell;
+	forcefieldSpell.maxActiveTime = sf::milliseconds(3000);
+	forcefieldSpell.cooldown = sf::milliseconds(10000);
+	forcefieldSpell.damage = 1;
+	forcefieldSpell.reflectCount = 0;
+	forcefieldSpell.startVelocity = 0.f;
 
 	SpellBean iceSpell;
 	iceSpell.maxActiveTime = sf::milliseconds(5000);
@@ -43,19 +50,22 @@ void SpellManager::init()
 	{
 		{ SpellID::Chop, chopSpell },
 		{ SpellID::Fire, fireSpell },
-		{ SpellID::Ice, iceSpell }
+		{ SpellID::Ice, iceSpell },
+		{ SpellID::Forcefield, forcefieldSpell }
 	});
 	m_coolDownMap.insert(
 	{
 		{ SpellID::Chop, sf::Time::Zero },
 		{ SpellID::Fire, sf::Time::Zero },
-		{ SpellID::Ice, sf::Time::Zero }
+		{ SpellID::Ice, sf::Time::Zero },
+		{ SpellID::Forcefield, sf::Time::Zero }
 	});
 	m_keyMap.insert(
 	{
 		{ Key::SpellChop, SpellID::Chop },
 		{ Key::SpellIce, SpellID::Ice },
-		{ Key::SpellFire, SpellID::Fire }
+		{ Key::SpellFire, SpellID::Fire },
+		{ Key::SpellForcefield, SpellID::Forcefield }
 	});
 
 }
@@ -92,6 +102,9 @@ Spell* SpellManager::getSpell()
 		break;
 	case SpellID::Ice:
 		newSpell = new IceSpell();
+		break;
+	case SpellID::Forcefield:
+		newSpell = new ForcefieldSpell();
 		break;
 	default:
 		return nullptr;

@@ -32,6 +32,8 @@ void InputController::update()
 	m_keyActiveMap[Key::SpellIce] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellIce));
 	// SPELL CHOP
 	m_keyActiveMap[Key::SpellChop] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellChop));
+	// SPELL FORCEFIELD
+	m_keyActiveMap[Key::SpellForcefield] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellForcefield));
 
 	m_isMouseJustPressedLeft = false;
 	m_isMouseJustPressedRight = false;
@@ -79,6 +81,7 @@ void InputController::init()
 			{ Key::Jump, false },
 			{ Key::SpellFire, false },
 			{ Key::SpellChop, false },
+			{ Key::SpellForcefield, false },
 			{ Key::SpellIce, false }
 		});
 	m_keyMap.insert(
@@ -91,7 +94,8 @@ void InputController::init()
 			{ Key::Jump, sf::Keyboard::Space },
 			{ Key::SpellChop, sf::Keyboard::Num1 },
 			{ Key::SpellFire, sf::Keyboard::Num2 },
-			{ Key::SpellIce, sf::Keyboard::Num3 }
+			{ Key::SpellIce, sf::Keyboard::Num3 },
+			{ Key::SpellForcefield, sf::Keyboard::Num4 }
 		});
 
 	m_windowSize.x = WINDOW_WIDTH;

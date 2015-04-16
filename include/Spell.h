@@ -6,11 +6,14 @@
 #include "InputController.h"
 #include "Level.h"
 
+class MainCharacter;
+
 enum class SpellID
 {
 	Chop,
 	Fire,
-	Ice
+	Ice,
+	Forcefield
 };
 
 /* unlike the values loaded in load() these values here are modifiable by crystal modifiers */
@@ -30,12 +33,15 @@ public:
 
 	// called by the spell manager
 	void init(SpellBean& bean);
-	void loadSpell(Level* level, const sf::Vector2f& position, bool isFacingRight);
+	void loadSpell(Level* level, MainCharacter* mainChar);
 	virtual void update(sf::Time& frameTime) override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
 
 	// the offset of the spells start position, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
 	virtual sf::Vector2f getConfiguredPositionOffset();
+	// returns whether the spell is bound to the main character and will update its position according to the main character. default is false.
+	// if this value is set to true, the velocity of a spell has no influence anymore.
+	virtual bool getConfiguredIsAttachedToMainChar();
 
 	// returns whether the spell object should be deleted
 	bool isDisposed();
@@ -45,6 +51,7 @@ public:
 
 private:
 	Level* m_level;
+	MainCharacter* m_mainChar;
 	sf::Vector2f m_nextPosition;
 	sf::Time m_activeCoolDown;
 	bool m_isDisposed;
@@ -52,4 +59,7 @@ private:
 	int m_damage;
 	int m_reflectCount;
 	float m_speed;
+
+	// calculates position according to m_mainChar.
+	void calculatePositionAccordingToMainChar(sf::Vector2f& position);
 };
