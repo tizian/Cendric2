@@ -10,8 +10,9 @@ int main(int argc, char* argv[])
 	g_inputController = new InputController();
 	g_inputController->init();
 
-	Game game;
-	game.run();
+	Game* game = new Game();
+	game->run();
+	delete game;
 
 	delete g_resourceManager;
 	delete g_inputController;

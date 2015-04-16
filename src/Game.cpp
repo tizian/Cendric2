@@ -1,11 +1,10 @@
 #include "Game.h"
 
-Game::Game()
+Game::Game() : m_screenManager(new SplashScreen())
 {
 	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
 	m_mainWindow.setFramerateLimit(MAX_FRAME_RATE);
 	g_inputController->setWindow(&m_mainWindow);
-	m_screenManager = ScreenManager(new SplashScreen());
 	m_running = true;
 }
 
@@ -23,7 +22,7 @@ void Game::run()
 		deltaTime = frameClock.restart();
 		while (m_mainWindow.pollEvent(e))
 		{
-			if (e.type == sf::Event::Closed || (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Escape))
+			if (e.type == sf::Event::Closed || g_inputController->isKeyActive(Key::Escape))
 			{
 				m_running = false;
 			}
@@ -43,6 +42,10 @@ void Game::run()
 
 		// game updates
 		m_screenManager.update(frameTime);
+		if (g_resourceManager->pollError()->first != ErrorID::Void)
+		{
+			m_screenManager.setErrorScreen();
+		}
 
 		// render
 		m_mainWindow.clear();

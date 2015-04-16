@@ -1,10 +1,17 @@
 #include "ScreenManager.h"
 
-ScreenManager::ScreenManager() {}
+ScreenManager::ScreenManager() 
+{
+}
 
-ScreenManager::ScreenManager(Screen *initialScreen)
+ScreenManager::ScreenManager(Screen *initialScreen) : m_isErrorScreen(false)
 {
 	m_currentScreen = initialScreen;
+}
+
+ScreenManager::~ScreenManager()
+{
+	delete m_currentScreen;
 }
 
 void ScreenManager::update(sf::Time frameTime)
@@ -17,6 +24,17 @@ void ScreenManager::update(sf::Time frameTime)
 		delete m_currentScreen;
 		m_currentScreen = nextScreen;
 	}
+}
+
+void ScreenManager::setErrorScreen()
+{
+	if (m_isErrorScreen) return;
+	Screen* nextScreen = new ErrorScreen();
+	m_currentScreen->onExit(nextScreen);
+	nextScreen->onEnter(m_currentScreen);
+	delete m_currentScreen;
+	m_currentScreen = nextScreen;
+	m_isErrorScreen = true;
 }
 
 void ScreenManager::render(sf::RenderTarget &renderTarget) 

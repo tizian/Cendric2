@@ -12,6 +12,7 @@ InputController::~InputController()
 
 void InputController::update()
 {
+	m_isWindowFocused = m_mainWindow->hasFocus();
 	// LEFT
     m_keyActiveMap[Key::Left] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Left));
 	// RIGHT
@@ -22,6 +23,8 @@ void InputController::update()
 	m_keyActiveMap[Key::Down] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Down));
 	// JUMP
 	m_keyActiveMap[Key::Jump] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Jump));
+	// Escape
+	m_keyActiveMap[Key::Escape] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Escape));
 
 	// SPELL FIRE
 	m_keyActiveMap[Key::SpellFire] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellFire));
@@ -56,6 +59,7 @@ void InputController::update()
 void InputController::setWindow(sf::RenderWindow* window)
 {
 	m_mainWindow = window;
+	m_isWindowFocused = m_mainWindow->hasFocus();
 }
 
 
@@ -67,6 +71,7 @@ void InputController::init()
 	m_isMouseReleasedRight = true;
 	m_keyActiveMap.insert(
 		{
+			{ Key::Escape, false },
 			{ Key::Left, false },
 			{ Key::Right, false },
 			{ Key::Up, false },
@@ -78,6 +83,7 @@ void InputController::init()
 		});
 	m_keyMap.insert(
 		{
+			{ Key::Escape, sf::Keyboard::Escape },
 			{ Key::Left, sf::Keyboard::A },
 			{ Key::Right, sf::Keyboard::D },
 			{ Key::Up, sf::Keyboard::W },
@@ -111,16 +117,28 @@ sf::Vector2f InputController::getMousePosition()
 
 bool InputController::isMouseJustPressedLeft()
 {
+	if (!m_isWindowFocused) 
+	{
+		return false;
+	}
 	return m_isMouseJustPressedLeft;
 }
 
 bool InputController::isMouseJustPressedRight()
 {
+	if (!m_isWindowFocused)
+	{
+		return false;
+	}
 	return m_isMouseJustPressedRight;
 }
 
 bool InputController::isKeyActive(const Key key)
 {
+	if (!m_isWindowFocused)
+	{
+		return false;
+	}
 	return m_keyActiveMap[key];
 }
 

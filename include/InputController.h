@@ -6,6 +6,7 @@
 
 enum class Key
 {
+	Escape,
 	Left,
 	Right, 
 	Up,
@@ -24,7 +25,7 @@ public:
 	~InputController();
 
 	bool isKeyActive(const Key key);
-	// TODO: add a just active because of jumping.
+
 	bool isMouseJustPressedLeft();
 	bool isMouseJustPressedRight();
 
@@ -55,4 +56,7 @@ private:
 
 	// current window size. Used for mouse position and dependent on resize events
 	sf::Vector2i m_windowSize;
+	
+	// is the window currently focused? we only count input events if it is so!
+	bool m_isWindowFocused;
 };
