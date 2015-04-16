@@ -45,6 +45,9 @@ Screen* GameScreen::update(sf::Time frameTime)
 			it++;
 		}
 	}
+
+	// main char has to be updated first, so that the spells have the correct position
+	Screen* nextScreen = Screen::update(frameTime);
 	// add spell from mainchar
 	Spell* firedSpell = m_mainChar->getFiredSpell();
 	if (firedSpell != nullptr)
@@ -55,7 +58,7 @@ Screen* GameScreen::update(sf::Time frameTime)
 	{
 		spell->update(frameTime);
 	}
-	return Screen::update(frameTime);
+	return nextScreen;
 }
 
 void GameScreen::render(sf::RenderTarget &renderTarget)
