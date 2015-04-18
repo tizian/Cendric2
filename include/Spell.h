@@ -42,12 +42,15 @@ public:
 	// returns whether the spell is bound to the main character and will update its position according to the main character. default is false.
 	// if this value is set to true, the velocity of a spell has no influence anymore.
 	virtual bool getConfiguredIsAttachedToMainChar();
+	// if true, cendric will be "fighting" as long as this spell is active. default is false.
+	virtual bool getConfiguredTriggerFightAnimation();
 
 	// returns whether the spell object should be deleted
 	bool isDisposed();
 	void setDisposed();
 
 	int getDamage();
+	sf::Time getActiveTime();
 
 private:
 	Level* m_level;

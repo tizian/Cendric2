@@ -16,6 +16,7 @@ enum class ResourceID
 	Texture_spell_fire,
 	Texture_spell_ice,
 	Texture_spell_forcefield,
+	Texture_weapon_icestaff,
 	Texture_screen_splash,
 	Texture_screen_loading,
 	Texture_screen_error_fileNotFound,

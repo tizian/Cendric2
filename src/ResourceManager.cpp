@@ -32,7 +32,8 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
-		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" }
+		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
+		{ ResourceID::Texture_weapon_icestaff, "res/assets/weapons/spritesheet_staff_ice.png" }
 	});
 }
 

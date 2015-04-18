@@ -2,9 +2,6 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "Screens\SplashScreen.h"
-#include "Screens\MenuScreen.h"
-#include "Screens\GameScreen.h"
 #include "ErrorScreen.h"
 
 class ScreenManager

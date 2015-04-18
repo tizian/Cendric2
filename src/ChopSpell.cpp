@@ -37,3 +37,8 @@ bool ChopSpell::getConfiguredIsAttachedToMainChar()
 {
 	return true;
 }
+
+bool ChopSpell::getConfiguredTriggerFightAnimation()
+{
+	return true;
+}

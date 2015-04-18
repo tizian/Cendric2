@@ -26,8 +26,8 @@ void SpellManager::init()
 	fireSpell.startVelocity = 500.f;
 
 	SpellBean chopSpell;
-	chopSpell.maxActiveTime = sf::milliseconds(100);
-	chopSpell.cooldown = sf::milliseconds(200);
+	chopSpell.maxActiveTime = sf::milliseconds(320);
+	chopSpell.cooldown = sf::milliseconds(400);
 	chopSpell.damage = 2;
 	chopSpell.reflectCount = 0;
 	chopSpell.startVelocity = 0.f;

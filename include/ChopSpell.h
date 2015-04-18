@@ -13,6 +13,7 @@ public:
 
 	sf::Vector2f getConfiguredPositionOffset() override;
 	bool getConfiguredIsAttachedToMainChar() override;
+	bool getConfiguredTriggerFightAnimation() override;
 
 private:
 };

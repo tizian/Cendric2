@@ -6,6 +6,7 @@
 #include "InputController.h"
 #include "SpellManager.h"
 #include "Screen.h"
+#include "IceStaff.h"
 
 // Cendric in a level
 class MainCharacter : public MovableGameObject
@@ -16,6 +17,7 @@ public:
 
 	void load() override;
 	void update(sf::Time& frameTime) override;
+	void render(sf::RenderTarget& renderTarget) const override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
 	void calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
 
@@ -25,6 +27,7 @@ public:
 	Level* getLevel();
 	Spell* getFiredSpell();
 	bool getIsFacingRight();
+	GameObjectState getState();
 
 private:
 	const float WALK_ACCELERATION = 1500.0f;
@@ -44,6 +47,9 @@ private:
 	sf::Vector2f m_nextPosition;
 	Level* m_level;
 	Spell* m_firedSpell;
+	Weapon* m_weapon;
 
 	SpellManager* m_spellManager;
+	// as long as this time is not null, cendric will have the fighting animation. 
+	sf::Time m_fightAnimationTime;
 };

@@ -84,6 +84,11 @@ sf::Vector2f Spell::getConfiguredPositionOffset()
 	return sf::Vector2f(20.f, 0.f);
 }
 
+bool Spell::getConfiguredTriggerFightAnimation()
+{
+	return false;
+}
+
 void Spell::checkCollisions(sf::Vector2f nextPosition)
 {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
@@ -112,5 +117,9 @@ bool Spell::isDisposed()
 void Spell::setDisposed()
 {
 	m_isDisposed = true;
+}
+
+sf::Time Spell::getActiveTime(){
+	return m_activeCoolDown;
 }
 

@@ -6,6 +6,9 @@ MainCharacter::MainCharacter(Level* level)
 	load();
 	setPosition(m_level->getStartPos());
 	m_spellManager = new SpellManager();
+	m_weapon = new IceStaff();
+	m_weapon->load();
+	m_weapon->loadWeapon(this);
 	m_firedSpell = nullptr;
 }
 MainCharacter::~MainCharacter() 
@@ -13,6 +16,7 @@ MainCharacter::~MainCharacter()
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
 	delete m_spellManager;
 	delete m_firedSpell;
+	delete m_weapon;
 }
 
 void MainCharacter::update(sf::Time& frameTime)
@@ -22,7 +26,15 @@ void MainCharacter::update(sf::Time& frameTime)
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
+	m_fightAnimationTime = (m_fightAnimationTime - frameTime) >= sf::Time::Zero ? m_fightAnimationTime - frameTime : sf::Time::Zero;
 	updateAnimation();
+	m_weapon->update(frameTime);
+}
+
+void MainCharacter::render(sf::RenderTarget& renderTarget) const
+{
+	MovableGameObject::render(renderTarget);
+	m_weapon->render(renderTarget);
 }
 
 void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
@@ -65,15 +77,18 @@ void MainCharacter::updateAnimation()
 {
 	// calculate new game state and set animation.
 	GameObjectState newState = GameObjectState::Idle;
-
-	if (abs(getVelocity().x) > 20.0f)
+	if (m_fightAnimationTime > sf::Time::Zero) 
+	{
+		newState = GameObjectState::Fighting;
+	} 
+	else if (!m_isGrounded)
+	{
+		newState = GameObjectState::Jumping;
+	}
+	else if (abs(getVelocity().x) > 20.0f)
 	{
 		newState = GameObjectState::Walking;
 	}
-	if (!m_isGrounded)
-	{
-		newState = GameObjectState::Jumping;
-	}	
 
 	// only update animation if we need to
 	if (m_state != newState || m_nextIsFacingRight != m_isFacingRight)
@@ -113,6 +128,9 @@ void MainCharacter::handleInput()
 		if (spell != nullptr) 
 		{
 			spell->loadSpell(getLevel(), this);
+			if (spell->getConfiguredTriggerFightAnimation()) {
+				m_fightAnimationTime = spell->getActiveTime();
+			}
 			m_firedSpell = spell;
 		}
 	}
@@ -155,7 +173,16 @@ void MainCharacter::load()
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	setFrameTime(sf::seconds(0.1f));
+	Animation fightingAnimation;
+	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	fightingAnimation.addFrame(sf::IntRect(800, 0, 80, 120));
+	fightingAnimation.addFrame(sf::IntRect(880, 0, 80, 120));
+	fightingAnimation.addFrame(sf::IntRect(960, 0, 80, 120));
+	fightingAnimation.addFrame(sf::IntRect(1040, 0, 80, 120));
+
+	addAnimation(GameObjectState::Fighting, fightingAnimation);
+
+	setFrameTime(sf::seconds(0.08f));
 
 	// initial values
 	m_state = GameObjectState::Idle;
@@ -192,4 +219,9 @@ Level* MainCharacter::getLevel()
 bool MainCharacter::getIsFacingRight()
 {
 	return m_isFacingRight;
+}
+
+GameObjectState MainCharacter::getState()
+{
+	return m_state;
 }

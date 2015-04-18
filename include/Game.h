@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "ScreenManager.h"
+#include "Screens\SplashScreen.h"
 #include "InputController.h"
 
 class Game

@@ -18,7 +18,8 @@ enum class GameObjectState
 	Walking_down,
 	Walking_right,
 	Walking_left,
-	Jumping
+	Jumping,
+	Fighting
 };
 
 // A game object with animations
