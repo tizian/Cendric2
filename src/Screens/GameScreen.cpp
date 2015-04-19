@@ -21,6 +21,10 @@ void GameScreen::onEnter(Screen *previousScreen)
 void GameScreen::onExit(Screen *nextScreen)
 {
 	m_currentLevel.dispose();
+	for (std::vector<Spell*>::iterator it = m_spells.begin(); it != m_spells.end(); it++)
+	{
+		delete (*it);
+	}
 	m_spells.clear();
 	delete m_mainChar;
 }
@@ -58,6 +62,8 @@ Screen* GameScreen::update(sf::Time frameTime)
 	{
 		spell->update(frameTime);
 	}
+
+	m_currentLevel.updateDynamicTiles(frameTime);
 	return nextScreen;
 }
 

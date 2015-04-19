@@ -91,6 +91,19 @@ bool LevelReader::checkData(LevelData& data)
 			return false;
 		}
 	}
+	for (int i = 0; i < data.dynamicTiles.size(); i++)
+	{
+		if (data.dynamicTiles[i].first == DynamicTileID::Void)
+		{
+			printf("LevelReader: Error in level data: dynamic tile ID not recognized \n", i);
+			return false;
+		}
+		if (data.dynamicTiles[i].second.empty() || data.dynamicTiles[i].second.size() != data.mapSize.x * data.mapSize.y)
+		{
+			printf("LevelReader: Error in level data: dynamic tile layer has not correct size (map size) \n", i);
+			return false;
+		}
+	}
 	if (data.collidableTiles.empty())
 	{
 		printf("LevelReader: Error in level data: collidable layer is empty \n");
@@ -233,6 +246,35 @@ bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data)
 	return true;
 }
 
+bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
+{
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+	// read dynamic tile id
+	DynamicTileID id = resolveDynamicTile(atoi(startData));
+	vector<bool> dynamicTiles;
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+
+	while (startData != NULL)
+	{
+		dynamicTiles.push_back(0 != atoi(startData));
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+
+	data.dynamicTiles.push_back(std::pair<DynamicTileID, vector<bool>>(id, dynamicTiles));
+
+	return true;
+}
+
 bool LevelReader::readStartPos(char* start, char* end, LevelData& data)
 {
 	char* startData;
@@ -317,6 +359,12 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
+		else if (strncmp(pos, __LAYER_DYNAMIC_TILES, strlen(__LAYER_DYNAMIC_TILES)) == 0) {
+			printf("LevelReader: Found tag %s \n", __LAYER_DYNAMIC_TILES);
+			readLayerDynamicTiles(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
+			pos = gotoNextChar(pos, end, '\n');
+		}
 		else if (strncmp(pos, __CENDRIC_STARTPOS, strlen(__CENDRIC_STARTPOS)) == 0) {
 			printf("LevelReader: Found tag %s \n", __CENDRIC_STARTPOS);
 			readStartPos(pos, end, data);
@@ -361,14 +409,13 @@ void LevelReader::updateData(LevelData& data)
 	data.startPos.x = data.startPos.x * data.tileSize.x;
 	data.startPos.y = data.startPos.y * data.tileSize.y;
 
+	// calculate collidable tiles
 	int x = 0;
 	int y = 0;
-
 	vector<bool> xLine;
 
-	// calculate collidable tiles
-	for (std::vector<bool>::iterator it = data.collidableTiles.begin(); it != data.collidableTiles.end(); ++it) {
-		
+	for (std::vector<bool>::iterator it = data.collidableTiles.begin(); it != data.collidableTiles.end(); ++it) 
+	{
 		xLine.push_back((*it));
 		if (x + 1 >= data.mapSize.x) 
 		{
@@ -382,10 +429,52 @@ void LevelReader::updateData(LevelData& data)
 			x++;
 		}
 	}
+	
+	// calculate dynamic tiles
+	int tileWidth = data.tileSize.x;
+	int tileHeight = data.tileSize.y;
+
+	for (std::vector<std::pair<DynamicTileID, std::vector<bool>>>::iterator it = data.dynamicTiles.begin(); it != data.dynamicTiles.end(); ++it) 
+	{
+		int x = 0;
+		int y = 0;
+		DynamicTileID id = it->first;
+		for (std::vector<bool>::iterator it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+		{
+			if ((*it2))
+			{
+				data.dynamicTileRects.push_back(std::pair<DynamicTileID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+			}
+			if (x + 1 >= data.mapSize.x)
+			{
+				x = 0;
+				y++;
+			}
+			else
+			{
+				x++;
+			}
+		}
+	}
 
 	// calculate level rect
 	data.levelRect.left = 0;
 	data.levelRect.top = 0;
 	data.levelRect.height = static_cast<float>(data.tileSize.y * data.mapSize.y);
 	data.levelRect.width = static_cast<float>(data.tileSize.x * data.mapSize.x);
+}
+
+DynamicTileID LevelReader::resolveDynamicTile(int tileID)
+{
+	switch (tileID)
+	{
+	case 1:
+		return DynamicTileID::Water;
+	case 2:
+		return DynamicTileID::Ice;
+	case 3:
+		return DynamicTileID::Crumbly_block;
+	default:
+		return DynamicTileID::Void;
+	}
 }

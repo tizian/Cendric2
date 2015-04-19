@@ -28,3 +28,13 @@ const float FireSpell::getConfiguredMaxVelocityX()
 {
 	return 1000.0f;
 }
+
+bool FireSpell::getConfiguredTriggerFightAnimation()
+{
+	return true;
+}
+
+SpellID FireSpell::getConfiguredType()
+{
+	return SpellID::Fire;
+}

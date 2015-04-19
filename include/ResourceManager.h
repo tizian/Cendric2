@@ -16,6 +16,9 @@ enum class ResourceID
 	Texture_spell_fire,
 	Texture_spell_ice,
 	Texture_spell_forcefield,
+	Texture_tile_water,
+	Texture_tile_ice,
+	Texture_tile_crumblyblock,
 	Texture_weapon_icestaff,
 	Texture_screen_splash,
 	Texture_screen_loading,
@@ -37,7 +40,7 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	// \brief initializes the filename map
+	// initializes the filename map
 	void init();
 
 	sf::Texture* getTexture(ResourceID id);
@@ -47,6 +50,8 @@ public:
 	char* getFilename(ResourceID id);
 
 	void deleteResource(ResourceID id);
+	// deletes all spell + dynamic tile + enemy resources
+	void deleteLevelResources();
 	void deleteResource(std::string filename);
 	std::pair<ErrorID, std::string>* pollError();
 	void setError(ErrorID id, std::string& description);
@@ -55,7 +60,7 @@ private:
 	std::map<std::string, sf::Texture> m_textures;
 	std::map<std::string, sf::Font> m_fonts;
 
-	// \brief a map that is filled with all ResourceTags and the corresponding filenames
+	// a map that is filled with all ResourceTags and the corresponding filenames
 	std::map <ResourceID, std::string> m_fileNames;
 	
 	// this pair stores resource errors and gets checked in every game loop iteration. mostly and hopefully void.

@@ -42,3 +42,8 @@ bool ChopSpell::getConfiguredTriggerFightAnimation()
 {
 	return true;
 }
+
+SpellID ChopSpell::getConfiguredType()
+{
+	return SpellID::Chop;
+}

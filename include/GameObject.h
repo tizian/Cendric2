@@ -6,20 +6,24 @@
 #include "Object.h"
 #include "AnimatedSprite.h"
 
+// this enum is used for animations. 
+// TODO: everyone may need other states, they should be defined directly on the game objects, not here.
 enum class GameObjectState
 {
-	Idle,
-	Idle_up,
-	Idle_down,
-	Idle_left,
-	Idle_right,
-	Walking,
-	Walking_up,
-	Walking_down,
-	Walking_right,
-	Walking_left,
-	Jumping,
-	Fighting
+	Idle, // used by nearly every game object
+	Idle_up, // used by map main character
+	Idle_down, // used by map main character
+	Idle_left, // used by map main character
+	Idle_right, // used by map main character
+	Walking, // used by main character and its weapons
+	Walking_up, // used by map main character
+	Walking_down, // used by map main character
+	Walking_right, // used by map main character
+	Walking_left, // used by map main character
+	Jumping, // used by main character and its weapons
+	Fighting, // used by main character and its weapons
+	Frozen, // used by water tile
+	Crumbling // used by crumbly block tile
 };
 
 // A game object with animations
@@ -44,6 +48,9 @@ public:
 	void playCurrentAnimation(bool play);
 	void loopCurrentAnimation(bool loop);
 	Animation* getAnimation(GameObjectState state);
+
+protected:
+	GameObjectState m_state;
 	
 private:
 	std::map<GameObjectState, Animation> m_animations;

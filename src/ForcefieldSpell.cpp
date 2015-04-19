@@ -40,3 +40,8 @@ bool ForcefieldSpell::getConfiguredIsAttachedToMainChar()
 {
 	return true;
 }
+
+SpellID ForcefieldSpell::getConfiguredType()
+{
+	return SpellID::Forcefield;
+}

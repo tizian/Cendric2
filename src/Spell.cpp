@@ -49,7 +49,6 @@ void Spell::calculatePositionAccordingToMainChar(sf::Vector2f& position)
 
 void Spell::init(SpellBean& bean) 
 {
-	m_isDisposed = false;
 	m_activeCoolDown = bean.maxActiveTime;
 	m_damage = bean.damage;
 	m_reflectCount = bean.reflectCount;
@@ -68,9 +67,10 @@ void Spell::update(sf::Time& frameTime)
 	{
 		calculateNextPosition(frameTime, m_nextPosition);
 	}
-
-	MovableGameObject::update(frameTime);
+	
 	checkCollisions(m_nextPosition);
+	MovableGameObject::update(frameTime);
+	
 	m_activeCoolDown = m_activeCoolDown - frameTime;
 
 	if (m_activeCoolDown.asMilliseconds() <= 0)
@@ -107,6 +107,9 @@ void Spell::checkCollisions(sf::Vector2f nextPosition)
 	{
 		m_isDisposed = true;
 	}
+
+	// check collisions with dynamic tiles
+	m_level->collideWithDynamicTiles(this, nextBoundingBoxX, nextBoundingBoxY);
 }
 
 bool Spell::isDisposed()

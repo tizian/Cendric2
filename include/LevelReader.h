@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "BackgroundLayer.h"
+#include "DynamicTile.h"
 
 #define __COMMENT_MARKER '#'
 #define __LEVEL_NAME "level.name"
@@ -10,6 +11,7 @@
 #define __TILESET_PATH "tileset.path"
 #define __LAYER_COLLIDABLE "layer.collidable"
 #define __LAYER_TILES "layer.tiles"
+#define __LAYER_DYNAMIC_TILES "layer.dynamictiles"
 #define __LAYER_BACKGROUND "layer.background"
 #define __CENDRIC_STARTPOS "cendric.startpos"
 
@@ -24,6 +26,8 @@ struct LevelData
 	std::vector<std::vector<int>> layers;
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTileRects;
+	std::vector<std::pair<DynamicTileID, std::vector<bool>>> dynamicTiles;
+	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTileRects;
 	sf::FloatRect levelRect;
 };
 
@@ -48,10 +52,12 @@ private:
 	bool readLayerCollidable(char* start, char* end, LevelData& data);
 	bool readStartPos(char* start, char* end, LevelData& data);
 	bool readLayerTiles(char* start, char* end, LevelData& data);
+	bool readLayerDynamicTiles(char* start, char* end, LevelData& data);
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data);
 
 	// \brief update data to prepare it for the level
 	void updateData(LevelData& data);
+	DynamicTileID resolveDynamicTile(int tileID);
 };

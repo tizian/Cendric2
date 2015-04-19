@@ -28,6 +28,9 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_forcefield, "res/assets/spells/spritesheet_spell_forcefield.png" },
 		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
 		{ ResourceID::Texture_spell_chop, "res/assets/spells/spritesheet_spell_chop.png" },
+		{ ResourceID::Texture_tile_water, "res/assets/dynamic_tiles/spritesheet_tiles_water.png" },
+		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
+		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
@@ -149,6 +152,24 @@ void ResourceManager::setError(ErrorID id, string& description)
 {
 	m_currentError.first = id;
 	m_currentError.second = description;
+}
+
+void ResourceManager::deleteLevelResources()
+{
+	// delete spell resources
+	deleteResource(ResourceID::Texture_spell_chop);
+	deleteResource(ResourceID::Texture_spell_fire);
+	deleteResource(ResourceID::Texture_spell_ice);
+	deleteResource(ResourceID::Texture_spell_forcefield);
+
+	// delete dynamic tile resources
+	deleteResource(ResourceID::Texture_tile_water);
+	deleteResource(ResourceID::Texture_tile_ice);
+	deleteResource(ResourceID::Texture_tile_crumblyblock);
+
+	// delete enemy resources
+
+	// delete item in level resources?
 }
 
 

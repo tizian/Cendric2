@@ -28,3 +28,14 @@ const float IceSpell::getConfiguredMaxVelocityX()
 {
 	return 1000.0f;
 }
+
+bool IceSpell::getConfiguredTriggerFightAnimation()
+{
+	return true;
+}
+
+SpellID IceSpell::getConfiguredType()
+{
+	return SpellID::Ice;
+}
+

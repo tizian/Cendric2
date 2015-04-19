@@ -42,7 +42,6 @@ private:
 	void updateAnimation();
 	bool m_isFacingRight;
 	bool m_nextIsFacingRight;
-	GameObjectState m_state;
 	bool m_isGrounded;
 	sf::Vector2f m_nextPosition;
 	Level* m_level;

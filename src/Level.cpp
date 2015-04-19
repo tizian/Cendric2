@@ -1,5 +1,7 @@
 #include "Level.h"
 
+using namespace std;
+
 Level::Level()
 {
 }
@@ -16,11 +18,12 @@ void Level::dispose()
 	{
 		m_backgroundLayers[i].dispose();
 	}
-	// delete spell resources TODO: move this into resource manager
-	g_resourceManager->deleteResource(ResourceID::Texture_spell_chop);
-	g_resourceManager->deleteResource(ResourceID::Texture_spell_fire);
-	g_resourceManager->deleteResource(ResourceID::Texture_spell_ice);
-	g_resourceManager->deleteResource(ResourceID::Texture_spell_forcefield);
+	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); it++)
+	{
+		delete (*it);
+	}
+	m_dynamicTiles.clear();
+	g_resourceManager->deleteLevelResources();
 }
 
 bool Level::load(ResourceID id) 
@@ -39,6 +42,7 @@ bool Level::load(ResourceID id)
 	m_collidableTiles = data.collidableTileRects;
 	m_levelRect = data.levelRect;
 	m_backgroundLayers = data.backgroundLayers;
+	loadDynamicTiles(data);
 	return true;
 }
 
@@ -46,6 +50,8 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Ve
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	// parallax background layers
 	for (int i = 0; i < m_backgroundLayers.size(); i++)
 	{
 		// handle case for layer at infinity
@@ -65,11 +71,21 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Ve
 		}
 		m_backgroundLayers[i].render(target, states);
 	}
+
+	// tilemap
 	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x));
 	float camCenterY = WINDOW_HEIGHT / 2.f;
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
 	m_tileMap.draw(target, states);
+
+	// dynamic tiles
+	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); it++)
+	{
+		(*it)->render(target);
+	}
+
+	// foreground layers?
 }
 
 sf::FloatRect& Level::getLevelRect()
@@ -126,6 +142,15 @@ bool Level::collidesX(const sf::FloatRect& boundingBox)
 		}
 	}
 
+	// check collidable dynamic tiles
+	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
+	{
+		if ((*it)->getIsCollidable() && (*it)->getBoundingBox()->intersects(boundingBox))
+		{
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -168,6 +193,15 @@ bool Level::collidesY(const sf::FloatRect& boundingBox)
 		}
 	}
 
+	// check collidable dynamic tiles
+	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
+	{
+		if ((*it)->getIsCollidable() && (*it)->getBoundingBox()->intersects(boundingBox))
+		{
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -184,4 +218,64 @@ float Level::getGround(const sf::FloatRect& boundingBox)
 	int y = static_cast<int>(floor((boundingBox.top + boundingBox.height)) / tileHeight);
 
 	return (y * tileHeight) - boundingBox.height;
+}
+
+void Level::loadDynamicTiles(LevelData& data)
+{
+	for (std::vector<std::pair<DynamicTileID, sf::Vector2f>>::iterator it = data.dynamicTileRects.begin(); it != data.dynamicTileRects.end(); ++it)
+	{
+		DynamicTile* tile;
+		switch (it->first)
+		{
+		case DynamicTileID::Water:
+			tile = new WaterTile();
+			break;
+		case DynamicTileID::Ice:
+			tile = new IceTile();
+			break;
+		case DynamicTileID::Crumbly_block:
+			tile = new CrumblyBlockTile();
+			break;
+		default:
+			// unexpected error
+			cout << "Level: ERROR: Dynamic tile was not loaded, unknown id.\n";
+			return;
+		}
+
+		tile->setTileSize(data.tileSize);
+		tile->load();
+		tile->setPosition(it->second);
+		m_dynamicTiles.push_back(tile);
+	}
+}
+
+void Level::updateDynamicTiles(sf::Time frameTime)
+{
+	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
+	{
+		(*it)->update(frameTime);
+	}
+	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); /* DON'T increment here*/)
+	{
+		if ((*it)->isDisposed())
+		{
+			delete (*it);
+			it = m_dynamicTiles.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+}
+
+void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect nextBoundingBoxX, const sf::FloatRect nextBoundingBoxY)
+{
+	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
+	{
+		if ((*it)->getBoundingBox()->intersects(nextBoundingBoxX) || (*it)->getBoundingBox()->intersects(nextBoundingBoxY))
+		{
+			(*it)->onHit(spell);
+		}
+	}
 }

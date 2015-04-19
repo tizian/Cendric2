@@ -44,6 +44,7 @@ public:
 	virtual bool getConfiguredIsAttachedToMainChar();
 	// if true, cendric will be "fighting" as long as this spell is active. default is false.
 	virtual bool getConfiguredTriggerFightAnimation();
+	virtual SpellID getConfiguredType() = 0;
 
 	// returns whether the spell object should be deleted
 	bool isDisposed();
@@ -57,7 +58,7 @@ private:
 	MainCharacter* m_mainChar;
 	sf::Vector2f m_nextPosition;
 	sf::Time m_activeCoolDown;
-	bool m_isDisposed;
+	bool m_isDisposed = false;
 
 	int m_damage;
 	int m_reflectCount;

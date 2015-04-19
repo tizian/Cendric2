@@ -11,5 +11,8 @@ public:
 	const float getConfiguredMaxVelocityY() override;
 	const float getConfiguredMaxVelocityX() override;
 
+	bool getConfiguredTriggerFightAnimation() override;
+	SpellID getConfiguredType() override;
+
 private:
 };

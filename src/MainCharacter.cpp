@@ -129,7 +129,7 @@ void MainCharacter::handleInput()
 		{
 			spell->loadSpell(getLevel(), this);
 			if (spell->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = spell->getActiveTime();
+				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
 			}
 			m_firedSpell = spell;
 		}
