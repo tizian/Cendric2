@@ -112,7 +112,13 @@ void Spell::checkCollisions(sf::Vector2f nextPosition)
 	m_level->collideWithDynamicTiles(this, nextBoundingBoxX, nextBoundingBoxY);
 }
 
-sf::Time Spell::getActiveTime(){
+sf::Time Spell::getActiveTime()
+{
 	return m_activeCoolDown;
+}
+
+GameObjectType Spell::getConfiguredType() const
+{
+	return GameObjectType::Spell;
 }
 

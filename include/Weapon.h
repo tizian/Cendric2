@@ -15,6 +15,7 @@ public:
 
 	// the offset of the spells start position, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
 	virtual sf::Vector2f getConfiguredPositionOffset();
+	GameObjectType getConfiguredType() const override;
 
 protected:
 	bool m_isFacingRight;

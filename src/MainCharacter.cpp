@@ -225,3 +225,8 @@ GameObjectState MainCharacter::getState()
 {
 	return m_state;
 }
+
+GameObjectType MainCharacter::getConfiguredType() const
+{
+	return GameObjectType::MainCharacter;
+}

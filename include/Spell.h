@@ -45,6 +45,7 @@ public:
 	// if true, cendric will be "fighting" as long as the fight animation is. default is false.
 	virtual bool getConfiguredTriggerFightAnimation();
 	virtual SpellID getConfiguredType() = 0;
+	GameObjectType getConfiguredType() const override;
 
 	int getDamage();
 	sf::Time getActiveTime();

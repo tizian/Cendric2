@@ -222,3 +222,8 @@ const float MapMainCharacter::getConfiguredMaxVelocityX()
 {
 	return 200.0f;
 }
+
+GameObjectType MapMainCharacter::getConfiguredType() const
+{
+	return GameObjectType::MainCharacter;
+}

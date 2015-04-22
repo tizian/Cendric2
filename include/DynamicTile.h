@@ -26,6 +26,7 @@ public:
 	virtual void onHit(Spell* spell) = 0;
 	// gets called by the level when initializing the tile
 	void setTileSize(const sf::Vector2i tileSize);
+	GameObjectType getConfiguredType() const override;
 
 protected:
 	// dynamic tile textures have a border (border width in pixel)

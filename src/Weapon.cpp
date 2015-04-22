@@ -46,3 +46,8 @@ void Weapon::loadWeapon(MainCharacter* mainChar)
 	calculatePositionAccordingToMainChar(position);
 	setPosition(position);
 }
+
+GameObjectType Weapon::getConfiguredType() const
+{
+	return GameObjectType::Weapon;
+}

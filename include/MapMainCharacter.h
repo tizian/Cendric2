@@ -19,6 +19,7 @@ public:
 
 	const float getConfiguredMaxVelocityY() override;
 	const float getConfiguredMaxVelocityX() override;
+	GameObjectType getConfiguredType() const override;
 
 private:
 	const float WALK_ACCELERATION = 1500.0f;

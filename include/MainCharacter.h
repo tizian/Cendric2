@@ -23,6 +23,7 @@ public:
 
 	const float getConfiguredMaxVelocityY() override;
 	const float getConfiguredMaxVelocityX() override;
+	GameObjectType getConfiguredType() const override;
 
 	Level* getLevel();
 	Spell* getFiredSpell();

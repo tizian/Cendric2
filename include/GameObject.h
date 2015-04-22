@@ -21,7 +21,22 @@ enum class GameObjectState
 	Jumping, // used by main character and its weapons
 	Fighting, // used by main character and its weapons
 	Frozen, // used by water tile
-	Crumbling // used by crumbly block tile
+	Crumbling, // used by crumbly block tile
+	Pressed // used by buttons
+};
+
+// the type of a game object.
+// used by the screen for rendering and update order.
+// Undefined has to be the last enum object as we have to iterate over this enum
+enum class GameObjectType
+{
+	MainCharacter,
+	Weapon,
+	Button,
+	Spell,
+	DynamicTile,
+	Enemy,
+	Undefined
 };
 
 // A game object with animations, position, bounding box, game state.
@@ -33,6 +48,7 @@ public:
 	virtual void load() = 0;
 	virtual void update(sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget) const;
+	virtual GameObjectType getConfiguredType() const = 0;
 
 	void setBoundingBox(const sf::FloatRect& rect);
 	void setPosition(const sf::Vector2f& pos);

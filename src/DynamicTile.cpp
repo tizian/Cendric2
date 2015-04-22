@@ -14,3 +14,8 @@ void DynamicTile::setTileSize(const sf::Vector2i tileSize)
 {
 	m_tileSize = tileSize;
 }
+
+GameObjectType DynamicTile::getConfiguredType() const
+{
+	return GameObjectType::DynamicTile;
+}
