@@ -4,14 +4,14 @@ using namespace std;
 
 Screen::Screen()
 {
-	m_objects = vector<Object *>();
+	m_objects = vector<GameObject *>();
 }
 
 Screen::~Screen() {}
 
 Screen* Screen::update(sf::Time frameTime)
 {
-	for (Object *obj : m_objects)
+	for (GameObject *obj : m_objects)
 	{
 		obj->update(frameTime);
 	}
@@ -20,13 +20,13 @@ Screen* Screen::update(sf::Time frameTime)
 
 void Screen::render(sf::RenderTarget &renderTarget)
 {
-	for (Object *obj : m_objects)
+	for (GameObject *obj : m_objects)
 	{
 		obj->render(renderTarget);
 	}
 }
 
-void Screen::addObject(Object *object)
+void Screen::addObject(GameObject *object)
 {
 	m_objects.push_back(object);
 }

@@ -1,19 +1,5 @@
 #include "GameObject.h"
 
-GameObject::GameObject()
-{
-}
-
-
-GameObject::~GameObject()
-{
-}
-
-void GameObject::load()
-{
-	//nop
-}
-
 void GameObject::setCurrentAnimation(Animation* animation, bool isFlipped)
 {
 	m_animatedSprite.setFlipped(isFlipped);
@@ -41,8 +27,22 @@ void GameObject::update(sf::Time& frameTime)
 
 void GameObject::setPosition(const sf::Vector2f& position)
 {
-	Object::setPosition(position);
+	m_position = position;
+	m_boundingBox.left = position.x;
+	m_boundingBox.top = position.y;
 	m_animatedSprite.setPosition(position + m_spriteOffset);
+}
+
+void GameObject::setPositionX(const float posX)
+{
+	const sf::Vector2f newPosition(posX, m_position.y);
+	setPosition(newPosition);
+}
+
+void GameObject::setPositionY(const float posY)
+{
+	const sf::Vector2f newPosition(m_position.x, posY);
+	setPosition(newPosition);
 }
 
 void GameObject::setFrameTime(sf::Time time) 
@@ -72,3 +72,24 @@ void GameObject::setSpriteOffset(const sf::Vector2f& spriteOffset)
 	m_spriteOffset = spriteOffset;
 }
 
+void GameObject::setBoundingBox(const sf::FloatRect& rect)
+{
+	m_boundingBox = rect;
+}
+
+sf::FloatRect* GameObject::getBoundingBox()
+{
+	return &m_boundingBox;
+}
+
+sf::Vector2f GameObject::getCenter()
+{
+	return sf::Vector2f(
+		m_boundingBox.left + (m_boundingBox.width / 2),
+		m_boundingBox.top + (m_boundingBox.height / 2));
+}
+
+const sf::Vector2f& GameObject::getPosition()
+{
+	return m_position;
+}

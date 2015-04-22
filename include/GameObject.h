@@ -3,10 +3,9 @@
 #include <map>
 
 #include "global.h"
-#include "Object.h"
 #include "AnimatedSprite.h"
 
-// this enum is used for animations. 
+// this enum is used for animations and used by all game objects
 enum class GameObjectState
 {
 	Idle, // used by nearly every game object
@@ -25,23 +24,26 @@ enum class GameObjectState
 	Crumbling // used by crumbly block tile
 };
 
-// A game object with animations
-class GameObject : public Object
+// A game object with animations, position, bounding box, game state.
+class GameObject 
 {
 public:
-	GameObject();
-	~GameObject();
-
 	// \brief loads animations using the resource manager
 	// also defines bounding box and sprite offset
-	virtual void load();
+	virtual void load() = 0;
+	virtual void update(sf::Time& frameTime);
+	virtual void render(sf::RenderTarget& renderTarget) const;
 
-	void render(sf::RenderTarget& renderTarget) const override;
-	void update(sf::Time& frameTime) override;
+	void setBoundingBox(const sf::FloatRect& rect);
+	void setPosition(const sf::Vector2f& pos);
+	void setPositionX(const float posX);
+	void setPositionY(const float posY);
+	const sf::Vector2f& getPosition();
+	sf::FloatRect* getBoundingBox();
+	sf::Vector2f getCenter();
 
 	void setCurrentAnimation(Animation* animation, bool isFlipped);
 	void addAnimation(GameObjectState state, Animation& animation);
-	void setPosition(const sf::Vector2f& position) override;
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void setFrameTime(sf::Time time);
 	void playCurrentAnimation(bool play);
@@ -55,4 +57,7 @@ private:
 	std::map<GameObjectState, Animation> m_animations;
 	AnimatedSprite m_animatedSprite;
 	sf::Vector2f m_spriteOffset;
+	sf::FloatRect m_boundingBox;
+	// absolute position as seen from the upper left corner
+	sf::Vector2f m_position;
 };

@@ -3,9 +3,8 @@
 #include <vector>
 
 #include "global.h"
-#include "Object.h"
+#include "GameObject.h"
 
-class Object;
 class ScreenManager;
 
 enum class ScreenID
@@ -26,8 +25,8 @@ public:
 	virtual void onEnter(Screen *previousScreen) = 0;
 	virtual void onExit(Screen *nextScreen) = 0;
 
-	void addObject(Object *object);
+	void addObject(GameObject *object);
 	
 protected:
-	std::vector<Object *> m_objects;
+	std::vector<GameObject *> m_objects;
 };
