@@ -12,6 +12,7 @@
 #include "WaterTile.h"
 #include "IceTile.h"
 #include "CrumblyBlockTile.h"
+#include "Logger.h"
 
 class Level 
 {

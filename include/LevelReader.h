@@ -3,17 +3,7 @@
 #include "global.h"
 #include "BackgroundLayer.h"
 #include "DynamicTile.h"
-
-#define __COMMENT_MARKER '#'
-#define __LEVEL_NAME "level.name"
-#define __MAP_SIZE "map.size"
-#define __MAP_TILESIZE "map.tilesize"
-#define __TILESET_PATH "tileset.path"
-#define __LAYER_COLLIDABLE "layer.collidable"
-#define __LAYER_TILES "layer.tiles"
-#define __LAYER_DYNAMIC_TILES "layer.dynamictiles"
-#define __LAYER_BACKGROUND "layer.background"
-#define __CENDRIC_STARTPOS "cendric.startpos"
+#include "Logger.h"
 
 struct LevelData
 {
@@ -60,4 +50,15 @@ private:
 	// \brief update data to prepare it for the level
 	void updateData(LevelData& data);
 	DynamicTileID resolveDynamicTile(int tileID);
+
+	const char COMMENT_MARKER = '#';
+	const char* LEVEL_NAME = "level.name";
+	const char* MAP_SIZE = "map.size";
+	const char* MAP_TILESIZE = "map.tilesize";
+	const char* TILESET_PATH = "tileset.path";
+	const char* LAYER_COLLIDABLE = "layer.collidable";
+	const char* LAYER_TILES = "layer.tiles";
+	const char* LAYER_DYNAMIC_TILES = "layer.dynamictiles";
+	const char* LAYER_BACKGROUND = "layer.background";
+	const char* CENDRIC_STARTPOS = "cendric.startpos";
 };

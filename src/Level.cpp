@@ -238,7 +238,7 @@ void Level::loadDynamicTiles(LevelData& data)
 			break;
 		default:
 			// unexpected error
-			cout << "Level: ERROR: Dynamic tile was not loaded, unknown id.\n";
+			g_logger->logError("Level", "Dynamic tile was not loaded, unknown id.");
 			return;
 		}
 

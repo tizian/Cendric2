@@ -60,11 +60,11 @@ sf::Texture* ResourceManager::getTexture(std::string& filename)
 	if (texture.loadFromFile(filename))
 	{
 		m_textures[filename] = texture;
-		cout << "ResourceManager: " << filename << ": loading texture.\n";
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading texture");
 		return &m_textures[filename];
 	}
 
-	cout << "ResourceManager: ERROR: Texture could not be loaded from file: " << filename << ".\n";
+	g_logger->logError("ResourceManager", "Texture could not be loaded from file: " + std::string(filename));
 	setError(ErrorID::Error_fileNotFound, "Texture could not be loaded from file: " + filename);
 	m_textures[filename] = texture;
 	return &m_textures[filename];
@@ -95,11 +95,11 @@ sf::Font* ResourceManager::getFont(std::string& filename)
 	if (font.loadFromFile(filename))
 	{
 		m_fonts[filename] = font;
-		cout << "ResourceManager: " << filename << ": loading font.\n";
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading font");
 		return &m_fonts[filename];
 	}
 
-	cout << "ResourceManager: ERROR: Font could not be loaded from file: " << filename << ".\n";
+	g_logger->logError("ResourceManager", "Font could not be loaded from file: " + std::string(filename));
 	setError(ErrorID::Error_fileNotFound, "Font could not be loaded from file: " + filename);
 	m_fonts[filename] = font;
 	return &m_fonts[filename];
@@ -122,7 +122,7 @@ void ResourceManager::deleteResource(std::string filename)
 	if (textureIt != m_textures.end())
 	{
 		m_textures.erase(textureIt);
-		cout << "ResourceManager: " << filename << ": releasing texture.\n";
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing texture");
 		return;
 	}
 		
@@ -131,7 +131,7 @@ void ResourceManager::deleteResource(std::string filename)
 	if (fontIt != m_fonts.end())
 	{
 		m_fonts.erase(fontIt);
-		cout << "ResourceManager: " << filename << ": releasing font.\n";
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing font");
 		return;
 	}
 

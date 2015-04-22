@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "ResourceManager.h"
+#include "Logger.h"
 #include "Screen.h"
 
 class ErrorScreen : public Screen

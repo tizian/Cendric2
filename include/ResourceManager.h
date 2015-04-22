@@ -1,8 +1,9 @@
 #pragma once
 
-#include<map>
+#include <map>
 
 #include "global.h"
+#include "Logger.h"
 
 enum class ResourceID
 {	

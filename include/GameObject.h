@@ -7,7 +7,6 @@
 #include "AnimatedSprite.h"
 
 // this enum is used for animations. 
-// TODO: everyone may need other states, they should be defined directly on the game objects, not here.
 enum class GameObjectState
 {
 	Idle, // used by nearly every game object

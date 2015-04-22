@@ -15,7 +15,7 @@ ErrorScreen::ErrorScreen()
 		break;
 	default:
 		// unexpected
-		cout << "ErrorScreen: ERROR: Error screen has been set without an error occurring.\n";
+		g_logger->logError("ErrorScreen", "Error screen has been set without an error occurring");
 		m_screenResource = ResourceID::Texture_screen_error_dataCorrupted;
 		break;
 	}

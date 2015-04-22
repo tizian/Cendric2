@@ -50,55 +50,55 @@ bool MapReader::checkData(MapData& data)
 {
 	if (data.mapSize.x == 0 || data.mapSize.y == 0)
 	{
-		printf("LevelReader: Error in level data: map size not set / invalid \n");
+		g_logger->logError("MapReader", "Error in map data : map size not set / invalid");
 		return false;
 	}
 	if (data.tileSize.x == 0 || data.tileSize.y == 0)
 	{
-		printf("LevelReader: Error in level data: tile size not set / invalid \n");
+		g_logger->logError("MapReader", "Error in map data : tile size not set / invalid");
 		return false;
 	}
 	if (data.startPos.x < 0 || data.startPos.x > data.mapSize.x || data.startPos.y < 0 || data.startPos.y > data.mapSize.y)
 	{
-		printf("LevelReader: Error in level data: invalid start position, must be in range of map \n");
+		g_logger->logError("MapReader", "Error in map data : invalid start position, must be in range of map");
 		return false;
 	}
 	if (data.name.empty())
 	{
-		printf("LevelReader: Error in level data: level name not set / empty \n");
+		g_logger->logError("MapReader", "Error in map data : map name not set / empty");
 		return false;
 	}
 	if (data.tileSetPath.empty())
 	{
-		printf("LevelReader: Error in level data: tileset-path not set / empty \n");
+		g_logger->logError("MapReader", "Error in map data : tileset-path not set / empty");
 		return false;
 	}
 	if (data.layers.empty())
 	{
-		printf("LevelReader: Error in level data: no layers set \n");
+		g_logger->logError("MapReader", "Error in map data : no layers set");
 		return false;
 	}
 	for (int i = 0; i < data.layers.size(); i++)
 	{
 		if (data.layers[i].empty())
 		{
-			printf("LevelReader: Error in level data: layer %d empty \n", i);
+			g_logger->logError("MapReader", "Error in map data : layer " + i + std::string(" empty"));
 			return false;
 		}
 		if (data.layers[i].size() != data.mapSize.x * data.mapSize.y)
 		{
-			printf("LevelReader: Error in level data: layer %d has not correct size (map size) \n", i);
+			g_logger->logError("MapReader", "Error in map data : layer " + i + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}
 	if (data.collidableTiles.empty())
 	{
-		printf("LevelReader: Error in level data: collidable layer is empty \n");
+		g_logger->logError("MapReader", "Error in map data : collidable layer is empty");
 		return false;
 	}
 	if (data.collidableTiles.size() != data.mapSize.x * data.mapSize.y)
 	{
-		printf("LevelReader: Error in level data: collidable layer has not correct size (map size) \n");
+		g_logger->logError("MapReader", "Error in map data : collidable layer has not correct size (map size)");
 		return false;
 	}
 
@@ -233,7 +233,7 @@ bool MapReader::readMap(char* fileName, MapData& data)
 
 	if (mapFile == NULL)
 	{
-		printf("MapReader: Error at opening file %s \n", fileName);
+		g_logger->logError("MapReader", "Error at opening file " + std::string(fileName));
 		return false;
 	}
 
@@ -259,50 +259,50 @@ bool MapReader::readMap(char* fileName, MapData& data)
 	// read defined tags
 	while (pos < end)
 	{
-		if (*pos == __COMMENT_MARKER)
+		if (*pos == COMMENT_MARKER)
 		{
 			pos = gotoNextChar(pos, end, '\n');
 		}
 
-		else if (strncmp(pos, __MAP_NAME, strlen(__MAP_NAME)) == 0) {
-			printf("MapReader: Found tag %s \n", __MAP_NAME);
+		else if (strncmp(pos, MAP_NAME, strlen(MAP_NAME)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_NAME));
 			readMapName(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __MAP_SIZE, strlen(__MAP_SIZE)) == 0) {
-			printf("MapReader: Found tag %s \n", __MAP_SIZE);
+		else if (strncmp(pos, MAP_SIZE, strlen(MAP_SIZE)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_SIZE));
 			readMapSize(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __MAP_TILESIZE, strlen(__MAP_TILESIZE)) == 0) {
-			printf("MapReader: Found tag %s \n", __MAP_TILESIZE);
+		else if (strncmp(pos, MAP_TILESIZE, strlen(MAP_TILESIZE)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_TILESIZE));
 			readTileSize(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __TILESET_PATH, strlen(__TILESET_PATH)) == 0) {
-			printf("MapReader: Found tag %s \n", __TILESET_PATH);
+		else if (strncmp(pos, TILESET_PATH, strlen(TILESET_PATH)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(TILESET_PATH));
 			readTilesetPath(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __LAYER_COLLIDABLE, strlen(__LAYER_COLLIDABLE)) == 0) {
-			printf("MapReader: Found tag %s \n", __LAYER_COLLIDABLE);
+		else if (strncmp(pos, LAYER_COLLIDABLE, strlen(LAYER_COLLIDABLE)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_COLLIDABLE));;
 			readLayerCollidable(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __LAYER_TILES, strlen(__LAYER_TILES)) == 0) {
-			printf("MapReader: Found tag %s \n", __LAYER_TILES);
+		else if (strncmp(pos, LAYER_TILES, strlen(LAYER_TILES)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_TILES));
 			readLayerTiles(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, __CENDRIC_STARTPOS, strlen(__CENDRIC_STARTPOS)) == 0) {
-			printf("MapReader: Found tag %s \n", __CENDRIC_STARTPOS);
+		else if (strncmp(pos, CENDRIC_STARTPOS, strlen(CENDRIC_STARTPOS)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(CENDRIC_STARTPOS));
 			readStartPos(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {
-			printf("MapReader: Error, unknown tag found in file %s \n", fileName);
+			g_logger->logError("MapReader", "unknown tag found in file " + std::string(fileName));
 			return false;
 		}
 
