@@ -93,3 +93,13 @@ const sf::Vector2f& GameObject::getPosition()
 {
 	return m_position;
 }
+
+bool GameObject::isDisposed()
+{
+	return m_isDisposed;
+}
+
+void GameObject::setDisposed()
+{
+	m_isDisposed = true;
+}

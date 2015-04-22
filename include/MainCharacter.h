@@ -43,7 +43,6 @@ private:
 	bool m_isFacingRight;
 	bool m_nextIsFacingRight;
 	bool m_isGrounded;
-	sf::Vector2f m_nextPosition;
 	Level* m_level;
 	Spell* m_firedSpell;
 	Weapon* m_weapon;

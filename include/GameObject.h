@@ -50,8 +50,14 @@ public:
 	void loopCurrentAnimation(bool loop);
 	Animation* getAnimation(GameObjectState state);
 
+	// returns whether the game object should be deleted
+	bool isDisposed();
+	// if this is set, the game object gets deleted in the next game loop
+	void setDisposed();
+
 protected:
 	GameObjectState m_state;
+	sf::Vector2f m_nextPosition;
 	
 private:
 	std::map<GameObjectState, Animation> m_animations;
@@ -60,4 +66,5 @@ private:
 	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
+	bool m_isDisposed = false;
 };

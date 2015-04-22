@@ -100,26 +100,16 @@ void Spell::checkCollisions(sf::Vector2f nextPosition)
 	// check for collision on x axis
 	if (isMovingX && m_level->collidesX(nextBoundingBoxX))
 	{
-		m_isDisposed = true;
+		setDisposed();
 	}
 	// check for collision on y axis
 	if (isMovingY && m_level->collidesY(nextBoundingBoxY))
 	{
-		m_isDisposed = true;
+		setDisposed();
 	}
 
 	// check collisions with dynamic tiles
 	m_level->collideWithDynamicTiles(this, nextBoundingBoxX, nextBoundingBoxY);
-}
-
-bool Spell::isDisposed()
-{
-	return m_isDisposed;
-}
-
-void Spell::setDisposed()
-{
-	m_isDisposed = true;
 }
 
 sf::Time Spell::getActiveTime(){

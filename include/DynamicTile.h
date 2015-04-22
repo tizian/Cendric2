@@ -27,10 +27,6 @@ public:
 	// gets called by the level when initializing the tile
 	void setTileSize(const sf::Vector2i tileSize);
 
-	// returns whether the dynamic tile object should be deleted
-	bool isDisposed();
-	void setDisposed();
-
 protected:
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
@@ -38,7 +34,5 @@ protected:
 	bool m_isCollidable;
 	
 private:	
-	bool m_isDisposed = false;
-	
 	
 };

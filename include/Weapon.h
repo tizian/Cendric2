@@ -17,7 +17,6 @@ public:
 	virtual sf::Vector2f getConfiguredPositionOffset();
 
 protected:
-	GameObjectState m_state;
 	bool m_isFacingRight;
 
 private:

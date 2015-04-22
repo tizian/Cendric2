@@ -29,6 +29,5 @@ private:
 	// update animation based on the current velocity
 	void updateAnimation();
 	GameObjectState m_state;
-	sf::Vector2f m_nextPosition;
 	Map* m_map;
 };
