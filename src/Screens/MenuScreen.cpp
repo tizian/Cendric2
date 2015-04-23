@@ -22,11 +22,11 @@ void MenuScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_screenSprite);
 }
 
-void MenuScreen::onEnter(Screen *previousScreen)
+void MenuScreen::execOnEnter(Screen *previousScreen)
 {
 }
 
-void MenuScreen::onExit(Screen *nextScreen)
+void MenuScreen::execOnExit(Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
 }

@@ -31,10 +31,9 @@ public:
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect nextBoundingBoxX, const sf::FloatRect nextBoundingBoxY);
 	// returns the next y position where the bounding box is grounding.
 	float getGround(const sf::FloatRect& boundingBox);
-	void updateDynamicTiles(sf::Time frameTime);
 
 	// loads a .dric file
-	bool load(ResourceID id);
+	bool load(ResourceID id, Screen* screen);
 
 	// deletes the resources
 	void dispose();
@@ -47,10 +46,10 @@ private:
 	sf::FloatRect m_levelRect;
 	std::vector<std::vector<bool>> m_collidableTiles;
 	std::vector<BackgroundLayer> m_backgroundLayers;
-	std::vector<DynamicTile*> m_dynamicTiles;
+	std::vector<GameObject*>* m_dynamicTiles;
 	std::string m_name;
 	sf::Vector2f m_startPos;
 	ResourceID m_resourceID;
 
-	void loadDynamicTiles(LevelData& data);
+	void loadDynamicTiles(LevelData& data, Screen* screen);
 };

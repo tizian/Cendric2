@@ -49,5 +49,5 @@ void Weapon::loadWeapon(MainCharacter* mainChar)
 
 GameObjectType Weapon::getConfiguredType() const
 {
-	return GameObjectType::Weapon;
+	return GameObjectType::_Weapon;
 }

@@ -22,11 +22,11 @@ void SplashScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_screenSprite);
 }
 
-void SplashScreen::onEnter(Screen *previousScreen)
+void SplashScreen::execOnEnter(Screen *previousScreen)
 {
 }
 
-void SplashScreen::onExit(Screen *nextScreen)
+void SplashScreen::execOnExit(Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash);
 }

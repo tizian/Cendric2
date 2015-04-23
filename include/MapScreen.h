@@ -15,8 +15,8 @@ public:
 	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
 
-	void onEnter(Screen *previousScreen) override;
-	void onExit(Screen *nextScreen) override;
+	void execOnEnter(Screen *previousScreen) override;
+	void execOnExit(Screen *nextScreen) override;
 
 private:
 	Map m_currentMap;

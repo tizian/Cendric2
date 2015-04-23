@@ -16,17 +16,34 @@ enum class ScreenID
 class Screen
 {
 public:
-	Screen();
-	virtual ~Screen();
+	virtual Screen* update(sf::Time frameTime) = 0;
+	virtual void render(sf::RenderTarget& renderTarget) = 0;
 
-	virtual Screen* update(sf::Time frameTime);
-	virtual void render(sf::RenderTarget &renderTarget);
+	// initializes the m_object vector. called by ALL subclasses
+	void onEnter(Screen* previousScreen);
+	virtual void execOnEnter(Screen* previousScreen);
+	// deletes all objects. called by ALL subclasses
+	void onExit(Screen* nextScreen);
+	virtual void execOnExit(Screen* nextScreen);
 
-	virtual void onEnter(Screen *previousScreen) = 0;
-	virtual void onExit(Screen *nextScreen) = 0;
+	// adds an object of type 'type' to the screen.
+	void addObject(GameObjectType type, GameObject* object);
 
-	void addObject(GameObject *object);
+	// gets the vector with the objects of type 'type'
+	std::vector<GameObject*>* getObjects(GameObjectType type);
 	
 protected:
-	std::vector<GameObject *> m_objects;
+	// deletes all objects marked as 'disposed'
+	void deleteDisposedObjects();
+	// deletes all objects
+	void deleteAllObjects();
+	// deletes all objects of type 'type'
+	void deleteObjects(GameObjectType type);
+	// updates all objects of type 'type'
+	void updateObjects(GameObjectType type, sf::Time frameTime);
+	// render all objects of type 'type'
+	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
+
+private:
+	std::vector<std::vector<GameObject*>> m_objects;
 };

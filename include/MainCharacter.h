@@ -6,7 +6,6 @@
 #include "InputController.h"
 #include "SpellManager.h"
 #include "Screen.h"
-#include "IceStaff.h"
 
 // Cendric in a level
 class MainCharacter : public MovableGameObject
@@ -26,7 +25,6 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 	Level* getLevel();
-	Spell* getFiredSpell();
 	bool getIsFacingRight();
 	GameObjectState getState();
 
@@ -45,8 +43,6 @@ private:
 	bool m_nextIsFacingRight;
 	bool m_isGrounded;
 	Level* m_level;
-	Spell* m_firedSpell;
-	Weapon* m_weapon;
 
 	SpellManager* m_spellManager;
 	// as long as this time is not null, cendric will have the fighting animation. 

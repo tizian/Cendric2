@@ -35,11 +35,16 @@ void ErrorScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_errorText);
 }
 
-void ErrorScreen::onEnter(Screen *previousScreen)
+Screen* ErrorScreen::update(sf::Time frameTime)
+{
+	return this;
+}
+
+void ErrorScreen::execOnEnter(Screen *previousScreen)
 {
 }
 
-void ErrorScreen::onExit(Screen *nextScreen)
+void ErrorScreen::execOnExit(Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(m_screenResource);
 	g_resourceManager->deleteResource(ResourceID::Font_copperplateGothicBold);

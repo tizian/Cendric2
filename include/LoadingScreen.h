@@ -14,8 +14,8 @@ public:
 	Screen* update(sf::Time frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
 
-	virtual void onEnter(Screen *previousScreen) override;
-	virtual void onExit(Screen *nextScreen) override;
+	virtual void execOnEnter(Screen *previousScreen) override;
+	virtual void execOnExit(Screen *nextScreen) override;
 
 private:
 	sf::Sprite m_screenSprite;

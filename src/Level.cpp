@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "Screen.h"
 
 using namespace std;
 
@@ -18,15 +19,10 @@ void Level::dispose()
 	{
 		m_backgroundLayers[i].dispose();
 	}
-	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); it++)
-	{
-		delete (*it);
-	}
-	m_dynamicTiles.clear();
 	g_resourceManager->deleteLevelResources();
 }
 
-bool Level::load(ResourceID id) 
+bool Level::load(ResourceID id, Screen* screen) 
 {
 	LevelReader reader;
 	LevelData data;
@@ -42,7 +38,7 @@ bool Level::load(ResourceID id)
 	m_collidableTiles = data.collidableTileRects;
 	m_levelRect = data.levelRect;
 	m_backgroundLayers = data.backgroundLayers;
-	loadDynamicTiles(data);
+	loadDynamicTiles(data, screen);
 	return true;
 }
 
@@ -80,7 +76,7 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Ve
 	m_tileMap.draw(target, states);
 
 	// dynamic tiles
-	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); it++)
+	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); it++)
 	{
 		(*it)->render(target);
 	}
@@ -143,9 +139,10 @@ bool Level::collidesX(const sf::FloatRect& boundingBox)
 	}
 
 	// check collidable dynamic tiles
-	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
+	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
 	{
-		if ((*it)->getIsCollidable() && (*it)->getBoundingBox()->intersects(boundingBox))
+		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
+		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
 		{
 			return true;
 		}
@@ -194,9 +191,10 @@ bool Level::collidesY(const sf::FloatRect& boundingBox)
 	}
 
 	// check collidable dynamic tiles
-	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
+	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
 	{
-		if ((*it)->getIsCollidable() && (*it)->getBoundingBox()->intersects(boundingBox))
+		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
+		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
 		{
 			return true;
 		}
@@ -220,7 +218,7 @@ float Level::getGround(const sf::FloatRect& boundingBox)
 	return (y * tileHeight) - boundingBox.height;
 }
 
-void Level::loadDynamicTiles(LevelData& data)
+void Level::loadDynamicTiles(LevelData& data, Screen* screen)
 {
 	for (std::vector<std::pair<DynamicTileID, sf::Vector2f>>::iterator it = data.dynamicTileRects.begin(); it != data.dynamicTileRects.end(); ++it)
 	{
@@ -245,37 +243,19 @@ void Level::loadDynamicTiles(LevelData& data)
 		tile->setTileSize(data.tileSize);
 		tile->load();
 		tile->setPosition(it->second);
-		m_dynamicTiles.push_back(tile);
+		screen->addObject(GameObjectType::_DynamicTile, tile);
 	}
-}
-
-void Level::updateDynamicTiles(sf::Time frameTime)
-{
-	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
-	{
-		(*it)->update(frameTime);
-	}
-	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); /* DON'T increment here*/)
-	{
-		if ((*it)->isDisposed())
-		{
-			delete (*it);
-			it = m_dynamicTiles.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
+	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 }
 
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect nextBoundingBoxX, const sf::FloatRect nextBoundingBoxY)
 {
-	for (std::vector<DynamicTile*>::iterator it = m_dynamicTiles.begin(); it != m_dynamicTiles.end(); ++it)
+	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
 	{
-		if ((*it)->getBoundingBox()->intersects(nextBoundingBoxX) || (*it)->getBoundingBox()->intersects(nextBoundingBoxY))
+		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
+		if (tile != nullptr && tile->getBoundingBox()->intersects(nextBoundingBoxX) || tile->getBoundingBox()->intersects(nextBoundingBoxY))
 		{
-			(*it)->onHit(spell);
+			tile->onHit(spell);
 		}
 	}
 }

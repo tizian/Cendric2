@@ -6,17 +6,12 @@ MainCharacter::MainCharacter(Level* level)
 	load();
 	setPosition(m_level->getStartPos());
 	m_spellManager = new SpellManager();
-	m_weapon = new IceStaff();
-	m_weapon->load();
-	m_weapon->loadWeapon(this);
-	m_firedSpell = nullptr;
 }
+
 MainCharacter::~MainCharacter() 
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
 	delete m_spellManager;
-	delete m_firedSpell;
-	delete m_weapon;
 }
 
 void MainCharacter::update(sf::Time& frameTime)
@@ -28,13 +23,11 @@ void MainCharacter::update(sf::Time& frameTime)
 	MovableGameObject::update(frameTime);
 	m_fightAnimationTime = (m_fightAnimationTime - frameTime) >= sf::Time::Zero ? m_fightAnimationTime - frameTime : sf::Time::Zero;
 	updateAnimation();
-	m_weapon->update(frameTime);
 }
 
 void MainCharacter::render(sf::RenderTarget& renderTarget) const
 {
 	MovableGameObject::render(renderTarget);
-	m_weapon->render(renderTarget);
 }
 
 void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
@@ -131,16 +124,9 @@ void MainCharacter::handleInput()
 			if (spell->getConfiguredTriggerFightAnimation()) {
 				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
 			}
-			m_firedSpell = spell;
+			m_screen->addObject(GameObjectType::_Spell, spell);
 		}
 	}
-}
-
-Spell* MainCharacter::getFiredSpell()
-{
-	Spell* firedSpell = m_firedSpell;
-	m_firedSpell = nullptr;
-	return firedSpell;
 }
 
 void MainCharacter::load()
@@ -228,5 +214,5 @@ GameObjectState MainCharacter::getState()
 
 GameObjectType MainCharacter::getConfiguredType() const
 {
-	return GameObjectType::MainCharacter;
+	return GameObjectType::_MainCharacter;
 }

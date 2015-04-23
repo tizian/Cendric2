@@ -28,11 +28,11 @@ void LoadingScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_screenSprite);
 }
 
-void LoadingScreen::onEnter(Screen *previousScreen)
+void LoadingScreen::execOnEnter(Screen *previousScreen)
 {
 }
 
-void LoadingScreen::onExit(Screen *nextScreen)
+void LoadingScreen::execOnExit(Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_loading);
 }

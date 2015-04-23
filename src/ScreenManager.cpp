@@ -7,6 +7,7 @@ ScreenManager::ScreenManager()
 ScreenManager::ScreenManager(Screen *initialScreen) : m_isErrorScreen(false)
 {
 	m_currentScreen = initialScreen;
+	m_currentScreen->onEnter(nullptr);
 }
 
 ScreenManager::~ScreenManager()

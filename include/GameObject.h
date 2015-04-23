@@ -5,6 +5,8 @@
 #include "global.h"
 #include "AnimatedSprite.h"
 
+class Screen;
+
 // this enum is used for animations and used by all game objects
 enum class GameObjectState
 {
@@ -27,16 +29,18 @@ enum class GameObjectState
 
 // the type of a game object.
 // used by the screen for rendering and update order.
-// Undefined has to be the last enum object as we have to iterate over this enum
-enum class GameObjectType
+// MAX should not be used as enum types as it is only used for the enum iterator
+// undefined should always be the first (=0). It can be used though.
+enum GameObjectType
 {
-	MainCharacter,
-	Weapon,
-	Button,
-	Spell,
-	DynamicTile,
-	Enemy,
-	Undefined
+	_Undefined,
+	_MainCharacter,
+	_Weapon,
+	_Button,
+	_Spell,
+	_DynamicTile,
+	_Enemy,
+	_MAX
 };
 
 // A game object with animations, position, bounding box, game state.
@@ -61,6 +65,7 @@ public:
 	void setCurrentAnimation(Animation* animation, bool isFlipped);
 	void addAnimation(GameObjectState state, Animation& animation);
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
+	void setScreen(Screen* screen);
 	void setFrameTime(sf::Time time);
 	void playCurrentAnimation(bool play);
 	void loopCurrentAnimation(bool loop);
@@ -74,6 +79,7 @@ public:
 protected:
 	GameObjectState m_state;
 	sf::Vector2f m_nextPosition;
+	Screen* m_screen = nullptr;
 	
 private:
 	std::map<GameObjectState, Animation> m_animations;

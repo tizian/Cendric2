@@ -2,31 +2,95 @@
 
 using namespace std;
 
-Screen::Screen()
+void Screen::addObject(GameObjectType type, GameObject* object)
 {
-	m_objects = vector<GameObject *>();
+	m_objects[type].push_back(object);
 }
 
-Screen::~Screen() {}
-
-Screen* Screen::update(sf::Time frameTime)
+vector<GameObject*>* Screen::getObjects(GameObjectType type)
 {
-	for (GameObject *obj : m_objects)
+	return &m_objects[type];
+}
+
+void Screen::onEnter(Screen* previousScreen)
+{
+	m_objects = vector<vector<GameObject*>>();
+	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t+1))
 	{
-		obj->update(frameTime);
+		vector<GameObject*> newVector;
+		m_objects.push_back(newVector);
 	}
-	return this;
+	execOnEnter(previousScreen);
 }
 
-void Screen::render(sf::RenderTarget &renderTarget)
+void Screen::execOnEnter(Screen* previousScreen)
 {
-	for (GameObject *obj : m_objects)
+	// nop
+}
+
+void Screen::onExit(Screen* nextScreen)
+{
+	deleteAllObjects();
+	execOnExit(nextScreen);
+}
+
+void Screen::execOnExit(Screen* nextScreen)
+{
+	// nop
+}
+
+void Screen::deleteDisposedObjects()
+{
+	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1))
 	{
-		obj->render(renderTarget);
+		for (std::vector<GameObject*>::iterator it = m_objects[t].begin(); it != m_objects[t].end(); /*don't increment here*/)
+		{
+			if ((*it)->isDisposed())
+			{
+				delete (*it);
+				it = m_objects[t].erase(it);
+			}
+			else
+			{
+				it++;
+			}
+		}
 	}
 }
 
-void Screen::addObject(GameObject *object)
+void Screen::deleteAllObjects()
 {
-	m_objects.push_back(object);
+	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1))
+	{
+		for (std::vector<GameObject*>::iterator it = m_objects[t].begin(); it != m_objects[t].end(); /*don't increment here*/)
+		{
+			delete (*it);
+			it = m_objects[t].erase(it);
+		}
+	}
+}
+
+void Screen::deleteObjects(GameObjectType type)
+{
+	for (std::vector<GameObject*>::iterator it = m_objects[type].begin(); it != m_objects[type].end(); /*don't increment here*/)
+	{
+		delete (*it);
+		it = m_objects[type].erase(it);
+	}
+}
+
+void Screen::updateObjects(GameObjectType type, sf::Time frameTime)
+{
+	for (std::vector<GameObject*>::iterator it = m_objects[type].begin(); it != m_objects[type].end(); ++it)
+	{
+		(*it)->update(frameTime);
+	}
+}
+
+void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget)
+{
+	for (std::vector<GameObject*>::iterator it = m_objects[type].begin(); it != m_objects[type].end(); ++it)
+	{
+		(*it)->render(renderTarget);
+	}
 }

@@ -103,3 +103,8 @@ void GameObject::setDisposed()
 {
 	m_isDisposed = true;
 }
+
+void GameObject::setScreen(Screen* screen)
+{
+	m_screen = screen;
+}

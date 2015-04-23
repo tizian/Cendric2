@@ -119,6 +119,6 @@ sf::Time Spell::getActiveTime()
 
 GameObjectType Spell::getConfiguredType() const
 {
-	return GameObjectType::Spell;
+	return GameObjectType::_Spell;
 }
 

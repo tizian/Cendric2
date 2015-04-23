@@ -4,76 +4,48 @@ using namespace std;
 
 GameScreen::GameScreen(ResourceID levelID)
 {
-	if (!(m_currentLevel.load(levelID)))
+	m_levelID = levelID;
+}
+
+void GameScreen::execOnEnter(Screen *previousScreen)
+{
+	if (!(m_currentLevel.load(m_levelID, this)))
 	{
-		string filename(g_resourceManager->getFilename(levelID));
+		string filename(g_resourceManager->getFilename(m_levelID));
 		string errormsg = filename + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 	}
+
 	m_mainChar = new MainCharacter(&m_currentLevel);
-	addObject(m_mainChar);
+	m_mainChar->setScreen(this);
+	addObject(GameObjectType::_MainCharacter, m_mainChar);
+	IceStaff* staff = new IceStaff();
+	staff->load();
+	staff->loadWeapon(m_mainChar);
+	addObject(GameObjectType::_Weapon, staff);
 }
 
-void GameScreen::onEnter(Screen *previousScreen)
-{
-}
-
-void GameScreen::onExit(Screen *nextScreen)
+void GameScreen::execOnExit(Screen *nextScreen)
 {
 	m_currentLevel.dispose();
-	for (std::vector<Spell*>::iterator it = m_spells.begin(); it != m_spells.end(); it++)
-	{
-		delete (*it);
-	}
-	m_spells.clear();
-	delete m_mainChar;
-}
-
-void GameScreen::addSpell(Spell* spell)
-{
-	m_spells.push_back(spell);
 }
 
 Screen* GameScreen::update(sf::Time frameTime)
 {
-	// delete disposed spells
-	for (std::vector<Spell*>::iterator it = m_spells.begin(); it != m_spells.end(); /* DON'T increment here*/)
-	{
-		if ((*it)->isDisposed())
-		{
-			delete (*it);
-			it = m_spells.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
-
-	// main char has to be updated first, so that the spells have the correct position
-	Screen* nextScreen = Screen::update(frameTime);
-	// add spell from mainchar
-	Spell* firedSpell = m_mainChar->getFiredSpell();
-	if (firedSpell != nullptr)
-	{
-		addSpell(firedSpell);
-	}
-	for (Spell *spell : m_spells)
-	{
-		spell->update(frameTime);
-	}
-
-	m_currentLevel.updateDynamicTiles(frameTime);
-	return nextScreen;
+	updateObjects(GameObjectType::_MainCharacter, frameTime);
+	updateObjects(GameObjectType::_Weapon, frameTime);
+	updateObjects(GameObjectType::_Spell, frameTime);
+	updateObjects(GameObjectType::_DynamicTile, frameTime);
+	deleteDisposedObjects();
+	return this;
 }
 
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
 	// parallax, maybe forground + background layers?
+	// don't render dynamic tiles, they are rendered in the level.
 	m_currentLevel.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
-	Screen::render(renderTarget);
-	for (Spell *spell : m_spells)
-	{
-		spell->render(renderTarget);
-	}
+	renderObjects(GameObjectType::_MainCharacter, renderTarget);
+	renderObjects(GameObjectType::_Weapon, renderTarget);
+	renderObjects(GameObjectType::_Spell, renderTarget);
 }

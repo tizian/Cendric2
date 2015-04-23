@@ -11,9 +11,10 @@ public:
 	ErrorScreen();
 
 	void render(sf::RenderTarget &renderTarget) override;
+	Screen* update(sf::Time frameTime) override;
 
-	void onEnter(Screen *previousScreen) override;
-	void onExit(Screen *nextScreen) override;
+	void execOnEnter(Screen* previousScreen) override;
+	void execOnExit(Screen* nextScreen) override;
 
 private:
 	sf::Sprite m_screenSprite;
