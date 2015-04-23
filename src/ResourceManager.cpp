@@ -172,4 +172,22 @@ void ResourceManager::deleteLevelResources()
 	// delete item in level resources?
 }
 
+void ResourceManager::loadLevelResources()
+{
+	// load spell resources
+	getTexture(ResourceID::Texture_spell_chop);
+	getTexture(ResourceID::Texture_spell_fire);
+	getTexture(ResourceID::Texture_spell_ice);
+	getTexture(ResourceID::Texture_spell_forcefield);
+
+	// load dynamic tile resources
+	getTexture(ResourceID::Texture_tile_water);
+	getTexture(ResourceID::Texture_tile_ice);
+	getTexture(ResourceID::Texture_tile_crumblyblock);
+
+	// load enemy resources
+
+	// load item in level resources?
+}
+
 

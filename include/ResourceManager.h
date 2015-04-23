@@ -53,6 +53,9 @@ public:
 	void deleteResource(ResourceID id);
 	// deletes all spell + dynamic tile + enemy resources
 	void deleteLevelResources();
+	// loads all spell + dynamic tile + enemy resources
+	// called before loading a level so that the game won't lag when using a new spell.
+	void loadLevelResources();
 	void deleteResource(std::string filename);
 	std::pair<ErrorID, std::string>* pollError();
 	void setError(ErrorID id, std::string& description);

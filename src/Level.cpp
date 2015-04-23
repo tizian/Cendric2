@@ -24,6 +24,7 @@ void Level::dispose()
 
 bool Level::load(ResourceID id, Screen* screen) 
 {
+	g_resourceManager->loadLevelResources();
 	LevelReader reader;
 	LevelData data;
 	if (!reader.readLevel(g_resourceManager->getFilename(id), data))
