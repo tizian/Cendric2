@@ -1,5 +1,10 @@
 #include "ForcefieldSpell.h"
 
+ForcefieldSpell::ForcefieldSpell()
+{
+	load();
+}
+
 void ForcefieldSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(-12.f, -12.f));

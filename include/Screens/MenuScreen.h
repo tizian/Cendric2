@@ -5,6 +5,7 @@
 #include "Screen.h"
 #include "LoadingScreen.h"
 #include "SplashScreen.h"
+#include "FireBasket.h"
 
 class MenuScreen : public Screen
 {

@@ -43,12 +43,13 @@ enum GameObjectType
 	_MAX
 };
 
-// A game object with animations, position, bounding box, game state.
+// A game object with animations, position, bounding box, game state. 
+// subclasses should always call 'load'.
 class GameObject 
 {
 public:
 	// \brief loads animations using the resource manager
-	// also defines bounding box and sprite offset
+	// also defines bounding box and sprite offset.
 	virtual void load() = 0;
 	virtual void update(sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget) const;

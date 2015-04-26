@@ -6,6 +6,7 @@
 class FireSpell : public Spell
 {
 public:
+	FireSpell();
 	void load() override;
 
 	const float getConfiguredMaxVelocityY() override;

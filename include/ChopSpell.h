@@ -6,6 +6,7 @@
 class ChopSpell : public Spell
 {
 public:
+	ChopSpell();
 	void load() override;
 
 	const float getConfiguredMaxVelocityY() override;

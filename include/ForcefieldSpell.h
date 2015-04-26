@@ -6,6 +6,7 @@
 class ForcefieldSpell : public Spell
 {
 public:
+	ForcefieldSpell();
 	void load() override;
 
 	const float getConfiguredMaxVelocityY() override;

@@ -18,7 +18,6 @@ enum class DynamicTileID
 class DynamicTile : public GameObject
 {
 public:
-
 	virtual void update(sf::Time& frameTime) override;
 
 	virtual bool getIsCollidable();

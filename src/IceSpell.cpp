@@ -1,5 +1,10 @@
 #include "IceSpell.h"
 
+IceSpell::IceSpell()
+{
+	load();
+}
+
 void IceSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));

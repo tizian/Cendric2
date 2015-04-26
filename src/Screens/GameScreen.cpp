@@ -20,7 +20,6 @@ void GameScreen::execOnEnter(Screen *previousScreen)
 	m_mainChar->setScreen(this);
 	addObject(GameObjectType::_MainCharacter, m_mainChar);
 	IceStaff* staff = new IceStaff();
-	staff->load();
 	staff->loadWeapon(m_mainChar);
 	addObject(GameObjectType::_Weapon, staff);
 }

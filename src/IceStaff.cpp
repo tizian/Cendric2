@@ -1,5 +1,10 @@
 #include "IceStaff.h"
 
+IceStaff::IceStaff()
+{
+	load();
+}
+
 IceStaff::~IceStaff()
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_weapon_icestaff);

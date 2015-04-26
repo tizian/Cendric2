@@ -53,7 +53,6 @@ void Spell::init(SpellBean& bean)
 	m_damage = bean.damage;
 	m_reflectCount = bean.reflectCount;
 	m_speed = bean.startVelocity;
-	load();
 }
 
 void Spell::update(sf::Time& frameTime)

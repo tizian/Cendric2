@@ -6,6 +6,7 @@
 class IceSpell : public Spell
 {
 public:
+	IceSpell();
 	void load() override;
 
 	const float getConfiguredMaxVelocityY() override;

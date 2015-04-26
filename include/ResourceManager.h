@@ -22,6 +22,7 @@ enum class ResourceID
 	Texture_tile_crumblyblock,
 	Texture_weapon_icestaff,
 	Texture_screen_splash,
+	Texture_screen_splash_fireanimation,
 	Texture_screen_loading,
 	Texture_screen_error_fileNotFound,
 	Texture_screen_error_dataCorrupted,

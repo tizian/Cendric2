@@ -6,6 +6,7 @@
 class IceStaff : public Weapon
 {
 public:
+	IceStaff();
 	~IceStaff();
 
 	void load() override;

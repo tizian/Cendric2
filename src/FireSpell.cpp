@@ -1,5 +1,10 @@
 #include "FireSpell.h"
 
+FireSpell::FireSpell()
+{
+	load();
+}
+
 void FireSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
