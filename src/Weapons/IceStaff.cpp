@@ -1,4 +1,4 @@
-#include "IceStaff.h"
+#include "Weapons\IceStaff.h"
 
 IceStaff::IceStaff()
 {

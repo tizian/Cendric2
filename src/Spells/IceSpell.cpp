@@ -1,17 +1,17 @@
-#include "FireSpell.h"
+#include "Spells\IceSpell.h"
 
-FireSpell::FireSpell()
+IceSpell::IceSpell()
 {
 	load();
 }
 
-void FireSpell::load()
+void IceSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0, 0, 30, 30));
 
 	Animation spellAnimation;
-	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fire));
+	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_ice));
 	spellAnimation.addFrame(sf::IntRect(0, 0, 30, 30));
 	spellAnimation.addFrame(sf::IntRect(30, 0, 30, 30));
 
@@ -24,22 +24,23 @@ void FireSpell::load()
 	playCurrentAnimation(true);
 }
 
-const float FireSpell::getConfiguredMaxVelocityY()
+const float IceSpell::getConfiguredMaxVelocityY()
 {
 	return 1000.0f;
 }
 
-const float FireSpell::getConfiguredMaxVelocityX()
+const float IceSpell::getConfiguredMaxVelocityX()
 {
 	return 1000.0f;
 }
 
-bool FireSpell::getConfiguredTriggerFightAnimation()
+bool IceSpell::getConfiguredTriggerFightAnimation()
 {
 	return true;
 }
 
-SpellID FireSpell::getConfiguredType()
+SpellID IceSpell::getConfiguredType()
 {
-	return SpellID::Fire;
+	return SpellID::Ice;
 }
+

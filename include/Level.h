@@ -9,9 +9,9 @@
 #include "LevelReader.h"
 #include "ResourceManager.h"
 #include "DynamicTile.h"
-#include "WaterTile.h"
-#include "IceTile.h"
-#include "CrumblyBlockTile.h"
+#include "DynamicTiles\WaterTile.h"
+#include "DynamicTiles\IceTile.h"
+#include "DynamicTiles\CrumblyBlockTile.h"
 #include "Logger.h"
 
 class Level 

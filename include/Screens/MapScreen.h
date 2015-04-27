@@ -5,7 +5,7 @@
 #include "MapMainCharacter.h"
 #include "Screen.h"
 #include "ResourceManager.h"
-#include "LoadingScreen.h"
+#include "Screens\LoadingScreen.h"
 
 class MapScreen : public Screen
 {

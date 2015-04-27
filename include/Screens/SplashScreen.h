@@ -4,7 +4,7 @@
 #include "ResourceManager.h"
 #include "Screen.h"
 #include "MenuScreen.h"
-#include "FireBasket.h"
+#include "Misc\FireBasket.h"
 
 class SplashScreen : public Screen
 {

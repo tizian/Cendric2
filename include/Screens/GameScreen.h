@@ -5,7 +5,7 @@
 #include "MainCharacter.h"
 #include "Screen.h"
 #include "ResourceManager.h"
-#include "IceStaff.h"
+#include "Weapons\IceStaff.h"
 
 class GameScreen : public Screen
 {

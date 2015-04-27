@@ -3,8 +3,8 @@
 #include "global.h"
 #include "ResourceManager.h"
 #include "Screen.h"
-#include "MapScreen.h"
-#include "Screens/GameScreen.h"
+#include "Screens\MapScreen.h"
+#include "Screens\GameScreen.h"
 
 class LoadingScreen : public Screen
 {

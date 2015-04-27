@@ -1,4 +1,4 @@
-#include "ChopSpell.h"
+#include "Spells/ChopSpell.h"
 
 ChopSpell::ChopSpell()
 {

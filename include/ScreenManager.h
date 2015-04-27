@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "ErrorScreen.h"
+#include "Screens\ErrorScreen.h"
 
 class ScreenManager
 {

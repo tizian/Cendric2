@@ -3,9 +3,9 @@
 #include "global.h"
 #include "ResourceManager.h"
 #include "Screen.h"
-#include "LoadingScreen.h"
-#include "SplashScreen.h"
-#include "FireBasket.h"
+#include "Screens\LoadingScreen.h"
+#include "Screens\SplashScreen.h"
+#include "Misc\FireBasket.h"
 
 class MenuScreen : public Screen
 {

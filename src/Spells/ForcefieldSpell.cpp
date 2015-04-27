@@ -1,4 +1,4 @@
-#include "ForcefieldSpell.h"
+#include "Spells/ForcefieldSpell.h"
 
 ForcefieldSpell::ForcefieldSpell()
 {
