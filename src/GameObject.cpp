@@ -22,6 +22,14 @@ void GameObject::render(sf::RenderTarget &renderTarget) const
 
 void GameObject::update(sf::Time& frameTime)
 {
+	if (g_inputController->isMouseOver(&m_boundingBox))
+	{
+		onMouseOver();
+	}
+	if (g_inputController->isRightClicked(&m_boundingBox))
+	{
+		onRightClick();
+	}
 	m_animatedSprite.update(frameTime);
 }
 
@@ -80,6 +88,16 @@ void GameObject::setBoundingBox(const sf::FloatRect& rect)
 sf::FloatRect* GameObject::getBoundingBox()
 {
 	return &m_boundingBox;
+}
+
+void GameObject::onMouseOver() 
+{
+	// nop
+}
+
+void GameObject::onRightClick()
+{
+	// nop
 }
 
 sf::Vector2f GameObject::getCenter()

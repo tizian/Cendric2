@@ -119,6 +119,16 @@ sf::Vector2f InputController::getMousePosition()
 	return pos + view;
 }
 
+bool InputController::isMouseOver(sf::FloatRect* boundingBox)
+{
+	return boundingBox->contains(getMousePosition());
+}
+
+bool InputController::isRightClicked(sf::FloatRect* boundingBox)
+{
+	return boundingBox->contains(getMousePosition()) && isMouseJustPressedRight();
+}
+
 bool InputController::isMouseJustPressedLeft()
 {
 	if (!m_isWindowFocused) 

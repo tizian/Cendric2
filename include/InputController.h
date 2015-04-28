@@ -26,7 +26,8 @@ public:
 	~InputController();
 
 	bool isKeyActive(const Key key);
-
+	bool isMouseOver(sf::FloatRect* boundingBox);
+	bool isRightClicked(sf::FloatRect* boundingBox);
 	bool isMouseJustPressedLeft();
 	bool isMouseJustPressedRight();
 
@@ -47,7 +48,7 @@ private:
 	sf::RenderWindow* m_mainWindow;
 
 	// TODO: this map has to be loaded from an .ini file later so it can be changed in the game options.
-	// Another problem: Mouse keys can't be set in this map yet.
+	// Mouse keys can't be set in this map. Their functions are fix.
 	std::map<Key, sf::Keyboard::Key> m_keyMap;
 
 	bool m_isMouseReleasedLeft;

@@ -4,6 +4,7 @@
 
 #include "global.h"
 #include "AnimatedSprite.h"
+#include "InputController.h"
 
 class Screen;
 
@@ -53,6 +54,13 @@ public:
 	virtual void load() = 0;
 	virtual void update(sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget) const;
+	// gets checked & called in the update loop. default implementation does nothing.
+	// checks for the bounding box 
+	virtual void onMouseOver();
+	// gets checked & called in the update loop. default implementation does nothing.
+	// checks for the bounding box 
+	// right click is used to interact with game objects, while left click is used to fire spells
+	virtual void onRightClick();
 	virtual GameObjectType getConfiguredType() const = 0;
 
 	void setBoundingBox(const sf::FloatRect& rect);

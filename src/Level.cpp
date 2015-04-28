@@ -45,8 +45,10 @@ bool Level::load(ResourceID id, Screen* screen)
 
 void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center)
 {
+
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
 
 	// parallax background layers
 	for (int i = 0; i < m_backgroundLayers.size(); i++)
