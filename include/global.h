@@ -13,6 +13,7 @@
 #define MAX_FRAME_RATE 80
 
 class Logger;
+class TextProvider;
 class ResourceManager;
 class InputController; 
 
@@ -20,5 +21,6 @@ class InputController;
 extern ResourceManager* g_resourceManager;
 extern InputController* g_inputController;
 extern Logger* g_logger;
+extern TextProvider* g_textProvider;
 
 
