@@ -53,6 +53,14 @@ void AnimatedSprite::setFlipped(bool flipped)
 	m_isFlipped = flipped;
 }
 
+void AnimatedSprite::reset()
+{
+	setColor(sf::Color::White);
+	setRotation(0.f);
+	setFlipped(false);
+	setScale(sf::Vector2f(1.f, 1.f));
+}
+
 void AnimatedSprite::setColor(const sf::Color& color)
 {
 	// Update the vertices' color

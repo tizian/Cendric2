@@ -94,3 +94,39 @@ void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget)
 		(*it)->render(renderTarget);
 	}
 }
+
+sf::Text* Screen::getTooltipText()
+{
+	return &m_tooltipText;
+}
+	
+void Screen::setTooltipText(sf::Text& text)
+{
+	m_tooltipText = text;
+}
+
+void Screen::renderTooltipText(sf::RenderTarget& target)
+{
+	setViewToTooltipView(target);
+	target.draw(m_tooltipText);
+	// reset to empty text so tooltip texts don't get stuck
+	m_tooltipText = sf::Text();
+}
+
+void Screen::setViewToStandardView(sf::RenderTarget& target)
+{
+	sf::View view;
+	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
+	view.setCenter(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
+	target.setView(view);
+}
+
+void Screen::setViewToTooltipView(sf::RenderTarget& target)
+{
+	sf::View view;
+	view.setSize(WINDOW_WIDTH, BOTTOM_BORDER);
+	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, static_cast<float>(BOTTOM_BORDER) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
+	view.setCenter(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT + BOTTOM_BORDER / 2.f);
+	target.setView(view);
+}

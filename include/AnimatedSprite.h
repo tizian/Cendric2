@@ -41,6 +41,8 @@ public:
 	void setLooped(bool looped);
 	void setFlipped(bool flipped);
 	void setColor(const sf::Color& color);
+	// resets color, rotation, scale and flipped property
+	void reset();
 	const Animation* getAnimation() const;
 	sf::FloatRect getLocalBounds() const;
 	sf::FloatRect getGlobalBounds() const;

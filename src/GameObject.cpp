@@ -15,7 +15,7 @@ Animation* GameObject::getAnimation(GameObjectState state)
 	return &m_animations[state];
 }
 
-void GameObject::render(sf::RenderTarget &renderTarget) const
+void GameObject::render(sf::RenderTarget &renderTarget)
 {
 	renderTarget.draw(m_animatedSprite);
 }

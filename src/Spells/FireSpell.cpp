@@ -39,7 +39,7 @@ bool FireSpell::getConfiguredTriggerFightAnimation()
 	return true;
 }
 
-SpellID FireSpell::getConfiguredType()
+SpellID FireSpell::getConfiguredSpellID()
 {
 	return SpellID::Fire;
 }

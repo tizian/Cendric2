@@ -24,7 +24,7 @@ void IceTile::load()
 
 void IceTile::onHit(Spell* spell)
 {
-	switch (spell->getConfiguredType())
+	switch (spell->getConfiguredSpellID())
 	{
 	case SpellID::Fire:
 		spell->setDisposed();

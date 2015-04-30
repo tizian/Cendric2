@@ -30,7 +30,7 @@ void WaterTile::load()
 
 void WaterTile::onHit(Spell* spell)
 {
-	switch (spell->getConfiguredType())
+	switch (spell->getConfiguredSpellID())
 	{
 	case SpellID::Ice:
 		if (m_state == GameObjectState::Idle)

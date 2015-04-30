@@ -41,6 +41,7 @@ Screen* GameScreen::update(sf::Time frameTime)
 
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
+	renderTooltipText(renderTarget);
 	// parallax, maybe forground + background layers?
 	// don't render dynamic tiles, they are rendered in the level.
 	m_currentLevel.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());

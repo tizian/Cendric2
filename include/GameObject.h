@@ -41,6 +41,7 @@ enum GameObjectType
 	_Spell,
 	_DynamicTile,
 	_Enemy,
+	_Item,
 	_MAX
 };
 
@@ -53,7 +54,7 @@ public:
 	// also defines bounding box and sprite offset.
 	virtual void load() = 0;
 	virtual void update(sf::Time& frameTime);
-	virtual void render(sf::RenderTarget& renderTarget) const;
+	virtual void render(sf::RenderTarget& renderTarget);
 	// gets checked & called in the update loop. default implementation does nothing.
 	// checks for the bounding box 
 	virtual void onMouseOver();
@@ -88,11 +89,12 @@ public:
 protected:
 	GameObjectState m_state;
 	sf::Vector2f m_nextPosition;
+	AnimatedSprite m_animatedSprite;
 	Screen* m_screen = nullptr;
 	
 private:
 	std::map<GameObjectState, Animation> m_animations;
-	AnimatedSprite m_animatedSprite;
+	
 	sf::Vector2f m_spriteOffset;
 	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner

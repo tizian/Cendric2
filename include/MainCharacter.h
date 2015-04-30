@@ -16,7 +16,6 @@ public:
 
 	void load() override;
 	void update(sf::Time& frameTime) override;
-	void render(sf::RenderTarget& renderTarget) const override;
 	void checkCollisions(sf::Vector2f nextPosition) override;
 	void calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
 
@@ -45,6 +44,6 @@ private:
 	Level* m_level;
 
 	SpellManager* m_spellManager;
-	// as long as this time is not null, cendric will have the fighting animation. 
+	// as long as this time is not sf::Time::Zero, cendric will have the fighting animation. 
 	sf::Time m_fightAnimationTime;
 };

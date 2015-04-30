@@ -39,7 +39,7 @@ bool IceSpell::getConfiguredTriggerFightAnimation()
 	return true;
 }
 
-SpellID IceSpell::getConfiguredType()
+SpellID IceSpell::getConfiguredSpellID()
 {
 	return SpellID::Ice;
 }

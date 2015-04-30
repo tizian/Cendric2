@@ -15,7 +15,7 @@ public:
 	sf::Vector2f getConfiguredPositionOffset() override;
 	bool getConfiguredIsAttachedToMainChar() override;
 	bool getConfiguredTriggerFightAnimation() override;
-	SpellID getConfiguredType() override;
+	SpellID getConfiguredSpellID() override;
 
 private:
 };

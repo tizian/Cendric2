@@ -22,7 +22,7 @@ public:
 	// initializes the m_object vector. called by ALL subclasses
 	void onEnter(Screen* previousScreen);
 	virtual void execOnEnter(Screen* previousScreen);
-	// deletes all objects. called by ALL subclasses
+	// deletes all objects. called by ALL subclasses (screen manager)
 	void onExit(Screen* nextScreen);
 	virtual void execOnExit(Screen* nextScreen);
 
@@ -31,7 +31,22 @@ public:
 
 	// gets the vector with the objects of type 'type'
 	std::vector<GameObject*>* getObjects(GameObjectType type);
-	
+
+	// getter for the tooltip text
+	sf::Text* getTooltipText();
+
+	// sets the tooltip text to 'text'	
+	void setTooltipText(sf::Text& text);
+
+	// sets the view to the standard view, which means the upper part of the window, the game view, without the tooltip bar.
+	void setViewToStandardView(sf::RenderTarget& target);
+
+	// sets the view to show only the tooltip bar. used before drawing anything there.
+	void setViewToTooltipView(sf::RenderTarget& target);
+
+	// renders the tooltip text in 'm_tooltipText'
+	void renderTooltipText(sf::RenderTarget& target);
+
 protected:
 	// deletes all objects marked as 'disposed'
 	void deleteDisposedObjects();
@@ -46,4 +61,5 @@ protected:
 
 private:
 	std::vector<std::vector<GameObject*>> m_objects;
+	sf::Text m_tooltipText;
 };

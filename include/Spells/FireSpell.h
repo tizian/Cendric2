@@ -13,7 +13,7 @@ public:
 	const float getConfiguredMaxVelocityX() override;
 
 	bool getConfiguredTriggerFightAnimation() override;
-	SpellID getConfiguredType() override;
+	SpellID getConfiguredSpellID() override;
 
 private:
 };

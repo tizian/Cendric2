@@ -25,11 +25,6 @@ void MainCharacter::update(sf::Time& frameTime)
 	updateAnimation();
 }
 
-void MainCharacter::render(sf::RenderTarget& renderTarget) const
-{
-	MovableGameObject::render(renderTarget);
-}
-
 void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
 {	
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
