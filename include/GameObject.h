@@ -41,7 +41,7 @@ enum GameObjectType
 	_Spell,
 	_DynamicTile,
 	_Enemy,
-	_Item,
+	_LevelItem,
 	_MAX
 };
 
@@ -69,6 +69,7 @@ public:
 	void setPositionX(const float posX);
 	void setPositionY(const float posY);
 	const sf::Vector2f& getPosition();
+	const sf::Vector2f& getSpriteOffset();
 	sf::FloatRect* getBoundingBox();
 	sf::Vector2f getCenter();
 

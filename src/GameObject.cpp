@@ -80,6 +80,11 @@ void GameObject::setSpriteOffset(const sf::Vector2f& spriteOffset)
 	m_spriteOffset = spriteOffset;
 }
 
+const sf::Vector2f& GameObject::getSpriteOffset()
+{
+	return m_spriteOffset;
+}
+
 void GameObject::setBoundingBox(const sf::FloatRect& rect)
 {
 	m_boundingBox = rect;

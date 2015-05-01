@@ -36,10 +36,14 @@ bool Level::load(ResourceID id, Screen* screen)
 	m_startPos = data.startPos;
 	m_name = data.name;
 	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
-	m_collidableTiles = data.collidableTileRects;
+	m_collidableTiles = data.collidableTilePositions;
 	m_levelRect = data.levelRect;
 	m_backgroundLayers = data.backgroundLayers;
-	loadDynamicTiles(data, screen);
+	LevelLoader loader;
+	loader.loadDynamicTiles(data, screen);
+	loader.loadLevelItems(data, screen);
+	loader.loadEnemies(data, screen);
+	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 	return true;
 }
 
@@ -219,36 +223,6 @@ float Level::getGround(const sf::FloatRect& boundingBox)
 	int y = static_cast<int>(floor((boundingBox.top + boundingBox.height)) / tileHeight);
 
 	return (y * tileHeight) - boundingBox.height;
-}
-
-void Level::loadDynamicTiles(LevelData& data, Screen* screen)
-{
-	for (std::vector<std::pair<DynamicTileID, sf::Vector2f>>::iterator it = data.dynamicTileRects.begin(); it != data.dynamicTileRects.end(); ++it)
-	{
-		DynamicTile* tile;
-		switch (it->first)
-		{
-		case DynamicTileID::Water:
-			tile = new WaterTile();
-			break;
-		case DynamicTileID::Ice:
-			tile = new IceTile();
-			break;
-		case DynamicTileID::Crumbly_block:
-			tile = new CrumblyBlockTile();
-			break;
-		default:
-			// unexpected error
-			g_logger->logError("Level", "Dynamic tile was not loaded, unknown id.");
-			return;
-		}
-
-		tile->setTileSize(data.tileSize);
-		tile->load();
-		tile->setPosition(it->second);
-		screen->addObject(GameObjectType::_DynamicTile, tile);
-	}
-	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 }
 
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect nextBoundingBoxX, const sf::FloatRect nextBoundingBoxY)

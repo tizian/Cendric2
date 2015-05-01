@@ -26,7 +26,8 @@ enum class ResourceID
 	Texture_screen_loading,
 	Texture_screen_error_fileNotFound,
 	Texture_screen_error_dataCorrupted,
-	Texture_screen_menu
+	Texture_screen_menu,
+	Texture_items_food
 };
 
 enum class ErrorID

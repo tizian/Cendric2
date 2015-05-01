@@ -9,9 +9,12 @@ void TextProvider::init()
 	addText(Texts::Play, "Play", "Spielen");
 	addText(Texts::Credits, "Credits", "Credits");
 	addText(Texts::Exit, "Exit", "Beenden");
+
+	// level item tooltips
+	addText(Texts::Levelitem_tooltip_cheese, "A nice moist cheese", "Ein hübscher saftiger Käse");
 }
 
-std::string TextProvider::getText(Texts key)
+const std::string& TextProvider::getText(Texts key)
 {
 	switch (m_language)
 	{
@@ -30,7 +33,7 @@ void TextProvider::setLanguage(Language lang)
 	m_language = lang;
 }
 
-void TextProvider::addText(Texts key, std::string english, std::string german)
+void TextProvider::addText(Texts key, const std::string& english, const std::string& german)
 {
 	m_englishTexts.insert({ key, english });
 	m_germanTexts.insert({ key, german });

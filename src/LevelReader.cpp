@@ -100,7 +100,20 @@ bool LevelReader::checkData(LevelData& data)
 		}
 		if (data.dynamicTiles[i].second.empty() || data.dynamicTiles[i].second.size() != data.mapSize.x * data.mapSize.y)
 		{
-			g_logger->logError("LevelReader", "Error in level data : dynamic tile layer dynamic tile layer has not correct size (map size)");
+			g_logger->logError("LevelReader", "Error in level data : dynamic tile layer has not correct size (map size)");
+			return false;
+		}
+	}
+	for (int i = 0; i < data.levelItems.size(); i++)
+	{
+		if (data.levelItems[i].first == LevelItemID::Void)
+		{
+			g_logger->logError("LevelReader", "Error in level data : dynamic tile ID not recognized");
+			return false;
+		}
+		if (data.levelItems[i].second.empty() || data.levelItems[i].second.size() != data.mapSize.x * data.mapSize.y)
+		{
+			g_logger->logError("LevelReader", "Error in level data : level item layer has not correct size (map size)");
 			return false;
 		}
 	}
@@ -275,6 +288,35 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 	return true;
 }
 
+bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data)
+{
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+	// read level item id
+	LevelItemID id = resolveLevelItem(atoi(startData));
+	vector<bool> levelItems;
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+
+	while (startData != NULL)
+	{
+		levelItems.push_back(0 != atoi(startData));
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+
+	data.levelItems.push_back(std::pair<LevelItemID, vector<bool>>(id, levelItems));
+
+	return true;
+}
+
 bool LevelReader::readStartPos(char* start, char* end, LevelData& data)
 {
 	char* startData;
@@ -365,6 +407,12 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
+		else if (strncmp(pos, LAYER_LEVEL_ITEMS, strlen(LAYER_LEVEL_ITEMS)) == 0) {
+			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_LEVEL_ITEMS);
+			readLayerLevelItems(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
+			pos = gotoNextChar(pos, end, '\n');
+		}
 		else if (strncmp(pos, CENDRIC_STARTPOS, strlen(CENDRIC_STARTPOS)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + CENDRIC_STARTPOS);
 			readStartPos(pos, end, data);
@@ -421,7 +469,7 @@ void LevelReader::updateData(LevelData& data)
 		{
 			x = 0;
 			y++;
-			data.collidableTileRects.push_back(xLine); // push back creates a copy of that vector.
+			data.collidableTilePositions.push_back(xLine); // push back creates a copy of that vector.
 			xLine.clear();
 		}
 		else
@@ -443,7 +491,32 @@ void LevelReader::updateData(LevelData& data)
 		{
 			if ((*it2))
 			{
-				data.dynamicTileRects.push_back(std::pair<DynamicTileID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+				data.dynamicTilePositions.push_back(std::pair<DynamicTileID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+			}
+			if (x + 1 >= data.mapSize.x)
+			{
+				x = 0;
+				y++;
+			}
+			else
+			{
+				x++;
+			}
+		}
+	}
+
+	// calculate levelItems
+
+	for (std::vector<std::pair<LevelItemID, std::vector<bool>>>::iterator it = data.levelItems.begin(); it != data.levelItems.end(); ++it)
+	{
+		int x = 0;
+		int y = 0;
+		LevelItemID id = it->first;
+		for (std::vector<bool>::iterator it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+		{
+			if ((*it2))
+			{
+				data.levelItemPositions.push_back(std::pair<LevelItemID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
 			}
 			if (x + 1 >= data.mapSize.x)
 			{
@@ -476,5 +549,20 @@ DynamicTileID LevelReader::resolveDynamicTile(int tileID)
 		return DynamicTileID::Crumbly_block;
 	default:
 		return DynamicTileID::Void;
+	}
+}
+
+LevelItemID LevelReader::resolveLevelItem(int itemID)
+{
+	switch (itemID)
+	{
+	case 1:
+		return LevelItemID::Food_Cheese;
+	case 2:
+		return LevelItemID::Food_Bread;
+	case 3:
+		return LevelItemID::Food_Water;
+	default:
+		return LevelItemID::Void;
 	}
 }

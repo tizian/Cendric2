@@ -9,10 +9,9 @@
 #include "LevelReader.h"
 #include "ResourceManager.h"
 #include "DynamicTile.h"
-#include "DynamicTiles\WaterTile.h"
-#include "DynamicTiles\IceTile.h"
-#include "DynamicTiles\CrumblyBlockTile.h"
+#include "LevelItem.h"
 #include "Logger.h"
+#include "LevelLoader.h"
 
 class Level 
 {
@@ -50,6 +49,4 @@ private:
 	std::string m_name;
 	sf::Vector2f m_startPos;
 	ResourceID m_resourceID;
-
-	void loadDynamicTiles(LevelData& data, Screen* screen);
 };

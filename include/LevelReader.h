@@ -3,6 +3,7 @@
 #include "global.h"
 #include "BackgroundLayer.h"
 #include "DynamicTile.h"
+#include "LevelItem.h"
 #include "Logger.h"
 
 struct LevelData
@@ -15,9 +16,11 @@ struct LevelData
 	std::vector<BackgroundLayer> backgroundLayers;
 	std::vector<std::vector<int>> layers;
 	std::vector<bool> collidableTiles;
-	std::vector<std::vector<bool>> collidableTileRects;
+	std::vector<std::vector<bool>> collidableTilePositions;
 	std::vector<std::pair<DynamicTileID, std::vector<bool>>> dynamicTiles;
-	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTileRects;
+	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTilePositions;
+	std::vector<std::pair<LevelItemID, std::vector<bool>>> levelItems;
+	std::vector<std::pair<LevelItemID, sf::Vector2f>> levelItemPositions;
 	sf::FloatRect levelRect;
 };
 
@@ -43,6 +46,7 @@ private:
 	bool readStartPos(char* start, char* end, LevelData& data);
 	bool readLayerTiles(char* start, char* end, LevelData& data);
 	bool readLayerDynamicTiles(char* start, char* end, LevelData& data);
+	bool readLayerLevelItems(char* start, char* end, LevelData& data);
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data);
@@ -50,6 +54,7 @@ private:
 	// \brief update data to prepare it for the level
 	void updateData(LevelData& data);
 	DynamicTileID resolveDynamicTile(int tileID);
+	LevelItemID resolveLevelItem(int itemID);
 
 	const char COMMENT_MARKER = '#';
 	const char* LEVEL_NAME = "level.name";
@@ -59,6 +64,7 @@ private:
 	const char* LAYER_COLLIDABLE = "layer.collidable";
 	const char* LAYER_TILES = "layer.tiles";
 	const char* LAYER_DYNAMIC_TILES = "layer.dynamictiles";
+	const char* LAYER_LEVEL_ITEMS = "layer.levelitems";
 	const char* LAYER_BACKGROUND = "layer.background";
 	const char* CENDRIC_STARTPOS = "cendric.startpos";
 };

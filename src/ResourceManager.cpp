@@ -37,6 +37,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
+		{ ResourceID::Texture_items_food, "res/assets/items/spritesheet_items_food.png" },
 		{ ResourceID::Texture_weapon_icestaff, "res/assets/weapons/spritesheet_staff_ice.png" }
 	});
 }
@@ -170,7 +171,7 @@ void ResourceManager::deleteLevelResources()
 
 	// delete enemy resources
 
-	// delete item in level resources?
+	// delete item in level resources
 }
 
 void ResourceManager::loadLevelResources()

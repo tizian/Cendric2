@@ -29,7 +29,6 @@ Screen* MapScreen::update(sf::Time frameTime)
 void MapScreen::execOnEnter(Screen *previousScreen)
 {
 	m_mainChar = new MapMainCharacter(&m_currentMap);
-	m_mainChar->setScreen(this);
 	addObject(GameObjectType::_MainCharacter, m_mainChar);
 }
 

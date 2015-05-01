@@ -4,6 +4,7 @@
 
 #include "global.h"
 #include "GameObject.h"
+#include "ResourceManager.h"
 
 class ScreenManager;
 
@@ -35,8 +36,8 @@ public:
 	// getter for the tooltip text
 	sf::Text* getTooltipText();
 
-	// sets the tooltip text to 'text'	
-	void setTooltipText(sf::Text& text);
+	// sets the tooltip text to 'text' and display it at this position (relative to the tooltip view)
+	void setTooltipText(const std::string& text, const sf::Vector2f& position, const sf::Color& color);
 
 	// sets the view to the standard view, which means the upper part of the window, the game view, without the tooltip bar.
 	void setViewToStandardView(sf::RenderTarget& target);

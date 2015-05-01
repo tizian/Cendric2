@@ -17,7 +17,6 @@ void GameScreen::execOnEnter(Screen *previousScreen)
 	}
 
 	m_mainChar = new MainCharacter(&m_currentLevel);
-	m_mainChar->setScreen(this);
 	addObject(GameObjectType::_MainCharacter, m_mainChar);
 	IceStaff* staff = new IceStaff();
 	staff->loadWeapon(m_mainChar);
@@ -35,6 +34,7 @@ Screen* GameScreen::update(sf::Time frameTime)
 	updateObjects(GameObjectType::_Weapon, frameTime);
 	updateObjects(GameObjectType::_Spell, frameTime);
 	updateObjects(GameObjectType::_DynamicTile, frameTime);
+	updateObjects(GameObjectType::_LevelItem, frameTime);
 	deleteDisposedObjects();
 	return this;
 }
@@ -45,6 +45,7 @@ void GameScreen::render(sf::RenderTarget &renderTarget)
 	// parallax, maybe forground + background layers?
 	// don't render dynamic tiles, they are rendered in the level.
 	m_currentLevel.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_Weapon, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);

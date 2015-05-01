@@ -5,6 +5,7 @@ using namespace std;
 void Screen::addObject(GameObjectType type, GameObject* object)
 {
 	m_objects[type].push_back(object);
+	object->setScreen(this);
 }
 
 vector<GameObject*>* Screen::getObjects(GameObjectType type)
@@ -100,9 +101,13 @@ sf::Text* Screen::getTooltipText()
 	return &m_tooltipText;
 }
 	
-void Screen::setTooltipText(sf::Text& text)
+void Screen::setTooltipText(const std::string& text, const sf::Vector2f& position, const sf::Color& color)
 {
-	m_tooltipText = text;
+	m_tooltipText = sf::Text(
+		text,
+		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));;
+	m_tooltipText.setPosition(position);
+	m_tooltipText.setColor(color);
 }
 
 void Screen::renderTooltipText(sf::RenderTarget& target)
@@ -126,7 +131,7 @@ void Screen::setViewToTooltipView(sf::RenderTarget& target)
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, BOTTOM_BORDER);
-	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, static_cast<float>(BOTTOM_BORDER) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
-	view.setCenter(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT + BOTTOM_BORDER / 2.f);
+	view.setViewport(sf::FloatRect(0.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER), 1.f, static_cast<float>(BOTTOM_BORDER) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
+	view.setCenter(WINDOW_WIDTH / 2.f, BOTTOM_BORDER / 2.f);
 	target.setView(view);
 }

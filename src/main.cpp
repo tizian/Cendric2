@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
 {
 	g_logger = new Logger();
 	g_textProvider = new TextProvider();
+	g_textProvider->init();
 	g_resourceManager = new ResourceManager();
 	g_resourceManager->init();
 	g_inputController = new InputController();
