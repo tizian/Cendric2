@@ -7,28 +7,26 @@
 class MovableGameObject : public GameObject
 {
 public:
+	void update(const sf::Time& frameTime) override;
+	void calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const;
+	void calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
+	virtual void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
+	virtual void checkCollisions(const sf::Vector2f& nextPosition);
 
-	void update(sf::Time& frameTime) override;
 	void setAcceleration(const sf::Vector2f& acceleration);
 	void setAccelerationX(float accelerationX);
 	void setAccelerationY(float accelerationY);
-	void setVelocity(sf::Vector2f& velocity);
+	void setVelocity(const sf::Vector2f& velocity);
 	void setVelocityX(float velocityX);
 	void setVelocityY(float velocityY);
-	void calculateNextPosition(sf::Time& frameTime, sf::Vector2f& nextPos);
-	void calculateNextVelocity(sf::Time& frameTime, sf::Vector2f& nextVel);
-	virtual void calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel);
-	virtual void checkCollisions(sf::Vector2f nextPosition);
-
-	// configurable values, implemented by subclasses.
-	virtual const float getConfiguredMaxVelocityY() = 0;
-	virtual const float getConfiguredMaxVelocityX() = 0;
-
-	sf::Vector2f& getVelocity();
-	sf::Vector2f& getAcceleration();
+	
+	virtual float getConfiguredMaxVelocityY() const = 0;
+	virtual float getConfiguredMaxVelocityX() const = 0;
+	const sf::Vector2f& getVelocity() const;
+	const sf::Vector2f& getAcceleration() const;
 
 private:
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_acceleration;
-	void boundVelocity(sf::Vector2f& vel);
+	void boundVelocity(sf::Vector2f& vel) const;
 };

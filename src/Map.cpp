@@ -32,7 +32,7 @@ bool Map::load(ResourceID id)
 	return true;
 }
 
-void Map::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center)
+void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -45,22 +45,22 @@ void Map::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vect
 	m_tileMap.draw(target, states);
 }
 
-sf::FloatRect& Map::getMapRect()
+const sf::FloatRect& Map::getMapRect() const
 {
 	return m_mapRect;
 }
 
-TileMap Map::getTilemap()
+const TileMap& Map::getTilemap() const 
 {
 	return m_tileMap;
 }
 
-sf::Vector2f& Map::getStartPos()
+const sf::Vector2f& Map::getStartPos() const
 {
 	return m_startPos;
 }
 
-bool Map::collidesX(const sf::FloatRect& boundingBox)
+bool Map::collidesX(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
 	if (boundingBox.left < m_mapRect.left || boundingBox.left + boundingBox.width > m_mapRect.left + m_mapRect.width)
@@ -102,7 +102,7 @@ bool Map::collidesX(const sf::FloatRect& boundingBox)
 	return false;
 }
 
-bool Map::collidesY(const sf::FloatRect& boundingBox)
+bool Map::collidesY(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
 	if (boundingBox.top < m_mapRect.top || boundingBox.top + boundingBox.height > m_mapRect.top + m_mapRect.height)
@@ -144,7 +144,7 @@ bool Map::collidesY(const sf::FloatRect& boundingBox)
 	return false;
 }
 
-ResourceID Map::checkLevelEntry(const sf::FloatRect& boundingBox)
+ResourceID Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 {
 	
 	if (boundingBox.contains(sf::Vector2f(50*1, 50*32)))

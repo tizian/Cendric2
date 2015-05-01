@@ -14,7 +14,7 @@ MainCharacter::~MainCharacter()
 	delete m_spellManager;
 }
 
-void MainCharacter::update(sf::Time& frameTime)
+void MainCharacter::update(const sf::Time& frameTime)
 {
 	handleInput();
 	m_spellManager->update(frameTime);
@@ -25,7 +25,7 @@ void MainCharacter::update(sf::Time& frameTime)
 	updateAnimation();
 }
 
-void MainCharacter::checkCollisions(sf::Vector2f nextPosition)
+void MainCharacter::checkCollisions(const sf::Vector2f& nextPosition)
 {	
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
@@ -172,7 +172,7 @@ void MainCharacter::load()
 	playCurrentAnimation(true);
 }
 
-void MainCharacter::calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
+void MainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const
 {
 	// distinguish damping in the air and at the ground
 	float dampingPerSec = (getVelocity().y == 0.0f) ? DAMPING_GROUND_PER_S : DAMPING_AIR_PER_S;
@@ -182,27 +182,27 @@ void MainCharacter::calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
 
-const float MainCharacter::getConfiguredMaxVelocityY() 
+float MainCharacter::getConfiguredMaxVelocityY() const
 {
 	return 600.0f;
 }
 
-const float MainCharacter::getConfiguredMaxVelocityX()
+float MainCharacter::getConfiguredMaxVelocityX() const
 {
 	return 200.0f;
 }
 
-Level* MainCharacter::getLevel()
+Level* MainCharacter::getLevel() const
 {
 	return m_level;
 }
 
-bool MainCharacter::getIsFacingRight()
+bool MainCharacter::getIsFacingRight() const
 {
 	return m_isFacingRight;
 }
 
-GameObjectState MainCharacter::getState()
+GameObjectState MainCharacter::getState() const
 {
 	return m_state;
 }

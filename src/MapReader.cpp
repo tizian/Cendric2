@@ -12,7 +12,7 @@ MapReader::~MapReader()
 {
 }
 
-char* MapReader::gotoNextChar(char* buffer, char* end, char goal)
+char* MapReader::gotoNextChar(char* buffer, char* end, char goal) const
 {
 	while (buffer < end && *buffer != goal)
 	{
@@ -28,7 +28,7 @@ char* MapReader::gotoNextChar(char* buffer, char* end, char goal)
 	return buffer;
 }
 
-int MapReader::countToNextChar(char* buffer, char* end, char goal)
+int MapReader::countToNextChar(char* buffer, char* end, char goal) const
 {
 	int count = 0;
 	while (buffer < end && *buffer != goal)
@@ -46,7 +46,7 @@ int MapReader::countToNextChar(char* buffer, char* end, char goal)
 	return count;
 }
 
-bool MapReader::checkData(MapData& data)
+bool MapReader::checkData(MapData& data) const
 {
 	if (data.mapSize.x == 0 || data.mapSize.y == 0)
 	{
@@ -105,7 +105,7 @@ bool MapReader::checkData(MapData& data)
 	return true;
 }
 
-bool MapReader::readMapName(char* start, char* end, MapData& data)
+bool MapReader::readMapName(char* start, char* end, MapData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -120,7 +120,7 @@ bool MapReader::readMapName(char* start, char* end, MapData& data)
 	return true;
 }
 
-bool MapReader::readTilesetPath(char* start, char* end, MapData& data)
+bool MapReader::readTilesetPath(char* start, char* end, MapData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -135,7 +135,7 @@ bool MapReader::readTilesetPath(char* start, char* end, MapData& data)
 	return true;
 }
 
-bool MapReader::readMapSize(char* start, char* end, MapData& data)
+bool MapReader::readMapSize(char* start, char* end, MapData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -148,7 +148,7 @@ bool MapReader::readMapSize(char* start, char* end, MapData& data)
 	data.mapSize = size;
 	return true;
 }
-bool MapReader::readTileSize(char* start, char* end, MapData& data)
+bool MapReader::readTileSize(char* start, char* end, MapData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -162,7 +162,7 @@ bool MapReader::readTileSize(char* start, char* end, MapData& data)
 	return true;
 }
 
-bool MapReader::readLayerTiles(char* start, char* end, MapData& data)
+bool MapReader::readLayerTiles(char* start, char* end, MapData& data) const
 {
 	// add a new layer into data
 	vector<int> layer;
@@ -188,7 +188,7 @@ bool MapReader::readLayerTiles(char* start, char* end, MapData& data)
 	return true;
 }
 
-bool MapReader::readLayerCollidable(char* start, char* end, MapData& data)
+bool MapReader::readLayerCollidable(char* start, char* end, MapData& data) const
 {
 	data.collidableTiles.clear();
 
@@ -212,7 +212,7 @@ bool MapReader::readLayerCollidable(char* start, char* end, MapData& data)
 	return true;
 }
 
-bool MapReader::readStartPos(char* start, char* end, MapData& data)
+bool MapReader::readStartPos(char* start, char* end, MapData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -329,7 +329,7 @@ bool MapReader::readMap(char* fileName, MapData& data)
 	return true;
 }
 
-void MapReader::updateData(MapData& data)
+void MapReader::updateData(MapData& data) const
 {
 	// update start pos
 	data.startPos.x = data.startPos.x * data.tileSize.x;

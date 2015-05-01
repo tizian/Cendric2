@@ -18,13 +18,14 @@ enum class DynamicTileID
 class DynamicTile : public GameObject
 {
 public:
-	virtual void update(sf::Time& frameTime) override;
-
-	virtual bool getIsCollidable();
+	virtual void update(const sf::Time& frameTime) override;
 	// gets called by a spell when it hits the dynamic tile
 	virtual void onHit(Spell* spell) = 0;
+	
 	// gets called by the level when initializing the tile
 	void setTileSize(const sf::Vector2i tileSize);
+	
+	virtual bool getIsCollidable() const;
 	GameObjectType getConfiguredType() const override;
 
 protected:

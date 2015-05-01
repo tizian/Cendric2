@@ -23,32 +23,32 @@ void ChopSpell::load()
 	playCurrentAnimation(true);
 }
 
-sf::Vector2f ChopSpell::getConfiguredPositionOffset()
+const sf::Vector2f ChopSpell::getConfiguredPositionOffset() const
 {
 	return sf::Vector2f(10.f, 0.f);
 }
 
-const float ChopSpell::getConfiguredMaxVelocityY()
+float ChopSpell::getConfiguredMaxVelocityY() const
 {
 	return 0.f;
 }
 
-const float ChopSpell::getConfiguredMaxVelocityX()
+float ChopSpell::getConfiguredMaxVelocityX() const
 {
 	return 0.f;
 }
 
-bool ChopSpell::getConfiguredIsAttachedToMainChar()
+bool ChopSpell::getConfiguredIsAttachedToMainChar() const
 {
 	return true;
 }
 
-bool ChopSpell::getConfiguredTriggerFightAnimation()
+bool ChopSpell::getConfiguredTriggerFightAnimation() const
 {
 	return true;
 }
 
-SpellID ChopSpell::getConfiguredSpellID()
+SpellID ChopSpell::getConfiguredSpellID() const
 {
 	return SpellID::Chop;
 }

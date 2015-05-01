@@ -7,7 +7,7 @@ SplashScreen::SplashScreen()
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_splash)));
 }
 
-void SplashScreen::execOnEnter(Screen* previousScreen)
+void SplashScreen::execOnEnter(const Screen* previousScreen)
 {
 	// add burning fire baskets
 	FireBasket* fireBasket1 = new FireBasket();
@@ -18,7 +18,7 @@ void SplashScreen::execOnEnter(Screen* previousScreen)
 	addObject(GameObjectType::_Undefined, fireBasket2);
 }
 
-Screen* SplashScreen::update(sf::Time frameTime)
+Screen* SplashScreen::update(const sf::Time& frameTime)
 {
 	if (g_inputController->isKeyActive(Key::Escape) || g_inputController->isMouseJustPressedLeft())
 	{
@@ -35,7 +35,7 @@ void SplashScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_Undefined, renderTarget);
 }
 
-void SplashScreen::execOnExit(Screen *nextScreen)
+void SplashScreen::execOnExit(const Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash);
 }

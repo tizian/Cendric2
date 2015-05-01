@@ -25,12 +25,12 @@ void Spell::loadSpell(Level* level, MainCharacter* mainChar)
 	setVelocity(m_speed * direction);
 }
 
-bool Spell::getConfiguredIsAttachedToMainChar()
+bool Spell::getConfiguredIsAttachedToMainChar() const
 {
 	return false;
 }
 
-void Spell::calculatePositionAccordingToMainChar(sf::Vector2f& position)
+void Spell::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
 {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
 	sf::Vector2f offset;
@@ -55,7 +55,7 @@ void Spell::init(SpellBean& bean)
 	m_speed = bean.startVelocity;
 }
 
-void Spell::update(sf::Time& frameTime)
+void Spell::update(const sf::Time& frameTime)
 {
 	if (getConfiguredIsAttachedToMainChar())
 	{
@@ -78,17 +78,17 @@ void Spell::update(sf::Time& frameTime)
 	}
 }
 
-sf::Vector2f Spell::getConfiguredPositionOffset()
+const sf::Vector2f Spell::getConfiguredPositionOffset() const
 {
 	return sf::Vector2f(20.f, 0.f);
 }
 
-bool Spell::getConfiguredTriggerFightAnimation()
+bool Spell::getConfiguredTriggerFightAnimation() const
 {
 	return false;
 }
 
-void Spell::checkCollisions(sf::Vector2f nextPosition)
+void Spell::checkCollisions(const sf::Vector2f& nextPosition)
 {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);

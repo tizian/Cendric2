@@ -4,6 +4,10 @@
 #include "Animation.h"
 
 ////////////////////////////////////////////////////////////
+// This class was altered from the original source
+// by Ironbell
+// For the original source, see notice below
+////////////////////////////////////////////////////////////
 //
 // Copyright (C) 2014 Maximilian Wagenbach (aka. Foaly) (foaly.f@web.de)
 //
@@ -29,29 +33,31 @@
 class AnimatedSprite : public sf::Drawable, public sf::Transformable
 {
 public:
-	explicit AnimatedSprite(sf::Time frameTime = sf::seconds(0.2f), bool paused = false, bool looped = true);
+	explicit AnimatedSprite(sf::Time frameTime = sf::seconds(0.2f), bool paused = false, bool looped = true, bool flipped = false);
 
 	void update(sf::Time deltaTime);
-	void setAnimation(Animation* animation);
-	void setFrameTime(sf::Time time);
-	void play();
 	void play(Animation* animation);
+	void play();
 	void pause();
 	void stop();
+
+	void setAnimation(const Animation* animation);
+	void setFrameTime(sf::Time time);
 	void setLooped(bool looped);
 	void setFlipped(bool flipped);
 	void setColor(const sf::Color& color);
+	void setFrame(std::size_t newFrame, bool resetTime = true);
 	// resets color, rotation, scale and flipped property
 	void reset();
+
 	const Animation* getAnimation() const;
 	sf::FloatRect getLocalBounds() const;
 	sf::FloatRect getGlobalBounds() const;
+	sf::Time getFrameTime() const;
 	bool isLooped() const;
 	bool isPlaying() const;
 	bool isFlipped() const;
-	sf::Time getFrameTime() const;
-	void setFrame(std::size_t newFrame, bool resetTime = true);
-
+	
 private:
 	const Animation* m_animation;
 	sf::Time m_frameTime;
@@ -64,5 +70,4 @@ private:
 	sf::Vertex m_vertices[4];
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
 };

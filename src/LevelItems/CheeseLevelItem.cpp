@@ -18,12 +18,12 @@ void CheeseLevelItem::load()
 	playCurrentAnimation(true);
 }
 
-const LevelItemID CheeseLevelItem::getConfiguredItemID()
+LevelItemID CheeseLevelItem::getConfiguredItemID() const
 {
 	return LevelItemID::Food_Cheese;
 }
 
-const std::string CheeseLevelItem::getConfiguredTooltipText()
+const std::string& CheeseLevelItem::getConfiguredTooltipText() const
 {
 	return g_textProvider->getText(Texts::Levelitem_tooltip_cheese);
 }

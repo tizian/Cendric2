@@ -42,7 +42,7 @@ void ResourceManager::init()
 	});
 }
 
-sf::Texture* ResourceManager::getTexture(std::string& filename)
+sf::Texture* ResourceManager::getTexture(const std::string& filename)
 {
 	// does the texture exist yet?
 	for (std::map<std::string, sf::Texture>::iterator it = m_textures.begin();
@@ -145,7 +145,7 @@ char* ResourceManager::getFilename(ResourceID id)
 	return &m_fileNames[id][0u];
 }
 
-std::pair<ErrorID, std::string>* ResourceManager::pollError()
+const std::pair<ErrorID, std::string>* ResourceManager::pollError() const
 {
 	return &m_currentError;
 }

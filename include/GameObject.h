@@ -53,7 +53,7 @@ public:
 	// \brief loads animations using the resource manager
 	// also defines bounding box and sprite offset.
 	virtual void load() = 0;
-	virtual void update(sf::Time& frameTime);
+	virtual void update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget);
 	// gets checked & called in the update loop. default implementation does nothing.
 	// checks for the bounding box 
@@ -62,30 +62,29 @@ public:
 	// checks for the bounding box 
 	// right click is used to interact with game objects, while left click is used to fire spells
 	virtual void onRightClick();
-	virtual GameObjectType getConfiguredType() const = 0;
+	void addAnimation(GameObjectState state, Animation& animation);
 
 	void setBoundingBox(const sf::FloatRect& rect);
 	void setPosition(const sf::Vector2f& pos);
-	void setPositionX(const float posX);
-	void setPositionY(const float posY);
-	const sf::Vector2f& getPosition();
-	const sf::Vector2f& getSpriteOffset();
-	sf::FloatRect* getBoundingBox();
-	sf::Vector2f getCenter();
-
-	void setCurrentAnimation(Animation* animation, bool isFlipped);
-	void addAnimation(GameObjectState state, Animation& animation);
+	void setPositionX(float posX);
+	void setPositionY(float posY);
+	void setDisposed();
+	void setCurrentAnimation(const Animation* animation, bool isFlipped);
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void setScreen(Screen* screen);
-	void setFrameTime(sf::Time time);
+	void setFrameTime(const sf::Time& time);
 	void playCurrentAnimation(bool play);
 	void loopCurrentAnimation(bool loop);
-	Animation* getAnimation(GameObjectState state);
 
+	const Animation* getAnimation(GameObjectState state);
+	const sf::Vector2f& getPosition() const;
+	const sf::Vector2f& getSpriteOffset() const;
+	const sf::FloatRect* getBoundingBox() const;
+	const sf::Vector2f getCenter() const;
 	// returns whether the game object should be deleted
-	bool isDisposed();
+	bool isDisposed() const;
+	virtual GameObjectType getConfiguredType() const = 0;
 	// if this is set, the game object gets deleted in the next game loop
-	void setDisposed();
 
 protected:
 	GameObjectState m_state;

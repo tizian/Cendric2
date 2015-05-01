@@ -17,9 +17,9 @@ class LevelLoader
 {
 public:
 	// loads dynamic tiles out of level data and adds them directly to the screen
-	void loadDynamicTiles(LevelData& data, Screen* screen);
+	void loadDynamicTiles(LevelData& data, Screen* screen) const;
 	// loads level items out of level data and adds them directly to the screen
-	void loadLevelItems(LevelData& data, Screen* screen);
+	void loadLevelItems(LevelData& data, Screen* screen) const;
 	// loads enemies out of level data and adds them directly to the screen
-	void loadEnemies(LevelData& data, Screen* screen);
+	void loadEnemies(LevelData& data, Screen* screen) const;
 };

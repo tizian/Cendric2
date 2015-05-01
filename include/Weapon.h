@@ -10,11 +10,11 @@ class MainCharacter;
 class Weapon : public GameObject
 {
 public:
-	virtual void update(sf::Time& frameTime) override;
+	virtual void update(const sf::Time& frameTime) override;
 	void loadWeapon(MainCharacter* mainChar);
 
-	// the offset of the spells start position, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
-	virtual sf::Vector2f getConfiguredPositionOffset();
+	// the offset of the weapon, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
+	virtual const sf::Vector2f getConfiguredPositionOffset() const;
 	GameObjectType getConfiguredType() const override;
 
 protected:
@@ -24,5 +24,5 @@ private:
 	MainCharacter* m_mainChar;
 
 	// calculates position according to m_mainChar.
-	void calculatePositionAccordingToMainChar(sf::Vector2f& position);
+	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
 };

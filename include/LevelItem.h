@@ -24,8 +24,8 @@ public:
 	void render(sf::RenderTarget &renderTarget) override;
 
 	GameObjectType getConfiguredType() const override;
-	virtual const LevelItemID getConfiguredItemID() = 0;
-	virtual const std::string getConfiguredTooltipText() = 0;
+	virtual LevelItemID getConfiguredItemID() const = 0;
+	virtual const std::string& getConfiguredTooltipText() const = 0;
 
 private:
 	MainCharacter* m_mainChar;

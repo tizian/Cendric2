@@ -34,17 +34,17 @@ public:
 	// called by the spell manager
 	void init(SpellBean& bean);
 	void loadSpell(Level* level, MainCharacter* mainChar);
-	virtual void update(sf::Time& frameTime) override;
-	void checkCollisions(sf::Vector2f nextPosition) override;
+	virtual void update(const sf::Time& frameTime) override;
+	void checkCollisions(const sf::Vector2f& nextPosition) override;
 
 	// the offset of the spells start position, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
-	virtual sf::Vector2f getConfiguredPositionOffset();
+	virtual const sf::Vector2f getConfiguredPositionOffset() const;
 	// returns whether the spell is bound to the main character and will update its position according to the main character. default is false.
 	// if this value is set to true, the velocity of a spell has no influence anymore.
-	virtual bool getConfiguredIsAttachedToMainChar();
+	virtual bool getConfiguredIsAttachedToMainChar() const;
 	// if true, cendric will be "fighting" as long as the fight animation is. default is false.
-	virtual bool getConfiguredTriggerFightAnimation();
-	virtual SpellID getConfiguredSpellID() = 0;
+	virtual bool getConfiguredTriggerFightAnimation() const;
+	virtual SpellID getConfiguredSpellID() const = 0;
 	GameObjectType getConfiguredType() const override;
 
 	int getDamage();
@@ -60,5 +60,5 @@ private:
 	float m_speed;
 
 	// calculates position according to m_mainChar.
-	void calculatePositionAccordingToMainChar(sf::Vector2f& position);
+	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
 };

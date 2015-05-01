@@ -1,11 +1,11 @@
 #include "DynamicTile.h"
 
-void DynamicTile::update(sf::Time& frameTime)
+void DynamicTile::update(const sf::Time& frameTime)
 {
 	GameObject::update(frameTime);
 }
 
-bool DynamicTile::getIsCollidable()
+bool DynamicTile::getIsCollidable() const
 {
 	return m_isCollidable;
 }

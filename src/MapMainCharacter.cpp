@@ -12,7 +12,7 @@ MapMainCharacter::~MapMainCharacter()
 	g_resourceManager->deleteResource(ResourceID::Texture_mapMainChar);
 }
 
-void MapMainCharacter::update(sf::Time& frameTime)
+void MapMainCharacter::update(const sf::Time& frameTime)
 {
 	handleInput();
 	calculateNextPosition(frameTime, m_nextPosition);
@@ -21,7 +21,7 @@ void MapMainCharacter::update(sf::Time& frameTime)
 	updateAnimation();
 }
 
-void MapMainCharacter::checkCollisions(sf::Vector2f nextPosition)
+void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition)
 {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
@@ -192,7 +192,7 @@ void MapMainCharacter::load()
 	playCurrentAnimation(true);
 }
 
-void MapMainCharacter::calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel)
+void MapMainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const
 {
 	if (getAcceleration().x == 0.0f)
 	{
@@ -213,12 +213,12 @@ void MapMainCharacter::calculateUnboundedVelocity(sf::Time& frameTime, sf::Vecto
 	}
 }
 
-const float MapMainCharacter::getConfiguredMaxVelocityY()
+float MapMainCharacter::getConfiguredMaxVelocityY() const
 {
 	return 200.0f;
 }
 
-const float MapMainCharacter::getConfiguredMaxVelocityX()
+float MapMainCharacter::getConfiguredMaxVelocityX() const
 {
 	return 200.0f;
 }

@@ -12,7 +12,7 @@ LevelReader::~LevelReader()
 {
 }
 
-char* LevelReader::gotoNextChar(char* buffer, char* end, char goal)
+char* LevelReader::gotoNextChar(char* buffer, char* end, char goal) const
 {
 	while (buffer < end && *buffer != goal)
 	{
@@ -28,7 +28,7 @@ char* LevelReader::gotoNextChar(char* buffer, char* end, char goal)
 	return buffer;
 }
 
-int LevelReader::countToNextChar(char* buffer, char* end, char goal)
+int LevelReader::countToNextChar(char* buffer, char* end, char goal) const
 {
 	int count = 0;
 	while (buffer < end && *buffer != goal)
@@ -46,7 +46,7 @@ int LevelReader::countToNextChar(char* buffer, char* end, char goal)
 	return count;
 }
 
-bool LevelReader::checkData(LevelData& data)
+bool LevelReader::checkData(LevelData& data) const
 {
 	if (data.mapSize.x == 0 || data.mapSize.y == 0) 
 	{
@@ -131,7 +131,7 @@ bool LevelReader::checkData(LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLevelName(char* start, char* end, LevelData& data)
+bool LevelReader::readLevelName(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -146,7 +146,7 @@ bool LevelReader::readLevelName(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readTilesetPath(char* start, char* end, LevelData& data)
+bool LevelReader::readTilesetPath(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -161,7 +161,7 @@ bool LevelReader::readTilesetPath(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -182,7 +182,7 @@ bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readMapSize(char* start, char* end, LevelData& data)
+bool LevelReader::readMapSize(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -195,7 +195,7 @@ bool LevelReader::readMapSize(char* start, char* end, LevelData& data)
 	data.mapSize = size;
 	return true;
 }
-bool LevelReader::readTileSize(char* start, char* end, LevelData& data)
+bool LevelReader::readTileSize(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -209,7 +209,7 @@ bool LevelReader::readTileSize(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayerTiles(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerTiles(char* start, char* end, LevelData& data) const
 {
 	// add a new layer into data
 	vector<int> layer;
@@ -235,7 +235,7 @@ bool LevelReader::readLayerTiles(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data) const
 {
 	data.collidableTiles.clear();
 
@@ -259,7 +259,7 @@ bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	char* endData;
@@ -288,7 +288,7 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data)
+bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	char* endData;
@@ -317,7 +317,7 @@ bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readStartPos(char* start, char* end, LevelData& data)
+bool LevelReader::readStartPos(char* start, char* end, LevelData& data) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -331,7 +331,7 @@ bool LevelReader::readStartPos(char* start, char* end, LevelData& data)
 	return true;
 }
 
-bool LevelReader::readLevel(char* fileName, LevelData& data)
+bool LevelReader::readLevel(char* fileName, LevelData& data) const
 {
 	FILE* levelFile;
 	levelFile = fopen(fileName, "r");
@@ -451,7 +451,7 @@ bool LevelReader::readLevel(char* fileName, LevelData& data)
 	return true;
 }
 
-void LevelReader::updateData(LevelData& data) 
+void LevelReader::updateData(LevelData& data)  const
 {
 	// update start pos
 	data.startPos.x = data.startPos.x * data.tileSize.x;
@@ -537,7 +537,7 @@ void LevelReader::updateData(LevelData& data)
 	data.levelRect.width = static_cast<float>(data.tileSize.x * data.mapSize.x);
 }
 
-DynamicTileID LevelReader::resolveDynamicTile(int tileID)
+DynamicTileID LevelReader::resolveDynamicTile(int tileID) const
 {
 	switch (tileID)
 	{
@@ -552,7 +552,7 @@ DynamicTileID LevelReader::resolveDynamicTile(int tileID)
 	}
 }
 
-LevelItemID LevelReader::resolveLevelItem(int itemID)
+LevelItemID LevelReader::resolveLevelItem(int itemID) const
 {
 	switch (itemID)
 	{

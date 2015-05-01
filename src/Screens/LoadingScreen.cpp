@@ -9,7 +9,7 @@ LoadingScreen::LoadingScreen(ScreenID screenToLoad, ResourceID resource)
 	m_resource = resource;
 }
 
-Screen* LoadingScreen::update(sf::Time frameTime)
+Screen* LoadingScreen::update(const sf::Time& frameTime)
 {
 	switch (m_screenToLoad)
 	{
@@ -28,11 +28,11 @@ void LoadingScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_screenSprite);
 }
 
-void LoadingScreen::execOnEnter(Screen *previousScreen)
+void LoadingScreen::execOnEnter(const Screen *previousScreen)
 {
 }
 
-void LoadingScreen::execOnExit(Screen *nextScreen)
+void LoadingScreen::execOnExit(const Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_loading);
 }

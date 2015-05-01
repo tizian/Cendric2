@@ -28,22 +28,22 @@ public:
 
 private:
 
-	char* gotoNextChar(char* buffer, char* end, char goal);
-	int countToNextChar(char* buffer, char* end, char goal);
+	char* gotoNextChar(char* buffer, char* end, char goal) const;
+	int countToNextChar(char* buffer, char* end, char goal) const;
 
-	bool readMapName(char* start, char* end, MapData& data);
-	bool readTilesetPath(char* start, char* end, MapData& data);
-	bool readMapSize(char* start, char* end, MapData& data);
-	bool readTileSize(char* start, char* end, MapData& data);
-	bool readLayerCollidable(char* start, char* end, MapData& data);
-	bool readStartPos(char* start, char* end, MapData& data);
-	bool readLayerTiles(char* start, char* end, MapData& data);
+	bool readMapName(char* start, char* end, MapData& data) const;
+	bool readTilesetPath(char* start, char* end, MapData& data) const;
+	bool readMapSize(char* start, char* end, MapData& data) const;
+	bool readTileSize(char* start, char* end, MapData& data) const;
+	bool readLayerCollidable(char* start, char* end, MapData& data) const;
+	bool readStartPos(char* start, char* end, MapData& data) const;
+	bool readLayerTiles(char* start, char* end, MapData& data) const;
 
 	// \brief check map bean for validity before loading the level
-	bool checkData(MapData& data);
+	bool checkData(MapData& data) const;
 
 	// \brief update data to prepare it for the map
-	void updateData(MapData& data);
+	void updateData(MapData& data) const;
 
 	const char COMMENT_MARKER = '#';
 	const char* MAP_NAME = "map.name";

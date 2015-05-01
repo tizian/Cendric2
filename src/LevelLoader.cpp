@@ -1,6 +1,6 @@
 #include "LevelLoader.h"
 
-void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen)
+void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 {
 	for (std::vector<std::pair<DynamicTileID, sf::Vector2f>>::iterator it = data.dynamicTilePositions.begin(); it != data.dynamicTilePositions.end(); ++it)
 	{
@@ -29,7 +29,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen)
 	}
 }
 
-void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)
+void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 {
 	for (std::vector<std::pair<LevelItemID, sf::Vector2f>>::iterator it = data.levelItemPositions.begin(); it != data.levelItemPositions.end(); ++it)
 	{
@@ -51,7 +51,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)
 	}
 }
 
-void LevelLoader::loadEnemies(LevelData& data, Screen* screen)
+void LevelLoader::loadEnemies(LevelData& data, Screen* screen) const
 {
 	// TODO
 }

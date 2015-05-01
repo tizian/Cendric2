@@ -9,11 +9,10 @@ public:
 	IceSpell();
 	void load() override;
 
-	const float getConfiguredMaxVelocityY() override;
-	const float getConfiguredMaxVelocityX() override;
-
-	bool getConfiguredTriggerFightAnimation() override;
-	SpellID getConfiguredSpellID() override;
+	float getConfiguredMaxVelocityY() const override;
+	float getConfiguredMaxVelocityX() const override;
+	bool getConfiguredTriggerFightAnimation() const override;
+	SpellID getConfiguredSpellID() const override;
 
 private:
 };

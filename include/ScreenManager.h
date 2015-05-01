@@ -8,16 +8,16 @@ class ScreenManager
 {
 public:
 	ScreenManager();
-	ScreenManager(Screen *initialScreen);
+	ScreenManager(Screen* initialScreen);
 	~ScreenManager();
 
-	void update(sf::Time frameTime);
-	void render(sf::RenderTarget &renderTarget);
+	void update(const sf::Time& frameTime);
+	void render(sf::RenderTarget& renderTarget);
 	void setErrorScreen();
 
-	Screen *getCurrentScreen();
+	Screen* getCurrentScreen() const;
 
 private:
-	Screen *m_currentScreen = nullptr;
+	Screen* m_currentScreen = nullptr;
 	bool m_isErrorScreen;
 };

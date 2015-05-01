@@ -17,15 +17,15 @@ enum class ScreenID
 class Screen
 {
 public:
-	virtual Screen* update(sf::Time frameTime) = 0;
+	virtual Screen* update(const sf::Time& frameTime) = 0;
 	virtual void render(sf::RenderTarget& renderTarget) = 0;
 
 	// initializes the m_object vector. called by ALL subclasses
-	void onEnter(Screen* previousScreen);
-	virtual void execOnEnter(Screen* previousScreen);
+	void onEnter(const Screen* previousScreen);
+	virtual void execOnEnter(const Screen* previousScreen);
 	// deletes all objects. called by ALL subclasses (screen manager)
-	void onExit(Screen* nextScreen);
-	virtual void execOnExit(Screen* nextScreen);
+	void onExit(const Screen* nextScreen);
+	virtual void execOnExit(const Screen* nextScreen);
 
 	// adds an object of type 'type' to the screen.
 	void addObject(GameObjectType type, GameObject* object);
@@ -34,16 +34,16 @@ public:
 	std::vector<GameObject*>* getObjects(GameObjectType type);
 
 	// getter for the tooltip text
-	sf::Text* getTooltipText();
+	const sf::Text* getTooltipText() const;
 
 	// sets the tooltip text to 'text' and display it at this position (relative to the tooltip view)
 	void setTooltipText(const std::string& text, const sf::Vector2f& position, const sf::Color& color);
 
 	// sets the view to the standard view, which means the upper part of the window, the game view, without the tooltip bar.
-	void setViewToStandardView(sf::RenderTarget& target);
+	void setViewToStandardView(sf::RenderTarget& target) const;
 
 	// sets the view to show only the tooltip bar. used before drawing anything there.
-	void setViewToTooltipView(sf::RenderTarget& target);
+	void setViewToTooltipView(sf::RenderTarget& target) const;
 
 	// renders the tooltip text in 'm_tooltipText'
 	void renderTooltipText(sf::RenderTarget& target);

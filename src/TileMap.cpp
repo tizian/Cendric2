@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool TileMap::load(string &filepath, sf::Vector2i tileSize, vector<vector<int> > layers, int width, int height)
+bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const vector<vector<int> >& layers, int width, int height)
 {
 	m_tilesetPath = filepath;
 	m_tileset = g_resourceManager->getTexture(filepath);
@@ -72,7 +72,7 @@ void TileMap::dispose()
 	g_resourceManager->deleteResource(m_tilesetPath);
 }
 
-sf::Vector2i& TileMap::getTilesize() 
+const sf::Vector2i& TileMap::getTilesize() const
 {
 	return m_tilesize;
 }

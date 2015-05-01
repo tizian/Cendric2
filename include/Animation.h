@@ -3,6 +3,10 @@
 #include "global.h"
 
 ////////////////////////////////////////////////////////////
+// This class was altered from the original source
+// by Ironbell
+// For the original source, see notice below
+////////////////////////////////////////////////////////////
 //
 // Copyright (C) 2014 Maximilian Wagenbach (aka. Foaly) (foaly.f@web.de)
 //
@@ -31,7 +35,8 @@ public:
 	Animation();
 
 	void addFrame(sf::IntRect rect);
-	void setSpriteSheet(sf::Texture* texture);
+	void setSpriteSheet(const sf::Texture* texture);
+	
 	const sf::Texture* getSpriteSheet() const;
 	std::size_t getSize() const;
 	const sf::IntRect& getFrame(std::size_t n) const;

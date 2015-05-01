@@ -19,26 +19,23 @@ public:
 	Level();
 	~Level();
 
-	// getters
-	TileMap getTilemap();
-	sf::Vector2f& getStartPos();
-	sf::FloatRect& getLevelRect();
-
-	// checks collision with the collidable grid of that level
-	bool collidesX(const sf::FloatRect& boundingBox);
-	bool collidesY(const sf::FloatRect& boundingBox);
-	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect nextBoundingBoxX, const sf::FloatRect nextBoundingBoxY);
-	// returns the next y position where the bounding box is grounding.
-	float getGround(const sf::FloatRect& boundingBox);
-
 	// loads a .dric file
 	bool load(ResourceID id, Screen* screen);
-
+	// draws the level. Background layers, tilemap, dynamic tiles, foreground layers.
+	void draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center) const;
 	// deletes the resources
 	void dispose();
 
-	// draws the level. Background layers, tilemap, dynamic tiles, foreground layers.
-	void draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center);
+	// checks collision with the collidable grid of that level
+	bool collidesX(const sf::FloatRect& boundingBox) const;
+	bool collidesY(const sf::FloatRect& boundingBox) const;
+	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY) const;
+
+	const TileMap& getTilemap() const;
+	const sf::Vector2f& getStartPos() const;
+	const sf::FloatRect& getLevelRect() const;
+	// returns the next y position where the bounding box is grounding.
+	float getGround(const sf::FloatRect& boundingBox) const;
 
 private:
 	TileMap m_tileMap;

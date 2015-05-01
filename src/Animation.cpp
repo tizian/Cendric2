@@ -10,7 +10,7 @@ void Animation::addFrame(sf::IntRect rect)
 	m_frames.push_back(rect);
 }
 
-void Animation::setSpriteSheet(sf::Texture* texture)
+void Animation::setSpriteSheet(const sf::Texture* texture)
 {
 	m_texture = texture;
 }

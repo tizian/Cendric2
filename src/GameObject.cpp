@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-void GameObject::setCurrentAnimation(Animation* animation, bool isFlipped)
+void GameObject::setCurrentAnimation(const Animation* animation, bool isFlipped)
 {
 	m_animatedSprite.setFlipped(isFlipped);
 	m_animatedSprite.setAnimation(animation);
@@ -10,7 +10,8 @@ void GameObject::addAnimation(GameObjectState state, Animation& animation)
 {
 	m_animations.insert({ state, animation });
 }
-Animation* GameObject::getAnimation(GameObjectState state)
+
+const Animation* GameObject::getAnimation(GameObjectState state)
 {
 	return &m_animations[state];
 }
@@ -20,7 +21,7 @@ void GameObject::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_animatedSprite);
 }
 
-void GameObject::update(sf::Time& frameTime)
+void GameObject::update(const sf::Time& frameTime)
 {
 	if (g_inputController->isMouseOver(&m_boundingBox))
 	{
@@ -53,7 +54,7 @@ void GameObject::setPositionY(const float posY)
 	setPosition(newPosition);
 }
 
-void GameObject::setFrameTime(sf::Time time) 
+void GameObject::setFrameTime(const sf::Time& time) 
 {
 	m_animatedSprite.setFrameTime(time);
 }
@@ -80,7 +81,7 @@ void GameObject::setSpriteOffset(const sf::Vector2f& spriteOffset)
 	m_spriteOffset = spriteOffset;
 }
 
-const sf::Vector2f& GameObject::getSpriteOffset()
+const sf::Vector2f& GameObject::getSpriteOffset() const
 {
 	return m_spriteOffset;
 }
@@ -90,7 +91,7 @@ void GameObject::setBoundingBox(const sf::FloatRect& rect)
 	m_boundingBox = rect;
 }
 
-sf::FloatRect* GameObject::getBoundingBox()
+const sf::FloatRect* GameObject::getBoundingBox() const
 {
 	return &m_boundingBox;
 }
@@ -105,19 +106,19 @@ void GameObject::onRightClick()
 	// nop
 }
 
-sf::Vector2f GameObject::getCenter()
+const sf::Vector2f GameObject::getCenter() const
 {
 	return sf::Vector2f(
 		m_boundingBox.left + (m_boundingBox.width / 2),
 		m_boundingBox.top + (m_boundingBox.height / 2));
 }
 
-const sf::Vector2f& GameObject::getPosition()
+const sf::Vector2f& GameObject::getPosition() const
 {
 	return m_position;
 }
 
-bool GameObject::isDisposed()
+bool GameObject::isDisposed() const
 {
 	return m_isDisposed;
 }
@@ -127,7 +128,7 @@ void GameObject::setDisposed()
 	m_isDisposed = true;
 }
 
-void GameObject::setScreen(Screen* screen)
+void GameObject::setScreen(Screen* screen) 
 {
 	m_screen = screen;
 }

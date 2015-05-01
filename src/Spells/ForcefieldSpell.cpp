@@ -26,27 +26,27 @@ void ForcefieldSpell::load()
 	playCurrentAnimation(true);
 }
 
-sf::Vector2f ForcefieldSpell::getConfiguredPositionOffset()
+const sf::Vector2f ForcefieldSpell::getConfiguredPositionOffset() const
 {
 	return sf::Vector2f(-49.f, 0.f);
 }
 
-const float ForcefieldSpell::getConfiguredMaxVelocityY()
+float ForcefieldSpell::getConfiguredMaxVelocityY() const
 {
 	return 0.f;
 }
 
-const float ForcefieldSpell::getConfiguredMaxVelocityX()
+float ForcefieldSpell::getConfiguredMaxVelocityX() const
 {
 	return 0.f;
 }
 
-bool ForcefieldSpell::getConfiguredIsAttachedToMainChar()
+bool ForcefieldSpell::getConfiguredIsAttachedToMainChar() const
 {
 	return true;
 }
 
-SpellID ForcefieldSpell::getConfiguredSpellID()
+SpellID ForcefieldSpell::getConfiguredSpellID() const
 {
 	return SpellID::Forcefield;
 }

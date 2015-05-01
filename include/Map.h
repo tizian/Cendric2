@@ -13,27 +13,24 @@ class Map
 public:
 	Map();
 	~Map();
-
-	// getters
-	TileMap getTilemap();
-	sf::Vector2f& getStartPos();
-	sf::FloatRect& getMapRect();
-
-	// checks collision with the collidable grid of that map
-	bool collidesX(const sf::FloatRect& boundingBox);
-	bool collidesY(const sf::FloatRect& boundingBox);
-
-	// checks if the main char has reached a level entry. If no, it returns the void resource id, else the resource id of that level
-	ResourceID checkLevelEntry(const sf::FloatRect& boundingBox);
-
+	
 	// loads a .dricmap file
 	bool load(ResourceID id);
-
+	// draws the map. tilelayers, objects, cendric.
+	void draw(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
 	// deletes the resources
 	void dispose();
+	
+	// checks collision with the collidable grid of that map
+	bool collidesX(const sf::FloatRect& boundingBox) const;
+	bool collidesY(const sf::FloatRect& boundingBox) const;
+	// checks if the main char has reached a level entry. If no, it returns the void resource id, else the resource id of that level
+	ResourceID checkLevelEntry(const sf::FloatRect& boundingBox) const;
 
-	// draws the map. tilelayers, objects, cendric.
-	void draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center);
+	const TileMap& getTilemap() const;
+	const sf::Vector2f& getStartPos() const;
+	const sf::FloatRect& getMapRect() const;
+
 
 private:
 	TileMap m_tileMap;

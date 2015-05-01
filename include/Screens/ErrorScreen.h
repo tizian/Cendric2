@@ -10,11 +10,11 @@ class ErrorScreen : public Screen
 public:
 	ErrorScreen();
 
-	void render(sf::RenderTarget &renderTarget) override;
-	Screen* update(sf::Time frameTime) override;
+	void render(sf::RenderTarget& renderTarget) override;
+	Screen* update(const sf::Time& frameTime) override;
 
-	void execOnEnter(Screen* previousScreen) override;
-	void execOnExit(Screen* nextScreen) override;
+	void execOnEnter(const Screen* previousScreen) override;
+	void execOnExit(const Screen* nextScreen) override;
 
 private:
 	sf::Sprite m_screenSprite;

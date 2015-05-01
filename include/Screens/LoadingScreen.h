@@ -11,11 +11,11 @@ class LoadingScreen : public Screen
 public:
 	LoadingScreen(ScreenID screenToLoad, ResourceID level);
 
-	Screen* update(sf::Time frameTime) override;
+	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
 
-	virtual void execOnEnter(Screen *previousScreen) override;
-	virtual void execOnExit(Screen *nextScreen) override;
+	virtual void execOnEnter(const Screen *previousScreen) override;
+	virtual void execOnExit(const Screen *nextScreen) override;
 
 private:
 	sf::Sprite m_screenSprite;

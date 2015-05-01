@@ -1,7 +1,7 @@
 #include "Weapon.h"
 #include "MainCharacter.h"
 
-void Weapon::calculatePositionAccordingToMainChar(sf::Vector2f& position)
+void Weapon::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
 {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
 	sf::Vector2f offset;
@@ -18,7 +18,7 @@ void Weapon::calculatePositionAccordingToMainChar(sf::Vector2f& position)
 	position.y = (mainCharPosition + offset).y;
 }
 
-void Weapon::update(sf::Time& frameTime)
+void Weapon::update(const sf::Time& frameTime)
 {
 	GameObjectState newState = m_mainChar->getState();
 	bool newFacingRight = m_mainChar->getIsFacingRight();
@@ -33,7 +33,7 @@ void Weapon::update(sf::Time& frameTime)
 	GameObject::update(frameTime);
 }
 
-sf::Vector2f Weapon::getConfiguredPositionOffset()
+const sf::Vector2f Weapon::getConfiguredPositionOffset() const
 {
 	return sf::Vector2f(-60.f, -20.f);
 }

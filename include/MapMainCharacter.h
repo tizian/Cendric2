@@ -13,12 +13,12 @@ public:
 	~MapMainCharacter();
 
 	void load() override;
-	void update(sf::Time& frameTime) override;
-	void checkCollisions(sf::Vector2f nextPosition) override;
-	void calculateUnboundedVelocity(sf::Time& frameTime, sf::Vector2f& nextVel) override;
+	void update(const sf::Time& frameTime) override;
+	void checkCollisions(const sf::Vector2f& nextPosition) override;
+	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
-	const float getConfiguredMaxVelocityY() override;
-	const float getConfiguredMaxVelocityX() override;
+	float getConfiguredMaxVelocityY() const override;
+	float getConfiguredMaxVelocityX() const override;
 	GameObjectType getConfiguredType() const override;
 
 private:

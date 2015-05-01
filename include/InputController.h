@@ -24,24 +24,23 @@ class InputController
 public:
 	InputController();
 	~InputController();
-
-	bool isKeyActive(const Key key);
-	bool isMouseOver(sf::FloatRect* boundingBox);
-	bool isRightClicked(sf::FloatRect* boundingBox);
-	bool isMouseJustPressedLeft();
-	bool isMouseJustPressedRight();
-
+	
 	// refreshes the keymap
 	void update();
-
 	// initializes the keymaps
 	void init();
 
 	void setWindow(sf::RenderWindow* window);
 	void setCurrentWindowSize(int width, int height);
 
+	bool isKeyActive(Key key);
+	bool isMouseOver(const sf::FloatRect* boundingBox) const;
+	bool isRightClicked(const sf::FloatRect* boundingBox) const;
+	bool isMouseJustPressedLeft() const;
+	bool isMouseJustPressedRight() const;
+
 	// returns mouse position relative to window
-	sf::Vector2f getMousePosition();
+	sf::Vector2f getMousePosition() const;
 
 private:
 	std::map<Key, bool> m_keyActiveMap;

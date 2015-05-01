@@ -108,7 +108,7 @@ void InputController::setCurrentWindowSize(int width, int height)
 	m_windowSize.y = height;
 }
 
-sf::Vector2f InputController::getMousePosition()
+sf::Vector2f InputController::getMousePosition() const
 {
 	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
 	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
@@ -119,17 +119,17 @@ sf::Vector2f InputController::getMousePosition()
 	return pos + view;
 }
 
-bool InputController::isMouseOver(sf::FloatRect* boundingBox)
+bool InputController::isMouseOver(const sf::FloatRect* boundingBox) const
 {
 	return boundingBox->contains(getMousePosition());
 }
 
-bool InputController::isRightClicked(sf::FloatRect* boundingBox)
+bool InputController::isRightClicked(const sf::FloatRect* boundingBox) const
 {
 	return boundingBox->contains(getMousePosition()) && isMouseJustPressedRight();
 }
 
-bool InputController::isMouseJustPressedLeft()
+bool InputController::isMouseJustPressedLeft() const
 {
 	if (!m_isWindowFocused) 
 	{
@@ -138,7 +138,7 @@ bool InputController::isMouseJustPressedLeft()
 	return m_isMouseJustPressedLeft;
 }
 
-bool InputController::isMouseJustPressedRight()
+bool InputController::isMouseJustPressedRight() const
 {
 	if (!m_isWindowFocused)
 	{
@@ -147,7 +147,7 @@ bool InputController::isMouseJustPressedRight()
 	return m_isMouseJustPressedRight;
 }
 
-bool InputController::isKeyActive(const Key key)
+bool InputController::isKeyActive(Key key)
 {
 	if (!m_isWindowFocused)
 	{

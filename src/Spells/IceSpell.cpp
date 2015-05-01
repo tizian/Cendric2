@@ -24,22 +24,22 @@ void IceSpell::load()
 	playCurrentAnimation(true);
 }
 
-const float IceSpell::getConfiguredMaxVelocityY()
+float IceSpell::getConfiguredMaxVelocityY() const
 {
 	return 1000.0f;
 }
 
-const float IceSpell::getConfiguredMaxVelocityX()
+float IceSpell::getConfiguredMaxVelocityX() const
 {
 	return 1000.0f;
 }
 
-bool IceSpell::getConfiguredTriggerFightAnimation()
+bool IceSpell::getConfiguredTriggerFightAnimation() const
 {
 	return true;
 }
 
-SpellID IceSpell::getConfiguredSpellID()
+SpellID IceSpell::getConfiguredSpellID() const
 {
 	return SpellID::Ice;
 }

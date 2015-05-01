@@ -29,7 +29,7 @@ void CrumblyBlockTile::load()
 	playCurrentAnimation(true);
 }
 
-void CrumblyBlockTile::update(sf::Time& frameTime)
+void CrumblyBlockTile::update(const sf::Time& frameTime)
 {
 	if (m_state == GameObjectState::Crumbling)
 	{

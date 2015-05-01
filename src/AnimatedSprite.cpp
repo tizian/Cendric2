@@ -1,12 +1,12 @@
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(sf::Time frameTime, bool paused, bool looped) :
-m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL), m_isFlipped(false)
+AnimatedSprite::AnimatedSprite(sf::Time frameTime, bool paused, bool looped, bool flipped) :
+m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL), m_isFlipped(flipped)
 {
 
 }
 
-void AnimatedSprite::setAnimation(Animation* animation)
+void AnimatedSprite::setAnimation(const Animation* animation)
 {
 	m_animation = animation;
 	m_texture = m_animation->getSpriteSheet();

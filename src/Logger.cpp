@@ -4,7 +4,7 @@ using namespace std;
 
 Logger* g_logger;
 
-void Logger::log(LogLevel level, const std::string& source, const std::string& message)
+void Logger::log(LogLevel level, const std::string& source, const std::string& message) const
 {
 	if (level <= m_logLevel && level != LogLevel::None)
 	{
@@ -34,15 +34,15 @@ void Logger::log(LogLevel level, const std::string& source, const std::string& m
 	}
 	
 }
-void Logger::logError(const std::string& source, const std::string& message)
+void Logger::logError(const std::string& source, const std::string& message) const
 {
 	log(LogLevel::Error, source, message);
 }
-void Logger::logWarning(const std::string& source, const std::string& message)
+void Logger::logWarning(const std::string& source, const std::string& message) const
 {
 	log(LogLevel::Warning, source, message);
 }
-void Logger::logInfo(const std::string& source, const std::string& message)
+void Logger::logInfo(const std::string& source, const std::string& message) const
 {
 	log(LogLevel::Info, source, message);
 }

@@ -13,7 +13,7 @@ vector<GameObject*>* Screen::getObjects(GameObjectType type)
 	return &m_objects[type];
 }
 
-void Screen::onEnter(Screen* previousScreen)
+void Screen::onEnter(const Screen* previousScreen)
 {
 	m_objects = vector<vector<GameObject*>>();
 	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t+1))
@@ -24,18 +24,18 @@ void Screen::onEnter(Screen* previousScreen)
 	execOnEnter(previousScreen);
 }
 
-void Screen::execOnEnter(Screen* previousScreen)
+void Screen::execOnEnter(const Screen* previousScreen)
 {
 	// nop
 }
 
-void Screen::onExit(Screen* nextScreen)
+void Screen::onExit(const Screen* nextScreen)
 {
 	deleteAllObjects();
 	execOnExit(nextScreen);
 }
 
-void Screen::execOnExit(Screen* nextScreen)
+void Screen::execOnExit(const Screen* nextScreen)
 {
 	// nop
 }
@@ -96,7 +96,7 @@ void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget)
 	}
 }
 
-sf::Text* Screen::getTooltipText()
+const sf::Text* Screen::getTooltipText() const
 {
 	return &m_tooltipText;
 }
@@ -118,7 +118,7 @@ void Screen::renderTooltipText(sf::RenderTarget& target)
 	m_tooltipText = sf::Text();
 }
 
-void Screen::setViewToStandardView(sf::RenderTarget& target)
+void Screen::setViewToStandardView(sf::RenderTarget& target) const
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -127,7 +127,7 @@ void Screen::setViewToStandardView(sf::RenderTarget& target)
 	target.setView(view);
 }
 
-void Screen::setViewToTooltipView(sf::RenderTarget& target)
+void Screen::setViewToTooltipView(sf::RenderTarget& target) const
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, BOTTOM_BORDER);

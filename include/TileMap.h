@@ -8,10 +8,12 @@
 class TileMap : public sf::Drawable, public sf::Transformable
 {
 public:
-	bool load(std::string &filepath, sf::Vector2i tilesize, std::vector<std::vector<int> > layers, int width, int height);
+	bool load(const std::string& filepath, const sf::Vector2i& tilesize, const std::vector<std::vector<int> >& layers, int width, int height);
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	void dispose();
-	sf::Vector2i& getTilesize();
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+	
+	const sf::Vector2i& getTilesize() const;
+	
 
 private:
 	// there is a border around each tile of size 1, to avoid rounding problems

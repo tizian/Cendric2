@@ -7,7 +7,7 @@ GameScreen::GameScreen(ResourceID levelID)
 	m_levelID = levelID;
 }
 
-void GameScreen::execOnEnter(Screen *previousScreen)
+void GameScreen::execOnEnter(const Screen *previousScreen)
 {
 	if (!(m_currentLevel.load(m_levelID, this)))
 	{
@@ -23,12 +23,12 @@ void GameScreen::execOnEnter(Screen *previousScreen)
 	addObject(GameObjectType::_Weapon, staff);
 }
 
-void GameScreen::execOnExit(Screen *nextScreen)
+void GameScreen::execOnExit(const Screen *nextScreen)
 {
 	m_currentLevel.dispose();
 }
 
-Screen* GameScreen::update(sf::Time frameTime)
+Screen* GameScreen::update(const sf::Time& frameTime)
 {
 	updateObjects(GameObjectType::_MainCharacter, frameTime);
 	updateObjects(GameObjectType::_Weapon, frameTime);
@@ -45,6 +45,7 @@ void GameScreen::render(sf::RenderTarget &renderTarget)
 	// parallax, maybe forground + background layers?
 	// don't render dynamic tiles, they are rendered in the level.
 	m_currentLevel.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	// ASSURE that at this point, the view is the correct game view
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_Weapon, renderTarget);

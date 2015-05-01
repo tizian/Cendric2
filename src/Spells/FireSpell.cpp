@@ -24,22 +24,22 @@ void FireSpell::load()
 	playCurrentAnimation(true);
 }
 
-const float FireSpell::getConfiguredMaxVelocityY()
+float FireSpell::getConfiguredMaxVelocityY() const
 {
 	return 1000.0f;
 }
 
-const float FireSpell::getConfiguredMaxVelocityX()
+float FireSpell::getConfiguredMaxVelocityX() const
 {
 	return 1000.0f;
 }
 
-bool FireSpell::getConfiguredTriggerFightAnimation()
+bool FireSpell::getConfiguredTriggerFightAnimation() const
 {
 	return true;
 }
 
-SpellID FireSpell::getConfiguredSpellID()
+SpellID FireSpell::getConfiguredSpellID() const
 {
 	return SpellID::Fire;
 }

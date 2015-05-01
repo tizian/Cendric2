@@ -47,7 +47,7 @@ bool Level::load(ResourceID id, Screen* screen)
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center)
+void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center) const
 {
 
 	sf::View view;
@@ -91,22 +91,22 @@ void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Ve
 	// foreground layers?
 }
 
-sf::FloatRect& Level::getLevelRect()
+const sf::FloatRect& Level::getLevelRect() const
 {
 	return m_levelRect;
 }
 
-TileMap Level::getTilemap() 
+const TileMap& Level::getTilemap() const
 {
 	return m_tileMap;
 }
 
-sf::Vector2f& Level::getStartPos()
+const sf::Vector2f& Level::getStartPos() const
 {
 	return m_startPos;
 }
 
-bool Level::collidesX(const sf::FloatRect& boundingBox)
+bool Level::collidesX(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
 	if (boundingBox.left < m_levelRect.left || boundingBox.left + boundingBox.width > m_levelRect.left + m_levelRect.width) 
@@ -158,7 +158,7 @@ bool Level::collidesX(const sf::FloatRect& boundingBox)
 	return false;
 }
 
-bool Level::collidesY(const sf::FloatRect& boundingBox)
+bool Level::collidesY(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
 	if (boundingBox.top < m_levelRect.top || boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height)
@@ -210,7 +210,7 @@ bool Level::collidesY(const sf::FloatRect& boundingBox)
 	return false;
 }
 
-float Level::getGround(const sf::FloatRect& boundingBox)
+float Level::getGround(const sf::FloatRect& boundingBox) const
 {
 	// check if ground is level ground
 	if (boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height) 
@@ -225,7 +225,7 @@ float Level::getGround(const sf::FloatRect& boundingBox)
 	return (y * tileHeight) - boundingBox.height;
 }
 
-void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect nextBoundingBoxX, const sf::FloatRect nextBoundingBoxY)
+void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY) const
 {
 	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
 	{

@@ -8,7 +8,9 @@ class CheeseLevelItem : public LevelItem
 {
 public:
 	void load() override;
-	const LevelItemID getConfiguredItemID() override;
-	const std::string getConfiguredTooltipText() override;
+
+	LevelItemID getConfiguredItemID() const override;
+	const std::string& getConfiguredTooltipText() const override;
+
 private:
 };

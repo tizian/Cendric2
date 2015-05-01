@@ -15,7 +15,7 @@ ScreenManager::~ScreenManager()
 	delete m_currentScreen;
 }
 
-void ScreenManager::update(sf::Time frameTime)
+void ScreenManager::update(const sf::Time& frameTime)
 {
 	Screen* nextScreen = m_currentScreen->update(frameTime);
 	if (m_currentScreen != nextScreen) 
@@ -43,7 +43,7 @@ void ScreenManager::render(sf::RenderTarget &renderTarget)
 	m_currentScreen->render(renderTarget);
 }
 
-Screen *ScreenManager::getCurrentScreen()
+Screen *ScreenManager::getCurrentScreen() const
 {
 	return m_currentScreen;
 }

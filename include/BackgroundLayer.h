@@ -10,9 +10,10 @@ public:
 	~BackgroundLayer();
 
 	void load(std::string& filename, float distance);
+	void render(sf::RenderTarget &target, sf::RenderStates states) const;
 	void dispose();
-	void render(sf::RenderTarget &target, sf::RenderStates states);
-	float getDistance();
+	
+	float getDistance() const;
 
 private:
 	// distance to camera. -1 means infinity.

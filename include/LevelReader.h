@@ -30,31 +30,31 @@ public:
 	LevelReader();
 	~LevelReader();
 
-	bool readLevel(char* fileName, LevelData& data);
+	bool readLevel(char* fileName, LevelData& data) const;
 
 private:
 
-	char* gotoNextChar(char* buffer, char* end, char goal);
-	int countToNextChar(char* buffer, char* end, char goal);
+	char* gotoNextChar(char* buffer, char* end, char goal) const;
+	int countToNextChar(char* buffer, char* end, char goal) const;
 
-	bool readLevelName(char* start, char* end, LevelData& data);
-	bool readTilesetPath(char* start, char* end, LevelData& data);
-	bool readMapSize(char* start, char* end, LevelData& data);
-	bool readTileSize(char* start, char* end, LevelData& data);
-	bool readLayerBackground(char* start, char* end, LevelData& data);
-	bool readLayerCollidable(char* start, char* end, LevelData& data);
-	bool readStartPos(char* start, char* end, LevelData& data);
-	bool readLayerTiles(char* start, char* end, LevelData& data);
-	bool readLayerDynamicTiles(char* start, char* end, LevelData& data);
-	bool readLayerLevelItems(char* start, char* end, LevelData& data);
+	bool readLevelName(char* start, char* end, LevelData& data) const;
+	bool readTilesetPath(char* start, char* end, LevelData& data) const;
+	bool readMapSize(char* start, char* end, LevelData& data) const;
+	bool readTileSize(char* start, char* end, LevelData& data) const;
+	bool readLayerBackground(char* start, char* end, LevelData& data) const;
+	bool readLayerCollidable(char* start, char* end, LevelData& data) const;
+	bool readStartPos(char* start, char* end, LevelData& data) const;
+	bool readLayerTiles(char* start, char* end, LevelData& data) const;
+	bool readLayerDynamicTiles(char* start, char* end, LevelData& data) const;
+	bool readLayerLevelItems(char* start, char* end, LevelData& data) const;
 
 	// \brief check level bean for validity before loading the level
-	bool checkData(LevelData& data);
+	bool checkData(LevelData& data) const;
 
 	// \brief update data to prepare it for the level
-	void updateData(LevelData& data);
-	DynamicTileID resolveDynamicTile(int tileID);
-	LevelItemID resolveLevelItem(int itemID);
+	void updateData(LevelData& data) const;
+	DynamicTileID resolveDynamicTile(int tileID) const;
+	LevelItemID resolveLevelItem(int itemID) const;
 
 	const char COMMENT_MARKER = '#';
 	const char* LEVEL_NAME = "level.name";
