@@ -19,7 +19,7 @@ struct LevelData
 	std::vector<std::vector<bool>> collidableTilePositions;
 	std::vector<std::pair<DynamicTileID, std::vector<bool>>> dynamicTiles;
 	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTilePositions;
-	std::vector<std::pair<LevelItemID, std::vector<bool>>> levelItems;
+	std::vector<LevelItemID> levelItems;
 	std::vector<std::pair<LevelItemID, sf::Vector2f>> levelItemPositions;
 	sf::FloatRect levelRect;
 };

@@ -1,4 +1,5 @@
 #include "LevelLoader.h"
+#include "MainCharacter.h"
 
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 {
@@ -31,6 +32,12 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 
 void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 {
+	MainCharacter* mainCharacter = dynamic_cast<MainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	if (mainCharacter == nullptr)
+	{	
+		g_logger->logError("LevelLoader", "Could not find main character of game screen");
+		return;
+	}
 	for (std::vector<std::pair<LevelItemID, sf::Vector2f>>::iterator it = data.levelItemPositions.begin(); it != data.levelItemPositions.end(); ++it)
 	{
 		LevelItem* levelItem;
@@ -45,7 +52,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 			return;
 		}
 
-		levelItem->load();
+		levelItem->loadItem(mainCharacter);
 		levelItem->setPosition(it->second - levelItem->getSpriteOffset());
 		screen->addObject(GameObjectType::_LevelItem, levelItem);
 	}

@@ -10,6 +10,8 @@ void TextProvider::init()
 	addText(Texts::Credits, "Credits", "Credits");
 	addText(Texts::Exit, "Exit", "Beenden");
 
+	addText(Texts::Warn_itemTooFarAway, "Item out of range", "Ich muss näher ran");
+
 	// level item tooltips
 	addText(Texts::Levelitem_tooltip_cheese, "A nice moist cheese", "Ein hübscher saftiger Käse");
 }

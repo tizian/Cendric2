@@ -29,4 +29,6 @@ public:
 
 private:
 	MainCharacter* m_mainChar;
+	// the item can only be picked up if the main char is in this range
+	const float m_pickupRange = 50.f;
 };

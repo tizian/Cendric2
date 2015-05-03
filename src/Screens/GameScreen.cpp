@@ -9,18 +9,18 @@ GameScreen::GameScreen(ResourceID levelID)
 
 void GameScreen::execOnEnter(const Screen *previousScreen)
 {
+	m_mainChar = new MainCharacter(&m_currentLevel);
+	addObject(GameObjectType::_MainCharacter, m_mainChar);
+	IceStaff* staff = new IceStaff();
+	staff->loadWeapon(m_mainChar);
+	addObject(GameObjectType::_Weapon, staff);
+
 	if (!(m_currentLevel.load(m_levelID, this)))
 	{
 		string filename(g_resourceManager->getFilename(m_levelID));
 		string errormsg = filename + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 	}
-
-	m_mainChar = new MainCharacter(&m_currentLevel);
-	addObject(GameObjectType::_MainCharacter, m_mainChar);
-	IceStaff* staff = new IceStaff();
-	staff->loadWeapon(m_mainChar);
-	addObject(GameObjectType::_Weapon, staff);
 }
 
 void GameScreen::execOnExit(const Screen *nextScreen)

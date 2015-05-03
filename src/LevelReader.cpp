@@ -48,7 +48,7 @@ int LevelReader::countToNextChar(char* buffer, char* end, char goal) const
 
 bool LevelReader::checkData(LevelData& data) const
 {
-	if (data.mapSize.x == 0 || data.mapSize.y == 0) 
+	if (data.mapSize.x == 0 || data.mapSize.y == 0)
 	{
 		g_logger->logError("LevelReader", "Error in level data : map size not set / invalid");
 		return false;
@@ -104,18 +104,10 @@ bool LevelReader::checkData(LevelData& data) const
 			return false;
 		}
 	}
-	for (int i = 0; i < data.levelItems.size(); i++)
+	if (data.levelItems.size() != data.mapSize.x * data.mapSize.y)
 	{
-		if (data.levelItems[i].first == LevelItemID::Void)
-		{
-			g_logger->logError("LevelReader", "Error in level data : dynamic tile ID not recognized");
-			return false;
-		}
-		if (data.levelItems[i].second.empty() || data.levelItems[i].second.size() != data.mapSize.x * data.mapSize.y)
-		{
-			g_logger->logError("LevelReader", "Error in level data : level item layer has not correct size (map size)");
-			return false;
-		}
+		g_logger->logError("LevelReader", "Error in level data : level item layer has not correct size (map size)");
+		return false;
 	}
 	if (data.collidableTiles.empty())
 	{
@@ -296,23 +288,17 @@ bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data) c
 	startData++;
 	endData = gotoNextChar(startData, end, '"');
 
-	// read level item id
-	LevelItemID id = resolveLevelItem(atoi(startData));
-	vector<bool> levelItems;
-	startData = gotoNextChar(startData, endData, ',');
-	startData++;
-
+	LevelItemID id;
 	while (startData != NULL)
 	{
-		levelItems.push_back(0 != atoi(startData));
+		id = resolveLevelItem(atoi(startData));
+		data.levelItems.push_back(id);
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
 			startData++;
 		}
 	}
-
-	data.levelItems.push_back(std::pair<LevelItemID, vector<bool>>(id, levelItems));
 
 	return true;
 }
@@ -504,29 +490,26 @@ void LevelReader::updateData(LevelData& data)  const
 			}
 		}
 	}
+	
+	x = 0;
+	y = 0;
 
-	// calculate levelItems
-
-	for (std::vector<std::pair<LevelItemID, std::vector<bool>>>::iterator it = data.levelItems.begin(); it != data.levelItems.end(); ++it)
+	// calculate level items
+	for (std::vector<LevelItemID>::iterator it = data.levelItems.begin(); it != data.levelItems.end(); ++it)
 	{
-		int x = 0;
-		int y = 0;
-		LevelItemID id = it->first;
-		for (std::vector<bool>::iterator it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+		LevelItemID id = (*it);
+		if (id != LevelItemID::Void)
 		{
-			if ((*it2))
-			{
-				data.levelItemPositions.push_back(std::pair<LevelItemID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
-			}
-			if (x + 1 >= data.mapSize.x)
-			{
-				x = 0;
-				y++;
-			}
-			else
-			{
-				x++;
-			}
+			data.levelItemPositions.push_back(std::pair<LevelItemID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+		}
+		if (x + 1 >= data.mapSize.x)
+		{
+			x = 0;
+			y++;
+		}
+		else
+		{
+			x++;
 		}
 	}
 
@@ -548,6 +531,7 @@ DynamicTileID LevelReader::resolveDynamicTile(int tileID) const
 	case 3:
 		return DynamicTileID::Crumbly_block;
 	default:
+		g_logger->logError("LevelReader", "Dynamic Tile ID not recognized: " + tileID);
 		return DynamicTileID::Void;
 	}
 }
@@ -556,6 +540,8 @@ LevelItemID LevelReader::resolveLevelItem(int itemID) const
 {
 	switch (itemID)
 	{
+	case 0:
+		return LevelItemID::Void;
 	case 1:
 		return LevelItemID::Food_Cheese;
 	case 2:
@@ -563,6 +549,7 @@ LevelItemID LevelReader::resolveLevelItem(int itemID) const
 	case 3:
 		return LevelItemID::Food_Water;
 	default:
+		g_logger->logError("LevelReader", "Level Item ID not recognized: " + itemID);
 		return LevelItemID::Void;
 	}
 }

@@ -36,6 +36,7 @@ public:
 	bool isKeyActive(Key key);
 	bool isMouseOver(const sf::FloatRect* boundingBox) const;
 	bool isRightClicked(const sf::FloatRect* boundingBox) const;
+	bool isLeftClicked(const sf::FloatRect* boundingBox) const;
 	bool isMouseJustPressedLeft() const;
 	bool isMouseJustPressedRight() const;
 

@@ -129,6 +129,11 @@ bool InputController::isRightClicked(const sf::FloatRect* boundingBox) const
 	return boundingBox->contains(getMousePosition()) && isMouseJustPressedRight();
 }
 
+bool InputController::isLeftClicked(const sf::FloatRect* boundingBox) const
+{
+	return boundingBox->contains(getMousePosition()) && isMouseJustPressedLeft();
+}
+
 bool InputController::isMouseJustPressedLeft() const
 {
 	if (!m_isWindowFocused) 

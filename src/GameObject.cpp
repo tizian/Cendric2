@@ -31,6 +31,10 @@ void GameObject::update(const sf::Time& frameTime)
 	{
 		onRightClick();
 	}
+	if (g_inputController->isLeftClicked(&m_boundingBox))
+	{
+		onLeftClick();
+	}
 	m_animatedSprite.update(frameTime);
 }
 
@@ -102,6 +106,11 @@ void GameObject::onMouseOver()
 }
 
 void GameObject::onRightClick()
+{
+	// nop
+}
+
+void GameObject::onLeftClick()
 {
 	// nop
 }

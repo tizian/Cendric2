@@ -60,8 +60,10 @@ public:
 	virtual void onMouseOver();
 	// gets checked & called in the update loop. default implementation does nothing.
 	// checks for the bounding box 
-	// right click is used to interact with game objects, while left click is used to fire spells
+	// right click is used to interact with game objects
 	virtual void onRightClick();
+	// left click is used to fire spells / press buttons
+	virtual void onLeftClick();
 	void addAnimation(GameObjectState state, Animation& animation);
 
 	void setBoundingBox(const sf::FloatRect& rect);
