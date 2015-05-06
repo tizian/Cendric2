@@ -1,10 +1,15 @@
 #include "LevelItem.h"
 #include "MainCharacter.h"
 
-void LevelItem::loadItem(MainCharacter* mainChar)
+void LevelItem::loadItem(MainCharacter* mainChar, LevelItemID id)
 {
 	m_mainChar = mainChar;
-	load();
+	m_itemID = id;
+}
+
+void LevelItem::load()
+{
+	// nop
 }
 
 void LevelItem::onRightClick()
@@ -25,7 +30,7 @@ void LevelItem::onRightClick()
 void LevelItem::onMouseOver()
 {
 	m_animatedSprite.setColor(sf::Color::Red);
-	m_screen->setTooltipText(getConfiguredTooltipText(), sf::Vector2f(10.f, 10.f), sf::Color::White);
+	m_screen->setTooltipText(m_tooltipText, sf::Vector2f(10.f, 10.f), sf::Color::White);
 }
 
 void LevelItem::render(sf::RenderTarget &renderTarget)
@@ -37,4 +42,9 @@ void LevelItem::render(sf::RenderTarget &renderTarget)
 GameObjectType LevelItem::getConfiguredType() const
 {
 	return GameObjectType::_LevelItem;
+}
+
+void LevelItem::setTooltipText(const std::string& tooltip)
+{
+	m_tooltipText = tooltip;
 }

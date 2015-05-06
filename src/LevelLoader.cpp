@@ -38,13 +38,19 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 		g_logger->logError("LevelLoader", "Could not find main character of game screen");
 		return;
 	}
+
 	for (std::vector<std::pair<LevelItemID, sf::Vector2f>>::iterator it = data.levelItemPositions.begin(); it != data.levelItemPositions.end(); ++it)
 	{
-		LevelItem* levelItem;
+		LevelItemBean item;
 		switch (it->first)
 		{
 		case LevelItemID::Food_Cheese:
-			levelItem = new CheeseLevelItem();
+			item.spriteOffset = sf::Vector2f(-10.f, -10.f);
+			item.boundingBox = sf::FloatRect(0, 0, 30, 30);
+			item.textureID = ResourceID::Texture_items_food;
+			item.texturePos = sf::IntRect(0, 0, 50, 50);
+			item.frameTime = sf::seconds(1.0f);
+			item.tooltip = Texts::Levelitem_tooltip_cheese;
 			break;
 		default:
 			// unexpected error
@@ -52,7 +58,19 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 			return;
 		}
 
-		levelItem->loadItem(mainCharacter);
+		LevelItem* levelItem = new LevelItem();
+		Animation idleAnimation;
+		levelItem->setSpriteOffset(item.spriteOffset);
+		levelItem->setBoundingBox(item.boundingBox);
+		idleAnimation.setSpriteSheet(g_resourceManager->getTexture(item.textureID));
+		idleAnimation.addFrame(item.texturePos);
+		levelItem->addAnimation(GameObjectState::Idle, idleAnimation);
+		levelItem->setFrameTime(item.frameTime);
+		// initial values
+		levelItem->setCurrentAnimation(levelItem->getAnimation(GameObjectState::Idle), false);
+		levelItem->playCurrentAnimation(false);
+		levelItem->loadItem(mainCharacter, it->first);
+		levelItem->setTooltipText(g_textProvider->getText(item.tooltip));
 		levelItem->setPosition(it->second - levelItem->getSpriteOffset());
 		screen->addObject(GameObjectType::_LevelItem, levelItem);
 	}

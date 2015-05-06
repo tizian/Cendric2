@@ -18,17 +18,20 @@ enum class LevelItemID
 class LevelItem : public GameObject
 {
 public:
-	void loadItem(MainCharacter* mainChar);
-	virtual void onRightClick() override;
-	virtual void onMouseOver() override;
-	void render(sf::RenderTarget &renderTarget) override;
+	void loadItem(MainCharacter* mainChar, LevelItemID id);
+	void load() override;
+	void onRightClick() override;
+	void onMouseOver() override;
+	void render(sf::RenderTarget& renderTarget) override;
+	
+	void setTooltipText(const std::string& tooltip);
 
 	GameObjectType getConfiguredType() const override;
-	virtual LevelItemID getConfiguredItemID() const = 0;
-	virtual const std::string& getConfiguredTooltipText() const = 0;
 
 private:
 	MainCharacter* m_mainChar;
 	// the item can only be picked up if the main char is in this range
 	const float m_pickupRange = 50.f;
+	LevelItemID m_itemID;
+	std::string m_tooltipText;
 };
