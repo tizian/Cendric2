@@ -9,28 +9,34 @@ void Logger::log(LogLevel level, const std::string& source, const std::string& m
 	if (level <= m_logLevel && level != LogLevel::None)
 	{
 		string levelString;
+		string color;
 		switch (level)
 		{
 		case LogLevel::Debug:
 			levelString = "[DEBUG]";
+			color = GREEN;
 			break;
 		case LogLevel::Info:
 			levelString = "[INFO]";
+			color = RED; // TODO should be default
 			break;
 		case LogLevel::Warning:
 			levelString = "[WARNING]";
+			color = YELLOW;
 			break;
 		case LogLevel::Error:
 			levelString = "[ERROR]";
+			color = RED;
 			break;
 		case LogLevel::Verbose:
 			levelString = "[VERBOSE]";
+			color = BLUE;
 			break;
 		default:
-			break;
+			return;
 		}
 
-		cout << levelString << "-[" << source << "]: " << message << endl;
+		cout << color << levelString << "-[" << source << "]: " << message << DEFAULT << endl;
 	}
 	
 }
