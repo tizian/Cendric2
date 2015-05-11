@@ -1,4 +1,4 @@
-#include "Screens\LoadingScreen.h"
+#include "Screens/LoadingScreen.h"
 
 using namespace std;
 

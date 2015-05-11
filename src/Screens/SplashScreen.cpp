@@ -1,4 +1,4 @@
-#include "Screens\SplashScreen.h"
+#include "Screens/SplashScreen.h"
 
 using namespace std;
 

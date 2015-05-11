@@ -69,7 +69,8 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename)
 	}
 
 	g_logger->logError("ResourceManager", "Texture could not be loaded from file: " + std::string(filename));
-	setError(ErrorID::Error_fileNotFound, "Texture could not be loaded from file: " + filename);
+    std::string tmp = "Texture could not be loaded from file: " + filename;
+	setError(ErrorID::Error_fileNotFound, tmp);
 	m_textures[filename] = texture;
 	return &m_textures[filename];
 }
@@ -104,7 +105,8 @@ sf::Font* ResourceManager::getFont(std::string& filename)
 	}
 
 	g_logger->logError("ResourceManager", "Font could not be loaded from file: " + std::string(filename));
-	setError(ErrorID::Error_fileNotFound, "Font could not be loaded from file: " + filename);
+    std::string tmp = "Font could not be loaded from file: " + filename;
+	setError(ErrorID::Error_fileNotFound, tmp);
 	m_fonts[filename] = font;
 	return &m_fonts[filename];
 }

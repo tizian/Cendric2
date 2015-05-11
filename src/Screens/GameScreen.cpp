@@ -1,4 +1,4 @@
-#include "Screens\GameScreen.h"
+#include "Screens/GameScreen.h"
 
 using namespace std;
 

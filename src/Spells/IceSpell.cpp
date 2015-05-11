@@ -1,4 +1,4 @@
-#include "Spells\IceSpell.h"
+#include "Spells/IceSpell.h"
 
 IceSpell::IceSpell()
 {
