@@ -18,7 +18,7 @@ void LevelItem::onRightClick()
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= m_pickupRange)
 	{
-		// TODO pickup
+		// TODO pickup, create the correct item in the players inventory.
 		setDisposed();
 	}
 	else

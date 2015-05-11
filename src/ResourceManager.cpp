@@ -38,7 +38,9 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
 		{ ResourceID::Texture_items_food, "res/assets/items/spritesheet_items_food.png" },
-		{ ResourceID::Texture_weapon_icestaff, "res/assets/weapons/spritesheet_staff_ice.png" }
+		{ ResourceID::Texture_head_wizardhat_grey, "res/assets/equipment/head/spritesheet_head_wizardhat_grey.png" },
+		{ ResourceID::Texture_head_wizardhat_blue, "res/assets/equipment/head/spritesheet_head_wizardhat_blue.png" },
+		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" }
 	});
 }
 

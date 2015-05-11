@@ -1,7 +1,12 @@
-#include "Weapon.h"
+#include "LevelEquipment.h"
 #include "MainCharacter.h"
 
-void Weapon::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
+LevelEquipment::~LevelEquipment()
+{
+	g_resourceManager->deleteResource(m_resourceID);
+}
+
+void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
 {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
 	sf::Vector2f offset;
@@ -18,11 +23,12 @@ void Weapon::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
 	position.y = (mainCharPosition + offset).y;
 }
 
-void Weapon::update(const sf::Time& frameTime)
+void LevelEquipment::update(const sf::Time& frameTime)
 {
 	GameObjectState newState = m_mainChar->getState();
 	bool newFacingRight = m_mainChar->getIsFacingRight();
-	if (m_state != newState || newFacingRight != m_isFacingRight) {
+	if (m_state != newState || newFacingRight != m_isFacingRight) 
+	{
 		m_state = newState;
 		m_isFacingRight = newFacingRight;
 		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
@@ -33,21 +39,32 @@ void Weapon::update(const sf::Time& frameTime)
 	GameObject::update(frameTime);
 }
 
-const sf::Vector2f Weapon::getConfiguredPositionOffset() const
+const sf::Vector2f LevelEquipment::getConfiguredPositionOffset() const
 {
 	return sf::Vector2f(-60.f, -20.f);
 }
 
-void Weapon::loadWeapon(MainCharacter* mainChar)
+void LevelEquipment::loadEquipment(MainCharacter* mainChar, LevelEquipmentID id)
 {
 	m_mainChar = mainChar;
+	m_equipmentID = id;
 
 	sf::Vector2f position;
 	calculatePositionAccordingToMainChar(position);
 	setPosition(position);
 }
 
-GameObjectType Weapon::getConfiguredType() const
+void LevelEquipment::load()
 {
-	return GameObjectType::_Weapon;
+	// nop
+}
+
+void LevelEquipment::setTextureID(ResourceID id)
+{
+	m_resourceID = id;
+}
+
+GameObjectType LevelEquipment::getConfiguredType() const
+{
+	return GameObjectType::_LevelEquipment;
 }

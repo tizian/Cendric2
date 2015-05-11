@@ -48,7 +48,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 			item.spriteOffset = sf::Vector2f(-10.f, -10.f);
 			item.boundingBox = sf::FloatRect(0, 0, 30, 30);
 			item.textureID = ResourceID::Texture_items_food;
-			item.texturePos = sf::IntRect(0, 0, 50, 50);
+			item.texturePositions.push_back(sf::IntRect(0, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
 			item.tooltip = Texts::Levelitem_tooltip_cheese;
 			break;
@@ -63,12 +63,15 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 		levelItem->setSpriteOffset(item.spriteOffset);
 		levelItem->setBoundingBox(item.boundingBox);
 		idleAnimation.setSpriteSheet(g_resourceManager->getTexture(item.textureID));
-		idleAnimation.addFrame(item.texturePos);
+		// add frames
+		for (auto &frame : item.texturePositions) {
+			idleAnimation.addFrame(frame);
+		}
 		levelItem->addAnimation(GameObjectState::Idle, idleAnimation);
 		levelItem->setFrameTime(item.frameTime);
 		// initial values
 		levelItem->setCurrentAnimation(levelItem->getAnimation(GameObjectState::Idle), false);
-		levelItem->playCurrentAnimation(false);
+		levelItem->playCurrentAnimation(item.texturePositions.size() > 1);
 		levelItem->loadItem(mainCharacter, it->first);
 		levelItem->setTooltipText(g_textProvider->getText(item.tooltip));
 		levelItem->setPosition(it->second - levelItem->getSpriteOffset());

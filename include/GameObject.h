@@ -36,7 +36,7 @@ enum GameObjectType
 {
 	_Undefined,
 	_MainCharacter,
-	_Weapon,
+	_LevelEquipment, // includes everything cendric can wear
 	_Button,
 	_Spell,
 	_DynamicTile,

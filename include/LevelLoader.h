@@ -4,13 +4,13 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "LevelReader.h"
 #include "DynamicTile.h"
 #include "DynamicTiles\WaterTile.h"
 #include "DynamicTiles\IceTile.h"
 #include "DynamicTiles\CrumblyBlockTile.h"
 #include "LevelItem.h"
 #include "TextProvider.h"
+#include "LevelReader.h"
 
 // TODO maybe this information should come over files rather than be hardcoded here.
 struct LevelItemBean
@@ -18,7 +18,7 @@ struct LevelItemBean
 	sf::Vector2f spriteOffset;
 	sf::FloatRect boundingBox;
 	ResourceID textureID;
-	sf::IntRect texturePos;
+	std::vector<sf::IntRect> texturePositions;
 	sf::Time frameTime;
 	Texts tooltip;
 };

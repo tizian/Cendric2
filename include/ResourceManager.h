@@ -21,6 +21,8 @@ enum class ResourceID
 	Texture_tile_ice,
 	Texture_tile_crumblyblock,
 	Texture_weapon_icestaff,
+	Texture_head_wizardhat_grey,
+	Texture_head_wizardhat_blue,
 	Texture_screen_splash,
 	Texture_screen_splash_fireanimation,
 	Texture_screen_loading,
