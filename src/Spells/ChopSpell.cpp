@@ -8,7 +8,7 @@ ChopSpell::ChopSpell()
 void ChopSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox (sf::FloatRect(0, 0, 40, 60));
+	// chop spell does not set bounding box here as it varies per weapon
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_chop));

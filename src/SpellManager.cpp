@@ -31,6 +31,7 @@ void SpellManager::init()
 	chopSpell.damage = 2;
 	chopSpell.reflectCount = 0;
 	chopSpell.startVelocity = 0.f;
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 60);
 
 	SpellBean forcefieldSpell;
 	forcefieldSpell.maxActiveTime = sf::milliseconds(3000);

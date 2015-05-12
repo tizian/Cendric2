@@ -53,6 +53,10 @@ void Spell::init(SpellBean& bean)
 	m_damage = bean.damage;
 	m_reflectCount = bean.reflectCount;
 	m_speed = bean.startVelocity;
+	if (bean.boundingBox.width != 0.f && bean.boundingBox.height != 0.f)
+	{
+		setBoundingBox(bean.boundingBox);
+	}
 }
 
 void Spell::update(const sf::Time& frameTime)

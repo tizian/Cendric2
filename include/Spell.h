@@ -24,6 +24,7 @@ struct SpellBean
 	sf::Time cooldown;
 	sf::Time maxActiveTime;
 	float startVelocity;
+	sf::FloatRect boundingBox; // gets only set after load if it is not [0,0,0,0]
 };
 
 // A spell cendric can cast
