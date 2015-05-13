@@ -9,18 +9,6 @@ void ChopSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	// chop spell does not set bounding box here as it varies per weapon
-
-	Animation spellAnimation;
-	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_chop));
-	spellAnimation.addFrame(sf::IntRect(0, 0, 40, 60));
-
-	addAnimation(GameObjectState::Idle, spellAnimation);
-
-	setFrameTime(sf::seconds(0.1f));
-
-	// initial values
-	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
-	playCurrentAnimation(true);
 }
 
 const sf::Vector2f ChopSpell::getConfiguredPositionOffset() const

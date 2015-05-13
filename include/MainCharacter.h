@@ -25,6 +25,7 @@ public:
 	Level* getLevel() const;
 	bool getIsFacingRight() const;
 	GameObjectState getState() const;
+	sf::Color getConfiguredDebugColor() const override;
 
 private:
 	const float WALK_ACCELERATION = 1500.0f;

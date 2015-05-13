@@ -13,6 +13,8 @@
 // Framerate. Values < 30 give interesting results and should not be selected.
 #define MAX_FRAME_RATE 80
 
+const bool DEBUG_RENDERING = true;
+
 class Logger;
 class TextProvider;
 class ResourceManager;

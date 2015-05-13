@@ -19,6 +19,25 @@ const Animation* GameObject::getAnimation(GameObjectState state)
 void GameObject::render(sf::RenderTarget &renderTarget)
 {
 	renderTarget.draw(m_animatedSprite);
+	if (DEBUG_RENDERING && getConfiguredDebugColor() != sf::Color::Transparent)
+	{
+		drawBoundingBox(renderTarget);
+	}
+}
+
+void GameObject::drawBoundingBox(sf::RenderTarget& renderTarget) const
+{
+	sf::RectangleShape rectangle(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
+	rectangle.setPosition(m_position);
+	rectangle.setOutlineThickness(1.f);
+	rectangle.setFillColor(sf::Color::Transparent);
+	rectangle.setOutlineColor(getConfiguredDebugColor());
+	renderTarget.draw(rectangle);
+}
+
+sf::Color GameObject::getConfiguredDebugColor() const
+{
+	return sf::Color::Transparent;
 }
 
 void GameObject::update(const sf::Time& frameTime)

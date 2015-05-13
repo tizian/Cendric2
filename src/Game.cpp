@@ -50,8 +50,39 @@ void Game::run()
 		// render
 		m_mainWindow.clear();
 		m_screenManager.render(m_mainWindow);
+		if (DEBUG_RENDERING)
+		{
+			showFPSText(m_mainWindow, frameTime.asSeconds());
+		}
+		
 		m_mainWindow.display();
 	}
 
 	m_mainWindow.close();
+}
+
+void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds)
+{
+	sf::View oldView = target.getView();
+	target.setView(target.getDefaultView());
+	m_fpsList.push_back(frameTimeSeconds);
+	if (m_fpsList.size() > FPS_AVERAGE_NR)
+	{
+		m_fpsList.pop_front();
+	}
+	// calc average
+	float sum = 0.f;
+	for (float f : m_fpsList)
+	{
+		sum += f;
+	}
+	int fps = static_cast<int>(1.f / (sum / FPS_AVERAGE_NR));
+	sf::Text fpsText = sf::Text(
+		"FPS: " + std::to_string(fps),
+		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));
+	fpsText.setColor(sf::Color::Red);
+	fpsText.setPosition(sf::Vector2f(10.f, 10.f));
+	fpsText.setCharacterSize(20);
+	target.draw(fpsText);
+	target.setView(oldView);
 }

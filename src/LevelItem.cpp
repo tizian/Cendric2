@@ -48,3 +48,8 @@ void LevelItem::setTooltipText(const std::string& tooltip)
 {
 	m_tooltipText = tooltip;
 }
+
+sf::Color LevelItem::getConfiguredDebugColor() const
+{
+	return sf::Color::Cyan;
+}

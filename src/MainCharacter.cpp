@@ -211,3 +211,8 @@ GameObjectType MainCharacter::getConfiguredType() const
 {
 	return GameObjectType::_MainCharacter;
 }
+
+sf::Color MainCharacter::getConfiguredDebugColor() const
+{
+	return sf::Color::White;
+}

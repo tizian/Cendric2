@@ -84,9 +84,11 @@ public:
 	const sf::FloatRect* getBoundingBox() const;
 	const sf::Vector2f getCenter() const;
 	// returns whether the game object should be deleted
+	// if this is set, the game object gets deleted in the next game loop
 	bool isDisposed() const;
 	virtual GameObjectType getConfiguredType() const = 0;
-	// if this is set, the game object gets deleted in the next game loop
+	// returns the color in which the debug rect should be rendered. default is transparent.
+	virtual sf::Color getConfiguredDebugColor() const;
 
 protected:
 	GameObjectState m_state;
@@ -95,11 +97,13 @@ protected:
 	Screen* m_screen = nullptr;
 	
 private:
+	bool m_isDisposed = false;
+
 	std::map<GameObjectState, Animation> m_animations;
-	
 	sf::Vector2f m_spriteOffset;
 	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
-	bool m_isDisposed = false;
+
+	void drawBoundingBox(sf::RenderTarget& renderTarget) const;
 };

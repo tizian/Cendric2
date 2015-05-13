@@ -27,6 +27,7 @@ public:
 	void setTooltipText(const std::string& tooltip);
 
 	GameObjectType getConfiguredType() const override;
+	sf::Color getConfiguredDebugColor() const override;
 
 private:
 	MainCharacter* m_mainChar;

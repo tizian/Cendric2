@@ -25,6 +25,7 @@ public:
 	// sets the log level to 'level'. The log will only output messages, that have importance 'level' or higher.
 	// if the log level is set to 'None', the log won't output anything.
 	void setLogLevel(LogLevel level);
+	LogLevel getLogLevel() const;
 
 private:
 	LogLevel m_logLevel = LogLevel::Debug;

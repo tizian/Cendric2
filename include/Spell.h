@@ -47,6 +47,7 @@ public:
 	virtual bool getConfiguredTriggerFightAnimation() const;
 	virtual SpellID getConfiguredSpellID() const = 0;
 	GameObjectType getConfiguredType() const override;
+	sf::Color getConfiguredDebugColor() const override;
 
 	int getDamage();
 	sf::Time getActiveTime();

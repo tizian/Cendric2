@@ -18,7 +18,7 @@ void Logger::log(LogLevel level, const std::string& source, const std::string& m
 			break;
 		case LogLevel::Info:
 			levelString = "[INFO]";
-			color = RED; // TODO should be default
+			color = DEFAULT;
 			break;
 		case LogLevel::Warning:
 			levelString = "[WARNING]";
@@ -56,5 +56,10 @@ void Logger::logInfo(const std::string& source, const std::string& message) cons
 void Logger::setLogLevel(LogLevel level)
 {
 	m_logLevel = level;
+}
+
+LogLevel Logger::getLogLevel() const
+{
+	return m_logLevel;
 }
 

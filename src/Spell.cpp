@@ -125,3 +125,8 @@ GameObjectType Spell::getConfiguredType() const
 	return GameObjectType::_Spell;
 }
 
+sf::Color Spell::getConfiguredDebugColor() const
+{
+	return sf::Color::Red;
+}
+

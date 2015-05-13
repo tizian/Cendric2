@@ -42,6 +42,9 @@ void ResourceManager::init()
 		{ ResourceID::Texture_head_wizardhat_blue, "res/assets/equipment/head/spritesheet_head_wizardhat_blue.png" },
 		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" }
 	});
+
+	// font should be always loaded to avoid lags when loading later
+	getFont(ResourceID::Font_copperplateGothicBold);
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename)
