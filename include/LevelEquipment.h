@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 
-class MainCharacter;
+class LevelMainCharacter;
 
 enum class LevelEquipmentID
 {
@@ -21,7 +21,7 @@ public:
 	~LevelEquipment();
 
 	void update(const sf::Time& frameTime) override;
-	void loadEquipment(MainCharacter* mainChar, LevelEquipmentID id);
+	void loadEquipment(LevelMainCharacter* mainChar, LevelEquipmentID id);
 	void load() override;
 
 	void setTextureID(ResourceID id);
@@ -34,7 +34,7 @@ protected:
 	bool m_isFacingRight;
 
 private:
-	MainCharacter* m_mainChar;
+	LevelMainCharacter* m_mainChar;
 	LevelEquipmentID m_equipmentID;
 	ResourceID m_resourceID;
 

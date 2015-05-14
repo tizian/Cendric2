@@ -19,14 +19,13 @@ public:
 
 	void update(sf::Time frameTime);
 	void render(sf::RenderTarget &renderTarget);
+	void addSpell(SpellBean& spell);
 	// returns a spell that can be added to the game screen. If the spell cannot be cast because of cd, returns nullptr.
 	Spell* getSpell();
+	void setCurrentSpell(SpellID id);
 
 private:
 	SpellID m_currentSpell;
 	std::map<SpellID, sf::Time> m_coolDownMap;
-	std::map<Key, SpellID> m_keyMap;
 	std::map<SpellID, SpellBean> m_spellMap;
-	// fill maps
-	void init();
 };

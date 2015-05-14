@@ -27,7 +27,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
 		{ ResourceID::Texture_spell_forcefield, "res/assets/spells/spritesheet_spell_forcefield.png" },
 		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
-		{ ResourceID::Texture_spell_chop, "res/assets/spells/spritesheet_spell_chop.png" },
+		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_tile_water, "res/assets/dynamic_tiles/spritesheet_tiles_water.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
@@ -166,7 +166,6 @@ void ResourceManager::setError(ErrorID id, string& description)
 void ResourceManager::deleteLevelResources()
 {
 	// delete spell resources
-	deleteResource(ResourceID::Texture_spell_chop);
 	deleteResource(ResourceID::Texture_spell_fire);
 	deleteResource(ResourceID::Texture_spell_ice);
 	deleteResource(ResourceID::Texture_spell_forcefield);
@@ -177,14 +176,15 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_tile_crumblyblock);
 
 	// delete enemy resources
+	deleteResource(ResourceID::Texture_enemy_rat);
 
 	// delete item in level resources
+	deleteResource(ResourceID::Texture_items_food);
 }
 
 void ResourceManager::loadLevelResources()
 {
 	// load spell resources
-	getTexture(ResourceID::Texture_spell_chop);
 	getTexture(ResourceID::Texture_spell_fire);
 	getTexture(ResourceID::Texture_spell_ice);
 	getTexture(ResourceID::Texture_spell_forcefield);
@@ -193,10 +193,6 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_tile_water);
 	getTexture(ResourceID::Texture_tile_ice);
 	getTexture(ResourceID::Texture_tile_crumblyblock);
-
-	// load enemy resources
-
-	// load item in level resources?
 }
 
 

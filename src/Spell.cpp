@@ -1,13 +1,13 @@
 #include "Spell.h"
-#include "MainCharacter.h"
+#include "LevelMovableGameObject.h"
 
-void Spell::loadSpell(Level* level, MainCharacter* mainChar)
+void Spell::loadSpell(Level* level, LevelMovableGameObject* mob)
 {
 	m_level = level;
-	m_mainChar = mainChar;
+	m_mob = mob;
 	
 	sf::Vector2f absolutePosition; 
-	calculatePositionAccordingToMainChar(absolutePosition);
+	calculatePositionAccordingToMob(absolutePosition);
 	setPosition(absolutePosition);
 
 	// if the spell is attached to the main char, velocity is ignored
@@ -30,11 +30,11 @@ bool Spell::getConfiguredIsAttachedToMainChar() const
 	return false;
 }
 
-void Spell::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
+void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 {
-	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
+	sf::Vector2f mainCharPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
 	sf::Vector2f offset;
-	if (m_mainChar->getIsFacingRight())
+	if (m_mob->getIsFacingRight())
 	{
 		offset = sf::Vector2f(getConfiguredPositionOffset());
 	}
@@ -63,7 +63,7 @@ void Spell::update(const sf::Time& frameTime)
 {
 	if (getConfiguredIsAttachedToMainChar())
 	{
-		calculatePositionAccordingToMainChar(m_nextPosition);
+		calculatePositionAccordingToMob(m_nextPosition);
 		setPosition(m_nextPosition);
 	}
 	else 

@@ -1,7 +1,7 @@
 #include "LevelItem.h"
-#include "MainCharacter.h"
+#include "LevelMainCharacter.h"
 
-void LevelItem::loadItem(MainCharacter* mainChar, LevelItemID id)
+void LevelItem::loadItem(LevelMainCharacter* mainChar, LevelItemID id)
 {
 	m_mainChar = mainChar;
 	m_itemID = id;

@@ -2,10 +2,10 @@
 
 #include "global.h"
 #include "Level.h"
-#include "MainCharacter.h"
+#include "LevelMainCharacter.h"
 #include "Screen.h"
 #include "ResourceManager.h"
-#include "MainCharacterLoader.h"
+#include "LevelMainCharacterLoader.h"
 
 class GameScreen : public Screen
 {
@@ -19,6 +19,6 @@ public:
 
 private:
 	Level m_currentLevel;
-	MainCharacter* m_mainChar;
+	LevelMainCharacter* m_mainChar;
 	ResourceID m_levelID;
 };

@@ -1,5 +1,5 @@
 #include "LevelEquipment.h"
-#include "MainCharacter.h"
+#include "LevelMainCharacter.h"
 
 LevelEquipment::~LevelEquipment()
 {
@@ -44,7 +44,7 @@ const sf::Vector2f LevelEquipment::getConfiguredPositionOffset() const
 	return sf::Vector2f(-60.f, -20.f);
 }
 
-void LevelEquipment::loadEquipment(MainCharacter* mainChar, LevelEquipmentID id)
+void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar, LevelEquipmentID id)
 {
 	m_mainChar = mainChar;
 	m_equipmentID = id;

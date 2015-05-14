@@ -6,7 +6,7 @@
 #include "global.h"
 #include "Screen.h"
 #include "LevelEquipment.h"
-#include "MainCharacter.h"
+#include "LevelMainCharacter.h"
 #include "TextProvider.h"
 #include "Level.h"
 
@@ -20,11 +20,11 @@ struct LevelEquipmentBean
 };
 
 // helper class used by the game screan to load the main character including his weapon / equipment.
-class MainCharacterLoader
+class LevelMainCharacterLoader
 {
 public:
 	// loads the main character and adds it directly to the screen
-	MainCharacter* loadMainCharacter(Screen* screen, Level* level) const;
+	LevelMainCharacter* loadMainCharacter(Screen* screen, Level* level) const;
 	// loads level items out of level data and adds them directly to the screen
 	void loadEquipment(Screen* screen) const;
 };

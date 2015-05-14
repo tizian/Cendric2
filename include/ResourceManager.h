@@ -13,7 +13,6 @@ enum class ResourceID
 	Font_copperplateGothicBold,
 	Texture_mainChar,
 	Texture_mapMainChar,
-	Texture_spell_chop,
 	Texture_spell_fire,
 	Texture_spell_ice,
 	Texture_spell_forcefield,
@@ -29,6 +28,7 @@ enum class ResourceID
 	Texture_screen_error_fileNotFound,
 	Texture_screen_error_dataCorrupted,
 	Texture_screen_menu,
+	Texture_enemy_rat,
 	Texture_items_food
 };
 

@@ -6,7 +6,7 @@
 #include "InputController.h"
 #include "Level.h"
 
-class MainCharacter;
+class LevelMovableGameObject;
 
 enum class SpellID
 {
@@ -19,6 +19,7 @@ enum class SpellID
 /* unlike the values loaded in load() these values here are modifiable by crystal modifiers */
 struct SpellBean
 {
+	SpellID id;
 	int damage;
 	int reflectCount;
 	sf::Time cooldown;
@@ -34,7 +35,7 @@ public:
 
 	// called by the spell manager
 	void init(SpellBean& bean);
-	void loadSpell(Level* level, MainCharacter* mainChar);
+	void loadSpell(Level* level, LevelMovableGameObject* mob);
 	virtual void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 
@@ -54,13 +55,13 @@ public:
 
 private:
 	Level* m_level;
-	MainCharacter* m_mainChar;
+	LevelMovableGameObject* m_mob;
 	sf::Time m_activeCoolDown;
 
 	int m_damage;
 	int m_reflectCount;
 	float m_speed;
 
-	// calculates position according to m_mainChar.
-	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
+	// calculates position according to m_mob
+	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
 };

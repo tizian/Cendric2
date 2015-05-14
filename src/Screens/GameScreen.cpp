@@ -9,7 +9,7 @@ GameScreen::GameScreen(ResourceID levelID)
 
 void GameScreen::execOnEnter(const Screen *previousScreen)
 {
-	MainCharacterLoader loader;
+	LevelMainCharacterLoader loader;
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
 	loader.loadEquipment(this);
 	if (!(m_currentLevel.load(m_levelID, this)))

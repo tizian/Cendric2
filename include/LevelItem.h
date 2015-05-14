@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 
-class MainCharacter;
+class LevelMainCharacter;
 
 enum class LevelItemID
 {
@@ -18,7 +18,7 @@ enum class LevelItemID
 class LevelItem : public GameObject
 {
 public:
-	void loadItem(MainCharacter* mainChar, LevelItemID id);
+	void loadItem(LevelMainCharacter* mainChar, LevelItemID id);
 	void load() override;
 	void onRightClick() override;
 	void onMouseOver() override;
@@ -30,7 +30,7 @@ public:
 	sf::Color getConfiguredDebugColor() const override;
 
 private:
-	MainCharacter* m_mainChar;
+	LevelMainCharacter* m_mainChar;
 	// the item can only be picked up if the main char is in this range
 	const float m_pickupRange = 50.f;
 	LevelItemID m_itemID;

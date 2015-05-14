@@ -1,21 +1,21 @@
-#include "MainCharacterLoader.h"
-#include "MainCharacter.h"
+#include "LevelMainCharacterLoader.h"
+#include "LevelMainCharacter.h"
 
 using namespace std;
 
-MainCharacter* MainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const
+LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const
 {
-	MainCharacter* mainChar = new MainCharacter(level);
+	LevelMainCharacter* mainChar = new LevelMainCharacter(level);
 	screen->addObject(GameObjectType::_MainCharacter, mainChar);
 	return mainChar;
 }
 
-void MainCharacterLoader::loadEquipment(Screen* screen) const
+void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 {
-	MainCharacter* mainCharacter = dynamic_cast<MainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
 	if (mainCharacter == nullptr)
 	{
-		g_logger->logError("MainCharacterLoader", "Could not find main character of game screen");
+		g_logger->logError("LevelMainCharacterLoader", "Could not find main character of game screen");
 		return;
 	}
 
@@ -44,7 +44,7 @@ void MainCharacterLoader::loadEquipment(Screen* screen) const
 			break;
 		default:
 			// unexpected error
-			g_logger->logError("MainCharacterLoader", "Equipment item was not loaded, unknown id.");
+			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");
 			return;
 		}
 
