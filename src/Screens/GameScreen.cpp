@@ -32,6 +32,7 @@ Screen* GameScreen::update(const sf::Time& frameTime)
 	updateObjects(GameObjectType::_Spell, frameTime);
 	updateObjects(GameObjectType::_DynamicTile, frameTime);
 	updateObjects(GameObjectType::_LevelItem, frameTime);
+	updateObjects(GameObjectType::_Enemy, frameTime);
 	deleteDisposedObjects();
 	return this;
 }
@@ -46,5 +47,6 @@ void GameScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
+	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
 }

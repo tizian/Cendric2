@@ -1,5 +1,8 @@
 #include "LevelLoader.h"
 #include "LevelMainCharacter.h"
+#include "Level.h"
+#include "Enemy.h"
+#include "Enemies/RatEnemy.h"
 
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 {
@@ -30,7 +33,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 	}
 }
 
-void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
+void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 {
 	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
 	if (mainCharacter == nullptr)
@@ -79,7 +82,31 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen)const
 	}
 }
 
-void LevelLoader::loadEnemies(LevelData& data, Screen* screen) const
+void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) const
 {
-	// TODO
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	if (mainCharacter == nullptr)
+	{
+		g_logger->logError("LevelLoader", "Could not find main character of game screen");
+		return;
+	}
+
+	for (std::vector<std::pair<EnemyID, sf::Vector2f>>::iterator it = data.enemyPositions.begin(); it != data.enemyPositions.end(); ++it)
+	{
+		Enemy* enemy;
+		switch (it->first)
+		{
+		case EnemyID::Rat:
+			enemy = new RatEnemy(level, mainCharacter, it->second);
+			break;
+		case EnemyID::Void:
+			break;
+		default:
+			// unexpected error
+			g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
+			return;
+		}
+
+		screen->addObject(GameObjectType::_Enemy, enemy);
+	}
 }

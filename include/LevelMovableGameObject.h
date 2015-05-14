@@ -2,10 +2,9 @@
 
 #include "global.h"
 #include "MovableGameObject.h"
-#include "Level.h"
-#include "SpellManager.h"
-#include "Screen.h"
-#include "Spell.h"
+
+class Level;
+class SpellManager;
 
 // a MOB in a level, enemies + main character.
 class LevelMovableGameObject : public MovableGameObject

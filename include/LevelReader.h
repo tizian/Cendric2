@@ -4,6 +4,7 @@
 #include "BackgroundLayer.h"
 #include "DynamicTile.h"
 #include "LevelItem.h"
+#include "Enemy.h"
 #include "Logger.h"
 
 struct LevelData
@@ -21,6 +22,8 @@ struct LevelData
 	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTilePositions;
 	std::vector<LevelItemID> levelItems;
 	std::vector<std::pair<LevelItemID, sf::Vector2f>> levelItemPositions;
+	std::vector<EnemyID> enemies;
+	std::vector<std::pair<EnemyID, sf::Vector2f>> enemyPositions;
 	sf::FloatRect levelRect;
 };
 
@@ -47,6 +50,7 @@ private:
 	bool readLayerTiles(char* start, char* end, LevelData& data) const;
 	bool readLayerDynamicTiles(char* start, char* end, LevelData& data) const;
 	bool readLayerLevelItems(char* start, char* end, LevelData& data) const;
+	bool readLayerEnemies(char* start, char* end, LevelData& data) const;
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data) const;
@@ -55,6 +59,7 @@ private:
 	void updateData(LevelData& data) const;
 	DynamicTileID resolveDynamicTile(int tileID) const;
 	LevelItemID resolveLevelItem(int itemID) const;
+	EnemyID resolveEnemy(int enemyID) const;
 
 	const char COMMENT_MARKER = '#';
 	const char* LEVEL_NAME = "level.name";
@@ -65,6 +70,7 @@ private:
 	const char* LAYER_TILES = "layer.tiles";
 	const char* LAYER_DYNAMIC_TILES = "layer.dynamictiles";
 	const char* LAYER_LEVEL_ITEMS = "layer.levelitems";
+	const char* LAYER_ENEMIES = "layer.enemies";
 	const char* LAYER_BACKGROUND = "layer.background";
 	const char* CENDRIC_STARTPOS = "cendric.startpos";
 };

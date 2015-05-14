@@ -12,6 +12,8 @@
 #include "TextProvider.h"
 #include "LevelReader.h"
 
+class Level;
+
 // TODO maybe this information should come over files rather than be hardcoded here.
 struct LevelItemBean
 {
@@ -32,5 +34,5 @@ public:
 	// loads level items out of level data and adds them directly to the screen
 	void loadLevelItems(LevelData& data, Screen* screen) const;
 	// loads enemies out of level data and adds them directly to the screen
-	void loadEnemies(LevelData& data, Screen* screen) const;
+	void loadEnemies(LevelData& data, Screen* screen, Level* level) const;
 };
