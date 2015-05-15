@@ -109,6 +109,11 @@ bool LevelReader::checkData(LevelData& data) const
 		g_logger->logError("LevelReader", "Error in level data : level item layer has not correct size (map size)");
 		return false;
 	}
+	if (data.enemies.size() != data.mapSize.x * data.mapSize.y)
+	{
+		g_logger->logError("LevelReader", "Error in level data : enemy layer has not correct size (map size)");
+		return false;
+	}
 	if (data.collidableTiles.empty())
 	{
 		g_logger->logError("LevelReader", "Error in level data : collidable layer is empty");
@@ -299,7 +304,28 @@ bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data) c
 			startData++;
 		}
 	}
+	return true;
+}
 
+bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) const
+{
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+	EnemyID id;
+	while (startData != NULL)
+	{
+		id = resolveEnemy(atoi(startData));
+		data.enemies.push_back(id);
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
 	return true;
 }
 
@@ -396,6 +422,12 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 		else if (strncmp(pos, LAYER_LEVEL_ITEMS, strlen(LAYER_LEVEL_ITEMS)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_LEVEL_ITEMS);
 			readLayerLevelItems(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, LAYER_ENEMIES, strlen(LAYER_ENEMIES)) == 0) {
+			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_ENEMIES);
+			readLayerEnemies(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
@@ -513,6 +545,27 @@ void LevelReader::updateData(LevelData& data)  const
 		}
 	}
 
+	x = 0;
+	y = 0;
+
+	// calculate enemies
+	for (std::vector<EnemyID>::iterator it = data.enemies.begin(); it != data.enemies.end(); ++it)
+	{
+		EnemyID id = (*it);		if (id != EnemyID::Void)
+		{
+			data.enemyPositions.push_back(std::pair<EnemyID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+		}
+		if (x + 1 >= data.mapSize.x)
+		{
+			x = 0;
+			y++;
+		}
+		else
+		{
+			x++;
+		}
+	}
+
 	// calculate level rect
 	data.levelRect.left = 0;
 	data.levelRect.top = 0;
@@ -551,5 +604,19 @@ LevelItemID LevelReader::resolveLevelItem(int itemID) const
 	default:
 		g_logger->logError("LevelReader", "Level Item ID not recognized: " + itemID);
 		return LevelItemID::Void;
+	}
+}
+
+EnemyID LevelReader::resolveEnemy(int enemyID) const
+{
+	switch (enemyID)
+	{
+	case 0:
+		return EnemyID::Void;
+	case 1:
+		return EnemyID::Rat;
+	default:
+		g_logger->logError("LevelReader", "Enemy ID not recognized: " + enemyID);
+		return EnemyID::Void;
 	}
 }

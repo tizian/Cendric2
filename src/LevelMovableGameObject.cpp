@@ -1,4 +1,6 @@
 #include "LevelMovableGameObject.h"
+#include "SpellManager.h"
+#include "Level.h"
 
 LevelMovableGameObject::LevelMovableGameObject(Level* level)
 {

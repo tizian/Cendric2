@@ -42,7 +42,7 @@ bool Level::load(ResourceID id, Screen* screen)
 	LevelLoader loader;
 	loader.loadDynamicTiles(data, screen);
 	loader.loadLevelItems(data, screen);
-	loader.loadEnemies(data, screen);
+	loader.loadEnemies(data, screen, this);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 	return true;
 }
@@ -181,6 +181,11 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 	int y = topLeft.y;
 	for (int x = topLeft.x; x <= topRight.x; x++)
 	{
+		if (y > m_collidableTiles.size() || y < 0 || x < 0 || x > m_collidableTiles[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
 		if (m_collidableTiles[y][x])
 		{
 			return true;
@@ -191,6 +196,11 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 	y = bottomLeft.y;
 	for (int x = bottomLeft.x; x <= bottomRight.x; x++)
 	{
+		if (y > m_collidableTiles.size() || y < 0 || x < 0 || x > m_collidableTiles[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
 		if (m_collidableTiles[y][x])
 		{
 			return true;
