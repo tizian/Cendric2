@@ -1,8 +1,7 @@
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(sf::Time frameTime, bool paused, bool looped, bool flipped) :
-m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL), m_isFlipped(flipped)
-{
+AnimatedSprite::AnimatedSprite(sf::Time frameTime, bool paused, bool looped) :
+m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL) {
 
 }
 
@@ -50,7 +49,15 @@ void AnimatedSprite::setLooped(bool looped)
 
 void AnimatedSprite::setFlipped(bool flipped)
 {
-	m_isFlipped = flipped;
+	if (flipped)
+	{
+		setScale(-1.f, 1.f);
+	}
+	else
+	{
+		setScale(1.f, 1.f);
+	}
+	
 }
 
 void AnimatedSprite::reset()
@@ -59,6 +66,7 @@ void AnimatedSprite::reset()
 	setRotation(0.f);
 	setFlipped(false);
 	setScale(sf::Vector2f(1.f, 1.f));
+	setOrigin(0.f, 0.f);
 }
 
 void AnimatedSprite::setColor(const sf::Color& color)
@@ -95,11 +103,6 @@ bool AnimatedSprite::isLooped() const
 	return m_isLooped;
 }
 
-bool AnimatedSprite::isFlipped() const
-{
-	return m_isFlipped;
-}
-
 bool AnimatedSprite::isPlaying() const
 {
 	return !m_isPaused;
@@ -126,21 +129,11 @@ void AnimatedSprite::setFrame(size_t newFrame, bool resetTime)
 		float right = left + static_cast<float>(rect.width);
 		float top = static_cast<float>(rect.top);
 		float bottom = top + static_cast<float>(rect.height);
-		
-		if (m_isFlipped) 
-		{
-			m_vertices[0].texCoords = sf::Vector2f(right, top);
-			m_vertices[1].texCoords = sf::Vector2f(right, bottom);
-			m_vertices[2].texCoords = sf::Vector2f(left, bottom);
-			m_vertices[3].texCoords = sf::Vector2f(left, top);
-		} 
-		else 
-		{
-			m_vertices[0].texCoords = sf::Vector2f(left, top);
-			m_vertices[1].texCoords = sf::Vector2f(left, bottom);
-			m_vertices[2].texCoords = sf::Vector2f(right, bottom);
-			m_vertices[3].texCoords = sf::Vector2f(right, top);
-		}
+
+		m_vertices[0].texCoords = sf::Vector2f(left, top);
+		m_vertices[1].texCoords = sf::Vector2f(left, bottom);
+		m_vertices[2].texCoords = sf::Vector2f(right, bottom);
+		m_vertices[3].texCoords = sf::Vector2f(right, top);
 	}
 
 	if (resetTime)

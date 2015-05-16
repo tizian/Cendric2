@@ -62,7 +62,10 @@ void GameObject::setPosition(const sf::Vector2f& position)
 	m_position = position;
 	m_boundingBox.left = position.x;
 	m_boundingBox.top = position.y;
-	m_animatedSprite.setPosition(position + m_spriteOffset);
+	// origin is set to the center for rotation + flipping
+	sf::Vector2f spriteCenter(sf::Vector2f(m_boundingBox.width / 2, m_boundingBox.height / 2) - m_spriteOffset);
+	m_animatedSprite.setOrigin(spriteCenter);
+	m_animatedSprite.setPosition(position + m_spriteOffset + spriteCenter);
 }
 
 void GameObject::setPositionX(const float posX)
@@ -75,6 +78,15 @@ void GameObject::setPositionY(const float posY)
 {
 	const sf::Vector2f newPosition(m_position.x, posY);
 	setPosition(newPosition);
+}
+
+void GameObject::setRotation(float angle)
+{
+	// SFML uses degrees, not radian, hence the conversion here.
+	sf::Vector2f oldOrigin = m_animatedSprite.getOrigin();
+	
+	m_animatedSprite.setRotation(angle * 57.2957795f);
+
 }
 
 void GameObject::setFrameTime(const sf::Time& time) 

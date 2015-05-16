@@ -33,7 +33,7 @@
 class AnimatedSprite : public sf::Drawable, public sf::Transformable
 {
 public:
-	explicit AnimatedSprite(sf::Time frameTime = sf::seconds(0.2f), bool paused = false, bool looped = true, bool flipped = false);
+	explicit AnimatedSprite(sf::Time frameTime = sf::seconds(0.2f), bool paused = false, bool looped = true);
 
 	void update(sf::Time deltaTime);
 	void play(Animation* animation);
@@ -65,7 +65,6 @@ private:
 	std::size_t m_currentFrame;
 	bool m_isPaused;
 	bool m_isLooped;
-	bool m_isFlipped;
 	const sf::Texture* m_texture;
 	sf::Vertex m_vertices[4];
 

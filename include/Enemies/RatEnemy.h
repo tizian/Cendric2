@@ -10,7 +10,7 @@
 class RatEnemy : public Enemy
 {
 public:
-	RatEnemy(Level* level, LevelMainCharacter* mainChar, sf::Vector2f pos);
+	RatEnemy(Level* level, LevelMainCharacter* mainChar);
 	~RatEnemy();
 
 	void load() override;
@@ -18,6 +18,7 @@ public:
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;
+	sf::Vector2f getConfiguredSpellOffset() const override;
 
 protected:
 	// handle input and calculate the next position

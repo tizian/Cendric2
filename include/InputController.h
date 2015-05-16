@@ -41,7 +41,7 @@ public:
 	bool isMouseJustPressedRight() const;
 
 	// returns mouse position relative to window
-	sf::Vector2f getMousePosition() const;
+	const sf::Vector2f& getMousePosition() const;
 
 private:
 	std::map<Key, bool> m_keyActiveMap;
@@ -61,4 +61,6 @@ private:
 	
 	// is the window currently focused? we only count input events if it is so!
 	bool m_isWindowFocused;
+	// the mouse position gets calculated in every frame.
+	sf::Vector2f m_mousePosition;
 };

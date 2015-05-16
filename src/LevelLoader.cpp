@@ -97,7 +97,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 		switch (it->first)
 		{
 		case EnemyID::Rat:
-			enemy = new RatEnemy(level, mainCharacter, it->second);
+			enemy = new RatEnemy(level, mainCharacter);
 			break;
 		case EnemyID::Void:
 			break;
@@ -107,6 +107,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			return;
 		}
 
+		enemy->setPosition(it->second);
 		screen->addObject(GameObjectType::_Enemy, enemy);
 	}
 }

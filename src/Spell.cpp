@@ -1,6 +1,8 @@
 #include "Spell.h"
 #include "LevelMovableGameObject.h"
 
+using namespace std;
+
 void Spell::loadSpell(Level* level, LevelMovableGameObject* mob)
 {
 	m_level = level;
@@ -11,7 +13,7 @@ void Spell::loadSpell(Level* level, LevelMovableGameObject* mob)
 	setPosition(absolutePosition);
 
 	// if the spell is attached to the main char, velocity is ignored
-	if (getConfiguredIsAttachedToMainChar())
+	if (getConfiguredIsAttachedToMob())
 	{
 		setVelocity(sf::Vector2f(0, 0));
 		return;
@@ -22,10 +24,15 @@ void Spell::loadSpell(Level* level, LevelMovableGameObject* mob)
 	direction.x = (len == 0) ? 0 : direction.x / len;
 	direction.y = (len == 0) ? 0 : direction.y / len;
 	
+	if (getConfiguredRotateSprite())
+	{
+		setRotation(atan2(direction.y, direction.x));
+	}
+	
 	setVelocity(m_speed * direction);
 }
 
-bool Spell::getConfiguredIsAttachedToMainChar() const
+bool Spell::getConfiguredIsAttachedToMob() const
 {
 	return false;
 }
@@ -36,11 +43,11 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 	sf::Vector2f offset;
 	if (m_mob->getIsFacingRight())
 	{
-		offset = sf::Vector2f(getConfiguredPositionOffset());
+		offset = sf::Vector2f(getConfiguredPositionOffset() + m_mob->getConfiguredSpellOffset());
 	}
 	else
 	{
-		offset = sf::Vector2f(-getConfiguredPositionOffset().x - getBoundingBox()->width, getConfiguredPositionOffset().y);
+		offset = sf::Vector2f(-(getConfiguredPositionOffset().x + m_mob->getConfiguredSpellOffset().x) - getBoundingBox()->width, getConfiguredPositionOffset().y + m_mob->getConfiguredSpellOffset().y);
 	}
 
 	position.x = (mainCharPosition + offset).x;
@@ -61,7 +68,7 @@ void Spell::init(SpellBean& bean)
 
 void Spell::update(const sf::Time& frameTime)
 {
-	if (getConfiguredIsAttachedToMainChar())
+	if (getConfiguredIsAttachedToMob())
 	{
 		calculatePositionAccordingToMob(m_nextPosition);
 		setPosition(m_nextPosition);
@@ -90,6 +97,11 @@ const sf::Vector2f Spell::getConfiguredPositionOffset() const
 bool Spell::getConfiguredTriggerFightAnimation() const
 {
 	return false;
+}
+
+bool Spell::getConfiguredRotateSprite() const
+{
+	return true;
 }
 
 void Spell::checkCollisions(const sf::Vector2f& nextPosition)

@@ -1,7 +1,7 @@
 #include "Enemies/RatEnemy.h"
 #include "LevelMainCharacter.h"
 
-RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar, sf::Vector2f pos) : Enemy(level, mainChar, pos)
+RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar)
 {
 	load();
 
@@ -22,6 +22,11 @@ void RatEnemy::checkCollisions(const sf::Vector2f& nextPosition)
 {
 	Enemy::checkCollisions(nextPosition);
 	// TODO check positions with spells
+}
+
+sf::Vector2f RatEnemy::getConfiguredSpellOffset() const
+{
+	return sf::Vector2f(-10.f, 0.f);
 }
 
 void RatEnemy::handleInput()

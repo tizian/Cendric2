@@ -35,6 +35,7 @@ void InputController::update()
 	// SPELL FORCEFIELD
 	m_keyActiveMap[Key::SpellForcefield] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellForcefield));
 
+	// update mouse clicks
 	m_isMouseJustPressedLeft = false;
 	m_isMouseJustPressedRight = false;
 	if (m_isMouseReleasedLeft && sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -56,6 +57,15 @@ void InputController::update()
 	{
 		m_isMouseReleasedRight = false;
 	}
+
+	// update mouse position
+	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
+	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
+	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT + BOTTOM_BORDER) / m_windowSize.y);
+	sf::Vector2f view = sf::Vector2f(
+		m_mainWindow->getView().getCenter().x - m_mainWindow->getView().getSize().x / 2,
+		m_mainWindow->getView().getCenter().y - m_mainWindow->getView().getSize().y / 2);
+	m_mousePosition = pos + view;
 }
 
 void InputController::setWindow(sf::RenderWindow* window)
@@ -108,15 +118,9 @@ void InputController::setCurrentWindowSize(int width, int height)
 	m_windowSize.y = height;
 }
 
-sf::Vector2f InputController::getMousePosition() const
+const sf::Vector2f& InputController::getMousePosition() const
 {
-	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
-	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
-	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT + BOTTOM_BORDER) / m_windowSize.y);
-	sf::Vector2f view = sf::Vector2f(
-		m_mainWindow->getView().getCenter().x - m_mainWindow->getView().getSize().x / 2, 
-		m_mainWindow->getView().getCenter().y - m_mainWindow->getView().getSize().y / 2);
-	return pos + view;
+	return m_mousePosition;
 }
 
 bool InputController::isMouseOver(const sf::FloatRect* boundingBox) const

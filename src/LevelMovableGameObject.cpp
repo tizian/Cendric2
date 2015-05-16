@@ -62,6 +62,11 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition)
 	}
 }
 
+sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const
+{
+	return sf::Vector2f(0, 0);
+}
+
 void LevelMovableGameObject::updateAnimation()
 {
 	// calculate new game state and set animation.

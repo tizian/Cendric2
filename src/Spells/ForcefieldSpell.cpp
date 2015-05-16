@@ -41,9 +41,14 @@ float ForcefieldSpell::getConfiguredMaxVelocityX() const
 	return 0.f;
 }
 
-bool ForcefieldSpell::getConfiguredIsAttachedToMainChar() const
+bool ForcefieldSpell::getConfiguredIsAttachedToMob() const
 {
 	return true;
+}
+
+bool ForcefieldSpell::getConfiguredRotateSprite() const
+{
+	return false;
 }
 
 SpellID ForcefieldSpell::getConfiguredSpellID() const

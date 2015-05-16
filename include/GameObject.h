@@ -75,6 +75,8 @@ public:
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void setScreen(Screen* screen);
 	void setFrameTime(const sf::Time& time);
+	// angle is in radian
+	void setRotation(float angle);
 	void playCurrentAnimation(bool play);
 	void loopCurrentAnimation(bool loop);
 

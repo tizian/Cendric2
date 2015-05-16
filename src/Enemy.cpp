@@ -2,10 +2,9 @@
 #include "Level.h"
 #include "LevelMainCharacter.h"
 
-Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, sf::Vector2f pos) : LevelMovableGameObject(level)
+Enemy::Enemy(Level* level, LevelMainCharacter* mainChar) : LevelMovableGameObject(level)
 {
 	m_mainChar = mainChar;
-	setPosition(pos);
 }
 
 Enemy::~Enemy()
@@ -50,6 +49,7 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 		m_isGrounded = false;
 	}
 
+	m_jumps = false;
 	if (isMovingX && collidesX)
 	{
 		m_jumps = true;

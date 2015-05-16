@@ -26,7 +26,7 @@ float ChopSpell::getConfiguredMaxVelocityX() const
 	return 0.f;
 }
 
-bool ChopSpell::getConfiguredIsAttachedToMainChar() const
+bool ChopSpell::getConfiguredIsAttachedToMob() const
 {
 	return true;
 }
@@ -34,6 +34,11 @@ bool ChopSpell::getConfiguredIsAttachedToMainChar() const
 bool ChopSpell::getConfiguredTriggerFightAnimation() const
 {
 	return true;
+}
+
+bool ChopSpell::getConfiguredRotateSprite() const
+{
+	return false;
 }
 
 SpellID ChopSpell::getConfiguredSpellID() const

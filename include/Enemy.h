@@ -16,7 +16,7 @@ enum class EnemyID
 class Enemy : public LevelMovableGameObject
 {
 public:
-	Enemy(Level* level, LevelMainCharacter* mainChar, sf::Vector2f pos);
+	Enemy(Level* level, LevelMainCharacter* mainChar);
 	~Enemy();
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;

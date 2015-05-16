@@ -39,13 +39,15 @@ public:
 	virtual void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 
-	// the offset of the spells start position, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
+	// the offset of the spells start position, as seen from the upper mid of the mobs bounding box. The default is the position of the staff head
 	virtual const sf::Vector2f getConfiguredPositionOffset() const;
-	// returns whether the spell is bound to the main character and will update its position according to the main character. default is false.
+	// returns whether the spell is bound to the main character and will update its position according to the mob. default is false.
 	// if this value is set to true, the velocity of a spell has no influence anymore.
-	virtual bool getConfiguredIsAttachedToMainChar() const;
-	// if true, cendric will be "fighting" as long as the fight animation is. default is false.
+	virtual bool getConfiguredIsAttachedToMob() const;
+	// if true, the mob will be in its "fighting" state for the duration of the spell (or the fighting animation (cendric)). default is false.
 	virtual bool getConfiguredTriggerFightAnimation() const;
+	// if true, the spell sprite will be rotated accordingly. default is true.
+	virtual bool getConfiguredRotateSprite() const;
 	virtual SpellID getConfiguredSpellID() const = 0;
 	GameObjectType getConfiguredType() const override;
 	sf::Color getConfiguredDebugColor() const override;
@@ -55,7 +57,7 @@ public:
 
 private:
 	Level* m_level;
-	LevelMovableGameObject* m_mob;
+	LevelMovableGameObject* m_mob; // owner
 	sf::Time m_activeCoolDown;
 
 	int m_damage;
