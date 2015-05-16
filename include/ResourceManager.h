@@ -29,6 +29,7 @@ enum class ResourceID
 	Texture_screen_error_dataCorrupted,
 	Texture_screen_menu,
 	Texture_enemy_rat,
+	Texture_enemy_firerat,
 	Texture_items_food
 };
 

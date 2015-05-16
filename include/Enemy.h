@@ -9,7 +9,8 @@ class LevelMainCharacter;
 enum class EnemyID
 {
 	Void,
-	Rat
+	Rat,
+	FireRat,
 };
 
 // An enemy in a level

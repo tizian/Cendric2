@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void Spell::loadSpell(Level* level, LevelMovableGameObject* mob)
+void Spell::loadSpell(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
 {
 	m_level = level;
 	m_mob = mob;
@@ -11,14 +11,8 @@ void Spell::loadSpell(Level* level, LevelMovableGameObject* mob)
 	sf::Vector2f absolutePosition; 
 	calculatePositionAccordingToMob(absolutePosition);
 	setPosition(absolutePosition);
-
-	// if the spell is attached to the main char, velocity is ignored
-	if (getConfiguredIsAttachedToMob())
-	{
-		setVelocity(sf::Vector2f(0, 0));
-		return;
-	}
-	sf::Vector2f direction = g_inputController->getMousePosition() - absolutePosition;
+	
+	sf::Vector2f direction = target - absolutePosition;
 	// normalize dir
 	float len = sqrt(direction.x * direction.x + direction.y * direction.y);
 	direction.x = (len == 0) ? 0 : direction.x / len;
@@ -27,6 +21,13 @@ void Spell::loadSpell(Level* level, LevelMovableGameObject* mob)
 	if (getConfiguredRotateSprite())
 	{
 		setRotation(atan2(direction.y, direction.x));
+	}
+	
+	// if the spell is attached to the main char, velocity is ignored 
+	if (getConfiguredIsAttachedToMob())
+	{
+		setVelocity(sf::Vector2f(0, 0));
+		return;
 	}
 	
 	setVelocity(m_speed * direction);
@@ -127,7 +128,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition)
 	m_level->collideWithDynamicTiles(this, nextBoundingBoxX, nextBoundingBoxY);
 }
 
-sf::Time Spell::getActiveTime()
+const sf::Time& Spell::getActiveTime() const 
 {
 	return m_activeCoolDown;
 }

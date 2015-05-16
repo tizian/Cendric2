@@ -3,7 +3,6 @@
 #include "global.h"
 #include "MovableGameObject.h"
 #include "ResourceManager.h"
-#include "InputController.h"
 #include "Level.h"
 
 class LevelMovableGameObject;
@@ -35,7 +34,7 @@ public:
 
 	// called by the spell manager
 	void init(SpellBean& bean);
-	void loadSpell(Level* level, LevelMovableGameObject* mob);
+	void loadSpell(Level* level, LevelMovableGameObject* mob, sf::Vector2f target);
 	virtual void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 
@@ -52,8 +51,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 	sf::Color getConfiguredDebugColor() const override;
 
-	int getDamage();
-	sf::Time getActiveTime();
+	const sf::Time& getActiveTime() const;
 
 private:
 	Level* m_level;

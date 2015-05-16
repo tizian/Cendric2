@@ -19,7 +19,7 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 	fireSpell.cooldown = sf::milliseconds(1000);
 	fireSpell.damage = 10;
 	fireSpell.reflectCount = 0;
-	fireSpell.startVelocity = 500.f;
+	fireSpell.startVelocity = 300.f;
 
 	SpellBean chopSpell;
 	chopSpell.id = SpellID::Chop;
@@ -44,7 +44,7 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 	iceSpell.cooldown = sf::milliseconds(1000);
 	iceSpell.damage = 6;
 	iceSpell.reflectCount = 0;
-	iceSpell.startVelocity = 700.f;
+	iceSpell.startVelocity = 400.f;
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(iceSpell);
@@ -101,7 +101,7 @@ void LevelMainCharacter::handleInput()
 		Spell* spell = m_spellManager->getSpell();
 		if (spell != nullptr) 
 		{
-			spell->loadSpell(getLevel(), this);
+			spell->loadSpell(getLevel(), this, g_inputController->getMousePosition());
 			if (spell->getConfiguredTriggerFightAnimation()) {
 				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
 			}

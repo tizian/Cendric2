@@ -615,6 +615,8 @@ EnemyID LevelReader::resolveEnemy(int enemyID) const
 		return EnemyID::Void;
 	case 1:
 		return EnemyID::Rat;
+	case 2:
+		return EnemyID::FireRat;
 	default:
 		g_logger->logError("LevelReader", "Enemy ID not recognized: " + enemyID);
 		return EnemyID::Void;

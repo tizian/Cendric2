@@ -28,6 +28,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_forcefield, "res/assets/spells/spritesheet_spell_forcefield.png" },
 		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
+		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
 		{ ResourceID::Texture_tile_water, "res/assets/dynamic_tiles/spritesheet_tiles_water.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
@@ -177,6 +178,7 @@ void ResourceManager::deleteLevelResources()
 
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
+	deleteResource(ResourceID::Texture_enemy_firerat);
 
 	// delete item in level resources
 	deleteResource(ResourceID::Texture_items_food);

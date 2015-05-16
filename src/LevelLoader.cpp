@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Enemy.h"
 #include "Enemies/RatEnemy.h"
+#include "Enemies/FireRatEnemy.h"
 
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 {
@@ -98,6 +99,9 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 		{
 		case EnemyID::Rat:
 			enemy = new RatEnemy(level, mainCharacter);
+			break;
+		case EnemyID::FireRat:
+			enemy = new FireRatEnemy(level, mainCharacter);
 			break;
 		case EnemyID::Void:
 			break;
