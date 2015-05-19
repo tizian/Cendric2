@@ -7,11 +7,6 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar) : LevelMovableGameObjec
 	m_mainChar = mainChar;
 }
 
-Enemy::~Enemy()
-{
-	delete m_spellManager;
-}
-
 void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
