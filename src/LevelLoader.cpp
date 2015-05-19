@@ -55,6 +55,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.texturePositions.push_back(sf::IntRect(0, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
 			item.tooltip = Texts::Levelitem_tooltip_cheese;
+			item.item = ItemID::Food_Cheese;
 			break;
 		default:
 			// unexpected error
@@ -78,6 +79,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 		levelItem->playCurrentAnimation(item.texturePositions.size() > 1);
 		levelItem->loadItem(mainCharacter, it->first);
 		levelItem->setTooltipText(g_textProvider->getText(item.tooltip));
+		levelItem->setItemID(item.item);
 		levelItem->setPosition(it->second - levelItem->getSpriteOffset());
 		screen->addObject(GameObjectType::_LevelItem, levelItem);
 	}

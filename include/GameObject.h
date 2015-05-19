@@ -6,44 +6,10 @@
 #include "AnimatedSprite.h"
 #include "InputController.h"
 
+#include "Enums/GameObjectState.h"
+#include "Enums/GameObjectType.h"
+
 class Screen;
-
-// this enum is used for animations and used by all game objects
-enum class GameObjectState
-{
-	Idle, // used by nearly every game object
-	Idle_up, // used by map main character
-	Idle_down, // used by map main character
-	Idle_left, // used by map main character
-	Idle_right, // used by map main character
-	Walking, // used by main character and its weapons
-	Walking_up, // used by map main character
-	Walking_down, // used by map main character
-	Walking_right, // used by map main character
-	Walking_left, // used by map main character
-	Jumping, // used by main character and its weapons
-	Fighting, // used by main character and its weapons
-	Frozen, // used by water tile
-	Crumbling, // used by crumbly block tile
-	Pressed // used by buttons
-};
-
-// the type of a game object.
-// used by the screen for rendering and update order.
-// MAX should not be used as enum types as it is only used for the enum iterator
-// undefined should always be the first (=0). It can be used though.
-enum GameObjectType
-{
-	_Undefined,
-	_MainCharacter,
-	_LevelEquipment, // includes everything cendric can wear
-	_Button,
-	_Spell,
-	_DynamicTile,
-	_Enemy,
-	_LevelItem,
-	_MAX
-};
 
 // A game object with animations, position, bounding box, game state. 
 // subclasses should always call 'load'.

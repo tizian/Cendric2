@@ -1,24 +1,14 @@
 #pragma once
 
 #include "global.h"
+#include "Reader.h"
 #include "Logger.h"
+
+#include "Structs/MapData.h"
 
 class Map;
 
-struct MapData
-{
-	std::string name;
-	sf::Vector2i mapSize;
-	sf::Vector2i tileSize;
-	sf::Vector2f startPos;
-	std::string tileSetPath;
-	std::vector<std::vector<int>> layers;
-	std::vector<bool> collidableTiles;
-	std::vector<std::vector<bool>> collidableTileRects;
-	sf::FloatRect mapRect;
-};
-
-class MapReader
+class MapReader : public Reader
 {
 public:
 	MapReader();
@@ -27,9 +17,6 @@ public:
 	bool readMap(char* fileName, MapData& data);
 
 private:
-
-	char* gotoNextChar(char* buffer, char* end, char goal) const;
-	int countToNextChar(char* buffer, char* end, char goal) const;
 
 	bool readMapName(char* start, char* end, MapData& data) const;
 	bool readTilesetPath(char* start, char* end, MapData& data) const;
@@ -45,7 +32,6 @@ private:
 	// \brief update data to prepare it for the map
 	void updateData(MapData& data) const;
 
-	const char COMMENT_MARKER = '#';
 	const char* MAP_NAME = "map.name";
 	const char* MAP_SIZE = "map.size";
 	const char* MAP_TILESIZE = "map.tilesize";

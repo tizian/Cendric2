@@ -4,7 +4,7 @@
 void LevelItem::loadItem(LevelMainCharacter* mainChar, LevelItemID id)
 {
 	m_mainChar = mainChar;
-	m_itemID = id;
+	m_levelItemID = id;
 }
 
 void LevelItem::load()
@@ -52,4 +52,9 @@ void LevelItem::setTooltipText(const std::string& tooltip)
 sf::Color LevelItem::getConfiguredDebugColor() const
 {
 	return sf::Color::Cyan;
+}
+
+void LevelItem::setItemID(ItemID id)
+{
+	m_itemID = id;
 }

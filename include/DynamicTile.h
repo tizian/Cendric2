@@ -3,16 +3,9 @@
 #include "global.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "Enums/DynamicTileID.h"
 
 class Spell;
-
-enum class DynamicTileID
-{
-	Void,
-	Water,
-	Ice,
-	Crumbly_block
-};
 
 // A dynamic tile in a level
 class DynamicTile : public GameObject

@@ -1,33 +1,16 @@
 #pragma once
 
 #include "global.h"
+#include "Reader.h"
 #include "BackgroundLayer.h"
 #include "DynamicTile.h"
 #include "LevelItem.h"
 #include "Enemy.h"
 #include "Logger.h"
 
-struct LevelData
-{
-	std::string name;
-	sf::Vector2i mapSize;
-	sf::Vector2i tileSize;
-	sf::Vector2f startPos;
-	std::string tileSetPath;
-	std::vector<BackgroundLayer> backgroundLayers;
-	std::vector<std::vector<int>> layers;
-	std::vector<bool> collidableTiles;
-	std::vector<std::vector<bool>> collidableTilePositions;
-	std::vector<std::pair<DynamicTileID, std::vector<bool>>> dynamicTiles;
-	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTilePositions;
-	std::vector<LevelItemID> levelItems;
-	std::vector<std::pair<LevelItemID, sf::Vector2f>> levelItemPositions;
-	std::vector<EnemyID> enemies;
-	std::vector<std::pair<EnemyID, sf::Vector2f>> enemyPositions;
-	sf::FloatRect levelRect;
-};
+#include "Structs/LevelData.h"
 
-class LevelReader
+class LevelReader : public Reader
 {
 public:
 	LevelReader();
@@ -36,9 +19,6 @@ public:
 	bool readLevel(char* fileName, LevelData& data) const;
 
 private:
-
-	char* gotoNextChar(char* buffer, char* end, char goal) const;
-	int countToNextChar(char* buffer, char* end, char goal) const;
 
 	bool readLevelName(char* start, char* end, LevelData& data) const;
 	bool readTilesetPath(char* start, char* end, LevelData& data) const;
@@ -61,7 +41,6 @@ private:
 	LevelItemID resolveLevelItem(int itemID) const;
 	EnemyID resolveEnemy(int enemyID) const;
 
-	const char COMMENT_MARKER = '#';
 	const char* LEVEL_NAME = "level.name";
 	const char* MAP_SIZE = "map.size";
 	const char* MAP_TILESIZE = "map.tilesize";

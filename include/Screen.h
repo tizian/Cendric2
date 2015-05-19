@@ -6,13 +6,9 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 
-class ScreenManager;
+#include "Enums/ScreenID.h"
 
-enum class ScreenID
-{
-	Screen_map,
-	Screen_game
-};
+class ScreenManager;
 
 class Screen
 {

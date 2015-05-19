@@ -4,26 +4,19 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "DynamicTile.h"
 #include "DynamicTiles/WaterTile.h"
 #include "DynamicTiles/IceTile.h"
 #include "DynamicTiles/CrumblyBlockTile.h"
-#include "LevelItem.h"
-#include "TextProvider.h"
-#include "LevelReader.h"
+
+#include "Enums/DynamicTileID.h"
+#include "Enums/LevelItemID.h"
+#include "Enums/ItemID.h"
+#include "Enums/EnemyID.h"
+
+#include "Structs/LevelData.h"
+#include "Structs/LevelItemBean.h"
 
 class Level;
-
-// TODO maybe this information should come over files rather than be hardcoded here.
-struct LevelItemBean
-{
-	sf::Vector2f spriteOffset;
-	sf::FloatRect boundingBox;
-	ResourceID textureID;
-	std::vector<sf::IntRect> texturePositions;
-	sf::Time frameTime;
-	Texts tooltip;
-};
 
 // helper class used by the level to load dynamic tiles, level items and enemies
 class LevelLoader

@@ -3,21 +3,7 @@
 #include <map>
 
 #include "global.h"
-
-enum class Key
-{
-	Escape,
-	Left,
-	Right, 
-	Up,
-	Down,
-	Jump, 
-	Fire, 
-	SpellFire, 
-	SpellIce,
-	SpellChop,
-	SpellForcefield
-};
+#include "Enums/Key.h"
 
 class InputController
 {

@@ -2,16 +2,10 @@
 
 #include "global.h"
 #include "LevelMovableGameObject.h"
+#include "Enums/EnemyID.h"
 
 class Level;
 class LevelMainCharacter;
-
-enum class EnemyID
-{
-	Void,
-	Rat,
-	FireRat,
-};
 
 // An enemy in a level
 class Enemy : public LevelMovableGameObject

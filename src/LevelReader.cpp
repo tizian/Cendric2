@@ -12,40 +12,6 @@ LevelReader::~LevelReader()
 {
 }
 
-char* LevelReader::gotoNextChar(char* buffer, char* end, char goal) const
-{
-	while (buffer < end && *buffer != goal)
-	{
-		buffer++;
-	}
-
-	// goal not found
-	if (buffer >= end)
-	{
-		return NULL;
-	}
-
-	return buffer;
-}
-
-int LevelReader::countToNextChar(char* buffer, char* end, char goal) const
-{
-	int count = 0;
-	while (buffer < end && *buffer != goal)
-	{
-		buffer++;
-		count++;
-	}
-
-	// goal not found
-	if (buffer >= end)
-	{
-		return -1;
-	}
-
-	return count;
-}
-
 bool LevelReader::checkData(LevelData& data) const
 {
 	if (data.mapSize.x == 0 || data.mapSize.y == 0)

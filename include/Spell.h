@@ -5,27 +5,10 @@
 #include "ResourceManager.h"
 #include "Level.h"
 
+#include "Enums/SpellID.h"
+#include "Structs/SpellBean.h"
+
 class LevelMovableGameObject;
-
-enum class SpellID
-{
-	Chop,
-	Fire,
-	Ice,
-	Forcefield
-};
-
-/* unlike the values loaded in load() these values here are modifiable by crystal modifiers */
-struct SpellBean
-{
-	SpellID id;
-	int damage;
-	int reflectCount;
-	sf::Time cooldown;
-	sf::Time maxActiveTime;
-	float startVelocity;
-	sf::FloatRect boundingBox; // gets only set after load if it is not [0,0,0,0]
-};
 
 // A spell cendric can cast
 class Spell : public MovableGameObject

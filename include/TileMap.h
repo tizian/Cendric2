@@ -14,7 +14,6 @@ public:
 	
 	const sf::Vector2i& getTilesize() const;
 	
-
 private:
 	// there is a border around each tile of size 1, to avoid rounding problems
 	const int TILE_BORDER = 1;

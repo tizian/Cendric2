@@ -1,23 +1,10 @@
 #pragma once
 
 #include "global.h"
+#include "Enums/Language.h"
+#include "Enums/Texts.h"
 
 #include <map>
-
-enum class Texts
-{
-	Play,
-	Exit,
-	Credits,
-	Warn_itemTooFarAway,
-	Levelitem_tooltip_cheese,
-};
-
-enum class Language
-{
-	Lang_EN,
-	Lang_DE
-};
 
 class TextProvider
 {

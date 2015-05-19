@@ -3,16 +3,9 @@
 #include "global.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "Enums/LevelEquipmentID.h"
 
 class LevelMainCharacter;
-
-enum class LevelEquipmentID
-{
-	Void,
-	Weapon_icestaff,
-	Head_wizardhat_grey,
-	Head_wizardhat_blue
-};
 
 // Equipment for cendric inside a level
 class LevelEquipment : public GameObject

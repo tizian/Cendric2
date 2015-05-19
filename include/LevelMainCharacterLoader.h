@@ -5,19 +5,12 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "LevelEquipment.h"
 #include "LevelMainCharacter.h"
-#include "TextProvider.h"
 #include "Level.h"
+#include "LevelEquipment.h"
 
-struct LevelEquipmentBean
-{
-	sf::Vector2f spriteOffset;
-	sf::FloatRect boundingBox;
-	ResourceID textureID;
-	std::map<GameObjectState, std::vector<sf::IntRect>> texturePositions;
-	sf::Time frameTime;
-};
+#include "Enums/LevelEquipmentID.h"
+#include "Structs/LevelEquipmentBean.h"
 
 // helper class used by the game screan to load the main character including his weapon / equipment.
 class LevelMainCharacterLoader
