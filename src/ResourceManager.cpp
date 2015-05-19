@@ -38,10 +38,12 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
-		{ ResourceID::Texture_items_food, "res/assets/items/spritesheet_items_food.png" },
+		{ ResourceID::Texture_levelitems, "res/assets/items/spritesheet_levelitems.png" },
+		{ ResourceID::Texture_items, "res/assets/items/spritesheet_items.png" },
 		{ ResourceID::Texture_head_wizardhat_grey, "res/assets/equipment/head/spritesheet_head_wizardhat_grey.png" },
 		{ ResourceID::Texture_head_wizardhat_blue, "res/assets/equipment/head/spritesheet_head_wizardhat_blue.png" },
-		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" }
+		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" },
+		{ ResourceID::Texture_weapon_rustysword, "res/assets/equipment/weapon/spritesheet_weapon_rustysword.png" }
 	});
 
 	// font should be always loaded to avoid lags when loading later
@@ -181,7 +183,7 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_enemy_firerat);
 
 	// delete item in level resources
-	deleteResource(ResourceID::Texture_items_food);
+	deleteResource(ResourceID::Texture_levelitems);
 }
 
 void ResourceManager::loadLevelResources()

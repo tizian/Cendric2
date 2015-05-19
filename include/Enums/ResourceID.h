@@ -15,6 +15,7 @@ enum class ResourceID
 	Texture_tile_ice,
 	Texture_tile_crumblyblock,
 	Texture_weapon_icestaff,
+	Texture_weapon_rustysword,
 	Texture_head_wizardhat_grey,
 	Texture_head_wizardhat_blue,
 	Texture_screen_splash,
@@ -25,5 +26,6 @@ enum class ResourceID
 	Texture_screen_menu,
 	Texture_enemy_rat,
 	Texture_enemy_firerat,
-	Texture_items_food
+	Texture_levelitems,
+	Texture_items,
 };

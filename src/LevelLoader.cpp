@@ -51,7 +51,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 		case LevelItemID::Food_Cheese:
 			item.spriteOffset = sf::Vector2f(-10.f, -10.f);
 			item.boundingBox = sf::FloatRect(0, 0, 30, 30);
-			item.textureID = ResourceID::Texture_items_food;
+			item.textureID = ResourceID::Texture_levelitems;
 			item.texturePositions.push_back(sf::IntRect(0, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
 			item.tooltip = Texts::Levelitem_tooltip_cheese;

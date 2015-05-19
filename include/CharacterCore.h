@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 
 #include "Enums/ItemID.h"
+#include "Enums/LevelEquipmentID.h"
 #include "Structs/AttributeBean.h"
 
 class CharacterCore
@@ -38,13 +39,13 @@ private:
 	int m_gold;
 	
 	// current equipment
-	ItemID m_equipped_head;
-	ItemID m_equipped_body;
-	ItemID m_equipped_weapon;
-	ItemID m_equipped_ring_1;
-	ItemID m_equipped_ring_2;
-	ItemID m_equipped_neck;
-	ItemID m_equipped_back;
+	LevelEquipmentID m_equipped_head;
+	LevelEquipmentID m_equipped_body;
+	LevelEquipmentID m_equipped_weapon;
+	LevelEquipmentID m_equipped_ring_1;
+	LevelEquipmentID m_equipped_ring_2;
+	LevelEquipmentID m_equipped_neck;
+	LevelEquipmentID m_equipped_back;
 
 	// item vector, the id and the quantity.
 	std::map<ItemID, int> m_items;

@@ -22,7 +22,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 	// TODO this is only a dummy gamedata object
 	vector<LevelEquipmentID> gameData;
 	gameData.push_back(LevelEquipmentID::Head_wizardhat_grey);
-	gameData.push_back(LevelEquipmentID::Weapon_icestaff);
+	gameData.push_back(LevelEquipmentID::Weapon_rustysword);
 
 	for (std::vector<LevelEquipmentID>::iterator it = gameData.begin(); it != gameData.end(); ++it)
 	{
@@ -32,6 +32,10 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 		{
 		case LevelEquipmentID::Weapon_icestaff:
 			equipment.textureID = ResourceID::Texture_weapon_icestaff;
+			useStandardFrames = true;
+			break;
+		case LevelEquipmentID::Weapon_rustysword:
+			equipment.textureID = ResourceID::Texture_weapon_rustysword;
 			useStandardFrames = true;
 			break;
 		case LevelEquipmentID::Head_wizardhat_blue:
