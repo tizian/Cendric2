@@ -22,7 +22,7 @@ void Level::dispose()
 	g_resourceManager->deleteLevelResources();
 }
 
-bool Level::load(ResourceID id, Screen* screen) 
+bool Level::load(LevelID id, Screen* screen) 
 {
 	g_resourceManager->loadLevelResources();
 	LevelReader reader;
@@ -32,6 +32,7 @@ bool Level::load(ResourceID id, Screen* screen)
 		return false;
 	}
 
+	m_id = id;
 	// load level
 	m_startPos = data.startPos;
 	m_name = data.name;
@@ -245,4 +246,9 @@ void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBound
 			tile->onHit(spell);
 		}
 	}
+}
+
+LevelID Level::getID() const
+{
+	return m_id;
 }

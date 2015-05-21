@@ -4,8 +4,11 @@
 
 #include "global.h"
 #include "Logger.h"
+
 #include "Enums/ResourceID.h"
 #include "Enums/ErrorID.h"
+#include "Enums/MapID.h"
+#include "Enums/LevelID.h"
 
 class ResourceManager
 {
@@ -31,6 +34,8 @@ public:
 	sf::Font* getFont(ResourceID id);
 	sf::Font* getFont(std::string& filename);
 	char* getFilename(ResourceID id);
+	char* getFilename(LevelID id);
+	char* getFilename(MapID id);
 	const std::pair<ErrorID, std::string>* pollError() const;
 
 private:
@@ -38,6 +43,10 @@ private:
 	std::map<std::string, sf::Font> m_fonts;
 	// a map that is filled with all ResourceTags and the corresponding filenames
 	std::map <ResourceID, std::string> m_fileNames;
+	// a map that is filled with all LevelIDs and their filenames
+	std::map <LevelID, std::string> m_levelFileNames;
+	// a map that is filled with all MapIDs and their filenames
+	std::map <MapID, std::string> m_mapFileNames;
 	// this pair stores resource errors and gets checked in every game loop iteration. mostly and hopefully void.
 	std::pair<ErrorID, std::string> m_currentError;
 };

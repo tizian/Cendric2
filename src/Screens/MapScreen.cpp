@@ -2,11 +2,11 @@
 
 using namespace std;
 
-MapScreen::MapScreen(ResourceID map)
+MapScreen::MapScreen(MapID mapID)
 {
-	if (!(m_currentMap.load(map)))
+	if (!(m_currentMap.load(mapID)))
 	{
-		string filename(g_resourceManager->getFilename(map));
+		string filename(g_resourceManager->getFilename(mapID));
 		string errormsg = filename + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 	}
@@ -14,15 +14,15 @@ MapScreen::MapScreen(ResourceID map)
 
 Screen* MapScreen::update(const sf::Time& frameTime)
 {
-	ResourceID id = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
-	if (id == ResourceID::Void)
+	LevelID id = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
+	if (id == LevelID::Void)
 	{
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
 		return this;
 	} 
 	else
 	{ 
-		return new LoadingScreen(ScreenID::Screen_game, ResourceID::Level_testlevel);
+		return new LoadingScreen(id);
 	}
 }
 

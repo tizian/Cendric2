@@ -12,6 +12,8 @@
 #include "Logger.h"
 #include "LevelLoader.h"
 
+#include "Enums/LevelID.h"
+
 class Level 
 {
 public:
@@ -19,7 +21,7 @@ public:
 	~Level();
 
 	// loads a .dric file
-	bool load(ResourceID id, Screen* screen);
+	bool load(LevelID id, Screen* screen);
 	// draws the level. Background layers, tilemap, dynamic tiles, foreground layers.
 	void draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center) const;
 	// deletes the resources
@@ -33,6 +35,7 @@ public:
 	const TileMap& getTilemap() const;
 	const sf::Vector2f& getStartPos() const;
 	const sf::FloatRect& getLevelRect() const;
+	LevelID getID() const;
 	// returns the next y position where the bounding box is grounding.
 	float getGround(const sf::FloatRect& boundingBox) const;
 
@@ -44,5 +47,5 @@ private:
 	std::vector<GameObject*>* m_dynamicTiles;
 	std::string m_name;
 	sf::Vector2f m_startPos;
-	ResourceID m_resourceID;
+	LevelID m_id;
 };

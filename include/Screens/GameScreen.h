@@ -7,10 +7,12 @@
 #include "ResourceManager.h"
 #include "LevelMainCharacterLoader.h"
 
+#include "Enums/LevelID.h"
+
 class GameScreen : public Screen
 {
 public:
-	GameScreen(ResourceID levelID);
+	GameScreen(LevelID levelID);
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
@@ -20,5 +22,5 @@ public:
 private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar;
-	ResourceID m_levelID;
+	LevelID m_levelID;
 };

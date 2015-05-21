@@ -2,14 +2,17 @@
 
 #include "global.h"
 #include "ResourceManager.h"
-#include "Screen.h"
 #include "Screens/MapScreen.h"
 #include "Screens/GameScreen.h"
+
+#include "Enums/MapID.h"
+#include "Enums/LevelID.h"
 
 class LoadingScreen : public Screen
 {
 public:
-	LoadingScreen(ScreenID screenToLoad, ResourceID level);
+	LoadingScreen(LevelID level);
+	LoadingScreen(MapID map);
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
@@ -19,7 +22,7 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
-	ScreenID m_screenToLoad;
-	// depicts the map or level to load
-	ResourceID m_resource;
+
+	LevelID m_levelToLoad;
+	MapID m_mapToLoad;
 };

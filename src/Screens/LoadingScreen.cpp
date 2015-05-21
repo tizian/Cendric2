@@ -2,24 +2,31 @@
 
 using namespace std;
 
-LoadingScreen::LoadingScreen(ScreenID screenToLoad, ResourceID resource)
+LoadingScreen::LoadingScreen(LevelID id)
 {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_loading)));
-	m_screenToLoad = screenToLoad;
-	m_resource = resource;
+	m_levelToLoad = id;
+	m_mapToLoad = MapID::Void;
+}
+
+LoadingScreen::LoadingScreen(MapID id)
+{
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_loading)));
+	m_mapToLoad = id;
+	m_levelToLoad = LevelID::Void;
 }
 
 Screen* LoadingScreen::update(const sf::Time& frameTime)
 {
-	switch (m_screenToLoad)
+	if (m_levelToLoad != LevelID::Void)
 	{
-	case ScreenID::Screen_game:
-		return new GameScreen(m_resource);
-	case ScreenID::Screen_map:
-		return new MapScreen(m_resource);
-	default:
-		return this;
+		return new GameScreen(m_levelToLoad);
 	}
+	if (m_mapToLoad != MapID::Void)
+	{
+		return new MapScreen(m_mapToLoad);
+	}
+	return this;
 }
 
 void LoadingScreen::render(sf::RenderTarget &renderTarget)

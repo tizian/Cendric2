@@ -6,8 +6,6 @@
 
 #include "Structs/MapData.h"
 
-class Map;
-
 class MapReader : public Reader
 {
 public:

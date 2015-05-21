@@ -3,8 +3,7 @@
 enum class ResourceID
 {
 	Void,
-	Map_testmap,
-	Level_testlevel,
+	
 	Font_copperplateGothicBold,
 	Texture_mainChar,
 	Texture_mapMainChar,

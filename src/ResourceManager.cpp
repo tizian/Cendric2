@@ -12,15 +12,23 @@ ResourceManager::~ResourceManager()
 {
 	m_textures.clear();
 	m_fileNames.clear();
+	m_levelFileNames.clear();
+	m_mapFileNames.clear();
 	m_fonts.clear();
 }
 
 void ResourceManager::init()
 {
+	m_levelFileNames.insert(
+		{ LevelID::Testlevel, "res/level/testlevel/testlevel.dric" }
+	);
+
+	m_mapFileNames.insert(
+		{ MapID::Testmap, "res/map/testmap/testmap.dricmap" }
+	);
+
 	m_fileNames.insert(
 	{
-		{ ResourceID::Map_testmap, "res/map/testmap/testmap.dricmap" },
-		{ ResourceID::Level_testlevel, "res/level/testlevel/testlevel.dric" },
 		{ ResourceID::Font_copperplateGothicBold, "res/fonts/copperplate_gothic_bold.ttf" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
@@ -153,6 +161,16 @@ void ResourceManager::deleteResource(std::string filename)
 char* ResourceManager::getFilename(ResourceID id)
 {
 	return &m_fileNames[id][0u];
+}
+
+char* ResourceManager::getFilename(MapID id)
+{
+	return &m_mapFileNames[id][0u];
+}
+
+char* ResourceManager::getFilename(LevelID id)
+{
+	return &m_levelFileNames[id][0u];
 }
 
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const

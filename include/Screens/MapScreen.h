@@ -7,10 +7,12 @@
 #include "ResourceManager.h"
 #include "Screens/LoadingScreen.h"
 
+#include "Enums/MapID.h"
+
 class MapScreen : public Screen
 {
 public:
-	MapScreen(ResourceID map);
+	MapScreen(MapID mapID);
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

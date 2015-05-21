@@ -14,7 +14,7 @@ void Map::dispose()
 	m_tileMap.dispose();
 }
 
-bool Map::load(ResourceID id)
+bool Map::load(MapID id)
 {
 	MapReader reader;
 	MapData data;
@@ -144,15 +144,20 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
-ResourceID Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
+LevelID Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 {
 	
 	if (boundingBox.contains(sf::Vector2f(50*1, 50*32)))
 	{
-		return ResourceID::Level_testlevel;
+		return LevelID::Testlevel;
 	}
 	else 
 	{
-		return ResourceID::Void;
+		return LevelID::Void;
 	}
+}
+
+MapID Map::getID() const
+{
+	return m_id;
 }

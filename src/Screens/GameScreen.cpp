@@ -2,7 +2,7 @@
 
 using namespace std;
 
-GameScreen::GameScreen(ResourceID levelID)
+GameScreen::GameScreen(LevelID levelID)
 {
 	m_levelID = levelID;
 }

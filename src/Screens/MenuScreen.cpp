@@ -11,7 +11,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 {
 	if (g_inputController->isKeyActive(Key::Escape) || g_inputController->isMouseJustPressedLeft())
 	{
-		return new LoadingScreen(ScreenID::Screen_map, ResourceID::Map_testmap);
+		return new LoadingScreen(MapID::Testmap);
 	}
 	updateObjects(GameObjectType::_Undefined, frameTime);
 	return this;
