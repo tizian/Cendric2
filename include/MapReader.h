@@ -9,8 +9,6 @@
 class MapReader : public Reader
 {
 public:
-	MapReader();
-	~MapReader();
 
 	bool readMap(char* fileName, MapData& data);
 

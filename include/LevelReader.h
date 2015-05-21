@@ -19,6 +19,7 @@ public:
 	bool readLevel(char* fileName, LevelData& data) const;
 
 private:
+	void initMaps();
 
 	bool readLevelName(char* start, char* end, LevelData& data) const;
 	bool readTilesetPath(char* start, char* end, LevelData& data) const;
@@ -37,9 +38,10 @@ private:
 
 	// \brief update data to prepare it for the level
 	void updateData(LevelData& data) const;
-	DynamicTileID resolveDynamicTile(int tileID) const;
-	LevelItemID resolveLevelItem(int itemID) const;
-	EnemyID resolveEnemy(int enemyID) const;
+
+	std::map<int, DynamicTileID> m_dynamicTileMap;
+	std::map<int, LevelItemID> m_levelItemMap;
+	std::map<int, EnemyID> m_enemyMap;
 
 	const char* LEVEL_NAME = "level.name";
 	const char* MAP_SIZE = "map.size";

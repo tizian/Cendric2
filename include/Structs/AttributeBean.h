@@ -6,10 +6,10 @@ struct AttributeBean
 	int maxManaPoints;
 	int healthRegenerationPerS;
 	int manaRegenerationPerS;
+	int damagePhysical;
 	int damageFire;
 	int damageIce;
-	int damagePhysical;
+	int resistancePhysical;
 	int resistanceFire;
 	int resistanceIce;
-	int resistancePhysical;
 };

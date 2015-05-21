@@ -2,16 +2,6 @@
 
 using namespace std;
 
-//constructor
-MapReader::MapReader()
-{
-}
-
-//destructor
-MapReader::~MapReader()
-{
-}
-
 bool MapReader::checkData(MapData& data) const
 {
 	if (data.mapSize.x == 0 || data.mapSize.y == 0)
@@ -222,6 +212,8 @@ bool MapReader::readMap(char* fileName, MapData& data)
 	char* pos = charBuffer;
 	char* end = charBuffer + bufferContentLength;
 
+	bool noError = true;
+
 	// read defined tags
 	while (pos < end)
 	{
@@ -232,39 +224,39 @@ bool MapReader::readMap(char* fileName, MapData& data)
 
 		else if (strncmp(pos, MAP_NAME, strlen(MAP_NAME)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_NAME));
-			readMapName(pos, end, data);
+			noError = readMapName(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, MAP_SIZE, strlen(MAP_SIZE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_SIZE));
-			readMapSize(pos, end, data);
+			noError = readMapSize(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, MAP_TILESIZE, strlen(MAP_TILESIZE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_TILESIZE));
-			readTileSize(pos, end, data);
+			noError = readTileSize(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, TILESET_PATH, strlen(TILESET_PATH)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(TILESET_PATH));
-			readTilesetPath(pos, end, data);
+			noError = readTilesetPath(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_COLLIDABLE, strlen(LAYER_COLLIDABLE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_COLLIDABLE));;
-			readLayerCollidable(pos, end, data);
+			noError = readLayerCollidable(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_TILES, strlen(LAYER_TILES)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_TILES));
-			readLayerTiles(pos, end, data);
+			noError = readLayerTiles(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, CENDRIC_STARTPOS, strlen(CENDRIC_STARTPOS)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(CENDRIC_STARTPOS));
-			readStartPos(pos, end, data);
+			noError = readStartPos(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {
@@ -272,9 +264,9 @@ bool MapReader::readMap(char* fileName, MapData& data)
 			return false;
 		}
 
-		if (pos == NULL)
+		if (pos == NULL || !noError)
 		{
-			// reached end of file
+			// reached end of file or error happened.
 			break;
 		}
 
@@ -285,7 +277,7 @@ bool MapReader::readMap(char* fileName, MapData& data)
 	delete[] charBuffer;
 
 	// check data
-	if (!checkData(data))
+	if (!noError || !checkData(data))
 	{
 		return false;
 	}

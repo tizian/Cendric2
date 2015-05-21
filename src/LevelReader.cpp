@@ -2,14 +2,36 @@
 
 using namespace std;
 
-//constructor
 LevelReader::LevelReader()
 {
+	initMaps();
 }
 
-//destructor
 LevelReader::~LevelReader()
 {
+	m_dynamicTileMap.clear();
+	m_levelItemMap.clear();
+	m_enemyMap.clear();
+}
+
+void LevelReader::initMaps()
+{
+	m_dynamicTileMap.insert({
+		{ 1, DynamicTileID::Water },
+		{ 2, DynamicTileID::Ice },
+		{ 3, DynamicTileID::Crumbly_block }
+	});
+	m_levelItemMap.insert({
+		{ 0, LevelItemID::Void },
+		{ 1, LevelItemID::Food_Cheese },
+		{ 2, LevelItemID::Food_Bread },
+		{ 3, LevelItemID::Food_Water }
+	});
+	m_enemyMap.insert({
+		{ 0, EnemyID::Void },
+		{ 1, EnemyID::Rat },
+		{ 2, EnemyID::FireRat },
+	});
 }
 
 bool LevelReader::checkData(LevelData& data) const
@@ -231,7 +253,13 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 	endData = gotoNextChar(startData, end, '"');
 
 	// read dynamic tile id
-	DynamicTileID id = resolveDynamicTile(atoi(startData));
+	int id = atoi(startData);
+	if (m_dynamicTileMap.find(id) == m_dynamicTileMap.end())
+	{
+		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + id);
+		return false;
+	}
+	DynamicTileID dynamicTile = m_dynamicTileMap.at(id);
 	vector<bool> dynamicTiles;
 	startData = gotoNextChar(startData, endData, ',');
 	startData++;
@@ -246,7 +274,7 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 		}
 	}
 
-	data.dynamicTiles.push_back(std::pair<DynamicTileID, vector<bool>>(id, dynamicTiles));
+	data.dynamicTiles.push_back(std::pair<DynamicTileID, vector<bool>>(dynamicTile, dynamicTiles));
 
 	return true;
 }
@@ -259,11 +287,17 @@ bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data) c
 	startData++;
 	endData = gotoNextChar(startData, end, '"');
 
-	LevelItemID id;
+	LevelItemID levelItem;
 	while (startData != NULL)
 	{
-		id = resolveLevelItem(atoi(startData));
-		data.levelItems.push_back(id);
+		int id = atoi(startData);
+		if (m_levelItemMap.find(id) == m_levelItemMap.end())
+		{
+			g_logger->logError("LevelReader", "Level item ID not recognized: " + id);
+			return false;
+		}
+		levelItem = m_levelItemMap.at(id);
+		data.levelItems.push_back(levelItem);
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
@@ -281,11 +315,17 @@ bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) cons
 	startData++;
 	endData = gotoNextChar(startData, end, '"');
 
-	EnemyID id;
+	EnemyID enemy;
 	while (startData != NULL)
 	{
-		id = resolveEnemy(atoi(startData));
-		data.enemies.push_back(id);
+		int id = atoi(startData);
+		if (m_enemyMap.find(id) == m_enemyMap.end())
+		{
+			g_logger->logError("LevelReader", "Enemy ID not recognized: " + id);
+			return false;
+		}
+		enemy = m_enemyMap.at(id);
+		data.enemies.push_back(enemy);
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
@@ -339,6 +379,8 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 	char* pos = charBuffer;
 	char* end = charBuffer + bufferContentLength;
 
+	bool noError = true;
+
 	// read defined tags
 	while (pos < end)
 	{
@@ -349,39 +391,39 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 
 		else if (strncmp(pos, LEVEL_NAME, strlen(LEVEL_NAME)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LEVEL_NAME);
-			readLevelName(pos, end, data);			
+			noError = readLevelName(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, MAP_SIZE, strlen(MAP_SIZE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + MAP_SIZE);
-			readMapSize(pos, end, data);
+			noError = readMapSize(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, MAP_TILESIZE, strlen(MAP_TILESIZE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + MAP_TILESIZE);
-			readTileSize(pos, end, data);
+			noError = readTileSize(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, TILESET_PATH, strlen(TILESET_PATH)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + TILESET_PATH);
-			readTilesetPath(pos, end, data);
+			noError = readTilesetPath(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_COLLIDABLE, strlen(LAYER_COLLIDABLE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_COLLIDABLE);
-			readLayerCollidable(pos, end, data);
+			noError = readLayerCollidable(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_TILES, strlen(LAYER_TILES)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_TILES);
-			readLayerTiles(pos, end, data);
+			noError = readLayerTiles(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_DYNAMIC_TILES, strlen(LAYER_DYNAMIC_TILES)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_DYNAMIC_TILES);
-			readLayerDynamicTiles(pos, end, data);
+			noError = readLayerDynamicTiles(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
@@ -393,18 +435,18 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 		}
 		else if (strncmp(pos, LAYER_ENEMIES, strlen(LAYER_ENEMIES)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_ENEMIES);
-			readLayerEnemies(pos, end, data);
+			noError = readLayerEnemies(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, CENDRIC_STARTPOS, strlen(CENDRIC_STARTPOS)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + CENDRIC_STARTPOS);
-			readStartPos(pos, end, data);
+			noError = readStartPos(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_BACKGROUND, strlen(LAYER_BACKGROUND)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_BACKGROUND);
-			readLayerBackground(pos, end, data);
+			noError = readLayerBackground(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {
@@ -412,9 +454,9 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 			return false;
 		}
 
-		if (pos == NULL) 
+		if (pos == NULL || !noError) 
 		{
-			// reached end of file
+			// reached end of file or error happened
 			break;
 		}
 
@@ -425,7 +467,7 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 	delete[] charBuffer;
 
 	// check data
-	if (!checkData(data))
+	if (!noError || !checkData(data))
 	{
 		return false;
 	}
@@ -537,54 +579,4 @@ void LevelReader::updateData(LevelData& data)  const
 	data.levelRect.top = 0;
 	data.levelRect.height = static_cast<float>(data.tileSize.y * data.mapSize.y);
 	data.levelRect.width = static_cast<float>(data.tileSize.x * data.mapSize.x);
-}
-
-DynamicTileID LevelReader::resolveDynamicTile(int tileID) const
-{
-	switch (tileID)
-	{
-	case 1:
-		return DynamicTileID::Water;
-	case 2:
-		return DynamicTileID::Ice;
-	case 3:
-		return DynamicTileID::Crumbly_block;
-	default:
-		g_logger->logError("LevelReader", "Dynamic Tile ID not recognized: " + tileID);
-		return DynamicTileID::Void;
-	}
-}
-
-LevelItemID LevelReader::resolveLevelItem(int itemID) const
-{
-	switch (itemID)
-	{
-	case 0:
-		return LevelItemID::Void;
-	case 1:
-		return LevelItemID::Food_Cheese;
-	case 2:
-		return LevelItemID::Food_Bread;
-	case 3:
-		return LevelItemID::Food_Water;
-	default:
-		g_logger->logError("LevelReader", "Level Item ID not recognized: " + itemID);
-		return LevelItemID::Void;
-	}
-}
-
-EnemyID LevelReader::resolveEnemy(int enemyID) const
-{
-	switch (enemyID)
-	{
-	case 0:
-		return EnemyID::Void;
-	case 1:
-		return EnemyID::Rat;
-	case 2:
-		return EnemyID::FireRat;
-	default:
-		g_logger->logError("LevelReader", "Enemy ID not recognized: " + enemyID);
-		return EnemyID::Void;
-	}
 }
