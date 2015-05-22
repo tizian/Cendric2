@@ -2,7 +2,7 @@
 
 using namespace std;
 
-ErrorScreen::ErrorScreen()
+ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core)
 {
 	ErrorID error = g_resourceManager->pollError()->first;
 	switch (error)

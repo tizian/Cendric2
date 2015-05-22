@@ -2,7 +2,7 @@
 
 using namespace std;
 
-GameScreen::GameScreen(LevelID levelID)
+GameScreen::GameScreen(LevelID levelID, CharacterCore* core) : Screen(core)
 {
 	m_levelID = levelID;
 }

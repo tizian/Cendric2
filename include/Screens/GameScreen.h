@@ -12,7 +12,7 @@
 class GameScreen : public Screen
 {
 public:
-	GameScreen(LevelID levelID);
+	GameScreen(LevelID levelID, CharacterCore* core);
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

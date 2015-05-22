@@ -7,6 +7,8 @@
 #include "Screens/SplashScreen.h"
 #include "InputController.h"
 
+#include "CharacterCore.h"
+
 class Game
 {
 public:
@@ -18,6 +20,7 @@ private:
 	bool m_running;
 	sf::RenderWindow m_mainWindow;
 	ScreenManager m_screenManager;
+	CharacterCore* m_characterCore;
 
 	// debug operations
 	std::list<float> m_fpsList;

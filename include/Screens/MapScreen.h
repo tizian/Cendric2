@@ -12,7 +12,7 @@
 class MapScreen : public Screen
 {
 public:
-	MapScreen(MapID mapID);
+	MapScreen(MapID mapID, CharacterCore* core);
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

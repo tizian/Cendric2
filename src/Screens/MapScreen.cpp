@@ -2,7 +2,7 @@
 
 using namespace std;
 
-MapScreen::MapScreen(MapID mapID)
+MapScreen::MapScreen(MapID mapID, CharacterCore* core) : Screen(core)
 {
 	if (!(m_currentMap.load(mapID)))
 	{
@@ -22,7 +22,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 	} 
 	else
 	{ 
-		return new LoadingScreen(id);
+		return new LoadingScreen(id, getCharacterCore());
 	}
 }
 

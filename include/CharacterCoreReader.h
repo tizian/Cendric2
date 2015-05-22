@@ -34,8 +34,7 @@ private:
 	
 	bool readGold(char* start, char* end, CharacterCoreData& data) const;
 	bool readItemID(char* start, char* end, CharacterCoreData& data) const;
-	// nr is here number of rings and is only important if item type == equipment_ring
-	bool readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type, int nr) const;
+	bool readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const;
 
 	// check map bean for validity before loading the savegame
 	bool checkData(CharacterCoreData& data) const;

@@ -14,6 +14,13 @@ void TextProvider::init()
 
 	// level item tooltips
 	addText(Texts::Levelitem_tooltip_cheese, "A nice moist cheese", "Ein hübscher saftiger Käse");
+
+	// item descriptions
+	addText(Texts::Item_description_wizardhat, "A perfect fit for a mage.", "Perfekt für einen Magier.");
+	addText(Texts::Item_description_staff_ice, "Feels ice cold.", "Fühlt sich eiskalt an.");
+	addText(Texts::Item_description_Food_Bread, "An ordinary loaf of bread.", "Ein einfaches Brot.");
+	addText(Texts::Item_description_Food_Cheese, "Smelly.", "Riecht nicht sonderlich gut.");
+	addText(Texts::Item_description_Food_Water, "Fresh clear water.", "Frisches klares Wasser.");
 }
 
 const std::string& TextProvider::getText(Texts key)

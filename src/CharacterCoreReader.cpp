@@ -206,7 +206,7 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	return true;
 }
 
-bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type, int nr) const
+bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const
 {
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
@@ -224,15 +224,11 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 	case ItemType::Equipment_head:
 		data.equippedHead = item;
 		break;
-	case ItemType::Equipment_ring:
-		if (nr == 1)
-		{
-			data.equippedRing1 = item;
-		}
-		else
-		{
-			data.equippedRing2 = item;
-		}
+	case ItemType::Equipment_ring_1:
+		data.equippedRing1 = item;
+		break;
+	case ItemType::Equipment_ring_2:
+		data.equippedRing2 = item;
 		break;
 	case ItemType::Equipment_weapon:
 		data.equippedWeapon = item;
@@ -407,32 +403,37 @@ bool CharacterCoreReader::readCharacterCore(char* fileName, CharacterCoreData& d
 		}
 		else if (strncmp(pos, EQUIPPED_WEAPON, strlen(EQUIPPED_WEAPON)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_WEAPON));
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_weapon, 0);
+			noError = readEquippedItem(pos, end, data, ItemType::Equipment_weapon);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, EQUIPPED_WEAPON, strlen(EQUIPPED_BODY)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_BODY));
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_body, 0);
+			noError = readEquippedItem(pos, end, data, ItemType::Equipment_body);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, EQUIPPED_RING_1, strlen(EQUIPPED_RING_1)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_RING_1));
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_ring, 1);
+			noError = readEquippedItem(pos, end, data, ItemType::Equipment_ring_1);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, EQUIPPED_RING_2, strlen(EQUIPPED_RING_2)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_RING_2));
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_ring, 2);
+			noError = readEquippedItem(pos, end, data, ItemType::Equipment_ring_2);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, EQUIPPED_NECK, strlen(EQUIPPED_NECK)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_NECK));
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_neck, 0);
+			noError = readEquippedItem(pos, end, data, ItemType::Equipment_neck);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, EQUIPPED_BACK, strlen(EQUIPPED_BACK)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_WEAPON));
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_back, 0);
+			noError = readEquippedItem(pos, end, data, ItemType::Equipment_back);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, EQUIPPED_HEAD, strlen(EQUIPPED_HEAD)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_HEAD));
+			noError = readEquippedItem(pos, end, data, ItemType::Equipment_head);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {

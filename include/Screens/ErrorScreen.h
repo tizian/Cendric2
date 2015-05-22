@@ -8,7 +8,7 @@
 class ErrorScreen : public Screen
 {
 public:
-	ErrorScreen();
+	ErrorScreen(CharacterCore* core);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	Screen* update(const sf::Time& frameTime) override;

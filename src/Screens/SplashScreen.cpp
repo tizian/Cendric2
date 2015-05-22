@@ -2,7 +2,7 @@
 
 using namespace std;
 
-SplashScreen::SplashScreen()
+SplashScreen::SplashScreen() : Screen(nullptr)
 {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_splash)));
 }
@@ -22,7 +22,7 @@ Screen* SplashScreen::update(const sf::Time& frameTime)
 {
 	if (g_inputController->isKeyActive(Key::Escape) || g_inputController->isMouseJustPressedLeft())
 	{
-		return new MenuScreen();
+		return new MenuScreen(nullptr);
 	}
 	updateObjects(GameObjectType::_Undefined, frameTime);
 	return this;

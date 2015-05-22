@@ -2,14 +2,10 @@
 
 Item::Item(ItemBean& bean)
 {
-	m_bean.description = bean.description;
-	m_bean.icon = bean.icon;
-	m_bean.id = bean.id;
-	m_bean.type = bean.type;
-	m_bean.value = bean.value;
+	m_bean = bean;
 }
 
-const std::string& Item::getDescription() const
+Texts Item::getDescription() const
 {
 	return m_bean.description;
 }
@@ -24,6 +20,11 @@ ItemType Item::getType() const
 	return m_bean.type;
 }
 
+LevelEquipmentID Item::getLevelEquipmentID() const
+{
+	return m_bean.levelEquipment;
+}
+
 ResourceID Item::getIcon() const
 {
 	return m_bean.icon;
@@ -32,4 +33,9 @@ ResourceID Item::getIcon() const
 int Item::getValue() const
 {
 	return m_bean.value;
+}
+
+const AttributeBean& Item::getAttributes() const
+{
+	return m_bean.attributes;
 }

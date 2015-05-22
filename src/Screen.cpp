@@ -2,6 +2,11 @@
 
 using namespace std;
 
+Screen::Screen(CharacterCore* core)
+{
+	m_characterCore = core;
+}
+
 void Screen::addObject(GameObjectType type, GameObject* object)
 {
 	m_objects[type].push_back(object);
@@ -110,10 +115,14 @@ void Screen::setTooltipText(const std::string& text, const sf::Vector2f& positio
 	m_tooltipText.setColor(color);
 }
 
-void Screen::renderTooltipText(sf::RenderTarget& target)
+void Screen::renderTooltipText(sf::RenderTarget& target) const
 {
 	setViewToTooltipView(target);
 	target.draw(m_tooltipText);
+}
+
+void Screen::clearTooltipText()
+{
 	// reset to empty text so tooltip texts don't get stuck
 	m_tooltipText = sf::Text();
 }
@@ -134,4 +143,9 @@ void Screen::setViewToTooltipView(sf::RenderTarget& target) const
 	view.setViewport(sf::FloatRect(0.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER), 1.f, static_cast<float>(BOTTOM_BORDER) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
 	view.setCenter(WINDOW_WIDTH / 2.f, BOTTOM_BORDER / 2.f);
 	target.setView(view);
+}
+
+CharacterCore* Screen::getCharacterCore() const
+{
+	return m_characterCore;
 }

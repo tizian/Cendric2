@@ -13,3 +13,17 @@ struct AttributeBean
 	int resistanceFire;
 	int resistanceIce;
 };
+
+const struct AttributeBean ZERO_ATTRIBUTES =
+{
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
+};

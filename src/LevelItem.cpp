@@ -37,6 +37,7 @@ void LevelItem::render(sf::RenderTarget &renderTarget)
 {
 	GameObject::render(renderTarget);
 	m_animatedSprite.setColor(sf::Color::White);
+	m_screen->clearTooltipText();
 }
 
 GameObjectType LevelItem::getConfiguredType() const
