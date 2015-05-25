@@ -106,25 +106,25 @@ const sf::Text* Screen::getTooltipText() const
 	return &m_tooltipText;
 }
 	
-void Screen::setTooltipText(const std::string& text, const sf::Vector2f& position, const sf::Color& color)
+void Screen::setTooltipText(const string& text, const sf::Vector2f& position, const sf::Color& color, bool isOverride)
 {
+	if (m_tooltipTime > sf::Time::Zero && !isOverride)
+	{
+		// another text is still displaying
+		return;
+	}
 	m_tooltipText = sf::Text(
 		text,
-		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));;
+		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));
 	m_tooltipText.setPosition(position);
 	m_tooltipText.setColor(color);
+	m_tooltipTime = TOOLTIP_ACTIVE_TIME;
 }
 
 void Screen::renderTooltipText(sf::RenderTarget& target) const
 {
 	setViewToTooltipView(target);
 	target.draw(m_tooltipText);
-}
-
-void Screen::clearTooltipText()
-{
-	// reset to empty text so tooltip texts don't get stuck
-	m_tooltipText = sf::Text();
 }
 
 void Screen::setViewToStandardView(sf::RenderTarget& target) const
@@ -148,4 +148,23 @@ void Screen::setViewToTooltipView(sf::RenderTarget& target) const
 CharacterCore* Screen::getCharacterCore() const
 {
 	return m_characterCore;
+}
+
+void Screen::updateTooltipText(const sf::Time& frameTime)
+{
+	if (m_tooltipTime > sf::Time::Zero)
+	{
+		m_tooltipTime -= frameTime;
+		if (m_tooltipTime <= sf::Time::Zero) // yes, sf::Time can be negative.
+		{
+			// reset tooltip text
+			m_tooltipText = sf::Text();
+			m_tooltipTime = sf::Time::Zero;
+		}
+	}
+}
+
+bool Screen::isQuitRequested() const
+{
+	return m_requestQuit;
 }

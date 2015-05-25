@@ -7,6 +7,7 @@
 #include "Screens/SplashScreen.h"
 #include "Misc/FireBasket.h"
 #include "CharacterCore.h"
+#include "Button.h"
 
 class MenuScreen : public Screen
 {
@@ -21,4 +22,10 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
+
+	// buttons on this screen
+	Button* m_newGameButton;
+	Button* m_loadGameButton;
+	Button* m_startGameButton;
+	Button* m_exitButton;
 };

@@ -48,14 +48,14 @@ void InputController::update()
 		m_isMouseReleasedLeft = true;
 	}
 
-	if (!m_isMouseReleasedRight && sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	if (m_isMouseReleasedRight && sf::Mouse::isButtonPressed(sf::Mouse::Right))
 	{
 		m_isMouseJustPressedRight = true;
 		m_isMouseReleasedRight = false;
 	}
 	else if (!sf::Mouse::isButtonPressed(sf::Mouse::Right))
 	{
-		m_isMouseReleasedRight = false;
+		m_isMouseReleasedRight = true;
 	}
 
 	// update mouse position
@@ -154,6 +154,24 @@ bool InputController::isMouseJustPressedRight() const
 		return false;
 	}
 	return m_isMouseJustPressedRight;
+}
+
+bool InputController::isMousePressedLeft() const
+{
+	if (!m_isWindowFocused)
+	{
+		return false;
+	}
+	return !m_isMouseReleasedLeft;
+}
+
+bool InputController::isMousePressedRight() const
+{
+	if (!m_isWindowFocused)
+	{
+		return false;
+	}
+	return !m_isMouseReleasedRight;
 }
 
 bool InputController::isKeyActive(Key key)

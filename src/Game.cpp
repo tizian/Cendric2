@@ -42,6 +42,10 @@ void Game::run()
 
 		// game updates
 		m_screenManager.update(frameTime);
+		if (m_screenManager.getCurrentScreen()->isQuitRequested())
+		{
+			m_running = false;
+		}
 		if (g_resourceManager->pollError()->first != ErrorID::Void)
 		{
 			m_screenManager.setErrorScreen();

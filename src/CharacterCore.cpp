@@ -18,12 +18,27 @@ bool CharacterCore::load(char* fileName)
 	if (!reader.readCharacterCore(fileName, m_data))
 	{
 		return false;
-	}
+	} 
 	
 	// measuring the time played with this save.
 	m_stopwatch.restart();
 	reloadStats();
 	return true;
+}
+
+void CharacterCore::loadNew()
+{
+	m_data.currentMap = MapID::Testmap;
+	m_data.currentMapPosition = sf::Vector2f(); // will be start position later
+	m_data.attributes.currentHealthPoints = 100;
+	m_data.attributes.currentManaPoints = 100;
+	m_data.attributes.maxHealthPoints = 100;
+	m_data.attributes.maxManaPoints = 100;
+	m_data.attributes.healthRegenerationPerS = 3;
+	m_data.attributes.manaRegenerationPerS = 0;
+
+	m_stopwatch.restart();
+	reloadStats();
 }
 
 const Item& CharacterCore::getEquippedItem(ItemType type)
@@ -109,6 +124,11 @@ void CharacterCore::clearEquippedItems()
 void CharacterCore::clearItems()
 {
 	m_equippedItems.clear();
+}
+
+const CharacterCoreData& CharacterCore::getData() const
+{
+	return m_data;
 }
 
 void CharacterCore::addBean(AttributeBean& firstBean, const AttributeBean& secondBean) const

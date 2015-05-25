@@ -27,6 +27,7 @@ void GameScreen::execOnExit(const Screen *nextScreen)
 
 Screen* GameScreen::update(const sf::Time& frameTime)
 {
+	updateTooltipText(frameTime);
 	updateObjects(GameObjectType::_MainCharacter, frameTime);
 	updateObjects(GameObjectType::_LevelEquipment, frameTime);
 	updateObjects(GameObjectType::_Spell, frameTime);

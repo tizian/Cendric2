@@ -9,24 +9,42 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core)
 
 Screen* MenuScreen::update(const sf::Time& frameTime)
 {
-	if (g_inputController->isKeyActive(Key::Escape) || g_inputController->isMouseJustPressedLeft())
+	if (g_inputController->isKeyActive(Key::Escape) || m_exitButton->isPressed())
 	{
-		// we start a new game with an empty character core
-		CharacterCore* core = (getCharacterCore() == nullptr) ? new CharacterCore() : m_characterCore;
-		return new LoadingScreen(MapID::Testmap, core);
+		// end the game
+		m_requestQuit = true;
 	}
-	if (g_inputController->isMouseJustPressedRight() && m_characterCore == nullptr)
+	else if (m_newGameButton->isPressed())
+	{
+		// be lenient 
+		delete m_characterCore;
+		// we start a new game with an empty character core
+		m_characterCore = new CharacterCore();
+		m_characterCore->loadNew();
+		m_startGameButton->setEnabled(true);
+		setTooltipText("Loaded new game", sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
+	}
+	else if (m_loadGameButton->isPressed())
 	{
 		// TODO the .sav files should be loaded in another screen.
 		char* saveFilename = "saves/testsave.sav";
-		setTooltipText("Loading .sav file: " + string(saveFilename), sf::Vector2f(10.f, 10.f), sf::Color::Cyan);
+		
+		delete m_characterCore;
 		m_characterCore = new CharacterCore();
 		if (!(m_characterCore->load(saveFilename)))
 		{
 			string errormsg = string(saveFilename) + ": save file corrupted!";
 			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		}
+		m_startGameButton->setEnabled(true);
+		setTooltipText("Loaded .sav file: " + string(saveFilename), sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
+	} 
+	else if (m_startGameButton->isPressed() && m_characterCore != nullptr)
+	{
+		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}
+	updateTooltipText(frameTime);
+	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Undefined, frameTime);
 	return this;
 }
@@ -37,6 +55,7 @@ void MenuScreen::render(sf::RenderTarget &renderTarget)
 	setViewToStandardView(renderTarget);
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
+	renderObjects(GameObjectType::_Button, renderTarget);
 }
 
 void MenuScreen::execOnEnter(const Screen *previousScreen)
@@ -48,6 +67,21 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	fireBasket2->setPosition(sf::Vector2f(998.f, 140.f));
 	addObject(GameObjectType::_Undefined, fireBasket1);
 	addObject(GameObjectType::_Undefined, fireBasket2);
+
+	// add buttons
+	m_newGameButton = new Button(sf::FloatRect(500, 250, 250, 90));
+	m_newGameButton->setText(Texts::New_game);
+	m_loadGameButton = new Button(sf::FloatRect(500, 350, 250, 90));
+	m_loadGameButton->setText(Texts::Load_game);
+	m_startGameButton = new Button(sf::FloatRect(500, 450, 250, 90));
+	m_startGameButton->setText(Texts::Start_game);
+	m_startGameButton->setEnabled(false);
+	m_exitButton = new Button(sf::FloatRect(500, 550, 250, 90));
+	m_exitButton->setText(Texts::Exit);
+	addObject(GameObjectType::_Button, m_newGameButton);
+	addObject(GameObjectType::_Button, m_loadGameButton);
+	addObject(GameObjectType::_Button, m_exitButton);
+	addObject(GameObjectType::_Button, m_startGameButton);
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen)

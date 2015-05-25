@@ -3,9 +3,11 @@
 enum class Texts
 {
 	Void,
-	Play,
-	Exit,
+	New_game,
+	Load_game,
+	Start_game,
 	Credits,
+	Exit,
 	Warn_itemTooFarAway,
 	Levelitem_tooltip_cheese,
 	Item_description_wizardhat,

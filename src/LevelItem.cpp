@@ -23,21 +23,20 @@ void LevelItem::onRightClick()
 	}
 	else
 	{
-		m_screen->setTooltipText(g_textProvider->getText(Texts::Warn_itemTooFarAway), sf::Vector2f(10.f, 10.f), sf::Color::Red);
+		m_screen->setTooltipText(g_textProvider->getText(Texts::Warn_itemTooFarAway), sf::Vector2f(10.f, 10.f), sf::Color::Red, true);
 	}
 }
 
 void LevelItem::onMouseOver()
 {
 	m_animatedSprite.setColor(sf::Color::Red);
-	m_screen->setTooltipText(m_tooltipText, sf::Vector2f(10.f, 10.f), sf::Color::White);
+	m_screen->setTooltipText(m_tooltipText, sf::Vector2f(10.f, 10.f), sf::Color::White, false);
 }
 
 void LevelItem::render(sf::RenderTarget &renderTarget)
 {
 	GameObject::render(renderTarget);
 	m_animatedSprite.setColor(sf::Color::White);
-	m_screen->clearTooltipText();
 }
 
 GameObjectType LevelItem::getConfiguredType() const

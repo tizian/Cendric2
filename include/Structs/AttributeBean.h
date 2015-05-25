@@ -3,7 +3,7 @@
 struct AttributeBean
 {
 	int maxHealthPoints;
-	int maxManaPoints;
+	int maxManaPoints; 
 	int currentHealthPoints;
 	int currentManaPoints;
 	int healthRegenerationPerS;

@@ -21,11 +21,15 @@ public:
 
 	// returns the currently equipped item of type 'type'
 	const Item& getEquippedItem(ItemType type);
-
+	// loads a new game with a new core and default attributes
+	void loadNew();
 	// uses the character core reader to load a .sav file
 	bool load(char* fileName);
 	// uses the character core writer to save a .sav file
 	void save(char* fileName);
+
+	// getter for core part
+	const CharacterCoreData& getData() const;
 
 private:
 	// loads equipped itemvector
@@ -49,5 +53,5 @@ private:
 
 	CharacterCoreData m_data;
 
-	sf::Clock m_stopwatch;
+	sf::Clock m_stopwatch; 
 };

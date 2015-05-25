@@ -6,7 +6,9 @@ TextProvider* g_textProvider;
 
 void TextProvider::init()
 {
-	addText(Texts::Play, "Play", "Spielen");
+	addText(Texts::New_game, "New Game", "Neues Spiel");
+	addText(Texts::Load_game, "Load Game", "Spiel laden");
+	addText(Texts::Start_game, "Play", "Starten");
 	addText(Texts::Credits, "Credits", "Credits");
 	addText(Texts::Exit, "Exit", "Beenden");
 

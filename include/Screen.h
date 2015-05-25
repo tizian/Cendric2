@@ -38,7 +38,8 @@ public:
 	CharacterCore* getCharacterCore() const;
 
 	// sets the tooltip text to 'text' and display it at this position (relative to the tooltip view)
-	void setTooltipText(const std::string& text, const sf::Vector2f& position, const sf::Color& color);
+	// if override is set, this new text will display anyway, regardless of what other text is displaying.
+	void setTooltipText(const std::string& text, const sf::Vector2f& position, const sf::Color& color, bool isOverride);
 
 	// sets the view to the standard view, which means the upper part of the window, the game view, without the tooltip bar.
 	void setViewToStandardView(sf::RenderTarget& target) const;
@@ -46,11 +47,14 @@ public:
 	// sets the view to show only the tooltip bar. used before drawing anything there.
 	void setViewToTooltipView(sf::RenderTarget& target) const;
 
+	// updates the tooltip text in 'm_tooltipText'. used so tooltip texts don't get stuck.
+	void updateTooltipText(const sf::Time& frameTime);
+
 	// renders the tooltip text in 'm_tooltipText'
 	void renderTooltipText(sf::RenderTarget& target) const;
 
-	// clears the tooltip text in 'm_tooltipText'
-	void clearTooltipText();
+	// the screen manager sees if a screen wants to end the game
+	bool isQuitRequested() const;
 
 protected:
 	// deletes all objects marked as 'disposed'
@@ -65,9 +69,12 @@ protected:
 	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
 	
 	CharacterCore* m_characterCore;
+	bool m_requestQuit = false;
 
 private:
 	std::vector<std::vector<GameObject*>> m_objects;
 	sf::Text m_tooltipText;
 	
+	const sf::Time TOOLTIP_ACTIVE_TIME = sf::seconds(1.5f);
+	sf::Time m_tooltipTime = sf::Time::Zero;
 };

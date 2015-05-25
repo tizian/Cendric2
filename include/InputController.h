@@ -23,6 +23,8 @@ public:
 	bool isMouseOver(const sf::FloatRect* boundingBox) const;
 	bool isRightClicked(const sf::FloatRect* boundingBox) const;
 	bool isLeftClicked(const sf::FloatRect* boundingBox) const;
+	bool isMousePressedLeft() const;
+	bool isMousePressedRight() const;
 	bool isMouseJustPressedLeft() const;
 	bool isMouseJustPressedRight() const;
 
