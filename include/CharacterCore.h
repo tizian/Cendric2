@@ -25,7 +25,7 @@ public:
 	// uses the character core reader to load a .sav file
 	bool load(char* fileName);
 	// uses the character core writer to save a .sav file
-	void save(char* fileName) const;
+	void save(char* fileName);
 
 private:
 	// loads equipped itemvector
@@ -44,11 +44,10 @@ private:
 	// base attributes plus the attributes of all currently equipped items
 	AttributeBean m_totalAttributes;
 
-	int m_currentHealthPoints;
-	int m_currentManaPoints;
-
 	std::map<ItemID, Item> m_items;
 	std::map<ItemType, Item> m_equippedItems;
 
 	CharacterCoreData m_data;
+
+	sf::Clock m_stopwatch;
 };

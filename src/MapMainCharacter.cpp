@@ -12,6 +12,11 @@ MapMainCharacter::~MapMainCharacter()
 	g_resourceManager->deleteResource(ResourceID::Texture_mapMainChar);
 }
 
+void MapMainCharacter::setCharacterCore(CharacterCore* core)
+{
+	m_core = core;
+}
+
 void MapMainCharacter::update(const sf::Time& frameTime)
 {
 	handleInput();

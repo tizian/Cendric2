@@ -110,6 +110,11 @@ void LevelMainCharacter::handleInput()
 	}
 }
 
+void LevelMainCharacter::setCharacterCore(CharacterCore* core)
+{
+	m_core = core;
+}
+
 void LevelMainCharacter::load()
 {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 46.f, 100.f));

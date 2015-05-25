@@ -4,6 +4,8 @@ struct AttributeBean
 {
 	int maxHealthPoints;
 	int maxManaPoints;
+	int currentHealthPoints;
+	int currentManaPoints;
 	int healthRegenerationPerS;
 	int manaRegenerationPerS;
 	int damagePhysical;
@@ -16,6 +18,8 @@ struct AttributeBean
 
 const struct AttributeBean ZERO_ATTRIBUTES =
 {
+	0,
+	0,
 	0,
 	0,
 	0,

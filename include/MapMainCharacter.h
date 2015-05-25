@@ -4,6 +4,8 @@
 #include "MovableGameObject.h"
 #include "Map.h"
 #include "InputController.h"
+#include "Screen.h"
+#include "CharacterCore.h"
 
 // Cendric on the map
 class MapMainCharacter : public MovableGameObject
@@ -16,6 +18,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
+
+	void setCharacterCore(CharacterCore* core);
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;
@@ -31,4 +35,5 @@ private:
 	void updateAnimation();
 	GameObjectState m_state;
 	Map* m_map;
+	CharacterCore* m_core;
 };

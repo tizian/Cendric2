@@ -20,8 +20,8 @@ bool CharacterCore::load(char* fileName)
 		return false;
 	}
 	
-	m_currentHealthPoints = m_data.attributes.maxHealthPoints;
-	m_currentManaPoints = m_data.attributes.maxManaPoints;
+	// measuring the time played with this save.
+	m_stopwatch.restart();
 	reloadStats();
 	return true;
 }
@@ -35,9 +35,10 @@ const Item& CharacterCore::getEquippedItem(ItemType type)
 	return m_equippedItems.at(type);
 }
 
-void CharacterCore::save(char* fileName) const
+void CharacterCore::save(char* fileName) 
 {
-
+	m_data.timePlayed += m_stopwatch.restart();
+	// TODO write to savefile.
 }
 
 void CharacterCore::reloadStats()
@@ -119,5 +120,7 @@ void CharacterCore::addBean(AttributeBean& firstBean, const AttributeBean& secon
 	firstBean.resistanceIce += secondBean.resistanceIce;
 	firstBean.resistancePhysical += secondBean.resistancePhysical;
 	firstBean.maxHealthPoints += secondBean.maxHealthPoints;
-	firstBean.damageFire += secondBean.damageFire;
+	firstBean.maxManaPoints += secondBean.maxManaPoints;
+	firstBean.currentHealthPoints = (firstBean.maxHealthPoints < firstBean.currentHealthPoints + secondBean.currentHealthPoints) ? firstBean.maxHealthPoints : (firstBean.currentHealthPoints + secondBean.currentHealthPoints);
+	firstBean.currentManaPoints = (firstBean.maxManaPoints < firstBean.currentManaPoints + secondBean.currentManaPoints) ? firstBean.maxManaPoints : (firstBean.currentManaPoints + secondBean.currentManaPoints);
 }

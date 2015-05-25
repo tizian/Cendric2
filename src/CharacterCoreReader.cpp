@@ -162,6 +162,12 @@ bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreDa
 	data.attributes.maxManaPoints = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
+	data.attributes.currentHealthPoints = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	data.attributes.currentManaPoints = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
 	data.attributes.healthRegenerationPerS = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;

@@ -6,6 +6,7 @@
 #include "InputController.h"
 #include "SpellManager.h"
 #include "Screen.h"
+#include "CharacterCore.h"
 
 // Cendric in a level
 class LevelMainCharacter : public LevelMovableGameObject
@@ -16,6 +17,8 @@ public:
 
 	void load() override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
+
+	void setCharacterCore(CharacterCore* core);
 	
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;
@@ -30,4 +33,5 @@ protected:
 private:
 	// TODO load this map from configuration
 	std::map<Key, SpellID> m_keyMap;
+	CharacterCore* m_core;
 };

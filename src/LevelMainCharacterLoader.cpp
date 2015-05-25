@@ -6,6 +6,7 @@ using namespace std;
 LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const
 {
 	LevelMainCharacter* mainChar = new LevelMainCharacter(level);
+	mainChar->setCharacterCore(screen->getCharacterCore());
 	screen->addObject(GameObjectType::_MainCharacter, mainChar);
 	return mainChar;
 }
