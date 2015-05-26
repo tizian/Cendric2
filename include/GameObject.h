@@ -30,6 +30,9 @@ public:
 	virtual void onRightClick();
 	// left click is used to fire spells / press buttons
 	virtual void onLeftClick();
+	virtual void onRightJustPressed();
+	virtual void onLeftJustPressed();
+
 	void addAnimation(GameObjectState state, Animation& animation);
 
 	void setBoundingBox(const sf::FloatRect& rect);

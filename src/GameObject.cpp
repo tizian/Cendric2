@@ -50,9 +50,17 @@ void GameObject::update(const sf::Time& frameTime)
 	{
 		onRightClick();
 	}
+	else if (g_inputController->isRightJustPressed(&m_boundingBox))
+	{
+		onRightJustPressed();
+	}
 	if (g_inputController->isLeftClicked(&m_boundingBox))
 	{
 		onLeftClick();
+	}
+	else if (g_inputController->isLeftJustPressed(&m_boundingBox))
+	{
+		onLeftJustPressed();
 	}
 	m_animatedSprite.update(frameTime);
 }
@@ -142,6 +150,16 @@ void GameObject::onRightClick()
 }
 
 void GameObject::onLeftClick()
+{
+	// nop
+}
+
+void GameObject::onRightJustPressed()
+{
+	// nop
+}
+
+void GameObject::onLeftJustPressed()
 {
 	// nop
 }

@@ -13,6 +13,7 @@ public:
 	Button(const sf::FloatRect& box);
 
 	void load() override;
+	void onLeftJustPressed() override;
 	void onLeftClick() override;
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
@@ -24,12 +25,13 @@ public:
 	// a button can only be clicked if its enabled. also, the color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
 
-	bool isPressed() const;
+	bool isClicked() const;
 	bool isEnabled() const;
 	GameObjectType getConfiguredType() const override;
 
 private:
 	bool m_isPressed = false;
+	bool m_isClicked = false;
 	bool m_isEnabled = true;
 
 	sf::Color m_pressedColor;

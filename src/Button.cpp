@@ -46,6 +46,17 @@ void Button::load()
 
 void Button::onLeftClick()
 {
+	if (m_isEnabled && m_isPressed)
+	{
+		m_isClicked = true;
+		m_isPressed = false;
+		m_shape.setFillColor(m_isEnabled ? m_releasedColor : sf::Color(m_releasedColor.r, m_releasedColor.g, m_releasedColor.b, 100));
+		m_shape.setOutlineColor(m_isEnabled ? m_mousoverColor : sf::Color(m_mousoverColor.r, m_mousoverColor.g, m_mousoverColor.b, 100));
+	}
+}
+
+void Button::onLeftJustPressed()
+{
 	if (m_isEnabled)
 	{
 		m_isPressed = true;
@@ -56,7 +67,7 @@ void Button::onLeftClick()
 
 void Button::onMouseOver()
 {
-	if (m_isEnabled)
+	if (m_isEnabled && !m_isPressed)
 	{
 		m_shape.setFillColor(m_mousoverColor);
 		m_shape.setOutlineColor(m_releasedColor);
@@ -71,9 +82,13 @@ void Button::render(sf::RenderTarget& renderTarget)
 
 void Button::update(const sf::Time& frameTime)
 {
-	m_shape.setFillColor(m_isEnabled ? m_releasedColor : sf::Color(m_releasedColor.r, m_releasedColor.g, m_releasedColor.b, 100));
-	m_shape.setOutlineColor(m_isEnabled ? m_mousoverColor : sf::Color(m_mousoverColor.r, m_mousoverColor.g, m_mousoverColor.b, 100));
-	m_isPressed = false;
+	m_isClicked = false;
+	if (!g_inputController->isMouseOver(getBoundingBox()))
+	{
+		m_isPressed = false;
+		m_shape.setFillColor(m_isEnabled ? m_releasedColor : sf::Color(m_releasedColor.r, m_releasedColor.g, m_releasedColor.b, 100));
+		m_shape.setOutlineColor(m_isEnabled ? m_mousoverColor : sf::Color(m_mousoverColor.r, m_mousoverColor.g, m_mousoverColor.b, 100));
+	}
 	GameObject::update(frameTime);
 }
 
@@ -86,13 +101,13 @@ void Button::setText(Texts text, const sf::Color& color)
 	m_text.setColor(color);
 	// calculate position
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
-	float yOffset = max((getBoundingBox()->height - (2 * m_text.getLocalBounds().height)) / 2.f, 0.f);
+	float yOffset = max((getBoundingBox()->height / 2.f - m_text.getLocalBounds().height), 0.f);
 	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
 }
 
 void Button::setText(Texts text)
 {
-	setText(text, CENDRIC_COLOR_LIGHT_PURPLE);
+	setText(text, sf::Color::White);
 }
 
 void Button::setEnabled(bool enabled)
@@ -100,9 +115,9 @@ void Button::setEnabled(bool enabled)
 	m_isEnabled = enabled;
 }
 
-bool Button::isPressed() const
+bool Button::isClicked() const
 {
-	return m_isPressed;
+	return m_isClicked;
 }
 
 bool Button::isEnabled() const

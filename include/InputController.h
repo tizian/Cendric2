@@ -21,12 +21,19 @@ public:
 
 	bool isKeyActive(Key key);
 	bool isMouseOver(const sf::FloatRect* boundingBox) const;
-	bool isRightClicked(const sf::FloatRect* boundingBox) const;
 	bool isLeftClicked(const sf::FloatRect* boundingBox) const;
+	bool isRightClicked(const sf::FloatRect* boundingBox) const;
+	bool isLeftPressed(const sf::FloatRect* boundingBox) const;
+	bool isRightPressed(const sf::FloatRect* boundingBox) const;
+	bool isLeftJustPressed(const sf::FloatRect* boundingBox) const;
+	bool isRightJustPressed(const sf::FloatRect* boundingBox) const;
+	
 	bool isMousePressedLeft() const;
 	bool isMousePressedRight() const;
 	bool isMouseJustPressedLeft() const;
 	bool isMouseJustPressedRight() const;
+	bool isMouseClickedLeft() const;
+	bool isMouseClickedRight() const;
 
 	// returns mouse position relative to window
 	const sf::Vector2f& getMousePosition() const;
@@ -39,10 +46,12 @@ private:
 	// Mouse keys can't be set in this map. Their functions are fix.
 	std::map<Key, sf::Keyboard::Key> m_keyMap;
 
-	bool m_isMouseReleasedLeft;
-	bool m_isMouseReleasedRight;
-	bool m_isMouseJustPressedLeft;
-	bool m_isMouseJustPressedRight;
+	bool m_isMousePressedLeft = false;
+	bool m_isMousePressedRight = false;
+	bool m_isMouseJustPressedLeft = false;
+	bool m_isMouseJustPressedRight = false;
+	bool m_isMouseClickedLeft = false;
+	bool m_isMouseClickedRight = false;
 
 	// current window size. Used for mouse position and dependent on resize events
 	sf::Vector2i m_windowSize;

@@ -9,12 +9,12 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core)
 
 Screen* MenuScreen::update(const sf::Time& frameTime)
 {
-	if (g_inputController->isKeyActive(Key::Escape) || m_exitButton->isPressed())
+	if (g_inputController->isKeyActive(Key::Escape) || m_exitButton->isClicked())
 	{
 		// end the game
 		m_requestQuit = true;
 	}
-	else if (m_newGameButton->isPressed())
+	else if (m_newGameButton->isClicked())
 	{
 		// be lenient 
 		delete m_characterCore;
@@ -24,7 +24,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		m_startGameButton->setEnabled(true);
 		setTooltipText("Loaded new game", sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
 	}
-	else if (m_loadGameButton->isPressed())
+	else if (m_loadGameButton->isClicked())
 	{
 		// TODO the .sav files should be loaded in another screen.
 		char* saveFilename = "saves/testsave.sav";
@@ -39,7 +39,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		m_startGameButton->setEnabled(true);
 		setTooltipText("Loaded .sav file: " + string(saveFilename), sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
 	} 
-	else if (m_startGameButton->isPressed() && m_characterCore != nullptr)
+	else if (m_startGameButton->isClicked() && m_characterCore != nullptr)
 	{
 		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}

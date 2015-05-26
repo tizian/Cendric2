@@ -36,27 +36,12 @@ void InputController::update()
 	m_keyActiveMap[Key::SpellForcefield] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellForcefield));
 
 	// update mouse clicks
-	m_isMouseJustPressedLeft = false;
-	m_isMouseJustPressedRight = false;
-	if (m_isMouseReleasedLeft && sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		m_isMouseJustPressedLeft = true;
-		m_isMouseReleasedLeft = false;
-	}
-	else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		m_isMouseReleasedLeft = true;
-	}
-
-	if (m_isMouseReleasedRight && sf::Mouse::isButtonPressed(sf::Mouse::Right))
-	{
-		m_isMouseJustPressedRight = true;
-		m_isMouseReleasedRight = false;
-	}
-	else if (!sf::Mouse::isButtonPressed(sf::Mouse::Right))
-	{
-		m_isMouseReleasedRight = true;
-	}
+	m_isMouseClickedLeft = (m_isMousePressedLeft && !sf::Mouse::isButtonPressed(sf::Mouse::Left));
+	m_isMouseClickedRight = (m_isMousePressedRight && !sf::Mouse::isButtonPressed(sf::Mouse::Right));
+	m_isMouseJustPressedLeft = (!m_isMousePressedLeft && sf::Mouse::isButtonPressed(sf::Mouse::Left));
+	m_isMouseJustPressedRight = (!m_isMousePressedRight && sf::Mouse::isButtonPressed(sf::Mouse::Right));
+	m_isMousePressedLeft = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	m_isMousePressedRight = sf::Mouse::isButtonPressed(sf::Mouse::Right);
 
 	// update mouse position
 	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
@@ -77,10 +62,6 @@ void InputController::setWindow(sf::RenderWindow* window)
 
 void InputController::init()
 {
-	m_isMouseJustPressedLeft = false;
-	m_isMouseJustPressedRight = false;
-	m_isMouseReleasedLeft = true;
-	m_isMouseReleasedRight = true;
 	m_keyActiveMap.insert(
 		{
 			{ Key::Escape, false },
@@ -130,57 +111,67 @@ bool InputController::isMouseOver(const sf::FloatRect* boundingBox) const
 
 bool InputController::isRightClicked(const sf::FloatRect* boundingBox) const
 {
-	return boundingBox->contains(getMousePosition()) && isMouseJustPressedRight();
+	return boundingBox->contains(getMousePosition()) && isMouseClickedRight();
 }
 
 bool InputController::isLeftClicked(const sf::FloatRect* boundingBox) const
 {
+	return boundingBox->contains(getMousePosition()) && isMouseClickedLeft();
+}
+
+bool InputController::isRightPressed(const sf::FloatRect* boundingBox) const
+{
+	return boundingBox->contains(getMousePosition()) && isMousePressedRight();
+}
+
+bool InputController::isLeftPressed(const sf::FloatRect* boundingBox) const
+{
+	return boundingBox->contains(getMousePosition()) && isMousePressedLeft();
+}
+
+bool InputController::isRightJustPressed(const sf::FloatRect* boundingBox) const
+{
+	return boundingBox->contains(getMousePosition()) && isMouseJustPressedRight();
+}
+
+bool InputController::isLeftJustPressed(const sf::FloatRect* boundingBox) const
+{
 	return boundingBox->contains(getMousePosition()) && isMouseJustPressedLeft();
 }
 
-bool InputController::isMouseJustPressedLeft() const
+bool InputController::isMouseClickedLeft() const
 {
-	if (!m_isWindowFocused) 
-	{
-		return false;
-	}
-	return m_isMouseJustPressedLeft;
+	return m_isWindowFocused && m_isMouseClickedLeft;
 }
 
-bool InputController::isMouseJustPressedRight() const
+bool InputController::isMouseClickedRight() const
 {
-	if (!m_isWindowFocused)
-	{
-		return false;
-	}
-	return m_isMouseJustPressedRight;
+	return m_isWindowFocused && m_isMouseClickedRight;
 }
 
 bool InputController::isMousePressedLeft() const
 {
-	if (!m_isWindowFocused)
-	{
-		return false;
-	}
-	return !m_isMouseReleasedLeft;
+	return m_isWindowFocused && m_isMousePressedLeft;
 }
 
 bool InputController::isMousePressedRight() const
 {
-	if (!m_isWindowFocused)
-	{
-		return false;
-	}
-	return !m_isMouseReleasedRight;
+	return m_isWindowFocused && m_isMousePressedRight;
+}
+
+bool InputController::isMouseJustPressedLeft() const
+{
+	return m_isWindowFocused && m_isMouseJustPressedLeft;
+}
+
+bool InputController::isMouseJustPressedRight() const
+{
+	return m_isWindowFocused && m_isMouseJustPressedRight;
 }
 
 bool InputController::isKeyActive(Key key)
 {
-	if (!m_isWindowFocused)
-	{
-		return false;
-	}
-	return m_keyActiveMap[key];
+	return m_isWindowFocused && m_keyActiveMap[key];
 }
 
 
