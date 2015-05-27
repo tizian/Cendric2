@@ -5,10 +5,13 @@ using namespace std;
 
 Level::Level()
 {
+	m_camera = new SpeedupPullCamera();
+	m_camera->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
 }
 
 Level::~Level()
 {
+	delete m_camera;
 	dispose();
 }
 
@@ -48,36 +51,37 @@ bool Level::load(LevelID id, Screen* screen)
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center) const
+void Level::draw(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
 {
-
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
+
+	m_camera->setFocusCenter(center);
 
 	// parallax background layers
 	for (int i = 0; i < m_backgroundLayers.size(); i++)
 	{
 		// handle case for layer at infinity
-		if (m_backgroundLayers[i].getDistance() == -1.0f) 
+		if (m_backgroundLayers[i].getDistance() == -1.0f)
 		{
-			view.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+			view.setCenter(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
 			target.setView(view);
 		}
 		else
 		{
 			float d = m_backgroundLayers[i].getDistance();
 			float ominoeseOffset = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
-			float camCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x)) / d) + ominoeseOffset;
-			float camCenterY = WINDOW_HEIGHT / 2.f;
-			view.setCenter(camCenterX, camCenterY);
+			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffset;
+			float viewCenterY = WINDOW_WIDTH / 2.f;
+			view.setCenter(viewCenterX, viewCenterY);
 			target.setView(view);
 		}
 		m_backgroundLayers[i].render(target, states);
 	}
 
 	// tilemap
-	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, center.x));
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x));
 	float camCenterY = WINDOW_HEIGHT / 2.f;
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);

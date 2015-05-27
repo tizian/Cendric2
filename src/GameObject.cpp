@@ -91,10 +91,7 @@ void GameObject::setPositionY(const float posY)
 void GameObject::setRotation(float angle)
 {
 	// SFML uses degrees, not radian, hence the conversion here. 
-	sf::Vector2f oldOrigin = m_animatedSprite.getOrigin();
-	
 	m_animatedSprite.setRotation(angle * (180.f / PI_F));
-
 }
 
 void GameObject::setFrameTime(const sf::Time& time) 

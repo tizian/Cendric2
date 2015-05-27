@@ -11,6 +11,7 @@
 #include "DynamicTile.h"
 #include "Logger.h"
 #include "LevelLoader.h"
+#include "SpeedupPullCamera.h"
 
 #include "Enums/LevelID.h"
 
@@ -23,7 +24,7 @@ public:
 	// loads a .dric file
 	bool load(LevelID id, Screen* screen);
 	// draws the level. Background layers, tilemap, dynamic tiles, foreground layers.
-	void draw(sf::RenderTarget &target, sf::RenderStates states, const sf::Vector2f& center) const;
+	void draw(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
 	// deletes the resources
 	void dispose();
 
@@ -48,4 +49,7 @@ private:
 	std::string m_name;
 	sf::Vector2f m_startPos;
 	LevelID m_id;
+
+	SpeedupPullCamera* m_camera;
+	const float CAMERA_WINDOW_WIDTH = 100.f;
 };
