@@ -51,5 +51,5 @@ private:
 	LevelID m_id;
 
 	SpeedupPullCamera* m_camera;
-	const float CAMERA_WINDOW_WIDTH = 100.f;
+	const float CAMERA_WINDOW_WIDTH = 200.f;
 };
