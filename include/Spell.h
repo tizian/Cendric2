@@ -30,11 +30,13 @@ public:
 	virtual bool getConfiguredTriggerFightAnimation() const;
 	// if true, the spell sprite will be rotated accordingly. default is true.
 	virtual bool getConfiguredRotateSprite() const;
+	int getDamage() const;
 	virtual SpellID getConfiguredSpellID() const = 0;
 	GameObjectType getConfiguredType() const override;
 	sf::Color getConfiguredDebugColor() const override;
 
 	const sf::Time& getActiveTime() const;
+	const MovableGameObject* getOwner() const;
 
 private:
 	Level* m_level;
@@ -45,6 +47,12 @@ private:
 	int m_reflectCount;
 	float m_speed;
 
+	// enemy list from screen
+	std::vector<GameObject*>* m_enemies; 
 	// calculates position according to m_mob
 	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
+	// collisions with mainchar
+	void checkCollisionsWithMainChar(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY);
+	// collisions with enemies
+	void checkCollisionsWithEnemies(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY);
 };

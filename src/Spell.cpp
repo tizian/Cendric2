@@ -3,10 +3,12 @@
 
 using namespace std;
 
-void Spell::loadSpell(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
+void Spell::loadSpell(Level* level, LevelMovableGameObject* mob, sf::Vector2f target) 
 {
 	m_level = level;
 	m_mob = mob;
+	m_screen = mob->getScreen();
+	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	
 	sf::Vector2f absolutePosition; 
 	calculatePositionAccordingToMob(absolutePosition);
@@ -126,6 +128,30 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition)
 
 	// check collisions with dynamic tiles
 	m_level->collideWithDynamicTiles(this, nextBoundingBoxX, nextBoundingBoxY);
+	// check collisions with main char
+	if (!(m_mob->getConfiguredType() == GameObjectType::_MainCharacter))
+	{
+		checkCollisionsWithMainChar(nextBoundingBoxX, nextBoundingBoxY);
+	}
+	// check collisions with enemies
+	checkCollisionsWithEnemies(nextBoundingBoxX, nextBoundingBoxY);
+}
+
+void Spell::checkCollisionsWithMainChar(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY)
+{
+
+}
+
+void Spell::checkCollisionsWithEnemies(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY)
+{
+	for (std::vector<GameObject*>::iterator it = m_enemies->begin(); it != m_enemies->end(); ++it)
+	{
+		Enemy* enemy = dynamic_cast<Enemy*>((*it));
+		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(nextBoundingBoxX) || enemy->getBoundingBox()->intersects(nextBoundingBoxY)))
+		{
+			enemy->onHit(this);
+		}
+	}
 }
 
 const sf::Time& Spell::getActiveTime() const 
@@ -141,5 +167,15 @@ GameObjectType Spell::getConfiguredType() const
 sf::Color Spell::getConfiguredDebugColor() const
 {
 	return sf::Color::Red;
+}
+
+const MovableGameObject* Spell::getOwner() const
+{
+	return m_mob;
+}
+
+int Spell::getDamage() const
+{
+	return m_damage;
 }
 

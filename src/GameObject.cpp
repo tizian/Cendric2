@@ -187,3 +187,8 @@ void GameObject::setScreen(Screen* screen)
 {
 	m_screen = screen;
 }
+
+Screen* GameObject::getScreen() const
+{
+	return m_screen;
+}

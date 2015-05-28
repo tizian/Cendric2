@@ -23,4 +23,8 @@ public:
 protected:
 	// handle input and calculate the next position
 	void handleInput() override;
+	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
+	void loadAttributes() override;
+	// loads spells and adds them to the spell manager. default does nothing.
+	void loadSpells() override;
 };

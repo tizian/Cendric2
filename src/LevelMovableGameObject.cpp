@@ -17,8 +17,11 @@ LevelMovableGameObject::~LevelMovableGameObject()
 
 void LevelMovableGameObject::update(const sf::Time& frameTime)
 {
-	handleInput();
-	m_spellManager->update(frameTime);
+	if (m_state != GameObjectState::Dead)
+	{
+		handleInput();
+		m_spellManager->update(frameTime);
+	}
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
@@ -70,8 +73,13 @@ sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const
 void LevelMovableGameObject::updateAnimation()
 {
 	// calculate new game state and set animation.
+
 	GameObjectState newState = GameObjectState::Idle;
-	if (m_fightAnimationTime > sf::Time::Zero)
+	if (m_state == GameObjectState::Dead)
+	{
+		newState = GameObjectState::Dead;
+	}
+	else if (m_fightAnimationTime > sf::Time::Zero)
 	{
 		newState = GameObjectState::Fighting;
 	}

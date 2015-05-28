@@ -1,10 +1,24 @@
 #include "Enemies/FireRatEnemy.h"
 #include "LevelMainCharacter.h"
 
-FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar)
+FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::FireRat)
 {
 	load();
+	loadAttributes();
+	loadSpells();
+}
 
+void FireRatEnemy::loadAttributes()
+{
+	m_attributes.currentHealthPoints = 70;
+	m_attributes.maxHealthPoints = 70;
+	m_attributes.resistanceIce = -10;
+
+	m_immuneSpells.push_back(SpellID::Fire);
+}
+
+void FireRatEnemy::loadSpells()
+{
 	SpellBean chopSpell;
 	chopSpell.id = SpellID::Chop;
 	chopSpell.maxActiveTime = sf::milliseconds(500);

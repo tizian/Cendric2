@@ -2,9 +2,16 @@
 #include "Level.h"
 #include "LevelMainCharacter.h"
 
-Enemy::Enemy(Level* level, LevelMainCharacter* mainChar) : LevelMovableGameObject(level)
+Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMovableGameObject(level)
 {
+	m_id = id;
 	m_mainChar = mainChar;
+	m_immuneEnemies.push_back(id);
+	m_attributes = ZERO_ATTRIBUTES;
+	
+	// load hp bar
+	m_hpBar.setFillColor(sf::Color::Red);
+	updateHpBar();
 }
 
 void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
@@ -52,6 +59,67 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 	// TODO check positions with spells referencing not this object.
 }
 
+void Enemy::onHit(Spell* spell)
+{
+	if (m_state == GameObjectState::Dead)
+	{
+		return;
+	}
+	// check for owner
+	if (spell->getOwner() == this)
+	{
+		return;
+	}
+	// check for immune spells, if yes, the spell will disappear, absorbed by the immuneness of this enemy
+	if (std::find(m_immuneSpells.begin(), m_immuneSpells.end(), spell->getConfiguredSpellID()) != m_immuneSpells.end())
+	{
+		spell->setDisposed();
+		return;
+	}
+	int damage = 0;
+	switch (spell->getConfiguredSpellID())
+	{
+	case SpellID::Ice:
+		damage = spell->getDamage() - m_attributes.resistanceIce;
+		spell->setDisposed();
+		break;
+	case SpellID::Fire:
+		damage = spell->getDamage() - m_attributes.resistanceFire;
+		spell->setDisposed();
+		break;
+	case SpellID::Chop:
+		damage = spell->getDamage() - m_attributes.resistancePhysical;
+		spell->setDisposed();
+		break;
+	default:
+		break;
+	}
+	m_attributes.currentHealthPoints = m_attributes.currentHealthPoints - std::max(damage, 0);
+	if (m_attributes.currentHealthPoints < 0)
+	{
+		m_attributes.currentHealthPoints = 0;
+		m_state = GameObjectState::Dead;
+	}
+}
+
+void Enemy::render(sf::RenderTarget &renderTarget)
+{
+	LevelMovableGameObject::render(renderTarget);
+	renderTarget.draw(m_hpBar);
+}
+
+void Enemy::update(const sf::Time& frameTime) 
+{
+	LevelMovableGameObject::update(frameTime);
+	updateHpBar();
+}
+
+void Enemy::updateHpBar() 
+{
+	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
+	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
+}
+
 float Enemy::distToMainChar() const
 {
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
@@ -63,7 +131,17 @@ GameObjectType Enemy::getConfiguredType() const
 	return GameObjectType::_Enemy;
 }
 
+EnemyID Enemy::getEnemyID() const
+{
+	return m_id;
+}
+
 sf::Color Enemy::getConfiguredDebugColor() const
 {
 	return sf::Color::Magenta;
+}
+
+float Enemy::getConfiguredDistanceToHPBar() const
+{
+	return 20.f;
 }

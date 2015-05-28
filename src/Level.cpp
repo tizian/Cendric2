@@ -245,7 +245,7 @@ void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBound
 	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
 	{
 		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
-		if (tile != nullptr && tile->getBoundingBox()->intersects(nextBoundingBoxX) || tile->getBoundingBox()->intersects(nextBoundingBoxY))
+		if (tile != nullptr && (tile->getBoundingBox()->intersects(nextBoundingBoxX) || tile->getBoundingBox()->intersects(nextBoundingBoxY)))
 		{
 			tile->onHit(spell);
 		}

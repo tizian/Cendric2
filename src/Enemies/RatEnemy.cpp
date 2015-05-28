@@ -1,10 +1,22 @@
 #include "Enemies/RatEnemy.h"
 #include "LevelMainCharacter.h"
 
-RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar)
+RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::Rat)
 {
 	load();
+	loadAttributes();
+	loadSpells();
+}
 
+void RatEnemy::loadAttributes()
+{
+	m_attributes.currentHealthPoints = 40;
+	m_attributes.maxHealthPoints = 40;
+	m_attributes.resistancePhysical = 10;
+}
+
+void RatEnemy::loadSpells()
+{
 	SpellBean chopSpell;
 	chopSpell.id = SpellID::Chop;
 	chopSpell.maxActiveTime = sf::milliseconds(500);

@@ -59,12 +59,9 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		|| data.attributes.manaRegenerationPerS < 0
 		|| data.attributes.damagePhysical < 0
 		|| data.attributes.damageFire < 0
-		|| data.attributes.damageIce < 0
-		|| data.attributes.resistancePhysical < 0
-		|| data.attributes.resistanceFire < 0
-		|| data.attributes.resistanceIce < 0)
+		|| data.attributes.damageIce < 0)
 	{
-		g_logger->logError("CharacterCoreReader", "Error in savegame data : attributes cannot be negative");
+		g_logger->logError("CharacterCoreReader", "Error in savegame data : (some) attributes cannot be negative");
 		return false;
 	}
 	if (data.attributes.maxHealthPoints < data.attributes.currentHealthPoints 

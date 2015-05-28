@@ -60,6 +60,7 @@ public:
 	virtual GameObjectType getConfiguredType() const = 0;
 	// returns the color in which the debug rect should be rendered. default is transparent.
 	virtual sf::Color getConfiguredDebugColor() const;
+	Screen* getScreen() const;
 
 protected:
 	GameObjectState m_state;
