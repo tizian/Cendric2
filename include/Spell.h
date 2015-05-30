@@ -49,6 +49,8 @@ private:
 
 	// enemy list from screen
 	std::vector<GameObject*>* m_enemies; 
+	// main character from screen
+	LevelMainCharacter* m_mainChar;
 	// calculates position according to m_mob
 	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
 	// collisions with mainchar

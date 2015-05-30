@@ -19,21 +19,15 @@ void FireRatEnemy::loadAttributes()
 
 void FireRatEnemy::loadSpells()
 {
-	SpellBean chopSpell;
-	chopSpell.id = SpellID::Chop;
+	SpellBean chopSpell = DEFAULT_CHOP;
+	chopSpell.damage = 15;
 	chopSpell.maxActiveTime = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.damage = 2;
-	chopSpell.reflectCount = 0;
-	chopSpell.startVelocity = 0.f;
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
 
-	SpellBean fireSpell;
-	fireSpell.id = SpellID::Fire;
-	fireSpell.maxActiveTime = sf::milliseconds(5000);
-	fireSpell.cooldown = sf::milliseconds(3000);
+	SpellBean fireSpell = DEFAULT_FIRE;
 	fireSpell.damage = 10;
-	fireSpell.reflectCount = 0;
+	fireSpell.cooldown = sf::milliseconds(3000);
 	fireSpell.startVelocity = 200.f;
 
 	m_spellManager->addSpell(chopSpell);
@@ -131,6 +125,12 @@ void FireRatEnemy::load()
 	fightingAnimation.addFrame(sf::IntRect(250, 0, 50, 50));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
+
+	Animation deadAnimation;
+	deadAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_firerat));
+	deadAnimation.addFrame(sf::IntRect(350, 0, 50, 50));
+
+	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	setFrameTime(sf::seconds(0.08f));
 

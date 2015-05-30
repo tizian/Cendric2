@@ -29,7 +29,7 @@ public:
 	void save(char* fileName);
 
 	// getter for core part
-	const CharacterCoreData& getData() const;
+	CharacterCoreData& getData();
 
 private:
 	// loads equipped itemvector

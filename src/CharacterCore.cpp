@@ -126,7 +126,7 @@ void CharacterCore::clearItems()
 	m_equippedItems.clear();
 }
 
-const CharacterCoreData& CharacterCore::getData() const
+CharacterCoreData& CharacterCore::getData()
 {
 	return m_data;
 }

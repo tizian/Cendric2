@@ -98,7 +98,7 @@ void Enemy::onHit(Spell* spell)
 	if (m_attributes.currentHealthPoints < 0)
 	{
 		m_attributes.currentHealthPoints = 0;
-		m_state = GameObjectState::Dead;
+		m_isDead = true;
 	}
 }
 

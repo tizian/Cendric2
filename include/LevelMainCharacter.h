@@ -16,7 +16,9 @@ public:
 	~LevelMainCharacter();
 
 	void load() override;
-	void checkCollisions(const sf::Vector2f& nextPosition) override;
+	void onHit(Spell* spell);
+	void render(sf::RenderTarget& target) override;
+	void update(const sf::Time& frameTime) override;
 
 	void setCharacterCore(CharacterCore* core);
 	
@@ -34,4 +36,17 @@ private:
 	// TODO load this map from configuration
 	std::map<Key, SpellID> m_keyMap;
 	CharacterCore* m_core;
+	AttributeBean* m_attributes;
+
+	// TODO [tiz] this is a part of the interface. Refactor / Move.
+	void updateInterfaceBars();
+	sf::RectangleShape m_hpBarOutline;
+	sf::RectangleShape m_hpBar;
+	sf::RectangleShape m_manaBarOutline;
+	sf::RectangleShape m_manaBar;
+	const float BAR_HEIGHT = 10.f;
+	const float BAR_WIDTH = 200.f;
+	const float BAR_OUTLINE_THICKNESS = 2.f;
+	const float BAR_LEFT = 10.f;
+	const float BAR_TOP = 10.f;
 };

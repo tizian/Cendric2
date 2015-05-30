@@ -17,13 +17,10 @@ void RatEnemy::loadAttributes()
 
 void RatEnemy::loadSpells()
 {
-	SpellBean chopSpell;
-	chopSpell.id = SpellID::Chop;
+	SpellBean chopSpell = DEFAULT_CHOP;
 	chopSpell.maxActiveTime = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.damage = 2;
-	chopSpell.reflectCount = 0;
-	chopSpell.startVelocity = 0.f;
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
 
 	m_spellManager->addSpell(chopSpell);
@@ -113,6 +110,12 @@ void RatEnemy::load()
 	fightingAnimation.addFrame(sf::IntRect(250, 0, 50, 50));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
+
+	Animation deadAnimation;
+	deadAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_rat));
+	deadAnimation.addFrame(sf::IntRect(300, 0, 50, 50));
+
+	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	setFrameTime(sf::seconds(0.08f));
 

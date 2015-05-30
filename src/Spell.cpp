@@ -1,5 +1,6 @@
 #include "Spell.h"
 #include "LevelMovableGameObject.h"
+#include "LevelMainCharacter.h"
 
 using namespace std;
 
@@ -9,6 +10,12 @@ void Spell::loadSpell(Level* level, LevelMovableGameObject* mob, sf::Vector2f ta
 	m_mob = mob;
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
+	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	if (m_mainChar == nullptr)
+	{
+		g_logger->logError("Spell", "Could not find main character of game screen");
+		return;
+	}
 	
 	sf::Vector2f absolutePosition; 
 	calculatePositionAccordingToMob(absolutePosition);
@@ -63,10 +70,7 @@ void Spell::init(SpellBean& bean)
 	m_damage = bean.damage;
 	m_reflectCount = bean.reflectCount;
 	m_speed = bean.startVelocity;
-	if (bean.boundingBox.width != 0.f && bean.boundingBox.height != 0.f)
-	{
-		setBoundingBox(bean.boundingBox);
-	}
+	setBoundingBox(bean.boundingBox);
 }
 
 void Spell::update(const sf::Time& frameTime)
@@ -139,7 +143,10 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition)
 
 void Spell::checkCollisionsWithMainChar(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY)
 {
-
+	if (m_mainChar->getBoundingBox()->intersects(nextBoundingBoxX) || m_mainChar->getBoundingBox()->intersects(nextBoundingBoxY))
+	{
+		m_mainChar->onHit(this);
+	}
 }
 
 void Spell::checkCollisionsWithEnemies(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY)

@@ -26,6 +26,11 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 void LevelEquipment::update(const sf::Time& frameTime)
 {
 	GameObjectState newState = m_mainChar->getState();
+	if (newState == GameObjectState::Dead)
+	{
+		setDisposed();
+		return;
+	}
 	bool newFacingRight = m_mainChar->getIsFacingRight();
 	if (m_state != newState || newFacingRight != m_isFacingRight) 
 	{

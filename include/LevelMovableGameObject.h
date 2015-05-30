@@ -37,6 +37,7 @@ protected:
 	bool m_isFacingRight;
 	bool m_nextIsFacingRight;
 	bool m_isGrounded;
+	bool m_isDead = false;
 	Level* m_level;
 
 	SpellManager* m_spellManager;

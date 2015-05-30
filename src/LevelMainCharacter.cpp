@@ -12,44 +12,34 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 		{ Key::SpellForcefield, SpellID::Forcefield }
 	});
 
-	// TODO these values should come from a staff. they are hardcoded for now.
-	SpellBean fireSpell;
-	fireSpell.id = SpellID::Fire;
-	fireSpell.maxActiveTime = sf::milliseconds(5000);
-	fireSpell.cooldown = sf::milliseconds(1000);
-	fireSpell.damage = 10;
-	fireSpell.reflectCount = 0;
-	fireSpell.startVelocity = 300.f;
-
-	SpellBean chopSpell;
-	chopSpell.id = SpellID::Chop;
-	chopSpell.maxActiveTime = sf::milliseconds(320);
-	chopSpell.cooldown = sf::milliseconds(400);
-	chopSpell.damage = 2;
-	chopSpell.reflectCount = 0;
-	chopSpell.startVelocity = 0.f;
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 60);
-
-	SpellBean forcefieldSpell;
-	forcefieldSpell.id = SpellID::Forcefield;
-	forcefieldSpell.maxActiveTime = sf::milliseconds(3000);
-	forcefieldSpell.cooldown = sf::milliseconds(10000);
-	forcefieldSpell.damage = 1;
-	forcefieldSpell.reflectCount = 0;
-	forcefieldSpell.startVelocity = 0.f;
-
-	SpellBean iceSpell;
-	iceSpell.id = SpellID::Ice;
-	iceSpell.maxActiveTime = sf::milliseconds(5000);
-	iceSpell.cooldown = sf::milliseconds(1000);
-	iceSpell.damage = 6;
-	iceSpell.reflectCount = 0;
-	iceSpell.startVelocity = 400.f;
+	// these values should be modified by a staff
+	SpellBean fireSpell = DEFAULT_FIRE;
+	SpellBean chopSpell = DEFAULT_CHOP;
+	SpellBean forcefieldSpell = DEFAULT_FORCEFIELD;
+	SpellBean iceSpell = DEFAULT_ICE;
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(iceSpell);
 	m_spellManager->addSpell(forcefieldSpell);
 	m_spellManager->addSpell(fireSpell);
+
+	// TODO [tiz] this is part of the interface. refactor / move. 
+	m_hpBar.setFillColor(sf::Color::Red);
+	m_hpBar.setSize(sf::Vector2f(0, BAR_HEIGHT));
+	m_hpBar.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + BAR_OUTLINE_THICKNESS));
+	m_hpBarOutline.setOutlineColor(sf::Color(150, 0, 0, 255));
+	m_hpBarOutline.setOutlineThickness(BAR_OUTLINE_THICKNESS);
+	m_hpBarOutline.setFillColor(sf::Color::Transparent);
+	m_hpBarOutline.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + BAR_OUTLINE_THICKNESS));
+	m_hpBarOutline.setSize(sf::Vector2f(BAR_WIDTH, BAR_HEIGHT));
+	m_manaBar.setFillColor(sf::Color::Blue);
+	m_manaBar.setSize(sf::Vector2f(0, BAR_HEIGHT));
+	m_manaBar.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + 3 * BAR_OUTLINE_THICKNESS + BAR_HEIGHT));
+	m_manaBarOutline.setOutlineColor(sf::Color(0, 0, 150, 255));
+	m_manaBarOutline.setOutlineThickness(BAR_OUTLINE_THICKNESS);
+	m_manaBarOutline.setFillColor(sf::Color::Transparent);
+	m_manaBarOutline.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + 3 * BAR_OUTLINE_THICKNESS + BAR_HEIGHT));
+	m_manaBarOutline.setSize(sf::Vector2f(BAR_WIDTH, BAR_HEIGHT));
 }
 
 LevelMainCharacter::~LevelMainCharacter()
@@ -59,10 +49,47 @@ LevelMainCharacter::~LevelMainCharacter()
 	delete m_spellManager;
 }
 
-void LevelMainCharacter::checkCollisions(const sf::Vector2f& nextPosition)
-{	
-	LevelMovableGameObject::checkCollisions(nextPosition);
-	// TODO check positions with spells
+void LevelMainCharacter::updateInterfaceBars()
+{
+	m_hpBar.setSize(sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints), BAR_HEIGHT));
+	m_manaBar.setSize(sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentManaPoints) / m_attributes->maxManaPoints), BAR_HEIGHT));
+}
+
+void LevelMainCharacter::onHit(Spell* spell)
+{
+	if (m_state == GameObjectState::Dead)
+	{
+		return;
+	}
+	// check for owner
+	if (spell->getOwner() == this)
+	{
+		return;
+	}
+	int damage = 0;
+	switch (spell->getConfiguredSpellID())
+	{
+	case SpellID::Ice:
+		damage = spell->getDamage() - m_attributes->resistanceIce;
+		spell->setDisposed();
+		break;
+	case SpellID::Fire:
+		damage = spell->getDamage() - m_attributes->resistanceFire;
+		spell->setDisposed();
+		break;
+	case SpellID::Chop:
+		damage = spell->getDamage() - m_attributes->resistancePhysical;
+		spell->setDisposed();
+		break;
+	default:
+		break;
+	}
+	m_attributes->currentHealthPoints = m_attributes->currentHealthPoints - std::max(damage, 0);
+	if (m_attributes->currentHealthPoints < 0)
+	{
+		m_attributes->currentHealthPoints = 0;
+		m_isDead = true;
+	}
 }
 
 void LevelMainCharacter::handleInput()
@@ -113,6 +140,7 @@ void LevelMainCharacter::handleInput()
 void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 {
 	m_core = core;
+	m_attributes = &(core->getData().attributes);
 }
 
 void LevelMainCharacter::load()
@@ -154,6 +182,12 @@ void LevelMainCharacter::load()
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
+	Animation deadAnimation;
+	deadAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	deadAnimation.addFrame(sf::IntRect(1120, 0, 80, 120));
+
+	addAnimation(GameObjectState::Dead, deadAnimation);
+
 	setFrameTime(sf::seconds(0.08f));
 
 	// initial values
@@ -161,6 +195,25 @@ void LevelMainCharacter::load()
 	m_isFacingRight = true;
 	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	playCurrentAnimation(true);
+}
+
+void LevelMainCharacter::render(sf::RenderTarget &renderTarget)
+{
+	LevelMovableGameObject::render(renderTarget);
+
+	sf::View oldView = renderTarget.getView();
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_hpBarOutline);
+	renderTarget.draw(m_hpBar);
+	renderTarget.draw(m_manaBarOutline);
+	renderTarget.draw(m_manaBar);
+	renderTarget.setView(oldView);
+}
+
+void LevelMainCharacter::update(const sf::Time& frameTime)
+{
+	LevelMovableGameObject::update(frameTime);
+	updateInterfaceBars();
 }
 
 float LevelMainCharacter::getConfiguredMaxVelocityY() const

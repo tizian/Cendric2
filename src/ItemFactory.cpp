@@ -10,11 +10,11 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_blue;
 		bean.value = 20;
-		bean.attributes.damageIce = 10;
-		bean.attributes.resistanceIce = 5;
-		bean.attributes.resistancePhysical = 10;
+		bean.attributes.damageIce = 5;
+		bean.attributes.resistanceIce = 2;
+		bean.attributes.resistancePhysical = 1;
 		bean.attributes.manaRegenerationPerS = 2;
-		bean.attributes.maxManaPoints = 10;
+		bean.attributes.maxManaPoints = 5;
 		break;
 	case ItemID::Equipment_head_wizardhat_black:
 		bean.description = Texts::Item_description_wizardhat;
@@ -23,10 +23,10 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_grey;
 		bean.value = 20;
 		bean.attributes.manaRegenerationPerS = 4;
-		bean.attributes.resistanceFire = 5;
-		bean.attributes.resistancePhysical = 10;
-		bean.attributes.maxManaPoints = 10;
-		bean.attributes.maxHealthPoints = 10;
+		bean.attributes.resistanceFire = 2;
+		bean.attributes.resistancePhysical = 1;
+		bean.attributes.maxManaPoints = 5;
+		bean.attributes.maxHealthPoints = 5;
 		break;
 	case ItemID::Equipment_weapon_staff_ice:
 		bean.description = Texts::Item_description_staff_ice;
@@ -37,7 +37,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.attributes.manaRegenerationPerS = 4;
 		bean.attributes.maxManaPoints = 10;
 		bean.attributes.maxHealthPoints = 10;
-		bean.attributes.damageIce = 100;
+		bean.attributes.damageIce = 20;
 		break;
 	case ItemID::Food_Cheese:
 		bean.description = Texts::Item_description_Food_Cheese;

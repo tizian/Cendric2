@@ -8,7 +8,6 @@ ForcefieldSpell::ForcefieldSpell()
 void ForcefieldSpell::load()
 {
 	setSpriteOffset(sf::Vector2f(-12.f, -12.f));
-	setBoundingBox(sf::FloatRect(0, 0, 98, 98));
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_forcefield));

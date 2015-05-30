@@ -17,11 +17,16 @@ LevelMovableGameObject::~LevelMovableGameObject()
 
 void LevelMovableGameObject::update(const sf::Time& frameTime)
 {
-	if (m_state != GameObjectState::Dead)
+	if (m_state == GameObjectState::Dead)
+	{
+		setAcceleration(sf::Vector2f(0, getConfiguredGravityAcceleration()));
+	}
+	else
 	{
 		handleInput();
-		m_spellManager->update(frameTime);
 	}
+	
+	m_spellManager->update(frameTime);
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
@@ -75,7 +80,7 @@ void LevelMovableGameObject::updateAnimation()
 	// calculate new game state and set animation.
 
 	GameObjectState newState = GameObjectState::Idle;
-	if (m_state == GameObjectState::Dead)
+	if (m_isDead)
 	{
 		newState = GameObjectState::Dead;
 	}
