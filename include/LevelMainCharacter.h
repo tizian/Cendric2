@@ -17,6 +17,7 @@ public:
 
 	void load() override;
 	void onHit(Spell* spell);
+	void update(const sf::Time& frameTime) override;
 
 	void setCharacterCore(CharacterCore* core);
 	// adds the item to the players inventory
@@ -39,4 +40,8 @@ private:
 	std::map<Key, SpellID> m_keyMap;
 	CharacterCore* m_core;
 	AttributeBean* m_attributes;
+
+	// regeneration (hp, mana)
+	void updateRegeneration(const sf::Time& frameTime);
+	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
 };

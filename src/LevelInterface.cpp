@@ -86,6 +86,15 @@ void LevelInterface::updateCharacterInfo()
 		infoText.append("/");
 		infoText.append(std::to_string(m_attributes->maxManaPoints));
 		infoText.append("\n");
+		// regeneration
+		infoText.append(g_textProvider->getText(Texts::Attribute_healthRegeneration));
+		infoText.append(": ");
+		infoText.append(std::to_string(m_attributes->healthRegenerationPerS));
+		infoText.append("/s\n");
+		infoText.append(g_textProvider->getText(Texts::Attribute_manaRegeneration));
+		infoText.append(": ");
+		infoText.append(std::to_string(m_attributes->manaRegenerationPerS));
+		infoText.append("/s\n");
 		// dmg 
 		infoText.append(g_textProvider->getText(Texts::Attribute_damagePhysical));
 		infoText.append(": ");
@@ -127,6 +136,10 @@ void LevelInterface::updateInventory()
 		// update text
 		std::string inventoryText = "";
 		inventoryText.append(g_textProvider->getText(Texts::Inventory));
+		inventoryText.append("\n\n");
+		inventoryText.append(g_textProvider->getText(Texts::Gold));
+		inventoryText.append(": ");
+		inventoryText.append(std::to_string(m_core->getData().gold));
 		inventoryText.append("\n\n");
 		// reload
 		m_core->loadItems();

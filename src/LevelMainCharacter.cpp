@@ -119,6 +119,31 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 	m_attributes = &(core->getData().attributes);
 }
 
+void LevelMainCharacter::update(const sf::Time& frameTime)
+{
+	LevelMovableGameObject::update(frameTime);
+	updateRegeneration(frameTime);
+}
+
+void LevelMainCharacter::updateRegeneration(const sf::Time& frameTime)
+{
+	m_timeSinceRegeneration += frameTime;
+	if (m_timeSinceRegeneration >= sf::seconds(1))
+	{
+		m_timeSinceRegeneration -= sf::seconds(1);
+		m_attributes->currentHealthPoints += m_attributes->healthRegenerationPerS;
+		m_attributes->currentManaPoints += m_attributes->manaRegenerationPerS;
+		if (m_attributes->currentHealthPoints > m_attributes->maxHealthPoints)
+		{
+			m_attributes->currentHealthPoints = m_attributes->maxHealthPoints;
+		}
+		if (m_attributes->currentManaPoints > m_attributes->maxManaPoints)
+		{
+			m_attributes->currentManaPoints = m_attributes->maxManaPoints;
+		}
+	}
+}
+
 void LevelMainCharacter::load()
 {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 46.f, 100.f));

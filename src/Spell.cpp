@@ -49,6 +49,11 @@ bool Spell::getConfiguredIsAttachedToMob() const
 
 void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 {
+	if (m_mob == nullptr)
+	{
+		// owner could be dead and looted.
+		return;
+	}
 	sf::Vector2f mainCharPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
 	sf::Vector2f offset;
 	if (m_mob->getIsFacingRight())
@@ -133,7 +138,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition)
 	// check collisions with dynamic tiles
 	m_level->collideWithDynamicTiles(this, nextBoundingBoxX, nextBoundingBoxY);
 	// check collisions with main char
-	if (!(m_mob->getConfiguredType() == GameObjectType::_MainCharacter))
+	if (m_mob == nullptr || !(m_mob->getConfiguredType() == GameObjectType::_MainCharacter))
 	{
 		checkCollisionsWithMainChar(nextBoundingBoxX, nextBoundingBoxY);
 	}
