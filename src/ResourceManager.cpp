@@ -15,6 +15,7 @@ ResourceManager::~ResourceManager()
 	m_levelFileNames.clear();
 	m_mapFileNames.clear();
 	m_fonts.clear();
+	m_bitmapFonts.clear();
 }
 
 void ResourceManager::init()
@@ -29,6 +30,7 @@ void ResourceManager::init()
 
 	m_fileNames.insert(
 	{
+		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
 		{ ResourceID::Font_copperplateGothicBold, "res/fonts/copperplate_gothic_bold.ttf" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
@@ -55,6 +57,7 @@ void ResourceManager::init()
 	});
 
 	// font should be always loaded to avoid lags when loading later
+	getBitmapFont(ResourceID::BitmapFont_default);	// TODO: Comment above maybe doesn't apply to bitmap fonts...?
 	getFont(ResourceID::Font_copperplateGothicBold);
 }
 
@@ -130,6 +133,42 @@ sf::Font* ResourceManager::getFont(ResourceID id)
 	return getFont(m_fileNames[id]);
 }
 
+BitmapFont* ResourceManager::getBitmapFont(std::string& filename)
+{
+	// does the font exist yet?
+	for (auto it = m_bitmapFonts.begin();
+		it != m_bitmapFonts.end();
+		++it)
+	{
+		if (filename.compare(it->first) == 0)
+		{
+			return &(it->second);
+		}
+	}
+
+	// the font doesn't exist. Create and save it.
+	BitmapFont font;
+
+	// search project's main directory
+	if (font.loadFromFile(filename))
+	{
+		m_bitmapFonts[filename] = font;
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading bitmap font");
+		return &m_bitmapFonts[filename];
+	}
+
+	g_logger->logError("ResourceManager", "Bitmap Font could not be loaded from file: " + std::string(filename));
+	std::string tmp = "Bitmap Font could not be loaded from file: " + filename;
+	setError(ErrorID::Error_fileNotFound, tmp);
+	m_bitmapFonts[filename] = font;
+	return &m_bitmapFonts[filename];
+}
+
+BitmapFont* ResourceManager::getBitmapFont(ResourceID id)
+{
+	return getBitmapFont(m_fileNames[id]);
+}
+
 void ResourceManager::deleteResource(ResourceID id)
 {
 	deleteResource(m_fileNames[id]);
@@ -152,6 +191,15 @@ void ResourceManager::deleteResource(std::string filename)
 	{
 		m_fonts.erase(fontIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing font");
+		return;
+	}
+
+	// delete bitmap font
+	auto bitmapFontIt = m_bitmapFonts.find(filename);
+	if (bitmapFontIt != m_bitmapFonts.end())
+	{
+		m_bitmapFonts.erase(bitmapFontIt);
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing bitmap font");
 		return;
 	}
 

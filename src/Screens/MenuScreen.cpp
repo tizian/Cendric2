@@ -56,6 +56,11 @@ void MenuScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
+
+	sf::View oldView = renderTarget.getView();
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_testText);
+	renderTarget.setView(oldView);
 }
 
 void MenuScreen::execOnEnter(const Screen *previousScreen)
@@ -82,6 +87,14 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	addObject(GameObjectType::_Button, m_loadGameButton);
 	addObject(GameObjectType::_Button, m_exitButton);
 	addObject(GameObjectType::_Button, m_startGameButton);
+
+	m_testText = BitmapText(
+		"TEST",
+		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
+
+	m_testText.setColor(sf::Color::White);
+	m_testText.setCharacterSize(30);
+	m_testText.setPosition(sf::Vector2f(200, 300));
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen)

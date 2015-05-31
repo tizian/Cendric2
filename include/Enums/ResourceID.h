@@ -4,6 +4,7 @@ enum class ResourceID
 {
 	Void,
 	
+	BitmapFont_default,
 	Font_copperplateGothicBold,
 	Texture_mainChar,
 	Texture_mapMainChar,

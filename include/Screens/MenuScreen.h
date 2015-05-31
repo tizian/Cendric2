@@ -9,6 +9,8 @@
 #include "CharacterCore.h"
 #include "Button.h"
 
+#include "GUI/BitmapText.h"
+
 class MenuScreen : public Screen
 {
 public:
@@ -22,6 +24,8 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
+
+	BitmapText m_testText;
 
 	// buttons on this screen
 	Button* m_newGameButton;

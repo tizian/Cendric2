@@ -81,12 +81,14 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds)
 		sum += f;
 	}
 	int fps = static_cast<int>(1.f / (sum / FPS_AVERAGE_NR));
-	sf::Text fpsText = sf::Text(
+
+	BitmapText fpsText = BitmapText(
 		"FPS: " + std::to_string(fps),
-		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));
+		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
 	fpsText.setColor(sf::Color::Red);
-	fpsText.setPosition(sf::Vector2f(1150.f, 10.f));
+	fpsText.setPosition(sf::Vector2f(1050.f, 10.f));
 	fpsText.setCharacterSize(20);
+
 	target.draw(fpsText);
 	target.setView(oldView);
 }
