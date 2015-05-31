@@ -113,16 +113,10 @@ void BitmapText::init()
 		float u = (c % NUM_GLYPHS_U) * du;
 		float v = (c / NUM_GLYPHS_U) * dv;
 
-		cout << "(u, v) = (" << u << ", " << v << ")" << endl;
-		cout << "(du, dv) = (" << du << ", " << dv << ")" << endl;
-
-		cout << "(x, y) = (" << curX << ", " << curY << ")" << endl;
-		cout << "(dx, dy) = (" << dx << ", " << dy << ")" << endl;
-
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY), sf::Color::White, sf::Vector2f(u, v)));
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY), sf::Color::White, sf::Vector2f(u + du, v)));
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY + dy), sf::Color::White, sf::Vector2f(u + du, v + dv)));
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY + dy), sf::Color::White, sf::Vector2f(u, v + dv)));
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY), m_color, sf::Vector2f(u, v)));
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY), m_color, sf::Vector2f(u + du, v)));
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY + dy), m_color, sf::Vector2f(u + du, v + dv)));
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY + dy), m_color, sf::Vector2f(u, v + dv)));
 
 		curX += dx;
 	}
