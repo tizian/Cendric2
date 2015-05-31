@@ -6,6 +6,7 @@
 #include "Screen.h"
 #include "ResourceManager.h"
 #include "LevelMainCharacterLoader.h"
+#include "LevelInterface.h"
 
 #include "Enums/LevelID.h"
 
@@ -23,4 +24,5 @@ private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar;
 	LevelID m_levelID;
+	LevelInterface m_interface;	
 };

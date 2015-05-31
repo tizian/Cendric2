@@ -7,6 +7,7 @@
 
 #include "Enums/EnemyID.h"
 #include "Enums/SpellID.h"
+#include "Enums/ItemID.h"
 
 class Level;
 class LevelMainCharacter;
@@ -20,9 +21,12 @@ public:
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void render(sf::RenderTarget& target) override;
+	void onRightClick() override;
+	void onMouseOver() override;
 	void update(const sf::Time& frameTime) override;
 
 	virtual void onHit(Spell* spell);
+	void setLoot(const std::map<ItemID, int>& items, int gold);
 
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
@@ -54,4 +58,10 @@ protected:
 private:
 	sf::RectangleShape m_hpBar;
 	const float HP_BAR_HEIGHT = 3.f;
+
+	// lootable items 
+	std::map<ItemID, int> m_lootableItems;
+	int m_lootableGold;
+	// the enemy can only be looted if the main char is in this range
+	const float PICKUP_RANGE = 100.f;
 };

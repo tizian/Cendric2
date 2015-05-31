@@ -12,7 +12,22 @@ void TextProvider::init()
 	addText(Texts::Credits, "Credits", "Credits");
 	addText(Texts::Exit, "Exit", "Beenden");
 
-	addText(Texts::Warn_itemTooFarAway, "Item out of range", "Ich muss näher ran");
+	// Inventory & Attributes
+	addText(Texts::Inventory, "Inventory", "Inventar");
+	addText(Texts::CharacterInfo, "Character Info", "Charakter Info");
+	addText(Texts::Gold, "Gold", "Gold");
+	addText(Texts::Attribute_health, "Health", "Lebenskraft");
+	addText(Texts::Attribute_mana, "Mana", "Mana");
+	addText(Texts::Attribute_healthRegeneration, "Health regeneration", "Lebensregeneration");
+	addText(Texts::Attribute_manaRegeneration, "Mana regeneration", "Manaregeneration");
+	addText(Texts::Attribute_damageFire, "Fire damage", "Feuerschaden");
+	addText(Texts::Attribute_damageIce, "Ice damage", "Eisschaden");
+	addText(Texts::Attribute_damagePhysical, "Physical damage", "Physischer Schaden");
+	addText(Texts::Attribute_resistanceFire, "Fire resistance", "Feuerresistenz");
+	addText(Texts::Attribute_resistanceIce, "Ice resistance", "Eisresistenz");
+	addText(Texts::Attribute_resistancePhysical, "Armour", "Rüstung");
+	
+	addText(Texts::Warn_itemTooFarAway, "Out of range", "Ich muss näher ran");
 
 	// level item tooltips
 	addText(Texts::Levelitem_tooltip_cheese, "A nice moist cheese", "Ein hübscher saftiger Käse");
@@ -23,6 +38,14 @@ void TextProvider::init()
 	addText(Texts::Item_description_Food_Bread, "An ordinary loaf of bread.", "Ein einfaches Brot.");
 	addText(Texts::Item_description_Food_Cheese, "Smelly.", "Riecht nicht sonderlich gut.");
 	addText(Texts::Item_description_Food_Water, "Fresh clear water.", "Frisches klares Wasser.");
+	
+	// item  names
+	addText(Texts::Item_name_food_bread, "Bread", "Brot");
+	addText(Texts::Item_name_food_cheese, "Cheese", "Käse");
+	addText(Texts::Item_name_food_water, "Water", "Wasser");
+	addText(Texts::Item_name_staff_ice, "Ice staff", "Eisstab");
+	addText(Texts::Item_name_wizardhat_blue, "Blue wizardhat", "Blauer Spitzhut");
+	addText(Texts::Item_name_wizardhat_grey, "Grey wizardhat", "Grauer Spitzhut");
 }
 
 const std::string& TextProvider::getText(Texts key)

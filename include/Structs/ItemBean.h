@@ -13,6 +13,7 @@
 struct ItemBean
 {
 	Texts description;
+	Texts name;
 	ItemID id;
 	ItemType type;
 	ResourceID icon;
@@ -25,6 +26,7 @@ struct ItemBean
 const struct ItemBean DEFAULT_ITEM = 
 {
 	Texts::Void, 
+	Texts::Void,
 	ItemID::Void, 
 	ItemType::Void, 
 	ResourceID::Void,

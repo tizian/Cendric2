@@ -20,6 +20,7 @@ public:
 	void setCurrentWindowSize(int width, int height);
 
 	bool isKeyActive(Key key);
+	bool isKeyJustPressed(Key key);
 	bool isMouseOver(const sf::FloatRect* boundingBox) const;
 	bool isLeftClicked(const sf::FloatRect* boundingBox) const;
 	bool isRightClicked(const sf::FloatRect* boundingBox) const;
@@ -40,6 +41,7 @@ public:
 
 private:
 	std::map<Key, bool> m_keyActiveMap;
+	std::map<Key, bool> m_keyJustPressedMap;
 	sf::RenderWindow* m_mainWindow;
 
 	// TODO: this map has to be loaded from an .ini file later so it can be changed in the game options.

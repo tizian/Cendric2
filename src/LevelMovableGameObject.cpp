@@ -6,8 +6,7 @@ LevelMovableGameObject::LevelMovableGameObject(Level* level)
 {
 	m_level = level;
 	m_spellManager = new SpellManager();
-	// children should call load()
-	// children should add spells to spell manager in the constructor.
+	// children should add spells to spell manager in their constructor.
 }
 
 LevelMovableGameObject::~LevelMovableGameObject()
@@ -154,4 +153,9 @@ float LevelMovableGameObject::getConfiguredDampingGroundPersS() const
 float LevelMovableGameObject::getConfiguredDampingAirPerS() const
 {
 	return 0.7f;
+}
+
+SpellManager* LevelMovableGameObject::getSpellManager() const
+{
+	return m_spellManager;
 }

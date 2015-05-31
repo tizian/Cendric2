@@ -3,6 +3,8 @@
 enum class Key
 {
 	Escape,
+	Inventory,
+	CharacterInfo,
 	Left,
 	Right,
 	Up,

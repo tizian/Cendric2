@@ -2,7 +2,7 @@
 
 using namespace std;
 
-GameScreen::GameScreen(LevelID levelID, CharacterCore* core) : Screen(core)
+GameScreen::GameScreen(LevelID levelID, CharacterCore* core) : Screen(core), m_interface(core)
 {
 	m_levelID = levelID;
 }
@@ -18,6 +18,7 @@ void GameScreen::execOnEnter(const Screen *previousScreen)
 		string errormsg = filename + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 	}
+	m_interface.setSpellManager(m_mainChar->getSpellManager());
 }
 
 void GameScreen::execOnExit(const Screen *nextScreen)
@@ -34,6 +35,7 @@ Screen* GameScreen::update(const sf::Time& frameTime)
 	updateObjects(GameObjectType::_DynamicTile, frameTime);
 	updateObjects(GameObjectType::_LevelItem, frameTime);
 	updateObjects(GameObjectType::_Enemy, frameTime);
+	m_interface.update(frameTime);
 	deleteDisposedObjects();
 	return this;
 }
@@ -50,4 +52,5 @@ void GameScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
+	m_interface.render(renderTarget);
 }

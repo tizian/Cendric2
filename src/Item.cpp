@@ -10,6 +10,11 @@ Texts Item::getDescription() const
 	return m_bean.description;
 }
 
+Texts Item::getName() const
+{
+	return m_bean.name;
+}
+
 ItemID Item::getID() const
 {
 	return m_bean.id;

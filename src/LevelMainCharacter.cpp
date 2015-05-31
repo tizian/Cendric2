@@ -22,24 +22,6 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 	m_spellManager->addSpell(iceSpell);
 	m_spellManager->addSpell(forcefieldSpell);
 	m_spellManager->addSpell(fireSpell);
-
-	// TODO [tiz] this is part of the interface. refactor / move. 
-	m_hpBar.setFillColor(sf::Color::Red);
-	m_hpBar.setSize(sf::Vector2f(0, BAR_HEIGHT));
-	m_hpBar.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + BAR_OUTLINE_THICKNESS));
-	m_hpBarOutline.setOutlineColor(sf::Color(150, 0, 0, 255));
-	m_hpBarOutline.setOutlineThickness(BAR_OUTLINE_THICKNESS);
-	m_hpBarOutline.setFillColor(sf::Color::Transparent);
-	m_hpBarOutline.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + BAR_OUTLINE_THICKNESS));
-	m_hpBarOutline.setSize(sf::Vector2f(BAR_WIDTH, BAR_HEIGHT));
-	m_manaBar.setFillColor(sf::Color::Blue);
-	m_manaBar.setSize(sf::Vector2f(0, BAR_HEIGHT));
-	m_manaBar.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + 3 * BAR_OUTLINE_THICKNESS + BAR_HEIGHT));
-	m_manaBarOutline.setOutlineColor(sf::Color(0, 0, 150, 255));
-	m_manaBarOutline.setOutlineThickness(BAR_OUTLINE_THICKNESS);
-	m_manaBarOutline.setFillColor(sf::Color::Transparent);
-	m_manaBarOutline.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + 3 * BAR_OUTLINE_THICKNESS + BAR_HEIGHT));
-	m_manaBarOutline.setSize(sf::Vector2f(BAR_WIDTH, BAR_HEIGHT));
 }
 
 LevelMainCharacter::~LevelMainCharacter()
@@ -47,12 +29,6 @@ LevelMainCharacter::~LevelMainCharacter()
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
 	m_keyMap.clear();
 	delete m_spellManager;
-}
-
-void LevelMainCharacter::updateInterfaceBars()
-{
-	m_hpBar.setSize(sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints), BAR_HEIGHT));
-	m_manaBar.setSize(sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentManaPoints) / m_attributes->maxManaPoints), BAR_HEIGHT));
 }
 
 void LevelMainCharacter::onHit(Spell* spell)
@@ -197,25 +173,6 @@ void LevelMainCharacter::load()
 	playCurrentAnimation(true);
 }
 
-void LevelMainCharacter::render(sf::RenderTarget &renderTarget)
-{
-	LevelMovableGameObject::render(renderTarget);
-
-	sf::View oldView = renderTarget.getView();
-	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_hpBarOutline);
-	renderTarget.draw(m_hpBar);
-	renderTarget.draw(m_manaBarOutline);
-	renderTarget.draw(m_manaBar);
-	renderTarget.setView(oldView);
-}
-
-void LevelMainCharacter::update(const sf::Time& frameTime)
-{
-	LevelMovableGameObject::update(frameTime);
-	updateInterfaceBars();
-}
-
 float LevelMainCharacter::getConfiguredMaxVelocityY() const
 {
 	return 600.0f;
@@ -239,4 +196,32 @@ GameObjectType LevelMainCharacter::getConfiguredType() const
 sf::Color LevelMainCharacter::getConfiguredDebugColor() const
 {
 	return sf::Color::White;
+}
+
+void LevelMainCharacter::lootItem(ItemID item, int quantity) const
+{
+	std::map<ItemID, int>* coreItems = &(m_core->getData().items);
+	auto it = coreItems->find(item);
+
+	if (it != coreItems->end())
+	{
+		coreItems->at(item) = coreItems->at(item) + quantity;
+	}
+	else
+	{
+		coreItems->insert({item, quantity});
+	}
+}
+
+void LevelMainCharacter::lootItems(std::map<ItemID, int>& items) const
+{
+	for (auto it : items)
+	{
+		lootItem(it.first, it.second);
+	}
+}
+
+void LevelMainCharacter::addGold(int gold) const
+{
+	m_core->getData().gold += std::max(gold, 0);
 }

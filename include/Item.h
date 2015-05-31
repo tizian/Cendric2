@@ -11,6 +11,7 @@ public:
 	Item(ItemBean& bean);
 
 	Texts getDescription() const;
+	Texts getName() const;
 	ItemID getID() const;
 	ItemType getType() const;
 	LevelEquipmentID getLevelEquipmentID() const;

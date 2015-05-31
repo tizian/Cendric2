@@ -21,21 +21,23 @@ public:
 
 	// returns the currently equipped item of type 'type'
 	const Item& getEquippedItem(ItemType type);
+	// returns the item of id "id"
+	const Item& getItem(ItemID id);
 	// loads a new game with a new core and default attributes
 	void loadNew();
 	// uses the character core reader to load a .sav file
 	bool load(char* fileName);
 	// uses the character core writer to save a .sav file
 	void save(char* fileName);
-
+	// loads equipped itemvector (reload if not empty)
+	void loadEquipmentItems();
+	// loads itemvector (reload if not empty)
+	void loadItems();
 	// getter for core part
 	CharacterCoreData& getData();
-
+	
 private:
-	// loads equipped itemvector
-	void loadEquipmentItems();
-	// loads itemvector
-	void loadItems();
+
 	// clears equipped itemvector
 	void clearEquippedItems();
 	// clears itemvector

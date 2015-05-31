@@ -47,5 +47,4 @@ void ErrorScreen::execOnEnter(const Screen *previousScreen)
 void ErrorScreen::execOnExit(const Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(m_screenResource);
-	g_resourceManager->deleteResource(ResourceID::Font_copperplateGothicBold);
 }

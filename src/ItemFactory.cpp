@@ -6,6 +6,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 	{
 	case ItemID::Equipment_head_wizardhat_blue:
 		bean.description = Texts::Item_description_wizardhat;
+		bean.name = Texts::Item_name_wizardhat_blue;
 		bean.type = ItemType::Equipment_head;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_blue;
@@ -18,6 +19,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Equipment_head_wizardhat_black:
 		bean.description = Texts::Item_description_wizardhat;
+		bean.name = Texts::Item_name_wizardhat_grey;
 		bean.type = ItemType::Equipment_head;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_grey;
@@ -30,6 +32,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Equipment_weapon_staff_ice:
 		bean.description = Texts::Item_description_staff_ice;
+		bean.name = Texts::Item_name_staff_ice;
 		bean.type = ItemType::Equipment_weapon;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Weapon_icestaff;
@@ -41,6 +44,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Food_Cheese:
 		bean.description = Texts::Item_description_Food_Cheese;
+		bean.name = Texts::Item_name_food_cheese;
 		bean.type = ItemType::Food;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -49,6 +53,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Food_Bread:
 		bean.description = Texts::Item_description_Food_Bread;
+		bean.name = Texts::Item_name_food_bread;
 		bean.type = ItemType::Food;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -57,6 +62,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Food_Water:
 		bean.description = Texts::Item_description_Food_Water;
+		bean.name = Texts::Item_name_food_water;
 		bean.type = ItemType::Food;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Void;

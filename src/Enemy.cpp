@@ -56,7 +56,6 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 	{
 		m_jumps = true;
 	}
-	// TODO check positions with spells referencing not this object.
 }
 
 void Enemy::onHit(Spell* spell)
@@ -106,6 +105,7 @@ void Enemy::render(sf::RenderTarget &renderTarget)
 {
 	LevelMovableGameObject::render(renderTarget);
 	renderTarget.draw(m_hpBar);
+	m_animatedSprite.setColor(sf::Color::White);
 }
 
 void Enemy::update(const sf::Time& frameTime) 
@@ -144,4 +144,38 @@ sf::Color Enemy::getConfiguredDebugColor() const
 float Enemy::getConfiguredDistanceToHPBar() const
 {
 	return 20.f;
+}
+
+void Enemy::setLoot(const std::map<ItemID, int>& items, int gold)
+{
+	m_lootableItems = items;
+	m_lootableGold = gold;
+}
+
+void Enemy::onMouseOver()
+{
+	if (m_state == GameObjectState::Dead)
+	{
+		m_animatedSprite.setColor(sf::Color::Red);
+	}
+}
+
+void Enemy::onRightClick()
+{
+	if (m_state == GameObjectState::Dead)
+	{
+		// check if the enemy body is in range
+		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
+		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE)
+		{
+			// loot, create the correct items + gold in the players inventory.
+			m_mainChar->lootItems(m_lootableItems);
+			m_mainChar->addGold(m_lootableGold);
+			setDisposed();
+		}
+		else
+		{
+			m_screen->setTooltipText(g_textProvider->getText(Texts::Warn_itemTooFarAway), sf::Vector2f(10.f, 10.f), sf::Color::Red, true);
+		}
+	}
 }

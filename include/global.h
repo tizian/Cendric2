@@ -6,6 +6,8 @@
 // std library
 #include <iostream>
 
+#define PI_F 3.14159265358979f
+#define DEG_TO_RAD 57.2957795f
 // TODO these values should not be const, but loaded from an .ini file.
 #define WINDOW_WIDTH 1250
 #define WINDOW_HEIGHT 750
@@ -18,7 +20,7 @@
 #define CENDRIC_COLOR_PURPLE sf::Color(54, 11, 93, 255)
 #define CENDRIC_COLOR_LIGHT_PURPLE sf::Color(114, 66, 200, 255)
 
-const bool DEBUG_RENDERING = true;
+const bool DEBUG_RENDERING = false;
 
 class Logger;
 class TextProvider;

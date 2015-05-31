@@ -78,5 +78,4 @@ private:
 	sf::Vector2f m_position;
 
 	void drawBoundingBox(sf::RenderTarget& renderTarget) const;
-	const float  PI_F = 3.14159265358979f;
 };

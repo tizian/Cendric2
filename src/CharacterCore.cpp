@@ -9,6 +9,8 @@ CharacterCore::CharacterCore()
 
 CharacterCore::~CharacterCore()
 {
+	clearEquippedItems();
+	clearItems();
 }
 
 bool CharacterCore::load(char* fileName)
@@ -50,6 +52,15 @@ const Item& CharacterCore::getEquippedItem(ItemType type)
 	return m_equippedItems.at(type);
 }
 
+const Item& CharacterCore::getItem(ItemID id)
+{
+	if (m_items.empty())
+	{
+		loadItems();
+	}
+	return m_items.at(id);
+}
+
 void CharacterCore::save(char* fileName) 
 {
 	m_data.timePlayed += m_stopwatch.restart();
@@ -59,10 +70,7 @@ void CharacterCore::save(char* fileName)
 void CharacterCore::reloadStats()
 {
 	m_totalAttributes = m_data.attributes;
-	if(m_equippedItems.empty())
-	{
-		loadEquipmentItems();
-	}
+	loadEquipmentItems();
 	for (auto &it : m_equippedItems)
 	{
 		addBean(m_totalAttributes, it.second.getAttributes());

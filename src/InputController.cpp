@@ -8,31 +8,50 @@ InputController::InputController()
 
 InputController::~InputController()
 {
+	m_keyActiveMap.clear();
+	m_keyJustPressedMap.clear();
+	m_keyJustPressedMap.clear();
 }
 
 void InputController::update()
 {
 	m_isWindowFocused = m_mainWindow->hasFocus();
 	// LEFT
+	m_keyJustPressedMap[Key::Left] = !m_keyActiveMap[Key::Left] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Left));
     m_keyActiveMap[Key::Left] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Left));
 	// RIGHT
+	m_keyJustPressedMap[Key::Right] = !m_keyActiveMap[Key::Right] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Right));
 	m_keyActiveMap[Key::Right] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Right));
 	// UP
+	m_keyJustPressedMap[Key::Up] = !m_keyActiveMap[Key::Up] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Up));
 	m_keyActiveMap[Key::Up] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Up));
 	// DOWN
+	m_keyJustPressedMap[Key::Down] = !m_keyActiveMap[Key::Down] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Down));
 	m_keyActiveMap[Key::Down] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Down));
 	// JUMP
+	m_keyJustPressedMap[Key::Jump] = !m_keyActiveMap[Key::Jump] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Jump));
 	m_keyActiveMap[Key::Jump] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Jump));
 	// Escape
+	m_keyJustPressedMap[Key::Escape] = !m_keyActiveMap[Key::Escape] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Escape));
 	m_keyActiveMap[Key::Escape] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Escape));
+	// Inventory
+	m_keyJustPressedMap[Key::Inventory] = !m_keyActiveMap[Key::Inventory] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Inventory));
+	m_keyActiveMap[Key::Inventory] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Inventory));
+	// Character Info
+	m_keyJustPressedMap[Key::CharacterInfo] = !m_keyActiveMap[Key::CharacterInfo] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::CharacterInfo));
+	m_keyActiveMap[Key::CharacterInfo] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::CharacterInfo));
 
 	// SPELL FIRE
+	m_keyJustPressedMap[Key::SpellFire] = !m_keyActiveMap[Key::SpellFire] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellFire));
 	m_keyActiveMap[Key::SpellFire] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellFire));
 	// SPELL ICE
+	m_keyJustPressedMap[Key::SpellIce] = !m_keyActiveMap[Key::SpellIce] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellIce));
 	m_keyActiveMap[Key::SpellIce] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellIce));
 	// SPELL CHOP
+	m_keyJustPressedMap[Key::SpellChop] = !m_keyActiveMap[Key::SpellChop] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellChop));
 	m_keyActiveMap[Key::SpellChop] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellChop));
 	// SPELL FORCEFIELD
+	m_keyJustPressedMap[Key::SpellForcefield] = !m_keyActiveMap[Key::SpellForcefield] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellForcefield));
 	m_keyActiveMap[Key::SpellForcefield] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::SpellForcefield));
 
 	// update mouse clicks
@@ -65,6 +84,8 @@ void InputController::init()
 	m_keyActiveMap.insert(
 		{
 			{ Key::Escape, false },
+			{ Key::Inventory, false },
+			{ Key::CharacterInfo, false },
 			{ Key::Left, false },
 			{ Key::Right, false },
 			{ Key::Up, false },
@@ -75,9 +96,26 @@ void InputController::init()
 			{ Key::SpellForcefield, false },
 			{ Key::SpellIce, false }
 		});
+	m_keyJustPressedMap.insert(
+	{
+		{ Key::Escape, false },
+		{ Key::Inventory, false },
+		{ Key::CharacterInfo, false },
+		{ Key::Left, false },
+		{ Key::Right, false },
+		{ Key::Up, false },
+		{ Key::Down, false },
+		{ Key::Jump, false },
+		{ Key::SpellFire, false },
+		{ Key::SpellChop, false },
+		{ Key::SpellForcefield, false },
+		{ Key::SpellIce, false }
+	});
 	m_keyMap.insert(
 		{
 			{ Key::Escape, sf::Keyboard::Escape },
+			{ Key::Inventory, sf::Keyboard::I },
+			{ Key::CharacterInfo, sf::Keyboard::C },
 			{ Key::Left, sf::Keyboard::A },
 			{ Key::Right, sf::Keyboard::D },
 			{ Key::Up, sf::Keyboard::W },
@@ -172,6 +210,11 @@ bool InputController::isMouseJustPressedRight() const
 bool InputController::isKeyActive(Key key)
 {
 	return m_isWindowFocused && m_keyActiveMap[key];
+}
+
+bool InputController::isKeyJustPressed(Key key)
+{
+	return m_isWindowFocused && m_keyJustPressedMap[key];
 }
 
 

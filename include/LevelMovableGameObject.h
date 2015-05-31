@@ -19,6 +19,7 @@ public:
 	virtual sf::Vector2f getConfiguredSpellOffset() const;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
+	SpellManager* getSpellManager() const;
 	Level* getLevel() const;
 	bool getIsFacingRight() const;
 	GameObjectState getState() const;

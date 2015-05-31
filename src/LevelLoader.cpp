@@ -97,13 +97,18 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 	for (std::vector<std::pair<EnemyID, sf::Vector2f>>::iterator it = data.enemyPositions.begin(); it != data.enemyPositions.end(); ++it)
 	{
 		Enemy* enemy;
+		std::map<ItemID, int> loot;
 		switch (it->first)
 		{
 		case EnemyID::Rat:
 			enemy = new RatEnemy(level, mainCharacter);
+			loot.insert({ ItemID::Food_Cheese, 1 });
+			enemy->setLoot(loot, 1);
 			break;
 		case EnemyID::FireRat:
 			enemy = new FireRatEnemy(level, mainCharacter);
+			loot.insert({ ItemID::Food_Bread, 2 });
+			enemy->setLoot(loot, 2);
 			break;
 		case EnemyID::Void:
 			break;
