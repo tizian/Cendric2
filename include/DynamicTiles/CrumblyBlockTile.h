@@ -11,5 +11,5 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 private:
-	sf::Time m_crumblingTime = sf::seconds(0.3f);
+	sf::Time m_crumblingTime = sf::seconds(0.4f);
 };
