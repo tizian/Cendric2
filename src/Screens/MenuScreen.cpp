@@ -93,7 +93,8 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
 
 	m_testText.setColor(sf::Color::White);
-	m_testText.setPosition(sf::Vector2f(100, 100));
+	m_testText.setCharacterSize(30);
+	m_testText.setPosition(sf::Vector2f(200, 300));
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen)

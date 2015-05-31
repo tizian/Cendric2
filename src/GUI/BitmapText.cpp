@@ -1,7 +1,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/BitmapFont.h"
 
-#include "Logger.h"
+#include <iostream>
 
 const char FIRST_CHAR = ' ';
 const char LAST_CHAR = '~';
@@ -13,6 +13,7 @@ BitmapText::BitmapText() : m_vertices(sf::Quads), m_color(255, 255, 255) {}
 
 BitmapText::BitmapText(const sf::String &string, const BitmapFont &font) : m_font(&font), m_vertices(sf::Quads), m_string(string), m_color(255, 255, 255)
 {
+	m_characterSize = font.getGlyphSize().y;
 	init();
 }
 
@@ -74,22 +75,18 @@ void BitmapText::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void BitmapText::init()
 {
+	using std::cout;
+	using std::endl;
+
 	m_vertices.clear();
-
-	m_vertices.append(sf::Vertex(sf::Vector2f(-1000, -1000), sf::Color::White));
-	m_vertices.append(sf::Vertex(sf::Vector2f(1000, -1000), sf::Color::White));
-	m_vertices.append(sf::Vertex(sf::Vector2f(1000, 1000), sf::Color::White));
-	m_vertices.append(sf::Vertex(sf::Vector2f(-1000, 1000), sf::Color::White));
-
-	/*
 
 	sf::Vector2i glyphSize = m_font->getGlyphSize();
 
 	float dy = static_cast<float>(m_characterSize);
 	float dx = glyphSize.x * (dy / glyphSize.y);
 
-	float du = 1.f / NUM_GLYPHS_U;
-	float dv = 1.f / NUM_GLYPHS_V;
+	float du = 1.f / NUM_GLYPHS_U * m_font->getTexture().getSize().x;
+	float dv = 1.f / NUM_GLYPHS_V * m_font->getTexture().getSize().y;
 
 	float curX = 0.f;
 	float curY = 0.f;
@@ -116,15 +113,19 @@ void BitmapText::init()
 		float u = (c % NUM_GLYPHS_U) * du;
 		float v = (c / NUM_GLYPHS_U) * dv;
 
-		//m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY), sf::Color::White, sf::Vector2f(u, v + dv)));
-		//m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY), sf::Color::White, sf::Vector2f(u + du, v + dv)));
-		//m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY + dy), sf::Color::White, sf::Vector2f(u + du, v)));
-		//m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY + dy), sf::Color::White, sf::Vector2f(u, v)));
+		cout << "(u, v) = (" << u << ", " << v << ")" << endl;
+		cout << "(du, dv) = (" << du << ", " << dv << ")" << endl;
+
+		cout << "(x, y) = (" << curX << ", " << curY << ")" << endl;
+		cout << "(dx, dy) = (" << dx << ", " << dy << ")" << endl;
+
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY), sf::Color::White, sf::Vector2f(u, v)));
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY), sf::Color::White, sf::Vector2f(u + du, v)));
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY + dy), sf::Color::White, sf::Vector2f(u + du, v + dv)));
+		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY + dy), sf::Color::White, sf::Vector2f(u, v + dv)));
 
 		curX += dx;
 	}
 
 	m_bounds = m_vertices.getBounds();
-
-	*/
 }
