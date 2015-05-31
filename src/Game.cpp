@@ -87,6 +87,7 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds)
 	fpsText.setColor(sf::Color::Red);
 	fpsText.setPosition(sf::Vector2f(1150.f, 10.f));
 	fpsText.setCharacterSize(20);
+
 	target.draw(fpsText);
 	target.setView(oldView);
 }

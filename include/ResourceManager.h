@@ -10,6 +10,8 @@
 #include "Enums/MapID.h"
 #include "Enums/LevelID.h"
 
+#include "GUI/BitmapFont.h"
+
 class ResourceManager
 {
 public:
@@ -33,6 +35,8 @@ public:
 	sf::Texture* getTexture(const std::string& filename);
 	sf::Font* getFont(ResourceID id);
 	sf::Font* getFont(std::string& filename);
+	BitmapFont* getBitmapFont(ResourceID id);
+	BitmapFont* getBitmapFont(std::string& filename);
 	char* getFilename(ResourceID id);
 	char* getFilename(LevelID id);
 	char* getFilename(MapID id);
@@ -40,6 +44,7 @@ public:
 
 private:
 	std::map<std::string, sf::Texture> m_textures;
+	std::map<std::string, BitmapFont> m_bitmapFonts;
 	std::map<std::string, sf::Font> m_fonts;
 	// a map that is filled with all ResourceTags and the corresponding filenames
 	std::map <ResourceID, std::string> m_fileNames;
