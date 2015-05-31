@@ -134,9 +134,23 @@ void CharacterCore::clearItems()
 	m_equippedItems.clear();
 }
 
-CharacterCoreData& CharacterCore::getData()
+const CharacterCoreData& CharacterCore::getData() const
 {
 	return m_data;
+}
+AttributeBean* CharacterCore::getTotalAttributes()
+{
+	return &m_totalAttributes;
+}
+
+std::map<ItemID, int>* CharacterCore::getItems()
+{
+	return &(m_data.items);
+}
+
+void CharacterCore::addGold(int gold)
+{
+	m_data.gold += std::max(gold, 0);
 }
 
 void CharacterCore::addBean(AttributeBean& firstBean, const AttributeBean& secondBean) const

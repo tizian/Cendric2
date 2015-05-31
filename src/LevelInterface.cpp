@@ -3,7 +3,7 @@
 LevelInterface::LevelInterface(CharacterCore* core)
 {
 	m_core = core;
-	m_attributes = &(core->getData().attributes);
+	m_attributes = core->getTotalAttributes();
 	initInterfaceBars();
 	initCharacterInfo();
 	initInventory();

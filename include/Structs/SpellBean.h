@@ -46,7 +46,7 @@ const struct SpellBean DEFAULT_CHOP =
 	sf::milliseconds(320),
 	sf::milliseconds(400),
 	0.f,
-	sf::FloatRect(0, 0, 40, 60)
+	sf::FloatRect(0, 0, 40, 80)
 };
 
 const struct SpellBean DEFAULT_FORCEFIELD =

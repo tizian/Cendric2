@@ -78,11 +78,11 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 			{
 				equipment.texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(1200 + i * 120, 0, 120, 120));
 			}
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
 			}
-			equipment.frameTime = sf::seconds(0.08f);
+			equipment.frameTime = sf::seconds(0.07f);
 		}
 
 		LevelEquipment* levelEquipment = new LevelEquipment();

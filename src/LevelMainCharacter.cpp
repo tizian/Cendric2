@@ -106,7 +106,7 @@ void LevelMainCharacter::handleInput()
 		{
 			spell->loadSpell(getLevel(), this, g_inputController->getMousePosition());
 			if (spell->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
+				m_fightAnimationTime = sf::milliseconds(5 * 70); // duration of fight animation
 			}
 			m_screen->addObject(GameObjectType::_Spell, spell);
 		}
@@ -116,7 +116,7 @@ void LevelMainCharacter::handleInput()
 void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 {
 	m_core = core;
-	m_attributes = &(core->getData().attributes);
+	m_attributes = core->getTotalAttributes();
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime)
@@ -146,8 +146,8 @@ void LevelMainCharacter::updateRegeneration(const sf::Time& frameTime)
 
 void LevelMainCharacter::load()
 {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 46.f, 100.f));
-	setSpriteOffset(sf::Vector2f(-17.f, -20.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 100.f));
+	setSpriteOffset(sf::Vector2f(-25.f, -20.f));
 
 	Animation walkingAnimation;
 	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
@@ -180,6 +180,7 @@ void LevelMainCharacter::load()
 	fightingAnimation.addFrame(sf::IntRect(880, 0, 80, 120));
 	fightingAnimation.addFrame(sf::IntRect(960, 0, 80, 120));
 	fightingAnimation.addFrame(sf::IntRect(1040, 0, 80, 120));
+	fightingAnimation.addFrame(sf::IntRect(1040, 0, 80, 120));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -189,7 +190,7 @@ void LevelMainCharacter::load()
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	setFrameTime(sf::seconds(0.08f));
+	setFrameTime(sf::seconds(0.07f));
 
 	// initial values
 	m_state = GameObjectState::Idle;
@@ -225,7 +226,7 @@ sf::Color LevelMainCharacter::getConfiguredDebugColor() const
 
 void LevelMainCharacter::lootItem(ItemID item, int quantity) const
 {
-	std::map<ItemID, int>* coreItems = &(m_core->getData().items);
+	std::map<ItemID, int>* coreItems = m_core->getItems();
 	auto it = coreItems->find(item);
 
 	if (it != coreItems->end())
@@ -248,5 +249,5 @@ void LevelMainCharacter::lootItems(std::map<ItemID, int>& items) const
 
 void LevelMainCharacter::addGold(int gold) const
 {
-	m_core->getData().gold += std::max(gold, 0);
+	m_core->addGold(gold);
 }

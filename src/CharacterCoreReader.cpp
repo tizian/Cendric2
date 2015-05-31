@@ -23,9 +23,10 @@ void CharacterCoreReader::initMaps()
 		{ 1, ItemID::Equipment_head_wizardhat_blue },
 		{ 2, ItemID::Equipment_head_wizardhat_black},
 		{ 3, ItemID::Equipment_weapon_staff_ice },
-		{ 4, ItemID::Food_Cheese },
-		{ 5, ItemID::Food_Bread },
-		{ 6, ItemID::Food_Water },
+		{ 4, ItemID::Equipment_weapon_rustysword },
+		{ 5, ItemID::Food_Cheese },
+		{ 6, ItemID::Food_Bread },
+		{ 7, ItemID::Food_Water },
 	});
 }
 

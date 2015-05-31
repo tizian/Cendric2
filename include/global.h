@@ -20,7 +20,7 @@
 #define CENDRIC_COLOR_PURPLE sf::Color(54, 11, 93, 255)
 #define CENDRIC_COLOR_LIGHT_PURPLE sf::Color(114, 66, 200, 255)
 
-const bool DEBUG_RENDERING = false;
+const bool DEBUG_RENDERING = true;
 
 class Logger;
 class TextProvider;

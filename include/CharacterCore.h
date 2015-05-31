@@ -33,8 +33,14 @@ public:
 	void loadEquipmentItems();
 	// loads itemvector (reload if not empty)
 	void loadItems();
+	// base attributes plus the attributes gotten by equipment
+	AttributeBean* getTotalAttributes();
+	// getter for items
+	std::map<ItemID, int>* getItems();
+	// add gold to the data
+	void addGold(int gold);
 	// getter for core part
-	CharacterCoreData& getData();
+	const CharacterCoreData& getData() const;
 	
 private:
 

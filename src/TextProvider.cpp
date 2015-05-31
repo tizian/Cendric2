@@ -16,7 +16,7 @@ void TextProvider::init()
 	addText(Texts::Inventory, "Inventory", "Inventar");
 	addText(Texts::CharacterInfo, "Character Info", "Charakter Info");
 	addText(Texts::Gold, "Gold", "Gold");
-	addText(Texts::Attribute_health, "Health", "Lebenskraft");
+	addText(Texts::Attribute_health, "Health", "Lebensenergie");
 	addText(Texts::Attribute_mana, "Mana", "Mana");
 	addText(Texts::Attribute_healthRegeneration, "Health regeneration", "Lebensregeneration");
 	addText(Texts::Attribute_manaRegeneration, "Mana regeneration", "Manaregeneration");
@@ -35,6 +35,7 @@ void TextProvider::init()
 	// item descriptions
 	addText(Texts::Item_description_wizardhat, "A perfect fit for a mage.", "Perfekt für einen Magier.");
 	addText(Texts::Item_description_staff_ice, "Feels ice cold.", "Fühlt sich eiskalt an.");
+	addText(Texts::Item_description_weapon_rustysword, "Doesn't seem to have been used lately.", "Wurde wohl schon länger nicht mehr benutzt.");
 	addText(Texts::Item_description_Food_Bread, "An ordinary loaf of bread.", "Ein einfaches Brot.");
 	addText(Texts::Item_description_Food_Cheese, "Smelly.", "Riecht nicht sonderlich gut.");
 	addText(Texts::Item_description_Food_Water, "Fresh clear water.", "Frisches klares Wasser.");
@@ -44,6 +45,7 @@ void TextProvider::init()
 	addText(Texts::Item_name_food_cheese, "Cheese", "Käse");
 	addText(Texts::Item_name_food_water, "Water", "Wasser");
 	addText(Texts::Item_name_staff_ice, "Ice staff", "Eisstab");
+	addText(Texts::Item_name_weapon_rustysword, "Rusty sword", "Rostiges Schwert");
 	addText(Texts::Item_name_wizardhat_blue, "Blue wizardhat", "Blauer Spitzhut");
 	addText(Texts::Item_name_wizardhat_grey, "Grey wizardhat", "Grauer Spitzhut");
 }

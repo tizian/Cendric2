@@ -40,7 +40,17 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.attributes.manaRegenerationPerS = 4;
 		bean.attributes.maxManaPoints = 10;
 		bean.attributes.maxHealthPoints = 10;
-		bean.attributes.damageIce = 20;
+		bean.attributes.damageIce = 30;
+		bean.attributes.damagePhysical = 15;
+		break;
+	case ItemID::Equipment_weapon_rustysword:
+		bean.description = Texts::Item_description_weapon_rustysword;
+		bean.name = Texts::Item_name_weapon_rustysword;
+		bean.type = ItemType::Equipment_weapon;
+		bean.icon = ResourceID::Void; // TODO
+		bean.levelEquipment = LevelEquipmentID::Weapon_rustysword;
+		bean.value = 15;
+		bean.attributes.damagePhysical = 5;
 		break;
 	case ItemID::Food_Cheese:
 		bean.description = Texts::Item_description_Food_Cheese;

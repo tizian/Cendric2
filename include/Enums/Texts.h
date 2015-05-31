@@ -28,6 +28,8 @@ enum class Texts
 	Item_name_wizardhat_grey,
 	Item_description_staff_ice,
 	Item_name_staff_ice,
+	Item_description_weapon_rustysword,
+	Item_name_weapon_rustysword,
 	Item_description_Food_Bread,
 	Item_name_food_bread,
 	Item_description_Food_Cheese,
