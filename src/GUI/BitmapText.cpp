@@ -88,7 +88,9 @@ void BitmapText::init()
 
 	float curX = 0.f;
 	float curY = 0.f;
-
+    
+//    sf::String blub(L"€ … †");
+    
 	for (auto c : m_string)
 	{
 		if (c < FIRST_CHAR || c > LAST_CHAR)

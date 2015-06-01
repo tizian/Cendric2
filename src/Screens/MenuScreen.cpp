@@ -87,9 +87,11 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	addObject(GameObjectType::_Button, m_loadGameButton);
 	addObject(GameObjectType::_Button, m_exitButton);
 	addObject(GameObjectType::_Button, m_startGameButton);
+    
+    sf::String blub(L"A O U");
 
 	m_testText = BitmapText(
-		L"A O U, Ä Ö Ü",
+		blub,
 		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
 
 	m_testText.setColor(sf::Color::White);
