@@ -25,18 +25,19 @@ bool CharacterCore::load(char* fileName)
 	// measuring the time played with this save.
 	m_stopwatch.restart();
 	reloadStats();
+	m_isLoaded = true;
 	return true;
 }
 
 void CharacterCore::loadNew()
 {
-	m_data.currentMap = MapID::Testmap;
+	m_data.currentMap = MapID::Testmap; // will be set to the start map
 	m_data.currentMapPosition = sf::Vector2f(); // will be start position later
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.currentManaPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.maxManaPoints = 100;
-	m_data.attributes.healthRegenerationPerS = 3;
+	m_data.attributes.healthRegenerationPerS = 0;
 	m_data.attributes.manaRegenerationPerS = 0;
 
 	m_stopwatch.restart();
@@ -74,6 +75,10 @@ void CharacterCore::reloadStats()
 	for (auto &it : m_equippedItems)
 	{
 		addBean(m_totalAttributes, it.second.getAttributes());
+	}
+	if (m_totalAttributes.currentHealthPoints > m_totalAttributes.maxHealthPoints)
+	{
+		m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 	}
 }
 
@@ -151,6 +156,18 @@ std::map<ItemID, int>* CharacterCore::getItems()
 void CharacterCore::addGold(int gold)
 {
 	m_data.gold += std::max(gold, 0);
+}
+
+void CharacterCore::setMap(const sf::Vector2f& position, MapID map)
+{
+	m_data.currentMap = map;
+	m_data.currentMapPosition = position;
+	m_isLoaded = true;
+}
+
+bool CharacterCore::isLoaded() const
+{
+	return m_isLoaded;
 }
 
 void CharacterCore::addBean(AttributeBean& firstBean, const AttributeBean& secondBean) const

@@ -65,11 +65,9 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : (some) attributes cannot be negative");
 		return false;
 	}
-	if (data.attributes.maxHealthPoints < data.attributes.currentHealthPoints 
-		|| data.attributes.maxManaPoints < data.attributes.currentManaPoints
-		|| data.attributes.currentHealthPoints < 2)
+	if (data.attributes.currentHealthPoints < 1)
 	{
-		g_logger->logError("CharacterCoreReader", "Error in savegame data : invalid attributes");
+		g_logger->logError("CharacterCoreReader", "Error in savegame data : current health cannot be 0");
 		return false;
 	}
 	for (auto &it : data.levelKilled)
@@ -150,11 +148,11 @@ bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreD
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
 	startData++;
-	int x = atoi(startData);
+	float x = static_cast<float>(atof(startData));
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
-	int y = atoi(startData);
-	data.currentMapPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+	float y = static_cast<float>(atof(startData));
+	data.currentMapPosition = sf::Vector2f(x, y);
 	return true;
 }
 

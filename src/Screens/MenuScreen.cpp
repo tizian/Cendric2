@@ -16,19 +16,20 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_newGameButton->isClicked())
 	{
-		// be lenient 
+		// TODO check if character core is set and ask if it should be overwritten
 		delete m_characterCore;
 		// we start a new game with an empty character core
 		m_characterCore = new CharacterCore();
 		m_characterCore->loadNew();
 		m_startGameButton->setEnabled(true);
+		m_startGameButton->setText(Texts::Start_game);
 		setTooltipText("Loaded new game", sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
 	}
 	else if (m_loadGameButton->isClicked())
 	{
-		// TODO the .sav files should be loaded in another screen.
+		// TODO the .sav files should be loaded in another screen. 
 		char* saveFilename = "saves/testsave.sav";
-		
+		// TODO check if character core is set and ask if it should be overwritten
 		delete m_characterCore;
 		m_characterCore = new CharacterCore();
 		if (!(m_characterCore->load(saveFilename)))
@@ -37,6 +38,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		}
 		m_startGameButton->setEnabled(true);
+		m_startGameButton->setText(Texts::Start_game);
 		setTooltipText("Loaded .sav file: " + string(saveFilename), sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
 	} 
 	else if (m_startGameButton->isClicked() && m_characterCore != nullptr)
@@ -74,13 +76,13 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	addObject(GameObjectType::_Undefined, fireBasket2);
 
 	// add buttons
-	m_newGameButton = new Button(sf::FloatRect(500, 250, 250, 90));
+	m_startGameButton = new Button(sf::FloatRect(500, 250, 250, 90));
+	m_startGameButton->setText(m_characterCore != nullptr ? Texts::Continue_game : Texts::Start_game);
+	m_startGameButton->setEnabled(m_characterCore != nullptr);
+	m_newGameButton = new Button(sf::FloatRect(500, 350, 250, 90));
 	m_newGameButton->setText(Texts::New_game);
-	m_loadGameButton = new Button(sf::FloatRect(500, 350, 250, 90));
+	m_loadGameButton = new Button(sf::FloatRect(500, 450, 250, 90));
 	m_loadGameButton->setText(Texts::Load_game);
-	m_startGameButton = new Button(sf::FloatRect(500, 450, 250, 90));
-	m_startGameButton->setText(Texts::Start_game);
-	m_startGameButton->setEnabled(false);
 	m_exitButton = new Button(sf::FloatRect(500, 550, 250, 90));
 	m_exitButton->setText(Texts::Exit);
 	addObject(GameObjectType::_Button, m_newGameButton);
@@ -92,7 +94,7 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 
 	m_testText = BitmapText(
 		blub,
-		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
+		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
 
 	m_testText.setColor(sf::Color::White);
 	m_testText.setCharacterSize(30);

@@ -6,6 +6,7 @@ enum class Texts
 	New_game,
 	Load_game,
 	Start_game,
+	Continue_game,
 	Credits,
 	Exit,
 	Inventory,

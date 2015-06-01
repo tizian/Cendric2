@@ -96,9 +96,10 @@ void Button::setText(Texts text, const sf::Color& color)
 {
 	m_text = sf::Text(
 		g_textProvider->getText(text),
-		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));
+		*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold));
 	
 	m_text.setColor(color);
+	m_text.setCharacterSize(25);
 	// calculate position
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
 	float yOffset = max((getBoundingBox()->height / 2.f - m_text.getLocalBounds().height), 0.f);

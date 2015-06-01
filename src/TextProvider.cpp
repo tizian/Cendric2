@@ -8,7 +8,8 @@ void TextProvider::init()
 {
 	addText(Texts::New_game, "New Game", "Neues Spiel");
 	addText(Texts::Load_game, "Load Game", "Spiel laden");
-	addText(Texts::Start_game, "Play", "Starten");
+	addText(Texts::Start_game, "Play", "Spiel starten");
+	addText(Texts::Continue_game, "Continue", "Zurück zum Spiel");
 	addText(Texts::Credits, "Credits", "Credits");
 	addText(Texts::Exit, "Exit", "Beenden");
 

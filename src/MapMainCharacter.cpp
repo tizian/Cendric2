@@ -4,7 +4,6 @@ MapMainCharacter::MapMainCharacter(Map* map)
 {
 	m_map = map;
 	load();
-	setPosition(m_map->getStartPos());
 }
 
 MapMainCharacter::~MapMainCharacter()
@@ -15,6 +14,7 @@ MapMainCharacter::~MapMainCharacter()
 void MapMainCharacter::setCharacterCore(CharacterCore* core)
 {
 	m_core = core;
+	setPosition(m_core->getData().currentMapPosition);
 }
 
 void MapMainCharacter::update(const sf::Time& frameTime)

@@ -173,11 +173,11 @@ bool MapReader::readStartPos(char* start, char* end, MapData& data) const
 	char* startData;
 	startData = gotoNextChar(start, end, '"');
 	startData++;
-	int x = atoi(startData);
+	float x = static_cast<float>(atof(startData));
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
-	int y = atoi(startData);
-	sf::Vector2f pos(static_cast<float>(x), static_cast<float>(y));
+	float y = static_cast<float>(atof(startData));
+	sf::Vector2f pos(x, y);
 	data.startPos = pos;
 	return true;
 }

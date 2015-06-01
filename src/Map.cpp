@@ -22,13 +22,14 @@ bool Map::load(MapID id)
 	{
 		return false;
 	}
-
+	
 	// load map
 	m_startPos = data.startPos;
 	m_name = data.name;
 	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
 	m_collidableTiles = data.collidableTileRects;
 	m_mapRect = data.mapRect;
+	m_id = id;
 	return true;
 }
 

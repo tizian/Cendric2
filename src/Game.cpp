@@ -22,7 +22,7 @@ void Game::run()
 		deltaTime = frameClock.restart();
 		while (m_mainWindow.pollEvent(e))
 		{
-			if (e.type == sf::Event::Closed || g_inputController->isKeyActive(Key::Escape))
+			if (e.type == sf::Event::Closed)
 			{
 				m_running = false;
 			}

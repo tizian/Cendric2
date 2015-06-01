@@ -11,7 +11,7 @@ LoadingScreen::LoadingScreen(LevelID id, CharacterCore* core) : Screen(core)
 
 LoadingScreen::LoadingScreen(MapID id, CharacterCore* core) : Screen(core)
 {
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_loading)));
+	m_screenSprite = sf::Sprite(*g_resourceManager->getTexture(ResourceID::Texture_screen_loading));
 	m_mapToLoad = id;
 	m_levelToLoad = LevelID::Void;
 }

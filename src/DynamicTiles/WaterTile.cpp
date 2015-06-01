@@ -11,7 +11,7 @@ void WaterTile::load()
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_water));
 	for (float f = 0.f; f < 1.f; f += 0.1f)
 	{
-		idleAnimation.addFrame(sf::IntRect(BORDER + (1.f + f) * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
+		idleAnimation.addFrame(sf::IntRect(BORDER + static_cast<int>((1.f + f) * (2 * BORDER + m_tileSize.x)), BORDER, m_tileSize.x, m_tileSize.y));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);

@@ -39,11 +39,15 @@ public:
 	std::map<ItemID, int>* getItems();
 	// add gold to the data
 	void addGold(int gold);
+	// save the position and map id
+	void setMap(const sf::Vector2f& position, MapID map);
 	// getter for core part
 	const CharacterCoreData& getData() const;
-	
-private:
+	// checks if this is a new game or a continued game
+	bool isLoaded() const;
 
+private:
+	bool m_isLoaded = false;
 	// clears equipped itemvector
 	void clearEquippedItems();
 	// clears itemvector
