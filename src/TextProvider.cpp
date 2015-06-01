@@ -25,7 +25,7 @@ void TextProvider::init()
 	addText(Texts::Attribute_damagePhysical, "Physical damage", "Physischer Schaden");
 	addText(Texts::Attribute_resistanceFire, "Fire resistance", "Feuerresistenz");
 	addText(Texts::Attribute_resistanceIce, "Ice resistance", "Eisresistenz");
-	addText(Texts::Attribute_resistancePhysical, "Armour", "RŸstung");
+	addText(Texts::Attribute_resistancePhysical, "Armour", "Rüstung");
 	
 	addText(Texts::Warn_itemTooFarAway, "Out of range", "Ich muss näher ran");
 

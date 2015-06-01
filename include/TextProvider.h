@@ -18,5 +18,5 @@ private:
 	void addText(Texts key, const std::string& english, const std::string& german);
 	std::map<Texts, std::string> m_germanTexts;
 	std::map<Texts, std::string> m_englishTexts;
-	Language m_language = Language::Lang_EN;
+	Language m_language = Language::Lang_DE;
 };
