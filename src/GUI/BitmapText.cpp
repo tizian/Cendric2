@@ -7,10 +7,29 @@ const char LAST_CHAR = 'ÿ';
 const int NUM_GLYPHS_U = 16;
 const int NUM_GLYPHS_V = 14;
 
-BitmapText::BitmapText() : m_vertices(sf::Quads), m_color(255, 255, 255) {}
-
-BitmapText::BitmapText(const sf::String &string, const BitmapFont &font) : m_font(&font), m_vertices(sf::Quads), m_string(string), m_color(255, 255, 255)
+void toUpperCase(sf::String &str)
 {
+	for (auto & c : str) {
+		if (c == 228) c = 196;			// ä
+		else if (c == 246) c = 214;		// ö
+		else if (c == 252) c = 220;		// ü
+		else c = toupper(c);
+	}
+}
+
+BitmapText::BitmapText()
+{
+	m_vertices = sf::VertexArray(sf::Quads);
+	m_color = sf::Color::White;
+}
+
+BitmapText::BitmapText(const sf::String &string, const BitmapFont &font)
+{
+	m_font = &font;
+	m_vertices = sf::VertexArray(sf::Quads);
+	m_string = string;
+	toUpperCase(m_string);
+	m_color = sf::Color::White;
 	m_characterSize = font.getGlyphSize().y;
 	init();
 }
@@ -18,6 +37,7 @@ BitmapText::BitmapText(const sf::String &string, const BitmapFont &font) : m_fon
 void BitmapText::setString(const sf::String &string)
 {
 	m_string = string;
+	toUpperCase(m_string);
 	init();
 }
 

@@ -94,15 +94,15 @@ void Button::update(const sf::Time& frameTime)
 
 void Button::setText(Texts text, const sf::Color& color)
 {
-	m_text = sf::Text(
+	m_text = BitmapText(
 		g_textProvider->getText(text),
-		*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold));
+		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
 	
 	m_text.setColor(color);
-	m_text.setCharacterSize(25);
+	m_text.setCharacterSize(16);
 	// calculate position
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
-	float yOffset = max((getBoundingBox()->height / 2.f - m_text.getLocalBounds().height), 0.f);
+	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f , 0.f);
 	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
 }
 

@@ -5,6 +5,8 @@
 #include "TextProvider.h"
 #include "ResourceManager.h"
 
+#include "GUI/BitmapText.h"
+
 // An ugly button to click
 class Button : public GameObject
 {
@@ -39,5 +41,5 @@ private:
 	sf::Color m_releasedColor;
 
 	sf::RectangleShape m_shape;
-	sf::Text m_text;
+	BitmapText m_text;
 };

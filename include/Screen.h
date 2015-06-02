@@ -8,6 +8,7 @@
 #include "CharacterCore.h"
 
 #include "Enums/ScreenID.h"
+#include "GUI/BitmapText.h"
 
 class ScreenManager;
 
@@ -33,7 +34,7 @@ public:
 	std::vector<GameObject*>* getObjects(GameObjectType type);
 
 	// getter for the tooltip text
-	const sf::Text* getTooltipText() const;
+	const BitmapText* getTooltipText() const;
 	// gets the character core that is needed by each screen
 	CharacterCore* getCharacterCore() const;
 
@@ -73,7 +74,7 @@ protected:
 
 private:
 	std::vector<std::vector<GameObject*>> m_objects;
-	sf::Text m_tooltipText;
+	BitmapText m_tooltipText;
 	
 	const sf::Time TOOLTIP_ACTIVE_TIME = sf::seconds(1.5f);
 	sf::Time m_tooltipTime = sf::Time::Zero;

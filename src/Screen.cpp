@@ -101,7 +101,7 @@ void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget)
 	}
 }
 
-const sf::Text* Screen::getTooltipText() const
+const BitmapText* Screen::getTooltipText() const
 {
 	return &m_tooltipText;
 }
@@ -113,9 +113,10 @@ void Screen::setTooltipText(const string& text, const sf::Vector2f& position, co
 		// another text is still displaying
 		return;
 	}
-	m_tooltipText = sf::Text(
+	m_tooltipText = BitmapText(
 		text,
-		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));
+		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
+	m_tooltipText.setCharacterSize(12);
 	m_tooltipText.setPosition(position);
 	m_tooltipText.setColor(color);
 	m_tooltipTime = TOOLTIP_ACTIVE_TIME;
@@ -158,7 +159,7 @@ void Screen::updateTooltipText(const sf::Time& frameTime)
 		if (m_tooltipTime <= sf::Time::Zero) // yes, sf::Time can be negative.
 		{
 			// reset tooltip text
-			m_tooltipText = sf::Text();
+			m_tooltipText = BitmapText();
 			m_tooltipTime = sf::Time::Zero;
 		}
 	}
