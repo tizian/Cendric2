@@ -8,10 +8,13 @@ void TextProvider::init()
 {
 	addText(Texts::New_game, "New Game", "Neues Spiel");
 	addText(Texts::Load_game, "Load Game", "Spiel laden");
-	addText(Texts::Start_game, "Play", "Spiel starten");
-	addText(Texts::Continue_game, "Continue", "Zurück zum Spiel");
-	addText(Texts::Credits, "Credits", "Credits");
+	addText(Texts::Save_game, "Save Game", "Spiel speichern");
+	addText(Texts::Options, "Options", "Einstellungen");
+	addText(Texts::Continue_game, "Resume", "Spiel fortsetzen");
+	addText(Texts::Credits, "Credits", "Mitwirkende");
 	addText(Texts::Exit, "Exit", "Beenden");
+	addText(Texts::Start_game, "Play", "Spiel starten");
+	addText(Texts::Back, "Back", "Zurück");
 
 	// Inventory & Attributes
 	addText(Texts::Inventory, "Inventory", "Inventar");

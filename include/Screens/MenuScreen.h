@@ -27,9 +27,12 @@ private:
 
 	BitmapText m_testText;
 
-	// buttons on this screen
-	Button* m_newGameButton;
+	// only used when character core is not null
+	Button* m_resumeGameButton;
+	Button* m_newGameButton; 
 	Button* m_loadGameButton;
-	Button* m_startGameButton;
+	Button* m_saveGameButton;
+	Button* m_optionsButton;
+	Button* m_creditsButton;
 	Button* m_exitButton;
 };

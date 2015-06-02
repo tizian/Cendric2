@@ -9,10 +9,15 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core)
 
 Screen* MenuScreen::update(const sf::Time& frameTime)
 {
-	if (g_inputController->isKeyActive(Key::Escape) || m_exitButton->isClicked())
+	if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked())
 	{
 		// end the game
 		m_requestQuit = true;
+	}
+	else if ((m_resumeGameButton != nullptr && m_resumeGameButton->isClicked()) || (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr))
+	{
+		// resume game
+		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}
 	else if (m_newGameButton->isClicked())
 	{
@@ -21,9 +26,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		// we start a new game with an empty character core
 		m_characterCore = new CharacterCore();
 		m_characterCore->loadNew();
-		m_startGameButton->setEnabled(true);
-		m_startGameButton->setText(Texts::Start_game);
-		setTooltipText("Loaded new game", sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
+		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}
 	else if (m_loadGameButton->isClicked())
 	{
@@ -37,13 +40,15 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			string errormsg = string(saveFilename) + ": save file corrupted!";
 			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		}
-		m_startGameButton->setEnabled(true);
-		m_startGameButton->setText(Texts::Start_game);
-		setTooltipText("Loaded .sav file: " + string(saveFilename), sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
-	} 
-	else if (m_startGameButton->isClicked() && m_characterCore != nullptr)
-	{
 		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+	} 
+	else if (m_optionsButton->isClicked())
+	{
+		// TODO show options
+	}
+	else if (m_creditsButton->isClicked())
+	{
+		// TODO show credits
 	}
 	updateTooltipText(frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
@@ -76,19 +81,34 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	addObject(GameObjectType::_Undefined, fireBasket2);
 
 	// add buttons
-	m_startGameButton = new Button(sf::FloatRect(500, 250, 250, 90));
-	m_startGameButton->setText(m_characterCore != nullptr ? Texts::Continue_game : Texts::Start_game);
-	m_startGameButton->setEnabled(m_characterCore != nullptr);
-	m_newGameButton = new Button(sf::FloatRect(500, 350, 250, 90));
+	if (m_characterCore != nullptr)
+	{
+		m_resumeGameButton = new Button(sf::FloatRect(475, 250, 300, 40));
+		m_resumeGameButton->setText(Texts::Continue_game);
+		addObject(GameObjectType::_Button, m_resumeGameButton);
+	}
+	else
+	{
+		m_resumeGameButton = nullptr;
+	}
+	m_newGameButton = new Button(sf::FloatRect(475, 300, 300, 40));
 	m_newGameButton->setText(Texts::New_game);
-	m_loadGameButton = new Button(sf::FloatRect(500, 450, 250, 90));
+	m_loadGameButton = new Button(sf::FloatRect(475, 350, 300, 40));
 	m_loadGameButton->setText(Texts::Load_game);
-	m_exitButton = new Button(sf::FloatRect(500, 550, 250, 90));
+	m_saveGameButton = new Button(sf::FloatRect(475, 400, 300, 40));
+	m_saveGameButton->setText(Texts::Save_game);
+	m_optionsButton = new Button(sf::FloatRect(475, 450, 300, 40));
+	m_optionsButton->setText(Texts::Options);
+	m_creditsButton = new Button(sf::FloatRect(475, 500, 300, 40));
+	m_creditsButton->setText(Texts::Credits);
+	m_exitButton = new Button(sf::FloatRect(475, 550, 300, 40));
 	m_exitButton->setText(Texts::Exit);
 	addObject(GameObjectType::_Button, m_newGameButton);
 	addObject(GameObjectType::_Button, m_loadGameButton);
+	addObject(GameObjectType::_Button, m_optionsButton);
+	addObject(GameObjectType::_Button, m_creditsButton);
 	addObject(GameObjectType::_Button, m_exitButton);
-	addObject(GameObjectType::_Button, m_startGameButton);
+	addObject(GameObjectType::_Button, m_saveGameButton);
     
     sf::String blub(L"A O U");
 
