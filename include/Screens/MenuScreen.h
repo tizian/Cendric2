@@ -7,9 +7,9 @@
 #include "Screens/SplashScreen.h"
 #include "Misc/FireBasket.h"
 #include "CharacterCore.h"
-#include "Button.h"
-
+#include "GUI/Button.h"
 #include "GUI/BitmapText.h"
+#include "GUI/YesOrNoForm.h"
 
 class MenuScreen : public Screen
 {
@@ -25,14 +25,18 @@ public:
 private:
 	sf::Sprite m_screenSprite;
 
-	BitmapText m_testText;
+	// enables / disables all buttons on this screen
+	void setAllButtonsEnabled(bool value);
 
 	// only used when character core is not null
-	Button* m_resumeGameButton;
-	Button* m_newGameButton; 
-	Button* m_loadGameButton;
-	Button* m_saveGameButton;
-	Button* m_optionsButton;
-	Button* m_creditsButton;
-	Button* m_exitButton;
+	Button* m_resumeGameButton = nullptr;
+	Button* m_newGameButton = nullptr;
+	Button* m_loadGameButton = nullptr;
+	Button* m_saveGameButton = nullptr;
+	Button* m_optionsButton = nullptr;
+	Button* m_creditsButton = nullptr;
+	Button* m_exitButton = nullptr;
+
+	YesOrNoForm* m_yesOrNoForm = nullptr;
+	CharacterCore* m_newCharacterCore = nullptr;
 };

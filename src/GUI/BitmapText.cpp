@@ -113,21 +113,23 @@ void BitmapText::init()
     
 	for (auto c : m_string)
 	{
-		if (c < FIRST_CHAR || c > LAST_CHAR)
-		{
-			c = '?';
-		}
-
 		if (c == '\t')
 		{
 			curX += 4 * dx;
+			continue;
 		}
 		else if (c == '\n')
 		{
 			curY += dy;
 			curX = 0.f;
+			continue;
 		}
 
+		if (c < FIRST_CHAR || c > LAST_CHAR)
+		{
+			c = '?';
+		}
+		
 		c -= FIRST_CHAR;
 
 		float u = (c % NUM_GLYPHS_U) * du;

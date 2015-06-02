@@ -9,7 +9,23 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core)
 
 Screen* MenuScreen::update(const sf::Time& frameTime)
 {
-	if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked())
+	if (m_yesOrNoForm != nullptr && m_yesOrNoForm->isNoClicked())
+	{
+		m_yesOrNoForm->setDisposed();
+		m_yesOrNoForm = nullptr;
+		delete m_newCharacterCore;
+		setAllButtonsEnabled(true);
+	}
+	else if (m_yesOrNoForm != nullptr && m_yesOrNoForm->isYesClicked())
+	{
+		m_yesOrNoForm->setDisposed();
+		m_yesOrNoForm = nullptr;
+		delete m_characterCore;
+		m_characterCore = m_newCharacterCore;
+		m_newCharacterCore = nullptr;
+		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+	}
+	else if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked())
 	{
 		// end the game
 		m_requestQuit = true;
@@ -21,26 +37,52 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_newGameButton->isClicked())
 	{
-		// TODO check if character core is set and ask if it should be overwritten
-		delete m_characterCore;
-		// we start a new game with an empty character core
-		m_characterCore = new CharacterCore();
-		m_characterCore->loadNew();
-		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+		if (m_characterCore == nullptr)
+		{
+			// we start a new game with an empty character core
+			m_characterCore = new CharacterCore();
+			m_characterCore->loadNew();
+			return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+		}
+		else
+		{
+			m_newCharacterCore = new CharacterCore();
+			m_newCharacterCore->loadNew();
+			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+			m_yesOrNoForm->setMessage(Texts::Question_startNewGame);
+			addObject(GameObjectType::_Form, m_yesOrNoForm);
+			setAllButtonsEnabled(false);
+		}
 	}
 	else if (m_loadGameButton->isClicked())
 	{
 		// TODO the .sav files should be loaded in another screen. 
 		char* saveFilename = "saves/testsave.sav";
 		// TODO check if character core is set and ask if it should be overwritten
-		delete m_characterCore;
-		m_characterCore = new CharacterCore();
-		if (!(m_characterCore->load(saveFilename)))
+		if (m_characterCore == nullptr)
 		{
-			string errormsg = string(saveFilename) + ": save file corrupted!";
-			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
+			// we start a new game with an empty character core
+			m_characterCore = new CharacterCore();
+			if (!(m_characterCore->load(saveFilename)))
+			{
+				string errormsg = string(saveFilename) + ": save file corrupted!";
+				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
+			}
+			return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+		} 
+		else 
+		{
+			m_newCharacterCore = new CharacterCore();
+			if (!(m_newCharacterCore->load(saveFilename)))
+			{
+				string errormsg = string(saveFilename) + ": save file corrupted!";
+				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
+			}
+			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+			m_yesOrNoForm->setMessage(Texts::Question_loadGame);
+			addObject(GameObjectType::_Form, m_yesOrNoForm);
+			setAllButtonsEnabled(false);
 		}
-		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	} 
 	else if (m_optionsButton->isClicked())
 	{
@@ -51,9 +93,24 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		// TODO show credits
 	}
 	updateTooltipText(frameTime);
-	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Undefined, frameTime);
+	updateObjects(GameObjectType::_Button, frameTime);
+	updateObjects(GameObjectType::_Form, frameTime);
+	deleteDisposedObjects();
 	return this;
+}
+
+void MenuScreen::setAllButtonsEnabled(bool value)
+{
+	vector<GameObject*>* buttons = getObjects(GameObjectType::_Button);
+	for (auto it : *buttons)
+	{
+		Button* button = dynamic_cast<Button*>(it);
+		if (button != nullptr)
+		{
+			button->setEnabled(value);
+		}
+	}
 }
 
 void MenuScreen::render(sf::RenderTarget &renderTarget) 
@@ -63,11 +120,7 @@ void MenuScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
-
-	sf::View oldView = renderTarget.getView();
-	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_testText);
-	renderTarget.setView(oldView);
+	renderObjects(GameObjectType::_Form, renderTarget);
 }
 
 void MenuScreen::execOnEnter(const Screen *previousScreen)
@@ -87,10 +140,6 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 		m_resumeGameButton->setText(Texts::Continue_game);
 		addObject(GameObjectType::_Button, m_resumeGameButton);
 	}
-	else
-	{
-		m_resumeGameButton = nullptr;
-	}
 	m_newGameButton = new Button(sf::FloatRect(475, 300, 300, 40));
 	m_newGameButton->setText(Texts::New_game);
 	m_loadGameButton = new Button(sf::FloatRect(475, 350, 300, 40));
@@ -109,20 +158,11 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	addObject(GameObjectType::_Button, m_creditsButton);
 	addObject(GameObjectType::_Button, m_exitButton);
 	addObject(GameObjectType::_Button, m_saveGameButton);
-    
-    sf::String blub(L"A O U");
-
-	m_testText = BitmapText(
-		blub,
-		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
-
-	m_testText.setColor(sf::Color::White);
-	m_testText.setCharacterSize(30);
-	m_testText.setPosition(sf::Vector2f(50, 300));
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen)
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash_fireanimation);
+	delete m_newCharacterCore;
 }

@@ -15,6 +15,10 @@ void TextProvider::init()
 	addText(Texts::Exit, "Exit", "Beenden");
 	addText(Texts::Start_game, "Play", "Spiel starten");
 	addText(Texts::Back, "Back", "Zurück");
+	addText(Texts::Yes, "Yes", "Ja");
+	addText(Texts::No, "No", "Nein");
+	addText(Texts::Question_loadGame, "Load game?\nAll unsaved progress will\nbe lost.", "Spiel laden?\nUngespeicherter Fortschritt\ngeht verloren.");
+	addText(Texts::Question_startNewGame, "Start new game?\nAll unsaved progress will\nbe lost.", "Neues Spiel starten?\nUngespeicherter Fortschritt\ngeht verloren.");
 
 	// Inventory & Attributes
 	addText(Texts::Inventory, "Inventory", "Inventar");
