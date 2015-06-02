@@ -22,6 +22,9 @@ public:
 	void setCharacterSize(int size);
 	const int getCharacterSize() const;
 
+	void setLineSpacing(float spacing);
+	const float getLineSpacing() const;
+
 	sf::FloatRect getLocalBounds() const;
 
 private:
@@ -31,6 +34,7 @@ private:
 	sf::String			m_string;
 	const BitmapFont   *m_font = nullptr;
 	int					m_characterSize;
+	float				m_lineSpacing;
 	sf::Color			m_color;
 	sf::VertexArray		m_vertices;
 	sf::FloatRect		m_bounds;

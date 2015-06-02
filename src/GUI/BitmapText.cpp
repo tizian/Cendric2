@@ -31,6 +31,7 @@ BitmapText::BitmapText(const sf::String &string, const BitmapFont &font)
 	toUpperCase(m_string);
 	m_color = sf::Color::White;
 	m_characterSize = font.getGlyphSize().y;
+	m_lineSpacing = 0.5f;
 	init();
 }
 
@@ -79,6 +80,17 @@ const int BitmapText::getCharacterSize() const
 	return m_characterSize;
 }
 
+void BitmapText::setLineSpacing(float spacing)
+{
+	m_lineSpacing = spacing;
+	init();
+}
+
+const float BitmapText::getLineSpacing() const
+{
+	return m_lineSpacing;
+}
+
 sf::FloatRect BitmapText::getLocalBounds() const
 {
 	return m_bounds;
@@ -108,9 +120,7 @@ void BitmapText::init()
 
 	float curX = 0.f;
 	float curY = 0.f;
-    
-//    sf::String blub(L"€ … †");
-    
+
 	for (auto c : m_string)
 	{
 		if (c == '\t')
@@ -120,7 +130,7 @@ void BitmapText::init()
 		}
 		else if (c == '\n')
 		{
-			curY += dy;
+			curY += dy * (m_lineSpacing + 1.f);
 			curX = 0.f;
 			continue;
 		}
