@@ -13,6 +13,7 @@ InputController::~InputController()
 	m_keyJustPressedMap.clear();
 }
 
+// TODO refactor this
 void InputController::update()
 {
 	m_isWindowFocused = m_mainWindow->hasFocus();
@@ -34,6 +35,12 @@ void InputController::update()
 	// Escape
 	m_keyJustPressedMap[Key::Escape] = !m_keyActiveMap[Key::Escape] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Escape));
 	m_keyActiveMap[Key::Escape] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Escape));
+	// Quicksave
+	m_keyJustPressedMap[Key::Quicksave] = !m_keyActiveMap[Key::Quicksave] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Quicksave));
+	m_keyActiveMap[Key::Quicksave] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Quicksave));
+	// Quickload
+	m_keyJustPressedMap[Key::Quickload] = !m_keyActiveMap[Key::Quickload] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Quickload));
+	m_keyActiveMap[Key::Quickload] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Quickload));
 	// Inventory
 	m_keyJustPressedMap[Key::Inventory] = !m_keyActiveMap[Key::Inventory] && sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Inventory));
 	m_keyActiveMap[Key::Inventory] = sf::Keyboard::isKeyPressed(m_keyMap.at(Key::Inventory));
@@ -84,6 +91,8 @@ void InputController::init()
 	m_keyActiveMap.insert(
 		{
 			{ Key::Escape, false },
+			{ Key::Quickload, false },
+			{ Key::Quicksave, false },
 			{ Key::Inventory, false },
 			{ Key::CharacterInfo, false },
 			{ Key::Left, false },
@@ -99,6 +108,8 @@ void InputController::init()
 	m_keyJustPressedMap.insert(
 	{
 		{ Key::Escape, false },
+		{ Key::Quickload, false },
+		{ Key::Quicksave, false },
 		{ Key::Inventory, false },
 		{ Key::CharacterInfo, false },
 		{ Key::Left, false },
@@ -114,6 +125,8 @@ void InputController::init()
 	m_keyMap.insert(
 		{
 			{ Key::Escape, sf::Keyboard::Escape },
+			{ Key::Quickload, sf::Keyboard::F9 },
+			{ Key::Quicksave, sf::Keyboard::F5 },
 			{ Key::Inventory, sf::Keyboard::I },
 			{ Key::CharacterInfo, sf::Keyboard::C },
 			{ Key::Left, sf::Keyboard::A },

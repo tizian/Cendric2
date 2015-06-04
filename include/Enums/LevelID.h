@@ -3,5 +3,6 @@
 enum class LevelID
 {
 	Void,
-	Testlevel
+	Testlevel,
+	MAX
 };

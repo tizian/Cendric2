@@ -5,6 +5,7 @@
 #include "global.h"
 #include "ResourceManager.h"
 #include "FileIO/CharacterCoreReader.h"
+#include "FileIO/CharacterCoreWriter.h"
 #include "Item.h"
 #include "ItemFactory.h"
 
@@ -25,10 +26,12 @@ public:
 	const Item& getItem(ItemID id);
 	// loads a new game with a new core and default attributes
 	void loadNew();
+	// tries to create a new file with this name. if successful, returns true. if it already exists, returns false
+	bool createFile(const char* fileName) const;
 	// uses the character core reader to load a .sav file
-	bool load(char* fileName);
+	bool load(const char* fileName);
 	// uses the character core writer to save a .sav file
-	void save(char* fileName);
+	bool save(const char* fileName);
 	// loads equipped itemvector (reload if not empty)
 	void loadEquipmentItems();
 	// loads itemvector (reload if not empty)

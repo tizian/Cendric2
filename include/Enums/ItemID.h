@@ -1,5 +1,6 @@
 #pragma once
 
+// be aware that this enum order will determine the item ids in the savegames.
 enum class ItemID
 {
 	Void,
@@ -10,4 +11,5 @@ enum class ItemID
 	Food_Cheese,
 	Food_Bread,
 	Food_Water,
+	MAX
 };

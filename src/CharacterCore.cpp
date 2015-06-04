@@ -13,7 +13,7 @@ CharacterCore::~CharacterCore()
 	clearItems();
 }
 
-bool CharacterCore::load(char* fileName)
+bool CharacterCore::load(const char* fileName)
 {
 	CharacterCoreReader reader;
 	
@@ -62,10 +62,20 @@ const Item& CharacterCore::getItem(ItemID id)
 	return m_items.at(id);
 }
 
-void CharacterCore::save(char* fileName) 
+bool CharacterCore::save(const char* fileName) 
 {
 	m_data.timePlayed += m_stopwatch.restart();
-	// TODO write to savefile.
+	
+	// write to savefile.
+	CharacterCoreWriter writer;
+	writer.createFile(fileName);
+	return writer.saveToFile(fileName, m_data);
+}
+
+bool CharacterCore::createFile(const char* fileName) const
+{
+	CharacterCoreWriter writer;
+	return writer.createFile(fileName);
 }
 
 void CharacterCore::reloadStats()
@@ -131,12 +141,12 @@ void CharacterCore::loadItems()
 
 void CharacterCore::clearEquippedItems()
 {
-	m_items.clear();
+	m_equippedItems.clear();
 }
 
 void CharacterCore::clearItems()
 {
-	m_equippedItems.clear();
+	m_items.clear();
 }
 
 const CharacterCoreData& CharacterCore::getData() const

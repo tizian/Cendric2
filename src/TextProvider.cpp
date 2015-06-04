@@ -10,13 +10,14 @@ void TextProvider::reload()
 	reader.readTranslations(m_language, m_translationMap);
 }
 
-const std::wstring& TextProvider::getText(const std::string& key) const
+const std::wstring& TextProvider::getText(const std::string& key)
 {
 	if (m_translationMap.find(key) == m_translationMap.end())
 	{
 		// fallback
 		g_logger->logWarning("TranslationReader", "Tried to get missing translation for key: " + key);
-		return L"{undefined text " + std::wstring(key.begin(), key.end()) + L"}";
+		m_fallbackString = L"{undefined text " + std::wstring(key.begin(), key.end()) + L"}";
+		return m_fallbackString;
 	}
 	return m_translationMap.at(key);
 }

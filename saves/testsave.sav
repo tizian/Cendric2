@@ -1,10 +1,10 @@
-player.name:"Ironbell"
+player.name:Ironbell
 # in seconds
-time.played:"0"
+time.played:0
 # in this order: maxHealthPoints, maxManaPos, currentHealthPos, currentManaPos,	 healthRegenerationPerS, manaRegenerationPerS, damagePhysical, damageFire, damageIce, resistancePhysical, resistanceFire, resistanceIce
-attributes:"100,100,105,100,1,2,10,0,0,1,1,1"
-map.id:"1"
-map.position:"96.23,1506.233"
-gold:"10"
-equipped.weapon:"4"
-equipped.head:"2"
+attributes:100,100,105,100,1,2,10,0,0,1,1,1
+map.id:1
+map.position:96.23,1506.233
+gold:10
+equipped.weapon:4
+equipped.head:2

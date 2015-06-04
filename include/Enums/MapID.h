@@ -3,5 +3,6 @@
 enum class MapID 
 {
 	Void,
-	Testmap
+	Testmap,
+	MAX
 };

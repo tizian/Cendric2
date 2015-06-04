@@ -2,34 +2,6 @@
 
 using namespace std;
 
-CharacterCoreReader::CharacterCoreReader()
-{
-	initMaps();
-}
-
-CharacterCoreReader::~CharacterCoreReader()
-{
-	m_mapMap.clear();
-	m_levelMap.clear();
-	m_itemMap.clear();
-}
-
-void CharacterCoreReader::initMaps()
-{
-	m_mapMap.insert({1, MapID::Testmap});
-	m_levelMap.insert({ 1, LevelID::Testlevel });
-	m_itemMap.insert({ 
-		{ 0, ItemID::Void },
-		{ 1, ItemID::Equipment_head_wizardhat_blue },
-		{ 2, ItemID::Equipment_head_wizardhat_grey},
-		{ 3, ItemID::Equipment_weapon_staff_ice },
-		{ 4, ItemID::Equipment_weapon_rustysword },
-		{ 5, ItemID::Food_Cheese },
-		{ 6, ItemID::Food_Bread },
-		{ 7, ItemID::Food_Water },
-	});
-}
-
 bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 {
 	if (data.playerName.empty())
@@ -93,10 +65,10 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 bool CharacterCoreReader::readPlayerName(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	string name(startData);
-	int count = countToNextChar(startData, end, '"');
+	int count = countToNextChar(startData, end, '\n');
 	if (count == -1) {
 		return false;
 	}
@@ -108,7 +80,7 @@ bool CharacterCoreReader::readPlayerName(char* start, char* end, CharacterCoreDa
 bool CharacterCoreReader::readTimePlayed(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int x = atoi(startData);
 	if (x < 0)
@@ -122,7 +94,7 @@ bool CharacterCoreReader::readTimePlayed(char* start, char* end, CharacterCoreDa
 bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	data.gold = atoi(startData);
 	return true;
@@ -131,22 +103,22 @@ bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& da
 bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
-	int id = atoi(startData);
-	if (m_mapMap.find(id) == m_mapMap.end())
+	MapID id = static_cast<MapID>(atoi(startData));
+	if (id <= MapID::Void || id >= MapID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Map ID not recognized: " + id);
+		g_logger->logError("CharacterCoreReader", "Map ID not recognized: " + static_cast<int>(id));
 		return false;
 	}
-	data.currentMap = m_mapMap.at(id);
+	data.currentMap = id;
 	return true;
 }
 
 bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	float x = static_cast<float>(atof(startData));
 	startData = gotoNextChar(startData, end, ',');
@@ -159,7 +131,7 @@ bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreD
 bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	data.attributes.maxHealthPoints = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
@@ -201,34 +173,32 @@ bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreDa
 bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
-	int id = atoi(startData);
-	if (id == 0 || m_itemMap.find(id) == m_itemMap.end())
+	ItemID id = static_cast<ItemID>(atoi(startData));
+	if (id <= ItemID::Void || id >= ItemID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + id);
+		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + static_cast<int>(id));
 		return false;
 	}
-	ItemID item = m_itemMap.at(id);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int amount = atoi(startData);
-	data.items.insert({item, amount});
+	data.items.insert({id, amount});
 	return true;
 }
 
 bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
-	int id = atoi(startData);
-	if (m_itemMap.find(id) == m_itemMap.end())
+	ItemID item = static_cast<ItemID>(atoi(startData));
+	if (item < ItemID::Void || item >= ItemID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + id);
+		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + static_cast<int>(item));
 		return false;
 	}
-	ItemID item = m_itemMap.at(id);
 
 	switch (type)
 	{
@@ -266,17 +236,16 @@ bool CharacterCoreReader::readLevelKilled(char* start, char* end, CharacterCoreD
 
 	char* startData;
 	char* endData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
-	endData = gotoNextChar(startData, end, '"');
+	endData = gotoNextChar(startData, end, '\n');
 
-	int id = atoi(startData);
-	if (m_levelMap.find(id) == m_levelMap.end())
+	LevelID id = static_cast<LevelID>(atoi(startData));
+	if (id <= LevelID::Void || id >= LevelID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + id);
+		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + static_cast<int>(id));
 		return false;
 	}
-	LevelID level = m_levelMap.at(id);
 	startData++;
 
 	while (startData != NULL)
@@ -289,7 +258,7 @@ bool CharacterCoreReader::readLevelKilled(char* start, char* end, CharacterCoreD
 		}
 	}
 
-	data.levelKilled.insert({level, layer});
+	data.levelKilled.insert({id, layer});
 	return true;
 }
 
@@ -300,17 +269,16 @@ bool CharacterCoreReader::readLevelLooted(char* start, char* end, CharacterCoreD
 
 	char* startData;
 	char* endData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
-	endData = gotoNextChar(startData, end, '"');
+	endData = gotoNextChar(startData, end, '\n');
 
-	int id = atoi(startData);
-	if (m_levelMap.find(id) == m_levelMap.end())
+	LevelID id = static_cast<LevelID>(atoi(startData));
+	if (id <= LevelID::Void || id >= LevelID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + id);
+		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + static_cast<int>(id));
 		return false;
 	}
-	LevelID level = m_levelMap.at(id);
 	startData++;
 
 	while (startData != NULL)
@@ -323,11 +291,11 @@ bool CharacterCoreReader::readLevelLooted(char* start, char* end, CharacterCoreD
 		}
 	}
 
-	data.levelLooted.insert({ level, layer });
+	data.levelLooted.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readCharacterCore(char* fileName, CharacterCoreData& data)
+bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreData& data)
 {
 	FILE* savFile;
 	savFile = fopen(fileName, "r");
@@ -417,7 +385,7 @@ bool CharacterCoreReader::readCharacterCore(char* fileName, CharacterCoreData& d
 			noError = readEquippedItem(pos, end, data, ItemType::Equipment_weapon);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, EQUIPPED_WEAPON, strlen(EQUIPPED_BODY)) == 0) {
+		else if (strncmp(pos, EQUIPPED_BODY, strlen(EQUIPPED_BODY)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_BODY));
 			noError = readEquippedItem(pos, end, data, ItemType::Equipment_body);
 			pos = gotoNextChar(pos, end, '\n');

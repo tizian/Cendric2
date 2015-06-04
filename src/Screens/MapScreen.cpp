@@ -3,6 +3,8 @@
 
 using namespace std;
 
+const char* QUICKSAVE_LOCATION = "saves/quicksave.sav";
+
 MapScreen::MapScreen(MapID mapID, CharacterCore* core) : Screen(core)
 {
 	if (!(m_currentMap.load(mapID)))
@@ -21,10 +23,34 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
 		return new MenuScreen(m_characterCore);
 	}
+	if (g_inputController->isKeyJustPressed(Key::Quickload))
+	{
+		// store pos & go back to menu screen
+		CharacterCore* newCharacterCore = new CharacterCore();
+		if (!newCharacterCore->load(QUICKSAVE_LOCATION))
+		{
+			// no quicksave exists
+			setTooltipText(L"No quicksave exists.", sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
+			delete newCharacterCore;
+		}
+		else
+		{
+			delete m_characterCore;
+			m_characterCore = newCharacterCore;
+			return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+		}
+	}
+	if (g_inputController->isKeyJustPressed(Key::Quicksave))
+	{
+		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
+		m_characterCore->save(QUICKSAVE_LOCATION);
+		setTooltipText(L"Saved file to: saves/quicksave.sav", sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
+	}
 	LevelID id = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
 	if (id == LevelID::Void)
 	{
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
+		updateTooltipText(frameTime);
 		return this;
 	} 
 	else
@@ -54,4 +80,5 @@ void MapScreen::render(sf::RenderTarget &renderTarget)
 {
 	m_currentMap.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
+	renderTooltipText(renderTarget);
 }

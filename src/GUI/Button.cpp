@@ -114,6 +114,7 @@ void Button::setText(const std::string& text)
 void Button::setEnabled(bool enabled)
 {
 	m_isEnabled = enabled;
+	m_text.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
 }
 
 bool Button::isClicked() const

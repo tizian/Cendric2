@@ -3,6 +3,8 @@
 enum class Key
 {
 	Escape,
+	Quicksave,
+	Quickload,
 	Inventory,
 	CharacterInfo,
 	Left,

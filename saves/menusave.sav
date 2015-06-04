@@ -1,0 +1,18 @@
+player.name:Ironbell
+# time played, in seconds
+time.played:4
+map.id:1
+map.position:327.763428,1461.416992
+attributes:100,100,105,100,1,2,10,0,0,0
+gold:10
+# items in inventory:
+# equipment:
+equipped.back:0
+equipped.body:0
+equipped.head:2
+equipped.neck:0
+equipped.ring1:0
+equipped.ring2:0
+equipped.weapon:4
+# levels killed:
+# levels looted:

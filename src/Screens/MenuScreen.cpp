@@ -84,6 +84,13 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			setAllButtonsEnabled(false);
 		}
 	} 
+	else if (m_saveGameButton->isClicked())
+	{
+		// TODO hardcoded menu .sav file 
+		char* saveFilename = "saves/menusave.sav";
+		m_characterCore->save(saveFilename);
+		setTooltipText(L"Saved file to: saves/menusave.sav", sf::Vector2f(10.f, 10.f), sf::Color::White, true);
+	}
 	else if (m_optionsButton->isClicked())
 	{
 		// TODO show options
@@ -111,6 +118,7 @@ void MenuScreen::setAllButtonsEnabled(bool value)
 			button->setEnabled(value);
 		}
 	}
+	m_saveGameButton->setEnabled(value && (m_characterCore != nullptr));
 }
 
 void MenuScreen::render(sf::RenderTarget &renderTarget) 
@@ -146,6 +154,7 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	m_loadGameButton->setText("LoadGame");
 	m_saveGameButton = new Button(sf::FloatRect(475, 400, 300, 40));
 	m_saveGameButton->setText("SaveGame");
+	m_saveGameButton->setEnabled(m_characterCore != nullptr);
 	m_optionsButton = new Button(sf::FloatRect(475, 450, 300, 40));
 	m_optionsButton->setText("Options");
 	m_creditsButton = new Button(sf::FloatRect(475, 500, 300, 40));
