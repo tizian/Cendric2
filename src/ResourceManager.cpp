@@ -31,7 +31,7 @@ void ResourceManager::init()
 	m_fileNames.insert(
 	{
 		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
-		{ ResourceID::Font_copperplateGothicBold, "res/fonts/copperplate_gothic_bold.ttf" },
+		{ ResourceID::Translations, "res/translations.csv" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
 		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
@@ -58,7 +58,6 @@ void ResourceManager::init()
 
 	// font should be always loaded to avoid lags when loading later
 	getBitmapFont(ResourceID::BitmapFont_default);	// TODO: Comment above maybe doesn't apply to bitmap fonts...?
-	getFont(ResourceID::Font_copperplateGothicBold);
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename)

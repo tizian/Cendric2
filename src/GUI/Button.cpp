@@ -92,7 +92,7 @@ void Button::update(const sf::Time& frameTime)
 	GameObject::update(frameTime);
 }
 
-void Button::setText(Texts text, const sf::Color& color)
+void Button::setText(const std::string& text, const sf::Color& color)
 {
 	m_text = BitmapText(
 		g_textProvider->getText(text),
@@ -106,7 +106,7 @@ void Button::setText(Texts text, const sf::Color& color)
 	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
 }
 
-void Button::setText(Texts text)
+void Button::setText(const std::string& text)
 {
 	setText(text, sf::Color::White);
 }

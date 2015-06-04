@@ -20,12 +20,12 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core)
 		break;
 	}
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(m_screenResource)));
-	m_errorText = sf::Text(
+	m_errorText = BitmapText(
 		g_resourceManager->pollError()->second, 
-		(*g_resourceManager->getFont(ResourceID::Font_copperplateGothicBold)));
+		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
 	m_errorText.setColor(sf::Color::Red);
 	m_errorText.setPosition(sf::Vector2f(64, 518));
-	m_errorText.setCharacterSize(20);
+	m_errorText.setCharacterSize(12);
 }
 
 void ErrorScreen::render(sf::RenderTarget &renderTarget)

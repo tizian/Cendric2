@@ -1,4 +1,4 @@
-#include "CharacterCoreReader.h"
+#include "FileIO/CharacterCoreReader.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ void CharacterCoreReader::initMaps()
 	m_itemMap.insert({ 
 		{ 0, ItemID::Void },
 		{ 1, ItemID::Equipment_head_wizardhat_blue },
-		{ 2, ItemID::Equipment_head_wizardhat_black},
+		{ 2, ItemID::Equipment_head_wizardhat_grey},
 		{ 3, ItemID::Equipment_weapon_staff_ice },
 		{ 4, ItemID::Equipment_weapon_rustysword },
 		{ 5, ItemID::Food_Cheese },

@@ -22,8 +22,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	// position will be set automatically as the center of the button.
-	void setText(Texts text, const sf::Color& color);
-	void setText(Texts text);
+	void setText(const std::string& text, const sf::Color& color);
+	void setText(const std::string& text);
 	// a button can only be clicked if its enabled. also, the color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
 

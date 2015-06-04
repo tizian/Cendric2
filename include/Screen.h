@@ -40,7 +40,7 @@ public:
 
 	// sets the tooltip text to 'text' and display it at this position (relative to the tooltip view)
 	// if override is set, this new text will display anyway, regardless of what other text is displaying.
-	void setTooltipText(const std::string& text, const sf::Vector2f& position, const sf::Color& color, bool isOverride);
+	void setTooltipText(const std::wstring& text, const sf::Vector2f& position, const sf::Color& color, bool isOverride);
 
 	// sets the view to the standard view, which means the upper part of the window, the game view, without the tooltip bar.
 	void setViewToStandardView(sf::RenderTarget& target) const;

@@ -4,7 +4,7 @@
 
 #include "global.h"
 #include "ResourceManager.h"
-#include "CharacterCoreReader.h"
+#include "FileIO/CharacterCoreReader.h"
 #include "Item.h"
 #include "ItemFactory.h"
 

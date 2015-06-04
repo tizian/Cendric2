@@ -5,7 +5,7 @@
 
 #include "global.h"
 #include "TileMap.h"
-#include "MapReader.h"
+#include "FileIO/MapReader.h"
 #include "ResourceManager.h"
 
 class Map

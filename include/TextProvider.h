@@ -2,21 +2,19 @@
 
 #include "global.h"
 #include "Enums/Language.h"
-#include "Enums/Texts.h"
+#include "FileIO/TranslationReader.h"
 
 #include <map>
 
 class TextProvider
 {
 public:
-	// inits the text vectors
-	void init();
-	const std::string& getText(Texts key);
+	// clears the map & loads the translations using the current language
+	void reload();
+	const std::wstring& getText(const std::string& key) const;
 	void setLanguage(Language lang);
 
 private:
-	void addText(Texts key, const std::string& english, const std::string& german);
-	std::map<Texts, std::string> m_germanTexts;
-	std::map<Texts, std::string> m_englishTexts;
 	Language m_language = Language::Lang_DE;
+	std::map<std::string, std::wstring> m_translationMap;
 };

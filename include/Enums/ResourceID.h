@@ -5,7 +5,7 @@ enum class ResourceID
 	Void,
 	
 	BitmapFont_default,
-	Font_copperplateGothicBold,
+	Translations,
 	Texture_mainChar,
 	Texture_mapMainChar,
 	Texture_spell_fire,

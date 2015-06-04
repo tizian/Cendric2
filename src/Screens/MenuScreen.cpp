@@ -49,7 +49,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			m_newCharacterCore = new CharacterCore();
 			m_newCharacterCore->loadNew();
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-			m_yesOrNoForm->setMessage(Texts::Question_startNewGame);
+			m_yesOrNoForm->setMessage("QuestionStartNewGame");
 			addObject(GameObjectType::_Form, m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
@@ -79,7 +79,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 			}
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-			m_yesOrNoForm->setMessage(Texts::Question_loadGame);
+			m_yesOrNoForm->setMessage("QuestionLoadGame");
 			addObject(GameObjectType::_Form, m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
@@ -137,21 +137,21 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	if (m_characterCore != nullptr)
 	{
 		m_resumeGameButton = new Button(sf::FloatRect(475, 250, 300, 40));
-		m_resumeGameButton->setText(Texts::Continue_game);
+		m_resumeGameButton->setText("Resume");
 		addObject(GameObjectType::_Button, m_resumeGameButton);
 	}
 	m_newGameButton = new Button(sf::FloatRect(475, 300, 300, 40));
-	m_newGameButton->setText(Texts::New_game);
+	m_newGameButton->setText("NewGame");
 	m_loadGameButton = new Button(sf::FloatRect(475, 350, 300, 40));
-	m_loadGameButton->setText(Texts::Load_game);
+	m_loadGameButton->setText("LoadGame");
 	m_saveGameButton = new Button(sf::FloatRect(475, 400, 300, 40));
-	m_saveGameButton->setText(Texts::Save_game);
+	m_saveGameButton->setText("SaveGame");
 	m_optionsButton = new Button(sf::FloatRect(475, 450, 300, 40));
-	m_optionsButton->setText(Texts::Options);
+	m_optionsButton->setText("Options");
 	m_creditsButton = new Button(sf::FloatRect(475, 500, 300, 40));
-	m_creditsButton->setText(Texts::Credits);
+	m_creditsButton->setText("Credits");
 	m_exitButton = new Button(sf::FloatRect(475, 550, 300, 40));
-	m_exitButton->setText(Texts::Exit);
+	m_exitButton->setText("Exit");
 	addObject(GameObjectType::_Button, m_newGameButton);
 	addObject(GameObjectType::_Button, m_loadGameButton);
 	addObject(GameObjectType::_Button, m_optionsButton);

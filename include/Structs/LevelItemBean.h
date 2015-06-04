@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Enums/ResourceID.h"
-#include "Enums/Texts.h"
 #include "Enums/ItemID.h"
 
 struct LevelItemBean
@@ -14,6 +13,6 @@ struct LevelItemBean
 	ResourceID textureID;
 	std::vector<sf::IntRect> texturePositions;
 	sf::Time frameTime;
-	Texts tooltip;
+	std::string tooltip;
 	ItemID item;
 };

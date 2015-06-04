@@ -5,12 +5,12 @@ Item::Item(ItemBean& bean)
 	m_bean = bean;
 }
 
-Texts Item::getDescription() const
+const std::string& Item::getDescription() const
 {
 	return m_bean.description;
 }
 
-Texts Item::getName() const
+const std::string& Item::getName() const
 {
 	return m_bean.name;
 }

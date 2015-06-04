@@ -21,8 +21,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	// position will be set automatically as the upper center of the form.
-	void setMessage(Texts msg, const sf::Color& color);
-	void setMessage(Texts msg);
+	void setMessage(const std::string& msg, const sf::Color& color);
+	void setMessage(const std::string& msg);
 
 	bool isYesClicked();
 	bool isNoClicked();

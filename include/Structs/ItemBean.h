@@ -5,15 +5,14 @@
 #include "Enums/ItemID.h"
 #include "Enums/ItemType.h"
 #include "Enums/ResourceID.h"
-#include "Enums/Texts.h"
 #include "Enums/LevelEquipmentID.h"
 
 #include "Structs/AttributeBean.h"
 
 struct ItemBean
 {
-	Texts description;
-	Texts name;
+	std::string description;
+	std::string name;
 	ItemID id;
 	ItemType type;
 	ResourceID icon;
@@ -25,8 +24,8 @@ struct ItemBean
 
 const struct ItemBean DEFAULT_ITEM = 
 {
-	Texts::Void, 
-	Texts::Void,
+	"", 
+	"",
 	ItemID::Void, 
 	ItemType::Void, 
 	ResourceID::Void,

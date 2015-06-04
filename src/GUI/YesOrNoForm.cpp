@@ -11,8 +11,8 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box, const sf::Color& pressedColor
 	m_yesButton = new Button(sf::FloatRect(box.left + DIST_FROM_BORDER, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight), pressedColor, mousoverColor, releasedColor);
 	m_noButton = new Button(sf::FloatRect(box.left + buttonGap + DIST_FROM_BORDER + buttonWidth, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight), pressedColor, mousoverColor, releasedColor);
 
-	m_yesButton->setText(Texts::Yes);
-	m_noButton->setText(Texts::No);
+	m_yesButton->setText("Yes");
+	m_noButton->setText("No");
 
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
@@ -35,8 +35,8 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box)
 	m_yesButton = new Button(sf::FloatRect(box.left + DIST_FROM_BORDER, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight));
 	m_noButton = new Button(sf::FloatRect(box.left + buttonGap + DIST_FROM_BORDER + buttonWidth, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight));
 
-	m_yesButton->setText(Texts::Yes);
-	m_noButton->setText(Texts::No);
+	m_yesButton->setText("Yes");
+	m_noButton->setText("No");
 
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
@@ -76,7 +76,7 @@ void YesOrNoForm::update(const sf::Time& frameTime)
 	m_noButton->update(frameTime);
 }
 
-void YesOrNoForm::setMessage(Texts msg, const sf::Color& color)
+void YesOrNoForm::setMessage(const std::string& msg, const sf::Color& color)
 {
 	m_message = BitmapText(
 		g_textProvider->getText(msg),
@@ -88,7 +88,7 @@ void YesOrNoForm::setMessage(Texts msg, const sf::Color& color)
 	m_message.setPosition(sf::Vector2f(DIST_FROM_BORDER, DIST_FROM_BORDER) + getPosition());
 }
 
-void YesOrNoForm::setMessage(Texts msg)
+void YesOrNoForm::setMessage(const std::string& msg)
 {
 	setMessage(msg, sf::Color::White);
 }

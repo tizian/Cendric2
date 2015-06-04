@@ -19,7 +19,7 @@ public:
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
 	
-	void setTooltipText(const std::string& tooltip);
+	void setTooltipText(const std::wstring& tooltip);
 	void setItemID(ItemID id);
 
 	GameObjectType getConfiguredType() const override;
@@ -31,5 +31,5 @@ private:
 	const float PICKUP_RANGE = 50.f;
 	LevelItemID m_levelItemID;
 	ItemID m_itemID;
-	std::string m_tooltipText;
+	std::wstring m_tooltipText;
 };

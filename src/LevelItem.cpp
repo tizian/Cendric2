@@ -24,7 +24,7 @@ void LevelItem::onRightClick()
 	}
 	else
 	{
-		m_screen->setTooltipText(g_textProvider->getText(Texts::Warn_itemTooFarAway), sf::Vector2f(10.f, 10.f), sf::Color::Red, true);
+		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Vector2f(10.f, 10.f), sf::Color::Red, true);
 	}
 }
 
@@ -45,7 +45,7 @@ GameObjectType LevelItem::getConfiguredType() const
 	return GameObjectType::_LevelItem;
 }
 
-void LevelItem::setTooltipText(const std::string& tooltip)
+void LevelItem::setTooltipText(const std::wstring& tooltip)
 {
 	m_tooltipText = tooltip;
 }

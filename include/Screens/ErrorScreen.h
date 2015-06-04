@@ -18,6 +18,6 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
-	sf::Text m_errorText;
+	BitmapText m_errorText;
 	ResourceID m_screenResource;
 };

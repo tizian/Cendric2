@@ -1,0 +1,51 @@
+Armor;Armour;Rüstung;Rüstig
+Back;Back;Zurück;Zrugg
+CharacterInfo;Character Info;Charakter Info;Charakter Info
+Credits;Credits;Mitwirkende;Erschaffer
+Exit;Exit;Beenden;Beende
+FireDamage;Fire Damage;Feuerschaden;Füürschade
+FireResistance;Fire Resistance;Feuerresistenz;Füürresistenz
+Gold;Gold;Gold;Gold
+Health;Health;Lebensenergie;Lebe
+HealthRegeneration;Health Regeneration;Lebensregeneration;Lebensregeneration
+IceDamage;Ice Damage;Eisschaden;Iisschade
+IceResistance;Ice Resistance;Eisresistenz;Iisresistenz
+Inventory;Inventory;Inventar;Inventar
+ItemDescriptionBread;An ordinary loaf of bread.;Ein einfaches Brot.;Es Brot halt.
+ItemDescriptionCheese;Smelly.;Riecht nicht sonderlich gut.;Er müffelet echli.
+ItemDescriptionIcestaff;Feels ice cold.;Fühlt sich eiskalt an.;So chalt we Iis.
+ItemDescriptionRustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
+ItemDescriptionWater;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
+ItemDescriptionWizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
+ItemNameBread;Bread;Brot;Brot
+ItemNameCheese;Cheese;Käse;Chääs
+ItemNameIcestaff;Ice staff;Eisstab;Iisstab
+ItemNameWizardhatBlue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
+ItemNameWizardhatGrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
+ItemTooFarAway;Out of range;Ich muss näher ran;Da isch z'wiit weg
+LevelItemTooltipCheese;A nice moist cheese;Ein hübscher saftiger Käse;En hübsche saftige Chääs
+LoadGame;Load Game;Spiel laden;Spiel lade
+Mana;Mana;Mana;Mana
+ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration
+NewGame;New Game;Neues Spiel;Neus Spiel
+No;No;Nein;Nai
+Options;Options;Einstellungen;Iistellige
+PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
+QuestionLoadGame;"Load game?
+All unsaved progress
+will be lost.";"Spiel laden?
+Ungespeicherter Fortschritt
+geht verloren.";"Spiel lade?
+Ungspeicherete Fortschritt
+isch futsch."
+QuestionStartNewGame;"Start new game?
+All unsaved progress
+will be lost.";"""Näöües"" Spiel; starten?
+Ungespeicherter Fortschritt
+geht verloren.";"Neus Spiel starte?
+Ungspeicherete Fortschritt
+isch futsch."
+Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
+SaveGame;Save Game;Spiel speichern;Spiel speichere
+StartGame;Start Game;Spiel starten;Spiel starte
+Yes;Yes;Ja;Jo

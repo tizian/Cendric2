@@ -54,7 +54,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.textureID = ResourceID::Texture_levelitems;
 			item.texturePositions.push_back(sf::IntRect(0, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = Texts::Levelitem_tooltip_cheese;
+			item.tooltip = "LevelItemTooltipCheese";
 			item.item = ItemID::Food_Cheese;
 			break;
 		default:

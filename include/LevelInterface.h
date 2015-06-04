@@ -29,7 +29,7 @@ private:
 	void updateInventory();
 	void renderInventory(sf::RenderTarget& target) const;
 	sf::RectangleShape m_inventoryShape;
-	sf::Text m_inventoryText;
+	BitmapText m_inventoryText;
 	bool m_showInventory = false;
 	const float INVENTORY_HEIGHT = 500.f;
 	const float INVENTORY_WIDTH = 550.f;
@@ -42,7 +42,7 @@ private:
 	void updateCharacterInfo();
 	void renderCharacterInfo(sf::RenderTarget& target) const;
 	sf::RectangleShape m_characterInfoShape;
-	sf::Text m_characterInfoText;
+	BitmapText m_characterInfoText;
 	bool m_showCharacterInfo = false;
 	const float INFO_HEIGHT = 500.f;
 	const float INFO_WIDTH = 550.f;
