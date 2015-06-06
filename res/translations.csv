@@ -22,7 +22,6 @@ ItemNameCheese;Cheese;Käse;Chääs
 ItemNameIcestaff;Ice staff;Eisstab;Iisstab
 ItemNameWizardhatBlue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
 ItemNameWizardhatGrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
-ItemTooFarAway;Out of range;Ich muss näher ran;Da isch z'wiit weg
 LevelItemTooltipCheese;A nice moist cheese;Ein hübscher saftiger Käse;En hübsche saftige Chääs
 LoadGame;Load Game;Spiel laden;Spiel lade
 Mana;Mana;Mana;Mana
@@ -30,22 +29,24 @@ ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration
 NewGame;New Game;Neues Spiel;Neus Spiel
 No;No;Nein;Nai
 Options;Options;Einstellungen;Iistellige
+OutOfRange;Out of range;Ich muss näher ran;Da isch z'wiit weg
 PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
 QuestionLoadGame;"Load game?
-All unsaved progress
-will be lost.";"Spiel laden?
-Ungespeicherter Fortschritt
-geht verloren.";"Spiel lade?
-Ungspeicherete Fortschritt
-isch futsch."
+All unsaved progress will be lost.";"Spiel laden?
+Ungespeicherter Fortschritt geht verloren.";"Spiel lade?
+Ungspeicherete Fortschritt isch futsch."
 QuestionStartNewGame;"Start new game?
-All unsaved progress
-will be lost.";"""Näöües"" Spiel; starten?
-Ungespeicherter Fortschritt
-geht verloren.";"Neus Spiel starte?
-Ungspeicherete Fortschritt
-isch futsch."
+All unsaved progress will be lost.";"Neues Spiel starten?
+Ungespeicherter Fortschritt geht verloren.";"Neus Spiel starte?
+Ungspeicherete Fortschritt isch futsch."
 Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
 SaveGame;Save Game;Spiel speichern;Spiel speichere
 StartGame;Start Game;Spiel starten;Spiel starte
 Yes;Yes;Ja;Jo
+CreditsText;"Cendric Font:
+   Tizian
+too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
+   Tizian
+too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
+   Tizian
+too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword."

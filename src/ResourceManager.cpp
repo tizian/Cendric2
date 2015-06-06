@@ -48,6 +48,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
+		{ ResourceID::Texture_screen_credits, "res/screens/screen_credits.png" },
 		{ ResourceID::Texture_levelitems, "res/assets/items/spritesheet_levelitems.png" },
 		{ ResourceID::Texture_items, "res/assets/items/spritesheet_items.png" },
 		{ ResourceID::Texture_head_wizardhat_grey, "res/assets/equipment/head/spritesheet_head_wizardhat_grey.png" },

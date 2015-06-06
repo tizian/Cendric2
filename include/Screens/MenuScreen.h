@@ -5,6 +5,7 @@
 #include "Screen.h"
 #include "Screens/LoadingScreen.h"
 #include "Screens/SplashScreen.h"
+#include "Screens/CreditsScreen.h"
 #include "Misc/FireBasket.h"
 #include "CharacterCore.h"
 #include "GUI/Button.h"

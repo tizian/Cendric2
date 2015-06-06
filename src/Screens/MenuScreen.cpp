@@ -97,7 +97,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_creditsButton->isClicked())
 	{
-		// TODO show credits
+		return new CreditsScreen(m_characterCore);
 	}
 	updateTooltipText(frameTime);
 	updateObjects(GameObjectType::_Undefined, frameTime);
