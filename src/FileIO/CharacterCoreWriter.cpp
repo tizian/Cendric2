@@ -42,7 +42,7 @@ bool CharacterCoreWriter::saveToFile(const char* filename, const CharacterCoreDa
 		g_logger->logError("CharacterCoreWriter", "Unable to open file: " + string(filename));
 		return false;
 	}
-	return 0;
+	return true;
 }
 
 std::string CharacterCoreWriter::writePlayerName(const CharacterCoreData& data) const

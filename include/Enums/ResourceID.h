@@ -6,6 +6,9 @@ enum class ResourceID
 	
 	BitmapFont_default,
 	Translations,
+	Configuration,
+	Quicksave,
+	Save_folder,
 	Texture_mainChar,
 	Texture_mapMainChar,
 	Texture_spell_fire,

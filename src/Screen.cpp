@@ -119,7 +119,7 @@ void Screen::setTooltipText(const wstring& text, const sf::Vector2f& position, c
 	m_tooltipText.setCharacterSize(12);
 	m_tooltipText.setPosition(position);
 	m_tooltipText.setColor(color);
-	m_tooltipTime = TOOLTIP_ACTIVE_TIME;
+	m_tooltipTime = sf::seconds(0.05f * static_cast<float>(text.length()));
 }
 
 void Screen::renderTooltipText(sf::RenderTarget& target) const

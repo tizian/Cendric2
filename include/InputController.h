@@ -44,9 +44,8 @@ private:
 	std::map<Key, bool> m_keyJustPressedMap;
 	sf::RenderWindow* m_mainWindow;
 
-	// TODO: this map has to be loaded from an .ini file later so it can be changed in the game options.
-	// Mouse keys can't be set in this map. Their functions are fix.
-	std::map<Key, sf::Keyboard::Key> m_keyMap;
+	// Mouse keys can't be set in this map. Their functions are fixed
+	const std::map<Key, sf::Keyboard::Key>& m_keyMap;
 
 	bool m_isMousePressedLeft = false;
 	bool m_isMousePressedRight = false;

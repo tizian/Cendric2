@@ -75,7 +75,6 @@ protected:
 private:
 	std::vector<std::vector<GameObject*>> m_objects;
 	BitmapText m_tooltipText;
-	
-	const sf::Time TOOLTIP_ACTIVE_TIME = sf::seconds(1.5f);
+
 	sf::Time m_tooltipTime = sf::Time::Zero;
 };

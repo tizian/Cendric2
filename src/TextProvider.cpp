@@ -6,8 +6,12 @@ TextProvider* g_textProvider;
 
 void TextProvider::reload()
 {
-	TranslationReader reader;
-	reader.readTranslations(m_language, m_translationMap);
+	if (m_language != g_resourceManager->getConfiguration().language)
+	{
+		setLanguage(g_resourceManager->getConfiguration().language);
+		TranslationReader reader;
+		reader.readTranslations(m_language, m_translationMap);
+	}
 }
 
 const std::wstring& TextProvider::getText(const std::string& key)

@@ -15,14 +15,14 @@ TranslationReader::~TranslationReader()
 bool TranslationReader::readTranslations(Language lang, std::map<std::string, std::wstring>& translationMap) const
 {
 	translationMap.clear();
-	wstring contents = getFileContents(g_resourceManager->getFilename(ResourceID::Translations));
+	wstring contents = getFileContentsWide(g_resourceManager->getFilename(ResourceID::Translations));
 	if (contents.empty())
 	{
 		return false;
 	}
 	StringTable tab;
 	parseCsv(contents.c_str(), tab);
-	if (tab.size() == 0 || tab[0].size() < static_cast<int>(lang) + 2)
+	if (tab.size() == 0 || tab[0].size() < static_cast<int>(lang) + 1)
 	{
 		g_logger->logError("TranslationReader", "Error in translation file, incorrect number of columns or no rows");
 		return false;
@@ -32,7 +32,7 @@ bool TranslationReader::readTranslations(Language lang, std::map<std::string, st
 	{
 		lineNr++;
 		string key = string(it[0].begin(), it[0].end());
-		wstring value = it[static_cast<int>(lang)+1];
+		wstring value = it[static_cast<int>(lang)];
 		if (key.empty() || value.empty())
 		{
 			g_logger->logError("TranslationReader", "Could not get translation for line: " + lineNr);

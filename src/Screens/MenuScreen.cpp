@@ -93,7 +93,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_optionsButton->isClicked())
 	{
-		// TODO show options
+		return new OptionsScreen(m_characterCore);
 	}
 	else if (m_creditsButton->isClicked())
 	{

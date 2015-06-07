@@ -10,6 +10,9 @@
 #include "Enums/MapID.h"
 #include "Enums/LevelID.h"
 
+#include "Structs/ConfigurationData.h"
+#include "FileIO/ConfigurationReader.h"
+
 #include "GUI/BitmapFont.h"
 
 class ResourceManager
@@ -18,7 +21,7 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	// initializes the filename map
+	// initializes its maps & data
 	void init();
 
 	void deleteResource(ResourceID id);
@@ -41,6 +44,8 @@ public:
 	char* getFilename(LevelID id);
 	char* getFilename(MapID id);
 	const std::pair<ErrorID, std::string>* pollError() const;
+	ConfigurationData& getConfiguration();
+	int getMaxFPS() const;
 
 private:
 	std::map<std::string, sf::Texture> m_textures;
@@ -54,4 +59,6 @@ private:
 	std::map <MapID, std::string> m_mapFileNames;
 	// this pair stores resource errors and gets checked in every game loop iteration. mostly and hopefully void.
 	std::pair<ErrorID, std::string> m_currentError;
+	// configuration can be manipulated by the user
+	ConfigurationData m_configuration;
 };

@@ -32,6 +32,9 @@ void ResourceManager::init()
 	{
 		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
 		{ ResourceID::Translations, "res/translations.csv" },
+		{ ResourceID::Configuration, "config.ini" },
+		{ ResourceID::Save_folder, "saves/" },
+		{ ResourceID::Quicksave, "saves/quicksave.sav" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
 		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
@@ -59,6 +62,12 @@ void ResourceManager::init()
 
 	// font should be always loaded to avoid lags when loading later
 	getBitmapFont(ResourceID::BitmapFont_default);	// TODO: Comment above maybe doesn't apply to bitmap fonts...?
+
+	ConfigurationReader reader;
+	if (!reader.readConfiguration(m_configuration))
+	{
+		m_configuration = DEFAULT_CONFIGURATION;
+	}
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename)
@@ -224,6 +233,16 @@ char* ResourceManager::getFilename(LevelID id)
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const
 {
 	return &m_currentError;
+}
+
+ConfigurationData& ResourceManager::getConfiguration()
+{
+	return m_configuration;
+}
+
+int ResourceManager::getMaxFPS() const
+{
+	return m_configuration.maxFrameRate;
 }
 
 void ResourceManager::setError(ErrorID id, string& description)

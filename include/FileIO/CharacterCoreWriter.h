@@ -7,7 +7,7 @@
 
 #include "Enums/ItemType.h"
 #include "Structs/CharacterCoreData.h"
-#include "CharacterCoreIO.h"
+#include "FileIO/CharacterCoreIO.h"
 
 // a writer to write a savefile.
 class CharacterCoreWriter : public CharacterCoreIO

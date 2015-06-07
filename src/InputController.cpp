@@ -1,8 +1,9 @@
 #include "InputController.h"
+#include "ResourceManager.h"
 
 InputController* g_inputController;
 
-InputController::InputController()
+InputController::InputController() : m_keyMap(g_resourceManager->getConfiguration().keyMap)
 {
 }
 
@@ -10,7 +11,6 @@ InputController::~InputController()
 {
 	m_keyActiveMap.clear();
 	m_keyJustPressedMap.clear();
-	m_keyMap.clear();
 }
 
 void InputController::update()
@@ -69,23 +69,7 @@ void InputController::init()
 			{ Key::SpellIce, false }
 		});
 	m_keyJustPressedMap = m_keyActiveMap;
-	m_keyMap.insert(
-		{
-			{ Key::Escape, sf::Keyboard::Escape },
-			{ Key::Quickload, sf::Keyboard::F9 },
-			{ Key::Quicksave, sf::Keyboard::F5 },
-			{ Key::Inventory, sf::Keyboard::I },
-			{ Key::CharacterInfo, sf::Keyboard::C },
-			{ Key::Left, sf::Keyboard::A },
-			{ Key::Right, sf::Keyboard::D },
-			{ Key::Up, sf::Keyboard::W },
-			{ Key::Down, sf::Keyboard::S },
-			{ Key::Jump, sf::Keyboard::Space },
-			{ Key::SpellChop, sf::Keyboard::Num1 },
-			{ Key::SpellFire, sf::Keyboard::Num2 },
-			{ Key::SpellIce, sf::Keyboard::Num3 },
-			{ Key::SpellForcefield, sf::Keyboard::Num4 }
-		});
+	
 
 	m_windowSize.x = WINDOW_WIDTH;
 	m_windowSize.y = WINDOW_HEIGHT + BOTTOM_BORDER;

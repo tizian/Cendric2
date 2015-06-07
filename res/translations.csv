@@ -1,10 +1,20 @@
+Apply;Apply;Anwenden;Awende
 Armor;Armour;Rüstung;Rüstig
 Back;Back;Zurück;Zrugg
 CharacterInfo;Character Info;Charakter Info;Charakter Info
 Credits;Credits;Mitwirkende;Erschaffer
+CreditsText;"Cendric Font:
+   Tizian
+too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
+   Tizian
+too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
+   Tizian
+too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword."
+English;English;Englisch;Englisch
 Exit;Exit;Beenden;Beende
 FireDamage;Fire Damage;Feuerschaden;Füürschade
 FireResistance;Fire Resistance;Feuerresistenz;Füürresistenz
+German;German;Deutsch;Düütsch
 Gold;Gold;Gold;Gold
 Health;Health;Lebensenergie;Lebe
 HealthRegeneration;Health Regeneration;Lebensregeneration;Lebensregeneration
@@ -22,15 +32,24 @@ ItemNameCheese;Cheese;Käse;Chääs
 ItemNameIcestaff;Ice staff;Eisstab;Iisstab
 ItemNameWizardhatBlue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
 ItemNameWizardhatGrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
+Jump;Jump;Springen;Springe
+Language;Language;Sprache;Sproch
 LevelItemTooltipCheese;A nice moist cheese;Ein hübscher saftiger Käse;En hübsche saftige Chääs
 LoadGame;Load Game;Spiel laden;Spiel lade
 Mana;Mana;Mana;Mana
 ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration
+MoveDown;Move down;Nach unten bewegen;Abelaufe
+MoveLeft;Move left;Nach links laufen;Links laufe
+MoveRight;Move right;Nach rechts bewegen;Rechts laufe
+MoveUp;Move up;Nach oben bewegen;Uelaufe
 NewGame;New Game;Neues Spiel;Neus Spiel
 No;No;Nein;Nai
+Off;Off;Aus;Uus
+On;On;An;Ii
 Options;Options;Einstellungen;Iistellige
 OutOfRange;Out of range;Ich muss näher ran;Da isch z'wiit weg
 PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
+PressAnyKey;<press any key>;<beliebige Taste drücken>;<irgende Taste trucke>
 QuestionLoadGame;"Load game?
 All unsaved progress will be lost.";"Spiel laden?
 Ungespeicherter Fortschritt geht verloren.";"Spiel lade?
@@ -39,14 +58,19 @@ QuestionStartNewGame;"Start new game?
 All unsaved progress will be lost.";"Neues Spiel starten?
 Ungespeicherter Fortschritt geht verloren.";"Neus Spiel starte?
 Ungspeicherete Fortschritt isch futsch."
+Quickload;Quick load;Schnell laden;Schnell lade
+Quicksave;Quick save;Schnell speichern;Schnell speichere
 Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
 SaveGame;Save Game;Spiel speichern;Spiel speichere
+Sound;Sound;Musik;Musig
+SoundVolume;Volume;Lautstärke;Luutstärchi
+SpellChop;Chop;Hauen;Haue
+SpellFire;Fireball;Feuerball;Füürball
+SpellForcefield;Forcefield;Schutzschild;Schutzschild
+SpellIce;Icebolt;Eisblitz;Iisblitz
 StartGame;Start Game;Spiel starten;Spiel starte
+SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
+Unknown;Unknown;Unbekannt;Unbekannt
 Yes;Yes;Ja;Jo
-CreditsText;"Cendric Font:
-   Tizian
-too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
-   Tizian
-too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
-   Tizian
-too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword."
+MaxFPS;Max. FPS;Max. FPS;Max. FPS
+ConfigurationSaved;Configuration was saved. A new start of the game is needed so all changes apply.;Einstellungen wurden gespeichert. Das Spiel muss neugestartet werden um alle Änderungen zu übernehmen.;Iistellige sind gspeicheret. Es brucht aber en Neustart vom Game damit alli Änderige überno werded.

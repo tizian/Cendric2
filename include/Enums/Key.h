@@ -2,6 +2,7 @@
 
 enum class Key
 {
+	Void,
 	Escape,
 	Quicksave,
 	Quickload,
@@ -12,9 +13,9 @@ enum class Key
 	Up,
 	Down,
 	Jump,
-	Fire,
 	SpellFire,
 	SpellIce,
 	SpellChop,
-	SpellForcefield
+	SpellForcefield,
+	MAX
 };

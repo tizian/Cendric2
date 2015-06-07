@@ -12,8 +12,6 @@
 #define WINDOW_WIDTH 1250
 #define WINDOW_HEIGHT 750
 #define BOTTOM_BORDER 50
-// Framerate. Values < 30 give interesting results and should not be selected.
-#define MAX_FRAME_RATE 80
 
 // cendric color palette
 #define CENDRIC_COLOR_BLACK sf::Color::Black

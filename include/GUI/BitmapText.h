@@ -9,6 +9,7 @@ class BitmapText : public sf::Drawable, public::sf::Transformable
 public:
 	BitmapText();
 	BitmapText(const sf::String &string, const BitmapFont &font);
+	BitmapText(const sf::String &string);
 
 	void setString(const sf::String &string);
 	const sf::String &getString() const;

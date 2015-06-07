@@ -92,14 +92,14 @@ void Button::update(const sf::Time& frameTime)
 	GameObject::update(frameTime);
 }
 
-void Button::setText(const std::string& text, const sf::Color& color)
+void Button::setText(const std::string& text, const sf::Color& color, int charSize)
 {
 	m_text = BitmapText(
 		g_textProvider->getText(text),
 		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
 	
 	m_text.setColor(color);
-	m_text.setCharacterSize(16);
+	m_text.setCharacterSize(charSize);
 	// calculate position
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
 	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f , 0.f);
@@ -108,7 +108,49 @@ void Button::setText(const std::string& text, const sf::Color& color)
 
 void Button::setText(const std::string& text)
 {
-	setText(text, sf::Color::White);
+	setText(text, sf::Color::White, 16);
+}
+
+void Button::setText(const std::string& text, int charSize)
+{
+	setText(text, sf::Color::White, charSize);
+}
+
+void Button::setTextRaw(const std::string& text, const sf::Color& color, int charSize)
+{
+	m_text = BitmapText(
+		text,
+		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
+
+	m_text.setColor(color);
+	m_text.setCharacterSize(charSize);
+	// calculate position
+	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
+	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
+	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
+}
+
+void Button::setTextRaw(const std::string& text, int charSize)
+{
+	setTextRaw(text, sf::Color::White, charSize);
+}
+
+void Button::setTextRaw(const std::string& text)
+{
+	setTextRaw(text, sf::Color::White, 16);
+}
+
+void Button::setCharacterSize(int size)
+{
+	m_text.setCharacterSize(size);
+	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
+	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
+	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
+}
+
+void Button::setTextColor(const sf::Color& color)
+{
+	m_text.setColor(color);
 }
 
 void Button::setEnabled(bool enabled)

@@ -1,5 +1,6 @@
 #include "GUI/BitmapText.h"
 #include "GUI/BitmapFont.h"
+#include "ResourceManager.h"
 
 const char FIRST_CHAR = ' ';
 const char LAST_CHAR = 'ÿ';
@@ -21,6 +22,7 @@ BitmapText::BitmapText()
 {
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_color = sf::Color::White;
+	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
 }
 
 BitmapText::BitmapText(const sf::String &string, const BitmapFont &font)
@@ -31,6 +33,18 @@ BitmapText::BitmapText(const sf::String &string, const BitmapFont &font)
 	toUpperCase(m_string);
 	m_color = sf::Color::White;
 	m_characterSize = font.getGlyphSize().y;
+	m_lineSpacing = 0.5f;
+	init();
+}
+
+BitmapText::BitmapText(const sf::String &string)
+{
+	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
+	m_vertices = sf::VertexArray(sf::Quads);
+	m_string = string;
+	toUpperCase(m_string);
+	m_color = sf::Color::White;
+	m_characterSize = m_font->getGlyphSize().y;
 	m_lineSpacing = 0.5f;
 	init();
 }

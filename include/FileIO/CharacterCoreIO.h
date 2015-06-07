@@ -2,15 +2,10 @@
 
 #include "global.h"
 
-#include "Enums/LevelID.h"
-#include "Enums/ItemID.h"
-#include "Enums/MapID.h"
-
-// some constants and members used by character core reader & writer
+// some constants used by character core reader & writer
 class CharacterCoreIO
 {
 protected:
-
 	const char* PLAYER_NAME = "player.name";
 	const char* TIME_PLAYED = "time.played";
 
