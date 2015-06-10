@@ -12,3 +12,6 @@ https://docs.google.com/document/d/1iNSQIyNpVGHeak6isbP6AHdHD50gs8MNXF1GCf08efg/
 
 CSV Parser:
 http://codereview.stackexchange.com/questions/24196/correctly-import-csv-data-even-when-possibly-malformed
+
+Tile Spacing:
+http://registry.gimp.org/node/24816

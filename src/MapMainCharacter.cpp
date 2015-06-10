@@ -126,8 +126,8 @@ void MapMainCharacter::handleInput()
 
 void MapMainCharacter::load()
 {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 48.f, 48.f));
-	setSpriteOffset(sf::Vector2f(-1.f, -1.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 10.f, 10.f));
+	setSpriteOffset(sf::Vector2f(-20.f, -40.f));
 
 	Animation walkingAnimationDown;
 	walkingAnimationDown.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));

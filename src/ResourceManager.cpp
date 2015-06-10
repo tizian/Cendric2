@@ -25,7 +25,7 @@ void ResourceManager::init()
 	);
 
 	m_mapFileNames.insert(
-		{ MapID::Testmap, "res/map/testmap/testmap.dricmap" }
+		{ MapID::Firstmap, "res/map/firstmap/firstmap.dricmap" }
 	);
 
 	m_fileNames.insert(

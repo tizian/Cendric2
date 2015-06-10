@@ -31,7 +31,7 @@ bool CharacterCore::load(const char* fileName)
 
 void CharacterCore::loadNew()
 {
-	m_data.currentMap = MapID::Testmap; // will be set to the start map
+	m_data.currentMap = MapID::Firstmap; // the first map in the cendric universe
 	m_data.currentMapPosition = sf::Vector2f(); // will be start position later
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.currentManaPoints = 100;

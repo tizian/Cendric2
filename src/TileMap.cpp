@@ -34,8 +34,8 @@ bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const v
 				// we start with tiles at 1 in the .dric format, but need 0 here
 				tileNumber--;
 
-				int tu = tileNumber % (m_tileset->getSize().x / tileSize.x);
-				int tv = tileNumber / (m_tileset->getSize().x / tileSize.x);
+				int tu = tileNumber % (m_tileset->getSize().x / (tileSize.x + 2 * TILE_BORDER));
+				int tv = tileNumber / (m_tileset->getSize().x / (tileSize.x + 2 * TILE_BORDER));
 
 				sf::Vertex *quad = &layer[(i + j * width) * 4];
 

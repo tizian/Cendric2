@@ -78,7 +78,8 @@ void MapScreen::execOnExit(const Screen *nextScreen)
 
 void MapScreen::render(sf::RenderTarget &renderTarget)
 {
-	m_currentMap.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
+	m_currentMap.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderTooltipText(renderTarget);
 }

@@ -20,7 +20,8 @@ private:
 	bool readTileSize(char* start, char* end, MapData& data) const;
 	bool readLayerCollidable(char* start, char* end, MapData& data) const;
 	bool readStartPos(char* start, char* end, MapData& data) const;
-	bool readLayerTiles(char* start, char* end, MapData& data) const;
+	bool readBackgroundLayerTiles(char* start, char* end, MapData& data) const;
+	bool readForegroundLayerTiles(char* start, char* end, MapData& data) const;
 
 	// \brief check map bean for validity before loading the level
 	bool checkData(MapData& data) const;
@@ -33,6 +34,7 @@ private:
 	const char* MAP_TILESIZE = "map.tilesize";
 	const char* TILESET_PATH = "tileset.path";
 	const char* LAYER_COLLIDABLE = "layer.collidable";
-	const char* LAYER_TILES = "layer.tiles";
+	const char* LAYER_TILES_BACKGROUND = "layer.tiles.background";
+	const char* LAYER_TILES_FOREGROUND = "layer.tiles.foreground";
 	const char* CENDRIC_STARTPOS = "cendric.startpos";
 };

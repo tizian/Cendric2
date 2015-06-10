@@ -29,21 +29,34 @@ bool MapReader::checkData(MapData& data) const
 		g_logger->logError("MapReader", "Error in map data : tileset-path not set / empty");
 		return false;
 	}
-	if (data.layers.empty())
+	if (data.backgroundLayers.empty())
 	{
-		g_logger->logError("MapReader", "Error in map data : no layers set");
+		g_logger->logError("MapReader", "Error in map data : no background layers set");
 		return false;
 	}
-	for (int i = 0; i < data.layers.size(); i++)
+	for (int i = 0; i < data.backgroundLayers.size(); i++)
 	{
-		if (data.layers[i].empty())
+		if (data.backgroundLayers[i].empty())
 		{
-			g_logger->logError("MapReader", "Error in map data : layer " + i + std::string(" empty"));
+			g_logger->logError("MapReader", "Error in map data : background layer " + i + std::string(" empty"));
 			return false;
 		}
-		if (data.layers[i].size() != data.mapSize.x * data.mapSize.y)
+		if (data.backgroundLayers[i].size() != data.mapSize.x * data.mapSize.y)
 		{
-			g_logger->logError("MapReader", "Error in map data : layer " + i + std::string(" has not correct size (map size)"));
+			g_logger->logError("MapReader", "Error in map data : background layer " + i + std::string(" has not correct size (map size)"));
+			return false;
+		}
+	}
+	for (int i = 0; i < data.foregroundLayers.size(); i++)
+	{
+		if (data.foregroundLayers[i].empty())
+		{
+			g_logger->logError("MapReader", "Error in map data : foreground layer " + i + std::string(" empty"));
+			return false;
+		}
+		if (data.foregroundLayers[i].size() != data.mapSize.x * data.mapSize.y)
+		{
+			g_logger->logError("MapReader", "Error in map data : foreground layer " + i + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}
@@ -118,9 +131,9 @@ bool MapReader::readTileSize(char* start, char* end, MapData& data) const
 	return true;
 }
 
-bool MapReader::readLayerTiles(char* start, char* end, MapData& data) const
+bool MapReader::readBackgroundLayerTiles(char* start, char* end, MapData& data) const
 {
-	// add a new layer into data
+	// add a new background layer into data
 	vector<int> layer;
 
 	char* startData;
@@ -140,7 +153,33 @@ bool MapReader::readLayerTiles(char* start, char* end, MapData& data) const
 		}
 	}
 
-	data.layers.push_back(layer);
+	data.backgroundLayers.push_back(layer);
+	return true;
+}
+
+bool MapReader::readForegroundLayerTiles(char* start, char* end, MapData& data) const
+{
+	// add a new foreground layer into data
+	vector<int> layer;
+
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+
+	while (startData != NULL)
+	{
+		layer.push_back(atoi(startData));
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+
+	data.foregroundLayers.push_back(layer);
 	return true;
 }
 
@@ -248,9 +287,15 @@ bool MapReader::readMap(char* fileName, MapData& data)
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, LAYER_TILES, strlen(LAYER_TILES)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_TILES));
-			noError = readLayerTiles(pos, end, data);
+		else if (strncmp(pos, LAYER_TILES_BACKGROUND, strlen(LAYER_TILES_BACKGROUND)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_TILES_BACKGROUND));
+			noError = readBackgroundLayerTiles(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, LAYER_TILES_FOREGROUND, strlen(LAYER_TILES_FOREGROUND)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_TILES_FOREGROUND));
+			noError = readForegroundLayerTiles(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}

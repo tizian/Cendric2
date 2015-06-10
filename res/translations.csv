@@ -49,7 +49,7 @@ On;On;An;Ii
 Options;Options;Einstellungen;Iistellige
 OutOfRange;Out of range;Ich muss näher ran;Da isch z'wiit weg
 PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
-PressAnyKey;<press any key>;<beliebige Taste drücken>;<irgende Taste trucke>
+PressAnyKey;<?>;<?>;<?>
 QuestionLoadGame;"Load game?
 All unsaved progress will be lost.";"Spiel laden?
 Ungespeicherter Fortschritt geht verloren.";"Spiel lade?
@@ -71,6 +71,6 @@ SpellIce;Icebolt;Eisblitz;Iisblitz
 StartGame;Start Game;Spiel starten;Spiel starte
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
 Unknown;Unknown;Unbekannt;Unbekannt
-Yes;Yes;Ja;Jo
+Yes;Yes;Ja;Ja
 MaxFPS;Max. FPS;Max. FPS;Max. FPS
-ConfigurationSaved;Configuration was saved. A new start of the game is needed so all changes apply.;Einstellungen wurden gespeichert. Das Spiel muss neugestartet werden um alle Änderungen zu übernehmen.;Iistellige sind gspeicheret. Es brucht aber en Neustart vom Game damit alli Änderige überno werded.
+ConfigurationSaved;Configuration was saved. A new start of the game is needed so all changes apply.;Einstellungen wurden gespeichert. Das Spiel muss neugestartet werden um alle Änderungen zu übernehmen.;Iistellige sind gspeicheret. Es brucht aber en Neustart vom Game damit alli Änderige würksam werded.
