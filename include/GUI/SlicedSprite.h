@@ -8,10 +8,11 @@ class SlicedSprite : public sf::Drawable, public::sf::Transformable
 {
 public:
 	SlicedSprite();
-	SlicedSprite(sf::Texture *tex, int width, int height);
+	SlicedSprite(sf::Texture *tex, const sf::Color &color, int width, int height);
 
 	void setSize(int width, int height);
 	void setTexture(sf::Texture *texture);
+	void setColor(sf::Color &color);
 
 	void setSlicing(int left, int right, int top, int bottom);
 
@@ -31,6 +32,7 @@ private:
 	int m_topSlice;
 	int m_bottomSlice;
 
+	sf::Color			m_color;
 	sf::VertexArray		m_vertices;
 	sf::FloatRect		m_bounds;
 };

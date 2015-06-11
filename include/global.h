@@ -14,7 +14,8 @@
 #define BOTTOM_BORDER 50
 
 // cendric color palette
-#define CENDRIC_COLOR_BLACK sf::Color::Black
+#define CENDRIC_COLOR_WHITE sf::Color(255, 255, 255, 255)
+#define CENDRIC_COLOR_BLACK sf::Color(0, 0, 0, 255)
 #define CENDRIC_COLOR_PURPLE sf::Color(54, 11, 93, 255)
 #define CENDRIC_COLOR_LIGHT_PURPLE sf::Color(114, 66, 200, 255)
 

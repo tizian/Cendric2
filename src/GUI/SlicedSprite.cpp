@@ -10,9 +10,10 @@ SlicedSprite::SlicedSprite()
 	m_topSlice = 0;
 	m_bottomSlice = 0;
 	m_vertices = sf::VertexArray(sf::Quads);
+	m_color = sf::Color::White;
 }
 
-SlicedSprite::SlicedSprite(sf::Texture *tex, int width, int height)
+SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, int width, int height)
 {
 	m_texture = tex;
 	m_width = width;
@@ -22,6 +23,17 @@ SlicedSprite::SlicedSprite(sf::Texture *tex, int width, int height)
 	m_topSlice = 0;
 	m_bottomSlice = 0;
 	m_vertices = sf::VertexArray(sf::Quads);
+	m_color = color;
+
+	// For default behaviour, assume symmetric slicing
+	int texWidth = tex->getSize().x;
+	int texHeight = tex->getSize().y;
+	m_leftSlice = std::floor(texWidth / 2);
+	m_rightSlice = m_leftSlice;
+	m_topSlice = std::floor(texHeight / 2);
+	m_bottomSlice = m_topSlice;
+
+	init();
 }
 
 void SlicedSprite::setSize(int width, int height)
@@ -33,6 +45,15 @@ void SlicedSprite::setSize(int width, int height)
 void SlicedSprite::setTexture(sf::Texture *texture)
 {
 	m_texture = texture;
+}
+
+void SlicedSprite::setColor(sf::Color &color)
+{
+	m_color = color;
+
+	for (int i = 0; i < m_vertices.getVertexCount(); ++i) {
+		m_vertices[i].color = m_color;
+	}
 }
 
 void SlicedSprite::setSlicing(int left, int right, int top, int bottom)
@@ -58,14 +79,10 @@ void SlicedSprite::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void SlicedSprite::init()
 {
-	using std::cout;
-	using std::endl;
-
 	m_vertices.clear();
 
 	if (m_leftSlice + m_rightSlice > m_width || m_topSlice + m_bottomSlice > m_height) {
 		g_logger->logError("SlicedSprite::init()", "Slicing doesn't agree with width and height!");
-		cout << "width: " << m_width << "height: " << m_height << endl;
 		return;
 	}
 
@@ -83,10 +100,10 @@ void SlicedSprite::init()
 
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i], y[j]), sf::Vector2f(u[i], v[j])));
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i + 1], y[j]), sf::Vector2f(u[i + 1], v[j])));
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i + 1], y[j + 1]), sf::Vector2f(u[i + 1], v[j + 1])));
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i], y[j + 1]), sf::Vector2f(u[i], v[j + 1])));
+			m_vertices.append(sf::Vertex(sf::Vector2f(x[i], y[j]), m_color, sf::Vector2f(u[i], v[j])));
+			m_vertices.append(sf::Vertex(sf::Vector2f(x[i + 1], y[j]), m_color, sf::Vector2f(u[i + 1], v[j])));
+			m_vertices.append(sf::Vertex(sf::Vector2f(x[i + 1], y[j + 1]), m_color, sf::Vector2f(u[i + 1], v[j + 1])));
+			m_vertices.append(sf::Vertex(sf::Vector2f(x[i], y[j + 1]), m_color, sf::Vector2f(u[i], v[j + 1])));
 		}
 	}
 

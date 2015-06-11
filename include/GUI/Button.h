@@ -8,18 +8,18 @@
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
-enum class ButtonState {
-	DEFAULT,
-	MOUSEOVER,
-	PRESSED,
+enum class ButtonOrnamentStyle {
+	NONE,
+	SMALL,
+	MEDIUM,
+	LARGE
 };
 
 // A not so ugly button to click
 class Button : public GameObject
 {
 public:
-	Button(const sf::FloatRect& box, const sf::Color& pressedColor, const sf::Color& mousoverColor, const sf::Color& releasedColor);
-	Button(const sf::FloatRect& box);
+	Button(const sf::FloatRect& box, ButtonOrnamentStyle style = ButtonOrnamentStyle::NONE);
 
 	void load() override;
 	void onLeftJustPressed() override;
@@ -51,10 +51,13 @@ private:
 	bool m_isClicked = false;
 	bool m_isEnabled = true;
 
-	ButtonState m_state;
+	sf::Vector2f m_positionDefault;
+	sf::Vector2f m_backLayerOffset;
+	sf::Vector2f m_textOffset;
 
-	SlicedSprite m_sprite;
-	SlicedSprite m_spritePressed;
-	SlicedSprite m_spriteMouseover;
+	SlicedSprite m_mainLayer;
+	SlicedSprite m_backLayer;
+	SlicedSprite m_ornamentLayer;
+
 	BitmapText m_text;
 };

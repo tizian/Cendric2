@@ -2,26 +2,35 @@
 
 using namespace std;
 
-Button::Button(const sf::FloatRect& box)
+Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style)
 {
 	// using default values for constructor.
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
-	setPosition(sf::Vector2f(box.left, box.top));
+	m_positionDefault = sf::Vector2f(box.left, box.top);
+	setPosition(m_positionDefault);
 
-	m_sprite = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_button_sliced), box.width, box.height);
-	m_spritePressed = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_button_sliced_pressed), box.width, box.height);
-	m_spriteMouseover = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_button_sliced_mouseover), box.width, box.height);
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_BLACK, box.width, box.height);
+	m_mainLayer.setPosition(m_positionDefault);
 
-	m_sprite.setSlicing(21, 21, 22, 22);
-	m_spritePressed.setSlicing(21, 21, 22, 22);
-	m_spriteMouseover.setSlicing(21, 21, 22, 22);
+	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_LIGHT_PURPLE, box.width, box.height);
+	m_backLayerOffset = sf::Vector2f(0, 2);
+	m_backLayer.setPosition(m_positionDefault + m_backLayerOffset);
 
-	m_sprite.setPosition(box.left, box.top);
-	m_spritePressed.setPosition(box.left, box.top);
-	m_spriteMouseover.setPosition(box.left, box.top);
+	if (style == ButtonOrnamentStyle::NONE) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), CENDRIC_COLOR_WHITE, box.width, box.height);
+	}
+	else if (style == ButtonOrnamentStyle::SMALL) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), CENDRIC_COLOR_WHITE, box.width, box.height);
+	}
+	else if (style == ButtonOrnamentStyle::MEDIUM) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), CENDRIC_COLOR_WHITE, box.width, box.height);
+	}
+	else if (style == ButtonOrnamentStyle::LARGE) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), CENDRIC_COLOR_WHITE, box.width, box.height);
+	}
 
-	m_state = ButtonState::DEFAULT;
+	m_ornamentLayer.setPosition(m_positionDefault);
 }
 
 void Button::load() 
@@ -35,7 +44,8 @@ void Button::onLeftClick()
 	{
 		m_isClicked = true;
 		m_isPressed = false;
-		m_state = ButtonState::PRESSED;
+		m_mainLayer.move(0, 1);
+		m_mainLayer.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
 	}
 }
 
@@ -44,7 +54,8 @@ void Button::onLeftJustPressed()
 	if (m_isEnabled)
 	{
 		m_isPressed = true;
-		m_state = ButtonState::PRESSED;
+		m_mainLayer.move(0, 1);
+		m_mainLayer.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
 	}
 }
 
@@ -52,22 +63,18 @@ void Button::onMouseOver()
 {
 	if (m_isEnabled && !m_isPressed)
 	{
-		m_state = ButtonState::MOUSEOVER;
+		m_mainLayer.setColor(CENDRIC_COLOR_PURPLE);
 	}
 }
 
 void Button::render(sf::RenderTarget& renderTarget)
 {
-	if (m_state == ButtonState::DEFAULT) {
-		renderTarget.draw(m_sprite);
-	}
-	else if (m_state == ButtonState::MOUSEOVER) {
-		renderTarget.draw(m_spriteMouseover);
-	}
-	else if (m_state == ButtonState::PRESSED) {
-		renderTarget.draw(m_spritePressed);
-	}
+	m_ornamentLayer.setPosition(m_mainLayer.getPosition());
+	m_text.setPosition(m_mainLayer.getPosition() + m_textOffset);
 	
+	renderTarget.draw(m_backLayer);
+	renderTarget.draw(m_mainLayer);
+	renderTarget.draw(m_ornamentLayer);
 	renderTarget.draw(m_text);
 }
 
@@ -77,7 +84,8 @@ void Button::update(const sf::Time& frameTime)
 	if (!g_inputController->isMouseOver(getBoundingBox()))
 	{
 		m_isPressed = false;
-		m_state = ButtonState::DEFAULT;
+		m_mainLayer.setPosition(m_positionDefault);
+		m_mainLayer.setColor(CENDRIC_COLOR_BLACK);
 	}
 	GameObject::update(frameTime);
 }
@@ -93,7 +101,7 @@ void Button::setText(const std::string& text, const sf::Color& color, int charSi
 	// calculate position
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
 	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f , 0.f);
-	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
+	m_textOffset = sf::Vector2f(xOffset, yOffset);
 }
 
 void Button::setText(const std::string& text)
@@ -117,7 +125,7 @@ void Button::setTextRaw(const std::string& text, const sf::Color& color, int cha
 	// calculate position
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
 	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
-	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
+	m_textOffset = sf::Vector2f(xOffset, yOffset);
 }
 
 void Button::setTextRaw(const std::string& text, int charSize)
@@ -135,7 +143,7 @@ void Button::setCharacterSize(int size)
 	m_text.setCharacterSize(size);
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
 	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
-	m_text.setPosition(sf::Vector2f(xOffset, yOffset) + getPosition());
+	m_textOffset = sf::Vector2f(xOffset, yOffset);
 }
 
 void Button::setTextColor(const sf::Color& color)
