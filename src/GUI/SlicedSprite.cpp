@@ -13,7 +13,7 @@ SlicedSprite::SlicedSprite()
 	m_color = sf::Color::White;
 }
 
-SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, int width, int height)
+SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height)
 {
 	m_texture = tex;
 	m_width = width;
@@ -28,15 +28,15 @@ SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, int width, 
 	// For default behaviour, assume symmetric slicing
 	int texWidth = tex->getSize().x;
 	int texHeight = tex->getSize().y;
-	m_leftSlice = std::floor(texWidth / 2);
+	m_leftSlice = static_cast<float>(std::floor(texWidth / 2));
 	m_rightSlice = m_leftSlice;
-	m_topSlice = std::floor(texHeight / 2);
+	m_topSlice = static_cast<float>(std::floor(texHeight / 2));
 	m_bottomSlice = m_topSlice;
 
 	init();
 }
 
-void SlicedSprite::setSize(int width, int height)
+void SlicedSprite::setSize(float width, float height)
 {
 	m_width = width;
 	m_height = height;
@@ -51,12 +51,12 @@ void SlicedSprite::setColor(sf::Color &color)
 {
 	m_color = color;
 
-	for (int i = 0; i < m_vertices.getVertexCount(); ++i) {
+	for (unsigned int i = 0; i < m_vertices.getVertexCount(); ++i) {
 		m_vertices[i].color = m_color;
 	}
 }
 
-void SlicedSprite::setSlicing(int left, int right, int top, int bottom)
+void SlicedSprite::setSlicing(float left, float right, float top, float bottom)
 {
 	m_leftSlice = left;
 	m_rightSlice = right;
@@ -86,17 +86,17 @@ void SlicedSprite::init()
 		return;
 	}
 
-	int horizontal = m_width - m_leftSlice - m_rightSlice;
-	int vertical = m_height - m_topSlice - m_bottomSlice;
+	float horizontal = m_width - m_leftSlice - m_rightSlice;
+	float vertical = m_height - m_topSlice - m_bottomSlice;
 
-	int texWidth = m_texture->getSize().x;
-	int texHeight = m_texture->getSize().y;
+	float texWidth = static_cast<float>(m_texture->getSize().x);
+	float texHeight = static_cast<float>(m_texture->getSize().y);
 
-	int x[4] = { 0, m_leftSlice, m_width - m_rightSlice, m_width };
-	int y[4] = { 0, m_topSlice, m_height - m_bottomSlice, m_height };
+	float x[4] = { 0.f, m_leftSlice, m_width - m_rightSlice, m_width };
+	float y[4] = { 0.f, m_topSlice, m_height - m_bottomSlice, m_height };
 
-	int u[4] = { 0, m_leftSlice, texWidth - m_rightSlice, texWidth };
-	int v[4] = { 0, m_topSlice, texHeight - m_bottomSlice, texHeight };
+	float u[4] = { 0.f, m_leftSlice, texWidth - m_rightSlice, texWidth };
+	float v[4] = { 0.f, m_topSlice, texHeight - m_bottomSlice, texHeight };
 
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {

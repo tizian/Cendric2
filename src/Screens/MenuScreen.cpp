@@ -14,6 +14,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		m_yesOrNoForm->setDisposed();
 		m_yesOrNoForm = nullptr;
 		delete m_newCharacterCore;
+		m_newCharacterCore = nullptr;
 		setAllButtonsEnabled(true);
 	}
 	else if (m_yesOrNoForm != nullptr && m_yesOrNoForm->isYesClicked())
