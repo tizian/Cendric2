@@ -2,29 +2,6 @@
 
 using namespace std;
 
-YesOrNoForm::YesOrNoForm(const sf::FloatRect& box, const sf::Color& pressedColor, const sf::Color& mousoverColor, const sf::Color& releasedColor) 
-{
-	float buttonHeight = 40.f;
-	float buttonGap = 20.f;
-	float buttonWidth = (box.width - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;
-	
-	m_yesButton = new Button(sf::FloatRect(box.left + DIST_FROM_BORDER, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight), pressedColor, mousoverColor, releasedColor);
-	m_noButton = new Button(sf::FloatRect(box.left + buttonGap + DIST_FROM_BORDER + buttonWidth, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight), pressedColor, mousoverColor, releasedColor);
-
-	m_yesButton->setText("Yes");
-	m_noButton->setText("No");
-
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(box);
-	setPosition(sf::Vector2f(box.left, box.top));
-
-	m_shape = sf::RectangleShape(sf::Vector2f(box.width, box.height));
-	m_shape.setPosition(box.left, box.top);
-
-	m_shape.setOutlineThickness(2.f);
-	m_shape.setFillColor(releasedColor);
-	m_shape.setOutlineColor(mousoverColor);
-}
 
 YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) 
 {

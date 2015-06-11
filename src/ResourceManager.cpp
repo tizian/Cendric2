@@ -57,7 +57,12 @@ void ResourceManager::init()
 		{ ResourceID::Texture_head_wizardhat_grey, "res/assets/equipment/head/spritesheet_head_wizardhat_grey.png" },
 		{ ResourceID::Texture_head_wizardhat_blue, "res/assets/equipment/head/spritesheet_head_wizardhat_blue.png" },
 		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" },
-		{ ResourceID::Texture_weapon_rustysword, "res/assets/equipment/weapon/spritesheet_weapon_rustysword.png" }
+		{ ResourceID::Texture_weapon_rustysword, "res/assets/equipment/weapon/spritesheet_weapon_rustysword.png" },
+		{ ResourceID::Texture_GUI_button_sliced, "res/assets/gui/button_sliced.png" },
+		{ ResourceID::Texture_GUI_button_sliced_pressed, "res/assets/gui/button_sliced_pressed.png" },
+		{ ResourceID::Texture_GUI_button_sliced_mouseover, "res/assets/gui/button_sliced_mouseover.png" }
+
+		
 	});
 
 	// font should be always loaded to avoid lags when loading later

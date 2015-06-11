@@ -9,34 +9,19 @@ Button::Button(const sf::FloatRect& box)
 	setBoundingBox(box);
 	setPosition(sf::Vector2f(box.left, box.top));
 
-	m_shape = sf::RectangleShape(sf::Vector2f(box.width, box.height));
-	m_shape.setPosition(box.left, box.top);
+	m_sprite = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_button_sliced), box.width, box.height);
+	m_spritePressed = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_button_sliced_pressed), box.width, box.height);
+	m_spriteMouseover = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_button_sliced_mouseover), box.width, box.height);
 
-	m_shape.setOutlineThickness(2.f);
-	m_shape.setFillColor(CENDRIC_COLOR_BLACK);
-	m_shape.setOutlineColor(CENDRIC_COLOR_PURPLE);
+	m_sprite.setSlicing(21, 21, 22, 22);
+	m_spritePressed.setSlicing(21, 21, 22, 22);
+	m_spriteMouseover.setSlicing(21, 21, 22, 22);
 
-	m_pressedColor = CENDRIC_COLOR_LIGHT_PURPLE;
-	m_mousoverColor = CENDRIC_COLOR_PURPLE;
-	m_releasedColor = CENDRIC_COLOR_BLACK;
-}
+	m_sprite.setPosition(box.left, box.top);
+	m_spritePressed.setPosition(box.left, box.top);
+	m_spriteMouseover.setPosition(box.left, box.top);
 
-Button::Button(const sf::FloatRect& box, const sf::Color& pressedColor, const sf::Color& mousoverColor, const sf::Color& releasedColor)
-{
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(box);
-	setPosition(sf::Vector2f(box.left, box.top));
-	
-	m_shape = sf::RectangleShape(sf::Vector2f(box.width, box.height));
-	m_shape.setPosition(box.left, box.top);
-	
-	m_shape.setOutlineThickness(2.f);
-	m_shape.setFillColor(releasedColor);
-	m_shape.setOutlineColor(mousoverColor);
-
-	m_pressedColor = pressedColor;
-	m_mousoverColor = mousoverColor;
-	m_releasedColor = releasedColor;
+	m_state = ButtonState::DEFAULT;
 }
 
 void Button::load() 
@@ -50,8 +35,7 @@ void Button::onLeftClick()
 	{
 		m_isClicked = true;
 		m_isPressed = false;
-		m_shape.setFillColor(m_isEnabled ? m_releasedColor : sf::Color(m_releasedColor.r, m_releasedColor.g, m_releasedColor.b, 100));
-		m_shape.setOutlineColor(m_isEnabled ? m_mousoverColor : sf::Color(m_mousoverColor.r, m_mousoverColor.g, m_mousoverColor.b, 100));
+		m_state = ButtonState::PRESSED;
 	}
 }
 
@@ -60,8 +44,7 @@ void Button::onLeftJustPressed()
 	if (m_isEnabled)
 	{
 		m_isPressed = true;
-		m_shape.setFillColor(m_pressedColor);
-		m_shape.setOutlineColor(m_mousoverColor);
+		m_state = ButtonState::PRESSED;
 	}
 }
 
@@ -69,14 +52,22 @@ void Button::onMouseOver()
 {
 	if (m_isEnabled && !m_isPressed)
 	{
-		m_shape.setFillColor(m_mousoverColor);
-		m_shape.setOutlineColor(m_releasedColor);
+		m_state = ButtonState::MOUSEOVER;
 	}
 }
 
 void Button::render(sf::RenderTarget& renderTarget)
 {
-	renderTarget.draw(m_shape);
+	if (m_state == ButtonState::DEFAULT) {
+		renderTarget.draw(m_sprite);
+	}
+	else if (m_state == ButtonState::MOUSEOVER) {
+		renderTarget.draw(m_spriteMouseover);
+	}
+	else if (m_state == ButtonState::PRESSED) {
+		renderTarget.draw(m_spritePressed);
+	}
+	
 	renderTarget.draw(m_text);
 }
 
@@ -86,8 +77,7 @@ void Button::update(const sf::Time& frameTime)
 	if (!g_inputController->isMouseOver(getBoundingBox()))
 	{
 		m_isPressed = false;
-		m_shape.setFillColor(m_isEnabled ? m_releasedColor : sf::Color(m_releasedColor.r, m_releasedColor.g, m_releasedColor.b, 100));
-		m_shape.setOutlineColor(m_isEnabled ? m_mousoverColor : sf::Color(m_mousoverColor.r, m_mousoverColor.g, m_mousoverColor.b, 100));
+		m_state = ButtonState::DEFAULT;
 	}
 	GameObject::update(frameTime);
 }

@@ -32,4 +32,7 @@ enum class ResourceID
 	Texture_enemy_firerat,
 	Texture_levelitems,
 	Texture_items,
+	Texture_GUI_button_sliced,
+	Texture_GUI_button_sliced_pressed,
+	Texture_GUI_button_sliced_mouseover,
 };

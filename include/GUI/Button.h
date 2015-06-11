@@ -6,8 +6,15 @@
 #include "ResourceManager.h"
 
 #include "GUI/BitmapText.h"
+#include "GUI/SlicedSprite.h"
 
-// An ugly button to click
+enum class ButtonState {
+	DEFAULT,
+	MOUSEOVER,
+	PRESSED,
+};
+
+// A not so ugly button to click
 class Button : public GameObject
 {
 public:
@@ -44,10 +51,10 @@ private:
 	bool m_isClicked = false;
 	bool m_isEnabled = true;
 
-	sf::Color m_pressedColor;
-	sf::Color m_mousoverColor;
-	sf::Color m_releasedColor;
+	ButtonState m_state;
 
-	sf::RectangleShape m_shape;
+	SlicedSprite m_sprite;
+	SlicedSprite m_spritePressed;
+	SlicedSprite m_spriteMouseover;
 	BitmapText m_text;
 };
