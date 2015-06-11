@@ -27,7 +27,6 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 
 		m_selectedLanguage = Language::Lang_EN;
 		refreshLanguageText();
-
 	}
 	else if (m_germanButton->isClicked())
 	{
@@ -88,25 +87,25 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	// language
 	m_selectedLanguage = g_resourceManager->getConfiguration().language;
 	m_languageText = new BitmapText();
-	m_languageText->setCharacterSize(12);
+	m_languageText->setCharacterSize(16);
 	m_languageText->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	refreshLanguageText();
 
 	distFromTop = distFromTop + 30;
-	m_englishButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 100, 30));
-	m_englishButton->setText("English", 12);
+	m_englishButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 130, 50));
+	m_englishButton->setText("English", 16);
 	addObject(GameObjectType::_Button, m_englishButton);
-	m_germanButton = new Button(sf::FloatRect(distFromLeft + 110, distFromTop, 100, 30));
-	m_germanButton->setText("German", 12);
+	m_germanButton = new Button(sf::FloatRect(distFromLeft + 140, distFromTop, 130, 50));
+	m_germanButton->setText("German", 16);
 	addObject(GameObjectType::_Button, m_germanButton);
-	m_swissButton = new Button(sf::FloatRect(distFromLeft + 220, distFromTop, 200, 30));
-	m_swissButton->setText("SwissGerman", 12);
+	m_swissButton = new Button(sf::FloatRect(distFromLeft + 280, distFromTop, 240, 50));
+	m_swissButton->setText("SwissGerman", 16);
 	addObject(GameObjectType::_Button, m_swissButton);
 
-	distFromTop = distFromTop + 80;
+	distFromTop = distFromTop + 100;
 	// sound
 	m_sound = new BitmapText();
-	m_sound->setCharacterSize(12);
+	m_sound->setCharacterSize(16);
 	m_sound->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	m_selectedSoundOn = g_resourceManager->getConfiguration().isSoundOn;
 	refreshSoundText();
@@ -115,24 +114,24 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	volumeText.append(to_wstring(g_resourceManager->getConfiguration().volume));
 	volumeText.append(L"%");
 	m_volume = new BitmapText(volumeText);
-	m_volume->setCharacterSize(12);
-	m_volume->setPosition(sf::Vector2f(distFromLeft + 150, distFromTop));
+	m_volume->setCharacterSize(16);
+	m_volume->setPosition(sf::Vector2f(distFromLeft + 180, distFromTop));
 
 	distFromTop = distFromTop + 30;
-	m_soundOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 60, 30));
-	m_soundOnButton->setText("On", 12);
+	m_soundOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
+	m_soundOnButton->setText("On", 16);
 	addObject(GameObjectType::_Button, m_soundOnButton);
-	m_soundOffButton = new Button(sf::FloatRect(distFromLeft + 70, distFromTop, 60, 30));
-	m_soundOffButton->setText("Off", 12);
+	m_soundOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
+	m_soundOffButton->setText("Off", 16);
 	addObject(GameObjectType::_Button, m_soundOffButton);
 
 
-	distFromTop = distFromTop + 80;
+	distFromTop = distFromTop + 100;
 	// fps
 	wstring fpsText = g_textProvider->getText("MaxFPS") + L": ";
 	fpsText.append(to_wstring(g_resourceManager->getConfiguration().maxFrameRate));
 	m_fps = new BitmapText(fpsText);
-	m_fps->setCharacterSize(12);
+	m_fps->setCharacterSize(16);
 	m_fps->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 
 	// keyboard mappings
@@ -149,11 +148,11 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	}
 
 	// back
-	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 40));
+	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
 	m_backButton->setText("Back");
 	addObject(GameObjectType::_Button, m_backButton);
 	// apply
-	m_applyButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 40));
+	m_applyButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 50));
 	m_applyButton->setText("Apply");
 	addObject(GameObjectType::_Button, m_applyButton);
 }
