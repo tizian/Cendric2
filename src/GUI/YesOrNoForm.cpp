@@ -5,7 +5,7 @@ using namespace std;
 
 YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) 
 {
-	float buttonHeight = 40.f;
+	float buttonHeight = 50.f;
 	float buttonGap = 20.f;
 	float buttonWidth = (box.width - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;
 

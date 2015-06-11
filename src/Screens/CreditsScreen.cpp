@@ -44,7 +44,7 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen)
 	m_credits->setPosition(sf::Vector2f((WINDOW_WIDTH - creditsWidth) / 2.f, 150.f));
 
 	// add buttons
-	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 40));
+	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
 	m_backButton->setText("Back");
 	addObject(GameObjectType::_Button, m_backButton);
 }
