@@ -30,6 +30,7 @@ bool Map::load(MapID id)
 	m_backgroundTileMap.load(data.tileSetPath, data.tileSize, data.backgroundLayers, data.mapSize.x, data.mapSize.y);
 	m_foregroundTileMap.load(data.tileSetPath, data.tileSize, data.foregroundLayers, data.mapSize.x, data.mapSize.y);
 	m_collidableTiles = data.collidableTileRects;
+	m_levelEntries = data.levelEntries;
 	m_mapRect = data.mapRect;
 	m_id = id;
 	return true;
@@ -164,15 +165,15 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 
 LevelID Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 {
-	
-	if (boundingBox.contains(sf::Vector2f(50*1, 50*32)))
+	for (auto it : m_levelEntries)
 	{
-		return LevelID::Testlevel;
+		if (boundingBox.intersects(it.first))
+		{
+			return it.second;
+		}
 	}
-	else 
-	{
-		return LevelID::Void;
-	}
+
+	return LevelID::Void;
 }
 
 MapID Map::getID() const

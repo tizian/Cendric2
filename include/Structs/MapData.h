@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <Enums/LevelID.h>
 
 struct MapData
 {
@@ -14,5 +15,6 @@ struct MapData
 	std::vector<std::vector<int>> foregroundLayers;
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTileRects;
+	std::vector<std::pair<sf::FloatRect, LevelID>> levelEntries;
 	sf::FloatRect mapRect;
 };

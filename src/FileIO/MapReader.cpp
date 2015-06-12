@@ -60,6 +60,23 @@ bool MapReader::checkData(MapData& data) const
 			return false;
 		}
 	}
+	for (auto it : data.levelEntries)
+	{
+		for (auto it2 : data.levelEntries)
+		{
+			if (it != it2 && it.first.intersects(it2.first))
+			{
+				g_logger->logError("MapReader", "Error in map data : there are at least two level entries with intersection.");
+				return false;
+			}
+		}
+
+		if (it.first.left < 0.0 || it.first.top < 0.0 || it.first.left >= data.mapSize.x || it.first.top >= data.mapSize.y)
+		{
+			g_logger->logError("MapReader", "Error in map data : a level entry rect is out of range for this map.");
+			return false;
+		}
+	}
 	if (data.collidableTiles.empty())
 	{
 		g_logger->logError("MapReader", "Error in map data : collidable layer is empty");
@@ -92,10 +109,10 @@ bool MapReader::readMapName(char* start, char* end, MapData& data) const
 bool MapReader::readTilesetPath(char* start, char* end, MapData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	string path(startData);
-	int count = countToNextChar(startData, end, '"');
+	int count = countToNextChar(startData, end, '\n');
 	if (count == -1) {
 		return false;
 	}
@@ -104,10 +121,45 @@ bool MapReader::readTilesetPath(char* start, char* end, MapData& data) const
 	return true;
 }
 
+bool MapReader::readLevelEntry(char* start, char* end, MapData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	LevelID id = static_cast<LevelID>(atoi(startData));
+	if (id <= LevelID::Void || id >= LevelID::MAX)
+	{
+		g_logger->logError("MapReader", "Could not read level entry : level ID not recognized.");
+		return false;
+	}
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float left = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float top = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float width = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float height = static_cast<float>(atof(startData));
+
+	if (width <= 0.0 || height <= 0.0)
+	{
+		g_logger->logError("MapReader", "Could not read level entry : level entry rect has a volume thats negative or null.");
+		return false;
+	}
+
+	data.levelEntries.push_back(pair<sf::FloatRect, LevelID>(sf::FloatRect(left, top, width, height), id));
+
+	return true;
+}
+
 bool MapReader::readMapSize(char* start, char* end, MapData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int width = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
@@ -120,7 +172,7 @@ bool MapReader::readMapSize(char* start, char* end, MapData& data) const
 bool MapReader::readTileSize(char* start, char* end, MapData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int width = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
@@ -210,7 +262,7 @@ bool MapReader::readLayerCollidable(char* start, char* end, MapData& data) const
 bool MapReader::readStartPos(char* start, char* end, MapData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	float x = static_cast<float>(atof(startData));
 	startData = gotoNextChar(startData, end, ',');
@@ -256,7 +308,7 @@ bool MapReader::readMap(char* fileName, MapData& data)
 	// read defined tags
 	while (pos < end)
 	{
-		if (*pos == COMMENT_MARKER)
+		if (*pos == COMMENT_MARKER || *pos == '\n')
 		{
 			pos = gotoNextChar(pos, end, '\n');
 		}
@@ -279,6 +331,11 @@ bool MapReader::readMap(char* fileName, MapData& data)
 		else if (strncmp(pos, TILESET_PATH, strlen(TILESET_PATH)) == 0) {
 			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(TILESET_PATH));
 			noError = readTilesetPath(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, LEVEL_ENTRY, strlen(LEVEL_ENTRY)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LEVEL_ENTRY));
+			noError = readLevelEntry(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_COLLIDABLE, strlen(LAYER_COLLIDABLE)) == 0) {
@@ -358,6 +415,19 @@ void MapReader::updateData(MapData& data) const
 		{
 			x++;
 		}
+	}
+
+	// calculate level entries
+	std::vector<std::pair<sf::FloatRect, LevelID>> oldLevelEntries = data.levelEntries;
+	data.levelEntries.clear();
+	sf::FloatRect newRect;
+	for (auto it : oldLevelEntries) {
+		newRect = sf::FloatRect(
+			it.first.left * data.tileSize.x, 
+			it.first.top * data.tileSize.y, 
+			it.first.width * data.tileSize.x, 
+			it.first.height * data.tileSize.y);
+		data.levelEntries.push_back(std::pair<sf::FloatRect, LevelID>(newRect, it.second));
 	}
 
 	// calculate map rect
