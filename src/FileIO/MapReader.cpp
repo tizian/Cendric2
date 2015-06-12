@@ -38,12 +38,12 @@ bool MapReader::checkData(MapData& data) const
 	{
 		if (data.backgroundLayers[i].empty())
 		{
-			g_logger->logError("MapReader", "Error in map data : background layer " + i + std::string(" empty"));
+			g_logger->logError("MapReader", "Error in map data : background layer " + std::to_string(i) + std::string(" empty"));
 			return false;
 		}
 		if (data.backgroundLayers[i].size() != data.mapSize.x * data.mapSize.y)
 		{
-			g_logger->logError("MapReader", "Error in map data : background layer " + i + std::string(" has not correct size (map size)"));
+			g_logger->logError("MapReader", "Error in map data : background layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}
@@ -51,12 +51,12 @@ bool MapReader::checkData(MapData& data) const
 	{
 		if (data.foregroundLayers[i].empty())
 		{
-			g_logger->logError("MapReader", "Error in map data : foreground layer " + i + std::string(" empty"));
+			g_logger->logError("MapReader", "Error in map data : foreground layer " + std::to_string(i) + std::string(" empty"));
 			return false;
 		}
 		if (data.foregroundLayers[i].size() != data.mapSize.x * data.mapSize.y)
 		{
-			g_logger->logError("MapReader", "Error in map data : foreground layer " + i + std::string(" has not correct size (map size)"));
+			g_logger->logError("MapReader", "Error in map data : foreground layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}

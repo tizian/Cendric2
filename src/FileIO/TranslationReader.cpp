@@ -35,7 +35,7 @@ bool TranslationReader::readTranslations(Language lang, std::map<std::string, st
 		wstring value = it[static_cast<int>(lang)];
 		if (key.empty() || value.empty())
 		{
-			g_logger->logError("TranslationReader", "Could not get translation for line: " + lineNr);
+			g_logger->logError("TranslationReader", "Could not get translation for line: " + std::to_string(lineNr));
 			return false;
 		}
 		if (translationMap.find(key) != translationMap.end())

@@ -77,7 +77,7 @@ bool ConfigurationReader::checkConfigurationData(ConfigurationData& data) const
 		// insert.second will be false if the value is already in the set
 		if (!values.insert(it->second).second)
 		{
-			g_logger->logError("ConfigurationReader", "Inconsistent key map, a keyboard value appears twice for different keys. Key: " + it->second);
+            g_logger->logError("ConfigurationReader", "Inconsistent key map, a keyboard value appears twice for different keys. Key: " + std::to_string(it->second));
 			return false;
 		}
 	}
