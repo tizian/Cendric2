@@ -3,7 +3,6 @@
 #include "ResourceManager.h"
 
 const char FIRST_CHAR = ' ';
-const char LAST_CHAR = 'ÿ';
 
 const int NUM_GLYPHS_U = 16;
 const int NUM_GLYPHS_V = 14;
@@ -149,7 +148,7 @@ void BitmapText::init()
 			continue;
 		}
 
-		if (c < FIRST_CHAR || c > LAST_CHAR)
+		if (c < FIRST_CHAR)
 		{
 			c = '?';
 		}

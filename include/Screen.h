@@ -16,6 +16,7 @@ class Screen
 {
 public:
 	Screen(CharacterCore* core);
+    virtual ~Screen() {}
 
 	virtual Screen* update(const sf::Time& frameTime) = 0;
 	virtual void render(sf::RenderTarget& renderTarget) = 0;

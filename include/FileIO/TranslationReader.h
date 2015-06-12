@@ -24,7 +24,7 @@ public:
 	bool readTranslations(Language lang, std::map<std::string, std::wstring>& translationMap) const;
 
 private: 
-	void parseCsv(const wchar_t *csvData, StringTable& table) const;
-	const wchar_t* nextCsvField(const wchar_t *p, bool *newline, const wchar_t **escapedEnd) const;
+	void parseCsv(wchar_t *csvData, StringTable& table) const;
+	wchar_t* nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd) const;
 	
 };

@@ -47,7 +47,7 @@ void SlicedSprite::setTexture(sf::Texture *texture)
 	m_texture = texture;
 }
 
-void SlicedSprite::setColor(sf::Color &color)
+void SlicedSprite::setColor(const sf::Color &color)
 {
 	m_color = color;
 
@@ -85,9 +85,6 @@ void SlicedSprite::init()
 		g_logger->logError("SlicedSprite::init()", "Slicing doesn't agree with width and height!");
 		return;
 	}
-
-	float horizontal = m_width - m_leftSlice - m_rightSlice;
-	float vertical = m_height - m_topSlice - m_bottomSlice;
 
 	float texWidth = static_cast<float>(m_texture->getSize().x);
 	float texHeight = static_cast<float>(m_texture->getSize().y);

@@ -11,7 +11,7 @@ class FireRatEnemy : public Enemy
 {
 public:
 	FireRatEnemy(Level* level, LevelMainCharacter* mainChar);
-	~FireRatEnemy();
+    virtual ~FireRatEnemy() {}
 
 	void load() override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;

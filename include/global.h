@@ -5,6 +5,7 @@
 
 // std library
 #include <iostream>
+#include <cmath>
 
 #define PI_F 3.14159265358979f
 #define DEG_TO_RAD 57.2957795f

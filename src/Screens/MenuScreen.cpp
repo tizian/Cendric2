@@ -57,14 +57,14 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_loadGameButton->isClicked())
 	{
-		// TODO the .sav files should be loaded in another screen. 
-		char* saveFilename = "saves/testsave.sav";
+		// TODO the .sav files should be loaded in another screen.
+        std::string saveFilename = "saves/testsave.sav";
 		// TODO check if character core is set and ask if it should be overwritten
 		if (m_characterCore == nullptr)
 		{
 			// we start a new game with an empty character core
 			m_characterCore = new CharacterCore();
-			if (!(m_characterCore->load(saveFilename)))
+			if (!(m_characterCore->load(saveFilename.c_str())))
 			{
 				string errormsg = string(saveFilename) + ": save file corrupted!";
 				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
@@ -74,7 +74,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		else 
 		{
 			m_newCharacterCore = new CharacterCore();
-			if (!(m_newCharacterCore->load(saveFilename)))
+			if (!(m_newCharacterCore->load(saveFilename.c_str())))
 			{
 				string errormsg = string(saveFilename) + ": save file corrupted!";
 				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
@@ -88,8 +88,8 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	else if (m_saveGameButton->isClicked())
 	{
 		// TODO hardcoded menu .sav file 
-		char* saveFilename = "saves/menusave.sav";
-		m_characterCore->save(saveFilename);
+        std::string saveFilename = "saves/menusave.sav";
+		m_characterCore->save(saveFilename.c_str());
 		setTooltipText(L"Saved file to: saves/menusave.sav", sf::Vector2f(10.f, 10.f), sf::Color::White, true);
 	}
 	else if (m_optionsButton->isClicked())

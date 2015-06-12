@@ -53,7 +53,7 @@ std::string CharacterCoreWriter::writePlayerName(const CharacterCoreData& data) 
 std::string CharacterCoreWriter::writeTimePlayed(const CharacterCoreData& data) const
 {
 	string timePlayed = "# time played, in seconds\n";
-	return timePlayed.append(string(TIME_PLAYED) + ":" + to_string(static_cast<int>(floor(data.timePlayed.asSeconds()))) + "\n");
+    return timePlayed.append(string(TIME_PLAYED) + ":" + to_string(static_cast<int>(std::floor(data.timePlayed.asSeconds()))) + "\n");
 }
 
 std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const

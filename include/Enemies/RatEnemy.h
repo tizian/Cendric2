@@ -11,7 +11,7 @@ class RatEnemy : public Enemy
 {
 public:
 	RatEnemy(Level* level, LevelMainCharacter* mainChar);
-	~RatEnemy();
+    virtual ~RatEnemy() {}
 
 	void load() override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;

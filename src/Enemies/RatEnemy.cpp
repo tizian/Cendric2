@@ -45,12 +45,12 @@ void RatEnemy::handleInput()
 
 	if (distToMainChar() < 500.f)
 	{
-		if (m_mainChar->getCenter().x < getCenter().x && abs(m_mainChar->getCenter().x - getCenter().x) > 5)
+        if (m_mainChar->getCenter().x < getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > 5)
 		{
 			m_nextIsFacingRight = false;
 			newAccelerationX -= getConfiguredWalkAcceleration();
 		}
-		if (m_mainChar->getCenter().x > getCenter().x && abs(m_mainChar->getCenter().x - getCenter().x) > 5)
+		if (m_mainChar->getCenter().x > getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > 5)
 		{
 			m_nextIsFacingRight = true;
 			newAccelerationX += getConfiguredWalkAcceleration();

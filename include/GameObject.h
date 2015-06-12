@@ -16,6 +16,7 @@ class Screen;
 class GameObject 
 {
 public:
+    virtual ~GameObject() {}
 	// \brief loads animations using the resource manager
 	// also defines bounding box and sprite offset.
 	virtual void load() = 0;

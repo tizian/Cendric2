@@ -63,7 +63,7 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition)
 		m_isGrounded = true;
 	}
 
-	if (abs(getVelocity().y) > 0.0f)
+	if (std::abs(getVelocity().y) > 0.0f)
 	{
 		m_isGrounded = false;
 	}
@@ -91,7 +91,7 @@ void LevelMovableGameObject::updateAnimation()
 	{
 		newState = GameObjectState::Jumping;
 	}
-	else if (abs(getVelocity().x) > 20.0f)
+	else if (std::abs(getVelocity().x) > 20.0f)
 	{
 		newState = GameObjectState::Walking;
 	}

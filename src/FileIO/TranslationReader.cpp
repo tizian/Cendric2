@@ -21,7 +21,7 @@ bool TranslationReader::readTranslations(Language lang, std::map<std::string, st
 		return false;
 	}
 	StringTable tab;
-	parseCsv(contents.c_str(), tab);
+	parseCsv((wchar_t *)contents.c_str(), tab);
 	if (tab.size() == 0 || tab[0].size() < static_cast<int>(lang) + 1)
 	{
 		g_logger->logError("TranslationReader", "Error in translation file, incorrect number of columns or no rows");
@@ -52,7 +52,7 @@ bool TranslationReader::readTranslations(Language lang, std::map<std::string, st
 // last field in the CSV p is the start position of the field sep is the
 // separator used, i.e. comma or semicolon newline says whether the field ends
 // with a newline or with a comma
-const wchar_t* TranslationReader::nextCsvField(const wchar_t *p, bool *newline, const wchar_t **escapedEnd) const
+wchar_t* TranslationReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd) const
 {
 	*escapedEnd = nullptr;
 	*newline = false;
@@ -100,7 +100,7 @@ const wchar_t* TranslationReader::nextCsvField(const wchar_t *p, bool *newline, 
 
 // Parses the CSV data and constructs a StringTable
 // from the fields in it.
-void TranslationReader::parseCsv(const wchar_t *csvData, StringTable& table) const
+void TranslationReader::parseCsv(wchar_t *csvData, StringTable& table) const
 {
 	table.clear();
 
@@ -116,8 +116,8 @@ void TranslationReader::parseCsv(const wchar_t *csvData, StringTable& table) con
 	while (csvData) {
 		// Call nextCsvField.
 		bool newline;
-		const wchar_t *escapedEnd;
-		const wchar_t *next = nextCsvField(csvData, &newline, &escapedEnd);
+		wchar_t *escapedEnd;
+		wchar_t *next = nextCsvField(csvData, &newline, &escapedEnd);
 
 		// Add new field to the current row.
 		table.back().resize(table.back().size() + 1);

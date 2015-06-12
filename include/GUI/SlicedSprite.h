@@ -12,7 +12,7 @@ public:
 
 	void setSize(float width, float height);
 	void setTexture(sf::Texture *texture);
-	void setColor(sf::Color &color);
+	void setColor(const sf::Color &color);
 
 	void setSlicing(float left, float right, float top, float bottom);
 

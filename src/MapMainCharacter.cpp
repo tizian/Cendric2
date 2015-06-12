@@ -53,19 +53,19 @@ void MapMainCharacter::updateAnimation()
 	// calculate new game state and set animation.
 	GameObjectState newState = m_state;
 	// check if char walks up
-	if (getVelocity().y < 0.0f && (abs(getVelocity().x) < abs(getVelocity().y)))
+	if (getVelocity().y < 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y)))
 	{
 		newState = GameObjectState::Walking_up;
 	}
-	else if (getVelocity().y >= 0.0f && (abs(getVelocity().x) < abs(getVelocity().y)))
+	else if (getVelocity().y >= 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y)))
 	{
 		newState = GameObjectState::Walking_down;
 	}
-	else if (getVelocity().x < 0.0f && (abs(getVelocity().x) > abs(getVelocity().y)))
+	else if (getVelocity().x < 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y)))
 	{
 		newState = GameObjectState::Walking_left;
 	}
-	else if (getVelocity().x >= 0.0f && (abs(getVelocity().x) > abs(getVelocity().y)))
+	else if (getVelocity().x >= 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y)))
 	{
 		newState = GameObjectState::Walking_right;
 	}

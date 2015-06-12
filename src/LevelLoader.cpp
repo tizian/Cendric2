@@ -96,7 +96,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 
 	for (std::vector<std::pair<EnemyID, sf::Vector2f>>::iterator it = data.enemyPositions.begin(); it != data.enemyPositions.end(); ++it)
 	{
-		Enemy* enemy;
+		Enemy* enemy = nullptr;
 		std::map<ItemID, int> loot;
 		switch (it->first)
 		{
