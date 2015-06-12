@@ -22,6 +22,7 @@ private:
 	bool readStartPos(char* start, char* end, MapData& data) const;
 	bool readBackgroundLayerTiles(char* start, char* end, MapData& data) const;
 	bool readForegroundLayerTiles(char* start, char* end, MapData& data) const;
+	bool readLevelEntry(char* start, char* end, MapData& data) const;
 
 	// \brief check map bean for validity before loading the level
 	bool checkData(MapData& data) const;
@@ -33,6 +34,7 @@ private:
 	const char* MAP_SIZE = "map.size";
 	const char* MAP_TILESIZE = "map.tilesize";
 	const char* TILESET_PATH = "tileset.path";
+	const char* LEVEL_ENTRY = "level.entry";
 	const char* LAYER_COLLIDABLE = "layer.collidable";
 	const char* LAYER_TILES_BACKGROUND = "layer.tiles.background";
 	const char* LAYER_TILES_FOREGROUND = "layer.tiles.foreground";

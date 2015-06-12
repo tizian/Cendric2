@@ -44,6 +44,7 @@ private:
 	std::vector<std::vector<bool>> m_collidableTiles;
 	std::string m_name;
 	sf::Vector2f m_startPos;
+	std::vector<std::pair<sf::FloatRect, LevelID>> m_levelEntries;
 
 	MapID m_id;
 };
