@@ -111,7 +111,6 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			enemy->setLoot(loot, 2);
 			break;
 		case EnemyID::Void:
-			break;
 		default:
 			// unexpected error
 			g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");

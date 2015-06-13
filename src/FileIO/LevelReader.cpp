@@ -70,12 +70,12 @@ bool LevelReader::checkData(LevelData& data) const
 	{
 		if (data.layers[i].empty())
 		{
-			g_logger->logError("LevelReader", "Error in level data : layer " + i + std::string(" empty"));
+			g_logger->logError("LevelReader", "Error in level data : layer " + std::to_string(i) + std::string(" empty"));
 			return false;
 		}
 		if (data.layers[i].size() != data.mapSize.x * data.mapSize.y)
 		{
-			g_logger->logError("LevelReader", "Error in level data : layer " + i + std::string(" has not correct size (map size)"));
+			g_logger->logError("LevelReader", "Error in level data : layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}
@@ -256,7 +256,7 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 	int id = atoi(startData);
 	if (m_dynamicTileMap.find(id) == m_dynamicTileMap.end())
 	{
-		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + id);
+		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + std::to_string(id));
 		return false;
 	}
 	DynamicTileID dynamicTile = m_dynamicTileMap.at(id);
@@ -293,7 +293,7 @@ bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data) c
 		int id = atoi(startData);
 		if (m_levelItemMap.find(id) == m_levelItemMap.end())
 		{
-			g_logger->logError("LevelReader", "Level item ID not recognized: " + id);
+			g_logger->logError("LevelReader", "Level item ID not recognized: " + std::to_string(id));
 			return false;
 		}
 		levelItem = m_levelItemMap.at(id);
@@ -321,7 +321,7 @@ bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) cons
 		int id = atoi(startData);
 		if (m_enemyMap.find(id) == m_enemyMap.end())
 		{
-			g_logger->logError("LevelReader", "Enemy ID not recognized: " + id);
+			g_logger->logError("LevelReader", "Enemy ID not recognized: " + std::to_string(id));
 			return false;
 		}
 		enemy = m_enemyMap.at(id);

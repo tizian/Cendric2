@@ -108,7 +108,7 @@ bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& d
 	MapID id = static_cast<MapID>(atoi(startData));
 	if (id <= MapID::Void || id >= MapID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Map ID not recognized: " + static_cast<int>(id));
+		g_logger->logError("CharacterCoreReader", "Map ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
 	}
 	data.currentMap = id;
@@ -178,7 +178,7 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	ItemID id = static_cast<ItemID>(atoi(startData));
 	if (id <= ItemID::Void || id >= ItemID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + static_cast<int>(id));
+		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
 	}
 	startData = gotoNextChar(startData, end, ',');
@@ -196,7 +196,7 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 	ItemID item = static_cast<ItemID>(atoi(startData));
 	if (item < ItemID::Void || item >= ItemID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + static_cast<int>(item));
+		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + std::to_string(static_cast<int>(item)));
 		return false;
 	}
 
@@ -243,7 +243,7 @@ bool CharacterCoreReader::readLevelKilled(char* start, char* end, CharacterCoreD
 	LevelID id = static_cast<LevelID>(atoi(startData));
 	if (id <= LevelID::Void || id >= LevelID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + static_cast<int>(id));
+		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
 	}
 	startData++;
@@ -276,7 +276,7 @@ bool CharacterCoreReader::readLevelLooted(char* start, char* end, CharacterCoreD
 	LevelID id = static_cast<LevelID>(atoi(startData));
 	if (id <= LevelID::Void || id >= LevelID::MAX)
 	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + static_cast<int>(id));
+		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
 	}
 	startData++;

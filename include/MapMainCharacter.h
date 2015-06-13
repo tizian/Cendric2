@@ -27,8 +27,6 @@ public:
 
 private:
 	const float WALK_ACCELERATION = 1500.0f;
-	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
-	const float DAMPING_PER_S = 0.999f;
 	// handle input and calculate the next position
 	void handleInput();
 	// update animation based on the current velocity

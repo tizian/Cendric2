@@ -31,11 +31,8 @@ private:
 	sf::RectangleShape m_inventoryShape;
 	BitmapText m_inventoryText;
 	bool m_showInventory = false;
-	const float INVENTORY_HEIGHT = 500.f;
-	const float INVENTORY_WIDTH = 550.f;
 	const float INVENTORY_TOP = 50.f;
 	const float INVENTORY_LEFT = 50.f;
-	const float INVENTORY_OUTLINE_THICKNESS = 5.f;
 
 	// <<<< CHARCTER INFO >>>>
 	void initCharacterInfo();
