@@ -5,6 +5,7 @@ using namespace std;
 
 YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) 
 {
+	m_window = new Window(box, WindowOrnamentStyle::NONE);
 	float buttonHeight = 50.f;
 	float buttonGap = 20.f;
 	float buttonWidth = (box.width - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;
@@ -18,13 +19,6 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box)
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
 	setPosition(sf::Vector2f(box.left, box.top));
-
-	m_shape = sf::RectangleShape(sf::Vector2f(box.width, box.height));
-	m_shape.setPosition(box.left, box.top);
-
-	m_shape.setOutlineThickness(2.f);
-	m_shape.setFillColor(CENDRIC_COLOR_BLACK);
-	m_shape.setOutlineColor(CENDRIC_COLOR_PURPLE);
 }
 
 YesOrNoForm::~YesOrNoForm()
@@ -40,7 +34,7 @@ void YesOrNoForm::load()
 
 void YesOrNoForm::render(sf::RenderTarget& renderTarget)
 {
-	renderTarget.draw(m_shape);
+	m_window->render(renderTarget);
 	renderTarget.draw(m_message);
 
 	m_yesButton->render(renderTarget);
@@ -57,7 +51,7 @@ void YesOrNoForm::setMessage(const std::string& msg, const sf::Color& color)
 {
 	int characterSize = 16;
 	m_message = BitmapText(
-		g_textProvider->getCroppedText(msg, characterSize, static_cast<int>(m_shape.getSize().x - (2*DIST_FROM_BORDER))),
+		g_textProvider->getCroppedText(msg, characterSize, static_cast<int>(m_window->getSize().x - (2*DIST_FROM_BORDER))),
 		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
 
 	m_message.setColor(color);

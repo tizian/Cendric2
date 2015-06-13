@@ -10,6 +10,7 @@ enum GameObjectType
 	_MainCharacter,
 	_LevelEquipment, // includes everything cendric can wear
 	_Button, 
+	_Window,
 	_Form, // form buttons will be rendered / updated with their form and not in the "button" context
 	_Spell,
 	_DynamicTile,

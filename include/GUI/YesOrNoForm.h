@@ -5,6 +5,7 @@
 #include "TextProvider.h"
 #include "ResourceManager.h"
 #include "GUI/Button.h"
+#include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 
 // A form with two buttons on it, a Yes and a No button.
@@ -30,7 +31,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 private:
-	sf::RectangleShape m_shape;
+	Window* m_window;
 	BitmapText m_message;
 	Button* m_yesButton;
 	Button* m_noButton;
