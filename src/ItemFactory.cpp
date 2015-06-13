@@ -6,7 +6,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 	{
 	case ItemID::Equipment_head_wizardhat_blue:
 		bean.description = "ItemDescriptionWizardhat";
-		bean.name = "BlueWizardhat";
+		bean.name = "ItemNameBlueWizardhat";
 		bean.type = ItemType::Equipment_head;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_blue;
@@ -19,7 +19,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Equipment_head_wizardhat_grey:
 		bean.description = "ItemDescriptionWizardhat";
-		bean.name = "GreyWizardhat";
+		bean.name = "ItemNameGreyWizardhat";
 		bean.type = ItemType::Equipment_head;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_grey;
@@ -32,7 +32,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Equipment_weapon_staff_ice:
 		bean.description = "ItemDescriptionIcestaff";
-		bean.name = "Icestaff";
+		bean.name = "ItemNameIcestaff";
 		bean.type = ItemType::Equipment_weapon;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Weapon_icestaff;
@@ -45,7 +45,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Equipment_weapon_rustysword:
 		bean.description = "ItemDescriptionRustysword";
-		bean.name = "Rustysword";
+		bean.name = "ItemNameRustysword";
 		bean.type = ItemType::Equipment_weapon;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Weapon_rustysword;
@@ -54,7 +54,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Food_Cheese:
 		bean.description = "ItemDescriptionCheese";
-		bean.name = "Cheese";
+		bean.name = "ItemNameCheese";
 		bean.type = ItemType::Food;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -63,7 +63,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Food_Bread:
 		bean.description = "ItemDescriptionBread";
-		bean.name = "Bread";
+		bean.name = "ItemNameBread";
 		bean.type = ItemType::Food;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -72,7 +72,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		break;
 	case ItemID::Food_Water:
 		bean.description = "ItemDescriptionWater";
-		bean.name = "Water";
+		bean.name = "ItemNameWater";
 		bean.type = ItemType::Food;
 		bean.icon = ResourceID::Void; // TODO
 		bean.levelEquipment = LevelEquipmentID::Void;

@@ -65,63 +65,63 @@ void LevelInterface::updateCharacterInfo()
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo))
 	{
 		m_showCharacterInfo = !m_showCharacterInfo;
-	}
-	if (m_showCharacterInfo)
-	{
-		// update text
-		std::wstring infoText = L"";
-		infoText.append(g_textProvider->getText("CharacterInfo"));
-		infoText.append(L"\n\n");
-		// health
-		infoText.append(g_textProvider->getText("Health"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->currentHealthPoints));
-		infoText.append(L"/");
-		infoText.append(std::to_wstring(m_attributes->maxHealthPoints));
-		infoText.append(L"\n");
-		// mana
-		infoText.append(g_textProvider->getText("Mana"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->currentManaPoints));
-		infoText.append(L"/");
-		infoText.append(std::to_wstring(m_attributes->maxManaPoints));
-		infoText.append(L"\n");
-		// regeneration
-		infoText.append(g_textProvider->getText("HealthRegeneration"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->healthRegenerationPerS));
-		infoText.append(L"/s\n");
-		infoText.append(g_textProvider->getText("ManaRegeneration"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->manaRegenerationPerS));
-		infoText.append(L"/s\n");
-		// dmg 
-		infoText.append(g_textProvider->getText("PhysicalDamage"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->damagePhysical));
-		infoText.append(L"\n");
-		infoText.append(g_textProvider->getText("FireDamage"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->damageFire));
-		infoText.append(L"\n");
-		infoText.append(g_textProvider->getText("IceDamage"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->damageIce));
-		infoText.append(L"\n");
-		// resistance
-		infoText.append(g_textProvider->getText("Armor"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->resistancePhysical));
-		infoText.append(L"\n");
-		infoText.append(g_textProvider->getText("FireResistance"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->resistanceFire));
-		infoText.append(L"\n");
-		infoText.append(g_textProvider->getText("IceResistance"));
-		infoText.append(L": ");
-		infoText.append(std::to_wstring(m_attributes->resistanceIce));
-		infoText.append(L"\n");
-		m_characterInfoText.setString(infoText);
+		if (m_showCharacterInfo)
+		{
+			// update text
+			std::wstring infoText = L"";
+			infoText.append(g_textProvider->getText("CharacterInfo"));
+			infoText.append(L"\n\n");
+			// health
+			infoText.append(g_textProvider->getText("Health"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->currentHealthPoints));
+			infoText.append(L"/");
+			infoText.append(std::to_wstring(m_attributes->maxHealthPoints));
+			infoText.append(L"\n");
+			// mana
+			infoText.append(g_textProvider->getText("Mana"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->currentManaPoints));
+			infoText.append(L"/");
+			infoText.append(std::to_wstring(m_attributes->maxManaPoints));
+			infoText.append(L"\n");
+			// regeneration
+			infoText.append(g_textProvider->getText("HealthRegeneration"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->healthRegenerationPerS));
+			infoText.append(L"/s\n");
+			infoText.append(g_textProvider->getText("ManaRegeneration"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->manaRegenerationPerS));
+			infoText.append(L"/s\n");
+			// dmg 
+			infoText.append(g_textProvider->getText("PhysicalDamage"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->damagePhysical));
+			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("FireDamage"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->damageFire));
+			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("IceDamage"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->damageIce));
+			infoText.append(L"\n");
+			// resistance
+			infoText.append(g_textProvider->getText("Armor"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->resistancePhysical));
+			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("FireResistance"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->resistanceFire));
+			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("IceResistance"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->resistanceIce));
+			infoText.append(L"\n");
+			m_characterInfoText.setString(infoText);
+		}
 	}
 }
 
@@ -130,27 +130,27 @@ void LevelInterface::updateInventory()
 	if (g_inputController->isKeyJustPressed(Key::Inventory))
 	{
 		m_showInventory = !m_showInventory;
-	}
-	if (m_showInventory)
-	{
-		// update text
-		std::wstring inventoryText = L"";
-		inventoryText.append(g_textProvider->getText("Inventory"));
-		inventoryText.append(L"\n\n");
-		inventoryText.append(g_textProvider->getText("Gold"));
-		inventoryText.append(L": ");
-		inventoryText.append(std::to_wstring(m_core->getData().gold));
-		inventoryText.append(L"\n\n");
-		// reload
-		m_core->loadItems();
-		for (auto it : m_core->getData().items)
+		if (m_showInventory)
 		{
-			inventoryText.append(g_textProvider->getText(m_core->getItem(it.first).getName()));
+			// update text
+			std::wstring inventoryText = L"";
+			inventoryText.append(g_textProvider->getText("Inventory"));
+			inventoryText.append(L"\n\n");
+			inventoryText.append(g_textProvider->getText("Gold"));
 			inventoryText.append(L": ");
-			inventoryText.append(std::to_wstring(it.second));
-			inventoryText.append(L"\n");
+			inventoryText.append(std::to_wstring(m_core->getData().gold));
+			inventoryText.append(L"\n\n");
+			// reload
+			m_core->loadItems();
+			for (auto it : m_core->getData().items)
+			{
+				inventoryText.append(g_textProvider->getText(m_core->getItem(it.first).getName()));
+				inventoryText.append(L": ");
+				inventoryText.append(std::to_wstring(it.second));
+				inventoryText.append(L"\n");
+			}
+			m_inventoryText.setString(inventoryText);
 		}
-		m_inventoryText.setString(inventoryText);
 	}
 }
 
@@ -174,7 +174,7 @@ void LevelInterface::initInterfaceBars()
 	m_manaBar.setFillColor(sf::Color::Blue);
 	m_manaBar.setSize(sf::Vector2f(0, BAR_HEIGHT));
 	m_manaBar.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + 3 * BAR_OUTLINE_THICKNESS + BAR_HEIGHT));
-	
+
 	m_manaBarOutline.setOutlineColor(sf::Color(0, 0, 150, 255));
 	m_manaBarOutline.setOutlineThickness(BAR_OUTLINE_THICKNESS);
 	m_manaBarOutline.setFillColor(sf::Color::Transparent);

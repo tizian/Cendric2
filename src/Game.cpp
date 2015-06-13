@@ -33,9 +33,22 @@ void Game::run()
 		}
 		
 		// time
-		frameClock.restart();
+		sf::Time eventTime = frameClock.restart();
+		if (eventTime.asMilliseconds() > 0)
+		{
+			g_logger->logInfo("Game Loop", "The event loop has had (ms): " + std::to_string(eventTime.asMilliseconds()));
+		}
+		
 		// hard bound: dt should not exeed 50ms (20fps)
-		frameTime = deltaTime.asMilliseconds() > 50 ? sf::milliseconds(50) : deltaTime;
+		if (deltaTime.asMilliseconds() > 50)
+		{
+			frameTime = sf::milliseconds(50);
+			g_logger->logWarning("Game Loop", "Frame time just exceeded 50ms and is set down to 50ms. Its time was (ms): " + std::to_string(deltaTime.asMilliseconds()));
+		}
+		else
+		{
+			frameTime = deltaTime;
+		}
 
 		// input
 		g_inputController->update();

@@ -145,22 +145,22 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	// add buttons
 	if (m_characterCore != nullptr)
 	{
-		m_resumeGameButton = new Button(sf::FloatRect(475, 250, 300, 50), ButtonOrnamentStyle::MEDIUM);
+		m_resumeGameButton = new Button(sf::FloatRect(475, 200, 300, 50), ButtonOrnamentStyle::MEDIUM);
 		m_resumeGameButton->setText("Resume");
 		addObject(GameObjectType::_Button, m_resumeGameButton);
 	}
-	m_newGameButton = new Button(sf::FloatRect(475, 320, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_newGameButton = new Button(sf::FloatRect(475, 270, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_newGameButton->setText("NewGame");
-	m_loadGameButton = new Button(sf::FloatRect(475, 390, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_loadGameButton = new Button(sf::FloatRect(475, 340, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_loadGameButton->setText("LoadGame");
-	m_saveGameButton = new Button(sf::FloatRect(475, 460, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_saveGameButton = new Button(sf::FloatRect(475, 410, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_saveGameButton->setText("SaveGame");
 	m_saveGameButton->setEnabled(m_characterCore != nullptr);
-	m_optionsButton = new Button(sf::FloatRect(475, 530, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_optionsButton = new Button(sf::FloatRect(475, 480, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_optionsButton->setText("Options");
-	m_creditsButton = new Button(sf::FloatRect(475, 600, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_creditsButton = new Button(sf::FloatRect(475, 550, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_creditsButton->setText("Credits");
-	m_exitButton = new Button(sf::FloatRect(475, 670, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_exitButton = new Button(sf::FloatRect(475, 610, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_exitButton->setText("Exit");
 	addObject(GameObjectType::_Button, m_newGameButton);
 	addObject(GameObjectType::_Button, m_loadGameButton);
