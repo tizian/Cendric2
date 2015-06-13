@@ -23,6 +23,7 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box)
 
 YesOrNoForm::~YesOrNoForm()
 {
+	delete m_window;
 	delete m_yesButton;
 	delete m_noButton;
 }
