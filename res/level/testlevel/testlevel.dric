@@ -3,7 +3,7 @@ level.name:Testlevel
 map.size:50,15
 map.tilesize:50,50
 level.exit:0.0,0.0,0.1,15.0,1,80.0,14.0
-level.exit:49.5,0.0,0.1,15.0,1,76.0,9.0
+level.exit:49.9,0.0,0.1,15.0,1,76.0,9.0
 cendric.startpos:1.0,1.0
 tileset.path:res/tilesets/tileset_level_test.png
 layer.background:-1.0,res/level/testlevel/layer_0.png
