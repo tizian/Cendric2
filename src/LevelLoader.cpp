@@ -94,11 +94,11 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 		return;
 	}
 
-	for (std::vector<std::pair<EnemyID, sf::Vector2f>>::iterator it = data.enemyPositions.begin(); it != data.enemyPositions.end(); ++it)
+	for (auto it : data.enemyPositions)
 	{
 		Enemy* enemy = nullptr;
 		std::map<ItemID, int> loot;
-		switch (it->first)
+		switch (it.first)
 		{
 		case EnemyID::Rat:
 			enemy = new RatEnemy(level, mainCharacter);
@@ -117,7 +117,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			return;
 		}
 
-		enemy->setPosition(it->second);
+		enemy->setPosition(it.second);
 		screen->addObject(GameObjectType::_Enemy, enemy);
 	}
 }

@@ -92,6 +92,14 @@ bool LevelReader::checkData(LevelData& data) const
 			return false;
 		}
 	}
+	for (auto it : data.levelExits)
+	{
+		if (it.levelExitRect.height <= 0.0 || it.levelExitRect.width <= 0.0)
+		{
+			g_logger->logError("LevelReader", "Error in level data : level exit rectangle has volume negative or null.");
+			return false;
+		}
+	}
 	if (data.levelItems.size() != data.mapSize.x * data.mapSize.y)
 	{
 		g_logger->logError("LevelReader", "Error in level data : level item layer has not correct size (map size)");
@@ -119,10 +127,10 @@ bool LevelReader::checkData(LevelData& data) const
 bool LevelReader::readLevelName(char* start, char* end, LevelData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	string name(startData);
-	int count = countToNextChar(startData, end, '"');
+	int count = countToNextChar(startData, end, '\n');
 	if (count == -1) {
 		return false;
 	}
@@ -134,10 +142,10 @@ bool LevelReader::readLevelName(char* start, char* end, LevelData& data) const
 bool LevelReader::readTilesetPath(char* start, char* end, LevelData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	string path(startData);
-	int count = countToNextChar(startData, end, '"');
+	int count = countToNextChar(startData, end, '\n');
 	if (count == -1) {
 		return false;
 	}
@@ -149,13 +157,13 @@ bool LevelReader::readTilesetPath(char* start, char* end, LevelData& data) const
 bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	float distance = static_cast<float>(atof(startData));
 	startData = gotoNextChar(start, end, ',');
 	startData++;
 	string path(startData);
-	int count = countToNextChar(startData, end, '"');
+	int count = countToNextChar(startData, end, '\n');
 	if (count == -1) {
 		return false;
 	}
@@ -170,7 +178,7 @@ bool LevelReader::readLayerBackground(char* start, char* end, LevelData& data) c
 bool LevelReader::readMapSize(char* start, char* end, LevelData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int width = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
@@ -180,10 +188,11 @@ bool LevelReader::readMapSize(char* start, char* end, LevelData& data) const
 	data.mapSize = size;
 	return true;
 }
+
 bool LevelReader::readTileSize(char* start, char* end, LevelData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int width = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
@@ -191,6 +200,49 @@ bool LevelReader::readTileSize(char* start, char* end, LevelData& data) const
 	int height = atoi(startData);
 	sf::Vector2i size(width, height);
 	data.tileSize = size;
+	return true;
+}
+
+bool LevelReader::readLevelExit(char* start, char* end, LevelData& data) const
+{
+	char* startData;
+	
+	// read level exit rect
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	float left = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float top = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float width = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float height = static_cast<float>(atof(startData));
+	sf::FloatRect exit(left, top, width, height);
+
+	// read map spawn point
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	MapID mapID = static_cast<MapID>(atoi(startData));
+	if (mapID <= MapID::Void || mapID >= MapID::MAX)
+	{
+		g_logger->logError("LevelReader", "Could not read level exit : Map ID not recognized.");
+		return false;
+	}
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float x = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float y = static_cast<float>(atof(startData));
+	sf::Vector2f spawnPoint(x, y);
+	LevelExitBean levelExit;
+	levelExit.levelExitRect = exit;
+	levelExit.map = mapID;
+	levelExit.mapSpawnPoint = spawnPoint;
+	data.levelExits.push_back(levelExit);
 	return true;
 }
 
@@ -338,7 +390,7 @@ bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) cons
 bool LevelReader::readStartPos(char* start, char* end, LevelData& data) const
 {
 	char* startData;
-	startData = gotoNextChar(start, end, '"');
+	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int x = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
@@ -384,7 +436,7 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 	// read defined tags
 	while (pos < end)
 	{
-		if (*pos == COMMENT_MARKER)
+		if (*pos == COMMENT_MARKER || *pos == '\n')
 		{
 			pos = gotoNextChar(pos, end, '\n');
 		}
@@ -402,6 +454,11 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 		else if (strncmp(pos, MAP_TILESIZE, strlen(MAP_TILESIZE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + MAP_TILESIZE);
 			noError = readTileSize(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, LEVEL_EXIT, strlen(LEVEL_EXIT)) == 0) {
+			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LEVEL_EXIT);
+			noError = readLevelExit(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, TILESET_PATH, strlen(TILESET_PATH)) == 0) {
@@ -450,7 +507,7 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {
-			g_logger->logError("LevelReader", std::string("Uknown tag found in file ") + fileName);
+			g_logger->logError("LevelReader", std::string("Unknown tag found in file ") + fileName);
 			return false;
 		}
 
@@ -482,6 +539,24 @@ void LevelReader::updateData(LevelData& data)  const
 	// update start pos
 	data.startPos.x = data.startPos.x * data.tileSize.x;
 	data.startPos.y = data.startPos.y * data.tileSize.y;
+
+	// update level exits
+	vector<LevelExitBean> oldExits = data.levelExits;
+	data.levelExits.clear();
+	for (auto it : oldExits)
+	{
+		LevelExitBean newBean;
+		newBean.levelExitRect = sf::FloatRect(
+			it.levelExitRect.left * data.tileSize.x,
+			it.levelExitRect.top * data.tileSize.y,
+			it.levelExitRect.width * data.tileSize.x,
+			it.levelExitRect.height * data.tileSize.y);
+		newBean.map = it.map;
+		newBean.mapSpawnPoint = sf::Vector2f(
+			it.mapSpawnPoint.x * data.tileSize.x,
+			it.mapSpawnPoint.y * data.tileSize.y);
+		data.levelExits.push_back(newBean);
+	}
 
 	// calculate collidable tiles
 	int x = 0;

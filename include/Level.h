@@ -23,11 +23,15 @@ public:
 
 	// loads a .dric file
 	bool load(LevelID id, Screen* screen);
+	// loads enemies and level items for the level. must be called after a screen already has a main char
+	void loadAfterMainChar(Screen* screen);
 	// draws the level. Background layers, tilemap, dynamic tiles, foreground layers.
 	void draw(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
 	// deletes the resources
 	void dispose();
 
+	// checks if the main char has reached a level exit. If no, it returns nullptr, the map id and spawn point for the map.
+	LevelExitBean* checkLevelExit(const sf::FloatRect& boundingBox) const;
 	// checks collision with the collidable grid of that level
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;
@@ -48,7 +52,10 @@ private:
 	std::vector<GameObject*>* m_dynamicTiles;
 	std::string m_name;
 	sf::Vector2f m_startPos;
+	std::vector<LevelExitBean> m_levelExits;
 	LevelID m_id;
+	// data loaded by the level loader
+	LevelData m_levelData;
 
 	SpeedupPullCamera* m_camera;
 	const float CAMERA_WINDOW_WIDTH = 200.f;

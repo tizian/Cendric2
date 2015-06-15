@@ -25,29 +25,35 @@ void Level::dispose()
 	g_resourceManager->deleteLevelResources();
 }
 
+void Level::loadAfterMainChar(Screen* screen)
+{
+	LevelLoader loader;
+	loader.loadEnemies(m_levelData, screen, this);
+	loader.loadLevelItems(m_levelData, screen);
+}
+
 bool Level::load(LevelID id, Screen* screen) 
 {
-	g_resourceManager->loadLevelResources();
 	LevelReader reader;
-	LevelData data;
-	if (!reader.readLevel(g_resourceManager->getFilename(id), data))
+	if (!reader.readLevel(g_resourceManager->getFilename(id), m_levelData))
 	{
 		return false;
 	}
 
 	m_id = id;
 	// load level
-	m_startPos = data.startPos;
-	m_name = data.name;
-	m_tileMap.load(data.tileSetPath, data.tileSize, data.layers, data.mapSize.x, data.mapSize.y);
-	m_collidableTiles = data.collidableTilePositions;
-	m_levelRect = data.levelRect;
-	m_backgroundLayers = data.backgroundLayers;
+	m_startPos = m_levelData.startPos;
+	m_name = m_levelData.name;
+	m_tileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.layers, m_levelData.mapSize.x, m_levelData.mapSize.y);
+	m_collidableTiles = m_levelData.collidableTilePositions;
+	m_levelRect = m_levelData.levelRect;
+	m_backgroundLayers = m_levelData.backgroundLayers;
+	m_levelExits = m_levelData.levelExits;
 	LevelLoader loader;
-	loader.loadDynamicTiles(data, screen);
-	loader.loadLevelItems(data, screen);
-	loader.loadEnemies(data, screen, this);
+	loader.loadDynamicTiles(m_levelData, screen);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
+
+	g_resourceManager->loadLevelResources();
 	return true;
 }
 
@@ -250,6 +256,22 @@ void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBound
 			tile->onHit(spell);
 		}
 	}
+}
+
+LevelExitBean* Level::checkLevelExit(const sf::FloatRect& boundingBox) const
+{
+	for (auto it : m_levelExits)
+	{
+		if (boundingBox.intersects(it.levelExitRect))
+		{
+			LevelExitBean* exit = new LevelExitBean();
+			exit->map = it.map;
+			exit->mapSpawnPoint = it.mapSpawnPoint;
+			return exit;
+		}
+	}
+
+	return nullptr;
 }
 
 LevelID Level::getID() const

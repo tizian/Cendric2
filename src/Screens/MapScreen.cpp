@@ -47,8 +47,9 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 		setTooltipText(L"Saved file to: saves/quicksave.sav", sf::Vector2f(10.f, 10.f), sf::Color::Cyan, true);
 	}
 	LevelID id = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
-	if (id == LevelID::Void)
+	if (id == LevelID::Void || m_isOnLevelEntry)
 	{
+		m_isOnLevelEntry = (id != LevelID::Void);
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
 		updateTooltipText(frameTime);
 		return this;

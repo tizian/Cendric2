@@ -32,6 +32,7 @@ private:
 	bool readLayerDynamicTiles(char* start, char* end, LevelData& data) const;
 	bool readLayerLevelItems(char* start, char* end, LevelData& data) const;
 	bool readLayerEnemies(char* start, char* end, LevelData& data) const;
+	bool readLevelExit(char* start, char* end, LevelData& data) const;
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data) const;
@@ -45,6 +46,7 @@ private:
 
 	const char* LEVEL_NAME = "level.name";
 	const char* MAP_SIZE = "map.size";
+	const char* LEVEL_EXIT = "level.exit";
 	const char* MAP_TILESIZE = "map.tilesize";
 	const char* TILESET_PATH = "tileset.path";
 	const char* LAYER_COLLIDABLE = "layer.collidable";

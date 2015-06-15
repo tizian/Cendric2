@@ -28,7 +28,6 @@ LevelMainCharacter::~LevelMainCharacter()
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
 	m_keyMap.clear();
-	delete m_spellManager;
 }
 
 void LevelMainCharacter::onHit(Spell* spell)

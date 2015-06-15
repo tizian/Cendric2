@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "BackgroundLayer.h"
+#include "Structs/LevelExitBean.h"
 
 struct LevelData
 {
@@ -22,5 +23,6 @@ struct LevelData
 	std::vector<std::pair<LevelItemID, sf::Vector2f>> levelItemPositions;
 	std::vector<EnemyID> enemies;
 	std::vector<std::pair<EnemyID, sf::Vector2f>> enemyPositions;
+	std::vector<LevelExitBean> levelExits;
 	sf::FloatRect levelRect;
 };
