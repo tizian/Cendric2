@@ -1,19 +1,8 @@
 # the first map in the cendric universe.
-cendric.startpos:29.0,29.0
-# top left cave
-level.entry:1,14.0,5.0,2.0,1.2
-# rope cave
-level.entry:1,15.0,37.0,2.0,1.2
 # rat cave entry + exit 2
-level.entry:1,75.0,8.0,2.0,1.2
+level.entry:75.0,8.0,2.0,1.2,1,14.5,5.5
 # rat cave entry + rat cave exit 1
-level.entry:1,79.0,13.0,2.0,1.2
-# house near the pond
-level.entry:1,53.0,27.0,2.0,1.2
-# mystical island
-level.entry:1,64.0,72.0,1.0,1.2
-# herb farm
-level.entry:1,59.0,5.0,1.0,1.2
+level.entry:79.0,13.0,2.0,1.2,1,10.5,23.5
 map.name:First Map
 map.size:100,100
 map.tilesize:50,50

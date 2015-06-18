@@ -25,8 +25,10 @@ public:
 	bool load(LevelID id, Screen* screen);
 	// loads enemies and level items for the level. must be called after a screen already has a main char
 	void loadAfterMainChar(Screen* screen);
-	// draws the level. Background layers, tilemap, dynamic tiles, foreground layers.
-	void draw(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
+	// draws the level. Background layers, background tilemap, dynamic tiles
+	void drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
+	// draws the level. Foreground tilemap
+	void drawForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
 	// deletes the resources
 	void dispose();
 
@@ -37,26 +39,25 @@ public:
 	bool collidesY(const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY) const;
 
+	// check with evil tiles
+	bool diesX(const sf::FloatRect& boundingBox) const;
+	bool diesY(const sf::FloatRect& boundingBox) const;
+
 	const TileMap& getTilemap() const;
-	const sf::Vector2f& getStartPos() const;
 	const sf::FloatRect& getLevelRect() const;
 	LevelID getID() const;
 	// returns the next y position where the bounding box is grounding.
 	float getGround(const sf::FloatRect& boundingBox) const;
 
 private:
-	TileMap m_tileMap;
-	sf::FloatRect m_levelRect;
-	std::vector<std::vector<bool>> m_collidableTiles;
-	std::vector<BackgroundLayer> m_backgroundLayers;
+	TileMap m_backgroundTileMap;
+	TileMap m_foregroundTileMap;
 	std::vector<GameObject*>* m_dynamicTiles;
-	std::string m_name;
-	sf::Vector2f m_startPos;
-	std::vector<LevelExitBean> m_levelExits;
 	LevelID m_id;
 	// data loaded by the level loader
 	LevelData m_levelData;
 
 	SpeedupPullCamera* m_camera;
 	const float CAMERA_WINDOW_WIDTH = 200.f;
+	const float CAMERA_WINDOW_HEIGHT = 200.f;
 };

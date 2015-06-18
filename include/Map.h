@@ -26,12 +26,11 @@ public:
 	// checks collision with the collidable grid of that map
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;
-	// checks if the main char has reached a level entry. If no, it returns the void resource id, else the resource id of that level
-	LevelID checkLevelEntry(const sf::FloatRect& boundingBox) const;
+	// checks if the main char has reached a level entry. If no, nullptr, else the spawn point and id for that level
+	MapExitBean* checkLevelEntry(const sf::FloatRect& boundingBox) const;
 
 	const TileMap& getBackgroundTilemap() const;
 	const TileMap& getForegroundTilemap() const;
-	const sf::Vector2f& getStartPos() const;
 	const sf::FloatRect& getMapRect() const;
 	MapID getID() const;
 
@@ -43,8 +42,7 @@ private:
 	sf::FloatRect m_mapRect;
 	std::vector<std::vector<bool>> m_collidableTiles;
 	std::string m_name;
-	sf::Vector2f m_startPos;
-	std::vector<std::pair<sf::FloatRect, LevelID>> m_levelEntries;
+	std::vector<MapExitBean> m_levelEntries;
 
 	MapID m_id;
 };

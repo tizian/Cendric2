@@ -18,8 +18,15 @@ void LevelItem::onRightClick()
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE)
 	{
-		// pickup, create the correct item in the players inventory.
-		m_mainChar->lootItem(m_itemID, 1);
+		// pickup, create the correct item or correct amount of gold in the players inventory.
+		if (m_itemID == ItemID::Void)
+		{
+			m_mainChar->addGold(m_goldValue);
+		}
+		else
+		{
+			m_mainChar->lootItem(m_itemID, 1);
+		}
 		setDisposed();
 	}
 	else
@@ -58,4 +65,9 @@ sf::Color LevelItem::getConfiguredDebugColor() const
 void LevelItem::setItemID(ItemID id)
 {
 	m_itemID = id;
+}
+
+void LevelItem::setGoldValue(int goldValue)
+{
+	m_goldValue = goldValue;
 }

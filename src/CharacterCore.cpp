@@ -25,21 +25,21 @@ bool CharacterCore::load(const char* fileName)
 	// measuring the time played with this save.
 	m_stopwatch.restart();
 	reloadStats();
-	m_isLoaded = true;
 	return true;
 }
 
 void CharacterCore::loadNew()
 {
-	m_data.currentMap = MapID::Firstmap; // the first map in the cendric universe
-	m_data.currentMapPosition = sf::Vector2f(); // will be start position later
+	// start map & position when a new game is saved
+	m_data.playerName = "Dummy";
+	m_data.currentMap = MapID::Firstmap; 
+	m_data.currentMapPosition = sf::Vector2f(1450.0f, 1450.0f); 
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.currentManaPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.maxManaPoints = 100;
 	m_data.attributes.healthRegenerationPerS = 0;
 	m_data.attributes.manaRegenerationPerS = 0;
-
 	m_stopwatch.restart();
 	reloadStats();
 }
@@ -172,12 +172,12 @@ void CharacterCore::setMap(const sf::Vector2f& position, MapID map)
 {
 	m_data.currentMap = map;
 	m_data.currentMapPosition = position;
-	m_isLoaded = true;
 }
 
-bool CharacterCore::isLoaded() const
+void CharacterCore::setLevel(const sf::Vector2f& position, LevelID level)
 {
-	return m_isLoaded;
+	m_data.currentLevel = level;
+	m_data.currentLevelPosition = position;
 }
 
 void CharacterCore::addBean(AttributeBean& firstBean, const AttributeBean& secondBean) const

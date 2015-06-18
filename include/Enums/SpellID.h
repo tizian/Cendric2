@@ -5,5 +5,6 @@ enum class SpellID
 	Chop,
 	Fire,
 	Ice,
-	Forcefield
+	Forcefield,
+	Unlock,
 };

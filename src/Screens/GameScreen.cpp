@@ -32,8 +32,9 @@ void GameScreen::execOnExit(const Screen *nextScreen)
 Screen* GameScreen::update(const sf::Time& frameTime)
 {
 	LevelExitBean* bean = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
-	if (bean == nullptr)
+	if (bean == nullptr || m_isOnLevelExit)
 	{
+		m_isOnLevelExit = (bean != nullptr);
 		updateTooltipText(frameTime);
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
 		updateObjects(GameObjectType::_LevelEquipment, frameTime);
@@ -56,14 +57,14 @@ Screen* GameScreen::update(const sf::Time& frameTime)
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
 	renderTooltipText(renderTarget);
-	// parallax, maybe forground + background layers?
-	// don't render dynamic tiles, they are rendered in the level.
-	m_currentLevel.draw(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	// don't render dynamic tiles here, they are rendered in the level.
+	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	// ASSURE that at this point, the view is the correct game view
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
+	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	m_interface.render(renderTarget);
 }

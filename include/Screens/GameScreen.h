@@ -25,4 +25,5 @@ private:
 	LevelMainCharacter* m_mainChar;
 	LevelID m_levelID;
 	LevelInterface m_interface;	
+	bool m_isOnLevelExit = true;
 };

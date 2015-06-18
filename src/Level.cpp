@@ -7,6 +7,7 @@ Level::Level()
 {
 	m_camera = new SpeedupPullCamera();
 	m_camera->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
+	m_camera->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
 }
 
 Level::~Level()
@@ -17,10 +18,11 @@ Level::~Level()
 
 void Level::dispose()
 {
-	m_tileMap.dispose();
-	for (int i = 0; i < m_backgroundLayers.size(); i++)
+	// no need to dispose both tile maps (fg + bg), as they share their resource
+	m_backgroundTileMap.dispose();
+	for (int i = 0; i < m_levelData.backgroundLayers.size(); i++)
 	{
-		m_backgroundLayers[i].dispose();
+		m_levelData.backgroundLayers[i].dispose();
 	}
 	g_resourceManager->deleteLevelResources();
 }
@@ -42,13 +44,9 @@ bool Level::load(LevelID id, Screen* screen)
 
 	m_id = id;
 	// load level
-	m_startPos = m_levelData.startPos;
-	m_name = m_levelData.name;
-	m_tileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.layers, m_levelData.mapSize.x, m_levelData.mapSize.y);
-	m_collidableTiles = m_levelData.collidableTilePositions;
-	m_levelRect = m_levelData.levelRect;
-	m_backgroundLayers = m_levelData.backgroundLayers;
-	m_levelExits = m_levelData.levelExits;
+	m_backgroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.backgroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
+	m_foregroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.foregroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
+
 	LevelLoader loader;
 	loader.loadDynamicTiles(m_levelData, screen);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
@@ -57,7 +55,7 @@ bool Level::load(LevelID id, Screen* screen)
 	return true;
 }
 
-void Level::draw(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
+void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -66,67 +64,61 @@ void Level::draw(sf::RenderTarget &target, const sf::RenderStates& states, const
 	m_camera->setFocusCenter(center);
 
 	// parallax background layers
-	for (int i = 0; i < m_backgroundLayers.size(); i++)
+	for (int i = 0; i < m_levelData.backgroundLayers.size(); i++)
 	{
 		// handle case for layer at infinity
-		if (m_backgroundLayers[i].getDistance() == -1.0f)
+		if (m_levelData.backgroundLayers[i].getDistance() == -1.0f)
 		{
 			view.setCenter(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
 			target.setView(view);
 		}
 		else
 		{
-			float d = m_backgroundLayers[i].getDistance();
-			float ominoeseOffset = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
-			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffset;
-			float viewCenterY = WINDOW_WIDTH / 2.f;
+			float d = m_levelData.backgroundLayers[i].getDistance();
+			float ominoeseOffsetX = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
+			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffsetX;
+			float ominoeseOffsetY = (WINDOW_HEIGHT / 2) - (1 / d) * (WINDOW_HEIGHT / 2);
+			float viewCenterY = (std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.levelRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y)) / d) + ominoeseOffsetY;
 			view.setCenter(viewCenterX, viewCenterY);
 			target.setView(view);
 		}
-		m_backgroundLayers[i].render(target, states);
+		m_levelData.backgroundLayers[i].render(target, states);
 	}
 
 	// tilemap
-	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x));
-	float camCenterY = WINDOW_HEIGHT / 2.f;
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x));
+	float camCenterY = std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.levelRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y));
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
-	m_tileMap.draw(target, states);
+	m_backgroundTileMap.draw(target, states);
 
 	// dynamic tiles
 	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); it++)
 	{
 		(*it)->render(target);
 	}
+}
 
-	// foreground layers?
+void Level::drawForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
+{
+	m_foregroundTileMap.draw(target, states);
 }
 
 const sf::FloatRect& Level::getLevelRect() const
 {
-	return m_levelRect;
-}
-
-const TileMap& Level::getTilemap() const
-{
-	return m_tileMap;
-}
-
-const sf::Vector2f& Level::getStartPos() const
-{
-	return m_startPos;
+	return m_levelData.levelRect;
 }
 
 bool Level::collidesX(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
-	if (boundingBox.left < m_levelRect.left || boundingBox.left + boundingBox.width > m_levelRect.left + m_levelRect.width) 
+	if (boundingBox.left < m_levelData.levelRect.left || boundingBox.left + boundingBox.width > m_levelData.levelRect.left + m_levelData.levelRect.width)
 	{
 		return true;
 	}
 
-	float tileWidth = static_cast<float>(m_tileMap.getTilesize().x);
-	float tileHeight = static_cast<float>(m_tileMap.getTilesize().y);
+	float tileWidth = static_cast<float>(m_levelData.tileSize.x);
+	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
 
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
 	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
@@ -140,7 +132,12 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const
 	int x = topLeft.x;
 	for (int y = topLeft.y; y <= bottomLeft.y; y++)
 	{
-		if (m_collidableTiles[y][x])
+		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
+		if (m_levelData.collidableTilePositions[y][x])
 		{
 			return true;
 		}
@@ -150,7 +147,12 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const
 	x = topRight.x;
 	for (int y = topRight.y; y <= bottomRight.y; y++)
 	{
-		if (m_collidableTiles[y][x])
+		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
+		if (m_levelData.collidableTilePositions[y][x])
 		{
 			return true;
 		}
@@ -172,13 +174,13 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const
 bool Level::collidesY(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
-	if (boundingBox.top < m_levelRect.top || boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height)
+	if (boundingBox.top < m_levelData.levelRect.top || boundingBox.top + boundingBox.height > m_levelData.levelRect.top + m_levelData.levelRect.height)
 	{
 		return true;
 	}
 	
-	float tileWidth = static_cast<float>(m_tileMap.getTilesize().x);
-	float tileHeight = static_cast<float>(m_tileMap.getTilesize().y);
+	float tileWidth = static_cast<float>(m_levelData.tileSize.x);
+	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
 
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
 	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
@@ -192,12 +194,12 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 	int y = topLeft.y;
 	for (int x = topLeft.x; x <= topRight.x; x++)
 	{
-		if (y > m_collidableTiles.size() || y < 0 || x < 0 || x > m_collidableTiles[y].size())
+		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size())
 		{
 			// check for out of range (happens seldom because of rounding problems above)
 			return true;
 		}
-		if (m_collidableTiles[y][x])
+		if (m_levelData.collidableTilePositions[y][x])
 		{
 			return true;
 		}
@@ -207,12 +209,12 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 	y = bottomLeft.y;
 	for (int x = bottomLeft.x; x <= bottomRight.x; x++)
 	{
-		if (y > m_collidableTiles.size() || y < 0 || x < 0 || x > m_collidableTiles[y].size())
+		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size())
 		{
 			// check for out of range (happens seldom because of rounding problems above)
 			return true;
 		}
-		if (m_collidableTiles[y][x])
+		if (m_levelData.collidableTilePositions[y][x])
 		{
 			return true;
 		}
@@ -231,16 +233,110 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
+bool Level::diesX(const sf::FloatRect& boundingBox) const
+{
+	float tileWidth = static_cast<float>(m_levelData.tileSize.x);
+	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
+
+	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
+	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
+	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
+	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
+	sf::Vector2i bottomRight(rightX, bottomY);
+
+	// check left side
+	int x = topLeft.x;
+	for (int y = topLeft.y; y <= bottomLeft.y; y++)
+	{
+		if (y > m_levelData.evilTilePositions.size() || y < 0 || x < 0 || x > m_levelData.evilTilePositions[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
+		if (m_levelData.evilTilePositions[y][x])
+		{
+			return true;
+		}
+	}
+
+	// check right side
+	x = topRight.x;
+	for (int y = topRight.y; y <= bottomRight.y; y++)
+	{
+		if (y > m_levelData.evilTilePositions.size() || y < 0 || x < 0 || x > m_levelData.evilTilePositions[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
+		if (m_levelData.evilTilePositions[y][x])
+		{
+			return true;
+		}
+	}
+
+	// check evil dynamic tiles?
+	return false;
+}
+
+bool Level::diesY(const sf::FloatRect& boundingBox) const
+{
+	float tileWidth = static_cast<float>(m_levelData.tileSize.x);
+	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
+
+	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
+	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
+	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
+	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
+	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
+	sf::Vector2i bottomRight(rightX, bottomY);
+
+	// check top side
+	int y = topLeft.y;
+	for (int x = topLeft.x; x <= topRight.x; x++)
+	{
+		if (y > m_levelData.evilTilePositions.size() || y < 0 || x < 0 || x > m_levelData.evilTilePositions[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
+		if (m_levelData.evilTilePositions[y][x])
+		{
+			return true;
+		}
+	}
+
+	// check bottom side
+	y = bottomLeft.y;
+	for (int x = bottomLeft.x; x <= bottomRight.x; x++)
+	{
+		if (y > m_levelData.evilTilePositions.size() || y < 0 || x < 0 || x > m_levelData.evilTilePositions[y].size())
+		{
+			// check for out of range (happens seldom because of rounding problems above)
+			return true;
+		}
+		if (m_levelData.evilTilePositions[y][x])
+		{
+			return true;
+		}
+	}
+
+	// check evil dynamic tiles?
+	return false;
+}
+
 float Level::getGround(const sf::FloatRect& boundingBox) const
 {
 	// check if ground is level ground
-	if (boundingBox.top + boundingBox.height > m_levelRect.top + m_levelRect.height) 
+	if (boundingBox.top + boundingBox.height > m_levelData.levelRect.top + m_levelData.levelRect.height)
 	{
-		return (m_levelRect.top + m_levelRect.height) - boundingBox.height; 
+		return (m_levelData.levelRect.top + m_levelData.levelRect.height) - boundingBox.height;
 	}
 
 	// then, a collidable tile in the grid must be the ground
-	float tileHeight = static_cast<float>(m_tileMap.getTilesize().y);
+	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
 	int y = static_cast<int>(floor((boundingBox.top + boundingBox.height)) / tileHeight);
 
 	return (y * tileHeight) - boundingBox.height;
@@ -260,7 +356,7 @@ void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBound
 
 LevelExitBean* Level::checkLevelExit(const sf::FloatRect& boundingBox) const
 {
-	for (auto it : m_levelExits)
+	for (auto it : m_levelData.levelExits)
 	{
 		if (boundingBox.intersects(it.levelExitRect))
 		{

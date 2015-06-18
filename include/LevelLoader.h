@@ -7,6 +7,8 @@
 #include "DynamicTiles/WaterTile.h"
 #include "DynamicTiles/IceTile.h"
 #include "DynamicTiles/CrumblyBlockTile.h"
+#include "DynamicTiles/TorchTile.h"
+#include "DynamicTiles/ChestTile.h"
 
 #include "Enums/DynamicTileID.h"
 #include "Enums/LevelItemID.h"

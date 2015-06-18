@@ -25,7 +25,6 @@ bool Map::load(MapID id)
 	}
 	
 	// load map
-	m_startPos = data.startPos;
 	m_name = data.name;
 	m_backgroundTileMap.load(data.tileSetPath, data.tileSize, data.backgroundLayers, data.mapSize.x, data.mapSize.y);
 	m_foregroundTileMap.load(data.tileSetPath, data.tileSize, data.foregroundLayers, data.mapSize.x, data.mapSize.y);
@@ -72,11 +71,6 @@ const TileMap& Map::getBackgroundTilemap() const
 const TileMap& Map::getForegroundTilemap() const
 {
 	return m_foregroundTileMap;
-}
-
-const sf::Vector2f& Map::getStartPos() const
-{
-	return m_startPos;
 }
 
 bool Map::collidesX(const sf::FloatRect& boundingBox) const
@@ -163,17 +157,20 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
-LevelID Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
+MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 {
 	for (auto it : m_levelEntries)
 	{
-		if (boundingBox.intersects(it.first))
+		if (boundingBox.intersects(it.mapExitRect))
 		{
-			return it.second;
+			MapExitBean* exit = new MapExitBean();
+			exit->level = it.level;
+			exit->levelSpawnPoint = it.levelSpawnPoint;
+			return exit;
 		}
 	}
 
-	return LevelID::Void;
+	return nullptr;
 }
 
 MapID Map::getID() const

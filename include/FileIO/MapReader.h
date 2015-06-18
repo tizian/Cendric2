@@ -19,7 +19,6 @@ private:
 	bool readMapSize(char* start, char* end, MapData& data) const;
 	bool readTileSize(char* start, char* end, MapData& data) const;
 	bool readLayerCollidable(char* start, char* end, MapData& data) const;
-	bool readStartPos(char* start, char* end, MapData& data) const;
 	bool readBackgroundLayerTiles(char* start, char* end, MapData& data) const;
 	bool readForegroundLayerTiles(char* start, char* end, MapData& data) const;
 	bool readLevelEntry(char* start, char* end, MapData& data) const;
@@ -38,5 +37,4 @@ private:
 	const char* LAYER_COLLIDABLE = "layer.collidable";
 	const char* LAYER_TILES_BACKGROUND = "layer.tiles.background";
 	const char* LAYER_TILES_FOREGROUND = "layer.tiles.foreground";
-	const char* CENDRIC_STARTPOS = "cendric.startpos";
 };

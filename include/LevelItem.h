@@ -21,6 +21,7 @@ public:
 	
 	void setTooltipText(const std::wstring& tooltip);
 	void setItemID(ItemID id);
+	void setGoldValue(int goldValue);
 
 	GameObjectType getConfiguredType() const override;
 	sf::Color getConfiguredDebugColor() const override;
@@ -31,5 +32,7 @@ private:
 	const float PICKUP_RANGE = 50.f;
 	LevelItemID m_levelItemID;
 	ItemID m_itemID;
+	// only relevant for gold items. they have their item id void.
+	int m_goldValue;
 	std::wstring m_tooltipText;
 };

@@ -18,6 +18,8 @@ struct CharacterCoreData
 	// position & progress
 	MapID currentMap;
 	sf::Vector2f currentMapPosition;
+	LevelID currentLevel;
+	sf::Vector2f currentLevelPosition;
 	std::map<LevelID, std::vector<bool>> levelLooted;
 	std::map<LevelID, std::vector<bool>> levelKilled;
 	// TODO: quest progress
@@ -42,6 +44,8 @@ const CharacterCoreData DEFAULT_CORE
 	"",
 	sf::Time::Zero,
 	MapID::Void,
+	sf::Vector2f(),
+	LevelID::Void,
 	sf::Vector2f(),
 	std::map<LevelID, std::vector<bool>>(),
 	std::map<LevelID, std::vector<bool>>(),

@@ -4,7 +4,6 @@
 
 #include "Enums/ItemID.h"
 #include "Enums/ItemType.h"
-#include "Enums/ResourceID.h"
 #include "Enums/LevelEquipmentID.h"
 
 #include "Structs/AttributeBean.h"
@@ -15,7 +14,8 @@ struct ItemBean
 	std::string name;
 	ItemID id;
 	ItemType type;
-	ResourceID icon;
+	// in texture coordinates. The location is the spritesheet for items and the height and width is always 50px.
+	sf::Vector2i iconTextureLocation;
 	// only relevant for equipment, else void.
 	LevelEquipmentID levelEquipment;
 	AttributeBean attributes;
@@ -24,11 +24,11 @@ struct ItemBean
 
 const struct ItemBean DEFAULT_ITEM = 
 {
-	"", 
 	"",
-	ItemID::Void, 
-	ItemType::Void, 
-	ResourceID::Void,
+	"",
+	ItemID::Void,
+	ItemType::Void,
+	sf::Vector2i(),
 	LevelEquipmentID::Void,
 	ZERO_ATTRIBUTES,
 	0

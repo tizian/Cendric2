@@ -30,9 +30,9 @@ LevelEquipmentID Item::getLevelEquipmentID() const
 	return m_bean.levelEquipment;
 }
 
-ResourceID Item::getIcon() const
+const sf::Vector2i& Item::getIconTextureLocation() const
 {
-	return m_bean.icon;
+	return m_bean.iconTextureLocation;
 }
 
 int Item::getValue() const

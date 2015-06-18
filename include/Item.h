@@ -15,7 +15,7 @@ public:
 	ItemID getID() const;
 	ItemType getType() const;
 	LevelEquipmentID getLevelEquipmentID() const;
-	ResourceID getIcon() const;
+	const sf::Vector2i& getIconTextureLocation() const;
 	const AttributeBean& getAttributes() const;
 	// the items gold value
 	int getValue() const;

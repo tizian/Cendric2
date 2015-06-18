@@ -10,9 +10,10 @@ struct LevelItemBean
 {
 	sf::Vector2f spriteOffset;
 	sf::FloatRect boundingBox;
-	ResourceID textureID;
 	std::vector<sf::IntRect> texturePositions;
 	sf::Time frameTime;
 	std::string tooltip;
 	ItemID item;
+	// only relevant for gold items. They will have their item id void.
+	int goldValue;
 };

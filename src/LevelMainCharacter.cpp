@@ -3,7 +3,6 @@
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level)
 {
 	load();
-	setPosition(m_level->getStartPos());
 	m_keyMap.insert(
 	{
 		{ Key::SpellChop, SpellID::Chop },
@@ -116,6 +115,7 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 {
 	m_core = core;
 	m_attributes = core->getTotalAttributes();
+	setPosition(core->getData().currentLevelPosition);
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime)

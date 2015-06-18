@@ -9,23 +9,25 @@ LevelReader::LevelReader()
 
 LevelReader::~LevelReader()
 {
-	m_dynamicTileMap.clear();
 	m_levelItemMap.clear();
 	m_enemyMap.clear();
 }
 
 void LevelReader::initMaps()
 {
-	m_dynamicTileMap.insert({
-		{ 1, DynamicTileID::Water },
-		{ 2, DynamicTileID::Ice },
-		{ 3, DynamicTileID::Crumbly_block }
-	});
 	m_levelItemMap.insert({
 		{ 0, LevelItemID::Void },
-		{ 1, LevelItemID::Food_Cheese },
-		{ 2, LevelItemID::Food_Bread },
-		{ 3, LevelItemID::Food_Water }
+		{ 1, LevelItemID::Food_CaveBerry },
+		{ 2, LevelItemID::Misc_GoldenGoblet },
+		{ 3, LevelItemID::Gold_OneCoin },
+		{ 4, LevelItemID::Quest_Letter },
+		{ 5, LevelItemID::EQ_Ring_RingOfLesserHealth },
+		{ 26, LevelItemID::Food_HealingHerb },
+		{ 27, LevelItemID::Food_GlowingShroom }, 
+		{ 28, LevelItemID::Gold_ThreeCoins },
+		{ 29, LevelItemID::Food_Water },
+		{ 49, LevelItemID::Food_Cheese },
+		{ 50, LevelItemID::Food_Bread },
 	});
 	m_enemyMap.insert({
 		{ 0, EnemyID::Void },
@@ -46,11 +48,6 @@ bool LevelReader::checkData(LevelData& data) const
 		g_logger->logError("LevelReader", "Error in level data: tile size not set / invalid");
 		return false;
 	}
-	if (data.startPos.x < 0 || data.startPos.x > data.mapSize.x || data.startPos.y < 0 || data.startPos.y > data.mapSize.y)
-	{
-		g_logger->logError("LevelReader", "Error in level data : invalid start position, must be in range of map");
-		return false;
-	}
 	if (data.name.empty())
 	{
 		g_logger->logError("LevelReader", "Error in level data : level name not set / empty");
@@ -61,21 +58,37 @@ bool LevelReader::checkData(LevelData& data) const
 		g_logger->logError("LevelReader", "Error in level data : tileset-path not set / empty");
 		return false;
 	}
-	if (data.layers.empty())
+	if (data.backgroundTileLayers.empty())
 	{
-		g_logger->logError("LevelReader", "Error in level data : no layers set");
-		return false;
+		g_logger->logInfo("LevelReader", "No background tile layers set");
 	}
-	for (int i = 0; i < data.layers.size(); i++)
+	for (int i = 0; i < data.backgroundTileLayers.size(); i++)
 	{
-		if (data.layers[i].empty())
+		if (data.backgroundTileLayers[i].empty())
 		{
-			g_logger->logError("LevelReader", "Error in level data : layer " + std::to_string(i) + std::string(" empty"));
+			g_logger->logError("LevelReader", "Error in level data : background tile layer " + std::to_string(i) + std::string(" empty"));
 			return false;
 		}
-		if (data.layers[i].size() != data.mapSize.x * data.mapSize.y)
+		if (data.backgroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y)
 		{
-			g_logger->logError("LevelReader", "Error in level data : layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
+			g_logger->logError("LevelReader", "Error in level data : background tile layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
+			return false;
+		}
+	}
+	if (data.foregroundTileLayers.empty())
+	{
+		g_logger->logInfo("LevelReader", "No foreground tile layers set");
+	}
+	for (int i = 0; i < data.foregroundTileLayers.size(); i++)
+	{
+		if (data.foregroundTileLayers[i].empty())
+		{
+			g_logger->logError("LevelReader", "Error in level data : foreground tile layer " + std::to_string(i) + std::string(" empty"));
+			return false;
+		}
+		if (data.foregroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y)
+		{
+			g_logger->logError("LevelReader", "Error in level data : foreground tile layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}
@@ -112,12 +125,22 @@ bool LevelReader::checkData(LevelData& data) const
 	}
 	if (data.collidableTiles.empty())
 	{
-		g_logger->logError("LevelReader", "Error in level data : collidable layer is empty");
+		g_logger->logError("LevelReader", "Error in level data : collidable layer is empty (can be all zeros but must be set)");
 		return false;
 	}
 	if (data.collidableTiles.size() != data.mapSize.x * data.mapSize.y)
 	{
 		g_logger->logError("LevelReader", "Error in level data : collidable layer has not correct size (map size)");
+		return false;
+	}
+	if (data.evilTiles.empty())
+	{
+		g_logger->logError("LevelReader", "Error in level data : evil layer is empty (can be all zeros but must be set)");
+		return false;
+	}
+	if (data.evilTiles.size() != data.mapSize.x * data.mapSize.y)
+	{
+		g_logger->logError("LevelReader", "Error in level data : evil layer has not correct size (map size)");
 		return false;
 	}
 	
@@ -246,9 +269,9 @@ bool LevelReader::readLevelExit(char* start, char* end, LevelData& data) const
 	return true;
 }
 
-bool LevelReader::readLayerTiles(char* start, char* end, LevelData& data) const
+bool LevelReader::readLayerTilesBackground(char* start, char* end, LevelData& data) const
 {
-	// add a new layer into data
+	// add a new background tile layer into data
 	vector<int> layer;
 
 	char* startData;
@@ -268,7 +291,33 @@ bool LevelReader::readLayerTiles(char* start, char* end, LevelData& data) const
 		}
 	}
 	
-	data.layers.push_back(layer);
+	data.backgroundTileLayers.push_back(layer);
+	return true;
+}
+
+bool LevelReader::readLayerTilesForeground(char* start, char* end, LevelData& data) const
+{
+	// add a new foreground tile layer into data
+	vector<int> layer;
+
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+
+	while (startData != NULL)
+	{
+		layer.push_back(atoi(startData));
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+
+	data.foregroundTileLayers.push_back(layer);
 	return true;
 }
 
@@ -296,6 +345,30 @@ bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data) c
 	return true;
 }
 
+bool LevelReader::readLayerEvil(char* start, char* end, LevelData& data) const
+{
+	data.evilTiles.clear();
+
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+
+	while (startData != NULL)
+	{
+		data.evilTiles.push_back(0 != atoi(startData));
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+
+	return true;
+}
+
 bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data) const
 {
 	char* startData;
@@ -305,13 +378,12 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 	endData = gotoNextChar(startData, end, '"');
 
 	// read dynamic tile id
-	int id = atoi(startData);
-	if (m_dynamicTileMap.find(id) == m_dynamicTileMap.end())
+	DynamicTileID id = static_cast<DynamicTileID>(atoi(startData));
+	if (id <= DynamicTileID::Void || id >= DynamicTileID::MAX)
 	{
-		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + std::to_string(id));
+		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
 	}
-	DynamicTileID dynamicTile = m_dynamicTileMap.at(id);
 	vector<bool> dynamicTiles;
 	startData = gotoNextChar(startData, endData, ',');
 	startData++;
@@ -326,7 +398,7 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 		}
 	}
 
-	data.dynamicTiles.push_back(std::pair<DynamicTileID, vector<bool>>(dynamicTile, dynamicTiles));
+	data.dynamicTiles.push_back(std::pair<DynamicTileID, vector<bool>>(id, dynamicTiles));
 
 	return true;
 }
@@ -339,10 +411,15 @@ bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data) c
 	startData++;
 	endData = gotoNextChar(startData, end, '"');
 
+	int firstgid = atoi(startData);
+	startData = gotoNextChar(start, end, ',');
+	startData++;
+
 	LevelItemID levelItem;
 	while (startData != NULL)
 	{
 		int id = atoi(startData);
+		id = (id == 0) ? id : id - firstgid + 1;
 		if (m_levelItemMap.find(id) == m_levelItemMap.end())
 		{
 			g_logger->logError("LevelReader", "Level item ID not recognized: " + std::to_string(id));
@@ -367,10 +444,15 @@ bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) cons
 	startData++;
 	endData = gotoNextChar(startData, end, '"');
 
+	int firstgid = atoi(startData);
+	startData = gotoNextChar(start, end, ',');
+	startData++;
+
 	EnemyID enemy;
 	while (startData != NULL)
 	{
 		int id = atoi(startData);
+		id = (id == 0) ? id : id - firstgid + 1;
 		if (m_enemyMap.find(id) == m_enemyMap.end())
 		{
 			g_logger->logError("LevelReader", "Enemy ID not recognized: " + std::to_string(id));
@@ -384,20 +466,6 @@ bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) cons
 			startData++;
 		}
 	}
-	return true;
-}
-
-bool LevelReader::readStartPos(char* start, char* end, LevelData& data) const
-{
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	int x = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	int y = atoi(startData);
-	sf::Vector2f pos(static_cast<float>(x), static_cast<float>(y));
-	data.startPos = pos;
 	return true;
 }
 
@@ -472,9 +540,21 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, LAYER_TILES, strlen(LAYER_TILES)) == 0) {
-			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_TILES);
-			noError = readLayerTiles(pos, end, data);
+		else if (strncmp(pos, LAYER_EVIL, strlen(LAYER_EVIL)) == 0) {
+			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_EVIL);
+			noError = readLayerEvil(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, LAYER_TILES_BACKGROUND, strlen(LAYER_TILES_BACKGROUND)) == 0) {
+			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_TILES_BACKGROUND);
+			noError = readLayerTilesBackground(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, LAYER_TILES_FOREGROUND, strlen(LAYER_TILES_FOREGROUND)) == 0) {
+			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_TILES_FOREGROUND);
+			noError = readLayerTilesForeground(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
@@ -494,11 +574,6 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_ENEMIES);
 			noError = readLayerEnemies(pos, end, data);
 			pos = gotoNextChar(pos, end, ';');
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, CENDRIC_STARTPOS, strlen(CENDRIC_STARTPOS)) == 0) {
-			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + CENDRIC_STARTPOS);
-			noError = readStartPos(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, LAYER_BACKGROUND, strlen(LAYER_BACKGROUND)) == 0) {
@@ -536,10 +611,6 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 
 void LevelReader::updateData(LevelData& data)  const
 {
-	// update start pos
-	data.startPos.x = data.startPos.x * data.tileSize.x;
-	data.startPos.y = data.startPos.y * data.tileSize.y;
-
 	// update level exits
 	vector<LevelExitBean> oldExits = data.levelExits;
 	data.levelExits.clear();
@@ -571,6 +642,27 @@ void LevelReader::updateData(LevelData& data)  const
 			x = 0;
 			y++;
 			data.collidableTilePositions.push_back(xLine); // push back creates a copy of that vector.
+			xLine.clear();
+		}
+		else
+		{
+			x++;
+		}
+	}
+
+	// calculate evil tiles
+	x = 0;
+	y = 0;
+	xLine.clear();
+
+	for (std::vector<bool>::iterator it = data.evilTiles.begin(); it != data.evilTiles.end(); ++it)
+	{
+		xLine.push_back((*it));
+		if (x + 1 >= data.mapSize.x)
+		{
+			x = 0;
+			y++;
+			data.evilTilePositions.push_back(xLine); // push back creates a copy of that vector.
 			xLine.clear();
 		}
 		else

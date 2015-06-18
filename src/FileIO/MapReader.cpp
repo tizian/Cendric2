@@ -14,11 +14,6 @@ bool MapReader::checkData(MapData& data) const
 		g_logger->logError("MapReader", "Error in map data : tile size not set / invalid");
 		return false;
 	}
-	if (data.startPos.x < 0 || data.startPos.x > data.mapSize.x || data.startPos.y < 0 || data.startPos.y > data.mapSize.y)
-	{
-		g_logger->logError("MapReader", "Error in map data : invalid start position, must be in range of map");
-		return false;
-	}
 	if (data.name.empty())
 	{
 		g_logger->logError("MapReader", "Error in map data : map name not set / empty");
@@ -26,7 +21,7 @@ bool MapReader::checkData(MapData& data) const
 	}
 	if (data.tileSetPath.empty())
 	{
-		g_logger->logError("MapReader", "Error in map data : tileset-path not set / empty");
+		g_logger->logError("MapReader", "Error in map data : tileset path not set / empty");
 		return false;
 	}
 	if (data.backgroundLayers.empty())
@@ -62,16 +57,7 @@ bool MapReader::checkData(MapData& data) const
 	}
 	for (auto it : data.levelEntries)
 	{
-		for (auto it2 : data.levelEntries)
-		{
-			if (it != it2 && it.first.intersects(it2.first))
-			{
-				g_logger->logError("MapReader", "Error in map data : there are at least two level entries with intersection.");
-				return false;
-			}
-		}
-
-		if (it.first.left < 0.0 || it.first.top < 0.0 || it.first.left >= data.mapSize.x || it.first.top >= data.mapSize.y)
+		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x || it.mapExitRect.top >= data.mapSize.y)
 		{
 			g_logger->logError("MapReader", "Error in map data : a level entry rect is out of range for this map.");
 			return false;
@@ -124,15 +110,9 @@ bool MapReader::readTilesetPath(char* start, char* end, MapData& data) const
 bool MapReader::readLevelEntry(char* start, char* end, MapData& data) const
 {
 	char* startData;
+
+	// read level entry rect
 	startData = gotoNextChar(start, end, ':');
-	startData++;
-	LevelID id = static_cast<LevelID>(atoi(startData));
-	if (id <= LevelID::Void || id >= LevelID::MAX)
-	{
-		g_logger->logError("MapReader", "Could not read level entry : level ID not recognized.");
-		return false;
-	}
-	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	float left = static_cast<float>(atof(startData));
 	startData = gotoNextChar(startData, end, ',');
@@ -144,15 +124,31 @@ bool MapReader::readLevelEntry(char* start, char* end, MapData& data) const
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	float height = static_cast<float>(atof(startData));
+	sf::FloatRect entry(left, top, width, height);
 
-	if (width <= 0.0 || height <= 0.0)
+	// read level spawn point
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	LevelID levelID = static_cast<LevelID>(atoi(startData));
+	if (levelID <= LevelID::Void || levelID >= LevelID::MAX)
 	{
-		g_logger->logError("MapReader", "Could not read level entry : level entry rect has a volume thats negative or null.");
+		g_logger->logError("MapReader", "Could not read level entry : Level ID not recognized.");
 		return false;
 	}
 
-	data.levelEntries.push_back(pair<sf::FloatRect, LevelID>(sf::FloatRect(left, top, width, height), id));
-
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float x = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float y = static_cast<float>(atof(startData));
+	sf::Vector2f spawnPoint(x, y);
+	
+	MapExitBean levelEntry;
+	levelEntry.mapExitRect = entry;
+	levelEntry.level = levelID;
+	levelEntry.levelSpawnPoint = spawnPoint;
+	data.levelEntries.push_back(levelEntry);
 	return true;
 }
 
@@ -259,20 +255,6 @@ bool MapReader::readLayerCollidable(char* start, char* end, MapData& data) const
 	return true;
 }
 
-bool MapReader::readStartPos(char* start, char* end, MapData& data) const
-{
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	float x = static_cast<float>(atof(startData));
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float y = static_cast<float>(atof(startData));
-	sf::Vector2f pos(x, y);
-	data.startPos = pos;
-	return true;
-}
-
 bool MapReader::readMap(char* fileName, MapData& data)
 {
 	FILE* mapFile;
@@ -356,11 +338,6 @@ bool MapReader::readMap(char* fileName, MapData& data)
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, CENDRIC_STARTPOS, strlen(CENDRIC_STARTPOS)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(CENDRIC_STARTPOS));
-			noError = readStartPos(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
 		else {
 			g_logger->logError("MapReader", "unknown tag found in file " + std::string(fileName));
 			return false;
@@ -391,10 +368,6 @@ bool MapReader::readMap(char* fileName, MapData& data)
 
 void MapReader::updateData(MapData& data) const
 {
-	// update start pos
-	data.startPos.x = data.startPos.x * data.tileSize.x;
-	data.startPos.y = data.startPos.y * data.tileSize.y;
-
 	int x = 0;
 	int y = 0;
 
@@ -417,17 +390,22 @@ void MapReader::updateData(MapData& data) const
 		}
 	}
 
-	// calculate level entries
-	std::vector<std::pair<sf::FloatRect, LevelID>> oldLevelEntries = data.levelEntries;
+	// update level entries
+	vector<MapExitBean> oldExits = data.levelEntries;
 	data.levelEntries.clear();
-	sf::FloatRect newRect;
-	for (auto it : oldLevelEntries) {
-		newRect = sf::FloatRect(
-			it.first.left * data.tileSize.x, 
-			it.first.top * data.tileSize.y, 
-			it.first.width * data.tileSize.x, 
-			it.first.height * data.tileSize.y);
-		data.levelEntries.push_back(std::pair<sf::FloatRect, LevelID>(newRect, it.second));
+	for (auto it : oldExits)
+	{
+		MapExitBean newBean;
+		newBean.mapExitRect = sf::FloatRect(
+			it.mapExitRect.left * data.tileSize.x,
+			it.mapExitRect.top * data.tileSize.y,
+			it.mapExitRect.width * data.tileSize.x,
+			it.mapExitRect.height * data.tileSize.y);
+		newBean.level = it.level;
+		newBean.levelSpawnPoint = sf::Vector2f(
+			it.levelSpawnPoint.x * data.tileSize.x,
+			it.levelSpawnPoint.y * data.tileSize.y);
+		data.levelEntries.push_back(newBean);
 	}
 
 	// calculate map rect

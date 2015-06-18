@@ -11,12 +11,14 @@ struct LevelData
 	std::string name;
 	sf::Vector2i mapSize;
 	sf::Vector2i tileSize;
-	sf::Vector2f startPos;
 	std::string tileSetPath;
 	std::vector<BackgroundLayer> backgroundLayers;
-	std::vector<std::vector<int>> layers;
+	std::vector<std::vector<int>> backgroundTileLayers;
+	std::vector<std::vector<int>> foregroundTileLayers;
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTilePositions;
+	std::vector<bool> evilTiles;
+	std::vector<std::vector<bool>> evilTilePositions;
 	std::vector<std::pair<DynamicTileID, std::vector<bool>>> dynamicTiles;
 	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTilePositions;
 	std::vector<LevelItemID> levelItems;

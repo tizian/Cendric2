@@ -5,5 +5,8 @@ enum class DynamicTileID
 	Void,
 	Water,
 	Ice,
-	Crumbly_block
+	Crumbly_block,
+	Torch,
+	Chest,
+	MAX
 };

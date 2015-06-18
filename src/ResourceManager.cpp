@@ -21,7 +21,7 @@ ResourceManager::~ResourceManager()
 void ResourceManager::init()
 {
 	m_levelFileNames.insert(
-		{ LevelID::Testlevel, "res/level/testlevel/testlevel.dric" }
+		{ LevelID::RatCave, "res/level/ratcave/ratcave.dric" }
 	);
 
 	m_mapFileNames.insert(
@@ -45,6 +45,8 @@ void ResourceManager::init()
 		{ ResourceID::Texture_tile_water, "res/assets/dynamic_tiles/spritesheet_tiles_water.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
+		{ ResourceID::Texture_tile_torch, "res/assets/dynamic_tiles/spritesheet_tiles_torch.png" },
+		{ ResourceID::Texture_tile_chest, "res/assets/dynamic_tiles/spritesheet_tiles_chest.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
@@ -262,11 +264,14 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_spell_fire);
 	deleteResource(ResourceID::Texture_spell_ice);
 	deleteResource(ResourceID::Texture_spell_forcefield);
+	deleteResource(ResourceID::Texture_spell_unlock);
 
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_water);
 	deleteResource(ResourceID::Texture_tile_ice);
 	deleteResource(ResourceID::Texture_tile_crumblyblock);
+	deleteResource(ResourceID::Texture_tile_torch);
+	deleteResource(ResourceID::Texture_tile_chest);
 
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
@@ -282,11 +287,14 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_spell_fire);
 	getTexture(ResourceID::Texture_spell_ice);
 	getTexture(ResourceID::Texture_spell_forcefield);
+	//getTexture(ResourceID::Texture_spell_unlock);
 
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_water);
 	getTexture(ResourceID::Texture_tile_ice);
 	getTexture(ResourceID::Texture_tile_crumblyblock);
+	getTexture(ResourceID::Texture_tile_torch);
+	getTexture(ResourceID::Texture_tile_chest);
 }
 
 

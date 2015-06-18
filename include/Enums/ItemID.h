@@ -8,8 +8,14 @@ enum class ItemID
 	Equipment_head_wizardhat_grey,
 	Equipment_weapon_staff_ice,
 	Equipment_weapon_rustysword,
+	Equipment_ring_ringOfLesserHealth,
+	Food_CaveBerry,
+	Food_HealingHerb,
+	Food_GlowingShroom,
 	Food_Cheese,
 	Food_Bread,
 	Food_Water,
+	Quest_Letter,
+	Misc_GoldenGoblet,
 	MAX
 };
