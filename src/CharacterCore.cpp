@@ -168,6 +168,12 @@ void CharacterCore::addGold(int gold)
 	m_data.gold += std::max(gold, 0);
 }
 
+void CharacterCore::resetHealth()
+{
+	m_data.attributes.currentHealthPoints = m_data.attributes.maxHealthPoints;
+	reloadStats();
+}
+
 void CharacterCore::setMap(const sf::Vector2f& position, MapID map)
 {
 	m_data.currentMap = map;

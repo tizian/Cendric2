@@ -47,11 +47,14 @@ void ResourceManager::init()
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/dynamic_tiles/spritesheet_tiles_torch.png" },
 		{ ResourceID::Texture_tile_chest, "res/assets/dynamic_tiles/spritesheet_tiles_chest.png" },
+		{ ResourceID::Texture_tile_spikesbottom, "res/assets/dynamic_tiles/spritesheet_tiles_spikesBottom.png" },
+		{ ResourceID::Texture_tile_spikestop, "res/assets/dynamic_tiles/spritesheet_tiles_spikesTop.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
+		{ ResourceID::Texture_screen_gameover, "res/screens/screen_gameover.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
 		{ ResourceID::Texture_screen_credits, "res/screens/screen_credits.png" },
 		{ ResourceID::Texture_levelitems, "res/assets/items/spritesheet_levelitems.png" },
@@ -272,6 +275,8 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_tile_crumblyblock);
 	deleteResource(ResourceID::Texture_tile_torch);
 	deleteResource(ResourceID::Texture_tile_chest);
+	deleteResource(ResourceID::Texture_tile_spikesbottom);
+	deleteResource(ResourceID::Texture_tile_spikestop);
 
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
@@ -279,6 +284,9 @@ void ResourceManager::deleteLevelResources()
 
 	// delete item in level resources
 	deleteResource(ResourceID::Texture_levelitems);
+	
+	// delete game over sprite
+	deleteResource(ResourceID::Texture_screen_gameover);
 }
 
 void ResourceManager::loadLevelResources()
@@ -295,6 +303,11 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_tile_crumblyblock);
 	getTexture(ResourceID::Texture_tile_torch);
 	getTexture(ResourceID::Texture_tile_chest);
+	getTexture(ResourceID::Texture_tile_spikestop);
+	getTexture(ResourceID::Texture_tile_spikesbottom);
+
+	// load game over sprite 
+	getTexture(ResourceID::Texture_screen_gameover);
 }
 
 

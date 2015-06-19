@@ -35,7 +35,7 @@ void InputController::update()
 	// update mouse position
 	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
 	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
-	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT + BOTTOM_BORDER) / m_windowSize.y);
+	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT) / m_windowSize.y);
 	sf::Vector2f view = sf::Vector2f(
 		m_mainWindow->getView().getCenter().x - m_mainWindow->getView().getSize().x / 2,
 		m_mainWindow->getView().getCenter().y - m_mainWindow->getView().getSize().y / 2);
@@ -72,7 +72,7 @@ void InputController::init()
 	
 
 	m_windowSize.x = WINDOW_WIDTH;
-	m_windowSize.y = WINDOW_HEIGHT + BOTTOM_BORDER;
+	m_windowSize.y = WINDOW_HEIGHT;
 }
 
 void InputController::setCurrentWindowSize(int width, int height)

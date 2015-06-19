@@ -23,7 +23,7 @@ Screen* CreditsScreen::update(const sf::Time& frameTime)
 
 void CreditsScreen::render(sf::RenderTarget &renderTarget)
 {
-	setViewToStandardView(renderTarget);
+	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(*m_title);
 	renderTarget.draw(*m_credits);

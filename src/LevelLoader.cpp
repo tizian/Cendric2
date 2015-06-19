@@ -27,6 +27,12 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 		case DynamicTileID::Chest:
 			tile = new ChestTile();
 			break;
+		case DynamicTileID::SpikesBottom:
+			tile = new SpikesBottomTile();
+			break;
+		case DynamicTileID::SpikesTop:
+			tile = new SpikesTopTile();
+			break;
 		default:
 			// unexpected error
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
@@ -35,7 +41,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 
 		tile->setTileSize(data.tileSize);
 		tile->load();
-		tile->setPosition(it->second);
+		tile->setPosition(it->second - tile->getSpriteOffset());
 		screen->addObject(GameObjectType::_DynamicTile, tile);
 	}
 }
@@ -59,7 +65,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 22, 22);
 			item.texturePositions.push_back(sf::IntRect(0, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipCheese";
+			item.tooltip = "It_Cheese";
 			item.item = ItemID::Food_Cheese;
 			break;
 		case LevelItemID::EQ_Ring_RingOfLesserHealth:
@@ -67,7 +73,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 5, 5);
 			item.texturePositions.push_back(sf::IntRect(200, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipRingOfLesserHealth";
+			item.tooltip = "It_RingOfLesserHealth";
 			item.item = ItemID::Equipment_ring_ringOfLesserHealth;
 			break;
 		case LevelItemID::Food_Bread:
@@ -75,7 +81,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 30, 5);
 			item.texturePositions.push_back(sf::IntRect(50, 100, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipBread";
+			item.tooltip = "It_Bread";
 			item.item = ItemID::Food_Bread;
 			break;
 		case LevelItemID::Food_CaveBerry:
@@ -83,7 +89,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 50, 70);
 			item.texturePositions.push_back(sf::IntRect(0, 0, 50, 100));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipCaveBerry";
+			item.tooltip = "It_CaveBerry";
 			item.item = ItemID::Food_CaveBerry;
 			break;
 		case LevelItemID::Food_GlowingShroom:
@@ -91,7 +97,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 30, 30);
 			item.texturePositions.push_back(sf::IntRect(100, 50, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipGlowingShroom";
+			item.tooltip = "It_GlowingShroom";
 			item.item = ItemID::Food_GlowingShroom;
 			break;
 		case LevelItemID::Food_HealingHerb:
@@ -99,7 +105,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 30, 50);
 			item.texturePositions.push_back(sf::IntRect(50, 50, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipHealingHerb";
+			item.tooltip = "It_HealingHerb";
 			item.item = ItemID::Food_HealingHerb;
 			break;
 		case LevelItemID::Food_Water:
@@ -107,7 +113,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 18, 30);
 			item.texturePositions.push_back(sf::IntRect(200, 50, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipWater";
+			item.tooltip = "It_Water";
 			item.item = ItemID::Food_Water;
 			break;
 		case LevelItemID::Gold_OneCoin:
@@ -115,7 +121,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 5, 5);
 			item.texturePositions.push_back(sf::IntRect(100, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipOneCoin";
+			item.tooltip = "It_OneCoin";
 			item.item = ItemID::Void;
 			item.goldValue = 1;
 			break;
@@ -124,7 +130,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 25, 25);
 			item.texturePositions.push_back(sf::IntRect(150, 50, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipThreeCoins";
+			item.tooltip = "It_ThreeCoins";
 			item.item = ItemID::Void;
 			item.goldValue = 3;
 			break;
@@ -133,7 +139,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 30, 40);
 			item.texturePositions.push_back(sf::IntRect(50, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipGoldenGoblet";
+			item.tooltip = "It_GoldenGoblet";
 			item.item = ItemID::Misc_GoldenGoblet;
 			break;
 		case LevelItemID::Quest_Letter:
@@ -141,7 +147,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.boundingBox = sf::FloatRect(0, 0, 50, 30);
 			item.texturePositions.push_back(sf::IntRect(150, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
-			item.tooltip = "LevelItemTooltipLetter";
+			item.tooltip = "It_Letter";
 			item.item = ItemID::Quest_Letter;
 			break;
 		default:
@@ -165,9 +171,9 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 		levelItem->setCurrentAnimation(levelItem->getAnimation(GameObjectState::Idle), false);
 		levelItem->playCurrentAnimation(item.texturePositions.size() > 1);
 		levelItem->loadItem(mainCharacter, it->first);
-		levelItem->setTooltipText(g_textProvider->getText(item.tooltip));
 		levelItem->setItemID(item.item);
 		levelItem->setPosition(it->second - levelItem->getSpriteOffset());
+		levelItem->setTooltipText(g_textProvider->getText(item.tooltip));
 		screen->addObject(GameObjectType::_LevelItem, levelItem);
 	}
 }

@@ -37,11 +37,9 @@ public:
 	// checks collision with the collidable grid of that level
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;
-	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY) const;
-
-	// check with evil tiles
-	bool diesX(const sf::FloatRect& boundingBox) const;
-	bool diesY(const sf::FloatRect& boundingBox) const;
+	bool collidesLevelBottom(const sf::FloatRect& boundingBox) const;
+	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const;
+	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect* boundingBox) const;
 
 	const TileMap& getTilemap() const;
 	const sf::FloatRect& getLevelRect() const;

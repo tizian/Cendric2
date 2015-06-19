@@ -18,6 +18,8 @@ public:
 	void load() override;
 	void onHit(Spell* spell);
 	void update(const sf::Time& frameTime) override;
+	void addDamage(int damage) override;
+	void setDead() override;
 
 	void setCharacterCore(CharacterCore* core);
 	// adds the item to the players inventory

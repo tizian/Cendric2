@@ -17,8 +17,6 @@ struct LevelData
 	std::vector<std::vector<int>> foregroundTileLayers;
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTilePositions;
-	std::vector<bool> evilTiles;
-	std::vector<std::vector<bool>> evilTilePositions;
 	std::vector<std::pair<DynamicTileID, std::vector<bool>>> dynamicTiles;
 	std::vector<std::pair<DynamicTileID, sf::Vector2f>> dynamicTilePositions;
 	std::vector<LevelItemID> levelItems;

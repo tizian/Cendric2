@@ -31,7 +31,7 @@ Screen* LoadingScreen::update(const sf::Time& frameTime)
 
 void LoadingScreen::render(sf::RenderTarget &renderTarget)
 {
-	setViewToStandardView(renderTarget);
+	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 }
 

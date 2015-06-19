@@ -58,12 +58,7 @@ void LevelMainCharacter::onHit(Spell* spell)
 	default:
 		break;
 	}
-	m_attributes->currentHealthPoints = m_attributes->currentHealthPoints - std::max(damage, 0);
-	if (m_attributes->currentHealthPoints < 0)
-	{
-		m_attributes->currentHealthPoints = 0;
-		m_isDead = true;
-	}
+	addDamage(damage);
 }
 
 void LevelMainCharacter::handleInput()
@@ -111,6 +106,21 @@ void LevelMainCharacter::handleInput()
 	}
 }
 
+void LevelMainCharacter::addDamage(int damage)
+{
+	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints - damage));
+	if (m_attributes->currentHealthPoints == 0)
+	{
+		m_isDead = true;
+	}
+}
+
+void LevelMainCharacter::setDead()
+{
+	m_attributes->currentHealthPoints = 0;
+	m_isDead = true;
+}
+
 void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 {
 	m_core = core;
@@ -121,7 +131,10 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 void LevelMainCharacter::update(const sf::Time& frameTime)
 {
 	LevelMovableGameObject::update(frameTime);
-	updateRegeneration(frameTime);
+	if (!m_isDead)
+	{
+		updateRegeneration(frameTime);
+	}
 }
 
 void LevelMainCharacter::updateRegeneration(const sf::Time& frameTime)

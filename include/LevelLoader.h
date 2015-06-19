@@ -9,6 +9,8 @@
 #include "DynamicTiles/CrumblyBlockTile.h"
 #include "DynamicTiles/TorchTile.h"
 #include "DynamicTiles/ChestTile.h"
+#include "DynamicTiles/SpikesBottomTile.h"
+#include "DynamicTiles/SpikesTopTile.h"
 
 #include "Enums/DynamicTileID.h"
 #include "Enums/LevelItemID.h"

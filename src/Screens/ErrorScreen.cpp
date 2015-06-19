@@ -30,7 +30,7 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core)
 
 void ErrorScreen::render(sf::RenderTarget &renderTarget)
 {
-	setViewToStandardView(renderTarget);
+	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(m_errorText);
 }

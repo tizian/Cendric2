@@ -27,7 +27,6 @@ private:
 	bool readTileSize(char* start, char* end, LevelData& data) const;
 	bool readLayerBackground(char* start, char* end, LevelData& data) const;
 	bool readLayerCollidable(char* start, char* end, LevelData& data) const;
-	bool readLayerEvil(char* start, char* end, LevelData& data) const;
 	bool readLayerTilesBackground(char* start, char* end, LevelData& data) const;
 	bool readLayerTilesForeground(char* start, char* end, LevelData& data) const;
 	bool readLayerDynamicTiles(char* start, char* end, LevelData& data) const;
@@ -50,7 +49,6 @@ private:
 	const char* MAP_TILESIZE = "map.tilesize";
 	const char* TILESET_PATH = "tileset.path";
 	const char* LAYER_COLLIDABLE = "layer.collidable";
-	const char* LAYER_EVIL = "layer.evil";
 	const char* LAYER_TILES_BACKGROUND = "layer.tiles.background";
 	const char* LAYER_TILES_FOREGROUND = "layer.tiles.foreground";
 	const char* LAYER_DYNAMIC_TILES = "layer.dynamictiles";

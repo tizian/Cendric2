@@ -106,7 +106,7 @@ const BitmapText* Screen::getTooltipText() const
 	return &m_tooltipText;
 }
 	
-void Screen::setTooltipText(const wstring& text, const sf::Vector2f& position, const sf::Color& color, bool isOverride)
+void Screen::setTooltipText(const wstring& text, const sf::Color& color, bool isOverride)
 {
 	if (m_tooltipTime > sf::Time::Zero && !isOverride)
 	{
@@ -117,33 +117,17 @@ void Screen::setTooltipText(const wstring& text, const sf::Vector2f& position, c
 		text,
 		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
 	m_tooltipText.setCharacterSize(12);
-	m_tooltipText.setPosition(position);
+	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 10.f);
 	m_tooltipText.setColor(color);
-	m_tooltipTime = sf::seconds(0.05f * static_cast<float>(text.length()));
+	m_tooltipTime = sf::seconds(0.06f * static_cast<float>(text.length()));
 }
 
 void Screen::renderTooltipText(sf::RenderTarget& target) const
 {
-	setViewToTooltipView(target);
+	sf::View oldView = target.getView();
+	target.setView(target.getDefaultView());
 	target.draw(m_tooltipText);
-}
-
-void Screen::setViewToStandardView(sf::RenderTarget& target) const
-{
-	sf::View view;
-	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
-	view.setCenter(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
-	target.setView(view);
-}
-
-void Screen::setViewToTooltipView(sf::RenderTarget& target) const
-{
-	sf::View view;
-	view.setSize(WINDOW_WIDTH, BOTTOM_BORDER);
-	view.setViewport(sf::FloatRect(0.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER), 1.f, static_cast<float>(BOTTOM_BORDER) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
-	view.setCenter(WINDOW_WIDTH / 2.f, BOTTOM_BORDER / 2.f);
-	target.setView(view);
+	target.setView(oldView);
 }
 
 CharacterCore* Screen::getCharacterCore() const

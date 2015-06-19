@@ -1,5 +1,6 @@
 #include "Screens/GameScreen.h"
 #include "Screens/LoadingScreen.h"
+#include "Screens/MenuScreen.h"
 
 using namespace std;
 
@@ -27,14 +28,46 @@ void GameScreen::execOnEnter(const Screen *previousScreen)
 void GameScreen::execOnExit(const Screen *nextScreen)
 {
 	m_currentLevel.dispose();
+	delete m_gameOverSprite;
+	delete m_youDied;
 }
 
 Screen* GameScreen::update(const sf::Time& frameTime)
 {
-	LevelExitBean* bean = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
-	if (bean == nullptr || m_isOnLevelExit)
+	// handle game over
+	if (!m_isGameOver && m_mainChar->isDead())
 	{
-		m_isOnLevelExit = (bean != nullptr);
+		m_isGameOver = true;
+		m_gameOverSprite = new sf::Sprite(*g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
+		m_youDied = new BitmapText(g_textProvider->getText("YouDied"));
+		m_youDied->setCharacterSize(56);
+		m_youDied->setColor(sf::Color::Red);
+		m_youDied->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_youDied->getLocalBounds().width) / 2.f), 200.f));
+		m_retryButton = new Button(sf::FloatRect(475, 410, 300, 50), ButtonOrnamentStyle::MEDIUM);
+		m_retryButton->setText("RetryLevel");
+		addObject(GameObjectType::_Button, m_retryButton);
+		m_backToMenuButton = new Button(sf::FloatRect(475, 470, 300, 50), ButtonOrnamentStyle::MEDIUM);
+		m_backToMenuButton->setText("BackToMenu");
+		addObject(GameObjectType::_Button, m_backToMenuButton);
+	}
+
+	if (m_isGameOver && m_retryButton->isClicked())
+	{
+		// be nice!
+		m_characterCore->resetHealth();
+		return new LoadingScreen(m_characterCore->getData().currentLevel, m_characterCore);
+	} 
+
+	if (m_isGameOver && m_backToMenuButton->isClicked())
+	{
+		// be nice!
+		m_characterCore->resetHealth();
+		return new MenuScreen(m_characterCore);
+	}
+
+	LevelExitBean* bean = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
+	if (bean == nullptr || m_isGameOver || !g_inputController->isKeyActive(Key::Up))
+	{
 		updateTooltipText(frameTime);
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
 		updateObjects(GameObjectType::_LevelEquipment, frameTime);
@@ -42,11 +75,12 @@ Screen* GameScreen::update(const sf::Time& frameTime)
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_LevelItem, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
+		updateObjects(GameObjectType::_Button, frameTime);
 		m_interface.update(frameTime);
 		deleteDisposedObjects();
 		return this;
 	}
-	else
+	else 
 	{
 		m_characterCore->setMap(bean->mapSpawnPoint, bean->map);
 		delete bean;
@@ -56,7 +90,7 @@ Screen* GameScreen::update(const sf::Time& frameTime)
 
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
-	renderTooltipText(renderTarget);
+	
 	// don't render dynamic tiles here, they are rendered in the level.
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	// ASSURE that at this point, the view is the correct game view
@@ -65,6 +99,16 @@ void GameScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
+
 	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	renderTooltipText(renderTarget);
 	m_interface.render(renderTarget);
+
+	if (m_isGameOver)
+	{
+		renderTarget.setView(renderTarget.getDefaultView());
+		renderTarget.draw(*m_gameOverSprite);
+		renderTarget.draw(*m_youDied);
+		renderObjects(GameObjectType::_Button, renderTarget);
+	}
 }

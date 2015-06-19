@@ -3,8 +3,8 @@
 
 void TorchTile::load()
 {
-	setSpriteOffset(sf::Vector2f(0.f, static_cast<float>(m_tileSize.y) / 2));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
+	setSpriteOffset(sf::Vector2f(-10.f, -static_cast<float>(m_tileSize.y) / 2));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x) / 2.f, static_cast<float>(m_tileSize.y)));
 	m_isCollidable = false;
 
 	Animation burningAnimation;

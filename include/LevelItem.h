@@ -7,6 +7,8 @@
 #include "Item.h"
 #include "Enums/LevelItemID.h"
 
+#include "GUI/BitmapText.h"
+
 class LevelMainCharacter;
 
 // A item cendric can collect in a level
@@ -18,6 +20,7 @@ public:
 	void onRightClick() override;
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
+	void update(const sf::Time& frameTime) override;
 	
 	void setTooltipText(const std::wstring& tooltip);
 	void setItemID(ItemID id);
@@ -34,5 +37,6 @@ private:
 	ItemID m_itemID;
 	// only relevant for gold items. they have their item id void.
 	int m_goldValue;
-	std::wstring m_tooltipText;
+	BitmapText m_tooltipText;
+	sf::Time m_tooltipTime = sf::Time::Zero;
 };

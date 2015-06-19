@@ -54,7 +54,7 @@ private:
 	// calculates position according to m_mob
 	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
 	// collisions with mainchar
-	void checkCollisionsWithMainChar(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY);
+	void checkCollisionsWithMainChar(const sf::FloatRect* boundingBox);
 	// collisions with enemies
-	void checkCollisionsWithEnemies(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY);
+	void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
 };

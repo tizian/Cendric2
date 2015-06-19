@@ -8,5 +8,7 @@ enum class DynamicTileID
 	Crumbly_block,
 	Torch,
 	Chest,
+	SpikesBottom,
+	SpikesTop,
 	MAX
 };

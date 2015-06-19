@@ -91,6 +91,15 @@ void Spell::update(const sf::Time& frameTime)
 	}
 	
 	checkCollisions(m_nextPosition);
+	// check collisions with dynamic tiles
+	m_level->collideWithDynamicTiles(this, getBoundingBox());
+	// check collisions with main char
+	if (m_mob == nullptr || !(m_mob->getConfiguredType() == GameObjectType::_MainCharacter))
+	{
+		checkCollisionsWithMainChar(getBoundingBox());
+	}
+	// check collisions with enemies
+	checkCollisionsWithEnemies(getBoundingBox());
 	MovableGameObject::update(frameTime);
 	
 	m_activeCoolDown = m_activeCoolDown - frameTime;
@@ -134,32 +143,22 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition)
 	{
 		setDisposed();
 	}
-
-	// check collisions with dynamic tiles
-	m_level->collideWithDynamicTiles(this, nextBoundingBoxX, nextBoundingBoxY);
-	// check collisions with main char
-	if (m_mob == nullptr || !(m_mob->getConfiguredType() == GameObjectType::_MainCharacter))
-	{
-		checkCollisionsWithMainChar(nextBoundingBoxX, nextBoundingBoxY);
-	}
-	// check collisions with enemies
-	checkCollisionsWithEnemies(nextBoundingBoxX, nextBoundingBoxY);
 }
 
-void Spell::checkCollisionsWithMainChar(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY)
+void Spell::checkCollisionsWithMainChar(const sf::FloatRect* boundingBox)
 {
-	if (m_mainChar->getBoundingBox()->intersects(nextBoundingBoxX) || m_mainChar->getBoundingBox()->intersects(nextBoundingBoxY))
+	if (m_mainChar->getBoundingBox()->intersects(*boundingBox))
 	{
 		m_mainChar->onHit(this);
 	}
 }
 
-void Spell::checkCollisionsWithEnemies(const sf::FloatRect& nextBoundingBoxX, const sf::FloatRect& nextBoundingBoxY)
+void Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox)
 {
 	for (std::vector<GameObject*>::iterator it = m_enemies->begin(); it != m_enemies->end(); ++it)
 	{
 		Enemy* enemy = dynamic_cast<Enemy*>((*it));
-		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(nextBoundingBoxX) || enemy->getBoundingBox()->intersects(nextBoundingBoxY)))
+		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox)))
 		{
 			enemy->onHit(this);
 		}

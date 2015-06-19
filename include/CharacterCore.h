@@ -42,6 +42,8 @@ public:
 	std::map<ItemID, int>* getItems();
 	// add gold to the data
 	void addGold(int gold);
+	// sets health to max health
+	void resetHealth();
 	// save the position and map id
 	void setMap(const sf::Vector2f& position, MapID map);
 	// save the position and level id

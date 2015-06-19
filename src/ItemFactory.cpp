@@ -5,8 +5,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 	switch (id)
 	{
 	case ItemID::Equipment_head_wizardhat_blue:
-		bean.description = "ItemDescriptionWizardhat";
-		bean.name = "ItemNameBlueWizardhat";
+		bean.description = "Itd_Wizardhat";
+		bean.name = "It_BlueWizardhat";
 		bean.type = ItemType::Equipment_head;
 		bean.iconTextureLocation = sf::Vector2i(100, 100);
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_blue;
@@ -18,8 +18,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.attributes.maxManaPoints = 5;
 		break;
 	case ItemID::Equipment_head_wizardhat_grey:
-		bean.description = "ItemDescriptionWizardhat";
-		bean.name = "ItemNameGreyWizardhat";
+		bean.description = "Itd_Wizardhat";
+		bean.name = "It_GreyWizardhat";
 		bean.type = ItemType::Equipment_head;
 		bean.iconTextureLocation = sf::Vector2i(150, 100);
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_grey;
@@ -31,8 +31,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.attributes.maxHealthPoints = 5;
 		break;
 	case ItemID::Equipment_weapon_staff_ice:
-		bean.description = "ItemDescriptionIcestaff";
-		bean.name = "ItemNameIcestaff";
+		bean.description = "Itd_Icestaff";
+		bean.name = "It_Icestaff";
 		bean.type = ItemType::Equipment_weapon;
 		bean.iconTextureLocation = sf::Vector2i(200, 100);
 		bean.levelEquipment = LevelEquipmentID::Weapon_icestaff;
@@ -44,8 +44,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.attributes.damagePhysical = 15;
 		break;
 	case ItemID::Equipment_weapon_rustysword:
-		bean.description = "ItemDescriptionRustysword";
-		bean.name = "ItemNameRustysword";
+		bean.description = "Itd_Rustysword";
+		bean.name = "It_Rustysword";
 		bean.type = ItemType::Equipment_weapon;
 		bean.iconTextureLocation = sf::Vector2i(250, 100);
 		bean.levelEquipment = LevelEquipmentID::Weapon_rustysword;
@@ -53,8 +53,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.attributes.damagePhysical = 5;
 		break;
 	case ItemID::Food_Cheese:
-		bean.description = "ItemDescriptionCheese";
-		bean.name = "ItemNameCheese";
+		bean.description = "Itd_Cheese";
+		bean.name = "It_Cheese";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(0, 100);
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -62,8 +62,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.value = 3;
 		break;
 	case ItemID::Food_Bread:
-		bean.description = "ItemDescriptionBread";
-		bean.name = "ItemNameBread";
+		bean.description = "Itd_Bread";
+		bean.name = "It_Bread";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(50, 100);
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -71,8 +71,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.value = 2;
 		break;
 	case ItemID::Food_Water:
-		bean.description = "ItemDescriptionWater";
-		bean.name = "ItemNameWater";
+		bean.description = "Itd_Water";
+		bean.name = "It_Water";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(100, 0);
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -81,8 +81,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.value = 2;
 		break;
 	case ItemID::Food_CaveBerry:
-		bean.description = "ItemDescriptionCaveBerry";
-		bean.name = "ItemNameCaveBerry";
+		bean.description = "Itd_CaveBerry";
+		bean.name = "It_CaveBerry";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(0, 0);
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -90,8 +90,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.value = 3;
 		break;
 	case ItemID::Food_GlowingShroom:
-		bean.description = "ItemDescriptionGlowingShroom";
-		bean.name = "ItemNameGlowingShroom";
+		bean.description = "Itd_GlowingShroom";
+		bean.name = "It_GlowingShroom";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(150, 50);
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -99,8 +99,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.value = 2;
 		break;
 	case ItemID::Food_HealingHerb:
-		bean.description = "ItemDescriptionHealingHerb";
-		bean.name = "ItemNameHealingHerb";
+		bean.description = "Itd_HealingHerb";
+		bean.name = "It_HealingHerb";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(50, 50);
 		bean.levelEquipment = LevelEquipmentID::Void;
@@ -108,24 +108,24 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.value = 5;
 		break;
 	case ItemID::Quest_Letter:
-		bean.description = "ItemDescriptionLetter";
-		bean.name = "ItemNameLetter";
+		bean.description = "Itd_Letter";
+		bean.name = "It_Letter";
 		bean.type = ItemType::Quest;
 		bean.iconTextureLocation = sf::Vector2i(200, 0);
 		bean.levelEquipment = LevelEquipmentID::Void;
 		bean.value = 0;
 		break;
 	case ItemID::Misc_GoldenGoblet:
-		bean.description = "ItemDescriptionGoldenGoblet";
-		bean.name = "ItemNameGoldenGoblet";
+		bean.description = "Itd_GoldenGoblet";
+		bean.name = "It_GoldenGoblet";
 		bean.type = ItemType::Misc;
 		bean.iconTextureLocation = sf::Vector2i(0, 50);
 		bean.levelEquipment = LevelEquipmentID::Void;
 		bean.value = 15;
 		break;
 	case ItemID::Equipment_ring_ringOfLesserHealth:
-		bean.description = "ItemDescriptionRingOfLesserHealth";
-		bean.name = "ItemNameRingOfLesserHealth";
+		bean.description = "Itd_RingOfLesserHealth";
+		bean.name = "It_RingOfLesserHealth";
 		bean.type = ItemType::Equipment_ring_1;
 		bean.iconTextureLocation = sf::Vector2i(100, 50);
 		bean.levelEquipment = LevelEquipmentID::Ring_ringOfLesserHealth;

@@ -80,8 +80,8 @@ void RatEnemy::handleInput()
 
 void RatEnemy::load()
 {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 30.f));
-	setSpriteOffset(sf::Vector2f(0.f, -20.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
+	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 
 	Animation walkingAnimation;
 	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_rat));

@@ -39,7 +39,7 @@ void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, static_cast<float>(WINDOW_HEIGHT) / (WINDOW_HEIGHT + BOTTOM_BORDER)));
+	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 
 	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_mapRect.width - WINDOW_WIDTH / 2.f, center.x));
 	float camCenterY = std::max((WINDOW_HEIGHT) / 2.f, std::min(m_mapRect.height - (WINDOW_HEIGHT) / 2.f, center.y));

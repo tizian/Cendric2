@@ -2,7 +2,7 @@
 
 Game::Game() : m_screenManager(new SplashScreen())
 {
-	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT + BOTTOM_BORDER), "Cendric");
+	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
 	m_mainWindow.setFramerateLimit(g_resourceManager->getMaxFPS());
 	g_inputController->setWindow(&m_mainWindow);
 	m_running = true;
@@ -37,7 +37,7 @@ void Game::run()
 		if (deltaTime.asMilliseconds() > 50)
 		{
 			frameTime = sf::milliseconds(50);
-			g_logger->logInfo("Game Loop", "Frame time just exceeded 50ms and is set down to 50ms. Its time was (ms): " + std::to_string(deltaTime.asMilliseconds()));
+			//g_logger->logInfo("Game Loop", "Frame time just exceeded 50ms and is set down to 50ms. Its time was (ms): " + std::to_string(deltaTime.asMilliseconds()));
 		}
 		else
 		{

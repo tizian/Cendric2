@@ -133,16 +133,6 @@ bool LevelReader::checkData(LevelData& data) const
 		g_logger->logError("LevelReader", "Error in level data : collidable layer has not correct size (map size)");
 		return false;
 	}
-	if (data.evilTiles.empty())
-	{
-		g_logger->logError("LevelReader", "Error in level data : evil layer is empty (can be all zeros but must be set)");
-		return false;
-	}
-	if (data.evilTiles.size() != data.mapSize.x * data.mapSize.y)
-	{
-		g_logger->logError("LevelReader", "Error in level data : evil layer has not correct size (map size)");
-		return false;
-	}
 	
 	return true;
 }
@@ -345,30 +335,6 @@ bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data) c
 	return true;
 }
 
-bool LevelReader::readLayerEvil(char* start, char* end, LevelData& data) const
-{
-	data.evilTiles.clear();
-
-	char* startData;
-	char* endData;
-	startData = gotoNextChar(start, end, '"');
-	startData++;
-	endData = gotoNextChar(startData, end, '"');
-
-
-	while (startData != NULL)
-	{
-		data.evilTiles.push_back(0 != atoi(startData));
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
-		{
-			startData++;
-		}
-	}
-
-	return true;
-}
-
 bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data) const
 {
 	char* startData;
@@ -540,12 +506,6 @@ bool LevelReader::readLevel(char* fileName, LevelData& data) const
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, LAYER_EVIL, strlen(LAYER_EVIL)) == 0) {
-			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_EVIL);
-			noError = readLayerEvil(pos, end, data);
-			pos = gotoNextChar(pos, end, ';');
-			pos = gotoNextChar(pos, end, '\n');
-		}
 		else if (strncmp(pos, LAYER_TILES_BACKGROUND, strlen(LAYER_TILES_BACKGROUND)) == 0) {
 			g_logger->log(LogLevel::Verbose, "LevelReader", std::string("Found tag ") + LAYER_TILES_BACKGROUND);
 			noError = readLayerTilesBackground(pos, end, data);
@@ -650,27 +610,6 @@ void LevelReader::updateData(LevelData& data)  const
 		}
 	}
 
-	// calculate evil tiles
-	x = 0;
-	y = 0;
-	xLine.clear();
-
-	for (std::vector<bool>::iterator it = data.evilTiles.begin(); it != data.evilTiles.end(); ++it)
-	{
-		xLine.push_back((*it));
-		if (x + 1 >= data.mapSize.x)
-		{
-			x = 0;
-			y++;
-			data.evilTilePositions.push_back(xLine); // push back creates a copy of that vector.
-			xLine.clear();
-		}
-		else
-		{
-			x++;
-		}
-	}
-	
 	// calculate dynamic tiles
 	int tileWidth = data.tileSize.x;
 	int tileHeight = data.tileSize.y;

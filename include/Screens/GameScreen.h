@@ -8,6 +8,7 @@
 #include "LevelMainCharacterLoader.h"
 #include "LevelInterface.h"
 
+#include "GUI/Button.h"
 #include "Enums/LevelID.h"
 
 class GameScreen : public Screen
@@ -25,5 +26,10 @@ private:
 	LevelMainCharacter* m_mainChar;
 	LevelID m_levelID;
 	LevelInterface m_interface;	
-	bool m_isOnLevelExit = true;
+
+	bool m_isGameOver = false;
+	BitmapText* m_youDied = nullptr;
+	sf::Sprite* m_gameOverSprite = nullptr;
+	Button* m_retryButton = nullptr;
+	Button* m_backToMenuButton = nullptr;
 };

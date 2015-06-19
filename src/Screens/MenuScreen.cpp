@@ -90,7 +90,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		// TODO hardcoded menu .sav file 
         std::string saveFilename = "saves/menusave.sav";
 		m_characterCore->save(saveFilename.c_str());
-		setTooltipText(L"Saved file to: saves/menusave.sav", sf::Vector2f(10.f, 10.f), sf::Color::White, true);
+		setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::White, true);
 	}
 	else if (m_optionsButton->isClicked())
 	{
@@ -124,12 +124,12 @@ void MenuScreen::setAllButtonsEnabled(bool value)
 
 void MenuScreen::render(sf::RenderTarget &renderTarget) 
 {
-	renderTooltipText(renderTarget);
-	setViewToStandardView(renderTarget);
+	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
+	renderTooltipText(renderTarget);
 }
 
 void MenuScreen::execOnEnter(const Screen *previousScreen)

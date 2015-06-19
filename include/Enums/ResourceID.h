@@ -3,7 +3,7 @@
 enum class ResourceID
 {
 	Void,
-	
+
 	BitmapFont_default,
 	Translations,
 	Configuration,
@@ -20,6 +20,8 @@ enum class ResourceID
 	Texture_tile_crumblyblock,
 	Texture_tile_torch,
 	Texture_tile_chest,
+	Texture_tile_spikestop,
+	Texture_tile_spikesbottom,
 	Texture_weapon_icestaff,
 	Texture_weapon_rustysword,
 	Texture_head_wizardhat_grey,
@@ -29,6 +31,7 @@ enum class ResourceID
 	Texture_screen_loading,
 	Texture_screen_error_fileNotFound,
 	Texture_screen_error_dataCorrupted,
+	Texture_screen_gameover,
 	Texture_screen_menu,
 	Texture_screen_credits,
 	Texture_enemy_rat,

@@ -24,6 +24,8 @@ public:
 	void onRightClick() override;
 	void onMouseOver() override;
 	void update(const sf::Time& frameTime) override;
+	void addDamage(int damage) override;
+	void setDead() override;
 
 	virtual void onHit(Spell* spell);
 	void setLoot(const std::map<ItemID, int>& items, int gold);

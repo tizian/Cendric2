@@ -14,6 +14,21 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	updateHpBar();
 }
 
+void Enemy::addDamage(int damage)
+{
+	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
+	if (m_attributes.currentHealthPoints == 0)
+	{
+		m_isDead = true;
+	}
+}
+
+void Enemy::setDead()
+{
+	m_attributes.currentHealthPoints = 0;
+	m_isDead = true;
+}
+
 void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
@@ -41,9 +56,14 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 	{
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
-		// set cendric down.
+		// set enemy down.
 		setPositionY(m_level->getGround(nextBoundingBoxY));
 		m_isGrounded = true;
+		if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY))
+		{
+			// colliding with level bottom is deadly.
+			setDead();
+		}
 	}
 
 	if (std::abs(getVelocity().y) > 0.0f)
@@ -93,12 +113,7 @@ void Enemy::onHit(Spell* spell)
 	default:
 		break;
 	}
-	m_attributes.currentHealthPoints = m_attributes.currentHealthPoints - std::max(damage, 0);
-	if (m_attributes.currentHealthPoints < 0)
-	{
-		m_attributes.currentHealthPoints = 0;
-		m_isDead = true;
-	}
+	addDamage(damage);
 }
 
 void Enemy::render(sf::RenderTarget &renderTarget)
@@ -175,7 +190,7 @@ void Enemy::onRightClick()
 		}
 		else
 		{
-			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Vector2f(10.f, 10.f), sf::Color::Red, true);
+			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
 		}
 	}
 }

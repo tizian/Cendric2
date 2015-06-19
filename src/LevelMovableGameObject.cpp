@@ -28,6 +28,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 	m_spellManager->update(frameTime);
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
+	m_level->collideWithDynamicTiles(this, getBoundingBox());
 	MovableGameObject::update(frameTime);
 	m_fightAnimationTime = (m_fightAnimationTime - frameTime) >= sf::Time::Zero ? m_fightAnimationTime - frameTime : sf::Time::Zero;
 	updateAnimation();
@@ -47,6 +48,7 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition)
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
+
 	// check for collision on y axis
 	bool collidesY = m_level->collidesY(nextBoundingBoxY);
 	if (!isMovingDown && collidesY)
@@ -58,9 +60,14 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition)
 	{
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
-		// set cendric down.
+		// set mob down.
 		setPositionY(m_level->getGround(nextBoundingBoxY));
 		m_isGrounded = true;
+		if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY))
+		{
+			// colliding with level bottom is deadly.
+			setDead();
+		}
 	}
 
 	if (std::abs(getVelocity().y) > 0.0f)
@@ -128,6 +135,11 @@ Level* LevelMovableGameObject::getLevel() const
 bool LevelMovableGameObject::getIsFacingRight() const
 {
 	return m_isFacingRight;
+}
+
+bool LevelMovableGameObject::isDead() const
+{
+	return m_isDead;
 }
 
 GameObjectState LevelMovableGameObject::getState() const

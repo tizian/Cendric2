@@ -1,8 +1,8 @@
 player.name:Ironbell
 # time played, in seconds
-time.played:5
+time.played:12
 map.id:1
-map.position:3450.5,450.514648
+map.position:3523.816162,625.415588
 # in this order: maxHealthPoints, maxManaPos, currentHealthPos, currentManaPos, healthRegenerationPerS, manaRegenerationPerS, damagePhysical, damageFire, damageIce, resistancePhysical, resistanceFire, resistanceIce 
 attributes:100,100,100,100,0,0,0,0,0,0,0,0
 gold:0
