@@ -32,7 +32,6 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
-	virtual sf::Color getConfiguredDebugColor() const override;
 	// determines the distance from the top of the enemies bounding box to its
 	// hp bar. Default is 20px.
 	virtual float getConfiguredDistanceToHPBar() const;

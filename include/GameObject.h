@@ -59,9 +59,8 @@ public:
 	// if this is set, the game object gets deleted in the next game loop
 	bool isDisposed() const;
 	virtual GameObjectType getConfiguredType() const = 0;
-	// returns the color in which the debug rect should be rendered. default is transparent.
-	virtual sf::Color getConfiguredDebugColor() const;
 	Screen* getScreen() const;
+	void setDebugBoundingBox(sf::Color debugColor);
 
 protected:
 	GameObjectState m_state;
@@ -78,5 +77,6 @@ private:
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 
-	void drawBoundingBox(sf::RenderTarget& renderTarget) const;
+	bool m_isDrawBoundingBox = false;
+	sf::RectangleShape m_debugBox;
 };

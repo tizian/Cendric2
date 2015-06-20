@@ -209,6 +209,8 @@ void LevelMainCharacter::load()
 	m_isFacingRight = true;
 	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	playCurrentAnimation(true);
+
+	setDebugBoundingBox(sf::Color::White);
 }
 
 float LevelMainCharacter::getConfiguredMaxVelocityY() const
@@ -229,11 +231,6 @@ float LevelMainCharacter::getConfiguredDampingGroundPersS() const
 GameObjectType LevelMainCharacter::getConfiguredType() const
 {
 	return GameObjectType::_MainCharacter;
-}
-
-sf::Color LevelMainCharacter::getConfiguredDebugColor() const
-{
-	return sf::Color::White;
 }
 
 void LevelMainCharacter::lootItem(ItemID item, int quantity) const

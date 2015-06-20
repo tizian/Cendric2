@@ -59,8 +59,6 @@ void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& sta
 {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
-
 	m_camera->setFocusCenter(center);
 
 	// parallax background layers
@@ -93,9 +91,9 @@ void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& sta
 	m_backgroundTileMap.draw(target, states);
 
 	// dynamic tiles
-	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); it++)
+	for (auto &it : (*m_dynamicTiles))
 	{
-		(*it)->render(target);
+		it->render(target);
 	}
 }
 

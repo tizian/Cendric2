@@ -20,11 +20,6 @@ GameObjectType DynamicTile::getConfiguredType() const
 	return GameObjectType::_DynamicTile;
 }
 
-sf::Color DynamicTile::getConfiguredDebugColor() const
-{
-	return sf::Color::Yellow;
-}
-
 void DynamicTile::onHit(LevelMovableGameObject* mob)
 {
 	// nop

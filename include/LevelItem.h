@@ -27,7 +27,6 @@ public:
 	void setGoldValue(int goldValue);
 
 	GameObjectType getConfiguredType() const override;
-	sf::Color getConfiguredDebugColor() const override;
 
 private:
 	LevelMainCharacter* m_mainChar;

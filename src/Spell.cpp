@@ -76,6 +76,7 @@ void Spell::init(SpellBean& bean)
 	m_reflectCount = bean.reflectCount;
 	m_speed = bean.startVelocity;
 	setBoundingBox(bean.boundingBox);
+	setDebugBoundingBox(sf::Color::Red);
 }
 
 void Spell::update(const sf::Time& frameTime)
@@ -173,11 +174,6 @@ const sf::Time& Spell::getActiveTime() const
 GameObjectType Spell::getConfiguredType() const
 {
 	return GameObjectType::_Spell;
-}
-
-sf::Color Spell::getConfiguredDebugColor() const
-{
-	return sf::Color::Red;
 }
 
 const MovableGameObject* Spell::getOwner() const

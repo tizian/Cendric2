@@ -30,7 +30,6 @@ public:
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;
 	GameObjectType getConfiguredType() const override;
-	sf::Color getConfiguredDebugColor() const override;
 
 protected:
 	float getConfiguredDampingGroundPersS() const;

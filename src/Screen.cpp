@@ -87,17 +87,17 @@ void Screen::deleteObjects(GameObjectType type)
 
 void Screen::updateObjects(GameObjectType type, sf::Time frameTime)
 {
-	for (std::vector<GameObject*>::iterator it = m_objects[type].begin(); it != m_objects[type].end(); ++it)
+	for (auto &it : m_objects[type])
 	{
-		(*it)->update(frameTime);
+		it->update(frameTime);
 	}
 }
 
 void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget)
 {
-	for (std::vector<GameObject*>::iterator it = m_objects[type].begin(); it != m_objects[type].end(); ++it)
+	for (auto &it : m_objects[type])
 	{
-		(*it)->render(renderTarget);
+		it->render(renderTarget);
 	}
 }
 

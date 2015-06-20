@@ -90,7 +90,6 @@ Screen* GameScreen::update(const sf::Time& frameTime)
 
 void GameScreen::render(sf::RenderTarget &renderTarget)
 {
-	
 	// don't render dynamic tiles here, they are rendered in the level.
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	// ASSURE that at this point, the view is the correct game view

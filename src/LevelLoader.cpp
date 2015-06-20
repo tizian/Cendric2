@@ -42,6 +42,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 		tile->setTileSize(data.tileSize);
 		tile->load();
 		tile->setPosition(it->second - tile->getSpriteOffset());
+		tile->setDebugBoundingBox(sf::Color::Yellow);
 		screen->addObject(GameObjectType::_DynamicTile, tile);
 	}
 }
@@ -211,6 +212,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 		}
 
 		enemy->setPosition(it.second);
+		enemy->setDebugBoundingBox(sf::Color::Magenta);
 		screen->addObject(GameObjectType::_Enemy, enemy);
 	}
 }

@@ -151,11 +151,6 @@ EnemyID Enemy::getEnemyID() const
 	return m_id;
 }
 
-sf::Color Enemy::getConfiguredDebugColor() const
-{
-	return sf::Color::Magenta;
-}
-
 float Enemy::getConfiguredDistanceToHPBar() const
 {
 	return 20.f;

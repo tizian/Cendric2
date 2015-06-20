@@ -5,6 +5,7 @@ void LevelItem::loadItem(LevelMainCharacter* mainChar, LevelItemID id)
 {
 	m_mainChar = mainChar;
 	m_levelItemID = id;
+	setDebugBoundingBox(sf::Color::Green);
 }
 
 void LevelItem::load()
@@ -75,11 +76,6 @@ void LevelItem::setTooltipText(const std::wstring& tooltip)
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);
 	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
-}
-
-sf::Color LevelItem::getConfiguredDebugColor() const
-{
-	return sf::Color::Cyan;
 }
 
 void LevelItem::setItemID(ItemID id)

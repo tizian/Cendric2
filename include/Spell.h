@@ -33,7 +33,6 @@ public:
 	int getDamage() const;
 	virtual SpellID getConfiguredSpellID() const = 0;
 	GameObjectType getConfiguredType() const override;
-	sf::Color getConfiguredDebugColor() const override;
 
 	const sf::Time& getActiveTime() const;
 	const MovableGameObject* getOwner() const;

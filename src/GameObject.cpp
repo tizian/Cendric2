@@ -19,25 +19,20 @@ const Animation* GameObject::getAnimation(GameObjectState state)
 void GameObject::render(sf::RenderTarget &renderTarget)
 {
 	renderTarget.draw(m_animatedSprite);
-	if (DEBUG_RENDERING && getConfiguredDebugColor() != sf::Color::Transparent)
+	if (DEBUG_RENDERING && m_isDrawBoundingBox)
 	{
-		drawBoundingBox(renderTarget);
+		renderTarget.draw(m_debugBox);
 	}
 }
 
-void GameObject::drawBoundingBox(sf::RenderTarget& renderTarget) const
+void  GameObject::setDebugBoundingBox(sf::Color debugColor)
 {
-	sf::RectangleShape rectangle(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
-	rectangle.setPosition(m_position);
-	rectangle.setOutlineThickness(1.f);
-	rectangle.setFillColor(sf::Color::Transparent);
-	rectangle.setOutlineColor(getConfiguredDebugColor());
-	renderTarget.draw(rectangle);
-}
-
-sf::Color GameObject::getConfiguredDebugColor() const
-{
-	return sf::Color::Transparent;
+	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
+	m_debugBox.setPosition(m_position);
+	m_debugBox.setOutlineThickness(1.f);
+	m_debugBox.setFillColor(sf::Color::Transparent);
+	m_debugBox.setOutlineColor(debugColor);
+	m_isDrawBoundingBox = true;
 }
 
 void GameObject::update(const sf::Time& frameTime)
@@ -63,6 +58,10 @@ void GameObject::update(const sf::Time& frameTime)
 		onLeftJustPressed();
 	}
 	m_animatedSprite.update(frameTime);
+	if (DEBUG_RENDERING && m_isDrawBoundingBox)
+	{
+		m_debugBox.setPosition(getPosition());
+	}
 }
 
 void GameObject::setPosition(const sf::Vector2f& position)

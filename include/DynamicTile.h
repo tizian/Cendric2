@@ -23,7 +23,6 @@ public:
 	
 	virtual bool getIsCollidable() const;
 	GameObjectType getConfiguredType() const override;
-	sf::Color getConfiguredDebugColor() const override;
 
 protected:
 	// dynamic tile textures have a border (border width in pixel)
