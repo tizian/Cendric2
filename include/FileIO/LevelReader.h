@@ -43,6 +43,10 @@ private:
 	std::map<int, LevelItemID> m_levelItemMap;
 	std::map<int, EnemyID> m_enemyMap;
 
+	// this is the width in tiles of the dynamic tile tileset
+	// and used to calculate the skin of the dynamic tile.
+	const int DYNAMIC_TILE_COUNT = 20;
+
 	const char* LEVEL_NAME = "level.name";
 	const char* MAP_SIZE = "map.size";
 	const char* LEVEL_EXIT = "level.exit";

@@ -92,14 +92,14 @@ bool LevelReader::checkData(LevelData& data) const
 			return false;
 		}
 	}
-	for (int i = 0; i < data.dynamicTiles.size(); i++)
+	for (int i = 0; i < data.dynamicTileLayers.size(); i++)
 	{
-		if (data.dynamicTiles[i].first == DynamicTileID::Void)
+		if (data.dynamicTileLayers[i].first == DynamicTileID::Void)
 		{
 			g_logger->logError("LevelReader", "Error in level data : dynamic tile ID not recognized");
 			return false;
 		}
-		if (data.dynamicTiles[i].second.empty() || data.dynamicTiles[i].second.size() != data.mapSize.x * data.mapSize.y)
+		if (data.dynamicTileLayers[i].second.empty() || data.dynamicTileLayers[i].second.size() != data.mapSize.x * data.mapSize.y)
 		{
 			g_logger->logError("LevelReader", "Error in level data : dynamic tile layer has not correct size (map size)");
 			return false;
@@ -350,13 +350,20 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
 	}
-	vector<bool> dynamicTiles;
+
+	// read offset
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+	int offset = atoi(startData);
+
+	vector<int> dynamicTiles;
 	startData = gotoNextChar(startData, endData, ',');
 	startData++;
 
 	while (startData != NULL)
 	{
-		dynamicTiles.push_back(0 != atoi(startData));
+		int skinNr = atoi(startData);
+		dynamicTiles.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
@@ -364,7 +371,7 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 		}
 	}
 
-	data.dynamicTiles.push_back(std::pair<DynamicTileID, vector<bool>>(id, dynamicTiles));
+	data.dynamicTileLayers.push_back(std::pair<DynamicTileID, vector<int>>(id, dynamicTiles));
 
 	return true;
 }
@@ -614,25 +621,83 @@ void LevelReader::updateData(LevelData& data)  const
 	int tileWidth = data.tileSize.x;
 	int tileHeight = data.tileSize.y;
 
-	for (std::vector<std::pair<DynamicTileID, std::vector<bool>>>::iterator it = data.dynamicTiles.begin(); it != data.dynamicTiles.end(); ++it) 
+	for (auto& it : data.dynamicTileLayers)
 	{
 		int x = 0;
 		int y = 0;
-		DynamicTileID id = it->first;
-		for (std::vector<bool>::iterator it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+		DynamicTileID id = it.first;
+		
+		if (id == DynamicTileID::Water)
 		{
-			if ((*it2))
+			// handle special dynamic tiles
+			bool isReadingWaterTiles = false;
+			float waterTileWidth = 0.f;
+			DynamicTileBean bean;
+			bean.id = id;
+			for (auto& it2 : it.second)
 			{
-				data.dynamicTilePositions.push_back(std::pair<DynamicTileID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+				if (it2 != 0)
+				{
+					if (isReadingWaterTiles)
+					{
+						waterTileWidth += tileWidth;
+					}
+					else
+					{
+						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+						bean.skinNr = it2;
+						waterTileWidth = static_cast<float>(tileWidth);
+						isReadingWaterTiles = true;
+					}
+				}
+				else
+				{
+					if (isReadingWaterTiles)
+					{
+						isReadingWaterTiles = false;
+						bean.size = sf::Vector2f(waterTileWidth, static_cast<float>(tileWidth));
+						data.dynamicTiles.push_back(bean);
+					}
+				}
+				if (x + 1 >= data.mapSize.x)
+				{
+					x = 0;
+					y++;
+					if (isReadingWaterTiles)
+					{
+						isReadingWaterTiles = false;
+						bean.size = sf::Vector2f(waterTileWidth, static_cast<float>(tileWidth));
+						data.dynamicTiles.push_back(bean);
+					}
+				}
+				else
+				{
+					x++;
+				}
 			}
-			if (x + 1 >= data.mapSize.x)
+		}
+		else
+		{
+			// normal tiles
+			for (auto& it2 : it.second)
 			{
-				x = 0;
-				y++;
-			}
-			else
-			{
-				x++;
+				if (it2 != 0)
+				{
+					DynamicTileBean bean;
+					bean.id = id;
+					bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+					bean.skinNr = it2;
+					data.dynamicTiles.push_back(bean);
+				}
+				if (x + 1 >= data.mapSize.x)
+				{
+					x = 0;
+					y++;
+				}
+				else
+				{
+					x++;
+				}
 			}
 		}
 	}

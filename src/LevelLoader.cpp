@@ -7,13 +7,14 @@
 
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 {
-	for (std::vector<std::pair<DynamicTileID, sf::Vector2f>>::iterator it = data.dynamicTilePositions.begin(); it != data.dynamicTilePositions.end(); ++it)
+	for (auto& it : data.dynamicTiles)
 	{
 		DynamicTile* tile;
-		switch (it->first)
+		switch (it.id)
 		{
 		case DynamicTileID::Water:
-			tile = new WaterTile();
+			tile = new SimulatedWaterTile();
+			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
 			break;
 		case DynamicTileID::Ice:
 			tile = new IceTile();
@@ -40,8 +41,8 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 		}
 
 		tile->setTileSize(data.tileSize);
-		tile->load(0);
-		tile->setPosition(it->second - tile->getSpriteOffset());
+		tile->load(it.skinNr);
+		tile->setPosition(it.position - tile->getSpriteOffset());
 		tile->setDebugBoundingBox(sf::Color::Yellow);
 		screen->addObject(GameObjectType::_DynamicTile, tile);
 	}

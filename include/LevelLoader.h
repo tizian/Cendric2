@@ -11,6 +11,7 @@
 #include "DynamicTiles/ChestTile.h"
 #include "DynamicTiles/SpikesBottomTile.h"
 #include "DynamicTiles/SpikesTopTile.h"
+#include "DynamicTiles/SimulatedWaterTile.h"
 
 #include "Enums/DynamicTileID.h"
 #include "Enums/LevelItemID.h"
