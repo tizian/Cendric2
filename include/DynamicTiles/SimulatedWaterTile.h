@@ -28,7 +28,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
-	void splash(float xPosition, float yPosition, float velocity);
+	void splash(float xPosition, float velocity);
 
 private:
 	float m_x, m_y;
@@ -40,6 +40,8 @@ private:
 
 	float *m_leftDeltas;
 	float *m_rightDeltas;
+
+	sf::VertexArray m_vertexArray;
 
 	static const float TENSION;
 	static const float DAMPING;
