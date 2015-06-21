@@ -28,11 +28,6 @@ YesOrNoForm::~YesOrNoForm()
 	delete m_noButton;
 }
 
-void YesOrNoForm::load()
-{
-	// nop
-}
-
 void YesOrNoForm::render(sf::RenderTarget& renderTarget)
 {
 	m_window->render(renderTarget);

@@ -15,7 +15,6 @@ public:
 
 	void update(const sf::Time& frameTime) override;
 	void loadEquipment(LevelMainCharacter* mainChar, LevelEquipmentID id);
-	void load() override;
 
 	void setTextureID(ResourceID id);
 

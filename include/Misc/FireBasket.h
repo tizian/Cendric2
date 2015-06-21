@@ -9,7 +9,7 @@ class FireBasket : public GameObject
 {
 public:
 	FireBasket();
-	void load() override;
+	void load();
 
 	GameObjectType getConfiguredType() const override;
 };

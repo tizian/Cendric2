@@ -33,11 +33,6 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style)
 	m_ornamentLayer.setPosition(m_positionDefault);
 }
 
-void Window::load()
-{
-	// not used.
-}
-
 void Window::render(sf::RenderTarget& renderTarget)
 {
 	renderTarget.draw(m_backLayer);

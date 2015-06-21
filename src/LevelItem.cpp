@@ -1,16 +1,11 @@
 #include "LevelItem.h"
 #include "LevelMainCharacter.h"
 
-void LevelItem::loadItem(LevelMainCharacter* mainChar, LevelItemID id)
+void LevelItem::load(LevelMainCharacter* mainChar, LevelItemID id)
 {
 	m_mainChar = mainChar;
 	m_levelItemID = id;
 	setDebugBoundingBox(sf::Color::Green);
-}
-
-void LevelItem::load()
-{
-	// nop
 }
 
 void LevelItem::onRightClick()

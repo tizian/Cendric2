@@ -7,7 +7,7 @@ class UnlockSpell : public Spell
 {
 public:
 	UnlockSpell();
-	void load() override;
+	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target) override;
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

@@ -2,10 +2,9 @@
 
 ForcefieldSpell::ForcefieldSpell()
 {
-	load();
 }
 
-void ForcefieldSpell::load()
+void ForcefieldSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
 {
 	setSpriteOffset(sf::Vector2f(-12.f, -12.f));
 
@@ -23,6 +22,8 @@ void ForcefieldSpell::load()
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
+
+	Spell::load(level, mob, target);
 }
 
 const sf::Vector2f ForcefieldSpell::getConfiguredPositionOffset() const

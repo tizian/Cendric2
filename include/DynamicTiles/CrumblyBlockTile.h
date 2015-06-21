@@ -6,7 +6,7 @@
 class CrumblyBlockTile : public DynamicTile
 {
 public:
-	void load() override;
+	void load(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 

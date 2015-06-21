@@ -2,13 +2,13 @@
 
 ChopSpell::ChopSpell()
 {
-	load();
 }
 
-void ChopSpell::load()
+void ChopSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	// chop spell does not set bounding box here as it varies per weapon
+	Spell::load(level, mob, target);
 }
 
 const sf::Vector2f ChopSpell::getConfiguredPositionOffset() const

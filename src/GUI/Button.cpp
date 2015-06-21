@@ -33,11 +33,6 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style)
 	m_ornamentLayer.setPosition(m_positionDefault);
 }
 
-void Button::load() 
-{
-	// not used.
-}
-
 void Button::onLeftClick()
 {
 	if (m_isEnabled && m_isPressed)

@@ -1,7 +1,7 @@
 #include "DynamicTiles/CrumblyBlockTile.h"
 #include "Spell.h"
 
-void CrumblyBlockTile::load()
+void CrumblyBlockTile::load(int skinNr)
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));

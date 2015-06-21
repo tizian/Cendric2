@@ -40,7 +40,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 		}
 
 		tile->setTileSize(data.tileSize);
-		tile->load();
+		tile->load(0);
 		tile->setPosition(it->second - tile->getSpriteOffset());
 		tile->setDebugBoundingBox(sf::Color::Yellow);
 		screen->addObject(GameObjectType::_DynamicTile, tile);
@@ -171,7 +171,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 		// initial values
 		levelItem->setCurrentAnimation(levelItem->getAnimation(GameObjectState::Idle), false);
 		levelItem->playCurrentAnimation(item.texturePositions.size() > 1);
-		levelItem->loadItem(mainCharacter, it->first);
+		levelItem->load(mainCharacter, it->first);
 		levelItem->setItemID(item.item);
 		levelItem->setPosition(it->second - levelItem->getSpriteOffset());
 		levelItem->setTooltipText(g_textProvider->getText(item.tooltip));

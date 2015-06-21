@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Spell::loadSpell(Level* level, LevelMovableGameObject* mob, sf::Vector2f target) 
+void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target) 
 {
 	m_level = level;
 	m_mob = mob;

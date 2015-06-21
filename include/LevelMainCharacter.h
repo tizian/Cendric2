@@ -15,7 +15,7 @@ public:
 	LevelMainCharacter(Level* level);
 	~LevelMainCharacter();
 
-	void load() override;
+	void load();
 	void onHit(Spell* spell);
 	void update(const sf::Time& frameTime) override;
 	void addDamage(int damage) override;

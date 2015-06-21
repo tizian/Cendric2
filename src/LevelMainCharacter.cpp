@@ -97,7 +97,7 @@ void LevelMainCharacter::handleInput()
 		Spell* spell = m_spellManager->getSpell();
 		if (spell != nullptr) 
 		{
-			spell->loadSpell(getLevel(), this, g_inputController->getMousePosition());
+			spell->load(getLevel(), this, g_inputController->getMousePosition());
 			if (spell->getConfiguredTriggerFightAnimation()) {
 				m_fightAnimationTime = sf::milliseconds(5 * 70); // duration of fight animation
 			}

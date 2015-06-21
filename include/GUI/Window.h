@@ -20,7 +20,6 @@ class Window : public GameObject
 public:
 	Window(const sf::FloatRect& box, WindowOrnamentStyle style = WindowOrnamentStyle::NONE);
 
-	void load() override;
 	void render(sf::RenderTarget& renderTarget) override;
 
 	sf::Vector2f getSize() const;

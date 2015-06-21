@@ -7,7 +7,7 @@ class FireSpell : public Spell
 {
 public:
 	FireSpell();
-	void load() override;
+	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target) override;
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

@@ -83,7 +83,7 @@ void FireRatEnemy::handleInput()
 		Spell* spell = m_spellManager->getSpell();
 		if (spell != nullptr)
 		{
-			spell->loadSpell(getLevel(), this, m_mainChar->getCenter());
+			spell->load(getLevel(), this, m_mainChar->getCenter());
 			if (spell->getConfiguredTriggerFightAnimation()) {
 				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
 			}

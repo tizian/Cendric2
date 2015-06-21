@@ -15,8 +15,7 @@ class LevelMainCharacter;
 class LevelItem : public GameObject
 {
 public:
-	void loadItem(LevelMainCharacter* mainChar, LevelItemID id);
-	void load() override;
+	void load(LevelMainCharacter* mainChar, LevelItemID id);
 	void onRightClick() override;
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;

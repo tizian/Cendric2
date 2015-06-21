@@ -12,6 +12,8 @@ class LevelMovableGameObject;
 class DynamicTile : public GameObject
 {
 public:
+	// loads the dynamic tile with the specified skin nr
+	virtual void load(int skinNr) = 0;
 	virtual void update(const sf::Time& frameTime) override;
 	// gets called by a spell when it hits the dynamic tile
 	virtual void onHit(Spell* spell) = 0;

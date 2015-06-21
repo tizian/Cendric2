@@ -2,12 +2,12 @@
 
 UnlockSpell::UnlockSpell()
 {
-	load();
 }
 
-void UnlockSpell::load()
+void UnlockSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
+	Spell::load(level, mob, target);
 }
 
 const sf::Vector2f UnlockSpell::getConfiguredPositionOffset() const

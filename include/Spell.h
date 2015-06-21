@@ -17,7 +17,7 @@ public:
 
 	// called by the spell manager
 	void init(SpellBean& bean);
-	void loadSpell(Level* level, LevelMovableGameObject* mob, sf::Vector2f target);
+	virtual void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target);
 	virtual void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 

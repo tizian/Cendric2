@@ -19,6 +19,7 @@ class Enemy : public LevelMovableGameObject
 public:
 	Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
 
+	virtual void load() = 0;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void render(sf::RenderTarget& target) override;
 	void onRightClick() override;

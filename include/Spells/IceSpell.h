@@ -7,7 +7,7 @@ class IceSpell : public Spell
 {
 public:
 	IceSpell();
-	void load() override;
+	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target);
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

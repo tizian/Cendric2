@@ -59,11 +59,6 @@ void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar, LevelEquipmentI
 	setPosition(position);
 }
 
-void LevelEquipment::load()
-{
-	// nop
-}
-
 void LevelEquipment::setTextureID(ResourceID id)
 {
 	m_resourceID = id;

@@ -21,7 +21,6 @@ class Button : public GameObject
 public:
 	Button(const sf::FloatRect& box, ButtonOrnamentStyle style = ButtonOrnamentStyle::NONE);
 
-	void load() override;
 	void onLeftJustPressed() override;
 	void onLeftClick() override;
 	void onMouseOver() override;

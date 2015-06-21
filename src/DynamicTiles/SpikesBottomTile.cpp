@@ -1,7 +1,7 @@
 #include "DynamicTiles/SpikesBottomTile.h"
 #include "Spell.h"
 
-void SpikesBottomTile::load()
+void SpikesBottomTile::load(int skinNr)
 {
 	setSpriteOffset(sf::Vector2f(0.f, -25.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 25.f));

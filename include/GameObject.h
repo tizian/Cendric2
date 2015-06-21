@@ -17,9 +17,7 @@ class GameObject
 {
 public:
     virtual ~GameObject() {}
-	// \brief loads animations using the resource manager
-	// also defines bounding box and sprite offset.
-	virtual void load() = 0;
+
 	virtual void update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget);
 	// gets checked & called in the update loop. default implementation does nothing.
