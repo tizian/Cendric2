@@ -23,6 +23,7 @@ struct WaterColumn
 class SimulatedWaterTile : public DynamicTile
 {
 public:
+	void init() override;
 	void load(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;

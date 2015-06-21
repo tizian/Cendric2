@@ -12,6 +12,8 @@ class LevelMovableGameObject;
 class DynamicTile : public GameObject
 {
 public:
+	// loads sprite offset & bounding box. maybe uses skin nr later, too.
+	virtual void init() = 0;
 	// loads the dynamic tile with the specified skin nr
 	virtual void load(int skinNr) = 0;
 	virtual void update(const sf::Time& frameTime) override;

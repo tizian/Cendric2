@@ -41,6 +41,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 		}
 
 		tile->setTileSize(data.tileSize);
+		tile->init();
 		tile->setPosition(it.position - tile->getSpriteOffset());
 		tile->setDebugBoundingBox(sf::Color::Yellow);
 		tile->load(it.skinNr);

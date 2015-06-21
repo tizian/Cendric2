@@ -1,10 +1,14 @@
 #include "DynamicTiles/IceTile.h"
 #include "Spell.h"
 
-void IceTile::load(int skinNr)
+void IceTile::init()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
+}
+
+void IceTile::load(int skinNr)
+{
 	m_isCollidable = true;
 
 	Animation idleAnimation;

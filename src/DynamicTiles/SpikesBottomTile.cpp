@@ -1,10 +1,14 @@
 #include "DynamicTiles/SpikesBottomTile.h"
 #include "Spell.h"
 
-void SpikesBottomTile::load(int skinNr)
+void SpikesBottomTile::init()
 {
 	setSpriteOffset(sf::Vector2f(0.f, -25.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 25.f));
+}
+
+void SpikesBottomTile::load(int skinNr)
+{
 	m_isCollidable = false;
 
 	Animation idleAnimation;

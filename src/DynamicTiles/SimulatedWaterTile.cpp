@@ -7,9 +7,13 @@ const float SimulatedWaterTile::TENSION = 0.3f;
 const float SimulatedWaterTile::DAMPING = 0.05f;
 const float SimulatedWaterTile::SPREAD = 0.5f;
 
-void SimulatedWaterTile::load(int skinNr)
+void SimulatedWaterTile::init()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
+}
+
+void SimulatedWaterTile::load(int skinNr)
+{
 	m_isCollidable = false;
 
 	const sf::FloatRect *bb = getBoundingBox();
