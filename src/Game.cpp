@@ -37,7 +37,7 @@ void Game::run()
 		if (deltaTime.asMilliseconds() > 50)
 		{
 			frameTime = sf::milliseconds(50);
-			//g_logger->logInfo("Game Loop", "Frame time just exceeded 50ms and is set down to 50ms. Its time was (ms): " + std::to_string(deltaTime.asMilliseconds()));
+			g_logger->logInfo("Game Loop", "Frame time just exceeded 50ms and is set down to 50ms. Its time was (ms): " + std::to_string(deltaTime.asMilliseconds()));
 		}
 		else
 		{
