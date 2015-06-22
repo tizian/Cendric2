@@ -46,7 +46,7 @@ void SimulatedWaterTile::load(int skinNr)
 void SimulatedWaterTile::update(const sf::Time& frameTime)
 {
 	float dt = frameTime.asSeconds();
-	dt *= 16.f;
+	dt *= 20.f;
 
 	for (int i = 0; i < m_nColumns; ++i)
 	{
@@ -150,4 +150,14 @@ void SimulatedWaterTile::onHit(Spell* spell)
 		spell->setDisposed();
 		break;
 	}
+}
+
+void SimulatedWaterTile::onHit(LevelMovableGameObject* mob)
+{
+	float vx = mob->getVelocity().x;
+	float vy = mob->getVelocity().y;
+	float vel = std::sqrt(vx*vx + vy*vy);
+	// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
+	float x = mob->getBoundingBox()->left + mob->getBoundingBox()->width / 2;
+	splash(x, -vel * 0.5f);
 }
