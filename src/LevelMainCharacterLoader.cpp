@@ -56,6 +56,10 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 			equipment.textureID = ResourceID::Texture_head_wizardhat_grey;
 			useStandardFrames = true;
 			break;
+		case LevelEquipmentID::Back_purple:
+			equipment.textureID = ResourceID::Texture_back_purple;
+			useStandardFrames = true;
+			break;
 		default:
 			// unexpected error
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");

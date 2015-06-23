@@ -63,6 +63,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_head_wizardhat_blue, "res/assets/equipment/head/spritesheet_head_wizardhat_blue.png" },
 		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" },
 		{ ResourceID::Texture_weapon_rustysword, "res/assets/equipment/weapon/spritesheet_weapon_rustysword.png" },
+		{ ResourceID::Texture_back_purple, "res/assets/equipment/back/spritesheet_back_purple.png" },
 		{ ResourceID::Texture_GUI_rounded_rectangle, "res/assets/gui/rounded_rectangle.png" },
 		{ ResourceID::Texture_GUI_ornament_none, "res/assets/gui/ornament_none.png" },
 		{ ResourceID::Texture_GUI_ornament_small, "res/assets/gui/ornament_small.png" },

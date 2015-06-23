@@ -26,6 +26,7 @@ enum class ResourceID
 	Texture_weapon_rustysword,
 	Texture_head_wizardhat_grey,
 	Texture_head_wizardhat_blue,
+	Texture_back_purple,
 	Texture_screen_splash,
 	Texture_screen_splash_fireanimation,
 	Texture_screen_loading,

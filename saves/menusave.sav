@@ -8,12 +8,12 @@ attributes:100,100,100,100,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
 # equipment:
-equipped.back:0
+equipped.back:6
 equipped.body:0
-equipped.head:0
+equipped.head:3
 equipped.neck:0
 equipped.ring1:0
 equipped.ring2:0
-equipped.weapon:0
+equipped.weapon:1
 # levels killed:
 # levels looted:

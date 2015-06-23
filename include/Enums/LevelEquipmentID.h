@@ -8,4 +8,5 @@ enum class LevelEquipmentID
 	Head_wizardhat_grey,
 	Head_wizardhat_blue,
 	Ring_ringOfLesserHealth,
+	Back_purple,
 };
