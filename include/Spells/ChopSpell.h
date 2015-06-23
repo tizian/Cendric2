@@ -7,7 +7,7 @@ class ChopSpell : public Spell
 {
 public:
 	ChopSpell();
-	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target) override;
+	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence) override;
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

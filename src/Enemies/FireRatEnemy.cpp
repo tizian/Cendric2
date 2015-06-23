@@ -80,14 +80,25 @@ void FireRatEnemy::handleInput()
 			m_spellManager->setCurrentSpell(SpellID::Chop);
 		}
 		
-		Spell* spell = m_spellManager->getSpell();
-		if (spell != nullptr)
+		std::vector<Spell*> holder = m_spellManager->getSpells();
+
+		if (!holder.empty())
 		{
-			spell->load(getLevel(), this, m_mainChar->getCenter());
-			if (spell->getConfiguredTriggerFightAnimation()) {
+			int div = 0;
+			int sign = 1;
+			for (auto& it : holder)
+			{
+				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
+				m_screen->addObject(GameObjectType::_Spell, it);
+				sign = -sign;
+				if (sign == -1)
+				{
+					div += 1;
+				}
+			}
+			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
 				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
 			}
-			m_screen->addObject(GameObjectType::_Spell, spell);
 		}
 	}
 }

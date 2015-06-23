@@ -26,7 +26,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 			tile = new TorchTile();
 			break;
 		case DynamicTileID::Chest:
-			tile = new ChestTile();
+			tile = new ChestTile(); 
 			break;
 		case DynamicTileID::SpikesBottom:
 			tile = new SpikesBottomTile();

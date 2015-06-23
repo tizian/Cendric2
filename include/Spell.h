@@ -17,7 +17,8 @@ public:
 
 	// called by the spell manager
 	void init(SpellBean& bean);
-	virtual void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target);
+	// the spell divergence only matters if we have more than one spell. else, the spell divergence will be 0
+	virtual void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence);
 	virtual void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 
@@ -56,4 +57,5 @@ private:
 	void checkCollisionsWithMainChar(const sf::FloatRect* boundingBox);
 	// collisions with enemies
 	void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
+	sf::Vector2f rotateVector(const sf::Vector2f &vec, float angle);
 };

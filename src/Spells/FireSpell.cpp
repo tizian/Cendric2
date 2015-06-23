@@ -4,7 +4,7 @@ FireSpell::FireSpell()
 {
 }
 
-void FireSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
+void FireSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence)
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
@@ -21,7 +21,7 @@ void FireSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f tar
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	Spell::load(level, mob, target);
+	Spell::load(level, mob, target, divergence);
 }
 
 float FireSpell::getConfiguredMaxVelocityY() const

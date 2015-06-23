@@ -13,7 +13,8 @@ struct SpellBean
 	sf::Time maxActiveTime;
 	sf::Time cooldown;
 	float startVelocity;
-	sf::FloatRect boundingBox; 
+	sf::FloatRect boundingBox;
+	int amount;
 };
 
 const struct SpellBean DEFAULT_FIRE =
@@ -24,7 +25,8 @@ const struct SpellBean DEFAULT_FIRE =
 	sf::milliseconds(5000),
 	sf::milliseconds(1000),
 	300.f,
-	sf::FloatRect(0, 0, 10, 10)
+	sf::FloatRect(0, 0, 10, 10),
+	1
 };
 
 const struct SpellBean DEFAULT_ICE =
@@ -35,7 +37,8 @@ const struct SpellBean DEFAULT_ICE =
 	sf::milliseconds(5000),
 	sf::milliseconds(1000),
 	400.f,
-	sf::FloatRect(0, 0, 10, 10)
+	sf::FloatRect(0, 0, 10, 10),
+	1
 };
 
 const struct SpellBean DEFAULT_CHOP =
@@ -46,7 +49,8 @@ const struct SpellBean DEFAULT_CHOP =
 	sf::milliseconds(320),
 	sf::milliseconds(400),
 	0.f,
-	sf::FloatRect(0, 0, 40, 80)
+	sf::FloatRect(0, 0, 40, 80),
+	1
 };
 
 const struct SpellBean DEFAULT_FORCEFIELD =
@@ -57,5 +61,6 @@ const struct SpellBean DEFAULT_FORCEFIELD =
 	sf::milliseconds(3000),
 	sf::milliseconds(10000),
 	0.f,
-	sf::FloatRect(0, 0, 98, 98)
+	sf::FloatRect(0, 0, 98, 98),
+	1
 };

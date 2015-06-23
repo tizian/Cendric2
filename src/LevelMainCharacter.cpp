@@ -13,6 +13,8 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 
 	// these values should be modified by a staff
 	SpellBean fireSpell = DEFAULT_FIRE;
+	fireSpell.amount = 3;
+	fireSpell.reflectCount = 2;
 	SpellBean chopSpell = DEFAULT_CHOP;
 	SpellBean forcefieldSpell = DEFAULT_FORCEFIELD;
 	SpellBean iceSpell = DEFAULT_ICE;
@@ -56,7 +58,7 @@ void LevelMainCharacter::onHit(Spell* spell)
 		spell->setDisposed();
 		break;
 	default:
-		break;
+		return;
 	}
 	addDamage(damage);
 }
@@ -94,14 +96,25 @@ void LevelMainCharacter::handleInput()
 	// handle attack input
 	if (g_inputController->isMouseJustPressedLeft()) 
 	{
-		Spell* spell = m_spellManager->getSpell();
-		if (spell != nullptr) 
+		std::vector<Spell*> holder = m_spellManager->getSpells();
+		
+		if (!holder.empty())
 		{
-			spell->load(getLevel(), this, g_inputController->getMousePosition());
-			if (spell->getConfiguredTriggerFightAnimation()) {
+			int div = 0;
+			int sign = 1;
+			for (auto& it : holder)
+			{
+				it->load(getLevel(), this, g_inputController->getMousePosition(), div * sign);
+				m_screen->addObject(GameObjectType::_Spell, it);
+				sign = -sign;
+				if (sign == -1)
+				{
+					div += 1;
+				}
+			}
+			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
 				m_fightAnimationTime = sf::milliseconds(5 * 70); // duration of fight animation
 			}
-			m_screen->addObject(GameObjectType::_Spell, spell);
 		}
 	}
 }

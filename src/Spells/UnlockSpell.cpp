@@ -4,10 +4,10 @@ UnlockSpell::UnlockSpell()
 {
 }
 
-void UnlockSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
+void UnlockSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence)
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	Spell::load(level, mob, target);
+	Spell::load(level, mob, target, 0);
 }
 
 const sf::Vector2f UnlockSpell::getConfiguredPositionOffset() const
