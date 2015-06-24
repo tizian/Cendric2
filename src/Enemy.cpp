@@ -80,7 +80,8 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 		m_jumps = m_enemyState == EnemyState::Fleeing || !m_level->collidesAfterJump(*getBoundingBox(), m_jumpHeight, m_isFacingRight);
 	}
 
-	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight))
+	// checks if the enemy falls would fall deeper than it can jump. fleeing enemies don't consider this and fall anyway.
+	if (!(m_enemyState == EnemyState::Fleeing) && isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getConfiguredDistanceToAbyss()))
 	{
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
@@ -162,9 +163,9 @@ sf::Time Enemy::getConfiguredRecoveringTime() const
 	return sf::milliseconds(200);
 }
 
-sf::Time Enemy::getConfiguredWaitingTime() const
+float Enemy::getConfiguredDistanceToAbyss() const
 {
-	return sf::seconds(5);
+	return 10.f;
 }
 
 sf::Time Enemy::getRandomDescisionTime() const
@@ -200,16 +201,6 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 		return;
 	}
 
-	if (m_waitingTime > sf::Time::Zero)
-	{
-		m_enemyState = EnemyState::Idle;
-		m_waitingTime -= frameTime;
-		if (m_waitingTime < sf::Time::Zero)
-		{
-			m_waitingTime = sf::Time::Zero;
-		}
-	}
-
 	if (m_enemyState == EnemyState::Idle)
 	{
 		m_descisionTime -= frameTime;
@@ -221,7 +212,7 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 		}
 	}
 
-	if (m_enemyState == EnemyState::Idle && m_waitingTime == sf::Time::Zero && distToMainChar() < getConfiguredAggroRange())
+	if (m_enemyState == EnemyState::Idle && distToMainChar() < getConfiguredAggroRange())
 	{
 		m_enemyState = EnemyState::Chasing;
 		return;
@@ -287,33 +278,6 @@ void Enemy::handleMovementInput()
 	}
 
 	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
-}
-
-void Enemy::handleAttackInput()
-{
-	if (distToMainChar() < 100.f)
-	{
-		std::vector<Spell*> holder = m_spellManager->getSpells();
-
-		if (!holder.empty())
-		{
-			int div = 0;
-			int sign = 1;
-			for (auto& it : holder)
-			{
-				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
-				m_screen->addObject(GameObjectType::_Spell, it);
-				sign = -sign;
-				if (sign == -1)
-				{
-					div += 1;
-				}
-			}
-			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = getConfiguredFightAnimationTime();
-			}
-		}
-	}
 }
 
 EnemyID Enemy::getEnemyID() const

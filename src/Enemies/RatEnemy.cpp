@@ -35,12 +35,39 @@ sf::Vector2f RatEnemy::getConfiguredSpellOffset() const
 
 void RatEnemy::handleAttackInput()
 {
-	Enemy::handleAttackInput();
+	if (distToMainChar() < 100.f)
+	{
+		std::vector<Spell*> holder = m_spellManager->getSpells();
+
+		if (!holder.empty())
+		{
+			int div = 0;
+			int sign = 1;
+			for (auto& it : holder)
+			{
+				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
+				m_screen->addObject(GameObjectType::_Spell, it);
+				sign = -sign;
+				if (sign == -1)
+				{
+					div += 1;
+				}
+			}
+			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
+				m_fightAnimationTime = getConfiguredFightAnimationTime();
+			}
+		}
+	}
 }
 
 float RatEnemy::getConfiguredAggroRange() const
 {
 	return 500.f;
+}
+
+float RatEnemy::getConfiguredDistanceToAbyss() const
+{
+	return 20.f;
 }
 
 bool RatEnemy::getConfiguredFleeCondition() const

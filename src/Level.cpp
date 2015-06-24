@@ -178,10 +178,10 @@ bool Level::collidesLevelBottom(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
-bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const
+bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize) const
 {
 	sf::FloatRect dummyRect = boundingBox;
-	dummyRect.left = right ? dummyRect.left + STEP_SIZE : dummyRect.left - STEP_SIZE;
+	dummyRect.left = right ? dummyRect.left + stepSize : dummyRect.left - stepSize;
 	if (collidesY(dummyRect) || collidesX(dummyRect))
 	{
 		return false;
@@ -212,7 +212,7 @@ bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight
 	}
 
 	// depending on left or right, calculate one step left or right
-	dummyRect.left = right ? dummyRect.left + STEP_SIZE : dummyRect.left - STEP_SIZE;
+	dummyRect.left = right ? dummyRect.left + 10.f : dummyRect.left - 10.f;
 	if (collidesX(dummyRect))
 	{
 		return true;

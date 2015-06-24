@@ -69,6 +69,8 @@ protected:
 	virtual float getConfiguredAggroRange() const = 0;
 	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
 	virtual bool getConfiguredFleeCondition() const;
+	// how near does an enemy go to the abyss until it stops? default is 10.f. Can be 0 for unflinching enemies
+	virtual float getConfiguredDistanceToAbyss() const;
 	virtual sf::Time getConfiguredFightAnimationTime() const = 0;
 	// the distance from the center of the enemy to the center of the main char at which the enemy approaches the main char.
 	virtual float getConfiguredApproachingDistance() const = 0;
@@ -81,15 +83,11 @@ protected:
 	int m_randomDescision = 0;
 	// time until the enemy can do anything after it has taken a hit or a special spell (stun)
 	sf::Time m_recoveringTime = sf::Time::Zero;
-	// time until the enemy chases again
-	sf::Time m_waitingTime = sf::Time::Zero;
 	// time until next random desicion in idle state
 	sf::Time m_descisionTime = sf::Time::Zero;
 
-	void handleMovementInput() override;
-	void handleAttackInput() override;
+	virtual void handleMovementInput() override;
 	virtual sf::Time getConfiguredRecoveringTime() const;
-	virtual sf::Time getConfiguredWaitingTime() const;
 	virtual sf::Time getRandomDescisionTime() const;
 	float m_jumpHeight = 0;
 

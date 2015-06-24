@@ -20,6 +20,7 @@ public:
 	float getConfiguredApproachingDistance() const override;
 	float getConfiguredAggroRange() const override;
 	bool getConfiguredFleeCondition() const override;
+	float getConfiguredDistanceToAbyss() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
