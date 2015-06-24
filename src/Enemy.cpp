@@ -8,10 +8,16 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_mainChar = mainChar;
 	m_immuneEnemies.push_back(id);
 	m_attributes = ZERO_ATTRIBUTES;
+	m_enemyState = EnemyState::Idle;
 	
 	// load hp bar
 	m_hpBar.setFillColor(sf::Color::Red);
 	updateHpBar();
+}
+
+bool Enemy::getConfiguredFleeCondition() const
+{
+	return false;
 }
 
 void Enemy::addDamage(int damage)
@@ -47,6 +53,7 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 	}
 	// check for collision on y axis
 	bool collidesY = m_level->collidesY(nextBoundingBoxY);
+
 	if (!isMovingDown && collidesY)
 	{
 		setAccelerationY(0.0);
@@ -66,15 +73,22 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 		}
 	}
 
-	if (std::abs(getVelocity().y) > 0.0f)
-	{
-		m_isGrounded = false;
-	}
-
 	m_jumps = false;
 	if (isMovingX && collidesX)
 	{
-		m_jumps = true;
+		// would a jump work? if the state is fleeing, the enemy doesn't think about that anymore.
+		m_jumps = m_enemyState == EnemyState::Fleeing || !m_level->collidesAfterJump(*getBoundingBox(), m_jumpHeight, m_isFacingRight);
+	}
+
+	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight))
+	{
+		setAccelerationX(0.0f);
+		setVelocityX(0.0f);
+	}
+
+	if (std::abs(getVelocity().y) > 0.0f)
+	{
+		m_isGrounded = false;
 	}
 }
 
@@ -111,9 +125,10 @@ void Enemy::onHit(Spell* spell)
 		spell->setDisposed();
 		break;
 	default:
-		break;
+		return;
 	}
 	addDamage(damage);
+	m_recoveringTime = getConfiguredRecoveringTime();
 }
 
 void Enemy::render(sf::RenderTarget &renderTarget)
@@ -125,6 +140,7 @@ void Enemy::render(sf::RenderTarget &renderTarget)
 
 void Enemy::update(const sf::Time& frameTime) 
 {
+	updateEnemyState(frameTime);
 	LevelMovableGameObject::update(frameTime);
 	updateHpBar();
 }
@@ -138,12 +154,166 @@ void Enemy::updateHpBar()
 float Enemy::distToMainChar() const
 {
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-	return (sqrt(dist.x * dist.x + dist.y * dist.y));
+	return sqrt(dist.x * dist.x + dist.y * dist.y);
+}
+
+sf::Time Enemy::getConfiguredRecoveringTime() const
+{
+	return sf::milliseconds(200);
+}
+
+sf::Time Enemy::getConfiguredWaitingTime() const
+{
+	return sf::seconds(5);
+}
+
+sf::Time Enemy::getRandomDescisionTime() const
+{
+	int r = rand() % 1500 + 200;
+	return sf::milliseconds(r);
 }
 
 GameObjectType Enemy::getConfiguredType() const
 {
 	return GameObjectType::_Enemy;
+}
+
+void Enemy::updateEnemyState(const sf::Time& frameTime)
+{
+	if (m_isDead) return;
+
+	if (m_recoveringTime > sf::Time::Zero)
+	{
+		m_enemyState = EnemyState::Recovering;
+		m_recoveringTime -= frameTime;
+		if (m_recoveringTime < sf::Time::Zero)
+		{
+			m_recoveringTime = sf::Time::Zero;
+			m_enemyState = EnemyState::Idle;
+		}
+		return;
+	}
+
+	if (getConfiguredFleeCondition())
+	{
+		m_enemyState = EnemyState::Fleeing;
+		return;
+	}
+
+	if (m_waitingTime > sf::Time::Zero)
+	{
+		m_enemyState = EnemyState::Idle;
+		m_waitingTime -= frameTime;
+		if (m_waitingTime < sf::Time::Zero)
+		{
+			m_waitingTime = sf::Time::Zero;
+		}
+	}
+
+	if (m_enemyState == EnemyState::Idle)
+	{
+		m_descisionTime -= frameTime;
+		if (m_descisionTime < sf::Time::Zero)
+		{
+			// decide again
+			m_descisionTime = getRandomDescisionTime();
+			m_randomDescision = rand() % 3 - 1;
+		}
+	}
+
+	if (m_enemyState == EnemyState::Idle && m_waitingTime == sf::Time::Zero && distToMainChar() < getConfiguredAggroRange())
+	{
+		m_enemyState = EnemyState::Chasing;
+		return;
+	}
+
+	if ((m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Fleeing) && distToMainChar() > getConfiguredAggroRange())
+	{
+		m_enemyState = EnemyState::Idle;
+		return;
+	}
+}
+
+void Enemy::handleMovementInput()
+{
+	// movement AI
+	float newAccelerationX = 0;
+
+	if (m_enemyState == EnemyState::Chasing)
+	{
+		if (m_mainChar->getCenter().x < getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getConfiguredApproachingDistance())
+		{
+			m_nextIsFacingRight = false;
+			newAccelerationX -= getConfiguredWalkAcceleration();
+		}
+		if (m_mainChar->getCenter().x > getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getConfiguredApproachingDistance())
+		{
+			m_nextIsFacingRight = true;
+			newAccelerationX += getConfiguredWalkAcceleration();
+		}
+		if (m_jumps && m_isGrounded)
+		{
+			setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+			m_jumps = false;
+		}
+	}
+
+	if (m_enemyState == EnemyState::Fleeing)
+	{
+		if (m_mainChar->getCenter().x < getCenter().x)
+		{
+			m_nextIsFacingRight = true;
+			newAccelerationX += getConfiguredWalkAcceleration();
+		}
+		if (m_mainChar->getCenter().x > getCenter().x)
+		{
+			m_nextIsFacingRight = false;
+			newAccelerationX -= getConfiguredWalkAcceleration();
+		}
+		if (m_jumps && m_isGrounded)
+		{
+			setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+			m_jumps = false;
+		}
+	}
+
+	if (m_enemyState == EnemyState::Idle)
+	{
+		if (m_randomDescision != 0)
+		{
+			m_nextIsFacingRight = (m_randomDescision == 1);
+			newAccelerationX += (m_randomDescision * getConfiguredWalkAcceleration());
+		}
+	}
+
+	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
+}
+
+void Enemy::handleAttackInput()
+{
+	if (distToMainChar() < 100.f)
+	{
+		std::vector<Spell*> holder = m_spellManager->getSpells();
+
+		if (!holder.empty())
+		{
+			int div = 0;
+			int sign = 1;
+			for (auto& it : holder)
+			{
+				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
+				m_screen->addObject(GameObjectType::_Spell, it);
+				sign = -sign;
+				if (sign == -1)
+				{
+					div += 1;
+				}
+			}
+			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
+				m_fightAnimationTime = getConfiguredFightAnimationTime();
+			}
+		}
+	}
 }
 
 EnemyID Enemy::getEnemyID() const

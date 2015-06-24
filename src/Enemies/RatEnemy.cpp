@@ -6,6 +6,7 @@ RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, ma
 	load();
 	loadAttributes();
 	loadSpells();
+	m_jumpHeight = getConfiguredMaxVelocityY() * getConfiguredMaxVelocityY() / (2 * getConfiguredGravityAcceleration());
 }
 
 void RatEnemy::loadAttributes()
@@ -27,66 +28,35 @@ void RatEnemy::loadSpells()
 	m_spellManager->setCurrentSpell(SpellID::Chop);
 }
 
-void RatEnemy::checkCollisions(const sf::Vector2f& nextPosition)
-{
-	Enemy::checkCollisions(nextPosition);
-	// TODO check positions with spells
-}
-
 sf::Vector2f RatEnemy::getConfiguredSpellOffset() const
 {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
-void RatEnemy::handleInput()
+void RatEnemy::handleAttackInput()
 {
-	// movement AI
-	float newAccelerationX = 0;
+	Enemy::handleAttackInput();
+}
 
-	if (distToMainChar() < 500.f)
-	{
-        if (m_mainChar->getCenter().x < getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > 5)
-		{
-			m_nextIsFacingRight = false;
-			newAccelerationX -= getConfiguredWalkAcceleration();
-		}
-		if (m_mainChar->getCenter().x > getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > 5)
-		{
-			m_nextIsFacingRight = true;
-			newAccelerationX += getConfiguredWalkAcceleration();
-		}
-		if (m_jumps && m_isGrounded)
-		{
-			setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
-			m_jumps = false;
-		}
-	}
-	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
+float RatEnemy::getConfiguredAggroRange() const
+{
+	return 500.f;
+}
 
-	// handle attack input
-	if (distToMainChar() < 100.f)
-	{
-		std::vector<Spell*> holder = m_spellManager->getSpells();
+bool RatEnemy::getConfiguredFleeCondition() const
+{
+	// what a cowardly rat
+	return m_attributes.currentHealthPoints < m_attributes.maxHealthPoints / 3;
+}
 
-		if (!holder.empty())
-		{
-			int div = 0;
-			int sign = 1;
-			for (auto& it : holder)
-			{
-				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
-				m_screen->addObject(GameObjectType::_Spell, it);
-				sign = -sign;
-				if (sign == -1)
-				{
-					div += 1;
-				}
-			}
-			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
-			}
-		}
-	}
+float RatEnemy::getConfiguredApproachingDistance() const
+{
+	return 10.f;
+}
+
+void RatEnemy::handleMovementInput()
+{
+	Enemy::handleMovementInput();
 }
 
 void RatEnemy::load()
@@ -135,6 +105,11 @@ void RatEnemy::load()
 	m_isFacingRight = true;
 	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	playCurrentAnimation(true);
+}
+
+sf::Time RatEnemy::getConfiguredFightAnimationTime() const
+{
+	return sf::milliseconds(4 * 80);
 }
 
 float RatEnemy::getConfiguredMaxVelocityY() const

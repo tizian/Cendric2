@@ -37,12 +37,13 @@ protected:
 	virtual float getConfiguredDampingGroundPersS() const;
 	virtual float getConfiguredDampingAirPerS() const;
 	// handle input and calculate the next position (AI or user input)
-	virtual void handleInput() = 0;
+	virtual void handleMovementInput() = 0;
+	virtual void handleAttackInput() = 0;
 	// update animation based on the current velocity + grounded
 	void updateAnimation();
 	bool m_isFacingRight;
 	bool m_nextIsFacingRight;
-	bool m_isGrounded;
+	bool m_isGrounded = false;
 	bool m_isDead = false;
 	Level* m_level;
 

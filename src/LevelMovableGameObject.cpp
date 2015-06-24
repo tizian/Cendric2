@@ -22,7 +22,8 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 	}
 	else
 	{
-		handleInput();
+		handleMovementInput();
+		handleAttackInput();
 	}
 	
 	m_spellManager->update(frameTime);
@@ -110,11 +111,6 @@ void LevelMovableGameObject::updateAnimation()
 		m_state = newState;
 		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	}
-}
-
-void LevelMovableGameObject::handleInput()
-{
-	// nop
 }
 
 void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const

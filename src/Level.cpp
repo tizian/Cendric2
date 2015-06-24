@@ -51,6 +51,8 @@ bool Level::load(LevelID id, Screen* screen)
 	loader.loadDynamicTiles(m_levelData, screen);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 
+	tileWidth = static_cast<float>(m_levelData.tileSize.x);
+	tileHeight = static_cast<float>(m_levelData.tileSize.y);
 	g_resourceManager->loadLevelResources();
 	return true;
 }
@@ -115,9 +117,6 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const
 		return true;
 	}
 
-	float tileWidth = static_cast<float>(m_levelData.tileSize.x);
-	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
-
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
 	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
 	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
@@ -179,6 +178,48 @@ bool Level::collidesLevelBottom(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
+bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const
+{
+	sf::FloatRect dummyRect = boundingBox;
+	dummyRect.left = right ? dummyRect.left + STEP_SIZE : dummyRect.left - STEP_SIZE;
+	if (collidesY(dummyRect) || collidesX(dummyRect))
+	{
+		return false;
+	}
+	for (float y = boundingBox.top; y < boundingBox.top + jumpHeight; /* don't increment y here */)
+	{
+		y = std::min(boundingBox.top + jumpHeight, y + tileHeight);
+		dummyRect.top = y;
+		if (collidesY(dummyRect) || collidesX(dummyRect))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const
+{
+	sf::FloatRect dummyRect = boundingBox;
+	for (float y = boundingBox.top; y > boundingBox.top - jumpHeight; /* don't decrement y here */)
+	{
+		y = std::max(boundingBox.top - jumpHeight, y - tileHeight);
+		dummyRect.top = y;
+		if (collidesY(dummyRect) || collidesX(dummyRect))
+		{
+			return true;
+		}
+	}
+
+	// depending on left or right, calculate one step left or right
+	dummyRect.left = right ? dummyRect.left + STEP_SIZE : dummyRect.left - STEP_SIZE;
+	if (collidesX(dummyRect))
+	{
+		return true;
+	}
+	return false;
+}
+
 bool Level::collidesY(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
@@ -186,9 +227,6 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 	{
 		return true;
 	}
-	
-	float tileWidth = static_cast<float>(m_levelData.tileSize.x);
-	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
 
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
 	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));

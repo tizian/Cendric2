@@ -63,28 +63,8 @@ void LevelMainCharacter::onHit(Spell* spell)
 	addDamage(damage);
 }
 
-void LevelMainCharacter::handleInput()
+void LevelMainCharacter::handleAttackInput()
 {
-	// movement input
-	float newAccelerationX = 0;
-
-	if (g_inputController->isKeyActive(Key::Left))
-	{
-		m_nextIsFacingRight = false;
-		newAccelerationX -= getConfiguredWalkAcceleration();
-	}
-	if (g_inputController->isKeyActive(Key::Right))
-	{
-		m_nextIsFacingRight = true;
-		newAccelerationX += getConfiguredWalkAcceleration();
-	}
-	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
-	{
-		setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
-	}
-
-	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
-
 	// update current spell
 	for (auto const &it : m_keyMap) {
 		if (g_inputController->isKeyActive(it.first))
@@ -94,10 +74,10 @@ void LevelMainCharacter::handleInput()
 	}
 
 	// handle attack input
-	if (g_inputController->isMouseJustPressedLeft()) 
+	if (g_inputController->isMouseJustPressedLeft())
 	{
 		std::vector<Spell*> holder = m_spellManager->getSpells();
-		
+
 		if (!holder.empty())
 		{
 			int div = 0;
@@ -117,6 +97,28 @@ void LevelMainCharacter::handleInput()
 			}
 		}
 	}
+}
+
+void LevelMainCharacter::handleMovementInput()
+{
+	float newAccelerationX = 0;
+
+	if (g_inputController->isKeyActive(Key::Left))
+	{
+		m_nextIsFacingRight = false;
+		newAccelerationX -= getConfiguredWalkAcceleration();
+	}
+	if (g_inputController->isKeyActive(Key::Right))
+	{
+		m_nextIsFacingRight = true;
+		newAccelerationX += getConfiguredWalkAcceleration();
+	}
+	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
+	{
+		setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+	}
+
+	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
 }
 
 void LevelMainCharacter::addDamage(int damage)

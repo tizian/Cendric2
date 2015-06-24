@@ -34,6 +34,10 @@ public:
 
 	// checks if the main char has reached a level exit. If no, it returns nullptr, the map id and spawn point for the map.
 	LevelExitBean* checkLevelExit(const sf::FloatRect& boundingBox) const;
+	// formula for the jump height is vel_y_max^2 / (2*gravity acc)
+	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const;
+	// calculates if the object would fall deeper than it can jump if it did one more step in the given direction.
+	bool fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const;
 	// checks collision with the collidable grid of that level
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;
@@ -58,4 +62,7 @@ private:
 	SpeedupPullCamera* m_camera;
 	const float CAMERA_WINDOW_WIDTH = 200.f;
 	const float CAMERA_WINDOW_HEIGHT = 200.f;
+	float tileHeight;
+	float tileWidth;
+	const float STEP_SIZE = 10.f;
 };

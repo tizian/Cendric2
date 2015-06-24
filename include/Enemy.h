@@ -13,6 +13,14 @@ class Level;
 class LevelMainCharacter;
 class Spell;
 
+enum class EnemyState {
+	Idle,
+	Chasing,
+	// the enemy has taken a hit and needs to recover 
+	Recovering,
+	Fleeing
+};
+
 // An enemy in a level
 class Enemy : public LevelMovableGameObject
 {
@@ -44,11 +52,7 @@ protected:
 	virtual void loadSpells() = 0;
 	// loads/updates hp bar
 	virtual void updateHpBar();
-	// the target to be destroyed!
-	LevelMainCharacter* m_mainChar;
-	float distToMainChar() const;
-	// if this bool is set to true, the enemy jumps in the next frame. used by the AI
-	bool m_jumps = false;
+	
 	EnemyID m_id;
 	// spells from these enemies won't hurt. default is its own type.
 	std::vector<EnemyID> m_immuneEnemies;
@@ -56,6 +60,38 @@ protected:
 	std::vector<SpellID> m_immuneSpells;
 	// the attribute bean. if the enemies hp falls to 0, its state will be dead.
 	AttributeBean m_attributes;
+	
+	// AI
+	EnemyState m_enemyState;
+	virtual void updateEnemyState(const sf::Time& frameTime);
+	// if the enemy is not in this range, its state is idle and it will do some random movement.
+	// inside, it will probably chase & attack the main char.
+	virtual float getConfiguredAggroRange() const = 0;
+	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
+	virtual bool getConfiguredFleeCondition() const;
+	virtual sf::Time getConfiguredFightAnimationTime() const = 0;
+	// the distance from the center of the enemy to the center of the main char at which the enemy approaches the main char.
+	virtual float getConfiguredApproachingDistance() const = 0;
+	// the target to be destroyed!
+	LevelMainCharacter* m_mainChar;
+	float distToMainChar() const;
+	// if this bool is set to true, the enemy jumps in the next frame. used by the AI
+	bool m_jumps = false;
+	// a descision the enemy has taken an that lasts until it decides anew. -1: walk left, 0: stay, 1: walk right
+	int m_randomDescision = 0;
+	// time until the enemy can do anything after it has taken a hit or a special spell (stun)
+	sf::Time m_recoveringTime = sf::Time::Zero;
+	// time until the enemy chases again
+	sf::Time m_waitingTime = sf::Time::Zero;
+	// time until next random desicion in idle state
+	sf::Time m_descisionTime = sf::Time::Zero;
+
+	void handleMovementInput() override;
+	void handleAttackInput() override;
+	virtual sf::Time getConfiguredRecoveringTime() const;
+	virtual sf::Time getConfiguredWaitingTime() const;
+	virtual sf::Time getRandomDescisionTime() const;
+	float m_jumpHeight = 0;
 
 private:
 	sf::RectangleShape m_hpBar;
@@ -64,6 +100,7 @@ private:
 	// lootable items 
 	std::map<ItemID, int> m_lootableItems;
 	int m_lootableGold;
+	
 	// the enemy can only be looted if the main char is in this range
 	const float PICKUP_RANGE = 100.f;
 };
