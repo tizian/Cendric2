@@ -39,6 +39,7 @@ protected:
 	// handle input and calculate the next position (AI or user input)
 	virtual void handleMovementInput() = 0;
 	virtual void handleAttackInput() = 0;
+	virtual void setSpriteColor(const sf::Color& color, const sf::Time& time);
 	// update animation based on the current velocity + grounded
 	void updateAnimation();
 	bool m_isFacingRight;
@@ -49,5 +50,7 @@ protected:
 
 	SpellManager* m_spellManager;
 	// as long as this time is not sf::Time::Zero, the mob will have the fighting animation. 
-	sf::Time m_fightAnimationTime;
+	sf::Time m_fightAnimationTime = sf::Time::Zero;
+	// the sprite will reset its color as soon as this time is zero.
+	sf::Time m_coloredTime = sf::Time::Zero;
 };

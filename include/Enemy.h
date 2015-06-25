@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "LevelMovableGameObject.h"
+#include "GUI/LootWindow.h"
 
 #include "Structs/AttributeBean.h"
 
@@ -26,6 +27,7 @@ class Enemy : public LevelMovableGameObject
 {
 public:
 	Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
+	~Enemy();
 
 	virtual void load() = 0;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
@@ -98,6 +100,8 @@ private:
 	// lootable items 
 	std::map<ItemID, int> m_lootableItems;
 	int m_lootableGold;
+	LootWindow* m_lootWindow = nullptr;
+	bool m_showLootWindow = false;
 	
 	// the enemy can only be looted if the main char is in this range
 	const float PICKUP_RANGE = 100.f;

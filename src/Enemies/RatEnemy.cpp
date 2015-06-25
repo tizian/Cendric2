@@ -62,7 +62,7 @@ void RatEnemy::handleAttackInput()
 
 float RatEnemy::getConfiguredAggroRange() const
 {
-	return 500.f;
+	return 300.f;
 }
 
 float RatEnemy::getConfiguredDistanceToAbyss() const

@@ -123,11 +123,13 @@ void LevelMainCharacter::handleMovementInput()
 
 void LevelMainCharacter::addDamage(int damage)
 {
+	if (m_state == GameObjectState::Dead) return;
 	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints - damage));
 	if (m_attributes->currentHealthPoints == 0)
 	{
 		m_isDead = true;
 	}
+	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
 }
 
 void LevelMainCharacter::setDead()

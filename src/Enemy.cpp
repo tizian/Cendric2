@@ -15,6 +15,11 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	updateHpBar();
 }
 
+Enemy::~Enemy()
+{
+	delete m_lootWindow;
+}
+
 bool Enemy::getConfiguredFleeCondition() const
 {
 	return false;
@@ -22,11 +27,13 @@ bool Enemy::getConfiguredFleeCondition() const
 
 void Enemy::addDamage(int damage)
 {
+	if (m_state == GameObjectState::Dead) return;
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
 	if (m_attributes.currentHealthPoints == 0)
 	{
 		m_isDead = true;
 	}
+	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
 }
 
 void Enemy::setDead()
@@ -136,7 +143,11 @@ void Enemy::render(sf::RenderTarget &renderTarget)
 {
 	LevelMovableGameObject::render(renderTarget);
 	renderTarget.draw(m_hpBar);
-	m_animatedSprite.setColor(sf::Color::White);
+	if (m_showLootWindow && m_lootWindow != nullptr)
+	{
+		m_lootWindow->render(renderTarget);
+		m_showLootWindow = false;
+	}
 }
 
 void Enemy::update(const sf::Time& frameTime) 
@@ -144,6 +155,11 @@ void Enemy::update(const sf::Time& frameTime)
 	updateEnemyState(frameTime);
 	LevelMovableGameObject::update(frameTime);
 	updateHpBar();
+	if (m_showLootWindow && m_lootWindow != nullptr)
+	{
+		sf::Vector2f pos(getBoundingBox()->left + getBoundingBox()->width, getBoundingBox()->top - m_lootWindow->getSize().y + 10.f);
+		m_lootWindow->setPosition(pos);
+	}
 }
 
 void Enemy::updateHpBar() 
@@ -195,13 +211,15 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 		return;
 	}
 
-	if (getConfiguredFleeCondition())
+	bool isInAggroRange = distToMainChar() < getConfiguredAggroRange();
+
+	if (getConfiguredFleeCondition() && isInAggroRange)
 	{
 		m_enemyState = EnemyState::Fleeing;
 		return;
 	}
 
-	if (m_enemyState == EnemyState::Idle)
+	if (m_enemyState == EnemyState::Idle && !isInAggroRange)
 	{
 		m_descisionTime -= frameTime;
 		if (m_descisionTime < sf::Time::Zero)
@@ -212,13 +230,13 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 		}
 	}
 
-	if (m_enemyState == EnemyState::Idle && distToMainChar() < getConfiguredAggroRange())
+	if (m_enemyState == EnemyState::Idle && isInAggroRange)
 	{
 		m_enemyState = EnemyState::Chasing;
 		return;
 	}
 
-	if ((m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Fleeing) && distToMainChar() > getConfiguredAggroRange())
+	if ((m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Fleeing) && !isInAggroRange)
 	{
 		m_enemyState = EnemyState::Idle;
 		return;
@@ -294,13 +312,18 @@ void Enemy::setLoot(const std::map<ItemID, int>& items, int gold)
 {
 	m_lootableItems = items;
 	m_lootableGold = gold;
+	delete m_lootWindow;
+	sf::FloatRect window(0.f, 0.f, 150.f, (items.size() + 2) * 12.f + 20.f);
+	m_lootWindow = new LootWindow(window, WindowOrnamentStyle::SMALL);
+	m_lootWindow->setLoot(items, gold);
 }
 
 void Enemy::onMouseOver()
 {
 	if (m_state == GameObjectState::Dead)
 	{
-		m_animatedSprite.setColor(sf::Color::Red);
+		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
+		m_showLootWindow = true;
 	}
 }
 

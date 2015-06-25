@@ -147,7 +147,7 @@ sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const
 
 float FireRatEnemy::getConfiguredAggroRange() const
 {
-	return 600.f;
+	return 500.f;
 }
 
 float FireRatEnemy::getConfiguredApproachingDistance() const

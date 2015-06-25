@@ -41,6 +41,7 @@ public:
 private:
 	Level* m_level;
 	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.
+	GameObjectType m_ownerType;
 	sf::Time m_activeCoolDown;
 
 	int m_damage;

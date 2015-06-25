@@ -35,7 +35,7 @@ public:
 	void addAnimation(GameObjectState state, Animation& animation);
 
 	void setBoundingBox(const sf::FloatRect& rect);
-	void setPosition(const sf::Vector2f& pos);
+	virtual void setPosition(const sf::Vector2f& pos);
 	void setPositionX(float posX);
 	void setPositionY(float posY);
 	void setDisposed();

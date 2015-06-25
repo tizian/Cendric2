@@ -10,6 +10,7 @@ void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target,
 {
 	m_level = level;
 	m_mob = mob;
+	m_ownerType = m_mob->getConfiguredType();
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_MainCharacter)->at(0));
@@ -100,7 +101,7 @@ void Spell::update(const sf::Time& frameTime)
 	// check collisions with dynamic tiles
 	m_level->collideWithDynamicTiles(this, getBoundingBox());
 	// check collisions with main char
-	if (m_mob == nullptr || !(m_mob->getConfiguredType() == GameObjectType::_MainCharacter))
+	if (m_ownerType != GameObjectType::_MainCharacter)
 	{
 		checkCollisionsWithMainChar(getBoundingBox());
 	}
