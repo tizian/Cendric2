@@ -39,6 +39,8 @@ enum class ResourceID
 	Texture_enemy_firerat,
 	Texture_levelitems,
 	Texture_items,
+	Texture_npcs,
+	Texture_dialogue,
 	Texture_GUI_rounded_rectangle,
 	Texture_GUI_ornament_none,
 	Texture_GUI_ornament_small,

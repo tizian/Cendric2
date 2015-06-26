@@ -6,6 +6,7 @@
 #include "global.h"
 #include "TileMap.h"
 #include "FileIO/MapReader.h"
+#include "MapLoader.h"
 #include "ResourceManager.h"
 
 class Map
@@ -16,6 +17,7 @@ public:
 	
 	// loads a .dricmap file
 	bool load(MapID id);
+	void loadAfterMainChar(Screen* screen);
 	// draws the map. background tilelayers
 	void drawBackground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
 	// draws the map. foreground tilelayers
@@ -39,10 +41,8 @@ private:
 	void draw(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const;
 	TileMap m_backgroundTileMap;
 	TileMap m_foregroundTileMap;
-	sf::FloatRect m_mapRect;
-	std::vector<std::vector<bool>> m_collidableTiles;
-	std::string m_name;
-	std::vector<MapExitBean> m_levelEntries;
 
 	MapID m_id;
+	// data loaded by the map loader
+	MapData m_mapData;
 };

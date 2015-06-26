@@ -59,6 +59,8 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_credits, "res/screens/screen_credits.png" },
 		{ ResourceID::Texture_levelitems, "res/assets/items/spritesheet_levelitems.png" },
 		{ ResourceID::Texture_items, "res/assets/items/spritesheet_items.png" },
+		{ ResourceID::Texture_npcs, "res/assets/npcs/spritesheet_npcs.png" },
+		{ ResourceID::Texture_dialogue, "res/assets/dialogue/spritesheet_dialogue.png" },
 		{ ResourceID::Texture_head_wizardhat_grey, "res/assets/equipment/head/spritesheet_head_wizardhat_grey.png" },
 		{ ResourceID::Texture_head_wizardhat_blue, "res/assets/equipment/head/spritesheet_head_wizardhat_blue.png" },
 		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" },

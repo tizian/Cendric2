@@ -16,5 +16,6 @@ enum GameObjectType
 	_DynamicTile,
 	_Enemy,
 	_LevelItem,
+	_NPC,
 	_MAX
 };

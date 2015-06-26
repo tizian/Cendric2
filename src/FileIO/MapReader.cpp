@@ -2,6 +2,24 @@
 
 using namespace std;
 
+MapReader::MapReader()
+{
+	initMaps();
+}
+
+MapReader::~MapReader()
+{
+	m_npcMap.clear();
+}
+
+void MapReader::initMaps()
+{
+	m_npcMap.insert({
+		{ 0, NpcID::Void },
+		{ 1, NpcID::Guard },
+	});
+}
+
 bool MapReader::checkData(MapData& data) const
 {
 	if (data.mapSize.x == 0 || data.mapSize.y == 0)
@@ -179,6 +197,39 @@ bool MapReader::readTileSize(char* start, char* end, MapData& data) const
 	return true;
 }
 
+bool MapReader::readLayerNPC(char* start, char* end, MapData& data) const
+{
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, '"');
+	startData++;
+	endData = gotoNextChar(startData, end, '"');
+
+	int firstgid = atoi(startData);
+	startData = gotoNextChar(start, end, ',');
+	startData++;
+
+	NpcID npc;
+	while (startData != NULL)
+	{
+		int id = atoi(startData);
+		id = (id == 0) ? id : id - firstgid + 1;
+		if (m_npcMap.find(id) == m_npcMap.end())
+		{
+			g_logger->logError("MapReader", "Npc ID not recognized: " + std::to_string(id));
+			return false;
+		}
+		npc = m_npcMap.at(id);
+		data.npcs.push_back(npc);
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+	return true;
+}
+
 bool MapReader::readBackgroundLayerTiles(char* start, char* end, MapData& data) const
 {
 	// add a new background layer into data
@@ -338,6 +389,12 @@ bool MapReader::readMap(char* fileName, MapData& data)
 			pos = gotoNextChar(pos, end, ';');
 			pos = gotoNextChar(pos, end, '\n');
 		}
+		else if (strncmp(pos, LAYER_NPC, strlen(LAYER_NPC)) == 0) {
+			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_NPC));
+			noError = readLayerNPC(pos, end, data);
+			pos = gotoNextChar(pos, end, ';');
+			pos = gotoNextChar(pos, end, '\n');
+		}
 		else {
 			g_logger->logError("MapReader", "unknown tag found in file " + std::string(fileName));
 			return false;
@@ -383,6 +440,30 @@ void MapReader::updateData(MapData& data) const
 			y++;
 			data.collidableTileRects.push_back(xLine); // push back creates a copy of that vector.
 			xLine.clear();
+		}
+		else
+		{
+			x++;
+		}
+	}
+
+	x = 0;
+	y = 0;
+
+	int tileWidth = data.tileSize.x;
+	int tileHeight = data.tileSize.y;
+
+	// calculate npcs
+	for (std::vector<NpcID>::iterator it = data.npcs.begin(); it != data.npcs.end(); ++it)
+	{
+		NpcID id = (*it);		if (id != NpcID::Void)
+		{
+			data.npcPositions.push_back(std::pair<NpcID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+		}
+		if (x + 1 >= data.mapSize.x)
+		{
+			x = 0;
+			y++;
 		}
 		else
 		{

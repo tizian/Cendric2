@@ -20,7 +20,7 @@ Screen* LoadingScreen::update(const sf::Time& frameTime)
 {
 	if (m_levelToLoad != LevelID::Void)
 	{
-		return new GameScreen(m_levelToLoad, getCharacterCore());
+		return new LevelScreen(m_levelToLoad, getCharacterCore());
 	}
 	if (m_mapToLoad != MapID::Void)
 	{
