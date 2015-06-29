@@ -23,6 +23,7 @@ void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 			npc.texturePositions.push_back(sf::IntRect(0, 0, 50, 50));
 			npc.frameTime = sf::seconds(1.0f);
 			npc.tooltip = "NPC_Guard";
+			npc.talksActive = true;
 			break;
 		default:
 			// unexpected error
@@ -34,6 +35,7 @@ void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 		Animation idleAnimation;
 		mapNPC->setSpriteOffset(npc.spriteOffset);
 		mapNPC->setBoundingBox(npc.boundingBox);
+		mapNPC->setActiveTalking(npc.talksActive);
 		idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_npcs));
 		// add frames
 		for (auto &frame : npc.texturePositions) {

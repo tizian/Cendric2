@@ -10,4 +10,5 @@ struct NPCBean
 	std::vector<sf::IntRect> texturePositions;
 	sf::Time frameTime;
 	std::string tooltip;
+	bool talksActive;
 };

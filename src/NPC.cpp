@@ -33,6 +33,20 @@ void NPC::update(const sf::Time& frameTime)
 			m_tooltipTime = sf::Time::Zero;
 		}
 	}
+	checkCollisionWithMainChar();
+}
+
+void NPC::setActiveTalking(bool activeTalking)
+{
+	m_talksActive = activeTalking;
+}
+
+void NPC::checkCollisionWithMainChar()
+{
+	if (m_talksActive && !m_mainChar->isTalking() && getBoundingBox()->intersects(*(m_mainChar->getBoundingBox())))
+	{
+		m_mainChar->setDialogueWith(m_npcID);
+	}
 }
 
 GameObjectType NPC::getConfiguredType() const
