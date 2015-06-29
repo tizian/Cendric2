@@ -14,7 +14,7 @@ class LevelMovableGameObject;
 class Spell : public MovableGameObject
 {
 public:
-
+	Spell() : MovableGameObject() {}
 	// called by the spell manager
 	void init(SpellBean& bean);
 	// the spell divergence only matters if we have more than one spell. else, the spell divergence will be 0

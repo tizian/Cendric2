@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style)
+Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject()
 {
 	// using default values for constructor.
 	m_size = sf::Vector2f(box.width, box.height);

@@ -1,6 +1,6 @@
 #include "Spells/UnlockSpell.h"
 
-UnlockSpell::UnlockSpell()
+UnlockSpell::UnlockSpell() : Spell()
 {
 }
 

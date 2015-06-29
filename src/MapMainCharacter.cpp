@@ -1,6 +1,6 @@
 #include "MapMainCharacter.h"
 
-MapMainCharacter::MapMainCharacter(Map* map)
+MapMainCharacter::MapMainCharacter(Map* map) : MovableGameObject()
 {
 	m_map = map;
 	load();

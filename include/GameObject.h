@@ -16,7 +16,7 @@ class Screen;
 class GameObject 
 {
 public:
-	GameObject() {}
+	GameObject();
     virtual ~GameObject() {}
 
 	virtual void update(const sf::Time& frameTime);
@@ -53,6 +53,7 @@ public:
 	const sf::Vector2f& getPosition() const;
 	const sf::Vector2f& getSpriteOffset() const;
 	const sf::FloatRect* getBoundingBox() const;
+	const std::vector<sf::FloatRect> *getBoundingBoxes() const;
 	const sf::Vector2f getCenter() const;
 	// returns whether the game object should be deleted
 	// if this is set, the game object gets deleted in the next game loop

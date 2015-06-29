@@ -1,6 +1,6 @@
 #include "Spells/IceSpell.h"
 
-IceSpell::IceSpell()
+IceSpell::IceSpell() : Spell()
 {
 }
 

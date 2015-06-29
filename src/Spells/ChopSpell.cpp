@@ -1,6 +1,6 @@
 #include "Spells/ChopSpell.h"
 
-ChopSpell::ChopSpell()
+ChopSpell::ChopSpell() : Spell()
 {
 }
 

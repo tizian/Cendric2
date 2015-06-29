@@ -155,13 +155,20 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const
 		}
 	}
 
-	// check collidable dynamic tiles
-	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
+	// check collidable dynamic tiles	// NOTE: collidesX/collidesY are currently the only places where multiple BBs (should) have any effect.
+	for (GameObject *go : *m_dynamicTiles)
 	{
-		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
-		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
+		DynamicTile *tile = dynamic_cast<DynamicTile *>(go);
+		if (tile != nullptr && tile->getIsCollidable())
 		{
-			return true;
+			const std::vector<sf::FloatRect> *tileBBs = tile->getBoundingBoxes();
+			for (const sf::FloatRect &bb : *tileBBs)
+			{
+				if (bb.intersects(boundingBox))
+				{
+					return true;
+				}
+			}
 		}
 	}
 
@@ -266,13 +273,20 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 		}
 	}
 
-	// check collidable dynamic tiles
-	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
+	// check collidable dynamic tiles	// NOTE: collidesX/collidesY are currently the only places where multiple BBs (should) have any effect.
+	for (GameObject *go : *m_dynamicTiles)
 	{
-		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
-		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
+		DynamicTile *tile = dynamic_cast<DynamicTile *>(go);
+		if (tile != nullptr && tile->getIsCollidable())
 		{
-			return true;
+			const std::vector<sf::FloatRect> *tileBBs = tile->getBoundingBoxes();
+			for (const sf::FloatRect &bb : *tileBBs)
+			{
+				if (bb.intersects(boundingBox))
+				{
+					return true;
+				}
+			}
 		}
 	}
 

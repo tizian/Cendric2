@@ -6,6 +6,7 @@
 class CrumblyBlockTile : public DynamicTile
 {
 public:
+	CrumblyBlockTile() : DynamicTile() {}
 	void init() override;
 	void load(int skinNr) override;
 	void onHit(Spell* spell) override;

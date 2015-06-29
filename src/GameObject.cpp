@@ -146,6 +146,11 @@ const sf::FloatRect* GameObject::getBoundingBox() const
 	return &m_boundingBoxes.at(0);
 }
 
+const std::vector<sf::FloatRect> *GameObject::getBoundingBoxes() const
+{
+	return &m_boundingBoxes;
+}
+
 void GameObject::onMouseOver() 
 {
 	// nop

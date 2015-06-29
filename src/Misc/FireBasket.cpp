@@ -1,6 +1,6 @@
 #include "Misc/FireBasket.h"
 
-FireBasket::FireBasket()
+FireBasket::FireBasket() : GameObject()
 {
 	load();
 }

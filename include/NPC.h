@@ -15,6 +15,7 @@ class MapMainCharacter;
 class NPC : public GameObject
 {
 public:
+	NPC() : GameObject() {}
 	void load(MapMainCharacter* mainChar, NpcID id);
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;

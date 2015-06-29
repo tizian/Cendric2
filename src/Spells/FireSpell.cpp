@@ -1,6 +1,6 @@
 #include "Spells/FireSpell.h"
 
-FireSpell::FireSpell()
+FireSpell::FireSpell() : Spell()
 {
 }
 

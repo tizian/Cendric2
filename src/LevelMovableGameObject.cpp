@@ -2,7 +2,7 @@
 #include "SpellManager.h"
 #include "Level.h"
 
-LevelMovableGameObject::LevelMovableGameObject(Level* level)
+LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject()
 {
 	m_level = level;
 	m_spellManager = new SpellManager();

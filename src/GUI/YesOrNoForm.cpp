@@ -3,7 +3,7 @@
 using namespace std;
 
 
-YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) 
+YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject()
 {
 	m_window = new Window(box, WindowOrnamentStyle::NONE);
 	float buttonHeight = 50.f;

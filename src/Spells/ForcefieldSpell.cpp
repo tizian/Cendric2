@@ -1,6 +1,6 @@
 #include "Spells/ForcefieldSpell.h"
 
-ForcefieldSpell::ForcefieldSpell()
+ForcefieldSpell::ForcefieldSpell() : Spell()
 {
 }
 
