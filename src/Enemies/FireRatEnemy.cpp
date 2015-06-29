@@ -6,6 +6,7 @@ FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(l
 	load();
 	loadAttributes();
 	loadSpells();
+	m_jumpHeight = getConfiguredMaxVelocityY() * getConfiguredMaxVelocityY() / (2 * getConfiguredGravityAcceleration());
 }
 
 void FireRatEnemy::loadAttributes()
@@ -35,61 +36,49 @@ void FireRatEnemy::loadSpells()
 	m_spellManager->setCurrentSpell(SpellID::Chop);
 }
 
-void FireRatEnemy::checkCollisions(const sf::Vector2f& nextPosition)
-{
-	Enemy::checkCollisions(nextPosition);
-	// TODO check positions with spells
-}
-
 sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const
 {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
-void FireRatEnemy::handleInput()
+void FireRatEnemy::handleAttackInput()
 {
-	// movement AI
-	float newAccelerationX = 0;
-
-	if (distToMainChar() < 600.f)
+	if (distToMainChar() < getConfiguredAggroRange())
 	{
-        if (m_mainChar->getCenter().x < getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > 5)
-		{
-			m_nextIsFacingRight = false;
-			newAccelerationX -= getConfiguredWalkAcceleration();
-		}
-        if (m_mainChar->getCenter().x > getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > 5)
-		{
-			m_nextIsFacingRight = true;
-			newAccelerationX += getConfiguredWalkAcceleration();
-		}
-		if (m_jumps && m_isGrounded)
-		{
-			setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
-			m_jumps = false;
-		}
-	}
-	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
-
-	// handle attack input
-	if (distToMainChar() < 600.f)
-	{	
 		m_spellManager->setCurrentSpell(SpellID::Fire);
-		if (distToMainChar() < 100.f) 
+		if (distToMainChar() < 100.f)
 		{
 			m_spellManager->setCurrentSpell(SpellID::Chop);
 		}
-		
-		Spell* spell = m_spellManager->getSpell();
-		if (spell != nullptr)
+
+		std::vector<Spell*> holder = m_spellManager->getSpells();
+
+		if (!holder.empty())
 		{
-			spell->load(getLevel(), this, m_mainChar->getCenter());
-			if (spell->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = sf::milliseconds(4 * 80); // duration of fight animation
+			int div = 0;
+			int sign = 1;
+			for (auto& it : holder)
+			{
+				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
+				m_screen->addObject(GameObjectType::_Spell, it);
+				sign = -sign;
+				if (sign == -1)
+				{
+					div += 1;
+				}
 			}
-			m_screen->addObject(GameObjectType::_Spell, spell);
+			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
+				m_fightAnimationTime = getConfiguredFightAnimationTime();
+			}
 		}
 	}
+}
+
+void FireRatEnemy::handleMovementInput()
+{
+	Enemy::handleMovementInput();
+	// handle attack input
+	
 }
 
 void FireRatEnemy::load()
@@ -149,4 +138,19 @@ float FireRatEnemy::getConfiguredMaxVelocityY() const
 float FireRatEnemy::getConfiguredMaxVelocityX() const
 {
 	return 50.0f;
+}
+
+sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const
+{
+	return sf::milliseconds(4 * 80);
+}
+
+float FireRatEnemy::getConfiguredAggroRange() const
+{
+	return 500.f;
+}
+
+float FireRatEnemy::getConfiguredApproachingDistance() const
+{
+	return 10.f;
 }

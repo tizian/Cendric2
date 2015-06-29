@@ -22,6 +22,7 @@ public:
 
 private:
 	Map m_currentMap;
+	MapID m_mapID;
 	MapMainCharacter* m_mainChar;
 	bool m_isOnLevelEntry = true;
 };

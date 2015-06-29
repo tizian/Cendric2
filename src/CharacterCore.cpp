@@ -30,10 +30,10 @@ bool CharacterCore::load(const char* fileName)
 
 void CharacterCore::loadNew()
 {
-	// start map & position when a new game is saved
+	// start map & position when a new game is loaded
 	m_data.playerName = "Dummy";
 	m_data.currentMap = MapID::Firstmap; 
-	m_data.currentMapPosition = sf::Vector2f(1450.0f, 1450.0f); 
+	m_data.currentMapPosition = sf::Vector2f(4400.0f, 650.0f); 
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.currentManaPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;

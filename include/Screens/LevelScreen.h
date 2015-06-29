@@ -11,10 +11,10 @@
 #include "GUI/Button.h"
 #include "Enums/LevelID.h"
 
-class GameScreen : public Screen
+class LevelScreen : public Screen
 {
 public:
-	GameScreen(LevelID levelID, CharacterCore* core);
+	LevelScreen(LevelID levelID, CharacterCore* core);
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

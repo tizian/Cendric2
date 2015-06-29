@@ -4,10 +4,13 @@
 
 using namespace std;
 
-void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target) 
+const float SPELL_ANGLE = 0.2f;
+
+void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence) 
 {
 	m_level = level;
 	m_mob = mob;
+	m_ownerType = m_mob->getConfiguredType();
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_MainCharacter)->at(0));
@@ -21,16 +24,6 @@ void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
 	calculatePositionAccordingToMob(absolutePosition);
 	setPosition(absolutePosition);
 	
-	sf::Vector2f direction = target - absolutePosition;
-	// normalize dir
-	float len = sqrt(direction.x * direction.x + direction.y * direction.y);
-	direction.x = (len == 0) ? 0 : direction.x / len;
-	direction.y = (len == 0) ? 0 : direction.y / len;
-	
-	if (getConfiguredRotateSprite())
-	{
-		setRotation(atan2(direction.y, direction.x));
-	}
 	
 	// if the spell is attached to the main char, velocity is ignored 
 	if (getConfiguredIsAttachedToMob())
@@ -38,7 +31,20 @@ void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
 		setVelocity(sf::Vector2f(0, 0));
 		return;
 	}
-	
+
+ 	sf::Vector2f trueDir = target - absolutePosition;
+	// normalize dir
+	float len = sqrt(trueDir.x * trueDir.x + trueDir.y * trueDir.y);
+	trueDir.x = (len == 0) ? 0 : trueDir.x / len;
+	trueDir.y = (len == 0) ? 0 : trueDir.y / len;
+
+	sf::Vector2f direction = rotateVector(trueDir, divergence * SPELL_ANGLE);
+
+	if (getConfiguredRotateSprite())
+	{
+		setRotation(atan2(direction.y, direction.x));
+	}
+
 	setVelocity(m_speed * direction);
 }
 
@@ -95,7 +101,7 @@ void Spell::update(const sf::Time& frameTime)
 	// check collisions with dynamic tiles
 	m_level->collideWithDynamicTiles(this, getBoundingBox());
 	// check collisions with main char
-	if (m_mob == nullptr || !(m_mob->getConfiguredType() == GameObjectType::_MainCharacter))
+	if (m_ownerType != GameObjectType::_MainCharacter)
 	{
 		checkCollisionsWithMainChar(getBoundingBox());
 	}
@@ -133,16 +139,48 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition)
 
 	bool isMovingY = nextPosition.y != getBoundingBox()->top;
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
-
+	bool reflected = false;
 	// check for collision on x axis
 	if (isMovingX && m_level->collidesX(nextBoundingBoxX))
 	{
-		setDisposed();
+		if (m_reflectCount <= 0)
+		{
+			setDisposed();
+			return;
+		}
+		else
+		{
+			reflected = true;
+			setAcceleration(sf::Vector2f(0.f, 0.f));
+			setVelocityX(-getVelocity().x);
+			if (getConfiguredRotateSprite())
+			{
+				setRotation(atan2(getVelocity().y, getVelocity().x));
+			}
+		}
 	}
 	// check for collision on y axis
 	if (isMovingY && m_level->collidesY(nextBoundingBoxY))
 	{
-		setDisposed();
+		if (m_reflectCount <= 0)
+		{
+			setDisposed();
+			return;
+		}
+		else
+		{
+			reflected = true;
+			setAcceleration(sf::Vector2f(0.f, 0.f));
+			setVelocityY(-getVelocity().y);
+			if (getConfiguredRotateSprite())
+			{
+				setRotation(atan2(getVelocity().y, getVelocity().x));
+			}
+		}
+	}
+	if (reflected)
+	{
+		m_reflectCount -= 1;
 	}
 }
 
@@ -184,5 +222,12 @@ const MovableGameObject* Spell::getOwner() const
 int Spell::getDamage() const
 {
 	return m_damage;
+}
+
+sf::Vector2f Spell::rotateVector(const sf::Vector2f &vec, float angle)
+{
+	float newX = vec.x * cos(angle) - vec.y * sin(angle);
+	float newY = vec.x * sin(angle) + vec.y * cos(angle);
+	return sf::Vector2f(newX, newY);
 }
 

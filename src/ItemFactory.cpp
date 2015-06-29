@@ -8,7 +8,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.description = "Itd_Wizardhat";
 		bean.name = "It_BlueWizardhat";
 		bean.type = ItemType::Equipment_head;
-		bean.iconTextureLocation = sf::Vector2i(100, 100);
+		bean.iconTextureLocation = sf::Vector2i(100, 100); // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_blue;
 		bean.value = 20;
 		bean.attributes.damageIce = 5;
@@ -21,7 +21,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.description = "Itd_Wizardhat";
 		bean.name = "It_GreyWizardhat";
 		bean.type = ItemType::Equipment_head;
-		bean.iconTextureLocation = sf::Vector2i(150, 100);
+		bean.iconTextureLocation = sf::Vector2i(150, 100); // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_grey;
 		bean.value = 20;
 		bean.attributes.manaRegenerationPerS = 4;
@@ -34,7 +34,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.description = "Itd_Icestaff";
 		bean.name = "It_Icestaff";
 		bean.type = ItemType::Equipment_weapon;
-		bean.iconTextureLocation = sf::Vector2i(200, 100);
+		bean.iconTextureLocation = sf::Vector2i(200, 100); // TODO
 		bean.levelEquipment = LevelEquipmentID::Weapon_icestaff;
 		bean.value = 120;
 		bean.attributes.manaRegenerationPerS = 4;
@@ -47,10 +47,20 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.description = "Itd_Rustysword";
 		bean.name = "It_Rustysword";
 		bean.type = ItemType::Equipment_weapon;
-		bean.iconTextureLocation = sf::Vector2i(250, 100);
+		bean.iconTextureLocation = sf::Vector2i(250, 100); // TODO
 		bean.levelEquipment = LevelEquipmentID::Weapon_rustysword;
 		bean.value = 15;
 		bean.attributes.damagePhysical = 5;
+		break;
+	case ItemID::Equipment_back_purple:
+		bean.description = "Itd_Purpleback"; // TODO
+		bean.name = "It_Purpleback"; // TODO
+		bean.type = ItemType::Equipment_back;
+		bean.iconTextureLocation = sf::Vector2i(250, 100); // TODO
+		bean.levelEquipment = LevelEquipmentID::Back_purple;
+		bean.value = 10;
+		bean.attributes.resistancePhysical = 1;
+		bean.attributes.resistanceIce = 5;
 		break;
 	case ItemID::Food_Cheese:
 		bean.description = "Itd_Cheese";

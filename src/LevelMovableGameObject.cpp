@@ -22,7 +22,8 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 	}
 	else
 	{
-		handleInput();
+		handleMovementInput();
+		handleAttackInput();
 	}
 	
 	m_spellManager->update(frameTime);
@@ -30,7 +31,17 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 	checkCollisions(m_nextPosition);
 	m_level->collideWithDynamicTiles(this, getBoundingBox());
 	MovableGameObject::update(frameTime);
+	// update time
 	m_fightAnimationTime = (m_fightAnimationTime - frameTime) >= sf::Time::Zero ? m_fightAnimationTime - frameTime : sf::Time::Zero;
+	if (m_coloredTime != sf::Time::Zero)
+	{
+		m_coloredTime -= frameTime;
+		if (m_coloredTime <= sf::Time::Zero)
+		{
+			m_animatedSprite.setColor(sf::Color::White);
+			m_coloredTime = sf::Time::Zero;
+		}
+	}
 	updateAnimation();
 }
 
@@ -112,11 +123,6 @@ void LevelMovableGameObject::updateAnimation()
 	}
 }
 
-void LevelMovableGameObject::handleInput()
-{
-	// nop
-}
-
 void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const
 {
 	// distinguish damping in the air and at the ground
@@ -170,4 +176,11 @@ float LevelMovableGameObject::getConfiguredDampingAirPerS() const
 SpellManager* LevelMovableGameObject::getSpellManager() const
 {
 	return m_spellManager;
+}
+
+void LevelMovableGameObject::setSpriteColor(const sf::Color& color, const sf::Time& time)
+{
+	if (time <= sf::Time::Zero) return;
+	m_animatedSprite.setColor(color);
+	m_coloredTime = time;
 }

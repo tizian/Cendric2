@@ -5,14 +5,19 @@
 #include "Logger.h"
 
 #include "Structs/MapData.h"
+#include "Enums/NpcID.h"
 
 class MapReader : public Reader
 {
 public:
-
+	MapReader();
+	~MapReader();
 	bool readMap(char* fileName, MapData& data);
 
 private:
+	void initMaps();
+
+	std::map<int, NpcID> m_npcMap;
 
 	bool readMapName(char* start, char* end, MapData& data) const;
 	bool readTilesetPath(char* start, char* end, MapData& data) const;
@@ -22,6 +27,7 @@ private:
 	bool readBackgroundLayerTiles(char* start, char* end, MapData& data) const;
 	bool readForegroundLayerTiles(char* start, char* end, MapData& data) const;
 	bool readLevelEntry(char* start, char* end, MapData& data) const;
+	bool readLayerNPC(char* start, char* end, MapData& data) const;
 
 	// \brief check map bean for validity before loading the level
 	bool checkData(MapData& data) const;
@@ -37,4 +43,5 @@ private:
 	const char* LAYER_COLLIDABLE = "layer.collidable";
 	const char* LAYER_TILES_BACKGROUND = "layer.tiles.background";
 	const char* LAYER_TILES_FOREGROUND = "layer.tiles.foreground";
+	const char* LAYER_NPC = "layer.npc";
 };

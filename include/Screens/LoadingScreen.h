@@ -3,7 +3,7 @@
 #include "global.h"
 #include "ResourceManager.h"
 #include "Screens/MapScreen.h"
-#include "Screens/GameScreen.h"
+#include "Screens/LevelScreen.h"
 
 #include "Enums/MapID.h"
 #include "Enums/LevelID.h"

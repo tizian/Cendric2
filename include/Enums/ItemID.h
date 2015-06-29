@@ -9,6 +9,7 @@ enum class ItemID
 	Equipment_weapon_staff_ice,
 	Equipment_weapon_rustysword,
 	Equipment_ring_ringOfLesserHealth,
+	Equipment_back_purple,
 	Food_CaveBerry,
 	Food_HealingHerb,
 	Food_GlowingShroom,

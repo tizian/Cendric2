@@ -7,7 +7,7 @@ class ForcefieldSpell : public Spell
 {
 public:
 	ForcefieldSpell();
-	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target);
+	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence) override;
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

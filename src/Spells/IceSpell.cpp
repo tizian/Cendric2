@@ -4,7 +4,7 @@ IceSpell::IceSpell()
 {
 }
 
-void IceSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target)
+void IceSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence)
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 	setBoundingBox(sf::FloatRect(0, 0, 10, 10));
@@ -22,7 +22,7 @@ void IceSpell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f targ
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	Spell::load(level, mob, target);
+	Spell::load(level, mob, target, divergence);
 }
 
 float IceSpell::getConfiguredMaxVelocityY() const

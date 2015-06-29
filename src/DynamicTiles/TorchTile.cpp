@@ -10,13 +10,14 @@ void TorchTile::init()
 void TorchTile::load(int skinNr)
 {
 	m_isCollidable = false;
+	int textureHeight = 2 * m_tileSize.y;
 
 	Animation burningAnimation;
 	burningAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_torch));
-	burningAnimation.addFrame(sf::IntRect(0, 0, m_tileSize.x, 2 * m_tileSize.y));
-	burningAnimation.addFrame(sf::IntRect(m_tileSize.x, 0, m_tileSize.x, 2 * m_tileSize.y));
-	burningAnimation.addFrame(sf::IntRect(m_tileSize.x * 2, 0, m_tileSize.x, 2 * m_tileSize.y));
-	burningAnimation.addFrame(sf::IntRect(m_tileSize.x * 3, 0, m_tileSize.x, 2 * m_tileSize.y));
+	burningAnimation.addFrame(sf::IntRect(0, (skinNr - 1) * textureHeight, m_tileSize.x, textureHeight));
+	burningAnimation.addFrame(sf::IntRect(m_tileSize.x, (skinNr - 1) * textureHeight, m_tileSize.x, textureHeight));
+	burningAnimation.addFrame(sf::IntRect(m_tileSize.x * 2, (skinNr - 1) * textureHeight, m_tileSize.x, textureHeight));
+	burningAnimation.addFrame(sf::IntRect(m_tileSize.x * 3, (skinNr - 1) * textureHeight, m_tileSize.x, textureHeight));
 
 	addAnimation(GameObjectState::Burning, burningAnimation);
 

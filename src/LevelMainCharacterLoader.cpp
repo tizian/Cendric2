@@ -20,15 +20,15 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 		return;
 	}
 
-	// the order of the ids in this vector determine the update and rendering order.
+	// the order of the ids in this vector determine the update and rendering order. 
 	vector<LevelEquipmentID> gameData;
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_head).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_body).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_back).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_neck).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_2).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_1).getLevelEquipmentID());
 	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_weapon).getLevelEquipmentID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_1).getLevelEquipmentID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_2).getLevelEquipmentID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_neck).getLevelEquipmentID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_back).getLevelEquipmentID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_body).getLevelEquipmentID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_head).getLevelEquipmentID());
 
 	for (std::vector<LevelEquipmentID>::iterator it = gameData.begin(); it != gameData.end(); ++it)
 	{
@@ -54,6 +54,10 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 			break;
 		case LevelEquipmentID::Head_wizardhat_grey:
 			equipment.textureID = ResourceID::Texture_head_wizardhat_grey;
+			useStandardFrames = true;
+			break;
+		case LevelEquipmentID::Back_purple:
+			equipment.textureID = ResourceID::Texture_back_purple;
 			useStandardFrames = true;
 			break;
 		default:

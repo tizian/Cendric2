@@ -1,15 +1,15 @@
-#include "Screens/GameScreen.h"
+#include "Screens/LevelScreen.h"
 #include "Screens/LoadingScreen.h"
 #include "Screens/MenuScreen.h"
 
 using namespace std;
 
-GameScreen::GameScreen(LevelID levelID, CharacterCore* core) : Screen(core), m_interface(core)
+LevelScreen::LevelScreen(LevelID levelID, CharacterCore* core) : Screen(core), m_interface(core)
 {
 	m_levelID = levelID;
 }
 
-void GameScreen::execOnEnter(const Screen *previousScreen)
+void LevelScreen::execOnEnter(const Screen *previousScreen)
 {
 	if (!(m_currentLevel.load(m_levelID, this)))
 	{
@@ -25,14 +25,14 @@ void GameScreen::execOnEnter(const Screen *previousScreen)
 	m_interface.setSpellManager(m_mainChar->getSpellManager());
 }
 
-void GameScreen::execOnExit(const Screen *nextScreen)
+void LevelScreen::execOnExit(const Screen *nextScreen)
 {
 	m_currentLevel.dispose();
 	delete m_gameOverSprite;
 	delete m_youDied;
 }
 
-Screen* GameScreen::update(const sf::Time& frameTime)
+Screen* LevelScreen::update(const sf::Time& frameTime)
 {
 	// handle game over
 	if (!m_isGameOver && m_mainChar->isDead())
@@ -88,7 +88,7 @@ Screen* GameScreen::update(const sf::Time& frameTime)
 	}
 }
 
-void GameScreen::render(sf::RenderTarget &renderTarget)
+void LevelScreen::render(sf::RenderTarget &renderTarget)
 {
 	// don't render dynamic tiles here, they are rendered in the level.
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());

@@ -18,16 +18,17 @@ enum class WindowOrnamentStyle {
 class Window : public GameObject
 {
 public:
-	Window(const sf::FloatRect& box, WindowOrnamentStyle style = WindowOrnamentStyle::NONE);
+	Window(const sf::FloatRect& box, WindowOrnamentStyle style);
+	Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor);
 
-	void render(sf::RenderTarget& renderTarget) override;
+	virtual void render(sf::RenderTarget& renderTarget) override;
 
 	sf::Vector2f getSize() const;
+	virtual void setPosition(const sf::Vector2f& position) override;
 
 	GameObjectType getConfiguredType() const override;
 
 private:
-	sf::Vector2f m_positionDefault;
 	sf::Vector2f m_size;
 
 	SlicedSprite m_mainLayer;

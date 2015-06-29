@@ -58,11 +58,11 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	else if (m_loadGameButton->isClicked())
 	{
 		// TODO the .sav files should be loaded in another screen.
-        std::string saveFilename = "saves/testsave.sav";
-		// TODO check if character core is set and ask if it should be overwritten
+        std::string saveFilename = "saves/menusave.sav";
+		// check if character core is set and ask if it should be overwritten
 		if (m_characterCore == nullptr)
 		{
-			// we start a new game with an empty character core
+			// load a savegame
 			m_characterCore = new CharacterCore();
 			if (!(m_characterCore->load(saveFilename.c_str())))
 			{

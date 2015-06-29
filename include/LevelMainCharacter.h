@@ -34,7 +34,8 @@ public:
 protected:
 	float getConfiguredDampingGroundPersS() const;
 	// handle input and calculate the next position
-	void handleInput() override;
+	void handleMovementInput() override;
+	void handleAttackInput() override;
 
 private:
 	// TODO load this map from configuration

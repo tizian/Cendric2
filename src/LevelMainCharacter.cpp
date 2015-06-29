@@ -13,6 +13,8 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 
 	// these values should be modified by a staff
 	SpellBean fireSpell = DEFAULT_FIRE;
+	fireSpell.amount = 3;
+	fireSpell.reflectCount = 2;
 	SpellBean chopSpell = DEFAULT_CHOP;
 	SpellBean forcefieldSpell = DEFAULT_FORCEFIELD;
 	SpellBean iceSpell = DEFAULT_ICE;
@@ -56,14 +58,49 @@ void LevelMainCharacter::onHit(Spell* spell)
 		spell->setDisposed();
 		break;
 	default:
-		break;
+		return;
 	}
 	addDamage(damage);
 }
 
-void LevelMainCharacter::handleInput()
+void LevelMainCharacter::handleAttackInput()
 {
-	// movement input
+	// update current spell
+	for (auto const &it : m_keyMap) {
+		if (g_inputController->isKeyActive(it.first))
+		{
+			m_spellManager->setCurrentSpell(it.second);
+		}
+	}
+
+	// handle attack input
+	if (g_inputController->isMouseJustPressedLeft())
+	{
+		std::vector<Spell*> holder = m_spellManager->getSpells();
+
+		if (!holder.empty())
+		{
+			int div = 0;
+			int sign = 1;
+			for (auto& it : holder)
+			{
+				it->load(getLevel(), this, g_inputController->getMousePosition(), div * sign);
+				m_screen->addObject(GameObjectType::_Spell, it);
+				sign = -sign;
+				if (sign == -1)
+				{
+					div += 1;
+				}
+			}
+			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
+				m_fightAnimationTime = sf::milliseconds(5 * 70); // duration of fight animation
+			}
+		}
+	}
+}
+
+void LevelMainCharacter::handleMovementInput()
+{
 	float newAccelerationX = 0;
 
 	if (g_inputController->isKeyActive(Key::Left))
@@ -82,37 +119,17 @@ void LevelMainCharacter::handleInput()
 	}
 
 	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
-
-	// update current spell
-	for (auto const &it : m_keyMap) {
-		if (g_inputController->isKeyActive(it.first))
-		{
-			m_spellManager->setCurrentSpell(it.second);
-		}
-	}
-
-	// handle attack input
-	if (g_inputController->isMouseJustPressedLeft()) 
-	{
-		Spell* spell = m_spellManager->getSpell();
-		if (spell != nullptr) 
-		{
-			spell->load(getLevel(), this, g_inputController->getMousePosition());
-			if (spell->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = sf::milliseconds(5 * 70); // duration of fight animation
-			}
-			m_screen->addObject(GameObjectType::_Spell, spell);
-		}
-	}
 }
 
 void LevelMainCharacter::addDamage(int damage)
 {
+	if (m_state == GameObjectState::Dead) return;
 	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints - damage));
 	if (m_attributes->currentHealthPoints == 0)
 	{
 		m_isDead = true;
 	}
+	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
 }
 
 void LevelMainCharacter::setDead()

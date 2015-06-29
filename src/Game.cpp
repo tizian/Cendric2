@@ -3,7 +3,7 @@
 Game::Game() : m_screenManager(new SplashScreen())
 {
 	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
-	m_mainWindow.setFramerateLimit(g_resourceManager->getMaxFPS());
+	//m_mainWindow.setFramerateLimit(g_resourceManager->getMaxFPS());
 	g_inputController->setWindow(&m_mainWindow);
 	m_running = true;
 }

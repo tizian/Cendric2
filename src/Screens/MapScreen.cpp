@@ -7,12 +7,7 @@ const char* QUICKSAVE_LOCATION = "saves/quicksave.sav";
 
 MapScreen::MapScreen(MapID mapID, CharacterCore* core) : Screen(core)
 {
-	if (!(m_currentMap.load(mapID)))
-	{
-		string filename(g_resourceManager->getFilename(mapID));
-		string errormsg = filename + ": file corrupted!";
-		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
-	}
+	m_mapID = mapID;
 }
 
 Screen* MapScreen::update(const sf::Time& frameTime)
@@ -51,6 +46,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 	{
 		m_isOnLevelEntry = (bean != nullptr);
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
+		updateObjects(GameObjectType::_NPC, frameTime);
 		updateTooltipText(frameTime);
 		return this;
 	} 
@@ -65,9 +61,17 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 
 void MapScreen::execOnEnter(const Screen *previousScreen)
 {
+	if (!(m_currentMap.load(m_mapID)))
+	{
+		string filename(g_resourceManager->getFilename(m_mapID));
+		string errormsg = filename + ": file corrupted!";
+		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
+		return;
+	}
 	m_mainChar = new MapMainCharacter(&m_currentMap);
 	m_mainChar->setCharacterCore(getCharacterCore());
 	addObject(GameObjectType::_MainCharacter, m_mainChar);
+	m_currentMap.loadAfterMainChar(this);
 }
 
 void MapScreen::execOnExit(const Screen *nextScreen)
@@ -79,6 +83,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget)
 {
 	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
+	renderObjects(GameObjectType::_NPC, renderTarget);
 	m_currentMap.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderTooltipText(renderTarget);
 }

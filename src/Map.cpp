@@ -18,21 +18,22 @@ void Map::dispose()
 bool Map::load(MapID id)
 {
 	MapReader reader;
-	MapData data;
-	if (!reader.readMap(g_resourceManager->getFilename(id), data))
+	if (!reader.readMap(g_resourceManager->getFilename(id), m_mapData))
 	{
 		return false;
 	}
 	
 	// load map
-	m_name = data.name;
-	m_backgroundTileMap.load(data.tileSetPath, data.tileSize, data.backgroundLayers, data.mapSize.x, data.mapSize.y);
-	m_foregroundTileMap.load(data.tileSetPath, data.tileSize, data.foregroundLayers, data.mapSize.x, data.mapSize.y);
-	m_collidableTiles = data.collidableTileRects;
-	m_levelEntries = data.levelEntries;
-	m_mapRect = data.mapRect;
+	m_backgroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.backgroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
+	m_foregroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.foregroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
 	m_id = id;
 	return true;
+}
+
+void Map::loadAfterMainChar(Screen* screen)
+{
+	MapLoader loader;
+	loader.loadNpcs(m_mapData, screen);
 }
 
 void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const
@@ -41,8 +42,8 @@ void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 
-	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_mapRect.width - WINDOW_WIDTH / 2.f, center.x));
-	float camCenterY = std::max((WINDOW_HEIGHT) / 2.f, std::min(m_mapRect.height - (WINDOW_HEIGHT) / 2.f, center.y));
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_mapData.mapRect.width - WINDOW_WIDTH / 2.f, center.x));
+	float camCenterY = std::max((WINDOW_HEIGHT) / 2.f, std::min(m_mapData.mapRect.height - (WINDOW_HEIGHT) / 2.f, center.y));
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
 	map.draw(target, states);
@@ -60,7 +61,7 @@ void Map::drawForeground(sf::RenderTarget &target, const sf::RenderStates states
 
 const sf::FloatRect& Map::getMapRect() const
 {
-	return m_mapRect;
+	return m_mapData.mapRect;
 }
 
 const TileMap& Map::getBackgroundTilemap() const 
@@ -76,7 +77,7 @@ const TileMap& Map::getForegroundTilemap() const
 bool Map::collidesX(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
-	if (boundingBox.left < m_mapRect.left || boundingBox.left + boundingBox.width > m_mapRect.left + m_mapRect.width)
+	if (boundingBox.left < m_mapData.mapRect.left || boundingBox.left + boundingBox.width > m_mapData.mapRect.left + m_mapData.mapRect.width)
 	{
 		return true;
 	}
@@ -96,7 +97,7 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const
 	int x = topLeft.x;
 	for (int y = topLeft.y; y <= bottomLeft.y; y++)
 	{
-		if (m_collidableTiles[y][x])
+		if (m_mapData.collidableTileRects[y][x])
 		{
 			return true;
 		}
@@ -106,7 +107,7 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const
 	x = topRight.x;
 	for (int y = topRight.y; y <= bottomRight.y; y++)
 	{
-		if (m_collidableTiles[y][x])
+		if (m_mapData.collidableTileRects[y][x])
 		{
 			return true;
 		}
@@ -118,7 +119,7 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const
 bool Map::collidesY(const sf::FloatRect& boundingBox) const
 {
 	// check for collision with level rect
-	if (boundingBox.top < m_mapRect.top || boundingBox.top + boundingBox.height > m_mapRect.top + m_mapRect.height)
+	if (boundingBox.top < m_mapData.mapRect.top || boundingBox.top + boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height)
 	{
 		return true;
 	}
@@ -138,7 +139,7 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 	int y = topLeft.y;
 	for (int x = topLeft.x; x <= topRight.x; x++)
 	{
-		if (m_collidableTiles[y][x])
+		if (m_mapData.collidableTileRects[y][x])
 		{
 			return true;
 		}
@@ -148,7 +149,7 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 	y = bottomLeft.y;
 	for (int x = bottomLeft.x; x <= bottomRight.x; x++)
 	{
-		if (m_collidableTiles[y][x])
+		if (m_mapData.collidableTileRects[y][x])
 		{
 			return true;
 		}
@@ -159,7 +160,7 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 
 MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 {
-	for (auto it : m_levelEntries)
+	for (auto it : m_mapData.levelEntries)
 	{
 		if (boundingBox.intersects(it.mapExitRect))
 		{
