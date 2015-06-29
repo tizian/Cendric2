@@ -5,6 +5,7 @@
 
 void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 {
+	NPCFactory factory;
 	MapMainCharacter* mainCharacter = dynamic_cast<MapMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
 	if (mainCharacter == nullptr)
 	{
@@ -14,28 +15,15 @@ void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 
 	for (auto& it : data.npcPositions)
 	{
-		NPCBean npc;
-		switch (it.first)
-		{
-		case NpcID::Guard:
-			npc.spriteOffset = sf::Vector2f(0.f, 0.f);
-			npc.boundingBox = sf::FloatRect(0, 0, 50, 50);
-			npc.texturePositions.push_back(sf::IntRect(0, 0, 50, 50));
-			npc.frameTime = sf::seconds(1.0f);
-			npc.tooltip = "NPC_Guard";
-			npc.talksActive = true;
-			break;
-		default:
-			// unexpected error
-			g_logger->logError("MapLoader", "NPC was not loaded, unknown id.");
-			return;
-		}
+		NPCBean npc = DEFAULT_NPC;
+		factory.loadNPCBean(npc, it.first);
 
 		NPC* mapNPC = new NPC();
 		Animation idleAnimation;
 		mapNPC->setSpriteOffset(npc.spriteOffset);
 		mapNPC->setBoundingBox(npc.boundingBox);
-		mapNPC->setActiveTalking(npc.talksActive);
+		mapNPC->setTalksActive(npc.talksActive);
+		mapNPC->setDialogueID(npc.dialogueID);
 		idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_npcs));
 		// add frames
 		for (auto &frame : npc.texturePositions) {
@@ -48,7 +36,7 @@ void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 		mapNPC->playCurrentAnimation(npc.texturePositions.size() > 1);
 		mapNPC->load(mainCharacter, it.first);
 		mapNPC->setPosition(it.second - mapNPC->getSpriteOffset());
-		mapNPC->setTooltipText(g_textProvider->getText(npc.tooltip));
+		mapNPC->setTooltipText(g_textProvider->getText(npc.name));
 		screen->addObject(GameObjectType::_NPC, mapNPC);
 	}
 }

@@ -1,7 +1,8 @@
 #include "NPC.h"
 #include "MapMainCharacter.h"
+#include "Screens/MapScreen.h"
 
-void NPC::load(MapMainCharacter* mainChar, NpcID id)
+void NPC::load(MapMainCharacter* mainChar, NPCID id)
 {
 	m_mainChar = mainChar;
 	m_npcID = id;
@@ -11,6 +12,26 @@ void NPC::load(MapMainCharacter* mainChar, NpcID id)
 void NPC::onMouseOver()
 {
 	m_tooltipTime = sf::seconds(1);
+}
+
+void NPC::onRightClick()
+{
+	// check if npc is in range
+	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
+	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= TALKING_RANGE)
+	{
+		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
+		mapScreen->setDialogue(m_npcID, m_dialogueID);
+	}
+	else
+	{
+		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+	}
+}
+
+void NPC::onInteractKey()
+{
+	onRightClick();
 }
 
 void NPC::render(sf::RenderTarget &renderTarget)
@@ -36,16 +57,23 @@ void NPC::update(const sf::Time& frameTime)
 	checkCollisionWithMainChar();
 }
 
-void NPC::setActiveTalking(bool activeTalking)
+void NPC::setTalksActive(bool talksActive)
 {
-	m_talksActive = activeTalking;
+	m_talksActive = talksActive;
+}
+
+void NPC::setDialogueID(DialogueID id)
+{
+	m_dialogueID = id;
 }
 
 void NPC::checkCollisionWithMainChar()
 {
-	if (m_talksActive && !m_mainChar->isTalking() && getBoundingBox()->intersects(*(m_mainChar->getBoundingBox())))
+	if (m_talksActive && getBoundingBox()->intersects(*(m_mainChar->getBoundingBox())))
 	{
-		m_mainChar->setDialogueWith(m_npcID);
+		setTalksActive(false);
+		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
+		mapScreen->setDialogue(m_npcID, m_dialogueID);
 	}
 }
 

@@ -32,6 +32,7 @@ public:
 	virtual void onLeftClick();
 	virtual void onRightJustPressed();
 	virtual void onLeftJustPressed();
+	virtual void onInteractKey();
 
 	void addAnimation(GameObjectState state, Animation& animation);
 

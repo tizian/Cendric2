@@ -3,7 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Enums/LevelID.h"
-#include "Enums/NpcID.h"
+#include "Enums/NPCID.h"
 #include "Structs/MapExitBean.h"
 
 struct MapData
@@ -17,7 +17,7 @@ struct MapData
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTileRects;
 	std::vector<MapExitBean> levelEntries;
-	std::vector<NpcID> npcs;
-	std::vector<std::pair<NpcID, sf::Vector2f>> npcPositions;
+	std::vector<NPCID> npcs;
+	std::vector<std::pair<NPCID, sf::Vector2f>> npcPositions;
 	sf::FloatRect mapRect;
 };

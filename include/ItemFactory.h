@@ -8,6 +8,7 @@
 #include "Structs/ItemBean.h"
 
 // contains information for each and every item and fills item beans.
+// will maybe be ported to a db-like structure (.csv)
 class ItemFactory
 {
 public:

@@ -15,8 +15,8 @@ MapReader::~MapReader()
 void MapReader::initMaps()
 {
 	m_npcMap.insert({
-		{ 0, NpcID::Void },
-		{ 1, NpcID::Guard },
+		{ 0, NPCID::Void },
+		{ 1, NPCID::Guard },
 	});
 }
 
@@ -209,7 +209,7 @@ bool MapReader::readLayerNPC(char* start, char* end, MapData& data) const
 	startData = gotoNextChar(start, end, ',');
 	startData++;
 
-	NpcID npc;
+	NPCID npc;
 	while (startData != NULL)
 	{
 		int id = atoi(startData);
@@ -454,11 +454,11 @@ void MapReader::updateData(MapData& data) const
 	int tileHeight = data.tileSize.y;
 
 	// calculate npcs
-	for (std::vector<NpcID>::iterator it = data.npcs.begin(); it != data.npcs.end(); ++it)
+	for (std::vector<NPCID>::iterator it = data.npcs.begin(); it != data.npcs.end(); ++it)
 	{
-		NpcID id = (*it);		if (id != NpcID::Void)
+		NPCID id = (*it);		if (id != NPCID::Void)
 		{
-			data.npcPositions.push_back(std::pair<NpcID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+			data.npcPositions.push_back(std::pair<NPCID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
 		}
 		if (x + 1 >= data.mapSize.x)
 		{

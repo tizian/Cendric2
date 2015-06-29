@@ -5,7 +5,7 @@
 #include "Logger.h"
 
 #include "Structs/MapData.h"
-#include "Enums/NpcID.h"
+#include "Enums/NPCID.h"
 
 class MapReader : public Reader
 {
@@ -17,7 +17,7 @@ public:
 private:
 	void initMaps();
 
-	std::map<int, NpcID> m_npcMap;
+	std::map<int, NPCID> m_npcMap;
 
 	bool readMapName(char* start, char* end, MapData& data) const;
 	bool readTilesetPath(char* start, char* end, MapData& data) const;

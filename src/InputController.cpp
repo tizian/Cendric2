@@ -3,8 +3,9 @@
 
 InputController* g_inputController;
 
-InputController::InputController() : m_keyMap(g_resourceManager->getConfiguration().keyMap)
+InputController::InputController()
 {
+	m_keyMap = &(g_resourceManager->getConfiguration().keyMap);
 }
 
 InputController::~InputController()
@@ -20,8 +21,8 @@ void InputController::update()
 	// update keys
 	for (auto it : m_keyActiveMap)
 	{
-		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && sf::Keyboard::isKeyPressed(m_keyMap.at(it.first));
-		m_keyActiveMap[it.first] = sf::Keyboard::isKeyPressed(m_keyMap.at(it.first));
+		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && sf::Keyboard::isKeyPressed(m_keyMap->at(it.first));
+		m_keyActiveMap[it.first] = sf::Keyboard::isKeyPressed(m_keyMap->at(it.first));
 	}
 	
 	// update mouse clicks
@@ -58,6 +59,9 @@ void InputController::init()
 			{ Key::Quicksave, false },
 			{ Key::Inventory, false },
 			{ Key::CharacterInfo, false },
+			{ Key::Journal, false },
+			{ Key::Interact, false },
+			{ Key::Confirm, false },
 			{ Key::Left, false },
 			{ Key::Right, false },
 			{ Key::Up, false },

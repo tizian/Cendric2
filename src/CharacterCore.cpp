@@ -62,6 +62,44 @@ const Item& CharacterCore::getItem(ItemID id)
 	return m_items.at(id);
 }
 
+NPCState CharacterCore::getNPCState(NPCID id)
+{
+	if (m_data.npcStates.find(id) != m_data.npcStates.end())
+	{
+		return m_data.npcStates[id];
+	}
+	return NPCState::Never_talked;
+}
+
+QuestState CharacterCore::getQuestState(QuestID id)
+{
+	if (m_data.questStates.find(id) != m_data.questStates.end())
+	{
+		return m_data.questStates[id];
+	}
+	return QuestState::Void;
+}
+
+void CharacterCore::setNPCState(NPCID id, NPCState state)
+{
+	if (m_data.npcStates.find(id) != m_data.npcStates.end())
+	{
+		m_data.npcStates[id] = state;
+		return;
+	}
+	m_data.npcStates.insert({ id, state });
+}
+
+void CharacterCore::setQuestState(QuestID id, QuestState state)
+{
+	if (m_data.questStates.find(id) != m_data.questStates.end())
+	{
+		m_data.questStates[id] = state;
+		return;
+	}
+	m_data.questStates.insert({ id, state });
+}
+
 bool CharacterCore::save(const char* fileName) 
 {
 	m_data.timePlayed += m_stopwatch.restart();

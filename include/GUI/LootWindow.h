@@ -12,8 +12,7 @@
 class LootWindow : public Window
 {
 public:
-	LootWindow(const sf::FloatRect& box, WindowOrnamentStyle style);
-	LootWindow(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor);
+	LootWindow(const sf::FloatRect& box);
 	~LootWindow();
 
 	void render(sf::RenderTarget& renderTarget) override;

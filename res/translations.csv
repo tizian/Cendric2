@@ -94,3 +94,13 @@ YouDied;You died;Ihr seid tot;Du bisch verreckt
 GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
 NoQuicksaveExists;No quick save exists;Kein Schnelllade-Speicherstand existiert;Kein Schnelllade-Speicherstand existiert
 NPC_Guard;Kingsguard;Wache des Königs;Wächter vom König
+Hello;Hello;Hallo;Hoi
+Interact;Interact;Interagieren;Interagiere
+Journal;Journal;Tagebuch;Tagebuech
+DL_Guard_Hello;Hey you, stop! What are you doing here, so very alone? It's dangerous out here.;Hey du, stopp! Was machst du hier, so alleine? Es ist gefährlich hier draussen.;Hey du, stop! Was machsch du da? Es isch gföhrlich, so elei go umelaufe.
+DL_Guard_KillSomeRats;Okay, go and kill some rats for me.;Okay, dann geh und töte ein paar Ratten für mich.;Okay, dänn gang und kill es paar Ratte für mich.
+DL_Cendric_Okay;Okay, I will do that.;Okay, das mache ich.;Okay, dännhalt.
+DL_Choice_GiveMeAQuest;Give me a quest.;Gib mir eine Aufgabe.;Gib mer was zum mache.
+DL_Choice_Nothing;None of your business.;Geht dich nichts an.;Gaht dich en füechte Dreck ah.
+DL_Guard_KillThemAlready;You haven't killed those rats! Go and do your job.;Die Ratten leben noch! Geh jetzt und erledige das.;Du hesch die Ratte nanig killt! Gang ez und mach da.
+Confirm;Confirm;Bestätigen;Bestätige

@@ -4,6 +4,7 @@
 
 #include "global.h"
 #include "Screen.h"
+#include "NPCFactory.h"
 
 #include "Enums/NpcID.h"
 

@@ -6,8 +6,12 @@
 #include "InputController.h"
 #include "Screen.h"
 #include "CharacterCore.h"
+#include "GUI/DialogueWindow.h"
 
-#include "Enums/NpcID.h"
+#include "Enums/NPCID.h"
+#include "Enums/DialogueID.h"
+
+class MapScreen;
 
 // Cendric on the map
 class MapMainCharacter : public MovableGameObject
@@ -22,8 +26,7 @@ public:
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
 	void setCharacterCore(CharacterCore* core);
-	void setDialogueWith(NpcID npc);
-	bool isTalking();
+
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;
@@ -38,5 +41,4 @@ private:
 	GameObjectState m_state;
 	Map* m_map;
 	CharacterCore* m_core;
-	bool m_isInDialogue = false;
 };

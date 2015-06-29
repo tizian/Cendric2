@@ -314,7 +314,7 @@ void Enemy::setLoot(const std::map<ItemID, int>& items, int gold)
 	m_lootableGold = gold;
 	delete m_lootWindow;
 	sf::FloatRect window(0.f, 0.f, 150.f, (items.size() + 2) * 12.f + 20.f);
-	m_lootWindow = new LootWindow(window, WindowOrnamentStyle::SMALL);
+	m_lootWindow = new LootWindow(window);
 	m_lootWindow->setLoot(items, gold);
 }
 

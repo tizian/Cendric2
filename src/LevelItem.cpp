@@ -31,6 +31,12 @@ void LevelItem::onRightClick()
 	}
 }
 
+void LevelItem::onInteractKey()
+{
+	// it is made impossible for a game object to have onInteractKey and onRightClick called in the same game loop
+	onRightClick();
+}
+
 void LevelItem::onMouseOver()
 {
 	m_animatedSprite.setColor(sf::Color::Red);

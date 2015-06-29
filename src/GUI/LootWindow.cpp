@@ -4,11 +4,7 @@ using namespace std;
 
 const sf::Vector2f TEXT_OFFSET = sf::Vector2f(5.f, 10.f);
 
-LootWindow::LootWindow(const sf::FloatRect& box, WindowOrnamentStyle style) : Window(box, style)
-{
-}
-
-LootWindow::LootWindow(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor) : Window(box, style, mainColor, backColor, ornamentColor)
+LootWindow::LootWindow(const sf::FloatRect& box) : Window(box, WindowOrnamentStyle::SMALL, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White)
 {
 }
 

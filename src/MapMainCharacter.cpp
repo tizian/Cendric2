@@ -1,4 +1,5 @@
 #include "MapMainCharacter.h"
+#include "Screens/MapScreen.h"
 
 MapMainCharacter::MapMainCharacter(Map* map) : MovableGameObject()
 {
@@ -15,16 +16,6 @@ void MapMainCharacter::setCharacterCore(CharacterCore* core)
 {
 	m_core = core;
 	setPosition(m_core->getData().currentMapPosition);
-}
-
-void MapMainCharacter::setDialogueWith(NpcID npc)
-{
-	m_isInDialogue = true;
-}
-
-bool MapMainCharacter::isTalking()
-{
-	return m_isInDialogue;
 }
 
 void MapMainCharacter::update(const sf::Time& frameTime)

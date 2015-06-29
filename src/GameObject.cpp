@@ -48,23 +48,28 @@ void GameObject::update(const sf::Time& frameTime)
 	if (g_inputController->isMouseOver(&m_boundingBoxes[0]))
 	{
 		onMouseOver();
+		if (g_inputController->isKeyJustPressed(Key::Interact))
+		{
+			onInteractKey();
+		}
+		else if (g_inputController->isRightClicked(&m_boundingBoxes[0]))
+		{
+			onRightClick();
+		}
+		else if (g_inputController->isRightJustPressed(&m_boundingBoxes[0]))
+		{
+				onRightJustPressed();
+		}
+		else if (g_inputController->isLeftClicked(&m_boundingBoxes[0]))
+		{
+			onLeftClick();
+		}
+		else if (g_inputController->isLeftJustPressed(&m_boundingBoxes[0]))
+		{
+			onLeftJustPressed();
+		}
 	}
-	if (g_inputController->isRightClicked(&m_boundingBoxes[0]))
-	{
-		onRightClick();
-	}
-	else if (g_inputController->isRightJustPressed(&m_boundingBoxes[0]))
-	{
-		onRightJustPressed();
-	}
-	if (g_inputController->isLeftClicked(&m_boundingBoxes[0]))
-	{
-		onLeftClick();
-	}
-	else if (g_inputController->isLeftJustPressed(&m_boundingBoxes[0]))
-	{
-		onLeftJustPressed();
-	}
+	
 	m_animatedSprite.update(frameTime);
 	if (DEBUG_RENDERING && m_isDrawBoundingBox)
 	{
@@ -152,6 +157,11 @@ const std::vector<sf::FloatRect> *GameObject::getBoundingBoxes() const
 }
 
 void GameObject::onMouseOver() 
+{
+	// nop
+}
+
+void GameObject::onInteractKey()
 {
 	// nop
 }

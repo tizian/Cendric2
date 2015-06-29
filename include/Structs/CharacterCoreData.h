@@ -6,6 +6,10 @@
 #include "Enums/MapID.h"
 #include "Enums/LevelID.h"
 #include "Enums/ItemID.h"
+#include "Enums/NPCID.h"
+#include "Enums/NPCState.h"
+#include "Enums/QuestID.h"
+#include "Enums/QuestState.h"
 
 #include "Structs/AttributeBean.h"
 
@@ -22,7 +26,10 @@ struct CharacterCoreData
 	sf::Vector2f currentLevelPosition;
 	std::map<LevelID, std::vector<bool>> levelLooted;
 	std::map<LevelID, std::vector<bool>> levelKilled;
-	// TODO: quest progress
+	
+	// quest & npc progress
+	std::map<NPCID, NPCState> npcStates;
+	std::map<QuestID, QuestState> questStates;
 	
 	// base attributes
 	AttributeBean attributes;
@@ -49,6 +56,8 @@ const CharacterCoreData DEFAULT_CORE
 	sf::Vector2f(),
 	std::map<LevelID, std::vector<bool>>(),
 	std::map<LevelID, std::vector<bool>>(),
+	std::map<NPCID, NPCState>(),
+	std::map<QuestID, QuestState>(),
 	ZERO_ATTRIBUTES,
 	0,
 	ItemID::Void,

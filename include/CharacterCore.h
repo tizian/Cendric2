@@ -24,6 +24,10 @@ public:
 	const Item& getEquippedItem(ItemType type);
 	// returns the item of id "id"
 	const Item& getItem(ItemID id);
+	NPCState getNPCState(NPCID id);
+	QuestState getQuestState(QuestID id);
+	void setNPCState(NPCID id, NPCState state);
+	void setQuestState(QuestID id, QuestState state);
 	// loads a new game with a new core and default attributes
 	void loadNew();
 	// tries to create a new file with this name. if successful, returns true. if it already exists, returns false

@@ -18,6 +18,7 @@ public:
 	LevelItem() : GameObject() {}
 	void load(LevelMainCharacter* mainChar, LevelItemID id);
 	void onRightClick() override;
+	void onInteractKey() override;
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class NPCID
+enum class DialogueID
 {
 	Void,
 	Guard,
