@@ -7,6 +7,7 @@
 class MovableGameObject : public GameObject
 {
 public:
+	MovableGameObject() : GameObject() {}
 	void update(const sf::Time& frameTime) override;
 	void calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const;
 	void calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;

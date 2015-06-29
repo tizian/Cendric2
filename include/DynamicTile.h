@@ -12,6 +12,7 @@ class LevelMovableGameObject;
 class DynamicTile : public GameObject
 {
 public:
+	DynamicTile() : GameObject() {}
 	// loads sprite offset & bounding box. maybe uses skin nr later, too.
 	virtual void init() = 0;
 	// loads the dynamic tile with the specified skin nr

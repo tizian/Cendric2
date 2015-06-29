@@ -16,6 +16,7 @@ class Screen;
 class GameObject 
 {
 public:
+	GameObject() {}
     virtual ~GameObject() {}
 
 	virtual void update(const sf::Time& frameTime);
@@ -71,7 +72,7 @@ private:
 
 	std::map<GameObjectState, Animation> m_animations;
 	sf::Vector2f m_spriteOffset;
-	sf::FloatRect m_boundingBox;
+	std::vector<sf::FloatRect> m_boundingBoxes;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 

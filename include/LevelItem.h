@@ -15,6 +15,7 @@ class LevelMainCharacter;
 class LevelItem : public GameObject
 {
 public:
+	LevelItem() : GameObject() {}
 	void load(LevelMainCharacter* mainChar, LevelItemID id);
 	void onRightClick() override;
 	void onMouseOver() override;

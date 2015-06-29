@@ -11,6 +11,7 @@ class LevelMainCharacter;
 class LevelEquipment : public GameObject
 {
 public:
+	LevelEquipment() : GameObject() {}
 	~LevelEquipment();
 
 	void update(const sf::Time& frameTime) override;
