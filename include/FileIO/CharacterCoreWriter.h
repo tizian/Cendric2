@@ -15,7 +15,7 @@ class CharacterCoreWriter : public CharacterCoreIO
 public:
 	bool saveToFile(const char* filename, const CharacterCoreData& data) const;
 	
-	// tries to create file with that filename and returns true if sucessful.
+	// tries to create file with that filename and returns true if successful.
 	// if file already exists, it returns false.
 	bool createFile(const char* filename) const;
 	
@@ -25,8 +25,12 @@ private:
 
 	std::string writeMapID(const CharacterCoreData& data) const;
 	std::string writeMapPosition(const CharacterCoreData& data) const;
+	std::string writeLevelID(const CharacterCoreData& data) const;
+	std::string writeLevelPosition(const CharacterCoreData& data) const;
 	std::string writeLevelKilled(const CharacterCoreData& data) const;
 	std::string writeLevelLooted(const CharacterCoreData& data) const;
+	std::string writeQuestStates(const CharacterCoreData& data) const;
+	std::string writeNPCStates(const CharacterCoreData& data) const;
 
 	std::string writeAttributes(const CharacterCoreData& data) const;
 

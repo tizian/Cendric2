@@ -128,6 +128,34 @@ bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreD
 	return true;
 }
 
+bool CharacterCoreReader::readLevelID(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	LevelID id = static_cast<LevelID>(atoi(startData));
+	if (id < LevelID::Void || id >= LevelID::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
+		return false;
+	}
+	data.currentLevel = id;
+	return true;
+}
+
+bool CharacterCoreReader::readLevelPosition(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	float x = static_cast<float>(atof(startData));
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	float y = static_cast<float>(atof(startData));
+	data.currentLevelPosition = sf::Vector2f(x, y);
+	return true;
+}
+
 bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
@@ -185,6 +213,52 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	startData++;
 	int amount = atoi(startData);
 	data.items.insert({id, amount});
+	return true;
+}
+
+bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	QuestID id = static_cast<QuestID>(atoi(startData));
+	if (id <= QuestID::Void || id >= QuestID::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "Quest ID not recognized: " + std::to_string(static_cast<int>(id)));
+		return false;
+	}
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	QuestState state = static_cast<QuestState>(atoi(startData));
+	if (state <= QuestState::Void || state >= QuestState::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "Quest State not recognized: " + std::to_string(static_cast<int>(state)));
+		return false;
+	}
+	data.questStates.insert({ id, state });
+	return true;
+}
+
+bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	NPCID id = static_cast<NPCID>(atoi(startData));
+	if (id <= NPCID::Void || id >= NPCID::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "NPC ID not recognized: " + std::to_string(static_cast<int>(id)));
+		return false;
+	}
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	NPCState state = static_cast<NPCState>(atoi(startData));
+	if (state <= NPCState::Void || state >= NPCState::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "NPC State not recognized: " + std::to_string(static_cast<int>(state)));
+		return false;
+	}
+	data.npcStates.insert({ id, state });
 	return true;
 }
 
@@ -360,6 +434,16 @@ bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreD
 			noError = readMapPosition(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
+		else if (strncmp(pos, LEVEL_ID, strlen(LEVEL_ID)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(LEVEL_ID));
+			noError = readLevelID(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, LEVEL_POSITION, strlen(LEVEL_POSITION)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(LEVEL_POSITION));
+			noError = readLevelPosition(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
 		else if (strncmp(pos, LEVEL_KILLED, strlen(LEVEL_KILLED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(LEVEL_KILLED));
 			noError = readLevelKilled(pos, end, data);
@@ -368,6 +452,16 @@ bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreD
 		else if (strncmp(pos, LEVEL_LOOTED, strlen(LEVEL_LOOTED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(LEVEL_LOOTED));
 			noError = readLevelLooted(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUEST_STATE));
+			noError = readQuestStates(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, NPC_STATE, strlen(NPC_STATE)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(NPC_STATE));
+			noError = readNPCStates(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, GOLD, strlen(GOLD)) == 0) {

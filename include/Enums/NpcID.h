@@ -4,4 +4,5 @@ enum class NPCID
 {
 	Void,
 	Guard,
+	MAX
 };

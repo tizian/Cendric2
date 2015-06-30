@@ -26,6 +26,8 @@ bool CharacterCoreWriter::saveToFile(const char* filename, const CharacterCoreDa
 	{
 		savefile << writePlayerName(data);
 		savefile << writeTimePlayed(data);
+		savefile << writeLevelID(data);
+		savefile << writeLevelPosition(data);
 		savefile << writeMapID(data);
 		savefile << writeMapPosition(data);
 		savefile << writeAttributes(data);
@@ -34,6 +36,8 @@ bool CharacterCoreWriter::saveToFile(const char* filename, const CharacterCoreDa
 		savefile << writeEquippedItems(data);
 		savefile << writeLevelKilled(data);
 		savefile << writeLevelLooted(data);
+		savefile << writeQuestStates(data);
+		savefile << writeNPCStates(data);
 
 		savefile.close();
 	}
@@ -64,6 +68,16 @@ std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const
 std::string CharacterCoreWriter::writeMapPosition(const CharacterCoreData& data) const
 {
 	return string(MAP_POSITION) + ":" + to_string(data.currentMapPosition.x) + "," + to_string(data.currentMapPosition.y) + "\n";
+}
+
+std::string CharacterCoreWriter::writeLevelID(const CharacterCoreData& data) const
+{
+	return string(LEVEL_ID) + ":" + to_string(static_cast<int>(data.currentLevel)) + "\n";
+}
+
+std::string CharacterCoreWriter::writeLevelPosition(const CharacterCoreData& data) const
+{
+	return string(LEVEL_POSITION) + ":" + to_string(data.currentLevelPosition.x) + "," + to_string(data.currentLevelPosition.y) + "\n";
 }
 
 std::string CharacterCoreWriter::writeLevelKilled(const CharacterCoreData& data) const
@@ -131,6 +145,40 @@ std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) 
 std::string CharacterCoreWriter::writeGold(const CharacterCoreData& data) const
 {
 	return string(GOLD) + ":" + to_string(data.gold) + "\n";
+}
+
+std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data) const
+{
+	string quests = "# quest states:\n";
+
+	for (auto it : data.questStates)
+	{
+		string quest = string(QUEST_STATE);
+		quest.append(":");
+		quest.append(to_string(static_cast<int>(it.first)));
+		quest.append(",");
+		quest.append(to_string(static_cast<int>(it.second)));
+		quest.append("\n");
+		quests.append(quest);
+	}
+	return quests;
+}
+
+std::string CharacterCoreWriter::writeNPCStates(const CharacterCoreData& data) const
+{
+	string npcs = "# npc states:\n";
+
+	for (auto it : data.npcStates)
+	{
+		string npc = string(NPC_STATE);
+		npc.append(":");
+		npc.append(to_string(static_cast<int>(it.first)));
+		npc.append(",");
+		npc.append(to_string(static_cast<int>(it.second)));
+		npc.append("\n");
+		npcs.append(npc);
+	}
+	return npcs;
 }
 
 std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) const

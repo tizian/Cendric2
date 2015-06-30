@@ -15,8 +15,12 @@ protected:
 	// position & progress
 	const char* MAP_ID = "map.id";
 	const char* MAP_POSITION = "map.position";
+	const char* LEVEL_ID = "level.id";
+	const char* LEVEL_POSITION = "level.position";
 	const char* LEVEL_KILLED = "level.killed";
 	const char* LEVEL_LOOTED = "level.looted";
+	const char* QUEST_STATE = "quest.state";
+	const char* NPC_STATE = "npc.state";
 
 	// equipment & items
 	const char* GOLD = "gold";
