@@ -69,6 +69,8 @@ protected:
 	// if the enemy is not in this range, its state is idle and it will do some random movement.
 	// inside, it will probably chase & attack the main char.
 	virtual float getConfiguredAggroRange() const = 0;
+	// the enemy feels safe outside this range and will not chase the main char anymore and not flee either.
+	virtual float getConfiguredSafeRange() const;
 	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
 	virtual bool getConfiguredFleeCondition() const;
 	// how near does an enemy go to the abyss until it stops? default is 10.f. Can be 0 for unflinching enemies

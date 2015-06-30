@@ -25,6 +25,11 @@ bool Enemy::getConfiguredFleeCondition() const
 	return false;
 }
 
+float Enemy::getConfiguredSafeRange() const
+{
+	return 1000.f;
+}
+
 void Enemy::addDamage(int damage)
 {
 	if (m_state == GameObjectState::Dead) return;
@@ -136,6 +141,10 @@ void Enemy::onHit(Spell* spell)
 		return;
 	}
 	addDamage(damage);
+	if (m_enemyState == EnemyState::Idle)
+	{
+		m_enemyState = EnemyState::Chasing;
+	}
 	m_recoveringTime = getConfiguredRecoveringTime();
 }
 
@@ -212,8 +221,9 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 	}
 
 	bool isInAggroRange = distToMainChar() < getConfiguredAggroRange();
+	bool isInSaveRange = distToMainChar() < getConfiguredSafeRange();
 
-	if (getConfiguredFleeCondition() && isInAggroRange)
+	if (getConfiguredFleeCondition() && isInSaveRange)
 	{
 		m_enemyState = EnemyState::Fleeing;
 		return;
@@ -236,7 +246,7 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 		return;
 	}
 
-	if ((m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Fleeing) && !isInAggroRange)
+	if ((m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Fleeing) && !isInSaveRange)
 	{
 		m_enemyState = EnemyState::Idle;
 		return;

@@ -122,7 +122,7 @@ bool DialogueWindow::updateDialogue()
 		return m_dialogue->updateWindow();
 	}
 
-	if (g_inputController->isKeyJustPressed(Key::Confirm))
+	if (g_inputController->isKeyJustPressed(Key::Confirm) || g_inputController->isKeyJustPressed(Key::Interact))
 	{
 		if (m_options.empty())
 		{
