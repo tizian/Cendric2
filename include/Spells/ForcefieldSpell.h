@@ -15,6 +15,7 @@ public:
 	bool getConfiguredIsAttachedToMob() const override;
 	bool getConfiguredRotateSprite() const override;
 	SpellID getConfiguredSpellID() const override;
+	DamageType getConfiguredDamageType() const override;
 
 private:
 };

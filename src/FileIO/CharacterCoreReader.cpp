@@ -4,17 +4,12 @@ using namespace std;
 
 bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 {
-	if (data.playerName.empty())
-	{
-		g_logger->logError("CharacterCoreReader", "Error in savegame data : player name not set");
-		return false;
-	}
 	if (data.currentMapPosition.x < 0 || data.currentMapPosition.y < 0)
 	{
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : map position negative");
 		return false;
 	}
-	if (data.currentMap == MapID::Void)
+	if (data.currentMap == MapID::VOID)
 	{
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : map not resolved");
 		return false;
@@ -25,14 +20,15 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		return false;
 	}
 	if (data.attributes.maxHealthPoints < 0 
-		|| data.attributes.maxManaPoints < 0
 		|| data.attributes.currentHealthPoints < 0
-		|| data.attributes.currentManaPoints < 0
 		|| data.attributes.healthRegenerationPerS < 0
-		|| data.attributes.manaRegenerationPerS < 0
+		|| data.attributes.haste < 0
+		|| data.attributes.critical < 0
 		|| data.attributes.damagePhysical < 0
 		|| data.attributes.damageFire < 0
-		|| data.attributes.damageIce < 0)
+		|| data.attributes.damageIce < 0
+		|| data.attributes.damageShadow < 0
+		|| data.attributes.damageLight < 0)
 	{
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : (some) attributes cannot be negative");
 		return false;
@@ -44,7 +40,7 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 	}
 	for (auto &it : data.levelKilled)
 	{
-		if (it.first == LevelID::Void)
+		if (it.first == LevelID::VOID)
 		{
 			g_logger->logError("CharacterCoreReader", "Error in savegame data : level not resolved");
 			return false;
@@ -52,28 +48,13 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 	}
 	for (auto &it : data.levelLooted)
 	{
-		if (it.first == LevelID::Void)
+		if (it.first == LevelID::VOID)
 		{
 			g_logger->logError("CharacterCoreReader", "Error in savegame data : level not resolved");
 			return false;
 		}
 	}
 	
-	return true;
-}
-
-bool CharacterCoreReader::readPlayerName(char* start, char* end, CharacterCoreData& data) const
-{
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	string name(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	name = name.substr(0, count);
-	data.playerName = name;
 	return true;
 }
 
@@ -106,7 +87,7 @@ bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& d
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	MapID id = static_cast<MapID>(atoi(startData));
-	if (id <= MapID::Void || id >= MapID::MAX)
+	if (id <= MapID::VOID || id >= MapID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Map ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
@@ -134,7 +115,7 @@ bool CharacterCoreReader::readLevelID(char* start, char* end, CharacterCoreData&
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	LevelID id = static_cast<LevelID>(atoi(startData));
-	if (id < LevelID::Void || id >= LevelID::MAX)
+	if (id < LevelID::VOID || id >= LevelID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
@@ -164,19 +145,16 @@ bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreDa
 	data.attributes.maxHealthPoints = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
-	data.attributes.maxManaPoints = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
 	data.attributes.currentHealthPoints = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.currentManaPoints = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	data.attributes.healthRegenerationPerS = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
-	data.attributes.manaRegenerationPerS = atoi(startData);
+	data.attributes.haste = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	data.attributes.critical = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	data.attributes.damagePhysical = atoi(startData);
@@ -188,13 +166,25 @@ bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreDa
 	data.attributes.damageIce = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
+	data.attributes.damageShadow = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	data.attributes.damageLight = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
 	data.attributes.resistancePhysical = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	data.attributes.resistanceFire = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
-	data.attributes.resistancePhysical = atoi(startData);
+	data.attributes.resistanceIce = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	data.attributes.resistanceShadow = atoi(startData);
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	data.attributes.resistanceLight = atoi(startData);
 	return true;
 }
 
@@ -204,7 +194,7 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	ItemID id = static_cast<ItemID>(atoi(startData));
-	if (id <= ItemID::Void || id >= ItemID::MAX)
+	if (id <= ItemID::VOID || id >= ItemID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
@@ -268,7 +258,7 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	ItemID item = static_cast<ItemID>(atoi(startData));
-	if (item < ItemID::Void || item >= ItemID::MAX)
+	if (item < ItemID::VOID || item >= ItemID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + std::to_string(static_cast<int>(item)));
 		return false;
@@ -315,7 +305,7 @@ bool CharacterCoreReader::readLevelKilled(char* start, char* end, CharacterCoreD
 	endData = gotoNextChar(startData, end, '\n');
 
 	LevelID id = static_cast<LevelID>(atoi(startData));
-	if (id <= LevelID::Void || id >= LevelID::MAX)
+	if (id <= LevelID::VOID || id >= LevelID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
@@ -348,7 +338,7 @@ bool CharacterCoreReader::readLevelLooted(char* start, char* end, CharacterCoreD
 	endData = gotoNextChar(startData, end, '\n');
 
 	LevelID id = static_cast<LevelID>(atoi(startData));
-	if (id <= LevelID::Void || id >= LevelID::MAX)
+	if (id <= LevelID::VOID || id >= LevelID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
@@ -409,11 +399,7 @@ bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreD
 			pos = gotoNextChar(pos, end, '\n');
 		}
 
-		else if (strncmp(pos, PLAYER_NAME, strlen(PLAYER_NAME)) == 0) {
-			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(PLAYER_NAME));
-			noError = readPlayerName(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
+
 		else if (strncmp(pos, TIME_PLAYED, strlen(TIME_PLAYED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(TIME_PLAYED));
 			noError = readTimePlayed(pos, end, data);

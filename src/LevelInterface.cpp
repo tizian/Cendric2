@@ -1,5 +1,9 @@
 #include "LevelInterface.h"
 
+int round_int(float r) {
+	return static_cast<int>((r > 0.0) ? (r + 0.5) : (r - 0.5));
+}
+
 LevelInterface::LevelInterface(CharacterCore* core)
 {
 	m_core = core;
@@ -25,8 +29,6 @@ void LevelInterface::renderInterfaceBars(sf::RenderTarget& target) const
 {
 	target.draw(m_hpBarOutline);
 	target.draw(m_hpBar);
-	target.draw(m_manaBarOutline);
-	target.draw(m_manaBar);
 }
 
 void LevelInterface::renderCharacterInfo(sf::RenderTarget& target) const
@@ -57,7 +59,6 @@ void LevelInterface::update(const sf::Time& frameTime)
 void LevelInterface::updateInterfaceBars()
 {
 	m_hpBar.setSize(sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints), BAR_HEIGHT));
-	m_manaBar.setSize(sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentManaPoints) / m_attributes->maxManaPoints), BAR_HEIGHT));
 }
 
 void LevelInterface::updateCharacterInfo()
@@ -78,22 +79,28 @@ void LevelInterface::updateCharacterInfo()
 			infoText.append(L"/");
 			infoText.append(std::to_wstring(m_attributes->maxHealthPoints));
 			infoText.append(L"\n");
-			// mana
-			infoText.append(g_textProvider->getText("Mana"));
-			infoText.append(L": ");
-			infoText.append(std::to_wstring(m_attributes->currentManaPoints));
-			infoText.append(L"/");
-			infoText.append(std::to_wstring(m_attributes->maxManaPoints));
-			infoText.append(L"\n");
-			// regeneration
+
+			// health regeneration
 			infoText.append(g_textProvider->getText("HealthRegeneration"));
 			infoText.append(L": ");
 			infoText.append(std::to_wstring(m_attributes->healthRegenerationPerS));
 			infoText.append(L"/s\n");
-			infoText.append(g_textProvider->getText("ManaRegeneration"));
+
+			// crit
+			infoText.append(g_textProvider->getText("CriticalHitChance"));
 			infoText.append(L": ");
-			infoText.append(std::to_wstring(m_attributes->manaRegenerationPerS));
-			infoText.append(L"/s\n");
+			infoText.append(std::to_wstring(m_attributes->criticalHitChance));
+			infoText.append(L"%\n");
+
+			// cooldown reduction
+			infoText.append(g_textProvider->getText("Haste"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->haste));
+			infoText.append(L" - ");
+			infoText.append(std::to_wstring(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
+			infoText.append(L"% " + g_textProvider->getText("CooldownReduction"));
+			infoText.append(L"\n");
+
 			// dmg 
 			infoText.append(g_textProvider->getText("PhysicalDamage"));
 			infoText.append(L": ");
@@ -107,18 +114,51 @@ void LevelInterface::updateCharacterInfo()
 			infoText.append(L": ");
 			infoText.append(std::to_wstring(m_attributes->damageIce));
 			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("ShadowDamage"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->damageShadow));
+			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("LightDamage"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->damageLight));
+			infoText.append(L"\n");
+
 			// resistance
 			infoText.append(g_textProvider->getText("Armor"));
 			infoText.append(L": ");
 			infoText.append(std::to_wstring(m_attributes->resistancePhysical));
+			infoText.append(L" - ");
+			infoText.append(std::to_wstring(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
+			infoText.append(L"% " + g_textProvider->getText("Reduction"));
 			infoText.append(L"\n");
 			infoText.append(g_textProvider->getText("FireResistance"));
 			infoText.append(L": ");
 			infoText.append(std::to_wstring(m_attributes->resistanceFire));
+			infoText.append(L" - ");
+			infoText.append(std::to_wstring(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
+			infoText.append(L"% " + g_textProvider->getText("Reduction"));
 			infoText.append(L"\n");
 			infoText.append(g_textProvider->getText("IceResistance"));
 			infoText.append(L": ");
 			infoText.append(std::to_wstring(m_attributes->resistanceIce));
+			infoText.append(L" - ");
+			infoText.append(std::to_wstring(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
+			infoText.append(L"% " + g_textProvider->getText("Reduction"));
+			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("ShadowResistance"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->resistanceShadow));
+			infoText.append(L" - ");
+			infoText.append(std::to_wstring(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
+			infoText.append(L"% " + g_textProvider->getText("Reduction"));
+			
+			infoText.append(L"\n");
+			infoText.append(g_textProvider->getText("LightResistance"));
+			infoText.append(L": ");
+			infoText.append(std::to_wstring(m_attributes->resistanceLight));
+			infoText.append(L" - ");
+			infoText.append(std::to_wstring(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
+			infoText.append(L"% " + g_textProvider->getText("Reduction"));
 			infoText.append(L"\n");
 			m_characterInfoText.setString(infoText);
 		}
@@ -170,16 +210,6 @@ void LevelInterface::initInterfaceBars()
 	m_hpBarOutline.setFillColor(sf::Color::Transparent);
 	m_hpBarOutline.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + BAR_OUTLINE_THICKNESS));
 	m_hpBarOutline.setSize(sf::Vector2f(BAR_WIDTH, BAR_HEIGHT));
-
-	m_manaBar.setFillColor(sf::Color::Blue);
-	m_manaBar.setSize(sf::Vector2f(0, BAR_HEIGHT));
-	m_manaBar.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + 3 * BAR_OUTLINE_THICKNESS + BAR_HEIGHT));
-
-	m_manaBarOutline.setOutlineColor(sf::Color(0, 0, 150, 255));
-	m_manaBarOutline.setOutlineThickness(BAR_OUTLINE_THICKNESS);
-	m_manaBarOutline.setFillColor(sf::Color::Transparent);
-	m_manaBarOutline.setPosition(sf::Vector2f(BAR_LEFT + BAR_OUTLINE_THICKNESS, BAR_TOP + 3 * BAR_OUTLINE_THICKNESS + BAR_HEIGHT));
-	m_manaBarOutline.setSize(sf::Vector2f(BAR_WIDTH, BAR_HEIGHT));
 }
 
 void LevelInterface::initCharacterInfo()

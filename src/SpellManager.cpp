@@ -2,9 +2,10 @@
 
 using namespace std;
 
-SpellManager::SpellManager()
+SpellManager::SpellManager(const AttributeBean* bean)
 {
 	m_currentSpell = SpellID::Chop;
+	m_attributeBean = bean;
 }
 
 SpellManager::~SpellManager()
@@ -26,7 +27,7 @@ const std::vector<Spell*>& SpellManager::getSpells()
 	if (m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return m_spellHolder;
 	
 	// spell has been cast. set cooldown.
-	m_coolDownMap[m_currentSpell] = m_spellMap[m_currentSpell].cooldown;
+	m_coolDownMap[m_currentSpell] = m_spellMap[m_currentSpell].cooldown * m_attributeBean->cooldownMultiplier;
 
 	for (int i = 0; i < m_spellMap[m_currentSpell].amount; i++)
 	{
@@ -52,7 +53,9 @@ const std::vector<Spell*>& SpellManager::getSpells()
 			return m_spellHolder;
 		}
 
-		newSpell->init(m_spellMap[m_currentSpell]);
+		SpellBean spellBean = m_spellMap[m_currentSpell];
+		updateDamage(newSpell->getConfiguredDamageType(), spellBean);
+		newSpell->init(spellBean);
 		m_spellHolder.push_back(newSpell);
 	}
 
@@ -72,6 +75,40 @@ void SpellManager::update(sf::Time frameTime)
 void SpellManager::setCurrentSpell(SpellID id)
 {
 	m_currentSpell = id;
+}
+
+void SpellManager::updateDamage(DamageType type, SpellBean& bean) const
+{
+	switch (type)
+	{
+	case DamageType::Physical:
+		bean.damage = bean.damage + m_attributeBean->damagePhysical;
+		break;
+	case DamageType::Fire:
+		bean.damage = bean.damage + m_attributeBean->damageFire;
+		break;
+	case DamageType::Ice:
+		bean.damage = bean.damage + m_attributeBean->damageIce;
+		break;
+	case DamageType::Shadow:
+		bean.damage = bean.damage + m_attributeBean->damageShadow;
+		break;
+	case DamageType::Light:
+		bean.damage = bean.damage + m_attributeBean->damageLight;
+		break;
+	default:
+		return;
+	}
+
+	// add randomness to damage (something from 80 - 120% of the base damage)
+	bean.damage = static_cast<int>(bean.damage * ((rand() % 41 + 80.f) / 100.f));   
+
+	// add critical hit to damage
+	int chance = rand() % 100 + 1;
+	if (chance <= m_attributeBean->criticalHitChance)
+	{
+		bean.damage *= 2;
+	}
 }
 
 void SpellManager::render(sf::RenderTarget &renderTarget)

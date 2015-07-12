@@ -1,19 +1,24 @@
-player.name:Ironbell
 # time played, in seconds
-time.played:13
+time.played:8
+level.id:0
+level.position:0.000000,0.000000
 map.id:1
-map.position:3802.408691,521.733704
-# in this order: maxHealthPoints, maxManaPos, currentHealthPos, currentManaPos, healthRegenerationPerS, manaRegenerationPerS, damagePhysical, damageFire, damageIce, resistancePhysical, resistanceFire, resistanceIce 
-attributes:100,100,100,100,0,0,0,0,0,0,0,0
+map.position:4230.898438,1070.047363
+# in this order: maxHealthPoints, currentHealthPoints, healthRegenerationPerS, haste, critical, 
+# damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
+# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
+attributes:100,100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
 # equipment:
-equipped.back:6
+equipped.back:0
 equipped.body:0
-equipped.head:3
+equipped.head:0
 equipped.neck:0
 equipped.ring1:0
 equipped.ring2:0
-equipped.weapon:1
+equipped.weapon:0
 # levels killed:
 # levels looted:
+# quest states:
+# npc states:

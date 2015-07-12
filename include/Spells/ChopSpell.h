@@ -16,6 +16,7 @@ public:
 	bool getConfiguredTriggerFightAnimation() const override;
 	bool getConfiguredRotateSprite() const override;
 	SpellID getConfiguredSpellID() const override;
+	DamageType getConfiguredDamageType() const override;
 
 private:
 };

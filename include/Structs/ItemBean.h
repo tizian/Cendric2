@@ -26,10 +26,10 @@ const struct ItemBean DEFAULT_ITEM =
 {
 	"",
 	"",
-	ItemID::Void,
-	ItemType::Void,
+	ItemID::VOID,
+	ItemType::VOID,
 	sf::Vector2i(),
-	LevelEquipmentID::Void,
+	LevelEquipmentID::VOID,
 	ZERO_ATTRIBUTES,
 	0
 };

@@ -45,3 +45,8 @@ SpellID IceSpell::getConfiguredSpellID() const
 	return SpellID::Ice;
 }
 
+DamageType IceSpell::getConfiguredDamageType() const
+{
+	return DamageType::Ice;
+}
+

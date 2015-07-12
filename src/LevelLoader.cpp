@@ -125,7 +125,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.texturePositions.push_back(sf::IntRect(100, 0, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
 			item.tooltip = "It_OneCoin";
-			item.item = ItemID::Void;
+			item.item = ItemID::VOID;
 			item.goldValue = 1;
 			break;
 		case LevelItemID::Gold_ThreeCoins:
@@ -134,7 +134,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 			item.texturePositions.push_back(sf::IntRect(150, 50, 50, 50));
 			item.frameTime = sf::seconds(1.0f);
 			item.tooltip = "It_ThreeCoins";
-			item.item = ItemID::Void;
+			item.item = ItemID::VOID;
 			item.goldValue = 3;
 			break;
 		case LevelItemID::Misc_GoldenGoblet:

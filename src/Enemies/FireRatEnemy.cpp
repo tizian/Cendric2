@@ -11,9 +11,9 @@ FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(l
 
 void FireRatEnemy::loadAttributes()
 {
-	m_attributes.currentHealthPoints = 70;
-	m_attributes.maxHealthPoints = 70;
-	m_attributes.resistanceIce = -10;
+	m_attributes->currentHealthPoints = 70;
+	m_attributes->maxHealthPoints = 70;
+	m_attributes->iceMultiplier = 1.2f;
 
 	m_immuneSpells.push_back(SpellID::Fire);
 }

@@ -44,3 +44,8 @@ SpellID UnlockSpell::getConfiguredSpellID() const
 {
 	return SpellID::Unlock;
 }
+
+DamageType UnlockSpell::getConfiguredDamageType() const
+{
+	return DamageType::VOID;
+}

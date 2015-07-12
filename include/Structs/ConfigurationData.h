@@ -39,9 +39,11 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 		{ Key::Up, sf::Keyboard::W },
 		{ Key::Down, sf::Keyboard::S },
 		{ Key::Jump, sf::Keyboard::Space },
-		{ Key::SpellChop, sf::Keyboard::Num1 },
-		{ Key::SpellFire, sf::Keyboard::Num2 },
-		{ Key::SpellIce, sf::Keyboard::Num3 },
-		{ Key::SpellForcefield, sf::Keyboard::Num4 }
+		{ Key::Chop, sf::Keyboard::F },
+		{ Key::FirstSpell, sf::Keyboard::Num1 },
+		{ Key::SecondSpell, sf::Keyboard::Num2 },
+		{ Key::ThirdSpell, sf::Keyboard::Num3 },
+		{ Key::FourthSpell, sf::Keyboard::Num4 },
+		{ Key::FifthSpell, sf::Keyboard::Num5 }
 	}),
 };

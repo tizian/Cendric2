@@ -67,10 +67,12 @@ void InputController::init()
 			{ Key::Up, false },
 			{ Key::Down, false },
 			{ Key::Jump, false },
-			{ Key::SpellFire, false },
-			{ Key::SpellChop, false },
-			{ Key::SpellForcefield, false },
-			{ Key::SpellIce, false }
+			{ Key::Chop, false },
+			{ Key::FirstSpell, false },
+			{ Key::SecondSpell, false },
+			{ Key::ThirdSpell, false },
+			{ Key::FourthSpell, false },
+			{ Key::FifthSpell, false }
 		});
 	m_keyJustPressedMap = m_keyActiveMap;
 	

@@ -16,7 +16,6 @@
 struct CharacterCoreData
 {
 	// player attributes
-	std::string playerName;
 	sf::Time timePlayed;
 
 	// position & progress
@@ -48,11 +47,10 @@ struct CharacterCoreData
 
 const CharacterCoreData DEFAULT_CORE
 {
-	"",
 	sf::Time::Zero,
-	MapID::Void,
+	MapID::VOID,
 	sf::Vector2f(),
-	LevelID::Void,
+	LevelID::VOID,
 	sf::Vector2f(),
 	std::map<LevelID, std::vector<bool>>(),
 	std::map<LevelID, std::vector<bool>>(),
@@ -60,12 +58,12 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<QuestID, QuestState>(),
 	ZERO_ATTRIBUTES,
 	0,
-	ItemID::Void,
-	ItemID::Void,
-	ItemID::Void,
-	ItemID::Void,
-	ItemID::Void,
-	ItemID::Void,
-	ItemID::Void,
+	ItemID::VOID,
+	ItemID::VOID,
+	ItemID::VOID,
+	ItemID::VOID,
+	ItemID::VOID,
+	ItemID::VOID,
+	ItemID::VOID,
 	std::map<ItemID, int>()
 };

@@ -15,7 +15,6 @@ public:
 	bool readCharacterCore(const char* fileName, CharacterCoreData& data);
 
 private:
-	bool readPlayerName(char* start, char* end, CharacterCoreData& data) const;
 	bool readTimePlayed(char* start, char* end, CharacterCoreData& data) const;
 
 	bool readMapID(char* start, char* end, CharacterCoreData& data) const;

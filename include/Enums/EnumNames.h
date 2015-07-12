@@ -56,14 +56,18 @@ public:
 			return "Confirm";
 		case Key::Right:
 			return "MoveRight";
-		case Key::SpellChop:
-			return "SpellChop";
-		case Key::SpellFire:
-			return "SpellFire";
-		case Key::SpellForcefield:
-			return "SpellForcefield";
-		case Key::SpellIce:
-			return "SpellIce";
+		case Key::Chop:
+			return "Chop";
+		case Key::FirstSpell:
+			return "FirstSpell";
+		case Key::SecondSpell:
+			return "SecondSpell";
+		case Key::ThirdSpell:
+			return "ThirdSpell";
+		case Key::FourthSpell:
+			return "FourthSpell";
+		case Key::FifthSpell:
+			return "FifthSpell";
 		case Key::Up:
 			return "MoveUp";
 		}

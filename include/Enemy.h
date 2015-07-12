@@ -31,14 +31,12 @@ public:
 
 	virtual void load() = 0;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
-	void render(sf::RenderTarget& target) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onRightClick() override;
 	void onMouseOver() override;
 	void update(const sf::Time& frameTime) override;
-	void addDamage(int damage) override;
-	void setDead() override;
-
-	virtual void onHit(Spell* spell);
+	
+	void onHit(Spell* spell) override;
 	void setLoot(const std::map<ItemID, int>& items, int gold);
 
 	GameObjectType getConfiguredType() const override;
@@ -60,8 +58,6 @@ protected:
 	std::vector<EnemyID> m_immuneEnemies;
 	// spells of these types won't hurt. default is empty.
 	std::vector<SpellID> m_immuneSpells;
-	// the attribute bean. if the enemies hp falls to 0, its state will be dead.
-	AttributeBean m_attributes;
 	
 	// AI
 	EnemyState m_enemyState;

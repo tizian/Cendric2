@@ -45,3 +45,8 @@ SpellID ChopSpell::getConfiguredSpellID() const
 {
 	return SpellID::Chop;
 }
+
+DamageType ChopSpell::getConfiguredDamageType() const
+{
+	return DamageType::Physical;
+}

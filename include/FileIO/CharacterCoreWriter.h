@@ -20,7 +20,6 @@ public:
 	bool createFile(const char* filename) const;
 	
 private:
-	std::string writePlayerName(const CharacterCoreData& data) const;
 	std::string writeTimePlayed(const CharacterCoreData& data) const;
 
 	std::string writeMapID(const CharacterCoreData& data) const;

@@ -32,7 +32,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 
 	for (std::vector<LevelEquipmentID>::iterator it = gameData.begin(); it != gameData.end(); ++it)
 	{
-		if ((*it) == LevelEquipmentID::Void) 
+		if ((*it) == LevelEquipmentID::VOID)
 		{
 			continue;
 		}
@@ -60,6 +60,8 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 			equipment.textureID = ResourceID::Texture_back_purple;
 			useStandardFrames = true;
 			break;
+		case LevelEquipmentID::Ring_ringOfLesserHealth:
+			continue;
 		default:
 			// unexpected error
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");

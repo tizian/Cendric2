@@ -110,6 +110,8 @@ void MapScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_NPC, renderTarget);
 	m_currentMap.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_NPC, renderTarget);
 	renderTooltipText(renderTarget);
 
 	// render the dialogue window. be aware that if this window exists, the view for input will be the default view

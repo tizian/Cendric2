@@ -16,10 +16,6 @@ public:
 	~LevelMainCharacter();
 
 	void load();
-	void onHit(Spell* spell);
-	void update(const sf::Time& frameTime) override;
-	void addDamage(int damage) override;
-	void setDead() override;
 
 	void setCharacterCore(CharacterCore* core);
 	// adds the item to the players inventory
@@ -38,12 +34,7 @@ protected:
 	void handleAttackInput() override;
 
 private:
-	// TODO load this map from configuration
+	// TODO: load this from configuration
 	std::map<Key, SpellID> m_keyMap;
 	CharacterCore* m_core;
-	AttributeBean* m_attributes;
-
-	// regeneration (hp, mana)
-	void updateRegeneration(const sf::Time& frameTime);
-	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
 };

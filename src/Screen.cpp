@@ -101,6 +101,14 @@ void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget)
 	}
 }
 
+void Screen::renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget)
+{
+	for (auto &it : m_objects[type])
+	{
+		it->renderAfterForeground(renderTarget);
+	}
+}
+
 const BitmapText* Screen::getTooltipText() const
 {
 	return &m_tooltipText;

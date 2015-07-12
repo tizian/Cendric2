@@ -25,6 +25,10 @@ const Animation* GameObject::getAnimation(GameObjectState state)
 void GameObject::render(sf::RenderTarget &renderTarget)
 {
 	renderTarget.draw(m_animatedSprite);
+}
+
+void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget)
+{
 	if (DEBUG_RENDERING && m_isDrawBoundingBox)
 	{
 		renderTarget.draw(m_debugBox);

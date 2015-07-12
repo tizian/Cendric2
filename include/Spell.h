@@ -6,6 +6,7 @@
 #include "Level.h"
 
 #include "Enums/SpellID.h"
+#include "Enums/DamageType.h"
 #include "Structs/SpellBean.h"
 
 class LevelMovableGameObject;
@@ -33,6 +34,7 @@ public:
 	virtual bool getConfiguredRotateSprite() const;
 	int getDamage() const;
 	virtual SpellID getConfiguredSpellID() const = 0;
+	virtual DamageType getConfiguredDamageType() const = 0;
 	GameObjectType getConfiguredType() const override;
 
 	const sf::Time& getActiveTime() const;

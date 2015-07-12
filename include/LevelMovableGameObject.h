@@ -2,9 +2,11 @@
 
 #include "global.h"
 #include "MovableGameObject.h"
+#include "Structs/AttributeBean.h"
 
 class Level;
 class SpellManager;
+class Spell;
 
 // a MOB in a level, enemies + main character.
 class LevelMovableGameObject : public MovableGameObject
@@ -18,10 +20,11 @@ public:
 	// the offset to the from where a spell starts. it gets added to the spell offset defined by the spell itself. default is (0,0)
 	virtual sf::Vector2f getConfiguredSpellOffset() const;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
+	virtual void onHit(Spell* spell);
 	// adds damage to the attribute health. this damage can be negative (heal)
-	virtual void addDamage(int damage) = 0;
+	void addDamage(int damage);
 	// sets the dead bool and sets the attribute health to zero.
-	virtual void setDead() = 0;
+	void setDead();
 
 	SpellManager* getSpellManager() const;
 	Level* getLevel() const;
@@ -53,4 +56,10 @@ protected:
 	sf::Time m_fightAnimationTime = sf::Time::Zero;
 	// the sprite will reset its color as soon as this time is zero.
 	sf::Time m_coloredTime = sf::Time::Zero;
+
+	AttributeBean* m_attributes;
+
+	// regeneration (hp)
+	void updateRegeneration(const sf::Time& frameTime);
+	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
 };

@@ -6,23 +6,23 @@ LoadingScreen::LoadingScreen(LevelID id, CharacterCore* core) : Screen(core)
 {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_loading)));
 	m_levelToLoad = id;
-	m_mapToLoad = MapID::Void;
+	m_mapToLoad = MapID::VOID;
 }
 
 LoadingScreen::LoadingScreen(MapID id, CharacterCore* core) : Screen(core)
 {
 	m_screenSprite = sf::Sprite(*g_resourceManager->getTexture(ResourceID::Texture_screen_loading));
 	m_mapToLoad = id;
-	m_levelToLoad = LevelID::Void;
+	m_levelToLoad = LevelID::VOID;
 }
 
 Screen* LoadingScreen::update(const sf::Time& frameTime)
 {
-	if (m_levelToLoad != LevelID::Void)
+	if (m_levelToLoad != LevelID::VOID)
 	{
 		return new LevelScreen(m_levelToLoad, getCharacterCore());
 	}
-	if (m_mapToLoad != MapID::Void)
+	if (m_mapToLoad != MapID::VOID)
 	{
 		return new MapScreen(m_mapToLoad, getCharacterCore());
 	}

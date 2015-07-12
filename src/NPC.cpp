@@ -34,9 +34,9 @@ void NPC::onInteractKey()
 	onRightClick();
 }
 
-void NPC::render(sf::RenderTarget &renderTarget)
+void NPC::renderAfterForeground(sf::RenderTarget &renderTarget)
 {
-	GameObject::render(renderTarget);
+	GameObject::renderAfterForeground(renderTarget);
 	if (m_tooltipTime > sf::Time::Zero)
 	{
 		renderTarget.draw(m_tooltipText);

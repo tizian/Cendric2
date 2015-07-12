@@ -21,6 +21,7 @@ public:
 	void onInteractKey() override;
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
+	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	
 	void setTooltipText(const std::wstring& tooltip);

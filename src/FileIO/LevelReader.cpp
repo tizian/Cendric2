@@ -239,7 +239,7 @@ bool LevelReader::readLevelExit(char* start, char* end, LevelData& data) const
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	MapID mapID = static_cast<MapID>(atoi(startData));
-	if (mapID <= MapID::Void || mapID >= MapID::MAX)
+	if (mapID <= MapID::VOID || mapID >= MapID::MAX)
 	{
 		g_logger->logError("LevelReader", "Could not read level exit : Map ID not recognized.");
 		return false;

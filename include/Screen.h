@@ -63,6 +63,8 @@ protected:
 	void updateObjects(GameObjectType type, sf::Time frameTime);
 	// render all objects of type 'type'
 	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
+	// render all objects after foreground of type 'type'
+	void renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget);
 	
 	CharacterCore* m_characterCore;
 	bool m_requestQuit = false;

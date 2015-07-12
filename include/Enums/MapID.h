@@ -2,7 +2,7 @@
 
 enum class MapID 
 {
-	Void,
+	VOID,
 	Firstmap,
 	MAX
 };

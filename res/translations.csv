@@ -82,9 +82,13 @@ RetryLevel;Retry this level;Nochmal versuchen;Nomal probiere
 SaveGame;Save Game;Spiel speichern;Spiel speichere
 Sound;Sound;Musik;Musig
 SoundVolume;Volume;Lautstärke;Luutstärchi
-SpellChop;Chop;Hauen;Haue
+Chop;Chop;Hauen;Haue
+FirstSpell;1. Spell;1. Zauber;1. Zauber
+SecondSpell;2. Spell;2. Zauber;2. Zauber
+ThirdSpell;3. Spell;3. Zauber;3. Zauber
+FourthSpell;4. Spell ;4. Zauber;4. Zauber
+FifthSpell;5. Spell;5. Zauber;5. Zauber
 SpellFire;Fireball;Feuerball;Füürball
-SpellForcefield;Forcefield;Schutzschild;Schutzschild
 SpellIce;Icebolt;Eisblitz;Iisblitz
 StartGame;Start Game;Spiel starten;Spiel starte
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
@@ -104,3 +108,11 @@ DL_Choice_GiveMeAQuest;Give me a quest.;Gib mir eine Aufgabe.;Gib mer was zum ma
 DL_Choice_Nothing;None of your business.;Geht dich nichts an.;Gaht dich en füechte Dreck ah.
 DL_Guard_KillThemAlready;You haven't killed those rats! Go and do your job.;Die Ratten leben noch! Geh jetzt und erledige das.;Du hesch die Ratte nanig killt! Gang ez und mach da.
 Confirm;Confirm;Bestätigen;Bestätige
+ShadowDamage;Shadow Damage;Schattenschaden;Schatteschade
+LightDamage;Light Damage;Lichtschaden;Liechtschade
+ShadowResistance;Shadow Resistance;Schattenresistenz;Schatteresistenz
+LightResistance;Light Resistance;Lichtresistenz;Liechtresistenz
+Reduction;Reduction;Verminderung;Verminderig
+CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
+Haste;Haste;Schnelligkeit;Schnelligkeit
+CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering

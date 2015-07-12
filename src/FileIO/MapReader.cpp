@@ -148,7 +148,7 @@ bool MapReader::readLevelEntry(char* start, char* end, MapData& data) const
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	LevelID levelID = static_cast<LevelID>(atoi(startData));
-	if (levelID <= LevelID::Void || levelID >= LevelID::MAX)
+	if (levelID <= LevelID::VOID || levelID >= LevelID::MAX)
 	{
 		g_logger->logError("MapReader", "Could not read level entry : Level ID not recognized.");
 		return false;

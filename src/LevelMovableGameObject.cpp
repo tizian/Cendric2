@@ -5,8 +5,6 @@
 LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject()
 {
 	m_level = level;
-	m_spellManager = new SpellManager();
-	// children should add spells to spell manager in their constructor.
 }
 
 LevelMovableGameObject::~LevelMovableGameObject()
@@ -43,6 +41,24 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 		}
 	}
 	updateAnimation();
+	if (!m_isDead)
+	{
+		updateRegeneration(frameTime);
+	}
+}
+
+void LevelMovableGameObject::updateRegeneration(const sf::Time& frameTime)
+{
+	m_timeSinceRegeneration += frameTime;
+	if (m_timeSinceRegeneration >= sf::seconds(1))
+	{
+		m_timeSinceRegeneration -= sf::seconds(1);
+		m_attributes->currentHealthPoints += m_attributes->healthRegenerationPerS;
+		if (m_attributes->currentHealthPoints > m_attributes->maxHealthPoints)
+		{
+			m_attributes->currentHealthPoints = m_attributes->maxHealthPoints;
+		}
+	}
 }
 
 void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition)
@@ -131,6 +147,63 @@ void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTim
 	if (getAcceleration().x != 0.0f) dampingPerSec = 0;
 	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
+}
+
+void LevelMovableGameObject::addDamage(int damage)
+{
+	if (m_state == GameObjectState::Dead) return;
+	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints - damage));
+	if (m_attributes->currentHealthPoints == 0)
+	{
+		m_isDead = true;
+	}
+	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
+}
+
+void LevelMovableGameObject::onHit(Spell* spell)
+{
+	if (m_state == GameObjectState::Dead)
+	{
+		return;
+	}
+	// check for owner
+	if (spell->getOwner() == this)
+	{
+		return;
+	}
+	int damage = 0;
+	switch (spell->getConfiguredDamageType())
+	{
+	case DamageType::Physical:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->physicalMultiplier);
+		spell->setDisposed();
+		break;
+	case DamageType::Ice:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->iceMultiplier);
+		spell->setDisposed();
+		break;
+	case DamageType::Fire:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->fireMultiplier);
+		spell->setDisposed();
+		break;
+	case DamageType::Shadow:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->shadowMultiplier);
+		spell->setDisposed();
+		break;
+	case DamageType::Light:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->lightMultiplier);
+		spell->setDisposed();
+		break;
+	default:
+		return;
+	}
+	addDamage(damage);
+}
+
+void LevelMovableGameObject::setDead()
+{
+	m_attributes->currentHealthPoints = 0;
+	m_isDead = true;
 }
 
 Level* LevelMovableGameObject::getLevel() const

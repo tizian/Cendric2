@@ -53,8 +53,6 @@ private:
 	void renderInterfaceBars(sf::RenderTarget& target) const;
 	sf::RectangleShape m_hpBarOutline;
 	sf::RectangleShape m_hpBar;
-	sf::RectangleShape m_manaBarOutline;
-	sf::RectangleShape m_manaBar;
 	const float BAR_HEIGHT = 10.f;
 	const float BAR_WIDTH = 200.f;
 	const float BAR_OUTLINE_THICKNESS = 2.f;

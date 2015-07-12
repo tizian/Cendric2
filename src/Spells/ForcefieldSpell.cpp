@@ -55,3 +55,8 @@ SpellID ForcefieldSpell::getConfiguredSpellID() const
 {
 	return SpellID::Forcefield;
 }
+
+DamageType ForcefieldSpell::getConfiguredDamageType() const
+{
+	return DamageType::VOID;
+}

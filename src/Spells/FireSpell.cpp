@@ -43,3 +43,8 @@ SpellID FireSpell::getConfiguredSpellID() const
 {
 	return SpellID::Fire;
 }
+
+DamageType FireSpell::getConfiguredDamageType() const
+{
+	return DamageType::Fire;
+}

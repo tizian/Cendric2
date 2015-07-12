@@ -6,7 +6,6 @@
 class CharacterCoreIO
 {
 protected:
-	const char* PLAYER_NAME = "player.name";
 	const char* TIME_PLAYED = "time.played";
 
 	// attributes

@@ -7,6 +7,18 @@ CharacterCore::CharacterCore()
 	m_data = DEFAULT_CORE;
 }
 
+void CharacterCore::update(const sf::Time& frameTime)
+{
+	if (m_foodAttributes.first > sf::Time::Zero)
+	{
+		m_foodAttributes.first -= frameTime;
+		if (m_foodAttributes.first <= sf::Time::Zero)
+		{
+			reloadAttributes();
+		}
+	}
+}
+
 CharacterCore::~CharacterCore()
 {
 	clearEquippedItems();
@@ -24,24 +36,20 @@ bool CharacterCore::load(const char* fileName)
 	
 	// measuring the time played with this save.
 	m_stopwatch.restart();
-	reloadStats();
+	reloadAttributes();
 	return true;
 }
 
 void CharacterCore::loadNew()
 {
 	// start map & position when a new game is loaded
-	m_data.playerName = "Dummy";
 	m_data.currentMap = MapID::Firstmap; 
 	m_data.currentMapPosition = sf::Vector2f(4400.0f, 650.0f); 
 	m_data.attributes.currentHealthPoints = 100;
-	m_data.attributes.currentManaPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
-	m_data.attributes.maxManaPoints = 100;
-	m_data.attributes.healthRegenerationPerS = 0;
-	m_data.attributes.manaRegenerationPerS = 0;
+	m_data.attributes.critical = 5;
 	m_stopwatch.restart();
-	reloadStats();
+	reloadAttributes();
 }
 
 const Item& CharacterCore::getEquippedItem(ItemType type)
@@ -116,9 +124,11 @@ bool CharacterCore::createFile(const char* fileName) const
 	return writer.createFile(fileName);
 }
 
-void CharacterCore::reloadStats()
+void CharacterCore::reloadAttributes()
 {
 	m_totalAttributes = m_data.attributes;
+	m_foodAttributes.first = sf::Time::Zero;
+	m_foodAttributes.second = ZERO_ATTRIBUTES;
 	loadEquipmentItems();
 	for (auto &it : m_equippedItems)
 	{
@@ -128,6 +138,36 @@ void CharacterCore::reloadStats()
 	{
 		m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 	}
+	calculateAttributes(m_totalAttributes);
+}
+
+void CharacterCore::consumeFood(sf::Time& duration, AttributeBean& attributes)
+{
+	reloadAttributes();
+	m_foodAttributes = pair<sf::Time, AttributeBean>(duration, attributes);
+	addBean(m_totalAttributes, attributes);
+	calculateAttributes(m_totalAttributes);
+}
+
+void CharacterCore::calculateAttributes(AttributeBean& bean)
+{
+	bean.criticalHitChance = max(0, min(60, bean.critical));
+	bean.cooldownMultiplier = 1.f / (1.f + (bean.haste / 100.f));
+
+	bean.physicalMultiplier = calculateDamageReduction(bean.resistancePhysical);
+	bean.fireMultiplier = calculateDamageReduction(bean.resistanceFire);
+	bean.iceMultiplier = calculateDamageReduction(bean.resistanceIce);
+	bean.shadowMultiplier = calculateDamageReduction(bean.resistanceShadow);
+	bean.lightMultiplier = calculateDamageReduction(bean.resistanceLight);
+}
+
+float CharacterCore::calculateDamageReduction(int resistance) const
+{
+	if (resistance >= 0)
+	{
+		return 100.f / (100.f + resistance);
+	}
+	return 2.f - 100.f / (100.f - resistance);
 }
 
 void CharacterCore::loadEquipmentItems()
@@ -209,7 +249,7 @@ void CharacterCore::addGold(int gold)
 void CharacterCore::resetHealth()
 {
 	m_data.attributes.currentHealthPoints = m_data.attributes.maxHealthPoints;
-	reloadStats();
+	reloadAttributes();
 }
 
 void CharacterCore::setMap(const sf::Vector2f& position, MapID map)
@@ -229,11 +269,16 @@ void CharacterCore::addBean(AttributeBean& firstBean, const AttributeBean& secon
 	firstBean.damageFire += secondBean.damageFire;
 	firstBean.damageIce += secondBean.damageIce;
 	firstBean.damagePhysical += secondBean.damagePhysical;
+	firstBean.damageLight += secondBean.damageLight;
+	firstBean.damageShadow += secondBean.damageShadow;
 	firstBean.resistanceFire += secondBean.resistanceFire;
 	firstBean.resistanceIce += secondBean.resistanceIce;
 	firstBean.resistancePhysical += secondBean.resistancePhysical;
+	firstBean.resistanceLight += secondBean.resistanceLight;
+	firstBean.resistanceShadow += secondBean.resistanceShadow;
 	firstBean.maxHealthPoints += secondBean.maxHealthPoints;
-	firstBean.maxManaPoints += secondBean.maxManaPoints;
+	firstBean.haste += secondBean.haste;
+	firstBean.critical += secondBean.critical;
+	firstBean.healthRegenerationPerS += secondBean.healthRegenerationPerS;
 	firstBean.currentHealthPoints = (firstBean.maxHealthPoints < firstBean.currentHealthPoints + secondBean.currentHealthPoints) ? firstBean.maxHealthPoints : (firstBean.currentHealthPoints + secondBean.currentHealthPoints);
-	firstBean.currentManaPoints = (firstBean.maxManaPoints < firstBean.currentManaPoints + secondBean.currentManaPoints) ? firstBean.maxManaPoints : (firstBean.currentManaPoints + secondBean.currentManaPoints);
 }

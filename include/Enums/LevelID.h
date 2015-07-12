@@ -2,7 +2,7 @@
 
 enum class LevelID
 {
-	Void,
+	VOID,
 	RatCave,
 	MAX
 };

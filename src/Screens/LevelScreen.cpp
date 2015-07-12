@@ -76,6 +76,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		updateObjects(GameObjectType::_LevelItem, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
 		updateObjects(GameObjectType::_Button, frameTime);
+		m_characterCore->update(frameTime);
 		m_interface.update(frameTime);
 		deleteDisposedObjects();
 		return this;
@@ -100,6 +101,13 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_Spell, renderTarget);
 
 	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+
+	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_LevelEquipment, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_Enemy, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
+
 	renderTooltipText(renderTarget);
 	m_interface.render(renderTarget);
 

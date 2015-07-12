@@ -21,6 +21,8 @@ public:
 
 	virtual void update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget);
+	// used for tooltips and loot windows
+	virtual void renderAfterForeground(sf::RenderTarget& renderTarget);
 	// gets checked & called in the update loop. default implementation does nothing.
 	// checks for the bounding box 
 	virtual void onMouseOver();

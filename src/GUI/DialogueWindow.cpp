@@ -90,6 +90,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 
 bool DialogueWindow::updateDialogue()
 {
+	bool chooseOption = false;
 	if (!m_options.empty())
 	{
 		int oldOption = m_chosenOption;
@@ -106,6 +107,11 @@ bool DialogueWindow::updateDialogue()
 			m_options[i].update(sf::Time::Zero);
 			if (m_options[i].isClicked())
 			{
+				if (i == m_chosenOption)
+				{
+					// a chosen option was clicked again
+					chooseOption = true;
+				}
 				m_chosenOption = i;
 			}
 		}
@@ -122,7 +128,7 @@ bool DialogueWindow::updateDialogue()
 		return m_dialogue->updateWindow();
 	}
 
-	if (g_inputController->isKeyJustPressed(Key::Confirm) || g_inputController->isKeyJustPressed(Key::Interact))
+	if (chooseOption || g_inputController->isKeyJustPressed(Key::Confirm) || g_inputController->isKeyJustPressed(Key::Interact))
 	{
 		if (m_options.empty())
 		{

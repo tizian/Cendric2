@@ -16,9 +16,11 @@ enum class Key
 	Up,
 	Down,
 	Jump,
-	SpellFire,
-	SpellIce,
-	SpellChop,
-	SpellForcefield,
+	Chop,
+	FirstSpell,
+	SecondSpell,
+	ThirdSpell,
+	FourthSpell,
+	FifthSpell,
 	MAX
 };

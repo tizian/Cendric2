@@ -3,64 +3,12 @@
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level)
 {
 	load();
-	m_keyMap.insert(
-	{
-		{ Key::SpellChop, SpellID::Chop },
-		{ Key::SpellIce, SpellID::Ice },
-		{ Key::SpellFire, SpellID::Fire },
-		{ Key::SpellForcefield, SpellID::Forcefield }
-	});
-
-	// these values should be modified by a staff
-	SpellBean fireSpell = DEFAULT_FIRE;
-	fireSpell.amount = 3;
-	fireSpell.reflectCount = 2;
-	SpellBean chopSpell = DEFAULT_CHOP;
-	SpellBean forcefieldSpell = DEFAULT_FORCEFIELD;
-	SpellBean iceSpell = DEFAULT_ICE;
-
-	m_spellManager->addSpell(chopSpell);
-	m_spellManager->addSpell(iceSpell);
-	m_spellManager->addSpell(forcefieldSpell);
-	m_spellManager->addSpell(fireSpell);
 }
 
 LevelMainCharacter::~LevelMainCharacter()
 {
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
 	m_keyMap.clear();
-}
-
-void LevelMainCharacter::onHit(Spell* spell)
-{
-	if (m_state == GameObjectState::Dead)
-	{
-		return;
-	}
-	// check for owner
-	if (spell->getOwner() == this)
-	{
-		return;
-	}
-	int damage = 0;
-	switch (spell->getConfiguredSpellID())
-	{
-	case SpellID::Ice:
-		damage = spell->getDamage() - m_attributes->resistanceIce;
-		spell->setDisposed();
-		break;
-	case SpellID::Fire:
-		damage = spell->getDamage() - m_attributes->resistanceFire;
-		spell->setDisposed();
-		break;
-	case SpellID::Chop:
-		damage = spell->getDamage() - m_attributes->resistancePhysical;
-		spell->setDisposed();
-		break;
-	default:
-		return;
-	}
-	addDamage(damage);
 }
 
 void LevelMainCharacter::handleAttackInput()
@@ -121,56 +69,36 @@ void LevelMainCharacter::handleMovementInput()
 	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
 }
 
-void LevelMainCharacter::addDamage(int damage)
-{
-	if (m_state == GameObjectState::Dead) return;
-	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints - damage));
-	if (m_attributes->currentHealthPoints == 0)
-	{
-		m_isDead = true;
-	}
-	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
-}
-
-void LevelMainCharacter::setDead()
-{
-	m_attributes->currentHealthPoints = 0;
-	m_isDead = true;
-}
-
 void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 {
 	m_core = core;
 	m_attributes = core->getTotalAttributes();
 	setPosition(core->getData().currentLevelPosition);
-}
 
-void LevelMainCharacter::update(const sf::Time& frameTime)
-{
-	LevelMovableGameObject::update(frameTime);
-	if (!m_isDead)
+	// these values should come from the staff
+	m_keyMap.insert(
 	{
-		updateRegeneration(frameTime);
-	}
-}
+		{ Key::Chop, SpellID::Chop },
+		{ Key::FirstSpell, SpellID::Ice },
+		{ Key::SecondSpell, SpellID::Fire },
+		{ Key::ThirdSpell, SpellID::Forcefield },
+		{ Key::FourthSpell, SpellID::VOID },
+		{ Key::FifthSpell, SpellID::VOID },
+	});
 
-void LevelMainCharacter::updateRegeneration(const sf::Time& frameTime)
-{
-	m_timeSinceRegeneration += frameTime;
-	if (m_timeSinceRegeneration >= sf::seconds(1))
-	{
-		m_timeSinceRegeneration -= sf::seconds(1);
-		m_attributes->currentHealthPoints += m_attributes->healthRegenerationPerS;
-		m_attributes->currentManaPoints += m_attributes->manaRegenerationPerS;
-		if (m_attributes->currentHealthPoints > m_attributes->maxHealthPoints)
-		{
-			m_attributes->currentHealthPoints = m_attributes->maxHealthPoints;
-		}
-		if (m_attributes->currentManaPoints > m_attributes->maxManaPoints)
-		{
-			m_attributes->currentManaPoints = m_attributes->maxManaPoints;
-		}
-	}
+	// these values should be modified by a staff
+	SpellBean fireSpell = DEFAULT_FIRE;
+	fireSpell.amount = 3;
+	fireSpell.reflectCount = 2;
+	SpellBean chopSpell = DEFAULT_CHOP;
+	SpellBean forcefieldSpell = DEFAULT_FORCEFIELD;
+	SpellBean iceSpell = DEFAULT_ICE;
+
+	m_spellManager = new SpellManager(m_attributes);
+	m_spellManager->addSpell(chopSpell);
+	m_spellManager->addSpell(iceSpell);
+	m_spellManager->addSpell(forcefieldSpell);
+	m_spellManager->addSpell(fireSpell);
 }
 
 void LevelMainCharacter::load()

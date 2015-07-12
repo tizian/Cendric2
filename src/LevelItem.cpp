@@ -15,7 +15,7 @@ void LevelItem::onRightClick()
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE)
 	{
 		// pickup, create the correct item or correct amount of gold in the players inventory.
-		if (m_itemID == ItemID::Void)
+		if (m_itemID == ItemID::VOID)
 		{
 			m_mainChar->addGold(m_goldValue);
 		}
@@ -47,6 +47,11 @@ void LevelItem::render(sf::RenderTarget &renderTarget)
 {
 	GameObject::render(renderTarget);
 	m_animatedSprite.setColor(sf::Color::White);
+}
+
+void LevelItem::renderAfterForeground(sf::RenderTarget& renderTarget)
+{
+	GameObject::renderAfterForeground(renderTarget);
 	if (m_tooltipTime > sf::Time::Zero)
 	{
 		renderTarget.draw(m_tooltipText);

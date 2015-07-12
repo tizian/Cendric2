@@ -24,7 +24,6 @@ bool CharacterCoreWriter::saveToFile(const char* filename, const CharacterCoreDa
 	ofstream savefile(filename, ios::trunc);
 	if (savefile.is_open())
 	{
-		savefile << writePlayerName(data);
 		savefile << writeTimePlayed(data);
 		savefile << writeLevelID(data);
 		savefile << writeLevelPosition(data);
@@ -47,11 +46,6 @@ bool CharacterCoreWriter::saveToFile(const char* filename, const CharacterCoreDa
 		return false;
 	}
 	return true;
-}
-
-std::string CharacterCoreWriter::writePlayerName(const CharacterCoreData& data) const
-{
-	return string(PLAYER_NAME) + ":" + data.playerName + "\n";
 }
 
 std::string CharacterCoreWriter::writeTimePlayed(const CharacterCoreData& data) const
@@ -122,21 +116,26 @@ std::string CharacterCoreWriter::writeLevelLooted(const CharacterCoreData& data)
 
 std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) const
 {
-	string orderComment = "# in this order: maxHealthPoints, maxManaPos, currentHealthPos, currentManaPos, healthRegenerationPerS, manaRegenerationPerS, damagePhysical, damageFire, damageIce, resistancePhysical, resistanceFire, resistanceIce \n";
+	string orderComment = "# in this order: maxHealthPoints, currentHealthPoints, healthRegenerationPerS, haste, critical, \n# damagePhysical, damageFire, damageIce, damageShadow, damageLight, \n# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. \n";
 	string attributeString = orderComment.append(string(ATTRIBUTES));
 	attributeString.append(":");
 	attributeString.append(to_string(data.attributes.maxHealthPoints) + ",");
-	attributeString.append(to_string(data.attributes.maxManaPoints) + ",");
 	attributeString.append(to_string(data.attributes.currentHealthPoints) + ",");
-	attributeString.append(to_string(data.attributes.currentManaPoints) + ",");
 	attributeString.append(to_string(data.attributes.healthRegenerationPerS) + ",");
-	attributeString.append(to_string(data.attributes.manaRegenerationPerS) + ",");
+	attributeString.append(to_string(data.attributes.haste) + ",");
+	attributeString.append(to_string(data.attributes.critical) + ",");
+
 	attributeString.append(to_string(data.attributes.damagePhysical) + ",");
 	attributeString.append(to_string(data.attributes.damageFire) + ",");
 	attributeString.append(to_string(data.attributes.damageIce) + ",");
+	attributeString.append(to_string(data.attributes.damageShadow) + ",");
+	attributeString.append(to_string(data.attributes.damageLight) + ",");
+
 	attributeString.append(to_string(data.attributes.resistancePhysical) + ",");
 	attributeString.append(to_string(data.attributes.resistanceFire) + ",");
-	attributeString.append(to_string(data.attributes.resistanceIce));
+	attributeString.append(to_string(data.attributes.resistanceIce) + ",");
+	attributeString.append(to_string(data.attributes.resistanceShadow) + ",");
+	attributeString.append(to_string(data.attributes.resistanceLight));
 	attributeString.append("\n");
 
 	return attributeString;

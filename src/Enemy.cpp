@@ -7,8 +7,9 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_id = id;
 	m_mainChar = mainChar;
 	m_immuneEnemies.push_back(id);
-	m_attributes = ZERO_ATTRIBUTES;
+	m_attributes = new AttributeBean(ZERO_ATTRIBUTES);
 	m_enemyState = EnemyState::Idle;
+	m_spellManager = new SpellManager(m_attributes);
 	
 	// load hp bar
 	m_hpBar.setFillColor(sf::Color::Red);
@@ -18,6 +19,7 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 Enemy::~Enemy()
 {
 	delete m_lootWindow;
+	delete m_attributes;
 }
 
 bool Enemy::getConfiguredFleeCondition() const
@@ -28,23 +30,6 @@ bool Enemy::getConfiguredFleeCondition() const
 float Enemy::getConfiguredSafeRange() const
 {
 	return 1000.f;
-}
-
-void Enemy::addDamage(int damage)
-{
-	if (m_state == GameObjectState::Dead) return;
-	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
-	if (m_attributes.currentHealthPoints == 0)
-	{
-		m_isDead = true;
-	}
-	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
-}
-
-void Enemy::setDead()
-{
-	m_attributes.currentHealthPoints = 0;
-	m_isDead = true;
 }
 
 void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
@@ -122,19 +107,28 @@ void Enemy::onHit(Spell* spell)
 		spell->setDisposed();
 		return;
 	}
+
 	int damage = 0;
-	switch (spell->getConfiguredSpellID())
+	switch (spell->getConfiguredDamageType())
 	{
-	case SpellID::Ice:
-		damage = spell->getDamage() - m_attributes.resistanceIce;
+	case DamageType::Physical:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->physicalMultiplier);
 		spell->setDisposed();
 		break;
-	case SpellID::Fire:
-		damage = spell->getDamage() - m_attributes.resistanceFire;
+	case DamageType::Ice:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->iceMultiplier);
 		spell->setDisposed();
 		break;
-	case SpellID::Chop:
-		damage = spell->getDamage() - m_attributes.resistancePhysical;
+	case DamageType::Fire:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->fireMultiplier);
+		spell->setDisposed();
+		break;
+	case DamageType::Shadow:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->shadowMultiplier);
+		spell->setDisposed();
+		break;
+	case DamageType::Light:
+		damage = static_cast<int>(spell->getDamage() * m_attributes->lightMultiplier);
 		spell->setDisposed();
 		break;
 	default:
@@ -148,9 +142,9 @@ void Enemy::onHit(Spell* spell)
 	m_recoveringTime = getConfiguredRecoveringTime();
 }
 
-void Enemy::render(sf::RenderTarget &renderTarget)
+void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget)
 {
-	LevelMovableGameObject::render(renderTarget);
+	GameObject::renderAfterForeground(renderTarget);
 	renderTarget.draw(m_hpBar);
 	if (m_showLootWindow && m_lootWindow != nullptr)
 	{
@@ -174,7 +168,7 @@ void Enemy::update(const sf::Time& frameTime)
 void Enemy::updateHpBar() 
 {
 	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
-	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
+	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints), HP_BAR_HEIGHT));
 }
 
 float Enemy::distToMainChar() const

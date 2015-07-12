@@ -14,8 +14,6 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.attributes.damageIce = 5;
 		bean.attributes.resistanceIce = 2;
 		bean.attributes.resistancePhysical = 1;
-		bean.attributes.manaRegenerationPerS = 2;
-		bean.attributes.maxManaPoints = 5;
 		break;
 	case ItemID::Equipment_head_wizardhat_grey:
 		bean.description = "Itd_Wizardhat";
@@ -24,10 +22,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.iconTextureLocation = sf::Vector2i(150, 100); // TODO
 		bean.levelEquipment = LevelEquipmentID::Head_wizardhat_grey;
 		bean.value = 20;
-		bean.attributes.manaRegenerationPerS = 4;
 		bean.attributes.resistanceFire = 2;
 		bean.attributes.resistancePhysical = 1;
-		bean.attributes.maxManaPoints = 5;
 		bean.attributes.maxHealthPoints = 5;
 		break;
 	case ItemID::Equipment_weapon_staff_ice:
@@ -37,8 +33,6 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.iconTextureLocation = sf::Vector2i(200, 100); // TODO
 		bean.levelEquipment = LevelEquipmentID::Weapon_icestaff;
 		bean.value = 120;
-		bean.attributes.manaRegenerationPerS = 4;
-		bean.attributes.maxManaPoints = 10;
 		bean.attributes.maxHealthPoints = 10;
 		bean.attributes.damageIce = 30;
 		bean.attributes.damagePhysical = 15;
@@ -67,7 +61,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_Cheese";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(0, 100);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.attributes.currentHealthPoints = 40;
 		bean.value = 3;
 		break;
@@ -76,7 +70,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_Bread";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(50, 100);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.attributes.currentHealthPoints = 30;
 		bean.value = 2;
 		break;
@@ -85,9 +79,8 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_Water";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(100, 0);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.attributes.currentHealthPoints = 10;
-		bean.attributes.currentManaPoints = 50;
 		bean.value = 2;
 		break;
 	case ItemID::Food_CaveBerry:
@@ -95,7 +88,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_CaveBerry";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(0, 0);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.attributes.currentHealthPoints = 20;
 		bean.value = 3;
 		break;
@@ -104,7 +97,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_GlowingShroom";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(150, 50);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.attributes.currentHealthPoints = -20;
 		bean.value = 2;
 		break;
@@ -113,7 +106,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_HealingHerb";
 		bean.type = ItemType::Food;
 		bean.iconTextureLocation = sf::Vector2i(50, 50);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.attributes.currentHealthPoints = 50;
 		bean.value = 5;
 		break;
@@ -122,7 +115,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_Letter";
 		bean.type = ItemType::Quest;
 		bean.iconTextureLocation = sf::Vector2i(200, 0);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.value = 0;
 		break;
 	case ItemID::Misc_GoldenGoblet:
@@ -130,7 +123,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.name = "It_GoldenGoblet";
 		bean.type = ItemType::Misc;
 		bean.iconTextureLocation = sf::Vector2i(0, 50);
-		bean.levelEquipment = LevelEquipmentID::Void;
+		bean.levelEquipment = LevelEquipmentID::VOID;
 		bean.value = 15;
 		break;
 	case ItemID::Equipment_ring_ringOfLesserHealth:
@@ -142,7 +135,7 @@ void ItemFactory::loadItemBean(ItemBean& bean, ItemID id)
 		bean.value = 20;
 		break;
 	default:
-		bean.id = ItemID::Void;
+		bean.id = ItemID::VOID;
 		return;
 	}
 
