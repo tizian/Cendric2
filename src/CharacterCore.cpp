@@ -132,42 +132,21 @@ void CharacterCore::reloadAttributes()
 	loadEquipmentItems();
 	for (auto &it : m_equippedItems)
 	{
-		addBean(m_totalAttributes, it.second.getAttributes());
+		m_totalAttributes.addBean(it.second.getAttributes());
 	}
 	if (m_totalAttributes.currentHealthPoints > m_totalAttributes.maxHealthPoints)
 	{
 		m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 	}
-	calculateAttributes(m_totalAttributes);
+	m_totalAttributes.calculateAttributes();
 }
 
 void CharacterCore::consumeFood(sf::Time& duration, AttributeBean& attributes)
 {
 	reloadAttributes();
 	m_foodAttributes = pair<sf::Time, AttributeBean>(duration, attributes);
-	addBean(m_totalAttributes, attributes);
-	calculateAttributes(m_totalAttributes);
-}
-
-void CharacterCore::calculateAttributes(AttributeBean& bean)
-{
-	bean.criticalHitChance = max(0, min(60, bean.critical));
-	bean.cooldownMultiplier = 1.f / (1.f + (bean.haste / 100.f));
-
-	bean.physicalMultiplier = calculateDamageReduction(bean.resistancePhysical);
-	bean.fireMultiplier = calculateDamageReduction(bean.resistanceFire);
-	bean.iceMultiplier = calculateDamageReduction(bean.resistanceIce);
-	bean.shadowMultiplier = calculateDamageReduction(bean.resistanceShadow);
-	bean.lightMultiplier = calculateDamageReduction(bean.resistanceLight);
-}
-
-float CharacterCore::calculateDamageReduction(int resistance) const
-{
-	if (resistance >= 0)
-	{
-		return 100.f / (100.f + resistance);
-	}
-	return 2.f - 100.f / (100.f - resistance);
+	m_totalAttributes.addBean(attributes);
+	m_totalAttributes.calculateAttributes();
 }
 
 void CharacterCore::loadEquipmentItems()
@@ -262,23 +241,4 @@ void CharacterCore::setLevel(const sf::Vector2f& position, LevelID level)
 {
 	m_data.currentLevel = level;
 	m_data.currentLevelPosition = position;
-}
-
-void CharacterCore::addBean(AttributeBean& firstBean, const AttributeBean& secondBean) const
-{
-	firstBean.damageFire += secondBean.damageFire;
-	firstBean.damageIce += secondBean.damageIce;
-	firstBean.damagePhysical += secondBean.damagePhysical;
-	firstBean.damageLight += secondBean.damageLight;
-	firstBean.damageShadow += secondBean.damageShadow;
-	firstBean.resistanceFire += secondBean.resistanceFire;
-	firstBean.resistanceIce += secondBean.resistanceIce;
-	firstBean.resistancePhysical += secondBean.resistancePhysical;
-	firstBean.resistanceLight += secondBean.resistanceLight;
-	firstBean.resistanceShadow += secondBean.resistanceShadow;
-	firstBean.maxHealthPoints += secondBean.maxHealthPoints;
-	firstBean.haste += secondBean.haste;
-	firstBean.critical += secondBean.critical;
-	firstBean.healthRegenerationPerS += secondBean.healthRegenerationPerS;
-	firstBean.currentHealthPoints = (firstBean.maxHealthPoints < firstBean.currentHealthPoints + secondBean.currentHealthPoints) ? firstBean.maxHealthPoints : (firstBean.currentHealthPoints + secondBean.currentHealthPoints);
 }

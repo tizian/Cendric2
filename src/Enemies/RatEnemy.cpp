@@ -13,7 +13,8 @@ void RatEnemy::loadAttributes()
 {
 	m_attributes->currentHealthPoints = 40;
 	m_attributes->maxHealthPoints = 40;
-	m_attributes->physicalMultiplier = 0.9f;
+	m_attributes->resistancePhysical = 10.f;
+	m_attributes->calculateAttributes();
 }
 
 void RatEnemy::loadSpells()

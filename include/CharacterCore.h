@@ -64,11 +64,6 @@ private:
 	void clearItems();
 	// reload attributes based on equipped items (called by load). all attributes coming from food are removed.
 	void reloadAttributes();
-	// calculates attributes based on bean.
-	void calculateAttributes(AttributeBean& bean);
-	float calculateDamageReduction(int resistance) const;
-	// adds the second bean to the first bean
-	void addBean(AttributeBean& firstBean, const AttributeBean& secondBean) const;
 
 	// base attributes plus the attributes of all currently equipped items & the attributes of the food currently eaten
 	AttributeBean m_totalAttributes;

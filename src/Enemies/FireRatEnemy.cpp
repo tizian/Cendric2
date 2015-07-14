@@ -13,7 +13,8 @@ void FireRatEnemy::loadAttributes()
 {
 	m_attributes->currentHealthPoints = 70;
 	m_attributes->maxHealthPoints = 70;
-	m_attributes->iceMultiplier = 1.2f;
+	m_attributes->resistanceIce = -20.f;
+	m_attributes->calculateAttributes();
 
 	m_immuneSpells.push_back(SpellID::Fire);
 }
