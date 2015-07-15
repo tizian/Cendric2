@@ -16,6 +16,7 @@ struct WaterColumn
 
 		velocity += a * dt;
 		height += velocity * dt;
+		height = std::max(0.f, height);
 	}
 };
 

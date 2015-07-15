@@ -21,7 +21,7 @@ void SimulatedWaterTile::load(int skinNr)
 	m_y = getPosition().y;
 	m_width = bb->width;
 	m_height = bb->height;
-	m_nTiles = static_cast<int>(bb->width / 50.f); // Tilesize 50px
+	m_nTiles = static_cast<int>(bb->width / m_tileSize.x); // Tilesize 50px
 
 	float waterLevel = 35.f;		// configure
 	int nColumsPerTile = 10;		// configure

@@ -8,7 +8,8 @@
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
-enum class ButtonOrnamentStyle {
+enum class ButtonOrnamentStyle 
+{
 	NONE,
 	SMALL,
 	MEDIUM,
