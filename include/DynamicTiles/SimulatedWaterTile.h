@@ -3,14 +3,19 @@
 #include "global.h"
 #include "DynamicTile.h"
 
+class FrozenWaterTile;
+
 struct WaterColumn
 {
 	float targetHeight;
 	float height;
 	float velocity;
+	bool fixed;
 
 	void update(float damping, float tension, float dt)
 	{
+		if (fixed) return;
+		
 		float x = targetHeight - height;
 		float a = tension * x - damping * velocity;
 
@@ -34,6 +39,11 @@ public:
 
 	void splash(float xPosition, float velocity);
 
+	void freeze(int index);
+	void melt(int index);
+
+	bool isFrozen(int index);
+
 private:
 	float m_x, m_y;
 	float m_width, m_height;
@@ -47,7 +57,12 @@ private:
 
 	sf::VertexArray m_vertexArray;
 
+	std::vector<FrozenWaterTile *> m_frozenTiles;
+
 	static const float TENSION;
 	static const float DAMPING;
 	static const float SPREAD;
+
+	static const float WATER_LEVEL;
+	static const int NUMBER_COLUMNS_PER_SUBTILE;
 };

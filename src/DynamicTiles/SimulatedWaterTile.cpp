@@ -1,11 +1,16 @@
 #include "DynamicTiles/SimulatedWaterTile.h"
 #include "Spell.h"
 
+#include "DynamicTiles/FrozenWaterTile.h"
+
 using namespace std;
 
 const float SimulatedWaterTile::TENSION = 0.3f;
 const float SimulatedWaterTile::DAMPING = 0.05f;
 const float SimulatedWaterTile::SPREAD = 0.5f;
+
+const float SimulatedWaterTile::WATER_LEVEL = 35.f;
+const int SimulatedWaterTile:: NUMBER_COLUMNS_PER_SUBTILE = 10;
 
 void SimulatedWaterTile::init()
 {
@@ -23,22 +28,23 @@ void SimulatedWaterTile::load(int skinNr)
 	m_height = bb->height;
 	m_nTiles = static_cast<int>(bb->width / m_tileSize.x); // Tilesize 50px
 
-	float waterLevel = 35.f;		// configure
-	int nColumsPerTile = 10;		// configure
-	m_nColumns = nColumsPerTile * m_nTiles;
+	m_nColumns = NUMBER_COLUMNS_PER_SUBTILE * m_nTiles;
 	m_columns = vector<WaterColumn>();
 	for (int i = 0; i < m_nColumns; ++i)
 	{
 		WaterColumn c;
-		c.targetHeight = waterLevel;
-		c.height = waterLevel;
+		c.targetHeight = WATER_LEVEL;
+		c.height = WATER_LEVEL;
 		c.velocity = 0.f;
+		c.fixed = false;
 
 		m_columns.push_back(c);
 	}
 
 	m_leftDeltas = new float[m_nColumns];
 	m_rightDeltas = new float[m_nColumns];
+
+	m_frozenTiles = std::vector<FrozenWaterTile *>(m_nTiles, nullptr);
 
 	m_vertexArray = sf::VertexArray(sf::Quads, 2 * 4 * (m_nColumns - 1));
 }
@@ -136,19 +142,41 @@ void SimulatedWaterTile::render(sf::RenderTarget& target)
 
 void SimulatedWaterTile::onHit(Spell* spell)
 {
-	switch (spell->getConfiguredSpellID())
+	auto id = spell->getConfiguredSpellID();
+
+	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
+	bool frozen = isFrozen(index);
+	bool doSplash = true;
+
+	if (id == SpellID::Ice)
 	{
-	case SpellID::Ice:
-		// exercise 1c) check the spells position, split water into two tiles (if water was only one tile wide, (setDisposed)) etc
-		spell->setDisposed();
-		break;
-	default:
+		if (!frozen)
+		{
+			freeze(index);
+			spell->setDisposed();
+		}
+		doSplash = false;
+	}
+	else if (id == SpellID::Fire)
+	{
+		if (frozen) {
+			doSplash = false;
+		}
+		//if (frozen) {
+		//	melt(index);
+		//	spell->setDisposed();
+		//	doSplash = false;
+		//}
+		//doSplash = false;
+	}
+
+	if (doSplash)
+	{
 		float vx = spell->getVelocity().x;
 		float vy = spell->getVelocity().y;
 		float vel = std::sqrt(vx*vx + vy*vy);
 		splash(spell->getPosition().x, -vel * 0.5f);
 		spell->setDisposed();
-		break;
 	}
 }
 
@@ -160,4 +188,47 @@ void SimulatedWaterTile::onHit(LevelMovableGameObject* mob)
 	// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
 	float x = mob->getBoundingBox()->left + mob->getBoundingBox()->width / 2;
 	splash(x, -vel * 0.5f);
+}
+
+void SimulatedWaterTile::freeze(int index)
+{
+	if (index >= 0 && index < m_nTiles)
+	{
+		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i)
+		{
+			WaterColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
+			col.height = col.targetHeight;
+			col.fixed = true;
+		}
+
+		FrozenWaterTile *frozenTile = new FrozenWaterTile(this, index);
+		frozenTile->setTileSize(m_tileSize);
+		frozenTile->init();
+		frozenTile->setPosition(sf::Vector2f(m_x + index * m_tileSize.x, m_y));
+		frozenTile->setDebugBoundingBox(sf::Color::Yellow);
+		frozenTile->load(0);
+		m_frozenTiles[index] = frozenTile;
+		m_screen->addObject(GameObjectType::_DynamicTile, frozenTile);
+	}
+}
+
+void SimulatedWaterTile::melt(int index)
+{
+	if (index >= 0 && index < m_nTiles)
+	{
+		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i)
+		{
+			WaterColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
+			col.fixed = false;
+		}
+
+		m_frozenTiles[index] = nullptr;	// LET IT GOOOO, LET IT GO. Can't keep this pointer anymoooreee.
+	}
+}
+
+bool SimulatedWaterTile::isFrozen(int index)
+{
+	if (m_frozenTiles[index])
+		return true;
+	return false;
 }

@@ -1,23 +1,23 @@
 # time played, in seconds
-time.played:6
+time.played:15
 level.id:0
 level.position:0.000000,0.000000
 map.id:1
-map.position:4324.582031,1124.213745
+map.position:4003.269775,744.212402
 # in this order: maxHealthPoints, currentHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
-attributes:100,100,1,10,11,10,20,10,20,10,10,20,100,200,-40
+attributes:100,100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
 # equipment:
-equipped.back:6
+equipped.back:0
 equipped.body:0
-equipped.head:2
+equipped.head:0
 equipped.neck:0
-equipped.ring1:5
+equipped.ring1:0
 equipped.ring2:0
-equipped.weapon:3
+equipped.weapon:0
 # levels killed:
 # levels looted:
 # quest states:

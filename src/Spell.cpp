@@ -99,7 +99,8 @@ void Spell::update(const sf::Time& frameTime)
 	
 	checkCollisions(m_nextPosition);
 	// check collisions with dynamic tiles
-	m_level->collideWithDynamicTiles(this, getBoundingBox());
+	sf::FloatRect tmp(m_nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
+	m_level->collideWithDynamicTiles(this, &tmp);
 	// check collisions with main char
 	if (m_ownerType != GameObjectType::_MainCharacter)
 	{

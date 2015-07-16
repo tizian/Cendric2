@@ -56,7 +56,6 @@ public:
 	const sf::Vector2f& getPosition() const;
 	const sf::Vector2f& getSpriteOffset() const;
 	const sf::FloatRect* getBoundingBox() const;
-	const std::vector<sf::FloatRect> *getBoundingBoxes() const;
 	const sf::Vector2f getCenter() const;
 	// returns whether the game object should be deleted
 	// if this is set, the game object gets deleted in the next game loop
@@ -76,7 +75,7 @@ private:
 
 	std::map<GameObjectState, Animation> m_animations;
 	sf::Vector2f m_spriteOffset;
-	std::vector<sf::FloatRect> m_boundingBoxes;
+	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 

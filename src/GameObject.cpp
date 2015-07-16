@@ -2,8 +2,6 @@
 
 GameObject::GameObject()
 {
-	m_boundingBoxes = std::vector<sf::FloatRect>();
-	m_boundingBoxes.push_back(sf::FloatRect());
 }
 
 void GameObject::setCurrentAnimation(const Animation* animation, bool isFlipped)
@@ -38,7 +36,7 @@ void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget)
 void  GameObject::setDebugBoundingBox(sf::Color debugColor)
 {
 	// TODO: maybe extend for multiple BBs
-	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBoxes[0].width, m_boundingBoxes[0].height));
+	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
 	m_debugBox.setPosition(m_position);
 	m_debugBox.setOutlineThickness(1.f);
 	m_debugBox.setFillColor(sf::Color::Transparent);
@@ -49,26 +47,26 @@ void  GameObject::setDebugBoundingBox(sf::Color debugColor)
 void GameObject::update(const sf::Time& frameTime)
 {
 	// TODO: maybe extend for multiple BBs
-	if (g_inputController->isMouseOver(&m_boundingBoxes[0]))
+	if (g_inputController->isMouseOver(&m_boundingBox))
 	{
 		onMouseOver();
 		if (g_inputController->isKeyJustPressed(Key::Interact))
 		{
 			onInteractKey();
 		}
-		else if (g_inputController->isRightClicked(&m_boundingBoxes[0]))
+		else if (g_inputController->isRightClicked(&m_boundingBox))
 		{
 			onRightClick();
 		}
-		else if (g_inputController->isRightJustPressed(&m_boundingBoxes[0]))
+		else if (g_inputController->isRightJustPressed(&m_boundingBox))
 		{
 				onRightJustPressed();
 		}
-		else if (g_inputController->isLeftClicked(&m_boundingBoxes[0]))
+		else if (g_inputController->isLeftClicked(&m_boundingBox))
 		{
 			onLeftClick();
 		}
-		else if (g_inputController->isLeftJustPressed(&m_boundingBoxes[0]))
+		else if (g_inputController->isLeftJustPressed(&m_boundingBox))
 		{
 			onLeftJustPressed();
 		}
@@ -85,10 +83,10 @@ void GameObject::setPosition(const sf::Vector2f& position)
 {
 	// TODO: maybe extend for multiple BBs
 	m_position = position;
-	m_boundingBoxes[0].left = position.x;
-	m_boundingBoxes[0].top = position.y;
+	m_boundingBox.left = position.x;
+	m_boundingBox.top = position.y;
 	// origin is set to the center for rotation + flipping
-	sf::Vector2f spriteCenter(sf::Vector2f(m_boundingBoxes[0].width / 2, m_boundingBoxes[0].height / 2) - m_spriteOffset);
+	sf::Vector2f spriteCenter(sf::Vector2f(m_boundingBox.width / 2, m_boundingBox.height / 2) - m_spriteOffset);
 	m_animatedSprite.setOrigin(spriteCenter);
 	m_animatedSprite.setPosition(position + m_spriteOffset + spriteCenter);
 }
@@ -145,19 +143,12 @@ const sf::Vector2f& GameObject::getSpriteOffset() const
 
 void GameObject::setBoundingBox(const sf::FloatRect& rect)
 {
-	// TODO: maybe extend for multiple BBs
-	m_boundingBoxes.clear();
-	m_boundingBoxes.push_back(rect);
+	m_boundingBox = rect;
 }
 
 const sf::FloatRect* GameObject::getBoundingBox() const
 {
-	return &m_boundingBoxes.at(0);
-}
-
-const std::vector<sf::FloatRect> *GameObject::getBoundingBoxes() const
-{
-	return &m_boundingBoxes;
+	return &m_boundingBox;
 }
 
 void GameObject::onMouseOver() 
@@ -194,8 +185,8 @@ const sf::Vector2f GameObject::getCenter() const
 {
 	// TODO: maybe extend for multiple BBs
 	return sf::Vector2f(
-		m_boundingBoxes[0].left + (m_boundingBoxes[0].width / 2),
-		m_boundingBoxes[0].top + (m_boundingBoxes[0].height / 2));
+		m_boundingBox.left + (m_boundingBox.width / 2),
+		m_boundingBox.top + (m_boundingBox.height / 2));
 }
 
 const sf::Vector2f& GameObject::getPosition() const

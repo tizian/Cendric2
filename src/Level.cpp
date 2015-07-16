@@ -155,20 +155,13 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const
 		}
 	}
 
-	// check collidable dynamic tiles	// NOTE: collidesX/collidesY are currently the only places where multiple BBs (should) have any effect.
+	// check collidable dynamic tiles
 	for (GameObject *go : *m_dynamicTiles)
 	{
 		DynamicTile *tile = dynamic_cast<DynamicTile *>(go);
-		if (tile != nullptr && tile->getIsCollidable())
+		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
 		{
-			const std::vector<sf::FloatRect> *tileBBs = tile->getBoundingBoxes();
-			for (const sf::FloatRect &bb : *tileBBs)
-			{
-				if (bb.intersects(boundingBox))
-				{
-					return true;
-				}
-			}
+			return true;
 		}
 	}
 
@@ -273,20 +266,13 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 		}
 	}
 
-	// check collidable dynamic tiles	// NOTE: collidesX/collidesY are currently the only places where multiple BBs (should) have any effect.
+	// check collidable dynamic tiles
 	for (GameObject *go : *m_dynamicTiles)
 	{
 		DynamicTile *tile = dynamic_cast<DynamicTile *>(go);
-		if (tile != nullptr && tile->getIsCollidable())
+		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
 		{
-			const std::vector<sf::FloatRect> *tileBBs = tile->getBoundingBoxes();
-			for (const sf::FloatRect &bb : *tileBBs)
-			{
-				if (bb.intersects(boundingBox))
-				{
-					return true;
-				}
-			}
+			return true;
 		}
 	}
 
@@ -310,9 +296,10 @@ float Level::getGround(const sf::FloatRect& boundingBox) const
 
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const
 {
-	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
+	size_t size = m_dynamicTiles->size(); // Note: this loop type allows objects to be added to the back of the list while iterating over it.
+	for (size_t i = 0; i < size; ++i)
 	{
-		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
+		DynamicTile* tile = dynamic_cast<DynamicTile*>(m_dynamicTiles->at(i));
 		if (tile != nullptr && (tile->getBoundingBox()->intersects(*boundingBox)))
 		{
 			tile->onHit(spell);
