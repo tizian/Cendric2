@@ -20,9 +20,9 @@ void FrozenWaterTile::load(int skinNr)
 	m_isCollidable = true;
 
 	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_ice));
+	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_frozenwater));
 	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, m_tileSize.x, m_tileSize.y));
-	idleAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
+	//idleAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
 	
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

@@ -10,8 +10,8 @@
 #define PI_F 3.14159265358979f
 #define DEG_TO_RAD 57.2957795f
 // TODO these values should not be const, but loaded from an .ini file.
-#define WINDOW_WIDTH 1250
-#define WINDOW_HEIGHT 750
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 720
 
 // cendric color palette
 #define CENDRIC_COLOR_WHITE sf::Color(255, 255, 255, 255)

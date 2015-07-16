@@ -49,6 +49,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_tile_chest, "res/assets/dynamic_tiles/spritesheet_tiles_chest.png" },
 		{ ResourceID::Texture_tile_spikesbottom, "res/assets/dynamic_tiles/spritesheet_tiles_spikesBottom.png" },
 		{ ResourceID::Texture_tile_spikestop, "res/assets/dynamic_tiles/spritesheet_tiles_spikesTop.png" },
+		{ ResourceID::Texture_tile_frozenwater, "res/assets/dynamic_tiles/spritesheet_tiles_frozenWater.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },

@@ -22,6 +22,7 @@ enum class ResourceID
 	Texture_tile_chest,
 	Texture_tile_spikestop,
 	Texture_tile_spikesbottom,
+	Texture_tile_frozenwater,
 	Texture_weapon_icestaff,
 	Texture_weapon_rustysword,
 	Texture_head_wizardhat_grey,

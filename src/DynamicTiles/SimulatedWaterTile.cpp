@@ -5,11 +5,12 @@
 
 using namespace std;
 
-const float SimulatedWaterTile::TENSION = 0.3f;
+const float SimulatedWaterTile::TENSION = 0.4f;
 const float SimulatedWaterTile::DAMPING = 0.05f;
-const float SimulatedWaterTile::SPREAD = 0.5f;
+const float SimulatedWaterTile::SPREAD = 0.7f;
 
-const float SimulatedWaterTile::WATER_LEVEL = 35.f;
+const float SimulatedWaterTile::WATER_LEVEL = 40.f;
+const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
 const int SimulatedWaterTile:: NUMBER_COLUMNS_PER_SUBTILE = 10;
 
 void SimulatedWaterTile::init()
@@ -26,7 +27,10 @@ void SimulatedWaterTile::load(int skinNr)
 	m_y = getPosition().y;
 	m_width = bb->width;
 	m_height = bb->height;
-	m_nTiles = static_cast<int>(bb->width / m_tileSize.x); // Tilesize 50px
+
+	setBoundingBox(sf::FloatRect(m_x, m_y + 11.f, m_width, m_height));
+
+	m_nTiles = static_cast<int>(bb->width / m_tileSize.x);
 
 	m_nColumns = NUMBER_COLUMNS_PER_SUBTILE * m_nTiles;
 	m_columns = vector<WaterColumn>();
@@ -90,6 +94,14 @@ void SimulatedWaterTile::update(const sf::Time& frameTime)
 
 	m_columns[0].height = m_columns[0].targetHeight;
 	m_columns[m_nColumns - 1].height = m_columns[m_nColumns - 1].targetHeight;
+
+	for (int i = 0; i < m_nColumns; ++i)
+	{
+		if (m_columns[i].fixed)
+		{
+			m_columns[i].height = m_columns[i].targetHeight;
+		}
+	}
 
 	sf::Color blue = sf::Color(20, 50, 100, 128);
 	sf::Color transparent = sf::Color(255, 255, 255, 0);
@@ -162,12 +174,6 @@ void SimulatedWaterTile::onHit(Spell* spell)
 		if (frozen) {
 			doSplash = false;
 		}
-		//if (frozen) {
-		//	melt(index);
-		//	spell->setDisposed();
-		//	doSplash = false;
-		//}
-		//doSplash = false;
 	}
 
 	if (doSplash)
@@ -205,6 +211,8 @@ void SimulatedWaterTile::freeze(int index)
 		frozenTile->setTileSize(m_tileSize);
 		frozenTile->init();
 		frozenTile->setPosition(sf::Vector2f(m_x + index * m_tileSize.x, m_y));
+		const sf::FloatRect *bb = frozenTile->getBoundingBox();
+		frozenTile->setBoundingBox(sf::FloatRect(bb->left, bb->top, bb->width, bb->height - 35.f));	// ice tile is ca. 15 pixels thick
 		frozenTile->setDebugBoundingBox(sf::Color::Yellow);
 		frozenTile->load(0);
 		m_frozenTiles[index] = frozenTile;
