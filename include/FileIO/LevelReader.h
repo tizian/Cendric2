@@ -40,7 +40,7 @@ private:
 	// \brief update data to prepare it for the level
 	void updateData(LevelData& data) const;
 
-	std::map<int, LevelItemID> m_levelItemMap;
+	std::map<int, std::string> m_levelItemMap;
 	std::map<int, EnemyID> m_enemyMap;
 
 	// this is the width in tiles of the dynamic tile tileset

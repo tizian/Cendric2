@@ -193,12 +193,13 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
-	ItemID id = static_cast<ItemID>(atoi(startData));
-	if (id <= ItemID::VOID || id >= ItemID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + std::to_string(static_cast<int>(id)));
+	string id(startData);
+	int count = countToNextChar(startData, end, '\n');
+	if (count == -1) {
 		return false;
 	}
+	id = id.substr(0, count);
+
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int amount = atoi(startData);
@@ -257,13 +258,13 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
-	ItemID item = static_cast<ItemID>(atoi(startData));
-	if (item < ItemID::VOID || item >= ItemID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Item ID not recognized: " + std::to_string(static_cast<int>(item)));
+	string item(startData);
+	int count = countToNextChar(startData, end, '\n');
+	if (count == -1) {
 		return false;
 	}
-
+	item = item.substr(0, count);
+	
 	switch (type)
 	{
 	case ItemType::Equipment_head:

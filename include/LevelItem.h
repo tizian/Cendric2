@@ -5,9 +5,9 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Item.h"
-#include "Enums/LevelItemID.h"
 
 #include "GUI/BitmapText.h"
+#include "Enums/ItemType.h"
 
 class LevelMainCharacter;
 
@@ -16,7 +16,7 @@ class LevelItem : public GameObject
 {
 public:
 	LevelItem() : GameObject() {}
-	void load(LevelMainCharacter* mainChar, LevelItemID id);
+	void load(LevelMainCharacter* mainChar, const ItemBean& bean, const sf::Vector2f& position);
 	void onRightClick() override;
 	void onInteractKey() override;
 	void onMouseOver() override;
@@ -24,20 +24,18 @@ public:
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	
-	void setTooltipText(const std::wstring& tooltip);
-	void setItemID(ItemID id);
-	void setGoldValue(int goldValue);
-
 	GameObjectType getConfiguredType() const override;
+
+	void setTooltipText(const std::wstring& tooltip);
 
 private:
 	LevelMainCharacter* m_mainChar;
 	// the item can only be picked up if the main char is in this range
 	const float PICKUP_RANGE = 100.f;
-	LevelItemID m_levelItemID;
-	ItemID m_itemID;
-	// only relevant for gold items. they have their item id void.
+	std::string m_itemID;
+	// only relevant for gold items. they have their item type "Gold".
 	int m_goldValue;
+	ItemType m_itemType;
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;
 };

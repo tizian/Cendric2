@@ -5,7 +5,6 @@
 
 #include "Enums/MapID.h"
 #include "Enums/LevelID.h"
-#include "Enums/ItemID.h"
 #include "Enums/NPCID.h"
 #include "Enums/NPCState.h"
 #include "Enums/QuestID.h"
@@ -35,14 +34,14 @@ struct CharacterCoreData
 
 	// items & equipment
 	int gold;
-	ItemID equippedWeapon;
-	ItemID equippedHead;
-	ItemID equippedBody;
-	ItemID equippedBack;
-	ItemID equippedRing1;
-	ItemID equippedRing2;
-	ItemID equippedNeck;
-	std::map<ItemID, int> items;
+	std::string equippedWeapon;
+	std::string equippedHead;
+	std::string equippedBody;
+	std::string equippedBack;
+	std::string equippedRing1;
+	std::string equippedRing2;
+	std::string equippedNeck;
+	std::map<std::string, int> items;
 };
 
 const CharacterCoreData DEFAULT_CORE
@@ -58,12 +57,12 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<QuestID, QuestState>(),
 	ZERO_ATTRIBUTES,
 	0,
-	ItemID::VOID,
-	ItemID::VOID,
-	ItemID::VOID,
-	ItemID::VOID,
-	ItemID::VOID,
-	ItemID::VOID,
-	ItemID::VOID,
-	std::map<ItemID, int>()
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	std::map<std::string, int>()
 };

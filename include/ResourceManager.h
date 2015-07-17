@@ -12,6 +12,7 @@
 
 #include "Structs/ConfigurationData.h"
 #include "FileIO/ConfigurationReader.h"
+#include "FileIO/ItemReader.h"
 
 #include "GUI/BitmapFont.h"
 
@@ -40,6 +41,7 @@ public:
 	sf::Font* getFont(std::string& filename);
 	BitmapFont* getBitmapFont(ResourceID id);
 	BitmapFont* getBitmapFont(std::string& filename);
+	const ItemBean* getItemBean(const std::string& id);
 	char* getFilename(ResourceID id);
 	char* getFilename(LevelID id);
 	char* getFilename(MapID id);
@@ -61,4 +63,6 @@ private:
 	std::pair<ErrorID, std::string> m_currentError;
 	// configuration can be manipulated by the user
 	ConfigurationData m_configuration;
+	// all item beans are saved here
+	std::map<std::string, ItemBean> m_itemMap;
 };

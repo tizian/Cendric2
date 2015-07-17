@@ -35,7 +35,6 @@ void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget)
 
 void  GameObject::setDebugBoundingBox(sf::Color debugColor)
 {
-	// TODO: maybe extend for multiple BBs
 	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
 	m_debugBox.setPosition(m_position);
 	m_debugBox.setOutlineThickness(1.f);
@@ -46,7 +45,6 @@ void  GameObject::setDebugBoundingBox(sf::Color debugColor)
 
 void GameObject::update(const sf::Time& frameTime)
 {
-	// TODO: maybe extend for multiple BBs
 	if (g_inputController->isMouseOver(&m_boundingBox))
 	{
 		onMouseOver();

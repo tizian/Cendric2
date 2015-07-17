@@ -16,6 +16,7 @@ ResourceManager::~ResourceManager()
 	m_mapFileNames.clear();
 	m_fonts.clear();
 	m_bitmapFonts.clear();
+	m_itemMap.clear();
 }
 
 void ResourceManager::init()
@@ -35,6 +36,7 @@ void ResourceManager::init()
 		{ ResourceID::Configuration, "config.ini" },
 		{ ResourceID::Save_folder, "saves/" },
 		{ ResourceID::Quicksave, "saves/quicksave.sav" },
+		{ ResourceID::Items, "res/items.csv" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
 		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
@@ -42,7 +44,6 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
-		{ ResourceID::Texture_tile_water, "res/assets/dynamic_tiles/spritesheet_tiles_water.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/dynamic_tiles/spritesheet_tiles_torch.png" },
@@ -62,11 +63,6 @@ void ResourceManager::init()
 		{ ResourceID::Texture_items, "res/assets/items/spritesheet_items.png" },
 		{ ResourceID::Texture_npcs, "res/assets/npcs/spritesheet_npcs.png" },
 		{ ResourceID::Texture_dialogue, "res/assets/dialogue/spritesheet_dialogue.png" },
-		{ ResourceID::Texture_head_wizardhat_grey, "res/assets/equipment/head/spritesheet_head_wizardhat_grey.png" },
-		{ ResourceID::Texture_head_wizardhat_blue, "res/assets/equipment/head/spritesheet_head_wizardhat_blue.png" },
-		{ ResourceID::Texture_weapon_icestaff, "res/assets/equipment/weapon/spritesheet_staff_ice.png" },
-		{ ResourceID::Texture_weapon_rustysword, "res/assets/equipment/weapon/spritesheet_weapon_rustysword.png" },
-		{ ResourceID::Texture_back_purple, "res/assets/equipment/back/spritesheet_back_purple.png" },
 		{ ResourceID::Texture_GUI_rounded_rectangle, "res/assets/gui/rounded_rectangle.png" },
 		{ ResourceID::Texture_GUI_ornament_none, "res/assets/gui/ornament_none.png" },
 		{ ResourceID::Texture_GUI_ornament_small, "res/assets/gui/ornament_small.png" },
@@ -81,6 +77,14 @@ void ResourceManager::init()
 	if (!reader.readConfiguration(m_configuration))
 	{
 		m_configuration = DEFAULT_CONFIGURATION;
+	}
+
+	ItemReader itemReader;
+	if (!itemReader.readItems(m_itemMap))
+	{
+		m_itemMap.clear();
+		g_logger->logError("ResourceManager", "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
+		setError(ErrorID::Error_dataCorrupted, "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
 	}
 }
 
@@ -192,6 +196,19 @@ BitmapFont* ResourceManager::getBitmapFont(ResourceID id)
 	return getBitmapFont(m_fileNames[id]);
 }
 
+const ItemBean* ResourceManager::getItemBean(const std::string& id)
+{
+	if (m_itemMap.find(id) != m_itemMap.end())
+	{
+		return &m_itemMap.at(id);
+	}
+	else
+	{
+		g_logger->logError("ResourceManager", "Item not found with ID: " + id);
+		return nullptr;
+	}
+}
+
 void ResourceManager::deleteResource(ResourceID id)
 {
 	deleteResource(m_fileNames[id]);
@@ -274,7 +291,7 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_spell_unlock);
 
 	// delete dynamic tile resources
-	deleteResource(ResourceID::Texture_tile_water);
+	deleteResource(ResourceID::Texture_tile_frozenwater);
 	deleteResource(ResourceID::Texture_tile_ice);
 	deleteResource(ResourceID::Texture_tile_crumblyblock);
 	deleteResource(ResourceID::Texture_tile_torch);
@@ -302,7 +319,7 @@ void ResourceManager::loadLevelResources()
 	//getTexture(ResourceID::Texture_spell_unlock);
 
 	// load dynamic tile resources
-	getTexture(ResourceID::Texture_tile_water);
+	getTexture(ResourceID::Texture_tile_frozenwater);
 	getTexture(ResourceID::Texture_tile_ice);
 	getTexture(ResourceID::Texture_tile_crumblyblock);
 	getTexture(ResourceID::Texture_tile_torch);

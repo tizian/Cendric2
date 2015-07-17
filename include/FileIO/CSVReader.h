@@ -5,7 +5,6 @@
 #include "global.h"
 #include "FileIO/Reader.h"
 #include "Logger.h"
-#include "ResourceManager.h"
 
 #include "Enums/Language.h"
 

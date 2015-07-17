@@ -8,13 +8,11 @@
 class Item 
 {
 public:
-	Item(ItemBean& bean);
+	Item(const ItemBean& bean);
 
 	const std::string& getDescription() const;
-	const std::string& getName() const;
-	ItemID getID() const;
+	const std::string& getID() const;
 	ItemType getType() const;
-	LevelEquipmentID getLevelEquipmentID() const;
 	const sf::Vector2i& getIconTextureLocation() const;
 	const AttributeBean& getAttributes() const;
 	// the items gold value

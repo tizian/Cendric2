@@ -23,34 +23,34 @@ HealthRegeneration;Health Regeneration;Lebensregeneration;Lebensregeneration
 IceDamage;Ice Damage;Eisschaden;Iisschade
 IceResistance;Ice Resistance;Eisresistenz;Iisresistenz
 Inventory;Inventory;Inventar;Inventar
-It_Bread;Bread;Brot;Brot
-It_CaveBerry;Cave berries;Höhlenbeeren;Höhlebeeri
-It_Cheese;Cheese;Käse;Chääs
-It_GlowingShroom;Glowing shroom;Leuchtpilz;Lüchtpilz
-It_GoldenGoblet;Golden goblet;Goldener Pokal;Goldige Pokal
-It_HealingHerb;Healing herb;Heilpflanze;Heilpflanze
-It_Icestaff;Ice staff;Eisstab;Iisstab
-It_Letter;Sealed Letter;Versiegelter Brief;Versiglete Brief
-It_OneCoin;Golden coin;Goldmünze;Goldmünze
-It_RingOfLesserHealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
-It_ThreeCoins;A few coins;Ein paar Münzen;Es paar Münze
-It_Water;Water bottle;Wasserflasche;Wasserfläsche
-It_WizardhatBlue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
-It_WizardhatGrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
-Itd_Bread;An ordinary loaf of bread.;Ein einfaches Brot.;Es Brot halt.
-Itd_Cheese;Smelly.;Riecht nicht sonderlich gut.;Er müffelet echli.
-Itd_Icestaff;Feels ice cold.;Fühlt sich eiskalt an.;So chalt we Iis.
-Itd_Rustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
-Itd_Water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
-Itd_Wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
+it_fo_bread;Bread;Brot;Brot
+it_fo_caveberry;Cave berries;Höhlenbeeren;Höhlebeeri
+it_fo_cheese;Cheese;Käse;Chääs
+it_fo_glowingshroom;Glowing shroom;Leuchtpilz;Lüchtpilz
+it_mi_goldengoblet;Golden goblet;Goldener Pokal;Goldige Pokal
+it_fo_healingherb;Healing herb;Heilpflanze;Heilpflanze
+it_we_icestaf;Ice staff;Eisstab;Iisstab
+it_qe_letter;Sealed Letter;Versiegelter Brief;Versiglete Brief
+it_go_onecoin;Golden coin;Goldmünze;Goldmünze
+it_eq_ringoflesserhealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
+it_go_threecoins;A few coins;Ein paar Münzen;Es paar Münze
+it_fo_water;Water bottle;Wasserflasche;Wasserfläsche
+it_eq_wizardhatblue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
+it_eq_wizardhatgrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
+itd_bread;An ordinary loaf of bread.;Ein einfaches Brot.;Es Brot halt.
+itd_cheese;Smelly.;Riecht nicht sonderlich gut.;Er müffelet echli.
+itd_icestaff;Feels ice cold.;Fühlt sich eiskalt an.;So chalt we Iis.
+itd_rustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
+itd_water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
+itd_wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
 Jump;Jump;Springen;Springe
 Language;Language;Sprache;Sproch
-Itd_CaveBerry;Sweet;Süss;Süess
-Itd_GlowingShroom;It still glows…;Er leuchtet immer noch…;Er lüchtet immer na…
-Itd_GoldenGoblet;A golden goblet;Ein goldener Pokal;En goldige Pokal
-Itd_HealingHerb;Heals wounds;Heilt Wunden;Heilt Wunde
-Itd_Letter;Sealed;Versiegelt;Versiglet
-Itd_RingOfLesserHealth;The small ruby sparkles;Der kleine Rubin funkelt;De chli Rubin funklet 
+itd_caveberry;Sweet;Süss;Süess
+itd_glowingshroom;It still glows…;Er leuchtet immer noch…;Er lüchtet immer na…
+itd_goldengoblet;A golden goblet;Ein goldener Pokal;En goldige Pokal
+itd_healingherb;Heals wounds;Heilt Wunden;Heilt Wunde
+itd_letter;Sealed;Versiegelt;Versiglet
+itd_ringoflesserhealth;The small ruby sparkles;Der kleine Rubin funkelt;De chli Rubin funklet 
 LoadGame;Load Game;Spiel laden;Spiel lade
 Mana;Mana;Mana;Mana
 ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration

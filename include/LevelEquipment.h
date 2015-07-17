@@ -3,7 +3,6 @@
 #include "global.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
-#include "Enums/LevelEquipmentID.h"
 
 class LevelMainCharacter;
 
@@ -15,9 +14,9 @@ public:
 	~LevelEquipment();
 
 	void update(const sf::Time& frameTime) override;
-	void loadEquipment(LevelMainCharacter* mainChar, LevelEquipmentID id);
+	void loadEquipment(LevelMainCharacter* mainChar);
 
-	void setTextureID(ResourceID id);
+	void setTexturePath(const std::string& texturePath);
 
 	// this is only used by weapons: the offset of the weapon, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
 	virtual const sf::Vector2f getConfiguredPositionOffset() const;
@@ -28,8 +27,7 @@ protected:
 
 private:
 	LevelMainCharacter* m_mainChar;
-	LevelEquipmentID m_equipmentID;
-	ResourceID m_resourceID;
+	std::string m_texturePath;
 
 	// calculates position according to m_mainChar.
 	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;

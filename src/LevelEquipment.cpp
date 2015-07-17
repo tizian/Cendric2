@@ -3,7 +3,7 @@
 
 LevelEquipment::~LevelEquipment()
 {
-	g_resourceManager->deleteResource(m_resourceID);
+	g_resourceManager->deleteResource(m_texturePath);
 }
 
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
@@ -49,19 +49,18 @@ const sf::Vector2f LevelEquipment::getConfiguredPositionOffset() const
 	return sf::Vector2f(-60.f, -20.f);
 }
 
-void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar, LevelEquipmentID id)
+void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar)
 {
 	m_mainChar = mainChar;
-	m_equipmentID = id;
 
 	sf::Vector2f position;
 	calculatePositionAccordingToMainChar(position);
 	setPosition(position);
 }
 
-void LevelEquipment::setTextureID(ResourceID id)
+void LevelEquipment::setTexturePath(const std::string& texturePath)
 {
-	m_resourceID = id;
+	m_texturePath = texturePath;
 }
 
 GameObjectType LevelEquipment::getConfiguredType() const

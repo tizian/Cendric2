@@ -178,9 +178,9 @@ GameObjectType LevelMainCharacter::getConfiguredType() const
 	return GameObjectType::_MainCharacter;
 }
 
-void LevelMainCharacter::lootItem(ItemID item, int quantity) const
+void LevelMainCharacter::lootItem(const std::string& item, int quantity) const
 {
-	std::map<ItemID, int>* coreItems = m_core->getItems();
+	std::map<std::string, int>* coreItems = m_core->getItems();
 	auto it = coreItems->find(item);
 
 	if (it != coreItems->end())
@@ -193,7 +193,7 @@ void LevelMainCharacter::lootItem(ItemID item, int quantity) const
 	}
 }
 
-void LevelMainCharacter::lootItems(std::map<ItemID, int>& items) const
+void LevelMainCharacter::lootItems(std::map<std::string, int>& items) const
 {
 	for (auto it : items)
 	{

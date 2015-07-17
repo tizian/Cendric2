@@ -19,8 +19,8 @@ public:
 
 	void setCharacterCore(CharacterCore* core);
 	// adds the item to the players inventory
-	void lootItem(ItemID item, int quantity) const;
-	void lootItems(std::map<ItemID, int>& items) const;
+	void lootItem(const std::string& item, int quantity) const;
+	void lootItems(std::map<std::string, int>& items) const;
 	void addGold(int gold) const;
 
 	float getConfiguredMaxVelocityY() const override;

@@ -8,7 +8,6 @@
 
 #include "Enums/EnemyID.h"
 #include "Enums/SpellID.h"
-#include "Enums/ItemID.h"
 
 class Level;
 class LevelMainCharacter;
@@ -37,7 +36,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	
 	void onHit(Spell* spell) override;
-	void setLoot(const std::map<ItemID, int>& items, int gold);
+	void setLoot(const std::map<std::string, int>& items, int gold);
 
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
@@ -96,7 +95,7 @@ private:
 	const float HP_BAR_HEIGHT = 3.f;
 
 	// lootable items 
-	std::map<ItemID, int> m_lootableItems;
+	std::map<std::string, int> m_lootableItems;
 	int m_lootableGold;
 	LootWindow* m_lootWindow = nullptr;
 	bool m_showLootWindow = false;

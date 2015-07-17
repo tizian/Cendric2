@@ -10,7 +10,7 @@ struct LevelEquipmentBean
 {
 	sf::Vector2f spriteOffset;
 	sf::FloatRect boundingBox;
-	ResourceID textureID;
+	std::string texturePath;
 	std::map<GameObjectState, std::vector<sf::IntRect>> texturePositions;
 	sf::Time frameTime;
 };

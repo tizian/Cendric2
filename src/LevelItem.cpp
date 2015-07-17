@@ -1,10 +1,27 @@
 #include "LevelItem.h"
 #include "LevelMainCharacter.h"
 
-void LevelItem::load(LevelMainCharacter* mainChar, LevelItemID id)
+void LevelItem::load(LevelMainCharacter* mainChar, const ItemBean& bean, const sf::Vector2f& position)
 {
 	m_mainChar = mainChar;
-	m_levelItemID = id;
+	m_itemID = bean.id;
+
+	Animation idleAnimation;
+	setSpriteOffset(bean.spriteOffset);
+	setBoundingBox(bean.boundingBox);
+	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_levelitems));
+	// add frames
+	for (auto &frame : bean.texturePositions) {
+		idleAnimation.addFrame(frame);
+	}
+	addAnimation(GameObjectState::Idle, idleAnimation);
+	setFrameTime(bean.frameTime);
+	// initial values
+	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
+	playCurrentAnimation(bean.texturePositions.size() > 1);
+
+	setPosition(position - getSpriteOffset());
+	setTooltipText(g_textProvider->getText(bean.id));
 	setDebugBoundingBox(sf::Color::Green);
 }
 
@@ -15,7 +32,7 @@ void LevelItem::onRightClick()
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE)
 	{
 		// pickup, create the correct item or correct amount of gold in the players inventory.
-		if (m_itemID == ItemID::VOID)
+		if (m_itemType == ItemType::Gold)
 		{
 			m_mainChar->addGold(m_goldValue);
 		}
@@ -84,12 +101,3 @@ void LevelItem::setTooltipText(const std::wstring& tooltip)
 	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
 }
 
-void LevelItem::setItemID(ItemID id)
-{
-	m_itemID = id;
-}
-
-void LevelItem::setGoldValue(int goldValue)
-{
-	m_goldValue = goldValue;
-}

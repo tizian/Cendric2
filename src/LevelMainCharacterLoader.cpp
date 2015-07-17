@@ -21,82 +21,57 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 	}
 
 	// the order of the ids in this vector determine the update and rendering order. 
-	vector<LevelEquipmentID> gameData;
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_weapon).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_1).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_2).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_neck).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_back).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_body).getLevelEquipmentID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_head).getLevelEquipmentID());
+	vector<string> gameData;
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_weapon).getID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_1).getID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_2).getID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_neck).getID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_back).getID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_body).getID());
+	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_head).getID());
 
-	for (std::vector<LevelEquipmentID>::iterator it = gameData.begin(); it != gameData.end(); ++it)
+	for (auto& it : gameData)
 	{
-		if ((*it) == LevelEquipmentID::VOID)
+		if (it.empty())
 		{
 			continue;
 		}
 		LevelEquipmentBean equipment;
-		bool useStandardFrames = false;
-		switch (*it)
+		const ItemBean* bean = g_resourceManager->getItemBean(it);
+		if (bean == nullptr)
 		{
-		case LevelEquipmentID::Weapon_icestaff:
-			equipment.textureID = ResourceID::Texture_weapon_icestaff;
-			useStandardFrames = true;
-			break;
-		case LevelEquipmentID::Weapon_rustysword:
-			equipment.textureID = ResourceID::Texture_weapon_rustysword;
-			useStandardFrames = true;
-			break;
-		case LevelEquipmentID::Head_wizardhat_blue:
-			equipment.textureID = ResourceID::Texture_head_wizardhat_blue;
-			useStandardFrames = true;
-			break;
-		case LevelEquipmentID::Head_wizardhat_grey:
-			equipment.textureID = ResourceID::Texture_head_wizardhat_grey;
-			useStandardFrames = true;
-			break;
-		case LevelEquipmentID::Back_purple:
-			equipment.textureID = ResourceID::Texture_back_purple;
-			useStandardFrames = true;
-			break;
-		case LevelEquipmentID::Ring_ringOfLesserHealth:
-			continue;
-		default:
-			// unexpected error
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");
 			return;
 		}
 
-		if (useStandardFrames)
+		equipment.texturePath = bean->spritesheetPath;
+		
+		equipment.spriteOffset = sf::Vector2f(0.f, 0.f);
+		equipment.boundingBox = sf::FloatRect(0, 0, 120, 120);
+		for (int i = 0; i < 8; i++)
 		{
-			equipment.spriteOffset = sf::Vector2f(0.f, 0.f);
-			equipment.boundingBox = sf::FloatRect(0, 0, 120, 120);
-			for (int i = 0; i < 8; i++)
-			{
-				equipment.texturePositions[GameObjectState::Walking].push_back(sf::IntRect(i * 120, 0, 120, 120));
-			}
-			for (int i = 0; i < 2; i++)
-			{
-				equipment.texturePositions[GameObjectState::Idle].push_back(sf::IntRect(960 + i * 120, 0, 120, 120));
-			}
-			for (int i = 0; i < 2; i++)
-			{
-				equipment.texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(1200 + i * 120, 0, 120, 120));
-			}
-			for (int i = 0; i < 5; i++)
-			{
-				equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
-			}
-			equipment.frameTime = sf::seconds(0.07f);
+			equipment.texturePositions[GameObjectState::Walking].push_back(sf::IntRect(i * 120, 0, 120, 120));
 		}
+		for (int i = 0; i < 2; i++)
+		{
+			equipment.texturePositions[GameObjectState::Idle].push_back(sf::IntRect(960 + i * 120, 0, 120, 120));
+		}
+		for (int i = 0; i < 2; i++)
+		{
+			equipment.texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(1200 + i * 120, 0, 120, 120));
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
+		}
+		equipment.frameTime = sf::seconds(0.07f);
 
 		LevelEquipment* levelEquipment = new LevelEquipment();
 		levelEquipment->setBoundingBox(equipment.boundingBox);
 		for (auto &ani : equipment.texturePositions)
 		{
 			Animation animation;
-			animation.setSpriteSheet(g_resourceManager->getTexture(equipment.textureID));
+			animation.setSpriteSheet(g_resourceManager->getTexture(bean->spritesheetPath));
 			for (auto &frame : ani.second) 
 			{
 				animation.addFrame(frame);
@@ -108,8 +83,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 		// initial values
 		levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 		levelEquipment->playCurrentAnimation(true);
-		levelEquipment->loadEquipment(mainCharacter, (*it));
-		levelEquipment->setTextureID(equipment.textureID);
+		levelEquipment->loadEquipment(mainCharacter);
 		screen->addObject(GameObjectType::_LevelEquipment, levelEquipment);
 	}
 }

@@ -1,4 +1,5 @@
 #include "TextProvider.h"
+#include "ResourceManager.h"
 
 using namespace std;
 

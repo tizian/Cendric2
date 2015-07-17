@@ -61,7 +61,7 @@ const Item& CharacterCore::getEquippedItem(ItemType type)
 	return m_equippedItems.at(type);
 }
 
-const Item& CharacterCore::getItem(ItemID id)
+const Item& CharacterCore::getItem(const std::string& id)
 {
 	if (m_items.empty())
 	{
@@ -152,47 +152,58 @@ void CharacterCore::consumeFood(sf::Time& duration, AttributeBean& attributes)
 void CharacterCore::loadEquipmentItems()
 {
 	clearEquippedItems();
-	ItemFactory factory;
 
-	ItemBean newItem = DEFAULT_ITEM;
-	factory.loadItemBean(newItem, m_data.equippedWeapon);
-	m_equippedItems.insert({ ItemType::Equipment_weapon , Item(newItem)});
-
-	newItem = DEFAULT_ITEM;
-	factory.loadItemBean(newItem, m_data.equippedBack);
-	m_equippedItems.insert({ ItemType::Equipment_back, Item(newItem) });
-
-	newItem = DEFAULT_ITEM;
-	factory.loadItemBean(newItem, m_data.equippedBody);
-	m_equippedItems.insert({ ItemType::Equipment_body, Item(newItem) });
-
-	newItem = DEFAULT_ITEM;
-	factory.loadItemBean(newItem, m_data.equippedHead);
-	m_equippedItems.insert({ ItemType::Equipment_head, Item(newItem) });
-
-	newItem = DEFAULT_ITEM;
-	factory.loadItemBean(newItem, m_data.equippedNeck);
-	m_equippedItems.insert({ ItemType::Equipment_neck, Item(newItem) });
-
-	newItem = DEFAULT_ITEM;
-	factory.loadItemBean(newItem, m_data.equippedRing1);
-	m_equippedItems.insert({ ItemType::Equipment_ring_1, Item(newItem) });
-
-	newItem = DEFAULT_ITEM;
-	factory.loadItemBean(newItem, m_data.equippedRing2);
-	m_equippedItems.insert({ ItemType::Equipment_ring_2, Item(newItem) });
+	Item eqWeapon(DEFAULT_ITEM);
+	Item eqBack(DEFAULT_ITEM);
+	Item eqBody(DEFAULT_ITEM);
+	Item eqHead(DEFAULT_ITEM);
+	Item eqNeck(DEFAULT_ITEM);
+	Item eqRing1(DEFAULT_ITEM);
+	Item eqRing2(DEFAULT_ITEM);
+	if (!m_data.equippedWeapon.empty() && g_resourceManager->getItemBean(m_data.equippedWeapon) != nullptr)
+	{
+		eqWeapon = Item(*g_resourceManager->getItemBean(m_data.equippedWeapon));
+	}
+	if (!m_data.equippedBack.empty() && g_resourceManager->getItemBean(m_data.equippedBack) != nullptr)
+	{
+		eqBack = Item(*g_resourceManager->getItemBean(m_data.equippedBack));
+	}
+	if (!m_data.equippedBody.empty() && g_resourceManager->getItemBean(m_data.equippedBody) != nullptr)
+	{
+		eqBody = Item(*g_resourceManager->getItemBean(m_data.equippedBody));
+	}
+	if (!m_data.equippedHead.empty() && g_resourceManager->getItemBean(m_data.equippedHead) != nullptr)
+	{
+		eqHead = Item(*g_resourceManager->getItemBean(m_data.equippedHead));
+	}
+	if (!m_data.equippedNeck.empty() && g_resourceManager->getItemBean(m_data.equippedNeck) != nullptr)
+	{
+		eqNeck = Item(*g_resourceManager->getItemBean(m_data.equippedNeck));
+	}
+	if (!m_data.equippedRing1.empty() && g_resourceManager->getItemBean(m_data.equippedRing1) != nullptr)
+	{
+		eqRing1 = Item(*g_resourceManager->getItemBean(m_data.equippedRing1));
+	}
+	if (!m_data.equippedRing2.empty() && g_resourceManager->getItemBean(m_data.equippedRing2) != nullptr)
+	{
+		eqRing2 = Item(*g_resourceManager->getItemBean(m_data.equippedRing2));
+	}
+	
+	m_equippedItems.insert({ ItemType::Equipment_weapon, eqWeapon });
+	m_equippedItems.insert({ ItemType::Equipment_back, eqBack });
+	m_equippedItems.insert({ ItemType::Equipment_body, eqBody });
+	m_equippedItems.insert({ ItemType::Equipment_head, eqHead });
+	m_equippedItems.insert({ ItemType::Equipment_neck, eqNeck });
+	m_equippedItems.insert({ ItemType::Equipment_ring_1, eqRing1 });
+	m_equippedItems.insert({ ItemType::Equipment_ring_2, eqRing2 });
 }
 
 void CharacterCore::loadItems()
 {
 	clearItems();
-	ItemBean newItem;
-	ItemFactory factory;
 	for (auto &it : m_data.items)
 	{
-		newItem = DEFAULT_ITEM;
-		factory.loadItemBean(newItem, it.first);
-		m_items.insert({ it.first, Item(newItem) });
+		m_items.insert({ it.first, Item(*g_resourceManager->getItemBean(it.first)) });
 	}
 }
 
@@ -215,7 +226,7 @@ AttributeBean* CharacterCore::getTotalAttributes()
 	return &m_totalAttributes;
 }
 
-std::map<ItemID, int>* CharacterCore::getItems()
+std::map<std::string, int>* CharacterCore::getItems()
 {
 	return &(m_data.items);
 }

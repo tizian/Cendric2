@@ -15,3 +15,6 @@ http://codereview.stackexchange.com/questions/24196/correctly-import-csv-data-ev
 
 Tile Spacing:
 http://registry.gimp.org/node/24816
+
+Lighting:
+http://gamedev.stackexchange.com/questions/22159/can-i-achieve-a-torchlight-effect-lighter-area-around-a-light-source-in-a-2d-g

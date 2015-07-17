@@ -188,7 +188,7 @@ std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) cons
 	{
 		string item = string(ITEM_ID);
 		item.append(":");
-		item.append(to_string(static_cast<int>(it.first)));
+		item.append(it.first);
 		item.append(",");
 		item.append(to_string(it.second));
 		item.append("\n");
@@ -201,13 +201,13 @@ std::string CharacterCoreWriter::writeEquippedItems(const CharacterCoreData& dat
 {
 	string equipment = "# equipment:\n";
 
-	equipment.append(string(EQUIPPED_BACK) + ":" + to_string(static_cast<int>(data.equippedBack)) + "\n");
-	equipment.append(string(EQUIPPED_BODY) + ":" + to_string(static_cast<int>(data.equippedBody)) + "\n");
-	equipment.append(string(EQUIPPED_HEAD) + ":" + to_string(static_cast<int>(data.equippedHead)) + "\n");
-	equipment.append(string(EQUIPPED_NECK) + ":" + to_string(static_cast<int>(data.equippedNeck)) + "\n");
-	equipment.append(string(EQUIPPED_RING_1) + ":" + to_string(static_cast<int>(data.equippedRing1)) + "\n");
-	equipment.append(string(EQUIPPED_RING_2) + ":" + to_string(static_cast<int>(data.equippedRing2)) + "\n");
-	equipment.append(string(EQUIPPED_WEAPON) + ":" + to_string(static_cast<int>(data.equippedWeapon)) + "\n");
+	equipment.append(string(EQUIPPED_BACK) + ":" + data.equippedBack + "\n");
+	equipment.append(string(EQUIPPED_BODY) + ":" + data.equippedBody + "\n");
+	equipment.append(string(EQUIPPED_HEAD) + ":" + data.equippedHead + "\n");
+	equipment.append(string(EQUIPPED_NECK) + ":" + data.equippedNeck + "\n");
+	equipment.append(string(EQUIPPED_RING_1) + ":" + data.equippedRing1 + "\n");
+	equipment.append(string(EQUIPPED_RING_2) + ":" + data.equippedRing2 + "\n");
+	equipment.append(string(EQUIPPED_WEAPON) + ":" + data.equippedWeapon + "\n");
 
 	return equipment;
 }

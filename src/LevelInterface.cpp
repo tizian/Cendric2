@@ -184,7 +184,7 @@ void LevelInterface::updateInventory()
 			m_core->loadItems();
 			for (auto it : m_core->getData().items)
 			{
-				inventoryText.append(g_textProvider->getText(m_core->getItem(it.first).getName()));
+				inventoryText.append(g_textProvider->getText(m_core->getItem(it.first).getID()));
 				inventoryText.append(L": ");
 				inventoryText.append(std::to_wstring(it.second));
 				inventoryText.append(L"\n");

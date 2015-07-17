@@ -2,6 +2,8 @@
 #include "Level.h"
 #include "LevelMainCharacter.h"
 
+using namespace std;
+
 Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMovableGameObject(level)
 {
 	m_id = id;
@@ -312,7 +314,7 @@ float Enemy::getConfiguredDistanceToHPBar() const
 	return 20.f;
 }
 
-void Enemy::setLoot(const std::map<ItemID, int>& items, int gold)
+void Enemy::setLoot(const std::map<string, int>& items, int gold)
 {
 	m_lootableItems = items;
 	m_lootableGold = gold;

@@ -7,10 +7,7 @@
 #include "FileIO/CharacterCoreReader.h"
 #include "FileIO/CharacterCoreWriter.h"
 #include "Item.h"
-#include "ItemFactory.h"
 
-#include "Enums/ItemID.h"
-#include "Enums/LevelEquipmentID.h"
 #include "Structs/AttributeBean.h"
 #include "Structs/CharacterCoreData.h"
 
@@ -25,7 +22,7 @@ public:
 	// returns the currently equipped item of type 'type'
 	const Item& getEquippedItem(ItemType type);
 	// returns the item of id "id"
-	const Item& getItem(ItemID id);
+	const Item& getItem(const std::string& id);
 	NPCState getNPCState(NPCID id);
 	QuestState getQuestState(QuestID id);
 	void setNPCState(NPCID id, NPCState state);
@@ -45,7 +42,7 @@ public:
 	// base attributes plus the attributes gotten by equipment
 	AttributeBean* getTotalAttributes();
 	// getter for items
-	std::map<ItemID, int>* getItems();
+	std::map<std::string, int>* getItems();
 	// add gold to the data
 	void addGold(int gold);
 	// sets health to max health
@@ -73,7 +70,7 @@ private:
 	// a vector to store the attributes given by food. if their time runs out, they get removed from the total attributes.
 	std::pair<sf::Time, AttributeBean> m_foodAttributes;
 
-	std::map<ItemID, Item> m_items;
+	std::map<std::string, Item> m_items;
 	std::map<ItemType, Item> m_equippedItems;
 
 	CharacterCoreData m_data;

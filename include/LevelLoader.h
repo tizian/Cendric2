@@ -4,7 +4,6 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "DynamicTiles/WaterTile.h"
 #include "DynamicTiles/IceTile.h"
 #include "DynamicTiles/CrumblyBlockTile.h"
 #include "DynamicTiles/TorchTile.h"
@@ -14,12 +13,9 @@
 #include "DynamicTiles/SimulatedWaterTile.h"
 
 #include "Enums/DynamicTileID.h"
-#include "Enums/LevelItemID.h"
-#include "Enums/ItemID.h"
 #include "Enums/EnemyID.h"
 
 #include "Structs/LevelData.h"
-#include "Structs/LevelItemBean.h"
 
 class Level;
 

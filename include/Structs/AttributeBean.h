@@ -2,9 +2,10 @@
 
 struct AttributeBean
 {
+	int currentHealthPoints;
+
 	// total attributes
 	int maxHealthPoints;
-	int currentHealthPoints;
 	int healthRegenerationPerS;
 	int haste;
 	int critical;

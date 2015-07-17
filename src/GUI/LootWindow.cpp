@@ -1,4 +1,5 @@
 #include "GUI/LootWindow.h"
+#include "ResourceManager.h"
 
 using namespace std;
 
@@ -13,20 +14,17 @@ LootWindow::~LootWindow()
 	delete m_lootText;
 }
 
-void LootWindow::loadItemNames(const std::map<ItemID, int>& loot, std::map<ItemID, std::wstring>& names) const
+void LootWindow::loadItemNames(const std::map<std::string, int>& loot, std::map<std::string, std::wstring>& names) const
 {
 	names.clear();
-	ItemBean newItem;
-	ItemFactory factory;
 	for (auto &it : loot)
 	{
-		newItem = DEFAULT_ITEM;
-		factory.loadItemBean(newItem, it.first);
-		names.insert({ it.first, g_textProvider->getText(Item(newItem).getName()) });
+		const ItemBean* bean = g_resourceManager->getItemBean(it.first);
+		names.insert({ it.first, g_textProvider->getText(bean->id) });
 	}
 }
 
-void LootWindow::setLoot(const std::map<ItemID, int>& loot, int gold)
+void LootWindow::setLoot(const std::map<string, int>& loot, int gold)
 {
 	delete m_lootText;
 	wstring lootText = L"";
@@ -35,7 +33,7 @@ void LootWindow::setLoot(const std::map<ItemID, int>& loot, int gold)
 	lootText.append(std::to_wstring(gold));
 	lootText.append(L"\n\n");
 	// reload
-	std::map<ItemID, std::wstring> names;
+	std::map<std::string, std::wstring> names;
 	loadItemNames(loot, names);
 	for (auto &it : loot)
 	{

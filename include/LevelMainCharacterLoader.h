@@ -9,7 +9,6 @@
 #include "Level.h"
 #include "LevelEquipment.h"
 
-#include "Enums/LevelEquipmentID.h"
 #include "Structs/LevelEquipmentBean.h"
 
 // helper class used by the game screan to load the main character including his weapon / equipment.

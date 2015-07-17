@@ -16,18 +16,18 @@ LevelReader::~LevelReader()
 void LevelReader::initMaps()
 {
 	m_levelItemMap.insert({
-		{ 0, LevelItemID::Void },
-		{ 1, LevelItemID::Food_CaveBerry },
-		{ 2, LevelItemID::Misc_GoldenGoblet },
-		{ 3, LevelItemID::Gold_OneCoin },
-		{ 4, LevelItemID::Quest_Letter },
-		{ 5, LevelItemID::EQ_Ring_RingOfLesserHealth },
-		{ 26, LevelItemID::Food_HealingHerb },
-		{ 27, LevelItemID::Food_GlowingShroom }, 
-		{ 28, LevelItemID::Gold_ThreeCoins },
-		{ 29, LevelItemID::Food_Water },
-		{ 49, LevelItemID::Food_Cheese },
-		{ 50, LevelItemID::Food_Bread },
+		{ 0, "" },
+		{ 1, "it_fo_caveberry" },
+		{ 2, "it_mi_goldengoblet" },
+		{ 3, "it_go_onecoin" },
+		{ 4, "it_qe_letter" },
+		{ 5, "it_eq_ringoflesserhealth" },
+		{ 26, "it_fo_healingherb" },
+		{ 27, "it_fo_glowingshroom" }, 
+		{ 28, "it_go_threecoins" },
+		{ 29, "it_fo_water" },
+		{ 49, "it_fo_cheese" },
+		{ 50, "it_fo_bread" },
 	});
 	m_enemyMap.insert({
 		{ 0, EnemyID::Void },
@@ -388,7 +388,7 @@ bool LevelReader::readLayerLevelItems(char* start, char* end, LevelData& data) c
 	startData = gotoNextChar(start, end, ',');
 	startData++;
 
-	LevelItemID levelItem;
+	string levelItem;
 	while (startData != NULL)
 	{
 		int id = atoi(startData);
@@ -706,12 +706,12 @@ void LevelReader::updateData(LevelData& data)  const
 	y = 0;
 
 	// calculate level items
-	for (std::vector<LevelItemID>::iterator it = data.levelItems.begin(); it != data.levelItems.end(); ++it)
+	for (std::vector<string>::iterator it = data.levelItems.begin(); it != data.levelItems.end(); ++it)
 	{
-		LevelItemID id = (*it);
-		if (id != LevelItemID::Void)
+		string id = (*it);
+		if (!id.empty())
 		{
-			data.levelItemPositions.push_back(std::pair<LevelItemID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
+			data.levelItemPositions.push_back(std::pair<string, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
 		}
 		if (x + 1 >= data.mapSize.x)
 		{

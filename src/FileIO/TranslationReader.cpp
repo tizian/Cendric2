@@ -1,4 +1,5 @@
 #include "FileIO/TranslationReader.h"
+#include "ResourceManager.h"
 
 using namespace std;
 

@@ -16,5 +16,7 @@ enum class ItemType
 	Quest,
 	Document,
 	Misc,
+	// Gold items are converted to gold at pickup time (examples include cold coin, three gold coins, treasure...)
+	Gold,
 	MAX
 };

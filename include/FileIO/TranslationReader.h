@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "FileIO/CSVReader.h"
-#include "ResourceManager.h"
 
 #include "Enums/Language.h"
 
