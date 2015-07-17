@@ -65,10 +65,10 @@ bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const
 		// item type
 		item.type = static_cast<ItemType>(atoi(columns[2].c_str()));
 		// icon texture location
-		if (!columns[3].empty() && columns[3].find(",") != string::npos)
+		if (!columns[3].empty() && columns[3].find(",") != string::npos && columns[3].find(",") + 1 < columns[3].size())
 		{
 			item.iconTextureLocation.x = atoi(columns[3].c_str());
-			item.iconTextureLocation.y = atoi(columns[3].substr(columns[3].find(",")).c_str());
+			item.iconTextureLocation.y = atoi(columns[3].substr(columns[3].find(",") + 1).c_str());
 		}
 		// gold value
 		item.goldValue = atoi(columns[4].c_str());
@@ -92,10 +92,10 @@ bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const
 
 
 		// sprite offset
-		if (!columns[20].empty() && columns[20].find(",") != string::npos)
+		if (!columns[20].empty() && columns[20].find(",") != string::npos && columns[20].find(",") + 1 < columns[20].size())
 		{
 			item.spriteOffset.x = static_cast<float>(atoi(columns[20].c_str()));
-			item.spriteOffset.y = static_cast<float>(atoi(columns[20].substr(columns[20].find(",")).c_str()));
+			item.spriteOffset.y = static_cast<float>(atoi(columns[20].substr(columns[20].find(",") + 1).c_str()));
 		}
 		// level item bounding box
 		if (!columns[21].empty())
