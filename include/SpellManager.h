@@ -5,32 +5,33 @@
 #include "global.h"
 #include "Spell.h"
 #include "InputController.h"
-#include "Spells/FireSpell.h"
-#include "Spells/ChopSpell.h"
-#include "Spells/IceSpell.h"
-#include "Spells/ForcefieldSpell.h"
-#include "Spells/UnlockSpell.h"
+#include "Structs/SpellModifier.h"
+#include "SpellCreator.h"
+#include "SpellCreators/FireBallSpellCreator.h"
+#include "SpellCreators/IceBallSpellCreator.h"
+#include "SpellCreators/DivineShieldSpellCreator.h"
+#include "SpellCreators/AureolaSpellCreator.h"
+#include "SpellCreators/ChopSpellCreator.h"
 
-// a class that decides whether a spell can be cast or not and adds modifiers. It also draws a part of the gui.
+// a class that decides whether a spell can be cast or not and holds the creators for the corresponding spells
 class SpellManager
 {
 public:
-	SpellManager(const AttributeBean* bean);
+	SpellManager(LevelMovableGameObject* owner);
 	~SpellManager();
 
 	void update(sf::Time frameTime);
-	void render(sf::RenderTarget &renderTarget);
-	void addSpell(SpellBean& spell);
+	void addSpell(const SpellBean& spell);
+	void addSpell(const SpellBean& spell, const std::vector<SpellModifier>& modifiers);
 	void setCurrentSpell(SpellID id);
-	// returns a spell vector that can be added to the game screen. If the spell cannot be cast because of cd, returns an empty vector
-	const std::vector<Spell*>& getSpells();
+	// triggers the spell creator & executes the current spell if it are not on cooldown
+	void executeCurrentSpell(const sf::Vector2f& target);
 	
 private:
-	// updates the spells damage, using the mobs attributes. It adds damage and calculates critical hits
-	void updateDamage(DamageType type, SpellBean& bean) const;
+	
+	SpellCreator* getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers);
 	SpellID m_currentSpell;
 	std::map<SpellID, sf::Time> m_coolDownMap;
-	std::map<SpellID, SpellBean> m_spellMap;
-	std::vector<Spell*> m_spellHolder;
-	const AttributeBean* m_attributeBean;
+	std::map<SpellID, SpellCreator*> m_spellMap;
+	LevelMovableGameObject* m_owner;
 };

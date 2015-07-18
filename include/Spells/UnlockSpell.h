@@ -7,16 +7,11 @@ class UnlockSpell : public Spell
 {
 public:
 	UnlockSpell();
-	void load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle) override;
 
-	float getConfiguredMaxVelocityY() const override;
-	float getConfiguredMaxVelocityX() const override;
 	const sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredIsAttachedToMob() const override;
-	bool getConfiguredTriggerFightAnimation() const override;
 	bool getConfiguredRotateSprite() const override;
-	SpellID getConfiguredSpellID() const override;
-	DamageType getConfiguredDamageType() const override;
 
 private:
 };

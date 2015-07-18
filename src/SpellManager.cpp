@@ -2,64 +2,46 @@
 
 using namespace std;
 
-SpellManager::SpellManager(const AttributeBean* bean)
+SpellManager::SpellManager(LevelMovableGameObject* owner)
 {
 	m_currentSpell = SpellID::Chop;
-	m_attributeBean = bean;
+	m_owner = owner;
 }
 
 SpellManager::~SpellManager()
 {
+	for (auto& it : m_spellMap)
+	{
+		delete it.second;
+	}
 	m_spellMap.clear();
 	m_coolDownMap.clear();
 }
 
-void SpellManager::addSpell(SpellBean& spell)
+void SpellManager::addSpell(const SpellBean& spell)
 {
-	m_spellMap.insert({ spell.id, spell });
-	m_coolDownMap.insert({ spell.id, sf::Time::Zero });
+	addSpell(spell, std::vector<SpellModifier>());
 }
 
-const std::vector<Spell*>& SpellManager::getSpells()
+void SpellManager::addSpell(const SpellBean& spell, const std::vector<SpellModifier>& modifiers)
 {
-	m_spellHolder.clear();
+	// only one spell is allowed per spell id. This check is only
+	// to assure that there are no more spellcreators created with "new" than
+	// there are deleted in the destructor.
+	if (m_spellMap.find(spell.id) == m_spellMap.end())
+	{
+		m_spellMap.insert({ spell.id, getSpellCreator(spell, modifiers) });
+		m_coolDownMap.insert({ spell.id, sf::Time::Zero });
+	}
+}
 
-	if (m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return m_spellHolder;
+void SpellManager::executeCurrentSpell(const sf::Vector2f& target)
+{
+	if (m_currentSpell == SpellID::VOID || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
 	
 	// spell has been cast. set cooldown.
-	m_coolDownMap[m_currentSpell] = m_spellMap[m_currentSpell].cooldown * m_attributeBean->cooldownMultiplier;
-
-	for (int i = 0; i < m_spellMap[m_currentSpell].amount; i++)
-	{
-		Spell* newSpell;
-		switch (m_currentSpell)
-		{
-		case SpellID::Chop:
-			newSpell = new ChopSpell();
-			break;
-		case SpellID::Fire:
-			newSpell = new FireSpell();
-			break;
-		case SpellID::Ice:
-			newSpell = new IceSpell();
-			break;
-		case SpellID::Forcefield:
-			newSpell = new ForcefieldSpell();
-			break;
-		case SpellID::Unlock:
-			newSpell = new UnlockSpell();
-			break;
-		default:
-			return m_spellHolder;
-		}
-
-		SpellBean spellBean = m_spellMap[m_currentSpell];
-		updateDamage(newSpell->getConfiguredDamageType(), spellBean);
-		newSpell->init(spellBean);
-		m_spellHolder.push_back(newSpell);
-	}
-
-	return m_spellHolder;
+	m_coolDownMap[m_currentSpell] = m_spellMap[m_currentSpell]->getSpellCooldown() * m_owner->getAttributes()->cooldownMultiplier;
+	m_spellMap[m_currentSpell]->executeSpell(target);
 }
 
 void SpellManager::update(sf::Time frameTime)
@@ -77,41 +59,31 @@ void SpellManager::setCurrentSpell(SpellID id)
 	m_currentSpell = id;
 }
 
-void SpellManager::updateDamage(DamageType type, SpellBean& bean) const
+SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers)
 {
-	switch (type)
+	SpellCreator* creator;
+	switch (bean.id)
 	{
-	case DamageType::Physical:
-		bean.damage = bean.damage + m_attributeBean->damagePhysical;
+	case SpellID::Chop:
+		creator = new ChopSpellCreator(bean, m_owner);
 		break;
-	case DamageType::Fire:
-		bean.damage = bean.damage + m_attributeBean->damageFire;
+	case SpellID::FireBall:
+		creator = new FireBallSpellCreator(bean, m_owner);
 		break;
-	case DamageType::Ice:
-		bean.damage = bean.damage + m_attributeBean->damageIce;
+	case SpellID::IceBall:
+		creator = new IceBallSpellCreator(bean, m_owner);
 		break;
-	case DamageType::Shadow:
-		bean.damage = bean.damage + m_attributeBean->damageShadow;
+	case SpellID::DivineShield:
+		creator = new DivineShieldSpellCreator(bean, m_owner);
 		break;
-	case DamageType::Light:
-		bean.damage = bean.damage + m_attributeBean->damageLight;
+	case SpellID::Aureola:
+		creator = new AureolaSpellCreator(bean, m_owner);
 		break;
 	default:
-		return;
+		return nullptr;
 	}
 
-	// add randomness to damage (something from 80 - 120% of the base damage)
-	bean.damage = static_cast<int>(bean.damage * ((rand() % 41 + 80.f) / 100.f));   
-
-	// add critical hit to damage
-	int chance = rand() % 100 + 1;
-	if (chance <= m_attributeBean->criticalHitChance)
-	{
-		bean.damage *= 2;
-	}
-}
-
-void SpellManager::render(sf::RenderTarget &renderTarget)
-{
-	// TODO render gui
+	creator->addModifiers(modifiers);
+	
+	return creator;
 }

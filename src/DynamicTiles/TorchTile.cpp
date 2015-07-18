@@ -37,13 +37,13 @@ void TorchTile::load(int skinNr)
 
 void TorchTile::onHit(Spell* spell)
 {
-	switch (spell->getConfiguredSpellID())
+	switch (spell->getSpellID())
 	{
 	case SpellID::Chop:
 		spell->setDisposed();
 		setDisposed();
 		break;
-	case SpellID::Ice:
+	case SpellID::IceBall:
 		if (m_state == GameObjectState::Burning)
 		{
 			m_state = GameObjectState::Idle;
@@ -51,7 +51,7 @@ void TorchTile::onHit(Spell* spell)
 			spell->setDisposed();
 		}
 		break;
-	case SpellID::Fire:
+	case SpellID::FireBall:
 		if (m_state == GameObjectState::Idle)
 		{
 			m_state = GameObjectState::Burning;

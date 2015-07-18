@@ -16,24 +16,24 @@ void FireRatEnemy::loadAttributes()
 	m_attributes->resistanceIce = -20;
 	m_attributes->calculateAttributes();
 
-	m_immuneSpells.push_back(SpellID::Fire);
+	m_immuneDamageTypes.push_back(DamageType::Fire);
 }
 
 void FireRatEnemy::loadSpells()
 {
 	SpellBean chopSpell = DEFAULT_CHOP;
 	chopSpell.damage = 15;
-	chopSpell.maxActiveTime = sf::milliseconds(500);
+	chopSpell.duration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
 
-	SpellBean fireSpell = DEFAULT_FIRE;
-	fireSpell.damage = 10;
-	fireSpell.cooldown = sf::milliseconds(3000);
-	fireSpell.startVelocity = 200.f;
+	SpellBean fireBallSpell = DEFAULT_FIREBALL;
+	fireBallSpell.damage = 10;
+	fireBallSpell.cooldown = sf::milliseconds(3000);
+	fireBallSpell.startVelocity = 200.f;
 
 	m_spellManager->addSpell(chopSpell);
-	m_spellManager->addSpell(fireSpell);
+	m_spellManager->addSpell(fireBallSpell);
 	m_spellManager->setCurrentSpell(SpellID::Chop);
 }
 
@@ -46,32 +46,13 @@ void FireRatEnemy::handleAttackInput()
 {
 	if (distToMainChar() < getConfiguredAggroRange())
 	{
-		m_spellManager->setCurrentSpell(SpellID::Fire);
+		m_spellManager->setCurrentSpell(SpellID::FireBall);
 		if (distToMainChar() < 100.f)
 		{
 			m_spellManager->setCurrentSpell(SpellID::Chop);
 		}
 
-		std::vector<Spell*> holder = m_spellManager->getSpells();
-
-		if (!holder.empty())
-		{
-			int div = 0;
-			int sign = 1;
-			for (auto& it : holder)
-			{
-				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
-				m_screen->addObject(GameObjectType::_Spell, it);
-				sign = -sign;
-				if (sign == -1)
-				{
-					div += 1;
-				}
-			}
-			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = getConfiguredFightAnimationTime();
-			}
-		}
+		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 	}
 }
 

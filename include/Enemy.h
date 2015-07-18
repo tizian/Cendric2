@@ -8,6 +8,7 @@
 
 #include "Enums/EnemyID.h"
 #include "Enums/SpellID.h"
+#include "Enums/DamageType.h"
 
 class Level;
 class LevelMainCharacter;
@@ -55,8 +56,8 @@ protected:
 	EnemyID m_id;
 	// spells from these enemies won't hurt. default is its own type.
 	std::vector<EnemyID> m_immuneEnemies;
-	// spells of these types won't hurt. default is empty.
-	std::vector<SpellID> m_immuneSpells;
+	// spells of these damage types won't hurt. default is empty.
+	std::vector<DamageType> m_immuneDamageTypes;
 	
 	// AI
 	EnemyState m_enemyState;
@@ -70,7 +71,6 @@ protected:
 	virtual bool getConfiguredFleeCondition() const;
 	// how near does an enemy go to the abyss until it stops? default is 10.f. Can be 0 for unflinching enemies
 	virtual float getConfiguredDistanceToAbyss() const;
-	virtual sf::Time getConfiguredFightAnimationTime() const = 0;
 	// the distance from the center of the enemy to the center of the main char at which the enemy approaches the main char.
 	virtual float getConfiguredApproachingDistance() const = 0;
 	// the target to be destroyed!

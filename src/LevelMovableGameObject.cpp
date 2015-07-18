@@ -172,7 +172,7 @@ void LevelMovableGameObject::onHit(Spell* spell)
 		return;
 	}
 	int damage = 0;
-	switch (spell->getConfiguredDamageType())
+	switch (spell->getDamageType())
 	{
 	case DamageType::Physical:
 		damage = static_cast<int>(spell->getDamage() * m_attributes->physicalMultiplier);
@@ -204,6 +204,11 @@ void LevelMovableGameObject::setDead()
 {
 	m_attributes->currentHealthPoints = 0;
 	m_isDead = true;
+}
+
+void LevelMovableGameObject::setFightAnimationTime()
+{
+	m_fightAnimationTime = getConfiguredFightAnimationTime();
 }
 
 Level* LevelMovableGameObject::getLevel() const
@@ -249,6 +254,11 @@ float LevelMovableGameObject::getConfiguredDampingAirPerS() const
 SpellManager* LevelMovableGameObject::getSpellManager() const
 {
 	return m_spellManager;
+}
+
+const AttributeBean* LevelMovableGameObject::getAttributes() const
+{
+	return m_attributes;
 }
 
 void LevelMovableGameObject::setSpriteColor(const sf::Color& color, const sf::Time& time)

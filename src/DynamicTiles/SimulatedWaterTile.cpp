@@ -154,13 +154,13 @@ void SimulatedWaterTile::render(sf::RenderTarget& target)
 
 void SimulatedWaterTile::onHit(Spell* spell)
 {
-	auto id = spell->getConfiguredSpellID();
+	auto id = spell->getSpellID();
 
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
 	bool frozen = isFrozen(index);
 	bool doSplash = true;
 
-	if (id == SpellID::Ice)
+	if (id == SpellID::IceBall)
 	{
 		if (!frozen)
 		{
@@ -169,7 +169,7 @@ void SimulatedWaterTile::onHit(Spell* spell)
 		}
 		doSplash = false;
 	}
-	else if (id == SpellID::Fire)
+	else if (id == SpellID::FireBall)
 	{
 		if (frozen) {
 			doSplash = false;

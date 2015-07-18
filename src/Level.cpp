@@ -102,6 +102,11 @@ void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& sta
 void Level::drawForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
 {
 	m_foregroundTileMap.draw(target, states);
+	// dynamic tiles
+	for (auto &it : (*m_dynamicTiles))
+	{
+		it->renderAfterForeground(target);
+	}
 }
 
 const sf::FloatRect& Level::getLevelRect() const

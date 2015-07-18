@@ -28,9 +28,9 @@ void IceTile::load(int skinNr)
 
 void IceTile::onHit(Spell* spell)
 {
-	switch (spell->getConfiguredSpellID())
+	switch (spell->getSpellID())
 	{
-	case SpellID::Fire:
+	case SpellID::FireBall:
 		spell->setDisposed();
 		setDisposed();
 		break;

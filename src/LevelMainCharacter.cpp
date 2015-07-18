@@ -2,7 +2,6 @@
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level)
 {
-	load();
 }
 
 LevelMainCharacter::~LevelMainCharacter()
@@ -24,26 +23,7 @@ void LevelMainCharacter::handleAttackInput()
 	// handle attack input
 	if (g_inputController->isMouseJustPressedLeft())
 	{
-		std::vector<Spell*> holder = m_spellManager->getSpells();
-
-		if (!holder.empty())
-		{
-			int div = 0;
-			int sign = 1;
-			for (auto& it : holder)
-			{
-				it->load(getLevel(), this, g_inputController->getMousePosition(), div * sign);
-				m_screen->addObject(GameObjectType::_Spell, it);
-				sign = -sign;
-				if (sign == -1)
-				{
-					div += 1;
-				}
-			}
-			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = sf::milliseconds(5 * 70); // duration of fight animation
-			}
-		}
+		m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
 	}
 }
 
@@ -79,26 +59,46 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 	m_keyMap.insert(
 	{
 		{ Key::Chop, SpellID::Chop },
-		{ Key::FirstSpell, SpellID::Ice },
-		{ Key::SecondSpell, SpellID::Fire },
-		{ Key::ThirdSpell, SpellID::Forcefield },
-		{ Key::FourthSpell, SpellID::VOID },
+		{ Key::FirstSpell, SpellID::IceBall },
+		{ Key::SecondSpell, SpellID::FireBall },
+		{ Key::ThirdSpell, SpellID::DivineShield },
+		{ Key::FourthSpell, SpellID::Aureola },
 		{ Key::FifthSpell, SpellID::VOID },
 	});
 
-	// these values should be modified by a staff
-	SpellBean fireSpell = DEFAULT_FIRE;
-	fireSpell.amount = 3;
-	fireSpell.reflectCount = 2;
+	// TODO these values should be come from the staff
+	SpellBean fireSpell = DEFAULT_FIREBALL;
 	SpellBean chopSpell = DEFAULT_CHOP;
-	SpellBean forcefieldSpell = DEFAULT_FORCEFIELD;
-	SpellBean iceSpell = DEFAULT_ICE;
+	SpellBean divineShieldSpell = DEFAULT_DIVINESHIELD;
+	SpellBean iceSpell = DEFAULT_ICEBALL;
+	SpellBean aureolaSpell = DEFAULT_AUREOLA;
 
-	m_spellManager = new SpellManager(m_attributes);
+	// TODO these modifiers should come from a staff, too
+	SpellModifier level2DamageModifier;
+	level2DamageModifier.level = 2;
+	level2DamageModifier.type = SpellModifierType::Damage;
+	SpellModifier level1CountModifier;
+	level1CountModifier.level = 1;
+	level1CountModifier.type = SpellModifierType::Count;
+	SpellModifier level2ReflectModifier;
+	level2ReflectModifier.level = 2;
+	level2ReflectModifier.type = SpellModifierType::Reflect;
+
+	std::vector<SpellModifier> fireModifiers;
+	fireModifiers.push_back(level2DamageModifier);
+	fireModifiers.push_back(level1CountModifier);
+	fireModifiers.push_back(level2ReflectModifier);
+
+	std::vector<SpellModifier> aureolaModifiers;
+	aureolaModifiers.push_back(level2DamageModifier);
+	aureolaModifiers.push_back(level1CountModifier);
+
+	m_spellManager = new SpellManager(this);
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(iceSpell);
-	m_spellManager->addSpell(forcefieldSpell);
-	m_spellManager->addSpell(fireSpell);
+	m_spellManager->addSpell(divineShieldSpell);
+	m_spellManager->addSpell(fireSpell, fireModifiers);
+	m_spellManager->addSpell(aureolaSpell, aureolaModifiers);
 }
 
 void LevelMainCharacter::load()
@@ -171,6 +171,11 @@ float LevelMainCharacter::getConfiguredMaxVelocityX() const
 float LevelMainCharacter::getConfiguredDampingGroundPersS() const
 {
 	return 0.999f;
+}
+
+sf::Time LevelMainCharacter::getConfiguredFightAnimationTime() const
+{
+	return sf::milliseconds(4 * 70);
 }
 
 GameObjectType LevelMainCharacter::getConfiguredType() const

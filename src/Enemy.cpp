@@ -11,7 +11,8 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_immuneEnemies.push_back(id);
 	m_attributes = new AttributeBean(ZERO_ATTRIBUTES);
 	m_enemyState = EnemyState::Idle;
-	m_spellManager = new SpellManager(m_attributes);
+	m_screen = mainChar->getScreen();
+	m_spellManager = new SpellManager(this);
 	
 	// load hp bar
 	m_hpBar.setFillColor(sf::Color::Red);
@@ -103,15 +104,15 @@ void Enemy::onHit(Spell* spell)
 	{
 		return;
 	}
-	// check for immune spells, if yes, the spell will disappear, absorbed by the immuneness of this enemy
-	if (std::find(m_immuneSpells.begin(), m_immuneSpells.end(), spell->getConfiguredSpellID()) != m_immuneSpells.end())
+	// check for immune damage types, if yes, the spell will disappear, absorbed by the immuneness of this enemy
+	if (std::find(m_immuneDamageTypes.begin(), m_immuneDamageTypes.end(), spell->getDamageType()) != m_immuneDamageTypes.end())
 	{
 		spell->setDisposed();
 		return;
 	}
 
 	int damage = 0;
-	switch (spell->getConfiguredDamageType())
+	switch (spell->getDamageType())
 	{
 	case DamageType::Physical:
 		damage = static_cast<int>(spell->getDamage() * m_attributes->physicalMultiplier);

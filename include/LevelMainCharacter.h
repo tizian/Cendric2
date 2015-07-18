@@ -25,6 +25,7 @@ public:
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;
+	sf::Time getConfiguredFightAnimationTime() const override;
 	GameObjectType getConfiguredType() const override;
 
 protected:

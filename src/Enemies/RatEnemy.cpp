@@ -20,7 +20,7 @@ void RatEnemy::loadAttributes()
 void RatEnemy::loadSpells()
 {
 	SpellBean chopSpell = DEFAULT_CHOP;
-	chopSpell.maxActiveTime = sf::milliseconds(500);
+	chopSpell.duration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.damage = 2;
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
@@ -38,26 +38,7 @@ void RatEnemy::handleAttackInput()
 {
 	if (distToMainChar() < 100.f)
 	{
-		std::vector<Spell*> holder = m_spellManager->getSpells();
-
-		if (!holder.empty())
-		{
-			int div = 0;
-			int sign = 1;
-			for (auto& it : holder)
-			{
-				it->load(getLevel(), this, m_mainChar->getCenter(), div * sign);
-				m_screen->addObject(GameObjectType::_Spell, it);
-				sign = -sign;
-				if (sign == -1)
-				{
-					div += 1;
-				}
-			}
-			if (holder.at(0)->getConfiguredTriggerFightAnimation()) {
-				m_fightAnimationTime = getConfiguredFightAnimationTime();
-			}
-		}
+		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 	}
 }
 

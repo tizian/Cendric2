@@ -89,8 +89,6 @@ bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const
 		item.attributes.resistanceLight = atoi(columns[18].c_str());
 		// food duration
 		item.foodDuration = sf::seconds(static_cast<float>(atoi(columns[19].c_str())));
-
-
 		// sprite offset
 		if (!columns[20].empty() && columns[20].find(",") != string::npos && columns[20].find(",") + 1 < columns[20].size())
 		{

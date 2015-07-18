@@ -21,8 +21,8 @@ public:
 	void setVelocityX(float velocityX);
 	void setVelocityY(float velocityY);
 	
-	virtual float getConfiguredMaxVelocityY() const = 0;
-	virtual float getConfiguredMaxVelocityX() const = 0;
+	virtual float getConfiguredMaxVelocityY() const;
+	virtual float getConfiguredMaxVelocityX() const;
 	const sf::Vector2f& getVelocity() const;
 	const sf::Vector2f& getAcceleration() const;
 

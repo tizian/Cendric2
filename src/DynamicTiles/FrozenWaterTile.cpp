@@ -37,9 +37,9 @@ void FrozenWaterTile::load(int skinNr)
 void FrozenWaterTile::onHit(Spell* spell)
 {
 	using std::cout; using std::endl;
-	switch (spell->getConfiguredSpellID())
+	switch (spell->getSpellID())
 	{
-	case SpellID::Fire:
+	case SpellID::FireBall:
 		spell->setDisposed();
 		m_waterTile->melt(m_waterTileIndex);
 		setDisposed();

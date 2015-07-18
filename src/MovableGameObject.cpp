@@ -74,6 +74,16 @@ void MovableGameObject::setVelocityY(float velocityY)
 	m_velocity.y = velocityY;
 }
 
+float MovableGameObject::getConfiguredMaxVelocityY() const
+{
+	return 1000.0f;
+}
+
+float MovableGameObject::getConfiguredMaxVelocityX() const
+{
+	return 1000.0f;
+}
+
 const sf::Vector2f& MovableGameObject::getVelocity() const
 {
 	return m_velocity;

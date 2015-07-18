@@ -25,8 +25,11 @@ public:
 	void addDamage(int damage);
 	// sets the dead bool and sets the attribute health to zero.
 	void setDead();
+	// sets the fight animation time of this mob
+	void setFightAnimationTime();
 
 	SpellManager* getSpellManager() const;
+	const AttributeBean* getAttributes() const;
 	Level* getLevel() const;
 	bool getIsFacingRight() const;
 	bool isDead() const;
@@ -36,6 +39,7 @@ protected:
 
 	virtual float getConfiguredWalkAcceleration() const;
 	virtual float getConfiguredGravityAcceleration() const;
+	virtual sf::Time getConfiguredFightAnimationTime() const = 0;
 	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
 	virtual float getConfiguredDampingGroundPersS() const;
 	virtual float getConfiguredDampingAirPerS() const;

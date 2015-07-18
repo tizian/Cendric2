@@ -34,7 +34,7 @@ void ChestTile::load(int skinNr)
 
 void ChestTile::onHit(Spell* spell)
 {
-	switch (spell->getConfiguredSpellID())
+	switch (spell->getSpellID())
 	{
 	case SpellID::Unlock:
 		if (m_state == GameObjectState::Locked)

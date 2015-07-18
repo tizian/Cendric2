@@ -4,16 +4,24 @@
 
 using namespace std;
 
-const float SPELL_ANGLE = 0.2f;
-
-void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target, int divergence) 
+void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle)
 {
-	m_level = level;
+	m_activeCoolDown = bean.duration;
+	m_damage = bean.damage;
+	m_damageType = bean.damageType;
+	m_reflectCount = bean.reflectCount;
+	m_speed = bean.startVelocity;
+	m_id = bean.id;
+	setBoundingBox(bean.boundingBox);
+	setDebugBoundingBox(sf::Color::Red);
+
+	m_level = mob->getLevel();
 	m_mob = mob;
-	m_ownerType = m_mob->getConfiguredType();
+	m_ownerType = mob->getConfiguredType();
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	
 	if (m_mainChar == nullptr)
 	{
 		g_logger->logError("Spell", "Could not find main character of game screen");
@@ -38,7 +46,7 @@ void Spell::load(Level* level, LevelMovableGameObject* mob, sf::Vector2f target,
 	trueDir.x = (len == 0) ? 0 : trueDir.x / len;
 	trueDir.y = (len == 0) ? 0 : trueDir.y / len;
 
-	sf::Vector2f direction = rotateVector(trueDir, divergence * SPELL_ANGLE);
+	sf::Vector2f direction = rotateVector(trueDir, divergenceAngle);
 
 	if (getConfiguredRotateSprite())
 	{
@@ -73,16 +81,6 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 
 	position.x = (mainCharPosition + offset).x;
 	position.y = (mainCharPosition + offset).y;
-}
-
-void Spell::init(SpellBean& bean) 
-{
-	m_activeCoolDown = bean.maxActiveTime;
-	m_damage = bean.damage;
-	m_reflectCount = bean.reflectCount;
-	m_speed = bean.startVelocity;
-	setBoundingBox(bean.boundingBox);
-	setDebugBoundingBox(sf::Color::Red);
 }
 
 void Spell::update(const sf::Time& frameTime)
@@ -121,11 +119,6 @@ void Spell::update(const sf::Time& frameTime)
 const sf::Vector2f Spell::getConfiguredPositionOffset() const
 {
 	return sf::Vector2f(20.f, 0.f);
-}
-
-bool Spell::getConfiguredTriggerFightAnimation() const
-{
-	return false;
 }
 
 bool Spell::getConfiguredRotateSprite() const
@@ -213,6 +206,16 @@ const sf::Time& Spell::getActiveTime() const
 GameObjectType Spell::getConfiguredType() const
 {
 	return GameObjectType::_Spell;
+}
+
+DamageType Spell::getDamageType() const
+{
+	return m_damageType;
+}
+
+SpellID Spell::getSpellID() const
+{
+	return m_id;
 }
 
 const MovableGameObject* Spell::getOwner() const

@@ -49,7 +49,7 @@ void CrumblyBlockTile::update(const sf::Time& frameTime)
 
 void CrumblyBlockTile::onHit(Spell* spell)
 {
-	switch (spell->getConfiguredSpellID())
+	switch (spell->getSpellID())
 	{
 	case SpellID::Chop:
 		if (m_state == GameObjectState::Idle)

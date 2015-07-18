@@ -39,9 +39,10 @@ void ResourceManager::init()
 		{ ResourceID::Items, "res/items.csv" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
-		{ ResourceID::Texture_spell_fire, "res/assets/spells/spritesheet_spell_fire.png" },
-		{ ResourceID::Texture_spell_forcefield, "res/assets/spells/spritesheet_spell_forcefield.png" },
-		{ ResourceID::Texture_spell_ice, "res/assets/spells/spritesheet_spell_ice.png" },
+		{ ResourceID::Texture_spell_fireball, "res/assets/spells/spritesheet_spell_fireball.png" },
+		{ ResourceID::Texture_spell_divineshield, "res/assets/spells/spritesheet_spell_divineshield.png" },
+		{ ResourceID::Texture_spell_iceball, "res/assets/spells/spritesheet_spell_iceball.png" },
+		{ ResourceID::Texture_spell_aureola, "res/assets/spells/spritesheet_spell_aureola.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
@@ -285,10 +286,10 @@ void ResourceManager::setError(ErrorID id, string& description)
 void ResourceManager::deleteLevelResources()
 {
 	// delete spell resources
-	deleteResource(ResourceID::Texture_spell_fire);
-	deleteResource(ResourceID::Texture_spell_ice);
-	deleteResource(ResourceID::Texture_spell_forcefield);
-	deleteResource(ResourceID::Texture_spell_unlock);
+	deleteResource(ResourceID::Texture_spell_fireball);
+	deleteResource(ResourceID::Texture_spell_iceball);
+	deleteResource(ResourceID::Texture_spell_divineshield);
+	deleteResource(ResourceID::Texture_spell_aureola);
 
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
@@ -313,10 +314,10 @@ void ResourceManager::deleteLevelResources()
 void ResourceManager::loadLevelResources()
 {
 	// load spell resources
-	getTexture(ResourceID::Texture_spell_fire);
-	getTexture(ResourceID::Texture_spell_ice);
-	getTexture(ResourceID::Texture_spell_forcefield);
-	//getTexture(ResourceID::Texture_spell_unlock);
+	getTexture(ResourceID::Texture_spell_fireball);
+	getTexture(ResourceID::Texture_spell_iceball);
+	getTexture(ResourceID::Texture_spell_divineshield);
+	getTexture(ResourceID::Texture_spell_aureola);
 
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_frozenwater);
