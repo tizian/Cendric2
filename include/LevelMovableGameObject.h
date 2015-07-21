@@ -21,8 +21,10 @@ public:
 	virtual sf::Vector2f getConfiguredSpellOffset() const;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 	virtual void onHit(Spell* spell);
-	// adds damage to the attribute health. this damage can be negative (heal)
+	// adds damage to the attribute health. this damage can't be negative
 	void addDamage(int damage);
+	// adds heal to the attribute health. the heal can't be negative
+	void addHeal(int heal);
 	// sets the dead bool and sets the attribute health to zero.
 	void setDead();
 	// sets the fight animation time of this mob

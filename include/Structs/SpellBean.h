@@ -15,6 +15,7 @@ struct SpellBean
 
 	// modifiable by crystal modifiers
 	int damage;
+	int heal;
 	int reflectCount;
 	float startVelocity;
 	int count;
@@ -39,6 +40,7 @@ const struct SpellBean DEFAULT_CHOP =
 
 	2,
 	0,
+	0,
 	0.f,
 	1,
 	sf::milliseconds(320),
@@ -61,6 +63,7 @@ const struct SpellBean DEFAULT_FIREBALL =
 	DamageType::Fire,
 
 	10,
+	0,
 	0,
 	300.f,
 	1,
@@ -85,6 +88,7 @@ const struct SpellBean DEFAULT_ICEBALL =
 
 	6,
 	0,
+	0,
 	300.f,
 	1,
 	sf::milliseconds(5000),
@@ -107,6 +111,7 @@ const struct SpellBean DEFAULT_DIVINESHIELD =
 	DamageType::VOID,
 
 	0,
+	20,
 	0,
 	0.f,
 	1,
@@ -129,6 +134,7 @@ const struct SpellBean DEFAULT_AUREOLA =
 	sf::FloatRect(0, 0, 20, 20),
 	DamageType::Light,
 
+	10,
 	10,
 	0,
 	300.f,

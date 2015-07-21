@@ -8,6 +8,7 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2
 {
 	m_activeCoolDown = bean.duration;
 	m_damage = bean.damage;
+	m_heal = bean.heal;
 	m_damageType = bean.damageType;
 	m_reflectCount = bean.reflectCount;
 	m_speed = bean.startVelocity;
@@ -226,6 +227,11 @@ const MovableGameObject* Spell::getOwner() const
 int Spell::getDamage() const
 {
 	return m_damage;
+}
+
+int Spell::getHeal() const
+{
+	return m_heal;
 }
 
 sf::Vector2f Spell::rotateVector(const sf::Vector2f &vec, float angle)

@@ -151,13 +151,20 @@ void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTim
 
 void LevelMovableGameObject::addDamage(int damage)
 {
-	if (m_state == GameObjectState::Dead) return;
+	if (m_state == GameObjectState::Dead || damage <= 0) return;
 	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints - damage));
 	if (m_attributes->currentHealthPoints == 0)
 	{
 		m_isDead = true;
 	}
 	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
+}
+
+void LevelMovableGameObject::addHeal(int heal)
+{
+	if (m_state == GameObjectState::Dead || heal <= 0) return;
+	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints + heal));
+	setSpriteColor(sf::Color::Green, sf::milliseconds(200));
 }
 
 void LevelMovableGameObject::onHit(Spell* spell)

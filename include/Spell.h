@@ -30,6 +30,7 @@ public:
 	// if true, the spell sprite will be rotated accordingly. default is true.
 	virtual bool getConfiguredRotateSprite() const;
 	int getDamage() const;
+	int getHeal() const;
 	SpellID getSpellID() const;
 	DamageType getDamageType() const;
 	GameObjectType getConfiguredType() const override;
@@ -45,6 +46,7 @@ protected:
 	sf::Time m_activeCoolDown;
 
 	int m_damage;
+	int m_heal;
 	DamageType m_damageType;
 	int m_reflectCount;
 	float m_speed;

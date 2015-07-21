@@ -12,7 +12,11 @@ void DivineShieldSpellCreator::executeSpell(sf::Vector2f target)
 	DivineShieldSpell* newSpell = new DivineShieldSpell();
 	newSpell->load(spellBean, m_owner, g_inputController->getMousePosition(), 0);
 	m_screen->addObject(GameObjectType::_Spell, newSpell);
-	// TODO heal owner
+	
+	m_owner->addHeal(newSpell->getHeal());
 }
 
-// TODO override modifier strength
+void DivineShieldSpellCreator::addStrengthModifier(int level)
+{
+	m_spellBean.heal += 10 * level;
+}

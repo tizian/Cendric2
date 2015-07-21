@@ -26,23 +26,29 @@ void AureolaSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::
 	Spell::load(bean, mob, target, divergenceAngle);
 }
 
+void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const
+{
+	if (m_isReturning)
+	{
+		// an aureola spell will chase its owner.
+		sf::Vector2f dir = m_mob->getCenter() - getPosition();
+		float abs = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+		dir = dir / abs * m_absVel;
+		nextVel.x = dir.x;
+		nextVel.y = dir.y;
+	}
+	else
+	{
+		nextVel.x = getVelocity().x;
+		nextVel.y = getVelocity().y;
+	}
+}
+
 void AureolaSpell::update(const sf::Time& frameTime)
 {
 	calculateNextPosition(frameTime, m_nextPosition);
-
-	if (m_rangeLeft > 0.f)
-	{
-		sf::Vector2f div = m_nextPosition - getPosition();
-		m_rangeLeft -= std::sqrt(div.x * div.x + div.y * div.y);
-		if (m_rangeLeft <= 0.f)
-		{
-			m_rangeLeft = -1.f;
-			setVelocityX(-getVelocity().x);
-			setVelocityY(-getVelocity().y);
-			setRotation(atan2(getVelocity().y, getVelocity().x));
-		}
-	}
-
+	sf::Vector2f div = m_nextPosition - getPosition();
+	
 	// check collisions with main char
 	if (m_ownerType != GameObjectType::_MainCharacter)
 	{
@@ -50,6 +56,12 @@ void AureolaSpell::update(const sf::Time& frameTime)
 	}
 	// check collisions with enemies
 	checkCollisionsWithEnemies(getBoundingBox());
+	// check collisions with owner
+	if (m_isReturning && m_mob->getBoundingBox()->intersects(*getBoundingBox()))
+	{
+		m_mob->addHeal(getHeal());
+		setDisposed();
+	}
 	MovableGameObject::update(frameTime);
 
 	m_activeCoolDown = m_activeCoolDown - frameTime;
@@ -57,6 +69,20 @@ void AureolaSpell::update(const sf::Time& frameTime)
 	if (m_activeCoolDown.asMilliseconds() <= 0)
 	{
 		setDisposed();
+	}
+
+	if (!m_isReturning)
+	{
+		m_rangeLeft -= std::sqrt(div.x * div.x + div.y * div.y);
+		if (m_rangeLeft <= 0.f)
+		{
+			m_isReturning = true;
+			m_absVel = std::sqrt(getVelocity().x * getVelocity().x + getVelocity().y * getVelocity().y);
+		}
+	}
+	else
+	{
+		setRotation(atan2(getVelocity().y, getVelocity().x));
 	}
 }
 
