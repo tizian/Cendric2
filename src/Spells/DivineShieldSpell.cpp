@@ -1,7 +1,13 @@
 #include "Spells/DivineShieldSpell.h"
 
-DivineShieldSpell::DivineShieldSpell() : Spell()
+DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell()
 {
+	m_additionalResistance = ZERO_ATTRIBUTES;
+	m_additionalResistance.resistancePhysical = additionalResistance;
+	m_additionalResistance.resistanceFire = additionalResistance;
+	m_additionalResistance.resistanceIce = additionalResistance;
+	m_additionalResistance.resistanceShadow = additionalResistance;
+	m_additionalResistance.resistanceLight = additionalResistance;
 }
 
 void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle)
@@ -30,6 +36,22 @@ void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob,
 	playCurrentAnimation(true);
 
 	Spell::load(bean, mob, target, 0);
+	m_mob->addAttributes(m_duration, m_additionalResistance);
+}
+
+void DivineShieldSpell::update(const sf::Time& frameTime)
+{
+	calculatePositionAccordingToMob(m_nextPosition);
+	setPosition(m_nextPosition);
+
+	MovableGameObject::update(frameTime);
+
+	m_duration = m_duration - frameTime;
+
+	if (m_duration.asMilliseconds() <= 0)
+	{
+		setDisposed();
+	}
 }
 
 const sf::Vector2f DivineShieldSpell::getConfiguredPositionOffset() const

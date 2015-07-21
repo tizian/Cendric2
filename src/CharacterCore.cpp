@@ -7,18 +7,6 @@ CharacterCore::CharacterCore()
 	m_data = DEFAULT_CORE;
 }
 
-void CharacterCore::update(const sf::Time& frameTime)
-{
-	if (m_foodAttributes.first > sf::Time::Zero)
-	{
-		m_foodAttributes.first -= frameTime;
-		if (m_foodAttributes.first <= sf::Time::Zero)
-		{
-			reloadAttributes();
-		}
-	}
-}
-
 CharacterCore::~CharacterCore()
 {
 	clearEquippedItems();
@@ -127,26 +115,12 @@ bool CharacterCore::createFile(const char* fileName) const
 void CharacterCore::reloadAttributes()
 {
 	m_totalAttributes = m_data.attributes;
-	m_foodAttributes.first = sf::Time::Zero;
-	m_foodAttributes.second = ZERO_ATTRIBUTES;
 	loadEquipmentItems();
 	for (auto &it : m_equippedItems)
 	{
 		m_totalAttributes.addBean(it.second.getAttributes());
 	}
-	if (m_totalAttributes.currentHealthPoints > m_totalAttributes.maxHealthPoints)
-	{
-		m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
-	}
-	m_totalAttributes.calculateAttributes();
-}
-
-void CharacterCore::consumeFood(sf::Time& duration, AttributeBean& attributes)
-{
-	reloadAttributes();
-	m_foodAttributes = pair<sf::Time, AttributeBean>(duration, attributes);
-	m_totalAttributes.addBean(attributes);
-	m_totalAttributes.calculateAttributes();
+	m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 }
 
 void CharacterCore::loadEquipmentItems()
@@ -221,9 +195,9 @@ const CharacterCoreData& CharacterCore::getData() const
 {
 	return m_data;
 }
-AttributeBean* CharacterCore::getTotalAttributes()
+const AttributeBean& CharacterCore::getTotalAttributes() const
 {
-	return &m_totalAttributes;
+	return m_totalAttributes;
 }
 
 std::map<std::string, int>* CharacterCore::getItems()
@@ -234,12 +208,6 @@ std::map<std::string, int>* CharacterCore::getItems()
 void CharacterCore::addGold(int gold)
 {
 	m_data.gold += std::max(gold, 0);
-}
-
-void CharacterCore::resetHealth()
-{
-	m_data.attributes.currentHealthPoints = m_data.attributes.maxHealthPoints;
-	reloadAttributes();
 }
 
 void CharacterCore::setMap(const sf::Vector2f& position, MapID map)

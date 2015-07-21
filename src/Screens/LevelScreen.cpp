@@ -4,7 +4,7 @@
 
 using namespace std;
 
-LevelScreen::LevelScreen(LevelID levelID, CharacterCore* core) : Screen(core), m_interface(core)
+LevelScreen::LevelScreen(LevelID levelID, CharacterCore* core) : Screen(core)
 {
 	m_levelID = levelID;
 }
@@ -22,7 +22,8 @@ void LevelScreen::execOnEnter(const Screen *previousScreen)
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
 	m_currentLevel.loadAfterMainChar(this);
 	loader.loadEquipment(this);
-	m_interface.setSpellManager(m_mainChar->getSpellManager());
+	m_interface = new LevelInterface(m_characterCore, m_mainChar);
+	m_interface->setSpellManager(m_mainChar->getSpellManager());
 }
 
 void LevelScreen::execOnExit(const Screen *nextScreen)
@@ -30,6 +31,7 @@ void LevelScreen::execOnExit(const Screen *nextScreen)
 	m_currentLevel.dispose();
 	delete m_gameOverSprite;
 	delete m_youDied;
+	delete m_interface;
 }
 
 Screen* LevelScreen::update(const sf::Time& frameTime)
@@ -53,15 +55,11 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 
 	if (m_isGameOver && m_retryButton->isClicked())
 	{
-		// be nice!
-		m_characterCore->resetHealth();
 		return new LoadingScreen(m_characterCore->getData().currentLevel, m_characterCore);
 	} 
 
 	if (m_isGameOver && m_backToMenuButton->isClicked())
 	{
-		// be nice!
-		m_characterCore->resetHealth();
 		return new MenuScreen(m_characterCore);
 	}
 
@@ -76,8 +74,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		updateObjects(GameObjectType::_LevelItem, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
 		updateObjects(GameObjectType::_Button, frameTime);
-		m_characterCore->update(frameTime);
-		m_interface.update(frameTime);
+		m_interface->update(frameTime);
 		deleteDisposedObjects();
 		return this;
 	}
@@ -109,7 +106,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
 
 	renderTooltipText(renderTarget);
-	m_interface.render(renderTarget);
+	m_interface->render(renderTarget);
 
 	if (m_isGameOver)
 	{

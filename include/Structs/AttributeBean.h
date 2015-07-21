@@ -52,7 +52,7 @@ struct AttributeBean
 		lightMultiplier = calculateDamageReduction(resistanceLight);
 	}
 
-	// adds the second bean to the this bean
+	// adds the second bean to the this bean. current health points will be added.
 	void addBean(const AttributeBean& secondBean)
 	{
 		damageFire += secondBean.damageFire;
@@ -70,6 +70,37 @@ struct AttributeBean
 		critical += secondBean.critical;
 		healthRegenerationPerS += secondBean.healthRegenerationPerS;
 		currentHealthPoints = (maxHealthPoints < currentHealthPoints + secondBean.currentHealthPoints) ? maxHealthPoints : (currentHealthPoints + secondBean.currentHealthPoints);
+	
+		calculateAttributes();
+	}
+
+	// removes the second bean from the this bean. current health points will not be removed!
+	void removeBean(const AttributeBean& secondBean)
+	{
+		damageFire -= secondBean.damageFire;
+		damageIce -= secondBean.damageIce;
+		damagePhysical -= secondBean.damagePhysical;
+		damageLight -= secondBean.damageLight;
+		damageShadow -= secondBean.damageShadow;
+		resistanceFire -= secondBean.resistanceFire;
+		resistanceIce -= secondBean.resistanceIce;
+		resistancePhysical -= secondBean.resistancePhysical;
+		resistanceLight -= secondBean.resistanceLight;
+		resistanceShadow -= secondBean.resistanceShadow;
+		maxHealthPoints -= secondBean.maxHealthPoints;
+		haste -= secondBean.haste;
+		critical -= secondBean.critical;
+		healthRegenerationPerS -= secondBean.healthRegenerationPerS;
+		currentHealthPoints = std::min(currentHealthPoints, maxHealthPoints);
+
+		calculateAttributes();
+	}
+
+	// sets the current health points and the max points to the health value
+	void setHealth(int health)
+	{
+		maxHealthPoints = health;
+		currentHealthPoints = health;
 	}
 };
 

@@ -35,7 +35,7 @@ public:
 	DamageType getDamageType() const;
 	GameObjectType getConfiguredType() const override;
 
-	const sf::Time& getActiveTime() const;
+	const sf::Time& getDuration() const;
 	const MovableGameObject* getOwner() const;
 
 protected:
@@ -43,7 +43,7 @@ protected:
 	Level* m_level;
 	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.
 	GameObjectType m_ownerType;
-	sf::Time m_activeCoolDown;
+	sf::Time m_duration;
 
 	int m_damage;
 	int m_heal;

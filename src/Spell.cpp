@@ -6,7 +6,7 @@ using namespace std;
 
 void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle)
 {
-	m_activeCoolDown = bean.duration;
+	m_duration = bean.duration;
 	m_damage = bean.damage;
 	m_heal = bean.heal;
 	m_damageType = bean.damageType;
@@ -109,9 +109,9 @@ void Spell::update(const sf::Time& frameTime)
 	checkCollisionsWithEnemies(getBoundingBox());
 	MovableGameObject::update(frameTime);
 	
-	m_activeCoolDown = m_activeCoolDown - frameTime;
+	m_duration = m_duration - frameTime;
 
-	if (m_activeCoolDown.asMilliseconds() <= 0)
+	if (m_duration.asMilliseconds() <= 0)
 	{
 		setDisposed();
 	}
@@ -199,9 +199,9 @@ void Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox)
 	}
 }
 
-const sf::Time& Spell::getActiveTime() const 
+const sf::Time& Spell::getDuration() const 
 {
-	return m_activeCoolDown;
+	return m_duration;
 }
 
 GameObjectType Spell::getConfiguredType() const

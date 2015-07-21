@@ -11,7 +11,7 @@
 class LevelInterface
 {
 public:
-	LevelInterface(CharacterCore* core);
+	LevelInterface(CharacterCore* core, LevelMainCharacter* character);
 
 	// the spell manager of the level main character.
 	void setSpellManager(SpellManager* spellManager);
@@ -21,7 +21,8 @@ public:
 
 private:
 	CharacterCore* m_core;
-	AttributeBean* m_attributes;
+	LevelMainCharacter* m_mainCharacter;
+	const AttributeBean* m_attributes;
 	SpellManager* m_spellManager;
 
 	// <<<< INVENTORY >>>>

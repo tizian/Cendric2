@@ -6,12 +6,14 @@
 class DivineShieldSpell : public Spell
 {
 public:
-	DivineShieldSpell();
+	DivineShieldSpell(int additionalResistance);
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle) override;
+	void update(const sf::Time& frameTime) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredIsAttachedToMob() const override;
 	bool getConfiguredRotateSprite() const override;
 
 private:
+	AttributeBean m_additionalResistance;
 };

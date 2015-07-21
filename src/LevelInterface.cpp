@@ -1,13 +1,15 @@
 #include "LevelInterface.h"
+#include "LevelMainCharacter.h"
 
 int round_int(float r) {
 	return static_cast<int>((r > 0.0) ? (r + 0.5) : (r - 0.5));
 }
 
-LevelInterface::LevelInterface(CharacterCore* core)
+LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character)
 {
 	m_core = core;
-	m_attributes = core->getTotalAttributes();
+	m_mainCharacter = character;
+	m_attributes = m_mainCharacter->getAttributes();
 	initInterfaceBars();
 	initCharacterInfo();
 	initInventory();

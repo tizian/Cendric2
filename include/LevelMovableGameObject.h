@@ -29,6 +29,10 @@ public:
 	void setDead();
 	// sets the fight animation time of this mob
 	void setFightAnimationTime();
+	// the mob consumes a food and gets its bonus attributes for its duration. they may also be negative.
+	void consumeFood(sf::Time& duration, AttributeBean& attributes);
+	// the mob adds these attributes to its own. if their time runs out, they get removed again. The attribute "current health" however will stay.
+	void addAttributes(sf::Time& duration, AttributeBean& attributes);
 
 	SpellManager* getSpellManager() const;
 	const AttributeBean* getAttributes() const;
@@ -63,9 +67,14 @@ protected:
 	// the sprite will reset its color as soon as this time is zero.
 	sf::Time m_coloredTime = sf::Time::Zero;
 
-	AttributeBean* m_attributes;
+	// store attributes given by food. if their time runs out, they get removed from the total attributes.
+	std::pair<sf::Time, AttributeBean> m_foodAttributes;
+	// a vector to store the attributes given by spells (buffs). if their time runs out, they get removed from the total attributes.
+	std::vector<std::pair<sf::Time, AttributeBean>> m_buffAttributes;
 
-	// regeneration (hp)
-	void updateRegeneration(const sf::Time& frameTime);
+	AttributeBean m_attributes;
+
+	// attributes, include regeneration (hp) and all buffs.
+	void updateAttributes(const sf::Time& frameTime);
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
 };

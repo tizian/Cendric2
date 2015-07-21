@@ -5,6 +5,8 @@
 LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject()
 {
 	m_level = level;
+	m_foodAttributes.first = sf::Time::Zero;
+	m_foodAttributes.second = ZERO_ATTRIBUTES;
 }
 
 LevelMovableGameObject::~LevelMovableGameObject()
@@ -43,20 +45,47 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 	updateAnimation();
 	if (!m_isDead)
 	{
-		updateRegeneration(frameTime);
+		updateAttributes(frameTime);
 	}
 }
 
-void LevelMovableGameObject::updateRegeneration(const sf::Time& frameTime)
+void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime)
 {
+	// update food attributes
+	if (m_foodAttributes.first > sf::Time::Zero)
+	{
+		m_foodAttributes.first -= frameTime;
+		if (m_foodAttributes.first <= sf::Time::Zero)
+		{
+			m_foodAttributes.first = sf::Time::Zero;
+			m_attributes.removeBean(m_foodAttributes.second);
+		}
+	}
+
+	// update buff attributes
+	for (int i = 0; i < m_buffAttributes.size();/* don't increment here, we remove on the fly */)
+	{
+		m_buffAttributes[i].first -= frameTime;
+		if (m_buffAttributes[i].first <= sf::Time::Zero)
+		{
+			m_attributes.removeBean(m_buffAttributes[i].second);
+			m_buffAttributes.erase(m_buffAttributes.begin() + i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+	// health regeneration
 	m_timeSinceRegeneration += frameTime;
 	if (m_timeSinceRegeneration >= sf::seconds(1))
 	{
 		m_timeSinceRegeneration -= sf::seconds(1);
-		m_attributes->currentHealthPoints += m_attributes->healthRegenerationPerS;
-		if (m_attributes->currentHealthPoints > m_attributes->maxHealthPoints)
+		m_attributes.currentHealthPoints += m_attributes.healthRegenerationPerS;
+		if (m_attributes.currentHealthPoints > m_attributes.maxHealthPoints)
 		{
-			m_attributes->currentHealthPoints = m_attributes->maxHealthPoints;
+			m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
 		}
 	}
 }
@@ -139,6 +168,12 @@ void LevelMovableGameObject::updateAnimation()
 	}
 }
 
+void LevelMovableGameObject::addAttributes(sf::Time& duration, AttributeBean& attributes)
+{
+	m_attributes.addBean(attributes);
+	m_buffAttributes.push_back(std::pair<sf::Time, AttributeBean>(duration, attributes));
+}
+
 void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const
 {
 	// distinguish damping in the air and at the ground
@@ -152,8 +187,8 @@ void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTim
 void LevelMovableGameObject::addDamage(int damage)
 {
 	if (m_state == GameObjectState::Dead || damage <= 0) return;
-	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints - damage));
-	if (m_attributes->currentHealthPoints == 0)
+	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
+	if (m_attributes.currentHealthPoints == 0)
 	{
 		m_isDead = true;
 	}
@@ -163,7 +198,7 @@ void LevelMovableGameObject::addDamage(int damage)
 void LevelMovableGameObject::addHeal(int heal)
 {
 	if (m_state == GameObjectState::Dead || heal <= 0) return;
-	m_attributes->currentHealthPoints = std::max(0, std::min(m_attributes->maxHealthPoints, m_attributes->currentHealthPoints + heal));
+	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints + heal));
 	setSpriteColor(sf::Color::Green, sf::milliseconds(200));
 }
 
@@ -182,23 +217,23 @@ void LevelMovableGameObject::onHit(Spell* spell)
 	switch (spell->getDamageType())
 	{
 	case DamageType::Physical:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->physicalMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.physicalMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Ice:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->iceMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.iceMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Fire:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->fireMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.fireMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Shadow:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->shadowMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.shadowMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Light:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->lightMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.lightMultiplier);
 		spell->setDisposed();
 		break;
 	default:
@@ -209,7 +244,7 @@ void LevelMovableGameObject::onHit(Spell* spell)
 
 void LevelMovableGameObject::setDead()
 {
-	m_attributes->currentHealthPoints = 0;
+	m_attributes.currentHealthPoints = 0;
 	m_isDead = true;
 }
 
@@ -265,7 +300,18 @@ SpellManager* LevelMovableGameObject::getSpellManager() const
 
 const AttributeBean* LevelMovableGameObject::getAttributes() const
 {
-	return m_attributes;
+	return &m_attributes;
+}
+
+void LevelMovableGameObject::consumeFood(sf::Time& duration, AttributeBean& attributes)
+{
+	if (m_foodAttributes.first > sf::Time::Zero)
+	{
+		// old food attributes have to be removed
+		m_attributes.removeBean(m_foodAttributes.second);
+	}
+	m_foodAttributes = std::pair<sf::Time, AttributeBean>(duration, attributes);
+	m_attributes.addBean(attributes);
 }
 
 void LevelMovableGameObject::setSpriteColor(const sf::Color& color, const sf::Time& time)

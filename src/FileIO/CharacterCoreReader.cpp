@@ -20,7 +20,6 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		return false;
 	}
 	if (data.attributes.maxHealthPoints < 0 
-		|| data.attributes.currentHealthPoints < 0
 		|| data.attributes.healthRegenerationPerS < 0
 		|| data.attributes.haste < 0
 		|| data.attributes.critical < 0
@@ -31,11 +30,6 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		|| data.attributes.damageLight < 0)
 	{
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : (some) attributes cannot be negative");
-		return false;
-	}
-	if (data.attributes.currentHealthPoints < 1)
-	{
-		g_logger->logError("CharacterCoreReader", "Error in savegame data : current health cannot be 0");
 		return false;
 	}
 	for (auto &it : data.levelKilled)
@@ -143,9 +137,6 @@ bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreDa
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	data.attributes.maxHealthPoints = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.currentHealthPoints = atoi(startData);
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	data.attributes.healthRegenerationPerS = atoi(startData);
@@ -399,8 +390,6 @@ bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreD
 		{
 			pos = gotoNextChar(pos, end, '\n');
 		}
-
-
 		else if (strncmp(pos, TIME_PLAYED, strlen(TIME_PLAYED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(TIME_PLAYED));
 			noError = readTimePlayed(pos, end, data);

@@ -4,10 +4,10 @@ level.id:0
 level.position:0.000000,0.000000
 map.id:1
 map.position:4057.586426,862.213074
-# in this order: maxHealthPoints, currentHealthPoints, healthRegenerationPerS, haste, critical, 
+# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
-attributes:100,100,0,0,5,0,0,0,0,0,0,0,0,0,0
+attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
 # equipment:

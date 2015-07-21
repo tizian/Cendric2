@@ -17,4 +17,5 @@ public:
 
 protected:
 	void addStrengthModifier(int level);
+	int m_additionalResistance;
 };

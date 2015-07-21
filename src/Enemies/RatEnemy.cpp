@@ -11,10 +11,9 @@ RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, ma
 
 void RatEnemy::loadAttributes()
 {
-	m_attributes->currentHealthPoints = 40;
-	m_attributes->maxHealthPoints = 40;
-	m_attributes->resistancePhysical = 10;
-	m_attributes->calculateAttributes();
+	m_attributes.setHealth(40);
+	m_attributes.resistancePhysical = 10;
+	m_attributes.calculateAttributes();
 }
 
 void RatEnemy::loadSpells()
@@ -55,7 +54,7 @@ float RatEnemy::getConfiguredDistanceToAbyss() const
 bool RatEnemy::getConfiguredFleeCondition() const
 {
 	// what a cowardly rat
-	return m_attributes->currentHealthPoints < m_attributes->maxHealthPoints / 3;
+	return m_attributes.currentHealthPoints < m_attributes.maxHealthPoints / 3;
 }
 
 float RatEnemy::getConfiguredApproachingDistance() const

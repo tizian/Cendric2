@@ -116,11 +116,10 @@ std::string CharacterCoreWriter::writeLevelLooted(const CharacterCoreData& data)
 
 std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) const
 {
-	string orderComment = "# in this order: maxHealthPoints, currentHealthPoints, healthRegenerationPerS, haste, critical, \n# damagePhysical, damageFire, damageIce, damageShadow, damageLight, \n# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. \n";
+	string orderComment = "# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, \n# damagePhysical, damageFire, damageIce, damageShadow, damageLight, \n# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. \n";
 	string attributeString = orderComment.append(string(ATTRIBUTES));
 	attributeString.append(":");
 	attributeString.append(to_string(data.attributes.maxHealthPoints) + ",");
-	attributeString.append(to_string(data.attributes.currentHealthPoints) + ",");
 	attributeString.append(to_string(data.attributes.healthRegenerationPerS) + ",");
 	attributeString.append(to_string(data.attributes.haste) + ",");
 	attributeString.append(to_string(data.attributes.critical) + ",");

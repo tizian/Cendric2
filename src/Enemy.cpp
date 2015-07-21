@@ -9,7 +9,7 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_id = id;
 	m_mainChar = mainChar;
 	m_immuneEnemies.push_back(id);
-	m_attributes = new AttributeBean(ZERO_ATTRIBUTES);
+	m_attributes = ZERO_ATTRIBUTES;
 	m_enemyState = EnemyState::Idle;
 	m_screen = mainChar->getScreen();
 	m_spellManager = new SpellManager(this);
@@ -22,7 +22,6 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 Enemy::~Enemy()
 {
 	delete m_lootWindow;
-	delete m_attributes;
 }
 
 bool Enemy::getConfiguredFleeCondition() const
@@ -115,23 +114,23 @@ void Enemy::onHit(Spell* spell)
 	switch (spell->getDamageType())
 	{
 	case DamageType::Physical:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->physicalMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.physicalMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Ice:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->iceMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.iceMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Fire:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->fireMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.fireMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Shadow:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->shadowMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.shadowMultiplier);
 		spell->setDisposed();
 		break;
 	case DamageType::Light:
-		damage = static_cast<int>(spell->getDamage() * m_attributes->lightMultiplier);
+		damage = static_cast<int>(spell->getDamage() * m_attributes.lightMultiplier);
 		spell->setDisposed();
 		break;
 	default:
@@ -171,7 +170,7 @@ void Enemy::update(const sf::Time& frameTime)
 void Enemy::updateHpBar() 
 {
 	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
-	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints), HP_BAR_HEIGHT));
+	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
 }
 
 float Enemy::distToMainChar() const

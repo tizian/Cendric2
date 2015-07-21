@@ -25,7 +25,7 @@ private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar;
 	LevelID m_levelID;
-	LevelInterface m_interface;	
+	LevelInterface* m_interface;	
 
 	bool m_isGameOver = false;
 	BitmapText* m_youDied = nullptr;

@@ -11,10 +11,9 @@ FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(l
 
 void FireRatEnemy::loadAttributes()
 {
-	m_attributes->currentHealthPoints = 70;
-	m_attributes->maxHealthPoints = 70;
-	m_attributes->resistanceIce = -20;
-	m_attributes->calculateAttributes();
+	m_attributes.setHealth(70);
+	m_attributes.resistanceIce = -20;
+	m_attributes.calculateAttributes();
 
 	m_immuneDamageTypes.push_back(DamageType::Fire);
 }

@@ -17,8 +17,6 @@ public:
 	CharacterCore();
 	~CharacterCore();
 
-	void update(const sf::Time& frameTime);
-
 	// returns the currently equipped item of type 'type'
 	const Item& getEquippedItem(ItemType type);
 	// returns the item of id "id"
@@ -40,13 +38,11 @@ public:
 	// loads itemvector (reload if not empty)
 	void loadItems();
 	// base attributes plus the attributes gotten by equipment
-	AttributeBean* getTotalAttributes();
+	const AttributeBean& getTotalAttributes() const;
 	// getter for items
 	std::map<std::string, int>* getItems();
 	// add gold to the data
 	void addGold(int gold);
-	// sets health to max health
-	void resetHealth();
 	// save the position and map id
 	void setMap(const sf::Vector2f& position, MapID map);
 	// save the position and level id
@@ -62,13 +58,8 @@ private:
 	// reload attributes based on equipped items (called by load). all attributes coming from food are removed.
 	void reloadAttributes();
 
-	// base attributes plus the attributes of all currently equipped items & the attributes of the food currently eaten
+	// base attributes plus the attributes of all currently equipped items
 	AttributeBean m_totalAttributes;
-
-	// cendric consumes a food and gets its bonus attributes for its duration. they may also be negative.
-	void consumeFood(sf::Time& duration, AttributeBean& attributes);
-	// a vector to store the attributes given by food. if their time runs out, they get removed from the total attributes.
-	std::pair<sf::Time, AttributeBean> m_foodAttributes;
 
 	std::map<std::string, Item> m_items;
 	std::map<ItemType, Item> m_equippedItems;
