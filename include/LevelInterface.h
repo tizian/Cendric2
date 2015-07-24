@@ -6,7 +6,12 @@
 #include "InputController.h"
 #include "ResourceManager.h"
 
-// The interface overlay in a level, displaying mana + hp bars, spell cooldowns etc.
+#include "GUI/HealthBar.h"
+#include "GUI/SpellSelection.h"
+#include "GUI/Inventory.h"
+#include "GUI/CharacterInfo.h"
+
+// The interface overlay in a level, displaying hp bar, spell cooldowns etc.
 // if the keys for character screen and inventory are pressed, these will display as well.
 class LevelInterface
 {
@@ -20,43 +25,16 @@ public:
 	void update(const sf::Time& frameTime);
 
 private:
-	CharacterCore* m_core;
-	LevelMainCharacter* m_mainCharacter;
-	const AttributeBean* m_attributes;
-	SpellManager* m_spellManager;
-
-	// <<<< INVENTORY >>>>
-	void initInventory();
-	void updateInventory();
-	void renderInventory(sf::RenderTarget& target) const;
-	sf::RectangleShape m_inventoryShape;
-	BitmapText m_inventoryText;
+	// <<< INVENTORY >>>
+	Inventory m_inventory;
 	bool m_showInventory = false;
-	const float INVENTORY_TOP = 50.f;
-	const float INVENTORY_LEFT = 50.f;
+	void updateInventory();
 
 	// <<<< CHARCTER INFO >>>>
-	void initCharacterInfo();
-	void updateCharacterInfo();
-	void renderCharacterInfo(sf::RenderTarget& target) const;
-	sf::RectangleShape m_characterInfoShape;
-	BitmapText m_characterInfoText;
+	CharacterInfo m_characterInfo;
 	bool m_showCharacterInfo = false;
-	const float INFO_HEIGHT = 500.f;
-	const float INFO_WIDTH = 550.f;
-	const float INFO_TOP = 50.f;
-	const float INFO_LEFT = 50.f;
-	const float INFO_OUTLINE_THICKNESS = 5.f;
-
-	// <<<< INTERFACE BARS >>>>
-	void initInterfaceBars();
-	void updateInterfaceBars();
-	void renderInterfaceBars(sf::RenderTarget& target) const;
-	sf::RectangleShape m_hpBarOutline;
-	sf::RectangleShape m_hpBar;
-	const float BAR_HEIGHT = 10.f;
-	const float BAR_WIDTH = 200.f;
-	const float BAR_OUTLINE_THICKNESS = 2.f;
-	const float BAR_LEFT = 10.f;
-	const float BAR_TOP = 10.f;
+	void updateCharacterInfo();
+	
+	// <<<< HEALTH BAR >>>>
+	HealthBar m_healthBar;
 };
