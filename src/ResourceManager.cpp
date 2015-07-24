@@ -277,7 +277,7 @@ int ResourceManager::getMaxFPS() const
 	return m_configuration.maxFrameRate;
 }
 
-void ResourceManager::setError(ErrorID id, string& description)
+void ResourceManager::setError(ErrorID id, const string& description)
 {
 	m_currentError.first = id;
 	m_currentError.second = description;

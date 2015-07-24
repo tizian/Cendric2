@@ -1,7 +1,8 @@
 #include "LevelInterface.h"
 #include "LevelMainCharacter.h"
 
-LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) : m_healthBar(character->getAttributes()), m_inventory(core), m_characterInfo(character)
+LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) :
+    m_inventory(core),  m_characterInfo(character), m_healthBar(character->getAttributes())
 {
 }
 

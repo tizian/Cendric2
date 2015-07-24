@@ -33,7 +33,7 @@ public:
 	void loadLevelResources();
 	void deleteResource(std::string filename);
 
-	void setError(ErrorID id, std::string& description);
+	void setError(ErrorID id, const std::string& description);
 
 	sf::Texture* getTexture(ResourceID id);
 	sf::Texture* getTexture(const std::string& filename);

@@ -12,7 +12,7 @@ class SpellCreator
 {
 public:
 	SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
-	~SpellCreator();
+	virtual ~SpellCreator();
 
 	void addModifiers(const std::vector<SpellModifier>& modifiers);
 
