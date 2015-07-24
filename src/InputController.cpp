@@ -167,4 +167,28 @@ bool InputController::isKeyJustPressed(Key key)
 	return m_isWindowFocused && m_keyJustPressedMap[key];
 }
 
+void InputController::startReadingText()
+{
+	m_readText.clear();
+	m_isReadText = true;
+}
+
+void InputController::stopReadingText()
+{
+	m_isReadText = false;
+}
+
+const std::string& InputController::getReadText() const
+{
+	return m_readText;
+}
+
+void InputController::readUnicode(sf::Uint32 character)
+{
+	if (m_isReadText && m_isWindowFocused && character < 128)
+	{
+		m_readText += static_cast<char>(character);
+	}
+}
+
 

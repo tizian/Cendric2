@@ -25,6 +25,9 @@ bool CharacterCoreWriter::saveToFile(const char* filename, const CharacterCoreDa
 	if (savefile.is_open())
 	{
 		savefile << writeTimePlayed(data);
+		savefile << writeIsQuicksave(data);
+		savefile << writeSaveGameName(data);
+		savefile << writeDateSaved(data);
 		savefile << writeLevelID(data);
 		savefile << writeLevelPosition(data);
 		savefile << writeMapID(data);
@@ -52,6 +55,21 @@ std::string CharacterCoreWriter::writeTimePlayed(const CharacterCoreData& data) 
 {
 	string timePlayed = "# time played, in seconds\n";
     return timePlayed.append(string(TIME_PLAYED) + ":" + to_string(static_cast<int>(std::floor(data.timePlayed.asSeconds()))) + "\n");
+}
+
+std::string CharacterCoreWriter::writeIsQuicksave(const CharacterCoreData& data) const
+{
+	return string(IS_QUICKSAVE) + ":" + to_string(data.isQuicksave);
+}
+
+std::string CharacterCoreWriter::writeSaveGameName(const CharacterCoreData& data) const
+{
+	return string(SAVE_GAME_NAME) + ":" + data.saveGameName;
+}
+
+std::string CharacterCoreWriter::writeDateSaved(const CharacterCoreData& data) const
+{
+	return string(DATE_SAVED) + ":" + to_string(data.dateSaved);
 }
 
 std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const

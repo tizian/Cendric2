@@ -31,6 +31,10 @@ void Game::run()
 			{
 				g_inputController->setCurrentWindowSize(e.size.width, e.size.height);
 			}
+			else if (e.type == sf::Event::TextEntered)
+			{
+				g_inputController->readUnicode(e.text.unicode);
+			}
 		}
 		
 		frameClock.restart();

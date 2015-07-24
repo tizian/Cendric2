@@ -14,8 +14,11 @@
 
 struct CharacterCoreData
 {
-	// player attributes
+	// savegame attributes
 	sf::Time timePlayed;
+	bool isQuicksave;
+	std::string saveGameName;
+	std::time_t dateSaved;
 
 	// position & progress
 	MapID currentMap;
@@ -47,6 +50,9 @@ struct CharacterCoreData
 const CharacterCoreData DEFAULT_CORE
 {
 	sf::Time::Zero,
+	false,
+	"",
+	time(nullptr),
 	MapID::VOID,
 	sf::Vector2f(),
 	LevelID::VOID,

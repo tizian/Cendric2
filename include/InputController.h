@@ -19,6 +19,12 @@ public:
 	void setWindow(sf::RenderWindow* window);
 	void setCurrentWindowSize(int width, int height);
 
+	// text input
+	void startReadingText();
+	void stopReadingText();
+	const std::string& getReadText() const;
+	void readUnicode(sf::Uint32 character);
+
 	bool isKeyActive(Key key);
 	bool isKeyJustPressed(Key key);
 	bool isMouseOver(const sf::FloatRect* boundingBox) const;
@@ -61,4 +67,8 @@ private:
 	bool m_isWindowFocused;
 	// the mouse position gets calculated in every frame.
 	sf::Vector2f m_mousePosition;
+
+	bool m_isReadText = false;
+	// the text read by the input controller while isReadText is true
+	std::string m_readText;
 };

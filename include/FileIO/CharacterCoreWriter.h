@@ -21,6 +21,9 @@ public:
 	
 private:
 	std::string writeTimePlayed(const CharacterCoreData& data) const;
+	std::string writeIsQuicksave(const CharacterCoreData& data) const;
+	std::string writeSaveGameName(const CharacterCoreData& data) const;
+	std::string writeDateSaved(const CharacterCoreData& data) const;
 
 	std::string writeMapID(const CharacterCoreData& data) const;
 	std::string writeMapPosition(const CharacterCoreData& data) const;
