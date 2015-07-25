@@ -1,8 +1,6 @@
 #include "Screens/CreditsScreen.h"
 #include "Screens/MenuScreen.h"
 
-#include "Screens/MenuScreen.h"
-
 using namespace std;
 
 CreditsScreen::CreditsScreen(CharacterCore* core) : Screen(core)

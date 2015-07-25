@@ -1,9 +1,11 @@
 # time played, in seconds
-time.played:75
-level.id:1
-level.position:525.000000,1175.000000
+time.played:45
+savegame.name:Menusave
+savegame.date:1437763959
+level.id:0
+level.position:0.000000,0.000000
 map.id:1
-map.position:3741.697998,1164.730103
+map.position:3991.611816,987.476990
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 

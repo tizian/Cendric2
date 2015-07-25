@@ -28,11 +28,13 @@ public:
 	// loads a new game with a new core and default attributes
 	void loadNew();
 	// tries to create a new file with this name. if successful, returns true. if it already exists, returns false
-	bool createFile(const char* fileName) const;
+	bool createFile(const std::string& fileName) const;
 	// uses the character core reader to load a .sav file
-	bool load(const char* fileName);
-	// uses the character core writer to save a .sav file
-	bool save(const char* fileName);
+	bool load(const std::string& fileName);
+	bool quickload();
+	// uses the character core writer to save a .sav file. The name is the name chosen by the user.
+	bool save(const std::string& fileName, const std::string& name);
+	bool quicksave();
 	// loads equipped itemvector (reload if not empty)
 	void loadEquipmentItems();
 	// loads itemvector (reload if not empty)

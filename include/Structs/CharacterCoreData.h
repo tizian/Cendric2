@@ -16,7 +16,6 @@ struct CharacterCoreData
 {
 	// savegame attributes
 	sf::Time timePlayed;
-	bool isQuicksave;
 	std::string saveGameName;
 	std::time_t dateSaved;
 
@@ -50,7 +49,6 @@ struct CharacterCoreData
 const CharacterCoreData DEFAULT_CORE
 {
 	sf::Time::Zero,
-	false,
 	"",
 	time(nullptr),
 	MapID::VOID,

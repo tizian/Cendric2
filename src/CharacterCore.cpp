@@ -2,6 +2,8 @@
 
 using namespace std;
 
+const char* QUICKSAVE_LOCATION = "saves/quicksave.sav";
+
 CharacterCore::CharacterCore()
 {
 	m_data = DEFAULT_CORE;
@@ -13,7 +15,12 @@ CharacterCore::~CharacterCore()
 	clearItems();
 }
 
-bool CharacterCore::load(const char* fileName)
+bool CharacterCore::quickload()
+{
+	return load(QUICKSAVE_LOCATION);
+}
+
+bool CharacterCore::load(const std::string& fileName)
 {
 	CharacterCoreReader reader;
 	
@@ -96,17 +103,38 @@ void CharacterCore::setQuestState(QuestID id, QuestState state)
 	m_data.questStates.insert({ id, state });
 }
 
-bool CharacterCore::save(const char* fileName) 
+bool CharacterCore::save(const std::string& fileName, const string& name) 
 {
 	m_data.timePlayed += m_stopwatch.restart();
+	m_data.dateSaved = time(nullptr);
+	m_data.saveGameName = name;
 	
 	// write to savefile.
 	CharacterCoreWriter writer;
+
+	//if (fileName == nullptr)
+	//{
+	//	std::string file = "saves/" + to_string(m_data.dateSaved) + name + ".sav";
+	//	writer.createFile(file.c_str());
+	//	return writer.saveToFile(file.c_str(), m_data);
+	//}
 	writer.createFile(fileName);
 	return writer.saveToFile(fileName, m_data);
 }
 
-bool CharacterCore::createFile(const char* fileName) const
+bool CharacterCore::quicksave()
+{
+	m_data.timePlayed += m_stopwatch.restart();
+	m_data.dateSaved = time(nullptr);
+	m_data.saveGameName = "Quicksave";
+
+	// write to savefile.
+	CharacterCoreWriter writer;
+	writer.createFile(QUICKSAVE_LOCATION);
+	return writer.saveToFile(QUICKSAVE_LOCATION, m_data);
+}
+
+bool CharacterCore::createFile(const std::string& fileName) const
 {
 	CharacterCoreWriter writer;
 	return writer.createFile(fileName);

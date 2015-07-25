@@ -13,15 +13,14 @@
 class CharacterCoreWriter : public CharacterCoreIO
 {
 public:
-	bool saveToFile(const char* filename, const CharacterCoreData& data) const;
+	bool saveToFile(const std::string& filename, const CharacterCoreData& data) const;
 	
 	// tries to create file with that filename and returns true if successful.
 	// if file already exists, it returns false.
-	bool createFile(const char* filename) const;
+	bool createFile(const std::string& filename) const;
 	
 private:
 	std::string writeTimePlayed(const CharacterCoreData& data) const;
-	std::string writeIsQuicksave(const CharacterCoreData& data) const;
 	std::string writeSaveGameName(const CharacterCoreData& data) const;
 	std::string writeDateSaved(const CharacterCoreData& data) const;
 

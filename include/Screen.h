@@ -69,6 +69,10 @@ protected:
 	CharacterCore* m_characterCore;
 	bool m_requestQuit = false;
 
+protected:
+	// enables / disables all buttons on this screen
+	virtual void setAllButtonsEnabled(bool value);
+
 private:
 	std::vector<std::vector<GameObject*>> m_objects;
 	BitmapText m_tooltipText;

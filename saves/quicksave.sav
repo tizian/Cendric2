@@ -1,9 +1,11 @@
 # time played, in seconds
-time.played:25
+time.played:16
+savegame.name:Quicksave
+savegame.date:1437753677
 level.id:0
 level.position:0.000000,0.000000
 map.id:1
-map.position:4057.586426,862.213074
+map.position:4203.071777,1082.623901
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -11,13 +13,13 @@ attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
 # equipment:
-equipped.back:it_eq_purpleback
+equipped.back:
 equipped.body:
-equipped.head:it_eq_wizardhatblue
+equipped.head:
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
-equipped.weapon:it_we_icestaff
+equipped.weapon:
 # levels killed:
 # levels looted:
 # quest states:

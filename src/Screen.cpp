@@ -1,4 +1,5 @@
 #include "Screen.h"
+#include "GUI/Button.h"
 
 using namespace std;
 
@@ -60,6 +61,19 @@ void Screen::deleteDisposedObjects()
 			{
 				it++;
 			}
+		}
+	}
+}
+
+void Screen::setAllButtonsEnabled(bool value)
+{
+	vector<GameObject*>* buttons = getObjects(GameObjectType::_Button);
+	for (auto it : *buttons)
+	{
+		Button* button = dynamic_cast<Button*>(it);
+		if (button != nullptr)
+		{
+			button->setEnabled(value);
 		}
 	}
 }

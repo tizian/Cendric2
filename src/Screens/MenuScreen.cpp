@@ -57,39 +57,13 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_loadGameButton->isClicked())
 	{
-		// TODO the .sav files should be loaded in another screen.
-        std::string saveFilename = "saves/menusave.sav";
-		// check if character core is set and ask if it should be overwritten
-		if (m_characterCore == nullptr)
-		{
-			// load a savegame
-			m_characterCore = new CharacterCore();
-			if (!(m_characterCore->load(saveFilename.c_str())))
-			{
-				string errormsg = string(saveFilename) + ": save file corrupted!";
-				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
-			}
-			return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
-		} 
-		else 
-		{
-			m_newCharacterCore = new CharacterCore();
-			if (!(m_newCharacterCore->load(saveFilename.c_str())))
-			{
-				string errormsg = string(saveFilename) + ": save file corrupted!";
-				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
-			}
-			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-			m_yesOrNoForm->setMessage("QuestionLoadGame");
-			addObject(GameObjectType::_Form, m_yesOrNoForm);
-			setAllButtonsEnabled(false);
-		}
+		return new LoadGameScreen(m_characterCore);
 	} 
 	else if (m_saveGameButton->isClicked())
 	{
 		// TODO hardcoded menu .sav file 
         std::string saveFilename = "saves/menusave.sav";
-		m_characterCore->save(saveFilename.c_str());
+		m_characterCore->save(saveFilename.c_str(), "Menusave");
 		setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::White, true);
 	}
 	else if (m_optionsButton->isClicked())
@@ -110,15 +84,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 
 void MenuScreen::setAllButtonsEnabled(bool value)
 {
-	vector<GameObject*>* buttons = getObjects(GameObjectType::_Button);
-	for (auto it : *buttons)
-	{
-		Button* button = dynamic_cast<Button*>(it);
-		if (button != nullptr)
-		{
-			button->setEnabled(value);
-		}
-	}
+	Screen::setAllButtonsEnabled(value);
 	m_saveGameButton->setEnabled(value && (m_characterCore != nullptr));
 }
 

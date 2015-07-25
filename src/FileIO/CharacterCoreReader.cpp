@@ -66,6 +66,30 @@ bool CharacterCoreReader::readTimePlayed(char* start, char* end, CharacterCoreDa
 	return true;
 }
 
+bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	string name(startData);
+	int count = countToNextChar(startData, end, '\n');
+	if (count == -1) {
+		return false;
+	}
+	name = name.substr(0, count);
+	data.saveGameName = name;
+	return true;
+}
+
+bool CharacterCoreReader::readSavegameDate(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++; 
+	data.dateSaved = (atol(startData));
+	return true;
+}
+
 bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
@@ -351,14 +375,14 @@ bool CharacterCoreReader::readLevelLooted(char* start, char* end, CharacterCoreD
 	return true;
 }
 
-bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreData& data)
+bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data)
 {
 	FILE* savFile;
-	savFile = fopen(fileName, "r");
+	savFile = fopen(filename.c_str(), "r");
 
 	if (savFile == NULL)
 	{
-		g_logger->logError("CharacterCoreReader", "Error at opening file " + std::string(fileName));
+		g_logger->logError("CharacterCoreReader", "Error at opening file " + filename);
 		return false;
 	}
 
@@ -393,6 +417,16 @@ bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreD
 		else if (strncmp(pos, TIME_PLAYED, strlen(TIME_PLAYED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(TIME_PLAYED));
 			noError = readTimePlayed(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, SAVE_GAME_NAME, strlen(SAVE_GAME_NAME)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(SAVE_GAME_NAME));
+			noError = readSavegameName(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, DATE_SAVED, strlen(DATE_SAVED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(DATE_SAVED));
+			noError = readSavegameDate(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, ATTRIBUTES, strlen(ATTRIBUTES)) == 0) {
@@ -486,7 +520,7 @@ bool CharacterCoreReader::readCharacterCore(const char* fileName, CharacterCoreD
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {
-			g_logger->logError("CharacterCoreReader", "unknown tag found in file " + std::string(fileName));
+			g_logger->logError("CharacterCoreReader", "unknown tag found in file " + filename);
 			return false;
 		}
 

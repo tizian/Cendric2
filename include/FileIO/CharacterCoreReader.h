@@ -12,10 +12,12 @@
 class CharacterCoreReader : public Reader, public CharacterCoreIO
 {
 public:
-	bool readCharacterCore(const char* fileName, CharacterCoreData& data);
+	bool readCharacterCore(const std::string& fileName, CharacterCoreData& data);
 
 private:
 	bool readTimePlayed(char* start, char* end, CharacterCoreData& data) const;
+	bool readSavegameName(char* start, char* end, CharacterCoreData& data) const;
+	bool readSavegameDate(char* start, char* end, CharacterCoreData& data) const;
 
 	bool readMapID(char* start, char* end, CharacterCoreData& data) const;
 	bool readMapPosition(char* start, char* end, CharacterCoreData& data) const;

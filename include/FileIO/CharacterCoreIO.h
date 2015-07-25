@@ -8,7 +8,6 @@ class CharacterCoreIO
 protected:
 	// savegame attributes
 	const char* TIME_PLAYED = "time.played";
-	const char* IS_QUICKSAVE = "savegame.quicksave";
 	const char* SAVE_GAME_NAME = "savegame.name";
 	const char* DATE_SAVED = "savegame.date";
 

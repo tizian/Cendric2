@@ -7,6 +7,7 @@
 #include "Screens/SplashScreen.h"
 #include "Screens/CreditsScreen.h"
 #include "Screens/OptionsScreen.h"
+#include "Screens/LoadGameScreen.h"
 #include "Misc/FireBasket.h"
 #include "CharacterCore.h"
 #include "GUI/Button.h"
@@ -27,8 +28,7 @@ public:
 private:
 	sf::Sprite m_screenSprite;
 
-	// enables / disables all buttons on this screen
-	void setAllButtonsEnabled(bool value);
+	void setAllButtonsEnabled(bool value) override;
 
 	// only used when character core is not null
 	Button* m_resumeGameButton = nullptr;

@@ -12,7 +12,6 @@
 class Screen;
 
 // A game object with animations, position, bounding box, game state. 
-// subclasses should always call 'load'.
 class GameObject 
 {
 public:

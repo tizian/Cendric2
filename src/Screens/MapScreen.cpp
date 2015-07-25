@@ -3,8 +3,6 @@
 
 using namespace std;
 
-const char* QUICKSAVE_LOCATION = "saves/quicksave.sav";
-
 MapScreen::MapScreen(MapID mapID, CharacterCore* core) : Screen(core)
 {
 	m_mapID = mapID;
@@ -34,7 +32,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 		{
 			// store pos & go back to menu screen
 			CharacterCore* newCharacterCore = new CharacterCore();
-			if (!newCharacterCore->load(QUICKSAVE_LOCATION))
+			if (!newCharacterCore->quickload())
 			{
 				// no quicksave exists
 				setTooltipText(g_textProvider->getText("NoQuicksaveExists"), sf::Color::Cyan, true);
@@ -50,7 +48,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 		if (g_inputController->isKeyJustPressed(Key::Quicksave))
 		{
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			m_characterCore->save(QUICKSAVE_LOCATION);
+			m_characterCore->quicksave();
 			setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Cyan, true);
 		}
 		MapExitBean* bean = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));

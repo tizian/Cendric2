@@ -2,30 +2,29 @@
 
 using namespace std;
 
-bool CharacterCoreWriter::createFile(const char* filename) const
+bool CharacterCoreWriter::createFile(const std::string& filename) const
 {
 	if (std::ifstream(filename))
 	{
-		g_logger->logInfo("CharacterCoreWriter", "File already exists: " + string(filename));
+		g_logger->logInfo("CharacterCoreWriter", "File already exists: " + filename);
 		return false;
 	}
 	std::ofstream file(filename);
-	g_logger->logInfo("CharacterCoreWriter", "Created new file: " + string(filename));
+	g_logger->logInfo("CharacterCoreWriter", "Created new file: " + filename);
 	if (!file)
 	{
-		g_logger->logError("CharacterCoreWriter", "File could not be created: " + string(filename));
+		g_logger->logError("CharacterCoreWriter", "File could not be created: " + filename);
 		return false;
 	}
 	return true;
 }
 
-bool CharacterCoreWriter::saveToFile(const char* filename, const CharacterCoreData& data) const
+bool CharacterCoreWriter::saveToFile(const std::string& filename, const CharacterCoreData& data) const
 {
 	ofstream savefile(filename, ios::trunc);
 	if (savefile.is_open())
 	{
 		savefile << writeTimePlayed(data);
-		savefile << writeIsQuicksave(data);
 		savefile << writeSaveGameName(data);
 		savefile << writeDateSaved(data);
 		savefile << writeLevelID(data);
@@ -57,19 +56,14 @@ std::string CharacterCoreWriter::writeTimePlayed(const CharacterCoreData& data) 
     return timePlayed.append(string(TIME_PLAYED) + ":" + to_string(static_cast<int>(std::floor(data.timePlayed.asSeconds()))) + "\n");
 }
 
-std::string CharacterCoreWriter::writeIsQuicksave(const CharacterCoreData& data) const
-{
-	return string(IS_QUICKSAVE) + ":" + to_string(data.isQuicksave);
-}
-
 std::string CharacterCoreWriter::writeSaveGameName(const CharacterCoreData& data) const
 {
-	return string(SAVE_GAME_NAME) + ":" + data.saveGameName;
+	return string(SAVE_GAME_NAME) + ":" + data.saveGameName + "\n";
 }
 
 std::string CharacterCoreWriter::writeDateSaved(const CharacterCoreData& data) const
 {
-	return string(DATE_SAVED) + ":" + to_string(data.dateSaved);
+	return string(DATE_SAVED) + ":" + to_string(data.dateSaved) + "\n";
 }
 
 std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const
