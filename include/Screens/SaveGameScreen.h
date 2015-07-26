@@ -28,8 +28,17 @@ private:
 	Button* m_saveButton = nullptr;
 	Button* m_newSaveGameButton = nullptr;
 	BitmapText* m_title = nullptr;
+
 	SaveGameWindow* m_saveGameWindow = nullptr;
 	NewSaveGameForm* m_newSaveGameForm = nullptr;
-
 	YesOrNoForm* m_yesOrNoForm = nullptr;
+
+	// pretty little agents to give to our yes or no forms.
+	void onNoPressed();
+	void onOverwriteSaveGamePressed();
+	void onDeleteSaveGamePressed();
+
+	// pretty little agents to give to our new save game form.
+	void onCancelPressed();
+	void onNewSaveGamePressed();
 };

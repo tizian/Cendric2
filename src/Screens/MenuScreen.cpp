@@ -9,21 +9,8 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core)
 
 Screen* MenuScreen::update(const sf::Time& frameTime)
 {
-	if (m_yesOrNoForm != nullptr && m_yesOrNoForm->isNoClicked())
+	if (m_startNewGame)
 	{
-		m_yesOrNoForm->setDisposed();
-		m_yesOrNoForm = nullptr;
-		delete m_newCharacterCore;
-		m_newCharacterCore = nullptr;
-		setAllButtonsEnabled(true);
-	}
-	else if (m_yesOrNoForm != nullptr && m_yesOrNoForm->isYesClicked())
-	{
-		m_yesOrNoForm->setDisposed();
-		m_yesOrNoForm = nullptr;
-		delete m_characterCore;
-		m_characterCore = m_newCharacterCore;
-		m_newCharacterCore = nullptr;
 		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}
 	else if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked())
@@ -36,7 +23,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 		// resume game
 		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}
-	else if (m_newGameButton->isClicked())
+	else if (m_newGameButton->isClicked() && m_yesOrNoForm == nullptr)
 	{
 		if (m_characterCore == nullptr)
 		{
@@ -51,6 +38,8 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			m_newCharacterCore->loadNew();
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 			m_yesOrNoForm->setMessage("QuestionStartNewGame");
+			m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNoPressed, this));
+			m_yesOrNoForm->setOnYesClicked(std::bind(&MenuScreen::onStartNewGamePressed, this));
 			addObject(GameObjectType::_Form, m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
@@ -138,4 +127,24 @@ void MenuScreen::execOnExit(const Screen *nextScreen)
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash_fireanimation);
 	delete m_newCharacterCore;
+}
+
+// <<< agents for the yes or no form >>>
+
+void MenuScreen::onStartNewGamePressed()
+{
+	m_yesOrNoForm->setDisposed();
+	m_yesOrNoForm = nullptr;
+	delete m_characterCore;
+	m_characterCore = m_newCharacterCore;
+	m_newCharacterCore = nullptr;
+	m_startNewGame = true;
+}
+
+void MenuScreen::onNoPressed()
+{
+	m_yesOrNoForm = nullptr;
+	delete m_newCharacterCore;
+	m_newCharacterCore = nullptr;
+	setAllButtonsEnabled(true);
 }

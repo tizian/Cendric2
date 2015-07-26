@@ -13,24 +13,11 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 	{
 		return new MenuScreen(m_characterCore);
 	}
-	if (m_yesOrNoForm != nullptr && m_yesOrNoForm->isNoClicked())
+	else if (m_loadGame)
 	{
-		m_yesOrNoForm->setDisposed();
-		m_yesOrNoForm = nullptr;
-		delete m_newCharacterCore;
-		m_newCharacterCore = nullptr;
-		setAllButtonsEnabled(true);
-	}
-	else if (m_yesOrNoForm != nullptr && m_yesOrNoForm->isYesClicked())
-	{
-		m_yesOrNoForm->setDisposed();
-		m_yesOrNoForm = nullptr;
-		delete m_characterCore;
-		m_characterCore = m_newCharacterCore;
-		m_newCharacterCore = nullptr;
 		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}
-	if (m_loadButton->isClicked() || m_saveGameWindow->isChosen())
+	if (m_yesOrNoForm == nullptr && (m_loadButton->isClicked() || m_saveGameWindow->isChosen()))
 	{
 		if (m_characterCore == nullptr)
 		{
@@ -53,6 +40,8 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 			}
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 			m_yesOrNoForm->setMessage("QuestionLoadGame");
+			m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNoPressed, this));
+			m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onLoadGamePressed, this));
 			addObject(GameObjectType::_Form, m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
@@ -102,4 +91,23 @@ void LoadGameScreen::execOnExit(const Screen *nextScreen)
 {
 	delete m_title;
 	delete m_newCharacterCore;
+}
+
+// <<< agents for yes or no form >>>
+
+void LoadGameScreen::onNoPressed()
+{
+	m_yesOrNoForm = nullptr;
+	delete m_newCharacterCore;
+	m_newCharacterCore = nullptr;
+	setAllButtonsEnabled(true);
+}
+
+void LoadGameScreen::onLoadGamePressed()
+{
+	m_yesOrNoForm = nullptr;
+	delete m_characterCore;
+	m_characterCore = m_newCharacterCore;
+	m_newCharacterCore = nullptr;
+	m_loadGame = true;
 }

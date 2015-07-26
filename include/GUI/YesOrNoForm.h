@@ -13,7 +13,6 @@
 class YesOrNoForm : public GameObject
 {
 public:
-	YesOrNoForm(const sf::FloatRect& box, const sf::Color& pressedColor, const sf::Color& mousoverColor, const sf::Color& releasedColor);
 	YesOrNoForm(const sf::FloatRect& box);
 	~YesOrNoForm();
 
@@ -24,8 +23,8 @@ public:
 	void setMessage(const std::string& msg, const sf::Color& color);
 	void setMessage(const std::string& msg);
 
-	bool isYesClicked();
-	bool isNoClicked();
+	void setOnYesClicked(const std::function<void()>& agent);
+	void setOnNoClicked(const std::function<void()>& agent);
 
 	GameObjectType getConfiguredType() const override;
 
@@ -34,4 +33,10 @@ private:
 	BitmapText m_message;
 	Button* m_yesButton;
 	Button* m_noButton;
+
+	std::function<void()> m_executeYes;
+	std::function<void()> m_executeNo;
+
+	// placeholder for agents
+	void nop() const;
 };

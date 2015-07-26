@@ -19,11 +19,11 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 
-	bool isCancelClicked();
-	// if this is true, it is guaranteed that the savegame name is set correctly.
-	bool isOkClicked();
 	// this name is not cleared of invalid chars for a filename!
 	const std::string& getSavegameName() const;
+
+	void setOnOkClicked(const std::function<void()>& agent);
+	void setOnCancelClicked(const std::function<void()>& agent);
 
 	GameObjectType getConfiguredType() const override;
 
@@ -35,4 +35,10 @@ private:
 
 	std::string m_savegameName;
 	BitmapText m_savegameNameText;
+
+	std::function<void()> m_executeOk;
+	std::function<void()> m_executeCancel;
+
+	// placeholder function for the agents.
+	void nop() const;
 };

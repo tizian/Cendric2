@@ -28,4 +28,10 @@ private:
 
 	YesOrNoForm* m_yesOrNoForm = nullptr;
 	CharacterCore* m_newCharacterCore = nullptr;
+
+	// agents for yes or no form
+	void onNoPressed();
+	void onLoadGamePressed();
+
+	bool m_loadGame = false;
 };

@@ -6,6 +6,7 @@
 // std library
 #include <iostream>
 #include <cmath>
+#include <functional>
 
 #define PI_F 3.14159265358979f
 #define DEG_TO_RAD 57.2957795f
@@ -16,6 +17,7 @@
 // cendric color palette
 #define CENDRIC_COLOR_GREY sf::Color(100, 100, 100)
 #define CENDRIC_COLOR_PURPLE sf::Color(54, 11, 93, 255)
+#define CENDRIC_COLOR_DARK_PURPLE sf::Color(41, 7, 63, 255)
 #define CENDRIC_COLOR_LIGHT_PURPLE sf::Color(114, 66, 200, 255)
 
 const bool DEBUG_RENDERING = true;

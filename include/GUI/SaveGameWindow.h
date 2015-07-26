@@ -14,7 +14,7 @@ public:
 	// loads data from the filename via a character core reader.
 	// returns true if successful, else false.
 	bool load(const std::string& filename);
-	// gets called after load was successful and sets the entries positon. the offset is the offset for the date text.
+	// gets called after load was successful and sets the entries positon. 
 	void init(const sf::Vector2f& position);
 
 	void render(sf::RenderTarget& renderTarget) override;
@@ -33,6 +33,7 @@ private:
 	bool m_isClicked = false;
 	BitmapText m_dateSaved;
 	BitmapText m_name;
+	BitmapText m_timePlayed;
 
 	std::string m_filename;
 };

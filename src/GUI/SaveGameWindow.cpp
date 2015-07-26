@@ -7,8 +7,8 @@
 using namespace std;
 
 const sf::Vector2f TEXT_OFFSET = sf::Vector2f(40.f, 30.f);
-const sf::FloatRect BOX = sf::FloatRect((WINDOW_WIDTH - 600.f) / 2, 75.f, 600.f, 500.f);
-const float DATE_OFFSET = 300.f;
+const sf::FloatRect BOX = sf::FloatRect((WINDOW_WIDTH - 900.f) / 2, 75.f, 900.f, 500.f);
+const float COLUMN_WIDTH = 300.f;
 const int CHAR_SIZE = 12;
 const float LINE_PITCH = 20;
 const string SAVE_GAME_FOLDER = "saves/";
@@ -20,7 +20,7 @@ inline bool ends_with(std::string const & value, std::string const & ending)
 	return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
-SaveGameWindow::SaveGameWindow() : Window(BOX, WindowOrnamentStyle::LARGE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White)
+SaveGameWindow::SaveGameWindow() : Window(BOX, WindowOrnamentStyle::LARGE, CENDRIC_COLOR_DARK_PURPLE, sf::Color(0, 0, 0, 100), sf::Color::White)
 {
 	reload();
 }
@@ -150,6 +150,8 @@ SaveGameEntry::SaveGameEntry()
 	m_dateSaved.setColor(sf::Color::White);
 	m_name.setCharacterSize(CHAR_SIZE);
 	m_name.setColor(sf::Color::White);
+	m_timePlayed.setCharacterSize(CHAR_SIZE);
+	m_timePlayed.setColor(sf::Color::White);
 }
 
 bool SaveGameEntry::load(const std::string& filename)
@@ -164,10 +166,22 @@ bool SaveGameEntry::load(const std::string& filename)
 
 	m_filename = filename;
 
+	// format date saved
 	char buff[20];
 	strftime(buff, 20, "%Y-%m-%d %H:%M:%S", localtime(&data.dateSaved));
 	m_dateSaved.setString(string(buff));
 	m_name.setString(data.saveGameName);
+
+	// format time played
+	int secondsPlayed = static_cast<int>(data.timePlayed.asSeconds());
+	int hoursPlayed = secondsPlayed / 3600;
+	int minutesPlayed = (secondsPlayed / 60) % 60;
+	secondsPlayed = (secondsPlayed % 60);
+	string stringHours = hoursPlayed > 0 ? to_string(hoursPlayed) + " h - " : "";
+	string stringMinutes = minutesPlayed > 0 ? to_string(minutesPlayed) + " m - " : "";
+	string stringSeconds = to_string(secondsPlayed) + " s";
+	string formattedTime = stringHours + stringMinutes + stringSeconds;
+	m_timePlayed.setString(formattedTime);
 	return true;
 }
 
@@ -191,12 +205,14 @@ void SaveGameEntry::setPosition(const sf::Vector2f& pos)
 {
 	GameObject::setPosition(pos);
 	m_name.setPosition(pos);
-	m_dateSaved.setPosition(sf::Vector2f(pos.x + DATE_OFFSET, pos.y));
+	m_timePlayed.setPosition(sf::Vector2f(pos.x + COLUMN_WIDTH, pos.y));
+	m_dateSaved.setPosition(sf::Vector2f(pos.x + 2 * COLUMN_WIDTH, pos.y));
 }
 
 void SaveGameEntry::render(sf::RenderTarget& renderTarget)
 {
 	renderTarget.draw(m_name);
+	renderTarget.draw(m_timePlayed);
 	renderTarget.draw(m_dateSaved);
 }
 
@@ -216,6 +232,7 @@ void SaveGameEntry::select()
 {
 	m_name.setColor(sf::Color::White);
 	m_dateSaved.setColor(sf::Color::White);
+	m_timePlayed.setColor(sf::Color::White);
 	m_isSelected = true;
 }
 
@@ -228,6 +245,7 @@ void SaveGameEntry::deselect()
 {
 	m_name.setColor(CENDRIC_COLOR_GREY);
 	m_dateSaved.setColor(CENDRIC_COLOR_GREY);
+	m_timePlayed.setColor(CENDRIC_COLOR_GREY);
 	m_isSelected = false;
 }
 

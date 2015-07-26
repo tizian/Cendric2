@@ -42,4 +42,9 @@ private:
 
 	YesOrNoForm* m_yesOrNoForm = nullptr;
 	CharacterCore* m_newCharacterCore = nullptr;
+
+	// agents for the yes or no form
+	void onStartNewGamePressed();
+	void onNoPressed();
+	bool m_startNewGame = false;
 };
