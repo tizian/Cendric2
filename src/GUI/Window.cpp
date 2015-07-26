@@ -9,21 +9,21 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_BLACK, box.width, box.height);
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), sf::Color::Black, box.width, box.height);
 
 	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_LIGHT_PURPLE, box.width, box.height);
 
 	if (style == WindowOrnamentStyle::NONE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), sf::Color::White, box.width, box.height);
 	}
 	else if (style == WindowOrnamentStyle::SMALL) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), sf::Color::White, box.width, box.height);
 	}
 	else if (style == WindowOrnamentStyle::MEDIUM) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), sf::Color::White, box.width, box.height);
 	}
 	else if (style == WindowOrnamentStyle::LARGE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), sf::Color::White, box.width, box.height);
 	}
 
 	setPosition(sf::Vector2f(box.left, box.top));

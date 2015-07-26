@@ -26,6 +26,7 @@ public:
 	bool isClicked();
 	bool isSelected() const;
 	const std::string& getFilename() const;
+	const std::string getSaveName() const;
 
 private:
 	bool m_isSelected = false;
@@ -47,7 +48,9 @@ public:
 	void update(const sf::Time& frameTime) override;
 	// if this is true, the chosen file should be loaded. be aware that this "query" sets this bool to false again.
 	bool isChosen();
+	void reload();
 	std::string getChosenFilename() const;
+	std::string getChosenSaveName() const;
 	
 private:
 	std::vector<SaveGameEntry> m_entries;

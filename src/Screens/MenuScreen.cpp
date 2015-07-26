@@ -59,12 +59,9 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	{
 		return new LoadGameScreen(m_characterCore);
 	} 
-	else if (m_saveGameButton->isClicked())
+	else if (m_saveGameButton->isClicked() && m_characterCore != nullptr)
 	{
-		// TODO hardcoded menu .sav file 
-        std::string saveFilename = "saves/menusave.sav";
-		m_characterCore->save(saveFilename.c_str(), "Menusave");
-		setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::White, true);
+		return new SaveGameScreen(m_characterCore);
 	}
 	else if (m_optionsButton->isClicked())
 	{

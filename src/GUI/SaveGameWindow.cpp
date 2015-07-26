@@ -11,7 +11,6 @@ const sf::FloatRect BOX = sf::FloatRect((WINDOW_WIDTH - 600.f) / 2, 75.f, 600.f,
 const float DATE_OFFSET = 300.f;
 const int CHAR_SIZE = 12;
 const float LINE_PITCH = 20;
-const int MAX_CHARS_IN_FILENAME = static_cast<int>(DATE_OFFSET) / CHAR_SIZE - 1;
 const string SAVE_GAME_FOLDER = "saves/";
 const string QUICKSAVE_NAME = "quicksave.sav";
 
@@ -23,6 +22,14 @@ inline bool ends_with(std::string const & value, std::string const & ending)
 
 SaveGameWindow::SaveGameWindow() : Window(BOX, WindowOrnamentStyle::LARGE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White)
 {
+	reload();
+}
+
+void SaveGameWindow::reload()
+{
+	m_entries.clear();
+	m_isChosen = false;
+
 	DIR *dir;
 	struct dirent *de;
 
@@ -126,6 +133,15 @@ std::string SaveGameWindow::getChosenFilename() const
 	return m_entries[m_chosenEntry].getFilename();
 }
 
+std::string SaveGameWindow::getChosenSaveName() const
+{
+	if (m_entries.empty())
+	{
+		return "";
+	}
+	return m_entries[m_chosenEntry].getSaveName();
+}
+
 // <<< SaveGameEntry >>>
 
 SaveGameEntry::SaveGameEntry()
@@ -164,6 +180,11 @@ void SaveGameEntry::init(const sf::Vector2f& pos)
 const std::string& SaveGameEntry::getFilename() const
 {
 	return m_filename;
+}
+
+const std::string SaveGameEntry::getSaveName() const
+{
+	return m_name.getString();
 }
 
 void SaveGameEntry::setPosition(const sf::Vector2f& pos)
@@ -205,8 +226,8 @@ GameObjectType SaveGameEntry::getConfiguredType() const
 
 void SaveGameEntry::deselect()
 {
-	m_name.setColor(sf::Color(100, 100, 100));
-	m_dateSaved.setColor(sf::Color(100, 100, 100));
+	m_name.setColor(CENDRIC_COLOR_GREY);
+	m_dateSaved.setColor(CENDRIC_COLOR_GREY);
 	m_isSelected = false;
 }
 

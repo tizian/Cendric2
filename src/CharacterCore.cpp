@@ -112,12 +112,6 @@ bool CharacterCore::save(const std::string& fileName, const string& name)
 	// write to savefile.
 	CharacterCoreWriter writer;
 
-	//if (fileName == nullptr)
-	//{
-	//	std::string file = "saves/" + to_string(m_data.dateSaved) + name + ".sav";
-	//	writer.createFile(file.c_str());
-	//	return writer.saveToFile(file.c_str(), m_data);
-	//}
 	writer.createFile(fileName);
 	return writer.saveToFile(fileName, m_data);
 }

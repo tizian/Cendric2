@@ -19,7 +19,7 @@ DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::LARGE, sf::C
 	m_dialogueText = new BitmapText(L"");
 	m_dialogueText->setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y + 30.f));
 	m_dialogueText->setCharacterSize(CHAR_SIZE_DIALOGUE);
-	m_dialogueText->setColor(CENDRIC_COLOR_WHITE);
+	m_dialogueText->setColor(sf::Color::White);
 }
 
 DialogueWindow::~DialogueWindow()
@@ -207,7 +207,7 @@ GameObjectType DialogueOption::getConfiguredType() const
 
 void DialogueOption::deselect()
 {
-	m_text.setColor(sf::Color(0, 0, 0, 150));
+	m_text.setColor(CENDRIC_COLOR_GREY);
 	m_isSelected = false;
 }
 

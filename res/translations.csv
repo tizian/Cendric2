@@ -3,7 +3,10 @@ Armor;Armour;Rüstung;Rüstig
 Back;Back;Zurück;Zrugg
 BackToMenu;Back to menu;Zurück zum Menu;Zrugg zum Menu
 CharacterInfo;Character Info;Charakter Info;Charakter Info
+Chop;Chop;Hauen;Haue
 ConfigurationSaved;Configuration was saved. A new start of the game is needed so all changes apply.;Einstellungen wurden gespeichert. Das Spiel muss neugestartet werden um alle Änderungen zu übernehmen.;Iistellige sind gspeicheret. Es brucht aber en Neustart vom Game damit alli Änderige würksam werded.
+Confirm;Confirm;Bestätigen;Bestätige
+CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering
 Credits;Credits;Mitwirkende;Erschaffer
 CreditsText;"Cendric Font:
    Tizian
@@ -12,45 +15,63 @@ too many text on one line yay way to many text this needs to be cropped so hard 
 too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
    Tizian
 too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword."
+CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
+DL_Cendric_Okay;Okay, I will do that.;Okay, das mache ich.;Okay, dännhalt.
+DL_Choice_GiveMeAQuest;Give me a quest.;Gib mir eine Aufgabe.;Gib mer was zum mache.
+DL_Choice_Nothing;None of your business.;Geht dich nichts an.;Gaht dich en füechte Dreck ah.
+DL_Guard_Hello;Hey you, stop! What are you doing here, so very alone? It's dangerous out here.;Hey du, stopp! Was machst du hier, so alleine? Es ist gefährlich hier draussen.;Hey du, stop! Was machsch du da? Es isch gföhrlich, so elei go umelaufe.
+DL_Guard_KillSomeRats;Okay, go and kill some rats for me.;Okay, dann geh und töte ein paar Ratten für mich.;Okay, dänn gang und kill es paar Ratte für mich.
+DL_Guard_KillThemAlready;You haven't killed those rats! Go and do your job.;Die Ratten leben noch! Geh jetzt und erledige das.;Du hesch die Ratte nanig killt! Gang ez und mach da.
 English;English;Englisch;Englisch
 Exit;Exit;Beenden;Beende
+FifthSpell;5. Spell;5. Zauber;5. Zauber
 FireDamage;Fire Damage;Feuerschaden;Füürschade
 FireResistance;Fire Resistance;Feuerresistenz;Füürresistenz
+FirstSpell;1. Spell;1. Zauber;1. Zauber
+FourthSpell;4. Spell ;4. Zauber;4. Zauber
+GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
 German;German;Deutsch;Düütsch
 Gold;Gold;Gold;Gold
+Haste;Haste;Schnelligkeit;Schnelligkeit
 Health;Health;Lebensenergie;Lebe
 HealthRegeneration;Health Regeneration;Lebensregeneration;Lebensregeneration
+Hello;Hello;Hallo;Hoi
 IceDamage;Ice Damage;Eisschaden;Iisschade
 IceResistance;Ice Resistance;Eisresistenz;Iisresistenz
+Interact;Interact;Interagieren;Interagiere
 Inventory;Inventory;Inventar;Inventar
+it_eq_ringoflesserhealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
+it_eq_wizardhatblue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
+it_eq_wizardhatgrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
 it_fo_bread;Bread;Brot;Brot
 it_fo_caveberry;Cave berries;Höhlenbeeren;Höhlebeeri
 it_fo_cheese;Cheese;Käse;Chääs
 it_fo_glowingshroom;Glowing shroom;Leuchtpilz;Lüchtpilz
-it_mi_goldengoblet;Golden goblet;Goldener Pokal;Goldige Pokal
 it_fo_healingherb;Healing herb;Heilpflanze;Heilpflanze
-it_we_icestaf;Ice staff;Eisstab;Iisstab
-it_qe_letter;Sealed Letter;Versiegelter Brief;Versiglete Brief
-it_go_onecoin;Golden coin;Goldmünze;Goldmünze
-it_eq_ringoflesserhealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
-it_go_threecoins;A few coins;Ein paar Münzen;Es paar Münze
 it_fo_water;Water bottle;Wasserflasche;Wasserfläsche
-it_eq_wizardhatblue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
-it_eq_wizardhatgrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
+it_go_onecoin;Golden coin;Goldmünze;Goldmünze
+it_go_threecoins;A few coins;Ein paar Münzen;Es paar Münze
+it_mi_goldengoblet;Golden goblet;Goldener Pokal;Goldige Pokal
+it_qe_letter;Sealed Letter;Versiegelter Brief;Versiglete Brief
+it_we_icestaf;Ice staff;Eisstab;Iisstab
 itd_bread;An ordinary loaf of bread.;Ein einfaches Brot.;Es Brot halt.
-itd_cheese;Smelly.;Riecht nicht sonderlich gut.;Er müffelet echli.
-itd_icestaff;Feels ice cold.;Fühlt sich eiskalt an.;So chalt we Iis.
-itd_rustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
-itd_water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
-itd_wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
-Jump;Jump;Springen;Springe
-Language;Language;Sprache;Sproch
 itd_caveberry;Sweet;Süss;Süess
+itd_cheese;Smelly.;Riecht nicht sonderlich gut.;Er müffelet echli.
 itd_glowingshroom;It still glows…;Er leuchtet immer noch…;Er lüchtet immer na…
 itd_goldengoblet;A golden goblet;Ein goldener Pokal;En goldige Pokal
 itd_healingherb;Heals wounds;Heilt Wunden;Heilt Wunde
+itd_icestaff;Feels ice cold.;Fühlt sich eiskalt an.;So chalt we Iis.
 itd_letter;Sealed;Versiegelt;Versiglet
 itd_ringoflesserhealth;The small ruby sparkles;Der kleine Rubin funkelt;De chli Rubin funklet 
+itd_rustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
+itd_water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
+itd_wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
+Journal;Journal;Tagebuch;Tagebuech
+Jump;Jump;Springen;Springe
+Language;Language;Sprache;Sproch
+LightDamage;Light Damage;Lichtschaden;Liechtschade
+LightResistance;Light Resistance;Lichtresistenz;Liechtresistenz
+Load;Load;Laden;Lade
 LoadGame;Load Game;Spiel laden;Spiel lade
 Mana;Mana;Mana;Mana
 ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration
@@ -59,8 +80,11 @@ MoveDown;Move down;Nach unten bewegen;Abelaufe
 MoveLeft;Move left;Nach links laufen;Links laufe
 MoveRight;Move right;Nach rechts bewegen;Rechts laufe
 MoveUp;Move up;Nach oben bewegen;Uelaufe
+New;New;Neu;Neu
 NewGame;New Game;Neues Spiel;Neus Spiel
 No;No;Nein;Nai
+NoQuicksaveExists;No quick save exists;Kein Schnelllade-Speicherstand existiert;Kein Schnelllade-Speicherstand existiert
+NPC_Guard;Kingsguard;Wache des Königs;Wächter vom König
 Off;Off;Aus;Uus
 On;On;An;Ii
 Options;Options;Einstellungen;Iistellige
@@ -71,49 +95,31 @@ QuestionLoadGame;"Load game?
 All unsaved progress will be lost.";"Spiel laden?
 Ungespeicherter Fortschritt geht verloren.";"Spiel lade?
 Ungspeicherete Fortschritt isch futsch."
+QuestionOverwriteSaveGame;Overwrite this save game?;Diesen Speicherstand überschreiben?;De Speicherstand überschribe?
 QuestionStartNewGame;"Start new game?
 All unsaved progress will be lost.";"Neues Spiel starten?
 Ungespeicherter Fortschritt geht verloren.";"Neus Spiel starte?
 Ungspeicherete Fortschritt isch futsch."
 Quickload;Quick load;Schnell laden;Schnell lade
 Quicksave;Quick save;Schnell speichern;Schnell speichere
+Reduction;Reduction;Verminderung;Verminderig
 Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
 RetryLevel;Retry this level;Nochmal versuchen;Nomal probiere
+Save;Save;Speichern;Speichere
 SaveGame;Save Game;Spiel speichern;Spiel speichere
+SecondSpell;2. Spell;2. Zauber;2. Zauber
+ShadowDamage;Shadow Damage;Schattenschaden;Schatteschade
+ShadowResistance;Shadow Resistance;Schattenresistenz;Schatteresistenz
 Sound;Sound;Musik;Musig
 SoundVolume;Volume;Lautstärke;Luutstärchi
-Chop;Chop;Hauen;Haue
-FirstSpell;1. Spell;1. Zauber;1. Zauber
-SecondSpell;2. Spell;2. Zauber;2. Zauber
-ThirdSpell;3. Spell;3. Zauber;3. Zauber
-FourthSpell;4. Spell ;4. Zauber;4. Zauber
-FifthSpell;5. Spell;5. Zauber;5. Zauber
 SpellFire;Fireball;Feuerball;Füürball
 SpellIce;Icebolt;Eisblitz;Iisblitz
 StartGame;Start Game;Spiel starten;Spiel starte
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
+ThirdSpell;3. Spell;3. Zauber;3. Zauber
 Unknown;Unknown;Unbekannt;Unbekannt
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
-NoQuicksaveExists;No quick save exists;Kein Schnelllade-Speicherstand existiert;Kein Schnelllade-Speicherstand existiert
-NPC_Guard;Kingsguard;Wache des Königs;Wächter vom König
-Hello;Hello;Hallo;Hoi
-Interact;Interact;Interagieren;Interagiere
-Journal;Journal;Tagebuch;Tagebuech
-DL_Guard_Hello;Hey you, stop! What are you doing here, so very alone? It's dangerous out here.;Hey du, stopp! Was machst du hier, so alleine? Es ist gefährlich hier draussen.;Hey du, stop! Was machsch du da? Es isch gföhrlich, so elei go umelaufe.
-DL_Guard_KillSomeRats;Okay, go and kill some rats for me.;Okay, dann geh und töte ein paar Ratten für mich.;Okay, dänn gang und kill es paar Ratte für mich.
-DL_Cendric_Okay;Okay, I will do that.;Okay, das mache ich.;Okay, dännhalt.
-DL_Choice_GiveMeAQuest;Give me a quest.;Gib mir eine Aufgabe.;Gib mer was zum mache.
-DL_Choice_Nothing;None of your business.;Geht dich nichts an.;Gaht dich en füechte Dreck ah.
-DL_Guard_KillThemAlready;You haven't killed those rats! Go and do your job.;Die Ratten leben noch! Geh jetzt und erledige das.;Du hesch die Ratte nanig killt! Gang ez und mach da.
-Confirm;Confirm;Bestätigen;Bestätige
-ShadowDamage;Shadow Damage;Schattenschaden;Schatteschade
-LightDamage;Light Damage;Lichtschaden;Liechtschade
-ShadowResistance;Shadow Resistance;Schattenresistenz;Schatteresistenz
-LightResistance;Light Resistance;Lichtresistenz;Liechtresistenz
-Reduction;Reduction;Verminderung;Verminderig
-CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
-Haste;Haste;Schnelligkeit;Schnelligkeit
-CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering
-Load;Load;Laden;Lade
+Cancel;Cancel;Abbrechen;Abbreche
+Okay;Okay;Okay;Okee
+MessageNewSaveGame;Please enter the name for your new save game (at most 24 characters);Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen);Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)

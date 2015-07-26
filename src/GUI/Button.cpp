@@ -10,7 +10,7 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 	m_positionDefault = sf::Vector2f(box.left, box.top);
 	setPosition(m_positionDefault);
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_BLACK, box.width, box.height);
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), sf::Color::Black, box.width, box.height);
 	m_mainLayer.setPosition(m_positionDefault);
 
 	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_LIGHT_PURPLE, box.width, box.height);
@@ -18,16 +18,16 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 	m_backLayer.setPosition(m_positionDefault + m_backLayerOffset);
 
 	if (style == ButtonOrnamentStyle::NONE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), sf::Color::White, box.width, box.height);
 	}
 	else if (style == ButtonOrnamentStyle::SMALL) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), sf::Color::White, box.width, box.height);
 	}
 	else if (style == ButtonOrnamentStyle::MEDIUM) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), sf::Color::White, box.width, box.height);
 	}
 	else if (style == ButtonOrnamentStyle::LARGE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), CENDRIC_COLOR_WHITE, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), sf::Color::White, box.width, box.height);
 	}
 
 	m_ornamentLayer.setPosition(m_positionDefault);
@@ -80,7 +80,7 @@ void Button::update(const sf::Time& frameTime)
 	{
 		m_isPressed = false;
 		m_mainLayer.setPosition(m_positionDefault);
-		m_mainLayer.setColor(CENDRIC_COLOR_BLACK);
+		m_mainLayer.setColor(sf::Color::Black);
 	}
 	GameObject::update(frameTime);
 }

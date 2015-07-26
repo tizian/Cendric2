@@ -8,6 +8,7 @@
 #include "Screens/CreditsScreen.h"
 #include "Screens/OptionsScreen.h"
 #include "Screens/LoadGameScreen.h"
+#include "Screens/SaveGameScreen.h"
 #include "Misc/FireBasket.h"
 #include "CharacterCore.h"
 #include "GUI/Button.h"

@@ -159,12 +159,12 @@ bool InputController::isMouseJustPressedRight() const
 
 bool InputController::isKeyActive(Key key)
 {
-	return m_isWindowFocused && m_keyActiveMap[key];
+	return m_isWindowFocused && !m_isReadText && m_keyActiveMap[key];
 }
 
 bool InputController::isKeyJustPressed(Key key)
 {
-	return m_isWindowFocused && m_keyJustPressedMap[key];
+	return m_isWindowFocused && !m_isReadText && m_keyJustPressedMap[key];
 }
 
 void InputController::startReadingText()
@@ -185,10 +185,16 @@ const std::string& InputController::getReadText() const
 
 void InputController::readUnicode(sf::Uint32 character)
 {
-	if (m_isReadText && m_isWindowFocused && character < 128)
+	if (!m_isReadText || !m_isWindowFocused 
+		|| character == '\t' 
+		|| character == '\n') return;
+	if (character == '\b')
 	{
-		m_readText += static_cast<char>(character);
+		if (!m_readText.empty())
+			m_readText.erase(m_readText.size() - 1, 1);
 	}
+	else if (character < 128)
+		m_readText += static_cast<char>(character);
 }
 
 

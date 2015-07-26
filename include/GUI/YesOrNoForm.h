@@ -34,7 +34,4 @@ private:
 	BitmapText m_message;
 	Button* m_yesButton;
 	Button* m_noButton;
-
-	// determines the distance of the message text and the buttons from border
-	const float DIST_FROM_BORDER = 10.f;
 };

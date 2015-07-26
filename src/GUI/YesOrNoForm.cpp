@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// determines the distance of the message text and the buttons from border
+const float DIST_FROM_BORDER = 10.f;
 
 YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject()
 {
