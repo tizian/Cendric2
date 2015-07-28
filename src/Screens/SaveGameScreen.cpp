@@ -34,16 +34,16 @@ Screen* SaveGameScreen::update(const sf::Time& frameTime)
 	{
 		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 		m_yesOrNoForm->setMessage("QuestionOverwriteSaveGame");
-		m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNoPressed, this)); 
-		m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onOverwriteSaveGamePressed, this));
+		m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNo, this)); 
+		m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onOverwriteSaveGame, this));
 		addObject(GameObjectType::_Form, m_yesOrNoForm);
 		setAllButtonsEnabled(false);
 	}
 	else if (m_newSaveGameButton->isClicked())
 	{
 		m_newSaveGameForm = new NewSaveGameForm(sf::FloatRect(400, 350, 450, 200));
-		m_newSaveGameForm->setOnOkClicked(std::bind(&SaveGameScreen::onNewSaveGamePressed, this));
-		m_newSaveGameForm->setOnCancelClicked(std::bind(&SaveGameScreen::onCancelPressed, this));
+		m_newSaveGameForm->setOnOkClicked(std::bind(&SaveGameScreen::onNewSaveGame, this));
+		m_newSaveGameForm->setOnCancelClicked(std::bind(&SaveGameScreen::onCancel, this));
 		addObject(GameObjectType::_Form, m_newSaveGameForm);
 		setAllButtonsEnabled(false);
 	}
@@ -51,8 +51,8 @@ Screen* SaveGameScreen::update(const sf::Time& frameTime)
 	{
 		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 		m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
-		m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNoPressed, this));
-		m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onDeleteSaveGamePressed, this));
+		m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onDeleteSaveGame, this));
 		addObject(GameObjectType::_Form, m_yesOrNoForm);
 		setAllButtonsEnabled(false);
 	}
@@ -114,13 +114,13 @@ void SaveGameScreen::execOnExit(const Screen *nextScreen)
 // <<< functions for agents >>>
 
 // yes or no forms
-void SaveGameScreen::onNoPressed()
+void SaveGameScreen::onNo()
 {
 	m_yesOrNoForm = nullptr;
 	setAllButtonsEnabled(true);
 }
 
-void SaveGameScreen::onOverwriteSaveGamePressed()
+void SaveGameScreen::onOverwriteSaveGame()
 {
 	m_yesOrNoForm = nullptr;
 	if (m_characterCore->save(m_saveGameWindow->getChosenFilename(), m_saveGameWindow->getChosenSaveName()))
@@ -136,7 +136,7 @@ void SaveGameScreen::onOverwriteSaveGamePressed()
 	setAllButtonsEnabled(true);
 }
 
-void SaveGameScreen::onDeleteSaveGamePressed()
+void SaveGameScreen::onDeleteSaveGame()
 {
 	m_yesOrNoForm = nullptr;
 	if (remove(m_saveGameWindow->getChosenFilename().c_str()) == 0)
@@ -153,13 +153,13 @@ void SaveGameScreen::onDeleteSaveGamePressed()
 }
 
 // new save game form
-void SaveGameScreen::onCancelPressed()
+void SaveGameScreen::onCancel()
 {
 	m_newSaveGameForm = nullptr;
 	setAllButtonsEnabled(true);
 }
 
-void SaveGameScreen::onNewSaveGamePressed()
+void SaveGameScreen::onNewSaveGame()
 {
 	string name = m_newSaveGameForm->getSavegameName();
 	string cleanedName = name;

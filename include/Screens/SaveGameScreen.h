@@ -35,11 +35,11 @@ private:
 	YesOrNoForm* m_yesOrNoForm = nullptr;
 
 	// pretty little agents to give to our yes or no forms.
-	void onNoPressed();
-	void onOverwriteSaveGamePressed();
-	void onDeleteSaveGamePressed();
+	void onNo();
+	void onOverwriteSaveGame();
+	void onDeleteSaveGame();
 
 	// pretty little agents to give to our new save game form.
-	void onCancelPressed();
-	void onNewSaveGamePressed();
+	void onCancel();
+	void onNewSaveGame();
 };

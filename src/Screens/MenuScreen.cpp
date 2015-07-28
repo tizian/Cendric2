@@ -38,8 +38,8 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			m_newCharacterCore->loadNew();
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 			m_yesOrNoForm->setMessage("QuestionStartNewGame");
-			m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNoPressed, this));
-			m_yesOrNoForm->setOnYesClicked(std::bind(&MenuScreen::onStartNewGamePressed, this));
+			m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNo, this));
+			m_yesOrNoForm->setOnYesClicked(std::bind(&MenuScreen::onStartNewGame, this));
 			addObject(GameObjectType::_Form, m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
@@ -131,7 +131,7 @@ void MenuScreen::execOnExit(const Screen *nextScreen)
 
 // <<< agents for the yes or no form >>>
 
-void MenuScreen::onStartNewGamePressed()
+void MenuScreen::onStartNewGame()
 {
 	m_yesOrNoForm->setDisposed();
 	m_yesOrNoForm = nullptr;
@@ -141,7 +141,7 @@ void MenuScreen::onStartNewGamePressed()
 	m_startNewGame = true;
 }
 
-void MenuScreen::onNoPressed()
+void MenuScreen::onNo()
 {
 	m_yesOrNoForm = nullptr;
 	delete m_newCharacterCore;
