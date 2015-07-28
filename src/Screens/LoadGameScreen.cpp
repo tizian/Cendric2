@@ -17,7 +17,13 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 	{
 		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
 	}
-	if (m_yesOrNoForm == nullptr && (m_loadButton->isClicked() || m_saveGameWindow->isChosen()))
+	updateObjects(GameObjectType::_Window, frameTime);
+	updateObjects(GameObjectType::_Button, frameTime);
+	updateObjects(GameObjectType::_Form, frameTime);
+	updateTooltipText(frameTime);
+	deleteDisposedObjects();
+	if (!getObjects(GameObjectType::_Form)->empty()) return this;
+	if (m_loadSaveGameButton->isClicked() || m_saveGameWindow->isChosen())
 	{
 		if (m_characterCore == nullptr)
 		{
@@ -40,16 +46,21 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 			}
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 			m_yesOrNoForm->setMessage("QuestionLoadGame");
-			m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNoPressed, this));
-			m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onLoadGamePressed, this));
+			m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
+			m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onLoadGame, this));
 			addObject(GameObjectType::_Form, m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
 	}
-	updateObjects(GameObjectType::_Window, frameTime);
-	updateObjects(GameObjectType::_Button, frameTime);
-	updateObjects(GameObjectType::_Form, frameTime);
-	deleteDisposedObjects();
+	else if (m_deleteSaveGameButton->isClicked())
+	{
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
+		addObject(GameObjectType::_Form, m_yesOrNoForm);
+		setAllButtonsEnabled(false);
+	}
 	return this;
 }
 
@@ -57,6 +68,7 @@ void LoadGameScreen::render(sf::RenderTarget &renderTarget)
 {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
+	renderTooltipText(renderTarget);
 	renderObjects(GameObjectType::_Window, renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
@@ -69,21 +81,29 @@ void LoadGameScreen::execOnEnter(const Screen *previousScreen)
 	m_title->setCharacterSize(25);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
+	float buttonWidth = 200.f;
+	float buttonHeight = 50.f;
+	float marginX = 60.f;
+	float marginY = WINDOW_HEIGHT - 100.f;
+	float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
+	float buttonSpacing = (buttonSpaceWidth - 3 * buttonWidth) / 2.f;
+
 	// add buttons
-	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
+	m_backButton = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
 	m_backButton->setText("Back");
 	addObject(GameObjectType::_Button, m_backButton);
 
-	m_loadButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 50));
-	m_loadButton->setText("Load");
-	addObject(GameObjectType::_Button, m_loadButton);
+	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight));
+	m_deleteSaveGameButton->setText("Delete");
+	addObject(GameObjectType::_Button, m_deleteSaveGameButton);
+
+	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight));
+	m_loadSaveGameButton->setText("Load");
+	addObject(GameObjectType::_Button, m_loadSaveGameButton);
 
 	// savegame window
 	m_saveGameWindow = new SaveGameWindow();
-	if (m_saveGameWindow->getChosenFilename().empty())
-	{
-		m_loadButton->setEnabled(false);
-	}
+	setAllButtonsEnabled(true);
 	addObject(GameObjectType::_Window, m_saveGameWindow);
 }
 
@@ -93,9 +113,18 @@ void LoadGameScreen::execOnExit(const Screen *nextScreen)
 	delete m_newCharacterCore;
 }
 
+void LoadGameScreen::setAllButtonsEnabled(bool value)
+{
+	Screen::setAllButtonsEnabled(value);
+	bool empty = m_saveGameWindow->getChosenFilename().empty();
+	m_loadSaveGameButton->setEnabled(value && !empty);
+	m_deleteSaveGameButton->setEnabled(value && !empty);
+	m_saveGameWindow->setEnabled(value);
+}
+
 // <<< agents for yes or no form >>>
 
-void LoadGameScreen::onNoPressed()
+void LoadGameScreen::onNo()
 {
 	m_yesOrNoForm = nullptr;
 	delete m_newCharacterCore;
@@ -103,11 +132,27 @@ void LoadGameScreen::onNoPressed()
 	setAllButtonsEnabled(true);
 }
 
-void LoadGameScreen::onLoadGamePressed()
+void LoadGameScreen::onLoadGame()
 {
 	m_yesOrNoForm = nullptr;
 	delete m_characterCore;
 	m_characterCore = m_newCharacterCore;
 	m_newCharacterCore = nullptr;
 	m_loadGame = true;
+}
+
+void LoadGameScreen::onDeleteSaveGame()
+{
+	m_yesOrNoForm = nullptr;
+	if (remove(m_saveGameWindow->getChosenFilename().c_str()) == 0)
+	{
+		setTooltipText(g_textProvider->getText("SavegameDeleted"), CENDRIC_COLOR_LIGHT_PURPLE, true);
+	}
+	else
+	{
+		g_logger->logError("SaveGameScreen", "Savegame could not be deleted");
+		setTooltipText(g_textProvider->getText("OperationFailed"), sf::Color::Red, true);
+	}
+	m_saveGameWindow->reload();
+	setAllButtonsEnabled(true);
 }

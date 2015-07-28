@@ -102,10 +102,7 @@ void SaveGameScreen::execOnEnter(const Screen *previousScreen)
 
 	// savegame window
 	m_saveGameWindow = new SaveGameWindow();
-	if (m_saveGameWindow->getChosenFilename().empty())
-	{
-		m_saveButton->setEnabled(false);
-	}
+	setAllButtonsEnabled(true);
 	addObject(GameObjectType::_Window, m_saveGameWindow);
 }
 

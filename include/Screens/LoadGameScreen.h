@@ -21,8 +21,10 @@ public:
 	void execOnExit(const Screen *nextScreen) override;
 
 private:
+	void setAllButtonsEnabled(bool value) override;
 	Button* m_backButton = nullptr;
-	Button* m_loadButton = nullptr;
+	Button* m_loadSaveGameButton = nullptr;
+	Button* m_deleteSaveGameButton = nullptr;
 	BitmapText* m_title = nullptr;
 	SaveGameWindow* m_saveGameWindow = nullptr;
 
@@ -30,8 +32,9 @@ private:
 	CharacterCore* m_newCharacterCore = nullptr;
 
 	// agents for yes or no form
-	void onNoPressed();
-	void onLoadGamePressed();
+	void onNo();
+	void onLoadGame();
+	void onDeleteSaveGame();
 
 	bool m_loadGame = false;
 };

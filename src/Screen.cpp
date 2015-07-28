@@ -141,7 +141,7 @@ void Screen::setTooltipText(const wstring& text, const sf::Color& color, bool is
 	m_tooltipText.setCharacterSize(12);
 	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 10.f);
 	m_tooltipText.setColor(color);
-	m_tooltipTime = sf::seconds(0.06f * static_cast<float>(text.length()));
+	m_tooltipTime = sf::seconds(0.07f * static_cast<float>(text.length()));
 }
 
 void Screen::renderTooltipText(sf::RenderTarget& target) const
