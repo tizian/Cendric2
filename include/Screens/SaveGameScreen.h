@@ -27,6 +27,7 @@ private:
 	Button* m_backButton = nullptr;
 	Button* m_saveButton = nullptr;
 	Button* m_newSaveGameButton = nullptr;
+	Button* m_deleteSaveGameButton = nullptr;
 	BitmapText* m_title = nullptr;
 
 	SaveGameWindow* m_saveGameWindow = nullptr;

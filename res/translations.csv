@@ -125,3 +125,5 @@ Okay;Okay;Okay;Okee
 MessageNewSaveGame;Please enter the name for your new save game (at most 24 characters);Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen);Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)
 Delete;Delete;Löschen;Lösche
 QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du diesen Speicherstand wirklich löschen?;Wetsch de Speicherstand würkli lösche?
+SavegameDeleted;Save game successfully deleted;Speicherstand erfolgreich gelöscht;Speicherstand isch glöscht
+OperationFailed;Operation failed;Operation fehlgeschlagen;Es het nid klappt

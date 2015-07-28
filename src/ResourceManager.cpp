@@ -68,7 +68,8 @@ void ResourceManager::init()
 		{ ResourceID::Texture_GUI_ornament_none, "res/assets/gui/ornament_none.png" },
 		{ ResourceID::Texture_GUI_ornament_small, "res/assets/gui/ornament_small.png" },
 		{ ResourceID::Texture_GUI_ornament_medium, "res/assets/gui/ornament_medium.png" },
-		{ ResourceID::Texture_GUI_ornament_large, "res/assets/gui/ornament_large.png" }
+		{ ResourceID::Texture_GUI_ornament_large, "res/assets/gui/ornament_large.png" },
+		{ ResourceID::Texture_GUI_arrow, "res/assets/gui/arrow.png" }
 	});
 
 	// font should be always loaded to avoid lags when loading later

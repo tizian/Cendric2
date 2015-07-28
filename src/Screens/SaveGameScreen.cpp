@@ -6,12 +6,16 @@ using namespace std;
 SaveGameScreen::SaveGameScreen(CharacterCore* core) : Screen(core)
 {
 	// precondition: character core can't be nullptr here.
+	assert(core != nullptr);
 }
 
 void SaveGameScreen::setAllButtonsEnabled(bool value)
 {
 	Screen::setAllButtonsEnabled(value);
-	m_saveButton->setEnabled(value && !m_saveGameWindow->getChosenFilename().empty());
+	bool empty = m_saveGameWindow->getChosenFilename().empty();
+	m_saveButton->setEnabled(value && !empty);
+	m_deleteSaveGameButton->setEnabled(value && !empty);
+	m_saveGameWindow->setEnabled(value);
 }
 
 Screen* SaveGameScreen::update(const sf::Time& frameTime)
@@ -20,7 +24,13 @@ Screen* SaveGameScreen::update(const sf::Time& frameTime)
 	{
 		return new MenuScreen(m_characterCore);
 	}
-	else if (m_yesOrNoForm == nullptr && m_newSaveGameForm == nullptr && (m_saveButton->isClicked() || m_saveGameWindow->isChosen()))
+	updateObjects(GameObjectType::_Window, frameTime);
+	updateObjects(GameObjectType::_Button, frameTime);
+	updateObjects(GameObjectType::_Form, frameTime);
+	updateTooltipText(frameTime);
+	deleteDisposedObjects();
+	if (!getObjects(GameObjectType::_Form)->empty()) return this;
+	if (m_saveButton->isClicked() || m_saveGameWindow->isChosen())
 	{
 		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 		m_yesOrNoForm->setMessage("QuestionOverwriteSaveGame");
@@ -29,7 +39,7 @@ Screen* SaveGameScreen::update(const sf::Time& frameTime)
 		addObject(GameObjectType::_Form, m_yesOrNoForm);
 		setAllButtonsEnabled(false);
 	}
-	else if (m_yesOrNoForm == nullptr && m_newSaveGameForm == nullptr && m_newSaveGameButton->isClicked())
+	else if (m_newSaveGameButton->isClicked())
 	{
 		m_newSaveGameForm = new NewSaveGameForm(sf::FloatRect(400, 350, 450, 200));
 		m_newSaveGameForm->setOnOkClicked(std::bind(&SaveGameScreen::onNewSaveGamePressed, this));
@@ -37,11 +47,15 @@ Screen* SaveGameScreen::update(const sf::Time& frameTime)
 		addObject(GameObjectType::_Form, m_newSaveGameForm);
 		setAllButtonsEnabled(false);
 	}
-	updateObjects(GameObjectType::_Window, frameTime);
-	updateObjects(GameObjectType::_Button, frameTime);
-	updateObjects(GameObjectType::_Form, frameTime);
-	updateTooltipText(frameTime);
-	deleteDisposedObjects();
+	else if (m_deleteSaveGameButton->isClicked())
+	{
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNoPressed, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onDeleteSaveGamePressed, this));
+		addObject(GameObjectType::_Form, m_yesOrNoForm);
+		setAllButtonsEnabled(false);
+	}
 	return this;
 }
 
@@ -63,17 +77,28 @@ void SaveGameScreen::execOnEnter(const Screen *previousScreen)
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
 	// add buttons
-	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
+	float buttonWidth = 200.f;
+	float buttonHeight = 50.f;
+	float marginX = 60.f;
+	float marginY = WINDOW_HEIGHT - 100.f;
+	float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
+	float buttonSpacing = (buttonSpaceWidth - 4 * buttonWidth) / 3.f;
+
+	m_backButton = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
 	m_backButton->setText("Back");
 	addObject(GameObjectType::_Button, m_backButton);
 
-	m_saveButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 50));
-	m_saveButton->setText("Save");
-	addObject(GameObjectType::_Button, m_saveButton);
+	m_deleteSaveGameButton = new Button(sf::FloatRect(buttonWidth + buttonSpacing + marginX, marginY, buttonWidth, buttonHeight));
+	m_deleteSaveGameButton->setText("Delete");
+	addObject(GameObjectType::_Button, m_deleteSaveGameButton);
 
-	m_newSaveGameButton = new Button(sf::FloatRect((WINDOW_WIDTH - 200) / 2, WINDOW_HEIGHT - 100, 200, 50));
+	m_newSaveGameButton = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight));
 	m_newSaveGameButton->setText("New");
 	addObject(GameObjectType::_Button, m_newSaveGameButton);
+
+	m_saveButton = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight));
+	m_saveButton->setText("Save");
+	addObject(GameObjectType::_Button, m_saveButton);
 
 	// savegame window
 	m_saveGameWindow = new SaveGameWindow();
@@ -105,13 +130,29 @@ void SaveGameScreen::onOverwriteSaveGamePressed()
 	{
 		setTooltipText(g_textProvider->getText("GameSaved"), CENDRIC_COLOR_LIGHT_PURPLE, true);;
 	}
+	else
+	{
+		g_logger->logError("SaveGameScreen", "Savegame could not be saved");
+		setTooltipText(g_textProvider->getText("OperationFailed"), sf::Color::Red, true);
+	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);
 }
 
 void SaveGameScreen::onDeleteSaveGamePressed()
 {
-	// TODO
+	m_yesOrNoForm = nullptr;
+	if (remove(m_saveGameWindow->getChosenFilename().c_str()) == 0)
+	{
+		setTooltipText(g_textProvider->getText("SavegameDeleted"), CENDRIC_COLOR_LIGHT_PURPLE, true);
+	}
+	else
+	{
+		g_logger->logError("SaveGameScreen", "Savegame could not be deleted");
+		setTooltipText(g_textProvider->getText("OperationFailed"), sf::Color::Red, true);
+	}
+	m_saveGameWindow->reload();
+	setAllButtonsEnabled(true);
 }
 
 // new save game form
@@ -139,6 +180,11 @@ void SaveGameScreen::onNewSaveGamePressed()
 	if (m_characterCore->save(file, name))
 	{
 		setTooltipText(g_textProvider->getText("GameSaved"), CENDRIC_COLOR_LIGHT_PURPLE, true);
+	}
+	else
+	{
+		g_logger->logError("SaveGameScreen", "Savegame could not be created");
+		setTooltipText(g_textProvider->getText("OperationFailed"), sf::Color::Red, true);
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);

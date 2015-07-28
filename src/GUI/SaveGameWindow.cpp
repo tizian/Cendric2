@@ -20,9 +20,25 @@ inline bool ends_with(std::string const & value, std::string const & ending)
 	return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
-SaveGameWindow::SaveGameWindow() : Window(BOX, WindowOrnamentStyle::LARGE, CENDRIC_COLOR_DARK_PURPLE, sf::Color(0, 0, 0, 100), sf::Color::White)
+SaveGameWindow::SaveGameWindow() : Window(BOX, 
+	WindowOrnamentStyle::LARGE, 
+	CENDRIC_COLOR_DARK_PURPLE, 
+	sf::Color(0, 0, 0, 100), sf::Color::White),
+	m_maxShowableEntries(static_cast<int>((BOX.height - 2 * TEXT_OFFSET.x) / LINE_PITCH))
 {
 	reload();
+	m_arrowUp.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));
+	m_arrowUp.setOrigin(sf::Vector2f(m_arrowUp.getLocalBounds().width / 2, m_arrowUp.getLocalBounds().height / 2));
+	m_arrowUp.setPosition(sf::Vector2f(BOX.left + 25.f, BOX.top + 50.f));
+	m_arrowDown.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));
+	m_arrowDown.setOrigin(sf::Vector2f(m_arrowDown.getLocalBounds().width / 2, m_arrowDown.getLocalBounds().height / 2));
+	m_arrowDown.setScale(sf::Vector2f(1.f, -1.f));
+	m_arrowDown.setPosition(sf::Vector2f(BOX.left + 25.f, BOX.top + BOX.height - 50.f));
+}
+
+SaveGameWindow::~SaveGameWindow()
+{
+	g_resourceManager->deleteResource(ResourceID::Texture_GUI_arrow);
 }
 
 void SaveGameWindow::reload()
@@ -67,6 +83,8 @@ void SaveGameWindow::reload()
 	{
 		m_chosenEntry = 0;
 		m_entries[m_chosenEntry].select();
+		m_topEntry = 0;
+		m_bottomEntry = std::min(static_cast<int>(m_entries.size()) - 1, m_maxShowableEntries - 1);
 	}
 }
 
@@ -79,18 +97,26 @@ bool SaveGameWindow::isChosen()
 
 void SaveGameWindow::update(const sf::Time& frameTime)
 {
-	if (!m_entries.empty())
+	if (!m_entries.empty() && m_isEnabled)
 	{
 		int oldEntry = m_chosenEntry;
 		if (g_inputController->isKeyJustPressed(Key::Up))
 		{
 			m_chosenEntry = max(m_chosenEntry - 1, 0);
+			if (m_chosenEntry < m_topEntry)
+			{
+				scrollUp();
+			}
 		}
 		else if (g_inputController->isKeyJustPressed(Key::Down))
 		{
 			m_chosenEntry = min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
+			if (m_chosenEntry > m_bottomEntry)
+			{
+				scrollDown();
+			}
 		}
-		for (int i = 0; i < m_entries.size(); i++)
+		for (int i = m_topEntry; i < m_bottomEntry + 1; i++)
 		{
 			m_entries[i].update(frameTime);
 			if (m_entries[i].isClicked())
@@ -118,9 +144,17 @@ void SaveGameWindow::update(const sf::Time& frameTime)
 void SaveGameWindow::render(sf::RenderTarget& renderTarget)
 {
 	Window::render(renderTarget);
-	for (auto& it : m_entries)
+	for (int i = m_topEntry; i < m_bottomEntry + 1; i++)
 	{
-		it.render(renderTarget);
+		m_entries[i].render(renderTarget);
+	}
+	if (m_topEntry > 0)
+	{
+		renderTarget.draw(m_arrowUp);
+	}
+	if (m_entries.size() - 1 > m_bottomEntry)
+	{
+		renderTarget.draw(m_arrowDown);
 	}
 }
 
@@ -133,6 +167,11 @@ std::string SaveGameWindow::getChosenFilename() const
 	return m_entries[m_chosenEntry].getFilename();
 }
 
+void SaveGameWindow::setEnabled(bool value)
+{
+	m_isEnabled = value;
+}
+
 std::string SaveGameWindow::getChosenSaveName() const
 {
 	if (m_entries.empty())
@@ -140,6 +179,26 @@ std::string SaveGameWindow::getChosenSaveName() const
 		return "";
 	}
 	return m_entries[m_chosenEntry].getSaveName();
+}
+
+void SaveGameWindow::scrollUp()
+{
+	m_topEntry = m_chosenEntry;
+	m_bottomEntry = m_chosenEntry + m_maxShowableEntries - 1;
+	for (auto& it : m_entries)
+	{
+		it.setPositionY(it.getPosition().y + LINE_PITCH);
+	}
+}
+
+void SaveGameWindow::scrollDown()
+{
+	m_topEntry = m_chosenEntry - m_maxShowableEntries + 1;
+	m_bottomEntry = m_chosenEntry;
+	for (auto& it : m_entries)
+	{
+		it.setPositionY(it.getPosition().y - LINE_PITCH);
+	}
 }
 
 // <<< SaveGameEntry >>>

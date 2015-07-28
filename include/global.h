@@ -7,6 +7,8 @@
 #include <iostream>
 #include <cmath>
 #include <functional>
+// #define NDEBUG; // uncomment this for final version
+#include <assert.h>
 
 #define PI_F 3.14159265358979f
 #define DEG_TO_RAD 57.2957795f

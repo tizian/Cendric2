@@ -42,4 +42,5 @@ enum class ResourceID
 	Texture_GUI_ornament_small,
 	Texture_GUI_ornament_medium,
 	Texture_GUI_ornament_large,
+	Texture_GUI_arrow,
 };
