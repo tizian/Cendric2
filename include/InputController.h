@@ -50,8 +50,9 @@ private:
 	std::map<Key, bool> m_keyJustPressedMap;
 	sf::RenderWindow* m_mainWindow;
 
-	// Mouse keys can't be set in this map. Their functions are fixed
-	const std::map<Key, sf::Keyboard::Key>* m_keyMap;
+	// Mouse keys can't be set in this maps. Their functions are fixed
+	const std::map<Key, sf::Keyboard::Key>* m_mainKeyMap;
+	const std::map<Key, sf::Keyboard::Key>* m_alternativeKeyMap;
 
 	bool m_isMousePressedLeft = false;
 	bool m_isMousePressedRight = false;

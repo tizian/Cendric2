@@ -23,10 +23,15 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(LANGUAGE));
 				noError = readLanguage(line, data);
 			}
-			else if (line.compare(0, strlen(INPUT_MAPPING), string(INPUT_MAPPING)) == 0)
+			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), string(MAIN_INPUT_MAPPING)) == 0)
 			{
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(INPUT_MAPPING));
-				noError = readInputMapping(line, data);
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(MAIN_INPUT_MAPPING));
+				noError = readMainInputMapping(line, data);
+			}
+			else if (line.compare(0, strlen(ALTERNATIVE_INPUT_MAPPING), string(ALTERNATIVE_INPUT_MAPPING)) == 0)
+			{
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(ALTERNATIVE_INPUT_MAPPING));
+				noError = readAlternativeInputMapping(line, data);
 			}
 			else if (line.compare(0, strlen(MAX_FPS), string(MAX_FPS)) == 0)
 			{
@@ -72,15 +77,30 @@ bool ConfigurationReader::checkConfigurationData(ConfigurationData& data) const
 {
 	// checking key map for duplicate entries...
 	std::set<sf::Keyboard::Key> values;
-	for (auto it = data.keyMap.begin(); it != data.keyMap.end(); it++)
+	for (auto& it : data.mainKeyMap)
 	{
+		// "KeyCount" is allowed and is interpreted as "not set"
+		if (it.second == sf::Keyboard::KeyCount) continue;
 		// insert.second will be false if the value is already in the set
-		if (!values.insert(it->second).second)
+		if (!values.insert(it.second).second)
 		{
-            g_logger->logError("ConfigurationReader", "Inconsistent key map, a keyboard value appears twice for different keys. Key: " + std::to_string(it->second));
+            g_logger->logError("ConfigurationReader", "Inconsistent key map (main), a keyboard value appears twice for different keys. Key: " + std::to_string(it.second));
 			return false;
 		}
 	}
+	// values mustn't be cleared here! the alternative key map should not have values already present in the main one.
+	for (auto& it : data.alternativeKeyMap)
+	{
+		// "KeyCount" is allowed and is interpreted as "key not set"
+		if (it.second == sf::Keyboard::KeyCount) continue;
+		// insert.second will be false if the value is already in the set
+		if (!values.insert(it.second).second)
+		{
+			g_logger->logError("ConfigurationReader", "Inconsistent key map (alternative), a keyboard value appears twice for different keys. Key: " + std::to_string(it.second));
+			return false;
+		}
+	}
+
 	return true;
 }
 
@@ -151,7 +171,7 @@ bool ConfigurationReader::readSoundOn(const std::string& line, ConfigurationData
 	return true;
 }
 
-bool ConfigurationReader::readInputMapping(const std::string& line, ConfigurationData& data) const
+bool ConfigurationReader::readMainInputMapping(const std::string& line, ConfigurationData& data) const
 {
 	size_t colon = line.find(':');
 	if (colon == string::npos || line.length() < colon + 1)
@@ -168,16 +188,47 @@ bool ConfigurationReader::readInputMapping(const std::string& line, Configuratio
 	size_t comma = line.find(',');
 	if (comma == string::npos || line.length() < comma + 1)
 	{
-		g_logger->logError("ConfigurationReader", "No comma found after key integer (input mapping tag) or no value after comma.");
+		g_logger->logError("ConfigurationReader", "No comma found after key integer (main input mapping tag) or no value after comma.");
 		return false;
 	}
 	sf::Keyboard::Key keyboardKey = static_cast<sf::Keyboard::Key>(atoi(line.substr(comma + 1).c_str()));
-	if (keyboardKey >= sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown)
+	if (keyboardKey > sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown)
 	{
 		g_logger->logError("ConfigurationReader", "sf Keyboard Key id not recognized.");
 		return false;
 	}
-	data.keyMap.insert({key, keyboardKey});
+	data.mainKeyMap.insert({key, keyboardKey});
 	return true;
 }
+
+bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const
+{
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1)
+	{
+		g_logger->logError("ConfigurationReader", "No colon found after input mapping tag or no value after colon.");
+		return false;
+	}
+	Key key = static_cast<Key>(atoi(line.substr(colon + 1).c_str()));
+	if (key >= Key::MAX || key <= Key::Void)
+	{
+		g_logger->logError("ConfigurationReader", "Key id not recognized.");
+		return false;
+	}
+	size_t comma = line.find(',');
+	if (comma == string::npos || line.length() < comma + 1)
+	{
+		g_logger->logError("ConfigurationReader", "No comma found after key integer (alternative input mapping tag) or no value after comma.");
+		return false;
+	}
+	sf::Keyboard::Key keyboardKey = static_cast<sf::Keyboard::Key>(atoi(line.substr(comma + 1).c_str()));
+	if (keyboardKey > sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown)
+	{
+		g_logger->logError("ConfigurationReader", "sf Keyboard Key id not recognized.");
+		return false;
+	}
+	data.alternativeKeyMap.insert({ key, keyboardKey });
+	return true;
+}
+
 

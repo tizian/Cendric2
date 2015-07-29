@@ -100,35 +100,23 @@ void SaveGameWindow::update(const sf::Time& frameTime)
 	if (!m_entries.empty() && m_isEnabled)
 	{
 		int oldEntry = m_chosenEntry;
-		if (g_inputController->isKeyJustPressed(Key::Up))
+		if (!updateScrolling(frameTime))
 		{
-			m_chosenEntry = max(m_chosenEntry - 1, 0);
-			if (m_chosenEntry < m_topEntry)
+			for (int i = m_topEntry; i < m_bottomEntry + 1; i++)
 			{
-				scrollUp();
-			}
-		}
-		else if (g_inputController->isKeyJustPressed(Key::Down))
-		{
-			m_chosenEntry = min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
-			if (m_chosenEntry > m_bottomEntry)
-			{
-				scrollDown();
-			}
-		}
-		for (int i = m_topEntry; i < m_bottomEntry + 1; i++)
-		{
-			m_entries[i].update(frameTime);
-			if (m_entries[i].isClicked())
-			{
-				if (i == m_chosenEntry)
+				m_entries[i].update(frameTime);
+				if (m_entries[i].isClicked())
 				{
-					// a chosen option was clicked again
-					m_isChosen = true;
+					if (i == m_chosenEntry)
+					{
+						// a chosen option was clicked again
+						m_isChosen = true;
+					}
+					m_chosenEntry = i;
 				}
-				m_chosenEntry = i;
 			}
 		}
+
 		if (oldEntry != m_chosenEntry)
 		{
 			m_entries[oldEntry].deselect();
@@ -139,6 +127,77 @@ void SaveGameWindow::update(const sf::Time& frameTime)
 			m_isChosen = true;
 		}
 	}
+}
+
+bool SaveGameWindow::updateScrolling(const sf::Time& frameTime)
+{
+	if (g_inputController->isKeyJustPressed(Key::Up))
+	{
+		m_chosenEntry = max(m_chosenEntry - 1, 0);
+		if (m_chosenEntry < m_topEntry)
+		{
+			scrollUp();
+		}
+		m_upActiveTime = frameTime;
+		return true;
+	}
+	if (g_inputController->isKeyJustPressed(Key::Down))
+	{
+		m_chosenEntry = min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
+		if (m_chosenEntry > m_bottomEntry)
+		{
+			scrollDown();
+		}
+		m_downActiveTime = frameTime;
+		return true;
+	}
+	if (m_upActiveTime > sf::Time::Zero)
+	{
+		if (g_inputController->isKeyActive(Key::Up))
+		{
+			m_upActiveTime += frameTime;
+		}
+		else
+		{
+			m_upActiveTime = sf::Time::Zero;
+			return false;
+		}
+	}
+	if (m_downActiveTime > sf::Time::Zero)
+	{
+		if (g_inputController->isKeyActive(Key::Down))
+		{
+			m_downActiveTime += frameTime;
+		}
+		else
+		{
+			m_downActiveTime = sf::Time::Zero;
+			return false;
+		}
+	}
+	m_timeSinceTick += frameTime;
+	if (m_timeSinceTick < SCROLL_TICK_TIME) return false;
+	if (m_upActiveTime > SCROLL_TIMEOUT)
+	{
+		m_chosenEntry = max(m_chosenEntry - 1, 0);
+		m_timeSinceTick = sf::Time::Zero;
+		if (m_chosenEntry < m_topEntry)
+		{
+			scrollUp();
+		}
+		return true;
+	}
+	if (m_downActiveTime > SCROLL_TIMEOUT)
+	{
+		m_chosenEntry = min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
+		m_timeSinceTick = sf::Time::Zero;
+		if (m_chosenEntry > m_bottomEntry)
+		{
+			scrollDown();
+		}
+		return true;
+	}
+	return false;
 }
 
 void SaveGameWindow::render(sf::RenderTarget& renderTarget)
@@ -183,8 +242,8 @@ std::string SaveGameWindow::getChosenSaveName() const
 
 void SaveGameWindow::scrollUp()
 {
-	m_topEntry = m_chosenEntry;
-	m_bottomEntry = m_chosenEntry + m_maxShowableEntries - 1;
+	m_topEntry = m_topEntry - 1 ;
+	m_bottomEntry = m_topEntry + m_maxShowableEntries - 1;
 	for (auto& it : m_entries)
 	{
 		it.setPositionY(it.getPosition().y + LINE_PITCH);
@@ -193,8 +252,8 @@ void SaveGameWindow::scrollUp()
 
 void SaveGameWindow::scrollDown()
 {
-	m_topEntry = m_chosenEntry - m_maxShowableEntries + 1;
-	m_bottomEntry = m_chosenEntry;
+	m_bottomEntry = m_bottomEntry + 1;
+	m_topEntry = m_bottomEntry - m_maxShowableEntries + 1;
 	for (auto& it : m_entries)
 	{
 		it.setPositionY(it.getPosition().y - LINE_PITCH);

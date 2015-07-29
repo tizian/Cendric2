@@ -126,4 +126,4 @@ MessageNewSaveGame;Please enter the name for your new save game (at most 24 char
 Delete;Delete;Löschen;Lösche
 QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du diesen Speicherstand wirklich löschen?;Wetsch de Speicherstand würkli lösche?
 SavegameDeleted;Save game successfully deleted;Speicherstand erfolgreich gelöscht;Speicherstand isch glöscht
-OperationFailed;Operation failed;Operation fehlgeschlagen;Es het nid klappt
+OperationFailed;Operation failed;Operation fehlgeschlagen;Die Operation isch id Hose

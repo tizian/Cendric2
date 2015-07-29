@@ -5,7 +5,8 @@ InputController* g_inputController;
 
 InputController::InputController()
 {
-	m_keyMap = &(g_resourceManager->getConfiguration().keyMap);
+	m_mainKeyMap = &(g_resourceManager->getConfiguration().mainKeyMap);
+	m_alternativeKeyMap = &(g_resourceManager->getConfiguration().alternativeKeyMap);
 }
 
 InputController::~InputController()
@@ -19,10 +20,11 @@ void InputController::update()
 	m_isWindowFocused = m_mainWindow->hasFocus();
 	
 	// update keys
-	for (auto it : m_keyActiveMap)
+	for (auto& it : m_keyActiveMap)
 	{
-		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && sf::Keyboard::isKeyPressed(m_keyMap->at(it.first));
-		m_keyActiveMap[it.first] = sf::Keyboard::isKeyPressed(m_keyMap->at(it.first));
+		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && 
+			(sf::Keyboard::isKeyPressed(m_mainKeyMap->at(it.first)) || sf::Keyboard::isKeyPressed(m_alternativeKeyMap->at(it.first)));
+		m_keyActiveMap[it.first] = sf::Keyboard::isKeyPressed(m_mainKeyMap->at(it.first)) || sf::Keyboard::isKeyPressed(m_alternativeKeyMap->at(it.first));
 	}
 	
 	// update mouse clicks
@@ -187,7 +189,8 @@ void InputController::readUnicode(sf::Uint32 character)
 {
 	if (!m_isReadText || !m_isWindowFocused 
 		|| character == '\t' 
-		|| character == '\n') return;
+		|| character == '\n'
+		|| character == '\r') return;
 	if (character == '\b')
 	{
 		if (!m_readText.empty())

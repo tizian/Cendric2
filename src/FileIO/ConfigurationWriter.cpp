@@ -12,7 +12,8 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const
 		configuration << writeSoundOn(data);
 		configuration << writeSoundVolume(data);
 		configuration << writeLanguage(data);
-		configuration << writeInputMap(data);
+		configuration << writeMainInputMap(data);
+		configuration << writeAlternativeInputMap(data);
 		configuration << writeMaxFPS(data);
 
 		configuration.close();
@@ -63,15 +64,31 @@ std::string ConfigurationWriter::writeMaxFPS(const ConfigurationData& data) cons
 	return fps.append(string(MAX_FPS) + ":" + to_string(data.maxFrameRate) + "\n");
 }
 
-std::string ConfigurationWriter::writeInputMap(const ConfigurationData& data) const
+std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data) const
 {
 	string inputMap = "# the key input mapping.\n";
 	inputMap.append("# for key map values (values before comma) guess which is which.\n");
 	inputMap.append("# for keyboard key values (values after comma) see SFML -> Keyboard.\n");
 
-	for (auto it : data.keyMap)
+	for (auto it : data.mainKeyMap)
 	{
-		inputMap.append(string(INPUT_MAPPING));
+		inputMap.append(string(MAIN_INPUT_MAPPING));
+		inputMap.append(":");
+		inputMap.append(to_string(static_cast<int>(it.first)));
+		inputMap.append(",");
+		inputMap.append(to_string(static_cast<int>(it.second)));
+		inputMap.append("\n");
+	}
+	return inputMap;
+}
+
+std::string ConfigurationWriter::writeAlternativeInputMap(const ConfigurationData& data) const
+{
+	string inputMap = "# the alternative key input mapping.\n";
+
+	for (auto it : data.mainKeyMap)
+	{
+		inputMap.append(string(MAIN_INPUT_MAPPING));
 		inputMap.append(":");
 		inputMap.append(to_string(static_cast<int>(it.first)));
 		inputMap.append(",");

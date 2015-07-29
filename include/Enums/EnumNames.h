@@ -79,6 +79,8 @@ public:
 		default:
 		case sf::Keyboard::Unknown:
 			return "Unknown";
+		case sf::Keyboard::KeyCount:
+			return "<NONE>";
 		case sf::Keyboard::A:
 			return "A";
 		case sf::Keyboard::B:

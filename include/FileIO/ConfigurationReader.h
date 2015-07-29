@@ -20,7 +20,8 @@ public:
 private:
 	bool readLanguage(const std::string& line, ConfigurationData& data) const;
 	bool readMaxFPS(const std::string& line, ConfigurationData& data) const;
-	bool readInputMapping(const std::string& line, ConfigurationData& data) const;
+	bool readMainInputMapping(const std::string& line, ConfigurationData& data) const;
+	bool readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const;
 
 	bool readSoundVolume(const std::string& line, ConfigurationData& data) const;
 	bool readSoundOn(const std::string& line, ConfigurationData& data) const;

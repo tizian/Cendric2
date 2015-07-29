@@ -21,6 +21,7 @@ private:
 	std::string writeSoundVolume(const ConfigurationData& data) const;
 
 	std::string writeLanguage(const ConfigurationData& data) const;
-	std::string writeInputMap(const ConfigurationData& data) const;
+	std::string writeMainInputMap(const ConfigurationData& data) const;
+	std::string writeAlternativeInputMap(const ConfigurationData& data) const;
 	std::string writeMaxFPS(const ConfigurationData& data) const;
 };

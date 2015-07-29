@@ -135,7 +135,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	m_fps->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 
 	// keyboard mappings
-	for (auto it : g_resourceManager->getConfiguration().keyMap)
+	for (auto it : g_resourceManager->getConfiguration().mainKeyMap)
 	{
 		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
 		keyText->setCharacterSize(12);
