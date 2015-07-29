@@ -77,7 +77,7 @@ private:
 	sf::Time m_upActiveTime = sf::Time::Zero;
 	sf::Time m_downActiveTime = sf::Time::Zero;
 	// the time between the scroll-ticks, determines the speed of the scrolling
-	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(100);
+	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
 	sf::Time m_timeSinceTick = sf::Time::Zero;
 	// returns if a scrolling operation has been executed
 	bool updateScrolling(const sf::Time& frametime);
