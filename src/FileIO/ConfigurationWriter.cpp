@@ -86,9 +86,9 @@ std::string ConfigurationWriter::writeAlternativeInputMap(const ConfigurationDat
 {
 	string inputMap = "# the alternative key input mapping.\n";
 
-	for (auto it : data.mainKeyMap)
+	for (auto it : data.alternativeKeyMap)
 	{
-		inputMap.append(string(MAIN_INPUT_MAPPING));
+		inputMap.append(string(ALTERNATIVE_INPUT_MAPPING));
 		inputMap.append(":");
 		inputMap.append(to_string(static_cast<int>(it.first)));
 		inputMap.append(",");
