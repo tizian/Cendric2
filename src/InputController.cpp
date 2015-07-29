@@ -23,8 +23,8 @@ void InputController::update()
 	for (auto& it : m_keyActiveMap)
 	{
 		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && 
-			(sf::Keyboard::isKeyPressed(m_mainKeyMap->at(it.first)) || sf::Keyboard::isKeyPressed(m_alternativeKeyMap->at(it.first)));
-		m_keyActiveMap[it.first] = sf::Keyboard::isKeyPressed(m_mainKeyMap->at(it.first)) || sf::Keyboard::isKeyPressed(m_alternativeKeyMap->at(it.first));
+			(isKeyPressed(m_mainKeyMap->at(it.first)) || isKeyPressed(m_alternativeKeyMap->at(it.first)));
+		m_keyActiveMap[it.first] = isKeyPressed(m_mainKeyMap->at(it.first)) || isKeyPressed(m_alternativeKeyMap->at(it.first));
 	}
 	
 	// update mouse clicks
@@ -198,6 +198,15 @@ void InputController::readUnicode(sf::Uint32 character)
 	}
 	else if (character < 128)
 		m_readText += static_cast<char>(character);
+}
+
+bool InputController::isKeyPressed(sf::Keyboard::Key key) const
+{
+	if (key >= sf::Keyboard::KeyCount || key <= sf::Keyboard::Unknown)
+	{
+		return false;
+	}
+	return sf::Keyboard::isKeyPressed(key);
 }
 
 

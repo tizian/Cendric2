@@ -72,4 +72,6 @@ private:
 	bool m_isReadText = false;
 	// the text read by the input controller while isReadText is true
 	std::string m_readText;
+
+	bool isKeyPressed(sf::Keyboard::Key key) const;
 };
