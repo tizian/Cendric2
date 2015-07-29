@@ -29,11 +29,11 @@ SaveGameWindow::SaveGameWindow() : Window(BOX,
 	reload();
 	m_arrowUp.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));
 	m_arrowUp.setOrigin(sf::Vector2f(m_arrowUp.getLocalBounds().width / 2, m_arrowUp.getLocalBounds().height / 2));
-	m_arrowUp.setPosition(sf::Vector2f(BOX.left + 25.f, BOX.top + 50.f));
+	m_arrowUp.setPosition(sf::Vector2f(BOX.left + 20.f, BOX.top + 50.f));
 	m_arrowDown.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));
 	m_arrowDown.setOrigin(sf::Vector2f(m_arrowDown.getLocalBounds().width / 2, m_arrowDown.getLocalBounds().height / 2));
 	m_arrowDown.setScale(sf::Vector2f(1.f, -1.f));
-	m_arrowDown.setPosition(sf::Vector2f(BOX.left + 25.f, BOX.top + BOX.height - 50.f));
+	m_arrowDown.setPosition(sf::Vector2f(BOX.left + 20.f, BOX.top + BOX.height - 50.f));
 }
 
 SaveGameWindow::~SaveGameWindow()

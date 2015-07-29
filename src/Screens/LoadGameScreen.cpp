@@ -78,8 +78,8 @@ void LoadGameScreen::execOnEnter(const Screen *previousScreen)
 {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("LoadGame"));
-	m_title->setCharacterSize(25);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
+	m_title->setCharacterSize(24);
+	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getBounds().width) / 2.f, 25.f));
 
 	float buttonWidth = 200.f;
 	float buttonHeight = 50.f;

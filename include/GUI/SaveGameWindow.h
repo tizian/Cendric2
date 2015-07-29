@@ -73,7 +73,7 @@ private:
 	sf::Sprite m_arrowUp;
 	sf::Sprite m_arrowDown;
 	// the time it waits from key active to scrolling
-	const sf::Time SCROLL_TIMEOUT = sf::seconds(1);
+	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
 	sf::Time m_upActiveTime = sf::Time::Zero;
 	sf::Time m_downActiveTime = sf::Time::Zero;
 	// the time between the scroll-ticks, determines the speed of the scrolling

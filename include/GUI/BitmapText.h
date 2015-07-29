@@ -27,6 +27,7 @@ public:
 	const float getLineSpacing() const;
 
 	sf::FloatRect getLocalBounds() const;
+	sf::FloatRect getBounds() const;
 
 private:
 	void init();	// Set vertexArray data

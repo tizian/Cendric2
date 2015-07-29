@@ -84,6 +84,10 @@ const sf::Color &BitmapText::getColor() const
 
 void BitmapText::setCharacterSize(int size)
 {
+	if (m_characterSize % m_font->getGlyphSize().y != 0)
+	{
+		g_logger->logWarning("BitmapText::setCharacterSize", "You should only use multiples of the bitmap glyph size to avoid aliasing problems!");
+	}
 	m_characterSize = size;
 	init();
 }
@@ -107,6 +111,11 @@ const float BitmapText::getLineSpacing() const
 sf::FloatRect BitmapText::getLocalBounds() const
 {
 	return m_bounds;
+}
+
+sf::FloatRect BitmapText::getBounds() const
+{
+	return getTransform().transformRect(m_bounds);
 }
 
 void BitmapText::draw(sf::RenderTarget &target, sf::RenderStates states) const

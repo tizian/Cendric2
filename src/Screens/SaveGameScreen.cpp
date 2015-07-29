@@ -73,7 +73,7 @@ void SaveGameScreen::execOnEnter(const Screen *previousScreen)
 {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("SaveGame"));
-	m_title->setCharacterSize(25);
+	m_title->setCharacterSize(24);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
 	// add buttons
