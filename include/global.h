@@ -10,8 +10,23 @@
 // #define NDEBUG; // uncomment this for final version
 #include <assert.h>
 
+#undef M_PI
+#define M_PI         3.14159265358979323846f
+#define M_TWOPI		 6.28318530717958647692f
+#define INV_PI       0.31830988618379067154f
+#define INV_TWOPI    0.15915494309189533577f
+
+inline float radToDeg(float rad) {
+	return rad * (180.f / M_PI);
+}
+
+inline float degToRad(float deg) {
+	return deg * (M_PI / 180.f);
+}
+
 #define PI_F 3.14159265358979f
-#define DEG_TO_RAD 57.2957795f
+#define DEG_TO_RAD 57.2957795f	// TODO: Should be called RAD_TO_DEG ?!
+
 // TODO these values should not be const, but loaded from an .ini file.
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720

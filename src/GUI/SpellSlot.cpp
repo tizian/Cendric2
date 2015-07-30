@@ -10,25 +10,42 @@ SpellSlot::SpellSlot(const SpellBean *spell, const sf::Vector2f &center) : GameO
 	m_spell = spell;
 	setBoundingBox(sf::FloatRect(center.x - r, center.y - r, r, r));
 
-	sf::Color color = CENDRIC_COLOR_GREY;
+	m_color = CENDRIC_COLOR_GREY;
 	if (spell->color == SpellColor::Elemental)
-		color = CENDRIC_COLOR_ELEMENTAL;
+		m_color = CENDRIC_COLOR_ELEMENTAL;
 	else if (spell->color == SpellColor::Twilight)
-		color = CENDRIC_COLOR_TWILIGHT;
+		m_color = CENDRIC_COLOR_TWILIGHT;
 	else if (spell->color == SpellColor::Necromancy)
-		color = CENDRIC_COLOR_NECROMANCY;
+		m_color = CENDRIC_COLOR_NECROMANCY;
 	else if (spell->color == SpellColor::Divine)
-		color = CENDRIC_COLOR_DIVINE;
+		m_color = CENDRIC_COLOR_DIVINE;
 	else if (spell->color == SpellColor::Illusion)
-		color = CENDRIC_COLOR_ILLUSION;
+		m_color = CENDRIC_COLOR_ILLUSION;
+
+	m_colorBase = CENDRIC_COLOR_BLACK;
+	if (spell->color == SpellColor::Elemental)
+		m_colorBase = CENDRIC_COLOR_ELEMENTAL_INACTIVE;
+	else if (spell->color == SpellColor::Twilight)
+		m_colorBase = CENDRIC_COLOR_TWILIGHT_INACTIVE;
+	else if (spell->color == SpellColor::Necromancy)
+		m_colorBase = CENDRIC_COLOR_NECROMANCY_INACTIVE;
+	else if (spell->color == SpellColor::Divine)
+		m_colorBase = CENDRIC_COLOR_DIVINE_INACTIVE;
+	else if (spell->color == SpellColor::Illusion)
+		m_colorBase = CENDRIC_COLOR_ILLUSION_INACTIVE;
 
 	m_outerRing = sf::CircleShape(r);
 	m_outerRing.setPosition(center - sf::Vector2f(radius));
 	m_outerRing.setFillColor(CENDRIC_COLOR_WHITE);
 
-	m_coloredRing = sf::CircleShape(0.95f * r);
+	m_coloredRingBase = sf::CircleShape(0.95f * r);
+	m_coloredRingBase.setPosition(center - 0.95f * radius);
+	m_coloredRingBase.setFillColor(m_colorBase);
+    
+	m_coloredRing = CircleSector(0.95f * r);
 	m_coloredRing.setPosition(center - 0.95f * radius);
-	m_coloredRing.setFillColor(color);
+	m_coloredRing.setFillColor(m_color);
+	m_coloredRing.setAngle(0.f);
 
 	m_innerRing = sf::CircleShape(0.75f * r);
 	m_innerRing.setPosition(center - 0.75f * radius);
@@ -41,13 +58,13 @@ SpellSlot::SpellSlot(const SpellBean *spell, const sf::Vector2f &center) : GameO
 
 	m_smallRingLeft1 = sf::CircleShape(0.25f * r);
 	m_smallRingLeft1.setPosition(center - sf::Vector2f(0.85f * r, 0.f) - 0.25f * radius);
-	m_smallRingLeft1.setFillColor(color);
+	m_smallRingLeft1.setFillColor(m_color);
 	m_smallRingLeft1.setOutlineColor(CENDRIC_COLOR_WHITE);
 	m_smallRingLeft1.setOutlineThickness(0.05f * r);
 
 	m_smallRingLeft2 = sf::CircleShape(0.05f * r);
 	m_smallRingLeft2.setPosition(center - sf::Vector2f(0.85f * r, 0.f) - 0.05f * radius);
-	m_smallRingLeft2.setFillColor(color);
+	m_smallRingLeft2.setFillColor(m_color);
 	m_smallRingLeft2.setOutlineColor(CENDRIC_COLOR_WHITE);
 	m_smallRingLeft2.setOutlineThickness(0.05f * r);
 
@@ -70,6 +87,7 @@ SpellSlot::SpellSlot(const SpellBean *spell, const sf::Vector2f &center) : GameO
 void SpellSlot::render(sf::RenderTarget& renderTarget)
 {
 	renderTarget.draw(m_outerRing);
+	renderTarget.draw(m_coloredRingBase);
 	renderTarget.draw(m_coloredRing);
 	renderTarget.draw(m_innerRing);
 	renderTarget.draw(m_inside);
@@ -87,6 +105,14 @@ void SpellSlot::render(sf::RenderTarget& renderTarget)
 void SpellSlot::update(const sf::Time& frameTime)
 {
 	// update stuff
+	float d = 100.f;
+
+	float angle = d * m_animationTime.asSeconds();
+	angle = angle - std::floor(angle / 360.f) * 360.f;
+
+	m_coloredRing.setAngle(angle);
+
+	m_animationTime += frameTime;
 	GameObject::update(frameTime);
 }
 
