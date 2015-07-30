@@ -17,6 +17,7 @@ void LevelMainCharacter::handleAttackInput()
 		if (g_inputController->isKeyActive(it.first))
 		{
 			m_spellManager->setCurrentSpell(it.second);
+			m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
 		}
 	}
 

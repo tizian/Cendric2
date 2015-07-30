@@ -75,7 +75,7 @@ void NewSaveGameForm::update(const sf::Time& frameTime)
 	m_okButton->update(frameTime);
 	m_cancelButton->update(frameTime);
 
-	if (m_okButton->isClicked())
+	if (m_okButton->isClicked() || (m_okButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)))
 	{
 		m_executeOk();
 		setDisposed();

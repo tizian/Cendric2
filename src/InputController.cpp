@@ -161,12 +161,12 @@ bool InputController::isMouseJustPressedRight() const
 
 bool InputController::isKeyActive(Key key)
 {
-	return m_isWindowFocused && !m_isReadText && m_keyActiveMap[key];
+	return m_isWindowFocused && m_keyActiveMap[key];
 }
 
 bool InputController::isKeyJustPressed(Key key)
 {
-	return m_isWindowFocused && !m_isReadText && m_keyJustPressedMap[key];
+	return m_isWindowFocused && m_keyJustPressedMap[key];
 }
 
 void InputController::startReadingText()

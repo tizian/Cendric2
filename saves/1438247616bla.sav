@@ -1,11 +1,11 @@
 # time played, in seconds
-time.played:862
-savegame.name:DU BLDS FUTZLI/DF*DF#F.
-savegame.date:1437922950
+time.played:125
+savegame.name:bla
+savegame.date:1438247616
 level.id:0
 level.position:0.000000,0.000000
 map.id:1
-map.position:4096.222168,1214.931396
+map.position:3767.327393,1456.509155
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
