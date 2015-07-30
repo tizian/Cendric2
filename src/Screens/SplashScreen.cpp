@@ -16,6 +16,9 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	fireBasket2->setPosition(sf::Vector2f(998.f, 140.f));
 	addObject(GameObjectType::_Undefined, fireBasket1);
 	addObject(GameObjectType::_Undefined, fireBasket2);
+
+	SpellSlot *slot = new SpellSlot(&DEFAULT_FIREBALL, sf::Vector2f(200, 200));
+	addObject(GameObjectType::_Undefined, slot);
 }
 
 Screen* SplashScreen::update(const sf::Time& frameTime)

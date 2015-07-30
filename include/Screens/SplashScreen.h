@@ -6,6 +6,9 @@
 #include "MenuScreen.h"
 #include "Misc/FireBasket.h"
 
+#include "GUI/SpellSlot.h"
+#include "Structs/SpellBean.h"
+
 class SplashScreen : public Screen
 {
 public:

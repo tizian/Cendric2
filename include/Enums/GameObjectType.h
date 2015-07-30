@@ -17,5 +17,6 @@ enum GameObjectType
 	_Enemy,
 	_LevelItem,
 	_NPC,
+	_Interface,
 	_MAX
 };
