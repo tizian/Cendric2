@@ -45,7 +45,6 @@ SpellSlot::SpellSlot(const SpellBean *spell, const sf::Vector2f &center) : GameO
 	m_coloredRing = CircleSector(0.95f * r);
 	m_coloredRing.setPosition(center - 0.95f * radius);
 	m_coloredRing.setFillColor(m_color);
-	m_coloredRing.setAngle(0.f);
 
 	m_innerRing = sf::CircleShape(0.75f * r);
 	m_innerRing.setPosition(center - 0.75f * radius);
@@ -82,6 +81,9 @@ SpellSlot::SpellSlot(const SpellBean *spell, const sf::Vector2f &center) : GameO
 	m_smallRingBottom1.setPosition(center + sf::Vector2f(0.f, 0.85f * r) - 0.25f * radius);
 	m_smallRingBottom2 = m_smallRingLeft2;
 	m_smallRingBottom2.setPosition(center + sf::Vector2f(0.f, 0.85f * r) - 0.05f * radius);
+
+	m_animating = false;
+	m_animationTime = sf::Time::Zero;
 }
 
 void SpellSlot::render(sf::RenderTarget& renderTarget)
@@ -102,17 +104,43 @@ void SpellSlot::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_smallRingBottom2);
 }
 
+void SpellSlot::playAnimation()
+{
+	m_animationTime = sf::Time::Zero;
+	m_animating = true;
+}
+
 void SpellSlot::update(const sf::Time& frameTime)
 {
-	// update stuff
-	float d = 100.f;
+	float flashTime = 0.05f;	// seconds
 
-	float angle = d * m_animationTime.asSeconds();
-	angle = angle - std::floor(angle / 360.f) * 360.f;
+	if (m_animating)
+	{
+		float t = m_animationTime.asSeconds() / m_spell->cooldown.asSeconds();
+		float angle = lerp(t, 0.f, 360.f);
+		// cout << angle << endl;
+		m_coloredRing.setAngle(angle);
 
-	m_coloredRing.setAngle(angle);
+		m_animationTime += frameTime;
 
-	m_animationTime += frameTime;
+		if (m_animationTime.asSeconds() > m_spell->cooldown.asSeconds())
+		{
+			if (m_animationTime.asSeconds() < m_spell->cooldown.asSeconds() + flashTime)
+			{
+				m_coloredRing.setAngle(360.f);
+				m_coloredRing.setFillColor(CENDRIC_COLOR_WHITE);
+			}
+			else
+			{
+				m_animationTime = sf::Time::Zero;
+				m_coloredRing.setAngle(360.f);
+				m_coloredRing.setFillColor(m_color);
+				m_animating = false;
+			}
+			
+		}
+	}
+
 	GameObject::update(frameTime);
 }
 

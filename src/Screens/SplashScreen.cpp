@@ -18,6 +18,7 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	addObject(GameObjectType::_Undefined, fireBasket2);
 
 	SpellSlot *slot = new SpellSlot(&DEFAULT_FIREBALL, sf::Vector2f(200, 200));
+	slot->playAnimation();
 	addObject(GameObjectType::_Undefined, slot);
 }
 

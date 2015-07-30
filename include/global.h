@@ -24,6 +24,10 @@ inline float degToRad(float deg) {
 	return deg * (M_PI / 180.f);
 }
 
+inline float lerp(float t, float v1, float v2) {
+    return ((float) 1 - t) * v1 + t * v2;
+}
+
 #define PI_F 3.14159265358979f
 #define DEG_TO_RAD 57.2957795f	// TODO: Should be called RAD_TO_DEG ?!
 

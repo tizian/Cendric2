@@ -12,7 +12,7 @@ class SpellSlot : public GameObject
 public:
 	SpellSlot(const SpellBean *spell, const sf::Vector2f &center);
 
-	void fire();
+	void playAnimation();
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
@@ -40,5 +40,6 @@ private:
 	sf::CircleShape m_smallRingBottom1;
 	sf::CircleShape m_smallRingBottom2;
 
+	bool m_animating;
 	sf::Time m_animationTime;
 };
