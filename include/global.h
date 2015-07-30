@@ -39,6 +39,7 @@ inline float lerp(float t, float v1, float v2) {
 #define CENDRIC_COLOR_WHITE sf::Color(255, 255, 255)
 #define CENDRIC_COLOR_BLACK sf::Color(0, 0, 0)
 
+#define CENDRIC_COLOR_LIGHT_GREY sf::Color(200, 200, 200)
 #define CENDRIC_COLOR_GREY sf::Color(100, 100, 100)
 #define CENDRIC_COLOR_PURPLE sf::Color(54, 11, 93, 255)
 #define CENDRIC_COLOR_DARK_PURPLE sf::Color(41, 7, 63, 255)

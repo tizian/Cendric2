@@ -17,9 +17,12 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	addObject(GameObjectType::_Undefined, fireBasket1);
 	addObject(GameObjectType::_Undefined, fireBasket2);
 
-	SpellSlot *slot = new SpellSlot(&DEFAULT_FIREBALL, sf::Vector2f(200, 200));
-	slot->playAnimation();
-	addObject(GameObjectType::_Undefined, slot);
+	SpellSlot *slotInactive = new SpellSlot(sf::Vector2f(200, 100), SpellColor::Elemental);
+	addObject(GameObjectType::_Undefined, slotInactive);
+
+	SpellSlot *slotActive = new SpellSlot(sf::Vector2f(400, 100), DEFAULT_FIREBALL.color, DEFAULT_FIREBALL.cooldown);
+	slotActive->playAnimation();
+	addObject(GameObjectType::_Undefined, slotActive);
 }
 
 Screen* SplashScreen::update(const sf::Time& frameTime)

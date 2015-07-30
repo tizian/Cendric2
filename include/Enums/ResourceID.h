@@ -43,4 +43,9 @@ enum class ResourceID
 	Texture_GUI_ornament_medium,
 	Texture_GUI_ornament_large,
 	Texture_GUI_arrow,
+	Texture_GUI_spell_color_elemental,
+	Texture_GUI_spell_color_twilight,
+	Texture_GUI_spell_color_necromancy,
+	Texture_GUI_spell_color_divine,
+	Texture_GUI_spell_color_illusion,
 };

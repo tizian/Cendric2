@@ -69,7 +69,12 @@ void ResourceManager::init()
 		{ ResourceID::Texture_GUI_ornament_small, "res/assets/gui/ornament_small.png" },
 		{ ResourceID::Texture_GUI_ornament_medium, "res/assets/gui/ornament_medium.png" },
 		{ ResourceID::Texture_GUI_ornament_large, "res/assets/gui/ornament_large.png" },
-		{ ResourceID::Texture_GUI_arrow, "res/assets/gui/arrow.png" }
+		{ ResourceID::Texture_GUI_arrow, "res/assets/gui/arrow.png" },
+		{ ResourceID::Texture_GUI_spell_color_elemental, "res/assets/gui/spell_color_elemental.png" },
+		{ ResourceID::Texture_GUI_spell_color_twilight, "res/assets/gui/spell_color_twilight.png" },
+		{ ResourceID::Texture_GUI_spell_color_necromancy, "res/assets/gui/spell_color_necromancy.png" },
+		{ ResourceID::Texture_GUI_spell_color_divine, "res/assets/gui/spell_color_divine.png" },
+		{ ResourceID::Texture_GUI_spell_color_illusion, "res/assets/gui/spell_color_illusion.png" }
 	});
 
 	// font should be always loaded to avoid lags when loading later
