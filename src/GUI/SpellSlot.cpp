@@ -4,24 +4,11 @@ using namespace std;
 
 const float SpellSlot::RADIUS = 40.f;
 
-SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor)
+SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, bool active)
 {
 	setBoundingBox(sf::FloatRect(center.x - RADIUS, center.y - RADIUS, RADIUS, RADIUS));
 	m_spellColor = spellColor;
-	init(center, RADIUS);
-	deactivate();
-}
 
-SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, const sf::Time &cooldown)
-{
-	setBoundingBox(sf::FloatRect(center.x - RADIUS, center.y - RADIUS, RADIUS, RADIUS));
-	m_spellColor = spellColor;
-	init(center, RADIUS);
-	activate(cooldown);
-}
-
-void SpellSlot::init(const sf::Vector2f &center, float r)
-{
 	m_color = CENDRIC_COLOR_GREY;
 	m_colorBase = CENDRIC_COLOR_BLACK;
 	if (m_spellColor == SpellColor::Elemental)
@@ -58,60 +45,68 @@ void SpellSlot::init(const sf::Vector2f &center, float r)
 	// TODO: change this texture depending on the inserted spell (should probably take the spellbean as a constructor parameter or sth like that...)
 	m_texture = g_resourceManager->getTexture(ResourceID::Texture_spell_fireball);
 
-	sf::Vector2f radius(r, r);
+	sf::Vector2f radiusVector(RADIUS, RADIUS);
 
-	m_outerRing = sf::CircleShape(r);
-	m_outerRing.setPosition(center - sf::Vector2f(radius));
+	m_outerRing = sf::CircleShape(RADIUS);
+	m_outerRing.setPosition(center - sf::Vector2f(radiusVector));
 	m_outerRing.setFillColor(CENDRIC_COLOR_WHITE);
 
-	m_coloredRingBase = sf::CircleShape(0.95f * r);
-	m_coloredRingBase.setPosition(center - 0.95f * radius);
+	m_coloredRingBase = sf::CircleShape(0.95f * RADIUS);
+	m_coloredRingBase.setPosition(center - 0.95f * radiusVector);
 	m_coloredRingBase.setFillColor(m_colorBase);
     
-	m_coloredRing = CircleSector(0.95f * r);
-	m_coloredRing.setPosition(center - 0.95f * radius);
+	m_coloredRing = CircleSector(0.95f * RADIUS);
+	m_coloredRing.setPosition(center - 0.95f * radiusVector);
 	m_coloredRing.setFillColor(m_color);
 
-	m_innerRing = sf::CircleShape(0.75f * r);
-	m_innerRing.setPosition(center - 0.75f * radius);
+	m_innerRing = sf::CircleShape(0.75f * RADIUS);
+	m_innerRing.setPosition(center - 0.75f * radiusVector);
 	m_innerRing.setFillColor(CENDRIC_COLOR_WHITE);
 
-	m_insideBase = sf::CircleShape(0.7f * r);
-	m_insideBase.setPosition(center - 0.7f * radius);
+	m_insideBase = sf::CircleShape(0.7f * RADIUS);
+	m_insideBase.setPosition(center - 0.7f * radiusVector);
 	m_insideBase.setFillColor(CENDRIC_COLOR_LIGHT_GREY);
 
-	m_inside = sf::CircleShape(0.7f * r);
-	m_inside.setPosition(center - 0.7f * radius);
+	m_inside = sf::CircleShape(0.7f * RADIUS);
+	m_inside.setPosition(center - 0.7f * radiusVector);
 
-	m_smallRingLeft1 = sf::CircleShape(0.25f * r);
-	m_smallRingLeft1.setPosition(center - sf::Vector2f(0.85f * r, 0.f) - 0.25f * radius);
+	m_smallRingLeft1 = sf::CircleShape(0.25f * RADIUS);
+	m_smallRingLeft1.setPosition(center - sf::Vector2f(0.85f * RADIUS, 0.f) - 0.25f * radiusVector);
 	m_smallRingLeft1.setOutlineColor(CENDRIC_COLOR_WHITE);
-	m_smallRingLeft1.setOutlineThickness(0.05f * r);
+	m_smallRingLeft1.setOutlineThickness(0.05f * RADIUS);
 
-	m_smallRingLeft2 = sf::CircleShape(0.05f * r);
-	m_smallRingLeft2.setPosition(center - sf::Vector2f(0.85f * r, 0.f) - 0.05f * radius);
+	m_smallRingLeft2 = sf::CircleShape(0.05f * RADIUS);
+	m_smallRingLeft2.setPosition(center - sf::Vector2f(0.85f * RADIUS, 0.f) - 0.05f * radiusVector);
 	m_smallRingLeft2.setOutlineColor(CENDRIC_COLOR_WHITE);
-	m_smallRingLeft2.setOutlineThickness(0.05f * r);
+	m_smallRingLeft2.setOutlineThickness(0.05f * RADIUS);
 
 	m_smallRingRight1 = m_smallRingLeft1;
-	m_smallRingRight1.setPosition(center + sf::Vector2f(0.85f * r, 0.f) - 0.25f * radius);
+	m_smallRingRight1.setPosition(center + sf::Vector2f(0.85f * RADIUS, 0.f) - 0.25f * radiusVector);
 	m_smallRingRight2 = m_smallRingLeft2;
-	m_smallRingRight2.setPosition(center + sf::Vector2f(0.85f * r, 0.f) - 0.05f * radius);
+	m_smallRingRight2.setPosition(center + sf::Vector2f(0.85f * RADIUS, 0.f) - 0.05f * radiusVector);
 
 	m_smallRingTop1 = m_smallRingLeft1;
-	m_smallRingTop1.setPosition(center - sf::Vector2f(0.f, 0.85f * r) - 0.25f * radius);
+	m_smallRingTop1.setPosition(center - sf::Vector2f(0.f, 0.85f * RADIUS) - 0.25f * radiusVector);
 	m_smallRingTop2 = m_smallRingLeft2;
-	m_smallRingTop2.setPosition(center - sf::Vector2f(0.f, 0.85f * r) - 0.05f * radius);
+	m_smallRingTop2.setPosition(center - sf::Vector2f(0.f, 0.85f * RADIUS) - 0.05f * radiusVector);
 
 	m_smallRingBottom1 = m_smallRingLeft1;
-	m_smallRingBottom1.setPosition(center + sf::Vector2f(0.f, 0.85f * r) - 0.25f * radius);
+	m_smallRingBottom1.setPosition(center + sf::Vector2f(0.f, 0.85f * RADIUS) - 0.25f * radiusVector);
 	m_smallRingBottom2 = m_smallRingLeft2;
-	m_smallRingBottom2.setPosition(center + sf::Vector2f(0.f, 0.85f * r) - 0.05f * radius);
+	m_smallRingBottom2.setPosition(center + sf::Vector2f(0.f, 0.85f * RADIUS) - 0.05f * radiusVector);
+
+	if (active)
+	{
+		activate();
+	}
+	else
+	{
+		deactivate();
+	}
 }
 
-void SpellSlot::activate(const sf::Time &cooldown)
+void SpellSlot::activate()
 {
-	m_cooldown = cooldown;
 	m_active = true;
 	m_inside.setTexture(m_texture);
 	m_inside.setFillColor(CENDRIC_COLOR_WHITE);
@@ -163,10 +158,11 @@ void SpellSlot::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_smallRingBottom2);
 }
 
-void SpellSlot::playAnimation()
+void SpellSlot::playAnimation(const sf::Time &cooldown)
 {
 	if (m_active)
 	{
+		m_cooldown = cooldown;
 		m_animationTime = sf::Time::Zero;
 		m_animating = true;
 	}

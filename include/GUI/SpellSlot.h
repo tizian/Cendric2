@@ -11,13 +11,12 @@
 class SpellSlot : public GameObject
 {
 public:
-	SpellSlot(const sf::Vector2f &center = sf::Vector2f(0.f, 0.f), const SpellColor &spellColor = SpellColor::VOID);
-	SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, const sf::Time &cooldown);
+	SpellSlot(const sf::Vector2f &center = sf::Vector2f(0.f, 0.f), const SpellColor &spellColor = SpellColor::VOID, bool active = true);
 
-	void activate(const sf::Time &cooldown);
+	void activate();
 	void deactivate();
 
-	void playAnimation();
+	void playAnimation(const sf::Time &cooldown);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
@@ -27,8 +26,6 @@ public:
 	static const float RADIUS;
 
 private:
-	void init(const sf::Vector2f &center, float r);
-
 	sf::Texture *m_textureInactive = nullptr;
 	sf::Texture *m_texture = nullptr;
 

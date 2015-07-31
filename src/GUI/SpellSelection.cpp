@@ -24,8 +24,7 @@ void SpellSelection::update(const sf::Time& frametime)
 		if (!m_activateMap[it.first] && it.second > sf::Time::Zero)
 		{
 			m_activateMap[it.first] = true;
-			m_spellSlots[it.first].activate(it.second);
-			m_spellSlots[it.first].playAnimation();
+			m_spellSlots[it.first].playAnimation(it.second);
 		} 
 		else if (m_activateMap[it.first] && it.second == sf::Time::Zero)
 		{

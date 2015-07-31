@@ -107,6 +107,7 @@ void CircleSector::setPointCount(int count)
 void CircleSector::setTexture(sf::Texture *texture)
 {
 	m_texture = texture;
+	init();
 }
 
 void CircleSector::setFillColor(const sf::Color &color)
