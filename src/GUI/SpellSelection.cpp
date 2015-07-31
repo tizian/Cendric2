@@ -32,6 +32,11 @@ void SpellSelection::update(const sf::Time& frametime)
 			m_activateMap[it.first] = false;
 		}
 	}
+
+	for (auto& it : m_spellSlots)
+	{
+		it.second.update(frametime);
+	}
 }
 
 void SpellSelection::render(sf::RenderTarget& target) 
@@ -48,14 +53,14 @@ void SpellSelection::render(sf::RenderTarget& target)
 void SpellSelection::reload()
 {
 	m_spellSlots.clear();
-	float offset = 0.f;
+	float offset = SpellSlot::RADIUS;
 	for (auto& it : m_spellManager->getSpellMap())
 	{
 		SpellSlot slot(
-			sf::Vector2f(SPELLSELECTION_OFFSET.x + offset, WINDOW_HEIGHT - SPELLSELECTION_OFFSET.y - 40.f), 
+			sf::Vector2f(SPELLSELECTION_OFFSET.x + offset, WINDOW_HEIGHT - (SpellSlot::RADIUS + SPELLSELECTION_OFFSET.y)),
 			it.second->getSpellBean().color);
 		m_spellSlots.insert({ it.first, slot });
-		offset += (SPELLSLOT_SPACING + 40.f);
+		offset += (SPELLSLOT_SPACING + 2 * SpellSlot::RADIUS);
 	}
 }
 

@@ -2,21 +2,21 @@
 
 using namespace std;
 
+const float SpellSlot::RADIUS = 40.f;
+
 SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor)
 {
-	float r = 40.f;
-	setBoundingBox(sf::FloatRect(center.x - r, center.y - r, r, r));
+	setBoundingBox(sf::FloatRect(center.x - RADIUS, center.y - RADIUS, RADIUS, RADIUS));
 	m_spellColor = spellColor;
-	init(center, r);
+	init(center, RADIUS);
 	deactivate();
 }
 
 SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, const sf::Time &cooldown)
 {
-	float r = 40.f;
-	setBoundingBox(sf::FloatRect(center.x - r, center.y - r, r, r));
+	setBoundingBox(sf::FloatRect(center.x - RADIUS, center.y - RADIUS, RADIUS, RADIUS));
 	m_spellColor = spellColor;
-	init(center, r);
+	init(center, RADIUS);
 	activate(cooldown);
 }
 

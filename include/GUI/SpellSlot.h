@@ -24,7 +24,7 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 
-	const float SpellSlot::radius = 40.f;
+	static const float RADIUS;
 
 private:
 	void init(const sf::Vector2f &center, float r);

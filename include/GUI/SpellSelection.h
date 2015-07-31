@@ -29,7 +29,7 @@ private:
 	void reload();
 
 	// as seen from the bottom left corner
-	const sf::Vector2f SPELLSELECTION_OFFSET = sf::Vector2f(50.f, 50.f);
+	const sf::Vector2f SPELLSELECTION_OFFSET = sf::Vector2f(10.f, 10.f);
 	// x space between two slots
 	const float SPELLSLOT_SPACING = 20.f;
 };
