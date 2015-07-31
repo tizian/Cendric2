@@ -4,7 +4,7 @@ using namespace std;
 
 SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor)
 {
-	float r = 80.f;
+	float r = 40.f;
 	setBoundingBox(sf::FloatRect(center.x - r, center.y - r, r, r));
 	m_spellColor = spellColor;
 	init(center, r);
@@ -13,7 +13,7 @@ SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor)
 
 SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, const sf::Time &cooldown)
 {
-	float r = 80.f;
+	float r = 40.f;
 	setBoundingBox(sf::FloatRect(center.x - r, center.y - r, r, r));
 	m_spellColor = spellColor;
 	init(center, r);

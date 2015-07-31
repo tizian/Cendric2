@@ -18,7 +18,7 @@ public:
 
 	// calculates spells using the owners attributes & the target, and executes their behaviour, adding objects to the screen.
 	virtual void executeSpell(sf::Vector2f target) = 0;
-	const sf::Time& getSpellCooldown();
+	const SpellBean& getSpellBean() const;
 
 protected:
 	// filled by the subclasses

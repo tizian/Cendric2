@@ -11,7 +11,7 @@
 class SpellSlot : public GameObject
 {
 public:
-	SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor);
+	SpellSlot(const sf::Vector2f &center = sf::Vector2f(0.f, 0.f), const SpellColor &spellColor = SpellColor::VOID);
 	SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, const sf::Time &cooldown);
 
 	void activate(const sf::Time &cooldown);
@@ -23,6 +23,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	GameObjectType getConfiguredType() const override;
+
+	const float SpellSlot::radius = 40.f;
 
 private:
 	void init(const sf::Vector2f &center, float r);

@@ -40,7 +40,7 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target)
 	if (m_currentSpell == SpellID::VOID || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
 	
 	// spell has been cast. set cooldown.
-	m_coolDownMap[m_currentSpell] = m_spellMap[m_currentSpell]->getSpellCooldown() * m_owner->getAttributes()->cooldownMultiplier;
+	m_coolDownMap[m_currentSpell] = m_spellMap[m_currentSpell]->getSpellBean().cooldown * m_owner->getAttributes()->cooldownMultiplier;
 	m_spellMap[m_currentSpell]->executeSpell(target);
 }
 
@@ -86,4 +86,14 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 	creator->addModifiers(modifiers);
 	
 	return creator;
+}
+
+std::map<SpellID, SpellCreator*>& SpellManager::getSpellMap()
+{
+	return m_spellMap;
+}
+
+const std::map<SpellID, sf::Time>& SpellManager::getCooldownMap() const
+{
+	return m_coolDownMap;
 }

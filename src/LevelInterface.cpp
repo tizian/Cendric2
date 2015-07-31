@@ -6,12 +6,18 @@ LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* characte
 {
 }
 
+LevelInterface::~LevelInterface()
+{
+	delete m_spellSelection;
+}
+
 void LevelInterface::render(sf::RenderTarget& target)
 {
 	sf::View oldView = target.getView();
 	target.setView(target.getDefaultView());
 
 	m_healthBar.render(target);
+	m_spellSelection->render(target);
 	m_characterInfo.render(target);
 	m_inventory.render(target);
 
@@ -21,6 +27,7 @@ void LevelInterface::render(sf::RenderTarget& target)
 void LevelInterface::update(const sf::Time& frameTime)
 {
 	m_healthBar.update();
+	m_spellSelection->update(frameTime);
 	updateInventory();
 	updateCharacterInfo();
 }
@@ -74,5 +81,7 @@ void LevelInterface::updateInventory()
 
 void LevelInterface::setSpellManager(SpellManager* spellManager)
 {
-	// TODO: use this spell manager for the interface bar.
+	// use this spell manager for the interface bar.
+	delete m_spellSelection;
+	m_spellSelection = new SpellSelection(spellManager);
 }

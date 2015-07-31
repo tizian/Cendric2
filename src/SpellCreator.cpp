@@ -93,9 +93,9 @@ void SpellCreator::addStrengthModifier(int level)
 	// nop, we don't know yet what this does but the method is implemented so its subclasses won't have to
 }
 
-const sf::Time& SpellCreator::getSpellCooldown()
+const SpellBean& SpellCreator::getSpellBean() const
 {
-	return m_spellBean.cooldown;
+	return m_spellBean;
 }
 
 void SpellCreator::updateDamage(SpellBean& bean) const
