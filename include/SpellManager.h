@@ -13,6 +13,8 @@
 #include "SpellCreators/AureolaSpellCreator.h"
 #include "SpellCreators/ChopSpellCreator.h"
 
+class SpellSelection;
+
 // a class that decides whether a spell can be cast or not and holds the creators for the corresponding spells
 class SpellManager
 {
@@ -29,7 +31,8 @@ public:
 
 	// used by the spell interface
 	std::map<SpellID, SpellCreator*>& getSpellMap();
-	const std::map<SpellID, sf::Time>& getCooldownMap() const;
+	
+	void setSpellSelection(SpellSelection* spellSelection);
 	
 private:
 	
@@ -38,4 +41,8 @@ private:
 	std::map<SpellID, sf::Time> m_coolDownMap;
 	std::map<SpellID, SpellCreator*> m_spellMap;
 	LevelMovableGameObject* m_owner;
+
+	// only used by the level main character to show the spells in its interface
+	SpellSelection* m_spellSelection = nullptr;
+
 };

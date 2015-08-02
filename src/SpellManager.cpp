@@ -1,4 +1,5 @@
 #include "SpellManager.h"
+#include "GUI/SpellSelection.h"
 
 using namespace std;
 
@@ -16,6 +17,11 @@ SpellManager::~SpellManager()
 	}
 	m_spellMap.clear();
 	m_coolDownMap.clear();
+}
+
+void SpellManager::setSpellSelection(SpellSelection* selection)
+{
+	m_spellSelection = selection;
 }
 
 void SpellManager::addSpell(const SpellBean& spell)
@@ -40,8 +46,13 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target)
 	if (m_currentSpell == SpellID::VOID || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
 	
 	// spell has been cast. set cooldown.
-	m_coolDownMap[m_currentSpell] = m_spellMap[m_currentSpell]->getSpellBean().cooldown * m_owner->getAttributes()->cooldownMultiplier;
+	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellBean().cooldown * m_owner->getAttributes()->cooldownMultiplier;
+	m_coolDownMap[m_currentSpell] = cooldown;
 	m_spellMap[m_currentSpell]->executeSpell(target);
+	if (m_spellSelection != nullptr)
+	{
+		m_spellSelection->activateSlot(m_currentSpell, cooldown);
+	}
 }
 
 void SpellManager::update(sf::Time frameTime)
@@ -91,9 +102,4 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 std::map<SpellID, SpellCreator*>& SpellManager::getSpellMap()
 {
 	return m_spellMap;
-}
-
-const std::map<SpellID, sf::Time>& SpellManager::getCooldownMap() const
-{
-	return m_coolDownMap;
 }

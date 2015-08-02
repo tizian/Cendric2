@@ -11,7 +11,7 @@
 class SpellSlot : public GameObject
 {
 public:
-	SpellSlot(const sf::Vector2f &center = sf::Vector2f(0.f, 0.f), const SpellColor &spellColor = SpellColor::VOID, bool active = true);
+	SpellSlot(const sf::Vector2f &center = sf::Vector2f(0.f, 0.f), const SpellBean& spellBean = EMPTY_SPELL, bool active = true);
 
 	void activate();
 	void deactivate();
@@ -27,7 +27,9 @@ public:
 
 private:
 	sf::Texture *m_textureInactive = nullptr;
-	sf::Texture *m_texture = nullptr;
+	// the position of the texture icon of this spell.
+	sf::IntRect m_textureRect;
+	bool m_isChopSlot = false;
 
 	bool m_active = false;
 

@@ -13,14 +13,14 @@ public:
 
 	void show();
 	void hide();
+	// called by the spell manager 
+	void activateSlot(SpellID spell, const sf::Time& cooldown);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
 private:
 	SpellManager* m_spellManager;
-	const std::map<SpellID, sf::Time>& m_cooldownMap;
-	std::map<SpellID, bool> m_activateMap;
 	bool m_isVisible = true;
 
 	std::map<SpellID, SpellSlot> m_spellSlots;

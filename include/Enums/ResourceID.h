@@ -10,6 +10,7 @@ enum class ResourceID
 	Quicksave,
 	Save_folder,
 	Items,
+	Texture_spellicons,
 	Texture_mainChar,
 	Texture_mapMainChar,
 	Texture_spell_fireball,

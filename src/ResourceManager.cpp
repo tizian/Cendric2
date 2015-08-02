@@ -37,6 +37,7 @@ void ResourceManager::init()
 		{ ResourceID::Save_folder, "saves/" },
 		{ ResourceID::Quicksave, "saves/quicksave.sav" },
 		{ ResourceID::Items, "res/items.csv" },
+		{ ResourceID::Texture_spellicons, "res/assets/spells/spritesheet_spellicons.png" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
 		{ ResourceID::Texture_spell_fireball, "res/assets/spells/spritesheet_spell_fireball.png" },

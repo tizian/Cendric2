@@ -1,37 +1,24 @@
 #include "GUI/SpellSelection.h"
 
-SpellSelection::SpellSelection(SpellManager* manager) : m_cooldownMap(manager->getCooldownMap())
+SpellSelection::SpellSelection(SpellManager* manager) 
 {
 	m_spellManager = manager;
-	m_activateMap.clear();
-	for (auto& it : m_cooldownMap)
-	{
-		m_activateMap.insert({it.first, false});
-	}
+	m_spellManager->setSpellSelection(this);
 	reload();
 }
 
 SpellSelection::~SpellSelection()
 {
-	m_activateMap.clear();
 	m_spellSlots.clear();
+}
+
+void SpellSelection::activateSlot(SpellID spell, const sf::Time& cooldown)
+{
+	m_spellSlots[spell].playAnimation(cooldown);
 }
 
 void SpellSelection::update(const sf::Time& frametime)
 {
-	for (auto& it : m_cooldownMap)
-	{
-		if (!m_activateMap[it.first] && it.second > sf::Time::Zero)
-		{
-			m_activateMap[it.first] = true;
-			m_spellSlots[it.first].playAnimation(it.second);
-		} 
-		else if (m_activateMap[it.first] && it.second == sf::Time::Zero)
-		{
-			m_activateMap[it.first] = false;
-		}
-	}
-
 	for (auto& it : m_spellSlots)
 	{
 		it.second.update(frametime);
@@ -57,7 +44,7 @@ void SpellSelection::reload()
 	{
 		SpellSlot slot(
 			sf::Vector2f(SPELLSELECTION_OFFSET.x + offset, WINDOW_HEIGHT - (SpellSlot::RADIUS + SPELLSELECTION_OFFSET.y)),
-			it.second->getSpellBean().color);
+			it.second->getSpellBean());
 		m_spellSlots.insert({ it.first, slot });
 		offset += (SPELLSLOT_SPACING + 2 * SpellSlot::RADIUS);
 	}

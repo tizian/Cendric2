@@ -4,10 +4,10 @@ using namespace std;
 
 const float SpellSlot::RADIUS = 40.f;
 
-SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, bool active)
+SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellBean& spellBean, bool active)
 {
 	setBoundingBox(sf::FloatRect(center.x - RADIUS, center.y - RADIUS, RADIUS, RADIUS));
-	m_spellColor = spellColor;
+	m_spellColor = spellBean.color;
 
 	m_color = CENDRIC_COLOR_GREY;
 	m_colorBase = CENDRIC_COLOR_BLACK;
@@ -42,8 +42,8 @@ SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, b
 		m_textureInactive = g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_illusion);
 	}
 
-	// TODO: change this texture depending on the inserted spell (should probably take the spellbean as a constructor parameter or sth like that...)
-	m_texture = g_resourceManager->getTexture(ResourceID::Texture_spell_fireball);
+	m_textureRect = spellBean.iconTextureRect;
+	m_isChopSlot = (spellBean.id == SpellID::Chop);
 
 	sf::Vector2f radiusVector(RADIUS, RADIUS);
 
@@ -108,7 +108,10 @@ SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellColor &spellColor, b
 void SpellSlot::activate()
 {
 	m_active = true;
-	m_inside.setTexture(m_texture);
+	m_inside.setTexture(m_isChopSlot ? 
+		g_resourceManager->getTexture(ResourceID::Texture_items) : 
+		g_resourceManager->getTexture(ResourceID::Texture_spellicons));
+	m_inside.setTextureRect(m_textureRect);
 	m_inside.setFillColor(CENDRIC_COLOR_WHITE);
 	m_coloredRing.setAngle(360.f);
 
