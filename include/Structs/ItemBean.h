@@ -4,6 +4,7 @@
 
 #include "Enums/ItemType.h"
 #include "Structs/AttributeBean.h"
+#include "Structs/WeaponSpellSlot.h"
 
 // an item bean, directly read from a csv file
 // it contains all information for items, their level items and (maybe) equipment
@@ -19,7 +20,7 @@ struct ItemBean
 	AttributeBean attributes;
 	sf::Time foodDuration;
 	
-	// For levelItem
+	// for levelItem
 	sf::Vector2f spriteOffset;
 	sf::FloatRect boundingBox;
 	std::vector<sf::IntRect> texturePositions;
@@ -27,6 +28,11 @@ struct ItemBean
 
 	// for equipment items
 	std::string spritesheetPath;
+	// and for weapons
+	std::vector<WeaponSpellSlot> weaponSlots;
+	sf::Time weaponChopCooldown;
+	sf::FloatRect weaponChopRect;
+	int weaponChopDamage;
 };
 
 const struct ItemBean DEFAULT_ITEM = 
@@ -44,5 +50,9 @@ const struct ItemBean DEFAULT_ITEM =
 	std::vector<sf::IntRect>(),
 	sf::seconds(1),
 
-	""
+	"",
+	std::vector<WeaponSpellSlot>(),
+	sf::Time::Zero,
+	sf::FloatRect(),
+	0
 };

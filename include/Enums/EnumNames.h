@@ -30,7 +30,7 @@ public:
 		switch (key) {
 		default:
 		case Key::MAX:
-		case Key::Void:
+		case Key::VOID:
 			return "Unknown";
 		case Key::CharacterInfo:
 			return "CharacterInfo";
@@ -134,25 +134,25 @@ public:
 		case sf::Keyboard::Z:
 			return "Z";
 		case sf::Keyboard::Num0:
-			return "Num0";
+			return "0";
 		case sf::Keyboard::Num1:
-			return "Num1";
+			return "1";
 		case sf::Keyboard::Num2:
-			return "Num2";
+			return "2";
 		case sf::Keyboard::Num3:
-			return "Num3";
+			return "3";
 		case sf::Keyboard::Num4:
-			return "Num4";
+			return "4";
 		case sf::Keyboard::Num5:
-			return "Num5";
+			return "5";
 		case sf::Keyboard::Num6:
-			return "Num6";
+			return "6";
 		case sf::Keyboard::Num7:
-			return "Num7";
+			return "7";
 		case sf::Keyboard::Num8:
-			return "Num8";
+			return "8";
 		case sf::Keyboard::Num9:
-			return "Num9";
+			return "9";
 		case sf::Keyboard::Escape:
 			return "Escape";
 		case sf::Keyboard::LControl:
@@ -232,25 +232,25 @@ public:
 		case sf::Keyboard::Down:
 			return "Down";
 		case sf::Keyboard::Numpad0:
-			return "Numpad0";
+			return "Num0";
 		case sf::Keyboard::Numpad1:
-			return "Numpad1";
+			return "Num1";
 		case sf::Keyboard::Numpad2:
-			return "Numpad2";
+			return "Num2";
 		case sf::Keyboard::Numpad3:
-			return "Numpad3";
+			return "Num3";
 		case sf::Keyboard::Numpad4:
-			return "Numpad4";
+			return "Num4";
 		case sf::Keyboard::Numpad5:
-			return "Numpad5";
+			return "Num5";
 		case sf::Keyboard::Numpad6:
-			return "Numpad6";
+			return "Num6";
 		case sf::Keyboard::Numpad7:
-			return "Numpad7";
+			return "Num7";
 		case sf::Keyboard::Numpad8:
-			return "Numpad8";
+			return "Num8";
 		case sf::Keyboard::Numpad9:
-			return "Numpad9";
+			return "Num9";
 		case sf::Keyboard::F1:
 			return "F1";
 		case sf::Keyboard::F2:

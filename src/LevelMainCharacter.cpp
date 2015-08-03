@@ -68,11 +68,15 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 	});
 
 	// TODO these values should be come from the staff
-	SpellBean fireSpell = DEFAULT_FIREBALL;
 	SpellBean chopSpell = DEFAULT_CHOP;
-	SpellBean divineShieldSpell = DEFAULT_DIVINESHIELD;
 	SpellBean iceSpell = DEFAULT_ICEBALL;
+	iceSpell.inputKey = Key::FirstSpell;
+	SpellBean fireSpell = DEFAULT_FIREBALL;
+	fireSpell.inputKey = Key::SecondSpell;
+	SpellBean divineShieldSpell = DEFAULT_DIVINESHIELD;
+	divineShieldSpell.inputKey = Key::ThirdSpell;
 	SpellBean aureolaSpell = DEFAULT_AUREOLA;
+	aureolaSpell.inputKey = Key::FourthSpell;
 
 	// TODO these modifiers should come from a staff, too
 	SpellModifier level2DamageModifier;
@@ -97,8 +101,8 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core)
 	m_spellManager = new SpellManager(this);
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(iceSpell);
-	m_spellManager->addSpell(divineShieldSpell);
 	m_spellManager->addSpell(fireSpell, fireModifiers);
+	m_spellManager->addSpell(divineShieldSpell);
 	m_spellManager->addSpell(aureolaSpell, aureolaModifiers);
 }
 

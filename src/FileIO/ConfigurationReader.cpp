@@ -180,7 +180,7 @@ bool ConfigurationReader::readMainInputMapping(const std::string& line, Configur
 		return false;
 	}
 	Key key = static_cast<Key>(atoi(line.substr(colon + 1).c_str()));
-	if (key >= Key::MAX || key <= Key::Void)
+	if (key >= Key::MAX || key <= Key::VOID)
 	{
 		g_logger->logError("ConfigurationReader", "Key id not recognized.");
 		return false;
@@ -210,7 +210,7 @@ bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, C
 		return false;
 	}
 	Key key = static_cast<Key>(atoi(line.substr(colon + 1).c_str()));
-	if (key >= Key::MAX || key <= Key::Void)
+	if (key >= Key::MAX || key <= Key::VOID)
 	{
 		g_logger->logError("ConfigurationReader", "Key id not recognized.");
 		return false;

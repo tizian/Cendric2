@@ -7,6 +7,7 @@
 #include "GUI/CircleSector.h"
 #include "Structs/SpellBean.h"
 #include "ResourceManager.h"
+#include "Enums/EnumNames.h"
 
 class SpellSlot : public GameObject
 {
@@ -34,7 +35,7 @@ private:
 	bool m_active = false;
 
 	sf::Time m_cooldown;
-	SpellColor m_spellColor;
+	SpellType m_spellType;
 
 	sf::Color m_color;
 	sf::Color m_colorBase;
@@ -54,6 +55,8 @@ private:
 	sf::CircleShape m_smallRingTop2;
 	sf::CircleShape m_smallRingBottom1;
 	sf::CircleShape m_smallRingBottom2;
+
+	BitmapText m_inputKey;
 
 	bool m_animating = false;
 	sf::Time m_animationTime;

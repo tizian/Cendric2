@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int COLUMN_COUNT = 25;
+const int COLUMN_COUNT = 33;
 
 ItemReader::ItemReader()
 {
@@ -108,15 +108,15 @@ bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const
 				if (ss.peek() == ',' || ss.peek() == ' ')
 					ss.ignore();
 			}
-			if (boundingBoxValues.size() != 4)
+			if (boundingBoxValues.size() != 2)
 			{
 				g_logger->logError("ItemReader", "Level Item Bounding box could not be parsed!");
 				return false;
 			}
-			item.boundingBox.left = boundingBoxValues[0];
-			item.boundingBox.top = boundingBoxValues[1];
-			item.boundingBox.width = boundingBoxValues[2];
-			item.boundingBox.height = boundingBoxValues[3];
+			item.boundingBox.left = 0;
+			item.boundingBox.top = 0;
+			item.boundingBox.width = boundingBoxValues[0];
+			item.boundingBox.height = boundingBoxValues[1];
 		}
 		// level item texture position(s)
 		if (!columns[22].empty())
@@ -154,6 +154,72 @@ bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const
 		}
 		// path to equipment texture
 		item.spritesheetPath = columns[24];
+		// weapon chop cooldown
+		if (!columns[25].empty())
+		{
+			item.weaponChopCooldown = sf::milliseconds(atoi(columns[25].c_str()));
+		}
+		// weapon chop bounding box
+		if (!columns[26].empty())
+		{
+			std::stringstream ss(columns[26]);
+			int i;
+			vector<float> boundingBoxValues;
+			while (ss >> i)
+			{
+				boundingBoxValues.push_back(static_cast<float>(i));
+
+				if (ss.peek() == ',' || ss.peek() == ' ')
+					ss.ignore();
+			}
+			if (boundingBoxValues.size() != 2)
+			{
+				g_logger->logError("ItemReader", "Weapon Chop Bounding box could not be parsed!");
+				return false;
+			}
+			item.weaponChopRect.left = 0;
+			item.weaponChopRect.top = 0;
+			item.weaponChopRect.width = boundingBoxValues[0];
+			item.weaponChopRect.height = boundingBoxValues[1];
+		}
+		// weapon chop damage
+		if (!columns[27].empty())
+		{
+			item.weaponChopDamage = atoi(columns[27].c_str());
+		}
+		// slot 1-5
+		for (int col = 28; col < 28 + 5; col++)
+		{
+			if (!columns[col].empty())
+			{
+				std::stringstream ss(columns[col]);
+				int i;
+				vector<int> slotValues;
+				while (ss >> i)
+				{
+					slotValues.push_back(i);
+
+					if (ss.peek() == ',' || ss.peek() == ' ')
+						ss.ignore();
+				}
+				if (slotValues.size() != 8)
+				{
+					g_logger->logError("ItemReader", "Weapon Spell Slot could not be parsed!");
+					return false;
+				}
+				WeaponSpellSlot slot;
+				slot.type = static_cast<SpellType>(slotValues[0]);
+				slot.hasStrengthModifier = (slotValues[1] != 0);
+				slot.hasDurationModifier = (slotValues[2] != 0);
+				slot.hasRangeModifier = (slotValues[3] != 0);
+				slot.hasSpeedModifier = (slotValues[4] != 0);
+				slot.hasDamageModifier = (slotValues[5] != 0);
+				slot.hasCountModifier = (slotValues[6] != 0);
+				slot.hasReflectModifier = (slotValues[7] != 0);
+				
+				item.weaponSlots.push_back(slot);
+			}
+		}
 
 		if (!checkItem(item))
 		{
@@ -179,6 +245,30 @@ bool ItemReader::checkItem(const ItemBean& bean) const
 	if (bean.type <= ItemType::VOID || bean.type >= ItemType::MAX)
 	{
 		return false;
+	}
+	if (bean.type != ItemType::Equipment_weapon)
+	{
+		if (bean.weaponChopCooldown != sf::Time::Zero ||
+			bean.weaponSlots.size() > 0 ||
+			bean.weaponChopDamage != 0 ||
+			bean.weaponChopRect.height != 0 || bean.weaponChopRect.width != 0)
+		{
+			return false;
+		}
+	}
+	else
+	{
+		if (bean.weaponSlots.size() < 0 || bean.weaponSlots.size() > 5)
+		{
+			return false;
+		}
+		for (auto& it : bean.weaponSlots)
+		{
+			if (it.type <= SpellType::VOID || it.type >= SpellType::MAX)
+			{
+				return false;
+			}
+		}
 	}
 
 	return true;

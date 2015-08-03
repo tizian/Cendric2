@@ -2,7 +2,7 @@
 
 enum class Key
 {
-	Void,
+	VOID,
 	Escape,
 	Quicksave,
 	Quickload,

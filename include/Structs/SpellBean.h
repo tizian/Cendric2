@@ -3,14 +3,15 @@
 #include <SFML/Graphics.hpp>
 
 #include "Enums/SpellID.h"
-#include "Enums/SpellColor.h"
+#include "Enums/SpellType.h"
 #include "Enums/DamageType.h"
+#include "Enums/Key.h"
 
 /* describes the attributes of a spell */
 struct SpellBean
 {
 	SpellID id;
-	SpellColor color;
+	SpellType spellType;
 	sf::IntRect iconTextureRect;
 	sf::Time cooldown;
 	sf::FloatRect boundingBox;
@@ -32,12 +33,14 @@ struct SpellBean
 	int countModifierAddition;
 	int reflectModifierAddition;
 	sf::Time durationModifierAddition;
+
+	Key inputKey;
 };
 
 const struct SpellBean EMPTY_SPELL =
 {
 	SpellID::VOID,
-	SpellColor::VOID,
+	SpellType::VOID,
 	sf::IntRect(0, 0, 0, 0),
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),
@@ -57,13 +60,15 @@ const struct SpellBean EMPTY_SPELL =
 	0,
 	0,
 	0,
-	sf::Time::Zero
+	sf::Time::Zero,
+
+	Key::VOID
 };
 
 const struct SpellBean DEFAULT_CHOP =
 {
 	SpellID::Chop,
-	SpellColor::VOID,
+	SpellType::VOID,
 	sf::IntRect(0, 0, 0, 0),
 	sf::milliseconds(400),
 	sf::FloatRect(0, 0, 40, 80),
@@ -83,13 +88,15 @@ const struct SpellBean DEFAULT_CHOP =
 	0,
 	0,
 	0,
-	sf::Time::Zero
+	sf::Time::Zero,
+
+	Key::Chop
 };
 
 const struct SpellBean DEFAULT_FIREBALL =
 {
 	SpellID::FireBall,
-	SpellColor::Elemental,
+	SpellType::Elemental,
 	sf::IntRect(0, 0, 50, 50),
 	sf::milliseconds(1000),
 	sf::FloatRect(0, 0, 10, 10),
@@ -109,13 +116,15 @@ const struct SpellBean DEFAULT_FIREBALL =
 	100,
 	1,
 	1,
-	sf::Time::Zero
+	sf::Time::Zero,
+
+	Key::VOID
 };
 
 const struct SpellBean DEFAULT_ICEBALL =
 {
 	SpellID::IceBall,
-	SpellColor::Elemental,
+	SpellType::Elemental,
 	sf::IntRect(50, 0, 50, 50),
 	sf::milliseconds(1000),
 	sf::FloatRect(0, 0, 10, 10),
@@ -135,13 +144,15 @@ const struct SpellBean DEFAULT_ICEBALL =
 	100,
 	1,
 	1,
-	sf::Time::Zero
+	sf::Time::Zero,
+
+	Key::VOID
 };
 
 const struct SpellBean DEFAULT_DIVINESHIELD =
 {
 	SpellID::DivineShield,
-	SpellColor::Divine,
+	SpellType::Divine,
 	sf::IntRect(100, 150, 50, 50),
 	sf::milliseconds(10000),
 	sf::FloatRect(0, 0, 98, 98),
@@ -167,7 +178,7 @@ const struct SpellBean DEFAULT_DIVINESHIELD =
 const struct SpellBean DEFAULT_AUREOLA =
 {
 	SpellID::Aureola,
-	SpellColor::Divine,
+	SpellType::Divine,
 	sf::IntRect(200, 150, 50, 50),
 	sf::milliseconds(10000),
 	sf::FloatRect(0, 0, 20, 20),
@@ -187,5 +198,7 @@ const struct SpellBean DEFAULT_AUREOLA =
 	100,
 	2,
 	0,
-	sf::Time::Zero
+	sf::Time::Zero,
+
+	Key::VOID
 };

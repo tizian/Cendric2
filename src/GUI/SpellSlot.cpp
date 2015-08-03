@@ -7,35 +7,35 @@ const float SpellSlot::RADIUS = 40.f;
 SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellBean& spellBean, bool active)
 {
 	setBoundingBox(sf::FloatRect(center.x - RADIUS, center.y - RADIUS, RADIUS, RADIUS));
-	m_spellColor = spellBean.color;
+	m_spellType = spellBean.spellType;
 
 	m_color = CENDRIC_COLOR_GREY;
 	m_colorBase = CENDRIC_COLOR_BLACK;
-	if (m_spellColor == SpellColor::Elemental)
+	if (m_spellType == SpellType::Elemental)
 	{
 		m_color = CENDRIC_COLOR_ELEMENTAL;
 		m_colorBase = CENDRIC_COLOR_ELEMENTAL_INACTIVE;
 		m_textureInactive = g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_elemental);
 	}
-	else if (m_spellColor == SpellColor::Twilight)
+	else if (m_spellType == SpellType::Twilight)
 	{
 		m_color = CENDRIC_COLOR_TWILIGHT;
 		m_colorBase = CENDRIC_COLOR_TWILIGHT_INACTIVE;
 		m_textureInactive = g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight);
 	}
-	else if (m_spellColor == SpellColor::Necromancy)
+	else if (m_spellType == SpellType::Necromancy)
 	{
 		m_color = CENDRIC_COLOR_NECROMANCY;
 		m_colorBase = CENDRIC_COLOR_NECROMANCY_INACTIVE;
 		m_textureInactive = g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_necromancy);
 	}
-	else if (m_spellColor == SpellColor::Divine)
+	else if (m_spellType == SpellType::Divine)
 	{
 		m_color = CENDRIC_COLOR_DIVINE;
 		m_colorBase = CENDRIC_COLOR_DIVINE_INACTIVE;
 		m_textureInactive = g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_divine);
 	}
-	else if (m_spellColor == SpellColor::Illusion)
+	else if (m_spellType == SpellType::Illusion)
 	{
 		m_color = CENDRIC_COLOR_ILLUSION;
 		m_colorBase = CENDRIC_COLOR_ILLUSION_INACTIVE;
@@ -44,8 +44,15 @@ SpellSlot::SpellSlot(const sf::Vector2f &center, const SpellBean& spellBean, boo
 
 	m_textureRect = spellBean.iconTextureRect;
 	m_isChopSlot = (spellBean.id == SpellID::Chop);
-
+	
 	sf::Vector2f radiusVector(RADIUS, RADIUS);
+
+	m_inputKey.setString(spellBean.inputKey != Key::VOID ? 
+		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[spellBean.inputKey]) :
+		"");
+	m_inputKey.setCharacterSize(16);
+	m_inputKey.setColor(CENDRIC_COLOR_WHITE);
+	m_inputKey.setPosition(center - sf::Vector2f(radiusVector));
 
 	m_outerRing = sf::CircleShape(RADIUS);
 	m_outerRing.setPosition(center - sf::Vector2f(radiusVector));
@@ -159,6 +166,8 @@ void SpellSlot::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_smallRingTop2);
 	renderTarget.draw(m_smallRingBottom1);
 	renderTarget.draw(m_smallRingBottom2);
+
+	renderTarget.draw(m_inputKey);
 }
 
 void SpellSlot::playAnimation(const sf::Time &cooldown)
