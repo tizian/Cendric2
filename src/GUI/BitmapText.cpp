@@ -86,7 +86,7 @@ void BitmapText::setCharacterSize(int size)
 {
 	if (m_characterSize % m_font->getGlyphSize().y != 0)
 	{
-		g_logger->logWarning("BitmapText::setCharacterSize", "You should only use multiples of the bitmap glyph size to avoid aliasing problems!");
+		// g_logger->logWarning("BitmapText::setCharacterSize", "You should only use multiples of the bitmap glyph size to avoid aliasing problems!");
 	}
 	m_characterSize = size;
 	init();

@@ -35,7 +35,8 @@ protected:
 	void handleAttackInput() override;
 
 private:
-	// TODO: load this from configuration
-	std::map<Key, SpellID> m_keyMap;
 	CharacterCore* m_core;
+	// character core must be set when loading the weapon.
+	void loadWeapon();
+	std::map<Key, int> m_spellKeyMap;
 };

@@ -22,21 +22,23 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 	}
 
 	// the order of the ids in this vector determine the update and rendering order. 
+	vector<ItemType> equipmentOrder;
+	equipmentOrder.push_back(ItemType::Equipment_weapon);
+	equipmentOrder.push_back(ItemType::Equipment_ring_1);
+	equipmentOrder.push_back(ItemType::Equipment_ring_2);
+	equipmentOrder.push_back(ItemType::Equipment_neck);
+	equipmentOrder.push_back(ItemType::Equipment_back);
+	equipmentOrder.push_back(ItemType::Equipment_body);
+	equipmentOrder.push_back(ItemType::Equipment_head);
 	vector<string> gameData;
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_weapon).getID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_1).getID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_ring_2).getID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_neck).getID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_back).getID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_body).getID());
-	gameData.push_back(screen->getCharacterCore()->getEquippedItem(ItemType::Equipment_head).getID());
-
+	for (auto& it : equipmentOrder)
+	{
+		if (screen->getCharacterCore()->getEquippedItem(it) == nullptr) continue;
+		gameData.push_back(screen->getCharacterCore()->getEquippedItem(it)->getID());
+	}
+	
 	for (auto& it : gameData)
 	{
-		if (it.empty())
-		{
-			continue;
-		}
 		LevelEquipmentBean equipment;
 		const ItemBean* bean = g_resourceManager->getItemBean(it);
 		if (bean == nullptr)

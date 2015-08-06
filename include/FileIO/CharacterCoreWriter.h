@@ -37,5 +37,6 @@ private:
 
 	std::string writeGold(const CharacterCoreData& data) const;
 	std::string writeItemID(const CharacterCoreData& data) const;
+	std::string writeEquippedWeaponSlots(const CharacterCoreData& data) const;
 	std::string writeEquippedItems(const CharacterCoreData& data) const;
 };

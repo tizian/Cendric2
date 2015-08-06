@@ -27,6 +27,7 @@ protected:
 	// equipment & items
 	const char* GOLD = "gold";
 	const char* ITEM_ID = "item.id";
+	const char* EQUIPPED_SPELLSLOT = "equipped.spellslot";
 	const char* EQUIPPED_WEAPON = "equipped.weapon";
 	const char* EQUIPPED_HEAD = "equipped.head";
 	const char* EQUIPPED_BODY = "equipped.body";

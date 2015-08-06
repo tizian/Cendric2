@@ -14,7 +14,7 @@ public:
 	void show();
 	void hide();
 	// called by the spell manager 
-	void activateSlot(SpellID spell, const sf::Time& cooldown);
+	void activateSlot(int spellNr, const sf::Time& cooldown);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
@@ -23,7 +23,7 @@ private:
 	SpellManager* m_spellManager;
 	bool m_isVisible = true;
 
-	std::map<SpellID, SpellSlot> m_spellSlots;
+	std::vector<SpellSlot> m_spellSlots;
 
 	// reloads the spells, depending on the manager
 	void reload();

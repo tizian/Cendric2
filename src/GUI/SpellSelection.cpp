@@ -12,16 +12,16 @@ SpellSelection::~SpellSelection()
 	m_spellSlots.clear();
 }
 
-void SpellSelection::activateSlot(SpellID spell, const sf::Time& cooldown)
+void SpellSelection::activateSlot(int spellNr, const sf::Time& cooldown)
 {
-	m_spellSlots[spell].playAnimation(cooldown);
+	m_spellSlots[spellNr].playAnimation(cooldown);
 }
 
 void SpellSelection::update(const sf::Time& frametime)
 {
 	for (auto& it : m_spellSlots)
 	{
-		it.second.update(frametime);
+		it.update(frametime);
 	}
 }
 
@@ -31,7 +31,7 @@ void SpellSelection::render(sf::RenderTarget& target)
 	{
 		for (auto& it : m_spellSlots)
 		{
-			it.second.render(target);
+			it.render(target);
 		}
 	}
 }
@@ -44,8 +44,8 @@ void SpellSelection::reload()
 	{
 		SpellSlot slot(
 			sf::Vector2f(SPELLSELECTION_OFFSET.x + offset, WINDOW_HEIGHT - (SpellSlot::RADIUS + SPELLSELECTION_OFFSET.y)),
-			it.second->getSpellBean());
-		m_spellSlots.insert({ it.first, slot });
+			it->getSpellBean());
+		m_spellSlots.push_back(slot);
 		offset += (SPELLSLOT_SPACING + 2 * SpellSlot::RADIUS);
 	}
 }

@@ -7,6 +7,7 @@
 #include "FileIO/CharacterCoreReader.h"
 #include "FileIO/CharacterCoreWriter.h"
 #include "Item.h"
+#include "Weapon.h"
 
 #include "Structs/AttributeBean.h"
 #include "Structs/CharacterCoreData.h"
@@ -18,7 +19,9 @@ public:
 	~CharacterCore();
 
 	// returns the currently equipped item of type 'type'
-	const Item& getEquippedItem(ItemType type);
+	const Item* getEquippedItem(ItemType type);
+	// getter for currently equipped weapon. convenience method for getItem of type weapon with a dynamic cast.
+	const Weapon* getWeapon();
 	// returns the item of id "id"
 	const Item& getItem(const std::string& id);
 	NPCState getNPCState(NPCID id);
@@ -64,7 +67,7 @@ private:
 	AttributeBean m_totalAttributes;
 
 	std::map<std::string, Item> m_items;
-	std::map<ItemType, Item> m_equippedItems;
+	std::map<ItemType, Item*> m_equippedItems;
 
 	CharacterCoreData m_data;
 

@@ -1,6 +1,6 @@
 # time played, in seconds
 time.played:45
-savegame.name:Menusave
+savegame.name:Isa's Testsave
 savegame.date:1437763959
 level.id:0
 level.position:0.000000,0.000000
@@ -13,13 +13,19 @@ attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
 # equipment:
-equipped.back:
+equipped.back:it_eq_purpleback
 equipped.body:
-equipped.head:
+equipped.head:it_eq_wizardhatgrey
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
-equipped.weapon:
+equipped.weapon:it_we_icestaff
+# fireball with speed (3) & count (5)
+equipped.spellslots:2,3,2,5,3
+# iceball with damage (1) & reflect (4)
+equipped.spellslots:3,4,3,1,1
+equipped.spellslots:19
+equipped.spellslots:21,5,3
 # levels killed:
 # levels looted:
 # quest states:

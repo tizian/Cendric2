@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "global.h"
 
 #include "Enums/SpellID.h"
 #include "Enums/SpellType.h"
@@ -35,6 +36,8 @@ struct SpellBean
 	sf::Time durationModifierAddition;
 
 	Key inputKey;
+
+	static SpellBean getSpellBean(SpellID id);
 };
 
 const struct SpellBean EMPTY_SPELL =

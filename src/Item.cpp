@@ -5,6 +5,10 @@ Item::Item(const ItemBean& bean)
 	m_bean = bean;
 }
 
+Item::~Item()
+{
+}
+
 const std::string& Item::getDescription() const
 {
 	return m_bean.description;

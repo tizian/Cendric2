@@ -25,7 +25,7 @@ void RatEnemy::loadSpells()
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
 
 	m_spellManager->addSpell(chopSpell);
-	m_spellManager->setCurrentSpell(SpellID::Chop);
+	m_spellManager->setCurrentSpell(0);
 }
 
 sf::Vector2f RatEnemy::getConfiguredSpellOffset() const

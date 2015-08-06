@@ -32,6 +32,7 @@ private:
 	
 	bool readGold(char* start, char* end, CharacterCoreData& data) const;
 	bool readItemID(char* start, char* end, CharacterCoreData& data) const;
+	bool readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const;
 	bool readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const;
 
 	// check map bean for validity before loading the savegame

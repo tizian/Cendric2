@@ -9,8 +9,10 @@
 #include "Enums/NPCState.h"
 #include "Enums/QuestID.h"
 #include "Enums/QuestState.h"
+#include "Enums/SpellID.h"
 
 #include "Structs/AttributeBean.h"
+#include "Structs/SpellModifier.h"
 
 struct CharacterCoreData
 {
@@ -36,6 +38,7 @@ struct CharacterCoreData
 
 	// items & equipment
 	int gold;
+	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;
 	std::string equippedWeapon;
 	std::string equippedHead;
 	std::string equippedBody;
@@ -61,6 +64,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<QuestID, QuestState>(),
 	ZERO_ATTRIBUTES,
 	0,
+	std::vector<std::pair<SpellID, std::vector<SpellModifier>>>(),
 	"",
 	"",
 	"",

@@ -5,15 +5,20 @@ using namespace std;
 
 SpellManager::SpellManager(LevelMovableGameObject* owner)
 {
-	m_currentSpell = SpellID::Chop;
+	m_currentSpell = -1;
 	m_owner = owner;
 }
 
 SpellManager::~SpellManager()
 {
+	clearSpells();
+}
+
+void SpellManager::clearSpells()
+{
 	for (auto& it : m_spellMap)
 	{
-		delete it.second;
+		delete it;
 	}
 	m_spellMap.clear();
 	m_coolDownMap.clear();
@@ -31,19 +36,13 @@ void SpellManager::addSpell(const SpellBean& spell)
 
 void SpellManager::addSpell(const SpellBean& spell, const std::vector<SpellModifier>& modifiers)
 {
-	// only one spell is allowed per spell id. This check is only
-	// to assure that there are no more spellcreators created with "new" than
-	// there are deleted in the destructor.
-	if (m_spellMap.find(spell.id) == m_spellMap.end())
-	{
-		m_spellMap.insert({ spell.id, getSpellCreator(spell, modifiers) });
-		m_coolDownMap.insert({ spell.id, sf::Time::Zero });
-	}
+	m_spellMap.push_back(getSpellCreator(spell, modifiers));
+	m_coolDownMap.push_back(sf::Time::Zero);
 }
 
 void SpellManager::executeCurrentSpell(const sf::Vector2f& target)
 {
-	if (m_currentSpell == SpellID::VOID || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
+	if (m_currentSpell == -1 || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
 	
 	// spell has been cast. set cooldown.
 	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellBean().cooldown * m_owner->getAttributes()->cooldownMultiplier;
@@ -58,16 +57,22 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target)
 void SpellManager::update(sf::Time frameTime)
 {
 	// update cooldown map
-	for (auto const &it : m_coolDownMap) {
-		if (m_coolDownMap[it.first].asMilliseconds() == 0) continue;
-		m_coolDownMap[it.first] = it.second - frameTime;
-		if (m_coolDownMap[it.first].asMilliseconds() < 0) m_coolDownMap[it.first] = sf::Time::Zero;
+	for (auto &it : m_coolDownMap) {
+		if (it.asMilliseconds() == 0) continue;
+		it -= frameTime;
+		if (it.asMilliseconds() < 0) it = sf::Time::Zero;
 	}
 }
 
-void SpellManager::setCurrentSpell(SpellID id)
+void SpellManager::setCurrentSpell(int spellNr)
 {
-	m_currentSpell = id;
+	if (spellNr < -1 || spellNr > m_spellMap.size() - 1)
+	{
+		g_logger->logError("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + to_string(spellNr));
+		m_currentSpell = -1;
+		return;
+	}
+	m_currentSpell = spellNr;
 }
 
 SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers)
@@ -99,7 +104,7 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 	return creator;
 }
 
-std::map<SpellID, SpellCreator*>& SpellManager::getSpellMap()
+std::vector<SpellCreator*>& SpellManager::getSpellMap()
 {
 	return m_spellMap;
 }

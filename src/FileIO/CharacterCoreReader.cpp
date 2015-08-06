@@ -48,6 +48,11 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 			return false;
 		}
 	}
+	if (data.equippedWeaponSlots.size() > 5)
+	{
+		g_logger->logError("CharacterCoreReader", "Error in savegame data : there can't be more spell slots than 5 on a weapon");
+		return false;
+	}
 	
 	return true;
 }
@@ -309,6 +314,55 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 	return true;
 }
 
+bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+
+	SpellID spell = static_cast<SpellID>(atoi(startData));
+	if (spell <= SpellID::VOID || spell >= SpellID::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + to_string(static_cast<int>(spell)));
+		return false;
+	}
+
+	char* endData = gotoNextChar(startData, end, '\n');
+	if (endData == nullptr) return false;
+
+	vector<SpellModifier> modifiers;
+	
+	startData = gotoNextChar(startData, end, ',');
+	while (startData != nullptr && startData < endData)
+	{
+		startData++;
+		SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
+		if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX)
+		{
+			g_logger->logError("CharacterCoreReader", "Spell Modifier type not recognized: " + to_string(static_cast<int>(type)));
+			return false;
+		}
+		startData = gotoNextChar(startData, end, ',');
+		startData++;
+		int level = atoi(startData);
+		if (level < 1 || level > 3)
+		{
+			g_logger->logError("CharacterCoreReader", "Spell Modifier level is not allowed: " + to_string(level));
+			return false;
+		}
+		SpellModifier modifier;
+		modifier.type = type;
+		modifier.level = level;
+		modifiers.push_back(modifier);
+
+		startData = gotoNextChar(startData, end, ',');
+	}
+
+	data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(spell, modifiers));
+	
+	return true;
+}
+
 bool CharacterCoreReader::readLevelKilled(char* start, char* end, CharacterCoreData& data) const
 {
 	// add a level state
@@ -482,6 +536,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, ITEM_ID, strlen(ITEM_ID)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(ITEM_ID));
 			noError = readItemID(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, EQUIPPED_SPELLSLOT, strlen(EQUIPPED_SPELLSLOT)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_SPELLSLOT));
+			noError = readEquippedWeaponSlots(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, EQUIPPED_WEAPON, strlen(EQUIPPED_WEAPON)) == 0) {

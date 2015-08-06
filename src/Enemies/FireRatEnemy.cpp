@@ -33,7 +33,7 @@ void FireRatEnemy::loadSpells()
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(fireBallSpell);
-	m_spellManager->setCurrentSpell(SpellID::Chop);
+	m_spellManager->setCurrentSpell(0); // chop
 }
 
 sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const
@@ -45,10 +45,10 @@ void FireRatEnemy::handleAttackInput()
 {
 	if (distToMainChar() < getConfiguredAggroRange())
 	{
-		m_spellManager->setCurrentSpell(SpellID::FireBall);
+		m_spellManager->setCurrentSpell(1);
 		if (distToMainChar() < 100.f)
 		{
-			m_spellManager->setCurrentSpell(SpellID::Chop);
+			m_spellManager->setCurrentSpell(0);
 		}
 
 		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());

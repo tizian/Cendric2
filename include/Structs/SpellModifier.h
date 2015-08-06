@@ -20,3 +20,9 @@ struct SpellModifier
 	// level ranges from 1 to 3
 	int level;
 };
+
+const SpellModifier EMPTY_SPELLMODIFIER
+{
+	SpellModifierType::VOID,
+	0
+};

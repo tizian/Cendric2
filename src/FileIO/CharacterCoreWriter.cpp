@@ -34,6 +34,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeAttributes(data);
 		savefile << writeGold(data);
 		savefile << writeItemID(data);
+		savefile << writeEquippedWeaponSlots(data);
 		savefile << writeEquippedItems(data);
 		savefile << writeLevelKilled(data);
 		savefile << writeLevelLooted(data);
@@ -206,6 +207,23 @@ std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) cons
 		items.append(item);
 	}
 	return items;
+}
+std::string CharacterCoreWriter::writeEquippedWeaponSlots(const CharacterCoreData& data) const
+{
+	string weaponSlots = "# weapon slots. it is always: spell ID+, (modifier type, level)*:\n";
+	for (auto& it : data.equippedWeaponSlots)
+	{
+		weaponSlots.append(string(EQUIPPED_SPELLSLOT) + ":");
+		weaponSlots.append(to_string(static_cast<int>(it.first)));
+		for (auto& it2 : it.second)
+		{
+			weaponSlots.append(",");
+			weaponSlots.append(to_string(static_cast<int>(it2.type)) + ",");
+			weaponSlots.append(to_string(it2.level));
+		}
+		weaponSlots.append("\n");
+	}
+	return weaponSlots;
 }
 
 std::string CharacterCoreWriter::writeEquippedItems(const CharacterCoreData& data) const

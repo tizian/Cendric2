@@ -190,35 +190,36 @@ bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const
 		// slot 1-5
 		for (int col = 28; col < 28 + 5; col++)
 		{
-			if (!columns[col].empty())
+			if (columns[col].empty()) break;
+			
+			std::stringstream ss(columns[col]);
+			int i;
+			vector<int> slotValues;
+			while (ss >> i)
 			{
-				std::stringstream ss(columns[col]);
-				int i;
-				vector<int> slotValues;
-				while (ss >> i)
-				{
-					slotValues.push_back(i);
+				slotValues.push_back(i);
 
-					if (ss.peek() == ',' || ss.peek() == ' ')
-						ss.ignore();
-				}
-				if (slotValues.size() != 8)
-				{
-					g_logger->logError("ItemReader", "Weapon Spell Slot could not be parsed!");
-					return false;
-				}
-				WeaponSpellSlot slot;
-				slot.type = static_cast<SpellType>(slotValues[0]);
-				slot.hasStrengthModifier = (slotValues[1] != 0);
-				slot.hasDurationModifier = (slotValues[2] != 0);
-				slot.hasRangeModifier = (slotValues[3] != 0);
-				slot.hasSpeedModifier = (slotValues[4] != 0);
-				slot.hasDamageModifier = (slotValues[5] != 0);
-				slot.hasCountModifier = (slotValues[6] != 0);
-				slot.hasReflectModifier = (slotValues[7] != 0);
-				
-				item.weaponSlots.push_back(slot);
+				if (ss.peek() == ',' || ss.peek() == ' ')
+					ss.ignore();
 			}
+			if (slotValues.size() != 8)
+			{
+				g_logger->logError("ItemReader", "Weapon Spell Slot could not be parsed!");
+				return false;
+			}
+			WeaponSpellSlotBean slot;
+			slot.type = static_cast<SpellType>(slotValues[0]);
+			std::set<SpellModifierType> types;
+			if (slotValues[1] != 0) types.insert(SpellModifierType::Strength);
+			if (slotValues[2] != 0) types.insert(SpellModifierType::Duration);
+			if (slotValues[3] != 0) types.insert(SpellModifierType::Range);
+			if (slotValues[4] != 0) types.insert(SpellModifierType::Speed);
+			if (slotValues[5] != 0) types.insert(SpellModifierType::Damage);
+			if (slotValues[6] != 0) types.insert(SpellModifierType::Count);
+			if (slotValues[7] != 0) types.insert(SpellModifierType::Reflect);
+			slot.allowedModifiers = types;
+			
+			item.weaponSlots.push_back(slot);
 		}
 
 		if (!checkItem(item))

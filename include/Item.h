@@ -9,6 +9,7 @@ class Item
 {
 public:
 	Item(const ItemBean& bean);
+	virtual ~Item();
 
 	const std::string& getDescription() const;
 	const std::string& getID() const;
@@ -18,6 +19,6 @@ public:
 	// the items gold value
 	int getValue() const;
 
-private:
+protected:
 	ItemBean m_bean;
 };

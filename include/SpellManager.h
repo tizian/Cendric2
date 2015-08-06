@@ -25,21 +25,24 @@ public:
 	void update(sf::Time frameTime);
 	void addSpell(const SpellBean& spell);
 	void addSpell(const SpellBean& spell, const std::vector<SpellModifier>& modifiers);
-	void setCurrentSpell(SpellID id);
+	void setCurrentSpell(int spellNr);
 	// triggers the spell creator & executes the current spell if it are not on cooldown
 	void executeCurrentSpell(const sf::Vector2f& target);
 
 	// used by the spell interface
-	std::map<SpellID, SpellCreator*>& getSpellMap();
+	std::vector<SpellCreator*>& getSpellMap();
+
+	// clears all spells from the maps
+	void clearSpells();
 	
 	void setSpellSelection(SpellSelection* spellSelection);
 	
 private:
 	
 	SpellCreator* getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers);
-	SpellID m_currentSpell;
-	std::map<SpellID, sf::Time> m_coolDownMap;
-	std::map<SpellID, SpellCreator*> m_spellMap;
+	int m_currentSpell;
+	std::vector<sf::Time> m_coolDownMap;
+	std::vector<SpellCreator*> m_spellMap;
 	LevelMovableGameObject* m_owner;
 
 	// only used by the level main character to show the spells in its interface
