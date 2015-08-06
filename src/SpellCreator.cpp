@@ -17,6 +17,7 @@ void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers)
 {
 	for (auto& it : modifiers)
 	{
+		if (it.type == SpellModifierType::VOID) continue;
 		// some security checks
 		if (!(std::find(m_allowedModifiers.begin(), m_allowedModifiers.end(), it.type) != m_allowedModifiers.end()))
 		{

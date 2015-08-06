@@ -79,6 +79,7 @@ void LevelMainCharacter::loadWeapon()
 	chop.boundingBox = weapon->getWeaponChopRect();
 	chop.cooldown = weapon->getWeaponCooldown();
 	chop.damage = weapon->getWeaponChopDamage();
+	chop.iconTextureRect = sf::IntRect(weapon->getIconTextureLocation().x, weapon->getIconTextureLocation().y, 50, 50);
 	m_spellManager->addSpell(chop);
 
 	// handle other spells
