@@ -49,4 +49,6 @@ enum class ResourceID
 	Texture_GUI_spell_color_necromancy,
 	Texture_GUI_spell_color_divine,
 	Texture_GUI_spell_color_illusion,
+	Texture_Particle_circle,
+	Texture_Particle_blob,
 };

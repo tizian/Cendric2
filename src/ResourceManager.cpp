@@ -75,7 +75,9 @@ void ResourceManager::init()
 		{ ResourceID::Texture_GUI_spell_color_twilight, "res/assets/gui/spell_color_twilight.png" },
 		{ ResourceID::Texture_GUI_spell_color_necromancy, "res/assets/gui/spell_color_necromancy.png" },
 		{ ResourceID::Texture_GUI_spell_color_divine, "res/assets/gui/spell_color_divine.png" },
-		{ ResourceID::Texture_GUI_spell_color_illusion, "res/assets/gui/spell_color_illusion.png" }
+		{ ResourceID::Texture_GUI_spell_color_illusion, "res/assets/gui/spell_color_illusion.png" },
+		{ ResourceID::Texture_Particle_circle, "res/assets/particles/circle.png" },
+		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" }
 	});
 
 	// font should be always loaded to avoid lags when loading later

@@ -18,3 +18,9 @@ http://registry.gimp.org/node/24816
 
 Lighting:
 http://gamedev.stackexchange.com/questions/22159/can-i-achieve-a-torchlight-effect-lighter-area-around-a-light-source-in-a-2d-g
+
+Particles:
+http://www.bfilipek.com/2014/03/three-particle-effects.html
+
+Water:
+http://gamedevelopment.tutsplus.com/tutorials/make-a-splash-with-dynamic-2d-water-effects--gamedev-236
