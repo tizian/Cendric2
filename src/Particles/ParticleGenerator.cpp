@@ -2,6 +2,8 @@
 
 #include "Particles/ParticleSystem.h"
 
+#include <cmath>
+
 namespace particles
 {
 	#ifndef M_PI

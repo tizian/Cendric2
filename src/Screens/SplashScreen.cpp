@@ -25,7 +25,7 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	addObject(GameObjectType::_Undefined, slotActive);
 
 	// Particle System Test
-	m_ps = std::make_unique <particles::ParticleSystem>(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob));
+    m_ps = std::unique_ptr<particles::ParticleSystem>(new particles::ParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
 	m_ps->emitRate = 10000.0f / 5.0f;
 	m_ps->additiveBlendMode = true;
 
