@@ -56,7 +56,7 @@ void SimulatedWaterTile::load(int skinNr)
 
 
 	// Particle System
-	m_ps = std::unique_ptr<particles::ParticleSystem>(new particles::ParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::ParticleSystem>(new particles::ParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
 	m_ps->additiveBlendMode = true;
 	m_ps->active = false;
 
@@ -73,10 +73,6 @@ void SimulatedWaterTile::load(int skinNr)
 
 	auto colGen = m_ps->addGenerator<particles::ConstantColorGenerator>();
 	colGen->color = WATER_COLOR;
-	colGen->color.r *= 0.5f;
-	colGen->color.g *= 0.5f;
-	colGen->color.b *= 0.5f;
-	colGen->color.a = 255;
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -60.f;
@@ -189,7 +185,7 @@ void SimulatedWaterTile::update(const sf::Time& frameTime)
 float SimulatedWaterTile::getHeight(float xPosition)
 {
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
-	if (index < 0 || index > m_nColumns)
+	if (index < 0 || index > m_nColumns - 1)
 		return WATER_LEVEL;
 
 	return m_columns[index].height;
