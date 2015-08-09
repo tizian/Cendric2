@@ -26,7 +26,7 @@ namespace particles
 
 	void EulerUpdater::update(float dt, ParticleData *p)
 	{
-		const unsigned int endId = p->countAlive;
+		const unsigned int endId = static_cast<unsigned int>(p->countAlive);
 
 		for (size_t i = 0; i < endId; ++i)
 			p->acc[i] += dt * globalAcceleration;
@@ -41,7 +41,7 @@ namespace particles
 
 	void FloorUpdater::update(float dt, ParticleData *p)
 	{
-		const unsigned int endId = p->countAlive;
+		const unsigned int endId = static_cast<unsigned int>(p->countAlive);
 
 		for (size_t i = 0; i < endId; ++i)
 		{
@@ -62,8 +62,8 @@ namespace particles
 
 	void AttractorUpdater::update(float dt, ParticleData *p)
 	{
-		const unsigned int endId = p->countAlive;
-		const unsigned int numAttractors = m_attractors.size();
+		const unsigned int endId = static_cast<unsigned int>(p->countAlive);
+		const unsigned int numAttractors = static_cast<unsigned int>(m_attractors.size());
 		sf::Vector2f off;
 		float dist;
 		size_t a;
@@ -85,7 +85,7 @@ namespace particles
 
 	void SizeUpdater::update(float dt, ParticleData *p)
 	{
-		const unsigned int endId = p->countAlive;
+		const unsigned int endId = static_cast<unsigned int>(p->countAlive);
 
 		for (size_t i = 0; i < endId; ++i)
 		{
@@ -97,7 +97,7 @@ namespace particles
 
 	void ColorUpdater::update(float dt, ParticleData *p)
 	{
-		const unsigned int endId = p->countAlive;
+		const unsigned int endId = static_cast<unsigned int>(p->countAlive);
 
 		for (size_t i = 0; i < endId; ++i)
 		{
@@ -109,7 +109,7 @@ namespace particles
 
 	void TimeUpdater::update(float dt, ParticleData *p)
 	{
-		unsigned int endId = p->countAlive;
+		unsigned int endId = static_cast<unsigned int>(p->countAlive);
 
 		if (endId == 0) return;
 
@@ -121,14 +121,14 @@ namespace particles
 			if (p->time[i].x < 0.0f)
 			{
 				p->kill(i);
-				endId = p->countAlive < p->count ? p->countAlive : p->count;
+				endId = static_cast<unsigned int>(p->countAlive < p->count ? p->countAlive : p->count);
 			}
 		}
 	}
 
 	void SimulatedWaterUpdater::update(float dt, ParticleData *p)
 	{
-		unsigned int endId = p->countAlive;
+		unsigned int endId = static_cast<unsigned int>(p->countAlive);
 
 		if (endId == 0) return;
 
@@ -141,7 +141,7 @@ namespace particles
 			if (p->pos[i].y + p->size[i].x > bb->top + bb->height - y - water->WATER_SURFACE_THICKNESS)
 			{
 				p->kill(i);
-				endId = p->countAlive < p->count ? p->countAlive : p->count;
+				endId = static_cast<unsigned int>(p->countAlive < p->count ? p->countAlive : p->count);
 			}
 		}
 	}

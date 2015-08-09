@@ -12,9 +12,9 @@ namespace particles
 		m_texture = tex;
 		if (m_texture)
 		{
-			m_vertices = sf::VertexArray(sf::Quads, maxCount * 4);
+			m_vertices = sf::VertexArray(sf::Quads, static_cast<unsigned int>(maxCount * 4));
 
-			for (size_t i = 0; i < m_particles.count; ++i)
+			for (unsigned int i = 0; i < static_cast<unsigned int>(m_particles.count); ++i)
 			{
 				m_vertices[4 * i + 0].texCoords.x = 0.0f;	m_vertices[4 * i + 0].texCoords.y = 0.0f;
 				m_vertices[4 * i + 1].texCoords.x = (float)m_texture->getSize().x;	m_vertices[4 * i + 1].texCoords.y = 0.0f;
@@ -29,7 +29,7 @@ namespace particles
 		}
 		else
 		{
-			m_vertices = sf::VertexArray(sf::Points, maxCount);
+			m_vertices = sf::VertexArray(sf::Points, static_cast<unsigned int>(maxCount));
 		}
 	}
 
@@ -81,7 +81,7 @@ namespace particles
 
 		if (m_texture)
 		{
-			for (size_t i = 0; i < m_particles.countAlive; ++i)
+			for (unsigned int i = 0; i < static_cast<unsigned int>(m_particles.countAlive); ++i)
 			{
 				m_vertices[4 * i + 0].position.x = m_particles.pos[i].x - m_particles.size[i].x;	m_vertices[4 * i + 0].position.y = m_particles.pos[i].y - m_particles.size[i].x;
 				m_vertices[4 * i + 1].position.x = m_particles.pos[i].x + m_particles.size[i].x;	m_vertices[4 * i + 1].position.y = m_particles.pos[i].y - m_particles.size[i].x;
@@ -96,14 +96,12 @@ namespace particles
 		}
 		else
 		{
-			for (size_t i = 0; i < m_particles.countAlive; ++i)
+			for (unsigned int i = 0; i < static_cast<unsigned int>(m_particles.countAlive); ++i)
 			{
 				m_vertices[i].position = m_particles.pos[i];
 				m_vertices[i].color = m_particles.col[i];
 			}
 		}
-
-		
 	}
 
 	void ParticleSystem::reset()
@@ -127,15 +125,14 @@ namespace particles
 			states.texture = m_texture;
 			
 			const sf::Vertex *ver = &m_vertices[0];
-			target.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
+			target.draw(ver, static_cast<unsigned int>(m_particles.countAlive * 4), sf::Quads, states);
 		}
 		else
 		{
 			states.texture = nullptr;
 
 			const sf::Vertex *ver = &m_vertices[0];
-			target.draw(ver, m_particles.countAlive, sf::Points, states);
+			target.draw(ver, static_cast<unsigned int>(m_particles.countAlive), sf::Points, states);
 		}
-		
 	}
 }

@@ -20,12 +20,14 @@ equipped.neck:
 equipped.ring1:
 equipped.ring2:
 equipped.weapon:it_we_icestaff
-# fireball with speed (3) & count (5)
-equipped.spellslots:2,3,2,5,3
-# iceball with damage (1) & reflect (4)
-equipped.spellslots:3,4,3,1,1
-equipped.spellslots:19
-equipped.spellslots:21,5,3
+# fireball with speed (3), level 2 & count (5), level 3
+equipped.spellslot:2,3,2,5,3
+# iceball with damage (1), level 1 & reflect (4), level 3
+equipped.spellslot:3,4,3,1,1
+# divine shield with no modifiers
+equipped.spellslot:19
+# aureola with count (5), level 3
+equipped.spellslot:21,5,3
 # levels killed:
 # levels looted:
 # quest states:
