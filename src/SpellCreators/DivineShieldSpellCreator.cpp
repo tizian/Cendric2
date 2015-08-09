@@ -11,7 +11,7 @@ void DivineShieldSpellCreator::executeSpell(sf::Vector2f target)
 {
 	SpellBean spellBean = m_spellBean;
 	DivineShieldSpell* newSpell = new DivineShieldSpell(m_additionalResistance);
-	newSpell->load(spellBean, m_owner, g_inputController->getMousePosition(), 0);
+	newSpell->load(spellBean, m_owner, target, 0);
 	m_screen->addObject(GameObjectType::_Spell, newSpell);
 	
 	m_owner->addHeal(newSpell->getHeal());

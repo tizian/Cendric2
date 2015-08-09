@@ -14,30 +14,38 @@ class Level;
 class LevelMainCharacter;
 class Spell;
 
-enum class EnemyState {
+enum class EnemyState
+{
 	Idle,
 	Chasing,
-	// the enemy has taken a hit and needs to recover 
+	Stunned,
+	Fleeing,
+	Waiting,
 	Recovering,
-	Fleeing
+	Dead
 };
 
 // An enemy in a level
 class Enemy : public LevelMovableGameObject
 {
 public:
-	Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
+	Enemy(Level* level, LevelMainCharacter *mainChar, EnemyID id);
 	~Enemy();
 
 	virtual void load() = 0;
-	void checkCollisions(const sf::Vector2f& nextPosition) override;
-	void renderAfterForeground(sf::RenderTarget& target) override;
+	void checkCollisions(const sf::Vector2f &nextPosition) override;
+	void renderAfterForeground(sf::RenderTarget &target) override;
 	void onRightClick() override;
 	void onMouseOver() override;
-	void update(const sf::Time& frameTime) override;
+	void update(const sf::Time &frameTime) override;
 	
-	void onHit(Spell* spell) override;
-	void setLoot(const std::map<std::string, int>& items, int gold);
+	void onHit(Spell *spell) override;
+	// the enemy flees for the given time
+	void setFleeing(const sf::Time &fleeingTime);
+	// the enemy is stunned for the given time
+	void setStunned(const sf::Time &stunnedTime);
+	void setLoot(const std::map<std::string, int> &items, int gold);
+	void setDead() override;
 
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
@@ -60,19 +68,18 @@ protected:
 	std::vector<DamageType> m_immuneDamageTypes;
 	
 	// AI
-	EnemyState m_enemyState;
+	EnemyState m_enemyState = EnemyState::Idle;
 	virtual void updateEnemyState(const sf::Time& frameTime);
+	virtual void updateAggro();
 	// if the enemy is not in this range, its state is idle and it will do some random movement.
 	// inside, it will probably chase & attack the main char.
-	virtual float getConfiguredAggroRange() const = 0;
-	// the enemy feels safe outside this range and will not chase the main char anymore and not flee either.
-	virtual float getConfiguredSafeRange() const;
+	virtual float getAggroRange() const = 0;
 	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
-	virtual bool getConfiguredFleeCondition() const;
+	virtual bool getFleeCondition() const;
 	// how near does an enemy go to the abyss until it stops? default is 10.f. Can be 0 for unflinching enemies
-	virtual float getConfiguredDistanceToAbyss() const;
+	virtual float getDistanceToAbyss() const;
 	// the distance from the center of the enemy to the center of the main char at which the enemy approaches the main char.
-	virtual float getConfiguredApproachingDistance() const = 0;
+	virtual float getApproachingDistance() const = 0;
 	// the target to be destroyed!
 	LevelMainCharacter* m_mainChar;
 	float distToMainChar() const;
@@ -80,14 +87,26 @@ protected:
 	bool m_jumps = false;
 	// a descision the enemy has taken an that lasts until it decides anew. -1: walk left, 0: stay, 1: walk right
 	int m_randomDescision = 0;
-	// time until the enemy can do anything after it has taken a hit or a special spell (stun)
+	// time until the enemy can attack after it has taken a hit
 	sf::Time m_recoveringTime = sf::Time::Zero;
+	// time stunned
+	sf::Time m_stunnedTime = sf::Time::Zero;
+	// time feared
+	sf::Time m_fearedTime = sf::Time::Zero;
+	// time while the enemy does nothing because it tried to get to the main char and it failed
+	sf::Time m_waitingTime = sf::Time::Zero;
 	// time until next random desicion in idle state
 	sf::Time m_descisionTime = sf::Time::Zero;
+	// time the enemy will chase the main char anyway (even if it is out of aggro range)
+	sf::Time m_chasingTime = sf::Time::Zero;
 
 	virtual void handleMovementInput() override;
 	virtual sf::Time getConfiguredRecoveringTime() const;
-	virtual sf::Time getRandomDescisionTime() const;
+	virtual sf::Time getConfiguredRandomDescisionTime() const;
+	// time feared after the fear condition is true (has nothing to do with spells)
+	virtual sf::Time getConfiguredFearedTime() const;
+	virtual sf::Time getConfiguredWaitingTime() const;
+	virtual sf::Time getConfiguredChasingTime() const;
 	float m_jumpHeight = 0;
 
 private:
@@ -97,7 +116,7 @@ private:
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;
 	int m_lootableGold;
-	LootWindow* m_lootWindow = nullptr;
+	LootWindow *m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
 	
 	// the enemy can only be looted if the main char is in this range

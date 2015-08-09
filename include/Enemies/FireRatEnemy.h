@@ -15,8 +15,8 @@ public:
 
 	void load() override;
 
-	float getConfiguredApproachingDistance() const override;
-	float getConfiguredAggroRange() const override;
+	float getApproachingDistance() const override;
+	float getAggroRange() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

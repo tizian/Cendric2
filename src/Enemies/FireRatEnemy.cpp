@@ -43,12 +43,13 @@ sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const
 
 void FireRatEnemy::handleAttackInput()
 {
-	if (distToMainChar() < getConfiguredAggroRange())
+	if (m_enemyState != EnemyState::Chasing) return;
+	if (distToMainChar() < getAggroRange())
 	{
-		m_spellManager->setCurrentSpell(1);
+		m_spellManager->setCurrentSpell(1); // fire ball
 		if (distToMainChar() < 100.f)
 		{
-			m_spellManager->setCurrentSpell(0);
+			m_spellManager->setCurrentSpell(0); // chop
 		}
 
 		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
@@ -126,12 +127,12 @@ sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const
 	return sf::milliseconds(4 * 80);
 }
 
-float FireRatEnemy::getConfiguredAggroRange() const
+float FireRatEnemy::getAggroRange() const
 {
 	return 500.f;
 }
 
-float FireRatEnemy::getConfiguredApproachingDistance() const
+float FireRatEnemy::getApproachingDistance() const
 {
 	return 10.f;
 }

@@ -33,7 +33,7 @@ void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget)
 	}
 }
 
-void GameObject::setDebugBoundingBox(sf::Color debugColor)
+void GameObject::setDebugBoundingBox(const sf::Color &debugColor)
 {
 	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
 	m_debugBox.setPosition(m_position);
@@ -210,4 +210,11 @@ void GameObject::setScreen(Screen* screen)
 Screen* GameObject::getScreen() const
 {
 	return m_screen;
+}
+
+void GameObject::updateTime(sf::Time &time, const sf::Time &frameTime)
+{
+	if (time == sf::Time::Zero) return;
+	time -= frameTime;
+	if (time < sf::Time::Zero) time = sf::Time::Zero;
 }

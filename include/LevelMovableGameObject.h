@@ -27,7 +27,7 @@ public:
 	// adds heal to the attribute health. the heal can't be negative
 	void addHeal(int heal);
 	// sets the dead bool and sets the attribute health to zero.
-	void setDead();
+	virtual void setDead();
 	// sets the fight animation time of this mob
 	void setFightAnimationTime();
 	// the mob consumes a food and gets its bonus attributes for its duration. they may also be negative.

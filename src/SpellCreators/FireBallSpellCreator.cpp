@@ -17,7 +17,7 @@ void FireBallSpellCreator::executeSpell(sf::Vector2f target)
 	for (int i = 0; i < m_spellBean.count; i++)
 	{
 		FireBallSpell* newSpell = new FireBallSpell();		
-		newSpell->load(spellBean, m_owner, g_inputController->getMousePosition(), div * sign * spellBean.divergenceAngle);
+		newSpell->load(spellBean, m_owner, target, div * sign * spellBean.divergenceAngle);
 		m_screen->addObject(GameObjectType::_Spell, newSpell);
 		sign = -sign;
 		if (sign == -1)

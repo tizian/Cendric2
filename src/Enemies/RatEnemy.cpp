@@ -35,29 +35,30 @@ sf::Vector2f RatEnemy::getConfiguredSpellOffset() const
 
 void RatEnemy::handleAttackInput()
 {
+	if (m_enemyState != EnemyState::Chasing) return;
 	if (distToMainChar() < 100.f)
 	{
 		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 	}
 }
 
-float RatEnemy::getConfiguredAggroRange() const
+float RatEnemy::getAggroRange() const
 {
 	return 300.f;
 }
 
-float RatEnemy::getConfiguredDistanceToAbyss() const
+float RatEnemy::getDistanceToAbyss() const
 {
 	return 20.f;
 }
 
-bool RatEnemy::getConfiguredFleeCondition() const
+bool RatEnemy::getFleeCondition() const
 {
 	// what a cowardly rat
 	return m_attributes.currentHealthPoints < m_attributes.maxHealthPoints / 3;
 }
 
-float RatEnemy::getConfiguredApproachingDistance() const
+float RatEnemy::getApproachingDistance() const
 {
 	return 10.f;
 }

@@ -10,7 +10,6 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_mainChar = mainChar;
 	m_immuneEnemies.push_back(id);
 	m_attributes = ZERO_ATTRIBUTES;
-	m_enemyState = EnemyState::Idle;
 	m_screen = mainChar->getScreen();
 	m_spellManager = new SpellManager(this);
 	
@@ -24,14 +23,9 @@ Enemy::~Enemy()
 	delete m_lootWindow;
 }
 
-bool Enemy::getConfiguredFleeCondition() const
+bool Enemy::getFleeCondition() const
 {
 	return false;
-}
-
-float Enemy::getConfiguredSafeRange() const
-{
-	return 1000.f;
 }
 
 void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
@@ -75,20 +69,28 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 	m_jumps = false;
 	if (isMovingX && collidesX)
 	{
-		// would a jump work? if the state is fleeing, the enemy doesn't think about that anymore.
-		m_jumps = m_enemyState == EnemyState::Fleeing || !m_level->collidesAfterJump(*getBoundingBox(), m_jumpHeight, m_isFacingRight);
+		// would a jump work? 
+		m_jumps = !m_level->collidesAfterJump(*getBoundingBox(), m_jumpHeight, m_isFacingRight);
 	}
 
-	// checks if the enemy falls would fall deeper than it can jump. fleeing enemies don't consider this and fall anyway.
-	if (!(m_enemyState == EnemyState::Fleeing) && isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getConfiguredDistanceToAbyss()))
+	// checks if the enemy falls would fall deeper than it can jump. 
+	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss()))
 	{
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
+		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
 	}
 
 	if (std::abs(getVelocity().y) > 0.0f)
 	{
 		m_isGrounded = false;
+	}
+
+	// if the enemy collidesX but can't jump and is chasing, it waits for a certain time.
+	// the same if it can't reach the main char because of the y difference.
+	if (m_enemyState == EnemyState::Chasing && ((collidesX && !m_jumps) || abs(m_mainChar->getPosition().y - getPosition().y) > m_jumpHeight))
+	{
+		m_waitingTime = getConfiguredWaitingTime();
 	}
 }
 
@@ -137,10 +139,7 @@ void Enemy::onHit(Spell* spell)
 		return;
 	}
 	addDamage(damage);
-	if (m_enemyState == EnemyState::Idle)
-	{
-		m_enemyState = EnemyState::Chasing;
-	}
+	m_chasingTime = getConfiguredChasingTime();
 	m_recoveringTime = getConfiguredRecoveringTime();
 }
 
@@ -158,6 +157,7 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget)
 void Enemy::update(const sf::Time& frameTime) 
 {
 	updateEnemyState(frameTime);
+	updateAggro();
 	LevelMovableGameObject::update(frameTime);
 	updateHpBar();
 	if (m_showLootWindow && m_lootWindow != nullptr)
@@ -184,15 +184,30 @@ sf::Time Enemy::getConfiguredRecoveringTime() const
 	return sf::milliseconds(200);
 }
 
-float Enemy::getConfiguredDistanceToAbyss() const
+sf::Time Enemy::getConfiguredWaitingTime() const
 {
-	return 10.f;
+	return sf::seconds(2);
 }
 
-sf::Time Enemy::getRandomDescisionTime() const
+sf::Time Enemy::getConfiguredRandomDescisionTime() const
 {
 	int r = rand() % 1500 + 200;
 	return sf::milliseconds(r);
+}
+
+sf::Time Enemy::getConfiguredFearedTime() const
+{
+	return sf::seconds(6);
+}
+
+sf::Time Enemy::getConfiguredChasingTime() const
+{
+	return sf::seconds(1);
+}
+
+float Enemy::getDistanceToAbyss() const
+{
+	return 10.f;
 }
 
 GameObjectType Enemy::getConfiguredType() const
@@ -202,50 +217,60 @@ GameObjectType Enemy::getConfiguredType() const
 
 void Enemy::updateEnemyState(const sf::Time& frameTime)
 {
-	if (m_isDead) return;
+	// handle dead
+	if (m_enemyState == EnemyState::Dead) return;
 
-	if (m_recoveringTime > sf::Time::Zero)
+	// update times
+	GameObject::updateTime(m_stunnedTime, frameTime);
+	GameObject::updateTime(m_waitingTime, frameTime);
+	GameObject::updateTime(m_recoveringTime, frameTime);
+	GameObject::updateTime(m_fearedTime, frameTime);
+	GameObject::updateTime(m_chasingTime, frameTime);
+	GameObject::updateTime(m_descisionTime, frameTime);
+
+	// handle stunned
+	if (m_stunnedTime > sf::Time::Zero)
 	{
-		m_enemyState = EnemyState::Recovering;
-		m_recoveringTime -= frameTime;
-		if (m_recoveringTime < sf::Time::Zero)
-		{
-			m_recoveringTime = sf::Time::Zero;
-			m_enemyState = EnemyState::Idle;
-		}
+		m_enemyState = EnemyState::Stunned;
 		return;
 	}
 
-	bool isInAggroRange = distToMainChar() < getConfiguredAggroRange();
-	bool isInSaveRange = distToMainChar() < getConfiguredSafeRange();
-
-	if (getConfiguredFleeCondition() && isInSaveRange)
+	// handle fear
+	if (m_fearedTime > sf::Time::Zero)
 	{
 		m_enemyState = EnemyState::Fleeing;
 		return;
 	}
 
-	if (m_enemyState == EnemyState::Idle && !isInAggroRange)
+	// handle recovering
+	if (m_recoveringTime > sf::Time::Zero)
 	{
-		m_descisionTime -= frameTime;
-		if (m_descisionTime < sf::Time::Zero)
-		{
-			// decide again
-			m_descisionTime = getRandomDescisionTime();
-			m_randomDescision = rand() % 3 - 1;
-		}
+		m_enemyState = EnemyState::Recovering;
+		return;
 	}
 
-	if (m_enemyState == EnemyState::Idle && isInAggroRange)
+	// handle chasing
+	if (m_chasingTime > sf::Time::Zero)
 	{
 		m_enemyState = EnemyState::Chasing;
 		return;
 	}
 
-	if ((m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Fleeing) && !isInSaveRange)
+	// handle waiting
+	if (m_waitingTime > sf::Time::Zero)
+	{
+		m_enemyState = EnemyState::Waiting;
+	}
+	else
 	{
 		m_enemyState = EnemyState::Idle;
-		return;
+	}
+
+	if (m_descisionTime == sf::Time::Zero)
+	{
+		// decide again
+		m_descisionTime = getConfiguredRandomDescisionTime();
+		m_randomDescision = rand() % 3 - 1;
 	}
 }
 
@@ -254,14 +279,14 @@ void Enemy::handleMovementInput()
 	// movement AI
 	float newAccelerationX = 0;
 
-	if (m_enemyState == EnemyState::Chasing)
+	if (m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Recovering)
 	{
-		if (m_mainChar->getCenter().x < getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getConfiguredApproachingDistance())
+		if (m_mainChar->getCenter().x < getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getApproachingDistance())
 		{
 			m_nextIsFacingRight = false;
 			newAccelerationX -= getConfiguredWalkAcceleration();
 		}
-		if (m_mainChar->getCenter().x > getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getConfiguredApproachingDistance())
+		if (m_mainChar->getCenter().x > getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getApproachingDistance())
 		{
 			m_nextIsFacingRight = true;
 			newAccelerationX += getConfiguredWalkAcceleration();
@@ -273,7 +298,7 @@ void Enemy::handleMovementInput()
 		}
 	}
 
-	if (m_enemyState == EnemyState::Fleeing)
+	else if (m_enemyState == EnemyState::Fleeing)
 	{
 		if (m_mainChar->getCenter().x < getCenter().x)
 		{
@@ -292,7 +317,7 @@ void Enemy::handleMovementInput()
 		}
 	}
 
-	if (m_enemyState == EnemyState::Idle)
+	else if (m_enemyState == EnemyState::Idle || m_enemyState == EnemyState::Waiting)
 	{
 		if (m_randomDescision != 0)
 		{
@@ -302,6 +327,23 @@ void Enemy::handleMovementInput()
 	}
 
 	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
+}
+
+void Enemy::updateAggro()
+{
+	bool isInAggroRange = distToMainChar() < getAggroRange();
+
+	if (m_enemyState == EnemyState::Chasing && getFleeCondition())
+	{
+		m_fearedTime = getConfiguredFearedTime();
+		return;
+	}
+
+	if (m_enemyState == EnemyState::Idle && isInAggroRange)
+	{
+		m_chasingTime = getConfiguredChasingTime();
+		return;
+	}
 }
 
 EnemyID Enemy::getEnemyID() const
@@ -351,4 +393,10 @@ void Enemy::onRightClick()
 			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
 		}
 	}
+}
+
+void Enemy::setDead()
+{
+	LevelMovableGameObject::setDead();
+	m_enemyState = EnemyState::Dead;
 }

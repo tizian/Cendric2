@@ -14,7 +14,7 @@ void AureolaSpellCreator::executeSpell(sf::Vector2f target)
 	for (int i = 0; i < m_spellBean.count; i++)
 	{
 		AureolaSpell* newSpell = new AureolaSpell();
-		newSpell->load(spellBean, m_owner, g_inputController->getMousePosition(), i  * spellBean.divergenceAngle);
+		newSpell->load(spellBean, m_owner, target, i  * spellBean.divergenceAngle);
 		m_screen->addObject(GameObjectType::_Spell, newSpell);
 	}
 
