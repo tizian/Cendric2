@@ -95,12 +95,30 @@ namespace particles
 	}
 
 
+	void ConstantSizeGenerator::generate(ParticleData *p, size_t startId, size_t endId)
+	{
+		for (size_t i = startId; i < endId; ++i)
+		{
+			p->size[i].x = p->size[i].y = p->size[i].z = size;
+		}
+	}
+
+
 	void ColorGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
 		for (size_t i = startId; i < endId; ++i)
 		{
 			p->startCol[i] = randomColor(minStartCol, maxStartCol);
 			p->endCol[i] = randomColor(minEndCol, maxEndCol);
+		}
+	}
+
+
+	void ConstantColorGenerator::generate(ParticleData *p, size_t startId, size_t endId)
+	{
+		for (size_t i = startId; i < endId; ++i)
+		{
+			p->startCol[i] = p->endCol[i] = color;
 		}
 	}
 
@@ -116,12 +134,11 @@ namespace particles
 
 	void AngledVelocityGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
-		float phi = DEG_TO_RAD * (randomFloat(minAngle, maxAngle) - 90.0f);		// offset to start at top instead of "mathematical 0 degrees"
-		sf::Vector2f dir{ std::cos(phi), std::sin(phi) };
-		float len = randomFloat(minStartVel, maxStartVel);
-
 		for (size_t i = startId; i < endId; ++i)
 		{
+			float phi = DEG_TO_RAD * (randomFloat(minAngle, maxAngle) - 90.0f);		// offset to start at top instead of "mathematical 0 degrees"
+			sf::Vector2f dir{ std::cos(phi), std::sin(phi) };
+			float len = randomFloat(minStartVel, maxStartVel);
 			p->vel[i] = dir * len;
 		}
 	}

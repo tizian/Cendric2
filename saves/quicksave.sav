@@ -1,17 +1,18 @@
 # time played, in seconds
-time.played:16
+time.played:1
 savegame.name:Quicksave
-savegame.date:1437753677
+savegame.date:1439108708
 level.id:0
 level.position:0.000000,0.000000
 map.id:1
-map.position:4203.071777,1082.623901
+map.position:4400.000000,650.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:
 equipped.body:

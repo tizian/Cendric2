@@ -1,7 +1,9 @@
 #pragma once
 
-#include "global.h"
 #include "DynamicTile.h"
+
+#include "global.h"
+#include "Particles/ParticleSystem.h"
 
 class FrozenWaterTile;
 
@@ -37,6 +39,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
+	float getHeight(float xPosition);
+
 	void splash(float xPosition, float velocity);
 
 	void freeze(int index);
@@ -59,6 +63,12 @@ private:
 
 	std::vector<FrozenWaterTile *> m_frozenTiles;
 
+	std::unique_ptr<particles::ParticleSystem> m_ps;
+	sf::Vector2f *m_particlePosition = nullptr;
+	float *m_particleMinSpeed = nullptr;
+	float *m_particleMaxSpeed = nullptr;
+
+public:
 	static const float TENSION;
 	static const float DAMPING;
 	static const float SPREAD;
@@ -66,4 +76,6 @@ private:
 	static const float WATER_LEVEL;
 	static const float WATER_SURFACE_THICKNESS;
 	static const int NUMBER_COLUMNS_PER_SUBTILE;
+
+	static const sf::Color WATER_COLOR;
 };

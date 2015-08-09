@@ -1,5 +1,7 @@
 #include "Particles/ParticleUpdater.h"
 
+#include "DynamicTiles/SimulatedWaterTile.h"
+
 namespace particles
 {
 	inline float dot(const sf::Vector2f &a, const sf::Vector2f &b)
@@ -117,6 +119,26 @@ namespace particles
 			p->time[i].z = 1.0f - (p->time[i].x / p->time[i].y);
 
 			if (p->time[i].x < 0.0f)
+			{
+				p->kill(i);
+				endId = p->countAlive < p->count ? p->countAlive : p->count;
+			}
+		}
+	}
+
+	void SimulatedWaterUpdater::update(float dt, ParticleData *p)
+	{
+		unsigned int endId = p->countAlive;
+
+		if (endId == 0) return;
+
+		const sf::FloatRect *bb = water->getBoundingBox();
+
+		for (size_t i = 0; i < endId; ++i)
+		{
+			float y = water->getHeight(p->pos[i].x);
+			
+			if (p->pos[i].y + p->size[i].x > bb->top + bb->height - y - water->WATER_SURFACE_THICKNESS)
 			{
 				p->kill(i);
 				endId = p->countAlive < p->count ? p->countAlive : p->count;

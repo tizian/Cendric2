@@ -13,6 +13,8 @@ const float SimulatedWaterTile::WATER_LEVEL = 40.f;
 const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
 const int SimulatedWaterTile:: NUMBER_COLUMNS_PER_SUBTILE = 10;
 
+const sf::Color SimulatedWaterTile::WATER_COLOR = sf::Color(20, 50, 100, 128);
+
 void SimulatedWaterTile::init()
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
@@ -51,6 +53,51 @@ void SimulatedWaterTile::load(int skinNr)
 	m_frozenTiles = std::vector<FrozenWaterTile *>(m_nTiles, nullptr);
 
 	m_vertexArray = sf::VertexArray(sf::Quads, 2 * 4 * (m_nColumns - 1));
+
+
+	// Particle System
+	m_ps = std::unique_ptr<particles::ParticleSystem>(new particles::ParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps->additiveBlendMode = true;
+	m_ps->active = false;
+
+	// Generators
+	auto posGen = m_ps->addGenerator<particles::DiskPositionGenerator>();
+	m_particlePosition = &posGen->center;
+	posGen->radius = 40.f;
+
+	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	sizeGen->minStartSize = 12.0f;
+	sizeGen->maxStartSize = 16.0f;
+	sizeGen->minEndSize = 4.0f;
+	sizeGen->maxEndSize = 6.0f;
+
+	auto colGen = m_ps->addGenerator<particles::ConstantColorGenerator>();
+	colGen->color = WATER_COLOR;
+	colGen->color.r *= 0.5f;
+	colGen->color.g *= 0.5f;
+	colGen->color.b *= 0.5f;
+	colGen->color.a = 255;
+
+	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	velGen->minAngle = -60.f;
+	velGen->maxAngle = 60.f;
+	m_particleMinSpeed = &velGen->minStartVel;
+	m_particleMaxSpeed = &velGen->maxStartVel;
+
+	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	timeGen->minTime = 10.0f;
+	timeGen->maxTime = 10.0f;
+
+	// Updaters
+	auto timeUpdater = m_ps->addUpdater<particles::TimeUpdater>();
+
+	auto colorUpdater = m_ps->addUpdater<particles::ColorUpdater>();
+
+	auto waterUpdater = m_ps->addUpdater<particles::SimulatedWaterUpdater>();
+	waterUpdater->water = this;
+
+	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
+	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 100000.0f);		// TODO: This seems.... suspicious.
 }
 
 void SimulatedWaterTile::update(const sf::Time& frameTime)
@@ -103,7 +150,6 @@ void SimulatedWaterTile::update(const sf::Time& frameTime)
 		}
 	}
 
-	sf::Color blue = sf::Color(20, 50, 100, 128);
 	sf::Color transparent = sf::Color(255, 255, 255, 0);
 
 	float scale = m_width / (float)(m_nColumns - 1);
@@ -119,23 +165,34 @@ void SimulatedWaterTile::update(const sf::Time& frameTime)
 		sf::Vector2f p6 = sf::Vector2f(p1.x, p1.y - thickness);
 
 		m_vertexArray[8 * i + 0].position = p1;
-		m_vertexArray[8 * i + 0].color = blue;
+		m_vertexArray[8 * i + 0].color = WATER_COLOR;
 		m_vertexArray[8 * i + 1].position = p2;
-		m_vertexArray[8 * i + 1].color = blue;
+		m_vertexArray[8 * i + 1].color = WATER_COLOR;
 		m_vertexArray[8 * i + 2].position = p3;
-		m_vertexArray[8 * i + 2].color = blue;
+		m_vertexArray[8 * i + 2].color = WATER_COLOR;
 		m_vertexArray[8 * i + 3].position = p4;
-		m_vertexArray[8 * i + 3].color = blue;
+		m_vertexArray[8 * i + 3].color = WATER_COLOR;
 
 		m_vertexArray[8 * i + 4].position = p1;
-		m_vertexArray[8 * i + 4].color = blue;
+		m_vertexArray[8 * i + 4].color = WATER_COLOR;
 		m_vertexArray[8 * i + 5].position = p2;
-		m_vertexArray[8 * i + 5].color = blue;
+		m_vertexArray[8 * i + 5].color = WATER_COLOR;
 		m_vertexArray[8 * i + 6].position = p5;
 		m_vertexArray[8 * i + 6].color = transparent;
 		m_vertexArray[8 * i + 7].position = p6;
 		m_vertexArray[8 * i + 7].color = transparent;
 	}
+
+	m_ps->update(frameTime);
+}
+
+float SimulatedWaterTile::getHeight(float xPosition)
+{
+	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
+	if (index < 0 || index > m_nColumns)
+		return WATER_LEVEL;
+
+	return m_columns[index].height;
 }
 
 void SimulatedWaterTile::splash(float xPosition, float velocity)
@@ -145,11 +202,22 @@ void SimulatedWaterTile::splash(float xPosition, float velocity)
 	{
 		m_columns[index].velocity = velocity;
 	}
+
+	velocity = std::abs(velocity);
+	float y = getHeight(xPosition);
+	const sf::FloatRect *bb = getBoundingBox();
+
+	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y - WATER_SURFACE_THICKNESS);
+	*m_particleMinSpeed = 0.2f * velocity;
+	*m_particleMaxSpeed = 0.8f * velocity;
+	int nParticles = static_cast<int>(velocity / 8);
+	m_ps->emit(nParticles);
 }
 
 void SimulatedWaterTile::render(sf::RenderTarget& target)
 {
 	target.draw(m_vertexArray);
+	m_ps->draw(target, sf::RenderStates::Default);
 }
 
 void SimulatedWaterTile::onHit(Spell* spell)

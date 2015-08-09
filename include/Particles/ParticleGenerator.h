@@ -87,6 +87,19 @@ namespace particles
 	};
 
 
+	class ConstantSizeGenerator : public ParticleGenerator
+	{
+	public:
+		ConstantSizeGenerator() {}
+		~ConstantSizeGenerator() {}
+
+		void generate(ParticleData *p, size_t startId, size_t endId);
+
+	public:
+		float size{ 1.0f };
+	};
+
+
 	class ColorGenerator : public ParticleGenerator
 	{
 	public:
@@ -100,6 +113,19 @@ namespace particles
 		sf::Color maxStartCol{ sf::Color::Black };
 		sf::Color minEndCol{ sf::Color::Black };
 		sf::Color maxEndCol{ sf::Color::Black };
+	};
+
+
+	class ConstantColorGenerator : public ParticleGenerator
+	{
+	public:
+		ConstantColorGenerator() {}
+		~ConstantColorGenerator() {}
+
+		void generate(ParticleData *p, size_t startId, size_t endId);
+
+	public:
+		sf::Color color{ sf::Color::Black };
 	};
 
 

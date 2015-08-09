@@ -1,25 +1,30 @@
 # time played, in seconds
-time.played:743
-savegame.name:SDFSD
-savegame.date:1437915775
+time.played:57
+savegame.name:Tiz's TestSAVE
+savegame.date:1439113480
 level.id:0
 level.position:0.000000,0.000000
 map.id:1
-map.position:4044.900146,1271.534546
+map.position:3991.611816,770.208374
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+equipped.spellslot:2,3,2,5,3
+equipped.spellslot:3,4,3,1,1
+equipped.spellslot:19
+equipped.spellslot:21,5,3
 # equipment:
-equipped.back:
+equipped.back:it_eq_purpleback
 equipped.body:
-equipped.head:
+equipped.head:it_eq_wizardhatgrey
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
-equipped.weapon:
+equipped.weapon:it_we_icestaff
 # levels killed:
 # levels looted:
 # quest states:
