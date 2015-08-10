@@ -63,7 +63,7 @@ private:
 
 	std::vector<FrozenWaterTile *> m_frozenTiles;
 
-	std::unique_ptr<particles::ParticleSystem> m_ps;
+	std::unique_ptr<particles::MetaballParticleSystem> m_ps;
 	sf::Vector2f *m_particlePosition = nullptr;
 	float *m_particleMinSpeed = nullptr;
 	float *m_particleMaxSpeed = nullptr;

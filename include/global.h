@@ -65,9 +65,10 @@ class ResourceManager;
 class InputController; 
 
 // extern objects
-extern ResourceManager* g_resourceManager;
-extern InputController* g_inputController;
-extern Logger* g_logger;
-extern TextProvider* g_textProvider;
+extern ResourceManager *g_resourceManager;
+extern InputController *g_inputController;
+extern Logger *g_logger;
+extern TextProvider *g_textProvider;
+extern sf::RenderTexture *g_renderTexture;
 
 

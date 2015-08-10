@@ -54,11 +54,11 @@ void SimulatedWaterTile::load(int skinNr)
 
 	m_vertexArray = sf::VertexArray(sf::Quads, 2 * 4 * (m_nColumns - 1));
 
-
 	// Particle System
-	m_ps = std::unique_ptr<particles::ParticleSystem>(new particles::ParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
-	m_ps->additiveBlendMode = true;
-	m_ps->active = false;
+	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob), g_renderTexture));
+	g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)->setSmooth(true);
+	m_ps->color = WATER_COLOR;
+	m_ps->threshold = 0.7f;
 
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::DiskPositionGenerator>();
@@ -66,13 +66,10 @@ void SimulatedWaterTile::load(int skinNr)
 	posGen->radius = 40.f;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 12.0f;
+	sizeGen->minStartSize = 8.f;
 	sizeGen->maxStartSize = 16.0f;
 	sizeGen->minEndSize = 4.0f;
-	sizeGen->maxEndSize = 6.0f;
-
-	auto colGen = m_ps->addGenerator<particles::ConstantColorGenerator>();
-	colGen->color = WATER_COLOR;
+	sizeGen->maxEndSize = 8.0f;
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -60.f;
@@ -86,8 +83,6 @@ void SimulatedWaterTile::load(int skinNr)
 
 	// Updaters
 	auto timeUpdater = m_ps->addUpdater<particles::TimeUpdater>();
-
-	auto colorUpdater = m_ps->addUpdater<particles::ColorUpdater>();
 
 	auto waterUpdater = m_ps->addUpdater<particles::SimulatedWaterUpdater>();
 	waterUpdater->water = this;
@@ -213,7 +208,7 @@ void SimulatedWaterTile::splash(float xPosition, float velocity)
 void SimulatedWaterTile::render(sf::RenderTarget& target)
 {
 	target.draw(m_vertexArray);
-	m_ps->draw(target, sf::RenderStates::Default);
+	m_ps->render(target);
 }
 
 void SimulatedWaterTile::onHit(Spell* spell)

@@ -6,17 +6,18 @@
 
 namespace particles
 {
-	class ParticleSystem : public sf::Drawable, public sf::Transformable
+	class ParticleSystem : public sf::Transformable
 	{
 	public:
-		explicit ParticleSystem(size_t maxCount, sf::Texture *tex=nullptr);
+		ParticleSystem(size_t maxCount);
 		virtual ~ParticleSystem() {}
 
 		ParticleSystem(const ParticleSystem &) = delete;
 		ParticleSystem &operator=(const ParticleSystem &) = delete;
 
 		virtual void update(const sf::Time &dt);
-		void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+		virtual void render(sf::RenderTarget& renderTarget) = 0;
+
 		virtual void reset();
 
 		virtual size_t numAllParticles() const { return m_particles.count; }
@@ -43,18 +44,67 @@ namespace particles
 
 	public:
 		float	emitRate{ 0.0f };		// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
-		bool	active{ true };
-		bool	additiveBlendMode{ false };
 
 	protected:
-		sf::Texture *m_texture;
+		size_t m_count;
 
 		ParticleData m_particles;
 		sf::VertexArray m_vertices;
 
-		size_t m_count;
-
 		std::vector<std::shared_ptr<ParticleGenerator>> m_generators;
 		std::vector<std::shared_ptr<ParticleUpdater>> m_updaters;
+	};
+
+	class PointParticleSystem : public ParticleSystem
+	{
+	public:
+		PointParticleSystem(size_t maxCount);
+		virtual ~PointParticleSystem() {}
+
+		PointParticleSystem(const PointParticleSystem &) = delete;
+		PointParticleSystem &operator=(const PointParticleSystem &) = delete;
+
+		virtual void update(const sf::Time &dt) override;
+		virtual void render(sf::RenderTarget& renderTarget) override;
+	};
+
+	class TextureParticleSystem : public ParticleSystem
+	{
+	public:
+		TextureParticleSystem(size_t maxCount, sf::Texture *texture);
+		virtual ~TextureParticleSystem() {}
+
+		TextureParticleSystem(const TextureParticleSystem &) = delete;
+		TextureParticleSystem &operator=(const TextureParticleSystem &) = delete;
+
+		virtual void update(const sf::Time &dt) override;
+		virtual void render(sf::RenderTarget& renderTarget) override;
+
+		void setAdditiveBlendMode(bool blendMode) { m_additiveBlendMode = blendMode; }
+
+	protected:
+		sf::Texture *m_texture;
+		bool m_additiveBlendMode;
+	};
+
+	class MetaballParticleSystem : public TextureParticleSystem
+	{
+	public:
+		MetaballParticleSystem(size_t maxCount, sf::Texture *texture, sf::RenderTexture *renderTexture);
+		virtual ~MetaballParticleSystem() {}
+
+		MetaballParticleSystem(const MetaballParticleSystem &) = delete;
+		MetaballParticleSystem &operator=(const MetaballParticleSystem &) = delete;
+
+		virtual void render(sf::RenderTarget& renderTarget) override;
+
+	public:
+		sf::Color color{ sf::Color::White };
+		float threshold{ 0.5f };
+
+	protected:
+		sf::RenderTexture *m_renderTexture;
+		sf::Sprite m_sprite;
+		sf::Shader m_shader;
 	};
 }

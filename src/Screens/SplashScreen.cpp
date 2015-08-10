@@ -25,9 +25,9 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	addObject(GameObjectType::_Undefined, slotActive);
 
 	// Particle System Test
-    m_ps = std::unique_ptr<particles::ParticleSystem>(new particles::ParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps->setAdditiveBlendMode(true);
 	m_ps->emitRate = 10000.0f / 5.0f;
-	m_ps->additiveBlendMode = true;
 
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
@@ -84,7 +84,7 @@ void SplashScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
-	m_ps->draw(renderTarget, sf::RenderStates::Default);
+	m_ps->render(renderTarget);
 }
 
 void SplashScreen::execOnExit(const Screen *nextScreen)
