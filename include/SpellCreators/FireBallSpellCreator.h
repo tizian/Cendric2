@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-
 #include "global.h"
 #include "SpellCreator.h"
 
@@ -11,7 +9,7 @@
 class FireBallSpellCreator : public SpellCreator 
 {
 public:
-	FireBallSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	FireBallSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
  
-	void executeSpell(sf::Vector2f target) override;
+	void executeSpell(const sf::Vector2f &target) override;
 };

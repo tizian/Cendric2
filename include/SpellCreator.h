@@ -11,14 +11,14 @@
 class SpellCreator
 {
 public:
-	SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	SpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
 	virtual ~SpellCreator();
 
-	void addModifiers(const std::vector<SpellModifier>& modifiers);
+	void addModifiers(const std::vector<SpellModifier> &modifiers);
 
 	// calculates spells using the owners attributes & the target, and executes their behaviour, adding objects to the screen.
-	virtual void executeSpell(sf::Vector2f target) = 0;
-	const SpellBean& getSpellBean() const;
+	virtual void executeSpell(const sf::Vector2f &target) = 0;
+	const SpellBean &getSpellBean() const;
 
 protected:
 	// filled by the subclasses

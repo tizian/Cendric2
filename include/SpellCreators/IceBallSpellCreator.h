@@ -11,7 +11,7 @@
 class IceBallSpellCreator : public SpellCreator
 {
 public:
-	IceBallSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	IceBallSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
 
-	void executeSpell(sf::Vector2f target) override;
+	void executeSpell(const sf::Vector2f &target) override;
 };

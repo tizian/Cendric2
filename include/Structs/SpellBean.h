@@ -205,3 +205,31 @@ const struct SpellBean DEFAULT_AUREOLA =
 
 	Key::VOID
 };
+
+const struct SpellBean DEFAULT_FEAR =
+{
+	SpellID::Fear,
+	SpellType::Necromancy,
+	sf::IntRect(0, 100, 50, 50),
+	sf::milliseconds(3000),
+	sf::FloatRect(0, 0, 10, 10),
+	DamageType::VOID,
+
+	0,
+	0,
+	0,
+	300.f,
+	1,
+	sf::milliseconds(5000),
+	0.f,
+
+	0.2f,
+	0.f,
+	10,
+	100,
+	1,
+	1,
+	sf::seconds(2),
+
+	Key::VOID
+};

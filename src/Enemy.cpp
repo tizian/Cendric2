@@ -111,34 +111,7 @@ void Enemy::onHit(Spell* spell)
 		spell->setDisposed();
 		return;
 	}
-
-	int damage = 0;
-	switch (spell->getDamageType())
-	{
-	case DamageType::Physical:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.physicalMultiplier);
-		spell->setDisposed();
-		break;
-	case DamageType::Ice:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.iceMultiplier);
-		spell->setDisposed();
-		break;
-	case DamageType::Fire:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.fireMultiplier);
-		spell->setDisposed();
-		break;
-	case DamageType::Shadow:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.shadowMultiplier);
-		spell->setDisposed();
-		break;
-	case DamageType::Light:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.lightMultiplier);
-		spell->setDisposed();
-		break;
-	default:
-		return;
-	}
-	addDamage(damage);
+	LevelMovableGameObject::onHit(spell);
 	m_chasingTime = getConfiguredChasingTime();
 	m_recoveringTime = getConfiguredRecoveringTime();
 }
@@ -356,6 +329,11 @@ float Enemy::getConfiguredDistanceToHPBar() const
 	return 20.f;
 }
 
+int Enemy::getMentalStrength() const
+{
+	return 0;
+}
+
 void Enemy::setLoot(const std::map<string, int>& items, int gold)
 {
 	m_lootableItems = items;
@@ -364,6 +342,16 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold)
 	sf::FloatRect window(0.f, 0.f, 150.f, (items.size() + 2) * 12.f + 20.f);
 	m_lootWindow = new LootWindow(window);
 	m_lootWindow->setLoot(items, gold);
+}
+
+void Enemy::setFeared(const sf::Time &fearedTime)
+{
+	m_fearedTime = fearedTime;
+}
+
+void Enemy::setStunned(const sf::Time &stunnedTime)
+{
+	m_stunnedTime = stunnedTime;
 }
 
 void Enemy::onMouseOver()
