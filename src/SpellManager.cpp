@@ -95,6 +95,9 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 	case SpellID::Aureola:
 		creator = new AureolaSpellCreator(bean, m_owner);
 		break;
+	case SpellID::Fear:
+		creator = new FearSpellCreator(bean, m_owner);
+		break;
 	default:
 		return nullptr;
 	}

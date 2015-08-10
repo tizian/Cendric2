@@ -1,13 +1,13 @@
 #include "SpellCreators/AureolaSpellCreator.h"
 
-AureolaSpellCreator::AureolaSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner)
+AureolaSpellCreator::AureolaSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
 	m_allowedModifiers.push_back(SpellModifierType::Damage);
 	m_allowedModifiers.push_back(SpellModifierType::Count);
 	m_allowedModifiers.push_back(SpellModifierType::Speed);
 }
 
-void AureolaSpellCreator::executeSpell(sf::Vector2f target)
+void AureolaSpellCreator::executeSpell(const sf::Vector2f &target)
 {
 	SpellBean spellBean = m_spellBean;
 	updateDamage(spellBean);

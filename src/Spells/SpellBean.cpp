@@ -14,6 +14,8 @@ SpellBean SpellBean::getSpellBean(SpellID id)
 		return DEFAULT_AUREOLA;
 	case SpellID::DivineShield:
 		return DEFAULT_DIVINESHIELD;
+	case SpellID::Fear:
+		return DEFAULT_FEAR;
 	default:
 		return EMPTY_SPELL;
 	}

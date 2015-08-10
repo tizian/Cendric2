@@ -12,6 +12,7 @@
 #include "SpellCreators/DivineShieldSpellCreator.h"
 #include "SpellCreators/AureolaSpellCreator.h"
 #include "SpellCreators/ChopSpellCreator.h"
+#include "SpellCreators/FearSpellCreator.h"
 
 class SpellSelection;
 

@@ -62,6 +62,11 @@ bool Spell::getConfiguredIsAttachedToMob() const
 	return false;
 }
 
+void Spell::execOnHit(LevelMovableGameObject *target)
+{
+	// nop
+}
+
 void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 {
 	if (m_mob == nullptr)

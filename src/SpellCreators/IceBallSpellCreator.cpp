@@ -1,6 +1,6 @@
 #include "SpellCreators/IceBallSpellCreator.h"
 
-IceBallSpellCreator::IceBallSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner)
+IceBallSpellCreator::IceBallSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
 	m_allowedModifiers.push_back(SpellModifierType::Damage);
 	m_allowedModifiers.push_back(SpellModifierType::Count);
@@ -8,7 +8,7 @@ IceBallSpellCreator::IceBallSpellCreator(const SpellBean& spellBean, LevelMovabl
 	m_allowedModifiers.push_back(SpellModifierType::Speed);
 }
 
-void IceBallSpellCreator::executeSpell(sf::Vector2f target)
+void IceBallSpellCreator::executeSpell(const sf::Vector2f &target)
 {
 	SpellBean spellBean = m_spellBean;
 	updateDamage(spellBean);

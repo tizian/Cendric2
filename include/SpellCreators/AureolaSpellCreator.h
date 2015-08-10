@@ -11,9 +11,10 @@
 class AureolaSpellCreator : public SpellCreator
 {
 public:
-	AureolaSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	AureolaSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
 
-	void executeSpell(sf::Vector2f target) override;
+	void executeSpell(const sf::Vector2f &target) override;
 
+private:
 	void addCountModifier(int level) override;
 };

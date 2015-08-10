@@ -41,7 +41,7 @@ public:
 	
 	void onHit(Spell *spell) override;
 	// the enemy flees for the given time
-	void setFleeing(const sf::Time &fleeingTime);
+	void setFeared(const sf::Time &fearedTime);
 	// the enemy is stunned for the given time
 	void setStunned(const sf::Time &stunnedTime);
 	void setLoot(const std::map<std::string, int> &items, int gold);
@@ -49,6 +49,9 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
+	// a level, ranges from 0 to 3. An enemy can only be feared / stunned, if the level of its spell is high enough.
+	// default is 0. A enemy with level 3 can never be feared / stunned / controlled or affected in any other way!!
+	virtual int getMentalStrength() const;
 	// determines the distance from the top of the enemies bounding box to its
 	// hp bar. Default is 20px.
 	virtual float getConfiguredDistanceToHPBar() const;

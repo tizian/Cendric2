@@ -8,7 +8,7 @@ FireBallSpellCreator::FireBallSpellCreator(const SpellBean& spellBean, LevelMova
 	m_allowedModifiers.push_back(SpellModifierType::Speed);
 }
 
-void FireBallSpellCreator::executeSpell(sf::Vector2f target)
+void FireBallSpellCreator::executeSpell(const sf::Vector2f &target)
 {
 	SpellBean spellBean = m_spellBean;
 	updateDamage(spellBean);

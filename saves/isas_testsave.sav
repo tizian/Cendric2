@@ -28,6 +28,8 @@ equipped.spellslot:3,4,3,1,1
 equipped.spellslot:19
 # aureola with count (5), level 3
 equipped.spellslot:21,5,3
+# fear with count (5), level 1 & duration (7), level 2 & strength (6), level 3
+equipped.spellslot:12,5,1,7,2,6,3
 # levels killed:
 # levels looted:
 # quest states:

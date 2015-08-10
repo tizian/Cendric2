@@ -2,7 +2,7 @@
 
 using namespace std;
 
-ResourceManager* g_resourceManager;
+ResourceManager *g_resourceManager;
 
 ResourceManager::ResourceManager() : m_textures(), m_fileNames(), m_currentError(ErrorID::Void, "")
 {
@@ -44,6 +44,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_divineshield, "res/assets/spells/spritesheet_spell_divineshield.png" },
 		{ ResourceID::Texture_spell_iceball, "res/assets/spells/spritesheet_spell_iceball.png" },
 		{ ResourceID::Texture_spell_aureola, "res/assets/spells/spritesheet_spell_aureola.png" },
+		{ ResourceID::Texture_spell_fear, "res/assets/spells/spritesheet_spell_fear.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
@@ -286,7 +287,7 @@ int ResourceManager::getMaxFPS() const
 	return m_configuration.maxFrameRate;
 }
 
-void ResourceManager::setError(ErrorID id, const string& description)
+void ResourceManager::setError(ErrorID id, const string &description)
 {
 	m_currentError.first = id;
 	m_currentError.second = description;
@@ -299,6 +300,7 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_spell_iceball);
 	deleteResource(ResourceID::Texture_spell_divineshield);
 	deleteResource(ResourceID::Texture_spell_aureola);
+	deleteResource(ResourceID::Texture_spell_fear);
 
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
@@ -327,6 +329,7 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_spell_iceball);
 	getTexture(ResourceID::Texture_spell_divineshield);
 	getTexture(ResourceID::Texture_spell_aureola);
+	getTexture(ResourceID::Texture_spell_fear);
 
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_frozenwater);

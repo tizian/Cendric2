@@ -246,6 +246,7 @@ void LevelMovableGameObject::onHit(Spell* spell)
 	{
 		return;
 	}
+	spell->execOnHit(this);
 	int damage = 0;
 	switch (spell->getDamageType())
 	{

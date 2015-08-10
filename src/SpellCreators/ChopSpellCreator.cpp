@@ -1,11 +1,11 @@
 #include "SpellCreators/ChopSpellCreator.h"
 
-ChopSpellCreator::ChopSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner)
+ChopSpellCreator::ChopSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
 	// no modifiers allowed on this one.
 }
 
-void ChopSpellCreator::executeSpell(sf::Vector2f target)
+void ChopSpellCreator::executeSpell(const sf::Vector2f &target)
 {
 	SpellBean spellBean = m_spellBean;
 	updateDamage(spellBean);
