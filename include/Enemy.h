@@ -9,21 +9,11 @@
 #include "Enums/EnemyID.h"
 #include "Enums/SpellID.h"
 #include "Enums/DamageType.h"
+#include "Enums/EnemyState.h"
 
 class Level;
 class LevelMainCharacter;
 class Spell;
-
-enum class EnemyState
-{
-	Idle,
-	Chasing,
-	Stunned,
-	Fleeing,
-	Waiting,
-	Recovering,
-	Dead
-};
 
 // An enemy in a level
 class Enemy : public LevelMovableGameObject
@@ -124,4 +114,9 @@ private:
 	
 	// the enemy can only be looted if the main char is in this range
 	const float PICKUP_RANGE = 100.f;
+
+	AnimatedSprite* m_debuffSprite = nullptr;
+	void updateDebuffSprite(const sf::Time &frameTime);
+	Animation m_fearAnimation;
+	Animation m_stunAnimation;
 };

@@ -4,13 +4,13 @@ GameObject::GameObject()
 {
 }
 
-void GameObject::setCurrentAnimation(const Animation* animation, bool isFlipped)
+void GameObject::setCurrentAnimation(const Animation *animation, bool isFlipped)
 {
 	m_animatedSprite.setFlipped(isFlipped);
 	m_animatedSprite.setAnimation(animation);
 }
 
-void GameObject::addAnimation(GameObjectState state, Animation& animation)
+void GameObject::addAnimation(GameObjectState state, Animation &animation)
 {
 	m_animations.insert({ state, animation });
 }
@@ -77,9 +77,8 @@ void GameObject::update(const sf::Time& frameTime)
 	}
 }
 
-void GameObject::setPosition(const sf::Vector2f& position)
+void GameObject::setPosition(const sf::Vector2f &position)
 {
-	// TODO: maybe extend for multiple BBs
 	m_position = position;
 	m_boundingBox.left = position.x;
 	m_boundingBox.top = position.y;
@@ -129,7 +128,7 @@ void GameObject::loopCurrentAnimation(bool loop)
 	m_animatedSprite.setLooped(loop);
 }
 
-void GameObject::setSpriteOffset(const sf::Vector2f& spriteOffset)
+void GameObject::setSpriteOffset(const sf::Vector2f &spriteOffset)
 {
 	m_spriteOffset = spriteOffset;
 }
@@ -139,7 +138,7 @@ const sf::Vector2f& GameObject::getSpriteOffset() const
 	return m_spriteOffset;
 }
 
-void GameObject::setBoundingBox(const sf::FloatRect& rect)
+void GameObject::setBoundingBox(const sf::FloatRect &rect)
 {
 	m_boundingBox = rect;
 }

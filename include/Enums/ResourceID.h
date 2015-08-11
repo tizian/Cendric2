@@ -25,6 +25,8 @@ enum class ResourceID
 	Texture_tile_spikestop,
 	Texture_tile_spikesbottom,
 	Texture_tile_frozenwater,
+	Texture_debuff_fear,
+	Texture_debuff_stun,
 	Texture_screen_splash,
 	Texture_screen_splash_fireanimation,
 	Texture_screen_loading,

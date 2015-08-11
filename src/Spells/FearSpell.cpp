@@ -33,6 +33,7 @@ void FearSpell::execOnHit(LevelMovableGameObject *target)
 		if (enemy->getMentalStrength() <= m_strength)
 		{
 			enemy->setFeared(m_fearedDuration);
+			setDisposed();
 		}
 	}
 	// main character can't be feared yet.

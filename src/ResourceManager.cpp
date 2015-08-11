@@ -1,4 +1,5 @@
 #include "ResourceManager.h"
+#include "AnimatedSprite.h"
 
 using namespace std;
 
@@ -61,6 +62,8 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_gameover, "res/screens/screen_gameover.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
+		{ ResourceID::Texture_debuff_fear, "res/assets/debuffs/spritesheet_debuff_fear.png" },
+		{ ResourceID::Texture_debuff_stun, "res/assets/debuffs/spritesheet_debuff_stun.png" },
 		{ ResourceID::Texture_screen_credits, "res/screens/screen_credits.png" },
 		{ ResourceID::Texture_levelitems, "res/assets/items/spritesheet_levelitems.png" },
 		{ ResourceID::Texture_items, "res/assets/items/spritesheet_items.png" },
@@ -82,7 +85,9 @@ void ResourceManager::init()
 	});
 
 	// font should be always loaded to avoid lags when loading later
-	getBitmapFont(ResourceID::BitmapFont_default);	// TODO: Comment above maybe doesn't apply to bitmap fonts...?
+	getBitmapFont(ResourceID::BitmapFont_default);	
+
+
 
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration))
@@ -135,7 +140,7 @@ sf::Texture* ResourceManager::getTexture(ResourceID id)
 	return getTexture(m_fileNames[id]);
 }
 
-sf::Font* ResourceManager::getFont(std::string& filename)
+sf::Font* ResourceManager::getFont(const std::string &filename)
 {
 	// does the font exist yet?
 	for (std::map<std::string, sf::Font>::iterator it = m_fonts.begin();
@@ -171,7 +176,7 @@ sf::Font* ResourceManager::getFont(ResourceID id)
 	return getFont(m_fileNames[id]);
 }
 
-BitmapFont* ResourceManager::getBitmapFont(std::string& filename)
+BitmapFont* ResourceManager::getBitmapFont(const std::string &filename)
 {
 	// does the font exist yet?
 	for (auto it = m_bitmapFonts.begin();
@@ -225,7 +230,7 @@ void ResourceManager::deleteResource(ResourceID id)
 	deleteResource(m_fileNames[id]);
 }
 
-void ResourceManager::deleteResource(std::string filename)
+void ResourceManager::deleteResource(const std::string &filename)
 {
 	// delete texture
 	std::map<std::string, sf::Texture>::iterator textureIt = m_textures.find(filename);
@@ -315,6 +320,10 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_enemy_rat);
 	deleteResource(ResourceID::Texture_enemy_firerat);
 
+	// delete debuff resources
+	deleteResource(ResourceID::Texture_debuff_fear);
+	deleteResource(ResourceID::Texture_debuff_stun);
+
 	// delete item in level resources
 	deleteResource(ResourceID::Texture_levelitems);
 	
@@ -342,6 +351,11 @@ void ResourceManager::loadLevelResources()
 
 	// load game over sprite 
 	getTexture(ResourceID::Texture_screen_gameover);
+
+	// load debuff sprites
+	getTexture(ResourceID::Texture_debuff_fear);
+	getTexture(ResourceID::Texture_debuff_stun);
 }
+
 
 

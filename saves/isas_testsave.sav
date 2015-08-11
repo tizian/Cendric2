@@ -1,17 +1,23 @@
 # time played, in seconds
-time.played:45
-savegame.name:Isa's Testsave
-savegame.date:1437763959
+time.played:64
+savegame.name:ISA'S TESTSAVE
+savegame.date:1439297583
 level.id:0
 level.position:0.000000,0.000000
 map.id:1
-map.position:3991.611816,987.476990
+map.position:3991.611816,740.564148
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+equipped.spellslot:2,3,2,5,3
+equipped.spellslot:3,4,3,1,1
+equipped.spellslot:19
+equipped.spellslot:21,5,3
+equipped.spellslot:12,5,1,7,2,6,3
 # equipment:
 equipped.back:it_eq_purpleback
 equipped.body:
@@ -20,16 +26,6 @@ equipped.neck:
 equipped.ring1:
 equipped.ring2:
 equipped.weapon:it_we_icestaff
-# fireball with speed (3), level 2 & count (5), level 3
-equipped.spellslot:2,3,2,5,3
-# iceball with damage (1), level 1 & reflect (4), level 3
-equipped.spellslot:3,4,3,1,1
-# divine shield with no modifiers
-equipped.spellslot:19
-# aureola with count (5), level 3
-equipped.spellslot:21,5,3
-# fear with count (5), level 1 & duration (7), level 2 & strength (6), level 3
-equipped.spellslot:12,5,1,7,2,6,3
 # levels killed:
 # levels looted:
 # quest states:

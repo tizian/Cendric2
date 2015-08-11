@@ -16,11 +16,21 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	// load hp bar
 	m_hpBar.setFillColor(sf::Color::Red);
 	updateHpBar();
+
+	// pre-fill animations
+	m_stunAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_stun));
+	m_stunAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
+	m_stunAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
+	m_fearAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_fear));
+	m_fearAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
+	m_fearAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
+
 }
 
 Enemy::~Enemy()
 {
 	delete m_lootWindow;
+	delete m_debuffSprite;
 }
 
 bool Enemy::getFleeCondition() const
@@ -119,6 +129,7 @@ void Enemy::onHit(Spell* spell)
 void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget)
 {
 	GameObject::renderAfterForeground(renderTarget);
+	if (m_debuffSprite) renderTarget.draw(*m_debuffSprite);
 	renderTarget.draw(m_hpBar);
 	if (m_showLootWindow && m_lootWindow != nullptr)
 	{
@@ -130,6 +141,7 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget)
 void Enemy::update(const sf::Time& frameTime) 
 {
 	updateEnemyState(frameTime);
+	updateDebuffSprite(frameTime);
 	updateAggro();
 	LevelMovableGameObject::update(frameTime);
 	updateHpBar();
@@ -144,6 +156,25 @@ void Enemy::updateHpBar()
 {
 	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
 	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
+}
+
+void Enemy::updateDebuffSprite(const sf::Time &frameTime)
+{
+	if (m_debuffSprite)
+	{
+		if (!(m_enemyState == EnemyState::Fleeing || m_enemyState == EnemyState::Stunned))
+		{
+			delete m_debuffSprite;
+			m_debuffSprite = nullptr;
+		}
+		else
+		{
+			m_debuffSprite->setPosition(sf::Vector2f(
+				getPosition().x - 10.f + getBoundingBox()->width / 2, 
+				getPosition().y - (getConfiguredDistanceToHPBar() + 25.f)));
+			m_debuffSprite->update(frameTime);
+		}
+	}
 }
 
 float Enemy::distToMainChar() const
@@ -347,11 +378,27 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold)
 void Enemy::setFeared(const sf::Time &fearedTime)
 {
 	m_fearedTime = fearedTime;
+	if (fearedTime > sf::Time::Zero)
+	{
+		delete m_debuffSprite;
+
+		m_debuffSprite = new AnimatedSprite();
+		m_debuffSprite->setAnimation(&m_fearAnimation);
+		m_debuffSprite->setFrameTime(sf::milliseconds(100));
+	}
 }
 
 void Enemy::setStunned(const sf::Time &stunnedTime)
 {
 	m_stunnedTime = stunnedTime;
+	if (stunnedTime > sf::Time::Zero)
+	{
+		delete m_debuffSprite;
+
+		m_debuffSprite = new AnimatedSprite();
+		m_debuffSprite->setAnimation(&m_stunAnimation);
+		m_debuffSprite->setFrameTime(sf::milliseconds(100));
+	}
 }
 
 void Enemy::onMouseOver()

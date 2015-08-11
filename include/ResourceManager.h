@@ -31,22 +31,23 @@ public:
 	// loads all spell + dynamic tile + enemy resources
 	// called before loading a level so that the game won't lag when using a new spell.
 	void loadLevelResources();
-	void deleteResource(std::string filename);
+	void deleteResource(const std::string &filename);
 
-	void setError(ErrorID id, const std::string& description);
+	void setError(ErrorID id, const std::string &description);
 
-	sf::Texture* getTexture(ResourceID id);
-	sf::Texture* getTexture(const std::string& filename);
-	sf::Font* getFont(ResourceID id);
-	sf::Font* getFont(std::string& filename);
-	BitmapFont* getBitmapFont(ResourceID id);
-	BitmapFont* getBitmapFont(std::string& filename);
-	const ItemBean* getItemBean(const std::string& id);
+	sf::Texture *getTexture(ResourceID id);
+	sf::Texture *getTexture(const std::string& filename);
+	sf::Font *getFont(ResourceID id);
+	sf::Font *getFont(const std::string &filename);
+	BitmapFont *getBitmapFont(ResourceID id);
+	BitmapFont *getBitmapFont(const std::string &filename);
+
+	const ItemBean *getItemBean(const std::string &id);
 	char* getFilename(ResourceID id);
 	char* getFilename(LevelID id);
 	char* getFilename(MapID id);
-	const std::pair<ErrorID, std::string>* pollError() const;
-	ConfigurationData& getConfiguration();
+	const std::pair<ErrorID, std::string> *pollError() const;
+	ConfigurationData &getConfiguration();
 	int getMaxFPS() const;
 
 private:
