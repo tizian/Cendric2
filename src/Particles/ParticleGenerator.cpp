@@ -82,7 +82,6 @@ namespace particles
 		}
 	}
 
-
 	void SizeGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
 		for (size_t i = startId; i < endId; ++i)
@@ -94,7 +93,6 @@ namespace particles
 		}
 	}
 
-
 	void ConstantSizeGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
 		for (size_t i = startId; i < endId; ++i)
@@ -102,7 +100,6 @@ namespace particles
 			p->size[i].x = p->size[i].y = p->size[i].z = size;
 		}
 	}
-
 
 	void ColorGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
@@ -113,7 +110,6 @@ namespace particles
 		}
 	}
 
-
 	void ConstantColorGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
 		for (size_t i = startId; i < endId; ++i)
@@ -122,7 +118,6 @@ namespace particles
 		}
 	}
 
-
 	void VelocityGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
 		for (size_t i = startId; i < endId; ++i)
@@ -130,7 +125,6 @@ namespace particles
 			p->vel[i] = randomVector2f(minStartVel, maxStartVel);
 		}
 	}
-
 
 	void AngledVelocityGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
@@ -143,13 +137,12 @@ namespace particles
 		}
 	}
 
-
 	void TimeGenerator::generate(ParticleData *p, size_t startId, size_t endId)
 	{
 		for (size_t i = startId; i < endId; ++i)
 		{
 			p->time[i].x = p->time[i].y = randomFloat(minTime, maxTime);
-			p->time[i].z = (float)0.0;
+			p->time[i].z = 0.f;
 		}
 	}
 }

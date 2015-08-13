@@ -7,7 +7,7 @@ class UnlockSpell : public Spell
 {
 public:
 	UnlockSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredIsAttachedToMob() const override;

@@ -34,11 +34,14 @@ public:
 	void consumeFood(sf::Time& duration, AttributeBean& attributes);
 	// the mob adds these attributes to its own. if their time runs out, they get removed again. The attribute "current health" however will stay.
 	void addAttributes(sf::Time& duration, AttributeBean& attributes);
+	// gravity flip (used for anti gravity spell)
+	void flipGravity();
 
 	SpellManager* getSpellManager() const;
 	const AttributeBean* getAttributes() const;
 	Level* getLevel() const;
 	bool getIsFacingRight() const;
+	bool getIsUpsideDown() const;
 	bool isDead() const;
 	GameObjectState getState() const;
 
@@ -60,6 +63,7 @@ protected:
 	bool m_nextIsFacingRight;
 	bool m_isGrounded = false;
 	bool m_isDead = false;
+	bool m_isFlippedGravity = false;
 	Level* m_level;
 
 	SpellManager* m_spellManager;

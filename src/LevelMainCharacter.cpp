@@ -45,10 +45,10 @@ void LevelMainCharacter::handleMovementInput()
 	}
 	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
 	{
-		setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+		setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityY() : -getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
 	}
 
-	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
+	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getConfiguredGravityAcceleration() : getConfiguredGravityAcceleration())));
 }
 
 void LevelMainCharacter::loadWeapon()

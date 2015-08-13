@@ -98,6 +98,9 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 	case SpellID::Fear:
 		creator = new FearSpellCreator(bean, m_owner);
 		break;
+	case SpellID::AntiGravity:
+		creator = new AntiGravitySpellCreator(bean, m_owner);
+		break;
 	default:
 		return nullptr;
 	}

@@ -42,6 +42,7 @@ public:
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;
 	bool collidesLevelBottom(const sf::FloatRect& boundingBox) const;
+	bool collidesLevelCeiling(const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const;
 	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect* boundingBox) const;
 
@@ -50,6 +51,8 @@ public:
 	LevelID getID() const;
 	// returns the next y position where the bounding box is grounding.
 	float getGround(const sf::FloatRect& boundingBox) const;
+	// returns the next y position where the bounding box is on the ceiling.
+	float getCeiling(const sf::FloatRect& boundingBox) const;
 
 private:
 	TileMap m_backgroundTileMap;

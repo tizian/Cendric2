@@ -18,7 +18,7 @@ public:
 	Spell() : MovableGameObject() {}
 
 	// the spell divergence only matters if we have more than one spell. else, the spell divergence will be 0
-	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle);
+	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle);
 	virtual void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 

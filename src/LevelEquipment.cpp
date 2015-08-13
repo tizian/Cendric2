@@ -9,15 +9,11 @@ LevelEquipment::~LevelEquipment()
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const
 {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
-	sf::Vector2f offset;
-	if (m_mainChar->getIsFacingRight())
-	{
-		offset = sf::Vector2f(getConfiguredPositionOffset());
-	}
-	else
-	{
-		offset = sf::Vector2f(-getConfiguredPositionOffset().x - getBoundingBox()->width, getConfiguredPositionOffset().y);
-	}
+	sf::Vector2f offset(-60.f, -20.f);
+	if (!m_mainChar->getIsFacingRight())
+		offset.x = -offset.x - getBoundingBox()->width;
+	if (m_mainChar->getIsUpsideDown())
+		offset.y = m_mainChar->getBoundingBox()->height -offset.y - getBoundingBox()->height;
 
 	position.x = (mainCharPosition + offset).x;
 	position.y = (mainCharPosition + offset).y;
@@ -38,15 +34,14 @@ void LevelEquipment::update(const sf::Time& frameTime)
 		m_isFacingRight = newFacingRight;
 		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	}
+	if (m_mainChar->getIsUpsideDown() != m_animatedSprite.isFlippedY())
+	{
+		m_animatedSprite.setFlippedY(m_mainChar->getIsUpsideDown());
+	}
 	sf::Vector2f newPosition;
 	calculatePositionAccordingToMainChar(newPosition);
 	setPosition(newPosition);
 	GameObject::update(frameTime);
-}
-
-const sf::Vector2f LevelEquipment::getConfiguredPositionOffset() const
-{
-	return sf::Vector2f(-60.f, -20.f);
 }
 
 void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar)

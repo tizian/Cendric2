@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-
 #include "global.h"
 #include "SpellCreator.h"
 
@@ -11,9 +9,9 @@
 class DivineShieldSpellCreator : public SpellCreator
 {
 public:
-	DivineShieldSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
+	DivineShieldSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
 
-	void executeSpell(const sf::Vector2f &target) override;
+	void executeSpell(const sf::Vector2f& target) override;
 
 protected:
 	void addStrengthModifier(int level);

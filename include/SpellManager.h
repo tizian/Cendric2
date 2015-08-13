@@ -13,6 +13,7 @@
 #include "SpellCreators/AureolaSpellCreator.h"
 #include "SpellCreators/ChopSpellCreator.h"
 #include "SpellCreators/FearSpellCreator.h"
+#include "SpellCreators/AntiGravitySpellCreator.h"
 
 class SpellSelection;
 

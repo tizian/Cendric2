@@ -464,7 +464,7 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 	// read defined tags
 	while (pos < end)
 	{
-		if (*pos == COMMENT_MARKER)
+		if (*pos == COMMENT_MARKER || *pos == '\n')
 		{
 			pos = gotoNextChar(pos, end, '\n');
 		}

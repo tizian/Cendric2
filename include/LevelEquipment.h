@@ -18,16 +18,13 @@ public:
 
 	void setTexturePath(const std::string& texturePath);
 
-	// this is only used by weapons: the offset of the weapon, as seen from the upper mid of cendrics bounding box. The default is the position of the staff head
-	virtual const sf::Vector2f getConfiguredPositionOffset() const;
 	GameObjectType getConfiguredType() const override;
-
-protected:
-	bool m_isFacingRight;
 
 private:
 	LevelMainCharacter* m_mainChar;
 	std::string m_texturePath;
+
+	bool m_isFacingRight;
 
 	// calculates position according to m_mainChar.
 	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;

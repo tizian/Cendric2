@@ -233,3 +233,29 @@ const struct SpellBean DEFAULT_FEAR =
 
 	Key::VOID
 };
+
+const struct SpellBean DEFAULT_ANTIGRAVITY =
+{
+	SpellID::AntiGravity,
+	SpellType::Elemental,
+	sf::IntRect(200, 0, 50, 50),
+	sf::milliseconds(20000),
+	sf::FloatRect(0, 0, 98, 98),
+	DamageType::VOID,
+
+	0,
+	0,
+	0,
+	0.f,
+	1,
+	sf::milliseconds(5000),
+	0.f,
+
+	0.f,
+	0.f,
+	0,
+	0,
+	0,
+	0,
+	sf::seconds(3)
+};

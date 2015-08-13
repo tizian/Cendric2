@@ -16,6 +16,8 @@ SpellBean SpellBean::getSpellBean(SpellID id)
 		return DEFAULT_DIVINESHIELD;
 	case SpellID::Fear:
 		return DEFAULT_FEAR;
+	case SpellID::AntiGravity:
+		return DEFAULT_ANTIGRAVITY;
 	default:
 		return EMPTY_SPELL;
 	}

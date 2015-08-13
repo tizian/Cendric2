@@ -4,7 +4,7 @@ UnlockSpell::UnlockSpell() : Spell()
 {
 }
 
-void UnlockSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle)
+void UnlockSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	Spell::load(bean, mob, target, 0);

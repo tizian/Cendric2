@@ -47,24 +47,39 @@ void AnimatedSprite::setLooped(bool looped)
 	m_isLooped = looped;
 }
 
-void AnimatedSprite::setFlipped(bool flipped)
+void AnimatedSprite::setFlippedX(bool flipped)
 {
+	m_isFlippedX = flipped;
 	if (flipped)
 	{
-		setScale(-1.f, 1.f);
+		setScale(-1.f, getScale().y);
 	}
 	else
 	{
-		setScale(1.f, 1.f);
+		setScale(1.f, getScale().y);
 	}
 	
+}
+
+void AnimatedSprite::setFlippedY(bool flipped)
+{
+	m_isFlippedY = flipped;
+	if (flipped)
+	{
+		setScale(getScale().x, -1.f);
+	}
+	else
+	{
+		setScale(getScale().x, 1.f);
+	}
 }
 
 void AnimatedSprite::reset()
 {
 	setColor(sf::Color::White);
 	setRotation(0.f);
-	setFlipped(false);
+	setFlippedX(false);
+	setFlippedY(false);
 	setScale(sf::Vector2f(1.f, 1.f));
 	setOrigin(0.f, 0.f);
 }
@@ -106,6 +121,16 @@ bool AnimatedSprite::isLooped() const
 bool AnimatedSprite::isPlaying() const
 {
 	return !m_isPaused;
+}
+
+bool AnimatedSprite::isFlippedX() const
+{
+	return m_isFlippedX;
+}
+
+bool AnimatedSprite::isFlippedY() const
+{
+	return m_isFlippedY;
 }
 
 sf::Time AnimatedSprite::getFrameTime() const

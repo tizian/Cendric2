@@ -7,7 +7,7 @@ class DivineShieldSpell : public Spell
 {
 public:
 	DivineShieldSpell(int additionalResistance);
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle) override;
 	void update(const sf::Time& frameTime) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;

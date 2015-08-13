@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle)
+void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
 {
 	m_duration = bean.duration;
 	m_damage = bean.damage;
@@ -75,15 +75,11 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 		return;
 	}
 	sf::Vector2f mainCharPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
-	sf::Vector2f offset;
-	if (m_mob->getIsFacingRight())
-	{
-		offset = sf::Vector2f(getConfiguredPositionOffset() + m_mob->getConfiguredSpellOffset());
-	}
-	else
-	{
-		offset = sf::Vector2f(-(getConfiguredPositionOffset().x + m_mob->getConfiguredSpellOffset().x) - getBoundingBox()->width, getConfiguredPositionOffset().y + m_mob->getConfiguredSpellOffset().y);
-	}
+	sf::Vector2f offset = getConfiguredPositionOffset() + m_mob->getConfiguredSpellOffset();
+	if (!m_mob->getIsFacingRight())
+		offset.x = -offset.x - getBoundingBox()->width;
+	if (m_mob->getIsUpsideDown())
+		offset.y = m_mainChar->getBoundingBox()->height - offset.y - getBoundingBox()->height;
 
 	position.x = (mainCharPosition + offset).x;
 	position.y = (mainCharPosition + offset).y;

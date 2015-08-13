@@ -6,7 +6,7 @@ FearSpell::FearSpell(const sf::Time &fearedDuration, int strength) : Spell()
 	m_strength = strength;
 }
 
-void FearSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle)
+void FearSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 

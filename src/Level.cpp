@@ -183,6 +183,16 @@ bool Level::collidesLevelBottom(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
+bool Level::collidesLevelCeiling(const sf::FloatRect& boundingBox) const
+{
+	// check for collision with level rect
+	if (boundingBox.top < m_levelData.levelRect.top)
+	{
+		return true;
+	}
+	return false;
+}
+
 bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize) const
 {
 	sf::FloatRect dummyRect = boundingBox;
@@ -294,9 +304,24 @@ float Level::getGround(const sf::FloatRect& boundingBox) const
 
 	// then, a collidable tile in the grid must be the ground
 	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
-	int y = static_cast<int>(floor((boundingBox.top + boundingBox.height)) / tileHeight);
+	int y = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight));
 
 	return (y * tileHeight) - boundingBox.height;
+}
+
+float Level::getCeiling(const sf::FloatRect& boundingBox) const
+{
+	// check if ceiling is level ceiling
+	if (boundingBox.top < m_levelData.levelRect.top)
+	{
+		return m_levelData.levelRect.top;
+	}
+
+	// then, a collidable tile in the grid must be the ceiling
+	float tileHeight = static_cast<float>(m_levelData.tileSize.y);
+	int y = static_cast<int>(ceil((boundingBox.top) / tileHeight));
+
+	return y * tileHeight;
 }
 
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const

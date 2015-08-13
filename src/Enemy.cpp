@@ -24,7 +24,6 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_fearAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_fear));
 	m_fearAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
 	m_fearAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
-
 }
 
 Enemy::~Enemy()
@@ -61,18 +60,32 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 	{
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
+		// set mob up in case of anti gravity!
+		if (getIsUpsideDown())
+		{
+			setPositionY(m_level->getCeiling(nextBoundingBoxY));
+			m_isGrounded = true;
+			if (!m_isDead && m_level->collidesLevelCeiling(nextBoundingBoxY))
+			{
+				// colliding with level ceiling is deadly when the mob is upside down.
+				setDead();
+			}
+		}
 	}
 	else if (isMovingDown && collidesY)
 	{
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
-		// set enemy down.
-		setPositionY(m_level->getGround(nextBoundingBoxY));
-		m_isGrounded = true;
-		if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY))
+		// set mob down. in case of normal gravity.
+		if (!getIsUpsideDown())
 		{
-			// colliding with level bottom is deadly.
-			setDead();
+			setPositionY(m_level->getGround(nextBoundingBoxY));
+			m_isGrounded = true;
+			if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY))
+			{
+				// colliding with level bottom is deadly.
+				setDead();
+			}
 		}
 	}
 
@@ -91,14 +104,12 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition)
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
 	}
 
-	if (std::abs(getVelocity().y) > 0.0f)
-	{
+	if (std::abs(getVelocity().y) > 0.f)
 		m_isGrounded = false;
-	}
 
 	// if the enemy collidesX but can't jump and is chasing, it waits for a certain time.
 	// the same if it can't reach the main char because of the y difference.
-	if (m_enemyState == EnemyState::Chasing && ((collidesX && !m_jumps) || abs(m_mainChar->getPosition().y - getPosition().y) > m_jumpHeight))
+	if (m_enemyState == EnemyState::Chasing && ((collidesX && !m_jumps) || abs(m_mainChar->getPosition().y - getPosition().y) > 2 * m_jumpHeight))
 	{
 		m_waitingTime = getConfiguredWaitingTime();
 	}
@@ -297,7 +308,7 @@ void Enemy::handleMovementInput()
 		}
 		if (m_jumps && m_isGrounded)
 		{
-			setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+			setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityY() : -getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
 			m_jumps = false;
 		}
 	}
@@ -330,7 +341,7 @@ void Enemy::handleMovementInput()
 		}
 	}
 
-	setAcceleration(sf::Vector2f(newAccelerationX, getConfiguredGravityAcceleration()));
+	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getConfiguredGravityAcceleration() : getConfiguredGravityAcceleration())));
 }
 
 void Enemy::updateAggro()

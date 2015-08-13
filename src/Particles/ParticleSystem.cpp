@@ -60,8 +60,6 @@ namespace particles
 		m_particles.countAlive = 0;
 	}
 
-
-
 	PointParticleSystem::PointParticleSystem(size_t maxCount) : ParticleSystem(maxCount)
 	{
 		m_vertices = sf::VertexArray(sf::Points, maxCount);
@@ -85,8 +83,6 @@ namespace particles
 		const sf::Vertex *ver = &m_vertices[0];
 		renderTarget.draw(ver, m_particles.countAlive, sf::Points, states);
 	}
-
-
 
 	TextureParticleSystem::TextureParticleSystem(size_t maxCount, sf::Texture *texture) : ParticleSystem(maxCount), m_texture(texture)
 	{
@@ -138,8 +134,6 @@ namespace particles
 		const sf::Vertex *ver = &m_vertices[0];
 		renderTarget.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
 	}
-
-
 
 	const std::string vertexShader = \
 		"void main()" \

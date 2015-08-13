@@ -44,7 +44,8 @@ public:
 	void setAnimation(const Animation* animation);
 	void setFrameTime(sf::Time time);
 	void setLooped(bool looped);
-	void setFlipped(bool flipped);
+	void setFlippedX(bool flipped);
+	void setFlippedY(bool flipped);
 	void setColor(const sf::Color& color);
 	void setFrame(std::size_t newFrame, bool resetTime = true);
 	// resets color, rotation, scale and flipped property
@@ -56,7 +57,8 @@ public:
 	sf::Time getFrameTime() const;
 	bool isLooped() const;
 	bool isPlaying() const;
-	bool isFlipped() const;
+	bool isFlippedX() const;
+	bool isFlippedY() const;
 	
 private:
 	const Animation* m_animation;
@@ -65,6 +67,8 @@ private:
 	std::size_t m_currentFrame;
 	bool m_isPaused;
 	bool m_isLooped;
+	bool m_isFlippedX = false;
+	bool m_isFlippedY = false;
 	const sf::Texture* m_texture;
 	sf::Vertex m_vertices[4];
 

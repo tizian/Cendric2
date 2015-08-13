@@ -144,25 +144,37 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition)
 	{
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
+		// set mob up in case of anti gravity!
+		if (getIsUpsideDown())
+		{
+			setPositionY(m_level->getCeiling(nextBoundingBoxY));
+			m_isGrounded = true;
+			if (!m_isDead && m_level->collidesLevelCeiling(nextBoundingBoxY))
+			{
+				// colliding with level ceiling is deadly when the mob is upside down.
+				setDead();
+			}
+		}
 	}
 	else if (isMovingDown && collidesY)
 	{
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
-		// set mob down.
-		setPositionY(m_level->getGround(nextBoundingBoxY));
-		m_isGrounded = true;
-		if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY))
+		// set mob down. in case of normal gravity.
+		if (!getIsUpsideDown())
 		{
-			// colliding with level bottom is deadly.
-			setDead();
+			setPositionY(m_level->getGround(nextBoundingBoxY));
+			m_isGrounded = true;
+			if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY))
+			{
+				// colliding with level bottom is deadly.
+				setDead();
+			}
 		}
 	}
 
-	if (std::abs(getVelocity().y) > 0.0f)
-	{
+	if (std::abs(getVelocity().y) > 0.f)
 		m_isGrounded = false;
-	}
 }
 
 sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const
@@ -297,9 +309,20 @@ bool LevelMovableGameObject::getIsFacingRight() const
 	return m_isFacingRight;
 }
 
+bool LevelMovableGameObject::getIsUpsideDown() const
+{
+	return m_animatedSprite.isFlippedY();
+}
+
 bool LevelMovableGameObject::isDead() const
 {
 	return m_isDead;
+}
+
+void LevelMovableGameObject::flipGravity()
+{
+	m_isFlippedGravity = !m_isFlippedGravity;
+	m_animatedSprite.setFlippedY(m_isFlippedGravity);
 }
 
 GameObjectState LevelMovableGameObject::getState() const

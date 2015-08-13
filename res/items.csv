@@ -2,7 +2,7 @@ Item ID;Item Description;Item Type;Icon Texture Location (x,y);Gold Value;Attr: 
 it_eq_wizardhatblue;itd_wizardhat;1;0, 150;22;;;;;;;5;;;1;;2;;;;;;;;res/assets/equipment/head/spritesheet_head_wizardhat_blue.png;;;;;;;;
 it_eq_wizardhatgrey;itd_wizardhat;1;50, 150;20;5;;;;;;;;;1;2;;;;;;;;;res/assets/equipment/head/spritesheet_head_wizardhat_grey.png;;;;;;;;
 it_we_icestaff;itd_icestaff;4;200, 150;120;10;;;;15;;30;;;;;;;;;;;;;res/assets/equipment/weapon/spritesheet_staff_ice.png;500;40, 80;10;1, 0, 0, 0, 1, 0, 1, 0;1, 0, 0, 0, 0, 1, 0, 1;4, 1,1,1,1, 1, 0, 1;4,1,1,1,1,1,1,1;3,1,1,1,1,1,1,1
-it_we_rustysword;itd_rustysword;4;150, 150;10;;;;;5;;;;;;;;;;;;;;;res/assets/equipment/weapon/spritesheet_weapon_rustysword.png;350;40, 50;5;;;;;
+it_we_rustysword;itd_rustysword;4;150, 150;10;;;;;5;;;;;;;;;;;;;;;res/assets/equipment/weapon/spritesheet_weapon_rustysword.png;350;40, 50;5;1,1,1,1,1,1,1,1;;;;
 it_eq_purpleback;itd_purpleback;7;100, 150;10;;;;;;;;;;1;;5;;;;;;;;res/assets/equipment/back/spritesheet_back_purple.png;;;;;;;;
 it_fo_cheese;itd_cheese;8;0, 100;3;;2;5;;;;;;;;;;;;10;-14, -14;22, 22;0, 0, 50, 50;1000;;;;;;;;;
 it_fo_bread;itd_bread;8;50, 100;2;;2;;;;;;;;;;;;;15;-10, -25;30, 5;200, 0, 50, 50;1000;;;;;;;;;

@@ -6,7 +6,7 @@ GameObject::GameObject()
 
 void GameObject::setCurrentAnimation(const Animation *animation, bool isFlipped)
 {
-	m_animatedSprite.setFlipped(isFlipped);
+	m_animatedSprite.setFlippedX(isFlipped);
 	m_animatedSprite.setAnimation(animation);
 }
 

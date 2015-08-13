@@ -4,7 +4,7 @@ FireBallSpell::FireBallSpell() : Spell()
 {
 }
 
-void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, sf::Vector2f target, float divergenceAngle)
+void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
