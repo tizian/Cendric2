@@ -26,7 +26,7 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 
 	// Particle System Test
 	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
-	m_ps->setAdditiveBlendMode(true);
+	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 10000.0f / 5.0f;
 
 	// Generators

@@ -28,12 +28,17 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	endif()
 endif()
 
-add_subdirectory("${PROJECT_SOURCE_DIR}/SFML-2.2")
-include_directories("${PROJECT_SOURCE_DIR}/SFML-2.2/include" "${PROJECT_SOURCE_DIR}/include")
+add_subdirectory("${PROJECT_SOURCE_DIR}/ext/SFML-2.2")
+
+include_directories(
+	"${PROJECT_SOURCE_DIR}/ext/SFML-2.2/include"
+	"${PROJECT_SOURCE_DIR}/ext"
+	"${PROJECT_SOURCE_DIR}/include"
+)
 
 file(GLOB_RECURSE Cendric_FILES
-	"${PROJECT_SOURCE_DIR}/include/*.h"
 	"${PROJECT_SOURCE_DIR}/src/*.cpp"
+	"${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
 )
 
 add_executable(Cendric2 ${Cendric_FILES})

@@ -2,6 +2,7 @@
 #include "Spell.h"
 
 #include "DynamicTiles/FrozenWaterTile.h"
+#include "CustomParticleUpdaters.h"
 
 using namespace std;
 
@@ -88,7 +89,7 @@ void SimulatedWaterTile::load(int skinNr)
 	waterUpdater->water = this;
 
 	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
-	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 100000.0f);		// TODO: This seems.... suspicious.
+	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);		// TODO: This seems.... suspicious.
 }
 
 void SimulatedWaterTile::update(const sf::Time& frameTime)
@@ -200,7 +201,7 @@ void SimulatedWaterTile::splash(float xPosition, float velocity)
 
 	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y - WATER_SURFACE_THICKNESS);
 	*m_particleMinSpeed = 0.2f * velocity;
-	*m_particleMaxSpeed = 0.8f * velocity;
+	*m_particleMaxSpeed = 1.0f * velocity;
 	int nParticles = static_cast<int>(velocity / 8);
 	m_ps->emit(nParticles);
 }
