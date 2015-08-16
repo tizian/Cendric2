@@ -17,6 +17,7 @@ void LevelInterface::render(sf::RenderTarget& target)
 	target.setView(target.getDefaultView());
 
 	m_healthBar.render(target);
+	m_buffBar.render(target);
 	m_spellSelection->render(target);
 	m_characterInfo.render(target);
 	m_inventory.render(target);
@@ -27,9 +28,15 @@ void LevelInterface::render(sf::RenderTarget& target)
 void LevelInterface::update(const sf::Time& frameTime)
 {
 	m_healthBar.update();
+	m_buffBar.update(frameTime);
 	m_spellSelection->update(frameTime);
 	updateInventory();
 	updateCharacterInfo();
+}
+
+void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration)
+{
+	m_buffBar.addSlot(type, textureLocation, duration);
 }
 
 void LevelInterface::updateCharacterInfo()

@@ -6,7 +6,7 @@ using namespace std;
 LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const
 {
 	LevelMainCharacter* mainChar = new LevelMainCharacter(level);
-	screen->addObject(GameObjectType::_MainCharacter, mainChar);
+	screen->addObject(mainChar);
 	mainChar->load();
 	mainChar->setCharacterCore(screen->getCharacterCore());
 	return mainChar;
@@ -87,6 +87,6 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 		levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 		levelEquipment->playCurrentAnimation(true);
 		levelEquipment->loadEquipment(mainCharacter);
-		screen->addObject(GameObjectType::_LevelEquipment, levelEquipment);
+		screen->addObject(levelEquipment);
 	}
 }

@@ -1,11 +1,15 @@
 #include "SpellCreator.h"
+#include "Screens/LevelScreen.h"
 
 SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner)
 {
 	m_owner = owner;
 	m_level = owner->getLevel();
 	m_attributeBean = owner->getAttributes();
-	m_screen = owner->getScreen();
+	if (!(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen())))
+	{
+		g_logger->logError("SpellCreator", "spell owner has no (level)screen");
+	}
 	m_spellBean = spellBean;
 }
 

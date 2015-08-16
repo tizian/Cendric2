@@ -21,6 +21,8 @@ public:
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
 
+	void addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const;
+
 private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar;

@@ -74,7 +74,7 @@ protected:
 	AnimatedSprite m_animatedSprite;
 	Screen* m_screen = nullptr;
 	
-private:
+protected:
 	bool m_isDisposed = false;
 
 	std::map<GameObjectState, Animation> m_animations;
@@ -83,6 +83,7 @@ private:
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 
+private:
 	bool m_isDrawBoundingBox = false;
 	sf::RectangleShape m_debugBox;
 };

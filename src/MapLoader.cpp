@@ -37,6 +37,6 @@ void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 		mapNPC->load(mainCharacter, it.first);
 		mapNPC->setPosition(it.second - mapNPC->getSpriteOffset());
 		mapNPC->setTooltipText(g_textProvider->getText(npc.name));
-		screen->addObject(GameObjectType::_NPC, mapNPC);
+		screen->addObject(mapNPC);
 	}
 }

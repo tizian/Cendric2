@@ -1,4 +1,5 @@
 #include "SpellCreators/FearSpellCreator.h"
+#include "Screens/LevelScreen.h"
 
 FearSpellCreator::FearSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
@@ -19,7 +20,7 @@ void FearSpellCreator::executeSpell(const sf::Vector2f &target)
 	{
 		FearSpell* newSpell = new FearSpell(m_fearedDuration, m_strength);
 		newSpell->load(spellBean, m_owner, target, div * sign * spellBean.divergenceAngle);
-		m_screen->addObject(GameObjectType::_Spell, newSpell);
+		m_screen->addObject(newSpell);
 		sign = -sign;
 		if (sign == -1)
 		{

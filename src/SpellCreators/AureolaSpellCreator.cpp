@@ -1,4 +1,5 @@
 #include "SpellCreators/AureolaSpellCreator.h"
+#include "Screens/LevelScreen.h"
 
 AureolaSpellCreator::AureolaSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
@@ -15,7 +16,7 @@ void AureolaSpellCreator::executeSpell(const sf::Vector2f &target)
 	{
 		AureolaSpell* newSpell = new AureolaSpell();
 		newSpell->load(spellBean, m_owner, target, i  * spellBean.divergenceAngle);
-		m_screen->addObject(GameObjectType::_Spell, newSpell);
+		m_screen->addObject(newSpell);
 	}
 
 	m_owner->setFightAnimationTime();

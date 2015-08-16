@@ -7,18 +7,20 @@
 
 #include "Structs/SpellModifier.h"
 
+class LevelScreen;
+
 // a class that spawns spells of a certain type - directly to the screen
 class SpellCreator
 {
 public:
-	SpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
+	SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
 	virtual ~SpellCreator();
 
-	void addModifiers(const std::vector<SpellModifier> &modifiers);
+	void addModifiers(const std::vector<SpellModifier>& modifiers);
 
 	// calculates spells using the owners attributes & the target, and executes their behaviour, adding objects to the screen.
-	virtual void executeSpell(const sf::Vector2f &target) = 0;
-	const SpellBean &getSpellBean() const;
+	virtual void executeSpell(const sf::Vector2f& target) = 0;
+	const SpellBean& getSpellBean() const;
 
 protected:
 	// filled by the subclasses
@@ -35,7 +37,7 @@ protected:
 	const AttributeBean* m_attributeBean;
 	SpellBean m_spellBean;
 	Level* m_level;
-	Screen* m_screen;
+	LevelScreen* m_screen = nullptr;
 	LevelMovableGameObject* m_owner;
 
 	// updates the spells damage, using the mobs attributes. It adds damage and calculates critical hits

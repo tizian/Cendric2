@@ -14,15 +14,17 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	FireBasket* fireBasket2 = new FireBasket();
 	fireBasket1->setPosition(sf::Vector2f(60.f, 140.f));
 	fireBasket2->setPosition(sf::Vector2f(998.f, 140.f));
-	addObject(GameObjectType::_Undefined, fireBasket1);
-	addObject(GameObjectType::_Undefined, fireBasket2);
+	addObject(fireBasket1);
+	addObject(fireBasket2);
 
-	SpellSlot *slotInactive = new SpellSlot(sf::Vector2f(200, 100), DEFAULT_FIREBALL, false);
-	addObject(GameObjectType::_Undefined, slotInactive);
+	SpellSlot *slotInactive = new SpellSlot(DEFAULT_FIREBALL, false);
+	slotInactive->setPosition(sf::Vector2f(200, 100));
+	addObject(slotInactive);
 
-	SpellSlot *slotActive = new SpellSlot(sf::Vector2f(400, 100), DEFAULT_FIREBALL, true);
+	SpellSlot *slotActive = new SpellSlot(DEFAULT_FIREBALL, true);
+	slotActive->setPosition(sf::Vector2f(400, 100));
 	slotActive->playAnimation(DEFAULT_FIREBALL.cooldown);
-	addObject(GameObjectType::_Undefined, slotActive);
+	addObject(slotActive);
 
 	// Particle System Test
 	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
@@ -75,6 +77,7 @@ Screen* SplashScreen::update(const sf::Time& frameTime)
 		return new MenuScreen(nullptr);
 	}
 	updateObjects(GameObjectType::_Undefined, frameTime);
+	updateObjects(GameObjectType::_Interface, frameTime);
 	m_ps->update(frameTime);
 	return this;
 }
@@ -84,6 +87,7 @@ void SplashScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
+	renderObjects(GameObjectType::_Interface, renderTarget);
 	m_ps->render(renderTarget);
 }
 

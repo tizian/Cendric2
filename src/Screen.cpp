@@ -8,9 +8,9 @@ Screen::Screen(CharacterCore* core)
 	m_characterCore = core;
 }
 
-void Screen::addObject(GameObjectType type, GameObject* object)
+void Screen::addObject(GameObject* object)
 {
-	m_objects[type].push_back(object);
+	m_objects[object->getConfiguredType()].push_back(object);
 	object->setScreen(this);
 }
 

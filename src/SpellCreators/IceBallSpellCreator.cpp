@@ -1,4 +1,5 @@
 #include "SpellCreators/IceBallSpellCreator.h"
+#include "Screens/LevelScreen.h"
 
 IceBallSpellCreator::IceBallSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
@@ -18,7 +19,7 @@ void IceBallSpellCreator::executeSpell(const sf::Vector2f &target)
 	{
 		IceBallSpell* newSpell = new IceBallSpell();
 		newSpell->load(spellBean, m_owner, target, div * sign * spellBean.divergenceAngle);
-		m_screen->addObject(GameObjectType::_Spell, newSpell);
+		m_screen->addObject(newSpell);
 		sign = -sign;
 		if (sign == -1)
 		{

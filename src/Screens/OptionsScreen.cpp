@@ -94,13 +94,13 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	distFromTop = distFromTop + 30;
 	m_englishButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 130, 50));
 	m_englishButton->setText("English", 12);
-	addObject(GameObjectType::_Button, m_englishButton);
+	addObject(m_englishButton);
 	m_germanButton = new Button(sf::FloatRect(distFromLeft + 140, distFromTop, 130, 50));
 	m_germanButton->setText("German", 12);
-	addObject(GameObjectType::_Button, m_germanButton);
+	addObject(m_germanButton);
 	m_swissButton = new Button(sf::FloatRect(distFromLeft + 280, distFromTop, 240, 50));
 	m_swissButton->setText("SwissGerman", 12);
-	addObject(GameObjectType::_Button, m_swissButton);
+	addObject(m_swissButton);
 
 	distFromTop = distFromTop + 100;
 	// sound
@@ -120,10 +120,10 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	distFromTop = distFromTop + 30;
 	m_soundOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
 	m_soundOnButton->setText("On", 12);
-	addObject(GameObjectType::_Button, m_soundOnButton);
+	addObject(m_soundOnButton);
 	m_soundOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
 	m_soundOffButton->setText("Off", 12);
-	addObject(GameObjectType::_Button, m_soundOffButton);
+	addObject(m_soundOffButton);
 
 
 	distFromTop = distFromTop + 100;
@@ -143,18 +143,18 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 		m_keyTexts.push_back(keyText);
 		Button* keyButton = new Button(sf::FloatRect(distFromLeftKeymap + 300.f, distFromTopKeymap, 100, 20));
 		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
-		addObject(GameObjectType::_Button, keyButton);
+		addObject(keyButton);
 		distFromTopKeymap = distFromTopKeymap + 25;
 	}
 
 	// back
 	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
 	m_backButton->setText("Back");
-	addObject(GameObjectType::_Button, m_backButton);
+	addObject(m_backButton);
 	// apply
 	m_applyButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 50));
 	m_applyButton->setText("Apply");
-	addObject(GameObjectType::_Button, m_applyButton);
+	addObject(m_applyButton);
 }
 
 void OptionsScreen::refreshLanguageText()

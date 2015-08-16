@@ -47,7 +47,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 		tile->setPosition(it.position - tile->getSpriteOffset());
 		tile->setDebugBoundingBox(sf::Color::Yellow);
 		tile->load(it.skinNr);
-		screen->addObject(GameObjectType::_DynamicTile, tile);
+		screen->addObject(tile);
 	}
 }
 
@@ -72,7 +72,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 
 		LevelItem* levelItem = new LevelItem();
 		levelItem->load(mainCharacter, *item, it->second);
-		screen->addObject(GameObjectType::_LevelItem, levelItem);
+		screen->addObject(levelItem);
 	}
 }
 
@@ -110,6 +110,6 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 
 		enemy->setPosition(it.second);
 		enemy->setDebugBoundingBox(sf::Color::Magenta);
-		screen->addObject(GameObjectType::_Enemy, enemy);
+		screen->addObject(enemy);
 	}
 }

@@ -40,7 +40,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			m_yesOrNoForm->setMessage("QuestionStartNewGame");
 			m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNo, this));
 			m_yesOrNoForm->setOnYesClicked(std::bind(&MenuScreen::onStartNewGame, this));
-			addObject(GameObjectType::_Form, m_yesOrNoForm);
+			addObject(m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
 	}
@@ -91,15 +91,15 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	FireBasket* fireBasket2 = new FireBasket();
 	fireBasket1->setPosition(sf::Vector2f(60.f, 140.f));
 	fireBasket2->setPosition(sf::Vector2f(998.f, 140.f));
-	addObject(GameObjectType::_Undefined, fireBasket1);
-	addObject(GameObjectType::_Undefined, fireBasket2);
+	addObject(fireBasket1);
+	addObject(fireBasket2);
 
 	// add buttons
 	if (m_characterCore != nullptr)
 	{
 		m_resumeGameButton = new Button(sf::FloatRect(475, 200, 300, 50), ButtonOrnamentStyle::MEDIUM);
 		m_resumeGameButton->setText("Resume");
-		addObject(GameObjectType::_Button, m_resumeGameButton);
+		addObject(m_resumeGameButton);
 	}
 	m_newGameButton = new Button(sf::FloatRect(475, 270, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_newGameButton->setText("NewGame");
@@ -114,12 +114,12 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	m_creditsButton->setText("Credits");
 	m_exitButton = new Button(sf::FloatRect(475, 610, 300, 50), ButtonOrnamentStyle::MEDIUM);
 	m_exitButton->setText("Exit");
-	addObject(GameObjectType::_Button, m_newGameButton);
-	addObject(GameObjectType::_Button, m_loadGameButton);
-	addObject(GameObjectType::_Button, m_optionsButton);
-	addObject(GameObjectType::_Button, m_creditsButton);
-	addObject(GameObjectType::_Button, m_exitButton);
-	addObject(GameObjectType::_Button, m_saveGameButton);
+	addObject(m_newGameButton);
+	addObject(m_loadGameButton);
+	addObject(m_optionsButton);
+	addObject(m_creditsButton);
+	addObject(m_exitButton);
+	addObject(m_saveGameButton);
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen)

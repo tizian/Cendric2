@@ -48,7 +48,7 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 			m_yesOrNoForm->setMessage("QuestionLoadGame");
 			m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
 			m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onLoadGame, this));
-			addObject(GameObjectType::_Form, m_yesOrNoForm);
+			addObject(m_yesOrNoForm);
 			setAllButtonsEnabled(false);
 		}
 	}
@@ -58,7 +58,7 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 		m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
 		m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
 		m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
-		addObject(GameObjectType::_Form, m_yesOrNoForm);
+		addObject(m_yesOrNoForm);
 		setAllButtonsEnabled(false);
 	}
 	return this;
@@ -91,20 +91,20 @@ void LoadGameScreen::execOnEnter(const Screen *previousScreen)
 	// add buttons
 	m_backButton = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
 	m_backButton->setText("Back");
-	addObject(GameObjectType::_Button, m_backButton);
+	addObject(m_backButton);
 
 	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight));
 	m_deleteSaveGameButton->setText("Delete");
-	addObject(GameObjectType::_Button, m_deleteSaveGameButton);
+	addObject(m_deleteSaveGameButton);
 
 	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight));
 	m_loadSaveGameButton->setText("Load");
-	addObject(GameObjectType::_Button, m_loadSaveGameButton);
+	addObject(m_loadSaveGameButton);
 
 	// savegame window
 	m_saveGameWindow = new SaveGameWindow();
 	setAllButtonsEnabled(true);
-	addObject(GameObjectType::_Window, m_saveGameWindow);
+	addObject(m_saveGameWindow);
 }
 
 void LoadGameScreen::execOnExit(const Screen *nextScreen)

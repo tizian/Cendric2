@@ -12,15 +12,17 @@
 class SpellSlot : public GameObject
 {
 public:
-	SpellSlot(const sf::Vector2f &center = sf::Vector2f(0.f, 0.f), const SpellBean& spellBean = EMPTY_SPELL, bool active = true);
+	SpellSlot(const SpellBean& spellBean = EMPTY_SPELL, bool active = true);
 
 	void activate();
 	void deactivate();
 
-	void playAnimation(const sf::Time &cooldown);
+	void playAnimation(const sf::Time& cooldown);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
+	// be aware that the position here is the center of the spell slot. 
+	void setPosition(const sf::Vector2f& pos) override;
 
 	GameObjectType getConfiguredType() const override;
 

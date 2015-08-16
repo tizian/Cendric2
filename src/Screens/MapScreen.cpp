@@ -82,7 +82,7 @@ void MapScreen::execOnEnter(const Screen *previousScreen)
 	}
 	m_mainChar = new MapMainCharacter(&m_currentMap);
 	m_mainChar->setCharacterCore(getCharacterCore());
-	addObject(GameObjectType::_MainCharacter, m_mainChar);
+	addObject(m_mainChar);
 	m_currentMap.loadAfterMainChar(this);
 }
 

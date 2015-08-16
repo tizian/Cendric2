@@ -34,6 +34,11 @@ void LevelScreen::execOnExit(const Screen *nextScreen)
 	delete m_interface;
 }
 
+void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const
+{
+	m_interface->addBuff(type, textureLocation, duration);
+}
+
 Screen* LevelScreen::update(const sf::Time& frameTime)
 {
 	// handle game over
@@ -47,10 +52,10 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		m_youDied->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_youDied->getLocalBounds().width) / 2.f), 200.f));
 		m_retryButton = new Button(sf::FloatRect(475, 410, 300, 50), ButtonOrnamentStyle::MEDIUM);
 		m_retryButton->setText("RetryLevel");
-		addObject(GameObjectType::_Button, m_retryButton);
+		addObject(m_retryButton);
 		m_backToMenuButton = new Button(sf::FloatRect(475, 470, 300, 50), ButtonOrnamentStyle::MEDIUM);
 		m_backToMenuButton->setText("BackToMenu");
-		addObject(GameObjectType::_Button, m_backToMenuButton);
+		addObject(m_backToMenuButton);
 	}
 
 	if (m_isGameOver && m_retryButton->isClicked())

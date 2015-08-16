@@ -42,9 +42,10 @@ void SpellSelection::reload()
 	float offset = SpellSlot::RADIUS;
 	for (auto& it : m_spellManager->getSpellMap())
 	{
-		SpellSlot slot(
-			sf::Vector2f(SPELLSELECTION_OFFSET.x + offset, WINDOW_HEIGHT - (SpellSlot::RADIUS + SPELLSELECTION_OFFSET.y)),
-			it->getSpellBean());
+		SpellSlot slot(it->getSpellBean());
+		slot.setPosition(sf::Vector2f(
+			SPELLSELECTION_OFFSET.x + offset, 
+			WINDOW_HEIGHT - (SpellSlot::RADIUS + SPELLSELECTION_OFFSET.y)));
 		m_spellSlots.push_back(slot);
 		offset += (SPELLSLOT_SPACING + 2 * SpellSlot::RADIUS);
 	}

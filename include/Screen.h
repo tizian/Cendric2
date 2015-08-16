@@ -28,8 +28,8 @@ public:
 	void onExit(const Screen* nextScreen);
 	virtual void execOnExit(const Screen* nextScreen);
 
-	// adds an object of type 'type' to the screen.
-	void addObject(GameObjectType type, GameObject* object);
+	// adds a gameobject to the screen.
+	void addObject(GameObject* object);
 
 	// gets the vector with the objects of type 'type'
 	std::vector<GameObject*>* getObjects(GameObjectType type);

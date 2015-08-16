@@ -276,7 +276,7 @@ void SimulatedWaterTile::freeze(int index)
 		frozenTile->setDebugBoundingBox(sf::Color::Yellow);
 		frozenTile->load(0);
 		m_frozenTiles[index] = frozenTile;
-		m_screen->addObject(GameObjectType::_DynamicTile, frozenTile);
+		m_screen->addObject(frozenTile);
 	}
 }
 

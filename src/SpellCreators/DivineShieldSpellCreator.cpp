@@ -1,4 +1,5 @@
 #include "SpellCreators/DivineShieldSpellCreator.h"
+#include "Screens/LevelScreen.h"
 
 DivineShieldSpellCreator::DivineShieldSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
@@ -12,7 +13,8 @@ void DivineShieldSpellCreator::executeSpell(const sf::Vector2f &target)
 	SpellBean spellBean = m_spellBean;
 	DivineShieldSpell* newSpell = new DivineShieldSpell(m_additionalResistance);
 	newSpell->load(spellBean, m_owner, target, 0);
-	m_screen->addObject(GameObjectType::_Spell, newSpell);
+	m_screen->addObject(newSpell);
+	m_screen->addBuffToInterface(BuffType::Spell, spellBean.iconTextureRect, spellBean.duration);
 	
 	m_owner->addHeal(newSpell->getHeal());
 }

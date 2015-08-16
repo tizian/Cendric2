@@ -11,8 +11,9 @@
 #include "GUI/Inventory.h"
 #include "GUI/CharacterInfo.h"
 #include "GUI/SpellSelection.h"
+#include "GUI/BuffBar.h"
 
-// The interface overlay in a level, displaying hp bar, spell cooldowns etc.
+// The interface overlay in a level, displaying hp bar, spell cooldowns, buffs etc.
 // if the keys for character screen and inventory are pressed, these will display as well.
 class LevelInterface
 {
@@ -22,6 +23,9 @@ public:
 
 	// the spell manager of the level main character.
 	void setSpellManager(SpellManager* spellManager);
+
+	// used to add buffs to the buff bar
+	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
@@ -42,4 +46,7 @@ private:
 
 	// <<< SPELL SELECTION >>>
 	SpellSelection* m_spellSelection = nullptr;
+
+	// <<< BUFF BAR >>>
+	BuffBar m_buffBar;
 };

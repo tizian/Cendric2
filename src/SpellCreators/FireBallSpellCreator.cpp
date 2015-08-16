@@ -1,4 +1,5 @@
 #include "SpellCreators/FireBallSpellCreator.h"
+#include "Screens/LevelScreen.h"
 
 FireBallSpellCreator::FireBallSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner)
 {
@@ -18,7 +19,7 @@ void FireBallSpellCreator::executeSpell(const sf::Vector2f &target)
 	{
 		FireBallSpell* newSpell = new FireBallSpell();		
 		newSpell->load(spellBean, m_owner, target, div * sign * spellBean.divergenceAngle);
-		m_screen->addObject(GameObjectType::_Spell, newSpell);
+		m_screen->addObject(newSpell);
 		sign = -sign;
 		if (sign == -1)
 		{

@@ -49,7 +49,7 @@ namespace particles
 
 		void update(ParticleData *data, float dt);
 
-		int numAttractors() const { return m_attractors.size(); }
+		int numAttractors() const { return static_cast<int>(m_attractors.size()); }
 		void add(const sf::Vector3f &attr) { m_attractors.push_back(attr); }
 		sf::Vector3f &get(int id) { return m_attractors[id]; }
 
