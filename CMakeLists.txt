@@ -37,6 +37,7 @@ include_directories(
 )
 
 file(GLOB_RECURSE Cendric_FILES
+	"${PROJECT_SOURCE_DIR}/include/*.h"
 	"${PROJECT_SOURCE_DIR}/src/*.cpp"
 	"${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
 )
