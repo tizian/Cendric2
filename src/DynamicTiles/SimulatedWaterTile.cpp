@@ -89,7 +89,7 @@ void SimulatedWaterTile::load(int skinNr)
 	waterUpdater->water = this;
 
 	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
-	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);		// TODO: This seems.... suspicious.
+    eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);
 }
 
 void SimulatedWaterTile::update(const sf::Time& frameTime)
