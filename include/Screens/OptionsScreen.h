@@ -31,6 +31,12 @@ private:
 	Button* m_soundOffButton = nullptr;
 	void refreshSoundText();
 
+	BitmapText* m_quickcast = nullptr;
+	bool m_selectedQuickcastOn = false;
+	Button* m_quickcastOnButton = nullptr;
+	Button* m_quickcastOffButton = nullptr;
+	void refreshQuickcastText();
+
 	Language m_selectedLanguage = Language::Void;
 	BitmapText* m_languageText = nullptr;
 	Button* m_englishButton = nullptr;

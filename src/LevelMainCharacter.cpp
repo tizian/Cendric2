@@ -3,6 +3,7 @@
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level)
 {
 	m_spellManager = new SpellManager(this);
+	m_isQuickcast = g_resourceManager->getConfiguration().isQuickcast;
 }
 
 LevelMainCharacter::~LevelMainCharacter()
@@ -13,12 +14,14 @@ LevelMainCharacter::~LevelMainCharacter()
 
 void LevelMainCharacter::handleAttackInput()
 {
+	if (g_inputController->isActionLocked()) return;
 	// update current spell
 	for (auto const &it : m_spellKeyMap) {
 		if (g_inputController->isKeyJustPressed(it.first))
 		{
 			m_spellManager->setCurrentSpell(it.second);
-			m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
+			if (m_isQuickcast)
+				m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
 		}
 	}
 
@@ -26,6 +29,7 @@ void LevelMainCharacter::handleAttackInput()
 	if (g_inputController->isMouseJustPressedLeft())
 	{
 		m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
+		g_inputController->lockAction();
 	}
 }
 

@@ -15,6 +15,8 @@ public:
 	void hide();
 	// called by the spell manager 
 	void activateSlot(int spellNr, const sf::Time& cooldown);
+	// called by the spell manager
+	void selectSlot(int spellNr);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
@@ -32,4 +34,5 @@ private:
 	const sf::Vector2f SPELLSELECTION_OFFSET = sf::Vector2f(10.f, 10.f);
 	// x space between two slots
 	const float SPELLSLOT_SPACING = 20.f;
+	int m_selectedSlot = 0;
 };

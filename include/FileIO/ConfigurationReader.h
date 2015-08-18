@@ -25,4 +25,6 @@ private:
 
 	bool readSoundVolume(const std::string& line, ConfigurationData& data) const;
 	bool readSoundOn(const std::string& line, ConfigurationData& data) const;
+
+	bool readQuickcastOn(const std::string& line, ConfigurationData& data) const;
 };

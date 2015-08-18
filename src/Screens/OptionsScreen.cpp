@@ -17,6 +17,7 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 	{
 		g_resourceManager->getConfiguration().language = m_selectedLanguage;
 		g_resourceManager->getConfiguration().isSoundOn = m_selectedSoundOn;
+		g_resourceManager->getConfiguration().isQuickcast = m_selectedQuickcastOn;
 		ConfigurationWriter writer;
 		writer.saveToFile(g_resourceManager->getConfiguration());
 		g_textProvider->reload();
@@ -24,7 +25,6 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_englishButton->isClicked())
 	{
-
 		m_selectedLanguage = Language::Lang_EN;
 		refreshLanguageText();
 	}
@@ -50,6 +50,16 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 		m_selectedSoundOn = false;
 		refreshSoundText();
 	}
+	else if (m_quickcastOnButton->isClicked())
+	{
+		m_selectedQuickcastOn = true;
+		refreshQuickcastText();
+	}
+	else if (m_quickcastOffButton->isClicked())
+	{
+		m_selectedQuickcastOn = false;
+		refreshQuickcastText();
+	}
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
 	deleteDisposedObjects();
@@ -62,6 +72,7 @@ void OptionsScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(*m_title);
 	renderTarget.draw(*m_languageText);
 	renderTarget.draw(*m_sound);
+	renderTarget.draw(*m_quickcast);
 	renderTarget.draw(*m_fps);
 	renderTarget.draw(*m_volume);
 	for (auto it : m_keyTexts)
@@ -101,6 +112,22 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	m_swissButton = new Button(sf::FloatRect(distFromLeft + 280, distFromTop, 240, 50));
 	m_swissButton->setText("SwissGerman", 12);
 	addObject(m_swissButton);
+
+	distFromTop = distFromTop + 100;
+	// quickcast
+	m_quickcast = new BitmapText();
+	m_quickcast->setCharacterSize(12);
+	m_quickcast->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_selectedQuickcastOn = g_resourceManager->getConfiguration().isQuickcast;
+	refreshQuickcastText();
+
+	distFromTop = distFromTop + 30;
+	m_quickcastOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
+	m_quickcastOnButton->setText("On", 12);
+	addObject(m_quickcastOnButton);
+	m_quickcastOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
+	m_quickcastOffButton->setText("Off", 12);
+	addObject(m_quickcastOffButton);
 
 	distFromTop = distFromTop + 100;
 	// sound
@@ -173,6 +200,14 @@ void OptionsScreen::refreshSoundText()
 	m_sound->setString(soundText);
 }
 
+void OptionsScreen::refreshQuickcastText()
+{
+	string currentSwitch = m_selectedQuickcastOn ? "On" : "Off";
+	wstring quickcastText = g_textProvider->getText("Quickcast") + L": ";
+	quickcastText.append(g_textProvider->getText(currentSwitch));
+	m_quickcast->setString(quickcastText);
+}
+
 void OptionsScreen::execOnExit(const Screen *nextScreen)
 {
 	// delete texts (buttons are deleted automatically by the screen)
@@ -181,7 +216,8 @@ void OptionsScreen::execOnExit(const Screen *nextScreen)
 	delete m_fps;
 	delete m_volume;
 	delete m_sound;
-	for (auto it : m_keyTexts)
+	delete m_quickcast;
+	for (auto& it : m_keyTexts)
 	{
 		delete it;
 	}

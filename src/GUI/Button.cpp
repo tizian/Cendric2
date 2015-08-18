@@ -41,6 +41,7 @@ void Button::onLeftClick()
 		m_isPressed = false;
 		m_mainLayer.move(0, 1);
 		m_mainLayer.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+		g_inputController->lockAction();
 	}
 }
 
@@ -51,6 +52,7 @@ void Button::onLeftJustPressed()
 		m_isPressed = true;
 		m_mainLayer.move(0, 1);
 		m_mainLayer.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+		g_inputController->lockAction();
 	}
 }
 

@@ -81,15 +81,17 @@ void BuffBar::update(const sf::Time& frameTime)
 
 void BuffBar::calculateSlotPositions()
 {
-	// we're starting from right side to left side <-------
 	// the foodbuff is always the first one (as seen from left)
 	sf::Vector2f offset = BUFFBAR_OFFSET;
 	float xOffset = BUFFSLOT_SPACING + 2 * BuffSlot::RADIUS + 2 * BuffSlot::MARGIN;
-	offset.x -= xOffset - BUFFSLOT_SPACING;
+	if (m_foodBuffSlot != nullptr) 
+	{
+		m_foodBuffSlot->setPosition(offset);
+		offset.x += xOffset;
+	}
 	for (auto& it : m_buffSlots)
 	{
 		it->setPosition(offset);
-		offset.x -= xOffset;
+		offset.x += xOffset;
 	}
-	if (m_foodBuffSlot != nullptr) m_foodBuffSlot->setPosition(offset);
 }

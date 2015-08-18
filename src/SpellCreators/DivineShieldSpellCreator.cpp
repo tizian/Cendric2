@@ -14,7 +14,8 @@ void DivineShieldSpellCreator::executeSpell(const sf::Vector2f &target)
 	DivineShieldSpell* newSpell = new DivineShieldSpell(m_additionalResistance);
 	newSpell->load(spellBean, m_owner, target, 0);
 	m_screen->addObject(newSpell);
-	m_screen->addBuffToInterface(BuffType::Spell, spellBean.iconTextureRect, spellBean.duration);
+	if (dynamic_cast<LevelMainCharacter*>(m_owner))
+		m_screen->addBuffToInterface(BuffType::Spell, spellBean.iconTextureRect, spellBean.duration);
 	
 	m_owner->addHeal(newSpell->getHeal());
 }

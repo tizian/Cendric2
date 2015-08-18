@@ -72,14 +72,14 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 	if (bean == nullptr || m_isGameOver || !g_inputController->isKeyActive(Key::Up))
 	{
 		updateTooltipText(frameTime);
+		m_interface->update(frameTime);
+		updateObjects(GameObjectType::_Button, frameTime);
+		updateObjects(GameObjectType::_Enemy, frameTime);
+		updateObjects(GameObjectType::_LevelItem, frameTime);
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
 		updateObjects(GameObjectType::_LevelEquipment, frameTime);
 		updateObjects(GameObjectType::_Spell, frameTime);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
-		updateObjects(GameObjectType::_LevelItem, frameTime);
-		updateObjects(GameObjectType::_Enemy, frameTime);
-		updateObjects(GameObjectType::_Button, frameTime);
-		m_interface->update(frameTime);
 		deleteDisposedObjects();
 		return this;
 	}

@@ -98,7 +98,7 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds)
 		"FPS: " + std::to_string(fps),
 		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
 	fpsText.setColor(sf::Color::Red);
-	fpsText.setPosition(sf::Vector2f(550.f, 10.f));
+	fpsText.setPosition(sf::Vector2f(1050.f, 10.f));
 	fpsText.setCharacterSize(20);
 
 	target.draw(fpsText);

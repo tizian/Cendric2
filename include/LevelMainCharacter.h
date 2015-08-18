@@ -39,4 +39,5 @@ private:
 	// character core must be set when loading the weapon.
 	void loadWeapon();
 	std::map<Key, int> m_spellKeyMap;
+	bool m_isQuickcast;
 };

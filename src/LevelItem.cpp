@@ -46,6 +46,7 @@ void LevelItem::onRightClick()
 	{
 		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
 	}
+	g_inputController->lockAction();
 }
 
 void LevelItem::onInteractKey()

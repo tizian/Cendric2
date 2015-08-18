@@ -68,11 +68,15 @@ void SpellManager::setCurrentSpell(int spellNr)
 {
 	if (spellNr < -1 || spellNr > m_spellMap.size() - 1)
 	{
-		g_logger->logError("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + to_string(spellNr));
+		g_logger->logWarning("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + to_string(spellNr));
 		m_currentSpell = -1;
 		return;
 	}
 	m_currentSpell = spellNr;
+	if (m_spellSelection != nullptr)
+	{
+		m_spellSelection->selectSlot(spellNr);
+	}
 }
 
 SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers)

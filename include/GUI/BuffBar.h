@@ -32,7 +32,7 @@ private:
 	void calculateSlotPositions();
 
 	// as seen from the top left corner
-	const sf::Vector2f BUFFBAR_OFFSET = sf::Vector2f(WINDOW_WIDTH - 10.f, 10.f);
+	const sf::Vector2f BUFFBAR_OFFSET = sf::Vector2f(220.f, 10.f);
 	// x space between two slots
 	const float BUFFSLOT_SPACING = 20.f;
 };

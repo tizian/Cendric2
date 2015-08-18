@@ -14,14 +14,27 @@ SpellSelection::~SpellSelection()
 
 void SpellSelection::activateSlot(int spellNr, const sf::Time& cooldown)
 {
+	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
 	m_spellSlots[spellNr].playAnimation(cooldown);
+}
+
+void SpellSelection::selectSlot(int spellNr)
+{
+	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
+	m_spellSlots[m_selectedSlot].deselect();
+	m_spellSlots[spellNr].select();
+	m_selectedSlot = spellNr;
 }
 
 void SpellSelection::update(const sf::Time& frametime)
 {
-	for (auto& it : m_spellSlots)
+	for (int i = 0; i < m_spellSlots.size(); i++)
 	{
-		it.update(frametime);
+		m_spellSlots[i].update(frametime);
+		if (m_spellSlots[i].isClicked())
+		{
+			m_spellManager->setCurrentSpell(i);
+		}
 	}
 }
 

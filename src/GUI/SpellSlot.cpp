@@ -7,6 +7,7 @@ const float SpellSlot::RADIUS = 40.f;
 SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
 {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2 * RADIUS, 2 * RADIUS));
+	setDebugBoundingBox(sf::Color::Red);
 	m_spellType = spellBean.spellType;
 
 	m_color = CENDRIC_COLOR_GREY;
@@ -95,6 +96,33 @@ SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
 	}
 }
 
+void SpellSlot::select()
+{
+	if (m_isSelected) return;
+	m_isSelected = true;
+	m_smallRingBottom1.setFillColor(sf::Color::Red);
+	m_smallRingTop1.setFillColor(sf::Color::Red);
+	m_smallRingLeft1.setFillColor(sf::Color::Red);
+	m_smallRingRight1.setFillColor(sf::Color::Red);
+}
+
+void SpellSlot::deselect()
+{
+	if (!m_isSelected) return;
+	m_isSelected = false;
+	m_smallRingBottom1.setFillColor(m_color);
+	m_smallRingTop1.setFillColor(m_color);
+	m_smallRingLeft1.setFillColor(m_color);
+	m_smallRingRight1.setFillColor(m_color);
+}
+
+bool SpellSlot::isClicked()
+{
+	bool wasClicked = m_isClicked;
+	m_isClicked = false;
+	return wasClicked;
+}
+
 void SpellSlot::setPosition(const sf::Vector2f& pos)
 {
 	m_position = pos;
@@ -102,6 +130,7 @@ void SpellSlot::setPosition(const sf::Vector2f& pos)
 	m_boundingBox.top = pos.y - RADIUS;
 
 	sf::Vector2f radiusVector(RADIUS, RADIUS);
+	m_debugBox.setPosition(pos - radiusVector);
 
 	m_inputKey.setPosition(pos - sf::Vector2f(radiusVector));
 	m_outerRing.setPosition(pos - sf::Vector2f(radiusVector));
@@ -177,6 +206,8 @@ void SpellSlot::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_smallRingBottom2);
 
 	renderTarget.draw(m_inputKey);
+
+	GameObject::renderAfterForeground(renderTarget);
 }
 
 void SpellSlot::playAnimation(const sf::Time &cooldown)
@@ -220,7 +251,12 @@ void SpellSlot::update(const sf::Time& frameTime)
 		}
 	}
 
-	GameObject::update(frameTime);
+	// check for left click, in default view
+	if (m_boundingBox.contains(g_inputController->getDefaultViewMousePosition()) && g_inputController->isMousePressedLeft())
+	{
+		m_isClicked = true;
+		g_inputController->lockAction();
+	}
 }
 
 GameObjectType SpellSlot::getConfiguredType() const

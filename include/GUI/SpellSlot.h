@@ -16,6 +16,8 @@ public:
 
 	void activate();
 	void deactivate();
+	void select();
+	void deselect();
 
 	void playAnimation(const sf::Time& cooldown);
 
@@ -23,6 +25,9 @@ public:
 	void update(const sf::Time& frameTime) override;
 	// be aware that the position here is the center of the spell slot. 
 	void setPosition(const sf::Vector2f& pos) override;
+
+	// asks if it is clicked and sets the member bool to false again (!)
+	bool isClicked();
 
 	GameObjectType getConfiguredType() const override;
 
@@ -35,6 +40,8 @@ private:
 	bool m_isChopSlot = false;
 
 	bool m_active = false;
+	bool m_isClicked = false;
+	bool m_isSelected = false;
 
 	sf::Time m_cooldown;
 	SpellType m_spellType;

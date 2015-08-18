@@ -61,20 +61,20 @@ public:
 	bool isDisposed() const;
 	virtual GameObjectType getConfiguredType() const = 0;
 	Screen* getScreen() const;
-	void setDebugBoundingBox(const sf::Color &debugColor);
 
 	// convenience method for updating time values (used in many GOs). 
 	// The frame time is subtracted from the time but 
 	// if the time falls below sf::Time::Zero, it is set to sf::Time::Zero.
 	static void updateTime(sf::Time &time, const sf::Time &frameTime);
+	void setDebugBoundingBox(const sf::Color &debugColor);
 
 protected:
 	GameObjectState m_state;
 	sf::Vector2f m_nextPosition;
 	AnimatedSprite m_animatedSprite;
 	Screen* m_screen = nullptr;
-	
-protected:
+	sf::RectangleShape m_debugBox;
+
 	bool m_isDisposed = false;
 
 	std::map<GameObjectState, Animation> m_animations;
@@ -85,5 +85,4 @@ protected:
 
 private:
 	bool m_isDrawBoundingBox = false;
-	sf::RectangleShape m_debugBox;
 };

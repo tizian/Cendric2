@@ -19,6 +19,7 @@ private:
 	std::string writeConfigurationHeader() const;
 	std::string writeSoundOn(const ConfigurationData& data) const;
 	std::string writeSoundVolume(const ConfigurationData& data) const;
+	std::string writeQuickcastOn(const ConfigurationData& data) const;
 
 	std::string writeLanguage(const ConfigurationData& data) const;
 	std::string writeMainInputMap(const ConfigurationData& data) const;

@@ -12,4 +12,5 @@ protected:
 	const char* SOUND_VOLUME = "sound.volume";
 	const char* MAIN_INPUT_MAPPING = "input.main.key";
 	const char* ALTERNATIVE_INPUT_MAPPING = "input.alternative.key";
+	const char* QUICKCAST_ON = "quickcast.on";
 };

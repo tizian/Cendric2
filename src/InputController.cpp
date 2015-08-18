@@ -15,9 +15,20 @@ InputController::~InputController()
 	m_keyJustPressedMap.clear();
 }
 
+void InputController::lockAction()
+{
+	m_isActionLocked = true;
+}
+
+bool InputController::isActionLocked() const
+{
+	return m_isActionLocked;
+}
+
 void InputController::update()
 {
 	m_isWindowFocused = m_mainWindow->hasFocus();
+	m_isActionLocked = false;
 	
 	// update keys
 	for (auto& it : m_keyActiveMap)
@@ -35,14 +46,18 @@ void InputController::update()
 	m_isMousePressedLeft = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	m_isMousePressedRight = sf::Mouse::isButtonPressed(sf::Mouse::Right);
 
-	// update mouse position
+	// update mouse positions
 	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
 	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
 	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT) / m_windowSize.y);
 	sf::Vector2f view = sf::Vector2f(
 		m_mainWindow->getView().getCenter().x - m_mainWindow->getView().getSize().x / 2,
 		m_mainWindow->getView().getCenter().y - m_mainWindow->getView().getSize().y / 2);
+	sf::Vector2f defaultview = sf::Vector2f(
+		m_mainWindow->getDefaultView().getCenter().x - m_mainWindow->getView().getSize().x / 2,
+		m_mainWindow->getDefaultView().getCenter().y - m_mainWindow->getView().getSize().y / 2);
 	m_mousePosition = pos + view;
+	m_defaultViewMousePosition = pos + defaultview;
 }
 
 void InputController::setWindow(sf::RenderWindow* window)
@@ -92,6 +107,11 @@ void InputController::setCurrentWindowSize(int width, int height)
 const sf::Vector2f& InputController::getMousePosition() const
 {
 	return m_mousePosition;
+}
+
+const sf::Vector2f& InputController::getDefaultViewMousePosition() const
+{
+	return m_defaultViewMousePosition;
 }
 
 bool InputController::isMouseOver(const sf::FloatRect* boundingBox) const

@@ -45,9 +45,18 @@ void GameObject::setDebugBoundingBox(const sf::Color &debugColor)
 
 void GameObject::update(const sf::Time& frameTime)
 {
+	m_animatedSprite.update(frameTime);
+	if (DEBUG_RENDERING && m_isDrawBoundingBox)
+	{
+		m_debugBox.setPosition(getPosition());
+	}
+
 	if (g_inputController->isMouseOver(&m_boundingBox))
 	{
 		onMouseOver();
+		// if the inputcontroller has locked actions, skip these methods.
+		if (g_inputController->isActionLocked()) return;
+
 		if (g_inputController->isKeyJustPressed(Key::Interact))
 		{
 			onInteractKey();
@@ -68,12 +77,6 @@ void GameObject::update(const sf::Time& frameTime)
 		{
 			onLeftJustPressed();
 		}
-	}
-	
-	m_animatedSprite.update(frameTime);
-	if (DEBUG_RENDERING && m_isDrawBoundingBox)
-	{
-		m_debugBox.setPosition(getPosition());
 	}
 }
 

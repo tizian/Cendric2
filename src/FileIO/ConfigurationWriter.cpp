@@ -12,6 +12,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const
 		configuration << writeSoundOn(data);
 		configuration << writeSoundVolume(data);
 		configuration << writeLanguage(data);
+		configuration << writeQuickcastOn(data);
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeMaxFPS(data);
@@ -44,6 +45,12 @@ std::string ConfigurationWriter::writeSoundOn(const ConfigurationData& data) con
 {
 	string soundOn = "# 0 means sound off, 1 means sound on\n";
 	return soundOn.append(string(SOUND_ON) + ":" + (data.isSoundOn ? "1" : "0")  + "\n");
+}
+
+std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data) const
+{
+	string quickcastOn = "# 0 means quickcast off, 1 means quickcast on\n";
+	return quickcastOn.append(string(QUICKCAST_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeSoundVolume(const ConfigurationData& data) const

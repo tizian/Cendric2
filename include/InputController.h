@@ -42,8 +42,14 @@ public:
 	bool isMouseClickedLeft() const;
 	bool isMouseClickedRight() const;
 
-	// returns mouse position relative to window
+	// locks further input actions in this frame.
+	void lockAction();
+	bool isActionLocked() const;
+
+	// returns mouse position relative to window & the current view
 	const sf::Vector2f& getMousePosition() const;
+	// returns the mouse position relative to window & the default view
+	const sf::Vector2f& getDefaultViewMousePosition() const;
 
 private:
 	std::map<Key, bool> m_keyActiveMap;
@@ -66,12 +72,18 @@ private:
 	
 	// is the window currently focused? we only count input events if it is so!
 	bool m_isWindowFocused;
-	// the mouse position gets calculated in every frame.
+	// the mouse position gets calculated once in every frame. This is the mouse position according to the current view
 	sf::Vector2f m_mousePosition;
+	// the mouse position according to the default view.
+	sf::Vector2f m_defaultViewMousePosition;
 
 	bool m_isReadText = false;
 	// the text read by the input controller while isReadText is true
 	std::string m_readText;
 
 	bool isKeyPressed(sf::Keyboard::Key key) const;
+
+	// if an input action is done in the current frame, the GO will switch this to true 
+	// and the input controller will ignore all further clicks/actions.
+	bool m_isActionLocked = false;
 };
