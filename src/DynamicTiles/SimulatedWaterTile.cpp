@@ -56,7 +56,7 @@ void SimulatedWaterTile::load(int skinNr)
 	m_vertexArray = sf::VertexArray(sf::Quads, 2 * 4 * (m_nColumns - 1));
 
 	// Particle System
-	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob), g_renderTexture));
+	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob), WINDOW_WIDTH, WINDOW_HEIGHT));
 	g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)->setSmooth(true);
 	m_ps->color = WATER_COLOR;
 	m_ps->threshold = 0.7f;

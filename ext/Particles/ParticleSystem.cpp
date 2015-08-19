@@ -78,7 +78,7 @@ namespace particles
 		}
 	}
 
-	void PointParticleSystem::render(sf::RenderTarget& renderTarget) {
+	void PointParticleSystem::render(sf::RenderTarget &renderTarget) {
 		sf::RenderStates states = sf::RenderStates::Default;
 
 		const sf::Vertex *ver = &m_vertices[0];
@@ -132,7 +132,7 @@ namespace particles
 		}
 	}
 
-	void TextureParticleSystem::render(sf::RenderTarget& renderTarget) {
+	void TextureParticleSystem::render(sf::RenderTarget &renderTarget) {
 		sf::RenderStates states = sf::RenderStates::Default;
 
 		if (additiveBlendMode) {
@@ -171,13 +171,14 @@ namespace particles
 		"    }" \
 		"}";
 
-	MetaballParticleSystem::MetaballParticleSystem(int maxCount, sf::Texture *texture, sf::RenderTexture *renderTexture) : TextureParticleSystem(maxCount, texture), m_renderTexture(renderTexture) {
+	MetaballParticleSystem::MetaballParticleSystem(int maxCount, sf::Texture *texture, int windowWidth, int windowHeight) : TextureParticleSystem(maxCount, texture) {
 		additiveBlendMode = true;
 		m_shader.setParameter("texture", sf::Shader::CurrentTexture);
 		m_shader.loadFromMemory(vertexShader, fragmentShader);
+		m_renderTexture.create(windowWidth, windowHeight);
 	}
 
-	void MetaballParticleSystem::render(sf::RenderTarget& renderTarget) {
+	void MetaballParticleSystem::render(sf::RenderTarget &renderTarget) {
 		sf::RenderStates states = sf::RenderStates::Default;
 		states.blendMode = sf::BlendAdd;
 
@@ -188,11 +189,11 @@ namespace particles
 		sf::View oldView = renderTarget.getView();
 		sf::View defaultView = renderTarget.getDefaultView();
 
-		m_renderTexture->setView(oldView);
-		m_renderTexture->clear(sf::Color(0, 0, 0, 0));
-		m_renderTexture->draw(ver, m_particles.countAlive * 4, sf::Quads, states);
-		m_renderTexture->display();
-		m_sprite.setTexture(m_renderTexture->getTexture());
+		m_renderTexture.setView(oldView);
+		m_renderTexture.clear(sf::Color(0, 0, 0, 0));
+		m_renderTexture.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
+		m_renderTexture.display();
+		m_sprite.setTexture(m_renderTexture.getTexture());
 		m_shader.setParameter("customColor", color);
 		m_shader.setParameter("threshold", threshold);
 		
