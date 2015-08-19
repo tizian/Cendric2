@@ -6,7 +6,7 @@
 class SpikesBottomTile : public DynamicTile
 {
 public:
-	SpikesBottomTile() : DynamicTile() {}
+	SpikesBottomTile(Level* level) : DynamicTile(level) {}
 	void init() override;
 	void load(int skinNr) override;
 	void onHit(Spell* spell) override;

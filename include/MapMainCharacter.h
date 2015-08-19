@@ -22,7 +22,7 @@ public:
 
 	void load();
 	void update(const sf::Time& frameTime) override;
-	void checkCollisions(const sf::Vector2f& nextPosition) override;
+	void checkCollisions(const sf::Vector2f& nextPosition);
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
 	void setCharacterCore(CharacterCore* core);

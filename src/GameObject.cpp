@@ -183,7 +183,6 @@ void GameObject::onLeftJustPressed()
 
 const sf::Vector2f GameObject::getCenter() const
 {
-	// TODO: maybe extend for multiple BBs
 	return sf::Vector2f(
 		m_boundingBox.left + (m_boundingBox.width / 2),
 		m_boundingBox.top + (m_boundingBox.height / 2));

@@ -259,3 +259,29 @@ const struct SpellBean DEFAULT_ANTIGRAVITY =
 	0,
 	sf::seconds(3)
 };
+
+const struct SpellBean DEFAULT_WINDGUST =
+{
+	SpellID::WindGust,
+	SpellType::Elemental,
+	sf::IntRect(150, 0, 50, 50),
+	sf::milliseconds(3000),
+	sf::FloatRect(0, 0, 60, 40),
+	DamageType::VOID,
+
+	0,
+	0,
+	0,
+	0.f,
+	1,
+	sf::seconds(1),
+	20.f,
+
+	0.f,
+	0.f,
+	0,
+	0,
+	0,
+	0,
+	sf::seconds(1)
+};

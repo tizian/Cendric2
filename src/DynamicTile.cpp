@@ -1,8 +1,8 @@
 #include "DynamicTile.h"
 
-void DynamicTile::update(const sf::Time& frameTime)
+DynamicTile::DynamicTile(Level* level) : GameObject()
 {
-	GameObject::update(frameTime);
+	m_level = level;
 }
 
 bool DynamicTile::getIsCollidable() const

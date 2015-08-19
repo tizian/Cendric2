@@ -6,7 +6,7 @@
 class ChestTile : public DynamicTile
 {
 public:
-	ChestTile() : DynamicTile() {}
+	ChestTile(Level* level) : DynamicTile(level) {}
 	void init() override;
 	void load(int skinNr) override;
 	void onHit(Spell* spell) override;

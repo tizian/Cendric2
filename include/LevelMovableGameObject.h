@@ -14,10 +14,10 @@ class LevelMovableGameObject : public MovableGameObject
 {
 public:
 	LevelMovableGameObject(Level* level);
-	~LevelMovableGameObject();
+	virtual ~LevelMovableGameObject();
 
 	virtual void update(const sf::Time& frameTime) override;
-	virtual void checkCollisions(const sf::Vector2f& nextPosition) override;
+	virtual void checkCollisions(const sf::Vector2f& nextPosition);
 	// the offset to the from where a spell starts. it gets added to the spell offset defined by the spell itself. default is (0,0)
 	virtual sf::Vector2f getConfiguredSpellOffset() const;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;

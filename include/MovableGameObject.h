@@ -4,15 +4,16 @@
 #include "GameObject.h"
 
 // A movable game object with physics.  Abstract class
-class MovableGameObject : public GameObject
+class MovableGameObject : virtual public GameObject
 {
 public:
 	MovableGameObject() : GameObject() {}
+	virtual ~MovableGameObject() {}
+
 	void update(const sf::Time& frameTime) override;
 	void calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const;
 	void calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
 	virtual void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
-	virtual void checkCollisions(const sf::Vector2f& nextPosition);
 
 	void setAcceleration(const sf::Vector2f& acceleration);
 	void setAccelerationX(float accelerationX);

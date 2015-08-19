@@ -48,7 +48,7 @@ bool Level::load(LevelID id, Screen* screen)
 	m_foregroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.foregroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
 
 	LevelLoader loader;
-	loader.loadDynamicTiles(m_levelData, screen);
+	loader.loadDynamicTiles(m_levelData, screen, this);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 
 	tileWidth = static_cast<float>(m_levelData.tileSize.x);
@@ -114,7 +114,7 @@ const sf::FloatRect& Level::getLevelRect() const
 	return m_levelData.levelRect;
 }
 
-bool Level::collidesX(const sf::FloatRect& boundingBox) const
+bool Level::collidesX(const sf::FloatRect& boundingBox, const DynamicTile* exclude) const
 {
 	// check for collision with level rect
 	if (boundingBox.left < m_levelData.levelRect.left || boundingBox.left + boundingBox.width > m_levelData.levelRect.left + m_levelData.levelRect.width)
@@ -161,10 +161,10 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const
 	}
 
 	// check collidable dynamic tiles
-	for (GameObject *go : *m_dynamicTiles)
+	for (GameObject* go : *m_dynamicTiles)
 	{
-		DynamicTile *tile = dynamic_cast<DynamicTile *>(go);
-		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
+		DynamicTile* tile = dynamic_cast<DynamicTile*>(go);
+		if (tile != nullptr && tile != exclude && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
 		{
 			return true;
 		}
@@ -235,7 +235,7 @@ bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight
 	return false;
 }
 
-bool Level::collidesY(const sf::FloatRect& boundingBox) const
+bool Level::collidesY(const sf::FloatRect& boundingBox, const DynamicTile* exclude) const
 {
 	// check for collision with level rect
 	if (boundingBox.top < m_levelData.levelRect.top || boundingBox.top + boundingBox.height > m_levelData.levelRect.top + m_levelData.levelRect.height)
@@ -282,16 +282,26 @@ bool Level::collidesY(const sf::FloatRect& boundingBox) const
 	}
 
 	// check collidable dynamic tiles
-	for (GameObject *go : *m_dynamicTiles)
+	for (GameObject* go : *m_dynamicTiles)
 	{
-		DynamicTile *tile = dynamic_cast<DynamicTile *>(go);
-		if (tile != nullptr && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
+		DynamicTile* tile = dynamic_cast<DynamicTile*>(go);
+		if (tile != nullptr && tile != exclude && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox))
 		{
 			return true;
 		}
 	}
 
 	return false;
+}
+
+bool Level::collidesY(const sf::FloatRect& boundingBox) const
+{
+	return collidesY(boundingBox, nullptr);
+}
+
+bool Level::collidesX(const sf::FloatRect& boundingBox) const
+{
+	return collidesX(boundingBox, nullptr);
 }
 
 float Level::getGround(const sf::FloatRect& boundingBox) const

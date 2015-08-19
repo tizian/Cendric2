@@ -10,5 +10,6 @@ enum class DynamicTileID
 	Chest,
 	SpikesBottom,
 	SpikesTop,
+	ShiftableBlock,
 	MAX
 };

@@ -11,6 +11,7 @@
 #include "DynamicTiles/SpikesBottomTile.h"
 #include "DynamicTiles/SpikesTopTile.h"
 #include "DynamicTiles/SimulatedWaterTile.h"
+#include "DynamicTiles/ShiftableBlockTile.h"
 
 #include "Enums/DynamicTileID.h"
 #include "Enums/EnemyID.h"
@@ -24,7 +25,7 @@ class LevelLoader
 {
 public:
 	// loads dynamic tiles out of level data and adds them directly to the screen
-	void loadDynamicTiles(LevelData& data, Screen* screen) const;
+	void loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const;
 	// loads level items out of level data and adds them directly to the screen
 	void loadLevelItems(LevelData& data, Screen* screen) const;
 	// loads enemies out of level data and adds them directly to the screen

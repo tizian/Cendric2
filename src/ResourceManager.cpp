@@ -23,7 +23,10 @@ ResourceManager::~ResourceManager()
 void ResourceManager::init()
 {
 	m_levelFileNames.insert(
-		{ LevelID::RatCave, "res/level/ratcave/ratcave.dric" }
+	{
+		{ LevelID::RatCave, "res/level/ratcave/ratcave.dric" },
+		{ LevelID::Testlevel, "res/level/testlevel/testlevel.dric" }
+	}
 	);
 
 	m_mapFileNames.insert(
@@ -52,9 +55,10 @@ void ResourceManager::init()
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/dynamic_tiles/spritesheet_tiles_torch.png" },
 		{ ResourceID::Texture_tile_chest, "res/assets/dynamic_tiles/spritesheet_tiles_chest.png" },
-		{ ResourceID::Texture_tile_spikesbottom, "res/assets/dynamic_tiles/spritesheet_tiles_spikesBottom.png" },
-		{ ResourceID::Texture_tile_spikestop, "res/assets/dynamic_tiles/spritesheet_tiles_spikesTop.png" },
-		{ ResourceID::Texture_tile_frozenwater, "res/assets/dynamic_tiles/spritesheet_tiles_frozenWater.png" },
+		{ ResourceID::Texture_tile_spikesbottom, "res/assets/dynamic_tiles/spritesheet_tiles_spikesbottom.png" },
+		{ ResourceID::Texture_tile_spikestop, "res/assets/dynamic_tiles/spritesheet_tiles_spikestop.png" },
+		{ ResourceID::Texture_tile_frozenwater, "res/assets/dynamic_tiles/spritesheet_tiles_frozenwater.png" },
+		{ ResourceID::Texture_tile_shiftableblock, "res/assets/dynamic_tiles/spritesheet_tiles_shiftableblock.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },

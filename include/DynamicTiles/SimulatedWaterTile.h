@@ -31,7 +31,7 @@ struct WaterColumn
 class SimulatedWaterTile : public DynamicTile
 {
 public:
-	SimulatedWaterTile() : DynamicTile() {}
+	SimulatedWaterTile(Level* level) : DynamicTile(level) {}
 	void init() override;
 	void load(int skinNr) override;
 	void onHit(LevelMovableGameObject* mob) override;

@@ -7,17 +7,19 @@
 
 class Spell;
 class LevelMovableGameObject;
+class Level;
 
 // A dynamic tile in a level
-class DynamicTile : public GameObject
+class DynamicTile : virtual public GameObject
 {
 public:
-	DynamicTile() : GameObject() {}
+	DynamicTile(Level* level);
+	virtual ~DynamicTile() {};
+
 	// loads sprite offset & bounding box. maybe uses skin nr later, too.
 	virtual void init() = 0;
 	// loads the dynamic tile with the specified skin nr
 	virtual void load(int skinNr) = 0;
-	virtual void update(const sf::Time& frameTime) override;
 	// gets called by a spell when it hits the dynamic tile
 	virtual void onHit(Spell* spell) = 0;
 	// gets called by a mob when it hits the dynamic tile. default does nothing
@@ -34,6 +36,7 @@ protected:
 	const int BORDER = 1;
 	sf::Vector2i m_tileSize;
 	bool m_isCollidable;
+	Level* m_level;
 	
 private:	
 	

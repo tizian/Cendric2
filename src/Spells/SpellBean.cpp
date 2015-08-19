@@ -18,6 +18,8 @@ SpellBean SpellBean::getSpellBean(SpellID id)
 		return DEFAULT_FEAR;
 	case SpellID::AntiGravity:
 		return DEFAULT_ANTIGRAVITY;
+	case SpellID::WindGust:
+		return DEFAULT_WINDGUST;
 	default:
 		return EMPTY_SPELL;
 	}

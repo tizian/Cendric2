@@ -79,7 +79,7 @@ void SpellManager::setCurrentSpell(int spellNr)
 	}
 }
 
-SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers)
+SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers) const
 {
 	SpellCreator* creator;
 	switch (bean.id)
@@ -104,6 +104,9 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 		break;
 	case SpellID::AntiGravity:
 		creator = new AntiGravitySpellCreator(bean, m_owner);
+		break;
+	case SpellID::WindGust:
+		creator = new WindGustSpellCreator(bean, m_owner);
 		break;
 	default:
 		return nullptr;

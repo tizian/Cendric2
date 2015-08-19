@@ -9,11 +9,6 @@ void MovableGameObject::update(const sf::Time& frameTime)
 	GameObject::update(frameTime);
 }
 
-void MovableGameObject::checkCollisions(const sf::Vector2f& nextPosition)
-{
-	//nop
-}
-
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const
 {
 	sf::Vector2f position = getPosition();

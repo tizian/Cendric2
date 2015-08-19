@@ -14,6 +14,7 @@
 #include "SpellCreators/ChopSpellCreator.h"
 #include "SpellCreators/FearSpellCreator.h"
 #include "SpellCreators/AntiGravitySpellCreator.h"
+#include "SpellCreators/WindGustSpellCreator.h"
 
 class SpellSelection;
 
@@ -40,8 +41,7 @@ public:
 	void setSpellSelection(SpellSelection* spellSelection);
 	
 private:
-	
-	SpellCreator* getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers);
+	SpellCreator* getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers) const;
 	int m_currentSpell;
 	std::vector<sf::Time> m_coolDownMap;
 	std::vector<SpellCreator*> m_spellMap;
@@ -49,5 +49,4 @@ private:
 
 	// only used by the level main character to show the spells in its interface
 	SpellSelection* m_spellSelection = nullptr;
-
 };

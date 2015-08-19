@@ -3,7 +3,7 @@
 
 #include "DynamicTiles/SimulatedWaterTile.h"
 
-FrozenWaterTile::FrozenWaterTile(SimulatedWaterTile *waterTile, int waterTileIndex) : DynamicTile()
+FrozenWaterTile::FrozenWaterTile(SimulatedWaterTile *waterTile, int waterTileIndex) : DynamicTile(nullptr)
 {
 	m_waterTile = waterTile;
 	m_waterTileIndex = waterTileIndex;

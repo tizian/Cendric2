@@ -16,11 +16,12 @@ class Spell : public MovableGameObject
 {
 public:
 	Spell() : MovableGameObject() {}
+	virtual ~Spell() {}
 
 	// the spell divergence only matters if we have more than one spell. else, the spell divergence will be 0
 	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle);
 	virtual void update(const sf::Time& frameTime) override;
-	void checkCollisions(const sf::Vector2f& nextPosition) override;
+	void checkCollisions(const sf::Vector2f& nextPosition);
 
 	// the offset of the spells start position, as seen from the upper mid of the mobs bounding box. The default is the position of the staff head
 	virtual const sf::Vector2f getConfiguredPositionOffset() const;

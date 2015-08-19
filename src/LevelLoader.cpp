@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
+void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const
 {
 	for (auto& it : data.dynamicTiles)
 	{
@@ -15,26 +15,29 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen) const
 		switch (it.id)
 		{
 		case DynamicTileID::Water:
-			tile = new SimulatedWaterTile();
+			tile = new SimulatedWaterTile(level);
 			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
 			break;
 		case DynamicTileID::Ice:
-			tile = new IceTile();
+			tile = new IceTile(level);
 			break;
 		case DynamicTileID::Crumbly_block:
-			tile = new CrumblyBlockTile();
+			tile = new CrumblyBlockTile(level);
 			break;
 		case DynamicTileID::Torch:
-			tile = new TorchTile();
+			tile = new TorchTile(level);
 			break;
 		case DynamicTileID::Chest:
-			tile = new ChestTile(); 
+			tile = new ChestTile(level); 
 			break;
 		case DynamicTileID::SpikesBottom:
-			tile = new SpikesBottomTile();
+			tile = new SpikesBottomTile(level);
 			break;
 		case DynamicTileID::SpikesTop:
-			tile = new SpikesTopTile();
+			tile = new SpikesTopTile(level);
+			break;
+		case DynamicTileID::ShiftableBlock:
+			tile = new ShiftableBlockTile(level);
 			break;
 		default:
 			// unexpected error

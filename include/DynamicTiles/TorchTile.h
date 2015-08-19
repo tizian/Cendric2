@@ -6,7 +6,7 @@
 class TorchTile : public DynamicTile
 {
 public:
-	TorchTile() : DynamicTile() {}
+	TorchTile(Level* level) : DynamicTile(level) {}
 	void init() override;
 	void load(int skinNr) override;
 	void onHit(Spell* spell) override;

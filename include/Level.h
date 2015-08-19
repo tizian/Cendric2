@@ -38,9 +38,14 @@ public:
 	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const;
 	// calculates if the object would fall deeper than it can jump if it did one more step in the given direction.
 	bool fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize) const;
-	// checks collision with the collidable grid of that level
+	// checks collision with the collidable grid of that level and also the collidable dynamic tiles
+	// if the calling object itself wants to be excluded, it can give itself as an argument here.
+	bool collidesX(const sf::FloatRect& boundingBox, const DynamicTile* exclude) const;
+	bool collidesY(const sf::FloatRect& boundingBox, const DynamicTile* exclude) const;
+
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;
+
 	bool collidesLevelBottom(const sf::FloatRect& boundingBox) const;
 	bool collidesLevelCeiling(const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const;
