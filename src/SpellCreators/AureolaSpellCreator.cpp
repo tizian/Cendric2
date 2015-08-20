@@ -15,7 +15,8 @@ void AureolaSpellCreator::executeSpell(const sf::Vector2f &target)
 	for (int i = 0; i < m_spellBean.count; i++)
 	{
 		AureolaSpell* newSpell = new AureolaSpell();
-		newSpell->load(spellBean, m_owner, target, i  * spellBean.divergenceAngle);
+		spellBean.divergenceAngle = i * m_spellBean.divergenceAngle;
+		newSpell->load(spellBean, m_owner, target);
 		m_screen->addObject(newSpell);
 	}
 

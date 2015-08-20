@@ -111,6 +111,9 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 	case SpellID::Leech:
 		creator = new LeechSpellCreator(bean, m_owner);
 		break;
+	case SpellID::IcyAmbush:
+		creator = new IcyAmbushSpellCreator(bean, m_owner);
+		break;
 	default:
 		return nullptr;
 	}

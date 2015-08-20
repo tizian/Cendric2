@@ -7,7 +7,7 @@ class FearSpell : public Spell
 {
 public:
 	FearSpell(const sf::Time& fearedDuration, int strength);
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
 private:

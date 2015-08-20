@@ -10,7 +10,7 @@ DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell()
 	m_additionalResistance.resistanceLight = additionalResistance;
 }
 
-void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
+void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
 {
 	setSpriteOffset(sf::Vector2f(-12.f, -12.f));
 
@@ -35,7 +35,7 @@ void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob,
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	Spell::load(bean, mob, target, 0);
+	Spell::load(bean, mob, target);
 	m_mob->addAttributes(m_duration, m_additionalResistance);
 	m_mob->addHeal(getHeal());
 }

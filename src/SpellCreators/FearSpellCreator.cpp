@@ -19,7 +19,8 @@ void FearSpellCreator::executeSpell(const sf::Vector2f &target)
 	for (int i = 0; i < m_spellBean.count; i++)
 	{
 		FearSpell* newSpell = new FearSpell(m_fearedDuration, m_strength);
-		newSpell->load(spellBean, m_owner, target, div * sign * spellBean.divergenceAngle);
+		spellBean.divergenceAngle = div * sign * m_spellBean.divergenceAngle;
+		newSpell->load(spellBean, m_owner, target);
 		m_screen->addObject(newSpell);
 		sign = -sign;
 		if (sign == -1)

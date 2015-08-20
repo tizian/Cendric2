@@ -1,13 +1,15 @@
 #include "Spells/WindGustSpell.h"
 
+#define SPELL_OFFSET 10.f
+
 WindGustSpell::WindGustSpell() : Spell()
 {
 }
 
-void WindGustSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
+void WindGustSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
 {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	Spell::load(bean, mob, target, 0);
+	Spell::load(bean, mob, target);
 	loadParticleSystem();
 }
 
@@ -41,13 +43,14 @@ bool WindGustSpell::getConfiguredRotateSprite() const
 
 void WindGustSpell::loadParticleSystem()
 {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
 	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 100.0f / 5.0f;
+	m_ps->emitRate = 500.0f / 5.0f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
-	posGen->center = sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->height / 2);
+	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
+	posGen->center = sf::Vector2f(getPosition().x + SPELL_OFFSET, getPosition().y + getBoundingBox()->height / 2);
+	posGen->size = sf::Vector2f(0.f, getBoundingBox()->height / 2.f);
 	m_pointGenerator = posGen.get();
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
@@ -87,14 +90,14 @@ void WindGustSpell::updateParticleSystemPosition()
 	{
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
-		m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width;
+		m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width - SPELL_OFFSET;
 		m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
 	}
 	else
 	{
 		m_velGenerator->minAngle = 90 + -20.f;
 		m_velGenerator->maxAngle = 90 + 20.f;
-		m_pointGenerator->center.x = getPosition().x;
+		m_pointGenerator->center.x = getPosition().x + SPELL_OFFSET;
 		m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
 	}
 }

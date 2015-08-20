@@ -4,7 +4,7 @@ IceBallSpell::IceBallSpell() : Spell()
 {
 }
 
-void IceBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
+void IceBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 	setBoundingBox(sf::FloatRect(0, 0, 10, 10));
@@ -22,6 +22,6 @@ void IceBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, cons
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	Spell::load(bean, mob, target, divergenceAngle);
+	Spell::load(bean, mob, target);
 }
 

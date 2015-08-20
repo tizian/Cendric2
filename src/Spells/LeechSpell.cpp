@@ -5,7 +5,7 @@ LeechSpell::LeechSpell() : Spell()
 {
 }
 
-void LeechSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
+void LeechSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
@@ -22,7 +22,7 @@ void LeechSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const 
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	Spell::load(bean, mob, target, divergenceAngle);
+	Spell::load(bean, mob, target);
 
 	m_absVel = std::sqrt(getVelocity().x * getVelocity().x + getVelocity().y * getVelocity().y);
 }

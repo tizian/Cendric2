@@ -49,6 +49,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_iceball, "res/assets/spells/spritesheet_spell_iceball.png" },
 		{ ResourceID::Texture_spell_aureola, "res/assets/spells/spritesheet_spell_aureola.png" },
 		{ ResourceID::Texture_spell_fear, "res/assets/spells/spritesheet_spell_fear.png" },
+		{ ResourceID::Texture_spell_icyambush, "res/assets/spells/spritesheet_spell_icyambush.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
@@ -85,7 +86,8 @@ void ResourceManager::init()
 		{ ResourceID::Texture_GUI_spell_color_divine, "res/assets/gui/spell_color_divine.png" },
 		{ ResourceID::Texture_GUI_spell_color_illusion, "res/assets/gui/spell_color_illusion.png" },
 		{ ResourceID::Texture_Particle_circle, "res/assets/particles/circle.png" },
-		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" }
+		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" },
+		{ ResourceID::Texture_Particle_snowflake, "res/assets/particles/snowflake.png" }
 	});
 
 	// font should be always loaded to avoid lags when loading later
@@ -310,6 +312,7 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_spell_divineshield);
 	deleteResource(ResourceID::Texture_spell_aureola);
 	deleteResource(ResourceID::Texture_spell_fear);
+	deleteResource(ResourceID::Texture_spell_icyambush);
 
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
@@ -343,6 +346,7 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_spell_divineshield);
 	getTexture(ResourceID::Texture_spell_aureola);
 	getTexture(ResourceID::Texture_spell_fear);
+	getTexture(ResourceID::Texture_spell_icyambush);
 
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_frozenwater);

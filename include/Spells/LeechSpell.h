@@ -7,7 +7,7 @@ class LeechSpell : public Spell
 {
 public:
 	LeechSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 

@@ -22,6 +22,8 @@ SpellBean SpellBean::getSpellBean(SpellID id)
 		return DEFAULT_WINDGUST;
 	case SpellID::Leech:
 		return DEFAULT_LEECH;
+	case SpellID::IcyAmbush:
+		return DEFAULT_ICYAMBUSH;
 	default:
 		return EMPTY_SPELL;
 	}

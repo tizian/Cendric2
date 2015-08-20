@@ -313,3 +313,31 @@ const struct SpellBean DEFAULT_LEECH =
 
 	Key::VOID
 };
+
+const struct SpellBean DEFAULT_ICYAMBUSH =
+{
+	SpellID::IcyAmbush,
+	SpellType::Twilight,
+	sf::IntRect(200, 50, 50, 50),
+	sf::milliseconds(10000),
+	sf::FloatRect(0, 0, 20, 20),
+	DamageType::Ice,
+
+	100,
+	0,
+	0,
+	200.f,
+	1,
+	sf::seconds(5),
+	70.f,
+
+	0.f,
+	25.f,
+	100,
+	0.f,
+	0,
+	0,
+	sf::seconds(1.f),
+
+	Key::VOID
+};

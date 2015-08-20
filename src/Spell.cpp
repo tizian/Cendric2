@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
+void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
 {
 	m_duration = bean.duration;
 	m_damage = bean.damage;
@@ -13,6 +13,7 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	m_reflectCount = bean.reflectCount;
 	m_speed = bean.startVelocity;
 	m_id = bean.id;
+	m_range = bean.range;
 	setBoundingBox(bean.boundingBox);
 	setDebugBoundingBox(sf::Color::Red);
 
@@ -47,7 +48,7 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	trueDir.x = (len == 0) ? 0 : trueDir.x / len;
 	trueDir.y = (len == 0) ? 0 : trueDir.y / len;
 
-	sf::Vector2f direction = rotateVector(trueDir, divergenceAngle);
+	sf::Vector2f direction = rotateVector(trueDir, bean.divergenceAngle);
 
 	if (getConfiguredRotateSprite())
 	{
@@ -130,7 +131,10 @@ bool Spell::getConfiguredRotateSprite() const
 
 void Spell::setViewable(bool value)
 {
-	if (!value) setDisposed();
+	if (!value)
+	{
+		setDisposed();
+	}
 }
 
 void Spell::checkCollisions(const sf::Vector2f& nextPosition)
@@ -197,6 +201,7 @@ void Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox)
 {
 	for (std::vector<GameObject*>::iterator it = m_enemies->begin(); it != m_enemies->end(); ++it)
 	{
+		if (!(*it)->isViewable()) continue;
 		Enemy* enemy = dynamic_cast<Enemy*>((*it));
 		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox)))
 		{

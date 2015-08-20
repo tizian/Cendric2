@@ -4,9 +4,9 @@ AntiGravitySpell::AntiGravitySpell() : Spell()
 {
 }
 
-void AntiGravitySpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
+void AntiGravitySpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
 {
-	Spell::load(bean, mob, target, 0);
+	Spell::load(bean, mob, target);
 	m_mob->flipGravity();
 }
 

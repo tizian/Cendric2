@@ -16,6 +16,7 @@ gold:0
 equipped.spellslot:6,7,3
 equipped.spellslot:5,2,1,7,1
 equipped.spellslot:13,3,1,5,2
+equipped.spellslot:11
 # equipment:
 equipped.back:it_eq_purpleback
 equipped.body:

@@ -4,7 +4,7 @@ AureolaSpell::AureolaSpell() : Spell()
 {
 }
 
-void AureolaSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle)
+void AureolaSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
@@ -23,7 +23,7 @@ void AureolaSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, cons
 
 	m_rangeLeft = bean.range;
 
-	Spell::load(bean, mob, target, divergenceAngle);
+	Spell::load(bean, mob, target);
 }
 
 void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const

@@ -8,7 +8,7 @@ class AntiGravitySpell : public Spell
 {
 public:
 	AntiGravitySpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 

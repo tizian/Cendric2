@@ -8,7 +8,7 @@ class WindGustSpell : public Spell
 {
 public:
 	WindGustSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
@@ -19,7 +19,7 @@ public:
 private:
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::PointPositionGenerator* m_pointGenerator;
+	particles::BoxPositionGenerator* m_pointGenerator;
 
 	void loadParticleSystem();
 

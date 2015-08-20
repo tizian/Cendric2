@@ -7,7 +7,7 @@ class ChopSpell : public Spell
 {
 public:
 	ChopSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle) override;
+	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredIsAttachedToMob() const override;

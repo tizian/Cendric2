@@ -11,7 +11,7 @@ void ChopSpellCreator::executeSpell(const sf::Vector2f &target)
 	SpellBean spellBean = m_spellBean;
 	updateDamage(spellBean);
 	ChopSpell* newSpell = new ChopSpell();
-	newSpell->load(spellBean, m_owner, target, 0);
+	newSpell->load(spellBean, m_owner, target);
 	m_screen->addObject(newSpell);
 	m_owner->setFightAnimationTime();
 }

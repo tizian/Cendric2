@@ -9,7 +9,7 @@ FireBallSpellCreator::FireBallSpellCreator(const SpellBean& spellBean, LevelMova
 	m_allowedModifiers.push_back(SpellModifierType::Speed);
 }
 
-void FireBallSpellCreator::executeSpell(const sf::Vector2f &target)
+void FireBallSpellCreator::executeSpell(const sf::Vector2f& target)
 {
 	SpellBean spellBean = m_spellBean;
 	updateDamage(spellBean);
@@ -17,8 +17,9 @@ void FireBallSpellCreator::executeSpell(const sf::Vector2f &target)
 	int sign = 1;
 	for (int i = 0; i < m_spellBean.count; i++)
 	{
-		FireBallSpell* newSpell = new FireBallSpell();		
-		newSpell->load(spellBean, m_owner, target, div * sign * spellBean.divergenceAngle);
+		FireBallSpell* newSpell = new FireBallSpell();	
+		spellBean.divergenceAngle = div * sign * m_spellBean.divergenceAngle;
+		newSpell->load(spellBean, m_owner, target);
 		m_screen->addObject(newSpell);
 		sign = -sign;
 		if (sign == -1)

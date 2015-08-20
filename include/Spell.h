@@ -18,8 +18,7 @@ public:
 	Spell() : MovableGameObject() {}
 	virtual ~Spell() {}
 
-	// the spell divergence only matters if we have more than one spell. else, the spell divergence will be 0
-	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target, float divergenceAngle);
+	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target);
 	virtual void update(const sf::Time& frameTime) override;
 	void setViewable(bool value) override;
 	
@@ -56,6 +55,7 @@ protected:
 	DamageType m_damageType;
 	int m_reflectCount;
 	float m_speed;
+	float m_range;
 
 	// enemy list from screen
 	std::vector<GameObject*> *m_enemies; 

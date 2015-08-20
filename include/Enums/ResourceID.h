@@ -18,6 +18,7 @@ enum class ResourceID
 	Texture_spell_divineshield,
 	Texture_spell_aureola,
 	Texture_spell_fear,
+	Texture_spell_icyambush,
 	Texture_tile_ice,
 	Texture_tile_crumblyblock,
 	Texture_tile_torch,
@@ -55,4 +56,5 @@ enum class ResourceID
 	Texture_GUI_spell_color_illusion,
 	Texture_Particle_circle,
 	Texture_Particle_blob,
+	Texture_Particle_snowflake,
 };

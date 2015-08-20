@@ -258,7 +258,7 @@ void LevelMovableGameObject::onHit(Spell* spell)
 	{
 		return;
 	}
-	spell->execOnHit(this);
+	
 	int damage = 0;
 	switch (spell->getDamageType())
 	{
@@ -283,9 +283,11 @@ void LevelMovableGameObject::onHit(Spell* spell)
 		spell->setDisposed();
 		break;
 	default:
-		return;
+		break;
 	}
-	addDamage(damage);
+	spell->execOnHit(this);
+	if (damage > 0)
+		addDamage(damage);
 }
 
 void LevelMovableGameObject::setDead()
