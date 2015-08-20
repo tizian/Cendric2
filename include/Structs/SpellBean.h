@@ -30,7 +30,7 @@ struct SpellBean
 	float divergenceAngle;
 	float rangeModifierAddition;
 	int damageModifierAddition;
-	int speedModifierAddition;
+	float speedModifierAddition;
 	int countModifierAddition;
 	int reflectModifierAddition;
 	sf::Time durationModifierAddition;
@@ -284,4 +284,32 @@ const struct SpellBean DEFAULT_WINDGUST =
 	0,
 	0,
 	sf::seconds(1)
+};
+
+const struct SpellBean DEFAULT_LEECH =
+{
+	SpellID::Leech,
+	SpellType::Necromancy,
+	sf::IntRect(50, 100, 50, 50),
+	sf::milliseconds(3000),
+	sf::FloatRect(0, 0, 10, 10),
+	DamageType::Shadow,
+
+	10,
+	0,
+	0,
+	100.f,
+	1,
+	sf::milliseconds(5000),
+	0.f,
+
+	0.2f,
+	0.f,
+	10,
+	50.f,
+	1,
+	1,
+	sf::Time::Zero,
+
+	Key::VOID
 };

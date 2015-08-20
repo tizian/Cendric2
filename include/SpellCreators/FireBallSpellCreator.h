@@ -9,7 +9,7 @@
 class FireBallSpellCreator : public SpellCreator 
 {
 public:
-	FireBallSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
+	FireBallSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
  
-	void executeSpell(const sf::Vector2f &target) override;
+	void executeSpell(const sf::Vector2f& target) override;
 };

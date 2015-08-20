@@ -108,6 +108,9 @@ SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::ve
 	case SpellID::WindGust:
 		creator = new WindGustSpellCreator(bean, m_owner);
 		break;
+	case SpellID::Leech:
+		creator = new LeechSpellCreator(bean, m_owner);
+		break;
 	default:
 		return nullptr;
 	}

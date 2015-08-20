@@ -20,6 +20,8 @@ SpellBean SpellBean::getSpellBean(SpellID id)
 		return DEFAULT_ANTIGRAVITY;
 	case SpellID::WindGust:
 		return DEFAULT_WINDGUST;
+	case SpellID::Leech:
+		return DEFAULT_LEECH;
 	default:
 		return EMPTY_SPELL;
 	}

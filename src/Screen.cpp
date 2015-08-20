@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define VIEW_MARGIN 200;
+#define VIEW_MARGIN 50;
 
 inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundingBox)
 {

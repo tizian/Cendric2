@@ -15,6 +15,7 @@ gold:0
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:6,7,3
 equipped.spellslot:5,2,1,7,1
+equipped.spellslot:13,3,1,5,2
 # equipment:
 equipped.back:it_eq_purpleback
 equipped.body:
