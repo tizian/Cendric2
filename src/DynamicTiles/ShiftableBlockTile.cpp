@@ -17,7 +17,7 @@ void ShiftableBlockTile::load(int skinNr)
 
 	Animation idleAnimation;
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftableblock));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, m_tileSize.x, m_tileSize.y));
+	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (m_tileSize.x + 2 * BORDER)) , m_tileSize.x, m_tileSize.y));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

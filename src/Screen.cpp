@@ -3,6 +3,26 @@
 
 using namespace std;
 
+#define VIEW_MARGIN 200;
+
+inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundingBox)
+{
+	sf::IntRect view(static_cast<int>(targetView.getCenter().x - targetView.getSize().x / 2),
+		static_cast<int>(targetView.getCenter().y - targetView.getSize().y / 2),
+		static_cast<int>(targetView.getSize().x),
+		static_cast<int>(targetView.getSize().y));
+
+	view.left -= VIEW_MARGIN;
+	view.top -= VIEW_MARGIN;
+	view.width += 2 * VIEW_MARGIN;
+	view.height += 2 * VIEW_MARGIN;
+	if (view.contains(static_cast<int>(boundingBox.left), static_cast<int>(boundingBox.top)))
+		return true;
+	if (view.contains(static_cast<int>(boundingBox.left + static_cast<int>(boundingBox.width)), static_cast<int>(boundingBox.top + boundingBox.height)))
+		return true;
+	return false;
+}
+
 Screen::Screen(CharacterCore* core)
 {
 	m_characterCore = core;
@@ -99,19 +119,22 @@ void Screen::deleteObjects(GameObjectType type)
 	}
 }
 
-void Screen::updateObjects(GameObjectType type, sf::Time frameTime)
+void Screen::updateObjects(GameObjectType type, const sf::Time& frameTime)
 {
-	for (auto &it : m_objects[type])
+	for (auto& it : m_objects[type])
 	{
-		it->update(frameTime);
+		if (it->isViewable())
+			it->update(frameTime);
 	}
 }
 
 void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget)
 {
-	for (auto &it : m_objects[type])
+	for (auto& it : m_objects[type])
 	{
-		it->render(renderTarget);
+		it->setViewable(isInsideView(renderTarget.getView(), *(it->getBoundingBox())));
+		if (it->isViewable())
+			it->render(renderTarget);
 	}
 }
 
@@ -119,7 +142,8 @@ void Screen::renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget&
 {
 	for (auto &it : m_objects[type])
 	{
-		it->renderAfterForeground(renderTarget);
+		if (it->isViewable())
+			it->renderAfterForeground(renderTarget);
 	}
 }
 

@@ -60,7 +60,7 @@ protected:
 	// deletes all objects of type 'type'
 	void deleteObjects(GameObjectType type);
 	// updates all objects of type 'type'
-	void updateObjects(GameObjectType type, sf::Time frameTime);
+	void updateObjects(GameObjectType type, const sf::Time& frameTime);
 	// render all objects of type 'type'
 	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
 	// render all objects after foreground of type 'type'

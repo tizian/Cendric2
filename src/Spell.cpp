@@ -74,15 +74,15 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 		// owner could be dead and looted.
 		return;
 	}
-	sf::Vector2f mainCharPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
+	sf::Vector2f mobPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
 	sf::Vector2f offset = getConfiguredPositionOffset() + m_mob->getConfiguredSpellOffset();
 	if (!m_mob->getIsFacingRight())
 		offset.x = -offset.x - getBoundingBox()->width;
 	if (m_mob->getIsUpsideDown())
-		offset.y = m_mainChar->getBoundingBox()->height - offset.y - getBoundingBox()->height;
+		offset.y = m_mob->getBoundingBox()->height - offset.y - getBoundingBox()->height;
 
-	position.x = (mainCharPosition + offset).x;
-	position.y = (mainCharPosition + offset).y;
+	position.x = (mobPosition + offset).x;
+	position.y = (mobPosition + offset).y;
 }
 
 void Spell::update(const sf::Time& frameTime)
@@ -126,6 +126,11 @@ const sf::Vector2f Spell::getConfiguredPositionOffset() const
 bool Spell::getConfiguredRotateSprite() const
 {
 	return true;
+}
+
+void Spell::setViewable(bool value)
+{
+	if (!value) setDisposed();
 }
 
 void Spell::checkCollisions(const sf::Vector2f& nextPosition)

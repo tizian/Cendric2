@@ -188,6 +188,16 @@ const sf::Vector2f GameObject::getCenter() const
 		m_boundingBox.top + (m_boundingBox.height / 2));
 }
 
+bool GameObject::isViewable() const
+{
+	return m_isViewable;
+}
+
+void GameObject::setViewable(bool value)
+{
+	m_isViewable = value;
+}
+
 const sf::Vector2f& GameObject::getPosition() const
 {
 	return m_position;

@@ -46,6 +46,7 @@ public:
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void setScreen(Screen* screen);
 	void setFrameTime(const sf::Time& time);
+	virtual void setViewable(bool value);
 	// angle is in radian
 	void setRotation(float angle);
 	void playCurrentAnimation(bool play);
@@ -56,6 +57,8 @@ public:
 	const sf::Vector2f& getSpriteOffset() const;
 	const sf::FloatRect* getBoundingBox() const;
 	const sf::Vector2f getCenter() const;
+	// is the object currently visible inside this view + margin?
+	bool isViewable() const;
 	// returns whether the game object should be deleted
 	// if this is set, the game object gets deleted in the next game loop
 	bool isDisposed() const;
@@ -76,6 +79,7 @@ protected:
 	sf::RectangleShape m_debugBox;
 
 	bool m_isDisposed = false;
+	bool m_isViewable = true;
 
 	std::map<GameObjectState, Animation> m_animations;
 	sf::Vector2f m_spriteOffset;
