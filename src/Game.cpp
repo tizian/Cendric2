@@ -1,12 +1,37 @@
 #include "Game.h"
 
-Game::Game() : m_screenManager(new SplashScreen())
+Game::Game() 
 {
 	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
 	//m_mainWindow.setFramerateLimit(g_resourceManager->getMaxFPS());
 	//m_mainWindow.setVerticalSyncEnabled(true);
 	g_inputController->setWindow(&m_mainWindow);
 	m_running = true;
+
+	if (g_resourceManager->getConfiguration().isDebugMode)
+	{
+		CharacterCore* core = new CharacterCore();
+		if (!(core->load(CharacterCore::DEBUGSAVE_LOCATION)))
+		{
+			std::string errormsg = std::string(CharacterCore::DEBUGSAVE_LOCATION) + ": save file corrupted!";
+			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
+			m_screenManager = new ScreenManager(new SplashScreen());
+			delete core;
+		}
+		else
+		{
+			m_screenManager = new ScreenManager(new LoadingScreen(core->getData().currentLevel, core));
+		}
+	}
+	else
+	{
+		m_screenManager = new ScreenManager(new SplashScreen());
+	}
+}
+
+Game::~Game()
+{
+	delete m_screenManager;
 }
 
 void Game::run()
@@ -53,19 +78,19 @@ void Game::run()
 		g_inputController->update();
 
 		// game updates
-		m_screenManager.update(frameTime);
-		if (m_screenManager.getCurrentScreen()->isQuitRequested())
+		m_screenManager->update(frameTime);
+		if (m_screenManager->getCurrentScreen()->isQuitRequested())
 		{
 			m_running = false;
 		}
 		if (g_resourceManager->pollError()->first != ErrorID::Void)
 		{
-			m_screenManager.setErrorScreen();
+			m_screenManager->setErrorScreen();
 		}
 
 		// render
 		m_mainWindow.clear();
-		m_screenManager.render(m_mainWindow);
+		m_screenManager->render(m_mainWindow);
 		if (DEBUG_RENDERING)
 		{
 			showFPSText(m_mainWindow, frameTime.asSeconds());

@@ -19,6 +19,7 @@ struct ConfigurationData
 	// TODO: the alternative key map can't be seen, saved or changed by the user yet.
 	std::map < Key, sf::Keyboard::Key > alternativeKeyMap;
 	bool isQuickcast;
+	bool isDebugMode;
 };
 
 const struct ConfigurationData DEFAULT_CONFIGURATION =
@@ -74,4 +75,5 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 			{ Key::FifthSpell, sf::Keyboard::Numpad5 }
 		}),
 		true,
+		false
 };

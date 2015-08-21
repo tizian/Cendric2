@@ -25,4 +25,6 @@ private:
 	std::string writeMainInputMap(const ConfigurationData& data) const;
 	std::string writeAlternativeInputMap(const ConfigurationData& data) const;
 	std::string writeMaxFPS(const ConfigurationData& data) const;
+
+	std::string writeDebugModeOn(const ConfigurationData& data) const;
 };

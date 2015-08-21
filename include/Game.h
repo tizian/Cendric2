@@ -13,13 +13,14 @@ class Game
 {
 public:
 	Game();
+	~Game();
 
 	void run();
 
 private:
 	bool m_running;
 	sf::RenderWindow m_mainWindow;
-	ScreenManager m_screenManager;
+	ScreenManager* m_screenManager = nullptr;
 
 	// debug operations
 	std::list<float> m_fpsList;

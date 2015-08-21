@@ -53,6 +53,11 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(QUICKCAST_ON));
 				noError = readQuickcastOn(line, data);
 			}
+			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0)
+			{
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGMODE_ON));
+				noError = readDebugOn(line, data);
+			}
 			else
 			{
 				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file.");
@@ -186,6 +191,19 @@ bool ConfigurationReader::readQuickcastOn(const std::string& line, Configuration
 	}
 	bool quickcastOn = (atoi(line.substr(colon + 1).c_str()) != 0);
 	data.isQuickcast = quickcastOn;
+	return true;
+}
+
+bool ConfigurationReader::readDebugOn(const std::string& line, ConfigurationData& data) const
+{
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1)
+	{
+		g_logger->logError("ConfigurationReader", "No colon found after debug on tag or no value after colon.");
+		return false;
+	}
+	bool debugOn = (atoi(line.substr(colon + 1).c_str()) != 0);
+	data.isDebugMode = debugOn;
 	return true;
 }
 
