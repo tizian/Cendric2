@@ -1,5 +1,7 @@
 #include "FileIO/CharacterCoreReader.h"
 
+#include <cstring>
+
 using namespace std;
 
 bool CharacterCoreReader::checkData(CharacterCoreData& data) const

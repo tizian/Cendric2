@@ -2,7 +2,12 @@
 #include "FileIO/CharacterCoreReader.h"
 
 #include <sstream>
-#include <dirent.h>
+
+#ifdef _WIN32
+	#include "dirent/dirent.h"
+#else
+	#include <dirent.h>
+#endif
 
 using namespace std;
 

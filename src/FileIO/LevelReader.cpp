@@ -1,5 +1,7 @@
 #include "FileIO/LevelReader.h"
 
+#include <cstring>
+
 using namespace std;
 
 LevelReader::LevelReader()

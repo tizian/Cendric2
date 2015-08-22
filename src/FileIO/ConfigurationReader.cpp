@@ -1,6 +1,8 @@
 #include "FileIO/ConfigurationReader.h"
 #include "ResourceManager.h"
 
+#include <cstring>
+
 using namespace std;
 
 bool ConfigurationReader::readConfiguration(ConfigurationData& data) const

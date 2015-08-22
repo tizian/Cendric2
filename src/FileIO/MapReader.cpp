@@ -1,5 +1,7 @@
 #include "FileIO/MapReader.h"
 
+#include <cstring>
+
 using namespace std;
 
 MapReader::MapReader()
