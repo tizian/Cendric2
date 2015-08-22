@@ -55,6 +55,9 @@ public:
 	// getter for core part
 	const CharacterCoreData& getData() const;
 
+	static const char* QUICKSAVE_LOCATION;
+	static const char* DEBUGSAVE_LOCATION;
+
 private:
 	// clears equipped itemvector
 	void clearEquippedItems();

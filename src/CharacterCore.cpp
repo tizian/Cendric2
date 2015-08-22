@@ -3,7 +3,8 @@
 
 using namespace std;
 
-const char* QUICKSAVE_LOCATION = "saves/quicksave.sav";
+const char* CharacterCore::QUICKSAVE_LOCATION = "saves/quicksave.sav";
+const char* CharacterCore::DEBUGSAVE_LOCATION = "saves/debug.sav";
 
 CharacterCore::CharacterCore()
 {

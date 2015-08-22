@@ -16,6 +16,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeMaxFPS(data);
+		configuration << writeDebugModeOn(data);
 
 		configuration.close();
 	}
@@ -51,6 +52,13 @@ std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data)
 {
 	string quickcastOn = "# 0 means quickcast off, 1 means quickcast on\n";
 	return quickcastOn.append(string(QUICKCAST_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeDebugModeOn(const ConfigurationData& data) const
+{
+	string quickcastOn = "# 0 means debug mode is off, 1 means debug mode on\n";
+	quickcastOn += "# if the debug mode is on, the game will try to load a savegame 'debug.sav' directly into its level.\n";
+	return quickcastOn.append(string(DEBUGMODE_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeSoundVolume(const ConfigurationData& data) const

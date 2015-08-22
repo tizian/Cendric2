@@ -7,7 +7,6 @@
 class ScreenManager
 {
 public:
-	ScreenManager();
 	ScreenManager(Screen* initialScreen);
 	~ScreenManager();
 

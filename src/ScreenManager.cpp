@@ -1,9 +1,5 @@
 #include "ScreenManager.h"
 
-ScreenManager::ScreenManager() 
-{
-}
-
 ScreenManager::ScreenManager(Screen *initialScreen) : m_isErrorScreen(false)
 {
 	m_currentScreen = initialScreen;

@@ -26,9 +26,8 @@ void ResourceManager::init()
 	{
 		{ LevelID::RatCave, "res/level/ratcave/ratcave.dric" },
 		{ LevelID::Testlevel, "res/level/testlevel/testlevel.dric" }
-	}
-	);
-
+	});
+	
 	m_mapFileNames.insert(
 		{ MapID::Firstmap, "res/map/firstmap/firstmap.dricmap" }
 	);
@@ -92,8 +91,6 @@ void ResourceManager::init()
 
 	// font should be always loaded to avoid lags when loading later
 	getBitmapFont(ResourceID::BitmapFont_default);	
-
-
 
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration))
