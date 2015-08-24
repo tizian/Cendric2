@@ -33,7 +33,7 @@ void SpellSelection::update(const sf::Time& frametime)
 		m_spellSlots[i].update(frametime);
 		if (m_spellSlots[i].isClicked())
 		{
-			m_spellManager->setCurrentSpell(i);
+			m_spellManager->setAndExecuteSpell(i);
 		}
 	}
 }

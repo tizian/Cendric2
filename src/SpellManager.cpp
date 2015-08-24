@@ -57,10 +57,19 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target)
 void SpellManager::update(sf::Time frameTime)
 {
 	// update cooldown map
-	for (auto &it : m_coolDownMap) {
+	for (auto& it : m_coolDownMap) {
 		if (it.asMilliseconds() == 0) continue;
 		it -= frameTime;
 		if (it.asMilliseconds() < 0) it = sf::Time::Zero;
+	}
+}
+
+void SpellManager::setAndExecuteSpell(int spellNr)
+{
+	setCurrentSpell(spellNr);
+	if (!(m_spellMap.at(m_currentSpell)->getSpellBean().needsTarget) && m_currentSpell == spellNr)
+	{
+		executeCurrentSpell(sf::Vector2f());
 	}
 }
 

@@ -11,7 +11,6 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;
-	bool getConfiguredIsAttachedToMob() const override;
 	bool getConfiguredRotateSprite() const override;
 
 private:

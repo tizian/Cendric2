@@ -60,11 +60,6 @@ const sf::Vector2f DivineShieldSpell::getConfiguredPositionOffset() const
 	return sf::Vector2f(-49.f, 0.f);
 }
 
-bool DivineShieldSpell::getConfiguredIsAttachedToMob() const
-{
-	return true;
-}
-
 bool DivineShieldSpell::getConfiguredRotateSprite() const
 {
 	return false;

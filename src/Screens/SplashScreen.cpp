@@ -17,13 +17,13 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	addObject(fireBasket1);
 	addObject(fireBasket2);
 
-	SpellSlot *slotInactive = new SpellSlot(DEFAULT_FIREBALL, false);
+	SpellSlot *slotInactive = new SpellSlot(SpellBean::getSpellBean(SpellID::FireBall), true);
 	slotInactive->setPosition(sf::Vector2f(200, 100));
 	addObject(slotInactive);
 
-	SpellSlot *slotActive = new SpellSlot(DEFAULT_FIREBALL, true);
+	SpellSlot *slotActive = new SpellSlot(SpellBean::getSpellBean(SpellID::FireBall), true);
 	slotActive->setPosition(sf::Vector2f(400, 100));
-	slotActive->playAnimation(DEFAULT_FIREBALL.cooldown);
+	slotActive->playAnimation(SpellBean::getSpellBean(SpellID::FireBall).cooldown);
 	addObject(slotActive);
 
 	// Particle System Test

@@ -87,6 +87,5 @@ protected:
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 
-private:
 	bool m_isDrawBoundingBox = false;
 };

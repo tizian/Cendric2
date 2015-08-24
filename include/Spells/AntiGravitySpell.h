@@ -13,7 +13,6 @@ public:
 	void render(sf::RenderTarget& target) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;
-	bool getConfiguredIsAttachedToMob() const override;
 	bool getConfiguredRotateSprite() const override;
 
 private:

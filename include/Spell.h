@@ -26,9 +26,6 @@ public:
 
 	// the offset of the spells start position, as seen from the upper mid of the mobs bounding box. The default is the position of the staff head
 	virtual const sf::Vector2f getConfiguredPositionOffset() const;
-	// returns whether the spell is bound to the main character and will update its position according to the mob. default is false.
-	// if this value is set to true, the velocity of a spell has no influence anymore.
-	virtual bool getConfiguredIsAttachedToMob() const;
 	// if true, the spell sprite will be rotated accordingly. default is true.
 	virtual bool getConfiguredRotateSprite() const;
 	int getDamage() const;
@@ -56,6 +53,7 @@ protected:
 	int m_reflectCount;
 	float m_speed;
 	float m_range;
+	bool m_needsTarget;
 
 	// enemy list from screen
 	std::vector<GameObject*> *m_enemies; 

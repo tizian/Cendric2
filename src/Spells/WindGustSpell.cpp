@@ -31,11 +31,6 @@ const sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const
 	return sf::Vector2f(10.f, 20.f);
 }
 
-bool WindGustSpell::getConfiguredIsAttachedToMob() const
-{
-	return true;
-}
-
 bool WindGustSpell::getConfiguredRotateSprite() const
 {
 	return false;

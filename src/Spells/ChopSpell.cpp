@@ -15,11 +15,6 @@ const sf::Vector2f ChopSpell::getConfiguredPositionOffset() const
 	return sf::Vector2f(10.f, 0.f);
 }
 
-bool ChopSpell::getConfiguredIsAttachedToMob() const
-{
-	return true;
-}
-
 bool ChopSpell::getConfiguredRotateSprite() const
 {
 	return false;

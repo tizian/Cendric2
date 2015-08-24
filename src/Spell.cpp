@@ -14,6 +14,7 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	m_speed = bean.startVelocity;
 	m_id = bean.id;
 	m_range = bean.range;
+	m_needsTarget = bean.needsTarget;
 	setBoundingBox(bean.boundingBox);
 	setDebugBoundingBox(sf::Color::Red);
 
@@ -34,9 +35,8 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	calculatePositionAccordingToMob(absolutePosition);
 	setPosition(absolutePosition);
 	
-	
-	// if the spell is attached to the main char, velocity is ignored 
-	if (getConfiguredIsAttachedToMob())
+	// if the spell doesn't need a target, it is attached to main char and velocity is ignored 
+	if (!bean.needsTarget)
 	{
 		setVelocity(sf::Vector2f(0, 0));
 		return;
@@ -56,11 +56,6 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	}
 
 	setVelocity(m_speed * direction);
-}
-
-bool Spell::getConfiguredIsAttachedToMob() const
-{
-	return false;
 }
 
 void Spell::execOnHit(LevelMovableGameObject *target)
@@ -88,7 +83,7 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const
 
 void Spell::update(const sf::Time& frameTime)
 {
-	if (getConfiguredIsAttachedToMob())
+	if (!m_needsTarget)
 	{
 		calculatePositionAccordingToMob(m_nextPosition);
 		setPosition(m_nextPosition);

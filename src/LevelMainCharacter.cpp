@@ -19,9 +19,15 @@ void LevelMainCharacter::handleAttackInput()
 	for (auto const &it : m_spellKeyMap) {
 		if (g_inputController->isKeyJustPressed(it.first))
 		{
-			m_spellManager->setCurrentSpell(it.second);
 			if (m_isQuickcast)
+			{
+				m_spellManager->setCurrentSpell(it.second);
 				m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
+			}
+			else
+			{
+				m_spellManager->setAndExecuteSpell(it.second);
+			}
 		}
 	}
 
@@ -64,7 +70,7 @@ void LevelMainCharacter::loadWeapon()
 	if (m_core == nullptr || m_core->getWeapon() == nullptr)
 	{
 		g_logger->logWarning("LevelMainCharacter::loadWeapon", "character core is not set or weapon not found.");
-		m_spellManager->addSpell(DEFAULT_CHOP);
+		m_spellManager->addSpell(SpellBean::getSpellBean(SpellID::Chop));
 		return;
 	}
 	const Weapon* weapon = m_core->getWeapon();
@@ -79,7 +85,7 @@ void LevelMainCharacter::loadWeapon()
 	m_spellManager->clearSpells();
 
 	// handle chop spell
-	SpellBean chop = DEFAULT_CHOP;
+	SpellBean chop = SpellBean::getSpellBean(SpellID::Chop);
 	chop.boundingBox = weapon->getWeaponChopRect();
 	chop.cooldown = weapon->getWeaponCooldown();
 	chop.damage = weapon->getWeaponChopDamage();

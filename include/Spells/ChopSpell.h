@@ -10,7 +10,6 @@ public:
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;
-	bool getConfiguredIsAttachedToMob() const override;
 	bool getConfiguredRotateSprite() const override;
 
 private:
