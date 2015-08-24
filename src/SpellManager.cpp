@@ -67,6 +67,7 @@ void SpellManager::update(sf::Time frameTime)
 void SpellManager::setAndExecuteSpell(int spellNr)
 {
 	setCurrentSpell(spellNr);
+	if (m_currentSpell == -1) return;
 	if (!(m_spellMap.at(m_currentSpell)->getSpellBean().needsTarget) && m_currentSpell == spellNr)
 	{
 		executeCurrentSpell(sf::Vector2f());
