@@ -5,6 +5,8 @@ void LevelItem::load(LevelMainCharacter* mainChar, const ItemBean& bean, const s
 {
 	m_mainChar = mainChar;
 	m_itemID = bean.id;
+	m_itemType = bean.type;
+	m_goldValue = bean.goldValue;
 
 	Animation idleAnimation;
 	setSpriteOffset(bean.spriteOffset);

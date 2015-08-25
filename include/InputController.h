@@ -27,13 +27,13 @@ public:
 
 	bool isKeyActive(Key key);
 	bool isKeyJustPressed(Key key);
-	bool isMouseOver(const sf::FloatRect* boundingBox) const;
-	bool isLeftClicked(const sf::FloatRect* boundingBox) const;
-	bool isRightClicked(const sf::FloatRect* boundingBox) const;
-	bool isLeftPressed(const sf::FloatRect* boundingBox) const;
-	bool isRightPressed(const sf::FloatRect* boundingBox) const;
-	bool isLeftJustPressed(const sf::FloatRect* boundingBox) const;
-	bool isRightJustPressed(const sf::FloatRect* boundingBox) const;
+	bool isMouseOver(const sf::FloatRect* boundingBox, bool useDefaultView) const;
+	bool isLeftClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const;
+	bool isRightClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const;
+	bool isLeftPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const;
+	bool isRightPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const;
+	bool isLeftJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const;
+	bool isRightJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const;
 	
 	bool isMousePressedLeft() const;
 	bool isMousePressedRight() const;

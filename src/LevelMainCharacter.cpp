@@ -1,4 +1,5 @@
 #include "LevelMainCharacter.h"
+#include "Screens/LevelScreen.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level)
 {
@@ -226,16 +227,19 @@ GameObjectType LevelMainCharacter::getConfiguredType() const
 
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const
 {
-	std::map<std::string, int>* coreItems = m_core->getItems();
-	auto it = coreItems->find(item);
-
-	if (it != coreItems->end())
+	m_core->addItem(item, quantity);
+	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
 	{
-		coreItems->at(item) = coreItems->at(item) + quantity;
+		levelScreen->reloadInventory();
 	}
-	else
+}
+
+void LevelMainCharacter::removeItems(const std::string& item, int quantity) const
+{
+	m_core->removeItem(item, quantity);
+	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
 	{
-		coreItems->insert({item, quantity});
+		levelScreen->reloadInventory();
 	}
 }
 
@@ -250,4 +254,17 @@ void LevelMainCharacter::lootItems(std::map<std::string, int>& items) const
 void LevelMainCharacter::addGold(int gold) const
 {
 	m_core->addGold(gold);
+	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
+	{
+		levelScreen->reloadInventory();
+	}
+}
+
+void LevelMainCharacter::removeGold(int gold) const
+{
+	m_core->removeGold(gold);
+	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
+	{
+		levelScreen->reloadInventory();
+	}
 }

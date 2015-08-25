@@ -48,6 +48,12 @@ public:
 	std::map<std::string, int>* getItems();
 	// add gold to the data
 	void addGold(int gold);
+	// remove gold from the data
+	void removeGold(int gold);
+	// adds item(s) to the data
+	void addItem(const std::string& item, int quantity);
+	// removes item(s) to the data
+	void removeItem(const std::string& item, int quantity);
 	// save the position and map id
 	void setMap(const sf::Vector2f& position, MapID map);
 	// save the position and level id

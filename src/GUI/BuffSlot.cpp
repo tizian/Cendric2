@@ -22,7 +22,7 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	switch (type)
 	{
 	case BuffType::Food:
-		m_outerRing.setFillColor(CENDRIC_COLOR_BLACK);
+		m_outerRing.setFillColor(sf::Color::Green);
 		texture = g_resourceManager->getTexture(ResourceID::Texture_items);
 		break;
 	case BuffType::Spell:

@@ -70,9 +70,29 @@ void Window::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_ornamentLayer);
 }
 
-sf::Vector2f Window::getSize() const
+const sf::Vector2f& Window::getSize() const
 {
 	return m_size;
+}
+
+void Window::setHeight(float height)
+{
+	if (height < 0.f) return;
+	m_size.y = height;
+	m_boundingBox.height = height;
+	m_backLayer.setSize(m_size.x, m_size.y);
+	m_mainLayer.setSize(m_size.x, m_size.y);
+	m_ornamentLayer.setSize(m_size.x, m_size.y);
+}
+
+void Window::setWidth(float width)
+{
+	if (width < 0.f) return;
+	m_size.x = width;
+	m_boundingBox.width = width;
+	m_backLayer.setSize(m_size.x, m_size.y);
+	m_mainLayer.setSize(m_size.x, m_size.y);
+	m_ornamentLayer.setSize(m_size.x, m_size.y);
 }
 
 GameObjectType Window::getConfiguredType() const

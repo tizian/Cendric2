@@ -114,39 +114,39 @@ const sf::Vector2f& InputController::getDefaultViewMousePosition() const
 	return m_defaultViewMousePosition;
 }
 
-bool InputController::isMouseOver(const sf::FloatRect* boundingBox) const
+bool InputController::isMouseOver(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	return boundingBox->contains(getMousePosition());
+	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition());
 }
 
-bool InputController::isRightClicked(const sf::FloatRect* boundingBox) const
+bool InputController::isRightClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	return boundingBox->contains(getMousePosition()) && isMouseClickedRight();
+	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseClickedRight();
 }
 
-bool InputController::isLeftClicked(const sf::FloatRect* boundingBox) const
+bool InputController::isLeftClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	return boundingBox->contains(getMousePosition()) && isMouseClickedLeft();
+	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseClickedLeft();
 }
 
-bool InputController::isRightPressed(const sf::FloatRect* boundingBox) const
+bool InputController::isRightPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	return boundingBox->contains(getMousePosition()) && isMousePressedRight();
+	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMousePressedRight();
 }
 
-bool InputController::isLeftPressed(const sf::FloatRect* boundingBox) const
+bool InputController::isLeftPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	return boundingBox->contains(getMousePosition()) && isMousePressedLeft();
+	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMousePressedLeft();
 }
 
-bool InputController::isRightJustPressed(const sf::FloatRect* boundingBox) const
+bool InputController::isRightJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	return boundingBox->contains(getMousePosition()) && isMouseJustPressedRight();
+	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseJustPressedRight();
 }
 
-bool InputController::isLeftJustPressed(const sf::FloatRect* boundingBox) const
+bool InputController::isLeftJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	return boundingBox->contains(getMousePosition()) && isMouseJustPressedLeft();
+	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseJustPressedLeft();
 }
 
 bool InputController::isMouseClickedLeft() const

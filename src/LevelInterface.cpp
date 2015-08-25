@@ -2,7 +2,7 @@
 #include "LevelMainCharacter.h"
 
 LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) :
-    m_inventory(core),  m_characterInfo(character), m_healthBar(character->getAttributes())
+    m_inventory(core, character, this),  m_characterInfo(character), m_healthBar(character->getAttributes())
 {
 }
 
@@ -30,13 +30,21 @@ void LevelInterface::update(const sf::Time& frameTime)
 	m_healthBar.update();
 	m_buffBar.update(frameTime);
 	m_spellSelection->update(frameTime);
-	updateInventory();
+	updateInventory(frameTime);
 	updateCharacterInfo();
 }
 
 void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration)
 {
 	m_buffBar.addSlot(type, textureLocation, duration);
+}
+
+void LevelInterface::reloadInventory()
+{
+	if (m_inventory.isVisible())
+	{
+		m_inventory.reload();
+	}
 }
 
 void LevelInterface::updateCharacterInfo()
@@ -60,7 +68,7 @@ void LevelInterface::updateCharacterInfo()
 	}
 }
 
-void LevelInterface::updateInventory()
+void LevelInterface::updateInventory(const sf::Time& frameTime)
 {
 	if (g_inputController->isKeyJustPressed(Key::Inventory))
 	{
@@ -82,7 +90,7 @@ void LevelInterface::updateInventory()
 
 	if (m_showInventory)
 	{
-		m_inventory.update();
+		m_inventory.update(frameTime);
 	}
 }
 

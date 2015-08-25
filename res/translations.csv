@@ -128,3 +128,13 @@ QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du di
 SavegameDeleted;Save game successfully deleted;Speicherstand erfolgreich gelöscht;Speicherstand isch glöscht
 OperationFailed;Operation failed;Operation fehlgeschlagen;Die Operation isch id Hose
 Quickcast;Quickcast;Schnellzaubern;Schnellzaubere
+MaxHealthPoints;Max. Health;Max. Lebensenergie;Max. Lebensenergie
+HealthRegenerationPerS;Health Regeneration / s;Lebensregeneration / s;Lebensregeneration / s
+Critical;Critical;Kritisch;Kritisch
+Duration;Duration;Dauer;Duur
+GoldValue;Gold Value;Goldwert;Goldwert
+QuestItems;Quest Items;Questgegenstände;Questgegeständ
+Miscellaneous;Miscellaneous;Plunder;Grümpel
+Documents;Documents;Schriftstücke;Dokument
+Consumables;Consumables;Tränke und Nahrung;Tränk und Ässe
+Equipment;Equipment;Ausrüstung;Usrüstig

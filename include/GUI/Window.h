@@ -23,7 +23,9 @@ public:
 
 	virtual void render(sf::RenderTarget& renderTarget) override;
 
-	sf::Vector2f getSize() const;
+	void setHeight(float height);
+	void setWidth(float width);
+	const sf::Vector2f& getSize() const;
 	virtual void setPosition(const sf::Vector2f& position) override;
 
 	GameObjectType getConfiguredType() const override;

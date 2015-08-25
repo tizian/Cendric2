@@ -27,6 +27,7 @@ public:
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
+	void setPosition(const sf::Vector2f& pos) override;
 
 	// position will be set automatically as the center of the button.
 	// setting text using the text provider (translated)
@@ -41,12 +42,17 @@ public:
 	void setEnabled(bool enabled);
 	void setCharacterSize(int size);
 	void setTextColor(const sf::Color& color);
+	void setBackgroundLayerColor(const sf::Color& color);
+	void setMainLayerColor(const sf::Color& color);
+	void setOrnamentLayerColor(const sf::Color& color);
+	void setMouseOverColor(const sf::Color& color);
 
 	bool isClicked() const;
 	bool isEnabled() const;
 	GameObjectType getConfiguredType() const override;
 
-private:
+protected:
+	bool m_isMouseOver = false;
 	bool m_isPressed = false;
 	bool m_isClicked = false;
 	bool m_isEnabled = true;
@@ -58,6 +64,11 @@ private:
 	SlicedSprite m_mainLayer;
 	SlicedSprite m_backLayer;
 	SlicedSprite m_ornamentLayer;
+
+	sf::Color m_backLayerColor = CENDRIC_COLOR_LIGHT_PURPLE;
+	sf::Color m_mainLayerColor = CENDRIC_COLOR_BLACK;
+	sf::Color m_ornamentLayerColor = CENDRIC_COLOR_WHITE;
+	sf::Color m_mouseOverColor = CENDRIC_COLOR_PURPLE;
 
 	BitmapText m_text;
 };

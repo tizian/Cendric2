@@ -22,6 +22,8 @@ BitmapText::BitmapText()
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_color = sf::Color::White;
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
+	m_characterSize = m_font->getGlyphSize().y;
+	m_lineSpacing = 0.5f;
 }
 
 BitmapText::BitmapText(const sf::String &string, const BitmapFont &font)

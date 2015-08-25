@@ -38,3 +38,8 @@ const AttributeBean& Item::getAttributes() const
 {
 	return m_bean.attributes;
 }
+
+const ItemBean& Item::getBean() const
+{
+	return m_bean;
+}

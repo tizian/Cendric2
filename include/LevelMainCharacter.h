@@ -22,6 +22,8 @@ public:
 	void lootItem(const std::string& item, int quantity) const;
 	void lootItems(std::map<std::string, int>& items) const;
 	void addGold(int gold) const;
+	void removeGold(int gold) const;
+	void removeItems(const std::string& item, int quantity) const;
 
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

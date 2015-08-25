@@ -18,6 +18,7 @@ public:
 	const AttributeBean& getAttributes() const;
 	// the items gold value
 	int getValue() const;
+	const ItemBean& getBean() const;
 
 protected:
 	ItemBean m_bean;

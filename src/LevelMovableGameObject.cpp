@@ -213,7 +213,7 @@ void LevelMovableGameObject::updateAnimation()
 	}
 }
 
-void LevelMovableGameObject::addAttributes(sf::Time& duration, AttributeBean& attributes)
+void LevelMovableGameObject::addAttributes(const sf::Time& duration, const AttributeBean& attributes)
 {
 	m_attributes.addBean(attributes);
 	m_buffAttributes.push_back(std::pair<sf::Time, AttributeBean>(duration, attributes));
@@ -362,7 +362,7 @@ const AttributeBean* LevelMovableGameObject::getAttributes() const
 	return &m_attributes;
 }
 
-void LevelMovableGameObject::consumeFood(sf::Time& duration, AttributeBean& attributes)
+void LevelMovableGameObject::consumeFood(const sf::Time& duration, const AttributeBean& attributes)
 {
 	if (m_foodAttributes.first > sf::Time::Zero)
 	{

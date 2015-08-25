@@ -40,6 +40,7 @@ void SlicedSprite::setSize(float width, float height)
 {
 	m_width = width;
 	m_height = height;
+	init();
 }
 
 void SlicedSprite::setTexture(sf::Texture *texture)
@@ -82,7 +83,7 @@ void SlicedSprite::init()
 	m_vertices.clear();
 
 	if (m_leftSlice + m_rightSlice > m_width || m_topSlice + m_bottomSlice > m_height) {
-		g_logger->logError("SlicedSprite::init()", "Slicing doesn't agree with width and height!");
+		g_logger->logWarning("SlicedSprite::init()", "Slicing doesn't agree with width and height!");
 		return;
 	}
 

@@ -25,6 +25,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	// be aware that the position here is the center of the spell slot. 
 	void setPosition(const sf::Vector2f& pos) override;
+	void onLeftJustPressed() override;
 
 	// asks if it is clicked and sets the member bool to false again (!)
 	bool isClicked();

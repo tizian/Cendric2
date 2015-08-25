@@ -8,6 +8,7 @@ SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
 {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2 * RADIUS, 2 * RADIUS));
 	setDebugBoundingBox(sf::Color::Red);
+	setInputInDefaultView(true);
 	m_spellType = spellBean.spellType;
 
 	m_color = CENDRIC_COLOR_GREY;
@@ -250,13 +251,13 @@ void SpellSlot::update(const sf::Time& frameTime)
 			
 		}
 	}
+	GameObject::update(frameTime);
+}
 
-	// check for left click, in default view
-	if (m_boundingBox.contains(g_inputController->getDefaultViewMousePosition()) && g_inputController->isMousePressedLeft())
-	{
-		m_isClicked = true;
-		g_inputController->lockAction();
-	}
+void SpellSlot::onLeftJustPressed()
+{
+	m_isClicked = true;
+	g_inputController->lockAction();
 }
 
 GameObjectType SpellSlot::getConfiguredType() const

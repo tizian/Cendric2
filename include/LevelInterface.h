@@ -26,6 +26,8 @@ public:
 
 	// used to add buffs to the buff bar
 	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
+	// reloads the inventory if it is visible
+	void reloadInventory();
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
@@ -34,7 +36,7 @@ private:
 	// <<< INVENTORY >>>
 	Inventory m_inventory;
 	bool m_showInventory = false;
-	void updateInventory();
+	void updateInventory(const sf::Time& frameTime);
 
 	// <<< CHARCTER INFO >>>
 	CharacterInfo m_characterInfo;

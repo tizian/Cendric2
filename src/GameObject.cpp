@@ -46,12 +46,8 @@ void GameObject::setDebugBoundingBox(const sf::Color &debugColor)
 void GameObject::update(const sf::Time& frameTime)
 {
 	m_animatedSprite.update(frameTime);
-	if (DEBUG_RENDERING && m_isDrawBoundingBox)
-	{
-		m_debugBox.setPosition(getPosition());
-	}
-
-	if (g_inputController->isMouseOver(&m_boundingBox))
+	
+	if (g_inputController->isMouseOver(&m_boundingBox, m_isInputInDefaultView))
 	{
 		onMouseOver();
 		// if the inputcontroller has locked actions, skip these methods.
@@ -61,19 +57,19 @@ void GameObject::update(const sf::Time& frameTime)
 		{
 			onInteractKey();
 		}
-		else if (g_inputController->isRightClicked(&m_boundingBox))
+		else if (g_inputController->isRightClicked(&m_boundingBox, m_isInputInDefaultView))
 		{
 			onRightClick();
 		}
-		else if (g_inputController->isRightJustPressed(&m_boundingBox))
+		else if (g_inputController->isRightJustPressed(&m_boundingBox, m_isInputInDefaultView))
 		{
 				onRightJustPressed();
 		}
-		else if (g_inputController->isLeftClicked(&m_boundingBox))
+		else if (g_inputController->isLeftClicked(&m_boundingBox, m_isInputInDefaultView))
 		{
 			onLeftClick();
 		}
-		else if (g_inputController->isLeftJustPressed(&m_boundingBox))
+		else if (g_inputController->isLeftJustPressed(&m_boundingBox, m_isInputInDefaultView))
 		{
 			onLeftJustPressed();
 		}
@@ -89,6 +85,10 @@ void GameObject::setPosition(const sf::Vector2f &position)
 	sf::Vector2f spriteCenter(sf::Vector2f(m_boundingBox.width / 2, m_boundingBox.height / 2) - m_spriteOffset);
 	m_animatedSprite.setOrigin(spriteCenter);
 	m_animatedSprite.setPosition(position + m_spriteOffset + spriteCenter);
+	if (DEBUG_RENDERING && m_isDrawBoundingBox)
+	{
+		m_debugBox.setPosition(position);
+	}
 }
 
 void GameObject::setPositionX(const float posX)
@@ -196,6 +196,11 @@ bool GameObject::isViewable() const
 void GameObject::setViewable(bool value)
 {
 	m_isViewable = value;
+}
+
+void GameObject::setInputInDefaultView(bool value)
+{
+	m_isInputInDefaultView = value;
 }
 
 const sf::Vector2f& GameObject::getPosition() const

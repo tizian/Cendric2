@@ -46,6 +46,7 @@ public:
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void setScreen(Screen* screen);
 	void setFrameTime(const sf::Time& time);
+	void setInputInDefaultView(bool value);
 	virtual void setViewable(bool value);
 	// angle is in radian
 	void setRotation(float angle);
@@ -88,4 +89,5 @@ protected:
 	sf::Vector2f m_position;
 
 	bool m_isDrawBoundingBox = false;
+	bool m_isInputInDefaultView = false;
 };

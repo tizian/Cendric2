@@ -22,6 +22,8 @@ public:
 	void execOnExit(const Screen* nextScreen) override;
 
 	void addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const;
+	// reloads the inventory if it is visible
+	void reloadInventory();
 
 private:
 	Level m_currentLevel;

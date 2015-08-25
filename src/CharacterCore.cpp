@@ -261,6 +261,39 @@ void CharacterCore::addGold(int gold)
 	m_data.gold += std::max(gold, 0);
 }
 
+void CharacterCore::removeGold(int gold)
+{
+	m_data.gold -= std::min(m_data.gold, gold);
+}
+
+void CharacterCore::addItem(const std::string& item, int quantity)
+{
+	auto it = m_data.items.find(item);
+
+	if (it != m_data.items.end())
+	{
+		m_data.items.at(item) = m_data.items.at(item) + quantity;
+	}
+	else
+	{
+		m_data.items.insert({ item, quantity });
+	}
+}
+
+void CharacterCore::removeItem(const std::string& item, int quantity)
+{
+	auto it = m_data.items.find(item);
+
+	if (it != m_data.items.end())
+	{
+		m_data.items.at(item) = m_data.items.at(item) - quantity;
+		if (m_data.items.at(item) <= 0)
+		{
+			m_data.items.erase(item);
+		}
+	}
+}
+
 void CharacterCore::setMap(const sf::Vector2f& position, MapID map)
 {
 	m_data.currentMap = map;

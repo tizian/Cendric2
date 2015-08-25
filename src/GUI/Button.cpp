@@ -7,18 +7,15 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 	// using default values for constructor.
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
-	m_positionDefault = sf::Vector2f(box.left, box.top);
-	setPosition(m_positionDefault);
+	setInputInDefaultView(true);
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), sf::Color::Black, box.width, box.height);
-	m_mainLayer.setPosition(m_positionDefault);
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_mainLayerColor, box.width, box.height);
 
-	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_LIGHT_PURPLE, box.width, box.height);
+	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backLayerColor, box.width, box.height);
 	m_backLayerOffset = sf::Vector2f(0, 2);
-	m_backLayer.setPosition(m_positionDefault + m_backLayerOffset);
 
 	if (style == ButtonOrnamentStyle::NONE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), sf::Color::White, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_ornamentLayerColor, box.width, box.height);
 	}
 	else if (style == ButtonOrnamentStyle::SMALL) {
 		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), sf::Color::White, box.width, box.height);
@@ -30,7 +27,8 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), sf::Color::White, box.width, box.height);
 	}
 
-	m_ornamentLayer.setPosition(m_positionDefault);
+	m_positionDefault = sf::Vector2f(box.left, box.top);
+	setPosition(m_positionDefault);
 }
 
 void Button::onLeftClick()
@@ -40,7 +38,8 @@ void Button::onLeftClick()
 		m_isClicked = true;
 		m_isPressed = false;
 		m_mainLayer.move(0, 1);
-		m_mainLayer.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+		m_ornamentLayer.move(0, 1);
+		m_mainLayer.setColor(m_backLayerColor);
 		g_inputController->lockAction();
 	}
 }
@@ -51,47 +50,55 @@ void Button::onLeftJustPressed()
 	{
 		m_isPressed = true;
 		m_mainLayer.move(0, 1);
-		m_mainLayer.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+		m_ornamentLayer.move(0, 1);
+		m_mainLayer.setColor(m_backLayerColor);
 		g_inputController->lockAction();
 	}
 }
 
 void Button::onMouseOver()
 {
+	m_isMouseOver = true;
 	if (m_isEnabled && !m_isPressed)
 	{
-		m_mainLayer.setColor(CENDRIC_COLOR_PURPLE);
+		m_mainLayer.setColor(m_mouseOverColor);
 	}
 }
 
 void Button::render(sf::RenderTarget& renderTarget)
 {
-	m_ornamentLayer.setPosition(m_mainLayer.getPosition());
-	m_text.setPosition(m_mainLayer.getPosition() + m_textOffset);
-	
 	renderTarget.draw(m_backLayer);
 	renderTarget.draw(m_mainLayer);
 	renderTarget.draw(m_ornamentLayer);
 	renderTarget.draw(m_text);
 }
 
+void Button::setPosition(const sf::Vector2f& pos)
+{
+	GameObject::setPosition(pos);
+	m_mainLayer.setPosition(pos);
+	m_backLayer.setPosition(pos + m_backLayerOffset);
+	m_ornamentLayer.setPosition(pos);
+	m_text.setPosition(pos + m_textOffset);
+	m_positionDefault = pos;
+}
+
 void Button::update(const sf::Time& frameTime)
 {
 	m_isClicked = false;
-	if (!g_inputController->isMouseOver(getBoundingBox()))
+	if (m_isMouseOver && !(g_inputController->isMouseOver(getBoundingBox(), true)))
 	{
 		m_isPressed = false;
-		m_mainLayer.setPosition(m_positionDefault);
-		m_mainLayer.setColor(sf::Color::Black);
+		m_isMouseOver = false;
+		m_mainLayer.setColor(m_mainLayerColor);
+		setPosition(m_positionDefault);
 	}
 	GameObject::update(frameTime);
 }
 
 void Button::setText(const std::string& text, const sf::Color& color, int charSize)
 {
-	m_text = BitmapText(
-		g_textProvider->getText(text),
-		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
+	m_text = BitmapText(g_textProvider->getText(text));
 	
 	m_text.setColor(color);
 	m_text.setCharacterSize(charSize);
@@ -99,6 +106,7 @@ void Button::setText(const std::string& text, const sf::Color& color, int charSi
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
 	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f , 0.f);
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
+	setPosition(m_positionDefault);
 }
 
 void Button::setText(const std::string& text)
@@ -113,9 +121,7 @@ void Button::setText(const std::string& text, int charSize)
 
 void Button::setTextRaw(const std::string& text, const sf::Color& color, int charSize)
 {
-	m_text = BitmapText(
-		text,
-		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
+	m_text = BitmapText(text);
 
 	m_text.setColor(color);
 	m_text.setCharacterSize(charSize);
@@ -143,9 +149,32 @@ void Button::setCharacterSize(int size)
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
 }
 
+void Button::setBackgroundLayerColor(const sf::Color& color)
+{
+	m_backLayer.setColor(color);
+	m_backLayerColor = color;
+}
+
 void Button::setTextColor(const sf::Color& color)
 {
 	m_text.setColor(color);
+}
+
+void Button::setMouseOverColor(const sf::Color& color)
+{
+	m_mouseOverColor = color;
+}
+
+void Button::setMainLayerColor(const sf::Color& color)
+{
+	m_mainLayer.setColor(color);
+	m_mainLayerColor = color;
+}
+
+void Button::setOrnamentLayerColor(const sf::Color& color)
+{
+	m_ornamentLayer.setColor(color);
+	m_ornamentLayerColor = color;
 }
 
 void Button::setEnabled(bool enabled)

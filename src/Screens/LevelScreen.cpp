@@ -39,6 +39,11 @@ void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLo
 	m_interface->addBuff(type, textureLocation, duration);
 }
 
+void LevelScreen::reloadInventory()
+{
+	m_interface->reloadInventory();
+}
+
 Screen* LevelScreen::update(const sf::Time& frameTime)
 {
 	// handle game over

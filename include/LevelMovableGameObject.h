@@ -31,9 +31,9 @@ public:
 	// sets the fight animation time of this mob
 	void setFightAnimationTime();
 	// the mob consumes a food and gets its bonus attributes for its duration. they may also be negative.
-	void consumeFood(sf::Time& duration, AttributeBean& attributes);
+	void consumeFood(const sf::Time& duration, const AttributeBean& attributes);
 	// the mob adds these attributes to its own. if their time runs out, they get removed again. The attribute "current health" however will stay.
-	void addAttributes(sf::Time& duration, AttributeBean& attributes);
+	void addAttributes(const sf::Time& duration, const AttributeBean& attributes);
 	// gravity flip (used for anti gravity spell)
 	void flipGravity();
 

@@ -1,64 +1,264 @@
 #include "GUI/Inventory.h"
+#include "LevelMainCharacter.h"
+#include "LevelInterface.h"
 
-Inventory::Inventory(CharacterCore* core)
+Inventory::Inventory(CharacterCore* core, LevelMainCharacter* character, LevelInterface* interface)
 {
 	m_core = core;
+	m_character = character;
+	m_interface = interface;
 
 	// init window
 	sf::FloatRect box(INVENTORY_LEFT, INVENTORY_TOP, INVENTORY_WIDTH, INVENTORY_HEIGHT);
-	sf::Color mainColor = sf::Color(50, 50, 50, 100);
-	sf::Color backColor = sf::Color::Transparent;
-	m_window = new Window(box, WindowOrnamentStyle::LARGE, mainColor, backColor, CENDRIC_COLOR_PURPLE);
+	m_window = new Window(box, 
+		WindowOrnamentStyle::LARGE, 
+		CENDRIC_COLOR_TRANS_BLACK, // main
+		sf::Color::Transparent, // back
+		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
 
 	// init text
-	m_inventoryText = BitmapText("");
-	m_inventoryText.setPosition(sf::Vector2f(INVENTORY_LEFT + TEXT_OFFSET, INVENTORY_TOP + TEXT_OFFSET));
-	m_inventoryText.setColor(sf::Color::White);
-	m_inventoryText.setCharacterSize(12);
+	m_selectedTabText.setPosition(sf::Vector2f(INVENTORY_LEFT + TEXT_OFFSET, INVENTORY_TOP + TEXT_OFFSET));
+	m_selectedTabText.setColor(sf::Color::White);
+	m_selectedTabText.setCharacterSize(CHARACTER_SIZE);
+
+	m_goldText.setPosition(sf::Vector2f(INVENTORY_LEFT + TEXT_OFFSET, INVENTORY_TOP + INVENTORY_HEIGHT - TEXT_OFFSET - CHARACTER_SIZE));
+	m_goldText.setColor(sf::Color::White);
+	m_goldText.setCharacterSize(CHARACTER_SIZE);
+
+	// fill the helper map
+	m_typeMap.insert({
+		{ ItemType::Consumable, &m_consumableItems },
+		{ ItemType::Misc, &m_miscItems },
+		{ ItemType::Document, &m_documentItems },
+		{ ItemType::Quest, &m_questItems },
+		{ ItemType::Equipment_back, &m_equipmentItems },
+		{ ItemType::Equipment_body, &m_equipmentItems },
+		{ ItemType::Equipment_head, &m_equipmentItems },
+		{ ItemType::Equipment_neck, &m_equipmentItems },
+		{ ItemType::Equipment_ring_1, &m_equipmentItems },
+		{ ItemType::Equipment_ring_2, &m_equipmentItems },
+		{ ItemType::Equipment_weapon, &m_equipmentItems },
+	});
+
+	// init buttons
+	TexturedButton button = TexturedButton(sf::FloatRect(0, 0, BUTTON_SIZE.x, BUTTON_SIZE.y));
+	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Equipment_weapon));
+	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Consumable));
+	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Document));
+	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Quest));
+	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Misc));
+
+	int textureOffset = 0;
+	float xOffset = INVENTORY_LEFT + TEXT_OFFSET;
+	float yOffset = INVENTORY_TOP + TEXT_OFFSET + CHARACTER_SIZE + 2 * MARGIN;
+	float buttonMargin = (INVENTORY_WIDTH - 5 * BUTTON_SIZE.x - 2 * TEXT_OFFSET) / 4.f;
+
+	for (auto& it : m_tabs)
+	{
+		it.first.setTexture(g_resourceManager->getTexture(ResourceID::Texture_inventorytabs), sf::IntRect(textureOffset, 0, 60, 35));
+		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
+		it.first.setBackgroundLayerColor(sf::Color::Transparent);
+		it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
+		it.first.setOrnamentLayerColor(CENDRIC_COLOR_DARK_PURPLE);
+		it.first.setMouseOverColor(CENDRIC_COLOR_LIGHT_PURPLE);
+		xOffset += BUTTON_SIZE.x + buttonMargin;
+		textureOffset += 60;
+	}
+
+	selectTab(ItemType::Consumable);
 }
 
 Inventory::~Inventory()
 {
 	delete m_window;
+	delete m_descriptionWindow;
+	clearAllSlots();
 }
 
-void Inventory::update()
+void Inventory::clearAllSlots()
 {
-	if (m_isVisible)
+	m_consumableItems.clear();
+	m_equipmentItems.clear();
+	m_questItems.clear();
+	m_documentItems.clear();
+	m_questItems.clear();
+	m_selectedSlot = nullptr;
+}
+
+void Inventory::update(const sf::Time& frameTime)
+{
+	if (!m_isVisible) return;
+
+	// check whether an item was selected
+	for (auto& it : *(m_typeMap[m_currentTab]))
 	{
-		// TODO: check whether an item is selected
+		it.update(frameTime);
+		if (it.isClicked() && m_selectedSlot != &it)
+		{
+			if (m_selectedSlot != nullptr)
+			{
+				m_selectedSlot->deselect();
+			}
+			m_selectedSlot = &it;
+			it.select();
+			showDescription(it);
+			return;
+		}
+		if (it.isConsumed())
+		{
+			m_character->consumeFood(
+				it.getItem().getBean().foodDuration,
+				it.getItem().getAttributes());
+			m_interface->addBuff(BuffType::Food, 
+				sf::IntRect(it.getItem().getIconTextureLocation().x, it.getItem().getIconTextureLocation().y, 50, 50),
+				it.getItem().getBean().foodDuration);
+			m_core->removeItem(it.getItem().getID(), 1);
+			reload();
+			break;
+		}
+	}
+
+	for (auto& it : m_tabs)
+	{
+		it.first.update(frameTime);
+		if (it.first.isClicked() && m_currentTab != it.second)
+		{
+			selectTab(it.second);
+			return;
+		}
 	}
 }
 
-void Inventory::render(sf::RenderTarget& target) const
+bool Inventory::isVisible() const
 {
-	if (m_isVisible)
+	return m_isVisible;
+}
+
+void Inventory::render(sf::RenderTarget& target)
+{
+	if (!m_isVisible) return;
+
+	m_window->render(target);
+	target.draw(m_goldText);
+	target.draw(m_selectedTabText);
+	for (auto& it : *(m_typeMap[m_currentTab]))
 	{
-		m_window->render(target);
-		target.draw(m_inventoryText);
+		it.render(target);
+		// it.renderAfterForeground(target); // uncomment for debug box
 	}
+
+	for (auto& it : m_tabs)
+	{
+		it.first.render(target);
+	}
+
+	if (m_descriptionWindow != nullptr)
+	{
+		m_descriptionWindow->render(target);
+	}
+}
+
+void Inventory::showDescription(const InventorySlot& slot)
+{
+	delete m_descriptionWindow;
+	m_descriptionWindow = new InventoryDescriptionWindow(slot.getItem());
+	m_descriptionWindow->setPosition(sf::Vector2f(
+		m_window->getPosition().x + MARGIN + m_window->getSize().x,
+		m_window->getPosition().y));
+}
+
+void Inventory::hideDescription()
+{
+	delete m_descriptionWindow;
+	m_descriptionWindow = nullptr;
+}
+
+void Inventory::selectTab(ItemType type)
+{
+	hideDescription();
+	if (m_selectedSlot != nullptr)
+	{
+		m_selectedSlot->deselect();
+		m_selectedSlot = nullptr;
+	}
+	m_currentTab = type;
+	switch (type)
+	{
+	case ItemType::Equipment_weapon:
+		m_selectedTabText.setString(g_textProvider->getText("Equipment"));
+		break;
+	case ItemType::Consumable:
+		m_selectedTabText.setString(g_textProvider->getText("Consumables"));
+		break;
+	case ItemType::Document:
+		m_selectedTabText.setString(g_textProvider->getText("Documents"));
+		break;
+	case ItemType::Quest:
+		m_selectedTabText.setString(g_textProvider->getText("QuestItems"));
+		break;
+	case ItemType::Misc:
+		m_selectedTabText.setString(g_textProvider->getText("Miscellaneous"));
+		break;
+	default:
+		break;
+	}
+	// center text
+	m_selectedTabText.setPosition(
+		m_window->getPosition().x + 
+		INVENTORY_WIDTH / 2 - 
+		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
 }
 
 void Inventory::reload()
 {
-	// update text
-	std::wstring inventoryText = L"";
-	inventoryText.append(g_textProvider->getText("Inventory"));
-	inventoryText.append(L"\n\n");
-	inventoryText.append(g_textProvider->getText("Gold"));
-	inventoryText.append(L": ");
-	inventoryText.append(std::to_wstring(m_core->getData().gold));
-	inventoryText.append(L"\n\n");
-	// reload
+	// reload gold
+	std::wstring gold = L"";
+	gold.append(g_textProvider->getText("Gold"));
+	gold.append(L": ");
+	gold.append(std::to_wstring(m_core->getData().gold));
+	gold.append(L"\n\n");
+	m_goldText.setString(gold);
+	
+	// reload items
+	clearAllSlots();
+	hideDescription();
 	m_core->loadItems();
-	for (auto it : m_core->getData().items)
+	for (auto& it : m_core->getData().items)
 	{
-		inventoryText.append(g_textProvider->getText(m_core->getItem(it.first).getID()));
-		inventoryText.append(L": ");
-		inventoryText.append(std::to_wstring(it.second));
-		inventoryText.append(L"\n");
+		const Item& item = m_core->getItem(it.first);
+		if (m_typeMap[item.getType()] == nullptr) continue;
+		m_typeMap[item.getType()]->push_back(InventorySlot(item, it.second));
 	}
-	m_inventoryText.setString(inventoryText);
+
+	calculateSlotPositions(m_consumableItems);
+	calculateSlotPositions(m_equipmentItems);
+	calculateSlotPositions(m_questItems);
+	calculateSlotPositions(m_documentItems);
+	calculateSlotPositions(m_questItems);
+}
+
+void Inventory::calculateSlotPositions(std::vector<InventorySlot>& slots)
+{
+	float yOffset = INVENTORY_TOP + 2 * TEXT_OFFSET + CHARACTER_SIZE + 2 * MARGIN + BUTTON_SIZE.y;
+	float xOffset = INVENTORY_LEFT + TEXT_OFFSET;
+	int y = 1;
+	int x = 1;
+	for (auto& it : slots)
+	{
+		it.setPosition(sf::Vector2f(xOffset, yOffset));
+		if (x + 1 > SLOT_COUNT_X)
+		{
+			x = 1;
+			xOffset = INVENTORY_LEFT + TEXT_OFFSET;
+			y++;
+			yOffset += MARGIN + 2 * InventorySlot::MARGIN + InventorySlot::SIDE_LENGTH;
+		}
+		else
+		{
+			x++;
+			xOffset += MARGIN + 2 * InventorySlot::MARGIN + InventorySlot::SIDE_LENGTH;
+		}
+	}
 }
 
 void Inventory::show()
