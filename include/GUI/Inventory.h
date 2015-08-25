@@ -70,7 +70,7 @@ private:
 
 	const float TEXT_OFFSET = 20.f;
 	const float MARGIN = 7.f;
-	const float INVENTORY_TOP = 50.f;
+	const float INVENTORY_TOP = 100.f;
 	const float INVENTORY_LEFT = 50.f;
 	const float INVENTORY_HEIGHT = 
 		3 * TEXT_OFFSET + 

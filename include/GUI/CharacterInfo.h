@@ -29,7 +29,7 @@ private:
 	BitmapText m_characterInfoText;
 
 	const float TEXT_OFFSET = 20.f;
-	const float CHARACTERINFO_TOP = 50.f;
+	const float CHARACTERINFO_TOP = 100.f;
 	const float CHARACTERINFO_LEFT = 50.f;
 	const float CHARACTERINFO_HEIGHT = 500.f;
 	const float CHARACTERINFO_WIDTH = 700.f;

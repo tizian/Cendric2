@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const float SpellSlot::RADIUS = 40.f;
+const float SpellSlot::RADIUS = 35.f;
 
 SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
 {

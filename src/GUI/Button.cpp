@@ -49,6 +49,8 @@ void Button::onLeftJustPressed()
 	if (m_isEnabled)
 	{
 		m_isPressed = true;
+		m_mainLayer.setPosition(m_positionDefault);
+		m_ornamentLayer.setPosition(m_positionDefault);
 		m_mainLayer.move(0, 1);
 		m_ornamentLayer.move(0, 1);
 		m_mainLayer.setColor(m_backLayerColor);

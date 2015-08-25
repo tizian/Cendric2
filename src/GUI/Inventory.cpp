@@ -207,6 +207,18 @@ void Inventory::selectTab(ItemType type)
 		m_window->getPosition().x + 
 		INVENTORY_WIDTH / 2 - 
 		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
+	// color selected tab
+	for (auto& it : m_tabs)
+	{
+		if (it.second == m_currentTab)
+		{
+			it.first.setMainLayerColor(CENDRIC_COLOR_LIGHT_GREY);
+		}
+		else
+		{
+			it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
+		}
+	}
 }
 
 void Inventory::reload()
