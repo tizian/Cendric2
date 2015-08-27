@@ -348,4 +348,6 @@ void Inventory::hide()
 	m_equipment->hide();
 	delete m_currentClone;
 	m_currentClone = nullptr;
+	m_isDragging = false;
+	m_hasDraggingStarted = false;
 }
