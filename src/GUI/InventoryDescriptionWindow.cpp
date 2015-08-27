@@ -31,7 +31,7 @@ InventoryDescriptionWindow::InventoryDescriptionWindow(const Item& item) : Windo
 	stats.append(getAttributeText("IceDamage", attr.damageIce));
 	stats.append(getAttributeText("LightDamage", attr.damageLight));
 	stats.append(getAttributeText("ShadowDamage", attr.damageShadow));
-	stats.append(getAttributeText("PhysicalResistance", attr.resistancePhysical));
+	stats.append(getAttributeText("Armor", attr.resistancePhysical));
 	stats.append(getAttributeText("FireResistance", attr.resistanceFire));
 	stats.append(getAttributeText("IceResistance", attr.resistanceIce));
 	stats.append(getAttributeText("LightResistance", attr.resistanceLight));

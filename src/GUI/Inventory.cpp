@@ -2,11 +2,11 @@
 #include "LevelMainCharacter.h"
 #include "LevelInterface.h"
 
-Inventory::Inventory(CharacterCore* core, LevelMainCharacter* character, LevelInterface* interface)
+Inventory::Inventory(CharacterCore* core, LevelMainCharacter* character, LevelInterface* _interface)
 {
 	m_core = core;
 	m_character = character;
-	m_interface = interface;
+	m_interface = _interface;
 
 	// init window
 	sf::FloatRect box(INVENTORY_LEFT, INVENTORY_TOP, INVENTORY_WIDTH, INVENTORY_HEIGHT);
@@ -66,12 +66,15 @@ Inventory::Inventory(CharacterCore* core, LevelMainCharacter* character, LevelIn
 	}
 
 	selectTab(ItemType::Consumable);
+
+	m_equipment = new InventoryEquipment(m_core);
 }
 
 Inventory::~Inventory()
 {
 	delete m_window;
 	delete m_descriptionWindow;
+	delete m_equipment;
 	clearAllSlots();
 }
 
@@ -127,6 +130,21 @@ void Inventory::update(const sf::Time& frameTime)
 			return;
 		}
 	}
+
+	// update equipment part
+	m_equipment->update(frameTime);
+
+	InventorySlot* slot = m_equipment->getSelectedSlot();
+	if (slot != nullptr)
+	{
+		if (m_selectedSlot != nullptr)
+		{
+			m_selectedSlot->deselect();
+		}
+		m_selectedSlot = slot;
+		m_selectedSlot->select();
+		showDescription(*m_selectedSlot);
+	}
 }
 
 bool Inventory::isVisible() const
@@ -156,6 +174,8 @@ void Inventory::render(sf::RenderTarget& target)
 	{
 		m_descriptionWindow->render(target);
 	}
+
+	m_equipment->render(target);
 }
 
 void Inventory::showDescription(const InventorySlot& slot)
@@ -247,6 +267,9 @@ void Inventory::reload()
 	calculateSlotPositions(m_questItems);
 	calculateSlotPositions(m_documentItems);
 	calculateSlotPositions(m_questItems);
+
+	// reload equipment
+	m_equipment->reload();
 }
 
 void Inventory::calculateSlotPositions(std::vector<InventorySlot>& slots)
@@ -276,10 +299,11 @@ void Inventory::calculateSlotPositions(std::vector<InventorySlot>& slots)
 void Inventory::show()
 {
 	m_isVisible = true;
-	reload();
+	m_equipment->show();
 }
 
 void Inventory::hide()
 {
 	m_isVisible = false;
+	m_equipment->hide();
 }

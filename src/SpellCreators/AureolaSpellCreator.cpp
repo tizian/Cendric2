@@ -26,5 +26,5 @@ void AureolaSpellCreator::executeSpell(const sf::Vector2f &target)
 void AureolaSpellCreator::addCountModifier(int level)
 {
 	m_spellBean.count += m_spellBean.countModifierAddition * level;
-	m_spellBean.divergenceAngle = 2 * PI_F / m_spellBean.count;
+	m_spellBean.divergenceAngle = 2 * M_PI / m_spellBean.count;
 }

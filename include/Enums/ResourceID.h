@@ -44,6 +44,7 @@ enum class ResourceID
 	Texture_npcs,
 	Texture_dialogue,
 	Texture_inventorytabs,
+	Texture_equipmentplaceholders,
 	Texture_GUI_rounded_rectangle,
 	Texture_GUI_ornament_none,
 	Texture_GUI_ornament_small,

@@ -8,6 +8,7 @@
 #include "GUI/InventorySlot.h"
 #include "GUI/InventoryDescriptionWindow.h"
 #include "GUI/TexturedButton.h"
+#include "GUI/InventoryEquipment.h"
 
 class LevelMainCharacter;
 class LevelInterface;
@@ -18,7 +19,7 @@ class LevelInterface;
 class Inventory
 {
 public:
-	Inventory(CharacterCore* core, LevelMainCharacter* character, LevelInterface* interface);
+	Inventory(CharacterCore* core, LevelMainCharacter* character, LevelInterface* _interface);
 	~Inventory();
 
 	void show();
@@ -63,6 +64,8 @@ private:
 	void showDescription(const InventorySlot& slot);
 	void hideDescription();
 
+	InventoryEquipment* m_equipment = nullptr;
+
 	const int SLOT_COUNT_X = 5;
 	const int SLOT_COUNT_Y = 5;
 	const int CHARACTER_SIZE = 12;
@@ -70,8 +73,8 @@ private:
 
 	const float TEXT_OFFSET = 20.f;
 	const float MARGIN = 7.f;
-	const float INVENTORY_TOP = 100.f;
-	const float INVENTORY_LEFT = 50.f;
+	const float INVENTORY_TOP = InventoryEquipment::TOP;
+	const float INVENTORY_LEFT = InventoryEquipment::LEFT + MARGIN + InventoryEquipment::WIDTH;
 	const float INVENTORY_HEIGHT = 
 		3 * TEXT_OFFSET + 
 		2 * CHARACTER_SIZE + 

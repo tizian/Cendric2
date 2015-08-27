@@ -2,10 +2,12 @@ Apply;Apply;Anwenden;Awende
 Armor;Armour;Rüstung;Rüstig
 Back;Back;Zurück;Zrugg
 BackToMenu;Back to menu;Zurück zum Menu;Zrugg zum Menu
+Cancel;Cancel;Abbrechen;Abbreche
 CharacterInfo;Character Info;Charakter Info;Charakter Info
 Chop;Chop;Hauen;Haue
 ConfigurationSaved;Configuration was saved. A new start of the game is needed so all changes apply.;Einstellungen wurden gespeichert. Das Spiel muss neugestartet werden um alle Änderungen zu übernehmen.;Iistellige sind gspeicheret. Es brucht aber en Neustart vom Game damit alli Änderige würksam werded.
 Confirm;Confirm;Bestätigen;Bestätige
+Consumables;Consumables;Tränke und Nahrung;Tränk und Ässe
 CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering
 Credits;Credits;Mitwirkende;Erschaffer
 CreditsText;"Cendric Font:
@@ -15,14 +17,19 @@ too many text on one line yay way to many text this needs to be cropped so hard 
 too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
    Tizian
 too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword."
+Critical;Critical;Kritisch;Kritisch
 CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
+Delete;Delete;Löschen;Lösche
 DL_Cendric_Okay;Okay, I will do that.;Okay, das mache ich.;Okay, dännhalt.
 DL_Choice_GiveMeAQuest;Give me a quest.;Gib mir eine Aufgabe.;Gib mer was zum mache.
 DL_Choice_Nothing;None of your business.;Geht dich nichts an.;Gaht dich en füechte Dreck ah.
 DL_Guard_Hello;Hey you, stop! What are you doing here, so very alone? It's dangerous out here.;Hey du, stopp! Was machst du hier, so alleine? Es ist gefährlich hier draussen.;Hey du, stop! Was machsch du da? Es isch gföhrlich, so elei go umelaufe.
 DL_Guard_KillSomeRats;Okay, go and kill some rats for me.;Okay, dann geh und töte ein paar Ratten für mich.;Okay, dänn gang und kill es paar Ratte für mich.
 DL_Guard_KillThemAlready;You haven't killed those rats! Go and do your job.;Die Ratten leben noch! Geh jetzt und erledige das.;Du hesch die Ratte nanig killt! Gang ez und mach da.
+Documents;Documents;Schriftstücke;Dokument
+Duration;Duration;Dauer;Duur
 English;English;Englisch;Englisch
+Equipment;Equipment;Ausrüstung;Usrüstig
 Exit;Exit;Beenden;Beende
 FifthSpell;5. Spell;5. Zauber;5. Zauber
 FireDamage;Fire Damage;Feuerschaden;Füürschade
@@ -32,9 +39,11 @@ FourthSpell;4. Spell ;4. Zauber;4. Zauber
 GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
 German;German;Deutsch;Düütsch
 Gold;Gold;Gold;Gold
+GoldValue;Gold Value;Goldwert;Goldwert
 Haste;Haste;Schnelligkeit;Schnelligkeit
 Health;Health;Lebensenergie;Lebe
 HealthRegeneration;Health Regeneration;Lebensregeneration;Lebensregeneration
+HealthRegenerationPerS;Health Regeneration / s;Lebensregeneration / s;Lebensregeneration / s
 Hello;Hello;Hallo;Hoi
 IceDamage;Ice Damage;Eisschaden;Iisschade
 IceResistance;Ice Resistance;Eisresistenz;Iisresistenz
@@ -42,6 +51,7 @@ Interact;Interact;Interagieren;Interagiere
 Inventory;Inventory;Inventar;Inventar
 it_eq_ringoflesserhealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
 it_eq_wizardhatblue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
+it_eq_purpleback;Purple cape;Violetter Umhang;Violette Umhang
 it_eq_wizardhatgrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
 it_fo_bread;Bread;Brot;Brot
 it_fo_caveberry;Cave berries;Höhlenbeeren;Höhlebeeri
@@ -53,6 +63,7 @@ it_go_onecoin;Golden coin;Goldmünze;Goldmünze
 it_go_threecoins;A few coins;Ein paar Münzen;Es paar Münze
 it_mi_goldengoblet;Golden goblet;Goldener Pokal;Goldige Pokal
 it_qe_letter;Sealed Letter;Versiegelter Brief;Versiglete Brief
+it_we_rustysword;Rusty sword;Rostiges Schwert;Rostigs Schwert
 it_we_icestaf;Ice staff;Eisstab;Iisstab
 itd_bread;An ordinary loaf of bread.;Ein einfaches Brot.;Es Brot halt.
 itd_caveberry;Sweet;Süss;Süess
@@ -65,6 +76,7 @@ itd_letter;Sealed;Versiegelt;Versiglet
 itd_ringoflesserhealth;The small ruby sparkles;Der kleine Rubin funkelt;De chli Rubin funklet 
 itd_rustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
 itd_water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
+itd_purpleback;Ugly cape for testing. Needs some shading. Won't appear in the final version.;Hässlicher Umhang, nur für Testing. Wird vermutlich nicht in dem Endgame auftauchen und wird entfernt.;Boaey we chame nur sonen hässliche Umhang designe, gaht ja gar nid. Schomal was vo Schatte und so ghört? Alteeeee
 itd_wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
 Journal;Journal;Tagebuch;Tagebuech
 Jump;Jump;Springen;Springe
@@ -76,6 +88,9 @@ LoadGame;Load Game;Spiel laden;Spiel lade
 Mana;Mana;Mana;Mana
 ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration
 MaxFPS;Max. FPS;Max. FPS;Max. FPS
+MaxHealthPoints;Max. Health;Max. Lebensenergie;Max. Lebensenergie
+MessageNewSaveGame;Please enter the name for your new save game (at most 24 characters);Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen);Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)
+Miscellaneous;Miscellaneous;Plunder;Grümpel
 MoveDown;Move down;Nach unten bewegen;Abelaufe
 MoveLeft;Move left;Nach links laufen;Links laufe
 MoveRight;Move right;Nach rechts bewegen;Rechts laufe
@@ -86,11 +101,14 @@ No;No;Nein;Nai
 NoQuicksaveExists;No quick save exists;Kein Schnelllade-Speicherstand existiert;Kein Schnelllade-Speicherstand existiert
 NPC_Guard;Kingsguard;Wache des Königs;Wächter vom König
 Off;Off;Aus;Uus
+Okay;Okay;Okay;Okee
 On;On;An;Ii
+OperationFailed;Operation failed;Operation fehlgeschlagen;Die Operation isch id Hose
 Options;Options;Einstellungen;Iistellige
 OutOfRange;Out of range;Ich muss näher ran;Da isch z'wiit weg
 PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
 PressAnyKey;<?>;<?>;<?>
+QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du diesen Speicherstand wirklich löschen?;Wetsch de Speicherstand würkli lösche?
 QuestionLoadGame;"Load game?
 All unsaved progress will be lost.";"Spiel laden?
 Ungespeicherter Fortschritt geht verloren.";"Spiel lade?
@@ -100,6 +118,8 @@ QuestionStartNewGame;"Start new game?
 All unsaved progress will be lost.";"Neues Spiel starten?
 Ungespeicherter Fortschritt geht verloren.";"Neus Spiel starte?
 Ungspeicherete Fortschritt isch futsch."
+QuestItems;Quest Items;Questgegenstände;Questgegeständ
+Quickcast;Quickcast;Schnellzaubern;Schnellzaubere
 Quickload;Quick load;Schnell laden;Schnell lade
 Quicksave;Quick save;Schnell speichern;Schnell speichere
 Reduction;Reduction;Verminderung;Verminderig
@@ -107,6 +127,7 @@ Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
 RetryLevel;Retry this level;Nochmal versuchen;Nomal probiere
 Save;Save;Speichern;Speichere
 SaveGame;Save Game;Spiel speichern;Spiel speichere
+SavegameDeleted;Save game successfully deleted;Speicherstand erfolgreich gelöscht;Speicherstand isch glöscht
 SecondSpell;2. Spell;2. Zauber;2. Zauber
 ShadowDamage;Shadow Damage;Schattenschaden;Schatteschade
 ShadowResistance;Shadow Resistance;Schattenresistenz;Schatteresistenz
@@ -120,21 +141,3 @@ ThirdSpell;3. Spell;3. Zauber;3. Zauber
 Unknown;Unknown;Unbekannt;Unbekannt
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-Cancel;Cancel;Abbrechen;Abbreche
-Okay;Okay;Okay;Okee
-MessageNewSaveGame;Please enter the name for your new save game (at most 24 characters);Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen);Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)
-Delete;Delete;Löschen;Lösche
-QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du diesen Speicherstand wirklich löschen?;Wetsch de Speicherstand würkli lösche?
-SavegameDeleted;Save game successfully deleted;Speicherstand erfolgreich gelöscht;Speicherstand isch glöscht
-OperationFailed;Operation failed;Operation fehlgeschlagen;Die Operation isch id Hose
-Quickcast;Quickcast;Schnellzaubern;Schnellzaubere
-MaxHealthPoints;Max. Health;Max. Lebensenergie;Max. Lebensenergie
-HealthRegenerationPerS;Health Regeneration / s;Lebensregeneration / s;Lebensregeneration / s
-Critical;Critical;Kritisch;Kritisch
-Duration;Duration;Dauer;Duur
-GoldValue;Gold Value;Goldwert;Goldwert
-QuestItems;Quest Items;Questgegenstände;Questgegeständ
-Miscellaneous;Miscellaneous;Plunder;Grümpel
-Documents;Documents;Schriftstücke;Dokument
-Consumables;Consumables;Tränke und Nahrung;Tränk und Ässe
-Equipment;Equipment;Ausrüstung;Usrüstig

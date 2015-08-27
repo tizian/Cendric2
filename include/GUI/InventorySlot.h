@@ -12,7 +12,10 @@ class CharacterCore;
 class InventorySlot : public GameObject
 {
 public:
+	// constructor for filled slots. if amount is < 0, it won't show.
 	InventorySlot(const Item& item, int amount);
+	// constructor for placeholder slots
+	InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPOs);
 
 	void select();
 	void deselect();

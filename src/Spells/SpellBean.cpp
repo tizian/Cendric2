@@ -121,7 +121,7 @@ SpellBean SpellBean::getAureolaSpellBean()
 	aureola.cooldown = sf::milliseconds(10000);
 	aureola.boundingBox = sf::FloatRect(0, 0, 20, 20);
 	aureola.count = 4,
-	aureola.divergenceAngle = 2 * PI_F / aureola.count;
+	aureola.divergenceAngle = 2 * M_PI / aureola.count;
 	aureola.damageType = DamageType::Light;
 	aureola.duration = sf::milliseconds(10000);
 	aureola.needsTarget = true;

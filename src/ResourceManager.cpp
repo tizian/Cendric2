@@ -74,6 +74,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_npcs, "res/assets/npcs/spritesheet_npcs.png" },
 		{ ResourceID::Texture_dialogue, "res/assets/dialogue/spritesheet_dialogue.png" },
 		{ ResourceID::Texture_inventorytabs, "res/assets/misc/spritesheet_inventorytabs.png" },
+		{ ResourceID::Texture_equipmentplaceholders, "res/assets/misc/spritesheet_equipmentplaceholders.png" },
 		{ ResourceID::Texture_GUI_rounded_rectangle, "res/assets/gui/rounded_rectangle.png" },
 		{ ResourceID::Texture_GUI_ornament_none, "res/assets/gui/ornament_none.png" },
 		{ ResourceID::Texture_GUI_ornament_small, "res/assets/gui/ornament_small.png" },

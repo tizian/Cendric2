@@ -81,6 +81,7 @@ void LevelInterface::updateInventory(const sf::Time& frameTime)
 				m_characterInfo.hide();
 			}
 			m_inventory.show();
+			m_inventory.reload();
 		}
 		else
 		{
