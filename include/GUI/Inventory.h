@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "Window.h"
 #include "GUI/InventorySlot.h"
+#include "GUI/InventorySlotClone.h"
 #include "GUI/InventoryDescriptionWindow.h"
 #include "GUI/TexturedButton.h"
 #include "GUI/InventoryEquipment.h"
@@ -39,7 +40,6 @@ private:
 	LevelInterface* m_interface;
 	bool m_isVisible = false;
 
-	
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector
 	void calculateSlotPositions(std::vector<InventorySlot>& slots);
@@ -48,6 +48,7 @@ private:
 
 	BitmapText m_goldText;
 	BitmapText m_selectedTabText;
+
 	std::vector<std::pair<TexturedButton, ItemType>> m_tabs;
 
 	std::vector<InventorySlot> m_consumableItems;
@@ -59,6 +60,16 @@ private:
 	ItemType m_currentTab;
 	InventorySlot* m_selectedSlot = nullptr;
 	void selectTab(ItemType type);
+	void selectSlot(InventorySlot* selectedSlot);
+
+	// used for drag & drop handling
+	InventorySlotClone* m_currentClone = nullptr;
+	bool m_hasDraggingStarted = false;
+	bool m_isDragging = false;
+	// the mouse has to move this distance while pressed to spawn a clone.
+	const float DRAG_DISTANCE = 10.f;
+	sf::Vector2f m_startMousePosition;
+	void handleDragAndDrop();
 
 	InventoryDescriptionWindow* m_descriptionWindow = nullptr;
 	void showDescription(const InventorySlot& slot);

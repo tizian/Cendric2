@@ -42,6 +42,20 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos)
 	m_outside.setOutlineColor(CENDRIC_COLOR_BLACK);
 }
 
+void InventorySlot::activate()
+{
+	m_outside.setOutlineColor(sf::Color::Red);
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_BLACK);
+	m_inside.setFillColor(sf::Color::White);
+}
+
+void InventorySlot::deactivate()
+{
+	m_outside.setOutlineColor(CENDRIC_COLOR_BLACK);
+	m_outside.setFillColor(sf::Color(100, 100, 100, 100));
+	m_inside.setFillColor(sf::Color(150, 150, 150));
+}
+
 void InventorySlot::select()
 {
 	if (m_isSelected || m_item.getType() == ItemType::VOID) return;

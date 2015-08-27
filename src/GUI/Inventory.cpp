@@ -75,6 +75,7 @@ Inventory::~Inventory()
 	delete m_window;
 	delete m_descriptionWindow;
 	delete m_equipment;
+	delete m_currentClone;
 	clearAllSlots();
 }
 
@@ -96,15 +97,9 @@ void Inventory::update(const sf::Time& frameTime)
 	for (auto& it : *(m_typeMap[m_currentTab]))
 	{
 		it.update(frameTime);
-		if (it.isClicked() && m_selectedSlot != &it)
+		if (it.isClicked())
 		{
-			if (m_selectedSlot != nullptr)
-			{
-				m_selectedSlot->deselect();
-			}
-			m_selectedSlot = &it;
-			it.select();
-			showDescription(it);
+			selectSlot(&it);
 			return;
 		}
 		if (it.isConsumed())
@@ -133,17 +128,58 @@ void Inventory::update(const sf::Time& frameTime)
 
 	// update equipment part
 	m_equipment->update(frameTime);
+	selectSlot(m_equipment->getSelectedSlot());
 
-	InventorySlot* slot = m_equipment->getSelectedSlot();
-	if (slot != nullptr)
+	handleDragAndDrop();
+}
+
+void Inventory::selectSlot(InventorySlot* selectedSlot)
+{
+	if (selectedSlot == nullptr) return;
+	m_hasDraggingStarted = true;
+	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	if (selectedSlot == m_selectedSlot) return;
+	if (m_selectedSlot != nullptr)
 	{
+		m_selectedSlot->deselect();
+	}
+	m_selectedSlot = selectedSlot;
+	m_selectedSlot->select();
+	showDescription(*m_selectedSlot);
+}
+
+void Inventory::handleDragAndDrop()
+{
+	if (!m_hasDraggingStarted) return;
+	if (!(g_inputController->isMousePressedLeft()))
+	{
+		delete m_currentClone;
+		m_currentClone = nullptr;
+		m_hasDraggingStarted = false;
+		m_isDragging = false;
 		if (m_selectedSlot != nullptr)
 		{
-			m_selectedSlot->deselect();
+			m_selectedSlot->activate();
 		}
-		m_selectedSlot = slot;
-		m_selectedSlot->select();
-		showDescription(*m_selectedSlot);
+		return;
+	}
+	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
+	if (!m_isDragging)
+	{
+		if (DRAG_DISTANCE < std::sqrt(
+			(mousePos.x - m_startMousePosition.x) * (mousePos.x - m_startMousePosition.x) +
+			(mousePos.y - m_startMousePosition.y) * (mousePos.y - m_startMousePosition.y)))
+		{
+			m_isDragging = true;
+			delete m_currentClone;
+			m_currentClone = new InventorySlotClone(m_selectedSlot);
+			m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+			m_selectedSlot->deactivate();
+		}
+	}
+	else
+	{
+		m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
 	}
 }
 
@@ -176,6 +212,10 @@ void Inventory::render(sf::RenderTarget& target)
 	}
 
 	m_equipment->render(target);
+	if (m_currentClone != nullptr)
+	{
+		m_currentClone->render(target);
+	}
 }
 
 void Inventory::showDescription(const InventorySlot& slot)
@@ -306,4 +346,6 @@ void Inventory::hide()
 {
 	m_isVisible = false;
 	m_equipment->hide();
+	delete m_currentClone;
+	m_currentClone = nullptr;
 }

@@ -88,7 +88,6 @@ void InventoryEquipment::reload()
 void InventoryEquipment::show()
 {
 	m_isVisible = true;
-	reload();
 }
 
 void InventoryEquipment::hide()
