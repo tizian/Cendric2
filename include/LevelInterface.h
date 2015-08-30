@@ -28,11 +28,21 @@ public:
 	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
 	// reloads the inventory if it is visible
 	void reloadInventory();
+	// an consumable item has been dropped. check its position.
+	void notifyConsumableDrop(const InventorySlotClone* item);
+	// consumes a consumable item
+	void consumeItem(const Item& item);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
+	CharacterCore* getCore() const;
+	LevelMainCharacter* getMainCharacter() const;
+
 private:
+	CharacterCore* m_core;
+	LevelMainCharacter* m_character;
+
 	// <<< INVENTORY >>>
 	Inventory m_inventory;
 	bool m_showInventory = false;
@@ -48,6 +58,9 @@ private:
 
 	// <<< SPELL SELECTION >>>
 	SpellSelection* m_spellSelection = nullptr;
+
+	// <<< QUICK SLOTS >>>
+	// TODO
 
 	// <<< BUFF BAR >>>
 	BuffBar m_buffBar;

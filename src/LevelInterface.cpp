@@ -2,8 +2,10 @@
 #include "LevelMainCharacter.h"
 
 LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) :
-    m_inventory(core, character, this),  m_characterInfo(character), m_healthBar(character->getAttributes())
+    m_inventory(this),  m_characterInfo(character), m_healthBar(character->getAttributes())
 {
+	m_core = core;
+	m_character = character;
 }
 
 LevelInterface::~LevelInterface()
@@ -37,6 +39,24 @@ void LevelInterface::update(const sf::Time& frameTime)
 void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration)
 {
 	m_buffBar.addSlot(type, textureLocation, duration);
+}
+
+void LevelInterface::notifyConsumableDrop(const InventorySlotClone* item)
+{
+	// todo
+}
+
+void LevelInterface::consumeItem(const Item& item)
+{
+	m_character->consumeFood(
+		item.getBean().foodDuration,
+		item.getAttributes());
+	addBuff(BuffType::Food,
+		sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50),
+		item.getBean().foodDuration);
+	m_core->removeItem(item.getID(), 1);
+	m_inventory.reload();
+	// todo: reload slots too
 }
 
 void LevelInterface::reloadInventory()
@@ -100,4 +120,14 @@ void LevelInterface::setSpellManager(SpellManager* spellManager)
 	// use this spell manager for the interface bar.
 	delete m_spellSelection;
 	m_spellSelection = new SpellSelection(spellManager);
+}
+
+CharacterCore* LevelInterface::getCore() const
+{
+	return m_core;
+}
+
+LevelMainCharacter* LevelInterface::getMainCharacter() const
+{
+	return m_character;
 }

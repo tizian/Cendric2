@@ -22,5 +22,7 @@ enum class Key
 	ThirdSpell,
 	FourthSpell,
 	FifthSpell,
+	QuickSlot1,
+	QuickSlot2,
 	MAX
 };

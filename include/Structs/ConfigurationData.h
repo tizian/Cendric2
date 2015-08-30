@@ -48,7 +48,9 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 		{ Key::SecondSpell, sf::Keyboard::Num2 },
 		{ Key::ThirdSpell, sf::Keyboard::Num3 },
 		{ Key::FourthSpell, sf::Keyboard::Num4 },
-		{ Key::FifthSpell, sf::Keyboard::Num5 }
+		{ Key::FifthSpell, sf::Keyboard::Num5 },
+		{ Key::QuickSlot1, sf::Keyboard::Num6 },
+		{ Key::QuickSlot2, sf::Keyboard::Num7 }
 	}),
 	std::map < Key, sf::Keyboard::Key >(
 		{
@@ -72,7 +74,9 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 			{ Key::SecondSpell, sf::Keyboard::Numpad2 },
 			{ Key::ThirdSpell, sf::Keyboard::Numpad3 },
 			{ Key::FourthSpell, sf::Keyboard::Numpad4 },
-			{ Key::FifthSpell, sf::Keyboard::Numpad5 }
+			{ Key::FifthSpell, sf::Keyboard::Numpad5 },
+			{ Key::QuickSlot1, sf::Keyboard::Numpad6 },
+			{ Key::QuickSlot2, sf::Keyboard::Numpad7 }
 		}),
 		true,
 		false

@@ -20,7 +20,7 @@ class LevelInterface;
 class Inventory
 {
 public:
-	Inventory(CharacterCore* core, LevelMainCharacter* character, LevelInterface* _interface);
+	Inventory(LevelInterface* _interface);
 	~Inventory();
 
 	void show();
@@ -36,7 +36,6 @@ public:
 
 private:
 	CharacterCore* m_core;
-	LevelMainCharacter* m_character;
 	LevelInterface* m_interface;
 	bool m_isVisible = false;
 

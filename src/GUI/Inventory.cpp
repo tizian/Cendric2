@@ -2,11 +2,10 @@
 #include "LevelMainCharacter.h"
 #include "LevelInterface.h"
 
-Inventory::Inventory(CharacterCore* core, LevelMainCharacter* character, LevelInterface* _interface)
+Inventory::Inventory(LevelInterface* _interface)
 {
-	m_core = core;
-	m_character = character;
 	m_interface = _interface;
+	m_core = _interface->getCore();
 
 	// init window
 	sf::FloatRect box(INVENTORY_LEFT, INVENTORY_TOP, INVENTORY_WIDTH, INVENTORY_HEIGHT);
@@ -104,14 +103,7 @@ void Inventory::update(const sf::Time& frameTime)
 		}
 		if (it.isConsumed())
 		{
-			m_character->consumeFood(
-				it.getItem().getBean().foodDuration,
-				it.getItem().getAttributes());
-			m_interface->addBuff(BuffType::Food, 
-				sf::IntRect(it.getItem().getIconTextureLocation().x, it.getItem().getIconTextureLocation().y, 50, 50),
-				it.getItem().getBean().foodDuration);
-			m_core->removeItem(it.getItem().getID(), 1);
-			reload();
+			m_interface->consumeItem(it.getItem());
 			break;
 		}
 	}
@@ -153,14 +145,18 @@ void Inventory::handleDragAndDrop()
 	if (!m_hasDraggingStarted) return;
 	if (!(g_inputController->isMousePressedLeft()))
 	{
+		if (m_selectedSlot != nullptr)
+		{
+			m_selectedSlot->activate();
+			if (m_selectedSlot->getItem().getType() == ItemType::Consumable)
+			{
+				m_interface->notifyConsumableDrop(m_currentClone);
+			}
+		}
 		delete m_currentClone;
 		m_currentClone = nullptr;
 		m_hasDraggingStarted = false;
 		m_isDragging = false;
-		if (m_selectedSlot != nullptr)
-		{
-			m_selectedSlot->activate();
-		}
 		return;
 	}
 	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
