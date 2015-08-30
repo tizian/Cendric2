@@ -46,9 +46,11 @@ public:
 	void setMainLayerColor(const sf::Color& color);
 	void setOrnamentLayerColor(const sf::Color& color);
 	void setMouseOverColor(const sf::Color& color);
+	void setVisible(bool value);
 
 	bool isClicked() const;
 	bool isEnabled() const;
+	bool isVisible() const;
 	GameObjectType getConfiguredType() const override;
 
 protected:
@@ -56,6 +58,7 @@ protected:
 	bool m_isPressed = false;
 	bool m_isClicked = false;
 	bool m_isEnabled = true;
+	bool m_isVisible = true;
 
 	sf::Vector2f m_positionDefault;
 	sf::Vector2f m_backLayerOffset;

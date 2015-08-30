@@ -24,6 +24,15 @@ void LevelScreen::execOnEnter(const Screen *previousScreen)
 	loader.loadEquipment(this);
 	m_interface = new LevelInterface(m_characterCore, m_mainChar);
 	m_interface->setSpellManager(m_mainChar->getSpellManager());
+
+	m_retryButton = new Button(sf::FloatRect(475, 410, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_retryButton->setText("RetryLevel");
+	m_retryButton->setVisible(false);
+	addObject(m_retryButton);
+	m_backToMenuButton = new Button(sf::FloatRect(475, 470, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	m_backToMenuButton->setText("BackToMenu");
+	m_backToMenuButton->setVisible(false);
+	addObject(m_backToMenuButton);
 }
 
 void LevelScreen::execOnExit(const Screen *nextScreen)
@@ -55,20 +64,16 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		m_youDied->setCharacterSize(56);
 		m_youDied->setColor(sf::Color::Red);
 		m_youDied->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_youDied->getLocalBounds().width) / 2.f), 200.f));
-		m_retryButton = new Button(sf::FloatRect(475, 410, 300, 50), ButtonOrnamentStyle::MEDIUM);
-		m_retryButton->setText("RetryLevel");
-		addObject(m_retryButton);
-		m_backToMenuButton = new Button(sf::FloatRect(475, 470, 300, 50), ButtonOrnamentStyle::MEDIUM);
-		m_backToMenuButton->setText("BackToMenu");
-		addObject(m_backToMenuButton);
+		m_retryButton->setVisible(true);
+		m_backToMenuButton->setVisible(true);
 	}
 
-	if (m_isGameOver && m_retryButton->isClicked())
+	if (m_retryButton->isClicked())
 	{
 		return new LoadingScreen(m_characterCore->getData().currentLevel, m_characterCore);
-	} 
+	}
 
-	if (m_isGameOver && m_backToMenuButton->isClicked())
+	if (m_backToMenuButton->isClicked())
 	{
 		return new MenuScreen(m_characterCore);
 	}
@@ -76,9 +81,9 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 	LevelExitBean* bean = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
 	if (bean == nullptr || m_isGameOver || !g_inputController->isKeyActive(Key::Up))
 	{
+		updateObjects(GameObjectType::_Button, frameTime);
 		updateTooltipText(frameTime);
 		m_interface->update(frameTime);
-		updateObjects(GameObjectType::_Button, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
 		updateObjects(GameObjectType::_LevelItem, frameTime);
 		updateObjects(GameObjectType::_MainCharacter, frameTime);
@@ -86,6 +91,20 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		updateObjects(GameObjectType::_Spell, frameTime);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		deleteDisposedObjects();
+
+		if (!g_inputController->isActionLocked() && g_inputController->isKeyJustPressed(Key::Escape))
+		{
+			if (m_retryButton->isVisible())
+			{
+				m_retryButton->setVisible(false);
+				m_backToMenuButton->setVisible(false);
+			}
+			else
+			{
+				m_retryButton->setVisible(true);
+				m_backToMenuButton->setVisible(true);
+			}
+		}
 		return this;
 	}
 	else 
@@ -116,13 +135,13 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
 
 	renderTooltipText(renderTarget);
-	m_interface->render(renderTarget);
+	m_interface->render(renderTarget); // this will set the view to the default view!
 
 	if (m_isGameOver)
 	{
-		renderTarget.setView(renderTarget.getDefaultView());
 		renderTarget.draw(*m_gameOverSprite);
 		renderTarget.draw(*m_youDied);
-		renderObjects(GameObjectType::_Button, renderTarget);
 	}
+		
+	renderObjects(GameObjectType::_Button, renderTarget);
 }

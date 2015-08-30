@@ -248,7 +248,7 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	string id(startData);
-	int count = countToNextChar(startData, end, '\n');
+	int count = countToNextChar(startData, end, ',');
 	if (count == -1) {
 		return false;
 	}

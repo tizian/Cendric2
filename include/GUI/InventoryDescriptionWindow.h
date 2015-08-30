@@ -5,6 +5,7 @@
 #include "GUI/BitmapText.h"
 #include "TextProvider.h"
 #include "Item.h"
+#include "Weapon.h"
 
 class InventoryDescriptionWindow : public Window
 {

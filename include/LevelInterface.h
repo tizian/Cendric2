@@ -27,7 +27,7 @@ public:
 
 	// used to add buffs to the buff bar
 	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
-	// reloads the inventory if it is visible
+	// reloads the inventory if it is visible. also reloads the quick slot bar
 	void reloadInventory();
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const InventorySlotClone* item);
@@ -46,12 +46,10 @@ private:
 
 	// <<< INVENTORY >>>
 	Inventory m_inventory;
-	bool m_showInventory = false;
 	void updateInventory(const sf::Time& frameTime);
 
 	// <<< CHARCTER INFO >>>
 	CharacterInfo m_characterInfo;
-	bool m_showCharacterInfo = false;
 	void updateCharacterInfo();
 	
 	// <<< HEALTH BAR >>>

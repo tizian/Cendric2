@@ -27,6 +27,11 @@ CharacterInfo::~CharacterInfo()
 	delete m_window;
 }
 
+bool CharacterInfo::isVisible() const
+{
+	return m_isVisible;
+}
+
 void CharacterInfo::render(sf::RenderTarget& target) const
 {
 	if (m_isVisible)

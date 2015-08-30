@@ -16,6 +16,7 @@ public:
 	void hide();
 
 	void render(sf::RenderTarget& target) const;
+	bool isVisible() const;
 
 private:
 	LevelMainCharacter* m_mainChar;

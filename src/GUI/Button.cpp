@@ -69,6 +69,7 @@ void Button::onMouseOver()
 
 void Button::render(sf::RenderTarget& renderTarget)
 {
+	if (!m_isVisible) return;
 	renderTarget.draw(m_backLayer);
 	renderTarget.draw(m_mainLayer);
 	renderTarget.draw(m_ornamentLayer);
@@ -87,6 +88,7 @@ void Button::setPosition(const sf::Vector2f& pos)
 
 void Button::update(const sf::Time& frameTime)
 {
+	if (!m_isVisible) return;
 	m_isClicked = false;
 	if (m_isMouseOver && !(g_inputController->isMouseOver(getBoundingBox(), true)))
 	{
@@ -185,6 +187,11 @@ void Button::setEnabled(bool enabled)
 	m_text.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
 }
 
+void Button::setVisible(bool value)
+{
+	m_isVisible = value;
+}
+
 bool Button::isClicked() const
 {
 	return m_isClicked;
@@ -193,6 +200,11 @@ bool Button::isClicked() const
 bool Button::isEnabled() const
 {
 	return m_isEnabled;
+}
+
+bool Button::isVisible() const
+{
+	return m_isVisible;
 }
 
 GameObjectType Button::getConfiguredType() const

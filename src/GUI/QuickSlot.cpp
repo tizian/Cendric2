@@ -85,6 +85,7 @@ void QuickSlot::reload()
 		m_outside.setOutlineColor(CENDRIC_COLOR_DARK_GREY);
 		m_keyText.setColor(CENDRIC_COLOR_GREY);
 		m_amountText.setString("");
+		m_itemID = "";
 	}
 	else
 	{

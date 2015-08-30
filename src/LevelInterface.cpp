@@ -13,7 +13,6 @@ LevelInterface::~LevelInterface()
 
 void LevelInterface::render(sf::RenderTarget& target)
 {
-	sf::View oldView = target.getView();
 	target.setView(target.getDefaultView());
 
 	m_healthBar.render(target);
@@ -22,8 +21,6 @@ void LevelInterface::render(sf::RenderTarget& target)
 	m_quickSlotBar.render(target);
 	m_characterInfo.render(target);
 	m_inventory.render(target);
-
-	target.setView(oldView);
 }
 
 void LevelInterface::update(const sf::Time& frameTime)
@@ -65,18 +62,17 @@ void LevelInterface::reloadInventory()
 	{
 		m_inventory.reload();
 	}
+	m_quickSlotBar.reload();
 }
 
 void LevelInterface::updateCharacterInfo()
 {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo))
 	{
-		m_showCharacterInfo = !m_showCharacterInfo;
-		if (m_showCharacterInfo)
+		if (!m_characterInfo.isVisible())
 		{
-			if (m_showInventory)
+			if (m_inventory.isVisible())
 			{
-				m_showInventory = false;
 				m_inventory.hide();
 			}
 			m_characterInfo.show();
@@ -86,18 +82,21 @@ void LevelInterface::updateCharacterInfo()
 			m_characterInfo.hide();
 		}
 	}
+	else if (m_characterInfo.isVisible() && g_inputController->isKeyJustPressed(Key::Escape))
+	{
+		m_characterInfo.hide();
+		g_inputController->lockAction();
+	}
 }
 
 void LevelInterface::updateInventory(const sf::Time& frameTime)
 {
 	if (g_inputController->isKeyJustPressed(Key::Inventory))
 	{
-		m_showInventory = !m_showInventory;
-		if (m_showInventory)
+		if (!m_inventory.isVisible())
 		{
-			if (m_showCharacterInfo)
+			if (m_characterInfo.isVisible())
 			{
-				m_showCharacterInfo = false;
 				m_characterInfo.hide();
 			}
 			m_inventory.show();
@@ -108,11 +107,13 @@ void LevelInterface::updateInventory(const sf::Time& frameTime)
 			m_inventory.hide();
 		}
 	}
-
-	if (m_showInventory)
+	else if (m_inventory.isVisible() && g_inputController->isKeyJustPressed(Key::Escape))
 	{
-		m_inventory.update(frameTime);
+		m_inventory.hide();
+		g_inputController->lockAction();
 	}
+
+	m_inventory.update(frameTime);
 }
 
 void LevelInterface::setSpellManager(SpellManager* spellManager)
