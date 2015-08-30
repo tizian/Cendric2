@@ -84,7 +84,7 @@ void Inventory::clearAllSlots()
 	m_equipmentItems.clear();
 	m_questItems.clear();
 	m_documentItems.clear();
-	m_questItems.clear();
+	m_miscItems.clear();
 	m_selectedSlot = nullptr;
 }
 
@@ -302,7 +302,7 @@ void Inventory::reload()
 	calculateSlotPositions(m_equipmentItems);
 	calculateSlotPositions(m_questItems);
 	calculateSlotPositions(m_documentItems);
-	calculateSlotPositions(m_questItems);
+	calculateSlotPositions(m_miscItems);
 
 	// reload equipment
 	m_equipment->reload();

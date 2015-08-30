@@ -35,4 +35,7 @@ protected:
 	const char* EQUIPPED_RING_2 = "equipped.ring2";
 	const char* EQUIPPED_NECK = "equipped.neck";
 	const char* EQUIPPED_BACK = "equipped.back";
+
+	// quickslot assignment
+	const char* QUICKSLOT = "quickslot";
 };

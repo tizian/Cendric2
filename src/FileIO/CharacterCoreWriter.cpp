@@ -36,6 +36,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeItemID(data);
 		savefile << writeEquippedWeaponSlots(data);
 		savefile << writeEquippedItems(data);
+		savefile << writeQuickslots(data);
 		savefile << writeLevelKilled(data);
 		savefile << writeLevelLooted(data);
 		savefile << writeQuestStates(data);
@@ -239,4 +240,14 @@ std::string CharacterCoreWriter::writeEquippedItems(const CharacterCoreData& dat
 	equipment.append(string(EQUIPPED_WEAPON) + ":" + data.equippedWeapon + "\n");
 
 	return equipment;
+}
+
+std::string CharacterCoreWriter::writeQuickslots(const CharacterCoreData& data) const
+{
+	string quickslots = "# quickslot assignments:\n";
+
+	quickslots.append(string(QUICKSLOT) + ":1," + data.quickSlot1 + "\n");
+	quickslots.append(string(QUICKSLOT) + ":2," + data.quickSlot2 + "\n");
+
+	return quickslots;
 }

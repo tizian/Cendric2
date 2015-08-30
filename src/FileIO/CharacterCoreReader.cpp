@@ -88,6 +88,38 @@ bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCore
 	return true;
 }
 
+bool CharacterCoreReader::readQuickslot(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	int nr = atoi(startData);
+	if (nr < 1 || nr > 2)
+	{
+		g_logger->logError("CharacterCoreReader::readQuickslot", "Quickslot nr not valid.");
+		return false;
+	}
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	string item(startData);
+	int count = countToNextChar(startData, end, '\n');
+	if (count == -1) 
+	{
+		return false;
+	}
+	item = item.substr(0, count);
+
+	if (nr == 1)
+	{
+		data.quickSlot1 = item;
+	}
+	else
+	{
+		data.quickSlot2 = item;
+	}
+	return true;
+}
+
 bool CharacterCoreReader::readSavegameDate(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
@@ -578,6 +610,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, EQUIPPED_HEAD, strlen(EQUIPPED_HEAD)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_HEAD));
 			noError = readEquippedItem(pos, end, data, ItemType::Equipment_head);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, QUICKSLOT, strlen(QUICKSLOT)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUICKSLOT));
+			noError = readQuickslot(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {

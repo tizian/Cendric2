@@ -1,11 +1,9 @@
 #include "LevelInterface.h"
 #include "LevelMainCharacter.h"
 
-LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) :
-    m_inventory(this),  m_characterInfo(character), m_healthBar(character->getAttributes())
+LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) : m_core(core), m_character(character),
+m_inventory(this), m_characterInfo(character), m_healthBar(character->getAttributes()), m_quickSlotBar(this)
 {
-	m_core = core;
-	m_character = character;
 }
 
 LevelInterface::~LevelInterface()
@@ -21,6 +19,7 @@ void LevelInterface::render(sf::RenderTarget& target)
 	m_healthBar.render(target);
 	m_buffBar.render(target);
 	m_spellSelection->render(target);
+	m_quickSlotBar.render(target);
 	m_characterInfo.render(target);
 	m_inventory.render(target);
 
@@ -32,6 +31,7 @@ void LevelInterface::update(const sf::Time& frameTime)
 	m_healthBar.update();
 	m_buffBar.update(frameTime);
 	m_spellSelection->update(frameTime);
+	m_quickSlotBar.update(frameTime);
 	updateInventory(frameTime);
 	updateCharacterInfo();
 }
@@ -43,7 +43,7 @@ void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, 
 
 void LevelInterface::notifyConsumableDrop(const InventorySlotClone* item)
 {
-	// todo
+	m_quickSlotBar.notifyConsumableDrop(item);
 }
 
 void LevelInterface::consumeItem(const Item& item)
@@ -56,7 +56,7 @@ void LevelInterface::consumeItem(const Item& item)
 		item.getBean().foodDuration);
 	m_core->removeItem(item.getID(), 1);
 	m_inventory.reload();
-	// todo: reload slots too
+	m_quickSlotBar.reload();
 }
 
 void LevelInterface::reloadInventory()

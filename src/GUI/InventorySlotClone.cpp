@@ -19,7 +19,7 @@ InventorySlotClone::InventorySlotClone(const InventorySlot* original)
 		static_cast<int>(InventorySlot::SIDE_LENGTH)));
 
 	m_outside.setSize(sf::Vector2f(InventorySlot::SIDE_LENGTH, InventorySlot::SIDE_LENGTH));
-	m_outside.setFillColor(CENDRIC_COLOR_TRANS_BLACK);
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
 	m_outside.setOutlineThickness(InventorySlot::MARGIN);
 	m_outside.setOutlineColor(sf::Color::Red);
 }
@@ -40,4 +40,9 @@ void InventorySlotClone::render(sf::RenderTarget& renderTarget)
 GameObjectType InventorySlotClone::getConfiguredType() const
 {
 	return GameObjectType::_Interface;
+}
+
+const std::string& InventorySlotClone::getItemID() const
+{
+	return m_original->getItem().getID();
 }

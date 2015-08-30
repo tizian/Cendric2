@@ -1,0 +1,30 @@
+# time played, in seconds
+time.played:14
+savegame.name:neus game
+savegame.date:1440954743
+level.id:0
+level.position:0.000000,0.000000
+map.id:1
+map.position:4380.789551,776.359985
+# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
+# damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
+# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
+attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
+gold:0
+# items in inventory:
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+# equipment:
+equipped.back:
+equipped.body:
+equipped.head:
+equipped.neck:
+equipped.ring1:
+equipped.ring2:
+equipped.weapon:
+# quickslot assignments:
+quickslot:1,
+quickslot:2,
+# levels killed:
+# levels looted:
+# quest states:
+# npc states:

@@ -116,6 +116,18 @@ void CharacterCore::setQuestState(QuestID id, QuestState state)
 	m_data.questStates.insert({ id, state });
 }
 
+void CharacterCore::setQuickslot(const std::string& item, int nr)
+{
+	if (nr == 1)
+	{
+		m_data.quickSlot1 = item;
+	}
+	else if (nr == 2)
+	{
+		m_data.quickSlot2 = item;
+	}
+}
+
 bool CharacterCore::save(const std::string& fileName, const string& name) 
 {
 	m_data.timePlayed += m_stopwatch.restart();

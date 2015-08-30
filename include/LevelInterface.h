@@ -12,8 +12,9 @@
 #include "GUI/CharacterInfo.h"
 #include "GUI/SpellSelection.h"
 #include "GUI/BuffBar.h"
+#include "GUI/QuickSlotBar.h"
 
-// The interface overlay in a level, displaying hp bar, spell cooldowns, buffs etc.
+// The interface overlay in a level, displaying hp bar, spell cooldowns, buffs, quickslot bar
 // if the keys for character screen and inventory are pressed, these will display as well.
 class LevelInterface
 {
@@ -28,7 +29,7 @@ public:
 	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
 	// reloads the inventory if it is visible
 	void reloadInventory();
-	// an consumable item has been dropped. check its position.
+	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const InventorySlotClone* item);
 	// consumes a consumable item
 	void consumeItem(const Item& item);
@@ -60,7 +61,7 @@ private:
 	SpellSelection* m_spellSelection = nullptr;
 
 	// <<< QUICK SLOTS >>>
-	// TODO
+	QuickSlotBar m_quickSlotBar;
 
 	// <<< BUFF BAR >>>
 	BuffBar m_buffBar;

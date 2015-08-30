@@ -15,14 +15,17 @@ class QuickSlot : public GameObject
 {
 public:
 	// an empty slot is initialized with an empty itemID
-	QuickSlot(LevelInterface* _interface, std::string itemID, Key key);
+	QuickSlot(LevelInterface* _interface, const std::string& itemID, Key key);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	void onLeftJustPressed() override;
 	void onRightClick() override;
+	// reloads the slot, depending on the character core.
+	void reload();
 
 	void setPosition(const sf::Vector2f& pos) override;
+	void setItemID(const std::string& itemID);
 
 	GameObjectType getConfiguredType() const override;
 	
@@ -44,6 +47,4 @@ private:
 
 	// consumes the item
 	void consume();
-	// reloads the slot, depending on the character core.
-	void reload();
 };

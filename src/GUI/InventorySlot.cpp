@@ -21,7 +21,7 @@ InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getBean
 	m_amountText.setColor(CENDRIC_COLOR_WHITE);
 
 	m_outside.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
-	m_outside.setFillColor(CENDRIC_COLOR_TRANS_BLACK);
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
 	m_outside.setOutlineThickness(MARGIN);
 	m_outside.setOutlineColor(CENDRIC_COLOR_PURPLE);
 }
@@ -37,22 +37,22 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos)
 	m_inside.setTextureRect(sf::IntRect(texPos.x, texPos.y, static_cast<int>(SIDE_LENGTH), static_cast<int>(SIDE_LENGTH)));
 
 	m_outside.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
-	m_outside.setFillColor(CENDRIC_COLOR_TRANS_BLACK);
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
 	m_outside.setOutlineThickness(MARGIN);
-	m_outside.setOutlineColor(CENDRIC_COLOR_BLACK);
+	m_outside.setOutlineColor(CENDRIC_COLOR_DARK_GREY);
 }
 
 void InventorySlot::activate()
 {
 	m_outside.setOutlineColor(sf::Color::Red);
-	m_outside.setFillColor(CENDRIC_COLOR_TRANS_BLACK);
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
 	m_inside.setFillColor(sf::Color::White);
 }
 
 void InventorySlot::deactivate()
 {
 	m_outside.setOutlineColor(CENDRIC_COLOR_BLACK);
-	m_outside.setFillColor(sf::Color(100, 100, 100, 100));
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_BLACK);
 	m_inside.setFillColor(sf::Color(150, 150, 150));
 }
 
@@ -91,7 +91,7 @@ void InventorySlot::setPosition(const sf::Vector2f& pos)
 	GameObject::setPosition(pos);
 	m_inside.setPosition(pos);
 	m_outside.setPosition(pos);
-	m_amountText.setPosition(sf::Vector2f(pos.x, pos.y + SIDE_LENGTH - 8.f));
+	m_amountText.setPosition(sf::Vector2f(pos.x + SIDE_LENGTH - 8.f, pos.y + SIDE_LENGTH - 8.f));
 }
 
 void InventorySlot::render(sf::RenderTarget& renderTarget)

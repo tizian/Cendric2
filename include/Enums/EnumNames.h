@@ -68,6 +68,10 @@ public:
 			return "FourthSpell";
 		case Key::FifthSpell:
 			return "FifthSpell";
+		case Key::QuickSlot1:
+			return "QuickSlot1";
+		case Key::QuickSlot2:
+			return "QuickSlot2";
 		case Key::Up:
 			return "MoveUp";
 		}

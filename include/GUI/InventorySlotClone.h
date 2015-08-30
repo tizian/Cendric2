@@ -18,6 +18,7 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 
 	GameObjectType getConfiguredType() const override;
+	const std::string& getItemID() const;
 
 private:
 	const InventorySlot* m_original;

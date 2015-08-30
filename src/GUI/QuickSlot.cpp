@@ -7,7 +7,7 @@ using namespace std;
 const float QuickSlot::SIDE_LENGTH = 50.f;
 const float QuickSlot::MARGIN = 2.f;
 
-QuickSlot::QuickSlot(LevelInterface* _interface, std::string itemID, Key key) 
+QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key key) 
 {
 	m_interface = _interface;
 	m_core = _interface->getCore();
@@ -22,6 +22,7 @@ QuickSlot::QuickSlot(LevelInterface* _interface, std::string itemID, Key key)
 	
 	m_outside.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
 	m_outside.setOutlineThickness(MARGIN);
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
 
 	m_amountText.setCharacterSize(8);
 	m_amountText.setColor(CENDRIC_COLOR_WHITE);
@@ -29,8 +30,7 @@ QuickSlot::QuickSlot(LevelInterface* _interface, std::string itemID, Key key)
 	m_keyText.setString(key != Key::VOID ?
 		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[key]) :
 		"");
-	m_keyText.setCharacterSize(8);
-	m_keyText.setColor(CENDRIC_COLOR_WHITE);
+	m_keyText.setCharacterSize(16);
 
 	reload();
 }
@@ -40,8 +40,15 @@ void QuickSlot::setPosition(const sf::Vector2f& pos)
 	GameObject::setPosition(pos);
 	m_inside.setPosition(pos);
 	m_outside.setPosition(pos);
-	m_amountText.setPosition(sf::Vector2f(pos.x, pos.y + SIDE_LENGTH - 8.f));
+	m_amountText.setPosition(sf::Vector2f(pos.x + SIDE_LENGTH - 8.f, pos.y + SIDE_LENGTH - 8.f));
 	m_keyText.setPosition(pos);
+}
+
+void QuickSlot::setItemID(const std::string& itemID)
+{
+	m_itemID = itemID;
+	m_core->setQuickslot(itemID, m_key == Key::QuickSlot1 ? 1 : 2);
+	reload();
 }
 
 void QuickSlot::update(const sf::Time& frameTime) 
@@ -75,8 +82,9 @@ void QuickSlot::reload()
 		// the slot is empty
 		m_isEmpty = true;
 		m_inside.setFillColor(sf::Color::Transparent);
-		m_outside.setOutlineColor(CENDRIC_COLOR_BLACK);
-		m_outside.setFillColor(sf::Color::Transparent);
+		m_outside.setOutlineColor(CENDRIC_COLOR_DARK_GREY);
+		m_keyText.setColor(CENDRIC_COLOR_GREY);
+		m_amountText.setString("");
 	}
 	else
 	{
@@ -86,13 +94,17 @@ void QuickSlot::reload()
 		int amount = m_core->getItems()->at(m_itemID);
 
 		m_inside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_items));
-		m_inside.setTextureRect(sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, static_cast<int>(SIDE_LENGTH), static_cast<int>(SIDE_LENGTH)));
+		m_inside.setTextureRect(sf::IntRect(
+			item.getIconTextureLocation().x, 
+			item.getIconTextureLocation().y, 
+			static_cast<int>(SIDE_LENGTH), 
+			static_cast<int>(SIDE_LENGTH)));
 		m_inside.setFillColor(sf::Color::White);
 
-		m_outside.setFillColor(CENDRIC_COLOR_TRANS_BLACK);
 		m_outside.setOutlineColor(CENDRIC_COLOR_PURPLE);
 
 		m_amountText.setString(to_string(amount));
+		m_keyText.setColor(CENDRIC_COLOR_WHITE);
 	}
 }
 

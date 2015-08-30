@@ -47,6 +47,10 @@ struct CharacterCoreData
 	std::string equippedRing2;
 	std::string equippedNeck;
 	std::map<std::string, int> items;
+
+	// quickslot assignment
+	std::string quickSlot1;
+	std::string quickSlot2;
 };
 
 const CharacterCoreData DEFAULT_CORE
@@ -72,5 +76,8 @@ const CharacterCoreData DEFAULT_CORE
 	"",
 	"",
 	"",
-	std::map<std::string, int>()
+	std::map<std::string, int>(),
+
+	"",
+	"",
 };
