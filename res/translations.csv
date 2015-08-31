@@ -5,7 +5,7 @@ BackToMenu;Back to menu;Zurück zum Menu;Zrugg zum Menu
 Cancel;Cancel;Abbrechen;Abbreche
 CharacterInfo;Character Info;Charakter Info;Charakter Info
 Chop;Chop;Hauen;Haue
-ConfigurationSaved;Configuration was saved. A new start of the game is needed so all changes apply.;Einstellungen wurden gespeichert. Das Spiel muss neugestartet werden um alle Änderungen zu übernehmen.;Iistellige sind gspeicheret. Es brucht aber en Neustart vom Game damit alli Änderige würksam werded.
+ConfigurationSaved;Configuration was saved.;Einstellungen wurden erfolgreich gespeichert. ;Iistellige sind erfolgriich gspeicheret.
 Confirm;Confirm;Bestätigen;Bestätige
 Consumables;Consumables;Tränke und Nahrung;Tränk und Ässe
 CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering
@@ -21,6 +21,7 @@ too many text on one line yay way to many text this needs to be cropped so hard 
 Critical;Critical;Kritisch;Kritisch
 CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
 Damage;Damage;Schaden;Schade
+Default;Default;Standardwert;Standardwert
 Delete;Delete;Löschen;Lösche
 Divine;Divine;Heilig;Heilig
 DL_Cendric_Okay;Okay, I will do that.;Okay, das mache ich.;Okay, dännhalt.
@@ -87,6 +88,8 @@ itd_water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
 itd_wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
 Journal;Journal;Tagebuch;Tagebuech
 Jump;Jump;Springen;Springe
+KeyBindings;Key Bindings;Tastaturbelegung;Tastaturbelegig
+KeyReserved;This key is reserved and cannot be selected.;Diese Taste ist reserviert und kann nicht gewählt werden.;Die Taste isch reserviert und derf me nid bruche.
 Language;Language;Sprache;Sproch
 LightDamage;Light Damage;Lichtschaden;Liechtschade
 LightResistance;Light Resistance;Lichtresistenz;Liechtresistenz
@@ -135,6 +138,7 @@ Quickslot2;Quick Slot 2;Schnellwahl 2;Schnellwahl 2
 Range;Range;Reichweite;Riichwiiti
 Reduction;Reduction;Verminderung;Verminderig
 Reflection;Reflection;Reflektion;Abpraller
+Reset;Reset;Zurücksetzen;Zruggsetze
 Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
 RetryLevel;Retry this level;Nochmal versuchen;Nomal probiere
 Save;Save;Speichern;Speichere

@@ -1,16 +1,16 @@
-# a cave with two entries and a lot of rats
-level.name:Rat Cave
+# the testlevel
+level.name:Tetlevel
 map.size:70,30
 map.tilesize:50,50
 # bottom exit
 level.exit:10.5,23.5,1.0,2.5,1,80.0,14.0
 # top exit
 level.exit:14.5,5.5,1.0,2.5,1,76.0,9.0
-tileset.path:res/level/ratcave/tileset_level_ratcave.png
-layer.background:-1.0,res/level/ratcave/layer_inf.png
-layer.background:8.0,res/level/ratcave/layer_8.png
-layer.background:5.0,res/level/ratcave/layer_5.png
-layer.background:3.0,res/level/ratcave/layer_3.png
+tileset.path:res/level/testlevel/tileset_level_testlevel.png
+layer.background:-1.0,res/level/testlevel/layer_inf.png
+layer.background:8.0,res/level/testlevel/layer_8.png
+layer.background:5.0,res/level/testlevel/layer_5.png
+layer.background:3.0,res/level/testlevel/layer_3.png
 layer.tiles.background:
 "0,0,0,0,116,0,0,0,53,54,54,54,54,54,54,54,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,53,
 0,48,47,0,94,0,0,0,53,54,54,54,54,54,54,54,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,53,

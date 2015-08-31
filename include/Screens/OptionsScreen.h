@@ -7,7 +7,6 @@
 
 #include "GUI/Button.h"
 #include "GUI/BitmapText.h"
-#include "Enums/EnumNames.h"
 
 class OptionsScreen : public Screen
 {
@@ -23,6 +22,7 @@ public:
 private:
 	Button* m_backButton = nullptr;
 	Button* m_applyButton = nullptr;
+	Button* m_keyBindingsButton = nullptr;
 	BitmapText* m_title = nullptr;
 
 	BitmapText* m_sound = nullptr;
@@ -44,9 +44,6 @@ private:
 	Button* m_swissButton = nullptr;
 	void refreshLanguageText();
 
-	std::vector<Button*> m_keyButtons;
-	std::vector<BitmapText*> m_keyTexts;
-	
 	// TODO add sliders
 	BitmapText* m_fps = nullptr;
 	BitmapText* m_volume = nullptr;

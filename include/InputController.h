@@ -24,6 +24,7 @@ public:
 	void stopReadingText();
 	const std::string& getReadText() const;
 	void readUnicode(sf::Uint32 character);
+	void setLastPressedKey(sf::Keyboard::Key key);
 
 	bool isKeyActive(Key key);
 	bool isKeyJustPressed(Key key);
@@ -50,6 +51,9 @@ public:
 	const sf::Vector2f& getMousePosition() const;
 	// returns the mouse position relative to window & the default view
 	const sf::Vector2f& getDefaultViewMousePosition() const;
+
+	// returns the sf::keyboard::key that was pressed in the last frame. If none, returns sf::Keyboard::Unknown
+	sf::Keyboard::Key getLastPressedKey() const;
 
 private:
 	std::map<Key, bool> m_keyActiveMap;
@@ -82,6 +86,8 @@ private:
 	std::string m_readText;
 
 	bool isKeyPressed(sf::Keyboard::Key key) const;
+
+	sf::Keyboard::Key m_lastPressedKey = sf::Keyboard::Unknown;
 
 	// if an input action is done in the current frame, the GO will switch this to true 
 	// and the input controller will ignore all further clicks/actions.

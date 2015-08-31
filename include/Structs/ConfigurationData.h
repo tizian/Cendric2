@@ -23,36 +23,39 @@ struct ConfigurationData
 	bool isDebugRendering;
 };
 
+const std::map < Key, sf::Keyboard::Key > DEFAULT_KEYMAP =
+std::map < Key, sf::Keyboard::Key >(
+{
+	{ Key::Escape, sf::Keyboard::Escape },
+	{ Key::Quickload, sf::Keyboard::F9 },
+	{ Key::Quicksave, sf::Keyboard::F5 },
+	{ Key::Inventory, sf::Keyboard::I },
+	{ Key::CharacterInfo, sf::Keyboard::C },
+	{ Key::Journal, sf::Keyboard::J },
+	{ Key::Interact, sf::Keyboard::E },
+	{ Key::Confirm, sf::Keyboard::Return },
+	{ Key::Left, sf::Keyboard::A },
+	{ Key::Right, sf::Keyboard::D },
+	{ Key::Up, sf::Keyboard::W },
+	{ Key::Down, sf::Keyboard::S },
+	{ Key::Jump, sf::Keyboard::Space },
+	{ Key::Chop, sf::Keyboard::F },
+	{ Key::FirstSpell, sf::Keyboard::Num1 },
+	{ Key::SecondSpell, sf::Keyboard::Num2 },
+	{ Key::ThirdSpell, sf::Keyboard::Num3 },
+	{ Key::FourthSpell, sf::Keyboard::Num4 },
+	{ Key::FifthSpell, sf::Keyboard::Num5 },
+	{ Key::QuickSlot1, sf::Keyboard::Num6 },
+	{ Key::QuickSlot2, sf::Keyboard::Num7 }
+});
+
 const struct ConfigurationData DEFAULT_CONFIGURATION =
 {
 	Language::Lang_EN,
 	true,
 	100,
 	80,
-	std::map < Key, sf::Keyboard::Key >(
-	{
-		{ Key::Escape, sf::Keyboard::Escape },
-		{ Key::Quickload, sf::Keyboard::F9 },
-		{ Key::Quicksave, sf::Keyboard::F5 },
-		{ Key::Inventory, sf::Keyboard::I },
-		{ Key::CharacterInfo, sf::Keyboard::C },
-		{ Key::Journal, sf::Keyboard::J },
-		{ Key::Interact, sf::Keyboard::E },
-		{ Key::Confirm, sf::Keyboard::Return },
-		{ Key::Left, sf::Keyboard::A },
-		{ Key::Right, sf::Keyboard::D },
-		{ Key::Up, sf::Keyboard::W },
-		{ Key::Down, sf::Keyboard::S },
-		{ Key::Jump, sf::Keyboard::Space },
-		{ Key::Chop, sf::Keyboard::F },
-		{ Key::FirstSpell, sf::Keyboard::Num1 },
-		{ Key::SecondSpell, sf::Keyboard::Num2 },
-		{ Key::ThirdSpell, sf::Keyboard::Num3 },
-		{ Key::FourthSpell, sf::Keyboard::Num4 },
-		{ Key::FifthSpell, sf::Keyboard::Num5 },
-		{ Key::QuickSlot1, sf::Keyboard::Num6 },
-		{ Key::QuickSlot2, sf::Keyboard::Num7 }
-	}),
+	DEFAULT_KEYMAP,
 	std::map < Key, sf::Keyboard::Key >(
 		{
 			// assuming that it will never be "KeyCount" as input.

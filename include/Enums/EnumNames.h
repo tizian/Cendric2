@@ -130,7 +130,7 @@ public:
 		case sf::Keyboard::Unknown:
 			return "Unknown";
 		case sf::Keyboard::KeyCount:
-			return "<NONE>";
+			return "<...>";
 		case sf::Keyboard::A:
 			return "A";
 		case sf::Keyboard::B:

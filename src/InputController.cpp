@@ -29,6 +29,7 @@ void InputController::update()
 {
 	m_isWindowFocused = m_mainWindow->hasFocus();
 	m_isActionLocked = false;
+	m_lastPressedKey = sf::Keyboard::Unknown;
 	
 	// update keys
 	for (auto& it : m_keyActiveMap)
@@ -114,6 +115,11 @@ const sf::Vector2f& InputController::getMousePosition() const
 const sf::Vector2f& InputController::getDefaultViewMousePosition() const
 {
 	return m_defaultViewMousePosition;
+}
+
+sf::Keyboard::Key InputController::getLastPressedKey() const
+{
+	return m_lastPressedKey;
 }
 
 bool InputController::isMouseOver(const sf::FloatRect* boundingBox, bool useDefaultView) const
@@ -220,6 +226,11 @@ void InputController::readUnicode(sf::Uint32 character)
 	}
 	else if (character < 128)
 		m_readText += static_cast<char>(character);
+}
+
+void InputController::setLastPressedKey(sf::Keyboard::Key key)
+{
+	m_lastPressedKey = key;
 }
 
 bool InputController::isKeyPressed(sf::Keyboard::Key key) const

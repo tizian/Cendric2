@@ -89,14 +89,19 @@ void Button::setPosition(const sf::Vector2f& pos)
 void Button::update(const sf::Time& frameTime)
 {
 	if (!m_isVisible) return;
-	m_isClicked = false;
+	
 	if (m_isMouseOver && !(g_inputController->isMouseOver(getBoundingBox(), true)))
 	{
-		m_isPressed = false;
 		m_isMouseOver = false;
+		m_isPressed = false;
 		m_mainLayer.setColor(m_mainLayerColor);
 		setPosition(m_positionDefault);
 	}
+	if (!m_isPressed && m_isClicked)
+	{
+		setPosition(m_positionDefault);
+	}
+	m_isClicked = false;
 	GameObject::update(frameTime);
 }
 
@@ -151,6 +156,7 @@ void Button::setCharacterSize(int size)
 	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
 	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
+	m_text.setPosition(getPosition() + m_textOffset);
 }
 
 void Button::setBackgroundLayerColor(const sf::Color& color)

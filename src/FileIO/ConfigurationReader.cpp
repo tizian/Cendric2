@@ -253,7 +253,7 @@ bool ConfigurationReader::readMainInputMapping(const std::string& line, Configur
 		g_logger->logError("ConfigurationReader", "sf Keyboard Key id not recognized.");
 		return false;
 	}
-	data.mainKeyMap.insert({key, keyboardKey});
+	data.mainKeyMap[key] = keyboardKey;
 	return true;
 }
 
@@ -283,7 +283,7 @@ bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, C
 		g_logger->logError("ConfigurationReader", "sf Keyboard Key id not recognized.");
 		return false;
 	}
-	data.alternativeKeyMap.insert({ key, keyboardKey });
+	data.alternativeKeyMap[key] = keyboardKey;
 	return true;
 }
 

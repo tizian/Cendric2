@@ -44,6 +44,9 @@ void Game::run()
 		sf::Event e;
 		sf::Time deltaTime;
 		
+		// input
+		g_inputController->update();
+
 		// don't count this loop into the frametime!
 		deltaTime = frameClock.restart();
 		while (m_mainWindow.pollEvent(e))
@@ -60,6 +63,10 @@ void Game::run()
 			{
 				g_inputController->readUnicode(e.text.unicode);
 			}
+			else if (e.type == sf::Event::KeyPressed)
+			{
+				g_inputController->setLastPressedKey(e.key.code);
+			}
 		}
 		
 		frameClock.restart();
@@ -73,9 +80,6 @@ void Game::run()
 		{
 			frameTime = deltaTime;
 		}
-
-		// input
-		g_inputController->update();
 
 		// game updates
 		m_screenManager->update(frameTime);

@@ -1,5 +1,6 @@
 #include "Screens/OptionsScreen.h"
 #include "Screens/MenuScreen.h"
+#include "Screens/KeyBindingsScreen.h"
 
 using namespace std;
 
@@ -12,6 +13,10 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked())
 	{
 		return new MenuScreen(m_characterCore);
+	}
+	else if (m_keyBindingsButton->isClicked())
+	{
+		return new KeyBindingsScreen(m_characterCore);
 	}
 	else if (m_applyButton->isClicked())
 	{
@@ -75,10 +80,6 @@ void OptionsScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(*m_quickcast);
 	renderTarget.draw(*m_fps);
 	renderTarget.draw(*m_volume);
-	for (auto it : m_keyTexts)
-	{
-		renderTarget.draw(*it);
-	}
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderTooltipText(renderTarget);
 }
@@ -91,9 +92,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
 
 	float distFromTop = 150.f;
-	float distFromTopKeymap = 150.f;
 	float distFromLeft = 50.f;
-	float distFromLeftKeymap = (WINDOW_WIDTH - 460);
 
 	// language
 	m_selectedLanguage = g_resourceManager->getConfiguration().language;
@@ -152,8 +151,8 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	m_soundOffButton->setText("Off", 12);
 	addObject(m_soundOffButton);
 
-
 	distFromTop = distFromTop + 100;
+	
 	// fps
 	wstring fpsText = g_textProvider->getText("MaxFPS") + L": ";
 	fpsText.append(to_wstring(g_resourceManager->getConfiguration().maxFrameRate));
@@ -161,19 +160,12 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	m_fps->setCharacterSize(12);
 	m_fps->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 
-	// keyboard mappings
-	for (auto it : g_resourceManager->getConfiguration().mainKeyMap)
-	{
-		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
-		keyText->setCharacterSize(12);
-		keyText->setPosition(sf::Vector2f(distFromLeftKeymap, distFromTopKeymap));
-		m_keyTexts.push_back(keyText);
-		Button* keyButton = new Button(sf::FloatRect(distFromLeftKeymap + 300.f, distFromTopKeymap, 100, 20));
-		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
-		addObject(keyButton);
-		distFromTopKeymap = distFromTopKeymap + 25;
-	}
-
+	// keyboard mappings button
+	m_keyBindingsButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, 170.f, 200, 50));
+	m_keyBindingsButton->setText("KeyBindings");
+	m_keyBindingsButton->setCharacterSize(12);
+	addObject(m_keyBindingsButton);
+	
 	// back
 	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
 	m_backButton->setText("Back");
@@ -217,9 +209,4 @@ void OptionsScreen::execOnExit(const Screen *nextScreen)
 	delete m_volume;
 	delete m_sound;
 	delete m_quickcast;
-	for (auto& it : m_keyTexts)
-	{
-		delete it;
-	}
-	m_keyTexts.clear();
 }
