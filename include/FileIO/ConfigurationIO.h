@@ -14,4 +14,5 @@ protected:
 	const char* ALTERNATIVE_INPUT_MAPPING = "input.alternative.key";
 	const char* QUICKCAST_ON = "quickcast.on";
 	const char* DEBUGMODE_ON = "debugmode.on";
+	const char* DEBUGRENDERING_ON = "debugrendering.on";
 };

@@ -54,7 +54,7 @@ void LevelMainCharacter::handleMovementInput()
 		m_nextIsFacingRight = true;
 		newAccelerationX += getConfiguredWalkAcceleration();
 	}
-	if (g_inputController->isKeyActive(Key::Jump) && m_isGrounded)
+	if (g_inputController->isKeyJustPressed(Key::Jump) && m_isGrounded)
 	{
 		setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityY() : -getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
 	}

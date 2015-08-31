@@ -16,10 +16,11 @@ struct ConfigurationData
 	// Framerate. Values < 30 give interesting results and should not be selected. Values > 80 do not make sense.
 	int maxFrameRate;
 	std::map < Key, sf::Keyboard::Key > mainKeyMap;
-	// TODO: the alternative key map can't be seen, saved or changed by the user yet.
+	// important: the alternative key map can't be seen, saved or changed by the user yet.
 	std::map < Key, sf::Keyboard::Key > alternativeKeyMap;
 	bool isQuickcast;
 	bool isDebugMode;
+	bool isDebugRendering;
 };
 
 const struct ConfigurationData DEFAULT_CONFIGURATION =
@@ -79,5 +80,6 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 			{ Key::QuickSlot2, sf::Keyboard::Numpad7 }
 		}),
 		true,
-		false
+		false,
+		false,
 };

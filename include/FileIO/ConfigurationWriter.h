@@ -27,4 +27,5 @@ private:
 	std::string writeMaxFPS(const ConfigurationData& data) const;
 
 	std::string writeDebugModeOn(const ConfigurationData& data) const;
+	std::string writeDebugRenderingOn(const ConfigurationData& data) const;
 };

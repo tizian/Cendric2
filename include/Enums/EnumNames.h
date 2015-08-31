@@ -5,6 +5,7 @@
 #include "Enums/Language.h"
 #include "Enums/Key.h"
 #include "Enums/SpellType.h"
+#include "Structs/SpellModifier.h"
 
 // pure static class used to resolve enum names.
 class EnumNames 
@@ -43,6 +44,30 @@ public:
 			return "Necromancy";
 		case SpellType::Illusion:
 			return "Illusion";
+		}
+	}
+
+	static std::string getSpellModifierTypeName(SpellModifierType type)
+	{
+		switch (type) {
+		default:
+		case SpellModifierType::MAX:
+		case SpellModifierType::VOID:
+			return "Unknown";
+		case SpellModifierType::Count:
+			return "Count";
+		case SpellModifierType::Damage:
+			return "Damage";
+		case SpellModifierType::Duration:
+			return "Duration";
+		case SpellModifierType::Range:
+			return "Range";
+		case SpellModifierType::Reflect:
+			return "Reflection";
+		case SpellModifierType::Speed:
+			return "Speed";
+		case SpellModifierType::Strength:
+			return "Strength";
 		}
 	}
 
@@ -90,9 +115,9 @@ public:
 		case Key::FifthSpell:
 			return "FifthSpell";
 		case Key::QuickSlot1:
-			return "QuickSlot1";
+			return "Quickslot1";
 		case Key::QuickSlot2:
-			return "QuickSlot2";
+			return "Quickslot2";
 		case Key::Up:
 			return "MoveUp";
 		}

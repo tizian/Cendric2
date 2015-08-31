@@ -91,7 +91,7 @@ void Game::run()
 		// render
 		m_mainWindow.clear();
 		m_screenManager->render(m_mainWindow);
-		if (DEBUG_RENDERING)
+		if (g_resourceManager->getConfiguration().isDebugRendering)
 		{
 			showFPSText(m_mainWindow, frameTime.asSeconds());
 		}

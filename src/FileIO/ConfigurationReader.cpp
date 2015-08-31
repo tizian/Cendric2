@@ -58,7 +58,12 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const
 			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0)
 			{
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGMODE_ON));
-				noError = readDebugOn(line, data);
+				noError = readDebugModeOn(line, data);
+			}
+			else if (line.compare(0, strlen(DEBUGRENDERING_ON), string(DEBUGRENDERING_ON)) == 0)
+			{
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGRENDERING_ON));
+				noError = readDebugRenderingOn(line, data);
 			}
 			else
 			{
@@ -196,16 +201,29 @@ bool ConfigurationReader::readQuickcastOn(const std::string& line, Configuration
 	return true;
 }
 
-bool ConfigurationReader::readDebugOn(const std::string& line, ConfigurationData& data) const
+bool ConfigurationReader::readDebugModeOn(const std::string& line, ConfigurationData& data) const
 {
 	size_t colon = line.find(':');
 	if (colon == string::npos || line.length() < colon + 1)
 	{
-		g_logger->logError("ConfigurationReader", "No colon found after debug on tag or no value after colon.");
+		g_logger->logError("ConfigurationReader", "No colon found after debug mode on tag or no value after colon.");
 		return false;
 	}
 	bool debugOn = (atoi(line.substr(colon + 1).c_str()) != 0);
 	data.isDebugMode = debugOn;
+	return true;
+}
+
+bool ConfigurationReader::readDebugRenderingOn(const std::string& line, ConfigurationData& data) const
+{
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1)
+	{
+		g_logger->logError("ConfigurationReader", "No colon found after debug rendering on tag or no value after colon.");
+		return false;
+	}
+	bool debugOn = (atoi(line.substr(colon + 1).c_str()) != 0);
+	data.isDebugRendering = debugOn;
 	return true;
 }
 

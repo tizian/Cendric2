@@ -9,6 +9,7 @@ ConfigurationSaved;Configuration was saved. A new start of the game is needed so
 Confirm;Confirm;Bestätigen;Bestätige
 Consumables;Consumables;Tränke und Nahrung;Tränk und Ässe
 CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering
+Count;Count;Anzahl;Aazahl
 Credits;Credits;Mitwirkende;Erschaffer
 CreditsText;"Cendric Font:
    Tizian
@@ -19,6 +20,7 @@ too many text on one line yay way to many text this needs to be cropped so hard 
 too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword."
 Critical;Critical;Kritisch;Kritisch
 CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
+Damage;Damage;Schaden;Schade
 Delete;Delete;Löschen;Lösche
 Divine;Divine;Heilig;Heilig
 DL_Cendric_Okay;Okay, I will do that.;Okay, das mache ich.;Okay, dännhalt.
@@ -38,7 +40,9 @@ FireDamage;Fire Damage;Feuerschaden;Füürschade
 FireResistance;Fire Resistance;Feuerresistenz;Füürresistenz
 FirstSpell;1. Spell;1. Zauber;1. Zauber
 FourthSpell;4. Spell ;4. Zauber;4. Zauber
+GamePaused;Game Paused;Spiel pausiert;Spiel pausiert
 GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
+GemSockets;Gem Sockets;Edelstein Sockel;Edelstei Sockel
 German;German;Deutsch;Düütsch
 Gold;Gold;Gold;Gold
 GoldValue;Gold Value;Goldwert;Goldwert
@@ -127,8 +131,10 @@ Quickcast;Quickcast;Schnellzaubern;Schnellzaubere
 Quickload;Quick load;Schnell laden;Schnell lade
 Quicksave;Quick save;Schnell speichern;Schnell speichere
 Quickslot1;Quick Slot 1;Schnellwahl 1;Schnellwahl 1
-QuickSlot2;Quick Slot 2;Schnellwahl 2;Schnellwahl 2
+Quickslot2;Quick Slot 2;Schnellwahl 2;Schnellwahl 2
+Range;Range;Reichweite;Riichwiiti
 Reduction;Reduction;Verminderung;Verminderig
+Reflection;Reflection;Reflektion;Abpraller
 Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
 RetryLevel;Retry this level;Nochmal versuchen;Nomal probiere
 Save;Save;Speichern;Speichere
@@ -139,14 +145,15 @@ ShadowDamage;Shadow Damage;Schattenschaden;Schatteschade
 ShadowResistance;Shadow Resistance;Schattenresistenz;Schatteresistenz
 Sound;Sound;Musik;Musig
 SoundVolume;Volume;Lautstärke;Luutstärchi
+Speed;Speed;Geschwindigkeit;Gschwindigkeit
 SpellFire;Fireball;Feuerball;Füürball
 SpellIce;Icebolt;Eisblitz;Iisblitz
+SpellSlots;Spell Slots;Verfügbare Zauber;Verfüegbari Zauber
 StartGame;Start Game;Spiel starten;Spiel starte
+Strength;Strength;Stärke;Stärchi
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
 ThirdSpell;3. Spell;3. Zauber;3. Zauber
 Twilight;Twilight;Zwielicht;Zwieliecht
 Unknown;Unknown;Unbekannt;Unbekannt
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-SpellSlots;Spell Slots;Verfügbare Zauber;Verfüegbari Zauber
-GemSockets;Gem Sockets;Edelstein Sockel;Edelstei Sockel

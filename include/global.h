@@ -57,8 +57,6 @@ inline float lerp(float t, float v1, float v2) {
 #define CENDRIC_COLOR_DIVINE_INACTIVE		sf::Color(179, 155, 116)
 #define CENDRIC_COLOR_ILLUSION_INACTIVE		sf::Color(79, 58, 78)
 
-const bool DEBUG_RENDERING = true;
-
 class Logger;
 class TextProvider;
 class ResourceManager;

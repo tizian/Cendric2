@@ -19,7 +19,7 @@ void AntiGravitySpell::update(const sf::Time& frameTime)
 {
 	calculatePositionAccordingToMob(m_nextPosition);
 	setPosition(m_nextPosition);
-	if (DEBUG_RENDERING && m_isDrawBoundingBox)
+	if (m_isDrawBoundingBox)
 	{
 		m_debugBox.setPosition(getPosition());
 	}

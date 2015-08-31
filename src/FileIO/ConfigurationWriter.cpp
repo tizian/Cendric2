@@ -17,6 +17,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeMaxFPS(data);
 		configuration << writeDebugModeOn(data);
+		configuration << writeDebugRenderingOn(data);
 
 		configuration.close();
 	}
@@ -56,9 +57,16 @@ std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data)
 
 std::string ConfigurationWriter::writeDebugModeOn(const ConfigurationData& data) const
 {
-	string quickcastOn = "# 0 means debug mode is off, 1 means debug mode on\n";
-	quickcastOn += "# if the debug mode is on, the game will try to load a savegame 'debug.sav' directly into its level.\n";
-	return quickcastOn.append(string(DEBUGMODE_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
+	string debugModeOn = "# 0 means debug mode is off, 1 means debug mode on\n";
+	debugModeOn += "# if the debug mode is on, the game will try to load a savegame 'debug.sav' directly into its level.\n";
+	return debugModeOn.append(string(DEBUGMODE_ON) + ":" + (data.isDebugMode ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& data) const
+{
+	string debugRenderingOn = "# 0 means debug rendering is off, 1 means debug rendering on\n";
+	debugRenderingOn += "# if the debug rendering is on, the game will display hitboxes and framerate.\n";
+	return debugRenderingOn.append(string(DEBUGRENDERING_ON) + ":" + (data.isDebugRendering ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeSoundVolume(const ConfigurationData& data) const
