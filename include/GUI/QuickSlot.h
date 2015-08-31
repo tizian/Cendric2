@@ -24,6 +24,8 @@ public:
 	// reloads the slot, depending on the character core.
 	void reload();
 
+	void highlight(bool highlight);
+
 	void setPosition(const sf::Vector2f& pos) override;
 	void setItemID(const std::string& itemID);
 

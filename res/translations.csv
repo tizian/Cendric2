@@ -1,6 +1,7 @@
 Apply;Apply;Anwenden;Awende
 Armor;Armour;Rüstung;Rüstig
 Back;Back;Zurück;Zrugg
+BackToCheckpoint;Back to checkpoint;Zurück zum Checkpoint;Zrugg zum Checkpoint
 BackToMenu;Back to menu;Zurück zum Menu;Zrugg zum Menu
 Cancel;Cancel;Abbrechen;Abbreche
 CharacterInfo;Character Info;Charakter Info;Charakter Info
@@ -140,7 +141,6 @@ Reduction;Reduction;Verminderung;Verminderig
 Reflection;Reflection;Reflektion;Abpraller
 Reset;Reset;Zurücksetzen;Zruggsetze
 Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
-RetryLevel;Retry this level;Nochmal versuchen;Nomal probiere
 Save;Save;Speichern;Speichere
 SaveGame;Save Game;Spiel speichern;Spiel speichere
 SavegameDeleted;Save game successfully deleted;Speicherstand erfolgreich gelöscht;Speicherstand isch glöscht

@@ -65,6 +65,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_gameover, "res/screens/screen_gameover.png" },
+		{ ResourceID::Texture_screen_overlay, "res/screens/screen_overlay.png" },
 		{ ResourceID::Texture_screen_menu, "res/screens/screen_menu.png" },
 		{ ResourceID::Texture_debuff_fear, "res/assets/debuffs/spritesheet_debuff_fear.png" },
 		{ ResourceID::Texture_debuff_stun, "res/assets/debuffs/spritesheet_debuff_stun.png" },

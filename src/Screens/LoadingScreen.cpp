@@ -2,18 +2,19 @@
 
 using namespace std;
 
-LoadingScreen::LoadingScreen(LevelID id, CharacterCore* core) : Screen(core)
+LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core)
 {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_loading)));
-	m_levelToLoad = id;
-	m_mapToLoad = MapID::VOID;
-}
-
-LoadingScreen::LoadingScreen(MapID id, CharacterCore* core) : Screen(core)
-{
-	m_screenSprite = sf::Sprite(*g_resourceManager->getTexture(ResourceID::Texture_screen_loading));
-	m_mapToLoad = id;
-	m_levelToLoad = LevelID::VOID;
+	if (core->getData().isInLevel)
+	{
+		m_levelToLoad = core->getData().currentLevel;
+		m_mapToLoad = MapID::VOID;
+	}
+	else
+	{
+		m_levelToLoad = LevelID::VOID;
+		m_mapToLoad = core->getData().currentMap;
+	}
 }
 
 Screen* LoadingScreen::update(const sf::Time& frameTime)

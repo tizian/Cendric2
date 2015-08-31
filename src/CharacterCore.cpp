@@ -40,6 +40,7 @@ bool CharacterCore::load(const std::string& fileName)
 void CharacterCore::loadNew()
 {
 	// start map & position when a new game is loaded
+	m_data.isInLevel = false;
 	m_data.currentMap = MapID::Firstmap; 
 	m_data.currentMapPosition = sf::Vector2f(4400.0f, 650.0f); 
 	m_data.attributes.currentHealthPoints = 100;
@@ -310,10 +311,12 @@ void CharacterCore::setMap(const sf::Vector2f& position, MapID map)
 {
 	m_data.currentMap = map;
 	m_data.currentMapPosition = position;
+	m_data.isInLevel = false;
 }
 
 void CharacterCore::setLevel(const sf::Vector2f& position, LevelID level)
 {
 	m_data.currentLevel = level;
 	m_data.currentLevelPosition = position;
+	m_data.isInLevel = true;
 }

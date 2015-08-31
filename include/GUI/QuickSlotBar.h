@@ -16,6 +16,8 @@ public:
 	void show();
 	void hide();
 
+	void highlightSlots(bool highlight);
+
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 

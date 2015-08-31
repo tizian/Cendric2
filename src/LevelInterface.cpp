@@ -56,6 +56,11 @@ void LevelInterface::consumeItem(const Item& item)
 	m_quickSlotBar.reload();
 }
 
+void LevelInterface::highlightQuickslots(bool highlight)
+{
+	m_quickSlotBar.highlightSlots(highlight);
+}
+
 void LevelInterface::reloadInventory()
 {
 	if (m_inventory.isVisible())

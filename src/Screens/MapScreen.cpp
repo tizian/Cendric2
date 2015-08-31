@@ -42,7 +42,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 			{
 				delete m_characterCore;
 				m_characterCore = newCharacterCore;
-				return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+				return new LoadingScreen(m_characterCore);
 			}
 		}
 		if (g_inputController->isKeyJustPressed(Key::Quicksave))
@@ -66,7 +66,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
 			m_characterCore->setLevel(bean->levelSpawnPoint, bean->level);
 			delete bean;
-			return new LoadingScreen(m_characterCore->getData().currentLevel, getCharacterCore());
+			return new LoadingScreen(getCharacterCore());
 		}
 	}
 }

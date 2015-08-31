@@ -11,7 +11,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 {
 	if (m_startNewGame)
 	{
-		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+		return new LoadingScreen(m_characterCore);
 	}
 	else if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked())
 	{
@@ -21,7 +21,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	else if ((m_resumeGameButton != nullptr && m_resumeGameButton->isClicked()) || (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr))
 	{
 		// resume game
-		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+		return new LoadingScreen(m_characterCore);
 	}
 	else if (m_newGameButton->isClicked() && m_yesOrNoForm == nullptr)
 	{
@@ -30,7 +30,7 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			// we start a new game with an empty character core
 			m_characterCore = new CharacterCore();
 			m_characterCore->loadNew();
-			return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+			return new LoadingScreen(m_characterCore);
 		}
 		else
 		{

@@ -26,6 +26,12 @@ void QuickSlotBar::hide()
 	m_isVisible = false;
 }
 
+void QuickSlotBar::highlightSlots(bool highlight)
+{
+	m_quickSlot1->highlight(highlight);
+	m_quickSlot2->highlight(highlight);
+}
+
 void QuickSlotBar::render(sf::RenderTarget& target)
 {
 	if (!m_isVisible) return;

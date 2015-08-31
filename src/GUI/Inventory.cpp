@@ -151,6 +151,7 @@ void Inventory::handleDragAndDrop()
 			if (m_selectedSlot->getItem().getType() == ItemType::Consumable)
 			{
 				m_interface->notifyConsumableDrop(m_currentClone);
+				m_interface->highlightQuickslots(false);
 			}
 		}
 		delete m_currentClone;
@@ -171,6 +172,10 @@ void Inventory::handleDragAndDrop()
 			m_currentClone = new InventorySlotClone(m_selectedSlot);
 			m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
 			m_selectedSlot->deactivate();
+			if (m_selectedSlot->getItem().getType() == ItemType::Consumable)
+			{
+				m_interface->highlightQuickslots(true);
+			}
 		}
 	}
 	else

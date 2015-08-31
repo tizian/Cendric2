@@ -22,6 +22,7 @@ struct CharacterCoreData
 	std::time_t dateSaved;
 
 	// position & progress
+	bool isInLevel;
 	MapID currentMap;
 	sf::Vector2f currentMapPosition;
 	LevelID currentLevel;
@@ -58,6 +59,7 @@ const CharacterCoreData DEFAULT_CORE
 	sf::Time::Zero,
 	"",
 	time(nullptr),
+	false,
 	MapID::VOID,
 	sf::Vector2f(),
 	LevelID::VOID,

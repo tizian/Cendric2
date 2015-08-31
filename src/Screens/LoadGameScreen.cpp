@@ -15,7 +15,7 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 	}
 	else if (m_loadGame)
 	{
-		return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+		return new LoadingScreen(m_characterCore);
 	}
 	updateObjects(GameObjectType::_Window, frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
@@ -34,7 +34,7 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime)
 				string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
 				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 			}
-			return new LoadingScreen(m_characterCore->getData().currentMap, m_characterCore);
+			return new LoadingScreen(m_characterCore);
 		}
 		else
 		{

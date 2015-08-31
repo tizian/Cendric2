@@ -55,9 +55,9 @@ public:
 	void addItem(const std::string& item, int quantity);
 	// removes item(s) to the data
 	void removeItem(const std::string& item, int quantity);
-	// save the position and map id
+	// save the position and map id. also sets "isInLevel" = false
 	void setMap(const sf::Vector2f& position, MapID map);
-	// save the position and level id
+	// save the position and level id  also sets "isInLevel" = true
 	void setLevel(const sf::Vector2f& position, LevelID level);
 	// getter for core part
 	const CharacterCoreData& getData() const;

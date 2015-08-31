@@ -261,6 +261,15 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	return true;
 }
 
+bool CharacterCoreReader::readIsInLevel(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	data.isInLevel = atoi(startData) == 1;
+	return true;
+}
+
 bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
@@ -615,6 +624,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, QUICKSLOT, strlen(QUICKSLOT)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUICKSLOT));
 			noError = readQuickslot(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, IS_IN_LEVEL, strlen(IS_IN_LEVEL)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(IS_IN_LEVEL));
+			noError = readIsInLevel(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {

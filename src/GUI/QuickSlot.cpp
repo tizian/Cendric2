@@ -44,6 +44,18 @@ void QuickSlot::setPosition(const sf::Vector2f& pos)
 	m_keyText.setPosition(pos);
 }
 
+void QuickSlot::highlight(bool highlight)
+{
+	if (highlight)
+	{
+		m_outside.setOutlineColor(sf::Color::Green);
+	}
+	else
+	{
+		m_outside.setOutlineColor(m_isEmpty ? CENDRIC_COLOR_DARK_GREY : CENDRIC_COLOR_PURPLE);
+	}
+}
+
 void QuickSlot::setItemID(const std::string& itemID)
 {
 	m_itemID = itemID;

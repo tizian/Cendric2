@@ -29,6 +29,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeDateSaved(data);
 		savefile << writeLevelID(data);
 		savefile << writeLevelPosition(data);
+		savefile << writeIsInLevel(data);
 		savefile << writeMapID(data);
 		savefile << writeMapPosition(data);
 		savefile << writeAttributes(data);
@@ -71,6 +72,11 @@ std::string CharacterCoreWriter::writeDateSaved(const CharacterCoreData& data) c
 std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const
 {
 	return string(MAP_ID) + ":" + to_string(static_cast<int>(data.currentMap)) + "\n";
+}
+
+std::string CharacterCoreWriter::writeIsInLevel(const CharacterCoreData& data) const
+{
+	return string(IS_IN_LEVEL) + ":" + (data.isInLevel ? "1" : "0") + "\n";
 }
 
 std::string CharacterCoreWriter::writeMapPosition(const CharacterCoreData& data) const

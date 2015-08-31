@@ -19,6 +19,7 @@ private:
 	bool readSavegameName(char* start, char* end, CharacterCoreData& data) const;
 	bool readSavegameDate(char* start, char* end, CharacterCoreData& data) const;
 
+	bool readIsInLevel(char* start, char* end, CharacterCoreData& data) const;
 	bool readMapID(char* start, char* end, CharacterCoreData& data) const;
 	bool readMapPosition(char* start, char* end, CharacterCoreData& data) const;
 	bool readLevelID(char* start, char* end, CharacterCoreData& data) const;

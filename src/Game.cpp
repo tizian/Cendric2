@@ -20,7 +20,7 @@ Game::Game()
 		}
 		else
 		{
-			m_screenManager = new ScreenManager(new LoadingScreen(core->getData().currentLevel, core));
+			m_screenManager = new ScreenManager(new LoadingScreen(core));
 		}
 	}
 	else

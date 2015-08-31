@@ -11,8 +11,7 @@
 class LoadingScreen : public Screen
 {
 public:
-	LoadingScreen(LevelID level, CharacterCore* core);
-	LoadingScreen(MapID map, CharacterCore* core);
+	LoadingScreen(CharacterCore* core);
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;

@@ -33,6 +33,8 @@ public:
 	void notifyConsumableDrop(const InventorySlotClone* item);
 	// consumes a consumable item
 	void consumeItem(const Item& item);
+	// highlight quickslots
+	void highlightQuickslots(bool highlight);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);

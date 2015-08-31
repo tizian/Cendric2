@@ -32,8 +32,8 @@ private:
 	LevelInterface* m_interface;	
 
 	bool m_isGameOver = false;
-	BitmapText* m_youDied = nullptr;
-	sf::Sprite* m_gameOverSprite = nullptr;
+	BitmapText* m_overlayText = nullptr;
+	sf::Sprite* m_overlaySprite = nullptr;
 	Button* m_retryButton = nullptr;
 	Button* m_backToMenuButton = nullptr;
 };

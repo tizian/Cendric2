@@ -15,6 +15,7 @@ protected:
 	const char* ATTRIBUTES = "attributes";
 
 	// position & progress
+	const char* IS_IN_LEVEL = "is.in.level";
 	const char* MAP_ID = "map.id";
 	const char* MAP_POSITION = "map.position";
 	const char* LEVEL_ID = "level.id";
