@@ -5,7 +5,7 @@
 // reordering this enum will cause confusion.
 enum class Language
 {
-	Void,
+	VOID,
 	Lang_EN,
 	Lang_DE,
 	Lang_CH,

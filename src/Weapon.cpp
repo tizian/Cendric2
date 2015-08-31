@@ -7,16 +7,14 @@ Weapon::Weapon(const ItemBean& bean) : Item(bean)
 	for (auto& it : bean.weaponSlots)
 	{
 		std::pair<SpellType, SpellID> emptySpellSlot(it.type, SpellID::VOID);
-		std::map<SpellModifierType, SpellModifier> modifiers;
-		// insert modifier slots
-		for (auto& it2 : it.allowedModifiers)
-		{
-			modifiers.insert({it2, EMPTY_SPELLMODIFIER});
-		}
+		std::pair<int, std::map<SpellModifierType, SpellModifier>> modifiers;
+		modifiers.first = it.modifierCount;
 		
 		std::pair<
 			std::pair<SpellType, SpellID>,
-			std::map<SpellModifierType, SpellModifier>> slot(emptySpellSlot, modifiers);
+			std::pair<
+			int,
+			std::map<SpellModifierType, SpellModifier >>> slot(emptySpellSlot, modifiers);
 		
 		m_weaponSlots.push_back(slot);
 	}
@@ -52,24 +50,29 @@ const std::map<SpellModifierType, SpellModifier>* Weapon::getCurrentModifiersFor
 	{
 		return nullptr;
 	}
-	return &m_weaponSlots[slotNr].second;
+	return &m_weaponSlots[slotNr].second.second;
 }
 
 bool Weapon::addModifier(int slotNr, const SpellModifier& modifier, bool force)
 {
-	if (!isModifierAllowed(slotNr, modifier.type))
-	{
-		g_logger->logError("Weapon::addModifier", "This slot doesn't exist or doesn't allow a modifier of this type");
-		return false;
-	}
+	if (!doesSlotExist(slotNr)) return false;
+	
+	std::map<SpellModifierType, SpellModifier>& modifiers = m_weaponSlots.at(slotNr).second.second;
+
 	// check if this slot is already taken
-	if (m_weaponSlots.at(slotNr).second.at(modifier.type).type != SpellModifierType::VOID)
+	if (modifiers.find(modifier.type) != modifiers.end())
 	{
-		g_logger->logWarning("Weapon::addModifier", "This modifier slot is already taken");
+		g_logger->logWarning("Weapon::addModifier", "The modifier slot for this type is already taken");
 		if (!force) return false;
 	}
+	// if not, check if there is enough space for the new modifier
+	else if (modifiers.size() >= m_weaponSlots.at(slotNr).second.first)
+	{
+		g_logger->logError("Weapon::addModifier", "There is not enough space for a new modifier!");
+		return false;
+	}
 
-	m_weaponSlots.at(slotNr).second[modifier.type] = modifier;
+	m_weaponSlots.at(slotNr).second.second[modifier.type] = modifier;
 	return true;
 }
 
@@ -91,17 +94,15 @@ bool Weapon::addSpell(int slotNr, SpellID id, bool force)
 	return true;
 }
 
-bool Weapon::isModifierAllowed(int slotNr, SpellModifierType modifier) const
+bool Weapon::doesSlotExist(int slotNr) const
 {
-	// check if slot with this nr exists (avoid out-of-range exception)
+	// check if slot with this nr exists 
 	if (slotNr < 0 || slotNr > m_weaponSlots.size() - 1)
 	{
 		g_logger->logError("Weapon", "This weapon has not enough slots for the modification (slots: " + std::to_string(m_weaponSlots.size()) + ", required nr: " + std::to_string(slotNr));
 		return false;
 	}
-	// check if modifier is allowed
-	const std::map<SpellModifierType, SpellModifier>& modifierSlots = m_weaponSlots.at(slotNr).second;
-	return (modifierSlots.find(modifier) != modifierSlots.end());
+	return true;
 }
 
 bool Weapon::isSpellAllowed(int slotNr, SpellID id) const

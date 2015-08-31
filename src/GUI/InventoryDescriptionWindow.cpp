@@ -44,11 +44,23 @@ InventoryDescriptionWindow::InventoryDescriptionWindow(const Item& item) : Windo
 		stats.append(L": ");
 		stats.append(to_wstring(static_cast<int>(floor(item.getBean().foodDuration.asSeconds()))));
 		stats.append(L" s\n");
-	}
+	} 
 
 	stats.append(g_textProvider->getText("GoldValue"));
 	stats.append(L": ");
 	stats.append(to_wstring(item.getBean().goldValue));
+
+	if (item.getType() == ItemType::Equipment_weapon && item.getBean().weaponSlots.size() > 0)
+	{
+		stats.append(L"\n\n");
+		stats.append(L"<<< " + g_textProvider->getText("SpellSlots") + L" >>>\n");
+		for (auto& it : item.getBean().weaponSlots)
+		{
+			stats.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.type)));
+			stats.append(L" - " + g_textProvider->getText("GemSockets") + L": ");
+			stats.append(to_wstring(it.modifierCount) + L"\n");
+		}
+	}
 
 	m_statsText.setCharacterSize(CHARACTER_SIZE);
 	m_statsText.setColor(CENDRIC_COLOR_WHITE);

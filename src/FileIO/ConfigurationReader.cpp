@@ -125,7 +125,7 @@ bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationDat
 		return false;
 	}
 	Language language = static_cast<Language>(atoi(line.substr(colon + 1).c_str()));
-	if (language >= Language::MAX || language <= Language::Void)
+	if (language >= Language::MAX || language <= Language::VOID)
 	{
 		g_logger->logError("ConfigurationReader", "Language id not recognized.");
 		return false;

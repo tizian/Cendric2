@@ -20,6 +20,7 @@ too many text on one line yay way to many text this needs to be cropped so hard 
 Critical;Critical;Kritisch;Kritisch
 CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
 Delete;Delete;Löschen;Lösche
+Divine;Divine;Heilig;Heilig
 DL_Cendric_Okay;Okay, I will do that.;Okay, das mache ich.;Okay, dännhalt.
 DL_Choice_GiveMeAQuest;Give me a quest.;Gib mir eine Aufgabe.;Gib mer was zum mache.
 DL_Choice_Nothing;None of your business.;Geht dich nichts an.;Gaht dich en füechte Dreck ah.
@@ -28,6 +29,7 @@ DL_Guard_KillSomeRats;Okay, go and kill some rats for me.;Okay, dann geh und töt
 DL_Guard_KillThemAlready;You haven't killed those rats! Go and do your job.;Die Ratten leben noch! Geh jetzt und erledige das.;Du hesch die Ratte nanig killt! Gang ez und mach da.
 Documents;Documents;Schriftstücke;Dokument
 Duration;Duration;Dauer;Duur
+Elemental;Elemental;Elementar;Elementar
 English;English;Englisch;Englisch
 Equipment;Equipment;Ausrüstung;Usrüstig
 Exit;Exit;Beenden;Beende
@@ -47,11 +49,12 @@ HealthRegenerationPerS;Health Regeneration / s;Lebensregeneration / s;Lebensrege
 Hello;Hello;Hallo;Hoi
 IceDamage;Ice Damage;Eisschaden;Iisschade
 IceResistance;Ice Resistance;Eisresistenz;Iisresistenz
+Illusion;Illusion;Illusion;Illusion
 Interact;Interact;Interagieren;Interagiere
 Inventory;Inventory;Inventar;Inventar
+it_eq_purpleback;Purple cape;Violetter Umhang;Violette Umhang
 it_eq_ringoflesserhealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
 it_eq_wizardhatblue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
-it_eq_purpleback;Purple cape;Violetter Umhang;Violette Umhang
 it_eq_wizardhatgrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
 it_fo_bread;Bread;Brot;Brot
 it_fo_caveberry;Cave berries;Höhlenbeeren;Höhlebeeri
@@ -63,8 +66,8 @@ it_go_onecoin;Golden coin;Goldmünze;Goldmünze
 it_go_threecoins;A few coins;Ein paar Münzen;Es paar Münze
 it_mi_goldengoblet;Golden goblet;Goldener Pokal;Goldige Pokal
 it_qe_letter;Sealed Letter;Versiegelter Brief;Versiglete Brief
+it_we_icestaff;Ice staff;Eisstab;Iisstab
 it_we_rustysword;Rusty sword;Rostiges Schwert;Rostigs Schwert
-it_we_icestaf;Ice staff;Eisstab;Iisstab
 itd_bread;An ordinary loaf of bread.;Ein einfaches Brot.;Es Brot halt.
 itd_caveberry;Sweet;Süss;Süess
 itd_cheese;Smelly.;Riecht nicht sonderlich gut.;Er müffelet echli.
@@ -73,10 +76,10 @@ itd_goldengoblet;A golden goblet;Ein goldener Pokal;En goldige Pokal
 itd_healingherb;Heals wounds;Heilt Wunden;Heilt Wunde
 itd_icestaff;Feels ice cold.;Fühlt sich eiskalt an.;So chalt we Iis.
 itd_letter;Sealed;Versiegelt;Versiglet
+itd_purpleback;Ugly cape for testing. Needs some shading. Won't appear in the final version.;Hässlicher Umhang, nur für Testing. Wird vermutlich nicht in dem Endgame auftauchen und wird entfernt.;Boaey we chame nur sonen hässliche Umhang designe, gaht ja gar nid. Schomal was vo Schatte und so ghört? Alteeeee
 itd_ringoflesserhealth;The small ruby sparkles;Der kleine Rubin funkelt;De chli Rubin funklet 
 itd_rustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
 itd_water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
-itd_purpleback;Ugly cape for testing. Needs some shading. Won't appear in the final version.;Hässlicher Umhang, nur für Testing. Wird vermutlich nicht in dem Endgame auftauchen und wird entfernt.;Boaey we chame nur sonen hässliche Umhang designe, gaht ja gar nid. Schomal was vo Schatte und so ghört? Alteeeee
 itd_wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
 Journal;Journal;Tagebuch;Tagebuech
 Jump;Jump;Springen;Springe
@@ -95,6 +98,7 @@ MoveDown;Move down;Nach unten bewegen;Abelaufe
 MoveLeft;Move left;Nach links laufen;Links laufe
 MoveRight;Move right;Nach rechts bewegen;Rechts laufe
 MoveUp;Move up;Nach oben bewegen;Uelaufe
+Necromancy;Necromancy;Nekromantie;Nekromantie
 New;New;Neu;Neu
 NewGame;New Game;Neues Spiel;Neus Spiel
 No;No;Nein;Nai
@@ -122,6 +126,8 @@ QuestItems;Quest Items;Questgegenstände;Questgegeständ
 Quickcast;Quickcast;Schnellzaubern;Schnellzaubere
 Quickload;Quick load;Schnell laden;Schnell lade
 Quicksave;Quick save;Schnell speichern;Schnell speichere
+Quickslot1;Quick Slot 1;Schnellwahl 1;Schnellwahl 1
+QuickSlot2;Quick Slot 2;Schnellwahl 2;Schnellwahl 2
 Reduction;Reduction;Verminderung;Verminderig
 Resume;Resume;Spiel fortsetzen;Zrugg zum Spiel
 RetryLevel;Retry this level;Nochmal versuchen;Nomal probiere
@@ -138,8 +144,9 @@ SpellIce;Icebolt;Eisblitz;Iisblitz
 StartGame;Start Game;Spiel starten;Spiel starte
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
 ThirdSpell;3. Spell;3. Zauber;3. Zauber
+Twilight;Twilight;Zwielicht;Zwieliecht
 Unknown;Unknown;Unbekannt;Unbekannt
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-Quickslot1;Quick Slot 1;Schnellwahl 1;Schnellwahl 1
-QuickSlot2;Quick Slot 2;Schnellwahl 2;Schnellwahl 2
+SpellSlots;Spell Slots;Verfügbare Zauber;Verfüegbari Zauber
+GemSockets;Gem Sockets;Edelstein Sockel;Edelstei Sockel

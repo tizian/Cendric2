@@ -4,6 +4,7 @@
 
 #include "Enums/Language.h"
 #include "Enums/Key.h"
+#include "Enums/SpellType.h"
 
 // pure static class used to resolve enum names.
 class EnumNames 
@@ -14,7 +15,7 @@ public:
 		switch (lang) {
 		default:
 		case Language::MAX:
-		case Language::Void:
+		case Language::VOID:
 			return "Unknown";
 		case Language::Lang_CH:
 			return "SwissGerman";
@@ -22,6 +23,26 @@ public:
 			return "German";
 		case Language::Lang_EN:
 			return "English";
+		}
+	}
+
+	static std::string getSpellTypeName(SpellType type)
+	{
+		switch (type) {
+		default:
+		case SpellType::MAX:
+		case SpellType::VOID:
+			return "Unknown";
+		case SpellType::Elemental:
+			return "Elemental";
+		case SpellType::Divine:
+			return "Divine";
+		case SpellType::Twilight:
+			return "Twilight";
+		case SpellType::Necromancy:
+			return "Necromancy";
+		case SpellType::Illusion:
+			return "Illusion";
 		}
 	}
 

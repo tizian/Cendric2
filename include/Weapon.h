@@ -29,8 +29,10 @@ private:
 
 	std::vector<std::pair<
 		std::pair<SpellType, SpellID>, 
-		std::map<SpellModifierType, SpellModifier>>> m_weaponSlots;
+		std::pair<
+			int,
+			std::map<SpellModifierType, SpellModifier>>>> m_weaponSlots;
 
-	bool isModifierAllowed(int slotNr, SpellModifierType modifier) const;
+	bool doesSlotExist(int slotNr) const;
 	bool isSpellAllowed(int slotNr, SpellID spellID) const;
 };

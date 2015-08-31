@@ -19,7 +19,7 @@ public:
 	void setLanguage(Language lang);
 
 private:
-	Language m_language = Language::Void;
+	Language m_language = Language::VOID;
 	std::map<std::string, std::wstring> m_translationMap;
 	std::wstring m_fallbackString = L"{undefined text}";
 };

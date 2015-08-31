@@ -120,6 +120,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	// don't render dynamic tiles here, they are rendered in the level.
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	// ASSURE that at this point, the view is the correct game view
+	sf::View oldView = renderTarget.getView();
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
@@ -144,4 +145,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	}
 		
 	renderObjects(GameObjectType::_Button, renderTarget);
+
+	// reset the view for the updates
+	renderTarget.setView(oldView);
 }

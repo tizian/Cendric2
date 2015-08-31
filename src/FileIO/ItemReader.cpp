@@ -202,22 +202,14 @@ bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const
 				if (ss.peek() == ',' || ss.peek() == ' ')
 					ss.ignore();
 			}
-			if (slotValues.size() != 8)
+			if (slotValues.size() != 2)
 			{
 				g_logger->logError("ItemReader", "Weapon Spell Slot could not be parsed!");
 				return false;
 			}
 			WeaponSpellSlotBean slot;
 			slot.type = static_cast<SpellType>(slotValues[0]);
-			std::set<SpellModifierType> types;
-			if (slotValues[1] != 0) types.insert(SpellModifierType::Strength);
-			if (slotValues[2] != 0) types.insert(SpellModifierType::Duration);
-			if (slotValues[3] != 0) types.insert(SpellModifierType::Range);
-			if (slotValues[4] != 0) types.insert(SpellModifierType::Speed);
-			if (slotValues[5] != 0) types.insert(SpellModifierType::Damage);
-			if (slotValues[6] != 0) types.insert(SpellModifierType::Count);
-			if (slotValues[7] != 0) types.insert(SpellModifierType::Reflect);
-			slot.allowedModifiers = types;
+			slot.modifierCount = slotValues[1];
 			
 			item.weaponSlots.push_back(slot);
 		}
@@ -267,6 +259,12 @@ bool ItemReader::checkItem(const ItemBean& bean) const
 		{
 			if (it.type <= SpellType::VOID || it.type >= SpellType::MAX)
 			{
+				g_logger->logError("ItemReader", "Weapon slot spell type not resolved.");
+				return false;
+			}
+			if (it.modifierCount < 0 || it.modifierCount > 3)
+			{
+				g_logger->logError("ItemReader", "Weapon slot modifier count not allowed! Must be between 0 and 3");
 				return false;
 			}
 		}

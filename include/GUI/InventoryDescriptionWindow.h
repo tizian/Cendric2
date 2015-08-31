@@ -6,6 +6,7 @@
 #include "TextProvider.h"
 #include "Item.h"
 #include "Weapon.h"
+#include "Enums/EnumNames.h"
 
 class InventoryDescriptionWindow : public Window
 {
