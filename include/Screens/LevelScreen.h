@@ -27,6 +27,9 @@ public:
 	// reloads the inventory if it is visible
 	void reloadInventory();
 
+	// called by the loading screen. the dynamic tiles in level
+	void loadDynamicTiles();
+
 private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar;

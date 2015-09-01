@@ -39,7 +39,11 @@ Screen* LoadingScreen::update(const sf::Time& frameTime)
 
 	m_thread.join();
 	if (m_mapToLoad != nullptr) return m_mapToLoad;
-	if (m_levelToLoad != nullptr) return m_levelToLoad;
+	if (m_levelToLoad != nullptr)
+	{
+		m_levelToLoad->loadDynamicTiles();
+		return m_levelToLoad;
+	}
 
 	return this;
 }

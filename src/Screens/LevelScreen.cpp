@@ -9,9 +9,14 @@ LevelScreen::LevelScreen(LevelID levelID, CharacterCore* core) : Screen(core)
 	m_levelID = levelID;
 }
 
+void LevelScreen::loadDynamicTiles()
+{
+	m_currentLevel.loadDynamicTiles(this);
+}
+
 void LevelScreen::load()
 {
-	if (!(m_currentLevel.load(m_levelID, this)))
+	if (!(m_currentLevel.load(m_levelID)))
 	{
 		string filename(g_resourceManager->getFilename(m_levelID));
 		string errormsg = filename + ": file corrupted!";
@@ -49,6 +54,8 @@ void LevelScreen::cleanUp()
 	delete m_overlayText;
 	delete m_interface;
 }
+
+
 
 void LevelScreen::execOnEnter(const Screen *previousScreen)
 {

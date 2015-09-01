@@ -34,7 +34,7 @@ void Level::loadAfterMainChar(Screen* screen)
 	loader.loadLevelItems(m_levelData, screen);
 }
 
-bool Level::load(LevelID id, Screen* screen) 
+bool Level::load(LevelID id) 
 {
 	LevelReader reader;
 	if (!reader.readLevel(g_resourceManager->getFilename(id), m_levelData))
@@ -47,16 +47,18 @@ bool Level::load(LevelID id, Screen* screen)
 	m_backgroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.backgroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
 	m_foregroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.foregroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
 
-	LevelLoader loader;
-	loader.loadDynamicTiles(m_levelData, screen, this);
-	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
-
 	tileWidth = static_cast<float>(m_levelData.tileSize.x);
 	tileHeight = static_cast<float>(m_levelData.tileSize.y);
 	g_resourceManager->loadLevelResources();
 	return true;
 }
 
+void Level::loadDynamicTiles(Screen* screen)
+{
+	LevelLoader loader;
+	loader.loadDynamicTiles(m_levelData, screen, this);
+	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
+}
 void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
 {
 	sf::View view;
@@ -351,9 +353,9 @@ void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingB
 
 void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect* boundingBox) const
 {
-	for (std::vector<GameObject*>::iterator it = m_dynamicTiles->begin(); it != m_dynamicTiles->end(); ++it)
+	for (auto& it : *m_dynamicTiles)
 	{
-		DynamicTile* tile = dynamic_cast<DynamicTile*>((*it));
+		DynamicTile* tile = dynamic_cast<DynamicTile*>(it);
 		if (tile != nullptr && (tile->getBoundingBox()->intersects(*boundingBox)))
 		{
 			tile->onHit(mob);

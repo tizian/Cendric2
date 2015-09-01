@@ -22,7 +22,9 @@ public:
 	~Level();
 
 	// loads a .dric file
-	bool load(LevelID id, Screen* screen);
+	bool load(LevelID id);
+	// loads only dynamic tiles. this happens AFTER everything other and is because of our nice RENDERTEXTURE PROBLEM >:(
+	void loadDynamicTiles(Screen* screen);
 	// loads enemies and level items for the level. must be called after a screen already has a main char
 	void loadAfterMainChar(Screen* screen);
 	// draws the level. Background layers, background tilemap, dynamic tiles
