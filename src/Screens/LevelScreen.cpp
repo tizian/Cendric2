@@ -9,7 +9,7 @@ LevelScreen::LevelScreen(LevelID levelID, CharacterCore* core) : Screen(core)
 	m_levelID = levelID;
 }
 
-void LevelScreen::execOnEnter(const Screen *previousScreen)
+void LevelScreen::load()
 {
 	if (!(m_currentLevel.load(m_levelID, this)))
 	{
@@ -42,12 +42,22 @@ void LevelScreen::execOnEnter(const Screen *previousScreen)
 	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
 }
 
-void LevelScreen::execOnExit(const Screen *nextScreen)
+void LevelScreen::cleanUp()
 {
 	m_currentLevel.dispose();
 	delete m_overlaySprite;
 	delete m_overlayText;
 	delete m_interface;
+}
+
+void LevelScreen::execOnEnter(const Screen *previousScreen)
+{
+	// nop
+}
+
+void LevelScreen::execOnExit(const Screen *nextScreen)
+{
+	cleanUp();
 }
 
 void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const

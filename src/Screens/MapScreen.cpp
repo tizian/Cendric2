@@ -71,7 +71,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 	}
 }
 
-void MapScreen::execOnEnter(const Screen *previousScreen)
+void MapScreen::load()
 {
 	if (!(m_currentMap.load(m_mapID)))
 	{
@@ -84,6 +84,11 @@ void MapScreen::execOnEnter(const Screen *previousScreen)
 	m_mainChar->setCharacterCore(getCharacterCore());
 	addObject(m_mainChar);
 	m_currentMap.loadAfterMainChar(this);
+}
+
+void MapScreen::execOnEnter(const Screen *previousScreen)
+{
+	// nop
 }
 
 void MapScreen::execOnExit(const Screen *nextScreen)

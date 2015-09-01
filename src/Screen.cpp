@@ -26,6 +26,13 @@ inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundi
 Screen::Screen(CharacterCore* core)
 {
 	m_characterCore = core;
+
+	m_objects = vector<vector<GameObject*>>();
+	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1))
+	{
+		vector<GameObject*> newVector;
+		m_objects.push_back(newVector);
+	}
 }
 
 void Screen::addObject(GameObject* object)
@@ -41,12 +48,6 @@ vector<GameObject*>* Screen::getObjects(GameObjectType type)
 
 void Screen::onEnter(const Screen* previousScreen)
 {
-	m_objects = vector<vector<GameObject*>>();
-	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t+1))
-	{
-		vector<GameObject*> newVector;
-		m_objects.push_back(newVector);
-	}
 	execOnEnter(previousScreen);
 }
 

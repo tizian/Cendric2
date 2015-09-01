@@ -15,59 +15,7 @@ void SplashScreen::execOnEnter(const Screen* previousScreen)
 	fireBasket1->setPosition(sf::Vector2f(60.f, 140.f));
 	fireBasket2->setPosition(sf::Vector2f(998.f, 140.f));
 	addObject(fireBasket1);
-	addObject(fireBasket2);
-
-	SpellSlot *slotInactive = new SpellSlot(SpellBean::getSpellBean(SpellID::FireBall), true);
-	slotInactive->setPosition(sf::Vector2f(200, 100));
-	addObject(slotInactive);
-
-	SpellSlot *slotActive = new SpellSlot(SpellBean::getSpellBean(SpellID::FireBall), true);
-	slotActive->setPosition(sf::Vector2f(400, 100));
-	slotActive->playAnimation(SpellBean::getSpellBean(SpellID::FireBall).cooldown);
-	addObject(slotActive);
-
-	// Particle System Test
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 10000.0f / 5.0f;
-
-	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->center = sf::Vector2f(640, 720);
-	posGen->size = sf::Vector2f(20.0f, 5.0f);
-
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 3.0f;
-	sizeGen->maxStartSize = 12.f;
-	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 2.f;
-
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(150, 0, 180, 255);
-	colGen->maxStartCol = sf::Color(220, 255, 220, 255);
-	colGen->minEndCol = sf::Color(128, 0, 150, 0);
-	colGen->maxEndCol = sf::Color(180, 128, 220, 0);
-
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = -20.f;
-	velGen->maxAngle = 20.f;
-	velGen->minStartVel = 100.f;
-	velGen->maxStartVel = 100.0f;
-
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.0f;
-	timeGen->maxTime = 5.0f;
-
-	// Updaters
-	auto timeUpdater = m_ps->addUpdater<particles::TimeUpdater>();
-
-	auto colorUpdater = m_ps->addUpdater<particles::ColorUpdater>();
-
-	//auto attractorUpdater = m_ps->addUpdater<particles::AttractorUpdater>();
-	//attractorUpdater->add(sf::Vector3f(640, 360, 1000.0f));
-
-	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
-	//eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 1000.0f);
+	addObject(fireBasket2);	
 }
 
 Screen* SplashScreen::update(const sf::Time& frameTime)
@@ -77,8 +25,6 @@ Screen* SplashScreen::update(const sf::Time& frameTime)
 		return new MenuScreen(nullptr);
 	}
 	updateObjects(GameObjectType::_Undefined, frameTime);
-	updateObjects(GameObjectType::_Interface, frameTime);
-	m_ps->update(frameTime);
 	return this;
 }
 
@@ -88,7 +34,6 @@ void SplashScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
 	renderObjects(GameObjectType::_Interface, renderTarget);
-	m_ps->render(renderTarget);
 }
 
 void SplashScreen::execOnExit(const Screen *nextScreen)

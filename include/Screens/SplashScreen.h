@@ -24,5 +24,4 @@ public:
 
 private:	
 	sf::Sprite m_screenSprite;
-	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 };

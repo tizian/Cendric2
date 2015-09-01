@@ -61,7 +61,6 @@ void ResourceManager::init()
 		{ ResourceID::Texture_tile_shiftableblock, "res/assets/dynamic_tiles/spritesheet_tiles_shiftableblock.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
-		{ ResourceID::Texture_screen_loading, "res/screens/screen_loading.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_gameover, "res/screens/screen_gameover.png" },
@@ -336,6 +335,7 @@ void ResourceManager::deleteLevelResources()
 	
 	// delete game over sprite
 	deleteResource(ResourceID::Texture_screen_gameover);
+	
 }
 
 void ResourceManager::loadLevelResources()

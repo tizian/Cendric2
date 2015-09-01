@@ -15,6 +15,8 @@ class LevelScreen : public Screen
 {
 public:
 	LevelScreen(LevelID levelID, CharacterCore* core);
+	// called by the loading screen
+	void load();
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
@@ -36,4 +38,6 @@ private:
 	sf::Sprite* m_overlaySprite = nullptr;
 	Button* m_retryButton = nullptr;
 	Button* m_backToMenuButton = nullptr;
+
+	void cleanUp();
 };

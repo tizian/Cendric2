@@ -197,4 +197,5 @@ void KeyBindingsScreen::execOnExit(const Screen *nextScreen)
 	m_keyTexts.clear();
 	m_keyButtons.clear();
 	m_selectedKeys.clear();
+	delete m_title;
 }

@@ -14,6 +14,8 @@ class MapScreen : public Screen
 {
 public:
 	MapScreen(MapID mapID, CharacterCore* core);
+	// called by the loadingScreen
+	void load();
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

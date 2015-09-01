@@ -1,23 +1,23 @@
 # time played, in seconds
-time.played:104
+time.played:397
 savegame.name:TESTLEVEL
-savegame.date:1441056773
-level.id:2
+savegame.date:1441134996
+level.id:1
 level.position:725.000000,275.000000
 is.in.level:1
 map.id:1
-map.position:4443.153809,259.834198
+map.position:3805.718506,459.907959
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:11
+gold:23
 # items in inventory:
-item.id:it_fo_bread,2
-item.id:it_fo_caveberry,1
-item.id:it_fo_cheese,3
-item.id:it_fo_glowingshroom,3
-item.id:it_fo_water,1
+item.id:it_fo_bread,4
+item.id:it_fo_caveberry,3
+item.id:it_fo_cheese,7
+item.id:it_fo_glowingshroom,8
+item.id:it_fo_water,2
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:6,7,3
 equipped.spellslot:5,2,1,7,1

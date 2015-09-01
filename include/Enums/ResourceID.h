@@ -31,7 +31,6 @@ enum class ResourceID
 	Texture_debuff_stun,
 	Texture_screen_splash,
 	Texture_screen_splash_fireanimation,
-	Texture_screen_loading,
 	Texture_screen_error_fileNotFound,
 	Texture_screen_error_dataCorrupted,
 	Texture_screen_gameover,
