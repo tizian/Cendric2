@@ -83,8 +83,8 @@ void IcyAmbushSpell::execOnHit(LevelMovableGameObject *target)
 		
 		// check if port of owner is possible
 		sf::FloatRect ownerBB = *(m_mob->getBoundingBox());
-		ownerBB.left = target->getBoundingBox()->left + target->getBoundingBox()->width / 2 - ownerBB.width / 2;
-		ownerBB.top = target->getBoundingBox()->top + (target->getBoundingBox()->height - m_mob->getBoundingBox()->height);
+		ownerBB.left = target->getBoundingBox()->left + target->getBoundingBox()->width / 2.f - ownerBB.width / 2.f;
+		ownerBB.top = target->getBoundingBox()->top + (target->getBoundingBox()->height - ownerBB.height);
 		if (!m_level->collidesX(ownerBB) && !m_level->collidesY(ownerBB))
 		{
 			m_mob->setPosition(sf::Vector2f(ownerBB.left, ownerBB.top));

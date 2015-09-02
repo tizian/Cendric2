@@ -83,7 +83,7 @@ protected:
 	bool m_isViewable = true;
 
 	std::map<GameObjectState, Animation> m_animations;
-	sf::Vector2f m_spriteOffset;
+	sf::Vector2f m_spriteOffset = sf::Vector2f(0.f, 0.f);
 	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;

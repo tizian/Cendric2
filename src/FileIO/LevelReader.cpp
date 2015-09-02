@@ -96,7 +96,7 @@ bool LevelReader::checkData(LevelData& data) const
 	}
 	for (int i = 0; i < data.dynamicTileLayers.size(); i++)
 	{
-		if (data.dynamicTileLayers[i].first == DynamicTileID::Void)
+		if (data.dynamicTileLayers[i].first == DynamicTileID::VOID)
 		{
 			g_logger->logError("LevelReader", "Error in level data : dynamic tile ID not recognized");
 			return false;
@@ -347,7 +347,7 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 
 	// read dynamic tile id
 	DynamicTileID id = static_cast<DynamicTileID>(atoi(startData));
-	if (id <= DynamicTileID::Void || id >= DynamicTileID::MAX)
+	if (id <= DynamicTileID::VOID || id >= DynamicTileID::MAX)
 	{
 		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;

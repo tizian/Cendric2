@@ -26,8 +26,11 @@ public:
 	virtual void onHit(LevelMovableGameObject* mob);
 	
 	// gets called by the level when initializing the tile
-	void setTileSize(const sf::Vector2i tileSize);
+	void setTileSize(const sf::Vector2i& tileSize);
+	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
+	void setPositionOffset(const sf::Vector2f& offset);
 	
+	const sf::Vector2f& getPositionOffset() const;
 	virtual bool getIsCollidable() const;
 	GameObjectType getConfiguredType() const override;
 
@@ -37,7 +40,7 @@ protected:
 	sf::Vector2i m_tileSize;
 	bool m_isCollidable;
 	Level* m_level;
-	
-private:	
-	
+
+private:
+	sf::Vector2f m_positionOffset = sf::Vector2f(0.f, 0.f);
 };

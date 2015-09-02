@@ -2,14 +2,15 @@
 
 enum class DynamicTileID
 {
-	Void,
+	VOID,
 	Water,
 	Ice,
-	Crumbly_block,
+	CrumblyBlock,
 	Torch,
 	Chest,
 	SpikesBottom,
 	SpikesTop,
 	ShiftableBlock,
+	Checkpoint,
 	MAX
 };

@@ -22,5 +22,5 @@ enum class GameObjectState
 	Open, // used by chest tile
 	Burning, // used by torch tile
 	Crumbling, // used by crumbly block tile
-	Pressed // used by buttons
+	Active, // Used by checkpoint tiles
 };

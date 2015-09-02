@@ -3,6 +3,7 @@
 
 void SpikesTopTile::init()
 {
+	setPositionOffset(sf::Vector2f(-5.f, -20.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 65.f));
 }

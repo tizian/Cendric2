@@ -59,6 +59,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_tile_spikestop, "res/assets/dynamic_tiles/spritesheet_tiles_spikestop.png" },
 		{ ResourceID::Texture_tile_frozenwater, "res/assets/dynamic_tiles/spritesheet_tiles_frozenwater.png" },
 		{ ResourceID::Texture_tile_shiftableblock, "res/assets/dynamic_tiles/spritesheet_tiles_shiftableblock.png" },
+		{ ResourceID::Texture_tile_checkpoint, "res/assets/dynamic_tiles/spritesheet_tiles_checkpoint.png" },
 		{ ResourceID::Texture_screen_splash, "res/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/screens/screen_error_filenotfound.png" },
@@ -321,6 +322,8 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_tile_chest);
 	deleteResource(ResourceID::Texture_tile_spikesbottom);
 	deleteResource(ResourceID::Texture_tile_spikestop);
+	deleteResource(ResourceID::Texture_tile_shiftableblock);
+	deleteResource(ResourceID::Texture_tile_checkpoint);
 
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
@@ -356,6 +359,8 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_tile_chest);
 	getTexture(ResourceID::Texture_tile_spikestop);
 	getTexture(ResourceID::Texture_tile_spikesbottom);
+	getTexture(ResourceID::Texture_tile_shiftableblock);
+	getTexture(ResourceID::Texture_tile_checkpoint);
 
 	// load game over sprite 
 	getTexture(ResourceID::Texture_screen_gameover);

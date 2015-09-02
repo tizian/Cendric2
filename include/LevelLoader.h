@@ -12,6 +12,7 @@
 #include "DynamicTiles/SpikesTopTile.h"
 #include "DynamicTiles/SimulatedWaterTile.h"
 #include "DynamicTiles/ShiftableBlockTile.h"
+#include "DynamicTiles/CheckpointTile.h"
 
 #include "Enums/DynamicTileID.h"
 #include "Enums/EnemyID.h"

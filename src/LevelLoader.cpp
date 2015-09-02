@@ -21,7 +21,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 		case DynamicTileID::Ice:
 			tile = new IceTile(level);
 			break;
-		case DynamicTileID::Crumbly_block:
+		case DynamicTileID::CrumblyBlock:
 			tile = new CrumblyBlockTile(level);
 			break;
 		case DynamicTileID::Torch:
@@ -39,6 +39,9 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 		case DynamicTileID::ShiftableBlock:
 			tile = new ShiftableBlockTile(level);
 			break;
+		case DynamicTileID::Checkpoint:
+			tile = new CheckpointTile(screen->getCharacterCore(), level);
+			break;
 		default:
 			// unexpected error
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
@@ -47,7 +50,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 
 		tile->setTileSize(data.tileSize);
 		tile->init();
-		tile->setPosition(it.position - tile->getSpriteOffset());
+		tile->setPosition(it.position - tile->getPositionOffset());
 		tile->setDebugBoundingBox(sf::Color::Yellow);
 		tile->load(it.skinNr);
 		screen->addObject(tile);
