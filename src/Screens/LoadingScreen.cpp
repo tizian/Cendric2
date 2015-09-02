@@ -4,8 +4,7 @@ using namespace std;
 
 inline void load(LevelScreen* levelToLoad, MapScreen* mapToLoad, LoadingScreen* loadingScreen)
 {
-	std::this_thread::sleep_for(std::chrono::seconds(5));
-	/*if (loadingScreen == nullptr) return;
+	if (loadingScreen == nullptr) return;
 	if (levelToLoad != nullptr)
 	{
 		levelToLoad->load();
@@ -13,20 +12,20 @@ inline void load(LevelScreen* levelToLoad, MapScreen* mapToLoad, LoadingScreen* 
 	else if (mapToLoad != nullptr)
 	{
 		mapToLoad->load();
-	} */
+	} 
 	loadingScreen->setLoaded();
 }
 
 LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core)
 {
-	/*if (core->getData().isInLevel)
+	if (core->getData().isInLevel)
 	{
 		m_levelToLoad = new LevelScreen(core->getData().currentLevel, getCharacterCore());
 	}
 	else
 	{
 		m_mapToLoad = new MapScreen(core->getData().currentMap, getCharacterCore());
-	} */
+	} 
 }
 
 Screen* LoadingScreen::update(const sf::Time& frameTime)
@@ -40,14 +39,15 @@ Screen* LoadingScreen::update(const sf::Time& frameTime)
 
 	m_thread.join();
 	
-	/*if (m_mapToLoad != nullptr) return m_mapToLoad;
+	if (m_mapToLoad != nullptr) return m_mapToLoad;
 	if (m_levelToLoad != nullptr)
 	{
 		m_levelToLoad->loadDynamicTiles();
 		return m_levelToLoad;
-	} */
+	} 
 
-	return new LoadingScreen(m_characterCore);
+	g_resourceManager->setError(ErrorID::Error_dataCorrupted, "No level or map to load. Aborting.");
+	return this;
 }
 
 void LoadingScreen::render(sf::RenderTarget &renderTarget)
@@ -114,4 +114,5 @@ void LoadingScreen::setLoaded()
 void LoadingScreen::execOnExit(const Screen *nextScreen)
 {
 	delete m_title;
+	if (m_thread.joinable()) m_thread.join();
 }

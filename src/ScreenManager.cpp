@@ -10,6 +10,7 @@ ScreenManager::~ScreenManager()
 {
 	if (m_currentScreen != nullptr)
 	{
+		m_currentScreen->onExit(nullptr);
 		delete m_currentScreen->getCharacterCore();
 		delete m_currentScreen;
 	}
