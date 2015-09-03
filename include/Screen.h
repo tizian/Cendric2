@@ -37,7 +37,7 @@ public:
 	// getter for the tooltip text
 	const BitmapText* getTooltipText() const;
 	// gets the character core that is needed by each screen
-	CharacterCore* getCharacterCore() const;
+	virtual CharacterCore* getCharacterCore() const;
 
 	// sets the tooltip text to 'text' and display it at the tooltip position thats always at the bootom mid of the screen
 	// if override is set, this new text will display anyway, regardless of what other text is displaying.

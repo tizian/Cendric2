@@ -30,6 +30,11 @@ public:
 	// called by the loading screen. the dynamic tiles in level
 	void loadDynamicTiles();
 
+	// the level screen does not use the original core, but runs on a copy. To get the original, call this method.
+	CharacterCore* getOriginalCharacterCore() const;
+	// the level screen doesn't return the original core here, but a mere copy.
+	CharacterCore* getCharacterCore() const override;
+
 private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar;
@@ -41,6 +46,10 @@ private:
 	sf::Sprite* m_overlaySprite = nullptr;
 	Button* m_retryButton = nullptr;
 	Button* m_backToMenuButton = nullptr;
+
+	// the level screen runs on a copy of the character core that only gets written back to the original core
+	// if a checkpoint is reached or the level is finished.
+	CharacterCore* m_characterCoreCopy = nullptr;
 
 	void cleanUp();
 };

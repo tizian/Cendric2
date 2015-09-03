@@ -16,6 +16,9 @@ void LevelScreen::loadDynamicTiles()
 
 void LevelScreen::load()
 {
+	delete m_characterCoreCopy;
+	m_characterCoreCopy = new CharacterCore(*m_characterCore);
+
 	if (!(m_currentLevel.load(m_levelID)))
 	{
 		string filename(g_resourceManager->getFilename(m_levelID));
@@ -50,12 +53,21 @@ void LevelScreen::load()
 void LevelScreen::cleanUp()
 {
 	m_currentLevel.dispose();
+	delete m_characterCoreCopy;
 	delete m_overlaySprite;
 	delete m_overlayText;
 	delete m_interface;
 }
 
+CharacterCore* LevelScreen::getCharacterCore() const
+{
+	return m_characterCoreCopy;
+}
 
+CharacterCore* LevelScreen::getOriginalCharacterCore() const
+{
+	return m_characterCore;
+}
 
 void LevelScreen::execOnEnter(const Screen *previousScreen)
 {
