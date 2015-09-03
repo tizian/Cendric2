@@ -17,7 +17,7 @@ void LevelScreen::loadDynamicTiles()
 void LevelScreen::load()
 {
 	delete m_characterCoreCopy;
-	m_characterCoreCopy = new CharacterCore(*m_characterCore);
+	m_characterCoreCopy = new CharacterCore(m_characterCore->getData());
 
 	if (!(m_currentLevel.load(m_levelID)))
 	{
@@ -30,7 +30,7 @@ void LevelScreen::load()
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
 	m_currentLevel.loadAfterMainChar(this);
 	loader.loadEquipment(this);
-	m_interface = new LevelInterface(m_characterCore, m_mainChar);
+	m_interface = new LevelInterface(m_characterCoreCopy, m_mainChar);
 	m_interface->setSpellManager(m_mainChar->getSpellManager());
 
 	m_retryButton = new Button(sf::FloatRect(450, 410, 350, 50), ButtonOrnamentStyle::MEDIUM);
@@ -54,6 +54,7 @@ void LevelScreen::cleanUp()
 {
 	m_currentLevel.dispose();
 	delete m_characterCoreCopy;
+	m_characterCoreCopy = nullptr;
 	delete m_overlaySprite;
 	delete m_overlayText;
 	delete m_interface;
@@ -61,12 +62,17 @@ void LevelScreen::cleanUp()
 
 CharacterCore* LevelScreen::getCharacterCore() const
 {
+	if (m_characterCoreCopy == nullptr)
+	{
+		return m_characterCore;
+	}
 	return m_characterCoreCopy;
 }
 
-CharacterCore* LevelScreen::getOriginalCharacterCore() const
+void LevelScreen::writeToCore()
 {
-	return m_characterCore;
+	delete m_characterCore;
+	m_characterCore = new CharacterCore(m_characterCoreCopy->getData());
 }
 
 void LevelScreen::execOnEnter(const Screen *previousScreen)
@@ -149,6 +155,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		}
 		else
 		{
+			writeToCore();
 			m_characterCore->setMap(bean->mapSpawnPoint, bean->map);
 			delete bean;
 			return new LoadingScreen(m_characterCore);

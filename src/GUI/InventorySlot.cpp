@@ -91,7 +91,9 @@ void InventorySlot::setPosition(const sf::Vector2f& pos)
 	GameObject::setPosition(pos);
 	m_inside.setPosition(pos);
 	m_outside.setPosition(pos);
-	m_amountText.setPosition(sf::Vector2f(pos.x + SIDE_LENGTH - 8.f, pos.y + SIDE_LENGTH - 8.f));
+	m_amountText.setPosition(sf::Vector2f(
+		pos.x + SIDE_LENGTH - m_amountText.getLocalBounds().width, 
+		pos.y + SIDE_LENGTH - m_amountText.getLocalBounds().height));
 }
 
 void InventorySlot::render(sf::RenderTarget& renderTarget)

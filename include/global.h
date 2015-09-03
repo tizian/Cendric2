@@ -25,7 +25,7 @@ inline float degToRad(float deg) {
 }
 
 inline float lerp(float t, float v1, float v2) {
-    return ((float) 1 - t) * v1 + t * v2;
+    return (1.f - t) * v1 + t * v2;
 }
 
 // TODO these values should not be const, but loaded from an .ini file.

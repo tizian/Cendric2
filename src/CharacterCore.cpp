@@ -11,6 +11,13 @@ CharacterCore::CharacterCore()
 	m_data = DEFAULT_CORE;
 }
 
+CharacterCore::CharacterCore(const CharacterCoreData& data)
+{
+	m_data = data;
+	m_stopwatch.restart();
+	reloadAttributes();
+}
+
 CharacterCore::~CharacterCore()
 {
 	clearEquippedItems();

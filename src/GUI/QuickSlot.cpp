@@ -31,6 +31,7 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[key]) :
 		"");
 	m_keyText.setCharacterSize(16);
+	if (m_keyText.getLocalBounds().width > SIDE_LENGTH - 10.f) m_keyText.setCharacterSize(8);
 
 	reload();
 }
@@ -40,8 +41,10 @@ void QuickSlot::setPosition(const sf::Vector2f& pos)
 	GameObject::setPosition(pos);
 	m_inside.setPosition(pos);
 	m_outside.setPosition(pos);
-	m_amountText.setPosition(sf::Vector2f(pos.x + SIDE_LENGTH - 8.f, pos.y + SIDE_LENGTH - 8.f));
 	m_keyText.setPosition(pos);
+	m_amountText.setPosition(sf::Vector2f(
+		pos.x + SIDE_LENGTH - m_amountText.getLocalBounds().width,
+		pos.y + SIDE_LENGTH - m_amountText.getLocalBounds().height));
 }
 
 void QuickSlot::highlight(bool highlight)

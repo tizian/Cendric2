@@ -1,7 +1,7 @@
 Apply;Apply;Anwenden;Awende
 Armor;Armour;Rüstung;Rüstig
 Back;Back;Zurück;Zrugg
-BackToCheckpoint;Back to checkpoint;Zurück zum Checkpoint;Zrugg zum Checkpoint
+BackToCheckpoint;Back to checkpoint;Zurück zum Kontrollpunkt;Zrugg zum Checkpoint
 BackToMenu;Back to menu;Zurück zum Menu;Zrugg zum Menu
 Cancel;Cancel;Abbrechen;Abbreche
 CharacterInfo;Character Info;Charakter Info;Charakter Info
@@ -96,6 +96,7 @@ LightDamage;Light Damage;Lichtschaden;Liechtschade
 LightResistance;Light Resistance;Lichtresistenz;Liechtresistenz
 Load;Load;Laden;Lade
 LoadGame;Load Game;Spiel laden;Spiel lade
+Loading;Loading...;Lädt...;Es ladet...
 Mana;Mana;Mana;Mana
 ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration
 MaxFPS;Max. FPS;Max. FPS;Max. FPS
@@ -121,6 +122,7 @@ OutOfRange;Out of range;Ich muss näher ran;Da isch z'wiit weg
 PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
 PressAnyKey;<?>;<?>;<?>
 QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du diesen Speicherstand wirklich löschen?;Wetsch de Speicherstand würkli lösche?
+QuestionGoBackToCheckpoint;Your progress since the last checkpoint will be lost. Continue?;Dein Fortschritt seit dem letzten Kontrollpunkt geht verloren. Fortfahren?;Din Fortschritt sitt em letzte Checkpoint gaht verlore. Egal?
 QuestionLoadGame;"Load game?
 All unsaved progress will be lost.";"Spiel laden?
 Ungespeicherter Fortschritt geht verloren.";"Spiel lade?
@@ -161,4 +163,3 @@ Twilight;Twilight;Zwielicht;Zwieliecht
 Unknown;Unknown;Unbekannt;Unbekannt
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-Loading;Loading...;Lädt...;Es ladet...

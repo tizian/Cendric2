@@ -51,6 +51,7 @@ SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
 		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[spellBean.inputKey]) :
 		"");
 	m_inputKey.setCharacterSize(16);
+	if (m_inputKey.getLocalBounds().width > 2 * RADIUS - 10.f) m_inputKey.setCharacterSize(8);
 	m_inputKey.setColor(CENDRIC_COLOR_WHITE);
 
 	m_outerRing = sf::CircleShape(RADIUS);

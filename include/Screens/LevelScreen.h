@@ -30,10 +30,11 @@ public:
 	// called by the loading screen. the dynamic tiles in level
 	void loadDynamicTiles();
 
-	// the level screen does not use the original core, but runs on a copy. To get the original, call this method.
-	CharacterCore* getOriginalCharacterCore() const;
 	// the level screen doesn't return the original core here, but a mere copy.
 	CharacterCore* getCharacterCore() const override;
+	// the level screen does not use the original core, but runs on a copy.
+	// to update the original core, call this method. (used by the checkpoints)
+	void writeToCore();
 
 private:
 	Level m_currentLevel;

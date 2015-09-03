@@ -40,7 +40,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 			tile = new ShiftableBlockTile(level);
 			break;
 		case DynamicTileID::Checkpoint:
-			tile = new CheckpointTile(screen->getCharacterCore(), level);
+			tile = new CheckpointTile(level);
 			break;
 		default:
 			// unexpected error

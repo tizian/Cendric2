@@ -1,12 +1,7 @@
 #include "DynamicTiles/CheckpointTile.h"
 #include "LevelMainCharacter.h"
 #include "Spell.h"
-#include "CharacterCore.h"
-
-CheckpointTile::CheckpointTile(CharacterCore* core, Level* level) : DynamicTile(level) 
-{
-	m_core = core;
-}
+#include "Screens/LevelScreen.h"
 
 void CheckpointTile::init()
 {
@@ -56,7 +51,11 @@ void CheckpointTile::onHit(LevelMovableGameObject* mob)
 		bb.top = getBoundingBox()->top + (getBoundingBox()->height - bb.height);
 		if (!m_level->collidesX(bb) && !m_level->collidesY(bb))
 		{
-			m_core->setLevel(sf::Vector2f(bb.left, bb.top), m_level->getID());
+			if (LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen()))
+			{
+				screen->getCharacterCore()->setLevel(sf::Vector2f(bb.left, bb.top), m_level->getID());
+				screen->writeToCore();
+			}
 		}
 		else
 		{

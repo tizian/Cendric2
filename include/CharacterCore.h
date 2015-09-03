@@ -16,6 +16,7 @@ class CharacterCore
 {
 public:
 	CharacterCore();
+	CharacterCore(const CharacterCoreData& data);
 	~CharacterCore();
 
 	// returns the currently equipped item of type 'type'
