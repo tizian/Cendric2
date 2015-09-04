@@ -125,7 +125,7 @@ void SaveGameScreen::onOverwriteSaveGame()
 	m_yesOrNoForm = nullptr;
 	if (m_characterCore->save(m_saveGameWindow->getChosenFilename(), m_saveGameWindow->getChosenSaveName()))
 	{
-		setTooltipText(g_textProvider->getText("GameSaved"), CENDRIC_COLOR_LIGHT_PURPLE, true);;
+		setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Green, true);;
 	}
 	else
 	{
@@ -176,7 +176,7 @@ void SaveGameScreen::onNewSaveGame()
 	m_newSaveGameForm = nullptr;
 	if (m_characterCore->save(file, name))
 	{
-		setTooltipText(g_textProvider->getText("GameSaved"), CENDRIC_COLOR_LIGHT_PURPLE, true);
+		setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Green, true);
 	}
 	else
 	{

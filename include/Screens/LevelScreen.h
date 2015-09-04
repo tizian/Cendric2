@@ -9,6 +9,7 @@
 #include "LevelInterface.h"
 
 #include "GUI/Button.h"
+#include "GUI/YesOrNoForm.h"
 #include "Enums/LevelID.h"
 
 class LevelScreen : public Screen
@@ -47,6 +48,14 @@ private:
 	sf::Sprite* m_overlaySprite = nullptr;
 	Button* m_retryButton = nullptr;
 	Button* m_backToMenuButton = nullptr;
+	YesOrNoForm* m_yesOrNoForm = nullptr;
+
+	// pretty little agents to give to our yes or no form.
+	void onNo();
+	void onYesToCheckpoint();
+	void onYesToMenu();
+	bool m_isGoBackToCheckpoint = false;
+	bool m_isGoBackToMenu = false;
 
 	// the level screen runs on a copy of the character core that only gets written back to the original core
 	// if a checkpoint is reached or the level is finished.

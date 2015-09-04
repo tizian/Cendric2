@@ -32,7 +32,7 @@ void LevelReader::initMaps()
 		{ 50, "it_fo_bread" },
 	});
 	m_enemyMap.insert({
-		{ 0, EnemyID::Void },
+		{ 0, EnemyID::VOID },
 		{ 1, EnemyID::Rat },
 		{ 2, EnemyID::FireRat },
 	});
@@ -701,49 +701,6 @@ void LevelReader::updateData(LevelData& data)  const
 					x++;
 				}
 			}
-		}
-	}
-	
-	x = 0;
-	y = 0;
-
-	// calculate level items
-	for (std::vector<string>::iterator it = data.levelItems.begin(); it != data.levelItems.end(); ++it)
-	{
-		string id = (*it);
-		if (!id.empty())
-		{
-			data.levelItemPositions.push_back(std::pair<string, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
-		}
-		if (x + 1 >= data.mapSize.x)
-		{
-			x = 0;
-			y++;
-		}
-		else
-		{
-			x++;
-		}
-	}
-
-	x = 0;
-	y = 0;
-
-	// calculate enemies
-	for (std::vector<EnemyID>::iterator it = data.enemies.begin(); it != data.enemies.end(); ++it)
-	{
-		EnemyID id = (*it);		if (id != EnemyID::Void)
-		{
-			data.enemyPositions.push_back(std::pair<EnemyID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
-		}
-		if (x + 1 >= data.mapSize.x)
-		{
-			x = 0;
-			y++;
-		}
-		else
-		{
-			x++;
 		}
 	}
 

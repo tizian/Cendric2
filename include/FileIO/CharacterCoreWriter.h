@@ -29,8 +29,9 @@ private:
 	std::string writeMapPosition(const CharacterCoreData& data) const;
 	std::string writeLevelID(const CharacterCoreData& data) const;
 	std::string writeLevelPosition(const CharacterCoreData& data) const;
-	std::string writeLevelKilled(const CharacterCoreData& data) const;
-	std::string writeLevelLooted(const CharacterCoreData& data) const;
+	std::string writeEnemiesKilled(const CharacterCoreData& data) const;
+	std::string writeEnemiesLooted(const CharacterCoreData& data) const;
+	std::string writeItemsLooted(const CharacterCoreData& data) const;
 	std::string writeQuestStates(const CharacterCoreData& data) const;
 	std::string writeNPCStates(const CharacterCoreData& data) const;
 

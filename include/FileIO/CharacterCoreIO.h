@@ -20,8 +20,9 @@ protected:
 	const char* MAP_POSITION = "map.position";
 	const char* LEVEL_ID = "level.id";
 	const char* LEVEL_POSITION = "level.position";
-	const char* LEVEL_KILLED = "level.killed";
-	const char* LEVEL_LOOTED = "level.looted";
+	const char* ENEMIES_KILLED = "enemies.killed";
+	const char* ENEMIES_LOOTED = "enemies.looted";
+	const char* ITEMS_LOOTED = "items.looted";
 	const char* QUEST_STATE = "quest.state";
 	const char* NPC_STATE = "npc.state";
 

@@ -38,8 +38,9 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeEquippedWeaponSlots(data);
 		savefile << writeEquippedItems(data);
 		savefile << writeQuickslots(data);
-		savefile << writeLevelKilled(data);
-		savefile << writeLevelLooted(data);
+		savefile << writeEnemiesKilled(data);
+		savefile << writeEnemiesLooted(data);
+		savefile << writeItemsLooted(data);
 		savefile << writeQuestStates(data);
 		savefile << writeNPCStates(data);
 
@@ -94,44 +95,64 @@ std::string CharacterCoreWriter::writeLevelPosition(const CharacterCoreData& dat
 	return string(LEVEL_POSITION) + ":" + to_string(data.currentLevelPosition.x) + "," + to_string(data.currentLevelPosition.y) + "\n";
 }
 
-std::string CharacterCoreWriter::writeLevelKilled(const CharacterCoreData& data) const
+std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& data) const
 {
-	string levelsKilled = "# levels killed:\n"; 
+	string enemiesKilled = "# enemies killed in level:\n"; 
 	
-	for (auto it : data.levelKilled)
+	for (auto it : data.enemiesKilled)
 	{
-		string levelKilled = string(LEVEL_KILLED);
-		levelKilled.append(":");
-		levelKilled.append(to_string(static_cast<int>(it.first)));
+		string enemyKilled = string(ENEMIES_KILLED);
+		enemyKilled.append(":");
+		enemyKilled.append(to_string(static_cast<int>(it.first)));
 		for (auto it2 : it.second)
 		{
 			string boolean = it2 ? "1" : "0";
-			levelKilled.append("," + boolean);
+			enemyKilled.append("," + boolean);
 		}
-		levelKilled.append("\n");
-		levelsKilled.append(levelKilled);
+		enemyKilled.append("\n");
+		enemiesKilled.append(enemyKilled);
 	}
-	return levelsKilled;
+	return enemiesKilled;
 }
 
-std::string CharacterCoreWriter::writeLevelLooted(const CharacterCoreData& data) const
+std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& data) const
 {
-	string levelsLooted = "# levels looted:\n";
+	string enemiesLooted = "# enemies looted in level:\n";
 
-	for (auto it : data.levelLooted)
+	for (auto it : data.enemiesLooted)
 	{
-		string levelLooted = string(LEVEL_LOOTED);
-		levelLooted.append(":");
-		levelLooted.append(to_string(static_cast<int>(it.first)));
+		string enemyLooted = string(ENEMIES_LOOTED);
+		enemyLooted.append(":");
+		enemyLooted.append(to_string(static_cast<int>(it.first)));
 		for (auto it2 : it.second)
 		{
 			string boolean = it2 ? "1" : "0";
-			levelLooted.append("," + boolean);
+			enemyLooted.append("," + boolean);
 		}
-		levelLooted.append("\n");
-		levelsLooted.append(levelLooted);
+		enemyLooted.append("\n");
+		enemiesLooted.append(enemyLooted);
 	}
-	return levelsLooted;
+	return enemiesLooted;
+}
+
+std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data) const
+{
+	string itemsLooted = "# items looted in level:\n";
+
+	for (auto it : data.itemsLooted)
+	{
+		string itemLooted = string(ITEMS_LOOTED);
+		itemLooted.append(":");
+		itemLooted.append(to_string(static_cast<int>(it.first)));
+		for (auto it2 : it.second)
+		{
+			string boolean = it2 ? "1" : "0";
+			itemLooted.append("," + boolean);
+		}
+		itemLooted.append("\n");
+		itemsLooted.append(itemLooted);
+	}
+	return itemsLooted;
 }
 
 std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) const

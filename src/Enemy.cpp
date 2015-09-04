@@ -12,6 +12,7 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = mainChar->getScreen();
 	m_spellManager = new SpellManager(this);
+	setDebugBoundingBox(sf::Color::Magenta);
 	
 	// load hp bar
 	m_hpBar.setFillColor(sf::Color::Red);
@@ -386,6 +387,11 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold)
 	m_lootWindow->setLoot(items, gold);
 }
 
+void Enemy::setSpawnPosition(int spawnPosition)
+{
+	m_spawnPosition = spawnPosition;
+}
+
 void Enemy::setFeared(const sf::Time &fearedTime)
 {
 	m_fearedTime = fearedTime;
@@ -432,6 +438,7 @@ void Enemy::onRightClick()
 			// loot, create the correct items + gold in the players inventory.
 			m_mainChar->lootItems(m_lootableItems);
 			m_mainChar->addGold(m_lootableGold);
+			m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_spawnPosition);
 			setDisposed();
 		}
 		else
@@ -446,4 +453,5 @@ void Enemy::setDead()
 {
 	LevelMovableGameObject::setDead();
 	m_enemyState = EnemyState::Dead;
+	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_spawnPosition);
 }

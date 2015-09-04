@@ -26,6 +26,9 @@ void LevelScreen::load()
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}
+
+	m_characterCoreCopy->initializeMaps(m_levelID, m_currentLevel.getNumberOfTiles());
+
 	LevelMainCharacterLoader loader;
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
 	m_currentLevel.loadAfterMainChar(this);
@@ -97,6 +100,14 @@ void LevelScreen::reloadInventory()
 
 Screen* LevelScreen::update(const sf::Time& frameTime)
 {
+	if (m_isGoBackToCheckpoint)
+	{
+		return new LoadingScreen(m_characterCore);
+	}
+	if (m_isGoBackToMenu)
+	{
+		return new MenuScreen(m_characterCore);
+	}
 	// handle game over
 	if (!m_isGameOver && m_mainChar->isDead())
 	{
@@ -110,22 +121,32 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 
 	if (m_retryButton->isClicked())
 	{
-		return new LoadingScreen(m_characterCore);
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
+		addObject(m_yesOrNoForm);
+		setAllButtonsEnabled(false);
 	}
-
-	if (m_backToMenuButton->isClicked())
+	else if (m_backToMenuButton->isClicked())
 	{
-		return new MenuScreen(m_characterCore);
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToMenu, this));
+		addObject(m_yesOrNoForm);
+		setAllButtonsEnabled(false);
 	}
 
 	updateObjects(GameObjectType::_Button, frameTime);
+	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
 	if (!m_retryButton->isVisible())
 	{
 		m_interface->update(frameTime);
 	}
 
-	if (!g_inputController->isActionLocked() && g_inputController->isKeyJustPressed(Key::Escape))
+	if (m_retryButton->isEnabled() && !g_inputController->isActionLocked() && g_inputController->isKeyJustPressed(Key::Escape))
 	{
 		if (m_retryButton->isVisible())
 		{
@@ -161,6 +182,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 			return new LoadingScreen(m_characterCore);
 		}
 	}
+	deleteDisposedObjects();
 	return this;
 }
 
@@ -194,7 +216,27 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	}
 		
 	renderObjects(GameObjectType::_Button, renderTarget);
+	renderObjects(GameObjectType::_Form, renderTarget);
 
 	// reset the view for the updates
 	renderTarget.setView(oldView);
+}
+
+// yes or no form
+void LevelScreen::onNo()
+{
+	m_yesOrNoForm->setDisposed();
+	setAllButtonsEnabled(true);
+}
+
+void LevelScreen::onYesToCheckpoint()
+{
+	m_isGoBackToCheckpoint = true;
+	m_yesOrNoForm->setDisposed();
+}
+
+void LevelScreen::onYesToMenu()
+{
+	m_isGoBackToMenu = true;
+	m_yesOrNoForm->setDisposed();
 }

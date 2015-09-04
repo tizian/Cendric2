@@ -35,7 +35,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 			if (!newCharacterCore->quickload())
 			{
 				// no quicksave exists
-				setTooltipText(g_textProvider->getText("NoQuicksaveExists"), sf::Color::Cyan, true);
+				setTooltipText(g_textProvider->getText("NoQuicksaveExists"), sf::Color::Red, true);
 				delete newCharacterCore;
 			}
 			else
@@ -49,7 +49,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 		{
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
 			m_characterCore->quicksave();
-			setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Cyan, true);
+			setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Green, true);
 		}
 		MapExitBean* bean = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
 		if (bean == nullptr || m_isOnLevelEntry)

@@ -24,8 +24,9 @@ private:
 	bool readMapPosition(char* start, char* end, CharacterCoreData& data) const;
 	bool readLevelID(char* start, char* end, CharacterCoreData& data) const;
 	bool readLevelPosition(char* start, char* end, CharacterCoreData& data) const;
-	bool readLevelKilled(char* start, char* end, CharacterCoreData& data) const;
-	bool readLevelLooted(char* start, char* end, CharacterCoreData& data) const;
+	bool readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const;
+	bool readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const;
+	bool readItemsLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestStates(char* start, char* end, CharacterCoreData& data) const;
 	bool readNPCStates(char* start, char* end, CharacterCoreData& data) const;
 

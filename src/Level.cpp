@@ -42,7 +42,7 @@ bool Level::load(LevelID id)
 		return false;
 	}
 
-	m_id = id;
+	m_levelData.id = id;
 	// load level
 	m_backgroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.backgroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
 	m_foregroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.foregroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
@@ -338,6 +338,11 @@ float Level::getCeiling(const sf::FloatRect& boundingBox) const
 	return y * tileHeight;
 }
 
+int Level::getNumberOfTiles() const
+{
+	return m_levelData.mapSize.x * m_levelData.mapSize.y;
+}
+
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const
 {
 	size_t size = m_dynamicTiles->size(); // Note: this loop type allows objects to be added to the back of the list while iterating over it.
@@ -384,5 +389,5 @@ LevelExitBean* Level::checkLevelExit(const sf::FloatRect& boundingBox) const
 
 LevelID Level::getID() const
 {
-	return m_id;
+	return m_levelData.id;
 }

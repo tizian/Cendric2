@@ -42,6 +42,7 @@ void LevelItem::onRightClick()
 		{
 			m_mainChar->lootItem(m_itemID, 1);
 		}
+		m_screen->getCharacterCore()->setItemLooted(m_mainChar->getLevel()->getID(), m_spawnPosition);
 		setDisposed();
 	}
 	else
@@ -102,5 +103,10 @@ void LevelItem::setTooltipText(const std::wstring& tooltip)
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);
 	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
+}
+
+void LevelItem::setSpawnPosition(int spawnPosition)
+{
+	m_spawnPosition = spawnPosition;
 }
 

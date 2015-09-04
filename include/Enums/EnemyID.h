@@ -2,7 +2,8 @@
 
 enum class EnemyID
 {
-	Void,
+	VOID,
 	Rat,
 	FireRat,
+	MAX
 };

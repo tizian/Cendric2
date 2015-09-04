@@ -36,6 +36,8 @@ public:
 	void setStunned(const sf::Time &stunnedTime);
 	void setLoot(const std::map<std::string, int> &items, int gold);
 	void setDead() override;
+	// the spawn position in the level enemy layer.
+	void setSpawnPosition(int pos);
 
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
@@ -55,6 +57,7 @@ protected:
 	virtual void updateHpBar();
 	
 	EnemyID m_id;
+	int m_spawnPosition = -1;
 	// spells from these enemies won't hurt. default is its own type.
 	std::vector<EnemyID> m_immuneEnemies;
 	// spells of these damage types won't hurt. default is empty.

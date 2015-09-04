@@ -66,19 +66,39 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 		return;
 	}
 
-	for (std::vector<std::pair<string, sf::Vector2f>>::iterator it = data.levelItemPositions.begin(); it != data.levelItemPositions.end(); ++it)
-	{
-		const ItemBean* item = g_resourceManager->getItemBean(it->first);
-		if (item == nullptr)
-		{
-			// unexpected error
-			g_logger->logError("LevelLoader", "Level item was not loaded, unknown id.");
-			return;
-		}
+	int x = 0;
+	int y = 0;
+	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
-		LevelItem* levelItem = new LevelItem();
-		levelItem->load(mainCharacter, *item, it->second);
-		screen->addObject(levelItem);
+	// calculate level positions and create them if they are not looted yet
+	for (int i = 0; i < data.levelItems.size(); i++)
+	{
+		auto& it = data.levelItems.at(i);
+		if (!it.empty() && !coreData.itemsLooted.at(data.id).at(i))
+		{
+			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
+			const ItemBean* item = g_resourceManager->getItemBean(it);
+			if (item == nullptr)
+			{
+				// unexpected error
+				g_logger->logError("LevelLoader", "Level item was not loaded, unknown id.");
+				return;
+			}
+
+			LevelItem* levelItem = new LevelItem();
+			levelItem->load(mainCharacter, *item, position);
+			levelItem->setSpawnPosition(i);
+			screen->addObject(levelItem);
+		}
+		if (x + 1 >= data.mapSize.x)
+		{
+			x = 0;
+			y++;
+		}
+		else
+		{
+			x++;
+		}
 	}
 }
 
@@ -91,31 +111,51 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 		return;
 	}
 
-	for (auto it : data.enemyPositions)
-	{
-		Enemy* enemy = nullptr;
-		std::map<string, int> loot;
-		switch (it.first)
-		{
-		case EnemyID::Rat:
-			enemy = new RatEnemy(level, mainCharacter);
-			loot.insert({ "it_fo_cheese", 1 });
-			enemy->setLoot(loot, 1);
-			break;
-		case EnemyID::FireRat:
-			enemy = new FireRatEnemy(level, mainCharacter);
-			loot.insert({ "it_fo_bread", 2 });
-			enemy->setLoot(loot, 2);
-			break;
-		case EnemyID::Void:
-		default:
-			// unexpected error
-			g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
-			return;
-		}
+	int x = 0;
+	int y = 0;
+	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
-		enemy->setPosition(it.second);
-		enemy->setDebugBoundingBox(sf::Color::Magenta);
-		screen->addObject(enemy);
+	// calculate level positions and create them if they are not looted yet
+	for (int i = 0; i < data.enemies.size(); i++)
+	{
+		auto& it = data.enemies.at(i);
+		if (it != EnemyID::VOID && !coreData.enemiesLooted.at(data.id).at(i))
+		{
+			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
+			Enemy* enemy = nullptr;
+			std::map<string, int> loot;
+			switch (it)
+			{
+			case EnemyID::Rat:
+				enemy = new RatEnemy(level, mainCharacter);
+				loot.insert({ "it_fo_cheese", 1 });
+				enemy->setLoot(loot, 1);
+				break;
+			case EnemyID::FireRat:
+				enemy = new FireRatEnemy(level, mainCharacter);
+				loot.insert({ "it_fo_bread", 2 });
+				enemy->setLoot(loot, 2);
+				break;
+			case EnemyID::VOID:
+			default:
+				// unexpected error
+				g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
+				return;
+			}
+
+			enemy->setPosition(position);
+			enemy->setSpawnPosition(i);
+			if (coreData.enemiesKilled.at(data.id).at(i)) enemy->setDead();
+			screen->addObject(enemy);
+		}
+		if (x + 1 >= data.mapSize.x)
+		{
+			x = 0;
+			y++;
+		}
+		else
+		{
+			x++;
+		}
 	}
 }

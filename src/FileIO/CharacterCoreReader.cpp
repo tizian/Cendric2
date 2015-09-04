@@ -34,7 +34,7 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : (some) attributes cannot be negative");
 		return false;
 	}
-	for (auto &it : data.levelKilled)
+	for (auto &it : data.enemiesKilled)
 	{
 		if (it.first == LevelID::VOID)
 		{
@@ -42,7 +42,15 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 			return false;
 		}
 	}
-	for (auto &it : data.levelLooted)
+	for (auto &it : data.enemiesLooted)
+	{
+		if (it.first == LevelID::VOID)
+		{
+			g_logger->logError("CharacterCoreReader", "Error in savegame data : level not resolved");
+			return false;
+		}
+	}
+	for (auto &it : data.itemsLooted)
 	{
 		if (it.first == LevelID::VOID)
 		{
@@ -406,7 +414,7 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	return true;
 }
 
-bool CharacterCoreReader::readLevelKilled(char* start, char* end, CharacterCoreData& data) const
+bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const
 {
 	// add a level state
 	vector<bool> layer;
@@ -435,11 +443,11 @@ bool CharacterCoreReader::readLevelKilled(char* start, char* end, CharacterCoreD
 		}
 	}
 
-	data.levelKilled.insert({id, layer});
+	data.enemiesKilled.insert({id, layer});
 	return true;
 }
 
-bool CharacterCoreReader::readLevelLooted(char* start, char* end, CharacterCoreData& data) const
+bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const
 {
 	// add a level state
 	vector<bool> layer;
@@ -468,7 +476,40 @@ bool CharacterCoreReader::readLevelLooted(char* start, char* end, CharacterCoreD
 		}
 	}
 
-	data.levelLooted.insert({ id, layer });
+	data.enemiesLooted.insert({ id, layer });
+	return true;
+}
+
+bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreData& data) const
+{
+	// add a level state
+	vector<bool> layer;
+
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	endData = gotoNextChar(startData, end, '\n');
+
+	LevelID id = static_cast<LevelID>(atoi(startData));
+	if (id <= LevelID::VOID || id >= LevelID::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
+		return false;
+	}
+	startData++;
+
+	while (startData != NULL)
+	{
+		layer.push_back(atoi(startData) != 0);
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+	}
+
+	data.itemsLooted.insert({ id, layer });
 	return true;
 }
 
@@ -551,14 +592,19 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 			noError = readLevelPosition(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, LEVEL_KILLED, strlen(LEVEL_KILLED)) == 0) {
-			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(LEVEL_KILLED));
-			noError = readLevelKilled(pos, end, data);
+		else if (strncmp(pos, ENEMIES_KILLED, strlen(ENEMIES_KILLED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(ENEMIES_KILLED));
+			noError = readEnemiesKilled(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
-		else if (strncmp(pos, LEVEL_LOOTED, strlen(LEVEL_LOOTED)) == 0) {
-			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(LEVEL_LOOTED));
-			noError = readLevelLooted(pos, end, data);
+		else if (strncmp(pos, ENEMIES_LOOTED, strlen(ENEMIES_LOOTED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(ENEMIES_LOOTED));
+			noError = readEnemiesLooted(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, ITEMS_LOOTED, strlen(ITEMS_LOOTED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(ITEMS_LOOTED));
+			noError = readItemsLooted(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {

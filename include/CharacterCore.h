@@ -62,6 +62,14 @@ public:
 	void setLevel(const sf::Vector2f& position, LevelID level);
 	// getter for core part
 	const CharacterCoreData& getData() const;
+	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level
+	void initializeMaps(LevelID level, int length);
+	// signal enemy kill
+	void setEnemyKilled(LevelID level, int pos);
+	// signal enemy looted
+	void setEnemyLooted(LevelID level, int pos);
+	// signal item looted
+	void setItemLooted(LevelID level, int pos);
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;

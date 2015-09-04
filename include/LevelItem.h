@@ -27,6 +27,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 	void setTooltipText(const std::wstring& tooltip);
+	void setSpawnPosition(int spawnPosition);
 
 private:
 	LevelMainCharacter* m_mainChar;
@@ -35,6 +36,7 @@ private:
 	std::string m_itemID;
 	// only relevant for gold items. they have their item type "Gold".
 	int m_goldValue;
+	int m_spawnPosition = -1;
 	ItemType m_itemType;
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;

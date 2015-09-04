@@ -60,12 +60,13 @@ public:
 	float getGround(const sf::FloatRect& boundingBox) const;
 	// returns the next y position where the bounding box is on the ceiling.
 	float getCeiling(const sf::FloatRect& boundingBox) const;
+	// returns the total of tiles in the level
+	int getNumberOfTiles() const;
 
 private:
 	TileMap m_backgroundTileMap;
 	TileMap m_foregroundTileMap;
 	std::vector<GameObject*>* m_dynamicTiles;
-	LevelID m_id;
 	// data loaded by the level loader
 	LevelData m_levelData;
 

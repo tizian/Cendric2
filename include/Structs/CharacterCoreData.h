@@ -27,8 +27,9 @@ struct CharacterCoreData
 	sf::Vector2f currentMapPosition;
 	LevelID currentLevel;
 	sf::Vector2f currentLevelPosition;
-	std::map<LevelID, std::vector<bool>> levelLooted;
-	std::map<LevelID, std::vector<bool>> levelKilled;
+	std::map<LevelID, std::vector<bool>> enemiesLooted;
+	std::map<LevelID, std::vector<bool>> enemiesKilled;
+	std::map<LevelID, std::vector<bool>> itemsLooted;
 	
 	// quest & npc progress
 	std::map<NPCID, NPCState> npcStates;
@@ -64,6 +65,7 @@ const CharacterCoreData DEFAULT_CORE
 	sf::Vector2f(),
 	LevelID::VOID,
 	sf::Vector2f(),
+	std::map<LevelID, std::vector<bool>>(),
 	std::map<LevelID, std::vector<bool>>(),
 	std::map<LevelID, std::vector<bool>>(),
 	std::map<NPCID, NPCState>(),
