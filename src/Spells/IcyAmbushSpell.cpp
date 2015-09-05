@@ -106,7 +106,7 @@ void IcyAmbushSpell::loadParticleSystem()
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 	posGen->size = sf::Vector2f(getBoundingBox()->width / 2.f, 0.f);
-	m_pointGenerator = posGen.get();
+    m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 2.f;
@@ -125,18 +125,16 @@ void IcyAmbushSpell::loadParticleSystem()
 	velGen->maxAngle = 360.f;
 	velGen->minStartVel = 200.f;
 	velGen->maxStartVel = 200.f;
-	m_velGenerator = velGen.get();
+    m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 1.0f;
 	timeGen->maxTime = 1.0f;
 
 	// Updaters
-	auto timeUpdater = m_ps->addUpdater<particles::TimeUpdater>();
-
-	auto colorUpdater = m_ps->addUpdater<particles::ColorUpdater>();
-
-	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::TimeUpdater>();
+	m_ps->addUpdater<particles::ColorUpdater>();
+    m_ps->addUpdater<particles::EulerUpdater>();
 }
 
 void IcyAmbushSpell::updateParticleSystemPosition()

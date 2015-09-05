@@ -83,7 +83,7 @@ void SimulatedWaterTile::load(int skinNr)
 	timeGen->maxTime = 10.0f;
 
 	// Updaters
-	auto timeUpdater = m_ps->addUpdater<particles::TimeUpdater>();
+	m_ps->addUpdater<particles::TimeUpdater>();
 
 	auto waterUpdater = m_ps->addUpdater<particles::SimulatedWaterUpdater>();
 	waterUpdater->water = this;
@@ -206,6 +206,30 @@ void SimulatedWaterTile::splash(float xPosition, float velocity)
 	m_ps->emit(nParticles);
 }
 
+void SimulatedWaterTile::splash(float xPosition, float width, float velocity)
+{
+	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
+	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
+	for (int i = startIndex; i <= endIndex; ++i)
+	{
+		if (i > 0 && i < m_nColumns)
+		{
+			m_columns[i].velocity = velocity;
+		}
+	}
+
+	velocity = std::abs(velocity);
+	xPosition = xPosition + 0.5f * width;
+	float y = getHeight(xPosition);
+	const sf::FloatRect *bb = getBoundingBox();
+
+	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y - WATER_SURFACE_THICKNESS);
+	*m_particleMinSpeed = 0.2f * velocity;
+	*m_particleMaxSpeed = 1.0f * velocity;
+	int nParticles = static_cast<int>(velocity / 8);
+	m_ps->emit(nParticles);
+}
+
 void SimulatedWaterTile::render(sf::RenderTarget& target)
 {
 	target.draw(m_vertexArray);
@@ -252,8 +276,7 @@ void SimulatedWaterTile::onHit(LevelMovableGameObject* mob)
 	float vy = mob->getVelocity().y;
 	float vel = std::sqrt(vx*vx + vy*vy);
 	// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
-	float x = mob->getBoundingBox()->left + mob->getBoundingBox()->width / 2;
-	splash(x, -vel * 0.5f);
+	splash(mob->getBoundingBox()->left, mob->getBoundingBox()->width, -vel * 0.5f);
 }
 
 void SimulatedWaterTile::freeze(int index)

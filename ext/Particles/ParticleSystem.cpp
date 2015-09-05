@@ -8,6 +8,16 @@ namespace particles
 		}
 	}
 
+	ParticleSystem::~ParticleSystem() {
+		for (auto g : m_generators) {
+			delete g;
+		}
+
+		for (auto u : m_updaters) {
+			delete u;
+		}
+	}
+
 	void ParticleSystem::emit(float dt) {
 		m_dt += dt;
 

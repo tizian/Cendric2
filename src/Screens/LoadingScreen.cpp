@@ -65,8 +65,7 @@ void LoadingScreen::execOnEnter(const Screen *previousScreen)
 	m_ps->emitRate = 10000.0f / 1.0f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
-	m_posGen = posGen.get();
+	m_posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 3.0f;
@@ -74,12 +73,11 @@ void LoadingScreen::execOnEnter(const Screen *previousScreen)
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 2.f;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	m_colorGen = colGen.get();
-	colGen->minStartCol = sf::Color(0, 0, 0, 255);
-	colGen->maxStartCol = sf::Color(0, 0, 0, 255);
-	colGen->minEndCol = sf::Color(128, 0, 150, 0);
-	colGen->maxEndCol = sf::Color(180, 128, 220, 0);
+	m_colorGen = m_ps->addGenerator<particles::ColorGenerator>();
+	m_colorGen->minStartCol = sf::Color(0, 0, 0, 255);
+	m_colorGen->maxStartCol = sf::Color(0, 0, 0, 255);
+	m_colorGen->minEndCol = sf::Color(128, 0, 150, 0);
+	m_colorGen->maxEndCol = sf::Color(180, 128, 220, 0);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -180.f;
@@ -92,11 +90,9 @@ void LoadingScreen::execOnEnter(const Screen *previousScreen)
 	timeGen->maxTime = 0.2f;
 
 	// Updaters
-	auto timeUpdater = m_ps->addUpdater<particles::TimeUpdater>();
-
-	auto colorUpdater = m_ps->addUpdater<particles::ColorUpdater>();
-
-	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::TimeUpdater>();
+    m_ps->addUpdater<particles::ColorUpdater>();
+    m_ps->addUpdater<particles::EulerUpdater>();
 
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Loading"));

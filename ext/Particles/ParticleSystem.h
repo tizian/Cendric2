@@ -10,7 +10,7 @@ namespace particles
 	{
 	public:
 		ParticleSystem(int maxCount);
-		virtual ~ParticleSystem() {}
+		virtual ~ParticleSystem();
 
 		ParticleSystem(const ParticleSystem &) = delete;
 		ParticleSystem &operator=(const ParticleSystem &) = delete;
@@ -24,15 +24,15 @@ namespace particles
 		virtual int numAliveParticles() const { return m_particles.countAlive; }
 
 		template<typename T>
-		inline std::shared_ptr<T> addGenerator() {
-			auto g = std::make_shared<T>();
+		inline T *addGenerator() {
+			T *g = new T();
 			m_generators.push_back(g);
 			return g;
 		}
 
 		template<typename T>
-		inline std::shared_ptr<T> addUpdater() {
-			auto u = std::make_shared<T>();
+		inline T *addUpdater() {
+			T *u = new T();
 			m_updaters.push_back(u);
 			return u;
 		}
@@ -50,8 +50,8 @@ namespace particles
 		ParticleData m_particles;
 		sf::VertexArray m_vertices;
 
-		std::vector<std::shared_ptr<ParticleGenerator>> m_generators;
-		std::vector<std::shared_ptr<ParticleUpdater>> m_updaters;
+		std::vector<ParticleGenerator *> m_generators;
+		std::vector<ParticleUpdater *> m_updaters;
 	};
 
 	class PointParticleSystem : public ParticleSystem

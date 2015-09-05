@@ -42,6 +42,7 @@ public:
 	float getHeight(float xPosition);
 
 	void splash(float xPosition, float velocity);
+	void splash(float xPosition, float width, float velocity);
 
 	void freeze(int index);
 	void melt(int index);
