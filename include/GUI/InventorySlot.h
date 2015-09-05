@@ -24,11 +24,14 @@ public:
 	// deactivate sets the colors of this slot all grey.
 	void deactivate();
 
+	void highlight(bool highlight);
+
 	void render(sf::RenderTarget& renderTarget) override;
 	void onLeftJustPressed() override;
 	void onRightClick() override;
  
 	void setPosition(const sf::Vector2f& pos) override;
+	void setItemType(ItemType type);
 
 	// asks if it is clicked and sets the member bool to false again (!)
 	bool isClicked();
@@ -36,6 +39,8 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 	const Item& getItem() const;
+	ItemType getItemType() const;
+	const std::string& getItemID() const;
 
 	static const float SIDE_LENGTH;
 	static const float MARGIN;
@@ -46,6 +51,7 @@ private:
 	bool m_isConsumed = false;
 
 	Item m_item;
+	ItemType m_type;
 
 	sf::RectangleShape m_inside;
 	sf::RectangleShape m_outside;

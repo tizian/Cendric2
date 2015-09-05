@@ -1,25 +1,25 @@
 # time played, in seconds
-time.played:1075
+time.played:1136
 savegame.name:TESTLEVEL
-savegame.date:1441454536
+savegame.date:1441474874
 level.id:2
-level.position:1860.000000,450.000000
-is.in.level:1
+level.position:1960.000000,1200.000000
+is.in.level:0
 map.id:1
-map.position:4426.966309,259.866730
+map.position:4000.000000,827.932007
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:48
+gold:50
 # items in inventory:
 item.id:it_fo_bread,10
 item.id:it_fo_caveberry,8
-item.id:it_fo_cheese,14
+item.id:it_fo_cheese,16
 item.id:it_fo_glowingshroom,13
 item.id:it_fo_healingherb,4
 item.id:it_fo_water,5
-item.id:it_qe_letter,1
+item.id:it_qe_letter,2
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:6,7,3
 equipped.spellslot:5,2,1,7,1
@@ -30,17 +30,17 @@ equipped.back:it_eq_purpleback
 equipped.body:
 equipped.head:it_eq_wizardhatblue
 equipped.neck:
-equipped.ring1:
+equipped.ring1:it_eq_ringoflesserhealth
 equipped.ring2:
 equipped.weapon:it_we_rustysword
 # quickslot assignments:
 quickslot:1,it_fo_caveberry
 quickslot:2,it_fo_glowingshroom
 # enemies killed in level:
-enemies.killed:2,0,740,967,1074,1307
+enemies.killed:2,0,740,967,1074,1307,1799
 # enemies looted in level:
-enemies.looted:2,0,967,1074,1307
+enemies.looted:2,0,967,1074,1307,1799
 # items looted in level:
-items.looted:2,0,734,738,1076,1200,1229,1302
+items.looted:2,0,734,738,1076,1200,1229,1302,1800,1801,1802,1803
 # quest states:
 # npc states:

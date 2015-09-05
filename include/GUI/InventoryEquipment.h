@@ -7,6 +7,8 @@
 #include "Window.h"
 #include "GUI/InventorySlot.h"
 
+class InventorySlotClone;
+
 // the equipment part of the inventory. it shows all equipped items
 class InventoryEquipment
 {
@@ -25,6 +27,10 @@ public:
 	// returns an inventory slot* if one was selected, else nullptr
 	InventorySlot* getSelectedSlot();
 
+	void highlightEquipmentSlot(ItemType type, bool highlight);
+	// returns wheter an equipment change has happened.
+	bool notifyEquipmentDrop(const InventorySlotClone* item);
+
 	static float WIDTH;
 	static float TOP;
 	static float LEFT;
@@ -35,7 +41,7 @@ private:
 	
 	bool m_isVisible = false;
 	
-	std::vector<InventorySlot> m_slots;
+	std::map<ItemType, InventorySlot> m_slots;
 
 	Window* m_window;
 };

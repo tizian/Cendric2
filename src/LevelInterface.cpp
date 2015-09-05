@@ -2,7 +2,7 @@
 #include "LevelMainCharacter.h"
 
 LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) : m_core(core), m_character(character),
-m_inventory(this), m_characterInfo(character), m_healthBar(character->getAttributes()), m_quickSlotBar(this)
+m_inventory(this), m_characterInfo(character->getAttributes()), m_healthBar(character->getAttributes()), m_quickSlotBar(this)
 {
 }
 

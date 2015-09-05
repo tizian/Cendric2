@@ -11,8 +11,8 @@
 #include "GUI/TexturedButton.h"
 #include "GUI/InventoryEquipment.h"
 
-class LevelMainCharacter;
 class LevelInterface;
+class MapInterface;
 
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
@@ -21,6 +21,7 @@ class Inventory
 {
 public:
 	Inventory(LevelInterface* _interface);
+	Inventory(MapInterface* _interface);
 	~Inventory();
 
 	void show();
@@ -36,8 +37,11 @@ public:
 
 private:
 	CharacterCore* m_core;
-	LevelInterface* m_interface;
+	LevelInterface* m_levelInterface = nullptr;
+	MapInterface* m_mapInterface = nullptr;
 	bool m_isVisible = false;
+
+	void init();
 
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector
@@ -59,16 +63,18 @@ private:
 	ItemType m_currentTab;
 	InventorySlot* m_selectedSlot = nullptr;
 	void selectTab(ItemType type);
-	void selectSlot(InventorySlot* selectedSlot);
+	void selectSlot(InventorySlot* selectedSlot, bool isEquipmentSlot);
 
 	// used for drag & drop handling
 	InventorySlotClone* m_currentClone = nullptr;
 	bool m_hasDraggingStarted = false;
+	bool m_isEquipmentSlotDragged = false;
 	bool m_isDragging = false;
 	// the mouse has to move this distance while pressed to spawn a clone.
 	const float DRAG_DISTANCE = 10.f;
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
+	void removeEquipmentItem();
 
 	InventoryDescriptionWindow* m_descriptionWindow = nullptr;
 	void showDescription(const InventorySlot& slot);

@@ -19,6 +19,7 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 	const std::string& getItemID() const;
+	const ItemType getItemType() const;
 
 private:
 	const InventorySlot* m_original;

@@ -60,6 +60,8 @@ public:
 	void setMap(const sf::Vector2f& position, MapID map);
 	// save the position and level id  also sets "isInLevel" = true
 	void setLevel(const sf::Vector2f& position, LevelID level);
+	// equips an item at the given position and adds the former equipment part into the inventory. To deequip an item, use this method with an empty string as item id.
+	void equipItem(const std::string& item, ItemType type);
 	// getter for core part
 	const CharacterCoreData& getData() const;
 	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level

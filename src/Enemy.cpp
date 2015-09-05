@@ -12,7 +12,6 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = mainChar->getScreen();
 	m_spellManager = new SpellManager(this);
-	setDebugBoundingBox(sf::Color::Magenta);
 	
 	// load hp bar
 	m_hpBar.setFillColor(sf::Color::Red);

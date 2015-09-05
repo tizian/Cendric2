@@ -5,7 +5,7 @@ using namespace std;
 InventorySlotClone::InventorySlotClone(const InventorySlot* original)
 {
 	m_original = original;
-
+	
 	setBoundingBox(sf::FloatRect(0.f, 0.f, InventorySlot::SIDE_LENGTH, InventorySlot::SIDE_LENGTH));
 	setDebugBoundingBox(sf::Color::Red);
 	setInputInDefaultView(true);
@@ -13,9 +13,9 @@ InventorySlotClone::InventorySlotClone(const InventorySlot* original)
 	m_inside.setSize(sf::Vector2f(InventorySlot::SIDE_LENGTH, InventorySlot::SIDE_LENGTH));
 	m_inside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_items));
 	m_inside.setTextureRect(sf::IntRect(
-		original->getItem().getIconTextureLocation().x, 
-		original->getItem().getIconTextureLocation().y, 
-		static_cast<int>(InventorySlot::SIDE_LENGTH), 
+		original->getItem().getIconTextureLocation().x,
+		original->getItem().getIconTextureLocation().y,
+		static_cast<int>(InventorySlot::SIDE_LENGTH),
 		static_cast<int>(InventorySlot::SIDE_LENGTH)));
 
 	m_outside.setSize(sf::Vector2f(InventorySlot::SIDE_LENGTH, InventorySlot::SIDE_LENGTH));
@@ -44,5 +44,10 @@ GameObjectType InventorySlotClone::getConfiguredType() const
 
 const std::string& InventorySlotClone::getItemID() const
 {
-	return m_original->getItem().getID();
+	return m_original->getItemID();
+}
+
+const ItemType InventorySlotClone::getItemType() const
+{
+	return m_original->getItemType();
 }

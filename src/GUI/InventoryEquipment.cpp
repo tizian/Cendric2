@@ -1,4 +1,5 @@
 #include "GUI/InventoryEquipment.h"
+#include "GUI/InventorySlotClone.h"
 
 float MARGIN = 10.f;
 float YOFFSET = 28.f;
@@ -33,7 +34,7 @@ void InventoryEquipment::update(const sf::Time& frameTime)
 	// check whether an item was selected
 	for (auto& it : m_slots)
 	{
-		it.update(frameTime);
+		it.second.update(frameTime);
 	}
 }
 
@@ -44,18 +45,55 @@ void InventoryEquipment::render(sf::RenderTarget& target)
 	m_window->render(target);
 	for (auto& it : m_slots)
 	{
-		it.render(target);
-		// it.renderAfterForeground(target); // uncomment for debug box
+		it.second.render(target);
 	}
+}
+
+void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight)
+{
+	if (m_slots.find(type) == m_slots.end()) return;
+	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2)
+	{
+		m_slots.at(ItemType::Equipment_ring_1).highlight(highlight);
+		m_slots.at(ItemType::Equipment_ring_2).highlight(highlight);
+	}
+	else
+	{
+		m_slots.at(type).highlight(highlight);
+	}
+}
+
+bool InventoryEquipment::notifyEquipmentDrop(const InventorySlotClone* item)
+{
+	if (item == nullptr || m_slots.find(item->getItemType()) == m_slots.end()) return false;
+	if (item->getItemType() == ItemType::Equipment_ring_1 || item->getItemType() == ItemType::Equipment_ring_2)
+	{
+		if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox())))
+		{
+			m_core->equipItem(item->getItemID(), ItemType::Equipment_ring_1);
+			return true;
+		}
+		else if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox())))
+		{
+			m_core->equipItem(item->getItemID(), ItemType::Equipment_ring_2);
+			return true;
+		}
+	}
+	else if (item->getBoundingBox()->intersects(*(m_slots.at(item->getItemType()).getBoundingBox())))
+	{
+		m_core->equipItem(item->getItemID(), item->getItemType());
+		return true;
+	}
+	return false;
 }
 
 InventorySlot* InventoryEquipment::getSelectedSlot()
 {
 	for (auto& it : m_slots)
 	{
-		if (it.isClicked())
+		if (it.second.isClicked())
 		{
-			return &it;
+			return &it.second;
 		}
 	}
 	return nullptr;
@@ -66,21 +104,33 @@ void InventoryEquipment::reload()
 	m_slots.clear();
 
 	const sf::Texture* tex = g_resourceManager->getTexture(ResourceID::Texture_equipmentplaceholders);
-	sf::Vector2i texPos(0, 0);
-	m_slots.push_back(m_core->getEquippedItem(ItemType::Equipment_weapon) == nullptr ? InventorySlot(tex, texPos) : InventorySlot(*(m_core->getEquippedItem(ItemType::Equipment_weapon)), -1)); texPos.x += 50;
-	m_slots.push_back(m_core->getEquippedItem(ItemType::Equipment_head) == nullptr ? InventorySlot(tex, texPos) : InventorySlot(*(m_core->getEquippedItem(ItemType::Equipment_head)), -1)); texPos.x += 50;
-	m_slots.push_back(m_core->getEquippedItem(ItemType::Equipment_neck) == nullptr ? InventorySlot(tex, texPos) : InventorySlot(*(m_core->getEquippedItem(ItemType::Equipment_neck)), -1)); texPos.x += 50;
-	m_slots.push_back(m_core->getEquippedItem(ItemType::Equipment_body) == nullptr ? InventorySlot(tex, texPos) : InventorySlot(*(m_core->getEquippedItem(ItemType::Equipment_body)), -1)); texPos.x += 50;
-	m_slots.push_back(m_core->getEquippedItem(ItemType::Equipment_back) == nullptr ? InventorySlot(tex, texPos) : InventorySlot(*(m_core->getEquippedItem(ItemType::Equipment_back)), -1)); texPos.x += 50;
-	m_slots.push_back(m_core->getEquippedItem(ItemType::Equipment_ring_1) == nullptr ? InventorySlot(tex, texPos) : InventorySlot(*(m_core->getEquippedItem(ItemType::Equipment_ring_1)), -1)); texPos.x += 50;
-	m_slots.push_back(m_core->getEquippedItem(ItemType::Equipment_ring_2) == nullptr ? InventorySlot(tex, texPos) : InventorySlot(*(m_core->getEquippedItem(ItemType::Equipment_ring_2)), -1)); texPos.x += 50;
 
+	std::vector<ItemType> types;
+	types.push_back(ItemType::Equipment_weapon);
+	types.push_back(ItemType::Equipment_head);
+	types.push_back(ItemType::Equipment_neck);
+	types.push_back(ItemType::Equipment_body);
+	types.push_back(ItemType::Equipment_back);
+	types.push_back(ItemType::Equipment_ring_1);
+	types.push_back(ItemType::Equipment_ring_2);
+
+	sf::Vector2i texPos(0, 0);
 	float xOffset = LEFT + ((WIDTH - InventorySlot::SIDE_LENGTH) / 2.f);
 	float yOffset = TOP + YOFFSET;
-	
-	for (auto& it : m_slots)
+
+	for (auto& it : types)
 	{
-		it.setPosition(sf::Vector2f(xOffset, yOffset));
+		if (m_core->getEquippedItem(it) == nullptr)
+		{
+			m_slots.insert({ it, InventorySlot(tex, texPos) });
+		}
+		else
+		{
+			m_slots.insert({ it, InventorySlot(*(m_core->getEquippedItem(it)), -1) });
+		}
+		texPos.x += 50;
+		m_slots.at(it).setItemType(it);
+		m_slots.at(it).setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += InventorySlot::SIDE_LENGTH + MARGIN;
 	}
 }

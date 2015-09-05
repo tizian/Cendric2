@@ -160,7 +160,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		m_interface->update(frameTime);
 	}
 
-	if (m_retryButton->isEnabled() && !g_inputController->isActionLocked() && g_inputController->isKeyJustPressed(Key::Escape))
+	if (m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape))
 	{
 		if (m_retryButton->isVisible())
 		{

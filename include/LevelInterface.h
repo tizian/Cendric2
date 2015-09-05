@@ -7,7 +7,6 @@
 #include "ResourceManager.h"
 
 #include "GUI/HealthBar.h"
-#include "GUI/SpellSelection.h"
 #include "GUI/Inventory.h"
 #include "GUI/CharacterInfo.h"
 #include "GUI/SpellSelection.h"

@@ -4,10 +4,9 @@ int round_int(float r) {
 	return static_cast<int>((r > 0.0) ? (r + 0.5) : (r - 0.5));
 }
 
-CharacterInfo::CharacterInfo(LevelMainCharacter* mainChar)
+CharacterInfo::CharacterInfo(const AttributeBean* attributes)
 {
-	m_mainChar = mainChar;
-	m_attributes = mainChar->getAttributes();
+	m_attributes = attributes;
 
 	// init window
 	sf::FloatRect box(CHARACTERINFO_LEFT, CHARACTERINFO_TOP, CHARACTERINFO_WIDTH, CHARACTERINFO_HEIGHT);

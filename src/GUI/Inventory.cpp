@@ -1,16 +1,30 @@
 #include "GUI/Inventory.h"
 #include "LevelMainCharacter.h"
 #include "LevelInterface.h"
+#include "MapInterface.h"
 
 Inventory::Inventory(LevelInterface* _interface)
 {
-	m_interface = _interface;
+	m_levelInterface = _interface;
+	m_core = _interface->getCore();
+	
+	init();
+}
+
+Inventory::Inventory(MapInterface* _interface)
+{
+	m_mapInterface = _interface;
 	m_core = _interface->getCore();
 
+	init();
+}
+
+void Inventory::init()
+{
 	// init window
 	sf::FloatRect box(INVENTORY_LEFT, INVENTORY_TOP, INVENTORY_WIDTH, INVENTORY_HEIGHT);
-	m_window = new Window(box, 
-		WindowOrnamentStyle::LARGE, 
+	m_window = new Window(box,
+		WindowOrnamentStyle::LARGE,
 		CENDRIC_COLOR_TRANS_BLACK, // main
 		sf::Color::Transparent, // back
 		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
@@ -98,12 +112,12 @@ void Inventory::update(const sf::Time& frameTime)
 		it.update(frameTime);
 		if (it.isClicked())
 		{
-			selectSlot(&it);
+			selectSlot(&it, false);
 			return;
 		}
-		if (it.isConsumed())
+		if (it.isConsumed() && m_levelInterface != nullptr)
 		{
-			m_interface->consumeItem(it.getItem());
+			m_levelInterface->consumeItem(it.getItem());
 			break;
 		}
 	}
@@ -120,15 +134,16 @@ void Inventory::update(const sf::Time& frameTime)
 
 	// update equipment part
 	m_equipment->update(frameTime);
-	selectSlot(m_equipment->getSelectedSlot());
+	selectSlot(m_equipment->getSelectedSlot(), true);
 
 	handleDragAndDrop();
 }
 
-void Inventory::selectSlot(InventorySlot* selectedSlot)
+void Inventory::selectSlot(InventorySlot* selectedSlot, bool isEquipmentSlot)
 {
 	if (selectedSlot == nullptr) return;
 	m_hasDraggingStarted = true;
+	m_isEquipmentSlotDragged = isEquipmentSlot;
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	if (selectedSlot == m_selectedSlot) return;
 	if (m_selectedSlot != nullptr)
@@ -140,6 +155,15 @@ void Inventory::selectSlot(InventorySlot* selectedSlot)
 	showDescription(*m_selectedSlot);
 }
 
+void Inventory::removeEquipmentItem()
+{
+	if (m_window->getBoundingBox()->intersects(*m_currentClone->getBoundingBox()))
+	{
+		m_core->equipItem("", m_currentClone->getItemType());
+		reload();
+	}
+}
+
 void Inventory::handleDragAndDrop()
 {
 	if (!m_hasDraggingStarted) return;
@@ -148,10 +172,25 @@ void Inventory::handleDragAndDrop()
 		if (m_selectedSlot != nullptr)
 		{
 			m_selectedSlot->activate();
-			if (m_selectedSlot->getItem().getType() == ItemType::Consumable)
+			if (m_selectedSlot->getItemType() == ItemType::Consumable && m_levelInterface != nullptr)
 			{
-				m_interface->notifyConsumableDrop(m_currentClone);
-				m_interface->highlightQuickslots(false);
+				m_levelInterface->notifyConsumableDrop(m_currentClone);
+				m_levelInterface->highlightQuickslots(false);
+			}
+			else if (m_mapInterface != nullptr && m_currentClone != nullptr)
+			{
+				if (m_isEquipmentSlotDragged)
+				{
+					removeEquipmentItem();
+				}
+				else
+				{
+					if (m_equipment->notifyEquipmentDrop(m_currentClone))
+					{
+						reload();
+					}
+					m_equipment->highlightEquipmentSlot(m_currentClone->getItemType(), false);
+				}
 			}
 		}
 		delete m_currentClone;
@@ -172,9 +211,13 @@ void Inventory::handleDragAndDrop()
 			m_currentClone = new InventorySlotClone(m_selectedSlot);
 			m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
 			m_selectedSlot->deactivate();
-			if (m_selectedSlot->getItem().getType() == ItemType::Consumable)
+			if (m_selectedSlot->getItemType() == ItemType::Consumable && m_levelInterface != nullptr)
 			{
-				m_interface->highlightQuickslots(true);
+				m_levelInterface->highlightQuickslots(true);
+			}
+			else if (m_mapInterface != nullptr && m_selectedSlot != nullptr && !m_isEquipmentSlotDragged)
+			{
+				m_equipment->highlightEquipmentSlot(m_selectedSlot->getItemType(), true);
 			}
 		}
 	}

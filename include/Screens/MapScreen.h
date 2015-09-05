@@ -7,6 +7,7 @@
 #include "ResourceManager.h"
 #include "Screens/LoadingScreen.h"
 #include "GUI/DialogueWindow.h"
+#include "MapInterface.h"
 
 #include "Enums/MapID.h"
 
@@ -30,4 +31,5 @@ private:
 	MapMainCharacter* m_mainChar;
 	bool m_isOnLevelEntry = true;
 	DialogueWindow* m_dialogueWindow = nullptr;
+	MapInterface* m_interface;
 };

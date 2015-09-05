@@ -350,3 +350,49 @@ void CharacterCore::setLevel(const sf::Vector2f& position, LevelID level)
 	m_data.currentLevelPosition = position;
 	m_data.isInLevel = true;
 }
+
+void CharacterCore::equipItem(const std::string& item, ItemType type)
+{
+	std::string oldItem = "";
+	switch (type)
+	{
+	case ItemType::Equipment_back:
+		oldItem = m_data.equippedBack;
+		m_data.equippedBack = item;
+		break;
+	case ItemType::Equipment_body:
+		oldItem = m_data.equippedBody;
+		m_data.equippedBody = item;
+		break;
+	case ItemType::Equipment_head:
+		oldItem = m_data.equippedHead;
+		m_data.equippedHead = item;
+		break;
+	case ItemType::Equipment_neck:
+		oldItem = m_data.equippedNeck;
+		m_data.equippedNeck = item;
+		break;
+	case ItemType::Equipment_ring_1:
+		oldItem = m_data.equippedRing1;
+		m_data.equippedRing1 = item;
+		break;
+	case ItemType::Equipment_ring_2:
+		oldItem = m_data.equippedRing2;
+		m_data.equippedRing2 = item;
+		break;
+	case ItemType::Equipment_weapon:
+		oldItem = m_data.equippedWeapon;
+		m_data.equippedWeapon = item;
+		m_data.equippedWeaponSlots.clear();
+		break;
+	default: 
+		return;
+	}
+	removeItem(item, 1);
+	if (!oldItem.empty())
+	{
+		addItem(oldItem, 1);
+	}
+	loadEquipmentItems();
+	loadItems();
+}

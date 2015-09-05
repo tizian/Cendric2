@@ -5,11 +5,11 @@
 #include "Window.h"
 
 // the character info, as displayed in a level
-// it takes its information from the level main character
+// it takes its information from an attribute bean (of the level main char or the character core)
 class CharacterInfo
 {
 public:
-	CharacterInfo(LevelMainCharacter* mainChar);
+	CharacterInfo(const AttributeBean* attributes);
 	~CharacterInfo();
 
 	void show();
@@ -19,7 +19,6 @@ public:
 	bool isVisible() const;
 
 private:
-	LevelMainCharacter* m_mainChar;
 	const AttributeBean* m_attributes;
 	bool m_isVisible = false;
 

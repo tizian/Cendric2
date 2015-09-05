@@ -8,6 +8,8 @@ const float InventorySlot::MARGIN = 2.f;
 
 InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getBean())
 {
+	m_type = m_item.getType();
+
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIDE_LENGTH, SIDE_LENGTH));
 	setDebugBoundingBox(sf::Color::Red);
 	setInputInDefaultView(true);
@@ -56,6 +58,18 @@ void InventorySlot::deactivate()
 	m_inside.setFillColor(sf::Color(150, 150, 150));
 }
 
+void InventorySlot::highlight(bool highlight)
+{
+	if (highlight)
+	{
+		m_outside.setOutlineColor(sf::Color::Green);
+	}
+	else
+	{
+		m_outside.setOutlineColor(m_isSelected ? sf::Color::Red : CENDRIC_COLOR_DARK_PURPLE);
+	}
+}
+
 void InventorySlot::select()
 {
 	if (m_isSelected || m_item.getType() == ItemType::VOID) return;
@@ -96,6 +110,11 @@ void InventorySlot::setPosition(const sf::Vector2f& pos)
 		pos.y + SIDE_LENGTH - m_amountText.getLocalBounds().height));
 }
 
+void InventorySlot::setItemType(ItemType type)
+{
+	m_type = type;
+}
+
 void InventorySlot::render(sf::RenderTarget& renderTarget)
 {
 	renderTarget.draw(m_outside);
@@ -114,7 +133,6 @@ void InventorySlot::onRightClick()
 	if (m_item.getType() == ItemType::Consumable)
 	{
 		m_isConsumed = true;
-		m_outside.setOutlineColor(sf::Color::Green);
 		g_inputController->lockAction();
 	}
 }
@@ -127,4 +145,14 @@ GameObjectType InventorySlot::getConfiguredType() const
 const Item& InventorySlot::getItem() const
 {
 	return m_item;
+}
+
+ItemType InventorySlot::getItemType() const
+{
+	return m_type;
+}
+
+const std::string& InventorySlot::getItemID() const
+{
+	return m_item.getID();
 }

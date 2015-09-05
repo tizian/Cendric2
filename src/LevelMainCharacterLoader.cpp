@@ -49,6 +49,8 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 
 		equipment.texturePath = bean->spritesheetPath;
 		
+		if (equipment.texturePath.empty()) continue;
+
 		equipment.spriteOffset = sf::Vector2f(0.f, 0.f);
 		equipment.boundingBox = sf::FloatRect(0, 0, 120, 120);
 		for (int i = 0; i < 8; i++)
