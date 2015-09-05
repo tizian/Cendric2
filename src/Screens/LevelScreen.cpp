@@ -121,21 +121,35 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 
 	if (m_retryButton->isClicked())
 	{
-		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
-		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
-		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
-		addObject(m_yesOrNoForm);
-		setAllButtonsEnabled(false);
+		if (m_isGameOver)
+		{
+			m_isGoBackToCheckpoint = true;
+		}
+		else
+		{
+			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+			m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
+			m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
+			m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
+			addObject(m_yesOrNoForm);
+			setAllButtonsEnabled(false);
+		}
 	}
 	else if (m_backToMenuButton->isClicked())
 	{
-		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
-		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
-		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToMenu, this));
-		addObject(m_yesOrNoForm);
-		setAllButtonsEnabled(false);
+		if (m_isGameOver)
+		{
+			m_isGoBackToMenu = true;
+		}
+		else
+		{
+			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+			m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
+			m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
+			m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToMenu, this));
+			addObject(m_yesOrNoForm);
+			setAllButtonsEnabled(false);
+		}
 	}
 
 	updateObjects(GameObjectType::_Button, frameTime);

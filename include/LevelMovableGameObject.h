@@ -3,7 +3,6 @@
 #include "global.h"
 #include "MovableGameObject.h"
 #include "Structs/AttributeBean.h"
-#include "Enums/DebuffType.h"
 
 class Level;
 class SpellManager;
@@ -82,8 +81,4 @@ protected:
 	// attributes, include regeneration (hp) and all buffs.
 	void updateAttributes(const sf::Time& frameTime);
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
-
-	// current debuffs
-	void updateDebuffs(const sf::Time& frameTime);
-	std::map<DebuffType, sf::Time> m_currentDebuffs;
 };

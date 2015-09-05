@@ -7,11 +7,6 @@ LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject
 	m_level = level;
 	m_foodAttributes.first = sf::Time::Zero;
 	m_foodAttributes.second = ZERO_ATTRIBUTES;
-
-	for (DebuffType debuffType = static_cast<DebuffType>(1); debuffType < DebuffType::MAX; debuffType = static_cast<DebuffType>(static_cast<int>(debuffType)+1))
-	{
-		m_currentDebuffs.insert({ debuffType, sf::Time::Zero });
-	}
 }
 
 LevelMovableGameObject::~LevelMovableGameObject()
@@ -51,34 +46,6 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 	if (!m_isDead)
 	{
 		updateAttributes(frameTime);
-		updateDebuffs(frameTime);
-	}
-}
-
-void LevelMovableGameObject::updateDebuffs(const sf::Time& frameTime)
-{
-	for (auto& it : m_currentDebuffs)
-	{
-		if (it.second == sf::Time::Zero) continue;
-		it.second -= frameTime;
-		if (it.second < sf::Time::Zero)
-		{
-			it.second = sf::Time::Zero;
-			continue;
-		}
-		switch (it.first)
-		{
-		case DebuffType::Feared:
-			break;
-		case DebuffType::DamageOverTime:
-			break;
-		case DebuffType::Frozen:
-			break;
-		case DebuffType::Stunned:
-			break;
-		default:
-			break;
-		}
 	}
 }
 
