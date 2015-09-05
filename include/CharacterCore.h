@@ -63,7 +63,7 @@ public:
 	// getter for core part
 	const CharacterCoreData& getData() const;
 	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level
-	void initializeMaps(LevelID level, int length);
+	void initializeMaps(LevelID level);
 	// signal enemy kill
 	void setEnemyKilled(LevelID level, int pos);
 	// signal enemy looted

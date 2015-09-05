@@ -262,33 +262,27 @@ void CharacterCore::clearItems()
 	m_items.clear();
 }
 
-void CharacterCore::initializeMaps(LevelID level, int length)
+void CharacterCore::initializeMaps(LevelID level)
 {
 	if (m_data.enemiesKilled.find(level) != m_data.enemiesKilled.end()) return;
-	m_data.enemiesKilled.insert({ level, std::vector<bool>() });
-	m_data.enemiesLooted.insert({ level, std::vector<bool>() });
-	m_data.itemsLooted.insert({ level, std::vector<bool>() });
-	for (int i = 0; i < length; i++)
-	{
-		m_data.enemiesKilled.at(level).push_back(false);
-		m_data.enemiesLooted.at(level).push_back(false);
-		m_data.itemsLooted.at(level).push_back(false);
-	}
+	m_data.enemiesKilled.insert({ level, std::set<int>() });
+	m_data.enemiesLooted.insert({ level, std::set<int>() });
+	m_data.itemsLooted.insert({ level, std::set<int>() });
 }
 
 void CharacterCore::setEnemyKilled(LevelID level, int pos)
 {
-	m_data.enemiesKilled.at(level).at(pos) = true;
+	m_data.enemiesKilled.at(level).insert(pos);
 }
 
 void CharacterCore::setEnemyLooted(LevelID level, int pos)
 {
-	m_data.enemiesLooted.at(level).at(pos) = true;
+	m_data.enemiesLooted.at(level).insert(pos);
 }
 
 void CharacterCore::setItemLooted(LevelID level, int pos)
 {
-	m_data.itemsLooted.at(level).at(pos) = true;
+	m_data.itemsLooted.at(level).insert(pos);
 }
 
 const CharacterCoreData& CharacterCore::getData() const

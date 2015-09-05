@@ -34,30 +34,6 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : (some) attributes cannot be negative");
 		return false;
 	}
-	for (auto &it : data.enemiesKilled)
-	{
-		if (it.first == LevelID::VOID)
-		{
-			g_logger->logError("CharacterCoreReader", "Error in savegame data : level not resolved");
-			return false;
-		}
-	}
-	for (auto &it : data.enemiesLooted)
-	{
-		if (it.first == LevelID::VOID)
-		{
-			g_logger->logError("CharacterCoreReader", "Error in savegame data : level not resolved");
-			return false;
-		}
-	}
-	for (auto &it : data.itemsLooted)
-	{
-		if (it.first == LevelID::VOID)
-		{
-			g_logger->logError("CharacterCoreReader", "Error in savegame data : level not resolved");
-			return false;
-		}
-	}
 	if (data.equippedWeaponSlots.size() > 5)
 	{
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : there can't be more spell slots than 5 on a weapon");
@@ -417,7 +393,7 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const
 {
 	// add a level state
-	vector<bool> layer;
+	set<int> layer;
 
 	char* startData;
 	char* endData;
@@ -435,7 +411,7 @@ bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCor
 
 	while (startData != NULL)
 	{
-		layer.push_back(atoi(startData) != 0);
+		layer.insert(atoi(startData));
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
@@ -450,7 +426,7 @@ bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCor
 bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const
 {
 	// add a level state
-	vector<bool> layer;
+	set<int> layer;
 
 	char* startData;
 	char* endData;
@@ -468,7 +444,7 @@ bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCor
 
 	while (startData != NULL)
 	{
-		layer.push_back(atoi(startData) != 0);
+		layer.insert(atoi(startData));
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
@@ -483,7 +459,7 @@ bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCor
 bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreData& data) const
 {
 	// add a level state
-	vector<bool> layer;
+	set<int> layer;
 
 	char* startData;
 	char* endData;
@@ -501,7 +477,7 @@ bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreD
 
 	while (startData != NULL)
 	{
-		layer.push_back(atoi(startData) != 0);
+		layer.insert(atoi(startData));
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{

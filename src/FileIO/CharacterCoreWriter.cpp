@@ -106,8 +106,7 @@ std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& dat
 		enemyKilled.append(to_string(static_cast<int>(it.first)));
 		for (auto it2 : it.second)
 		{
-			string boolean = it2 ? "1" : "0";
-			enemyKilled.append("," + boolean);
+			enemyKilled.append("," + to_string(it2));
 		}
 		enemyKilled.append("\n");
 		enemiesKilled.append(enemyKilled);
@@ -126,8 +125,7 @@ std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& dat
 		enemyLooted.append(to_string(static_cast<int>(it.first)));
 		for (auto it2 : it.second)
 		{
-			string boolean = it2 ? "1" : "0";
-			enemyLooted.append("," + boolean);
+			enemyLooted.append("," + to_string(it2));
 		}
 		enemyLooted.append("\n");
 		enemiesLooted.append(enemyLooted);
@@ -146,8 +144,7 @@ std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data)
 		itemLooted.append(to_string(static_cast<int>(it.first)));
 		for (auto it2 : it.second)
 		{
-			string boolean = it2 ? "1" : "0";
-			itemLooted.append("," + boolean);
+			itemLooted.append("," + to_string(it2));
 		}
 		itemLooted.append("\n");
 		itemsLooted.append(itemLooted);

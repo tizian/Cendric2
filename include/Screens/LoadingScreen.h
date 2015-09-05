@@ -38,6 +38,6 @@ private:
 	float m_phi = M_PI;
 	const float VELOCITY = 300.f;
 	const float RADIUS = 200.f;
-	const sf::Vector2f CENTER = sf::Vector2f(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f + 50.f);
+	const sf::Vector2f CENTER = sf::Vector2f(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
 	sf::Vector2f m_pos;
 };

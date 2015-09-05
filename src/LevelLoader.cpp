@@ -74,7 +74,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const
 	for (int i = 0; i < data.levelItems.size(); i++)
 	{
 		auto& it = data.levelItems.at(i);
-		if (!it.empty() && !coreData.itemsLooted.at(data.id).at(i))
+		if (!it.empty() && (coreData.itemsLooted.at(data.id).find(i) == coreData.itemsLooted.at(data.id).end()))
 		{
 			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
 			const ItemBean* item = g_resourceManager->getItemBean(it);
@@ -119,7 +119,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 	for (int i = 0; i < data.enemies.size(); i++)
 	{
 		auto& it = data.enemies.at(i);
-		if (it != EnemyID::VOID && !coreData.enemiesLooted.at(data.id).at(i))
+		if (it != EnemyID::VOID && (coreData.enemiesLooted.at(data.id).find(i) == coreData.enemiesLooted.at(data.id).end()))
 		{
 			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
 			Enemy* enemy = nullptr;
@@ -145,7 +145,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 
 			enemy->setPosition(position);
 			enemy->setSpawnPosition(i);
-			if (coreData.enemiesKilled.at(data.id).at(i)) enemy->setDead();
+			if (coreData.enemiesKilled.at(data.id).find(i) != coreData.enemiesKilled.at(data.id).end()) enemy->setDead();
 			screen->addObject(enemy);
 		}
 		if (x + 1 >= data.mapSize.x)

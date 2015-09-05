@@ -235,7 +235,7 @@ void LevelMovableGameObject::addDamage(int damage)
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
 	if (m_attributes.currentHealthPoints == 0)
 	{
-		m_isDead = true;
+		setDead();
 	}
 	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
 }

@@ -338,11 +338,6 @@ float Level::getCeiling(const sf::FloatRect& boundingBox) const
 	return y * tileHeight;
 }
 
-int Level::getNumberOfTiles() const
-{
-	return m_levelData.mapSize.x * m_levelData.mapSize.y;
-}
-
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const
 {
 	size_t size = m_dynamicTiles->size(); // Note: this loop type allows objects to be added to the back of the list while iterating over it.
