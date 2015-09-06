@@ -121,6 +121,10 @@ void QuickSlot::reload()
 
 		m_amountText.setString(to_string(amount));
 		m_keyText.setColor(CENDRIC_COLOR_WHITE);
+
+		m_amountText.setPosition(sf::Vector2f(
+			getPosition().x + SIDE_LENGTH - m_amountText.getLocalBounds().width,
+			getPosition().y + SIDE_LENGTH - m_amountText.getLocalBounds().height));
 	}
 }
 

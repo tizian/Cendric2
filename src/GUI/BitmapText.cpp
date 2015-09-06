@@ -26,7 +26,7 @@ BitmapText::BitmapText()
 	m_lineSpacing = 0.5f;
 }
 
-BitmapText::BitmapText(const sf::String &string, const BitmapFont &font)
+BitmapText::BitmapText(const sf::String& string, const BitmapFont &font)
 {
 	m_font = &font;
 	m_vertices = sf::VertexArray(sf::Quads);
@@ -38,7 +38,7 @@ BitmapText::BitmapText(const sf::String &string, const BitmapFont &font)
 	init();
 }
 
-BitmapText::BitmapText(const sf::String &string)
+BitmapText::BitmapText(const sf::String& string)
 {
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
 	m_vertices = sf::VertexArray(sf::Quads);
@@ -50,7 +50,7 @@ BitmapText::BitmapText(const sf::String &string)
 	init();
 }
 
-void BitmapText::setString(const sf::String &string)
+void BitmapText::setString(const sf::String& string)
 {
 	m_string = string;
 	toUpperCase(m_string);
@@ -62,7 +62,7 @@ const sf::String &BitmapText::getString() const
 	return m_string;
 }
 
-void BitmapText::setFont(const BitmapFont &font)
+void BitmapText::setFont(const BitmapFont& font)
 {
 	m_font = &font;
 	init();

@@ -17,6 +17,7 @@
 #include "SpellCreators/WindGustSpellCreator.h"
 #include "SpellCreators/LeechSpellCreator.h"
 #include "SpellCreators/IcyAmbushSpellCreator.h"
+#include "SpellCreators/UnlockSpellCreator.h"
 
 class SpellSelection;
 

@@ -49,7 +49,7 @@ private:
 	static SpellBean getWindGustSpellBean();
 	static SpellBean getAntiGravitySpellBean();
 	
-	// static SpellBean getUnlockSpellBean();
+	static SpellBean getUnlockSpellBean();
 	// static SpellBean getShadowTrapSpellBean();
 	// static SpellBean getInvisibilitySpellBean();
 	// static SpellBean getFlashSpellBean();

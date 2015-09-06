@@ -761,6 +761,7 @@ void LevelReader::updateData(LevelData& data)  const
 					{
 						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 						bean.skinNr = it2;
+						bean.spawnPosition = y * data.mapSize.x + x;
 						waterTileWidth = static_cast<float>(tileWidth);
 						isReadingWaterTiles = true;
 					}
@@ -802,6 +803,7 @@ void LevelReader::updateData(LevelData& data)  const
 					bean.id = id;
 					bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 					bean.skinNr = it2;
+					bean.spawnPosition = y * data.mapSize.x + x;
 					data.dynamicTiles.push_back(bean);
 				}
 				if (x + 1 >= data.mapSize.x)

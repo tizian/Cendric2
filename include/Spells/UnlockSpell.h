@@ -6,11 +6,9 @@
 class UnlockSpell : public Spell
 {
 public:
-	UnlockSpell();
+	UnlockSpell(int strength);
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 
-	const sf::Vector2f getConfiguredPositionOffset() const override;
-	bool getConfiguredRotateSprite() const override;
-
 private:
+	int m_strength;
 };

@@ -1,5 +1,13 @@
 #include "DynamicTiles/ChestTile.h"
+#include "LevelMainCharacter.h"
 #include "Spell.h"
+
+using namespace std;
+
+ChestTile::ChestTile(LevelMainCharacter* mainChar, Level* level) : DynamicTile(level)
+{
+	m_mainChar = mainChar;
+}
 
 void ChestTile::init()
 {
@@ -16,13 +24,12 @@ void ChestTile::load(int skinNr)
 	closedAnimation.addFrame(sf::IntRect(0, 0, 2 * m_tileSize.x, 2 * m_tileSize.y));
 
 	addAnimation(GameObjectState::Locked, closedAnimation);
-	addAnimation(GameObjectState::Unlocked, closedAnimation);
-
+	
 	Animation openAnimation;
 	openAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_chest));
 	openAnimation.addFrame(sf::IntRect(2 * m_tileSize.x, 0, 2 * m_tileSize.x, 2 * m_tileSize.y));
 
-	addAnimation(GameObjectState::Open, openAnimation);
+	addAnimation(GameObjectState::Unlocked, openAnimation);
 
 	setFrameTime(sf::seconds(10.f));
 
@@ -30,6 +37,17 @@ void ChestTile::load(int skinNr)
 	m_state = GameObjectState::Locked;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(false);
+}
+
+void ChestTile::setLoot(const std::map<string, int>& items, int gold)
+{
+	m_lootableItems = items;
+	m_lootableGold = gold;
+	delete m_lootWindow;
+	m_lootWindow = nullptr;
+	if (items.empty() && gold <= 0) return;
+	m_lootWindow = new LootWindow();
+	m_lootWindow->setLoot(items, gold);
 }
 
 void ChestTile::onHit(Spell* spell)
@@ -46,5 +64,61 @@ void ChestTile::onHit(Spell* spell)
 		break;
 	default:
 		break;
+	}
+}
+
+void ChestTile::renderAfterForeground(sf::RenderTarget &renderTarget)
+{
+	GameObject::renderAfterForeground(renderTarget);
+	if (m_showLootWindow && m_lootWindow != nullptr)
+	{
+		m_lootWindow->render(renderTarget);
+		m_showLootWindow = false;
+	}
+}
+
+void ChestTile::update(const sf::Time& frameTime)
+{
+	DynamicTile::update(frameTime);
+	if (m_showLootWindow && m_lootWindow != nullptr)
+	{
+		sf::Vector2f pos(getBoundingBox()->left + getBoundingBox()->width, getBoundingBox()->top - m_lootWindow->getSize().y + 10.f);
+		m_lootWindow->setPosition(pos);
+	}
+}
+
+void ChestTile::setSpawnPosition(int pos)
+{
+	m_spawnPosition = pos;
+}
+
+void ChestTile::onMouseOver()
+{
+	if (m_state == GameObjectState::Unlocked)
+	{
+		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
+		m_showLootWindow = true;
+	}
+}
+
+void ChestTile::onRightClick()
+{
+	if (m_state == GameObjectState::Unlocked)
+	{
+		// check if the chest is in range
+		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
+		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE)
+		{
+			// loot, create the correct items + gold in the players inventory.
+			m_mainChar->lootItems(m_lootableItems);
+			m_mainChar->addGold(m_lootableGold);
+			m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_spawnPosition);
+			setDisposed();
+		}
+		else
+		{
+			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+		}
+		g_inputController->lockAction();
 	}
 }

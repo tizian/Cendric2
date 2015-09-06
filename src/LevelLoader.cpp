@@ -9,8 +9,20 @@ using namespace std;
 
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const
 {
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	if (mainCharacter == nullptr)
+	{
+		g_logger->logError("LevelLoader", "Could not find main character of game screen");
+		return;
+	}
+
+	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
+
 	for (auto& it : data.dynamicTiles)
 	{
+		std::map<string, int> loot;
+		int gold;
+		ChestTile* chestTile = nullptr;
 		DynamicTile* tile;
 		switch (it.id)
 		{
@@ -28,7 +40,23 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 			tile = new TorchTile(level);
 			break;
 		case DynamicTileID::Chest:
-			tile = new ChestTile(level); 
+			if (coreData.chestsLooted.at(data.id).find(it.spawnPosition) != coreData.chestsLooted.at(data.id).end()) continue;
+			
+			// calculate loot.
+			loot.clear();
+			gold = 0;
+			if (data.chestLoot.find(it.spawnPosition) != data.chestLoot.end())
+			{
+				gold = data.chestLoot.at(it.spawnPosition).second;
+				for (auto& item : data.chestLoot.at(it.spawnPosition).first)
+				{
+					loot.insert({ item.first, item.second });
+				}
+			}
+			chestTile = new ChestTile(mainCharacter, level);
+			chestTile->setSpawnPosition(it.spawnPosition);
+			chestTile->setLoot(loot, gold);
+			tile = chestTile;
 			break;
 		case DynamicTileID::SpikesBottom:
 			tile = new SpikesBottomTile(level);
@@ -126,11 +154,8 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			// calculate loot.
 			std::map<string, int> loot;
 			int gold = 0;
-			bool isPredefinedLoot = false;
 			if (data.enemyLoot.find(i) != data.enemyLoot.end())
 			{
-				isPredefinedLoot = true;
-				
 				gold = data.enemyLoot.at(i).second;
 				for (auto& item : data.enemyLoot.at(i).first)
 				{
@@ -141,7 +166,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			{
 			case EnemyID::Rat:
 				enemy = new RatEnemy(level, mainCharacter);
-				if (!isPredefinedLoot)
+				if (gold == 0 && loot.empty())
 				{
 					loot.insert({ "it_fo_cheese", 1 });
 					gold = 1;
@@ -149,7 +174,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 				break;
 			case EnemyID::FireRat:
 				enemy = new FireRatEnemy(level, mainCharacter);
-				if (!isPredefinedLoot)
+				if (gold == 0 && loot.empty())
 				{
 					loot.insert({ "it_fo_bread", 2 });
 					gold = 2;

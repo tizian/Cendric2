@@ -19,22 +19,22 @@ class Spell;
 class Enemy : public LevelMovableGameObject
 {
 public:
-	Enemy(Level* level, LevelMainCharacter *mainChar, EnemyID id);
+	Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
 	~Enemy();
 
 	virtual void load() = 0;
-	void checkCollisions(const sf::Vector2f &nextPosition) override;
-	void renderAfterForeground(sf::RenderTarget &target) override;
+	void checkCollisions(const sf::Vector2f& nextPosition) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onRightClick() override;
 	void onMouseOver() override;
-	void update(const sf::Time &frameTime) override;
+	void update(const sf::Time& frameTime) override;
 	
-	void onHit(Spell *spell) override;
+	void onHit(Spell* spell) override;
 	// the enemy flees for the given time
-	void setFeared(const sf::Time &fearedTime);
+	void setFeared(const sf::Time& fearedTime);
 	// the enemy is stunned for the given time
 	void setStunned(const sf::Time &stunnedTime);
-	void setLoot(const std::map<std::string, int> &items, int gold);
+	void setLoot(const std::map<std::string, int>& items, int gold);
 	void setDead() override;
 	// the spawn position in the level enemy layer.
 	void setSpawnPosition(int pos);

@@ -8,6 +8,7 @@ struct DynamicTileBean
 {
 	DynamicTileID id;
 	sf::Vector2f position;
+	int spawnPosition;
 	int skinNr;
 	// only used for SWE Simulated Water Tiles
 	sf::Vector2f size;

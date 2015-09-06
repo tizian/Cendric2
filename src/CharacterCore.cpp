@@ -286,6 +286,11 @@ void CharacterCore::setItemLooted(LevelID level, int pos)
 	m_data.itemsLooted.at(level).insert(pos);
 }
 
+void CharacterCore::setChestLooted(LevelID level, int pos)
+{
+	m_data.chestsLooted.at(level).insert(pos);
+}
+
 const CharacterCoreData& CharacterCore::getData() const
 {
 	return m_data;

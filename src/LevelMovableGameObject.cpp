@@ -33,15 +33,6 @@ void LevelMovableGameObject::update(const sf::Time& frameTime)
 	MovableGameObject::update(frameTime);
 	// update time
 	m_fightAnimationTime = (m_fightAnimationTime - frameTime) >= sf::Time::Zero ? m_fightAnimationTime - frameTime : sf::Time::Zero;
-	if (m_coloredTime != sf::Time::Zero)
-	{
-		m_coloredTime -= frameTime;
-		if (m_coloredTime <= sf::Time::Zero)
-		{
-			m_animatedSprite.setColor(sf::Color::White);
-			m_coloredTime = sf::Time::Zero;
-		}
-	}
 	updateAnimation();
 	if (!m_isDead)
 	{
@@ -338,11 +329,4 @@ void LevelMovableGameObject::consumeFood(const sf::Time& duration, const Attribu
 	}
 	m_foodAttributes = std::pair<sf::Time, AttributeBean>(duration, attributes);
 	m_attributes.addBean(attributes);
-}
-
-void LevelMovableGameObject::setSpriteColor(const sf::Color& color, const sf::Time& time)
-{
-	if (time <= sf::Time::Zero) return;
-	m_animatedSprite.setColor(color);
-	m_coloredTime = time;
 }

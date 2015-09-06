@@ -90,4 +90,10 @@ protected:
 
 	bool m_isDrawBoundingBox = false;
 	bool m_isInputInDefaultView = false;
+
+	virtual void setSpriteColor(const sf::Color& color, const sf::Time& time);
+
+private:
+	// the sprite will reset its color as soon as this time is zero.
+	sf::Time m_coloredTime = sf::Time::Zero;
 };

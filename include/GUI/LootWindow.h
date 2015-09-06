@@ -10,7 +10,7 @@
 class LootWindow : public Window
 {
 public:
-	LootWindow(const sf::FloatRect& box);
+	LootWindow();
 	~LootWindow();
 
 	void render(sf::RenderTarget& renderTarget) override;

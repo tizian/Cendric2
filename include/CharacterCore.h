@@ -72,6 +72,8 @@ public:
 	void setEnemyLooted(LevelID level, int pos);
 	// signal item looted
 	void setItemLooted(LevelID level, int pos);
+	// signal chest looted
+	void setChestLooted(LevelID level, int pos);
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;

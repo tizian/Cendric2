@@ -50,6 +50,15 @@ void GameObject::setDebugBoundingBox(const sf::Color &debugColor)
 void GameObject::update(const sf::Time& frameTime)
 {
 	m_animatedSprite.update(frameTime);
+	if (m_coloredTime > sf::Time::Zero)
+	{
+		m_coloredTime -= frameTime;
+		if (m_coloredTime <= sf::Time::Zero)
+		{
+			m_animatedSprite.setColor(sf::Color::White);
+			m_coloredTime = sf::Time::Zero;
+		}
+	}
 	
 	if (g_inputController->isMouseOver(&m_boundingBox, m_isInputInDefaultView))
 	{
@@ -237,4 +246,11 @@ void GameObject::updateTime(sf::Time &time, const sf::Time &frameTime)
 	if (time == sf::Time::Zero) return;
 	time -= frameTime;
 	if (time < sf::Time::Zero) time = sf::Time::Zero;
+}
+
+void GameObject::setSpriteColor(const sf::Color& color, const sf::Time& time)
+{
+	if (time <= sf::Time::Zero) return;
+	m_animatedSprite.setColor(color);
+	m_coloredTime = time;
 }

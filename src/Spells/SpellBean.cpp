@@ -24,6 +24,8 @@ SpellBean SpellBean::getSpellBean(SpellID id)
 		return getLeechSpellBean();
 	case SpellID::IcyAmbush:
 		return getIcyAmbushSpellBean();
+	case SpellID::Unlock:
+		return getUnlockSpellBean();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -239,6 +241,22 @@ SpellBean SpellBean::getIcyAmbushSpellBean()
 	icyAmbush.rangeModifierAddition = 25.f;
 
 	return icyAmbush;
+}
+
+SpellBean SpellBean::getUnlockSpellBean()
+{
+	SpellBean unlock = EMPTY_SPELL;
+	unlock.id = SpellID::Unlock;
+	unlock.spellType = SpellType::Twilight;
+	unlock.iconTextureRect = sf::IntRect(0, 50, 50, 50);
+
+	unlock.cooldown = sf::seconds(2);
+	unlock.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	unlock.duration = sf::seconds(1);
+	unlock.needsTarget = true;
+	unlock.startVelocity = 200.f;
+
+	return unlock;
 }
 
 
