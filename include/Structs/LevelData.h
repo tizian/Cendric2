@@ -23,6 +23,8 @@ struct LevelData
 	std::vector<DynamicTileBean> dynamicTiles;
 	std::vector<std::string> levelItems;
 	std::vector<EnemyID> enemies;
+	std::map<int, std::pair<std::map<std::string, int>, int>> enemyLoot;
+	std::map<int, std::pair<std::map<std::string, int>, int>> chestLoot;
 	std::vector<LevelExitBean> levelExits;
 	sf::FloatRect levelRect;
 };

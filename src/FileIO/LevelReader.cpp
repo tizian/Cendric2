@@ -337,6 +337,77 @@ bool LevelReader::readLayerCollidable(char* start, char* end, LevelData& data) c
 	return true;
 }
 
+bool LevelReader::readLayerChestTiles(char* start, char* end, LevelData& data) const
+{
+	char* startData = start;
+	char* endData = end;
+	char* startLoot;
+	char* endLoot;
+
+	// read offset
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+	int offset = atoi(startData);
+
+	vector<int> dynamicTiles;
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+
+	int chestSpawnPos = 0;
+	while (startData != NULL)
+	{
+		int gold = 0;
+		std::map<string, int> loot;
+		bool isPredefinedLoot = false;
+		if (*startData == '(')
+		{
+			// read loot
+			startLoot = startData;
+			isPredefinedLoot = true;
+			endLoot = gotoNextChar(startLoot, end, ')');
+			while (startLoot != NULL && startLoot < endLoot)
+			{
+				startLoot++;
+				string item(startLoot);
+				int count = countToNextChar(startLoot, endLoot, ',');
+				if (count == -1) {
+					return false;
+				}
+				item = item.substr(0, count);
+				startLoot = gotoNextChar(startLoot, end, ',');
+				startLoot++;
+				int amount = atoi(startLoot);
+				if (item.compare("gold") == 0 || item.compare("Gold") == 0)
+				{
+					gold += amount;
+				}
+				else
+				{
+					loot.insert({ item, amount });
+				}
+				startLoot = gotoNextChar(startLoot, end, ',');
+			}
+			startData = ++endLoot;
+		}
+		int skinNr = atoi(startData);
+		dynamicTiles.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
+		if (isPredefinedLoot)
+		{
+			data.chestLoot.insert({ chestSpawnPos, std::pair<std::map<std::string, int>, int>(loot, gold) });
+		}
+		startData = gotoNextChar(startData, endData, ',');
+		if (startData != NULL)
+		{
+			startData++;
+		}
+		chestSpawnPos++;
+	}
+
+	data.dynamicTileLayers.push_back(std::pair<DynamicTileID, vector<int>>(DynamicTileID::Chest, dynamicTiles));
+
+	return true;
+}
+
 bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data) const
 {
 	char* startData;
@@ -352,6 +423,7 @@ bool LevelReader::readLayerDynamicTiles(char* start, char* end, LevelData& data)
 		g_logger->logError("LevelReader", "Dynamic tile ID not recognized: " + std::to_string(static_cast<int>(id)));
 		return false;
 	}
+	if (id == DynamicTileID::Chest) return readLayerChestTiles(startData, endData, data);
 
 	// read offset
 	startData = gotoNextChar(startData, endData, ',');
@@ -415,17 +487,53 @@ bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) cons
 {
 	char* startData;
 	char* endData;
+	char* startLoot;
+	char* endLoot;
 	startData = gotoNextChar(start, end, '"');
 	startData++;
 	endData = gotoNextChar(startData, end, '"');
 
 	int firstgid = atoi(startData);
-	startData = gotoNextChar(start, end, ',');
+	startData = gotoNextChar(start, endData, ',');
 	startData++;
 
+	int enemySpawnPos = 0;
 	EnemyID enemy;
 	while (startData != NULL)
 	{
+		int gold = 0;
+		std::map<string, int> loot;
+		bool isPredefinedLoot = false;
+		if (*startData == '(')
+		{
+			// read loot
+			startLoot = startData;
+			isPredefinedLoot = true;
+			endLoot = gotoNextChar(startLoot, end, ')');
+			while (startLoot != NULL && startLoot < endLoot)
+			{
+				startLoot++;
+				string item(startLoot);
+				int count = countToNextChar(startLoot, endLoot, ',');
+				if (count == -1) {
+					return false;
+				}
+				item = item.substr(0, count);
+				startLoot = gotoNextChar(startLoot, end, ',');
+				startLoot++;
+				int amount = atoi(startLoot);
+				if (item.compare("gold") == 0 || item.compare("Gold") == 0)
+				{
+					gold += amount;
+				}
+				else
+				{
+					loot.insert({ item, amount });
+				}
+				startLoot = gotoNextChar(startLoot, endData, ',');
+			}
+			startData = ++endLoot;
+		}
 		int id = atoi(startData);
 		id = (id == 0) ? id : id - firstgid + 1;
 		if (m_enemyMap.find(id) == m_enemyMap.end())
@@ -435,11 +543,16 @@ bool LevelReader::readLayerEnemies(char* start, char* end, LevelData& data) cons
 		}
 		enemy = m_enemyMap.at(id);
 		data.enemies.push_back(enemy);
+		if (isPredefinedLoot)
+		{
+			data.enemyLoot.insert({ enemySpawnPos, std::pair<std::map<std::string, int>, int>(loot, gold) });
+		}
 		startData = gotoNextChar(startData, endData, ',');
 		if (startData != NULL)
 		{
 			startData++;
 		}
+		enemySpawnPos++;
 	}
 	return true;
 }

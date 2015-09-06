@@ -23,6 +23,7 @@ protected:
 	const char* ENEMIES_KILLED = "enemies.killed";
 	const char* ENEMIES_LOOTED = "enemies.looted";
 	const char* ITEMS_LOOTED = "items.looted";
+	const char* CHESTS_LOOTED = "chests.looted";
 	const char* QUEST_STATE = "quest.state";
 	const char* NPC_STATE = "npc.state";
 

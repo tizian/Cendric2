@@ -123,18 +123,37 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 		{
 			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
 			Enemy* enemy = nullptr;
+			// calculate loot.
 			std::map<string, int> loot;
+			int gold = 0;
+			bool isPredefinedLoot = false;
+			if (data.enemyLoot.find(i) != data.enemyLoot.end())
+			{
+				isPredefinedLoot = true;
+				
+				gold = data.enemyLoot.at(i).second;
+				for (auto& item : data.enemyLoot.at(i).first)
+				{
+					loot.insert({ item.first, item.second });
+				}
+			}
 			switch (it)
 			{
 			case EnemyID::Rat:
 				enemy = new RatEnemy(level, mainCharacter);
-				loot.insert({ "it_fo_cheese", 1 });
-				enemy->setLoot(loot, 1);
+				if (!isPredefinedLoot)
+				{
+					loot.insert({ "it_fo_cheese", 1 });
+					gold = 1;
+				}
 				break;
 			case EnemyID::FireRat:
 				enemy = new FireRatEnemy(level, mainCharacter);
-				loot.insert({ "it_fo_bread", 2 });
-				enemy->setLoot(loot, 2);
+				if (!isPredefinedLoot)
+				{
+					loot.insert({ "it_fo_bread", 2 });
+					gold = 2;
+				}
 				break;
 			case EnemyID::VOID:
 			default:
@@ -143,6 +162,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 				return;
 			}
 
+			enemy->setLoot(loot, gold);
 			enemy->setPosition(position);
 			enemy->setSpawnPosition(i);
 			enemy->setDebugBoundingBox(sf::Color::Magenta);

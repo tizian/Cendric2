@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:1136
+time.played:1145
 savegame.name:TESTLEVEL
-savegame.date:1441474874
+savegame.date:1441571949
 level.id:2
 level.position:1960.000000,1200.000000
 is.in.level:0
 map.id:1
-map.position:4000.000000,827.932007
+map.position:4397.335938,393.322144
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -36,11 +36,5 @@ equipped.weapon:it_we_rustysword
 # quickslot assignments:
 quickslot:1,it_fo_caveberry
 quickslot:2,it_fo_glowingshroom
-# enemies killed in level:
-enemies.killed:2,0,740,967,1074,1307,1799
-# enemies looted in level:
-enemies.looted:2,0,967,1074,1307,1799
-# items looted in level:
-items.looted:2,0,734,738,1076,1200,1229,1302,1800,1801,1802,1803
 # quest states:
 # npc states:

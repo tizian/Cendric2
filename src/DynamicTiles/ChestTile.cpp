@@ -3,8 +3,8 @@
 
 void ChestTile::init()
 {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(1.5 * m_tileSize.x), static_cast<float>(1.5 * m_tileSize.y)));
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
+	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
 }
 
 void ChestTile::load(int skinNr)

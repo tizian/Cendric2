@@ -264,10 +264,11 @@ void CharacterCore::clearItems()
 
 void CharacterCore::initializeMaps(LevelID level)
 {
-	if (m_data.enemiesKilled.find(level) != m_data.enemiesKilled.end()) return;
+	// if these entries for the given level already exist, an insert will do nothing.
 	m_data.enemiesKilled.insert({ level, std::set<int>() });
 	m_data.enemiesLooted.insert({ level, std::set<int>() });
 	m_data.itemsLooted.insert({ level, std::set<int>() });
+	m_data.chestsLooted.insert({ level, std::set<int>() });
 }
 
 void CharacterCore::setEnemyKilled(LevelID level, int pos)

@@ -390,18 +390,15 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	return true;
 }
 
-bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const
+bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& layer, LevelID& id) const
 {
-	// add a level state
-	set<int> layer;
-
 	char* startData;
-	char* endData;
+	char* endData; 
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	endData = gotoNextChar(startData, end, '\n');
 
-	LevelID id = static_cast<LevelID>(atoi(startData));
+	id = static_cast<LevelID>(atoi(startData));
 	if (id <= LevelID::VOID || id >= LevelID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
@@ -418,74 +415,42 @@ bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCor
 			startData++;
 		}
 	}
+	return true;
+}
 
+bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const
+{
+	set<int> layer;
+	LevelID id;
+	if (!readLevelStateLayer(start, end, layer, id)) return false;
 	data.enemiesKilled.insert({id, layer});
 	return true;
 }
 
 bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const
 {
-	// add a level state
 	set<int> layer;
-
-	char* startData;
-	char* endData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	endData = gotoNextChar(startData, end, '\n');
-
-	LevelID id = static_cast<LevelID>(atoi(startData));
-	if (id <= LevelID::VOID || id >= LevelID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
-		return false;
-	}
-	startData++;
-
-	while (startData != NULL)
-	{
-		layer.insert(atoi(startData));
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
-		{
-			startData++;
-		}
-	}
-
+	LevelID id;
+	if (!readLevelStateLayer(start, end, layer, id)) return false;
 	data.enemiesLooted.insert({ id, layer });
 	return true;
 }
 
 bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreData& data) const
 {
-	// add a level state
 	set<int> layer;
-
-	char* startData;
-	char* endData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	endData = gotoNextChar(startData, end, '\n');
-
-	LevelID id = static_cast<LevelID>(atoi(startData));
-	if (id <= LevelID::VOID || id >= LevelID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
-		return false;
-	}
-	startData++;
-
-	while (startData != NULL)
-	{
-		layer.insert(atoi(startData));
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
-		{
-			startData++;
-		}
-	}
-
+	LevelID id;
+	if (!readLevelStateLayer(start, end, layer, id)) return false;
 	data.itemsLooted.insert({ id, layer });
+	return true;
+}
+
+bool CharacterCoreReader::readChestsLooted(char* start, char* end, CharacterCoreData& data) const
+{
+	set<int> layer;
+	LevelID id;
+	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	data.chestsLooted.insert({ id, layer });
 	return true;
 }
 
@@ -581,6 +546,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, ITEMS_LOOTED, strlen(ITEMS_LOOTED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(ITEMS_LOOTED));
 			noError = readItemsLooted(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, CHESTS_LOOTED, strlen(CHESTS_LOOTED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(CHESTS_LOOTED));
+			noError = readChestsLooted(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {

@@ -30,6 +30,7 @@ private:
 	bool readLayerTilesBackground(char* start, char* end, LevelData& data) const;
 	bool readLayerTilesForeground(char* start, char* end, LevelData& data) const;
 	bool readLayerDynamicTiles(char* start, char* end, LevelData& data) const;
+	bool readLayerChestTiles(char* start, char* end, LevelData& data) const;
 	bool readLayerLevelItems(char* start, char* end, LevelData& data) const;
 	bool readLayerEnemies(char* start, char* end, LevelData& data) const;
 	bool readLevelExit(char* start, char* end, LevelData& data) const;

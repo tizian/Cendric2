@@ -66,7 +66,7 @@ protected:
 	// render all objects after foreground of type 'type'
 	void renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget);
 	
-	CharacterCore* m_characterCore;
+	CharacterCore* m_characterCore = nullptr;
 	bool m_requestQuit = false;
 
 protected:

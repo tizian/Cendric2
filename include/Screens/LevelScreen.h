@@ -39,9 +39,9 @@ public:
 
 private:
 	Level m_currentLevel;
-	LevelMainCharacter* m_mainChar;
+	LevelMainCharacter* m_mainChar = nullptr;
 	LevelID m_levelID;
-	LevelInterface* m_interface;	
+	LevelInterface* m_interface = nullptr;
 
 	bool m_isGameOver = false;
 	BitmapText* m_overlayText = nullptr;

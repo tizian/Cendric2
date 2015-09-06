@@ -31,8 +31,8 @@ void ScreenManager::update(const sf::Time& frameTime)
 void ScreenManager::setErrorScreen()
 {
 	if (m_isErrorScreen) return;
+	m_currentScreen->onExit(nullptr);
 	Screen* nextScreen = new ErrorScreen(m_currentScreen->getCharacterCore());
-	m_currentScreen->onExit(nextScreen);
 	nextScreen->onEnter(m_currentScreen);
 	delete m_currentScreen;
 	m_currentScreen = nextScreen;

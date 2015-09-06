@@ -41,6 +41,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeEnemiesKilled(data);
 		savefile << writeEnemiesLooted(data);
 		savefile << writeItemsLooted(data);
+		savefile << writeChestsLooted(data);
 		savefile << writeQuestStates(data);
 		savefile << writeNPCStates(data);
 
@@ -150,6 +151,25 @@ std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data)
 		itemsLooted.append(itemLooted);
 	}
 	return itemsLooted;
+}
+
+std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data) const
+{
+	string chestsLooted = "# chests looted in level:\n";
+
+	for (auto it : data.chestsLooted)
+	{
+		string chestLooted = string(ITEMS_LOOTED);
+		chestLooted.append(":");
+		chestLooted.append(to_string(static_cast<int>(it.first)));
+		for (auto it2 : it.second)
+		{
+			chestLooted.append("," + to_string(it2));
+		}
+		chestLooted.append("\n");
+		chestsLooted.append(chestLooted);
+	}
+	return chestsLooted;
 }
 
 std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) const

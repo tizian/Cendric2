@@ -1,5 +1,7 @@
 #pragma once
 
+#include <set>
+
 #include "global.h"
 #include "FileIO/Reader.h"
 #include "Logger.h"
@@ -27,8 +29,11 @@ private:
 	bool readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const;
 	bool readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readItemsLooted(char* start, char* end, CharacterCoreData& data) const;
+	bool readChestsLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestStates(char* start, char* end, CharacterCoreData& data) const;
 	bool readNPCStates(char* start, char* end, CharacterCoreData& data) const;
+
+	bool readLevelStateLayer(char* start, char* end, std::set<int>& layer, LevelID& id) const;
 
 	bool readAttributes(char* start, char* end, CharacterCoreData& data) const;
 	

@@ -31,6 +31,7 @@ struct CharacterCoreData
 	std::map<LevelID, std::set<int>> enemiesLooted;
 	std::map<LevelID, std::set<int>> enemiesKilled;
 	std::map<LevelID, std::set<int>> itemsLooted;
+	std::map<LevelID, std::set<int>> chestsLooted;
 	
 	// quest & npc progress
 	std::map<NPCID, NPCState> npcStates;
@@ -66,6 +67,7 @@ const CharacterCoreData DEFAULT_CORE
 	sf::Vector2f(),
 	LevelID::VOID,
 	sf::Vector2f(),
+	std::map<LevelID, std::set<int>>(),
 	std::map<LevelID, std::set<int>>(),
 	std::map<LevelID, std::set<int>>(),
 	std::map<LevelID, std::set<int>>(),
