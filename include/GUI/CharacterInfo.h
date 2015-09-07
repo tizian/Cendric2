@@ -25,7 +25,7 @@ private:
 	// reloads the character info text, depending on the main char
 	void reload();
 
-	Window* m_window;
+	Window* m_window = nullptr;
 	BitmapText m_characterInfoText;
 
 	const float TEXT_OFFSET = 20.f;

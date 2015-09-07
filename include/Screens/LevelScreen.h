@@ -10,12 +10,11 @@
 
 #include "GUI/Button.h"
 #include "GUI/YesOrNoForm.h"
-#include "Enums/LevelID.h"
 
 class LevelScreen : public Screen
 {
 public:
-	LevelScreen(LevelID levelID, CharacterCore* core);
+	LevelScreen(const std::string& levelID, CharacterCore* core);
 	// called by the loading screen
 	void load();
 
@@ -40,7 +39,7 @@ public:
 private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar = nullptr;
-	LevelID m_levelID;
+	std::string m_levelID;
 	LevelInterface* m_interface = nullptr;
 
 	bool m_isGameOver = false;

@@ -87,7 +87,7 @@ void Game::run()
 		{
 			m_running = false;
 		}
-		if (g_resourceManager->pollError()->first != ErrorID::Void)
+		if (g_resourceManager->pollError()->first != ErrorID::VOID)
 		{
 			m_screenManager->setErrorScreen();
 		}

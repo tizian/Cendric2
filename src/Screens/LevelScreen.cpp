@@ -4,7 +4,7 @@
 
 using namespace std;
 
-LevelScreen::LevelScreen(LevelID levelID, CharacterCore* core) : Screen(core)
+LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : Screen(core)
 {
 	m_levelID = levelID;
 }
@@ -21,8 +21,7 @@ void LevelScreen::load()
 
 	if (!(m_currentLevel.load(m_levelID)))
 	{
-		string filename(g_resourceManager->getFilename(m_levelID));
-		string errormsg = filename + ": file corrupted!";
+		string errormsg = m_levelID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}
@@ -191,7 +190,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		else
 		{
 			writeToCore();
-			m_characterCore->setMap(bean->mapSpawnPoint, bean->map);
+			m_characterCore->setMap(bean->mapSpawnPoint, bean->mapID);
 			delete bean;
 			return new LoadingScreen(m_characterCore);
 		}

@@ -15,10 +15,10 @@ void Map::dispose()
 	m_foregroundTileMap.dispose();
 }
 
-bool Map::load(MapID id)
+bool Map::load(const std::string& id)
 {
 	MapReader reader;
-	if (!reader.readMap(g_resourceManager->getFilename(id), m_mapData))
+	if (!reader.readMap(id.c_str(), m_mapData))
 	{
 		return false;
 	}
@@ -160,12 +160,12 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 
 MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 {
-	for (auto it : m_mapData.levelEntries)
+	for (auto it : m_mapData.mapExits)
 	{
 		if (boundingBox.intersects(it.mapExitRect))
 		{
 			MapExitBean* exit = new MapExitBean();
-			exit->level = it.level;
+			exit->levelID = it.levelID;
 			exit->levelSpawnPoint = it.levelSpawnPoint;
 			return exit;
 		}
@@ -174,7 +174,7 @@ MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 	return nullptr;
 }
 
-MapID Map::getID() const
+const std::string& Map::getID() const
 {
 	return m_id;
 }

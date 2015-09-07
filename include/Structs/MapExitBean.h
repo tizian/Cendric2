@@ -2,11 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Enums/LevelID.h"
-
 struct MapExitBean
 {
-	LevelID level;
+	std::string levelID;
 	sf::Vector2f levelSpawnPoint;
 	sf::FloatRect mapExitRect;
 };

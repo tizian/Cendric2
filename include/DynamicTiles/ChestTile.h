@@ -17,18 +17,18 @@ public:
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
 	void onMouseOver() override;
-	// the spawn position in the dynamic chest tiles layer.
-	void setSpawnPosition(int pos);
+	// the object id in the dynamic chest tiles object layer.
+	void setObjectID(int id);
 
 	void setLoot(const std::map<std::string, int> &items, int gold);
 
 private:
 	LevelMainCharacter* m_mainChar;
-	int m_spawnPosition = -1;
+	int m_objectID = -1;
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;
 	int m_lootableGold = 0;
-	LootWindow *m_lootWindow = nullptr;
+	LootWindow* m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
 
 	// the chest can only be looted if the main char is in this range

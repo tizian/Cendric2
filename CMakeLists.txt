@@ -41,6 +41,7 @@ file(GLOB_RECURSE Cendric_FILES
 	"${PROJECT_SOURCE_DIR}/src/*.cpp"
 	"${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
 	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
+	"${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
 )
 
 add_executable(Cendric2 ${Cendric_FILES})

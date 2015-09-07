@@ -32,12 +32,13 @@ void Level::loadAfterMainChar(Screen* screen)
 	LevelLoader loader;
 	loader.loadEnemies(m_levelData, screen, this);
 	loader.loadLevelItems(m_levelData, screen);
+	loader.loadChestTiles(m_levelData, screen, this);
 }
 
-bool Level::load(LevelID id) 
+bool Level::load(const std::string& id) 
 {
 	LevelReader reader;
-	if (!reader.readLevel(g_resourceManager->getFilename(id), m_levelData))
+	if (!reader.readLevel(id, m_levelData))
 	{
 		return false;
 	}
@@ -372,7 +373,7 @@ LevelExitBean* Level::checkLevelExit(const sf::FloatRect& boundingBox) const
 			if (boundingBox.intersects(it.levelExitRect))
 			{
 				LevelExitBean* exit = new LevelExitBean();
-				exit->map = it.map;
+				exit->mapID = it.mapID;
 				exit->mapSpawnPoint = it.mapSpawnPoint;
 				return exit;
 			}
@@ -382,7 +383,7 @@ LevelExitBean* Level::checkLevelExit(const sf::FloatRect& boundingBox) const
 	return nullptr;
 }
 
-LevelID Level::getID() const
+const std::string& Level::getID() const
 {
 	return m_levelData.id;
 }

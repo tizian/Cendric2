@@ -48,7 +48,7 @@ void CharacterCore::loadNew()
 {
 	// start map & position when a new game is loaded
 	m_data.isInLevel = false;
-	m_data.currentMap = MapID::Firstmap; 
+	m_data.currentMap = "res/map/firstmap/firstmap.tmx";
 	m_data.currentMapPosition = sf::Vector2f(4400.0f, 650.0f); 
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
@@ -262,7 +262,7 @@ void CharacterCore::clearItems()
 	m_items.clear();
 }
 
-void CharacterCore::initializeMaps(LevelID level)
+void CharacterCore::initializeMaps(const std::string& level)
 {
 	// if these entries for the given level already exist, an insert will do nothing.
 	m_data.enemiesKilled.insert({ level, std::set<int>() });
@@ -271,22 +271,22 @@ void CharacterCore::initializeMaps(LevelID level)
 	m_data.chestsLooted.insert({ level, std::set<int>() });
 }
 
-void CharacterCore::setEnemyKilled(LevelID level, int pos)
+void CharacterCore::setEnemyKilled(const std::string& level, int pos)
 {
 	m_data.enemiesKilled.at(level).insert(pos);
 }
 
-void CharacterCore::setEnemyLooted(LevelID level, int pos)
+void CharacterCore::setEnemyLooted(const std::string& level, int pos)
 {
 	m_data.enemiesLooted.at(level).insert(pos);
 }
 
-void CharacterCore::setItemLooted(LevelID level, int pos)
+void CharacterCore::setItemLooted(const std::string& level, int pos)
 {
 	m_data.itemsLooted.at(level).insert(pos);
 }
 
-void CharacterCore::setChestLooted(LevelID level, int pos)
+void CharacterCore::setChestLooted(const std::string& level, int pos)
 {
 	m_data.chestsLooted.at(level).insert(pos);
 }
@@ -343,14 +343,14 @@ void CharacterCore::removeItem(const std::string& item, int quantity)
 	}
 }
 
-void CharacterCore::setMap(const sf::Vector2f& position, MapID map)
+void CharacterCore::setMap(const sf::Vector2f& position, const std::string& map)
 {
 	m_data.currentMap = map;
 	m_data.currentMapPosition = position;
 	m_data.isInLevel = false;
 }
 
-void CharacterCore::setLevel(const sf::Vector2f& position, LevelID level)
+void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& level)
 {
 	m_data.currentLevel = level;
 	m_data.currentLevelPosition = position;

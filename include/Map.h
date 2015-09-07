@@ -16,7 +16,7 @@ public:
 	~Map();
 	
 	// loads a .dricmap file
-	bool load(MapID id);
+	bool load(const std::string& id);
 	void loadAfterMainChar(Screen* screen);
 	// draws the map. background tilelayers
 	void drawBackground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
@@ -34,7 +34,7 @@ public:
 	const TileMap& getBackgroundTilemap() const;
 	const TileMap& getForegroundTilemap() const;
 	const sf::FloatRect& getMapRect() const;
-	MapID getID() const;
+	const std::string& getID() const;
 
 
 private:
@@ -42,7 +42,7 @@ private:
 	TileMap m_backgroundTileMap;
 	TileMap m_foregroundTileMap;
 
-	MapID m_id;
+	std::string m_id;
 	// data loaded by the map loader
 	MapData m_mapData;
 };

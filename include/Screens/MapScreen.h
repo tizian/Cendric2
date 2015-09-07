@@ -9,12 +9,10 @@
 #include "GUI/DialogueWindow.h"
 #include "MapInterface.h"
 
-#include "Enums/MapID.h"
-
 class MapScreen : public Screen
 {
 public:
-	MapScreen(MapID mapID, CharacterCore* core);
+	MapScreen(const std::string& mapID, CharacterCore* core);
 	// called by the loadingScreen
 	void load();
 
@@ -27,7 +25,7 @@ public:
 
 private:
 	Map m_currentMap;
-	MapID m_mapID;
+	std::string m_mapID;
 	MapMainCharacter* m_mainChar;
 	bool m_isOnLevelEntry = true;
 	DialogueWindow* m_dialogueWindow = nullptr;

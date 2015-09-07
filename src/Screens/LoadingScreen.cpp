@@ -42,7 +42,7 @@ Screen* LoadingScreen::update(const sf::Time& frameTime)
 	if (m_mapToLoad != nullptr) return m_mapToLoad;
 	if (m_levelToLoad != nullptr)
 	{
-		m_levelToLoad->loadDynamicTiles();
+		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_levelToLoad->loadDynamicTiles();
 		return m_levelToLoad;
 	} 
 

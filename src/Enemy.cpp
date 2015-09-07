@@ -387,9 +387,9 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold)
 	m_lootWindow->setLoot(items, gold);
 }
 
-void Enemy::setSpawnPosition(int spawnPosition)
+void Enemy::setObjectID(int id)
 {
-	m_spawnPosition = spawnPosition;
+	m_objectID = id;
 }
 
 void Enemy::setFeared(const sf::Time &fearedTime)
@@ -438,7 +438,7 @@ void Enemy::onRightClick()
 			// loot, create the correct items + gold in the players inventory.
 			m_mainChar->lootItems(m_lootableItems);
 			m_mainChar->addGold(m_lootableGold);
-			m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_spawnPosition);
+			m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_objectID);
 			setDisposed();
 		}
 		else
@@ -453,5 +453,5 @@ void Enemy::setDead()
 {
 	LevelMovableGameObject::setDead();
 	m_enemyState = EnemyState::Dead;
-	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_spawnPosition);
+	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
 }

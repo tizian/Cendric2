@@ -73,7 +73,7 @@ std::string CharacterCoreWriter::writeDateSaved(const CharacterCoreData& data) c
 
 std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const
 {
-	return string(MAP_ID) + ":" + to_string(static_cast<int>(data.currentMap)) + "\n";
+	return string(MAP_ID) + ":" + data.currentMap + "\n";
 }
 
 std::string CharacterCoreWriter::writeIsInLevel(const CharacterCoreData& data) const
@@ -88,7 +88,7 @@ std::string CharacterCoreWriter::writeMapPosition(const CharacterCoreData& data)
 
 std::string CharacterCoreWriter::writeLevelID(const CharacterCoreData& data) const
 {
-	return string(LEVEL_ID) + ":" + to_string(static_cast<int>(data.currentLevel)) + "\n";
+	return string(LEVEL_ID) + ":" + data.currentLevel + "\n";
 }
 
 std::string CharacterCoreWriter::writeLevelPosition(const CharacterCoreData& data) const
@@ -104,7 +104,7 @@ std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& dat
 	{
 		string enemyKilled = string(ENEMIES_KILLED);
 		enemyKilled.append(":");
-		enemyKilled.append(to_string(static_cast<int>(it.first)));
+		enemyKilled.append(it.first);
 		for (auto it2 : it.second)
 		{
 			enemyKilled.append("," + to_string(it2));
@@ -123,7 +123,7 @@ std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& dat
 	{
 		string enemyLooted = string(ENEMIES_LOOTED);
 		enemyLooted.append(":");
-		enemyLooted.append(to_string(static_cast<int>(it.first)));
+		enemyLooted.append(it.first);
 		for (auto it2 : it.second)
 		{
 			enemyLooted.append("," + to_string(it2));
@@ -142,7 +142,7 @@ std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data)
 	{
 		string itemLooted = string(ITEMS_LOOTED);
 		itemLooted.append(":");
-		itemLooted.append(to_string(static_cast<int>(it.first)));
+		itemLooted.append(it.first);
 		for (auto it2 : it.second)
 		{
 			itemLooted.append("," + to_string(it2));
@@ -161,7 +161,7 @@ std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data
 	{
 		string chestLooted = string(ITEMS_LOOTED);
 		chestLooted.append(":");
-		chestLooted.append(to_string(static_cast<int>(it.first)));
+		chestLooted.append(it.first);
 		for (auto it2 : it.second)
 		{
 			chestLooted.append("," + to_string(it2));

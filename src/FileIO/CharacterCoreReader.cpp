@@ -11,7 +11,7 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : map position negative");
 		return false;
 	}
-	if (data.currentMap == MapID::VOID)
+	if (data.currentMap.empty())
 	{
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : map not resolved");
 		return false;
@@ -127,12 +127,12 @@ bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& d
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
-	MapID id = static_cast<MapID>(atoi(startData));
-	if (id <= MapID::VOID || id >= MapID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Map ID not recognized: " + std::to_string(static_cast<int>(id)));
+	string id(startData);
+	int count = countToNextChar(startData, end, '\n');
+	if (count == -1) {
 		return false;
 	}
+	id = id.substr(0, count);
 	data.currentMap = id;
 	return true;
 }
@@ -155,12 +155,12 @@ bool CharacterCoreReader::readLevelID(char* start, char* end, CharacterCoreData&
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
-	LevelID id = static_cast<LevelID>(atoi(startData));
-	if (id < LevelID::VOID || id >= LevelID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
+	string id(startData);
+	int count = countToNextChar(startData, end, '\n');
+	if (count == -1) {
 		return false;
 	}
+	id = id.substr(0, count);
 	data.currentLevel = id;
 	return true;
 }
@@ -390,30 +390,40 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	return true;
 }
 
-bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& layer, LevelID& id) const
+bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& layer, std::string& id) const
 {
 	char* startData;
 	char* endData; 
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	endData = gotoNextChar(startData, end, '\n');
-
-	id = static_cast<LevelID>(atoi(startData));
-	if (id <= LevelID::VOID || id >= LevelID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Level ID not recognized: " + std::to_string(static_cast<int>(id)));
+	string levelID(startData);
+	int count = countToNextChar(startData, end, ',');
+	int count2 = countToNextChar(startData, end, '\n');
+	if (count == -1 && count2 == -1) {
 		return false;
 	}
-	startData++;
 
-	while (startData != NULL)
+	if (count != -1)
 	{
-		layer.insert(atoi(startData));
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
+		id = levelID.substr(0, count);
+		startData = gotoNextChar(start, end, ',');
+		startData++;
+
+		while (startData != NULL)
 		{
-			startData++;
+			layer.insert(atoi(startData));
+			startData = gotoNextChar(startData, endData, ',');
+			if (startData != NULL)
+			{
+				startData++;
+			}
 		}
+	}
+	else
+	{
+		id = levelID.substr(0, count2);
+		layer.clear();
 	}
 	return true;
 }
@@ -421,7 +431,7 @@ bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& 
 bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const
 {
 	set<int> layer;
-	LevelID id;
+	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
 	data.enemiesKilled.insert({id, layer});
 	return true;
@@ -430,7 +440,7 @@ bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCor
 bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const
 {
 	set<int> layer;
-	LevelID id;
+	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
 	data.enemiesLooted.insert({ id, layer });
 	return true;
@@ -439,7 +449,7 @@ bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCor
 bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreData& data) const
 {
 	set<int> layer;
-	LevelID id;
+	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
 	data.itemsLooted.insert({ id, layer });
 	return true;
@@ -448,7 +458,7 @@ bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreD
 bool CharacterCoreReader::readChestsLooted(char* start, char* end, CharacterCoreData& data) const
 {
 	set<int> layer;
-	LevelID id;
+	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
 	data.chestsLooted.insert({ id, layer });
 	return true;

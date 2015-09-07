@@ -57,23 +57,23 @@ public:
 	// removes item(s) to the data
 	void removeItem(const std::string& item, int quantity);
 	// save the position and map id. also sets "isInLevel" = false
-	void setMap(const sf::Vector2f& position, MapID map);
+	void setMap(const sf::Vector2f& position, const std::string& map);
 	// save the position and level id  also sets "isInLevel" = true
-	void setLevel(const sf::Vector2f& position, LevelID level);
+	void setLevel(const sf::Vector2f& position, const std::string& level);
 	// equips an item at the given position and adds the former equipment part into the inventory. To deequip an item, use this method with an empty string as item id.
 	void equipItem(const std::string& item, ItemType type);
 	// getter for core part
 	const CharacterCoreData& getData() const;
 	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level
-	void initializeMaps(LevelID level);
+	void initializeMaps(const std::string& level);
 	// signal enemy kill
-	void setEnemyKilled(LevelID level, int pos);
+	void setEnemyKilled(const std::string& level, int pos);
 	// signal enemy looted
-	void setEnemyLooted(LevelID level, int pos);
+	void setEnemyLooted(const std::string& level, int pos);
 	// signal item looted
-	void setItemLooted(LevelID level, int pos);
+	void setItemLooted(const std::string& level, int pos);
 	// signal chest looted
-	void setChestLooted(LevelID level, int pos);
+	void setChestLooted(const std::string& level, int pos);
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;

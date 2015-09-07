@@ -3,7 +3,7 @@
 
 using namespace std;
 
-MapScreen::MapScreen(MapID mapID, CharacterCore* core) : Screen(core)
+MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : Screen(core)
 {
 	m_mapID = mapID;
 }
@@ -65,7 +65,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 		else
 		{
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			m_characterCore->setLevel(bean->levelSpawnPoint, bean->level);
+			m_characterCore->setLevel(bean->levelSpawnPoint, bean->levelID);
 			delete bean;
 			return new LoadingScreen(getCharacterCore());
 		}
@@ -76,8 +76,7 @@ void MapScreen::load()
 {
 	if (!(m_currentMap.load(m_mapID)))
 	{
-		string filename(g_resourceManager->getFilename(m_mapID));
-		string errormsg = filename + ": file corrupted!";
+		string errormsg = m_mapID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}

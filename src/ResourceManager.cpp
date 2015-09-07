@@ -5,7 +5,7 @@ using namespace std;
 
 ResourceManager *g_resourceManager;
 
-ResourceManager::ResourceManager() : m_textures(), m_fileNames(), m_currentError(ErrorID::Void, "")
+ResourceManager::ResourceManager() : m_textures(), m_fileNames(), m_currentError(ErrorID::VOID, "")
 {
 }
 
@@ -13,8 +13,6 @@ ResourceManager::~ResourceManager()
 {
 	m_textures.clear();
 	m_fileNames.clear();
-	m_levelFileNames.clear();
-	m_mapFileNames.clear();
 	m_fonts.clear();
 	m_bitmapFonts.clear();
 	m_itemMap.clear();
@@ -22,16 +20,6 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::init()
 {
-	m_levelFileNames.insert(
-	{
-		{ LevelID::RatCave, "res/level/ratcave/ratcave.dric" },
-		{ LevelID::Testlevel, "res/level/testlevel/testlevel.dric" }
-	});
-	
-	m_mapFileNames.insert(
-		{ MapID::Firstmap, "res/map/firstmap/firstmap.dricmap" }
-	);
-
 	m_fileNames.insert(
 	{
 		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
@@ -272,16 +260,6 @@ void ResourceManager::deleteResource(const std::string &filename)
 char* ResourceManager::getFilename(ResourceID id)
 {
 	return &m_fileNames[id][0u];
-}
-
-char* ResourceManager::getFilename(MapID id)
-{
-	return &m_mapFileNames[id][0u];
-}
-
-char* ResourceManager::getFilename(LevelID id)
-{
-	return &m_levelFileNames[id][0u];
 }
 
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const

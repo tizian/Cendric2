@@ -7,9 +7,6 @@
 #include "Screens/MapScreen.h"
 #include "Screens/LevelScreen.h"
 
-#include "Enums/MapID.h"
-#include "Enums/LevelID.h"
-
 class LoadingScreen : public Screen
 {
 public:

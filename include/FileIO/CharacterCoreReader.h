@@ -33,7 +33,7 @@ private:
 	bool readQuestStates(char* start, char* end, CharacterCoreData& data) const;
 	bool readNPCStates(char* start, char* end, CharacterCoreData& data) const;
 
-	bool readLevelStateLayer(char* start, char* end, std::set<int>& layer, LevelID& id) const;
+	bool readLevelStateLayer(char* start, char* end, std::set<int>& layer, std::string& id) const;
 
 	bool readAttributes(char* start, char* end, CharacterCoreData& data) const;
 	

@@ -2,9 +2,9 @@
 time.played:64
 savegame.name:ISA'S TESTSAVE
 savegame.date:1439297583
-level.id:0
+level.id:
 level.position:0.000000,0.000000
-map.id:1
+map.id:res/map/firstmap/firstmap.tmx
 map.position:3991.611816,740.564148
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 

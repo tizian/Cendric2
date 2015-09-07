@@ -2,9 +2,9 @@
 time.played:52
 savegame.name:TIZ'S TESTSAVE
 savegame.date:1439286194
-level.id:0
+level.id:
 level.position:0.000000,0.000000
-map.id:1
+map.id:res/map/firstmap/firstmap.tmx
 map.position:3991.611816,755.471375
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 

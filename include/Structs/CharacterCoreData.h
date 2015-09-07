@@ -4,8 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <set>
 
-#include "Enums/MapID.h"
-#include "Enums/LevelID.h"
 #include "Enums/NPCID.h"
 #include "Enums/NPCState.h"
 #include "Enums/QuestID.h"
@@ -24,14 +22,14 @@ struct CharacterCoreData
 
 	// position & progress
 	bool isInLevel;
-	MapID currentMap;
+	std::string currentMap;
 	sf::Vector2f currentMapPosition;
-	LevelID currentLevel;
+	std::string currentLevel;
 	sf::Vector2f currentLevelPosition;
-	std::map<LevelID, std::set<int>> enemiesLooted;
-	std::map<LevelID, std::set<int>> enemiesKilled;
-	std::map<LevelID, std::set<int>> itemsLooted;
-	std::map<LevelID, std::set<int>> chestsLooted;
+	std::map<std::string, std::set<int>> enemiesLooted;
+	std::map<std::string, std::set<int>> enemiesKilled;
+	std::map<std::string, std::set<int>> itemsLooted;
+	std::map<std::string, std::set<int>> chestsLooted;
 	
 	// quest & npc progress
 	std::map<NPCID, NPCState> npcStates;
@@ -63,14 +61,14 @@ const CharacterCoreData DEFAULT_CORE
 	"",
 	time(nullptr),
 	false,
-	MapID::VOID,
+	"",
 	sf::Vector2f(),
-	LevelID::VOID,
+	"",
 	sf::Vector2f(),
-	std::map<LevelID, std::set<int>>(),
-	std::map<LevelID, std::set<int>>(),
-	std::map<LevelID, std::set<int>>(),
-	std::map<LevelID, std::set<int>>(),
+	std::map<std::string, std::set<int>>(),
+	std::map<std::string, std::set<int>>(),
+	std::map<std::string, std::set<int>>(),
+	std::map<std::string, std::set<int>>(),
 	std::map<NPCID, NPCState>(),
 	std::map<QuestID, QuestState>(),
 	ZERO_ATTRIBUTES,

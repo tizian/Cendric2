@@ -25,8 +25,10 @@ class Level;
 class LevelLoader
 {
 public:
-	// loads dynamic tiles out of level data and adds them directly to the screen
+	// loads dynamic tiles out of level data and adds them directly to the screen. An exception are dynamic chest tiles.
 	void loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const;
+	// loads chest tiles out of level data and adds them directly to the screen
+	void loadChestTiles(LevelData& data, Screen* screen, Level* level) const;
 	// loads level items out of level data and adds them directly to the screen
 	void loadLevelItems(LevelData& data, Screen* screen) const;
 	// loads enemies out of level data and adds them directly to the screen

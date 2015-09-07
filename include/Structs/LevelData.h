@@ -9,7 +9,7 @@
 
 struct LevelData
 {
-	LevelID id;
+	std::string id;
 	std::string name;
 	sf::Vector2i mapSize;
 	sf::Vector2i tileSize;
@@ -22,9 +22,13 @@ struct LevelData
 	std::vector<std::pair<DynamicTileID, std::vector<int>>> dynamicTileLayers;
 	std::vector<DynamicTileBean> dynamicTiles;
 	std::vector<std::string> levelItems;
-	std::vector<EnemyID> enemies;
+	std::map<int, std::pair<EnemyID, sf::Vector2f>> enemies;
+	std::map<int, std::pair<int, sf::Vector2f>> chests;
 	std::map<int, std::pair<std::map<std::string, int>, int>> enemyLoot;
 	std::map<int, std::pair<std::map<std::string, int>, int>> chestLoot;
 	std::vector<LevelExitBean> levelExits;
 	sf::FloatRect levelRect;
+	int firstgidEnemies;
+	int firstgidDynamicTiles;
+	int firstgidItems;
 };

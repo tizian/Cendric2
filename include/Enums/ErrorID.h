@@ -2,7 +2,7 @@
 
 enum class ErrorID
 {
-	Void,
+	VOID,
 	Error_fileNotFound,
 	Error_dataCorrupted
 };

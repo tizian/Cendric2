@@ -7,6 +7,47 @@
 
 using namespace std;
 
+void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) const
+{
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	if (mainCharacter == nullptr)
+	{
+		g_logger->logError("LevelLoader", "Could not find main character of game screen");
+		return;
+	}
+
+	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
+
+	// create chests if they are not looted yet
+	for (auto& it : data.chests)
+	{
+		if (coreData.chestsLooted.at(data.id).find(it.first) == coreData.chestsLooted.at(data.id).end())
+		{
+			ChestTile* chestTile = nullptr;
+			// calculate loot.
+			std::map<string, int> loot;
+			int gold = 0;
+			if (data.chestLoot.find(it.first) != data.chestLoot.end())
+			{
+				gold = data.chestLoot.at(it.first).second;
+				for (auto& item : data.chestLoot.at(it.first).first)
+				{
+					loot.insert({ item.first, item.second });
+				}
+			}
+			chestTile = new ChestTile(mainCharacter, level);
+			chestTile->setTileSize(data.tileSize);
+			chestTile->init();
+			chestTile->setObjectID(it.first);
+			chestTile->setLoot(loot, gold);
+			chestTile->setPosition(it.second.second - chestTile->getPositionOffset());
+			chestTile->setDebugBoundingBox(sf::Color::Yellow);
+			chestTile->load(it.second.first);
+			screen->addObject(chestTile);
+		}
+	}
+}
+
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const
 {
 	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
@@ -20,10 +61,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 
 	for (auto& it : data.dynamicTiles)
 	{
-		std::map<string, int> loot;
-		int gold;
-		ChestTile* chestTile = nullptr;
-		DynamicTile* tile;
+		DynamicTile* tile = nullptr;
 		switch (it.id)
 		{
 		case DynamicTileID::Water:
@@ -38,25 +76,6 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 			break;
 		case DynamicTileID::Torch:
 			tile = new TorchTile(level);
-			break;
-		case DynamicTileID::Chest:
-			if (coreData.chestsLooted.at(data.id).find(it.spawnPosition) != coreData.chestsLooted.at(data.id).end()) continue;
-			
-			// calculate loot.
-			loot.clear();
-			gold = 0;
-			if (data.chestLoot.find(it.spawnPosition) != data.chestLoot.end())
-			{
-				gold = data.chestLoot.at(it.spawnPosition).second;
-				for (auto& item : data.chestLoot.at(it.spawnPosition).first)
-				{
-					loot.insert({ item.first, item.second });
-				}
-			}
-			chestTile = new ChestTile(mainCharacter, level);
-			chestTile->setSpawnPosition(it.spawnPosition);
-			chestTile->setLoot(loot, gold);
-			tile = chestTile;
 			break;
 		case DynamicTileID::SpikesBottom:
 			tile = new SpikesBottomTile(level);
@@ -139,30 +158,26 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 		return;
 	}
 
-	int x = 0;
-	int y = 0;
 	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
-	// calculate level positions and create them if they are not looted yet
-	for (int i = 0; i < data.enemies.size(); i++)
+	// create enemies if they are not looted yet
+	for (auto& it : data.enemies)
 	{
-		auto& it = data.enemies.at(i);
-		if (it != EnemyID::VOID && (coreData.enemiesLooted.at(data.id).find(i) == coreData.enemiesLooted.at(data.id).end()))
+		if (coreData.enemiesLooted.at(data.id).find(it.first) == coreData.enemiesLooted.at(data.id).end())
 		{
-			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
 			Enemy* enemy = nullptr;
 			// calculate loot.
 			std::map<string, int> loot;
 			int gold = 0;
-			if (data.enemyLoot.find(i) != data.enemyLoot.end())
+			if (data.enemyLoot.find(it.first) != data.enemyLoot.end())
 			{
-				gold = data.enemyLoot.at(i).second;
-				for (auto& item : data.enemyLoot.at(i).first)
+				gold = data.enemyLoot.at(it.first).second;
+				for (auto& item : data.enemyLoot.at(it.first).first)
 				{
 					loot.insert({ item.first, item.second });
 				}
 			}
-			switch (it)
+			switch (it.second.first)
 			{
 			case EnemyID::Rat:
 				enemy = new RatEnemy(level, mainCharacter);
@@ -188,20 +203,11 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			}
 
 			enemy->setLoot(loot, gold);
-			enemy->setPosition(position);
-			enemy->setSpawnPosition(i);
+			enemy->setPosition(it.second.second);
+			enemy->setObjectID(it.first);
 			enemy->setDebugBoundingBox(sf::Color::Magenta);
-			if (coreData.enemiesKilled.at(data.id).find(i) != coreData.enemiesKilled.at(data.id).end()) enemy->setDead();
+			if (coreData.enemiesKilled.at(data.id).find(it.first) != coreData.enemiesKilled.at(data.id).end()) enemy->setDead();
 			screen->addObject(enemy);
-		}
-		if (x + 1 >= data.mapSize.x)
-		{
-			x = 0;
-			y++;
-		}
-		else
-		{
-			x++;
 		}
 	}
 }

@@ -13,8 +13,6 @@
 #include "LevelLoader.h"
 #include "SpeedupPullCamera.h"
 
-#include "Enums/LevelID.h"
-
 class Level 
 {
 public:
@@ -22,7 +20,7 @@ public:
 	~Level();
 
 	// loads a .dric file
-	bool load(LevelID id);
+	bool load(const std::string& id);
 	// loads only dynamic tiles. this happens AFTER everything other and is because of our nice RENDERTEXTURE PROBLEM >:(
 	void loadDynamicTiles(Screen* screen);
 	// loads enemies and level items for the level. must be called after a screen already has a main char
@@ -55,7 +53,7 @@ public:
 
 	const TileMap& getTilemap() const;
 	const sf::FloatRect& getLevelRect() const;
-	LevelID getID() const;
+	const std::string& getID() const;
 	// returns the next y position where the bounding box is grounding.
 	float getGround(const sf::FloatRect& boundingBox) const;
 	// returns the next y position where the bounding box is on the ceiling.

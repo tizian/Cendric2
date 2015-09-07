@@ -87,9 +87,9 @@ void ChestTile::update(const sf::Time& frameTime)
 	}
 }
 
-void ChestTile::setSpawnPosition(int pos)
+void ChestTile::setObjectID(int id)
 {
-	m_spawnPosition = pos;
+	m_objectID = id;
 }
 
 void ChestTile::onMouseOver()
@@ -112,7 +112,7 @@ void ChestTile::onRightClick()
 			// loot, create the correct items + gold in the players inventory.
 			m_mainChar->lootItems(m_lootableItems);
 			m_mainChar->addGold(m_lootableGold);
-			m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_spawnPosition);
+			m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
 			setDisposed();
 		}
 		else

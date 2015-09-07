@@ -2,10 +2,10 @@
 time.played:1145
 savegame.name:TESTLEVEL
 savegame.date:1441571949
-level.id:2
-level.position:1960.000000,1200.000000
+level.id:
+level.position:0.000000,0.000000
 is.in.level:0
-map.id:1
+map.id:res/map/firstmap/firstmap.tmx
 map.position:4397.335938,393.322144
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 

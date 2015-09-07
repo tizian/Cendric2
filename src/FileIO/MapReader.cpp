@@ -1,6 +1,8 @@
 #include "FileIO/MapReader.h"
 
-#include <cstring>
+#ifndef XMLCheckResult
+	#define XMLCheckResult(result) if (result != XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
+#endif
 
 using namespace std;
 
@@ -75,11 +77,21 @@ bool MapReader::checkData(MapData& data) const
 			return false;
 		}
 	}
-	for (auto it : data.levelEntries)
+	for (auto it : data.mapExits)
 	{
-		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x || it.mapExitRect.top >= data.mapSize.y)
+		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x * data.tileSize.x || it.mapExitRect.top >= data.mapSize.y * data.tileSize.y)
 		{
-			g_logger->logError("MapReader", "Error in map data : a level entry rect is out of range for this map.");
+			g_logger->logError("MapReader", "Error in map data : a map exit rect is out of range for this map.");
+			return false;
+		}
+		if (it.levelID.empty())
+		{
+			g_logger->logError("MapReader", "Error in map data : map exit level id is empty.");
+			return false;
+		}
+		if (it.levelSpawnPoint.x < 0.f || it.levelSpawnPoint.y < 0.f)
+		{
+			g_logger->logError("MapReader", "Error in map data : lmap exit level spawn point is negative.");
 			return false;
 		}
 	}
@@ -97,125 +109,133 @@ bool MapReader::checkData(MapData& data) const
 	return true;
 }
 
-bool MapReader::readMapName(char* start, char* end, MapData& data) const
+bool MapReader::readMapExits(XMLElement* objectgroup, MapData& data) const
 {
-	char* startData;
-	startData = gotoNextChar(start, end, '"');
-	startData++;
-	string name(startData);
-	int count = countToNextChar(startData, end, '"');
-	if (count == -1) {
-		return false;
-	}
-	name = name.substr(0, count);
-	data.name = name;
-	return true;
-}
+	XMLElement* object = objectgroup->FirstChildElement("object");
 
-bool MapReader::readTilesetPath(char* start, char* end, MapData& data) const
-{
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	string path(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	path = path.substr(0, count);
-	data.tileSetPath = path;
-	return true;
-}
-
-bool MapReader::readLevelEntry(char* start, char* end, MapData& data) const
-{
-	char* startData;
-
-	// read level entry rect
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	float left = static_cast<float>(atof(startData));
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float top = static_cast<float>(atof(startData));
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float width = static_cast<float>(atof(startData));
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float height = static_cast<float>(atof(startData));
-	sf::FloatRect entry(left, top, width, height);
-
-	// read level spawn point
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	LevelID levelID = static_cast<LevelID>(atoi(startData));
-	if (levelID <= LevelID::VOID || levelID >= LevelID::MAX)
+	while (object != nullptr)
 	{
-		g_logger->logError("MapReader", "Could not read level entry : Level ID not recognized.");
-		return false;
+		int x;
+		XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int width;
+		result = object->QueryIntAttribute("width", &width);
+		XMLCheckResult(result);
+
+		int height;
+		result = object->QueryIntAttribute("height", &height);
+		XMLCheckResult(result);
+
+		MapExitBean bean;
+		bean.mapExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
+		bean.levelID = "";
+		bean.levelSpawnPoint.x = -1.f;
+		bean.levelSpawnPoint.y = -1.f;
+
+		// map spawn point for level exit
+		XMLElement* properties = object->FirstChildElement("properties");
+		if (properties == nullptr)
+		{
+			g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties attribute found for level exit.");
+			return false;
+		}
+
+		XMLElement* _property = properties->FirstChildElement("property");
+		while (_property != nullptr)
+		{
+			const char* textAttr = nullptr;
+			textAttr = _property->Attribute("name");
+			if (textAttr == nullptr)
+			{
+				g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found for level exit.");
+				return false;
+			}
+			std::string name = textAttr;
+
+			if (name.compare("level id") == 0)
+			{
+				textAttr = nullptr;
+				textAttr = _property->Attribute("value");
+				if (textAttr == nullptr)
+				{
+					g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found for level exit map id.");
+					return false;
+				}
+				bean.levelID = textAttr;
+			}
+			else if (name.compare("x") == 0)
+			{
+				XMLError result = _property->QueryIntAttribute("value", &x);
+				XMLCheckResult(result);
+				bean.levelSpawnPoint.x = static_cast<float>(x);
+			}
+			else if (name.compare("y") == 0)
+			{
+				XMLError result = _property->QueryIntAttribute("value", &y);
+				XMLCheckResult(result);
+				bean.levelSpawnPoint.y = static_cast<float>(y);
+			}
+			else
+			{
+				g_logger->logError("MapReader", "XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
+				return false;
+			}
+			_property = _property->NextSiblingElement("property");
+		}
+		data.mapExits.push_back(bean);
+		object = object->NextSiblingElement("object");
 	}
-
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float x = static_cast<float>(atof(startData));
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float y = static_cast<float>(atof(startData));
-	sf::Vector2f spawnPoint(x, y);
-	
-	MapExitBean levelEntry;
-	levelEntry.mapExitRect = entry;
-	levelEntry.level = levelID;
-	levelEntry.levelSpawnPoint = spawnPoint;
-	data.levelEntries.push_back(levelEntry);
 	return true;
 }
 
-bool MapReader::readMapSize(char* start, char* end, MapData& data) const
+bool MapReader::readObjects(XMLElement* map, MapData& data) const
 {
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	int width = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	int height = atoi(startData);
-	sf::Vector2i size(width, height);
-	data.mapSize = size;
+	XMLElement* objectgroup = map->FirstChildElement("objectgroup");
+
+	const char* textAttr;
+	while (objectgroup != nullptr)
+	{
+		textAttr = nullptr;
+		textAttr = objectgroup->Attribute("name");
+		if (textAttr == nullptr)
+		{
+			g_logger->logError("MapReader", "XML file could not be read, no objectgroup->name attribute found.");
+			return false;
+		}
+
+		std::string name = textAttr;
+
+		if (name.find("mapexits") != std::string::npos)
+		{
+			if (!readMapExits(objectgroup, data)) return false;
+		}
+		else
+		{
+			g_logger->logError("MapReader", "Objectgroup with unknown name found in level.");
+			return false;
+		}
+
+		objectgroup = objectgroup->NextSiblingElement("objectgroup");
+	}
 	return true;
 }
-bool MapReader::readTileSize(char* start, char* end, MapData& data) const
+
+bool MapReader::readNPCLayer(const std::string& layer, MapData& data) const
 {
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	int width = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	int height = atoi(startData);
-	sf::Vector2i size(width, height);
-	data.tileSize = size;
-	return true;
-}
-
-bool MapReader::readLayerNPC(char* start, char* end, MapData& data) const
-{
-	char* startData;
-	char* endData;
-	startData = gotoNextChar(start, end, '"');
-	startData++;
-	endData = gotoNextChar(startData, end, '"');
-
-	int firstgid = atoi(startData);
-	startData = gotoNextChar(start, end, ',');
-	startData++;
-
+	std::string layerData = layer;
+	size_t pos = 0;
+	std::vector<int> dynamicTileLayer;
+	int id;
 	NPCID npc;
-	while (startData != NULL)
+	while ((pos = layerData.find(",")) != std::string::npos)
 	{
-		int id = atoi(startData);
-		id = (id == 0) ? id : id - firstgid + 1;
+		id = std::stoi(layerData.substr(0, pos));
+		id = (id == 0) ? id : id - data.firstgidNPC + 1;
 		if (m_npcMap.find(id) == m_npcMap.end())
 		{
 			g_logger->logError("MapReader", "Npc ID not recognized: " + std::to_string(id));
@@ -223,204 +243,289 @@ bool MapReader::readLayerNPC(char* start, char* end, MapData& data) const
 		}
 		npc = m_npcMap.at(id);
 		data.npcs.push_back(npc);
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
-		{
-			startData++;
-		}
+		layerData.erase(0, pos + 1);
 	}
-	return true;
-}
-
-bool MapReader::readBackgroundLayerTiles(char* start, char* end, MapData& data) const
-{
-	// add a new background layer into data
-	vector<int> layer;
-
-	char* startData;
-	char* endData;
-	startData = gotoNextChar(start, end, '"');
-	startData++;
-	endData = gotoNextChar(startData, end, '"');
-
-
-	while (startData != NULL)
+	id = std::stoi(layerData);
+	id = (id == 0) ? id : id - data.firstgidNPC + 1;
+	if (m_npcMap.find(id) == m_npcMap.end())
 	{
-		layer.push_back(atoi(startData));
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
-		{
-			startData++;
-		}
-	}
-
-	data.backgroundLayers.push_back(layer);
-	return true;
-}
-
-bool MapReader::readForegroundLayerTiles(char* start, char* end, MapData& data) const
-{
-	// add a new foreground layer into data
-	vector<int> layer;
-
-	char* startData;
-	char* endData;
-	startData = gotoNextChar(start, end, '"');
-	startData++;
-	endData = gotoNextChar(startData, end, '"');
-
-
-	while (startData != NULL)
-	{
-		layer.push_back(atoi(startData));
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
-		{
-			startData++;
-		}
-	}
-
-	data.foregroundLayers.push_back(layer);
-	return true;
-}
-
-bool MapReader::readLayerCollidable(char* start, char* end, MapData& data) const
-{
-	data.collidableTiles.clear();
-
-	char* startData;
-	char* endData;
-	startData = gotoNextChar(start, end, '"');
-	startData++;
-	endData = gotoNextChar(startData, end, '"');
-
-
-	while (startData != NULL)
-	{
-		data.collidableTiles.push_back(0 != atoi(startData));
-		startData = gotoNextChar(startData, endData, ',');
-		if (startData != NULL)
-		{
-			startData++;
-		}
-	}
-
-	return true;
-}
-
-bool MapReader::readMap(char* fileName, MapData& data)
-{
-	FILE* mapFile;
-	mapFile = fopen(fileName, "r");
-
-	if (mapFile == NULL)
-	{
-		g_logger->logError("MapReader", "Error at opening file " + std::string(fileName));
+		g_logger->logError("MapReader", "Npc ID not recognized: " + std::to_string(id));
 		return false;
 	}
+	npc = m_npcMap.at(id);
+	data.npcs.push_back(npc);
 
-	// obtain file size
-	long fileSize;
-	long returnedFileSize;
+	return true;
+}
 
-	fseek(mapFile, 0, SEEK_END);
-	fileSize = ftell(mapFile);
-	rewind(mapFile);
+bool MapReader::readBackgroundTileLayer(const std::string& layer, MapData& data) const
+{
+	std::string layerData = layer;
 
-	// huge buffer array
-	char* charBuffer = new char[fileSize];
+	size_t pos = 0;
+	std::vector<int> backgroundLayer;
+	while ((pos = layerData.find(",")) != std::string::npos) {
+		backgroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
+		layerData.erase(0, pos + 1);
+	}
+	backgroundLayer.push_back(std::stoi(layerData));
 
-	// fill buffer array
-	returnedFileSize = static_cast<long>(fread(charBuffer, sizeof(char), fileSize, mapFile));
+	data.backgroundLayers.push_back(backgroundLayer);
+	return true;
+}
 
-	long bufferContentLength = returnedFileSize;
+bool MapReader::readCollidableLayer(const std::string& layer, MapData& data) const
+{
+	std::string layerData = layer;
 
-	char* pos = charBuffer;
-	char* end = charBuffer + bufferContentLength;
+	size_t pos = 0;
+	std::vector<bool> collidableLayer;
+	while ((pos = layerData.find(",")) != std::string::npos) {
+		collidableLayer.push_back(std::stoi(layerData.substr(0, pos)) != 0);
+		layerData.erase(0, pos + 1);
+	}
+	collidableLayer.push_back(std::stoi(layerData) != 0);
 
-	bool noError = true;
+	data.collidableTiles = collidableLayer;
+	return true;
+}
 
-	// read defined tags
-	while (pos < end)
+bool MapReader::readForegroundTileLayer(const std::string& layer, MapData& data) const
+{
+	std::string layerData = layer;
+
+	size_t pos = 0;
+	std::vector<int> foregroundLayer;
+	while ((pos = layerData.find(",")) != std::string::npos) {
+		foregroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
+		layerData.erase(0, pos + 1);
+	}
+	foregroundLayer.push_back(std::stoi(layerData));
+
+	data.foregroundLayers.push_back(foregroundLayer);
+	return true;
+}
+
+bool MapReader::readLayers(XMLElement* map, MapData& data) const
+{
+	XMLElement* layer = map->FirstChildElement("layer");
+
+	const char* textAttr;
+	while (layer != nullptr)
 	{
-		if (*pos == COMMENT_MARKER || *pos == '\n')
+		textAttr = nullptr;
+		textAttr = layer->Attribute("name");
+		if (textAttr == nullptr)
 		{
-			pos = gotoNextChar(pos, end, '\n');
-		}
-
-		else if (strncmp(pos, MAP_NAME, strlen(MAP_NAME)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_NAME));
-			noError = readMapName(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, MAP_SIZE, strlen(MAP_SIZE)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_SIZE));
-			noError = readMapSize(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, MAP_TILESIZE, strlen(MAP_TILESIZE)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(MAP_TILESIZE));
-			noError = readTileSize(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, TILESET_PATH, strlen(TILESET_PATH)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(TILESET_PATH));
-			noError = readTilesetPath(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, LEVEL_ENTRY, strlen(LEVEL_ENTRY)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LEVEL_ENTRY));
-			noError = readLevelEntry(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, LAYER_COLLIDABLE, strlen(LAYER_COLLIDABLE)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_COLLIDABLE));;
-			noError = readLayerCollidable(pos, end, data);
-			pos = gotoNextChar(pos, end, ';');
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, LAYER_TILES_BACKGROUND, strlen(LAYER_TILES_BACKGROUND)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_TILES_BACKGROUND));
-			noError = readBackgroundLayerTiles(pos, end, data);
-			pos = gotoNextChar(pos, end, ';');
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, LAYER_TILES_FOREGROUND, strlen(LAYER_TILES_FOREGROUND)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_TILES_FOREGROUND));
-			noError = readForegroundLayerTiles(pos, end, data);
-			pos = gotoNextChar(pos, end, ';');
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, LAYER_NPC, strlen(LAYER_NPC)) == 0) {
-			g_logger->log(LogLevel::Verbose, "MapReader", "found tag " + std::string(LAYER_NPC));
-			noError = readLayerNPC(pos, end, data);
-			pos = gotoNextChar(pos, end, ';');
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else {
-			g_logger->logError("MapReader", "unknown tag found in file " + std::string(fileName));
+			g_logger->logError("MapReader", "XML file could not be read, no layer->name attribute found.");
 			return false;
 		}
 
-		if (pos == NULL || !noError)
+		std::string name = textAttr;
+
+		XMLElement* layerDataNode = layer->FirstChildElement("data");
+		if (layerDataNode == nullptr)
 		{
-			// reached end of file or error happened.
-			break;
+			g_logger->logError("MapReader", "XML file could not be read, no layer->data found.");
+			return false;
+		}
+		std::string layerData = layerDataNode->GetText();
+
+		if (name.find("BG") != std::string::npos || name.find("bg") != std::string::npos)
+		{
+			if (!readBackgroundTileLayer(layerData, data)) return false;
+		}
+		else if (name.find("FG") != std::string::npos || name.find("fg") != std::string::npos)
+		{
+			if (!readForegroundTileLayer(layerData, data)) return false;
+		}
+		else if (name.find("collidable") != std::string::npos)
+		{
+			if (!readCollidableLayer(layerData, data)) return false;
+		}
+		else if (name.find("npc") != std::string::npos)
+		{
+			if (!readNPCLayer(layerData, data)) return false;
+		}
+		else
+		{
+			g_logger->logError("MapReader", "Layer with unknown name found in map.");
+			return false;
 		}
 
-		pos++;
+		layer = layer->NextSiblingElement("layer");
+	}
+	return true;
+}
+
+
+bool MapReader::readFirstGridIDs(XMLElement* map, MapData& data) const
+{
+	XMLElement* tileset = map->FirstChildElement("tileset");
+
+	data.firstgidNPC = 0;
+	const char* textAttr;
+	while (tileset != nullptr)
+	{
+		textAttr = nullptr;
+		textAttr = tileset->Attribute("name");
+		if (textAttr == nullptr)
+		{
+			g_logger->logError("MapReader", "XML file could not be read, no tileset->name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+
+		int gid;
+		XMLError result = tileset->QueryIntAttribute("firstgid", &gid);
+		XMLCheckResult(result);
+
+		if (name.find("npc") != std::string::npos)
+		{
+			data.firstgidNPC = gid;
+		}
+		
+		tileset = tileset->NextSiblingElement("tileset");
 	}
 
-	std::fclose(mapFile);
-	delete[] charBuffer;
-
-	// check data
-	if (!noError || !checkData(data))
+	if (data.firstgidNPC <= 0)
 	{
+		g_logger->logError("MapReader", "Could not read firstgids, at least one of the required tilesets is missing.");
+		return false;
+	}
+	return true;
+}
+
+bool MapReader::readMap(const char* fileName, MapData& data)
+{
+	XMLDocument xmlDoc;
+	XMLError result = xmlDoc.LoadFile(fileName);
+	XMLCheckResult(result);
+
+	XMLElement* map = xmlDoc.FirstChildElement("map");
+	if (map == nullptr)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, no map node found.");
 		return false;
 	}
 
+	if (!readMapProperties(map, data)) return false;
+	if (!readFirstGridIDs(map, data)) return false;
+	if (!readLayers(map, data)) return false;
+	if (!readObjects(map, data)) return false;
+
 	updateData(data);
+	if (!checkData(data)) return false;
+	return true;
+}
+
+bool MapReader::readMapName(XMLElement* _property, MapData& data) const
+{
+	// we've found the property "name"
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, no value attribute found (map->properties->property->name=name).");
+		return false;
+	}
+	data.name = textAttr;
+	return true;
+}
+
+bool MapReader::readTilesetPath(XMLElement* _property, MapData& data) const
+{
+	// we've found the property "tilesetpath"
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, no value attribute found (map->properties->property->name=backgroundlayer).");
+		return false;
+	}
+	data.tileSetPath = textAttr;
+	return true;
+}
+
+bool MapReader::readMapProperties(XMLElement* map, MapData& data) const
+{
+	// check if renderorder is correct
+	const char* textAttr = nullptr;
+	textAttr = map->Attribute("renderorder");
+	if (textAttr == nullptr)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, no renderorder attribute found.");
+		return false;
+	}
+	std::string renderorder = textAttr;
+	if (renderorder.compare("right-down") != 0)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, renderorder is not \"right-down\".");
+		return false;
+	}
+
+	// check if orientation is correct
+	textAttr = nullptr;
+	textAttr = map->Attribute("orientation");
+	if (textAttr == nullptr)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, no orientation attribute found.");
+		return false;
+	}
+	std::string orientation = textAttr;
+	if (orientation.compare("orthogonal") != 0)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, renderorder is not \"orthogonal\".");
+		return false;
+	}
+
+	// read map width and height
+	XMLError result = map->QueryIntAttribute("width", &data.mapSize.x);
+	XMLCheckResult(result);
+	result = map->QueryIntAttribute("height", &data.mapSize.y);
+	XMLCheckResult(result);
+
+	// read tile size
+	result = map->QueryIntAttribute("tilewidth", &data.tileSize.x);
+	XMLCheckResult(result);
+	result = map->QueryIntAttribute("tileheight", &data.tileSize.y);
+	XMLCheckResult(result);
+
+	// read level properties
+	XMLElement* properties = map->FirstChildElement("properties");
+	if (properties == nullptr)
+	{
+		g_logger->logError("MapReader", "XML file could not be read, no properties node found.");
+		return false;
+	}
+	XMLElement* _property = properties->FirstChildElement("property");
+
+	while (_property != nullptr)
+	{
+		textAttr = nullptr;
+		textAttr = _property->Attribute("name");
+		if (textAttr == nullptr)
+		{
+			g_logger->logError("MapReader", "XML file could not be read, no property->name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+		if (name.compare("name") == 0)
+		{
+			if (!readMapName(_property, data)) return false;
+		}
+		else if (name.compare("tilesetpath") == 0)
+		{
+			if (!readTilesetPath(_property, data)) return false;
+		}
+		else
+		{
+			g_logger->logError("MapReader", "XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
+			return false;
+		}
+
+		_property = _property->NextSiblingElement("property");
+	}
 
 	return true;
 }
@@ -471,24 +576,6 @@ void MapReader::updateData(MapData& data) const
 		{
 			x++;
 		}
-	}
-
-	// update level entries
-	vector<MapExitBean> oldExits = data.levelEntries;
-	data.levelEntries.clear();
-	for (auto it : oldExits)
-	{
-		MapExitBean newBean;
-		newBean.mapExitRect = sf::FloatRect(
-			it.mapExitRect.left * data.tileSize.x,
-			it.mapExitRect.top * data.tileSize.y,
-			it.mapExitRect.width * data.tileSize.x,
-			it.mapExitRect.height * data.tileSize.y);
-		newBean.level = it.level;
-		newBean.levelSpawnPoint = sf::Vector2f(
-			it.levelSpawnPoint.x * data.tileSize.x,
-			it.levelSpawnPoint.y * data.tileSize.y);
-		data.levelEntries.push_back(newBean);
 	}
 
 	// calculate map rect
