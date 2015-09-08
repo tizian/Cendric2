@@ -99,7 +99,7 @@ void MapScreen::execOnExit(const Screen *nextScreen)
 	delete m_interface;
 }
 
-void MapScreen::setDialogue(NPCID npc, DialogueID id)
+void MapScreen::setDialogue(const std::string& npc, DialogueID id)
 {
 	if (m_dialogueWindow != nullptr)
 	{

@@ -23,3 +23,8 @@ void UnlockSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const
 
 	Spell::load(bean, mob, target);
 }
+
+int UnlockSpell::getStrength() const
+{
+	return m_strength;
+}

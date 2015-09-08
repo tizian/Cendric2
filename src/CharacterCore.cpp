@@ -86,7 +86,7 @@ const Weapon* CharacterCore::getWeapon()
 	return weapon;
 }
 
-NPCState CharacterCore::getNPCState(NPCID id)
+NPCState CharacterCore::getNPCState(const std::string& id)
 {
 	if (m_data.npcStates.find(id) != m_data.npcStates.end())
 	{
@@ -104,7 +104,7 @@ QuestState CharacterCore::getQuestState(QuestID id)
 	return QuestState::Void;
 }
 
-void CharacterCore::setNPCState(NPCID id, NPCState state)
+void CharacterCore::setNPCState(const std::string& id, NPCState state)
 {
 	if (m_data.npcStates.find(id) != m_data.npcStates.end())
 	{

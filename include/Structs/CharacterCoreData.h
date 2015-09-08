@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <set>
 
-#include "Enums/NPCID.h"
 #include "Enums/NPCState.h"
 #include "Enums/QuestID.h"
 #include "Enums/QuestState.h"
@@ -32,7 +31,7 @@ struct CharacterCoreData
 	std::map<std::string, std::set<int>> chestsLooted;
 	
 	// quest & npc progress
-	std::map<NPCID, NPCState> npcStates;
+	std::map<std::string, NPCState> npcStates;
 	std::map<QuestID, QuestState> questStates;
 	
 	// base attributes
@@ -69,7 +68,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
-	std::map<NPCID, NPCState>(),
+	std::map<std::string, NPCState>(),
 	std::map<QuestID, QuestState>(),
 	ZERO_ATTRIBUTES,
 	0,

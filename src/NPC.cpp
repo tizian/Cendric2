@@ -2,7 +2,7 @@
 #include "MapMainCharacter.h"
 #include "Screens/MapScreen.h"
 
-void NPC::load(MapMainCharacter* mainChar, NPCID id)
+void NPC::load(MapMainCharacter* mainChar, const std::string& id)
 {
 	m_mainChar = mainChar;
 	m_npcID = id;

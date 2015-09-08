@@ -228,7 +228,7 @@ std::string CharacterCoreWriter::writeNPCStates(const CharacterCoreData& data) c
 	{
 		string npc = string(NPC_STATE);
 		npc.append(":");
-		npc.append(to_string(static_cast<int>(it.first)));
+		npc.append(it.first);
 		npc.append(",");
 		npc.append(to_string(static_cast<int>(it.second)));
 		npc.append("\n");

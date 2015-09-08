@@ -17,27 +17,13 @@ LevelReader::~LevelReader()
 
 void LevelReader::initMaps()
 {
-	m_levelItemMap.insert({
-		{ 0, "" },
-		{ 1, "it_fo_caveberry" },
-		{ 2, "it_mi_goldengoblet" },
-		{ 3, "it_go_onecoin" },
-		{ 4, "it_qe_letter" },
-		{ 5, "it_eq_ringoflesserhealth" },
-		{ 26, "it_fo_healingherb" },
-		{ 27, "it_fo_glowingshroom" },
-		{ 28, "it_go_threecoins" },
-		{ 29, "it_fo_water" },
-		{ 49, "it_fo_cheese" },
-		{ 50, "it_fo_bread" },
-	});
 	m_enemyMap.insert({
 		{ 1, EnemyID::Rat },
 		{ 2, EnemyID::FireRat },
 	});
 }
 
-bool LevelReader::readLevel(const std::string& fileName, LevelData& data) const
+bool LevelReader::readLevel(const std::string& fileName, LevelData& data)
 {
 	XMLDocument xmlDoc;
 	XMLError result = xmlDoc.LoadFile(fileName.c_str());
@@ -166,7 +152,7 @@ bool LevelReader::readChestTiles(XMLElement* objectgroup, LevelData& data) const
 		result = object->QueryIntAttribute("y", &y);
 		XMLCheckResult(result);
 
-		int offset = static_cast<int>(DynamicTileID::Chest) + data.firstgidDynamicTiles - 1;
+		int offset = static_cast<int>(DynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
 		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
 
 		data.chests.insert({ id, std::pair<int, sf::Vector2f>(skinNr, sf::Vector2f(static_cast<float>(x), static_cast<float>(y))) });
@@ -197,6 +183,15 @@ bool LevelReader::readChestTiles(XMLElement* objectgroup, LevelData& data) const
 				if (itemText.compare("gold") == 0 || itemText.compare("Gold") == 0)
 				{
 					items.second += amount;
+				}
+				else if (itemText.compare("strength") == 0 || itemText.compare("Strength") == 0)
+				{
+					if (amount < 0 || amount > 4)
+					{
+						g_logger->logError("LevelReader", "XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 4).");
+						return false;
+					}
+					data.chestStrength.insert({ id, amount });
 				}
 				else
 				{
@@ -235,7 +230,7 @@ bool LevelReader::readEnemies(XMLElement* objectgroup, LevelData& data) const
 		result = object->QueryIntAttribute("y", &y);
 		XMLCheckResult(result);
 
-		gid = (gid == 0) ? gid : gid - data.firstgidEnemies + 1;
+		gid = (gid == 0) ? gid : gid - m_firstGidEnemies + 1;
 		if (m_enemyMap.find(gid) == m_enemyMap.end())
 		{
 			g_logger->logError("LevelReader", "Enemy ID not recognized: " + std::to_string(gid));
@@ -337,7 +332,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 	while ((pos = layerData.find(",")) != std::string::npos)
 	{
 		id = std::stoi(layerData.substr(0, pos));
-		id = (id == 0) ? id : id - data.firstgidItems + 1;
+		id = (id == 0) ? -1 : id - m_firstGidItems;
 		layerData.erase(0, pos + 1);
 		if (m_levelItemMap.find(id) == m_levelItemMap.end())
 		{
@@ -348,7 +343,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 		data.levelItems.push_back(levelItem);
 	}
 	id = std::stoi(layerData);
-	id = (id == 0) ? id : id - data.firstgidItems + 1;
+	id = (id == 0) ? -1 : id - m_firstGidItems;
 	if (m_levelItemMap.find(id) == m_levelItemMap.end())
 	{
 		g_logger->logError("LevelReader", "Level item ID not recognized: " + std::to_string(id));
@@ -363,7 +358,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 bool LevelReader::readDynamicTileLayer(DynamicTileID id, const std::string& layer, LevelData& data) const
 {
 	std::string layerData = layer;
-	int offset = static_cast<int>(id) + data.firstgidDynamicTiles - 1;
+	int offset = static_cast<int>(id) + m_firstGidDynamicTiles - 1;
 	size_t pos = 0;
 	std::vector<int> dynamicTileLayer;
 	int skinNr;
@@ -513,13 +508,66 @@ bool LevelReader::readLayers(XMLElement* map, LevelData& data) const
 	return true;
 }
 
-bool LevelReader::readFirstGridIDs(XMLElement* map, LevelData& data) const
+bool LevelReader::readItemIDs(XMLElement* _tile)
+{
+	m_levelItemMap.clear();
+	m_levelItemMap.insert({ -1, "" });
+	XMLElement* tile = _tile;
+
+	while (tile != nullptr)
+	{
+		int tileID;
+		XMLError result = tile->QueryIntAttribute("id", &tileID);
+		XMLCheckResult(result);
+
+		XMLElement* properties = tile->FirstChildElement("properties");
+		if (properties == nullptr)
+		{
+			g_logger->logError("LevelReader", "Could not read item tile properties, no tileset->tile->properties tag found.");
+			return false;
+		}
+		XMLElement* _property = properties->FirstChildElement("property");
+		if (_property == nullptr)
+		{
+			g_logger->logError("LevelReader", "Could not read item tile properties, no tileset->tile->properties->property tag found.");
+			return false;
+		}
+		const char* textAttr = nullptr;
+		textAttr = _property->Attribute("name");
+		if (textAttr == nullptr)
+		{
+			g_logger->logError("LevelReader", "XML file could not be read, no tileset->tile->properties->property name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+		if (name.compare("id") != 0)
+		{
+			g_logger->logError("LevelReader", "XML file could not be read, wrong tile property (not \"id\").");
+			return false;
+		}
+		textAttr = nullptr;
+		textAttr = _property->Attribute("value");
+		if (textAttr == nullptr)
+		{
+			g_logger->logError("LevelReader", "XML file could not be read, no tileset->tile->properties->property value attribute found.");
+			return false;
+		}
+
+		m_levelItemMap.insert({ tileID, std::string(textAttr) });
+
+		tile = tile->NextSiblingElement("tile");
+	}
+
+	return true;
+}
+
+bool LevelReader::readFirstGridIDs(XMLElement* map, LevelData& data)
 {
 	XMLElement* tileset = map->FirstChildElement("tileset");
 
-	data.firstgidDynamicTiles = 0;
-	data.firstgidEnemies = 0;
-	data.firstgidItems = 0;
+	m_firstGidDynamicTiles = 0;
+	m_firstGidEnemies = 0;
+	m_firstGidItems = 0;
 	const char* textAttr;
 	while (tileset != nullptr)
 	{
@@ -538,21 +586,22 @@ bool LevelReader::readFirstGridIDs(XMLElement* map, LevelData& data) const
 		
 		if (name.find("dynamic_tiles") != std::string::npos)
 		{
-			data.firstgidDynamicTiles = gid;
+			m_firstGidDynamicTiles = gid;
 		}
 		else if (name.find("enemies") != std::string::npos)
 		{
-			data.firstgidEnemies = gid;
+			m_firstGidEnemies = gid;
 		}
 		else if (name.find("levelitems") != std::string::npos)
 		{
-			data.firstgidItems = gid;
+			m_firstGidItems = gid;
+			if (!readItemIDs(tileset->FirstChildElement("tile"))) return false;
 		}
 
 		tileset = tileset->NextSiblingElement("tileset");
 	}
 
-	if (data.firstgidDynamicTiles <= 0 || data.firstgidEnemies <= 0 || data.firstgidItems <= 0)
+	if (m_firstGidItems <= 0 || m_firstGidDynamicTiles <= 0 || m_firstGidEnemies <= 0)
 	{
 		g_logger->logError("LevelReader", "Could not read firstgids, at least one of the required tilesets is missing.");
 		return false;

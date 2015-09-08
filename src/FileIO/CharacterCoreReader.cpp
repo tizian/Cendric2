@@ -282,12 +282,13 @@ bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreDat
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
-	NPCID id = static_cast<NPCID>(atoi(startData));
-	if (id <= NPCID::Void || id >= NPCID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "NPC ID not recognized: " + std::to_string(static_cast<int>(id)));
+	string npcID(startData);
+	int count = countToNextChar(startData, end, ',');
+	if (count == -1) {
 		return false;
 	}
+	npcID = npcID.substr(0, count);
+
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	NPCState state = static_cast<NPCState>(atoi(startData));
@@ -296,7 +297,7 @@ bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreDat
 		g_logger->logError("CharacterCoreReader", "NPC State not recognized: " + std::to_string(static_cast<int>(state)));
 		return false;
 	}
-	data.npcStates.insert({ id, state });
+	data.npcStates.insert({ npcID, state });
 	return true;
 }
 

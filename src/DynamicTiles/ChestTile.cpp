@@ -52,13 +52,18 @@ void ChestTile::setLoot(const std::map<string, int>& items, int gold)
 
 void ChestTile::onHit(Spell* spell)
 {
+	UnlockSpell* unlock;
 	switch (spell->getSpellID())
 	{
 	case SpellID::Unlock:
 		if (m_state == GameObjectState::Locked)
 		{
-			m_state = GameObjectState::Unlocked;
-			setCurrentAnimation(getAnimation(m_state), false);
+			unlock = dynamic_cast<UnlockSpell*>(spell);
+			if (unlock != nullptr && unlock->getStrength() >= m_strength)
+			{
+				m_state = GameObjectState::Unlocked;
+				setCurrentAnimation(getAnimation(m_state), false);
+			}
 			spell->setDisposed();
 		}
 		break;
@@ -92,6 +97,12 @@ void ChestTile::setObjectID(int id)
 	m_objectID = id;
 }
 
+void ChestTile::setStrength(int strength)
+{
+	if (strength < 0 || strength > 4) return;
+	m_strength = strength;
+}
+
 void ChestTile::onMouseOver()
 {
 	if (m_state == GameObjectState::Unlocked)
@@ -114,6 +125,22 @@ void ChestTile::onRightClick()
 			m_mainChar->addGold(m_lootableGold);
 			m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
 			setDisposed();
+		}
+		else
+		{
+			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+		}
+		g_inputController->lockAction();
+	}
+	else if (m_strength == 0 && m_state == GameObjectState::Locked)
+	{
+		// check if the chest is in range
+		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
+		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE)
+		{
+			// unlock!
+			m_state = GameObjectState::Unlocked;
+			setCurrentAnimation(getAnimation(m_state), false);
 		}
 		else
 		{

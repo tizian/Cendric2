@@ -24,11 +24,9 @@ struct LevelData
 	std::vector<std::string> levelItems;
 	std::map<int, std::pair<EnemyID, sf::Vector2f>> enemies;
 	std::map<int, std::pair<int, sf::Vector2f>> chests;
+	std::map<int, int> chestStrength;
 	std::map<int, std::pair<std::map<std::string, int>, int>> enemyLoot;
 	std::map<int, std::pair<std::map<std::string, int>, int>> chestLoot;
 	std::vector<LevelExitBean> levelExits;
 	sf::FloatRect levelRect;
-	int firstgidEnemies;
-	int firstgidDynamicTiles;
-	int firstgidItems;
 };

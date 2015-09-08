@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "Enums/NPCID.h"
 #include "Enums/NPCState.h"
 #include "Enums/QuestID.h"
 #include "Enums/QuestState.h"
@@ -17,7 +16,7 @@ struct DialogueNode
 	// The next tag. It may be 0 to infinity, but -1 means that the dialogue ends after that node
 	int nextTag;
 	std::map<QuestID, QuestState> questProgress;
-	std::map<NPCID, NPCState> npcProgress;
+	std::map<std::string, NPCState> npcProgress;
 	// TODO: reputation progress
 	// std::map<FractionID, int> reputationProgress;
 };

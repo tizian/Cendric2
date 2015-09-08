@@ -8,20 +8,11 @@ using namespace std;
 
 MapReader::MapReader()
 {
-	initMaps();
 }
 
 MapReader::~MapReader()
 {
 	m_npcMap.clear();
-}
-
-void MapReader::initMaps()
-{
-	m_npcMap.insert({
-		{ 0, NPCID::Void },
-		{ 1, NPCID::Guard },
-	});
 }
 
 bool MapReader::checkData(MapData& data) const
@@ -231,29 +222,29 @@ bool MapReader::readNPCLayer(const std::string& layer, MapData& data) const
 	size_t pos = 0;
 	std::vector<int> dynamicTileLayer;
 	int id;
-	NPCID npc;
+	std::string npcID;
 	while ((pos = layerData.find(",")) != std::string::npos)
 	{
 		id = std::stoi(layerData.substr(0, pos));
-		id = (id == 0) ? id : id - data.firstgidNPC + 1;
+		id = (id == 0) ? -1 : id - m_firstGidNPC;
 		if (m_npcMap.find(id) == m_npcMap.end())
 		{
 			g_logger->logError("MapReader", "Npc ID not recognized: " + std::to_string(id));
 			return false;
 		}
-		npc = m_npcMap.at(id);
-		data.npcs.push_back(npc);
+		npcID = m_npcMap.at(id);
+		data.npcs.push_back(npcID);
 		layerData.erase(0, pos + 1);
 	}
 	id = std::stoi(layerData);
-	id = (id == 0) ? id : id - data.firstgidNPC + 1;
+	id = (id == 0) ? -1 : id - m_firstGidNPC;
 	if (m_npcMap.find(id) == m_npcMap.end())
 	{
 		g_logger->logError("MapReader", "Npc ID not recognized: " + std::to_string(id));
 		return false;
 	}
-	npc = m_npcMap.at(id);
-	data.npcs.push_back(npc);
+	npcID = m_npcMap.at(id);
+	data.npcs.push_back(npcID);
 
 	return true;
 }
@@ -359,11 +350,11 @@ bool MapReader::readLayers(XMLElement* map, MapData& data) const
 }
 
 
-bool MapReader::readFirstGridIDs(XMLElement* map, MapData& data) const
+bool MapReader::readFirstGridIDs(XMLElement* map, MapData& data) 
 {
 	XMLElement* tileset = map->FirstChildElement("tileset");
 
-	data.firstgidNPC = 0;
+	m_firstGidNPC = 0;
 	const char* textAttr;
 	while (tileset != nullptr)
 	{
@@ -382,17 +373,72 @@ bool MapReader::readFirstGridIDs(XMLElement* map, MapData& data) const
 
 		if (name.find("npc") != std::string::npos)
 		{
-			data.firstgidNPC = gid;
+			m_firstGidNPC = gid;
+			if (!readNpcIDs(tileset->FirstChildElement("tile"))) return false;
+			break;
 		}
 		
 		tileset = tileset->NextSiblingElement("tileset");
 	}
 
-	if (data.firstgidNPC <= 0)
+	if (m_firstGidNPC <= 0)
 	{
 		g_logger->logError("MapReader", "Could not read firstgids, at least one of the required tilesets is missing.");
 		return false;
 	}
+	return true;
+}
+
+bool MapReader::readNpcIDs(XMLElement* _tile)
+{
+	m_npcMap.clear();
+	m_npcMap.insert({ -1, "" });
+	XMLElement* tile = _tile;
+
+	while (tile != nullptr)
+	{
+		int tileID;
+		XMLError result = tile->QueryIntAttribute("id", &tileID);
+		XMLCheckResult(result);
+
+		XMLElement* properties = tile->FirstChildElement("properties");
+		if (properties == nullptr)
+		{
+			g_logger->logError("MapReader", "Could not read npc tile properties, no tileset->tile->properties tag found.");
+			return false;
+		}
+		XMLElement* _property = properties->FirstChildElement("property");
+		if (_property == nullptr)
+		{
+			g_logger->logError("MapReader", "Could not read npc tile properties, no tileset->tile->properties->property tag found.");
+			return false;
+		}
+		const char* textAttr = nullptr;
+		textAttr = _property->Attribute("name");
+		if (textAttr == nullptr)
+		{
+			g_logger->logError("MapReader", "XML file could not be read, no tileset->tile->properties->property name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+		if (name.compare("id") != 0)
+		{
+			g_logger->logError("MapReader", "XML file could not be read, wrong tile property (not \"id\").");
+			return false;
+		}
+		textAttr = nullptr;
+		textAttr = _property->Attribute("value");
+		if (textAttr == nullptr)
+		{
+			g_logger->logError("MapReader", "XML file could not be read, no tileset->tile->properties->property value attribute found.");
+			return false;
+		}
+
+		m_npcMap.insert({ tileID, std::string(textAttr) });
+
+		tile = tile->NextSiblingElement("tile");
+	}
+	
 	return true;
 }
 
@@ -547,30 +593,6 @@ void MapReader::updateData(MapData& data) const
 			y++;
 			data.collidableTileRects.push_back(xLine); // push back creates a copy of that vector.
 			xLine.clear();
-		}
-		else
-		{
-			x++;
-		}
-	}
-
-	x = 0;
-	y = 0;
-
-	int tileWidth = data.tileSize.x;
-	int tileHeight = data.tileSize.y;
-
-	// calculate npcs
-	for (std::vector<NPCID>::iterator it = data.npcs.begin(); it != data.npcs.end(); ++it)
-	{
-		NPCID id = (*it);		if (id != NPCID::Void)
-		{
-			data.npcPositions.push_back(std::pair<NPCID, sf::Vector2f>(id, sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight))));
-		}
-		if (x + 1 >= data.mapSize.x)
-		{
-			x = 0;
-			y++;
 		}
 		else
 		{

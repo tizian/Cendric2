@@ -42,7 +42,7 @@ void DialogueFactory::loadDialogue(Dialogue& dialogue, CharacterCore* core)
 	switch (dialogue.getID())
 	{
 	case DialogueID::Guard:
-		if (core->getNPCState(NPCID::Guard) == NPCState::Never_talked)
+		if (core->getNPCState("npc_guard") == NPCState::Never_talked)
 		{
 			node = DialogueNode();
 			node.isNPCSpeaking = true;
@@ -60,7 +60,7 @@ void DialogueFactory::loadDialogue(Dialogue& dialogue, CharacterCore* core)
 			node = DialogueNode();
 			node.isNPCSpeaking = true;
 			node.text = "DL_Guard_KillSomeRats"; // Okay, go and kill some rats for me.
-			node.npcProgress.insert({ NPCID::Guard, NPCState::Passive });
+			node.npcProgress.insert({ "npc_guard", NPCState::Passive });
 			node.nextTag = 3;
 			dialogue.addNode(2, node);
 

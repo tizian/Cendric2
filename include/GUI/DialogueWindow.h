@@ -4,7 +4,6 @@
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 
-#include "Enums/NPCID.h"
 #include "NPCFactory.h"
 #include "Dialogue.h"
 
@@ -34,7 +33,7 @@ class DialogueWindow : public Window
 public:
 	DialogueWindow();
 	~DialogueWindow();
-	void load(NPCID npcID, DialogueID dialogueID, CharacterCore* core);
+	void load(const std::string& npcID, DialogueID dialogueID, CharacterCore* core);
 	void render(sf::RenderTarget& renderTarget) override;
 	// returns true as long as the dialogue exists and false as soon as it ends
 	bool updateDialogue();
@@ -44,7 +43,7 @@ public:
 	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& descisions); 
 
 private:
-	void setNPC(NPCID id);
+	void setNPC(const std::string& id);
 	void setDialogue(DialogueID dialogueID, CharacterCore* core);
 	std::vector<DialogueOption> m_options;
 	int m_chosenOption = 0;

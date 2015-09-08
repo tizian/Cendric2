@@ -5,7 +5,6 @@
 #include "tinyxml2/tinyxml2.h"
 
 #include "Structs/MapData.h"
-#include "Enums/NPCID.h"
 
 using namespace tinyxml2;
 
@@ -18,16 +17,16 @@ public:
 	bool readMap(const char* fileName, MapData& data);
 
 private:
-	void initMaps();
-
-	std::map<int, NPCID> m_npcMap;
+	std::map<int, std::string> m_npcMap;
+	int m_firstGidNPC;
 
 	// reads properties name, tile size, map size, tileset, starting @map node
 	bool readMapProperties(XMLElement* map, MapData& data) const;
 	bool readMapName(XMLElement* _property, MapData& data) const;
 	bool readTilesetPath(XMLElement* _property, MapData& data) const;
 
-	bool readFirstGridIDs(XMLElement* map, MapData& data) const;
+	bool readFirstGridIDs(XMLElement* map, MapData& data);
+	bool readNpcIDs(XMLElement* firstTile);
 
 	bool readLayers(XMLElement* map, MapData& data) const;
 	bool readBackgroundTileLayer(const std::string& layer, MapData& data) const;

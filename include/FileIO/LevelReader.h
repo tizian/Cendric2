@@ -20,7 +20,7 @@ public:
 	LevelReader();
 	~LevelReader();
 
-	bool readLevel(const std::string& fileName, LevelData& data) const;
+	bool readLevel(const std::string& fileName, LevelData& data);
 
 private:
 	void initMaps();
@@ -31,7 +31,8 @@ private:
 	bool readBackgroundLayers(XMLElement* _property, LevelData& data) const;
 	bool readTilesetPath(XMLElement* _property, LevelData& data) const;
 
-	bool readFirstGridIDs(XMLElement* map, LevelData& data) const;
+	bool readFirstGridIDs(XMLElement* map, LevelData& data);
+	bool readItemIDs(XMLElement* firstTile);
 
 	bool readLayers(XMLElement* map, LevelData& data) const;
 	bool readBackgroundTileLayer(const std::string& layer, LevelData& data) const;
@@ -57,4 +58,8 @@ private:
 
 	std::map<int, std::string> m_levelItemMap;
 	std::map<int, EnemyID> m_enemyMap;
+
+	int m_firstGidEnemies;
+	int m_firstGidItems;
+	int m_firstGidDynamicTiles;
 };

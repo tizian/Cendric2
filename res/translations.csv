@@ -112,7 +112,7 @@ New;New;Neu;Neu
 NewGame;New Game;Neues Spiel;Neus Spiel
 No;No;Nein;Nai
 NoQuicksaveExists;No quick save exists;Kein Schnelllade-Speicherstand existiert;Kein Schnelllade-Speicherstand existiert
-NPC_Guard;Kingsguard;Wache des Königs;Wächter vom König
+npc_guard;Kingsguard;Wache des Königs;Wächter vom König
 Off;Off;Aus;Uus
 Okay;Okay;Okay;Okee
 On;On;An;Ii

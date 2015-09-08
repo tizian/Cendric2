@@ -29,7 +29,7 @@ DialogueWindow::~DialogueWindow()
 	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
 }
 
-void DialogueWindow::load(NPCID npcID, DialogueID dialogueID, CharacterCore* core)
+void DialogueWindow::load(const std::string& npcID, DialogueID dialogueID, CharacterCore* core)
 {
 	setNPC(npcID);
 	setDialogue(dialogueID, core);
@@ -46,7 +46,7 @@ void DialogueWindow::setDialogue(DialogueID dialogueID, CharacterCore* core)
 	}
 }
 
-void DialogueWindow::setNPC(NPCID npc)
+void DialogueWindow::setNPC(const std::string& npc)
 {
 	NPCFactory factory;
 	NPCBean bean = DEFAULT_NPC;

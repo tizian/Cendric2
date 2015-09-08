@@ -9,6 +9,11 @@
  </tileset>
  <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1">
   <image source="../tilesets/tileset_map_npcs.png" width="364" height="260"/>
+  <tile id="0">
+   <properties>
+    <property name="id" value="npc_guard"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="BG 1" width="100" height="100">
   <data encoding="csv">

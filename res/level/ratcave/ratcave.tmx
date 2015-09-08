@@ -16,6 +16,61 @@
  </tileset>
  <tileset firstgid="632" name="spritesheet_levelitems" tilewidth="50" tileheight="50">
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
+  <tile id="0">
+   <properties>
+    <property name="id" value="it_fo_caveberry"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="id" value="it_mi_goldengoblet"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="id" value="it_go_onecoin"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="id" value="it_qe_letter"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="id" value="it_eq_ringoflesserhealth"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="id" value="it_fo_healingherb"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="id" value="it_fo_glowingshroom"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="id" value="it_go_threecoins"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="id" value="it_fo_water"/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="id" value="it_fo_cheese"/>
+   </properties>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="id" value="it_fo_bread"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="BG 1" width="70" height="30">
   <data encoding="csv">

@@ -19,12 +19,15 @@ public:
 	void onMouseOver() override;
 	// the object id in the dynamic chest tiles object layer.
 	void setObjectID(int id);
-
+	// loot for the chest
 	void setLoot(const std::map<std::string, int> &items, int gold);
+	// strength of the chest lock. It ranges from 0 to 3. Levels 1 to 3 need an unlock spell to unlock, level 0 only a right click :)
+	void setStrength(int strength);
 
 private:
 	LevelMainCharacter* m_mainChar;
 	int m_objectID = -1;
+	int m_strength = 0;
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;
 	int m_lootableGold = 0;

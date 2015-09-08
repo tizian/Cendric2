@@ -39,6 +39,7 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 			chestTile->setTileSize(data.tileSize);
 			chestTile->init();
 			chestTile->setObjectID(it.first);
+			if (data.chestStrength.find(it.first) != data.chestStrength.end()) chestTile->setStrength(data.chestStrength.at(it.first));
 			chestTile->setLoot(loot, gold);
 			chestTile->setPosition(it.second.second - chestTile->getPositionOffset());
 			chestTile->setDebugBoundingBox(sf::Color::Yellow);

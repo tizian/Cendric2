@@ -8,7 +8,6 @@
 #include "CharacterCore.h"
 #include "GUI/DialogueWindow.h"
 
-#include "Enums/NPCID.h"
 #include "Enums/DialogueID.h"
 
 class MapScreen;

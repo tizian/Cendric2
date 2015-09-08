@@ -6,8 +6,6 @@
 #include "Screen.h"
 #include "NPCFactory.h"
 
-#include "Enums/NpcID.h"
-
 #include "Structs/MapData.h"
 #include "Structs/NPCBean.h"
 

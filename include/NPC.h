@@ -5,7 +5,6 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 
-#include "Enums/NPCID.h"
 #include "Enums/DialogueID.h"
 
 #include "GUI/BitmapText.h"
@@ -17,7 +16,7 @@ class NPC : public GameObject
 {
 public:
 	NPC() : GameObject() {}
-	void load(MapMainCharacter* mainChar, NPCID id);
+	void load(MapMainCharacter* mainChar, const std::string& id);
 	void onMouseOver() override;
 	void onInteractKey() override;
 	void onRightClick() override;
@@ -34,7 +33,7 @@ public:
 
 private:
 	MapMainCharacter* m_mainChar;
-	NPCID m_npcID;
+	std::string m_npcID;
 
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;
