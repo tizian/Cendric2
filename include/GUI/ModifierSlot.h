@@ -28,15 +28,17 @@ public:
 	void highlight(bool highlight);
 
 	void render(sf::RenderTarget& renderTarget) override;
+	void update(const sf::Time& frameTime) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void onLeftJustPressed() override;
+	void onRightClick() override;
 	void onMouseOver() override;
 	void setNr(int nr);
 
 	void setPosition(const sf::Vector2f& pos) override;
 
-	// asks if it is clicked and sets the member bool to false again (!)
 	bool isClicked();
+	bool isRightClicked();
 	
 	GameObjectType getConfiguredType() const override;
 	const SpellModifier& getModifier() const;
@@ -48,6 +50,7 @@ public:
 private:
 	bool m_isClicked = false;
 	bool m_isSelected = false;
+	bool m_isRightClicked = false;
 	int m_nr = -1;
 
 	void initWindow();

@@ -4,7 +4,7 @@ MapInterface::MapInterface(CharacterCore* core) :
 m_core(core),
 m_inventory(this),
 m_characterInfo(&core->getTotalAttributes()),
-m_spellbook(core)
+m_spellbook(core, true)
 {
 }
 

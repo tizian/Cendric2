@@ -167,9 +167,12 @@ void SpellSlot::deselect()
 
 bool SpellSlot::isClicked()
 {
-	bool wasClicked = m_isClicked;
-	m_isClicked = false;
-	return wasClicked;
+	return m_isClicked;
+}
+
+bool SpellSlot::isRightClicked()
+{
+	return m_isRightClicked;
 }
 
 void SpellSlot::setPosition(const sf::Vector2f& pos)
@@ -300,6 +303,8 @@ void SpellSlot::update(const sf::Time& frameTime)
 			
 		}
 	}
+	m_isClicked = false;
+	m_isRightClicked = false;
 	GameObject::update(frameTime);
 }
 
@@ -307,6 +312,13 @@ void SpellSlot::onLeftJustPressed()
 {
 	if (!m_active) return;
 	m_isClicked = true;
+	g_inputController->lockAction();
+}
+
+void SpellSlot::onRightClick()
+{
+	if (!m_active) return;
+	m_isRightClicked = true;
 	g_inputController->lockAction();
 }
 

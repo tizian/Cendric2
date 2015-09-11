@@ -33,10 +33,11 @@ public:
 	// be aware that the position here is the center of the spell slot. 
 	void setPosition(const sf::Vector2f& pos) override;
 	void onLeftJustPressed() override;
+	void onRightClick() override;
 	void setNr(int nr);
 
-	// asks if it is clicked and sets the member bool to false again (!)
 	bool isClicked();
+	bool isRightClicked();
 
 	GameObjectType getConfiguredType() const override;
 	SpellType getSpellType() const;
@@ -56,6 +57,7 @@ private:
 
 	bool m_active = false;
 	bool m_isClicked = false;
+	bool m_isRightClicked = false;
 	bool m_isSelected = false;
 
 	sf::Time m_cooldown;

@@ -1,8 +1,14 @@
 #include "LevelInterface.h"
 #include "LevelMainCharacter.h"
 
-LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) : m_core(core), m_character(character),
-m_inventory(this), m_characterInfo(character->getAttributes()), m_healthBar(character->getAttributes()), m_quickSlotBar(this)
+LevelInterface::LevelInterface(CharacterCore* core, LevelMainCharacter* character) : 
+m_core(core), 
+m_character(character),
+m_inventory(this), 
+m_characterInfo(character->getAttributes()), 
+m_healthBar(character->getAttributes()), 
+m_quickSlotBar(this),
+m_spellbook(core, false)
 {
 }
 
@@ -20,6 +26,7 @@ void LevelInterface::render(sf::RenderTarget& target)
 	m_spellSelection->render(target);
 	m_quickSlotBar.render(target);
 	m_characterInfo.render(target);
+	m_spellbook.render(target);
 	m_inventory.render(target);
 }
 
@@ -30,6 +37,7 @@ void LevelInterface::update(const sf::Time& frameTime)
 	m_spellSelection->update(frameTime);
 	m_quickSlotBar.update(frameTime);
 	updateInventory(frameTime);
+	updateSpellbook(frameTime);
 	updateCharacterInfo();
 }
 
@@ -80,6 +88,10 @@ void LevelInterface::updateCharacterInfo()
 			{
 				m_inventory.hide();
 			}
+			if (m_spellbook.isVisible())
+			{
+				m_spellbook.hide();
+			}
 			m_characterInfo.show();
 		}
 		else
@@ -94,6 +106,37 @@ void LevelInterface::updateCharacterInfo()
 	}
 }
 
+void LevelInterface::updateSpellbook(const sf::Time& frameTime)
+{
+	if (g_inputController->isKeyJustPressed(Key::Spellbook))
+	{
+		if (!m_spellbook.isVisible())
+		{
+			if (m_inventory.isVisible())
+			{
+				m_inventory.hide();
+			}
+			if (m_characterInfo.isVisible())
+			{
+				m_characterInfo.hide();
+			}
+			m_spellbook.reload();
+			m_spellbook.show();
+		}
+		else
+		{
+			m_spellbook.hide();
+		}
+	}
+	else if (m_spellbook.isVisible() && g_inputController->isKeyJustPressed(Key::Escape))
+	{
+		m_spellbook.hide();
+		g_inputController->lockAction();
+	}
+
+	m_spellbook.update(frameTime);
+}
+
 void LevelInterface::updateInventory(const sf::Time& frameTime)
 {
 	if (g_inputController->isKeyJustPressed(Key::Inventory))
@@ -103,6 +146,10 @@ void LevelInterface::updateInventory(const sf::Time& frameTime)
 			if (m_characterInfo.isVisible())
 			{
 				m_characterInfo.hide();
+			}
+			if (m_spellbook.isVisible())
+			{
+				m_spellbook.hide();
 			}
 			m_inventory.show();
 			m_inventory.reload();

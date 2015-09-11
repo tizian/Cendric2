@@ -15,10 +15,11 @@
 
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
+// is only clickable when clickable is true
 class WeaponWindow
 {
 public:
-	WeaponWindow(CharacterCore* core);
+	WeaponWindow(CharacterCore* core, bool clickable);
 	~WeaponWindow();
 
 	void show();
@@ -48,11 +49,12 @@ private:
 	void reloadSpellDesc();
 	bool m_isVisible = false;
 	bool m_requireReload = false;
+	bool m_isClickable;
 
 	void init();
 	void clearAllSlots();
 
-	Window* m_window;
+	Window* m_window = nullptr;
 	const Weapon* m_weapon;
 
 	InventorySlot* m_weaponSlot = nullptr;

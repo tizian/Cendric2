@@ -7,9 +7,10 @@ float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
 float Spellbook::TOP = 100.f;
 float Spellbook::LEFT = 50.f;
 
-Spellbook::Spellbook(CharacterCore* core)
+Spellbook::Spellbook(CharacterCore* core, bool clickable)
 {
 	m_core = core;
+	m_isClickable = clickable;
 
 	init();
 }
@@ -70,16 +71,17 @@ void Spellbook::init()
 		{ SpellType::Elemental, &m_elementalSlots },
 		{ SpellType::Illusion, &m_illusionSlots },
 		{ SpellType::Necromancy, &m_necromancySlots }
-	});
+	}); 
 
 	selectTab(SpellType::VOID);
 
 	delete m_weaponWindow;
-	m_weaponWindow = new WeaponWindow(m_core);
+	m_weaponWindow = new WeaponWindow(m_core, m_isClickable);
 }
 
 Spellbook::~Spellbook()
 {
+	m_typeMap.clear();
 	delete m_window;
 	delete m_weaponWindow;
 	delete m_currentModifierClone;
@@ -97,12 +99,27 @@ void Spellbook::clearAllSlots()
 	m_illusionSlots.clear();
 	m_twilightSlots.clear();
 	m_selectedModifierSlot = nullptr;
-	m_selectedSpellSlot = nullptr;
+	m_selectedSpellSlot = nullptr; 
 }
 
 void Spellbook::update(const sf::Time& frameTime)
 {
 	if (!m_isVisible) return;
+
+	for (auto& it : m_tabs)
+	{
+		it.first.update(frameTime);
+		if (it.first.isClicked() && m_currentTab != it.second)
+		{
+			selectTab(it.second);
+			return;
+		}
+	}
+
+	// update weapon part
+	m_weaponWindow->update(frameTime);
+
+	if (!m_isClickable) return;
 
 	if (m_currentTab == SpellType::VOID)
 	{
@@ -130,19 +147,6 @@ void Spellbook::update(const sf::Time& frameTime)
 			}
 		}
 	}
-
-	for (auto& it : m_tabs)
-	{
-		it.first.update(frameTime);
-		if (it.first.isClicked() && m_currentTab != it.second)
-		{
-			selectTab(it.second);
-			return;
-		}
-	}
-
-	// update weapon part
-	m_weaponWindow->update(frameTime);
 
 	handleDragAndDrop();
 }
@@ -211,7 +215,9 @@ void Spellbook::handleDragAndDrop()
 		{
 			m_isDragging = true;
 			delete m_currentModifierClone;
+			m_currentModifierClone = nullptr;
 			delete m_currentSpellClone;
+			m_currentSpellClone = nullptr;
 			if (m_selectedModifierSlot != nullptr)
 			{
 				m_currentModifierClone = new ModifierSlotClone(m_selectedModifierSlot);
@@ -436,7 +442,7 @@ void Spellbook::show()
 void Spellbook::hide()
 {
 	m_isVisible = false;
-	m_weaponWindow->hide();
+	//m_weaponWindow->hide();
 	delete m_currentModifierClone;
 	m_currentModifierClone = nullptr;
 	delete m_currentSpellClone;

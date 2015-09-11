@@ -23,8 +23,9 @@ void FearSpellCreator::executeSpell(const sf::Vector2f &target)
 	int sign = 1;
 	for (int i = 0; i < m_spellBean.count; i++)
 	{
-		FearSpell* newSpell = new FearSpell(m_fearedDuration, m_strength);
+		FearSpell* newSpell = new FearSpell(m_spellBean.duration, m_strength);
 		spellBean.divergenceAngle = div * sign * m_spellBean.divergenceAngle;
+		spellBean.duration = m_activeDuration;
 		newSpell->load(spellBean, m_owner, target);
 		m_screen->addObject(newSpell);
 		sign = -sign;
@@ -35,11 +36,6 @@ void FearSpellCreator::executeSpell(const sf::Vector2f &target)
 	}
 
 	m_owner->setFightAnimationTime();
-}
-
-void FearSpellCreator::addDurationModifier(int level)
-{
-	m_fearedDuration += static_cast<float>(level)* m_spellBean.durationModifierAddition;
 }
 
 void FearSpellCreator::addStrengthModifier(int level)

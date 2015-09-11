@@ -48,7 +48,7 @@ std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id)
 		types.push_back(SpellModifierType::Strength);
 		break;
 	case SpellID::AntiGravity:
-		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Duration);
 		break;
 	case SpellID::WindGust:
 		types.push_back(SpellModifierType::Duration);

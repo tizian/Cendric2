@@ -12,6 +12,7 @@
 #include "GUI/SpellSelection.h"
 #include "GUI/BuffBar.h"
 #include "GUI/QuickSlotBar.h"
+#include "GUI/Spellbook.h"
 
 // The interface overlay in a level, displaying hp bar, spell cooldowns, buffs, quickslot bar
 // if the keys for character screen and inventory are pressed, these will display as well.
@@ -52,6 +53,10 @@ private:
 	// <<< CHARCTER INFO >>>
 	CharacterInfo m_characterInfo;
 	void updateCharacterInfo();
+
+	// <<< SPELLBOOK >>>
+	Spellbook m_spellbook;
+	void updateSpellbook(const sf::Time& frameTime);
 	
 	// <<< HEALTH BAR >>>
 	HealthBar m_healthBar;

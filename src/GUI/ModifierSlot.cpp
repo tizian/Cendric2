@@ -70,7 +70,11 @@ void ModifierSlot::highlight(bool highlight)
 	}
 	else
 	{
-		m_outside.setOutlineColor(m_isSelected ? sf::Color::Red : CENDRIC_COLOR_DARK_PURPLE);
+		m_outside.setOutlineColor(m_isSelected ? 
+			sf::Color::Red : 
+			(m_spellModifier.type == SpellModifierType::VOID) ? 
+				CENDRIC_COLOR_DARK_GREY : 
+				CENDRIC_COLOR_PURPLE);
 	}
 }
 
@@ -90,10 +94,12 @@ void ModifierSlot::deselect()
 
 bool ModifierSlot::isClicked()
 {
-	if (m_spellModifier.type == SpellModifierType::VOID) return false;
-	bool wasClicked = m_isClicked;
-	m_isClicked = false;
-	return wasClicked;
+	return m_isClicked;
+}
+
+bool ModifierSlot::isRightClicked()
+{
+	return m_isRightClicked;
 }
 
 void ModifierSlot::setPosition(const sf::Vector2f& pos)
@@ -114,6 +120,13 @@ void ModifierSlot::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_inside);
 }
 
+void ModifierSlot::update(const sf::Time& frameTime)
+{
+	m_isClicked = false;
+	m_isRightClicked = false;
+	GameObject::update(frameTime);
+}
+
 void ModifierSlot::renderAfterForeground(sf::RenderTarget& target)
 {
 	GameObject::renderAfterForeground(target);
@@ -126,7 +139,15 @@ void ModifierSlot::renderAfterForeground(sf::RenderTarget& target)
 
 void ModifierSlot::onLeftJustPressed()
 {
+	if (m_spellModifier.type == SpellModifierType::VOID) return;
 	m_isClicked = true;
+	g_inputController->lockAction();
+}
+
+void ModifierSlot::onRightClick()
+{
+	if (m_spellModifier.type == SpellModifierType::VOID) return;
+	m_isRightClicked = true;
 	g_inputController->lockAction();
 }
 

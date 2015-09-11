@@ -1,9 +1,10 @@
 #include "GUI/WeaponWindow.h"
 #include "MapInterface.h"
 
-WeaponWindow::WeaponWindow(CharacterCore* core)
+WeaponWindow::WeaponWindow(CharacterCore* core, bool clickable)
 {
 	m_core = core;
+	m_isClickable = clickable;
 
 	init();
 }
@@ -90,6 +91,7 @@ void WeaponWindow::reloadSpellDesc()
 void WeaponWindow::init()
 {
 	// init window
+	delete m_window;
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::LARGE,
@@ -97,6 +99,7 @@ void WeaponWindow::init()
 		sf::Color::Transparent, // back
 		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
 
+	delete m_spellDesc;
 	m_spellDesc = new SpellDescriptionWindow();
 	m_spellDesc->setPosition(sf::Vector2f(LEFT + WIDTH + MARGIN, TOP));
 
@@ -113,12 +116,12 @@ void WeaponWindow::init()
 
 WeaponWindow::~WeaponWindow()
 {
+	clearAllSlots();
 	delete m_window;
 	delete m_currentModifierClone;
 	delete m_currentSpellClone;
 	delete m_weaponSlot;
 	delete m_spellDesc;
-	clearAllSlots();
 }
 
 void WeaponWindow::clearAllSlots()
@@ -135,6 +138,8 @@ void WeaponWindow::update(const sf::Time& frameTime)
 
 	if (m_requireReload) reload();
 
+	if (!m_isClickable) return;
+
 	for (auto& it : m_weaponSlots)
 	{
 		it.first.update(frameTime);
@@ -143,12 +148,24 @@ void WeaponWindow::update(const sf::Time& frameTime)
 			selectSpellSlot(&it.first);
 			return;
 		}
+		else if (it.first.isRightClicked())
+		{
+			m_core->removeSpell(it.first.getNr());
+			m_requireReload = true;
+			return;
+		}
 		for (auto& it2 : it.second)
 		{
 			it2.update(frameTime);
 			if (it2.isClicked())
 			{
 				selectModifierSlot(&it2);
+				return;
+			}
+			else if (it2.isRightClicked())
+			{
+				m_core->removeModifier(it2.getModifier().type, it2.getNr());
+				m_requireReload = true;
 				return;
 			}
 		}

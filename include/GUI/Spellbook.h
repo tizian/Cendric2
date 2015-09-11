@@ -15,10 +15,11 @@ class WeaponWindow;
 
 // the spellbook, as displayed in a level or a map
 // it takes its information about learned spells and modifiers directly from the character core
+// it is only clickable when in a map.
 class Spellbook
 {
 public:
-	Spellbook(CharacterCore* core);
+	Spellbook(CharacterCore* core, bool clickable);
 	~Spellbook();
 
 	void show();
@@ -40,11 +41,12 @@ public:
 private:
 	CharacterCore* m_core;
 	bool m_isVisible = false;
+	bool m_isClickable;
 
 	void init();
 	void clearAllSlots();
 
-	Window* m_window;
+	Window* m_window = nullptr;
 	WeaponWindow* m_weaponWindow = nullptr;
 
 	BitmapText m_selectedTabText;
