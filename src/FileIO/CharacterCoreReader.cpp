@@ -301,6 +301,66 @@ bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreDat
 	return true;
 }
 
+bool CharacterCoreReader::readLearnedSpells(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	startData = gotoNextChar(start, endData, ':');
+	startData++;
+	
+	SpellType type = static_cast<SpellType>(atoi(startData));
+	if (type <= SpellType::VOID || type >= SpellType::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "Spell type not recognized: " + std::to_string(static_cast<int>(type)));
+		return false;
+	}
+
+	startData = gotoNextChar(startData, endData, ',');
+	
+	std::set<SpellID> learnedSpells;
+	while (startData != NULL)
+	{
+		startData++;
+		SpellID id = static_cast<SpellID>(atoi(startData));
+		if (id <= SpellID::VOID || id >= SpellID::MAX)
+		{
+			g_logger->logError("CharacterCoreReader", "Spell id not recognized: " + std::to_string(static_cast<int>(id)));
+			return false;
+		}
+		learnedSpells.insert(id);
+		startData = gotoNextChar(startData, endData, ',');
+	}
+
+	data.spellsLearned.insert({ type, learnedSpells });
+	return true;
+}
+
+bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+
+	SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
+	if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "Spell modifier type not recognized: " + std::to_string(static_cast<int>(type)));
+		return false;
+	}
+
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	int level = atoi(startData);
+	if (level < 1 || level > 3)
+	{
+		g_logger->logError("CharacterCoreReader", "Spell modifier type level is not between 1 and 3");
+		return false;
+	}
+
+	data.modfiersLearned.insert({ type, level });
+	return true;
+}
+
 bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const
 {
 	char* startData;
@@ -632,6 +692,16 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, IS_IN_LEVEL, strlen(IS_IN_LEVEL)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(IS_IN_LEVEL));
 			noError = readIsInLevel(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, SPELL_LEARNED, strlen(SPELL_LEARNED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(SPELL_LEARNED));
+			noError = readLearnedSpells(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, MODIFIER_LEARNED, strlen(MODIFIER_LEARNED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(MODIFIER_LEARNED));
+			noError = readLearnedModifiers(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {

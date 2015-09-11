@@ -12,7 +12,12 @@
 class SpellSlot : public GameObject
 {
 public:
-	SpellSlot(const SpellBean& spellBean = EMPTY_SPELL, bool active = true);
+	// creates an empty spell slot with type "type"
+	SpellSlot(SpellType type = SpellType::VOID);
+	// creates a filled spell slot for a spell with id "id"
+	SpellSlot(SpellID id);
+	// creates a filled spell slot for a spell with bean "bean"
+	SpellSlot(const SpellBean& bean);
 
 	void activate();
 	void deactivate();
@@ -31,10 +36,14 @@ public:
 	bool isClicked();
 
 	GameObjectType getConfiguredType() const override;
+	SpellType getSpellType() const;
+	SpellID getSpellID() const;
+	const sf::IntRect& getTextureRect() const;
 
 	static const float RADIUS;
 
 private:
+	void init();
 	sf::Texture *m_textureInactive = nullptr;
 	// the position of the texture icon of this spell.
 	sf::IntRect m_textureRect;
@@ -46,6 +55,8 @@ private:
 
 	sf::Time m_cooldown;
 	SpellType m_spellType;
+	SpellID m_spellID;
+	Key m_inputKeyID;
 
 	sf::Color m_color;
 	sf::Color m_colorBase;

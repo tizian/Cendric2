@@ -4,12 +4,44 @@ using namespace std;
 
 const float SpellSlot::RADIUS = 35.f;
 
-SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
+SpellSlot::SpellSlot(SpellType type)
+{
+	m_spellType = type;
+	m_spellID = SpellID::VOID;
+	m_isChopSlot = false;
+	m_inputKeyID = Key::VOID;
+
+	init();
+}
+
+SpellSlot::SpellSlot(SpellID id)
+{
+	m_spellID = id;
+	const SpellBean& bean = SpellBean::getSpellBean(id);
+	m_textureRect = bean.iconTextureRect;
+	m_spellType = bean.spellType;
+	m_isChopSlot = (id == SpellID::Chop);
+	m_inputKeyID = Key::VOID;
+
+	init();
+}
+
+SpellSlot::SpellSlot(const SpellBean& bean)
+{
+	m_spellID = bean.id;
+	m_textureRect = bean.iconTextureRect;
+	m_spellType = bean.spellType;
+	m_isChopSlot = (bean.id == SpellID::Chop);
+	m_inputKeyID = bean.inputKey;
+
+	init();
+}
+
+void SpellSlot::init()
 {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2 * RADIUS, 2 * RADIUS));
 	setDebugBoundingBox(sf::Color::Red);
 	setInputInDefaultView(true);
-	m_spellType = spellBean.spellType;
 
 	m_color = CENDRIC_COLOR_GREY;
 	m_colorBase = CENDRIC_COLOR_BLACK;
@@ -44,11 +76,10 @@ SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
 		m_textureInactive = g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_illusion);
 	}
 
-	m_textureRect = spellBean.iconTextureRect;
-	m_isChopSlot = (spellBean.id == SpellID::Chop);
+	
 
-	m_inputKey.setString(spellBean.inputKey != Key::VOID ?
-		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[spellBean.inputKey]) :
+	m_inputKey.setString(m_inputKeyID != Key::VOID ?
+		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[m_inputKeyID]) :
 		"");
 	m_inputKey.setCharacterSize(16);
 	if (m_inputKey.getLocalBounds().width > 2 * RADIUS - 10.f) m_inputKey.setCharacterSize(8);
@@ -88,7 +119,7 @@ SpellSlot::SpellSlot(const SpellBean& spellBean, bool active)
 	m_smallRingBottom1 = m_smallRingLeft1;
 	m_smallRingBottom2 = m_smallRingLeft2;
 
-	if (active)
+	if (m_spellID != SpellID::VOID)
 	{
 		activate();
 	}
@@ -264,4 +295,19 @@ void SpellSlot::onLeftJustPressed()
 GameObjectType SpellSlot::getConfiguredType() const
 {
 	return GameObjectType::_Interface;
+}
+
+SpellType SpellSlot::getSpellType() const
+{
+	return m_spellType;
+}
+
+SpellID SpellSlot::getSpellID() const
+{
+	return m_spellID;
+}
+
+const sf::IntRect& SpellSlot::getTextureRect() const
+{
+	return m_textureRect;
 }

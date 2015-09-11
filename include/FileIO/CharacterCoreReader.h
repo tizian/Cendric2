@@ -32,6 +32,8 @@ private:
 	bool readChestsLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestStates(char* start, char* end, CharacterCoreData& data) const;
 	bool readNPCStates(char* start, char* end, CharacterCoreData& data) const;
+	bool readLearnedSpells(char* start, char* end, CharacterCoreData& data) const;
+	bool readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const;
 
 	bool readLevelStateLayer(char* start, char* end, std::set<int>& layer, std::string& id) const;
 

@@ -1,6 +1,10 @@
 #include "MapInterface.h"
 
-MapInterface::MapInterface(CharacterCore* core) : m_core(core), m_inventory(this), m_characterInfo(&core->getTotalAttributes())
+MapInterface::MapInterface(CharacterCore* core) :
+m_core(core),
+m_inventory(this),
+m_characterInfo(&core->getTotalAttributes()),
+m_spellbook(this)
 {
 }
 
@@ -13,12 +17,14 @@ void MapInterface::render(sf::RenderTarget& target)
 	target.setView(target.getDefaultView());
 	m_characterInfo.render(target);
 	m_inventory.render(target);
+	m_spellbook.render(target);
 }
 
 void MapInterface::update(const sf::Time& frameTime)
 {
 	updateInventory(frameTime);
 	updateCharacterInfo();
+	updateSpellbook(frameTime);
 }
 
 void MapInterface::reloadInventory()
@@ -38,6 +44,10 @@ void MapInterface::updateCharacterInfo()
 			if (m_inventory.isVisible())
 			{
 				m_inventory.hide();
+			}
+			if (m_spellbook.isVisible())
+			{
+				m_spellbook.hide();
 			}
 			m_characterInfo.show();
 		}
@@ -63,6 +73,10 @@ void MapInterface::updateInventory(const sf::Time& frameTime)
 			{
 				m_characterInfo.hide();
 			}
+			if (m_spellbook.isVisible())
+			{
+				m_spellbook.hide();
+			}
 			m_inventory.show();
 			m_inventory.reload();
 		}
@@ -78,6 +92,37 @@ void MapInterface::updateInventory(const sf::Time& frameTime)
 	}
 
 	m_inventory.update(frameTime);
+}
+
+void MapInterface::updateSpellbook(const sf::Time& frameTime)
+{
+	if (g_inputController->isKeyJustPressed(Key::Spellbook))
+	{
+		if (!m_spellbook.isVisible())
+		{
+			if (m_characterInfo.isVisible())
+			{
+				m_characterInfo.hide();
+			}
+			if (m_inventory.isVisible())
+			{
+				m_inventory.hide();
+			}
+			m_spellbook.reload();
+			m_spellbook.show();
+		}
+		else
+		{
+			m_spellbook.hide();
+		}
+	}
+	else if (m_spellbook.isVisible() && g_inputController->isKeyJustPressed(Key::Escape))
+	{
+		m_spellbook.hide();
+		g_inputController->lockAction();
+	}
+
+	m_spellbook.update(frameTime);
 }
 
 CharacterCore* MapInterface::getCore() const

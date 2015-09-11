@@ -6,7 +6,7 @@
 #include "Enums/Key.h"
 
 // describes the configuration that can be modified by the user.
-// it is load every time the game starts and stored in the resource manager.
+// it is loaded every time the game starts and stored in the resource manager.
 struct ConfigurationData
 {
 	Language language;
@@ -32,6 +32,7 @@ std::map < Key, sf::Keyboard::Key >(
 	{ Key::Inventory, sf::Keyboard::I },
 	{ Key::CharacterInfo, sf::Keyboard::C },
 	{ Key::Journal, sf::Keyboard::J },
+	{ Key::Spellbook, sf::Keyboard::K },
 	{ Key::Interact, sf::Keyboard::E },
 	{ Key::Confirm, sf::Keyboard::Return },
 	{ Key::Left, sf::Keyboard::A },
@@ -59,13 +60,14 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 	std::map < Key, sf::Keyboard::Key >(
 		{
 			// assuming that it will never be "KeyCount" as input.
-			// the other option was sf::Keyboard::Unkonwn, but those'd be are all unhandled keys...
+			// the other option was sf::Keyboard::Unknown, but those'd be are all unhandled keys...
 			{ Key::Escape, sf::Keyboard::KeyCount },
 			{ Key::Quickload, sf::Keyboard::KeyCount },
 			{ Key::Quicksave, sf::Keyboard::KeyCount },
 			{ Key::Inventory, sf::Keyboard::KeyCount },
 			{ Key::CharacterInfo, sf::Keyboard::KeyCount },
 			{ Key::Journal, sf::Keyboard::KeyCount },
+			{ Key::Spellbook, sf::Keyboard::KeyCount },
 			{ Key::Interact, sf::Keyboard::KeyCount },
 			{ Key::Confirm, sf::Keyboard::KeyCount },
 			{ Key::Left, sf::Keyboard::Left },

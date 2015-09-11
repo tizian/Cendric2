@@ -26,3 +26,8 @@ void TexturedButton::setTexture(const sf::Texture* tex, const sf::IntRect& textu
 	m_texturedLayer.setTexture(tex);
 	m_texturedLayer.setTextureRect(textureRect);
 }
+
+void TexturedButton::setTextureColor(const sf::Color& color)
+{
+	m_texturedLayer.setFillColor(color);
+}

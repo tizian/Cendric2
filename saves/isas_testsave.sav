@@ -30,3 +30,15 @@ equipped.weapon:it_we_icestaff
 # levels looted:
 # quest states:
 # npc states:
+spell.learned:1,2,3,6,5
+spell.learned:2,11,7
+spell.learned:3,12,13
+spell.learned:4,21,19
+spell.learned:5
+modifier.learned:1,3
+modifier.learned:2,3
+modifier.learned:3,3
+modifier.learned:4,3
+modifier.learned:5,3
+modifier.learned:6,3
+modifier.learned:7,3

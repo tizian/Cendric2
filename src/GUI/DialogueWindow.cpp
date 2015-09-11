@@ -169,6 +169,7 @@ DialogueOption::DialogueOption(std::string text, int nr) : m_text(g_textProvider
 	m_text.setColor(sf::Color::White);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
 	setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y + 30.f + (nr * 20.f)));
+	setInputInDefaultView(true);
 }
 
 void DialogueOption::setPosition(const sf::Vector2f& pos)

@@ -5,6 +5,7 @@
 #include "Enums/Language.h"
 #include "Enums/Key.h"
 #include "Enums/SpellType.h"
+#include "Enums/SpellID.h"
 #include "Structs/SpellModifier.h"
 
 // pure static class used to resolve enum names.
@@ -47,6 +48,62 @@ public:
 		}
 	}
 
+	static std::string getSpellIDName(SpellID id)
+	{
+		switch (id) {
+		default:
+		case SpellID::MAX:
+		case SpellID::VOID:
+			return "Unknown";
+		case SpellID::AntiGravity:
+			return "SpellAntiGravity";
+		case SpellID::Aureola:
+			return "SpellAureola";
+		case SpellID::Chop:
+			return "SpellChop";
+		case SpellID::DivineShield:
+			return "SpellDivineShield";
+		case SpellID::DominateMind:
+			return "SpellDominateMind";
+		case SpellID::Fear:
+			return "SpellFear";
+		case SpellID::FireBall:
+			return "SpellFireBall";
+		case SpellID::Flash:
+			return "SpellFlash";
+		case SpellID::GhostForm:
+			return "SpellGhostForm";
+		case SpellID::IceBall:
+			return "SpellIceBall";
+		case SpellID::IcyAmbush:
+			return "SpellIcyAmbush";
+		case SpellID::Invisibility:
+			return "SpellInvisibility";
+		case SpellID::Justice:
+			return "SpellJustice";
+		case SpellID::Leech:
+			return "SpellLeech";
+		case SpellID::Light:
+			return "SpellLight";
+		case SpellID::MindBurn:
+			return "SpellMindBurn";
+		case SpellID::MirrorImage:
+			return "SpellMirrorImage";
+		case SpellID::RaiseTheDead:
+			return "SpellRaiseTheDead";
+		case SpellID::Shackle:
+			return "SpellShackle";
+		case SpellID::ShadowTrap:
+			return "SpellShadowTrap";
+		case SpellID::SummonCreature:
+			return "SpellSummonCreature";
+		case SpellID::Telekinesis:
+			return "SpellTelekinesis";
+		case SpellID::Unlock:
+			return "SpellUnlock";
+		}
+	}
+
 	static std::string getSpellModifierTypeName(SpellModifierType type)
 	{
 		switch (type) {
@@ -86,6 +143,8 @@ public:
 			return "Exit";
 		case Key::Inventory:
 			return "Inventory";
+		case Key::Spellbook:
+			return "Spellbook";
 		case Key::Jump:
 			return "Jump";
 		case Key::Left:

@@ -9,6 +9,7 @@ enum class Key
 	Inventory,
 	CharacterInfo,
 	Journal,
+	Spellbook,
 	Interact,
 	Confirm,
 	Left,

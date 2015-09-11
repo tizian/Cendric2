@@ -25,6 +25,14 @@ public:
 	// it won't add the spell if the slot is already taken if force is false
 	bool addSpell(int slotNr, SpellID spellID, bool force);
 
+	bool isSpellAllowed(int slotNr, SpellID spellID) const;
+
+	const std::vector < std::pair <
+		std::pair<SpellType, SpellID>,
+		std::pair<
+		int,
+		std::map < SpellModifierType, SpellModifier >> >>& getWeaponSlots() const;
+
 private:
 
 	std::vector<std::pair<
@@ -34,5 +42,5 @@ private:
 			std::map<SpellModifierType, SpellModifier>>>> m_weaponSlots;
 
 	bool doesSlotExist(int slotNr) const;
-	bool isSpellAllowed(int slotNr, SpellID spellID) const;
+	
 };

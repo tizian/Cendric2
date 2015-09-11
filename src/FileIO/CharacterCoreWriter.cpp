@@ -44,6 +44,8 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeChestsLooted(data);
 		savefile << writeQuestStates(data);
 		savefile << writeNPCStates(data);
+		savefile << writeSpellsLearned(data);
+		savefile << writeModifiersLearned(data);
 
 		savefile.close();
 	}
@@ -170,6 +172,42 @@ std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data
 		chestsLooted.append(chestLooted);
 	}
 	return chestsLooted;
+}
+
+std::string CharacterCoreWriter::writeSpellsLearned(const CharacterCoreData& data) const
+{
+	string spellsLearned = "# spells learned:\n";
+
+	for (auto it : data.spellsLearned)
+	{
+		string spellLearned = string(SPELL_LEARNED);
+		spellLearned.append(":");
+		spellLearned.append(std::to_string(static_cast<int>(it.first)));
+		for (auto it2 : it.second)
+		{
+			spellLearned.append("," + to_string(static_cast<int>(it2)));
+		}
+		spellLearned.append("\n");
+		spellsLearned.append(spellLearned);
+	}
+	return spellsLearned;
+}
+
+std::string CharacterCoreWriter::writeModifiersLearned(const CharacterCoreData& data) const
+{
+	string modifiersLearned = "# modifiers learned:\n";
+
+	for (auto it : data.modfiersLearned)
+	{
+		string modifierLearned = string(MODIFIER_LEARNED);
+		modifierLearned.append(":");
+		modifierLearned.append(std::to_string(static_cast<int>(it.first)));
+		modifierLearned.append(",");
+		modifierLearned.append(std::to_string(it.second));
+		modifierLearned.append("\n");
+		modifiersLearned.append(modifierLearned);
+	}
+	return modifiersLearned;
 }
 
 std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) const

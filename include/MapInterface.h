@@ -7,9 +7,10 @@
 
 #include "GUI/Inventory.h"
 #include "GUI/CharacterInfo.h"
+#include "GUI/Spellbook.h"
 
 // The interface overlay in a map
-// if the keys for character screen and inventory are pressed, these will display.
+// if the keys for character screen, spellbook and inventory are pressed, these will display.
 class MapInterface
 {
 public:
@@ -34,6 +35,10 @@ private:
 	// <<< INVENTORY >>>
 	Inventory m_inventory;
 	void updateInventory(const sf::Time& frameTime);
+
+	// <<< SPELLBOOK >>>
+	Spellbook m_spellbook;
+	void updateSpellbook(const sf::Time& frameTime);
 
 	// <<< CHARCTER INFO >>>
 	CharacterInfo m_characterInfo;

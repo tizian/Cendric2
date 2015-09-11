@@ -20,6 +20,15 @@ Weapon::Weapon(const ItemBean& bean) : Item(bean)
 	}
 }
 
+const std::vector < std::pair <
+	std::pair<SpellType, SpellID>,
+	std::pair<
+	int,
+	std::map < SpellModifierType, SpellModifier >> >>& Weapon::getWeaponSlots() const
+{
+	return m_weaponSlots;
+}
+
 const sf::Time& Weapon::getWeaponCooldown() const
 {
 	return m_bean.weaponChopCooldown;

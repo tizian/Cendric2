@@ -8,7 +8,9 @@
 #include "Enums/QuestID.h"
 #include "Enums/QuestState.h"
 #include "Enums/SpellID.h"
+#include "Enums/SpellType.h"
 
+#include "Structs/SpellModifier.h"
 #include "Structs/AttributeBean.h"
 #include "Structs/SpellModifier.h"
 
@@ -33,6 +35,10 @@ struct CharacterCoreData
 	// quest & npc progress
 	std::map<std::string, NPCState> npcStates;
 	std::map<QuestID, QuestState> questStates;
+
+	// learning progress
+	std::map<SpellType, std::set<SpellID>> spellsLearned;
+	std::map<SpellModifierType, int> modfiersLearned;
 	
 	// base attributes
 	AttributeBean attributes;
@@ -70,6 +76,8 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, NPCState>(),
 	std::map<QuestID, QuestState>(),
+	std::map<SpellType, std::set<SpellID>>(),
+	std::map<SpellModifierType, int>(),
 	ZERO_ATTRIBUTES,
 	0,
 	std::vector<std::pair<SpellID, std::vector<SpellModifier>>>(),

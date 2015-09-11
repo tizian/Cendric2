@@ -78,6 +78,7 @@ void InputController::init()
 			{ Key::Inventory, false },
 			{ Key::CharacterInfo, false },
 			{ Key::Journal, false },
+			{ Key::Spellbook, false },
 			{ Key::Interact, false },
 			{ Key::Confirm, false },
 			{ Key::Left, false },
