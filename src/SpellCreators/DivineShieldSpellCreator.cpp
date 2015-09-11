@@ -6,6 +6,16 @@ DivineShieldSpellCreator::DivineShieldSpellCreator(const SpellBean &spellBean, L
 	m_additionalResistance = 10;
 }
 
+int DivineShieldSpellCreator::getStrengthModifierValue() const
+{
+	return m_additionalResistance;
+}
+
+std::string DivineShieldSpellCreator::getStrengthModifierName() const
+{
+	return "AdditionalResistance";
+}
+
 void DivineShieldSpellCreator::executeSpell(const sf::Vector2f &target)
 {
 	SpellBean spellBean = m_spellBean;

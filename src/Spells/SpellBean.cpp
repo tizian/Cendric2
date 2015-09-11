@@ -1,4 +1,16 @@
 #include "Structs/SpellBean.h"
+#include "SpellCreator.h"
+#include "SpellCreators/FireBallSpellCreator.h"
+#include "SpellCreators/IceBallSpellCreator.h"
+#include "SpellCreators/DivineShieldSpellCreator.h"
+#include "SpellCreators/AureolaSpellCreator.h"
+#include "SpellCreators/ChopSpellCreator.h"
+#include "SpellCreators/FearSpellCreator.h"
+#include "SpellCreators/AntiGravitySpellCreator.h"
+#include "SpellCreators/WindGustSpellCreator.h"
+#include "SpellCreators/LeechSpellCreator.h"
+#include "SpellCreators/IcyAmbushSpellCreator.h"
+#include "SpellCreators/UnlockSpellCreator.h"
 
 std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id)
 {
@@ -62,6 +74,53 @@ std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id)
 		break;
 	}
 	return types;
+}
+
+SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner)
+{
+	SpellCreator* creator;
+	switch (bean.id)
+	{
+	case SpellID::Chop:
+		creator = new ChopSpellCreator(bean, owner);
+		break;
+	case SpellID::FireBall:
+		creator = new FireBallSpellCreator(bean, owner);
+		break;
+	case SpellID::IceBall:
+		creator = new IceBallSpellCreator(bean, owner);
+		break;
+	case SpellID::DivineShield:
+		creator = new DivineShieldSpellCreator(bean, owner);
+		break;
+	case SpellID::Aureola:
+		creator = new AureolaSpellCreator(bean, owner);
+		break;
+	case SpellID::Fear:
+		creator = new FearSpellCreator(bean, owner);
+		break;
+	case SpellID::AntiGravity:
+		creator = new AntiGravitySpellCreator(bean, owner);
+		break;
+	case SpellID::WindGust:
+		creator = new WindGustSpellCreator(bean, owner);
+		break;
+	case SpellID::Leech:
+		creator = new LeechSpellCreator(bean, owner);
+		break;
+	case SpellID::IcyAmbush:
+		creator = new IcyAmbushSpellCreator(bean, owner);
+		break;
+	case SpellID::Unlock:
+		creator = new UnlockSpellCreator(bean, owner);
+		break;
+	default:
+		return nullptr;
+	}
+
+	creator->addModifiers(modifiers);
+
+	return creator;
 }
 
 SpellBean SpellBean::getSpellBean(SpellID id)

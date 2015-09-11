@@ -7,17 +7,6 @@
 #include "InputController.h"
 #include "Structs/SpellModifier.h"
 #include "SpellCreator.h"
-#include "SpellCreators/FireBallSpellCreator.h"
-#include "SpellCreators/IceBallSpellCreator.h"
-#include "SpellCreators/DivineShieldSpellCreator.h"
-#include "SpellCreators/AureolaSpellCreator.h"
-#include "SpellCreators/ChopSpellCreator.h"
-#include "SpellCreators/FearSpellCreator.h"
-#include "SpellCreators/AntiGravitySpellCreator.h"
-#include "SpellCreators/WindGustSpellCreator.h"
-#include "SpellCreators/LeechSpellCreator.h"
-#include "SpellCreators/IcyAmbushSpellCreator.h"
-#include "SpellCreators/UnlockSpellCreator.h"
 
 class SpellSelection;
 
@@ -44,9 +33,9 @@ public:
 	void clearSpells();
 	
 	void setSpellSelection(SpellSelection* spellSelection);
-	
+
 private:
-	SpellCreator* getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers) const;
+	
 	int m_currentSpell;
 	std::vector<sf::Time> m_coolDownMap;
 	std::vector<SpellCreator*> m_spellMap;

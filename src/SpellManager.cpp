@@ -36,7 +36,7 @@ void SpellManager::addSpell(const SpellBean& spell)
 
 void SpellManager::addSpell(const SpellBean& spell, const std::vector<SpellModifier>& modifiers)
 {
-	m_spellMap.push_back(getSpellCreator(spell, modifiers));
+	m_spellMap.push_back(SpellBean::getSpellCreator(spell, modifiers, m_owner));
 	m_coolDownMap.push_back(sf::Time::Zero);
 }
 
@@ -87,53 +87,6 @@ void SpellManager::setCurrentSpell(int spellNr)
 	{
 		m_spellSelection->selectSlot(spellNr);
 	}
-}
-
-SpellCreator* SpellManager::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers) const
-{
-	SpellCreator* creator;
-	switch (bean.id)
-	{
-	case SpellID::Chop:
-		creator = new ChopSpellCreator(bean, m_owner);
-		break;
-	case SpellID::FireBall:
-		creator = new FireBallSpellCreator(bean, m_owner);
-		break;
-	case SpellID::IceBall:
-		creator = new IceBallSpellCreator(bean, m_owner);
-		break;
-	case SpellID::DivineShield:
-		creator = new DivineShieldSpellCreator(bean, m_owner);
-		break;
-	case SpellID::Aureola:
-		creator = new AureolaSpellCreator(bean, m_owner);
-		break;
-	case SpellID::Fear:
-		creator = new FearSpellCreator(bean, m_owner);
-		break;
-	case SpellID::AntiGravity:
-		creator = new AntiGravitySpellCreator(bean, m_owner);
-		break;
-	case SpellID::WindGust:
-		creator = new WindGustSpellCreator(bean, m_owner);
-		break;
-	case SpellID::Leech:
-		creator = new LeechSpellCreator(bean, m_owner);
-		break;
-	case SpellID::IcyAmbush:
-		creator = new IcyAmbushSpellCreator(bean, m_owner);
-		break;
-	case SpellID::Unlock:
-		creator = new UnlockSpellCreator(bean, m_owner);
-		break;
-	default:
-		return nullptr;
-	}
-
-	creator->addModifiers(modifiers);
-	
-	return creator;
 }
 
 std::vector<SpellCreator*>& SpellManager::getSpellMap()

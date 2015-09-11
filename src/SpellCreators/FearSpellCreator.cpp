@@ -5,6 +5,16 @@ FearSpellCreator::FearSpellCreator(const SpellBean &spellBean, LevelMovableGameO
 {
 }
 
+int FearSpellCreator::getStrengthModifierValue() const
+{
+	return m_strength;
+}
+
+std::string FearSpellCreator::getStrengthModifierName() const
+{
+	return "FearLevel";
+}
+
 void FearSpellCreator::executeSpell(const sf::Vector2f &target)
 {
 	SpellBean spellBean = m_spellBean;

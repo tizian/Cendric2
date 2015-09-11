@@ -1,10 +1,9 @@
 #include "GUI/WeaponWindow.h"
 #include "MapInterface.h"
 
-WeaponWindow::WeaponWindow(MapInterface* _interface)
+WeaponWindow::WeaponWindow(CharacterCore* core)
 {
-	m_mapInterface = _interface;
-	m_core = _interface->getCore();
+	m_core = core;
 
 	init();
 }
@@ -76,6 +75,18 @@ void WeaponWindow::reload()
 	}
 }
 
+void WeaponWindow::reloadSpellDesc()
+{
+	if (m_selectedSpellSlot == nullptr) return;
+	std::vector<SpellModifier> modifiers;
+	for (auto& it : m_weaponSlots.at(m_selectedSpellSlot->getNr()).second)
+	{
+		modifiers.push_back(it.getModifier());
+	}
+	m_spellDesc->reload(m_selectedSpellSlot->getSpellID(), modifiers, &m_core->getTotalAttributes());
+	m_spellDesc->show();
+}
+
 void WeaponWindow::init()
 {
 	// init window
@@ -85,6 +96,9 @@ void WeaponWindow::init()
 		CENDRIC_COLOR_TRANS_BLACK, // main
 		sf::Color::Transparent, // back
 		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
+
+	m_spellDesc = new SpellDescriptionWindow();
+	m_spellDesc->setPosition(sf::Vector2f(LEFT + WIDTH + MARGIN, TOP));
 
 	m_weaponName.setCharacterSize(CHARACTER_SIZE);
 	m_weaponName.setColor(CENDRIC_COLOR_WHITE);
@@ -103,6 +117,7 @@ WeaponWindow::~WeaponWindow()
 	delete m_currentModifierClone;
 	delete m_currentSpellClone;
 	delete m_weaponSlot;
+	delete m_spellDesc;
 	clearAllSlots();
 }
 
@@ -111,6 +126,7 @@ void WeaponWindow::clearAllSlots()
 	m_weaponSlots.clear();
 	m_selectedModifierSlot = nullptr;
 	m_selectedSpellSlot = nullptr;
+	m_spellDesc->hide();
 }
 
 void WeaponWindow::update(const sf::Time& frameTime)
@@ -179,6 +195,7 @@ void WeaponWindow::selectSpellSlot(SpellSlot* selectedSlot)
 	}
 	m_selectedSpellSlot = selectedSlot;
 	m_selectedSpellSlot->select();
+	reloadSpellDesc();
 }
 
 void WeaponWindow::handleDragAndDrop()
@@ -261,6 +278,7 @@ void WeaponWindow::render(sf::RenderTarget& target)
 	if (!m_isVisible) return;
 
 	m_window->render(target);
+	m_spellDesc->render(target);
 	target.draw(m_weaponName);
 	target.draw(m_weaponDescription);
 	m_weaponSlot->render(target);
@@ -368,4 +386,5 @@ void WeaponWindow::hide()
 	m_currentSpellClone = nullptr;
 	m_isDragging = false;
 	m_hasDraggingStarted = false;
+	m_spellDesc->hide();
 }

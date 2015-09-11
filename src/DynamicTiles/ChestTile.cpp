@@ -1,6 +1,6 @@
 #include "DynamicTiles/ChestTile.h"
 #include "LevelMainCharacter.h"
-#include "Spell.h"
+#include "Spells/UnlockSpell.h"
 
 using namespace std;
 

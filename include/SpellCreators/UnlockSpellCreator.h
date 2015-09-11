@@ -10,6 +10,8 @@ class UnlockSpellCreator : public SpellCreator
 {
 public:
 	UnlockSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	std::string getStrengthModifierName() const override;
+	int getStrengthModifierValue() const override;
 
 	void executeSpell(const sf::Vector2f& target) override;
 

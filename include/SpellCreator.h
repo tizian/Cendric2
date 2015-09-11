@@ -22,9 +22,21 @@ public:
 	virtual void executeSpell(const sf::Vector2f& target) = 0;
 	const SpellBean& getSpellBean() const;
 
+	// used by the descriptions to show what this creator does if it has a strength modifier
+	// default returns empty string
+	virtual std::string getStrengthModifierName() const;
+	// used by the descriptions to return strength modifier value
+	// default returns 0
+	virtual int getStrengthModifierValue() const;
+
+	// updates the spells damage, using the attribute bean. It adds damage and calculates critical hits
+	static void updateDamage(SpellBean& bean, const AttributeBean* attributes);
+
 protected:
 	// filled by the subclasses
 	std::vector<SpellModifierType> m_allowedModifiers;
+	// updates the spells damage, using the mobs attribute bean. It adds damage and calculates critical hits
+	void SpellCreator::updateDamage(SpellBean& bean) const;
 
 	virtual void addDamageModifier(int level);
 	virtual void addRangeModifier(int level);
@@ -36,10 +48,7 @@ protected:
 
 	const AttributeBean* m_attributeBean;
 	SpellBean m_spellBean;
-	Level* m_level;
+	Level* m_level = nullptr;
 	LevelScreen* m_screen = nullptr;
-	LevelMovableGameObject* m_owner;
-
-	// updates the spells damage, using the mobs attributes. It adds damage and calculates critical hits
-	void updateDamage(SpellBean& bean) const;
+	LevelMovableGameObject* m_owner = nullptr;
 };

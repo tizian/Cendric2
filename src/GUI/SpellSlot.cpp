@@ -305,6 +305,7 @@ void SpellSlot::update(const sf::Time& frameTime)
 
 void SpellSlot::onLeftJustPressed()
 {
+	if (!m_active) return;
 	m_isClicked = true;
 	g_inputController->lockAction();
 }

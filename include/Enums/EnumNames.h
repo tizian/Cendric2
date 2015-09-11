@@ -7,6 +7,7 @@
 #include "Enums/SpellType.h"
 #include "Enums/SpellID.h"
 #include "Structs/SpellModifier.h"
+#include "Enums/DamageType.h"
 
 // pure static class used to resolve enum names.
 class EnumNames 
@@ -25,6 +26,26 @@ public:
 			return "German";
 		case Language::Lang_EN:
 			return "English";
+		}
+	}
+
+	static std::string getDamageTypeName(DamageType type)
+	{
+		switch (type) {
+		default:
+		case DamageType::MAX:
+		case DamageType::VOID:
+			return "Unknown";
+		case DamageType::Physical:
+			return "PhysicalDamage";
+		case DamageType::Fire:
+			return "FireDamage";
+		case DamageType::Ice:
+			return "IceDamage";
+		case DamageType::Light:
+			return "LightDamage";
+		case DamageType::Shadow:
+			return "ShadowDamage";
 		}
 	}
 

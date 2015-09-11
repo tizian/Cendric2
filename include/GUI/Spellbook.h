@@ -11,7 +11,6 @@
 #include "GUI/ModifierSlot.h"
 #include "GUI/ModifierSlotClone.h"
 
-class MapInterface;
 class WeaponWindow;
 
 // the spellbook, as displayed in a level or a map
@@ -19,7 +18,7 @@ class WeaponWindow;
 class Spellbook
 {
 public:
-	Spellbook(MapInterface* _interface);
+	Spellbook(CharacterCore* core);
 	~Spellbook();
 
 	void show();
@@ -40,7 +39,6 @@ public:
 
 private:
 	CharacterCore* m_core;
-	MapInterface* m_mapInterface = nullptr;
 	bool m_isVisible = false;
 
 	void init();

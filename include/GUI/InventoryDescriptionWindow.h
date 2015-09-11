@@ -16,7 +16,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
 
-	static const float DESCRIPTION_WINDOW_WIDTH;
+	static const float WIDTH;
 
 private:
 	BitmapText m_titleText;

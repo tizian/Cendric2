@@ -10,16 +10,15 @@
 #include "GUI/ModifierSlotClone.h"
 #include "GUI/InventorySlot.h"
 #include "GUI/Spellbook.h"
+#include "GUI/SpellDescriptionWindow.h"
 #include "Weapon.h"
-
-class MapInterface;
 
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
 class WeaponWindow
 {
 public:
-	WeaponWindow(MapInterface* _interface);
+	WeaponWindow(CharacterCore* core);
 	~WeaponWindow();
 
 	void show();
@@ -45,7 +44,8 @@ public:
 
 private:
 	CharacterCore* m_core;
-	MapInterface* m_mapInterface = nullptr;
+	SpellDescriptionWindow* m_spellDesc = nullptr;
+	void reloadSpellDesc();
 	bool m_isVisible = false;
 	bool m_requireReload = false;
 

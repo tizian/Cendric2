@@ -4,11 +4,11 @@
 SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner)
 {
 	m_owner = owner;
-	m_level = owner->getLevel();
-	m_attributeBean = owner->getAttributes();
-	if (!(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen())))
+	if (m_owner != nullptr) m_level = owner->getLevel();
+	if (m_owner != nullptr) m_attributeBean = owner->getAttributes();
+	if (m_owner == nullptr || !(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen())))
 	{
-		g_logger->logError("SpellCreator", "spell owner has no (level)screen");
+		g_logger->logWarning("SpellCreator", "spell owner has no (level)screen. Don't use this spellcreator to execute spells.");
 	}
 	m_spellBean = spellBean;
 
@@ -107,22 +107,38 @@ const SpellBean& SpellCreator::getSpellBean() const
 
 void SpellCreator::updateDamage(SpellBean& bean) const
 {
+	SpellCreator::updateDamage(bean, m_attributeBean);
+}
+
+int SpellCreator::getStrengthModifierValue() const
+{
+	return 0;
+}
+
+std::string SpellCreator::getStrengthModifierName() const
+{
+	return "";
+}
+
+void SpellCreator::updateDamage(SpellBean& bean, const AttributeBean* attributes)
+{
+	if (attributes == nullptr) return;
 	switch (bean.damageType)
 	{
 	case DamageType::Physical:
-		bean.damage = bean.damage + m_attributeBean->damagePhysical;
+		bean.damage = bean.damage + attributes->damagePhysical;
 		break;
 	case DamageType::Fire:
-		bean.damage = bean.damage + m_attributeBean->damageFire;
+		bean.damage = bean.damage + attributes->damageFire;
 		break;
 	case DamageType::Ice:
-		bean.damage = bean.damage + m_attributeBean->damageIce;
+		bean.damage = bean.damage + attributes->damageIce;
 		break;
 	case DamageType::Shadow:
-		bean.damage = bean.damage + m_attributeBean->damageShadow;
+		bean.damage = bean.damage + attributes->damageShadow;
 		break;
 	case DamageType::Light:
-		bean.damage = bean.damage + m_attributeBean->damageLight;
+		bean.damage = bean.damage + attributes->damageLight;
 		break;
 	default:
 		return;
@@ -133,7 +149,7 @@ void SpellCreator::updateDamage(SpellBean& bean) const
 
 	// add critical hit to damage
 	int chance = rand() % 100 + 1;
-	if (chance <= m_attributeBean->criticalHitChance)
+	if (chance <= attributes->criticalHitChance)
 	{
 		bean.damage *= 2;
 	}

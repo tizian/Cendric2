@@ -187,3 +187,12 @@ Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
 Type;Type;Typ;Typ
 Level;Level;Stufe;Level
+Cooldown;Cooldown;Abklingzeit;Abklingziit
+DamageType;Damage Type;Schadenstyp;Schadetyp
+Heal;Heal;Heilung;Heilig
+AllowedModifiers;Allowed Gem Types;Erlaubte Edelsteintypen;Erlaubti Edelsteitype
+WeaponDamage;Weapon Damage;Waffenschaden;Waffeschade
+AdditionalResistance;Additional Resistance;Zusätzlicher Widerstand;Zuesätzliche Widerstand
+LockpickLevel;Lockpick Level;Dietrich Stufe;Dietrich Level
+FearLevel;Fear Level;Furcht Stufe;Angscht Stufe
+WindForce;Wind Force;Windstärke;Windstärchi

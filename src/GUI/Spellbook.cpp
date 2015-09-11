@@ -7,10 +7,9 @@ float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
 float Spellbook::TOP = 100.f;
 float Spellbook::LEFT = 50.f;
 
-Spellbook::Spellbook(MapInterface* _interface)
+Spellbook::Spellbook(CharacterCore* core)
 {
-	m_mapInterface = _interface;
-	m_core = _interface->getCore();
+	m_core = core;
 
 	init();
 }
@@ -76,7 +75,7 @@ void Spellbook::init()
 	selectTab(SpellType::VOID);
 
 	delete m_weaponWindow;
-	m_weaponWindow = new WeaponWindow(m_mapInterface);
+	m_weaponWindow = new WeaponWindow(m_core);
 }
 
 Spellbook::~Spellbook()

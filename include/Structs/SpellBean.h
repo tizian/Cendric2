@@ -9,6 +9,9 @@
 #include "Enums/Key.h"
 #include "Structs/SpellModifier.h"
 
+class SpellCreator;
+class LevelMovableGameObject;
+
 /* describes the attributes of a spell */
 struct SpellBean
 {
@@ -41,6 +44,7 @@ struct SpellBean
 
 	static SpellBean getSpellBean(SpellID id);
 	static std::vector<SpellModifierType> getAllowedModifiers(SpellID id);
+	static SpellCreator* getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner);
 
 private:
 	static SpellBean getChopSpellBean();

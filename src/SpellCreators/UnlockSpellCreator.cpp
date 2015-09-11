@@ -5,6 +5,16 @@ UnlockSpellCreator::UnlockSpellCreator(const SpellBean& spellBean, LevelMovableG
 {
 }
 
+int UnlockSpellCreator::getStrengthModifierValue() const
+{
+	return m_strength;
+}
+
+std::string UnlockSpellCreator::getStrengthModifierName() const
+{
+	return "LockpickLevel";
+}
+
 void UnlockSpellCreator::executeSpell(const sf::Vector2f& target)
 {
 	SpellBean spellBean = m_spellBean;

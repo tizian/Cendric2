@@ -5,6 +5,16 @@ WindGustSpellCreator::WindGustSpellCreator(const SpellBean &spellBean, LevelMova
 {
 }
 
+int WindGustSpellCreator::getStrengthModifierValue() const
+{
+	return m_strength;
+}
+
+std::string WindGustSpellCreator::getStrengthModifierName() const
+{
+	return "WindForce";
+}
+
 void WindGustSpellCreator::executeSpell(const sf::Vector2f &target)
 {
 	SpellBean spellBean = m_spellBean;
@@ -22,5 +32,6 @@ void WindGustSpellCreator::addRangeModifier(int level)
 
 void WindGustSpellCreator::addStrengthModifier(int level)
 {
+	m_strength += level;
 	// TODO. maybe this pushes faster, and maybe it pushes other "blocks"
 }

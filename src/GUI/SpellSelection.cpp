@@ -15,12 +15,14 @@ SpellSelection::~SpellSelection()
 void SpellSelection::activateSlot(int spellNr, const sf::Time& cooldown)
 {
 	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
+	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
 	m_spellSlots[spellNr].playAnimation(cooldown);
 }
 
 void SpellSelection::selectSlot(int spellNr)
 {
 	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
+	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
 	m_spellSlots[m_selectedSlot].deselect();
 	m_spellSlots[spellNr].select();
 	m_selectedSlot = spellNr;

@@ -96,7 +96,7 @@ void LevelMainCharacter::loadWeapon()
 	// handle other spells
 	for (int i = 0; i < 5; i++)
 	{
-		if (weapon->getCurrentSpellForSlot(i) == SpellID::VOID) break;
+		if (weapon->getCurrentSpellForSlot(i) == SpellID::VOID) continue;
 		SpellBean newBean = SpellBean::getSpellBean(weapon->getCurrentSpellForSlot(i));
 		switch (i)
 		{

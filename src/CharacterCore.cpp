@@ -390,7 +390,7 @@ void CharacterCore::removeModifier(SpellModifierType type, int slotNr)
 
 void CharacterCore::removeSpell(int slotNr)
 {
-	if (slotNr < 0 || m_data.equippedWeaponSlots.size() < slotNr - 1) return;
+	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
 	m_data.equippedWeaponSlots.at(slotNr).first = SpellID::VOID;
 	m_data.equippedWeaponSlots.at(slotNr).second.clear();
 	reloadWeaponSlots();
