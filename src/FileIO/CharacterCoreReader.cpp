@@ -409,7 +409,7 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	startData++;
 
 	SpellID spell = static_cast<SpellID>(atoi(startData));
-	if (spell <= SpellID::VOID || spell >= SpellID::MAX)
+	if (spell < SpellID::VOID || spell >= SpellID::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + to_string(static_cast<int>(spell)));
 		return false;

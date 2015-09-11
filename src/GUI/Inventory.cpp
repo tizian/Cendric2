@@ -70,7 +70,7 @@ void Inventory::init()
 	{
 		it.first.setTexture(g_resourceManager->getTexture(ResourceID::Texture_inventorytabs), sf::IntRect(textureOffset, 0, 60, 35));
 		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
-		it.first.setBackgroundLayerColor(sf::Color::Transparent);
+		it.first.setBackgroundLayerColor(CENDRIC_COLOR_TRANS_BLACK);
 		it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
 		it.first.setOrnamentLayerColor(CENDRIC_COLOR_DARK_PURPLE);
 		it.first.setMouseOverColor(CENDRIC_COLOR_LIGHT_PURPLE);

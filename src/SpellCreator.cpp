@@ -11,6 +11,8 @@ SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* o
 		g_logger->logError("SpellCreator", "spell owner has no (level)screen");
 	}
 	m_spellBean = spellBean;
+
+	m_allowedModifiers = SpellBean::getAllowedModifiers(spellBean.id);
 }
 
 SpellCreator::~SpellCreator()

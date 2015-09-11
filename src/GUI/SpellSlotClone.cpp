@@ -121,7 +121,6 @@ void SpellSlotClone::setPosition(const sf::Vector2f& pos)
 	m_smallRingBottom2.setPosition(pos + sf::Vector2f(0.f, 0.85f * SpellSlot::RADIUS) - 0.05f * radiusVector);
 }
 
-
 void SpellSlotClone::render(sf::RenderTarget& renderTarget)
 {
 	renderTarget.draw(m_outerRing);
@@ -146,4 +145,9 @@ void SpellSlotClone::render(sf::RenderTarget& renderTarget)
 GameObjectType SpellSlotClone::getConfiguredType() const
 {
 	return GameObjectType::_Interface;
+}
+
+const SpellSlot* SpellSlotClone::getOriginal() const
+{
+	return m_original;
 }

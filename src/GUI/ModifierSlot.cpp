@@ -43,6 +43,11 @@ ModifierSlot::ModifierSlot()
 	m_outside.setOutlineColor(CENDRIC_COLOR_DARK_GREY);
 }
 
+ModifierSlot::~ModifierSlot()
+{
+	delete m_descriptionWindow;
+}
+
 void ModifierSlot::activate()
 {
 	m_outside.setOutlineColor(sf::Color::Red);
@@ -96,6 +101,11 @@ void ModifierSlot::setPosition(const sf::Vector2f& pos)
 	GameObject::setPosition(pos);
 	m_inside.setPosition(pos);
 	m_outside.setPosition(pos);
+	if (m_descriptionWindow != nullptr)
+	{
+		sf::Vector2f pos(getBoundingBox()->left, getBoundingBox()->top - m_descriptionWindow->getSize().y - 10.f);
+		m_descriptionWindow->setPosition(pos);
+	}
 }
 
 void ModifierSlot::render(sf::RenderTarget& renderTarget)
@@ -104,10 +114,32 @@ void ModifierSlot::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_inside);
 }
 
+void ModifierSlot::renderAfterForeground(sf::RenderTarget& target)
+{
+	GameObject::renderAfterForeground(target);
+	if (m_showDescriptionWindow && m_descriptionWindow != nullptr)
+	{
+		m_descriptionWindow->render(target);
+		m_showDescriptionWindow = false;
+	}
+}
+
 void ModifierSlot::onLeftJustPressed()
 {
 	m_isClicked = true;
 	g_inputController->lockAction();
+}
+
+void ModifierSlot::onMouseOver()
+{
+	if (m_spellModifier.type == SpellModifierType::VOID) return;
+	if (m_descriptionWindow == nullptr)
+	{
+		m_descriptionWindow = new ModifierDescriptionWindow(m_spellModifier);
+		sf::Vector2f pos(getBoundingBox()->left, getBoundingBox()->top - m_descriptionWindow->getSize().y - 10.f);
+		m_descriptionWindow->setPosition(pos);
+	}
+	m_showDescriptionWindow = true;
 }
 
 GameObjectType ModifierSlot::getConfiguredType() const
@@ -118,4 +150,14 @@ GameObjectType ModifierSlot::getConfiguredType() const
 const SpellModifier& ModifierSlot::getModifier() const
 {
 	return m_spellModifier;
+}
+
+int ModifierSlot::getNr() const
+{
+	return m_nr;
+}
+
+void ModifierSlot::setNr(int nr)
+{
+	m_nr = nr;
 }

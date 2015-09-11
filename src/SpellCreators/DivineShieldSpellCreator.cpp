@@ -3,8 +3,6 @@
 
 DivineShieldSpellCreator::DivineShieldSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
-	m_allowedModifiers.push_back(SpellModifierType::Duration);
-	m_allowedModifiers.push_back(SpellModifierType::Strength);
 	m_additionalResistance = 10;
 }
 

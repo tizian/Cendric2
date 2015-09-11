@@ -3,10 +3,6 @@
 
 IcyAmbushSpellCreator::IcyAmbushSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner)
 {
-	m_allowedModifiers.push_back(SpellModifierType::Damage);
-	m_allowedModifiers.push_back(SpellModifierType::Range);
-	m_allowedModifiers.push_back(SpellModifierType::Duration);
-	m_allowedModifiers.push_back(SpellModifierType::Reflect);
 }
 
 void IcyAmbushSpellCreator::executeSpell(const sf::Vector2f& target)

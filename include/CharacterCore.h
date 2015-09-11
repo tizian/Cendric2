@@ -44,6 +44,8 @@ public:
 	void loadEquipmentItems();
 	// loads itemvector (reload if not empty)
 	void loadItems();
+	// reloads only the weapon slots.
+	void reloadWeaponSlots();
 	// base attributes plus the attributes gotten by equipment
 	const AttributeBean& getTotalAttributes() const;
 	// getter for items
@@ -62,6 +64,15 @@ public:
 	void setLevel(const sf::Vector2f& position, const std::string& level);
 	// equips an item at the given position and adds the former equipment part into the inventory. To deequip an item, use this method with an empty string as item id.
 	void equipItem(const std::string& item, ItemType type);
+	// tries to remove the spell from slot nr "slotNr"
+	void removeSpell(int slotNr);
+	// tries to add the spell with id "id" to slot nr "slotNr"
+	void addSpell(SpellID id, int slotNr);
+	// tries to remove a modifier of type "type" from weapon slot nr "slotNr"
+	void removeModifier(SpellModifierType type, int slotNr);
+	// tries to add a modifier of type "type" to weapon slot nr "slotNr"
+	// it uses "force" for that purpose
+	void addModifier(const SpellModifier& modifier, int slotNr);
 	// getter for core part
 	const CharacterCoreData& getData() const;
 	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level

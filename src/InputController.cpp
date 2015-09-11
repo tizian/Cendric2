@@ -125,52 +125,55 @@ sf::Keyboard::Key InputController::getLastPressedKey() const
 
 bool InputController::isMouseOver(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
+	if (!m_isWindowFocused) return false;
 	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition());
 }
 
 bool InputController::isRightClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	if (m_isActionLocked) return false;
+	if (m_isActionLocked || !m_isWindowFocused) return false;
 	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseClickedRight();
 }
 
 bool InputController::isLeftClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	if (m_isActionLocked) return false;
+	if (m_isActionLocked || !m_isWindowFocused) return false;
 	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseClickedLeft();
 }
 
 bool InputController::isRightPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
+	if (!m_isWindowFocused) return false;
 	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMousePressedRight();
 }
 
 bool InputController::isLeftPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
+	if (!m_isWindowFocused) return false;
 	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMousePressedLeft();
 }
 
 bool InputController::isRightJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	if (m_isActionLocked) return false;
+	if (m_isActionLocked || !m_isWindowFocused) return false;
 	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseJustPressedRight();
 }
 
 bool InputController::isLeftJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const
 {
-	if (m_isActionLocked) return false;
+	if (m_isActionLocked || !m_isWindowFocused) return false;
 	return boundingBox->contains(useDefaultView ? getDefaultViewMousePosition() : getMousePosition()) && isMouseJustPressedLeft();
 }
 
 bool InputController::isMouseClickedLeft() const
 {
-	if (m_isActionLocked) return false;
+	if (m_isActionLocked || !m_isWindowFocused) return false;
 	return m_isWindowFocused && m_isMouseClickedLeft;
 }
 
 bool InputController::isMouseClickedRight() const
 {
-	if (m_isActionLocked) return false;
+	if (m_isActionLocked || !m_isWindowFocused) return false;
 	return m_isWindowFocused && m_isMouseClickedRight;
 }
 
@@ -201,8 +204,8 @@ bool InputController::isKeyActive(Key key)
 
 bool InputController::isKeyJustPressed(Key key)
 {
-	if (m_isActionLocked) return false;
-	return m_isWindowFocused && m_keyJustPressedMap[key];
+	if (m_isActionLocked || !m_isWindowFocused) return false;
+	return m_keyJustPressedMap[key];
 }
 
 void InputController::startReadingText()

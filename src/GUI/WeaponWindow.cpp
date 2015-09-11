@@ -11,6 +11,7 @@ WeaponWindow::WeaponWindow(MapInterface* _interface)
 
 void WeaponWindow::reload()
 {
+	m_requireReload = false;
 	// reload slot and text
 	delete m_weaponSlot;
 	m_weapon = m_core->getWeapon();
@@ -33,11 +34,9 @@ void WeaponWindow::reload()
 
 	if (m_weapon == nullptr) return;
 
-	float xOffset = LEFT + TEXT_OFFSET + 2 * MARGIN;
-	float yOffset = std::max(
-		m_weaponSlot->getPosition().y + InventorySlot::SIDE_LENGTH,
-		m_weaponDescription.getPosition().y + m_weaponDescription.getLocalBounds().height)
-		+ 3 * MARGIN;
+	float xOffset = LEFT + TEXT_OFFSET;
+	float yOffset = m_weaponSlot->getPosition().y + 2 * InventorySlot::SIDE_LENGTH;
+	int slotNr = 0;
 	for (auto& it : m_weapon->getWeaponSlots())
 	{
 		SpellSlot spellSlot = SpellSlot();
@@ -50,6 +49,7 @@ void WeaponWindow::reload()
 			spellSlot = SpellSlot(it.first.second);
 		}
 		spellSlot.setPosition(sf::Vector2f(xOffset, yOffset) + sf::Vector2f(SpellSlot::RADIUS, SpellSlot::RADIUS));
+		spellSlot.setNr(slotNr);
 		xOffset += 2 * SpellSlot::RADIUS + 2 * MARGIN;
 
 		std::vector<ModifierSlot> modifiers;
@@ -65,11 +65,13 @@ void WeaponWindow::reload()
 		for (auto& it2 : modifiers)
 		{
 			it2.setPosition(sf::Vector2f(xOffset, yOffset));
+			it2.setNr(slotNr);
 			xOffset += ModifierSlot::SIDE_LENGTH + MARGIN;
 		}
 
 		yOffset += 2 * SpellSlot::RADIUS + 2 * MARGIN;
-		xOffset = LEFT + TEXT_OFFSET + 2 * MARGIN;
+		xOffset = LEFT + TEXT_OFFSET;
+		slotNr++;
 		m_weaponSlots.push_back(std::pair<SpellSlot, std::vector<ModifierSlot>>({spellSlot, modifiers}));
 	}
 }
@@ -84,13 +86,13 @@ void WeaponWindow::init()
 		sf::Color::Transparent, // back
 		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
 
-	m_weaponName.setCharacterSize(12);
+	m_weaponName.setCharacterSize(CHARACTER_SIZE);
 	m_weaponName.setColor(CENDRIC_COLOR_WHITE);
 	m_weaponName.setPosition(sf::Vector2f(LEFT + TEXT_OFFSET + MARGIN + InventorySlot::SIDE_LENGTH, TOP + TEXT_OFFSET));
 
-	m_weaponDescription.setCharacterSize(CHARACTER_SIZE);
+	m_weaponDescription.setCharacterSize(8);
 	m_weaponDescription.setColor(CENDRIC_COLOR_LIGHT_GREY);
-	m_weaponDescription.setPosition(sf::Vector2f(LEFT + TEXT_OFFSET + MARGIN + InventorySlot::SIDE_LENGTH, TOP + TEXT_OFFSET + 2 * CHARACTER_SIZE));
+	m_weaponDescription.setPosition(sf::Vector2f(LEFT + TEXT_OFFSET + MARGIN + InventorySlot::SIDE_LENGTH, TOP + TEXT_OFFSET + CHARACTER_SIZE + 4.f));
 
 	reload();
 }
@@ -99,6 +101,7 @@ WeaponWindow::~WeaponWindow()
 {
 	delete m_window;
 	delete m_currentModifierClone;
+	delete m_currentSpellClone;
 	delete m_weaponSlot;
 	clearAllSlots();
 }
@@ -107,17 +110,31 @@ void WeaponWindow::clearAllSlots()
 {
 	m_weaponSlots.clear();
 	m_selectedModifierSlot = nullptr;
+	m_selectedSpellSlot = nullptr;
 }
 
 void WeaponWindow::update(const sf::Time& frameTime)
 {
 	if (!m_isVisible) return;
 
+	if (m_requireReload) reload();
+
 	for (auto& it : m_weaponSlots)
 	{
+		it.first.update(frameTime);
+		if (it.first.isClicked())
+		{
+			selectSpellSlot(&it.first);
+			return;
+		}
 		for (auto& it2 : it.second)
 		{
 			it2.update(frameTime);
+			if (it2.isClicked())
+			{
+				selectModifierSlot(&it2);
+				return;
+			}
 		}
 	}
 
@@ -131,12 +148,37 @@ void WeaponWindow::selectModifierSlot(ModifierSlot* selectedSlot)
 
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	if (selectedSlot == m_selectedModifierSlot) return;
+	if (m_selectedSpellSlot != nullptr)
+	{
+		m_selectedSpellSlot->deselect();
+		m_selectedSpellSlot = nullptr;
+	}
 	if (m_selectedModifierSlot != nullptr)
 	{
 		m_selectedModifierSlot->deselect();
 	}
 	m_selectedModifierSlot = selectedSlot;
 	m_selectedModifierSlot->select();
+}
+
+void WeaponWindow::selectSpellSlot(SpellSlot* selectedSlot)
+{
+	if (selectedSlot == nullptr) return;
+	m_hasDraggingStarted = true;
+
+	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	if (selectedSlot == m_selectedSpellSlot) return;
+	if (m_selectedModifierSlot != nullptr)
+	{
+		m_selectedModifierSlot->deselect();
+		m_selectedModifierSlot = nullptr;
+	}
+	if (m_selectedSpellSlot != nullptr)
+	{
+		m_selectedSpellSlot->deselect();
+	}
+	m_selectedSpellSlot = selectedSlot;
+	m_selectedSpellSlot->select();
 }
 
 void WeaponWindow::handleDragAndDrop()
@@ -146,10 +188,32 @@ void WeaponWindow::handleDragAndDrop()
 	{
 		if (m_selectedModifierSlot != nullptr)
 		{
-			m_selectedModifierSlot->activate();
+			if (m_currentModifierClone != nullptr && !(m_currentModifierClone->getBoundingBox()->intersects(*m_selectedModifierSlot->getBoundingBox())))
+			{
+				m_core->removeModifier(m_selectedModifierSlot->getModifier().type, m_selectedModifierSlot->getNr());
+				m_requireReload = true;
+			}
+			else
+			{
+				m_selectedModifierSlot->activate();
+			}
+		}
+		if (m_selectedSpellSlot != nullptr)
+		{
+			if (m_currentSpellClone != nullptr && !(m_currentSpellClone->getBoundingBox()->intersects(*m_selectedSpellSlot->getBoundingBox())))
+			{
+				m_core->removeSpell(m_selectedSpellSlot->getNr());
+				m_requireReload = true;
+			}
+			else
+			{
+				m_selectedSpellSlot->activate();
+			}
 		}
 		delete m_currentModifierClone;
+		delete m_currentSpellClone;
 		m_currentModifierClone = nullptr;
+		m_currentSpellClone = nullptr;
 		m_hasDraggingStarted = false;
 		m_isDragging = false;
 		return;
@@ -163,14 +227,27 @@ void WeaponWindow::handleDragAndDrop()
 		{
 			m_isDragging = true;
 			delete m_currentModifierClone;
-			m_currentModifierClone = new ModifierSlotClone(m_selectedModifierSlot);
-			m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
-			m_selectedModifierSlot->deactivate();
+			delete m_currentSpellClone;
+			if (m_selectedModifierSlot != nullptr)
+			{
+				m_currentModifierClone = new ModifierSlotClone(m_selectedModifierSlot);
+				m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+				m_selectedModifierSlot->deactivate();
+			}
+			else if (m_selectedSpellSlot != nullptr)
+			{
+				m_currentSpellClone = new SpellSlotClone(m_selectedSpellSlot);
+				m_currentSpellClone->setPosition(mousePos);
+				m_selectedSpellSlot->deactivate();
+			}
 		}
 	}
 	else
 	{
-		m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+		if (m_currentModifierClone != nullptr)
+			m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+		if (m_currentSpellClone != nullptr)
+			m_currentSpellClone->setPosition(mousePos);
 	}
 }
 
@@ -201,6 +278,80 @@ void WeaponWindow::render(sf::RenderTarget& target)
 	{
 		m_currentModifierClone->render(target);
 	}
+	if (m_currentSpellClone != nullptr)
+	{
+		m_currentSpellClone->render(target);
+	}
+
+	for (auto& it : m_weaponSlots)
+	{
+		for (auto& it2 : it.second)
+		{
+			it2.renderAfterForeground(target);
+		}
+	}
+}
+
+void WeaponWindow::highlightSpellSlots(SpellType type, bool highlight)
+{
+	for (auto& it : m_weaponSlots)
+	{
+		if (!highlight || it.first.getSpellType() == type)
+			it.first.highlight(highlight);
+	}
+}
+
+void WeaponWindow::highlightModifierSlots(SpellModifierType type, bool highlight)
+{
+	for (auto& it : m_weaponSlots)
+	{
+		std::vector<SpellModifierType> allowedMods = SpellBean::getAllowedModifiers(it.first.getSpellID());
+		if (!highlight || std::find(allowedMods.begin(), allowedMods.end(), type) != allowedMods.end())
+		{
+			for (auto& it2 : it.second)
+			{
+				it2.highlight(highlight);
+			}
+		}
+	}
+}
+
+void WeaponWindow::notifyModifierDrop(ModifierSlotClone* clone)
+{
+	if (clone == nullptr) return;
+	SpellModifier modifier = clone->getModifier();
+
+	for (auto& it : m_weaponSlots)
+	{
+		std::vector<SpellModifierType> allowedMods = SpellBean::getAllowedModifiers(it.first.getSpellID());
+		bool isModifierAllowed = std::find(allowedMods.begin(), allowedMods.end(), modifier.type) != allowedMods.end();
+		if (!isModifierAllowed) continue;
+		for (auto& it2 : it.second)
+		{
+			if (clone->getBoundingBox()->intersects(*it2.getBoundingBox()))
+			{
+				m_core->addModifier(clone->getModifier(), it.first.getNr());
+				m_requireReload = true;
+				break;
+			}
+		}
+	}
+}
+
+void WeaponWindow::notifySpellDrop(SpellSlotClone* clone)
+{
+	if (clone == nullptr || clone->getOriginal() == nullptr) return;
+	SpellType type = clone->getOriginal()->getSpellType();
+
+	for (auto& it : m_weaponSlots)
+	{
+		if (type == it.first.getSpellType() && clone->getBoundingBox()->intersects(*it.first.getBoundingBox()))
+		{
+			m_core->addSpell(clone->getOriginal()->getSpellID(), it.first.getNr());
+			m_requireReload = true;
+			break;
+		}
+	}
 }
 
 void WeaponWindow::show()
@@ -213,6 +364,8 @@ void WeaponWindow::hide()
 	m_isVisible = false;
 	delete m_currentModifierClone;
 	m_currentModifierClone = nullptr;
+	delete m_currentSpellClone;
+	m_currentSpellClone = nullptr;
 	m_isDragging = false;
 	m_hasDraggingStarted = false;
 }

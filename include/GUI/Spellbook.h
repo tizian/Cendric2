@@ -55,11 +55,11 @@ private:
 	std::vector<std::pair<TexturedButton, SpellType>> m_tabs;
 
 	std::vector<ModifierSlot> m_modifierSlots;
-	std::vector<std::pair<SpellSlot, BitmapText>> m_elementalSlots;
-	std::vector<std::pair<SpellSlot, BitmapText>> m_twilightSlots;
-	std::vector<std::pair<SpellSlot, BitmapText>> m_necromancySlots;
-	std::vector<std::pair<SpellSlot, BitmapText>> m_divineSlots;
-	std::vector<std::pair<SpellSlot, BitmapText>> m_illusionSlots;
+	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_elementalSlots;
+	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_twilightSlots;
+	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_necromancySlots;
+	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_divineSlots;
+	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_illusionSlots;
 
 	void calculateModifierSlots();
 	void calculateSpellSlots();
@@ -71,7 +71,7 @@ private:
 	void selectTab(SpellType type);
 	void selectModifierSlot(ModifierSlot* selectedSlot);
 	void selectSpellSlot(SpellSlot* selectedSlot);
-	std::map<SpellType, std::vector<std::pair<SpellSlot, BitmapText>>*> m_typeMap;
+	std::map<SpellType, std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>>*> m_typeMap;
 
 	// used for drag & drop handling
 	ModifierSlotClone* m_currentModifierClone = nullptr;

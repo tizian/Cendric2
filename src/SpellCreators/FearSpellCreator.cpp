@@ -3,11 +3,6 @@
 
 FearSpellCreator::FearSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
-	m_allowedModifiers.push_back(SpellModifierType::Count);
-	m_allowedModifiers.push_back(SpellModifierType::Reflect);
-	m_allowedModifiers.push_back(SpellModifierType::Speed);
-	m_allowedModifiers.push_back(SpellModifierType::Duration);
-	m_allowedModifiers.push_back(SpellModifierType::Strength);
 }
 
 void FearSpellCreator::executeSpell(const sf::Vector2f &target)

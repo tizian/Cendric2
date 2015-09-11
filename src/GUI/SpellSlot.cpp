@@ -76,8 +76,6 @@ void SpellSlot::init()
 		m_textureInactive = g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_illusion);
 	}
 
-	
-
 	m_inputKey.setString(m_inputKeyID != Key::VOID ?
 		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[m_inputKeyID]) :
 		"");
@@ -139,6 +137,24 @@ void SpellSlot::select()
 	m_smallRingRight1.setFillColor(sf::Color::Red);
 }
 
+void SpellSlot::highlight(bool highlight)
+{
+	if (highlight)
+	{
+		m_smallRingBottom1.setFillColor(sf::Color::Green);
+		m_smallRingTop1.setFillColor(sf::Color::Green);
+		m_smallRingLeft1.setFillColor(sf::Color::Green);
+		m_smallRingRight1.setFillColor(sf::Color::Green);
+	}
+	else
+	{
+		m_smallRingBottom1.setFillColor(m_isSelected ? sf::Color::Red : m_active ? m_color : m_colorBase);
+		m_smallRingTop1.setFillColor(m_isSelected ? sf::Color::Red : m_active ? m_color : m_colorBase);
+		m_smallRingLeft1.setFillColor(m_isSelected ? sf::Color::Red : m_active ? m_color : m_colorBase);
+		m_smallRingRight1.setFillColor(m_isSelected ? sf::Color::Red : m_active ? m_color : m_colorBase);
+	}
+}
+
 void SpellSlot::deselect()
 {
 	if (!m_isSelected) return;
@@ -193,13 +209,13 @@ void SpellSlot::activate()
 	m_inside.setFillColor(CENDRIC_COLOR_WHITE);
 	m_coloredRing.setAngle(360.f);
 
-	m_smallRingLeft1.setFillColor(m_color);
+	m_smallRingLeft1.setFillColor(m_isSelected ? sf::Color::Red : m_color);
 	m_smallRingLeft2.setFillColor(m_color);
-	m_smallRingRight1.setFillColor(m_color);
+	m_smallRingRight1.setFillColor(m_isSelected ? sf::Color::Red : m_color);
 	m_smallRingRight2.setFillColor(m_color);
-	m_smallRingTop1.setFillColor(m_color);
+	m_smallRingTop1.setFillColor(m_isSelected ? sf::Color::Red : m_color);
 	m_smallRingTop2.setFillColor(m_color);
-	m_smallRingBottom1.setFillColor(m_color);
+	m_smallRingBottom1.setFillColor(m_isSelected ? sf::Color::Red : m_color);
 	m_smallRingBottom2.setFillColor(m_color);
 }
 
@@ -207,6 +223,7 @@ void SpellSlot::deactivate()
 {
 	m_active = false;
 	m_inside.setTexture(m_textureInactive);
+	m_inside.setTextureRect(sf::IntRect(50, 50, 400, 400));
 	m_inside.setFillColor(m_colorBase);
 	m_coloredRing.setAngle(0.f);
 
@@ -310,4 +327,14 @@ SpellID SpellSlot::getSpellID() const
 const sf::IntRect& SpellSlot::getTextureRect() const
 {
 	return m_textureRect;
+}
+
+int SpellSlot::getNr() const
+{
+	return m_nr;
+}
+
+void SpellSlot::setNr(int nr)
+{
+	m_nr = nr;
 }

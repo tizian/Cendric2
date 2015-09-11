@@ -179,6 +179,21 @@ void CharacterCore::reloadAttributes()
 	m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 }
 
+void CharacterCore::reloadWeaponSlots()
+{
+	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
+	if (wep == nullptr) return;
+	wep->reload();
+	for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++)
+	{
+		wep->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
+		for (auto& it : m_data.equippedWeaponSlots[slot].second)
+		{
+			wep->addModifier(slot, it, false);
+		}
+	}
+}
+
 void CharacterCore::loadEquipmentItems()
 {
 	clearEquippedItems();
@@ -357,6 +372,72 @@ void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& le
 	m_data.isInLevel = true;
 }
 
+void CharacterCore::removeModifier(SpellModifierType type, int slotNr)
+{
+	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
+
+	std::vector<SpellModifier>& modifiers = m_data.equippedWeaponSlots.at(slotNr).second;
+	for (auto& it = modifiers.begin(); it != modifiers.end(); /* don't increment here */)
+	{
+		if (it->type == type)
+		{
+			it = modifiers.erase(it);
+		}
+		else ++it;
+	}
+	reloadWeaponSlots();
+}
+
+void CharacterCore::removeSpell(int slotNr)
+{
+	if (slotNr < 0 || m_data.equippedWeaponSlots.size() < slotNr - 1) return;
+	m_data.equippedWeaponSlots.at(slotNr).first = SpellID::VOID;
+	m_data.equippedWeaponSlots.at(slotNr).second.clear();
+	reloadWeaponSlots();
+}
+
+void CharacterCore::addSpell(SpellID id, int slotNr)
+{
+	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
+	if (wep == nullptr) return;
+	if (!wep->isSpellAllowed(slotNr, id)) return;
+	// check if this spell is already in another slot, if yes, remove that
+	for (auto& it : m_data.equippedWeaponSlots)
+	{
+		if (it.first == id)
+		{
+			it.first = SpellID::VOID;
+			it.second.clear();
+		}
+	}
+	m_data.equippedWeaponSlots.at(slotNr).first = id;
+	m_data.equippedWeaponSlots.at(slotNr).second.clear();
+
+	reloadWeaponSlots();
+}
+
+void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr)
+{
+	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
+	if (wep == nullptr) return;
+	if (wep->addModifier(slotNr, modifier, true))
+	{
+		std::pair<SpellID, std::vector<SpellModifier>>& slot = m_data.equippedWeaponSlots.at(slotNr);
+		// check if this type already exists. if yes, remove it.
+		for (auto& it = slot.second.begin(); it != slot.second.end(); /* don't increment here */)
+		{
+			if (it->type == modifier.type)
+			{
+				it = slot.second.erase(it);
+			}
+			else ++it;
+		}
+		
+		slot.second.push_back(modifier);
+	}
+	reloadWeaponSlots();
+}
+
 void CharacterCore::equipItem(const std::string& item, ItemType type)
 {
 	std::string oldItem = "";
@@ -390,6 +471,10 @@ void CharacterCore::equipItem(const std::string& item, ItemType type)
 		oldItem = m_data.equippedWeapon;
 		m_data.equippedWeapon = item;
 		m_data.equippedWeaponSlots.clear();
+		for (int i = 0; i < (*(g_resourceManager->getItemBean(m_data.equippedWeapon))).weaponSlots.size(); i++)
+		{
+			m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
+		}
 		break;
 	default: 
 		return;

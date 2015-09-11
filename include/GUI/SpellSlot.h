@@ -24,6 +24,8 @@ public:
 	void select();
 	void deselect();
 
+	void highlight(bool highlight);
+
 	void playAnimation(const sf::Time& cooldown);
 
 	void render(sf::RenderTarget& renderTarget) override;
@@ -31,6 +33,7 @@ public:
 	// be aware that the position here is the center of the spell slot. 
 	void setPosition(const sf::Vector2f& pos) override;
 	void onLeftJustPressed() override;
+	void setNr(int nr);
 
 	// asks if it is clicked and sets the member bool to false again (!)
 	bool isClicked();
@@ -39,6 +42,7 @@ public:
 	SpellType getSpellType() const;
 	SpellID getSpellID() const;
 	const sf::IntRect& getTextureRect() const;
+	int getNr() const;
 
 	static const float RADIUS;
 
@@ -48,6 +52,7 @@ private:
 	// the position of the texture icon of this spell.
 	sf::IntRect m_textureRect;
 	bool m_isChopSlot = false;
+	int m_nr = -1;
 
 	bool m_active = false;
 	bool m_isClicked = false;

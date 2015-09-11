@@ -44,6 +44,7 @@ FirstSpell;1. Spell;1. Zauber;1. Zauber
 FourthSpell;4. Spell ;4. Zauber;4. Zauber
 GamePaused;Game Paused;Spiel pausiert;Spiel pausiert
 GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
+Gems;Gems;Edelsteine;Edelstei
 GemSockets;Gem Sockets;Edelstein Sockel;Edelstei Sockel
 German;German;Deutsch;Düütsch
 Gold;Gold;Gold;Gold
@@ -58,6 +59,7 @@ IceResistance;Ice Resistance;Eisresistenz;Iisresistenz
 Illusion;Illusion;Illusion;Illusion
 Interact;Interact;Interagieren;Interagiere
 Inventory;Inventory;Inventar;Inventar
+IsLocked;Is locked!;Ist verschlossen!;Da isch abgschlosse!
 it_eq_purpleback;Purple cape;Violetter Umhang;Violette Umhang
 it_eq_ringoflesserhealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
 it_eq_wizardhatblue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
@@ -112,6 +114,7 @@ New;New;Neu;Neu
 NewGame;New Game;Neues Spiel;Neus Spiel
 No;No;Nein;Nai
 NoQuicksaveExists;No quick save exists;Kein Schnelllade-Speicherstand existiert;Kein Schnelllade-Speicherstand existiert
+NoWeapon;No weapon equipped;Keine Waffe ausgerüstet;Kei Waffe usgrüstet
 npc_guard;Kingsguard;Wache des Königs;Wächter vom König
 Off;Off;Aus;Uus
 Okay;Okay;Okay;Okee
@@ -152,9 +155,28 @@ ShadowResistance;Shadow Resistance;Schattenresistenz;Schatteresistenz
 Sound;Sound;Musik;Musig
 SoundVolume;Volume;Lautstärke;Luutstärchi
 Speed;Speed;Geschwindigkeit;Gschwindigkeit
-SpellFire;Fireball;Feuerball;Füürball
-SpellIce;Icebolt;Eisblitz;Iisblitz
+SpellAntiGravity;Anti Gravity;Schwerkraft umkehren;Schwerchraft umchere
+SpellAntiGravityDesc;Reverses gravity for Cendric for a certain duration.;Dreht Cendrics Schwerkraft für eine gewisse Zeit um.;Drüllt em Cendric sini Schwerchraft für e gwüssi Ziit um.
+SpellAureola;Aureola;Strahlenkranz;Strahlechranz
+SpellAureolaDesc;Sends balls of light in all directions, if they hit an enemy they will return to Cendric and heal him.;Schickt Lichtbälle in alle Richtungen, die zurückkehren und Cendric heilen, falls sie einen Gegner treffen.;Schickt Liechtbäll in all Richtige, wo zruggchömed und de Cendric heiled wenn si en Gegner troffe hend.
+Spellbook;Spellbook;Zauberbuch;Zauberbuech
+SpellDivineShield;Divine Shield;Göttlicher Schild;Göttliche Schild
+SpellDivineShieldDesc;Grants a shield that enhances Cendrics Resistance and heals him once.;Umhüllt Cendric mit einem Schild, der ihn einmalig heilt und für eine gewisse Dauer seine Resistenzen erhöht.;Umhüllt de Cendric mitme Schild wo ihn eimalig heilt und sini Resistenze für e gwüssi Ziit erhöht.
+SpellFear;Fear;Furcht;Angscht
+SpellFearDesc;Enemies will flee in terror for a certain duration if the spell is strong enough.;Gegner fliehen für eine gewisse Zeit, allerdings nur, wenn der Zauber genug stark für sie ist.;Gegner flüchtet für e gwüssi Ziit, aber nur, wenn de Zauber gnueg starch isch für si.
+SpellFireBall;Fireball;Feuerball;Füürball
+SpellFireBallDesc;The good old fireball. Burns enemies and melts ice.;Der gute alte Feuerball. Verbrennt Gegner und schmilzt Eis.;De guet alt Füürball. Verbrennt Gegner und schmelzt Iis.
+SpellIceBall;Iceball;Eisball;Iisball
+SpellIceBallDesc;An icy ball damages enemies and freezes water.;Ein eisiger Ball schadet Gegnern und gefriert Wasser.;En iisige Ball schadet Gegner und gfrüürt Wasser.
+SpellIcyAmbush;Icy Ambush;Eisiger Hinterhalt;Iischalte Hinterhalt
+SpellIcyAmbushDesc;Cendric throws an enchanted dagger that deals big damage when it hits an enemy, stuns it and enemies in range and ports Cendric to its location.;Cendric wirft einen verzauberten Dolch, der eine grosse Menge Schaden verursacht, wenn er einen Gegner trifft und Cendric an dessen Stelle teleportiert. Gegner im Umkreis werden betäubt.;De Cendric wirft en verzauberte Dolch wo viel Schade amne Gegner macht und Gegner im Umkreis betäubt. De Cendric wird ad Stell vom troffene Gegner teleportiert.
+SpellLeech;Leech;Lebensraub;Lebesraub
+SpellLeechDesc;Sends out leeching spells that damage enemies and return with heal to Cendric if they hit an enemy.;Schickt lebensraubende Zauber aus, die zu Cendric zurückkehren, um ihn zu heilen, falls sie einen Gegner getroffen haben.;Schickt lebensraubendi Zauber uus wo zum Cendric zruggchömed zum ihn heile falls si en Gegner troffe hend.
 SpellSlots;Spell Slots;Verfügbare Zauber;Verfüegbari Zauber
+SpellUnlock;Summon Picklock;Dietrich beschwören;Dietrich beschwöre
+SpellUnlockDesc;Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.;Beschwört einen Dietrich, der verschlossene Truhen knackt, sofern die Stärke des Zaubers ausreicht.;Beschwört en Dietrich ane wo e verschlosseni True knackt sofern de Zauber gnueg starch isch für die True.
+SpellWindGust;Wind Gust;Windstoss;Windstoss
+SpellWindGustDesc;A wind gust that is able to shift certain objects.;Ein Windstoss der gewisse Objekte verschieben kann.;En Windstoss wo gwüssi Objekt verschiebe chan.
 StartGame;Start Game;Spiel starten;Spiel starte
 Strength;Strength;Stärke;Stärchi
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
@@ -163,6 +185,5 @@ Twilight;Twilight;Zwielicht;Zwieliecht
 Unknown;Unknown;Unbekannt;Unbekannt
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-Spellbook;Spellbook;Zauberbuch;Zauberbuech
-Gems;Gems;Edelsteine;Edelstei
-NoWeapon;No weapon equipped;Keine Waffe ausgerüstet;Kei Waffe usgrüstet
+Type;Type;Typ;Typ
+Level;Level;Stufe;Level

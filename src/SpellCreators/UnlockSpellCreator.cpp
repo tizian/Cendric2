@@ -3,7 +3,6 @@
 
 UnlockSpellCreator::UnlockSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner)
 {
-	m_allowedModifiers.push_back(SpellModifierType::Strength);
 }
 
 void UnlockSpellCreator::executeSpell(const sf::Vector2f& target)

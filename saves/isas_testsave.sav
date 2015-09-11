@@ -1,11 +1,12 @@
 # time played, in seconds
-time.played:64
+time.played:107
 savegame.name:ISA'S TESTSAVE
-savegame.date:1439297583
-level.id:
-level.position:0.000000,0.000000
+savegame.date:1441986163
+level.id:res/level/ratcave/ratcave.tmx
+level.position:525.000000,1175.000000
+is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:3991.611816,740.564148
+map.position:4000.000000,997.530884
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -13,10 +14,10 @@ attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:0
 # items in inventory:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:2,3,2,5,3
-equipped.spellslot:3,4,3,1,1
-equipped.spellslot:19
-equipped.spellslot:21,5,3
+equipped.spellslot:2,3,3
+equipped.spellslot:3,3,3
+equipped.spellslot:19,6,1,7,2
+equipped.spellslot:0
 equipped.spellslot:12,5,1,7,2,6,3
 # equipment:
 equipped.back:it_eq_purpleback
@@ -26,15 +27,26 @@ equipped.neck:
 equipped.ring1:
 equipped.ring2:
 equipped.weapon:it_we_icestaff
-# levels killed:
-# levels looted:
+# quickslot assignments:
+quickslot:1,
+quickslot:2,
+# enemies killed in level:
+enemies.killed:res/level/ratcave/ratcave.tmx
+# enemies looted in level:
+enemies.looted:res/level/ratcave/ratcave.tmx
+# items looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
+# chests looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
 # quest states:
 # npc states:
-spell.learned:1,2,3,6,5
-spell.learned:2,11,7
+# spells learned:
+spell.learned:1,2,3,5,6
+spell.learned:2,7,11
 spell.learned:3,12,13
-spell.learned:4,21,19
+spell.learned:4,19,21
 spell.learned:5
+# modifiers learned:
 modifier.learned:1,3
 modifier.learned:2,3
 modifier.learned:3,3

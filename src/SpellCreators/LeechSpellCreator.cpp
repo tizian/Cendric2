@@ -3,10 +3,6 @@
 
 LeechSpellCreator::LeechSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner)
 {
-	m_allowedModifiers.push_back(SpellModifierType::Damage);
-	m_allowedModifiers.push_back(SpellModifierType::Count);
-	m_allowedModifiers.push_back(SpellModifierType::Reflect);
-	m_allowedModifiers.push_back(SpellModifierType::Speed);
 }
 
 void LeechSpellCreator::executeSpell(const sf::Vector2f &target)

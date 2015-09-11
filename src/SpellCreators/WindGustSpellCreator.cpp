@@ -3,9 +3,6 @@
 
 WindGustSpellCreator::WindGustSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner)
 {
-	m_allowedModifiers.push_back(SpellModifierType::Duration);
-	m_allowedModifiers.push_back(SpellModifierType::Range);
-	m_allowedModifiers.push_back(SpellModifierType::Strength);
 }
 
 void WindGustSpellCreator::executeSpell(const sf::Vector2f &target)

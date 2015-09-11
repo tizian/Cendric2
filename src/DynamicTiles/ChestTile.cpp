@@ -148,4 +148,8 @@ void ChestTile::onRightClick()
 		}
 		g_inputController->lockAction();
 	}
+	else
+	{
+		m_screen->setTooltipText(g_textProvider->getText("IsLocked"), sf::Color::Red, true);
+	}
 }

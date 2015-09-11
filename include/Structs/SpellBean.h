@@ -7,6 +7,7 @@
 #include "Enums/SpellType.h"
 #include "Enums/DamageType.h"
 #include "Enums/Key.h"
+#include "Structs/SpellModifier.h"
 
 /* describes the attributes of a spell */
 struct SpellBean
@@ -39,6 +40,7 @@ struct SpellBean
 	Key inputKey;
 
 	static SpellBean getSpellBean(SpellID id);
+	static std::vector<SpellModifierType> getAllowedModifiers(SpellID id);
 
 private:
 	static SpellBean getChopSpellBean();

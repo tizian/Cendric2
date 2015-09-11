@@ -5,7 +5,7 @@
 
 #include "GUI/BitmapText.h"
 #include "ResourceManager.h"
-#include "GUI/InventoryDescriptionWindow.h"
+#include "GUI/ModifierDescriptionWindow.h"
 
 class CharacterCore;
 
@@ -16,6 +16,7 @@ public:
 	ModifierSlot(const SpellModifier& modifier);
 	// constructor for empty slots.
 	ModifierSlot();
+	~ModifierSlot();
 
 	void select();
 	void deselect();
@@ -27,7 +28,10 @@ public:
 	void highlight(bool highlight);
 
 	void render(sf::RenderTarget& renderTarget) override;
+	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void onLeftJustPressed() override;
+	void onMouseOver() override;
+	void setNr(int nr);
 
 	void setPosition(const sf::Vector2f& pos) override;
 
@@ -36,6 +40,7 @@ public:
 	
 	GameObjectType getConfiguredType() const override;
 	const SpellModifier& getModifier() const;
+	int getNr() const;
 
 	static const float SIDE_LENGTH;
 	static const float MARGIN;
@@ -43,6 +48,11 @@ public:
 private:
 	bool m_isClicked = false;
 	bool m_isSelected = false;
+	int m_nr = -1;
+
+	void initWindow();
+	ModifierDescriptionWindow* m_descriptionWindow = nullptr;
+	bool m_showDescriptionWindow = false;
 
 	SpellModifier m_spellModifier;
 

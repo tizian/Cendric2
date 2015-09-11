@@ -30,6 +30,16 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
+	// highlights all slots that could take a spell modifier of this type.
+	// if highlight is false, unhighlights all modifier slots.
+	void highlightModifierSlots(SpellModifierType type, bool highlight);
+	void notifyModifierDrop(ModifierSlotClone* clone);
+
+	// highlights all slots that could take a spell of this type.
+	// if highlight is false, unhighlights all spell slots.
+	void highlightSpellSlots(SpellType type, bool highlight);
+	void notifySpellDrop(SpellSlotClone* clone);
+
 	// reloads depending on the core and its weapon
 	void reload();
 
@@ -37,6 +47,7 @@ private:
 	CharacterCore* m_core;
 	MapInterface* m_mapInterface = nullptr;
 	bool m_isVisible = false;
+	bool m_requireReload = false;
 
 	void init();
 	void clearAllSlots();
@@ -50,12 +61,15 @@ private:
 
 	std::vector<std::pair<SpellSlot, std::vector<ModifierSlot>>> m_weaponSlots;
 
-	ModifierSlot* m_selectedModifierSlot = nullptr;
-
 	void selectModifierSlot(ModifierSlot* selectedSlot);
-	
+	void selectSpellSlot(SpellSlot* selectedSlot);
+
+	ModifierSlot* m_selectedModifierSlot = nullptr;
+	SpellSlot* m_selectedSpellSlot = nullptr;
+
 	// used for drag & drop handling
 	ModifierSlotClone* m_currentModifierClone = nullptr;
+	SpellSlotClone* m_currentSpellClone = nullptr;
 	bool m_hasDraggingStarted = false;
 	bool m_isDragging = false;
 	// the mouse has to move this distance while pressed to spawn a clone.
@@ -67,8 +81,8 @@ private:
 	const float TEXT_OFFSET = 20.f;
 	const float MARGIN = 10.f;
 
-	const float WIDTH = Spellbook::WIDTH;
 	const float TOP = Spellbook::TOP;
 	const float LEFT = Spellbook::LEFT + Spellbook::WIDTH + MARGIN;
 	const float HEIGHT = Spellbook::HEIGHT;
+	const float WIDTH = 2 * TEXT_OFFSET + 2 * SpellSlot::RADIUS + 4 * MARGIN + 3 * ModifierSlot::SIDE_LENGTH;
 };

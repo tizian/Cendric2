@@ -33,6 +33,8 @@ public:
 		int,
 		std::map < SpellModifierType, SpellModifier >> >>& getWeaponSlots() const;
 
+	void reload();
+
 private:
 
 	std::vector<std::pair<

@@ -101,6 +101,8 @@ public:
 			return "SpellTelekinesis";
 		case SpellID::Unlock:
 			return "SpellUnlock";
+		case SpellID::WindGust:
+			return "SpellWindGust";
 		}
 	}
 
