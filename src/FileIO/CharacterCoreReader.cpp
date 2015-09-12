@@ -39,6 +39,22 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : there can't be more spell slots than 5 on a weapon");
 		return false;
 	}
+	for (auto& it : data.questStates)
+	{
+		if (it.first.empty())
+		{
+			g_logger->logError("CharacterCoreReader", "Error in savegame data : quest id empty");
+			return false;
+		}
+	}
+	for (auto& it : data.npcStates)
+	{
+		if (it.first.empty())
+		{
+			g_logger->logError("CharacterCoreReader", "Error in savegame data : npc id empty");
+			return false;
+		}
+	}
 	
 	return true;
 }
@@ -259,12 +275,13 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
-	QuestID id = static_cast<QuestID>(atoi(startData));
-	if (id <= QuestID::Void || id >= QuestID::MAX)
-	{
-		g_logger->logError("CharacterCoreReader", "Quest ID not recognized: " + std::to_string(static_cast<int>(id)));
+	string questID(startData);
+	int count = countToNextChar(startData, end, ',');
+	if (count == -1) {
 		return false;
 	}
+	questID = questID.substr(0, count);
+
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	QuestState state = static_cast<QuestState>(atoi(startData));
@@ -273,7 +290,7 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 		g_logger->logError("CharacterCoreReader", "Quest State not recognized: " + std::to_string(static_cast<int>(state)));
 		return false;
 	}
-	data.questStates.insert({ id, state });
+	data.questStates.insert({ questID, state });
 	return true;
 }
 

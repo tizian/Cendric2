@@ -2,10 +2,26 @@
 #include "MapMainCharacter.h"
 #include "Screens/MapScreen.h"
 
-void NPC::load(MapMainCharacter* mainChar, const std::string& id)
+void NPC::load(MapMainCharacter* mainChar, const NPCBean& bean)
 {
 	m_mainChar = mainChar;
-	m_npcID = id;
+	m_bean = bean;
+
+	Animation idleAnimation;
+	setSpriteOffset(sf::Vector2f(0.f, 0.f));
+	setBoundingBox(bean.boundingBox);
+	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_npcs));
+	idleAnimation.addFrame(bean.texturePosition);
+
+	addAnimation(GameObjectState::Idle, idleAnimation);
+	setFrameTime(sf::seconds(10.f));
+	
+	// initial values
+	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
+	playCurrentAnimation(false);
+
+	setPosition(bean.position);
+	setTooltipText(g_textProvider->getText(bean.id));
 	setDebugBoundingBox(sf::Color::Magenta);
 }
 
@@ -21,7 +37,7 @@ void NPC::onRightClick()
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= TALKING_RANGE)
 	{
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
-		mapScreen->setDialogue(m_npcID, m_dialogueID);
+		mapScreen->setDialogue(m_bean);
 	}
 	else
 	{
@@ -59,21 +75,21 @@ void NPC::update(const sf::Time& frameTime)
 
 void NPC::setTalksActive(bool talksActive)
 {
-	m_talksActive = talksActive;
+	m_bean.talksActive = talksActive;
 }
 
-void NPC::setDialogueID(DialogueID id)
+void NPC::setDialogueID(const std::string& id)
 {
-	m_dialogueID = id;
+	m_bean.dialogueID = id;
 }
 
 void NPC::checkCollisionWithMainChar()
 {
-	if (m_talksActive && getBoundingBox()->intersects(*(m_mainChar->getBoundingBox())))
+	if (!m_bean.dialogueID.empty() && m_bean.talksActive && getBoundingBox()->intersects(*(m_mainChar->getBoundingBox())))
 	{
 		setTalksActive(false);
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
-		mapScreen->setDialogue(m_npcID, m_dialogueID);
+		mapScreen->setDialogue(m_bean);
 	}
 }
 

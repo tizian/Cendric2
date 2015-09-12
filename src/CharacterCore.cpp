@@ -95,7 +95,7 @@ NPCState CharacterCore::getNPCState(const std::string& id)
 	return NPCState::Never_talked;
 }
 
-QuestState CharacterCore::getQuestState(QuestID id)
+QuestState CharacterCore::getQuestState(const std::string& id)
 {
 	if (m_data.questStates.find(id) != m_data.questStates.end())
 	{
@@ -114,7 +114,7 @@ void CharacterCore::setNPCState(const std::string& id, NPCState state)
 	m_data.npcStates.insert({ id, state });
 }
 
-void CharacterCore::setQuestState(QuestID id, QuestState state)
+void CharacterCore::setQuestState(const std::string& id, QuestState state)
 {
 	if (m_data.questStates.find(id) != m_data.questStates.end())
 	{

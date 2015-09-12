@@ -12,6 +12,7 @@ DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::LARGE, sf::C
 {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
 	m_speakerSprite.setPosition(sf::Vector2f(0.f, WINDOW_HEIGHT - 250.f));
+	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
 	m_speakerText = new BitmapText(L"");
 	m_speakerText->setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y));
 	m_speakerText->setCharacterSize(CHAR_SIZE_SPEAKER);
@@ -27,33 +28,42 @@ DialogueWindow::~DialogueWindow()
 	delete m_dialogueText;
 	delete m_speakerText;
 	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
+	g_textProvider->releaseDialogueText();
 }
 
-void DialogueWindow::load(const std::string& npcID, DialogueID dialogueID, CharacterCore* core)
+void DialogueWindow::load(const NPCBean& npcBean, CharacterCore* core)
 {
-	setNPC(npcID);
-	setDialogue(dialogueID, core);
+	setNPC(npcBean);
+	setDialogue(npcBean.dialogueID, core);
 }
 
-void DialogueWindow::setDialogue(DialogueID dialogueID, CharacterCore* core)
+void DialogueWindow::setDialogue(const std::string& dialogueID, CharacterCore* core)
 {
+	g_textProvider->releaseDialogueText();
 	delete m_dialogue;
 	m_dialogue = new Dialogue();
 	m_dialogue->load(dialogueID, core, this);
+	
+	if (m_dialogue->getID().size() > 4)
+	{
+		// removing the .lua
+		std::string dialogueTranslations = m_dialogue->getID().substr(0, m_dialogue->getID().size() - 4);
+		// adding .csv
+		dialogueTranslations = dialogueTranslations + ".csv";
+		// if file doesn't exist, text provider will do nothing.
+		g_textProvider->loadDialogueText(dialogueTranslations);
+	}
+	 
 	if (!m_dialogue->updateWindow())
 	{
 		g_logger->logError("DialogueWindow", "No node in current dialogue");
 	}
 }
 
-void DialogueWindow::setNPC(const std::string& npc)
+void DialogueWindow::setNPC(const NPCBean& npc)
 {
-	NPCFactory factory;
-	NPCBean bean = DEFAULT_NPC;
-	factory.loadNPCBean(bean, npc);
-	
-	m_npcTexturePosition = bean.dialogueTexturePositon;
-	m_npcName = g_textProvider->getText(bean.name);
+	m_npcTexturePosition = npc.dialogueTexturePositon;
+	m_npcName = g_textProvider->getText(npc.id);
 }
 
 void DialogueWindow::setNPCTalking(const std::string& text)

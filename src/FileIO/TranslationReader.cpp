@@ -11,10 +11,9 @@ TranslationReader::~TranslationReader()
 {
 }
 
-bool TranslationReader::readTranslations(Language lang, std::map<std::string, std::wstring>& translationMap) const
+bool TranslationReader::readTranslations(Language lang, std::map<std::string, std::wstring>& translationMap, const std::string& filename) const
 {
-	translationMap.clear();
-	wstring contents = getFileContentsWide(g_resourceManager->getFilename(ResourceID::Translations));
+	wstring contents = getFileContentsWide(filename.c_str());
 	if (contents.empty())
 	{
 		return false;

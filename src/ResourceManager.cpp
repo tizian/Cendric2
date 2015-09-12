@@ -23,7 +23,6 @@ void ResourceManager::init()
 	m_fileNames.insert(
 	{
 		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
-		{ ResourceID::Translations, "res/translations.csv" },
 		{ ResourceID::Configuration, "config.ini" },
 		{ ResourceID::Save_folder, "saves/" },
 		{ ResourceID::Quicksave, "saves/quicksave.sav" },

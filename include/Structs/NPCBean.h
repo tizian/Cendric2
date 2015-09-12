@@ -3,32 +3,30 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Enums/DialogueID.h"
-
 struct NPCBean
 {
 	// npc on map
-	sf::Vector2f spriteOffset;
+	int objectID;
+	std::string id;
+	sf::Vector2f position;
 	sf::FloatRect boundingBox;
-	std::vector<sf::IntRect> texturePositions;
-	sf::Time frameTime;
-	std::string name;
+	sf::IntRect texturePosition;
 
 	// dialogue
 	bool talksActive;
-	DialogueID dialogueID;
+	std::string dialogueID;
 	sf::IntRect dialogueTexturePositon;
 };
 
 const struct NPCBean DEFAULT_NPC =
 {
-	sf::Vector2f(),
-	sf::FloatRect(),
-	std::vector<sf::IntRect>(),
-	sf::seconds(1),
+	-1,
 	"",
+	sf::Vector2f(0.f, 0.f),
+	sf::FloatRect(0.f, 0.f, 50.f, 50.f),
+	sf::IntRect(0, 0, 50, 50),
 
 	false,
-	DialogueID::Void,
+	"",
 	sf::IntRect(0, 0, 250, 250) // that's cendrics dialogue sprite
 };

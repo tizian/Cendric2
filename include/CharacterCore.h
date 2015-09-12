@@ -26,9 +26,9 @@ public:
 	// returns the item of id "id"
 	const Item& getItem(const std::string& id);
 	NPCState getNPCState(const std::string& id);
-	QuestState getQuestState(QuestID id);
+	QuestState getQuestState(const std::string& id);
 	void setNPCState(const std::string& id, NPCState state);
-	void setQuestState(QuestID id, QuestState state);
+	void setQuestState(const std::string& id, QuestState state);
 	void setQuickslot(const std::string& item, int nr);
 	// loads a new game with a new core and default attributes
 	void loadNew();

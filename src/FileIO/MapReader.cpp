@@ -12,7 +12,6 @@ MapReader::MapReader()
 
 MapReader::~MapReader()
 {
-	m_npcMap.clear();
 }
 
 bool MapReader::checkData(MapData& data) const
@@ -83,6 +82,19 @@ bool MapReader::checkData(MapData& data) const
 		if (it.levelSpawnPoint.x < 0.f || it.levelSpawnPoint.y < 0.f)
 		{
 			g_logger->logError("MapReader", "Error in map data : lmap exit level spawn point is negative.");
+			return false;
+		}
+	}
+	for (auto it : data.npcs)
+	{
+		if (it.id.empty())
+		{
+			g_logger->logError("MapReader", "Error in map data : a map npc has no id.");
+			return false;
+		}
+		if (it.objectID == -1)
+		{
+			g_logger->logError("MapReader", "Error in map data : a map npc has no object id.");
 			return false;
 		}
 	}
@@ -205,6 +217,10 @@ bool MapReader::readObjects(XMLElement* map, MapData& data) const
 		{
 			if (!readMapExits(objectgroup, data)) return false;
 		}
+		else if (name.find("npc") != std::string::npos)
+		{
+			if (!readNPCs(objectgroup, data)) return false;
+		}
 		else
 		{
 			g_logger->logError("MapReader", "Objectgroup with unknown name found in level.");
@@ -216,36 +232,141 @@ bool MapReader::readObjects(XMLElement* map, MapData& data) const
 	return true;
 }
 
-bool MapReader::readNPCLayer(const std::string& layer, MapData& data) const
+bool MapReader::readNPCs(XMLElement* objectgroup, MapData& data) const
 {
-	std::string layerData = layer;
-	size_t pos = 0;
-	std::vector<int> dynamicTileLayer;
-	int id;
-	std::string npcID;
-	while ((pos = layerData.find(",")) != std::string::npos)
-	{
-		id = std::stoi(layerData.substr(0, pos));
-		id = (id == 0) ? -1 : id - m_firstGidNPC;
-		if (m_npcMap.find(id) == m_npcMap.end())
-		{
-			g_logger->logError("MapReader", "Npc ID not recognized: " + std::to_string(id));
-			return false;
-		}
-		npcID = m_npcMap.at(id);
-		data.npcs.push_back(npcID);
-		layerData.erase(0, pos + 1);
-	}
-	id = std::stoi(layerData);
-	id = (id == 0) ? -1 : id - m_firstGidNPC;
-	if (m_npcMap.find(id) == m_npcMap.end())
-	{
-		g_logger->logError("MapReader", "Npc ID not recognized: " + std::to_string(id));
-		return false;
-	}
-	npcID = m_npcMap.at(id);
-	data.npcs.push_back(npcID);
+	XMLElement* object = objectgroup->FirstChildElement("object");
 
+	while (object != nullptr)
+	{
+		int id;
+		XMLError result = object->QueryIntAttribute("id", &id);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		NPCBean npc = DEFAULT_NPC;
+
+		npc.objectID = id;
+		npc.position.x = static_cast<float>(x);
+		npc.position.y = static_cast<float>(y);
+
+		// npc properties
+		XMLElement* properties = object->FirstChildElement("properties");
+		if (properties != nullptr)
+		{
+			XMLElement* _property = properties->FirstChildElement("property");
+			while (_property != nullptr)
+			{
+				const char* textAttr = nullptr;
+				textAttr = _property->Attribute("name");
+				if (textAttr == nullptr)
+				{
+					g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string attrText = textAttr;
+
+				if (attrText.compare("active") == 0)
+				{
+					int active;
+					result = _property->QueryIntAttribute("value", &active);
+					XMLCheckResult(result);
+					
+					npc.talksActive = (active != 0);
+				}
+				else if (attrText.compare("id") == 0)
+				{
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr)
+					{
+						g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					npc.id = textAttr;
+				}
+				else if (attrText.compare("dialogueid") == 0)
+				{
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr)
+					{
+						g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					npc.dialogueID = textAttr;
+				}
+				else if (attrText.compare("spritetexture") == 0)
+				{
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr)
+					{
+						g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					std::string tex = textAttr;
+
+					size_t pos = 0;
+					if ((pos = tex.find(",")) == std::string::npos) return false;
+					npc.texturePosition.left = std::stoi(tex.substr(0, pos));
+					tex.erase(0, pos + 1);
+					npc.texturePosition.top = std::stoi(tex);
+				}
+				else if (attrText.compare("dialoguetexture") == 0)
+				{
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr)
+					{
+						g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					std::string tex = textAttr;
+
+					size_t pos = 0;
+					if ((pos = tex.find(",")) == std::string::npos) return false;
+					npc.dialogueTexturePositon.left = std::stoi(tex.substr(0, pos));
+					tex.erase(0, pos + 1);
+					npc.dialogueTexturePositon.top = std::stoi(tex);
+				}
+				else if (attrText.compare("boundingbox") == 0)
+				{
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr)
+					{
+						g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					std::string bb = textAttr;
+
+					size_t pos = 0;
+					if ((pos = bb.find(",")) == std::string::npos) return false;
+					npc.boundingBox.left = static_cast<float>(std::stoi(bb.substr(0, pos)));
+					bb.erase(0, pos + 1);
+					if ((pos = bb.find(",")) == std::string::npos) return false;
+					npc.boundingBox.top = static_cast<float>(std::stoi(bb.substr(0, pos)));
+					bb.erase(0, pos + 1);
+					if ((pos = bb.find(",")) == std::string::npos) return false;
+					npc.boundingBox.width = static_cast<float>(std::stoi(bb.substr(0, pos)));
+					bb.erase(0, pos + 1);
+					npc.boundingBox.height = static_cast<float>(std::stoi(bb));
+				}
+
+				_property = _property->NextSiblingElement("property");
+			}
+		}
+
+		data.npcs.push_back(npc);
+		object = object->NextSiblingElement("object");
+	}
 	return true;
 }
 
@@ -334,10 +455,6 @@ bool MapReader::readLayers(XMLElement* map, MapData& data) const
 		{
 			if (!readCollidableLayer(layerData, data)) return false;
 		}
-		else if (name.find("npc") != std::string::npos)
-		{
-			if (!readNPCLayer(layerData, data)) return false;
-		}
 		else
 		{
 			g_logger->logError("MapReader", "Layer with unknown name found in map.");
@@ -346,99 +463,6 @@ bool MapReader::readLayers(XMLElement* map, MapData& data) const
 
 		layer = layer->NextSiblingElement("layer");
 	}
-	return true;
-}
-
-
-bool MapReader::readFirstGridIDs(XMLElement* map, MapData& data) 
-{
-	XMLElement* tileset = map->FirstChildElement("tileset");
-
-	m_firstGidNPC = 0;
-	const char* textAttr;
-	while (tileset != nullptr)
-	{
-		textAttr = nullptr;
-		textAttr = tileset->Attribute("name");
-		if (textAttr == nullptr)
-		{
-			g_logger->logError("MapReader", "XML file could not be read, no tileset->name attribute found.");
-			return false;
-		}
-		std::string name = textAttr;
-
-		int gid;
-		XMLError result = tileset->QueryIntAttribute("firstgid", &gid);
-		XMLCheckResult(result);
-
-		if (name.find("npc") != std::string::npos)
-		{
-			m_firstGidNPC = gid;
-			if (!readNpcIDs(tileset->FirstChildElement("tile"))) return false;
-			break;
-		}
-		
-		tileset = tileset->NextSiblingElement("tileset");
-	}
-
-	if (m_firstGidNPC <= 0)
-	{
-		g_logger->logError("MapReader", "Could not read firstgids, at least one of the required tilesets is missing.");
-		return false;
-	}
-	return true;
-}
-
-bool MapReader::readNpcIDs(XMLElement* _tile)
-{
-	m_npcMap.clear();
-	m_npcMap.insert({ -1, "" });
-	XMLElement* tile = _tile;
-
-	while (tile != nullptr)
-	{
-		int tileID;
-		XMLError result = tile->QueryIntAttribute("id", &tileID);
-		XMLCheckResult(result);
-
-		XMLElement* properties = tile->FirstChildElement("properties");
-		if (properties == nullptr)
-		{
-			g_logger->logError("MapReader", "Could not read npc tile properties, no tileset->tile->properties tag found.");
-			return false;
-		}
-		XMLElement* _property = properties->FirstChildElement("property");
-		if (_property == nullptr)
-		{
-			g_logger->logError("MapReader", "Could not read npc tile properties, no tileset->tile->properties->property tag found.");
-			return false;
-		}
-		const char* textAttr = nullptr;
-		textAttr = _property->Attribute("name");
-		if (textAttr == nullptr)
-		{
-			g_logger->logError("MapReader", "XML file could not be read, no tileset->tile->properties->property name attribute found.");
-			return false;
-		}
-		std::string name = textAttr;
-		if (name.compare("id") != 0)
-		{
-			g_logger->logError("MapReader", "XML file could not be read, wrong tile property (not \"id\").");
-			return false;
-		}
-		textAttr = nullptr;
-		textAttr = _property->Attribute("value");
-		if (textAttr == nullptr)
-		{
-			g_logger->logError("MapReader", "XML file could not be read, no tileset->tile->properties->property value attribute found.");
-			return false;
-		}
-
-		m_npcMap.insert({ tileID, std::string(textAttr) });
-
-		tile = tile->NextSiblingElement("tile");
-	}
-	
 	return true;
 }
 
@@ -456,7 +480,6 @@ bool MapReader::readMap(const char* fileName, MapData& data)
 	}
 
 	if (!readMapProperties(map, data)) return false;
-	if (!readFirstGridIDs(map, data)) return false;
 	if (!readLayers(map, data)) return false;
 	if (!readObjects(map, data)) return false;
 
@@ -605,4 +628,10 @@ void MapReader::updateData(MapData& data) const
 	data.mapRect.top = 0;
 	data.mapRect.height = static_cast<float>(data.tileSize.y * data.mapSize.y);
 	data.mapRect.width = static_cast<float>(data.tileSize.x * data.mapSize.x);
+
+	for (auto& it : data.npcs)
+	{
+		// why? why does tiled that to our objects?
+		it.position.y -= data.tileSize.y;
+	}
 }

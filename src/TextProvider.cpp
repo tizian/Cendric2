@@ -5,13 +5,46 @@ using namespace std;
 
 TextProvider* g_textProvider;
 
+void TextProvider::loadDialogueText(const std::string& filename)
+{
+	releaseDialogueText();
+	std::map<std::string, std::wstring> dialogueMap;
+	TranslationReader reader;
+	if (!reader.readTranslations(m_language, dialogueMap, filename))
+	{
+		g_logger->logInfo("TextProvider", "Dialogue has no translations or file: " + filename + " does not exist.");
+		return;
+	}
+	m_currentDialogue = filename;
+	for (auto& it : dialogueMap)
+	{
+		m_translationMap.insert(it);
+		m_currentDialogueTexts.push_back(it.first);
+	}
+}
+
+void TextProvider::releaseDialogueText()
+{
+	if (m_currentDialogue.empty()) return;
+	for (auto& it : m_currentDialogueTexts)
+	{
+		auto& element = m_translationMap.find(it);
+		if (element != m_translationMap.end()) m_translationMap.erase(element);
+	}
+	m_currentDialogue = "";
+	m_currentDialogueTexts.clear();
+}
+
 void TextProvider::reload()
 {
 	if (m_language != g_resourceManager->getConfiguration().language)
 	{
+		m_translationMap.clear();
+		m_currentDialogue = "";
+		m_currentDialogueTexts.clear();
 		setLanguage(g_resourceManager->getConfiguration().language);
 		TranslationReader reader;
-		reader.readTranslations(m_language, m_translationMap);
+		reader.readTranslations(m_language, m_translationMap, TRANSLATION_FILENAME);
 	}
 }
 

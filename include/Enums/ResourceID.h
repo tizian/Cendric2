@@ -5,7 +5,6 @@ enum class ResourceID
 	Void,
 
 	BitmapFont_default,
-	Translations,
 	Configuration,
 	Quicksave,
 	Save_folder,

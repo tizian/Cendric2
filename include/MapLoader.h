@@ -4,7 +4,6 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "NPCFactory.h"
 
 #include "Structs/MapData.h"
 #include "Structs/NPCBean.h"

@@ -8,8 +8,6 @@
 #include "CharacterCore.h"
 #include "GUI/DialogueWindow.h"
 
-#include "Enums/DialogueID.h"
-
 class MapScreen;
 
 // Cendric on the map

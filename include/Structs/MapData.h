@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Structs/MapExitBean.h"
+#include "Structs/NPCBean.h"
 
 struct MapData
 {
@@ -16,7 +17,6 @@ struct MapData
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTileRects;
 	std::vector<MapExitBean> mapExits;
-	std::vector<std::string> npcs;
-	std::vector<std::pair<std::string, sf::Vector2f>> npcPositions;
+	std::vector<NPCBean> npcs;
 	sf::FloatRect mapRect;
 };

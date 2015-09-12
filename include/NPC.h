@@ -5,9 +5,8 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 
-#include "Enums/DialogueID.h"
-
 #include "GUI/BitmapText.h"
+#include "Structs/NPCBean.h"
 
 class MapMainCharacter;
 
@@ -16,7 +15,7 @@ class NPC : public GameObject
 {
 public:
 	NPC() : GameObject() {}
-	void load(MapMainCharacter* mainChar, const std::string& id);
+	void load(MapMainCharacter* mainChar, const NPCBean& bean);
 	void onMouseOver() override;
 	void onInteractKey() override;
 	void onRightClick() override;
@@ -27,17 +26,15 @@ public:
 	void setTooltipText(const std::wstring& tooltip);
 	// if set to true, the npc will begin a dialogue with cendric when he enters its bounding box.
 	void setTalksActive(bool talksActive);
-	void setDialogueID(DialogueID id);
+	void setDialogueID(const std::string& id);
 
 	GameObjectType getConfiguredType() const override;
 
 private:
 	MapMainCharacter* m_mainChar;
-	std::string m_npcID;
+	NPCBean m_bean;
 
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;
-	bool m_talksActive;
-	DialogueID m_dialogueID;
 	const float TALKING_RANGE = 100.f;
 };

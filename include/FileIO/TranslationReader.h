@@ -13,7 +13,6 @@ public:
 	TranslationReader();
 	~TranslationReader();
 
-	// clears the translation map and fills it again with the translations of the language specified.
-	// returns if the operation was successful
-	bool readTranslations(Language lang, std::map<std::string, std::wstring>& translationMap) const;
+	// fills the translation map with the translations of the language specified.
+	bool readTranslations(Language lang, std::map<std::string, std::wstring>& translationMap, const std::string& filename) const;
 };

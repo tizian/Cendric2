@@ -249,7 +249,7 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 	{
 		string quest = string(QUEST_STATE);
 		quest.append(":");
-		quest.append(to_string(static_cast<int>(it.first)));
+		quest.append(it.first);
 		quest.append(",");
 		quest.append(to_string(static_cast<int>(it.second)));
 		quest.append("\n");

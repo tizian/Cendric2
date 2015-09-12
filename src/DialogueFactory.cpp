@@ -3,42 +3,11 @@
 
 using namespace std;
 
-void DialogueFactory::testLua()
-{
-	// create new Lua state
-	lua_State *lua_state;
-	lua_state = luaL_newstate();
-
-	// load Lua libraries
-	static const luaL_Reg lualibs[] =
-	{
-		{ "base", luaopen_base },
-		{ NULL, NULL }
-	};
-
-	const luaL_Reg *lib = lualibs;
-	for (; lib->func != NULL; lib++)
-	{
-		lib->func(lua_state);
-		lua_settop(lua_state, 0);
-	}
-
-	// run the Lua script
-	int ret = luaL_dofile(lua_state, "res/lua/test.lua");
-
-	if (ret != 0){
-		printf("Error occurs when calling luaL_dofile() Hint Machine 0x%x\n", ret);
-		printf("Error: %s", lua_tostring(lua_state, -1));
-	}
-
-	// close the Lua state
-	lua_close(lua_state); 
-}
-
 void DialogueFactory::loadDialogue(Dialogue& dialogue, CharacterCore* core)
 {
 	DialogueNode node;
-	testLua();
+	
+	/*
 	switch (dialogue.getID())
 	{
 	case DialogueID::Guard:
@@ -85,4 +54,5 @@ void DialogueFactory::loadDialogue(Dialogue& dialogue, CharacterCore* core)
 	default:
 		break;
 	}
+	*/
 }

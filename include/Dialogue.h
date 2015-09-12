@@ -5,8 +5,6 @@
 #include "TextProvider.h"
 #include "Structs/DialogueNode.h"
 
-#include "Enums/DialogueID.h"
-
 class CharacterCore;
 class DialogueWindow;
 
@@ -14,8 +12,8 @@ class DialogueWindow;
 class Dialogue
 {
 public:
-	void load(DialogueID id, CharacterCore* core, DialogueWindow* window);
-	DialogueID getID() const;
+	void load(const std::string& id, CharacterCore* core, DialogueWindow* window);
+	const std::string& getID() const;
 	void addNode(int tag, const DialogueNode& node);
 	void setNextNode(int tag);
 	void setRoot(int root);
@@ -24,7 +22,7 @@ public:
 private:
 	CharacterCore* m_core;
 	DialogueWindow* m_window;
-	DialogueNode* m_currentNode;
-	DialogueID m_id;
+	DialogueNode* m_currentNode = nullptr;
+	std::string m_id;
 	std::map<int, DialogueNode> m_nodes;
 };

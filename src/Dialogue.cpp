@@ -3,7 +3,7 @@
 #include "GUI/DialogueWindow.h"
 #include "DialogueFactory.h"
 
-void Dialogue::load(DialogueID id, CharacterCore* core, DialogueWindow* window)
+void Dialogue::load(const std::string& id, CharacterCore* core, DialogueWindow* window)
 {
 	m_id = id;
 	m_core = core;
@@ -19,7 +19,7 @@ void Dialogue::addNode(int tag, const DialogueNode& node)
 	m_nodes.insert({ tag, node });
 }
 
-DialogueID Dialogue::getID() const 
+const std::string& Dialogue::getID() const 
 {
 	return m_id;
 }
@@ -55,6 +55,7 @@ void Dialogue::setRoot(int root)
 
 void Dialogue::setNextNode(int choice)
 {
+	if (m_currentNode == nullptr) return;
 	int nextNode;
 	if (choice == -1)
 	{

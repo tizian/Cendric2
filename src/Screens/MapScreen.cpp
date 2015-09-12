@@ -99,7 +99,7 @@ void MapScreen::execOnExit(const Screen *nextScreen)
 	delete m_interface;
 }
 
-void MapScreen::setDialogue(const std::string& npc, DialogueID id)
+void MapScreen::setDialogue(const NPCBean& bean)
 {
 	if (m_dialogueWindow != nullptr)
 	{
@@ -107,7 +107,7 @@ void MapScreen::setDialogue(const std::string& npc, DialogueID id)
 	}
 
 	m_dialogueWindow = new DialogueWindow();
-	m_dialogueWindow->load(npc, id, m_characterCore);
+	m_dialogueWindow->load(bean, m_characterCore);
 }
 
 void MapScreen::render(sf::RenderTarget &renderTarget)
