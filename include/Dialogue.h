@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Structs/DialogueNode.h"
+#include "Dialogue/LuaScript.h"
 
 class CharacterCore;
 class DialogueWindow;
