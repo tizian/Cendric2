@@ -28,5 +28,5 @@ http://gamedevelopment.tutsplus.com/tutorials/make-a-splash-with-dynamic-2d-wate
 Tinyxml2 tutorial:
 https://shilohjames.wordpress.com/2014/04/27/tinyxml2-tutorial/
 
-Lua c++ binder:
-https://eliasdaler.wordpress.com/2013/10/11/lua_cpp_binder/
+Lua c++ tutorial
+https://eliasdaler.wordpress.com/2014/11/01/using-lua-with-c-luabridge-part-2-using-scripts-for-object-behaviour/
