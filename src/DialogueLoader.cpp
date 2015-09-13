@@ -1,11 +1,45 @@
-#include "DialogueFactory.h"
+#include "DialogueLoader.h"
 #include "CharacterCore.h"
 
 using namespace std;
+using namespace luabridge;
 
-void DialogueFactory::loadDialogue(Dialogue& dialogue, CharacterCore* core)
+DialogueLoader::DialogueLoader(Dialogue& dialogue, CharacterCore* core) : m_dialogue(dialogue)
+{
+	m_core = core;
+}
+
+void DialogueLoader::loadDialogue()
 {
 	DialogueNode node;
+
+	lua_State* L = luaL_newstate();
+	luaL_openlibs(L);
+	if (luaL_loadfile(L, m_dialogue.getID().c_str()))
+	{
+		g_logger->logError("Dialoge", "Cannot open lua script: " + m_dialogue.getID());
+		return;
+	}
+
+	lua_pcall(L, 0, 0, 0);
+
+	LuaRef s = getGlobal(L, "testString");
+	LuaRef n = getGlobal(L, "number");
+	std::string luaString = s.cast<std::string>();
+	int answer = n.cast<int>();
+	std::cout << luaString << std::endl;
+	std::cout << "And here's our number:" << answer << std::endl;
+
+	LuaRef t = getGlobal(L, "window");
+	LuaRef title = t["title"];
+	LuaRef w = t["width"];
+	LuaRef h = t["height"];
+	std::string titleString = title.cast<std::string>();
+	int width = w.cast<int>();
+	int height = h.cast<int>();
+	std::cout << titleString << std::endl;
+	std::cout << "width = " << width << std::endl;
+	std::cout << "height = " << height << std::endl;
 	
 	/*
 	switch (dialogue.getID())

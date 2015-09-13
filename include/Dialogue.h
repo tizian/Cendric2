@@ -4,7 +4,6 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Structs/DialogueNode.h"
-#include "Dialogue/LuaScript.h"
 
 class CharacterCore;
 class DialogueWindow;
@@ -19,7 +18,7 @@ public:
 	void setNextNode(int tag);
 	void setRoot(int root);
 	bool updateWindow();
-	
+
 private:
 	CharacterCore* m_core;
 	DialogueWindow* m_window;
