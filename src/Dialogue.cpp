@@ -35,9 +35,9 @@ bool Dialogue::updateWindow()
 	{
 		return false;
 	}
-	if (m_currentNode->type == DialogueNodeType::Descision)
+	if (m_currentNode->type == DialogueNodeType::Choice)
 	{
-		m_window->setDialogueChoice(m_currentNode->descisions);
+		m_window->setDialogueChoice(m_currentNode->choices);
 	}
 	else if (m_currentNode->type == DialogueNodeType::NPCTalking)
 	{
@@ -82,7 +82,7 @@ void Dialogue::setNextNode(int choice)
 	}
 	else
 	{
-		nextNode = m_currentNode->descisions[choice].second;
+		nextNode = m_currentNode->choices[choice].second;
 	}
 
 	if (nextNode == -1)

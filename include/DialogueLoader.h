@@ -24,10 +24,10 @@ public:
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);
 	void createNPCNode(int tag, int nextTag, const std::string& text);
-	void createDescisionNode(int tag);
+	void createChoiceNode(int tag);
 	
 	// methods to add properties to that node
-	void addDescision(int nextTag, const std::string& text);
+	void addChoice(int nextTag, const std::string& text);
 	void changeNPCState(const std::string& npcID, const std::string& state);
 	void changeQuestState(const std::string& questID, const std::string& state);
 	void addQuestProgress(const std::string& questID, const std::string& progress);

@@ -26,11 +26,12 @@ private:
 	void reload();
 
 	Window* m_window = nullptr;
-	BitmapText m_characterInfoText;
+	BitmapText m_title;
+	BitmapText m_namesText;
+	BitmapText m_attributeText;
 
+	const float CHARACTER_SIZE = 12.f;
 	const float TEXT_OFFSET = 20.f;
-	const float CHARACTERINFO_TOP = 100.f;
-	const float CHARACTERINFO_LEFT = 50.f;
-	const float CHARACTERINFO_HEIGHT = 500.f;
-	const float CHARACTERINFO_WIDTH = 700.f;
+	const float TOP = 100.f;
+	const float LEFT = 50.f;
 };

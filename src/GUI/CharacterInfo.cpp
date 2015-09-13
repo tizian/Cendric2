@@ -8,17 +8,61 @@ CharacterInfo::CharacterInfo(const AttributeBean* attributes)
 {
 	m_attributes = attributes;
 
-	// init window
-	sf::FloatRect box(CHARACTERINFO_LEFT, CHARACTERINFO_TOP, CHARACTERINFO_WIDTH, CHARACTERINFO_HEIGHT);
-	sf::Color mainColor = sf::Color(50, 50, 50, 100);
-	sf::Color backColor = sf::Color::Transparent;
-	m_window = new Window(box, WindowOrnamentStyle::LARGE, mainColor, backColor, CENDRIC_COLOR_PURPLE);
-
 	// init text
-	m_characterInfoText = BitmapText("");
-	m_characterInfoText.setPosition(sf::Vector2f(CHARACTERINFO_LEFT + TEXT_OFFSET, CHARACTERINFO_TOP + TEXT_OFFSET));
-	m_characterInfoText.setColor(sf::Color::White);
-	m_characterInfoText.setCharacterSize(12);
+	std::wstring names = L"";
+	names.append(g_textProvider->getText("Health") + L":\n");
+	names.append(g_textProvider->getText("HealthRegeneration") + L":\n");
+	names.append(g_textProvider->getText("CriticalHitChance") + L":\n");
+	names.append(g_textProvider->getText("Haste") + L":\n\n");
+
+	// dmg 
+	names.append(g_textProvider->getText("PhysicalDamage") + L":\n");
+	names.append(g_textProvider->getText("FireDamage") + L":\n");
+	names.append(g_textProvider->getText("IceDamage") + L":\n");
+	names.append(g_textProvider->getText("ShadowDamage") + L":\n");
+	names.append(g_textProvider->getText("LightDamage") + L":\n\n");
+
+	// resistance
+	names.append(g_textProvider->getText("Armor") + L":\n");
+	names.append(g_textProvider->getText("FireResistance") + L":\n");
+	names.append(g_textProvider->getText("IceResistance") + L":\n");
+	names.append(g_textProvider->getText("ShadowResistance") + L":\n");
+	names.append(g_textProvider->getText("LightResistance") + L":\n");
+
+	m_namesText.setString(names);
+	m_namesText.setCharacterSize(12);
+	m_namesText.setColor(sf::Color::White);
+
+	m_attributeText.setString("");
+	m_attributeText.setCharacterSize(12);
+	m_attributeText.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+
+	m_title = BitmapText(g_textProvider->getText("CharacterInfo"));
+	m_title.setCharacterSize(12);
+	m_title.setColor(sf::Color::White);
+
+	float width = 3 * TEXT_OFFSET + 2 * m_namesText.getLocalBounds().width;
+	float height = 3 * TEXT_OFFSET + m_title.getLocalBounds().height + m_namesText.getLocalBounds().height;
+
+	m_title.setPosition(sf::Vector2f(
+		LEFT + ((width - m_title.getLocalBounds().width) / 2.f), 
+		TOP + TEXT_OFFSET));
+	m_namesText.setPosition(sf::Vector2f(
+		LEFT + TEXT_OFFSET,
+		m_title.getPosition().y + m_title.getLocalBounds().height + TEXT_OFFSET));
+	m_attributeText.setPosition(sf::Vector2f(
+		LEFT + width / 2.f,
+		m_title.getPosition().y + m_title.getLocalBounds().height + TEXT_OFFSET));
+
+	// init window
+	sf::FloatRect box(LEFT, TOP, width, height);
+	m_window = new Window(box,
+		WindowOrnamentStyle::LARGE,
+		CENDRIC_COLOR_TRANS_BLACK, // main
+		sf::Color::Transparent, // back
+		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
+
+	reload();
 }
 
 CharacterInfo::~CharacterInfo()
@@ -36,105 +80,76 @@ void CharacterInfo::render(sf::RenderTarget& target) const
 	if (m_isVisible)
 	{
 		m_window->render(target);
-		target.draw(m_characterInfoText);
+		target.draw(m_title);
+		target.draw(m_namesText);
+		target.draw(m_attributeText);
 	}
 }
 
 void CharacterInfo::reload()
 {
-	// update text
-	std::wstring infoText = L"";
-	infoText.append(g_textProvider->getText("CharacterInfo"));
-	infoText.append(L"\n\n");
-	// health
-	infoText.append(g_textProvider->getText("Health"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->currentHealthPoints));
-	infoText.append(L"/");
-	infoText.append(std::to_wstring(m_attributes->maxHealthPoints));
-	infoText.append(L"\n");
+	// update attributes
+	std::wstring attributes = L"";
+	attributes.append(std::to_wstring(m_attributes->currentHealthPoints));
+	attributes.append(L"/");
+	attributes.append(std::to_wstring(m_attributes->maxHealthPoints));
+	attributes.append(L"\n");
 
 	// health regeneration
-	infoText.append(g_textProvider->getText("HealthRegeneration"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->healthRegenerationPerS));
-	infoText.append(L"/s\n");
+	attributes.append(std::to_wstring(m_attributes->healthRegenerationPerS));
+	attributes.append(L"/s\n");
 
 	// crit
-	infoText.append(g_textProvider->getText("CriticalHitChance"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->criticalHitChance));
-	infoText.append(L"%\n");
+	attributes.append(std::to_wstring(m_attributes->criticalHitChance));
+	attributes.append(L"%\n");
 
 	// cooldown reduction
-	infoText.append(g_textProvider->getText("Haste"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->haste));
-	infoText.append(L" - ");
-	infoText.append(std::to_wstring(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
-	infoText.append(L"% " + g_textProvider->getText("CooldownReduction"));
-	infoText.append(L"\n");
+	attributes.append(std::to_wstring(m_attributes->haste));
+	attributes.append(L" - ");
+	attributes.append(std::to_wstring(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
+	attributes.append(L"% " + g_textProvider->getText("CooldownReduction"));
+	attributes.append(L"\n\n");
 
 	// dmg 
-	infoText.append(g_textProvider->getText("PhysicalDamage"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->damagePhysical));
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("FireDamage"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->damageFire));
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("IceDamage"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->damageIce));
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("ShadowDamage"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->damageShadow));
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("LightDamage"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->damageLight));
-	infoText.append(L"\n");
+	attributes.append(std::to_wstring(m_attributes->damagePhysical) + L"\n");
+	attributes.append(std::to_wstring(m_attributes->damageFire) + L"\n");
+	attributes.append(std::to_wstring(m_attributes->damageIce) + L"\n");
+	attributes.append(std::to_wstring(m_attributes->damageShadow) + L"\n");
+	attributes.append(std::to_wstring(m_attributes->damageLight) + L"\n\n");
 
 	// resistance
-	infoText.append(g_textProvider->getText("Armor"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->resistancePhysical));
-	infoText.append(L" - ");
-	infoText.append(std::to_wstring(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
-	infoText.append(L"% " + g_textProvider->getText("Reduction"));
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("FireResistance"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->resistanceFire));
-	infoText.append(L" - ");
-	infoText.append(std::to_wstring(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
-	infoText.append(L"% " + g_textProvider->getText("Reduction"));
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("IceResistance"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->resistanceIce));
-	infoText.append(L" - ");
-	infoText.append(std::to_wstring(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
-	infoText.append(L"% " + g_textProvider->getText("Reduction"));
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("ShadowResistance"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->resistanceShadow));
-	infoText.append(L" - ");
-	infoText.append(std::to_wstring(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
-	infoText.append(L"% " + g_textProvider->getText("Reduction"));
+	attributes.append(std::to_wstring(m_attributes->resistancePhysical));
+	attributes.append(L" - ");
+	attributes.append(std::to_wstring(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
+	attributes.append(L"% " + g_textProvider->getText("Reduction"));
+	attributes.append(L"\n");
 
-	infoText.append(L"\n");
-	infoText.append(g_textProvider->getText("LightResistance"));
-	infoText.append(L": ");
-	infoText.append(std::to_wstring(m_attributes->resistanceLight));
-	infoText.append(L" - ");
-	infoText.append(std::to_wstring(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
-	infoText.append(L"% " + g_textProvider->getText("Reduction"));
-	infoText.append(L"\n");
-	m_characterInfoText.setString(infoText);
+	attributes.append(std::to_wstring(m_attributes->resistanceFire));
+	attributes.append(L" - ");
+	attributes.append(std::to_wstring(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
+	attributes.append(L"% " + g_textProvider->getText("Reduction"));
+	attributes.append(L"\n");
+
+	attributes.append(std::to_wstring(m_attributes->resistanceIce));
+	attributes.append(L" - ");
+	attributes.append(std::to_wstring(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
+	attributes.append(L"% " + g_textProvider->getText("Reduction"));
+	attributes.append(L"\n");
+
+	attributes.append(std::to_wstring(m_attributes->resistanceShadow));
+	attributes.append(L" - ");
+	attributes.append(std::to_wstring(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
+	attributes.append(L"% " + g_textProvider->getText("Reduction"));
+	attributes.append(L"\n");
+
+	attributes.append(std::to_wstring(m_attributes->resistanceLight));
+	attributes.append(L" - ");
+	attributes.append(std::to_wstring(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
+	attributes.append(L"% " + g_textProvider->getText("Reduction"));
+	attributes.append(L"\n");
+	m_attributeText.setString(attributes);
+
+	m_window->setWidth(3 * TEXT_OFFSET + m_namesText.getLocalBounds().width + m_attributeText.getLocalBounds().width);
 }
 
 void CharacterInfo::show()

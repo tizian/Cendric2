@@ -82,15 +82,15 @@ void DialogueWindow::setCendricTalking(const std::string& text)
 	m_dialogueText->setString(g_textProvider->getCroppedText(text, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
 }
 
-void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& descisions)
+void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices)
 {
 	m_options.clear();
 	m_dialogueText->setString("");
 	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
 	m_speakerText->setString(m_cendricName);
-	for (int i = 0; i < descisions.size(); i++)
+	for (int i = 0; i < choices.size(); i++)
 	{
-		DialogueOption option(descisions[i].first, i);
+		DialogueOption option(choices[i].first, i);
 		option.deselect();
 		m_options.push_back(option);
 	}

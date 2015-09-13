@@ -204,7 +204,7 @@ sf::Time Enemy::getConfiguredWaitingTime() const
 	return sf::seconds(2);
 }
 
-sf::Time Enemy::getConfiguredRandomDescisionTime() const
+sf::Time Enemy::getConfiguredRandomDecisionTime() const
 {
 	int r = rand() % 1500 + 200;
 	return sf::milliseconds(r);
@@ -241,7 +241,7 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 	GameObject::updateTime(m_recoveringTime, frameTime);
 	GameObject::updateTime(m_fearedTime, frameTime);
 	GameObject::updateTime(m_chasingTime, frameTime);
-	GameObject::updateTime(m_descisionTime, frameTime);
+	GameObject::updateTime(m_decisionTime, frameTime);
 
 	// handle stunned
 	if (m_stunnedTime > sf::Time::Zero)
@@ -281,11 +281,11 @@ void Enemy::updateEnemyState(const sf::Time& frameTime)
 		m_enemyState = EnemyState::Idle;
 	}
 
-	if (m_descisionTime == sf::Time::Zero)
+	if (m_decisionTime == sf::Time::Zero)
 	{
 		// decide again
-		m_descisionTime = getConfiguredRandomDescisionTime();
-		m_randomDescision = rand() % 3 - 1;
+		m_decisionTime = getConfiguredRandomDecisionTime();
+		m_randomDecision = rand() % 3 - 1;
 	}
 }
 
@@ -334,10 +334,10 @@ void Enemy::handleMovementInput()
 
 	else if (m_enemyState == EnemyState::Idle || m_enemyState == EnemyState::Waiting)
 	{
-		if (m_randomDescision != 0)
+		if (m_randomDecision != 0)
 		{
-			m_nextIsFacingRight = (m_randomDescision == 1);
-			newAccelerationX += (m_randomDescision * getConfiguredWalkAcceleration());
+			m_nextIsFacingRight = (m_randomDecision == 1);
+			newAccelerationX += (m_randomDecision * getConfiguredWalkAcceleration());
 		}
 	}
 

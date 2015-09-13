@@ -9,17 +9,17 @@ enum class DialogueNodeType
 {
 	CendricTalking,
 	NPCTalking,
-	Descision
+	Choice
 };
 
 struct DialogueNode
 {
 	int tag;
 	DialogueNodeType type;
-	// it is an empty string if this is a descision
+	// it is an empty string if this is a choice
 	std::string text;
-	// this is an empty vector if it is not a descision
-	std::vector<std::pair<std::string, int>> descisions;
+	// this is an empty vector if it is not a choice
+	std::vector<std::pair<std::string, int>> choices;
 	// The next tag. It may be 0 to infinity, but -1 means that the dialogue ends after that node
 	int nextTag;
 	std::map<std::string, QuestState> questStates;

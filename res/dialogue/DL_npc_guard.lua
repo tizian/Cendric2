@@ -6,9 +6,9 @@ loadDialogue = function(DL)
 			DL:changeNPCState("npc_guard", "passive")
 			DL:addNode()
 			
-			DL:createDescisionNode(1)
-			DL:addDescision(2, "DL_Choice_GiveMeAQuest") -- Give me a quest.
-			DL:addDescision(-1, "DL_Choice_Nothing") --  None of your business.
+			DL:createChoiceNode(1)
+			DL:addChoice(2, "DL_Choice_GiveMeAQuest") -- Give me a quest.
+			DL:addChoice(-1, "DL_Choice_Nothing") --  None of your business.
 			DL:addNode()
 			
 			DL:createNPCNode(2, 3, "DL_Guard_KillSomeRats") -- Okay, go and kill some rats for me.
@@ -32,9 +32,9 @@ loadDialogue = function(DL)
 			DL:createNPCNode(0, 1, "DL_Guard_StillHere") -- Are you sure you don't want to help me?
 			DL:addNode()
 			
-			DL:createDescisionNode(1)
-			DL:addDescision(-1, "DL_Choice_Yes") --  Yes, totally.
-			DL:addDescision(2, "DL_Choice_GiveMeAQuest") -- Give me a quest.
+			DL:createChoiceNode(1)
+			DL:addChoice(-1, "DL_Choice_Yes") --  Yes, totally.
+			DL:addChoice(2, "DL_Choice_GiveMeAQuest") -- Give me a quest.
 			DL:addNode()
 			
 			DL:createNPCNode(2, 3, "DL_Guard_KillSomeRats") -- Okay, go and kill some rats for me.

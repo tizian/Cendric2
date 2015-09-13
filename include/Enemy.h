@@ -81,8 +81,8 @@ protected:
 	float distToMainChar() const;
 	// if this bool is set to true, the enemy jumps in the next frame. used by the AI
 	bool m_jumps = false;
-	// a descision the enemy has taken an that lasts until it decides anew. -1: walk left, 0: stay, 1: walk right
-	int m_randomDescision = 0;
+	// a decision the enemy has taken an that lasts until it decides anew. -1: walk left, 0: stay, 1: walk right
+	int m_randomDecision = 0;
 	// time until the enemy can attack after it has taken a hit
 	sf::Time m_recoveringTime = sf::Time::Zero;
 	// time stunned
@@ -92,13 +92,13 @@ protected:
 	// time while the enemy does nothing because it tried to get to the main char and it failed
 	sf::Time m_waitingTime = sf::Time::Zero;
 	// time until next random desicion in idle state
-	sf::Time m_descisionTime = sf::Time::Zero;
+	sf::Time m_decisionTime = sf::Time::Zero;
 	// time the enemy will chase the main char anyway (even if it is out of aggro range)
 	sf::Time m_chasingTime = sf::Time::Zero;
 
 	virtual void handleMovementInput() override;
 	virtual sf::Time getConfiguredRecoveringTime() const;
-	virtual sf::Time getConfiguredRandomDescisionTime() const;
+	virtual sf::Time getConfiguredRandomDecisionTime() const;
 	// time feared after the fear condition is true (has nothing to do with spells)
 	virtual sf::Time getConfiguredFearedTime() const;
 	virtual sf::Time getConfiguredWaitingTime() const;

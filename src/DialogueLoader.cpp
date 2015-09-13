@@ -24,8 +24,8 @@ void DialogueLoader::loadDialogue()
 		.addFunction("isQuestState", &DialogueLoader::isQuestState)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
-		.addFunction("createDescisionNode", &DialogueLoader::createDescisionNode)
-		.addFunction("addDescision", &DialogueLoader::addDescision)
+		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
+		.addFunction("addChoice", &DialogueLoader::addChoice)
 		.addFunction("changeNPCState", &DialogueLoader::changeNPCState)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
@@ -56,14 +56,14 @@ void DialogueLoader::loadDialogue()
 	}
 }
 
-void DialogueLoader::addDescision(int nextTag, const std::string& text)
+void DialogueLoader::addChoice(int nextTag, const std::string& text)
 {
-	if (m_currentNode == nullptr || m_currentNode->type != DialogueNodeType::Descision)
+	if (m_currentNode == nullptr || m_currentNode->type != DialogueNodeType::Choice)
 	{
-		g_logger->logError("DialogueLoader", "Cannot add descision: No descision node created.");
+		g_logger->logError("DialogueLoader", "Cannot add choice: No choice node created.");
 		return;
 	}
-	m_currentNode->descisions.push_back(std::pair<std::string, int>(text, nextTag));
+	m_currentNode->choices.push_back(std::pair<std::string, int>(text, nextTag));
 }
 
 void DialogueLoader::changeNPCState(const std::string& npcID, const std::string& state)
@@ -190,7 +190,7 @@ void DialogueLoader::createNPCNode(int tag, int nextTag, const std::string& text
 	m_currentNode->text = text;
 }
 
-void DialogueLoader::createDescisionNode(int tag)
+void DialogueLoader::createChoiceNode(int tag)
 {
 	if (m_currentNode != nullptr)
 	{
@@ -198,7 +198,7 @@ void DialogueLoader::createDescisionNode(int tag)
 		return;
 	}
 	m_currentNode = new DialogueNode();
-	m_currentNode->type = DialogueNodeType::Descision;
+	m_currentNode->type = DialogueNodeType::Choice;
 	m_currentNode->tag = tag;
 }
 
@@ -209,9 +209,9 @@ void DialogueLoader::addNode()
 		g_logger->logError("DialogueLoader", "Cannot add current node, no node created.");
 		return;
 	}
-	if (m_currentNode->type == DialogueNodeType::Descision && m_currentNode->descisions.empty())
+	if (m_currentNode->type == DialogueNodeType::Choice && m_currentNode->choices.empty())
 	{
-		g_logger->logError("DialogueLoader", "Cannot add current node, a descision node cannot exist without descisions.");
+		g_logger->logError("DialogueLoader", "Cannot add current node, a choice node cannot exist without choices.");
 		return;
 	}
 	if (m_currentNode->nextTag == m_currentNode->tag)

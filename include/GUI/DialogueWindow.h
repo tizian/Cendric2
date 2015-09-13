@@ -40,7 +40,7 @@ public:
 
 	void setNPCTalking(const std::string& text);
 	void setCendricTalking(const std::string& text);
-	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& descisions); 
+	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices); 
 
 private:
 	void setNPC(const NPCBean& bean);
