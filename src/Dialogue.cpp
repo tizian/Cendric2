@@ -16,6 +16,11 @@ void Dialogue::load(const std::string& id, CharacterCore* core, DialogueWindow* 
 
 void Dialogue::addNode(int tag, const DialogueNode& node)
 {
+	if (m_nodes.find(tag) != m_nodes.end())
+	{
+		g_logger->logWarning("Dialogue", "Node with tag [" + std::to_string(tag) + "] already exists in the dialogoue tree.");
+		return;
+	}
 	m_nodes.insert({ tag, node });
 }
 
@@ -30,19 +35,28 @@ bool Dialogue::updateWindow()
 	{
 		return false;
 	}
-	if (!m_currentNode->descisions.empty())
+	if (m_currentNode->type == DialogueNodeType::Descision)
 	{
 		m_window->setDialogueChoice(m_currentNode->descisions);
 	}
+	else if (m_currentNode->type == DialogueNodeType::NPCTalking)
+	{
+		m_window->setNPCTalking(m_currentNode->text);
+	}
 	else
 	{
-		if (m_currentNode->isNPCSpeaking)
+		m_window->setCendricTalking(m_currentNode->text);
+	}
+
+	if (m_currentNode != nullptr)
+	{
+		for (auto& it : m_currentNode->npcStates)
 		{
-			m_window->setNPCTalking(m_currentNode->text);
+			m_core->setNPCState(it.first, it.second);
 		}
-		else
+		for (auto& it : m_currentNode->questStates)
 		{
-			m_window->setCendricTalking(m_currentNode->text);
+			m_core->setQuestState(it.first, it.second);
 		}
 	}
 	return true;
@@ -50,6 +64,11 @@ bool Dialogue::updateWindow()
 
 void Dialogue::setRoot(int root)
 {
+	if (m_nodes.find(root) == m_nodes.end())
+	{
+		g_logger->logWarning("Dialogue", "Node with tag [" + std::to_string(root) + "] does not exist in the tree and cannot be set as root.");
+		return;
+	}
 	m_currentNode = &m_nodes[root];
 }
 
@@ -73,12 +92,4 @@ void Dialogue::setNextNode(int choice)
 	}
 
 	m_currentNode = &m_nodes[nextNode];
-	for (auto& it : m_currentNode->npcProgress)
-	{
-		m_core->setNPCState(it.first, it.second);
-	}
-	for (auto& it : m_currentNode->questProgress)
-	{
-		m_core->setQuestState(it.first, it.second);
-	}
 }

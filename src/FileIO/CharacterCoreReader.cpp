@@ -285,7 +285,7 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	QuestState state = static_cast<QuestState>(atoi(startData));
-	if (state <= QuestState::Void || state >= QuestState::MAX)
+	if (state <= QuestState::VOID || state >= QuestState::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "Quest State not recognized: " + std::to_string(static_cast<int>(state)));
 		return false;
@@ -309,7 +309,7 @@ bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreDat
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	NPCState state = static_cast<NPCState>(atoi(startData));
-	if (state <= NPCState::Void || state >= NPCState::MAX)
+	if (state <= NPCState::VOID || state >= NPCState::MAX)
 	{
 		g_logger->logError("CharacterCoreReader", "NPC State not recognized: " + std::to_string(static_cast<int>(state)));
 		return false;
@@ -475,9 +475,10 @@ bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& 
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	endData = gotoNextChar(startData, end, '\n');
+	endData++;
 	string levelID(startData);
-	int count = countToNextChar(startData, end, ',');
-	int count2 = countToNextChar(startData, end, '\n');
+	int count = countToNextChar(startData, endData, ',');
+	int count2 = countToNextChar(startData, endData, '\n');
 	if (count == -1 && count2 == -1) {
 		return false;
 	}
@@ -485,7 +486,7 @@ bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& 
 	if (count != -1)
 	{
 		id = levelID.substr(0, count);
-		startData = gotoNextChar(start, end, ',');
+		startData = gotoNextChar(start, endData, ',');
 		startData++;
 
 		while (startData != NULL)

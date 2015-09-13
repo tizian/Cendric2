@@ -6,9 +6,9 @@ SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* o
 	m_owner = owner;
 	if (m_owner != nullptr) m_level = owner->getLevel();
 	if (m_owner != nullptr) m_attributeBean = owner->getAttributes();
-	if (m_owner == nullptr || !(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen())))
+	if (m_owner != nullptr && !(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen())))
 	{
-		g_logger->logWarning("SpellCreator", "spell owner has no (level)screen. Don't use this spellcreator to execute spells.");
+		g_logger->logError("SpellCreator", "spell owner has no (level)screen.");
 	}
 	m_spellBean = spellBean;
 

@@ -10,7 +10,6 @@
 class CharacterCore;
 
 // helper class to load lua files for dialogues
-// current class to mess around with lua
 class DialogueLoader
 {
 public:
@@ -18,18 +17,23 @@ public:
 	~DialogueLoader();
 	void loadDialogue();
 
-	// methods for lua
-	bool isNPCNeverTalkedTo(const std::string& npcID) const;
-	bool isQuestCompleted(const std::string& questID) const;
+	// methods for questions about the current game state
+	bool isNPCState(const std::string& npcID, const std::string& state) const;
+	bool isQuestState(const std::string& questID, const std::string& state) const;
 
 	// methods to create a node
-	void setCendricTalking();
-	void setNPCTalking();
-	void setText(const std::string& text);
-	void setNextTag(int tag);
+	void createCendricNode(int tag, int nextTag, const std::string& text);
+	void createNPCNode(int tag, int nextTag, const std::string& text);
+	void createDescisionNode(int tag);
+	
+	// methods to add properties to that node
+	void addDescision(int nextTag, const std::string& text);
+	void changeNPCState(const std::string& npcID, const std::string& state);
+	void changeQuestState(const std::string& questID, const std::string& state);
+	void addQuestProgress(const std::string& questID, const std::string& progress);
 
 	// finally, adding the node to the dialogue
-	void addNode(int tag);
+	void addNode();
 	void setRoot(int tag);
 
 private:

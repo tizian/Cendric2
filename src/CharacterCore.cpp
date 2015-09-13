@@ -101,7 +101,7 @@ QuestState CharacterCore::getQuestState(const std::string& id)
 	{
 		return m_data.questStates[id];
 	}
-	return QuestState::Void;
+	return QuestState::VOID;
 }
 
 void CharacterCore::setNPCState(const std::string& id, NPCState state)

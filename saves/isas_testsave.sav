@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:107
+time.played:121
 savegame.name:ISA'S TESTSAVE
-savegame.date:1441986163
+savegame.date:1442172775
 level.id:res/level/ratcave/ratcave.tmx
 level.position:525.000000,1175.000000
 is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:4000.000000,997.530884
+map.position:4031.125732,967.537903
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -37,9 +37,9 @@ enemies.looted:res/level/ratcave/ratcave.tmx
 # items looted in level:
 items.looted:res/level/ratcave/ratcave.tmx
 # chests looted in level:
-items.looted:res/level/ratcave/ratcave.tmx
 # quest states:
 # npc states:
+npc.state:npc_guard,2
 # spells learned:
 spell.learned:1,2,3,5,6
 spell.learned:2,7,11

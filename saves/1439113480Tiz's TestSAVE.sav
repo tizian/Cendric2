@@ -1,11 +1,12 @@
 # time played, in seconds
-time.played:52
+time.played:95
 savegame.name:TIZ'S TESTSAVE
-savegame.date:1439286194
+savegame.date:1442171471
 level.id:
 level.position:0.000000,0.000000
+is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:3991.611816,755.471375
+map.position:4163.390137,1074.484741
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -26,7 +27,16 @@ equipped.neck:
 equipped.ring1:
 equipped.ring2:
 equipped.weapon:it_we_icestaff
-# levels killed:
-# levels looted:
+# quickslot assignments:
+quickslot:1,
+quickslot:2,
+# enemies killed in level:
+# enemies looted in level:
+# items looted in level:
+# chests looted in level:
 # quest states:
+quest.state:quest_acaveofrats,1
 # npc states:
+npc.state:npc_guard,2
+# spells learned:
+# modifiers learned:

@@ -20,12 +20,15 @@ void DialogueLoader::loadDialogue()
 	luaL_openlibs(L);
 	getGlobalNamespace(L)
 		.beginClass<DialogueLoader>("Dialogue")
-		.addFunction("isNPCNeverTalkedTo", &DialogueLoader::isNPCNeverTalkedTo)
-		.addFunction("isQuestCompleted", &DialogueLoader::isQuestCompleted)
-		.addFunction("setNPCTalking", &DialogueLoader::setNPCTalking)
-		.addFunction("setCendricTalking", &DialogueLoader::setCendricTalking)
-		.addFunction("setText", &DialogueLoader::setText)
-		.addFunction("setNextTag", &DialogueLoader::setNextTag)
+		.addFunction("isNPCState", &DialogueLoader::isNPCState)
+		.addFunction("isQuestState", &DialogueLoader::isQuestState)
+		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
+		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
+		.addFunction("createDescisionNode", &DialogueLoader::createDescisionNode)
+		.addFunction("addDescision", &DialogueLoader::addDescision)
+		.addFunction("changeNPCState", &DialogueLoader::changeNPCState)
+		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
+		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
 		.addFunction("addNode", &DialogueLoader::addNode)
 		.endClass();
@@ -50,98 +53,176 @@ void DialogueLoader::loadDialogue()
 	catch (LuaException const& e) 
 	{
 		g_logger->logError("DialogeLoader", "LuaException: " + std::string(e.what()));
+	}
+}
+
+void DialogueLoader::addDescision(int nextTag, const std::string& text)
+{
+	if (m_currentNode == nullptr || m_currentNode->type != DialogueNodeType::Descision)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add descision: No descision node created.");
+		return;
+	}
+	m_currentNode->descisions.push_back(std::pair<std::string, int>(text, nextTag));
+}
+
+void DialogueLoader::changeNPCState(const std::string& npcID, const std::string& state)
+{
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot change state: no node created.");
+		return;
+	}
+	if (npcID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Npc ID cannot be empty.");
+		return;
+	}
+	NPCState npcState = resolveNPCState(state);
+	if (npcState == NPCState::VOID)
+	{
+		g_logger->logError("DialogueLoader", "Cannot change state: Npc state [" + state + "] does not exist.");
 		return;
 	}
 
-
-		/*
-		switch (dialogue.getID())
-		{
-		case DialogueID::Guard:
-		if (core->getNPCState("npc_guard") == NPCState::Never_talked)
-		{
-		node = DialogueNode();
-		node.isNPCSpeaking = true;
-		node.text = "DL_Guard_Hello"; // Hey you, stop! What are you doing here, so very alone? It's dangerous out here.
-		node.nextTag = 1;
-		dialogue.addNode(0, node);
-
-		node = DialogueNode();
-		node.isNPCSpeaking = false;
-		node.text = "";
-		node.descisions.push_back(pair<string, int>("DL_Choice_GiveMeAQuest", 2)); // Give me a quest.
-		node.descisions.push_back(pair<string, int>("DL_Choice_Nothing", -1)); // None of your business.
-		dialogue.addNode(1, node);
-
-		node = DialogueNode();
-		node.isNPCSpeaking = true;
-		node.text = "DL_Guard_KillSomeRats"; // Okay, go and kill some rats for me.
-		node.npcProgress.insert({ "npc_guard", NPCState::Passive });
-		node.nextTag = 3;
-		dialogue.addNode(2, node);
-
-		node = DialogueNode();
-		node.isNPCSpeaking = false;
-		node.text = "DL_Cendric_Okay"; // Okay, I will do that
-		node.questProgress.insert({ QuestID::A_Cave_Of_Rats, QuestState::Started });
-		node.nextTag = -1;
-		dialogue.addNode(3, node);
-
-		dialogue.setRoot(0);
-		}
-		else if (core->getQuestState(QuestID::A_Cave_Of_Rats) == QuestState::Started)
-		{
-		node.isNPCSpeaking = true;
-		node.text = "DL_Guard_KillThemAlready"; // You haven't killed those rats! Go and do your job.
-		node.nextTag = -1;
-		dialogue.addNode(4, node);
-		dialogue.setRoot(4);
-		}
-		break;
-		default:
-		break;
-		}
-		*/
+	m_currentNode->npcStates.insert({ npcID, npcState });
 }
 
-bool DialogueLoader::isNPCNeverTalkedTo(const std::string& npcID) const
+void DialogueLoader::changeQuestState(const std::string& questID, const std::string& state)
 {
-	return m_core->getNPCState(npcID) == NPCState::Never_talked;
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot change state: no node created.");
+		return;
+	}
+	if (questID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
+		return;
+	}
+	QuestState questState = resolveQuestState(state);
+	if (questState == QuestState::VOID)
+	{
+		g_logger->logError("DialogueLoader", "Cannot change state: Quest state [" + state + "] does not exist.");
+		return;
+	}
+
+	m_currentNode->questStates.insert({ questID, questState });
 }
 
-bool DialogueLoader::isQuestCompleted(const std::string& questID) const
+void DialogueLoader::addQuestProgress(const std::string& questID, const std::string& progress)
 {
-	return m_core->getQuestState(questID) == QuestState::Completed;
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add quest progress: no node created.");
+		return;
+	}
+	if (questID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
+		return;
+	}
+	if (m_currentNode->questProgress.find(questID) == m_currentNode->questProgress.end())
+	{
+		std::vector<std::string> vec;
+		m_currentNode->questProgress.insert({ questID, vec });
+	}
+	m_currentNode->questProgress.at(questID).push_back(progress);
 }
 
-void DialogueLoader::setCendricTalking()
+bool DialogueLoader::isNPCState(const std::string& npcID, const std::string& state) const
 {
-	if (m_currentNode == nullptr) m_currentNode = new DialogueNode();
-	m_currentNode->isNPCSpeaking = false;
+	NPCState npcState = resolveNPCState(state);
+	if (npcState == NPCState::VOID)
+	{
+		g_logger->logError("DialogueLoader", "Npc State: [" + state + "] does not exist");
+		return false;
+	}
+	if (npcID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Npc ID cannot be empty.");
+		return false;
+	}
+	return m_core->getNPCState(npcID) == npcState;
 }
 
-void DialogueLoader::setNPCTalking()
+bool DialogueLoader::isQuestState(const std::string& questID, const std::string& state) const
 {
-	if (m_currentNode == nullptr) m_currentNode = new DialogueNode();
-	m_currentNode->isNPCSpeaking = true;
+	QuestState questState = resolveQuestState(state);
+	if (questState == QuestState::VOID)
+	{
+		g_logger->logError("DialogueLoader", "Quest State: [" + state + "] does not exist");
+		return false;
+	}
+	if (questID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
+		return false;
+	}
+	return m_core->getQuestState(questID) == questState;
 }
 
-void DialogueLoader::setText(const std::string& text)
+void DialogueLoader::createCendricNode(int tag, int nextTag, const std::string& text)
 {
-	if (m_currentNode == nullptr) m_currentNode = new DialogueNode();
+	if (m_currentNode != nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add a new node to the dialogue if the old node is not yet added. Call \"addNode()\" to add that old node first.");
+		return;
+	}
+	m_currentNode = new DialogueNode();
+	m_currentNode->type = DialogueNodeType::CendricTalking;
+	m_currentNode->tag = tag;
+	m_currentNode->nextTag = nextTag;
 	m_currentNode->text = text;
 }
 
-void DialogueLoader::setNextTag(int tag)
+void DialogueLoader::createNPCNode(int tag, int nextTag, const std::string& text)
 {
-	if (m_currentNode == nullptr) m_currentNode = new DialogueNode();
-	m_currentNode->nextTag = tag;
+	if (m_currentNode != nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add a new node to the dialogue if the old node is not yet added. Call \"addNode()\" to add that old node first.");
+		return;
+	}
+	m_currentNode = new DialogueNode();
+	m_currentNode->type = DialogueNodeType::NPCTalking;
+	m_currentNode->tag = tag;
+	m_currentNode->nextTag = nextTag;
+	m_currentNode->text = text;
 }
 
-void DialogueLoader::addNode(int tag)
+void DialogueLoader::createDescisionNode(int tag)
 {
-	if (m_currentNode == nullptr) return;
-	m_dialogue.addNode(tag, *m_currentNode);
+	if (m_currentNode != nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add a new node to the dialogue if the old node is not yet added. Call \"addNode()\" to add that old node first.");
+		return;
+	}
+	m_currentNode = new DialogueNode();
+	m_currentNode->type = DialogueNodeType::Descision;
+	m_currentNode->tag = tag;
+}
+
+void DialogueLoader::addNode()
+{
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add current node, no node created.");
+		return;
+	}
+	if (m_currentNode->type == DialogueNodeType::Descision && m_currentNode->descisions.empty())
+	{
+		g_logger->logError("DialogueLoader", "Cannot add current node, a descision node cannot exist without descisions.");
+		return;
+	}
+	if (m_currentNode->nextTag == m_currentNode->tag)
+	{
+		g_logger->logWarning("DialogueLoader", "Loop detected in dialogue. Tag cannot equal next tag.");
+	}
+	if (m_currentNode->tag < 0)
+	{
+		g_logger->logWarning("DialogueLoader", "Tag of node should not be negative. -1 is reserved to end a dialogue.");
+	}
+	m_dialogue.addNode(m_currentNode->tag, *m_currentNode);
 	delete m_currentNode;
 	m_currentNode = nullptr;
 }

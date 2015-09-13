@@ -3,10 +3,17 @@
 // used for progress (character core)
 enum class NPCState
 {
-	Void,
+	VOID,
 	Never_talked,
 	Passive,
-	Nothing_to_say,
 	Angry,
 	MAX,
 };
+
+inline NPCState resolveNPCState(const std::string& state)
+{
+	if (state.compare("never_talked") == 0) return NPCState::Never_talked;
+	if (state.compare("passive") == 0) return NPCState::Passive;
+	if (state.compare("angry") == 0) return NPCState::Angry;
+	return NPCState::VOID;
+}
