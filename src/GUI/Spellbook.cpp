@@ -2,10 +2,8 @@
 #include "MapInterface.h"
 #include "GUI/WeaponWindow.h"
 
-float Spellbook::WIDTH = (WINDOW_WIDTH - Spellbook::LEFT - 20.f) / 3.f;
+float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
-float Spellbook::TOP = 100.f;
-float Spellbook::LEFT = 50.f;
 
 Spellbook::Spellbook(CharacterCore* core, bool clickable)
 {
@@ -18,17 +16,17 @@ Spellbook::Spellbook(CharacterCore* core, bool clickable)
 void Spellbook::init()
 {
 	// init window
-	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
+	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::LARGE,
-		CENDRIC_COLOR_TRANS_BLACK, // main
-		sf::Color::Transparent, // back
-		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
+		GUIConstants::MAIN_COLOR,
+		GUIConstants::BACK_COLOR,
+		GUIConstants::ORNAMENT_COLOR);
 
 	// init text
-	m_selectedTabText.setPosition(sf::Vector2f(LEFT + TEXT_OFFSET, TOP + TEXT_OFFSET));
+	m_selectedTabText.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
 	m_selectedTabText.setColor(sf::Color::White);
-	m_selectedTabText.setCharacterSize(CHARACTER_SIZE);
+	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	// init buttons
 	TexturedButton button = TexturedButton(sf::FloatRect(0, 0, BUTTON_SIZE.x, BUTTON_SIZE.y));
@@ -50,9 +48,9 @@ void Spellbook::init()
 	button.setTextureColor(CENDRIC_COLOR_TWILIGHT);
 	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Twilight));
 
-	float xOffset = LEFT + TEXT_OFFSET;
-	float yOffset = TOP + TEXT_OFFSET + CHARACTER_SIZE + 2 * MARGIN;
-	float buttonMargin = (WIDTH - 6 * BUTTON_SIZE.x - 2 * TEXT_OFFSET) / 5.f;
+	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
+	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
+	float buttonMargin = (WIDTH - 6 * BUTTON_SIZE.x - 2 * GUIConstants::TEXT_OFFSET) / 5.f;
 
 	for (auto& it : m_tabs)
 	{
@@ -361,19 +359,19 @@ void Spellbook::reload()
 
 void Spellbook::calculateModifierSlots()
 {
-	float yOffset = TOP + TEXT_OFFSET + 2 * CHARACTER_SIZE + 2 * MARGIN + 2 * BUTTON_SIZE.y;
-	float xOffset = LEFT + TEXT_OFFSET;
+	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + 2 * BUTTON_SIZE.y;
+	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
 	int maxY = 4;
 	int y = 1;
 	for (auto& it : m_core->getData().modfiersLearned)
 	{
 		BitmapText text;
-		text.setCharacterSize(CHARACTER_SIZE);
+		text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		text.setColor(CENDRIC_COLOR_WHITE);
 		text.setPosition(sf::Vector2f(xOffset, yOffset));
 		text.setString(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it.first)));
 		m_modifierTexts.push_back(text);
-		yOffset += CHARACTER_SIZE * 2;
+		yOffset += GUIConstants::CHARACTER_SIZE_M * 2;
 		for (int i = 0; i < it.second; i++)
 		{
 			SpellModifier modifier;
@@ -385,51 +383,50 @@ void Spellbook::calculateModifierSlots()
 		}
 		if (y >= maxY)
 		{
-			yOffset = TOP + TEXT_OFFSET + 2 * CHARACTER_SIZE + 2 * MARGIN + 2 * BUTTON_SIZE.y;
-			xOffset = LEFT + WIDTH - (3 * ModifierSlot::SIDE_LENGTH + 2 * MARGIN + TEXT_OFFSET);
+			yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + 2 * BUTTON_SIZE.y;
+			xOffset = GUIConstants::LEFT + WIDTH - (3 * ModifierSlot::SIDE_LENGTH + 2 * MARGIN + GUIConstants::TEXT_OFFSET);
 			y = 0;
 		}
 		else
 		{
 			y++;
-			yOffset += CHARACTER_SIZE + ModifierSlot::SIDE_LENGTH;
+			yOffset += GUIConstants::CHARACTER_SIZE_M + ModifierSlot::SIDE_LENGTH;
 		}
 	}
 }
 
 void Spellbook::calculateSpellSlots()
 {
-	float yOffset = TOP + TEXT_OFFSET + 2 * CHARACTER_SIZE + 4 * MARGIN + 1 * BUTTON_SIZE.y;
-	float xOffset = LEFT + TEXT_OFFSET;
+	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 4 * MARGIN + 1 * BUTTON_SIZE.y;
+	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
 	
 	for (auto& it : m_core->getData().spellsLearned)
 	{
 		for (auto& it2 : it.second)
 		{
-			
 			SpellSlot slot = SpellSlot(it2);
 			slot.setPosition(sf::Vector2f(xOffset, yOffset) + sf::Vector2f(SpellSlot::RADIUS, SpellSlot::RADIUS));
 
 			BitmapText text;
-			text.setCharacterSize(CHARACTER_SIZE);
+			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 			text.setColor(CENDRIC_COLOR_WHITE);
 			text.setString(g_textProvider->getText(EnumNames::getSpellIDName(it2)));
 			text.setPosition(sf::Vector2f(xOffset + SpellSlot::RADIUS * 2 + 2 * MARGIN, yOffset));
 
 			BitmapText textDesc;
-			textDesc.setCharacterSize(8);
+			textDesc.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 			textDesc.setColor(CENDRIC_COLOR_LIGHT_GREY);
 			textDesc.setString(g_textProvider->getCroppedText(
-				EnumNames::getSpellIDName(it2) + "Desc", 8, 
+				EnumNames::getSpellIDName(it2) + "Desc", GUIConstants::CHARACTER_SIZE_S,
 				static_cast<int>(WIDTH - (SpellSlot::RADIUS * 2 + 4 * MARGIN))));
-			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::RADIUS * 2 + 2 * MARGIN, yOffset + CHARACTER_SIZE + 4.f));
+			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::RADIUS * 2 + 2 * MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f));
 
 			std::pair<BitmapText, BitmapText> texts = std::pair<BitmapText, BitmapText>(text, textDesc);
 			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>(slot, texts));
 			yOffset += SpellSlot::RADIUS * 2 + MARGIN * 2;
 		}
 		
-		yOffset = TOP + TEXT_OFFSET + 2 * CHARACTER_SIZE + 4 * MARGIN + 1 * BUTTON_SIZE.y;
+		yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 4 * MARGIN + 1 * BUTTON_SIZE.y;
 	}
 }
 

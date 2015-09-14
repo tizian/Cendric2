@@ -30,37 +30,37 @@ CharacterInfo::CharacterInfo(const AttributeBean* attributes)
 	names.append(g_textProvider->getText("LightResistance") + L":\n");
 
 	m_namesText.setString(names);
-	m_namesText.setCharacterSize(12);
+	m_namesText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_namesText.setColor(sf::Color::White);
 
 	m_attributeText.setString("");
-	m_attributeText.setCharacterSize(12);
+	m_attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_attributeText.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
 
 	m_title = BitmapText(g_textProvider->getText("CharacterInfo"));
-	m_title.setCharacterSize(12);
+	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_title.setColor(sf::Color::White);
 
-	float width = 3 * TEXT_OFFSET + 2 * m_namesText.getLocalBounds().width;
-	float height = 3 * TEXT_OFFSET + m_title.getLocalBounds().height + m_namesText.getLocalBounds().height;
+	float width = 3 * GUIConstants::TEXT_OFFSET + 2 * m_namesText.getLocalBounds().width;
+	float height = 3 * GUIConstants::TEXT_OFFSET + m_title.getLocalBounds().height + m_namesText.getLocalBounds().height;
 
 	m_title.setPosition(sf::Vector2f(
-		LEFT + ((width - m_title.getLocalBounds().width) / 2.f), 
-		TOP + TEXT_OFFSET));
+		GUIConstants::LEFT + ((width - m_title.getLocalBounds().width) / 2.f),
+		GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
 	m_namesText.setPosition(sf::Vector2f(
-		LEFT + TEXT_OFFSET,
-		m_title.getPosition().y + m_title.getLocalBounds().height + TEXT_OFFSET));
+		GUIConstants::LEFT + GUIConstants::TEXT_OFFSET,
+		m_title.getPosition().y + m_title.getLocalBounds().height + GUIConstants::TEXT_OFFSET));
 	m_attributeText.setPosition(sf::Vector2f(
-		LEFT + width / 2.f,
-		m_title.getPosition().y + m_title.getLocalBounds().height + TEXT_OFFSET));
+		GUIConstants::LEFT + width / 2.f,
+		m_title.getPosition().y + m_title.getLocalBounds().height + GUIConstants::TEXT_OFFSET));
 
 	// init window
-	sf::FloatRect box(LEFT, TOP, width, height);
+	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, width, height);
 	m_window = new Window(box,
 		WindowOrnamentStyle::LARGE,
-		CENDRIC_COLOR_TRANS_BLACK, // main
-		sf::Color::Transparent, // back
-		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
+		GUIConstants::MAIN_COLOR,
+		GUIConstants::BACK_COLOR,
+		GUIConstants::ORNAMENT_COLOR);
 
 	reload();
 }
@@ -149,7 +149,7 @@ void CharacterInfo::reload()
 	attributes.append(L"\n");
 	m_attributeText.setString(attributes);
 
-	m_window->setWidth(3 * TEXT_OFFSET + m_namesText.getLocalBounds().width + m_attributeText.getLocalBounds().width);
+	m_window->setWidth(3 * GUIConstants::TEXT_OFFSET + m_namesText.getLocalBounds().width + m_attributeText.getLocalBounds().width);
 }
 
 void CharacterInfo::show()

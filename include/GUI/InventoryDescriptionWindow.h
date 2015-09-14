@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "Weapon.h"
 #include "Enums/EnumNames.h"
+#include "GUI/GUIConstants.h"
 
 class InventoryDescriptionWindow : public Window
 {

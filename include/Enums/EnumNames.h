@@ -7,6 +7,7 @@
 #include "Enums/SpellType.h"
 #include "Enums/SpellID.h"
 #include "Structs/SpellModifier.h"
+#include "Enums/QuestState.h"
 #include "Enums/DamageType.h"
 
 // pure static class used to resolve enum names.
@@ -46,6 +47,22 @@ public:
 			return "LightDamage";
 		case DamageType::Shadow:
 			return "ShadowDamage";
+		}
+	}
+
+	static std::string getQuestStateName(QuestState state)
+	{
+		switch (state) {
+		default:
+		case QuestState::MAX:
+		case QuestState::VOID:
+			return "Unknown";
+		case QuestState::Started:
+			return "Active";
+		case QuestState::Failed:
+			return "Failed";
+		case QuestState::Completed:
+			return "Completed";
 		}
 	}
 

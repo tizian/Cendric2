@@ -10,6 +10,7 @@
 #include "GUI/TexturedButton.h"
 #include "GUI/ModifierSlot.h"
 #include "GUI/ModifierSlotClone.h"
+#include "GUI/GUIConstants.h"
 
 class WeaponWindow;
 
@@ -34,8 +35,6 @@ public:
 	void reload();
 
 	static float WIDTH;
-	static float TOP;
-	static float LEFT;
 	static float HEIGHT;
 
 private:
@@ -83,8 +82,6 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 
-	const int CHARACTER_SIZE = 12;
-	const float TEXT_OFFSET = 20.f;
 	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(50.f, 50.f);
 	const float MARGIN = 10.f;
 };

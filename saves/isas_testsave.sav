@@ -1,20 +1,20 @@
 # time played, in seconds
-time.played:327
+time.played:332
 savegame.name:ISA'S TESTSAVE
-savegame.date:1442240070
+savegame.date:1442258057
 level.id:res/level/ratcave/ratcave.tmx
-level.position:410.000000,850.000000
+level.position:525.000000,1175.000000
 is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:3955.647705,1063.310425
+map.position:4000.000000,830.885681
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:7
+gold:8
 # items in inventory:
 item.id:it_fo_caveberry,1
-item.id:it_fo_cheese,5
+item.id:it_fo_cheese,6
 item.id:it_mi_goldengoblet,3
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2,3,3
@@ -34,17 +34,17 @@ equipped.weapon:it_we_icestaff
 quickslot:1,
 quickslot:2,
 # enemies killed in level:
-enemies.killed:res/level/ratcave/ratcave.tmx,1,13,14,15,16,18
+enemies.killed:res/level/ratcave/ratcave.tmx,14
 # enemies looted in level:
-enemies.looted:res/level/ratcave/ratcave.tmx,1,13,14,15,16,18
+enemies.looted:res/level/ratcave/ratcave.tmx,14
 # items looted in level:
-items.looted:res/level/ratcave/ratcave.tmx,1229
+items.looted:res/level/ratcave/ratcave.tmx
 # chests looted in level:
 items.looted:res/level/ratcave/ratcave.tmx
 # quest states:
 quest.state:quest_acaveofrats,1
 # quest targets killed:
-quest.progress.target:quest_acaveofrats,enemy_firerat,1,enemy_rat,5
+quest.progress.target:quest_acaveofrats,enemy_rat,1
 # quest conditions fulfilled:
 quest.progress.condition:quest_acaveofrats,test_condition
 # npc states:

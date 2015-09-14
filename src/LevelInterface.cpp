@@ -8,7 +8,8 @@ m_inventory(this),
 m_characterInfo(character->getAttributes()), 
 m_healthBar(character->getAttributes()), 
 m_quickSlotBar(this),
-m_spellbook(core, false)
+m_spellbook(core, false),
+m_questLog(core)
 {
 }
 
@@ -27,6 +28,7 @@ void LevelInterface::render(sf::RenderTarget& target)
 	m_quickSlotBar.render(target);
 	m_characterInfo.render(target);
 	m_spellbook.render(target);
+	m_questLog.render(target);
 	m_inventory.render(target);
 }
 
@@ -38,6 +40,7 @@ void LevelInterface::update(const sf::Time& frameTime)
 	m_quickSlotBar.update(frameTime);
 	updateInventory(frameTime);
 	updateSpellbook(frameTime);
+	updateQuestLog(frameTime);
 	updateCharacterInfo();
 }
 
@@ -84,14 +87,10 @@ void LevelInterface::updateCharacterInfo()
 	{
 		if (!m_characterInfo.isVisible())
 		{
-			if (m_inventory.isVisible())
-			{
-				m_inventory.hide();
-			}
-			if (m_spellbook.isVisible())
-			{
-				m_spellbook.hide();
-			}
+			if (m_inventory.isVisible()) m_inventory.hide();
+			if (m_spellbook.isVisible()) m_spellbook.hide();
+			if (m_questLog.isVisible()) m_questLog.hide();
+
 			m_characterInfo.show();
 		}
 		else
@@ -112,14 +111,10 @@ void LevelInterface::updateSpellbook(const sf::Time& frameTime)
 	{
 		if (!m_spellbook.isVisible())
 		{
-			if (m_inventory.isVisible())
-			{
-				m_inventory.hide();
-			}
-			if (m_characterInfo.isVisible())
-			{
-				m_characterInfo.hide();
-			}
+			if (m_characterInfo.isVisible()) m_characterInfo.hide();
+			if (m_inventory.isVisible()) m_inventory.hide();
+			if (m_questLog.isVisible()) m_questLog.hide();
+
 			m_spellbook.reload();
 			m_spellbook.show();
 		}
@@ -143,14 +138,10 @@ void LevelInterface::updateInventory(const sf::Time& frameTime)
 	{
 		if (!m_inventory.isVisible())
 		{
-			if (m_characterInfo.isVisible())
-			{
-				m_characterInfo.hide();
-			}
-			if (m_spellbook.isVisible())
-			{
-				m_spellbook.hide();
-			}
+			if (m_characterInfo.isVisible()) m_characterInfo.hide();
+			if (m_spellbook.isVisible()) m_spellbook.hide();
+			if (m_questLog.isVisible()) m_questLog.hide();
+
 			m_inventory.show();
 			m_inventory.reload();
 		}
@@ -166,6 +157,33 @@ void LevelInterface::updateInventory(const sf::Time& frameTime)
 	}
 
 	m_inventory.update(frameTime);
+}
+
+void LevelInterface::updateQuestLog(const sf::Time& frameTime)
+{
+	if (g_inputController->isKeyJustPressed(Key::Journal))
+	{
+		if (!m_questLog.isVisible())
+		{
+			if (m_characterInfo.isVisible()) m_characterInfo.hide();
+			if (m_spellbook.isVisible()) m_spellbook.hide();
+			if (m_inventory.isVisible()) m_inventory.hide();
+
+			m_questLog.show();
+			m_questLog.reload();
+		}
+		else
+		{
+			m_questLog.hide();
+		}
+	}
+	else if (m_questLog.isVisible() && g_inputController->isKeyJustPressed(Key::Escape))
+	{
+		m_questLog.hide();
+		g_inputController->lockAction();
+	}
+
+	m_questLog.update(frameTime);
 }
 
 void LevelInterface::setSpellManager(SpellManager* spellManager)

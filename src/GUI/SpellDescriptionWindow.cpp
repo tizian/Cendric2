@@ -6,8 +6,6 @@
 using namespace std;
 
 const float SpellDescriptionWindow::WIDTH = 340.f;
-const float MARGIN = 20.f;
-const int CHARACTER_SIZE = 8;
 
 inline std::wstring toStrMaxDecimals(float value, int decimals)
 {
@@ -23,17 +21,17 @@ inline std::wstring toStrMaxDecimals(float value, int decimals)
 SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	WindowOrnamentStyle::LARGE,
-	CENDRIC_COLOR_TRANS_BLACK, // main
-	sf::Color::Transparent, // back
-	CENDRIC_COLOR_LIGHT_PURPLE) // ornament
+	GUIConstants::MAIN_COLOR,
+	GUIConstants::BACK_COLOR,
+	GUIConstants::ORNAMENT_COLOR)
 {
-	m_titleText.setCharacterSize(12);
+	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(CENDRIC_COLOR_WHITE);
 
-	m_descriptionText.setCharacterSize(CHARACTER_SIZE);
+	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(CENDRIC_COLOR_LIGHT_GREY);
 
-	m_statsText.setCharacterSize(CHARACTER_SIZE);
+	m_statsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_statsText.setColor(CENDRIC_COLOR_WHITE);
 }
 
@@ -52,7 +50,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	delete creator;
 
 	m_titleText.setString(g_textProvider->getText(EnumNames::getSpellIDName(bean.id)));
-	m_descriptionText.setString(g_textProvider->getCroppedText(EnumNames::getSpellIDName(bean.id) + "Desc", CHARACTER_SIZE, static_cast<int>(WIDTH - 2 * MARGIN)));
+	m_descriptionText.setString(g_textProvider->getCroppedText(EnumNames::getSpellIDName(bean.id) + "Desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
 	wstring stats = L"\n";
 
@@ -152,9 +150,9 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 
 	m_statsText.setString(stats);
 
-	float height = 2 * MARGIN;
-	height += m_titleText.getLocalBounds().height + CHARACTER_SIZE * 2;
-	height += m_descriptionText.getLocalBounds().height + CHARACTER_SIZE;
+	float height = 2 * GUIConstants::TEXT_OFFSET;
+	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S * 2;
+	height += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
 	height += m_statsText.getLocalBounds().height;
 	setHeight(height);
 
@@ -174,12 +172,12 @@ void SpellDescriptionWindow::hide()
 void SpellDescriptionWindow::setPosition(const sf::Vector2f& position)
 {
 	Window::setPosition(position);
-	float y = position.y + MARGIN;
-	m_titleText.setPosition(position.x + MARGIN, y);
-	y += m_titleText.getLocalBounds().height + CHARACTER_SIZE;
-	m_descriptionText.setPosition(position.x + MARGIN, y);
-	y += m_descriptionText.getLocalBounds().height + CHARACTER_SIZE;
-	m_statsText.setPosition(position.x + MARGIN, y);
+	float y = position.y + GUIConstants::TEXT_OFFSET;
+	m_titleText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
+	y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	m_descriptionText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
+	y += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	m_statsText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
 }
 
 void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget)

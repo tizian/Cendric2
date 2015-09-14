@@ -4,18 +4,17 @@
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 #include "TextProvider.h"
-#include "Enums/EnumNames.h"
-#include "Structs/SpellBean.h"
+#include "Structs/QuestData.h"
+#include "CharacterCore.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/QuestLog.h"
 
-class SpellDescriptionWindow : public Window
+class QuestDescriptionWindow : public Window
 {
 public:
-	SpellDescriptionWindow();
+	QuestDescriptionWindow(const CharacterCore* core);
 
-	// sets the spell ID and modifiers for the window and reloads everything.
-	// the attributes should be the attributes of the core with the equipped items
-	void reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeBean* bean);
+	void reload(const std::string& questID);
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
 
@@ -25,9 +24,15 @@ public:
 	static const float WIDTH;
 
 private:
+	const CharacterCore* m_core;
+
 	bool m_isVisible = false;
 
 	BitmapText m_titleText;
 	BitmapText m_descriptionText;
-	BitmapText m_statsText;
+	BitmapText m_stateText;
+
+	std::vector<BitmapText> m_conditionTexts;
+	std::vector<BitmapText> m_targetsTexts;
+	std::vector<BitmapText> m_collectiblesTexts;
 };

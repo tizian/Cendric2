@@ -41,7 +41,7 @@ QuestData QuestLoader::loadQuest(const std::string& questID) const
 	questData.description = description.cast<std::string>();
 
 	LuaRef targets = getGlobal(L, "targets");
-	if (!targets.isNil() && targets.isTable())
+	if (targets.isTable())
 	{
 		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.
 		LuaRef element = targets[i];
@@ -61,7 +61,7 @@ QuestData QuestLoader::loadQuest(const std::string& questID) const
 	}
 
 	LuaRef collectibles = getGlobal(L, "collectibles");
-	if (!collectibles.isNil() && collectibles.isTable())
+	if (collectibles.isTable())
 	{
 		int i = 1;
 		LuaRef element = collectibles[i];
@@ -81,7 +81,7 @@ QuestData QuestLoader::loadQuest(const std::string& questID) const
 	}
 
 	LuaRef conditions = getGlobal(L, "conditions");
-	if (!conditions.isNil() && conditions.isTable())
+	if (conditions.isTable())
 	{
 		int i = 1;
 		LuaRef element = conditions[i];

@@ -12,6 +12,7 @@
 #include "GUI/Spellbook.h"
 #include "GUI/SpellDescriptionWindow.h"
 #include "Weapon.h"
+#include "GUI/GUIConstants.h"
 
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
@@ -79,12 +80,10 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 
-	const int CHARACTER_SIZE = 12;
-	const float TEXT_OFFSET = 20.f;
 	const float MARGIN = 10.f;
 
-	const float TOP = Spellbook::TOP;
-	const float LEFT = Spellbook::LEFT + Spellbook::WIDTH + MARGIN;
+	const float TOP = GUIConstants::TOP;
+	const float LEFT = GUIConstants::LEFT + Spellbook::WIDTH + MARGIN;
 	const float HEIGHT = Spellbook::HEIGHT;
-	const float WIDTH = 2 * TEXT_OFFSET + 2 * SpellSlot::RADIUS + 4 * MARGIN + 3 * ModifierSlot::SIDE_LENGTH;
+	const float WIDTH = 2 * GUIConstants::TEXT_OFFSET + 2 * SpellSlot::RADIUS + 4 * MARGIN + 3 * ModifierSlot::SIDE_LENGTH;
 };

@@ -104,20 +104,20 @@ const Weapon* CharacterCore::getWeapon()
 	return weapon;
 }
 
-NPCState CharacterCore::getNPCState(const std::string& id)
+NPCState CharacterCore::getNPCState(const std::string& id) const
 {
 	if (m_data.npcStates.find(id) != m_data.npcStates.end())
 	{
-		return m_data.npcStates[id];
+		return m_data.npcStates.at(id);
 	}
 	return NPCState::Never_talked;
 }
 
-QuestState CharacterCore::getQuestState(const std::string& id)
+QuestState CharacterCore::getQuestState(const std::string& id) const
 {
 	if (m_data.questStates.find(id) != m_data.questStates.end())
 	{
-		return m_data.questStates[id];
+		return m_data.questStates.at(id);
 	}
 	return QuestState::VOID;
 }
@@ -337,7 +337,17 @@ void CharacterCore::setChestLooted(const std::string& level, int pos)
 	m_data.chestsLooted.at(level).insert(pos);
 }
 
-bool CharacterCore::isQuestComplete(const std::string& questID)
+const QuestData* CharacterCore::getQuestData(const std::string& questID) const
+{
+	if (m_quests.find(questID) == m_quests.end())
+	{
+		g_logger->logError("CharacterCore", "Quest: " + questID + " has no quest data!");
+		return nullptr;
+	}
+	return &m_quests.at(questID);
+}
+
+bool CharacterCore::isQuestComplete(const std::string& questID) const
 {
 	if (getQuestState(questID) != QuestState::Started) return false;
 	if (m_quests.find(questID) == m_quests.end())
@@ -384,9 +394,7 @@ bool CharacterCore::isQuestComplete(const std::string& questID)
 				return false;
 		}
 	}
-	
-	// a quest without any target? always true. But then, please don't check it here.
-	g_logger->logWarning("CharacterCore", "This quest has no targets!");
+
 	return true;
 }
 

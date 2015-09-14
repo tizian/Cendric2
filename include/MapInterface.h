@@ -8,6 +8,7 @@
 #include "GUI/Inventory.h"
 #include "GUI/CharacterInfo.h"
 #include "GUI/Spellbook.h"
+#include "GUI/QuestLog.h"
 
 // The interface overlay in a map
 // if the keys for character screen, spellbook and inventory are pressed, these will display.
@@ -43,4 +44,8 @@ private:
 	// <<< CHARCTER INFO >>>
 	CharacterInfo m_characterInfo;
 	void updateCharacterInfo();
+
+	// <<< QUEST LOG >>>
+	QuestLog m_questLog;
+	void updateQuestLog(const sf::Time& frameTime);
 };

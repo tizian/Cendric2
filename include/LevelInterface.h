@@ -13,6 +13,7 @@
 #include "GUI/BuffBar.h"
 #include "GUI/QuickSlotBar.h"
 #include "GUI/Spellbook.h"
+#include "GUI/QuestLog.h"
 
 // The interface overlay in a level, displaying hp bar, spell cooldowns, buffs, quickslot bar
 // if the keys for character screen and inventory are pressed, these will display as well.
@@ -57,6 +58,10 @@ private:
 	// <<< SPELLBOOK >>>
 	Spellbook m_spellbook;
 	void updateSpellbook(const sf::Time& frameTime);
+
+	// <<< QUEST LOG >>>
+	QuestLog m_questLog;
+	void updateQuestLog(const sf::Time& frameTime);
 	
 	// <<< HEALTH BAR >>>
 	HealthBar m_healthBar;

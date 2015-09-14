@@ -26,8 +26,8 @@ public:
 	const Weapon* getWeapon();
 	// returns the item of id "id"
 	const Item& getItem(const std::string& id);
-	NPCState getNPCState(const std::string& id);
-	QuestState getQuestState(const std::string& id);
+	NPCState getNPCState(const std::string& id) const;
+	QuestState getQuestState(const std::string& id) const;
 	void setNPCState(const std::string& id, NPCState state);
 	void setQuestState(const std::string& id, QuestState state);
 	void setQuickslot(const std::string& item, int nr);
@@ -88,8 +88,10 @@ public:
 	void setItemLooted(const std::string& level, int pos);
 	// signal chest looted
 	void setChestLooted(const std::string& level, int pos);
+	// getter for quest data. If there is none for that id, returns nullptr
+	const QuestData* getQuestData(const std::string& questID) const;
 	// is the quest with id "id" complete?
-	bool isQuestComplete(const std::string& questID);
+	bool isQuestComplete(const std::string& questID) const;
 	// a target for a quest has been killed
 	void setQuestTargetKilled(const std::pair<std::string, std::string>& questtarget);
 	// a condition for a quest has been fulfilled

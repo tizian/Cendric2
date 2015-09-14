@@ -25,16 +25,16 @@ void WeaponWindow::reload()
 	{
 		m_weaponSlot = new InventorySlot(*m_weapon, -1);
 		m_weaponName.setString(g_textProvider->getText(m_weapon->getID()));
-		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getDescription(), CHARACTER_SIZE, 
-			static_cast<int>(WIDTH - (TEXT_OFFSET + 2 * MARGIN + InventorySlot::SIDE_LENGTH)))); 
+		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getDescription(), GUIConstants::CHARACTER_SIZE_M,
+			static_cast<int>(WIDTH - (GUIConstants::TEXT_OFFSET + 2 * MARGIN + InventorySlot::SIDE_LENGTH))));
 	}
-	m_weaponSlot->setPosition(sf::Vector2f(LEFT + TEXT_OFFSET, TOP + TEXT_OFFSET));
+	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
 
 	clearAllSlots();
 
 	if (m_weapon == nullptr) return;
 
-	float xOffset = LEFT + TEXT_OFFSET;
+	float xOffset = LEFT + GUIConstants::TEXT_OFFSET;
 	float yOffset = m_weaponSlot->getPosition().y + 2 * InventorySlot::SIDE_LENGTH;
 	int slotNr = 0;
 	for (auto& it : m_weapon->getWeaponSlots())
@@ -70,7 +70,7 @@ void WeaponWindow::reload()
 		}
 
 		yOffset += 2 * SpellSlot::RADIUS + 2 * MARGIN;
-		xOffset = LEFT + TEXT_OFFSET;
+		xOffset = LEFT + GUIConstants::TEXT_OFFSET;
 		slotNr++;
 		m_weaponSlots.push_back(std::pair<SpellSlot, std::vector<ModifierSlot>>({spellSlot, modifiers}));
 	}
@@ -95,21 +95,21 @@ void WeaponWindow::init()
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::LARGE,
-		CENDRIC_COLOR_TRANS_BLACK, // main
-		sf::Color::Transparent, // back
-		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
+		GUIConstants::MAIN_COLOR,
+		GUIConstants::BACK_COLOR,
+		GUIConstants::ORNAMENT_COLOR);
 
 	delete m_spellDesc;
 	m_spellDesc = new SpellDescriptionWindow();
 	m_spellDesc->setPosition(sf::Vector2f(LEFT + WIDTH + MARGIN, TOP));
 
-	m_weaponName.setCharacterSize(CHARACTER_SIZE);
+	m_weaponName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_weaponName.setColor(CENDRIC_COLOR_WHITE);
-	m_weaponName.setPosition(sf::Vector2f(LEFT + TEXT_OFFSET + MARGIN + InventorySlot::SIDE_LENGTH, TOP + TEXT_OFFSET));
+	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIDE_LENGTH, TOP + GUIConstants::TEXT_OFFSET));
 
-	m_weaponDescription.setCharacterSize(8);
+	m_weaponDescription.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_weaponDescription.setColor(CENDRIC_COLOR_LIGHT_GREY);
-	m_weaponDescription.setPosition(sf::Vector2f(LEFT + TEXT_OFFSET + MARGIN + InventorySlot::SIDE_LENGTH, TOP + TEXT_OFFSET + CHARACTER_SIZE + 4.f));
+	m_weaponDescription.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIDE_LENGTH, TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 4.f));
 
 	reload();
 }

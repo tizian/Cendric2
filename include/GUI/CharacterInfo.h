@@ -3,6 +3,7 @@
 #include "global.h"
 #include "LevelMainCharacter.h"
 #include "Window.h"
+#include "GUI/GUIConstants.h"
 
 // the character info, as displayed in a level
 // it takes its information from an attribute bean (of the level main char or the character core)
@@ -29,9 +30,4 @@ private:
 	BitmapText m_title;
 	BitmapText m_namesText;
 	BitmapText m_attributeText;
-
-	const float CHARACTER_SIZE = 12.f;
-	const float TEXT_OFFSET = 20.f;
-	const float TOP = 100.f;
-	const float LEFT = 50.f;
 };

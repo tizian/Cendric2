@@ -2,6 +2,7 @@
 #include "LevelMainCharacter.h"
 #include "LevelInterface.h"
 #include "MapInterface.h"
+#include "GUI/GUIConstants.h"
 
 Inventory::Inventory(LevelInterface* _interface)
 {
@@ -25,18 +26,18 @@ void Inventory::init()
 	sf::FloatRect box(INVENTORY_LEFT, INVENTORY_TOP, INVENTORY_WIDTH, INVENTORY_HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::LARGE,
-		CENDRIC_COLOR_TRANS_BLACK, // main
-		sf::Color::Transparent, // back
-		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
+		GUIConstants::MAIN_COLOR,
+		GUIConstants::BACK_COLOR,
+		GUIConstants::ORNAMENT_COLOR);
 
 	// init text
-	m_selectedTabText.setPosition(sf::Vector2f(INVENTORY_LEFT + TEXT_OFFSET, INVENTORY_TOP + TEXT_OFFSET));
+	m_selectedTabText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, INVENTORY_TOP + GUIConstants::TEXT_OFFSET));
 	m_selectedTabText.setColor(sf::Color::White);
-	m_selectedTabText.setCharacterSize(CHARACTER_SIZE);
+	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	m_goldText.setPosition(sf::Vector2f(INVENTORY_LEFT + TEXT_OFFSET, INVENTORY_TOP + INVENTORY_HEIGHT - TEXT_OFFSET - CHARACTER_SIZE));
+	m_goldText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, INVENTORY_TOP + INVENTORY_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
 	m_goldText.setColor(sf::Color::White);
-	m_goldText.setCharacterSize(CHARACTER_SIZE);
+	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	// fill the helper map
 	m_typeMap.insert({
@@ -62,9 +63,9 @@ void Inventory::init()
 	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Misc));
 
 	int textureOffset = 0;
-	float xOffset = INVENTORY_LEFT + TEXT_OFFSET;
-	float yOffset = INVENTORY_TOP + TEXT_OFFSET + CHARACTER_SIZE + 2 * MARGIN;
-	float buttonMargin = (INVENTORY_WIDTH - 5 * BUTTON_SIZE.x - 2 * TEXT_OFFSET) / 4.f;
+	float xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
+	float yOffset = INVENTORY_TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
+	float buttonMargin = (INVENTORY_WIDTH - 5 * BUTTON_SIZE.x - 2 * GUIConstants::TEXT_OFFSET) / 4.f;
 
 	for (auto& it : m_tabs)
 	{
@@ -358,8 +359,8 @@ void Inventory::reload()
 
 void Inventory::calculateSlotPositions(std::vector<InventorySlot>& slots)
 {
-	float yOffset = INVENTORY_TOP + 2 * TEXT_OFFSET + CHARACTER_SIZE + 2 * MARGIN + BUTTON_SIZE.y;
-	float xOffset = INVENTORY_LEFT + TEXT_OFFSET;
+	float yOffset = INVENTORY_TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y;
+	float xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
 	int y = 1;
 	int x = 1;
 	for (auto& it : slots)
@@ -368,7 +369,7 @@ void Inventory::calculateSlotPositions(std::vector<InventorySlot>& slots)
 		if (x + 1 > SLOT_COUNT_X)
 		{
 			x = 1;
-			xOffset = INVENTORY_LEFT + TEXT_OFFSET;
+			xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
 			y++;
 			yOffset += MARGIN + 2 * InventorySlot::MARGIN + InventorySlot::SIDE_LENGTH;
 		}
