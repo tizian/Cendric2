@@ -258,17 +258,33 @@ bool LevelReader::readEnemies(XMLElement* objectgroup, LevelData& data) const
 				}
 				std::string itemText = textAttr;
 
-				int amount;
-				result = item->QueryIntAttribute("value", &amount);
-				XMLCheckResult(result);
-
-				if (itemText.compare("gold") == 0 || itemText.compare("Gold") == 0)
+				if (itemText.compare("questtarget") == 0)
 				{
-					items.second += amount;
+					textAttr = item->Attribute("value");
+					if (textAttr == nullptr)
+					{
+						g_logger->logError("LevelReader", "XML file could not be read, quest target value attribute is void.");
+						return false;
+					}
+					std::string questtargetText = textAttr;
+					std::string questID = questtargetText.substr(0, questtargetText.find(","));
+					questtargetText.erase(0, questtargetText.find(",") + 1);
+					data.enemyQuesttarget.insert({id, std::pair<std::string, std::string>(questID, questtargetText)});
 				}
 				else
 				{
-					items.first.insert({ itemText, amount });
+					int amount;
+					result = item->QueryIntAttribute("value", &amount);
+					XMLCheckResult(result);
+
+					if (itemText.compare("gold") == 0 || itemText.compare("Gold") == 0)
+					{
+						items.second += amount;
+					}
+					else
+					{
+						items.first.insert({ itemText, amount });
+					}
 				}
 
 				item = item->NextSiblingElement("property");
@@ -947,7 +963,7 @@ bool LevelReader::checkData(LevelData& data) const
 			return false;
 		}
 	}
-	for (auto it : data.levelExits)
+	for (auto& it : data.levelExits)
 	{
 		if (it.levelExitRect.height <= 0.f || it.levelExitRect.width <= 0.f)
 		{
@@ -962,6 +978,14 @@ bool LevelReader::checkData(LevelData& data) const
 		if (it.mapSpawnPoint.x < 0.f || it.mapSpawnPoint.y < 0.f)
 		{
 			g_logger->logError("LevelReader", "Error in level data : level exit map spawn point is negative.");
+			return false;
+		}
+	}
+	for (auto& it : data.enemyQuesttarget)
+	{
+		if (it.second.first.empty() || it.second.second.empty())
+		{
+			g_logger->logError("LevelReader", "Error in level data : enemy quest target value strings (quest id and name) must not be empty.");
 			return false;
 		}
 	}

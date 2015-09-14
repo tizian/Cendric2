@@ -20,6 +20,7 @@ public:
 	// methods for questions about the current game state
 	bool isNPCState(const std::string& npcID, const std::string& state) const;
 	bool isQuestState(const std::string& questID, const std::string& state) const;
+	bool isQuestComplete(const std::string& questID);
 
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);
@@ -31,6 +32,11 @@ public:
 	void changeNPCState(const std::string& npcID, const std::string& state);
 	void changeQuestState(const std::string& questID, const std::string& state);
 	void addQuestProgress(const std::string& questID, const std::string& progress);
+	void addItem(const std::string& itemID, int amount);
+	void removeItem(const std::string& itemID, int amount);
+	void addGold(int amount);
+	void removeGold(int amount);
+	// TODO: learn spell, add reputation, etc.
 
 	// finally, adding the node to the dialogue
 	void addNode();

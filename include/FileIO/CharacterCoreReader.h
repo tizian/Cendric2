@@ -31,6 +31,8 @@ private:
 	bool readItemsLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readChestsLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestStates(char* start, char* end, CharacterCoreData& data) const;
+	bool readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const;
+	bool readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const;
 	bool readNPCStates(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedSpells(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const;

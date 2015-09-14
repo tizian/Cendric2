@@ -22,6 +22,7 @@ void DialogueLoader::loadDialogue()
 		.beginClass<DialogueLoader>("Dialogue")
 		.addFunction("isNPCState", &DialogueLoader::isNPCState)
 		.addFunction("isQuestState", &DialogueLoader::isQuestState)
+		.addFunction("isQuestComplete", &DialogueLoader::isQuestComplete)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
@@ -29,13 +30,17 @@ void DialogueLoader::loadDialogue()
 		.addFunction("changeNPCState", &DialogueLoader::changeNPCState)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
+		.addFunction("addItem", &DialogueLoader::addItem)
+		.addFunction("removeItem", &DialogueLoader::removeItem)
+		.addFunction("addGold", &DialogueLoader::addGold)
+		.addFunction("removeGold", &DialogueLoader::removeGold)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
 		.addFunction("addNode", &DialogueLoader::addNode)
 		.endClass();
 
 	if (luaL_dofile(L, m_dialogue.getID().c_str()) != 0) 
 	{
-		g_logger->logError("DialogeLoader", "Cannot do lua script: " + m_dialogue.getID());
+		g_logger->logError("DialogeLoader", "Cannot read lua script: " + m_dialogue.getID());
 		return;
 	}
 
@@ -122,12 +127,12 @@ void DialogueLoader::addQuestProgress(const std::string& questID, const std::str
 		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
 		return;
 	}
-	if (m_currentNode->questProgress.find(questID) == m_currentNode->questProgress.end())
+	if (m_currentNode->questProgress.find(questID) != m_currentNode->questProgress.end())
 	{
-		std::vector<std::string> vec;
-		m_currentNode->questProgress.insert({ questID, vec });
+		g_logger->logError("DialogueLoader", "Cannot add more than one quest progress per node and quest.");
+		return;
 	}
-	m_currentNode->questProgress.at(questID).push_back(progress);
+	m_currentNode->questProgress.insert({ questID, progress });
 }
 
 bool DialogueLoader::isNPCState(const std::string& npcID, const std::string& state) const
@@ -144,6 +149,86 @@ bool DialogueLoader::isNPCState(const std::string& npcID, const std::string& sta
 		return false;
 	}
 	return m_core->getNPCState(npcID) == npcState;
+}
+
+bool DialogueLoader::isQuestComplete(const std::string& questID)
+{
+	if (questID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
+		return false;
+	}
+	return m_core->isQuestComplete(questID);
+}
+
+void DialogueLoader::addItem(const std::string& itemID, int amount)
+{
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add item change: no node created.");
+		return;
+	}
+	if (itemID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Item ID cannot be empty.");
+		return;
+	}
+	if (amount <= 0)
+	{
+		g_logger->logError("DialogueLoader", "amount cannot be negative.");
+		return;
+	}
+	m_currentNode->itemChanges.insert({ itemID, amount });
+}
+
+void DialogueLoader::removeItem(const std::string& itemID, int amount)
+{
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add item change: no node created.");
+		return;
+	}
+	if (itemID.empty())
+	{
+		g_logger->logError("DialogueLoader", "Item ID cannot be empty.");
+		return;
+	}
+	if (amount <= 0)
+	{
+		g_logger->logError("DialogueLoader", "amount cannot be negative.");
+		return;
+	}
+	m_currentNode->itemChanges.insert({ itemID, -amount });
+}
+
+void DialogueLoader::addGold(int amount)
+{
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add gold change: no node created.");
+		return;
+	}
+	if (amount <= 0)
+	{
+		g_logger->logError("DialogueLoader", "amount cannot be negative.");
+		return;
+	}
+	m_currentNode->goldChanges = amount;
+}
+
+void DialogueLoader::removeGold(int amount)
+{
+	if (m_currentNode == nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add gold change: no node created.");
+		return;
+	}
+	if (amount <= 0)
+	{
+		g_logger->logError("DialogueLoader", "amount cannot be negative.");
+		return;
+	}
+	m_currentNode->goldChanges = -amount;
 }
 
 bool DialogueLoader::isQuestState(const std::string& questID, const std::string& state) const

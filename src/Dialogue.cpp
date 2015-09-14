@@ -58,6 +58,29 @@ bool Dialogue::updateWindow()
 		{
 			m_core->setQuestState(it.first, it.second);
 		}
+		if (m_currentNode->goldChanges > 0)
+		{
+			m_core->addGold(m_currentNode->goldChanges);
+		}
+		else if (m_currentNode->goldChanges < 0)
+		{
+			m_core->removeGold(-m_currentNode->goldChanges);
+		}
+		for (auto& it : m_currentNode->questProgress)
+		{
+			m_core->setQuestConditionFulfilled(it.first, it.second);
+		}
+		for (auto& it : m_currentNode->itemChanges)
+		{
+			if (it.second < 0)
+			{
+				m_core->removeItem(it.first, -it.second);
+			}
+			else if (it.second > 0)
+			{
+				m_core->addItem(it.first, it.second);
+			}
+		}
 	}
 	return true;
 }

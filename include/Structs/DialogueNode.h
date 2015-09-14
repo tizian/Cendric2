@@ -24,7 +24,11 @@ struct DialogueNode
 	int nextTag;
 	std::map<std::string, QuestState> questStates;
 	std::map<std::string, NPCState> npcStates;
-	std::map<std::string, std::vector<std::string>> questProgress;
+	std::map<std::string, std::string> questProgress;
 	// TODO: reputation progress
 	// std::map<FractionID, int> reputationProgress;
+
+	// removes (amount < 0) or adds (amount > 0) items to cendrics inventory. The same goes for gold.
+	std::map<std::string, int> itemChanges;
+	int goldChanges = 0;
 };

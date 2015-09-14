@@ -16,6 +16,7 @@ CharacterCore::CharacterCore(const CharacterCoreData& data)
 	m_data = data;
 	m_stopwatch.restart();
 	reloadAttributes();
+	loadQuests();
 }
 
 CharacterCore::~CharacterCore()
@@ -41,7 +42,24 @@ bool CharacterCore::load(const std::string& fileName)
 	// measuring the time played with this save.
 	m_stopwatch.restart();
 	reloadAttributes();
+	loadQuests();
 	return true;
+}
+
+void CharacterCore::loadQuests()
+{
+	m_quests.clear();
+	QuestLoader loader;
+	for (auto& it : m_data.questStates)
+	{
+		QuestData data = loader.loadQuest(it.first);
+		if (data.id.empty())
+		{
+			g_logger->logError("CharacterCore::loadQuests", "Could not load quest: " + it.first);
+			continue;
+		}
+		m_quests.insert({ data.id, data });
+	}
 }
 
 void CharacterCore::loadNew()
@@ -116,12 +134,25 @@ void CharacterCore::setNPCState(const std::string& id, NPCState state)
 
 void CharacterCore::setQuestState(const std::string& id, QuestState state)
 {
-	if (m_data.questStates.find(id) != m_data.questStates.end())
+	if (state == QuestState::Started && m_data.questStates.find(id) == m_data.questStates.end())
+	{
+		QuestLoader loader;
+		QuestData newQuest = loader.loadQuest(id);
+		if (newQuest.id.empty())
+		{
+			g_logger->logError("CharacterCore", "Could not load quest: " + id);
+			return;
+		}
+		m_quests.insert({ newQuest.id, newQuest });
+		m_data.questStates.insert({ id, state });
+		return;
+	}
+	if (state != QuestState::Started && m_data.questStates.find(id) != m_data.questStates.end())
 	{
 		m_data.questStates[id] = state;
 		return;
 	}
-	m_data.questStates.insert({ id, state });
+	g_logger->logError("CharacterCore", "Cannot change quest state for quest: " + id + ". Either the quest has already started (and cannot be started again) or the quest has not yet started and needs to be started first.");
 }
 
 void CharacterCore::setQuickslot(const std::string& item, int nr)
@@ -306,10 +337,88 @@ void CharacterCore::setChestLooted(const std::string& level, int pos)
 	m_data.chestsLooted.at(level).insert(pos);
 }
 
+bool CharacterCore::isQuestComplete(const std::string& questID)
+{
+	if (getQuestState(questID) != QuestState::Started) return false;
+	if (m_quests.find(questID) == m_quests.end())
+	{
+		g_logger->logError("CharacterCore", "Quest: " + questID + " has no quest data!");
+		return false;
+	}
+	QuestData data = m_quests.at(questID);
+
+	// check quest conditions
+	if (!data.conditions.empty())
+	{
+		if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end()) 
+			return false;
+		for (auto& it : data.conditions)
+		{
+			if (m_data.questConditionProgress.at(questID).find(it) == m_data.questConditionProgress.at(questID).end())
+				return false;
+		}
+	}
+
+	// check quest targets
+	if (!data.targets.empty())
+	{
+		if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end())
+			return false;
+		for (auto& it : data.targets)
+		{
+			if (m_data.questTargetProgress.at(questID).find(it.first) == m_data.questTargetProgress.at(questID).end())
+				return false;
+			if (m_data.questTargetProgress.at(questID).at(it.first) < it.second)
+				return false;
+		}
+	}
+	
+	// check collectibles
+	if (!data.collectibles.empty())
+	{
+		for (auto& it : data.collectibles)
+		{
+			if (m_data.items.find(it.first) == m_data.items.end())
+				return false;
+			if (m_data.items.at(it.first) < it.second)
+				return false;
+		}
+	}
+	
+	// a quest without any target? always true. But then, please don't check it here.
+	g_logger->logWarning("CharacterCore", "This quest has no targets!");
+	return true;
+}
+
+void CharacterCore::setQuestTargetKilled(const std::pair<std::string, std::string>& questtarget)
+{
+	std::string questID = questtarget.first;
+	std::string name = questtarget.second;
+	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end())
+	{
+		m_data.questTargetProgress.insert({ questID, std::map<std::string, int>() });
+	}
+	if (m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end())
+	{
+		m_data.questTargetProgress.at(questID).insert({ name, 0 });
+	}
+	m_data.questTargetProgress.at(questID).at(name) = m_data.questTargetProgress.at(questID).at(name) + 1;
+}
+
+void CharacterCore::setQuestConditionFulfilled(const std::string& questID, const std::string& condition)
+{
+	if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end())
+	{
+		m_data.questConditionProgress.insert({ questID, std::set<std::string>()});
+	}
+	m_data.questConditionProgress.at(questID).insert(condition);
+}
+
 const CharacterCoreData& CharacterCore::getData() const
 {
 	return m_data;
 }
+
 const AttributeBean& CharacterCore::getTotalAttributes() const
 {
 	return m_totalAttributes;

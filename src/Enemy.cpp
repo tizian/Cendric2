@@ -12,6 +12,7 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = mainChar->getScreen();
 	m_spellManager = new SpellManager(this);
+	m_questTarget.first = "";
 	
 	// load hp bar
 	m_hpBar.setFillColor(sf::Color::Red);
@@ -387,6 +388,11 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold)
 	m_lootWindow->setLoot(items, gold);
 }
 
+void Enemy::setQuestTarget(const std::pair<std::string, std::string>& questtarget)
+{
+	m_questTarget = questtarget;
+}
+
 void Enemy::setObjectID(int id)
 {
 	m_objectID = id;
@@ -454,4 +460,8 @@ void Enemy::setDead()
 	LevelMovableGameObject::setDead();
 	m_enemyState = EnemyState::Dead;
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
+	if (!m_questTarget.first.empty())
+	{
+		m_screen->getCharacterCore()->setQuestTargetKilled(m_questTarget);
+	}
 }

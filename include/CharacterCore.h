@@ -8,6 +8,7 @@
 #include "FileIO/CharacterCoreWriter.h"
 #include "Item.h"
 #include "Weapon.h"
+#include "QuestLoader.h"
 
 #include "Structs/AttributeBean.h"
 #include "Structs/CharacterCoreData.h"
@@ -44,6 +45,8 @@ public:
 	void loadEquipmentItems();
 	// loads itemvector (reload if not empty)
 	void loadItems();
+	// loads all quests that are started, completed or failed.
+	void loadQuests();
 	// reloads only the weapon slots.
 	void reloadWeaponSlots();
 	// base attributes plus the attributes gotten by equipment
@@ -85,6 +88,12 @@ public:
 	void setItemLooted(const std::string& level, int pos);
 	// signal chest looted
 	void setChestLooted(const std::string& level, int pos);
+	// is the quest with id "id" complete?
+	bool isQuestComplete(const std::string& questID);
+	// a target for a quest has been killed
+	void setQuestTargetKilled(const std::pair<std::string, std::string>& questtarget);
+	// a condition for a quest has been fulfilled
+	void setQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;
@@ -102,6 +111,7 @@ private:
 
 	std::map<std::string, Item> m_items;
 	std::map<ItemType, Item*> m_equippedItems;
+	std::map<std::string, QuestData> m_quests;
 
 	CharacterCoreData m_data;
 

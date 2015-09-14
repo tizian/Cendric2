@@ -25,6 +25,8 @@ protected:
 	const char* ITEMS_LOOTED = "items.looted";
 	const char* CHESTS_LOOTED = "chests.looted";
 	const char* QUEST_STATE = "quest.state";
+	const char* QUEST_PROGRESS_TARGET = "quest.progress.target";
+	const char* QUEST_PROGRESS_CONDITION = "quest.progress.condition";
 	const char* NPC_STATE = "npc.state";
 	const char* SPELL_LEARNED = "spell.learned";
 	const char* MODIFIER_LEARNED = "modifier.learned";

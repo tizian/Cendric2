@@ -294,6 +294,91 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 	return true;
 }
 
+bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	endData++;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	string questID(startData);
+	int count = countToNextChar(startData, endData, ',');
+	if (count == -1) {
+		return false;
+	}
+	questID = questID.substr(0, count);
+
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+
+	std::set<string> conditions;
+	while (startData != NULL)
+	{
+		std::string condition(startData);
+		count = countToNextChar(startData, endData, ',');
+		if (count == -1) {
+			count = countToNextChar(startData, endData, '\n');
+			if (count == -1)
+			{
+				return false;
+			}
+			conditions.insert(condition.substr(0, count));
+			break;
+		}
+		conditions.insert(condition.substr(0, count));
+		startData = gotoNextChar(startData, endData, ',');
+		startData++;
+	}
+
+	data.questConditionProgress.insert({ questID, conditions });
+	return true;
+}
+
+bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	endData++;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	string questID(startData);
+	int count = countToNextChar(startData, endData, ',');
+	if (count == -1) {
+		return false;
+	}
+	questID = questID.substr(0, count);
+
+	startData = gotoNextChar(startData, endData, ',');
+
+	std::map<std::string, int> targets;
+	while (startData != NULL)
+	{
+		startData++;
+		std::string name(startData);
+		count = countToNextChar(startData, endData, ',');
+		if (count == -1) 
+		{
+			return false;
+		}
+		name = name.substr(0, count);
+
+		startData = gotoNextChar(startData, endData, ',');
+		startData++;
+
+		int amount = atoi(startData);
+		if (amount == 0)
+		{
+			return false;
+		}
+
+		targets.insert({name, amount});
+		startData = gotoNextChar(startData, endData, ',');
+	}
+
+	data.questTargetProgress.insert({ questID, targets });
+	return true;
+}
+
 bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
@@ -645,6 +730,16 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUEST_STATE));
 			noError = readQuestStates(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, QUEST_PROGRESS_TARGET, strlen(QUEST_PROGRESS_TARGET)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUEST_PROGRESS_TARGET));
+			noError = readQuestProgressTargets(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, QUEST_PROGRESS_CONDITION, strlen(QUEST_PROGRESS_CONDITION)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUEST_PROGRESS_CONDITION));
+			noError = readQuestProgressConditions(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, NPC_STATE, strlen(NPC_STATE)) == 0) {

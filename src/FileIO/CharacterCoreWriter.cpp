@@ -43,6 +43,8 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeItemsLooted(data);
 		savefile << writeChestsLooted(data);
 		savefile << writeQuestStates(data);
+		savefile << writeQuestProgressTargets(data);
+		savefile << writeQuestProgressConditions(data);
 		savefile << writeNPCStates(data);
 		savefile << writeSpellsLearned(data);
 		savefile << writeModifiersLearned(data);
@@ -252,6 +254,49 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 		quest.append(it.first);
 		quest.append(",");
 		quest.append(to_string(static_cast<int>(it.second)));
+		quest.append("\n");
+		quests.append(quest);
+	}
+	return quests;
+}
+
+std::string CharacterCoreWriter::writeQuestProgressTargets(const CharacterCoreData& data) const
+{
+	string quests = "# quest targets killed:\n";
+
+	for (auto& it : data.questTargetProgress)
+	{
+		string quest = string(QUEST_PROGRESS_TARGET);
+		quest.append(":");
+		quest.append(it.first);
+		for (auto& it2 : it.second)
+		{
+			quest.append(",");
+			quest.append(it2.first);
+			quest.append(",");
+			quest.append(to_string(static_cast<int>(it2.second)));
+		}
+		quest.append("\n");
+		quests.append(quest);
+	}
+	return quests;
+}
+
+std::string CharacterCoreWriter::writeQuestProgressConditions(const CharacterCoreData& data) const
+{
+	string quests = "# quest conditions fulfilled:\n";
+
+	for (auto& it : data.questConditionProgress)
+	{
+		if (it.second.empty()) continue;
+		string quest = string(QUEST_PROGRESS_CONDITION);
+		quest.append(":");
+		quest.append(it.first);
+		for (auto& it2 : it.second)
+		{
+			quest.append(",");
+			quest.append(it2);
+		}
 		quest.append("\n");
 		quests.append(quest);
 	}

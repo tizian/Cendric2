@@ -34,6 +34,8 @@ private:
 	std::string writeItemsLooted(const CharacterCoreData& data) const;
 	std::string writeChestsLooted(const CharacterCoreData& data) const;
 	std::string writeQuestStates(const CharacterCoreData& data) const;
+	std::string writeQuestProgressTargets(const CharacterCoreData& data) const;
+	std::string writeQuestProgressConditions(const CharacterCoreData& data) const;
 	std::string writeNPCStates(const CharacterCoreData& data) const;
 	std::string writeSpellsLearned(const CharacterCoreData& data) const;
 	std::string writeModifiersLearned(const CharacterCoreData& data) const;

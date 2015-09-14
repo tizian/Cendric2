@@ -35,6 +35,7 @@ public:
 	// the enemy is stunned for the given time
 	void setStunned(const sf::Time &stunnedTime);
 	void setLoot(const std::map<std::string, int>& items, int gold);
+	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
 	// the object ID in the level enemy object layer.
 	void setObjectID(int id);
@@ -114,6 +115,9 @@ private:
 	int m_lootableGold;
 	LootWindow *m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
+
+	// is this enemy a quest target?
+	std::pair<std::string, std::string> m_questTarget;
 	
 	// the enemy can only be looted if the main char is in this range
 	const float PICKUP_RANGE = 100.f;

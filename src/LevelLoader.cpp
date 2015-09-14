@@ -203,6 +203,11 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 				return;
 			}
 
+			if (data.enemyQuesttarget.find(it.first) != data.enemyQuesttarget.end())
+			{
+				enemy->setQuestTarget(data.enemyQuesttarget.at(it.first));
+			}
+
 			enemy->setLoot(loot, gold);
 			enemy->setPosition(it.second.second);
 			enemy->setObjectID(it.first);
