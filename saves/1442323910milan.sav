@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:332
-savegame.name:ISA'S TESTSAVE
-savegame.date:1442258057
+time.played:350
+savegame.name:milan
+savegame.date:1442323910
 level.id:res/level/ratcave/ratcave.tmx
-level.position:525.000000,1175.000000
-is.in.level:0
+level.position:1960.000000,1200.000000
+is.in.level:1
 map.id:res/map/firstmap/firstmap.tmx
-map.position:4000.000000,830.885681
+map.position:4000.000000,703.749878
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -16,6 +16,7 @@ gold:8
 item.id:it_fo_caveberry,1
 item.id:it_fo_cheese,6
 item.id:it_mi_goldengoblet,3
+item.id:it_qe_letter,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2,3,3
 equipped.spellslot:3,3,3
@@ -33,6 +34,18 @@ equipped.weapon:it_we_icestaff
 # quickslot assignments:
 quickslot:1,
 quickslot:2,
+# enemies killed in level:
+enemies.killed:res/level/ratcave/ratcave.tmx
+# enemies looted in level:
+enemies.looted:res/level/ratcave/ratcave.tmx
+# items looted in level:
+items.looted:res/level/ratcave/ratcave.tmx,1802
+# chests looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
+# quest states:
+# quest targets killed:
+# quest conditions fulfilled:
+# npc states:
 # spells learned:
 spell.learned:1,2,3,5,6
 spell.learned:2,7,11

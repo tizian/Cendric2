@@ -92,12 +92,12 @@ bool InventorySlot::isClicked()
 	return wasClicked;
 }
 
-bool InventorySlot::isConsumed()
+bool InventorySlot::isRightClicked()
 {
 	if (m_item.getType() == ItemType::VOID) return false;
-	bool wasConsumed = m_isConsumed;
-	m_isConsumed = false;
-	return wasConsumed;
+	bool wasRightClicked = m_isRightClicked;
+	m_isRightClicked = false;
+	return wasRightClicked;
 }
 
 void InventorySlot::setPosition(const sf::Vector2f& pos)
@@ -130,11 +130,8 @@ void InventorySlot::onLeftJustPressed()
 
 void InventorySlot::onRightClick()
 {
-	if (m_item.getType() == ItemType::Consumable)
-	{
-		m_isConsumed = true;
-		g_inputController->lockAction();
-	}
+	m_isRightClicked = true;
+	g_inputController->lockAction();
 }
 
 GameObjectType InventorySlot::getConfiguredType() const

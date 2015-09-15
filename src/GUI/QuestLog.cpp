@@ -67,6 +67,7 @@ void QuestLog::init()
 	m_descriptionWindow = new QuestDescriptionWindow(m_core);
 
 	selectTab(QuestState::Started);
+	reload();
 }
 
 QuestLog::~QuestLog()

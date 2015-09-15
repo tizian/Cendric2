@@ -82,12 +82,14 @@ void Inventory::init()
 	selectTab(ItemType::Consumable);
 
 	m_equipment = new InventoryEquipment(m_core);
+	reload();
 }
 
 Inventory::~Inventory()
 {
 	delete m_window;
 	delete m_descriptionWindow;
+	delete m_documentWindow;
 	delete m_equipment;
 	delete m_currentClone;
 	clearAllSlots();
@@ -116,9 +118,12 @@ void Inventory::update(const sf::Time& frameTime)
 			selectSlot(&it, false);
 			return;
 		}
-		if (it.isConsumed() && m_levelInterface != nullptr)
+		if (it.isRightClicked() && m_levelInterface != nullptr)
 		{
-			m_levelInterface->consumeItem(it.getItem());
+			if (it.getItemType() == ItemType::Consumable)
+				m_levelInterface->consumeItem(it.getItem());
+			else if (it.getItemType() == ItemType::Document)
+				showDocument(it.getItem());
 			break;
 		}
 	}
@@ -153,7 +158,8 @@ void Inventory::selectSlot(InventorySlot* selectedSlot, bool isEquipmentSlot)
 	}
 	m_selectedSlot = selectedSlot;
 	m_selectedSlot->select();
-	showDescription(*m_selectedSlot);
+	hideDocument();
+	showDescription(m_selectedSlot->getItem());
 }
 
 void Inventory::removeEquipmentItem()
@@ -255,6 +261,10 @@ void Inventory::render(sf::RenderTarget& target)
 	{
 		m_descriptionWindow->render(target);
 	}
+	if (m_documentWindow != nullptr)
+	{
+		m_documentWindow->render(target);
+	}
 
 	m_equipment->render(target);
 	if (m_currentClone != nullptr)
@@ -263,24 +273,58 @@ void Inventory::render(sf::RenderTarget& target)
 	}
 }
 
-void Inventory::showDescription(const InventorySlot& slot)
+void Inventory::showDocument(const Item& item)
+{
+	delete m_documentWindow;
+	m_documentWindow = new DocumentDescriptionWindow(item);
+
+	sf::Vector2f pos = sf::Vector2f(
+		m_window->getPosition().x + MARGIN + m_window->getSize().x,
+		m_window->getPosition().y);
+	if (m_descriptionWindow != nullptr)
+	{
+		pos.x += InventoryDescriptionWindow::WIDTH + MARGIN;
+	}
+	m_documentWindow->setPosition(pos);
+}
+
+void Inventory::showDescription(const Item& item)
 {
 	delete m_descriptionWindow;
-	m_descriptionWindow = new InventoryDescriptionWindow(slot.getItem());
-	m_descriptionWindow->setPosition(sf::Vector2f(
+	m_descriptionWindow = new InventoryDescriptionWindow(item);
+	sf::Vector2f pos = sf::Vector2f(
 		m_window->getPosition().x + MARGIN + m_window->getSize().x,
-		m_window->getPosition().y));
+		m_window->getPosition().y);
+	m_descriptionWindow->setPosition(pos);
+	if (m_documentWindow != nullptr)
+	{
+		pos.x += InventoryDescriptionWindow::WIDTH + MARGIN;
+		m_documentWindow->setPosition(pos);
+	}
 }
 
 void Inventory::hideDescription()
 {
 	delete m_descriptionWindow;
 	m_descriptionWindow = nullptr;
+	if (m_documentWindow != nullptr)
+	{
+		m_documentWindow->setPosition(
+			m_documentWindow->getPosition() - 
+			sf::Vector2f(InventoryDescriptionWindow::WIDTH + MARGIN, 0.f));
+	}
+}
+
+void Inventory::hideDocument()
+{
+	delete m_documentWindow;
+	m_documentWindow = nullptr;
 }
 
 void Inventory::selectTab(ItemType type)
 {
 	hideDescription();
+	hideDocument();
 	if (m_selectedSlot != nullptr)
 	{
 		m_selectedSlot->deselect();
@@ -339,6 +383,7 @@ void Inventory::reload()
 	// reload items
 	clearAllSlots();
 	hideDescription();
+	hideDocument();
 	m_core->loadItems();
 	for (auto& it : m_core->getData().items)
 	{

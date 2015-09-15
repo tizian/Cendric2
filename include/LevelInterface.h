@@ -28,8 +28,10 @@ public:
 
 	// used to add buffs to the buff bar
 	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
-	// reloads the inventory if it is visible. also reloads the quick slot bar
+	// reloads the inventory. also reloads the quick slot bar
 	void reloadInventory();
+	// reloads the quest log
+	void reloadQuestLog();
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const InventorySlotClone* item);
 	// consumes a consumable item

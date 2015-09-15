@@ -25,7 +25,7 @@ InventoryDescriptionWindow::InventoryDescriptionWindow(const Item& item) : Windo
 	GUIConstants::ORNAMENT_COLOR)
 {
 	m_titleText.setString(g_textProvider->getText(item.getID()));
-	m_titleText.setCharacterSize(12);
+	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(CENDRIC_COLOR_WHITE);
 	
 	m_descriptionText.setString(g_textProvider->getCroppedText(item.getDescription(), GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));

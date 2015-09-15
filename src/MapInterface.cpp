@@ -32,10 +32,12 @@ void MapInterface::update(const sf::Time& frameTime)
 
 void MapInterface::reloadInventory()
 {
-	if (m_inventory.isVisible())
-	{
-		m_inventory.reload();
-	}
+	m_inventory.reload();
+}
+
+void MapInterface::reloadQuestLog()
+{
+	m_questLog.reload();
 }
 
 void MapInterface::updateCharacterInfo()
@@ -77,7 +79,6 @@ void MapInterface::updateInventory(const sf::Time& frameTime)
 			if (m_questLog.isVisible()) m_questLog.hide();
 
 			m_inventory.show();
-			m_inventory.reload();
 		}
 		else
 		{
@@ -131,7 +132,6 @@ void MapInterface::updateQuestLog(const sf::Time& frameTime)
 			if (m_spellbook.isVisible()) m_spellbook.hide();
 
 			m_questLog.show();
-			m_questLog.reload();
 		}
 		else
 		{

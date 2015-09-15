@@ -33,7 +33,7 @@ public:
 
 	// asks if it is clicked and sets the member bool to false again (!)
 	bool isClicked();
-	bool isConsumed();
+	bool isRightClicked();
 
 	GameObjectType getConfiguredType() const override;
 	const Item& getItem() const;
@@ -46,7 +46,7 @@ public:
 private:
 	bool m_isClicked = false;
 	bool m_isSelected = false;
-	bool m_isConsumed = false;
+	bool m_isRightClicked = false;
 
 	Item m_item;
 	ItemType m_type;

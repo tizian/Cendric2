@@ -74,11 +74,13 @@ void LevelInterface::highlightQuickslots(bool highlight)
 
 void LevelInterface::reloadInventory()
 {
-	if (m_inventory.isVisible())
-	{
-		m_inventory.reload();
-	}
+	m_inventory.reload();
 	m_quickSlotBar.reload();
+}
+
+void LevelInterface::reloadQuestLog()
+{
+	m_questLog.reload();
 }
 
 void LevelInterface::updateCharacterInfo()
@@ -143,7 +145,6 @@ void LevelInterface::updateInventory(const sf::Time& frameTime)
 			if (m_questLog.isVisible()) m_questLog.hide();
 
 			m_inventory.show();
-			m_inventory.reload();
 		}
 		else
 		{
@@ -170,7 +171,6 @@ void LevelInterface::updateQuestLog(const sf::Time& frameTime)
 			if (m_inventory.isVisible()) m_inventory.hide();
 
 			m_questLog.show();
-			m_questLog.reload();
 		}
 		else
 		{

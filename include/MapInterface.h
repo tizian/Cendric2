@@ -18,8 +18,10 @@ public:
 	MapInterface(CharacterCore* core);
 	~MapInterface();
 
-	// reloads the inventory if it is visible. 
+	// reloads the inventory 
 	void reloadInventory();
+	// reloads the quest log
+	void reloadQuestLog();
 	// an equipment item has been dropped. forward to equipment bar
 	void notifyEquipmentDrop(const InventorySlotClone* item);
 	// highlight equipment slots

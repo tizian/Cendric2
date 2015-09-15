@@ -8,6 +8,7 @@
 #include "GUI/InventorySlot.h"
 #include "GUI/InventorySlotClone.h"
 #include "GUI/InventoryDescriptionWindow.h"
+#include "GUI/DocumentDescriptionWindow.h"
 #include "GUI/TexturedButton.h"
 #include "GUI/InventoryEquipment.h"
 
@@ -77,8 +78,11 @@ private:
 	void removeEquipmentItem();
 
 	InventoryDescriptionWindow* m_descriptionWindow = nullptr;
-	void showDescription(const InventorySlot& slot);
+	DocumentDescriptionWindow* m_documentWindow = nullptr;
+	void showDescription(const Item& item);
 	void hideDescription();
+	void showDocument(const Item& item);
+	void hideDocument();
 
 	InventoryEquipment* m_equipment = nullptr;
 
