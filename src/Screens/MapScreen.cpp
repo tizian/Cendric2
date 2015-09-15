@@ -3,7 +3,7 @@
 
 using namespace std;
 
-MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : Screen(core)
+MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : GameScreen(core)
 {
 	m_mapID = mapID;
 }
@@ -22,7 +22,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 	}
 	else
 	{
-		m_interface->update(frameTime);
+		GameScreen::update(frameTime);
 		if (g_inputController->isKeyJustPressed(Key::Escape))
 		{
 			// store pos & go back to menu screen
@@ -85,7 +85,7 @@ void MapScreen::load()
 	addObject(m_mainChar);
 	m_currentMap.loadAfterMainChar(this);
 
-	m_interface = new MapInterface(m_characterCore);
+	m_interface = new MapInterface(this);
 }
 
 void MapScreen::execOnEnter(const Screen *previousScreen)
@@ -96,7 +96,6 @@ void MapScreen::execOnEnter(const Screen *previousScreen)
 void MapScreen::execOnExit(const Screen *nextScreen)
 {
 	m_currentMap.dispose();
-	delete m_interface;
 }
 
 void MapScreen::setDialogue(const NPCBean& bean)
@@ -107,7 +106,7 @@ void MapScreen::setDialogue(const NPCBean& bean)
 	}
 
 	m_dialogueWindow = new DialogueWindow();
-	m_dialogueWindow->load(bean, m_characterCore);
+	m_dialogueWindow->load(bean, this);
 }
 
 void MapScreen::render(sf::RenderTarget &renderTarget)
@@ -123,7 +122,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget)
 	// default view
 	sf::View oldView = renderTarget.getView();
 	renderTooltipText(renderTarget);
-	m_interface->render(renderTarget); // this will set the view to the default view!
+	GameScreen::render(renderTarget); // this will set the view to the default view!
 	// render the dialogue window. 
 	if (m_dialogueWindow != nullptr)
 	{

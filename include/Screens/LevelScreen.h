@@ -3,15 +3,16 @@
 #include "global.h"
 #include "Level.h"
 #include "LevelMainCharacter.h"
-#include "Screen.h"
+#include "GameScreen.h"
 #include "ResourceManager.h"
 #include "LevelMainCharacterLoader.h"
 #include "LevelInterface.h"
 
 #include "GUI/Button.h"
 #include "GUI/YesOrNoForm.h"
+#include "GUI/ProgressLog.h"
 
-class LevelScreen : public Screen
+class LevelScreen : public GameScreen
 {
 public:
 	LevelScreen(const std::string& levelID, CharacterCore* core);
@@ -24,8 +25,6 @@ public:
 	void execOnExit(const Screen* nextScreen) override;
 
 	void addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const;
-	// reloads the inventory if it is visible
-	void reloadInventory();
 
 	// called by the loading screen. the dynamic tiles in level
 	void loadDynamicTiles();
@@ -40,7 +39,6 @@ private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar = nullptr;
 	std::string m_levelID;
-	LevelInterface* m_interface = nullptr;
 
 	bool m_isGameOver = false;
 	BitmapText* m_overlayText = nullptr;

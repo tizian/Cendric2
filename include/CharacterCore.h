@@ -53,14 +53,8 @@ public:
 	const AttributeBean& getTotalAttributes() const;
 	// getter for items
 	std::map<std::string, int>* getItems();
-	// add gold to the data
-	void addGold(int gold);
-	// remove gold from the data
-	void removeGold(int gold);
-	// adds item(s) to the data
-	void addItem(const std::string& item, int quantity);
-	// removes item(s) to the data
-	void removeItem(const std::string& item, int quantity);
+	// an item was added or removed. if itemID equals "gold", gold is added or removed
+	void notifyItemChange(const std::string& itemID, int amount);
 	// save the position and map id. also sets "isInLevel" = false
 	void setMap(const sf::Vector2f& position, const std::string& map);
 	// save the position and level id  also sets "isInLevel" = true
@@ -107,6 +101,14 @@ private:
 	void clearItems();
 	// reload attributes based on equipped items (called by load). all attributes coming from food are removed.
 	void reloadAttributes();
+	// add gold to the data
+	void addGold(int gold);
+	// remove gold from the data
+	void removeGold(int gold);
+	// adds item(s) to the data
+	void addItem(const std::string& item, int quantity);
+	// removes item(s) to the data
+	void removeItem(const std::string& item, int quantity);
 
 	// base attributes plus the attributes of all currently equipped items
 	AttributeBean m_totalAttributes;

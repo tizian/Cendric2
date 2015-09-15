@@ -447,6 +447,33 @@ void CharacterCore::removeGold(int gold)
 	m_data.gold -= std::min(m_data.gold, gold);
 }
 
+void CharacterCore::notifyItemChange(const std::string& itemID, int amount)
+{
+	if (itemID.empty()) return;
+	if (itemID.compare("gold") == 0)
+	{
+		if (amount < 0)
+		{
+			removeGold(-amount);
+		}
+		else
+		{
+			addGold(amount);
+		}
+	}
+	else
+	{
+		if (amount < 0)
+		{
+			removeItem(itemID, -amount);
+		}
+		else
+		{
+			addItem(itemID, amount);
+		}
+	}
+}
+
 void CharacterCore::addItem(const std::string& item, int quantity)
 {
 	auto it = m_data.items.find(item);

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : Screen(core)
+LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : GameScreen(core)
 {
 	m_levelID = levelID;
 }
@@ -32,8 +32,8 @@ void LevelScreen::load()
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
 	m_currentLevel.loadAfterMainChar(this);
 	loader.loadEquipment(this);
-	m_interface = new LevelInterface(m_characterCoreCopy, m_mainChar);
-	m_interface->setSpellManager(m_mainChar->getSpellManager());
+	m_interface = new LevelInterface(this, m_mainChar);
+	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
 
 	m_retryButton = new Button(sf::FloatRect(450, 410, 350, 50), ButtonOrnamentStyle::MEDIUM);
 	m_retryButton->setText("BackToCheckpoint");
@@ -59,7 +59,6 @@ void LevelScreen::cleanUp()
 	m_characterCoreCopy = nullptr;
 	delete m_overlaySprite;
 	delete m_overlayText;
-	delete m_interface;
 }
 
 CharacterCore* LevelScreen::getCharacterCore() const
@@ -89,12 +88,7 @@ void LevelScreen::execOnExit(const Screen *nextScreen)
 
 void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const
 {
-	m_interface->addBuff(type, textureLocation, duration);
-}
-
-void LevelScreen::reloadInventory()
-{
-	m_interface->reloadInventory();
+	dynamic_cast<LevelInterface*>(m_interface)->addBuff(type, textureLocation, duration);
 }
 
 Screen* LevelScreen::update(const sf::Time& frameTime)
@@ -156,7 +150,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 	updateTooltipText(frameTime);
 	if (!m_retryButton->isVisible())
 	{
-		m_interface->update(frameTime);
+		GameScreen::update(frameTime);
 	}
 
 	if (m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape))
@@ -220,7 +214,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
 
 	renderTooltipText(renderTarget);
-	m_interface->render(renderTarget); // this will set the view to the default view!
+	GameScreen::render(renderTarget); // this will set the view to the default view!
 
 	if (m_retryButton->isVisible())
 	{

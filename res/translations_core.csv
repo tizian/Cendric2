@@ -1,3 +1,6 @@
+Active;Active;Aktiv;Aktiv
+AdditionalResistance;Additional Resistance;Zusätzlicher Widerstand;Zuesätzliche Widerstand
+AllowedModifiers;Allowed Gem Types;Erlaubte Edelsteintypen;Erlaubti Edelsteitype
 Apply;Apply;Anwenden;Awende
 Armor;Armour;Rüstung;Rüstig
 Back;Back;Zurück;Zrugg
@@ -6,9 +9,11 @@ BackToMenu;Back to menu;Zurück zum Menu;Zrugg zum Menu
 Cancel;Cancel;Abbrechen;Abbreche
 CharacterInfo;Character Info;Charakter Info;Charakter Info
 Chop;Chop;Hauen;Haue
+Completed;Completed;Abgeschlossen;Fertig
 ConfigurationSaved;Configuration was saved.;Einstellungen wurden erfolgreich gespeichert. ;Iistellige sind erfolgriich gspeicheret.
 Confirm;Confirm;Bestätigen;Bestätige
 Consumables;Consumables;Tränke und Nahrung;Tränk und Ässe
+Cooldown;Cooldown;Abklingzeit;Abklingziit
 CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering
 Count;Count;Anzahl;Aazahl
 Credits;Credits;Mitwirkende;Erschaffer
@@ -22,15 +27,19 @@ too many text on one line yay way to many text this needs to be cropped so hard 
 Critical;Critical;Kritisch;Kritisch
 CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
 Damage;Damage;Schaden;Schade
+DamageType;Damage Type;Schadenstyp;Schadetyp
 Default;Default;Standardwert;Standardwert
 Delete;Delete;Löschen;Lösche
 Divine;Divine;Heilig;Heilig
 Documents;Documents;Schriftstücke;Dokument
+Done;Done;Erfüllt;Erfüllt
 Duration;Duration;Dauer;Duur
 Elemental;Elemental;Elementar;Elementar
 English;English;Englisch;Englisch
 Equipment;Equipment;Ausrüstung;Usrüstig
 Exit;Exit;Beenden;Beende
+Failed;Failed;Fehlgeschlagen;Gfailt
+FearLevel;Fear Level;Furcht Stufe;Angscht Stufe
 FifthSpell;5. Spell;5. Zauber;5. Zauber
 FireDamage;Fire Damage;Feuerschaden;Füürschade
 FireResistance;Fire Resistance;Feuerresistenz;Füürresistenz
@@ -44,6 +53,7 @@ German;German;Deutsch;Düütsch
 Gold;Gold;Gold;Gold
 GoldValue;Gold Value;Goldwert;Goldwert
 Haste;Haste;Schnelligkeit;Schnelligkeit
+Heal;Heal;Heilung;Heilig
 Health;Health;Lebensenergie;Lebe
 HealthRegeneration;Health Regeneration;Lebensregeneration;Lebensregeneration
 HealthRegenerationPerS;Health Regeneration / s;Lebensregeneration / s;Lebensregeneration / s
@@ -54,45 +64,18 @@ Illusion;Illusion;Illusion;Illusion
 Interact;Interact;Interagieren;Interagiere
 Inventory;Inventory;Inventar;Inventar
 IsLocked;Is locked!;Ist verschlossen!;Da isch abgschlosse!
-it_eq_purpleback;Purple cape;Violetter Umhang;Violette Umhang
-it_eq_ringoflesserhealth;Small ruby ring;Kleiner Rubinring;Chliine Rubinring
-it_eq_wizardhatblue;Blue wizardhat;Blauer Spitzhut;Blaue Magierhuet
-it_eq_wizardhatgrey;Grey wizardhat;Grauer Spitzhut;Graue Magierhuet
-it_fo_bread;Bread;Brot;Brot
-it_fo_caveberry;Cave berries;Höhlenbeeren;Höhlebeeri
-it_fo_cheese;Cheese;Käse;Chääs
-it_fo_glowingshroom;Glowing shroom;Leuchtpilz;Lüchtpilz
-it_fo_healingherb;Healing herb;Heilpflanze;Heilpflanze
-it_fo_water;Water bottle;Wasserflasche;Wasserfläsche
-it_go_onecoin;Golden coin;Goldmünze;Goldmünze
-it_go_threecoins;A few coins;Ein paar Münzen;Es paar Münze
-it_mi_goldengoblet;Golden goblet;Goldener Pokal;Goldige Pokal
-it_qe_letter;Sealed Letter;Versiegelter Brief;Versiglete Brief
-it_we_icestaff;Ice staff;Eisstab;Iisstab
-it_we_rustysword;Rusty sword;Rostiges Schwert;Rostigs Schwert
-itd_bread;An ordinary loaf of bread.;Ein einfaches Brot.;Es Brot halt.
-itd_caveberry;Sweet;Süss;Süess
-itd_cheese;Smelly.;Riecht nicht sonderlich gut.;Er müffelet echli.
-itd_glowingshroom;It still glows…;Er leuchtet immer noch…;Er lüchtet immer na…
-itd_goldengoblet;A golden goblet;Ein goldener Pokal;En goldige Pokal
-itd_healingherb;Heals wounds;Heilt Wunden;Heilt Wunde
-itd_icestaff;Feels ice cold.;Fühlt sich eiskalt an.;So chalt we Iis.
-itd_letter;Sealed;Versiegelt;Versiglet
-itd_purpleback;Ugly cape for testing. Needs some shading. Won't appear in the final version.;Hässlicher Umhang, nur für Testing. Wird vermutlich nicht in dem Endgame auftauchen und wird entfernt.;Boaey we chame nur sonen hässliche Umhang designe, gaht ja gar nid. Schomal was vo Schatte und so ghört? Alteeeee
-itd_ringoflesserhealth;The small ruby sparkles;Der kleine Rubin funkelt;De chli Rubin funklet 
-itd_rustysword;Doesn't seem to have been used lately.;Wurde wohl schon länger nicht mehr benutzt.;Isch glaub scho länger nüm brucht worde.
-itd_water;Fresh clear water.;Frisches klares Wasser.;Frischs klars Wasser.
-itd_wizardhat;A perfect fit for a mage.;Perfekt für einen Magier.;Perfekt für en Magier.
 Journal;Journal;Tagebuch;Tagebuech
 Jump;Jump;Springen;Springe
 KeyBindings;Key Bindings;Tastaturbelegung;Tastaturbelegig
 KeyReserved;This key is reserved and cannot be selected.;Diese Taste ist reserviert und kann nicht gewählt werden.;Die Taste isch reserviert und derf me nid bruche.
 Language;Language;Sprache;Sproch
+Level;Level;Stufe;Level
 LightDamage;Light Damage;Lichtschaden;Liechtschade
 LightResistance;Light Resistance;Lichtresistenz;Liechtresistenz
 Load;Load;Laden;Lade
 LoadGame;Load Game;Spiel laden;Spiel lade
 Loading;Loading...;Lädt...;Es ladet...
+LockpickLevel;Lockpick Level;Dietrich Stufe;Dietrich Level
 Mana;Mana;Mana;Mana
 ManaRegeneration;Mana Regeneration;Manaregeneration;Manaregeneration
 MaxFPS;Max. FPS;Max. FPS;Max. FPS
@@ -116,6 +99,7 @@ On;On;An;Ii
 OperationFailed;Operation failed;Operation fehlgeschlagen;Die Operation isch id Hose
 Options;Options;Einstellungen;Iistellige
 OutOfRange;Out of range;Ich muss näher ran;Da isch z'wiit weg
+Pending;Pending;Ausstehend;Nanig erfüllt
 PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
 PressAnyKey;<?>;<?>;<?>
 QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du diesen Speicherstand wirklich löschen?;Wetsch de Speicherstand würkli lösche?
@@ -176,26 +160,9 @@ Strength;Strength;Stärke;Stärchi
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
 ThirdSpell;3. Spell;3. Zauber;3. Zauber
 Twilight;Twilight;Zwielicht;Zwieliecht
+Type;Type;Typ;Typ
 Unknown;Unknown;Unbekannt;Unbekannt
+WeaponDamage;Weapon Damage;Waffenschaden;Waffeschade
+WindForce;Wind Force;Windstärke;Windstärchi
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-Type;Type;Typ;Typ
-Level;Level;Stufe;Level
-Cooldown;Cooldown;Abklingzeit;Abklingziit
-DamageType;Damage Type;Schadenstyp;Schadetyp
-Heal;Heal;Heilung;Heilig
-AllowedModifiers;Allowed Gem Types;Erlaubte Edelsteintypen;Erlaubti Edelsteitype
-WeaponDamage;Weapon Damage;Waffenschaden;Waffeschade
-AdditionalResistance;Additional Resistance;Zusätzlicher Widerstand;Zuesätzliche Widerstand
-LockpickLevel;Lockpick Level;Dietrich Stufe;Dietrich Level
-FearLevel;Fear Level;Furcht Stufe;Angscht Stufe
-WindForce;Wind Force;Windstärke;Windstärchi
-Pending;Pending;Ausstehend;Nanig erfüllt
-Done;Done;Erfüllt;Erfüllt
-Active;Active;Aktiv;Aktiv
-Completed;Completed;Abgeschlossen;Fertig
-Failed;Failed;Fehlgeschlagen;Gfailt
-it_qe_letter_text;"Dear king
-bla bla blaaaaaaaa bla blaaaa bla bla and you better bla bla soon! CU your enemy.";"Lieber König
-blabla blaaaaaaaa bla bla bla lblaaaaa bla und sowieso";"Liebe König
-bla blubb bla bla bli bla blaaaaaaaa bla ende."

@@ -1,16 +1,16 @@
 #include "Dialogue.h"
-#include "CharacterCore.h"
+#include "Screens/GameScreen.h"
 #include "GUI/DialogueWindow.h"
 #include "DialogueLoader.h"
 
-void Dialogue::load(const std::string& id, CharacterCore* core, DialogueWindow* window)
+void Dialogue::load(const std::string& id, GameScreen* screen, DialogueWindow* window)
 {
 	m_id = id;
-	m_core = core;
+	m_screen = screen;
 	m_window = window;
 	m_nodes.clear();
 
-	DialogueLoader loader(*this, core);
+	DialogueLoader loader(*this, screen->getCharacterCore());
 	loader.loadDialogue();
 }
 
@@ -52,34 +52,23 @@ bool Dialogue::updateWindow()
 	{
 		for (auto& it : m_currentNode->npcStates)
 		{
-			m_core->setNPCState(it.first, it.second);
+			m_screen->getCharacterCore()->setNPCState(it.first, it.second);
 		}
 		for (auto& it : m_currentNode->questStates)
 		{
-			m_core->setQuestState(it.first, it.second);
+			m_screen->getCharacterCore()->setQuestState(it.first, it.second);
 		}
-		if (m_currentNode->goldChanges > 0)
+		if (m_currentNode->goldChanges != 0)
 		{
-			m_core->addGold(m_currentNode->goldChanges);
-		}
-		else if (m_currentNode->goldChanges < 0)
-		{
-			m_core->removeGold(-m_currentNode->goldChanges);
+			m_screen->notifyItemChange("gold", m_currentNode->goldChanges);
 		}
 		for (auto& it : m_currentNode->questProgress)
 		{
-			m_core->setQuestConditionFulfilled(it.first, it.second);
+			m_screen->notifyQuestConditionFulfilled(it.first, it.second);
 		}
 		for (auto& it : m_currentNode->itemChanges)
 		{
-			if (it.second < 0)
-			{
-				m_core->removeItem(it.first, -it.second);
-			}
-			else if (it.second > 0)
-			{
-				m_core->addItem(it.first, it.second);
-			}
+			m_screen->notifyItemChange(it.first, it.second);
 		}
 	}
 	return true;

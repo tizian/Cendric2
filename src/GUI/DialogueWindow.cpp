@@ -31,18 +31,18 @@ DialogueWindow::~DialogueWindow()
 	g_textProvider->releaseDialogueText();
 }
 
-void DialogueWindow::load(const NPCBean& npcBean, CharacterCore* core)
+void DialogueWindow::load(const NPCBean& npcBean, GameScreen* screen)
 {
 	setNPC(npcBean);
-	setDialogue(npcBean.dialogueID, core);
+	setDialogue(npcBean.dialogueID, screen);
 }
 
-void DialogueWindow::setDialogue(const std::string& dialogueID, CharacterCore* core)
+void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* screen)
 {
 	g_textProvider->releaseDialogueText();
 	delete m_dialogue;
 	m_dialogue = new Dialogue();
-	m_dialogue->load(dialogueID, core, this);
+	m_dialogue->load(dialogueID, screen, this);
 	
 	if (m_dialogue->getID().size() > 4)
 	{

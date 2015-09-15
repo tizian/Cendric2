@@ -228,19 +228,17 @@ GameObjectType LevelMainCharacter::getConfiguredType() const
 
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const
 {
-	m_core->addItem(item, quantity);
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
 	{
-		levelScreen->reloadInventory();
+		levelScreen->notifyItemChange(item, quantity);
 	}
 }
 
 void LevelMainCharacter::removeItems(const std::string& item, int quantity) const
 {
-	m_core->removeItem(item, quantity);
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
 	{
-		levelScreen->reloadInventory();
+		levelScreen->notifyItemChange(item, -quantity);
 	}
 }
 
@@ -254,18 +252,16 @@ void LevelMainCharacter::lootItems(std::map<std::string, int>& items) const
 
 void LevelMainCharacter::addGold(int gold) const
 {
-	m_core->addGold(gold);
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
 	{
-		levelScreen->reloadInventory();
+		levelScreen->notifyItemChange("gold", gold);
 	}
 }
 
 void LevelMainCharacter::removeGold(int gold) const
 {
-	m_core->removeGold(gold);
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen))
 	{
-		levelScreen->reloadInventory();
+		levelScreen->notifyItemChange("gold", -gold);
 	}
 }

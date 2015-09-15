@@ -3,13 +3,13 @@
 #include "global.h"
 #include "Map.h"
 #include "MapMainCharacter.h"
-#include "Screen.h"
+#include "Screens/GameScreen.h"
 #include "ResourceManager.h"
 #include "Screens/LoadingScreen.h"
 #include "GUI/DialogueWindow.h"
 #include "MapInterface.h"
 
-class MapScreen : public Screen
+class MapScreen : public GameScreen
 {
 public:
 	MapScreen(const std::string& mapID, CharacterCore* core);
@@ -29,5 +29,4 @@ private:
 	MapMainCharacter* m_mainChar;
 	bool m_isOnLevelEntry = true;
 	DialogueWindow* m_dialogueWindow = nullptr;
-	MapInterface* m_interface;
 };

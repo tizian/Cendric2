@@ -75,7 +75,6 @@ QuestLog::~QuestLog()
 	delete m_window;
 	delete m_descriptionWindow;
 	clearAllEntries();
-	g_textProvider->releaseQuestText();
 }
 
 void QuestLog::clearAllEntries()
@@ -213,14 +212,12 @@ void QuestLog::reload()
 
 void QuestLog::show()
 {
-	g_textProvider->loadQuestText();
 	m_isVisible = true;
 }
 
 void QuestLog::hide()
 {
 	m_isVisible = false;
-	g_textProvider->releaseQuestText();
 }
 
 // <<< QUEST ENTRY >>>

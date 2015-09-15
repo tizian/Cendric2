@@ -4,6 +4,7 @@
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 #include "Structs/NPCBean.h"
+#include "Screens/GameScreen.h"
 
 #include "Dialogue.h"
 
@@ -33,7 +34,7 @@ class DialogueWindow : public Window
 public:
 	DialogueWindow();
 	~DialogueWindow();
-	void load(const NPCBean& npcBean, CharacterCore* core);
+	void load(const NPCBean& npcBean, GameScreen* screen);
 	void render(sf::RenderTarget& renderTarget) override;
 	// returns true as long as the dialogue exists and false as soon as it ends
 	bool updateDialogue();
@@ -44,7 +45,7 @@ public:
 
 private:
 	void setNPC(const NPCBean& bean);
-	void setDialogue(const std::string& dialogueID, CharacterCore* core);
+	void setDialogue(const std::string& dialogueID, GameScreen* screen);
 	std::vector<DialogueOption> m_options;
 	int m_chosenOption = 0;
 	Dialogue* m_dialogue = nullptr;

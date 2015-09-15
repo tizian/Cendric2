@@ -23,6 +23,7 @@ public:
 	void deactivate();
 
 	void highlight(bool highlight);
+	void setAmount(int amount);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void onLeftJustPressed() override;

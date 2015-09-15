@@ -105,6 +105,54 @@ void Inventory::clearAllSlots()
 	m_selectedSlot = nullptr;
 }
 
+void Inventory::notifyChange(const std::string& itemID)
+{
+	if (itemID.compare("gold") == 0)
+	{
+		reloadGold();
+		return;
+	}
+	const ItemBean* bean = g_resourceManager->getItemBean(itemID);
+	if (bean == nullptr) return;
+	if (m_typeMap.find(bean->type) == m_typeMap.end()) return;
+
+	std::vector<InventorySlot>* tab = m_typeMap.at(bean->type);
+	
+	// search for the slot
+	std::vector<InventorySlot>::iterator it = (*tab).begin();
+	while (it != (*tab).end()) 
+	{
+		if (bean->id.compare((*it).getItemID()) == 0)
+		{
+			// the slot has been found.
+			if (m_core->getData().items.find(itemID) == m_core->getData().items.end())
+			{
+				// the item was removed. check if it is selected.
+				if (m_selectedSlot == &(*it))
+				{
+					m_selectedSlot = nullptr;
+					delete m_descriptionWindow;
+					m_descriptionWindow = nullptr;
+				}
+				(*tab).erase(it);
+				calculateSlotPositions(*(m_typeMap[bean->type]));
+			}
+			else
+			{
+				(*it).setAmount(m_core->getData().items.at(itemID));
+			}
+			return;
+		}
+		it++;
+	}
+
+	// the slot for that item has not been found. The slot is added with the current amount in the core
+	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
+	m_typeMap[bean->type]->push_back(InventorySlot(Item(*bean), m_core->getData().items.at(itemID)));
+
+	calculateSlotPositions(*(m_typeMap[bean->type]));
+}
+
 void Inventory::update(const sf::Time& frameTime)
 {
 	if (!m_isVisible) return;
@@ -370,15 +418,20 @@ void Inventory::selectTab(ItemType type)
 	}
 }
 
-void Inventory::reload()
+void Inventory::reloadGold()
 {
-	// reload gold
 	std::wstring gold = L"";
 	gold.append(g_textProvider->getText("Gold"));
 	gold.append(L": ");
 	gold.append(std::to_wstring(m_core->getData().gold));
 	gold.append(L"\n\n");
 	m_goldText.setString(gold);
+}
+
+void Inventory::reload()
+{
+	// reload gold
+	reloadGold();
 	
 	// reload items
 	clearAllSlots();

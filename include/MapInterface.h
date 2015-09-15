@@ -1,53 +1,15 @@
 #pragma once
 
 #include "global.h"
-#include "CharacterCore.h"
-#include "InputController.h"
-#include "ResourceManager.h"
-
-#include "GUI/Inventory.h"
-#include "GUI/CharacterInfo.h"
-#include "GUI/Spellbook.h"
-#include "GUI/QuestLog.h"
+#include "GUI/GameInterface.h"
 
 // The interface overlay in a map
 // if the keys for character screen, spellbook and inventory are pressed, these will display.
-class MapInterface
+class MapInterface : public GameInterface
 {
 public:
-	MapInterface(CharacterCore* core);
+	MapInterface(GameScreen* screen);
 	~MapInterface();
 
-	// reloads the inventory 
-	void reloadInventory();
-	// reloads the quest log
-	void reloadQuestLog();
-	// an equipment item has been dropped. forward to equipment bar
-	void notifyEquipmentDrop(const InventorySlotClone* item);
-	// highlight equipment slots
-	void highlightEquipmentSlots(bool highlight);
-
-	void render(sf::RenderTarget& target);
-	void update(const sf::Time& frameTime);
-
-	CharacterCore* getCore() const;
-
 private:
-	CharacterCore* m_core;
-
-	// <<< INVENTORY >>>
-	Inventory m_inventory;
-	void updateInventory(const sf::Time& frameTime);
-
-	// <<< SPELLBOOK >>>
-	Spellbook m_spellbook;
-	void updateSpellbook(const sf::Time& frameTime);
-
-	// <<< CHARCTER INFO >>>
-	CharacterInfo m_characterInfo;
-	void updateCharacterInfo();
-
-	// <<< QUEST LOG >>>
-	QuestLog m_questLog;
-	void updateQuestLog(const sf::Time& frameTime);
 };

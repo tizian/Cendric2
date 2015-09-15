@@ -33,16 +33,19 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	// reloads the inventory text & items, depending on the core
-	void reload();
+	void notifyChange(const std::string& itemID);
 
 private:
 	CharacterCore* m_core;
 	LevelInterface* m_levelInterface = nullptr;
 	MapInterface* m_mapInterface = nullptr;
 	bool m_isVisible = false;
-
 	void init();
+
+	// reloads the inventory text & items, depending on the core
+	void reload();
+	// reloads the inventory gold text
+	void reloadGold();
 
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector

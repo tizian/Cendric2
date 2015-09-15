@@ -1,26 +1,20 @@
 #pragma once
 
 #include "global.h"
-#include "CharacterCore.h"
 #include "SpellManager.h"
-#include "InputController.h"
-#include "ResourceManager.h"
 
+#include "GUI/GameInterface.h"
 #include "GUI/HealthBar.h"
-#include "GUI/Inventory.h"
-#include "GUI/CharacterInfo.h"
-#include "GUI/SpellSelection.h"
 #include "GUI/BuffBar.h"
 #include "GUI/QuickSlotBar.h"
-#include "GUI/Spellbook.h"
-#include "GUI/QuestLog.h"
+#include "GUI/SpellSelection.h"
 
 // The interface overlay in a level, displaying hp bar, spell cooldowns, buffs, quickslot bar
 // if the keys for character screen and inventory are pressed, these will display as well.
-class LevelInterface
+class LevelInterface : public GameInterface
 {
 public:
-	LevelInterface(CharacterCore* core, LevelMainCharacter* character);
+	LevelInterface(GameScreen* screen, LevelMainCharacter* character);
 	~LevelInterface();
 
 	// the spell manager of the level main character.
@@ -28,52 +22,33 @@ public:
 
 	// used to add buffs to the buff bar
 	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
-	// reloads the inventory. also reloads the quick slot bar
-	void reloadInventory();
-	// reloads the quest log
-	void reloadQuestLog();
+
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const InventorySlotClone* item);
 	// consumes a consumable item
 	void consumeItem(const Item& item);
 	// highlight quickslots
 	void highlightQuickslots(bool highlight);
+	// reloads inventory and quickslot bar
+	void reloadInventory(const std::string& changeditemID) override;
 
-	void render(sf::RenderTarget& target);
-	void update(const sf::Time& frameTime);
+	void render(sf::RenderTarget& target) override;
+	void update(const sf::Time& frameTime) override;
 
-	CharacterCore* getCore() const;
 	LevelMainCharacter* getMainCharacter() const;
 
 private:
-	CharacterCore* m_core;
-	LevelMainCharacter* m_character;
+	LevelMainCharacter* m_character = nullptr;
 
-	// <<< INVENTORY >>>
-	Inventory m_inventory;
-	void updateInventory(const sf::Time& frameTime);
-
-	// <<< CHARCTER INFO >>>
-	CharacterInfo m_characterInfo;
-	void updateCharacterInfo();
-
-	// <<< SPELLBOOK >>>
-	Spellbook m_spellbook;
-	void updateSpellbook(const sf::Time& frameTime);
-
-	// <<< QUEST LOG >>>
-	QuestLog m_questLog;
-	void updateQuestLog(const sf::Time& frameTime);
-	
 	// <<< HEALTH BAR >>>
-	HealthBar m_healthBar;
+	HealthBar* m_healthBar = nullptr;
 
 	// <<< SPELL SELECTION >>>
 	SpellSelection* m_spellSelection = nullptr;
 
 	// <<< QUICK SLOTS >>>
-	QuickSlotBar m_quickSlotBar;
+	QuickSlotBar* m_quickSlotBar = nullptr;
 
 	// <<< BUFF BAR >>>
-	BuffBar m_buffBar;
+	BuffBar* m_buffBar = nullptr;
 };

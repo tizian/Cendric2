@@ -61,8 +61,6 @@ CharacterInfo::CharacterInfo(const AttributeBean* attributes)
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
-
-	reload();
 }
 
 CharacterInfo::~CharacterInfo()

@@ -23,32 +23,6 @@ void TextProvider::loadDialogueText(const std::string& filename)
 	}
 }
 
-void TextProvider::loadQuestText()
-{
-	releaseQuestText();
-	std::map<std::string, std::wstring> questMap;
-	TranslationReader reader;
-	if (!reader.readTranslations(m_language, questMap, TRANSLATION_QUEST_FILENAME))
-	{
-		return;
-	}
-	for (auto& it : questMap)
-	{
-		m_translationMap.insert(it);
-		m_questTexts.push_back(it.first);
-	}
-}
-
-void TextProvider::releaseQuestText()
-{
-	for (auto& it : m_questTexts)
-	{
-		auto& element = m_translationMap.find(it);
-		if (element != m_translationMap.end()) m_translationMap.erase(element);
-	}
-	m_questTexts.clear();
-}
-
 void TextProvider::releaseDialogueText()
 {
 	if (m_currentDialogue.empty()) return;
@@ -70,7 +44,9 @@ void TextProvider::reload()
 		m_currentDialogueTexts.clear();
 		setLanguage(g_resourceManager->getConfiguration().language);
 		TranslationReader reader;
-		reader.readTranslations(m_language, m_translationMap, TRANSLATION_FILENAME);
+		reader.readTranslations(m_language, m_translationMap, TRANSLATION_CORE_FILENAME);
+		reader.readTranslations(m_language, m_translationMap, TRANSLATION_ITEMS_FILENAME);
+		reader.readTranslations(m_language, m_translationMap, TRANSLATION_QUESTS_FILENAME);
 	}
 }
 

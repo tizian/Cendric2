@@ -18,9 +18,9 @@ InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getBean
 	m_inside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_items));
 	m_inside.setTextureRect(sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, static_cast<int>(SIDE_LENGTH), static_cast<int>(SIDE_LENGTH)));
 
-	m_amountText.setString(amount < 0 ? "" : to_string(amount));
-	m_amountText.setCharacterSize(8);
+	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(CENDRIC_COLOR_WHITE);
+	setAmount(amount);
 
 	m_outside.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
 	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
@@ -42,6 +42,11 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos)
 	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
 	m_outside.setOutlineThickness(MARGIN);
 	m_outside.setOutlineColor(CENDRIC_COLOR_DARK_GREY);
+}
+
+void InventorySlot::setAmount(int amount)
+{
+	m_amountText.setString(amount < 0 ? "" : to_string(amount));
 }
 
 void InventorySlot::activate()
