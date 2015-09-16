@@ -21,17 +21,22 @@ void GameScreen::notifyItemChange(const std::string& itemID, int amount)
 
 void GameScreen::notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition)
 {
-	// TODO
 	m_characterCore->setQuestConditionFulfilled(questID, condition);
-	m_progressLog.addQuestProgress(questID);
+	m_progressLog.addQuestConditionFullfilled(questID, condition);
 	m_interface->reloadQuestLog(questID);
 }
 
 void GameScreen::notifyQuestTargetKilled(const std::string& questID, const std::string& name)
 {
-	// TODO
 	m_characterCore->setQuestTargetKilled(std::make_pair(questID, name));
-	m_progressLog.addQuestProgress(questID);
+	m_progressLog.addQuestTargetKilled(questID, name);
+	m_interface->reloadQuestLog(questID);
+}
+
+void GameScreen::notifyQuestStateChanged(const std::string& questID, QuestState state)
+{
+	m_characterCore->setQuestState(questID, state);
+	m_progressLog.addQuestStateChanged(questID, state);
 	m_interface->reloadQuestLog(questID);
 }
 

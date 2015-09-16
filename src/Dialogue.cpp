@@ -56,7 +56,7 @@ bool Dialogue::updateWindow()
 		}
 		for (auto& it : m_currentNode->questStates)
 		{
-			m_screen->getCharacterCore()->setQuestState(it.first, it.second);
+			m_screen->notifyQuestStateChanged(it.first, it.second);
 		}
 		if (m_currentNode->goldChanges != 0)
 		{

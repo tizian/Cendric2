@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include "Level.h"
 #include "LevelMainCharacter.h"
+#include "Screens/LevelScreen.h"
 
 using namespace std;
 
@@ -462,6 +463,6 @@ void Enemy::setDead()
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
 	if (!m_questTarget.first.empty())
 	{
-		m_screen->getCharacterCore()->setQuestTargetKilled(m_questTarget);
+		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(m_questTarget.first, m_questTarget.second);
 	}
 }
