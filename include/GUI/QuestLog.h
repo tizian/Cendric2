@@ -78,6 +78,7 @@ private:
 	
 	QuestState m_currentTab;
 	QuestEntry* m_selectedEntry = nullptr;
+	std::string m_selectedQuestID = "";
 
 	void selectTab(QuestState state);
 	void selectEntry(QuestEntry* selectedEntry);

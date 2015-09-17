@@ -87,9 +87,11 @@ public:
 	// is the quest with id "id" complete?
 	bool isQuestComplete(const std::string& questID) const;
 	// a target for a quest has been killed
-	void setQuestTargetKilled(const std::pair<std::string, std::string>& questtarget);
+	void setQuestTargetKilled(const std::string& questID, const std::string& name);
 	// a condition for a quest has been fulfilled
 	void setQuestConditionFulfilled(const std::string& questID, const std::string& condition);
+	// is a enemy in a certain level dead?
+	bool isEnemyKilled(const std::string& levelID, int objectID);
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;

@@ -398,10 +398,8 @@ bool CharacterCore::isQuestComplete(const std::string& questID) const
 	return true;
 }
 
-void CharacterCore::setQuestTargetKilled(const std::pair<std::string, std::string>& questtarget)
+void CharacterCore::setQuestTargetKilled(const std::string& questID, const std::string& name)
 {
-	std::string questID = questtarget.first;
-	std::string name = questtarget.second;
 	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end())
 	{
 		m_data.questTargetProgress.insert({ questID, std::map<std::string, int>() });
@@ -420,6 +418,13 @@ void CharacterCore::setQuestConditionFulfilled(const std::string& questID, const
 		m_data.questConditionProgress.insert({ questID, std::set<std::string>()});
 	}
 	m_data.questConditionProgress.at(questID).insert(condition);
+}
+
+bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID)
+{
+	if (m_data.enemiesKilled.find(levelID) == m_data.enemiesKilled.end()) return false;
+	if (m_data.enemiesKilled.at(levelID).find(objectID) == m_data.enemiesKilled.at(levelID).end()) return false;
+	return true;
 }
 
 const CharacterCoreData& CharacterCore::getData() const

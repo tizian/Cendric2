@@ -16,6 +16,7 @@ public:
 	
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
+	void updateProgressLog(const sf::Time& frameTime);
 	
 	// notify item change -> change in core, display text and reload inventory
 	void notifyItemChange(const std::string& itemID, int amount);

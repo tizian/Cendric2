@@ -460,6 +460,7 @@ void Enemy::setDead()
 {
 	LevelMovableGameObject::setDead();
 	m_enemyState = EnemyState::Dead;
+	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
 	if (!m_questTarget.first.empty())
 	{

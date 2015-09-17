@@ -122,6 +122,7 @@ void QuestLog::selectEntry(QuestEntry* entry)
 	m_selectedEntry = entry;
 	m_selectedEntry->select();
 	showDescription(m_selectedEntry->getQuestID());
+	m_selectedQuestID = m_selectedEntry->getQuestID();
 }
 
 bool QuestLog::isVisible() const
@@ -158,6 +159,7 @@ void QuestLog::showDescription(const std::string& questID)
 void QuestLog::hideDescription()
 {
 	m_descriptionWindow->hide();
+	m_selectedQuestID = "";
 }
 
 void QuestLog::selectTab(QuestState state)
@@ -187,12 +189,16 @@ void QuestLog::selectTab(QuestState state)
 void QuestLog::reload()
 {
 	clearAllEntries();
-	hideDescription();
 	
 	for (auto& it : m_core->getData().questStates)
 	{
 		if (m_stateMap[it.second] == nullptr) continue;
 		m_stateMap[it.second]->push_back(QuestEntry(it.first));
+		if (it.first.compare(m_selectedQuestID) == 0 && m_currentTab != it.second)
+		{
+			// assure that an item that is not in the current tab can never be selected
+			m_selectedQuestID = "";
+		}
 	}
 
 	// calculate positions
@@ -206,6 +212,10 @@ void QuestLog::reload()
 			it2.deselect();
 			it2.setPosition(sf::Vector2f(xOffset, yOffset));
 			yOffset += 1.5f * GUIConstants::CHARACTER_SIZE_M;
+			if (it2.getQuestID().compare(m_selectedQuestID) == 0)
+			{
+				selectEntry(&it2);
+			}
 		}
 	}
 }

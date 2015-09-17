@@ -18,6 +18,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 			delete m_dialogueWindow;
 			m_dialogueWindow = nullptr;
 		}
+		updateProgressLog(frameTime);
 		return this;
 	}
 	else
