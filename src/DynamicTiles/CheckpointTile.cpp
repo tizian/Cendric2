@@ -55,6 +55,7 @@ void CheckpointTile::onHit(LevelMovableGameObject* mob)
 			{
 				screen->getCharacterCore()->setLevel(sf::Vector2f(bb.left, bb.top), m_level->getID());
 				screen->writeToCore();
+				screen->setTooltipText(g_textProvider->getText("CheckpointReached"), sf::Color::Green, true);
 			}
 		}
 		else
