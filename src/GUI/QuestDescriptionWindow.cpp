@@ -196,6 +196,7 @@ void QuestDescriptionWindow::render(sf::RenderTarget& renderTarget)
 	Window::render(renderTarget);
 	renderTarget.draw(m_titleText);
 	renderTarget.draw(m_descriptionText);
+	renderTarget.draw(m_stateText);
 	for (auto& it : m_targetsTexts)
 	{
 		renderTarget.draw(it);

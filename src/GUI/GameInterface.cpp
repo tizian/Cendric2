@@ -34,7 +34,7 @@ void GameInterface::reloadInventory(const std::string& changedItemID)
 	m_inventory->notifyChange(changedItemID);
 }
 
-void GameInterface::reloadQuestLog(const std::string& changedQuestID)
+void GameInterface::reloadQuestLog()
 {
 	m_questLog->reload();
 }

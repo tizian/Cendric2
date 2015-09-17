@@ -197,7 +197,7 @@ void QuestLog::reload()
 		if (it.first.compare(m_selectedQuestID) == 0 && m_currentTab != it.second)
 		{
 			// assure that an item that is not in the current tab can never be selected
-			m_selectedQuestID = "";
+			hideDescription();
 		}
 	}
 

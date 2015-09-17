@@ -21,8 +21,8 @@ public:
 
 	// reloads the inventory for the items that have changed. if the string equals "gold", reloads gold
 	virtual void reloadInventory(const std::string& changeditemID);
-	// reloads the quest log for the quest that has changed
-	virtual void reloadQuestLog(const std::string& changedQuestID);
+	// reloads the quest log 
+	virtual void reloadQuestLog();
 	
 	virtual void render(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);

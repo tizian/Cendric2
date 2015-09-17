@@ -13,31 +13,31 @@ GameScreen::~GameScreen()
 
 void GameScreen::notifyItemChange(const std::string& itemID, int amount)
 {
-	// add to core
 	getCharacterCore()->notifyItemChange(itemID, amount);
 	m_progressLog.addItemProgress(itemID, amount);
 	m_interface->reloadInventory(itemID);
+	m_interface->reloadQuestLog();
 }
 
 void GameScreen::notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition)
 {
 	getCharacterCore()->setQuestConditionFulfilled(questID, condition);
 	m_progressLog.addQuestConditionFullfilled(questID, condition);
-	m_interface->reloadQuestLog(questID);
+	m_interface->reloadQuestLog();
 }
 
 void GameScreen::notifyQuestTargetKilled(const std::string& questID, const std::string& name)
 {
 	getCharacterCore()->setQuestTargetKilled(questID, name);
 	m_progressLog.addQuestTargetKilled(questID, name);
-	m_interface->reloadQuestLog(questID);
+	m_interface->reloadQuestLog();
 }
 
 void GameScreen::notifyQuestStateChanged(const std::string& questID, QuestState state)
 {
 	getCharacterCore()->setQuestState(questID, state);
 	m_progressLog.addQuestStateChanged(questID, state);
-	m_interface->reloadQuestLog(questID);
+	m_interface->reloadQuestLog();
 }
 
 Screen* GameScreen::update(const sf::Time& frameTime)

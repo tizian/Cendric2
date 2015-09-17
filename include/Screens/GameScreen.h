@@ -18,7 +18,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void updateProgressLog(const sf::Time& frameTime);
 	
-	// notify item change -> change in core, display text and reload inventory
+	// notify item change -> change in core, display text and reload inventory. Also reload quest log.
 	void notifyItemChange(const std::string& itemID, int amount);
 	// notify quest condition progress -> change in core, display text and reload quest log
 	void notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition);
