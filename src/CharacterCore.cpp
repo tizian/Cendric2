@@ -289,7 +289,11 @@ void CharacterCore::loadItems()
 	for (auto& it : m_data.items)
 	{
 		const ItemBean* bean = g_resourceManager->getItemBean(it.first);
-		if (bean == nullptr) continue;
+		if (bean == nullptr)
+		{
+			g_logger->logError("CharacterCore", "Item not found: " + it.first);
+			continue;
+		}
 		m_items.insert({ it.first, Item(*bean) });
 	}
 }
@@ -491,6 +495,14 @@ void CharacterCore::addItem(const std::string& item, int quantity)
 	{
 		m_data.items.insert({ item, quantity });
 	}
+
+	const ItemBean* bean = g_resourceManager->getItemBean(item);
+	if (bean == nullptr)
+	{
+		g_logger->logError("CharacterCore", "Item not found: " + item);
+		return;
+	}
+	m_items.insert({ item, Item(*bean) });
 }
 
 void CharacterCore::removeItem(const std::string& item, int quantity)
