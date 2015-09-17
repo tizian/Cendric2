@@ -69,10 +69,10 @@ bool LevelReader::readLights(XMLElement* objectgroup, LevelData& data) const
 		XMLCheckResult(result);
 
 		LightBean bean;
-		bean.radiusX = width / 2.f;
-		bean.radiusY = height / 2.f;
-		bean.center.x = x + bean.radiusX;
-		bean.center.y = y + bean.radiusY;
+		bean.radius.x = width / 2.f;
+		bean.radius.y = height / 2.f;
+		bean.center.x = x + bean.radius.x;
+		bean.center.y = y + bean.radius.y;
 
 		data.lights.push_back(bean);
 		object = object->NextSiblingElement("object");

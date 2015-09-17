@@ -1,7 +1,7 @@
 #include "Spells/FireBallSpell.h"
 
 FireBallSpell::FireBallSpell() : Spell(), 
-LightObject(LightBean(sf::Vector2f(), 30.f, 30.f))
+LightObject(LightBean(sf::Vector2f(), 30.f))
 {
 }
 

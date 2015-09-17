@@ -9,11 +9,11 @@ LightObject::LightObject(const LightBean& bean) : GameObject()
 
 void LightObject::init()
 {
-	m_ellipse.setOrigin(m_bean.radiusX, m_bean.radiusX); // setting the origin to the center
-	m_ellipse.setRadius(m_bean.radiusX);
-	m_yScale = (float)m_bean.radiusY / (float)m_bean.radiusX;
-	m_ellipse.setScale(1.f, m_yScale);
+	m_ellipse.setOrigin(1.f, 1.f); // setting the origin to the center
+	m_ellipse.setRadius(1.f);
+	m_ellipse.setScale(m_bean.radius.x, m_bean.radius.y);
 	m_ellipse.setFillColor(sf::Color(255, 255, 255, 100));
+	m_animationTimer = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
 	setPosition(m_bean.center);
 }
@@ -30,31 +30,16 @@ void LightObject::render(sf::RenderTarget& renderTarget)
 
 void LightObject::update(const sf::Time& frameTime)
 {
-	GameObject::updateTime(m_changingTime, frameTime);
-	if (m_changingTime == sf::Time::Zero)
-	{
-		m_changingTime = INTERVAL_TIME;
-		m_isGrowing = !m_isGrowing;
-	}
+	m_animationTimer += frameTime.asSeconds();
 
-	float scaleX;
-	float scaleY;
-	if (m_isGrowing)
-	{
-		scaleX = ((1.f - MAX_SCALING) * 1) + MAX_SCALING * 1 * ((1 - (m_changingTime / INTERVAL_TIME)));
-		scaleY = ((1.f - MAX_SCALING) * m_yScale) + MAX_SCALING * m_yScale * ((1 - (m_changingTime / INTERVAL_TIME)));
-	}
-	else
-	{
-		scaleX = ((1.f - MAX_SCALING) * 1) - MAX_SCALING * 1 * ((1 - (m_changingTime / INTERVAL_TIME)));
-		scaleY = ((1.f - MAX_SCALING) * m_yScale) - MAX_SCALING * m_yScale * ((1 - (m_changingTime / INTERVAL_TIME)));
-	}
+	float scaleX = m_bean.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
+	float scaleY = m_bean.radius.y + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 	
 	m_ellipse.setScale(scaleX, scaleY);
 }
 
 void LightObject::setPosition(const sf::Vector2f& pos)
 {
-	GameObject::setPosition(pos - sf::Vector2f(m_bean.radiusX, m_bean.radiusY));
+	GameObject::setPosition(pos - sf::Vector2f(m_bean.radius.x, m_bean.radius.y));
 	m_ellipse.setPosition(pos);
 }

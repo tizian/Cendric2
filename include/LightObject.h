@@ -19,15 +19,15 @@ public:
 	virtual GameObjectType getConfiguredType() const override;
 
 protected:
-	LightBean m_bean;
-	float m_yScale;
 	void init();
-	
-	// for testing
+
+	LightBean m_bean;
+
 	sf::CircleShape m_ellipse;
-	// for flickering
-	sf::Time m_changingTime = sf::Time::Zero;
-	const sf::Time INTERVAL_TIME = sf::seconds(1.f);
-	bool m_isGrowing = true;
-	const float MAX_SCALING = 0.6f;
+	
+	// Flickering animation
+	float m_animationTimer;
+
+	const float AMPLITUDE = 1.f;
+	const float FREQUENCY = 10.f;
 };
