@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Structs/MapExitBean.h"
 #include "Structs/NPCBean.h"
+#include "Structs/LightBean.h"
 
 struct MapData
 {
@@ -18,5 +19,7 @@ struct MapData
 	std::vector<std::vector<bool>> collidableTileRects;
 	std::vector<MapExitBean> mapExits;
 	std::vector<NPCBean> npcs;
+	std::vector<LightBean> lights;
 	sf::FloatRect mapRect;
+	float dimming = 0.f;
 };

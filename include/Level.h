@@ -21,8 +21,8 @@ public:
 
 	// loads a .dric file
 	bool load(const std::string& id);
-	// loads only dynamic tiles. this happens AFTER everything other and is because of our nice RENDERTEXTURE PROBLEM >:(
-	void loadDynamicTiles(Screen* screen);
+	// loads dynamic tiles and lights. this happens AFTER everything else and is because of our nice RENDERTEXTURE PROBLEM >:(
+	void loadForRenderTexture(Screen* screen);
 	// loads enemies and level items for the level. must be called after a screen already has a main char
 	void loadAfterMainChar(Screen* screen);
 	// draws the level. Background layers, background tilemap, dynamic tiles
@@ -58,6 +58,8 @@ public:
 	float getGround(const sf::FloatRect& boundingBox) const;
 	// returns the next y position where the bounding box is on the ceiling.
 	float getCeiling(const sf::FloatRect& boundingBox) const;
+	// returns the global dimming factor (0 to 1)
+	float getDimming() const;
 
 private:
 	TileMap m_backgroundTileMap;

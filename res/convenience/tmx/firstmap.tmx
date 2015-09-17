@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="5">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="6">
  <properties>
+  <property name="dimming" value="0.4"/>
   <property name="name" value="Firstmap"/>
   <property name="tilesetpath" value="res/map/firstmap/tileset_map_firstmap.png"/>
  </properties>
@@ -771,6 +772,11 @@
     <property name="id" value="npc_guard"/>
     <property name="spritetexture" value="0,0"/>
    </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="light">
+  <object id="5" x="3912" y="798" width="151" height="129" rotation="10">
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

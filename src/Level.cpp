@@ -54,10 +54,11 @@ bool Level::load(const std::string& id)
 	return true;
 }
 
-void Level::loadDynamicTiles(Screen* screen)
+void Level::loadForRenderTexture(Screen* screen)
 {
 	LevelLoader loader;
 	loader.loadDynamicTiles(m_levelData, screen, this);
+	loader.loadLights(m_levelData, screen);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 }
 void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
@@ -386,4 +387,9 @@ LevelExitBean* Level::checkLevelExit(const sf::FloatRect& boundingBox) const
 const std::string& Level::getID() const
 {
 	return m_levelData.id;
+}
+
+float Level::getDimming() const
+{
+	return m_levelData.dimming;
 }

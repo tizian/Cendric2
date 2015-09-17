@@ -2,6 +2,7 @@
 #include "MapMainCharacter.h"
 #include "Map.h"
 #include "NPC.h"
+#include "LightObject.h"
 
 void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 {
@@ -18,5 +19,15 @@ void MapLoader::loadNpcs(MapData& data, Screen* screen) const
 		NPC* mapNPC = new NPC();
 		mapNPC->load(mainCharacter, it);
 		screen->addObject(mapNPC);
+	}
+}
+
+void MapLoader::loadLights(MapData& data, Screen* screen) const
+{
+	// calculate lights
+	for (auto& it : data.lights)
+	{
+		LightObject* lightObject = new LightObject(it);
+		screen->addObject(lightObject);
 	}
 }

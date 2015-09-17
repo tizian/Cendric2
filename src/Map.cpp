@@ -36,6 +36,12 @@ void Map::loadAfterMainChar(Screen* screen)
 	loader.loadNpcs(m_mapData, screen);
 }
 
+void Map::loadForRenderTexture(Screen* screen)
+{
+	MapLoader loader;
+	loader.loadLights(m_mapData, screen);
+}
+
 void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const
 {
 	sf::View view;
@@ -177,4 +183,9 @@ MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 const std::string& Map::getID() const
 {
 	return m_id;
+}
+
+float Map::getDimming() const
+{
+	return m_mapData.dimming;
 }

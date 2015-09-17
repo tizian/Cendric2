@@ -9,9 +9,9 @@ LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : GameScree
 	m_levelID = levelID;
 }
 
-void LevelScreen::loadDynamicTiles()
+void LevelScreen::loadForRenderTexture()
 {
-	m_currentLevel.loadDynamicTiles(this);
+	m_currentLevel.loadForRenderTexture(this);
 }
 
 void LevelScreen::load()
@@ -178,6 +178,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 			updateObjects(GameObjectType::_LevelEquipment, frameTime);
 			updateObjects(GameObjectType::_Spell, frameTime);
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
+			updateObjects(GameObjectType::_Light, frameTime);
 			deleteDisposedObjects();
 			return this;
 		}
@@ -204,6 +205,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
+	renderObjects(GameObjectType::_Light, renderTarget);
 
 	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 

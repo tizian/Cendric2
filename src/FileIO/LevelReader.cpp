@@ -46,6 +46,40 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data)
 	return true;
 }
 
+bool LevelReader::readLights(XMLElement* objectgroup, LevelData& data) const
+{
+	XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr)
+	{
+		int x;
+		XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int width;
+		result = object->QueryIntAttribute("width", &width);
+		XMLCheckResult(result);
+
+		int height;
+		result = object->QueryIntAttribute("height", &height);
+		XMLCheckResult(result);
+
+		LightBean bean;
+		bean.radiusX = width / 2.f;
+		bean.radiusY = height / 2.f;
+		bean.center.x = x + bean.radiusX;
+		bean.center.y = y + bean.radiusY;
+
+		data.lights.push_back(bean);
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
 bool LevelReader::readLevelExits(XMLElement* objectgroup, LevelData& data) const
 {
 	XMLElement* object = objectgroup->FirstChildElement("object");
@@ -325,6 +359,10 @@ bool LevelReader::readObjects(XMLElement* map, LevelData& data) const
 		else if (name.find("chests") != std::string::npos)
 		{
 			if (!readChestTiles(objectgroup, data)) return false;
+		}
+		else if (name.find("light") != std::string::npos)
+		{
+			if (!readLights(objectgroup, data)) return false;
 		}
 		else
 		{
@@ -639,6 +677,23 @@ bool LevelReader::readLevelName(XMLElement* _property, LevelData& data) const
 	return true;
 }
 
+bool LevelReader::readDimming(XMLElement* _property, LevelData& data) const
+{
+	// we've found the property "dimming"
+	float dimming = 0.f;
+	XMLError result = _property->QueryFloatAttribute("value", &dimming);
+	XMLCheckResult(result);
+
+	if (dimming < 0.0f || dimming > 1.0f)
+	{
+		g_logger->logError("LevelReader", "XML file could not be read, dimming value not allowed (only [0,1]).");
+		return false;
+	}
+	data.dimming = dimming;
+	return true;
+}
+
+
 bool LevelReader::readTilesetPath(XMLElement* _property, LevelData& data) const
 {
 	// we've found the property "tilesetpath"
@@ -764,6 +819,10 @@ bool LevelReader::readLevelProperties(XMLElement* map, LevelData& data) const
 		else if (name.compare("tilesetpath") == 0)
 		{
 			if (!readTilesetPath(_property, data)) return false;
+		}
+		else if (name.compare("dimming") == 0)
+		{
+			if (!readDimming(_property, data)) return false;
 		}
 		else
 		{

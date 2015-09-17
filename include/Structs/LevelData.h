@@ -6,6 +6,7 @@
 #include "BackgroundLayer.h"
 #include "Structs/LevelExitBean.h"
 #include "Structs/DynamicTileBean.h"
+#include "Structs/LightBean.h"
 
 struct LevelData
 {
@@ -29,5 +30,7 @@ struct LevelData
 	std::map<int, std::pair<std::map<std::string, int>, int>> enemyLoot;
 	std::map<int, std::pair<std::map<std::string, int>, int>> chestLoot;
 	std::vector<LevelExitBean> levelExits;
+	std::vector<LightBean> lights;
 	sf::FloatRect levelRect;
+	float dimming = 0.f;
 };

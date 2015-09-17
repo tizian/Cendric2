@@ -1,6 +1,7 @@
 #include "Spells/FireBallSpell.h"
 
-FireBallSpell::FireBallSpell() : Spell()
+FireBallSpell::FireBallSpell() : Spell(), 
+LightObject(LightBean(sf::Vector2f(), 30.f, 30.f))
 {
 }
 
@@ -22,4 +23,27 @@ void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, con
 	playCurrentAnimation(true);
 
 	Spell::load(bean, mob, target);
+}
+
+void FireBallSpell::render(sf::RenderTarget& renderTarget)
+{
+	Spell::render(renderTarget);
+	LightObject::render(renderTarget);
+}
+
+void FireBallSpell::update(const sf::Time& frameTime)
+{
+	Spell::update(frameTime);
+	LightObject::update(frameTime);
+}
+
+void FireBallSpell::setPosition(const sf::Vector2f& pos)
+{
+	LightObject::setPosition(pos);
+	Spell::setPosition(pos);
+}
+
+GameObjectType FireBallSpell::getConfiguredType() const
+{
+	return Spell::getConfiguredType();
 }

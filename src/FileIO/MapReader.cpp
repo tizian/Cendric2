@@ -196,6 +196,40 @@ bool MapReader::readMapExits(XMLElement* objectgroup, MapData& data) const
 	return true;
 }
 
+bool MapReader::readLights(XMLElement* objectgroup, MapData& data) const
+{
+	XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr)
+	{
+		int x;
+		XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int width;
+		result = object->QueryIntAttribute("width", &width);
+		XMLCheckResult(result);
+
+		int height;
+		result = object->QueryIntAttribute("height", &height);
+		XMLCheckResult(result);
+
+		LightBean bean;
+		bean.radiusX = width / 2.f;
+		bean.radiusY = height / 2.f;
+		bean.center.x = x + bean.radiusX;
+		bean.center.y = y + bean.radiusY;
+		
+		data.lights.push_back(bean);
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
 bool MapReader::readObjects(XMLElement* map, MapData& data) const
 {
 	XMLElement* objectgroup = map->FirstChildElement("objectgroup");
@@ -220,6 +254,10 @@ bool MapReader::readObjects(XMLElement* map, MapData& data) const
 		else if (name.find("npc") != std::string::npos)
 		{
 			if (!readNPCs(objectgroup, data)) return false;
+		}
+		else if (name.find("light") != std::string::npos)
+		{
+			if (!readLights(objectgroup, data)) return false;
 		}
 		else
 		{
@@ -516,6 +554,23 @@ bool MapReader::readTilesetPath(XMLElement* _property, MapData& data) const
 	return true;
 }
 
+bool MapReader::readDimming(XMLElement* _property, MapData& data) const
+{
+	// we've found the property "dimming"
+	float dimming = 0.f;
+	XMLError result = _property->QueryFloatAttribute("value", &dimming);
+	XMLCheckResult(result);
+
+	if (dimming < 0.0f || dimming > 1.0f)
+	{
+		g_logger->logError("LevelReader", "XML file could not be read, dimming value not allowed (only [0,1]).");
+		return false;
+	}
+
+	data.dimming = dimming;
+	return true;
+}
+
 bool MapReader::readMapProperties(XMLElement* map, MapData& data) const
 {
 	// check if renderorder is correct
@@ -586,6 +641,10 @@ bool MapReader::readMapProperties(XMLElement* map, MapData& data) const
 		else if (name.compare("tilesetpath") == 0)
 		{
 			if (!readTilesetPath(_property, data)) return false;
+		}
+		else if (name.compare("dimming") == 0)
+		{
+			if (!readDimming(_property, data)) return false;
 		}
 		else
 		{

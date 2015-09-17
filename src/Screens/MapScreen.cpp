@@ -19,6 +19,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 			m_dialogueWindow = nullptr;
 		}
 		updateProgressLog(frameTime);
+		updateObjects(GameObjectType::_Light, frameTime);
 		return this;
 	}
 	else
@@ -59,6 +60,7 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 			m_isOnLevelEntry = (bean != nullptr);
 			updateObjects(GameObjectType::_MainCharacter, frameTime);
 			updateObjects(GameObjectType::_NPC, frameTime);
+			updateObjects(GameObjectType::_Light, frameTime);
 			updateTooltipText(frameTime);
 			deleteDisposedObjects();
 			return this;
@@ -71,6 +73,11 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 			return new LoadingScreen(getCharacterCore());
 		}
 	}
+}
+
+void MapScreen::loadForRenderTexture()
+{
+	m_currentMap.loadForRenderTexture(this);
 }
 
 void MapScreen::load()
@@ -116,6 +123,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget)
 	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_NPC, renderTarget);
+	renderObjects(GameObjectType::_Light, renderTarget);
 	m_currentMap.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_NPC, renderTarget);

@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Enemies/RatEnemy.h"
 #include "Enemies/FireRatEnemy.h"
+#include "LightObject.h"
 
 using namespace std;
 
@@ -215,5 +216,15 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			if (coreData.enemiesKilled.at(data.id).find(it.first) != coreData.enemiesKilled.at(data.id).end()) enemy->setDead();
 			screen->addObject(enemy);
 		}
+	}
+}
+
+void LevelLoader::loadLights(LevelData& data, Screen* screen) const
+{
+	// calculate lights
+	for (auto& it : data.lights)
+	{
+		LightObject* lightObject = new LightObject(it);
+		screen->addObject(lightObject);
 	}
 }

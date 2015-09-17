@@ -18,6 +18,8 @@ public:
 	// loads a .dricmap file
 	bool load(const std::string& id);
 	void loadAfterMainChar(Screen* screen);
+	// loads lights. this happens AFTER everything else and is because of our nice RENDERTEXTURE PROBLEM >:(
+	void loadForRenderTexture(Screen* screen);
 	// draws the map. background tilelayers
 	void drawBackground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
 	// draws the map. foreground tilelayers
@@ -35,6 +37,8 @@ public:
 	const TileMap& getForegroundTilemap() const;
 	const sf::FloatRect& getMapRect() const;
 	const std::string& getID() const;
+	// returns the global dimming factor (0 to 1)
+	float getDimming() const;
 
 
 private:

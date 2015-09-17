@@ -75,6 +75,8 @@ void Spellbook::init()
 
 	delete m_weaponWindow;
 	m_weaponWindow = new WeaponWindow(m_core, m_isClickable);
+
+	reload();
 }
 
 Spellbook::~Spellbook()

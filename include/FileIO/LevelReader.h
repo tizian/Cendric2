@@ -25,11 +25,12 @@ public:
 private:
 	void initMaps();
 
-	// reads properties name, tile size, map size, background layers, tileset, starting @map node
+	// reads properties name, tile size, map size, background layers, tileset, dimming starting @map node
 	bool readLevelProperties(XMLElement* map, LevelData& data) const;
 	bool readLevelName(XMLElement* _property, LevelData& data) const;
 	bool readBackgroundLayers(XMLElement* _property, LevelData& data) const;
 	bool readTilesetPath(XMLElement* _property, LevelData& data) const;
+	bool readDimming(XMLElement* _property, LevelData& data) const;
 
 	bool readFirstGridIDs(XMLElement* map, LevelData& data);
 	bool readItemIDs(XMLElement* firstTile);
@@ -45,6 +46,7 @@ private:
 	bool readChestTiles(XMLElement* objects, LevelData& data) const;
 	bool readEnemies(XMLElement* objects, LevelData& data) const;
 	bool readLevelExits(XMLElement* objects, LevelData & data) const;
+	bool readLights(XMLElement* objects, LevelData & data) const;
 
 	// this is the width in tiles of the dynamic tile tileset
 	// and used to calculate the skin of the dynamic tile.

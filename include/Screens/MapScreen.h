@@ -15,6 +15,8 @@ public:
 	MapScreen(const std::string& mapID, CharacterCore* core);
 	// called by the loadingScreen
 	void load();
+	// loads lights that need a seperate rendertexture
+	void loadForRenderTexture();
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

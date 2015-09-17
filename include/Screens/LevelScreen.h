@@ -26,8 +26,8 @@ public:
 
 	void addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const;
 
-	// called by the loading screen. the dynamic tiles in level
-	void loadDynamicTiles();
+	// called by the loading screen. the dynamic tiles & light in level
+	void loadForRenderTexture();
 
 	// the level screen doesn't return the original core here, but a mere copy.
 	CharacterCore* getCharacterCore() const override;

@@ -39,10 +39,14 @@ Screen* LoadingScreen::update(const sf::Time& frameTime)
 
 	m_thread.join();
 	
-	if (m_mapToLoad != nullptr) return m_mapToLoad;
+	if (m_mapToLoad != nullptr)
+	{
+		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_mapToLoad->loadForRenderTexture();
+		return m_mapToLoad;
+	}
 	if (m_levelToLoad != nullptr)
 	{
-		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_levelToLoad->loadDynamicTiles();
+		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_levelToLoad->loadForRenderTexture();
 		return m_levelToLoad;
 	} 
 

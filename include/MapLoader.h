@@ -16,4 +16,6 @@ class MapLoader
 public:
 	// loads npcs out of map data and adds them directly to the screen
 	void loadNpcs(MapData& data, Screen* screen) const;
+	// loads lights out of map data and adds them directly to the screen
+	void loadLights(MapData& data, Screen* screen) const;
 };

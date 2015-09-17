@@ -20,7 +20,7 @@ public:
 
 	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target);
 	virtual void update(const sf::Time& frameTime) override;
-	void setViewable(bool value) override;
+	virtual void setViewable(bool value) override;
 	
 	void checkCollisions(const sf::Vector2f& nextPosition);
 
