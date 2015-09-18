@@ -28,6 +28,6 @@ protected:
 	// Flickering animation
 	float m_animationTimer;
 
-	const float AMPLITUDE = 1.f;
-	const float FREQUENCY = 10.f;
+	const float AMPLITUDE = 1.5f;
+	const float FREQUENCY = 8.f;
 };
