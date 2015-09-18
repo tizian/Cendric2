@@ -3,9 +3,49 @@
 
 using namespace std;
 
+const std::string vertexShader = \
+"void main()" \
+"{" \
+"    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;" \
+"    gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;" \
+"    gl_FrontColor = gl_Color;" \
+"}";
+
+const std::string lightFragmentShader = \
+"uniform sampler2D texture;" \
+"uniform float ambientLevel;" \
+"" \
+"void main()" \
+"{" \
+"    vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
+"    float lightLevel = max(0.0, ambientLevel - pixel.r);" \
+"    gl_FragColor = vec4(0.0, 0.0, 0.0, lightLevel);" \
+"}";
+
+const std::string foregroundFragmentShader = \
+"uniform sampler2D texture;" \
+"uniform float ambientLevel;" \
+"" \
+"void main()" \
+"{" \
+"    vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
+"    if (pixel.a > 0.0)" \
+"        gl_FragColor = vec4(0.0, 0.0, 0.0, ambientLevel);" \
+"    else" \
+"        gl_FragColor = pixel;" \
+"}";
+
 MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : GameScreen(core)
 {
 	m_mapID = mapID;
+
+	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	m_lightLayerShader.setParameter("texture", sf::Shader::CurrentTexture);
+	m_lightLayerShader.loadFromMemory(vertexShader, lightFragmentShader);
+
+	m_foregroundLayerShader.setParameter("texture", sf::Shader::CurrentTexture);
+	m_foregroundLayerShader.loadFromMemory(vertexShader, foregroundFragmentShader);
 }
 
 Screen* MapScreen::update(const sf::Time& frameTime)
@@ -119,23 +159,52 @@ void MapScreen::setDialogue(const NPCBean& bean)
 
 void MapScreen::render(sf::RenderTarget &renderTarget)
 {
-	// game view
+	// Render map background etc. to window							(Normal map background rendered)
 	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_NPC, renderTarget);
-	renderObjects(GameObjectType::_Light, renderTarget);
-	m_currentMap.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	sf::View adjustedView = renderTarget.getView();
+
+	// Render ambient light level + light sprites to extra buffer	(Buffer contains light levels as grayscale colors)
+	m_renderTexture.clear();
+	m_renderTexture.setView(adjustedView);
+	renderObjects(GameObjectType::_Light, m_renderTexture);
+	m_renderTexture.display();
+
+	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
+	m_sprite.setTexture(m_renderTexture.getTexture());
+	m_lightLayerShader.setParameter("ambientLevel", m_currentMap.getDimming());
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_sprite, &m_lightLayerShader);
+
+	// Clear extra buffer
+	m_renderTexture.clear(sf::Color(0, 0, 0, 0));
+
+	// Render foreground layer to extra buffer
+	m_currentMap.drawForeground(m_renderTexture, sf::RenderStates::Default, m_mainChar->getCenter());
+	m_renderTexture.display();
+
+	// Render buffer to window										(Normal foreground rendered on top)
+	m_sprite.setTexture(m_renderTexture.getTexture());
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_sprite);
+
+	//// Render extra buffer with foreground shader to window		(Ambient light level added on top of foreground)
+	m_sprite.setTexture(m_renderTexture.getTexture());
+	m_foregroundLayerShader.setParameter("ambientLevel", m_currentMap.getDimming());
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_sprite, &m_foregroundLayerShader);
+
+	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
+	renderTarget.setView(adjustedView);
 	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_NPC, renderTarget);
-	
-	// default view
-	sf::View oldView = renderTarget.getView();
 	renderTooltipText(renderTarget);
 	GameScreen::render(renderTarget); // this will set the view to the default view!
-	// render the dialogue window. 
+
 	if (m_dialogueWindow != nullptr)
 	{
 		m_dialogueWindow->render(renderTarget);
 	}
-	renderTarget.setView(oldView);
+	renderTarget.setView(adjustedView);
 }
