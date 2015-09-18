@@ -775,55 +775,55 @@
   </object>
  </objectgroup>
  <objectgroup name="light">
-  <object id="5" x="3912" y="798" width="151" height="129" rotation="10">
+  <object id="5" x="3897" y="802" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="6" x="3910.5" y="890.5" width="151" height="129" rotation="10">
+  <object id="6" x="3900.5" y="896.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="7" x="3911.5" y="1037.5" width="151" height="129" rotation="10">
+  <object id="7" x="3898.5" y="1045.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="8" x="4310.5" y="237.5" width="151" height="129" rotation="10">
+  <object id="8" x="4302.5" y="249.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="9" x="2480.16" y="2345.24" width="223.229" height="212.249" rotation="10">
+  <object id="9" x="2463.16" y="2361.24" width="223.229" height="212.249">
    <ellipse/>
   </object>
-  <object id="10" x="857.5" y="2134.5" width="151" height="129" rotation="10">
+  <object id="10" x="848.5" y="2146.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="11" x="713.5" y="2184.5" width="151" height="129" rotation="10">
+  <object id="11" x="698.5" y="2193.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="12" x="810.5" y="1888.5" width="151" height="129" rotation="10">
+  <object id="12" x="798.5" y="1894.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="13" x="659.5" y="1888.5" width="151" height="129" rotation="10">
+  <object id="13" x="646.5" y="1892.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="14" x="1158.5" y="682.5" width="151" height="129" rotation="10">
+  <object id="14" x="1146.5" y="694.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="15" x="907.5" y="583.5" width="151" height="129" rotation="10">
+  <object id="15" x="900.5" y="597.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="16" x="711.5" y="289.5" width="151" height="129" rotation="10">
+  <object id="16" x="697.5" y="297.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="17" x="3360.5" y="185.5" width="151" height="129" rotation="10">
+  <object id="17" x="3351.5" y="200.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="18" x="3360.5" y="234.5" width="151" height="129" rotation="10">
+  <object id="18" x="3348.5" y="247.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="19" x="3111.5" y="183.5" width="151" height="129" rotation="10">
+  <object id="19" x="3099.5" y="193.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="20" x="3109.5" y="235.5" width="151" height="129" rotation="10">
+  <object id="20" x="3098.5" y="247.5" width="151" height="129">
    <ellipse/>
   </object>
-  <object id="21" x="2559.5" y="1342.5" width="151" height="129" rotation="10">
+  <object id="21" x="2548.5" y="1349.5" width="151" height="129">
    <ellipse/>
   </object>
  </objectgroup>
