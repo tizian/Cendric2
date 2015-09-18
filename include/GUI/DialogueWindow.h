@@ -3,6 +3,7 @@
 #include "global.h"
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
+#include "GUI/GUIConstants.h"
 #include "Structs/NPCBean.h"
 #include "Screens/GameScreen.h"
 

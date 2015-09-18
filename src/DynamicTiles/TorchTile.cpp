@@ -1,6 +1,11 @@
 #include "DynamicTiles/TorchTile.h"
 #include "Spell.h"
 
+TorchTile::TorchTile(Level* level) : DynamicTile(level),
+LightObject(LightBean(sf::Vector2f(), sf::Vector2f(60.f, 120.f)))
+{
+}
+
 void TorchTile::init()
 {
 	setSpriteOffset(sf::Vector2f(-10.f, -static_cast<float>(m_tileSize.y) / 2));
@@ -62,4 +67,27 @@ void TorchTile::onHit(Spell* spell)
 	default:
 		break;
 	}
+}
+
+void TorchTile::render(sf::RenderTarget& renderTarget)
+{
+	DynamicTile::render(renderTarget);
+	LightObject::render(renderTarget);
+}
+
+void TorchTile::update(const sf::Time& frameTime)
+{
+	DynamicTile::update(frameTime);
+	LightObject::update(frameTime);
+}
+
+void TorchTile::setPosition(const sf::Vector2f& pos)
+{
+	LightObject::setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
+	DynamicTile::setPosition(pos);
+}
+
+GameObjectType TorchTile::getConfiguredType() const
+{
+	return DynamicTile::getConfiguredType();
 }
