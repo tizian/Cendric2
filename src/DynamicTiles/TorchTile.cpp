@@ -72,13 +72,15 @@ void TorchTile::onHit(Spell* spell)
 void TorchTile::render(sf::RenderTarget& renderTarget)
 {
 	DynamicTile::render(renderTarget);
-	LightObject::render(renderTarget);
+	if (m_state == GameObjectState::Burning)
+		LightObject::render(renderTarget);
 }
 
 void TorchTile::update(const sf::Time& frameTime)
 {
 	DynamicTile::update(frameTime);
-	LightObject::update(frameTime);
+	if (m_state == GameObjectState::Burning)
+		LightObject::update(frameTime);
 }
 
 void TorchTile::setPosition(const sf::Vector2f& pos)
