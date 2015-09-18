@@ -84,6 +84,10 @@ public:
 	void setChestLooted(const std::string& level, int pos);
 	// getter for quest data. If there is none for that id, returns nullptr
 	const QuestData* getQuestData(const std::string& questID) const;
+	// getter for number of targets with name "name" killed for quest with id "questID"
+	int getNumberOfTargetsKilled(const std::string& questID, const std::string& name) const;
+	// getter for number of targets in total with name "name" killed for quest with id "questID"
+	int getNumberOfTotalTargets(const std::string& questID, const std::string& name) const;
 	// is the quest with id "id" complete?
 	bool isQuestComplete(const std::string& questID) const;
 	// a target for a quest has been killed

@@ -66,17 +66,12 @@ void QuestDescriptionWindow::reload(const std::string& questID)
 		std::wstring target = L"";
 		target.append(g_textProvider->getText(it.first));
 		target.append(L": ");
-		int progress = 0;
+
 		int goal = it.second;
-		if (m_core->getQuestState(questID) == QuestState::Completed)
-		{
-			progress = goal;
-		}
-		else if (m_core->getData().questTargetProgress.find(questID) != m_core->getData().questTargetProgress.end() &&
-			m_core->getData().questTargetProgress.at(questID).find(it.first) != m_core->getData().questTargetProgress.at(questID).end())
-		{
-			progress = m_core->getData().questTargetProgress.at(questID).at(it.first);
-		}
+		int progress = (m_core->getQuestState(questID) == QuestState::Completed) ? 
+			goal : 
+			m_core->getNumberOfTargetsKilled(questID, it.first);
+	
 		target.append(to_wstring(progress) + L"/" + to_wstring(goal));
 
 		BitmapText targetText;

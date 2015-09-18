@@ -6,12 +6,14 @@
 #include "GUIConstants.h"
 #include "Enums/EnumNames.h"
 
+class CharacterCore;
+
 // a small visual interface to show progress in a screen, such as 
-// item or gold changes, or quest changes
+// item, gold or quest changes
 class ProgressLog 
 {
 public:
-	ProgressLog();
+	ProgressLog(const CharacterCore* core);
 	~ProgressLog();
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& renderTarget);
@@ -24,6 +26,8 @@ public:
 private:
 	// a vector filled with texts (and their time to live) that log progress
 	std::vector<std::pair<BitmapText, sf::Time>> m_logTexts;
+	// the core to calculate the correct number of killed targets
+	const CharacterCore* m_core;
 
 	void calculatePositions();
 

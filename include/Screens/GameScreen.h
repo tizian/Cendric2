@@ -29,7 +29,5 @@ public:
 
 protected:
 	GameInterface* m_interface = nullptr;
-
-private:
-	ProgressLog m_progressLog;
+	ProgressLog* m_progressLog = nullptr;
 };

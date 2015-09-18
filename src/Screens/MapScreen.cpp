@@ -134,6 +134,7 @@ void MapScreen::load()
 	m_currentMap.loadAfterMainChar(this);
 
 	m_interface = new MapInterface(this);
+	m_progressLog = new ProgressLog(getCharacterCore());
 }
 
 void MapScreen::execOnEnter(const Screen *previousScreen)

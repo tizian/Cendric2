@@ -1,6 +1,7 @@
 #include "GUI/ProgressLog.h"
+#include "CharacterCore.h"
 
-ProgressLog::ProgressLog()
+ProgressLog::ProgressLog(const CharacterCore* core) : m_core(core)
 {
 }
 
@@ -48,6 +49,8 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount)
 
 void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const std::string& condition)
 {
+	if (m_core->getQuestState(questID) != QuestState::Started) return;
+
 	BitmapText progress;
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	progress.setColor(sf::Color::Cyan);
@@ -60,13 +63,45 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 
 void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::string& name)
 {
-	BitmapText progress;
-	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	progress.setColor(sf::Color::Cyan);
-	std::wstring progressText = g_textProvider->getText(questID) + L":\n";
-	progressText.append(g_textProvider->getText(name) + L" " + g_textProvider->getText("Killed"));
-	progress.setString(progressText);
-	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
+	if (m_core->getQuestState(questID) != QuestState::Started) return;
+
+	BitmapText questName;
+	questName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	questName.setColor(sf::Color::Green);
+	questName.setString(L"\"" + g_textProvider->getText(questID) + L"\"");
+	
+	std::wstring target = g_textProvider->getText(name);
+	target.append(L": ");
+	int progress = m_core->getNumberOfTargetsKilled(questID, name);
+	int goal = m_core->getNumberOfTotalTargets(questID, name);
+	if (m_core->getQuestData(questID) != nullptr)
+	{
+		const QuestData* data = m_core->getQuestData(questID);
+		if (data->targets.find(name) != data->targets.end())
+			goal = data->targets.at(name);
+	}
+	if (m_core->getData().questTargetProgress.find(questID) != m_core->getData().questTargetProgress.end() &&
+		m_core->getData().questTargetProgress.at(questID).find(name) != m_core->getData().questTargetProgress.at(questID).end())
+	{
+		progress = m_core->getData().questTargetProgress.at(questID).at(name);
+	}
+	target.append(std::to_wstring(progress) + L"/" + std::to_wstring(goal));
+	
+	// identation
+	int spacesToAdd = (int)(questName.getString().getSize() - target.size()) / 2;
+	for (int i = 0; i < spacesToAdd; i++)
+	{
+		target.append(L" ");
+	}
+
+	BitmapText targetText;
+	targetText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	targetText.setString(target);
+	targetText.setColor(progress >= goal ? sf::Color::Green : sf::Color::White);
+	targetText.setString(target);
+
+	m_logTexts.push_back(std::make_pair(questName, TIME_TO_LIVE));
+	m_logTexts.push_back(std::make_pair(targetText, TIME_TO_LIVE));
 	calculatePositions();
 }
 

@@ -351,6 +351,26 @@ const QuestData* CharacterCore::getQuestData(const std::string& questID) const
 	return &m_quests.at(questID);
 }
 
+int CharacterCore::getNumberOfTargetsKilled(const std::string& questID, const std::string& name) const
+{
+	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end() ||
+		m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end())
+	{
+		return 0;
+	}
+	return m_data.questTargetProgress.at(questID).at(name);
+}
+
+int CharacterCore::getNumberOfTotalTargets(const std::string& questID, const std::string& name) const
+{
+	if (m_quests.find(questID) == m_quests.end() ||
+		m_quests.at(questID).targets.find(name) == m_quests.at(questID).targets.end())
+	{
+		return 0;
+	}
+	return m_quests.at(questID).targets.at(name);
+}
+
 bool CharacterCore::isQuestComplete(const std::string& questID) const
 {
 	if (getQuestState(questID) != QuestState::Started) return false;

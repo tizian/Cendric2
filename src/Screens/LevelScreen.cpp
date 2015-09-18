@@ -32,6 +32,7 @@ void LevelScreen::load()
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
 	m_currentLevel.loadAfterMainChar(this);
 	loader.loadEquipment(this);
+	m_progressLog = new ProgressLog(getCharacterCore());
 	m_interface = new LevelInterface(this, m_mainChar);
 	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
 
