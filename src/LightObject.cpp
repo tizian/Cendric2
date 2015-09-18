@@ -9,11 +9,13 @@ LightObject::LightObject(const LightBean& bean) : GameObject()
 
 void LightObject::init()
 {
-	m_ellipse.setOrigin(1.f, 1.f); // setting the origin to the center
-	m_ellipse.setRadius(1.f);
-	m_ellipse.setScale(m_bean.radius.x, m_bean.radius.y);
-	m_ellipse.setFillColor(sf::Color(255, 255, 255, 100));
+	m_sprite.setSize(sf::Vector2f(2.f, 2.f));
+	m_sprite.setOrigin(1.f, 1.f); // setting the origin to the center
+	m_sprite.setScale(m_bean.radius.x, m_bean.radius.y);
+	g_resourceManager->getTexture(ResourceID::Texture_Particle_circle)->setSmooth(true);
+	m_sprite.setTexture(g_resourceManager->getTexture(ResourceID::Texture_Particle_circle));
 	m_animationTimer = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 2.f * m_bean.radius.x, 2.f * m_bean.radius.y));
 
 	setPosition(m_bean.center);
 }
@@ -25,7 +27,7 @@ GameObjectType LightObject::getConfiguredType() const
 
 void LightObject::render(sf::RenderTarget& renderTarget)
 {
-	renderTarget.draw(m_ellipse);
+	renderTarget.draw(m_sprite);
 }
 
 void LightObject::update(const sf::Time& frameTime)
@@ -35,11 +37,11 @@ void LightObject::update(const sf::Time& frameTime)
 	float scaleX = m_bean.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 	float scaleY = m_bean.radius.y + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 	
-	m_ellipse.setScale(scaleX, scaleY);
+	m_sprite.setScale(scaleX, scaleY);
 }
 
 void LightObject::setPosition(const sf::Vector2f& pos)
 {
 	GameObject::setPosition(pos - sf::Vector2f(m_bean.radius.x, m_bean.radius.y));
-	m_ellipse.setPosition(pos);
+	m_sprite.setPosition(pos);
 }

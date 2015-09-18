@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="6">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="22">
  <properties>
   <property name="dimming" value="0.4"/>
   <property name="name" value="Firstmap"/>
   <property name="tilesetpath" value="res/map/firstmap/tileset_map_firstmap.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_firstmap" tilewidth="50" tileheight="50" spacing="2" margin="1">
+ <tileset firstgid="1" name="tileset_map_firstmap" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529">
   <image source="../tilesets/tileset_map_firstmap.png" width="1200" height="1200"/>
  </tileset>
- <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1">
+ <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
   <image source="../tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
  <layer name="BG 1" width="100" height="100">
@@ -240,7 +240,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,438,307,307,451,287,288,0,355,0,0,0,10,0,0,0,0,0,0,0,0,0,26,0,0,0,126,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,358,359,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,208,209,210,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,310,311,331,0,0,0,330,33,0,0,0,0,0,168,102,0,0,0,26,0,126,148,0,0,0,0,0,0,0,0,0,0,0,0,
 327,328,0,0,0,0,0,0,381,382,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,208,209,210,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,330,0,0,0,0,0,0,0,353,0,0,0,208,209,210,0,0,0,0,0,0,0,0,125,0,0,0,0,0,0,0,0,0,0,0,0,0,
-350,351,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,330,0,0,0,0,0,0,0,355,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,125,0,0,6,5,0,0,0,0,0,0,0,0,0,
+350,351,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,330,0,0,0,0,0,0,0,355,0,0,0,0,0,0,0,0,0,0,0,168,0,8,0,0,0,0,125,0,0,6,5,0,0,0,0,0,0,0,0,0,
 304,305,0,0,0,0,0,0,302,303,304,305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,162,0,0,0,0,0,0,0,0,354,0,0,0,0,331,354,0,0,353,0,0,0,0,0,0,8,0,0,0,0,0,0,148,0,0,0,0,0,0,0,0,0,0,0,0,440,
 327,328,0,0,0,0,0,0,325,326,327,328,305,0,0,0,0,0,0,0,208,209,210,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,185,0,0,0,0,0,353,0,333,334,0,0,0,0,0,0,0,353,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,146,48,49,0,0,0,0,208,209,210,148,
 350,351,0,0,0,0,0,0,0,0,0,351,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,119,208,209,0,0,0,0,0,330,0,0,0,0,330,0,0,0,0,0,0,0,10,0,0,8,0,168,0,0,0,0,0,0,0,0,0,0,146,0,0,0,0,0,0,148,0,0,
@@ -763,7 +763,7 @@
   </object>
  </objectgroup>
  <objectgroup name="npc">
-  <object id="4" gid="530" x="4042" y="1074">
+  <object id="4" gid="530" x="4042" y="1074" width="50" height="50">
    <properties>
     <property name="active" value="1"/>
     <property name="boundingbox" value="0,0,50,50"/>
@@ -776,6 +776,54 @@
  </objectgroup>
  <objectgroup name="light">
   <object id="5" x="3912" y="798" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="6" x="3910.5" y="890.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="7" x="3911.5" y="1037.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="8" x="4310.5" y="237.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="9" x="2480.16" y="2345.24" width="223.229" height="212.249" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="10" x="857.5" y="2134.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="11" x="713.5" y="2184.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="12" x="810.5" y="1888.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="13" x="659.5" y="1888.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="14" x="1158.5" y="682.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="15" x="907.5" y="583.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="16" x="711.5" y="289.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="17" x="3360.5" y="185.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="18" x="3360.5" y="234.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="19" x="3111.5" y="183.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="20" x="3109.5" y="235.5" width="151" height="129" rotation="10">
+   <ellipse/>
+  </object>
+  <object id="21" x="2559.5" y="1342.5" width="151" height="129" rotation="10">
    <ellipse/>
   </object>
  </objectgroup>

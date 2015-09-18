@@ -23,7 +23,7 @@ protected:
 
 	LightBean m_bean;
 
-	sf::CircleShape m_ellipse;
+	sf::RectangleShape m_sprite;
 	
 	// Flickering animation
 	float m_animationTimer;

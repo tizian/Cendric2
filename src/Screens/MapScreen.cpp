@@ -29,10 +29,10 @@ const std::string foregroundFragmentShader = \
 "void main()" \
 "{" \
 "    vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
-"    if (pixel.a > 0.0)" \
-"        gl_FragColor = vec4(0.0, 0.0, 0.0, ambientLevel);" \
+"    if (pixel.a == 0.0)" \
+"        gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);" \
 "    else" \
-"        gl_FragColor = pixel;" \
+"        gl_FragColor = vec4(0.0, 0.0, 0.0, ambientLevel);" \
 "}";
 
 MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : GameScreen(core)
@@ -189,7 +189,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite);
 
-	//// Render extra buffer with foreground shader to window		(Ambient light level added on top of foreground)
+	// Render extra buffer with foreground shader to window			(Ambient light level added on top of foreground)
 	m_sprite.setTexture(m_renderTexture.getTexture());
 	m_foregroundLayerShader.setParameter("ambientLevel", m_currentMap.getDimming());
 	renderTarget.setView(renderTarget.getDefaultView());
