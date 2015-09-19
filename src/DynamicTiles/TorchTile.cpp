@@ -3,7 +3,7 @@
 
 TorchTile::TorchTile(Level* level) : DynamicTile(level)
 {
-	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(60.f, 120.f)));
+	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(140.f, 200.f)));
 }
 
 void TorchTile::init()

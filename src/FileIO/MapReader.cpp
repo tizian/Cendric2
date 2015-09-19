@@ -223,7 +223,44 @@ bool MapReader::readLights(XMLElement* objectgroup, MapData& data) const
 		bean.radius.y = height / 2.f;
 		bean.center.x = x + bean.radius.x;
 		bean.center.y = y + bean.radius.y;
-		
+
+		// brightness for light bean
+		XMLElement* properties = object->FirstChildElement("properties");
+		if (properties != nullptr)
+		{
+			XMLElement* _property = properties->FirstChildElement("property");
+			while (_property != nullptr)
+			{
+				const char* textAttr = nullptr;
+				textAttr = _property->Attribute("name");
+				if (textAttr == nullptr)
+				{
+					g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found for light bean.");
+					return false;
+				}
+				std::string name = textAttr;
+
+				if (name.compare("brightness") == 0)
+				{
+					float brightness;
+					result = _property->QueryFloatAttribute("value", &brightness);
+					XMLCheckResult(result);
+					if (brightness < 0.f || brightness > 1.f)
+					{
+						brightness = 1.f;
+						g_logger->logWarning("MapReader", "Brightness must be between 0 and 1. It was " + std::to_string(brightness) + ", it is now 1");
+					}
+					bean.brightness = brightness;
+				}
+				else
+				{
+					g_logger->logError("MapReader", "XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for light bean.");
+					return false;
+				}
+				_property = _property->NextSiblingElement("property");
+			}
+		}
+
 		data.lights.push_back(bean);
 		object = object->NextSiblingElement("object");
 	}

@@ -775,13 +775,16 @@
   </object>
  </objectgroup>
  <objectgroup name="light">
-  <object id="5" x="3897" y="802" width="151" height="129">
+  <object id="5" x="3863" y="778" width="219" height="197">
    <ellipse/>
   </object>
-  <object id="6" x="3900.5" y="896.5" width="151" height="129">
+  <object id="6" x="3853.5" y="854.5" width="239.5" height="230.5">
    <ellipse/>
   </object>
-  <object id="7" x="3898.5" y="1045.5" width="151" height="129">
+  <object id="7" x="3806.5" y="991.5" width="329.5" height="258.5">
+   <properties>
+    <property name="brightness" value="0.5"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="8" x="4302.5" y="249.5" width="151" height="129">
