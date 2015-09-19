@@ -39,12 +39,12 @@ public:
 
 	void setBoundingBox(const sf::FloatRect& rect);
 	virtual void setPosition(const sf::Vector2f& pos);
-	void setPositionX(float posX);
-	void setPositionY(float posY);
-	void setDisposed();
+	virtual void setPositionX(float posX);
+	virtual void setPositionY(float posY);
+	virtual void setDisposed();
 	void setCurrentAnimation(const Animation* animation, bool isFlipped);
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
-	void setScreen(Screen* screen);
+	virtual void setScreen(Screen* screen);
 	void setFrameTime(const sf::Time& time);
 	void setInputInDefaultView(bool value);
 	virtual void setViewable(bool value);

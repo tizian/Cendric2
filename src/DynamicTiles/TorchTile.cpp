@@ -1,9 +1,9 @@
 #include "DynamicTiles/TorchTile.h"
 #include "Spell.h"
 
-TorchTile::TorchTile(Level* level) : DynamicTile(level),
-LightObject(LightBean(sf::Vector2f(), sf::Vector2f(60.f, 120.f)))
+TorchTile::TorchTile(Level* level) : DynamicTile(level)
 {
+	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(60.f, 120.f)));
 }
 
 void TorchTile::init()
@@ -52,6 +52,7 @@ void TorchTile::onHit(Spell* spell)
 		if (m_state == GameObjectState::Burning)
 		{
 			m_state = GameObjectState::Idle;
+			m_lightObject->setVisible(false);
 			setCurrentAnimation(getAnimation(m_state), false);
 			spell->setDisposed();
 		}
@@ -60,6 +61,7 @@ void TorchTile::onHit(Spell* spell)
 		if (m_state == GameObjectState::Idle)
 		{
 			m_state = GameObjectState::Burning;
+			m_lightObject->setVisible(true);
 			setCurrentAnimation(getAnimation(m_state), false);
 			spell->setDisposed();
 		}
@@ -69,27 +71,20 @@ void TorchTile::onHit(Spell* spell)
 	}
 }
 
-void TorchTile::render(sf::RenderTarget& renderTarget)
-{
-	DynamicTile::render(renderTarget);
-	if (m_state == GameObjectState::Burning)
-		LightObject::render(renderTarget);
-}
-
-void TorchTile::update(const sf::Time& frameTime)
-{
-	DynamicTile::update(frameTime);
-	if (m_state == GameObjectState::Burning)
-		LightObject::update(frameTime);
-}
-
 void TorchTile::setPosition(const sf::Vector2f& pos)
 {
-	LightObject::setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
+	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	DynamicTile::setPosition(pos);
 }
 
-GameObjectType TorchTile::getConfiguredType() const
+void TorchTile::setDisposed()
 {
-	return DynamicTile::getConfiguredType();
+	DynamicTile::setDisposed();
+	m_lightObject->setDisposed();
+}
+
+void TorchTile::setScreen(Screen* screen)
+{
+	DynamicTile::setScreen(screen);
+	m_lightObject->setScreen(screen);
 }

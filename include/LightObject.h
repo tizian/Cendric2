@@ -18,8 +18,11 @@ public:
 	virtual void setPosition(const sf::Vector2f& pos) override;
 	virtual GameObjectType getConfiguredType() const override;
 
+	void setVisible(bool value);
+
 protected:
 	void init();
+	bool m_isVisible = true;
 
 	LightBean m_bean;
 

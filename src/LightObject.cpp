@@ -27,11 +27,13 @@ GameObjectType LightObject::getConfiguredType() const
 
 void LightObject::render(sf::RenderTarget& renderTarget)
 {
+	if (!m_isVisible) return;
 	renderTarget.draw(m_sprite);
 }
 
 void LightObject::update(const sf::Time& frameTime)
 {
+	if (!m_isVisible) return;
 	m_animationTimer += frameTime.asSeconds();
 
 	float scaleX = m_bean.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
@@ -44,4 +46,9 @@ void LightObject::setPosition(const sf::Vector2f& pos)
 {
 	GameObject::setPosition(pos - sf::Vector2f(m_bean.radius.x, m_bean.radius.y));
 	m_sprite.setPosition(pos);
+}
+
+void LightObject::setVisible(bool value)
+{
+	m_isVisible = value;
 }

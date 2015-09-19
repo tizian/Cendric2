@@ -4,16 +4,16 @@
 #include "Spell.h"
 #include "LightObject.h"
 
-class FireBallSpell : public Spell, public LightObject
+class FireBallSpell : public Spell
 {
 public:
 	FireBallSpell();
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 
-	void render(sf::RenderTarget& renderTarget) override;
-	void update(const sf::Time& frameTime) override;
-	void setPosition(const sf::Vector2f& pos) override;
-	void setViewable(bool value) override { Spell::setViewable(value); };
+	void setPosition(const sf::Vector2f& pos) override;	
+	void setScreen(Screen* screen) override;
+	void setDisposed() override;
 
-	GameObjectType getConfiguredType() const override;
+private:
+	LightObject* m_lightObject;
 };
