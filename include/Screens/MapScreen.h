@@ -31,10 +31,4 @@ private:
 	MapMainCharacter* m_mainChar;
 	bool m_isOnLevelEntry = true;
 	DialogueWindow* m_dialogueWindow = nullptr;
-	
-	// For lighting
-	sf::RenderTexture m_renderTexture;
-	sf::Sprite m_sprite;
-	sf::Shader m_lightLayerShader;
-	sf::Shader m_foregroundLayerShader;
 };

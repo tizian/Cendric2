@@ -30,4 +30,10 @@ public:
 protected:
 	GameInterface* m_interface = nullptr;
 	ProgressLog* m_progressLog = nullptr;
+
+	// For lighting
+	sf::RenderTexture m_renderTexture;
+	sf::Sprite m_sprite;
+	sf::Shader m_lightLayerShader;
+	sf::Shader m_foregroundLayerShader;
 };

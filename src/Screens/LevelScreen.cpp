@@ -197,18 +197,47 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 
 void LevelScreen::render(sf::RenderTarget &renderTarget)
 {
-	// don't render dynamic tiles here, they are rendered in the level.
+	// Render level background and content to window				(Normal level background rendered)
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
-	// ASSURE that at this point, the view is the correct game view
 	sf::View oldView = renderTarget.getView();
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
-	renderObjects(GameObjectType::_Light, renderTarget);
 
-	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
+	m_renderTexture.clear();
+	m_renderTexture.setView(oldView);
+	renderObjects(GameObjectType::_Light, m_renderTexture);
+	m_renderTexture.display();
+
+	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
+	m_sprite.setTexture(m_renderTexture.getTexture());
+	m_lightLayerShader.setParameter("ambientLevel", m_currentLevel.getDimming());
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_sprite, &m_lightLayerShader);
+
+	// Clear extra buffer
+	m_renderTexture.clear(sf::Color(0, 0, 0, 0));
+
+	// Render foreground layer to extra buffer
+	m_currentLevel.drawForeground(m_renderTexture, sf::RenderStates::Default, m_mainChar->getCenter());
+	m_renderTexture.display();
+
+	// Render buffer to window										(Normal foreground rendered on top)
+	m_sprite.setTexture(m_renderTexture.getTexture());
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_sprite);
+
+	// Render extra buffer with foreground shader to window			(Ambient light level added on top of foreground)
+	m_sprite.setTexture(m_renderTexture.getTexture());
+	m_foregroundLayerShader.setParameter("ambientLevel", m_currentLevel.getDimming());
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_sprite, &m_foregroundLayerShader);
+
+	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
+	renderTarget.setView(oldView);
 
 	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
@@ -224,12 +253,14 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 		renderTarget.draw(*m_overlaySprite);
 		renderTarget.draw(*m_overlayText);
 	}
-		
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
 
-	// reset the view for the updates
 	renderTarget.setView(oldView);
+
+
+
+
 }
 
 // yes or no form

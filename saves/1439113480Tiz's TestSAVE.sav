@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:95
+time.played:103
 savegame.name:TIZ'S TESTSAVE
-savegame.date:1442171471
+savegame.date:1442659273
 level.id:
 level.position:0.000000,0.000000
 is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:4163.390137,1074.484741
+map.position:3994.718750,783.859314
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -36,6 +36,8 @@ quickslot:2,
 # chests looted in level:
 # quest states:
 quest.state:quest_acaveofrats,1
+# quest targets killed:
+# quest conditions fulfilled:
 # npc states:
 npc.state:npc_guard,2
 # spells learned:
