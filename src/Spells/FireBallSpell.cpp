@@ -34,7 +34,7 @@ void FireBallSpell::setDisposed()
 void FireBallSpell::setScreen(Screen* screen)
 {
 	Spell::setScreen(screen);
-	m_lightObject->setScreen(screen);
+	screen->addObject(m_lightObject);
 }
 
 void FireBallSpell::setPosition(const sf::Vector2f& pos)

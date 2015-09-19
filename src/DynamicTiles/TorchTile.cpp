@@ -86,5 +86,5 @@ void TorchTile::setDisposed()
 void TorchTile::setScreen(Screen* screen)
 {
 	DynamicTile::setScreen(screen);
-	m_lightObject->setScreen(screen);
+	screen->addObject(m_lightObject);
 }
