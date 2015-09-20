@@ -145,3 +145,8 @@ CharacterCore* GameInterface::getCore() const
 {
 	return m_core;
 }
+
+Inventory* GameInterface::getInventory() const
+{
+	return m_inventory;
+}

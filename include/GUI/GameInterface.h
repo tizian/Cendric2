@@ -28,6 +28,7 @@ public:
 	virtual void update(const sf::Time& frameTime);
 
 	CharacterCore* getCore() const;
+	Inventory* getInventory() const;
 
 protected:
 	GameScreen* m_screen;

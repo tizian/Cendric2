@@ -26,6 +26,7 @@ void DialogueLoader::loadDialogue()
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
+		.addFunction("createTradeNode", &DialogueLoader::createTradeNode)
 		.addFunction("addChoice", &DialogueLoader::addChoice)
 		.addFunction("changeNPCState", &DialogueLoader::changeNPCState)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
@@ -270,6 +271,20 @@ void DialogueLoader::createNPCNode(int tag, int nextTag, const std::string& text
 	}
 	m_currentNode = new DialogueNode();
 	m_currentNode->type = DialogueNodeType::NPCTalking;
+	m_currentNode->tag = tag;
+	m_currentNode->nextTag = nextTag;
+	m_currentNode->text = text;
+}
+
+void DialogueLoader::createTradeNode(int tag, int nextTag, const std::string& text)
+{
+	if (m_currentNode != nullptr)
+	{
+		g_logger->logError("DialogueLoader", "Cannot add a new node to the dialogue if the old node is not yet added. Call \"addNode()\" to add that old node first.");
+		return;
+	}
+	m_currentNode = new DialogueNode();
+	m_currentNode->type = DialogueNodeType::Trade;
 	m_currentNode->tag = tag;
 	m_currentNode->nextTag = nextTag;
 	m_currentNode->text = text;

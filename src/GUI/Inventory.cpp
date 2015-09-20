@@ -2,6 +2,7 @@
 #include "LevelMainCharacter.h"
 #include "LevelInterface.h"
 #include "MapInterface.h"
+#include "MerchantInterface.h"
 #include "GUI/GUIConstants.h"
 
 Inventory::Inventory(LevelInterface* _interface)
@@ -29,6 +30,8 @@ void Inventory::init()
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
+
+	m_descriptionWindow = new ItemDescriptionWindow();
 
 	// init text
 	m_selectedTabText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, INVENTORY_TOP + GUIConstants::TEXT_OFFSET));
@@ -131,8 +134,7 @@ void Inventory::notifyChange(const std::string& itemID)
 				if (m_selectedSlot == &(*it))
 				{
 					m_selectedSlot = nullptr;
-					delete m_descriptionWindow;
-					m_descriptionWindow = nullptr;
+					m_descriptionWindow->hide();
 				}
 				(*tab).erase(it);
 				calculateSlotPositions(*(m_typeMap[bean->type]));
@@ -153,6 +155,27 @@ void Inventory::notifyChange(const std::string& itemID)
 	calculateSlotPositions(*(m_typeMap[bean->type]));
 }
 
+void Inventory::handleMapRightClick(InventorySlot* clicked)
+{
+	if (m_mapInterface == nullptr || clicked == nullptr) return;
+	if (m_merchantInterface != nullptr)
+	{
+		m_merchantInterface->sellItem(clicked->getItem());
+		return;
+	}
+	if (clicked->getItemType() == ItemType::Document)
+		showDocument(clicked->getItem());
+}
+
+void Inventory::handleLevelRightClick(InventorySlot* clicked)
+{
+	if (m_levelInterface == nullptr || clicked == nullptr) return;
+	if (clicked->getItemType() == ItemType::Consumable)
+		m_levelInterface->consumeItem(clicked->getItem());
+	else if (clicked->getItemType() == ItemType::Document)
+		showDocument(clicked->getItem());
+}
+
 void Inventory::update(const sf::Time& frameTime)
 {
 	if (!m_isVisible) return;
@@ -166,12 +189,10 @@ void Inventory::update(const sf::Time& frameTime)
 			selectSlot(&it, false);
 			return;
 		}
-		if (it.isRightClicked() && m_levelInterface != nullptr)
+		if (it.isRightClicked())
 		{
-			if (it.getItemType() == ItemType::Consumable)
-				m_levelInterface->consumeItem(it.getItem());
-			else if (it.getItemType() == ItemType::Document)
-				showDocument(it.getItem());
+			handleLevelRightClick(&it);
+			handleMapRightClick(&it);
 			break;
 		}
 	}
@@ -219,6 +240,51 @@ void Inventory::removeEquipmentItem()
 	}
 }
 
+void Inventory::handleMapDrag()
+{
+	if (m_mapInterface == nullptr) return;
+	if (m_selectedSlot != nullptr && !m_isEquipmentSlotDragged)
+	{
+		m_equipment->highlightEquipmentSlot(m_selectedSlot->getItemType(), true);
+	}
+}
+
+void Inventory::handleLevelDrag()
+{
+	if (m_levelInterface == nullptr) return;
+	if (m_selectedSlot->getItemType() == ItemType::Consumable)
+	{
+		m_levelInterface->highlightQuickslots(true);
+	}
+}
+
+void Inventory::handleMapDrop()
+{
+	if (m_mapInterface == nullptr || m_currentClone == nullptr) return;
+	if (m_isEquipmentSlotDragged)
+	{
+		removeEquipmentItem();
+	}
+	else
+	{
+		if (m_equipment->notifyEquipmentDrop(m_currentClone))
+		{
+			reload();
+		}
+		m_equipment->highlightEquipmentSlot(m_currentClone->getItemType(), false);
+	}
+}
+
+void Inventory::handleLevelDrop()
+{
+	if (m_levelInterface == nullptr || m_currentClone == nullptr) return;
+	if (m_selectedSlot->getItemType() == ItemType::Consumable)
+	{
+		m_levelInterface->notifyConsumableDrop(m_currentClone);
+		m_levelInterface->highlightQuickslots(false);
+	}
+}
+
 void Inventory::handleDragAndDrop()
 {
 	if (!m_hasDraggingStarted) return;
@@ -227,26 +293,8 @@ void Inventory::handleDragAndDrop()
 		if (m_selectedSlot != nullptr)
 		{
 			m_selectedSlot->activate();
-			if (m_selectedSlot->getItemType() == ItemType::Consumable && m_levelInterface != nullptr)
-			{
-				m_levelInterface->notifyConsumableDrop(m_currentClone);
-				m_levelInterface->highlightQuickslots(false);
-			}
-			else if (m_mapInterface != nullptr && m_currentClone != nullptr)
-			{
-				if (m_isEquipmentSlotDragged)
-				{
-					removeEquipmentItem();
-				}
-				else
-				{
-					if (m_equipment->notifyEquipmentDrop(m_currentClone))
-					{
-						reload();
-					}
-					m_equipment->highlightEquipmentSlot(m_currentClone->getItemType(), false);
-				}
-			}
+			handleLevelDrop();
+			handleMapDrop();
 		}
 		delete m_currentClone;
 		m_currentClone = nullptr;
@@ -266,14 +314,8 @@ void Inventory::handleDragAndDrop()
 			m_currentClone = new InventorySlotClone(m_selectedSlot);
 			m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
 			m_selectedSlot->deactivate();
-			if (m_selectedSlot->getItemType() == ItemType::Consumable && m_levelInterface != nullptr)
-			{
-				m_levelInterface->highlightQuickslots(true);
-			}
-			else if (m_mapInterface != nullptr && m_selectedSlot != nullptr && !m_isEquipmentSlotDragged)
-			{
-				m_equipment->highlightEquipmentSlot(m_selectedSlot->getItemType(), true);
-			}
+			handleLevelDrag();
+			handleMapDrag();
 		}
 	}
 	else
@@ -305,10 +347,7 @@ void Inventory::render(sf::RenderTarget& target)
 		it.first.render(target);
 	}
 
-	if (m_descriptionWindow != nullptr)
-	{
-		m_descriptionWindow->render(target);
-	}
+	m_descriptionWindow->render(target);
 	if (m_documentWindow != nullptr)
 	{
 		m_documentWindow->render(target);
@@ -331,35 +370,34 @@ void Inventory::showDocument(const Item& item)
 		m_window->getPosition().y);
 	if (m_descriptionWindow != nullptr)
 	{
-		pos.x += InventoryDescriptionWindow::WIDTH + MARGIN;
+		pos.x += ItemDescriptionWindow::WIDTH + MARGIN;
 	}
 	m_documentWindow->setPosition(pos);
 }
 
 void Inventory::showDescription(const Item& item)
 {
-	delete m_descriptionWindow;
-	m_descriptionWindow = new InventoryDescriptionWindow(item);
+	m_descriptionWindow->load(item);
+	m_descriptionWindow->show();
 	sf::Vector2f pos = sf::Vector2f(
 		m_window->getPosition().x + MARGIN + m_window->getSize().x,
 		m_window->getPosition().y);
 	m_descriptionWindow->setPosition(pos);
 	if (m_documentWindow != nullptr)
 	{
-		pos.x += InventoryDescriptionWindow::WIDTH + MARGIN;
+		pos.x += ItemDescriptionWindow::WIDTH + MARGIN;
 		m_documentWindow->setPosition(pos);
 	}
 }
 
 void Inventory::hideDescription()
 {
-	delete m_descriptionWindow;
-	m_descriptionWindow = nullptr;
+	m_descriptionWindow->hide();
 	if (m_documentWindow != nullptr)
 	{
 		m_documentWindow->setPosition(
 			m_documentWindow->getPosition() - 
-			sf::Vector2f(InventoryDescriptionWindow::WIDTH + MARGIN, 0.f));
+			sf::Vector2f(ItemDescriptionWindow::WIDTH + MARGIN, 0.f));
 	}
 }
 
@@ -493,4 +531,16 @@ void Inventory::hide()
 	m_currentClone = nullptr;
 	m_isDragging = false;
 	m_hasDraggingStarted = false;
+}
+
+void Inventory::startTrading(MerchantInterface* _interface)
+{
+	m_merchantInterface = _interface;
+	show();
+}
+
+void Inventory::stopTrading()
+{
+	m_merchantInterface = nullptr;
+	hide();
 }

@@ -270,6 +270,77 @@ bool CharacterCoreReader::readIsInLevel(char* start, char* end, CharacterCoreDat
 	return true;
 }
 
+bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCoreData& data) const
+{
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	endData++;
+	startData = gotoNextChar(start, endData, ':');
+	startData++;
+
+	string id(startData);
+	int count = countToNextChar(startData, end, ',');
+	if (count == -1) {
+		return false;
+	}
+	id = id.substr(0, count);
+
+	startData = gotoNextChar(start, endData, ',');
+	startData++;
+
+	FractionID fraction = (FractionID)(atoi(startData));
+	if (fraction < FractionID::VOID || fraction >= FractionID::MAX)
+	{
+		g_logger->logError("CharacterCoreReader", "FractionID not resolved " + to_string((int)fraction));
+		return false;
+	}
+
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+
+	float multiplier = (float)(atof(startData));
+	if (multiplier < 1.f)
+	{
+		g_logger->logError("CharacterCoreReader", "Multiplier value not allowed " + to_string(multiplier));
+		return false;
+	}
+
+	startData = gotoNextChar(startData, endData, ',');
+
+	std::map<std::string, int> wares;
+	while (startData != NULL)
+	{
+		startData++;
+		std::string name(startData);
+		count = countToNextChar(startData, endData, ',');
+		if (count == -1)
+		{
+			return false;
+		}
+		name = name.substr(0, count);
+
+		startData = gotoNextChar(startData, endData, ',');
+		startData++;
+
+		int amount = atoi(startData);
+		if (amount <= 0)
+		{
+			return false;
+		}
+
+		wares.insert({ name, amount });
+		startData = gotoNextChar(startData, endData, ',');
+	}
+
+	MerchantData merchandData;
+	merchandData.wares = wares;
+	merchandData.fraction = fraction;
+	merchandData.multiplier = multiplier;
+
+	data.merchantStates.insert({ id, merchandData });
+	return true;
+}
+
 bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreData& data) const
 {
 	char* startData;
@@ -805,6 +876,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, IS_IN_LEVEL, strlen(IS_IN_LEVEL)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(IS_IN_LEVEL));
 			noError = readIsInLevel(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, MERCHANT_STATE, strlen(MERCHANT_STATE)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(MERCHANT_STATE));
+			noError = readMerchandState(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, SPELL_LEARNED, strlen(SPELL_LEARNED)) == 0) {

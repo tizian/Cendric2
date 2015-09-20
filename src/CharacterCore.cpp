@@ -1,5 +1,6 @@
 #include "CharacterCore.h"
 #include "Item.h"
+#include "FileIO/MerchantLoader.h"
 
 using namespace std;
 
@@ -454,6 +455,22 @@ bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID)
 const CharacterCoreData& CharacterCore::getData() const
 {
 	return m_data;
+}
+
+MerchantData CharacterCore::getMerchantData(const std::string& merchantID)
+{
+	if (m_data.merchantStates.find(merchantID) != m_data.merchantStates.end())
+	{
+		return m_data.merchantStates.at(merchantID);
+	}
+
+	MerchantLoader loader;
+	return loader.loadMerchant(merchantID);
+}
+
+void CharacterCore::setMerchantData(const std::string& merchantID, const MerchantData& data)
+{
+	m_data.merchantStates[merchantID] = data;
 }
 
 const AttributeBean& CharacterCore::getTotalAttributes() const

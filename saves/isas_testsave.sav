@@ -1,21 +1,19 @@
 # time played, in seconds
-time.played:332
+time.played:403
 savegame.name:ISA'S TESTSAVE
-savegame.date:1442258057
+savegame.date:1442789478
 level.id:res/level/ratcave/ratcave.tmx
 level.position:525.000000,1175.000000
 is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:4000.000000,830.885681
+map.position:4071.431641,934.074402
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:8
+gold:41
 # items in inventory:
-item.id:it_fo_caveberry,1
-item.id:it_fo_cheese,6
-item.id:it_mi_goldengoblet,3
+item.id:it_mi_goldengoblet,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2,3,3
 equipped.spellslot:3,3,3
@@ -33,6 +31,16 @@ equipped.weapon:it_we_icestaff
 # quickslot assignments:
 quickslot:1,
 quickslot:2,
+# enemies killed in level:
+# enemies looted in level:
+# items looted in level:
+# chests looted in level:
+# quest states:
+# quest targets killed:
+# quest conditions fulfilled:
+# npc states:
+# merchand states:
+merchant.state:npc_guard,5,1.500000,it_fo_caveberry,1,it_fo_cheese,11,it_fo_healingherb,1,it_fo_water,10,it_mi_goldengoblet,2
 # spells learned:
 spell.learned:1,2,3,5,6
 spell.learned:2,7,11

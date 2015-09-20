@@ -164,7 +164,7 @@ void Screen::setTooltipText(const wstring& text, const sf::Color& color, bool is
 		text,
 		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
 	m_tooltipText.setCharacterSize(12);
-	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 10.f);
+	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), m_isTooltipTop ? 10.f : WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 10.f);
 	m_tooltipText.setColor(color);
 	m_tooltipTime = sf::seconds(1.f + 0.06f * static_cast<float>(text.length()));
 }
@@ -175,6 +175,11 @@ void Screen::renderTooltipText(sf::RenderTarget& target) const
 	target.setView(target.getDefaultView());
 	target.draw(m_tooltipText);
 	target.setView(oldView);
+}
+
+void Screen::setTooltipPositionTop(bool top)
+{
+	m_isTooltipTop = top;
 }
 
 CharacterCore* Screen::getCharacterCore() const

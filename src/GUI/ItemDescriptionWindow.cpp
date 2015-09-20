@@ -1,10 +1,10 @@
 #include <iomanip>
 
-#include "GUI/InventoryDescriptionWindow.h"
+#include "GUI/ItemDescriptionWindow.h"
 
 using namespace std;
 
-const float InventoryDescriptionWindow::WIDTH = 340.f;
+const float ItemDescriptionWindow::WIDTH = 340.f;
 
 inline std::wstring toStrMaxDecimals(float value, int decimals)
 {
@@ -17,21 +17,63 @@ inline std::wstring toStrMaxDecimals(float value, int decimals)
 	return std::wstring(s.begin(), s.end());
 }
 
-InventoryDescriptionWindow::InventoryDescriptionWindow(const Item& item) : Window(
+ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	WindowOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::BACK_COLOR,
 	GUIConstants::ORNAMENT_COLOR)
 {
-	m_titleText.setString(g_textProvider->getText(item.getID()));
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(CENDRIC_COLOR_WHITE);
-	
-	m_descriptionText.setString(g_textProvider->getCroppedText(item.getDescription(), GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(CENDRIC_COLOR_LIGHT_GREY);
 
+	m_statsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_statsText.setColor(CENDRIC_COLOR_WHITE);
+}
+
+std::wstring ItemDescriptionWindow::getGoldText(const Item& item) const
+{
+	std::wstring goldText;
+	goldText.append(g_textProvider->getText("GoldValue"));
+	goldText.append(L": ");
+	goldText.append(item.getBean().goldValue < 0 ? g_textProvider->getText("Unsalable") : to_wstring(item.getBean().goldValue));
+	return goldText;
+}
+
+std::wstring ItemDescriptionWindow::getAttributeText(const std::string& name, int value)
+{
+	if (value == 0) return L"";
+	wstring s;
+	s.append(g_textProvider->getText(name));
+	s.append(L": ");
+	s.append(to_wstring(value));
+	s.append(L"\n");
+	return s;
+}
+
+void ItemDescriptionWindow::setPosition(const sf::Vector2f& position)
+{
+	Window::setPosition(position);
+	float y = position.y + GUIConstants::TEXT_OFFSET;
+	m_titleText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
+	y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	m_descriptionText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
+	y += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	if (m_statsText.getLocalBounds().height == GUIConstants::CHARACTER_SIZE_S)
+	{
+		y -= GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S;
+	}
+	m_statsText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
+}
+
+void ItemDescriptionWindow::load(const Item& item)
+{
+	m_titleText.setString(g_textProvider->getText(item.getID()));
+	m_descriptionText.setString(g_textProvider->getCroppedText(item.getDescription(), GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+	
 	wstring stats = L"\n";
 	const AttributeBean& attr = item.getAttributes();
 	stats.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
@@ -55,16 +97,13 @@ InventoryDescriptionWindow::InventoryDescriptionWindow(const Item& item) : Windo
 		stats.append(L": ");
 		stats.append(to_wstring(static_cast<int>(floor(item.getBean().foodDuration.asSeconds()))));
 		stats.append(L" s\n");
-	} 
+	}
 
-	stats.append(g_textProvider->getText("GoldValue"));
-	stats.append(L": ");
-	stats.append(to_wstring(item.getBean().goldValue));
+	stats.append(getGoldText(item));
 
 	if (item.getType() == ItemType::Equipment_weapon)
 	{
 		stats.append(L"\n\n");
-
 		stats.append(g_textProvider->getText("WeaponDamage"));
 		stats.append(L": ");
 		stats.append(to_wstring(item.getBean().weaponChopDamage));
@@ -88,8 +127,6 @@ InventoryDescriptionWindow::InventoryDescriptionWindow(const Item& item) : Windo
 		}
 	}
 
-	m_statsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_statsText.setColor(CENDRIC_COLOR_WHITE);
 	m_statsText.setString(stats);
 
 	float height = 2 * GUIConstants::TEXT_OFFSET;
@@ -99,34 +136,23 @@ InventoryDescriptionWindow::InventoryDescriptionWindow(const Item& item) : Windo
 	setHeight(height);
 }
 
-std::wstring InventoryDescriptionWindow::getAttributeText(const std::string& name, int value)
+void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget)
 {
-	if (value == 0) return L"";
-	wstring s;
-	s.append(g_textProvider->getText(name));
-	s.append(L": ");
-	s.append(to_wstring(value));
-	s.append(L"\n");
-	return s;
-}
-
-void InventoryDescriptionWindow::setPosition(const sf::Vector2f& position)
-{
-	Window::setPosition(position);
-	float y = position.y + GUIConstants::TEXT_OFFSET;
-	m_titleText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
-	y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	m_descriptionText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
-	y += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	m_statsText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
-}
-
-void InventoryDescriptionWindow::render(sf::RenderTarget& renderTarget)
-{
+	if (!m_isVisible) return;
 	Window::render(renderTarget);
 	renderTarget.draw(m_titleText);
 	renderTarget.draw(m_descriptionText);
 	renderTarget.draw(m_statsText);
+}
+
+void ItemDescriptionWindow::show()
+{
+	m_isVisible = true;
+}
+
+void ItemDescriptionWindow::hide()
+{
+	m_isVisible = false;
 }
 
 

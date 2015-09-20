@@ -43,6 +43,10 @@ bool Dialogue::updateWindow()
 	{
 		m_window->setNPCTalking(m_currentNode->text);
 	}
+	else if (m_currentNode->type == DialogueNodeType::Trade)
+	{
+		m_window->setNPCTrading(m_currentNode->text);
+	}
 	else
 	{
 		m_window->setCendricTalking(m_currentNode->text);

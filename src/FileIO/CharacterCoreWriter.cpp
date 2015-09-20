@@ -46,6 +46,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeQuestProgressTargets(data);
 		savefile << writeQuestProgressConditions(data);
 		savefile << writeNPCStates(data);
+		savefile << writeMerchandStates(data);
 		savefile << writeSpellsLearned(data);
 		savefile << writeModifiersLearned(data);
 
@@ -258,6 +259,34 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 		quests.append(quest);
 	}
 	return quests;
+}
+
+std::string CharacterCoreWriter::writeMerchandStates(const CharacterCoreData& data) const
+{
+	string states = "# merchand states:\n";
+
+	for (auto it : data.merchantStates)
+	{
+		string merchant = string(MERCHANT_STATE);
+		merchant.append(":");
+		merchant.append(it.first);
+		merchant.append(",");
+		merchant.append(to_string((int)(it.second.fraction)));
+		merchant.append(",");
+		merchant.append(to_string(it.second.multiplier));
+
+		for (auto& it2 : it.second.wares)
+		{
+			merchant.append(",");
+			merchant.append(it2.first);
+			merchant.append(",");
+			merchant.append(to_string(it2.second));
+		}
+		
+		merchant.append("\n");
+		states.append(merchant);
+	}
+	return states;
 }
 
 std::string CharacterCoreWriter::writeQuestProgressTargets(const CharacterCoreData& data) const

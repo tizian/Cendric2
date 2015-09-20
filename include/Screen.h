@@ -42,13 +42,12 @@ public:
 	// sets the tooltip text to 'text' and display it at the tooltip position thats always at the bootom mid of the screen
 	// if override is set, this new text will display anyway, regardless of what other text is displaying.
 	void setTooltipText(const std::wstring& text, const sf::Color& color, bool isOverride);
-
 	// updates the tooltip text in 'm_tooltipText'. used so tooltip texts don't get stuck.
 	void updateTooltipText(const sf::Time& frameTime);
-
 	// renders the tooltip text in 'm_tooltipText'
 	void renderTooltipText(sf::RenderTarget& target) const;
-
+	// sets the tooltip text to the top of the screen instead of the bottom (if top = true, else bottom)
+	void setTooltipPositionTop(bool top);
 	// the screen manager sees if a screen wants to end the game
 	bool isQuitRequested() const;
 
@@ -78,4 +77,5 @@ private:
 	BitmapText m_tooltipText;
 
 	sf::Time m_tooltipTime = sf::Time::Zero;
+	bool m_isTooltipTop = false;
 };

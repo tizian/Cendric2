@@ -5,7 +5,7 @@
 
 #include "GUI/BitmapText.h"
 #include "ResourceManager.h"
-#include "GUI/InventoryDescriptionWindow.h"
+#include "Item.h"
 
 class InventorySlot : public GameObject
 {

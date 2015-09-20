@@ -11,16 +11,22 @@ const int CHAR_SIZE_DIALOGUE = 12;
 DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::LARGE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White)
 {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
-	m_speakerSprite.setPosition(sf::Vector2f(0.f, WINDOW_HEIGHT - 250.f));
 	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
 	m_speakerText = new BitmapText(L"");
-	m_speakerText->setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y));
 	m_speakerText->setCharacterSize(CHAR_SIZE_SPEAKER);
 	m_speakerText->setColor(CENDRIC_COLOR_LIGHT_PURPLE);
 	m_dialogueText = new BitmapText(L"");
-	m_dialogueText->setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y + 30.f));
 	m_dialogueText->setCharacterSize(CHAR_SIZE_DIALOGUE);
 	m_dialogueText->setColor(sf::Color::White);
+	setPosition(getPosition());
+}
+
+void DialogueWindow::setPosition(const sf::Vector2f& pos)
+{
+	Window::setPosition(pos);
+	m_speakerSprite.setPosition(sf::Vector2f(pos.x, WINDOW_HEIGHT - 250.f));
+	m_speakerText->setPosition(sf::Vector2f(pos.x + TEXT_OFFSET.x, pos.y + TEXT_OFFSET.y));
+	m_dialogueText->setPosition(sf::Vector2f(pos.x + TEXT_OFFSET.x, pos.y + TEXT_OFFSET.y + 30.f));
 }
 
 DialogueWindow::~DialogueWindow()
@@ -43,6 +49,7 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* scre
 	delete m_dialogue;
 	m_dialogue = new Dialogue();
 	m_dialogue->load(dialogueID, screen, this);
+	m_screen = screen;
 	
 	if (m_dialogue->getID().size() > 4)
 	{
@@ -64,6 +71,7 @@ void DialogueWindow::setNPC(const NPCBean& npc)
 {
 	m_npcTexturePosition = npc.dialogueTexturePositon;
 	m_npcName = g_textProvider->getText(npc.id);
+	m_npcID = npc.id;
 }
 
 void DialogueWindow::setNPCTalking(const std::string& text)
@@ -82,6 +90,18 @@ void DialogueWindow::setCendricTalking(const std::string& text)
 	m_dialogueText->setString(g_textProvider->getCroppedText(text, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
 }
 
+void DialogueWindow::setNPCTrading(const std::string& text)
+{
+	m_options.clear();
+	m_speakerSprite.setTextureRect(m_npcTexturePosition);
+	m_speakerText->setString(m_npcName);
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
+	delete m_merchantInterface;
+	m_merchantInterface = new MerchantInterface(dynamic_cast<GameScreen*>(m_screen), m_npcID);
+	setPosition(sf::Vector2f(getPosition().x, getPosition().y + BOX.height / 2.f));
+	setHeight(BOX.height / 2.f);
+}
+
 void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices)
 {
 	m_options.clear();
@@ -98,9 +118,24 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 	m_options[m_chosenOption].select();
 }
 
-bool DialogueWindow::updateDialogue()
+bool DialogueWindow::updateDialogue(const sf::Time frameTime)
 {
 	bool chooseOption = false;
+
+	if (m_merchantInterface != nullptr)
+	{
+		m_merchantInterface->update(frameTime);
+		if (m_merchantInterface->isCancelled())
+		{
+			delete m_merchantInterface;
+			m_merchantInterface = nullptr;
+			setPosition(sf::Vector2f(BOX.left, BOX.top));
+			setHeight(BOX.height);
+			m_dialogue->setNextNode(-1);
+			return m_dialogue->updateWindow();
+		}
+		return true;
+	}
 	if (!m_options.empty())
 	{
 		int oldOption = m_chosenOption;
@@ -114,7 +149,7 @@ bool DialogueWindow::updateDialogue()
 		}
 		for (int i = 0; i < m_options.size(); i++)
 		{
-			m_options[i].update(sf::Time::Zero);
+			m_options[i].update(frameTime);
 			if (m_options[i].isClicked())
 			{
 				if (i == m_chosenOption)
@@ -168,7 +203,15 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget)
 	{
 		renderTarget.draw(*m_dialogueText);
 	}
-	renderTarget.draw(m_speakerSprite);
+	
+	if (m_merchantInterface != nullptr)
+	{
+		m_merchantInterface->render(renderTarget);
+	}
+	else
+	{
+		renderTarget.draw(m_speakerSprite);
+	}
 }
 
 // Dialogue Option

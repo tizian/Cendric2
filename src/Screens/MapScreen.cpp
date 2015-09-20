@@ -13,12 +13,13 @@ Screen* MapScreen::update(const sf::Time& frameTime)
 	// handle case where a dialogue is open
 	if (m_dialogueWindow != nullptr)
 	{
-		if (!m_dialogueWindow->updateDialogue())
+		if (!m_dialogueWindow->updateDialogue(frameTime))
 		{
 			delete m_dialogueWindow;
 			m_dialogueWindow = nullptr;
 		}
 		updateProgressLog(frameTime);
+		updateTooltipText(frameTime);
 		updateObjects(GameObjectType::_Light, frameTime);
 		return this;
 	}

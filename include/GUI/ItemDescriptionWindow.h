@@ -9,20 +9,30 @@
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
 
-class InventoryDescriptionWindow : public Window
+class ItemDescriptionWindow : public Window
 {
 public:
-	InventoryDescriptionWindow(const Item& item);
+	ItemDescriptionWindow();
+	virtual ~ItemDescriptionWindow() {};
+
+	void load(const Item& item);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
 
+	void show();
+	void hide();
+
 	static const float WIDTH;
+
+protected:
+	virtual std::wstring getGoldText(const Item& item) const;
 
 private:
 	BitmapText m_titleText;
 	BitmapText m_descriptionText;
 	BitmapText m_statsText;
+	bool m_isVisible = false;
 
 	std::wstring getAttributeText(const std::string& name, int value);
 };

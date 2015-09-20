@@ -43,6 +43,8 @@ GameScreen::GameScreen(CharacterCore* core) : Screen(core)
 
 	m_foregroundLayerShader.setParameter("texture", sf::Shader::CurrentTexture);
 	m_foregroundLayerShader.loadFromMemory(vertexShader, foregroundFragmentShader);
+
+	setTooltipPositionTop(true);
 }
 
 GameScreen::~GameScreen()
@@ -78,6 +80,12 @@ void GameScreen::notifyQuestStateChanged(const std::string& questID, QuestState 
 	getCharacterCore()->setQuestState(questID, state);
 	m_progressLog->addQuestStateChanged(questID, state);
 	m_interface->reloadQuestLog();
+}
+
+Inventory* GameScreen::getInventory()
+{
+	if (m_interface == nullptr) return nullptr;
+	return m_interface->getInventory();
 }
 
 Screen* GameScreen::update(const sf::Time& frameTime)

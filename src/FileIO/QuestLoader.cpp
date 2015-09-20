@@ -1,4 +1,4 @@
-#include "QuestLoader.h"
+#include "FileIO/QuestLoader.h"
 
 using namespace std;
 using namespace luabridge;

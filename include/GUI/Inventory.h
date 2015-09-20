@@ -7,13 +7,14 @@
 #include "Window.h"
 #include "GUI/InventorySlot.h"
 #include "GUI/InventorySlotClone.h"
-#include "GUI/InventoryDescriptionWindow.h"
+#include "GUI/ItemDescriptionWindow.h"
 #include "GUI/DocumentDescriptionWindow.h"
 #include "GUI/TexturedButton.h"
 #include "GUI/InventoryEquipment.h"
 
 class LevelInterface;
 class MapInterface;
+class MerchantInterface;
 
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
@@ -34,11 +35,14 @@ public:
 	void update(const sf::Time& frameTime);
 
 	void notifyChange(const std::string& itemID);
+	void startTrading(MerchantInterface* _interface);
+	void stopTrading();
 
 private:
 	CharacterCore* m_core;
 	LevelInterface* m_levelInterface = nullptr;
 	MapInterface* m_mapInterface = nullptr;
+	MerchantInterface* m_merchantInterface = nullptr;
 	bool m_isVisible = false;
 	void init();
 
@@ -69,6 +73,9 @@ private:
 	void selectTab(ItemType type);
 	void selectSlot(InventorySlot* selectedSlot, bool isEquipmentSlot);
 
+	void handleMapRightClick(InventorySlot* clicked);
+	void handleLevelRightClick(InventorySlot* clicked);
+
 	// used for drag & drop handling
 	InventorySlotClone* m_currentClone = nullptr;
 	bool m_hasDraggingStarted = false;
@@ -79,8 +86,12 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 	void removeEquipmentItem();
+	void handleMapDrag();
+	void handleLevelDrag();
+	void handleMapDrop();
+	void handleLevelDrop();
 
-	InventoryDescriptionWindow* m_descriptionWindow = nullptr;
+	ItemDescriptionWindow* m_descriptionWindow = nullptr;
 	DocumentDescriptionWindow* m_documentWindow = nullptr;
 	void showDescription(const Item& item);
 	void hideDescription();

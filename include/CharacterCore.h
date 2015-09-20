@@ -6,9 +6,9 @@
 #include "ResourceManager.h"
 #include "FileIO/CharacterCoreReader.h"
 #include "FileIO/CharacterCoreWriter.h"
+#include "FileIO/QuestLoader.h"
 #include "Item.h"
 #include "Weapon.h"
-#include "QuestLoader.h"
 
 #include "Structs/AttributeBean.h"
 #include "Structs/CharacterCoreData.h"
@@ -96,6 +96,10 @@ public:
 	void setQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 	// is a enemy in a certain level dead?
 	bool isEnemyKilled(const std::string& levelID, int objectID);
+	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.
+	MerchantData getMerchantData(const std::string& merchantID);
+	// sets the merchant data of this merchant id
+	void setMerchantData(const std::string& merchantID, const MerchantData& data);
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;
