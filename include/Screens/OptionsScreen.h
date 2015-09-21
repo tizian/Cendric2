@@ -37,6 +37,18 @@ private:
 	Button* m_quickcastOffButton = nullptr;
 	void refreshQuickcastText();
 
+	BitmapText* m_fullscreen = nullptr;
+	bool m_selectedFullscreenOn = false;
+	Button* m_fullscreenButton = nullptr;
+	Button* m_windowButton = nullptr;
+	void refreshFullscreenText();
+
+	BitmapText* m_smoothing = nullptr;
+	bool m_selectedSmoothingOn = false;
+	Button* m_smoothingOnButton = nullptr;
+	Button* m_smoothingOffButton = nullptr;
+	void refreshSmoothingText();
+
 	Language m_selectedLanguage = Language::VOID;
 	BitmapText* m_languageText = nullptr;
 	Button* m_englishButton = nullptr;

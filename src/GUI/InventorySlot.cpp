@@ -47,6 +47,7 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos)
 void InventorySlot::setAmount(int amount)
 {
 	m_amountText.setString(amount < 0 ? "" : to_string(amount));
+	setPosition(getPosition());
 }
 
 void InventorySlot::activate()

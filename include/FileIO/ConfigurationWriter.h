@@ -28,4 +28,6 @@ private:
 
 	std::string writeDebugModeOn(const ConfigurationData& data) const;
 	std::string writeDebugRenderingOn(const ConfigurationData& data) const;
+	std::string writeFullscreenOn(const ConfigurationData& data) const;
+	std::string writeSmoothingOn(const ConfigurationData& data) const;
 };

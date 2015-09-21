@@ -8,6 +8,7 @@ BackToCheckpoint;Back to checkpoint;Zurück zum Kontrollpunkt;Zrugg zum Checkpoin
 BackToMenu;Back to menu;Zurück zum Menu;Zrugg zum Menu
 Cancel;Cancel;Abbrechen;Abbreche
 CharacterInfo;Character Info;Charakter Info;Charakter Info
+CheckpointReached;Checkpoint reached;Kontrollpunkt erreicht;Checkpoint erreicht
 Chop;Chop;Hauen;Haue
 Completed;Completed;Abgeschlossen;Fertig
 ConfigurationSaved;Configuration was saved.;Einstellungen wurden erfolgreich gespeichert. ;Iistellige sind erfolgriich gspeicheret.
@@ -30,6 +31,7 @@ Damage;Damage;Schaden;Schade
 DamageType;Damage Type;Schadenstyp;Schadetyp
 Default;Default;Standardwert;Standardwert
 Delete;Delete;Löschen;Lösche
+DisplayMode;Display Mode;Anzeigemodus;Aazeigemodus
 Divine;Divine;Heilig;Heilig
 Documents;Documents;Schriftstücke;Dokument
 Done;Done;Erfüllt;Erfüllt
@@ -45,6 +47,7 @@ FireDamage;Fire Damage;Feuerschaden;Füürschade
 FireResistance;Fire Resistance;Feuerresistenz;Füürresistenz
 FirstSpell;1. Spell;1. Zauber;1. Zauber
 FourthSpell;4. Spell ;4. Zauber;4. Zauber
+Fullscreen;Fullscreen;Vollbild;Vollbild
 GamePaused;Game Paused;Spiel pausiert;Spiel pausiert
 GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
 Gems;Gems;Edelsteine;Edelstei
@@ -68,6 +71,7 @@ Journal;Journal;Tagebuch;Tagebuech
 Jump;Jump;Springen;Springe
 KeyBindings;Key Bindings;Tastaturbelegung;Tastaturbelegig
 KeyReserved;This key is reserved and cannot be selected.;Diese Taste ist reserviert und kann nicht gewählt werden.;Die Taste isch reserviert und derf me nid bruche.
+Killed;Killed;Getötet;Killt
 Language;Language;Sprache;Sproch
 Level;Level;Stufe;Level
 LightDamage;Light Damage;Lichtschaden;Liechtschade
@@ -91,6 +95,7 @@ New;New;Neu;Neu
 NewGame;New Game;Neues Spiel;Neus Spiel
 No;No;Nein;Nai
 NoQuicksaveExists;No quick save exists;Kein Schnelllade-Speicherstand existiert;Kein Schnelllade-Speicherstand existiert
+NotEnoughGold;Not enough gold!;Nicht genügend Gold!;Nid gnueg Gold!
 NoWeapon;No weapon equipped;Keine Waffe ausgerüstet;Kei Waffe usgrüstet
 npc_guard;Kingsguard;Wache des Königs;Wächter vom König
 Off;Off;Aus;Uus
@@ -102,6 +107,7 @@ OutOfRange;Out of range;Ich muss näher ran;Da isch z'wiit weg
 Pending;Pending;Ausstehend;Nanig erfüllt
 PhysicalDamage;Physical Damage;Physischer Schaden;Physische Schade
 PressAnyKey;<?>;<?>;<?>
+Price;Price;Preis;Priis
 QuestionDeleteSaveGame;Do you really want to delete this save game?;Willst du diesen Speicherstand wirklich löschen?;Wetsch de Speicherstand würkli lösche?
 QuestionGoBackToCheckpoint;Your progress since the last checkpoint will be lost. Continue?;Dein Fortschritt seit dem letzten Kontrollpunkt geht verloren. Fortfahren?;Din Fortschritt sitt em letzte Checkpoint gaht verlore. Egal?
 QuestionLoadGame;"Load game?
@@ -130,6 +136,7 @@ SavegameDeleted;Save game successfully deleted;Speicherstand erfolgreich gelösch
 SecondSpell;2. Spell;2. Zauber;2. Zauber
 ShadowDamage;Shadow Damage;Schattenschaden;Schatteschade
 ShadowResistance;Shadow Resistance;Schattenresistenz;Schatteresistenz
+Smoothing;Texture Smoothing;Texturen glätten;Texture verschmiere
 Sound;Sound;Musik;Musig
 SoundVolume;Volume;Lautstärke;Luutstärchi
 Speed;Speed;Geschwindigkeit;Gschwindigkeit
@@ -162,12 +169,9 @@ ThirdSpell;3. Spell;3. Zauber;3. Zauber
 Twilight;Twilight;Zwielicht;Zwieliecht
 Type;Type;Typ;Typ
 Unknown;Unknown;Unbekannt;Unbekannt
+Unsalable;Cannot be sold;Unverkäuflich;Unverchäuflich
 WeaponDamage;Weapon Damage;Waffenschaden;Waffeschade
 WindForce;Wind Force;Windstärke;Windstärchi
+Window;Window;Fenster;Fenster
 Yes;Yes;Ja;Ja
 YouDied;You died;Ihr seid tot;Du bisch verreckt
-Killed;Killed;Getötet;Killt
-CheckpointReached;Checkpoint reached;Kontrollpunkt erreicht;Checkpoint erreicht
-Unsalable;Cannot be sold;Unverkäuflich;Unverchäuflich
-Price;Price;Preis;Priis
-NotEnoughGold;Not enough gold!;Nicht genügend Gold!;Nid gnueg Gold!

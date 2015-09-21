@@ -52,18 +52,19 @@ void InputController::update()
 	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
 	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT) / m_windowSize.y);
 	sf::Vector2f view = sf::Vector2f(
-		m_mainWindow->getView().getCenter().x - m_mainWindow->getView().getSize().x / 2,
-		m_mainWindow->getView().getCenter().y - m_mainWindow->getView().getSize().y / 2);
+		m_renderTexture->getView().getCenter().x - m_renderTexture->getView().getSize().x / 2,
+		m_renderTexture->getView().getCenter().y - m_renderTexture->getView().getSize().y / 2);
 	sf::Vector2f defaultview = sf::Vector2f(
-		m_mainWindow->getDefaultView().getCenter().x - m_mainWindow->getView().getSize().x / 2,
-		m_mainWindow->getDefaultView().getCenter().y - m_mainWindow->getView().getSize().y / 2);
+		m_renderTexture->getDefaultView().getCenter().x - m_renderTexture->getView().getSize().x / 2,
+		m_renderTexture->getDefaultView().getCenter().y - m_renderTexture->getView().getSize().y / 2);
 	m_mousePosition = pos + view;
 	m_defaultViewMousePosition = pos + defaultview;
 }
 
-void InputController::setWindow(sf::RenderWindow* window)
+void InputController::setWindow(sf::RenderWindow* window, sf::RenderTexture* texture)
 {
 	m_mainWindow = window;
+	m_renderTexture = texture;
 	m_isWindowFocused = m_mainWindow->hasFocus();
 }
 

@@ -16,6 +16,8 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeMaxFPS(data);
+		configuration << writeFullscreenOn(data);
+		configuration << writeSmoothingOn(data);
 		configuration << writeDebugModeOn(data);
 		configuration << writeDebugRenderingOn(data);
 
@@ -67,6 +69,18 @@ std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& 
 	string debugRenderingOn = "# 0 means debug rendering is off, 1 means debug rendering on\n";
 	debugRenderingOn += "# if the debug rendering is on, the game will display hitboxes and framerate.\n";
 	return debugRenderingOn.append(string(DEBUGRENDERING_ON) + ":" + (data.isDebugRendering ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeFullscreenOn(const ConfigurationData& data) const
+{
+	string fullscreenOn = "# 0 means window mode, 1 means fullscreen mode\n";
+	return fullscreenOn.append(string(FULLSCREEN_ON) + ":" + (data.isFullscreen ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeSmoothingOn(const ConfigurationData& data) const
+{
+	string smoothingOn = "# 0 means the resizing is handlet with Nearest Neighbor, 1 means with interpolation (smoothing)\n";
+	return smoothingOn.append(string(SMOOTHING_ON) + ":" + (data.isSmoothing ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeSoundVolume(const ConfigurationData& data) const

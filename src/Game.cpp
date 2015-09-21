@@ -2,10 +2,19 @@
 
 Game::Game() 
 {
-	m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric");
-	//m_mainWindow.setFramerateLimit(g_resourceManager->getMaxFPS());
-	//m_mainWindow.setVerticalSyncEnabled(true);
-	g_inputController->setWindow(&m_mainWindow);
+	if (g_resourceManager->getConfiguration().isFullscreen)
+	{
+		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Fullscreen);
+	}
+	else
+	{
+		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
+	}
+	
+	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
+	m_mainSprite.setTexture(m_renderTexture.getTexture());
+	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
 	m_running = true;
 
 	if (g_resourceManager->getConfiguration().isDebugMode)
@@ -57,7 +66,7 @@ void Game::run()
 			}
 			else if (e.type == sf::Event::Resized)
 			{
-				g_inputController->setCurrentWindowSize(e.size.width, e.size.height);
+				g_inputController->setCurrentWindowSize(e.size.width, e.size.height);		
 			}
 			else if (e.type == sf::Event::TextEntered)
 			{
@@ -94,12 +103,15 @@ void Game::run()
 
 		// render
 		m_mainWindow.clear();
-		m_screenManager->render(m_mainWindow);
+		m_renderTexture.clear(),
+		m_screenManager->render(m_renderTexture);
 		if (g_resourceManager->getConfiguration().isDebugRendering)
 		{
-			showFPSText(m_mainWindow, frameTime.asSeconds());
+			showFPSText(m_renderTexture, frameTime.asSeconds());
 		}
 		
+		m_renderTexture.display();
+		m_mainWindow.draw(m_mainSprite);
 		m_mainWindow.display();
 	}
 

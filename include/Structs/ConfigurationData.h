@@ -19,6 +19,8 @@ struct ConfigurationData
 	// important: the alternative key map can't be seen, saved or changed by the user yet.
 	std::map < Key, sf::Keyboard::Key > alternativeKeyMap;
 	bool isQuickcast;
+	bool isFullscreen;
+	bool isSmoothing;
 	bool isDebugMode;
 	bool isDebugRendering;
 };
@@ -84,6 +86,8 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 			{ Key::QuickSlot1, sf::Keyboard::Numpad6 },
 			{ Key::QuickSlot2, sf::Keyboard::Numpad7 }
 		}),
+		true,
+		false,
 		true,
 		false,
 		false,

@@ -23,10 +23,12 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 		g_resourceManager->getConfiguration().language = m_selectedLanguage;
 		g_resourceManager->getConfiguration().isSoundOn = m_selectedSoundOn;
 		g_resourceManager->getConfiguration().isQuickcast = m_selectedQuickcastOn;
+		g_resourceManager->getConfiguration().isFullscreen = m_selectedFullscreenOn;
+		g_resourceManager->getConfiguration().isSmoothing = m_selectedSmoothingOn;
 		ConfigurationWriter writer;
 		writer.saveToFile(g_resourceManager->getConfiguration());
 		g_textProvider->reload();
-		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::White, true);
+		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
 	}
 	else if (m_englishButton->isClicked())
 	{
@@ -65,6 +67,26 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 		m_selectedQuickcastOn = false;
 		refreshQuickcastText();
 	}
+	else if (m_fullscreenButton->isClicked())
+	{
+		m_selectedFullscreenOn = true;
+		refreshFullscreenText();
+	}
+	else if (m_windowButton->isClicked())
+	{
+		m_selectedFullscreenOn = false;
+		refreshFullscreenText();
+	}
+	else if (m_smoothingOnButton->isClicked())
+	{
+		m_selectedSmoothingOn = true;
+		refreshSmoothingText();
+	}
+	else if (m_smoothingOffButton->isClicked())
+	{
+		m_selectedSmoothingOn = false;
+		refreshSmoothingText();
+	}
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
 	deleteDisposedObjects();
@@ -80,6 +102,8 @@ void OptionsScreen::render(sf::RenderTarget &renderTarget)
 	renderTarget.draw(*m_quickcast);
 	renderTarget.draw(*m_fps);
 	renderTarget.draw(*m_volume);
+	renderTarget.draw(*m_fullscreen);
+	renderTarget.draw(*m_smoothing);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderTooltipText(renderTarget);
 }
@@ -160,8 +184,45 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	m_fps->setCharacterSize(12);
 	m_fps->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 
+	distFromTop = 150.f;
+	distFromLeft = WINDOW_WIDTH / 2.f + 50.f;
+
+	// displayMode
+	m_fullscreen = new BitmapText();
+	m_fullscreen->setCharacterSize(12);
+	m_fullscreen->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_selectedFullscreenOn = g_resourceManager->getConfiguration().isFullscreen;
+	refreshFullscreenText();
+
+	distFromTop = distFromTop + 30;
+	m_fullscreenButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 150, 50));
+	m_fullscreenButton->setText("Fullscreen", 12);
+	addObject(m_fullscreenButton);
+	m_windowButton = new Button(sf::FloatRect(distFromLeft + 160, distFromTop, 150, 50));
+	m_windowButton->setText("Window", 12);
+	addObject(m_windowButton);
+
+	distFromTop = distFromTop + 100;
+
+	// smoothing
+	m_smoothing = new BitmapText();
+	m_smoothing->setCharacterSize(12);
+	m_smoothing->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_selectedSmoothingOn = g_resourceManager->getConfiguration().isSmoothing;
+	refreshSmoothingText();
+
+	distFromTop = distFromTop + 30;
+	m_smoothingOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
+	m_smoothingOnButton->setText("On", 12);
+	addObject(m_smoothingOnButton);
+	m_smoothingOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
+	m_smoothingOffButton->setText("Off", 12);
+	addObject(m_smoothingOffButton);
+
+	distFromTop = distFromTop + 100;
+
 	// keyboard mappings button
-	m_keyBindingsButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, 170.f, 200, 50));
+	m_keyBindingsButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, distFromTop, 200, 50));
 	m_keyBindingsButton->setText("KeyBindings");
 	m_keyBindingsButton->setCharacterSize(12);
 	addObject(m_keyBindingsButton);
@@ -198,6 +259,22 @@ void OptionsScreen::refreshQuickcastText()
 	wstring quickcastText = g_textProvider->getText("Quickcast") + L": ";
 	quickcastText.append(g_textProvider->getText(currentSwitch));
 	m_quickcast->setString(quickcastText);
+}
+
+void OptionsScreen::refreshFullscreenText()
+{
+	string currentSwitch = m_selectedFullscreenOn ? "Fullscreen" : "Window";
+	wstring fullscreenText = g_textProvider->getText("DisplayMode") + L": ";
+	fullscreenText.append(g_textProvider->getText(currentSwitch));
+	m_fullscreen->setString(fullscreenText);
+}
+
+void OptionsScreen::refreshSmoothingText()
+{
+	string currentSwitch = m_selectedSmoothingOn ? "On" : "Off";
+	wstring smoothingText = g_textProvider->getText("Smoothing") + L": ";
+	smoothingText.append(g_textProvider->getText(currentSwitch));
+	m_smoothing->setString(smoothingText);
 }
 
 void OptionsScreen::execOnExit(const Screen *nextScreen)

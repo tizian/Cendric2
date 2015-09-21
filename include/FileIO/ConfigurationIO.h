@@ -15,4 +15,6 @@ protected:
 	const char* QUICKCAST_ON = "quickcast.on";
 	const char* DEBUGMODE_ON = "debugmode.on";
 	const char* DEBUGRENDERING_ON = "debugrendering.on";
+	const char* FULLSCREEN_ON = "fullscreen.on";
+	const char* SMOOTHING_ON = "smoothing.on";
 };

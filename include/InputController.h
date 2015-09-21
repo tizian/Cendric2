@@ -16,7 +16,7 @@ public:
 	// initializes the keymaps
 	void init();
 
-	void setWindow(sf::RenderWindow* window);
+	void setWindow(sf::RenderWindow* window, sf::RenderTexture* texture);
 	void setCurrentWindowSize(int width, int height);
 
 	// text input
@@ -59,6 +59,7 @@ private:
 	std::map<Key, bool> m_keyActiveMap;
 	std::map<Key, bool> m_keyJustPressedMap;
 	sf::RenderWindow* m_mainWindow;
+	sf::RenderTexture* m_renderTexture;
 
 	// Mouse keys can't be set in this maps. Their functions are fixed
 	const std::map<Key, sf::Keyboard::Key>* m_mainKeyMap;

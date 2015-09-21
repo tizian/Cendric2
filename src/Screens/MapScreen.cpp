@@ -168,5 +168,6 @@ void MapScreen::render(sf::RenderTarget &renderTarget)
 	{
 		m_dialogueWindow->render(renderTarget);
 	}
+	
 	renderTarget.setView(adjustedView);
 }
