@@ -16,4 +16,5 @@ public:
 
 private:
 	LightObject* m_lightObject;
+	sf::Sound m_sound;
 };

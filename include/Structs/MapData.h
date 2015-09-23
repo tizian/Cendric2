@@ -13,6 +13,7 @@ struct MapData
 	sf::Vector2i mapSize;
 	sf::Vector2i tileSize;
 	std::string tileSetPath;
+	std::string musicPath;
 	std::vector<std::vector<int>> backgroundLayers;
 	std::vector<std::vector<int>> foregroundLayers;
 	std::vector<bool> collidableTiles;

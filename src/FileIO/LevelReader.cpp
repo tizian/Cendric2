@@ -738,10 +738,24 @@ bool LevelReader::readTilesetPath(XMLElement* _property, LevelData& data) const
 	textAttr = _property->Attribute("value");
 	if (textAttr == nullptr)
 	{
-		g_logger->logError("LevelReader", "XML file could not be read, no value attribute found (map->properties->property->name=backgroundlayer).");
+		g_logger->logError("LevelReader", "XML file could not be read, no value attribute found (map->properties->property->name=tilesetpath).");
 		return false;
 	}
 	data.tileSetPath = textAttr;
+	return true;
+}
+
+bool LevelReader::readMusicPath(XMLElement* _property, LevelData& data) const
+{
+	// we've found the property "musicpath"
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr)
+	{
+		g_logger->logError("LevelReader", "XML file could not be read, no value attribute found (map->properties->property->name=musicpath).");
+		return false;
+	}
+	data.musicPath = textAttr;
 	return true;
 }
 
@@ -856,6 +870,10 @@ bool LevelReader::readLevelProperties(XMLElement* map, LevelData& data) const
 		else if (name.compare("tilesetpath") == 0)
 		{
 			if (!readTilesetPath(_property, data)) return false;
+		}
+		else if (name.compare("musicpath") == 0)
+		{
+			if (!readMusicPath(_property, data)) return false;
 		}
 		else if (name.compare("dimming") == 0)
 		{

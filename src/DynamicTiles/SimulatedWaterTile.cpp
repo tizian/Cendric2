@@ -204,6 +204,7 @@ void SimulatedWaterTile::splash(float xPosition, float velocity)
 	*m_particleMaxSpeed = 1.0f * velocity;
 	int nParticles = static_cast<int>(velocity / 8);
 	m_ps->emit(nParticles);
+	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_water);
 }
 
 void SimulatedWaterTile::splash(float xPosition, float width, float velocity)

@@ -389,6 +389,11 @@ const std::string& Level::getID() const
 	return m_levelData.id;
 }
 
+const std::string& Level::getMusicPath() const
+{
+	return m_levelData.musicPath;
+}
+
 float Level::getDimming() const
 {
 	return m_levelData.dimming;

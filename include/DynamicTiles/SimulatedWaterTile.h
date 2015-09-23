@@ -69,6 +69,8 @@ private:
 	float *m_particleMinSpeed = nullptr;
 	float *m_particleMaxSpeed = nullptr;
 
+	sf::Sound m_sound;
+
 public:
 	static const float TENSION;
 	static const float DAMPING;

@@ -33,8 +33,15 @@ public:
 
 	void setError(ErrorID id, const std::string& description);
 
+	// loads a sound and applies the current configuration to it (sound on/off, volume) and starts it.
+	void playSound(sf::Sound& sound, ResourceID id);
+	// streams a music and applies the current configuration to it (sound on/off, volume), starts and loops it.
+	void playMusic(sf::Music& music, const std::string& filename);
+
 	sf::Texture* getTexture(ResourceID id);
 	sf::Texture* getTexture(const std::string& filename);
+	sf::SoundBuffer* getSoundBuffer(ResourceID id);
+	sf::SoundBuffer* getSoundBuffer(const std::string& filename);
 	sf::Font* getFont(ResourceID id);
 	sf::Font* getFont(const std::string& filename);
 	BitmapFont* getBitmapFont(ResourceID id);
@@ -48,6 +55,7 @@ public:
 
 private:
 	std::map<std::string, sf::Texture> m_textures;
+	std::map<std::string, sf::SoundBuffer> m_soundBuffers;
 	std::map<std::string, BitmapFont> m_bitmapFonts;
 	std::map<std::string, sf::Font> m_fonts;
 	// a map that is filled with all ResourceTags and the corresponding filenames

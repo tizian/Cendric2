@@ -5,7 +5,7 @@ using namespace std;
 
 ResourceManager *g_resourceManager;
 
-ResourceManager::ResourceManager() : m_textures(), m_fileNames(), m_currentError(ErrorID::VOID, "")
+ResourceManager::ResourceManager() : m_currentError(ErrorID::VOID, "")
 {
 }
 
@@ -13,6 +13,7 @@ ResourceManager::~ResourceManager()
 {
 	m_textures.clear();
 	m_fileNames.clear();
+	m_soundBuffers.clear();
 	m_fonts.clear();
 	m_bitmapFonts.clear();
 	m_itemMap.clear();
@@ -78,7 +79,9 @@ void ResourceManager::init()
 		{ ResourceID::Texture_GUI_spell_color_illusion, "res/assets/gui/spell_color_illusion.png" },
 		{ ResourceID::Texture_Particle_circle, "res/assets/particles/circle.png" },
 		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" },
-		{ ResourceID::Texture_Particle_snowflake, "res/assets/particles/snowflake.png" }
+		{ ResourceID::Texture_Particle_snowflake, "res/assets/particles/snowflake.png" },
+		{ ResourceID::Sound_spell_fireball, "res/sound/sound_spell_fireball.wav" },
+		{ ResourceID::Sound_tile_water, "res/sound/sound_tile_water.wav" }
 	});
 
 	// font should be always loaded to avoid lags when loading later
@@ -133,6 +136,42 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename)
 sf::Texture* ResourceManager::getTexture(ResourceID id)
 {
 	return getTexture(m_fileNames[id]);
+}
+
+sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename)
+{
+	// does the soundbuffer exist yet?
+	for (std::map<std::string, sf::SoundBuffer>::iterator it = m_soundBuffers.begin();
+		it != m_soundBuffers.end();
+		++it)
+	{
+		if (filename.compare(it->first) == 0)
+		{
+			return &(it->second);
+		}
+	}
+
+	// the soundbuffer doesn't exist. Create and save it.
+	sf::SoundBuffer soundBuffer;
+
+	// search project's main directory
+	if (soundBuffer.loadFromFile(filename))
+	{
+		m_soundBuffers[filename] = soundBuffer;
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading soundbuffer");
+		return &m_soundBuffers[filename];
+	}
+
+	g_logger->logError("ResourceManager", "Soundbuffer could not be loaded from file: " + std::string(filename));
+	std::string tmp = "Soundbuffer could not be loaded from file: " + filename;
+	setError(ErrorID::Error_fileNotFound, tmp);
+	m_soundBuffers[filename] = soundBuffer;
+	return &m_soundBuffers[filename];
+}
+
+sf::SoundBuffer* ResourceManager::getSoundBuffer(ResourceID id)
+{
+	return getSoundBuffer(m_fileNames[id]);
 }
 
 sf::Font* ResourceManager::getFont(const std::string &filename)
@@ -228,7 +267,7 @@ void ResourceManager::deleteResource(ResourceID id)
 void ResourceManager::deleteResource(const std::string &filename)
 {
 	// delete texture
-	std::map<std::string, sf::Texture>::iterator textureIt = m_textures.find(filename);
+	auto& textureIt = m_textures.find(filename);
 	if (textureIt != m_textures.end())
 	{
 		m_textures.erase(textureIt);
@@ -237,7 +276,7 @@ void ResourceManager::deleteResource(const std::string &filename)
 	}
 		
 	// delete font
-	std::map<std::string, sf::Font>::iterator fontIt = m_fonts.find(filename);
+	auto& fontIt = m_fonts.find(filename);
 	if (fontIt != m_fonts.end())
 	{
 		m_fonts.erase(fontIt);
@@ -246,7 +285,7 @@ void ResourceManager::deleteResource(const std::string &filename)
 	}
 
 	// delete bitmap font
-	auto bitmapFontIt = m_bitmapFonts.find(filename);
+	auto& bitmapFontIt = m_bitmapFonts.find(filename);
 	if (bitmapFontIt != m_bitmapFonts.end())
 	{
 		m_bitmapFonts.erase(bitmapFontIt);
@@ -254,8 +293,43 @@ void ResourceManager::deleteResource(const std::string &filename)
 		return;
 	}
 
-	// delete sound etc...
+	// delete soundbuffer
+	auto& soundBufferIt = m_soundBuffers.find(filename);
+	if (soundBufferIt != m_soundBuffers.end())
+	{
+		m_soundBuffers.erase(soundBufferIt);
+		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing soundbuffer");
+		return;
+	}
 }
+
+void ResourceManager::playSound(sf::Sound& sound, ResourceID id)
+{
+	if (m_configuration.isSoundOn)
+	{
+		sound.setBuffer(*getSoundBuffer(id));
+		sound.setVolume(m_configuration.volume);
+		sound.play();
+	}
+}
+
+void ResourceManager::playMusic(sf::Music& music, const std::string& filename)
+{
+	if (m_configuration.isSoundOn && !filename.empty())
+	{
+		if (music.openFromFile(filename))
+		{
+			music.setLoop(true);
+			music.setVolume(m_configuration.volume);
+			music.play();
+		}
+		else
+		{
+			g_logger->logError("ResourceManager", "Could not read music from file: " + filename);
+		}
+	}
+}
+
 
 char* ResourceManager::getFilename(ResourceID id)
 {
@@ -294,6 +368,8 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_spell_icyambush);
 	deleteResource(ResourceID::Texture_spell_unlock);
 
+	deleteResource(ResourceID::Sound_spell_fireball);
+
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
 	deleteResource(ResourceID::Texture_tile_ice);
@@ -304,6 +380,8 @@ void ResourceManager::deleteLevelResources()
 	deleteResource(ResourceID::Texture_tile_spikestop);
 	deleteResource(ResourceID::Texture_tile_shiftableblock);
 	deleteResource(ResourceID::Texture_tile_checkpoint);
+
+	deleteResource(ResourceID::Sound_tile_water);
 
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
@@ -332,6 +410,8 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_spell_icyambush);
 	getTexture(ResourceID::Texture_spell_unlock);
 
+	getSoundBuffer(ResourceID::Sound_spell_fireball);
+
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_frozenwater);
 	getTexture(ResourceID::Texture_tile_ice);
@@ -342,6 +422,8 @@ void ResourceManager::loadLevelResources()
 	getTexture(ResourceID::Texture_tile_spikesbottom);
 	getTexture(ResourceID::Texture_tile_shiftableblock);
 	getTexture(ResourceID::Texture_tile_checkpoint);
+
+	getSoundBuffer(ResourceID::Sound_tile_water);
 
 	// load game over sprite 
 	getTexture(ResourceID::Texture_screen_gameover);

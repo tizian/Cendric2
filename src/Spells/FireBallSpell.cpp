@@ -23,12 +23,14 @@ void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, con
 	playCurrentAnimation(true);
 
 	Spell::load(bean, mob, target);
+	g_resourceManager->playSound(m_sound, ResourceID::Sound_spell_fireball);
 }
 
 void FireBallSpell::setDisposed()
 {
 	Spell::setDisposed();
 	m_lightObject->setDisposed();
+	m_sound.stop();
 }
 
 void FireBallSpell::setScreen(Screen* screen)

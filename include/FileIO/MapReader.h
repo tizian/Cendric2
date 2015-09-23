@@ -21,6 +21,7 @@ private:
 	bool readMapProperties(XMLElement* map, MapData& data) const;
 	bool readMapName(XMLElement* _property, MapData& data) const;
 	bool readTilesetPath(XMLElement* _property, MapData& data) const;
+	bool readMusicPath(XMLElement* _property, MapData& data) const;
 	bool readDimming(XMLElement* _property, MapData& data) const;
 
 	bool readLayers(XMLElement* map, MapData& data) const;

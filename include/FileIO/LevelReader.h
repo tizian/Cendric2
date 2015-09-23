@@ -30,6 +30,7 @@ private:
 	bool readLevelName(XMLElement* _property, LevelData& data) const;
 	bool readBackgroundLayers(XMLElement* _property, LevelData& data) const;
 	bool readTilesetPath(XMLElement* _property, LevelData& data) const;
+	bool readMusicPath(XMLElement* _property, LevelData& data) const;
 	bool readDimming(XMLElement* _property, LevelData& data) const;
 
 	bool readFirstGridIDs(XMLElement* map, LevelData& data);

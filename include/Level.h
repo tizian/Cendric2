@@ -54,6 +54,7 @@ public:
 	const TileMap& getTilemap() const;
 	const sf::FloatRect& getLevelRect() const;
 	const std::string& getID() const;
+	const std::string& getMusicPath() const;
 	// returns the next y position where the bounding box is grounding.
 	float getGround(const sf::FloatRect& boundingBox) const;
 	// returns the next y position where the bounding box is on the ceiling.

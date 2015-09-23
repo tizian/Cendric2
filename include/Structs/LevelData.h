@@ -15,6 +15,7 @@ struct LevelData
 	sf::Vector2i mapSize;
 	sf::Vector2i tileSize;
 	std::string tileSetPath;
+	std::string musicPath;
 	std::vector<BackgroundLayer> backgroundLayers;
 	std::vector<std::vector<int>> backgroundTileLayers;
 	std::vector<std::vector<int>> foregroundTileLayers;

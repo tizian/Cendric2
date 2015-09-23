@@ -51,10 +51,13 @@ void LevelScreen::load()
 	m_overlayText->setCharacterSize(56);
 	m_overlayText->setColor(sf::Color::Red);
 	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
+
+	g_resourceManager->playMusic(m_backgroundMusic, m_currentLevel.getMusicPath());
 }
 
 void LevelScreen::cleanUp()
 {
+	m_backgroundMusic.stop();
 	m_currentLevel.dispose();
 	delete m_characterCoreCopy;
 	m_characterCoreCopy = nullptr;

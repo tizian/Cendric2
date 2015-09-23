@@ -1,7 +1,8 @@
 #pragma once
 
-// Graphic Engine SFML
+// Graphic & Sound Engine SFML
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 // std library
 #include <iostream>

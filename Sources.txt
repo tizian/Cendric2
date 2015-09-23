@@ -30,3 +30,6 @@ https://shilohjames.wordpress.com/2014/04/27/tinyxml2-tutorial/
 
 Lua c++ tutorial
 https://eliasdaler.wordpress.com/2014/11/01/using-lua-with-c-luabridge-part-2-using-scripts-for-object-behaviour/
+
+Sound effects from
+Soundbible.com - Soundeffects 'Small Fireball' and 'Water Splash' by Mike Koenig
