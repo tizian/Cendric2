@@ -90,6 +90,7 @@ void ChestTile::update(const sf::Time& frameTime)
 		sf::Vector2f pos(getBoundingBox()->left + getBoundingBox()->width, getBoundingBox()->top - m_lootWindow->getSize().y + 10.f);
 		m_lootWindow->setPosition(pos);
 	}
+	m_showLootWindow = m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips);
 }
 
 void ChestTile::setObjectID(int id)

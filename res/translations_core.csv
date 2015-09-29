@@ -18,13 +18,22 @@ Cooldown;Cooldown;Abklingzeit;Abklingziit
 CooldownReduction;Cooldown Reduction;Abklingzeitverringerung;Abklingziitverringering
 Count;Count;Anzahl;Aazahl
 Credits;Credits;Mitwirkende;Erschaffer
-CreditsText;"Cendric Font:
+CreditsText;"Project Lead:
+   Isa
+Lead Effects and Simulation:
    Tizian
-too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
+Placeholder Soundeffects for Fireball and Water Splash
+   Mike Koenig";"Project Lead:
+   Isa
+Lead Effects and Simulation:
    Tizian
-too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword.";"Cendric Font:
+Placeholder Soundeffects for Fireball and Water Splash
+   Mike Koenig";"Project Lead:
+   Isa
+Lead Effects and Simulation:
    Tizian
-too many text on one line yay way to many text this needs to be cropped so hard whatsthisverylongworditdoesn'tfitatallomglookatthisworditssoooooooooooooooooooolong and there are some other words and some more words and to conclude there is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerylongword."
+Placeholder Soundeffects for Fireball and Water Splash
+   Mike Koenig"
 Critical;Critical;Kritisch;Kritisch
 CriticalHitChance;Critical Hit Chance;Chance auf kritische Treffer;Chance uf kritischi Treffer
 Damage;Damage;Schaden;Schade
@@ -166,6 +175,7 @@ StartGame;Start Game;Spiel starten;Spiel starte
 Strength;Strength;Stärke;Stärchi
 SwissGerman;Swiss German;Schweizerdeutsch;Schwiizerdüütsch
 ThirdSpell;3. Spell;3. Zauber;3. Zauber
+ToggleTooltips;Toggle Tooltips;Tooltips anzeigen/verbergen;Tooltips zeige/verstecke
 Twilight;Twilight;Zwielicht;Zwieliecht
 Type;Type;Typ;Typ
 Unknown;Unknown;Unbekannt;Unbekannt

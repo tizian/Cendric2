@@ -368,7 +368,7 @@ void Inventory::showDocument(const Item& item)
 	sf::Vector2f pos = sf::Vector2f(
 		m_window->getPosition().x + MARGIN + m_window->getSize().x,
 		m_window->getPosition().y);
-	if (m_descriptionWindow != nullptr)
+	if (m_descriptionWindow->isVisible())
 	{
 		pos.x += ItemDescriptionWindow::WIDTH + MARGIN;
 	}

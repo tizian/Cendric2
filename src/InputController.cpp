@@ -94,7 +94,8 @@ void InputController::init()
 			{ Key::FourthSpell, false },
 			{ Key::FifthSpell, false },
 			{ Key::QuickSlot1, false },
-			{ Key::QuickSlot2, false }
+			{ Key::QuickSlot2, false },
+			{ Key::ToggleTooltips, false }
 		});
 	m_keyJustPressedMap = m_keyActiveMap;
 	

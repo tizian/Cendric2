@@ -3,24 +3,20 @@
 
 using namespace std;
 
-#define VIEW_MARGIN 50;
+#define VIEW_MARGIN 50.f;
 
 inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundingBox)
 {
-	sf::IntRect view(static_cast<int>(targetView.getCenter().x - targetView.getSize().x / 2),
-		static_cast<int>(targetView.getCenter().y - targetView.getSize().y / 2),
-		static_cast<int>(targetView.getSize().x),
-		static_cast<int>(targetView.getSize().y));
+	sf::FloatRect view(targetView.getCenter().x - targetView.getSize().x / 2.f,
+		targetView.getCenter().y - targetView.getSize().y / 2.f,
+		targetView.getSize().x,
+		targetView.getSize().y);
 
 	view.left -= VIEW_MARGIN;
 	view.top -= VIEW_MARGIN;
 	view.width += 2 * VIEW_MARGIN;
 	view.height += 2 * VIEW_MARGIN;
-	if (view.contains(static_cast<int>(boundingBox.left), static_cast<int>(boundingBox.top)))
-		return true;
-	if (view.contains(static_cast<int>(boundingBox.left + static_cast<int>(boundingBox.width)), static_cast<int>(boundingBox.top + boundingBox.height)))
-		return true;
-	return false;
+	return view.intersects(boundingBox);
 }
 
 Screen::Screen(CharacterCore* core)

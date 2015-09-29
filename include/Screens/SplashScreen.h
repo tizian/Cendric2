@@ -6,11 +6,6 @@
 #include "MenuScreen.h"
 #include "Misc/FireBasket.h"
 
-// TODO: Remove test includes and everything that belongs to it.
-#include "GUI/SpellSlot.h"
-#include "Structs/SpellBean.h"
-#include "Particles/ParticleSystem.h"
-
 class SplashScreen : public Screen
 {
 public:
@@ -24,4 +19,5 @@ public:
 
 private:	
 	sf::Sprite m_screenSprite;
+	BitmapText m_versionText;
 };

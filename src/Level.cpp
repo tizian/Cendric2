@@ -61,6 +61,12 @@ void Level::loadForRenderTexture(Screen* screen)
 	loader.loadLights(m_levelData, screen);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
 }
+
+void Level::updateCamera(const sf::Time& frameTime)
+{
+	m_camera->update(frameTime);
+}
+
 void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
 {
 	sf::View view;
@@ -95,22 +101,11 @@ void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& sta
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
 	m_backgroundTileMap.draw(target, states);
-
-	// dynamic tiles
-	for (auto &it : (*m_dynamicTiles))
-	{
-		it->render(target);
-	}
 }
 
 void Level::drawForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const
 {
 	m_foregroundTileMap.draw(target, states);
-	// dynamic tiles
-	for (auto &it : (*m_dynamicTiles))
-	{
-		it->renderAfterForeground(target);
-	}
 }
 
 const sf::FloatRect& Level::getLevelRect() const

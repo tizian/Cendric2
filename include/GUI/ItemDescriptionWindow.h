@@ -22,6 +22,7 @@ public:
 
 	void show();
 	void hide();
+	bool isVisible() const;
 
 	static const float WIDTH;
 
