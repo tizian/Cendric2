@@ -53,7 +53,8 @@ void NPC::onInteractKey()
 void NPC::renderAfterForeground(sf::RenderTarget &renderTarget)
 {
 	GameObject::renderAfterForeground(renderTarget);
-	if (m_tooltipTime > sf::Time::Zero)
+	bool showTooltip = g_inputController->isKeyActive(Key::ToggleTooltips);
+	if (showTooltip || m_tooltipTime > sf::Time::Zero)
 	{
 		renderTarget.draw(m_tooltipText);
 	}

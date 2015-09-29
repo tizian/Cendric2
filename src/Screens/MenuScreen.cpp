@@ -78,6 +78,7 @@ void MenuScreen::render(sf::RenderTarget &renderTarget)
 {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
+	renderTarget.draw(m_versionText);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
@@ -90,29 +91,49 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	FireBasket* fireBasket1 = new FireBasket();
 	FireBasket* fireBasket2 = new FireBasket();
 	fireBasket1->setPosition(sf::Vector2f(60.f, 120.f));
-	fireBasket2->setPosition(sf::Vector2f(998.f, 120.f));
+	fireBasket2->setPosition(sf::Vector2f(1028.f, 120.f));
 	addObject(fireBasket1);
 	addObject(fireBasket2);
+
+	// add version nr
+	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
+	m_versionText.setCharacterSize(8);
+	m_versionText.setColor(sf::Color::White);
+	m_versionText.setPosition(
+		(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,
+		WINDOW_HEIGHT - 18.f);
+
+	float buttonHeight = 50.f;
+	float buttonWidth = 300.f;
+	float xOffset = (WINDOW_WIDTH - buttonWidth) / 2.f;
+	float yOffset = 200.f;
+	float addYOffset = 70.f;
 
 	// add buttons
 	if (m_characterCore != nullptr)
 	{
-		m_resumeGameButton = new Button(sf::FloatRect(475, 200, 300, 50), ButtonOrnamentStyle::MEDIUM);
+		m_resumeGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 		m_resumeGameButton->setText("Resume");
 		addObject(m_resumeGameButton);
 	}
-	m_newGameButton = new Button(sf::FloatRect(475, 270, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	yOffset += addYOffset;
+	m_newGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 	m_newGameButton->setText("NewGame");
-	m_loadGameButton = new Button(sf::FloatRect(475, 340, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	yOffset += addYOffset;
+	m_loadGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 	m_loadGameButton->setText("LoadGame");
-	m_saveGameButton = new Button(sf::FloatRect(475, 410, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	yOffset += addYOffset;
+	m_saveGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 	m_saveGameButton->setText("SaveGame");
 	m_saveGameButton->setEnabled(m_characterCore != nullptr);
-	m_optionsButton = new Button(sf::FloatRect(475, 480, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	yOffset += addYOffset;
+	m_optionsButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 	m_optionsButton->setText("Options");
-	m_creditsButton = new Button(sf::FloatRect(475, 550, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	yOffset += addYOffset;
+	m_creditsButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 	m_creditsButton->setText("Credits");
-	m_exitButton = new Button(sf::FloatRect(475, 610, 300, 50), ButtonOrnamentStyle::MEDIUM);
+	yOffset += addYOffset;
+	m_exitButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 	m_exitButton->setText("Exit");
 	addObject(m_newGameButton);
 	addObject(m_loadGameButton);

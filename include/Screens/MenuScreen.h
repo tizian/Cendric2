@@ -28,6 +28,7 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
+	BitmapText m_versionText;
 
 	void setAllButtonsEnabled(bool value) override;
 

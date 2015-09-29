@@ -219,6 +219,8 @@ public:
 			return "Quickslot2";
 		case Key::Up:
 			return "MoveUp";
+		case Key::ToggleTooltips:
+			return "ToggleTooltips";
 		}
 	}
 

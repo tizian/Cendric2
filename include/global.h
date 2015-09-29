@@ -29,7 +29,10 @@ inline float lerp(float t, float v1, float v2) {
     return (1.f - t) * v1 + t * v2;
 }
 
-// TODO these values should not be const, but loaded from an .ini file.
+// versioning
+#define CENDRIC_VERSION_NR "0.1.0"
+
+// const canvas size (window can be rescaled though)
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 

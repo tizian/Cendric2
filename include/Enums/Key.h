@@ -25,5 +25,6 @@ enum class Key
 	FifthSpell,
 	QuickSlot1,
 	QuickSlot2,
+	ToggleTooltips,
 	MAX
 };

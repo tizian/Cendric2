@@ -155,4 +155,9 @@ void ItemDescriptionWindow::hide()
 	m_isVisible = false;
 }
 
+bool ItemDescriptionWindow::isVisible() const
+{
+	return m_isVisible;
+}
+
 

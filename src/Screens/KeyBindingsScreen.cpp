@@ -60,7 +60,7 @@ Screen* KeyBindingsScreen::update(const sf::Time& frameTime)
 		g_resourceManager->getConfiguration().mainKeyMap = m_selectedKeys;
 		ConfigurationWriter writer;
 		writer.saveToFile(g_resourceManager->getConfiguration());
-		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::White, true);
+		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
 	}
 	
 	for (auto& it : m_keyButtons)
@@ -95,7 +95,7 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen)
 	// title
 	m_title = new BitmapText(g_textProvider->getText("KeyBindings"));
 	m_title->setCharacterSize(50);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
+	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 30.f));
 
 	m_selectedKeys = g_resourceManager->getConfiguration().mainKeyMap;
 
@@ -104,7 +104,7 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen)
 	const float buttonWidth = 200.f;
 	const float buttonHeight = 50.f;
 	const float marginX = 60.f;
-	const float marginY = WINDOW_HEIGHT - 100.f;
+	const float marginY = WINDOW_HEIGHT - 80.f;
 	const float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
 	const float buttonSpacing = (buttonSpaceWidth - 4 * buttonWidth) / 3.f;
 
@@ -151,9 +151,9 @@ void KeyBindingsScreen::reload()
 	}
 	m_keyButtons.clear();
 
-	float distFromTop = 150.f;
+	float distFromTop = 120.f;
 	float distFromLeft = 150.f;
-	const float maxDistFromTop = WINDOW_HEIGHT - 150.f;
+	const float maxDistFromTop = WINDOW_HEIGHT - 130.f;
 
 	// keyboard mappings
 	for (auto& it : m_selectedKeys)
@@ -178,7 +178,7 @@ void KeyBindingsScreen::reload()
 		distFromTop = distFromTop + 40;
 		if (distFromTop > maxDistFromTop)
 		{
-			distFromTop = 150.f;
+			distFromTop = 120.f;
 			distFromLeft = WINDOW_WIDTH / 2.f + 75.f;
 		}
 	}

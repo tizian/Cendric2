@@ -183,6 +183,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 			updateObjects(GameObjectType::_Spell, frameTime);
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Light, frameTime);
+			m_currentLevel.updateCamera(frameTime);
 			deleteDisposedObjects();
 			return this;
 		}
@@ -203,6 +204,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	// Render level background and content to window				(Normal level background rendered)
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	sf::View oldView = renderTarget.getView();
+	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
@@ -241,12 +243,13 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);
-
+	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Enemy, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
 
 	renderTooltipText(renderTarget);
 	GameScreen::render(renderTarget); // this will set the view to the default view!
@@ -260,10 +263,6 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_Form, renderTarget);
 
 	renderTarget.setView(oldView);
-
-
-
-
 }
 
 // yes or no form
