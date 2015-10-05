@@ -40,6 +40,7 @@ enum class ResourceID
 	Texture_screen_credits,
 	Texture_enemy_rat,
 	Texture_enemy_firerat,
+	Texture_enemy_nekomata_blue_trans,
 	Texture_levelitems,
 	Texture_items,
 	Texture_npcs,

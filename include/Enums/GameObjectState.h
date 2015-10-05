@@ -14,7 +14,10 @@ enum class GameObjectState
 	Walking_right, // used by map main character
 	Walking_left, // used by map main character
 	Jumping, // used by mobs and its weapons
+	Jumping_start, // used by mobs 
+	Jumping_end, // used by mobs
 	Fighting, // used by mobs and its weapons
+	Fighting_start, // used by mobs
 	Dead, // used by mobs and its weapons
 	Frozen, // used by water tile
 	Locked, // used by chest tile

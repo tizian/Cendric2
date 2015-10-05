@@ -40,6 +40,7 @@ void ResourceManager::init()
 		{ ResourceID::Texture_spell_unlock, "res/assets/spells/spritesheet_spell_unlock.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
+		{ ResourceID::Texture_enemy_nekomata_blue_trans, "res/assets/enemies/spritesheet_enemy_nekomata_blue_trans.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/dynamic_tiles/spritesheet_tiles_torch.png" },
@@ -308,7 +309,7 @@ void ResourceManager::playSound(sf::Sound& sound, ResourceID id)
 	if (m_configuration.isSoundOn)
 	{
 		sound.setBuffer(*getSoundBuffer(id));
-		sound.setVolume(m_configuration.volume);
+		sound.setVolume(static_cast<float>(m_configuration.volume));
 		sound.play();
 	}
 }
@@ -320,7 +321,7 @@ void ResourceManager::playMusic(sf::Music& music, const std::string& filename)
 		if (music.openFromFile(filename))
 		{
 			music.setLoop(true);
-			music.setVolume(m_configuration.volume);
+			music.setVolume(static_cast<float>(m_configuration.volume));
 			music.play();
 		}
 		else

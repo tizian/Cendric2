@@ -756,7 +756,7 @@
   </object>
   <object id="3" x="4413" y="218" width="77" height="37">
    <properties>
-    <property name="level id" value="res/level/ratcave/ratcave.tmx"/>
+    <property name="level id" value="res/level/testlevel/testlevel.tmx"/>
     <property name="x" value="525"/>
     <property name="y" value="1175"/>
    </properties>

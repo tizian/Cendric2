@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Enemies/RatEnemy.h"
 #include "Enemies/FireRatEnemy.h"
+#include "Enemies/NekomataEnemy.h"
 #include "LightObject.h"
 
 using namespace std;
@@ -195,6 +196,14 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 				{
 					loot.insert({ "it_fo_bread", 2 });
 					gold = 2;
+				}
+				break;
+			case EnemyID::Nekomata_blue:
+				enemy = new NekomataEnemy(level, mainCharacter);
+				if (gold == 0 && loot.empty())
+				{
+					loot.insert({ "it_mi_goldengoblet", 1 });
+					gold = 100;
 				}
 				break;
 			case EnemyID::VOID:
