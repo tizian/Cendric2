@@ -28,9 +28,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(ALTERNATIVE_INPUT_MAPPING));
 				noError = readAlternativeInputMapping(line, data);
 			}
-			else if (line.compare(0, strlen(MAX_FPS), string(MAX_FPS)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(MAX_FPS));
-				noError = readMaxFPS(line, data);
+			else if (line.compare(0, strlen(VSYNC_ON), string(VSYNC_ON)) == 0) {
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(VSYNC_ON));
+				noError = readVSyncOn(line, data);
 			}
 			else if (line.compare(0, strlen(SOUND_ON), string(SOUND_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_ON));
@@ -122,18 +122,14 @@ bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationDat
 	return true;
 }
 
-bool ConfigurationReader::readMaxFPS(const std::string& line, ConfigurationData& data) const {
+bool ConfigurationReader::readVSyncOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
 	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after max fps tag or no value after colon");
+		g_logger->logError("ConfigurationReader", "No colon found after VSync on tag or no value after colon.");
 		return false;
 	}
-	int maxFPS = atoi(line.substr(colon + 1).c_str());
-	if (maxFPS > 100 || maxFPS < 30) {
-		g_logger->logWarning("ConfigurationReader", "Max FPS has an invalid value, is left unchanged.");
-		return true;
-	}
-	data.maxFrameRate = maxFPS;
+	bool vsyncOn = (atoi(line.substr(colon + 1).c_str()) != 0);
+	data.isVSyncEnabled = vsyncOn;
 	return true;
 }
 

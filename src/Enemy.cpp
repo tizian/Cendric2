@@ -307,7 +307,7 @@ void Enemy::updateAggro() {
 		return;
 	}
 
-	if (m_enemyState == EnemyState::Idle && isInAggroRange) {
+	if ((m_enemyState == EnemyState::Idle || m_enemyState == EnemyState::Chasing) && isInAggroRange) {
 		m_chasingTime = getConfiguredChasingTime();
 		return;
 	}

@@ -13,7 +13,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeQuickcastOn(data);
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
-		configuration << writeMaxFPS(data);
+		configuration << writeVSyncOn(data);
 		configuration << writeFullscreenOn(data);
 		configuration << writeSmoothingOn(data);
 		configuration << writeDebugModeOn(data);
@@ -83,9 +83,9 @@ std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) co
 	return language.append(string(LANGUAGE) + ":" + to_string(static_cast<int>(data.language)) + "\n");
 }
 
-std::string ConfigurationWriter::writeMaxFPS(const ConfigurationData& data) const {
-	string fps = "# the fps limit for the game. Choose a value between 30 and 100\n";
-	return fps.append(string(MAX_FPS) + ":" + to_string(data.maxFrameRate) + "\n");
+std::string ConfigurationWriter::writeVSyncOn(const ConfigurationData& data) const {
+	string soundOn = "# 0 means vsync off, 1 means vsync on\n";
+	return soundOn.append(string(VSYNC_ON) + ":" + (data.isVSyncEnabled ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data) const {

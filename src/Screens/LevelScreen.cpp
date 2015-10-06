@@ -91,6 +91,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 	if (m_isGoBackToMenu) {
 		return new MenuScreen(m_characterCore);
 	}
+
 	// handle game over
 	if (!m_isGameOver && m_mainChar->isDead()) {
 		m_isGameOver = true;
@@ -99,8 +100,10 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 		m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
 		m_retryButton->setVisible(true);
 		m_backToMenuButton->setVisible(true);
+		// update once to set hp bar down
+		m_interface->update(frameTime);
 	}
-
+	
 	if (m_retryButton->isClicked()) {
 		if (m_isGameOver) {
 			m_isGoBackToCheckpoint = true;
@@ -167,6 +170,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 			return new LoadingScreen(m_characterCore);
 		}
 	}
+
 	deleteDisposedObjects();
 	return this;
 }

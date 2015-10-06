@@ -118,6 +118,8 @@ void NekomataEnemy::load() {
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	setFrameTime(sf::seconds(0.08f));
+	m_jumpStartTime = sf::seconds(3 * 0.08f);
+	m_fightStartTime = sf::seconds(1 * 0.08f);
 
 	// initial values
 	m_state = GameObjectState::Idle;
@@ -148,4 +150,63 @@ float NekomataEnemy::getApproachingDistance() const {
 
 float NekomataEnemy::getDistanceToAbyss() const {
 	return 100.f;
+}
+
+void NekomataEnemy::updateAnimation(const sf::Time& frameTime) {
+	// a nekomata has additional states
+
+	GameObjectState newState = GameObjectState::Idle;
+	if (m_isDead) {
+		newState = GameObjectState::Dead;
+	}
+	else if (m_fightAnimationTime > sf::Time::Zero) {
+		if (m_state == GameObjectState::Fighting) {
+			newState = GameObjectState::Fighting;
+		}
+		else {
+			if (m_currentFightStartTime == sf::Time::Zero) {
+				m_currentFightStartTime = m_fightStartTime;
+				newState = GameObjectState::Fighting_start;
+			}
+			else {
+				updateTime(m_currentFightStartTime, frameTime);
+				if (m_currentFightStartTime == sf::Time::Zero) {
+					newState = GameObjectState::Fighting;
+				}
+				else {
+					newState = GameObjectState::Fighting_start;
+				}
+			}
+		}
+	}
+	else if (!m_isGrounded) {
+		if (m_state == GameObjectState::Jumping) {
+			newState = GameObjectState::Jumping;
+		}
+		else {
+			if (m_currentJumpStartTime == sf::Time::Zero) {
+				m_currentJumpStartTime = m_jumpStartTime;
+				newState = GameObjectState::Jumping_start;
+			}
+			else {
+				updateTime(m_currentJumpStartTime, frameTime);
+				if (m_currentJumpStartTime == sf::Time::Zero) {
+					newState = GameObjectState::Jumping;
+				}
+				else {
+					newState = GameObjectState::Jumping_start;
+				}
+			}
+		}
+	}
+	else if (std::abs(getVelocity().x) > 20.0f) {
+		newState = GameObjectState::Walking;
+	}
+
+	// only update animation if we need to
+	if (m_state != newState || m_nextIsFacingRight != m_isFacingRight) {
+		m_isFacingRight = m_nextIsFacingRight;
+		m_state = newState;
+		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	}
 }

@@ -36,6 +36,12 @@ private:
 	Button* m_quickcastOffButton = nullptr;
 	void refreshQuickcastText();
 
+	BitmapText* m_vSync = nullptr;
+	bool m_selectedVSyncOn = false;
+	Button* m_vSyncOnButton = nullptr;
+	Button* m_vSyncOffButton = nullptr;
+	void refreshVSyncText();
+
 	BitmapText* m_fullscreen = nullptr;
 	bool m_selectedFullscreenOn = false;
 	Button* m_fullscreenButton = nullptr;
@@ -56,6 +62,5 @@ private:
 	void refreshLanguageText();
 
 	// TODO add sliders
-	BitmapText* m_fps = nullptr;
 	BitmapText* m_volume = nullptr;
 };

@@ -6,7 +6,7 @@
 class ConfigurationIO {
 protected:
 	const char* LANGUAGE = "language";
-	const char* MAX_FPS = "fps.max";
+	const char* VSYNC_ON = "vsync.on";
 	const char* SOUND_ON = "sound.on";
 	const char* SOUND_VOLUME = "sound.volume";
 	const char* MAIN_INPUT_MAPPING = "input.main.key";

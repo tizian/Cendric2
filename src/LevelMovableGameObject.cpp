@@ -28,7 +28,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	MovableGameObject::update(frameTime);
 	// update time
 	m_fightAnimationTime = (m_fightAnimationTime - frameTime) >= sf::Time::Zero ? m_fightAnimationTime - frameTime : sf::Time::Zero;
-	updateAnimation();
+	updateAnimation(frameTime);
 	if (!m_isDead) {
 		updateAttributes(frameTime);
 	}
@@ -117,7 +117,7 @@ sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const {
 	return sf::Vector2f(0, 0);
 }
 
-void LevelMovableGameObject::updateAnimation() {
+void LevelMovableGameObject::updateAnimation(const sf::Time& frameTime) {
 	// calculate new game state and set animation.
 
 	GameObjectState newState = GameObjectState::Idle;

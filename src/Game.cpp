@@ -7,7 +7,7 @@ Game::Game() {
 	else {
 		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
 	}
-
+	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
@@ -39,6 +39,7 @@ void Game::run() {
 	sf::Clock frameClock;
 	sf::Time frameTime;
 	frameTime = frameClock.restart();
+
 	while (m_running) {
 		sf::Event e;
 		sf::Time deltaTime;

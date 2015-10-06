@@ -50,7 +50,6 @@ public:
 	char* getFilename(ResourceID id);
 	const std::pair<ErrorID, std::string>* pollError() const;
 	ConfigurationData& getConfiguration();
-	int getMaxFPS() const;
 
 private:
 	std::map<std::string, sf::Texture> m_textures;

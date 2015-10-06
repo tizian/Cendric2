@@ -21,6 +21,7 @@ public:
 	float getConfiguredMaxVelocityX() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 	float getDistanceToAbyss() const override;
+	void updateAnimation(const sf::Time& frameTime) override;
 
 protected:
 	// handle input and calculate the next position
@@ -30,4 +31,9 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
+
+	sf::Time m_jumpStartTime = sf::Time::Zero;
+	sf::Time m_currentJumpStartTime = sf::Time::Zero;
+	sf::Time m_fightStartTime = sf::Time::Zero;
+	sf::Time m_currentFightStartTime = sf::Time::Zero;
 };

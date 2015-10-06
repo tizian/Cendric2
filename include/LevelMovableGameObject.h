@@ -55,7 +55,7 @@ protected:
 	virtual void handleMovementInput() = 0;
 	virtual void handleAttackInput() = 0;
 	// update animation based on the current velocity + grounded
-	void updateAnimation();
+	virtual void updateAnimation(const sf::Time& frameTime);
 	bool m_isFacingRight;
 	bool m_nextIsFacingRight;
 	bool m_isGrounded = false;
