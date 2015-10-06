@@ -7,8 +7,7 @@
 #include "LuaBridge/LuaBridge.h"
 
 // helper class to load lua files for quests
-class QuestLoader
-{
+class QuestLoader {
 public:
 	QuestLoader();
 	~QuestLoader();

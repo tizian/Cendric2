@@ -12,11 +12,10 @@
 class Screen;
 
 // A game object with animations, position, bounding box, game state. 
-class GameObject 
-{
+class GameObject {
 public:
 	GameObject();
-    virtual ~GameObject() {}
+	virtual ~GameObject() {}
 
 	virtual void update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget);

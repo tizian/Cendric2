@@ -9,8 +9,7 @@
 #include "GUI/SaveGameWindow.h"
 #include "GUI/YesOrNoForm.h"
 
-class LoadGameScreen : public Screen
-{
+class LoadGameScreen : public Screen {
 public:
 	LoadGameScreen(CharacterCore* core);
 

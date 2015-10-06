@@ -1,23 +1,20 @@
 #include "DynamicTiles/ShiftableBlockTile.h"
 #include "Spell.h"
 
-ShiftableBlockTile::ShiftableBlockTile(Level* level) : DynamicTile(level), MovableGameObject()
-{
+ShiftableBlockTile::ShiftableBlockTile(Level* level) : DynamicTile(level), MovableGameObject() {
 }
 
-void ShiftableBlockTile::init()
-{
+void ShiftableBlockTile::init() {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x) - 2.f, static_cast<float>(m_tileSize.y)));
 }
 
-void ShiftableBlockTile::load(int skinNr)
-{
+void ShiftableBlockTile::load(int skinNr) {
 	m_isCollidable = true;
 
 	Animation idleAnimation;
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftableblock));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (m_tileSize.x + 2 * BORDER)) , m_tileSize.x, m_tileSize.y));
+	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (m_tileSize.x + 2 * BORDER)), m_tileSize.x, m_tileSize.y));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -29,8 +26,7 @@ void ShiftableBlockTile::load(int skinNr)
 	playCurrentAnimation(true);
 }
 
-void ShiftableBlockTile::update(const sf::Time& frameTime)
-{
+void ShiftableBlockTile::update(const sf::Time& frameTime) {
 	setAcceleration(sf::Vector2f(m_pushAcceleration, GRAVITY_ACCELERATION));
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
@@ -38,18 +34,14 @@ void ShiftableBlockTile::update(const sf::Time& frameTime)
 	m_pushAcceleration = 0.f;
 }
 
-void ShiftableBlockTile::onHit(Spell* spell)
-{
-	switch (spell->getSpellID())
-	{
+void ShiftableBlockTile::onHit(Spell* spell) {
+	switch (spell->getSpellID()) {
 	case SpellID::WindGust:
 		// determine the direction of the windgust by the position of its owner.
-		if (spell->getOwner()->getPosition().x < getPosition().x)
-		{
+		if (spell->getOwner()->getPosition().x < getPosition().x) {
 			m_pushAcceleration = PUSH_ACCELERATION_X;
 		}
-		else
-		{
+		else {
 			m_pushAcceleration = -PUSH_ACCELERATION_X;
 		}
 		break;
@@ -58,13 +50,11 @@ void ShiftableBlockTile::onHit(Spell* spell)
 	}
 }
 
-GameObjectType ShiftableBlockTile::getConfiguredType() const
-{
+GameObjectType ShiftableBlockTile::getConfiguredType() const {
 	return DynamicTile::getConfiguredType();
 }
 
-void ShiftableBlockTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const
-{
+void ShiftableBlockTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
 	// distinguish damping in the air and at the ground
 	float dampingPerSec = (getVelocity().y == 0.0f) ? DAMPING_GROUND : DAMPING_AIR;
 	// don't damp when there is active acceleration 
@@ -73,8 +63,7 @@ void ShiftableBlockTile::calculateUnboundedVelocity(const sf::Time& frameTime, s
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
 
-void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition)
-{
+void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
@@ -82,21 +71,18 @@ void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition)
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
 
 	// check for collision on x axis
-	if (isMovingX && m_level->collidesX(nextBoundingBoxX, this))
-	{
+	if (isMovingX && m_level->collidesX(nextBoundingBoxX, this)) {
 		setAccelerationX(0.0f);
-		setVelocityX(0.0f); 
+		setVelocityX(0.0f);
 	}
 
 	// check for collision on y axis
 	bool collidesY = m_level->collidesY(nextBoundingBoxY, this);
-	if (!isMovingDown && collidesY)
-	{
+	if (!isMovingDown && collidesY) {
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
 	}
-	else if (isMovingDown && collidesY)
-	{
+	else if (isMovingDown && collidesY) {
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
 		setPositionY(m_level->getGround(nextBoundingBoxY));

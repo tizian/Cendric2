@@ -1,7 +1,6 @@
 #pragma once
 
-enum class EnemyID
-{
+enum class EnemyID {
 	VOID,
 	Rat,
 	FireRat,

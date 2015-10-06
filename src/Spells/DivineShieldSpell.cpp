@@ -1,7 +1,6 @@
 #include "Spells/DivineShieldSpell.h"
 
-DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell()
-{
+DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell() {
 	m_additionalResistance = ZERO_ATTRIBUTES;
 	m_additionalResistance.resistancePhysical = additionalResistance;
 	m_additionalResistance.resistanceFire = additionalResistance;
@@ -10,20 +9,17 @@ DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell()
 	m_additionalResistance.resistanceLight = additionalResistance;
 }
 
-void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
-{
+void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-12.f, -12.f));
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_divineshield));
-	
-	for (int i = 0; i < 8; i++)
-	{
+
+	for (int i = 0; i < 8; i++) {
 		spellAnimation.addFrame(sf::IntRect(i * 120, 0, 120, 120));
 	}
 
-	for (int i = 7; i > -1; i--)
-	{
+	for (int i = 7; i > -1; i--) {
 		spellAnimation.addFrame(sf::IntRect(i * 120, 0, 120, 120));
 	}
 
@@ -40,8 +36,7 @@ void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob,
 	m_mob->addHeal(getHeal());
 }
 
-void DivineShieldSpell::update(const sf::Time& frameTime)
-{
+void DivineShieldSpell::update(const sf::Time& frameTime) {
 	calculatePositionAccordingToMob(m_nextPosition);
 	setPosition(m_nextPosition);
 
@@ -49,18 +44,15 @@ void DivineShieldSpell::update(const sf::Time& frameTime)
 
 	m_duration = m_duration - frameTime;
 
-	if (m_duration.asMilliseconds() <= 0)
-	{
+	if (m_duration.asMilliseconds() <= 0) {
 		setDisposed();
 	}
 }
 
-const sf::Vector2f DivineShieldSpell::getConfiguredPositionOffset() const
-{
+const sf::Vector2f DivineShieldSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(-49.f, 0.f);
 }
 
-bool DivineShieldSpell::getConfiguredRotateSprite() const
-{
+bool DivineShieldSpell::getConfiguredRotateSprite() const {
 	return false;
 }

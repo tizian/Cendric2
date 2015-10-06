@@ -21,15 +21,13 @@ DocumentDescriptionWindow::DocumentDescriptionWindow(const Item& item) : Window(
 	setHeight(height);
 }
 
-void DocumentDescriptionWindow::setPosition(const sf::Vector2f& position)
-{
+void DocumentDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
 	float y = position.y + 2 * GUIConstants::TEXT_OFFSET;
 	m_text.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
 }
 
-void DocumentDescriptionWindow::render(sf::RenderTarget& renderTarget)
-{
+void DocumentDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	Window::render(renderTarget);
 	renderTarget.draw(m_text);
 }

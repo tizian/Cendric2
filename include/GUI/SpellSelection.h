@@ -5,8 +5,7 @@
 #include "GUI/SpellSlot.h"
 
 // the spell selection in a level
-class SpellSelection
-{
+class SpellSelection {
 public:
 	SpellSelection(SpellManager* manager);
 	~SpellSelection();

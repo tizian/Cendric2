@@ -4,8 +4,7 @@
 #include "DynamicTile.h"
 #include "LightObject.h"
 
-class TorchTile : public DynamicTile
-{
+class TorchTile : public DynamicTile {
 public:
 	TorchTile(Level* level);
 	void init() override;

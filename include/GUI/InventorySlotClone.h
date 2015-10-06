@@ -8,8 +8,7 @@
 #include "GUI/InventorySlot.h"
 
 // class for the inventory slot clone that spawns when an inventory slot is dragged around.
-class InventorySlotClone : public GameObject
-{
+class InventorySlotClone : public GameObject {
 public:
 	InventorySlotClone(const InventorySlot* original);
 

@@ -1,42 +1,33 @@
 #include "GUI/ProgressLog.h"
 #include "CharacterCore.h"
 
-ProgressLog::ProgressLog(const CharacterCore* core) : m_core(core)
-{
+ProgressLog::ProgressLog(const CharacterCore* core) : m_core(core) {
 }
 
-ProgressLog::~ProgressLog()
-{
+ProgressLog::~ProgressLog() {
 }
 
-void ProgressLog::update(const sf::Time& frameTime)
-{
+void ProgressLog::update(const sf::Time& frameTime) {
 	auto& it = m_logTexts.begin();
-	while (it != m_logTexts.end())
-	{
+	while (it != m_logTexts.end()) {
 		(*it).second = (*it).second - frameTime;
-		if ((*it).second <= sf::Time::Zero)
-		{
+		if ((*it).second <= sf::Time::Zero) {
 			it = m_logTexts.erase(it);
 			calculatePositions();
 		}
-		else
-		{
+		else {
 			it++;
 		}
 	}
 }
 
-void ProgressLog::render(sf::RenderTarget& renderTarget)
-{
-	for (auto& it : m_logTexts)
-	{
+void ProgressLog::render(sf::RenderTarget& renderTarget) {
+	for (auto& it : m_logTexts) {
 		renderTarget.draw(it.first);
 	}
 }
 
-void ProgressLog::addItemProgress(const std::string& itemID, int amount)
-{
+void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	BitmapText progress;
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	progress.setColor(amount < 0 ? sf::Color::Red : sf::Color::Green);
@@ -47,8 +38,7 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount)
 	calculatePositions();
 }
 
-void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const std::string& condition)
-{
+void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const std::string& condition) {
 	if (m_core->getQuestState(questID) != QuestState::Started) return;
 
 	BitmapText progress;
@@ -61,36 +51,32 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 	calculatePositions();
 }
 
-void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::string& name)
-{
+void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::string& name) {
 	if (m_core->getQuestState(questID) != QuestState::Started) return;
 
 	BitmapText questName;
 	questName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	questName.setColor(sf::Color::Green);
 	questName.setString(L"\"" + g_textProvider->getText(questID) + L"\"");
-	
+
 	std::wstring target = g_textProvider->getText(name);
 	target.append(L": ");
 	int progress = m_core->getNumberOfTargetsKilled(questID, name);
 	int goal = m_core->getNumberOfTotalTargets(questID, name);
-	if (m_core->getQuestData(questID) != nullptr)
-	{
+	if (m_core->getQuestData(questID) != nullptr) {
 		const QuestData* data = m_core->getQuestData(questID);
 		if (data->targets.find(name) != data->targets.end())
 			goal = data->targets.at(name);
 	}
 	if (m_core->getData().questTargetProgress.find(questID) != m_core->getData().questTargetProgress.end() &&
-		m_core->getData().questTargetProgress.at(questID).find(name) != m_core->getData().questTargetProgress.at(questID).end())
-	{
+		m_core->getData().questTargetProgress.at(questID).find(name) != m_core->getData().questTargetProgress.at(questID).end()) {
 		progress = m_core->getData().questTargetProgress.at(questID).at(name);
 	}
 	target.append(std::to_wstring(progress) + L"/" + std::to_wstring(goal));
-	
+
 	// identation
 	int spacesToAdd = (int)(questName.getString().getSize() - target.size()) / 2;
-	for (int i = 0; i < spacesToAdd; i++)
-	{
+	for (int i = 0; i < spacesToAdd; i++) {
 		target.append(L" ");
 	}
 
@@ -105,8 +91,7 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 	calculatePositions();
 }
 
-void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState state)
-{
+void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState state) {
 	BitmapText progress;
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	progress.setColor(state == QuestState::Completed ? sf::Color::Green : state == QuestState::Failed ? sf::Color::Red : sf::Color::Yellow);
@@ -117,11 +102,9 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 	calculatePositions();
 }
 
-void ProgressLog::calculatePositions()
-{
+void ProgressLog::calculatePositions() {
 	float yOffset = YOFFSET;
-	for (auto& it : m_logTexts)
-	{
+	for (auto& it : m_logTexts) {
 		it.first.setPosition(sf::Vector2f(
 			WINDOW_WIDTH - it.first.getLocalBounds().width - XOFFSET, yOffset));
 		yOffset += it.first.getLocalBounds().height + 0.5f * GUIConstants::CHARACTER_SIZE_M;

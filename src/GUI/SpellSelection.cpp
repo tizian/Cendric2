@@ -1,26 +1,22 @@
 #include "GUI/SpellSelection.h"
 
-SpellSelection::SpellSelection(SpellManager* manager) 
-{
+SpellSelection::SpellSelection(SpellManager* manager) {
 	m_spellManager = manager;
 	m_spellManager->setSpellSelection(this);
 	reload();
 }
 
-SpellSelection::~SpellSelection()
-{
+SpellSelection::~SpellSelection() {
 	m_spellSlots.clear();
 }
 
-void SpellSelection::activateSlot(int spellNr, const sf::Time& cooldown)
-{
+void SpellSelection::activateSlot(int spellNr, const sf::Time& cooldown) {
 	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
 	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
 	m_spellSlots[spellNr].playAnimation(cooldown);
 }
 
-void SpellSelection::selectSlot(int spellNr)
-{
+void SpellSelection::selectSlot(int spellNr) {
 	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
 	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
 	m_spellSlots[m_selectedSlot].deselect();
@@ -28,50 +24,40 @@ void SpellSelection::selectSlot(int spellNr)
 	m_selectedSlot = spellNr;
 }
 
-void SpellSelection::update(const sf::Time& frametime)
-{
-	for (int i = 0; i < m_spellSlots.size(); i++)
-	{
+void SpellSelection::update(const sf::Time& frametime) {
+	for (int i = 0; i < m_spellSlots.size(); i++) {
 		m_spellSlots[i].update(frametime);
-		if (m_spellSlots[i].isClicked())
-		{
+		if (m_spellSlots[i].isClicked()) {
 			m_spellManager->setAndExecuteSpell(i);
 		}
 	}
 }
 
-void SpellSelection::render(sf::RenderTarget& target) 
-{
-	if (m_isVisible)
-	{
-		for (auto& it : m_spellSlots)
-		{
+void SpellSelection::render(sf::RenderTarget& target) {
+	if (m_isVisible) {
+		for (auto& it : m_spellSlots) {
 			it.render(target);
 		}
 	}
 }
 
-void SpellSelection::reload()
-{
+void SpellSelection::reload() {
 	m_spellSlots.clear();
 	float offset = SpellSlot::RADIUS;
-	for (auto& it : m_spellManager->getSpellMap())
-	{
+	for (auto& it : m_spellManager->getSpellMap()) {
 		SpellSlot slot(it->getSpellBean());
 		slot.setPosition(sf::Vector2f(
-			SPELLSELECTION_OFFSET.x + offset, 
+			SPELLSELECTION_OFFSET.x + offset,
 			WINDOW_HEIGHT - (SpellSlot::RADIUS + SPELLSELECTION_OFFSET.y)));
 		m_spellSlots.push_back(slot);
 		offset += (SPELLSLOT_SPACING + 2 * SpellSlot::RADIUS);
 	}
 }
 
-void SpellSelection::show()
-{
+void SpellSelection::show() {
 	m_isVisible = true;
 }
 
-void SpellSelection::hide()
-{
+void SpellSelection::hide() {
 	m_isVisible = false;
 }

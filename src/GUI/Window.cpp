@@ -2,8 +2,7 @@
 
 using namespace std;
 
-Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject()
-{
+Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject() {
 	// using default values for constructor.
 	m_size = sf::Vector2f(box.width, box.height);
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
@@ -29,8 +28,7 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject
 	setPosition(sf::Vector2f(box.left, box.top));
 }
 
-Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor)
-{
+Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor) {
 	m_size = sf::Vector2f(box.width, box.height);
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
@@ -55,28 +53,24 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Co
 	setPosition(sf::Vector2f(box.left, box.top));
 }
 
-void Window::setPosition(const sf::Vector2f& position)
-{
+void Window::setPosition(const sf::Vector2f& position) {
 	GameObject::setPosition(position);
 	m_mainLayer.setPosition(position);
 	m_backLayer.setPosition(position);
 	m_ornamentLayer.setPosition(position);
 }
 
-void Window::render(sf::RenderTarget& renderTarget)
-{
+void Window::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_backLayer);
 	renderTarget.draw(m_mainLayer);
 	renderTarget.draw(m_ornamentLayer);
 }
 
-const sf::Vector2f& Window::getSize() const
-{
+const sf::Vector2f& Window::getSize() const {
 	return m_size;
 }
 
-void Window::setHeight(float height)
-{
+void Window::setHeight(float height) {
 	if (height < 0.f) return;
 	m_size.y = height;
 	m_boundingBox.height = height;
@@ -85,8 +79,7 @@ void Window::setHeight(float height)
 	m_ornamentLayer.setSize(m_size.x, m_size.y);
 }
 
-void Window::setWidth(float width)
-{
+void Window::setWidth(float width) {
 	if (width < 0.f) return;
 	m_size.x = width;
 	m_boundingBox.width = width;
@@ -95,7 +88,6 @@ void Window::setWidth(float width)
 	m_ornamentLayer.setSize(m_size.x, m_size.y);
 }
 
-GameObjectType Window::getConfiguredType() const
-{
+GameObjectType Window::getConfiguredType() const {
 	return GameObjectType::_Window;
 }

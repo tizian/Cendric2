@@ -6,8 +6,7 @@
 
 class LevelMainCharacter;
 
-class ChestTile : public DynamicTile
-{
+class ChestTile : public DynamicTile {
 public:
 	ChestTile(LevelMainCharacter* mainChar, Level* level);
 	void renderAfterForeground(sf::RenderTarget& target) override;

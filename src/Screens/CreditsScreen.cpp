@@ -3,15 +3,12 @@
 
 using namespace std;
 
-CreditsScreen::CreditsScreen(CharacterCore* core) : Screen(core)
-{
+CreditsScreen::CreditsScreen(CharacterCore* core) : Screen(core) {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_credits)));
 }
 
-Screen* CreditsScreen::update(const sf::Time& frameTime)
-{
-	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked())
-	{
+Screen* CreditsScreen::update(const sf::Time& frameTime) {
+	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
 		return new MenuScreen(m_characterCore);
 	}
 	updateObjects(GameObjectType::_Button, frameTime);
@@ -19,8 +16,7 @@ Screen* CreditsScreen::update(const sf::Time& frameTime)
 	return this;
 }
 
-void CreditsScreen::render(sf::RenderTarget &renderTarget)
-{
+void CreditsScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(*m_title);
@@ -28,8 +24,7 @@ void CreditsScreen::render(sf::RenderTarget &renderTarget)
 	renderObjects(GameObjectType::_Button, renderTarget);
 }
 
-void CreditsScreen::execOnEnter(const Screen *previousScreen)
-{
+void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("Credits"));
 	m_title->setCharacterSize(50);
@@ -47,8 +42,7 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen)
 	addObject(m_backButton);
 }
 
-void CreditsScreen::execOnExit(const Screen *nextScreen)
-{
+void CreditsScreen::execOnExit(const Screen *nextScreen) {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_credits);
 	delete m_title;
 	delete m_credits;

@@ -7,8 +7,7 @@
 #include "Structs/ItemBean.h"
 #include "Item.h"
 
-class LootWindow : public Window
-{
+class LootWindow : public Window {
 public:
 	LootWindow();
 	~LootWindow();

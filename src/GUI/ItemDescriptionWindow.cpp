@@ -6,8 +6,7 @@ using namespace std;
 
 const float ItemDescriptionWindow::WIDTH = 340.f;
 
-inline std::wstring toStrMaxDecimals(float value, int decimals)
-{
+inline std::wstring toStrMaxDecimals(float value, int decimals) {
 	std::ostringstream ss;
 	ss << std::fixed << std::setprecision(decimals) << value;
 	std::string s = ss.str();
@@ -22,8 +21,7 @@ ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	WindowOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::BACK_COLOR,
-	GUIConstants::ORNAMENT_COLOR)
-{
+	GUIConstants::ORNAMENT_COLOR) {
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(CENDRIC_COLOR_WHITE);
 
@@ -34,8 +32,7 @@ ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	m_statsText.setColor(CENDRIC_COLOR_WHITE);
 }
 
-std::wstring ItemDescriptionWindow::getGoldText(const Item& item) const
-{
+std::wstring ItemDescriptionWindow::getGoldText(const Item& item) const {
 	std::wstring goldText;
 	goldText.append(g_textProvider->getText("GoldValue"));
 	goldText.append(L": ");
@@ -43,8 +40,7 @@ std::wstring ItemDescriptionWindow::getGoldText(const Item& item) const
 	return goldText;
 }
 
-std::wstring ItemDescriptionWindow::getAttributeText(const std::string& name, int value)
-{
+std::wstring ItemDescriptionWindow::getAttributeText(const std::string& name, int value) {
 	if (value == 0) return L"";
 	wstring s;
 	s.append(g_textProvider->getText(name));
@@ -54,26 +50,23 @@ std::wstring ItemDescriptionWindow::getAttributeText(const std::string& name, in
 	return s;
 }
 
-void ItemDescriptionWindow::setPosition(const sf::Vector2f& position)
-{
+void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
 	float y = position.y + GUIConstants::TEXT_OFFSET;
 	m_titleText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
 	y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
 	m_descriptionText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
 	y += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	if (m_statsText.getLocalBounds().height == GUIConstants::CHARACTER_SIZE_S)
-	{
+	if (m_statsText.getLocalBounds().height == GUIConstants::CHARACTER_SIZE_S) {
 		y -= GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S;
 	}
 	m_statsText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
 }
 
-void ItemDescriptionWindow::load(const Item& item)
-{
+void ItemDescriptionWindow::load(const Item& item) {
 	m_titleText.setString(g_textProvider->getText(item.getID()));
 	m_descriptionText.setString(g_textProvider->getCroppedText(item.getDescription(), GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
-	
+
 	wstring stats = L"\n";
 	const AttributeBean& attr = item.getAttributes();
 	stats.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
@@ -91,8 +84,7 @@ void ItemDescriptionWindow::load(const Item& item)
 	stats.append(getAttributeText("ShadowResistance", attr.resistanceShadow));
 	stats.append(L"\n");
 
-	if (item.getBean().foodDuration > sf::Time::Zero)
-	{
+	if (item.getBean().foodDuration > sf::Time::Zero) {
 		stats.append(g_textProvider->getText("Duration"));
 		stats.append(L": ");
 		stats.append(to_wstring(static_cast<int>(floor(item.getBean().foodDuration.asSeconds()))));
@@ -101,8 +93,7 @@ void ItemDescriptionWindow::load(const Item& item)
 
 	stats.append(getGoldText(item));
 
-	if (item.getType() == ItemType::Equipment_weapon)
-	{
+	if (item.getType() == ItemType::Equipment_weapon) {
 		stats.append(L"\n\n");
 		stats.append(g_textProvider->getText("WeaponDamage"));
 		stats.append(L": ");
@@ -114,12 +105,10 @@ void ItemDescriptionWindow::load(const Item& item)
 		stats.append(toStrMaxDecimals(item.getBean().weaponChopCooldown.asSeconds(), 1));
 		stats.append(L"s\n");
 
-		if (item.getBean().weaponSlots.size() > 0)
-		{
+		if (item.getBean().weaponSlots.size() > 0) {
 			stats.append(L"\n");
 			stats.append(L"<<< " + g_textProvider->getText("SpellSlots") + L" >>>\n");
-			for (auto& it : item.getBean().weaponSlots)
-			{
+			for (auto& it : item.getBean().weaponSlots) {
 				stats.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.type)));
 				stats.append(L" - " + g_textProvider->getText("GemSockets") + L": ");
 				stats.append(to_wstring(it.modifierCount) + L"\n");
@@ -136,8 +125,7 @@ void ItemDescriptionWindow::load(const Item& item)
 	setHeight(height);
 }
 
-void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget)
-{
+void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	if (!m_isVisible) return;
 	Window::render(renderTarget);
 	renderTarget.draw(m_titleText);
@@ -145,18 +133,15 @@ void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget)
 	renderTarget.draw(m_statsText);
 }
 
-void ItemDescriptionWindow::show()
-{
+void ItemDescriptionWindow::show() {
 	m_isVisible = true;
 }
 
-void ItemDescriptionWindow::hide()
-{
+void ItemDescriptionWindow::hide() {
 	m_isVisible = false;
 }
 
-bool ItemDescriptionWindow::isVisible() const
-{
+bool ItemDescriptionWindow::isVisible() const {
 	return m_isVisible;
 }
 

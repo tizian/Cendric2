@@ -12,11 +12,9 @@
 #include "SpellCreators/IcyAmbushSpellCreator.h"
 #include "SpellCreators/UnlockSpellCreator.h"
 
-std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id)
-{
+std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
-	switch (id)
-	{
+	switch (id) {
 	case SpellID::Chop:
 		break;
 	case SpellID::FireBall:
@@ -76,11 +74,9 @@ std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id)
 	return types;
 }
 
-SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner)
-{
+SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner) {
 	SpellCreator* creator;
-	switch (bean.id)
-	{
+	switch (bean.id) {
 	case SpellID::Chop:
 		creator = new ChopSpellCreator(bean, owner);
 		break;
@@ -123,10 +119,8 @@ SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vecto
 	return creator;
 }
 
-SpellBean SpellBean::getSpellBean(SpellID id)
-{
-	switch (id)
-	{
+SpellBean SpellBean::getSpellBean(SpellID id) {
+	switch (id) {
 	case SpellID::Chop:
 		return getChopSpellBean();
 	case SpellID::FireBall:
@@ -154,8 +148,7 @@ SpellBean SpellBean::getSpellBean(SpellID id)
 	}
 }
 
-SpellBean SpellBean::getChopSpellBean()
-{
+SpellBean SpellBean::getChopSpellBean() {
 	SpellBean chop = EMPTY_SPELL;
 	chop.id = SpellID::Chop;
 
@@ -166,12 +159,11 @@ SpellBean SpellBean::getChopSpellBean()
 	chop.duration = sf::milliseconds(320);
 
 	chop.inputKey = Key::Chop;
-	
+
 	return chop;
 }
 
-SpellBean SpellBean::getFireBallSpellBean()
-{
+SpellBean SpellBean::getFireBallSpellBean() {
 	SpellBean fireBall = EMPTY_SPELL;
 	fireBall.id = SpellID::FireBall;
 	fireBall.spellType = SpellType::Elemental;
@@ -194,8 +186,7 @@ SpellBean SpellBean::getFireBallSpellBean()
 	return fireBall;
 }
 
-SpellBean SpellBean::getIceBallSpellBean()
-{
+SpellBean SpellBean::getIceBallSpellBean() {
 	SpellBean iceBall = EMPTY_SPELL;
 	iceBall.id = SpellID::IceBall;
 	iceBall.spellType = SpellType::Elemental;
@@ -214,12 +205,11 @@ SpellBean SpellBean::getIceBallSpellBean()
 	iceBall.damageModifierAddition = 20;
 	iceBall.reflectModifierAddition = 1;
 	iceBall.speedModifierAddition = 100.f;
-	
+
 	return iceBall;
 }
 
-SpellBean SpellBean::getDivineShieldSpellBean()
-{
+SpellBean SpellBean::getDivineShieldSpellBean() {
 	SpellBean divineShield = EMPTY_SPELL;
 	divineShield.id = SpellID::DivineShield;
 	divineShield.spellType = SpellType::Divine;
@@ -236,8 +226,7 @@ SpellBean SpellBean::getDivineShieldSpellBean()
 }
 
 
-SpellBean SpellBean::getAureolaSpellBean()
-{
+SpellBean SpellBean::getAureolaSpellBean() {
 	SpellBean aureola = EMPTY_SPELL;
 	aureola.id = SpellID::Aureola;
 	aureola.spellType = SpellType::Divine;
@@ -246,7 +235,7 @@ SpellBean SpellBean::getAureolaSpellBean()
 	aureola.cooldown = sf::milliseconds(10000);
 	aureola.boundingBox = sf::FloatRect(0, 0, 20, 20);
 	aureola.count = 4,
-	aureola.divergenceAngle = 2 * M_PI / aureola.count;
+		aureola.divergenceAngle = 2 * M_PI / aureola.count;
 	aureola.damageType = DamageType::Light;
 	aureola.duration = sf::milliseconds(10000);
 	aureola.needsTarget = true;
@@ -263,8 +252,7 @@ SpellBean SpellBean::getAureolaSpellBean()
 	return aureola;
 }
 
-SpellBean SpellBean::getFearSpellBean()
-{
+SpellBean SpellBean::getFearSpellBean() {
 	SpellBean fear = EMPTY_SPELL;
 	fear.id = SpellID::Fear;
 	fear.spellType = SpellType::Necromancy;
@@ -285,8 +273,7 @@ SpellBean SpellBean::getFearSpellBean()
 	return fear;
 }
 
-SpellBean SpellBean::getAntiGravitySpellBean()
-{
+SpellBean SpellBean::getAntiGravitySpellBean() {
 	SpellBean antiGravity = EMPTY_SPELL;
 	antiGravity.id = SpellID::AntiGravity;
 	antiGravity.spellType = SpellType::Elemental;
@@ -301,8 +288,7 @@ SpellBean SpellBean::getAntiGravitySpellBean()
 	return antiGravity;
 }
 
-SpellBean SpellBean::getWindGustSpellBean()
-{
+SpellBean SpellBean::getWindGustSpellBean() {
 	SpellBean windGust = EMPTY_SPELL;
 	windGust.id = SpellID::WindGust;
 	windGust.spellType = SpellType::Elemental;
@@ -318,8 +304,7 @@ SpellBean SpellBean::getWindGustSpellBean()
 	return windGust;
 }
 
-SpellBean SpellBean::getLeechSpellBean()
-{
+SpellBean SpellBean::getLeechSpellBean() {
 	SpellBean leech = EMPTY_SPELL;
 	leech.id = SpellID::Leech;
 	leech.spellType = SpellType::Necromancy;
@@ -342,8 +327,7 @@ SpellBean SpellBean::getLeechSpellBean()
 	return leech;
 }
 
-SpellBean SpellBean::getIcyAmbushSpellBean()
-{
+SpellBean SpellBean::getIcyAmbushSpellBean() {
 	SpellBean icyAmbush = EMPTY_SPELL;
 	icyAmbush.id = SpellID::IcyAmbush;
 	icyAmbush.spellType = SpellType::Twilight;
@@ -366,8 +350,7 @@ SpellBean SpellBean::getIcyAmbushSpellBean()
 	return icyAmbush;
 }
 
-SpellBean SpellBean::getUnlockSpellBean()
-{
+SpellBean SpellBean::getUnlockSpellBean() {
 	SpellBean unlock = EMPTY_SPELL;
 	unlock.id = SpellID::Unlock;
 	unlock.spellType = SpellType::Twilight;

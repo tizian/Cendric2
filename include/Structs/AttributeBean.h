@@ -1,7 +1,6 @@
 #pragma once
 
-struct AttributeBean
-{
+struct AttributeBean {
 	int currentHealthPoints;
 
 	// total attributes
@@ -30,18 +29,15 @@ struct AttributeBean
 	int criticalHitChance;
 
 	// helper function
-	float calculateDamageReduction(int resistance) const
-	{
-		if (resistance >= 0)
-		{
+	float calculateDamageReduction(int resistance) const {
+		if (resistance >= 0) {
 			return 100.f / (100.f + resistance);
 		}
 		return 2.f - 100.f / (100.f - resistance);
 	}
 
 	// calculates calculated attributes based on total attributes
-	void calculateAttributes()
-	{
+	void calculateAttributes() {
 		criticalHitChance = std::max(0, std::min(60, critical));
 		cooldownMultiplier = 1.f / (1.f + (haste / 100.f));
 
@@ -53,8 +49,7 @@ struct AttributeBean
 	}
 
 	// adds the second bean to the this bean. current health points will be added.
-	void addBean(const AttributeBean& secondBean)
-	{
+	void addBean(const AttributeBean& secondBean) {
 		damageFire += secondBean.damageFire;
 		damageIce += secondBean.damageIce;
 		damagePhysical += secondBean.damagePhysical;
@@ -70,13 +65,12 @@ struct AttributeBean
 		critical += secondBean.critical;
 		healthRegenerationPerS += secondBean.healthRegenerationPerS;
 		currentHealthPoints = (maxHealthPoints < currentHealthPoints + secondBean.currentHealthPoints) ? maxHealthPoints : (currentHealthPoints + secondBean.currentHealthPoints);
-	
+
 		calculateAttributes();
 	}
 
 	// removes the second bean from the this bean. current health points will not be removed!
-	void removeBean(const AttributeBean& secondBean)
-	{
+	void removeBean(const AttributeBean& secondBean) {
 		damageFire -= secondBean.damageFire;
 		damageIce -= secondBean.damageIce;
 		damagePhysical -= secondBean.damagePhysical;
@@ -97,8 +91,7 @@ struct AttributeBean
 	}
 
 	// sets the current health points and the max points to the health value
-	void setHealth(int health)
-	{
+	void setHealth(int health) {
 		maxHealthPoints = health;
 		currentHealthPoints = health;
 	}

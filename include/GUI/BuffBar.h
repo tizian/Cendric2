@@ -4,8 +4,7 @@
 #include "GUI/BuffSlot.h"
 
 // the buff bar in a level
-class BuffBar
-{
+class BuffBar {
 public:
 	BuffBar();
 	~BuffBar();

@@ -5,10 +5,9 @@
 #include "global.h"
 #include "Logger.h"
 
-class Reader
-{
+class Reader {
 public:
-	
+
 protected:
 	const char COMMENT_MARKER = '#';
 

@@ -3,8 +3,7 @@
 
 using namespace std;
 
-LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const
-{
+LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const {
 	LevelMainCharacter* mainChar = new LevelMainCharacter(level);
 	screen->addObject(mainChar);
 	mainChar->load();
@@ -12,11 +11,9 @@ LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, 
 	return mainChar;
 }
 
-void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
-{
+void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
-	if (mainCharacter == nullptr)
-	{
+	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelMainCharacterLoader", "Could not find main character of game screen");
 		return;
 	}
@@ -31,54 +28,45 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const
 	equipmentOrder.push_back(ItemType::Equipment_body);
 	equipmentOrder.push_back(ItemType::Equipment_head);
 	vector<string> gameData;
-	for (auto& it : equipmentOrder)
-	{
+	for (auto& it : equipmentOrder) {
 		if (screen->getCharacterCore()->getEquippedItem(it) == nullptr) continue;
 		gameData.push_back(screen->getCharacterCore()->getEquippedItem(it)->getID());
 	}
-	
-	for (auto& it : gameData)
-	{
+
+	for (auto& it : gameData) {
 		LevelEquipmentBean equipment;
 		const ItemBean* bean = g_resourceManager->getItemBean(it);
-		if (bean == nullptr)
-		{
+		if (bean == nullptr) {
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");
 			return;
 		}
 
 		equipment.texturePath = bean->spritesheetPath;
-		
+
 		if (equipment.texturePath.empty()) continue;
 
 		equipment.spriteOffset = sf::Vector2f(0.f, 0.f);
 		equipment.boundingBox = sf::FloatRect(0, 0, 120, 120);
-		for (int i = 0; i < 8; i++)
-		{
+		for (int i = 0; i < 8; i++) {
 			equipment.texturePositions[GameObjectState::Walking].push_back(sf::IntRect(i * 120, 0, 120, 120));
 		}
-		for (int i = 0; i < 2; i++)
-		{
+		for (int i = 0; i < 2; i++) {
 			equipment.texturePositions[GameObjectState::Idle].push_back(sf::IntRect(960 + i * 120, 0, 120, 120));
 		}
-		for (int i = 0; i < 2; i++)
-		{
+		for (int i = 0; i < 2; i++) {
 			equipment.texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(1200 + i * 120, 0, 120, 120));
 		}
-		for (int i = 0; i < 5; i++)
-		{
+		for (int i = 0; i < 5; i++) {
 			equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
 		}
 		equipment.frameTime = sf::seconds(0.07f);
 
 		LevelEquipment* levelEquipment = new LevelEquipment();
 		levelEquipment->setBoundingBox(equipment.boundingBox);
-		for (auto &ani : equipment.texturePositions)
-		{
+		for (auto &ani : equipment.texturePositions) {
 			Animation animation;
 			animation.setSpriteSheet(g_resourceManager->getTexture(bean->spritesheetPath));
-			for (auto &frame : ani.second) 
-			{
+			for (auto &frame : ani.second) {
 				animation.addFrame(frame);
 			}
 			levelEquipment->addAnimation(ani.first, animation);

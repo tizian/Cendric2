@@ -1,13 +1,11 @@
 #include "SpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner)
-{
+SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) {
 	m_owner = owner;
 	if (m_owner != nullptr) m_level = owner->getLevel();
 	if (m_owner != nullptr) m_attributeBean = owner->getAttributes();
-	if (m_owner != nullptr && !(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen())))
-	{
+	if (m_owner != nullptr && !(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen()))) {
 		g_logger->logError("SpellCreator", "spell owner has no (level)screen.");
 	}
 	m_spellBean = spellBean;
@@ -15,28 +13,22 @@ SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* o
 	m_allowedModifiers = SpellBean::getAllowedModifiers(spellBean.id);
 }
 
-SpellCreator::~SpellCreator()
-{
+SpellCreator::~SpellCreator() {
 }
 
-void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers)
-{
-	for (auto& it : modifiers)
-	{
+void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {
+	for (auto& it : modifiers) {
 		if (it.type == SpellModifierType::VOID) continue;
 		// some security checks
-		if (!(std::find(m_allowedModifiers.begin(), m_allowedModifiers.end(), it.type) != m_allowedModifiers.end()))
-		{
+		if (!(std::find(m_allowedModifiers.begin(), m_allowedModifiers.end(), it.type) != m_allowedModifiers.end())) {
 			g_logger->logWarning("SpellCreator", "Modifier of an unallowed type was ignored.");
 			continue;
 		}
-		if (it.level < 1 || it.level > 3)
-		{
+		if (it.level < 1 || it.level > 3) {
 			g_logger->logWarning("SpellCreator", "Modifier of an unallowed level was ignored.");
 			continue;
 		}
-		switch (it.type)
-		{
+		switch (it.type) {
 		case SpellModifierType::Count:
 			addCountModifier(it.level);
 			break;
@@ -65,66 +57,53 @@ void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers)
 	}
 }
 
-void SpellCreator::addSpeedModifier(int level)
-{
+void SpellCreator::addSpeedModifier(int level) {
 	m_spellBean.startVelocity += m_spellBean.speedModifierAddition * level;
 }
 
-void SpellCreator::addDamageModifier(int level)
-{
+void SpellCreator::addDamageModifier(int level) {
 	m_spellBean.damage += m_spellBean.damageModifierAddition * level;
 }
 
-void SpellCreator::addDurationModifier(int level)
-{
-	m_spellBean.duration += static_cast<float>(level) * m_spellBean.durationModifierAddition;
+void SpellCreator::addDurationModifier(int level) {
+	m_spellBean.duration += static_cast<float>(level)* m_spellBean.durationModifierAddition;
 }
 
-void SpellCreator::addRangeModifier(int level)
-{
+void SpellCreator::addRangeModifier(int level) {
 	m_spellBean.range += m_spellBean.rangeModifierAddition * level;
 }
 
-void SpellCreator::addCountModifier(int level)
-{
+void SpellCreator::addCountModifier(int level) {
 	m_spellBean.count += m_spellBean.countModifierAddition * level;
 }
 
-void SpellCreator::addReflectModifier(int level)
-{
+void SpellCreator::addReflectModifier(int level) {
 	m_spellBean.reflectCount += m_spellBean.reflectModifierAddition * level;
 }
 
-void SpellCreator::addStrengthModifier(int level)
-{
+void SpellCreator::addStrengthModifier(int level) {
 	// nop, we don't know yet what this does but the method is implemented so its subclasses won't have to
 }
 
-const SpellBean& SpellCreator::getSpellBean() const
-{
+const SpellBean& SpellCreator::getSpellBean() const {
 	return m_spellBean;
 }
 
-void SpellCreator::updateDamage(SpellBean& bean) const
-{
+void SpellCreator::updateDamage(SpellBean& bean) const {
 	SpellCreator::updateDamage(bean, m_attributeBean);
 }
 
-int SpellCreator::getStrengthModifierValue() const
-{
+int SpellCreator::getStrengthModifierValue() const {
 	return 0;
 }
 
-std::string SpellCreator::getStrengthModifierName() const
-{
+std::string SpellCreator::getStrengthModifierName() const {
 	return "";
 }
 
-void SpellCreator::updateDamage(SpellBean& bean, const AttributeBean* attributes)
-{
+void SpellCreator::updateDamage(SpellBean& bean, const AttributeBean* attributes) {
 	if (attributes == nullptr) return;
-	switch (bean.damageType)
-	{
+	switch (bean.damageType) {
 	case DamageType::Physical:
 		bean.damage = bean.damage + attributes->damagePhysical;
 		break;
@@ -149,8 +128,7 @@ void SpellCreator::updateDamage(SpellBean& bean, const AttributeBean* attributes
 
 	// add critical hit to damage
 	int chance = rand() % 100 + 1;
-	if (chance <= attributes->criticalHitChance)
-	{
+	if (chance <= attributes->criticalHitChance) {
 		bean.damage *= 2;
 	}
 }

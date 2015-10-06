@@ -8,8 +8,7 @@
 #include "GUI/Button.h"
 #include "GUI/BitmapText.h"
 
-class OptionsScreen : public Screen
-{
+class OptionsScreen : public Screen {
 public:
 	OptionsScreen(CharacterCore* core);
 

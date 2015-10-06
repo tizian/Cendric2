@@ -9,8 +9,7 @@
 #include "GUI/BitmapText.h"
 #include "Enums/EnumNames.h"
 
-class KeyBindingsScreen : public Screen
-{
+class KeyBindingsScreen : public Screen {
 public:
 	KeyBindingsScreen(CharacterCore* core);
 

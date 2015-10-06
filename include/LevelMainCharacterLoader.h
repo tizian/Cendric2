@@ -12,8 +12,7 @@
 #include "Structs/LevelEquipmentBean.h"
 
 // helper class used by the game screan to load the main character including his weapon / equipment.
-class LevelMainCharacterLoader
-{
+class LevelMainCharacterLoader {
 public:
 	// loads the main character and adds it directly to the screen
 	LevelMainCharacter* loadMainCharacter(Screen* screen, Level* level) const;

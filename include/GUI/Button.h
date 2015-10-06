@@ -8,8 +8,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
-enum class ButtonOrnamentStyle 
-{
+enum class ButtonOrnamentStyle {
 	NONE,
 	SMALL,
 	MEDIUM,
@@ -17,8 +16,7 @@ enum class ButtonOrnamentStyle
 };
 
 // A not so ugly button to click
-class Button : public GameObject
-{
+class Button : public GameObject {
 public:
 	Button(const sf::FloatRect& box, ButtonOrnamentStyle style = ButtonOrnamentStyle::NONE);
 

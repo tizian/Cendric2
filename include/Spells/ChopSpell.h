@@ -3,8 +3,7 @@
 #include "global.h"
 #include "Spell.h"
 
-class ChopSpell : public Spell
-{
+class ChopSpell : public Spell {
 public:
 	ChopSpell();
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

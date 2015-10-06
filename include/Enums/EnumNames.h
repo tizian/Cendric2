@@ -11,11 +11,9 @@
 #include "Enums/DamageType.h"
 
 // pure static class used to resolve enum names.
-class EnumNames 
-{
+class EnumNames {
 public:
-	static std::string getLanguageName(Language lang)
-	{
+	static std::string getLanguageName(Language lang) {
 		switch (lang) {
 		default:
 		case Language::MAX:
@@ -30,8 +28,7 @@ public:
 		}
 	}
 
-	static std::string getDamageTypeName(DamageType type)
-	{
+	static std::string getDamageTypeName(DamageType type) {
 		switch (type) {
 		default:
 		case DamageType::MAX:
@@ -50,8 +47,7 @@ public:
 		}
 	}
 
-	static std::string getQuestStateName(QuestState state)
-	{
+	static std::string getQuestStateName(QuestState state) {
 		switch (state) {
 		default:
 		case QuestState::MAX:
@@ -66,8 +62,7 @@ public:
 		}
 	}
 
-	static std::string getSpellTypeName(SpellType type)
-	{
+	static std::string getSpellTypeName(SpellType type) {
 		switch (type) {
 		default:
 		case SpellType::MAX:
@@ -86,8 +81,7 @@ public:
 		}
 	}
 
-	static std::string getSpellIDName(SpellID id)
-	{
+	static std::string getSpellIDName(SpellID id) {
 		switch (id) {
 		default:
 		case SpellID::MAX:
@@ -144,8 +138,7 @@ public:
 		}
 	}
 
-	static std::string getSpellModifierTypeName(SpellModifierType type)
-	{
+	static std::string getSpellModifierTypeName(SpellModifierType type) {
 		switch (type) {
 		default:
 		case SpellModifierType::MAX:
@@ -168,8 +161,7 @@ public:
 		}
 	}
 
-	static std::string getKeyName(Key key)
-	{
+	static std::string getKeyName(Key key) {
 		switch (key) {
 		default:
 		case Key::MAX:
@@ -224,8 +216,7 @@ public:
 		}
 	}
 
-	static std::string getKeyboardKeyName(sf::Keyboard::Key key)
-	{
+	static std::string getKeyboardKeyName(sf::Keyboard::Key key) {
 		switch (key) {
 		default:
 		case sf::Keyboard::Unknown:

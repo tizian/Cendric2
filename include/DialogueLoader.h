@@ -10,8 +10,7 @@
 class CharacterCore;
 
 // helper class to load lua files for dialogues
-class DialogueLoader
-{
+class DialogueLoader {
 public:
 	DialogueLoader(Dialogue& dialogue, CharacterCore* core);
 	~DialogueLoader();
@@ -27,7 +26,7 @@ public:
 	void createNPCNode(int tag, int nextTag, const std::string& text);
 	void createTradeNode(int tag, int nextTag, const std::string& text);
 	void createChoiceNode(int tag);
-	
+
 	// methods to add properties to that node
 	void addChoice(int nextTag, const std::string& text);
 	void changeNPCState(const std::string& npcID, const std::string& state);

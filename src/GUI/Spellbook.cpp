@@ -5,16 +5,14 @@
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
 
-Spellbook::Spellbook(CharacterCore* core, bool clickable)
-{
+Spellbook::Spellbook(CharacterCore* core, bool clickable) {
 	m_core = core;
 	m_isClickable = clickable;
 
 	init();
 }
 
-void Spellbook::init()
-{
+void Spellbook::init() {
 	// init window
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
@@ -52,8 +50,7 @@ void Spellbook::init()
 	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
 	float buttonMargin = (WIDTH - 6 * BUTTON_SIZE.x - 2 * GUIConstants::TEXT_OFFSET) / 5.f;
 
-	for (auto& it : m_tabs)
-	{
+	for (auto& it : m_tabs) {
 		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
 		it.first.setBackgroundLayerColor(CENDRIC_COLOR_TRANS_BLACK);
 		it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
@@ -69,7 +66,7 @@ void Spellbook::init()
 		{ SpellType::Elemental, &m_elementalSlots },
 		{ SpellType::Illusion, &m_illusionSlots },
 		{ SpellType::Necromancy, &m_necromancySlots }
-	}); 
+	});
 
 	selectTab(SpellType::VOID);
 
@@ -79,8 +76,7 @@ void Spellbook::init()
 	reload();
 }
 
-Spellbook::~Spellbook()
-{
+Spellbook::~Spellbook() {
 	m_typeMap.clear();
 	delete m_window;
 	delete m_weaponWindow;
@@ -89,8 +85,7 @@ Spellbook::~Spellbook()
 	clearAllSlots();
 }
 
-void Spellbook::clearAllSlots()
-{
+void Spellbook::clearAllSlots() {
 	m_modifierSlots.clear();
 	m_modifierTexts.clear();
 	m_necromancySlots.clear();
@@ -99,18 +94,15 @@ void Spellbook::clearAllSlots()
 	m_illusionSlots.clear();
 	m_twilightSlots.clear();
 	m_selectedModifierSlot = nullptr;
-	m_selectedSpellSlot = nullptr; 
+	m_selectedSpellSlot = nullptr;
 }
 
-void Spellbook::update(const sf::Time& frameTime)
-{
+void Spellbook::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	for (auto& it : m_tabs)
-	{
+	for (auto& it : m_tabs) {
 		it.first.update(frameTime);
-		if (it.first.isClicked() && m_currentTab != it.second)
-		{
+		if (it.first.isClicked() && m_currentTab != it.second) {
 			selectTab(it.second);
 			return;
 		}
@@ -121,27 +113,21 @@ void Spellbook::update(const sf::Time& frameTime)
 
 	if (!m_isClickable) return;
 
-	if (m_currentTab == SpellType::VOID)
-	{
+	if (m_currentTab == SpellType::VOID) {
 		// handle gems
-		for (auto& it : m_modifierSlots)
-		{
+		for (auto& it : m_modifierSlots) {
 			it.update(frameTime);
-			if (it.isClicked())
-			{
+			if (it.isClicked()) {
 				selectModifierSlot(&it);
 				return;
 			}
 		}
 	}
-	else
-	{
+	else {
 		// handle spells
-		for (auto& it : *(m_typeMap[m_currentTab]))
-		{
+		for (auto& it : *(m_typeMap[m_currentTab])) {
 			it.first.update(frameTime);
-			if (it.first.isClicked())
-			{
+			if (it.first.isClicked()) {
 				selectSpellSlot(&it.first);
 				return;
 			}
@@ -151,47 +137,39 @@ void Spellbook::update(const sf::Time& frameTime)
 	handleDragAndDrop();
 }
 
-void Spellbook::selectModifierSlot(ModifierSlot* selectedSlot)
-{
+void Spellbook::selectModifierSlot(ModifierSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
 	m_hasDraggingStarted = true;
 
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	if (selectedSlot == m_selectedModifierSlot) return;
-	if (m_selectedModifierSlot != nullptr)
-	{
+	if (m_selectedModifierSlot != nullptr) {
 		m_selectedModifierSlot->deselect();
 	}
 	m_selectedModifierSlot = selectedSlot;
 	m_selectedModifierSlot->select();
 }
 
-void Spellbook::selectSpellSlot(SpellSlot* selectedSlot)
-{
+void Spellbook::selectSpellSlot(SpellSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
 	m_hasDraggingStarted = true;
 
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	if (selectedSlot == m_selectedSpellSlot) return;
-	if (m_selectedSpellSlot != nullptr)
-	{
+	if (m_selectedSpellSlot != nullptr) {
 		m_selectedSpellSlot->deselect();
 	}
 	m_selectedSpellSlot = selectedSlot;
 	m_selectedSpellSlot->select();
 }
 
-void Spellbook::handleDragAndDrop()
-{
+void Spellbook::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
-	if (!(g_inputController->isMousePressedLeft()))
-	{
-		if (m_selectedModifierSlot != nullptr)
-		{
+	if (!(g_inputController->isMousePressedLeft())) {
+		if (m_selectedModifierSlot != nullptr) {
 			m_selectedModifierSlot->activate();
 		}
-		if (m_selectedSpellSlot != nullptr)
-		{
+		if (m_selectedSpellSlot != nullptr) {
 			m_selectedSpellSlot->activate();
 		}
 		m_weaponWindow->notifyModifierDrop(m_currentModifierClone);
@@ -207,26 +185,22 @@ void Spellbook::handleDragAndDrop()
 		return;
 	}
 	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
-	if (!m_isDragging)
-	{
+	if (!m_isDragging) {
 		if (DRAG_DISTANCE < std::sqrt(
 			(mousePos.x - m_startMousePosition.x) * (mousePos.x - m_startMousePosition.x) +
-			(mousePos.y - m_startMousePosition.y) * (mousePos.y - m_startMousePosition.y)))
-		{
+			(mousePos.y - m_startMousePosition.y) * (mousePos.y - m_startMousePosition.y))) {
 			m_isDragging = true;
 			delete m_currentModifierClone;
 			m_currentModifierClone = nullptr;
 			delete m_currentSpellClone;
 			m_currentSpellClone = nullptr;
-			if (m_selectedModifierSlot != nullptr)
-			{
+			if (m_selectedModifierSlot != nullptr) {
 				m_currentModifierClone = new ModifierSlotClone(m_selectedModifierSlot);
 				m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
 				m_selectedModifierSlot->deactivate();
 				m_weaponWindow->highlightModifierSlots(m_selectedModifierSlot->getModifier().type, true);
 			}
-			else if (m_selectedSpellSlot != nullptr)
-			{
+			else if (m_selectedSpellSlot != nullptr) {
 				m_currentSpellClone = new SpellSlotClone(m_selectedSpellSlot);
 				m_currentSpellClone->setPosition(mousePos);
 				m_selectedSpellSlot->deactivate();
@@ -234,8 +208,7 @@ void Spellbook::handleDragAndDrop()
 			}
 		}
 	}
-	else
-	{
+	else {
 		if (m_currentModifierClone != nullptr)
 			m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
 		if (m_currentSpellClone != nullptr)
@@ -243,79 +216,63 @@ void Spellbook::handleDragAndDrop()
 	}
 }
 
-bool Spellbook::isVisible() const
-{
+bool Spellbook::isVisible() const {
 	return m_isVisible;
 }
 
-void Spellbook::render(sf::RenderTarget& target)
-{
+void Spellbook::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
 	m_window->render(target);
 	target.draw(m_selectedTabText);
-	
-	if (m_currentTab == SpellType::VOID)
-	{
-		for (auto& it : m_modifierSlots)
-		{
+
+	if (m_currentTab == SpellType::VOID) {
+		for (auto& it : m_modifierSlots) {
 			it.render(target);
 		}
-		for (auto& it : m_modifierTexts)
-		{
+		for (auto& it : m_modifierTexts) {
 			target.draw(it);
 		}
 	}
-	else
-	{
-		for (auto& it : *m_typeMap[m_currentTab])
-		{
+	else {
+		for (auto& it : *m_typeMap[m_currentTab]) {
 			it.first.render(target);
 			target.draw(it.second.first);
 			target.draw(it.second.second);
 		}
 	}
-	
-	for (auto& it : m_tabs)
-	{
+
+	for (auto& it : m_tabs) {
 		it.first.render(target);
 	}
 
 	m_weaponWindow->render(target);
-	
-	if (m_currentModifierClone != nullptr)
-	{
+
+	if (m_currentModifierClone != nullptr) {
 		m_currentModifierClone->render(target);
 	}
-	if (m_currentSpellClone != nullptr)
-	{
+	if (m_currentSpellClone != nullptr) {
 		m_currentSpellClone->render(target);
 	}
 
-	if (m_currentTab == SpellType::VOID)
-	{
-		for (auto& it : m_modifierSlots)
-		{
+	if (m_currentTab == SpellType::VOID) {
+		for (auto& it : m_modifierSlots) {
 			it.renderAfterForeground(target);
 		}
 	}
 }
 
-void Spellbook::selectTab(SpellType type)
-{
-	if (m_selectedModifierSlot != nullptr)
-	{
+void Spellbook::selectTab(SpellType type) {
+	if (m_selectedModifierSlot != nullptr) {
 		m_selectedModifierSlot->deselect();
 		m_selectedModifierSlot = nullptr;
 	}
-	if (m_selectedSpellSlot != nullptr)
-	{
+	if (m_selectedSpellSlot != nullptr) {
 		m_selectedSpellSlot->deselect();
 		m_selectedSpellSlot = nullptr;
 	}
 	m_currentTab = type;
-	switch (type)
-	{
+	switch (type) {
 	case SpellType::VOID:
 		m_selectedTabText.setString(g_textProvider->getText("Gems"));
 		break;
@@ -335,21 +292,17 @@ void Spellbook::selectTab(SpellType type)
 		WIDTH / 2 -
 		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
 	// color selected tab
-	for (auto& it : m_tabs)
-	{
-		if (it.second == m_currentTab)
-		{
+	for (auto& it : m_tabs) {
+		if (it.second == m_currentTab) {
 			it.first.setMainLayerColor(CENDRIC_COLOR_LIGHT_GREY);
 		}
-		else
-		{
+		else {
 			it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
 		}
 	}
 }
 
-void Spellbook::reload()
-{
+void Spellbook::reload() {
 	// reload slots
 	clearAllSlots();
 	calculateModifierSlots();
@@ -359,14 +312,12 @@ void Spellbook::reload()
 	m_weaponWindow->reload();
 }
 
-void Spellbook::calculateModifierSlots()
-{
+void Spellbook::calculateModifierSlots() {
 	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + 2 * BUTTON_SIZE.y;
 	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
 	int maxY = 4;
 	int y = 1;
-	for (auto& it : m_core->getData().modfiersLearned)
-	{
+	for (auto& it : m_core->getData().modfiersLearned) {
 		BitmapText text;
 		text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		text.setColor(CENDRIC_COLOR_WHITE);
@@ -374,8 +325,7 @@ void Spellbook::calculateModifierSlots()
 		text.setString(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it.first)));
 		m_modifierTexts.push_back(text);
 		yOffset += GUIConstants::CHARACTER_SIZE_M * 2;
-		for (int i = 0; i < it.second; i++)
-		{
+		for (int i = 0; i < it.second; i++) {
 			SpellModifier modifier;
 			modifier.level = i + 1;
 			modifier.type = it.first;
@@ -383,29 +333,24 @@ void Spellbook::calculateModifierSlots()
 			slot.setPosition(sf::Vector2f(xOffset + (i * (ModifierSlot::SIDE_LENGTH + MARGIN)), yOffset));
 			m_modifierSlots.push_back(slot);
 		}
-		if (y >= maxY)
-		{
+		if (y >= maxY) {
 			yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + 2 * BUTTON_SIZE.y;
 			xOffset = GUIConstants::LEFT + WIDTH - (3 * ModifierSlot::SIDE_LENGTH + 2 * MARGIN + GUIConstants::TEXT_OFFSET);
 			y = 0;
 		}
-		else
-		{
+		else {
 			y++;
 			yOffset += GUIConstants::CHARACTER_SIZE_M + ModifierSlot::SIDE_LENGTH;
 		}
 	}
 }
 
-void Spellbook::calculateSpellSlots()
-{
+void Spellbook::calculateSpellSlots() {
 	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 4 * MARGIN + 1 * BUTTON_SIZE.y;
 	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
-	
-	for (auto& it : m_core->getData().spellsLearned)
-	{
-		for (auto& it2 : it.second)
-		{
+
+	for (auto& it : m_core->getData().spellsLearned) {
+		for (auto& it2 : it.second) {
 			SpellSlot slot = SpellSlot(it2);
 			slot.setPosition(sf::Vector2f(xOffset, yOffset) + sf::Vector2f(SpellSlot::RADIUS, SpellSlot::RADIUS));
 
@@ -427,19 +372,17 @@ void Spellbook::calculateSpellSlots()
 			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>(slot, texts));
 			yOffset += SpellSlot::RADIUS * 2 + MARGIN * 2;
 		}
-		
+
 		yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 4 * MARGIN + 1 * BUTTON_SIZE.y;
 	}
 }
 
-void Spellbook::show()
-{
+void Spellbook::show() {
 	m_isVisible = true;
 	m_weaponWindow->show();
 }
 
-void Spellbook::hide()
-{
+void Spellbook::hide() {
 	m_isVisible = false;
 	//m_weaponWindow->hide();
 	delete m_currentModifierClone;

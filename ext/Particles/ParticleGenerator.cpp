@@ -6,13 +6,13 @@
 
 namespace particles
 {
-	#ifndef M_PI
-	#define M_PI 3.14159265358979323846f
-	#endif
+#ifndef M_PI
+#define M_PI 3.14159265358979323846f
+#endif
 
-	#ifndef DEG_TO_RAD
-	#define DEG_TO_RAD M_PI / 180.0f
-	#endif
+#ifndef DEG_TO_RAD
+#define DEG_TO_RAD M_PI / 180.0f
+#endif
 
 	inline float randomFloat(float low, float high) {
 		return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));
@@ -53,14 +53,14 @@ namespace particles
 			a = (rand() % (int)(high.a - low.a + 1)) + low.a;
 		}
 
-		return { r, g, b, a };
+		return{ r, g, b, a };
 	}
 
 	inline sf::Vector2f randomVector2f(const sf::Vector2f &low, const sf::Vector2f &high) {
 		float y = low.y + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (high.y - low.y)));
 		float x = low.x + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (high.x - low.x)));
 
-		return { x, y };
+		return{ x, y };
 	}
 
 

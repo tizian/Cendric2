@@ -3,8 +3,7 @@
 #include "Screens/GameScreen.h"
 
 LevelInterface::LevelInterface(GameScreen* screen, LevelMainCharacter* character) : GameInterface(screen),
-m_character(character)
-{
+m_character(character) {
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(character->getAttributes());
 	m_healthBar = new HealthBar(character->getAttributes());
@@ -14,8 +13,7 @@ m_character(character)
 	m_buffBar = new BuffBar();
 }
 
-LevelInterface::~LevelInterface()
-{
+LevelInterface::~LevelInterface() {
 	delete m_spellSelection;
 	delete m_inventory;
 	delete m_characterInfo;
@@ -26,8 +24,7 @@ LevelInterface::~LevelInterface()
 	delete m_buffBar;
 }
 
-void LevelInterface::render(sf::RenderTarget& target)
-{
+void LevelInterface::render(sf::RenderTarget& target) {
 	GameInterface::render(target);
 
 	m_healthBar->render(target);
@@ -36,8 +33,7 @@ void LevelInterface::render(sf::RenderTarget& target)
 	m_quickSlotBar->render(target);
 }
 
-void LevelInterface::update(const sf::Time& frameTime)
-{
+void LevelInterface::update(const sf::Time& frameTime) {
 	GameInterface::update(frameTime);
 
 	m_healthBar->update();
@@ -46,48 +42,41 @@ void LevelInterface::update(const sf::Time& frameTime)
 	m_quickSlotBar->update(frameTime);
 }
 
-void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration)
-{
+void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) {
 	m_buffBar->addSlot(type, textureLocation, duration);
 }
 
-void LevelInterface::notifyConsumableDrop(const InventorySlotClone* item)
-{
+void LevelInterface::notifyConsumableDrop(const InventorySlotClone* item) {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
 
-void LevelInterface::consumeItem(const Item& item)
-{
+void LevelInterface::consumeItem(const Item& item) {
 	m_character->consumeFood(
 		item.getBean().foodDuration,
 		item.getAttributes());
 	addBuff(BuffType::Food,
 		sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50),
 		item.getBean().foodDuration);
-	
+
 	m_screen->notifyItemChange(item.getID(), -1);
 	m_quickSlotBar->reload();
 }
 
-void LevelInterface::highlightQuickslots(bool highlight)
-{
+void LevelInterface::highlightQuickslots(bool highlight) {
 	m_quickSlotBar->highlightSlots(highlight);
 }
 
-void LevelInterface::reloadInventory(const std::string& changedItemID)
-{
+void LevelInterface::reloadInventory(const std::string& changedItemID) {
 	GameInterface::reloadInventory(changedItemID);
 	m_quickSlotBar->reload();
 }
 
-void LevelInterface::setSpellManager(SpellManager* spellManager)
-{
+void LevelInterface::setSpellManager(SpellManager* spellManager) {
 	// use this spell manager for the interface bar.
 	delete m_spellSelection;
 	m_spellSelection = new SpellSelection(spellManager);
 }
 
-LevelMainCharacter* LevelInterface::getMainCharacter() const
-{
+LevelMainCharacter* LevelInterface::getMainCharacter() const {
 	return m_character;
 }

@@ -6,17 +6,16 @@
 #include "Structs/SpellBean.h"
 
 // A weapon in cendrics / a npcs / a mobs inventory
-class Weapon : public Item
-{
+class Weapon : public Item {
 public:
 	Weapon(const ItemBean& bean);
-	
+
 	const sf::Time& getWeaponCooldown() const;
 	const sf::FloatRect& getWeaponChopRect() const;
 	int getWeaponChopDamage() const;
 	SpellID getCurrentSpellForSlot(int slotNr) const;
 	const std::map<SpellModifierType, SpellModifier>* getCurrentModifiersForSlot(int slotNr) const;
-	
+
 	// returns if the modifier has been added to the weapon spell slot.
 	// it won't add the modifier if the slot is already taken if force is false
 	bool addModifier(int slotNr, const SpellModifier& modifier, bool force);
@@ -31,18 +30,18 @@ public:
 		std::pair<SpellType, SpellID>,
 		std::pair<
 		int,
-		std::map < SpellModifierType, SpellModifier >> >>& getWeaponSlots() const;
+		std::map < SpellModifierType, SpellModifier >> >> &getWeaponSlots() const;
 
 	void reload();
 
 private:
 
-	std::vector<std::pair<
-		std::pair<SpellType, SpellID>, 
+	std::vector < std::pair <
+		std::pair<SpellType, SpellID>,
 		std::pair<
-			int,
-			std::map<SpellModifierType, SpellModifier>>>> m_weaponSlots;
+		int,
+		std::map < SpellModifierType, SpellModifier >> >> m_weaponSlots;
 
 	bool doesSlotExist(int slotNr) const;
-	
+
 };

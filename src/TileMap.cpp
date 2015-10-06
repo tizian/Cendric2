@@ -2,8 +2,7 @@
 
 using namespace std;
 
-bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const vector<vector<int> >& layers, int width, int height)
-{
+bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const vector<vector<int> >& layers, int width, int height) {
 	m_tilesetPath = filepath;
 	m_tileset = g_resourceManager->getTexture(filepath);
 	m_tilesize = sf::Vector2i(tileSize.x, tileSize.y);
@@ -12,21 +11,17 @@ bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const v
 
 	m_layers.clear();
 
-	for (int count = 0; count < layers.size(); count++)
-	{
+	for (int count = 0; count < layers.size(); count++) {
 		sf::VertexArray layer;
 
 		layer.setPrimitiveType(sf::Quads);
 		layer.resize(width * height * 4);
 
-		for (int i = 0; i < width; ++i)
-		{
-			for (int j = 0; j < height; ++j)
-			{
+		for (int i = 0; i < width; ++i) {
+			for (int j = 0; j < height; ++j) {
 				int tileNumber = layers[count][i + j * width];
 
-				if (tileNumber == 0)
-				{
+				if (tileNumber == 0) {
 					// there is no tile
 					continue;
 				}
@@ -57,22 +52,18 @@ bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const v
 	return true;
 }
 
-void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const
-{
+void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = m_tileset;
-	for (int i = 0; i < m_layers.size(); i++)
-	{
+	for (int i = 0; i < m_layers.size(); i++) {
 		target.draw(m_layers[i], states);
 	}
 }
 
-void TileMap::dispose()
-{
+void TileMap::dispose() {
 	g_resourceManager->deleteResource(m_tilesetPath);
 }
 
-const sf::Vector2i& TileMap::getTilesize() const
-{
+const sf::Vector2i& TileMap::getTilesize() const {
 	return m_tilesize;
 }

@@ -2,38 +2,30 @@
 
 using namespace std;
 
-MenuScreen::MenuScreen(CharacterCore* core) : Screen(core)
-{
+MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_menu)));
 }
 
-Screen* MenuScreen::update(const sf::Time& frameTime)
-{
-	if (m_startNewGame)
-	{
+Screen* MenuScreen::update(const sf::Time& frameTime) {
+	if (m_startNewGame) {
 		return new LoadingScreen(m_characterCore);
 	}
-	else if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked())
-	{
+	else if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked()) {
 		// end the game
 		m_requestQuit = true;
 	}
-	else if ((m_resumeGameButton != nullptr && m_resumeGameButton->isClicked()) || (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr))
-	{
+	else if ((m_resumeGameButton != nullptr && m_resumeGameButton->isClicked()) || (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr)) {
 		// resume game
 		return new LoadingScreen(m_characterCore);
 	}
-	else if (m_newGameButton->isClicked() && m_yesOrNoForm == nullptr)
-	{
-		if (m_characterCore == nullptr)
-		{
+	else if (m_newGameButton->isClicked() && m_yesOrNoForm == nullptr) {
+		if (m_characterCore == nullptr) {
 			// we start a new game with an empty character core
 			m_characterCore = new CharacterCore();
 			m_characterCore->loadNew();
 			return new LoadingScreen(m_characterCore);
 		}
-		else
-		{
+		else {
 			m_newCharacterCore = new CharacterCore();
 			m_newCharacterCore->loadNew();
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
@@ -44,20 +36,16 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 			setAllButtonsEnabled(false);
 		}
 	}
-	else if (m_loadGameButton->isClicked())
-	{
+	else if (m_loadGameButton->isClicked()) {
 		return new LoadGameScreen(m_characterCore);
-	} 
-	else if (m_saveGameButton->isClicked() && m_characterCore != nullptr)
-	{
+	}
+	else if (m_saveGameButton->isClicked() && m_characterCore != nullptr) {
 		return new SaveGameScreen(m_characterCore);
 	}
-	else if (m_optionsButton->isClicked())
-	{
+	else if (m_optionsButton->isClicked()) {
 		return new OptionsScreen(m_characterCore);
 	}
-	else if (m_creditsButton->isClicked())
-	{
+	else if (m_creditsButton->isClicked()) {
 		return new CreditsScreen(m_characterCore);
 	}
 	updateTooltipText(frameTime);
@@ -68,14 +56,12 @@ Screen* MenuScreen::update(const sf::Time& frameTime)
 	return this;
 }
 
-void MenuScreen::setAllButtonsEnabled(bool value)
-{
+void MenuScreen::setAllButtonsEnabled(bool value) {
 	Screen::setAllButtonsEnabled(value);
 	m_saveGameButton->setEnabled(value && (m_characterCore != nullptr));
 }
 
-void MenuScreen::render(sf::RenderTarget &renderTarget) 
-{
+void MenuScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(m_versionText);
@@ -85,8 +71,7 @@ void MenuScreen::render(sf::RenderTarget &renderTarget)
 	renderTooltipText(renderTarget);
 }
 
-void MenuScreen::execOnEnter(const Screen *previousScreen)
-{
+void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	// add burning fire baskets
 	FireBasket* fireBasket1 = new FireBasket();
 	FireBasket* fireBasket2 = new FireBasket();
@@ -110,8 +95,7 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	float addYOffset = 70.f;
 
 	// add buttons
-	if (m_characterCore != nullptr)
-	{
+	if (m_characterCore != nullptr) {
 		m_resumeGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
 		m_resumeGameButton->setText("Resume");
 		addObject(m_resumeGameButton);
@@ -143,8 +127,7 @@ void MenuScreen::execOnEnter(const Screen *previousScreen)
 	addObject(m_saveGameButton);
 }
 
-void MenuScreen::execOnExit(const Screen *nextScreen)
-{
+void MenuScreen::execOnExit(const Screen *nextScreen) {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash_fireanimation);
 	delete m_newCharacterCore;
@@ -152,8 +135,7 @@ void MenuScreen::execOnExit(const Screen *nextScreen)
 
 // <<< agents for the yes or no form >>>
 
-void MenuScreen::onStartNewGame()
-{
+void MenuScreen::onStartNewGame() {
 	m_yesOrNoForm->setDisposed();
 	m_yesOrNoForm = nullptr;
 	delete m_characterCore;
@@ -162,8 +144,7 @@ void MenuScreen::onStartNewGame()
 	m_startNewGame = true;
 }
 
-void MenuScreen::onNo()
-{
+void MenuScreen::onNo() {
 	m_yesOrNoForm = nullptr;
 	delete m_newCharacterCore;
 	m_newCharacterCore = nullptr;

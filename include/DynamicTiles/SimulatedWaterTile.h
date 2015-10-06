@@ -7,17 +7,15 @@
 
 class FrozenWaterTile;
 
-struct WaterColumn
-{
+struct WaterColumn {
 	float targetHeight;
 	float height;
 	float velocity;
 	bool fixed;
 
-	void update(float damping, float tension, float dt)
-	{
+	void update(float damping, float tension, float dt) {
 		if (fixed) return;
-		
+
 		float x = targetHeight - height;
 		float a = tension * x - damping * velocity;
 
@@ -28,8 +26,7 @@ struct WaterColumn
 };
 
 // tizs awesome water
-class SimulatedWaterTile : public DynamicTile
-{
+class SimulatedWaterTile : public DynamicTile {
 public:
 	SimulatedWaterTile(Level* level) : DynamicTile(level) {}
 	void init() override;
@@ -53,7 +50,7 @@ private:
 	float m_x, m_y;
 	float m_width, m_height;
 	int m_nTiles;		// number tiles (width)
-	
+
 	int m_nColumns;
 	std::vector<WaterColumn> m_columns;
 

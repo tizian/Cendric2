@@ -17,8 +17,7 @@
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
 // is only clickable when clickable is true
-class WeaponWindow
-{
+class WeaponWindow {
 public:
 	WeaponWindow(CharacterCore* core, bool clickable);
 	~WeaponWindow();

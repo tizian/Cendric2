@@ -6,8 +6,7 @@
 #include "Spells/LeechSpell.h"
 
 // a class that creates leech spells
-class LeechSpellCreator : public SpellCreator
-{
+class LeechSpellCreator : public SpellCreator {
 public:
 	LeechSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
 

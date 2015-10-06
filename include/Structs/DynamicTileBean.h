@@ -4,8 +4,7 @@
 
 #include "Enums/DynamicTileID.h"
 
-struct DynamicTileBean
-{
+struct DynamicTileBean {
 	DynamicTileID id;
 	sf::Vector2f position;
 	int spawnPosition;

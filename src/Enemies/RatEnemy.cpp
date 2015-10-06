@@ -1,23 +1,20 @@
 #include "Enemies/RatEnemy.h"
 #include "LevelMainCharacter.h"
 
-RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::Rat)
-{
+RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::Rat) {
 	load();
 	loadAttributes();
 	loadSpells();
 	m_jumpHeight = getConfiguredMaxVelocityY() * getConfiguredMaxVelocityY() / (2 * getConfiguredGravityAcceleration());
 }
 
-void RatEnemy::loadAttributes()
-{
+void RatEnemy::loadAttributes() {
 	m_attributes.setHealth(40);
 	m_attributes.resistancePhysical = 10;
 	m_attributes.calculateAttributes();
 }
 
-void RatEnemy::loadSpells()
-{
+void RatEnemy::loadSpells() {
 	SpellBean chopSpell = SpellBean::getSpellBean(SpellID::Chop);
 	chopSpell.duration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
@@ -28,48 +25,39 @@ void RatEnemy::loadSpells()
 	m_spellManager->setCurrentSpell(0);
 }
 
-sf::Vector2f RatEnemy::getConfiguredSpellOffset() const
-{
+sf::Vector2f RatEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
-void RatEnemy::handleAttackInput()
-{
+void RatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (distToMainChar() < 100.f)
-	{
+	if (distToMainChar() < 100.f) {
 		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 	}
 }
 
-float RatEnemy::getAggroRange() const
-{
+float RatEnemy::getAggroRange() const {
 	return 300.f;
 }
 
-float RatEnemy::getDistanceToAbyss() const
-{
+float RatEnemy::getDistanceToAbyss() const {
 	return 20.f;
 }
 
-bool RatEnemy::getFleeCondition() const
-{
+bool RatEnemy::getFleeCondition() const {
 	// what a cowardly rat
 	return m_attributes.currentHealthPoints < m_attributes.maxHealthPoints / 3;
 }
 
-float RatEnemy::getApproachingDistance() const
-{
+float RatEnemy::getApproachingDistance() const {
 	return 10.f;
 }
 
-void RatEnemy::handleMovementInput()
-{
+void RatEnemy::handleMovementInput() {
 	Enemy::handleMovementInput();
 }
 
-void RatEnemy::load()
-{
+void RatEnemy::load() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 
@@ -116,17 +104,14 @@ void RatEnemy::load()
 	playCurrentAnimation(true);
 }
 
-sf::Time RatEnemy::getConfiguredFightAnimationTime() const
-{
+sf::Time RatEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(4 * 80);
 }
 
-float RatEnemy::getConfiguredMaxVelocityY() const
-{
+float RatEnemy::getConfiguredMaxVelocityY() const {
 	return 400.0f;
 }
 
-float RatEnemy::getConfiguredMaxVelocityX() const
-{
+float RatEnemy::getConfiguredMaxVelocityX() const {
 	return 100.0f;
 }

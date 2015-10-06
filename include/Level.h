@@ -13,8 +13,7 @@
 #include "LevelLoader.h"
 #include "SpeedupPullCamera.h"
 
-class Level 
-{
+class Level {
 public:
 	Level();
 	~Level();

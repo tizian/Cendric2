@@ -13,8 +13,7 @@
 #include "Structs/AttributeBean.h"
 #include "Structs/CharacterCoreData.h"
 
-class CharacterCore
-{
+class CharacterCore {
 public:
 	CharacterCore();
 	CharacterCore(const CharacterCoreData& data);
@@ -129,5 +128,5 @@ private:
 
 	CharacterCoreData m_data;
 
-	sf::Clock m_stopwatch; 
+	sf::Clock m_stopwatch;
 };

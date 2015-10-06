@@ -4,8 +4,7 @@
 
 #include "BitmapFont.h"
 
-class SlicedSprite : public sf::Drawable, public::sf::Transformable
-{
+class SlicedSprite : public sf::Drawable, public::sf::Transformable {
 public:
 	SlicedSprite();
 	SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height);
@@ -23,10 +22,10 @@ private:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 	sf::Texture *m_texture = nullptr;
-	
+
 	float m_width;
 	float m_height;
-	
+
 	float m_leftSlice;
 	float m_rightSlice;
 	float m_topSlice;

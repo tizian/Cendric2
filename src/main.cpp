@@ -7,8 +7,7 @@
 
 sf::RenderTexture *g_renderTexture;
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
 	g_logger = new Logger();
 	g_resourceManager = new ResourceManager();
 	g_resourceManager->init();

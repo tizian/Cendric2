@@ -1,14 +1,12 @@
 #include "LightObject.h"
 
-LightObject::LightObject(const LightBean& bean) : GameObject()
-{
+LightObject::LightObject(const LightBean& bean) : GameObject() {
 	m_bean = bean;
 
 	init();
 }
 
-void LightObject::init()
-{
+void LightObject::init() {
 	m_sprite.setSize(sf::Vector2f(2.f, 2.f));
 	m_sprite.setOrigin(1.f, 1.f); // setting the origin to the center
 	m_sprite.setScale(m_bean.radius.x, m_bean.radius.y);
@@ -22,35 +20,30 @@ void LightObject::init()
 	setDebugBoundingBox(sf::Color(255, 255, 0, 100));
 }
 
-GameObjectType LightObject::getConfiguredType() const
-{
+GameObjectType LightObject::getConfiguredType() const {
 	return GameObjectType::_Light;
 }
 
-void LightObject::render(sf::RenderTarget& renderTarget)
-{
+void LightObject::render(sf::RenderTarget& renderTarget) {
 	if (!m_isVisible) return;
 	renderTarget.draw(m_sprite);
 }
 
-void LightObject::update(const sf::Time& frameTime)
-{
+void LightObject::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 	m_animationTimer += frameTime.asSeconds();
 
 	float scaleX = m_bean.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 	float scaleY = m_bean.radius.y + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
-	
+
 	m_sprite.setScale(scaleX, scaleY);
 }
 
-void LightObject::setPosition(const sf::Vector2f& pos)
-{
+void LightObject::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos - sf::Vector2f(m_bean.radius.x, m_bean.radius.y));
 	m_sprite.setPosition(pos);
 }
 
-void LightObject::setVisible(bool value)
-{
+void LightObject::setVisible(bool value) {
 	m_isVisible = value;
 }

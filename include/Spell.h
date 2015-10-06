@@ -12,8 +12,7 @@
 class LevelMovableGameObject;
 
 // A spell cendric can cast
-class Spell : public MovableGameObject
-{
+class Spell : public MovableGameObject {
 public:
 	Spell() : MovableGameObject() {}
 	virtual ~Spell() {}
@@ -21,7 +20,7 @@ public:
 	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target);
 	virtual void update(const sf::Time& frameTime) override;
 	virtual void setViewable(bool value) override;
-	
+
 	void checkCollisions(const sf::Vector2f& nextPosition);
 
 	// the offset of the spells start position, as seen from the upper mid of the mobs bounding box. The default is the position of the staff head
@@ -56,7 +55,7 @@ protected:
 	bool m_needsTarget;
 
 	// enemy list from screen
-	std::vector<GameObject*> *m_enemies; 
+	std::vector<GameObject*> *m_enemies;
 	// main character from screen
 	LevelMainCharacter *m_mainChar;
 	// calculates position according to m_mob

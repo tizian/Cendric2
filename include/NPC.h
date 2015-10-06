@@ -11,8 +11,7 @@
 class MapMainCharacter;
 
 // A npc on a map
-class NPC : public GameObject
-{
+class NPC : public GameObject {
 public:
 	NPC() : GameObject() {}
 	void load(MapMainCharacter* mainChar, const NPCBean& bean);

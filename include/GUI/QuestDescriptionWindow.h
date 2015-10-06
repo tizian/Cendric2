@@ -9,8 +9,7 @@
 #include "GUI/GUIConstants.h"
 #include "GUI/QuestLog.h"
 
-class QuestDescriptionWindow : public Window
-{
+class QuestDescriptionWindow : public Window {
 public:
 	QuestDescriptionWindow(const CharacterCore* core);
 

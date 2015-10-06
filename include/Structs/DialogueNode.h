@@ -6,16 +6,14 @@
 #include "Enums/QuestState.h"
 #include "Enums/FractionID.h"
 
-enum class DialogueNodeType
-{
+enum class DialogueNodeType {
 	CendricTalking,
 	NPCTalking,
 	Choice,
 	Trade
 };
 
-struct DialogueNode
-{
+struct DialogueNode {
 	int tag;
 	DialogueNodeType type;
 	// it is an empty string if this is a choice

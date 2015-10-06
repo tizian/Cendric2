@@ -11,8 +11,7 @@
 
 class CharacterCore;
 
-class DialogueOption : public GameObject
-{
+class DialogueOption : public GameObject {
 public:
 	DialogueOption(std::string text, int nr);
 	void render(sf::RenderTarget& renderTarget) override;
@@ -30,8 +29,7 @@ private:
 	BitmapText m_text;
 };
 
-class DialogueWindow : public Window
-{
+class DialogueWindow : public Window {
 public:
 	DialogueWindow();
 	~DialogueWindow();
@@ -42,7 +40,7 @@ public:
 
 	void setNPCTalking(const std::string& text);
 	void setCendricTalking(const std::string& text);
-	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices); 
+	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices);
 	void setNPCTrading(const std::string& text);
 	void setPosition(const sf::Vector2f& pos) override;
 

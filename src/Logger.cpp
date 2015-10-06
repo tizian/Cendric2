@@ -4,14 +4,11 @@ using namespace std;
 
 Logger* g_logger;
 
-void Logger::log(LogLevel level, const std::string& source, const std::string& message) const
-{
-	if (level <= m_logLevel && level != LogLevel::None)
-	{
+void Logger::log(LogLevel level, const std::string& source, const std::string& message) const {
+	if (level <= m_logLevel && level != LogLevel::None) {
 		string levelString;
 		string color;
-		switch (level)
-		{
+		switch (level) {
 		case LogLevel::Debug:
 			levelString = "[DEBUG]";
 			color = GREEN;
@@ -38,28 +35,23 @@ void Logger::log(LogLevel level, const std::string& source, const std::string& m
 
 		cout << color << levelString << "-[" << source << "]: " << message << DEFAULT << endl;
 	}
-	
+
 }
-void Logger::logError(const std::string& source, const std::string& message) const
-{
+void Logger::logError(const std::string& source, const std::string& message) const {
 	log(LogLevel::Error, source, message);
 }
-void Logger::logWarning(const std::string& source, const std::string& message) const
-{
+void Logger::logWarning(const std::string& source, const std::string& message) const {
 	log(LogLevel::Warning, source, message);
 }
-void Logger::logInfo(const std::string& source, const std::string& message) const
-{
+void Logger::logInfo(const std::string& source, const std::string& message) const {
 	log(LogLevel::Info, source, message);
 }
 
-void Logger::setLogLevel(LogLevel level)
-{
+void Logger::setLogLevel(LogLevel level) {
 	m_logLevel = level;
 }
 
-LogLevel Logger::getLogLevel() const
-{
+LogLevel Logger::getLogLevel() const {
 	return m_logLevel;
 }
 

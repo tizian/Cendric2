@@ -6,8 +6,7 @@
 #include "GUI/BitmapText.h"
 
 // a save game entry in a save game window
-class SaveGameEntry : public GameObject
-{
+class SaveGameEntry : public GameObject {
 public:
 	SaveGameEntry();
 
@@ -40,12 +39,11 @@ private:
 
 // a window to show savegames in the saves/ folder. 
 // it is used inside the SaveGameScreen and the LoadGameScreen
-class SaveGameWindow : public Window
-{
+class SaveGameWindow : public Window {
 public:
 	SaveGameWindow();
 	~SaveGameWindow();
-	
+
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	// if this is true, the chosen file should be loaded. be aware that this "query" sets this bool to false again.
@@ -54,13 +52,13 @@ public:
 	void setEnabled(bool value);
 	std::string getChosenFilename() const;
 	std::string getChosenSaveName() const;
-	
+
 private:
 	std::vector<SaveGameEntry> m_entries;
 	int m_chosenEntry = 0;
 	bool m_isChosen = false;
 	bool m_isEnabled = true;
-	
+
 	// <<< scrolling >>>
 	// scroll one entry up
 	void scrollUp();

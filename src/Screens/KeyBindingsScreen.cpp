@@ -24,74 +24,60 @@ const std::set<sf::Keyboard::Key> KeyBindingsScreen::RESERVED_KEYS = {
 	sf::Keyboard::Right,
 };
 
-KeyBindingsScreen::KeyBindingsScreen(CharacterCore* core) : Screen(core)
-{
+KeyBindingsScreen::KeyBindingsScreen(CharacterCore* core) : Screen(core) {
 }
 
-Screen* KeyBindingsScreen::update(const sf::Time& frameTime)
-{
-	if ((m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) || m_backButton->isClicked())
-	{
+Screen* KeyBindingsScreen::update(const sf::Time& frameTime) {
+	if ((m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) || m_backButton->isClicked()) {
 		return new OptionsScreen(m_characterCore);
 	}
-	else if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape))
-	{
+	else if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) {
 		reload();
 	}
-	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedKey() != sf::Keyboard::Unknown)
-	{
-		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedKey()))
-		{
+	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedKey() != sf::Keyboard::Unknown) {
+		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedKey())) {
 			setTooltipText(g_textProvider->getText("KeyReserved"), sf::Color::Red, true);
 		}
 	}
-	else if (m_resetButton->isClicked())
-	{
+	else if (m_resetButton->isClicked()) {
 		m_selectedKeys = g_resourceManager->getConfiguration().mainKeyMap;
 		reload();
 	}
-	else if (m_useDefaultButton->isClicked())
-	{
+	else if (m_useDefaultButton->isClicked()) {
 		m_selectedKeys = DEFAULT_KEYMAP;
 		reload();
 	}
-	else if (m_applyButton->isClicked())
-	{
+	else if (m_applyButton->isClicked()) {
 		g_resourceManager->getConfiguration().mainKeyMap = m_selectedKeys;
 		ConfigurationWriter writer;
 		writer.saveToFile(g_resourceManager->getConfiguration());
 		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
 	}
-	
-	for (auto& it : m_keyButtons)
-	{
-		if (it.second.first->isClicked())
-		{
+
+	for (auto& it : m_keyButtons) {
+		if (it.second.first->isClicked()) {
 			it.second.first->setText("PressAnyKey");
 			m_selectedKey = it.first;
 		}
 	}
-	
+
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
 	deleteDisposedObjects();
 	return this;
 }
 
-void KeyBindingsScreen::render(sf::RenderTarget &renderTarget)
-{
+void KeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
-	for (auto it : m_keyTexts)
-	{
+	for (auto it : m_keyTexts) {
 		renderTarget.draw(*it);
 	}
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderTooltipText(renderTarget);
 }
 
-void KeyBindingsScreen::execOnEnter(const Screen *previousScreen)
-{
+void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("KeyBindings"));
 	m_title->setCharacterSize(50);
@@ -126,16 +112,13 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen)
 	addObject(m_applyButton);
 }
 
-bool KeyBindingsScreen::trySetKeyBinding(Key key, sf::Keyboard::Key keyboardKey)
-{
-	if (RESERVED_KEYS.find(keyboardKey) != RESERVED_KEYS.end())
-	{
+bool KeyBindingsScreen::trySetKeyBinding(Key key, sf::Keyboard::Key keyboardKey) {
+	if (RESERVED_KEYS.find(keyboardKey) != RESERVED_KEYS.end()) {
 		reload();
 		return false;
 	}
 
-	for (auto& it : m_selectedKeys)
-	{
+	for (auto& it : m_selectedKeys) {
 		if (it.second == keyboardKey) it.second = sf::Keyboard::KeyCount;
 	}
 	m_selectedKeys[key] = keyboardKey;
@@ -143,10 +126,8 @@ bool KeyBindingsScreen::trySetKeyBinding(Key key, sf::Keyboard::Key keyboardKey)
 	return true;
 }
 
-void KeyBindingsScreen::reload()
-{
-	for (auto& it : m_keyButtons)
-	{
+void KeyBindingsScreen::reload() {
+	for (auto& it : m_keyButtons) {
 		it.second.first->setDisposed();
 	}
 	m_keyButtons.clear();
@@ -156,28 +137,24 @@ void KeyBindingsScreen::reload()
 	const float maxDistFromTop = WINDOW_HEIGHT - 130.f;
 
 	// keyboard mappings
-	for (auto& it : m_selectedKeys)
-	{
+	for (auto& it : m_selectedKeys) {
 		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
 		keyText->setCharacterSize(16);
 		keyText->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 		m_keyTexts.push_back(keyText);
 		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
 		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
-		if (it.second == sf::Keyboard::KeyCount)
-		{
+		if (it.second == sf::Keyboard::KeyCount) {
 			keyButton->setTextColor(sf::Color::Red);
 		}
 		keyButton->setPosition(sf::Vector2f(distFromLeft + 300.f, distFromTop));
-		if (UNMODIFIABLE_KEYS.find(it.first) != UNMODIFIABLE_KEYS.end())
-		{
+		if (UNMODIFIABLE_KEYS.find(it.first) != UNMODIFIABLE_KEYS.end()) {
 			keyButton->setEnabled(false);
 		}
 		m_keyButtons[it.first] = std::pair<Button*, sf::Keyboard::Key>(keyButton, it.second);
 		addObject(keyButton);
 		distFromTop = distFromTop + 40;
-		if (distFromTop > maxDistFromTop)
-		{
+		if (distFromTop > maxDistFromTop) {
 			distFromTop = 120.f;
 			distFromLeft = WINDOW_WIDTH / 2.f + 75.f;
 		}
@@ -187,11 +164,9 @@ void KeyBindingsScreen::reload()
 }
 
 
-void KeyBindingsScreen::execOnExit(const Screen *nextScreen)
-{
+void KeyBindingsScreen::execOnExit(const Screen *nextScreen) {
 	// delete texts (buttons are deleted automatically by the screen)
-	for (auto& it : m_keyTexts)
-	{
+	for (auto& it : m_keyTexts) {
 		delete it;
 	}
 	m_keyTexts.clear();

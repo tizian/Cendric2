@@ -1,25 +1,21 @@
 #include "MapMainCharacter.h"
 #include "Screens/MapScreen.h"
 
-MapMainCharacter::MapMainCharacter(Map* map) : MovableGameObject()
-{
+MapMainCharacter::MapMainCharacter(Map* map) : MovableGameObject() {
 	m_map = map;
 	load();
 }
 
-MapMainCharacter::~MapMainCharacter()
-{
+MapMainCharacter::~MapMainCharacter() {
 	g_resourceManager->deleteResource(ResourceID::Texture_mapMainChar);
 }
 
-void MapMainCharacter::setCharacterCore(CharacterCore* core)
-{
+void MapMainCharacter::setCharacterCore(CharacterCore* core) {
 	m_core = core;
 	setPosition(m_core->getData().currentMapPosition);
 }
 
-void MapMainCharacter::update(const sf::Time& frameTime)
-{
+void MapMainCharacter::update(const sf::Time& frameTime) {
 	handleInput();
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
@@ -27,106 +23,86 @@ void MapMainCharacter::update(const sf::Time& frameTime)
 	updateAnimation();
 }
 
-void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition)
-{
+void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
-	bool isMovingY = nextPosition.y != getBoundingBox()->top; 
+	bool isMovingY = nextPosition.y != getBoundingBox()->top;
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
 
 	// check for collision on x axis
-	if (isMovingX && m_map->collidesX(nextBoundingBoxX))
-	{
+	if (isMovingX && m_map->collidesX(nextBoundingBoxX)) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
 	// check for collision on y axis
-	if (isMovingY && m_map->collidesY(nextBoundingBoxY))
-	{
+	if (isMovingY && m_map->collidesY(nextBoundingBoxY)) {
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
 	}
 }
 
-void MapMainCharacter::updateAnimation()
-{
+void MapMainCharacter::updateAnimation() {
 	// calculate new game state and set animation.
 	GameObjectState newState = m_state;
 	// check if char walks up
-	if (getVelocity().y < 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y)))
-	{
+	if (getVelocity().y < 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y))) {
 		newState = GameObjectState::Walking_up;
 	}
-	else if (getVelocity().y >= 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y)))
-	{
+	else if (getVelocity().y >= 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y))) {
 		newState = GameObjectState::Walking_down;
 	}
-	else if (getVelocity().x < 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y)))
-	{
+	else if (getVelocity().x < 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y))) {
 		newState = GameObjectState::Walking_left;
 	}
-	else if (getVelocity().x >= 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y)))
-	{
+	else if (getVelocity().x >= 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y))) {
 		newState = GameObjectState::Walking_right;
 	}
 
 	// check if cendric is standing still
-	if (getVelocity().x == 0.0f && getVelocity().y == 0.0f) 
-	{
-		if (m_state == GameObjectState::Walking_down) 
-		{
+	if (getVelocity().x == 0.0f && getVelocity().y == 0.0f) {
+		if (m_state == GameObjectState::Walking_down) {
 			newState = GameObjectState::Idle_down;
 		}
-		else if (m_state == GameObjectState::Walking_up)
-		{
+		else if (m_state == GameObjectState::Walking_up) {
 			newState = GameObjectState::Idle_up;
 		}
-		else if (m_state == GameObjectState::Walking_right)
-		{
+		else if (m_state == GameObjectState::Walking_right) {
 			newState = GameObjectState::Idle_right;
 		}
-		else if (m_state == GameObjectState::Walking_left)
-		{
+		else if (m_state == GameObjectState::Walking_left) {
 			newState = GameObjectState::Idle_left;
 		}
 	}
 
 	// only update animation if we need to
-	if (m_state != newState)
-	{
+	if (m_state != newState) {
 		m_state = newState;
 		setCurrentAnimation(getAnimation(m_state), false);
 	}
 }
 
-void MapMainCharacter::handleInput()
-{
+void MapMainCharacter::handleInput() {
 	float newAccelerationX = 0.f;
 	float newAccelerationY = 0.f;
 
-	if (g_inputController->isKeyActive(Key::Left))
-	{
+	if (g_inputController->isKeyActive(Key::Left)) {
 		newAccelerationX -= WALK_ACCELERATION;
 	}
-	else if (g_inputController->isKeyActive(Key::Right))
-	{
+	else if (g_inputController->isKeyActive(Key::Right)) {
 		newAccelerationX += WALK_ACCELERATION;
 	}
-	else if (g_inputController->isKeyActive(Key::Up))
-	{
+	else if (g_inputController->isKeyActive(Key::Up)) {
 		newAccelerationY -= WALK_ACCELERATION;
 	}
-	else if (g_inputController->isKeyActive(Key::Down))
-	{
+	else if (g_inputController->isKeyActive(Key::Down)) {
 		newAccelerationY += WALK_ACCELERATION;
 	}
 
 	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
 }
 
-void MapMainCharacter::load()
-{
+void MapMainCharacter::load() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 10.f, 10.f));
 	setSpriteOffset(sf::Vector2f(-20.f, -40.f));
 
@@ -198,38 +174,30 @@ void MapMainCharacter::load()
 	playCurrentAnimation(true);
 }
 
-void MapMainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const
-{
-	if (getAcceleration().x == 0.0f)
-	{
+void MapMainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
+	if (getAcceleration().x == 0.0f) {
 		nextVel.x = 0;
 	}
-	else
-	{
+	else {
 		nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds());
 	}
 
-	if (getAcceleration().y == 0.0f)
-	{
+	if (getAcceleration().y == 0.0f) {
 		nextVel.y = 0;
 	}
-	else 
-	{
+	else {
 		nextVel.y = (getVelocity().y + getAcceleration().y * frameTime.asSeconds());
 	}
 }
 
-float MapMainCharacter::getConfiguredMaxVelocityY() const
-{
+float MapMainCharacter::getConfiguredMaxVelocityY() const {
 	return 200.0f;
 }
 
-float MapMainCharacter::getConfiguredMaxVelocityX() const
-{
+float MapMainCharacter::getConfiguredMaxVelocityX() const {
 	return 200.0f;
 }
 
-GameObjectType MapMainCharacter::getConfiguredType() const
-{
+GameObjectType MapMainCharacter::getConfiguredType() const {
 	return GameObjectType::_MainCharacter;
 }

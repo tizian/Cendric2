@@ -4,22 +4,17 @@
 
 using namespace std;
 
-OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core)
-{
+OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core) {
 }
 
-Screen* OptionsScreen::update(const sf::Time& frameTime)
-{
-	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked())
-	{
+Screen* OptionsScreen::update(const sf::Time& frameTime) {
+	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
 		return new MenuScreen(m_characterCore);
 	}
-	else if (m_keyBindingsButton->isClicked())
-	{
+	else if (m_keyBindingsButton->isClicked()) {
 		return new KeyBindingsScreen(m_characterCore);
 	}
-	else if (m_applyButton->isClicked())
-	{
+	else if (m_applyButton->isClicked()) {
 		g_resourceManager->getConfiguration().language = m_selectedLanguage;
 		g_resourceManager->getConfiguration().isSoundOn = m_selectedSoundOn;
 		g_resourceManager->getConfiguration().isQuickcast = m_selectedQuickcastOn;
@@ -30,60 +25,49 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 		g_textProvider->reload();
 		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
 	}
-	else if (m_englishButton->isClicked())
-	{
+	else if (m_englishButton->isClicked()) {
 		m_selectedLanguage = Language::Lang_EN;
 		refreshLanguageText();
 	}
-	else if (m_germanButton->isClicked())
-	{
+	else if (m_germanButton->isClicked()) {
 
 		m_selectedLanguage = Language::Lang_DE;
 		refreshLanguageText();
 
 	}
-	else if (m_swissButton->isClicked())
-	{
+	else if (m_swissButton->isClicked()) {
 		m_selectedLanguage = Language::Lang_CH;
 		refreshLanguageText();
 	}
-	else if (m_soundOnButton->isClicked())
-	{
+	else if (m_soundOnButton->isClicked()) {
 		m_selectedSoundOn = true;
 		refreshSoundText();
 	}
-	else if (m_soundOffButton->isClicked())
-	{
+	else if (m_soundOffButton->isClicked()) {
 		m_selectedSoundOn = false;
 		refreshSoundText();
 	}
-	else if (m_quickcastOnButton->isClicked())
-	{
+	else if (m_quickcastOnButton->isClicked()) {
 		m_selectedQuickcastOn = true;
 		refreshQuickcastText();
 	}
-	else if (m_quickcastOffButton->isClicked())
-	{
+	else if (m_quickcastOffButton->isClicked()) {
 		m_selectedQuickcastOn = false;
 		refreshQuickcastText();
 	}
-	else if (m_fullscreenButton->isClicked())
-	{
+	else if (m_fullscreenButton->isClicked()) {
 		m_selectedFullscreenOn = true;
 		refreshFullscreenText();
 	}
-	else if (m_windowButton->isClicked())
-	{
+	else if (m_windowButton->isClicked()) {
 		m_selectedFullscreenOn = false;
 		refreshFullscreenText();
 	}
-	else if (m_smoothingOnButton->isClicked())
-	{
+	else if (m_smoothingOnButton->isClicked()) {
 		m_selectedSmoothingOn = true;
 		refreshSmoothingText();
 	}
-	else if (m_smoothingOffButton->isClicked())
-	{
+	else if (m_smoothingOffButton->isClicked()) {
 		m_selectedSmoothingOn = false;
 		refreshSmoothingText();
 	}
@@ -93,8 +77,7 @@ Screen* OptionsScreen::update(const sf::Time& frameTime)
 	return this;
 }
 
-void OptionsScreen::render(sf::RenderTarget &renderTarget)
-{
+void OptionsScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 	renderTarget.draw(*m_languageText);
@@ -108,8 +91,7 @@ void OptionsScreen::render(sf::RenderTarget &renderTarget)
 	renderTooltipText(renderTarget);
 }
 
-void OptionsScreen::execOnEnter(const Screen *previousScreen)
-{
+void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Options"));
 	m_title->setCharacterSize(50);
@@ -176,7 +158,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	addObject(m_soundOffButton);
 
 	distFromTop = distFromTop + 100;
-	
+
 	// fps
 	wstring fpsText = g_textProvider->getText("MaxFPS") + L": ";
 	fpsText.append(to_wstring(g_resourceManager->getConfiguration().maxFrameRate));
@@ -226,7 +208,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	m_keyBindingsButton->setText("KeyBindings");
 	m_keyBindingsButton->setCharacterSize(12);
 	addObject(m_keyBindingsButton);
-	
+
 	// back
 	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
 	m_backButton->setText("Back");
@@ -237,48 +219,42 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen)
 	addObject(m_applyButton);
 }
 
-void OptionsScreen::refreshLanguageText()
-{
+void OptionsScreen::refreshLanguageText() {
 	string currentLanguage = EnumNames::getLanguageName(m_selectedLanguage);
 	wstring languageText = g_textProvider->getText("Language") + L": ";
 	languageText.append(g_textProvider->getText(currentLanguage));
 	m_languageText->setString(languageText);
 }
 
-void OptionsScreen::refreshSoundText()
-{
+void OptionsScreen::refreshSoundText() {
 	string currentSwitch = m_selectedSoundOn ? "On" : "Off";
 	wstring soundText = g_textProvider->getText("Sound") + L": ";
 	soundText.append(g_textProvider->getText(currentSwitch));
 	m_sound->setString(soundText);
 }
 
-void OptionsScreen::refreshQuickcastText()
-{
+void OptionsScreen::refreshQuickcastText() {
 	string currentSwitch = m_selectedQuickcastOn ? "On" : "Off";
 	wstring quickcastText = g_textProvider->getText("Quickcast") + L": ";
 	quickcastText.append(g_textProvider->getText(currentSwitch));
 	m_quickcast->setString(quickcastText);
 }
 
-void OptionsScreen::refreshFullscreenText()
-{
+void OptionsScreen::refreshFullscreenText() {
 	string currentSwitch = m_selectedFullscreenOn ? "Fullscreen" : "Window";
 	wstring fullscreenText = g_textProvider->getText("DisplayMode") + L": ";
 	fullscreenText.append(g_textProvider->getText(currentSwitch));
 	m_fullscreen->setString(fullscreenText);
 }
 
-void OptionsScreen::refreshSmoothingText()
-{
+void OptionsScreen::refreshSmoothingText() {
 	string currentSwitch = m_selectedSmoothingOn ? "On" : "Off";
 	wstring smoothingText = g_textProvider->getText("Smoothing") + L": ";
 	smoothingText.append(g_textProvider->getText(currentSwitch));
 	m_smoothing->setString(smoothingText);
 }
 
-void OptionsScreen::execOnExit(const Screen *nextScreen)
-{
+void OptionsScreen::execOnExit(const Screen *nextScreen) {
 	// delete texts (buttons are deleted automatically by the screen)
 	delete m_title;
 	delete m_languageText;

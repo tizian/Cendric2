@@ -19,8 +19,7 @@ class MerchantInterface;
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
 // the inventory also shows item description and equipped items.
-class Inventory
-{
+class Inventory {
 public:
 	Inventory(LevelInterface* _interface);
 	Inventory(MapInterface* _interface);
@@ -107,16 +106,16 @@ private:
 	const float MARGIN = 7.f;
 	const float INVENTORY_TOP = InventoryEquipment::TOP;
 	const float INVENTORY_LEFT = InventoryEquipment::LEFT + MARGIN + InventoryEquipment::WIDTH;
-	const float INVENTORY_HEIGHT = 
+	const float INVENTORY_HEIGHT =
 		3 * GUIConstants::TEXT_OFFSET +
 		2 * GUIConstants::CHARACTER_SIZE_M +
 		BUTTON_SIZE.y +
 		(SLOT_COUNT_Y + 1) * MARGIN +
 		SLOT_COUNT_Y * (MARGIN + InventorySlot::SIDE_LENGTH + 2 * InventorySlot::MARGIN);
-	const float INVENTORY_WIDTH = 
+	const float INVENTORY_WIDTH =
 		2 * GUIConstants::TEXT_OFFSET +
 		(SLOT_COUNT_X - 1) * MARGIN +
 		SLOT_COUNT_X * (InventorySlot::SIDE_LENGTH + 2 * InventorySlot::MARGIN);
-	
+
 	std::map<ItemType, std::vector<InventorySlot>*> m_typeMap;
 };

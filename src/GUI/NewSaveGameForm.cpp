@@ -6,8 +6,7 @@ using namespace std;
 const float DIST_FROM_BORDER = 10.f;
 const int MAX_CHARS_IN_SAVEGAME_NAME = 24;
 
-NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject()
-{
+NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_window = new Window(box, WindowOrnamentStyle::NONE);
 	float buttonHeight = 50.f;
 	float buttonGap = 20.f;
@@ -44,16 +43,14 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject()
 	g_inputController->startReadingText();
 }
 
-NewSaveGameForm::~NewSaveGameForm()
-{
+NewSaveGameForm::~NewSaveGameForm() {
 	delete m_window;
 	delete m_okButton;
 	delete m_cancelButton;
 	g_inputController->stopReadingText();
 }
 
-void NewSaveGameForm::render(sf::RenderTarget& renderTarget)
-{
+void NewSaveGameForm::render(sf::RenderTarget& renderTarget) {
 	m_window->render(renderTarget);
 	renderTarget.draw(m_message);
 	renderTarget.draw(m_savegameNameText);
@@ -62,46 +59,38 @@ void NewSaveGameForm::render(sf::RenderTarget& renderTarget)
 	m_cancelButton->render(renderTarget);
 }
 
-const std::string& NewSaveGameForm::getSavegameName() const
-{
+const std::string& NewSaveGameForm::getSavegameName() const {
 	return m_savegameName;
 }
 
-void NewSaveGameForm::update(const sf::Time& frameTime)
-{
+void NewSaveGameForm::update(const sf::Time& frameTime) {
 	m_savegameName = g_inputController->getReadText();
 	m_savegameNameText.setString(m_savegameName);
 	m_okButton->setEnabled(m_savegameName.size() < 25 && m_savegameName.size() > 0);
 	m_okButton->update(frameTime);
 	m_cancelButton->update(frameTime);
 
-	if (m_okButton->isClicked() || (m_okButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)))
-	{
+	if (m_okButton->isClicked() || (m_okButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Confirm))) {
 		m_executeOk();
 		setDisposed();
 	}
-	else if (m_cancelButton->isClicked())
-	{
+	else if (m_cancelButton->isClicked()) {
 		m_executeCancel();
 		setDisposed();
 	}
 }
 
-void NewSaveGameForm::setOnOkClicked(const std::function<void()>& agent)
-{
+void NewSaveGameForm::setOnOkClicked(const std::function<void()>& agent) {
 	m_executeOk = agent;
 }
 
-void NewSaveGameForm::setOnCancelClicked(const std::function<void()>& agent)
-{
+void NewSaveGameForm::setOnCancelClicked(const std::function<void()>& agent) {
 	m_executeCancel = agent;
 }
 
-GameObjectType NewSaveGameForm::getConfiguredType() const
-{
+GameObjectType NewSaveGameForm::getConfiguredType() const {
 	return GameObjectType::_Form;
 }
-void NewSaveGameForm::nop() const
-{
+void NewSaveGameForm::nop() const {
 	// nop
 }

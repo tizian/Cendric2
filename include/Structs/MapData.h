@@ -6,8 +6,7 @@
 #include "Structs/NPCBean.h"
 #include "Structs/LightBean.h"
 
-struct MapData
-{
+struct MapData {
 	std::string id;
 	std::string name;
 	sf::Vector2i mapSize;

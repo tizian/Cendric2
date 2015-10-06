@@ -4,8 +4,7 @@
 #include "DynamicTile.h"
 #include "MovableGameObject.h"
 
-class ShiftableBlockTile : public DynamicTile, public MovableGameObject
-{
+class ShiftableBlockTile : public DynamicTile, public MovableGameObject {
 public:
 	ShiftableBlockTile(Level* level);
 	void init() override;

@@ -7,8 +7,7 @@
 #include "GUI/ModifierSlot.h"
 
 // class for the modifier slot clone that spawns when a modifier slot is dragged around.
-class ModifierSlotClone : public GameObject
-{
+class ModifierSlotClone : public GameObject {
 public:
 	ModifierSlotClone(const ModifierSlot* original);
 

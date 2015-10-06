@@ -10,8 +10,7 @@
 #include "GUI/YesOrNoForm.h"
 #include "GUI/NewSaveGameForm.h"
 
-class SaveGameScreen : public Screen
-{
+class SaveGameScreen : public Screen {
 public:
 	SaveGameScreen(CharacterCore* core);
 

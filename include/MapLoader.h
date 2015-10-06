@@ -11,8 +11,7 @@
 class Map;
 
 // helper class used by the map to load npcs
-class MapLoader
-{
+class MapLoader {
 public:
 	// loads npcs out of map data and adds them directly to the screen
 	void loadNpcs(MapData& data, Screen* screen) const;

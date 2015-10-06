@@ -11,8 +11,7 @@
 #include "FileIO/CharacterCoreIO.h"
 
 // a reader to read a savegame.
-class CharacterCoreReader : public Reader, public CharacterCoreIO
-{
+class CharacterCoreReader : public Reader, public CharacterCoreIO {
 public:
 	bool readCharacterCore(const std::string& fileName, CharacterCoreData& data);
 
@@ -41,7 +40,7 @@ private:
 	bool readLevelStateLayer(char* start, char* end, std::set<int>& layer, std::string& id) const;
 
 	bool readAttributes(char* start, char* end, CharacterCoreData& data) const;
-	
+
 	bool readGold(char* start, char* end, CharacterCoreData& data) const;
 	bool readItemID(char* start, char* end, CharacterCoreData& data) const;
 	bool readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const;

@@ -3,8 +3,7 @@
 #include "global.h"
 
 // some constants used by character core reader & writer
-class CharacterCoreIO
-{
+class CharacterCoreIO {
 protected:
 	// savegame attributes
 	const char* TIME_PLAYED = "time.played";

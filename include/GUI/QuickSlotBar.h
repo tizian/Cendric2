@@ -7,8 +7,7 @@
 class LevelInterface;
 
 // the quick slot bar in a level. There are two slots in total
-class QuickSlotBar
-{
+class QuickSlotBar {
 public:
 	QuickSlotBar(LevelInterface* _interface);
 	~QuickSlotBar();
@@ -34,7 +33,7 @@ private:
 	const float QUICKSLOT_SPACING = 20.f;
 	// as seen from the top left corner
 	const sf::Vector2f QUICKSLOT_OFFSET = sf::Vector2f(
-		WINDOW_WIDTH - 2 * (QuickSlot::SIDE_LENGTH + QUICKSLOT_SPACING), 
+		WINDOW_WIDTH - 2 * (QuickSlot::SIDE_LENGTH + QUICKSLOT_SPACING),
 		WINDOW_HEIGHT - (QuickSlot::SIDE_LENGTH + QUICKSLOT_SPACING));
-	
+
 };

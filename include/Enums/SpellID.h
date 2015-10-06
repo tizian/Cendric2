@@ -1,7 +1,6 @@
 #pragma once
 
-enum class SpellID
-{
+enum class SpellID {
 	VOID,
 
 	// not really a spell, each and every weapon has it and its attributes are dependant on

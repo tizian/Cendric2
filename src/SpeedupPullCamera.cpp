@@ -1,58 +1,47 @@
 #include "SpeedupPullCamera.h"
 #include "InputController.h"
 
-void SpeedupPullCamera::update(const sf::Time& frameTime)
-{
-	if (g_inputController->isKeyActive(Key::Up))
-	{
+void SpeedupPullCamera::update(const sf::Time& frameTime) {
+	if (g_inputController->isKeyActive(Key::Up)) {
 		m_cameraTop -= CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
 	}
-	if (g_inputController->isKeyActive(Key::Down))
-	{
+	if (g_inputController->isKeyActive(Key::Down)) {
 		m_cameraTop += CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
 	}
 }
 
-void SpeedupPullCamera::setCameraWindowHeight(float height)
-{
+void SpeedupPullCamera::setCameraWindowHeight(float height) {
 	m_cameraWindowHeight = height;
 }
 
-void SpeedupPullCamera::setCameraWindowWidth(float width) 
-{
+void SpeedupPullCamera::setCameraWindowWidth(float width) {
 	m_cameraWindowWidth = width;
 }
 
-void SpeedupPullCamera::setFocusCenter(const sf::Vector2f& center)
-{
+void SpeedupPullCamera::setFocusCenter(const sf::Vector2f& center) {
 	// check horizontally
-	if (center.x < m_cameraLeft)
-	{
+	if (center.x < m_cameraLeft) {
 		m_cameraLeft = center.x;
 		m_cameraCenter.x = m_cameraLeft + (m_cameraWindowWidth / 2.f);
 	}
-	else if (center.x > m_cameraLeft + m_cameraWindowWidth)
-	{
+	else if (center.x > m_cameraLeft + m_cameraWindowWidth) {
 		m_cameraLeft = center.x - m_cameraWindowWidth;
 		m_cameraCenter.x = m_cameraLeft + (m_cameraWindowWidth / 2.f);
 	}
 
 	// check vertically
-	if (center.y < m_cameraTop)
-	{
+	if (center.y < m_cameraTop) {
 		m_cameraTop = center.y;
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
 	}
-	else if (center.y > m_cameraTop + m_cameraWindowHeight)
-	{
+	else if (center.y > m_cameraTop + m_cameraWindowHeight) {
 		m_cameraTop = center.y - m_cameraWindowHeight;
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
 	}
 }
 
-const sf::Vector2f& SpeedupPullCamera::getCameraCenter() const
-{
+const sf::Vector2f& SpeedupPullCamera::getCameraCenter() const {
 	return m_cameraCenter;
 }

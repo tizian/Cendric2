@@ -1,7 +1,6 @@
 #pragma once
 
-enum class SpellType
-{
+enum class SpellType {
 	VOID,
 
 	Elemental,

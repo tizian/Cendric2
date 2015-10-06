@@ -4,8 +4,7 @@
 #include "Spell.h"
 
 
-class IcyAmbushSpell : public Spell
-{
+class IcyAmbushSpell : public Spell {
 public:
 	IcyAmbushSpell(const sf::Time& stunDuration);
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

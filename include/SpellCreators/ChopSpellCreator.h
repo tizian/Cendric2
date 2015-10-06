@@ -8,8 +8,7 @@
 #include "Spells/ChopSpell.h"
 
 // a class that creates chop spells
-class ChopSpellCreator : public SpellCreator
-{
+class ChopSpellCreator : public SpellCreator {
 public:
 	ChopSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
 

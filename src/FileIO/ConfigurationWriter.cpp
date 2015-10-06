@@ -3,11 +3,9 @@
 
 using namespace std;
 
-bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const
-{
+bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 	ofstream configuration(g_resourceManager->getFilename(ResourceID::Configuration), ios::trunc);
-	if (configuration.is_open())
-	{
+	if (configuration.is_open()) {
 		configuration << writeConfigurationHeader();
 		configuration << writeSoundOn(data);
 		configuration << writeSoundVolume(data);
@@ -23,16 +21,14 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const
 
 		configuration.close();
 	}
-	else
-	{
+	else {
 		g_logger->logError("ConfigurationWriter", "Unable to open file: " + string(g_resourceManager->getFilename(ResourceID::Configuration)));
 		return false;
 	}
 	return true;
 }
 
-std::string ConfigurationWriter::writeConfigurationHeader() const
-{
+std::string ConfigurationWriter::writeConfigurationHeader() const {
 	std::stringstream ss;
 	ss
 		<< "###############################################\n"
@@ -45,70 +41,59 @@ std::string ConfigurationWriter::writeConfigurationHeader() const
 	return ss.str();
 }
 
-std::string ConfigurationWriter::writeSoundOn(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeSoundOn(const ConfigurationData& data) const {
 	string soundOn = "# 0 means sound off, 1 means sound on\n";
-	return soundOn.append(string(SOUND_ON) + ":" + (data.isSoundOn ? "1" : "0")  + "\n");
+	return soundOn.append(string(SOUND_ON) + ":" + (data.isSoundOn ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data) const {
 	string quickcastOn = "# 0 means quickcast off, 1 means quickcast on\n";
 	return quickcastOn.append(string(QUICKCAST_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeDebugModeOn(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeDebugModeOn(const ConfigurationData& data) const {
 	string debugModeOn = "# 0 means debug mode is off, 1 means debug mode on\n";
 	debugModeOn += "# if the debug mode is on, the game will try to load a savegame 'debug.sav' directly into its level.\n";
 	return debugModeOn.append(string(DEBUGMODE_ON) + ":" + (data.isDebugMode ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& data) const {
 	string debugRenderingOn = "# 0 means debug rendering is off, 1 means debug rendering on\n";
 	debugRenderingOn += "# if the debug rendering is on, the game will display hitboxes and framerate.\n";
 	return debugRenderingOn.append(string(DEBUGRENDERING_ON) + ":" + (data.isDebugRendering ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeFullscreenOn(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeFullscreenOn(const ConfigurationData& data) const {
 	string fullscreenOn = "# 0 means window mode, 1 means fullscreen mode\n";
 	return fullscreenOn.append(string(FULLSCREEN_ON) + ":" + (data.isFullscreen ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeSmoothingOn(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeSmoothingOn(const ConfigurationData& data) const {
 	string smoothingOn = "# 0 means the resizing is handlet with Nearest Neighbor, 1 means with interpolation (smoothing)\n";
 	return smoothingOn.append(string(SMOOTHING_ON) + ":" + (data.isSmoothing ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeSoundVolume(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeSoundVolume(const ConfigurationData& data) const {
 	string soundVolume = "# this is the sound volume in percent (0 - 100)\n";
 	return soundVolume.append(string(SOUND_VOLUME) + ":" + to_string(data.volume) + "\n");
 }
 
-std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const {
 	string language = "# 1 for EN, 2 for DE, 3 for CH\n";
 	return language.append(string(LANGUAGE) + ":" + to_string(static_cast<int>(data.language)) + "\n");
 }
 
-std::string ConfigurationWriter::writeMaxFPS(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeMaxFPS(const ConfigurationData& data) const {
 	string fps = "# the fps limit for the game. Choose a value between 30 and 100\n";
 	return fps.append(string(MAX_FPS) + ":" + to_string(data.maxFrameRate) + "\n");
 }
 
-std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data) const {
 	string inputMap = "# the key input mapping.\n";
 	inputMap.append("# for key map values (values before comma) guess which is which.\n");
 	inputMap.append("# for keyboard key values (values after comma) see SFML -> Keyboard.\n");
 
-	for (auto it : data.mainKeyMap)
-	{
+	for (auto it : data.mainKeyMap) {
 		inputMap.append(string(MAIN_INPUT_MAPPING));
 		inputMap.append(":");
 		inputMap.append(to_string(static_cast<int>(it.first)));
@@ -119,12 +104,10 @@ std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data
 	return inputMap;
 }
 
-std::string ConfigurationWriter::writeAlternativeInputMap(const ConfigurationData& data) const
-{
+std::string ConfigurationWriter::writeAlternativeInputMap(const ConfigurationData& data) const {
 	string inputMap = "# the alternative key input mapping.\n";
 
-	for (auto it : data.alternativeKeyMap)
-	{
+	for (auto it : data.alternativeKeyMap) {
 		inputMap.append(string(ALTERNATIVE_INPUT_MAPPING));
 		inputMap.append(":");
 		inputMap.append(to_string(static_cast<int>(it.first)));

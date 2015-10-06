@@ -3,16 +3,13 @@
 using namespace std;
 using namespace luabridge;
 
-MerchantLoader::MerchantLoader()
-{
+MerchantLoader::MerchantLoader() {
 }
 
-MerchantLoader::~MerchantLoader()
-{
+MerchantLoader::~MerchantLoader() {
 }
 
-MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) const
-{
+MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) const {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 
@@ -20,8 +17,7 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) const
 
 	std::string filename = MERCHANT_FOLDER + "ME_" + merchantID + ".lua";
 
-	if (luaL_dofile(L, filename.c_str()) != 0)
-	{
+	if (luaL_dofile(L, filename.c_str()) != 0) {
 		g_logger->logError("MerchantLoader", "Cannot read lua script: " + filename);
 		return merchantData;
 	}
@@ -29,36 +25,29 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) const
 	lua_pcall(L, 0, 0, 0);
 
 	LuaRef multiplier = getGlobal(L, "multiplier");
-	if (multiplier.isNumber())
-	{
+	if (multiplier.isNumber()) {
 		float mult = multiplier.cast<float>();
-		if (mult < 1.f)
-		{
+		if (mult < 1.f) {
 			g_logger->logWarning("MerchantLoader", "Merchant multiplier is smaller than 1, this is not allowed, the default (1.5f) is taken instead.");
 		}
-		else
-		{
+		else {
 			merchantData.multiplier = mult;
 		}
 	}
 
 	LuaRef fraction = getGlobal(L, "fraction");
-	if (fraction.isString())
-	{
+	if (fraction.isString()) {
 		merchantData.fraction = resolveFractionID(fraction.cast<std::string>());
 	}
 
 	LuaRef wares = getGlobal(L, "wares");
-	if (wares.isTable())
-	{
+	if (wares.isTable()) {
 		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.
 		LuaRef element = wares[i];
-		while (!element.isNil())
-		{
+		while (!element.isNil()) {
 			LuaRef name = element[1];
 			LuaRef amount = element[2];
-			if (!name.isString() || !amount.isNumber())
-			{
+			if (!name.isString() || !amount.isNumber()) {
 				g_logger->logError("MerchantLoader", "File [" + filename + "]: wares table not resolved, no name or amount or of wrong type.");
 				return merchantData;
 			}

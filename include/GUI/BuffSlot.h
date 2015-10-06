@@ -6,14 +6,12 @@
 #include "GUI/BitmapText.h"
 #include "ResourceManager.h"
 
-enum class BuffType
-{
+enum class BuffType {
 	Food,
 	Spell
 };
 
-class BuffSlot : public GameObject
-{
+class BuffSlot : public GameObject {
 public:
 	BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
 

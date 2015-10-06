@@ -4,8 +4,7 @@
 #include "Spell.h"
 
 // not a spell projectile but it controls its mob. it is invisible for now (no texture), but that could change.
-class AntiGravitySpell : public Spell
-{
+class AntiGravitySpell : public Spell {
 public:
 	AntiGravitySpell();
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

@@ -7,8 +7,7 @@
 #include "Item.h"
 #include "GUI/GUIConstants.h"
 
-class DocumentDescriptionWindow : public Window
-{
+class DocumentDescriptionWindow : public Window {
 public:
 	DocumentDescriptionWindow(const Item& item);
 

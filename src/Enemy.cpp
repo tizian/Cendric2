@@ -242,7 +242,7 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 		m_enemyState = EnemyState::Idle;
 	}
 
-	if ((m_enemyState == EnemyState::Waiting || m_enemyState == EnemyState::Idle) && 
+	if ((m_enemyState == EnemyState::Waiting || m_enemyState == EnemyState::Idle) &&
 		m_decisionTime == sf::Time::Zero) {
 		// decide again
 		m_decisionTime = getConfiguredRandomDecisionTime();

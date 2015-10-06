@@ -9,8 +9,7 @@
 
 class CharacterCore;
 
-class ModifierSlot : public GameObject
-{
+class ModifierSlot : public GameObject {
 public:
 	// constructor for filled slots.
 	ModifierSlot(const SpellModifier& modifier);
@@ -39,7 +38,7 @@ public:
 
 	bool isClicked();
 	bool isRightClicked();
-	
+
 	GameObjectType getConfiguredType() const override;
 	const SpellModifier& getModifier() const;
 	int getNr() const;

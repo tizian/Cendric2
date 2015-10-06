@@ -4,8 +4,7 @@
 #include "GameObject.h"
 
 // A movable game object with physics.  Abstract class
-class MovableGameObject : virtual public GameObject
-{
+class MovableGameObject : virtual public GameObject {
 public:
 	MovableGameObject() : GameObject() {}
 	virtual ~MovableGameObject() {}
@@ -21,7 +20,7 @@ public:
 	void setVelocity(const sf::Vector2f& velocity);
 	void setVelocityX(float velocityX);
 	void setVelocityY(float velocityY);
-	
+
 	virtual float getConfiguredMaxVelocityY() const;
 	virtual float getConfiguredMaxVelocityX() const;
 	const sf::Vector2f& getVelocity() const;

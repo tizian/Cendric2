@@ -3,8 +3,7 @@
 #include "global.h"
 #include "DynamicTile.h"
 
-class CrumblyBlockTile : public DynamicTile
-{
+class CrumblyBlockTile : public DynamicTile {
 public:
 	CrumblyBlockTile(Level* level) : DynamicTile(level) {}
 	void init() override;

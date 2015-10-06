@@ -3,8 +3,7 @@
 #include "global.h"
 #include "Spell.h"
 
-class LeechSpell : public Spell
-{
+class LeechSpell : public Spell {
 public:
 	LeechSpell();
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

@@ -3,8 +3,7 @@
 #include "global.h"
 #include "Spell.h"
 
-class FearSpell : public Spell
-{
+class FearSpell : public Spell {
 public:
 	FearSpell(const sf::Time& fearedDuration, int strength);
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

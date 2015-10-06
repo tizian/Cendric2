@@ -14,8 +14,7 @@
 
 #include "GUI/BitmapFont.h"
 
-class ResourceManager
-{
+class ResourceManager {
 public:
 	ResourceManager();
 	~ResourceManager();

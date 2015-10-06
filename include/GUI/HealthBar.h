@@ -4,8 +4,7 @@
 #include "Structs/AttributeBean.h"
 
 // the health bar, as displayed in a level. It takes its data from the attributes of the main character.
-class HealthBar
-{
+class HealthBar {
 public:
 	HealthBar(const AttributeBean* attributes);
 

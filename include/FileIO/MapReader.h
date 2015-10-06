@@ -8,8 +8,7 @@
 
 using namespace tinyxml2;
 
-class MapReader
-{
+class MapReader {
 public:
 	MapReader();
 	~MapReader();

@@ -11,8 +11,7 @@
 class SpellSelection;
 
 // a class that decides whether a spell can be cast or not and holds the creators for the corresponding spells
-class SpellManager
-{
+class SpellManager {
 public:
 	SpellManager(LevelMovableGameObject* owner);
 	~SpellManager();
@@ -31,11 +30,11 @@ public:
 
 	// clears all spells from the maps
 	void clearSpells();
-	
+
 	void setSpellSelection(SpellSelection* spellSelection);
 
 private:
-	
+
 	int m_currentSpell;
 	std::vector<sf::Time> m_coolDownMap;
 	std::vector<SpellCreator*> m_spellMap;

@@ -10,8 +10,7 @@
 class MerchantInterface;
 
 // the merchant window, operating on a merchant interface
-class MerchantWindow
-{
+class MerchantWindow {
 public:
 	MerchantWindow(MerchantInterface* _interface);
 	~MerchantWindow();
@@ -25,7 +24,7 @@ private:
 	MerchantInterface* m_interface;
 	Button* m_cancelButton = nullptr;
 	std::string m_id;
-	
+
 	void init();
 
 	// reloads the merchant items, depending on the core
@@ -41,10 +40,10 @@ private:
 	InventorySlot* m_selectedSlot = nullptr;
 	void selectSlot(InventorySlot* selectedSlot);
 	MerchantItemDescriptionWindow* m_descriptionWindow = nullptr;
-	
+
 	void showDescription(const Item& item);
 	void hideDescription();
-	
+
 	const int SLOT_COUNT_X = 5;
 	const int SLOT_COUNT_Y = 5;
 

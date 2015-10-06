@@ -7,8 +7,7 @@
 
 // reads items from a specified csv file
 // used by the resource manager.
-class ItemReader : public CSVReader
-{
+class ItemReader : public CSVReader {
 public:
 	ItemReader();
 	~ItemReader();

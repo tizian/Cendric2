@@ -2,8 +2,7 @@
 
 using namespace std;
 
-ModifierSlotClone::ModifierSlotClone(const ModifierSlot* original)
-{
+ModifierSlotClone::ModifierSlotClone(const ModifierSlot* original) {
 	m_original = original->getModifier();
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, ModifierSlot::SIDE_LENGTH, ModifierSlot::SIDE_LENGTH));
@@ -20,25 +19,21 @@ ModifierSlotClone::ModifierSlotClone(const ModifierSlot* original)
 	m_outside.setOutlineColor(sf::Color::Red);
 }
 
-void ModifierSlotClone::setPosition(const sf::Vector2f& pos)
-{
+void ModifierSlotClone::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	m_inside.setPosition(pos);
 	m_outside.setPosition(pos);
 }
 
-void ModifierSlotClone::render(sf::RenderTarget& renderTarget)
-{
+void ModifierSlotClone::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_outside);
 	renderTarget.draw(m_inside);
 }
 
-GameObjectType ModifierSlotClone::getConfiguredType() const
-{
+GameObjectType ModifierSlotClone::getConfiguredType() const {
 	return GameObjectType::_Interface;
 }
 
-const SpellModifier&  ModifierSlotClone::getModifier() const
-{
+const SpellModifier&  ModifierSlotClone::getModifier() const {
 	return m_original;;
 }

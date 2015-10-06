@@ -4,8 +4,7 @@
 #include "Button.h"
 
 // A button that takes a texture additionally.
-class TexturedButton : public Button
-{
+class TexturedButton : public Button {
 public:
 	TexturedButton(const sf::FloatRect& box, ButtonOrnamentStyle style = ButtonOrnamentStyle::NONE);
 	void render(sf::RenderTarget& renderTarget) override;

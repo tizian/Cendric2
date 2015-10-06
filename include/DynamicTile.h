@@ -10,8 +10,7 @@ class LevelMovableGameObject;
 class Level;
 
 // A dynamic tile in a level
-class DynamicTile : virtual public GameObject
-{
+class DynamicTile : virtual public GameObject {
 public:
 	DynamicTile(Level* level);
 	virtual ~DynamicTile() {};
@@ -24,12 +23,12 @@ public:
 	virtual void onHit(Spell* spell) = 0;
 	// gets called by a mob when it hits the dynamic tile. default does nothing
 	virtual void onHit(LevelMovableGameObject* mob);
-	
+
 	// gets called by the level when initializing the tile
 	void setTileSize(const sf::Vector2i& tileSize);
 	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
 	void setPositionOffset(const sf::Vector2f& offset);
-	
+
 	const sf::Vector2f& getPositionOffset() const;
 	virtual bool getIsCollidable() const;
 	GameObjectType getConfiguredType() const override;

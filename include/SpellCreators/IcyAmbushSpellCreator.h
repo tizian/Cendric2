@@ -6,8 +6,7 @@
 #include "Spells/IcyAmbushSpell.h"
 
 // a class that creates icy ambush spells
-class IcyAmbushSpellCreator : public SpellCreator
-{
+class IcyAmbushSpellCreator : public SpellCreator {
 public:
 	IcyAmbushSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
 

@@ -14,8 +14,7 @@
 
 using namespace tinyxml2;
 
-class LevelReader 
-{
+class LevelReader {
 public:
 	LevelReader();
 	~LevelReader();

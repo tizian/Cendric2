@@ -3,8 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-struct NPCBean
-{
+struct NPCBean {
 	// npc on map
 	int objectID;
 	std::string id;

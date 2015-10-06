@@ -26,7 +26,7 @@ inline float degToRad(float deg) {
 }
 
 inline float lerp(float t, float v1, float v2) {
-    return (1.f - t) * v1 + t * v2;
+	return (1.f - t) * v1 + t * v2;
 }
 
 // versioning
@@ -64,7 +64,7 @@ inline float lerp(float t, float v1, float v2) {
 class Logger;
 class TextProvider;
 class ResourceManager;
-class InputController; 
+class InputController;
 
 // extern objects
 extern ResourceManager *g_resourceManager;

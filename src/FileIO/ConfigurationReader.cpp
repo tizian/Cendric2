@@ -5,124 +5,100 @@
 
 using namespace std;
 
-bool ConfigurationReader::readConfiguration(ConfigurationData& data) const
-{
+bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 	data = DEFAULT_CONFIGURATION;
 
 	string line;
 	ifstream configuration(g_resourceManager->getFilename(ResourceID::Configuration));
 	bool noError = true;
-	if (configuration.is_open())
-	{
-		while (getline(configuration, line))
-		{
-			if (line.empty() || line.compare(0, 1, "#") == 0)
-			{
+	if (configuration.is_open()) {
+		while (getline(configuration, line)) {
+			if (line.empty() || line.compare(0, 1, "#") == 0) {
 				continue;
 			}
-			else if (line.compare(0, strlen(LANGUAGE), string(LANGUAGE)) == 0) 
-			{
+			else if (line.compare(0, strlen(LANGUAGE), string(LANGUAGE)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(LANGUAGE));
 				noError = readLanguage(line, data);
 			}
-			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), string(MAIN_INPUT_MAPPING)) == 0)
-			{
+			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), string(MAIN_INPUT_MAPPING)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(MAIN_INPUT_MAPPING));
 				noError = readMainInputMapping(line, data);
 			}
-			else if (line.compare(0, strlen(ALTERNATIVE_INPUT_MAPPING), string(ALTERNATIVE_INPUT_MAPPING)) == 0)
-			{
+			else if (line.compare(0, strlen(ALTERNATIVE_INPUT_MAPPING), string(ALTERNATIVE_INPUT_MAPPING)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(ALTERNATIVE_INPUT_MAPPING));
 				noError = readAlternativeInputMapping(line, data);
 			}
-			else if (line.compare(0, strlen(MAX_FPS), string(MAX_FPS)) == 0)
-			{
+			else if (line.compare(0, strlen(MAX_FPS), string(MAX_FPS)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(MAX_FPS));
 				noError = readMaxFPS(line, data);
 			}
-			else if (line.compare(0, strlen(SOUND_ON), string(SOUND_ON)) == 0)
-			{
+			else if (line.compare(0, strlen(SOUND_ON), string(SOUND_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_ON));
 				noError = readSoundOn(line, data);
 			}
-			else if (line.compare(0, strlen(SOUND_VOLUME), string(SOUND_VOLUME)) == 0)
-			{
+			else if (line.compare(0, strlen(SOUND_VOLUME), string(SOUND_VOLUME)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_VOLUME));
 				noError = readSoundVolume(line, data);
 			}
-			else if (line.compare(0, strlen(QUICKCAST_ON), string(QUICKCAST_ON)) == 0)
-			{
+			else if (line.compare(0, strlen(QUICKCAST_ON), string(QUICKCAST_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(QUICKCAST_ON));
 				noError = readQuickcastOn(line, data);
 			}
-			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0)
-			{
+			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGMODE_ON));
 				noError = readDebugModeOn(line, data);
 			}
-			else if (line.compare(0, strlen(DEBUGRENDERING_ON), string(DEBUGRENDERING_ON)) == 0)
-			{
+			else if (line.compare(0, strlen(DEBUGRENDERING_ON), string(DEBUGRENDERING_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGRENDERING_ON));
 				noError = readDebugRenderingOn(line, data);
 			}
-			else if (line.compare(0, strlen(SMOOTHING_ON), string(SMOOTHING_ON)) == 0)
-			{
+			else if (line.compare(0, strlen(SMOOTHING_ON), string(SMOOTHING_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SMOOTHING_ON));
 				noError = readSmoothingOn(line, data);
 			}
-			else if (line.compare(0, strlen(FULLSCREEN_ON), string(FULLSCREEN_ON)) == 0)
-			{
+			else if (line.compare(0, strlen(FULLSCREEN_ON), string(FULLSCREEN_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(FULLSCREEN_ON));
 				noError = readFullscreenOn(line, data);
 			}
-			else
-			{
+			else {
 				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file.");
 				noError = false;
 			}
-			if (!noError)
-			{
+			if (!noError) {
 				break;
 			}
 		}
 		configuration.close();
-		if (!noError || !checkConfigurationData(data))
-		{
+		if (!noError || !checkConfigurationData(data)) {
 			return false;
 		}
 	}
-	else
-	{
+	else {
 		g_logger->logWarning("ConfigurationReader", "Unable to open configuration file. Default configuration is used.");
 		return false;
 	}
-	
+
 	return true;
 }
 
-bool ConfigurationReader::checkConfigurationData(ConfigurationData& data) const
-{
+bool ConfigurationReader::checkConfigurationData(ConfigurationData& data) const {
 	// checking key map for duplicate entries...
 	std::set<sf::Keyboard::Key> values;
-	for (auto& it : data.mainKeyMap)
-	{
+	for (auto& it : data.mainKeyMap) {
 		// "KeyCount" is allowed and is interpreted as "not set"
 		if (it.second == sf::Keyboard::KeyCount) continue;
 		// insert.second will be false if the value is already in the set
-		if (!values.insert(it.second).second)
-		{
-            g_logger->logError("ConfigurationReader", "Inconsistent key map (main), a keyboard value appears twice for different keys. Key: " + std::to_string(it.second));
+		if (!values.insert(it.second).second) {
+			g_logger->logError("ConfigurationReader", "Inconsistent key map (main), a keyboard value appears twice for different keys. Key: " + std::to_string(it.second));
 			return false;
 		}
 	}
 	// values mustn't be cleared here! the alternative key map should not have values already present in the main one.
-	for (auto& it : data.alternativeKeyMap)
-	{
+	for (auto& it : data.alternativeKeyMap) {
 		// "KeyCount" is allowed and is interpreted as "key not set"
 		if (it.second == sf::Keyboard::KeyCount) continue;
 		// insert.second will be false if the value is already in the set
-		if (!values.insert(it.second).second)
-		{
+		if (!values.insert(it.second).second) {
 			g_logger->logError("ConfigurationReader", "Inconsistent key map (alternative), a keyboard value appears twice for different keys. Key: " + std::to_string(it.second));
 			return false;
 		}
@@ -131,17 +107,14 @@ bool ConfigurationReader::checkConfigurationData(ConfigurationData& data) const
 	return true;
 }
 
-bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after language tag or no value after colon.");
 		return false;
 	}
 	Language language = static_cast<Language>(atoi(line.substr(colon + 1).c_str()));
-	if (language >= Language::MAX || language <= Language::VOID)
-	{
+	if (language >= Language::MAX || language <= Language::VOID) {
 		g_logger->logError("ConfigurationReader", "Language id not recognized.");
 		return false;
 	}
@@ -149,17 +122,14 @@ bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationDat
 	return true;
 }
 
-bool ConfigurationReader::readMaxFPS(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readMaxFPS(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after max fps tag or no value after colon");
 		return false;
 	}
 	int maxFPS = atoi(line.substr(colon + 1).c_str());
-	if (maxFPS > 100 || maxFPS < 30)
-	{
+	if (maxFPS > 100 || maxFPS < 30) {
 		g_logger->logWarning("ConfigurationReader", "Max FPS has an invalid value, is left unchanged.");
 		return true;
 	}
@@ -167,17 +137,14 @@ bool ConfigurationReader::readMaxFPS(const std::string& line, ConfigurationData&
 	return true;
 }
 
-bool ConfigurationReader::readSoundVolume(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readSoundVolume(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after sound volume tag or no value after colon");
 		return false;
 	}
 	int volume = atoi(line.substr(colon + 1).c_str());
-	if (volume > 100 || volume < 0)
-	{
+	if (volume > 100 || volume < 0) {
 		g_logger->logWarning("ConfigurationReader", "Sound volume has an invalid value, is left unchanged.");
 		return true;
 	}
@@ -185,11 +152,9 @@ bool ConfigurationReader::readSoundVolume(const std::string& line, Configuration
 	return true;
 }
 
-bool ConfigurationReader::readSoundOn(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readSoundOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after sound on tag or no value after colon.");
 		return false;
 	}
@@ -198,11 +163,9 @@ bool ConfigurationReader::readSoundOn(const std::string& line, ConfigurationData
 	return true;
 }
 
-bool ConfigurationReader::readQuickcastOn(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readQuickcastOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after quickcast on tag or no value after colon.");
 		return false;
 	}
@@ -211,11 +174,9 @@ bool ConfigurationReader::readQuickcastOn(const std::string& line, Configuration
 	return true;
 }
 
-bool ConfigurationReader::readDebugModeOn(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readDebugModeOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after debug mode on tag or no value after colon.");
 		return false;
 	}
@@ -224,11 +185,9 @@ bool ConfigurationReader::readDebugModeOn(const std::string& line, Configuration
 	return true;
 }
 
-bool ConfigurationReader::readDebugRenderingOn(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readDebugRenderingOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after debug rendering on tag or no value after colon.");
 		return false;
 	}
@@ -237,11 +196,9 @@ bool ConfigurationReader::readDebugRenderingOn(const std::string& line, Configur
 	return true;
 }
 
-bool ConfigurationReader::readFullscreenOn(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readFullscreenOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after debug fullscreen on tag or no value after colon.");
 		return false;
 	}
@@ -250,11 +207,9 @@ bool ConfigurationReader::readFullscreenOn(const std::string& line, Configuratio
 	return true;
 }
 
-bool ConfigurationReader::readSmoothingOn(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readSmoothingOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after smoothing on tag or no value after colon.");
 		return false;
 	}
@@ -263,29 +218,24 @@ bool ConfigurationReader::readSmoothingOn(const std::string& line, Configuration
 	return true;
 }
 
-bool ConfigurationReader::readMainInputMapping(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readMainInputMapping(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after input mapping tag or no value after colon.");
 		return false;
 	}
 	Key key = static_cast<Key>(atoi(line.substr(colon + 1).c_str()));
-	if (key >= Key::MAX || key <= Key::VOID)
-	{
+	if (key >= Key::MAX || key <= Key::VOID) {
 		g_logger->logError("ConfigurationReader", "Key id not recognized.");
 		return false;
 	}
 	size_t comma = line.find(',');
-	if (comma == string::npos || line.length() < comma + 1)
-	{
+	if (comma == string::npos || line.length() < comma + 1) {
 		g_logger->logError("ConfigurationReader", "No comma found after key integer (main input mapping tag) or no value after comma.");
 		return false;
 	}
 	sf::Keyboard::Key keyboardKey = static_cast<sf::Keyboard::Key>(atoi(line.substr(comma + 1).c_str()));
-	if (keyboardKey > sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown)
-	{
+	if (keyboardKey > sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown) {
 		g_logger->logError("ConfigurationReader", "sf Keyboard Key id not recognized.");
 		return false;
 	}
@@ -293,29 +243,24 @@ bool ConfigurationReader::readMainInputMapping(const std::string& line, Configur
 	return true;
 }
 
-bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const
-{
+bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1)
-	{
+	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after input mapping tag or no value after colon.");
 		return false;
 	}
 	Key key = static_cast<Key>(atoi(line.substr(colon + 1).c_str()));
-	if (key >= Key::MAX || key <= Key::VOID)
-	{
+	if (key >= Key::MAX || key <= Key::VOID) {
 		g_logger->logError("ConfigurationReader", "Key id not recognized.");
 		return false;
 	}
 	size_t comma = line.find(',');
-	if (comma == string::npos || line.length() < comma + 1)
-	{
+	if (comma == string::npos || line.length() < comma + 1) {
 		g_logger->logError("ConfigurationReader", "No comma found after key integer (alternative input mapping tag) or no value after comma.");
 		return false;
 	}
 	sf::Keyboard::Key keyboardKey = static_cast<sf::Keyboard::Key>(atoi(line.substr(comma + 1).c_str()));
-	if (keyboardKey > sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown)
-	{
+	if (keyboardKey > sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown) {
 		g_logger->logError("ConfigurationReader", "sf Keyboard Key id not recognized.");
 		return false;
 	}

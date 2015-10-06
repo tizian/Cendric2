@@ -7,8 +7,7 @@
 
 #include "Structs/SpellModifier.h"
 
-class ModifierDescriptionWindow : public Window
-{
+class ModifierDescriptionWindow : public Window {
 public:
 	ModifierDescriptionWindow(const SpellModifier& modifier);
 	~ModifierDescriptionWindow();

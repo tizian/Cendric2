@@ -9,8 +9,7 @@ class GameScreen;
 class DialogueWindow;
 
 // A dialogue with conditions, choices and text
-class Dialogue
-{
+class Dialogue {
 public:
 	void load(const std::string& id, GameScreen* screen, DialogueWindow* window);
 	const std::string& getID() const;

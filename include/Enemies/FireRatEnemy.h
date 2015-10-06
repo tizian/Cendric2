@@ -7,11 +7,10 @@
 #include "Screen.h"
 
 // A nasty fiery rat in a level
-class FireRatEnemy : public Enemy
-{
+class FireRatEnemy : public Enemy {
 public:
 	FireRatEnemy(Level* level, LevelMainCharacter* mainChar);
-    virtual ~FireRatEnemy() {}
+	virtual ~FireRatEnemy() {}
 
 	void load() override;
 

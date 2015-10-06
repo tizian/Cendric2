@@ -1,15 +1,13 @@
 #include "DynamicTiles/SpikesTopTile.h"
 #include "Spell.h"
 
-void SpikesTopTile::init()
-{
+void SpikesTopTile::init() {
 	setPositionOffset(sf::Vector2f(-5.f, -20.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 65.f));
 }
 
-void SpikesTopTile::load(int skinNr)
-{
+void SpikesTopTile::load(int skinNr) {
 	m_isCollidable = false;
 
 	Animation idleAnimation;
@@ -26,29 +24,23 @@ void SpikesTopTile::load(int skinNr)
 	playCurrentAnimation(false);
 }
 
-void SpikesTopTile::update(const sf::Time& frameTime)
-{
+void SpikesTopTile::update(const sf::Time& frameTime) {
 	DynamicTile::update(frameTime);
-	if (m_damageCooldown > sf::Time::Zero)
-	{
+	if (m_damageCooldown > sf::Time::Zero) {
 		m_damageCooldown = m_damageCooldown - frameTime;
-		if (m_damageCooldown < sf::Time::Zero)
-		{
+		if (m_damageCooldown < sf::Time::Zero) {
 			m_damageCooldown = sf::Time::Zero;
 		}
 	}
 }
 
-void SpikesTopTile::onHit(LevelMovableGameObject* mob)
-{
-	if (m_damageCooldown == sf::Time::Zero)
-	{
+void SpikesTopTile::onHit(LevelMovableGameObject* mob) {
+	if (m_damageCooldown == sf::Time::Zero) {
 		mob->addDamage(DMG_PER_S);
 		m_damageCooldown = sf::seconds(1);
 	}
 }
 
-void SpikesTopTile::onHit(Spell* spell)
-{
+void SpikesTopTile::onHit(Spell* spell) {
 	// TODO, maybe there is some spell that alters spikes?
 }

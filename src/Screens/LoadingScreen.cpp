@@ -2,34 +2,27 @@
 
 using namespace std;
 
-inline void load(LevelScreen* levelToLoad, MapScreen* mapToLoad, LoadingScreen* loadingScreen)
-{
+inline void load(LevelScreen* levelToLoad, MapScreen* mapToLoad, LoadingScreen* loadingScreen) {
 	if (loadingScreen == nullptr) return;
-	if (levelToLoad != nullptr)
-	{
+	if (levelToLoad != nullptr) {
 		levelToLoad->load();
 	}
-	else if (mapToLoad != nullptr)
-	{
+	else if (mapToLoad != nullptr) {
 		mapToLoad->load();
-	} 
+	}
 	loadingScreen->setLoaded();
 }
 
-LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core)
-{
-	if (core->getData().isInLevel)
-	{
+LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
+	if (core->getData().isInLevel) {
 		m_levelToLoad = new LevelScreen(core->getData().currentLevel, getCharacterCore());
 	}
-	else
-	{
+	else {
 		m_mapToLoad = new MapScreen(core->getData().currentMap, getCharacterCore());
-	} 
+	}
 }
 
-Screen* LoadingScreen::update(const sf::Time& frameTime)
-{
+Screen* LoadingScreen::update(const sf::Time& frameTime) {
 	m_phi += (frameTime.asSeconds() * VELOCITY) / RADIUS;
 	if (m_phi > 2 * M_PI) m_phi = 0.f;
 	m_posGen->center = CENTER + sf::Vector2f(cos(m_phi) * RADIUS, sin(m_phi) * RADIUS);
@@ -38,31 +31,27 @@ Screen* LoadingScreen::update(const sf::Time& frameTime)
 	if (!m_isLoaded) return this;
 
 	m_thread.join();
-	
-	if (m_mapToLoad != nullptr)
-	{
+
+	if (m_mapToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_mapToLoad->loadForRenderTexture();
 		return m_mapToLoad;
 	}
-	if (m_levelToLoad != nullptr)
-	{
+	if (m_levelToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_levelToLoad->loadForRenderTexture();
 		return m_levelToLoad;
-	} 
+	}
 
 	g_resourceManager->setError(ErrorID::Error_dataCorrupted, "No level or map to load. Aborting.");
 	return this;
 }
 
-void LoadingScreen::render(sf::RenderTarget &renderTarget)
-{
+void LoadingScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 	m_ps->render(renderTarget);
 }
 
-void LoadingScreen::execOnEnter(const Screen *previousScreen)
-{
+void LoadingScreen::execOnEnter(const Screen *previousScreen) {
 	// Particle System 
 	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
 	m_ps->additiveBlendMode = true;
@@ -95,8 +84,8 @@ void LoadingScreen::execOnEnter(const Screen *previousScreen)
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
-    m_ps->addUpdater<particles::ColorUpdater>();
-    m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::ColorUpdater>();
+	m_ps->addUpdater<particles::EulerUpdater>();
 
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Loading"));
@@ -106,13 +95,11 @@ void LoadingScreen::execOnEnter(const Screen *previousScreen)
 	m_thread = std::thread(load, m_levelToLoad, m_mapToLoad, this);
 }
 
-void LoadingScreen::setLoaded()
-{
+void LoadingScreen::setLoaded() {
 	m_isLoaded = true;
 }
 
-void LoadingScreen::execOnExit(const Screen *nextScreen)
-{
+void LoadingScreen::execOnExit(const Screen *nextScreen) {
 	delete m_title;
 	if (m_thread.joinable()) m_thread.join();
 }

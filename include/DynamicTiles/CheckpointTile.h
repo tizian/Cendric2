@@ -3,8 +3,7 @@
 #include "global.h"
 #include "DynamicTile.h"
 
-class CheckpointTile : public DynamicTile
-{
+class CheckpointTile : public DynamicTile {
 public:
 	CheckpointTile(Level* level) : DynamicTile(level) {};
 	void init() override;

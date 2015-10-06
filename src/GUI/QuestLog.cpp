@@ -6,15 +6,13 @@
 float QuestLog::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float QuestLog::HEIGHT = WINDOW_HEIGHT - 250.f;
 
-QuestLog::QuestLog(CharacterCore* core)
-{
+QuestLog::QuestLog(CharacterCore* core) {
 	m_core = core;
 
 	init();
 }
 
-void QuestLog::init()
-{
+void QuestLog::init() {
 	// init window
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
@@ -50,8 +48,7 @@ void QuestLog::init()
 	float yOffset = GUIConstants::TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M;
 	float buttonMargin = 10.f;
 
-	for (auto& it : m_tabs)
-	{
+	for (auto& it : m_tabs) {
 		it.first.setText(EnumNames::getQuestStateName(it.second));
 		it.first.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
@@ -70,53 +67,44 @@ void QuestLog::init()
 	reload();
 }
 
-QuestLog::~QuestLog()
-{
+QuestLog::~QuestLog() {
 	delete m_window;
 	delete m_descriptionWindow;
 	clearAllEntries();
 }
 
-void QuestLog::clearAllEntries()
-{
+void QuestLog::clearAllEntries() {
 	m_completedQuests.clear();
 	m_failedQuests.clear();
 	m_startedQuests.clear();
 	m_selectedEntry = nullptr;
 }
 
-void QuestLog::update(const sf::Time& frameTime)
-{
+void QuestLog::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
 	// check whether an entry was selected
-	for (auto& it : *(m_stateMap[m_currentTab]))
-	{
+	for (auto& it : *(m_stateMap[m_currentTab])) {
 		it.update(frameTime);
-		if (it.isClicked())
-		{
+		if (it.isClicked()) {
 			selectEntry(&it);
 			return;
 		}
 	}
 
-	for (auto& it : m_tabs)
-	{
+	for (auto& it : m_tabs) {
 		it.first.update(frameTime);
-		if (it.first.isClicked() && m_currentTab != it.second)
-		{
+		if (it.first.isClicked() && m_currentTab != it.second) {
 			selectTab(it.second);
 			return;
 		}
 	}
 }
 
-void QuestLog::selectEntry(QuestEntry* entry)
-{
+void QuestLog::selectEntry(QuestEntry* entry) {
 	if (entry == nullptr) return;
 	if (entry == m_selectedEntry) return;
-	if (m_selectedEntry != nullptr)
-	{
+	if (m_selectedEntry != nullptr) {
 		m_selectedEntry->deselect();
 	}
 	m_selectedEntry = entry;
@@ -125,115 +113,95 @@ void QuestLog::selectEntry(QuestEntry* entry)
 	m_selectedQuestID = m_selectedEntry->getQuestID();
 }
 
-bool QuestLog::isVisible() const
-{
+bool QuestLog::isVisible() const {
 	return m_isVisible;
 }
 
-void QuestLog::render(sf::RenderTarget& target)
-{
+void QuestLog::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
 	m_window->render(target);
 	target.draw(m_title);
-	for (auto& it : *(m_stateMap[m_currentTab]))
-	{
+	for (auto& it : *(m_stateMap[m_currentTab])) {
 		it.render(target);
 		// it.renderAfterForeground(target); // uncomment for debug box
 	}
 
-	for (auto& it : m_tabs)
-	{
+	for (auto& it : m_tabs) {
 		it.first.render(target);
 	}
 
 	m_descriptionWindow->render(target);
 }
 
-void QuestLog::showDescription(const std::string& questID)
-{
+void QuestLog::showDescription(const std::string& questID) {
 	m_descriptionWindow->reload(questID);
 	m_descriptionWindow->show();
 }
 
-void QuestLog::hideDescription()
-{
+void QuestLog::hideDescription() {
 	m_descriptionWindow->hide();
 	m_selectedQuestID = "";
 }
 
-void QuestLog::selectTab(QuestState state)
-{
+void QuestLog::selectTab(QuestState state) {
 	hideDescription();
-	if (m_selectedEntry != nullptr)
-	{
+	if (m_selectedEntry != nullptr) {
 		m_selectedEntry->deselect();
 		m_selectedEntry = nullptr;
 	}
 	m_currentTab = state;
-	
+
 	// color selected tab
-	for (auto& it : m_tabs)
-	{
-		if (it.second == m_currentTab)
-		{
+	for (auto& it : m_tabs) {
+		if (it.second == m_currentTab) {
 			it.first.setMainLayerColor(CENDRIC_COLOR_PURPLE);
 		}
-		else
-		{
+		else {
 			it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
 		}
 	}
 }
 
-void QuestLog::reload()
-{
+void QuestLog::reload() {
 	clearAllEntries();
-	
-	for (auto& it : m_core->getData().questStates)
-	{
+
+	for (auto& it : m_core->getData().questStates) {
 		if (m_stateMap[it.second] == nullptr) continue;
 		m_stateMap[it.second]->push_back(QuestEntry(it.first));
-		if (it.first.compare(m_selectedQuestID) == 0 && m_currentTab != it.second)
-		{
+		if (it.first.compare(m_selectedQuestID) == 0 && m_currentTab != it.second) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
 		}
 	}
 
 	// calculate positions
-	for (auto& it : m_stateMap)
-	{
+	for (auto& it : m_stateMap) {
 		float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
 		float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 
-		for (auto& it2 : *it.second)
-		{
+		for (auto& it2 : *it.second) {
 			it2.deselect();
 			it2.setPosition(sf::Vector2f(xOffset, yOffset));
 			yOffset += 1.5f * GUIConstants::CHARACTER_SIZE_M;
-			if (it2.getQuestID().compare(m_selectedQuestID) == 0)
-			{
+			if (it2.getQuestID().compare(m_selectedQuestID) == 0) {
 				selectEntry(&it2);
 			}
 		}
 	}
 }
 
-void QuestLog::show()
-{
+void QuestLog::show() {
 	m_isVisible = true;
 }
 
-void QuestLog::hide()
-{
+void QuestLog::hide() {
 	m_isVisible = false;
 }
 
 // <<< QUEST ENTRY >>>
 
-QuestEntry::QuestEntry(const std::string& questID)
-{
+QuestEntry::QuestEntry(const std::string& questID) {
 	m_questID = questID;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_name.setColor(sf::Color::White);
@@ -242,54 +210,45 @@ QuestEntry::QuestEntry(const std::string& questID)
 	setInputInDefaultView(true);
 }
 
-const std::string& QuestEntry::getQuestID() const
-{
+const std::string& QuestEntry::getQuestID() const {
 	return m_questID;
 }
 
-void QuestEntry::setPosition(const sf::Vector2f& pos)
-{
+void QuestEntry::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	m_name.setPosition(pos);
 }
 
-void QuestEntry::render(sf::RenderTarget& renderTarget)
-{
+void QuestEntry::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_name);
 }
 
-void QuestEntry::onLeftJustPressed()
-{
+void QuestEntry::onLeftJustPressed() {
 	g_inputController->lockAction();
 	m_isClicked = true;
 }
 
-bool QuestEntry::isClicked()
-{
+bool QuestEntry::isClicked() {
 	bool wasClicked = m_isClicked;
 	m_isClicked = false;
 	return wasClicked;
 }
 
-void QuestEntry::select()
-{
+void QuestEntry::select() {
 	m_name.setColor(sf::Color::White);
 	m_isSelected = true;
 }
 
-GameObjectType QuestEntry::getConfiguredType() const
-{
+GameObjectType QuestEntry::getConfiguredType() const {
 	return GameObjectType::_Interface;
 }
 
-void QuestEntry::deselect()
-{
+void QuestEntry::deselect() {
 	m_name.setColor(CENDRIC_COLOR_LIGHT_GREY);
 	m_isSelected = false;
 }
 
-bool QuestEntry::isSelected() const
-{
+bool QuestEntry::isSelected() const {
 	return m_isSelected;
 }
 

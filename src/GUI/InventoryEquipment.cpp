@@ -8,10 +8,9 @@ float InventoryEquipment::HEIGHT = 7 * (InventorySlot::SIDE_LENGTH + MARGIN) - M
 float InventoryEquipment::TOP = 100.f;
 float InventoryEquipment::LEFT = 50.f;
 
-InventoryEquipment::InventoryEquipment(CharacterCore* core)
-{
+InventoryEquipment::InventoryEquipment(CharacterCore* core) {
 	m_core = core;
-	
+
 	// init window
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
@@ -21,86 +20,69 @@ InventoryEquipment::InventoryEquipment(CharacterCore* core)
 		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
 }
 
-InventoryEquipment::~InventoryEquipment()
-{
+InventoryEquipment::~InventoryEquipment() {
 	m_slots.clear();
 	delete m_window;
 }
 
-void InventoryEquipment::update(const sf::Time& frameTime)
-{
+void InventoryEquipment::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
 	// check whether an item was selected
-	for (auto& it : m_slots)
-	{
+	for (auto& it : m_slots) {
 		it.second.update(frameTime);
 	}
 }
 
-void InventoryEquipment::render(sf::RenderTarget& target)
-{
+void InventoryEquipment::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
 	m_window->render(target);
-	for (auto& it : m_slots)
-	{
+	for (auto& it : m_slots) {
 		it.second.render(target);
 	}
 }
 
-void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight)
-{
+void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 	if (m_slots.find(type) == m_slots.end()) return;
-	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2)
-	{
+	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2) {
 		m_slots.at(ItemType::Equipment_ring_1).highlight(highlight);
 		m_slots.at(ItemType::Equipment_ring_2).highlight(highlight);
 	}
-	else
-	{
+	else {
 		m_slots.at(type).highlight(highlight);
 	}
 }
 
-bool InventoryEquipment::notifyEquipmentDrop(const InventorySlotClone* item)
-{
+bool InventoryEquipment::notifyEquipmentDrop(const InventorySlotClone* item) {
 	if (item == nullptr || m_slots.find(item->getItemType()) == m_slots.end()) return false;
-	if (item->getItemType() == ItemType::Equipment_ring_1 || item->getItemType() == ItemType::Equipment_ring_2)
-	{
-		if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox())))
-		{
+	if (item->getItemType() == ItemType::Equipment_ring_1 || item->getItemType() == ItemType::Equipment_ring_2) {
+		if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
 			m_core->equipItem(item->getItemID(), ItemType::Equipment_ring_1);
 			return true;
 		}
-		else if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox())))
-		{
+		else if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
 			m_core->equipItem(item->getItemID(), ItemType::Equipment_ring_2);
 			return true;
 		}
 	}
-	else if (item->getBoundingBox()->intersects(*(m_slots.at(item->getItemType()).getBoundingBox())))
-	{
+	else if (item->getBoundingBox()->intersects(*(m_slots.at(item->getItemType()).getBoundingBox()))) {
 		m_core->equipItem(item->getItemID(), item->getItemType());
 		return true;
 	}
 	return false;
 }
 
-InventorySlot* InventoryEquipment::getSelectedSlot()
-{
-	for (auto& it : m_slots)
-	{
-		if (it.second.isClicked())
-		{
+InventorySlot* InventoryEquipment::getSelectedSlot() {
+	for (auto& it : m_slots) {
+		if (it.second.isClicked()) {
 			return &it.second;
 		}
 	}
 	return nullptr;
 }
 
-void InventoryEquipment::reload()
-{
+void InventoryEquipment::reload() {
 	m_slots.clear();
 
 	const sf::Texture* tex = g_resourceManager->getTexture(ResourceID::Texture_equipmentplaceholders);
@@ -118,14 +100,11 @@ void InventoryEquipment::reload()
 	float xOffset = LEFT + ((WIDTH - InventorySlot::SIDE_LENGTH) / 2.f);
 	float yOffset = TOP + YOFFSET;
 
-	for (auto& it : types)
-	{
-		if (m_core->getEquippedItem(it) == nullptr)
-		{
+	for (auto& it : types) {
+		if (m_core->getEquippedItem(it) == nullptr) {
 			m_slots.insert({ it, InventorySlot(tex, texPos) });
 		}
-		else
-		{
+		else {
 			m_slots.insert({ it, InventorySlot(*(m_core->getEquippedItem(it)), -1) });
 		}
 		texPos.x += 50;
@@ -135,12 +114,10 @@ void InventoryEquipment::reload()
 	}
 }
 
-void InventoryEquipment::show()
-{
+void InventoryEquipment::show() {
 	m_isVisible = true;
 }
 
-void InventoryEquipment::hide()
-{
+void InventoryEquipment::hide() {
 	m_isVisible = false;
 }

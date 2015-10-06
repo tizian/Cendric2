@@ -2,42 +2,35 @@
 
 #define SPELL_OFFSET 10.f
 
-WindGustSpell::WindGustSpell() : Spell()
-{
+WindGustSpell::WindGustSpell() : Spell() {
 }
 
-void WindGustSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
-{
+void WindGustSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	Spell::load(bean, mob, target);
 	loadParticleSystem();
 }
 
-void WindGustSpell::update(const sf::Time& frameTime)
-{
+void WindGustSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
 	m_ps->update(frameTime);
 	updateParticleSystemPosition();
 }
 
-void WindGustSpell::render(sf::RenderTarget& target)
-{
+void WindGustSpell::render(sf::RenderTarget& target) {
 	Spell::render(target);
 	m_ps->render(target);
 }
 
-const sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const
-{
+const sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(10.f, 20.f);
 }
 
-bool WindGustSpell::getConfiguredRotateSprite() const
-{
+bool WindGustSpell::getConfiguredRotateSprite() const {
 	return false;
 }
 
-void WindGustSpell::loadParticleSystem()
-{
+void WindGustSpell::loadParticleSystem() {
 	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 500.0f / 5.0f;
@@ -73,21 +66,18 @@ void WindGustSpell::loadParticleSystem()
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
-    m_ps->addUpdater<particles::ColorUpdater>();
-    m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::ColorUpdater>();
+	m_ps->addUpdater<particles::EulerUpdater>();
 }
 
-void WindGustSpell::updateParticleSystemPosition()
-{
-	if (!m_mob->getIsFacingRight())
-	{
+void WindGustSpell::updateParticleSystemPosition() {
+	if (!m_mob->getIsFacingRight()) {
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
 		m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width - SPELL_OFFSET;
 		m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
 	}
-	else
-	{
+	else {
 		m_velGenerator->minAngle = 90 + -20.f;
 		m_velGenerator->maxAngle = 90 + 20.f;
 		m_pointGenerator->center.x = getPosition().x + SPELL_OFFSET;

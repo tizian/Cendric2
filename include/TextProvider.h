@@ -7,8 +7,7 @@
 
 #include <map>
 
-class TextProvider
-{
+class TextProvider {
 public:
 	// clears the map & loads the translations using the current language
 	void reload();

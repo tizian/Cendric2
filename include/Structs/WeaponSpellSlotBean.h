@@ -3,8 +3,7 @@
 #include "global.h"
 #include "Enums/SpellType.h"
 
-struct WeaponSpellSlotBean
-{
+struct WeaponSpellSlotBean {
 	SpellType type;
 	int modifierCount;
 };

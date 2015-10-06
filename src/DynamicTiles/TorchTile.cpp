@@ -1,19 +1,16 @@
 #include "DynamicTiles/TorchTile.h"
 #include "Spell.h"
 
-TorchTile::TorchTile(Level* level) : DynamicTile(level)
-{
+TorchTile::TorchTile(Level* level) : DynamicTile(level) {
 	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(140.f, 200.f)));
 }
 
-void TorchTile::init()
-{
+void TorchTile::init() {
 	setSpriteOffset(sf::Vector2f(-10.f, -static_cast<float>(m_tileSize.y) / 2));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x) / 2.f, static_cast<float>(m_tileSize.y)));
 }
 
-void TorchTile::load(int skinNr)
-{
+void TorchTile::load(int skinNr) {
 	m_isCollidable = false;
 	int textureHeight = 2 * m_tileSize.y;
 
@@ -40,17 +37,14 @@ void TorchTile::load(int skinNr)
 	playCurrentAnimation(true);
 }
 
-void TorchTile::onHit(Spell* spell)
-{
-	switch (spell->getSpellID())
-	{
+void TorchTile::onHit(Spell* spell) {
+	switch (spell->getSpellID()) {
 	case SpellID::Chop:
 		spell->setDisposed();
 		setDisposed();
 		break;
 	case SpellID::IceBall:
-		if (m_state == GameObjectState::Burning)
-		{
+		if (m_state == GameObjectState::Burning) {
 			m_state = GameObjectState::Idle;
 			m_lightObject->setVisible(false);
 			setCurrentAnimation(getAnimation(m_state), false);
@@ -58,8 +52,7 @@ void TorchTile::onHit(Spell* spell)
 		}
 		break;
 	case SpellID::FireBall:
-		if (m_state == GameObjectState::Idle)
-		{
+		if (m_state == GameObjectState::Idle) {
 			m_state = GameObjectState::Burning;
 			m_lightObject->setVisible(true);
 			setCurrentAnimation(getAnimation(m_state), false);
@@ -71,20 +64,17 @@ void TorchTile::onHit(Spell* spell)
 	}
 }
 
-void TorchTile::setPosition(const sf::Vector2f& pos)
-{
+void TorchTile::setPosition(const sf::Vector2f& pos) {
 	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	DynamicTile::setPosition(pos);
 }
 
-void TorchTile::setDisposed()
-{
+void TorchTile::setDisposed() {
 	DynamicTile::setDisposed();
 	m_lightObject->setDisposed();
 }
 
-void TorchTile::setScreen(Screen* screen)
-{
+void TorchTile::setScreen(Screen* screen) {
 	DynamicTile::setScreen(screen);
 	screen->addObject(m_lightObject);
 }

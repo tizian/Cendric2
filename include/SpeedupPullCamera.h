@@ -3,8 +3,7 @@
 #include "global.h"
 #include "BackgroundLayer.h"
 
-class SpeedupPullCamera
-{
+class SpeedupPullCamera {
 public:
 	void update(const sf::Time& frameTime);
 

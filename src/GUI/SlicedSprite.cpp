@@ -1,8 +1,7 @@
 #include "GUI/SlicedSprite.h"
 #include "Logger.h"
 
-SlicedSprite::SlicedSprite()
-{
+SlicedSprite::SlicedSprite() {
 	m_width = 0;
 	m_height = 0;
 	m_leftSlice = 0;
@@ -13,8 +12,7 @@ SlicedSprite::SlicedSprite()
 	m_color = sf::Color::White;
 }
 
-SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height)
-{
+SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height) {
 	m_texture = tex;
 	m_width = width;
 	m_height = height;
@@ -36,20 +34,17 @@ SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, float width
 	init();
 }
 
-void SlicedSprite::setSize(float width, float height)
-{
+void SlicedSprite::setSize(float width, float height) {
 	m_width = width;
 	m_height = height;
 	init();
 }
 
-void SlicedSprite::setTexture(sf::Texture *texture)
-{
+void SlicedSprite::setTexture(sf::Texture *texture) {
 	m_texture = texture;
 }
 
-void SlicedSprite::setColor(const sf::Color &color)
-{
+void SlicedSprite::setColor(const sf::Color &color) {
 	m_color = color;
 
 	for (unsigned int i = 0; i < m_vertices.getVertexCount(); ++i) {
@@ -57,8 +52,7 @@ void SlicedSprite::setColor(const sf::Color &color)
 	}
 }
 
-void SlicedSprite::setSlicing(float left, float right, float top, float bottom)
-{
+void SlicedSprite::setSlicing(float left, float right, float top, float bottom) {
 	m_leftSlice = left;
 	m_rightSlice = right;
 	m_topSlice = top;
@@ -66,20 +60,17 @@ void SlicedSprite::setSlicing(float left, float right, float top, float bottom)
 	init();
 }
 
-sf::FloatRect SlicedSprite::getLocalBounds() const
-{
+sf::FloatRect SlicedSprite::getLocalBounds() const {
 	return m_bounds;
 }
 
-void SlicedSprite::draw(sf::RenderTarget &target, sf::RenderStates states) const
-{
+void SlicedSprite::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = m_texture;
 	target.draw(m_vertices, states);
 }
 
-void SlicedSprite::init()
-{
+void SlicedSprite::init() {
 	m_vertices.clear();
 
 	if (m_leftSlice + m_rightSlice > m_width || m_topSlice + m_bottomSlice > m_height) {

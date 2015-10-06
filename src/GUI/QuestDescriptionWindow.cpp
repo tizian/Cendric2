@@ -8,9 +8,8 @@ QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Wind
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	WindowOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
-	GUIConstants::BACK_COLOR, 
-	GUIConstants::ORNAMENT_COLOR) 
-{
+	GUIConstants::BACK_COLOR,
+	GUIConstants::ORNAMENT_COLOR) {
 	m_core = core;
 
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -25,14 +24,12 @@ QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Wind
 	setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET + QuestLog::WIDTH, GUIConstants::TOP));
 }
 
-void QuestDescriptionWindow::reload(const std::string& questID)
-{
+void QuestDescriptionWindow::reload(const std::string& questID) {
 	m_collectiblesTexts.clear();
 	m_conditionTexts.clear();
 	m_targetsTexts.clear();
 	const QuestData* data = m_core->getQuestData(questID);
-	if (data == nullptr)
-	{
+	if (data == nullptr) {
 		m_titleText.setString(g_textProvider->getText("Unknown"));
 		m_descriptionText.setString(g_textProvider->getText("Unknown"));
 		setPosition(getPosition());
@@ -41,37 +38,33 @@ void QuestDescriptionWindow::reload(const std::string& questID)
 
 	m_titleText.setString(g_textProvider->getText(data->title));
 	m_descriptionText.setString(g_textProvider->getCroppedText(
-		data->description, 
-		GUIConstants::CHARACTER_SIZE_S, 
+		data->description,
+		GUIConstants::CHARACTER_SIZE_S,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
 	QuestState currentState = m_core->getQuestState(questID);
-	if (currentState == QuestState::Completed)
-	{
+	if (currentState == QuestState::Completed) {
 		m_stateText.setString(g_textProvider->getText(EnumNames::getQuestStateName(currentState)));
 		m_stateText.setColor(sf::Color::Green);
 	}
-	else if (currentState == QuestState::Failed)
-	{
+	else if (currentState == QuestState::Failed) {
 		m_stateText.setString(g_textProvider->getText(EnumNames::getQuestStateName(currentState)));
 		m_stateText.setColor(sf::Color::Red);
 	}
-	else
-	{
+	else {
 		m_stateText.setString("");
 	}
 
-	for (auto& it : data->targets)
-	{
+	for (auto& it : data->targets) {
 		std::wstring target = L"";
 		target.append(g_textProvider->getText(it.first));
 		target.append(L": ");
 
 		int goal = it.second;
-		int progress = (m_core->getQuestState(questID) == QuestState::Completed) ? 
-			goal : 
-			m_core->getNumberOfTargetsKilled(questID, it.first);
-	
+		int progress = (m_core->getQuestState(questID) == QuestState::Completed) ?
+		goal :
+			 m_core->getNumberOfTargetsKilled(questID, it.first);
+
 		target.append(to_wstring(progress) + L"/" + to_wstring(goal));
 
 		BitmapText targetText;
@@ -81,19 +74,16 @@ void QuestDescriptionWindow::reload(const std::string& questID)
 		m_targetsTexts.push_back(targetText);
 	}
 
-	for (auto& it : data->collectibles)
-	{
+	for (auto& it : data->collectibles) {
 		std::wstring collectible = L"";
 		collectible.append(g_textProvider->getText(it.first));
 		collectible.append(L": ");
 		int progress = 0;
 		int goal = it.second;
-		if (m_core->getQuestState(questID) == QuestState::Completed)
-		{
+		if (m_core->getQuestState(questID) == QuestState::Completed) {
 			progress = goal;
 		}
-		else if (m_core->getData().items.find(it.first) != m_core->getData().items.end())
-		{
+		else if (m_core->getData().items.find(it.first) != m_core->getData().items.end()) {
 			progress = m_core->getData().items.at(it.first);
 		}
 		collectible.append(to_wstring(progress) + L"/" + to_wstring(goal));
@@ -105,8 +95,7 @@ void QuestDescriptionWindow::reload(const std::string& questID)
 		m_collectiblesTexts.push_back(collectibleText);
 	}
 
-	for (auto& it : data->conditions)
-	{
+	for (auto& it : data->conditions) {
 		BitmapText conditionText;
 
 		std::wstring condition = L"";
@@ -115,14 +104,12 @@ void QuestDescriptionWindow::reload(const std::string& questID)
 
 		if ((m_core->getQuestState(questID) == QuestState::Completed)
 			||
-		(m_core->getData().questConditionProgress.find(questID) != m_core->getData().questConditionProgress.end() &&
-			m_core->getData().questConditionProgress.at(questID).find(it) != m_core->getData().questConditionProgress.at(questID).end()))
-		{
+			(m_core->getData().questConditionProgress.find(questID) != m_core->getData().questConditionProgress.end() &&
+			m_core->getData().questConditionProgress.at(questID).find(it) != m_core->getData().questConditionProgress.at(questID).end())) {
 			condition.append(g_textProvider->getText("Done"));
 			conditionText.setColor(sf::Color::Green);
 		}
-		else
-		{
+		else {
 			condition.append(g_textProvider->getText("Pending"));
 			conditionText.setColor(sf::Color::Red);
 		}
@@ -135,18 +122,15 @@ void QuestDescriptionWindow::reload(const std::string& questID)
 	setPosition(getPosition());
 }
 
-void QuestDescriptionWindow::show()
-{
+void QuestDescriptionWindow::show() {
 	m_isVisible = true;
 }
 
-void QuestDescriptionWindow::hide()
-{
+void QuestDescriptionWindow::hide() {
 	m_isVisible = false;
 }
 
-void QuestDescriptionWindow::setPosition(const sf::Vector2f& position)
-{
+void QuestDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
 	sf::Vector2f pos(position);
 	pos.y += GUIConstants::TEXT_OFFSET;
@@ -154,29 +138,25 @@ void QuestDescriptionWindow::setPosition(const sf::Vector2f& position)
 
 	m_titleText.setPosition(position.x + ((WIDTH - m_titleText.getLocalBounds().width) / 2.f), pos.y);
 	pos.y += 2 * m_titleText.getLocalBounds().height;
-	
+
 	m_descriptionText.setPosition(pos);
 
 	pos.y += GUIConstants::TEXT_OFFSET + m_descriptionText.getLocalBounds().height;
 
-	if (!m_stateText.getString().isEmpty())
-	{
+	if (!m_stateText.getString().isEmpty()) {
 		m_stateText.setPosition(pos.x, pos.y);
 		pos.y += GUIConstants::TEXT_OFFSET + m_stateText.getLocalBounds().height;
 	}
 
-	for (auto& it : m_targetsTexts)
-	{
+	for (auto& it : m_targetsTexts) {
 		it.setPosition(pos.x, pos.y);
 		pos.y += 2 * it.getBounds().height;
 	}
-	for (auto& it : m_collectiblesTexts)
-	{
+	for (auto& it : m_collectiblesTexts) {
 		it.setPosition(pos.x, pos.y);
 		pos.y += 2 * it.getBounds().height;
 	}
-	for (auto& it : m_conditionTexts)
-	{
+	for (auto& it : m_conditionTexts) {
 		it.setPosition(pos.x, pos.y);
 		pos.y += 2 * it.getBounds().height;
 	}
@@ -185,23 +165,19 @@ void QuestDescriptionWindow::setPosition(const sf::Vector2f& position)
 	setHeight(pos.y - position.y);
 }
 
-void QuestDescriptionWindow::render(sf::RenderTarget& renderTarget)
-{
+void QuestDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	if (!m_isVisible) return;
 	Window::render(renderTarget);
 	renderTarget.draw(m_titleText);
 	renderTarget.draw(m_descriptionText);
 	renderTarget.draw(m_stateText);
-	for (auto& it : m_targetsTexts)
-	{
+	for (auto& it : m_targetsTexts) {
 		renderTarget.draw(it);
 	}
-	for (auto& it : m_collectiblesTexts)
-	{
+	for (auto& it : m_collectiblesTexts) {
 		renderTarget.draw(it);
 	}
-	for (auto& it : m_conditionTexts)
-	{
+	for (auto& it : m_conditionTexts) {
 		renderTarget.draw(it);
 	}
 }

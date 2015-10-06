@@ -8,8 +8,7 @@
 #include "Spells/IceBallSpell.h"
 
 // a class that creates iceball spells
-class IceBallSpellCreator : public SpellCreator
-{
+class IceBallSpellCreator : public SpellCreator {
 public:
 	IceBallSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
 

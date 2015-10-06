@@ -5,8 +5,7 @@
 #include "Logger.h"
 #include "Screen.h"
 
-class ErrorScreen : public Screen
-{
+class ErrorScreen : public Screen {
 public:
 	ErrorScreen(CharacterCore* core);
 

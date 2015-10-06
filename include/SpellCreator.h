@@ -10,8 +10,7 @@
 class LevelScreen;
 
 // a class that spawns spells of a certain type - directly to the screen
-class SpellCreator
-{
+class SpellCreator {
 public:
 	SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
 	virtual ~SpellCreator();

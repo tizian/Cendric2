@@ -1,7 +1,6 @@
 #pragma once
 
-enum class ResourceID
-{
+enum class ResourceID {
 	Void,
 
 	BitmapFont_default,

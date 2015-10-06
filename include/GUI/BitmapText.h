@@ -4,8 +4,7 @@
 
 #include "BitmapFont.h"
 
-class BitmapText : public sf::Drawable, public::sf::Transformable
-{
+class BitmapText : public sf::Drawable, public::sf::Transformable {
 public:
 	BitmapText();
 	BitmapText(const sf::String &string, const BitmapFont &font);

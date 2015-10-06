@@ -9,12 +9,11 @@
 #include "MapLoader.h"
 #include "ResourceManager.h"
 
-class Map
-{
+class Map {
 public:
 	Map();
 	~Map();
-	
+
 	// loads a .dricmap file
 	bool load(const std::string& id);
 	void loadAfterMainChar(Screen* screen);
@@ -26,7 +25,7 @@ public:
 	void drawForeground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
 	// deletes the resources
 	void dispose();
-	
+
 	// checks collision with the collidable grid of that map
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;

@@ -9,8 +9,7 @@
 #include "GUI/DialogueWindow.h"
 #include "MapInterface.h"
 
-class MapScreen : public GameScreen
-{
+class MapScreen : public GameScreen {
 public:
 	MapScreen(const std::string& mapID, CharacterCore* core);
 	// called by the loadingScreen

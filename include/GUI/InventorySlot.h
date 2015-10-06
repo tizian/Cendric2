@@ -7,8 +7,7 @@
 #include "ResourceManager.h"
 #include "Item.h"
 
-class InventorySlot : public GameObject
-{
+class InventorySlot : public GameObject {
 public:
 	// constructor for filled slots. if amount is < 0, the amount text won't show.
 	InventorySlot(const Item& item, int amount);
@@ -28,7 +27,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void onLeftJustPressed() override;
 	void onRightClick() override;
- 
+
 	void setPosition(const sf::Vector2f& pos) override;
 	void setItemType(ItemType type);
 
@@ -54,6 +53,6 @@ private:
 
 	sf::RectangleShape m_inside;
 	sf::RectangleShape m_outside;
-	
+
 	BitmapText m_amountText;
 };

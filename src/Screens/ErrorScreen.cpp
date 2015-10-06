@@ -2,11 +2,9 @@
 
 using namespace std;
 
-ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core)
-{
+ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	ErrorID error = g_resourceManager->pollError()->first;
-	switch (error)
-	{
+	switch (error) {
 	case ErrorID::Error_fileNotFound:
 		m_screenResource = ResourceID::Texture_screen_error_fileNotFound;
 		break;
@@ -21,34 +19,29 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core)
 	}
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(m_screenResource)));
 	m_errorText = BitmapText(
-		g_resourceManager->pollError()->second, 
+		g_resourceManager->pollError()->second,
 		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
 	m_errorText.setColor(sf::Color::Red);
 	m_errorText.setPosition(sf::Vector2f(64, 518));
 	m_errorText.setCharacterSize(12);
 }
 
-void ErrorScreen::render(sf::RenderTarget &renderTarget)
-{
+void ErrorScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(m_errorText);
 }
 
-Screen* ErrorScreen::update(const sf::Time& frameTime)
-{
-	if (g_inputController->isKeyActive(Key::Escape))
-	{
+Screen* ErrorScreen::update(const sf::Time& frameTime) {
+	if (g_inputController->isKeyActive(Key::Escape)) {
 		m_requestQuit = true;
 	}
-	return this; 
+	return this;
 }
 
-void ErrorScreen::execOnEnter(const Screen *previousScreen)
-{
+void ErrorScreen::execOnEnter(const Screen *previousScreen) {
 }
 
-void ErrorScreen::execOnExit(const Screen *nextScreen)
-{
+void ErrorScreen::execOnExit(const Screen *nextScreen) {
 	g_resourceManager->deleteResource(m_screenResource);
 }

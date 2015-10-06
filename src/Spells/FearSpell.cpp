@@ -1,13 +1,11 @@
 #include "Spells/FearSpell.h"
 
-FearSpell::FearSpell(const sf::Time& fearedDuration, int strength) : Spell()
-{
+FearSpell::FearSpell(const sf::Time& fearedDuration, int strength) : Spell() {
 	m_fearedDuration = fearedDuration;
 	m_strength = strength;
 }
 
-void FearSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
-{
+void FearSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation spellAnimation;
@@ -26,12 +24,9 @@ void FearSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const s
 	Spell::load(bean, mob, target);
 }
 
-void FearSpell::execOnHit(LevelMovableGameObject *target)
-{
-	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) 
-	{
-		if (enemy->getMentalStrength() <= m_strength)
-		{
+void FearSpell::execOnHit(LevelMovableGameObject *target) {
+	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
+		if (enemy->getMentalStrength() <= m_strength) {
 			enemy->setFeared(m_fearedDuration);
 			setDisposed();
 		}

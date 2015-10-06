@@ -2,8 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class CircleSector : public sf::Drawable, public::sf::Transformable
-{
+class CircleSector : public sf::Drawable, public::sf::Transformable {
 public:
 	CircleSector();
 	CircleSector(float radius);
@@ -27,10 +26,10 @@ private:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 	sf::Texture *m_texture = nullptr;
-	
+
 	float m_radius;
 	float m_angle;
-	
+
 	int m_pointCount;
 
 	sf::Color			m_color;

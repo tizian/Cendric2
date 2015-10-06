@@ -22,8 +22,7 @@
 class Level;
 
 // helper class used by the level to load dynamic tiles, level items and enemies
-class LevelLoader
-{
+class LevelLoader {
 public:
 	// loads dynamic tiles out of level data and adds them directly to the screen. An exception are dynamic chest tiles.
 	void loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const;

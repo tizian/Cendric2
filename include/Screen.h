@@ -7,16 +7,14 @@
 #include "ResourceManager.h"
 #include "CharacterCore.h"
 
-#include "Enums/ScreenID.h"
 #include "GUI/BitmapText.h"
 
 class ScreenManager;
 
-class Screen
-{
+class Screen {
 public:
 	Screen(CharacterCore* core);
-    virtual ~Screen() {}
+	virtual ~Screen() {}
 
 	virtual Screen* update(const sf::Time& frameTime) = 0;
 	virtual void render(sf::RenderTarget& renderTarget) = 0;
@@ -64,7 +62,7 @@ protected:
 	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
 	// render all objects after foreground of type 'type'
 	void renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget);
-	
+
 	CharacterCore* m_characterCore = nullptr;
 	bool m_requestQuit = false;
 

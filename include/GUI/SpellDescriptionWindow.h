@@ -8,8 +8,7 @@
 #include "Structs/SpellBean.h"
 #include "GUI/GUIConstants.h"
 
-class SpellDescriptionWindow : public Window
-{
+class SpellDescriptionWindow : public Window {
 public:
 	SpellDescriptionWindow();
 

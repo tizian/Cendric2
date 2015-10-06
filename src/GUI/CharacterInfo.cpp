@@ -4,8 +4,7 @@ int round_int(float r) {
 	return static_cast<int>((r > 0.0) ? (r + 0.5) : (r - 0.5));
 }
 
-CharacterInfo::CharacterInfo(const AttributeBean* attributes)
-{
+CharacterInfo::CharacterInfo(const AttributeBean* attributes) {
 	m_attributes = attributes;
 
 	// init text
@@ -63,20 +62,16 @@ CharacterInfo::CharacterInfo(const AttributeBean* attributes)
 		GUIConstants::ORNAMENT_COLOR);
 }
 
-CharacterInfo::~CharacterInfo()
-{
+CharacterInfo::~CharacterInfo() {
 	delete m_window;
 }
 
-bool CharacterInfo::isVisible() const
-{
+bool CharacterInfo::isVisible() const {
 	return m_isVisible;
 }
 
-void CharacterInfo::render(sf::RenderTarget& target) const
-{
-	if (m_isVisible)
-	{
+void CharacterInfo::render(sf::RenderTarget& target) const {
+	if (m_isVisible) {
 		m_window->render(target);
 		target.draw(m_title);
 		target.draw(m_namesText);
@@ -84,8 +79,7 @@ void CharacterInfo::render(sf::RenderTarget& target) const
 	}
 }
 
-void CharacterInfo::reload()
-{
+void CharacterInfo::reload() {
 	// update attributes
 	std::wstring attributes = L"";
 	attributes.append(std::to_wstring(m_attributes->currentHealthPoints));
@@ -150,13 +144,11 @@ void CharacterInfo::reload()
 	m_window->setWidth(3 * GUIConstants::TEXT_OFFSET + m_namesText.getLocalBounds().width + m_attributeText.getLocalBounds().width);
 }
 
-void CharacterInfo::show()
-{
+void CharacterInfo::show() {
 	m_isVisible = true;
 	reload();
 }
 
-void CharacterInfo::hide()
-{
+void CharacterInfo::hide() {
 	m_isVisible = false;
 }

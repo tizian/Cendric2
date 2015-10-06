@@ -7,8 +7,7 @@
 #include "Screens/MapScreen.h"
 #include "Screens/LevelScreen.h"
 
-class LoadingScreen : public Screen
-{
+class LoadingScreen : public Screen {
 public:
 	LoadingScreen(CharacterCore* core);
 

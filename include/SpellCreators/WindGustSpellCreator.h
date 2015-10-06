@@ -8,8 +8,7 @@
 #include "Spells/WindGustSpell.h"
 
 // a class that creates windgust spells
-class WindGustSpellCreator : public SpellCreator
-{
+class WindGustSpellCreator : public SpellCreator {
 public:
 	WindGustSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
 	std::string getStrengthModifierName() const override;

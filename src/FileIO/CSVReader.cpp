@@ -9,8 +9,7 @@ using namespace std;
 // last field in the CSV p is the start position of the field sep is the
 // separator used, i.e. comma or semicolon newline says whether the field ends
 // with a newline or with a comma
-wchar_t* CSVReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd) const
-{
+wchar_t* CSVReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd) const {
 	*escapedEnd = nullptr;
 	*newline = false;
 
@@ -57,13 +56,11 @@ wchar_t* CSVReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd
 
 // Parses the CSV data and constructs a StringTable
 // from the fields in it.
-void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const
-{
+void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const {
 	table.clear();
 
 	// Return immediately if the CSV data is empty.
-	if (!csvData || !csvData[0])
-	{
+	if (!csvData || !csvData[0]) {
 		return;
 	}
 
@@ -85,10 +82,8 @@ void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const
 		// escaped to ". After that csvData is set to the part immediately
 		// after the closing double-quote, so anything after the closing
 		// double-quote is added as well (but unescaped).
-		if (escapedEnd)
-		{
-			for (const wchar_t *ii = csvData + 1; ii != escapedEnd; ii++)
-			{
+		if (escapedEnd) {
+			for (const wchar_t *ii = csvData + 1; ii != escapedEnd; ii++) {
 				field += *ii;
 				if ('"' == ii[0] && '"' == ii[1])
 					ii++;
@@ -104,10 +99,8 @@ void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const
 			field += csvData;
 
 		// If the field ends with a newline, add next row to the StringTable.
-		if (newline)
-		{
-			if (field.empty())
-			{
+		if (newline) {
+			if (field.empty()) {
 				table.back().pop_back();
 			}
 			table.resize(table.size() + 1);
@@ -121,8 +114,7 @@ void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const
 	// If the CSV ends with a newline, then there is an empty row added
 	// (actually it's a row with a single empty string). We trim that empty
 	// row here.
-	if (table.back().empty() || (table.back().size() == 1 && table.back().front().empty()))
-	{
+	if (table.back().empty() || (table.back().size() == 1 && table.back().front().empty())) {
 		table.pop_back();
 	}
 }

@@ -5,8 +5,7 @@
 
 class SimulatedWaterTile;
 
-class FrozenWaterTile : public DynamicTile
-{
+class FrozenWaterTile : public DynamicTile {
 public:
 	FrozenWaterTile(SimulatedWaterTile *waterTile, int waterTileIndex);
 	void init() override;

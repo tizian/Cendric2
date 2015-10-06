@@ -5,12 +5,11 @@
 #include "global.h"
 #include "Enums/Key.h"
 
-class InputController
-{
+class InputController {
 public:
 	InputController();
 	~InputController();
-	
+
 	// refreshes the keymap
 	void update();
 	// initializes the keymaps
@@ -35,7 +34,7 @@ public:
 	bool isRightPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const;
 	bool isLeftJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const;
 	bool isRightJustPressed(const sf::FloatRect* boundingBox, bool useDefaultView) const;
-	
+
 	bool isMousePressedLeft() const;
 	bool isMousePressedRight() const;
 	bool isMouseJustPressedLeft() const;
@@ -74,7 +73,7 @@ private:
 
 	// current window size. Used for mouse position and dependent on resize events
 	sf::Vector2i m_windowSize;
-	
+
 	// is the window currently focused? we only count input events if it is so!
 	bool m_isWindowFocused;
 	// the mouse position gets calculated once in every frame. This is the mouse position according to the current view

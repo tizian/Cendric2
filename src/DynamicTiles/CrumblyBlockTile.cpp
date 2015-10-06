@@ -1,14 +1,12 @@
 #include "DynamicTiles/CrumblyBlockTile.h"
 #include "Spell.h"
 
-void CrumblyBlockTile::init()
-{
+void CrumblyBlockTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
 }
 
-void CrumblyBlockTile::load(int skinNr)
-{
+void CrumblyBlockTile::load(int skinNr) {
 	m_isCollidable = true;
 
 	Animation idleAnimation;
@@ -34,26 +32,20 @@ void CrumblyBlockTile::load(int skinNr)
 	playCurrentAnimation(true);
 }
 
-void CrumblyBlockTile::update(const sf::Time& frameTime)
-{
-	if (m_state == GameObjectState::Crumbling)
-	{
+void CrumblyBlockTile::update(const sf::Time& frameTime) {
+	if (m_state == GameObjectState::Crumbling) {
 		m_crumblingTime = m_crumblingTime - frameTime;
-		if (m_crumblingTime < sf::Time::Zero)
-		{
+		if (m_crumblingTime < sf::Time::Zero) {
 			setDisposed();
 		}
 	}
 	DynamicTile::update(frameTime);
 }
 
-void CrumblyBlockTile::onHit(Spell* spell)
-{
-	switch (spell->getSpellID())
-	{
+void CrumblyBlockTile::onHit(Spell* spell) {
+	switch (spell->getSpellID()) {
 	case SpellID::Chop:
-		if (m_state == GameObjectState::Idle)
-		{
+		if (m_state == GameObjectState::Idle) {
 			m_state = GameObjectState::Crumbling;
 			setCurrentAnimation(getAnimation(m_state), false);
 			m_isCollidable = false;

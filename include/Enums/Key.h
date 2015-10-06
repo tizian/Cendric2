@@ -1,7 +1,6 @@
 #pragma once
 
-enum class Key
-{
+enum class Key {
 	VOID,
 	Escape,
 	Quicksave,

@@ -4,24 +4,20 @@
 
 using namespace std;
 
-bool CharacterCoreReader::checkData(CharacterCoreData& data) const
-{
-	if (data.currentMapPosition.x < 0 || data.currentMapPosition.y < 0)
-	{
+bool CharacterCoreReader::checkData(CharacterCoreData& data) const {
+	if (data.currentMapPosition.x < 0 || data.currentMapPosition.y < 0) {
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : map position negative");
 		return false;
 	}
-	if (data.currentMap.empty())
-	{
+	if (data.currentMap.empty()) {
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : map not resolved");
 		return false;
 	}
-	if (data.gold < 0)
-	{
+	if (data.gold < 0) {
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : gold cannot be negative");
 		return false;
 	}
-	if (data.attributes.maxHealthPoints < 0 
+	if (data.attributes.maxHealthPoints < 0
 		|| data.attributes.healthRegenerationPerS < 0
 		|| data.attributes.haste < 0
 		|| data.attributes.critical < 0
@@ -29,52 +25,43 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const
 		|| data.attributes.damageFire < 0
 		|| data.attributes.damageIce < 0
 		|| data.attributes.damageShadow < 0
-		|| data.attributes.damageLight < 0)
-	{
+		|| data.attributes.damageLight < 0) {
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : (some) attributes cannot be negative");
 		return false;
 	}
-	if (data.equippedWeaponSlots.size() > 5)
-	{
+	if (data.equippedWeaponSlots.size() > 5) {
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : there can't be more spell slots than 5 on a weapon");
 		return false;
 	}
-	for (auto& it : data.questStates)
-	{
-		if (it.first.empty())
-		{
+	for (auto& it : data.questStates) {
+		if (it.first.empty()) {
 			g_logger->logError("CharacterCoreReader", "Error in savegame data : quest id empty");
 			return false;
 		}
 	}
-	for (auto& it : data.npcStates)
-	{
-		if (it.first.empty())
-		{
+	for (auto& it : data.npcStates) {
+		if (it.first.empty()) {
 			g_logger->logError("CharacterCoreReader", "Error in savegame data : npc id empty");
 			return false;
 		}
 	}
-	
+
 	return true;
 }
 
-bool CharacterCoreReader::readTimePlayed(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readTimePlayed(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int x = atoi(startData);
-	if (x < 0)
-	{
+	if (x < 0) {
 		return false;
 	}
 	data.timePlayed = sf::seconds(static_cast<float>(x));
 	return true;
 }
 
-bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -88,14 +75,12 @@ bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCore
 	return true;
 }
 
-bool CharacterCoreReader::readQuickslot(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readQuickslot(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	int nr = atoi(startData);
-	if (nr < 1 || nr > 2)
-	{
+	if (nr < 1 || nr > 2) {
 		g_logger->logError("CharacterCoreReader::readQuickslot", "Quickslot nr not valid.");
 		return false;
 	}
@@ -103,34 +88,29 @@ bool CharacterCoreReader::readQuickslot(char* start, char* end, CharacterCoreDat
 	startData++;
 	string item(startData);
 	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) 
-	{
+	if (count == -1) {
 		return false;
 	}
 	item = item.substr(0, count);
 
-	if (nr == 1)
-	{
+	if (nr == 1) {
 		data.quickSlot1 = item;
 	}
-	else
-	{
+	else {
 		data.quickSlot2 = item;
 	}
 	return true;
 }
 
-bool CharacterCoreReader::readSavegameDate(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readSavegameDate(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
-	startData++; 
+	startData++;
 	data.dateSaved = (atol(startData));
 	return true;
 }
 
-bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -138,8 +118,7 @@ bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& da
 	return true;
 }
 
-bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -153,8 +132,7 @@ bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& d
 	return true;
 }
 
-bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -166,8 +144,7 @@ bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreD
 	return true;
 }
 
-bool CharacterCoreReader::readLevelID(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readLevelID(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -181,8 +158,7 @@ bool CharacterCoreReader::readLevelID(char* start, char* end, CharacterCoreData&
 	return true;
 }
 
-bool CharacterCoreReader::readLevelPosition(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readLevelPosition(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -194,8 +170,7 @@ bool CharacterCoreReader::readLevelPosition(char* start, char* end, CharacterCor
 	return true;
 }
 
-bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -242,8 +217,7 @@ bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreDa
 	return true;
 }
 
-bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -257,12 +231,11 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int amount = atoi(startData);
-	data.items.insert({id, amount});
+	data.items.insert({ id, amount });
 	return true;
 }
 
-bool CharacterCoreReader::readIsInLevel(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readIsInLevel(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -270,8 +243,7 @@ bool CharacterCoreReader::readIsInLevel(char* start, char* end, CharacterCoreDat
 	return true;
 }
 
-bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');
 	endData++;
@@ -289,8 +261,7 @@ bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCor
 	startData++;
 
 	FractionID fraction = (FractionID)(atoi(startData));
-	if (fraction < FractionID::VOID || fraction >= FractionID::MAX)
-	{
+	if (fraction < FractionID::VOID || fraction >= FractionID::MAX) {
 		g_logger->logError("CharacterCoreReader", "FractionID not resolved " + to_string((int)fraction));
 		return false;
 	}
@@ -299,8 +270,7 @@ bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCor
 	startData++;
 
 	float multiplier = (float)(atof(startData));
-	if (multiplier < 1.f)
-	{
+	if (multiplier < 1.f) {
 		g_logger->logError("CharacterCoreReader", "Multiplier value not allowed " + to_string(multiplier));
 		return false;
 	}
@@ -308,13 +278,11 @@ bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCor
 	startData = gotoNextChar(startData, endData, ',');
 
 	std::map<std::string, int> wares;
-	while (startData != NULL)
-	{
+	while (startData != NULL) {
 		startData++;
 		std::string name(startData);
 		count = countToNextChar(startData, endData, ',');
-		if (count == -1)
-		{
+		if (count == -1) {
 			return false;
 		}
 		name = name.substr(0, count);
@@ -323,8 +291,7 @@ bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCor
 		startData++;
 
 		int amount = atoi(startData);
-		if (amount <= 0)
-		{
+		if (amount <= 0) {
 			return false;
 		}
 
@@ -341,8 +308,7 @@ bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCor
 	return true;
 }
 
-bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -356,8 +322,7 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	QuestState state = static_cast<QuestState>(atoi(startData));
-	if (state <= QuestState::VOID || state >= QuestState::MAX)
-	{
+	if (state <= QuestState::VOID || state >= QuestState::MAX) {
 		g_logger->logError("CharacterCoreReader", "Quest State not recognized: " + std::to_string(static_cast<int>(state)));
 		return false;
 	}
@@ -365,8 +330,7 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 	return true;
 }
 
-bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');
 	endData++;
@@ -383,14 +347,12 @@ bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, Ch
 	startData++;
 
 	std::set<string> conditions;
-	while (startData != NULL)
-	{
+	while (startData != NULL) {
 		std::string condition(startData);
 		count = countToNextChar(startData, endData, ',');
 		if (count == -1) {
 			count = countToNextChar(startData, endData, '\n');
-			if (count == -1)
-			{
+			if (count == -1) {
 				return false;
 			}
 			conditions.insert(condition.substr(0, count));
@@ -405,8 +367,7 @@ bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, Ch
 	return true;
 }
 
-bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');
 	endData++;
@@ -422,13 +383,11 @@ bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, Chara
 	startData = gotoNextChar(startData, endData, ',');
 
 	std::map<std::string, int> targets;
-	while (startData != NULL)
-	{
+	while (startData != NULL) {
 		startData++;
 		std::string name(startData);
 		count = countToNextChar(startData, endData, ',');
-		if (count == -1) 
-		{
+		if (count == -1) {
 			return false;
 		}
 		name = name.substr(0, count);
@@ -437,12 +396,11 @@ bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, Chara
 		startData++;
 
 		int amount = atoi(startData);
-		if (amount == 0)
-		{
+		if (amount == 0) {
 			return false;
 		}
 
-		targets.insert({name, amount});
+		targets.insert({ name, amount });
 		startData = gotoNextChar(startData, endData, ',');
 	}
 
@@ -450,8 +408,7 @@ bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, Chara
 	return true;
 }
 
-bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -465,8 +422,7 @@ bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreDat
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	NPCState state = static_cast<NPCState>(atoi(startData));
-	if (state <= NPCState::VOID || state >= NPCState::MAX)
-	{
+	if (state <= NPCState::VOID || state >= NPCState::MAX) {
 		g_logger->logError("CharacterCoreReader", "NPC State not recognized: " + std::to_string(static_cast<int>(state)));
 		return false;
 	}
@@ -474,29 +430,25 @@ bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreDat
 	return true;
 }
 
-bool CharacterCoreReader::readLearnedSpells(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readLearnedSpells(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');
 	startData = gotoNextChar(start, endData, ':');
 	startData++;
-	
+
 	SpellType type = static_cast<SpellType>(atoi(startData));
-	if (type <= SpellType::VOID || type >= SpellType::MAX)
-	{
+	if (type <= SpellType::VOID || type >= SpellType::MAX) {
 		g_logger->logError("CharacterCoreReader", "Spell type not recognized: " + std::to_string(static_cast<int>(type)));
 		return false;
 	}
 
 	startData = gotoNextChar(startData, endData, ',');
-	
+
 	std::set<SpellID> learnedSpells;
-	while (startData != NULL)
-	{
+	while (startData != NULL) {
 		startData++;
 		SpellID id = static_cast<SpellID>(atoi(startData));
-		if (id <= SpellID::VOID || id >= SpellID::MAX)
-		{
+		if (id <= SpellID::VOID || id >= SpellID::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell id not recognized: " + std::to_string(static_cast<int>(id)));
 			return false;
 		}
@@ -508,15 +460,13 @@ bool CharacterCoreReader::readLearnedSpells(char* start, char* end, CharacterCor
 	return true;
 }
 
-bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 
 	SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
-	if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX)
-	{
+	if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX) {
 		g_logger->logError("CharacterCoreReader", "Spell modifier type not recognized: " + std::to_string(static_cast<int>(type)));
 		return false;
 	}
@@ -524,8 +474,7 @@ bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, Character
 	startData = gotoNextChar(startData, end, ',');
 	startData++;
 	int level = atoi(startData);
-	if (level < 1 || level > 3)
-	{
+	if (level < 1 || level > 3) {
 		g_logger->logError("CharacterCoreReader", "Spell modifier type level is not between 1 and 3");
 		return false;
 	}
@@ -534,8 +483,7 @@ bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, Character
 	return true;
 }
 
-bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const
-{
+bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -545,9 +493,8 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 		return false;
 	}
 	item = item.substr(0, count);
-	
-	switch (type)
-	{
+
+	switch (type) {
 	case ItemType::Equipment_head:
 		data.equippedHead = item;
 		break;
@@ -575,15 +522,13 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 	return true;
 }
 
-bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 
 	SpellID spell = static_cast<SpellID>(atoi(startData));
-	if (spell < SpellID::VOID || spell >= SpellID::MAX)
-	{
+	if (spell < SpellID::VOID || spell >= SpellID::MAX) {
 		g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + to_string(static_cast<int>(spell)));
 		return false;
 	}
@@ -592,22 +537,19 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	if (endData == nullptr) return false;
 
 	vector<SpellModifier> modifiers;
-	
+
 	startData = gotoNextChar(startData, end, ',');
-	while (startData != nullptr && startData < endData)
-	{
+	while (startData != nullptr && startData < endData) {
 		startData++;
 		SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
-		if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX)
-		{
+		if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell Modifier type not recognized: " + to_string(static_cast<int>(type)));
 			return false;
 		}
 		startData = gotoNextChar(startData, end, ',');
 		startData++;
 		int level = atoi(startData);
-		if (level < 1 || level > 3)
-		{
+		if (level < 1 || level > 3) {
 			g_logger->logError("CharacterCoreReader", "Spell Modifier level is not allowed: " + to_string(level));
 			return false;
 		}
@@ -620,14 +562,13 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	}
 
 	data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(spell, modifiers));
-	
+
 	return true;
 }
 
-bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& layer, std::string& id) const
-{
+bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& layer, std::string& id) const {
 	char* startData;
-	char* endData; 
+	char* endData;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
 	endData = gotoNextChar(startData, end, '\n');
@@ -639,41 +580,35 @@ bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, set<int>& 
 		return false;
 	}
 
-	if (count != -1)
-	{
+	if (count != -1) {
 		id = levelID.substr(0, count);
 		startData = gotoNextChar(start, endData, ',');
 		startData++;
 
-		while (startData != NULL)
-		{
+		while (startData != NULL) {
 			layer.insert(atoi(startData));
 			startData = gotoNextChar(startData, endData, ',');
-			if (startData != NULL)
-			{
+			if (startData != NULL) {
 				startData++;
 			}
 		}
 	}
-	else
-	{
+	else {
 		id = levelID.substr(0, count2);
 		layer.clear();
 	}
 	return true;
 }
 
-bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const {
 	set<int> layer;
 	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
-	data.enemiesKilled.insert({id, layer});
+	data.enemiesKilled.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const {
 	set<int> layer;
 	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
@@ -681,8 +616,7 @@ bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCor
 	return true;
 }
 
-bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreData& data) const {
 	set<int> layer;
 	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
@@ -690,8 +624,7 @@ bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreD
 	return true;
 }
 
-bool CharacterCoreReader::readChestsLooted(char* start, char* end, CharacterCoreData& data) const
-{
+bool CharacterCoreReader::readChestsLooted(char* start, char* end, CharacterCoreData& data) const {
 	set<int> layer;
 	std::string id;
 	if (!readLevelStateLayer(start, end, layer, id)) return false;
@@ -699,13 +632,11 @@ bool CharacterCoreReader::readChestsLooted(char* start, char* end, CharacterCore
 	return true;
 }
 
-bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data)
-{
+bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data) {
 	FILE* savFile;
 	savFile = fopen(filename.c_str(), "r");
 
-	if (savFile == NULL)
-	{
+	if (savFile == NULL) {
 		g_logger->logError("CharacterCoreReader", "Error at opening file " + filename);
 		return false;
 	}
@@ -732,10 +663,8 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 	bool noError = true;
 
 	// read defined tags
-	while (pos < end)
-	{
-		if (*pos == COMMENT_MARKER || *pos == '\n')
-		{
+	while (pos < end) {
+		if (*pos == COMMENT_MARKER || *pos == '\n') {
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, TIME_PLAYED, strlen(TIME_PLAYED)) == 0) {
@@ -898,8 +827,7 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 			return false;
 		}
 
-		if (pos == NULL || !noError)
-		{
+		if (pos == NULL || !noError) {
 			// reached end of file or error happened
 			break;
 		}
@@ -911,8 +839,7 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 	delete[] charBuffer;
 
 	// check data
-	if (!noError || !checkData(data))
-	{
+	if (!noError || !checkData(data)) {
 		return false;
 	}
 

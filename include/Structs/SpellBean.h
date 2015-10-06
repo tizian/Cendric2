@@ -13,8 +13,7 @@ class SpellCreator;
 class LevelMovableGameObject;
 
 /* describes the attributes of a spell */
-struct SpellBean
-{
+struct SpellBean {
 	SpellID id;
 	SpellType spellType;
 	sf::IntRect iconTextureRect;
@@ -54,13 +53,13 @@ private:
 	// static SpellBean getTelekinesisSpellBean();
 	static SpellBean getWindGustSpellBean();
 	static SpellBean getAntiGravitySpellBean();
-	
+
 	static SpellBean getUnlockSpellBean();
 	// static SpellBean getShadowTrapSpellBean();
 	// static SpellBean getInvisibilitySpellBean();
 	// static SpellBean getFlashSpellBean();
 	static SpellBean getIcyAmbushSpellBean();
-	
+
 	static SpellBean getFearSpellBean();
 	static SpellBean getLeechSpellBean();
 	// static SpellBean getReviveTheDeadSpellBean();

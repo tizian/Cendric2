@@ -6,8 +6,7 @@
 #include "Spells/UnlockSpell.h"
 
 // a class that creates unlock spells
-class UnlockSpellCreator : public SpellCreator
-{
+class UnlockSpellCreator : public SpellCreator {
 public:
 	UnlockSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

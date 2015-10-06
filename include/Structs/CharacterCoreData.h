@@ -13,8 +13,7 @@
 #include "Structs/AttributeBean.h"
 #include "Structs/MerchantData.h"
 
-struct CharacterCoreData
-{
+struct CharacterCoreData {
 	// savegame attributes
 	sf::Time timePlayed;
 	std::string saveGameName;
@@ -30,7 +29,7 @@ struct CharacterCoreData
 	std::map<std::string, std::set<int>> enemiesKilled;
 	std::map<std::string, std::set<int>> itemsLooted;
 	std::map<std::string, std::set<int>> chestsLooted;
-	
+
 	// quest & npc progress
 	std::map<std::string, NPCState> npcStates;
 	std::map<std::string, MerchantData> merchantStates;
@@ -41,7 +40,7 @@ struct CharacterCoreData
 	// learning progress
 	std::map<SpellType, std::set<SpellID>> spellsLearned;
 	std::map<SpellModifierType, int> modfiersLearned;
-	
+
 	// base attributes
 	AttributeBean attributes;
 

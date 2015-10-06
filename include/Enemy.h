@@ -16,8 +16,7 @@ class LevelMainCharacter;
 class Spell;
 
 // An enemy in a level
-class Enemy : public LevelMovableGameObject
-{
+class Enemy : public LevelMovableGameObject {
 public:
 	Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
 	~Enemy();
@@ -28,7 +27,7 @@ public:
 	void onRightClick() override;
 	void onMouseOver() override;
 	void update(const sf::Time& frameTime) override;
-	
+
 	void onHit(Spell* spell) override;
 	// the enemy flees for the given time
 	void setFeared(const sf::Time& fearedTime);
@@ -56,14 +55,14 @@ protected:
 	virtual void loadSpells() = 0;
 	// loads/updates hp bar
 	virtual void updateHpBar();
-	
+
 	EnemyID m_id;
 	int m_objectID = -1;
 	// spells from these enemies won't hurt. default is its own type.
 	std::vector<EnemyID> m_immuneEnemies;
 	// spells of these damage types won't hurt. default is empty.
 	std::vector<DamageType> m_immuneDamageTypes;
-	
+
 	// AI
 	EnemyState m_enemyState = EnemyState::Idle;
 	virtual void updateEnemyState(const sf::Time& frameTime);
@@ -118,7 +117,7 @@ private:
 
 	// is this enemy a quest target?
 	std::pair<std::string, std::string> m_questTarget;
-	
+
 	// the enemy can only be looted if the main char is in this range
 	const float PICKUP_RANGE = 100.f;
 

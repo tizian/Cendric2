@@ -10,8 +10,7 @@ class CharacterCore;
 
 // a small visual interface to show progress in a screen, such as 
 // item, gold or quest changes
-class ProgressLog 
-{
+class ProgressLog {
 public:
 	ProgressLog(const CharacterCore* core);
 	~ProgressLog();

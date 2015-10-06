@@ -1,28 +1,23 @@
 #include "Map.h"
 
-Map::Map()
-{
+Map::Map() {
 }
 
-Map::~Map()
-{
+Map::~Map() {
 	dispose();
 }
 
-void Map::dispose()
-{
+void Map::dispose() {
 	m_backgroundTileMap.dispose();
 	m_foregroundTileMap.dispose();
 }
 
-bool Map::load(const std::string& id)
-{
+bool Map::load(const std::string& id) {
 	MapReader reader;
-	if (!reader.readMap(id.c_str(), m_mapData))
-	{
+	if (!reader.readMap(id.c_str(), m_mapData)) {
 		return false;
 	}
-	
+
 	// load map
 	m_backgroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.backgroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
 	m_foregroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.foregroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
@@ -30,20 +25,17 @@ bool Map::load(const std::string& id)
 	return true;
 }
 
-void Map::loadAfterMainChar(Screen* screen)
-{
+void Map::loadAfterMainChar(Screen* screen) {
 	MapLoader loader;
 	loader.loadNpcs(m_mapData, screen);
 }
 
-void Map::loadForRenderTexture(Screen* screen)
-{
+void Map::loadForRenderTexture(Screen* screen) {
 	MapLoader loader;
 	loader.loadLights(m_mapData, screen);
 }
 
-void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const
-{
+void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
@@ -55,36 +47,29 @@ void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf
 	map.draw(target, states);
 }
 
-void Map::drawBackground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const
-{
+void Map::drawBackground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
 	draw(target, states, center, m_backgroundTileMap);
 }
 
-void Map::drawForeground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const
-{
+void Map::drawForeground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
 	draw(target, states, center, m_foregroundTileMap);
 }
 
-const sf::FloatRect& Map::getMapRect() const
-{
+const sf::FloatRect& Map::getMapRect() const {
 	return m_mapData.mapRect;
 }
 
-const TileMap& Map::getBackgroundTilemap() const 
-{
+const TileMap& Map::getBackgroundTilemap() const {
 	return m_backgroundTileMap;
 }
 
-const TileMap& Map::getForegroundTilemap() const
-{
+const TileMap& Map::getForegroundTilemap() const {
 	return m_foregroundTileMap;
 }
 
-bool Map::collidesX(const sf::FloatRect& boundingBox) const
-{
+bool Map::collidesX(const sf::FloatRect& boundingBox) const {
 	// check for collision with level rect
-	if (boundingBox.left < m_mapData.mapRect.left || boundingBox.left + boundingBox.width > m_mapData.mapRect.left + m_mapData.mapRect.width)
-	{
+	if (boundingBox.left < m_mapData.mapRect.left || boundingBox.left + boundingBox.width > m_mapData.mapRect.left + m_mapData.mapRect.width) {
 		return true;
 	}
 
@@ -101,20 +86,16 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const
 
 	// check left side
 	int x = topLeft.x;
-	for (int y = topLeft.y; y <= bottomLeft.y; y++)
-	{
-		if (m_mapData.collidableTileRects[y][x])
-		{
+	for (int y = topLeft.y; y <= bottomLeft.y; y++) {
+		if (m_mapData.collidableTileRects[y][x]) {
 			return true;
 		}
 	}
 
 	// check right side
 	x = topRight.x;
-	for (int y = topRight.y; y <= bottomRight.y; y++)
-	{
-		if (m_mapData.collidableTileRects[y][x])
-		{
+	for (int y = topRight.y; y <= bottomRight.y; y++) {
+		if (m_mapData.collidableTileRects[y][x]) {
 			return true;
 		}
 	}
@@ -122,11 +103,9 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
-bool Map::collidesY(const sf::FloatRect& boundingBox) const
-{
+bool Map::collidesY(const sf::FloatRect& boundingBox) const {
 	// check for collision with level rect
-	if (boundingBox.top < m_mapData.mapRect.top || boundingBox.top + boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height)
-	{
+	if (boundingBox.top < m_mapData.mapRect.top || boundingBox.top + boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height) {
 		return true;
 	}
 
@@ -143,20 +122,16 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 
 	// check top side
 	int y = topLeft.y;
-	for (int x = topLeft.x; x <= topRight.x; x++)
-	{
-		if (m_mapData.collidableTileRects[y][x])
-		{
+	for (int x = topLeft.x; x <= topRight.x; x++) {
+		if (m_mapData.collidableTileRects[y][x]) {
 			return true;
 		}
 	}
 
 	// check bottom side
 	y = bottomLeft.y;
-	for (int x = bottomLeft.x; x <= bottomRight.x; x++)
-	{
-		if (m_mapData.collidableTileRects[y][x])
-		{
+	for (int x = bottomLeft.x; x <= bottomRight.x; x++) {
+		if (m_mapData.collidableTileRects[y][x]) {
 			return true;
 		}
 	}
@@ -164,12 +139,9 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const
 	return false;
 }
 
-MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
-{
-	for (auto it : m_mapData.mapExits)
-	{
-		if (boundingBox.intersects(it.mapExitRect))
-		{
+MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {
+	for (auto it : m_mapData.mapExits) {
+		if (boundingBox.intersects(it.mapExitRect)) {
 			MapExitBean* exit = new MapExitBean();
 			exit->levelID = it.levelID;
 			exit->levelSpawnPoint = it.levelSpawnPoint;
@@ -180,12 +152,10 @@ MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const
 	return nullptr;
 }
 
-const std::string& Map::getID() const
-{
+const std::string& Map::getID() const {
 	return m_id;
 }
 
-float Map::getDimming() const
-{
+float Map::getDimming() const {
 	return m_mapData.dimming;
 }

@@ -17,8 +17,7 @@ class WeaponWindow;
 // the spellbook, as displayed in a level or a map
 // it takes its information about learned spells and modifiers directly from the character core
 // it is only clickable when in a map.
-class Spellbook
-{
+class Spellbook {
 public:
 	Spellbook(CharacterCore* core, bool clickable);
 	~Spellbook();
@@ -62,11 +61,11 @@ private:
 
 	void calculateModifierSlots();
 	void calculateSpellSlots();
-	
+
 	SpellType m_currentTab;
 	ModifierSlot* m_selectedModifierSlot = nullptr;
 	SpellSlot* m_selectedSpellSlot = nullptr;
-	
+
 	void selectTab(SpellType type);
 	void selectModifierSlot(ModifierSlot* selectedSlot);
 	void selectSpellSlot(SpellSlot* selectedSlot);

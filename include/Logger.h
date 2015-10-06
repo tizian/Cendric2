@@ -4,8 +4,7 @@
 
 // the importance of the log output. 0 is the highest (None) 
 // and should never be used to log messages (would have no effect)
-enum class LogLevel
-{
+enum class LogLevel {
 	None,
 	Error,
 	Warning,
@@ -14,8 +13,7 @@ enum class LogLevel
 	Verbose
 };
 
-class Logger
-{
+class Logger {
 public:
 	void logError(const std::string& source, const std::string& message) const;
 	void logWarning(const std::string& source, const std::string& message) const;

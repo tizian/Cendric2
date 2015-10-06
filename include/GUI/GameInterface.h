@@ -13,8 +13,7 @@
 class GameScreen;
 
 // abstract class for an interface in level or map
-class GameInterface
-{
+class GameInterface {
 public:
 	GameInterface(GameScreen* screen);
 	virtual ~GameInterface();
@@ -23,7 +22,7 @@ public:
 	virtual void reloadInventory(const std::string& changeditemID);
 	// reloads the quest log 
 	virtual void reloadQuestLog();
-	
+
 	virtual void render(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);
 

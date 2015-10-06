@@ -7,8 +7,7 @@
 #include "GUI/SpellSlot.h"
 
 // class for the spell slot clone that spawns when a spell slot is dragged around.
-class SpellSlotClone : public GameObject
-{
+class SpellSlotClone : public GameObject {
 public:
 	SpellSlotClone(const SpellSlot* original);
 

@@ -1,12 +1,10 @@
 #include "Spells/UnlockSpell.h"
 
-UnlockSpell::UnlockSpell(int strength) : Spell()
-{
+UnlockSpell::UnlockSpell(int strength) : Spell() {
 	m_strength = strength;
 }
 
-void UnlockSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
-{
+void UnlockSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, 0.f));
 
 	Animation spellAnimation;
@@ -24,7 +22,6 @@ void UnlockSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const
 	Spell::load(bean, mob, target);
 }
 
-int UnlockSpell::getStrength() const
-{
+int UnlockSpell::getStrength() const {
 	return m_strength;
 }

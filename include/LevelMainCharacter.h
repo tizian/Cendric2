@@ -9,8 +9,7 @@
 #include "CharacterCore.h"
 
 // Cendric in a level
-class LevelMainCharacter : public LevelMovableGameObject
-{
+class LevelMainCharacter : public LevelMovableGameObject {
 public:
 	LevelMainCharacter(Level* level);
 	~LevelMainCharacter();

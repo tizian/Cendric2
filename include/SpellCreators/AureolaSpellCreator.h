@@ -8,8 +8,7 @@
 #include "Spells/AureolaSpell.h"
 
 // a class that creates aureola spells
-class AureolaSpellCreator : public SpellCreator
-{
+class AureolaSpellCreator : public SpellCreator {
 public:
 	AureolaSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
 

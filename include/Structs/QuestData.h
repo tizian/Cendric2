@@ -5,8 +5,7 @@
 #include <map>
 #include <set>
 
-struct QuestData
-{
+struct QuestData {
 	std::string id;
 	std::string title;
 	std::string description;

@@ -2,8 +2,7 @@
 
 using namespace std;
 
-SpellSlotClone::SpellSlotClone(const SpellSlot* original)
-{
+SpellSlotClone::SpellSlotClone(const SpellSlot* original) {
 	m_original = original;
 	m_spellType = original->getSpellType();
 	m_spellID = original->getSpellID();
@@ -12,36 +11,30 @@ SpellSlotClone::SpellSlotClone(const SpellSlot* original)
 	init();
 }
 
-void SpellSlotClone::init()
-{
+void SpellSlotClone::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2 * SpellSlot::RADIUS, 2 * SpellSlot::RADIUS));
 	setDebugBoundingBox(sf::Color::Red);
 	setInputInDefaultView(true);
 
 	m_color = CENDRIC_COLOR_GREY;
 	m_colorBase = CENDRIC_COLOR_BLACK;
-	if (m_spellType == SpellType::Elemental)
-	{
+	if (m_spellType == SpellType::Elemental) {
 		m_color = CENDRIC_COLOR_ELEMENTAL;
 		m_colorBase = CENDRIC_COLOR_ELEMENTAL_INACTIVE;
 	}
-	else if (m_spellType == SpellType::Twilight)
-	{
+	else if (m_spellType == SpellType::Twilight) {
 		m_color = CENDRIC_COLOR_TWILIGHT;
 		m_colorBase = CENDRIC_COLOR_TWILIGHT_INACTIVE;
 	}
-	else if (m_spellType == SpellType::Necromancy)
-	{
+	else if (m_spellType == SpellType::Necromancy) {
 		m_color = CENDRIC_COLOR_NECROMANCY;
 		m_colorBase = CENDRIC_COLOR_NECROMANCY_INACTIVE;
 	}
-	else if (m_spellType == SpellType::Divine)
-	{
+	else if (m_spellType == SpellType::Divine) {
 		m_color = CENDRIC_COLOR_DIVINE;
 		m_colorBase = CENDRIC_COLOR_DIVINE_INACTIVE;
 	}
-	else if (m_spellType == SpellType::Illusion)
-	{
+	else if (m_spellType == SpellType::Illusion) {
 		m_color = CENDRIC_COLOR_ILLUSION;
 		m_colorBase = CENDRIC_COLOR_ILLUSION_INACTIVE;
 	}
@@ -95,8 +88,7 @@ void SpellSlotClone::init()
 	m_smallRingBottom2.setFillColor(m_color);
 }
 
-void SpellSlotClone::setPosition(const sf::Vector2f& pos)
-{
+void SpellSlotClone::setPosition(const sf::Vector2f& pos) {
 	m_position = pos;
 	m_boundingBox.left = pos.x - SpellSlot::RADIUS;
 	m_boundingBox.top = pos.y - SpellSlot::RADIUS;
@@ -121,8 +113,7 @@ void SpellSlotClone::setPosition(const sf::Vector2f& pos)
 	m_smallRingBottom2.setPosition(pos + sf::Vector2f(0.f, 0.85f * SpellSlot::RADIUS) - 0.05f * radiusVector);
 }
 
-void SpellSlotClone::render(sf::RenderTarget& renderTarget)
-{
+void SpellSlotClone::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_outerRing);
 	renderTarget.draw(m_coloredRingBase);
 	renderTarget.draw(m_coloredRing);
@@ -142,12 +133,10 @@ void SpellSlotClone::render(sf::RenderTarget& renderTarget)
 	GameObject::renderAfterForeground(renderTarget);
 }
 
-GameObjectType SpellSlotClone::getConfiguredType() const
-{
+GameObjectType SpellSlotClone::getConfiguredType() const {
 	return GameObjectType::_Interface;
 }
 
-const SpellSlot* SpellSlotClone::getOriginal() const
-{
+const SpellSlot* SpellSlotClone::getOriginal() const {
 	return m_original;
 }

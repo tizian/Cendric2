@@ -8,8 +8,7 @@
 #include "Structs/DynamicTileBean.h"
 #include "Structs/LightBean.h"
 
-struct LevelData
-{
+struct LevelData {
 	std::string id;
 	std::string name;
 	sf::Vector2i mapSize;

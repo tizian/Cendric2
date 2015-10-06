@@ -1,7 +1,6 @@
 #pragma once
 
-enum class DamageType
-{
+enum class DamageType {
 	VOID,
 	Physical,
 	Fire,

@@ -7,8 +7,7 @@
 
 // the character info, as displayed in a level
 // it takes its information from an attribute bean (of the level main char or the character core)
-class CharacterInfo
-{
+class CharacterInfo {
 public:
 	CharacterInfo(const AttributeBean* attributes);
 	~CharacterInfo();

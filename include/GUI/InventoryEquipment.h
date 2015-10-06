@@ -10,8 +10,7 @@
 class InventorySlotClone;
 
 // the equipment part of the inventory. it shows all equipped items
-class InventoryEquipment
-{
+class InventoryEquipment {
 public:
 	InventoryEquipment(CharacterCore* core);
 	~InventoryEquipment();
@@ -38,9 +37,9 @@ public:
 
 private:
 	CharacterCore* m_core;
-	
+
 	bool m_isVisible = false;
-	
+
 	std::map<ItemType, InventorySlot> m_slots;
 
 	Window* m_window;

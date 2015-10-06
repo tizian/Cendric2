@@ -7,8 +7,7 @@
 class LevelMainCharacter;
 
 // Equipment for cendric inside a level
-class LevelEquipment : public GameObject
-{
+class LevelEquipment : public GameObject {
 public:
 	LevelEquipment() : GameObject() {}
 	~LevelEquipment();

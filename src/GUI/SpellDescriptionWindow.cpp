@@ -7,8 +7,7 @@ using namespace std;
 
 const float SpellDescriptionWindow::WIDTH = 340.f;
 
-inline std::wstring toStrMaxDecimals(float value, int decimals)
-{
+inline std::wstring toStrMaxDecimals(float value, int decimals) {
 	std::ostringstream ss;
 	ss << std::fixed << std::setprecision(decimals) << value;
 	std::string s = ss.str();
@@ -23,8 +22,7 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	WindowOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::BACK_COLOR,
-	GUIConstants::ORNAMENT_COLOR)
-{
+	GUIConstants::ORNAMENT_COLOR) {
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(CENDRIC_COLOR_WHITE);
 
@@ -35,8 +33,7 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	m_statsText.setColor(CENDRIC_COLOR_WHITE);
 }
 
-void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeBean* attributes)
-{
+void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeBean* attributes) {
 	SpellBean bean = SpellBean::getSpellBean(id);
 	std::string strengthName;
 	int strengthValue;
@@ -61,8 +58,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	stats.append(L"s\n");
 
 	// damage type & damage
-	if (bean.damageType != DamageType::VOID)
-	{
+	if (bean.damageType != DamageType::VOID) {
 		stats.append(g_textProvider->getText("DamageType"));
 		stats.append(L": ");
 		stats.append(g_textProvider->getText(EnumNames::getDamageTypeName(bean.damageType)));
@@ -75,8 +71,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// heal
-	if (bean.heal > 0)
-	{
+	if (bean.heal > 0) {
 		stats.append(g_textProvider->getText("Heal"));
 		stats.append(L": ");
 		stats.append(to_wstring(bean.heal));
@@ -84,8 +79,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// reflection
-	if (bean.reflectCount > 0)
-	{
+	if (bean.reflectCount > 0) {
 		stats.append(g_textProvider->getText("Reflection"));
 		stats.append(L": ");
 		stats.append(to_wstring(bean.reflectCount));
@@ -93,8 +87,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// speed
-	if (bean.startVelocity > 0)
-	{
+	if (bean.startVelocity > 0) {
 		stats.append(g_textProvider->getText("Speed"));
 		stats.append(L": ");
 		stats.append(toStrMaxDecimals(bean.startVelocity, 1));
@@ -102,8 +95,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// count (is only displayed when there can be count modifier additions)
-	if (bean.countModifierAddition > 0)
-	{
+	if (bean.countModifierAddition > 0) {
 		stats.append(g_textProvider->getText("Count"));
 		stats.append(L": ");
 		stats.append(to_wstring(bean.count));
@@ -111,8 +103,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// duration (is only displayed when there can be duration modifier additions)
-	if (bean.durationModifierAddition > sf::Time::Zero)
-	{
+	if (bean.durationModifierAddition > sf::Time::Zero) {
 		stats.append(g_textProvider->getText("Duration"));
 		stats.append(L": ");
 		stats.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));
@@ -120,8 +111,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// range (is only displayed when there can be range modifier additions)
-	if (bean.rangeModifierAddition > 0.f)
-	{
+	if (bean.rangeModifierAddition > 0.f) {
 		stats.append(g_textProvider->getText("Range"));
 		stats.append(L": ");
 		stats.append(toStrMaxDecimals(bean.range, 1));
@@ -129,8 +119,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// strength (only if there is a strength modifier name set)
-	if (!strengthName.empty())
-	{
+	if (!strengthName.empty()) {
 		stats.append(g_textProvider->getText(strengthName));
 		stats.append(L": ");
 		stats.append(to_wstring(strengthValue));
@@ -142,8 +131,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	stats.append(L"<<< " + g_textProvider->getText("AllowedModifiers") + L" >>>");
 	stats.append(L"\n");
 
-	for (auto& it : SpellBean::getAllowedModifiers(id))
-	{
+	for (auto& it : SpellBean::getAllowedModifiers(id)) {
 		stats.append(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it)));
 		stats.append(L"\n");
 	}
@@ -159,18 +147,15 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	setPosition(getPosition());
 }
 
-void SpellDescriptionWindow::show()
-{
+void SpellDescriptionWindow::show() {
 	m_isVisible = true;
 }
 
-void SpellDescriptionWindow::hide()
-{
+void SpellDescriptionWindow::hide() {
 	m_isVisible = false;
 }
 
-void SpellDescriptionWindow::setPosition(const sf::Vector2f& position)
-{
+void SpellDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
 	float y = position.y + GUIConstants::TEXT_OFFSET;
 	m_titleText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
@@ -180,8 +165,7 @@ void SpellDescriptionWindow::setPosition(const sf::Vector2f& position)
 	m_statsText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
 }
 
-void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget)
-{
+void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	if (!m_isVisible) return;
 	Window::render(renderTarget);
 	renderTarget.draw(m_titleText);

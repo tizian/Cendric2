@@ -1,12 +1,10 @@
 #include "Spells/FireBallSpell.h"
 
-FireBallSpell::FireBallSpell() : Spell() 
-{
+FireBallSpell::FireBallSpell() : Spell() {
 	m_lightObject = new LightObject(LightBean(sf::Vector2f(), 50.f));
 }
 
-void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target)
-{
+void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation spellAnimation;
@@ -26,21 +24,18 @@ void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, con
 	g_resourceManager->playSound(m_sound, ResourceID::Sound_spell_fireball);
 }
 
-void FireBallSpell::setDisposed()
-{
+void FireBallSpell::setDisposed() {
 	Spell::setDisposed();
 	m_lightObject->setDisposed();
 	m_sound.stop();
 }
 
-void FireBallSpell::setScreen(Screen* screen)
-{
+void FireBallSpell::setScreen(Screen* screen) {
 	Spell::setScreen(screen);
 	screen->addObject(m_lightObject);
 }
 
-void FireBallSpell::setPosition(const sf::Vector2f& pos)
-{
+void FireBallSpell::setPosition(const sf::Vector2f& pos) {
 	Spell::setPosition(pos);
 	m_lightObject->setPosition(pos);
 }

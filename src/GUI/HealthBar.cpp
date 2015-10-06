@@ -1,7 +1,6 @@
 #include "GUI/HealthBar.h"
 
-HealthBar::HealthBar(const AttributeBean* attributes)
-{
+HealthBar::HealthBar(const AttributeBean* attributes) {
 	m_attributes = attributes;
 
 	// init bar
@@ -16,17 +15,15 @@ HealthBar::HealthBar(const AttributeBean* attributes)
 	m_barOutline.setSize(sf::Vector2f(BAR_WIDTH, BAR_HEIGHT));
 }
 
-void HealthBar::render(sf::RenderTarget& target) const
-{
+void HealthBar::render(sf::RenderTarget& target) const {
 	target.draw(m_barOutline);
 	target.draw(m_bar);
 }
 
-void HealthBar::update()
-{
+void HealthBar::update() {
 	m_bar.setSize
-	(
-		sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints), 
+		(
+		sf::Vector2f(BAR_WIDTH * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints),
 		BAR_HEIGHT)
-	);
+		);
 }

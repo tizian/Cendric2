@@ -12,17 +12,15 @@ const float SimulatedWaterTile::SPREAD = 0.7f;
 
 const float SimulatedWaterTile::WATER_LEVEL = 40.f;
 const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
-const int SimulatedWaterTile:: NUMBER_COLUMNS_PER_SUBTILE = 10;
+const int SimulatedWaterTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 
 const sf::Color SimulatedWaterTile::WATER_COLOR = sf::Color(20, 50, 100, 128);
 
-void SimulatedWaterTile::init()
-{
+void SimulatedWaterTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 }
 
-void SimulatedWaterTile::load(int skinNr)
-{
+void SimulatedWaterTile::load(int skinNr) {
 	m_isCollidable = false;
 
 	const sf::FloatRect *bb = getBoundingBox();
@@ -37,8 +35,7 @@ void SimulatedWaterTile::load(int skinNr)
 
 	m_nColumns = NUMBER_COLUMNS_PER_SUBTILE * m_nTiles;
 	m_columns = vector<WaterColumn>();
-	for (int i = 0; i < m_nColumns; ++i)
-	{
+	for (int i = 0; i < m_nColumns; ++i) {
 		WaterColumn c;
 		c.targetHeight = WATER_LEVEL;
 		c.height = WATER_LEVEL;
@@ -89,43 +86,34 @@ void SimulatedWaterTile::load(int skinNr)
 	waterUpdater->water = this;
 
 	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
-    eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);
+	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);
 }
 
-void SimulatedWaterTile::update(const sf::Time& frameTime)
-{
+void SimulatedWaterTile::update(const sf::Time& frameTime) {
 	float dt = frameTime.asSeconds();
 	dt *= 20.f;
 
-	for (int i = 0; i < m_nColumns; ++i)
-	{
+	for (int i = 0; i < m_nColumns; ++i) {
 		m_columns[i].update(DAMPING, TENSION, dt);
 	}
 
-	for (int iterations = 0; iterations < 8; ++iterations)
-	{
-		for (int i = 0; i < m_nColumns; ++i)
-		{
-			if (i > 0)
-			{
+	for (int iterations = 0; iterations < 8; ++iterations) {
+		for (int i = 0; i < m_nColumns; ++i) {
+			if (i > 0) {
 				m_leftDeltas[i] = SPREAD * (m_columns[i].height - m_columns[i - 1].height);
 				m_columns[i - 1].velocity += m_leftDeltas[i] * dt;
 			}
-			if (i < m_nColumns - 1)
-			{
+			if (i < m_nColumns - 1) {
 				m_rightDeltas[i] = SPREAD * (m_columns[i].height - m_columns[i + 1].height);
 				m_columns[i + 1].velocity += m_rightDeltas[i] * dt;
 			}
 		}
 
-		for (int i = 0; i < m_nColumns; ++i)
-		{
-			if (i > 0)
-			{
+		for (int i = 0; i < m_nColumns; ++i) {
+			if (i > 0) {
 				m_columns[i - 1].height += m_leftDeltas[i] * dt;
 			}
-			if (i < m_nColumns - 1)
-			{
+			if (i < m_nColumns - 1) {
 				m_columns[i + 1].height += m_rightDeltas[i] * dt;
 			}
 		}
@@ -134,10 +122,8 @@ void SimulatedWaterTile::update(const sf::Time& frameTime)
 	m_columns[0].height = m_columns[0].targetHeight;
 	m_columns[m_nColumns - 1].height = m_columns[m_nColumns - 1].targetHeight;
 
-	for (int i = 0; i < m_nColumns; ++i)
-	{
-		if (m_columns[i].fixed)
-		{
+	for (int i = 0; i < m_nColumns; ++i) {
+		if (m_columns[i].fixed) {
 			m_columns[i].height = m_columns[i].targetHeight;
 		}
 	}
@@ -147,10 +133,9 @@ void SimulatedWaterTile::update(const sf::Time& frameTime)
 	float scale = m_width / (float)(m_nColumns - 1);
 	float thickness = 4.f;
 
-	for (int i = 0; i < m_nColumns - 1; ++i)
-	{
+	for (int i = 0; i < m_nColumns - 1; ++i) {
 		sf::Vector2f p1 = sf::Vector2f(m_x + i * scale, m_y + m_height - m_columns[i].height);
-		sf::Vector2f p2 = sf::Vector2f(m_x + (i+1) * scale, m_y + m_height - m_columns[i+1].height);
+		sf::Vector2f p2 = sf::Vector2f(m_x + (i + 1) * scale, m_y + m_height - m_columns[i + 1].height);
 		sf::Vector2f p3 = sf::Vector2f(p2.x, m_y + m_height);
 		sf::Vector2f p4 = sf::Vector2f(p1.x, m_y + m_height);
 		sf::Vector2f p5 = sf::Vector2f(p2.x, p2.y - thickness);
@@ -178,8 +163,7 @@ void SimulatedWaterTile::update(const sf::Time& frameTime)
 	m_ps->update(frameTime);
 }
 
-float SimulatedWaterTile::getHeight(float xPosition)
-{
+float SimulatedWaterTile::getHeight(float xPosition) {
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	if (index < 0 || index > m_nColumns - 1)
 		return WATER_LEVEL;
@@ -187,11 +171,9 @@ float SimulatedWaterTile::getHeight(float xPosition)
 	return m_columns[index].height;
 }
 
-void SimulatedWaterTile::splash(float xPosition, float velocity)
-{
+void SimulatedWaterTile::splash(float xPosition, float velocity) {
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
-	if (index > 0 && index < m_nColumns)
-	{
+	if (index > 0 && index < m_nColumns) {
 		m_columns[index].velocity = velocity;
 	}
 
@@ -207,14 +189,11 @@ void SimulatedWaterTile::splash(float xPosition, float velocity)
 	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_water);
 }
 
-void SimulatedWaterTile::splash(float xPosition, float width, float velocity)
-{
+void SimulatedWaterTile::splash(float xPosition, float width, float velocity) {
 	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
-	for (int i = startIndex; i <= endIndex; ++i)
-	{
-		if (i > 0 && i < m_nColumns)
-		{
+	for (int i = startIndex; i <= endIndex; ++i) {
+		if (i > 0 && i < m_nColumns) {
 			m_columns[i].velocity = velocity;
 		}
 	}
@@ -231,38 +210,32 @@ void SimulatedWaterTile::splash(float xPosition, float width, float velocity)
 	m_ps->emit(nParticles);
 }
 
-void SimulatedWaterTile::render(sf::RenderTarget& target)
-{
+void SimulatedWaterTile::render(sf::RenderTarget& target) {
 	target.draw(m_vertexArray);
 	m_ps->render(target);
 }
 
-void SimulatedWaterTile::onHit(Spell* spell)
-{
+void SimulatedWaterTile::onHit(Spell* spell) {
 	auto id = spell->getSpellID();
 
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
 	bool frozen = isFrozen(index);
 	bool doSplash = true;
 
-	if (id == SpellID::IceBall)
-	{
-		if (!frozen)
-		{
+	if (id == SpellID::IceBall) {
+		if (!frozen) {
 			freeze(index);
 			spell->setDisposed();
 		}
 		doSplash = false;
 	}
-	else if (id == SpellID::FireBall)
-	{
+	else if (id == SpellID::FireBall) {
 		if (frozen) {
 			doSplash = false;
 		}
 	}
 
-	if (doSplash)
-	{
+	if (doSplash) {
 		float vx = spell->getVelocity().x;
 		float vy = spell->getVelocity().y;
 		float vel = std::sqrt(vx*vx + vy*vy);
@@ -271,8 +244,7 @@ void SimulatedWaterTile::onHit(Spell* spell)
 	}
 }
 
-void SimulatedWaterTile::onHit(LevelMovableGameObject* mob)
-{
+void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
 	float vx = mob->getVelocity().x;
 	float vy = mob->getVelocity().y;
 	float vel = std::sqrt(vx*vx + vy*vy);
@@ -280,12 +252,9 @@ void SimulatedWaterTile::onHit(LevelMovableGameObject* mob)
 	splash(mob->getBoundingBox()->left, mob->getBoundingBox()->width, -vel * 0.5f);
 }
 
-void SimulatedWaterTile::freeze(int index)
-{
-	if (index >= 0 && index < m_nTiles)
-	{
-		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i)
-		{
+void SimulatedWaterTile::freeze(int index) {
+	if (index >= 0 && index < m_nTiles) {
+		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i) {
 			WaterColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
 			col.height = col.targetHeight;
 			col.fixed = true;
@@ -304,12 +273,9 @@ void SimulatedWaterTile::freeze(int index)
 	}
 }
 
-void SimulatedWaterTile::melt(int index)
-{
-	if (index >= 0 && index < m_nTiles)
-	{
-		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i)
-		{
+void SimulatedWaterTile::melt(int index) {
+	if (index >= 0 && index < m_nTiles) {
+		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i) {
 			WaterColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
 			col.fixed = false;
 		}
@@ -318,8 +284,7 @@ void SimulatedWaterTile::melt(int index)
 	}
 }
 
-bool SimulatedWaterTile::isFrozen(int index)
-{
+bool SimulatedWaterTile::isFrozen(int index) {
 	if (m_frozenTiles[index])
 		return true;
 	return false;

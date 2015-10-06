@@ -9,8 +9,7 @@
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
 
-class ItemDescriptionWindow : public Window
-{
+class ItemDescriptionWindow : public Window {
 public:
 	ItemDescriptionWindow();
 	virtual ~ItemDescriptionWindow() {};

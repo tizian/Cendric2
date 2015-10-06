@@ -8,8 +8,7 @@
 
 // an item bean, directly read from a csv file
 // it contains all information for items, their level items and (maybe) equipment
-struct ItemBean
-{
+struct ItemBean {
 	// for item
 	std::string id;
 	std::string description;
@@ -19,7 +18,7 @@ struct ItemBean
 	int goldValue;
 	AttributeBean attributes;
 	sf::Time foodDuration;
-	
+
 	// for levelItem
 	sf::Vector2f spriteOffset;
 	sf::FloatRect boundingBox;
@@ -35,7 +34,7 @@ struct ItemBean
 	int weaponChopDamage;
 };
 
-const struct ItemBean DEFAULT_ITEM = 
+const struct ItemBean DEFAULT_ITEM =
 {
 	"",
 	"",

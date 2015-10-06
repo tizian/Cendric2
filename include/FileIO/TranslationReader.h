@@ -7,8 +7,7 @@
 
 // reads translations from a specified csv file
 // used by the text provider.
-class TranslationReader : public CSVReader
-{
+class TranslationReader : public CSVReader {
 public:
 	TranslationReader();
 	~TranslationReader();

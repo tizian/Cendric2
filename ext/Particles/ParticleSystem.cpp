@@ -206,7 +206,7 @@ namespace particles
 		m_sprite.setTexture(m_renderTexture.getTexture());
 		m_shader.setParameter("customColor", color);
 		m_shader.setParameter("threshold", threshold);
-		
+
 		renderTarget.setView(defaultView);
 		renderTarget.draw(m_sprite, &m_shader);
 		renderTarget.setView(oldView);

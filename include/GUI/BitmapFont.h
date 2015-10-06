@@ -5,8 +5,7 @@
 #include "global.h"
 #include <string>
 
-class BitmapFont
-{
+class BitmapFont {
 public:
 	BitmapFont();
 

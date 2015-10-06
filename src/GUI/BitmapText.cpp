@@ -7,8 +7,7 @@ const char FIRST_CHAR = ' ';
 const int NUM_GLYPHS_U = 16;
 const int NUM_GLYPHS_V = 14;
 
-void toUpperCase(sf::String &str)
-{
+void toUpperCase(sf::String &str) {
 	for (auto & c : str) {
 		if (c == 228) c = 196;			// ä
 		else if (c == 246) c = 214;		// ö
@@ -17,8 +16,7 @@ void toUpperCase(sf::String &str)
 	}
 }
 
-BitmapText::BitmapText()
-{
+BitmapText::BitmapText() {
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_color = sf::Color::White;
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
@@ -26,8 +24,7 @@ BitmapText::BitmapText()
 	m_lineSpacing = 0.5f;
 }
 
-BitmapText::BitmapText(const sf::String& string, const BitmapFont &font)
-{
+BitmapText::BitmapText(const sf::String& string, const BitmapFont &font) {
 	m_font = &font;
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = string;
@@ -38,8 +35,7 @@ BitmapText::BitmapText(const sf::String& string, const BitmapFont &font)
 	init();
 }
 
-BitmapText::BitmapText(const sf::String& string)
-{
+BitmapText::BitmapText(const sf::String& string) {
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = string;
@@ -50,85 +46,70 @@ BitmapText::BitmapText(const sf::String& string)
 	init();
 }
 
-void BitmapText::setString(const sf::String& string)
-{
+void BitmapText::setString(const sf::String& string) {
 	m_string = string;
 	toUpperCase(m_string);
 	init();
 }
 
-const sf::String &BitmapText::getString() const
-{
+const sf::String &BitmapText::getString() const {
 	return m_string;
 }
 
-void BitmapText::setFont(const BitmapFont& font)
-{
+void BitmapText::setFont(const BitmapFont& font) {
 	m_font = &font;
 	init();
 }
 
-const BitmapFont *BitmapText::getFont() const
-{
+const BitmapFont *BitmapText::getFont() const {
 	return m_font;
 }
 
-void BitmapText::setColor(const sf::Color &color)
-{
+void BitmapText::setColor(const sf::Color &color) {
 	m_color = color;
 	init();	// TODO: could only replace vertex color attributes instead of all vertex data
 }
 
-const sf::Color &BitmapText::getColor() const
-{
+const sf::Color &BitmapText::getColor() const {
 	return m_color;
 }
 
-void BitmapText::setCharacterSize(int size)
-{
-	if (m_characterSize % m_font->getGlyphSize().y != 0)
-	{
+void BitmapText::setCharacterSize(int size) {
+	if (m_characterSize % m_font->getGlyphSize().y != 0) {
 		// g_logger->logWarning("BitmapText::setCharacterSize", "You should only use multiples of the bitmap glyph size to avoid aliasing problems!");
 	}
 	m_characterSize = size;
 	init();
 }
 
-const int BitmapText::getCharacterSize() const
-{
+const int BitmapText::getCharacterSize() const {
 	return m_characterSize;
 }
 
-void BitmapText::setLineSpacing(float spacing)
-{
+void BitmapText::setLineSpacing(float spacing) {
 	m_lineSpacing = spacing;
 	init();
 }
 
-const float BitmapText::getLineSpacing() const
-{
+const float BitmapText::getLineSpacing() const {
 	return m_lineSpacing;
 }
 
-sf::FloatRect BitmapText::getLocalBounds() const
-{
+sf::FloatRect BitmapText::getLocalBounds() const {
 	return m_bounds;
 }
 
-sf::FloatRect BitmapText::getBounds() const
-{
+sf::FloatRect BitmapText::getBounds() const {
 	return getTransform().transformRect(m_bounds);
 }
 
-void BitmapText::draw(sf::RenderTarget &target, sf::RenderStates states) const
-{
+void BitmapText::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = &m_font->getTexture();
 	target.draw(m_vertices, states);
 }
 
-void BitmapText::init()
-{
+void BitmapText::init() {
 	using std::cout;
 	using std::endl;
 
@@ -145,25 +126,21 @@ void BitmapText::init()
 	float curX = 0.f;
 	float curY = 0.f;
 
-	for (auto c : m_string)
-	{
-		if (c == '\t')
-		{
+	for (auto c : m_string) {
+		if (c == '\t') {
 			curX += 4 * dx;
 			continue;
 		}
-		else if (c == '\n')
-		{
+		else if (c == '\n') {
 			curY += dy * (m_lineSpacing + 1.f);
 			curX = 0.f;
 			continue;
 		}
 
-		if (c < FIRST_CHAR)
-		{
+		if (c < FIRST_CHAR) {
 			c = '?';
 		}
-		
+
 		c -= FIRST_CHAR;
 
 		float u = (c % NUM_GLYPHS_U) * du;

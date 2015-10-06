@@ -6,8 +6,7 @@
 #include "Structs/LightBean.h"
 
 // A light ellipse in a level/map
-class LightObject : virtual public GameObject
-{
+class LightObject : virtual public GameObject {
 public:
 	LightObject(const LightBean& bean);
 	virtual ~LightObject() {};
@@ -27,7 +26,7 @@ protected:
 	LightBean m_bean;
 
 	sf::RectangleShape m_sprite;
-	
+
 	// Flickering animation
 	float m_animationTimer;
 

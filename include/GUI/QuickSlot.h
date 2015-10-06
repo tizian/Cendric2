@@ -11,8 +11,7 @@
 class CharacterCore;
 class LevelInterface;
 
-class QuickSlot : public GameObject
-{
+class QuickSlot : public GameObject {
 public:
 	// an empty slot is initialized with an empty itemID
 	QuickSlot(LevelInterface* _interface, const std::string& itemID, Key key);
@@ -30,7 +29,7 @@ public:
 	void setItemID(const std::string& itemID);
 
 	GameObjectType getConfiguredType() const override;
-	
+
 	static const float SIDE_LENGTH;
 	static const float MARGIN;
 

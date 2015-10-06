@@ -1,7 +1,6 @@
 #pragma once
 
-enum class SpellModifierType
-{
+enum class SpellModifierType {
 	VOID,
 	Damage,
 	Range,
@@ -14,8 +13,7 @@ enum class SpellModifierType
 };
 
 /* a simple spell modifier */
-struct SpellModifier
-{
+struct SpellModifier {
 	SpellModifierType type;
 	// level ranges from 1 to 3
 	int level;

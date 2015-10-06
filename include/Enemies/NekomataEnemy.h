@@ -7,8 +7,7 @@
 #include "Screen.h"
 
 // A spooky Nekomata in a level
-class NekomataEnemy : public Enemy
-{
+class NekomataEnemy : public Enemy {
 public:
 	NekomataEnemy(Level* level, LevelMainCharacter* mainChar);
 	virtual ~NekomataEnemy() {}

@@ -10,8 +10,7 @@
 
 // A form with two buttons on it, a Yes and a No button.
 // The form is responsible for these two buttons (create, update, render, delete), they are NOT added to the screen objects, only the form is
-class YesOrNoForm : public GameObject
-{
+class YesOrNoForm : public GameObject {
 public:
 	YesOrNoForm(const sf::FloatRect& box);
 	~YesOrNoForm();

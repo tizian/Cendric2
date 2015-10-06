@@ -7,39 +7,33 @@ using namespace std;
 const char* CharacterCore::QUICKSAVE_LOCATION = "saves/quicksave.sav";
 const char* CharacterCore::DEBUGSAVE_LOCATION = "saves/debug.sav";
 
-CharacterCore::CharacterCore()
-{
+CharacterCore::CharacterCore() {
 	m_data = DEFAULT_CORE;
 }
 
-CharacterCore::CharacterCore(const CharacterCoreData& data)
-{
+CharacterCore::CharacterCore(const CharacterCoreData& data) {
 	m_data = data;
 	m_stopwatch.restart();
 	reloadAttributes();
 	loadQuests();
 }
 
-CharacterCore::~CharacterCore()
-{
+CharacterCore::~CharacterCore() {
 	clearEquippedItems();
 	clearItems();
 }
 
-bool CharacterCore::quickload()
-{
+bool CharacterCore::quickload() {
 	return load(QUICKSAVE_LOCATION);
 }
 
-bool CharacterCore::load(const std::string& fileName)
-{
+bool CharacterCore::load(const std::string& fileName) {
 	CharacterCoreReader reader;
-	
-	if (!reader.readCharacterCore(fileName, m_data))
-	{
+
+	if (!reader.readCharacterCore(fileName, m_data)) {
 		return false;
-	} 
-	
+	}
+
 	// measuring the time played with this save.
 	m_stopwatch.restart();
 	reloadAttributes();
@@ -47,15 +41,12 @@ bool CharacterCore::load(const std::string& fileName)
 	return true;
 }
 
-void CharacterCore::loadQuests()
-{
+void CharacterCore::loadQuests() {
 	m_quests.clear();
 	QuestLoader loader;
-	for (auto& it : m_data.questStates)
-	{
+	for (auto& it : m_data.questStates) {
 		QuestData data = loader.loadQuest(it.first);
-		if (data.id.empty())
-		{
+		if (data.id.empty()) {
 			g_logger->logError("CharacterCore::loadQuests", "Could not load quest: " + it.first);
 			continue;
 		}
@@ -63,12 +54,11 @@ void CharacterCore::loadQuests()
 	}
 }
 
-void CharacterCore::loadNew()
-{
+void CharacterCore::loadNew() {
 	// start map & position when a new game is loaded
 	m_data.isInLevel = false;
 	m_data.currentMap = "res/map/firstmap/firstmap.tmx";
-	m_data.currentMapPosition = sf::Vector2f(4400.0f, 650.0f); 
+	m_data.currentMapPosition = sf::Vector2f(4400.0f, 650.0f);
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.critical = 5;
@@ -76,71 +66,56 @@ void CharacterCore::loadNew()
 	reloadAttributes();
 }
 
-const Item* CharacterCore::getEquippedItem(ItemType type)
-{
-	if (m_equippedItems.empty())
-	{
+const Item* CharacterCore::getEquippedItem(ItemType type) {
+	if (m_equippedItems.empty()) {
 		loadEquipmentItems();
 	}
 	return m_equippedItems.at(type);
 }
 
-const Item& CharacterCore::getItem(const std::string& id)
-{
-	if (m_items.empty())
-	{
+const Item& CharacterCore::getItem(const std::string& id) {
+	if (m_items.empty()) {
 		loadItems();
 	}
 	return m_items.at(id);
 }
 
-const Weapon* CharacterCore::getWeapon()
-{
+const Weapon* CharacterCore::getWeapon() {
 	const Weapon* weapon;
-	if (!(weapon = dynamic_cast<const Weapon*>(getEquippedItem(ItemType::Equipment_weapon))))
-	{
+	if (!(weapon = dynamic_cast<const Weapon*>(getEquippedItem(ItemType::Equipment_weapon)))) {
 		// unexpected
 		return nullptr;
 	}
 	return weapon;
 }
 
-NPCState CharacterCore::getNPCState(const std::string& id) const
-{
-	if (m_data.npcStates.find(id) != m_data.npcStates.end())
-	{
+NPCState CharacterCore::getNPCState(const std::string& id) const {
+	if (m_data.npcStates.find(id) != m_data.npcStates.end()) {
 		return m_data.npcStates.at(id);
 	}
 	return NPCState::Never_talked;
 }
 
-QuestState CharacterCore::getQuestState(const std::string& id) const
-{
-	if (m_data.questStates.find(id) != m_data.questStates.end())
-	{
+QuestState CharacterCore::getQuestState(const std::string& id) const {
+	if (m_data.questStates.find(id) != m_data.questStates.end()) {
 		return m_data.questStates.at(id);
 	}
 	return QuestState::VOID;
 }
 
-void CharacterCore::setNPCState(const std::string& id, NPCState state)
-{
-	if (m_data.npcStates.find(id) != m_data.npcStates.end())
-	{
+void CharacterCore::setNPCState(const std::string& id, NPCState state) {
+	if (m_data.npcStates.find(id) != m_data.npcStates.end()) {
 		m_data.npcStates[id] = state;
 		return;
 	}
 	m_data.npcStates.insert({ id, state });
 }
 
-void CharacterCore::setQuestState(const std::string& id, QuestState state)
-{
-	if (state == QuestState::Started && m_data.questStates.find(id) == m_data.questStates.end())
-	{
+void CharacterCore::setQuestState(const std::string& id, QuestState state) {
+	if (state == QuestState::Started && m_data.questStates.find(id) == m_data.questStates.end()) {
 		QuestLoader loader;
 		QuestData newQuest = loader.loadQuest(id);
-		if (newQuest.id.empty())
-		{
+		if (newQuest.id.empty()) {
 			g_logger->logError("CharacterCore", "Could not load quest: " + id);
 			return;
 		}
@@ -148,32 +123,27 @@ void CharacterCore::setQuestState(const std::string& id, QuestState state)
 		m_data.questStates.insert({ id, state });
 		return;
 	}
-	if (state != QuestState::Started && m_data.questStates.find(id) != m_data.questStates.end())
-	{
+	if (state != QuestState::Started && m_data.questStates.find(id) != m_data.questStates.end()) {
 		m_data.questStates[id] = state;
 		return;
 	}
 	g_logger->logError("CharacterCore", "Cannot change quest state for quest: " + id + ". Either the quest has already started (and cannot be started again) or the quest has not yet started and needs to be started first.");
 }
 
-void CharacterCore::setQuickslot(const std::string& item, int nr)
-{
-	if (nr == 1)
-	{
+void CharacterCore::setQuickslot(const std::string& item, int nr) {
+	if (nr == 1) {
 		m_data.quickSlot1 = item;
 	}
-	else if (nr == 2)
-	{
+	else if (nr == 2) {
 		m_data.quickSlot2 = item;
 	}
 }
 
-bool CharacterCore::save(const std::string& fileName, const string& name) 
-{
+bool CharacterCore::save(const std::string& fileName, const string& name) {
 	m_data.timePlayed += m_stopwatch.restart();
 	m_data.dateSaved = time(nullptr);
 	m_data.saveGameName = name;
-	
+
 	// write to savefile.
 	CharacterCoreWriter writer;
 
@@ -181,8 +151,7 @@ bool CharacterCore::save(const std::string& fileName, const string& name)
 	return writer.saveToFile(fileName, m_data);
 }
 
-bool CharacterCore::quicksave()
-{
+bool CharacterCore::quicksave() {
 	m_data.timePlayed += m_stopwatch.restart();
 	m_data.dateSaved = time(nullptr);
 	m_data.saveGameName = "Quicksave";
@@ -193,41 +162,34 @@ bool CharacterCore::quicksave()
 	return writer.saveToFile(QUICKSAVE_LOCATION, m_data);
 }
 
-bool CharacterCore::createFile(const std::string& fileName) const
-{
+bool CharacterCore::createFile(const std::string& fileName) const {
 	CharacterCoreWriter writer;
 	return writer.createFile(fileName);
 }
 
-void CharacterCore::reloadAttributes()
-{
+void CharacterCore::reloadAttributes() {
 	m_totalAttributes = m_data.attributes;
 	loadEquipmentItems();
-	for (auto &it : m_equippedItems)
-	{
+	for (auto &it : m_equippedItems) {
 		if (it.second == nullptr) continue;
 		m_totalAttributes.addBean(it.second->getAttributes());
 	}
 	m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 }
 
-void CharacterCore::reloadWeaponSlots()
-{
+void CharacterCore::reloadWeaponSlots() {
 	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
 	if (wep == nullptr) return;
 	wep->reload();
-	for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++)
-	{
+	for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++) {
 		wep->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
-		for (auto& it : m_data.equippedWeaponSlots[slot].second)
-		{
+		for (auto& it : m_data.equippedWeaponSlots[slot].second) {
 			wep->addModifier(slot, it, false);
 		}
 	}
 }
 
-void CharacterCore::loadEquipmentItems()
-{
+void CharacterCore::loadEquipmentItems() {
 	clearEquippedItems();
 
 	Weapon* eqWeapon = nullptr;
@@ -237,44 +199,35 @@ void CharacterCore::loadEquipmentItems()
 	Item* eqNeck = nullptr;
 	Item* eqRing1 = nullptr;
 	Item* eqRing2 = nullptr;
-	if (!m_data.equippedWeapon.empty() && g_resourceManager->getItemBean(m_data.equippedWeapon) != nullptr)
-	{
+	if (!m_data.equippedWeapon.empty() && g_resourceManager->getItemBean(m_data.equippedWeapon) != nullptr) {
 		eqWeapon = new Weapon(*g_resourceManager->getItemBean(m_data.equippedWeapon));
 		// add equipped spells and their modifiers
-		for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++)
-		{
+		for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++) {
 			eqWeapon->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
-			for (auto& it : m_data.equippedWeaponSlots[slot].second)
-			{
+			for (auto& it : m_data.equippedWeaponSlots[slot].second) {
 				eqWeapon->addModifier(slot, it, false);
 			}
 		}
 	}
-	if (!m_data.equippedBack.empty() && g_resourceManager->getItemBean(m_data.equippedBack) != nullptr)
-	{
+	if (!m_data.equippedBack.empty() && g_resourceManager->getItemBean(m_data.equippedBack) != nullptr) {
 		eqBack = new Item(*g_resourceManager->getItemBean(m_data.equippedBack));
 	}
-	if (!m_data.equippedBody.empty() && g_resourceManager->getItemBean(m_data.equippedBody) != nullptr)
-	{
+	if (!m_data.equippedBody.empty() && g_resourceManager->getItemBean(m_data.equippedBody) != nullptr) {
 		eqBody = new Item(*g_resourceManager->getItemBean(m_data.equippedBody));
 	}
-	if (!m_data.equippedHead.empty() && g_resourceManager->getItemBean(m_data.equippedHead) != nullptr)
-	{
+	if (!m_data.equippedHead.empty() && g_resourceManager->getItemBean(m_data.equippedHead) != nullptr) {
 		eqHead = new Item(*g_resourceManager->getItemBean(m_data.equippedHead));
 	}
-	if (!m_data.equippedNeck.empty() && g_resourceManager->getItemBean(m_data.equippedNeck) != nullptr)
-	{
+	if (!m_data.equippedNeck.empty() && g_resourceManager->getItemBean(m_data.equippedNeck) != nullptr) {
 		eqNeck = new Item(*g_resourceManager->getItemBean(m_data.equippedNeck));
 	}
-	if (!m_data.equippedRing1.empty() && g_resourceManager->getItemBean(m_data.equippedRing1) != nullptr)
-	{
+	if (!m_data.equippedRing1.empty() && g_resourceManager->getItemBean(m_data.equippedRing1) != nullptr) {
 		eqRing1 = new Item(*g_resourceManager->getItemBean(m_data.equippedRing1));
 	}
-	if (!m_data.equippedRing2.empty() && g_resourceManager->getItemBean(m_data.equippedRing2) != nullptr)
-	{
+	if (!m_data.equippedRing2.empty() && g_resourceManager->getItemBean(m_data.equippedRing2) != nullptr) {
 		eqRing2 = new Item(*g_resourceManager->getItemBean(m_data.equippedRing2));
 	}
-	
+
 	m_equippedItems.insert({ ItemType::Equipment_weapon, eqWeapon });
 	m_equippedItems.insert({ ItemType::Equipment_back, eqBack });
 	m_equippedItems.insert({ ItemType::Equipment_body, eqBody });
@@ -284,14 +237,11 @@ void CharacterCore::loadEquipmentItems()
 	m_equippedItems.insert({ ItemType::Equipment_ring_2, eqRing2 });
 }
 
-void CharacterCore::loadItems()
-{
+void CharacterCore::loadItems() {
 	clearItems();
-	for (auto& it : m_data.items)
-	{
+	for (auto& it : m_data.items) {
 		const ItemBean* bean = g_resourceManager->getItemBean(it.first);
-		if (bean == nullptr)
-		{
+		if (bean == nullptr) {
 			g_logger->logError("CharacterCore", "Item not found: " + it.first);
 			continue;
 		}
@@ -299,22 +249,18 @@ void CharacterCore::loadItems()
 	}
 }
 
-void CharacterCore::clearEquippedItems()
-{
-	for (auto& it : m_equippedItems)
-	{
+void CharacterCore::clearEquippedItems() {
+	for (auto& it : m_equippedItems) {
 		delete it.second;
 	}
 	m_equippedItems.clear();
 }
 
-void CharacterCore::clearItems()
-{
+void CharacterCore::clearItems() {
 	m_items.clear();
 }
 
-void CharacterCore::initializeMaps(const std::string& level)
-{
+void CharacterCore::initializeMaps(const std::string& level) {
 	// if these entries for the given level already exist, an insert will do nothing.
 	m_data.enemiesKilled.insert({ level, std::set<int>() });
 	m_data.enemiesLooted.insert({ level, std::set<int>() });
@@ -322,97 +268,79 @@ void CharacterCore::initializeMaps(const std::string& level)
 	m_data.chestsLooted.insert({ level, std::set<int>() });
 }
 
-void CharacterCore::setEnemyKilled(const std::string& level, int pos)
-{
+void CharacterCore::setEnemyKilled(const std::string& level, int pos) {
 	m_data.enemiesKilled.at(level).insert(pos);
 }
 
-void CharacterCore::setEnemyLooted(const std::string& level, int pos)
-{
+void CharacterCore::setEnemyLooted(const std::string& level, int pos) {
 	m_data.enemiesLooted.at(level).insert(pos);
 }
 
-void CharacterCore::setItemLooted(const std::string& level, int pos)
-{
+void CharacterCore::setItemLooted(const std::string& level, int pos) {
 	m_data.itemsLooted.at(level).insert(pos);
 }
 
-void CharacterCore::setChestLooted(const std::string& level, int pos)
-{
+void CharacterCore::setChestLooted(const std::string& level, int pos) {
 	m_data.chestsLooted.at(level).insert(pos);
 }
 
-const QuestData* CharacterCore::getQuestData(const std::string& questID) const
-{
-	if (m_quests.find(questID) == m_quests.end())
-	{
+const QuestData* CharacterCore::getQuestData(const std::string& questID) const {
+	if (m_quests.find(questID) == m_quests.end()) {
 		g_logger->logError("CharacterCore", "Quest: " + questID + " has no quest data!");
 		return nullptr;
 	}
 	return &m_quests.at(questID);
 }
 
-int CharacterCore::getNumberOfTargetsKilled(const std::string& questID, const std::string& name) const
-{
+int CharacterCore::getNumberOfTargetsKilled(const std::string& questID, const std::string& name) const {
 	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end() ||
-		m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end())
-	{
+		m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end()) {
 		return 0;
 	}
 	return m_data.questTargetProgress.at(questID).at(name);
 }
 
-int CharacterCore::getNumberOfTotalTargets(const std::string& questID, const std::string& name) const
-{
+int CharacterCore::getNumberOfTotalTargets(const std::string& questID, const std::string& name) const {
 	if (m_quests.find(questID) == m_quests.end() ||
-		m_quests.at(questID).targets.find(name) == m_quests.at(questID).targets.end())
-	{
+		m_quests.at(questID).targets.find(name) == m_quests.at(questID).targets.end()) {
 		return 0;
 	}
 	return m_quests.at(questID).targets.at(name);
 }
 
-bool CharacterCore::isQuestComplete(const std::string& questID) const
-{
+bool CharacterCore::isQuestComplete(const std::string& questID) const {
 	if (getQuestState(questID) != QuestState::Started) return false;
-	if (m_quests.find(questID) == m_quests.end())
-	{
+	if (m_quests.find(questID) == m_quests.end()) {
 		g_logger->logError("CharacterCore", "Quest: " + questID + " has no quest data!");
 		return false;
 	}
 	QuestData data = m_quests.at(questID);
 
 	// check quest conditions
-	if (!data.conditions.empty())
-	{
-		if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end()) 
+	if (!data.conditions.empty()) {
+		if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end())
 			return false;
-		for (auto& it : data.conditions)
-		{
+		for (auto& it : data.conditions) {
 			if (m_data.questConditionProgress.at(questID).find(it) == m_data.questConditionProgress.at(questID).end())
 				return false;
 		}
 	}
 
 	// check quest targets
-	if (!data.targets.empty())
-	{
+	if (!data.targets.empty()) {
 		if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end())
 			return false;
-		for (auto& it : data.targets)
-		{
+		for (auto& it : data.targets) {
 			if (m_data.questTargetProgress.at(questID).find(it.first) == m_data.questTargetProgress.at(questID).end())
 				return false;
 			if (m_data.questTargetProgress.at(questID).at(it.first) < it.second)
 				return false;
 		}
 	}
-	
+
 	// check collectibles
-	if (!data.collectibles.empty())
-	{
-		for (auto& it : data.collectibles)
-		{
+	if (!data.collectibles.empty()) {
+		for (auto& it : data.collectibles) {
 			if (m_data.items.find(it.first) == m_data.items.end())
 				return false;
 			if (m_data.items.at(it.first) < it.second)
@@ -423,44 +351,35 @@ bool CharacterCore::isQuestComplete(const std::string& questID) const
 	return true;
 }
 
-void CharacterCore::setQuestTargetKilled(const std::string& questID, const std::string& name)
-{
-	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end())
-	{
+void CharacterCore::setQuestTargetKilled(const std::string& questID, const std::string& name) {
+	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end()) {
 		m_data.questTargetProgress.insert({ questID, std::map<std::string, int>() });
 	}
-	if (m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end())
-	{
+	if (m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end()) {
 		m_data.questTargetProgress.at(questID).insert({ name, 0 });
 	}
 	m_data.questTargetProgress.at(questID).at(name) = m_data.questTargetProgress.at(questID).at(name) + 1;
 }
 
-void CharacterCore::setQuestConditionFulfilled(const std::string& questID, const std::string& condition)
-{
-	if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end())
-	{
-		m_data.questConditionProgress.insert({ questID, std::set<std::string>()});
+void CharacterCore::setQuestConditionFulfilled(const std::string& questID, const std::string& condition) {
+	if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end()) {
+		m_data.questConditionProgress.insert({ questID, std::set<std::string>() });
 	}
 	m_data.questConditionProgress.at(questID).insert(condition);
 }
 
-bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID)
-{
+bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) {
 	if (m_data.enemiesKilled.find(levelID) == m_data.enemiesKilled.end()) return false;
 	if (m_data.enemiesKilled.at(levelID).find(objectID) == m_data.enemiesKilled.at(levelID).end()) return false;
 	return true;
 }
 
-const CharacterCoreData& CharacterCore::getData() const
-{
+const CharacterCoreData& CharacterCore::getData() const {
 	return m_data;
 }
 
-MerchantData CharacterCore::getMerchantData(const std::string& merchantID)
-{
-	if (m_data.merchantStates.find(merchantID) != m_data.merchantStates.end())
-	{
+MerchantData CharacterCore::getMerchantData(const std::string& merchantID) {
+	if (m_data.merchantStates.find(merchantID) != m_data.merchantStates.end()) {
 		return m_data.merchantStates.at(merchantID);
 	}
 
@@ -468,117 +387,93 @@ MerchantData CharacterCore::getMerchantData(const std::string& merchantID)
 	return loader.loadMerchant(merchantID);
 }
 
-void CharacterCore::setMerchantData(const std::string& merchantID, const MerchantData& data)
-{
+void CharacterCore::setMerchantData(const std::string& merchantID, const MerchantData& data) {
 	m_data.merchantStates[merchantID] = data;
 }
 
-const AttributeBean& CharacterCore::getTotalAttributes() const
-{
+const AttributeBean& CharacterCore::getTotalAttributes() const {
 	return m_totalAttributes;
 }
 
-std::map<std::string, int>* CharacterCore::getItems()
-{
+std::map<std::string, int>* CharacterCore::getItems() {
 	return &(m_data.items);
 }
 
-void CharacterCore::addGold(int gold)
-{
+void CharacterCore::addGold(int gold) {
 	m_data.gold += std::max(gold, 0);
 }
 
-void CharacterCore::removeGold(int gold)
-{
+void CharacterCore::removeGold(int gold) {
 	m_data.gold -= std::min(m_data.gold, gold);
 }
 
-void CharacterCore::notifyItemChange(const std::string& itemID, int amount)
-{
+void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 	if (itemID.empty()) return;
-	if (itemID.compare("gold") == 0)
-	{
-		if (amount < 0)
-		{
+	if (itemID.compare("gold") == 0) {
+		if (amount < 0) {
 			removeGold(-amount);
 		}
-		else
-		{
+		else {
 			addGold(amount);
 		}
 	}
-	else
-	{
-		if (amount < 0)
-		{
+	else {
+		if (amount < 0) {
 			removeItem(itemID, -amount);
 		}
-		else
-		{
+		else {
 			addItem(itemID, amount);
 		}
 	}
 }
 
-void CharacterCore::addItem(const std::string& item, int quantity)
-{
+void CharacterCore::addItem(const std::string& item, int quantity) {
 	auto it = m_data.items.find(item);
 
-	if (it != m_data.items.end())
-	{
+	if (it != m_data.items.end()) {
 		m_data.items.at(item) = m_data.items.at(item) + quantity;
 	}
-	else
-	{
+	else {
 		m_data.items.insert({ item, quantity });
 	}
 
 	const ItemBean* bean = g_resourceManager->getItemBean(item);
-	if (bean == nullptr)
-	{
+	if (bean == nullptr) {
 		g_logger->logError("CharacterCore", "Item not found: " + item);
 		return;
 	}
 	m_items.insert({ item, Item(*bean) });
 }
 
-void CharacterCore::removeItem(const std::string& item, int quantity)
-{
+void CharacterCore::removeItem(const std::string& item, int quantity) {
 	auto it = m_data.items.find(item);
 
-	if (it != m_data.items.end())
-	{
+	if (it != m_data.items.end()) {
 		m_data.items.at(item) = m_data.items.at(item) - quantity;
-		if (m_data.items.at(item) <= 0)
-		{
+		if (m_data.items.at(item) <= 0) {
 			m_data.items.erase(item);
 		}
 	}
 }
 
-void CharacterCore::setMap(const sf::Vector2f& position, const std::string& map)
-{
+void CharacterCore::setMap(const sf::Vector2f& position, const std::string& map) {
 	m_data.currentMap = map;
 	m_data.currentMapPosition = position;
 	m_data.isInLevel = false;
 }
 
-void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& level)
-{
+void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& level) {
 	m_data.currentLevel = level;
 	m_data.currentLevelPosition = position;
 	m_data.isInLevel = true;
 }
 
-void CharacterCore::removeModifier(SpellModifierType type, int slotNr)
-{
+void CharacterCore::removeModifier(SpellModifierType type, int slotNr) {
 	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
 
 	std::vector<SpellModifier>& modifiers = m_data.equippedWeaponSlots.at(slotNr).second;
-	for (auto& it = modifiers.begin(); it != modifiers.end(); /* don't increment here */)
-	{
-		if (it->type == type)
-		{
+	for (auto& it = modifiers.begin(); it != modifiers.end(); /* don't increment here */) {
+		if (it->type == type) {
 			it = modifiers.erase(it);
 		}
 		else ++it;
@@ -586,24 +481,20 @@ void CharacterCore::removeModifier(SpellModifierType type, int slotNr)
 	reloadWeaponSlots();
 }
 
-void CharacterCore::removeSpell(int slotNr)
-{
+void CharacterCore::removeSpell(int slotNr) {
 	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
 	m_data.equippedWeaponSlots.at(slotNr).first = SpellID::VOID;
 	m_data.equippedWeaponSlots.at(slotNr).second.clear();
 	reloadWeaponSlots();
 }
 
-void CharacterCore::addSpell(SpellID id, int slotNr)
-{
+void CharacterCore::addSpell(SpellID id, int slotNr) {
 	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
 	if (wep == nullptr) return;
 	if (!wep->isSpellAllowed(slotNr, id)) return;
 	// check if this spell is already in another slot, if yes, remove that
-	for (auto& it : m_data.equippedWeaponSlots)
-	{
-		if (it.first == id)
-		{
+	for (auto& it : m_data.equippedWeaponSlots) {
+		if (it.first == id) {
 			it.first = SpellID::VOID;
 			it.second.clear();
 		}
@@ -614,33 +505,27 @@ void CharacterCore::addSpell(SpellID id, int slotNr)
 	reloadWeaponSlots();
 }
 
-void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr)
-{
+void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr) {
 	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
 	if (wep == nullptr) return;
-	if (wep->addModifier(slotNr, modifier, true))
-	{
+	if (wep->addModifier(slotNr, modifier, true)) {
 		std::pair<SpellID, std::vector<SpellModifier>>& slot = m_data.equippedWeaponSlots.at(slotNr);
 		// check if this type already exists. if yes, remove it.
-		for (auto& it = slot.second.begin(); it != slot.second.end(); /* don't increment here */)
-		{
-			if (it->type == modifier.type)
-			{
+		for (auto& it = slot.second.begin(); it != slot.second.end(); /* don't increment here */) {
+			if (it->type == modifier.type) {
 				it = slot.second.erase(it);
 			}
 			else ++it;
 		}
-		
+
 		slot.second.push_back(modifier);
 	}
 	reloadWeaponSlots();
 }
 
-void CharacterCore::equipItem(const std::string& item, ItemType type)
-{
+void CharacterCore::equipItem(const std::string& item, ItemType type) {
 	std::string oldItem = "";
-	switch (type)
-	{
+	switch (type) {
 	case ItemType::Equipment_back:
 		oldItem = m_data.equippedBack;
 		m_data.equippedBack = item;
@@ -669,17 +554,15 @@ void CharacterCore::equipItem(const std::string& item, ItemType type)
 		oldItem = m_data.equippedWeapon;
 		m_data.equippedWeapon = item;
 		m_data.equippedWeaponSlots.clear();
-		for (int i = 0; i < (*(g_resourceManager->getItemBean(m_data.equippedWeapon))).weaponSlots.size(); i++)
-		{
+		for (int i = 0; i < (*(g_resourceManager->getItemBean(m_data.equippedWeapon))).weaponSlots.size(); i++) {
 			m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
 		}
 		break;
-	default: 
+	default:
 		return;
 	}
 	removeItem(item, 1);
-	if (!oldItem.empty())
-	{
+	if (!oldItem.empty()) {
 		addItem(oldItem, 1);
 	}
 	loadEquipmentItems();

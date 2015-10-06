@@ -5,8 +5,7 @@
 #include "Structs/ItemBean.h"
 
 // An item in cendrics / a npcs / a mobs inventory
-class Item 
-{
+class Item {
 public:
 	Item(const ItemBean& bean);
 	virtual ~Item();

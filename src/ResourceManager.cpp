@@ -5,12 +5,10 @@ using namespace std;
 
 ResourceManager *g_resourceManager;
 
-ResourceManager::ResourceManager() : m_currentError(ErrorID::VOID, "")
-{
+ResourceManager::ResourceManager() : m_currentError(ErrorID::VOID, "") {
 }
 
-ResourceManager::~ResourceManager()
-{
+ResourceManager::~ResourceManager() {
 	m_textures.clear();
 	m_fileNames.clear();
 	m_soundBuffers.clear();
@@ -19,8 +17,7 @@ ResourceManager::~ResourceManager()
 	m_itemMap.clear();
 }
 
-void ResourceManager::init()
-{
+void ResourceManager::init() {
 	m_fileNames.insert(
 	{
 		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
@@ -86,32 +83,27 @@ void ResourceManager::init()
 	});
 
 	// font should be always loaded to avoid lags when loading later
-	getBitmapFont(ResourceID::BitmapFont_default);	
+	getBitmapFont(ResourceID::BitmapFont_default);
 
 	ConfigurationReader reader;
-	if (!reader.readConfiguration(m_configuration))
-	{
+	if (!reader.readConfiguration(m_configuration)) {
 		m_configuration = DEFAULT_CONFIGURATION;
 	}
 
 	ItemReader itemReader;
-	if (!itemReader.readItems(m_itemMap))
-	{
+	if (!itemReader.readItems(m_itemMap)) {
 		m_itemMap.clear();
 		g_logger->logError("ResourceManager", "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
 		setError(ErrorID::Error_dataCorrupted, "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
 	}
 }
 
-sf::Texture* ResourceManager::getTexture(const std::string& filename)
-{
+sf::Texture* ResourceManager::getTexture(const std::string& filename) {
 	// does the texture exist yet?
 	for (std::map<std::string, sf::Texture>::iterator it = m_textures.begin();
 		it != m_textures.end();
-		++it)
-	{
-		if (filename.compare(it->first) == 0)
-		{
+		++it) {
+		if (filename.compare(it->first) == 0) {
 			return &(it->second);
 		}
 	}
@@ -120,34 +112,29 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename)
 	sf::Texture texture;
 
 	// search project's main directory
-	if (texture.loadFromFile(filename))
-	{
+	if (texture.loadFromFile(filename)) {
 		m_textures[filename] = texture;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading texture");
 		return &m_textures[filename];
 	}
 
 	g_logger->logError("ResourceManager", "Texture could not be loaded from file: " + std::string(filename));
-    std::string tmp = "Texture could not be loaded from file: " + filename;
+	std::string tmp = "Texture could not be loaded from file: " + filename;
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_textures[filename] = texture;
 	return &m_textures[filename];
 }
 
-sf::Texture* ResourceManager::getTexture(ResourceID id)
-{
+sf::Texture* ResourceManager::getTexture(ResourceID id) {
 	return getTexture(m_fileNames[id]);
 }
 
-sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename)
-{
+sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) {
 	// does the soundbuffer exist yet?
 	for (std::map<std::string, sf::SoundBuffer>::iterator it = m_soundBuffers.begin();
 		it != m_soundBuffers.end();
-		++it)
-	{
-		if (filename.compare(it->first) == 0)
-		{
+		++it) {
+		if (filename.compare(it->first) == 0) {
 			return &(it->second);
 		}
 	}
@@ -156,8 +143,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename)
 	sf::SoundBuffer soundBuffer;
 
 	// search project's main directory
-	if (soundBuffer.loadFromFile(filename))
-	{
+	if (soundBuffer.loadFromFile(filename)) {
 		m_soundBuffers[filename] = soundBuffer;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading soundbuffer");
 		return &m_soundBuffers[filename];
@@ -170,20 +156,16 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename)
 	return &m_soundBuffers[filename];
 }
 
-sf::SoundBuffer* ResourceManager::getSoundBuffer(ResourceID id)
-{
+sf::SoundBuffer* ResourceManager::getSoundBuffer(ResourceID id) {
 	return getSoundBuffer(m_fileNames[id]);
 }
 
-sf::Font* ResourceManager::getFont(const std::string &filename)
-{
+sf::Font* ResourceManager::getFont(const std::string &filename) {
 	// does the font exist yet?
 	for (std::map<std::string, sf::Font>::iterator it = m_fonts.begin();
 		it != m_fonts.end();
-		++it)
-	{
-		if (filename.compare(it->first) == 0)
-		{
+		++it) {
+		if (filename.compare(it->first) == 0) {
 			return &(it->second);
 		}
 	}
@@ -192,34 +174,29 @@ sf::Font* ResourceManager::getFont(const std::string &filename)
 	sf::Font font;
 
 	// search project's main directory
-	if (font.loadFromFile(filename))
-	{
+	if (font.loadFromFile(filename)) {
 		m_fonts[filename] = font;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading font");
 		return &m_fonts[filename];
 	}
 
 	g_logger->logError("ResourceManager", "Font could not be loaded from file: " + std::string(filename));
-    std::string tmp = "Font could not be loaded from file: " + filename;
+	std::string tmp = "Font could not be loaded from file: " + filename;
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_fonts[filename] = font;
 	return &m_fonts[filename];
 }
 
-sf::Font* ResourceManager::getFont(ResourceID id)
-{
+sf::Font* ResourceManager::getFont(ResourceID id) {
 	return getFont(m_fileNames[id]);
 }
 
-BitmapFont* ResourceManager::getBitmapFont(const std::string &filename)
-{
+BitmapFont* ResourceManager::getBitmapFont(const std::string &filename) {
 	// does the font exist yet?
 	for (auto it = m_bitmapFonts.begin();
 		it != m_bitmapFonts.end();
-		++it)
-	{
-		if (filename.compare(it->first) == 0)
-		{
+		++it) {
+		if (filename.compare(it->first) == 0) {
 			return &(it->second);
 		}
 	}
@@ -228,8 +205,7 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string &filename)
 	BitmapFont font;
 
 	// search project's main directory
-	if (font.loadFromFile(filename))
-	{
+	if (font.loadFromFile(filename)) {
 		m_bitmapFonts[filename] = font;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading bitmap font");
 		return &m_bitmapFonts[filename];
@@ -242,44 +218,36 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string &filename)
 	return &m_bitmapFonts[filename];
 }
 
-BitmapFont* ResourceManager::getBitmapFont(ResourceID id)
-{
+BitmapFont* ResourceManager::getBitmapFont(ResourceID id) {
 	return getBitmapFont(m_fileNames[id]);
 }
 
-const ItemBean* ResourceManager::getItemBean(const std::string& id)
-{
-	if (m_itemMap.find(id) != m_itemMap.end())
-	{
+const ItemBean* ResourceManager::getItemBean(const std::string& id) {
+	if (m_itemMap.find(id) != m_itemMap.end()) {
 		return &m_itemMap.at(id);
 	}
-	else
-	{
+	else {
 		g_logger->logError("ResourceManager", "Item not found with ID: " + id);
 		return nullptr;
 	}
 }
 
-void ResourceManager::deleteResource(ResourceID id)
-{
+void ResourceManager::deleteResource(ResourceID id) {
 	deleteResource(m_fileNames[id]);
 }
 
-void ResourceManager::deleteResource(const std::string &filename)
-{
+void ResourceManager::deleteResource(const std::string &filename) {
 	// delete texture
 	auto& textureIt = m_textures.find(filename);
-	if (textureIt != m_textures.end())
-	{
+	if (textureIt != m_textures.end()) {
 		m_textures.erase(textureIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing texture");
 		return;
 	}
-		
+
 	// delete font
 	auto& fontIt = m_fonts.find(filename);
-	if (fontIt != m_fonts.end())
-	{
+	if (fontIt != m_fonts.end()) {
 		m_fonts.erase(fontIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing font");
 		return;
@@ -287,8 +255,7 @@ void ResourceManager::deleteResource(const std::string &filename)
 
 	// delete bitmap font
 	auto& bitmapFontIt = m_bitmapFonts.find(filename);
-	if (bitmapFontIt != m_bitmapFonts.end())
-	{
+	if (bitmapFontIt != m_bitmapFonts.end()) {
 		m_bitmapFonts.erase(bitmapFontIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing bitmap font");
 		return;
@@ -296,70 +263,57 @@ void ResourceManager::deleteResource(const std::string &filename)
 
 	// delete soundbuffer
 	auto& soundBufferIt = m_soundBuffers.find(filename);
-	if (soundBufferIt != m_soundBuffers.end())
-	{
+	if (soundBufferIt != m_soundBuffers.end()) {
 		m_soundBuffers.erase(soundBufferIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing soundbuffer");
 		return;
 	}
 }
 
-void ResourceManager::playSound(sf::Sound& sound, ResourceID id)
-{
-	if (m_configuration.isSoundOn)
-	{
+void ResourceManager::playSound(sf::Sound& sound, ResourceID id) {
+	if (m_configuration.isSoundOn) {
 		sound.setBuffer(*getSoundBuffer(id));
 		sound.setVolume(static_cast<float>(m_configuration.volume));
 		sound.play();
 	}
 }
 
-void ResourceManager::playMusic(sf::Music& music, const std::string& filename)
-{
-	if (m_configuration.isSoundOn && !filename.empty())
-	{
-		if (music.openFromFile(filename))
-		{
+void ResourceManager::playMusic(sf::Music& music, const std::string& filename) {
+	if (m_configuration.isSoundOn && !filename.empty()) {
+		if (music.openFromFile(filename)) {
 			music.setLoop(true);
 			music.setVolume(static_cast<float>(m_configuration.volume));
 			music.play();
 		}
-		else
-		{
+		else {
 			g_logger->logError("ResourceManager", "Could not read music from file: " + filename);
 		}
 	}
 }
 
 
-char* ResourceManager::getFilename(ResourceID id)
-{
+char* ResourceManager::getFilename(ResourceID id) {
 	return &m_fileNames[id][0u];
 }
 
-const std::pair<ErrorID, std::string>* ResourceManager::pollError() const
-{
+const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {
 	return &m_currentError;
 }
 
-ConfigurationData& ResourceManager::getConfiguration()
-{
+ConfigurationData& ResourceManager::getConfiguration() {
 	return m_configuration;
 }
 
-int ResourceManager::getMaxFPS() const
-{
+int ResourceManager::getMaxFPS() const {
 	return m_configuration.maxFrameRate;
 }
 
-void ResourceManager::setError(ErrorID id, const string &description)
-{
+void ResourceManager::setError(ErrorID id, const string &description) {
 	m_currentError.first = id;
 	m_currentError.second = description;
 }
 
-void ResourceManager::deleteLevelResources()
-{
+void ResourceManager::deleteLevelResources() {
 	// delete spell resources
 	deleteResource(ResourceID::Texture_spell_fireball);
 	deleteResource(ResourceID::Texture_spell_iceball);
@@ -394,14 +348,13 @@ void ResourceManager::deleteLevelResources()
 
 	// delete item in level resources
 	deleteResource(ResourceID::Texture_levelitems);
-	
+
 	// delete game over sprite
 	deleteResource(ResourceID::Texture_screen_gameover);
-	
+
 }
 
-void ResourceManager::loadLevelResources()
-{
+void ResourceManager::loadLevelResources() {
 	// load spell resources
 	getTexture(ResourceID::Texture_spell_fireball);
 	getTexture(ResourceID::Texture_spell_iceball);

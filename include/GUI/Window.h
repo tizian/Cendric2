@@ -15,8 +15,7 @@ enum class WindowOrnamentStyle {
 	LARGE
 };
 
-class Window : public GameObject
-{
+class Window : public GameObject {
 public:
 	Window(const sf::FloatRect& box, WindowOrnamentStyle style);
 	Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor);

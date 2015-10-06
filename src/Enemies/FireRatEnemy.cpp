@@ -1,16 +1,14 @@
 #include "Enemies/FireRatEnemy.h"
 #include "LevelMainCharacter.h"
 
-FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::FireRat)
-{
+FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::FireRat) {
 	load();
 	loadAttributes();
 	loadSpells();
 	m_jumpHeight = getConfiguredMaxVelocityY() * getConfiguredMaxVelocityY() / (2 * getConfiguredGravityAcceleration());
 }
 
-void FireRatEnemy::loadAttributes()
-{
+void FireRatEnemy::loadAttributes() {
 	m_attributes.setHealth(70);
 	m_attributes.resistanceIce = -20;
 	m_attributes.calculateAttributes();
@@ -18,8 +16,7 @@ void FireRatEnemy::loadAttributes()
 	m_immuneDamageTypes.push_back(DamageType::Fire);
 }
 
-void FireRatEnemy::loadSpells()
-{
+void FireRatEnemy::loadSpells() {
 	SpellBean chopSpell = SpellBean::getSpellBean(SpellID::Chop);
 	chopSpell.damage = 15;
 	chopSpell.duration = sf::milliseconds(500);
@@ -36,19 +33,15 @@ void FireRatEnemy::loadSpells()
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
-sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const
-{
+sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
-void FireRatEnemy::handleAttackInput()
-{
+void FireRatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (distToMainChar() < getAggroRange())
-	{
+	if (distToMainChar() < getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (distToMainChar() < 100.f)
-		{
+		if (distToMainChar() < 100.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
@@ -56,15 +49,13 @@ void FireRatEnemy::handleAttackInput()
 	}
 }
 
-void FireRatEnemy::handleMovementInput()
-{
+void FireRatEnemy::handleMovementInput() {
 	Enemy::handleMovementInput();
 	// handle attack input
-	
+
 }
 
-void FireRatEnemy::load()
-{
+void FireRatEnemy::load() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 
@@ -112,27 +103,22 @@ void FireRatEnemy::load()
 	playCurrentAnimation(true);
 }
 
-float FireRatEnemy::getConfiguredMaxVelocityY() const
-{
+float FireRatEnemy::getConfiguredMaxVelocityY() const {
 	return 400.0f;
 }
 
-float FireRatEnemy::getConfiguredMaxVelocityX() const
-{
+float FireRatEnemy::getConfiguredMaxVelocityX() const {
 	return 50.0f;
 }
 
-sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const
-{
+sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(4 * 80);
 }
 
-float FireRatEnemy::getAggroRange() const
-{
+float FireRatEnemy::getAggroRange() const {
 	return 500.f;
 }
 
-float FireRatEnemy::getApproachingDistance() const
-{
+float FireRatEnemy::getApproachingDistance() const {
 	return 10.f;
 }

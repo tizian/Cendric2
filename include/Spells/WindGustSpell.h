@@ -4,8 +4,7 @@
 #include "Spell.h"
 #include "Particles/ParticleSystem.h"
 
-class WindGustSpell : public Spell
-{
+class WindGustSpell : public Spell {
 public:
 	WindGustSpell();
 	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

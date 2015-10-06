@@ -7,8 +7,7 @@
 
 // describes the configuration that can be modified by the user.
 // it is loaded every time the game starts and stored in the resource manager.
-struct ConfigurationData
-{
+struct ConfigurationData {
 	Language language;
 	bool isSoundOn;
 	// in percent
@@ -61,36 +60,36 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 	80,
 	DEFAULT_KEYMAP,
 	std::map < Key, sf::Keyboard::Key >(
-		{
-			// assuming that it will never be "KeyCount" as input.
-			// the other option was sf::Keyboard::Unknown, but those'd be are all unhandled keys...
-			{ Key::Escape, sf::Keyboard::KeyCount },
-			{ Key::Quickload, sf::Keyboard::KeyCount },
-			{ Key::Quicksave, sf::Keyboard::KeyCount },
-			{ Key::Inventory, sf::Keyboard::KeyCount },
-			{ Key::CharacterInfo, sf::Keyboard::KeyCount },
-			{ Key::Journal, sf::Keyboard::KeyCount },
-			{ Key::Spellbook, sf::Keyboard::KeyCount },
-			{ Key::Interact, sf::Keyboard::KeyCount },
-			{ Key::Confirm, sf::Keyboard::KeyCount },
-			{ Key::Left, sf::Keyboard::Left },
-			{ Key::Right, sf::Keyboard::Right },
-			{ Key::Up, sf::Keyboard::Up},
-			{ Key::Down, sf::Keyboard::Down },
-			{ Key::Jump, sf::Keyboard::KeyCount },
-			{ Key::Chop, sf::Keyboard::KeyCount },
-			{ Key::FirstSpell, sf::Keyboard::Numpad1 },
-			{ Key::SecondSpell, sf::Keyboard::Numpad2 },
-			{ Key::ThirdSpell, sf::Keyboard::Numpad3 },
-			{ Key::FourthSpell, sf::Keyboard::Numpad4 },
-			{ Key::FifthSpell, sf::Keyboard::Numpad5 },
-			{ Key::QuickSlot1, sf::Keyboard::Numpad6 },
-			{ Key::QuickSlot2, sf::Keyboard::Numpad7 },
-			{ Key::ToggleTooltips, sf::Keyboard::KeyCount }
-		}),
-		true,
-		false,
-		true,
-		false,
-		false,
+	{
+		// assuming that it will never be "KeyCount" as input.
+		// the other option was sf::Keyboard::Unknown, but those'd be are all unhandled keys...
+		{ Key::Escape, sf::Keyboard::KeyCount },
+		{ Key::Quickload, sf::Keyboard::KeyCount },
+		{ Key::Quicksave, sf::Keyboard::KeyCount },
+		{ Key::Inventory, sf::Keyboard::KeyCount },
+		{ Key::CharacterInfo, sf::Keyboard::KeyCount },
+		{ Key::Journal, sf::Keyboard::KeyCount },
+		{ Key::Spellbook, sf::Keyboard::KeyCount },
+		{ Key::Interact, sf::Keyboard::KeyCount },
+		{ Key::Confirm, sf::Keyboard::KeyCount },
+		{ Key::Left, sf::Keyboard::Left },
+		{ Key::Right, sf::Keyboard::Right },
+		{ Key::Up, sf::Keyboard::Up },
+		{ Key::Down, sf::Keyboard::Down },
+		{ Key::Jump, sf::Keyboard::KeyCount },
+		{ Key::Chop, sf::Keyboard::KeyCount },
+		{ Key::FirstSpell, sf::Keyboard::Numpad1 },
+		{ Key::SecondSpell, sf::Keyboard::Numpad2 },
+		{ Key::ThirdSpell, sf::Keyboard::Numpad3 },
+		{ Key::FourthSpell, sf::Keyboard::Numpad4 },
+		{ Key::FifthSpell, sf::Keyboard::Numpad5 },
+		{ Key::QuickSlot1, sf::Keyboard::Numpad6 },
+		{ Key::QuickSlot2, sf::Keyboard::Numpad7 },
+		{ Key::ToggleTooltips, sf::Keyboard::KeyCount }
+	}),
+	true,
+	false,
+	true,
+	false,
+	false,
 };

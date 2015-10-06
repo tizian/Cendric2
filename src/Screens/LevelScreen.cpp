@@ -4,23 +4,19 @@
 
 using namespace std;
 
-LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : GameScreen(core)
-{
+LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : GameScreen(core) {
 	m_levelID = levelID;
 }
 
-void LevelScreen::loadForRenderTexture()
-{
+void LevelScreen::loadForRenderTexture() {
 	m_currentLevel.loadForRenderTexture(this);
 }
 
-void LevelScreen::load()
-{
+void LevelScreen::load() {
 	delete m_characterCoreCopy;
 	m_characterCoreCopy = new CharacterCore(m_characterCore->getData());
 
-	if (!(m_currentLevel.load(m_levelID)))
-	{
+	if (!(m_currentLevel.load(m_levelID))) {
 		string errormsg = m_levelID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
@@ -55,8 +51,7 @@ void LevelScreen::load()
 	g_resourceManager->playMusic(m_backgroundMusic, m_currentLevel.getMusicPath());
 }
 
-void LevelScreen::cleanUp()
-{
+void LevelScreen::cleanUp() {
 	m_backgroundMusic.stop();
 	m_currentLevel.dispose();
 	delete m_characterCoreCopy;
@@ -65,49 +60,39 @@ void LevelScreen::cleanUp()
 	delete m_overlayText;
 }
 
-CharacterCore* LevelScreen::getCharacterCore() const
-{
-	if (m_characterCoreCopy == nullptr)
-	{
+CharacterCore* LevelScreen::getCharacterCore() const {
+	if (m_characterCoreCopy == nullptr) {
 		return m_characterCore;
 	}
 	return m_characterCoreCopy;
 }
 
-void LevelScreen::writeToCore()
-{
+void LevelScreen::writeToCore() {
 	delete m_characterCore;
 	m_characterCore = new CharacterCore(m_characterCoreCopy->getData());
 }
 
-void LevelScreen::execOnEnter(const Screen *previousScreen)
-{
+void LevelScreen::execOnEnter(const Screen *previousScreen) {
 	// nop
 }
 
-void LevelScreen::execOnExit(const Screen *nextScreen)
-{
+void LevelScreen::execOnExit(const Screen *nextScreen) {
 	cleanUp();
 }
 
-void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const
-{
+void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const {
 	dynamic_cast<LevelInterface*>(m_interface)->addBuff(type, textureLocation, duration);
 }
 
-Screen* LevelScreen::update(const sf::Time& frameTime)
-{
-	if (m_isGoBackToCheckpoint)
-	{
+Screen* LevelScreen::update(const sf::Time& frameTime) {
+	if (m_isGoBackToCheckpoint) {
 		return new LoadingScreen(m_characterCore);
 	}
-	if (m_isGoBackToMenu)
-	{
+	if (m_isGoBackToMenu) {
 		return new MenuScreen(m_characterCore);
 	}
 	// handle game over
-	if (!m_isGameOver && m_mainChar->isDead())
-	{
+	if (!m_isGameOver && m_mainChar->isDead()) {
 		m_isGameOver = true;
 		m_overlaySprite->setTexture(*g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
 		m_overlayText->setString(g_textProvider->getText("YouDied"));
@@ -116,14 +101,11 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 		m_backToMenuButton->setVisible(true);
 	}
 
-	if (m_retryButton->isClicked())
-	{
-		if (m_isGameOver)
-		{
+	if (m_retryButton->isClicked()) {
+		if (m_isGameOver) {
 			m_isGoBackToCheckpoint = true;
 		}
-		else
-		{
+		else {
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 			m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
 			m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
@@ -132,14 +114,11 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 			setAllButtonsEnabled(false);
 		}
 	}
-	else if (m_backToMenuButton->isClicked())
-	{
-		if (m_isGameOver)
-		{
+	else if (m_backToMenuButton->isClicked()) {
+		if (m_isGameOver) {
 			m_isGoBackToMenu = true;
 		}
-		else
-		{
+		else {
 			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 			m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
 			m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
@@ -152,30 +131,24 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
-	if (!m_retryButton->isVisible())
-	{
+	if (!m_retryButton->isVisible()) {
 		GameScreen::update(frameTime);
 	}
 
-	if (m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape))
-	{
-		if (m_retryButton->isVisible())
-		{
+	if (m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
+		if (m_retryButton->isVisible()) {
 			m_retryButton->setVisible(false);
 			m_backToMenuButton->setVisible(false);
 		}
-		else
-		{
+		else {
 			m_retryButton->setVisible(true);
 			m_backToMenuButton->setVisible(true);
 		}
 	}
 
-	if (m_isGameOver || !m_retryButton->isVisible())
-	{
+	if (m_isGameOver || !m_retryButton->isVisible()) {
 		LevelExitBean* bean = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
-		if (bean == nullptr)
-		{
+		if (bean == nullptr) {
 			updateObjects(GameObjectType::_Enemy, frameTime);
 			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			updateObjects(GameObjectType::_MainCharacter, frameTime);
@@ -187,8 +160,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 			deleteDisposedObjects();
 			return this;
 		}
-		else
-		{
+		else {
 			writeToCore();
 			m_characterCore->setMap(bean->mapSpawnPoint, bean->mapID);
 			delete bean;
@@ -199,8 +171,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime)
 	return this;
 }
 
-void LevelScreen::render(sf::RenderTarget &renderTarget)
-{
+void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	// Render level background and content to window				(Normal level background rendered)
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
 	sf::View oldView = renderTarget.getView();
@@ -254,8 +225,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 	renderTooltipText(renderTarget);
 	GameScreen::render(renderTarget); // this will set the view to the default view!
 
-	if (m_retryButton->isVisible())
-	{
+	if (m_retryButton->isVisible()) {
 		renderTarget.draw(*m_overlaySprite);
 		renderTarget.draw(*m_overlayText);
 	}
@@ -266,20 +236,17 @@ void LevelScreen::render(sf::RenderTarget &renderTarget)
 }
 
 // yes or no form
-void LevelScreen::onNo()
-{
+void LevelScreen::onNo() {
 	m_yesOrNoForm->setDisposed();
 	setAllButtonsEnabled(true);
 }
 
-void LevelScreen::onYesToCheckpoint()
-{
+void LevelScreen::onYesToCheckpoint() {
 	m_isGoBackToCheckpoint = true;
 	m_yesOrNoForm->setDisposed();
 }
 
-void LevelScreen::onYesToMenu()
-{
+void LevelScreen::onYesToMenu() {
 	m_isGoBackToMenu = true;
 	m_yesOrNoForm->setDisposed();
 }

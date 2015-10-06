@@ -13,8 +13,7 @@
 class QuestDescriptionWindow;
 
 // a quest entry in the quest log
-class QuestEntry : public GameObject
-{
+class QuestEntry : public GameObject {
 public:
 	QuestEntry(const std::string& questID);
 
@@ -38,8 +37,7 @@ private:
 
 // the quest log, as displayed in a level or a map
 // it takes its information directly from the character core
-class QuestLog
-{
+class QuestLog {
 public:
 	QuestLog(CharacterCore* core);
 	~QuestLog();
@@ -75,7 +73,7 @@ private:
 	std::vector<QuestEntry> m_startedQuests;
 	std::vector<QuestEntry> m_completedQuests;
 	std::vector<QuestEntry> m_failedQuests;
-	
+
 	QuestState m_currentTab;
 	QuestEntry* m_selectedEntry = nullptr;
 	std::string m_selectedQuestID = "";

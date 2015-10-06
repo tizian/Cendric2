@@ -9,8 +9,7 @@
 
 #include "CharacterCore.h"
 
-class Game
-{
+class Game {
 public:
 	Game();
 	~Game();

@@ -9,8 +9,7 @@
 #include "ResourceManager.h"
 #include "Enums/EnumNames.h"
 
-class SpellSlot : public GameObject
-{
+class SpellSlot : public GameObject {
 public:
 	// creates an empty spell slot with type "type"
 	SpellSlot(SpellType type = SpellType::VOID);

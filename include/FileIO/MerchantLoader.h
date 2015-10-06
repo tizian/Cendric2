@@ -7,8 +7,7 @@
 #include "LuaBridge/LuaBridge.h"
 
 // helper class to load lua files for trading
-class MerchantLoader
-{
+class MerchantLoader {
 public:
 	MerchantLoader();
 	~MerchantLoader();

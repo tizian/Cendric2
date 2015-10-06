@@ -15,8 +15,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/YesOrNoForm.h"
 
-class MenuScreen : public Screen
-{
+class MenuScreen : public Screen {
 public:
 	MenuScreen(CharacterCore* core);
 

@@ -12,8 +12,7 @@
 class LevelMainCharacter;
 
 // A item cendric can collect in a level
-class LevelItem : public GameObject
-{
+class LevelItem : public GameObject {
 public:
 	LevelItem() : GameObject() {}
 	void load(LevelMainCharacter* mainChar, const ItemBean& bean, const sf::Vector2f& position);
@@ -23,7 +22,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
-	
+
 	GameObjectType getConfiguredType() const override;
 
 	void setTooltipText(const std::wstring& tooltip);

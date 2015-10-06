@@ -10,8 +10,7 @@
 #include "Structs/ConfigurationData.h"
 
 // a reader to read a configuration file
-class ConfigurationReader : public Reader, public ConfigurationIO
-{
+class ConfigurationReader : public Reader, public ConfigurationIO {
 public:
 	bool readConfiguration(ConfigurationData& data) const;
 	// checks a configuration, namely the key map, for duplicate entries.

@@ -1,7 +1,6 @@
 #pragma once
 
-enum class EnemyState
-{
+enum class EnemyState {
 	Idle,
 	Chasing,
 	Stunned,

@@ -5,8 +5,7 @@
 #include "Item.h"
 #include "GUI/ItemDescriptionWindow.h"
 
-class MerchantItemDescriptionWindow : public ItemDescriptionWindow
-{
+class MerchantItemDescriptionWindow : public ItemDescriptionWindow {
 public:
 	MerchantItemDescriptionWindow(float goldMultiplier);
 
