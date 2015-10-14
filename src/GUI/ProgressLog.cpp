@@ -8,7 +8,7 @@ ProgressLog::~ProgressLog() {
 }
 
 void ProgressLog::update(const sf::Time& frameTime) {
-	auto const &it = m_logTexts.begin();
+	auto it = m_logTexts.begin();
 	while (it != m_logTexts.end()) {
 		(*it).second = (*it).second - frameTime;
 		if ((*it).second <= sf::Time::Zero) {
