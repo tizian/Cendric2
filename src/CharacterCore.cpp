@@ -472,7 +472,7 @@ void CharacterCore::removeModifier(SpellModifierType type, int slotNr) {
 	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
 
 	std::vector<SpellModifier>& modifiers = m_data.equippedWeaponSlots.at(slotNr).second;
-	for (auto& it = modifiers.begin(); it != modifiers.end(); /* don't increment here */) {
+	for (auto it = modifiers.begin(); it != modifiers.end(); /* don't increment here */) {
 		if (it->type == type) {
 			it = modifiers.erase(it);
 		}
@@ -511,7 +511,7 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr) {
 	if (wep->addModifier(slotNr, modifier, true)) {
 		std::pair<SpellID, std::vector<SpellModifier>>& slot = m_data.equippedWeaponSlots.at(slotNr);
 		// check if this type already exists. if yes, remove it.
-		for (auto& it = slot.second.begin(); it != slot.second.end(); /* don't increment here */) {
+		for (auto it = slot.second.begin(); it != slot.second.end(); /* don't increment here */) {
 			if (it->type == modifier.type) {
 				it = slot.second.erase(it);
 			}
