@@ -35,7 +35,7 @@ protected:
 	// filled by the subclasses
 	std::vector<SpellModifierType> m_allowedModifiers;
 	// updates the spells damage, using the mobs attribute bean. It adds damage and calculates critical hits
-	void SpellCreator::updateDamage(SpellBean& bean) const;
+	void updateDamage(SpellBean& bean) const;
 
 	virtual void addDamageModifier(int level);
 	virtual void addRangeModifier(int level);
