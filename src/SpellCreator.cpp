@@ -90,7 +90,7 @@ const SpellBean& SpellCreator::getSpellBean() const {
 }
 
 void SpellCreator::updateDamage(SpellBean& bean) const {
-	SpellCreator::updateDamage(bean, m_attributeBean);
+	updateDamage(bean, m_attributeBean);
 }
 
 int SpellCreator::getStrengthModifierValue() const {
