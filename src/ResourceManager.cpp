@@ -238,7 +238,7 @@ void ResourceManager::deleteResource(ResourceID id) {
 
 void ResourceManager::deleteResource(const std::string &filename) {
 	// delete texture
-	auto& textureIt = m_textures.find(filename);
+	auto const &textureIt = m_textures.find(filename);
 	if (textureIt != m_textures.end()) {
 		m_textures.erase(textureIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing texture");
@@ -246,7 +246,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	}
 
 	// delete font
-	auto& fontIt = m_fonts.find(filename);
+	auto const &fontIt = m_fonts.find(filename);
 	if (fontIt != m_fonts.end()) {
 		m_fonts.erase(fontIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing font");
@@ -254,7 +254,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	}
 
 	// delete bitmap font
-	auto& bitmapFontIt = m_bitmapFonts.find(filename);
+	auto const &bitmapFontIt = m_bitmapFonts.find(filename);
 	if (bitmapFontIt != m_bitmapFonts.end()) {
 		m_bitmapFonts.erase(bitmapFontIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing bitmap font");
@@ -262,7 +262,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	}
 
 	// delete soundbuffer
-	auto& soundBufferIt = m_soundBuffers.find(filename);
+	auto const &soundBufferIt = m_soundBuffers.find(filename);
 	if (soundBufferIt != m_soundBuffers.end()) {
 		m_soundBuffers.erase(soundBufferIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing soundbuffer");
