@@ -23,7 +23,7 @@ void TextProvider::loadDialogueText(const std::string& filename) {
 void TextProvider::releaseDialogueText() {
 	if (m_currentDialogue.empty()) return;
 	for (auto& it : m_currentDialogueTexts) {
-		auto& element = m_translationMap.find(it);
+		auto const &element = m_translationMap.find(it);
 		if (element != m_translationMap.end()) m_translationMap.erase(element);
 	}
 	m_currentDialogue = "";
