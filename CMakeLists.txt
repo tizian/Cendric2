@@ -27,7 +27,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	        message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 	endif()
 else()
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++ -Wall")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 endif()
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/ext/SFML-2.2")
