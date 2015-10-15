@@ -48,8 +48,4 @@ file(GLOB_RECURSE Cendric_FILES
 
 add_executable(Cendric2 ${Cendric_FILES})
 
-if(WIN32)
-	target_link_libraries(Cendric2 sfml-system sfml-window sfml-graphics sfml-audio)
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-	target_link_libraries(Cendric2 sfml-system sfml-window sfml-graphics sfml-audio)
-endif()
+target_link_libraries(Cendric2 sfml-system sfml-window sfml-graphics sfml-audio)
