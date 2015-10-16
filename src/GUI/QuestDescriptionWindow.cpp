@@ -56,16 +56,16 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	}
 
 	for (auto& it : data->targets) {
-		std::wstring target = L"";
+		std::string target = "";
 		target.append(g_textProvider->getText(it.first));
-		target.append(L": ");
+		target.append(": ");
 
 		int goal = it.second;
 		int progress = (m_core->getQuestState(questID) == QuestState::Completed) ?
 		goal :
 			 m_core->getNumberOfTargetsKilled(questID, it.first);
 
-		target.append(to_wstring(progress) + L"/" + to_wstring(goal));
+		target.append(to_string(progress) + "/" + to_string(goal));
 
 		BitmapText targetText;
 		targetText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -75,9 +75,9 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	}
 
 	for (auto& it : data->collectibles) {
-		std::wstring collectible = L"";
+		std::string collectible = "";
 		collectible.append(g_textProvider->getText(it.first));
-		collectible.append(L": ");
+		collectible.append(": ");
 		int progress = 0;
 		int goal = it.second;
 		if (m_core->getQuestState(questID) == QuestState::Completed) {
@@ -86,7 +86,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		else if (m_core->getData().items.find(it.first) != m_core->getData().items.end()) {
 			progress = m_core->getData().items.at(it.first);
 		}
-		collectible.append(to_wstring(progress) + L"/" + to_wstring(goal));
+		collectible.append(to_string(progress) + "/" + to_string(goal));
 
 		BitmapText collectibleText;
 		collectibleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -98,9 +98,9 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	for (auto& it : data->conditions) {
 		BitmapText conditionText;
 
-		std::wstring condition = L"";
+		std::string condition = "";
 		condition.append(g_textProvider->getText(it));
-		condition.append(L": ");
+		condition.append(": ");
 
 		if ((m_core->getQuestState(questID) == QuestState::Completed)
 			||

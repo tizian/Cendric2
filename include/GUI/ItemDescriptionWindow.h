@@ -26,7 +26,7 @@ public:
 	static const float WIDTH;
 
 protected:
-	virtual std::wstring getGoldText(const Item& item) const;
+	virtual std::string getGoldText(const Item& item) const;
 
 private:
 	BitmapText m_titleText;
@@ -34,5 +34,5 @@ private:
 	BitmapText m_statsText;
 	bool m_isVisible = false;
 
-	std::wstring getAttributeText(const std::string& name, int value);
+	std::string getAttributeText(const std::string& name, int value);
 };

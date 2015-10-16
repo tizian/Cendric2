@@ -25,7 +25,7 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 
-	void setTooltipText(const std::wstring& tooltip);
+	void setTooltipText(const std::string& tooltip);
 	void setSpawnPosition(int spawnPosition);
 
 private:

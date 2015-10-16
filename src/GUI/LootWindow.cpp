@@ -12,7 +12,7 @@ LootWindow::~LootWindow() {
 	delete m_lootText;
 }
 
-void LootWindow::loadItemNames(const std::map<std::string, int>& loot, std::map<std::string, std::wstring>& names) const {
+void LootWindow::loadItemNames(const std::map<std::string, int>& loot, std::map<std::string, std::string>& names) const {
 	names.clear();
 	for (auto &it : loot) {
 		const ItemBean* bean = g_resourceManager->getItemBean(it.first);
@@ -22,21 +22,21 @@ void LootWindow::loadItemNames(const std::map<std::string, int>& loot, std::map<
 
 void LootWindow::setLoot(const std::map<string, int>& loot, int gold) {
 	delete m_lootText;
-	wstring lootText = L"";
+	string lootText = "";
 	// reload
-	std::map<std::string, std::wstring> names;
+	std::map<std::string, std::string> names;
 	loadItemNames(loot, names);
 	for (auto &it : loot) {
-		if (!lootText.empty()) lootText.append(L"\n");
+		if (!lootText.empty()) lootText.append("\n");
 		lootText.append(names.at(it.first));
-		lootText.append(L": ");
-		lootText.append(std::to_wstring(it.second));
+		lootText.append(": ");
+		lootText.append(std::to_string(it.second));
 	}
 	if (gold > 0) {
-		if (!lootText.empty()) lootText.append(L"\n\n");
+		if (!lootText.empty()) lootText.append("\n\n");
 		lootText.append(g_textProvider->getText("Gold"));
-		lootText.append(L": ");
-		lootText.append(std::to_wstring(gold));
+		lootText.append(": ");
+		lootText.append(std::to_string(gold));
 	}
 
 	m_lootText = new BitmapText(lootText);

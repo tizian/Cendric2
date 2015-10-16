@@ -9,7 +9,7 @@ using namespace std;
 // last field in the CSV p is the start position of the field sep is the
 // separator used, i.e. comma or semicolon newline says whether the field ends
 // with a newline or with a comma
-wchar_t* CSVReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd) const {
+const char* CSVReader::nextCsvField(const char *p, bool *newline, const char **escapedEnd) const {
 	*escapedEnd = nullptr;
 	*newline = false;
 
@@ -18,7 +18,7 @@ wchar_t* CSVReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd
 		p++;
 		while (1) {
 			// Find next double-quote
-			p = wcschr(p, L'"');
+			p = strchr(p, '"');
 			// Check for "", it is an escaped double-quote
 			if (p[1] != '"') {
 				*escapedEnd = p;
@@ -34,9 +34,9 @@ wchar_t* CSVReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd
 	}
 
 	// Find next newline or comma.
-	wchar_t newline_or_sep[4] = L"\n\r ";
+	char newline_or_sep[4] = "\n\r ";
 	newline_or_sep[2] = CSV_SEP;
-	p = wcspbrk(p, newline_or_sep);
+	p = strpbrk(p, newline_or_sep);
 
 	// If no newline or separator, this is the last field.
 	if (!p)
@@ -56,7 +56,7 @@ wchar_t* CSVReader::nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd
 
 // Parses the CSV data and constructs a StringTable
 // from the fields in it.
-void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const {
+void CSVReader::parseCsv(const char *csvData, StringTable& table) const {
 	table.clear();
 
 	// Return immediately if the CSV data is empty.
@@ -70,12 +70,12 @@ void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const {
 	while (csvData) {
 		// Call nextCsvField.
 		bool newline;
-		wchar_t *escapedEnd;
-		wchar_t *next = nextCsvField(csvData, &newline, &escapedEnd);
+		const char *escapedEnd;
+		const char *next = nextCsvField(csvData, &newline, &escapedEnd);
 
 		// Add new field to the current row.
 		table.back().resize(table.back().size() + 1);
-		std::wstring &field = table.back().back();
+		std::string &field = table.back().back();
 
 		// If there is a part that is escaped with double-quotes, add it
 		// (without the opening and closing double-quote, and also with any ""
@@ -83,7 +83,7 @@ void CSVReader::parseCsv(wchar_t *csvData, StringTable& table) const {
 		// after the closing double-quote, so anything after the closing
 		// double-quote is added as well (but unescaped).
 		if (escapedEnd) {
-			for (const wchar_t *ii = csvData + 1; ii != escapedEnd; ii++) {
+			for (const char *ii = csvData + 1; ii != escapedEnd; ii++) {
 				field += *ii;
 				if ('"' == ii[0] && '"' == ii[1])
 					ii++;

@@ -7,14 +7,14 @@ using namespace std;
 
 const float SpellDescriptionWindow::WIDTH = 340.f;
 
-inline std::wstring toStrMaxDecimals(float value, int decimals) {
+inline std::string toStrMaxDecimals(float value, int decimals) {
 	std::ostringstream ss;
 	ss << std::fixed << std::setprecision(decimals) << value;
 	std::string s = ss.str();
 	if (decimals > 0 && s[s.find_last_not_of('0')] == '.') {
 		s.erase(s.size() - decimals + 1);
 	}
-	return std::wstring(s.begin(), s.end());
+	return std::string(s.begin(), s.end());
 }
 
 SpellDescriptionWindow::SpellDescriptionWindow() : Window(
@@ -49,91 +49,91 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	m_titleText.setString(g_textProvider->getText(EnumNames::getSpellIDName(bean.id)));
 	m_descriptionText.setString(g_textProvider->getCroppedText(EnumNames::getSpellIDName(bean.id) + "Desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
-	wstring stats = L"\n";
+	string stats = "\n";
 
 	// cooldown
 	stats.append(g_textProvider->getText("Cooldown"));
-	stats.append(L": ");
+	stats.append(": ");
 	stats.append(toStrMaxDecimals(bean.cooldown.asSeconds(), 1));
-	stats.append(L"s\n");
+	stats.append("s\n");
 
 	// damage type & damage
 	if (bean.damageType != DamageType::VOID) {
 		stats.append(g_textProvider->getText("DamageType"));
-		stats.append(L": ");
+		stats.append(": ");
 		stats.append(g_textProvider->getText(EnumNames::getDamageTypeName(bean.damageType)));
-		stats.append(L"\n");
+		stats.append("\n");
 
 		stats.append(g_textProvider->getText("Damage"));
-		stats.append(L": ");
-		stats.append(to_wstring(bean.damage));
-		stats.append(L"\n");
+		stats.append(": ");
+		stats.append(to_string(bean.damage));
+		stats.append("\n");
 	}
 
 	// heal
 	if (bean.heal > 0) {
 		stats.append(g_textProvider->getText("Heal"));
-		stats.append(L": ");
-		stats.append(to_wstring(bean.heal));
-		stats.append(L"\n");
+		stats.append(": ");
+		stats.append(to_string(bean.heal));
+		stats.append("\n");
 	}
 
 	// reflection
 	if (bean.reflectCount > 0) {
 		stats.append(g_textProvider->getText("Reflection"));
-		stats.append(L": ");
-		stats.append(to_wstring(bean.reflectCount));
-		stats.append(L"\n");
+		stats.append(": ");
+		stats.append(to_string(bean.reflectCount));
+		stats.append("\n");
 	}
 
 	// speed
 	if (bean.startVelocity > 0) {
 		stats.append(g_textProvider->getText("Speed"));
-		stats.append(L": ");
+		stats.append(": ");
 		stats.append(toStrMaxDecimals(bean.startVelocity, 1));
-		stats.append(L"\n");
+		stats.append("\n");
 	}
 
 	// count (is only displayed when there can be count modifier additions)
 	if (bean.countModifierAddition > 0) {
 		stats.append(g_textProvider->getText("Count"));
-		stats.append(L": ");
-		stats.append(to_wstring(bean.count));
-		stats.append(L"\n");
+		stats.append(": ");
+		stats.append(to_string(bean.count));
+		stats.append("\n");
 	}
 
 	// duration (is only displayed when there can be duration modifier additions)
 	if (bean.durationModifierAddition > sf::Time::Zero) {
 		stats.append(g_textProvider->getText("Duration"));
-		stats.append(L": ");
+		stats.append(": ");
 		stats.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));
-		stats.append(L"\n");
+		stats.append("\n");
 	}
 
 	// range (is only displayed when there can be range modifier additions)
 	if (bean.rangeModifierAddition > 0.f) {
 		stats.append(g_textProvider->getText("Range"));
-		stats.append(L": ");
+		stats.append(": ");
 		stats.append(toStrMaxDecimals(bean.range, 1));
-		stats.append(L"\n");
+		stats.append("\n");
 	}
 
 	// strength (only if there is a strength modifier name set)
 	if (!strengthName.empty()) {
 		stats.append(g_textProvider->getText(strengthName));
-		stats.append(L": ");
-		stats.append(to_wstring(strengthValue));
-		stats.append(L"\n");
+		stats.append(": ");
+		stats.append(to_string(strengthValue));
+		stats.append("\n");
 	}
 
 	// allowed modifiers
-	stats.append(L"\n");
-	stats.append(L"<<< " + g_textProvider->getText("AllowedModifiers") + L" >>>");
-	stats.append(L"\n");
+	stats.append("\n");
+	stats.append("<<< " + g_textProvider->getText("AllowedModifiers") + " >>>");
+	stats.append("\n");
 
 	for (auto& it : SpellBean::getAllowedModifiers(id)) {
 		stats.append(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it)));
-		stats.append(L"\n");
+		stats.append("\n");
 	}
 
 	m_statsText.setString(stats);

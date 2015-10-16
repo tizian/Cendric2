@@ -8,25 +8,25 @@ CharacterInfo::CharacterInfo(const AttributeBean* attributes) {
 	m_attributes = attributes;
 
 	// init text
-	std::wstring names = L"";
-	names.append(g_textProvider->getText("Health") + L":\n");
-	names.append(g_textProvider->getText("HealthRegeneration") + L":\n");
-	names.append(g_textProvider->getText("CriticalHitChance") + L":\n");
-	names.append(g_textProvider->getText("Haste") + L":\n\n");
+	std::string names = "";
+	names.append(g_textProvider->getText("Health") + ":\n");
+	names.append(g_textProvider->getText("HealthRegeneration") + ":\n");
+	names.append(g_textProvider->getText("CriticalHitChance") + ":\n");
+	names.append(g_textProvider->getText("Haste") + ":\n\n");
 
 	// dmg 
-	names.append(g_textProvider->getText("PhysicalDamage") + L":\n");
-	names.append(g_textProvider->getText("FireDamage") + L":\n");
-	names.append(g_textProvider->getText("IceDamage") + L":\n");
-	names.append(g_textProvider->getText("ShadowDamage") + L":\n");
-	names.append(g_textProvider->getText("LightDamage") + L":\n\n");
+	names.append(g_textProvider->getText("PhysicalDamage") + ":\n");
+	names.append(g_textProvider->getText("FireDamage") + ":\n");
+	names.append(g_textProvider->getText("IceDamage") + ":\n");
+	names.append(g_textProvider->getText("ShadowDamage") + ":\n");
+	names.append(g_textProvider->getText("LightDamage") + ":\n\n");
 
 	// resistance
-	names.append(g_textProvider->getText("Armor") + L":\n");
-	names.append(g_textProvider->getText("FireResistance") + L":\n");
-	names.append(g_textProvider->getText("IceResistance") + L":\n");
-	names.append(g_textProvider->getText("ShadowResistance") + L":\n");
-	names.append(g_textProvider->getText("LightResistance") + L":\n");
+	names.append(g_textProvider->getText("Armor") + ":\n");
+	names.append(g_textProvider->getText("FireResistance") + ":\n");
+	names.append(g_textProvider->getText("IceResistance") + ":\n");
+	names.append(g_textProvider->getText("ShadowResistance") + ":\n");
+	names.append(g_textProvider->getText("LightResistance") + ":\n");
 
 	m_namesText.setString(names);
 	m_namesText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -81,64 +81,64 @@ void CharacterInfo::render(sf::RenderTarget& target) const {
 
 void CharacterInfo::reload() {
 	// update attributes
-	std::wstring attributes = L"";
-	attributes.append(std::to_wstring(m_attributes->currentHealthPoints));
-	attributes.append(L"/");
-	attributes.append(std::to_wstring(m_attributes->maxHealthPoints));
-	attributes.append(L"\n");
+	std::string attributes = "";
+	attributes.append(std::to_string(m_attributes->currentHealthPoints));
+	attributes.append("/");
+	attributes.append(std::to_string(m_attributes->maxHealthPoints));
+	attributes.append("\n");
 
 	// health regeneration
-	attributes.append(std::to_wstring(m_attributes->healthRegenerationPerS));
-	attributes.append(L"/s\n");
+	attributes.append(std::to_string(m_attributes->healthRegenerationPerS));
+	attributes.append("/s\n");
 
 	// crit
-	attributes.append(std::to_wstring(m_attributes->criticalHitChance));
-	attributes.append(L"%\n");
+	attributes.append(std::to_string(m_attributes->criticalHitChance));
+	attributes.append("%\n");
 
 	// cooldown reduction
-	attributes.append(std::to_wstring(m_attributes->haste));
-	attributes.append(L" - ");
-	attributes.append(std::to_wstring(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
-	attributes.append(L"% " + g_textProvider->getText("CooldownReduction"));
-	attributes.append(L"\n\n");
+	attributes.append(std::to_string(m_attributes->haste));
+	attributes.append(" - ");
+	attributes.append(std::to_string(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
+	attributes.append("% " + g_textProvider->getText("CooldownReduction"));
+	attributes.append("\n\n");
 
 	// dmg 
-	attributes.append(std::to_wstring(m_attributes->damagePhysical) + L"\n");
-	attributes.append(std::to_wstring(m_attributes->damageFire) + L"\n");
-	attributes.append(std::to_wstring(m_attributes->damageIce) + L"\n");
-	attributes.append(std::to_wstring(m_attributes->damageShadow) + L"\n");
-	attributes.append(std::to_wstring(m_attributes->damageLight) + L"\n\n");
+	attributes.append(std::to_string(m_attributes->damagePhysical) + "\n");
+	attributes.append(std::to_string(m_attributes->damageFire) + "\n");
+	attributes.append(std::to_string(m_attributes->damageIce) + "\n");
+	attributes.append(std::to_string(m_attributes->damageShadow) + "\n");
+	attributes.append(std::to_string(m_attributes->damageLight) + "\n\n");
 
 	// resistance
-	attributes.append(std::to_wstring(m_attributes->resistancePhysical));
-	attributes.append(L" - ");
-	attributes.append(std::to_wstring(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
-	attributes.append(L"% " + g_textProvider->getText("Reduction"));
-	attributes.append(L"\n");
+	attributes.append(std::to_string(m_attributes->resistancePhysical));
+	attributes.append(" - ");
+	attributes.append(std::to_string(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
+	attributes.append("% " + g_textProvider->getText("Reduction"));
+	attributes.append("\n");
 
-	attributes.append(std::to_wstring(m_attributes->resistanceFire));
-	attributes.append(L" - ");
-	attributes.append(std::to_wstring(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
-	attributes.append(L"% " + g_textProvider->getText("Reduction"));
-	attributes.append(L"\n");
+	attributes.append(std::to_string(m_attributes->resistanceFire));
+	attributes.append(" - ");
+	attributes.append(std::to_string(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
+	attributes.append("% " + g_textProvider->getText("Reduction"));
+	attributes.append("\n");
 
-	attributes.append(std::to_wstring(m_attributes->resistanceIce));
-	attributes.append(L" - ");
-	attributes.append(std::to_wstring(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
-	attributes.append(L"% " + g_textProvider->getText("Reduction"));
-	attributes.append(L"\n");
+	attributes.append(std::to_string(m_attributes->resistanceIce));
+	attributes.append(" - ");
+	attributes.append(std::to_string(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
+	attributes.append("% " + g_textProvider->getText("Reduction"));
+	attributes.append("\n");
 
-	attributes.append(std::to_wstring(m_attributes->resistanceShadow));
-	attributes.append(L" - ");
-	attributes.append(std::to_wstring(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
-	attributes.append(L"% " + g_textProvider->getText("Reduction"));
-	attributes.append(L"\n");
+	attributes.append(std::to_string(m_attributes->resistanceShadow));
+	attributes.append(" - ");
+	attributes.append(std::to_string(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
+	attributes.append("% " + g_textProvider->getText("Reduction"));
+	attributes.append("\n");
 
-	attributes.append(std::to_wstring(m_attributes->resistanceLight));
-	attributes.append(L" - ");
-	attributes.append(std::to_wstring(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
-	attributes.append(L"% " + g_textProvider->getText("Reduction"));
-	attributes.append(L"\n");
+	attributes.append(std::to_string(m_attributes->resistanceLight));
+	attributes.append(" - ");
+	attributes.append(std::to_string(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
+	attributes.append("% " + g_textProvider->getText("Reduction"));
+	attributes.append("\n");
 	m_attributeText.setString(attributes);
 
 	m_window->setWidth(3 * GUIConstants::TEXT_OFFSET + m_namesText.getLocalBounds().width + m_attributeText.getLocalBounds().width);

@@ -8,11 +8,11 @@
 
 #include "Enums/Language.h"
 
-typedef std::vector<std::vector<std::wstring> > StringTable;
+typedef std::vector<std::vector<std::string>> StringTable;
 
 // reads columns from a specified csv file
 class CSVReader : public Reader {
 protected:
-	void parseCsv(wchar_t *csvData, StringTable& table) const;
-	wchar_t* nextCsvField(wchar_t *p, bool *newline, wchar_t **escapedEnd) const;
+	void parseCsv(const char *csvData, StringTable& table) const;
+	const char* nextCsvField(const char *p, bool *newline, const char **escapedEnd) const;
 };

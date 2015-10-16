@@ -18,5 +18,5 @@ public:
 
 private:
 	BitmapText* m_lootText = nullptr;
-	void loadItemNames(const std::map<std::string, int>& loot, std::map<std::string, std::wstring>& names) const;
+	void loadItemNames(const std::map<std::string, int>& loot, std::map<std::string, std::string>& names) const;
 };

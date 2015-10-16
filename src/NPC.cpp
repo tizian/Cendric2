@@ -83,7 +83,7 @@ GameObjectType NPC::getConfiguredType() const {
 	return GameObjectType::_NPC;
 }
 
-void NPC::setTooltipText(const std::wstring& tooltip) {
+void NPC::setTooltipText(const std::string& tooltip) {
 	m_tooltipText = BitmapText(tooltip);
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);

@@ -31,7 +31,7 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	BitmapText progress;
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	progress.setColor(amount < 0 ? sf::Color::Red : sf::Color::Green);
-	std::wstring text = std::to_wstring(amount) + L"x ";
+	std::string text = std::to_string(amount) + "x ";
 	text.append(itemID.compare("gold") == 0 ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID));
 	progress.setString(text);
 	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
@@ -44,8 +44,8 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 	BitmapText progress;
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	progress.setColor(sf::Color::Cyan);
-	std::wstring progressText = g_textProvider->getText(questID) + L":\n";
-	progressText.append(g_textProvider->getText(condition) + L" " + g_textProvider->getText("Done"));
+	std::string progressText = g_textProvider->getText(questID) + ":\n";
+	progressText.append(g_textProvider->getText(condition) + " " + g_textProvider->getText("Done"));
 	progress.setString(progressText);
 	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
 	calculatePositions();
@@ -57,10 +57,10 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 	BitmapText questName;
 	questName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	questName.setColor(sf::Color::Green);
-	questName.setString(L"\"" + g_textProvider->getText(questID) + L"\"");
+	questName.setString("\"" + g_textProvider->getText(questID) + "\"");
 
-	std::wstring target = g_textProvider->getText(name);
-	target.append(L": ");
+	std::string target = g_textProvider->getText(name);
+	target.append(": ");
 	int progress = m_core->getNumberOfTargetsKilled(questID, name);
 	int goal = m_core->getNumberOfTotalTargets(questID, name);
 	if (m_core->getQuestData(questID) != nullptr) {
@@ -72,12 +72,12 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 		m_core->getData().questTargetProgress.at(questID).find(name) != m_core->getData().questTargetProgress.at(questID).end()) {
 		progress = m_core->getData().questTargetProgress.at(questID).at(name);
 	}
-	target.append(std::to_wstring(progress) + L"/" + std::to_wstring(goal));
+	target.append(std::to_string(progress) + "/" + std::to_string(goal));
 
 	// identation
 	int spacesToAdd = (int)(questName.getString().getSize() - target.size()) / 2;
 	for (int i = 0; i < spacesToAdd; i++) {
-		target.append(L" ");
+		target.append(" ");
 	}
 
 	BitmapText targetText;
@@ -95,7 +95,7 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 	BitmapText progress;
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	progress.setColor(state == QuestState::Completed ? sf::Color::Green : state == QuestState::Failed ? sf::Color::Red : sf::Color::Yellow);
-	std::wstring progressText = g_textProvider->getText(questID) + L": ";
+	std::string progressText = g_textProvider->getText(questID) + ": ";
 	progressText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
 	progress.setString(progressText);
 	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));

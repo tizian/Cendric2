@@ -6,14 +6,14 @@ using namespace std;
 
 const float ItemDescriptionWindow::WIDTH = 340.f;
 
-inline std::wstring toStrMaxDecimals(float value, int decimals) {
+inline std::string toStrMaxDecimals(float value, int decimals) {
 	std::ostringstream ss;
 	ss << std::fixed << std::setprecision(decimals) << value;
 	std::string s = ss.str();
 	if (decimals > 0 && s[s.find_last_not_of('0')] == '.') {
 		s.erase(s.size() - decimals + 1);
 	}
-	return std::wstring(s.begin(), s.end());
+	return std::string(s.begin(), s.end());
 }
 
 ItemDescriptionWindow::ItemDescriptionWindow() : Window(
@@ -32,21 +32,21 @@ ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	m_statsText.setColor(CENDRIC_COLOR_WHITE);
 }
 
-std::wstring ItemDescriptionWindow::getGoldText(const Item& item) const {
-	std::wstring goldText;
+std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
+	std::string goldText;
 	goldText.append(g_textProvider->getText("GoldValue"));
-	goldText.append(L": ");
-	goldText.append(item.getBean().goldValue < 0 ? g_textProvider->getText("Unsalable") : to_wstring(item.getBean().goldValue));
+	goldText.append(": ");
+	goldText.append(item.getBean().goldValue < 0 ? g_textProvider->getText("Unsalable") : to_string(item.getBean().goldValue));
 	return goldText;
 }
 
-std::wstring ItemDescriptionWindow::getAttributeText(const std::string& name, int value) {
-	if (value == 0) return L"";
-	wstring s;
+std::string ItemDescriptionWindow::getAttributeText(const std::string& name, int value) {
+	if (value == 0) return "";
+	string s;
 	s.append(g_textProvider->getText(name));
-	s.append(L": ");
-	s.append(to_wstring(value));
-	s.append(L"\n");
+	s.append(": ");
+	s.append(to_string(value));
+	s.append("\n");
 	return s;
 }
 
@@ -67,11 +67,11 @@ void ItemDescriptionWindow::load(const Item& item) {
 	m_titleText.setString(g_textProvider->getText(item.getID()));
 	m_descriptionText.setString(g_textProvider->getCroppedText(item.getDescription(), GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
-	wstring stats = L"\n";
+	string stats = "\n";
 	const AttributeBean& attr = item.getAttributes();
 	stats.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
 	stats.append(getAttributeText("Haste", attr.haste));
-	stats.append(getAttributeText("Critical", attr.critical));
+	stats.append(getAttributeText("Critica", attr.critical));
 	stats.append(getAttributeText("PhysicalDamage", attr.damagePhysical));
 	stats.append(getAttributeText("FireDamage", attr.damageFire));
 	stats.append(getAttributeText("IceDamage", attr.damageIce));
@@ -82,36 +82,36 @@ void ItemDescriptionWindow::load(const Item& item) {
 	stats.append(getAttributeText("IceResistance", attr.resistanceIce));
 	stats.append(getAttributeText("LightResistance", attr.resistanceLight));
 	stats.append(getAttributeText("ShadowResistance", attr.resistanceShadow));
-	stats.append(L"\n");
+	stats.append("\n");
 
 	if (item.getBean().foodDuration > sf::Time::Zero) {
 		stats.append(g_textProvider->getText("Duration"));
-		stats.append(L": ");
-		stats.append(to_wstring(static_cast<int>(floor(item.getBean().foodDuration.asSeconds()))));
-		stats.append(L" s\n");
+		stats.append(": ");
+		stats.append(to_string(static_cast<int>(floor(item.getBean().foodDuration.asSeconds()))));
+		stats.append(" s\n");
 	}
 
 	stats.append(getGoldText(item));
 
 	if (item.getType() == ItemType::Equipment_weapon) {
-		stats.append(L"\n\n");
+		stats.append("\n\n");
 		stats.append(g_textProvider->getText("WeaponDamage"));
-		stats.append(L": ");
-		stats.append(to_wstring(item.getBean().weaponChopDamage));
-		stats.append(L"\n");
+		stats.append(": ");
+		stats.append(to_string(item.getBean().weaponChopDamage));
+		stats.append("\n");
 
 		stats.append(g_textProvider->getText("Cooldown"));
-		stats.append(L": ");
+		stats.append(": ");
 		stats.append(toStrMaxDecimals(item.getBean().weaponChopCooldown.asSeconds(), 1));
-		stats.append(L"s\n");
+		stats.append("s\n");
 
 		if (item.getBean().weaponSlots.size() > 0) {
-			stats.append(L"\n");
-			stats.append(L"<<< " + g_textProvider->getText("SpellSlots") + L" >>>\n");
+			stats.append("\n");
+			stats.append("<<< " + g_textProvider->getText("SpellSlots") + " >>>\n");
 			for (auto& it : item.getBean().weaponSlots) {
 				stats.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.type)));
-				stats.append(L" - " + g_textProvider->getText("GemSockets") + L": ");
-				stats.append(to_wstring(it.modifierCount) + L"\n");
+				stats.append(" - " + g_textProvider->getText("GemSockets") + ": ");
+				stats.append(to_string(it.modifierCount) + "\n");
 			}
 		}
 	}

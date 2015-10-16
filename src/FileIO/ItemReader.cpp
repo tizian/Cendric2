@@ -13,12 +13,12 @@ ItemReader::~ItemReader() {
 
 bool ItemReader::readItems(std::map<std::string, ItemBean>& itemMap) const {
 	itemMap.clear();
-	wstring contents = getFileContentsWide(g_resourceManager->getFilename(ResourceID::Items));
+	string contents = getFileContents(g_resourceManager->getFilename(ResourceID::Items));
 	if (contents.empty()) {
 		return false;
 	}
 	StringTable tab;
-	parseCsv((wchar_t *)contents.c_str(), tab);
+	parseCsv(contents.c_str(), tab);
 	if (tab.size() == 0 || tab[0].size() != COLUMN_COUNT) {
 		g_logger->logError("ItemReader", "Error in item file, incorrect number of columns or no rows");
 		return false;

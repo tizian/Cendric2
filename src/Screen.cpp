@@ -120,7 +120,7 @@ const BitmapText* Screen::getTooltipText() const {
 	return &m_tooltipText;
 }
 
-void Screen::setTooltipText(const wstring& text, const sf::Color& color, bool isOverride) {
+void Screen::setTooltipText(const string& text, const sf::Color& color, bool isOverride) {
 	if (m_tooltipTime > sf::Time::Zero && !isOverride) {
 		// another text is still displaying
 		return;

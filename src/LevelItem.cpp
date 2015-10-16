@@ -83,7 +83,7 @@ GameObjectType LevelItem::getConfiguredType() const {
 	return GameObjectType::_LevelItem;
 }
 
-void LevelItem::setTooltipText(const std::wstring& tooltip) {
+void LevelItem::setTooltipText(const std::string& tooltip) {
 	m_tooltipText = BitmapText(tooltip);
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);

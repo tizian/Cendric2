@@ -10,17 +10,17 @@ ModifierDescriptionWindow::ModifierDescriptionWindow(const SpellModifier& modifi
 	sf::Color(0, 0, 0, 70), 
 	sf::Color::White) 
 {
-	wstring description = L"";
+	string description = "";
 
 	description.append(g_textProvider->getText("Type"));
-	description.append(L": ");
+	description.append(": ");
 	description.append(g_textProvider->getText(EnumNames::getSpellModifierTypeName(modifier.type)));
-	description.append(L"\n");
+	description.append("\n");
 
 	description.append(g_textProvider->getText("Level"));
-	description.append(L": ");
-	description.append(to_wstring(modifier.level));
-	description.append(L"\n");
+	description.append(": ");
+	description.append(to_string(modifier.level));
+	description.append("\n");
 
 	m_descriptionText = new BitmapText(description);
 	m_descriptionText->setCharacterSize(8);

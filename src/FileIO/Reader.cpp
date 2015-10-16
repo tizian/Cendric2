@@ -28,36 +28,26 @@ int Reader::countToNextChar(char* buffer, char* end, char goal) const {
 	return count;
 }
 
-std::wstring Reader::getFileContentsWide(const char *filename) const {
-	std::wifstream in(filename, std::ios::in);
-	if (in) {
-		std::wstring contents;
-		in.seekg(0, std::ios::end);
-		contents.resize(in.tellg());
-		in.seekg(0, std::ios::beg);
-		in.read(&contents[0], contents.size());
-		in.close();
-		return(contents);
-	}
-	else {
-		g_logger->logError("Reader", "Unable to read file: " + std::string(filename));
-		return L"";
-	}
-}
-
 std::string Reader::getFileContents(const char *filename) const {
-	std::ifstream in(filename, std::ios::in);
+	std::ifstream in(filename, std::ios::binary);
+	std::string s = "";
 	if (in) {
-		std::string contents;
 		in.seekg(0, std::ios::end);
-		contents.resize(in.tellg());
+		const int size = static_cast<int>(in.tellg());
+		char* content = new char[size];
 		in.seekg(0, std::ios::beg);
-		in.read(&contents[0], contents.size());
+		in.read(content, size);
+		// don't forget to null terminate char sequence
+		content[size - 1] = '\0';
+		
+		// parse to string and remove \r line endings
+		s = std::string(content);
+		s.erase(std::remove(s.begin(), s.end(), '\r'), s.end());
+		delete[] content;
 		in.close();
-		return(contents);
 	}
 	else {
 		g_logger->logError("Reader", "Unable to read file: " + std::string(filename));
-		return "";
 	}
+	return s;
 }

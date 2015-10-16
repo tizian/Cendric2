@@ -13,5 +13,5 @@ public:
 	~TranslationReader();
 
 	// fills the translation map with the translations of the language specified.
-	bool readTranslations(Language lang, std::map<std::string, std::wstring>& translationMap, const std::string& filename) const;
+	bool readTranslations(Language lang, std::map<std::string, std::string>& translationMap, const std::string& filename) const;
 };

@@ -39,7 +39,7 @@ public:
 
 	// sets the tooltip text to 'text' and display it at the tooltip position thats always at the bootom mid of the screen
 	// if override is set, this new text will display anyway, regardless of what other text is displaying.
-	void setTooltipText(const std::wstring& text, const sf::Color& color, bool isOverride);
+	void setTooltipText(const std::string& text, const sf::Color& color, bool isOverride);
 	// updates the tooltip text in 'm_tooltipText'. used so tooltip texts don't get stuck.
 	void updateTooltipText(const sf::Time& frameTime);
 	// renders the tooltip text in 'm_tooltipText'

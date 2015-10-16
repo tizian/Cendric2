@@ -22,7 +22,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void checkCollisionWithMainChar();
 
-	void setTooltipText(const std::wstring& tooltip);
+	void setTooltipText(const std::string& tooltip);
 	// if set to true, the npc will begin a dialogue with cendric when he enters its bounding box.
 	void setTalksActive(bool talksActive);
 	void setDialogueID(const std::string& id);

@@ -54,9 +54,9 @@ private:
 	BitmapText* m_speakerText = nullptr;
 	MerchantInterface* m_merchantInterface = nullptr;
 	sf::Sprite m_speakerSprite;
-	std::wstring m_npcName;
+	std::string m_npcName;
 	std::string m_npcID;
 	sf::IntRect m_npcTexturePosition;
 	const sf::IntRect m_cendricTexturePosition = sf::IntRect(0, 0, 250, 250);
-	const std::wstring m_cendricName = L"Cendric";
+	const std::string m_cendricName = "Cendric";
 };

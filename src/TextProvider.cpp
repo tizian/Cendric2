@@ -7,7 +7,7 @@ TextProvider* g_textProvider;
 
 void TextProvider::loadDialogueText(const std::string& filename) {
 	releaseDialogueText();
-	std::map<std::string, std::wstring> dialogueMap;
+	std::map<std::string, std::string> dialogueMap;
 	TranslationReader reader;
 	if (!reader.readTranslations(m_language, dialogueMap, filename)) {
 		g_logger->logInfo("TextProvider", "Dialogue has no translations or file: " + filename + " does not exist.");
@@ -43,52 +43,52 @@ void TextProvider::reload() {
 	}
 }
 
-const std::wstring& TextProvider::getText(const std::string& key) {
+const std::string& TextProvider::getText(const std::string& key) {
 	if (m_translationMap.find(key) == m_translationMap.end()) {
 		// fallback
 		g_logger->logWarning("TranslationReader", "Tried to get missing translation for key: " + key);
-		m_fallbackString = L"(undefined text " + std::wstring(key.begin(), key.end()) + L")";
+		m_fallbackString = "(undefined text " + std::string(key.begin(), key.end()) + ")";
 		return m_fallbackString;
 	}
 	return m_translationMap.at(key);
 }
 
-std::wstring TextProvider::getCroppedText(const std::string& key, int characterSize, int maxWidth) {
+std::string TextProvider::getCroppedText(const std::string& key, int characterSize, int maxWidth) {
 	// preconditions
 	if (characterSize < 1 || maxWidth < characterSize) {
-		return L"";
+		return "";
 	}
 
 	int maxLineChars = maxWidth / characterSize;
-	std::wstring uncroppedText = getText(key);
-	std::wstring text = L"";
+	std::string uncroppedText = getText(key);
+	std::string text = "";
 	while (uncroppedText.size() * characterSize > maxWidth) {
 		// check for forced newlines
-		size_t found = uncroppedText.find(L"\n");
+		size_t found = uncroppedText.find("\n");
 		if (found != string::npos && found < maxLineChars && found++ != string::npos) {
 			text.append(uncroppedText.substr(0, found));
 			uncroppedText = uncroppedText.substr(found);
 			continue;
 		}
 		// check if we need to crop a whole word
-		found = uncroppedText.find(L" ");
+		found = uncroppedText.find(" ");
 		if (found == string::npos || (found != string::npos && found > maxLineChars)) {
 			text.append(uncroppedText.substr(0, maxLineChars));
-			text.append(L"\n");
+			text.append("\n");
 			uncroppedText = uncroppedText.substr(maxLineChars);
 			continue;
 		}
 		// append words as long as we have still space for them
 		int space = maxLineChars;
 		while (true) {
-			found = uncroppedText.find(L" ");
+			found = uncroppedText.find(" ");
 			if (found != string::npos && found++ < space) {
 				text.append(uncroppedText.substr(0, found));
 				uncroppedText = uncroppedText.substr(found);
 				space = space - static_cast<int>(found);
 			}
 			else {
-				text.append(L"\n");
+				text.append("\n");
 				break;
 			}
 		}

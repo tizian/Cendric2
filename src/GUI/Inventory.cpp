@@ -396,11 +396,11 @@ void Inventory::selectTab(ItemType type) {
 }
 
 void Inventory::reloadGold() {
-	std::wstring gold = L"";
+	std::string gold = "";
 	gold.append(g_textProvider->getText("Gold"));
-	gold.append(L": ");
-	gold.append(std::to_wstring(m_core->getData().gold));
-	gold.append(L"\n\n");
+	gold.append(": ");
+	gold.append(std::to_string(m_core->getData().gold));
+	gold.append("\n\n");
 	m_goldText.setString(gold);
 }
 

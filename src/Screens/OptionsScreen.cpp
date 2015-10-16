@@ -151,9 +151,9 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_selectedSoundOn = g_resourceManager->getConfiguration().isSoundOn;
 	refreshSoundText();
 
-	wstring volumeText = g_textProvider->getText("SoundVolume") + L": ";
-	volumeText.append(to_wstring(g_resourceManager->getConfiguration().volume));
-	volumeText.append(L"%");
+	string volumeText = g_textProvider->getText("SoundVolume") + ": ";
+	volumeText.append(to_string(g_resourceManager->getConfiguration().volume));
+	volumeText.append("%");
 	m_volume = new BitmapText(volumeText);
 	m_volume->setCharacterSize(12);
 	m_volume->setPosition(sf::Vector2f(distFromLeft + 180, distFromTop));
@@ -238,42 +238,42 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 
 void OptionsScreen::refreshLanguageText() {
 	string currentLanguage = EnumNames::getLanguageName(m_selectedLanguage);
-	wstring languageText = g_textProvider->getText("Language") + L": ";
+	string languageText = g_textProvider->getText("Language") + ": ";
 	languageText.append(g_textProvider->getText(currentLanguage));
 	m_languageText->setString(languageText);
 }
 
 void OptionsScreen::refreshSoundText() {
 	string currentSwitch = m_selectedSoundOn ? "On" : "Off";
-	wstring soundText = g_textProvider->getText("Sound") + L": ";
+	string soundText = g_textProvider->getText("Sound") + ": ";
 	soundText.append(g_textProvider->getText(currentSwitch));
 	m_sound->setString(soundText);
 }
 
 void OptionsScreen::refreshVSyncText() {
 	string currentSwitch = m_selectedVSyncOn ? "On" : "Off";
-	wstring vsyncText = g_textProvider->getText("VSync") + L": ";
+	string vsyncText = g_textProvider->getText("VSync") + ": ";
 	vsyncText.append(g_textProvider->getText(currentSwitch));
 	m_vSync->setString(vsyncText);
 }
 
 void OptionsScreen::refreshQuickcastText() {
 	string currentSwitch = m_selectedQuickcastOn ? "On" : "Off";
-	wstring quickcastText = g_textProvider->getText("Quickcast") + L": ";
+	string quickcastText = g_textProvider->getText("Quickcast") + ": ";
 	quickcastText.append(g_textProvider->getText(currentSwitch));
 	m_quickcast->setString(quickcastText);
 }
 
 void OptionsScreen::refreshFullscreenText() {
 	string currentSwitch = m_selectedFullscreenOn ? "Fullscreen" : "Window";
-	wstring fullscreenText = g_textProvider->getText("DisplayMode") + L": ";
+	string fullscreenText = g_textProvider->getText("DisplayMode") + ": ";
 	fullscreenText.append(g_textProvider->getText(currentSwitch));
 	m_fullscreen->setString(fullscreenText);
 }
 
 void OptionsScreen::refreshSmoothingText() {
 	string currentSwitch = m_selectedSmoothingOn ? "On" : "Off";
-	wstring smoothingText = g_textProvider->getText("Smoothing") + L": ";
+	string smoothingText = g_textProvider->getText("Smoothing") + ": ";
 	smoothingText.append(g_textProvider->getText(currentSwitch));
 	m_smoothing->setString(smoothingText);
 }

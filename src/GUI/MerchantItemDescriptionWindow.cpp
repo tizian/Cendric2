@@ -6,10 +6,10 @@ MerchantItemDescriptionWindow::MerchantItemDescriptionWindow(float goldMultiplie
 	m_goldMultiplier = goldMultiplier;
 }
 
-std::wstring MerchantItemDescriptionWindow::getGoldText(const Item& item) const {
-	std::wstring goldText;
+std::string MerchantItemDescriptionWindow::getGoldText(const Item& item) const {
+	std::string goldText;
 	goldText.append(g_textProvider->getText("Price"));
-	goldText.append(L": ");
-	goldText.append(to_wstring((int)std::ceil(item.getBean().goldValue * m_goldMultiplier)));
+	goldText.append(": ");
+	goldText.append(to_string((int)std::ceil(item.getBean().goldValue * m_goldMultiplier)));
 	return goldText;
 }
