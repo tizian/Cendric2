@@ -54,7 +54,7 @@ std::string Reader::getFileContents(const char *filename) const {
 		std::string s = std::string(content);
 		s.erase(std::remove(s.begin(), s.end(), '\r'), s.end());
 
- #ifdef linux
+ #ifdef __linux__
 		// ä ö ü conversion for beloved linux that interprets our ansi as utf-8
 		for (int i = 0; i < s.size(); i++) {
 			if (s[i] == -28) {

@@ -23,14 +23,27 @@ LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 }
 
 Screen* LoadingScreen::update(const sf::Time& frameTime) {
+	
 	m_phi += (frameTime.asSeconds() * VELOCITY) / RADIUS;
 	if (m_phi > 2 * M_PI) m_phi = 0.f;
 	m_posGen->center = CENTER + sf::Vector2f(cos(m_phi) * RADIUS, sin(m_phi) * RADIUS);
 	m_ps->update(frameTime);
 
+#ifdef  __linux__
+
+	// linux returns once to render this screen, and then loads everything in the main thread.
+	if (!m_isLoaded) {
+		m_isLoaded = true;
+		return this;
+	}
+
+	load(m_levelToLoad, m_mapToLoad, this);
+
+#endif // __linux__
+
 	if (!m_isLoaded) return this;
 
-	m_thread.join();
+	if (m_thread.joinable()) m_thread.join();
 
 	if (m_mapToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_mapToLoad->loadForRenderTexture();
@@ -92,7 +105,10 @@ void LoadingScreen::execOnEnter(const Screen *previousScreen) {
 	m_title->setCharacterSize(50);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
 
+#ifndef  __linux__
+	// only do this multithreaded if we're not on linux. 
 	m_thread = std::thread(load, m_levelToLoad, m_mapToLoad, this);
+#endif // ! __linux__
 }
 
 void LoadingScreen::setLoaded() {
