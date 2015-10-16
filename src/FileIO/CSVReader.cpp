@@ -1,5 +1,6 @@
 #include "FileIO/CSVReader.h"
 #include "ResourceManager.h"
+#include <string.h>
 
 using namespace std;
 
