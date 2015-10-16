@@ -29,11 +29,12 @@ int Reader::countToNextChar(char* buffer, char* end, char goal) const {
 	return count;
 }
 
-inline unsigned char hex2byte(const char* hex) {
-	unsigned short byte = 0;
-	std::istringstream iss(hex);
-	iss >> std::hex >> byte;
-	return byte % 0x100;
+inline void replace(std::string& str, const std::string& oldStr, const std::string& newStr) {
+	size_t pos = 0;
+	while ((pos = str.find(oldStr, pos)) != std::string::npos) {
+		str.replace(pos, oldStr.length(), newStr);
+		pos += newStr.length();
+	}
 }
 
 std::string Reader::getFileContents(const char *filename) const {
@@ -53,31 +54,40 @@ std::string Reader::getFileContents(const char *filename) const {
 		std::string s = std::string(content);
 		s.erase(std::remove(s.begin(), s.end(), '\r'), s.end());
 
+ #ifdef linux
 		// ä ö ü conversion for beloved linux that interprets our ansi as utf-8
 		for (int i = 0; i < s.size(); i++) {
 			if (s[i] == -28) {
-				res.append("ä");
+				res.append("ae");
 			}
 			else if (s[i] == -10) {
-				res.append("ö");
+				res.append("oe");
 			}
 			else if (s[i] == -4) {
-				res.append("ü");
+				res.append("ue");
 			}
 			else if (s[i] == -60) {
-				res.append("Ä");
+				res.append("Ae");
 			}
 			else if (s[i] == -42) {
-				res.append("Ö");
+				res.append("Oe");
 			}
 			else if (s[i] == -36) {
-				res.append("Ü");
+				res.append("Ue");
 			}
 			else {
 				res += s[i];
 			}
 		}
-		
+
+		// remove duplicate ueue etc as it looks weird
+		replace(res, "ueue", "ue");
+		replace(res, "oeoe", "oe");
+		replace(res, "aeae", "ae");
+
+#else
+		res = s;
+#endif
 		delete[] content;
 		in.close();
 	}
