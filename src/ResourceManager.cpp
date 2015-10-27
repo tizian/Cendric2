@@ -77,6 +77,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_spell_color_illusion, "res/assets/gui/spell_color_illusion.png" },
 		{ ResourceID::Texture_Particle_circle, "res/assets/particles/circle.png" },
 		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" },
+		{ ResourceID::Texture_Particle_blob2, "res/assets/particles/blob2.png" },
 		{ ResourceID::Texture_Particle_snowflake, "res/assets/particles/snowflake.png" },
 		{ ResourceID::Sound_spell_fireball, "res/sound/sound_spell_fireball.wav" },
 		{ ResourceID::Sound_tile_water, "res/sound/sound_tile_water.wav" }

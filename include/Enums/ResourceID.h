@@ -60,6 +60,7 @@ enum class ResourceID {
 	Texture_GUI_spell_color_illusion,
 	Texture_Particle_circle,
 	Texture_Particle_blob,
+	Texture_Particle_blob2,
 	Texture_Particle_snowflake,
 	Sound_spell_fireball,
 	Sound_tile_water,
