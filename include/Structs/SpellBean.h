@@ -66,7 +66,7 @@ private:
 	// static SpellBean getGhostSpellBean();
 	// static SpellBean getSummonCreatureSpellBean();
 
-	// static SpellBean getLightSpellBean();
+	static SpellBean getLightSpellBean();
 	static SpellBean getDivineShieldSpellBean();
 	// static SpellBean getWrathOfTheGodsSpellBean();
 	// static SpellBean getJusticeSpellBean();

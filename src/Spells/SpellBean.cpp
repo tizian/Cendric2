@@ -11,6 +11,7 @@
 #include "SpellCreators/LeechSpellCreator.h"
 #include "SpellCreators/IcyAmbushSpellCreator.h"
 #include "SpellCreators/UnlockSpellCreator.h"
+#include "SpellCreators/LightSpellCreator.h"
 
 std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -68,6 +69,10 @@ std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 	case SpellID::Unlock:
 		types.push_back(SpellModifierType::Strength);
 		break;
+	case SpellID::Light:
+		types.push_back(SpellModifierType::Range);
+		types.push_back(SpellModifierType::Duration);
+		break;
 	default:
 		break;
 	}
@@ -110,6 +115,9 @@ SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vecto
 	case SpellID::Unlock:
 		creator = new UnlockSpellCreator(bean, owner);
 		break;
+	case SpellID::Light:
+		creator = new LightSpellCreator(bean, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -143,6 +151,8 @@ SpellBean SpellBean::getSpellBean(SpellID id) {
 		return getIcyAmbushSpellBean();
 	case SpellID::Unlock:
 		return getUnlockSpellBean();
+	case SpellID::Light:
+		return getLightSpellBean();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -348,6 +358,25 @@ SpellBean SpellBean::getIcyAmbushSpellBean() {
 	icyAmbush.rangeModifierAddition = 25.f;
 
 	return icyAmbush;
+}
+
+SpellBean SpellBean::getLightSpellBean() {
+	SpellBean light = EMPTY_SPELL;
+	light.id = SpellID::Light;
+	light.spellType = SpellType::Divine;
+	light.iconTextureRect = sf::IntRect(0, 150, 50, 50);
+
+	light.cooldown = sf::seconds(10);
+	light.boundingBox = sf::FloatRect(0, 0, 1, 1);
+	light.duration = sf::seconds(5);
+	light.damage = 100;
+	light.startVelocity = 200.f;
+	light.range = 100.f;
+
+	light.durationModifierAddition = sf::seconds(1);
+	light.rangeModifierAddition = 50.f;
+
+	return light;
 }
 
 SpellBean SpellBean::getUnlockSpellBean() {

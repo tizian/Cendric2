@@ -163,6 +163,8 @@ SpellFireBallDesc;The good old fireball. Burns enemies and melts ice.;Der gute a
 SpellIceBall;Iceball;Eisball;Iisball
 SpellIceBallDesc;An icy ball damages enemies and freezes water.;Ein eisiger Ball schadet Gegnern und gefriert Wasser.;En iisige Ball schadet Gegner und gfrüürt Wasser.
 SpellIcyAmbush;Icy Ambush;Eisiger Hinterhalt;Iischalte Hinterhalt
+SpellLight;Light;Licht;Liecht
+SpellLightDesc;There shall be light!;Es werde Licht!;Chasch chli heller mache, bitte?
 SpellIcyAmbushDesc;Cendric throws an enchanted dagger that deals big damage when it hits an enemy, stuns it and enemies in range and ports Cendric to its location.;Cendric wirft einen verzauberten Dolch, der eine grosse Menge Schaden verursacht, wenn er einen Gegner trifft und Cendric an dessen Stelle teleportiert. Gegner im Umkreis werden betäubt.;De Cendric wirft en verzauberte Dolch wo viel Schade amne Gegner macht und Gegner im Umkreis betäubt. De Cendric wird ad Stell vom troffene Gegner teleportiert.
 SpellLeech;Leech;Lebensraub;Lebesraub
 SpellLeechDesc;Sends out leeching spells that damage enemies and return with heal to Cendric if they hit an enemy.;Schickt lebensraubende Zauber aus, die zu Cendric zurückkehren, um ihn zu heilen, falls sie einen Gegner getroffen haben.;Schickt lebensraubendi Zauber uus wo zum Cendric zruggchömed zum ihn heile falls si en Gegner troffe hend.
