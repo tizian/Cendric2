@@ -12,6 +12,11 @@ public:
 	const sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredRotateSprite() const override;
 
+	void setPosition(const sf::Vector2f& pos) override;
+	void setScreen(Screen* screen) override;
+	void setDisposed() override;
+
 private:
 	AttributeBean m_additionalResistance;
+	LightObject* m_lightObject;
 };

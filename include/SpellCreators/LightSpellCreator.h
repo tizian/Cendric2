@@ -10,4 +10,7 @@ class LightSpellCreator : public SpellCreator {
 public:
 	LightSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
 	void executeSpell(const sf::Vector2f& target) override;
+
+private:
+	void addDurationModifier(int level) override;
 };

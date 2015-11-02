@@ -7,6 +7,8 @@ DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell() {
 	m_additionalResistance.resistanceIce = additionalResistance;
 	m_additionalResistance.resistanceShadow = additionalResistance;
 	m_additionalResistance.resistanceLight = additionalResistance;
+
+	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(100.f, 150.f), 0.2));
 }
 
 void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -55,4 +57,19 @@ const sf::Vector2f DivineShieldSpell::getConfiguredPositionOffset() const {
 
 bool DivineShieldSpell::getConfiguredRotateSprite() const {
 	return false;
+}
+
+void DivineShieldSpell::setDisposed() {
+	Spell::setDisposed();
+	m_lightObject->setDisposed();
+}
+
+void DivineShieldSpell::setScreen(Screen* screen) {
+	Spell::setScreen(screen);
+	screen->addObject(m_lightObject);
+}
+
+void DivineShieldSpell::setPosition(const sf::Vector2f& pos) {
+	Spell::setPosition(pos);
+	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 }
