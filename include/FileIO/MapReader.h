@@ -6,8 +6,6 @@
 
 #include "Structs/MapData.h"
 
-using namespace tinyxml2;
-
 class MapReader {
 public:
 	MapReader();
@@ -17,21 +15,21 @@ public:
 
 private:
 	// reads properties name, tile size, map size, tileset, dimming starting @map node
-	bool readMapProperties(XMLElement* map, MapData& data) const;
-	bool readMapName(XMLElement* _property, MapData& data) const;
-	bool readTilesetPath(XMLElement* _property, MapData& data) const;
-	bool readMusicPath(XMLElement* _property, MapData& data) const;
-	bool readDimming(XMLElement* _property, MapData& data) const;
+	bool readMapProperties(tinyxml2::XMLElement* map, MapData& data) const;
+	bool readMapName(tinyxml2::XMLElement* _property, MapData& data) const;
+	bool readTilesetPath(tinyxml2::XMLElement* _property, MapData& data) const;
+	bool readMusicPath(tinyxml2::XMLElement* _property, MapData& data) const;
+	bool readDimming(tinyxml2::XMLElement* _property, MapData& data) const;
 
-	bool readLayers(XMLElement* map, MapData& data) const;
+	bool readLayers(tinyxml2::XMLElement* map, MapData& data) const;
 	bool readBackgroundTileLayer(const std::string& layer, MapData& data) const;
 	bool readForegroundTileLayer(const std::string& layer, MapData& data) const;
 	bool readCollidableLayer(const std::string& layer, MapData& data) const;
 
-	bool readObjects(XMLElement* map, MapData& data) const;
-	bool readMapExits(XMLElement* objects, MapData& data) const;
-	bool readNPCs(XMLElement* objects, MapData& data) const;
-	bool readLights(XMLElement* objects, MapData& data) const;
+	bool readObjects(tinyxml2::XMLElement* map, MapData& data) const;
+	bool readMapExits(tinyxml2::XMLElement* objects, MapData& data) const;
+	bool readNPCs(tinyxml2::XMLElement* objects, MapData& data) const;
+	bool readLights(tinyxml2::XMLElement* objects, MapData& data) const;
 
 	// check map bean for validity before loading the map
 	bool checkData(MapData& data) const;

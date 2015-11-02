@@ -5,9 +5,25 @@
 #include "Logger.h"
 #include "TextProvider.h"
 
+#ifdef _WIN32
+
+#define _WIN32_WINNT 0x0500
+#include <windows.h>
+
+#endif
+
 sf::RenderTexture *g_renderTexture;
 
 int main(int argc, char* argv[]) {
+
+// show console window in windows only when debug mode is enabled.
+#ifndef DEBUG
+#ifdef _WIN32
+	HWND hWnd = GetConsoleWindow();
+	ShowWindow(hWnd, SW_HIDE);
+#endif
+#endif
+
 	g_logger = new Logger();
 	g_resourceManager = new ResourceManager();
 	g_resourceManager->init();

@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Misc\icon.h"
 
 Game::Game() {
 	if (g_resourceManager->getConfiguration().isFullscreen) {
@@ -8,6 +9,7 @@ Game::Game() {
 		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
 	}
 	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
+	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
 	m_mainSprite.setTexture(m_renderTexture.getTexture());

@@ -1,7 +1,7 @@
 #include "FileIO/LevelReader.h"
 
 #ifndef XMLCheckResult
-#define XMLCheckResult(result) if (result != XML_SUCCESS) {g_logger->logError("LevelReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
+#define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("LevelReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 #endif
 
 LevelReader::LevelReader() {
@@ -22,11 +22,11 @@ void LevelReader::initMaps() {
 }
 
 bool LevelReader::readLevel(const std::string& fileName, LevelData& data) {
-	XMLDocument xmlDoc;
-	XMLError result = xmlDoc.LoadFile(fileName.c_str());
+	tinyxml2::XMLDocument xmlDoc;
+	tinyxml2::XMLError result = xmlDoc.LoadFile(fileName.c_str());
 	XMLCheckResult(result);
 
-	XMLElement* map = xmlDoc.FirstChildElement("map");
+	tinyxml2::XMLElement* map = xmlDoc.FirstChildElement("map");
 	if (map == nullptr) {
 		g_logger->logError("LevelReader", "XML file could not be read, no map node found.");
 		return false;
@@ -42,12 +42,12 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data) {
 	return true;
 }
 
-bool LevelReader::readLights(XMLElement* objectgroup, LevelData& data) const {
-	XMLElement* object = objectgroup->FirstChildElement("object");
+bool LevelReader::readLights(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
 		int x;
-		XMLError result = object->QueryIntAttribute("x", &x);
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
 		XMLCheckResult(result);
 
 		int y;
@@ -69,9 +69,9 @@ bool LevelReader::readLights(XMLElement* objectgroup, LevelData& data) const {
 		bean.center.y = y + bean.radius.y;
 
 		// brightness for light bean
-		XMLElement* properties = object->FirstChildElement("properties");
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties != nullptr) {
-			XMLElement* _property = properties->FirstChildElement("property");
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 			while (_property != nullptr) {
 				const char* textAttr = nullptr;
 				textAttr = _property->Attribute("name");
@@ -105,12 +105,12 @@ bool LevelReader::readLights(XMLElement* objectgroup, LevelData& data) const {
 	return true;
 }
 
-bool LevelReader::readLevelExits(XMLElement* objectgroup, LevelData& data) const {
-	XMLElement* object = objectgroup->FirstChildElement("object");
+bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
 		int x;
-		XMLError result = object->QueryIntAttribute("x", &x);
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
 		XMLCheckResult(result);
 
 		int y;
@@ -132,13 +132,13 @@ bool LevelReader::readLevelExits(XMLElement* objectgroup, LevelData& data) const
 		bean.mapSpawnPoint.y = -1.f;
 
 		// map spawn point for level exit
-		XMLElement* properties = object->FirstChildElement("properties");
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties == nullptr) {
 			g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties attribute found for level exit.");
 			return false;
 		}
 
-		XMLElement* _property = properties->FirstChildElement("property");
+		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 		while (_property != nullptr) {
 			const char* textAttr = nullptr;
 			textAttr = _property->Attribute("name");
@@ -158,12 +158,12 @@ bool LevelReader::readLevelExits(XMLElement* objectgroup, LevelData& data) const
 				bean.mapID = textAttr;
 			}
 			else if (name.compare("x") == 0) {
-				XMLError result = _property->QueryIntAttribute("value", &x);
+				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
 				XMLCheckResult(result);
 				bean.mapSpawnPoint.x = static_cast<float>(x);
 			}
 			else if (name.compare("y") == 0) {
-				XMLError result = _property->QueryIntAttribute("value", &y);
+				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
 				XMLCheckResult(result);
 				bean.mapSpawnPoint.y = static_cast<float>(y);
 			}
@@ -179,12 +179,12 @@ bool LevelReader::readLevelExits(XMLElement* objectgroup, LevelData& data) const
 	return true;
 }
 
-bool LevelReader::readChestTiles(XMLElement* objectgroup, LevelData& data) const {
-	XMLElement* object = objectgroup->FirstChildElement("object");
+bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
 		int id;
-		XMLError result = object->QueryIntAttribute("id", &id);
+		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
 		XMLCheckResult(result);
 
 		int gid;
@@ -205,12 +205,12 @@ bool LevelReader::readChestTiles(XMLElement* objectgroup, LevelData& data) const
 		data.chests.insert({ id, std::pair<int, sf::Vector2f>(skinNr, sf::Vector2f(static_cast<float>(x), static_cast<float>(y))) });
 
 		// chest loot
-		XMLElement* loot = object->FirstChildElement("properties");
+		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
 		if (loot != nullptr) {
 			std::pair<std::map<std::string, int>, int> items;
 			items.second = 0;
 			items.first.clear();
-			XMLElement* item = loot->FirstChildElement("property");
+			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
 			while (item != nullptr) {
 				const char* textAttr = nullptr;
 				textAttr = item->Attribute("name");
@@ -248,12 +248,12 @@ bool LevelReader::readChestTiles(XMLElement* objectgroup, LevelData& data) const
 	return true;
 }
 
-bool LevelReader::readEnemies(XMLElement* objectgroup, LevelData& data) const {
-	XMLElement* object = objectgroup->FirstChildElement("object");
+bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
 		int id;
-		XMLError result = object->QueryIntAttribute("id", &id);
+		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
 		XMLCheckResult(result);
 
 		int gid;
@@ -277,12 +277,12 @@ bool LevelReader::readEnemies(XMLElement* objectgroup, LevelData& data) const {
 		data.enemies.insert({ id, std::pair<EnemyID, sf::Vector2f>(m_enemyMap.at(gid), sf::Vector2f(static_cast<float>(x), static_cast<float>(y))) });
 
 		// enemy loot
-		XMLElement* loot = object->FirstChildElement("properties");
+		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
 		if (loot != nullptr) {
 			std::pair<std::map<std::string, int>, int> items;
 			items.second = 0;
 			items.first.clear();
-			XMLElement* item = loot->FirstChildElement("property");
+			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
 			while (item != nullptr) {
 				const char* textAttr = nullptr;
 				textAttr = item->Attribute("name");
@@ -326,8 +326,8 @@ bool LevelReader::readEnemies(XMLElement* objectgroup, LevelData& data) const {
 	return true;
 }
 
-bool LevelReader::readObjects(XMLElement* map, LevelData& data) const {
-	XMLElement* objectgroup = map->FirstChildElement("objectgroup");
+bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const {
+	tinyxml2::XMLElement* objectgroup = map->FirstChildElement("objectgroup");
 
 	const char* textAttr;
 	while (objectgroup != nullptr) {
@@ -456,8 +456,8 @@ bool LevelReader::readBackgroundTileLayer(const std::string& layer, LevelData& d
 	return true;
 }
 
-bool LevelReader::readLayers(XMLElement* map, LevelData& data) const {
-	XMLElement* layer = map->FirstChildElement("layer");
+bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
+	tinyxml2::XMLElement* layer = map->FirstChildElement("layer");
 
 	const char* textAttr;
 	while (layer != nullptr) {
@@ -470,7 +470,7 @@ bool LevelReader::readLayers(XMLElement* map, LevelData& data) const {
 
 		std::string name = textAttr;
 
-		XMLElement* layerDataNode = layer->FirstChildElement("data");
+		tinyxml2::XMLElement* layerDataNode = layer->FirstChildElement("data");
 		if (layerDataNode == nullptr) {
 			g_logger->logError("LevelReader", "XML file could not be read, no layer->data found.");
 			return false;
@@ -523,22 +523,22 @@ bool LevelReader::readLayers(XMLElement* map, LevelData& data) const {
 	return true;
 }
 
-bool LevelReader::readItemIDs(XMLElement* _tile) {
+bool LevelReader::readItemIDs(tinyxml2::XMLElement* _tile) {
 	m_levelItemMap.clear();
 	m_levelItemMap.insert({ -1, "" });
-	XMLElement* tile = _tile;
+	tinyxml2::XMLElement* tile = _tile;
 
 	while (tile != nullptr) {
 		int tileID;
-		XMLError result = tile->QueryIntAttribute("id", &tileID);
+		tinyxml2::XMLError result = tile->QueryIntAttribute("id", &tileID);
 		XMLCheckResult(result);
 
-		XMLElement* properties = tile->FirstChildElement("properties");
+		tinyxml2::XMLElement* properties = tile->FirstChildElement("properties");
 		if (properties == nullptr) {
 			g_logger->logError("LevelReader", "Could not read item tile properties, no tileset->tile->properties tag found.");
 			return false;
 		}
-		XMLElement* _property = properties->FirstChildElement("property");
+		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 		if (_property == nullptr) {
 			g_logger->logError("LevelReader", "Could not read item tile properties, no tileset->tile->properties->property tag found.");
 			return false;
@@ -569,8 +569,8 @@ bool LevelReader::readItemIDs(XMLElement* _tile) {
 	return true;
 }
 
-bool LevelReader::readFirstGridIDs(XMLElement* map, LevelData& data) {
-	XMLElement* tileset = map->FirstChildElement("tileset");
+bool LevelReader::readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data) {
+	tinyxml2::XMLElement* tileset = map->FirstChildElement("tileset");
 
 	m_firstGidDynamicTiles = 0;
 	m_firstGidEnemies = 0;
@@ -586,7 +586,7 @@ bool LevelReader::readFirstGridIDs(XMLElement* map, LevelData& data) {
 		std::string name = textAttr;
 
 		int gid;
-		XMLError result = tileset->QueryIntAttribute("firstgid", &gid);
+		tinyxml2::XMLError result = tileset->QueryIntAttribute("firstgid", &gid);
 		XMLCheckResult(result);
 
 		if (name.find("dynamic_tiles") != std::string::npos) {
@@ -610,7 +610,7 @@ bool LevelReader::readFirstGridIDs(XMLElement* map, LevelData& data) {
 	return true;
 }
 
-bool LevelReader::readLevelName(XMLElement* _property, LevelData& data) const {
+bool LevelReader::readLevelName(tinyxml2::XMLElement* _property, LevelData& data) const {
 	// we've found the property "name"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -622,10 +622,10 @@ bool LevelReader::readLevelName(XMLElement* _property, LevelData& data) const {
 	return true;
 }
 
-bool LevelReader::readDimming(XMLElement* _property, LevelData& data) const {
+bool LevelReader::readDimming(tinyxml2::XMLElement* _property, LevelData& data) const {
 	// we've found the property "dimming"
 	float dimming = 0.f;
-	XMLError result = _property->QueryFloatAttribute("value", &dimming);
+	tinyxml2::XMLError result = _property->QueryFloatAttribute("value", &dimming);
 	XMLCheckResult(result);
 
 	if (dimming < 0.0f || dimming > 1.0f) {
@@ -637,7 +637,7 @@ bool LevelReader::readDimming(XMLElement* _property, LevelData& data) const {
 }
 
 
-bool LevelReader::readTilesetPath(XMLElement* _property, LevelData& data) const {
+bool LevelReader::readTilesetPath(tinyxml2::XMLElement* _property, LevelData& data) const {
 	// we've found the property "tilesetpath"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -649,7 +649,7 @@ bool LevelReader::readTilesetPath(XMLElement* _property, LevelData& data) const 
 	return true;
 }
 
-bool LevelReader::readMusicPath(XMLElement* _property, LevelData& data) const {
+bool LevelReader::readMusicPath(tinyxml2::XMLElement* _property, LevelData& data) const {
 	// we've found the property "musicpath"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -661,7 +661,7 @@ bool LevelReader::readMusicPath(XMLElement* _property, LevelData& data) const {
 	return true;
 }
 
-bool LevelReader::readBackgroundLayers(XMLElement* _property, LevelData& data) const {
+bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, LevelData& data) const {
 	// we've found the property "backgroundlayers"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -693,7 +693,7 @@ bool LevelReader::readBackgroundLayers(XMLElement* _property, LevelData& data) c
 	return true;
 }
 
-bool LevelReader::readLevelProperties(XMLElement* map, LevelData& data) const {
+bool LevelReader::readLevelProperties(tinyxml2::XMLElement* map, LevelData& data) const {
 	// check if renderorder is correct
 	const char* textAttr = nullptr;
 	textAttr = map->Attribute("renderorder");
@@ -721,7 +721,7 @@ bool LevelReader::readLevelProperties(XMLElement* map, LevelData& data) const {
 	}
 
 	// read map width and height
-	XMLError result = map->QueryIntAttribute("width", &data.mapSize.x);
+	tinyxml2::XMLError result = map->QueryIntAttribute("width", &data.mapSize.x);
 	XMLCheckResult(result);
 	result = map->QueryIntAttribute("height", &data.mapSize.y);
 	XMLCheckResult(result);
@@ -733,12 +733,12 @@ bool LevelReader::readLevelProperties(XMLElement* map, LevelData& data) const {
 	XMLCheckResult(result);
 
 	// read level properties
-	XMLElement* properties = map->FirstChildElement("properties");
+	tinyxml2::XMLElement* properties = map->FirstChildElement("properties");
 	if (properties == nullptr) {
 		g_logger->logError("LevelReader", "XML file could not be read, no properties node found.");
 		return false;
 	}
-	XMLElement* _property = properties->FirstChildElement("property");
+	tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 
 	while (_property != nullptr) {
 		textAttr = nullptr;

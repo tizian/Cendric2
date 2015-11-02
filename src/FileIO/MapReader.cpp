@@ -1,7 +1,7 @@
 #include "FileIO/MapReader.h"
 
 #ifndef XMLCheckResult
-#define XMLCheckResult(result) if (result != XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
+#define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 #endif
 
 using namespace std;
@@ -89,12 +89,12 @@ bool MapReader::checkData(MapData& data) const {
 	return true;
 }
 
-bool MapReader::readMapExits(XMLElement* objectgroup, MapData& data) const {
-	XMLElement* object = objectgroup->FirstChildElement("object");
+bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
 		int x;
-		XMLError result = object->QueryIntAttribute("x", &x);
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
 		XMLCheckResult(result);
 
 		int y;
@@ -116,13 +116,13 @@ bool MapReader::readMapExits(XMLElement* objectgroup, MapData& data) const {
 		bean.levelSpawnPoint.y = -1.f;
 
 		// map spawn point for level exit
-		XMLElement* properties = object->FirstChildElement("properties");
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties == nullptr) {
 			g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties attribute found for level exit.");
 			return false;
 		}
 
-		XMLElement* _property = properties->FirstChildElement("property");
+		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 		while (_property != nullptr) {
 			const char* textAttr = nullptr;
 			textAttr = _property->Attribute("name");
@@ -142,12 +142,12 @@ bool MapReader::readMapExits(XMLElement* objectgroup, MapData& data) const {
 				bean.levelID = textAttr;
 			}
 			else if (name.compare("x") == 0) {
-				XMLError result = _property->QueryIntAttribute("value", &x);
+				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
 				XMLCheckResult(result);
 				bean.levelSpawnPoint.x = static_cast<float>(x);
 			}
 			else if (name.compare("y") == 0) {
-				XMLError result = _property->QueryIntAttribute("value", &y);
+				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
 				XMLCheckResult(result);
 				bean.levelSpawnPoint.y = static_cast<float>(y);
 			}
@@ -163,12 +163,12 @@ bool MapReader::readMapExits(XMLElement* objectgroup, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readLights(XMLElement* objectgroup, MapData& data) const {
-	XMLElement* object = objectgroup->FirstChildElement("object");
+bool MapReader::readLights(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
 		int x;
-		XMLError result = object->QueryIntAttribute("x", &x);
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
 		XMLCheckResult(result);
 
 		int y;
@@ -190,9 +190,9 @@ bool MapReader::readLights(XMLElement* objectgroup, MapData& data) const {
 		bean.center.y = y + bean.radius.y;
 
 		// brightness for light bean
-		XMLElement* properties = object->FirstChildElement("properties");
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties != nullptr) {
-			XMLElement* _property = properties->FirstChildElement("property");
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 			while (_property != nullptr) {
 				const char* textAttr = nullptr;
 				textAttr = _property->Attribute("name");
@@ -226,8 +226,8 @@ bool MapReader::readLights(XMLElement* objectgroup, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readObjects(XMLElement* map, MapData& data) const {
-	XMLElement* objectgroup = map->FirstChildElement("objectgroup");
+bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
+	tinyxml2::XMLElement* objectgroup = map->FirstChildElement("objectgroup");
 
 	const char* textAttr;
 	while (objectgroup != nullptr) {
@@ -259,12 +259,12 @@ bool MapReader::readObjects(XMLElement* map, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readNPCs(XMLElement* objectgroup, MapData& data) const {
-	XMLElement* object = objectgroup->FirstChildElement("object");
+bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
 		int id;
-		XMLError result = object->QueryIntAttribute("id", &id);
+		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
 		XMLCheckResult(result);
 
 		int x;
@@ -282,9 +282,9 @@ bool MapReader::readNPCs(XMLElement* objectgroup, MapData& data) const {
 		npc.position.y = static_cast<float>(y);
 
 		// npc properties
-		XMLElement* properties = object->FirstChildElement("properties");
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties != nullptr) {
-			XMLElement* _property = properties->FirstChildElement("property");
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 			while (_property != nullptr) {
 				const char* textAttr = nullptr;
 				textAttr = _property->Attribute("name");
@@ -426,8 +426,8 @@ bool MapReader::readForegroundTileLayer(const std::string& layer, MapData& data)
 	return true;
 }
 
-bool MapReader::readLayers(XMLElement* map, MapData& data) const {
-	XMLElement* layer = map->FirstChildElement("layer");
+bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
+	tinyxml2::XMLElement* layer = map->FirstChildElement("layer");
 
 	const char* textAttr;
 	while (layer != nullptr) {
@@ -440,7 +440,7 @@ bool MapReader::readLayers(XMLElement* map, MapData& data) const {
 
 		std::string name = textAttr;
 
-		XMLElement* layerDataNode = layer->FirstChildElement("data");
+		tinyxml2::XMLElement* layerDataNode = layer->FirstChildElement("data");
 		if (layerDataNode == nullptr) {
 			g_logger->logError("MapReader", "XML file could not be read, no layer->data found.");
 			return false;
@@ -467,11 +467,11 @@ bool MapReader::readLayers(XMLElement* map, MapData& data) const {
 }
 
 bool MapReader::readMap(const char* fileName, MapData& data) {
-	XMLDocument xmlDoc;
-	XMLError result = xmlDoc.LoadFile(fileName);
+	tinyxml2::XMLDocument xmlDoc;
+	tinyxml2::XMLError result = xmlDoc.LoadFile(fileName);
 	XMLCheckResult(result);
 
-	XMLElement* map = xmlDoc.FirstChildElement("map");
+	tinyxml2::XMLElement* map = xmlDoc.FirstChildElement("map");
 	if (map == nullptr) {
 		g_logger->logError("MapReader", "XML file could not be read, no map node found.");
 		return false;
@@ -486,7 +486,7 @@ bool MapReader::readMap(const char* fileName, MapData& data) {
 	return true;
 }
 
-bool MapReader::readMapName(XMLElement* _property, MapData& data) const {
+bool MapReader::readMapName(tinyxml2::XMLElement* _property, MapData& data) const {
 	// we've found the property "name"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -498,7 +498,7 @@ bool MapReader::readMapName(XMLElement* _property, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readTilesetPath(XMLElement* _property, MapData& data) const {
+bool MapReader::readTilesetPath(tinyxml2::XMLElement* _property, MapData& data) const {
 	// we've found the property "tilesetpath"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -510,7 +510,7 @@ bool MapReader::readTilesetPath(XMLElement* _property, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readMusicPath(XMLElement* _property, MapData& data) const {
+bool MapReader::readMusicPath(tinyxml2::XMLElement* _property, MapData& data) const {
 	// we've found the property "musicpath"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -522,10 +522,10 @@ bool MapReader::readMusicPath(XMLElement* _property, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readDimming(XMLElement* _property, MapData& data) const {
+bool MapReader::readDimming(tinyxml2::XMLElement* _property, MapData& data) const {
 	// we've found the property "dimming"
 	float dimming = 0.f;
-	XMLError result = _property->QueryFloatAttribute("value", &dimming);
+	tinyxml2::XMLError result = _property->QueryFloatAttribute("value", &dimming);
 	XMLCheckResult(result);
 
 	if (dimming < 0.0f || dimming > 1.0f) {
@@ -537,7 +537,7 @@ bool MapReader::readDimming(XMLElement* _property, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readMapProperties(XMLElement* map, MapData& data) const {
+bool MapReader::readMapProperties(tinyxml2::XMLElement* map, MapData& data) const {
 	// check if renderorder is correct
 	const char* textAttr = nullptr;
 	textAttr = map->Attribute("renderorder");
@@ -565,7 +565,7 @@ bool MapReader::readMapProperties(XMLElement* map, MapData& data) const {
 	}
 
 	// read map width and height
-	XMLError result = map->QueryIntAttribute("width", &data.mapSize.x);
+	tinyxml2::XMLError result = map->QueryIntAttribute("width", &data.mapSize.x);
 	XMLCheckResult(result);
 	result = map->QueryIntAttribute("height", &data.mapSize.y);
 	XMLCheckResult(result);
@@ -577,12 +577,12 @@ bool MapReader::readMapProperties(XMLElement* map, MapData& data) const {
 	XMLCheckResult(result);
 
 	// read level properties
-	XMLElement* properties = map->FirstChildElement("properties");
+	tinyxml2::XMLElement* properties = map->FirstChildElement("properties");
 	if (properties == nullptr) {
 		g_logger->logError("MapReader", "XML file could not be read, no properties node found.");
 		return false;
 	}
-	XMLElement* _property = properties->FirstChildElement("property");
+	tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 
 	while (_property != nullptr) {
 		textAttr = nullptr;

@@ -366,15 +366,13 @@ SpellBean SpellBean::getLightSpellBean() {
 	light.spellType = SpellType::Divine;
 	light.iconTextureRect = sf::IntRect(0, 150, 50, 50);
 
-	light.cooldown = sf::seconds(10);
+	light.cooldown = sf::seconds(60);
 	light.boundingBox = sf::FloatRect(0, 0, 1, 1);
-	light.duration = sf::seconds(5);
-	light.damage = 100;
-	light.startVelocity = 200.f;
-	light.range = 100.f;
+	light.duration = sf::seconds(60);
+	light.range = 200.f;
 
-	light.durationModifierAddition = sf::seconds(1);
-	light.rangeModifierAddition = 50.f;
+	light.durationModifierAddition = sf::seconds(60);
+	light.rangeModifierAddition = 100.f;
 
 	return light;
 }

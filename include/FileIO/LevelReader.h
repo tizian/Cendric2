@@ -12,8 +12,6 @@
 #include "Structs/LevelData.h"
 #include "Enums/DynamicTileID.h"
 
-using namespace tinyxml2;
-
 class LevelReader {
 public:
 	LevelReader();
@@ -25,28 +23,28 @@ private:
 	void initMaps();
 
 	// reads properties name, tile size, map size, background layers, tileset, dimming starting @map node
-	bool readLevelProperties(XMLElement* map, LevelData& data) const;
-	bool readLevelName(XMLElement* _property, LevelData& data) const;
-	bool readBackgroundLayers(XMLElement* _property, LevelData& data) const;
-	bool readTilesetPath(XMLElement* _property, LevelData& data) const;
-	bool readMusicPath(XMLElement* _property, LevelData& data) const;
-	bool readDimming(XMLElement* _property, LevelData& data) const;
+	bool readLevelProperties(tinyxml2::XMLElement* map, LevelData& data) const;
+	bool readLevelName(tinyxml2::XMLElement* _property, LevelData& data) const;
+	bool readBackgroundLayers(tinyxml2::XMLElement* _property, LevelData& data) const;
+	bool readTilesetPath(tinyxml2::XMLElement* _property, LevelData& data) const;
+	bool readMusicPath(tinyxml2::XMLElement* _property, LevelData& data) const;
+	bool readDimming(tinyxml2::XMLElement* _property, LevelData& data) const;
 
-	bool readFirstGridIDs(XMLElement* map, LevelData& data);
-	bool readItemIDs(XMLElement* firstTile);
+	bool readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data);
+	bool readItemIDs(tinyxml2::XMLElement* firstTile);
 
-	bool readLayers(XMLElement* map, LevelData& data) const;
+	bool readLayers(tinyxml2::XMLElement* map, LevelData& data) const;
 	bool readBackgroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readForegroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readDynamicTileLayer(DynamicTileID id, const std::string& layer, LevelData& data) const;
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;
 	bool readCollidableLayer(const std::string& layer, LevelData& data) const;
 
-	bool readObjects(XMLElement* map, LevelData& data) const;
-	bool readChestTiles(XMLElement* objects, LevelData& data) const;
-	bool readEnemies(XMLElement* objects, LevelData& data) const;
-	bool readLevelExits(XMLElement* objects, LevelData & data) const;
-	bool readLights(XMLElement* objects, LevelData & data) const;
+	bool readObjects(tinyxml2::XMLElement* map, LevelData& data) const;
+	bool readChestTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readLevelExits(tinyxml2::XMLElement* objects, LevelData & data) const;
+	bool readLights(tinyxml2::XMLElement* objects, LevelData & data) const;
 
 	// this is the width in tiles of the dynamic tile tileset
 	// and used to calculate the skin of the dynamic tile.

@@ -2,7 +2,7 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000000" nextobjectid="24">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/ratcave/layer_inf.png,5.0,res/level/ratcave/layer_5.png,3.0,res/level/ratcave/layer_3.png,2.0,res/level/ratcave/layer_2.png"/>
-  <property name="dimming" value="0.5"/>
+  <property name="dimming" value="0.9"/>
   <property name="musicpath" value="res/level/ratcave/cave_try.wav"/>
   <property name="name" value="Rat Cave"/>
   <property name="tilesetpath" value="res/level/ratcave/tileset_level_ratcave.png"/>
