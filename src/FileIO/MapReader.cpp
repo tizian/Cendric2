@@ -33,7 +33,7 @@ bool MapReader::checkData(MapData& data) const {
 		g_logger->logError("MapReader", "Error in map data : no background layers set");
 		return false;
 	}
-	for (int i = 0; i < data.backgroundLayers.size(); i++) {
+	for (int i = 0; i < static_cast<int>(data.backgroundLayers.size()); i++) {
 		if (data.backgroundLayers[i].empty()) {
 			g_logger->logError("MapReader", "Error in map data : background layer " + std::to_string(i) + std::string(" empty"));
 			return false;
@@ -48,8 +48,18 @@ bool MapReader::checkData(MapData& data) const {
 			g_logger->logError("MapReader", "Error in map data : foreground layer " + std::to_string(i) + std::string(" empty"));
 			return false;
 		}
-		if (data.foregroundLayers[i].size() != data.mapSize.x * data.mapSize.y) {
+		if (static_cast<int>(data.foregroundLayers[i].size()) != data.mapSize.x * data.mapSize.y) {
 			g_logger->logError("MapReader", "Error in map data : foreground layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
+			return false;
+		}
+	}
+	for (int i = 0; i < static_cast<int>(data.lightedForegroundLayers.size()); i++) {
+		if (data.lightedForegroundLayers[i].empty()) {
+			g_logger->logError("MapReader", "Error in map data : lighted foreground layer " + std::to_string(i) + std::string(" empty"));
+			return false;
+		}
+		if (static_cast<int>(data.lightedForegroundLayers[i].size()) != data.mapSize.x * data.mapSize.y) {
+			g_logger->logError("MapReader", "Error in map data : lighted foreground layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}
@@ -81,7 +91,7 @@ bool MapReader::checkData(MapData& data) const {
 		g_logger->logError("MapReader", "Error in map data : collidable layer is empty");
 		return false;
 	}
-	if (data.collidableTiles.size() != data.mapSize.x * data.mapSize.y) {
+	if (static_cast<int>(data.collidableTiles.size()) != data.mapSize.x * data.mapSize.y) {
 		g_logger->logError("MapReader", "Error in map data : collidable layer has not correct size (map size)");
 		return false;
 	}
@@ -426,6 +436,21 @@ bool MapReader::readForegroundTileLayer(const std::string& layer, MapData& data)
 	return true;
 }
 
+bool MapReader::readLightedForegroundTileLayer(const std::string& layer, MapData& data) const {
+	std::string layerData = layer;
+
+	size_t pos = 0;
+	std::vector<int> foregroundLayer;
+	while ((pos = layerData.find(",")) != std::string::npos) {
+		foregroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
+		layerData.erase(0, pos + 1);
+	}
+	foregroundLayer.push_back(std::stoi(layerData));
+
+	data.lightedForegroundLayers.push_back(foregroundLayer);
+	return true;
+}
+
 bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 	tinyxml2::XMLElement* layer = map->FirstChildElement("layer");
 
@@ -449,6 +474,9 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 
 		if (name.find("BG") != std::string::npos || name.find("bg") != std::string::npos) {
 			if (!readBackgroundTileLayer(layerData, data)) return false;
+		}
+		else if (name.find("LFG") != std::string::npos || name.find("lfg") != std::string::npos) {
+			if (!readLightedForegroundTileLayer(layerData, data)) return false;
 		}
 		else if (name.find("FG") != std::string::npos || name.find("fg") != std::string::npos) {
 			if (!readForegroundTileLayer(layerData, data)) return false;

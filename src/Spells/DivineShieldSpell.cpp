@@ -8,7 +8,7 @@ DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell() {
 	m_additionalResistance.resistanceShadow = additionalResistance;
 	m_additionalResistance.resistanceLight = additionalResistance;
 
-	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(100.f, 150.f), 0.2));
+	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(100.f, 150.f), 0.2f));
 }
 
 void DivineShieldSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {

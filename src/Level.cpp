@@ -17,7 +17,7 @@ Level::~Level() {
 void Level::dispose() {
 	// no need to dispose both tile maps (fg + bg), as they share their resource
 	m_backgroundTileMap.dispose();
-	for (int i = 0; i < m_levelData.backgroundLayers.size(); i++) {
+	for (int i = 0; i < static_cast<int>(m_levelData.backgroundLayers.size()); i++) {
 		m_levelData.backgroundLayers[i].dispose();
 	}
 	g_resourceManager->deleteLevelResources();
@@ -39,6 +39,7 @@ bool Level::load(const std::string& id) {
 	m_levelData.id = id;
 	// load level
 	m_backgroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.backgroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
+	m_lightedForegroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.lightedForegroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
 	m_foregroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.foregroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
 
 	tileWidth = static_cast<float>(m_levelData.tileSize.x);
@@ -92,6 +93,10 @@ void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& sta
 
 void Level::drawForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const {
 	m_foregroundTileMap.draw(target, states);
+}
+
+void Level::drawLightedForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const {
+	m_lightedForegroundTileMap.draw(target, states);
 }
 
 const sf::FloatRect& Level::getLevelRect() const {

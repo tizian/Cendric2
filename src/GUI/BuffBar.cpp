@@ -34,7 +34,7 @@ void BuffBar::addSlot(BuffType type, const sf::IntRect& textureLocation, const s
 
 void BuffBar::render(sf::RenderTarget& target) {
 	if (m_foodBuffSlot != nullptr) m_foodBuffSlot->render(target);
-	for (int i = 0; i < m_buffSlots.size(); i++) {
+	for (int i = 0; i < static_cast<int>(m_buffSlots.size()); i++) {
 		m_buffSlots.at(i)->render(target);
 		if (i >((m_foodBuffSlot == nullptr) ? MAX_SHOWABLE_BUFFSLOTS - 1 : MAX_SHOWABLE_BUFFSLOTS - 2)) break;
 	}

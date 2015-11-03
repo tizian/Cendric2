@@ -23,6 +23,7 @@ private:
 
 	bool readLayers(tinyxml2::XMLElement* map, MapData& data) const;
 	bool readBackgroundTileLayer(const std::string& layer, MapData& data) const;
+	bool readLightedForegroundTileLayer(const std::string& layer, MapData& data) const;
 	bool readForegroundTileLayer(const std::string& layer, MapData& data) const;
 	bool readCollidableLayer(const std::string& layer, MapData& data) const;
 

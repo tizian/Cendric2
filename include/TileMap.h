@@ -17,7 +17,7 @@ private:
 	// there is a border around each tile of size 1, to avoid rounding problems
 	const int TILE_BORDER = 1;
 	std::vector<sf::VertexArray> m_layers;
-	sf::Texture* m_tileset;
+	sf::Texture* m_tileset = nullptr;
 	sf::String m_tilesetPath;
 	sf::Vector2i m_tilesize;
 };

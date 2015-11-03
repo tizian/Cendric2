@@ -20,6 +20,7 @@ bool Map::load(const std::string& id) {
 
 	// load map
 	m_backgroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.backgroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
+	m_lightedForegroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.lightedForegroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
 	m_foregroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.foregroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
 	m_id = id;
 	return true;
@@ -49,6 +50,10 @@ void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf
 
 void Map::drawBackground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
 	draw(target, states, center, m_backgroundTileMap);
+}
+
+void Map::drawLightedForeground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
+	draw(target, states, center, m_lightedForegroundTileMap);
 }
 
 void Map::drawForeground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {

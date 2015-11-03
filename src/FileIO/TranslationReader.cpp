@@ -16,7 +16,7 @@ bool TranslationReader::readTranslations(Language lang, std::map<std::string, st
 	}
 	StringTable tab;
 	parseCsv(contents.c_str(), tab);
-	if (tab.size() == 0 || tab[0].size() < static_cast<int>(lang)+1) {
+	if (tab.size() == 0 || static_cast<int>(tab[0].size()) < static_cast<int>(lang)+1) {
 		g_logger->logError("TranslationReader", "Error in translation file, incorrect number of columns or no rows");
 		return false;
 	}

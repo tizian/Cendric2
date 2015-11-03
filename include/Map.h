@@ -21,6 +21,8 @@ public:
 	void loadForRenderTexture(Screen* screen);
 	// draws the map. background tilelayers
 	void drawBackground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
+	// draws the map. lighted foreground tilelayers
+	void drawLightedForeground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
 	// draws the map. foreground tilelayers
 	void drawForeground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
 	// deletes the resources
@@ -43,6 +45,7 @@ public:
 private:
 	void draw(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const;
 	TileMap m_backgroundTileMap;
+	TileMap m_lightedForegroundTileMap;
 	TileMap m_foregroundTileMap;
 
 	std::string m_id;

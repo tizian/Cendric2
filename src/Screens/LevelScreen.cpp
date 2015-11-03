@@ -176,8 +176,10 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 }
 
 void LevelScreen::render(sf::RenderTarget &renderTarget) {
+	sf::Vector2f focus = m_mainChar->getCenter();
+
 	// Render level background and content to window				(Normal level background rendered)
-	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, m_mainChar->getCenter());
+	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, focus);
 	sf::View oldView = renderTarget.getView();
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
@@ -185,6 +187,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
+	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default, focus);
 
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();

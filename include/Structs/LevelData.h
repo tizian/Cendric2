@@ -17,6 +17,7 @@ struct LevelData {
 	std::string musicPath;
 	std::vector<BackgroundLayer> backgroundLayers;
 	std::vector<std::vector<int>> backgroundTileLayers;
+	std::vector<std::vector<int>> lightedForegroundTileLayers;
 	std::vector<std::vector<int>> foregroundTileLayers;
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTilePositions;

@@ -35,6 +35,7 @@ private:
 
 	bool readLayers(tinyxml2::XMLElement* map, LevelData& data) const;
 	bool readBackgroundTileLayer(const std::string& layer, LevelData& data) const;
+	bool readLightedForegroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readForegroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readDynamicTileLayer(DynamicTileID id, const std::string& layer, LevelData& data) const;
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;

@@ -3,6 +3,7 @@
 using namespace std;
 
 bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const vector<vector<int> >& layers, int width, int height) {
+	if (layers.empty()) return false;
 	m_tilesetPath = filepath;
 	m_tileset = g_resourceManager->getTexture(filepath);
 	m_tilesize = sf::Vector2i(tileSize.x, tileSize.y);
@@ -11,7 +12,7 @@ bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const v
 
 	m_layers.clear();
 
-	for (int count = 0; count < layers.size(); count++) {
+	for (int count = 0; count < static_cast<int>(layers.size()); count++) {
 		sf::VertexArray layer;
 
 		layer.setPrimitiveType(sf::Quads);

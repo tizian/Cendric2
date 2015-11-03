@@ -26,8 +26,10 @@ public:
 	void loadAfterMainChar(Screen* screen);
 	// updates the level camera
 	void updateCamera(const sf::Time& frameTime);
-	// draws the level. Background layers, background tilemap, dynamic tiles
+	// draws the level. Background layers, background tilemap
 	void drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
+	// draws the level. Lighted foreground tilemap
+	void drawLightedForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
 	// draws the level. Foreground tilemap
 	void drawForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
 	// deletes the resources
@@ -65,6 +67,7 @@ public:
 
 private:
 	TileMap m_backgroundTileMap;
+	TileMap m_lightedForegroundTileMap;
 	TileMap m_foregroundTileMap;
 	std::vector<GameObject*>* m_dynamicTiles;
 	// data loaded by the level loader

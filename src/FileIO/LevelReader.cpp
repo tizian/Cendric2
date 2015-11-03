@@ -441,6 +441,21 @@ bool LevelReader::readForegroundTileLayer(const std::string& layer, LevelData& d
 	return true;
 }
 
+bool LevelReader::readLightedForegroundTileLayer(const std::string& layer, LevelData& data) const {
+	std::string layerData = layer;
+
+	size_t pos = 0;
+	std::vector<int> foregroundLayer;
+	while ((pos = layerData.find(",")) != std::string::npos) {
+		foregroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
+		layerData.erase(0, pos + 1);
+	}
+	foregroundLayer.push_back(std::stoi(layerData));
+
+	data.lightedForegroundTileLayers.push_back(foregroundLayer);
+	return true;
+}
+
 bool LevelReader::readBackgroundTileLayer(const std::string& layer, LevelData& data) const {
 	std::string layerData = layer;
 
@@ -479,6 +494,9 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 
 		if (name.find("BG") != std::string::npos || name.find("bg") != std::string::npos) {
 			if (!readBackgroundTileLayer(layerData, data)) return false;
+		}
+		else if (name.find("LFG") != std::string::npos || name.find("lfg") != std::string::npos) {
+			if (!readLightedForegroundTileLayer(layerData, data)) return false;
 		}
 		else if (name.find("FG") != std::string::npos || name.find("fg") != std::string::npos) {
 			if (!readForegroundTileLayer(layerData, data)) return false;
@@ -901,9 +919,6 @@ bool LevelReader::checkData(LevelData& data) const {
 			return false;
 		}
 	}
-	if (data.foregroundTileLayers.empty()) {
-		g_logger->logInfo("LevelReader", "No foreground tile layers set");
-	}
 	for (int i = 0; i < data.foregroundTileLayers.size(); i++) {
 		if (data.foregroundTileLayers[i].empty()) {
 			g_logger->logError("LevelReader", "Error in level data : foreground tile layer " + std::to_string(i) + std::string(" empty"));
@@ -911,6 +926,16 @@ bool LevelReader::checkData(LevelData& data) const {
 		}
 		if (data.foregroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y) {
 			g_logger->logError("LevelReader", "Error in level data : foreground tile layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
+			return false;
+		}
+	}
+	for (int i = 0; i < data.lightedForegroundTileLayers.size(); i++) {
+		if (data.lightedForegroundTileLayers[i].empty()) {
+			g_logger->logError("LevelReader", "Error in level data : lighted foreground tile layer " + std::to_string(i) + std::string(" empty"));
+			return false;
+		}
+		if (data.lightedForegroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y) {
+			g_logger->logError("LevelReader", "Error in level data : lighted foreground tile layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
 			return false;
 		}
 	}

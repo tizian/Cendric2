@@ -11,13 +11,13 @@ SpellSelection::~SpellSelection() {
 }
 
 void SpellSelection::activateSlot(int spellNr, const sf::Time& cooldown) {
-	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
+	if (spellNr < 0 || spellNr > static_cast<int>(m_spellSlots.size()) - 1) return;
 	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
 	m_spellSlots[spellNr].playAnimation(cooldown);
 }
 
 void SpellSelection::selectSlot(int spellNr) {
-	if (spellNr < 0 || spellNr > m_spellSlots.size() - 1) return;
+	if (spellNr < 0 || spellNr > static_cast<int>(m_spellSlots.size()) - 1) return;
 	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
 	m_spellSlots[m_selectedSlot].deselect();
 	m_spellSlots[spellNr].select();
@@ -25,7 +25,7 @@ void SpellSelection::selectSlot(int spellNr) {
 }
 
 void SpellSelection::update(const sf::Time& frametime) {
-	for (int i = 0; i < m_spellSlots.size(); i++) {
+	for (int i = 0; i < static_cast<int>(m_spellSlots.size()); i++) {
 		m_spellSlots[i].update(frametime);
 		if (m_spellSlots[i].isClicked()) {
 			m_spellManager->setAndExecuteSpell(i);
