@@ -15,3 +15,4 @@ it_mi_goldengoblet;itd_goldengoblet;11;0, 50;15;;;;;;;;;;;;;;;;-10, -5;30, 40;50
 it_eq_ringoflesserhealth;itd_ringoflesserhealth;2;100, 50;20;;;;;;;;;;;;;;;;-14, -40;5, 5;200, 0, 50, 50;1000;;;;;;;;;
 it_go_threecoins;itd_threecoins;12;;3;;;;;;;;;;;;;;;;-5, -25;25, 25;150, 50, 50, 50;1000;;;;;;;;;
 it_go_onecoin;itd_onecoin;12;;1;;;;;;;;;;;;;;;;-18, -34;8, 8;100, 0, 50, 50;1000;;;;;;;;;
+it_eq_head_necrot3;itd_head_necrot3;1;0, 200;120;10;;;;;;;10;;5;;;10;10;;;;;;res/assets/equipment/head/spritesheet_head_necrot3.png;;;;;;;;

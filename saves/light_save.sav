@@ -23,7 +23,7 @@ equipped.spellslot:12,5,1,7,2,6,3
 # equipment:
 equipped.back:it_eq_purpleback
 equipped.body:
-equipped.head:it_eq_wizardhatgrey
+equipped.head:it_eq_head_necrot3
 equipped.neck:
 equipped.ring1:
 equipped.ring2:

@@ -18,6 +18,7 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 }
 
 void LevelEquipment::update(const sf::Time& frameTime) {
+	GameObject::update(frameTime);
 	GameObjectState newState = m_mainChar->getState();
 	if (newState == GameObjectState::Dead) {
 		setDisposed();
@@ -32,10 +33,10 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	if (m_mainChar->getIsUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->getIsUpsideDown());
 	}
+
 	sf::Vector2f newPosition;
 	calculatePositionAccordingToMainChar(newPosition);
 	setPosition(newPosition);
-	GameObject::update(frameTime);
 }
 
 void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar) {

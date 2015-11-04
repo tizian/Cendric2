@@ -115,6 +115,10 @@ sf::Time AnimatedSprite::getFrameTime() const {
 	return m_frameTime;
 }
 
+std::size_t AnimatedSprite::getCurrentFrame() const {
+	return static_cast<int>(m_currentFrame);
+}
+
 void AnimatedSprite::setFrame(size_t newFrame, bool resetTime) {
 	if (m_animation) {
 		//calculate new vertex positions and texture coordiantes

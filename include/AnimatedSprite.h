@@ -54,6 +54,7 @@ public:
 	sf::FloatRect getLocalBounds() const;
 	sf::FloatRect getGlobalBounds() const;
 	sf::Time getFrameTime() const;
+	std::size_t getCurrentFrame() const;
 	bool isLooped() const;
 	bool isPlaying() const;
 	bool isFlippedX() const;
