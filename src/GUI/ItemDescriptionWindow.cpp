@@ -71,7 +71,7 @@ void ItemDescriptionWindow::load(const Item& item) {
 	const AttributeBean& attr = item.getAttributes();
 	stats.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
 	stats.append(getAttributeText("Haste", attr.haste));
-	stats.append(getAttributeText("Critica", attr.critical));
+	stats.append(getAttributeText("Critical", attr.critical));
 	stats.append(getAttributeText("PhysicalDamage", attr.damagePhysical));
 	stats.append(getAttributeText("FireDamage", attr.damageFire));
 	stats.append(getAttributeText("IceDamage", attr.damageIce));

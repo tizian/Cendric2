@@ -14,6 +14,9 @@ attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:41
 # items in inventory:
 item.id:it_mi_goldengoblet,1
+item.id:it_eq_purpleback,1
+item.id:it_eq_wizardhatblue,1
+item.id:it_eq_wizardhatgrey,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2,3,3
 equipped.spellslot:3,3,3
@@ -21,7 +24,7 @@ equipped.spellslot:19,6,1,7,2
 equipped.spellslot:17,2,3
 equipped.spellslot:12,5,1,7,2,6,3
 # equipment:
-equipped.back:it_eq_purpleback
+equipped.back:it_eq_back_necrot3
 equipped.body:
 equipped.head:it_eq_head_necrot3
 equipped.neck:
