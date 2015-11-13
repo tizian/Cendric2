@@ -82,7 +82,7 @@ void RatEnemy::load() {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation fightingAnimation;
+	Animation fightingAnimation(sf::seconds(0.08f));
 	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_rat));
 	fightingAnimation.addFrame(sf::IntRect(200, 0, 50, 50));
 	fightingAnimation.addFrame(sf::IntRect(250, 0, 50, 50));
@@ -94,8 +94,6 @@ void RatEnemy::load() {
 	deadAnimation.addFrame(sf::IntRect(300, 0, 50, 50));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
-
-	setFrameTime(sf::seconds(0.08f));
 
 	// initial values
 	m_state = GameObjectState::Idle;

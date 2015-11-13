@@ -31,16 +31,20 @@
 
 class Animation {
 public:
-	Animation();
+	Animation(const sf::Time& frameTime) { m_frameTime = frameTime; };
+	Animation() { m_frameTime = sf::milliseconds(100); };
 
 	void addFrame(sf::IntRect rect);
 	void setSpriteSheet(const sf::Texture* texture);
+	void setFrameTime(const sf::Time& frameTime);
 
 	const sf::Texture* getSpriteSheet() const;
 	std::size_t getSize() const;
 	const sf::IntRect& getFrame(std::size_t n) const;
+	const sf::Time& getFrameTime() const;
 
 private:
 	std::vector<sf::IntRect> m_frames;
-	const sf::Texture* m_texture;
+	sf::Time m_frameTime;
+	const sf::Texture* m_texture = nullptr;
 };

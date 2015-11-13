@@ -7,13 +7,11 @@ IcyAmbushSpell::IcyAmbushSpell(const sf::Time& stunDuration) : Spell() {
 void IcyAmbushSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
-	Animation spellAnimation;
+	Animation spellAnimation(sf::seconds(10.f));
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_icyambush));
 	spellAnimation.addFrame(sf::IntRect(0, 0, 40, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
-
-	setFrameTime(sf::seconds(10.f));
 
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);

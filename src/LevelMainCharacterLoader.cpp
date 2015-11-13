@@ -59,12 +59,14 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 		for (int i = 0; i < 5; i++) {
 			equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
 		}
-		equipment.frameTime = sf::seconds(0.07f);
 
 		LevelEquipment* levelEquipment = new LevelEquipment();
 		levelEquipment->setBoundingBox(equipment.boundingBox);
 		for (auto &ani : equipment.texturePositions) {
 			Animation animation;
+			if (ani.first == GameObjectState::Fighting) {
+				animation.setFrameTime(sf::milliseconds(70));
+			}
 			animation.setSpriteSheet(g_resourceManager->getTexture(bean->spritesheetPath));
 			for (auto &frame : ani.second) {
 				animation.addFrame(frame);
@@ -72,7 +74,6 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 			levelEquipment->addAnimation(ani.first, animation);
 		}
 
-		levelEquipment->setFrameTime(equipment.frameTime);
 		// initial values
 		levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 		levelEquipment->playCurrentAnimation(true);

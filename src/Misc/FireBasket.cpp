@@ -15,8 +15,6 @@ void FireBasket::load() {
 	}
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	setFrameTime(sf::seconds(0.1f));
-
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);

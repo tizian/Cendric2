@@ -16,7 +16,7 @@ void CheckpointTile::load(int skinNr) {
 	idleAnimation.addFrame(sf::IntRect(0, (skinNr - 1) * 80, 80, 80));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation activatedAnimation;
+	Animation activatedAnimation(sf::seconds(0.2f));
 	activatedAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_checkpoint));
 	for (int i = 1; i < 5; i++) {
 		activatedAnimation.addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
@@ -25,8 +25,6 @@ void CheckpointTile::load(int skinNr) {
 		activatedAnimation.addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
 	}
 	addAnimation(GameObjectState::Active, activatedAnimation);
-
-	setFrameTime(sf::seconds(0.2f));
 
 	// initial values
 	m_state = GameObjectState::Idle;

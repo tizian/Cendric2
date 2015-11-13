@@ -106,7 +106,7 @@ void MapMainCharacter::load() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 10.f, 10.f));
 	setSpriteOffset(sf::Vector2f(-20.f, -40.f));
 
-	Animation walkingAnimationDown;
+	Animation walkingAnimationDown(sf::seconds(0.15f));
 	walkingAnimationDown.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
 	walkingAnimationDown.addFrame(sf::IntRect(0, 0, 50, 50));
 	walkingAnimationDown.addFrame(sf::IntRect(50, 0, 50, 50));
@@ -115,7 +115,7 @@ void MapMainCharacter::load() {
 
 	addAnimation(GameObjectState::Walking_down, walkingAnimationDown);
 
-	Animation walkingAnimationLeft;
+	Animation walkingAnimationLeft(sf::seconds(0.15f));
 	walkingAnimationLeft.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
 	walkingAnimationLeft.addFrame(sf::IntRect(0, 50, 50, 50));
 	walkingAnimationLeft.addFrame(sf::IntRect(50, 50, 50, 50));
@@ -124,7 +124,7 @@ void MapMainCharacter::load() {
 
 	addAnimation(GameObjectState::Walking_left, walkingAnimationLeft);
 
-	Animation walkingAnimationRight;
+	Animation walkingAnimationRight(sf::seconds(0.15f));
 	walkingAnimationRight.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
 	walkingAnimationRight.addFrame(sf::IntRect(0, 100, 50, 50));
 	walkingAnimationRight.addFrame(sf::IntRect(50, 100, 50, 50));
@@ -133,7 +133,7 @@ void MapMainCharacter::load() {
 
 	addAnimation(GameObjectState::Walking_right, walkingAnimationRight);
 
-	Animation walkingAnimationUp;
+	Animation walkingAnimationUp(sf::seconds(0.15f));
 	walkingAnimationUp.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
 	walkingAnimationUp.addFrame(sf::IntRect(0, 150, 50, 50));
 	walkingAnimationUp.addFrame(sf::IntRect(50, 150, 50, 50));
@@ -165,8 +165,6 @@ void MapMainCharacter::load() {
 	idleAnimationUp.addFrame(sf::IntRect(50, 150, 50, 50));
 
 	addAnimation(GameObjectState::Idle_up, idleAnimationUp);
-
-	setFrameTime(sf::seconds(0.15f));
 
 	// initial values
 	m_state = GameObjectState::Idle_right;

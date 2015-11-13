@@ -44,7 +44,6 @@ public:
 	void setCurrentAnimation(const Animation* animation, bool isFlipped);
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	virtual void setScreen(Screen* screen);
-	void setFrameTime(const sf::Time& time);
 	void setInputInDefaultView(bool value);
 	virtual void setViewable(bool value);
 	// angle is in radian

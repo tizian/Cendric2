@@ -6,14 +6,12 @@ AureolaSpell::AureolaSpell() : Spell() {
 void AureolaSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
-	Animation spellAnimation;
+	Animation spellAnimation(sf::seconds(0.3f));
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_aureola));
 	spellAnimation.addFrame(sf::IntRect(0, 0, 40, 40));
 	spellAnimation.addFrame(sf::IntRect(40, 0, 40, 40));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
-
-	setFrameTime(sf::seconds(0.3f));
 
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);

@@ -24,8 +24,6 @@ void CrumblyBlockTile::load(int skinNr) {
 
 	addAnimation(GameObjectState::Crumbling, crumblingAnimation);
 
-	setFrameTime(sf::seconds(0.1f));
-
 	// initial values
 	m_state = GameObjectState::Idle;
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);

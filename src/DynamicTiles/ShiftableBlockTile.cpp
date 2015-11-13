@@ -12,13 +12,11 @@ void ShiftableBlockTile::init() {
 void ShiftableBlockTile::load(int skinNr) {
 	m_isCollidable = true;
 
-	Animation idleAnimation;
+	Animation idleAnimation(sf::seconds(10.f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftableblock));
 	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (m_tileSize.x + 2 * BORDER)), m_tileSize.x, m_tileSize.y));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-
-	setFrameTime(sf::seconds(10.f));
 
 	// initial values
 	m_state = GameObjectState::Idle;

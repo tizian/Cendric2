@@ -16,19 +16,17 @@ void ChestTile::init() {
 void ChestTile::load(int skinNr) {
 	m_isCollidable = false;
 
-	Animation closedAnimation;
+	Animation closedAnimation(sf::seconds(10.f));
 	closedAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_chest));
 	closedAnimation.addFrame(sf::IntRect(0, 0, 2 * m_tileSize.x, 2 * m_tileSize.y));
 
 	addAnimation(GameObjectState::Locked, closedAnimation);
 
-	Animation openAnimation;
+	Animation openAnimation(sf::seconds(10.f));
 	openAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_chest));
 	openAnimation.addFrame(sf::IntRect(2 * m_tileSize.x, 0, 2 * m_tileSize.x, 2 * m_tileSize.y));
 
 	addAnimation(GameObjectState::Unlocked, openAnimation);
-
-	setFrameTime(sf::seconds(10.f));
 
 	// initial values
 	m_state = GameObjectState::Locked;

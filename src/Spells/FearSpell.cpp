@@ -15,8 +15,6 @@ void FearSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const s
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
-	setFrameTime(sf::seconds(0.1f));
-
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);

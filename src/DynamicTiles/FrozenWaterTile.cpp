@@ -16,14 +16,12 @@ void FrozenWaterTile::init() {
 void FrozenWaterTile::load(int skinNr) {
 	m_isCollidable = true;
 
-	Animation idleAnimation;
+	Animation idleAnimation(sf::seconds(0.5f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_frozenwater));
 	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, m_tileSize.x, m_tileSize.y));
 	//idleAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-
-	setFrameTime(sf::seconds(0.5f));
 
 	// initial values
 	m_state = GameObjectState::Idle;

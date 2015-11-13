@@ -76,7 +76,7 @@ void NekomataEnemy::load() {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation jumpingStartAnimation;
+	Animation jumpingStartAnimation(sf::seconds(0.08f));
 	jumpingStartAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	for (int i = 1; i < 4; i++) {
 		jumpingStartAnimation.addFrame(sf::IntRect(150, i * 81, 150, 81));
@@ -92,7 +92,7 @@ void NekomataEnemy::load() {
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation fightingStartAnimation;
+	Animation fightingStartAnimation(sf::seconds(0.08f));
 	fightingStartAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	for (int i = 0; i < 1; i++) {
 		fightingStartAnimation.addFrame(sf::IntRect(450, i * 81, 150, 81));
@@ -100,7 +100,7 @@ void NekomataEnemy::load() {
 
 	addAnimation(GameObjectState::Fighting_start, fightingStartAnimation);
 
-	Animation fightingAnimation;
+	Animation fightingAnimation(sf::seconds(0.08f));
 	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	fightingAnimation.addFrame(sf::IntRect(450, 1 * 81, 150, 81));
 	fightingAnimation.addFrame(sf::IntRect(450, 2 * 81, 150, 81));
@@ -117,7 +117,6 @@ void NekomataEnemy::load() {
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	setFrameTime(sf::seconds(0.08f));
 	m_jumpStartTime = sf::seconds(3 * 0.08f);
 	m_fightStartTime = sf::seconds(1 * 0.08f);
 

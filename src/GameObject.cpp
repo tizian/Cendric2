@@ -99,10 +99,6 @@ void GameObject::setRotation(float angle) {
 	m_animatedSprite.setRotation(radToDeg(angle));
 }
 
-void GameObject::setFrameTime(const sf::Time& time) {
-	m_animatedSprite.setFrameTime(time);
-}
-
 void GameObject::playCurrentAnimation(bool play) {
 	if (play) {
 		m_animatedSprite.play();

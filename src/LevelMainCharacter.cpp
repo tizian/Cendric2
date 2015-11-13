@@ -155,7 +155,7 @@ void LevelMainCharacter::load() {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation fightingAnimation;
+	Animation fightingAnimation(sf::milliseconds(70));
 	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
 	fightingAnimation.addFrame(sf::IntRect(800, 0, 80, 120));
 	fightingAnimation.addFrame(sf::IntRect(880, 0, 80, 120));
@@ -170,8 +170,6 @@ void LevelMainCharacter::load() {
 	deadAnimation.addFrame(sf::IntRect(1120, 0, 80, 120));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
-
-	setFrameTime(sf::seconds(0.07f));
 
 	// initial values
 	m_state = GameObjectState::Idle;

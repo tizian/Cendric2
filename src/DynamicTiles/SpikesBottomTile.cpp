@@ -10,13 +10,11 @@ void SpikesBottomTile::init() {
 void SpikesBottomTile::load(int skinNr) {
 	m_isCollidable = false;
 
-	Animation idleAnimation;
+	Animation idleAnimation(sf::seconds(10.0f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikesbottom));
 	idleAnimation.addFrame(sf::IntRect(0, (skinNr - 1) * m_tileSize.y, m_tileSize.x, m_tileSize.y));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-
-	setFrameTime(sf::seconds(10.0f));
 
 	// initial values
 	m_state = GameObjectState::Idle;

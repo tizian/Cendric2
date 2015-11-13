@@ -7,7 +7,7 @@ void LevelItem::load(LevelMainCharacter* mainChar, const ItemBean& bean, const s
 	m_itemType = bean.type;
 	m_goldValue = bean.goldValue;
 
-	Animation idleAnimation;
+	Animation idleAnimation(bean.frameTime);
 	setSpriteOffset(bean.spriteOffset);
 	setBoundingBox(bean.boundingBox);
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_levelitems));
@@ -16,7 +16,7 @@ void LevelItem::load(LevelMainCharacter* mainChar, const ItemBean& bean, const s
 		idleAnimation.addFrame(frame);
 	}
 	addAnimation(GameObjectState::Idle, idleAnimation);
-	setFrameTime(bean.frameTime);
+
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(bean.texturePositions.size() > 1);

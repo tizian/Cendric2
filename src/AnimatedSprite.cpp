@@ -7,6 +7,7 @@ m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused)
 
 void AnimatedSprite::setAnimation(const Animation* animation) {
 	m_animation = animation;
+	m_frameTime = animation->getFrameTime();
 	m_texture = m_animation->getSpriteSheet();
 	m_currentFrame = 0;
 	setFrame(m_currentFrame);

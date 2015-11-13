@@ -6,14 +6,13 @@ void NPC::load(MapMainCharacter* mainChar, const NPCBean& bean) {
 	m_mainChar = mainChar;
 	m_bean = bean;
 
-	Animation idleAnimation;
+	Animation idleAnimation(sf::seconds(10.f));
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(bean.boundingBox);
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_npcs));
 	idleAnimation.addFrame(bean.texturePosition);
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-	setFrameTime(sf::seconds(10.f));
 
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
