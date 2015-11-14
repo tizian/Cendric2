@@ -105,8 +105,8 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render map background etc. to window							(Normal map background rendered)
 	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, focus);
-	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	renderObjects(GameObjectType::_NPC, renderTarget);
+	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	m_currentMap.drawLightedForeground(renderTarget, sf::RenderStates::Default, focus);
 	sf::View adjustedView = renderTarget.getView();
 
@@ -142,8 +142,8 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(adjustedView);
-	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_NPC, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
 	renderTooltipText(renderTarget);
 	GameScreen::render(renderTarget); // this will set the view to the default view!
 

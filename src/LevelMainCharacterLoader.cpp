@@ -69,6 +69,9 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 			if (ani.first == GameObjectState::Fighting) {
 				animation.setFrameTime(sf::milliseconds(70));
 			}
+			else if (ani.first == GameObjectState::Jumping) {
+				animation.setFrameTime(sf::milliseconds(200));
+			}
 			animation.setSpriteSheet(g_resourceManager->getTexture(bean->spritesheetPath));
 			for (auto &frame : ani.second) {
 				animation.addFrame(frame);

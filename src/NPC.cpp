@@ -2,13 +2,19 @@
 #include "MapMainCharacter.h"
 #include "Screens/MapScreen.h"
 
+inline bool inRange(const sf::Vector2f& center, const sf::Vector2f& mainCharCenter, const float range) {
+	sf::Vector2f distVector = center - mainCharCenter;
+	float dist = std::sqrt(distVector.x * distVector.x + distVector.y * distVector.y);
+	return dist <= range;
+}
+
 void NPC::load(MapMainCharacter* mainChar, const NPCBean& bean) {
 	m_mainChar = mainChar;
 	m_bean = bean;
 
 	Animation idleAnimation(sf::seconds(10.f));
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(bean.boundingBox);
+	setSpriteOffset(sf::Vector2f(-bean.boundingBox.left, -bean.boundingBox.top));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_npcs));
 	idleAnimation.addFrame(bean.texturePosition);
 
@@ -30,7 +36,7 @@ void NPC::onMouseOver() {
 void NPC::onRightClick() {
 	// check if npc is in range
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= TALKING_RANGE) {
+	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
 		mapScreen->setDialogue(m_bean);
 	}
@@ -71,7 +77,7 @@ void NPC::setDialogueID(const std::string& id) {
 }
 
 void NPC::checkCollisionWithMainChar() {
-	if (!m_bean.dialogueID.empty() && m_bean.talksActive && getBoundingBox()->intersects(*(m_mainChar->getBoundingBox()))) {
+	if (!m_bean.dialogueID.empty() && m_bean.talksActive && inRange(getCenter(), m_mainChar->getCenter(), TALKING_RANGE)) {
 		setTalksActive(false);
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
 		mapScreen->setDialogue(m_bean);
@@ -88,3 +94,4 @@ void NPC::setTooltipText(const std::string& tooltip) {
 	m_tooltipText.setCharacterSize(8);
 	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
 }
+

@@ -766,7 +766,7 @@
   <object id="4" gid="599" x="4042" y="1074" width="50" height="50">
    <properties>
     <property name="active" value="1"/>
-    <property name="boundingbox" value="0,0,50,50"/>
+    <property name="boundingbox" value="12.5,0,25,50"/>
     <property name="dialogueid" value="res/dialogue/DL_npc_guard.lua"/>
     <property name="dialoguetexture" value="250,0"/>
     <property name="id" value="npc_guard"/>
