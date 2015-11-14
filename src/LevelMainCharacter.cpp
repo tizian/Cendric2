@@ -193,7 +193,7 @@ float LevelMainCharacter::getConfiguredDampingGroundPersS() const {
 }
 
 sf::Time LevelMainCharacter::getConfiguredFightAnimationTime() const {
-	return sf::milliseconds(4 * 70);
+	return sf::milliseconds(5 * 70);
 }
 
 GameObjectType LevelMainCharacter::getConfiguredType() const {

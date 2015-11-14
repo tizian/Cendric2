@@ -1,22 +1,25 @@
 # time played, in seconds
-time.played:65
+time.played:74
 savegame.name:LIGHT
-savegame.date:1445951532
+savegame.date:1447520558
 level.id:res/level/ratcave/ratcave.tmx
 level.position:525.000000,1175.000000
 is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:4071.431641,934.074402
+map.position:4000.910156,777.396057
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:41
+gold:42
 # items in inventory:
-item.id:it_mi_goldengoblet,1
+item.id:it_eq_back_necrot3,1
+item.id:it_eq_head_necrot3,1
 item.id:it_eq_purpleback,1
 item.id:it_eq_wizardhatblue,1
 item.id:it_eq_wizardhatgrey,1
+item.id:it_fo_cheese,1
+item.id:it_mi_goldengoblet,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2,3,3
 equipped.spellslot:3,3,3
@@ -24,9 +27,9 @@ equipped.spellslot:19,6,1,7,2
 equipped.spellslot:17,2,3
 equipped.spellslot:12,5,1,7,2,6,3
 # equipment:
-equipped.back:it_eq_back_necrot3
-equipped.body:
-equipped.head:it_eq_head_necrot3
+equipped.back:
+equipped.body:it_eq_body_necrot3
+equipped.head:
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
@@ -35,11 +38,16 @@ equipped.weapon:it_we_icestaff
 quickslot:1,
 quickslot:2,
 # enemies killed in level:
+enemies.killed:res/level/ratcave/ratcave.tmx,3
 # enemies looted in level:
+enemies.looted:res/level/ratcave/ratcave.tmx,3
 # items looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
 # chests looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
 # quest states:
 # quest targets killed:
+quest.progress.target:quest_acaveofrats,enemy_rat,1
 # quest conditions fulfilled:
 # npc states:
 # merchand states:

@@ -21,7 +21,7 @@ size_t Animation::getSize() const {
 }
 
 const sf::Time& Animation::getFrameTime() const {
-	return m_frameTime;
+	return m_frameTime; 
 }
 
 const sf::IntRect& Animation::getFrame(size_t n) const {

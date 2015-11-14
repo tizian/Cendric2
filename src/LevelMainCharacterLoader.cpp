@@ -20,13 +20,15 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 
 	// the order of the ids in this vector determine the update and rendering order. 
 	vector<ItemType> equipmentOrder;
-	equipmentOrder.push_back(ItemType::Equipment_weapon);
+
+	equipmentOrder.push_back(ItemType::Equipment_body);
+	equipmentOrder.push_back(ItemType::Equipment_back);
+	equipmentOrder.push_back(ItemType::Equipment_head);
+	equipmentOrder.push_back(ItemType::Equipment_neck);
 	equipmentOrder.push_back(ItemType::Equipment_ring_1);
 	equipmentOrder.push_back(ItemType::Equipment_ring_2);
-	equipmentOrder.push_back(ItemType::Equipment_neck);
-	equipmentOrder.push_back(ItemType::Equipment_back);
-	equipmentOrder.push_back(ItemType::Equipment_body);
-	equipmentOrder.push_back(ItemType::Equipment_head);
+	equipmentOrder.push_back(ItemType::Equipment_weapon);
+	
 	vector<string> gameData;
 	for (auto& it : equipmentOrder) {
 		if (screen->getCharacterCore()->getEquippedItem(it) == nullptr) continue;
