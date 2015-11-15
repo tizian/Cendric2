@@ -1,16 +1,18 @@
 #include "Spells/FireBallSpell.h"
 
 FireBallSpell::FireBallSpell() : Spell() {
-	m_lightObject = new LightObject(LightBean(sf::Vector2f(), 50.f));
+	m_lightObject = new LightObject(LightBean(sf::Vector2f(), 80.f));
 }
 
 void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
+	setSpriteOffset(sf::Vector2f(-20.f, -20.f));
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fireball));
-	spellAnimation.addFrame(sf::IntRect(0, 0, 30, 30));
-	spellAnimation.addFrame(sf::IntRect(30, 0, 30, 30));
+	spellAnimation.addFrame(sf::IntRect(0, 0, 50, 50));
+	spellAnimation.addFrame(sf::IntRect(50, 0, 50, 50));
+	spellAnimation.addFrame(sf::IntRect(100, 0, 50, 50));
+	spellAnimation.addFrame(sf::IntRect(150, 0, 50, 50));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
