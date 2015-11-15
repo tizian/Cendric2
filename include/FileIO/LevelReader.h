@@ -38,6 +38,7 @@ private:
 	bool readLightedForegroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readForegroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readDynamicTileLayer(DynamicTileID id, const std::string& layer, LevelData& data) const;
+	bool readLeverLayer(const std::string& layer, LevelData& data) const;
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;
 	bool readCollidableLayer(const std::string& layer, LevelData& data) const;
 

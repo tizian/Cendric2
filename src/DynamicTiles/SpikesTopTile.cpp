@@ -8,7 +8,6 @@ void SpikesTopTile::init() {
 }
 
 void SpikesTopTile::load(int skinNr) {
-	m_isCollidable = false;
 
 	Animation idleAnimation(sf::seconds(10.0f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikestop));
@@ -17,8 +16,7 @@ void SpikesTopTile::load(int skinNr) {
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	setCurrentAnimation(getAnimation(m_state), false);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(false);
 }
 
@@ -37,8 +35,4 @@ void SpikesTopTile::onHit(LevelMovableGameObject* mob) {
 		mob->addDamage(DMG_PER_S);
 		m_damageCooldown = sf::seconds(1);
 	}
-}
-
-void SpikesTopTile::onHit(Spell* spell) {
-	// TODO, maybe there is some spell that alters spikes?
 }

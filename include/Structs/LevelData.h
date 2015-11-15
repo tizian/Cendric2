@@ -7,6 +7,7 @@
 #include "Structs/LevelExitBean.h"
 #include "Structs/DynamicTileBean.h"
 #include "Structs/LightBean.h"
+#include "Structs/LeverBean.h"
 
 struct LevelData {
 	std::string id;
@@ -23,6 +24,7 @@ struct LevelData {
 	std::vector<std::vector<bool>> collidableTilePositions;
 	std::vector<std::pair<DynamicTileID, std::vector<int>>> dynamicTileLayers;
 	std::vector<DynamicTileBean> dynamicTiles;
+	std::vector<LeverBean> levers;
 	std::vector<std::string> levelItems;
 	std::map<int, std::pair<EnemyID, sf::Vector2f>> enemies;
 	std::map<int, std::pair<int, sf::Vector2f>> chests;

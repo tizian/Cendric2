@@ -47,6 +47,8 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_tile_frozenwater, "res/assets/dynamic_tiles/spritesheet_tiles_frozenwater.png" },
 		{ ResourceID::Texture_tile_shiftableblock, "res/assets/dynamic_tiles/spritesheet_tiles_shiftableblock.png" },
 		{ ResourceID::Texture_tile_checkpoint, "res/assets/dynamic_tiles/spritesheet_tiles_checkpoint.png" },
+		{ ResourceID::Texture_tile_lever, "res/assets/dynamic_tiles/spritesheet_tiles_lever.png" },
+		{ ResourceID::Texture_tile_switchable, "res/assets/dynamic_tiles/spritesheet_tiles_switchable.png" },
 		{ ResourceID::Texture_screen_splash, "res/assets/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/assets/screens/screen_error_filenotfound.png" },
@@ -332,6 +334,8 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_tile_spikestop);
 	deleteResource(ResourceID::Texture_tile_shiftableblock);
 	deleteResource(ResourceID::Texture_tile_checkpoint);
+	deleteResource(ResourceID::Texture_tile_lever);
+	deleteResource(ResourceID::Texture_tile_switchable);
 
 	deleteResource(ResourceID::Sound_tile_water);
 
@@ -373,6 +377,8 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_tile_spikesbottom);
 	getTexture(ResourceID::Texture_tile_shiftableblock);
 	getTexture(ResourceID::Texture_tile_checkpoint);
+	getTexture(ResourceID::Texture_tile_lever);
+	getTexture(ResourceID::Texture_tile_switchable);
 
 	getSoundBuffer(ResourceID::Sound_tile_water);
 

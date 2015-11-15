@@ -8,7 +8,6 @@ void SpikesBottomTile::init() {
 }
 
 void SpikesBottomTile::load(int skinNr) {
-	m_isCollidable = false;
 
 	Animation idleAnimation(sf::seconds(10.0f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikesbottom));
@@ -17,8 +16,7 @@ void SpikesBottomTile::load(int skinNr) {
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	setCurrentAnimation(getAnimation(m_state), false);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(false);
 }
 
@@ -37,8 +35,4 @@ void SpikesBottomTile::onHit(LevelMovableGameObject* mob) {
 		mob->addDamage(DMG_PER_S);
 		m_damageCooldown = sf::seconds(1);
 	}
-}
-
-void SpikesBottomTile::onHit(Spell* spell) {
-	// TODO, maybe there is some spell that alters spikes?
 }

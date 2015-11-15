@@ -37,7 +37,7 @@ protected:
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
 	sf::Vector2i m_tileSize;
-	bool m_isCollidable;
+	bool m_isCollidable = false;
 	Level* m_level;
 
 private:

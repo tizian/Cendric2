@@ -11,14 +11,18 @@ void IceTile::load(int skinNr) {
 
 	Animation idleAnimation(sf::seconds(0.5f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_ice));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, m_tileSize.x, m_tileSize.y));
-	idleAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
+	for (int i = 0; i < 2; i++) {
+		idleAnimation.addFrame(sf::IntRect(
+			BORDER + i * (2 * BORDER + m_tileSize.x),
+			BORDER + (skinNr - 1) * (2 * BORDER + m_tileSize.y),
+			m_tileSize.x,
+			m_tileSize.y));
+	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 }
 

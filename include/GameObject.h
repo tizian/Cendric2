@@ -43,6 +43,7 @@ public:
 	virtual void setDisposed();
 	void setCurrentAnimation(const Animation* animation, bool isFlipped);
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
+	void setState(GameObjectState state);
 	virtual void setScreen(Screen* screen);
 	void setInputInDefaultView(bool value);
 	virtual void setViewable(bool value);

@@ -17,10 +17,13 @@ void CrumblyBlockTile::load(int skinNr) {
 
 	Animation crumblingAnimation;
 	crumblingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_crumblyblock));
-	crumblingAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
-	crumblingAnimation.addFrame(sf::IntRect(BORDER + 2 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
-	crumblingAnimation.addFrame(sf::IntRect(BORDER + 3 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
-	crumblingAnimation.addFrame(sf::IntRect(BORDER + 4 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
+	for (int i = 1; i < 5; i++) {
+		crumblingAnimation.addFrame(sf::IntRect(
+			BORDER + i * (2 * BORDER + m_tileSize.x), 
+			BORDER + (skinNr - 1) * (2 * BORDER + m_tileSize.y), 
+			m_tileSize.x, 
+			m_tileSize.y));
+	}
 
 	addAnimation(GameObjectState::Crumbling, crumblingAnimation);
 

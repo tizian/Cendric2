@@ -45,6 +45,44 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 	}
 }
 
+void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) const {
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	if (mainCharacter == nullptr) {
+		g_logger->logError("LevelLoader", "Could not find main character of game screen");
+		return;
+	}
+
+	for (auto& it : data.levers) {
+		
+		std::vector<SwitchableTile*> dependentTiles;
+
+		// create the switch tiles and add them.
+		for (auto& switchBean : it.dependentTiles) {
+			SwitchableTile* tile = new SwitchableTile(level);
+			tile->setInitialState(switchBean.id == DynamicTileID::SwitchableOn);
+			tile->setTileSize(data.tileSize);
+			tile->init();
+			tile->setPosition(switchBean.position);
+			tile->setDebugBoundingBox(sf::Color::Yellow);
+			tile->load(switchBean.skinNr);
+			screen->addObject(tile);
+			dependentTiles.push_back(tile);
+		}
+
+		// create the lever tiles and add them.
+		for (auto& leverBean : it.levers) {
+			LeverTile* tile = new LeverTile(level, mainCharacter);
+			tile->setTileSize(data.tileSize);
+			tile->init();
+			tile->setPosition(leverBean.position);
+			tile->setDebugBoundingBox(sf::Color::Yellow);
+			tile->load(leverBean.skinNr);
+			tile->setDependantTiles(dependentTiles);
+			screen->addObject(tile);
+		}
+	}
+}
+
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const {
 	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
 	if (mainCharacter == nullptr) {

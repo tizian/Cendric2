@@ -12,5 +12,8 @@ enum class DynamicTileID {
 	SpikesTop,
 	ShiftableBlock,
 	Checkpoint,
+	Lever,
+	SwitchableOn,
+	SwitchableOff,
 	MAX
 };
