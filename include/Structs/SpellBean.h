@@ -50,7 +50,7 @@ private:
 
 	static SpellBean getFireBallSpellBean();
 	static SpellBean getIceBallSpellBean();
-	// static SpellBean getTelekinesisSpellBean();
+	static SpellBean getTelekinesisSpellBean();
 	static SpellBean getWindGustSpellBean();
 	static SpellBean getAntiGravitySpellBean();
 

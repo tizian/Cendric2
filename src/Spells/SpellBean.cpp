@@ -12,6 +12,7 @@
 #include "SpellCreators/IcyAmbushSpellCreator.h"
 #include "SpellCreators/UnlockSpellCreator.h"
 #include "SpellCreators/LightSpellCreator.h"
+#include "SpellCreators/TelekinesisSpellCreator.h"
 
 std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -73,6 +74,10 @@ std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Range);
 		types.push_back(SpellModifierType::Duration);
 		break;
+	case SpellID::Telekinesis:
+		types.push_back(SpellModifierType::Range);
+		types.push_back(SpellModifierType::Reflect);
+		break;
 	default:
 		break;
 	}
@@ -118,6 +123,9 @@ SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vecto
 	case SpellID::Light:
 		creator = new LightSpellCreator(bean, owner);
 		break;
+	case SpellID::Telekinesis:
+		creator = new TelekinesisSpellCreator(bean, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -153,6 +161,8 @@ SpellBean SpellBean::getSpellBean(SpellID id) {
 		return getUnlockSpellBean();
 	case SpellID::Light:
 		return getLightSpellBean();
+	case SpellID::Telekinesis:
+		return getTelekinesisSpellBean();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -296,6 +306,26 @@ SpellBean SpellBean::getAntiGravitySpellBean() {
 	antiGravity.durationModifierAddition = sf::seconds(3);
 
 	return antiGravity;
+}
+
+SpellBean SpellBean::getTelekinesisSpellBean() {
+	SpellBean telekinesis = EMPTY_SPELL;
+	telekinesis.id = SpellID::Telekinesis;
+	telekinesis.spellType = SpellType::Elemental;
+
+	telekinesis.iconTextureRect = sf::IntRect(100, 0, 50, 50);
+	telekinesis.cooldown = sf::seconds(3);
+	telekinesis.boundingBox = sf::FloatRect(0, 0, 20, 20);
+	telekinesis.duration = sf::seconds(1);
+	telekinesis.startVelocity = 200.f;
+	telekinesis.needsTarget = true;
+	telekinesis.range = 100;
+	telekinesis.duration = sf::seconds(telekinesis.range/telekinesis.startVelocity);
+
+	telekinesis.rangeModifierAddition = 150.f;
+	telekinesis.reflectModifierAddition = 1;
+
+	return telekinesis;
 }
 
 SpellBean SpellBean::getWindGustSpellBean() {

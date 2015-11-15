@@ -38,6 +38,7 @@ void LeverTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::Telekinesis:
 		switchLever();
+		spell->setDisposed();
 		break;
 	default:
 		break;

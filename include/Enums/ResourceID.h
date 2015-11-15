@@ -18,6 +18,7 @@ enum class ResourceID {
 	Texture_spell_fear,
 	Texture_spell_icyambush,
 	Texture_spell_unlock,
+	Texture_spell_telekinesis,
 	Texture_tile_ice,
 	Texture_tile_crumblyblock,
 	Texture_tile_torch,
