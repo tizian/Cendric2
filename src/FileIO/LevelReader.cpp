@@ -888,68 +888,68 @@ void LevelReader::updateData(LevelData& data)  const {
 	int tileWidth = data.tileSize.x;
 	int tileHeight = data.tileSize.y;
 
-	for (auto& it : data.dynamicTileLayers) {
-		int x = 0;
-		int y = 0;
-		DynamicTileID id = it.first;
+	for (auto& layer : data.dynamicTileLayers) {
+		DynamicTileID id = layer.first;
 
 		if (id == DynamicTileID::Water) {
-			// handle special dynamic tiles
-			bool isReadingWaterTiles = false;
-			float waterTileWidth = 0.f;
+			// Read in DynamicWaterTiles: Look for n x m tile rectangles inside layer
+
+			std::vector<bool> processed(layer.second.size(), false);
 			DynamicTileBean bean;
 			bean.id = id;
-			for (auto& it2 : it.second) {
-				if (it2 != 0) {
-					if (isReadingWaterTiles) {
-						waterTileWidth += tileWidth;
-					}
-					else {
+
+			for (int y = 0; y < data.mapSize.y; ++y) {
+				for (int x = 0; x < data.mapSize.x; ++x) {
+					int skinID = layer.second[y * data.mapSize.x + x];
+
+					if (skinID != 0 && !processed[y * data.mapSize.x + x]) {		// found start of unprocessed rectangle
+						int x0 = x; int xi = x0;
+						int y0 = y; int yi = y0;
+
+						int width = 0;
+						int height = 0;
+
+						// Check size of rectangle in both x and y
+						while (xi < data.mapSize.x && layer.second[y0 * data.mapSize.x + xi] == skinID) {
+							width++;
+							xi++;
+						}
+						while (yi < data.mapSize.y && layer.second[yi * data.mapSize.x + x0] == skinID) {
+							height++;
+							yi++;
+						}
+
+						// Mark whole rectangle as processed
+						for (int xi = x0; xi < x0 + width; ++xi) {
+							for (int yi = y0; yi < y0 + height; ++yi) {
+								processed[yi * data.mapSize.x + xi] = true;
+							}
+						}
+
+						// Fill in info
 						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
-						bean.skinNr = it2;
+						bean.skinNr = skinID;
 						bean.spawnPosition = y * data.mapSize.x + x;
-						waterTileWidth = static_cast<float>(tileWidth);
-						isReadingWaterTiles = true;
-					}
-				}
-				else {
-					if (isReadingWaterTiles) {
-						isReadingWaterTiles = false;
-						bean.size = sf::Vector2f(waterTileWidth, static_cast<float>(tileWidth));
+						bean.size = sf::Vector2f(tileWidth * width, tileHeight * height);
 						data.dynamicTiles.push_back(bean);
 					}
-				}
-				if (x + 1 >= data.mapSize.x) {
-					x = 0;
-					y++;
-					if (isReadingWaterTiles) {
-						isReadingWaterTiles = false;
-						bean.size = sf::Vector2f(waterTileWidth, static_cast<float>(tileWidth));
-						data.dynamicTiles.push_back(bean);
-					}
-				}
-				else {
-					x++;
+
 				}
 			}
 		}
 		else {
 			// normal tiles
-			for (auto& it2 : it.second) {
-				if (it2 != 0) {
-					DynamicTileBean bean;
-					bean.id = id;
-					bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
-					bean.skinNr = it2;
-					bean.spawnPosition = y * data.mapSize.x + x;
-					data.dynamicTiles.push_back(bean);
-				}
-				if (x + 1 >= data.mapSize.x) {
-					x = 0;
-					y++;
-				}
-				else {
-					x++;
+			for (int y = 0; y < data.mapSize.y; ++y) {
+				for (int x = 0; x < data.mapSize.x; ++x) {
+					int it2 = layer.second[y * data.mapSize.x + x];
+					if (it2 != 0) {
+						DynamicTileBean bean;
+						bean.id = id;
+						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+						bean.skinNr = it2;
+						bean.spawnPosition = y * data.mapSize.x + x;
+						data.dynamicTiles.push_back(bean);
+					}
 				}
 			}
 		}

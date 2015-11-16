@@ -73,7 +73,6 @@ public:
 	static const float DAMPING;
 	static const float SPREAD;
 
-	static const float WATER_LEVEL;
 	static const float WATER_SURFACE_THICKNESS;
 	static const int NUMBER_COLUMNS_PER_SUBTILE;
 

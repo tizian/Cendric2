@@ -10,7 +10,6 @@ const float SimulatedWaterTile::TENSION = 0.4f;
 const float SimulatedWaterTile::DAMPING = 0.05f;
 const float SimulatedWaterTile::SPREAD = 0.7f;
 
-const float SimulatedWaterTile::WATER_LEVEL = 40.f;
 const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
 const int SimulatedWaterTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 
@@ -37,8 +36,8 @@ void SimulatedWaterTile::load(int skinNr) {
 	m_columns = vector<WaterColumn>();
 	for (int i = 0; i < m_nColumns; ++i) {
 		WaterColumn c;
-		c.targetHeight = WATER_LEVEL;
-		c.height = WATER_LEVEL;
+		c.targetHeight = m_height - 10;
+		c.height = m_height - 10;
 		c.velocity = 0.f;
 		c.fixed = false;
 
@@ -119,8 +118,12 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 		}
 	}
 
-	m_columns[0].height = m_columns[0].targetHeight;
-	m_columns[m_nColumns - 1].height = m_columns[m_nColumns - 1].targetHeight;
+	if (m_columns[0].height > m_height) {
+		m_columns[0].height = m_height;
+	}
+	if (m_columns[m_nColumns - 1].height > m_height) {
+		m_columns[m_nColumns - 1].height = m_height;
+	}
 
 	for (int i = 0; i < m_nColumns; ++i) {
 		if (m_columns[i].fixed) {
@@ -166,7 +169,7 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 float SimulatedWaterTile::getHeight(float xPosition) {
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	if (index < 0 || index > m_nColumns - 1)
-		return WATER_LEVEL;
+		return m_height - 10;
 
 	return m_columns[index].height;
 }
@@ -194,7 +197,7 @@ void SimulatedWaterTile::splash(float xPosition, float width, float velocity) {
 	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
 	for (int i = startIndex; i <= endIndex; ++i) {
 		if (i > 0 && i < m_nColumns) {
-			m_columns[i].velocity = velocity;
+			m_columns[i].velocity = 0.1f * velocity;
 		}
 	}
 
