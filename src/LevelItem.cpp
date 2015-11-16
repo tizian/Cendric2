@@ -26,19 +26,23 @@ void LevelItem::load(LevelMainCharacter* mainChar, const ItemBean& bean, const s
 	setDebugBoundingBox(sf::Color::Green);
 }
 
+void LevelItem::pickup() {
+	// pickup, create the correct item or correct amount of gold in the players inventory.
+	if (m_itemType == ItemType::Gold) {
+		m_mainChar->addGold(m_goldValue);
+	}
+	else {
+		m_mainChar->lootItem(m_itemID, 1);
+	}
+	m_screen->getCharacterCore()->setItemLooted(m_mainChar->getLevel()->getID(), m_spawnPosition);
+	setDisposed();
+}
+
 void LevelItem::onRightClick() {
 	// check if item is in range
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
-		// pickup, create the correct item or correct amount of gold in the players inventory.
-		if (m_itemType == ItemType::Gold) {
-			m_mainChar->addGold(m_goldValue);
-		}
-		else {
-			m_mainChar->lootItem(m_itemID, 1);
-		}
-		m_screen->getCharacterCore()->setItemLooted(m_mainChar->getLevel()->getID(), m_spawnPosition);
-		setDisposed();
+		pickup();
 	}
 	else {
 		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);

@@ -24,6 +24,23 @@ void TelekinesisSpell::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 	Spell::update(frameTime);
 	updateParticleSystemPosition();
+	checkCollisionsWithItems();
+}
+
+void TelekinesisSpell::checkCollisionsWithItems() {
+	for (auto& it : *m_items) {
+		if (!it->isViewable()) continue;
+		if (it->getBoundingBox()->intersects(*getBoundingBox())) {
+			LevelItem* item = dynamic_cast<LevelItem*>(it);
+			if (item != nullptr) {
+				item->pickup();
+			}
+		}
+	}
+}
+
+void TelekinesisSpell::setItemVector(const std::vector<GameObject*>* items) {
+	m_items = items;
 }
 
 void TelekinesisSpell::render(sf::RenderTarget& target) {

@@ -24,6 +24,6 @@ private:
 	LevelMainCharacter* m_mainChar;
 	// the lever can only be used by hand if the main char is in this range.
 	// it is however always possible for a telekinesis spell to activate the lever if its projectile reaches the lever.
-	const float ACTIVATE_RANGE = 100.f;
+	const float ACTIVATE_RANGE = 60.f;
 	std::vector<SwitchableTile*> m_dependentTiles;
 };

@@ -10,6 +10,7 @@ void TelekinesisSpellCreator::executeSpell(const sf::Vector2f& target) {
 
 	TelekinesisSpell* newSpell = new TelekinesisSpell();
 	newSpell->load(spellBean, m_owner, target);
+	newSpell->setItemVector(m_screen->getObjects(GameObjectType::_LevelItem));
 	m_screen->addObject(newSpell);
 
 	m_owner->setFightAnimationTime();

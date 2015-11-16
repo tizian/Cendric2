@@ -16,6 +16,7 @@ public:
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
 	void onMouseOver() override;
+	void loot();
 	// the object id in the dynamic chest tiles object layer.
 	void setObjectID(int id);
 	// loot for the chest
