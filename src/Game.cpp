@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "Misc\icon.h"
+#include "Misc/icon.h"
 
 Game::Game() {
 	if (g_resourceManager->getConfiguration().isFullscreen) {
