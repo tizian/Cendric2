@@ -31,7 +31,10 @@ void TelekinesisSpell::checkCollisionsWithItems() {
 	for (auto& it : *m_items) {
 		if (!it->isViewable()) continue;
 		if (it->getBoundingBox()->intersects(*getBoundingBox())) {
-			// todo
+			LevelItem* item = dynamic_cast<LevelItem*>(it);
+			if (item != nullptr) {
+				item->pickup();
+			}
 		}
 	}
 }

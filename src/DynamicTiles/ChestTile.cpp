@@ -57,6 +57,12 @@ void ChestTile::onHit(Spell* spell) {
 			spell->setDisposed();
 		}
 		break;
+	case SpellID::Telekinesis:
+		if (m_state == GameObjectState::Unlocked) {
+			loot();
+			spell->setDisposed();
+		}
+		break;
 	default:
 		break;
 	}
@@ -95,16 +101,20 @@ void ChestTile::onMouseOver() {
 	}
 }
 
+void ChestTile::loot() {
+	// loot, create the correct items + gold in the players inventory.
+	m_mainChar->lootItems(m_lootableItems);
+	m_mainChar->addGold(m_lootableGold);
+	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
+	setDisposed();
+}
+
 void ChestTile::onRightClick() {
 	if (m_state == GameObjectState::Unlocked) {
 		// check if the chest is in range
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
-			// loot, create the correct items + gold in the players inventory.
-			m_mainChar->lootItems(m_lootableItems);
-			m_mainChar->addGold(m_lootableGold);
-			m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
-			setDisposed();
+			loot();
 		}
 		else {
 			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
