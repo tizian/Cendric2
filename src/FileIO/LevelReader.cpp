@@ -910,11 +910,11 @@ void LevelReader::updateData(LevelData& data)  const {
 						int height = 0;
 
 						// Check size of rectangle in both x and y
-						while (xi < data.mapSize.x && layer.second[y0 * data.mapSize.x + xi] == skinNr) {
+						while (xi < data.mapSize.x && layer.second[y0 * data.mapSize.x + xi] == skinNr && !processed[y0 * data.mapSize.x + xi]) {
 							width++;
 							xi++;
 						}
-						while (yi < data.mapSize.y && layer.second[yi * data.mapSize.x + x0] == skinNr) {
+						while (yi < data.mapSize.y && layer.second[yi * data.mapSize.x + x0] == skinNr && !processed[yi * data.mapSize.x + x0]) {
 							height++;
 							yi++;
 						}
