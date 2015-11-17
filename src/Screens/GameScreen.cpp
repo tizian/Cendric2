@@ -34,10 +34,10 @@ const std::string foregroundFragmentShader = \
 GameScreen::GameScreen(CharacterCore* core) : Screen(core) {
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	m_lightLayerShader.setParameter("texture", sf::Shader::CurrentTexture);
+	m_lightLayerShader.setUniform("texture", sf::Shader::CurrentTexture);
 	m_lightLayerShader.loadFromMemory(vertexShader, lightFragmentShader);
 
-	m_foregroundLayerShader.setParameter("texture", sf::Shader::CurrentTexture);
+	m_foregroundLayerShader.setUniform("texture", sf::Shader::CurrentTexture);
 	m_foregroundLayerShader.loadFromMemory(vertexShader, foregroundFragmentShader);
 
 	setTooltipPositionTop(true);

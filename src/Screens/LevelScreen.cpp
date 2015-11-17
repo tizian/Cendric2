@@ -197,7 +197,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
 	m_sprite.setTexture(m_renderTexture.getTexture());
-	m_lightLayerShader.setParameter("ambientLevel", m_currentLevel.getDimming());
+	m_lightLayerShader.setUniform("ambientLevel", m_currentLevel.getDimming());
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite, &m_lightLayerShader);
 
@@ -215,7 +215,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render extra buffer with foreground shader to window			(Ambient light level added on top of foreground)
 	m_sprite.setTexture(m_renderTexture.getTexture());
-	m_foregroundLayerShader.setParameter("ambientLevel", m_currentLevel.getDimming());
+	m_foregroundLayerShader.setUniform("ambientLevel", m_currentLevel.getDimming());
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite, &m_foregroundLayerShader);
 

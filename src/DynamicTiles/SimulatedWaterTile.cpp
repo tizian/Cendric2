@@ -217,7 +217,6 @@ void SimulatedWaterTile::onHit(Spell* spell) {
 	auto id = spell->getSpellID();
 
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
-	if (index == -1) index = 0;
 	bool frozen = isFrozen(index);
 	bool doSplash = !frozen;
 
@@ -284,5 +283,8 @@ void SimulatedWaterTile::melt(int index) {
 }
 
 bool SimulatedWaterTile::isFrozen(int index) {
+	if (m_frozenTiles.size() == 0) return false;
+	if (index < 0) index = 0;
+	if (index >= m_frozenTiles.size()) index = m_frozenTiles.size() - 1;
 	return (m_frozenTiles[index] != nullptr);
 }
