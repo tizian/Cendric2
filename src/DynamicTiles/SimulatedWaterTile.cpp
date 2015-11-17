@@ -222,7 +222,7 @@ void SimulatedWaterTile::onHit(Spell* spell) {
 	auto id = spell->getSpellID();
 
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
-	if (index == -1) index = 1;
+	if (index == -1) index = 0;
 	bool frozen = isFrozen(index);
 	bool doSplash = true;
 
