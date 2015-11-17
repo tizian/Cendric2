@@ -30,7 +30,7 @@ A list of all builds is available [here](https://github.com/tizian/Cendric2/rele
 
 The recommended way to compile the code is to use [**cmake**](https://cmake.org/), which automatically generates project files for your favourite IDE or build system:
 ```
-git clone https://github.com/tizian/Cendric2.git
+git clone https://github.com/tizian/Cendric2.git --recursive
 cd Cendric2
 mkdir build
 cd build
