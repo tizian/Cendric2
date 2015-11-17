@@ -222,6 +222,7 @@ void SimulatedWaterTile::onHit(Spell* spell) {
 	auto id = spell->getSpellID();
 
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
+	if (index == -1) index = 1;
 	bool frozen = isFrozen(index);
 	bool doSplash = true;
 
@@ -248,6 +249,8 @@ void SimulatedWaterTile::onHit(Spell* spell) {
 }
 
 void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
+	// don't splash if the mob is deeper than one tile below the surface
+	if (mob->getBoundingBox()->top > getBoundingBox()->top + m_tileSize.y) return;
 	float vx = mob->getVelocity().x;
 	float vy = mob->getVelocity().y;
 	float vel = std::sqrt(vx*vx + vy*vy);

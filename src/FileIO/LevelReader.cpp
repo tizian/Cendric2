@@ -900,9 +900,9 @@ void LevelReader::updateData(LevelData& data)  const {
 
 			for (int y = 0; y < data.mapSize.y; ++y) {
 				for (int x = 0; x < data.mapSize.x; ++x) {
-					int skinID = layer.second[y * data.mapSize.x + x];
+					int skinNr = layer.second[y * data.mapSize.x + x];
 
-					if (skinID != 0 && !processed[y * data.mapSize.x + x]) {		// found start of unprocessed rectangle
+					if (skinNr != 0 && !processed[y * data.mapSize.x + x]) {		// found start of unprocessed rectangle
 						int x0 = x; int xi = x0;
 						int y0 = y; int yi = y0;
 
@@ -910,11 +910,11 @@ void LevelReader::updateData(LevelData& data)  const {
 						int height = 0;
 
 						// Check size of rectangle in both x and y
-						while (xi < data.mapSize.x && layer.second[y0 * data.mapSize.x + xi] == skinID) {
+						while (xi < data.mapSize.x && layer.second[y0 * data.mapSize.x + xi] == skinNr) {
 							width++;
 							xi++;
 						}
-						while (yi < data.mapSize.y && layer.second[yi * data.mapSize.x + x0] == skinID) {
+						while (yi < data.mapSize.y && layer.second[yi * data.mapSize.x + x0] == skinNr) {
 							height++;
 							yi++;
 						}
@@ -928,12 +928,11 @@ void LevelReader::updateData(LevelData& data)  const {
 
 						// Fill in info
 						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
-						bean.skinNr = skinID;
+						bean.skinNr = skinNr;
 						bean.spawnPosition = y * data.mapSize.x + x;
 						bean.size = sf::Vector2f(tileWidth * width, tileHeight * height);
 						data.dynamicTiles.push_back(bean);
 					}
-
 				}
 			}
 		}
@@ -941,12 +940,12 @@ void LevelReader::updateData(LevelData& data)  const {
 			// normal tiles
 			for (int y = 0; y < data.mapSize.y; ++y) {
 				for (int x = 0; x < data.mapSize.x; ++x) {
-					int it2 = layer.second[y * data.mapSize.x + x];
-					if (it2 != 0) {
+					int skinNr = layer.second[y * data.mapSize.x + x];
+					if (skinNr != 0) {
 						DynamicTileBean bean;
 						bean.id = id;
 						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
-						bean.skinNr = it2;
+						bean.skinNr = skinNr;
 						bean.spawnPosition = y * data.mapSize.x + x;
 						data.dynamicTiles.push_back(bean);
 					}

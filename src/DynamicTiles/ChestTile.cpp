@@ -62,6 +62,10 @@ void ChestTile::onHit(Spell* spell) {
 			loot();
 			spell->setDisposed();
 		}
+		else if (m_strength == 0 && m_state == GameObjectState::Locked) {
+			setState(GameObjectState::Unlocked);
+			spell->setDisposed();
+		}
 		break;
 	default:
 		break;
@@ -126,8 +130,7 @@ void ChestTile::onRightClick() {
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
 			// unlock!
-			m_state = GameObjectState::Unlocked;
-			setCurrentAnimation(getAnimation(m_state), false);
+			setState(GameObjectState::Unlocked);
 		}
 		else {
 			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);

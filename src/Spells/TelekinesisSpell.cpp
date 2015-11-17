@@ -34,6 +34,7 @@ void TelekinesisSpell::checkCollisionsWithItems() {
 			LevelItem* item = dynamic_cast<LevelItem*>(it);
 			if (item != nullptr) {
 				item->pickup();
+				setDisposed();
 			}
 		}
 	}
