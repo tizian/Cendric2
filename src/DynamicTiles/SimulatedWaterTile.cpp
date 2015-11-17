@@ -6,14 +6,8 @@
 
 using namespace std;
 
-const float SimulatedWaterTile::TENSION = 0.4f;
-const float SimulatedWaterTile::DAMPING = 0.05f;
-const float SimulatedWaterTile::SPREAD = 0.7f;
-
 const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
 const int SimulatedWaterTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
-
-const sf::Color SimulatedWaterTile::WATER_COLOR = sf::Color(20, 50, 100, 128);
 
 void SimulatedWaterTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
@@ -21,6 +15,7 @@ void SimulatedWaterTile::init() {
 
 void SimulatedWaterTile::load(int skinNr) {
 	m_isCollidable = false;
+	m_data = SimulatedWaterTileData::getData(skinNr);
 
 	const sf::FloatRect *bb = getBoundingBox();
 	m_x = getPosition().x;
@@ -54,7 +49,7 @@ void SimulatedWaterTile::load(int skinNr) {
 	// Particle System
 	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob), WINDOW_WIDTH, WINDOW_HEIGHT));
 	g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)->setSmooth(true);
-	m_ps->color = WATER_COLOR;
+	m_ps->color = m_data.color;
 	m_ps->threshold = 0.7f;
 
 	// Generators
@@ -93,17 +88,17 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 	dt *= 20.f;
 
 	for (int i = 0; i < m_nColumns; ++i) {
-		m_columns[i].update(DAMPING, TENSION, dt);
+		m_columns[i].update(m_data.damping, m_data.tension, dt);
 	}
 
 	for (int iterations = 0; iterations < 8; ++iterations) {
 		for (int i = 0; i < m_nColumns; ++i) {
 			if (i > 0) {
-				m_leftDeltas[i] = SPREAD * (m_columns[i].height - m_columns[i - 1].height);
+				m_leftDeltas[i] = m_data.spread * (m_columns[i].height - m_columns[i - 1].height);
 				m_columns[i - 1].velocity += m_leftDeltas[i] * dt;
 			}
 			if (i < m_nColumns - 1) {
-				m_rightDeltas[i] = SPREAD * (m_columns[i].height - m_columns[i + 1].height);
+				m_rightDeltas[i] = m_data.spread * (m_columns[i].height - m_columns[i + 1].height);
 				m_columns[i + 1].velocity += m_rightDeltas[i] * dt;
 			}
 		}
@@ -145,18 +140,18 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 		sf::Vector2f p6 = sf::Vector2f(p1.x, p1.y - thickness);
 
 		m_vertexArray[8 * i + 0].position = p1;
-		m_vertexArray[8 * i + 0].color = WATER_COLOR;
+		m_vertexArray[8 * i + 0].color = m_data.color;
 		m_vertexArray[8 * i + 1].position = p2;
-		m_vertexArray[8 * i + 1].color = WATER_COLOR;
+		m_vertexArray[8 * i + 1].color = m_data.color;
 		m_vertexArray[8 * i + 2].position = p3;
-		m_vertexArray[8 * i + 2].color = WATER_COLOR;
+		m_vertexArray[8 * i + 2].color = m_data.color;
 		m_vertexArray[8 * i + 3].position = p4;
-		m_vertexArray[8 * i + 3].color = WATER_COLOR;
+		m_vertexArray[8 * i + 3].color = m_data.color;
 
 		m_vertexArray[8 * i + 4].position = p1;
-		m_vertexArray[8 * i + 4].color = WATER_COLOR;
+		m_vertexArray[8 * i + 4].color = m_data.color;
 		m_vertexArray[8 * i + 5].position = p2;
-		m_vertexArray[8 * i + 5].color = WATER_COLOR;
+		m_vertexArray[8 * i + 5].color = m_data.color;
 		m_vertexArray[8 * i + 6].position = p5;
 		m_vertexArray[8 * i + 6].color = transparent;
 		m_vertexArray[8 * i + 7].position = p6;
@@ -189,7 +184,7 @@ void SimulatedWaterTile::splash(float xPosition, float velocity) {
 	*m_particleMaxSpeed = 1.0f * velocity;
 	int nParticles = static_cast<int>(velocity / 8);
 	m_ps->emit(nParticles);
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_water);
+	g_resourceManager->playSound(m_sound, m_data.sound);
 }
 
 void SimulatedWaterTile::splash(float xPosition, float width, float velocity) {
@@ -224,17 +219,12 @@ void SimulatedWaterTile::onHit(Spell* spell) {
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
 	if (index == -1) index = 0;
 	bool frozen = isFrozen(index);
-	bool doSplash = true;
+	bool doSplash = !frozen;
 
 	if (id == SpellID::IceBall) {
-		if (!frozen) {
+		if (!frozen && m_data.isFreezable) {
 			freeze(index);
 			spell->setDisposed();
-		}
-		doSplash = false;
-	}
-	else if (id == SpellID::FireBall) {
-		if (frozen) {
 			doSplash = false;
 		}
 	}
@@ -256,6 +246,9 @@ void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
 	float vel = std::sqrt(vx*vx + vy*vy);
 	// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
 	splash(mob->getBoundingBox()->left, mob->getBoundingBox()->width, -vel * 0.5f);
+	if (m_data.isDeadly) {
+		mob->setDead();
+	}
 }
 
 void SimulatedWaterTile::freeze(int index) {
@@ -291,7 +284,5 @@ void SimulatedWaterTile::melt(int index) {
 }
 
 bool SimulatedWaterTile::isFrozen(int index) {
-	if (m_frozenTiles[index])
-		return true;
-	return false;
+	return (m_frozenTiles[index] != nullptr);
 }

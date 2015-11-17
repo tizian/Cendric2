@@ -4,6 +4,7 @@
 
 #include "global.h"
 #include "Particles/ParticleSystem.h"
+#include "DynamicTiles/SimulatedWaterTileData.h"
 
 class FrozenWaterTile;
 
@@ -47,6 +48,7 @@ public:
 	bool isFrozen(int index);
 
 private:
+	SimulatedWaterTileData m_data;
 	float m_x, m_y;
 	float m_width, m_height;
 	int m_nTiles;		// number tiles (width)
@@ -69,12 +71,7 @@ private:
 	sf::Sound m_sound;
 
 public:
-	static const float TENSION;
-	static const float DAMPING;
-	static const float SPREAD;
 
 	static const float WATER_SURFACE_THICKNESS;
 	static const int NUMBER_COLUMNS_PER_SUBTILE;
-
-	static const sf::Color WATER_COLOR;
 };
