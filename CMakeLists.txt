@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.6)
 
 project(Cendric2)
 
+add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
+
 if(WIN32)
 	include(CheckCXXCompilerFlag)
 	CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
@@ -19,10 +21,8 @@ else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 endif()
 
-add_subdirectory("${PROJECT_SOURCE_DIR}/ext/SFML-2.2")
-
 include_directories(
-	"${PROJECT_SOURCE_DIR}/ext/SFML-2.2/include"
+	"${PROJECT_SOURCE_DIR}/ext/sfml/include"
 	"${PROJECT_SOURCE_DIR}/ext"
 	"${PROJECT_SOURCE_DIR}/include"
 )
