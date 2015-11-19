@@ -183,8 +183,8 @@ void CharacterCore::reloadWeaponSlots() {
 	wep->reload();
 	for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++) {
 		wep->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
-		for (auto& it : m_data.equippedWeaponSlots[slot].second) {
-			wep->addModifier(slot, it, false);
+		for (int i = 0; i < m_data.equippedWeaponSlots[slot].second.size(); ++i) {
+			wep->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
 		}
 	}
 }
@@ -204,8 +204,8 @@ void CharacterCore::loadEquipmentItems() {
 		// add equipped spells and their modifiers
 		for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++) {
 			eqWeapon->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
-			for (auto& it : m_data.equippedWeaponSlots[slot].second) {
-				eqWeapon->addModifier(slot, it, false);
+			for (int i = 0; i < m_data.equippedWeaponSlots[slot].second.size(); ++i) {
+				eqWeapon->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
 			}
 		}
 	}
@@ -468,16 +468,13 @@ void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& le
 	m_data.isInLevel = true;
 }
 
-void CharacterCore::removeModifier(SpellModifierType type, int slotNr) {
+void CharacterCore::removeModifier(int slotNr, int modifierNr) {
 	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
-
 	std::vector<SpellModifier>& modifiers = m_data.equippedWeaponSlots.at(slotNr).second;
-	for (auto it = modifiers.begin(); it != modifiers.end(); /* don't increment here */) {
-		if (it->type == type) {
-			it = modifiers.erase(it);
-		}
-		else ++it;
-	}
+	if (modifierNr < 0 || modifierNr > modifiers.size() - 1) return;
+
+	modifiers[modifierNr].type = SpellModifierType::VOID;
+
 	reloadWeaponSlots();
 }
 
@@ -505,20 +502,35 @@ void CharacterCore::addSpell(SpellID id, int slotNr) {
 	reloadWeaponSlots();
 }
 
-void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr) {
+void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int modifierNr) {
 	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
 	if (wep == nullptr) return;
-	if (wep->addModifier(slotNr, modifier, true)) {
-		std::pair<SpellID, std::vector<SpellModifier>>& slot = m_data.equippedWeaponSlots.at(slotNr);
-		// check if this type already exists. if yes, remove it.
-		for (auto it = slot.second.begin(); it != slot.second.end(); /* don't increment here */) {
-			if (it->type == modifier.type) {
-				it = slot.second.erase(it);
+	if (wep->addModifier(slotNr, modifierNr, modifier, true)) {
+		// check if this spell slot exists. If not, fill the slots
+		if (m_data.equippedWeaponSlots.size() < slotNr + 1) {
+			g_logger->logInfo("CharacterCore", "Adding empty slots to the weapon!");
+			for (size_t i = m_data.equippedWeaponSlots.size(); i < slotNr + 1; ++i) {
+				std::pair<SpellID, std::vector<SpellModifier>> newSlot;
+				newSlot.first = SpellID::VOID;
+				m_data.equippedWeaponSlots.push_back(newSlot);
 			}
-			else ++it;
+		}
+		std::pair<SpellID, std::vector<SpellModifier>>& slot = m_data.equippedWeaponSlots.at(slotNr);
+		// check if this modifier slot exist
+		if (slot.second.size() < modifierNr + 1) {
+			g_logger->logInfo("CharacterCore", "Adding empty modifier slots slots to the weapon!");
+			for (size_t i = slot.second.size(); i < modifierNr + 1; ++i) {
+				slot.second.push_back(EMPTY_SPELLMODIFIER);
+			}
+		}
+		for (auto& it : slot.second) {
+			if (it.type == modifier.type) {
+				it.type = SpellModifierType::VOID;;
+			}
 		}
 
-		slot.second.push_back(modifier);
+		// add the modifier
+		slot.second[modifierNr] = modifier;
 	}
 	reloadWeaponSlots();
 }

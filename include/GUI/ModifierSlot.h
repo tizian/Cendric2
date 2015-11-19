@@ -32,6 +32,7 @@ public:
 	void onLeftJustPressed() override;
 	void onRightClick() override;
 	void onMouseOver() override;
+	void setSpellSlotNr(int nr);
 	void setNr(int nr);
 
 	void setPosition(const sf::Vector2f& pos) override;
@@ -42,6 +43,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 	const SpellModifier& getModifier() const;
 	int getNr() const;
+	int getSpellSlotNr() const;
 
 	static const float SIDE_LENGTH;
 	static const float MARGIN;
@@ -51,6 +53,7 @@ private:
 	bool m_isSelected = false;
 	bool m_isRightClicked = false;
 	int m_nr = -1;
+	int m_spellSlotNr = -1;
 
 	void initWindow();
 	ModifierDescriptionWindow* m_descriptionWindow = nullptr;

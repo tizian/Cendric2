@@ -35,27 +35,25 @@ void WeaponWindow::reload() {
 	int slotNr = 0;
 	for (auto& it : m_weapon->getWeaponSlots()) {
 		SpellSlot spellSlot = SpellSlot();
-		if (it.first.second == SpellID::VOID) {
-			spellSlot = SpellSlot(it.first.first);
+		if (it.spellSlot.spellID == SpellID::VOID) {
+			spellSlot = SpellSlot(it.spellSlot.spellType);
 		}
 		else {
-			spellSlot = SpellSlot(it.first.second);
+			spellSlot = SpellSlot(it.spellSlot.spellID);
 		}
 		spellSlot.setPosition(sf::Vector2f(xOffset, yOffset) + sf::Vector2f(SpellSlot::RADIUS, SpellSlot::RADIUS));
 		spellSlot.setNr(slotNr);
 		xOffset += 2 * SpellSlot::RADIUS + 2 * MARGIN;
 
 		std::vector<ModifierSlot> modifiers;
-		for (auto& it2 : it.second.second) {
-			modifiers.push_back(ModifierSlot(it2.second));
+		for (auto& mod : it.spellModifiers) {
+			modifiers.push_back(ModifierSlot(mod));
 		}
-		int emptyModifierCount = it.second.first - static_cast<int>(modifiers.size());
-		for (int i = 0; i < emptyModifierCount; i++) {
-			modifiers.push_back(ModifierSlot());
-		}
-		for (auto& it2 : modifiers) {
-			it2.setPosition(sf::Vector2f(xOffset, yOffset));
-			it2.setNr(slotNr);
+		for (int i = 0; i < modifiers.size(); ++i) {
+			auto& mod = modifiers[i];
+			mod.setPosition(sf::Vector2f(xOffset, yOffset));
+			mod.setSpellSlotNr(slotNr);
+			mod.setNr(i);
 			xOffset += ModifierSlot::SIDE_LENGTH + MARGIN;
 		}
 
@@ -142,7 +140,7 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 				return;
 			}
 			else if (it2.isRightClicked()) {
-				m_core->removeModifier(it2.getModifier().type, it2.getNr());
+				m_core->removeModifier(it2.getSpellSlotNr(), it2.getNr());
 				m_requireReload = true;
 				return;
 			}
@@ -192,7 +190,7 @@ void WeaponWindow::handleDragAndDrop() {
 	if (!(g_inputController->isMousePressedLeft())) {
 		if (m_selectedModifierSlot != nullptr) {
 			if (m_currentModifierClone != nullptr && !(m_currentModifierClone->getBoundingBox()->intersects(*m_selectedModifierSlot->getBoundingBox()))) {
-				m_core->removeModifier(m_selectedModifierSlot->getModifier().type, m_selectedModifierSlot->getNr());
+				m_core->removeModifier(m_selectedModifierSlot->getSpellSlotNr(), m_selectedModifierSlot->getNr());
 				m_requireReload = true;
 			}
 			else {
@@ -304,9 +302,9 @@ void WeaponWindow::notifyModifierDrop(ModifierSlotClone* clone) {
 		std::vector<SpellModifierType> allowedMods = SpellBean::getAllowedModifiers(it.first.getSpellID());
 		bool isModifierAllowed = std::find(allowedMods.begin(), allowedMods.end(), modifier.type) != allowedMods.end();
 		if (!isModifierAllowed) continue;
-		for (auto& it2 : it.second) {
-			if (clone->getBoundingBox()->intersects(*it2.getBoundingBox())) {
-				m_core->addModifier(clone->getModifier(), it.first.getNr());
+		for (auto& modifierSlot : it.second) {
+			if (clone->getBoundingBox()->intersects(*modifierSlot.getBoundingBox())) {
+				m_core->addModifier(clone->getModifier(), modifierSlot.getSpellSlotNr(), modifierSlot.getNr());
 				m_requireReload = true;
 				break;
 			}

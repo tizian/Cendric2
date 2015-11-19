@@ -285,6 +285,6 @@ void SimulatedWaterTile::melt(int index) {
 bool SimulatedWaterTile::isFrozen(int index) {
 	if (m_frozenTiles.size() == 0) return false;
 	if (index < 0) index = 0;
-	if (index >= m_frozenTiles.size()) index = m_frozenTiles.size() - 1;
+	if (index >= m_frozenTiles.size()) index = static_cast<int>(m_frozenTiles.size()) - 1;
 	return (m_frozenTiles[index] != nullptr);
 }

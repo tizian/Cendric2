@@ -112,8 +112,8 @@ void LevelMainCharacter::loadWeapon() {
 			continue;
 		}
 		std::vector<SpellModifier> spellModifiers;
-		for (auto& it : *(weapon->getCurrentModifiersForSlot(i))) {
-			spellModifiers.push_back(it.second);
+		for (auto& mod : *(weapon->getCurrentModifiersForSlot(i))) {
+			spellModifiers.push_back(mod);
 		}
 		m_spellManager->addSpell(newBean, spellModifiers);
 	}
