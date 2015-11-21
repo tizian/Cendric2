@@ -542,7 +542,7 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	while (startData != nullptr && startData < endData) {
 		startData++;
 		SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
-		if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX) {
+		if (type < SpellModifierType::VOID || type >= SpellModifierType::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell Modifier type not recognized: " + to_string(static_cast<int>(type)));
 			return false;
 		}
@@ -550,8 +550,13 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 		startData++;
 		int level = atoi(startData);
 		if (level < 1 || level > 3) {
-			g_logger->logError("CharacterCoreReader", "Spell Modifier level is not allowed: " + to_string(level));
-			return false;
+			if (type == SpellModifierType::VOID) {
+				level = 0;
+			}
+			else {
+				g_logger->logError("CharacterCoreReader", "Spell Modifier level is not allowed: " + to_string(level));
+				return false;
+			}
 		}
 		SpellModifier modifier;
 		modifier.type = type;

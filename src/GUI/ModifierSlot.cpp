@@ -156,3 +156,11 @@ int ModifierSlot::getNr() const {
 void ModifierSlot::setNr(int nr) {
 	m_nr = nr;
 }
+
+int ModifierSlot::getSpellSlotNr() const {
+	return m_spellSlotNr;
+}
+
+void ModifierSlot::setSpellSlotNr(int nr) {
+	m_spellSlotNr = nr;
+}

@@ -8,25 +8,26 @@ Weapon::Weapon(const ItemBean& bean) : Item(bean) {
 void Weapon::reload() {
 	m_weaponSlots.clear();
 	for (auto& it : m_bean.weaponSlots) {
-		std::pair<SpellType, SpellID> emptySpellSlot(it.type, SpellID::VOID);
-		std::pair<int, std::map<SpellModifierType, SpellModifier>> modifiers;
-		modifiers.first = it.modifierCount;
+		SpellSlot_s emptySpellSlot;
+		emptySpellSlot.spellType = it.type;
+		emptySpellSlot.spellID = SpellID::VOID;
 
-		std::pair <
-			std::pair<SpellType, SpellID>,
-			std::pair<
-			int,
-			std::map<SpellModifierType, SpellModifier >> > slot(emptySpellSlot, modifiers);
+		std::vector<SpellModifier> modifiers;
+		for (int i = 0; i < it.modifierCount; i++) {
+			SpellModifier modifier;
+			modifier.type = SpellModifierType::VOID;
+			modifiers.push_back(modifier);
+		}
+
+		WeaponSlot_s slot;
+		slot.spellSlot = emptySpellSlot;
+		slot.spellModifiers = modifiers;
 
 		m_weaponSlots.push_back(slot);
 	}
 }
 
-const std::vector < std::pair <
-	std::pair<SpellType, SpellID>,
-	std::pair<
-	int,
-	std::map < SpellModifierType, SpellModifier >> >> &Weapon::getWeaponSlots() const {
+const std::vector<WeaponSlot_s>& Weapon::getWeaponSlots() const {
 	return m_weaponSlots;
 }
 
@@ -46,47 +47,66 @@ SpellID Weapon::getCurrentSpellForSlot(int slotNr) const {
 	if (slotNr < 0 || slotNr > m_weaponSlots.size() - 1) {
 		return SpellID::VOID;
 	}
-	return m_weaponSlots[slotNr].first.second;
+	return m_weaponSlots[slotNr].spellSlot.spellID;
 }
 
-const std::map<SpellModifierType, SpellModifier>* Weapon::getCurrentModifiersForSlot(int slotNr) const {
+const std::vector<SpellModifier>* Weapon::getCurrentModifiersForSlot(int slotNr) const {
 	if (slotNr < 0 || slotNr > m_weaponSlots.size() - 1) {
 		return nullptr;
 	}
-	return &m_weaponSlots[slotNr].second.second;
+	return &m_weaponSlots[slotNr].spellModifiers;
 }
 
-bool Weapon::addModifier(int slotNr, const SpellModifier& modifier, bool force) {
+bool Weapon::addModifier(int slotNr, int modifierNr, const SpellModifier& modifier, bool force) {
 	if (!doesSlotExist(slotNr)) return false;
 
-	std::map<SpellModifierType, SpellModifier>& modifiers = m_weaponSlots.at(slotNr).second.second;
+	std::vector<SpellModifier>& modifiers = m_weaponSlots.at(slotNr).spellModifiers;
 
 	// check if there is a valid spell in this slot
-	if (m_weaponSlots.at(slotNr).first.second == SpellID::VOID) {
+	if (m_weaponSlots.at(slotNr).spellSlot.spellID == SpellID::VOID) {
 		g_logger->logWarning("Weapon::addModifier", "Cannot add a modifier to an empty spellslot");
 		return false;
 	}
 
-	// check if this slot is already taken
-	if (modifiers.find(modifier.type) != modifiers.end()) {
-		g_logger->logWarning("Weapon::addModifier", "The modifier slot for this type is already taken");
-		if (!force) return false;
-	}
-
-	// if not, check if there is enough space for the new modifier
-	else if (modifiers.size() >= m_weaponSlots.at(slotNr).second.first) {
-		g_logger->logWarning("Weapon::addModifier", "There is not enough space for a new modifier!");
+	// check if this modifierNr is allowed
+	if (modifierNr > modifiers.size() - 1 || modifierNr < 0) {
+		g_logger->logWarning("Weapon::addModifier", "Modifier slot with nr " + std::to_string(modifierNr) + " does not exist!");
 		return false;
 	}
 
+	if (!force) {
+		// check if this particular slot is already taken
+		if (modifiers[modifierNr].type != SpellModifierType::VOID) {
+			if (!force) {
+				g_logger->logWarning("Weapon::addModifier", "This modifier slot is already taken");
+				return false;
+			}
+		}
+
+		// check if this slot for this type is already taken
+		for (auto& mod : modifiers) {
+			if (mod.type == modifier.type) {
+				g_logger->logWarning("Weapon::addModifier", "The modifier slot for this type is already taken");
+				return false;
+			}
+		}
+	}
+
 	// check if this spell allows a modifier of this type
-	std::vector<SpellModifierType> allowedModifiers = SpellBean::getAllowedModifiers(m_weaponSlots.at(slotNr).first.second);
+	std::vector<SpellModifierType> allowedModifiers = SpellBean::getAllowedModifiers(m_weaponSlots.at(slotNr).spellSlot.spellID);
 	if (std::find(allowedModifiers.begin(), allowedModifiers.end(), modifier.type) == allowedModifiers.end()) {
 		g_logger->logWarning("Weapon::addModifier", "This modifier is not allowed for the spell!");
 		return false;
 	}
 
-	m_weaponSlots.at(slotNr).second.second[modifier.type] = modifier;
+	// remove the old modifier of this type, if any
+	for (auto& mod : modifiers) {
+		if (mod.type == modifier.type) {
+			mod.type = SpellModifierType::VOID;
+		}
+	}
+
+	m_weaponSlots.at(slotNr).spellModifiers[modifierNr] = modifier;
 	return true;
 }
 
@@ -96,12 +116,12 @@ bool Weapon::addSpell(int slotNr, SpellID id, bool force) {
 		return false;
 	}
 	// check if this slot is already taken
-	if (m_weaponSlots.at(slotNr).first.second != SpellID::VOID) {
+	if (m_weaponSlots.at(slotNr).spellSlot.spellID != SpellID::VOID) {
 		g_logger->logWarning("Weapon::addSpell", "This spell slot is already taken");
 		if (!force) return false;
 	}
 
-	m_weaponSlots.at(slotNr).first.second = id;
+	m_weaponSlots.at(slotNr).spellSlot.spellID = id;
 	return true;
 }
 
@@ -122,5 +142,5 @@ bool Weapon::isSpellAllowed(int slotNr, SpellID id) const {
 	}
 	// check if this spell bean has the correct type for this. An empty spell can be added anywhere.
 	if (SpellID::VOID == id) return true;
-	return (m_weaponSlots.at(slotNr).first.first == SpellBean::getSpellBean(id).spellType);
+	return (m_weaponSlots.at(slotNr).spellSlot.spellType == SpellBean::getSpellBean(id).spellType);
 }

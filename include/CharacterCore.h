@@ -64,11 +64,11 @@ public:
 	void removeSpell(int slotNr);
 	// tries to add the spell with id "id" to slot nr "slotNr"
 	void addSpell(SpellID id, int slotNr);
-	// tries to remove a modifier of type "type" from weapon slot nr "slotNr"
-	void removeModifier(SpellModifierType type, int slotNr);
-	// tries to add a modifier of type "type" to weapon slot nr "slotNr"
-	// it uses "force" for that purpose
-	void addModifier(const SpellModifier& modifier, int slotNr);
+	// tries to remove a modifier with modifierNr "modifierNr" from weapon slot nr "slotNr"
+	void removeModifier(int slotNr, int modifierNr);
+	// tries to add a modifier of type "type" to weapon slot nr "slotNr" into the modifier slot with nr "modifierNr"
+	// it uses "force" for that 
+	void addModifier(const SpellModifier& modifier, int slotNr, int modifierNr);
 	// getter for core part
 	const CharacterCoreData& getData() const;
 	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level
