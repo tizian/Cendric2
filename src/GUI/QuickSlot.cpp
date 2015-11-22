@@ -76,7 +76,9 @@ void QuickSlot::render(sf::RenderTarget& renderTarget) {
 
 void QuickSlot::consume() {
 	if (m_isEmpty) return;
-	m_interface->consumeItem(m_core->getItem(m_itemID));
+	const Item* item = m_core->getItem(m_itemID);
+	if (item == nullptr) return;
+	m_interface->consumeItem(*item);
 }
 
 void QuickSlot::reload() {
@@ -93,13 +95,14 @@ void QuickSlot::reload() {
 	else {
 		// the slot is filled
 		m_isEmpty = false;
-		const Item& item = m_core->getItem(m_itemID);
+		const Item* item = m_core->getItem(m_itemID);
+		if (item == nullptr) return;
 		int amount = m_core->getItems()->at(m_itemID);
 
 		m_inside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_items));
 		m_inside.setTextureRect(sf::IntRect(
-			item.getIconTextureLocation().x,
-			item.getIconTextureLocation().y,
+			item->getIconTextureLocation().x,
+			item->getIconTextureLocation().y,
 			static_cast<int>(SIDE_LENGTH),
 			static_cast<int>(SIDE_LENGTH)));
 		m_inside.setFillColor(sf::Color::White);
@@ -115,13 +118,13 @@ void QuickSlot::reload() {
 	}
 }
 
-void QuickSlot::onLeftJustPressed() {
+void QuickSlot::onLeftClick() {
 	consume();
 	g_inputController->lockAction();
 }
 
 void QuickSlot::onRightClick() {
-	consume();
+	setItemID("");
 	g_inputController->lockAction();
 }
 

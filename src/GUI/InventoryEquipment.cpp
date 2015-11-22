@@ -8,8 +8,9 @@ float InventoryEquipment::HEIGHT = 7 * (InventorySlot::SIDE_LENGTH + MARGIN) - M
 float InventoryEquipment::TOP = 100.f;
 float InventoryEquipment::LEFT = 50.f;
 
-InventoryEquipment::InventoryEquipment(CharacterCore* core) {
+InventoryEquipment::InventoryEquipment(CharacterCore* core, bool isInLevel) {
 	m_core = core;
+	m_isInLevel = isInLevel;
 
 	// init window
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
@@ -31,6 +32,11 @@ void InventoryEquipment::update(const sf::Time& frameTime) {
 	// check whether an item was selected
 	for (auto& it : m_slots) {
 		it.second.update(frameTime);
+		if (!m_isInLevel && it.second.isRightClicked()) {
+			// unequip item
+			m_core->equipItem("", it.first);
+			m_requiresReload = true;
+		}
 	}
 }
 
@@ -80,6 +86,12 @@ InventorySlot* InventoryEquipment::getSelectedSlot() {
 		}
 	}
 	return nullptr;
+}
+
+bool InventoryEquipment::requiresReload() {
+	bool wasRequireReload = m_requiresReload;
+	m_requiresReload = false;
+	return wasRequireReload;
 }
 
 void InventoryEquipment::reload() {

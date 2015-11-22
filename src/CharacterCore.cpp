@@ -73,11 +73,16 @@ const Item* CharacterCore::getEquippedItem(ItemType type) {
 	return m_equippedItems.at(type);
 }
 
-const Item& CharacterCore::getItem(const std::string& id) {
+const Item* CharacterCore::getItem(const std::string& id) {
 	if (m_items.empty()) {
 		loadItems();
 	}
-	return m_items.at(id);
+	if (m_items.find(id) == m_items.end()) {
+		g_logger->logError("CharacterCore", "Item with id: " + id + " does not exist!");
+		return nullptr;
+	}
+
+	return &m_items.at(id);
 }
 
 const Weapon* CharacterCore::getWeapon() {
@@ -566,8 +571,11 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 		oldItem = m_data.equippedWeapon;
 		m_data.equippedWeapon = item;
 		m_data.equippedWeaponSlots.clear();
-		for (int i = 0; i < (*(g_resourceManager->getItemBean(m_data.equippedWeapon))).weaponSlots.size(); i++) {
-			m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
+		if (!m_data.equippedWeapon.empty()) {
+			for (int i = 0; i < (*(g_resourceManager->getItemBean(m_data.equippedWeapon))).weaponSlots.size(); i++) {
+				m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
+			}
+			reloadWeaponSlots();
 		}
 		break;
 	default:

@@ -31,7 +31,7 @@ void WeaponWindow::reload() {
 	if (m_weapon == nullptr) return;
 
 	float xOffset = LEFT + GUIConstants::TEXT_OFFSET;
-	float yOffset = m_weaponSlot->getPosition().y + 2 * InventorySlot::SIDE_LENGTH;
+	float yOffset = TOP + Spellbook::SPELL_OFFSET;
 	int slotNr = 0;
 	for (auto& it : m_weapon->getWeaponSlots()) {
 		SpellSlot spellSlot = SpellSlot();
@@ -326,6 +326,7 @@ void WeaponWindow::notifySpellDrop(SpellSlotClone* clone) {
 }
 
 void WeaponWindow::show() {
+	reload();
 	m_isVisible = true;
 }
 

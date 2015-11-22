@@ -35,6 +35,7 @@ public:
 
 	static float WIDTH;
 	static float HEIGHT;
+	static float SPELL_OFFSET;
 
 private:
 	CharacterCore* m_core;

@@ -12,7 +12,7 @@ class InventorySlotClone;
 // the equipment part of the inventory. it shows all equipped items
 class InventoryEquipment {
 public:
-	InventoryEquipment(CharacterCore* core);
+	InventoryEquipment(CharacterCore* core, bool isInLevel);
 	~InventoryEquipment();
 
 	void show();
@@ -23,6 +23,8 @@ public:
 
 	// reloads the equipment items, depending on the core
 	void reload();
+	// checks if the equipment part of the inventory needs a reload and sets the bool to false again (!)
+	bool requiresReload();
 	// returns an inventory slot* if one was selected, else nullptr
 	InventorySlot* getSelectedSlot();
 
@@ -39,6 +41,8 @@ private:
 	CharacterCore* m_core;
 
 	bool m_isVisible = false;
+	bool m_requiresReload = false;
+	bool m_isInLevel = false;
 
 	std::map<ItemType, InventorySlot> m_slots;
 

@@ -18,7 +18,7 @@ public:
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
-	void onLeftJustPressed() override;
+	void onLeftClick() override;
 	void onRightClick() override;
 	// reloads the slot, depending on the character core.
 	void reload();

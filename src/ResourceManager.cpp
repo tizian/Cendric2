@@ -276,6 +276,8 @@ void ResourceManager::deleteResource(const std::string &filename) {
 
 void ResourceManager::playSound(sf::Sound& sound, ResourceID id) {
 	if (id == ResourceID::VOID) return;
+	// don't play the sound if it's already playing
+	if (sound.getStatus() == sf::SoundSource::Status::Playing) return;
 	if (m_configuration.isSoundOn) {
 		sound.setBuffer(*getSoundBuffer(id));
 		sound.setVolume(static_cast<float>(m_configuration.volume));

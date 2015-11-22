@@ -85,7 +85,7 @@ bool Weapon::addModifier(int slotNr, int modifierNr, const SpellModifier& modifi
 
 		// check if this slot for this type is already taken
 		for (auto& mod : modifiers) {
-			if (mod.type == modifier.type) {
+			if (modifier.type != SpellModifierType::VOID && mod.type == modifier.type) {
 				g_logger->logWarning("Weapon::addModifier", "The modifier slot for this type is already taken");
 				return false;
 			}
@@ -93,10 +93,12 @@ bool Weapon::addModifier(int slotNr, int modifierNr, const SpellModifier& modifi
 	}
 
 	// check if this spell allows a modifier of this type
-	std::vector<SpellModifierType> allowedModifiers = SpellBean::getAllowedModifiers(m_weaponSlots.at(slotNr).spellSlot.spellID);
-	if (std::find(allowedModifiers.begin(), allowedModifiers.end(), modifier.type) == allowedModifiers.end()) {
-		g_logger->logWarning("Weapon::addModifier", "This modifier is not allowed for the spell!");
-		return false;
+	if (modifier.type != SpellModifierType::VOID) {
+		std::vector<SpellModifierType> allowedModifiers = SpellBean::getAllowedModifiers(m_weaponSlots.at(slotNr).spellSlot.spellID);
+		if (std::find(allowedModifiers.begin(), allowedModifiers.end(), modifier.type) == allowedModifiers.end()) {
+			g_logger->logWarning("Weapon::addModifier", "This modifier is not allowed for the spell!");
+			return false;
+		}
 	}
 
 	// remove the old modifier of this type, if any

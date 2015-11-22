@@ -24,7 +24,7 @@ public:
 	// getter for currently equipped weapon. convenience method for getItem of type weapon with a dynamic cast.
 	const Weapon* getWeapon();
 	// returns the item of id "id"
-	const Item& getItem(const std::string& id);
+	const Item* getItem(const std::string& id);
 	NPCState getNPCState(const std::string& id) const;
 	QuestState getQuestState(const std::string& id) const;
 	void setNPCState(const std::string& id, NPCState state);

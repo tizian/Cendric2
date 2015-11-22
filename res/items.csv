@@ -18,3 +18,5 @@ it_go_onecoin;itd_onecoin;12;;1;;;;;;;;;;;;;;;;-18, -34;8, 8;100, 0, 50, 50;1000
 it_eq_head_necrot3;itd_head_necrot3;1;0, 200;120;10;;;;;;;10;;5;;;10;10;;;;;;res/assets/equipment/head/spritesheet_head_necrot3.png;;;;;;;;
 it_eq_back_necrot3;itd_back_necrot3;7;50, 200;150;20;;20;10;;;;10;;10;;;10;10;;;;;;res/assets/equipment/back/spritesheet_back_necrot3.png;;;;;;;;
 it_eq_body_necrot3;itd_body_necrot3;5;100, 200;200;30;1;30;;;10;10;20;;30;5;5;5;5;;;;;;res/assets/equipment/body/spritesheet_body_necrot3.png;;;;;;;;
+it_eq_rafishat;itd_rafishat;1;0, 250;10;;;-20;5;;;;;;2;2;1;;;;;;;;res/assets/equipment/head/spritesheet_head_rafishat.png;;;;;;;;
+it_eq_head_divinet3;itd_head_divinet3;1;150, 200;120;10;1;20;10;;10;;;10;2;;;;10;;;;;;res/assets/equipment/head/spritesheet_head_divinet3.png;;;;;;;;

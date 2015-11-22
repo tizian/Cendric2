@@ -4,6 +4,7 @@
 
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
+float Spellbook::SPELL_OFFSET = 120.f;
 
 Spellbook::Spellbook(CharacterCore* core, bool clickable) {
 	m_core = core;
@@ -346,7 +347,7 @@ void Spellbook::calculateModifierSlots() {
 }
 
 void Spellbook::calculateSpellSlots() {
-	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 4 * MARGIN + 1 * BUTTON_SIZE.y;
+	float yOffset = GUIConstants::TOP + SPELL_OFFSET;
 	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
 
 	for (auto& it : m_core->getData().spellsLearned) {
@@ -373,7 +374,7 @@ void Spellbook::calculateSpellSlots() {
 			yOffset += SpellSlot::RADIUS * 2 + MARGIN * 2;
 		}
 
-		yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 4 * MARGIN + 1 * BUTTON_SIZE.y;
+		yOffset = GUIConstants::TOP + SPELL_OFFSET;
 	}
 }
 

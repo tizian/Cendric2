@@ -80,7 +80,7 @@ void Inventory::init() {
 
 	selectTab(ItemType::Consumable);
 
-	m_equipment = new InventoryEquipment(m_core);
+	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
 	reload();
 }
 
@@ -137,7 +137,25 @@ void Inventory::notifyChange(const std::string& itemID) {
 
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
+
+	// if there is an item selected at the moment, update its address. The vector insert operation may change the address of the 
+	// item that was selected an mess up the program.
+	std::string selectedItemId = "";
+	if (m_selectedSlot != nullptr) {
+		selectedItemId = m_selectedSlot->getItemID();
+		m_selectedSlot = nullptr;
+	}
 	m_typeMap[bean->type]->push_back(InventorySlot(Item(*bean), m_core->getData().items.at(itemID)));
+	
+	// after the insert operation, search for the previously selected item and update the address.
+	if (!selectedItemId.empty()) {
+		for (auto& slot : (*m_typeMap[bean->type])) {
+			if (selectedItemId.compare(slot.getItemID()) == 0) {
+				m_selectedSlot = &slot;
+				break;
+			}
+		}
+	}
 
 	calculateSlotPositions(*(m_typeMap[bean->type]));
 }
@@ -190,6 +208,10 @@ void Inventory::update(const sf::Time& frameTime) {
 	selectSlot(m_equipment->getSelectedSlot(), true);
 
 	handleDragAndDrop();
+
+	if (m_equipment->requiresReload()) {
+		reload();
+	}
 }
 
 void Inventory::selectSlot(InventorySlot* selectedSlot, bool isEquipmentSlot) {
@@ -414,9 +436,9 @@ void Inventory::reload() {
 	hideDocument();
 	m_core->loadItems();
 	for (auto& it : m_core->getData().items) {
-		const Item& item = m_core->getItem(it.first);
-		if (m_typeMap[item.getType()] == nullptr) continue;
-		m_typeMap[item.getType()]->push_back(InventorySlot(item, it.second));
+		const Item* item = m_core->getItem(it.first);
+		if (item == nullptr || m_typeMap[item->getType()] == nullptr) continue;
+		m_typeMap[item->getType()]->push_back(InventorySlot(*item, it.second));
 	}
 
 	calculateSlotPositions(m_consumableItems);

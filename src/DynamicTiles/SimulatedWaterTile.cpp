@@ -184,7 +184,8 @@ void SimulatedWaterTile::splash(float xPosition, float velocity) {
 	*m_particleMaxSpeed = 1.0f * velocity;
 	int nParticles = static_cast<int>(velocity / 8);
 	m_ps->emit(nParticles);
-	g_resourceManager->playSound(m_sound, m_data.sound);
+	if (velocity > 100.f)
+		g_resourceManager->playSound(m_sound, m_data.sound);
 }
 
 void SimulatedWaterTile::splash(float xPosition, float width, float velocity) {
@@ -206,6 +207,8 @@ void SimulatedWaterTile::splash(float xPosition, float width, float velocity) {
 	*m_particleMaxSpeed = 1.0f * velocity;
 	int nParticles = static_cast<int>(velocity / 8);
 	m_ps->emit(nParticles);
+	if (velocity > 100.f)
+		g_resourceManager->playSound(m_sound, m_data.sound);
 }
 
 void SimulatedWaterTile::render(sf::RenderTarget& target) {
