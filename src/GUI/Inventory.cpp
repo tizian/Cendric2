@@ -233,6 +233,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 	InventorySlot* selectedSlot = getSelectedSlot();
 	hideDocument();
 	if (selectedSlot != nullptr) {
+		selectedSlot->select();
 		showDescription(selectedSlot->getItem());
 	}
 }

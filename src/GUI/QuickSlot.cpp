@@ -58,12 +58,14 @@ void QuickSlot::setItemID(const std::string& itemID) {
 	m_itemID = itemID;
 	m_core->setQuickslot(itemID, m_key == Key::QuickSlot1 ? 1 : 2);
 	reload();
+	g_inputController->lockAction();
 }
 
 void QuickSlot::update(const sf::Time& frameTime) {
 	GameObject::update(frameTime);
 	if (g_inputController->isKeyJustPressed(m_key)) {
 		consume();
+		g_inputController->lockAction();
 	}
 }
 
