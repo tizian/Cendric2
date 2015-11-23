@@ -6,6 +6,7 @@
 #include "FileIO/ConfigurationWriter.h"
 
 #include "GUI/Button.h"
+#include "GUI/Checkbox.h"
 #include "GUI/BitmapText.h"
 
 class OptionsScreen : public Screen {
@@ -24,35 +25,16 @@ private:
 	Button* m_keyBindingsButton = nullptr;
 	BitmapText* m_title = nullptr;
 
-	BitmapText* m_sound = nullptr;
-	bool m_selectedSoundOn = false;
-	Button* m_soundOnButton = nullptr;
-	Button* m_soundOffButton = nullptr;
-	void refreshSoundText();
-
-	BitmapText* m_quickcast = nullptr;
-	bool m_selectedQuickcastOn = false;
-	Button* m_quickcastOnButton = nullptr;
-	Button* m_quickcastOffButton = nullptr;
-	void refreshQuickcastText();
-
-	BitmapText* m_vSync = nullptr;
-	bool m_selectedVSyncOn = false;
-	Button* m_vSyncOnButton = nullptr;
-	Button* m_vSyncOffButton = nullptr;
-	void refreshVSyncText();
+	Checkbox* m_soundCheckbox = nullptr;
+	Checkbox* m_quickCastCheckbox = nullptr;
+	Checkbox* m_vSyncCheckbox = nullptr;
+	Checkbox* m_smoothingCheckbox = nullptr;
 
 	BitmapText* m_fullscreen = nullptr;
 	bool m_selectedFullscreenOn = false;
 	Button* m_fullscreenButton = nullptr;
 	Button* m_windowButton = nullptr;
 	void refreshFullscreenText();
-
-	BitmapText* m_smoothing = nullptr;
-	bool m_selectedSmoothingOn = false;
-	Button* m_smoothingOnButton = nullptr;
-	Button* m_smoothingOffButton = nullptr;
-	void refreshSmoothingText();
 
 	Language m_selectedLanguage = Language::VOID;
 	BitmapText* m_languageText = nullptr;

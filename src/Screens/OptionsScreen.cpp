@@ -16,11 +16,11 @@ Screen* OptionsScreen::update(const sf::Time& frameTime) {
 	}
 	else if (m_applyButton->isClicked()) {
 		g_resourceManager->getConfiguration().language = m_selectedLanguage;
-		g_resourceManager->getConfiguration().isSoundOn = m_selectedSoundOn;
-		g_resourceManager->getConfiguration().isQuickcast = m_selectedQuickcastOn;
+		g_resourceManager->getConfiguration().isSoundOn = m_soundCheckbox->isChecked();
+		g_resourceManager->getConfiguration().isQuickcast = m_quickCastCheckbox->isChecked();
 		g_resourceManager->getConfiguration().isFullscreen = m_selectedFullscreenOn;
-		g_resourceManager->getConfiguration().isSmoothing = m_selectedSmoothingOn;
-		g_resourceManager->getConfiguration().isVSyncEnabled = m_selectedVSyncOn;
+		g_resourceManager->getConfiguration().isSmoothing = m_smoothingCheckbox->isChecked();
+		g_resourceManager->getConfiguration().isVSyncEnabled = m_vSyncCheckbox->isChecked();
 		ConfigurationWriter writer;
 		writer.saveToFile(g_resourceManager->getConfiguration());
 		g_textProvider->reload();
@@ -31,38 +31,12 @@ Screen* OptionsScreen::update(const sf::Time& frameTime) {
 		refreshLanguageText();
 	}
 	else if (m_germanButton->isClicked()) {
-
 		m_selectedLanguage = Language::Lang_DE;
 		refreshLanguageText();
-
 	}
 	else if (m_swissButton->isClicked()) {
 		m_selectedLanguage = Language::Lang_CH;
 		refreshLanguageText();
-	}
-	else if (m_soundOnButton->isClicked()) {
-		m_selectedSoundOn = true;
-		refreshSoundText();
-	}
-	else if (m_soundOffButton->isClicked()) {
-		m_selectedSoundOn = false;
-		refreshSoundText();
-	}
-	else if (m_vSyncOnButton->isClicked()) {
-		m_selectedVSyncOn = true;
-		refreshVSyncText();
-	}
-	else if (m_vSyncOffButton->isClicked()) {
-		m_selectedVSyncOn = false;
-		refreshVSyncText();
-	}
-	else if (m_quickcastOnButton->isClicked()) {
-		m_selectedQuickcastOn = true;
-		refreshQuickcastText();
-	}
-	else if (m_quickcastOffButton->isClicked()) {
-		m_selectedQuickcastOn = false;
-		refreshQuickcastText();
 	}
 	else if (m_fullscreenButton->isClicked()) {
 		m_selectedFullscreenOn = true;
@@ -71,14 +45,6 @@ Screen* OptionsScreen::update(const sf::Time& frameTime) {
 	else if (m_windowButton->isClicked()) {
 		m_selectedFullscreenOn = false;
 		refreshFullscreenText();
-	}
-	else if (m_smoothingOnButton->isClicked()) {
-		m_selectedSmoothingOn = true;
-		refreshSmoothingText();
-	}
-	else if (m_smoothingOffButton->isClicked()) {
-		m_selectedSmoothingOn = false;
-		refreshSmoothingText();
 	}
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
@@ -90,12 +56,8 @@ void OptionsScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 	renderTarget.draw(*m_languageText);
-	renderTarget.draw(*m_sound);
-	renderTarget.draw(*m_quickcast);
-	renderTarget.draw(*m_vSync);
 	renderTarget.draw(*m_volume);
 	renderTarget.draw(*m_fullscreen);
-	renderTarget.draw(*m_smoothing);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderTooltipText(renderTarget);
 }
@@ -128,46 +90,6 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	addObject(m_swissButton);
 
 	distFromTop = distFromTop + 100;
-	// quickcast
-	m_quickcast = new BitmapText();
-	m_quickcast->setCharacterSize(12);
-	m_quickcast->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	m_selectedQuickcastOn = g_resourceManager->getConfiguration().isQuickcast;
-	refreshQuickcastText();
-
-	distFromTop = distFromTop + 30;
-	m_quickcastOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
-	m_quickcastOnButton->setText("On", 12);
-	addObject(m_quickcastOnButton);
-	m_quickcastOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
-	m_quickcastOffButton->setText("Off", 12);
-	addObject(m_quickcastOffButton);
-
-	distFromTop = distFromTop + 100;
-	// sound
-	m_sound = new BitmapText();
-	m_sound->setCharacterSize(12);
-	m_sound->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	m_selectedSoundOn = g_resourceManager->getConfiguration().isSoundOn;
-	refreshSoundText();
-
-	string volumeText = g_textProvider->getText("SoundVolume") + ": ";
-	volumeText.append(to_string(g_resourceManager->getConfiguration().volume));
-	volumeText.append("%");
-	m_volume = new BitmapText(volumeText);
-	m_volume->setCharacterSize(12);
-	m_volume->setPosition(sf::Vector2f(distFromLeft + 180, distFromTop));
-
-	distFromTop = distFromTop + 30;
-	m_soundOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
-	m_soundOnButton->setText("On", 12);
-	addObject(m_soundOnButton);
-	m_soundOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
-	m_soundOffButton->setText("Off", 12);
-	addObject(m_soundOffButton);
-
-	distFromTop = 150.f;
-	distFromLeft = WINDOW_WIDTH / 2.f + 50.f;
 
 	// displayMode
 	m_fullscreen = new BitmapText();
@@ -186,45 +108,59 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 
 	distFromTop = distFromTop + 100;
 
-	// smoothing
-	m_smoothing = new BitmapText();
-	m_smoothing->setCharacterSize(12);
-	m_smoothing->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	m_selectedSmoothingOn = g_resourceManager->getConfiguration().isSmoothing;
-	refreshSmoothingText();
-
-	distFromTop = distFromTop + 30;
-	m_smoothingOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
-	m_smoothingOnButton->setText("On", 12);
-	addObject(m_smoothingOnButton);
-	m_smoothingOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
-	m_smoothingOffButton->setText("Off", 12);
-	addObject(m_smoothingOffButton);
-
-	distFromTop = distFromTop + 100;
-
-	// vsync
-	m_vSync = new BitmapText();
-	m_vSync->setCharacterSize(12);
-	m_vSync->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	m_selectedVSyncOn = g_resourceManager->getConfiguration().isVSyncEnabled;
-	refreshVSyncText();
-
-	distFromTop = distFromTop + 30;
-	m_vSyncOnButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 70, 50));
-	m_vSyncOnButton->setText("On", 12);
-	addObject(m_vSyncOnButton);
-	m_vSyncOffButton = new Button(sf::FloatRect(distFromLeft + 80, distFromTop, 70, 50));
-	m_vSyncOffButton->setText("Off", 12);
-	addObject(m_vSyncOffButton);
-
-	distFromTop = distFromTop + 100;
-
 	// keyboard mappings button
 	m_keyBindingsButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 200, 50));
 	m_keyBindingsButton->setText("KeyBindings");
 	m_keyBindingsButton->setCharacterSize(12);
 	addObject(m_keyBindingsButton);
+
+	distFromTop = 150.f;
+	distFromLeft = WINDOW_WIDTH / 2.f + 50.f;
+
+	// quickcast
+	m_quickCastCheckbox = new Checkbox();
+	m_quickCastCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_quickCastCheckbox->setChecked(g_resourceManager->getConfiguration().isQuickcast);
+	m_quickCastCheckbox->setText("Quickcast");
+	addObject(m_quickCastCheckbox);
+
+	distFromTop = distFromTop + 50;
+
+	// smoothing
+	m_smoothingCheckbox = new Checkbox();
+	m_smoothingCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_smoothingCheckbox->setChecked(g_resourceManager->getConfiguration().isSmoothing);
+	m_smoothingCheckbox->setText("Smoothing");
+	addObject(m_smoothingCheckbox);
+
+	distFromTop = distFromTop + 50;
+
+	// vsync
+	m_vSyncCheckbox = new Checkbox();
+	m_vSyncCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_vSyncCheckbox->setChecked(g_resourceManager->getConfiguration().isVSyncEnabled);
+	m_vSyncCheckbox->setText("VSync");
+	addObject(m_vSyncCheckbox);
+
+	distFromTop = distFromTop + 50;
+
+	// sound	
+	m_soundCheckbox = new Checkbox();
+	m_soundCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_soundCheckbox->setChecked(g_resourceManager->getConfiguration().isSoundOn);
+	m_soundCheckbox->setText("Sound");
+	addObject(m_soundCheckbox);
+
+	distFromTop = distFromTop + 50;
+
+	string volumeText = g_textProvider->getText("SoundVolume") + ": ";
+	volumeText.append(to_string(g_resourceManager->getConfiguration().volume));
+	volumeText.append("%");
+	m_volume = new BitmapText(volumeText);
+	m_volume->setCharacterSize(12);
+	m_volume->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+
+	
 
 	// back
 	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
@@ -243,27 +179,6 @@ void OptionsScreen::refreshLanguageText() {
 	m_languageText->setString(languageText);
 }
 
-void OptionsScreen::refreshSoundText() {
-	string currentSwitch = m_selectedSoundOn ? "On" : "Off";
-	string soundText = g_textProvider->getText("Sound") + ": ";
-	soundText.append(g_textProvider->getText(currentSwitch));
-	m_sound->setString(soundText);
-}
-
-void OptionsScreen::refreshVSyncText() {
-	string currentSwitch = m_selectedVSyncOn ? "On" : "Off";
-	string vsyncText = g_textProvider->getText("VSync") + ": ";
-	vsyncText.append(g_textProvider->getText(currentSwitch));
-	m_vSync->setString(vsyncText);
-}
-
-void OptionsScreen::refreshQuickcastText() {
-	string currentSwitch = m_selectedQuickcastOn ? "On" : "Off";
-	string quickcastText = g_textProvider->getText("Quickcast") + ": ";
-	quickcastText.append(g_textProvider->getText(currentSwitch));
-	m_quickcast->setString(quickcastText);
-}
-
 void OptionsScreen::refreshFullscreenText() {
 	string currentSwitch = m_selectedFullscreenOn ? "Fullscreen" : "Window";
 	string fullscreenText = g_textProvider->getText("DisplayMode") + ": ";
@@ -271,19 +186,9 @@ void OptionsScreen::refreshFullscreenText() {
 	m_fullscreen->setString(fullscreenText);
 }
 
-void OptionsScreen::refreshSmoothingText() {
-	string currentSwitch = m_selectedSmoothingOn ? "On" : "Off";
-	string smoothingText = g_textProvider->getText("Smoothing") + ": ";
-	smoothingText.append(g_textProvider->getText(currentSwitch));
-	m_smoothing->setString(smoothingText);
-}
-
 void OptionsScreen::execOnExit(const Screen *nextScreen) {
 	// delete texts (buttons are deleted automatically by the screen)
 	delete m_title;
 	delete m_languageText;
-	delete m_vSync;
 	delete m_volume;
-	delete m_sound;
-	delete m_quickcast;
 }

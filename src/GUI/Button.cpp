@@ -96,13 +96,8 @@ void Button::update(const sf::Time& frameTime) {
 void Button::setText(const std::string& text, const sf::Color& color, int charSize) {
 	m_text = BitmapText(g_textProvider->getText(text));
 
-	m_text.setColor(color);
-	m_text.setCharacterSize(charSize);
-	// calculate position
-	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
-	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
-	m_textOffset = sf::Vector2f(xOffset, yOffset);
-	setPosition(m_positionDefault);
+	setTextColor(color);
+	setCharacterSize(charSize);
 }
 
 void Button::setText(const std::string& text) {
@@ -116,12 +111,8 @@ void Button::setText(const std::string& text, int charSize) {
 void Button::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
 	m_text = BitmapText(text);
 
-	m_text.setColor(color);
-	m_text.setCharacterSize(charSize);
-	// calculate position
-	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
-	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
-	m_textOffset = sf::Vector2f(xOffset, yOffset);
+	setTextColor(color);
+	setCharacterSize(charSize);
 }
 
 void Button::setTextRaw(const std::string& text, int charSize) {
