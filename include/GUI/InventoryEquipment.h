@@ -27,6 +27,8 @@ public:
 	bool requiresReload();
 	// returns an inventory slot* if one was selected, else nullptr
 	InventorySlot* getSelectedSlot();
+	// returns an inventory slot* of the selected type, could be nullptr.
+	InventorySlot* getSelectedSlot(ItemType type);
 
 	void highlightEquipmentSlot(ItemType type, bool highlight);
 	// returns wheter an equipment change has happened.

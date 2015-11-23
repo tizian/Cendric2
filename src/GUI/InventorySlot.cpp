@@ -6,6 +6,25 @@ using namespace std;
 const float InventorySlot::SIDE_LENGTH = 50.f;
 const float InventorySlot::MARGIN = 2.f;
 
+InventorySlot::InventorySlot() : m_item(DEFAULT_ITEM) {
+	m_type = m_item.getType();
+
+	setBoundingBox(sf::FloatRect(0.f, 0.f, SIDE_LENGTH, SIDE_LENGTH));
+	setDebugBoundingBox(sf::Color::Red);
+	setInputInDefaultView(true);
+
+	m_inside.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
+
+	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_amountText.setColor(CENDRIC_COLOR_WHITE);
+	setAmount(0);
+
+	m_outside.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
+	m_outside.setFillColor(CENDRIC_COLOR_TRANS_GREY);
+	m_outside.setOutlineThickness(MARGIN);
+	m_outside.setOutlineColor(CENDRIC_COLOR_PURPLE);
+}
+
 InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getBean()) {
 	m_type = m_item.getType();
 

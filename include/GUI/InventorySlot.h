@@ -13,6 +13,8 @@ public:
 	InventorySlot(const Item& item, int amount);
 	// constructor for placeholder slots
 	InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos);
+	// default constructor for empty slots
+	InventorySlot();
 
 	void select();
 	void deselect();

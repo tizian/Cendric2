@@ -88,6 +88,11 @@ InventorySlot* InventoryEquipment::getSelectedSlot() {
 	return nullptr;
 }
 
+InventorySlot* InventoryEquipment::getSelectedSlot(ItemType type) {
+	if (m_slots.find(type) == m_slots.end()) return nullptr;
+	return &m_slots.at(type);
+}
+
 bool InventoryEquipment::requiresReload() {
 	bool wasRequireReload = m_requiresReload;
 	m_requiresReload = false;

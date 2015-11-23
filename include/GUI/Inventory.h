@@ -52,7 +52,7 @@ private:
 
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector
-	void calculateSlotPositions(std::vector<InventorySlot>& slots);
+	void calculateSlotPositions(std::map<std::string, InventorySlot>& slots);
 
 	Window* m_window;
 
@@ -61,16 +61,20 @@ private:
 
 	std::vector<std::pair<TexturedButton, ItemType>> m_tabs;
 
-	std::vector<InventorySlot> m_consumableItems;
-	std::vector<InventorySlot> m_equipmentItems;
-	std::vector<InventorySlot> m_miscItems;
-	std::vector<InventorySlot> m_questItems;
-	std::vector<InventorySlot> m_documentItems;
+	std::map<std::string, InventorySlot> m_consumableItems;
+	std::map<std::string, InventorySlot> m_equipmentItems;
+	std::map<std::string, InventorySlot> m_miscItems;
+	std::map<std::string, InventorySlot> m_questItems;
+	std::map<std::string, InventorySlot> m_documentItems;
 
 	ItemType m_currentTab;
-	InventorySlot* m_selectedSlot = nullptr;
+	// first is the id, the second is VOID when it is no equiment slot and an Item Type when it is an equipment slot
+	std::pair<std::string, ItemType> m_selectedSlotId;
 	void selectTab(ItemType type);
-	void selectSlot(InventorySlot* selectedSlot, bool isEquipmentSlot);
+	// item type shall be VOID for not-equipment-slots
+	void selectSlot(const std::string& selectedSlotId, ItemType type);
+	void deselectCurrentSlot();
+	InventorySlot* getSelectedSlot() const;
 
 	void handleMapRightClick(InventorySlot* clicked);
 	void handleLevelRightClick(InventorySlot* clicked);
@@ -117,5 +121,5 @@ private:
 		(SLOT_COUNT_X - 1) * MARGIN +
 		SLOT_COUNT_X * (InventorySlot::SIDE_LENGTH + 2 * InventorySlot::MARGIN);
 
-	std::map<ItemType, std::vector<InventorySlot>*> m_typeMap;
+	std::map<ItemType, std::map<std::string, InventorySlot>*> m_typeMap;
 };

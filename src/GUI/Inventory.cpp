@@ -20,6 +20,8 @@ Inventory::Inventory(MapInterface* _interface) {
 }
 
 void Inventory::init() {
+	m_selectedSlotId.first = "";
+	m_selectedSlotId.second = ItemType::VOID;
 	// init window
 	sf::FloatRect box(INVENTORY_LEFT, INVENTORY_TOP, INVENTORY_WIDTH, INVENTORY_HEIGHT);
 	m_window = new Window(box,
@@ -99,7 +101,27 @@ void Inventory::clearAllSlots() {
 	m_questItems.clear();
 	m_documentItems.clear();
 	m_miscItems.clear();
-	m_selectedSlot = nullptr;
+	m_selectedSlotId.first = "";
+}
+
+InventorySlot* Inventory::getSelectedSlot() const {
+	if (m_selectedSlotId.first.empty()) return nullptr;
+	if (m_selectedSlotId.second != ItemType::VOID) {
+		return m_equipment->getSelectedSlot(m_selectedSlotId.second);
+	}
+	if (m_typeMap.find(m_currentTab) == m_typeMap.end()) return nullptr;
+	if (m_typeMap.at(m_currentTab)->find(m_selectedSlotId.first) == m_typeMap.at(m_currentTab)->end()) return nullptr;
+	return &m_typeMap.at(m_currentTab)->at(m_selectedSlotId.first);
+}
+
+void Inventory::deselectCurrentSlot() {
+	InventorySlot* slot = getSelectedSlot();
+	m_selectedSlotId.first = "";
+	m_selectedSlotId.second = ItemType::VOID;
+	m_descriptionWindow->hide();
+	if (slot != nullptr) {
+		slot->deselect();
+	}
 }
 
 void Inventory::notifyChange(const std::string& itemID) {
@@ -111,53 +133,30 @@ void Inventory::notifyChange(const std::string& itemID) {
 	if (bean == nullptr) return;
 	if (m_typeMap.find(bean->type) == m_typeMap.end()) return;
 
-	std::vector<InventorySlot>* tab = m_typeMap.at(bean->type);
+	std::map<std::string, InventorySlot>* tab = m_typeMap.at(bean->type);
 
 	// search for the slot
-	std::vector<InventorySlot>::iterator it = (*tab).begin();
-	while (it != (*tab).end()) {
-		if (bean->id.compare((*it).getItemID()) == 0) {
-			// the slot has been found.
-			if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) {
-				// the item was removed. check if it is selected.
-				if (m_selectedSlot == &(*it)) {
-					m_selectedSlot = nullptr;
-					m_descriptionWindow->hide();
-				}
-				(*tab).erase(it);
-				calculateSlotPositions(*(m_typeMap[bean->type]));
+	if (tab->find(bean->id) != tab->end()) {
+		if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) {
+			// the item was removed. check if it is selected.
+			if (m_selectedSlotId.first.compare(bean->id) == 0) {
+				deselectCurrentSlot();
 			}
-			else {
-				(*it).setAmount(m_core->getData().items.at(itemID));
-			}
-			return;
+			tab->erase(bean->id);
+			calculateSlotPositions(*(m_typeMap[bean->type]));
 		}
-		it++;
+		else {
+			tab->at(bean->id).setAmount(m_core->getData().items.at(itemID));
+		}
+		return;
 	}
-
+	
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
 
-	// if there is an item selected at the moment, update its address. The vector insert operation may change the address of the 
-	// item that was selected an mess up the program.
-	std::string selectedItemId = "";
-	if (m_selectedSlot != nullptr) {
-		selectedItemId = m_selectedSlot->getItemID();
-		m_selectedSlot = nullptr;
-	}
-	m_typeMap[bean->type]->push_back(InventorySlot(Item(*bean), m_core->getData().items.at(itemID)));
-	
-	// after the insert operation, search for the previously selected item and update the address.
-	if (!selectedItemId.empty()) {
-		for (auto& slot : (*m_typeMap[bean->type])) {
-			if (selectedItemId.compare(slot.getItemID()) == 0) {
-				m_selectedSlot = &slot;
-				break;
-			}
-		}
-	}
+	(*tab)[bean->id] = (InventorySlot(Item(*bean), m_core->getData().items.at(itemID)));
 
-	calculateSlotPositions(*(m_typeMap[bean->type]));
+	calculateSlotPositions(*tab);
 }
 
 void Inventory::handleMapRightClick(InventorySlot* clicked) {
@@ -183,14 +182,14 @@ void Inventory::update(const sf::Time& frameTime) {
 
 	// check whether an item was selected
 	for (auto& it : *(m_typeMap[m_currentTab])) {
-		it.update(frameTime);
-		if (it.isClicked()) {
-			selectSlot(&it, false);
+		it.second.update(frameTime);
+		if (it.second.isClicked()) {
+			selectSlot(it.second.getItemID(), ItemType::VOID);
 			return;
 		}
-		if (it.isRightClicked()) {
-			handleLevelRightClick(&it);
-			handleMapRightClick(&it);
+		if (it.second.isRightClicked()) {
+			handleLevelRightClick(&it.second);
+			handleMapRightClick(&it.second);
 			break;
 		}
 	}
@@ -205,7 +204,10 @@ void Inventory::update(const sf::Time& frameTime) {
 
 	// update equipment part
 	m_equipment->update(frameTime);
-	selectSlot(m_equipment->getSelectedSlot(), true);
+	InventorySlot* eqSlot = m_equipment->getSelectedSlot();
+	if (eqSlot != nullptr) {
+		selectSlot(eqSlot->getItemID(), eqSlot->getItemType());
+	}
 
 	handleDragAndDrop();
 
@@ -214,19 +216,25 @@ void Inventory::update(const sf::Time& frameTime) {
 	}
 }
 
-void Inventory::selectSlot(InventorySlot* selectedSlot, bool isEquipmentSlot) {
-	if (selectedSlot == nullptr) return;
-	m_hasDraggingStarted = true;
-	m_isEquipmentSlotDragged = isEquipmentSlot;
-	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
-	if (selectedSlot == m_selectedSlot) return;
-	if (m_selectedSlot != nullptr) {
-		m_selectedSlot->deselect();
+void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
+	if (selectedSlotId.empty()) {
+		deselectCurrentSlot();
+		return;
 	}
-	m_selectedSlot = selectedSlot;
-	m_selectedSlot->select();
+	m_hasDraggingStarted = true;
+	m_isEquipmentSlotDragged = type != ItemType::VOID;
+	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+
+	if (selectedSlotId.compare(m_selectedSlotId.first) == 0) return;
+	
+	deselectCurrentSlot();
+	m_selectedSlotId.first = selectedSlotId;
+	m_selectedSlotId.second = type;
+	InventorySlot* selectedSlot = getSelectedSlot();
 	hideDocument();
-	showDescription(m_selectedSlot->getItem());
+	if (selectedSlot != nullptr) {
+		showDescription(selectedSlot->getItem());
+	}
 }
 
 void Inventory::removeEquipmentItem() {
@@ -238,14 +246,16 @@ void Inventory::removeEquipmentItem() {
 
 void Inventory::handleMapDrag() {
 	if (m_mapInterface == nullptr) return;
-	if (m_selectedSlot != nullptr && !m_isEquipmentSlotDragged) {
-		m_equipment->highlightEquipmentSlot(m_selectedSlot->getItemType(), true);
+	InventorySlot* selectedSlot = getSelectedSlot();
+	if (selectedSlot != nullptr && !m_isEquipmentSlotDragged) {
+		m_equipment->highlightEquipmentSlot(selectedSlot->getItemType(), true);
 	}
 }
 
 void Inventory::handleLevelDrag() {
 	if (m_levelInterface == nullptr) return;
-	if (m_selectedSlot->getItemType() == ItemType::Consumable) {
+	InventorySlot* selectedSlot = getSelectedSlot();
+	if (selectedSlot != nullptr && selectedSlot->getItemType() == ItemType::Consumable) {
 		m_levelInterface->highlightQuickslots(true);
 	}
 }
@@ -265,7 +275,8 @@ void Inventory::handleMapDrop() {
 
 void Inventory::handleLevelDrop() {
 	if (m_levelInterface == nullptr || m_currentClone == nullptr) return;
-	if (m_selectedSlot->getItemType() == ItemType::Consumable) {
+	InventorySlot* selectedSlot = getSelectedSlot();
+	if (selectedSlot != nullptr && selectedSlot->getItemType() == ItemType::Consumable) {
 		m_levelInterface->notifyConsumableDrop(m_currentClone);
 		m_levelInterface->highlightQuickslots(false);
 	}
@@ -273,9 +284,10 @@ void Inventory::handleLevelDrop() {
 
 void Inventory::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
+	InventorySlot* selectedSlot = getSelectedSlot();
 	if (!(g_inputController->isMousePressedLeft())) {
-		if (m_selectedSlot != nullptr) {
-			m_selectedSlot->activate();
+		if (selectedSlot != nullptr) {
+			selectedSlot->activate();
 			handleLevelDrop();
 			handleMapDrop();
 		}
@@ -292,9 +304,9 @@ void Inventory::handleDragAndDrop() {
 			(mousePos.y - m_startMousePosition.y) * (mousePos.y - m_startMousePosition.y))) {
 			m_isDragging = true;
 			delete m_currentClone;
-			m_currentClone = new InventorySlotClone(m_selectedSlot);
+			m_currentClone = new InventorySlotClone(selectedSlot);
 			m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
-			m_selectedSlot->deactivate();
+			selectedSlot->deactivate();
 			handleLevelDrag();
 			handleMapDrag();
 		}
@@ -315,8 +327,8 @@ void Inventory::render(sf::RenderTarget& target) {
 	target.draw(m_goldText);
 	target.draw(m_selectedTabText);
 	for (auto& it : *(m_typeMap[m_currentTab])) {
-		it.render(target);
-		// it.renderAfterForeground(target); // uncomment for debug box
+		it.second.render(target);
+		// it.second.renderAfterForeground(target); // uncomment for debug box
 	}
 
 	for (auto& it : m_tabs) {
@@ -377,10 +389,7 @@ void Inventory::hideDocument() {
 void Inventory::selectTab(ItemType type) {
 	hideDescription();
 	hideDocument();
-	if (m_selectedSlot != nullptr) {
-		m_selectedSlot->deselect();
-		m_selectedSlot = nullptr;
-	}
+	deselectCurrentSlot();
 	m_currentTab = type;
 	switch (type) {
 	case ItemType::Equipment_weapon:
@@ -435,10 +444,10 @@ void Inventory::reload() {
 	hideDescription();
 	hideDocument();
 	m_core->loadItems();
-	for (auto& it : m_core->getData().items) {
-		const Item* item = m_core->getItem(it.first);
-		if (item == nullptr || m_typeMap[item->getType()] == nullptr) continue;
-		m_typeMap[item->getType()]->push_back(InventorySlot(*item, it.second));
+	for (auto& itemData : m_core->getData().items) {
+		const Item* item = m_core->getItem(itemData.first);
+		if (item == nullptr || m_typeMap.find(item->getType()) == m_typeMap.end()) continue;
+		m_typeMap[item->getType()]->insert({ item->getID(), InventorySlot(*item, itemData.second) });
 	}
 
 	calculateSlotPositions(m_consumableItems);
@@ -451,13 +460,13 @@ void Inventory::reload() {
 	m_equipment->reload();
 }
 
-void Inventory::calculateSlotPositions(std::vector<InventorySlot>& slots) {
+void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slots) {
 	float yOffset = INVENTORY_TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y;
 	float xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
 	int y = 1;
 	int x = 1;
 	for (auto& it : slots) {
-		it.setPosition(sf::Vector2f(xOffset, yOffset));
+		it.second.setPosition(sf::Vector2f(xOffset, yOffset));
 		if (x + 1 > SLOT_COUNT_X) {
 			x = 1;
 			xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
