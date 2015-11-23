@@ -67,4 +67,5 @@ enum class ResourceID {
 	Texture_Particle_snowflake,
 	Sound_spell_fireball,
 	Sound_tile_water,
+	Sound_tile_lever,
 };

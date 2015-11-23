@@ -26,4 +26,6 @@ private:
 	// it is however always possible for a telekinesis spell to activate the lever if its projectile reaches the lever.
 	const float ACTIVATE_RANGE = 60.f;
 	std::vector<SwitchableTile*> m_dependentTiles;
+
+	sf::Sound m_sound;
 };

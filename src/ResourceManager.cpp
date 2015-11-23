@@ -83,7 +83,8 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_Particle_blob2, "res/assets/particles/blob2.png" },
 		{ ResourceID::Texture_Particle_snowflake, "res/assets/particles/snowflake.png" },
 		{ ResourceID::Sound_spell_fireball, "res/sound/sound_spell_fireball.wav" },
-		{ ResourceID::Sound_tile_water, "res/sound/sound_tile_water.wav" }
+		{ ResourceID::Sound_tile_water, "res/sound/sound_tile_water.wav" },
+		{ ResourceID::Sound_tile_lever, "res/sound/sound_tile_lever.ogg" }
 	});
 
 	// font should be always loaded to avoid lags when loading later
