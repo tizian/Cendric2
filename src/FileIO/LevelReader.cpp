@@ -930,7 +930,7 @@ void LevelReader::updateData(LevelData& data)  const {
 						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 						bean.skinNr = skinNr;
 						bean.spawnPosition = y * data.mapSize.x + x;
-						bean.size = sf::Vector2f(tileWidth * width, tileHeight * height);
+						bean.size = sf::Vector2f(static_cast<float>(tileWidth * width), static_cast<float>(tileHeight * height));
 						data.dynamicTiles.push_back(bean);
 					}
 				}

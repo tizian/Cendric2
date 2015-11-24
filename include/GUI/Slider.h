@@ -21,6 +21,9 @@ public:
 
 	void setColor(const sf::Color& color);
 
+	bool isPressed() const;
+	const sf::Vector2f& getPosition() const override;
+
 	GameObjectType getConfiguredType() const override;
 
 private:
@@ -28,6 +31,12 @@ private:
 	bool m_isPressed = false;
 
 	sf::CircleShape m_knob;
+
+	static const float RADIUS;
+	static const float MARGIN;
+
+	sf::Color m_marginColor = CENDRIC_COLOR_LIGHT_PURPLE;
+	sf::Color m_fillColor = CENDRIC_COLOR_PURPLE;
 };
 
 // A simple ugly slider 
@@ -68,7 +77,6 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 protected:
-	
 	bool m_isPressed = false;
 	bool m_isEnabled = true;
 	bool m_isVisible = true;
@@ -76,7 +84,13 @@ protected:
 	int m_minPosition = 0;
 	int m_maxPosition = 100;
 
+	// drag & drop handling
+	void handleDragAndDrop();
+	// get the slider position from the current mouse position
+	int calculateSliderPosition(float mousePosX) const;
+
 	sf::RectangleShape m_background;
+	sf::RectangleShape m_filler;
 	sf::RectangleShape m_margin;
 	SliderKnob m_knob;
 	sf::Vector2f m_textOffset;
@@ -85,6 +99,7 @@ protected:
 	sf::Color m_marginColor = CENDRIC_COLOR_LIGHT_PURPLE;
 	sf::Color m_fillColor = CENDRIC_COLOR_PURPLE;
 
+	std::string m_title;
 	BitmapText m_titleText;
 	BitmapText m_maxText;
 	BitmapText m_minText;

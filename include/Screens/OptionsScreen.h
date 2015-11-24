@@ -7,6 +7,7 @@
 
 #include "GUI/Button.h"
 #include "GUI/Checkbox.h"
+#include "GUI/Slider.h"
 #include "GUI/BitmapText.h"
 
 class OptionsScreen : public Screen {
@@ -43,6 +44,5 @@ private:
 	Button* m_swissButton = nullptr;
 	void refreshLanguageText();
 
-	// TODO add sliders
-	BitmapText* m_volume = nullptr;
+	Slider* m_volumeSlider = nullptr;
 };

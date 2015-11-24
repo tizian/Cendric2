@@ -53,7 +53,7 @@ public:
 	void loopCurrentAnimation(bool loop);
 
 	const Animation* getAnimation(GameObjectState state);
-	const sf::Vector2f& getPosition() const;
+	virtual const sf::Vector2f& getPosition() const;
 	const sf::Vector2f& getSpriteOffset() const;
 	const sf::FloatRect* getBoundingBox() const;
 	const sf::Vector2f getCenter() const;

@@ -21,6 +21,7 @@ Screen* OptionsScreen::update(const sf::Time& frameTime) {
 		g_resourceManager->getConfiguration().isFullscreen = m_selectedFullscreenOn;
 		g_resourceManager->getConfiguration().isSmoothing = m_smoothingCheckbox->isChecked();
 		g_resourceManager->getConfiguration().isVSyncEnabled = m_vSyncCheckbox->isChecked();
+		g_resourceManager->getConfiguration().volume = m_volumeSlider->getSliderPosition();
 		ConfigurationWriter writer;
 		writer.saveToFile(g_resourceManager->getConfiguration());
 		g_textProvider->reload();
@@ -56,7 +57,6 @@ void OptionsScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 	renderTarget.draw(*m_languageText);
-	renderTarget.draw(*m_volume);
 	renderTarget.draw(*m_fullscreen);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderTooltipText(renderTarget);
@@ -151,16 +151,14 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_soundCheckbox->setText("Sound");
 	addObject(m_soundCheckbox);
 
-	distFromTop = distFromTop + 50;
+	distFromTop = distFromTop + 100;
 
-	string volumeText = g_textProvider->getText("SoundVolume") + ": ";
-	volumeText.append(to_string(g_resourceManager->getConfiguration().volume));
-	volumeText.append("%");
-	m_volume = new BitmapText(volumeText);
-	m_volume->setCharacterSize(12);
-	m_volume->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-
-	
+	m_volumeSlider = new Slider(0, 100);
+	string volumeText = g_textProvider->getText("SoundVolume") + " (%)";
+	m_volumeSlider->setTextRaw(volumeText);
+	m_volumeSlider->setSliderPosition(g_resourceManager->getConfiguration().volume);
+	m_volumeSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	addObject(m_volumeSlider);
 
 	// back
 	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
@@ -190,5 +188,4 @@ void OptionsScreen::execOnExit(const Screen *nextScreen) {
 	// delete texts (buttons are deleted automatically by the screen)
 	delete m_title;
 	delete m_languageText;
-	delete m_volume;
 }
