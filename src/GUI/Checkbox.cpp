@@ -6,9 +6,6 @@ const float Checkbox::SIDE_LENGTH = 40.f;
 const float Checkbox::MARGIN = 2.f;
 
 Checkbox::Checkbox() : GameObject() {
-	// using default values for constructor.
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-
 	m_background.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
 	m_background.setFillColor(m_backgroundColor);
 

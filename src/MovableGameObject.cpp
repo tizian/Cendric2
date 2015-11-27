@@ -5,7 +5,7 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 	calculateNextPosition(frameTime, position);
 	setPosition(position);
 	calculateNextVelocity(frameTime, m_velocity);
-	GameObject::update(frameTime);
+	AnimatedGameObject::update(frameTime);
 }
 
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const {

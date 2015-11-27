@@ -1,12 +1,12 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "AnimatedGameObject.h"
 
 // A movable game object with physics.  Abstract class
-class MovableGameObject : virtual public GameObject {
+class MovableGameObject : virtual public AnimatedGameObject {
 public:
-	MovableGameObject() : GameObject() {}
+	MovableGameObject() : AnimatedGameObject() {}
 	virtual ~MovableGameObject() {}
 
 	void update(const sf::Time& frameTime) override;

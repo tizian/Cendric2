@@ -1,9 +1,6 @@
 #pragma once
 
-#include <map>
-
 #include "global.h"
-#include "AnimatedSprite.h"
 #include "InputController.h"
 
 #include "Enums/GameObjectState.h"
@@ -11,10 +8,10 @@
 
 class Screen;
 
-// A game object with animations, position, bounding box, game state. 
+// A game object with position, bounding box, game state that can be added to a screen.
 class GameObject {
 public:
-	GameObject();
+	GameObject() {}
 	virtual ~GameObject() {}
 
 	virtual void update(const sf::Time& frameTime);
@@ -34,27 +31,18 @@ public:
 	virtual void onLeftJustPressed();
 	virtual void onInteractKey();
 
-	void addAnimation(GameObjectState state, Animation& animation);
-
 	void setBoundingBox(const sf::FloatRect& rect);
 	virtual void setPosition(const sf::Vector2f& pos);
 	virtual void setPositionX(float posX);
 	virtual void setPositionY(float posY);
 	virtual void setDisposed();
-	void setCurrentAnimation(const Animation* animation, bool isFlipped);
-	void setSpriteOffset(const sf::Vector2f& spriteOffset);
-	void setState(GameObjectState state);
+	
+	virtual void setState(GameObjectState state);
 	virtual void setScreen(Screen* screen);
 	void setInputInDefaultView(bool value);
 	virtual void setViewable(bool value);
-	// angle is in radian
-	void setRotation(float angle);
-	void playCurrentAnimation(bool play);
-	void loopCurrentAnimation(bool loop);
-
-	const Animation* getAnimation(GameObjectState state);
+	
 	virtual const sf::Vector2f& getPosition() const;
-	const sf::Vector2f& getSpriteOffset() const;
 	const sf::FloatRect* getBoundingBox() const;
 	const sf::Vector2f getCenter() const;
 	// is the object currently visible inside this view + margin?
@@ -74,25 +62,17 @@ public:
 protected:
 	GameObjectState m_state;
 	sf::Vector2f m_nextPosition;
-	AnimatedSprite m_animatedSprite;
+	
 	Screen* m_screen = nullptr;
 	sf::RectangleShape m_debugBox;
 
 	bool m_isDisposed = false;
 	bool m_isViewable = true;
 
-	std::map<GameObjectState, Animation> m_animations;
-	sf::Vector2f m_spriteOffset = sf::Vector2f(0.f, 0.f);
 	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner
 	sf::Vector2f m_position;
 
 	bool m_isDrawBoundingBox = false;
 	bool m_isInputInDefaultView = false;
-
-	virtual void setSpriteColor(const sf::Color& color, const sf::Time& time);
-
-private:
-	// the sprite will reset its color as soon as this time is zero.
-	sf::Time m_coloredTime = sf::Time::Zero;
 };

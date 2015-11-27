@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "AnimatedGameObject.h"
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Item.h"
@@ -12,9 +12,9 @@
 class LevelMainCharacter;
 
 // A item cendric can collect in a level
-class LevelItem : public GameObject {
+class LevelItem : public AnimatedGameObject {
 public:
-	LevelItem() : GameObject() {}
+	LevelItem() : AnimatedGameObject() {}
 	void load(LevelMainCharacter* mainChar, const ItemBean& bean, const sf::Vector2f& position);
 	void onRightClick() override;
 	void onInteractKey() override;

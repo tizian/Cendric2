@@ -18,7 +18,6 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_okButton->setText("Okay");
 	m_cancelButton->setText("Cancel");
 
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
 	setPosition(sf::Vector2f(box.left, box.top));
 

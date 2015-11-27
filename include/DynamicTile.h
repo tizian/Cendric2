@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "AnimatedGameObject.h"
 #include "ResourceManager.h"
 #include "Enums/DynamicTileID.h"
 
@@ -10,7 +10,7 @@ class LevelMovableGameObject;
 class Level;
 
 // A dynamic tile in a level
-class DynamicTile : virtual public GameObject {
+class DynamicTile : virtual public AnimatedGameObject {
 public:
 	DynamicTile(Level* level);
 	virtual ~DynamicTile() {};

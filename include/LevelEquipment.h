@@ -1,15 +1,15 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "AnimatedGameObject.h"
 #include "ResourceManager.h"
 
 class LevelMainCharacter;
 
 // Equipment for cendric inside a level
-class LevelEquipment : public GameObject {
+class LevelEquipment : public AnimatedGameObject {
 public:
-	LevelEquipment() : GameObject() {}
+	LevelEquipment() : AnimatedGameObject() {}
 	~LevelEquipment();
 
 	void update(const sf::Time& frameTime) override;

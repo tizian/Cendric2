@@ -13,8 +13,6 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 	m_maxPosition = maxPos;
 	setSliderPosition(m_minPosition);
 
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-
 	m_background.setSize(sf::Vector2f(WIDTH, HEIGHT));
 	m_background.setFillColor(m_backgroundColor);
 	

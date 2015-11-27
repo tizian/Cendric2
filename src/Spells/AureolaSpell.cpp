@@ -68,7 +68,7 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 		}
 	}
 	else {
-		setRotation(atan2(getVelocity().y, getVelocity().x));
+		setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 	}
 }
 

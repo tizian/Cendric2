@@ -18,7 +18,7 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 }
 
 void LevelEquipment::update(const sf::Time& frameTime) {
-	GameObject::update(frameTime);
+	AnimatedGameObject::update(frameTime);
 	GameObjectState newState = m_mainChar->getState();
 	if (newState == GameObjectState::Dead) {
 		setDisposed();
@@ -33,6 +33,8 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	if (m_mainChar->getIsUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->getIsUpsideDown());
 	}
+
+	// TODO: use level main char color!
 
 	sf::Vector2f newPosition;
 	calculatePositionAccordingToMainChar(newPosition);

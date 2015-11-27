@@ -1,11 +1,10 @@
 #include "Misc/FireBasket.h"
 
-FireBasket::FireBasket() : GameObject() {
+FireBasket::FireBasket() : AnimatedGameObject() {
 	load();
 }
 
 void FireBasket::load() {
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0, 0, 192, 600));
 
 	Animation idleAnimation;

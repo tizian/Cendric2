@@ -5,7 +5,6 @@ using namespace std;
 Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject() {
 	// using default values for constructor.
 	m_size = sf::Vector2f(box.width, box.height);
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
 
 	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), sf::Color::Black, box.width, box.height);
@@ -30,7 +29,6 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject
 
 Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor) {
 	m_size = sf::Vector2f(box.width, box.height);
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
 
 	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), mainColor, box.width, box.height);

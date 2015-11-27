@@ -48,7 +48,7 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	sf::Vector2f direction = rotateVector(trueDir, bean.divergenceAngle);
 
 	if (getConfiguredRotateSprite()) {
-		setRotation(atan2(direction.y, direction.x));
+		setSpriteRotation(atan2(direction.y, direction.x));
 	}
 
 	setVelocity(m_speed * direction);
@@ -134,7 +134,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAcceleration(sf::Vector2f(0.f, 0.f));
 			setVelocityX(-getVelocity().x);
 			if (getConfiguredRotateSprite()) {
-				setRotation(atan2(getVelocity().y, getVelocity().x));
+				setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 			}
 		}
 	}
@@ -149,7 +149,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAcceleration(sf::Vector2f(0.f, 0.f));
 			setVelocityY(-getVelocity().y);
 			if (getConfiguredRotateSprite()) {
-				setRotation(atan2(getVelocity().y, getVelocity().x));
+				setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 			}
 		}
 	}

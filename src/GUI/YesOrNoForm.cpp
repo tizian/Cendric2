@@ -17,7 +17,6 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
 	m_yesButton->setText("Yes");
 	m_noButton->setText("No");
 
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(box);
 	setPosition(sf::Vector2f(box.left, box.top));
 

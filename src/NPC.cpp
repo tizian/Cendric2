@@ -50,7 +50,7 @@ void NPC::onInteractKey() {
 }
 
 void NPC::renderAfterForeground(sf::RenderTarget &renderTarget) {
-	GameObject::renderAfterForeground(renderTarget);
+	AnimatedGameObject::renderAfterForeground(renderTarget);
 	bool showTooltip = g_inputController->isKeyActive(Key::ToggleTooltips);
 	if (showTooltip || m_tooltipTime > sf::Time::Zero) {
 		renderTarget.draw(m_tooltipText);
@@ -58,7 +58,7 @@ void NPC::renderAfterForeground(sf::RenderTarget &renderTarget) {
 }
 
 void NPC::update(const sf::Time& frameTime) {
-	GameObject::update(frameTime);
+	AnimatedGameObject::update(frameTime);
 	if (m_tooltipTime > sf::Time::Zero) {
 		m_tooltipTime = m_tooltipTime - frameTime;
 		if (m_tooltipTime < sf::Time::Zero) {

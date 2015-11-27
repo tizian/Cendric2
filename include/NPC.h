@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "AnimatedGameObject.h"
 #include "ResourceManager.h"
 #include "TextProvider.h"
 
@@ -11,9 +11,9 @@
 class MapMainCharacter;
 
 // A npc on a map
-class NPC : public GameObject {
+class NPC : public AnimatedGameObject {
 public:
-	NPC() : GameObject() {}
+	NPC() : AnimatedGameObject() {}
 	void load(MapMainCharacter* mainChar, const NPCBean& bean);
 	void onMouseOver() override;
 	void onInteractKey() override;

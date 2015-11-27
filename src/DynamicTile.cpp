@@ -1,6 +1,6 @@
 #include "DynamicTile.h"
 
-DynamicTile::DynamicTile(Level* level) : GameObject() {
+DynamicTile::DynamicTile(Level* level) : AnimatedGameObject() {
 	m_level = level;
 }
 
