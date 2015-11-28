@@ -25,6 +25,7 @@ void AnimatedGameObject::update(const sf::Time& frameTime) {
 		if (m_coloredTime <= sf::Time::Zero) {
 			m_animatedSprite.setColor(sf::Color::White);
 			m_coloredTime = sf::Time::Zero;
+			m_currentSpriteColor = sf::Color::White;
 		}
 	}
 
@@ -70,8 +71,13 @@ const sf::Vector2f& AnimatedGameObject::getSpriteOffset() const {
 	return m_spriteOffset;
 }
 
+const sf::Color& AnimatedGameObject::getCurrentSpriteColor() const {
+	return m_currentSpriteColor;
+}
+
 void AnimatedGameObject::setSpriteColor(const sf::Color& color, const sf::Time& time) {
 	if (time <= sf::Time::Zero) return;
 	m_animatedSprite.setColor(color);
 	m_coloredTime = time;
+	m_currentSpriteColor = color;
 }

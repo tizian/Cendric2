@@ -28,6 +28,7 @@ public:
 	
 	const Animation* getAnimation(GameObjectState state);
 	const sf::Vector2f& getSpriteOffset() const;
+	const sf::Color& getCurrentSpriteColor() const;
 
 protected:
 	AnimatedSprite m_animatedSprite;
@@ -39,5 +40,6 @@ protected:
 private:
 	// the sprite will reset its color as soon as this time is zero.
 	sf::Time m_coloredTime = sf::Time::Zero;
+	sf::Color m_currentSpriteColor = sf::Color::White;
 };
 

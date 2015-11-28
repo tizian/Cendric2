@@ -178,6 +178,7 @@ void LevelMainCharacter::load() {
 	playCurrentAnimation(true);
 
 	setDebugBoundingBox(sf::Color::White);
+	setSpriteColor(sf::Color(255, 255, 255, 100), sf::seconds(5));
 }
 
 float LevelMainCharacter::getConfiguredMaxVelocityY() const {

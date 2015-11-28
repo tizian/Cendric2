@@ -67,7 +67,7 @@ void LeverTile::onMouseOver() {
 }
 
 void LeverTile::render(sf::RenderTarget &renderTarget) {
-	GameObject::render(renderTarget);
+	AnimatedGameObject::render(renderTarget);
 	m_animatedSprite.setColor(sf::Color::White);
 }
 

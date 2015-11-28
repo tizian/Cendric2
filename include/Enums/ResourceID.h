@@ -65,6 +65,7 @@ enum class ResourceID {
 	Texture_Particle_blob,
 	Texture_Particle_blob2,
 	Texture_Particle_snowflake,
+	Texture_Particle_smoke,
 	Sound_spell_fireball,
 	Sound_tile_water,
 	Sound_tile_lever,

@@ -28,7 +28,7 @@ void IcyAmbushSpell::update(const sf::Time& frameTime) {
 		updateParticleSystemPosition();
 	}
 	else {
-		GameObject::updateTime(m_duration, frameTime);
+		AnimatedGameObject::updateTime(m_duration, frameTime);
 		if (m_duration <= sf::Time::Zero) setDisposed();
 	}
 }

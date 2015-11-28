@@ -162,7 +162,7 @@ void LevelMovableGameObject::addDamage(int damage) {
 	if (m_attributes.currentHealthPoints == 0) {
 		setDead();
 	}
-	setSpriteColor(sf::Color::Red, sf::milliseconds(100));
+	setSpriteColor(sf::Color::Red, sf::milliseconds(200));
 }
 
 void LevelMovableGameObject::addHeal(int heal) {

@@ -34,7 +34,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		m_animatedSprite.setFlippedY(m_mainChar->getIsUpsideDown());
 	}
 
-	// TODO: use level main char color!
+	setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
 
 	sf::Vector2f newPosition;
 	calculatePositionAccordingToMainChar(newPosition);
