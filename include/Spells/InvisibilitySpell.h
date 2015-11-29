@@ -19,7 +19,7 @@ private:
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::PointPositionGenerator* m_pointGenerator;
+	particles::DiskPositionGenerator* m_posGenerator;
 
 	void loadParticleSystem();
 

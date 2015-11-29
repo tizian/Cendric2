@@ -171,6 +171,8 @@ SpellBean SpellBean::getSpellBean(SpellID id) {
 		return getLightSpellBean();
 	case SpellID::Telekinesis:
 		return getTelekinesisSpellBean();
+	case SpellID::Invisibility:
+		return getInvisibilitySpellBean();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -434,7 +436,7 @@ SpellBean SpellBean::getInvisibilitySpellBean() {
 	SpellBean invisibility = EMPTY_SPELL;
 	invisibility.id = SpellID::Invisibility;
 	invisibility.spellType = SpellType::Twilight;
-	invisibility.iconTextureRect = sf::IntRect(50, 100, 50, 50);
+	invisibility.iconTextureRect = sf::IntRect(100, 50, 50, 50);
 
 	invisibility.cooldown = sf::seconds(30);
 	invisibility.boundingBox = sf::FloatRect(0, 0, 1, 1);

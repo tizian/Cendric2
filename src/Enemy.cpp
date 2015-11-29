@@ -300,7 +300,20 @@ void Enemy::handleMovementInput() {
 }
 
 void Enemy::updateAggro() {
-	bool isInAggroRange = distToMainChar() < getAggroRange();
+	float invisibilityScaler;
+	int invLevel = m_mainChar->getInvisibilityLevel();
+	int mentalStr = getMentalStrength();
+	if (invLevel == 0) {
+		invisibilityScaler = 1.f;
+	}
+	else if (invLevel > mentalStr) {
+		invisibilityScaler = 0.f;
+	}
+	else {
+		invisibilityScaler = 1.f / (2 * (6 - mentalStr)) + 1.f / (invLevel + 1);
+	}
+	
+	bool isInAggroRange = distToMainChar() < (getAggroRange() * invisibilityScaler);
 
 	if (m_enemyState == EnemyState::Chasing && getFleeCondition()) {
 		m_fearedTime = getConfiguredFearedTime();

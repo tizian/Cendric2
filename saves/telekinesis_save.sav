@@ -59,7 +59,7 @@ quest.progress.target:quest_acaveofrats,enemy_rat,1
 merchant.state:npc_guard,5,1.500000,it_fo_caveberry,1,it_fo_cheese,11,it_fo_healingherb,1,it_fo_water,10,it_mi_goldengoblet,2
 # spells learned:
 spell.learned:1,2,3,4,5,6
-spell.learned:2,7,11
+spell.learned:2,7,9,11
 spell.learned:3,12,13
 spell.learned:4,17,19,21
 spell.learned:5

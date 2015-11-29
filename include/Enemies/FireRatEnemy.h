@@ -16,6 +16,7 @@ public:
 
 	float getApproachingDistance() const override;
 	float getAggroRange() const override;
+	int getMentalStrength() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;

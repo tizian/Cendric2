@@ -134,7 +134,7 @@ void LevelMainCharacter::setInvisibilityLevel(int level) {
 	}
 	else {
 		// sets the color for a "sufficiently long" time. Other actions will reset invisibility.
-		setSpriteColor(sf::Color(255, 255, 255, 4 - m_invisibilityLevel * 50), sf::seconds(1000));
+		setSpriteColor(sf::Color(255, 255, 255, 75), sf::seconds(1000));
 	}
 }
 

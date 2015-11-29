@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "GUI/BuffSlot.h"
+#include "Enums/SpellID.h"
 
 // the buff bar in a level
 class BuffBar {
@@ -12,7 +13,8 @@ public:
 	void show();
 	void hide();
 	// called by the spell. the buff type determines the texture & how the slot looks
-	void addSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
+	// the id can be set to reference that slot
+	void addSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id = SpellID::VOID);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);

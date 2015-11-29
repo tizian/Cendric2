@@ -117,6 +117,10 @@ float FireRatEnemy::getAggroRange() const {
 	return 500.f;
 }
 
+int FireRatEnemy::getMentalStrength() const {
+	return 1;
+}
+
 float FireRatEnemy::getApproachingDistance() const {
 	return 10.f;
 }

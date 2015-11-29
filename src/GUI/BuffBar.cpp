@@ -21,7 +21,7 @@ void BuffBar::hide() {
 	m_isVisible = false;
 }
 
-void BuffBar::addSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) {
+void BuffBar::addSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) {
 	if (type == BuffType::Food) {
 		delete m_foodBuffSlot;
 		m_foodBuffSlot = new BuffSlot(type, textureLocation, duration);

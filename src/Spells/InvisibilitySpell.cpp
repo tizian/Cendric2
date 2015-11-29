@@ -1,7 +1,7 @@
 #include "Spells/InvisibilitySpell.h"
 #include "LevelMainCharacter.h"
 
-const sf::Time InvisibilitySpell::SMOKE_DURATION = sf::seconds(1);
+const sf::Time InvisibilitySpell::SMOKE_DURATION = sf::seconds(2);
 
 InvisibilitySpell::InvisibilitySpell() : Spell() {
 	m_smokeDuration = SMOKE_DURATION;
@@ -17,11 +17,14 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 	setPosition(m_nextPosition);
 
 	MovableGameObject::update(frameTime);
+	m_ps->update(frameTime);
+	updateParticleSystemPosition();
 	
 	if (m_smokeDuration > sf::Time::Zero) {
-		m_ps->update(frameTime);
-		updateParticleSystemPosition();
+		
 		GameObject::updateTime(m_smokeDuration, frameTime);
+		if (m_smokeDuration == sf::Time::Zero)
+			m_ps->emitRate = 0.f;
 	}
 
 	GameObject::updateTime(m_duration, frameTime);
@@ -32,13 +35,11 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 }
 
 void InvisibilitySpell::render(sf::RenderTarget& target) {
-	if (m_smokeDuration > sf::Time::Zero) {
-		m_ps->render(target);
-	}
+	m_ps->render(target);
 }
 
 const sf::Vector2f InvisibilitySpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-49.f, 0.f);
+	return sf::Vector2f(0.f, 100.f);
 }
 
 bool InvisibilitySpell::getConfiguredRotateSprite() const {
@@ -46,37 +47,38 @@ bool InvisibilitySpell::getConfiguredRotateSprite() const {
 }
 
 void InvisibilitySpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
+	auto posGen = m_ps->addGenerator<particles::DiskPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	m_pointGenerator = posGen;
+	posGen->radius = 20.f;
+	m_posGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 20.f;
-	sizeGen->minEndSize = 10.f;
-	sizeGen->maxEndSize = 50.f;
+	sizeGen->maxStartSize = 40.f;
+	sizeGen->minEndSize = 30.f;
+	sizeGen->maxEndSize = 60.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(24, 21, 57, 100);
 	colGen->maxStartCol = sf::Color(51, 51, 71, 150);
 	colGen->minEndCol = sf::Color(166, 167, 198, 0);
-	colGen->maxEndCol = sf::Color(198, 199, 210, 50);
+	colGen->maxEndCol = sf::Color(198, 199, 210, 0);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -45.f;
 	velGen->maxAngle = 45.f;
 	velGen->minStartVel = 50.f;
-	velGen->maxStartVel = 100.f;
+	velGen->maxStartVel = 70.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 0.5f;
-	timeGen->maxTime = 1.0f;
+	timeGen->minTime = 2.f;
+	timeGen->maxTime = 2.f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
@@ -85,6 +87,6 @@ void InvisibilitySpell::loadParticleSystem() {
 }
 
 void InvisibilitySpell::updateParticleSystemPosition() {
-	m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
 }
