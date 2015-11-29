@@ -7,9 +7,10 @@ const float BuffSlot::MARGIN = 5.f;
 const sf::Time BuffSlot::FLASHING_TIME = sf::seconds(5);
 const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
 
-BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) {
+BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, RADIUS + MARGIN, RADIUS + MARGIN));
 
+	m_spellID = id;
 	m_duration = duration;
 	m_timeUntilFlash = std::max(FLASHING_INTERVAL, duration - FLASHING_TIME);
 	m_isVisible = true;
@@ -56,6 +57,10 @@ void BuffSlot::render(sf::RenderTarget& renderTarget) {
 	}
 
 	renderTarget.draw(m_durationText);
+}
+
+SpellID BuffSlot::getSpellID() const {
+	return m_spellID;
 }
 
 void BuffSlot::update(const sf::Time& frameTime) {

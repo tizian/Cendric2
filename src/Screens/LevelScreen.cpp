@@ -80,8 +80,12 @@ void LevelScreen::execOnExit(const Screen *nextScreen) {
 	cleanUp();
 }
 
-void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const {
-	dynamic_cast<LevelInterface*>(m_interface)->addBuff(type, textureLocation, duration);
+void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) const {
+	dynamic_cast<LevelInterface*>(m_interface)->addBuff(type, textureLocation, duration, id);
+}
+
+void LevelScreen::removeTypedBuffs(SpellID id) {
+	dynamic_cast<LevelInterface*>(m_interface)->removeTypedBuffs(id);
 }
 
 Screen* LevelScreen::update(const sf::Time& frameTime) {

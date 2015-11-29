@@ -24,12 +24,20 @@ void BuffBar::hide() {
 void BuffBar::addSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) {
 	if (type == BuffType::Food) {
 		delete m_foodBuffSlot;
-		m_foodBuffSlot = new BuffSlot(type, textureLocation, duration);
+		m_foodBuffSlot = new BuffSlot(type, textureLocation, duration, SpellID::VOID);
 	}
 	else {
-		m_buffSlots.push_back(new BuffSlot(type, textureLocation, duration));
+		m_buffSlots.push_back(new BuffSlot(type, textureLocation, duration, id));
 	}
 	calculateSlotPositions();
+}
+
+void BuffBar::removeTypedSlots(SpellID id) {
+	for (auto& slot : m_buffSlots) {
+		if (slot->getSpellID() == id) {
+			slot->setDisposed();
+		}
+	}
 }
 
 void BuffBar::render(sf::RenderTarget& target) {

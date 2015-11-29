@@ -1,7 +1,8 @@
 #include "Spells/InvisibilitySpell.h"
 #include "LevelMainCharacter.h"
+#include "Screens/LevelScreen.h"
 
-const sf::Time InvisibilitySpell::SMOKE_DURATION = sf::seconds(2);
+const sf::Time InvisibilitySpell::SMOKE_DURATION = sf::seconds(1);
 
 InvisibilitySpell::InvisibilitySpell() : Spell() {
 	m_smokeDuration = SMOKE_DURATION;
@@ -21,7 +22,6 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 	updateParticleSystemPosition();
 	
 	if (m_smokeDuration > sf::Time::Zero) {
-		
 		GameObject::updateTime(m_smokeDuration, frameTime);
 		if (m_smokeDuration == sf::Time::Zero)
 			m_ps->emitRate = 0.f;

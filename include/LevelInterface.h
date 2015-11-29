@@ -20,7 +20,9 @@ public:
 	void setSpellManager(SpellManager* spellManager);
 
 	// used to add buffs to the buff bar
-	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
+	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id = SpellID::VOID);
+	// used to remove typed buffs from the buff bar
+	void removeTypedBuffs(SpellID id);
 
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const InventorySlotClone* item);

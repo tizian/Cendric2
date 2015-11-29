@@ -130,6 +130,7 @@ void LevelMainCharacter::setInvisibilityLevel(int level) {
 	if (level < 0 || level > 4) return;
 	m_invisibilityLevel = level;
 	if (m_invisibilityLevel == 0) {
+		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::Invisibility);
 		setSpriteColor(sf::Color::White, sf::milliseconds(1));
 	}
 	else {

@@ -23,7 +23,8 @@ public:
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
 
-	void addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) const;
+	void addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id = SpellID::VOID) const;
+	void removeTypedBuffs(SpellID id);
 
 	// called by the loading screen. the dynamic tiles & light in level
 	void loadForRenderTexture();

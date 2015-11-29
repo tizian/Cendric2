@@ -42,8 +42,12 @@ void LevelInterface::update(const sf::Time& frameTime) {
 	m_quickSlotBar->update(frameTime);
 }
 
-void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) {
-	m_buffBar->addSlot(type, textureLocation, duration);
+void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) {
+	m_buffBar->addSlot(type, textureLocation, duration, id);
+}
+
+void LevelInterface::removeTypedBuffs(SpellID id) {
+	m_buffBar->removeTypedSlots(id);
 }
 
 void LevelInterface::notifyConsumableDrop(const InventorySlotClone* item) {
