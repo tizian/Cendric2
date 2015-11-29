@@ -15,10 +15,11 @@ public:
 
 private:
 	sf::Time m_smokeDuration;
+	static const sf::Time SMOKE_DURATION;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::BoxPositionGenerator* m_pointGenerator;
+	particles::PointPositionGenerator* m_pointGenerator;
 
 	void loadParticleSystem();
 

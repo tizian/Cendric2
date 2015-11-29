@@ -1,6 +1,10 @@
 #include "Spells/InvisibilitySpell.h"
+#include "LevelMainCharacter.h"
+
+const sf::Time InvisibilitySpell::SMOKE_DURATION = sf::seconds(1);
 
 InvisibilitySpell::InvisibilitySpell() : Spell() {
+	m_smokeDuration = SMOKE_DURATION;
 }
 
 void InvisibilitySpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -17,12 +21,13 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 	if (m_smokeDuration > sf::Time::Zero) {
 		m_ps->update(frameTime);
 		updateParticleSystemPosition();
-		AnimatedGameObject::updateTime(m_smokeDuration, frameTime);
+		GameObject::updateTime(m_smokeDuration, frameTime);
 	}
 
-	AnimatedGameObject::updateTime(m_duration, frameTime);
+	GameObject::updateTime(m_duration, frameTime);
 	if (m_duration <= sf::Time::Zero) {
 		setDisposed();
+		m_mainChar->setInvisibilityLevel(0);
 	}
 }
 
@@ -41,37 +46,36 @@ bool InvisibilitySpell::getConfiguredRotateSprite() const {
 }
 
 void InvisibilitySpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(ResourceID::Texture_Particle_snowflake)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
 	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 500.0f / 5.0f;
+	m_ps->emitRate = 50.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
+	auto posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(getBoundingBox()->width / 2.f, 0.f);
 	m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 2.f;
-	sizeGen->maxStartSize = 6.f;
-	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 1.f;
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 20.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 50.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(210, 230, 250, 255);
-	colGen->maxStartCol = sf::Color(170, 180, 230, 255);
-	colGen->minEndCol = sf::Color(100, 100, 108, 0);
-	colGen->maxEndCol = sf::Color(90, 160, 170, 0);
+	colGen->minStartCol = sf::Color(24, 21, 57, 100);
+	colGen->maxStartCol = sf::Color(51, 51, 71, 150);
+	colGen->minEndCol = sf::Color(166, 167, 198, 0);
+	colGen->maxEndCol = sf::Color(198, 199, 210, 50);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = 0.f;
-	velGen->maxAngle = 360.f;
-	velGen->minStartVel = 200.f;
-	velGen->maxStartVel = 200.f;
+	velGen->minAngle = -45.f;
+	velGen->maxAngle = 45.f;
+	velGen->minStartVel = 50.f;
+	velGen->maxStartVel = 100.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.0f;
+	timeGen->minTime = 0.5f;
 	timeGen->maxTime = 1.0f;
 
 	// Updaters

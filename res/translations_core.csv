@@ -55,7 +55,7 @@ FifthSpell;5. Spell;5. Zauber;5. Zauber
 FireDamage;Fire Damage;Feuerschaden;Füürschade
 FireResistance;Fire Resistance;Feuerresistenz;Füürresistenz
 FirstSpell;1. Spell;1. Zauber;1. Zauber
-FourthSpell;4. Spell ;4. Zauber;4. Zauber
+FourthSpell;4. Spell;4. Zauber;4. Zauber
 Fullscreen;Fullscreen;Vollbild;Vollbild
 GamePaused;Game Paused;Spiel pausiert;Spiel pausiert
 GameSaved;Game saved;Spiel gespeichert;Spiel gspeicheret
@@ -190,3 +190,6 @@ YouDied;You died;Ihr seid tot;Du bisch verreckt
 VSync;Vsync;Vsync;Vsync
 SpellTelekinesis;Telekinesis;Telekinese;Telekinese
 SpellTelekinesisDesc;What seemed far is now near.;Das, was unerreichbar schien, ist nun greifbar geworden.;Unerreichbar isch es Fremdwort worde.
+SpellInvisibility;Invisibility;Unsichtbarkeit;Unsichtbarkeit
+SpellInvisibilityDesc;Renders Cendric invisible for a certain duration for certain enemies;Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.;Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.
+InvisibilityLevel;Transparency;Transparenz;Transparenz

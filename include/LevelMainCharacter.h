@@ -17,6 +17,8 @@ public:
 	void load();
 
 	void setCharacterCore(CharacterCore* core);
+	void setInvisibilityLevel(int level);
+	void addDamage(int damage) override;
 	// adds the item to the players inventory
 	void lootItem(const std::string& item, int quantity) const;
 	void lootItems(std::map<std::string, int>& items) const;
@@ -24,6 +26,8 @@ public:
 	void removeGold(int gold) const;
 	void removeItems(const std::string& item, int quantity) const;
 
+	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
+	int getInvisibilityLevel() const;
 	float getConfiguredMaxVelocityY() const override;
 	float getConfiguredMaxVelocityX() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
@@ -41,4 +45,5 @@ private:
 	void loadWeapon();
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
+	int m_invisibilityLevel = 0;
 };

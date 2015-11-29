@@ -35,7 +35,15 @@ void LightSpell::render(sf::RenderTarget& target) {
 }
 
 void LightSpell::update(const sf::Time& frameTime) {
-	Spell::update(frameTime);
+	calculatePositionAccordingToMob(m_nextPosition);
+	setPosition(m_nextPosition);
+
+	MovableGameObject::update(frameTime);
+
+	GameObject::updateTime(m_duration, frameTime);
+	if (m_duration == sf::Time::Zero) {
+		setDisposed();
+	}
 	m_ps->update(frameTime);
 }
 

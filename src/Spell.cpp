@@ -95,9 +95,9 @@ void Spell::update(const sf::Time& frameTime) {
 	checkCollisionsWithEnemies(getBoundingBox());
 	MovableGameObject::update(frameTime);
 
-	m_duration = m_duration - frameTime;
+	GameObject::updateTime(m_duration, frameTime);
 
-	if (m_duration.asMilliseconds() <= 0) {
+	if (m_duration == sf::Time::Zero) {
 		setDisposed();
 	}
 }

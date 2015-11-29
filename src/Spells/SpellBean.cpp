@@ -13,6 +13,7 @@
 #include "SpellCreators/UnlockSpellCreator.h"
 #include "SpellCreators/LightSpellCreator.h"
 #include "SpellCreators/TelekinesisSpellCreator.h"
+#include "SpellCreators/InvisibilitySpellCreator.h"
 
 std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -78,6 +79,10 @@ std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Range);
 		types.push_back(SpellModifierType::Reflect);
 		break;
+	case SpellID::Invisibility:
+		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Duration);
+		break;
 	default:
 		break;
 	}
@@ -125,6 +130,9 @@ SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vecto
 		break;
 	case SpellID::Telekinesis:
 		creator = new TelekinesisSpellCreator(bean, owner);
+		break;
+	case SpellID::Invisibility:
+		creator = new InvisibilitySpellCreator(bean, owner);
 		break;
 	default:
 		return nullptr;
@@ -420,6 +428,21 @@ SpellBean SpellBean::getUnlockSpellBean() {
 	unlock.startVelocity = 200.f;
 
 	return unlock;
+}
+
+SpellBean SpellBean::getInvisibilitySpellBean() {
+	SpellBean invisibility = EMPTY_SPELL;
+	invisibility.id = SpellID::Invisibility;
+	invisibility.spellType = SpellType::Twilight;
+	invisibility.iconTextureRect = sf::IntRect(50, 100, 50, 50);
+
+	invisibility.cooldown = sf::seconds(30);
+	invisibility.boundingBox = sf::FloatRect(0, 0, 1, 1);
+	invisibility.duration = sf::seconds(5);
+
+	invisibility.durationModifierAddition = sf::seconds(5);
+
+	return invisibility;
 }
 
 

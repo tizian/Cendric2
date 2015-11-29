@@ -56,7 +56,7 @@ private:
 
 	static SpellBean getUnlockSpellBean();
 	// static SpellBean getShadowTrapSpellBean();
-	// static SpellBean getInvisibilitySpellBean();
+	static SpellBean getInvisibilitySpellBean();
 	// static SpellBean getFlashSpellBean();
 	static SpellBean getIcyAmbushSpellBean();
 

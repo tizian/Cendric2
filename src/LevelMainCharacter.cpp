@@ -126,6 +126,28 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core) {
 	loadWeapon();
 }
 
+void LevelMainCharacter::setInvisibilityLevel(int level) {
+	if (level < 0 || level > 4) return;
+	m_invisibilityLevel = level;
+	if (m_invisibilityLevel == 0) {
+		setSpriteColor(sf::Color::White, sf::milliseconds(1));
+	}
+	else {
+		// sets the color for a "sufficiently long" time. Other actions will reset invisibility.
+		setSpriteColor(sf::Color(255, 255, 255, 4 - m_invisibilityLevel * 50), sf::seconds(1000));
+	}
+}
+
+int LevelMainCharacter::getInvisibilityLevel() const {
+	return m_invisibilityLevel;
+}
+
+void LevelMainCharacter::addDamage(int damage) {
+	// damage taken will remove invisibility
+	setInvisibilityLevel(0);
+	LevelMovableGameObject::addDamage(damage);
+}
+
 void LevelMainCharacter::load() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 100.f));
 	setSpriteOffset(sf::Vector2f(-25.f, -20.f));
@@ -178,7 +200,6 @@ void LevelMainCharacter::load() {
 	playCurrentAnimation(true);
 
 	setDebugBoundingBox(sf::Color::White);
-	setSpriteColor(sf::Color(255, 255, 255, 100), sf::seconds(5));
 }
 
 float LevelMainCharacter::getConfiguredMaxVelocityY() const {
