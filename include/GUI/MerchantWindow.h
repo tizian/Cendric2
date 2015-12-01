@@ -30,15 +30,18 @@ private:
 	// reloads the merchant items, depending on the core
 	void reload();
 	void clearAllSlots();
-	// reorganizes the positions of the 'slots' vector
-	void calculateSlotPositions(std::vector<InventorySlot>& slots);
+	// reorganizes the positions of the 'm_items' map
+	void calculateSlotPositions();
 
 	Window* m_window;
 	BitmapText m_title;
 
-	std::vector<InventorySlot> m_items;
-	InventorySlot* m_selectedSlot = nullptr;
-	void selectSlot(InventorySlot* selectedSlot);
+	std::string m_selectedSlotId = "";
+	void selectSlot(const std::string& selectedSlotId);
+	void deselectCurrentSlot();
+	InventorySlot* getSelectedSlot();
+
+	std::map<std::string, InventorySlot> m_items;
 	MerchantItemDescriptionWindow* m_descriptionWindow = nullptr;
 
 	void showDescription(const Item& item);

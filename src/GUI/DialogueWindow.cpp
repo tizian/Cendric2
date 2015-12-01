@@ -83,11 +83,13 @@ void DialogueWindow::setCendricTalking(const std::string& text) {
 void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTextureRect(m_npcTexturePosition);
+	m_speakerSprite.setScale(sf::Vector2f(0.6f, 0.6f));
 	m_speakerText->setString(m_npcName);
 	m_dialogueText->setString(g_textProvider->getCroppedText(text, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
 	delete m_merchantInterface;
 	m_merchantInterface = new MerchantInterface(dynamic_cast<GameScreen*>(m_screen), m_npcID);
 	setPosition(sf::Vector2f(getPosition().x, getPosition().y + BOX.height / 2.f));
+	m_speakerSprite.setPosition(sf::Vector2f(getPosition().x, WINDOW_HEIGHT - 150.f));
 	setHeight(BOX.height / 2.f);
 }
 
@@ -114,6 +116,8 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 			delete m_merchantInterface;
 			m_merchantInterface = nullptr;
 			setPosition(sf::Vector2f(BOX.left, BOX.top));
+			m_speakerSprite.setScale(sf::Vector2f(1.f, 1.f));
+			setPosition(getPosition());
 			setHeight(BOX.height);
 			m_dialogue->setNextNode(-1);
 			return m_dialogue->updateWindow();
@@ -176,9 +180,8 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 	if (m_merchantInterface != nullptr) {
 		m_merchantInterface->render(renderTarget);
 	}
-	else {
-		renderTarget.draw(m_speakerSprite);
-	}
+
+	renderTarget.draw(m_speakerSprite);
 }
 
 // Dialogue Option

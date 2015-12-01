@@ -11,7 +11,7 @@ it_fo_caveberry;itd_caveberry;8;0, 0;3;;-1;;5;;;;5;;;;;;3;20;0, -30;50, 70;0, 0,
 it_fo_glowingshroom;itd_glowingshroom;8;150, 50;2;;1;;;;;;;5;;;;5;;15;-10, -10;30, 30;100, 50, 50, 50;1000;;;;;;;;;
 it_fo_healingherb;itd_healingherb;8;50, 50;5;;5;;;;;;;;;;;;;10;-10, 0;30, 50;50, 50, 50, 50;1000;;;;;;;;;
 it_qe_letter;itd_letter;10;200, 0;-1;;;;;;;;;;;;;;;;0, -20;50, 30;150, 0, 50, 50;1000;;;;;;;;;
-it_mi_goldengoblet;itd_goldengoblet;11;0, 50;15;;;;;;;;;;;;;;;;-10, -5;30, 40;50, 0, 50, 50;1000;;;;;;;;;
+it_mi_goldengoblet;itd_goldengoblet;11;0, 50;20;;;;;;;;;;;;;;;;-10, -5;30, 40;50, 0, 50, 50;1000;;;;;;;;;
 it_eq_ringoflesserhealth;itd_ringoflesserhealth;2;100, 50;20;;;;;;;;;;;;;;;;-14, -40;5, 5;200, 0, 50, 50;1000;;;;;;;;;
 it_go_threecoins;itd_threecoins;12;;3;;;;;;;;;;;;;;;;-5, -25;25, 25;150, 50, 50, 50;1000;;;;;;;;;
 it_go_onecoin;itd_onecoin;12;;1;;;;;;;;;;;;;;;;-18, -34;8, 8;100, 0, 50, 50;1000;;;;;;;;;
@@ -20,3 +20,4 @@ it_eq_back_necrot3;itd_back_necrot3;7;50, 200;150;20;;20;10;;;;10;;10;;;10;10;;;
 it_eq_body_necrot3;itd_body_necrot3;5;100, 200;200;30;1;30;;;10;10;20;;30;5;5;5;5;;;;;;res/assets/equipment/body/spritesheet_body_necrot3.png;;;;;;;;
 it_eq_rafishat;itd_rafishat;1;0, 250;10;;;-20;5;;;;;;2;2;1;;;;;;;;res/assets/equipment/head/spritesheet_head_rafishat.png;;;;;;;;
 it_eq_head_divinet3;itd_head_divinet3;1;150, 200;120;10;1;20;10;;10;;;10;2;;;;10;;;;;;res/assets/equipment/head/spritesheet_head_divinet3.png;;;;;;;;
+it_fo_lesserhealingpotion;itd_lesserhealingpotion;8;100, 100;15;;5;;;;;;;;;;;;;5;-15, -2;20, 46;100, 100, 50, 50;1000;;;;;;;;;

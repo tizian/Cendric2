@@ -46,7 +46,7 @@ MerchantWindow::~MerchantWindow() {
 
 void MerchantWindow::clearAllSlots() {
 	m_items.clear();
-	m_selectedSlot = nullptr;
+	m_selectedSlotId = "";
 }
 
 void MerchantWindow::notifyChange(const std::string& itemID) {
@@ -54,44 +54,39 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	if (bean == nullptr) return;
 
 	// search for the slot
-	std::vector<InventorySlot>::iterator it = m_items.begin();
-	while (it != m_items.end()) {
-		if (bean->id.compare((*it).getItemID()) == 0) {
-			// the slot has been found.
-			if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) {
-				// the item was removed. check if it is selected.
-				if (m_selectedSlot == &(*it)) {
-					m_selectedSlot = nullptr;
-					m_descriptionWindow->hide();
-				}
-				m_items.erase(it);
-				calculateSlotPositions(m_items);
+	if (m_items.find(bean->id) != m_items.end()) {
+		if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) {
+			// the item was removed. check if it is selected.
+			if (m_selectedSlotId.compare(bean->id) == 0) {
+				deselectCurrentSlot();
 			}
-			else {
-				(*it).setAmount(m_interface->getMerchantData().wares.at(itemID));
-			}
-			return;
+			m_items.erase(bean->id);
+			calculateSlotPositions();
 		}
-		it++;
+		else {
+			m_items.at(bean->id).setAmount(m_interface->getMerchantData().wares.at(itemID));
+		}
+		return;
 	}
 
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) return;
-	m_items.push_back(InventorySlot(Item(*bean), m_interface->getMerchantData().wares.at(itemID)));
 
-	calculateSlotPositions(m_items);
+	m_items[bean->id] = (InventorySlot(Item(*bean), m_interface->getMerchantData().wares.at(itemID)));
+
+	calculateSlotPositions();
 }
 
 void MerchantWindow::update(const sf::Time& frameTime) {
 	// check whether an item was selected
-	for (auto& it : m_items) {
-		it.update(frameTime);
-		if (it.isClicked()) {
-			selectSlot(&it);
+	for (auto& slot : m_items) {
+		slot.second.update(frameTime);
+		if (slot.second.isClicked()) {
+			selectSlot(slot.second.getItemID());
 			return;
 		}
-		if (it.isRightClicked()) {
-			m_interface->buyItem(it.getItem());
+		if (slot.second.isRightClicked()) {
+			m_interface->buyItem(slot.second.getItem());
 			break;
 		}
 	}
@@ -102,22 +97,45 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 	}
 }
 
-void MerchantWindow::selectSlot(InventorySlot* selectedSlot) {
-	if (selectedSlot == nullptr) return;
-	if (selectedSlot == m_selectedSlot) return;
-	if (m_selectedSlot != nullptr) {
-		m_selectedSlot->deselect();
+void MerchantWindow::selectSlot(const std::string& selectedSlotId) {
+	if (selectedSlotId.empty()) {
+		deselectCurrentSlot();
+		return;
 	}
-	m_selectedSlot = selectedSlot;
-	m_selectedSlot->select();
-	showDescription(m_selectedSlot->getItem());
+	
+	if (selectedSlotId.compare(m_selectedSlotId) == 0) return;
+
+	deselectCurrentSlot();
+	m_selectedSlotId = selectedSlotId;
+
+	InventorySlot* selectedSlot = getSelectedSlot();
+	
+	if (selectedSlot != nullptr) {
+		selectedSlot->select();
+		showDescription(selectedSlot->getItem());
+	}
+}
+
+void MerchantWindow::deselectCurrentSlot() {
+	InventorySlot* slot = getSelectedSlot();
+	m_selectedSlotId = "";
+	m_descriptionWindow->hide();
+	if (slot != nullptr) {
+		slot->deselect();
+	}
+}
+
+InventorySlot* MerchantWindow::getSelectedSlot() {
+	if (m_selectedSlotId.empty()) return nullptr;
+	if (m_items.find(m_selectedSlotId) == m_items.end()) return nullptr;
+	return &m_items.at(m_selectedSlotId);
 }
 
 void MerchantWindow::render(sf::RenderTarget& target) {
 	m_window->render(target);
 	target.draw(m_title);
 	for (auto& it : m_items) {
-		it.render(target);
+		it.second.render(target);
 		// it.renderAfterForeground(target); // uncomment for debug box
 	}
 
@@ -148,19 +166,20 @@ void MerchantWindow::reload() {
 			g_logger->logError("MerchantWindow", "Item not resolved: " + it.first);
 			continue;
 		}
-		m_items.push_back(InventorySlot(Item(*bean), it.second));
+		
+		m_items[bean->id] = (InventorySlot(Item(*bean), it.second));
 	}
 
-	calculateSlotPositions(m_items);
+	calculateSlotPositions();
 }
 
-void MerchantWindow::calculateSlotPositions(std::vector<InventorySlot>& slots) {
+void MerchantWindow::calculateSlotPositions() {
 	float yOffset = TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M;
 	float xOffset = LEFT + GUIConstants::TEXT_OFFSET;
 	int y = 1;
 	int x = 1;
-	for (auto& it : slots) {
-		it.setPosition(sf::Vector2f(xOffset, yOffset));
+	for (auto& it : m_items) {
+		it.second.setPosition(sf::Vector2f(xOffset, yOffset));
 		if (x + 1 > SLOT_COUNT_X) {
 			x = 1;
 			xOffset = LEFT + GUIConstants::TEXT_OFFSET;

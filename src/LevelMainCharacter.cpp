@@ -19,10 +19,14 @@ void LevelMainCharacter::handleAttackInput() {
 			if (m_isQuickcast) {
 				m_spellManager->setCurrentSpell(it.second);
 				m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
+				if (m_invisibilityLevel > 0) {
+					setInvisibilityLevel(0);
+				}
 			}
 			else {
 				m_spellManager->setAndExecuteSpell(it.second);
 			}
+			g_inputController->lockAction();
 		}
 	}
 
@@ -30,6 +34,9 @@ void LevelMainCharacter::handleAttackInput() {
 	if (g_inputController->isMouseJustPressedLeft()) {
 		m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
 		g_inputController->lockAction();
+		if (m_invisibilityLevel > 0) {
+			setInvisibilityLevel(0);
+		}
 	}
 }
 

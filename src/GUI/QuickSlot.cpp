@@ -130,6 +130,14 @@ void QuickSlot::onRightClick() {
 	g_inputController->lockAction();
 }
 
+void QuickSlot::onLeftJustPressed() {
+	g_inputController->lockAction();
+}
+
+void QuickSlot::onRightJustPressed() {
+	g_inputController->lockAction();
+}
+
 GameObjectType QuickSlot::getConfiguredType() const {
 	return GameObjectType::_Interface;
 }
