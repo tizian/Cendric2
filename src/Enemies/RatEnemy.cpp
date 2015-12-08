@@ -1,5 +1,5 @@
 #include "Enemies/RatEnemy.h"
-#include "LevelMainCharacter.h"
+#include "Level/LevelMainCharacter.h"
 
 RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::Rat) {
 	load();

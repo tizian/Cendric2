@@ -3,7 +3,7 @@
 #include "global.h"
 #include "MovableGameObject.h"
 #include "ResourceManager.h"
-#include "Level.h"
+#include "Level/Level.h"
 
 #include "Enums/SpellID.h"
 #include "Enums/DamageType.h"

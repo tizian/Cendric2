@@ -5,7 +5,7 @@
 
 #include "BackgroundLayer.h"
 #include "Structs/LevelExitBean.h"
-#include "Structs/DynamicTileBean.h"
+#include "Structs/LevelDynamicTileBean.h"
 #include "Structs/LightBean.h"
 #include "Structs/LeverBean.h"
 
@@ -22,8 +22,8 @@ struct LevelData {
 	std::vector<std::vector<int>> foregroundTileLayers;
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTilePositions;
-	std::vector<std::pair<DynamicTileID, std::vector<int>>> dynamicTileLayers;
-	std::vector<DynamicTileBean> dynamicTiles;
+	std::vector<std::pair<LevelDynamicTileID, std::vector<int>>> dynamicTileLayers;
+	std::vector<LevelDynamicTileBean> dynamicTiles;
 	std::vector<LeverBean> levers;
 	std::vector<std::string> levelItems;
 	std::map<int, std::pair<EnemyID, sf::Vector2f>> enemies;

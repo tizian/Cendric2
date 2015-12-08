@@ -1,5 +1,5 @@
 #include "Spells/InvisibilitySpell.h"
-#include "LevelMainCharacter.h"
+#include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
 
 const sf::Time InvisibilitySpell::SMOKE_DURATION = sf::seconds(1);

@@ -1,5 +1,5 @@
 #include "GUI/Spellbook.h"
-#include "MapInterface.h"
+#include "Map/MapInterface.h"
 #include "GUI/WeaponWindow.h"
 
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;

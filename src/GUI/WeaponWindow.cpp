@@ -1,5 +1,5 @@
 #include "GUI/WeaponWindow.h"
-#include "MapInterface.h"
+#include "Map/MapInterface.h"
 
 WeaponWindow::WeaponWindow(CharacterCore* core, bool clickable) {
 	m_core = core;

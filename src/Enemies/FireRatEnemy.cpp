@@ -1,5 +1,5 @@
 #include "Enemies/FireRatEnemy.h"
-#include "LevelMainCharacter.h"
+#include "Level/LevelMainCharacter.h"
 
 FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::FireRat) {
 	load();

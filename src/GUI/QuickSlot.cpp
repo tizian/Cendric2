@@ -1,6 +1,6 @@
 #include "GUI/QuickSlot.h"
 #include "CharacterCore.h"
-#include "LevelInterface.h"
+#include "Level/LevelInterface.h"
 
 using namespace std;
 

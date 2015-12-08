@@ -5,12 +5,12 @@
 #include "tinyxml2/tinyxml2.h"
 
 #include "BackgroundLayer.h"
-#include "DynamicTile.h"
-#include "LevelItem.h"
-#include "Enemy.h"
+#include "Level/LevelDynamicTile.h"
+#include "Level/LevelItem.h"
+#include "Level/Enemy.h"
 
 #include "Structs/LevelData.h"
-#include "Enums/DynamicTileID.h"
+#include "Enums/LevelDynamicTileID.h"
 
 class LevelReader {
 public:
@@ -37,7 +37,7 @@ private:
 	bool readBackgroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readLightedForegroundTileLayer(const std::string& layer, LevelData& data) const;
 	bool readForegroundTileLayer(const std::string& layer, LevelData& data) const;
-	bool readDynamicTileLayer(DynamicTileID id, const std::string& layer, LevelData& data) const;
+	bool readDynamicTileLayer(LevelDynamicTileID id, const std::string& layer, LevelData& data) const;
 	bool readLeverLayer(const std::string& layer, LevelData& data) const;
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;
 	bool readCollidableLayer(const std::string& layer, LevelData& data) const;

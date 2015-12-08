@@ -1,7 +1,7 @@
 #include "GUI/Inventory.h"
-#include "LevelMainCharacter.h"
-#include "LevelInterface.h"
-#include "MapInterface.h"
+#include "Level/LevelMainCharacter.h"
+#include "Level/LevelInterface.h"
+#include "Map/MapInterface.h"
 #include "MerchantInterface.h"
 #include "GUI/GUIConstants.h"
 

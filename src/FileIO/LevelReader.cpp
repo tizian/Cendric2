@@ -199,7 +199,7 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 		result = object->QueryIntAttribute("y", &y);
 		XMLCheckResult(result);
 
-		int offset = static_cast<int>(DynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
+		int offset = static_cast<int>(LevelDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
 		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
 
 		data.chests.insert({ id, std::pair<int, sf::Vector2f>(skinNr, sf::Vector2f(static_cast<float>(x), static_cast<float>(y))) });
@@ -392,7 +392,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 	return true;
 }
 
-bool LevelReader::readDynamicTileLayer(DynamicTileID id, const std::string& layer, LevelData& data) const {
+bool LevelReader::readDynamicTileLayer(LevelDynamicTileID id, const std::string& layer, LevelData& data) const {
 	std::string layerData = layer;
 	int offset = static_cast<int>(id) + m_firstGidDynamicTiles - 1;
 	size_t pos = 0;
@@ -410,16 +410,16 @@ bool LevelReader::readDynamicTileLayer(DynamicTileID id, const std::string& laye
 	skinNr = std::stoi(layerData);
 	dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
 
-	data.dynamicTileLayers.push_back(std::pair<DynamicTileID, std::vector<int>>(id, dynamicTileLayer));
+	data.dynamicTileLayers.push_back(std::pair<LevelDynamicTileID, std::vector<int>>(id, dynamicTileLayer));
 
 	return true;
 }
 
 bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) const {
 	std::string layerData = layer;
-	int leverOffset = static_cast<int>(DynamicTileID::Lever) + m_firstGidDynamicTiles - 1;
-	int onOffset = static_cast<int>(DynamicTileID::SwitchableOn) + m_firstGidDynamicTiles - 1;
-	int offOffset = static_cast<int>(DynamicTileID::SwitchableOff) + m_firstGidDynamicTiles - 1;
+	int leverOffset = static_cast<int>(LevelDynamicTileID::Lever) + m_firstGidDynamicTiles - 1;
+	int onOffset = static_cast<int>(LevelDynamicTileID::SwitchableOn) + m_firstGidDynamicTiles - 1;
+	int offOffset = static_cast<int>(LevelDynamicTileID::SwitchableOff) + m_firstGidDynamicTiles - 1;
 
 	size_t pos = 0;
 	LeverBean bean;
@@ -436,24 +436,24 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 		}
 		else if ((skinNr - leverOffset) % DYNAMIC_TILE_COUNT == 0) {
 			// we've found a lever!
-			DynamicTileBean lever;
-			lever.id = DynamicTileID::Lever;
+			LevelDynamicTileBean lever;
+			lever.id = LevelDynamicTileID::Lever;
 			lever.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 			lever.skinNr = ((skinNr - leverOffset) / DYNAMIC_TILE_COUNT) + 1;
 			lever.spawnPosition = y * data.mapSize.x + x;
 			bean.levers.push_back(lever);
 		}
 		else if ((skinNr - onOffset) % DYNAMIC_TILE_COUNT == 0) {
-			DynamicTileBean switchTile;
-			switchTile.id = DynamicTileID::SwitchableOn;
+			LevelDynamicTileBean switchTile;
+			switchTile.id = LevelDynamicTileID::SwitchableOn;
 			switchTile.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 			switchTile.skinNr = ((skinNr - onOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
 			bean.dependentTiles.push_back(switchTile);
 		}
 		else if ((skinNr - offOffset) % DYNAMIC_TILE_COUNT == 0) {
-			DynamicTileBean switchTile;
-			switchTile.id = DynamicTileID::SwitchableOff;
+			LevelDynamicTileBean switchTile;
+			switchTile.id = LevelDynamicTileID::SwitchableOff;
 			switchTile.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 			switchTile.skinNr = ((skinNr - offOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
@@ -575,28 +575,28 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 			if (!readLeverLayer(layerData, data)) return false;
 		}
 		else if (name.find("dynamic checkpoint") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::Checkpoint, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::Checkpoint, layerData, data)) return false;
 		}
 		else if (name.find("dynamic ice") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::Ice, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::Ice, layerData, data)) return false;
 		}
 		else if (name.find("dynamic spikestop") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::SpikesTop, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::SpikesTop, layerData, data)) return false;
 		}
 		else if (name.find("dynamic spikesbottom") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::SpikesBottom, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::SpikesBottom, layerData, data)) return false;
 		}
 		else if (name.find("dynamic torch") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::Torch, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::Torch, layerData, data)) return false;
 		}
 		else if (name.find("dynamic crumblyblock") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::CrumblyBlock, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::CrumblyBlock, layerData, data)) return false;
 		}
 		else if (name.find("dynamic water") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::Water, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::Water, layerData, data)) return false;
 		}
 		else if (name.find("dynamic shiftableblock") != std::string::npos) {
-			if (!readDynamicTileLayer(DynamicTileID::ShiftableBlock, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::ShiftableBlock, layerData, data)) return false;
 		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
@@ -889,13 +889,13 @@ void LevelReader::updateData(LevelData& data)  const {
 	int tileHeight = data.tileSize.y;
 
 	for (auto& layer : data.dynamicTileLayers) {
-		DynamicTileID id = layer.first;
+		LevelDynamicTileID id = layer.first;
 
-		if (id == DynamicTileID::Water) {
+		if (id == LevelDynamicTileID::Water) {
 			// Read in DynamicWaterTiles: Look for n x m tile rectangles inside layer
 
 			std::vector<bool> processed(layer.second.size(), false);
-			DynamicTileBean bean;
+			LevelDynamicTileBean bean;
 			bean.id = id;
 
 			for (int y = 0; y < data.mapSize.y; ++y) {
@@ -942,7 +942,7 @@ void LevelReader::updateData(LevelData& data)  const {
 				for (int x = 0; x < data.mapSize.x; ++x) {
 					int skinNr = layer.second[y * data.mapSize.x + x];
 					if (skinNr != 0) {
-						DynamicTileBean bean;
+						LevelDynamicTileBean bean;
 						bean.id = id;
 						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 						bean.skinNr = skinNr;
@@ -1012,8 +1012,8 @@ bool LevelReader::checkData(LevelData& data) const {
 		}
 	}
 	for (int i = 0; i < data.dynamicTileLayers.size(); i++) {
-		if (data.dynamicTileLayers[i].first == DynamicTileID::VOID) {
-			g_logger->logError("LevelReader", "Error in level data : dynamic tile ID not recognized");
+		if (data.dynamicTileLayers[i].first == LevelDynamicTileID::VOID) {
+			g_logger->logError("LevelReader", "Error in level data : level dynamic tile ID not recognized");
 			return false;
 		}
 		if (data.dynamicTileLayers[i].second.empty() || data.dynamicTileLayers[i].second.size() != data.mapSize.x * data.mapSize.y) {

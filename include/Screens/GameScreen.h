@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Screen.h"
 #include "ResourceManager.h"
-#include "LevelInterface.h"
+#include "Level/LevelInterface.h"
 
 #include "GUI/ProgressLog.h"
 

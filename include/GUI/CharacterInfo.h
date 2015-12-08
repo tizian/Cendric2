@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "LevelMainCharacter.h"
+#include "Level/LevelMainCharacter.h"
 #include "Window.h"
 #include "GUI/GUIConstants.h"
 

@@ -1,13 +1,13 @@
 #pragma once
 
 #include "global.h"
-#include "Map.h"
-#include "MapMainCharacter.h"
+#include "Map/Map.h"
+#include "Map/MapMainCharacter.h"
 #include "Screens/GameScreen.h"
 #include "ResourceManager.h"
 #include "Screens/LoadingScreen.h"
 #include "GUI/DialogueWindow.h"
-#include "MapInterface.h"
+#include "Map/MapInterface.h"
 
 class MapScreen : public GameScreen {
 public:

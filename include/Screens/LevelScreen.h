@@ -1,12 +1,12 @@
 #pragma once
 
 #include "global.h"
-#include "Level.h"
-#include "LevelMainCharacter.h"
+#include "Level/Level.h"
+#include "Level/LevelMainCharacter.h"
 #include "GameScreen.h"
 #include "ResourceManager.h"
-#include "LevelMainCharacterLoader.h"
-#include "LevelInterface.h"
+#include "Level/LevelMainCharacterLoader.h"
+#include "Level/LevelInterface.h"
 
 #include "GUI/Button.h"
 #include "GUI/YesOrNoForm.h"

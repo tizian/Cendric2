@@ -1,5 +1,5 @@
 #include "Enemies/NekomataEnemy.h"
-#include "LevelMainCharacter.h"
+#include "Level/LevelMainCharacter.h"
 
 NekomataEnemy::NekomataEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::FireRat) {
 	load();

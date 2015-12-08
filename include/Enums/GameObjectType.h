@@ -12,7 +12,7 @@ enum GameObjectType {
 	_Window,
 	_Form, // form buttons will be rendered / updated with their form and not in the "button" context
 	_Spell,
-	_DynamicTile,
+	_DynamicTile, // dynamic tiles on map and levels
 	_Enemy,
 	_LevelItem,
 	_NPC,

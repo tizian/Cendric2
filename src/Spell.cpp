@@ -1,6 +1,6 @@
 #include "Spell.h"
-#include "LevelMovableGameObject.h"
-#include "LevelMainCharacter.h"
+#include "Level/LevelMovableGameObject.h"
+#include "Level/LevelMainCharacter.h"
 
 using namespace std;
 

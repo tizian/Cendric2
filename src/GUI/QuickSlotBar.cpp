@@ -1,5 +1,5 @@
 #include "GUI/QuickSlotBar.h"
-#include "LevelInterface.h"
+#include "Level/LevelInterface.h"
 
 QuickSlotBar::QuickSlotBar(LevelInterface* _interface) {
 	m_quickSlot1 = new QuickSlot(_interface, _interface->getCore()->getData().quickSlot1, Key::QuickSlot1);

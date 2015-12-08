@@ -1,8 +1,8 @@
 #pragma once
 
 #include "global.h"
-#include "Enemy.h"
-#include "Level.h"
+#include "Level/Enemy.h"
+#include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
 

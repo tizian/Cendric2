@@ -1,5 +1,5 @@
 #include "Spells/LeechSpell.h"
-#include "LevelMainCharacter.h"
+#include "Level/LevelMainCharacter.h"
 
 LeechSpell::LeechSpell() : Spell() {
 }
