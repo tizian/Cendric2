@@ -26,3 +26,31 @@ void MapLoader::loadLights(MapData& data, Screen* screen) const {
 		screen->addObject(lightObject);
 	}
 }
+
+void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const {
+	MapMainCharacter* mainCharacter = dynamic_cast<MapMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	if (mainCharacter == nullptr) {
+		g_logger->logError("MapLoader", "Could not find main character of game screen");
+		return;
+	}
+
+	for (auto& it : data.dynamicTiles) {
+		MapDynamicTile* tile = nullptr;
+		switch (it.id) {
+		case MapDynamicTileID::Cooking:
+			tile = new CookingTile(map);
+			break;
+		default:
+			// unexpected error
+			g_logger->logError("MapLoader", "Dynamic tile was not loaded, unknown id.");
+			return;
+		}
+
+		tile->setTileSize(data.tileSize);
+		tile->init();
+		tile->setPosition(it.position - tile->getPositionOffset());
+		tile->setDebugBoundingBox(sf::Color::Yellow);
+		tile->load(it.skinNr);
+		screen->addObject(tile);
+	}
+}

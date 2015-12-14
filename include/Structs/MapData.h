@@ -5,6 +5,7 @@
 #include "Structs/MapExitBean.h"
 #include "Structs/NPCBean.h"
 #include "Structs/LightBean.h"
+#include "Structs/MapDynamicTileBean.h"
 
 struct MapData {
 	std::string id;
@@ -16,6 +17,8 @@ struct MapData {
 	std::vector<std::vector<int>> backgroundLayers;
 	std::vector<std::vector<int>> lightedForegroundLayers;
 	std::vector<std::vector<int>> foregroundLayers;
+	std::vector<std::pair<MapDynamicTileID, std::vector<int>>> dynamicTileLayers;
+	std::vector<MapDynamicTileBean> dynamicTiles;
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTileRects;
 	std::vector<MapExitBean> mapExits;

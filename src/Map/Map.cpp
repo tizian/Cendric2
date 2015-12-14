@@ -35,6 +35,7 @@ void Map::loadAfterMainChar(Screen* screen) {
 void Map::loadForRenderTexture(Screen* screen) {
 	MapLoader loader;
 	loader.loadLights(m_mapData, screen);
+	loader.loadDynamicTiles(m_mapData, screen, this);
 }
 
 void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const {

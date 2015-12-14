@@ -17,7 +17,7 @@ void CookingTile::load(int skinNr) {
 
 	Animation burningAnimation(sf::seconds(0.15f));
 	burningAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_cooking));
-	for (int i = 1; i < 5; i++) {
+	for (int i = 0; i < 4; i++) {
 		burningAnimation.addFrame(sf::IntRect(m_tileSize.x * i, (skinNr - 1) * textureHeight, m_tileSize.x, textureHeight));
 	}
 

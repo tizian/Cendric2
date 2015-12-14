@@ -63,6 +63,16 @@ bool MapReader::checkData(MapData& data) const {
 			return false;
 		}
 	}
+	for (int i = 0; i < data.dynamicTileLayers.size(); i++) {
+		if (data.dynamicTileLayers[i].first == MapDynamicTileID::VOID) {
+			g_logger->logError("MapReader", "Error in map data : map dynamic tile ID not recognized");
+			return false;
+		}
+		if (data.dynamicTileLayers[i].second.empty() || data.dynamicTileLayers[i].second.size() != data.mapSize.x * data.mapSize.y) {
+			g_logger->logError("MapReader", "Error in map data : dynamic tile layer has not correct size (map size)");
+			return false;
+		}
+	}
 	for (auto it : data.mapExits) {
 		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x * data.tileSize.x || it.mapExitRect.top >= data.mapSize.y * data.tileSize.y) {
 			g_logger->logError("MapReader", "Error in map data : a map exit rect is out of range for this map.");
@@ -451,6 +461,29 @@ bool MapReader::readLightedForegroundTileLayer(const std::string& layer, MapData
 	return true;
 }
 
+bool MapReader::readDynamicTileLayer(MapDynamicTileID id, const std::string& layer, MapData& data) const {
+	std::string layerData = layer;
+	int offset = static_cast<int>(id) + m_firstGidDynamicTiles - 1;
+	size_t pos = 0;
+	std::vector<int> dynamicTileLayer;
+	int skinNr;
+	while ((pos = layerData.find(",")) != std::string::npos) {
+		skinNr = std::stoi(layerData.substr(0, pos));
+		if (skinNr != 0 && ((skinNr - offset) % DYNAMIC_TILE_COUNT) != 0) {
+			g_logger->logError("MapReader", "Dynamic Tile with ID: " + std::to_string(skinNr) + " is not allowed on this layer!");
+			return false;
+		}
+		dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
+		layerData.erase(0, pos + 1);
+	}
+	skinNr = std::stoi(layerData);
+	dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
+
+	data.dynamicTileLayers.push_back(std::pair<MapDynamicTileID, std::vector<int>>(id, dynamicTileLayer));
+
+	return true;
+}
+
 bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 	tinyxml2::XMLElement* layer = map->FirstChildElement("layer");
 
@@ -484,6 +517,9 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
 		}
+		else if (name.find("dynamic cooking") != std::string::npos) {
+			if (!readDynamicTileLayer(MapDynamicTileID::Cooking, layerData, data)) return false;
+		}
 		else {
 			g_logger->logError("MapReader", "Layer with unknown name found in map.");
 			return false;
@@ -506,6 +542,7 @@ bool MapReader::readMap(const char* fileName, MapData& data) {
 	}
 
 	if (!readMapProperties(map, data)) return false;
+	if (!readFirstGridIDs(map, data)) return false;
 	if (!readLayers(map, data)) return false;
 	if (!readObjects(map, data)) return false;
 
@@ -643,6 +680,38 @@ bool MapReader::readMapProperties(tinyxml2::XMLElement* map, MapData& data) cons
 	return true;
 }
 
+bool MapReader::readFirstGridIDs(tinyxml2::XMLElement* map, MapData& data) {
+	tinyxml2::XMLElement* tileset = map->FirstChildElement("tileset");
+
+	m_firstGidDynamicTiles = 0;
+	const char* textAttr;
+	while (tileset != nullptr) {
+		textAttr = nullptr;
+		textAttr = tileset->Attribute("name");
+		if (textAttr == nullptr) {
+			g_logger->logError("MapReader", "XML file could not be read, no tileset->name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+
+		int gid;
+		tinyxml2::XMLError result = tileset->QueryIntAttribute("firstgid", &gid);
+		XMLCheckResult(result);
+
+		if (name.find("dynamic_tiles") != std::string::npos) {
+			m_firstGidDynamicTiles = gid;
+		}
+	
+		tileset = tileset->NextSiblingElement("tileset");
+	}
+
+	if (m_firstGidDynamicTiles <= 0) {
+		g_logger->logError("MapReader", "Could not read firstgids, at least one of the required tilesets is missing.");
+		return false;
+	}
+	return true;
+}
+
 void MapReader::updateData(MapData& data) const {
 	int x = 0;
 	int y = 0;
@@ -661,6 +730,28 @@ void MapReader::updateData(MapData& data) const {
 		}
 		else {
 			x++;
+		}
+	}
+
+	// update dynamic tiles
+	int tileWidth = data.tileSize.x;
+	int tileHeight = data.tileSize.y;
+
+	for (auto& layer : data.dynamicTileLayers) {
+		MapDynamicTileID id = layer.first;
+
+		for (int y = 0; y < data.mapSize.y; ++y) {
+			for (int x = 0; x < data.mapSize.x; ++x) {
+				int skinNr = layer.second[y * data.mapSize.x + x];
+				if (skinNr != 0) {
+					MapDynamicTileBean bean;
+					bean.id = id;
+					bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+					bean.skinNr = skinNr;
+					bean.spawnPosition = y * data.mapSize.x + x;
+					data.dynamicTiles.push_back(bean);
+				}
+			}
 		}
 	}
 

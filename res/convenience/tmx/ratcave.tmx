@@ -10,8 +10,8 @@
  <tileset firstgid="1" name="tileset_level_ratcave" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529">
   <image source="../tilesets/tileset_level_ratcave.png" width="1200" height="1200"/>
  </tileset>
- <tileset firstgid="530" name="tileset_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
-  <image source="../tilesets/tileset_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <tileset firstgid="630" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="3">
   <image source="../tilesets/tileset_enemies.png" width="156" height="52"/>

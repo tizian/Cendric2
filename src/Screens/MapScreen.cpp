@@ -50,6 +50,7 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 			m_isOnLevelEntry = (bean != nullptr);
 			updateObjects(GameObjectType::_MainCharacter, frameTime);
 			updateObjects(GameObjectType::_NPC, frameTime);
+			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Light, frameTime);
 			updateTooltipText(frameTime);
 			deleteDisposedObjects();
@@ -105,6 +106,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render map background etc. to window							(Normal map background rendered)
 	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, focus);
+	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_NPC, renderTarget);
 	renderObjects(GameObjectType::_MainCharacter, renderTarget);
 	m_currentMap.drawLightedForeground(renderTarget, sf::RenderStates::Default, focus);
