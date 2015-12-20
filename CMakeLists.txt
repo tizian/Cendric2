@@ -32,9 +32,17 @@ file(GLOB_RECURSE Cendric_FILES
 	"${PROJECT_SOURCE_DIR}/src/*.cpp"
 	"${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
 	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
+	"${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
 	"${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
 )
 
+file(GLOB_RECURSE SQLiteShell_FILES
+	"${PROJECT_SOURCE_DIR}/ext/sqlite/*.c"
+	"${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
+)
+
 add_executable(Cendric2 ${Cendric_FILES})
+
+add_executable(SQLiteShell ${SQLiteShell_FILES})
 
 target_link_libraries(Cendric2 sfml-system sfml-window sfml-graphics sfml-audio)
