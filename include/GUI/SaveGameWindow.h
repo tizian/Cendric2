@@ -25,7 +25,7 @@ public:
 	bool isClicked();
 	bool isSelected() const;
 	const std::string& getFilename() const;
-	const std::string getSaveName() const;
+	const std::wstring getSaveName() const;
 
 private:
 	bool m_isSelected = false;

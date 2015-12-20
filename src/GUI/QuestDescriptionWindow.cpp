@@ -143,7 +143,7 @@ void QuestDescriptionWindow::setPosition(const sf::Vector2f& position) {
 
 	pos.y += GUIConstants::TEXT_OFFSET + m_descriptionText.getLocalBounds().height;
 
-	if (!m_stateText.getString().isEmpty()) {
+	if (!m_stateText.getString().empty()) {
 		m_stateText.setPosition(pos.x, pos.y);
 		pos.y += GUIConstants::TEXT_OFFSET + m_stateText.getLocalBounds().height;
 	}

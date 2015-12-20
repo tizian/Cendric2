@@ -75,7 +75,7 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 	target.append(std::to_string(progress) + "/" + std::to_string(goal));
 
 	// identation
-	int spacesToAdd = (int)(questName.getString().getSize() - target.size()) / 2;
+	int spacesToAdd = (int)(questName.getString().size() - target.size()) / 2;
 	for (int i = 0; i < spacesToAdd; i++) {
 		target.append(" ");
 	}

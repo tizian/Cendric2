@@ -7,11 +7,11 @@
 class BitmapText : public sf::Drawable, public::sf::Transformable {
 public:
 	BitmapText();
-	BitmapText(const sf::String &string, const BitmapFont &font);
-	BitmapText(const sf::String &string);
+	BitmapText(const std::string& string, const BitmapFont &font);
+	BitmapText(const std::string& string);
 
-	void setString(const sf::String &string);
-	const sf::String &getString() const;
+	void setString(const std::string& string);
+	const std::wstring& getString() const;
 
 	void setFont(const BitmapFont &font);
 	const BitmapFont *getFont() const;
@@ -32,7 +32,7 @@ private:
 	void init();	// Set vertexArray data
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-	sf::String			m_string;
+	std::wstring		m_string;
 	const BitmapFont   *m_font = nullptr;
 	int					m_characterSize;
 	float				m_lineSpacing;

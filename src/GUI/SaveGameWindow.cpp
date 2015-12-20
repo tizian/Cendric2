@@ -200,7 +200,8 @@ std::string SaveGameWindow::getChosenSaveName() const {
 	if (m_entries.empty()) {
 		return "";
 	}
-	return m_entries[m_chosenEntry].getSaveName();
+	std::wstring str = m_entries[m_chosenEntry].getSaveName();
+	return std::string(str.begin(), str.end());
 }
 
 void SaveGameWindow::scrollUp() {
@@ -268,7 +269,7 @@ const std::string& SaveGameEntry::getFilename() const {
 	return m_filename;
 }
 
-const std::string SaveGameEntry::getSaveName() const {
+const std::wstring SaveGameEntry::getSaveName() const {
 	return m_name.getString();
 }
 

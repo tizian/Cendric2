@@ -11,10 +11,10 @@ const int CHAR_SIZE_DIALOGUE = 12;
 DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::LARGE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
 	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
-	m_speakerText = new BitmapText(L"");
+	m_speakerText = new BitmapText("");
 	m_speakerText->setCharacterSize(CHAR_SIZE_SPEAKER);
 	m_speakerText->setColor(CENDRIC_COLOR_LIGHT_PURPLE);
-	m_dialogueText = new BitmapText(L"");
+	m_dialogueText = new BitmapText("");
 	m_dialogueText->setCharacterSize(CHAR_SIZE_DIALOGUE);
 	m_dialogueText->setColor(sf::Color::White);
 	setPosition(getPosition());
