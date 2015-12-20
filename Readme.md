@@ -40,6 +40,7 @@ cmake ..
 ## Used Libraries
 
 * [SFML](http://www.sfml-dev.org/) : Window creation, rendering and sound
+* [SQLite](https://www.sqlite.org/) : Database for translations and items
 * [Lua](http://www.lua.org/work/) and [LuaBridge](https://github.com/vinniefalco/LuaBridge) : Scripting
 * [TinyXML 2](http://www.grinninglizard.com/tinyxml2/index.html) : XML parsing
 
