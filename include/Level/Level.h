@@ -24,14 +24,14 @@ public:
 	void loadForRenderTexture(Screen* screen);
 	// loads enemies and level items for the level. must be called after a screen already has a main char
 	void loadAfterMainChar(Screen* screen);
-	// updates the level camera
-	void updateCamera(const sf::Time& frameTime);
 	// draws the level. Background layers, background tilemap
 	void drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
 	// draws the level. Lighted foreground tilemap
 	void drawLightedForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
 	// draws the level. Foreground tilemap
 	void drawForeground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const;
+	// updates all tilemaps and the level camera
+	void update(const sf::Time& frameTime);
 	// deletes the resources
 	void dispose();
 

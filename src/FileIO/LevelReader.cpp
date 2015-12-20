@@ -1,10 +1,8 @@
 #include "FileIO/LevelReader.h"
 
-#ifndef XMLCheckResult
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("LevelReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
-#endif
 
-LevelReader::LevelReader() {
+LevelReader::LevelReader() : TMXReader() {
 	initMaps();
 }
 
@@ -21,6 +19,10 @@ void LevelReader::initMaps() {
 	});
 }
 
+void LevelReader::logError(const std::string& error) const {
+	g_logger->logError("LevelReader", "Error in level data : " + error);
+}
+
 bool LevelReader::readLevel(const std::string& fileName, LevelData& data) {
 	tinyxml2::XMLDocument xmlDoc;
 	tinyxml2::XMLError result = xmlDoc.LoadFile(fileName.c_str());
@@ -28,80 +30,18 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data) {
 
 	tinyxml2::XMLElement* map = xmlDoc.FirstChildElement("map");
 	if (map == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no map node found.");
+		logError("XML file could not be read, no map node found.");
 		return false;
 	}
 
-	if (!readLevelProperties(map, data)) return false;
+	if (!readMapProperties(map, data)) return false;
 	if (!readFirstGridIDs(map, data)) return false;
+	if (!readAnimatedTiles(map, data)) return false;
 	if (!readLayers(map, data)) return false;
 	if (!readObjects(map, data)) return false;
 
 	updateData(data);
 	if (!checkData(data)) return false;
-	return true;
-}
-
-bool LevelReader::readLights(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
-
-	while (object != nullptr) {
-		int x;
-		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int width;
-		result = object->QueryIntAttribute("width", &width);
-		XMLCheckResult(result);
-
-		int height;
-		result = object->QueryIntAttribute("height", &height);
-		XMLCheckResult(result);
-
-		LightBean bean;
-		bean.radius.x = width / 2.f;
-		bean.radius.y = height / 2.f;
-		bean.center.x = x + bean.radius.x;
-		bean.center.y = y + bean.radius.y;
-
-		// brightness for light bean
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-		if (properties != nullptr) {
-			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-			while (_property != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = _property->Attribute("name");
-				if (textAttr == nullptr) {
-					g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found for light bean.");
-					return false;
-				}
-				std::string name = textAttr;
-
-				if (name.compare("brightness") == 0) {
-					float brightness;
-					result = _property->QueryFloatAttribute("value", &brightness);
-					XMLCheckResult(result);
-					if (brightness < 0.f || brightness > 1.f) {
-						brightness = 1.f;
-						g_logger->logWarning("LevelReader", "Brightness must be between 0 and 1. It was " + std::to_string(brightness) + ", it is now 1");
-					}
-					bean.brightness = brightness;
-				}
-				else {
-					g_logger->logError("LevelReader", "XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for light bean.");
-					return false;
-				}
-				_property = _property->NextSiblingElement("property");
-			}
-		}
-
-		data.lights.push_back(bean);
-		object = object->NextSiblingElement("object");
-	}
 	return true;
 }
 
@@ -134,7 +74,7 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 		// map spawn point for level exit
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties attribute found for level exit.");
+			logError("XML file could not be read, no objectgroup->object->properties attribute found for level exit.");
 			return false;
 		}
 
@@ -143,7 +83,7 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 			const char* textAttr = nullptr;
 			textAttr = _property->Attribute("name");
 			if (textAttr == nullptr) {
-				g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found for level exit.");
+				logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found for level exit.");
 				return false;
 			}
 			std::string name = textAttr;
@@ -152,7 +92,7 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 				textAttr = nullptr;
 				textAttr = _property->Attribute("value");
 				if (textAttr == nullptr) {
-					g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found for level exit map id.");
+					logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found for level exit map id.");
 					return false;
 				}
 				bean.mapID = textAttr;
@@ -168,7 +108,7 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 				bean.mapSpawnPoint.y = static_cast<float>(y);
 			}
 			else {
-				g_logger->logError("LevelReader", "XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
+				logError("XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
 				return false;
 			}
 			_property = _property->NextSiblingElement("property");
@@ -215,7 +155,7 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 				const char* textAttr = nullptr;
 				textAttr = item->Attribute("name");
 				if (textAttr == nullptr) {
-					g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
 					return false;
 				}
 				std::string itemText = textAttr;
@@ -229,7 +169,7 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 				}
 				else if (itemText.compare("strength") == 0 || itemText.compare("Strength") == 0) {
 					if (amount < 0 || amount > 4) {
-						g_logger->logError("LevelReader", "XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 4).");
+						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 4).");
 						return false;
 					}
 					data.chestStrength.insert({ id, amount });
@@ -270,7 +210,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 
 		gid = (gid == 0) ? gid : gid - m_firstGidEnemies + 1;
 		if (m_enemyMap.find(gid) == m_enemyMap.end()) {
-			g_logger->logError("LevelReader", "Enemy ID not recognized: " + std::to_string(gid));
+			logError("Enemy ID not recognized: " + std::to_string(gid));
 			return false;
 		}
 
@@ -287,7 +227,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				const char* textAttr = nullptr;
 				textAttr = item->Attribute("name");
 				if (textAttr == nullptr) {
-					g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
 					return false;
 				}
 				std::string itemText = textAttr;
@@ -295,7 +235,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				if (itemText.compare("questtarget") == 0) {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {
-						g_logger->logError("LevelReader", "XML file could not be read, quest target value attribute is void.");
+						logError("XML file could not be read, quest target value attribute is void.");
 						return false;
 					}
 					std::string questtargetText = textAttr;
@@ -334,7 +274,7 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 		textAttr = nullptr;
 		textAttr = objectgroup->Attribute("name");
 		if (textAttr == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no objectgroup->name attribute found.");
+			logError("XML file could not be read, no objectgroup->name attribute found.");
 			return false;
 		}
 
@@ -374,7 +314,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 		id = (id == 0) ? -1 : id - m_firstGidItems;
 		layerData.erase(0, pos + 1);
 		if (m_levelItemMap.find(id) == m_levelItemMap.end()) {
-			g_logger->logError("LevelReader", "Level item ID not recognized: " + std::to_string(id));
+			logError("Level item ID not recognized: " + std::to_string(id));
 			return false;
 		}
 		levelItem = m_levelItemMap.at(id);
@@ -383,7 +323,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 	id = std::stoi(layerData);
 	id = (id == 0) ? -1 : id - m_firstGidItems;
 	if (m_levelItemMap.find(id) == m_levelItemMap.end()) {
-		g_logger->logError("LevelReader", "Level item ID not recognized: " + std::to_string(id));
+		logError("Level item ID not recognized: " + std::to_string(id));
 		return false;
 	}
 	levelItem = m_levelItemMap.at(id);
@@ -401,7 +341,7 @@ bool LevelReader::readDynamicTileLayer(LevelDynamicTileID id, const std::string&
 	while ((pos = layerData.find(",")) != std::string::npos) {
 		skinNr = std::stoi(layerData.substr(0, pos));
 		if (skinNr != 0 && ((skinNr - offset) % DYNAMIC_TILE_COUNT) != 0) {
-			g_logger->logError("LevelReader", "Dynamic Tile with ID: " + std::to_string(skinNr) + " is not allowed on this layer!");
+			logError("Dynamic Tile with ID: " + std::to_string(skinNr) + " is not allowed on this layer!");
 			return false;
 		}
 		dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
@@ -460,7 +400,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 			bean.dependentTiles.push_back(switchTile);
 		}
 		else {
-			g_logger->logError("LevelReader", "Wrong tile id found on a lever layer, id=" + std::to_string(skinNr));
+			logError("Wrong tile id found on a lever layer, id=" + std::to_string(skinNr));
 			return false;
 		}
 
@@ -480,67 +420,6 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 	return true;
 }
 
-
-bool LevelReader::readCollidableLayer(const std::string& layer, LevelData& data) const {
-	std::string layerData = layer;
-
-	size_t pos = 0;
-	std::vector<bool> collidableLayer;
-	while ((pos = layerData.find(",")) != std::string::npos) {
-		collidableLayer.push_back(std::stoi(layerData.substr(0, pos)) != 0);
-		layerData.erase(0, pos + 1);
-	}
-	collidableLayer.push_back(std::stoi(layerData) != 0);
-
-	data.collidableTiles = collidableLayer;
-	return true;
-}
-
-bool LevelReader::readForegroundTileLayer(const std::string& layer, LevelData& data) const {
-	std::string layerData = layer;
-
-	size_t pos = 0;
-	std::vector<int> foregroundLayer;
-	while ((pos = layerData.find(",")) != std::string::npos) {
-		foregroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
-		layerData.erase(0, pos + 1);
-	}
-	foregroundLayer.push_back(std::stoi(layerData));
-
-	data.foregroundTileLayers.push_back(foregroundLayer);
-	return true;
-}
-
-bool LevelReader::readLightedForegroundTileLayer(const std::string& layer, LevelData& data) const {
-	std::string layerData = layer;
-
-	size_t pos = 0;
-	std::vector<int> foregroundLayer;
-	while ((pos = layerData.find(",")) != std::string::npos) {
-		foregroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
-		layerData.erase(0, pos + 1);
-	}
-	foregroundLayer.push_back(std::stoi(layerData));
-
-	data.lightedForegroundTileLayers.push_back(foregroundLayer);
-	return true;
-}
-
-bool LevelReader::readBackgroundTileLayer(const std::string& layer, LevelData& data) const {
-	std::string layerData = layer;
-
-	size_t pos = 0;
-	std::vector<int> backgroundLayer;
-	while ((pos = layerData.find(",")) != std::string::npos) {
-		backgroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
-		layerData.erase(0, pos + 1);
-	}
-	backgroundLayer.push_back(std::stoi(layerData));
-
-	data.backgroundTileLayers.push_back(backgroundLayer);
-	return true;
-}
-
 bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 	tinyxml2::XMLElement* layer = map->FirstChildElement("layer");
 
@@ -549,7 +428,7 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		textAttr = nullptr;
 		textAttr = layer->Attribute("name");
 		if (textAttr == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no layer->name attribute found.");
+			logError("XML file could not be read, no layer->name attribute found.");
 			return false;
 		}
 
@@ -557,7 +436,7 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 
 		tinyxml2::XMLElement* layerDataNode = layer->FirstChildElement("data");
 		if (layerDataNode == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no layer->data found.");
+			logError("XML file could not be read, no layer->data found.");
 			return false;
 		}
 		std::string layerData = layerDataNode->GetText();
@@ -626,29 +505,29 @@ bool LevelReader::readItemIDs(tinyxml2::XMLElement* _tile) {
 
 		tinyxml2::XMLElement* properties = tile->FirstChildElement("properties");
 		if (properties == nullptr) {
-			g_logger->logError("LevelReader", "Could not read item tile properties, no tileset->tile->properties tag found.");
+			logError("Could not read item tile properties, no tileset->tile->properties tag found.");
 			return false;
 		}
 		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 		if (_property == nullptr) {
-			g_logger->logError("LevelReader", "Could not read item tile properties, no tileset->tile->properties->property tag found.");
+			logError("Could not read item tile properties, no tileset->tile->properties->property tag found.");
 			return false;
 		}
 		const char* textAttr = nullptr;
 		textAttr = _property->Attribute("name");
 		if (textAttr == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no tileset->tile->properties->property name attribute found.");
+			logError("XML file could not be read, no tileset->tile->properties->property name attribute found.");
 			return false;
 		}
 		std::string name = textAttr;
 		if (name.compare("id") != 0) {
-			g_logger->logError("LevelReader", "XML file could not be read, wrong tile property (not \"id\").");
+			logError("XML file could not be read, wrong tile property (not \"id\").");
 			return false;
 		}
 		textAttr = nullptr;
 		textAttr = _property->Attribute("value");
 		if (textAttr == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no tileset->tile->properties->property value attribute found.");
+			logError("XML file could not be read, no tileset->tile->properties->property value attribute found.");
 			return false;
 		}
 
@@ -671,7 +550,7 @@ bool LevelReader::readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data) {
 		textAttr = nullptr;
 		textAttr = tileset->Attribute("name");
 		if (textAttr == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no tileset->name attribute found.");
+			logError("XML file could not be read, no tileset->name attribute found.");
 			return false;
 		}
 		std::string name = textAttr;
@@ -695,69 +574,20 @@ bool LevelReader::readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data) {
 	}
 
 	if (m_firstGidItems <= 0 || m_firstGidDynamicTiles <= 0 || m_firstGidEnemies <= 0) {
-		g_logger->logError("LevelReader", "Could not read firstgids, at least one of the required tilesets is missing.");
+		logError("Could not read firstgids, at least one of the required tilesets is missing.");
 		return false;
 	}
 	return true;
 }
 
-bool LevelReader::readLevelName(tinyxml2::XMLElement* _property, LevelData& data) const {
-	// we've found the property "name"
-	const char* textAttr = nullptr;
-	textAttr = _property->Attribute("value");
-	if (textAttr == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no value attribute found (map->properties->property->name=name).");
-		return false;
-	}
-	data.name = textAttr;
-	return true;
-}
-
-bool LevelReader::readDimming(tinyxml2::XMLElement* _property, LevelData& data) const {
-	// we've found the property "dimming"
-	float dimming = 0.f;
-	tinyxml2::XMLError result = _property->QueryFloatAttribute("value", &dimming);
-	XMLCheckResult(result);
-
-	if (dimming < 0.0f || dimming > 1.0f) {
-		g_logger->logError("LevelReader", "XML file could not be read, dimming value not allowed (only [0,1]).");
-		return false;
-	}
-	data.dimming = dimming;
-	return true;
-}
-
-
-bool LevelReader::readTilesetPath(tinyxml2::XMLElement* _property, LevelData& data) const {
-	// we've found the property "tilesetpath"
-	const char* textAttr = nullptr;
-	textAttr = _property->Attribute("value");
-	if (textAttr == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no value attribute found (map->properties->property->name=tilesetpath).");
-		return false;
-	}
-	data.tileSetPath = textAttr;
-	return true;
-}
-
-bool LevelReader::readMusicPath(tinyxml2::XMLElement* _property, LevelData& data) const {
-	// we've found the property "musicpath"
-	const char* textAttr = nullptr;
-	textAttr = _property->Attribute("value");
-	if (textAttr == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no value attribute found (map->properties->property->name=musicpath).");
-		return false;
-	}
-	data.musicPath = textAttr;
-	return true;
-}
-
-bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, LevelData& data) const {
+bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, TMXData& data_) const {
 	// we've found the property "backgroundlayers"
+	LevelData* data = static_cast<LevelData*>(&data_);
+	if (data == nullptr) return false;
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
 	if (textAttr == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no value attribute found (map->properties->property->name=backgroundlayer).");
+		logError("XML file could not be read, no value attribute found (map->properties->property->name=backgroundlayer).");
 		return false;
 	}
 	std::string backgroundLayerText = textAttr;
@@ -778,111 +608,14 @@ bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, LevelDat
 		}
 		BackgroundLayer layer;
 		layer.load(backgroundLayer, distance);
-		data.backgroundLayers.push_back(layer);
-	}
-
-	return true;
-}
-
-bool LevelReader::readLevelProperties(tinyxml2::XMLElement* map, LevelData& data) const {
-	// check if renderorder is correct
-	const char* textAttr = nullptr;
-	textAttr = map->Attribute("renderorder");
-	if (textAttr == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no renderorder attribute found.");
-		return false;
-	}
-	std::string renderorder = textAttr;
-	if (renderorder.compare("right-down") != 0) {
-		g_logger->logError("LevelReader", "XML file could not be read, renderorder is not \"right-down\".");
-		return false;
-	}
-
-	// check if orientation is correct
-	textAttr = nullptr;
-	textAttr = map->Attribute("orientation");
-	if (textAttr == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no orientation attribute found.");
-		return false;
-	}
-	std::string orientation = textAttr;
-	if (orientation.compare("orthogonal") != 0) {
-		g_logger->logError("LevelReader", "XML file could not be read, renderorder is not \"orthogonal\".");
-		return false;
-	}
-
-	// read map width and height
-	tinyxml2::XMLError result = map->QueryIntAttribute("width", &data.mapSize.x);
-	XMLCheckResult(result);
-	result = map->QueryIntAttribute("height", &data.mapSize.y);
-	XMLCheckResult(result);
-
-	// read tile size
-	result = map->QueryIntAttribute("tilewidth", &data.tileSize.x);
-	XMLCheckResult(result);
-	result = map->QueryIntAttribute("tileheight", &data.tileSize.y);
-	XMLCheckResult(result);
-
-	// read level properties
-	tinyxml2::XMLElement* properties = map->FirstChildElement("properties");
-	if (properties == nullptr) {
-		g_logger->logError("LevelReader", "XML file could not be read, no properties node found.");
-		return false;
-	}
-	tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-
-	while (_property != nullptr) {
-		textAttr = nullptr;
-		textAttr = _property->Attribute("name");
-		if (textAttr == nullptr) {
-			g_logger->logError("LevelReader", "XML file could not be read, no property->name attribute found.");
-			return false;
-		}
-		std::string name = textAttr;
-		if (name.compare("name") == 0) {
-			if (!readLevelName(_property, data)) return false;
-		}
-		else if (name.compare("backgroundlayers") == 0) {
-			if (!readBackgroundLayers(_property, data)) return false;
-		}
-		else if (name.compare("tilesetpath") == 0) {
-			if (!readTilesetPath(_property, data)) return false;
-		}
-		else if (name.compare("musicpath") == 0) {
-			if (!readMusicPath(_property, data)) return false;
-		}
-		else if (name.compare("dimming") == 0) {
-			if (!readDimming(_property, data)) return false;
-		}
-		else {
-			g_logger->logError("LevelReader", "XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
-			return false;
-		}
-
-		_property = _property->NextSiblingElement("property");
+		data->backgroundLayers.push_back(layer);
 	}
 
 	return true;
 }
 
 void LevelReader::updateData(LevelData& data)  const {
-	// calculate collidable tiles
-	int x = 0;
-	int y = 0;
-	std::vector<bool> xLine;
-
-	for (std::vector<bool>::iterator it = data.collidableTiles.begin(); it != data.collidableTiles.end(); ++it) {
-		xLine.push_back((*it));
-		if (x + 1 >= data.mapSize.x) {
-			x = 0;
-			y++;
-			data.collidableTilePositions.push_back(xLine); // push back creates a copy of that vector.
-			xLine.clear();
-		}
-		else {
-			x++;
-		}
-	}
+	TMXReader::updateData(data);
 
 	// calculate dynamic tiles
 	int tileWidth = data.tileSize.x;
@@ -953,104 +686,42 @@ void LevelReader::updateData(LevelData& data)  const {
 			}
 		}
 	}
-
-	// calculate level rect
-	data.levelRect.left = 0;
-	data.levelRect.top = 0;
-	data.levelRect.height = static_cast<float>(data.tileSize.y * data.mapSize.y);
-	data.levelRect.width = static_cast<float>(data.tileSize.x * data.mapSize.x);
 }
 
 bool LevelReader::checkData(LevelData& data) const {
-	if (data.mapSize.x == 0 || data.mapSize.y == 0) {
-		g_logger->logError("LevelReader", "Error in level data : map size not set / invalid");
-		return false;
-	}
-	if (data.tileSize.x == 0 || data.tileSize.y == 0) {
-		g_logger->logError("LevelReader", "Error in level data: tile size not set / invalid");
-		return false;
-	}
-	if (data.name.empty()) {
-		g_logger->logError("LevelReader", "Error in level data : level name not set / empty");
-		return false;
-	}
-	if (data.tileSetPath.empty()) {
-		g_logger->logError("LevelReader", "Error in level data : tileset-path not set / empty");
-		return false;
-	}
-	if (data.backgroundTileLayers.empty()) {
-		g_logger->logInfo("LevelReader", "No background tile layers set");
-	}
-	for (int i = 0; i < data.backgroundTileLayers.size(); i++) {
-		if (data.backgroundTileLayers[i].empty()) {
-			g_logger->logError("LevelReader", "Error in level data : background tile layer " + std::to_string(i) + std::string(" empty"));
-			return false;
-		}
-		if (data.backgroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y) {
-			g_logger->logError("LevelReader", "Error in level data : background tile layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
-			return false;
-		}
-	}
-	for (int i = 0; i < data.foregroundTileLayers.size(); i++) {
-		if (data.foregroundTileLayers[i].empty()) {
-			g_logger->logError("LevelReader", "Error in level data : foreground tile layer " + std::to_string(i) + std::string(" empty"));
-			return false;
-		}
-		if (data.foregroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y) {
-			g_logger->logError("LevelReader", "Error in level data : foreground tile layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
-			return false;
-		}
-	}
-	for (int i = 0; i < data.lightedForegroundTileLayers.size(); i++) {
-		if (data.lightedForegroundTileLayers[i].empty()) {
-			g_logger->logError("LevelReader", "Error in level data : lighted foreground tile layer " + std::to_string(i) + std::string(" empty"));
-			return false;
-		}
-		if (data.lightedForegroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y) {
-			g_logger->logError("LevelReader", "Error in level data : lighted foreground tile layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
-			return false;
-		}
-	}
+	if (!TMXReader::checkData(data)) return false;
 	for (int i = 0; i < data.dynamicTileLayers.size(); i++) {
 		if (data.dynamicTileLayers[i].first == LevelDynamicTileID::VOID) {
-			g_logger->logError("LevelReader", "Error in level data : level dynamic tile ID not recognized");
+			logError("level dynamic tile ID not recognized");
 			return false;
 		}
 		if (data.dynamicTileLayers[i].second.empty() || data.dynamicTileLayers[i].second.size() != data.mapSize.x * data.mapSize.y) {
-			g_logger->logError("LevelReader", "Error in level data : dynamic tile layer has not correct size (map size)");
+			logError("dynamic tile layer has not correct size (map size)");
 			return false;
 		}
 	}
 	for (auto& it : data.levelExits) {
 		if (it.levelExitRect.height <= 0.f || it.levelExitRect.width <= 0.f) {
-			g_logger->logError("LevelReader", "Error in level data : level exit rectangle has volume negative or null.");
+			logError("level exit rectangle has volume negative or null.");
 			return false;
 		}
 		if (it.mapID.empty()) {
-			g_logger->logError("LevelReader", "Error in level data : level exit map id is empty.");
+			logError("level exit map id is empty.");
 			return false;
 		}
 		if (it.mapSpawnPoint.x < 0.f || it.mapSpawnPoint.y < 0.f) {
-			g_logger->logError("LevelReader", "Error in level data : level exit map spawn point is negative.");
+			logError("level exit map spawn point is negative.");
 			return false;
 		}
 	}
 	for (auto& it : data.enemyQuesttarget) {
 		if (it.second.first.empty() || it.second.second.empty()) {
-			g_logger->logError("LevelReader", "Error in level data : enemy quest target value strings (quest id and name) must not be empty.");
+			logError("enemy quest target value strings (quest id and name) must not be empty.");
 			return false;
 		}
 	}
 	if (data.levelItems.size() != data.mapSize.x * data.mapSize.y) {
-		g_logger->logError("LevelReader", "Error in level data : level item layer has not correct size (map size)");
-		return false;
-	}
-	if (data.collidableTiles.empty()) {
-		g_logger->logError("LevelReader", "Error in level data : collidable layer is empty (can be all zeros but must be set)");
-		return false;
-	}
-	if (data.collidableTiles.size() != data.mapSize.x * data.mapSize.y) {
-		g_logger->logError("LevelReader", "Error in level data : collidable layer has not correct size (map size)");
+		logError("level item layer has not correct size (map size)");
 		return false;
 	}
 

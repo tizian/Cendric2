@@ -2,13 +2,21 @@
 
 using namespace std;
 
-bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const vector<vector<int> >& layers, int width, int height) {
+bool TileMap::load(const TMXData& data, const std::vector<std::vector<int> >& layers) {
 	if (layers.empty()) return false;
-	m_tilesetPath = filepath;
-	m_tileset = g_resourceManager->getTexture(filepath);
-	m_tilesize = sf::Vector2i(tileSize.x, tileSize.y);
-	float tileWidth = static_cast<float>(tileSize.x);
-	float tileHeight = static_cast<float>(tileSize.y);
+	m_tilesetPath = data.tileSetPath;
+	m_tileset = g_resourceManager->getTexture(data.tileSetPath);
+	m_tilesize = sf::Vector2i(data.tileSize.x, data.tileSize.y);
+	float tileWidth = static_cast<float>(data.tileSize.x);
+	float tileHeight = static_cast<float>(data.tileSize.y);
+	int width = static_cast<int>(data.mapRect.width / tileWidth);
+	int height = static_cast<int>(data.mapRect.height / tileHeight);
+
+	// animated tileIDs
+	std::set<int> animatedTileIDs;
+	for (auto animatedTile : data.animatedTiles) {
+		animatedTileIDs.insert(animatedTile.tileID);
+	}
 
 	m_layers.clear();
 
@@ -18,6 +26,8 @@ bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const v
 		layer.setPrimitiveType(sf::Quads);
 		layer.resize(width * height * 4);
 
+		m_animatedTiles.insert({ count, std::vector<AnimatedTile>() });
+
 		for (int i = 0; i < width; ++i) {
 			for (int j = 0; j < height; ++j) {
 				int tileNumber = layers[count][i + j * width];
@@ -26,12 +36,16 @@ bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const v
 					// there is no tile
 					continue;
 				}
+				if (animatedTileIDs.find(tileNumber) != animatedTileIDs.end()) {
+					readAnimatedTile(tileNumber, count, i, j, data);
+					continue;
+				}
 
-				// we start with tiles at 1 in the .dric format, but need 0 here
+				// we start with tiles at 1 in the .tmx format, but need 0 here
 				tileNumber--;
 
-				int tu = tileNumber % (m_tileset->getSize().x / (tileSize.x + 2 * TILE_BORDER));
-				int tv = tileNumber / (m_tileset->getSize().x / (tileSize.x + 2 * TILE_BORDER));
+				int tu = tileNumber % (m_tileset->getSize().x / (data.tileSize.x + 2 * TILE_BORDER));
+				int tv = tileNumber / (m_tileset->getSize().x / (data.tileSize.x + 2 * TILE_BORDER));
 
 				sf::Vertex *quad = &layer[(i + j * width) * 4];
 
@@ -50,7 +64,48 @@ bool TileMap::load(const string &filepath, const sf::Vector2i& tileSize, const v
 		m_layers.push_back(layer);
 	}
 
+	for (int i = 0; i < m_layers.size(); i++) {
+		for (auto& tile : m_animatedTiles.at(i)) {
+			tile.setState(GameObjectState::Idle);
+		}
+	}
 	return true;
+}
+
+void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const TMXData& data) {
+	for (auto& tile : data.animatedTiles) {
+		if (tile.tileID == tileNumber) {
+
+			AnimatedTile animatedTile;
+			
+			Animation idleAnimation(tile.frames.at(0).second);
+			idleAnimation.setSpriteSheet(m_tileset);
+
+			for (auto& frame : tile.frames) {
+				int frameTileID = frame.first - 1;
+				int tu = frameTileID % (m_tileset->getSize().x / (data.tileSize.x + 2 * TILE_BORDER));
+				int tv = frameTileID / (m_tileset->getSize().x / (data.tileSize.x + 2 * TILE_BORDER));
+
+				idleAnimation.addFrame(sf::IntRect(
+					tu * (data.tileSize.x + 2 * TILE_BORDER) + TILE_BORDER, 
+					tv * (data.tileSize.y + 2 * TILE_BORDER) + TILE_BORDER, 
+					data.tileSize.x, 
+					data.tileSize.y));
+			}
+			
+			animatedTile.addAnimation(GameObjectState::Idle, idleAnimation);
+
+			sf::Vector2f position(i * data.tileSize.x, j * data.tileSize.y);
+
+			// initial values
+			animatedTile.playCurrentAnimation(true);
+			animatedTile.setPosition(position);
+
+			m_animatedTiles[layerNr].push_back(animatedTile);
+			
+			break;
+		}
+	}
 }
 
 void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -58,6 +113,17 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	states.texture = m_tileset;
 	for (int i = 0; i < m_layers.size(); i++) {
 		target.draw(m_layers[i], states);
+		for (auto& tile : m_animatedTiles.at(i)) {
+			target.draw(tile.getAnimatedSprite());
+		}
+	}
+}
+
+void TileMap::update(const sf::Time& frameTime) {
+	for (auto& it : m_animatedTiles) {
+		for (auto& tile : it.second) {
+			tile.update(frameTime);
+		}
 	}
 }
 
@@ -68,3 +134,4 @@ void TileMap::dispose() {
 const sf::Vector2i& TileMap::getTilesize() const {
 	return m_tilesize;
 }
+

@@ -18,5 +18,6 @@ enum GameObjectType {
 	_NPC,
 	_Interface,
 	_Light,
+	_AnimatedTile,
 	_MAX
 };

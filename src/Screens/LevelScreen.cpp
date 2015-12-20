@@ -163,7 +163,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_Spell, frameTime);
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Light, frameTime);
-			m_currentLevel.updateCamera(frameTime);
+			m_currentLevel.update(frameTime);
 			deleteDisposedObjects();
 			return this;
 		}

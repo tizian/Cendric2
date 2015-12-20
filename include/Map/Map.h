@@ -25,6 +25,8 @@ public:
 	void drawLightedForeground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
 	// draws the map. foreground tilelayers
 	void drawForeground(sf::RenderTarget& target, const sf::RenderStates states, const sf::Vector2f& center) const;
+	// updates all tilemaps
+	void update(const sf::Time& frameTime);
 	// deletes the resources
 	void dispose();
 

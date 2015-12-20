@@ -61,7 +61,7 @@ public:
 	bool isFlippedY() const;
 
 private:
-	const Animation* m_animation;
+	const Animation* m_animation = nullptr;
 	sf::Time m_frameTime;
 	sf::Time m_currentTime;
 	std::size_t m_currentFrame;

@@ -52,6 +52,7 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_NPC, frameTime);
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Light, frameTime);
+			m_currentMap.update(frameTime);
 			updateTooltipText(frameTime);
 			deleteDisposedObjects();
 			return this;

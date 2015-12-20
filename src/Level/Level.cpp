@@ -39,9 +39,9 @@ bool Level::load(const std::string& id) {
 
 	m_levelData.id = id;
 	// load level
-	m_backgroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.backgroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
-	m_lightedForegroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.lightedForegroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
-	m_foregroundTileMap.load(m_levelData.tileSetPath, m_levelData.tileSize, m_levelData.foregroundTileLayers, m_levelData.mapSize.x, m_levelData.mapSize.y);
+	m_backgroundTileMap.load(m_levelData, m_levelData.backgroundTileLayers);
+	m_lightedForegroundTileMap.load(m_levelData, m_levelData.lightedForegroundTileLayers);
+	m_foregroundTileMap.load(m_levelData, m_levelData.foregroundTileLayers);
 
 	tileWidth = static_cast<float>(m_levelData.tileSize.x);
 	tileHeight = static_cast<float>(m_levelData.tileSize.y);
@@ -54,10 +54,6 @@ void Level::loadForRenderTexture(Screen* screen) {
 	loader.loadDynamicTiles(m_levelData, screen, this);
 	loader.loadLights(m_levelData, screen);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
-}
-
-void Level::updateCamera(const sf::Time& frameTime) {
-	m_camera->update(frameTime);
 }
 
 void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& states, const sf::Vector2f& center) const {
@@ -75,9 +71,9 @@ void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& sta
 		else {
 			float d = m_levelData.backgroundLayers[i].getDistance();
 			float ominoeseOffsetX = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
-			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffsetX;
+			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.mapRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffsetX;
 			float ominoeseOffsetY = (WINDOW_HEIGHT / 2) - (1 / d) * (WINDOW_HEIGHT / 2);
-			float viewCenterY = (std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.levelRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y)) / d) + ominoeseOffsetY;
+			float viewCenterY = (std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.mapRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y)) / d) + ominoeseOffsetY;
 			view.setCenter(viewCenterX, viewCenterY);
 			target.setView(view);
 		}
@@ -85,8 +81,8 @@ void Level::drawBackground(sf::RenderTarget &target, const sf::RenderStates& sta
 	}
 
 	// tilemap
-	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.levelRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x));
-	float camCenterY = std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.levelRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y));
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.mapRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x));
+	float camCenterY = std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.mapRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y));
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
 	m_backgroundTileMap.draw(target, states);
@@ -101,12 +97,19 @@ void Level::drawLightedForeground(sf::RenderTarget &target, const sf::RenderStat
 }
 
 const sf::FloatRect& Level::getLevelRect() const {
-	return m_levelData.levelRect;
+	return m_levelData.mapRect;
+}
+
+void Level::update(const sf::Time& frameTime) {
+	m_backgroundTileMap.update(frameTime);
+	m_foregroundTileMap.update(frameTime);
+	m_lightedForegroundTileMap.update(frameTime);
+	m_camera->update(frameTime);
 }
 
 bool Level::collidesX(const sf::FloatRect& boundingBox, const LevelDynamicTile* exclude) const {
 	// check for collision with level rect
-	if (boundingBox.left < m_levelData.levelRect.left || boundingBox.left + boundingBox.width > m_levelData.levelRect.left + m_levelData.levelRect.width) {
+	if (boundingBox.left < m_levelData.mapRect.left || boundingBox.left + boundingBox.width > m_levelData.mapRect.left + m_levelData.mapRect.width) {
 		return true;
 	}
 
@@ -156,7 +159,7 @@ bool Level::collidesX(const sf::FloatRect& boundingBox, const LevelDynamicTile* 
 
 bool Level::collidesLevelBottom(const sf::FloatRect& boundingBox) const {
 	// check for collision with level rect
-	if (boundingBox.top + boundingBox.height > m_levelData.levelRect.top + m_levelData.levelRect.height) {
+	if (boundingBox.top + boundingBox.height > m_levelData.mapRect.top + m_levelData.mapRect.height) {
 		return true;
 	}
 	return false;
@@ -164,7 +167,7 @@ bool Level::collidesLevelBottom(const sf::FloatRect& boundingBox) const {
 
 bool Level::collidesLevelCeiling(const sf::FloatRect& boundingBox) const {
 	// check for collision with level rect
-	if (boundingBox.top < m_levelData.levelRect.top) {
+	if (boundingBox.top < m_levelData.mapRect.top) {
 		return true;
 	}
 	return false;
@@ -206,7 +209,7 @@ bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight
 
 bool Level::collidesY(const sf::FloatRect& boundingBox, const LevelDynamicTile* exclude) const {
 	// check for collision with level rect
-	if (boundingBox.top < m_levelData.levelRect.top || boundingBox.top + boundingBox.height > m_levelData.levelRect.top + m_levelData.levelRect.height) {
+	if (boundingBox.top < m_levelData.mapRect.top || boundingBox.top + boundingBox.height > m_levelData.mapRect.top + m_levelData.mapRect.height) {
 		return true;
 	}
 
@@ -264,8 +267,8 @@ bool Level::collidesX(const sf::FloatRect& boundingBox) const {
 
 float Level::getGround(const sf::FloatRect& boundingBox) const {
 	// check if ground is level ground
-	if (boundingBox.top + boundingBox.height > m_levelData.levelRect.top + m_levelData.levelRect.height) {
-		return (m_levelData.levelRect.top + m_levelData.levelRect.height) - boundingBox.height;
+	if (boundingBox.top + boundingBox.height > m_levelData.mapRect.top + m_levelData.mapRect.height) {
+		return (m_levelData.mapRect.top + m_levelData.mapRect.height) - boundingBox.height;
 	}
 
 	// then, a collidable tile in the grid must be the ground
@@ -277,8 +280,8 @@ float Level::getGround(const sf::FloatRect& boundingBox) const {
 
 float Level::getCeiling(const sf::FloatRect& boundingBox) const {
 	// check if ceiling is level ceiling
-	if (boundingBox.top < m_levelData.levelRect.top) {
-		return m_levelData.levelRect.top;
+	if (boundingBox.top < m_levelData.mapRect.top) {
+		return m_levelData.mapRect.top;
 	}
 
 	// then, a collidable tile in the grid must be the ceiling

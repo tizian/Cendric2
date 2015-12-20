@@ -19,9 +19,9 @@ bool Map::load(const std::string& id) {
 	}
 
 	// load map
-	m_backgroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.backgroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
-	m_lightedForegroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.lightedForegroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
-	m_foregroundTileMap.load(m_mapData.tileSetPath, m_mapData.tileSize, m_mapData.foregroundLayers, m_mapData.mapSize.x, m_mapData.mapSize.y);
+	m_backgroundTileMap.load(m_mapData, m_mapData.backgroundTileLayers);
+	m_lightedForegroundTileMap.load(m_mapData, m_mapData.lightedForegroundTileLayers);
+	m_foregroundTileMap.load(m_mapData, m_mapData.foregroundTileLayers);
 	m_id = id;
 	return true;
 }
@@ -48,6 +48,12 @@ void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
 	map.draw(target, states);
+}
+
+void Map::update(const sf::Time& frameTime) {
+	m_backgroundTileMap.update(frameTime);
+	m_foregroundTileMap.update(frameTime);
+	m_lightedForegroundTileMap.update(frameTime);
 }
 
 void Map::drawBackground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
@@ -94,7 +100,7 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const {
 	// check left side
 	int x = topLeft.x;
 	for (int y = topLeft.y; y <= bottomLeft.y; y++) {
-		if (m_mapData.collidableTileRects[y][x]) {
+		if (m_mapData.collidableTilePositions[y][x]) {
 			return true;
 		}
 	}
@@ -102,7 +108,7 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const {
 	// check right side
 	x = topRight.x;
 	for (int y = topRight.y; y <= bottomRight.y; y++) {
-		if (m_mapData.collidableTileRects[y][x]) {
+		if (m_mapData.collidableTilePositions[y][x]) {
 			return true;
 		}
 	}
@@ -138,7 +144,7 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const {
 	// check top side
 	int y = topLeft.y;
 	for (int x = topLeft.x; x <= topRight.x; x++) {
-		if (m_mapData.collidableTileRects[y][x]) {
+		if (m_mapData.collidableTilePositions[y][x]) {
 			return true;
 		}
 	}
@@ -146,7 +152,7 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const {
 	// check bottom side
 	y = bottomLeft.y;
 	for (int x = bottomLeft.x; x <= bottomRight.x; x++) {
-		if (m_mapData.collidableTileRects[y][x]) {
+		if (m_mapData.collidableTilePositions[y][x]) {
 			return true;
 		}
 	}
