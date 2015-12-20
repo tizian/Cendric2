@@ -10,9 +10,9 @@ const int NUM_GLYPHS_V = 14;
 
 void toUpperCase(std::wstring& str) {
 	for (auto& c : str) {
-		if (c == 65508) c = L'Ä';			// ä
-		else if (c == 65526) c = L'Ö';		// ö
-		else if (c == 65532) c = L'Ü';		// ü
+		if (c == 65508) c = L'\xc4';			// ä
+		else if (c == 65526) c = L'\xd6';		// ö
+		else if (c == 65532) c = L'\xdc';		// ü
 		else c = toupper(c);
 	}
 }
