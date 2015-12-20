@@ -1,0 +1,1 @@
+call init.sh in an appropriate shell to execute the initdb.sql script and create the cendric database.

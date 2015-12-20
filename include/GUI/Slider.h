@@ -22,7 +22,6 @@ public:
 	void setColor(const sf::Color& color);
 
 	bool isPressed() const;
-	const sf::Vector2f& getPosition() const override;
 
 	GameObjectType getConfiguredType() const override;
 

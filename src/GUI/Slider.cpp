@@ -264,10 +264,6 @@ void SliderKnob::setPosition(const sf::Vector2f& pos) {
 	m_knob.setPosition(pos - sf::Vector2f(RADIUS, RADIUS));
 }
 
-const sf::Vector2f& SliderKnob::getPosition() const {
-	return GameObject::getPosition() + sf::Vector2f(RADIUS, RADIUS);
-}
-
 void SliderKnob::setColor(const sf::Color& color) {
 	m_knob.setFillColor(color);
 	m_fillColor = color;

@@ -97,12 +97,18 @@ void ResourceManager::init() {
 		m_configuration = DEFAULT_CONFIGURATION;
 	}
 
+	m_databaseManager.init();
+
 	ItemReader itemReader;
 	if (!itemReader.readItems(m_itemMap)) {
 		m_itemMap.clear();
 		g_logger->logError("ResourceManager", "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
 		setError(ErrorID::Error_dataCorrupted, "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
 	}
+}
+
+ResultSet ResourceManager::queryDB(std::string query) const {
+	return m_databaseManager.query(query);
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {

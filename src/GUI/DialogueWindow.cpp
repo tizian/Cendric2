@@ -31,7 +31,7 @@ DialogueWindow::~DialogueWindow() {
 	delete m_dialogueText;
 	delete m_speakerText;
 	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
-	g_textProvider->releaseDialogueText();
+	//g_textProvider->releaseDialogueText();
 }
 
 void DialogueWindow::load(const NPCBean& npcBean, GameScreen* screen) {
@@ -40,7 +40,7 @@ void DialogueWindow::load(const NPCBean& npcBean, GameScreen* screen) {
 }
 
 void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* screen) {
-	g_textProvider->releaseDialogueText();
+	//g_textProvider->releaseDialogueText();
 	delete m_dialogue;
 	m_dialogue = new Dialogue();
 	m_dialogue->load(dialogueID, screen, this);
@@ -52,7 +52,7 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* scre
 		// adding .csv
 		dialogueTranslations = dialogueTranslations + ".csv";
 		// if file doesn't exist, text provider will do nothing.
-		g_textProvider->loadDialogueText(dialogueTranslations);
+		//g_textProvider->loadDialogueText(dialogueTranslations);
 	}
 
 	if (!m_dialogue->updateWindow()) {

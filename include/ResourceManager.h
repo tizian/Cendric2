@@ -4,6 +4,7 @@
 
 #include "global.h"
 #include "Logger.h"
+#include "DatabaseManager.h"
 
 #include "Enums/ResourceID.h"
 #include "Enums/ErrorID.h"
@@ -51,6 +52,8 @@ public:
 	const std::pair<ErrorID, std::string>* pollError() const;
 	ConfigurationData& getConfiguration();
 
+	ResultSet queryDB(std::string query) const;
+
 private:
 	std::map<std::string, sf::Texture> m_textures;
 	std::map<std::string, sf::SoundBuffer> m_soundBuffers;
@@ -64,4 +67,5 @@ private:
 	ConfigurationData m_configuration;
 	// all item beans are saved here
 	std::map<std::string, ItemBean> m_itemMap;
+	DatabaseManager m_databaseManager;
 };
