@@ -43,6 +43,10 @@ file(GLOB_RECURSE SQLiteShell_FILES
 
 add_executable(Cendric2 ${Cendric_FILES})
 
+set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
+
+if (WIN32)
 add_executable(SQLiteShell ${SQLiteShell_FILES})
+endif()
 
 target_link_libraries(Cendric2 sfml-system sfml-window sfml-graphics sfml-audio)
