@@ -8,13 +8,32 @@ const char FIRST_CHAR = ' ';
 const int NUM_GLYPHS_U = 16;
 const int NUM_GLYPHS_V = 14;
 
-void toUpperCase(std::string& str) {
-	for (auto & c : str) {
-		if (c == 228) c = 196;   // ä
-		else if (c == 246) c = 214;  // ö
-		else if (c == 252) c = 220;  // ü
-		else c = toupper(c);
+std::string transform(const std::string& str) {
+	std::string out;
+	for (size_t i = 0; i < str.length(); ++i) {
+		unsigned char c = str.at(i);
+		if (c == 0xc3) {
+			unsigned char c2 = str.at(i + 1);
+			if (c2 == 0xa4 || c2 == 0x84) {			// ä or Ä
+				out.push_back(0xc4);
+			}
+			else if (c2 == 0xb6 || c2 == 0x96) {	// ö or Ö
+				out.push_back(0xd6);
+			}
+			else if (c2 == 0xbc || c2 == 0x9c) {	// ü or Ü
+				out.push_back(0xdc);
+			}
+			else {									// ?
+				out.push_back(0x3f);
+			}
+			i++;
+		}
+		else {
+			c = toupper(c);
+			out.push_back(c);
+		}
 	}
+	return out;
 }
 
 BitmapText::BitmapText() {
@@ -28,8 +47,7 @@ BitmapText::BitmapText() {
 BitmapText::BitmapText(const std::string& string, const BitmapFont &font) {
 	m_font = &font;
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_string = string;
-	toUpperCase(m_string);
+	m_string = transform(string);
 	m_color = sf::Color::White;
 	m_characterSize = font.getGlyphSize().y;
 	m_lineSpacing = 0.5f;
@@ -39,8 +57,7 @@ BitmapText::BitmapText(const std::string& string, const BitmapFont &font) {
 BitmapText::BitmapText(const std::string& string) {
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_string = string;
-	toUpperCase(m_string);
+	m_string = transform(string);
 	m_color = sf::Color::White;
 	m_characterSize = m_font->getGlyphSize().y;
 	m_lineSpacing = 0.5f;
@@ -48,8 +65,7 @@ BitmapText::BitmapText(const std::string& string) {
 }
 
 void BitmapText::setString(const std::string& string) {
-	m_string = string;
-	toUpperCase(m_string);
+	m_string = transform(string);
 	init();
 }
 
@@ -127,7 +143,8 @@ void BitmapText::init() {
 	float curX = 0.f;
 	float curY = 0.f;
 
-	for (auto c : m_string) {
+	for (size_t i = 0; i < m_string.length(); ++i) {
+		unsigned char c = m_string.at(i);
 		if (c == '\t') {
 			curX += 4 * dx;
 			continue;

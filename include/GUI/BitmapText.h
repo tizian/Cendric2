@@ -32,7 +32,7 @@ private:
 	void init();	// Set vertexArray data
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-	std::string		m_string;
+	std::string			m_string;
 	const BitmapFont   *m_font = nullptr;
 	int					m_characterSize;
 	float				m_lineSpacing;
