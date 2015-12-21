@@ -53,11 +53,11 @@ items.looted:res/level/testleverlevel/testleverlevel.tmx
 # chests looted in level:
 # quest states:
 # quest targets killed:
-quest.progress.target:quest_acaveofrats,enemy_rat,1
+quest.progress.target:ACaveOfRats,Rat,1
 # quest conditions fulfilled:
 # npc states:
 # merchand states:
-merchant.state:npc_guard,5,1.500000,it_fo_caveberry,1,it_fo_cheese,11,it_fo_healingherb,1,it_fo_water,10,it_mi_goldengoblet,2
+merchant.state:Guard,5,1.500000,it_fo_caveberry,1,it_fo_cheese,11,it_fo_healingherb,1,it_fo_water,10,it_mi_goldengoblet,2
 # spells learned:
 spell.learned:1,2,3,4,5,6
 spell.learned:2,7,9,11

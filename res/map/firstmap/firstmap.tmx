@@ -888,14 +888,14 @@
    <properties>
     <property name="active" value="1"/>
     <property name="boundingbox" value="12.5,0,25,50"/>
-    <property name="dialogueid" value="res/dialogue/DL_npc_guard.lua"/>
+    <property name="dialogueid" value="res/dialogue/DL_Guard.lua"/>
     <property name="dialoguetexture" value="250,0"/>
-    <property name="id" value="npc_guard"/>
+    <property name="id" value="Guard"/>
     <property name="spritetexture" value="0,0"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup name="light" visible="0">
   <object id="5" x="3863" y="778" width="219" height="197">
    <ellipse/>
   </object>

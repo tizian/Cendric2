@@ -25,7 +25,7 @@ void NPC::load(MapMainCharacter* mainChar, const NPCBean& bean) {
 	playCurrentAnimation(false);
 
 	setPosition(bean.position);
-	setTooltipText(g_textProvider->getText(bean.id));
+	setTooltipText(g_textProvider->getText(bean.id, "npc"));
 	setDebugBoundingBox(sf::Color::Magenta);
 }
 

@@ -205,7 +205,7 @@ QuestEntry::QuestEntry(const std::string& questID) {
 	m_questID = questID;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_name.setColor(sf::Color::White);
-	m_name.setString(">  " + g_textProvider->getText(questID));
+	m_name.setString(">  " + g_textProvider->getText(questID, "quest"));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
 }

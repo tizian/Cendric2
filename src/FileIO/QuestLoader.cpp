@@ -26,14 +26,12 @@ QuestData QuestLoader::loadQuest(const std::string& questID) const {
 	lua_pcall(L, 0, 0, 0);
 
 	LuaRef title = getGlobal(L, "title");
-	LuaRef description = getGlobal(L, "description");
-	if (!title.isString() || !description.isString()) {
-		g_logger->logError("QuestLoader", "Quest [" + filename + "] has no title or description tag or of wrong type.");
+	if (!title.isString()) {
+		g_logger->logError("QuestLoader", "Quest [" + filename + "] has no title tag or of wrong type.");
 		return questData;
 	}
 
 	questData.title = title.cast<std::string>();
-	questData.description = description.cast<std::string>();
 
 	LuaRef targets = getGlobal(L, "targets");
 	if (targets.isTable()) {

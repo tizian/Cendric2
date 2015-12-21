@@ -492,33 +492,33 @@
    <properties>
     <property name="gold" value="2"/>
     <property name="it_mi_goldengoblet" value="3"/>
-    <property name="questtarget" value="quest_acaveofrats,enemy_firerat"/>
+    <property name="questtarget" value="ACaveOfRats,FireRat"/>
    </properties>
   </object>
   <object id="2" gid="630" x="500" y="950" width="50" height="50">
    <properties>
-    <property name="questtarget" value="quest_acaveofrats,enemy_rat"/>
+    <property name="questtarget" value="ACaveOfRats,Rat"/>
    </properties>
   </object>
   <object id="3" gid="630" x="350" y="1300" width="50" height="50">
    <properties>
-    <property name="questtarget" value="quest_acaveofrats,enemy_rat"/>
+    <property name="questtarget" value="ACaveOfRats,Rat"/>
    </properties>
   </object>
   <object id="4" gid="630" x="1050" y="1200" width="50" height="50">
    <properties>
-    <property name="questtarget" value="quest_acaveofrats,enemy_rat"/>
+    <property name="questtarget" value="ACaveOfRats,Rat"/>
    </properties>
   </object>
   <object id="5" gid="630" x="2300" y="950" width="50" height="50">
    <properties>
-    <property name="questtarget" value="quest_acaveofrats,enemy_rat"/>
+    <property name="questtarget" value="ACaveOfRats,Rat"/>
    </properties>
   </object>
   <object id="6" gid="631" x="3000" y="900" width="50" height="50"/>
   <object id="7" gid="630" x="2000" y="550" width="50" height="50">
    <properties>
-    <property name="questtarget" value="quest_acaveofrats,enemy_rat"/>
+    <property name="questtarget" value="ACaveOfRats,Rat"/>
    </properties>
   </object>
  </objectgroup>
@@ -717,7 +717,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup name="light" visible="0">
   <object id="11" x="57" y="1367" width="1001" height="161">
    <properties>
     <property name="brightness" value="0.5"/>

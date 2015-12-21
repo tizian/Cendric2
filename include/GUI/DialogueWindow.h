@@ -13,7 +13,7 @@ class CharacterCore;
 
 class DialogueOption : public GameObject {
 public:
-	DialogueOption(std::string text, int nr);
+	DialogueOption(const std::string& text, const std::string& dialogueID, int nr);
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
@@ -56,6 +56,7 @@ private:
 	sf::Sprite m_speakerSprite;
 	std::string m_npcName;
 	std::string m_npcID;
+	std::string m_dialogueTextID;
 	sf::IntRect m_npcTexturePosition;
 	const sf::IntRect m_cendricTexturePosition = sf::IntRect(0, 0, 250, 250);
 	const std::string m_cendricName = "Cendric";

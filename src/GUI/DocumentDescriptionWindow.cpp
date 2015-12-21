@@ -14,7 +14,7 @@ DocumentDescriptionWindow::DocumentDescriptionWindow(const Item& item) : Window(
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_text.setColor(sf::Color::Black);
 	m_text.setString(g_textProvider->getCroppedText(
-		item.getID() + "_text", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+		item.getID(), "item_text", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
 	float height = 4 * GUIConstants::TEXT_OFFSET;
 	height += m_text.getLocalBounds().height;

@@ -10,24 +10,32 @@ void TextProvider::reload() {
 }
 
 std::string TextProvider::getText(const std::string& key) {
-	std::string query = "SELECT " + m_language + " FROM text WHERE text_id = '" + key + "' LIMIT 1;";
+	return getText(key, "core");
+}
+
+std::string TextProvider::getText(const std::string& key, const std::string& type) {
+	std::string query = "SELECT " + m_language + " FROM text WHERE text_id = '" + key + "' AND text_type = '" + type + "' LIMIT 1;";
 	ResultSet rs = g_resourceManager->queryDB(query);
 	if (rs.empty() || rs[0].empty()) {
 		// fallback
-		g_logger->logWarning("TranslationReader", "Tried to get missing translation for key: " + key);
+		g_logger->logWarning("TranslationReader", "Tried to get missing translation for key: " + key + " with type " + type);
 		return "(undefined text " + key + ")";
 	}
 	return rs[0][0];
 }
 
 std::string TextProvider::getCroppedText(const std::string& key, int characterSize, int maxWidth) {
+	return getCroppedText(key, "core", characterSize, maxWidth);
+}
+
+std::string TextProvider::getCroppedText(const std::string& key, const std::string& type, int characterSize, int maxWidth) {
 	// preconditions
 	if (characterSize < 1 || maxWidth < characterSize) {
 		return "";
 	}
 
 	int maxLineChars = maxWidth / characterSize;
-	std::string uncroppedText = getText(key);
+	std::string uncroppedText = getText(key, type);
 	std::string text = "";
 	while (uncroppedText.size() * characterSize > maxWidth) {
 		// check for forced newlines

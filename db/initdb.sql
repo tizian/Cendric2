@@ -12,11 +12,14 @@ DROP TABLE item;
 
 CREATE TABLE text(
 	text_id VARCHAR(50) NOT NULL, 
+	text_type VARCHAR(50) NOT NULL DEFAULT 'core',
 	english TEXT NOT NULL DEFAULT '',
 	german TEXT NOT NULL DEFAULT '',
 	swiss_german TEXT NOT NULL DEFAULT '',
-	PRIMARY KEY(text_id ASC)
+	PRIMARY KEY(text_id, text_type ASC)
 );
+
+CREATE INDEX text_type_x ON text(text_type);
 
 CREATE TABLE item(
 	item_id VARCHAR(50), 

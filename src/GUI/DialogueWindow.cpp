@@ -31,7 +31,6 @@ DialogueWindow::~DialogueWindow() {
 	delete m_dialogueText;
 	delete m_speakerText;
 	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
-	//g_textProvider->releaseDialogueText();
 }
 
 void DialogueWindow::load(const NPCBean& npcBean, GameScreen* screen) {
@@ -40,7 +39,6 @@ void DialogueWindow::load(const NPCBean& npcBean, GameScreen* screen) {
 }
 
 void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* screen) {
-	//g_textProvider->releaseDialogueText();
 	delete m_dialogue;
 	m_dialogue = new Dialogue();
 	m_dialogue->load(dialogueID, screen, this);
@@ -48,11 +46,11 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* scre
 
 	if (m_dialogue->getID().size() > 4) {
 		// removing the .lua
-		std::string dialogueTranslations = m_dialogue->getID().substr(0, m_dialogue->getID().size() - 4);
-		// adding .csv
-		dialogueTranslations = dialogueTranslations + ".csv";
-		// if file doesn't exist, text provider will do nothing.
-		//g_textProvider->loadDialogueText(dialogueTranslations);
+		m_dialogueTextID = m_dialogue->getID().substr(0, m_dialogue->getID().size() - 4);
+		// removing everything from /
+		if (m_dialogueTextID.find('/') != std::string::npos) {
+			m_dialogueTextID = m_dialogueTextID.substr(m_dialogueTextID.find_last_of('/') + 1, m_dialogueTextID.size());
+		}
 	}
 
 	if (!m_dialogue->updateWindow()) {
@@ -62,7 +60,7 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* scre
 
 void DialogueWindow::setNPC(const NPCBean& npc) {
 	m_npcTexturePosition = npc.dialogueTexturePositon;
-	m_npcName = g_textProvider->getText(npc.id);
+	m_npcName = g_textProvider->getText(npc.id, "npc");
 	m_npcID = npc.id;
 }
 
@@ -70,14 +68,14 @@ void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTextureRect(m_npcTexturePosition);
 	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
 }
 
 void DialogueWindow::setCendricTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
 	m_speakerText->setString(m_cendricName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
 }
 
 void DialogueWindow::setNPCTrading(const std::string& text) {
@@ -85,7 +83,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_speakerSprite.setTextureRect(m_npcTexturePosition);
 	m_speakerSprite.setScale(sf::Vector2f(0.6f, 0.6f));
 	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
 	delete m_merchantInterface;
 	m_merchantInterface = new MerchantInterface(dynamic_cast<GameScreen*>(m_screen), m_npcID);
 	setPosition(sf::Vector2f(getPosition().x, getPosition().y + BOX.height / 2.f));
@@ -99,7 +97,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
 	m_speakerText->setString(m_cendricName);
 	for (int i = 0; i < choices.size(); i++) {
-		DialogueOption option(choices[i].first, i);
+		DialogueOption option(choices[i].first, m_dialogueTextID, i);
 		option.deselect();
 		m_options.push_back(option);
 	}
@@ -186,7 +184,7 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 
 // Dialogue Option
 
-DialogueOption::DialogueOption(std::string text, int nr) : m_text(g_textProvider->getText(text)) {
+DialogueOption::DialogueOption(const std::string& text, const std::string& dialogueID, int nr) : m_text(g_textProvider->getText(text, dialogueID)) {
 	m_text.setCharacterSize(CHAR_SIZE_DIALOGUE);
 	m_text.setColor(sf::Color::White);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));

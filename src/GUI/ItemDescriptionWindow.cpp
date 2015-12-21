@@ -64,8 +64,8 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 }
 
 void ItemDescriptionWindow::load(const Item& item) {
-	m_titleText.setString(g_textProvider->getText(item.getID()));
-	m_descriptionText.setString(g_textProvider->getCroppedText(item.getDescription(), GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+	m_titleText.setString(g_textProvider->getText(item.getID(), "item"));
+	m_descriptionText.setString(g_textProvider->getCroppedText(item.getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
 	string stats = "\n";
 	const AttributeBean& attr = item.getAttributes();

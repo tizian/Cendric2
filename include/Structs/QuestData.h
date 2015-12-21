@@ -8,7 +8,6 @@
 struct QuestData {
 	std::string id;
 	std::string title;
-	std::string description;
 
 	// collect quest: which items must be collected and how many of them?
 	// first element is the item id, the second the amount

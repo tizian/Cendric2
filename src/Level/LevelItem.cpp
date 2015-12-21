@@ -22,7 +22,7 @@ void LevelItem::load(LevelMainCharacter* mainChar, const ItemBean& bean, const s
 	playCurrentAnimation(bean.texturePositions.size() > 1);
 
 	setPosition(position - getSpriteOffset());
-	setTooltipText(g_textProvider->getText(bean.id));
+	setTooltipText(g_textProvider->getText(bean.id, "item"));
 	setDebugBoundingBox(sf::Color::Green);
 }
 

@@ -15,21 +15,13 @@ void SplashScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(fireBasket1);
 	addObject(fireBasket2);
 
-	// ae test
-	m_versionText.setString(g_textProvider->getText("testae"));
+	// add version nr
+	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
 	m_versionText.setCharacterSize(8);
 	m_versionText.setColor(sf::Color::White);
 	m_versionText.setPosition(
 		(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,
 		WINDOW_HEIGHT - 18.f);
-
-	// add version nr
-	//m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
-	//m_versionText.setCharacterSize(8);
-	//m_versionText.setColor(sf::Color::White);
-	//m_versionText.setPosition(
-	//	(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,
-	//	WINDOW_HEIGHT - 18.f);
 }
 
 Screen* SplashScreen::update(const sf::Time& frameTime) {
