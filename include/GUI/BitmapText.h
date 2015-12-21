@@ -11,7 +11,7 @@ public:
 	BitmapText(const std::string& string);
 
 	void setString(const std::string& string);
-	const std::wstring& getString() const;
+	const std::string& getString() const;
 
 	void setFont(const BitmapFont &font);
 	const BitmapFont *getFont() const;
@@ -32,7 +32,7 @@ private:
 	void init();	// Set vertexArray data
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-	std::wstring		m_string;
+	std::string		m_string;
 	const BitmapFont   *m_font = nullptr;
 	int					m_characterSize;
 	float				m_lineSpacing;

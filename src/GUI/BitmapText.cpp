@@ -8,11 +8,11 @@ const char FIRST_CHAR = ' ';
 const int NUM_GLYPHS_U = 16;
 const int NUM_GLYPHS_V = 14;
 
-void toUpperCase(std::wstring& str) {
-	for (auto& c : str) {
-		if (c == 65508) c = L'\xc4';			// ä
-		else if (c == 65526) c = L'\xd6';		// ö
-		else if (c == 65532) c = L'\xdc';		// ü
+void toUpperCase(std::string& str) {
+	for (auto & c : str) {
+		if (c == 228) c = 196;   // ä
+		else if (c == 246) c = 214;  // ö
+		else if (c == 252) c = 220;  // ü
 		else c = toupper(c);
 	}
 }
@@ -28,7 +28,7 @@ BitmapText::BitmapText() {
 BitmapText::BitmapText(const std::string& string, const BitmapFont &font) {
 	m_font = &font;
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_string = std::wstring(string.begin(), string.end());
+	m_string = string;
 	toUpperCase(m_string);
 	m_color = sf::Color::White;
 	m_characterSize = font.getGlyphSize().y;
@@ -39,7 +39,7 @@ BitmapText::BitmapText(const std::string& string, const BitmapFont &font) {
 BitmapText::BitmapText(const std::string& string) {
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_string = std::wstring(string.begin(), string.end());
+	m_string = string;
 	toUpperCase(m_string);
 	m_color = sf::Color::White;
 	m_characterSize = m_font->getGlyphSize().y;
@@ -48,12 +48,12 @@ BitmapText::BitmapText(const std::string& string) {
 }
 
 void BitmapText::setString(const std::string& string) {
-	m_string = std::wstring(string.begin(), string.end());
+	m_string = string;
 	toUpperCase(m_string);
 	init();
 }
 
-const std::wstring &BitmapText::getString() const {
+const std::string& BitmapText::getString() const {
 	return m_string;
 }
 
