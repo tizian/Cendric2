@@ -260,7 +260,7 @@ void DialogueLoader::addNode() {
 		g_logger->logError("DialogueLoader", "Cannot add current node, a choice node cannot exist without choices.");
 		return;
 	}
-	if (m_currentNode->nextTag == m_currentNode->tag) {
+	if (m_currentNode->type != DialogueNodeType::Choice && m_currentNode->nextTag == m_currentNode->tag) {
 		g_logger->logWarning("DialogueLoader", "Loop detected in dialogue. Tag cannot equal next tag.");
 	}
 	if (m_currentNode->tag < 0) {
