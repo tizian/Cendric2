@@ -15,7 +15,7 @@ SpellSlot::SpellSlot(SpellType type) {
 
 SpellSlot::SpellSlot(SpellID id) {
 	m_spellID = id;
-	const SpellBean& bean = SpellBean::getSpellBean(id);
+	const SpellData& bean = SpellData::getSpellData(id);
 	m_textureRect = bean.iconTextureRect;
 	m_spellType = bean.spellType;
 	m_isChopSlot = (id == SpellID::Chop);
@@ -24,7 +24,7 @@ SpellSlot::SpellSlot(SpellID id) {
 	init();
 }
 
-SpellSlot::SpellSlot(const SpellBean& bean) {
+SpellSlot::SpellSlot(const SpellData& bean) {
 	m_spellID = bean.id;
 	m_textureRect = bean.iconTextureRect;
 	m_spellType = bean.spellType;

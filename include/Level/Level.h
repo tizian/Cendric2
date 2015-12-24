@@ -12,6 +12,7 @@
 #include "Logger.h"
 #include "LevelLoader.h"
 #include "SpeedupPullCamera.h"
+#include "Structs/LevelExitData.h"
 
 class Level {
 public:
@@ -36,7 +37,7 @@ public:
 	void dispose();
 
 	// checks if the main char has reached a level exit. If no, it returns nullptr, the map id and spawn point for the map.
-	LevelExitBean* checkLevelExit(const sf::FloatRect& boundingBox) const;
+	LevelExitData* checkLevelExit(const sf::FloatRect& boundingBox) const;
 	// formula for the jump height is vel_y_max^2 / (2*gravity acc)
 	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const;
 	// calculates if the object would fall deeper than it can jump if it did one more step in the given direction.

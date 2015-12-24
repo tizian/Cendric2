@@ -68,11 +68,11 @@ bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) c
 		result = object->QueryIntAttribute("height", &height);
 		XMLCheckResult(result);
 
-		MapExitBean bean;
-		bean.mapExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
-		bean.levelID = "";
-		bean.levelSpawnPoint.x = -1.f;
-		bean.levelSpawnPoint.y = -1.f;
+		MapExitData meData;
+		meData.mapExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
+		meData.levelID = "";
+		meData.levelSpawnPoint.x = -1.f;
+		meData.levelSpawnPoint.y = -1.f;
 
 		// map spawn point for level exit
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -98,17 +98,17 @@ bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) c
 					g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found for level exit map id.");
 					return false;
 				}
-				bean.levelID = textAttr;
+				meData.levelID = textAttr;
 			}
 			else if (name.compare("x") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
 				XMLCheckResult(result);
-				bean.levelSpawnPoint.x = static_cast<float>(x);
+				meData.levelSpawnPoint.x = static_cast<float>(x);
 			}
 			else if (name.compare("y") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
 				XMLCheckResult(result);
-				bean.levelSpawnPoint.y = static_cast<float>(y);
+				meData.levelSpawnPoint.y = static_cast<float>(y);
 			}
 			else {
 				g_logger->logError("MapReader", "XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
@@ -116,7 +116,7 @@ bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) c
 			}
 			_property = _property->NextSiblingElement("property");
 		}
-		data.mapExits.push_back(bean);
+		data.mapExits.push_back(meData);
 		object = object->NextSiblingElement("object");
 	}
 	return true;
@@ -171,7 +171,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 		result = object->QueryIntAttribute("y", &y);
 		XMLCheckResult(result);
 
-		NPCBean npc = DEFAULT_NPC;
+		NPCData npc = DEFAULT_NPC;
 
 		npc.objectID = id;
 		npc.position.x = static_cast<float>(x);
@@ -414,12 +414,12 @@ void MapReader::updateData(MapData& data) const {
 			for (int x = 0; x < data.mapSize.x; ++x) {
 				int skinNr = layer.second[y * data.mapSize.x + x];
 				if (skinNr != 0) {
-					MapDynamicTileBean bean;
-					bean.id = id;
-					bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
-					bean.skinNr = skinNr;
-					bean.spawnPosition = y * data.mapSize.x + x;
-					data.dynamicTiles.push_back(bean);
+					MapDynamicTileData mdtData;
+					mdtData.id = id;
+					mdtData.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+					mdtData.skinNr = skinNr;
+					mdtData.spawnPosition = y * data.mapSize.x + x;
+					data.dynamicTiles.push_back(mdtData);
 				}
 			}
 		}

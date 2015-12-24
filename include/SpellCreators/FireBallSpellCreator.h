@@ -8,7 +8,7 @@
 // a class that creates fireball spells
 class FireBallSpellCreator : public SpellCreator {
 public:
-	FireBallSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	FireBallSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
 	void executeSpell(const sf::Vector2f& target) override;
 };

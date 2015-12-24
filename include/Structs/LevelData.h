@@ -5,16 +5,16 @@
 
 #include "BackgroundLayer.h"
 #include "Structs/TMXData.h"
-#include "Structs/LevelExitBean.h"
-#include "Structs/LevelDynamicTileBean.h"
-#include "Structs/LeverBean.h"
+#include "Structs/LevelExitData.h"
+#include "Structs/LevelDynamicTileData.h"
+#include "Structs/LeverData.h"
 
 struct LevelData : TMXData {
 	std::vector<BackgroundLayer> backgroundLayers;
 	std::vector<std::pair<LevelDynamicTileID, std::vector<int>>> dynamicTileLayers;
-	std::vector<LevelDynamicTileBean> dynamicTiles;
+	std::vector<LevelDynamicTileData> dynamicTiles;
 	std::vector<AnimatedTileData> animatedTiles;
-	std::vector<LeverBean> levers;
+	std::vector<LeverData> levers;
 	std::vector<std::string> levelItems;
 
 	std::map<int, std::pair<EnemyID, sf::Vector2f>> enemies;
@@ -24,5 +24,5 @@ struct LevelData : TMXData {
 	std::map<int, std::pair<std::string, std::string>> enemyQuesttarget;
 	std::map<int, std::pair<std::map<std::string, int>, int>> enemyLoot;
 	std::map<int, std::pair<std::map<std::string, int>, int>> chestLoot;
-	std::vector<LevelExitBean> levelExits;
+	std::vector<LevelExitData> levelExits;
 };

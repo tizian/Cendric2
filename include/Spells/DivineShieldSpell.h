@@ -6,7 +6,7 @@
 class DivineShieldSpell : public Spell {
 public:
 	DivineShieldSpell(int additionalResistance);
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
+	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 
 	const sf::Vector2f getConfiguredPositionOffset() const override;
@@ -17,6 +17,6 @@ public:
 	void setDisposed() override;
 
 private:
-	AttributeBean m_additionalResistance;
+	AttributeData m_additionalResistance;
 	LightObject* m_lightObject;
 };

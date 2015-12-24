@@ -8,7 +8,7 @@
 // a class that creates leech spells
 class LeechSpellCreator : public SpellCreator {
 public:
-	LeechSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	LeechSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
 	void executeSpell(const sf::Vector2f& target) override;
 };

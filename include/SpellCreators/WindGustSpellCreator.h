@@ -10,7 +10,7 @@
 // a class that creates windgust spells
 class WindGustSpellCreator : public SpellCreator {
 public:
-	WindGustSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
+	WindGustSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner);
 	std::string getStrengthModifierName() const override;
 	int getStrengthModifierValue() const override;
 

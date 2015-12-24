@@ -3,7 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-struct NPCBean {
+struct NPCData {
 	// npc on map
 	int objectID;
 	std::string id;
@@ -17,7 +17,7 @@ struct NPCBean {
 	sf::IntRect dialogueTexturePositon;
 };
 
-const struct NPCBean DEFAULT_NPC =
+const struct NPCData DEFAULT_NPC =
 {
 	-1,
 	"",

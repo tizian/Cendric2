@@ -14,7 +14,6 @@ ResourceManager::~ResourceManager() {
 	m_soundBuffers.clear();
 	m_fonts.clear();
 	m_bitmapFonts.clear();
-	m_itemMap.clear();
 }
 
 void ResourceManager::init() {
@@ -23,6 +22,7 @@ void ResourceManager::init() {
 		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
 		{ ResourceID::Configuration, "config.ini" },
 		{ ResourceID::Save_folder, "saves/" },
+		{ ResourceID::Npc_folder, "res/npc/" },
 		{ ResourceID::Quicksave, "saves/quicksave.sav" },
 		{ ResourceID::Items, "res/items.csv" },
 		{ ResourceID::Texture_spellicons, "res/assets/spells/spritesheet_spellicons.png" },
@@ -96,19 +96,6 @@ void ResourceManager::init() {
 	if (!reader.readConfiguration(m_configuration)) {
 		m_configuration = DEFAULT_CONFIGURATION;
 	}
-
-	m_databaseManager.init();
-
-	ItemReader itemReader;
-	if (!itemReader.readItems(m_itemMap)) {
-		m_itemMap.clear();
-		g_logger->logError("ResourceManager", "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
-		setError(ErrorID::Error_dataCorrupted, "Items could not be loaded from file: " + std::string(getFilename(ResourceID::Items)));
-	}
-}
-
-ResultSet ResourceManager::queryDB(std::string query) const {
-	return m_databaseManager.query(query);
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {
@@ -233,16 +220,6 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string &filename) {
 
 BitmapFont* ResourceManager::getBitmapFont(ResourceID id) {
 	return getBitmapFont(m_fileNames[id]);
-}
-
-const ItemBean* ResourceManager::getItemBean(const std::string& id) {
-	if (m_itemMap.find(id) != m_itemMap.end()) {
-		return &m_itemMap.at(id);
-	}
-	else {
-		g_logger->logError("ResourceManager", "Item not found with ID: " + id);
-		return nullptr;
-	}
 }
 
 void ResourceManager::deleteResource(ResourceID id) {

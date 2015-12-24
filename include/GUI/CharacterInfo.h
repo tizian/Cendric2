@@ -9,7 +9,7 @@
 // it takes its information from an attribute bean (of the level main char or the character core)
 class CharacterInfo {
 public:
-	CharacterInfo(const AttributeBean* attributes);
+	CharacterInfo(const AttributeData* attributes);
 	~CharacterInfo();
 
 	void show();
@@ -19,7 +19,7 @@ public:
 	bool isVisible() const;
 
 private:
-	const AttributeBean* m_attributes;
+	const AttributeData* m_attributes;
 	bool m_isVisible = false;
 
 	// reloads the character info text, depending on the main char

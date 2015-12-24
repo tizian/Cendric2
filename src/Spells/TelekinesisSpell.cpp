@@ -3,7 +3,7 @@
 TelekinesisSpell::TelekinesisSpell() : Spell() {
 }
 
-void TelekinesisSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void TelekinesisSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation spellAnimation(sf::seconds(10.f));

@@ -3,9 +3,9 @@
 LightSpell::LightSpell() : Spell() {
 }
 
-void LightSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
-	m_lightObject = new LightObject(LightBean(sf::Vector2f(), bean.range));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), bean.range));
 	loadParticleSystem();
 }
 

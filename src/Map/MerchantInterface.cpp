@@ -21,11 +21,11 @@ void MerchantInterface::completeTrade() {
 }
 
 void MerchantInterface::sellItem(const Item& item) {
-	if (item.getBean().goldValue < 0) {
+	if (item.getValue() < 0) {
 		m_screen->setTooltipText(g_textProvider->getText("Unsalable"), sf::Color::Red, true);
 		return;
 	}
-	m_screen->notifyItemChange("gold", item.getBean().goldValue);
+	m_screen->notifyItemChange("gold", item.getValue());
 	if (m_data.wares.find(item.getID()) == m_data.wares.end()) {
 		m_data.wares.insert({ item.getID(), 1 });
 	}
@@ -39,11 +39,11 @@ void MerchantInterface::sellItem(const Item& item) {
 }
 
 void MerchantInterface::buyItem(const Item& item) {
-	if (m_core->getData().gold < (int)std::ceil(m_data.multiplier * item.getBean().goldValue)) {
+	if (m_core->getData().gold < (int)std::ceil(m_data.multiplier * item.getValue())) {
 		m_screen->setTooltipText(g_textProvider->getText("NotEnoughGold"), sf::Color::Red, true);
 		return;
 	}
-	m_screen->notifyItemChange("gold", -(int)std::ceil(m_data.multiplier * item.getBean().goldValue));
+	m_screen->notifyItemChange("gold", -(int)std::ceil(m_data.multiplier * item.getValue()));
 	m_screen->notifyItemChange(item.getID(), 1);
 	if (m_data.wares.find(item.getID()) != m_data.wares.end()) {
 		int amount = m_data.wares.at(item.getID());

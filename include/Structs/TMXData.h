@@ -3,7 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Structs/AnimatedTileData.h"
-#include "Structs/LightBean.h"
+#include "Structs/LightData.h"
 
 struct TMXData {
 	std::string id;
@@ -20,7 +20,7 @@ struct TMXData {
 	std::vector<bool> collidableTiles;
 	std::vector<std::vector<bool>> collidableTilePositions;
 
-	std::vector<LightBean> lights;
+	std::vector<LightData> lights;
 	
 	sf::FloatRect mapRect;
 	float dimming = 0.f;

@@ -154,8 +154,8 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 	}
 
 	if (m_isGameOver || !m_retryButton->isVisible()) {
-		LevelExitBean* bean = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
-		if (bean == nullptr) {
+		LevelExitData* leData = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
+		if (leData == nullptr) {
 			updateObjects(GameObjectType::_Enemy, frameTime);
 			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			updateObjects(GameObjectType::_MainCharacter, frameTime);
@@ -169,8 +169,8 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 		}
 		else {
 			writeToCore();
-			m_characterCore->setMap(bean->mapSpawnPoint, bean->mapID);
-			delete bean;
+			m_characterCore->setMap(leData->mapSpawnPoint, leData->mapID);
+			delete leData;
 			return new LoadingScreen(m_characterCore);
 		}
 	}

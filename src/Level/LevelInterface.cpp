@@ -56,11 +56,11 @@ void LevelInterface::notifyConsumableDrop(const InventorySlotClone* item) {
 
 void LevelInterface::consumeItem(const Item& item) {
 	m_character->consumeFood(
-		item.getBean().foodDuration,
+		item.getFoodDuration(),
 		item.getAttributes());
 	addBuff(BuffType::Food,
 		sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50),
-		item.getBean().foodDuration);
+		item.getFoodDuration());
 
 	m_screen->notifyItemChange(item.getID(), -1);
 	m_quickSlotBar->reload();

@@ -36,14 +36,14 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 	}
 
 	for (auto& it : gameData) {
-		LevelEquipmentBean equipment;
-		const ItemBean* bean = g_resourceManager->getItemBean(it);
-		if (bean == nullptr) {
+		LevelEquipmentData equipment;
+		Item item = Item(it);
+		if (!item.isValid() || !item.isEquipmentItem()) {
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");
 			return;
 		}
 
-		equipment.texturePath = bean->spritesheetPath;
+		equipment.texturePath = item.getEquipmentBean().texture_path;
 
 		if (equipment.texturePath.empty()) continue;
 
@@ -72,7 +72,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 			else if (ani.first == GameObjectState::Jumping) {
 				animation.setFrameTime(sf::milliseconds(200));
 			}
-			animation.setSpriteSheet(g_resourceManager->getTexture(bean->spritesheetPath));
+			animation.setSpriteSheet(g_resourceManager->getTexture(item.getEquipmentBean().texture_path));
 			for (auto &frame : ani.second) {
 				animation.addFrame(frame);
 			}

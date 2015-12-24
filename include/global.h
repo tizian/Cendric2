@@ -65,8 +65,10 @@ class Logger;
 class TextProvider;
 class ResourceManager;
 class InputController;
+class DatabaseManager;
 
 // extern objects
+extern DatabaseManager *g_databaseManager;
 extern ResourceManager *g_resourceManager;
 extern InputController *g_inputController;
 extern Logger *g_logger;

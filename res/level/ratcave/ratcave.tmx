@@ -20,62 +20,62 @@
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
-    <property name="id" value="it_fo_caveberry"/>
+    <property name="id" value="fo_caveberry"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="id" value="it_mi_goldengoblet"/>
+    <property name="id" value="mi_goldengoblet"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
-    <property name="id" value="it_go_onecoin"/>
+    <property name="id" value="go_onecoin"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="id" value="it_qe_letter"/>
+    <property name="id" value="qe_letter"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
-    <property name="id" value="it_eq_ringoflesserhealth"/>
+    <property name="id" value="eq_ringoflesserhealth"/>
    </properties>
   </tile>
   <tile id="25">
    <properties>
-    <property name="id" value="it_fo_healingherb"/>
+    <property name="id" value="fo_healingherb"/>
    </properties>
   </tile>
   <tile id="26">
    <properties>
-    <property name="id" value="it_fo_glowingshroom"/>
+    <property name="id" value="fo_glowingshroom"/>
    </properties>
   </tile>
   <tile id="27">
    <properties>
-    <property name="id" value="it_go_threecoins"/>
+    <property name="id" value="go_threecoins"/>
    </properties>
   </tile>
   <tile id="28">
    <properties>
-    <property name="id" value="it_fo_water"/>
+    <property name="id" value="fo_water"/>
    </properties>
   </tile>
   <tile id="48">
    <properties>
-    <property name="id" value="it_fo_cheese"/>
+    <property name="id" value="fo_cheese"/>
    </properties>
   </tile>
   <tile id="49">
    <properties>
-    <property name="id" value="it_fo_bread"/>
+    <property name="id" value="fo_bread"/>
    </properties>
   </tile>
   <tile id="50">
    <properties>
-    <property name="id" value="it_fo_lesserhealingpotion"/>
+    <property name="id" value="fo_lesserhealingpotion"/>
    </properties>
   </tile>
  </tileset>
@@ -491,34 +491,34 @@
   <object id="1" gid="631" x="400" y="500" width="50" height="50">
    <properties>
     <property name="gold" value="2"/>
-    <property name="it_mi_goldengoblet" value="3"/>
-    <property name="questtarget" value="ACaveOfRats,FireRat"/>
+    <property name="mi_goldengoblet" value="3"/>
+    <property name="questtarget" value="a_cave_of_rats,fire_rat"/>
    </properties>
   </object>
   <object id="2" gid="630" x="500" y="950" width="50" height="50">
    <properties>
-    <property name="questtarget" value="ACaveOfRats,Rat"/>
+    <property name="questtarget" value="a_cave_of_rats,rat"/>
    </properties>
   </object>
   <object id="3" gid="630" x="350" y="1300" width="50" height="50">
    <properties>
-    <property name="questtarget" value="ACaveOfRats,Rat"/>
+    <property name="questtarget" value="a_cave_of_rats,rat"/>
    </properties>
   </object>
   <object id="4" gid="630" x="1050" y="1200" width="50" height="50">
    <properties>
-    <property name="questtarget" value="ACaveOfRats,Rat"/>
+    <property name="questtarget" value="a_cave_of_rats,rat"/>
    </properties>
   </object>
   <object id="5" gid="630" x="2300" y="950" width="50" height="50">
    <properties>
-    <property name="questtarget" value="ACaveOfRats,Rat"/>
+    <property name="questtarget" value="a_cave_of_rats,rat"/>
    </properties>
   </object>
   <object id="6" gid="631" x="3000" y="900" width="50" height="50"/>
   <object id="7" gid="630" x="2000" y="550" width="50" height="50">
    <properties>
-    <property name="questtarget" value="ACaveOfRats,Rat"/>
+    <property name="questtarget" value="a_cave_of_rats,rat"/>
    </properties>
   </object>
  </objectgroup>
@@ -711,9 +711,9 @@
  <objectgroup name="chests">
   <object id="10" gid="534" x="3250" y="1200" width="50" height="50">
    <properties>
+    <property name="fo_water" value="1"/>
     <property name="gold" value="10"/>
-    <property name="it_fo_water" value="1"/>
-    <property name="it_mi_goldengoblet" value="1"/>
+    <property name="mi_goldengoblet" value="1"/>
    </properties>
   </object>
  </objectgroup>

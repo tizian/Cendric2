@@ -6,7 +6,7 @@
 class LightSpell : public Spell {
 public:
 	LightSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
+	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 

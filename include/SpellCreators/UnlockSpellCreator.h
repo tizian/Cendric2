@@ -8,7 +8,7 @@
 // a class that creates unlock spells
 class UnlockSpellCreator : public SpellCreator {
 public:
-	UnlockSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	UnlockSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;
 	int getStrengthModifierValue() const override;
 

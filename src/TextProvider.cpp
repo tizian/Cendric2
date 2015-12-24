@@ -1,5 +1,6 @@
 #include "TextProvider.h"
 #include "ResourceManager.h"
+#include "DatabaseManager.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ std::string TextProvider::getText(const std::string& key) {
 
 std::string TextProvider::getText(const std::string& key, const std::string& type) {
 	std::string query = "SELECT " + m_language + " FROM text WHERE text_id = '" + key + "' AND text_type = '" + type + "' LIMIT 1;";
-	ResultSet rs = g_resourceManager->queryDB(query);
+	ResultSet rs = g_databaseManager->query(query);
 	if (rs.empty() || rs[0].empty()) {
 		// fallback
 		g_logger->logWarning("TranslationReader", "Tried to get missing translation for key: " + key + " with type " + type);

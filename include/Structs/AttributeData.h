@@ -1,6 +1,8 @@
 #pragma once
 
-struct AttributeBean {
+#include "Beans/ItemAttributeBean.h"
+
+struct AttributeData {
 	int currentHealthPoints;
 
 	// total attributes
@@ -36,6 +38,30 @@ struct AttributeBean {
 		return 2.f - 100.f / (100.f - resistance);
 	}
 
+	// calculates the data from the database bean
+	void create(const ItemAttributeBean& bean) {
+		if (bean.status != BeanStatus::Filled) {
+			return;
+		}
+
+		maxHealthPoints = bean.max_health;
+		healthRegenerationPerS = bean.health_regeneration;
+		haste = bean.haste;
+		critical = bean.critical;
+		damagePhysical = bean.dmg_physical;
+		damageFire = bean.dmg_fire;
+		damageIce = bean.dmg_ice;
+		damageShadow = bean.dmg_shadow;
+		damageLight = bean.dmg_light;
+		resistancePhysical = bean.res_physical;
+		resistanceFire = bean.res_fire;
+		resistanceIce = bean.res_ice;
+		resistanceShadow = bean.res_ice;
+		resistanceLight = bean.res_light;
+
+		calculateAttributes();
+	}
+
 	// calculates calculated attributes based on total attributes
 	void calculateAttributes() {
 		criticalHitChance = std::max(0, std::min(60, critical));
@@ -49,7 +75,7 @@ struct AttributeBean {
 	}
 
 	// adds the second bean to the this bean. current health points will be added.
-	void addBean(const AttributeBean& secondBean) {
+	void addBean(const AttributeData& secondBean) {
 		damageFire += secondBean.damageFire;
 		damageIce += secondBean.damageIce;
 		damagePhysical += secondBean.damagePhysical;
@@ -70,7 +96,7 @@ struct AttributeBean {
 	}
 
 	// removes the second bean from the this bean. current health points will not be removed!
-	void removeBean(const AttributeBean& secondBean) {
+	void removeBean(const AttributeData& secondBean) {
 		damageFire -= secondBean.damageFire;
 		damageIce -= secondBean.damageIce;
 		damagePhysical -= secondBean.damagePhysical;
@@ -97,7 +123,7 @@ struct AttributeBean {
 	}
 };
 
-const struct AttributeBean ZERO_ATTRIBUTES =
+const struct AttributeData ZERO_ATTRIBUTES =
 {
 	0,
 	0,

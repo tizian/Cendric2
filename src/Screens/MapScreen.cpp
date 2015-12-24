@@ -45,9 +45,9 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 			m_characterCore->quicksave();
 			setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Green, true);
 		}
-		MapExitBean* bean = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
-		if (bean == nullptr || m_isOnLevelEntry) {
-			m_isOnLevelEntry = (bean != nullptr);
+		MapExitData* data = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
+		if (data == nullptr || m_isOnLevelEntry) {
+			m_isOnLevelEntry = (data != nullptr);
 			updateObjects(GameObjectType::_MainCharacter, frameTime);
 			updateObjects(GameObjectType::_NPC, frameTime);
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
@@ -59,8 +59,8 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 		}
 		else {
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			m_characterCore->setLevel(bean->levelSpawnPoint, bean->levelID);
-			delete bean;
+			m_characterCore->setLevel(data->levelSpawnPoint, data->levelID);
+			delete data;
 			return new LoadingScreen(getCharacterCore());
 		}
 	}
@@ -93,13 +93,13 @@ void MapScreen::execOnExit(const Screen *nextScreen) {
 	m_currentMap.dispose();
 }
 
-void MapScreen::setDialogue(const NPCBean& bean) {
+void MapScreen::setDialogue(const NPCData& data) {
 	if (m_dialogueWindow != nullptr) {
 		delete m_dialogueWindow;
 	}
 
 	m_dialogueWindow = new DialogueWindow();
-	m_dialogueWindow->load(bean, this);
+	m_dialogueWindow->load(data, this);
 }
 
 void MapScreen::render(sf::RenderTarget &renderTarget) {

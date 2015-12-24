@@ -1,7 +1,7 @@
 #include "SpellCreators/WindGustSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-WindGustSpellCreator::WindGustSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner) : SpellCreator(spellBean, owner) {
+WindGustSpellCreator::WindGustSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
 int WindGustSpellCreator::getStrengthModifierValue() const {
@@ -13,16 +13,16 @@ std::string WindGustSpellCreator::getStrengthModifierName() const {
 }
 
 void WindGustSpellCreator::executeSpell(const sf::Vector2f &target) {
-	SpellBean spellBean = m_spellBean;
-	updateDamage(spellBean);
+	SpellData spellData = m_spellData;
+	updateDamage(spellData);
 	WindGustSpell* newSpell = new WindGustSpell();
-	newSpell->load(spellBean, m_owner, target);
+	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 	m_owner->setFightAnimationTime();
 }
 
 void WindGustSpellCreator::addRangeModifier(int level) {
-	m_spellBean.boundingBox.width += m_spellBean.rangeModifierAddition * level;
+	m_spellData.boundingBox.width += m_spellData.rangeModifierAddition * level;
 }
 
 void WindGustSpellCreator::addStrengthModifier(int level) {

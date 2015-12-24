@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-struct LevelExitBean {
+struct LevelExitData {
 	std::string mapID;
 	sf::Vector2f mapSpawnPoint;
 	sf::FloatRect levelExitRect;

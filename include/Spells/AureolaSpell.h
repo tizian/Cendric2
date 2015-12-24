@@ -6,7 +6,7 @@
 class AureolaSpell : public Spell {
 public:
 	AureolaSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
+	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 

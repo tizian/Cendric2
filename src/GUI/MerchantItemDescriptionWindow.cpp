@@ -10,6 +10,6 @@ std::string MerchantItemDescriptionWindow::getGoldText(const Item& item) const {
 	std::string goldText;
 	goldText.append(g_textProvider->getText("Price"));
 	goldText.append(": ");
-	goldText.append(to_string((int)std::ceil(item.getBean().goldValue * m_goldMultiplier)));
+	goldText.append(to_string((int)std::ceil(item.getValue() * m_goldMultiplier)));
 	return goldText;
 }

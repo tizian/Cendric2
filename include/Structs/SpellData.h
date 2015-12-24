@@ -13,7 +13,7 @@ class SpellCreator;
 class LevelMovableGameObject;
 
 /* describes the attributes of a spell */
-struct SpellBean {
+struct SpellData {
 	SpellID id;
 	SpellType spellType;
 	sf::IntRect iconTextureRect;
@@ -41,39 +41,39 @@ struct SpellBean {
 
 	Key inputKey;
 
-	static SpellBean getSpellBean(SpellID id);
+	static SpellData getSpellData(SpellID id);
 	static std::vector<SpellModifierType> getAllowedModifiers(SpellID id);
-	static SpellCreator* getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner);
+	static SpellCreator* getSpellCreator(const SpellData& data, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner);
 
 private:
-	static SpellBean getChopSpellBean();
+	static SpellData getChopSpellData();
 
-	static SpellBean getFireBallSpellBean();
-	static SpellBean getIceBallSpellBean();
-	static SpellBean getTelekinesisSpellBean();
-	static SpellBean getWindGustSpellBean();
-	static SpellBean getAntiGravitySpellBean();
+	static SpellData getFireBallSpellData();
+	static SpellData getIceBallSpellData();
+	static SpellData getTelekinesisSpellData();
+	static SpellData getWindGustSpellData();
+	static SpellData getAntiGravitySpellData();
 
-	static SpellBean getUnlockSpellBean();
-	// static SpellBean getShadowTrapSpellBean();
-	static SpellBean getInvisibilitySpellBean();
-	// static SpellBean getFlashSpellBean();
-	static SpellBean getIcyAmbushSpellBean();
+	static SpellData getUnlockSpellData();
+	// static SpellData getShadowTrapSpellData();
+	static SpellData getInvisibilitySpellData();
+	// static SpellData getFlashSpellData();
+	static SpellData getIcyAmbushSpellData();
 
-	static SpellBean getFearSpellBean();
-	static SpellBean getLeechSpellBean();
-	// static SpellBean getReviveTheDeadSpellBean();
-	// static SpellBean getGhostSpellBean();
-	// static SpellBean getSummonCreatureSpellBean();
+	static SpellData getFearSpellData();
+	static SpellData getLeechSpellData();
+	// static SpellData getReviveTheDeadSpellData();
+	// static SpellData getGhostSpellData();
+	// static SpellData getSummonCreatureSpellData();
 
-	static SpellBean getLightSpellBean();
-	static SpellBean getDivineShieldSpellBean();
-	// static SpellBean getWrathOfTheGodsSpellBean();
-	// static SpellBean getJusticeSpellBean();
-	static SpellBean getAureolaSpellBean();
+	static SpellData getLightSpellData();
+	static SpellData getDivineShieldSpellData();
+	// static SpellData getWrathOfTheGodsSpellData();
+	// static SpellData getJusticeSpellData();
+	static SpellData getAureolaSpellData();
 };
 
-const struct SpellBean EMPTY_SPELL =
+const struct SpellData EMPTY_SPELL =
 {
 	SpellID::VOID,
 	SpellType::VOID,

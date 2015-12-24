@@ -8,7 +8,7 @@
 // a class that creates fear spells
 class FearSpellCreator : public SpellCreator {
 public:
-	FearSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	FearSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;
 	int getStrengthModifierValue() const override;
 

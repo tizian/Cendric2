@@ -204,8 +204,8 @@ void CharacterCore::loadEquipmentItems() {
 	Item* eqNeck = nullptr;
 	Item* eqRing1 = nullptr;
 	Item* eqRing2 = nullptr;
-	if (!m_data.equippedWeapon.empty() && g_resourceManager->getItemBean(m_data.equippedWeapon) != nullptr) {
-		eqWeapon = new Weapon(*g_resourceManager->getItemBean(m_data.equippedWeapon));
+	if (!m_data.equippedWeapon.empty() && g_databaseManager->itemExists(m_data.equippedWeapon)) {
+		eqWeapon = new Weapon(m_data.equippedWeapon);
 		// add equipped spells and their modifiers
 		for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++) {
 			eqWeapon->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
@@ -214,23 +214,23 @@ void CharacterCore::loadEquipmentItems() {
 			}
 		}
 	}
-	if (!m_data.equippedBack.empty() && g_resourceManager->getItemBean(m_data.equippedBack) != nullptr) {
-		eqBack = new Item(*g_resourceManager->getItemBean(m_data.equippedBack));
+	if (!m_data.equippedBack.empty() && g_databaseManager->itemExists(m_data.equippedBack)) {
+		eqBack = new Item(m_data.equippedBack);
 	}
-	if (!m_data.equippedBody.empty() && g_resourceManager->getItemBean(m_data.equippedBody) != nullptr) {
-		eqBody = new Item(*g_resourceManager->getItemBean(m_data.equippedBody));
+	if (!m_data.equippedBody.empty() && g_databaseManager->itemExists(m_data.equippedBody)) {
+		eqBody = new Item(m_data.equippedBody);
 	}
-	if (!m_data.equippedHead.empty() && g_resourceManager->getItemBean(m_data.equippedHead) != nullptr) {
-		eqHead = new Item(*g_resourceManager->getItemBean(m_data.equippedHead));
+	if (!m_data.equippedHead.empty() && g_databaseManager->itemExists(m_data.equippedHead)) {
+		eqHead = new Item(m_data.equippedHead);
 	}
-	if (!m_data.equippedNeck.empty() && g_resourceManager->getItemBean(m_data.equippedNeck) != nullptr) {
-		eqNeck = new Item(*g_resourceManager->getItemBean(m_data.equippedNeck));
+	if (!m_data.equippedNeck.empty() && g_databaseManager->itemExists(m_data.equippedNeck)) {
+		eqNeck = new Item(m_data.equippedNeck);
 	}
-	if (!m_data.equippedRing1.empty() && g_resourceManager->getItemBean(m_data.equippedRing1) != nullptr) {
-		eqRing1 = new Item(*g_resourceManager->getItemBean(m_data.equippedRing1));
+	if (!m_data.equippedRing1.empty() && g_databaseManager->itemExists(m_data.equippedRing1)) {
+		eqRing1 = new Item(m_data.equippedRing1);
 	}
-	if (!m_data.equippedRing2.empty() && g_resourceManager->getItemBean(m_data.equippedRing2) != nullptr) {
-		eqRing2 = new Item(*g_resourceManager->getItemBean(m_data.equippedRing2));
+	if (!m_data.equippedRing2.empty() && g_databaseManager->itemExists(m_data.equippedRing2)) {
+		eqRing2 = new Item(m_data.equippedRing2);
 	}
 
 	m_equippedItems.insert({ ItemType::Equipment_weapon, eqWeapon });
@@ -244,13 +244,12 @@ void CharacterCore::loadEquipmentItems() {
 
 void CharacterCore::loadItems() {
 	clearItems();
-	for (auto& it : m_data.items) {
-		const ItemBean* bean = g_resourceManager->getItemBean(it.first);
-		if (bean == nullptr) {
-			g_logger->logError("CharacterCore", "Item not found: " + it.first);
+	for (auto& item : m_data.items) {
+		if (!g_databaseManager->itemExists(item.first)) {
+			g_logger->logError("CharacterCore", "Item not found: " + item.first);
 			continue;
 		}
-		m_items.insert({ it.first, Item(*bean) });
+		m_items.insert({ item.first, Item(item.first) });
 	}
 }
 
@@ -396,7 +395,7 @@ void CharacterCore::setMerchantData(const std::string& merchantID, const Merchan
 	m_data.merchantStates[merchantID] = data;
 }
 
-const AttributeBean& CharacterCore::getTotalAttributes() const {
+const AttributeData& CharacterCore::getTotalAttributes() const {
 	return m_totalAttributes;
 }
 
@@ -442,12 +441,11 @@ void CharacterCore::addItem(const std::string& item, int quantity) {
 		m_data.items.insert({ item, quantity });
 	}
 
-	const ItemBean* bean = g_resourceManager->getItemBean(item);
-	if (bean == nullptr) {
+	if (!g_databaseManager->itemExists(item)) {
 		g_logger->logError("CharacterCore", "Item not found: " + item);
 		return;
 	}
-	m_items.insert({ item, Item(*bean) });
+	m_items.insert({ item, Item(item) });
 }
 
 void CharacterCore::removeItem(const std::string& item, int quantity) {
@@ -572,7 +570,8 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 		m_data.equippedWeapon = item;
 		m_data.equippedWeaponSlots.clear();
 		if (!m_data.equippedWeapon.empty()) {
-			for (int i = 0; i < (*(g_resourceManager->getItemBean(m_data.equippedWeapon))).weaponSlots.size(); i++) {
+			std::vector<ItemWeaponSlotBean> wep = g_databaseManager->getItemWeaponSlotBeans(m_data.equippedWeapon);
+			for (int i = 0; i < wep.size(); i++) {
 				m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
 			}
 			reloadWeaponSlots();

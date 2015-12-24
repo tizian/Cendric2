@@ -7,7 +7,7 @@
 class FireBallSpell : public Spell {
 public:
 	FireBallSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
+	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 
 	void setPosition(const sf::Vector2f& pos) override;
 	void setScreen(Screen* screen) override;

@@ -33,9 +33,9 @@ DialogueWindow::~DialogueWindow() {
 	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
 }
 
-void DialogueWindow::load(const NPCBean& npcBean, GameScreen* screen) {
-	setNPC(npcBean);
-	setDialogue(npcBean.dialogueID, screen);
+void DialogueWindow::load(const NPCData& npcData, GameScreen* screen) {
+	setNPC(npcData);
+	setDialogue(npcData.dialogueID, screen);
 }
 
 void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* screen) {
@@ -58,7 +58,7 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* scre
 	}
 }
 
-void DialogueWindow::setNPC(const NPCBean& npc) {
+void DialogueWindow::setNPC(const NPCData& npc) {
 	m_npcTexturePosition = npc.dialogueTexturePositon;
 	m_npcName = g_textProvider->getText(npc.id, "npc");
 	m_npcID = npc.id;

@@ -1,7 +1,7 @@
 #include "LightObject.h"
 
-LightObject::LightObject(const LightBean& bean) : GameObject() {
-	m_bean = bean;
+LightObject::LightObject(const LightData& data) : GameObject() {
+	m_lightData = data;
 
 	init();
 }
@@ -9,14 +9,14 @@ LightObject::LightObject(const LightBean& bean) : GameObject() {
 void LightObject::init() {
 	m_sprite.setSize(sf::Vector2f(2.f, 2.f));
 	m_sprite.setOrigin(1.f, 1.f); // setting the origin to the center
-	m_sprite.setScale(m_bean.radius.x, m_bean.radius.y);
-	m_sprite.setFillColor(sf::Color(255, 255, 255, (sf::Uint8)(255 * m_bean.brightness)));
+	m_sprite.setScale(m_lightData.radius.x, m_lightData.radius.y);
+	m_sprite.setFillColor(sf::Color(255, 255, 255, (sf::Uint8)(255 * m_lightData.brightness)));
 	g_resourceManager->getTexture(ResourceID::Texture_Particle_blob2)->setSmooth(true);
 	m_sprite.setTexture(g_resourceManager->getTexture(ResourceID::Texture_Particle_blob2));
 	m_animationTimer = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 2.f * m_bean.radius.x, 2.f * m_bean.radius.y));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 2.f * m_lightData.radius.x, 2.f * m_lightData.radius.y));
 
-	setPosition(m_bean.center);
+	setPosition(m_lightData.center);
 	setDebugBoundingBox(sf::Color(255, 255, 0, 100));
 }
 
@@ -33,14 +33,14 @@ void LightObject::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 	m_animationTimer += frameTime.asSeconds();
 
-	float scaleX = m_bean.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
-	float scaleY = m_bean.radius.y + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
+	float scaleX = m_lightData.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
+	float scaleY = m_lightData.radius.y + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 
 	m_sprite.setScale(scaleX, scaleY);
 }
 
 void LightObject::setPosition(const sf::Vector2f& pos) {
-	GameObject::setPosition(pos - sf::Vector2f(m_bean.radius.x, m_bean.radius.y));
+	GameObject::setPosition(pos - sf::Vector2f(m_lightData.radius.x, m_lightData.radius.y));
 	m_sprite.setPosition(pos);
 }
 

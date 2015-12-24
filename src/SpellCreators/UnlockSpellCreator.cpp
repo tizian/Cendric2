@@ -1,7 +1,7 @@
 #include "SpellCreators/UnlockSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-UnlockSpellCreator::UnlockSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner) {
+UnlockSpellCreator::UnlockSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
 int UnlockSpellCreator::getStrengthModifierValue() const {
@@ -13,10 +13,10 @@ std::string UnlockSpellCreator::getStrengthModifierName() const {
 }
 
 void UnlockSpellCreator::executeSpell(const sf::Vector2f& target) {
-	SpellBean spellBean = m_spellBean;
+	SpellData spellData = m_spellData;
 
 	UnlockSpell* newSpell = new UnlockSpell(m_strength);
-	newSpell->load(spellBean, m_owner, target);
+	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 
 	m_owner->setFightAnimationTime();

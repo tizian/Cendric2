@@ -10,7 +10,7 @@
 // a class that creates aureola spells
 class AureolaSpellCreator : public SpellCreator {
 public:
-	AureolaSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
+	AureolaSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner);
 
 	void executeSpell(const sf::Vector2f &target) override;
 

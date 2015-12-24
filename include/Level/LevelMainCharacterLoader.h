@@ -9,7 +9,7 @@
 #include "Level.h"
 #include "LevelEquipment.h"
 
-#include "Structs/LevelEquipmentBean.h"
+#include "Structs/LevelEquipmentData.h"
 
 // helper class used by the game screan to load the main character including his weapon / equipment.
 class LevelMainCharacterLoader {

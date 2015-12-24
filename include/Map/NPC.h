@@ -6,7 +6,7 @@
 #include "TextProvider.h"
 
 #include "GUI/BitmapText.h"
-#include "Structs/NPCBean.h"
+#include "Structs/NPCData.h"
 
 class MapMainCharacter;
 
@@ -14,7 +14,7 @@ class MapMainCharacter;
 class NPC : public AnimatedGameObject {
 public:
 	NPC() : AnimatedGameObject() {}
-	void load(MapMainCharacter* mainChar, const NPCBean& bean);
+	void load(MapMainCharacter* mainChar, const NPCData& data);
 	void onMouseOver() override;
 	void onInteractKey() override;
 	void onRightClick() override;
@@ -31,7 +31,7 @@ public:
 
 private:
 	MapMainCharacter* m_mainChar;
-	NPCBean m_bean;
+	NPCData m_NPCdata;
 
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;

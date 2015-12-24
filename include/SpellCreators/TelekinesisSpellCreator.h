@@ -8,7 +8,7 @@
 // a class that creates telekinesis spells
 class TelekinesisSpellCreator : public SpellCreator {
 public:
-	TelekinesisSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	TelekinesisSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
 	void executeSpell(const sf::Vector2f& target) override;
 

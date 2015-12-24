@@ -15,7 +15,7 @@ class LevelMainCharacter;
 class LevelItem : public AnimatedGameObject {
 public:
 	LevelItem() : AnimatedGameObject() {}
-	void load(LevelMainCharacter* mainChar, const ItemBean& bean, const sf::Vector2f& position);
+	void load(LevelMainCharacter* mainChar, const Item& item, const sf::Vector2f& position);
 	void onRightClick() override;
 	void onInteractKey() override;
 	void onMouseOver() override;

@@ -1,4 +1,4 @@
-#include "Structs/SpellBean.h"
+#include "Structs/SpellData.h"
 #include "SpellCreator.h"
 #include "SpellCreators/FireBallSpellCreator.h"
 #include "SpellCreators/IceBallSpellCreator.h"
@@ -15,7 +15,7 @@
 #include "SpellCreators/TelekinesisSpellCreator.h"
 #include "SpellCreators/InvisibilitySpellCreator.h"
 
-std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
+std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
 	switch (id) {
 	case SpellID::Chop:
@@ -89,50 +89,50 @@ std::vector<SpellModifierType> SpellBean::getAllowedModifiers(SpellID id) {
 	return types;
 }
 
-SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner) {
+SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vector<SpellModifier>& modifiers, LevelMovableGameObject* owner) {
 	SpellCreator* creator;
-	switch (bean.id) {
+	switch (data.id) {
 	case SpellID::Chop:
-		creator = new ChopSpellCreator(bean, owner);
+		creator = new ChopSpellCreator(data, owner);
 		break;
 	case SpellID::FireBall:
-		creator = new FireBallSpellCreator(bean, owner);
+		creator = new FireBallSpellCreator(data, owner);
 		break;
 	case SpellID::IceBall:
-		creator = new IceBallSpellCreator(bean, owner);
+		creator = new IceBallSpellCreator(data, owner);
 		break;
 	case SpellID::DivineShield:
-		creator = new DivineShieldSpellCreator(bean, owner);
+		creator = new DivineShieldSpellCreator(data, owner);
 		break;
 	case SpellID::Aureola:
-		creator = new AureolaSpellCreator(bean, owner);
+		creator = new AureolaSpellCreator(data, owner);
 		break;
 	case SpellID::Fear:
-		creator = new FearSpellCreator(bean, owner);
+		creator = new FearSpellCreator(data, owner);
 		break;
 	case SpellID::AntiGravity:
-		creator = new AntiGravitySpellCreator(bean, owner);
+		creator = new AntiGravitySpellCreator(data, owner);
 		break;
 	case SpellID::WindGust:
-		creator = new WindGustSpellCreator(bean, owner);
+		creator = new WindGustSpellCreator(data, owner);
 		break;
 	case SpellID::Leech:
-		creator = new LeechSpellCreator(bean, owner);
+		creator = new LeechSpellCreator(data, owner);
 		break;
 	case SpellID::IcyAmbush:
-		creator = new IcyAmbushSpellCreator(bean, owner);
+		creator = new IcyAmbushSpellCreator(data, owner);
 		break;
 	case SpellID::Unlock:
-		creator = new UnlockSpellCreator(bean, owner);
+		creator = new UnlockSpellCreator(data, owner);
 		break;
 	case SpellID::Light:
-		creator = new LightSpellCreator(bean, owner);
+		creator = new LightSpellCreator(data, owner);
 		break;
 	case SpellID::Telekinesis:
-		creator = new TelekinesisSpellCreator(bean, owner);
+		creator = new TelekinesisSpellCreator(data, owner);
 		break;
 	case SpellID::Invisibility:
-		creator = new InvisibilitySpellCreator(bean, owner);
+		creator = new InvisibilitySpellCreator(data, owner);
 		break;
 	default:
 		return nullptr;
@@ -143,43 +143,43 @@ SpellCreator* SpellBean::getSpellCreator(const SpellBean& bean, const std::vecto
 	return creator;
 }
 
-SpellBean SpellBean::getSpellBean(SpellID id) {
+SpellData SpellData::getSpellData(SpellID id) {
 	switch (id) {
 	case SpellID::Chop:
-		return getChopSpellBean();
+		return getChopSpellData();
 	case SpellID::FireBall:
-		return getFireBallSpellBean();
+		return getFireBallSpellData();
 	case SpellID::IceBall:
-		return getIceBallSpellBean();
+		return getIceBallSpellData();
 	case SpellID::Aureola:
-		return getAureolaSpellBean();
+		return getAureolaSpellData();
 	case SpellID::DivineShield:
-		return getDivineShieldSpellBean();
+		return getDivineShieldSpellData();
 	case SpellID::Fear:
-		return getFearSpellBean();
+		return getFearSpellData();
 	case SpellID::AntiGravity:
-		return getAntiGravitySpellBean();
+		return getAntiGravitySpellData();
 	case SpellID::WindGust:
-		return getWindGustSpellBean();
+		return getWindGustSpellData();
 	case SpellID::Leech:
-		return getLeechSpellBean();
+		return getLeechSpellData();
 	case SpellID::IcyAmbush:
-		return getIcyAmbushSpellBean();
+		return getIcyAmbushSpellData();
 	case SpellID::Unlock:
-		return getUnlockSpellBean();
+		return getUnlockSpellData();
 	case SpellID::Light:
-		return getLightSpellBean();
+		return getLightSpellData();
 	case SpellID::Telekinesis:
-		return getTelekinesisSpellBean();
+		return getTelekinesisSpellData();
 	case SpellID::Invisibility:
-		return getInvisibilitySpellBean();
+		return getInvisibilitySpellData();
 	default:
 		return EMPTY_SPELL;
 	}
 }
 
-SpellBean SpellBean::getChopSpellBean() {
-	SpellBean chop = EMPTY_SPELL;
+SpellData SpellData::getChopSpellData() {
+	SpellData chop = EMPTY_SPELL;
 	chop.id = SpellID::Chop;
 
 	chop.cooldown = sf::milliseconds(400);
@@ -193,8 +193,8 @@ SpellBean SpellBean::getChopSpellBean() {
 	return chop;
 }
 
-SpellBean SpellBean::getFireBallSpellBean() {
-	SpellBean fireBall = EMPTY_SPELL;
+SpellData SpellData::getFireBallSpellData() {
+	SpellData fireBall = EMPTY_SPELL;
 	fireBall.id = SpellID::FireBall;
 	fireBall.spellType = SpellType::Elemental;
 	fireBall.iconTextureRect = sf::IntRect(0, 0, 50, 50);
@@ -216,8 +216,8 @@ SpellBean SpellBean::getFireBallSpellBean() {
 	return fireBall;
 }
 
-SpellBean SpellBean::getIceBallSpellBean() {
-	SpellBean iceBall = EMPTY_SPELL;
+SpellData SpellData::getIceBallSpellData() {
+	SpellData iceBall = EMPTY_SPELL;
 	iceBall.id = SpellID::IceBall;
 	iceBall.spellType = SpellType::Elemental;
 	iceBall.iconTextureRect = sf::IntRect(50, 0, 50, 50);
@@ -239,8 +239,8 @@ SpellBean SpellBean::getIceBallSpellBean() {
 	return iceBall;
 }
 
-SpellBean SpellBean::getDivineShieldSpellBean() {
-	SpellBean divineShield = EMPTY_SPELL;
+SpellData SpellData::getDivineShieldSpellData() {
+	SpellData divineShield = EMPTY_SPELL;
 	divineShield.id = SpellID::DivineShield;
 	divineShield.spellType = SpellType::Divine;
 	divineShield.iconTextureRect = sf::IntRect(100, 150, 50, 50);
@@ -256,8 +256,8 @@ SpellBean SpellBean::getDivineShieldSpellBean() {
 }
 
 
-SpellBean SpellBean::getAureolaSpellBean() {
-	SpellBean aureola = EMPTY_SPELL;
+SpellData SpellData::getAureolaSpellData() {
+	SpellData aureola = EMPTY_SPELL;
 	aureola.id = SpellID::Aureola;
 	aureola.spellType = SpellType::Divine;
 	aureola.iconTextureRect = sf::IntRect(200, 150, 50, 50);
@@ -282,8 +282,8 @@ SpellBean SpellBean::getAureolaSpellBean() {
 	return aureola;
 }
 
-SpellBean SpellBean::getFearSpellBean() {
-	SpellBean fear = EMPTY_SPELL;
+SpellData SpellData::getFearSpellData() {
+	SpellData fear = EMPTY_SPELL;
 	fear.id = SpellID::Fear;
 	fear.spellType = SpellType::Necromancy;
 	fear.iconTextureRect = sf::IntRect(0, 100, 50, 50);
@@ -303,8 +303,8 @@ SpellBean SpellBean::getFearSpellBean() {
 	return fear;
 }
 
-SpellBean SpellBean::getAntiGravitySpellBean() {
-	SpellBean antiGravity = EMPTY_SPELL;
+SpellData SpellData::getAntiGravitySpellData() {
+	SpellData antiGravity = EMPTY_SPELL;
 	antiGravity.id = SpellID::AntiGravity;
 	antiGravity.spellType = SpellType::Elemental;
 	antiGravity.iconTextureRect = sf::IntRect(200, 0, 50, 50);
@@ -318,8 +318,8 @@ SpellBean SpellBean::getAntiGravitySpellBean() {
 	return antiGravity;
 }
 
-SpellBean SpellBean::getTelekinesisSpellBean() {
-	SpellBean telekinesis = EMPTY_SPELL;
+SpellData SpellData::getTelekinesisSpellData() {
+	SpellData telekinesis = EMPTY_SPELL;
 	telekinesis.id = SpellID::Telekinesis;
 	telekinesis.spellType = SpellType::Elemental;
 
@@ -338,8 +338,8 @@ SpellBean SpellBean::getTelekinesisSpellBean() {
 	return telekinesis;
 }
 
-SpellBean SpellBean::getWindGustSpellBean() {
-	SpellBean windGust = EMPTY_SPELL;
+SpellData SpellData::getWindGustSpellData() {
+	SpellData windGust = EMPTY_SPELL;
 	windGust.id = SpellID::WindGust;
 	windGust.spellType = SpellType::Elemental;
 
@@ -354,8 +354,8 @@ SpellBean SpellBean::getWindGustSpellBean() {
 	return windGust;
 }
 
-SpellBean SpellBean::getLeechSpellBean() {
-	SpellBean leech = EMPTY_SPELL;
+SpellData SpellData::getLeechSpellData() {
+	SpellData leech = EMPTY_SPELL;
 	leech.id = SpellID::Leech;
 	leech.spellType = SpellType::Necromancy;
 	leech.iconTextureRect = sf::IntRect(50, 100, 50, 50);
@@ -377,8 +377,8 @@ SpellBean SpellBean::getLeechSpellBean() {
 	return leech;
 }
 
-SpellBean SpellBean::getIcyAmbushSpellBean() {
-	SpellBean icyAmbush = EMPTY_SPELL;
+SpellData SpellData::getIcyAmbushSpellData() {
+	SpellData icyAmbush = EMPTY_SPELL;
 	icyAmbush.id = SpellID::IcyAmbush;
 	icyAmbush.spellType = SpellType::Twilight;
 	icyAmbush.iconTextureRect = sf::IntRect(200, 50, 50, 50);
@@ -400,8 +400,8 @@ SpellBean SpellBean::getIcyAmbushSpellBean() {
 	return icyAmbush;
 }
 
-SpellBean SpellBean::getLightSpellBean() {
-	SpellBean light = EMPTY_SPELL;
+SpellData SpellData::getLightSpellData() {
+	SpellData light = EMPTY_SPELL;
 	light.id = SpellID::Light;
 	light.spellType = SpellType::Divine;
 	light.iconTextureRect = sf::IntRect(0, 150, 50, 50);
@@ -417,8 +417,8 @@ SpellBean SpellBean::getLightSpellBean() {
 	return light;
 }
 
-SpellBean SpellBean::getUnlockSpellBean() {
-	SpellBean unlock = EMPTY_SPELL;
+SpellData SpellData::getUnlockSpellData() {
+	SpellData unlock = EMPTY_SPELL;
 	unlock.id = SpellID::Unlock;
 	unlock.spellType = SpellType::Twilight;
 	unlock.iconTextureRect = sf::IntRect(0, 50, 50, 50);
@@ -432,8 +432,8 @@ SpellBean SpellBean::getUnlockSpellBean() {
 	return unlock;
 }
 
-SpellBean SpellBean::getInvisibilitySpellBean() {
-	SpellBean invisibility = EMPTY_SPELL;
+SpellData SpellData::getInvisibilitySpellData() {
+	SpellData invisibility = EMPTY_SPELL;
 	invisibility.id = SpellID::Invisibility;
 	invisibility.spellType = SpellType::Twilight;
 	invisibility.iconTextureRect = sf::IntRect(100, 50, 50, 50);

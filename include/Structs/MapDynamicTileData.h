@@ -4,7 +4,7 @@
 
 #include "Enums/MapDynamicTileID.h"
 
-struct MapDynamicTileBean {
+struct MapDynamicTileData {
 	MapDynamicTileID id;
 	sf::Vector2f position;
 	int spawnPosition;

@@ -1,6 +1,6 @@
 #include "Animation.h"
 
-void Animation::addFrame(sf::IntRect rect) {
+void Animation::addFrame(const sf::IntRect& rect) {
 	m_frames.push_back(rect);
 }
 

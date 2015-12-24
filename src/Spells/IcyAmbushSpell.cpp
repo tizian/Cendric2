@@ -4,7 +4,7 @@ IcyAmbushSpell::IcyAmbushSpell(const sf::Time& stunDuration) : Spell() {
 	m_stunDuration = stunDuration;
 }
 
-void IcyAmbushSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation spellAnimation(sf::seconds(10.f));

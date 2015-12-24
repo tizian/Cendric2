@@ -4,7 +4,7 @@ UnlockSpell::UnlockSpell(int strength) : Spell() {
 	m_strength = strength;
 }
 
-void UnlockSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void UnlockSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, 0.f));
 
 	Animation spellAnimation(sf::seconds(10.f));

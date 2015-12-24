@@ -1,16 +1,16 @@
 #include "SpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-SpellCreator::SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) {
+SpellCreator::SpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) {
 	m_owner = owner;
 	if (m_owner != nullptr) m_level = owner->getLevel();
-	if (m_owner != nullptr) m_attributeBean = owner->getAttributes();
+	if (m_owner != nullptr) m_attributeData = owner->getAttributes();
 	if (m_owner != nullptr && !(m_screen = dynamic_cast<LevelScreen*>(owner->getScreen()))) {
 		g_logger->logError("SpellCreator", "spell owner has no (level)screen.");
 	}
-	m_spellBean = spellBean;
+	m_spellData = spellData;
 
-	m_allowedModifiers = SpellBean::getAllowedModifiers(spellBean.id);
+	m_allowedModifiers = SpellData::getAllowedModifiers(spellData.id);
 }
 
 SpellCreator::~SpellCreator() {
@@ -58,39 +58,39 @@ void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {
 }
 
 void SpellCreator::addSpeedModifier(int level) {
-	m_spellBean.startVelocity += m_spellBean.speedModifierAddition * level;
+	m_spellData.startVelocity += m_spellData.speedModifierAddition * level;
 }
 
 void SpellCreator::addDamageModifier(int level) {
-	m_spellBean.damage += m_spellBean.damageModifierAddition * level;
+	m_spellData.damage += m_spellData.damageModifierAddition * level;
 }
 
 void SpellCreator::addDurationModifier(int level) {
-	m_spellBean.duration += static_cast<float>(level)* m_spellBean.durationModifierAddition;
+	m_spellData.duration += static_cast<float>(level)* m_spellData.durationModifierAddition;
 }
 
 void SpellCreator::addRangeModifier(int level) {
-	m_spellBean.range += m_spellBean.rangeModifierAddition * level;
+	m_spellData.range += m_spellData.rangeModifierAddition * level;
 }
 
 void SpellCreator::addCountModifier(int level) {
-	m_spellBean.count += m_spellBean.countModifierAddition * level;
+	m_spellData.count += m_spellData.countModifierAddition * level;
 }
 
 void SpellCreator::addReflectModifier(int level) {
-	m_spellBean.reflectCount += m_spellBean.reflectModifierAddition * level;
+	m_spellData.reflectCount += m_spellData.reflectModifierAddition * level;
 }
 
 void SpellCreator::addStrengthModifier(int level) {
 	// nop, we don't know yet what this does but the method is implemented so its subclasses won't have to
 }
 
-const SpellBean& SpellCreator::getSpellBean() const {
-	return m_spellBean;
+const SpellData& SpellCreator::getSpellData() const {
+	return m_spellData;
 }
 
-void SpellCreator::updateDamage(SpellBean& bean) const {
-	updateDamage(bean, m_attributeBean);
+void SpellCreator::updateDamage(SpellData& bean) const {
+	updateDamage(bean, m_attributeData);
 }
 
 int SpellCreator::getStrengthModifierValue() const {
@@ -101,7 +101,7 @@ std::string SpellCreator::getStrengthModifierName() const {
 	return "";
 }
 
-void SpellCreator::updateDamage(SpellBean& bean, const AttributeBean* attributes) {
+void SpellCreator::updateDamage(SpellData& bean, const AttributeData* attributes) {
 	if (attributes == nullptr) return;
 	switch (bean.damageType) {
 	case DamageType::Physical:

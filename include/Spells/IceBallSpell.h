@@ -6,5 +6,5 @@
 class IceBallSpell : public Spell {
 public:
 	IceBallSpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
+	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 };

@@ -142,9 +142,9 @@ void LevelMovableGameObject::updateAnimation(const sf::Time& frameTime) {
 	}
 }
 
-void LevelMovableGameObject::addAttributes(const sf::Time& duration, const AttributeBean& attributes) {
+void LevelMovableGameObject::addAttributes(const sf::Time& duration, const AttributeData& attributes) {
 	m_attributes.addBean(attributes);
-	m_buffAttributes.push_back(std::pair<sf::Time, AttributeBean>(duration, attributes));
+	m_buffAttributes.push_back(std::pair<sf::Time, AttributeData>(duration, attributes));
 }
 
 void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
@@ -264,15 +264,15 @@ SpellManager* LevelMovableGameObject::getSpellManager() const {
 	return m_spellManager;
 }
 
-const AttributeBean* LevelMovableGameObject::getAttributes() const {
+const AttributeData* LevelMovableGameObject::getAttributes() const {
 	return &m_attributes;
 }
 
-void LevelMovableGameObject::consumeFood(const sf::Time& duration, const AttributeBean& attributes) {
+void LevelMovableGameObject::consumeFood(const sf::Time& duration, const AttributeData& attributes) {
 	if (m_foodAttributes.first > sf::Time::Zero) {
 		// old food attributes have to be removed
 		m_attributes.removeBean(m_foodAttributes.second);
 	}
-	m_foodAttributes = std::pair<sf::Time, AttributeBean>(duration, attributes);
+	m_foodAttributes = std::pair<sf::Time, AttributeData>(duration, attributes);
 	m_attributes.addBean(attributes);
 }

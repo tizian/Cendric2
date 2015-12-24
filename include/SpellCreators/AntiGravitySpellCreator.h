@@ -8,7 +8,7 @@
 // a class that creates anti gravity spells
 class AntiGravitySpellCreator : public SpellCreator {
 public:
-	AntiGravitySpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	AntiGravitySpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
 	void executeSpell(const sf::Vector2f& target) override;
 };

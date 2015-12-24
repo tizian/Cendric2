@@ -5,7 +5,7 @@
 
 #include "GUI/BitmapText.h"
 #include "GUI/CircleSector.h"
-#include "Structs/SpellBean.h"
+#include "Structs/SpellData.h"
 #include "ResourceManager.h"
 #include "Enums/EnumNames.h"
 
@@ -16,7 +16,7 @@ public:
 	// creates a filled spell slot for a spell with id "id"
 	SpellSlot(SpellID id);
 	// creates a filled spell slot for a spell with bean "bean"
-	SpellSlot(const SpellBean& bean);
+	SpellSlot(const SpellData& bean);
 
 	void activate();
 	void deactivate();

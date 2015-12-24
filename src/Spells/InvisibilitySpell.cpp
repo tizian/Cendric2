@@ -8,7 +8,7 @@ InvisibilitySpell::InvisibilitySpell() : Spell() {
 	m_smokeDuration = SMOKE_DURATION;
 }
 
-void InvisibilitySpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void InvisibilitySpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
 	loadParticleSystem();
 }

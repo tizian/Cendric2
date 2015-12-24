@@ -10,7 +10,7 @@
 #include "Item.h"
 #include "Weapon.h"
 
-#include "Structs/AttributeBean.h"
+#include "Structs/AttributeData.h"
 #include "Structs/CharacterCoreData.h"
 
 class CharacterCore {
@@ -49,7 +49,7 @@ public:
 	// reloads only the weapon slots.
 	void reloadWeaponSlots();
 	// base attributes plus the attributes gotten by equipment
-	const AttributeBean& getTotalAttributes() const;
+	const AttributeData& getTotalAttributes() const;
 	// getter for items
 	std::map<std::string, int>* getItems();
 	// an item was added or removed. if itemID equals "gold", gold is added or removed
@@ -120,7 +120,7 @@ private:
 	void removeItem(const std::string& item, int quantity);
 
 	// base attributes plus the attributes of all currently equipped items
-	AttributeBean m_totalAttributes;
+	AttributeData m_totalAttributes;
 
 	std::map<std::string, Item> m_items;
 	std::map<ItemType, Item*> m_equippedItems;

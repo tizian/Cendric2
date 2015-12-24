@@ -4,7 +4,7 @@ int round_int(float r) {
 	return static_cast<int>((r > 0.0) ? (r + 0.5) : (r - 0.5));
 }
 
-CharacterInfo::CharacterInfo(const AttributeBean* attributes) {
+CharacterInfo::CharacterInfo(const AttributeData* attributes) {
 	m_attributes = attributes;
 
 	// init text

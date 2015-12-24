@@ -1,5 +1,6 @@
 #include "global.h"
 #include "Game.h"
+#include "DatabaseManager.h"
 #include "ResourceManager.h"
 #include "InputController.h"
 #include "Logger.h"
@@ -25,6 +26,8 @@ int main(int argc, char* argv[]) {
 #endif
 
 	g_logger = new Logger();
+	g_databaseManager = new DatabaseManager();
+	g_databaseManager->init();
 	g_resourceManager = new ResourceManager();
 	g_resourceManager->init();
 	g_textProvider = new TextProvider();
@@ -41,6 +44,7 @@ int main(int argc, char* argv[]) {
 	delete g_resourceManager;
 	delete g_inputController;
 	delete g_textProvider;
+	delete g_databaseManager;
 	delete g_logger;
 
 	return 0;

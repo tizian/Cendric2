@@ -1,10 +1,10 @@
 #include "Spells/FireBallSpell.h"
 
 FireBallSpell::FireBallSpell() : Spell() {
-	m_lightObject = new LightObject(LightBean(sf::Vector2f(), 80.f));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f));
 }
 
-void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void FireBallSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-20.f, -20.f));
 
 	Animation spellAnimation;
@@ -20,7 +20,7 @@ void FireBallSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, con
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	Spell::load(bean, mob, target);
+	Spell::load(data, mob, target);
 	g_resourceManager->playSound(m_sound, ResourceID::Sound_spell_fireball);
 }
 

@@ -10,7 +10,7 @@
 // a class that creates chop spells
 class ChopSpellCreator : public SpellCreator {
 public:
-	ChopSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
+	ChopSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner);
 
 	void executeSpell(const sf::Vector2f &target) override;
 };

@@ -151,15 +151,15 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 		auto& it = data.levelItems.at(i);
 		if (!it.empty() && (coreData.itemsLooted.at(data.id).find(i) == coreData.itemsLooted.at(data.id).end())) {
 			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
-			const ItemBean* item = g_resourceManager->getItemBean(it);
-			if (item == nullptr) {
+			ItemBean item = g_databaseManager->getItemBean(it);
+			if (item.status == BeanStatus::Error) {
 				// unexpected error
 				g_logger->logError("LevelLoader", "Level item was not loaded, unknown id.");
 				return;
 			}
 
 			LevelItem* levelItem = new LevelItem();
-			levelItem->load(mainCharacter, *item, position);
+			levelItem->load(mainCharacter, Item(item.item_id), position);
 			levelItem->setSpawnPosition(i);
 			screen->addObject(levelItem);
 		}
@@ -199,21 +199,21 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			case EnemyID::Rat:
 				enemy = new RatEnemy(level, mainCharacter);
 				if (gold == 0 && loot.empty()) {
-					loot.insert({ "it_fo_cheese", 1 });
+					loot.insert({ "fo_cheese", 1 });
 					gold = 1;
 				}
 				break;
 			case EnemyID::FireRat:
 				enemy = new FireRatEnemy(level, mainCharacter);
 				if (gold == 0 && loot.empty()) {
-					loot.insert({ "it_fo_bread", 2 });
+					loot.insert({ "fo_bread", 2 });
 					gold = 2;
 				}
 				break;
 			case EnemyID::Nekomata_blue:
 				enemy = new NekomataEnemy(level, mainCharacter);
 				if (gold == 0 && loot.empty()) {
-					loot.insert({ "it_mi_goldengoblet", 1 });
+					loot.insert({ "mi_goldengoblet", 1 });
 					gold = 100;
 				}
 				break;

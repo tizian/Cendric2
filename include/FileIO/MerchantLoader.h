@@ -12,7 +12,4 @@ public:
 	MerchantLoader();
 	~MerchantLoader();
 	MerchantData loadMerchant(const std::string& merchantID) const;
-
-private:
-	const std::string MERCHANT_FOLDER = "res/dialogue/";
 };

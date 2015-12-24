@@ -5,7 +5,7 @@
 WindGustSpell::WindGustSpell() : Spell() {
 }
 
-void WindGustSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	Spell::load(bean, mob, target);
 	loadParticleSystem();

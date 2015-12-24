@@ -6,7 +6,7 @@
 #include "Enums/ResourceID.h"
 #include "Enums/GameObjectState.h"
 
-struct LevelEquipmentBean {
+struct LevelEquipmentData {
 	sf::Vector2f spriteOffset;
 	sf::FloatRect boundingBox;
 	std::string texturePath;

@@ -13,17 +13,17 @@ map.position:3904.280762,958.505676
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:42
 # items in inventory:
-item.id:it_eq_back_necrot3,1
-item.id:it_eq_head_necrot3,1
-item.id:it_eq_head_divinet3,1
-item.id:it_eq_purpleback,1
-item.id:it_eq_wizardhatblue,1
-item.id:it_eq_wizardhatgrey,1
-item.id:it_eq_rafishat,1
-item.id:it_fo_cheese,1
-item.id:it_mi_goldengoblet,1
-item.id:it_we_rustysword,1
-item.id:it_fo_rawmeat,2
+item.id:eq_back_necrot3,1
+item.id:eq_head_necrot3,1
+item.id:eq_head_divinet3,1
+item.id:eq_purpleback,1
+item.id:eq_wizardhatblue,1
+item.id:eq_wizardhatgrey,1
+item.id:eq_rafishat,1
+item.id:fo_cheese,1
+item.id:mi_goldengoblet,1
+item.id:we_rustysword,1
+item.id:fo_rawmeat,2
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2,0,0,5,3,1,3
 equipped.spellslot:4
@@ -32,12 +32,12 @@ equipped.spellslot:17,7,3
 equipped.spellslot:12,0,0,4,3
 # equipment:
 equipped.back:
-equipped.body:it_eq_body_necrot3
+equipped.body:eq_body_necrot3
 equipped.head:
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
-equipped.weapon:it_we_icestaff
+equipped.weapon:we_icestaff
 # quickslot assignments:
 quickslot:1,
 quickslot:2,
@@ -53,11 +53,11 @@ items.looted:res/level/testleverlevel/testleverlevel.tmx
 # chests looted in level:
 # quest states:
 # quest targets killed:
-quest.progress.target:ACaveOfRats,Rat,1
+quest.progress.target:a_cave_of_rats,rat,1
 # quest conditions fulfilled:
 # npc states:
 # merchand states:
-merchant.state:Guard,5,1.500000,it_fo_caveberry,1,it_fo_cheese,11,it_fo_healingherb,1,it_fo_water,10,it_mi_goldengoblet,2
+merchant.state:guard,5,1.500000,fo_caveberry,1,fo_cheese,11,fo_healingherb,1,fo_water,10,mi_goldengoblet,2
 # spells learned:
 spell.learned:1,2,3,4,5,6
 spell.learned:2,7,9,11

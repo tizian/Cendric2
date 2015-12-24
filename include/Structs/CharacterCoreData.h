@@ -10,7 +10,7 @@
 #include "Enums/SpellType.h"
 
 #include "Structs/SpellModifier.h"
-#include "Structs/AttributeBean.h"
+#include "Structs/AttributeData.h"
 #include "Structs/MerchantData.h"
 
 struct CharacterCoreData {
@@ -42,7 +42,7 @@ struct CharacterCoreData {
 	std::map<SpellModifierType, int> modfiersLearned;
 
 	// base attributes
-	AttributeBean attributes;
+	AttributeData attributes;
 
 	// items & equipment
 	int gold;

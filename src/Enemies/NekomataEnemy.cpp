@@ -17,13 +17,13 @@ void NekomataEnemy::loadAttributes() {
 }
 
 void NekomataEnemy::loadSpells() {
-	SpellBean chopSpell = SpellBean::getSpellBean(SpellID::Chop);
+	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 50;
 	chopSpell.duration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
 
-	SpellBean fireBallSpell = SpellBean::getSpellBean(SpellID::FireBall);
+	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 100;
 	fireBallSpell.cooldown = sf::milliseconds(3000);
 	fireBallSpell.startVelocity = 200.f;

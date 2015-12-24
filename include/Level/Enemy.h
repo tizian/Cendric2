@@ -4,7 +4,7 @@
 #include "LevelMovableGameObject.h"
 #include "GUI/LootWindow.h"
 
-#include "Structs/AttributeBean.h"
+#include "Structs/AttributeData.h"
 
 #include "Enums/EnemyID.h"
 #include "Enums/SpellID.h"

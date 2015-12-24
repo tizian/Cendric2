@@ -1,28 +1,32 @@
 #include "Level/LevelItem.h"
 #include "Level/LevelMainCharacter.h"
 
-void LevelItem::load(LevelMainCharacter* mainChar, const ItemBean& bean, const sf::Vector2f& position) {
+void LevelItem::load(LevelMainCharacter* mainChar, const Item& item, const sf::Vector2f& position) {
 	m_mainChar = mainChar;
-	m_itemID = bean.id;
-	m_itemType = bean.type;
-	m_goldValue = bean.goldValue;
+	m_itemID = item.getID();
+	m_itemType = item.getType();
+	m_goldValue = item.getValue();
 
-	Animation idleAnimation(bean.frameTime);
-	setSpriteOffset(bean.spriteOffset);
-	setBoundingBox(bean.boundingBox);
+	if (!item.isLevelitem()) {
+		g_logger->logError("LevelItem", "Tried to instantiate Levelitem that has no frames!");
+		return;
+	}
+	Animation idleAnimation(item.getLevelitemBean().frame_time);
+	setSpriteOffset(item.getLevelitemBean().sprite_offset);
+	setBoundingBox(sf::FloatRect(0.f, 0.f, item.getLevelitemBean().bounding_box.x, item.getLevelitemBean().bounding_box.x));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_levelitems));
 	// add frames
-	for (auto &frame : bean.texturePositions) {
-		idleAnimation.addFrame(frame);
+	for (auto &frame : item.getFrames()) {
+		idleAnimation.addFrame(frame.texture_location);
 	}
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
-	playCurrentAnimation(bean.texturePositions.size() > 1);
+	playCurrentAnimation(item.getFrames().size() > 1);
 
 	setPosition(position - getSpriteOffset());
-	setTooltipText(g_textProvider->getText(bean.id, "item"));
+	setTooltipText(g_textProvider->getText(item.getID(), "item"));
 	setDebugBoundingBox(sf::Color::Green);
 }
 

@@ -50,21 +50,21 @@ void MerchantWindow::clearAllSlots() {
 }
 
 void MerchantWindow::notifyChange(const std::string& itemID) {
-	const ItemBean* bean = g_resourceManager->getItemBean(itemID);
-	if (bean == nullptr) return;
+	ItemBean bean = g_databaseManager->getItemBean(itemID);
+	if (bean.status != BeanStatus::Filled) return;
 
 	// search for the slot
-	if (m_items.find(bean->id) != m_items.end()) {
+	if (m_items.find(bean.item_id) != m_items.end()) {
 		if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) {
 			// the item was removed. check if it is selected.
-			if (m_selectedSlotId.compare(bean->id) == 0) {
+			if (m_selectedSlotId.compare(bean.item_id) == 0) {
 				deselectCurrentSlot();
 			}
-			m_items.erase(bean->id);
+			m_items.erase(bean.item_id);
 			calculateSlotPositions();
 		}
 		else {
-			m_items.at(bean->id).setAmount(m_interface->getMerchantData().wares.at(itemID));
+			m_items.at(bean.item_id).setAmount(m_interface->getMerchantData().wares.at(itemID));
 		}
 		return;
 	}
@@ -72,7 +72,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) return;
 
-	m_items[bean->id] = (InventorySlot(Item(*bean), m_interface->getMerchantData().wares.at(itemID)));
+	m_items[bean.item_id] = (InventorySlot(Item(bean.item_id), m_interface->getMerchantData().wares.at(itemID)));
 
 	calculateSlotPositions();
 }
@@ -161,13 +161,13 @@ void MerchantWindow::reload() {
 	clearAllSlots();
 	hideDescription();
 	for (auto& it : m_interface->getMerchantData().wares) {
-		const ItemBean* bean = g_resourceManager->getItemBean(it.first);
-		if (bean == nullptr) {
+		ItemBean bean = g_databaseManager->getItemBean(it.first);
+		if (bean.status != BeanStatus::Filled) {
 			g_logger->logError("MerchantWindow", "Item not resolved: " + it.first);
 			continue;
 		}
 		
-		m_items[bean->id] = (InventorySlot(Item(*bean), it.second));
+		m_items[bean.item_id] = (InventorySlot(Item(bean.item_id), it.second));
 	}
 
 	calculateSlotPositions();

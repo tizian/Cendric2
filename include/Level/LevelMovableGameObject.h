@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "MovableGameObject.h"
-#include "Structs/AttributeBean.h"
+#include "Structs/AttributeData.h"
 
 class Level;
 class SpellManager;
@@ -29,14 +29,14 @@ public:
 	// sets the fight animation time of this mob
 	void setFightAnimationTime();
 	// the mob consumes a food and gets its bonus attributes for its duration. they may also be negative.
-	void consumeFood(const sf::Time& duration, const AttributeBean& attributes);
+	void consumeFood(const sf::Time& duration, const AttributeData& attributes);
 	// the mob adds these attributes to its own. if their time runs out, they get removed again. The attribute "current health" however will stay.
-	void addAttributes(const sf::Time& duration, const AttributeBean& attributes);
+	void addAttributes(const sf::Time& duration, const AttributeData& attributes);
 	// gravity flip (used for anti gravity spell)
 	void flipGravity();
 
 	SpellManager* getSpellManager() const;
-	const AttributeBean* getAttributes() const;
+	const AttributeData* getAttributes() const;
 	Level* getLevel() const;
 	bool getIsFacingRight() const;
 	bool getIsUpsideDown() const;
@@ -68,11 +68,11 @@ protected:
 	sf::Time m_fightAnimationTime = sf::Time::Zero;
 
 	// store attributes given by food. if their time runs out, they get removed from the total attributes.
-	std::pair<sf::Time, AttributeBean> m_foodAttributes;
+	std::pair<sf::Time, AttributeData> m_foodAttributes;
 	// a vector to store the attributes given by spells (buffs). if their time runs out, they get removed from the total attributes.
-	std::vector<std::pair<sf::Time, AttributeBean>> m_buffAttributes;
+	std::vector<std::pair<sf::Time, AttributeData>> m_buffAttributes;
 
-	AttributeBean m_attributes;
+	AttributeData m_attributes;
 
 	// attributes, include regeneration (hp) and all buffs.
 	void updateAttributes(const sf::Time& frameTime);

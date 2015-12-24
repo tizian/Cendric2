@@ -6,7 +6,7 @@ using namespace std;
 const float InventorySlot::SIDE_LENGTH = 50.f;
 const float InventorySlot::MARGIN = 2.f;
 
-InventorySlot::InventorySlot() : m_item(DEFAULT_ITEM) {
+InventorySlot::InventorySlot() : m_item() {
 	m_type = m_item.getType();
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIDE_LENGTH, SIDE_LENGTH));
@@ -25,7 +25,7 @@ InventorySlot::InventorySlot() : m_item(DEFAULT_ITEM) {
 	m_outside.setOutlineColor(CENDRIC_COLOR_PURPLE);
 }
 
-InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getBean()) {
+InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getID()) {
 	m_type = m_item.getType();
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIDE_LENGTH, SIDE_LENGTH));
@@ -46,7 +46,7 @@ InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getBean
 	m_outside.setOutlineColor(CENDRIC_COLOR_PURPLE);
 }
 
-InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos) : m_item(DEFAULT_ITEM) {
+InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos) : m_item() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIDE_LENGTH, SIDE_LENGTH));
 	setDebugBoundingBox(sf::Color::Red);
 	setInputInDefaultView(true);

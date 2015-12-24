@@ -1,14 +1,14 @@
 #include "SpellCreators/AntiGravitySpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-AntiGravitySpellCreator::AntiGravitySpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner) {
+AntiGravitySpellCreator::AntiGravitySpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
 void AntiGravitySpellCreator::executeSpell(const sf::Vector2f& target) {
-	SpellBean spellBean = m_spellBean;
+	SpellData spellData= m_spellData;
 	AntiGravitySpell* newSpell = new AntiGravitySpell();
-	newSpell->load(spellBean, m_owner, target);
+	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 	if (dynamic_cast<LevelMainCharacter*>(m_owner))
-		m_screen->addBuffToInterface(BuffType::Spell, spellBean.iconTextureRect, spellBean.duration);
+		m_screen->addBuffToInterface(BuffType::Spell, spellData.iconTextureRect, spellData.duration);
 }

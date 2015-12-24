@@ -10,7 +10,7 @@
 // a class that creates iceball spells
 class IceBallSpellCreator : public SpellCreator {
 public:
-	IceBallSpellCreator(const SpellBean &spellBean, LevelMovableGameObject *owner);
+	IceBallSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner);
 
 	void executeSpell(const sf::Vector2f &target) override;
 };

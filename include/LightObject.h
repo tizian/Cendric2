@@ -3,12 +3,12 @@
 #include "global.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
-#include "Structs/LightBean.h"
+#include "Structs/LightData.h"
 
 // A light ellipse in a level/map
 class LightObject : virtual public GameObject {
 public:
-	LightObject(const LightBean& bean);
+	LightObject(const LightData& data);
 	virtual ~LightObject() {};
 
 	virtual void render(sf::RenderTarget& renderTarget) override;
@@ -23,7 +23,7 @@ protected:
 	void init();
 	bool m_isVisible = true;
 
-	LightBean m_bean;
+	LightData m_lightData;
 
 	sf::RectangleShape m_sprite;
 

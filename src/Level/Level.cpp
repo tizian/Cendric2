@@ -310,11 +310,11 @@ void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::Float
 	}
 }
 
-LevelExitBean* Level::checkLevelExit(const sf::FloatRect& boundingBox) const {
+LevelExitData* Level::checkLevelExit(const sf::FloatRect& boundingBox) const {
 	if (g_inputController->isKeyJustPressed(Key::Up)) {
 		for (auto it : m_levelData.levelExits) {
 			if (boundingBox.intersects(it.levelExitRect)) {
-				LevelExitBean* exit = new LevelExitBean();
+				LevelExitData* exit = new LevelExitData();
 				exit->mapID = it.mapID;
 				exit->mapSpawnPoint = it.mapSpawnPoint;
 				return exit;

@@ -3,7 +3,7 @@
 AureolaSpell::AureolaSpell() : Spell() {
 }
 
-void AureolaSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation spellAnimation(sf::seconds(0.3f));

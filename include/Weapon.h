@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Item.h"
 #include "Structs/SpellModifier.h"
-#include "Structs/SpellBean.h"
+#include "Structs/SpellData.h"
 
 struct SpellSlot_s {
 	SpellType spellType;
@@ -16,9 +16,9 @@ struct WeaponSlot_s {
 };
 
 // A weapon in cendrics / a npcs / a mobs inventory
-class Weapon : public Item {
+class Weapon : virtual public Item {
 public:
-	Weapon(const ItemBean& bean);
+	Weapon(const std::string& itemID);
 
 	const sf::Time& getWeaponCooldown() const;
 	const sf::FloatRect& getWeaponChopRect() const;
@@ -38,9 +38,14 @@ public:
 
 	const std::vector<WeaponSlot_s>& getWeaponSlots() const;
 
+	void initWeaponBeans(const std::string& itemID);
+	void checkWeapon();
+
 	void reload();
 
 private:
+	ItemWeaponBean m_itemWeaponBean;
+	std::vector<ItemWeaponSlotBean> m_itemWeaponSlotBeans;
 
 	std::vector<WeaponSlot_s> m_weaponSlots;
 

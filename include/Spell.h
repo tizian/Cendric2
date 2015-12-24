@@ -7,7 +7,7 @@
 
 #include "Enums/SpellID.h"
 #include "Enums/DamageType.h"
-#include "Structs/SpellBean.h"
+#include "Structs/SpellData.h"
 
 class LevelMovableGameObject;
 
@@ -17,7 +17,7 @@ public:
 	Spell() : MovableGameObject() {}
 	virtual ~Spell() {}
 
-	virtual void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target);
+	virtual void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target);
 	virtual void update(const sf::Time& frameTime) override;
 	virtual void setViewable(bool value) override;
 

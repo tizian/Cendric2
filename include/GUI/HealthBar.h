@@ -1,18 +1,18 @@
 #pragma once
 
 #include "global.h"
-#include "Structs/AttributeBean.h"
+#include "Structs/AttributeData.h"
 
 // the health bar, as displayed in a level. It takes its data from the attributes of the main character.
 class HealthBar {
 public:
-	HealthBar(const AttributeBean* attributes);
+	HealthBar(const AttributeData* attributes);
 
 	void render(sf::RenderTarget& target) const;
 	void update();
 
 private:
-	const AttributeBean* m_attributes;
+	const AttributeData* m_attributes;
 
 	sf::RectangleShape m_barOutline;
 	sf::RectangleShape m_bar;

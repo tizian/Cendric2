@@ -17,8 +17,8 @@ public:
 	~SpellManager();
 
 	void update(sf::Time frameTime);
-	void addSpell(const SpellBean& spell);
-	void addSpell(const SpellBean& spell, const std::vector<SpellModifier>& modifiers);
+	void addSpell(const SpellData& spell);
+	void addSpell(const SpellData& spell, const std::vector<SpellModifier>& modifiers);
 	void setCurrentSpell(int spellNr);
 	// sets the current spell to spellNr and, if it doesn't need a target, executes it.
 	void setAndExecuteSpell(int spellNr);

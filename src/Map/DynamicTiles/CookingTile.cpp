@@ -2,7 +2,7 @@
 #include "Map/Map.h"
 
 CookingTile::CookingTile(Map* map) : MapDynamicTile(map) {
-	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(100.f, 100.f)));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(100.f, 100.f)));
 }
 
 void CookingTile::init() {

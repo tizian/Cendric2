@@ -7,7 +7,7 @@
 class AntiGravitySpell : public Spell {
 public:
 	AntiGravitySpell();
-	void load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
+	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
@@ -15,5 +15,5 @@ public:
 	bool getConfiguredRotateSprite() const override;
 
 private:
-	AttributeBean m_additionalResistance;
+	AttributeData m_additionalResistance;
 };

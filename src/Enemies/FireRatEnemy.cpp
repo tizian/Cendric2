@@ -17,13 +17,13 @@ void FireRatEnemy::loadAttributes() {
 }
 
 void FireRatEnemy::loadSpells() {
-	SpellBean chopSpell = SpellBean::getSpellBean(SpellID::Chop);
+	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 15;
 	chopSpell.duration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
 
-	SpellBean fireBallSpell = SpellBean::getSpellBean(SpellID::FireBall);
+	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 10;
 	fireBallSpell.cooldown = sf::milliseconds(3000);
 	fireBallSpell.startVelocity = 200.f;

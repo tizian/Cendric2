@@ -12,14 +12,14 @@ class LevelScreen;
 // a class that spawns spells of a certain type - directly to the screen
 class SpellCreator {
 public:
-	SpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	SpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	virtual ~SpellCreator();
 
 	void addModifiers(const std::vector<SpellModifier>& modifiers);
 
 	// calculates spells using the owners attributes & the target, and executes their behaviour, adding objects to the screen.
 	virtual void executeSpell(const sf::Vector2f& target) = 0;
-	const SpellBean& getSpellBean() const;
+	const SpellData& getSpellData() const;
 
 	// used by the descriptions to show what this creator does if it has a strength modifier
 	// default returns empty string
@@ -28,14 +28,14 @@ public:
 	// default returns 0
 	virtual int getStrengthModifierValue() const;
 
-	// updates the spells damage, using the attribute bean. It adds damage and calculates critical hits
-	static void updateDamage(SpellBean& bean, const AttributeBean* attributes);
+	// updates the spells damage, using the attribute data. It adds damage and calculates critical hits
+	static void updateDamage(SpellData& bean, const AttributeData* attributes);
 
 protected:
 	// filled by the subclasses
 	std::vector<SpellModifierType> m_allowedModifiers;
 	// updates the spells damage, using the mobs attribute bean. It adds damage and calculates critical hits
-	void updateDamage(SpellBean& bean) const;
+	void updateDamage(SpellData& bean) const;
 
 	virtual void addDamageModifier(int level);
 	virtual void addRangeModifier(int level);
@@ -45,8 +45,8 @@ protected:
 	virtual void addStrengthModifier(int level);
 	virtual void addDurationModifier(int level);
 
-	const AttributeBean* m_attributeBean;
-	SpellBean m_spellBean;
+	const AttributeData* m_attributeData;
+	SpellData m_spellData;
 	Level* m_level = nullptr;
 	LevelScreen* m_screen = nullptr;
 	LevelMovableGameObject* m_owner = nullptr;

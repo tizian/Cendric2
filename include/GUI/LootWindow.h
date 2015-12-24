@@ -4,7 +4,6 @@
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 
-#include "Structs/ItemBean.h"
 #include "Item.h"
 
 class LootWindow : public Window {

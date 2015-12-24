@@ -1,6 +1,6 @@
 #include "GUI/HealthBar.h"
 
-HealthBar::HealthBar(const AttributeBean* attributes) {
+HealthBar::HealthBar(const AttributeData* attributes) {
 	m_attributes = attributes;
 
 	// init bar

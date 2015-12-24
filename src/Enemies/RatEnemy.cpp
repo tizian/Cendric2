@@ -15,7 +15,7 @@ void RatEnemy::loadAttributes() {
 }
 
 void RatEnemy::loadSpells() {
-	SpellBean chopSpell = SpellBean::getSpellBean(SpellID::Chop);
+	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.duration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.damage = 2;

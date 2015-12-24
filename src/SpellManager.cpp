@@ -24,12 +24,12 @@ void SpellManager::setSpellSelection(SpellSelection* selection) {
 	m_spellSelection = selection;
 }
 
-void SpellManager::addSpell(const SpellBean& spell) {
+void SpellManager::addSpell(const SpellData& spell) {
 	addSpell(spell, std::vector<SpellModifier>());
 }
 
-void SpellManager::addSpell(const SpellBean& spell, const std::vector<SpellModifier>& modifiers) {
-	m_spellMap.push_back(SpellBean::getSpellCreator(spell, modifiers, m_owner));
+void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModifier>& modifiers) {
+	m_spellMap.push_back(SpellData::getSpellCreator(spell, modifiers, m_owner));
 	m_coolDownMap.push_back(sf::Time::Zero);
 }
 
@@ -37,7 +37,7 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target) {
 	if (m_currentSpell == -1 || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
 
 	// spell has been cast. set cooldown.
-	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellBean().cooldown * m_owner->getAttributes()->cooldownMultiplier;
+	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellData().cooldown * m_owner->getAttributes()->cooldownMultiplier;
 	m_coolDownMap[m_currentSpell] = cooldown;
 	m_spellMap[m_currentSpell]->executeSpell(target);
 	if (m_spellSelection != nullptr) {
@@ -57,7 +57,7 @@ void SpellManager::update(sf::Time frameTime) {
 void SpellManager::setAndExecuteSpell(int spellNr) {
 	setCurrentSpell(spellNr);
 	if (m_currentSpell == -1) return;
-	if (!(m_spellMap.at(m_currentSpell)->getSpellBean().needsTarget) && m_currentSpell == spellNr) {
+	if (!(m_spellMap.at(m_currentSpell)->getSpellData().needsTarget) && m_currentSpell == spellNr) {
 		executeCurrentSpell(sf::Vector2f());
 	}
 }

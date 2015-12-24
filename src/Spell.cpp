@@ -4,17 +4,17 @@
 
 using namespace std;
 
-void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	m_duration = bean.duration;
-	m_damage = bean.damage;
-	m_heal = bean.heal;
-	m_damageType = bean.damageType;
-	m_reflectCount = bean.reflectCount;
-	m_speed = bean.startVelocity;
-	m_id = bean.id;
-	m_range = bean.range;
-	m_needsTarget = bean.needsTarget;
-	setBoundingBox(bean.boundingBox);
+void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+	m_duration = data.duration;
+	m_damage = data.damage;
+	m_heal = data.heal;
+	m_damageType = data.damageType;
+	m_reflectCount = data.reflectCount;
+	m_speed = data.startVelocity;
+	m_id = data.id;
+	m_range = data.range;
+	m_needsTarget = data.needsTarget;
+	setBoundingBox(data.boundingBox);
 	setDebugBoundingBox(sf::Color::Red);
 
 	m_level = mob->getLevel();
@@ -34,7 +34,7 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	setPosition(absolutePosition);
 
 	// if the spell doesn't need a target, it is attached to main char and velocity is ignored 
-	if (!bean.needsTarget) {
+	if (!data.needsTarget) {
 		setVelocity(sf::Vector2f(0, 0));
 		return;
 	}
@@ -45,7 +45,7 @@ void Spell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::V
 	trueDir.x = (len == 0) ? 0 : trueDir.x / len;
 	trueDir.y = (len == 0) ? 0 : trueDir.y / len;
 
-	sf::Vector2f direction = rotateVector(trueDir, bean.divergenceAngle);
+	sf::Vector2f direction = rotateVector(trueDir, data.divergenceAngle);
 
 	if (getConfiguredRotateSprite()) {
 		setSpriteRotation(atan2(direction.y, direction.x));

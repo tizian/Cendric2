@@ -89,11 +89,11 @@ bool TMXReader::readLights(tinyxml2::XMLElement* objectgroup, TMXData& data) con
 		result = object->QueryIntAttribute("height", &height);
 		XMLCheckResult(result);
 
-		LightBean bean;
-		bean.radius.x = width / 2.f;
-		bean.radius.y = height / 2.f;
-		bean.center.x = x + bean.radius.x;
-		bean.center.y = y + bean.radius.y;
+		LightData lightData;
+		lightData.radius.x = width / 2.f;
+		lightData.radius.y = height / 2.f;
+		lightData.center.x = x + lightData.radius.x;
+		lightData.center.y = y + lightData.radius.y;
 
 		// brightness for light bean
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -116,7 +116,7 @@ bool TMXReader::readLights(tinyxml2::XMLElement* objectgroup, TMXData& data) con
 						brightness = 1.f;
 						g_logger->logWarning("TMXReader", "Brightness must be between 0 and 1. It was " + std::to_string(brightness) + ", it is now 1");
 					}
-					bean.brightness = brightness;
+					lightData.brightness = brightness;
 				}
 				else {
 					logError("XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for light bean.");
@@ -126,7 +126,7 @@ bool TMXReader::readLights(tinyxml2::XMLElement* objectgroup, TMXData& data) con
 			}
 		}
 
-		data.lights.push_back(bean);
+		data.lights.push_back(lightData);
 		object = object->NextSiblingElement("object");
 	}
 	return true;

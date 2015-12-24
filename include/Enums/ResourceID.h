@@ -8,6 +8,7 @@ enum class ResourceID {
 	Quicksave,
 	Save_folder,
 	Items,
+	Npc_folder,
 	Texture_spellicons,
 	Texture_mainChar,
 	Texture_mapMainChar,

@@ -19,7 +19,7 @@ public:
 
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
-	void setDialogue(const NPCBean& bean);
+	void setDialogue(const NPCData& data);
 
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;

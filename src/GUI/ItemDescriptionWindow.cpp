@@ -1,4 +1,5 @@
 #include <iomanip>
+#include <sstream>
 
 #include "GUI/ItemDescriptionWindow.h"
 
@@ -36,7 +37,7 @@ std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
 	std::string goldText;
 	goldText.append(g_textProvider->getText("GoldValue"));
 	goldText.append(": ");
-	goldText.append(item.getBean().goldValue < 0 ? g_textProvider->getText("Unsalable") : to_string(item.getBean().goldValue));
+	goldText.append(item.getValue() < 0 ? g_textProvider->getText("Unsalable") : to_string(item.getValue()));
 	return goldText;
 }
 
@@ -68,7 +69,7 @@ void ItemDescriptionWindow::load(const Item& item) {
 	m_descriptionText.setString(g_textProvider->getCroppedText(item.getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
 	string stats = "\n";
-	const AttributeBean& attr = item.getAttributes();
+	const AttributeData& attr = item.getAttributes();
 	stats.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
 	stats.append(getAttributeText("Haste", attr.haste));
 	stats.append(getAttributeText("Critical", attr.critical));
@@ -84,34 +85,38 @@ void ItemDescriptionWindow::load(const Item& item) {
 	stats.append(getAttributeText("ShadowResistance", attr.resistanceShadow));
 	stats.append("\n");
 
-	if (item.getBean().foodDuration > sf::Time::Zero) {
+	if (item.getFoodDuration() > sf::Time::Zero) {
 		stats.append(g_textProvider->getText("Duration"));
 		stats.append(": ");
-		stats.append(to_string(static_cast<int>(floor(item.getBean().foodDuration.asSeconds()))));
+		stats.append(to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))));
 		stats.append(" s\n");
 	}
 
 	stats.append(getGoldText(item));
 
 	if (item.getType() == ItemType::Equipment_weapon) {
+		const Weapon* weapon = dynamic_cast<const Weapon*>(&item);
+		if (weapon == nullptr) {
+			return;
+		}
 		stats.append("\n\n");
 		stats.append(g_textProvider->getText("WeaponDamage"));
 		stats.append(": ");
-		stats.append(to_string(item.getBean().weaponChopDamage));
+		stats.append(to_string(weapon->getWeaponChopDamage()));
 		stats.append("\n");
 
 		stats.append(g_textProvider->getText("Cooldown"));
 		stats.append(": ");
-		stats.append(toStrMaxDecimals(item.getBean().weaponChopCooldown.asSeconds(), 1));
+		stats.append(toStrMaxDecimals(weapon->getWeaponCooldown().asSeconds(), 1));
 		stats.append("s\n");
 
-		if (item.getBean().weaponSlots.size() > 0) {
+		if (weapon->getWeaponSlots().size() > 0) {
 			stats.append("\n");
 			stats.append("<<< " + g_textProvider->getText("SpellSlots") + " >>>\n");
-			for (auto& it : item.getBean().weaponSlots) {
-				stats.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.type)));
+			for (auto& it : weapon->getWeaponSlots()) {
+				stats.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
 				stats.append(" - " + g_textProvider->getText("GemSockets") + ": ");
-				stats.append(to_string(it.modifierCount) + "\n");
+				stats.append(to_string(it.spellModifiers.size()) + "\n");
 			}
 		}
 	}

@@ -65,11 +65,11 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 		result = object->QueryIntAttribute("height", &height);
 		XMLCheckResult(result);
 
-		LevelExitBean bean;
-		bean.levelExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
-		bean.mapID = "";
-		bean.mapSpawnPoint.x = -1.f;
-		bean.mapSpawnPoint.y = -1.f;
+		LevelExitData leData;
+		leData.levelExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
+		leData.mapID = "";
+		leData.mapSpawnPoint.x = -1.f;
+		leData.mapSpawnPoint.y = -1.f;
 
 		// map spawn point for level exit
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -95,17 +95,17 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 					logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found for level exit map id.");
 					return false;
 				}
-				bean.mapID = textAttr;
+				leData.mapID = textAttr;
 			}
 			else if (name.compare("x") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
 				XMLCheckResult(result);
-				bean.mapSpawnPoint.x = static_cast<float>(x);
+				leData.mapSpawnPoint.x = static_cast<float>(x);
 			}
 			else if (name.compare("y") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
 				XMLCheckResult(result);
-				bean.mapSpawnPoint.y = static_cast<float>(y);
+				leData.mapSpawnPoint.y = static_cast<float>(y);
 			}
 			else {
 				logError("XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
@@ -113,7 +113,7 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 			}
 			_property = _property->NextSiblingElement("property");
 		}
-		data.levelExits.push_back(bean);
+		data.levelExits.push_back(leData);
 		object = object->NextSiblingElement("object");
 	}
 	return true;
@@ -362,7 +362,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 	int offOffset = static_cast<int>(LevelDynamicTileID::SwitchableOff) + m_firstGidDynamicTiles - 1;
 
 	size_t pos = 0;
-	LeverBean bean;
+	LeverData leData;
 
 	int skinNr;
 	int x = 0;
@@ -376,28 +376,28 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 		}
 		else if ((skinNr - leverOffset) % DYNAMIC_TILE_COUNT == 0) {
 			// we've found a lever!
-			LevelDynamicTileBean lever;
+			LevelDynamicTileData lever;
 			lever.id = LevelDynamicTileID::Lever;
 			lever.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 			lever.skinNr = ((skinNr - leverOffset) / DYNAMIC_TILE_COUNT) + 1;
 			lever.spawnPosition = y * data.mapSize.x + x;
-			bean.levers.push_back(lever);
+			leData.levers.push_back(lever);
 		}
 		else if ((skinNr - onOffset) % DYNAMIC_TILE_COUNT == 0) {
-			LevelDynamicTileBean switchTile;
+			LevelDynamicTileData switchTile;
 			switchTile.id = LevelDynamicTileID::SwitchableOn;
 			switchTile.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 			switchTile.skinNr = ((skinNr - onOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
-			bean.dependentTiles.push_back(switchTile);
+			leData.dependentTiles.push_back(switchTile);
 		}
 		else if ((skinNr - offOffset) % DYNAMIC_TILE_COUNT == 0) {
-			LevelDynamicTileBean switchTile;
+			LevelDynamicTileData switchTile;
 			switchTile.id = LevelDynamicTileID::SwitchableOff;
 			switchTile.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
 			switchTile.skinNr = ((skinNr - offOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
-			bean.dependentTiles.push_back(switchTile);
+			leData.dependentTiles.push_back(switchTile);
 		}
 		else {
 			logError("Wrong tile id found on a lever layer, id=" + std::to_string(skinNr));
@@ -415,7 +415,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 		}
 	}
 	
-	data.levers.push_back(bean);
+	data.levers.push_back(leData);
 
 	return true;
 }
@@ -628,8 +628,8 @@ void LevelReader::updateData(LevelData& data)  const {
 			// Read in DynamicWaterTiles: Look for n x m tile rectangles inside layer
 
 			std::vector<bool> processed(layer.second.size(), false);
-			LevelDynamicTileBean bean;
-			bean.id = id;
+			LevelDynamicTileData ldtData;
+			ldtData.id = id;
 
 			for (int y = 0; y < data.mapSize.y; ++y) {
 				for (int x = 0; x < data.mapSize.x; ++x) {
@@ -660,11 +660,11 @@ void LevelReader::updateData(LevelData& data)  const {
 						}
 
 						// Fill in info
-						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
-						bean.skinNr = skinNr;
-						bean.spawnPosition = y * data.mapSize.x + x;
-						bean.size = sf::Vector2f(static_cast<float>(tileWidth * width), static_cast<float>(tileHeight * height));
-						data.dynamicTiles.push_back(bean);
+						ldtData.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+						ldtData.skinNr = skinNr;
+						ldtData.spawnPosition = y * data.mapSize.x + x;
+						ldtData.size = sf::Vector2f(static_cast<float>(tileWidth * width), static_cast<float>(tileHeight * height));
+						data.dynamicTiles.push_back(ldtData);
 					}
 				}
 			}
@@ -675,12 +675,12 @@ void LevelReader::updateData(LevelData& data)  const {
 				for (int x = 0; x < data.mapSize.x; ++x) {
 					int skinNr = layer.second[y * data.mapSize.x + x];
 					if (skinNr != 0) {
-						LevelDynamicTileBean bean;
-						bean.id = id;
-						bean.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
-						bean.skinNr = skinNr;
-						bean.spawnPosition = y * data.mapSize.x + x;
-						data.dynamicTiles.push_back(bean);
+						LevelDynamicTileData ldeData;
+						ldeData.id = id;
+						ldeData.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+						ldeData.skinNr = skinNr;
+						ldeData.spawnPosition = y * data.mapSize.x + x;
+						data.dynamicTiles.push_back(ldeData);
 					}
 				}
 			}

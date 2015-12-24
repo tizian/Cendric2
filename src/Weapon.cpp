@@ -1,19 +1,38 @@
 #include "Weapon.h"
 #include "Logger.h"
 
-Weapon::Weapon(const ItemBean& bean) : Item(bean) {
+Weapon::Weapon(const std::string& itemID) : Item(itemID) {
+	initWeaponBeans(itemID);
+	checkWeapon();
 	reload();
 }
 
+void Weapon::initWeaponBeans(const std::string& itemID) {
+	Item::initBeans(itemID);
+	m_itemWeaponBean = g_databaseManager->getItemWeaponBean(itemID);
+	m_itemWeaponSlotBeans = g_databaseManager->getItemWeaponSlotBeans(itemID);
+}
+
+void Weapon::checkWeapon() {
+	Item::checkItem();
+	if (m_itemWeaponBean.status == BeanStatus::Filled) {
+		m_isWeapon = true;
+	}
+	else {
+		g_logger->logError("Weapon", "Weapon instantiated that has no weapon part, id is" + m_itemBean.item_id);
+	}
+}
+
+
 void Weapon::reload() {
 	m_weaponSlots.clear();
-	for (auto& it : m_bean.weaponSlots) {
+	for (auto& slotBean : m_itemWeaponSlotBeans) {
 		SpellSlot_s emptySpellSlot;
-		emptySpellSlot.spellType = it.type;
+		emptySpellSlot.spellType = slotBean.slot_type;
 		emptySpellSlot.spellID = SpellID::VOID;
 
 		std::vector<SpellModifier> modifiers;
-		for (int i = 0; i < it.modifierCount; i++) {
+		for (int i = 0; i < slotBean.modifier_count; i++) {
 			SpellModifier modifier;
 			modifier.type = SpellModifierType::VOID;
 			modifiers.push_back(modifier);
@@ -32,15 +51,15 @@ const std::vector<WeaponSlot_s>& Weapon::getWeaponSlots() const {
 }
 
 const sf::Time& Weapon::getWeaponCooldown() const {
-	return m_bean.weaponChopCooldown;
+	return m_itemWeaponBean.chop_cooldown;
 }
 
 const sf::FloatRect& Weapon::getWeaponChopRect() const {
-	return m_bean.weaponChopRect;
+	return m_itemWeaponBean.chop_rect;
 }
 
 int Weapon::getWeaponChopDamage() const {
-	return m_bean.weaponChopDamage;
+	return m_itemWeaponBean.chop_damage;
 }
 
 SpellID Weapon::getCurrentSpellForSlot(int slotNr) const {
@@ -94,7 +113,7 @@ bool Weapon::addModifier(int slotNr, int modifierNr, const SpellModifier& modifi
 
 	// check if this spell allows a modifier of this type
 	if (modifier.type != SpellModifierType::VOID) {
-		std::vector<SpellModifierType> allowedModifiers = SpellBean::getAllowedModifiers(m_weaponSlots.at(slotNr).spellSlot.spellID);
+		std::vector<SpellModifierType> allowedModifiers = SpellData::getAllowedModifiers(m_weaponSlots.at(slotNr).spellSlot.spellID);
 		if (std::find(allowedModifiers.begin(), allowedModifiers.end(), modifier.type) == allowedModifiers.end()) {
 			g_logger->logWarning("Weapon::addModifier", "This modifier is not allowed for the spell!");
 			return false;
@@ -138,11 +157,11 @@ bool Weapon::doesSlotExist(int slotNr) const {
 
 bool Weapon::isSpellAllowed(int slotNr, SpellID id) const {
 	// check if slot with this nr exists
-	if (slotNr < 0 || slotNr > m_weaponSlots.size() - 1) {
+	if (slotNr < 0 || (size_t)slotNr > (m_weaponSlots.size() - 1)) {
 		g_logger->logError("Weapon", "This weapon has not enough slots to add this spell (slots: " + std::to_string(m_weaponSlots.size()) + ", required nr: " + std::to_string(slotNr));
 		return false;
 	}
 	// check if this spell bean has the correct type for this. An empty spell can be added anywhere.
 	if (SpellID::VOID == id) return true;
-	return (m_weaponSlots.at(slotNr).spellSlot.spellType == SpellBean::getSpellBean(id).spellType);
+	return (m_weaponSlots.at(slotNr).spellSlot.spellType == SpellData::getSpellData(id).spellType);
 }

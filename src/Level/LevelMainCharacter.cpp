@@ -65,7 +65,7 @@ void LevelMainCharacter::loadWeapon() {
 
 	if (m_core == nullptr || m_core->getWeapon() == nullptr) {
 		g_logger->logWarning("LevelMainCharacter::loadWeapon", "character core is not set or weapon not found.");
-		m_spellManager->addSpell(SpellBean::getSpellBean(SpellID::Chop));
+		m_spellManager->addSpell(SpellData::getSpellData(SpellID::Chop));
 		return;
 	}
 	const Weapon* weapon = m_core->getWeapon();
@@ -81,7 +81,7 @@ void LevelMainCharacter::loadWeapon() {
 	m_spellManager->clearSpells();
 
 	// handle chop spell
-	SpellBean chop = SpellBean::getSpellBean(SpellID::Chop);
+	SpellData chop = SpellData::getSpellData(SpellID::Chop);
 	chop.boundingBox = weapon->getWeaponChopRect();
 	chop.cooldown = weapon->getWeaponCooldown();
 	chop.damage = weapon->getWeaponChopDamage();
@@ -91,7 +91,7 @@ void LevelMainCharacter::loadWeapon() {
 	// handle other spells
 	for (int i = 0; i < 5; i++) {
 		if (weapon->getCurrentSpellForSlot(i) == SpellID::VOID) continue;
-		SpellBean newBean = SpellBean::getSpellBean(weapon->getCurrentSpellForSlot(i));
+		SpellData newBean = SpellData::getSpellData(weapon->getCurrentSpellForSlot(i));
 		switch (i) {
 		case 0:
 			newBean.inputKey = Key::FirstSpell;

@@ -1,15 +1,15 @@
 #include "SpellCreators/TelekinesisSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-TelekinesisSpellCreator::TelekinesisSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner) : SpellCreator(spellBean, owner) {
+TelekinesisSpellCreator::TelekinesisSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
 void TelekinesisSpellCreator::executeSpell(const sf::Vector2f& target) {
-	SpellBean spellBean = m_spellBean;
-	updateDamage(spellBean);
+	SpellData spellData = m_spellData;
+	updateDamage(spellData);
 
 	TelekinesisSpell* newSpell = new TelekinesisSpell();
-	newSpell->load(spellBean, m_owner, target);
+	newSpell->load(spellData, m_owner, target);
 	newSpell->setItemVector(m_screen->getObjects(GameObjectType::_LevelItem));
 	m_screen->addObject(newSpell);
 
@@ -18,5 +18,5 @@ void TelekinesisSpellCreator::executeSpell(const sf::Vector2f& target) {
 
 void TelekinesisSpellCreator::addRangeModifier(int level) {
 	SpellCreator::addRangeModifier(level);
-	m_spellBean.duration = sf::seconds(m_spellBean.range / m_spellBean.startVelocity);
+	m_spellData.duration = sf::seconds(m_spellData.range / m_spellData.startVelocity);
 }

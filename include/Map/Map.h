@@ -34,7 +34,7 @@ public:
 	bool collidesX(const sf::FloatRect& boundingBox) const;
 	bool collidesY(const sf::FloatRect& boundingBox) const;
 	// checks if the main char has reached a level entry. If no, nullptr, else the spawn point and id for that level
-	MapExitBean* checkLevelEntry(const sf::FloatRect& boundingBox) const;
+	MapExitData* checkLevelEntry(const sf::FloatRect& boundingBox) const;
 
 	const TileMap& getBackgroundTilemap() const;
 	const TileMap& getForegroundTilemap() const;

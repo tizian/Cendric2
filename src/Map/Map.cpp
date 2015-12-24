@@ -168,10 +168,10 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const {
 	return false;
 }
 
-MapExitBean* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {
+MapExitData* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {
 	for (auto it : m_mapData.mapExits) {
 		if (boundingBox.intersects(it.mapExitRect)) {
-			MapExitBean* exit = new MapExitBean();
+			MapExitData* exit = new MapExitData();
 			exit->levelID = it.levelID;
 			exit->levelSpawnPoint = it.levelSpawnPoint;
 			return exit;

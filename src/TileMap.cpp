@@ -95,7 +95,7 @@ void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const 
 			
 			animatedTile.addAnimation(GameObjectState::Idle, idleAnimation);
 
-			sf::Vector2f position(i * data.tileSize.x, j * data.tileSize.y);
+			sf::Vector2f position(static_cast<float>(i * data.tileSize.x), static_cast<float>(j * data.tileSize.y));
 
 			// initial values
 			animatedTile.playCurrentAnimation(true);

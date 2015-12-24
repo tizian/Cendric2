@@ -2,7 +2,7 @@
 #include "Spell.h"
 
 TorchTile::TorchTile(Level* level) : LevelDynamicTile(level) {
-	m_lightObject = new LightObject(LightBean(sf::Vector2f(), sf::Vector2f(140.f, 200.f)));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(140.f, 200.f)));
 }
 
 void TorchTile::init() {

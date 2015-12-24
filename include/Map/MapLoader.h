@@ -6,7 +6,7 @@
 #include "Screen.h"
 
 #include "Structs/MapData.h"
-#include "Structs/NPCBean.h"
+#include "Structs/NPCData.h"
 #include "Enums/MapDynamicTileID.h"
 
 #include "Map/DynamicTiles/CookingTile.h"

@@ -8,15 +8,15 @@ inline bool inRange(const sf::Vector2f& center, const sf::Vector2f& mainCharCent
 	return dist <= range;
 }
 
-void NPC::load(MapMainCharacter* mainChar, const NPCBean& bean) {
+void NPC::load(MapMainCharacter* mainChar, const NPCData& data) {
 	m_mainChar = mainChar;
-	m_bean = bean;
+	m_NPCdata = data;
 
 	Animation idleAnimation(sf::seconds(10.f));
-	setBoundingBox(bean.boundingBox);
-	setSpriteOffset(sf::Vector2f(-bean.boundingBox.left, -bean.boundingBox.top));
+	setBoundingBox(data.boundingBox);
+	setSpriteOffset(sf::Vector2f(-data.boundingBox.left, -data.boundingBox.top));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_npcs));
-	idleAnimation.addFrame(bean.texturePosition);
+	idleAnimation.addFrame(data.texturePosition);
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -24,8 +24,8 @@ void NPC::load(MapMainCharacter* mainChar, const NPCBean& bean) {
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(false);
 
-	setPosition(bean.position);
-	setTooltipText(g_textProvider->getText(bean.id, "npc"));
+	setPosition(data.position);
+	setTooltipText(g_textProvider->getText(data.id, "npc"));
 	setDebugBoundingBox(sf::Color::Magenta);
 }
 
@@ -38,7 +38,7 @@ void NPC::onRightClick() {
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
-		mapScreen->setDialogue(m_bean);
+		mapScreen->setDialogue(m_NPCdata);
 	}
 	else {
 		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
@@ -69,18 +69,18 @@ void NPC::update(const sf::Time& frameTime) {
 }
 
 void NPC::setTalksActive(bool talksActive) {
-	m_bean.talksActive = talksActive;
+	m_NPCdata.talksActive = talksActive;
 }
 
 void NPC::setDialogueID(const std::string& id) {
-	m_bean.dialogueID = id;
+	m_NPCdata.dialogueID = id;
 }
 
 void NPC::checkCollisionWithMainChar() {
-	if (!m_bean.dialogueID.empty() && m_bean.talksActive && inRange(getCenter(), m_mainChar->getCenter(), TALKING_RANGE)) {
+	if (!m_NPCdata.dialogueID.empty() && m_NPCdata.talksActive && inRange(getCenter(), m_mainChar->getCenter(), TALKING_RANGE)) {
 		setTalksActive(false);
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
-		mapScreen->setDialogue(m_bean);
+		mapScreen->setDialogue(m_NPCdata);
 	}
 }
 

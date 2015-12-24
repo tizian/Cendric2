@@ -33,13 +33,13 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	m_statsText.setColor(CENDRIC_COLOR_WHITE);
 }
 
-void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeBean* attributes) {
-	SpellBean bean = SpellBean::getSpellBean(id);
+void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData* attributes) {
+	SpellData bean = SpellData::getSpellData(id);
 	std::string strengthName;
 	int strengthValue;
 
-	SpellCreator* creator = SpellBean::getSpellCreator(bean, modifiers, nullptr);
-	bean = creator->getSpellBean();
+	SpellCreator* creator = SpellData::getSpellCreator(bean, modifiers, nullptr);
+	bean = creator->getSpellData();
 	creator->updateDamage(bean, attributes);
 	strengthName = creator->getStrengthModifierName();
 	strengthValue = creator->getStrengthModifierValue();
@@ -131,7 +131,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	stats.append("<<< " + g_textProvider->getText("AllowedModifiers") + " >>>");
 	stats.append("\n");
 
-	for (auto& it : SpellBean::getAllowedModifiers(id)) {
+	for (auto& it : SpellData::getAllowedModifiers(id)) {
 		stats.append(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it)));
 		stats.append("\n");
 	}

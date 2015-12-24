@@ -4,7 +4,7 @@
 LeechSpell::LeechSpell() : Spell() {
 }
 
-void LeechSpell::load(const SpellBean& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+void LeechSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation spellAnimation;

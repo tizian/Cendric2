@@ -8,7 +8,7 @@
 // a class that creates icy ambush spells
 class IcyAmbushSpellCreator : public SpellCreator {
 public:
-	IcyAmbushSpellCreator(const SpellBean& spellBean, LevelMovableGameObject* owner);
+	IcyAmbushSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
 	void executeSpell(const sf::Vector2f& target) override;
 
