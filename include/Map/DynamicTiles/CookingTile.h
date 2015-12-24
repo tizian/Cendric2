@@ -9,6 +9,8 @@ public:
 	CookingTile(Map* map);
 	void init() override;
 	void load(int skinNr) override;
+	void onRightClick() override;
+	void onInteractKey() override;
 
 	void setPosition(const sf::Vector2f& pos) override;
 	void setDisposed() override;

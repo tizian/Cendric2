@@ -7,6 +7,7 @@
 #include "ResourceManager.h"
 #include "Screens/LoadingScreen.h"
 #include "GUI/DialogueWindow.h"
+#include "GUI/CookingWindow.h"
 #include "Map/MapInterface.h"
 
 class MapScreen : public GameScreen {
@@ -20,6 +21,7 @@ public:
 	Screen* update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void setDialogue(const NPCData& data);
+	void setCooking();
 
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
@@ -30,4 +32,5 @@ private:
 	MapMainCharacter* m_mainChar;
 	bool m_isOnLevelEntry = true;
 	DialogueWindow* m_dialogueWindow = nullptr;
+	CookingWindow* m_cookingWindow = nullptr;
 };

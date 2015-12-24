@@ -52,6 +52,7 @@ enum class ResourceID {
 	Texture_inventorytabs,
 	Texture_equipmentplaceholders,
 	Texture_gems,
+	Texture_misc_cooking,
 	Texture_GUI_rounded_rectangle,
 	Texture_GUI_ornament_none,
 	Texture_GUI_ornament_small,

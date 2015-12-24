@@ -19,6 +19,17 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 		updateObjects(GameObjectType::_Light, frameTime);
 		return this;
 	}
+	// handle case where a cooking window is open
+	if (m_cookingWindow != nullptr) {
+		if (!m_cookingWindow->updateWindow(frameTime)) {
+			delete m_cookingWindow;
+			m_cookingWindow = nullptr;
+		}
+		updateProgressLog(frameTime);
+		updateTooltipText(frameTime);
+		updateObjects(GameObjectType::_Light, frameTime);
+		return this;
+	}
 	else {
 		GameScreen::update(frameTime);
 		if (g_inputController->isKeyJustPressed(Key::Escape)) {
@@ -91,15 +102,25 @@ void MapScreen::execOnEnter(const Screen *previousScreen) {
 
 void MapScreen::execOnExit(const Screen *nextScreen) {
 	m_currentMap.dispose();
+	delete m_dialogueWindow;
+	delete m_cookingWindow;
 }
 
 void MapScreen::setDialogue(const NPCData& data) {
-	if (m_dialogueWindow != nullptr) {
-		delete m_dialogueWindow;
-	}
+	delete m_dialogueWindow;
+	delete m_cookingWindow;
+	m_cookingWindow = nullptr;
 
 	m_dialogueWindow = new DialogueWindow();
 	m_dialogueWindow->load(data, this);
+}
+
+void MapScreen::setCooking() {
+	delete m_dialogueWindow;
+	delete m_cookingWindow;
+	m_dialogueWindow = nullptr;
+
+	m_cookingWindow = new CookingWindow(this);
 }
 
 void MapScreen::render(sf::RenderTarget &renderTarget) {
@@ -152,6 +173,9 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 
 	if (m_dialogueWindow != nullptr) {
 		m_dialogueWindow->render(renderTarget);
+	}
+	if (m_cookingWindow != nullptr) {
+		m_cookingWindow->render(renderTarget);
 	}
 
 	renderTarget.setView(adjustedView);

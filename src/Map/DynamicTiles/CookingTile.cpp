@@ -1,5 +1,6 @@
 #include "Map/DynamicTiles/CookingTile.h"
 #include "Map/Map.h"
+#include "Screens/MapScreen.h"
 
 CookingTile::CookingTile(Map* map) : MapDynamicTile(map) {
 	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(100.f, 100.f)));
@@ -27,6 +28,14 @@ void CookingTile::load(int skinNr) {
 	m_state = GameObjectState::Burning;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(true);
+}
+
+void CookingTile::onRightClick() {
+	dynamic_cast<MapScreen*>(getScreen())->setCooking();
+}
+
+void CookingTile::onInteractKey() {
+	dynamic_cast<MapScreen*>(getScreen())->setCooking();
 }
 
 void CookingTile::setPosition(const sf::Vector2f& pos) {

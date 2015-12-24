@@ -51,6 +51,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_tile_lever, "res/assets/level_dynamic_tiles/spritesheet_tiles_lever.png" },
 		{ ResourceID::Texture_tile_switchable, "res/assets/level_dynamic_tiles/spritesheet_tiles_switchable.png" },
 		{ ResourceID::Texture_tile_cooking, "res/assets/map_dynamic_tiles/spritesheet_tiles_cooking.png" },
+		{ ResourceID::Texture_misc_cooking, "res/assets/misc/sprite_cooking.png" },
 		{ ResourceID::Texture_screen_splash, "res/assets/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/assets/screens/screen_error_filenotfound.png" },
