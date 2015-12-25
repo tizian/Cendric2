@@ -28,7 +28,7 @@ bool Map::load(const std::string& id) {
 
 void Map::loadAfterMainChar(Screen* screen) {
 	MapLoader loader;
-	loader.loadNpcs(m_mapData, screen);
+	loader.loadNpcs(m_mapData, screen, this);
 	m_npcs = screen->getObjects(GameObjectType::_NPC);
 }
 

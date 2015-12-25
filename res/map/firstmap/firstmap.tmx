@@ -891,7 +891,8 @@
     <property name="dialogueid" value="res/npc/guard/dl_guard.lua"/>
     <property name="dialoguetexture" value="250,0"/>
     <property name="id" value="guard"/>
-    <property name="spritetexture" value="0,0"/>
+    <property name="routineid" value="res/npc/guard/ru_guard.lua"/>
+    <property name="spritesheetpath" value="res/npc/guard/spritesheet_npc_guard.png"/>
    </properties>
   </object>
  </objectgroup>

@@ -43,6 +43,13 @@ bool MapReader::checkData(MapData& data) const {
 			logError("a map npc has no object id.");
 			return false;
 		}
+		if (it.spritesheetpath.empty()) {
+			logError("a map npc has no spritesheet path.");
+			return false;
+		}
+		if (it.routineID.empty()) {
+			g_logger->logWarning("MapReader","a map npc has no routine.");
+		}
 	}
 
 	return true;
@@ -215,20 +222,23 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.dialogueID = textAttr;
 				}
-				else if (attrText.compare("spritetexture") == 0) {
+				else if (attrText.compare("spritesheetpath") == 0) {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
 						return false;
 					}
-					std::string tex = textAttr;
-
-					size_t pos = 0;
-					if ((pos = tex.find(",")) == std::string::npos) return false;
-					npc.texturePosition.left = std::stoi(tex.substr(0, pos));
-					tex.erase(0, pos + 1);
-					npc.texturePosition.top = std::stoi(tex);
+					npc.spritesheetpath = textAttr;
+				}
+				else if (attrText.compare("routineid") == 0) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					npc.routineID = textAttr;
 				}
 				else if (attrText.compare("dialoguetexture") == 0) {
 					textAttr = nullptr;

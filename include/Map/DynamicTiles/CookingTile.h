@@ -3,14 +3,18 @@
 #include "global.h"
 #include "Map/MapDynamicTile.h"
 #include "LightObject.h"
+#include "GUI/BitmapText.h"
 
 class CookingTile : public MapDynamicTile {
 public:
-	CookingTile(Map* map);
+	CookingTile(MapMainCharacter* mainChar, Map* map);
 	void init() override;
 	void load(int skinNr) override;
-	void onRightClick() override;
+	void update(const sf::Time& frameTime) override;
+	void onMouseOver() override;
 	void onInteractKey() override;
+	void onRightClick() override;
+	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 
 	void setPosition(const sf::Vector2f& pos) override;
 	void setDisposed() override;
@@ -18,4 +22,7 @@ public:
 
 private:
 	LightObject* m_lightObject;
+	MapMainCharacter* m_mainCharacter;
+	BitmapText m_tooltipText;
+	sf::Time m_tooltipTime = sf::Time::Zero;
 };

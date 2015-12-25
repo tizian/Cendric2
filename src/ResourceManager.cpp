@@ -64,7 +64,6 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_screen_credits, "res/assets/screens/screen_credits.png" },
 		{ ResourceID::Texture_levelitems, "res/assets/items/spritesheet_levelitems.png" },
 		{ ResourceID::Texture_items, "res/assets/items/spritesheet_items.png" },
-		{ ResourceID::Texture_npcs, "res/assets/npcs/spritesheet_npcs.png" },
 		{ ResourceID::Texture_dialogue, "res/assets/dialogue/spritesheet_dialogue.png" },
 		{ ResourceID::Texture_inventorytabs, "res/assets/misc/spritesheet_inventorytabs.png" },
 		{ ResourceID::Texture_equipmentplaceholders, "res/assets/misc/spritesheet_equipmentplaceholders.png" },

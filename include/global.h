@@ -29,6 +29,14 @@ inline float lerp(float t, float v1, float v2) {
 	return (1.f - t) * v1 + t * v2;
 }
 
+inline float norm(const sf::Vector2f& v) {
+	return std::sqrt(v.x * v.x + v.y * v.y);
+}
+
+inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
+	return norm(v1 - v2);
+}
+
 // versioning
 #define CENDRIC_VERSION_NR "0.1.0"
 

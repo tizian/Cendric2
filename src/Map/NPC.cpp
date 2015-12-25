@@ -3,30 +3,87 @@
 #include "Screens/MapScreen.h"
 
 inline bool inRange(const sf::Vector2f& center, const sf::Vector2f& mainCharCenter, const float range) {
-	sf::Vector2f distVector = center - mainCharCenter;
-	float dist = std::sqrt(distVector.x * distVector.x + distVector.y * distVector.y);
-	return dist <= range;
+	return dist(center, mainCharCenter) <= range;
 }
 
 void NPC::load(MapMainCharacter* mainChar, const NPCData& data) {
 	m_mainChar = mainChar;
 	m_NPCdata = data;
-
-	Animation idleAnimation(sf::seconds(10.f));
 	setBoundingBox(data.boundingBox);
 	setSpriteOffset(sf::Vector2f(-data.boundingBox.left, -data.boundingBox.top));
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_npcs));
-	idleAnimation.addFrame(data.texturePosition);
 
-	addAnimation(GameObjectState::Idle, idleAnimation);
+	Animation walkingAnimationDown(sf::seconds(0.15f));
+	walkingAnimationDown.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationDown.addFrame(sf::IntRect(0, 0, 50, 50));
+	walkingAnimationDown.addFrame(sf::IntRect(50, 0, 50, 50));
+	walkingAnimationDown.addFrame(sf::IntRect(100, 0, 50, 50));
+	walkingAnimationDown.addFrame(sf::IntRect(50, 0, 50, 50));
+
+	addAnimation(GameObjectState::Walking_down, walkingAnimationDown);
+
+	Animation walkingAnimationLeft(sf::seconds(0.15f));
+	walkingAnimationLeft.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationLeft.addFrame(sf::IntRect(0, 50, 50, 50));
+	walkingAnimationLeft.addFrame(sf::IntRect(50, 50, 50, 50));
+	walkingAnimationLeft.addFrame(sf::IntRect(100, 50, 50, 50));
+	walkingAnimationLeft.addFrame(sf::IntRect(50, 50, 50, 50));
+
+	addAnimation(GameObjectState::Walking_left, walkingAnimationLeft);
+
+	Animation walkingAnimationRight(sf::seconds(0.15f));
+	walkingAnimationRight.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationRight.addFrame(sf::IntRect(0, 100, 50, 50));
+	walkingAnimationRight.addFrame(sf::IntRect(50, 100, 50, 50));
+	walkingAnimationRight.addFrame(sf::IntRect(100, 100, 50, 50));
+	walkingAnimationRight.addFrame(sf::IntRect(50, 100, 50, 50));
+
+	addAnimation(GameObjectState::Walking_right, walkingAnimationRight);
+
+	Animation walkingAnimationUp(sf::seconds(0.15f));
+	walkingAnimationUp.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationUp.addFrame(sf::IntRect(0, 150, 50, 50));
+	walkingAnimationUp.addFrame(sf::IntRect(50, 150, 50, 50));
+	walkingAnimationUp.addFrame(sf::IntRect(100, 150, 50, 50));
+	walkingAnimationUp.addFrame(sf::IntRect(50, 150, 50, 50));
+
+	addAnimation(GameObjectState::Walking_up, walkingAnimationUp);
+
+	Animation idleAnimationDown;
+	idleAnimationDown.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationDown.addFrame(sf::IntRect(50, 0, 50, 50));
+
+	addAnimation(GameObjectState::Idle_down, idleAnimationDown);
+
+	Animation idleAnimationLeft;
+	idleAnimationLeft.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationLeft.addFrame(sf::IntRect(50, 50, 50, 50));
+
+	addAnimation(GameObjectState::Idle_left, idleAnimationLeft);
+
+	Animation idleAnimationRight;
+	idleAnimationRight.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationRight.addFrame(sf::IntRect(50, 100, 50, 50));
+
+	addAnimation(GameObjectState::Idle_right, idleAnimationRight);
+
+	Animation idleAnimationUp;
+	idleAnimationUp.setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationUp.addFrame(sf::IntRect(50, 150, 50, 50));
+
+	addAnimation(GameObjectState::Idle_up, idleAnimationUp);
 
 	// initial values
-	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
-	playCurrentAnimation(false);
+	m_state = GameObjectState::Idle_right;
+	setCurrentAnimation(getAnimation(m_state), false);
+	playCurrentAnimation(true);
 
 	setPosition(data.position);
 	setTooltipText(g_textProvider->getText(data.id, "npc"));
 	setDebugBoundingBox(sf::Color::Magenta);
+
+	if (!data.spritesheetpath.empty()) {
+		m_routine.load(data.routineID, this);
+	}
 }
 
 void NPC::onMouseOver() {
@@ -50,7 +107,7 @@ void NPC::onInteractKey() {
 }
 
 void NPC::renderAfterForeground(sf::RenderTarget &renderTarget) {
-	AnimatedGameObject::renderAfterForeground(renderTarget);
+	MovableGameObject::renderAfterForeground(renderTarget);
 	bool showTooltip = g_inputController->isKeyActive(Key::ToggleTooltips);
 	if (showTooltip || m_tooltipTime > sf::Time::Zero) {
 		renderTarget.draw(m_tooltipText);
@@ -58,14 +115,11 @@ void NPC::renderAfterForeground(sf::RenderTarget &renderTarget) {
 }
 
 void NPC::update(const sf::Time& frameTime) {
-	AnimatedGameObject::update(frameTime);
-	if (m_tooltipTime > sf::Time::Zero) {
-		m_tooltipTime = m_tooltipTime - frameTime;
-		if (m_tooltipTime < sf::Time::Zero) {
-			m_tooltipTime = sf::Time::Zero;
-		}
-	}
+	MovableGameObject::update(frameTime);
+	GameObject::updateTime(m_tooltipTime, frameTime);
 	checkCollisionWithMainChar();
+	m_routine.update(frameTime);
+	updateAnimation(frameTime);
 }
 
 void NPC::setTalksActive(bool talksActive) {
@@ -84,6 +138,11 @@ void NPC::checkCollisionWithMainChar() {
 	}
 }
 
+void NPC::setPosition(const sf::Vector2f& pos) {
+	MapMovableGameObject::setPosition(pos);
+	m_tooltipText.setPosition(sf::Vector2f(pos.x, pos.y - 10.f));
+}
+
 GameObjectType NPC::getConfiguredType() const {
 	return GameObjectType::_NPC;
 }
@@ -92,6 +151,12 @@ void NPC::setTooltipText(const std::string& tooltip) {
 	m_tooltipText = BitmapText(tooltip);
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);
-	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
 }
 
+float NPC::getConfiguredMaxVelocityY() const {
+	return 200.0f;
+}
+
+float NPC::getConfiguredMaxVelocityX() const {
+	return 200.0f;
+}

@@ -47,7 +47,6 @@ enum class ResourceID {
 	Texture_enemy_nekomata_blue_trans,
 	Texture_levelitems,
 	Texture_items,
-	Texture_npcs,
 	Texture_dialogue,
 	Texture_inventorytabs,
 	Texture_equipmentplaceholders,

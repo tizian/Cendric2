@@ -1,26 +1,31 @@
 #pragma once
 
 #include "global.h"
-#include "AnimatedGameObject.h"
+#include "Map/MapMovableGameObject.h"
 #include "ResourceManager.h"
 #include "TextProvider.h"
 
 #include "GUI/BitmapText.h"
 #include "Structs/NPCData.h"
+#include "Map/NPCRoutine.h"
 
 class MapMainCharacter;
 
 // A npc on a map
-class NPC : public AnimatedGameObject {
+class NPC : virtual public MapMovableGameObject {
 public:
-	NPC() : AnimatedGameObject() {}
+	NPC(Map* map) : MapMovableGameObject(map) {}
 	void load(MapMainCharacter* mainChar, const NPCData& data);
 	void onMouseOver() override;
 	void onInteractKey() override;
 	void onRightClick() override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
+	void setPosition(const sf::Vector2f& pos) override;
 	void checkCollisionWithMainChar();
+
+	float getConfiguredMaxVelocityY() const override;
+	float getConfiguredMaxVelocityX() const override;
 
 	void setTooltipText(const std::string& tooltip);
 	// if set to true, the npc will begin a dialogue with cendric when he enters its bounding box.
@@ -32,6 +37,7 @@ public:
 private:
 	MapMainCharacter* m_mainChar;
 	NPCData m_NPCdata;
+	NPCRoutine m_routine;
 
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;

@@ -9,7 +9,8 @@ struct NPCData {
 	std::string id;
 	sf::Vector2f position;
 	sf::FloatRect boundingBox;
-	sf::IntRect texturePosition;
+	std::string spritesheetpath;
+	std::string routineID;
 
 	// dialogue
 	bool talksActive;
@@ -23,7 +24,8 @@ const struct NPCData DEFAULT_NPC =
 	"",
 	sf::Vector2f(0.f, 0.f),
 	sf::FloatRect(0.f, 0.f, 25.f, 25.f),
-	sf::IntRect(0, 0, 50, 50),
+	"",
+	"",
 
 	false,
 	"",

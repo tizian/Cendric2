@@ -423,7 +423,7 @@ LevelitemFrameBean DatabaseManager::getLevelitemFrameBean(const std::string& ite
 				bean.texture_location.left = sqlite3_column_int(statement, 2);
 				bean.texture_location.top = sqlite3_column_int(statement, 3);
 				bean.texture_location.width = sqlite3_column_int(statement, 4);
-				bean.texture_location.height = static_cast<float>(sqlite3_column_int(statement, 5));
+				bean.texture_location.height = sqlite3_column_int(statement, 5);
 				bean.status = BeanStatus::Filled;
 			}
 			else {

@@ -19,7 +19,7 @@ public:
 	// loads dynamic tiles out of map data and adds them directly to the screen.
 	void loadDynamicTiles(MapData& data, Screen* screen, Map* map) const;
 	// loads npcs out of map data and adds them directly to the screen
-	void loadNpcs(MapData& data, Screen* screen) const;
+	void loadNpcs(MapData& data, Screen* screen, Map* map) const;
 	// loads lights out of map data and adds them directly to the screen
 	void loadLights(MapData& data, Screen* screen) const;
 };

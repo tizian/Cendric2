@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "MovableGameObject.h"
+#include "Map/MapMovableGameObject.h"
 #include "Map.h"
 #include "InputController.h"
 #include "Screen.h"
@@ -11,7 +11,7 @@
 class MapScreen;
 
 // Cendric on the map
-class MapMainCharacter : public MovableGameObject {
+class MapMainCharacter : virtual public MapMovableGameObject {
 public:
 	MapMainCharacter(Map* level);
 	~MapMainCharacter();
@@ -32,9 +32,6 @@ private:
 	const float WALK_ACCELERATION = 1500.0f;
 	// handle input and calculate the next position
 	void handleInput();
-	// update animation based on the current velocity
-	void updateAnimation();
 	GameObjectState m_state;
-	Map* m_map;
 	CharacterCore* m_core;
 };

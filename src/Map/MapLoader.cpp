@@ -4,7 +4,7 @@
 #include "Map/NPC.h"
 #include "LightObject.h"
 
-void MapLoader::loadNpcs(MapData& data, Screen* screen) const {
+void MapLoader::loadNpcs(MapData& data, Screen* screen, Map* map) const {
 	MapMainCharacter* mainCharacter = dynamic_cast<MapMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
 	if (mainCharacter == nullptr) {
 		g_logger->logError("MapLoader", "Could not find main character of map screen");
@@ -13,7 +13,7 @@ void MapLoader::loadNpcs(MapData& data, Screen* screen) const {
 
 	// calculate npcs
 	for (auto& it : data.npcs) {
-		NPC* mapNPC = new NPC();
+		NPC* mapNPC = new NPC(map);
 		mapNPC->load(mainCharacter, it);
 		screen->addObject(mapNPC);
 	}
@@ -38,7 +38,7 @@ void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const 
 		MapDynamicTile* tile = nullptr;
 		switch (it.id) {
 		case MapDynamicTileID::Cooking:
-			tile = new CookingTile(map);
+			tile = new CookingTile(mainCharacter, map);
 			break;
 		default:
 			// unexpected error

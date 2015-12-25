@@ -1,8 +1,7 @@
 #include "Map/MapMainCharacter.h"
 #include "Screens/MapScreen.h"
 
-MapMainCharacter::MapMainCharacter(Map* map) : MovableGameObject() {
-	m_map = map;
+MapMainCharacter::MapMainCharacter(Map* map) : MapMovableGameObject(map) {
 	load();
 }
 
@@ -20,7 +19,7 @@ void MapMainCharacter::update(const sf::Time& frameTime) {
 	calculateNextPosition(frameTime, m_nextPosition);
 	checkCollisions(m_nextPosition);
 	MovableGameObject::update(frameTime);
-	updateAnimation();
+	updateAnimation(frameTime);
 }
 
 void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
@@ -39,46 +38,6 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (isMovingY && m_map->collidesY(nextBoundingBoxY)) {
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
-	}
-}
-
-void MapMainCharacter::updateAnimation() {
-	// calculate new game state and set animation.
-	GameObjectState newState = m_state;
-	// check if char walks up
-	if (getVelocity().y < 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y))) {
-		newState = GameObjectState::Walking_up;
-	}
-	else if (getVelocity().y >= 0.0f && (std::abs(getVelocity().x) < std::abs(getVelocity().y))) {
-		newState = GameObjectState::Walking_down;
-	}
-	else if (getVelocity().x < 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y))) {
-		newState = GameObjectState::Walking_left;
-	}
-	else if (getVelocity().x >= 0.0f && (std::abs(getVelocity().x) > std::abs(getVelocity().y))) {
-		newState = GameObjectState::Walking_right;
-	}
-
-	// check if cendric is standing still
-	if (getVelocity().x == 0.0f && getVelocity().y == 0.0f) {
-		if (m_state == GameObjectState::Walking_down) {
-			newState = GameObjectState::Idle_down;
-		}
-		else if (m_state == GameObjectState::Walking_up) {
-			newState = GameObjectState::Idle_up;
-		}
-		else if (m_state == GameObjectState::Walking_right) {
-			newState = GameObjectState::Idle_right;
-		}
-		else if (m_state == GameObjectState::Walking_left) {
-			newState = GameObjectState::Idle_left;
-		}
-	}
-
-	// only update animation if we need to
-	if (m_state != newState) {
-		m_state = newState;
-		setCurrentAnimation(getAnimation(m_state), false);
 	}
 }
 
@@ -167,7 +126,7 @@ void MapMainCharacter::load() {
 	addAnimation(GameObjectState::Idle_up, idleAnimationUp);
 
 	// initial values
-	m_state = GameObjectState::Idle_right;
+	m_state = GameObjectState::Idle_down;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(true);
 }
