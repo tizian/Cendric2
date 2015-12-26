@@ -37,7 +37,7 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 	}
 	else if (currentStep.state == RoutineState::GoingTo) {
 		sf::Vector2f distance = currentStep.goal - m_npc->getPosition();
-		if (norm(distance) < 4.f) {
+		if (norm(distance) < 1.f) {
 			updateStep = true;
 		}
 		else {
@@ -63,6 +63,7 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 
 		if (m_steps[m_currentStepID].state == RoutineState::Waiting) {
 			m_remainingStepTime = m_steps[m_currentStepID].time;
+			m_npc->setVelocity(sf::Vector2f(0.f, 0.f));
 		}
 	}
 }

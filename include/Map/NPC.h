@@ -42,4 +42,6 @@ private:
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;
 	const float TALKING_RANGE = 30.f;
+
+	void turnToMainchar();
 };

@@ -37,14 +37,16 @@ void CookingWindow::reload() {
 	for (auto& item : *m_screen->getCharacterCore()->getItems()) {
 		ItemFoodBean food = g_databaseManager->getItemFoodBean(item.first);
 		if (food.status == BeanStatus::Filled && food.is_cookable) {
-			CookingOption option(item.first, item.second, nr);
+			CookingOption option(item.first, food.cooked_item_id, item.second, nr);
 			option.deselect();
 			m_options.push_back(option);
 			nr++;
 		}
 	}
 
-	CookingOption cancelOption("", -1, nr);
+
+
+	CookingOption cancelOption("", "", -1, nr);
 	cancelOption.deselect();
 	m_options.push_back(cancelOption);
 
@@ -98,14 +100,13 @@ void CookingWindow::cookItem(const std::string& itemID) {
 		g_logger->logError("CookingWindow", "Item to cook not found in character core!");
 		return;
 	}
-	int count = it->second;
 	ItemFoodBean food = g_databaseManager->getItemFoodBean(itemID);
 	if (food.status == BeanStatus::Error || !food.is_cookable || food.cooked_item_id.empty()) {
 		g_logger->logError("CookingWindow", "Cannot cook item with id " + itemID);
 		return;
 	}
-	m_screen->notifyItemChange(itemID, -count);
-	m_screen->notifyItemChange(food.cooked_item_id, count);
+	m_screen->notifyItemChange(itemID, -1);
+	m_screen->notifyItemChange(food.cooked_item_id, 1);
 }
 
 void CookingWindow::render(sf::RenderTarget& renderTarget) {
@@ -121,15 +122,19 @@ void CookingWindow::render(sf::RenderTarget& renderTarget) {
 
 // Cooking Option
 
-CookingOption::CookingOption(const std::string& itemID, int count, int nr) {
+CookingOption::CookingOption(const std::string& itemID, const std::string& cookedItemID, int count, int nr) {
 	m_itemID = itemID;
-	// if the item id is empty, this is the ending option
+	// if the itemID is empty, this is a cancel option
 	if (itemID.empty()) {
-		m_text.setString(g_textProvider->getText("Cancel"));
+		std::string text = "";
+		if (nr == 0) {
+			text += g_textProvider->getText("NothingToCook") + " ";
+		}
+		m_text.setString(text + g_textProvider->getText("Cancel"));
 	}
 	else {
-		std::string textString = g_textProvider->getText(itemID, "item");
-		textString += " (" + std::to_string(count) + ")";
+		std::string textString = g_textProvider->getText(cookedItemID, "item");
+		textString += " (" + g_textProvider->getText(itemID, "item") + " " + std::to_string(count)  + ")";
 		m_text.setString(textString);
 	}
 	m_text.setCharacterSize(CHAR_SIZE_OPTIONS);

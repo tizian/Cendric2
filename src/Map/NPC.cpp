@@ -95,6 +95,7 @@ void NPC::onRightClick() {
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
+		turnToMainchar();
 		mapScreen->setDialogue(m_NPCdata);
 	}
 	else {
@@ -115,11 +116,11 @@ void NPC::renderAfterForeground(sf::RenderTarget &renderTarget) {
 }
 
 void NPC::update(const sf::Time& frameTime) {
-	MovableGameObject::update(frameTime);
 	GameObject::updateTime(m_tooltipTime, frameTime);
-	checkCollisionWithMainChar();
 	m_routine.update(frameTime);
 	updateAnimation(frameTime);
+	MovableGameObject::update(frameTime);
+	checkCollisionWithMainChar();
 }
 
 void NPC::setTalksActive(bool talksActive) {
@@ -133,8 +134,20 @@ void NPC::setDialogueID(const std::string& id) {
 void NPC::checkCollisionWithMainChar() {
 	if (!m_NPCdata.dialogueID.empty() && m_NPCdata.talksActive && inRange(getCenter(), m_mainChar->getCenter(), TALKING_RANGE)) {
 		setTalksActive(false);
+		turnToMainchar();
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
+		
 		mapScreen->setDialogue(m_NPCdata);
+	}
+}
+
+void NPC::turnToMainchar() {
+	sf::Vector2f distance = m_mainChar->getCenter() - getCenter();
+	if (std::abs(distance.x) > std::abs(distance.y)) {
+		setState((distance.x > 0.f) ? GameObjectState::Idle_right : GameObjectState::Idle_left);
+	}
+	else {
+		setState((distance.y > 0.f) ? GameObjectState::Idle_down : GameObjectState::Idle_up);
 	}
 }
 

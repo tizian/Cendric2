@@ -113,14 +113,6 @@ bool Map::collidesX(const sf::FloatRect& boundingBox) const {
 		}
 	}
 
-	// check npcs
-	for (GameObject* go : *m_npcs) {
-		if (!go->isViewable()) continue;
-		if (go->getBoundingBox()->intersects(boundingBox)) {
-			return true;
-		}
-	}
-
 	return false;
 }
 
@@ -153,14 +145,6 @@ bool Map::collidesY(const sf::FloatRect& boundingBox) const {
 	y = bottomLeft.y;
 	for (int x = bottomLeft.x; x <= bottomRight.x; x++) {
 		if (m_mapData.collidableTilePositions[y][x]) {
-			return true;
-		}
-	}
-
-	// check npcs
-	for (GameObject* go : *m_npcs) {
-		if (!go->isViewable()) continue;
-		if (go->getBoundingBox()->intersects(boundingBox)) {
 			return true;
 		}
 	}

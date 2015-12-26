@@ -193,3 +193,4 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('SpellInvisibi
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellInvisibilityDesc','Renders Cendric invisible for a certain duration for certain enemies','Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Fireplace','Fireplace','Kochstelle','Chochstell');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NothingToCook','[Nothing to cook...]','[Nichts zu kochen...]','[Es git nüt zum chochä...]');
