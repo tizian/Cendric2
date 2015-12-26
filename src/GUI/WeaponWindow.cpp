@@ -22,7 +22,7 @@ void WeaponWindow::reload() {
 		m_weaponSlot = new InventorySlot(*m_weapon, -1);
 		m_weaponName.setString(g_textProvider->getText(m_weapon->getID(), "item"));
 		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item_desc", GUIConstants::CHARACTER_SIZE_M,
-			static_cast<int>(WIDTH - (GUIConstants::TEXT_OFFSET + 2 * MARGIN + InventorySlot::SIDE_LENGTH))));
+			static_cast<int>(WIDTH - (GUIConstants::TEXT_OFFSET + 2 * MARGIN))));
 	}
 	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
 

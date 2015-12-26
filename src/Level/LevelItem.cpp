@@ -13,7 +13,7 @@ void LevelItem::load(LevelMainCharacter* mainChar, const Item& item, const sf::V
 	}
 	Animation idleAnimation(item.getLevelitemBean().frame_time);
 	setSpriteOffset(item.getLevelitemBean().sprite_offset);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, item.getLevelitemBean().bounding_box.x, item.getLevelitemBean().bounding_box.x));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, item.getLevelitemBean().bounding_box.x, item.getLevelitemBean().bounding_box.y));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_levelitems));
 	// add frames
 	for (auto &frame : item.getFrames()) {
