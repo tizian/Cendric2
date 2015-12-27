@@ -249,13 +249,7 @@ void CharacterCore::loadItems() {
 			g_logger->logError("CharacterCore", "Item not found: " + item.first);
 			continue;
 		}
-		if (g_databaseManager->getItemBean(item.first).item_type == ItemType::Equipment_weapon) {
-			m_items.insert({ item.first, Weapon(item.first) });
-		}
-		else {
-			m_items.insert({ item.first, Item(item.first) });
-		}
-		
+		m_items.insert({ item.first, Item(item.first) });
 	}
 }
 
