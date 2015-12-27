@@ -227,7 +227,7 @@ sf::Time LevelMainCharacter::getConfiguredFightAnimationTime() const {
 }
 
 GameObjectType LevelMainCharacter::getConfiguredType() const {
-	return GameObjectType::_MainCharacter;
+	return GameObjectType::_LevelMainCharacter;
 }
 
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const {
@@ -243,7 +243,7 @@ void LevelMainCharacter::removeItems(const std::string& item, int quantity) cons
 }
 
 void LevelMainCharacter::lootItems(std::map<std::string, int>& items) const {
-	for (auto it : items) {
+	for (auto& it : items) {
 		lootItem(it.first, it.second);
 	}
 }

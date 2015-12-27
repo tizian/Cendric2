@@ -94,26 +94,23 @@ void ItemDescriptionWindow::load(const Item& item) {
 
 	stats.append(getGoldText(item));
 
-	if (item.getType() == ItemType::Equipment_weapon) {
-		const Weapon* weapon = dynamic_cast<const Weapon*>(&item);
-		if (weapon == nullptr) {
-			return;
-		}
+	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
+		Weapon weapon(item.getID());
 		stats.append("\n\n");
 		stats.append(g_textProvider->getText("WeaponDamage"));
 		stats.append(": ");
-		stats.append(to_string(weapon->getWeaponChopDamage()));
+		stats.append(to_string(weapon.getWeaponChopDamage()));
 		stats.append("\n");
 
 		stats.append(g_textProvider->getText("Cooldown"));
 		stats.append(": ");
-		stats.append(toStrMaxDecimals(weapon->getWeaponCooldown().asSeconds(), 1));
+		stats.append(toStrMaxDecimals(weapon.getWeaponCooldown().asSeconds(), 1));
 		stats.append("s\n");
 
-		if (weapon->getWeaponSlots().size() > 0) {
+		if (weapon.getWeaponSlots().size() > 0) {
 			stats.append("\n");
 			stats.append("<<< " + g_textProvider->getText("SpellSlots") + " >>>\n");
-			for (auto& it : weapon->getWeaponSlots()) {
+			for (auto& it : weapon.getWeaponSlots()) {
 				stats.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
 				stats.append(" - " + g_textProvider->getText("GemSockets") + ": ");
 				stats.append(to_string(it.spellModifiers.size()) + "\n");

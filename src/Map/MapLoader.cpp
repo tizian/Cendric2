@@ -3,9 +3,10 @@
 #include "Map/Map.h"
 #include "Map/NPC.h"
 #include "LightObject.h"
+#include "Screens/MapScreen.h"
 
 void MapLoader::loadNpcs(MapData& data, Screen* screen, Map* map) const {
-	MapMainCharacter* mainCharacter = dynamic_cast<MapMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("MapLoader", "Could not find main character of map screen");
 		return;
@@ -28,7 +29,7 @@ void MapLoader::loadLights(MapData& data, Screen* screen) const {
 }
 
 void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const {
-	MapMainCharacter* mainCharacter = dynamic_cast<MapMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("MapLoader", "Could not find main character of game screen");
 		return;

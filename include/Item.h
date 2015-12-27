@@ -13,7 +13,6 @@
 #include "Beans/ItemWeaponSlotBean.h"
 #include "Beans/LevelitemBean.h"
 #include "Beans/LevelitemFrameBean.h"
-#include "Beans/TextBean.h"
 
 // An item in cendrics / a npcs / a mobs inventory
 class Item {
@@ -56,6 +55,8 @@ protected:
 	LevelitemBean m_levelItemBean;
 	std::vector<LevelitemFrameBean> m_levelItemFrameBeans;
 	AttributeData m_attributeData;
+	ItemWeaponBean m_itemWeaponBean;
+	std::vector<ItemWeaponSlotBean> m_itemWeaponSlotBeans;
 
 	void checkItem();
 	void initBeans(const std::string& itemID);

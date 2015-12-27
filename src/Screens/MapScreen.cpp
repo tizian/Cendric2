@@ -59,8 +59,8 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 		MapExitData* data = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
 		if (data == nullptr || m_isOnLevelEntry) {
 			m_isOnLevelEntry = (data != nullptr);
-			updateObjects(GameObjectType::_MainCharacter, frameTime);
-			updateObjects(GameObjectType::_NPC, frameTime);
+			updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
+			depthSortObjects(GameObjectType::_MapMovableGameObject);
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Light, frameTime);
 			m_currentMap.update(frameTime);
@@ -106,6 +106,10 @@ void MapScreen::execOnExit(const Screen *nextScreen) {
 	delete m_cookingWindow;
 }
 
+MapMainCharacter* MapScreen::getMainCharacter() {
+	return m_mainChar;
+}
+
 void MapScreen::setDialogue(const NPCData& data) {
 	delete m_dialogueWindow;
 	delete m_cookingWindow;
@@ -129,8 +133,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	// Render map background etc. to window							(Normal map background rendered)
 	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, focus);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
-	renderObjects(GameObjectType::_NPC, renderTarget);
-	renderObjects(GameObjectType::_MainCharacter, renderTarget);
+	renderObjects(GameObjectType::_MapMovableGameObject, renderTarget);
 	m_currentMap.drawLightedForeground(renderTarget, sf::RenderStates::Default, focus);
 	sf::View adjustedView = renderTarget.getView();
 
@@ -167,8 +170,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(adjustedView);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_NPC, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_MainCharacter, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_MapMovableGameObject, renderTarget);
 	renderTooltipText(renderTarget);
 	GameScreen::render(renderTarget); // this will set the view to the default view!
 

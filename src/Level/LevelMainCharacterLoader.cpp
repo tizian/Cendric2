@@ -12,7 +12,7 @@ LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, 
 }
 
 void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_MainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelMainCharacterLoader", "Could not find main character of game screen");
 		return;

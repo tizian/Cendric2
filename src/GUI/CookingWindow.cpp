@@ -101,7 +101,7 @@ void CookingWindow::cookItem(const std::string& itemID) {
 		return;
 	}
 	ItemFoodBean food = g_databaseManager->getItemFoodBean(itemID);
-	if (food.status == BeanStatus::Error || !food.is_cookable || food.cooked_item_id.empty()) {
+	if (food.status == BeanStatus::NotSet || !food.is_cookable || food.cooked_item_id.empty()) {
 		g_logger->logError("CookingWindow", "Cannot cook item with id " + itemID);
 		return;
 	}

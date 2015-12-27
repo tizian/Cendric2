@@ -1,4 +1,5 @@
 #include "Item.h"
+#include "Weapon.h"
 
 Item::Item(const std::string& itemID) {
 	if (!itemID.empty())
@@ -19,6 +20,8 @@ void Item::initBeans(const std::string& itemID) {
 	m_levelItemFrameBeans = g_databaseManager->getLevelitemFrameBeans(itemID);
 	m_attributeData = ZERO_ATTRIBUTES;
 	m_attributeData.create(g_databaseManager->getItemAttributeBean(itemID));
+	m_itemWeaponBean = g_databaseManager->getItemWeaponBean(itemID);
+	m_itemWeaponSlotBeans = g_databaseManager->getItemWeaponSlotBeans(itemID);
 }
 
 Item::~Item() {
@@ -79,6 +82,9 @@ void Item::checkItem() {
 		m_itemBean.item_type == ItemType::Equipment_ring_2 || 
 		m_itemBean.item_type == ItemType::Equipment_weapon)) {
 		m_isEquipmentItem = true;
+	}
+	if (m_itemWeaponBean.status == BeanStatus::Filled) {
+		m_isWeapon = true;
 	}
 }
 

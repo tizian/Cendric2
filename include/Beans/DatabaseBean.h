@@ -4,11 +4,11 @@
 #include <SFML/Graphics.hpp>
 
 enum class BeanStatus {
-	Error,
+	NotSet,
 	Filled
 };
 
-// super struct for all database beans, initializes with error
+// super struct for all database beans, initializes with not set.
 struct DatabaseBean {
-	BeanStatus status = BeanStatus::Error;
+	BeanStatus status = BeanStatus::NotSet;
 };

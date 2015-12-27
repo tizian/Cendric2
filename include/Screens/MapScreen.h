@@ -25,6 +25,8 @@ public:
 
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
+	// getter for the main char as it lays in the movable go vector
+	MapMainCharacter* getMainCharacter();
 
 private:
 	Map m_currentMap;

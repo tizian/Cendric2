@@ -42,7 +42,7 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 	sf::Vector2f div = m_nextPosition - getPosition();
 
 	// check collisions with main char
-	if (m_ownerType != GameObjectType::_MainCharacter) {
+	if (m_ownerType != GameObjectType::_LevelMainCharacter) {
 		checkCollisionsWithMainChar(getBoundingBox());
 	}
 	// check collisions with enemies

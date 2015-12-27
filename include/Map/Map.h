@@ -50,8 +50,6 @@ private:
 	TileMap m_lightedForegroundTileMap;
 	TileMap m_foregroundTileMap;
 
-	std::vector<GameObject*>* m_npcs;
-
 	std::string m_id;
 	// data loaded by the map loader
 	MapData m_mapData;

@@ -249,7 +249,13 @@ void CharacterCore::loadItems() {
 			g_logger->logError("CharacterCore", "Item not found: " + item.first);
 			continue;
 		}
-		m_items.insert({ item.first, Item(item.first) });
+		if (g_databaseManager->getItemBean(item.first).item_type == ItemType::Equipment_weapon) {
+			m_items.insert({ item.first, Weapon(item.first) });
+		}
+		else {
+			m_items.insert({ item.first, Item(item.first) });
+		}
+		
 	}
 }
 
@@ -511,7 +517,6 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int m
 	if (wep->addModifier(slotNr, modifierNr, modifier, true)) {
 		// check if this spell slot exists. If not, fill the slots
 		if (m_data.equippedWeaponSlots.size() < slotNr + 1) {
-			g_logger->logInfo("CharacterCore", "Adding empty slots to the weapon!");
 			for (size_t i = m_data.equippedWeaponSlots.size(); i < slotNr + 1; ++i) {
 				std::pair<SpellID, std::vector<SpellModifier>> newSlot;
 				newSlot.first = SpellID::VOID;

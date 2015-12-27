@@ -157,7 +157,7 @@ void NPC::setPosition(const sf::Vector2f& pos) {
 }
 
 GameObjectType NPC::getConfiguredType() const {
-	return GameObjectType::_NPC;
+	return GameObjectType::_MapMovableGameObject;
 }
 
 void NPC::setTooltipText(const std::string& tooltip) {

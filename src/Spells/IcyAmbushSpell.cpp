@@ -61,7 +61,7 @@ void IcyAmbushSpell::execOnHit(LevelMovableGameObject *target) {
 
 		updateParticleSystemPosition();
 
-		if (m_ownerType != GameObjectType::_MainCharacter) {
+		if (m_ownerType != GameObjectType::_LevelMainCharacter) {
 			checkCollisionsWithMainChar(getBoundingBox());
 		}
 		// check collisions with enemies

@@ -21,7 +21,7 @@ void FireRatEnemy::loadSpells() {
 	chopSpell.damage = 15;
 	chopSpell.duration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 30, 30);
+	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 10;

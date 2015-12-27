@@ -38,15 +38,9 @@ public:
 
 	const std::vector<WeaponSlot_s>& getWeaponSlots() const;
 
-	void initWeaponBeans(const std::string& itemID);
-	void checkWeapon();
-
 	void reload();
 
 private:
-	ItemWeaponBean m_itemWeaponBean;
-	std::vector<ItemWeaponSlotBean> m_itemWeaponSlotBeans;
-
 	std::vector<WeaponSlot_s> m_weaponSlots;
 
 	bool doesSlotExist(int slotNr) const;

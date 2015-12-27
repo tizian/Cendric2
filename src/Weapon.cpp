@@ -2,27 +2,8 @@
 #include "Logger.h"
 
 Weapon::Weapon(const std::string& itemID) : Item(itemID) {
-	initWeaponBeans(itemID);
-	checkWeapon();
 	reload();
 }
-
-void Weapon::initWeaponBeans(const std::string& itemID) {
-	Item::initBeans(itemID);
-	m_itemWeaponBean = g_databaseManager->getItemWeaponBean(itemID);
-	m_itemWeaponSlotBeans = g_databaseManager->getItemWeaponSlotBeans(itemID);
-}
-
-void Weapon::checkWeapon() {
-	Item::checkItem();
-	if (m_itemWeaponBean.status == BeanStatus::Filled) {
-		m_isWeapon = true;
-	}
-	else {
-		g_logger->logError("Weapon", "Weapon instantiated that has no weapon part, id is" + m_itemBean.item_id);
-	}
-}
-
 
 void Weapon::reload() {
 	m_weaponSlots.clear();

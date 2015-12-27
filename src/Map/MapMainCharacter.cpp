@@ -156,5 +156,5 @@ float MapMainCharacter::getConfiguredMaxVelocityX() const {
 }
 
 GameObjectType MapMainCharacter::getConfiguredType() const {
-	return GameObjectType::_MainCharacter;
+	return GameObjectType::_MapMovableGameObject;
 }

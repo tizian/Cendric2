@@ -101,6 +101,15 @@ void Screen::updateObjects(GameObjectType type, const sf::Time& frameTime) {
 	}
 }
 
+inline bool compareYCoord(const GameObject* go1, const GameObject* go2) { 
+	return (go1->getPosition().y + go1->getBoundingBox()->height < 
+		go2->getPosition().y + go2->getBoundingBox()->height);
+}
+
+void Screen::depthSortObjects(GameObjectType type) {
+	std::sort(m_objects[type].begin(), m_objects[type].end(), compareYCoord);
+}
+
 void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget) {
 	for (auto& it : m_objects[type]) {
 		it->setViewable(isInsideView(renderTarget.getView(), *(it->getBoundingBox())));

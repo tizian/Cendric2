@@ -12,4 +12,5 @@ public:
 	bool getConfiguredRotateSprite() const override;
 
 private:
+	sf::Vector2f m_spellOffset;
 };

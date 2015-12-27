@@ -44,7 +44,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 	if (!m_isReturning) {
 		checkCollisions(m_nextPosition);
 		// check collisions with main char
-		if (m_ownerType != GameObjectType::_MainCharacter) {
+		if (m_ownerType != GameObjectType::_LevelMainCharacter) {
 			if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
 				m_mainChar->onHit(this);
 				m_isDisposed = false;
