@@ -23,6 +23,9 @@ struct ItemBean : DatabaseBean {
 		if (_item_type.compare("quest") == 0) {
 			return ItemType::Quest;
 		}
+		if (_item_type.compare("document") == 0) {
+			return ItemType::Document;
+		}
 		if (_item_type.compare("eq_weapon") == 0) {
 			return ItemType::Equipment_weapon;
 		}

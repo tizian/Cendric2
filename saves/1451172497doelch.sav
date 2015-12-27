@@ -1,26 +1,26 @@
 # time played, in seconds
-time.played:313
-savegame.name:doelch
-savegame.date:1451172497
+time.played:365
+savegame.name:DOELCH
+savegame.date:1451257813
 level.id:res/level/ratcave/ratcave.tmx
 level.position:525.000000,1175.000000
 is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:4022.105225,922.639954
+map.position:4000.000000,760.336060
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:37
+gold:38
 # items in inventory:
-item.id:eq_back_necrot3,1
-item.id:eq_head_divinet3,1
 item.id:eq_head_necrot3,1
 item.id:eq_purpleback,1
 item.id:eq_rafishat,1
 item.id:eq_wizardhatblue,1
 item.id:eq_wizardhatgrey,1
-item.id:fo_cheese,2
+item.id:fo_caveberry,1
+item.id:fo_cheese,3
+item.id:fo_glowingshroom,1
 item.id:fo_rawmeat,2
 item.id:mi_goldengoblet,1
 item.id:we_icestaff,1
@@ -30,11 +30,11 @@ equipped.spellslot:2,1,3,5,1,3,3
 equipped.spellslot:17,0,0,0,0,2,3
 equipped.spellslot:12,6,3,0,0,7,3
 equipped.spellslot:11,7,3,0,0,4,3
-equipped.spellslot:0
+equipped.spellslot:22,6,1,4,3,5,3
 # equipment:
-equipped.back:
+equipped.back:eq_back_necrot3
 equipped.body:eq_body_necrot3
-equipped.head:
+equipped.head:eq_head_divinet3
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
@@ -43,20 +43,20 @@ equipped.weapon:we_oathbreaker
 quickslot:1,
 quickslot:2,
 # enemies killed in level:
-enemies.killed:res/level/ratcave/ratcave.tmx,3
+enemies.killed:res/level/ratcave/ratcave.tmx,3,4
 enemies.killed:res/level/testleverlevel/testleverlevel.tmx
 # enemies looted in level:
-enemies.looted:res/level/ratcave/ratcave.tmx,3
+enemies.looted:res/level/ratcave/ratcave.tmx,3,4
 enemies.looted:res/level/testleverlevel/testleverlevel.tmx
 # items looted in level:
-items.looted:res/level/ratcave/ratcave.tmx,1778
+items.looted:res/level/ratcave/ratcave.tmx,1560,1758,1778
 items.looted:res/level/testleverlevel/testleverlevel.tmx
 # chests looted in level:
 items.looted:res/level/ratcave/ratcave.tmx
 # quest states:
 quest.state:a_cave_of_rats,1
 # quest targets killed:
-quest.progress.target:a_cave_of_rats,rat,1
+quest.progress.target:a_cave_of_rats,rat,2
 # quest conditions fulfilled:
 quest.progress.condition:a_cave_of_rats,test
 # npc states:
@@ -68,7 +68,7 @@ spell.learned:1,2,3,4,5,6
 spell.learned:2,7,9,11
 spell.learned:3,12,13
 spell.learned:4,17,19,21
-spell.learned:5
+spell.learned:5,22
 # modifiers learned:
 modifier.learned:1,3
 modifier.learned:2,3

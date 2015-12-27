@@ -1,4 +1,4 @@
--- Dialogue for NPC "Guard"
+-- Dialogue for NPC "guard"
 loadDialogue = function(DL)
 		DL:createChoiceNode(0)
 		DL:addChoice(1, "DL_Choice_TalkToMe") -- Talk to me.
@@ -11,11 +11,11 @@ loadDialogue = function(DL)
 		DL:createTradeNode(5, 0, "DL_Trade_TakeALook") -- Take a look.
 		DL:addNode()
 		
-        if (DL:isNPCState("Guard", "never_talked")) then
+        if (DL:isNPCState("guard", "never_talked")) then
             
 			DL:createNPCNode(1, 2, "DL_Guard_Hello") -- Hey you, stop! What are you doing here, so very alone? It's dangerous out here.
-			DL:changeNPCState("Guard", "passive")
-			DL:addQuestProgress("ACaveOfRats", "Test")
+			DL:changeNPCState("guard", "passive")
+			DL:addQuestProgress("a_cave_of_rats", "Test")
 			DL:addNode()
 			
 			DL:createChoiceNode(2)
@@ -27,15 +27,15 @@ loadDialogue = function(DL)
 			DL:addNode()
 			
 			DL:createCendricNode(4, -1, "DL_Cendric_Okay") -- Okay, I will do that
-			DL:changeQuestState("ACaveOfRats", "started")
+			DL:changeQuestState("a_cave_of_rats", "started")
 			DL:addNode()
 			
-        elseif (DL:isQuestState("ACaveOfRats", "started")) then
+        elseif (DL:isQuestState("a_cave_of_rats", "started")) then
 			
-			if (DL:isQuestComplete("ACaveOfRats")) then
+			if (DL:isQuestComplete("a_cave_of_rats")) then
 			
 				DL:createNPCNode(1, 2, "DL_Guard_GoodJob") -- Good job, boy! What do you want as a reward? 
-				DL:changeNPCState("Guard", "passive")
+				DL:changeNPCState("guard", "passive")
 				DL:addNode()
 			
 				DL:createChoiceNode(2)
@@ -44,13 +44,13 @@ loadDialogue = function(DL)
 				DL:addNode()
 			
 				DL:createNPCNode(3, -1, "DL_Guard_GivesReward") -- Okay, here you go.
-				DL:changeQuestState("ACaveOfRats", "completed")
+				DL:changeQuestState("a_cave_of_rats", "completed")
 				DL:addGold(5)
 				DL:addNode()
 			
 				DL:createNPCNode(4, -1, "DL_Guard_GivesReward") -- Okay, here you go.
-				DL:changeQuestState("ACaveOfRats", "completed")
-				DL:addItem("it_mi_goldengoblet", 1)
+				DL:changeQuestState("a_cave_of_rats", "completed")
+				DL:addItem("mi_goldengoblet", 1)
 				DL:addNode()
 			
 				DL:setRoot(0)
@@ -62,7 +62,7 @@ loadDialogue = function(DL)
 			
 			end
 			
-		elseif (DL:isQuestState("ACaveOfRats", "completed")) then
+		elseif (DL:isQuestState("a_cave_of_rats", "completed")) then
             
 			DL:createNPCNode(1, -1, "DL_Guard_GoAway") -- Go away, I have nothing to do for you.
 			DL:addNode()
@@ -81,7 +81,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 			
 			DL:createCendricNode(4, -1, "DL_Cendric_Okay") -- Okay, I will do that
-			DL:changeQuestState("ACaveOfRats", "started")
+			DL:changeQuestState("a_cave_of_rats", "started")
 			DL:addNode()
 			
         end

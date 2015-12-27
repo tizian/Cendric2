@@ -19,7 +19,7 @@
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="1">
    <properties>
-    <property name="id" value="it_mi_goldengoblet"/>
+    <property name="id" value="mi_goldengoblet"/>
    </properties>
   </tile>
  </tileset>
@@ -226,7 +226,7 @@
   <object id="4" gid="534" x="981" y="579" width="50" height="50">
    <properties>
     <property name="gold" value="100"/>
-    <property name="it_fo_cheese" value="1"/>
+    <property name="fo_cheese" value="1"/>
    </properties>
   </object>
   <object id="5" gid="534" x="307" y="790" width="50" height="50"/>

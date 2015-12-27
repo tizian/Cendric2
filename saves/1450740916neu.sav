@@ -66,7 +66,7 @@ spell.learned:1,2,3,4,5,6
 spell.learned:2,7,9,11
 spell.learned:3,12,13
 spell.learned:4,17,19,21
-spell.learned:5
+spell.learned:5,22
 # modifiers learned:
 modifier.learned:1,3
 modifier.learned:2,3

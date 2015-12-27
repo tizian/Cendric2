@@ -33,6 +33,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_spell_iceball, "res/assets/spells/spritesheet_spell_iceball.png" },
 		{ ResourceID::Texture_spell_aureola, "res/assets/spells/spritesheet_spell_aureola.png" },
 		{ ResourceID::Texture_spell_fear, "res/assets/spells/spritesheet_spell_fear.png" },
+		{ ResourceID::Texture_spell_shackle, "res/assets/spells/spritesheet_spell_shackle.png" },
 		{ ResourceID::Texture_spell_icyambush, "res/assets/spells/spritesheet_spell_icyambush.png" },
 		{ ResourceID::Texture_spell_unlock, "res/assets/spells/spritesheet_spell_unlock.png" },
 		{ ResourceID::Texture_spell_telekinesis, "res/assets/spells/spritesheet_spell_telekinesis.png" },
@@ -309,6 +310,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_spell_divineshield);
 	deleteResource(ResourceID::Texture_spell_aureola);
 	deleteResource(ResourceID::Texture_spell_fear);
+	deleteResource(ResourceID::Texture_spell_shackle);
 	deleteResource(ResourceID::Texture_spell_icyambush);
 	deleteResource(ResourceID::Texture_spell_unlock);
 
@@ -352,6 +354,7 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_spell_divineshield);
 	getTexture(ResourceID::Texture_spell_aureola);
 	getTexture(ResourceID::Texture_spell_fear);
+	getTexture(ResourceID::Texture_spell_shackle);
 	getTexture(ResourceID::Texture_spell_icyambush);
 	getTexture(ResourceID::Texture_spell_unlock);
 

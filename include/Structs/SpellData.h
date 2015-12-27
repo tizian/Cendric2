@@ -71,6 +71,8 @@ private:
 	// static SpellData getWrathOfTheGodsSpellData();
 	// static SpellData getJusticeSpellData();
 	static SpellData getAureolaSpellData();
+
+	static SpellData getShackleSpellData();
 };
 
 const struct SpellData EMPTY_SPELL =

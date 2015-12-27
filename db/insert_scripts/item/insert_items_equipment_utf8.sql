@@ -14,7 +14,7 @@ INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatgrey', '
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_purpleback', 'eq_back', 100, 150, 10);
 INSERT INTO item_attribute (item_id, res_physical, res_ice) values ('eq_purpleback', 5, 1);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_purpleback', 'res/assets/equipment/head/spritesheet_head_wizardhat_grey.png');
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_purpleback', 'res/assets/equipment/back/spritesheet_back_purple.png');
 
 -- Necro T3 Head
 

@@ -51,6 +51,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Equipment','E
 INSERT INTO text (text_id, english, german, swiss_german) values ('Exit','Exit','Beenden','Beende');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Failed','Failed','Fehlgeschlagen','Gfailt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FearLevel','Fear Level','Furcht Stufe','Angscht Stufe');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ShacklePower','Power','Kraft','Chraft');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FifthSpell','5. Spell','5. Zauber','5. Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FireDamage','Fire Damage','Feuerschaden','Füürschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FireResistance','Fire Resistance','Feuerresistenz','Füürresistenz');
@@ -167,6 +168,8 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLightDes
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellIcyAmbushDesc','Cendric throws an enchanted dagger that deals big damage when it hits an enemy, stuns it and enemies in range and ports Cendric to its location.','Cendric wirft einen verzauberten Dolch, der eine grosse Menge Schaden verursacht, wenn er einen Gegner trifft und Cendric an dessen Stelle teleportiert. Gegner im Umkreis werden betäubt.','De Cendric wirft en verzauberte Dolch wo viel Schade amne Gegner macht und Gegner im Umkreis betäubt. De Cendric wird ad Stell vom troffene Gegner teleportiert.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeech','Leech','Lebensraub','Lebesraub');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeechDesc','Sends out leeching spells that damage enemies and return with heal to Cendric if they hit an enemy.','Schickt lebensraubende Zauber aus, die zu Cendric zurückkehren, um ihn zu heilen, falls sie einen Gegner getroffen haben.','Schickt lebensraubendi Zauber uus wo zum Cendric zruggchömed zum ihn heile falls si en Gegner troffe hend.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellShackle','Shackle','Fesseln','Fessle');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellShackleDesc','Shackles an enemy and deals damage for its duration.','Fesselt einen Gegner und fügt ihm Schaden zu für eine gewisse Dauer.','Fesslet en Gegner und schadet ihm für e gwüssi Ziit.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellSlots','Spell Slots','Verfügbare Zauber','Verfüegbari Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellUnlock','Summon Picklock','Dietrich beschwören','Dietrich beschwöre');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellUnlockDesc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Beschwört einen Dietrich, der verschlossene Truhen knackt, sofern die Stärke des Zaubers ausreicht.','Beschwört en Dietrich ane wo e verschlosseni True knackt sofern de Zauber gnueg starch isch für die True.');

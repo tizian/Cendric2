@@ -14,6 +14,7 @@
 #include "SpellCreators/LightSpellCreator.h"
 #include "SpellCreators/TelekinesisSpellCreator.h"
 #include "SpellCreators/InvisibilitySpellCreator.h"
+#include "SpellCreators/ShackleSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -42,6 +43,13 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Strength);
 		break;
 	case SpellID::Fear:
+		types.push_back(SpellModifierType::Count);
+		types.push_back(SpellModifierType::Reflect);
+		types.push_back(SpellModifierType::Speed);
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Strength);
+		break;
+	case SpellID::Shackle:
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Reflect);
 		types.push_back(SpellModifierType::Speed);
@@ -134,6 +142,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::Invisibility:
 		creator = new InvisibilitySpellCreator(data, owner);
 		break;
+	case SpellID::Shackle:
+		creator = new ShackleSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -173,6 +184,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getTelekinesisSpellData();
 	case SpellID::Invisibility:
 		return getInvisibilitySpellData();
+	case SpellID::Shackle:
+		return getShackleSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -301,6 +314,27 @@ SpellData SpellData::getFearSpellData() {
 	fear.durationModifierAddition = sf::seconds(2);
 
 	return fear;
+}
+
+SpellData SpellData::getShackleSpellData() {
+	SpellData shackle = EMPTY_SPELL;
+	shackle.id = SpellID::Shackle;
+	shackle.spellType = SpellType::Illusion;
+	shackle.iconTextureRect = sf::IntRect(0, 200, 50, 50);
+
+	shackle.cooldown = sf::seconds(4);
+	shackle.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	shackle.divergenceAngle = 0.2f;
+	shackle.duration = sf::seconds(5);
+	shackle.needsTarget = true;
+	shackle.startVelocity = 200.f;
+
+	shackle.countModifierAddition = 1;
+	shackle.reflectModifierAddition = 1;
+	shackle.speedModifierAddition = 100.f;
+	shackle.durationModifierAddition = sf::seconds(2);
+
+	return shackle;
 }
 
 SpellData SpellData::getAntiGravitySpellData() {
