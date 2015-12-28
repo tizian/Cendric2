@@ -38,6 +38,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Critical','Cr
 INSERT INTO text (text_id, english, german, swiss_german) values ('CriticalHitChance','Critical Hit Chance','Chance auf kritische Treffer','Chance uf kritischi Treffer');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Damage','Damage','Schaden','Schade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DamageType','Damage Type','Schadenstyp','Schadetyp');
+INSERT INTO text (text_id, english, german, swiss_german) values ('DamagePerSecond','Damage per second','Schaden pro Sekunde','Schade pro Sekunde');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Default','Default','Standardwert','Standardwert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Delete','Delete','Löschen','Lösche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DisplayMode','Display Mode','Anzeigemodus','Aazeigemodus');

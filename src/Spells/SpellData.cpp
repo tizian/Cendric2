@@ -55,6 +55,7 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Speed);
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Damage);
 		break;
 	case SpellID::AntiGravity:
 		types.push_back(SpellModifierType::Duration);
@@ -322,6 +323,8 @@ SpellData SpellData::getShackleSpellData() {
 	shackle.spellType = SpellType::Illusion;
 	shackle.iconTextureRect = sf::IntRect(0, 200, 50, 50);
 
+	shackle.damageType = DamageType::Ice;
+	shackle.damagePerSecond = 2;
 	shackle.cooldown = sf::seconds(4);
 	shackle.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	shackle.divergenceAngle = 0.2f;
@@ -333,6 +336,7 @@ SpellData SpellData::getShackleSpellData() {
 	shackle.reflectModifierAddition = 1;
 	shackle.speedModifierAddition = 100.f;
 	shackle.durationModifierAddition = sf::seconds(2);
+	shackle.damageModifierAddition = 2;
 
 	return shackle;
 }

@@ -64,10 +64,19 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 		stats.append(g_textProvider->getText(EnumNames::getDamageTypeName(bean.damageType)));
 		stats.append("\n");
 
-		stats.append(g_textProvider->getText("Damage"));
-		stats.append(": ");
-		stats.append(to_string(bean.damage));
-		stats.append("\n");
+		if (bean.damage > 0) {
+			stats.append(g_textProvider->getText("Damage"));
+			stats.append(": ");
+			stats.append(to_string(bean.damage));
+			stats.append("\n");
+		}
+
+		if (bean.damagePerSecond > 0) {
+			stats.append(g_textProvider->getText("DamagePerSecond"));
+			stats.append(": ");
+			stats.append(to_string(bean.damagePerSecond));
+			stats.append("/s\n");
+		}
 	}
 
 	// heal

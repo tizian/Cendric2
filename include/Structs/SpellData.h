@@ -24,6 +24,7 @@ struct SpellData {
 
 	// modifiable by crystal modifiers
 	int damage;
+	int damagePerSecond;
 	int heal;
 	int reflectCount;
 	float startVelocity;
@@ -85,6 +86,7 @@ const struct SpellData EMPTY_SPELL =
 	DamageType::VOID,
 	false,
 
+	0,
 	0,
 	0,
 	0,

@@ -35,3 +35,7 @@ void ShackleSpellCreator::executeSpell(const sf::Vector2f &target) {
 void ShackleSpellCreator::addStrengthModifier(int level) {
 	m_strength += level;
 }
+
+void ShackleSpellCreator::addDamageModifier(int level) {
+	m_spellData.damagePerSecond += m_spellData.damageModifierAddition * level;
+}
