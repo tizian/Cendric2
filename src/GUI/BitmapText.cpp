@@ -14,17 +14,17 @@ std::string transform(const std::string& str) {
 		unsigned char c = str.at(i);
 		if (c == 0xc3) {
 			unsigned char c2 = str.at(i + 1);
-			if (c2 == 0xa4 || c2 == 0x84) {			// ä or Ä
+			if (c2 == 0xa4u || c2 == 0x84u) {			// ä or Ä
 				out.push_back(0xc4u);
 			}
-			else if (c2 == 0xb6 || c2 == 0x96) {	// ö or Ö
+			else if (c2 == 0xb6u || c2 == 0x96u) {	// ö or Ö
 				out.push_back(0xd6u);
 			}
-			else if (c2 == 0xbc || c2 == 0x9c) {	// ü or Ü
+			else if (c2 == 0xbcu || c2 == 0x9cu) {	// ü or Ü
 				out.push_back(0xdcu);
 			}
 			else {									// ?
-				out.push_back(0x3f);
+				out.push_back(0x3fu);
 			}
 			i++;
 		}

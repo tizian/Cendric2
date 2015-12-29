@@ -60,7 +60,7 @@ private:
 	static SpellData getUnlockSpellData();
 	// static SpellData getShadowTrapSpellData();
 	static SpellData getInvisibilitySpellData();
-	// static SpellData getFlashSpellData();
+	static SpellData getFlashSpellData();
 	static SpellData getIcyAmbushSpellData();
 
 	static SpellData getFearSpellData();

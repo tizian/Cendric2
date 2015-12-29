@@ -93,6 +93,10 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Strength);
 		types.push_back(SpellModifierType::Duration);
 		break;
+	case SpellID::Flash:
+		types.push_back(SpellModifierType::Range);
+		types.push_back(SpellModifierType::Damage);
+		break;
 	default:
 		break;
 	}
@@ -188,6 +192,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getInvisibilitySpellData();
 	case SpellID::Shackle:
 		return getShackleSpellData();
+	case SpellID::Flash:
+		return getFlashSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -442,6 +448,26 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.rangeModifierAddition = 25.f;
 
 	return icyAmbush;
+}
+
+SpellData SpellData::getFlashSpellData() {
+	SpellData flash = EMPTY_SPELL;
+	flash.id = SpellID::Flash;
+	flash.spellType = SpellType::Twilight;
+	flash.iconTextureRect = sf::IntRect(150, 50, 50, 50);
+
+	flash.cooldown = sf::seconds(10);
+	flash.damageType = DamageType::Light;
+	flash.activeDuration = sf::seconds(2);
+	flash.needsTarget = false;
+	flash.damage = 20;
+	flash.range = 60.f;
+	flash.boundingBox = sf::FloatRect(0, 0, flash.range, 20);
+
+	flash.damageModifierAddition = 20;
+	flash.rangeModifierAddition = 30.f;
+
+	return flash;
 }
 
 SpellData SpellData::getLightSpellData() {

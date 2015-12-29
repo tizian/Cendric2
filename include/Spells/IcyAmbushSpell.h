@@ -3,7 +3,6 @@
 #include "global.h"
 #include "Spell.h"
 
-
 class IcyAmbushSpell : public Spell {
 public:
 	IcyAmbushSpell();
