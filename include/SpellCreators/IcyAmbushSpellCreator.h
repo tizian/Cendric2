@@ -14,6 +14,4 @@ public:
 
 private:
 	void addDurationModifier(int level) override;
-
-	sf::Time m_stunTime = sf::seconds(1);
 };

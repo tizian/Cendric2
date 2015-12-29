@@ -15,13 +15,13 @@ std::string transform(const std::string& str) {
 		if (c == 0xc3) {
 			unsigned char c2 = str.at(i + 1);
 			if (c2 == 0xa4 || c2 == 0x84) {			// ä or Ä
-				out.push_back(0xc4);
+				out.push_back(0xc4u);
 			}
 			else if (c2 == 0xb6 || c2 == 0x96) {	// ö or Ö
-				out.push_back(0xd6);
+				out.push_back(0xd6u);
 			}
 			else if (c2 == 0xbc || c2 == 0x9c) {	// ü or Ü
-				out.push_back(0xdc);
+				out.push_back(0xdcu);
 			}
 			else {									// ?
 				out.push_back(0x3f);

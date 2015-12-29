@@ -15,6 +15,7 @@ public:
 	void executeSpell(const sf::Vector2f& target) override;
 
 protected:
-	void addStrengthModifier(int level);
+	void addStrengthModifier(int level) override;
+	void addDurationModifier(int level) override;
 	int m_additionalResistance;
 };

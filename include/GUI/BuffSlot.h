@@ -9,7 +9,8 @@
 
 enum class BuffType {
 	Food,
-	Spell
+	Spell,
+	Debuff
 };
 
 class BuffSlot : public GameObject {

@@ -18,9 +18,8 @@ void FearSpellCreator::executeSpell(const sf::Vector2f &target) {
 	int div = 0;
 	int sign = 1;
 	for (int i = 0; i < m_spellData.count; i++) {
-		FearSpell* newSpell = new FearSpell(m_spellData.duration, m_strength);
+		FearSpell* newSpell = new FearSpell(m_strength);
 		spellData.divergenceAngle = div * sign * m_spellData.divergenceAngle;
-		spellData.duration = m_activeDuration;
 		newSpell->load(spellData, m_owner, target);
 		m_screen->addObject(newSpell);
 		sign = -sign;
@@ -34,4 +33,8 @@ void FearSpellCreator::executeSpell(const sf::Vector2f &target) {
 
 void FearSpellCreator::addStrengthModifier(int level) {
 	m_strength += level;
+}
+
+void FearSpellCreator::addDurationModifier(int level) {
+	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
 }

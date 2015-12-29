@@ -15,6 +15,7 @@ void LightSpellCreator::executeSpell(const sf::Vector2f &target) {
 }
 
 void LightSpellCreator::addDurationModifier(int level) {
-	m_spellData.duration += static_cast<float>(level)* m_spellData.durationModifierAddition;
-	m_spellData.cooldown = m_spellData.duration;
+	m_spellData.activeDuration += static_cast<float>(level)* m_spellData.durationModifierAddition;
+	m_spellData.duration = m_spellData.activeDuration;
+	m_spellData.cooldown = m_spellData.activeDuration;
 }

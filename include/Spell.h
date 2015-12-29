@@ -34,7 +34,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 	// effects executed on mob when it hits one. default does nothing. executed by the mob itself.
-	virtual void execOnHit(LevelMovableGameObject *target);
+	virtual void execOnHit(LevelMovableGameObject* target);
 
 	const sf::Time& getDuration() const;
 	const MovableGameObject* getOwner() const;
@@ -47,6 +47,7 @@ protected:
 	sf::Time m_duration;
 
 	int m_damage;
+	int m_damagePerSecond;
 	int m_heal;
 	DamageType m_damageType;
 	int m_reflectCount;
@@ -55,14 +56,14 @@ protected:
 	bool m_needsTarget;
 
 	// enemy list from screen
-	std::vector<GameObject*> *m_enemies;
+	std::vector<GameObject*>* m_enemies;
 	// main character from screen
-	LevelMainCharacter *m_mainChar;
+	LevelMainCharacter* m_mainChar;
 	// calculates position according to m_mob
-	void calculatePositionAccordingToMob(sf::Vector2f &position) const;
+	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
 	// collisions with mainchar
-	void checkCollisionsWithMainChar(const sf::FloatRect *boundingBox);
+	void checkCollisionsWithMainChar(const sf::FloatRect* boundingBox);
 	// collisions with enemies
-	void checkCollisionsWithEnemies(const sf::FloatRect *boundingBox);
-	sf::Vector2f rotateVector(const sf::Vector2f &vec, float angle);
+	void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
+	sf::Vector2f rotateVector(const sf::Vector2f& vec, float angle);
 };

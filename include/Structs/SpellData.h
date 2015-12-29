@@ -29,8 +29,10 @@ struct SpellData {
 	int reflectCount;
 	float startVelocity;
 	int count;
-	sf::Time duration;
 	float range;
+	sf::Time duration; // duration of an effect of a spell, for example the fear duration (fear spell)
+	sf::Time activeDuration;	// the duration for which a spell is active before it gets disposed. 
+								//This value is not displayed to the user in contrast to the duration.
 
 	float divergenceAngle;
 	float rangeModifierAddition;
@@ -92,8 +94,9 @@ const struct SpellData EMPTY_SPELL =
 	0,
 	0.f,
 	1,
-	sf::Time::Zero,
 	0.f,
+	sf::Time::Zero,
+	sf::Time::Zero,
 
 	0.f,
 	0.f,

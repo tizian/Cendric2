@@ -5,7 +5,7 @@
 
 class ShackleSpell : public Spell {
 public:
-	ShackleSpell(const sf::Time& stunDuration, int strength);
+	ShackleSpell(int strength);
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void execOnHit(LevelMovableGameObject* target) override;
 

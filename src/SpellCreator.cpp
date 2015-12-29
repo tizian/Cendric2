@@ -66,7 +66,7 @@ void SpellCreator::addDamageModifier(int level) {
 }
 
 void SpellCreator::addDurationModifier(int level) {
-	m_spellData.duration += static_cast<float>(level)* m_spellData.durationModifierAddition;
+	m_spellData.activeDuration += static_cast<float>(level) * m_spellData.durationModifierAddition;
 }
 
 void SpellCreator::addRangeModifier(int level) {
@@ -103,24 +103,47 @@ std::string SpellCreator::getStrengthModifierName() const {
 
 void SpellCreator::updateDamage(SpellData& bean, const AttributeData* attributes) {
 	if (attributes == nullptr) return;
-	switch (bean.damageType) {
-	case DamageType::Physical:
-		bean.damage = bean.damage + attributes->damagePhysical;
-		break;
-	case DamageType::Fire:
-		bean.damage = bean.damage + attributes->damageFire;
-		break;
-	case DamageType::Ice:
-		bean.damage = bean.damage + attributes->damageIce;
-		break;
-	case DamageType::Shadow:
-		bean.damage = bean.damage + attributes->damageShadow;
-		break;
-	case DamageType::Light:
-		bean.damage = bean.damage + attributes->damageLight;
-		break;
-	default:
-		return;
+	if (bean.damage > 0) {
+		switch (bean.damageType) {
+		case DamageType::Physical:
+			bean.damage = bean.damage + attributes->damagePhysical;
+			break;
+		case DamageType::Fire:
+			bean.damage = bean.damage + attributes->damageFire;
+			break;
+		case DamageType::Ice:
+			bean.damage = bean.damage + attributes->damageIce;
+			break;
+		case DamageType::Shadow:
+			bean.damage = bean.damage + attributes->damageShadow;
+			break;
+		case DamageType::Light:
+			bean.damage = bean.damage + attributes->damageLight;
+			break;
+		default:
+			break;
+		}
+	}
+	if (bean.damagePerSecond > 0) {
+		switch (bean.damageType) {
+		case DamageType::Physical:
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damagePhysical / bean.duration.asSeconds());
+			break;
+		case DamageType::Fire:
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageIce / bean.duration.asSeconds());
+			break;
+		case DamageType::Ice:
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageFire / bean.duration.asSeconds());
+			break;
+		case DamageType::Shadow:
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageShadow / bean.duration.asSeconds());
+			break;
+		case DamageType::Light:
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageLight / bean.duration.asSeconds());
+			break;
+		default:
+			break;
+		}
 	}
 
 	// add randomness to damage (something from 80 - 120% of the base damage)

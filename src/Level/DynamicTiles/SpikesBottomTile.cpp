@@ -32,7 +32,7 @@ void SpikesBottomTile::update(const sf::Time& frameTime) {
 
 void SpikesBottomTile::onHit(LevelMovableGameObject* mob) {
 	if (m_damageCooldown == sf::Time::Zero) {
-		mob->addDamage(DMG_PER_S);
+		mob->addDamage(DMG_PER_S, DamageType::Physical);
 		m_damageCooldown = sf::seconds(1);
 	}
 }

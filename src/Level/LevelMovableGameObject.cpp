@@ -65,6 +65,20 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 			m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
 		}
 	}
+
+	// update debuff attributes
+	for (int i = 0; i < m_dots.size();/* don't increment here, we remove on the fly */) {
+		int prevSecond = static_cast<int>(std::floor(m_dots[i].duration.asSeconds()));
+		m_dots[i].duration -= frameTime;
+		int thisSecond = std::max(-1, static_cast<int>(std::floor(m_dots[i].duration.asSeconds())));
+		addDamage(m_dots[i].damage * (prevSecond - thisSecond), m_dots[i].damageType);
+		if (m_dots[i].duration <= sf::Time::Zero) {
+			m_dots.erase(m_dots.begin() + i);
+		}
+		else {
+			i++;
+		}
+	}
 }
 
 void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition) {
@@ -156,13 +170,38 @@ void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTim
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
 
-void LevelMovableGameObject::addDamage(int damage) {
+void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
+	int damage = 0;
+	switch (damageType) {
+	case DamageType::Physical:
+		damage = static_cast<int>(damage_ * m_attributes.physicalMultiplier);
+		break;
+	case DamageType::Ice:
+		damage = static_cast<int>(damage_ * m_attributes.iceMultiplier);
+		break;
+	case DamageType::Fire:
+		damage = static_cast<int>(damage_ * m_attributes.fireMultiplier);
+		break;
+	case DamageType::Shadow:
+		damage = static_cast<int>(damage_ * m_attributes.shadowMultiplier);
+		break;
+	case DamageType::Light:
+		damage = static_cast<int>(damage_ * m_attributes.lightMultiplier);
+		break;
+	default:
+		break;
+	}
+
 	if (m_state == GameObjectState::Dead || damage <= 0) return;
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
 	if (m_attributes.currentHealthPoints == 0) {
 		setDead();
 	}
 	setSpriteColor(sf::Color::Red, sf::milliseconds(200));
+}
+
+void LevelMovableGameObject::addDamageOverTime(const DamageOverTimeData& data) {
+	m_dots.push_back(data);
 }
 
 void LevelMovableGameObject::addHeal(int heal) {
@@ -180,34 +219,11 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 		return;
 	}
 
-	int damage = 0;
-	switch (spell->getDamageType()) {
-	case DamageType::Physical:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.physicalMultiplier);
+	if (spell->getDamageType() != DamageType::VOID) {
 		spell->setDisposed();
-		break;
-	case DamageType::Ice:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.iceMultiplier);
-		spell->setDisposed();
-		break;
-	case DamageType::Fire:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.fireMultiplier);
-		spell->setDisposed();
-		break;
-	case DamageType::Shadow:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.shadowMultiplier);
-		spell->setDisposed();
-		break;
-	case DamageType::Light:
-		damage = static_cast<int>(spell->getDamage() * m_attributes.lightMultiplier);
-		spell->setDisposed();
-		break;
-	default:
-		break;
 	}
 	spell->execOnHit(this);
-	if (damage > 0)
-		addDamage(damage);
+	addDamage(spell->getDamage(), spell->getDamageType());
 }
 
 void LevelMovableGameObject::setDead() {

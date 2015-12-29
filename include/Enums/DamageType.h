@@ -1,5 +1,6 @@
 #pragma once
 
+// don't change this order as it is synchronized with the debuff sprite order
 enum class DamageType {
 	VOID,
 	Physical,

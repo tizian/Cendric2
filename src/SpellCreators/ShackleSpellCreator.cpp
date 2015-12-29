@@ -18,9 +18,8 @@ void ShackleSpellCreator::executeSpell(const sf::Vector2f &target) {
 	int div = 0;
 	int sign = 1;
 	for (int i = 0; i < m_spellData.count; i++) {
-		ShackleSpell* newSpell = new ShackleSpell(m_spellData.duration, m_strength);
+		ShackleSpell* newSpell = new ShackleSpell(m_strength);
 		spellData.divergenceAngle = div * sign * m_spellData.divergenceAngle;
-		spellData.duration = m_activeDuration;
 		newSpell->load(spellData, m_owner, target);
 		m_screen->addObject(newSpell);
 		sign = -sign;
@@ -38,4 +37,8 @@ void ShackleSpellCreator::addStrengthModifier(int level) {
 
 void ShackleSpellCreator::addDamageModifier(int level) {
 	m_spellData.damagePerSecond += m_spellData.damageModifierAddition * level;
+}
+
+void ShackleSpellCreator::addDurationModifier(int level) {
+	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
 }

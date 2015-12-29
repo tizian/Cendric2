@@ -150,10 +150,16 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 	return m_invisibilityLevel;
 }
 
-void LevelMainCharacter::addDamage(int damage) {
+void LevelMainCharacter::addDamageOverTime(const DamageOverTimeData& data) {
+	sf::IntRect textureLocation((static_cast<int>(data.damageType)-1) * 50, 0, 50, 50);
+	dynamic_cast<LevelScreen*>(m_screen)->addBuffToInterface(BuffType::Debuff, textureLocation, data.duration);
+	LevelMovableGameObject::addDamageOverTime(data);
+}
+
+void LevelMainCharacter::addDamage(int damage, DamageType damageType) {
 	// damage taken will remove invisibility
 	setInvisibilityLevel(0);
-	LevelMovableGameObject::addDamage(damage);
+	LevelMovableGameObject::addDamage(damage, damageType);
 }
 
 void LevelMainCharacter::load() {

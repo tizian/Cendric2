@@ -1,11 +1,11 @@
 #include "Spells/IcyAmbushSpell.h"
 
-IcyAmbushSpell::IcyAmbushSpell(const sf::Time& stunDuration) : Spell() {
-	m_stunDuration = stunDuration;
+IcyAmbushSpell::IcyAmbushSpell() : Spell() {
 }
 
 void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
+	m_stunDuration = bean.duration;
 
 	Animation spellAnimation(sf::seconds(10.f));
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_icyambush));

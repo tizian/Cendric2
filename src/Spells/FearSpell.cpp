@@ -1,12 +1,12 @@
 #include "Spells/FearSpell.h"
 
-FearSpell::FearSpell(const sf::Time& fearedDuration, int strength) : Spell() {
-	m_fearedDuration = fearedDuration;
+FearSpell::FearSpell(int strength) : Spell() {
 	m_strength = strength;
 }
 
 void FearSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
+	m_fearedDuration = bean.duration;
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fear));

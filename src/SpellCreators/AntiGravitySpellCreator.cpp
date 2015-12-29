@@ -12,3 +12,8 @@ void AntiGravitySpellCreator::executeSpell(const sf::Vector2f& target) {
 	if (dynamic_cast<LevelMainCharacter*>(m_owner))
 		m_screen->addBuffToInterface(BuffType::Spell, spellData.iconTextureRect, spellData.duration);
 }
+
+void AntiGravitySpellCreator::addDurationModifier(int level) {
+	m_spellData.activeDuration += static_cast<float>(level) * m_spellData.durationModifierAddition;
+	m_spellData.duration = m_spellData.activeDuration;
+}

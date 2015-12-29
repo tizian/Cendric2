@@ -28,3 +28,8 @@ void InvisibilitySpellCreator::executeSpell(const sf::Vector2f &target) {
 void InvisibilitySpellCreator::addStrengthModifier(int level) {
 	m_invisibilityLevel += level;
 }
+
+void InvisibilitySpellCreator::addDurationModifier(int level) {
+	m_spellData.activeDuration += static_cast<float>(level) * m_spellData.durationModifierAddition;
+	m_spellData.duration = m_spellData.activeDuration;
+}

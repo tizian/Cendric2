@@ -5,8 +5,9 @@
 using namespace std;
 
 void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	m_duration = data.duration;
+	m_duration = data.activeDuration;
 	m_damage = data.damage;
+	m_damagePerSecond = data.damagePerSecond;
 	m_heal = data.heal;
 	m_damageType = data.damageType;
 	m_reflectCount = data.reflectCount;

@@ -34,6 +34,7 @@ public:
 	Animation(const sf::Time& frameTime) { m_frameTime = frameTime; };
 	Animation() { m_frameTime = sf::milliseconds(100); };
 
+	void clearFrames();
 	void addFrame(const sf::IntRect& rect);
 	void setSpriteSheet(const sf::Texture* texture);
 	void setFrameTime(const sf::Time& frameTime);

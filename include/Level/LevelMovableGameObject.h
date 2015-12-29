@@ -3,6 +3,7 @@
 #include "global.h"
 #include "MovableGameObject.h"
 #include "Structs/AttributeData.h"
+#include "Structs/DamageOverTimeData.h"
 
 class Level;
 class SpellManager;
@@ -21,7 +22,7 @@ public:
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 	virtual void onHit(Spell* spell);
 	// adds damage to the attribute health. this damage can't be negative
-	virtual void addDamage(int damage);
+	virtual void addDamage(int damage, DamageType damageType);
 	// adds heal to the attribute health. the heal can't be negative
 	void addHeal(int heal);
 	// sets the dead bool and sets the attribute health to zero.
@@ -32,6 +33,8 @@ public:
 	void consumeFood(const sf::Time& duration, const AttributeData& attributes);
 	// the mob adds these attributes to its own. if their time runs out, they get removed again. The attribute "current health" however will stay.
 	void addAttributes(const sf::Time& duration, const AttributeData& attributes);
+	// adds a dot to this mob
+	virtual void addDamageOverTime(const DamageOverTimeData& data);
 	// gravity flip (used for anti gravity spell)
 	void flipGravity();
 
@@ -71,10 +74,12 @@ protected:
 	std::pair<sf::Time, AttributeData> m_foodAttributes;
 	// a vector to store the attributes given by spells (buffs). if their time runs out, they get removed from the total attributes.
 	std::vector<std::pair<sf::Time, AttributeData>> m_buffAttributes;
+	// active debuffs (dots) with their type, remaining time and dps
+	std::vector<DamageOverTimeData> m_dots;
 
 	AttributeData m_attributes;
 
-	// attributes, include regeneration (hp) and all buffs.
+	// attributes, include regeneration (hp) and all buffs & dots.
 	void updateAttributes(const sf::Time& frameTime);
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
 };

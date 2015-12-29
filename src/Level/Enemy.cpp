@@ -25,6 +25,7 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_fearAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_fear));
 	m_fearAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
 	m_fearAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
+	m_dotAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_damageTypes));
 }
 
 Enemy::~Enemy() {
@@ -151,7 +152,7 @@ void Enemy::updateHpBar() {
 
 void Enemy::updateDebuffSprite(const sf::Time &frameTime) {
 	if (m_debuffSprite) {
-		if (!(m_enemyState == EnemyState::Fleeing || m_enemyState == EnemyState::Stunned)) {
+		if (!(m_enemyState == EnemyState::Fleeing || m_enemyState == EnemyState::Stunned) && m_dots.empty()) {
 			delete m_debuffSprite;
 			m_debuffSprite = nullptr;
 		}
@@ -378,6 +379,16 @@ void Enemy::setStunned(const sf::Time &stunnedTime) {
 	}
 }
 
+void Enemy::addDamageOverTime(const DamageOverTimeData& data) {
+	sf::IntRect textureLocation((static_cast<int>(data.damageType) - 1) * 25, 50, 25, 25);
+	m_dotAnimation.clearFrames();
+	m_dotAnimation.addFrame(textureLocation);
+	delete m_debuffSprite;
+	m_debuffSprite = new AnimatedSprite();
+	m_debuffSprite->setAnimation(&m_dotAnimation);
+	LevelMovableGameObject::addDamageOverTime(data);
+}
+
 void Enemy::onMouseOver() {
 	if (m_state == GameObjectState::Dead) {
 		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
@@ -407,6 +418,10 @@ void Enemy::onRightClick() {
 void Enemy::setDead() {
 	LevelMovableGameObject::setDead();
 	m_enemyState = EnemyState::Dead;
+	if (m_debuffSprite) {
+		delete m_debuffSprite;
+		m_debuffSprite = nullptr;
+	}
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);

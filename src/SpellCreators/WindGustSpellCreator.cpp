@@ -29,3 +29,8 @@ void WindGustSpellCreator::addStrengthModifier(int level) {
 	m_strength += level;
 	// TODO. maybe this pushes faster, and maybe it pushes other "blocks"
 }
+
+void WindGustSpellCreator::addDurationModifier(int level) {
+	m_spellData.activeDuration += static_cast<float>(level) * m_spellData.durationModifierAddition;
+	m_spellData.duration = m_spellData.activeDuration;
+}

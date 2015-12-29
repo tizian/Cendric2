@@ -37,6 +37,7 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Speed);
+		types.push_back(SpellModifierType::Range);
 		break;
 	case SpellID::DivineShield:
 		types.push_back(SpellModifierType::Duration);
@@ -217,7 +218,7 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	fireBall.divergenceAngle = 0.2f;
 	fireBall.damageType = DamageType::Fire;
-	fireBall.duration = sf::seconds(5);
+	fireBall.activeDuration = sf::seconds(5);
 	fireBall.needsTarget = true;
 	fireBall.damage = 10;
 	fireBall.startVelocity = 300.f;
@@ -240,7 +241,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	iceBall.divergenceAngle = 0.2f;
 	iceBall.damageType = DamageType::Ice;
-	iceBall.duration = sf::seconds(5);
+	iceBall.activeDuration = sf::seconds(5);
 	iceBall.needsTarget = true;
 	iceBall.damage = 6;
 	iceBall.startVelocity = 200.f;
@@ -261,10 +262,11 @@ SpellData SpellData::getDivineShieldSpellData() {
 
 	divineShield.cooldown = sf::milliseconds(10000);
 	divineShield.boundingBox = sf::FloatRect(0, 0, 98, 98);
-	divineShield.duration = sf::milliseconds(3000);
+	divineShield.duration = sf::seconds(3);
+	divineShield.activeDuration = divineShield.duration;
 	divineShield.heal = 20;
 
-	divineShield.durationModifierAddition = sf::milliseconds(2000);
+	divineShield.durationModifierAddition = sf::seconds(2);
 
 	return divineShield;
 }
@@ -278,10 +280,10 @@ SpellData SpellData::getAureolaSpellData() {
 
 	aureola.cooldown = sf::milliseconds(10000);
 	aureola.boundingBox = sf::FloatRect(0, 0, 20, 20);
-	aureola.count = 4,
-		aureola.divergenceAngle = 2 * M_PI / aureola.count;
+	aureola.count = 4;
+	aureola.divergenceAngle = 2 * M_PI / aureola.count;
 	aureola.damageType = DamageType::Light;
-	aureola.duration = sf::milliseconds(10000);
+	aureola.activeDuration = sf::seconds(10);
 	aureola.needsTarget = true;
 	aureola.damage = 10;
 	aureola.heal = 10;
@@ -305,7 +307,8 @@ SpellData SpellData::getFearSpellData() {
 	fear.cooldown = sf::seconds(3);
 	fear.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	fear.divergenceAngle = 0.2f;
-	fear.duration = sf::seconds(5);
+	fear.activeDuration = sf::seconds(5);
+	fear.duration = sf::seconds(2);
 	fear.needsTarget = true;
 	fear.startVelocity = 300.f;
 
@@ -328,14 +331,15 @@ SpellData SpellData::getShackleSpellData() {
 	shackle.cooldown = sf::seconds(4);
 	shackle.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	shackle.divergenceAngle = 0.2f;
-	shackle.duration = sf::seconds(5);
+	shackle.activeDuration = sf::seconds(5);
+	shackle.duration = sf::seconds(1);
 	shackle.needsTarget = true;
 	shackle.startVelocity = 200.f;
 
 	shackle.countModifierAddition = 1;
 	shackle.reflectModifierAddition = 1;
 	shackle.speedModifierAddition = 100.f;
-	shackle.durationModifierAddition = sf::seconds(2);
+	shackle.durationModifierAddition = sf::seconds(1);
 	shackle.damageModifierAddition = 2;
 
 	return shackle;
@@ -350,6 +354,7 @@ SpellData SpellData::getAntiGravitySpellData() {
 	antiGravity.cooldown = sf::seconds(15);
 	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
 	antiGravity.duration = sf::seconds(5);
+	antiGravity.activeDuration = antiGravity.duration;
 
 	antiGravity.durationModifierAddition = sf::seconds(3);
 
@@ -364,11 +369,10 @@ SpellData SpellData::getTelekinesisSpellData() {
 	telekinesis.iconTextureRect = sf::IntRect(100, 0, 50, 50);
 	telekinesis.cooldown = sf::seconds(3);
 	telekinesis.boundingBox = sf::FloatRect(0, 0, 20, 20);
-	telekinesis.duration = sf::seconds(1);
 	telekinesis.startVelocity = 200.f;
 	telekinesis.needsTarget = true;
 	telekinesis.range = 100;
-	telekinesis.duration = sf::seconds(telekinesis.range/telekinesis.startVelocity);
+	telekinesis.activeDuration = sf::seconds(telekinesis.range/telekinesis.startVelocity);
 
 	telekinesis.rangeModifierAddition = 150.f;
 	telekinesis.reflectModifierAddition = 1;
@@ -385,6 +389,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.cooldown = sf::seconds(3);
 	windGust.boundingBox = sf::FloatRect(0, 0, 60, 40);
 	windGust.duration = sf::seconds(1);
+	windGust.activeDuration = windGust.duration;
 
 	windGust.rangeModifierAddition = 20.f;
 	windGust.durationModifierAddition = sf::seconds(1);
@@ -402,7 +407,7 @@ SpellData SpellData::getLeechSpellData() {
 	leech.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	leech.divergenceAngle = 0.2f;
 	leech.damageType = DamageType::Shadow;
-	leech.duration = sf::seconds(5);
+	leech.activeDuration = sf::seconds(5);
 	leech.needsTarget = true;
 	leech.damage = 10;
 	leech.startVelocity = 150.f;
@@ -424,7 +429,8 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.cooldown = sf::seconds(5);
 	icyAmbush.boundingBox = sf::FloatRect(0, 0, 20, 20);
 	icyAmbush.damageType = DamageType::Ice;
-	icyAmbush.duration = sf::seconds(5);
+	icyAmbush.activeDuration = sf::seconds(5);
+	icyAmbush.duration = sf::seconds(1);
 	icyAmbush.needsTarget = true;
 	icyAmbush.damage = 100;
 	icyAmbush.startVelocity = 200.f;
@@ -447,6 +453,7 @@ SpellData SpellData::getLightSpellData() {
 	light.cooldown = sf::seconds(60);
 	light.boundingBox = sf::FloatRect(0, 0, 1, 1);
 	light.duration = sf::seconds(60);
+	light.activeDuration = light.duration;
 	light.range = 200.f;
 
 	light.durationModifierAddition = sf::seconds(60);
@@ -463,7 +470,7 @@ SpellData SpellData::getUnlockSpellData() {
 
 	unlock.cooldown = sf::seconds(2);
 	unlock.boundingBox = sf::FloatRect(0, 0, 10, 10);
-	unlock.duration = sf::seconds(1);
+	unlock.activeDuration = sf::seconds(1);
 	unlock.needsTarget = true;
 	unlock.startVelocity = 200.f;
 
@@ -478,7 +485,8 @@ SpellData SpellData::getInvisibilitySpellData() {
 
 	invisibility.cooldown = sf::seconds(30);
 	invisibility.boundingBox = sf::FloatRect(0, 0, 1, 1);
-	invisibility.duration = sf::seconds(5);
+	invisibility.activeDuration = sf::seconds(5);
+	invisibility.duration = invisibility.activeDuration;
 
 	invisibility.durationModifierAddition = sf::seconds(5);
 

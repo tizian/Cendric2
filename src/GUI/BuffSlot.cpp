@@ -28,6 +28,10 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 		m_outerRing.setFillColor(CENDRIC_COLOR_DIVINE);
 		texture = g_resourceManager->getTexture(ResourceID::Texture_spellicons);
 		break;
+	case BuffType::Debuff:
+		m_outerRing.setFillColor(sf::Color::Red);
+		texture = g_resourceManager->getTexture(ResourceID::Texture_damageTypes);
+		break;
 	default:
 		break;
 	}

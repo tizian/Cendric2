@@ -28,3 +28,8 @@ void DivineShieldSpellCreator::addStrengthModifier(int level) {
 	m_spellData.heal += 10 * level;
 	m_additionalResistance += 10 * level;
 }
+
+void DivineShieldSpellCreator::addDurationModifier(int level) {
+	m_spellData.activeDuration += static_cast<float>(level) * m_spellData.durationModifierAddition;
+	m_spellData.duration = m_spellData.activeDuration;
+}

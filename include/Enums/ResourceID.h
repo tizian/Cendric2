@@ -10,6 +10,7 @@ enum class ResourceID {
 	Items,
 	Npc_folder,
 	Texture_spellicons,
+	Texture_damageTypes,
 	Texture_mainChar,
 	Texture_mapMainChar,
 	Texture_spell_fireball,

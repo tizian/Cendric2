@@ -1,12 +1,12 @@
 #include "Spells/ShackleSpell.h"
 
-ShackleSpell::ShackleSpell(const sf::Time& stunDuration, int strength) : Spell() {
-	m_stunDuration = stunDuration;
+ShackleSpell::ShackleSpell(int strength) : Spell() {
 	m_strength = strength;
 }
 
 void ShackleSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
+	m_stunDuration = bean.duration;
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_shackle));
@@ -22,9 +22,13 @@ void ShackleSpell::load(const SpellData& bean, LevelMovableGameObject* mob, cons
 	Spell::load(bean, mob, target);
 }
 
-void ShackleSpell::execOnHit(LevelMovableGameObject *target) {
+void ShackleSpell::execOnHit(LevelMovableGameObject* target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		// TODO: set DOT
+		DamageOverTimeData data;
+		data.damageType = m_damageType;
+		data.damage = m_damagePerSecond;
+		data.duration = m_stunDuration;
+		enemy->addDamageOverTime(data);
 		if (enemy->getMentalStrength() <= m_strength) {
 			enemy->setStunned(m_stunDuration);
 			setDisposed();

@@ -15,8 +15,8 @@ public:
 	void executeSpell(const sf::Vector2f &target) override;
 
 private:
-	sf::Time m_activeDuration = sf::seconds(5);
 	int m_strength = 0;
 
 	void addStrengthModifier(int level) override;
+	void addDurationModifier(int level) override;
 };
