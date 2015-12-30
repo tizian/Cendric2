@@ -84,6 +84,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_Particle_circle, "res/assets/particles/circle.png" },
 		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" },
 		{ ResourceID::Texture_Particle_blob2, "res/assets/particles/blob2.png" },
+		{ ResourceID::Texture_Particle_longblob, "res/assets/particles/longblob.png" },
 		{ ResourceID::Texture_Particle_snowflake, "res/assets/particles/snowflake.png" },
 		{ ResourceID::Texture_Particle_smoke, "res/assets/particles/smoke.png" },
 		{ ResourceID::Sound_spell_fireball, "res/sound/sound_spell_fireball.wav" },

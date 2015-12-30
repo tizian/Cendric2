@@ -163,6 +163,8 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('SpellFireBall
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellFireBallDesc','The good old fireball. Burns enemies and melts ice.','Der gute alte Feuerball. Verbrennt Gegner und schmilzt Eis.','De guet alt Füürball. Verbrennt Gegner und schmelzt Iis.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellIceBall','Iceball','Eisball','Iisball');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellIceBallDesc','An icy ball damages enemies and freezes water.','Ein eisiger Ball schadet Gegnern und gefriert Wasser.','En iisige Ball schadet Gegner und gfrüürt Wasser.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellFlash','Flash','Blitz','Blitz');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellFlashDesc','Cendric shoots forward with speed of light and damages enemies.','Cendric schiesst mit Lichtgeschwindigkeit vorwärts und schadet Gegner.','De Cendric schüsst mit Liechtgschwindigkeit vorwärts und schadet Gegner.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellIcyAmbush','Icy Ambush','Eisiger Hinterhalt','Iischalte Hinterhalt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLight','Light','Licht','Liecht');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLightDesc','There shall be light!','Es werde Licht!','Chasch chli heller mache, bitte?');

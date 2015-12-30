@@ -5,12 +5,15 @@ FlashSpell::FlashSpell() : Spell() {
 
 void FlashSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
+	m_isFlashingRight = mob->getIsFacingRight();
+	m_mob = mob;
 	loadParticleSystem();
 }
 
 void FlashSpell::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 	Spell::update(frameTime);
+	updateParticleSystemPosition();
 }
 
 void FlashSpell::render(sf::RenderTarget& target) {
@@ -23,14 +26,15 @@ void FlashSpell::execOnHit(LevelMovableGameObject* target) {
 }
 
 void FlashSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob2)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(ResourceID::Texture_Particle_longblob)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 500.0f / 5.0f;
 
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(getBoundingBox()->width / 2.f, 0.f);
+	posGen->center.x = m_mob->getPosition().x + getBoundingBox()->width / 2;
+	posGen->center.y = m_mob->getPosition().y + getBoundingBox()->height / 2;
+	posGen->size = sf::Vector2f(10.f, getBoundingBox()->height);
 	m_posGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
@@ -46,18 +50,23 @@ void FlashSpell::loadParticleSystem() {
 	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = 0.f;
-	velGen->maxAngle = 360.f;
+	velGen->minAngle = m_isFlashingRight ? 260.f : 80.f;
+	velGen->maxAngle = m_isFlashingRight ? 280.f : 100.f;
 	velGen->minStartVel = 200.f;
-	velGen->maxStartVel = 200.f;
+	velGen->maxStartVel = 400.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.0f;
-	timeGen->maxTime = 1.0f;
+	timeGen->minTime = 0.1f;
+	timeGen->maxTime = 0.4f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
+}
+
+void FlashSpell::updateParticleSystemPosition() {
+	m_posGenerator->center.x = m_mob->getPosition().x + getBoundingBox()->width / 2;
+	m_posGenerator->center.y = m_mob->getPosition().y + getBoundingBox()->height / 2;
 }

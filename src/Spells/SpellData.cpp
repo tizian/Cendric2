@@ -15,6 +15,7 @@
 #include "SpellCreators/TelekinesisSpellCreator.h"
 #include "SpellCreators/InvisibilitySpellCreator.h"
 #include "SpellCreators/ShackleSpellCreator.h"
+#include "SpellCreators/FlashSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -150,6 +151,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 		break;
 	case SpellID::Shackle:
 		creator = new ShackleSpellCreator(data, owner);
+		break;
+	case SpellID::Flash:
+		creator = new FlashSpellCreator(data, owner);
 		break;
 	default:
 		return nullptr;
@@ -458,14 +462,14 @@ SpellData SpellData::getFlashSpellData() {
 
 	flash.cooldown = sf::seconds(10);
 	flash.damageType = DamageType::Light;
-	flash.activeDuration = sf::seconds(2);
+	flash.activeDuration = sf::seconds(1.5);
 	flash.needsTarget = false;
 	flash.damage = 20;
-	flash.range = 60.f;
-	flash.boundingBox = sf::FloatRect(0, 0, flash.range, 20);
+	flash.range = 100.f;
+	flash.boundingBox = sf::FloatRect(0, 0, flash.range, 60);
 
 	flash.damageModifierAddition = 20;
-	flash.rangeModifierAddition = 30.f;
+	flash.rangeModifierAddition = 50.f;
 
 	return flash;
 }

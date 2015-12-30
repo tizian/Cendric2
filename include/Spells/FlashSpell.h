@@ -17,5 +17,11 @@ private:
 	particles::AngledVelocityGenerator* m_velGenerator;
 	particles::BoxPositionGenerator* m_posGenerator;
 
+	bool m_isFlashingRight;
+
 	void loadParticleSystem();
+
+	void updateParticleSystemPosition();
+
+	LevelMovableGameObject* m_mob;
 };
