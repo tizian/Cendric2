@@ -460,9 +460,9 @@ SpellData SpellData::getFlashSpellData() {
 	flash.spellType = SpellType::Twilight;
 	flash.iconTextureRect = sf::IntRect(150, 50, 50, 50);
 
-	flash.cooldown = sf::seconds(10);
+	flash.cooldown = sf::seconds(5);
 	flash.damageType = DamageType::Light;
-	flash.activeDuration = sf::seconds(1.5);
+	flash.activeDuration = sf::seconds(0.5);
 	flash.needsTarget = false;
 	flash.damage = 20;
 	flash.range = 100.f;

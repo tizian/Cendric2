@@ -13,15 +13,14 @@ public:
 	void execOnHit(LevelMovableGameObject* target) override;
 
 private:
-	std::unique_ptr<particles::TextureParticleSystem> m_ps;
-	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::BoxPositionGenerator* m_posGenerator;
-
 	bool m_isFlashingRight;
+	
+	sf::Sprite m_startingSprite;
+	sf::Sprite m_endingSprite;
 
-	void loadParticleSystem();
-
-	void updateParticleSystemPosition();
+	sf::Time m_flashingTime;
+	const sf::Time FLASHING_TIME = sf::milliseconds(100);
+	bool m_isVisible = true;
 
 	LevelMovableGameObject* m_mob;
 };
