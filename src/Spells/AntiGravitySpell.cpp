@@ -27,7 +27,7 @@ void AntiGravitySpell::update(const sf::Time& frameTime) {
 	}
 }
 
-const sf::Vector2f AntiGravitySpell::getConfiguredPositionOffset() const {
+sf::Vector2f AntiGravitySpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(-49.f, 0.f);
 }
 

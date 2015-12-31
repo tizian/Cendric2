@@ -12,7 +12,7 @@
 class LevelMovableGameObject;
 
 // A spell cendric can cast
-class Spell : public MovableGameObject {
+class Spell : virtual public MovableGameObject {
 public:
 	Spell() : MovableGameObject() {}
 	virtual ~Spell() {}
@@ -24,7 +24,7 @@ public:
 	void checkCollisions(const sf::Vector2f& nextPosition);
 
 	// the offset of the spells start position, as seen from the upper mid of the mobs bounding box. The default is the position of the staff head
-	virtual const sf::Vector2f getConfiguredPositionOffset() const;
+	virtual sf::Vector2f getConfiguredPositionOffset() const;
 	// if true, the spell sprite will be rotated accordingly. default is true.
 	virtual bool getConfiguredRotateSprite() const;
 	int getDamage() const;
@@ -33,7 +33,7 @@ public:
 	DamageType getDamageType() const;
 	GameObjectType getConfiguredType() const override;
 
-	// effects executed on mob when it hits one. default does nothing. executed by the mob itself.
+	// effects executed on mob when it hits one. default does remove the spell object. executed by the mob itself.
 	virtual void execOnHit(LevelMovableGameObject* target);
 
 	const sf::Time& getDuration() const;

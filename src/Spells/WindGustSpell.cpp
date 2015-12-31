@@ -22,7 +22,7 @@ void WindGustSpell::render(sf::RenderTarget& target) {
 	m_ps->render(target);
 }
 
-const sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const {
+sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(10.f, 20.f);
 }
 

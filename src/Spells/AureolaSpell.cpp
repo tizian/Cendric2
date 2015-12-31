@@ -72,6 +72,6 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 	}
 }
 
-const sf::Vector2f AureolaSpell::getConfiguredPositionOffset() const {
+sf::Vector2f AureolaSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(5.f, 5.f);
 }

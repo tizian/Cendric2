@@ -13,8 +13,9 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	void setScreen(Screen* screen) override;
 	void setDisposed() override;
+	void execOnHit(LevelMovableGameObject* target) override;
 
-	const sf::Vector2f getConfiguredPositionOffset() const override;
+	sf::Vector2f getConfiguredPositionOffset() const override;
 
 private:
 	LightObject* m_lightObject = nullptr;

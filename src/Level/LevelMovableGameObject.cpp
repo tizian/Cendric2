@@ -219,9 +219,6 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 		return;
 	}
 
-	if (spell->getDamageType() != DamageType::VOID) {
-		spell->setDisposed();
-	}
 	spell->execOnHit(this);
 	addDamage(spell->getDamage(), spell->getDamageType());
 }

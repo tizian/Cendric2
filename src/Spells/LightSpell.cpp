@@ -9,13 +9,17 @@ void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const 
 	loadParticleSystem();
 }
 
-const sf::Vector2f LightSpell::getConfiguredPositionOffset() const {
+sf::Vector2f LightSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(0.f, -50.f);
 }
 
 void LightSpell::setDisposed() {
 	Spell::setDisposed();
 	m_lightObject->setDisposed();
+}
+
+void LightSpell::execOnHit(LevelMovableGameObject* target) {
+	// nop
 }
 
 void LightSpell::setScreen(Screen* screen) {

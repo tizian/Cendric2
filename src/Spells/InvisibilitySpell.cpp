@@ -38,7 +38,11 @@ void InvisibilitySpell::render(sf::RenderTarget& target) {
 	m_ps->render(target);
 }
 
-const sf::Vector2f InvisibilitySpell::getConfiguredPositionOffset() const {
+void InvisibilitySpell::execOnHit(LevelMovableGameObject* target) {
+	// nop
+}
+
+sf::Vector2f InvisibilitySpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(0.f, 100.f);
 }
 

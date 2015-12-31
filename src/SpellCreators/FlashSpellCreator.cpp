@@ -12,10 +12,10 @@ void FlashSpellCreator::executeSpell(const sf::Vector2f& target) {
 	sf::FloatRect ownerBB = *(m_owner->getBoundingBox());
 	ownerBB.left = m_owner->getIsFacingRight() ? ownerBB.left + spellData.range : ownerBB.left - spellData.range;
 	if (!m_level->collidesX(ownerBB) && !m_level->collidesY(ownerBB)) {
+		m_owner->setPosition(sf::Vector2f(ownerBB.left, ownerBB.top));
 		FlashSpell* newSpell = new FlashSpell();
 		newSpell->load(spellData, m_owner, target);
 		m_screen->addObject(newSpell);
-		m_owner->setPosition(sf::Vector2f(ownerBB.left, ownerBB.top));
 	}
 	else {
 		g_logger->logInfo("FlashSpellCreator", "Flash port would stuck its owner. The port is not executed.");

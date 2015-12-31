@@ -8,7 +8,7 @@ public:
 	ChopSpell();
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 
-	const sf::Vector2f getConfiguredPositionOffset() const override;
+	sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredRotateSprite() const override;
 
 private:

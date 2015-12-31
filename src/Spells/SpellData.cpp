@@ -211,7 +211,7 @@ SpellData SpellData::getChopSpellData() {
 	chop.boundingBox = sf::FloatRect(0, 0, 40, 80);
 	chop.damageType = DamageType::Physical;
 	chop.damage = 3;
-	chop.duration = sf::milliseconds(320);
+	chop.activeDuration = sf::milliseconds(320);
 
 	chop.inputKey = Key::Chop;
 
@@ -462,14 +462,14 @@ SpellData SpellData::getFlashSpellData() {
 
 	flash.cooldown = sf::seconds(5);
 	flash.damageType = DamageType::Light;
-	flash.activeDuration = sf::seconds(0.5);
+	flash.activeDuration = sf::seconds(2.0);
 	flash.needsTarget = false;
 	flash.damage = 20;
-	flash.range = 100.f;
-	flash.boundingBox = sf::FloatRect(0, 0, flash.range, 60);
+	flash.range = 150.f;
+	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
 
 	flash.damageModifierAddition = 20;
-	flash.rangeModifierAddition = 50.f;
+	flash.rangeModifierAddition = 100.f;
 
 	return flash;
 }

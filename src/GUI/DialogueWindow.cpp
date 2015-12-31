@@ -68,14 +68,14 @@ void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTextureRect(m_npcTexturePosition);
 	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x)));
 }
 
 void DialogueWindow::setCendricTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
 	m_speakerText->setString(m_cendricName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x)));
 }
 
 void DialogueWindow::setNPCTrading(const std::string& text) {
@@ -83,7 +83,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_speakerSprite.setTextureRect(m_npcTexturePosition);
 	m_speakerSprite.setScale(sf::Vector2f(0.6f, 0.6f));
 	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - 250 - 2 * static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x)));
 	delete m_merchantInterface;
 	m_merchantInterface = new MerchantInterface(dynamic_cast<GameScreen*>(m_screen), m_npcID);
 	setPosition(sf::Vector2f(getPosition().x, getPosition().y + BOX.height / 2.f));

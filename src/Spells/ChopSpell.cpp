@@ -10,7 +10,7 @@ void ChopSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const s
 	Spell::load(bean, mob, target);
 }
 
-const sf::Vector2f ChopSpell::getConfiguredPositionOffset() const {
+sf::Vector2f ChopSpell::getConfiguredPositionOffset() const {
 	return m_spellOffset;
 }
 

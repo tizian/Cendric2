@@ -56,7 +56,7 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 }
 
 void Spell::execOnHit(LevelMovableGameObject *target) {
-	// nop
+	setDisposed();
 }
 
 void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
@@ -103,7 +103,7 @@ void Spell::update(const sf::Time& frameTime) {
 	}
 }
 
-const sf::Vector2f Spell::getConfiguredPositionOffset() const {
+sf::Vector2f Spell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(20.f, 0.f);
 }
 
