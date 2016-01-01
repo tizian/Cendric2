@@ -13,4 +13,5 @@ public:
 
 private:
 	void addDurationModifier(int level) override;
+	void removeOldSpell();
 };

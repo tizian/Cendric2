@@ -46,6 +46,10 @@ std::string ItemDescriptionWindow::getAttributeText(const std::string& name, int
 	string s;
 	s.append(g_textProvider->getText(name));
 	s.append(": ");
+	if (value > 0) {
+		// these are boni on stats and should be signed
+		s.append("+");
+	}
 	s.append(to_string(value));
 	s.append("\n");
 	return s;

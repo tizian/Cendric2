@@ -22,9 +22,13 @@ void AntiGravitySpell::update(const sf::Time& frameTime) {
 	m_duration = m_duration - frameTime;
 
 	if (m_duration.asMilliseconds() <= 0) {
-		m_mob->flipGravity();
 		setDisposed();
 	}
+}
+
+void AntiGravitySpell::setDisposed() {
+	m_mob->flipGravity();
+	Spell::setDisposed();
 }
 
 sf::Vector2f AntiGravitySpell::getConfiguredPositionOffset() const {

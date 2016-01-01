@@ -13,4 +13,5 @@ public:
 	void executeSpell(const sf::Vector2f& target) override;
 private:
 	void addDurationModifier(int level) override;
+	void removeOldSpell();
 };
