@@ -125,7 +125,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
 	bool reflected = false;
 	// check for collision on x axis
-	if (isMovingX && m_level->collidesX(nextBoundingBoxX)) {
+	if (isMovingX && m_level->collides(nextBoundingBoxX)) {
 		if (m_reflectCount <= 0) {
 			setDisposed();
 			return;
@@ -140,7 +140,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 	}
 	// check for collision on y axis
-	if (isMovingY && m_level->collidesY(nextBoundingBoxY)) {
+	if (isMovingY && m_level->collides(nextBoundingBoxY)) {
 		if (m_reflectCount <= 0) {
 			setDisposed();
 			return;

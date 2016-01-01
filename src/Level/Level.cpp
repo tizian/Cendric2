@@ -107,56 +107,6 @@ void Level::update(const sf::Time& frameTime) {
 	m_camera->update(frameTime);
 }
 
-bool Level::collidesX(const sf::FloatRect& boundingBox, const LevelDynamicTile* exclude) const {
-	// check for collision with level rect
-	if (boundingBox.left < m_levelData.mapRect.left || boundingBox.left + boundingBox.width > m_levelData.mapRect.left + m_levelData.mapRect.width) {
-		return true;
-	}
-
-	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
-	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
-	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
-	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
-	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
-	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
-	sf::Vector2i bottomRight(rightX, bottomY);
-
-	// check left side
-	int x = topLeft.x;
-	for (int y = topLeft.y; y <= bottomLeft.y; y++) {
-		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size()) {
-			// check for out of range (happens seldom because of rounding problems above)
-			return true;
-		}
-		if (m_levelData.collidableTilePositions[y][x]) {
-			return true;
-		}
-	}
-
-	// check right side
-	x = topRight.x;
-	for (int y = topRight.y; y <= bottomRight.y; y++) {
-		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size()) {
-			// check for out of range (happens seldom because of rounding problems above)
-			return true;
-		}
-		if (m_levelData.collidableTilePositions[y][x]) {
-			return true;
-		}
-	}
-
-	// check collidable dynamic tiles
-	for (GameObject* go : *m_dynamicTiles) {
-		if (!go->isViewable()) continue;
-		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-		if (tile != nullptr && tile != exclude && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox)) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
 bool Level::collidesLevelBottom(const sf::FloatRect& boundingBox) const {
 	// check for collision with level rect
 	if (boundingBox.top + boundingBox.height > m_levelData.mapRect.top + m_levelData.mapRect.height) {
@@ -176,13 +126,13 @@ bool Level::collidesLevelCeiling(const sf::FloatRect& boundingBox) const {
 bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize) const {
 	sf::FloatRect dummyRect = boundingBox;
 	dummyRect.left = right ? dummyRect.left + stepSize : dummyRect.left - stepSize;
-	if (collidesY(dummyRect) || collidesX(dummyRect)) {
+	if (collides(dummyRect)) {
 		return false;
 	}
 	for (float y = boundingBox.top; y < boundingBox.top + jumpHeight; /* don't increment y here */) {
 		y = std::min(boundingBox.top + jumpHeight, y + tileHeight);
 		dummyRect.top = y;
-		if (collidesY(dummyRect) || collidesX(dummyRect)) {
+		if (collides(dummyRect)) {
 			return false;
 		}
 	}
@@ -194,22 +144,26 @@ bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight
 	for (float y = boundingBox.top; y > boundingBox.top - jumpHeight; /* don't decrement y here */) {
 		y = std::max(boundingBox.top - jumpHeight, y - tileHeight);
 		dummyRect.top = y;
-		if (collidesY(dummyRect) || collidesX(dummyRect)) {
+		if (collides(dummyRect)) {
 			return true;
 		}
 	}
 
 	// depending on left or right, calculate one step left or right
 	dummyRect.left = right ? dummyRect.left + 10.f : dummyRect.left - 10.f;
-	if (collidesX(dummyRect)) {
+	if (collides(dummyRect)) {
 		return true;
 	}
 	return false;
 }
 
-bool Level::collidesY(const sf::FloatRect& boundingBox, const LevelDynamicTile* exclude) const {
-	// check for collision with level rect
+bool Level::collides(const sf::FloatRect& boundingBox, const GameObject* exclude) const {
+	// check for collision with level rect (y axis)
 	if (boundingBox.top < m_levelData.mapRect.top || boundingBox.top + boundingBox.height > m_levelData.mapRect.top + m_levelData.mapRect.height) {
+		return true;
+	}
+	// check for collision with level rect (x axis)
+	if (boundingBox.left < m_levelData.mapRect.left || boundingBox.left + boundingBox.width > m_levelData.mapRect.left + m_levelData.mapRect.width) {
 		return true;
 	}
 
@@ -221,27 +175,16 @@ bool Level::collidesY(const sf::FloatRect& boundingBox, const LevelDynamicTile* 
 	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
 	sf::Vector2i bottomRight(rightX, bottomY);
 
-	// check top side
-	int y = topLeft.y;
+	// check level grid
 	for (int x = topLeft.x; x <= topRight.x; x++) {
-		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size()) {
-			// check for out of range (happens seldom because of rounding problems above)
-			return true;
-		}
-		if (m_levelData.collidableTilePositions[y][x]) {
-			return true;
-		}
-	}
-
-	// check bottom side
-	y = bottomLeft.y;
-	for (int x = bottomLeft.x; x <= bottomRight.x; x++) {
-		if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size()) {
-			// check for out of range (happens seldom because of rounding problems above)
-			return true;
-		}
-		if (m_levelData.collidableTilePositions[y][x]) {
-			return true;
+		for (int y = topLeft.y; y <= bottomLeft.y; y++) {
+			if (y > m_levelData.collidableTilePositions.size() || y < 0 || x < 0 || x > m_levelData.collidableTilePositions[y].size()) {
+				// check for out of range (happens seldom because of rounding problems above)
+				return true;
+			}
+			if (m_levelData.collidableTilePositions[y][x]) {
+				return true;
+			}
 		}
 	}
 
@@ -257,12 +200,8 @@ bool Level::collidesY(const sf::FloatRect& boundingBox, const LevelDynamicTile* 
 	return false;
 }
 
-bool Level::collidesY(const sf::FloatRect& boundingBox) const {
-	return collidesY(boundingBox, nullptr);
-}
-
-bool Level::collidesX(const sf::FloatRect& boundingBox) const {
-	return collidesX(boundingBox, nullptr);
+bool Level::collides(const sf::FloatRect& boundingBox) const {
+	return collides(boundingBox, nullptr);
 }
 
 float Level::getGround(const sf::FloatRect& boundingBox) const {

@@ -41,7 +41,7 @@ void CheckpointTile::onHit(LevelMovableGameObject* mob) {
 		sf::FloatRect bb = *(character->getBoundingBox());
 		bb.left = getBoundingBox()->left + getBoundingBox()->width / 2.f - bb.width / 2.f;
 		bb.top = getBoundingBox()->top + (getBoundingBox()->height - bb.height);
-		if (!m_level->collidesX(bb) && !m_level->collidesY(bb)) {
+		if (!m_level->collides(bb)) {
 			if (LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen())) {
 				screen->getCharacterCore()->setLevel(sf::Vector2f(bb.left, bb.top), m_level->getID());
 				screen->writeToCore();

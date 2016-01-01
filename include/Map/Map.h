@@ -31,8 +31,7 @@ public:
 	void dispose();
 
 	// checks collision with the collidable grid of that map
-	bool collidesX(const sf::FloatRect& boundingBox) const;
-	bool collidesY(const sf::FloatRect& boundingBox) const;
+	bool collides(const sf::FloatRect& boundingBox) const;
 	// checks if the main char has reached a level entry. If no, nullptr, else the spawn point and id for that level
 	MapExitData* checkLevelEntry(const sf::FloatRect& boundingBox) const;
 

@@ -44,11 +44,8 @@ public:
 	bool fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize) const;
 	// checks collision with the collidable grid of that level and also the collidable dynamic tiles
 	// if the calling object itself wants to be excluded, it can give itself as an argument here.
-	bool collidesX(const sf::FloatRect& boundingBox, const LevelDynamicTile* exclude) const;
-	bool collidesY(const sf::FloatRect& boundingBox, const LevelDynamicTile* exclude) const;
-
-	bool collidesX(const sf::FloatRect& boundingBox) const;
-	bool collidesY(const sf::FloatRect& boundingBox) const;
+	bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude) const;
+	bool collides(const sf::FloatRect& boundingBox) const;
 
 	bool collidesLevelBottom(const sf::FloatRect& boundingBox) const;
 	bool collidesLevelCeiling(const sf::FloatRect& boundingBox) const;
