@@ -34,6 +34,9 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
+	else {
+		nextBoundingBoxY.left = nextPosition.x;
+	}
 	// check for collision on y axis
 	if (isMovingY && m_map->collidesY(nextBoundingBoxY)) {
 		setAccelerationY(0.0);

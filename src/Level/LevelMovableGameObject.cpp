@@ -93,6 +93,9 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
+	else {
+		nextBoundingBoxY.left = nextPosition.x;
+	}
 
 	// check for collision on y axis
 	bool collidesY = m_level->collidesY(nextBoundingBoxY);
