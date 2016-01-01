@@ -48,7 +48,7 @@ INSERT INTO item_equipment (item_id, texture_path) values ('eq_rafishat', 'res/a
 
 -- Ring of lesser health
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_ringoflesserhealth', 'eq_ring', 100, 150, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_ringoflesserhealth', 'eq_ring', 100, 50, 10);
 INSERT INTO item_attribute (item_id) values ('eq_ringoflesserhealth');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_ringoflesserhealth', -14, -40, 5, 5);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_ringoflesserhealth', 1, 200, 0, 50, 50);
