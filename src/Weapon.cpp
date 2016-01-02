@@ -16,6 +16,7 @@ void Weapon::reload() {
 		for (int i = 0; i < slotBean.modifier_count; i++) {
 			SpellModifier modifier;
 			modifier.type = SpellModifierType::VOID;
+			modifier.level = 0;
 			modifiers.push_back(modifier);
 		}
 

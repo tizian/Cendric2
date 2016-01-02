@@ -6,13 +6,12 @@
 #include "ResourceManager.h"
 #include "Window.h"
 #include "GUI/SpellSlot.h"
-#include "GUI/SpellSlotClone.h"
 #include "GUI/TexturedButton.h"
 #include "GUI/ModifierSlot.h"
-#include "GUI/ModifierSlotClone.h"
 #include "GUI/GUIConstants.h"
 
 class WeaponWindow;
+class SlotClone;
 
 // the spellbook, as displayed in a level or a map
 // it takes its information about learned spells and modifiers directly from the character core
@@ -73,8 +72,8 @@ private:
 	std::map<SpellType, std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>>*> m_typeMap;
 
 	// used for drag & drop handling
-	ModifierSlotClone* m_currentModifierClone = nullptr;
-	SpellSlotClone* m_currentSpellClone = nullptr;
+	SlotClone* m_currentModifierClone = nullptr;
+	SlotClone* m_currentSpellClone = nullptr;
 	bool m_hasDraggingStarted = false;
 	bool m_isDragging = false;
 	// the mouse has to move this distance while pressed to spawn a clone.

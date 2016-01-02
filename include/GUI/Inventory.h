@@ -6,7 +6,6 @@
 #include "ResourceManager.h"
 #include "Window.h"
 #include "GUI/InventorySlot.h"
-#include "GUI/InventorySlotClone.h"
 #include "GUI/ItemDescriptionWindow.h"
 #include "GUI/DocumentDescriptionWindow.h"
 #include "GUI/TexturedButton.h"
@@ -80,7 +79,7 @@ private:
 	void handleLevelRightClick(InventorySlot* clicked);
 
 	// used for drag & drop handling
-	InventorySlotClone* m_currentClone = nullptr;
+	SlotClone* m_currentClone = nullptr;
 	bool m_hasDraggingStarted = false;
 	bool m_isEquipmentSlotDragged = false;
 	bool m_isDragging = false;
@@ -105,7 +104,7 @@ private:
 
 	const int SLOT_COUNT_X = 5;
 	const int SLOT_COUNT_Y = 5;
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIDE_LENGTH + 10.f, 35.f);
+	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 35.f);
 
 	const float MARGIN = 7.f;
 	const float INVENTORY_TOP = InventoryEquipment::TOP;
@@ -115,11 +114,11 @@ private:
 		2 * GUIConstants::CHARACTER_SIZE_M +
 		BUTTON_SIZE.y +
 		(SLOT_COUNT_Y + 1) * MARGIN +
-		SLOT_COUNT_Y * (MARGIN + InventorySlot::SIDE_LENGTH + 2 * InventorySlot::MARGIN);
+		SLOT_COUNT_Y * (MARGIN + InventorySlot::SIZE);
 	const float INVENTORY_WIDTH =
 		2 * GUIConstants::TEXT_OFFSET +
 		(SLOT_COUNT_X - 1) * MARGIN +
-		SLOT_COUNT_X * (InventorySlot::SIDE_LENGTH + 2 * InventorySlot::MARGIN);
+		SLOT_COUNT_X * InventorySlot::SIZE;
 
 	std::map<ItemType, std::map<std::string, InventorySlot>*> m_typeMap;
 };

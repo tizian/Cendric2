@@ -1,60 +1,38 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
-
+#include "Slot.h"
 #include "GUI/BitmapText.h"
-#include "ResourceManager.h"
 #include "Item.h"
 
-class InventorySlot : public GameObject {
+class InventorySlot : public Slot {
 public:
 	// constructor for filled slots. if amount is < 0, the amount text won't show.
 	InventorySlot(const Item& item, int amount);
 	// constructor for placeholder slots
 	InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos);
-	// default constructor for empty slots
-	InventorySlot();
-
-	void select();
-	void deselect();
-	// activate restores the colors of this slot
-	void activate();
-	// deactivate sets the colors of this slot all grey.
-	void deactivate();
-
-	void highlight(bool highlight);
-	void setAmount(int amount);
-
-	void render(sf::RenderTarget& renderTarget) override;
-	void onLeftJustPressed() override;
-	void onRightClick() override;
 
 	void setPosition(const sf::Vector2f& pos) override;
-	void setItemType(ItemType type);
 
-	// asks if it is clicked and sets the member bool to false again (!)
-	bool isClicked();
-	bool isRightClicked();
+	void render(sf::RenderTarget& renderTarget) override;
 
-	GameObjectType getConfiguredType() const override;
-	const Item& getItem() const;
-	ItemType getItemType() const;
-	const std::string& getItemID() const;
+	void setAmount(int amount);
 
-	static const float SIDE_LENGTH;
-	static const float MARGIN;
+	inline const Item& getItem() const { return m_item; }
+	inline const std::string& getItemID() const { return m_item.getID(); }
 
-private:
-	bool m_isClicked = false;
-	bool m_isSelected = false;
-	bool m_isRightClicked = false;
+	inline ItemType getItemType() const { return m_type; }
+	inline void setItemType(ItemType type) { m_type = type; }
 
+	inline float getConfiguredSize() const override { return SIZE; }
+	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
+
+	static const float SIZE;
+	static const float ICON_OFFSET;
+
+protected:
 	Item m_item;
 	ItemType m_type;
-
-	sf::RectangleShape m_inside;
-	sf::RectangleShape m_outside;
 
 	BitmapText m_amountText;
 };

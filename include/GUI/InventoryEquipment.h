@@ -7,8 +7,6 @@
 #include "Window.h"
 #include "GUI/InventorySlot.h"
 
-class InventorySlotClone;
-
 // the equipment part of the inventory. it shows all equipped items
 class InventoryEquipment {
 public:
@@ -32,7 +30,7 @@ public:
 
 	void highlightEquipmentSlot(ItemType type, bool highlight);
 	// returns wheter an equipment change has happened.
-	bool notifyEquipmentDrop(const InventorySlotClone* item);
+	bool notifyEquipmentDrop(const SlotClone* item);
 
 	static float WIDTH;
 	static float TOP;

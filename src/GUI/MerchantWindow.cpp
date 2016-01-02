@@ -72,7 +72,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) return;
 
-	m_items[bean.item_id] = (InventorySlot(Item(bean.item_id), m_interface->getMerchantData().wares.at(itemID)));
+	m_items.at(bean.item_id) = (InventorySlot(Item(bean.item_id), m_interface->getMerchantData().wares.at(itemID)));
 
 	calculateSlotPositions();
 }
@@ -167,7 +167,7 @@ void MerchantWindow::reload() {
 			continue;
 		}
 		
-		m_items[bean.item_id] = (InventorySlot(Item(bean.item_id), it.second));
+		m_items.at(bean.item_id) = (InventorySlot(Item(bean.item_id), it.second));
 	}
 
 	calculateSlotPositions();
@@ -184,11 +184,11 @@ void MerchantWindow::calculateSlotPositions() {
 			x = 1;
 			xOffset = LEFT + GUIConstants::TEXT_OFFSET;
 			y++;
-			yOffset += MARGIN + 2 * InventorySlot::MARGIN + InventorySlot::SIDE_LENGTH;
+			yOffset += MARGIN + InventorySlot::SIZE;
 		}
 		else {
 			x++;
-			xOffset += MARGIN + 2 * InventorySlot::MARGIN + InventorySlot::SIDE_LENGTH;
+			xOffset += MARGIN + InventorySlot::SIZE;
 		}
 	}
 }

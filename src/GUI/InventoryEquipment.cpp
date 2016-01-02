@@ -1,10 +1,10 @@
 #include "GUI/InventoryEquipment.h"
-#include "GUI/InventorySlotClone.h"
+#include "GUI/SlotClone.h"
 
 float MARGIN = 10.f;
 float YOFFSET = 28.f;
 float InventoryEquipment::WIDTH = 100.f;
-float InventoryEquipment::HEIGHT = 7 * (InventorySlot::SIDE_LENGTH + MARGIN) - MARGIN + 2 * YOFFSET;
+float InventoryEquipment::HEIGHT = 7 * (InventorySlot::SIZE + MARGIN) - MARGIN + 2 * YOFFSET;
 float InventoryEquipment::TOP = 100.f;
 float InventoryEquipment::LEFT = 50.f;
 
@@ -52,28 +52,41 @@ void InventoryEquipment::render(sf::RenderTarget& target) {
 void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 	if (m_slots.find(type) == m_slots.end()) return;
 	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2) {
-		m_slots.at(ItemType::Equipment_ring_1).highlight(highlight);
-		m_slots.at(ItemType::Equipment_ring_2).highlight(highlight);
+		if (highlight) {
+			m_slots.at(ItemType::Equipment_ring_1).highlight();
+			m_slots.at(ItemType::Equipment_ring_2).highlight();
+		}
+		else {
+			m_slots.at(ItemType::Equipment_ring_1).unhighlight();
+			m_slots.at(ItemType::Equipment_ring_2).unhighlight();
+		}
 	}
 	else {
-		m_slots.at(type).highlight(highlight);
+		if (highlight) {
+			m_slots.at(type).highlight();
+		}
+		else {
+			m_slots.at(type).unhighlight();
+		}
 	}
 }
 
-bool InventoryEquipment::notifyEquipmentDrop(const InventorySlotClone* item) {
-	if (item == nullptr || m_slots.find(item->getItemType()) == m_slots.end()) return false;
-	if (item->getItemType() == ItemType::Equipment_ring_1 || item->getItemType() == ItemType::Equipment_ring_2) {
+bool InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
+	if (item == nullptr) return false;
+	const InventorySlot *is = static_cast<const InventorySlot *>(item->getOriginalSlot());
+	if (m_slots.find(is->getItemType()) == m_slots.end()) return false;
+	if (is->getItemType() == ItemType::Equipment_ring_1 || is->getItemType() == ItemType::Equipment_ring_2) {
 		if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
-			m_core->equipItem(item->getItemID(), ItemType::Equipment_ring_1);
+			m_core->equipItem(is->getItemID(), ItemType::Equipment_ring_1);
 			return true;
 		}
 		else if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
-			m_core->equipItem(item->getItemID(), ItemType::Equipment_ring_2);
+			m_core->equipItem(is->getItemID(), ItemType::Equipment_ring_2);
 			return true;
 		}
 	}
-	else if (item->getBoundingBox()->intersects(*(m_slots.at(item->getItemType()).getBoundingBox()))) {
-		m_core->equipItem(item->getItemID(), item->getItemType());
+	else if (item->getBoundingBox()->intersects(*(m_slots.at(is->getItemType()).getBoundingBox()))) {
+		m_core->equipItem(is->getItemID(), is->getItemType());
 		return true;
 	}
 	return false;
@@ -114,7 +127,7 @@ void InventoryEquipment::reload() {
 	types.push_back(ItemType::Equipment_ring_2);
 
 	sf::Vector2i texPos(0, 0);
-	float xOffset = LEFT + ((WIDTH - InventorySlot::SIDE_LENGTH) / 2.f);
+	float xOffset = LEFT + ((WIDTH - InventorySlot::SIZE) / 2.f);
 	float yOffset = TOP + YOFFSET;
 
 	for (auto& it : types) {
@@ -127,7 +140,7 @@ void InventoryEquipment::reload() {
 		texPos.x += 50;
 		m_slots.at(it).setItemType(it);
 		m_slots.at(it).setPosition(sf::Vector2f(xOffset, yOffset));
-		yOffset += InventorySlot::SIDE_LENGTH + MARGIN;
+		yOffset += InventorySlot::SIZE + MARGIN;
 	}
 }
 
