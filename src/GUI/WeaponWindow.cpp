@@ -230,7 +230,7 @@ void WeaponWindow::handleDragAndDrop() {
 			}
 			else if (m_selectedSpellSlot != nullptr) {
 				m_currentSpellClone = new SlotClone(m_selectedSpellSlot);
-				m_currentSpellClone->setPosition(mousePos);
+				m_currentSpellClone->setPosition(mousePos - sf::Vector2f(SpellSlot::SIZE / 2.f, SpellSlot::SIZE / 2.f));
 				m_selectedSpellSlot->deactivate();
 			}
 		}
