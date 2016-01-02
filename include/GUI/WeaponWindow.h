@@ -7,12 +7,13 @@
 #include "Window.h"
 #include "GUI/SpellSlot.h"
 #include "GUI/ModifierSlot.h"
-#include "GUI/ModifierSlotClone.h"
 #include "GUI/InventorySlot.h"
 #include "GUI/Spellbook.h"
 #include "GUI/SpellDescriptionWindow.h"
 #include "Weapon.h"
 #include "GUI/GUIConstants.h"
+
+class SlotClone;
 
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
@@ -33,12 +34,12 @@ public:
 	// highlights all slots that could take a spell modifier of this type.
 	// if highlight is false, unhighlights all modifier slots.
 	void highlightModifierSlots(SpellModifierType type, bool highlight);
-	void notifyModifierDrop(ModifierSlotClone* clone);
+	void notifyModifierDrop(SlotClone* clone);
 
 	// highlights all slots that could take a spell of this type.
 	// if highlight is false, unhighlights all spell slots.
 	void highlightSpellSlots(SpellType type, bool highlight);
-	void notifySpellDrop(SpellSlotClone* clone);
+	void notifySpellDrop(SlotClone* clone);
 
 	// reloads depending on the core and its weapon
 	void reload();
@@ -70,8 +71,8 @@ private:
 	SpellSlot* m_selectedSpellSlot = nullptr;
 
 	// used for drag & drop handling
-	ModifierSlotClone* m_currentModifierClone = nullptr;
-	SpellSlotClone* m_currentSpellClone = nullptr;
+	SlotClone* m_currentModifierClone = nullptr;
+	SlotClone* m_currentSpellClone = nullptr;
 	bool m_hasDraggingStarted = false;
 	bool m_isDragging = false;
 	// the mouse has to move this distance while pressed to spawn a clone.
@@ -84,5 +85,5 @@ private:
 	const float TOP = GUIConstants::TOP;
 	const float LEFT = GUIConstants::LEFT + Spellbook::WIDTH + MARGIN;
 	const float HEIGHT = Spellbook::HEIGHT;
-	const float WIDTH = 2 * GUIConstants::TEXT_OFFSET + 2 * SpellSlot::RADIUS + 4 * MARGIN + 3 * ModifierSlot::SIDE_LENGTH;
+	const float WIDTH = 2 * GUIConstants::TEXT_OFFSET + SpellSlot::SIZE + 4 * MARGIN + 3 * ModifierSlot::SIZE;
 };

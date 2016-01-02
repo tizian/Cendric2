@@ -4,6 +4,7 @@
 #include "Map/MapInterface.h"
 #include "MerchantInterface.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/SlotClone.h"
 
 Inventory::Inventory(LevelInterface* _interface) {
 	m_levelInterface = _interface;
@@ -143,7 +144,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 				deselectCurrentSlot();
 			}
 			tab->erase(bean.item_id);
-			calculateSlotPositions(*(m_typeMap[bean.item_type]));
+			calculateSlotPositions(*(m_typeMap.at(bean.item_type)));
 		}
 		else {
 			tab->at(bean.item_id).setAmount(m_core->getData().items.at(itemID));
@@ -154,7 +155,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
 
-	(*tab)[bean.item_id] = (InventorySlot(Item(itemID), m_core->getData().items.at(itemID)));
+	(*tab).at(bean.item_id) = (InventorySlot(Item(itemID), m_core->getData().items.at(itemID)));
 
 	calculateSlotPositions(*tab);
 }
@@ -181,7 +182,7 @@ void Inventory::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
 	// check whether an item was selected
-	for (auto& it : *(m_typeMap[m_currentTab])) {
+	for (auto& it : *(m_typeMap.at(m_currentTab))) {
 		it.second.update(frameTime);
 		if (it.second.isClicked()) {
 			selectSlot(it.second.getItemID(), ItemType::VOID);
@@ -240,7 +241,8 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 
 void Inventory::removeEquipmentItem() {
 	if (m_window->getBoundingBox()->intersects(*m_currentClone->getBoundingBox())) {
-		m_core->equipItem("", m_currentClone->getItemType());
+		const InventorySlot *is = static_cast<const InventorySlot *>(m_currentClone->getOriginalSlot());
+		m_core->equipItem("", is->getItemType());
 		reload();
 	}
 }
@@ -270,7 +272,8 @@ void Inventory::handleMapDrop() {
 		if (m_equipment->notifyEquipmentDrop(m_currentClone)) {
 			reload();
 		}
-		m_equipment->highlightEquipmentSlot(m_currentClone->getItemType(), false);
+		const InventorySlot *is = static_cast<const InventorySlot *>(m_currentClone->getOriginalSlot());
+		m_equipment->highlightEquipmentSlot(is->getItemType(), false);
 	}
 }
 
@@ -305,15 +308,15 @@ void Inventory::handleDragAndDrop() {
 			(mousePos.y - m_startMousePosition.y) * (mousePos.y - m_startMousePosition.y))) {
 			m_isDragging = true;
 			delete m_currentClone;
-			m_currentClone = new InventorySlotClone(selectedSlot);
-			m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+			m_currentClone = new SlotClone(selectedSlot);
+			m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIZE / 2.f, InventorySlot::SIZE / 2.f));
 			selectedSlot->deactivate();
 			handleLevelDrag();
 			handleMapDrag();
 		}
 	}
 	else {
-		m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+		m_currentClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIZE / 2.f, InventorySlot::SIZE / 2.f));
 	}
 }
 
@@ -327,7 +330,7 @@ void Inventory::render(sf::RenderTarget& target) {
 	m_window->render(target);
 	target.draw(m_goldText);
 	target.draw(m_selectedTabText);
-	for (auto& it : *(m_typeMap[m_currentTab])) {
+	for (auto& it : *(m_typeMap.at(m_currentTab))) {
 		it.second.render(target);
 		// it.second.renderAfterForeground(target); // uncomment for debug box
 	}
@@ -448,7 +451,7 @@ void Inventory::reload() {
 	for (auto& itemData : m_core->getData().items) {
 		const Item* item = m_core->getItem(itemData.first);
 		if (item == nullptr || m_typeMap.find(item->getType()) == m_typeMap.end()) continue;
-		m_typeMap[item->getType()]->insert({ item->getID(), InventorySlot(*item, itemData.second) });
+		m_typeMap.at(item->getType())->insert({ item->getID(), InventorySlot(*item, itemData.second) });
 	}
 
 	calculateSlotPositions(m_consumableItems);
@@ -472,11 +475,11 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slo
 			x = 1;
 			xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
 			y++;
-			yOffset += MARGIN + 2 * InventorySlot::MARGIN + InventorySlot::SIDE_LENGTH;
+			yOffset += MARGIN + InventorySlot::SIZE;
 		}
 		else {
 			x++;
-			xOffset += MARGIN + 2 * InventorySlot::MARGIN + InventorySlot::SIDE_LENGTH;
+			xOffset += MARGIN + InventorySlot::SIZE;
 		}
 	}
 }

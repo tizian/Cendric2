@@ -1,66 +1,43 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
-
-#include "GUI/BitmapText.h"
-#include "ResourceManager.h"
-#include "GUI/ModifierDescriptionWindow.h"
+#include "Slot.h"
+#include "Structs/SpellModifier.h"
 
 class CharacterCore;
+class ModifierDescriptionWindow;
 
-class ModifierSlot : public GameObject {
+class ModifierSlot : public Slot {
 public:
-	// constructor for filled slots.
 	ModifierSlot(const SpellModifier& modifier);
-	// constructor for empty slots.
-	ModifierSlot();
+
 	~ModifierSlot();
-
-	void select();
-	void deselect();
-	// activate restores the colors of this slot
-	void activate();
-	// deactivate sets the colors of this slot all grey.
-	void deactivate();
-
-	void highlight(bool highlight);
-
-	void render(sf::RenderTarget& renderTarget) override;
-	void update(const sf::Time& frameTime) override;
-	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
-	void onLeftJustPressed() override;
-	void onRightClick() override;
-	void onMouseOver() override;
-	void setSpellSlotNr(int nr);
-	void setNr(int nr);
 
 	void setPosition(const sf::Vector2f& pos) override;
 
-	bool isClicked();
-	bool isRightClicked();
+	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 
-	GameObjectType getConfiguredType() const override;
-	const SpellModifier& getModifier() const;
-	int getNr() const;
-	int getSpellSlotNr() const;
+	virtual void onMouseOver() override;
 
-	static const float SIDE_LENGTH;
-	static const float MARGIN;
+	const SpellModifier& getModifier() const { return m_spellModifier; }
+	inline int getSpellSlotNr() const { return m_spellSlotNr; }
+	inline int getNr() const { return m_nr; }
+
+	inline void setSpellSlotNr(int nr) { m_spellSlotNr = nr; }
+	inline void setNr(int nr) { m_nr = nr; }
+
+	inline float getConfiguredSize() const override { return SIZE; }
+	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
+
+	static const float SIZE;
+	static const float ICON_OFFSET;
 
 private:
-	bool m_isClicked = false;
-	bool m_isSelected = false;
-	bool m_isRightClicked = false;
+	SpellModifier m_spellModifier;
+
 	int m_nr = -1;
 	int m_spellSlotNr = -1;
 
-	void initWindow();
-	ModifierDescriptionWindow* m_descriptionWindow = nullptr;
 	bool m_showDescriptionWindow = false;
-
-	SpellModifier m_spellModifier;
-
-	sf::RectangleShape m_inside;
-	sf::RectangleShape m_outside;
+	ModifierDescriptionWindow* m_descriptionWindow = nullptr;
 };

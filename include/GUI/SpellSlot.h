@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "Slot.h"
 
 #include "GUI/BitmapText.h"
 #include "GUI/CircleSector.h"
@@ -9,7 +9,7 @@
 #include "ResourceManager.h"
 #include "Enums/EnumNames.h"
 
-class SpellSlot : public GameObject {
+class SpellSlot : public Slot {
 public:
 	// creates an empty spell slot with type "type"
 	SpellSlot(SpellType type = SpellType::VOID);
@@ -18,70 +18,37 @@ public:
 	// creates a filled spell slot for a spell with bean "bean"
 	SpellSlot(const SpellData& bean);
 
-	void activate();
-	void deactivate();
-	void select();
-	void deselect();
+	void setPosition(const sf::Vector2f& pos) override;
 
-	void highlight(bool highlight);
+	void render(sf::RenderTarget& renderTarget) override;
+
+	void update(const sf::Time& frameTime) override;
 
 	void playAnimation(const sf::Time& cooldown);
 
-	void render(sf::RenderTarget& renderTarget) override;
-	void update(const sf::Time& frameTime) override;
-	// be aware that the position here is the center of the spell slot. 
-	void setPosition(const sf::Vector2f& pos) override;
-	void onLeftJustPressed() override;
-	void onRightClick() override;
-	void setNr(int nr);
+	inline void setNr(int nr) { m_nr = nr; }
+	
+	inline SpellType getSpellType() const { return m_spellType; }
+	inline SpellID getSpellID() const { return m_spellID; }
+	inline int getNr() const { return m_nr; }
 
-	bool isClicked();
-	bool isRightClicked();
+	inline float getConfiguredSize() const override { return SIZE; }
+	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
 
-	GameObjectType getConfiguredType() const override;
-	SpellType getSpellType() const;
-	SpellID getSpellID() const;
-	const sf::IntRect& getTextureRect() const;
-	int getNr() const;
-
-	static const float RADIUS;
+	static const float SIZE;
+	static const float ICON_OFFSET;
 
 private:
-	void init();
-	sf::Texture *m_textureInactive = nullptr;
-	// the position of the texture icon of this spell.
-	sf::IntRect m_textureRect;
+	void initSpellSlot();
+
 	bool m_isChopSlot = false;
 	int m_nr = -1;
 
-	bool m_active = false;
-	bool m_isClicked = false;
-	bool m_isRightClicked = false;
-	bool m_isSelected = false;
-
 	sf::Time m_cooldown;
+
 	SpellType m_spellType;
 	SpellID m_spellID;
 	Key m_inputKeyID;
-
-	sf::Color m_color;
-	sf::Color m_colorBase;
-
-	sf::CircleShape m_outerRing;
-	sf::CircleShape m_coloredRingBase;
-	CircleSector 	m_coloredRing;
-	sf::CircleShape m_innerRing;
-	sf::CircleShape m_insideBase;
-	sf::CircleShape m_inside;
-
-	sf::CircleShape m_smallRingLeft1;
-	sf::CircleShape m_smallRingLeft2;
-	sf::CircleShape m_smallRingRight1;
-	sf::CircleShape m_smallRingRight2;
-	sf::CircleShape m_smallRingTop1;
-	sf::CircleShape m_smallRingTop2;
-	sf::CircleShape m_smallRingBottom1;
-	sf::CircleShape m_smallRingBottom2;
 
 	BitmapText m_inputKey;
 

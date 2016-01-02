@@ -1,6 +1,7 @@
 #include "Level/LevelInterface.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/GameScreen.h"
+#include "GUI/SlotClone.h"
 
 LevelInterface::LevelInterface(GameScreen* screen, LevelMainCharacter* character) : GameInterface(screen),
 m_character(character) {
@@ -50,7 +51,7 @@ void LevelInterface::removeTypedBuffs(SpellID id) {
 	m_buffBar->removeTypedSlots(id);
 }
 
-void LevelInterface::notifyConsumableDrop(const InventorySlotClone* item) {
+void LevelInterface::notifyConsumableDrop(const SlotClone* item) {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
 

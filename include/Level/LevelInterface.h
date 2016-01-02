@@ -25,7 +25,7 @@ public:
 	void removeTypedBuffs(SpellID id);
 
 	// an consumable item has been dropped. forward to quick slot bar
-	void notifyConsumableDrop(const InventorySlotClone* item);
+	void notifyConsumableDrop(const SlotClone* item);
 	// consumes a consumable item
 	void consumeItem(const Item& item);
 	// highlight quickslots

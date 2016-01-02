@@ -1,6 +1,7 @@
 #include "GUI/Spellbook.h"
 #include "Map/MapInterface.h"
 #include "GUI/WeaponWindow.h"
+#include "GUI/SlotClone.h"
 
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
@@ -196,14 +197,14 @@ void Spellbook::handleDragAndDrop() {
 			delete m_currentSpellClone;
 			m_currentSpellClone = nullptr;
 			if (m_selectedModifierSlot != nullptr) {
-				m_currentModifierClone = new ModifierSlotClone(m_selectedModifierSlot);
-				m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+				m_currentModifierClone = new SlotClone(m_selectedModifierSlot);
+				m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIZE / 2.f, InventorySlot::SIZE / 2.f));
 				m_selectedModifierSlot->deactivate();
 				m_weaponWindow->highlightModifierSlots(m_selectedModifierSlot->getModifier().type, true);
 			}
 			else if (m_selectedSpellSlot != nullptr) {
-				m_currentSpellClone = new SpellSlotClone(m_selectedSpellSlot);
-				m_currentSpellClone->setPosition(mousePos);
+				m_currentSpellClone = new SlotClone(m_selectedSpellSlot);
+				m_currentSpellClone->setPosition(mousePos - sf::Vector2f(SpellSlot::SIZE / 2.f, SpellSlot::SIZE / 2.f));
 				m_selectedSpellSlot->deactivate();
 				m_weaponWindow->highlightSpellSlots(m_selectedSpellSlot->getSpellType(), true);
 			}
@@ -211,7 +212,7 @@ void Spellbook::handleDragAndDrop() {
 	}
 	else {
 		if (m_currentModifierClone != nullptr)
-			m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIDE_LENGTH / 2.f, InventorySlot::SIDE_LENGTH / 2.f));
+			m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIZE / 2.f, InventorySlot::SIZE / 2.f));
 		if (m_currentSpellClone != nullptr)
 			m_currentSpellClone->setPosition(mousePos);
 	}
@@ -331,17 +332,17 @@ void Spellbook::calculateModifierSlots() {
 			modifier.level = i + 1;
 			modifier.type = it.first;
 			ModifierSlot slot(modifier);
-			slot.setPosition(sf::Vector2f(xOffset + (i * (ModifierSlot::SIDE_LENGTH + MARGIN)), yOffset));
+			slot.setPosition(sf::Vector2f(xOffset + (i * (ModifierSlot::SIZE + MARGIN)), yOffset));
 			m_modifierSlots.push_back(slot);
 		}
 		if (y >= maxY) {
 			yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + 2 * BUTTON_SIZE.y;
-			xOffset = GUIConstants::LEFT + WIDTH - (3 * ModifierSlot::SIDE_LENGTH + 2 * MARGIN + GUIConstants::TEXT_OFFSET);
+			xOffset = GUIConstants::LEFT + WIDTH - (3 * ModifierSlot::SIZE + 2 * MARGIN + GUIConstants::TEXT_OFFSET);
 			y = 0;
 		}
 		else {
 			y++;
-			yOffset += GUIConstants::CHARACTER_SIZE_M + ModifierSlot::SIDE_LENGTH;
+			yOffset += GUIConstants::CHARACTER_SIZE_M + ModifierSlot::SIZE;
 		}
 	}
 }
@@ -353,25 +354,25 @@ void Spellbook::calculateSpellSlots() {
 	for (auto& it : m_core->getData().spellsLearned) {
 		for (auto& it2 : it.second) {
 			SpellSlot slot = SpellSlot(it2);
-			slot.setPosition(sf::Vector2f(xOffset, yOffset) + sf::Vector2f(SpellSlot::RADIUS, SpellSlot::RADIUS));
+			slot.setPosition(sf::Vector2f(xOffset, yOffset));
 
 			BitmapText text;
 			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 			text.setColor(CENDRIC_COLOR_WHITE);
 			text.setString(g_textProvider->getText(EnumNames::getSpellIDName(it2)));
-			text.setPosition(sf::Vector2f(xOffset + SpellSlot::RADIUS * 2 + 2 * MARGIN, yOffset));
+			text.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset));
 
 			BitmapText textDesc;
 			textDesc.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 			textDesc.setColor(CENDRIC_COLOR_LIGHT_GREY);
 			textDesc.setString(g_textProvider->getCroppedText(
 				EnumNames::getSpellIDName(it2) + "Desc", GUIConstants::CHARACTER_SIZE_S,
-				static_cast<int>(WIDTH - (SpellSlot::RADIUS * 2 + 4 * MARGIN))));
-			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::RADIUS * 2 + 2 * MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f));
+				static_cast<int>(WIDTH - (SpellSlot::SIZE + 4 * MARGIN))));
+			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f));
 
 			std::pair<BitmapText, BitmapText> texts = std::pair<BitmapText, BitmapText>(text, textDesc);
 			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>(slot, texts));
-			yOffset += SpellSlot::RADIUS * 2 + MARGIN * 2;
+			yOffset += SpellSlot::SIZE + MARGIN * 2;
 		}
 
 		yOffset = GUIConstants::TOP + SPELL_OFFSET;
