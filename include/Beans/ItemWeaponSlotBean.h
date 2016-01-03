@@ -24,9 +24,6 @@ struct ItemWeaponSlotBean : DatabaseBean {
 		if (_slot_type.compare("twilight") == 0) {
 			return SpellType::Twilight;
 		}
-		if (_slot_type.compare("illusion") == 0) {
-			return SpellType::Illusion;
-		}
 		return SpellType::VOID;
 	}
 };

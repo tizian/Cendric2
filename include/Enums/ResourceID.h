@@ -18,7 +18,6 @@ enum class ResourceID {
 	Texture_spell_divineshield,
 	Texture_spell_aureola,
 	Texture_spell_fear,
-	Texture_spell_shackle,
 	Texture_spell_icyambush,
 	Texture_spell_unlock,
 	Texture_spell_telekinesis,

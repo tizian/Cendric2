@@ -34,7 +34,6 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_spell_iceball, "res/assets/spells/spritesheet_spell_iceball.png" },
 		{ ResourceID::Texture_spell_aureola, "res/assets/spells/spritesheet_spell_aureola.png" },
 		{ ResourceID::Texture_spell_fear, "res/assets/spells/spritesheet_spell_fear.png" },
-		{ ResourceID::Texture_spell_shackle, "res/assets/spells/spritesheet_spell_shackle.png" },
 		{ ResourceID::Texture_spell_icyambush, "res/assets/spells/spritesheet_spell_icyambush.png" },
 		{ ResourceID::Texture_spell_unlock, "res/assets/spells/spritesheet_spell_unlock.png" },
 		{ ResourceID::Texture_spell_telekinesis, "res/assets/spells/spritesheet_spell_telekinesis.png" },
@@ -320,12 +319,15 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_spell_divineshield);
 	deleteResource(ResourceID::Texture_spell_aureola);
 	deleteResource(ResourceID::Texture_spell_fear);
-	deleteResource(ResourceID::Texture_spell_shackle);
 	deleteResource(ResourceID::Texture_spell_icyambush);
 	deleteResource(ResourceID::Texture_spell_unlock);
 	deleteResource(ResourceID::Texture_spell_flash);
 
 	deleteResource(ResourceID::Sound_spell_fireball);
+
+	// delete particle resources for spells
+	deleteResource(ResourceID::Texture_Particle_snowflake);
+	deleteResource(ResourceID::Texture_Particle_smoke);
 
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
@@ -365,12 +367,15 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_spell_divineshield);
 	getTexture(ResourceID::Texture_spell_aureola);
 	getTexture(ResourceID::Texture_spell_fear);
-	getTexture(ResourceID::Texture_spell_shackle);
 	getTexture(ResourceID::Texture_spell_icyambush);
 	getTexture(ResourceID::Texture_spell_unlock);
 	getTexture(ResourceID::Texture_spell_flash);
 
 	getSoundBuffer(ResourceID::Sound_spell_fireball);
+
+	// load particle resources for spells
+	getTexture(ResourceID::Texture_Particle_snowflake);
+	getTexture(ResourceID::Texture_Particle_smoke);
 
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_frozenwater);

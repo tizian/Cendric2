@@ -57,7 +57,6 @@ private:
 	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_twilightSlots;
 	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_necromancySlots;
 	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_divineSlots;
-	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_illusionSlots;
 
 	void calculateModifierSlots();
 	void calculateSpellSlots();

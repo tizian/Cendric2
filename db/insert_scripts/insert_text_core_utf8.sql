@@ -73,7 +73,6 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('HealthRegener
 INSERT INTO text (text_id, english, german, swiss_german) values ('Hello','Hello','Hallo','Hoi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceDamage','Ice Damage','Eisschaden','Iisschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceResistance','Ice Resistance','Eisresistenz','Iisresistenz');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Illusion','Illusion','Illusion','Illusion');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Interact','Interact','Interagieren','Interagiere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Inventory','Inventory','Inventar','Inventar');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IsLocked','Is locked!','Ist verschlossen!','Da isch abgschlosse!');

@@ -14,21 +14,7 @@ SpellSlot::SpellSlot(SpellType type) {
 	m_inputKeyID = Key::VOID;
 	m_isEmpty = true;
 
-	if (m_spellType == SpellType::Elemental) {
-		m_iconTextureRect = sf::IntRect(0, 200, 50, 50);
-	}
-	else if (m_spellType == SpellType::Twilight) {
-		m_iconTextureRect = sf::IntRect(50, 200, 50, 50);
-	}
-	else if (m_spellType == SpellType::Necromancy) {
-		m_iconTextureRect = sf::IntRect(100, 200, 50, 50);
-	}
-	else if (m_spellType == SpellType::Divine) {
-		m_iconTextureRect = sf::IntRect(150, 200, 50, 50);
-	}
-	else if (m_spellType == SpellType::Illusion) {
-		m_iconTextureRect = sf::IntRect(200, 200, 50, 50);
-	}
+	m_iconTextureRect = sf::IntRect(250, (static_cast<int>(m_spellType) - 1) * 50, 50, 50);
 
 	initSpellSlot();
 }

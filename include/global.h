@@ -61,13 +61,11 @@ inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
 #define CENDRIC_COLOR_TWILIGHT 		sf::Color(32, 43, 79)
 #define CENDRIC_COLOR_NECROMANCY 	sf::Color(23, 53, 18)
 #define CENDRIC_COLOR_DIVINE		sf::Color(178, 129, 52)
-#define CENDRIC_COLOR_ILLUSION		sf::Color(78, 37, 75)
 
 #define CENDRIC_COLOR_ELEMENTAL_INACTIVE 	sf::Color(143, 88, 76)
 #define CENDRIC_COLOR_TWILIGHT_INACTIVE 	sf::Color(56, 61, 79)
 #define CENDRIC_COLOR_NECROMANCY_INACTIVE 	sf::Color(46, 55, 43)
 #define CENDRIC_COLOR_DIVINE_INACTIVE		sf::Color(179, 155, 116)
-#define CENDRIC_COLOR_ILLUSION_INACTIVE		sf::Color(79, 58, 78)
 
 class Logger;
 class TextProvider;

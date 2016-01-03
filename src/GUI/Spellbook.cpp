@@ -39,18 +39,15 @@ void Spellbook::init() {
 	button.setTextureColor(CENDRIC_COLOR_DIVINE);
 	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Divine));
 	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_illusion), sf::IntRect(50, 50, 400, 400));
-	button.setTextureColor(CENDRIC_COLOR_ILLUSION);
-	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Illusion));
-	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_necromancy), sf::IntRect(50, 50, 400, 400));
 	button.setTextureColor(CENDRIC_COLOR_NECROMANCY);
 	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Necromancy));
 	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight), sf::IntRect(50, 50, 400, 400));
 	button.setTextureColor(CENDRIC_COLOR_TWILIGHT);
 	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Twilight));
 
-	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
-	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + MARGIN;
 	float buttonMargin = (WIDTH - 6 * BUTTON_SIZE.x - 2 * GUIConstants::TEXT_OFFSET) / 5.f;
+	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + MARGIN;
+	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET + (BUTTON_SIZE.x + buttonMargin) / 2.f;
 
 	for (auto& it : m_tabs) {
 		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
@@ -66,7 +63,6 @@ void Spellbook::init() {
 		{ SpellType::Twilight, &m_twilightSlots },
 		{ SpellType::Divine, &m_divineSlots },
 		{ SpellType::Elemental, &m_elementalSlots },
-		{ SpellType::Illusion, &m_illusionSlots },
 		{ SpellType::Necromancy, &m_necromancySlots }
 	});
 
@@ -93,7 +89,6 @@ void Spellbook::clearAllSlots() {
 	m_necromancySlots.clear();
 	m_elementalSlots.clear();
 	m_divineSlots.clear();
-	m_illusionSlots.clear();
 	m_twilightSlots.clear();
 	m_selectedModifierSlot = nullptr;
 	m_selectedSpellSlot = nullptr;
@@ -282,7 +277,6 @@ void Spellbook::selectTab(SpellType type) {
 	case SpellType::Necromancy:
 	case SpellType::Divine:
 	case SpellType::Elemental:
-	case SpellType::Illusion:
 		m_selectedTabText.setString(g_textProvider->getText(EnumNames::getSpellTypeName(type)));
 		break;
 	default:
@@ -316,7 +310,7 @@ void Spellbook::reload() {
 
 void Spellbook::calculateModifierSlots() {
 	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y;
-	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
+	float xOffset = GUIConstants::LEFT + 2 * GUIConstants::TEXT_OFFSET;
 	float modifierXOffset = 205.f;
 	float textYOffset = SpellSlot::SIZE / 2.f - GUIConstants::CHARACTER_SIZE_S / 2.f;
 	for (auto& it : m_core->getData().modfiersLearned) {
