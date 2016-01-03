@@ -214,7 +214,7 @@ void Spellbook::handleDragAndDrop() {
 		if (m_currentModifierClone != nullptr)
 			m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIZE / 2.f, InventorySlot::SIZE / 2.f));
 		if (m_currentSpellClone != nullptr)
-			m_currentSpellClone->setPosition(mousePos);
+			m_currentSpellClone->setPosition(mousePos - sf::Vector2f(SpellSlot::SIZE / 2.f, SpellSlot::SIZE / 2.f));
 	}
 }
 
