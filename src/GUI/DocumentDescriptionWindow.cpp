@@ -6,7 +6,7 @@ const float DocumentDescriptionWindow::WIDTH = 340.f;
 
 DocumentDescriptionWindow::DocumentDescriptionWindow(const Item& item) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
-	WindowOrnamentStyle::LARGE,
+	WindowOrnamentStyle::FANCY,
 	sf::Color(169, 141, 117), // main
 	sf::Color::Transparent, // back
 	sf::Color(110, 76, 54)) // ornament

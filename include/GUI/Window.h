@@ -10,9 +10,8 @@
 
 enum class WindowOrnamentStyle {
 	NONE,
-	SMALL,
-	MEDIUM,
-	LARGE
+	SIMPLE,
+	FANCY
 };
 
 class Window : public GameObject {

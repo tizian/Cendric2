@@ -75,6 +75,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_ornament_small, "res/assets/gui/ornament_small.png" },
 		{ ResourceID::Texture_GUI_ornament_medium, "res/assets/gui/ornament_medium.png" },
 		{ ResourceID::Texture_GUI_ornament_large, "res/assets/gui/ornament_large.png" },
+		{ ResourceID::Texture_GUI_window_ornament, "res/assets/gui/window_ornament.png" },
 		{ ResourceID::Texture_GUI_arrow, "res/assets/gui/arrow.png" },
 		{ ResourceID::Texture_GUI_spell_color_elemental, "res/assets/gui/spell_color_elemental.png" },
 		{ ResourceID::Texture_GUI_spell_color_twilight, "res/assets/gui/spell_color_twilight.png" },

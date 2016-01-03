@@ -8,7 +8,7 @@ const sf::FloatRect BOX = sf::FloatRect(0.f, WINDOW_HEIGHT - 200.f, WINDOW_WIDTH
 const int CHAR_SIZE_SPEAKER = 16;
 const int CHAR_SIZE_DIALOGUE = 12;
 
-DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::LARGE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White) {
+DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
 	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
 	m_speakerText = new BitmapText("");

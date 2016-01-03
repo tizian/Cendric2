@@ -19,7 +19,7 @@ inline std::string toStrMaxDecimals(float value, int decimals) {
 
 ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
-	WindowOrnamentStyle::LARGE,
+	WindowOrnamentStyle::FANCY,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::BACK_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {

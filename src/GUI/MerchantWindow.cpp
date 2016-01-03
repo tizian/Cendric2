@@ -11,7 +11,7 @@ void MerchantWindow::init() {
 	// init window
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
-		WindowOrnamentStyle::LARGE,
+		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);

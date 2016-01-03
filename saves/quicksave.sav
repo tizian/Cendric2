@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:398
-savegame.name:Quicksave
-savegame.date:1451485575
+time.played:442
+savegame.name:QUICKSAVE
+savegame.date:1451835857
 level.id:res/level/ratcave/ratcave.tmx
 level.position:525.000000,1175.000000
 is.in.level:0
 map.id:res/map/firstmap/firstmap.tmx
-map.position:4000.000000,760.336060
+map.position:4000.000000,984.430298
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -23,6 +23,7 @@ item.id:fo_cheese,3
 item.id:fo_glowingshroom,1
 item.id:fo_rawmeat,2
 item.id:mi_goldengoblet,1
+item.id:qe_letter,1
 item.id:we_icestaff,1
 item.id:we_rustysword,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
@@ -42,19 +43,20 @@ equipped.weapon:we_oathbreaker
 quickslot:1,
 quickslot:2,
 # enemies killed in level:
-enemies.killed:res/level/ratcave/ratcave.tmx,3,4
+enemies.killed:res/level/ratcave/ratcave.tmx,3,4,5
 enemies.killed:res/level/testleverlevel/testleverlevel.tmx
 # enemies looted in level:
 enemies.looted:res/level/ratcave/ratcave.tmx,3,4
 enemies.looted:res/level/testleverlevel/testleverlevel.tmx
 # items looted in level:
-items.looted:res/level/ratcave/ratcave.tmx,1560,1758,1778
+items.looted:res/level/ratcave/ratcave.tmx,1560,1758,1778,1802
 items.looted:res/level/testleverlevel/testleverlevel.tmx
 # chests looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
 # quest states:
 quest.state:a_cave_of_rats,1
 # quest targets killed:
-quest.progress.target:a_cave_of_rats,rat,2
+quest.progress.target:a_cave_of_rats,rat,3
 # quest conditions fulfilled:
 quest.progress.condition:a_cave_of_rats,test
 # npc states:

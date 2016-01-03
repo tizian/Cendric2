@@ -56,7 +56,7 @@ CharacterInfo::CharacterInfo(const AttributeData* attributes) {
 	// init window
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, width, height);
 	m_window = new Window(box,
-		WindowOrnamentStyle::LARGE,
+		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);

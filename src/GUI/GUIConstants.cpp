@@ -10,4 +10,4 @@ int GUIConstants::CHARACTER_SIZE_L = 16;
 
 sf::Color GUIConstants::MAIN_COLOR = CENDRIC_COLOR_TRANS_BLACK;
 sf::Color GUIConstants::BACK_COLOR = sf::Color::Transparent;
-sf::Color GUIConstants::ORNAMENT_COLOR = CENDRIC_COLOR_LIGHT_PURPLE;
+sf::Color GUIConstants::ORNAMENT_COLOR = CENDRIC_COLOR_WHITE;

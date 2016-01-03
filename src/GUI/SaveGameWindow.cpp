@@ -25,7 +25,7 @@ inline bool ends_with(std::string const & value, std::string const & ending) {
 }
 
 SaveGameWindow::SaveGameWindow() : Window(BOX,
-	WindowOrnamentStyle::LARGE,
+	WindowOrnamentStyle::SIMPLE,
 	CENDRIC_COLOR_DARK_PURPLE,
 	sf::Color(0, 0, 0, 100), sf::Color::White),
 	m_maxShowableEntries(static_cast<int>((BOX.height - 2 * TEXT_OFFSET.x) / LINE_PITCH)) {

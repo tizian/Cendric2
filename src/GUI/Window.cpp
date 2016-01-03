@@ -14,14 +14,11 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject
 	if (style == WindowOrnamentStyle::NONE) {
 		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), sf::Color::White, box.width, box.height);
 	}
-	else if (style == WindowOrnamentStyle::SMALL) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), sf::Color::White, box.width, box.height);
-	}
-	else if (style == WindowOrnamentStyle::MEDIUM) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), sf::Color::White, box.width, box.height);
-	}
-	else if (style == WindowOrnamentStyle::LARGE) {
+	else if (style == WindowOrnamentStyle::SIMPLE) {
 		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), sf::Color::White, box.width, box.height);
+	}
+	else if (style == WindowOrnamentStyle::FANCY) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_ornament), sf::Color::White, box.width, box.height);
 	}
 
 	setPosition(sf::Vector2f(box.left, box.top));
@@ -38,14 +35,11 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Co
 	if (style == WindowOrnamentStyle::NONE) {
 		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), ornamentColor, box.width, box.height);
 	}
-	else if (style == WindowOrnamentStyle::SMALL) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), ornamentColor, box.width, box.height);
+	else if (style == WindowOrnamentStyle::SIMPLE) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), sf::Color::White, box.width, box.height);
 	}
-	else if (style == WindowOrnamentStyle::MEDIUM) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), ornamentColor, box.width, box.height);
-	}
-	else if (style == WindowOrnamentStyle::LARGE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), ornamentColor, box.width, box.height);
+	else if (style == WindowOrnamentStyle::FANCY) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_ornament), sf::Color::White, box.width, box.height);
 	}
 
 	setPosition(sf::Vector2f(box.left, box.top));

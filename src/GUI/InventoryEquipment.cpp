@@ -14,10 +14,10 @@ InventoryEquipment::InventoryEquipment(CharacterCore* core, bool isInLevel) {
 	// init window
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
-		WindowOrnamentStyle::LARGE,
+		WindowOrnamentStyle::FANCY,
 		CENDRIC_COLOR_TRANS_BLACK, // main
 		sf::Color::Transparent, // back
-		CENDRIC_COLOR_LIGHT_PURPLE); // ornament
+		sf::Color::White); // ornament
 }
 
 InventoryEquipment::~InventoryEquipment() {
