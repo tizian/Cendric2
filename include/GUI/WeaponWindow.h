@@ -80,7 +80,7 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 
-	const float MARGIN = 10.f;
+	const float MARGIN = 5.f; 
 
 	const float TOP = GUIConstants::TOP;
 	const float LEFT = GUIConstants::LEFT + Spellbook::WIDTH + MARGIN;

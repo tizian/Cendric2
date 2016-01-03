@@ -5,7 +5,7 @@
 
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
-float Spellbook::SPELL_OFFSET = 120.f;
+float Spellbook::SPELL_OFFSET = 110.f;
 
 Spellbook::Spellbook(CharacterCore* core, bool clickable) {
 	m_core = core;
