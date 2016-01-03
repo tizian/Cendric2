@@ -58,4 +58,5 @@ protected:
 	const sf::Texture *m_iconTexture = nullptr;
 	const sf::Texture *m_borderTexture = nullptr;			// TODO: Maybe use one single spritesheet for all "slot border" textures
 	const sf::Texture *m_borderTextureSelected = nullptr;
+	const sf::Texture *m_highlightTexture = nullptr;
 };

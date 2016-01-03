@@ -23,6 +23,8 @@ ModifierSlot::ModifierSlot(const SpellModifier& modifier) {
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_modifier);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_modifier_selected);
 
+	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
+
 	initSlot();
 }
 

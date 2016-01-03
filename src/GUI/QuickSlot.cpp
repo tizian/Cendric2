@@ -36,6 +36,8 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected);
 
+	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
+
 	m_borderRect.setSize(sf::Vector2f(SIZE, SIZE));
 	m_borderRect.setTexture(m_borderTexture);
 

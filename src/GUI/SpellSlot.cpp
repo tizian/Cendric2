@@ -67,6 +67,8 @@ void SpellSlot::initSpellSlot() {
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_selected);
 
+	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
+
 	if (m_spellID != SpellID::VOID) {
 		m_iconTexture = m_isChopSlot ?
 			g_resourceManager->getTexture(ResourceID::Texture_items) :
