@@ -4,8 +4,8 @@
 
 using namespace std;
 
-const float SpellSlot::SIZE = 74.f;
-const float SpellSlot::ICON_OFFSET = 12.f;
+const float SpellSlot::SIZE = 86.f;
+const float SpellSlot::ICON_OFFSET = 18.f;
 
 SpellSlot::SpellSlot(SpellType type) {
 	m_spellType = type;
@@ -67,6 +67,27 @@ void SpellSlot::initSpellSlot() {
 	m_cooldownRect.setSize(ICON_SIZE, ICON_SIZE);
 	m_cooldownRect.setFillColor(sf::Color(200, 200, 200, 128));
 
+	m_gemsRect.setSize(sf::Vector2f(SIZE, SIZE));
+	m_gemsRect.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_gems));
+	cout << (int)m_spellType << endl;
+	switch (m_spellType) {
+	case SpellType::Elemental:
+		m_gemsRect.setFillColor(CENDRIC_COLOR_ELEMENTAL);
+		break;
+	case SpellType::Twilight:
+		m_gemsRect.setFillColor(CENDRIC_COLOR_TWILIGHT);
+		break;
+	case SpellType::Necromancy:
+		m_gemsRect.setFillColor(CENDRIC_COLOR_NECROMANCY);
+		break;
+	case SpellType::Divine:
+		m_gemsRect.setFillColor(CENDRIC_COLOR_DIVINE);
+		break;
+	default:
+		m_gemsRect.setFillColor(CENDRIC_COLOR_WHITE);
+		break;
+	}
+
 	initSlot();
 }
 
@@ -75,6 +96,7 @@ void SpellSlot::setPosition(const sf::Vector2f& pos) {
 	sf::Vector2f positionOffset(SpellSlot::SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, SpellSlot::SIZE - 10.f);
 	m_inputKey.setPosition(pos + positionOffset);
 	m_cooldownRect.setPosition(pos.x + ICON_OFFSET, pos.y + ICON_OFFSET);
+	m_gemsRect.setPosition(pos);
 }
 
 void SpellSlot::render(sf::RenderTarget& renderTarget) {
@@ -85,6 +107,7 @@ void SpellSlot::render(sf::RenderTarget& renderTarget) {
 		renderTarget.draw(m_cooldownRect);
 	}
 	renderTarget.draw(m_borderRect);
+	renderTarget.draw(m_gemsRect);
 	renderTarget.draw(m_inputKey);
 }
 

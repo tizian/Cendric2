@@ -54,8 +54,8 @@ private:
 	Key m_inputKeyID;
 
 	CooldownRectangleShape m_cooldownRect;
-
 	BitmapText m_inputKey;
+	sf::RectangleShape m_gemsRect;
 
 	bool m_animating = false;
 	sf::Time m_animationTime;
