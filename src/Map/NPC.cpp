@@ -166,7 +166,11 @@ void NPC::setTooltipText(const std::string& tooltip) {
 	m_tooltipText.setCharacterSize(8);
 }
 
-float NPC::getConfiguredMaxVelocityY() const {
+float NPC::getConfiguredMaxVelocityYUp() const {
+	return 200.0f;
+}
+
+float NPC::getConfiguredMaxVelocityYDown() const {
 	return 200.0f;
 }
 

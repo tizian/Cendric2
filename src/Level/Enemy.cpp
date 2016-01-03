@@ -268,7 +268,7 @@ void Enemy::handleMovementInput() {
 		}
 
 		if (m_jumps && m_isGrounded) {
-			setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityY() : -getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+			setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityYUp() : -getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
 			m_jumps = false;
 		}
 	}
@@ -285,7 +285,7 @@ void Enemy::handleMovementInput() {
 		}
 
 		if (m_jumps && m_isGrounded) {
-			setVelocityY(-getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+			setVelocityY(-getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
 			m_jumps = false;
 		}
 	}
@@ -297,7 +297,7 @@ void Enemy::handleMovementInput() {
 		}
 	}
 
-	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getConfiguredGravityAcceleration() : getConfiguredGravityAcceleration())));
+	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getGravityAcceleration() : getGravityAcceleration())));
 }
 
 void Enemy::updateAggro() {

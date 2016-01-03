@@ -499,6 +499,11 @@ void CharacterCore::addSpell(SpellID id, int slotNr) {
 			it.second.clear();
 		}
 	}
+
+	while (m_data.equippedWeaponSlots.size() - 1 < slotNr) {
+		m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>({SpellID::VOID, std::vector<SpellModifier>()}));
+	}
+
 	m_data.equippedWeaponSlots.at(slotNr).first = id;
 	m_data.equippedWeaponSlots.at(slotNr).second.clear();
 

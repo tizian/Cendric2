@@ -1,5 +1,8 @@
 #include "MovableGameObject.h"
 
+MovableGameObject::MovableGameObject() : AnimatedGameObject() {
+}
+
 void MovableGameObject::update(const sf::Time& frameTime) {
 	sf::Vector2f position;
 	calculateNextPosition(frameTime, position);
@@ -25,8 +28,8 @@ void MovableGameObject::boundVelocity(sf::Vector2f& vel) const {
 	// check bounds
 	if (vel.x > getConfiguredMaxVelocityX()) vel.x = getConfiguredMaxVelocityX();
 	if (vel.x < -getConfiguredMaxVelocityX()) vel.x = -getConfiguredMaxVelocityX();
-	if (vel.y > getConfiguredMaxVelocityY()) vel.y = getConfiguredMaxVelocityY();
-	if (vel.y < -getConfiguredMaxVelocityY()) vel.y = -getConfiguredMaxVelocityY();
+	if (vel.y > getConfiguredMaxVelocityYDown()) vel.y = getConfiguredMaxVelocityYDown();
+	if (vel.y < -getConfiguredMaxVelocityYUp()) vel.y = -getConfiguredMaxVelocityYUp();
 }
 
 void MovableGameObject::calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
@@ -58,11 +61,15 @@ void MovableGameObject::setVelocityY(float velocityY) {
 	m_velocity.y = velocityY;
 }
 
-float MovableGameObject::getConfiguredMaxVelocityY() const {
+float MovableGameObject::getConfiguredMaxVelocityX() const {
 	return 1000.0f;
 }
 
-float MovableGameObject::getConfiguredMaxVelocityX() const {
+float MovableGameObject::getConfiguredMaxVelocityYUp() const {
+	return 1000.0f;
+}
+
+float MovableGameObject::getConfiguredMaxVelocityYDown() const {
 	return 1000.0f;
 }
 

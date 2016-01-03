@@ -24,7 +24,8 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	void checkCollisionWithMainChar();
 
-	float getConfiguredMaxVelocityY() const override;
+	float getConfiguredMaxVelocityYUp() const override;
+	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityX() const override;
 
 	void setTooltipText(const std::string& tooltip);

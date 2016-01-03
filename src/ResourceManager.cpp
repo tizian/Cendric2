@@ -38,6 +38,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_spell_unlock, "res/assets/spells/spritesheet_spell_unlock.png" },
 		{ ResourceID::Texture_spell_telekinesis, "res/assets/spells/spritesheet_spell_telekinesis.png" },
 		{ ResourceID::Texture_spell_flash, "res/assets/spells/spritesheet_spell_flash.png" },
+		{ ResourceID::Texture_spell_leapoffaith, "res/assets/spells/spritesheet_spell_leapoffaith.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
 		{ ResourceID::Texture_enemy_nekomata_blue_trans, "res/assets/enemies/spritesheet_enemy_nekomata_blue_trans.png" },
@@ -323,6 +324,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_spell_icyambush);
 	deleteResource(ResourceID::Texture_spell_unlock);
 	deleteResource(ResourceID::Texture_spell_flash);
+	deleteResource(ResourceID::Texture_spell_leapoffaith);
 
 	deleteResource(ResourceID::Sound_spell_fireball);
 
@@ -371,12 +373,14 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_spell_icyambush);
 	getTexture(ResourceID::Texture_spell_unlock);
 	getTexture(ResourceID::Texture_spell_flash);
+	getTexture(ResourceID::Texture_spell_leapoffaith);
 
 	getSoundBuffer(ResourceID::Sound_spell_fireball);
 
 	// load particle resources for spells
 	getTexture(ResourceID::Texture_Particle_snowflake);
 	getTexture(ResourceID::Texture_Particle_smoke);
+	getTexture(ResourceID::Texture_Particle_blob2);
 
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_frozenwater);

@@ -5,7 +5,7 @@ NekomataEnemy::NekomataEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy
 	load();
 	loadAttributes();
 	loadSpells();
-	m_jumpHeight = getConfiguredMaxVelocityY() * getConfiguredMaxVelocityY() / (2 * getConfiguredGravityAcceleration());
+	m_jumpHeight = getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration());
 }
 
 void NekomataEnemy::loadAttributes() {
@@ -127,8 +127,12 @@ void NekomataEnemy::load() {
 	playCurrentAnimation(true);
 }
 
-float NekomataEnemy::getConfiguredMaxVelocityY() const {
+float NekomataEnemy::getConfiguredMaxVelocityYUp() const {
 	return 600.0f;
+}
+
+float NekomataEnemy::getConfiguredMaxVelocityYDown() const {
+	return m_maxVelocityYDownScale * 600.0f;
 }
 
 float NekomataEnemy::getConfiguredMaxVelocityX() const {

@@ -52,10 +52,10 @@ void LevelMainCharacter::handleMovementInput() {
 		newAccelerationX += getConfiguredWalkAcceleration();
 	}
 	if (g_inputController->isKeyJustPressed(Key::Jump) && m_isGrounded) {
-		setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityY() : -getConfiguredMaxVelocityY()); // first jump vel will always be max y vel. 
+		setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityYUp() : -getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
 	}
 
-	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getConfiguredGravityAcceleration() : getConfiguredGravityAcceleration())));
+	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getGravityAcceleration() : getGravityAcceleration())));
 }
 
 void LevelMainCharacter::loadWeapon() {
@@ -216,8 +216,12 @@ void LevelMainCharacter::load() {
 	setDebugBoundingBox(sf::Color::White);
 }
 
-float LevelMainCharacter::getConfiguredMaxVelocityY() const {
+float LevelMainCharacter::getConfiguredMaxVelocityYUp() const {
 	return 600.0f;
+}
+
+float LevelMainCharacter::getConfiguredMaxVelocityYDown() const {
+	return m_maxVelocityYDownScale * 600.0f;
 }
 
 float LevelMainCharacter::getConfiguredMaxVelocityX() const {
