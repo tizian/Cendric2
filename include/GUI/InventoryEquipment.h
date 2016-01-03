@@ -33,8 +33,6 @@ public:
 	bool notifyEquipmentDrop(const SlotClone* item);
 
 	static float WIDTH;
-	static float TOP;
-	static float LEFT;
 	static float HEIGHT;
 
 private:

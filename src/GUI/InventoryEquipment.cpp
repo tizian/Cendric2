@@ -1,19 +1,18 @@
 #include "GUI/InventoryEquipment.h"
 #include "GUI/SlotClone.h"
+#include "GUI/GUIConstants.h"
 
 float MARGIN = 10.f;
 float YOFFSET = 28.f;
 float InventoryEquipment::WIDTH = 100.f;
 float InventoryEquipment::HEIGHT = 7 * (InventorySlot::SIZE + MARGIN) - MARGIN + 2 * YOFFSET;
-float InventoryEquipment::TOP = 100.f;
-float InventoryEquipment::LEFT = 50.f;
 
 InventoryEquipment::InventoryEquipment(CharacterCore* core, bool isInLevel) {
 	m_core = core;
 	m_isInLevel = isInLevel;
 
 	// init window
-	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
+	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::LARGE,
 		CENDRIC_COLOR_TRANS_BLACK, // main
@@ -127,8 +126,8 @@ void InventoryEquipment::reload() {
 	types.push_back(ItemType::Equipment_ring_2);
 
 	sf::Vector2i texPos(0, 0);
-	float xOffset = LEFT + ((WIDTH - InventorySlot::SIZE) / 2.f);
-	float yOffset = TOP + YOFFSET;
+	float xOffset = GUIConstants::LEFT + ((WIDTH - InventorySlot::SIZE) / 2.f);
+	float yOffset = GUIConstants::TOP + YOFFSET;
 
 	for (auto& it : types) {
 		if (m_core->getEquippedItem(it) == nullptr) {

@@ -49,7 +49,7 @@ void Spellbook::init() {
 	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Twilight));
 
 	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
-	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
+	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + MARGIN;
 	float buttonMargin = (WIDTH - 6 * BUTTON_SIZE.x - 2 * GUIConstants::TEXT_OFFSET) / 5.f;
 
 	for (auto& it : m_tabs) {
@@ -315,35 +315,26 @@ void Spellbook::reload() {
 }
 
 void Spellbook::calculateModifierSlots() {
-	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + 2 * BUTTON_SIZE.y;
+	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y;
 	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
-	int maxY = 4;
-	int y = 1;
+	float modifierXOffset = 205.f;
+	float textYOffset = SpellSlot::SIZE / 2.f - GUIConstants::CHARACTER_SIZE_S / 2.f;
 	for (auto& it : m_core->getData().modfiersLearned) {
 		BitmapText text;
-		text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+		text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 		text.setColor(CENDRIC_COLOR_WHITE);
-		text.setPosition(sf::Vector2f(xOffset, yOffset));
+		text.setPosition(sf::Vector2f(xOffset, yOffset + textYOffset));
 		text.setString(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it.first)));
 		m_modifierTexts.push_back(text);
-		yOffset += GUIConstants::CHARACTER_SIZE_M * 2;
 		for (int i = 0; i < it.second; i++) {
 			SpellModifier modifier;
 			modifier.level = i + 1;
 			modifier.type = it.first;
 			ModifierSlot slot(modifier);
-			slot.setPosition(sf::Vector2f(xOffset + (i * (ModifierSlot::SIZE + MARGIN)), yOffset));
+			slot.setPosition(sf::Vector2f(modifierXOffset + (i * (ModifierSlot::SIZE + MARGIN)), yOffset));
 			m_modifierSlots.push_back(slot);
 		}
-		if (y >= maxY) {
-			yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + 2 * BUTTON_SIZE.y;
-			xOffset = GUIConstants::LEFT + WIDTH - (3 * ModifierSlot::SIZE + 2 * MARGIN + GUIConstants::TEXT_OFFSET);
-			y = 0;
-		}
-		else {
-			y++;
-			yOffset += GUIConstants::CHARACTER_SIZE_M + ModifierSlot::SIZE;
-		}
+		yOffset += ModifierSlot::SIZE;
 	}
 }
 
@@ -360,7 +351,7 @@ void Spellbook::calculateSpellSlots() {
 			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 			text.setColor(CENDRIC_COLOR_WHITE);
 			text.setString(g_textProvider->getText(EnumNames::getSpellIDName(it2)));
-			text.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset));
+			text.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset + SpellSlot::ICON_OFFSET));
 
 			BitmapText textDesc;
 			textDesc.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -368,11 +359,11 @@ void Spellbook::calculateSpellSlots() {
 			textDesc.setString(g_textProvider->getCroppedText(
 				EnumNames::getSpellIDName(it2) + "Desc", GUIConstants::CHARACTER_SIZE_S,
 				static_cast<int>(WIDTH - (SpellSlot::SIZE + 4 * MARGIN))));
-			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f));
+			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f + SpellSlot::ICON_OFFSET));
 
 			std::pair<BitmapText, BitmapText> texts = std::pair<BitmapText, BitmapText>(text, textDesc);
 			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>(slot, texts));
-			yOffset += SpellSlot::SIZE + MARGIN * 2;
+			yOffset += SpellSlot::SIZE + MARGIN;
 		}
 
 		yOffset = GUIConstants::TOP + SPELL_OFFSET;

@@ -15,8 +15,8 @@ public:
 	SpellSlot(SpellType type = SpellType::VOID);
 	// creates a filled spell slot for a spell with id "id"
 	SpellSlot(SpellID id);
-	// creates a filled spell slot for a spell with bean "bean"
-	SpellSlot(const SpellData& bean);
+	// creates a filled spell slot for a spell with data "data"
+	SpellSlot(const SpellData& data);
 
 	void setPosition(const sf::Vector2f& pos) override;
 

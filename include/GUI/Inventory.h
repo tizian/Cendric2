@@ -107,8 +107,7 @@ private:
 	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 35.f);
 
 	const float MARGIN = 7.f;
-	const float INVENTORY_TOP = InventoryEquipment::TOP;
-	const float INVENTORY_LEFT = InventoryEquipment::LEFT + MARGIN + InventoryEquipment::WIDTH;
+	const float INVENTORY_LEFT = GUIConstants::LEFT + MARGIN + InventoryEquipment::WIDTH;
 	const float INVENTORY_HEIGHT =
 		3 * GUIConstants::TEXT_OFFSET +
 		2 * GUIConstants::CHARACTER_SIZE_M +

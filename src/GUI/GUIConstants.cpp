@@ -1,7 +1,7 @@
 #include "GUI/GUIConstants.h"
 
 float GUIConstants::LEFT = 50.f;
-float GUIConstants::TOP = 100.f;
+float GUIConstants::TOP = 50.f;
 float GUIConstants::TEXT_OFFSET = 20.f;
 
 int GUIConstants::CHARACTER_SIZE_S = 8;
