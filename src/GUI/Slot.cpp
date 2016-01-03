@@ -61,11 +61,13 @@ void Slot::deselect() {
 }
 
 void Slot::highlight() {
-	m_overlayRect.setFillColor(sf::Color(255, 255, 255, 128));
+	m_overlayRect.setFillColor(sf::Color(255, 255, 255, 150));
+	m_overlayRect.setTexture(m_highlightTexture);
 }
 
 void Slot::unhighlight() {
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 0));
+	m_overlayRect.setTexture(nullptr);
 }
 
 void Slot::update(const sf::Time& frameTime) {

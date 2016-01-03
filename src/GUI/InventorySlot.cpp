@@ -21,6 +21,8 @@ InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getID()
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected);
 
+	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
+
 	initSlot();
 }
 
@@ -33,6 +35,8 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos)
 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected);
+
+	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
 
 	initSlot();
 }
