@@ -70,9 +70,9 @@ private:
 	// static SpellData getSummonCreatureSpellData();
 
 	static SpellData getLightSpellData();
+	// static SpellData getHolyFireSpellData();
 	static SpellData getDivineShieldSpellData();
-	// static SpellData getWrathOfTheGodsSpellData();
-	// static SpellData getJusticeSpellData();
+	static SpellData getLeapOfFaithSpellData();
 	static SpellData getAureolaSpellData();
 };
 

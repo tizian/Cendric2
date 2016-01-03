@@ -37,6 +37,8 @@ public:
 	virtual void addDamageOverTime(const DamageOverTimeData& data);
 	// gravity flip (used for anti gravity spell)
 	void flipGravity();
+	// change gravity (used for leap of faith spell)
+	void setGravityScale(float scale);
 
 	SpellManager* getSpellManager() const;
 	const AttributeData* getAttributes() const;
@@ -47,9 +49,11 @@ public:
 	GameObjectState getState() const;
 
 protected:
-
 	virtual float getConfiguredWalkAcceleration() const;
 	virtual float getConfiguredGravityAcceleration() const;
+	virtual float getGravityAcceleration() const;
+	// used for gliding
+	float m_maxVelocityYDownScale = 1.f;
 	virtual sf::Time getConfiguredFightAnimationTime() const = 0;
 	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
 	virtual float getConfiguredDampingGroundPersS() const;
@@ -64,6 +68,7 @@ protected:
 	bool m_isGrounded = false;
 	bool m_isDead = false;
 	bool m_isFlippedGravity = false;
+	float m_gravity;
 	Level* m_level;
 
 	SpellManager* m_spellManager;

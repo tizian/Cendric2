@@ -70,7 +70,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Heal','Heal',
 INSERT INTO text (text_id, english, german, swiss_german) values ('Health','Health','Lebensenergie','Lebe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('HealthRegeneration','Health Regeneration','Lebensregeneration','Lebensregeneration');
 INSERT INTO text (text_id, english, german, swiss_german) values ('HealthRegenerationPerS','Health Regeneration / s','Lebensregeneration / s','Lebensregeneration / s');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Hello','Hello','Hallo','Hoi');
+INSERT INTO text (text_id, english, german, swiss_german) values ('HolyPower','Holy Power','Heilige Kraft','Heiligi Chraft');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceDamage','Ice Damage','Eisschaden','Iisschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceResistance','Ice Resistance','Eisresistenz','Iisresistenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Interact','Interact','Interagieren','Interagiere');

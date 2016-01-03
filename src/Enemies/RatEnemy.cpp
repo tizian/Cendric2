@@ -5,7 +5,7 @@ RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, ma
 	load();
 	loadAttributes();
 	loadSpells();
-	m_jumpHeight = getConfiguredMaxVelocityY() * getConfiguredMaxVelocityY() / (2 * getConfiguredGravityAcceleration());
+	m_jumpHeight = getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration());
 }
 
 void RatEnemy::loadAttributes() {
@@ -106,8 +106,12 @@ sf::Time RatEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(4 * 80);
 }
 
-float RatEnemy::getConfiguredMaxVelocityY() const {
+float RatEnemy::getConfiguredMaxVelocityYUp() const {
 	return 400.0f;
+}
+
+float RatEnemy::getConfiguredMaxVelocityYDown() const {
+	return m_maxVelocityYDownScale * 400.0f;
 }
 
 float RatEnemy::getConfiguredMaxVelocityX() const {

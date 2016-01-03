@@ -150,7 +150,11 @@ void MapMainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf:
 	}
 }
 
-float MapMainCharacter::getConfiguredMaxVelocityY() const {
+float MapMainCharacter::getConfiguredMaxVelocityYUp() const {
+	return 200.0f;
+}
+
+float MapMainCharacter::getConfiguredMaxVelocityYDown() const {
 	return 200.0f;
 }
 

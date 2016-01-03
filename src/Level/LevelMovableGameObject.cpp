@@ -6,6 +6,7 @@ LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject
 	m_level = level;
 	m_foodAttributes.first = sf::Time::Zero;
 	m_foodAttributes.second = ZERO_ATTRIBUTES;
+	m_gravity = getConfiguredGravityAcceleration();
 }
 
 LevelMovableGameObject::~LevelMovableGameObject() {
@@ -14,7 +15,7 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	if (m_state == GameObjectState::Dead) {
-		setAcceleration(sf::Vector2f(0, getConfiguredGravityAcceleration()));
+		setAcceleration(sf::Vector2f(0, m_gravity));
 	}
 	else {
 		handleMovementInput();
@@ -256,6 +257,11 @@ void LevelMovableGameObject::flipGravity() {
 	m_animatedSprite.setFlippedY(m_isFlippedGravity);
 }
 
+void LevelMovableGameObject::setGravityScale(float scale) {
+	m_gravity = scale * getConfiguredGravityAcceleration();
+	m_maxVelocityYDownScale = scale;
+}
+
 GameObjectState LevelMovableGameObject::getState() const {
 	return m_state;
 }
@@ -265,7 +271,11 @@ float LevelMovableGameObject::getConfiguredWalkAcceleration() const {
 }
 
 float LevelMovableGameObject::getConfiguredGravityAcceleration() const {
-	return 1000.0f;
+	return 1000.f;
+}
+
+float LevelMovableGameObject::getGravityAcceleration() const {
+	return m_gravity;
 }
 
 float LevelMovableGameObject::getConfiguredDampingGroundPersS() const {

@@ -1,7 +1,7 @@
 # time played, in seconds
-time.played:535
+time.played:553
 savegame.name:WALD
-savegame.date:1451842551
+savegame.date:1451851391
 level.id:res/level/ratcave/ratcave.tmx
 level.position:1160.000000,700.000000
 is.in.level:0
@@ -34,6 +34,7 @@ equipped.spellslot:2,1,3,5,1,3,3
 equipped.spellslot:17,0,0,0,0,2,3
 equipped.spellslot:12,6,3,0,0,7,3
 equipped.spellslot:10,1,3
+equipped.spellslot:20,7,3
 # equipment:
 equipped.back:eq_back_necrot3
 equipped.body:eq_body_necrot3
@@ -69,7 +70,7 @@ merchant.state:guard,5,1.500000,fo_caveberry,1,fo_cheese,10,fo_healingherb,1,fo_
 spell.learned:1,2,3,4,5,6
 spell.learned:2,7,9,10,11
 spell.learned:3,12,13
-spell.learned:4,17,19,21
+spell.learned:4,17,19,20,21
 # modifiers learned:
 modifier.learned:1,3
 modifier.learned:2,3

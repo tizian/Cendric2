@@ -24,7 +24,8 @@ public:
 	void setCharacterCore(CharacterCore* core);
 
 
-	float getConfiguredMaxVelocityY() const override;
+	float getConfiguredMaxVelocityYUp() const override;
+	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityX() const override;
 	GameObjectType getConfiguredType() const override;
 

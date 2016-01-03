@@ -17,7 +17,8 @@ public:
 	float getApproachingDistance() const override;
 	float getAggroRange() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
-	float getConfiguredMaxVelocityY() const override;
+	float getConfiguredMaxVelocityYUp() const override;
+	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityX() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 	float getDistanceToAbyss() const override;

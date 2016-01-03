@@ -6,7 +6,7 @@
 // A movable game object with physics.  Abstract class
 class MovableGameObject : virtual public AnimatedGameObject {
 public:
-	MovableGameObject() : AnimatedGameObject() {}
+	MovableGameObject();
 	virtual ~MovableGameObject() {}
 
 	void update(const sf::Time& frameTime) override;
@@ -20,13 +20,14 @@ public:
 	void setVelocity(const sf::Vector2f& velocity);
 	void setVelocityX(float velocityX);
 	void setVelocityY(float velocityY);
-
-	virtual float getConfiguredMaxVelocityY() const;
-	virtual float getConfiguredMaxVelocityX() const;
+	
 	const sf::Vector2f& getVelocity() const;
 	const sf::Vector2f& getAcceleration() const;
 
-private:
+protected:
+	virtual float getConfiguredMaxVelocityYUp() const;
+	virtual float getConfiguredMaxVelocityYDown() const;
+	virtual float getConfiguredMaxVelocityX() const;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_acceleration;
 	void boundVelocity(sf::Vector2f& vel) const;

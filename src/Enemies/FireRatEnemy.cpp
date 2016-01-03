@@ -5,7 +5,7 @@ FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(l
 	load();
 	loadAttributes();
 	loadSpells();
-	m_jumpHeight = getConfiguredMaxVelocityY() * getConfiguredMaxVelocityY() / (2 * getConfiguredGravityAcceleration());
+	m_jumpHeight = getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration());
 }
 
 void FireRatEnemy::loadAttributes() {
@@ -101,13 +101,18 @@ void FireRatEnemy::load() {
 	playCurrentAnimation(true);
 }
 
-float FireRatEnemy::getConfiguredMaxVelocityY() const {
+float FireRatEnemy::getConfiguredMaxVelocityYUp() const {
 	return 400.0f;
+}
+
+float FireRatEnemy::getConfiguredMaxVelocityYDown() const {
+	return m_maxVelocityYDownScale * 400.0f;
 }
 
 float FireRatEnemy::getConfiguredMaxVelocityX() const {
 	return 50.0f;
 }
+
 
 sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(4 * 80);

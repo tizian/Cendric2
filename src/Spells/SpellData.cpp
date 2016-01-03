@@ -15,6 +15,7 @@
 #include "SpellCreators/TelekinesisSpellCreator.h"
 #include "SpellCreators/InvisibilitySpellCreator.h"
 #include "SpellCreators/FlashSpellCreator.h"
+#include "SpellCreators/LeapOfFaithSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -89,6 +90,10 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Range);
 		types.push_back(SpellModifierType::Damage);
 		break;
+	case SpellID::LeapOfFaith:
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Strength);
+		break;
 	default:
 		break;
 	}
@@ -143,6 +148,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::Flash:
 		creator = new FlashSpellCreator(data, owner);
 		break;
+	case SpellID::LeapOfFaith:
+		creator = new LeapOfFaithSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -184,6 +192,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getInvisibilitySpellData();
 	case SpellID::Flash:
 		return getFlashSpellData();
+	case SpellID::LeapOfFaith:
+		return getLeapOfFaithSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -451,6 +461,22 @@ SpellData SpellData::getLightSpellData() {
 	light.rangeModifierAddition = 100.f;
 
 	return light;
+}
+
+SpellData SpellData::getLeapOfFaithSpellData() {
+	SpellData leapOfFaith = EMPTY_SPELL;
+	leapOfFaith.id = SpellID::LeapOfFaith;
+	leapOfFaith.spellType = SpellType::Divine;
+	leapOfFaith.iconTextureRect = sf::IntRect(150, 150, 50, 50);
+
+	leapOfFaith.cooldown = sf::seconds(30);
+	leapOfFaith.boundingBox = sf::FloatRect(0, 0, 80, 120);
+	leapOfFaith.duration = sf::seconds(10);
+	leapOfFaith.activeDuration = leapOfFaith.duration;
+
+	leapOfFaith.durationModifierAddition = sf::seconds(10);
+
+	return leapOfFaith;
 }
 
 SpellData SpellData::getUnlockSpellData() {

@@ -29,7 +29,8 @@ public:
 
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
-	float getConfiguredMaxVelocityY() const override;
+	float getConfiguredMaxVelocityYUp() const override;
+	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityX() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
 	GameObjectType getConfiguredType() const override;
