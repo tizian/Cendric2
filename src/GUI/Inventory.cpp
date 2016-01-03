@@ -155,7 +155,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
 
-	(*tab).at(bean.item_id) = (InventorySlot(Item(itemID), m_core->getData().items.at(itemID)));
+	(*tab).insert({ bean.item_id, InventorySlot(Item(itemID), m_core->getData().items.at(itemID)) });
 
 	calculateSlotPositions(*tab);
 }
