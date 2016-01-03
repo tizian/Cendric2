@@ -76,8 +76,6 @@ public:
 			return "Twilight";
 		case SpellType::Necromancy:
 			return "Necromancy";
-		case SpellType::Illusion:
-			return "Illusion";
 		}
 	}
 
@@ -95,8 +93,6 @@ public:
 			return "SpellChop";
 		case SpellID::DivineShield:
 			return "SpellDivineShield";
-		case SpellID::DominateMind:
-			return "SpellDominateMind";
 		case SpellID::Fear:
 			return "SpellFear";
 		case SpellID::FireBall:
@@ -111,20 +107,14 @@ public:
 			return "SpellIcyAmbush";
 		case SpellID::Invisibility:
 			return "SpellInvisibility";
-		case SpellID::Justice:
-			return "SpellJustice";
+		case SpellID::LeapOfFaith:
+			return "SpellLeapOfFaith";
 		case SpellID::Leech:
 			return "SpellLeech";
 		case SpellID::Light:
 			return "SpellLight";
-		case SpellID::MindBurn:
-			return "SpellMindBurn";
-		case SpellID::MirrorImage:
-			return "SpellMirrorImage";
 		case SpellID::RaiseTheDead:
 			return "SpellRaiseTheDead";
-		case SpellID::Shackle:
-			return "SpellShackle";
 		case SpellID::ShadowTrap:
 			return "SpellShadowTrap";
 		case SpellID::SummonCreature:
@@ -135,6 +125,8 @@ public:
 			return "SpellUnlock";
 		case SpellID::WindGust:
 			return "SpellWindGust";
+		case SpellID::HolyFire:
+			return "SpellHolyFire";
 		}
 	}
 

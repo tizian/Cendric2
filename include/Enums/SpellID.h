@@ -3,7 +3,7 @@
 enum class SpellID {
 	VOID,
 
-	// not really a spell, each and every weapon has it and its attributes are dependant on
+	// not really a spell, each and every weapon has it and its attributes are dependent on
 	// the weapon and they not modifiable otherwise.
 	Chop,
 
@@ -30,17 +30,10 @@ enum class SpellID {
 
 	// Divine
 	Light,
-	WrathOfTheGods,
+	HolyFire,
 	DivineShield,
-	Justice,
+	LeapOfFaith,
 	Aureola,
-
-	// Illusion
-	Shackle,
-	MindBurn,
-	WordOfSilence,
-	DominateMind,
-	MirrorImage,
 
 	MAX
 };

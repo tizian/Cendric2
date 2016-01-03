@@ -14,7 +14,6 @@
 #include "SpellCreators/LightSpellCreator.h"
 #include "SpellCreators/TelekinesisSpellCreator.h"
 #include "SpellCreators/InvisibilitySpellCreator.h"
-#include "SpellCreators/ShackleSpellCreator.h"
 #include "SpellCreators/FlashSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
