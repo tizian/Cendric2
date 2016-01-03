@@ -64,6 +64,9 @@ void SpellSlot::initSpellSlot() {
 		m_iconTexture = g_resourceManager->getTexture(ResourceID::Texture_spellicons);
 	}
 
+	m_cooldownRect.setSize(ICON_SIZE, ICON_SIZE);
+	m_cooldownRect.setFillColor(sf::Color(200, 200, 200, 128));
+
 	initSlot();
 }
 
@@ -71,10 +74,17 @@ void SpellSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
 	sf::Vector2f positionOffset(SpellSlot::SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, SpellSlot::SIZE - 10.f);
 	m_inputKey.setPosition(pos + positionOffset);
+	m_cooldownRect.setPosition(pos.x + ICON_OFFSET, pos.y + ICON_OFFSET);
 }
 
 void SpellSlot::render(sf::RenderTarget& renderTarget) {
-	Slot::render(renderTarget);
+	renderTarget.draw(m_backgroundRect);
+	renderTarget.draw(m_iconRect);
+	renderTarget.draw(m_overlayRect);
+	if (m_animating) {
+		renderTarget.draw(m_cooldownRect);
+	}
+	renderTarget.draw(m_borderRect);
 	renderTarget.draw(m_inputKey);
 }
 
@@ -92,16 +102,17 @@ void SpellSlot::update(const sf::Time& frameTime) {
 	if (m_animating) {
 		float t = m_animationTime.asSeconds() / m_cooldown.asSeconds();
 		float angle = lerp(t, 0.f, 360.f);
+		m_cooldownRect.setAngle(angle);
 
 		m_animationTime += frameTime;
 
 		if (m_animationTime.asSeconds() > m_cooldown.asSeconds()) {
 			if (m_animationTime.asSeconds() < m_cooldown.asSeconds() + flashTime) {
-
+				m_cooldownRect.setAngle(0.f);
 			}
 			else {
 				m_animationTime = sf::Time::Zero;
-
+				m_cooldownRect.setAngle(0.f);
 				m_animating = false;
 			}
 

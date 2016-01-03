@@ -4,7 +4,7 @@
 #include "Slot.h"
 
 #include "GUI/BitmapText.h"
-#include "GUI/CircleSector.h"
+#include "GUI/CooldownRectangleShape.h"
 #include "Structs/SpellData.h"
 #include "ResourceManager.h"
 #include "Enums/EnumNames.h"
@@ -52,6 +52,8 @@ private:
 	SpellType m_spellType;
 	SpellID m_spellID;
 	Key m_inputKeyID;
+
+	CooldownRectangleShape m_cooldownRect;
 
 	BitmapText m_inputKey;
 
