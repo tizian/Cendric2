@@ -47,7 +47,8 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 
 void QuickSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
-	m_keyText.setPosition(pos);
+	sf::Vector2f positionOffset(QuickSlot::SIZE / 2.f - m_keyText.getLocalBounds().width / 2.f, QuickSlot::SIZE - QuickSlot::ICON_OFFSET / 2.f);
+	m_keyText.setPosition(pos + positionOffset);
 	m_amountText.setPosition(sf::Vector2f(
 		pos.x + SIZE - m_amountText.getLocalBounds().width,
 		pos.y + SIZE - m_amountText.getLocalBounds().height));
@@ -108,8 +109,8 @@ void QuickSlot::reload() {
 		m_keyText.setColor(CENDRIC_COLOR_WHITE);
 
 		m_amountText.setPosition(sf::Vector2f(
-			getPosition().x + SIZE - m_amountText.getLocalBounds().width,
-			getPosition().y + SIZE - m_amountText.getLocalBounds().height));
+			getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().width,
+			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().height));
 	}
 }
 

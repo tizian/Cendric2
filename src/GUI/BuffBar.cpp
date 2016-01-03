@@ -1,8 +1,10 @@
 #include "GUI/BuffBar.h"
+#include "Level/LevelInterface.h"
 
 const int BuffBar::MAX_SHOWABLE_BUFFSLOTS = 5;
 
-BuffBar::BuffBar() {
+BuffBar::BuffBar(LevelInterface* _interface) {
+	m_interface = _interface;
 }
 
 BuffBar::~BuffBar() {
@@ -29,6 +31,7 @@ void BuffBar::addSlot(BuffType type, const sf::IntRect& textureLocation, const s
 	else {
 		m_buffSlots.push_back(new BuffSlot(type, textureLocation, duration, id));
 	}
+	m_notifyInterface = true;
 	calculateSlotPositions();
 }
 
@@ -49,11 +52,16 @@ void BuffBar::render(sf::RenderTarget& target) {
 }
 
 void BuffBar::update(const sf::Time& frameTime) {
+	if (m_notifyInterface) {
+		m_interface->reloadCharacterInfo();
+		m_notifyInterface = false;
+	}
 	if (m_foodBuffSlot != nullptr) {
 		m_foodBuffSlot->update(frameTime);
 		if (m_foodBuffSlot->isDisposed()) {
 			delete m_foodBuffSlot;
 			m_foodBuffSlot = nullptr;
+			m_notifyInterface = true;
 			calculateSlotPositions();
 		}
 	}
@@ -63,6 +71,7 @@ void BuffBar::update(const sf::Time& frameTime) {
 		if ((*it)->isDisposed()) {
 			delete (*it);
 			it = m_buffSlots.erase(it);
+			m_notifyInterface = true;
 			calculateSlotPositions();
 		}
 		else {

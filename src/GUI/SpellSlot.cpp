@@ -81,7 +81,8 @@ void SpellSlot::initSpellSlot() {
 
 void SpellSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
-	m_inputKey.setPosition(pos);
+	sf::Vector2f positionOffset(SpellSlot::SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, SpellSlot::SIZE - 10.f);
+	m_inputKey.setPosition(pos + positionOffset);
 }
 
 void SpellSlot::render(sf::RenderTarget& renderTarget) {
@@ -121,4 +122,16 @@ void SpellSlot::update(const sf::Time& frameTime) {
 	m_isClicked = false;
 	m_isRightClicked = false;
 	GameObject::update(frameTime);
+}
+
+void SpellSlot::select() {
+	if (m_isSelected || m_isEmpty) return;
+	Slot::select();
+	m_inputKey.setColor(sf::Color::Red);
+}
+
+void SpellSlot::deselect() {
+	if (!m_isSelected || m_isEmpty) return;
+	Slot::deselect();
+	m_inputKey.setColor(sf::Color::White);
 }

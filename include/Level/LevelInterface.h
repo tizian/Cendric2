@@ -32,6 +32,8 @@ public:
 	void highlightQuickslots(bool highlight);
 	// reloads inventory and quickslot bar
 	void reloadInventory(const std::string& changeditemID) override;
+	// reloads the character info
+	void reloadCharacterInfo();
 
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;

@@ -14,8 +14,8 @@ public:
 
 	void setPosition(const sf::Vector2f& pos) override;
 
-	void select();
-	void deselect();
+	virtual void select();
+	virtual void deselect();
 
 	void activate();
 	void deactivate();

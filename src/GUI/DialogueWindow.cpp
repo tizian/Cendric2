@@ -88,7 +88,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_merchantInterface = new MerchantInterface(dynamic_cast<GameScreen*>(m_screen), m_npcID);
 	setPosition(sf::Vector2f(getPosition().x, getPosition().y + BOX.height / 2.f));
 	m_speakerSprite.setPosition(sf::Vector2f(getPosition().x, WINDOW_HEIGHT - 150.f));
-	setHeight(BOX.height / 2.f);
+	setHeight(BOX.height / 2.f); 
 }
 
 void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices) {

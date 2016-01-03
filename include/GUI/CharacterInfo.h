@@ -18,12 +18,12 @@ public:
 	void render(sf::RenderTarget& target) const;
 	bool isVisible() const;
 
+	// reloads the character info text, depending on the main char
+	void reload();
+
 private:
 	const AttributeData* m_attributes;
 	bool m_isVisible = false;
-
-	// reloads the character info text, depending on the main char
-	void reload();
 
 	Window* m_window = nullptr;
 	BitmapText m_title;

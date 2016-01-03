@@ -11,7 +11,7 @@ m_character(character) {
 	m_quickSlotBar = new QuickSlotBar(this);
 	m_spellbook = new Spellbook(m_core, false);
 	m_questLog = new QuestLog(m_core);
-	m_buffBar = new BuffBar();
+	m_buffBar = new BuffBar(this);
 }
 
 LevelInterface::~LevelInterface() {
@@ -26,12 +26,14 @@ LevelInterface::~LevelInterface() {
 }
 
 void LevelInterface::render(sf::RenderTarget& target) {
-	GameInterface::render(target);
-
-	m_healthBar->render(target);
+	target.setView(target.getDefaultView());
+	
 	m_buffBar->render(target);
+	m_healthBar->render(target);
 	m_spellSelection->render(target);
 	m_quickSlotBar->render(target);
+
+	GameInterface::render(target);
 }
 
 void LevelInterface::update(const sf::Time& frameTime) {
@@ -76,6 +78,10 @@ void LevelInterface::reloadInventory(const std::string& changedItemID) {
 	m_quickSlotBar->reload();
 }
 
+void LevelInterface::reloadCharacterInfo() {
+	m_characterInfo->reload();
+}
+ 
 void LevelInterface::setSpellManager(SpellManager* spellManager) {
 	// use this spell manager for the interface bar.
 	delete m_spellSelection;

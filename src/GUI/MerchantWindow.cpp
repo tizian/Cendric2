@@ -92,7 +92,7 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 	}
 
 	m_cancelButton->update(frameTime);
-	if (m_cancelButton->isClicked()) {
+	if (g_inputController->isKeyJustPressed(Key::Escape) || m_cancelButton->isClicked()) {
 		m_interface->completeTrade();
 	}
 }

@@ -26,6 +26,9 @@ public:
 
 	void playAnimation(const sf::Time& cooldown);
 
+	void select() override;
+	void deselect() override;
+
 	inline void setNr(int nr) { m_nr = nr; }
 	
 	inline SpellType getSpellType() const { return m_spellType; }

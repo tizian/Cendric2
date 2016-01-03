@@ -4,10 +4,12 @@
 #include "GUI/BuffSlot.h"
 #include "Enums/SpellID.h"
 
+class LevelInterface;
+
 // the buff bar in a level
 class BuffBar {
 public:
-	BuffBar();
+	BuffBar(LevelInterface* _interface);
 	~BuffBar();
 
 	void show();
@@ -38,4 +40,7 @@ private:
 	const sf::Vector2f BUFFBAR_OFFSET = sf::Vector2f(220.f, 10.f);
 	// x space between two slots
 	const float BUFFSLOT_SPACING = 20.f;
+
+	LevelInterface* m_interface = nullptr;
+	bool m_notifyInterface = false;
 };
