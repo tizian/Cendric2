@@ -1,0 +1,80 @@
+# time played, in seconds
+time.played:535
+savegame.name:WALD
+savegame.date:1451842551
+level.id:res/level/ratcave/ratcave.tmx
+level.position:1160.000000,700.000000
+is.in.level:0
+map.id:res/map/firstmap/firstmap.tmx
+map.position:2445.876221,961.178162
+# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
+# damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
+# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
+attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
+gold:42
+# items in inventory:
+item.id:eq_head_necrot3,1
+item.id:eq_purpleback,1
+item.id:eq_rafishat,1
+item.id:eq_wizardhatblue,1
+item.id:eq_wizardhatgrey,1
+item.id:fo_bread,2
+item.id:fo_caveberry,2
+item.id:fo_cheese,5
+item.id:fo_glowingshroom,2
+item.id:fo_healingherb,2
+item.id:fo_lesserhealingpotion,3
+item.id:fo_rawmeat,2
+item.id:fo_water,1
+item.id:mi_goldengoblet,1
+item.id:we_icestaff,1
+item.id:we_rustysword,1
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+equipped.spellslot:2,1,3,5,1,3,3
+equipped.spellslot:17,0,0,0,0,2,3
+equipped.spellslot:12,6,3,0,0,7,3
+equipped.spellslot:10,1,3
+# equipment:
+equipped.back:eq_back_necrot3
+equipped.body:eq_body_necrot3
+equipped.head:eq_head_divinet3
+equipped.neck:
+equipped.ring1:
+equipped.ring2:
+equipped.weapon:we_oathbreaker
+# quickslot assignments:
+quickslot:1,
+quickslot:2,
+# enemies killed in level:
+enemies.killed:res/level/ratcave/ratcave.tmx,3,4,5,6,7
+enemies.killed:res/level/testleverlevel/testleverlevel.tmx
+# enemies looted in level:
+enemies.looted:res/level/ratcave/ratcave.tmx,3,4,5,6,7
+enemies.looted:res/level/testleverlevel/testleverlevel.tmx
+# items looted in level:
+items.looted:res/level/ratcave/ratcave.tmx,738,1301,1302,1308,1503,1560,1720,1758,1778,1792,1794
+items.looted:res/level/testleverlevel/testleverlevel.tmx
+# chests looted in level:
+# quest states:
+quest.state:a_cave_of_rats,1
+# quest targets killed:
+quest.progress.target:a_cave_of_rats,rat,4
+# quest conditions fulfilled:
+quest.progress.condition:a_cave_of_rats,test
+# npc states:
+npc.state:Guard,2
+# merchand states:
+merchant.state:guard,5,1.500000,fo_caveberry,1,fo_cheese,10,fo_healingherb,1,fo_water,10,mi_goldengoblet,2
+# spells learned:
+spell.learned:1,2,3,4,5,6
+spell.learned:2,7,9,10,11
+spell.learned:3,12,13
+spell.learned:4,17,19,21
+# modifiers learned:
+modifier.learned:1,3
+modifier.learned:2,3
+modifier.learned:3,3
+modifier.learned:4,3
+modifier.learned:5,3
+modifier.learned:6,3
+modifier.learned:7,3
