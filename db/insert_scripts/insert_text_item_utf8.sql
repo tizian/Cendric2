@@ -44,8 +44,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item_desc', 'Golden & shiny','Golden & glänzig','Goldig & glänzig');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item', 'Lesser Healing Potion','Geringer Heiltrank','Chliine Heiltrank');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item_desc', '...','...','...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_theonering', 'item', 'The One Ring','Der Eine Ring','De Ring');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_theonering', 'item_desc', 'One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them...','Ein Ring, sie zu knechten, sie alle zu finden, ins Dunkel zu treiben und ewig zu binden..','En Ring zum si z''knechte, zum si all finde, si alli id Dunkelheit z''triibe und uf ewig z''binde...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item', 'Raw Meat','Rohes Fleisch','Rohs Fleisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item_desc', 'Would taste better if it was roasted on a fire.','Würde gebraten noch besser schmecken.','Wär chli feiner wenmes wür brötle.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item', 'Oathbreaker','Eidbrecher','Eidbrecher');

@@ -69,7 +69,6 @@ void SpellSlot::initSpellSlot() {
 
 	m_gemsRect.setSize(sf::Vector2f(SIZE, SIZE));
 	m_gemsRect.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_gems));
-	cout << (int)m_spellType << endl;
 	switch (m_spellType) {
 	case SpellType::Elemental:
 		m_gemsRect.setFillColor(CENDRIC_COLOR_ELEMENTAL);

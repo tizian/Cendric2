@@ -17,7 +17,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Consumables',
 INSERT INTO text (text_id, english, german, swiss_german) values ('Cooldown','Cooldown','Abklingzeit','Abklingziit');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CooldownReduction','Cooldown Reduction','Abklingzeitverringerung','Abklingziitverringering');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Count','Count','Anzahl','Aazahl');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Credits','Credits','Mitwirkende','Erschaffer');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Credits','Credits','Mitwirkende','Credits');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CreditsText','Project Lead:
    Isa
 Lead Effects and Simulation:

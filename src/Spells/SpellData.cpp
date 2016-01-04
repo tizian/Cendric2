@@ -368,11 +368,12 @@ SpellData SpellData::getWindGustSpellData() {
 
 	windGust.iconTextureRect = sf::IntRect(150, 0, 50, 50);
 	windGust.cooldown = sf::seconds(3);
-	windGust.boundingBox = sf::FloatRect(0, 0, 60, 40);
+	windGust.range = 50.f;
+	windGust.boundingBox = sf::FloatRect(0, 0, windGust.range, 40);
 	windGust.duration = sf::seconds(1);
 	windGust.activeDuration = windGust.duration;
 
-	windGust.rangeModifierAddition = 20.f;
+	windGust.rangeModifierAddition = 50.f;
 	windGust.durationModifierAddition = sf::seconds(1);
 
 	return windGust;

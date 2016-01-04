@@ -52,8 +52,3 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id) values ('eq_ringoflesserhealth');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_ringoflesserhealth', -14, -40, 5, 5);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_ringoflesserhealth', 1, 200, 0, 50, 50);
-
--- The one ring
-
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_theonering', 'eq_ring', 200, 100, 100);
-INSERT INTO item_attribute (item_id, haste, critical, health_regeneration, res_fire, res_light, res_physical) values ('eq_theonering', 20, 20, -2, 5, 5, 5);

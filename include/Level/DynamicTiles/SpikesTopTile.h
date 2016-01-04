@@ -13,6 +13,6 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 private:
-	const int DMG_PER_S = 300;
+	const int DMG_PER_S = 50;
 	sf::Time m_damageCooldown = sf::Time::Zero;
 };

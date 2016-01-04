@@ -33,6 +33,11 @@ void SpikesTopTile::update(const sf::Time& frameTime) {
 void SpikesTopTile::onHit(LevelMovableGameObject* mob) {
 	if (m_damageCooldown == sf::Time::Zero) {
 		mob->addDamage(DMG_PER_S, DamageType::Physical);
+		DamageOverTimeData data;
+		data.damageType = DamageType::Physical;
+		data.damage = static_cast<int>(DMG_PER_S / 3.f);
+		data.duration = sf::seconds(2);
+		mob->addDamageOverTime(data);
 		m_damageCooldown = sf::seconds(1);
 	}
 }

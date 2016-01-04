@@ -2,9 +2,9 @@
 #include "Spell.h"
 
 void SpikesBottomTile::init() {
-	setPositionOffset(sf::Vector2f(0.f, -25.f));
-	setSpriteOffset(sf::Vector2f(0.f, -25.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 25.f));
+	setPositionOffset(sf::Vector2f(-5.f, -25.f));
+	setSpriteOffset(sf::Vector2f(-5.f, -25.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 25.f));
 }
 
 void SpikesBottomTile::load(int skinNr) {
@@ -33,6 +33,11 @@ void SpikesBottomTile::update(const sf::Time& frameTime) {
 void SpikesBottomTile::onHit(LevelMovableGameObject* mob) {
 	if (m_damageCooldown == sf::Time::Zero) {
 		mob->addDamage(DMG_PER_S, DamageType::Physical);
+		DamageOverTimeData data;
+		data.damageType = DamageType::Physical;
+		data.damage = static_cast<int>(DMG_PER_S / 3.f);
+		data.duration = sf::seconds(2);
+		mob->addDamageOverTime(data);
 		m_damageCooldown = sf::seconds(1);
 	}
 }

@@ -989,8 +989,8 @@
   <object id="32" x="2401.5" y="897.5" width="47.5" height="32.5">
    <properties>
     <property name="level id" value="res/level/forest/forest.tmx"/>
-    <property name="x" value="650"/>
-    <property name="y" value="3250"/>
+    <property name="x" value="2175"/>
+    <property name="y" value="3175"/>
    </properties>
   </object>
   <object id="33" x="1401.25" y="799.75" width="47.5" height="32.5">
