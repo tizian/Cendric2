@@ -17,10 +17,10 @@ class SlotClone;
 
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
-// is only clickable when clickable is true
+// is only modifiable when modifiable is true
 class WeaponWindow {
 public:
-	WeaponWindow(CharacterCore* core, bool clickable);
+	WeaponWindow(CharacterCore* core, bool modifiable);
 	~WeaponWindow();
 
 	void show();
@@ -50,7 +50,7 @@ private:
 	void reloadSpellDesc();
 	bool m_isVisible = false;
 	bool m_requireReload = false;
-	bool m_isClickable;
+	bool m_isModifiable;
 
 	void init();
 	void clearAllSlots();

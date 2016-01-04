@@ -18,7 +18,7 @@ class SlotClone;
 // it is only clickable when in a map.
 class Spellbook {
 public:
-	Spellbook(CharacterCore* core, bool clickable);
+	Spellbook(CharacterCore* core, bool modifiable);
 	~Spellbook();
 
 	void show();
@@ -39,7 +39,7 @@ public:
 private:
 	CharacterCore* m_core;
 	bool m_isVisible = false;
-	bool m_isClickable;
+	bool m_isModifiable;
 
 	void init();
 	void clearAllSlots();

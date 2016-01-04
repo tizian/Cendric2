@@ -5,12 +5,12 @@
 
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
-float Spellbook::SPELL_OFFSET = 110.f;
+float Spellbook::SPELL_OFFSET = 105.f;
 
-Spellbook::Spellbook(CharacterCore* core, bool clickable) {
+Spellbook::Spellbook(CharacterCore* core, bool modifiable) {
 	m_core = core;
-	m_isClickable = clickable;
-
+	m_isModifiable = modifiable;
+	 
 	init();
 }
 
@@ -69,7 +69,7 @@ void Spellbook::init() {
 	selectTab(SpellType::VOID);
 
 	delete m_weaponWindow;
-	m_weaponWindow = new WeaponWindow(m_core, m_isClickable);
+	m_weaponWindow = new WeaponWindow(m_core, m_isModifiable);
 
 	reload();
 }
@@ -108,8 +108,6 @@ void Spellbook::update(const sf::Time& frameTime) {
 	// update weapon part
 	m_weaponWindow->update(frameTime);
 
-	if (!m_isClickable) return;
-
 	if (m_currentTab == SpellType::VOID) {
 		// handle gems
 		for (auto& it : m_modifierSlots) {
@@ -130,6 +128,8 @@ void Spellbook::update(const sf::Time& frameTime) {
 			}
 		}
 	}
+
+	if (!m_isModifiable) return;
 
 	handleDragAndDrop();
 }
@@ -334,7 +334,7 @@ void Spellbook::calculateModifierSlots() {
 
 void Spellbook::calculateSpellSlots() {
 	float yOffset = GUIConstants::TOP + SPELL_OFFSET;
-	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
+	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET / 2.f;
 
 	for (auto& it : m_core->getData().spellsLearned) {
 		for (auto& it2 : it.second) {
@@ -345,7 +345,7 @@ void Spellbook::calculateSpellSlots() {
 			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 			text.setColor(CENDRIC_COLOR_WHITE);
 			text.setString(g_textProvider->getText(EnumNames::getSpellIDName(it2)));
-			text.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset + SpellSlot::ICON_OFFSET));
+			text.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + MARGIN, yOffset + SpellSlot::ICON_OFFSET));
 
 			BitmapText textDesc;
 			textDesc.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -353,7 +353,7 @@ void Spellbook::calculateSpellSlots() {
 			textDesc.setString(g_textProvider->getCroppedText(
 				EnumNames::getSpellIDName(it2) + "Desc", GUIConstants::CHARACTER_SIZE_S,
 				static_cast<int>(WIDTH - (SpellSlot::SIZE + 4 * MARGIN))));
-			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + 2 * MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f + SpellSlot::ICON_OFFSET));
+			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f + SpellSlot::ICON_OFFSET));
 
 			std::pair<BitmapText, BitmapText> texts = std::pair<BitmapText, BitmapText>(text, textDesc);
 			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>(slot, texts));

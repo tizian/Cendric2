@@ -2,9 +2,9 @@
 #include "Map/MapInterface.h"
 #include "GUI/SlotClone.h"
 
-WeaponWindow::WeaponWindow(CharacterCore* core, bool clickable) {
+WeaponWindow::WeaponWindow(CharacterCore* core, bool modifiable) {
 	m_core = core;
-	m_isClickable = clickable;
+	m_isModifiable = modifiable;
 
 	init();
 }
@@ -31,7 +31,7 @@ void WeaponWindow::reload() {
 
 	if (m_weapon == nullptr) return;
 
-	float xOffset = LEFT + GUIConstants::TEXT_OFFSET;
+	float xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f;
 	float yOffset = TOP + Spellbook::SPELL_OFFSET;
 	int slotNr = 0;
 	for (auto& it : m_weapon->getWeaponSlots()) {
@@ -59,7 +59,7 @@ void WeaponWindow::reload() {
 		}
 
 		yOffset += SpellSlot::SIZE + MARGIN;
-		xOffset = LEFT + GUIConstants::TEXT_OFFSET;
+		xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f;
 		slotNr++;
 		m_weaponSlots.push_back(std::pair<SpellSlot, std::vector<ModifierSlot>>({ spellSlot, modifiers }));
 	} 
@@ -121,15 +121,13 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 
 	if (m_requireReload) reload();
 
-	if (!m_isClickable) return;
-
 	for (auto& it : m_weaponSlots) {
 		it.first.update(frameTime);
 		if (it.first.isClicked()) {
 			selectSpellSlot(&it.first);
 			return;
 		}
-		else if (it.first.isRightClicked()) {
+		else if (m_isModifiable && it.first.isRightClicked()) {
 			m_core->removeSpell(it.first.getNr());
 			m_requireReload = true;
 			return;
@@ -140,13 +138,15 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 				selectModifierSlot(&it2);
 				return;
 			}
-			else if (it2.isRightClicked()) {
+			else if (m_isModifiable && it2.isRightClicked()) {
 				m_core->removeModifier(it2.getSpellSlotNr(), it2.getNr());
 				m_requireReload = true;
 				return;
 			}
 		}
 	}
+
+	if (!m_isModifiable) return;
 
 	handleDragAndDrop();
 }
