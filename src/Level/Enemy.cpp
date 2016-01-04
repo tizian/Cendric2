@@ -88,7 +88,7 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	// checks if the enemy falls would fall deeper than it can jump. 
-	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss())) {
+	if (isMovingX && !(m_enemyState == EnemyState::Fleeing) && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss())) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
