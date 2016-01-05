@@ -94,6 +94,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ManaRegenerat
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxFPS','Max. FPS','Max. FPS','Max. FPS');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxHealthPoints','Max. Health','Max. Lebensenergie','Max. Lebensenergie');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MessageNewSaveGame','Please enter the name for your new save game (at most 24 characters)','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen)','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Meta','Meta','Meta','Meta');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Miscellaneous','Miscellaneous','Plunder','Grümpel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveDown','Move down','Nach unten bewegen','Abelaufe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveLeft','Move left','Nach links laufen','Links laufe');

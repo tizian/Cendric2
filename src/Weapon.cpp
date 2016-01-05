@@ -145,5 +145,6 @@ bool Weapon::isSpellAllowed(int slotNr, SpellID id) const {
 	}
 	// check if this spell bean has the correct type for this. An empty spell can be added anywhere.
 	if (SpellID::VOID == id) return true;
-	return (m_weaponSlots.at(slotNr).spellSlot.spellType == SpellData::getSpellData(id).spellType);
+	SpellType type = m_weaponSlots.at(slotNr).spellSlot.spellType;
+	return (type == SpellType::Meta || type == SpellData::getSpellData(id).spellType);
 }

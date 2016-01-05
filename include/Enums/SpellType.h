@@ -7,6 +7,7 @@ enum class SpellType {
 	Twilight,
 	Necromancy,
 	Divine,
+	Meta,
 
 	MAX
 };

@@ -3,12 +3,12 @@
 #include "global.h"
 #include "Enums/SpellType.h"
 
-struct WeaponSpellSlotBean {
+struct WeaponSpellSlotData {
 	SpellType type;
 	int modifierCount;
 };
 
-const struct WeaponSpellSlotBean DEFAULT_SPELLSLOT =
+const struct WeaponSpellSlotData DEFAULT_SPELLSLOT =
 {
 	SpellType::VOID,
 	0

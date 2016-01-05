@@ -17,6 +17,19 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 	position.y = (mainCharPosition + offset).y;
 }
 
+void LevelEquipment::setPosition(const sf::Vector2f& position) {
+	AnimatedGameObject::setPosition(position);
+	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
+	if (m_lightObject != nullptr) {
+		sf::Vector2f lightPosition = mainCharPosition + m_lightObjectOffset;
+		if (!m_mainChar->getIsFacingRight()) {
+			lightPosition.x -= 2 * m_lightObjectOffset.x;
+		}
+		
+		m_lightObject->setPosition(lightPosition);
+	}
+}
+
 void LevelEquipment::update(const sf::Time& frameTime) {
 	AnimatedGameObject::update(frameTime);
 	GameObjectState newState = m_mainChar->getState();
@@ -53,6 +66,23 @@ void LevelEquipment::setTexturePath(const std::string& texturePath) {
 	m_texturePath = texturePath;
 }
 
+void LevelEquipment::setLightObject(LightObject* lightObject) {
+	m_lightObject = lightObject;
+	m_lightObjectOffset = m_lightObject->getCenter();
+}
+
 GameObjectType LevelEquipment::getConfiguredType() const {
 	return GameObjectType::_LevelEquipment;
+}
+
+void LevelEquipment::setDisposed() {
+	AnimatedGameObject::setDisposed();
+	if (m_lightObject != nullptr)
+		m_lightObject->setDisposed();
+}
+
+void LevelEquipment::setScreen(Screen* screen) {
+	AnimatedGameObject::setScreen(screen);
+	if (m_lightObject != nullptr)
+		screen->addObject(m_lightObject);
 }

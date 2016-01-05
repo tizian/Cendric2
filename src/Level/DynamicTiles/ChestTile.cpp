@@ -108,7 +108,8 @@ void ChestTile::onMouseOver() {
 void ChestTile::loot() {
 	// loot, create the correct items + gold in the players inventory.
 	m_mainChar->lootItems(m_lootableItems);
-	m_mainChar->addGold(m_lootableGold);
+	if (m_lootableGold > 0)
+		m_mainChar->addGold(m_lootableGold);
 	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
 	setDisposed();
 }

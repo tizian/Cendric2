@@ -11,7 +11,6 @@ void TorchTile::init() {
 }
 
 void TorchTile::load(int skinNr) {
-	m_isCollidable = false;
 	int textureHeight = 2 * m_tileSize.y;
 
 	Animation idleAnimation(sf::seconds(10.f));

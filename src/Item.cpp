@@ -15,6 +15,7 @@ Item::Item() {
 void Item::initBeans(const std::string& itemID) {
 	m_itemBean = g_databaseManager->getItemBean(itemID);
 	m_itemEquipmentBean = g_databaseManager->getItemEquipmentBean(itemID);
+	m_itemEquipmentLightBean = g_databaseManager->getItemEquipmentLightBean(itemID);
 	m_itemFoodBean = g_databaseManager->getItemFoodBean(itemID);
 	m_levelItemBean = g_databaseManager->getLevelitemBean(itemID);
 	m_levelItemFrameBeans = g_databaseManager->getLevelitemFrameBeans(itemID);
@@ -55,6 +56,10 @@ const ItemEquipmentBean& Item::getEquipmentBean() const {
 	return m_itemEquipmentBean;
 }
 
+const ItemEquipmentLightBean& Item::getEquipmentLightBean() const {
+	return m_itemEquipmentLightBean;
+}
+
 const LevelitemBean& Item::getLevelitemBean() const {
 	return m_levelItemBean;
 }
@@ -83,6 +88,9 @@ void Item::checkItem() {
 		m_itemBean.item_type == ItemType::Equipment_weapon)) {
 		m_isEquipmentItem = true;
 	}
+	if (m_isEquipmentItem && m_itemEquipmentLightBean.status == BeanStatus::Filled) {
+		m_isLightedItem = true;
+	}
 	if (m_itemWeaponBean.status == BeanStatus::Filled) {
 		m_isWeapon = true;
 	}
@@ -106,4 +114,8 @@ bool Item::isLevelitem() const {
 
 bool Item::isEquipmentItem() const {
 	return m_isEquipmentItem;
+}
+
+bool Item::isLightedItem() const {
+	return m_isLightedItem;
 }

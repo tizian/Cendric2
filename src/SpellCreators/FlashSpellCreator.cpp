@@ -20,8 +20,3 @@ void FlashSpellCreator::executeSpell(const sf::Vector2f& target) {
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 }
-
-void FlashSpellCreator::addRangeModifier(int level) {
-	m_spellData.range += m_spellData.rangeModifierAddition * level;
-	m_spellData.boundingBox.width = m_spellData.range;
-}

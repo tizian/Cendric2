@@ -76,6 +76,8 @@ public:
 			return "Twilight";
 		case SpellType::Necromancy:
 			return "Necromancy";
+		case SpellType::Meta:
+			return "Meta";
 		}
 	}
 

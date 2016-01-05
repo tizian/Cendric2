@@ -8,6 +8,7 @@ void SwitchableTile::init() {
 
 void SwitchableTile::setInitialState(bool on) {
 	m_isCollidable = on;
+	m_isStrictlyCollidable = on;
 }
 
 void SwitchableTile::load(int skinNr) {
@@ -39,5 +40,6 @@ void SwitchableTile::load(int skinNr) {
 
 void SwitchableTile::switchTile() {
 	m_isCollidable = !m_isCollidable;
+	m_isStrictlyCollidable = m_isCollidable;
 	setState(m_isCollidable ? GameObjectState::On : GameObjectState::Off);
 }

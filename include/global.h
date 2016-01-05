@@ -49,8 +49,11 @@ inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
 #define CENDRIC_COLOR_BLACK			sf::Color(0, 0, 0)
 #define CENDRIC_COLOR_TRANS_BLACK	sf::Color(0, 0, 0, 130)
 #define CENDRIC_COLOR_TRANS_GREY	sf::Color(150, 150, 150, 100)
+#define CENDRIC_COLOR_TRANS_WHITE	sf::Color(255, 255, 255, 100)
+#define CENDRIC_COLOR_TRANSPARENT	sf::Color(0, 0, 0, 0)
 
 #define CENDRIC_COLOR_LIGHT_GREY	sf::Color(200, 200, 200)
+#define CENDRIC_COLOR_MEDIUM_GREY	sf::Color(150, 150, 150)
 #define CENDRIC_COLOR_GREY			sf::Color(100, 100, 100)
 #define CENDRIC_COLOR_DARK_GREY		sf::Color(50, 50, 50)
 #define CENDRIC_COLOR_PURPLE		sf::Color(54, 11, 93, 255)

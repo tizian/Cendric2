@@ -14,7 +14,6 @@ void SimulatedWaterTile::init() {
 }
 
 void SimulatedWaterTile::load(int skinNr) {
-	m_isCollidable = false;
 	m_data = SimulatedWaterTileData::getData(skinNr);
 
 	const sf::FloatRect *bb = getBoundingBox();

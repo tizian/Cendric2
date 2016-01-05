@@ -18,10 +18,14 @@ void Slot::initSlot() {
 	m_iconRect.setTextureRect(m_iconTextureRect);
 
 	m_overlayRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
-	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 0));	// TODO: Only use #defined colors for more consistency
+	m_overlayRect.setFillColor(CENDRIC_COLOR_TRANSPARENT);	
 
 	m_borderRect.setSize(sf::Vector2f(size, size));
 	m_borderRect.setTexture(m_borderTexture);
+
+	if (m_isEmpty) {
+		m_borderRect.setFillColor(CENDRIC_COLOR_MEDIUM_GREY);
+	}
 }
 
 void Slot::setPosition(const sf::Vector2f& pos) {

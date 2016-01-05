@@ -46,5 +46,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item_desc', '...','...','...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item', 'Raw Meat','Rohes Fleisch','Rohs Fleisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item_desc', 'Would taste better if it was roasted on a fire.','Würde gebraten noch besser schmecken.','Wär chli feiner wenmes wür brötle.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_torch', 'item', 'Torch','Fackel','Fackle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_torch', 'item_desc', 'Lights the way.','Spendet Licht.','Git Liecht.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item', 'Oathbreaker','Eidbrecher','Eidbrecher');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item_desc', 'The legendary twin-daggers Oath and Breaker. Some say that the cyan stones hold captured souls.','Die legendären Zwillingsdolche Eid und Brecher. Es wird erzählt, dass die zyanblauen Steine gefangene Seelen beherrbergen.','Di legendäre Zwillingsdolch Eid und Brecher. Me munklet dass ide zyanblaue Stei Seele gfange sind.');

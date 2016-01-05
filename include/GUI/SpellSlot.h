@@ -42,6 +42,7 @@ public:
 	static const float ICON_OFFSET;
 
 private:
+	static const float GEM_SIZE;
 	void initSpellSlot();
 
 	bool m_isChopSlot = false;
@@ -55,7 +56,7 @@ private:
 
 	CooldownRectangleShape m_cooldownRect;
 	BitmapText m_inputKey;
-	sf::RectangleShape m_gemsRect;
+	std::vector<sf::RectangleShape> m_gems;
 
 	bool m_animating = false;
 	sf::Time m_animationTime;

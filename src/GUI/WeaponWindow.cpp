@@ -279,7 +279,7 @@ void WeaponWindow::render(sf::RenderTarget& target) {
 
 void WeaponWindow::highlightSpellSlots(SpellType type, bool highlight) {
 	for (auto& it : m_weaponSlots) {
-		if (!highlight || it.first.getSpellType() == type) {
+		if (!highlight || it.first.getSpellType() == SpellType::Meta || it.first.getSpellType() == type) {
 			if (highlight) {
 				it.first.highlight();
 			}
@@ -329,9 +329,11 @@ void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 	if (clone == nullptr) return;
 	const SpellSlot *ss = static_cast<const SpellSlot *>(clone->getOriginalSlot());
 	SpellType type = ss->getSpellType();
-	for (auto& it : m_weaponSlots) {
-		if (type == it.first.getSpellType() && clone->getBoundingBox()->intersects(*it.first.getBoundingBox())) {
-			m_core->addSpell(ss->getSpellID(), it.first.getNr());
+	for (auto& slot : m_weaponSlots) {
+		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType()) 
+			&& clone->getBoundingBox()->intersects(*slot.first.getBoundingBox())) 
+		{
+			m_core->addSpell(ss->getSpellID(), slot.first.getNr());
 			m_requireReload = true;
 			break;
 		}

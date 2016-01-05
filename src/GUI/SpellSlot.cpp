@@ -6,6 +6,7 @@ using namespace std;
 
 const float SpellSlot::SIZE = 86.f;
 const float SpellSlot::ICON_OFFSET = 18.f;
+const float SpellSlot::GEM_SIZE = 10.f;
 
 SpellSlot::SpellSlot(SpellType type) {
 	m_spellType = type;
@@ -67,23 +68,39 @@ void SpellSlot::initSpellSlot() {
 	m_cooldownRect.setSize(ICON_SIZE, ICON_SIZE);
 	m_cooldownRect.setFillColor(sf::Color(200, 200, 200, 128));
 
-	m_gemsRect.setSize(sf::Vector2f(SIZE, SIZE));
-	m_gemsRect.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_gems));
+	for (int i = 0; i < 4; ++i) {
+		sf::RectangleShape gem;
+		gem.setSize(sf::Vector2f(GEM_SIZE, GEM_SIZE));
+		gem.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_gem));
+		m_gems.push_back(gem);
+	}
+
 	switch (m_spellType) {
 	case SpellType::Elemental:
-		m_gemsRect.setFillColor(CENDRIC_COLOR_ELEMENTAL);
+		for (auto& gem : m_gems) 
+			gem.setFillColor(CENDRIC_COLOR_ELEMENTAL);
 		break;
 	case SpellType::Twilight:
-		m_gemsRect.setFillColor(CENDRIC_COLOR_TWILIGHT);
+		for (auto& gem : m_gems)
+			gem.setFillColor(CENDRIC_COLOR_TWILIGHT);
 		break;
 	case SpellType::Necromancy:
-		m_gemsRect.setFillColor(CENDRIC_COLOR_NECROMANCY);
+		for (auto& gem : m_gems)
+			gem.setFillColor(CENDRIC_COLOR_NECROMANCY);
 		break;
 	case SpellType::Divine:
-		m_gemsRect.setFillColor(CENDRIC_COLOR_DIVINE);
+		for (auto& gem : m_gems)
+			gem.setFillColor(CENDRIC_COLOR_DIVINE);
+		break;
+	case SpellType::Meta:
+		m_gems[0].setFillColor(CENDRIC_COLOR_ELEMENTAL);
+		m_gems[1].setFillColor(CENDRIC_COLOR_TWILIGHT);
+		m_gems[2].setFillColor(CENDRIC_COLOR_NECROMANCY);
+		m_gems[3].setFillColor(CENDRIC_COLOR_DIVINE);
 		break;
 	default:
-		m_gemsRect.setFillColor(CENDRIC_COLOR_WHITE);
+		for (auto& gem : m_gems)
+			gem.setFillColor(CENDRIC_COLOR_WHITE);
 		break;
 	}
 
@@ -95,7 +112,10 @@ void SpellSlot::setPosition(const sf::Vector2f& pos) {
 	sf::Vector2f positionOffset(SpellSlot::SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, SpellSlot::SIZE - 10.f);
 	m_inputKey.setPosition(pos + positionOffset);
 	m_cooldownRect.setPosition(pos.x + ICON_OFFSET, pos.y + ICON_OFFSET);
-	m_gemsRect.setPosition(pos);
+	m_gems[0].setPosition(pos + sf::Vector2f(38.f, 6.f));
+	m_gems[1].setPosition(pos + sf::Vector2f(6.f, 38.f));
+	m_gems[2].setPosition(pos + sf::Vector2f(38.f, 70.f));
+	m_gems[3].setPosition(pos + sf::Vector2f(70.f, 38.f));
 }
 
 void SpellSlot::render(sf::RenderTarget& renderTarget) {
@@ -106,7 +126,8 @@ void SpellSlot::render(sf::RenderTarget& renderTarget) {
 		renderTarget.draw(m_cooldownRect);
 	}
 	renderTarget.draw(m_borderRect);
-	renderTarget.draw(m_gemsRect);
+	for (auto& gem : m_gems)
+		renderTarget.draw(gem);
 	renderTarget.draw(m_inputKey);
 }
 

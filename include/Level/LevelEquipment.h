@@ -3,6 +3,7 @@
 #include "global.h"
 #include "AnimatedGameObject.h"
 #include "ResourceManager.h"
+#include "LightObject.h"
 
 class LevelMainCharacter;
 
@@ -16,12 +17,20 @@ public:
 	void loadEquipment(LevelMainCharacter* mainChar);
 
 	void setTexturePath(const std::string& texturePath);
+	void setLightObject(LightObject* lightObject);
 
 	GameObjectType getConfiguredType() const override;
+
+	void setPosition(const sf::Vector2f& position) override;
+	void setDisposed() override;
+	void setScreen(Screen* screen) override;
 
 private:
 	LevelMainCharacter* m_mainChar;
 	std::string m_texturePath;
+
+	LightObject* m_lightObject = nullptr;
+	sf::Vector2f m_lightObjectOffset;
 
 	bool m_isFacingRight;
 

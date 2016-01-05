@@ -9,11 +9,13 @@ struct TextBean;
 struct ItemAttributeBean;
 struct ItemBean;
 struct ItemEquipmentBean;
+struct ItemEquipmentLightBean;
 struct ItemFoodBean;
 struct ItemWeaponBean;
 struct ItemWeaponSlotBean;
 struct LevelitemBean;
 struct LevelitemFrameBean;
+struct ItemEquipmentLightBean;
 
 typedef std::vector<std::vector<std::string>> ResultSet;
 
@@ -30,6 +32,7 @@ public:
 	ItemAttributeBean getItemAttributeBean(const std::string& item_id) const;
 	ItemBean getItemBean(const std::string& item_id) const;
 	ItemEquipmentBean getItemEquipmentBean(const std::string& item_id) const;
+	ItemEquipmentLightBean getItemEquipmentLightBean(const std::string& item_id) const;
 	ItemFoodBean getItemFoodBean(const std::string& item_id) const;
 	ItemWeaponBean getItemWeaponBean(const std::string& item_id) const;
 	ItemWeaponSlotBean getItemWeaponslotBean(const std::string& item_id, int slot_nr) const;

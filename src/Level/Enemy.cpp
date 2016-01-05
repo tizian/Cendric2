@@ -380,6 +380,7 @@ void Enemy::setStunned(const sf::Time &stunnedTime) {
 }
 
 void Enemy::addDamageOverTime(const DamageOverTimeData& data) {
+	if (m_state == GameObjectState::Dead) return;
 	sf::IntRect textureLocation((static_cast<int>(data.damageType) - 1) * 25, 50, 25, 25);
 	m_dotAnimation.clearFrames();
 	m_dotAnimation.addFrame(textureLocation);

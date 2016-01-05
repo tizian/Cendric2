@@ -205,6 +205,7 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
 }
 
 void LevelMovableGameObject::addDamageOverTime(const DamageOverTimeData& data) {
+	if (m_state == GameObjectState::Dead) return;
 	m_dots.push_back(data);
 }
 

@@ -116,7 +116,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 		stats.append(g_textProvider->getText("Duration"));
 		stats.append(": ");
 		stats.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));
-		stats.append("\n");
+		stats.append("s\n");
 	}
 
 	// range (is only displayed when there can be range modifier additions)

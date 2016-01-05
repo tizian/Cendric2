@@ -13,6 +13,7 @@ DROP TABLE levelitem_frame;
 DROP TABLE levelitem;
 DROP TABLE item_weapon_slot;
 DROP TABLE item_weapon;
+DROP TABLE item_equipment_light;
 DROP TABLE item_equipment;
 DROP TABLE item_attribute;
 DROP TABLE item_food;
@@ -73,6 +74,17 @@ CREATE TABLE item_equipment(
 	texture_path VARCHAR(200) NOT NULL,
 	PRIMARY KEY (item_id),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
+);
+
+CREATE TABLE item_equipment_light(
+	item_id VARCHAR(50) NOT NULL, 
+	light_offset_x INTEGER NOT NULL DEFAULT 0,
+	light_offset_y INTEGER NOT NULL DEFAULT 0,
+	light_radius_x INTEGER NOT NULL DEFAULT 0,
+	light_radius_y INTEGER NOT NULL DEFAULT 0,
+	brightness DOUBLE NOT NULL DEFAULT 1.0,
+	PRIMARY KEY (item_id),
+	FOREIGN KEY(item_id) REFERENCES equipment(item_id)
 );
 
 CREATE TABLE item_weapon(

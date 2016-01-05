@@ -8,6 +8,10 @@ bool LevelDynamicTile::getIsCollidable() const {
 	return m_isCollidable;
 }
 
+bool LevelDynamicTile::getIsStrictlyCollidable() const {
+	return m_isStrictlyCollidable;
+}
+
 void LevelDynamicTile::setTileSize(const sf::Vector2i& tileSize) {
 	m_tileSize = tileSize;
 }
@@ -16,8 +20,16 @@ void LevelDynamicTile::setPositionOffset(const sf::Vector2f& offset) {
 	m_positionOffset = offset;
 }
 
-const sf::Vector2f&  LevelDynamicTile::getPositionOffset() const {
+void LevelDynamicTile::setDynamicTileID(LevelDynamicTileID id) {
+	m_dynamicTileID = id;
+}
+
+const sf::Vector2f& LevelDynamicTile::getPositionOffset() const {
 	return m_positionOffset;
+}
+
+LevelDynamicTileID LevelDynamicTile::getDynamicTileID() const {
+	return m_dynamicTileID;
 }
 
 GameObjectType LevelDynamicTile::getConfiguredType() const {

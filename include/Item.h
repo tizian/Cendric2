@@ -8,6 +8,7 @@
 #include "Beans/ItemAttributeBean.h"
 #include "Beans/ItemBean.h"
 #include "Beans/ItemEquipmentBean.h"
+#include "Beans/ItemEquipmentLightBean.h"
 #include "Beans/ItemFoodBean.h"
 #include "Beans/ItemWeaponBean.h"
 #include "Beans/ItemWeaponSlotBean.h"
@@ -36,6 +37,8 @@ public:
 
 	// getter for equipment values
 	const ItemEquipmentBean& getEquipmentBean() const;
+	// getter for light values
+	const ItemEquipmentLightBean& getEquipmentLightBean() const;
 
 	// returns whether this is a valid item
 	bool isValid() const;
@@ -47,11 +50,14 @@ public:
 	bool isLevelitem() const;
 	// returns whether this item is an equipment item and it is valid
 	bool isEquipmentItem() const;
+	// returns whether this item has a light attached
+	bool isLightedItem() const;
 
 protected:
 	ItemBean m_itemBean;
 	ItemFoodBean m_itemFoodBean;
 	ItemEquipmentBean m_itemEquipmentBean;
+	ItemEquipmentLightBean m_itemEquipmentLightBean;
 	LevelitemBean m_levelItemBean;
 	std::vector<LevelitemFrameBean> m_levelItemFrameBeans;
 	AttributeData m_attributeData;
@@ -66,4 +72,5 @@ protected:
 	bool m_isWeapon = false;
 	bool m_isLevelitem = false;
 	bool m_isEquipmentItem = false;
+	bool m_isLightedItem = false;
 };

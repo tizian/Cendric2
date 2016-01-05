@@ -114,6 +114,8 @@ void QuickSlot::reload() {
 			getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().width,
 			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().height));
 	}
+
+	m_borderRect.setFillColor(m_isEmpty ? CENDRIC_COLOR_MEDIUM_GREY : CENDRIC_COLOR_WHITE);
 }
 
 void QuickSlot::onLeftClick() {

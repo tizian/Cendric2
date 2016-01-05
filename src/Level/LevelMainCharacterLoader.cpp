@@ -79,6 +79,13 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 			levelEquipment->addAnimation(ani.first, animation);
 		}
 
+		if (item.isLightedItem()) {
+			const ItemEquipmentLightBean& lightBean = item.getEquipmentLightBean();
+			LightData lightData(LightData(lightBean.light_offset, lightBean.light_radius, lightBean.brightness));
+			LightObject* light = new LightObject(lightData);
+			levelEquipment->setLightObject(light);
+		}
+
 		// initial values
 		levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 		levelEquipment->playCurrentAnimation(true);

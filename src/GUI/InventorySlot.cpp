@@ -38,6 +38,7 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos)
 
 	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
 
+	m_isEmpty = true;
 	initSlot();
 }
 

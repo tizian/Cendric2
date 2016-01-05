@@ -46,7 +46,6 @@ public:
 	void melt(int index);
 
 	bool isFrozen(int index);
-
 private:
 	SimulatedWaterTileData m_data;
 	float m_x, m_y;
