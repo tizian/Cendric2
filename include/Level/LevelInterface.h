@@ -18,12 +18,8 @@ public:
 
 	// the spell manager of the level main character.
 	void setSpellManager(SpellManager* spellManager);
-
-	// used to add buffs to the buff bar
-	void addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id = SpellID::VOID);
-	// used to remove typed buffs from the buff bar
-	void removeTypedBuffs(SpellID id);
-
+	// returns the buff bar
+	BuffBar& getBuffBar();
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item);
 	// consumes a consumable item
@@ -32,8 +28,8 @@ public:
 	void highlightQuickslots(bool highlight);
 	// reloads inventory and quickslot bar
 	void reloadInventory(const std::string& changeditemID) override;
-	// reloads the character info
-	void reloadCharacterInfo();
+	// notifies the character info
+	void notifyCharacterInfo();
 
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;

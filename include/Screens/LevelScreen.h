@@ -23,7 +23,9 @@ public:
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
 
-	void addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id = SpellID::VOID) const;
+	void addSpellBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr);
+	void addFoodBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const std::string& itemID, const AttributeData& attr);
+	void addDotBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data);
 	void removeTypedBuffs(SpellID id);
 
 	// called by the loading screen. the dynamic tiles & light in level

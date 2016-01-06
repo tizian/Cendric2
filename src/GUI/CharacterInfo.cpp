@@ -70,6 +70,12 @@ bool CharacterInfo::isVisible() const {
 	return m_isVisible;
 }
 
+void CharacterInfo::update() {
+	if (!m_isReloadNeeded || !m_isVisible) return;
+	reload();
+	m_isReloadNeeded = false;
+}
+
 void CharacterInfo::render(sf::RenderTarget& target) const {
 	if (m_isVisible) {
 		m_window->render(target);
@@ -77,6 +83,10 @@ void CharacterInfo::render(sf::RenderTarget& target) const {
 		target.draw(m_namesText);
 		target.draw(m_attributeText);
 	}
+}
+
+void CharacterInfo::notifyChange() {
+	m_isReloadNeeded = true;
 }
 
 void CharacterInfo::reload() {
@@ -146,7 +156,6 @@ void CharacterInfo::reload() {
 
 void CharacterInfo::show() {
 	m_isVisible = true;
-	reload();
 }
 
 void CharacterInfo::hide() {

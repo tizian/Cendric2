@@ -15,12 +15,19 @@ std::string DivineShieldSpellCreator::getStrengthModifierName() const {
 
 void DivineShieldSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
-	DivineShieldSpell* newSpell = new DivineShieldSpell(m_additionalResistance);
+	AttributeData resistance = ZERO_ATTRIBUTES;
+	resistance.resistancePhysical = m_additionalResistance;
+	resistance.resistanceFire = m_additionalResistance;
+	resistance.resistanceIce = m_additionalResistance;
+	resistance.resistanceShadow = m_additionalResistance;
+	resistance.resistanceLight = m_additionalResistance;
+	DivineShieldSpell* newSpell = new DivineShieldSpell(resistance);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
-	if (dynamic_cast<LevelMainCharacter*>(m_owner))
-		m_screen->addBuffToInterface(BuffType::Spell, spellData.iconTextureRect, spellData.duration);
-
+	if (dynamic_cast<LevelMainCharacter*>(m_owner)) {
+		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, resistance);
+	}
+	
 	m_owner->addHeal(newSpell->getHeal());
 }
 

@@ -15,15 +15,19 @@ public:
 	void show();
 	void hide();
 
+	void update();
 	void render(sf::RenderTarget& target) const;
 	bool isVisible() const;
 
-	// reloads the character info text, depending on the main char
-	void reload();
+	// can be called from outside to trigger a reload as soon as the window is visible
+	void notifyChange();
 
 private:
+	// reloads the character info text, depending on the main char
+	void reload();
 	const AttributeData* m_attributes;
 	bool m_isVisible = false;
+	bool m_isReloadNeeded = true;
 
 	Window* m_window = nullptr;
 	BitmapText m_title;

@@ -43,14 +43,11 @@ void LevelInterface::update(const sf::Time& frameTime) {
 	m_buffBar->update(frameTime);
 	m_spellSelection->update(frameTime);
 	m_quickSlotBar->update(frameTime);
+	m_characterInfo->update();
 }
 
-void LevelInterface::addBuff(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) {
-	m_buffBar->addSlot(type, textureLocation, duration, id);
-}
-
-void LevelInterface::removeTypedBuffs(SpellID id) {
-	m_buffBar->removeTypedSlots(id);
+BuffBar& LevelInterface::getBuffBar() {
+	return *m_buffBar;
 }
 
 void LevelInterface::notifyConsumableDrop(const SlotClone* item) {
@@ -61,9 +58,11 @@ void LevelInterface::consumeItem(const Item& item) {
 	m_character->consumeFood(
 		item.getFoodDuration(),
 		item.getAttributes());
-	addBuff(BuffType::Food,
+	getBuffBar().addFoodBuff(
 		sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50),
-		item.getFoodDuration());
+		item.getFoodDuration(),
+		item.getID(),
+		item.getAttributes());
 
 	m_screen->notifyItemChange(item.getID(), -1);
 	m_quickSlotBar->reload();
@@ -78,8 +77,8 @@ void LevelInterface::reloadInventory(const std::string& changedItemID) {
 	m_quickSlotBar->reload();
 }
 
-void LevelInterface::reloadCharacterInfo() {
-	m_characterInfo->reload();
+void LevelInterface::notifyCharacterInfo() {
+	m_characterInfo->notifyChange();
 }
  
 void LevelInterface::setSpellManager(SpellManager* spellManager) {

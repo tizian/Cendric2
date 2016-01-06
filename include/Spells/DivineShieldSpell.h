@@ -5,7 +5,7 @@
 
 class DivineShieldSpell : public Spell {
 public:
-	DivineShieldSpell(int additionalResistance);
+	DivineShieldSpell(const AttributeData& additionalResistance);
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 

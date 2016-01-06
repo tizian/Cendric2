@@ -30,6 +30,7 @@ public:
 	int getDamage() const;
 	int getHeal() const;
 	SpellID getSpellID() const;
+	SpellType getSpellType() const;
 	DamageType getDamageType() const;
 	GameObjectType getConfiguredType() const override;
 
@@ -41,6 +42,7 @@ public:
 
 protected:
 	SpellID m_id;
+	SpellType m_spellType;
 	Level* m_level;
 	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.
 	GameObjectType m_ownerType;

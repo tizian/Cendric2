@@ -3,6 +3,7 @@
 #include "global.h"
 #include "GUI/BuffSlot.h"
 #include "Enums/SpellID.h"
+#include "Structs/DamageOverTimeData.h"
 
 class LevelInterface;
 
@@ -14,11 +15,12 @@ public:
 
 	void show();
 	void hide();
-	// called by the spell. the buff type determines the texture & how the slot looks
-	// the id can be set to reference that slot
-	void addSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id = SpellID::VOID);
-	// removes all buffs with the referenced id
-	void removeTypedSlots(SpellID id);
+
+	void addSpellBuff(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr);
+	void addFoodBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const std::string& itemID, const AttributeData& attr);
+	void addDotBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data);
+	// removes all buffs with the referenced spell id
+	void removeTypedSpellBuffs(SpellID id);
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);

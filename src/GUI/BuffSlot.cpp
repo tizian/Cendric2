@@ -1,75 +1,109 @@
 #include "GUI/BuffSlot.h"
+#include "GUI/GUIConstants.h"
+#include "Spell.h"
+#include "Enums/EnumNames.h"
 
 using namespace std;
 
-const float BuffSlot::RADIUS = 25.f;
-const float BuffSlot::MARGIN = 5.f;
+const float BuffSlot::OUTLINE = 1.f;
+const float BuffSlot::MARGIN = 3.f;
+const float BuffSlot::SIZE = 50.f + 4 * OUTLINE + 2 * MARGIN;
 const sf::Time BuffSlot::FLASHING_TIME = sf::seconds(5);
 const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
 
-BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, RADIUS + MARGIN, RADIUS + MARGIN));
+const sf::Vector2f TEXT_OFFSET = sf::Vector2f(10.f, 10.f);
 
-	m_spellID = id;
+BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) : m_tooltipWindow(Window(sf::FloatRect(), WindowOrnamentStyle::NONE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White)) {
+	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
+	setDebugBoundingBox(sf::Color::Red);
+	m_buffType = type;
+	setInputInDefaultView(true);
+
 	m_duration = duration;
 	m_timeUntilFlash = std::max(FLASHING_INTERVAL, duration - FLASHING_TIME);
 	m_isVisible = true;
 
 	sf::Texture* texture;
 
-	m_outerRing = sf::CircleShape(RADIUS + MARGIN);
+	m_outside.setSize(sf::Vector2f(SIZE, SIZE));
+	m_outside.setOutlineThickness(-OUTLINE);
+	m_outside.setOutlineColor(CENDRIC_COLOR_BLACK);
 
 	switch (type) {
 	case BuffType::Food:
-		m_outerRing.setFillColor(sf::Color::Green);
+		m_outside.setFillColor(sf::Color::Green);
 		texture = g_resourceManager->getTexture(ResourceID::Texture_items);
 		break;
 	case BuffType::Spell:
-		m_outerRing.setFillColor(CENDRIC_COLOR_DIVINE);
 		texture = g_resourceManager->getTexture(ResourceID::Texture_spellicons);
 		break;
-	case BuffType::Debuff:
-		m_outerRing.setFillColor(sf::Color::Red);
+	case BuffType::DamageOverTime:
+		m_outside.setFillColor(sf::Color::Red);
 		texture = g_resourceManager->getTexture(ResourceID::Texture_damageTypes);
 		break;
 	default:
 		break;
 	}
-
-	m_innerRing = sf::CircleShape(RADIUS);
-	m_innerRing.setFillColor(CENDRIC_COLOR_LIGHT_GREY);
-	m_inside = sf::CircleShape(RADIUS);
+	
+	m_inside.setSize(sf::Vector2f(50.f, 50.f));
+	m_inside.setOutlineThickness(OUTLINE);
+	m_inside.setOutlineColor(CENDRIC_COLOR_BLACK);
 	m_inside.setTexture(texture);
 	m_inside.setTextureRect(textureLocation);
 
-	m_durationText.setCharacterSize(16);
+	m_back.setSize(sf::Vector2f(50.f, 50.f));
+	m_back.setFillColor(CENDRIC_COLOR_WHITE);
+
+	m_durationText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 }
 
 void BuffSlot::setPosition(const sf::Vector2f& pos) {
-	m_outerRing.setPosition(pos);
-	m_innerRing.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
-	m_inside.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
-	m_durationText.setPosition(pos + sf::Vector2f(0.f, 3 * MARGIN + 2 * RADIUS));
+	m_outside.setPosition(pos);
+	m_inside.setPosition(pos + sf::Vector2f(2 * OUTLINE + MARGIN, 2 * OUTLINE + MARGIN));
+	m_back.setPosition(pos + sf::Vector2f(2 * OUTLINE + MARGIN, 2 * OUTLINE + MARGIN));
+	m_durationText.setPosition(pos + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
+	m_tooltipWindow.setPosition(pos + sf::Vector2f(SIZE + 2.f, 0.f));
+	m_tooltipText.setPosition(pos + sf::Vector2f(SIZE + 2.f, 0.f) + TEXT_OFFSET);
 	GameObject::setPosition(pos);
 }
 
 void BuffSlot::render(sf::RenderTarget& renderTarget) {
 	if (m_isVisible) {
-		renderTarget.draw(m_outerRing);
-		renderTarget.draw(m_innerRing);
+		renderTarget.draw(m_outside);
+		renderTarget.draw(m_back);
 		renderTarget.draw(m_inside);
 	}
 
 	renderTarget.draw(m_durationText);
 }
 
+void BuffSlot::renderAfterForeground(sf::RenderTarget& renderTarget) {
+	GameObject::renderAfterForeground(renderTarget);
+	if (m_tooltipTime > sf::Time::Zero) {
+		m_tooltipWindow.render(renderTarget);
+		renderTarget.draw(m_tooltipText);
+	}
+}
+
 SpellID BuffSlot::getSpellID() const {
-	return m_spellID;
+	return m_ownerSpell == nullptr ? SpellID::VOID : m_ownerSpell->getSpellID();
+}
+
+void BuffSlot::onMouseOver() {
+	m_tooltipTime = sf::seconds(0.1);
+}
+
+void BuffSlot::onRightClick() {
+	if (m_ownerSpell == nullptr) return;
+	m_ownerSpell->setDisposed();
+	setDisposed();
 }
 
 void BuffSlot::update(const sf::Time& frameTime) {
 	// update time
 	GameObject::updateTime(m_duration, frameTime);
+	GameObject::updateTime(m_tooltipTime, frameTime);
 	if (m_duration == sf::Time::Zero) setDisposed();
 	GameObject::updateTime(m_timeUntilFlash, frameTime);
 	if (m_timeUntilFlash == sf::Time::Zero) {
@@ -79,9 +113,64 @@ void BuffSlot::update(const sf::Time& frameTime) {
 
 	// update duration text
 	m_durationText.setString(to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s");
+	m_durationText.setPosition(getPosition() + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
 	GameObject::update(frameTime);
 }
 
 GameObjectType BuffSlot::getConfiguredType() const {
 	return GameObjectType::_Interface;
+}
+
+void BuffSlot::setSpellAttributes(Spell* owner, const AttributeData& attributes) {
+	if (m_buffType != BuffType::Spell) return;
+	m_ownerSpell = owner;
+
+	switch (m_ownerSpell->getSpellType()) {
+	case SpellType::Elemental:
+		m_outside.setFillColor(CENDRIC_COLOR_ELEMENTAL);
+		break;
+	case SpellType::Twilight:
+		m_outside.setFillColor(CENDRIC_COLOR_TWILIGHT);
+		break;
+	case SpellType::Necromancy:
+		m_outside.setFillColor(CENDRIC_COLOR_NECROMANCY);
+		break;
+	case SpellType::Divine:
+		m_outside.setFillColor(CENDRIC_COLOR_DIVINE);
+		break;
+	default:
+		break;
+	}
+
+	std::string tooltip = "";
+	tooltip.append(g_textProvider->getText(EnumNames::getSpellIDName(m_ownerSpell->getSpellID())) + "\n\n");
+	AttributeData::appendAttributes(tooltip, attributes);
+
+	m_tooltipText.setString(tooltip);
+	m_tooltipWindow.setWidth(2 * TEXT_OFFSET.x + m_tooltipText.getLocalBounds().width);
+	m_tooltipWindow.setHeight(2 * TEXT_OFFSET.y + m_tooltipText.getLocalBounds().height);
+}
+
+void BuffSlot::setFoodAttributes(const std::string& item_id, const AttributeData& attributes) {
+	if (m_buffType != BuffType::Food) return;
+
+	std::string tooltip = "";
+	tooltip.append(g_textProvider->getText(item_id, "item") + "\n\n");
+	AttributeData::appendAttributes(tooltip, attributes);
+
+	m_tooltipText.setString(tooltip);
+	m_tooltipWindow.setWidth(2 * TEXT_OFFSET.x + m_tooltipText.getLocalBounds().width);
+	m_tooltipWindow.setHeight(2 * TEXT_OFFSET.y + m_tooltipText.getLocalBounds().height);
+}
+
+void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
+	if (m_buffType != BuffType::DamageOverTime) return;
+
+	std::string tooltip = "";
+	tooltip.append(g_textProvider->getText(EnumNames::getDamageTypeName(data.damageType)) + "\n\n");
+	tooltip.append(g_textProvider->getText("DamagePerSecond") + ": " + std::to_string(data.damage));
+
+	m_tooltipText.setString(tooltip);
+	m_tooltipWindow.setWidth(2 * TEXT_OFFSET.x + m_tooltipText.getLocalBounds().width);
+	m_tooltipWindow.setHeight(2 * TEXT_OFFSET.y + m_tooltipText.getLocalBounds().height);
 }

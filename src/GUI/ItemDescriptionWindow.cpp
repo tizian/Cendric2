@@ -41,20 +41,6 @@ std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
 	return goldText;
 }
 
-std::string ItemDescriptionWindow::getAttributeText(const std::string& name, int value) {
-	if (value == 0) return "";
-	string s;
-	s.append(g_textProvider->getText(name));
-	s.append(": ");
-	if (value > 0) {
-		// these are boni on stats and should be signed
-		s.append("+");
-	}
-	s.append(to_string(value));
-	s.append("\n");
-	return s;
-}
-
 void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
 	float y = position.y + GUIConstants::TEXT_OFFSET;
@@ -74,19 +60,7 @@ void ItemDescriptionWindow::load(const Item& item) {
 
 	string stats = "\n";
 	const AttributeData& attr = item.getAttributes();
-	stats.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
-	stats.append(getAttributeText("Haste", attr.haste));
-	stats.append(getAttributeText("Critical", attr.critical));
-	stats.append(getAttributeText("PhysicalDamage", attr.damagePhysical));
-	stats.append(getAttributeText("FireDamage", attr.damageFire));
-	stats.append(getAttributeText("IceDamage", attr.damageIce));
-	stats.append(getAttributeText("LightDamage", attr.damageLight));
-	stats.append(getAttributeText("ShadowDamage", attr.damageShadow));
-	stats.append(getAttributeText("Armor", attr.resistancePhysical));
-	stats.append(getAttributeText("FireResistance", attr.resistanceFire));
-	stats.append(getAttributeText("IceResistance", attr.resistanceIce));
-	stats.append(getAttributeText("LightResistance", attr.resistanceLight));
-	stats.append(getAttributeText("ShadowResistance", attr.resistanceShadow));
+	AttributeData::appendAttributes(stats, attr);
 	stats.append("\n");
 
 	if (item.getFoodDuration() > sf::Time::Zero) {

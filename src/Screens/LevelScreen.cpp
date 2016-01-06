@@ -80,12 +80,23 @@ void LevelScreen::execOnExit(const Screen *nextScreen) {
 	cleanUp();
 }
 
-void LevelScreen::addBuffToInterface(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration, SpellID id) const {
-	dynamic_cast<LevelInterface*>(m_interface)->addBuff(type, textureLocation, duration, id);
+void LevelScreen::addSpellBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr) {
+	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().
+		addSpellBuff(textureLocation, duration, spell, attr);
+}
+
+void LevelScreen::addFoodBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const std::string& itemID, const AttributeData& attr) {
+	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().
+		addFoodBuff(textureLocation, duration, itemID, attr);
+}
+
+void LevelScreen::addDotBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
+	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().
+		addDotBuff(textureLocation, duration, data);
 }
 
 void LevelScreen::removeTypedBuffs(SpellID id) {
-	dynamic_cast<LevelInterface*>(m_interface)->removeTypedBuffs(id);
+	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeTypedSpellBuffs(id);
 }
 
 Screen* LevelScreen::update(const sf::Time& frameTime) {

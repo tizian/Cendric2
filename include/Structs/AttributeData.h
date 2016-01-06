@@ -121,6 +121,9 @@ struct AttributeData {
 		maxHealthPoints = health;
 		currentHealthPoints = health;
 	}
+
+	// appends the attributes to the string, seperated with \n and prefixed with + or -
+	static void appendAttributes(std::string& string, const AttributeData& attr);
 };
 
 const struct AttributeData ZERO_ATTRIBUTES =

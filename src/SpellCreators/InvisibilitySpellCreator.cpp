@@ -21,7 +21,7 @@ void InvisibilitySpellCreator::executeSpell(const sf::Vector2f &target) {
 	LevelMainCharacter* mainChar = dynamic_cast<LevelMainCharacter*>(m_owner);
 	if (mainChar != nullptr) {
 		mainChar->setInvisibilityLevel(m_invisibilityLevel);
-		m_screen->addBuffToInterface(BuffType::Spell, spellData.iconTextureRect, spellData.duration, SpellID::Invisibility);
+		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, ZERO_ATTRIBUTES);
 	}
 }
 

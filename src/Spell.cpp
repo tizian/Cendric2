@@ -13,6 +13,7 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 	m_reflectCount = data.reflectCount;
 	m_speed = data.startVelocity;
 	m_id = data.id;
+	m_spellType = data.spellType;
 	m_range = data.range;
 	m_needsTarget = data.needsTarget;
 	setBoundingBox(data.boundingBox);
@@ -189,6 +190,10 @@ DamageType Spell::getDamageType() const {
 
 SpellID Spell::getSpellID() const {
 	return m_id;
+}
+
+SpellType Spell::getSpellType() const {
+	return m_spellType;
 }
 
 const MovableGameObject* Spell::getOwner() const {

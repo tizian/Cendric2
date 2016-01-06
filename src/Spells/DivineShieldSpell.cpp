@@ -1,13 +1,7 @@
 #include "Spells/DivineShieldSpell.h"
 
-DivineShieldSpell::DivineShieldSpell(int additionalResistance) : Spell() {
-	m_additionalResistance = ZERO_ATTRIBUTES;
-	m_additionalResistance.resistancePhysical = additionalResistance;
-	m_additionalResistance.resistanceFire = additionalResistance;
-	m_additionalResistance.resistanceIce = additionalResistance;
-	m_additionalResistance.resistanceShadow = additionalResistance;
-	m_additionalResistance.resistanceLight = additionalResistance;
-
+DivineShieldSpell::DivineShieldSpell(const AttributeData& additionalResistance) : Spell() {
+	m_additionalResistance = additionalResistance;
 	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(100.f, 150.f), 0.2f));
 }
 

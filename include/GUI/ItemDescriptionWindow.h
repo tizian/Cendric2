@@ -33,6 +33,4 @@ private:
 	BitmapText m_descriptionText;
 	BitmapText m_statsText;
 	bool m_isVisible = false;
-
-	std::string getAttributeText(const std::string& name, int value);
 };
