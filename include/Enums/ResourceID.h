@@ -75,6 +75,7 @@ enum class ResourceID {
 	Texture_GUI_slot_spell_selected,
 	Texture_GUI_slot_spell_gem,
 	Texture_GUI_slot_highlight,
+	Texture_GUI_slot_buff,
 	Texture_Particle_circle,
 	Texture_Particle_blob,
 	Texture_Particle_blob2,

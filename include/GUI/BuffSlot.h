@@ -44,7 +44,6 @@ public:
 	void onRightClick() override;
 	void onMouseOver() override;
 
-	static const float OUTLINE;
 	static const float MARGIN;
 	static const float SIZE;
 

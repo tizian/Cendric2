@@ -5,9 +5,8 @@
 
 using namespace std;
 
-const float BuffSlot::OUTLINE = 1.f;
 const float BuffSlot::MARGIN = 3.f;
-const float BuffSlot::SIZE = 50.f + 4 * OUTLINE + 2 * MARGIN;
+const float BuffSlot::SIZE = 50.f + 2 * MARGIN;
 const sf::Time BuffSlot::FLASHING_TIME = sf::seconds(5);
 const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
 
@@ -26,8 +25,7 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	sf::Texture* texture;
 
 	m_outside.setSize(sf::Vector2f(SIZE, SIZE));
-	m_outside.setOutlineThickness(-OUTLINE);
-	m_outside.setOutlineColor(CENDRIC_COLOR_BLACK);
+	m_outside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_buff));
 
 	switch (type) {
 	case BuffType::Food:
@@ -46,13 +44,11 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	}
 	
 	m_inside.setSize(sf::Vector2f(50.f, 50.f));
-	m_inside.setOutlineThickness(OUTLINE);
-	m_inside.setOutlineColor(CENDRIC_COLOR_BLACK);
 	m_inside.setTexture(texture);
 	m_inside.setTextureRect(textureLocation);
 
 	m_back.setSize(sf::Vector2f(50.f, 50.f));
-	m_back.setFillColor(CENDRIC_COLOR_WHITE);
+	m_back.setFillColor(CENDRIC_COLOR_TRANS_GREY);
 
 	m_durationText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -60,8 +56,8 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 
 void BuffSlot::setPosition(const sf::Vector2f& pos) {
 	m_outside.setPosition(pos);
-	m_inside.setPosition(pos + sf::Vector2f(2 * OUTLINE + MARGIN, 2 * OUTLINE + MARGIN));
-	m_back.setPosition(pos + sf::Vector2f(2 * OUTLINE + MARGIN, 2 * OUTLINE + MARGIN));
+	m_inside.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
+	m_back.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
 	m_durationText.setPosition(pos + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
 	m_tooltipWindow.setPosition(pos + sf::Vector2f(SIZE + 2.f, 0.f));
 	m_tooltipText.setPosition(pos + sf::Vector2f(SIZE + 2.f, 0.f) + TEXT_OFFSET);
