@@ -2,7 +2,8 @@
 
 #define SPELL_OFFSET 10.f
 
-WindGustSpell::WindGustSpell() : Spell() {
+WindGustSpell::WindGustSpell(float pushAcceleration) : Spell() {
+	m_pushAcceleration = pushAcceleration;
 }
 
 void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -28,6 +29,10 @@ sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const {
 
 bool WindGustSpell::getConfiguredRotateSprite() const {
 	return false;
+}
+
+float WindGustSpell::getPushAcceleration() const {
+	return m_pushAcceleration;
 }
 
 void WindGustSpell::loadParticleSystem() {
@@ -56,8 +61,8 @@ void WindGustSpell::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 90 + -20.f;
 	velGen->maxAngle = 90 + 20.f;
-	velGen->minStartVel = 200.f;
-	velGen->maxStartVel = 200.f;
+	velGen->minStartVel = m_pushAcceleration;
+	velGen->maxStartVel = m_pushAcceleration;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

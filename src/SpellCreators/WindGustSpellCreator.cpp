@@ -15,7 +15,7 @@ std::string WindGustSpellCreator::getStrengthModifierName() const {
 void WindGustSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamage(spellData);
-	WindGustSpell* newSpell = new WindGustSpell();
+	WindGustSpell* newSpell = new WindGustSpell(100.f * m_strength);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 	m_owner->setFightAnimationTime();
@@ -27,7 +27,6 @@ void WindGustSpellCreator::addRangeModifier(int level) {
 
 void WindGustSpellCreator::addStrengthModifier(int level) {
 	m_strength += level;
-	// TODO. maybe this pushes faster, and maybe it pushes other "blocks"
 }
 
 void WindGustSpellCreator::addDurationModifier(int level) {

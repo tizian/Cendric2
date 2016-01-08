@@ -87,7 +87,7 @@ SpellID BuffSlot::getSpellID() const {
 }
 
 void BuffSlot::onMouseOver() {
-	m_tooltipTime = sf::seconds(0.1);
+	m_tooltipTime = sf::seconds(0.1f);
 }
 
 void BuffSlot::onRightClick() {

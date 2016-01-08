@@ -20,24 +20,6 @@ void SpikesBottomTile::load(int skinNr) {
 	playCurrentAnimation(false);
 }
 
-void SpikesBottomTile::update(const sf::Time& frameTime) {
-	LevelDynamicTile::update(frameTime);
-	if (m_damageCooldown > sf::Time::Zero) {
-		m_damageCooldown = m_damageCooldown - frameTime;
-		if (m_damageCooldown < sf::Time::Zero) {
-			m_damageCooldown = sf::Time::Zero;
-		}
-	}
-}
-
 void SpikesBottomTile::onHit(LevelMovableGameObject* mob) {
-	if (m_damageCooldown == sf::Time::Zero) {
-		mob->addDamage(DMG_PER_S, DamageType::Physical);
-		DamageOverTimeData data;
-		data.damageType = DamageType::Physical;
-		data.damage = static_cast<int>(DMG_PER_S / 3.f);
-		data.duration = sf::seconds(2);
-		mob->addDamageOverTime(data);
-		m_damageCooldown = sf::seconds(1);
-	}
+	mob->setDead();
 }

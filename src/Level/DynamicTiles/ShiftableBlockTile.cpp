@@ -1,5 +1,6 @@
 #include "Level/DynamicTiles/ShiftableBlockTile.h"
 #include "Spell.h"
+#include "Spells/WindGustSpell.h"
 
 ShiftableBlockTile::ShiftableBlockTile(Level* level) : LevelDynamicTile(level), MovableGameObject() {
 }
@@ -34,15 +35,17 @@ void ShiftableBlockTile::update(const sf::Time& frameTime) {
 
 void ShiftableBlockTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
-	case SpellID::WindGust:
+	case SpellID::WindGust: {
+		float pushAcceleration = dynamic_cast<WindGustSpell*>(spell)->getPushAcceleration();
 		// determine the direction of the windgust by the position of its owner.
 		if (spell->getOwner()->getPosition().x < getPosition().x) {
-			m_pushAcceleration = PUSH_ACCELERATION_X;
+			m_pushAcceleration = pushAcceleration;
 		}
 		else {
-			m_pushAcceleration = -PUSH_ACCELERATION_X;
+			m_pushAcceleration = -pushAcceleration;
 		}
 		break;
+	}
 	default:
 		break;
 	}
@@ -79,6 +82,27 @@ void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on y axis
 	bool collidesY = m_level->collides(nextBoundingBoxY, this);
+
+	if (!collidesY && isMovingDown && 
+		(std::floor(getBoundingBox()->top / m_tileSize.y) == (getBoundingBox()->top / m_tileSize.y) 
+			|| std::floor(getBoundingBox()->top) != std::floor(nextPosition.y))) {
+		// we've moved over a line in the grid. check for collisions with mobs.
+		sf::FloatRect mobCollisionBox = nextBoundingBoxY;
+		mobCollisionBox.top = (std::floor(nextPosition.y / m_tileSize.y) + 1) * m_tileSize.y;
+		auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
+		auto mainChar = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
+
+		for (auto enemy : *enemies) {
+			if (enemy->getBoundingBox()->intersects(mobCollisionBox)) {
+				collidesY = true;
+				break;
+			}
+		}
+
+		if ((*mainChar)[0]->getBoundingBox()->intersects(mobCollisionBox)) {
+			collidesY = true;
+		}
+	}
 	if (!isMovingDown && collidesY) {
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
