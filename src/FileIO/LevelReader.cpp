@@ -68,8 +68,9 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 		LevelExitData leData;
 		leData.levelExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
 		leData.mapID = "";
-		leData.mapSpawnPoint.x = -1.f;
-		leData.mapSpawnPoint.y = -1.f;
+		leData.levelID = "";
+		leData.spawnPoint.x = -1.f;
+		leData.spawnPoint.y = -1.f;
 
 		// map spawn point for level exit
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -91,21 +92,26 @@ bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& d
 			if (name.compare("map id") == 0) {
 				textAttr = nullptr;
 				textAttr = _property->Attribute("value");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found for level exit map id.");
-					return false;
+				if (textAttr != nullptr) {
+					leData.mapID = textAttr;
 				}
-				leData.mapID = textAttr;
+			}
+			else if (name.compare("level id") == 0) {
+				textAttr = nullptr;
+				textAttr = _property->Attribute("value");
+				if (textAttr != nullptr) {
+					leData.levelID = textAttr;
+				}
 			}
 			else if (name.compare("x") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
 				XMLCheckResult(result);
-				leData.mapSpawnPoint.x = static_cast<float>(x);
+				leData.spawnPoint.x = static_cast<float>(x);
 			}
 			else if (name.compare("y") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
 				XMLCheckResult(result);
-				leData.mapSpawnPoint.y = static_cast<float>(y);
+				leData.spawnPoint.y = static_cast<float>(y);
 			}
 			else {
 				logError("XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
@@ -705,12 +711,12 @@ bool LevelReader::checkData(LevelData& data) const {
 			logError("level exit rectangle has volume negative or null.");
 			return false;
 		}
-		if (it.mapID.empty()) {
-			logError("level exit map id is empty.");
+		if ((it.mapID.empty() && it.levelID.empty()) || (!it.mapID.empty() && !it.levelID.empty())) {
+			logError("level exit map id and level id are both empty or both filled. Only one of them can be set.");
 			return false;
 		}
-		if (it.mapSpawnPoint.x < 0.f || it.mapSpawnPoint.y < 0.f) {
-			logError("level exit map spawn point is negative.");
+		if (it.spawnPoint.x < 0.f || it.spawnPoint.y < 0.f) {
+			logError("level exit spawn point is negative.");
 			return false;
 		}
 	}

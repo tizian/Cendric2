@@ -25,12 +25,12 @@ bool MapReader::checkData(MapData& data) const {
 			logError("a map exit rect is out of range for this map.");
 			return false;
 		}
-		if (it.levelID.empty()) {
-			logError("map exit level id is empty.");
+		if ((it.mapID.empty() && it.levelID.empty()) || (!it.mapID.empty() && !it.levelID.empty())) {
+			logError("map exit map id and level id are both empty or both filled. Only one of them can be set.");
 			return false;
 		}
-		if (it.levelSpawnPoint.x < 0.f || it.levelSpawnPoint.y < 0.f) {
-			logError("map exit level spawn point is negative.");
+		if (it.spawnPoint.x < 0.f || it.spawnPoint.y < 0.f) {
+			logError("map exit spawn point is negative.");
 			return false;
 		}
 	}
@@ -78,8 +78,9 @@ bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) c
 		MapExitData meData;
 		meData.mapExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
 		meData.levelID = "";
-		meData.levelSpawnPoint.x = -1.f;
-		meData.levelSpawnPoint.y = -1.f;
+		meData.mapID = "";
+		meData.spawnPoint.x = -1.f;
+		meData.spawnPoint.y = -1.f;
 
 		// map spawn point for level exit
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -101,21 +102,26 @@ bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) c
 			if (name.compare("level id") == 0) {
 				textAttr = nullptr;
 				textAttr = _property->Attribute("value");
-				if (textAttr == nullptr) {
-					g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties->property->value attribute found for level exit map id.");
-					return false;
+				if (textAttr != nullptr) {
+					meData.levelID = textAttr;
 				}
-				meData.levelID = textAttr;
+			}
+			else if (name.compare("map id") == 0) {
+				textAttr = nullptr;
+				textAttr = _property->Attribute("value");
+				if (textAttr != nullptr) {
+					meData.mapID = textAttr;
+				}
 			}
 			else if (name.compare("x") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
 				XMLCheckResult(result);
-				meData.levelSpawnPoint.x = static_cast<float>(x);
+				meData.spawnPoint.x = static_cast<float>(x);
 			}
 			else if (name.compare("y") == 0) {
 				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
 				XMLCheckResult(result);
-				meData.levelSpawnPoint.y = static_cast<float>(y);
+				meData.spawnPoint.y = static_cast<float>(y);
 			}
 			else {
 				g_logger->logError("MapReader", "XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");

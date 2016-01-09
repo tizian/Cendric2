@@ -36,7 +36,7 @@ private:
 	std::vector<BuffSlot*> m_buffSlots;
 	BuffSlot* m_foodBuffSlot = nullptr;
 
-	void calculateSlotPositions();
+	void calculateBuffPositions();
 
 	// as seen from the top left corner
 	const sf::Vector2f BUFFBAR_OFFSET = sf::Vector2f(220.f, 10.f);

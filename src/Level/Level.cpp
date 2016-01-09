@@ -25,6 +25,7 @@ void Level::dispose() {
 
 void Level::loadAfterMainChar(Screen* screen) {
 	LevelLoader loader;
+	m_screen = screen;
 	loader.loadEnemies(m_levelData, screen, this);
 	loader.loadLevelItems(m_levelData, screen);
 	loader.loadChestTiles(m_levelData, screen, this);
@@ -204,6 +205,23 @@ bool Level::collides(const sf::FloatRect& boundingBox) const {
 	return collides(boundingBox, nullptr);
 }
 
+bool Level::collidesWithMobs(const sf::FloatRect& boundingBox) const {
+	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
+	auto mainChar = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
+
+	for (auto enemy : *enemies) {
+		if (enemy->getBoundingBox()->intersects(boundingBox)) {
+			return true;
+		}
+	}
+
+	if ((*mainChar)[0]->getBoundingBox()->intersects(boundingBox)) {
+		return true;
+	}
+	return false;
+}
+
+
 float Level::getGround(const sf::FloatRect& boundingBox) const {
 	// check if ground is level ground
 	if (boundingBox.top + boundingBox.height > m_levelData.mapRect.top + m_levelData.mapRect.height) {
@@ -253,9 +271,7 @@ LevelExitData* Level::checkLevelExit(const sf::FloatRect& boundingBox) const {
 	if (g_inputController->isKeyJustPressed(Key::Up)) {
 		for (auto it : m_levelData.levelExits) {
 			if (boundingBox.intersects(it.levelExitRect)) {
-				LevelExitData* exit = new LevelExitData();
-				exit->mapID = it.mapID;
-				exit->mapSpawnPoint = it.mapSpawnPoint;
+				LevelExitData* exit = new LevelExitData(it);
 				return exit;
 			}
 		}

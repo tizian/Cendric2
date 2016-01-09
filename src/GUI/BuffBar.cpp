@@ -28,7 +28,7 @@ void BuffBar::addSpellBuff(const sf::IntRect& textureLocation, const sf::Time& d
 	buff->setSpellAttributes(spell, attr);
 	m_buffSlots.push_back(buff);
 	m_notifyInterface = true;
-	calculateSlotPositions();
+	calculateBuffPositions();
 }
 
 void BuffBar::addFoodBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const std::string& itemID, const AttributeData& attr) {
@@ -36,7 +36,7 @@ void BuffBar::addFoodBuff(const sf::IntRect& textureLocation, const sf::Time& du
 	m_foodBuffSlot = new BuffSlot(BuffType::Food, textureLocation, duration);
 	m_foodBuffSlot->setFoodAttributes(itemID, attr);
 	m_notifyInterface = true;
-	calculateSlotPositions();
+	calculateBuffPositions();
 }
 
 void BuffBar::addDotBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
@@ -44,7 +44,7 @@ void BuffBar::addDotBuff(const sf::IntRect& textureLocation, const sf::Time& dur
 	buff->setDotAttributes(data);
 	m_buffSlots.push_back(buff);
 	m_notifyInterface = true;
-	calculateSlotPositions();
+	calculateBuffPositions();
 }
 
 void BuffBar::removeTypedSpellBuffs(SpellID id) {
@@ -79,17 +79,17 @@ void BuffBar::update(const sf::Time& frameTime) {
 			delete m_foodBuffSlot;
 			m_foodBuffSlot = nullptr;
 			m_notifyInterface = true;
-			calculateSlotPositions();
+			calculateBuffPositions();
 		}
 	}
 
-	for (auto it = m_buffSlots.begin(); it != m_buffSlots.end(); /*don't increment here*/) {
+	for (auto& it = m_buffSlots.begin(); it != m_buffSlots.end(); /*don't increment here*/) {
 		(*it)->update(frameTime);
 		if ((*it)->isDisposed()) {
 			delete (*it);
 			it = m_buffSlots.erase(it);
 			m_notifyInterface = true;
-			calculateSlotPositions();
+			calculateBuffPositions();
 		}
 		else {
 			it++;
@@ -97,7 +97,7 @@ void BuffBar::update(const sf::Time& frameTime) {
 	}
 }
 
-void BuffBar::calculateSlotPositions() {
+void BuffBar::calculateBuffPositions() {
 	// the foodbuff is always the first one (as seen from left)
 	sf::Vector2f offset = BUFFBAR_OFFSET;
 	float xOffset = BUFFSLOT_SPACING + BuffSlot::SIZE;

@@ -50,10 +50,10 @@ public:
 	ConfigurationData& getConfiguration();
 
 private:
-	std::map<std::string, sf::Texture> m_textures;
-	std::map<std::string, sf::SoundBuffer> m_soundBuffers;
-	std::map<std::string, BitmapFont> m_bitmapFonts;
-	std::map<std::string, sf::Font> m_fonts;
+	std::map<std::string, sf::Texture*> m_textures;
+	std::map<std::string, sf::SoundBuffer*> m_soundBuffers;
+	std::map<std::string, BitmapFont*> m_bitmapFonts;
+	std::map<std::string, sf::Font*> m_fonts;
 	// a map that is filled with all ResourceTags and the corresponding filenames
 	std::map <ResourceID, std::string> m_fileNames;
 	// this pair stores resource errors and gets checked in every game loop iteration. mostly and hopefully void.

@@ -76,13 +76,22 @@ void LeverTile::setDependantTiles(const std::vector<SwitchableTile*>& dependentT
 }
 
 void LeverTile::switchLever() {
+	for (auto& tile : m_dependentTiles) {
+		if (tile->getGameObjectState() == GameObjectState::On) continue;
+		if (m_level->collidesWithMobs(*tile->getBoundingBox())) {
+			g_logger->logInfo("LeverTile::switchLever", "Cannot switch the lever as it would stuck a MOB!");
+			m_screen->setTooltipText(g_textProvider->getText("LeverStuck"), sf::Color::Red, true);
+			return;
+		}
+	}
+
 	(m_state == GameObjectState::On) ? 
 		setState(GameObjectState::Off) : 
 		setState(GameObjectState::On);
 
 	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_lever);
 
-	for (auto& it : m_dependentTiles) {
-		it->switchTile();
+	for (auto& tile : m_dependentTiles) {
+		tile->switchTile();
 	}
 }

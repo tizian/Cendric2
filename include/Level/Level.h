@@ -46,6 +46,8 @@ public:
 	// if the calling object itself wants to be excluded, it can give itself as an argument here.
 	bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude) const;
 	bool collides(const sf::FloatRect& boundingBox) const;
+	// checks for collisions with mobs (enemies and level main character)
+	bool collidesWithMobs(const sf::FloatRect& boundingBox) const;
 
 	bool collidesLevelBottom(const sf::FloatRect& boundingBox) const;
 	bool collidesLevelCeiling(const sf::FloatRect& boundingBox) const;
@@ -68,6 +70,7 @@ private:
 	TileMap m_lightedForegroundTileMap;
 	TileMap m_foregroundTileMap;
 	std::vector<GameObject*>* m_dynamicTiles;
+	Screen* m_screen;
 	// data loaded by the level loader
 	LevelData m_levelData;
 

@@ -225,6 +225,8 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.divergenceAngle = 0.2f;
 	fireBall.damageType = DamageType::Fire;
 	fireBall.activeDuration = sf::seconds(5);
+	fireBall.damagePerSecond = 2;
+	fireBall.duration = sf::seconds(3);
 	fireBall.needsTarget = true;
 	fireBall.damage = 10;
 	fireBall.startVelocity = 300.f;

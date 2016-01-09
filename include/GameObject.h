@@ -52,6 +52,7 @@ public:
 	bool isDisposed() const;
 	virtual GameObjectType getConfiguredType() const = 0;
 	Screen* getScreen() const;
+	GameObjectState getGameObjectState() const;
 
 	// convenience method for updating time values (used in many GOs). 
 	// The frame time is subtracted from the time but 

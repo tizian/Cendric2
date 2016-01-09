@@ -28,13 +28,13 @@ public:
 	// default returns 0
 	virtual int getStrengthModifierValue() const;
 
-	// updates the spells damage, using the attribute data. It adds damage and calculates critical hits
-	static void updateDamage(SpellData& bean, const AttributeData* attributes);
+	// updates the spells damage, using the attribute data. It adds damage and uses some rng and calculates critical hits if told so
+	static void updateDamage(SpellData& bean, const AttributeData* attributes, bool includeRngAndCrit);
 
 protected:
 	// filled by the subclasses
 	std::vector<SpellModifierType> m_allowedModifiers;
-	// updates the spells damage, using the mobs attribute bean. It adds damage and calculates critical hits
+	// updates the spells damage, using the mobs attribute bean. It adds damage, some rng and calculates critical hits
 	void updateDamage(SpellData& bean) const;
 
 	virtual void addDamageModifier(int level);

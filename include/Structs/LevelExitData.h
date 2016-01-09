@@ -4,6 +4,7 @@
 
 struct LevelExitData {
 	std::string mapID;
-	sf::Vector2f mapSpawnPoint;
+	std::string levelID;
+	sf::Vector2f spawnPoint;
 	sf::FloatRect levelExitRect;
 };

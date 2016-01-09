@@ -40,7 +40,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 
 	SpellCreator* creator = SpellData::getSpellCreator(bean, modifiers, nullptr);
 	bean = creator->getSpellData();
-	creator->updateDamage(bean, attributes);
+	creator->updateDamage(bean, attributes, false);
 	strengthName = creator->getStrengthModifierName();
 	strengthValue = creator->getStrengthModifierValue();
 
@@ -76,6 +76,11 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 			stats.append(": ");
 			stats.append(to_string(bean.damagePerSecond));
 			stats.append("/s\n");
+
+			stats.append(g_textProvider->getText("Duration"));
+			stats.append(": ");
+			stats.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));
+			stats.append("s\n");
 		}
 	}
 

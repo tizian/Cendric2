@@ -69,8 +69,13 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 			return this;
 		}
 		else {
-			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			m_characterCore->setLevel(data->levelSpawnPoint, data->levelID);
+			if (!data->levelID.empty()) {
+				m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
+				m_characterCore->setLevel(data->spawnPoint, data->levelID);
+			} 
+			else {
+				m_characterCore->setMap(data->spawnPoint, data->mapID);
+			}
 			delete data;
 			return new LoadingScreen(getCharacterCore());
 		}

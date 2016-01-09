@@ -90,7 +90,7 @@ const SpellData& SpellCreator::getSpellData() const {
 }
 
 void SpellCreator::updateDamage(SpellData& bean) const {
-	updateDamage(bean, m_attributeData);
+	updateDamage(bean, m_attributeData, true);
 }
 
 int SpellCreator::getStrengthModifierValue() const {
@@ -101,7 +101,7 @@ std::string SpellCreator::getStrengthModifierName() const {
 	return "";
 }
 
-void SpellCreator::updateDamage(SpellData& bean, const AttributeData* attributes) {
+void SpellCreator::updateDamage(SpellData& bean, const AttributeData* attributes, bool includeRngAndCrit) {
 	if (attributes == nullptr) return;
 	if (bean.damage > 0) {
 		switch (bean.damageType) {
@@ -124,27 +124,30 @@ void SpellCreator::updateDamage(SpellData& bean, const AttributeData* attributes
 			break;
 		}
 	}
-	if (bean.damagePerSecond > 0) {
+	if (bean.damagePerSecond > 0 && bean.duration.asSeconds() > 0.f) {
+		float durationS = bean.duration.asSeconds();
 		switch (bean.damageType) {
 		case DamageType::Physical:
-			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damagePhysical / bean.duration.asSeconds());
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damagePhysical / durationS);
 			break;
 		case DamageType::Fire:
-			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageIce / bean.duration.asSeconds());
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageIce / durationS);
 			break;
 		case DamageType::Ice:
-			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageFire / bean.duration.asSeconds());
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageFire / durationS);
 			break;
 		case DamageType::Shadow:
-			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageShadow / bean.duration.asSeconds());
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageShadow / durationS);
 			break;
 		case DamageType::Light:
-			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageLight / bean.duration.asSeconds());
+			bean.damagePerSecond = bean.damagePerSecond + static_cast<int>(attributes->damageLight / durationS);
 			break;
 		default:
 			break;
 		}
 	}
+
+	if (!includeRngAndCrit) return;
 
 	// add randomness to damage (something from 80 - 120% of the base damage)
 	bean.damage = static_cast<int>(bean.damage * ((rand() % 41 + 80.f) / 100.f));

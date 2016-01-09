@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const float Enemy::HP_BAR_HEIGHT = 3.f;
+
 Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMovableGameObject(level) {
 	m_id = id;
 	m_mainChar = mainChar;
@@ -18,19 +20,12 @@ Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMova
 	m_hpBar.setFillColor(sf::Color::Red);
 	updateHpBar();
 
-	// pre-fill animations
-	m_stunAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_stun));
-	m_stunAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
-	m_stunAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
-	m_fearAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_fear));
-	m_fearAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
-	m_fearAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
-	m_dotAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_damageTypes));
+	m_buffBar = new EnemyBuffBar(this);
 }
 
 Enemy::~Enemy() {
 	delete m_lootWindow;
-	delete m_debuffSprite;
+	delete m_buffBar;
 }
 
 bool Enemy::getFleeCondition() const {
@@ -88,7 +83,7 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	// checks if the enemy falls would fall deeper than it can jump. 
-	if (isMovingX && !(m_enemyState == EnemyState::Fleeing) && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss())) {
+	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss())) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
@@ -105,7 +100,7 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition) {
 }
 
 void Enemy::onHit(Spell* spell) {
-	if (m_state == GameObjectState::Dead) {
+	if (m_isDead) {
 		return;
 	}
 	// check for owner
@@ -124,7 +119,7 @@ void Enemy::onHit(Spell* spell) {
 
 void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
 	GameObject::renderAfterForeground(renderTarget);
-	if (m_debuffSprite) renderTarget.draw(*m_debuffSprite);
+	m_buffBar->render(renderTarget);
 	renderTarget.draw(m_hpBar);
 	if (m_showLootWindow && m_lootWindow != nullptr) {
 		m_lootWindow->render(renderTarget);
@@ -134,7 +129,6 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
 
 void Enemy::update(const sf::Time& frameTime) {
 	updateEnemyState(frameTime);
-	updateDebuffSprite(frameTime);
 	updateAggro();
 	LevelMovableGameObject::update(frameTime);
 	updateHpBar();
@@ -143,26 +137,12 @@ void Enemy::update(const sf::Time& frameTime) {
 		m_lootWindow->setPosition(pos);
 	}
 	m_showLootWindow = m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips);
+	m_buffBar->update(frameTime);
 }
 
 void Enemy::updateHpBar() {
 	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
 	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
-}
-
-void Enemy::updateDebuffSprite(const sf::Time &frameTime) {
-	if (m_debuffSprite) {
-		if (!(m_enemyState == EnemyState::Fleeing || m_enemyState == EnemyState::Stunned) && m_dots.empty()) {
-			delete m_debuffSprite;
-			m_debuffSprite = nullptr;
-		}
-		else {
-			m_debuffSprite->setPosition(sf::Vector2f(
-				getPosition().x - 10.f + getBoundingBox()->width / 2,
-				getPosition().y - (getConfiguredDistanceToHPBar() + 25.f)));
-			m_debuffSprite->update(frameTime);
-		}
-	}
 }
 
 float Enemy::distToMainChar() const {
@@ -359,46 +339,29 @@ void Enemy::setObjectID(int id) {
 
 void Enemy::setFeared(const sf::Time &fearedTime) {
 	m_fearedTime = fearedTime;
-	if (fearedTime > sf::Time::Zero) {
-		delete m_debuffSprite;
-
-		m_debuffSprite = new AnimatedSprite();
-		m_debuffSprite->setAnimation(&m_fearAnimation);
-		m_debuffSprite->setFrameTime(sf::milliseconds(100));
-	}
+	m_buffBar->addFeared(fearedTime);
 }
 
 void Enemy::setStunned(const sf::Time &stunnedTime) {
 	m_stunnedTime = stunnedTime;
-	if (stunnedTime > sf::Time::Zero) {
-		delete m_debuffSprite;
-
-		m_debuffSprite = new AnimatedSprite();
-		m_debuffSprite->setAnimation(&m_stunAnimation);
-		m_debuffSprite->setFrameTime(sf::milliseconds(100));
-	}
+	m_buffBar->addStunned(stunnedTime);
 }
 
 void Enemy::addDamageOverTime(const DamageOverTimeData& data) {
-	if (m_state == GameObjectState::Dead) return;
-	sf::IntRect textureLocation((static_cast<int>(data.damageType) - 1) * 25, 50, 25, 25);
-	m_dotAnimation.clearFrames();
-	m_dotAnimation.addFrame(textureLocation);
-	delete m_debuffSprite;
-	m_debuffSprite = new AnimatedSprite();
-	m_debuffSprite->setAnimation(&m_dotAnimation);
+	if (m_isDead) return;
+	m_buffBar->addDotBuff(data.duration, data.damageType);
 	LevelMovableGameObject::addDamageOverTime(data);
 }
 
 void Enemy::onMouseOver() {
-	if (m_state == GameObjectState::Dead) {
+	if (m_isDead) {
 		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
 		m_showLootWindow = true;
 	}
 }
 
 void Enemy::onRightClick() {
-	if (m_state == GameObjectState::Dead) {
+	if (m_isDead) {
 		// check if the enemy body is in range
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 
@@ -418,11 +381,7 @@ void Enemy::onRightClick() {
 
 void Enemy::setDead() {
 	LevelMovableGameObject::setDead();
-	m_enemyState = EnemyState::Dead;
-	if (m_debuffSprite) {
-		delete m_debuffSprite;
-		m_debuffSprite = nullptr;
-	}
+	m_buffBar->clear();
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);

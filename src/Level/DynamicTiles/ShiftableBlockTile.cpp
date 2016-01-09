@@ -89,19 +89,7 @@ void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		// we've moved over a line in the grid. check for collisions with mobs.
 		sf::FloatRect mobCollisionBox = nextBoundingBoxY;
 		mobCollisionBox.top = (std::floor(nextPosition.y / m_tileSize.y) + 1) * m_tileSize.y;
-		auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
-		auto mainChar = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
-
-		for (auto enemy : *enemies) {
-			if (enemy->getBoundingBox()->intersects(mobCollisionBox)) {
-				collidesY = true;
-				break;
-			}
-		}
-
-		if ((*mainChar)[0]->getBoundingBox()->intersects(mobCollisionBox)) {
-			collidesY = true;
-		}
+		collidesY = m_level->collidesWithMobs(mobCollisionBox);
 	}
 	if (!isMovingDown && collidesY) {
 		setAccelerationY(0.0f);

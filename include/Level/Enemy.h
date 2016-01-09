@@ -11,6 +11,8 @@
 #include "Enums/DamageType.h"
 #include "Enums/EnemyState.h"
 
+#include "Level/EnemyBuffBar.h"
+
 class Level;
 class LevelMainCharacter;
 class Spell;
@@ -108,7 +110,7 @@ protected:
 
 private:
 	sf::RectangleShape m_hpBar;
-	const float HP_BAR_HEIGHT = 3.f;
+	static const float HP_BAR_HEIGHT;
 
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;
@@ -122,9 +124,5 @@ private:
 	// the enemy can only be looted if the main char is in this range
 	const float PICKUP_RANGE = 100.f;
 
-	AnimatedSprite* m_debuffSprite = nullptr;
-	void updateDebuffSprite(const sf::Time &frameTime);
-	Animation m_fearAnimation;
-	Animation m_stunAnimation;
-	Animation m_dotAnimation;
+	EnemyBuffBar* m_buffBar = nullptr;
 };

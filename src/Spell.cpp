@@ -204,6 +204,10 @@ int Spell::getDamage() const {
 	return m_damage;
 }
 
+int Spell::getDamagePerSecond() const {
+	return m_damagePerSecond;
+}
+
 int Spell::getHeal() const {
 	return m_heal;
 }

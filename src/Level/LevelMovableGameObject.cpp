@@ -14,7 +14,7 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
-	if (m_state == GameObjectState::Dead) {
+	if (m_isDead) {
 		setAcceleration(sf::Vector2f(0, m_gravity));
 	}
 	else {
@@ -196,7 +196,7 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
 		break;
 	}
 
-	if (m_state == GameObjectState::Dead || damage <= 0) return;
+	if (m_isDead || damage <= 0) return;
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
 	if (m_attributes.currentHealthPoints == 0) {
 		setDead();
@@ -205,18 +205,18 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
 }
 
 void LevelMovableGameObject::addDamageOverTime(const DamageOverTimeData& data) {
-	if (m_state == GameObjectState::Dead) return;
+	if (m_isDead) return;
 	m_dots.push_back(data);
 }
 
 void LevelMovableGameObject::addHeal(int heal) {
-	if (m_state == GameObjectState::Dead || heal <= 0) return;
+	if (m_isDead || heal <= 0) return;
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints + heal));
 	setSpriteColor(sf::Color::Green, sf::milliseconds(200));
 }
 
 void LevelMovableGameObject::onHit(Spell* spell) {
-	if (m_state == GameObjectState::Dead) {
+	if (m_isDead) {
 		return;
 	}
 	// check for owner
@@ -226,9 +226,16 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 
 	spell->execOnHit(this);
 	addDamage(spell->getDamage(), spell->getDamageType());
+	if (spell->getDamagePerSecond() > 0.f && spell->getDuration() > sf::Time::Zero) {
+		DamageOverTimeData data;
+		data.damage = spell->getDamagePerSecond();
+		data.damageType = spell->getDamageType();
+		data.duration = spell->getDuration();
+		addDamageOverTime(data);
+	}
 }
 
-void LevelMovableGameObject::setDead() {
+void LevelMovableGameObject::setDead() { 
 	m_attributes.currentHealthPoints = 0;
 	m_isDead = true;
 }

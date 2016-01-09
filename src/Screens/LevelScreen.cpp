@@ -180,7 +180,12 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 		}
 		else {
 			writeToCore();
-			m_characterCore->setMap(leData->mapSpawnPoint, leData->mapID);
+			if (!leData->mapID.empty()) {
+				m_characterCore->setMap(leData->spawnPoint, leData->mapID);
+			}
+			else {
+				m_characterCore->setLevel(leData->spawnPoint, leData->levelID);
+			}
 			delete leData;
 			return new LoadingScreen(m_characterCore);
 		}

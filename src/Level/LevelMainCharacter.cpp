@@ -151,7 +151,7 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 }
 
 void LevelMainCharacter::addDamageOverTime(const DamageOverTimeData& data) {
-	if (m_state == GameObjectState::Dead) return;
+	if (m_isDead) return;
 	sf::IntRect textureLocation((static_cast<int>(data.damageType)-1) * 50, 0, 50, 50);
 	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, data.duration, data);
 	LevelMovableGameObject::addDamageOverTime(data);

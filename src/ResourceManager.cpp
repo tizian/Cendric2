@@ -9,11 +9,23 @@ ResourceManager::ResourceManager() : m_currentError(ErrorID::VOID, "") {
 }
 
 ResourceManager::~ResourceManager() {
+	for (auto& it : m_textures) {
+		delete it.second;
+	}
+	for (auto& it : m_soundBuffers) {
+		delete it.second;
+	}
+	for (auto& it : m_fonts) {
+		delete it.second;
+	}
+	for (auto& it : m_bitmapFonts) {
+		delete it.second;
+	}
 	m_textures.clear();
-	m_fileNames.clear();
 	m_soundBuffers.clear();
 	m_fonts.clear();
 	m_bitmapFonts.clear();
+	m_fileNames.clear();
 }
 
 void ResourceManager::init() {
@@ -114,29 +126,29 @@ void ResourceManager::init() {
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {
 	// does the texture exist yet?
-	for (std::map<std::string, sf::Texture>::iterator it = m_textures.begin();
+	for (std::map<std::string, sf::Texture*>::iterator it = m_textures.begin();
 		it != m_textures.end();
 		++it) {
 		if (filename.compare(it->first) == 0) {
-			return &(it->second);
+			return it->second;
 		}
 	}
 
 	// the texture doesn't exist. Create and save it.
-	sf::Texture texture;
+	sf::Texture* texture = new sf::Texture();
 
 	// search project's main directory
-	if (texture.loadFromFile(filename)) {
+	if (texture->loadFromFile(filename)) {
 		m_textures[filename] = texture;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading texture");
-		return &m_textures[filename];
+		return m_textures[filename];
 	}
 
 	g_logger->logError("ResourceManager", "Texture could not be loaded from file: " + std::string(filename));
 	std::string tmp = "Texture could not be loaded from file: " + filename;
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_textures[filename] = texture;
-	return &m_textures[filename];
+	return m_textures[filename];
 }
 
 sf::Texture* ResourceManager::getTexture(ResourceID id) {
@@ -145,29 +157,29 @@ sf::Texture* ResourceManager::getTexture(ResourceID id) {
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) {
 	// does the soundbuffer exist yet?
-	for (std::map<std::string, sf::SoundBuffer>::iterator it = m_soundBuffers.begin();
+	for (std::map<std::string, sf::SoundBuffer*>::iterator it = m_soundBuffers.begin();
 		it != m_soundBuffers.end();
 		++it) {
 		if (filename.compare(it->first) == 0) {
-			return &(it->second);
+			return it->second;
 		}
 	}
 
 	// the soundbuffer doesn't exist. Create and save it.
-	sf::SoundBuffer soundBuffer;
+	sf::SoundBuffer* soundBuffer = new sf::SoundBuffer();
 
 	// search project's main directory
-	if (soundBuffer.loadFromFile(filename)) {
+	if (soundBuffer->loadFromFile(filename)) {
 		m_soundBuffers[filename] = soundBuffer;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading soundbuffer");
-		return &m_soundBuffers[filename];
+		return m_soundBuffers[filename];
 	}
 
 	g_logger->logError("ResourceManager", "Soundbuffer could not be loaded from file: " + std::string(filename));
 	std::string tmp = "Soundbuffer could not be loaded from file: " + filename;
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_soundBuffers[filename] = soundBuffer;
-	return &m_soundBuffers[filename];
+	return m_soundBuffers[filename];
 }
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(ResourceID id) {
@@ -176,29 +188,29 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(ResourceID id) {
 
 sf::Font* ResourceManager::getFont(const std::string &filename) {
 	// does the font exist yet?
-	for (std::map<std::string, sf::Font>::iterator it = m_fonts.begin();
+	for (std::map<std::string, sf::Font*>::iterator it = m_fonts.begin();
 		it != m_fonts.end();
 		++it) {
 		if (filename.compare(it->first) == 0) {
-			return &(it->second);
+			return it->second;
 		}
 	}
 
 	// the font doesn't exist. Create and save it.
-	sf::Font font;
+	sf::Font* font = new sf::Font();
 
 	// search project's main directory
-	if (font.loadFromFile(filename)) {
+	if (font->loadFromFile(filename)) {
 		m_fonts[filename] = font;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading font");
-		return &m_fonts[filename];
+		return m_fonts[filename];
 	}
 
 	g_logger->logError("ResourceManager", "Font could not be loaded from file: " + std::string(filename));
 	std::string tmp = "Font could not be loaded from file: " + filename;
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_fonts[filename] = font;
-	return &m_fonts[filename];
+	return m_fonts[filename];
 }
 
 sf::Font* ResourceManager::getFont(ResourceID id) {
@@ -211,25 +223,25 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string &filename) {
 		it != m_bitmapFonts.end();
 		++it) {
 		if (filename.compare(it->first) == 0) {
-			return &(it->second);
+			return it->second;
 		}
 	}
 
 	// the font doesn't exist. Create and save it.
-	BitmapFont font;
+	BitmapFont* font = new BitmapFont();
 
 	// search project's main directory
-	if (font.loadFromFile(filename)) {
+	if (font->loadFromFile(filename)) {
 		m_bitmapFonts[filename] = font;
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading bitmap font");
-		return &m_bitmapFonts[filename];
+		return m_bitmapFonts[filename];
 	}
 
 	g_logger->logError("ResourceManager", "Bitmap Font could not be loaded from file: " + std::string(filename));
 	std::string tmp = "Bitmap Font could not be loaded from file: " + filename;
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_bitmapFonts[filename] = font;
-	return &m_bitmapFonts[filename];
+	return m_bitmapFonts[filename];
 }
 
 BitmapFont* ResourceManager::getBitmapFont(ResourceID id) {
@@ -244,6 +256,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	// delete texture
 	auto const &textureIt = m_textures.find(filename);
 	if (textureIt != m_textures.end()) {
+		delete textureIt->second;
 		m_textures.erase(textureIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing texture");
 		return;
@@ -252,6 +265,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	// delete font
 	auto const &fontIt = m_fonts.find(filename);
 	if (fontIt != m_fonts.end()) {
+		delete fontIt->second;
 		m_fonts.erase(fontIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing font");
 		return;
@@ -260,6 +274,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	// delete bitmap font
 	auto const &bitmapFontIt = m_bitmapFonts.find(filename);
 	if (bitmapFontIt != m_bitmapFonts.end()) {
+		delete bitmapFontIt->second;
 		m_bitmapFonts.erase(bitmapFontIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing bitmap font");
 		return;
@@ -268,6 +283,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	// delete soundbuffer
 	auto const &soundBufferIt = m_soundBuffers.find(filename);
 	if (soundBufferIt != m_soundBuffers.end()) {
+		delete soundBufferIt->second;
 		m_soundBuffers.erase(soundBufferIt);
 		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing soundbuffer");
 		return;
