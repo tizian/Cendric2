@@ -30,12 +30,12 @@ public:
 	const sf::Vector2f& getSpriteOffset() const;
 	const sf::Color& getCurrentSpriteColor() const;
 
+	virtual void setSpriteColor(const sf::Color& color, const sf::Time& time);
+
 protected:
 	AnimatedSprite m_animatedSprite;
 	std::map<GameObjectState, Animation> m_animations;
 	sf::Vector2f m_spriteOffset = sf::Vector2f(0.f, 0.f);
-
-	virtual void setSpriteColor(const sf::Color& color, const sf::Time& time);
 
 private:
 	// the sprite will reset its color as soon as this time is zero.

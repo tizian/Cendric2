@@ -18,9 +18,9 @@ public:
 	float getAggroRange() const override;
 	int getMentalStrength() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
-	float getConfiguredMaxVelocityYUp() const override;
-	float getConfiguredMaxVelocityYDown() const override;
-	float getConfiguredMaxVelocityX() const override;
+	float getMaxVelocityYUp() const override;
+	float getMaxVelocityYDown() const override;
+	float getMaxVelocityX() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
 protected:

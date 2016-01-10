@@ -14,9 +14,9 @@ public:
 
 	void load() override;
 
-	float getConfiguredMaxVelocityYUp() const override;
-	float getConfiguredMaxVelocityYDown() const override;
-	float getConfiguredMaxVelocityX() const override;
+	float getMaxVelocityYUp() const override;
+	float getMaxVelocityYDown() const override;
+	float getMaxVelocityX() const override;
 	float getApproachingDistance() const override;
 	float getAggroRange() const override;
 	bool getFleeCondition() const override;

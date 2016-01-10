@@ -217,16 +217,16 @@ void LevelMainCharacter::load() {
 	setDebugBoundingBox(sf::Color::White);
 }
 
-float LevelMainCharacter::getConfiguredMaxVelocityYUp() const {
-	return 600.0f;
+float LevelMainCharacter::getMaxVelocityYUp() const {
+	return 600.f;
 }
 
-float LevelMainCharacter::getConfiguredMaxVelocityYDown() const {
-	return m_maxVelocityYDownScale * 600.0f;
+float LevelMainCharacter::getMaxVelocityYDown() const {
+	return 600.f;
 }
 
-float LevelMainCharacter::getConfiguredMaxVelocityX() const {
-	return 200.0f;
+float LevelMainCharacter::getMaxVelocityX() const {
+	return 200.f;
 }
 
 float LevelMainCharacter::getConfiguredDampingGroundPersS() const {

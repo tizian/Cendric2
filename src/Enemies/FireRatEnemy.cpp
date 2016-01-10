@@ -101,16 +101,16 @@ void FireRatEnemy::load() {
 	playCurrentAnimation(true);
 }
 
-float FireRatEnemy::getConfiguredMaxVelocityYUp() const {
-	return 400.0f;
+float FireRatEnemy::getMaxVelocityYUp() const {
+	return 400.f;
 }
 
-float FireRatEnemy::getConfiguredMaxVelocityYDown() const {
-	return m_maxVelocityYDownScale * 400.0f;
+float FireRatEnemy::getMaxVelocityYDown() const {
+	return 400.f;
 }
 
-float FireRatEnemy::getConfiguredMaxVelocityX() const {
-	return 50.0f;
+float FireRatEnemy::getMaxVelocityX() const {
+	return 50.f;
 }
 
 

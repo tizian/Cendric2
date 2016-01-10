@@ -47,7 +47,8 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		m_animatedSprite.setFlippedY(m_mainChar->getIsUpsideDown());
 	}
 
-	setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
+	if (m_isCopyingMainCharColor)
+		setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
 
 	sf::Vector2f newPosition;
 	calculatePositionAccordingToMainChar(newPosition);
@@ -85,4 +86,8 @@ void LevelEquipment::setScreen(Screen* screen) {
 	AnimatedGameObject::setScreen(screen);
 	if (m_lightObject != nullptr)
 		screen->addObject(m_lightObject);
+}
+
+void LevelEquipment::setCopyingMainCharColor(bool value) {
+	m_isCopyingMainCharColor = value;
 }

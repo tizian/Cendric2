@@ -30,8 +30,12 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 	GameObject::updateTime(m_duration, frameTime);
 	if (m_duration <= sf::Time::Zero) {
 		setDisposed();
-		m_mainChar->setInvisibilityLevel(0);
 	}
+}
+
+void InvisibilitySpell::setDisposed() {
+	Spell::setDisposed();
+	m_mainChar->setInvisibilityLevel(0);
 }
 
 void InvisibilitySpell::render(sf::RenderTarget& target) {

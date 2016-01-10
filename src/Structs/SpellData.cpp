@@ -16,6 +16,7 @@
 #include "SpellCreators/InvisibilitySpellCreator.h"
 #include "SpellCreators/FlashSpellCreator.h"
 #include "SpellCreators/LeapOfFaithSpellCreator.h"
+#include "SpellCreators/GhostFormSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -94,6 +95,11 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Strength);
 		break;
+	case SpellID::GhostForm:
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Speed);
+		break;
 	default:
 		break;
 	}
@@ -151,6 +157,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::LeapOfFaith:
 		creator = new LeapOfFaithSpellCreator(data, owner);
 		break;
+	case SpellID::GhostForm:
+		creator = new GhostFormSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -194,6 +203,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getFlashSpellData();
 	case SpellID::LeapOfFaith:
 		return getLeapOfFaithSpellData();
+	case SpellID::GhostForm:
+		return getGhostFormSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -511,6 +522,24 @@ SpellData SpellData::getInvisibilitySpellData() {
 	invisibility.durationModifierAddition = sf::seconds(5);
 
 	return invisibility;
+}
+
+SpellData SpellData::getGhostFormSpellData() {
+	SpellData ghostForm = EMPTY_SPELL;
+	ghostForm.id = SpellID::GhostForm;
+
+	ghostForm.spellType = SpellType::Necromancy;
+	ghostForm.iconTextureRect = sf::IntRect(150, 100, 50, 50);
+	ghostForm.cooldown = sf::seconds(30);
+	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);
+	ghostForm.activeDuration = sf::seconds(5);
+	ghostForm.duration = ghostForm.activeDuration;
+	ghostForm.startVelocity = 50.f;
+
+	ghostForm.durationModifierAddition = sf::seconds(5);
+	ghostForm.speedModifierAddition = 50.f;
+
+	return ghostForm;
 }
 
 

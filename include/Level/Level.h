@@ -39,13 +39,14 @@ public:
 	// checks if the main char has reached a level exit. If no, it returns nullptr, the map id and spawn point for the map.
 	LevelExitData* checkLevelExit(const sf::FloatRect& boundingBox) const;
 	// formula for the jump height is vel_y_max^2 / (2*gravity acc)
-	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const;
+	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles = false) const;
 	// calculates if the object would fall deeper than it can jump if it did one more step in the given direction.
-	bool fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize) const;
+	bool fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize, bool ignoreDynamicTiles = false) const;
 	// checks collision with the collidable grid of that level and also the collidable dynamic tiles
 	// if the calling object itself wants to be excluded, it can give itself as an argument here.
-	bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude) const;
-	bool collides(const sf::FloatRect& boundingBox) const;
+	// the last argument will ignore collidable dynamic tiles in the check, but no strictly collidable dynamic tiles.
+	bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles = false) const;
+	bool collides(const sf::FloatRect& boundingBox, bool ignoreDynamicTiles = false) const;
 	// checks for collisions with mobs (enemies and level main character)
 	bool collidesWithMobs(const sf::FloatRect& boundingBox) const;
 

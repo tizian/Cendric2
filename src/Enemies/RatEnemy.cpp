@@ -106,14 +106,14 @@ sf::Time RatEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(4 * 80);
 }
 
-float RatEnemy::getConfiguredMaxVelocityYUp() const {
-	return 400.0f;
+float RatEnemy::getMaxVelocityYUp() const {
+	return 400.f;
 }
 
-float RatEnemy::getConfiguredMaxVelocityYDown() const {
-	return m_maxVelocityYDownScale * 400.0f;
+float RatEnemy::getMaxVelocityYDown() const {
+	return 400.f;
 }
 
-float RatEnemy::getConfiguredMaxVelocityX() const {
-	return 100.0f;
+float RatEnemy::getMaxVelocityX() const {
+	return 100.f;
 }

@@ -41,13 +41,13 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on x axis
 	bool collidesX = false;
-	if (isMovingX && m_level->collides(nextBoundingBoxX)) {
+	if (isMovingX && m_level->collides(nextBoundingBoxX, m_ignoreDynamicTiles)) {
 		collidesX = true;
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
 	// check for collision on y axis
-	bool collidesY = m_level->collides(nextBoundingBoxY);
+	bool collidesY = m_level->collides(nextBoundingBoxY, m_ignoreDynamicTiles);
 
 	if (!isMovingDown && collidesY) {
 		setAccelerationY(0.0);
@@ -79,11 +79,11 @@ void Enemy::checkCollisions(const sf::Vector2f& nextPosition) {
 	m_jumps = false;
 	if (isMovingX && collidesX) {
 		// would a jump work? 
-		m_jumps = !m_level->collidesAfterJump(*getBoundingBox(), m_jumpHeight, m_isFacingRight);
+		m_jumps = !m_level->collidesAfterJump(*getBoundingBox(), m_jumpHeight, m_isFacingRight, m_ignoreDynamicTiles);
 	}
 
 	// checks if the enemy falls would fall deeper than it can jump. 
-	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss())) {
+	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.

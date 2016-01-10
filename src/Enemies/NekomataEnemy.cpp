@@ -127,16 +127,16 @@ void NekomataEnemy::load() {
 	playCurrentAnimation(true);
 }
 
-float NekomataEnemy::getConfiguredMaxVelocityYUp() const {
-	return 600.0f;
+float NekomataEnemy::getMaxVelocityYUp() const {
+	return 600.f;
 }
 
-float NekomataEnemy::getConfiguredMaxVelocityYDown() const {
-	return m_maxVelocityYDownScale * 600.0f;
+float NekomataEnemy::getMaxVelocityYDown() const {
+	return 600.f;
 }
 
-float NekomataEnemy::getConfiguredMaxVelocityX() const {
-	return 80.0f;
+float NekomataEnemy::getMaxVelocityX() const {
+	return 80.f;
 }
 
 sf::Time NekomataEnemy::getConfiguredFightAnimationTime() const {

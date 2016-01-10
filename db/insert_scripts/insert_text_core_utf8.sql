@@ -192,8 +192,11 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Window','Wind
 INSERT INTO text (text_id, english, german, swiss_german) values ('Yes','Yes','Ja','Ja');
 INSERT INTO text (text_id, english, german, swiss_german) values ('YouDied','You died','Ihr seid tot','Du bisch verreckt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('VSync','Vsync','Vsync','Vsync');
+INSERT INTO text (text_id, english, german, swiss_german) values ('GhostDamage','Ghost Damage','Geisterschaden','Geisterschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellTelekinesis','Telekinesis','Telekinese','Telekinese');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellTelekinesisDesc','What seemed far is now near.','Das, was unerreichbar schien, ist nun greifbar geworden.','Unerreichbar isch es Fremdwort worde.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellGhostForm','Ghost Form','Geistergestalt','Geistergstalt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellGhostFormDesc','Cendric takes the shape of a ghost, making him able to walk through certain blocks, walk faster and gain additional weapon damage.','Cendric nimmt eine Geisterform an, was ihn durch bestimmte Blöcke gehen lässt, ihn schneller macht und ihm zusätzlichen Waffenschaden gewährt.','De Cendric nimmt e Geisterform ah, mit dere er dur gwüssi Blöck laufe cha, schneller lauft und me Waffeschade het.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellInvisibility','Invisibility','Unsichtbarkeit','Unsichtbarkeit');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellInvisibilityDesc','Renders Cendric invisible for a certain duration for certain enemies','Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz');

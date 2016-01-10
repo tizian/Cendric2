@@ -124,41 +124,41 @@ bool Level::collidesLevelCeiling(const sf::FloatRect& boundingBox) const {
 	return false;
 }
 
-bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize) const {
+bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize, bool ignoreDynamicTiles) const {
 	sf::FloatRect dummyRect = boundingBox;
 	dummyRect.left = right ? dummyRect.left + stepSize : dummyRect.left - stepSize;
-	if (collides(dummyRect)) {
+	if (collides(dummyRect, ignoreDynamicTiles)) {
 		return false;
 	}
 	for (float y = boundingBox.top; y < boundingBox.top + jumpHeight; /* don't increment y here */) {
 		y = std::min(boundingBox.top + jumpHeight, y + tileHeight);
 		dummyRect.top = y;
-		if (collides(dummyRect)) {
+		if (collides(dummyRect, ignoreDynamicTiles)) {
 			return false;
 		}
 	}
 	return true;
 }
 
-bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right) const {
+bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles) const {
 	sf::FloatRect dummyRect = boundingBox;
 	for (float y = boundingBox.top; y > boundingBox.top - jumpHeight; /* don't decrement y here */) {
 		y = std::max(boundingBox.top - jumpHeight, y - tileHeight);
 		dummyRect.top = y;
-		if (collides(dummyRect)) {
+		if (collides(dummyRect, ignoreDynamicTiles)) {
 			return true;
 		}
 	}
 
 	// depending on left or right, calculate one step left or right
 	dummyRect.left = right ? dummyRect.left + 10.f : dummyRect.left - 10.f;
-	if (collides(dummyRect)) {
+	if (collides(dummyRect, ignoreDynamicTiles)) {
 		return true;
 	}
 	return false;
 }
 
-bool Level::collides(const sf::FloatRect& boundingBox, const GameObject* exclude) const {
+bool Level::collides(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles) const {
 	// check for collision with level rect (y axis)
 	if (boundingBox.top < m_levelData.mapRect.top || boundingBox.top + boundingBox.height > m_levelData.mapRect.top + m_levelData.mapRect.height) {
 		return true;
@@ -193,6 +193,7 @@ bool Level::collides(const sf::FloatRect& boundingBox, const GameObject* exclude
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
 		if (!tile->isViewable() && !(tile->getDynamicTileID() == LevelDynamicTileID::ShiftableBlock)) continue;
+		if (ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
 		if (tile != nullptr && tile != exclude && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox)) {
 			return true;
 		}
@@ -201,8 +202,8 @@ bool Level::collides(const sf::FloatRect& boundingBox, const GameObject* exclude
 	return false;
 }
 
-bool Level::collides(const sf::FloatRect& boundingBox) const {
-	return collides(boundingBox, nullptr);
+bool Level::collides(const sf::FloatRect& boundingBox, bool ignoreDynamicTiles) const {
+	return collides(boundingBox, nullptr, ignoreDynamicTiles);
 }
 
 bool Level::collidesWithMobs(const sf::FloatRect& boundingBox) const {

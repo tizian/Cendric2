@@ -90,7 +90,7 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
 
 	// check for collision on x axis
-	if (isMovingX && m_level->collides(nextBoundingBoxX)) {
+	if (isMovingX && m_level->collides(nextBoundingBoxX, m_ignoreDynamicTiles)) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
@@ -99,7 +99,7 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	// check for collision on y axis
-	bool collidesY = m_level->collides(nextBoundingBoxY);
+	bool collidesY = m_level->collides(nextBoundingBoxY, m_ignoreDynamicTiles);
 	if (!isMovingDown && collidesY) {
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
@@ -270,6 +270,14 @@ void LevelMovableGameObject::setGravityScale(float scale) {
 	m_maxVelocityYDownScale = scale;
 }
 
+void LevelMovableGameObject::setMaxXVelocityScale(float scale) {
+	m_maxVelocityXScale = scale;
+}
+
+void LevelMovableGameObject::setIgnoreDynamicTiles(bool value) {
+	m_ignoreDynamicTiles = value;
+}
+
 GameObjectState LevelMovableGameObject::getState() const {
 	return m_state;
 }
@@ -288,6 +296,18 @@ float LevelMovableGameObject::getGravityAcceleration() const {
 
 float LevelMovableGameObject::getConfiguredDampingGroundPersS() const {
 	return 1.f;
+}
+
+float LevelMovableGameObject::getConfiguredMaxVelocityX() const {
+	return m_maxVelocityXScale * getMaxVelocityX();
+}
+
+float LevelMovableGameObject::getConfiguredMaxVelocityYDown() const {
+	return m_maxVelocityYDownScale * getMaxVelocityYDown();
+}
+
+float LevelMovableGameObject::getConfiguredMaxVelocityYUp() const {
+	return getMaxVelocityYUp();
 }
 
 float LevelMovableGameObject::getConfiguredDampingAirPerS() const {

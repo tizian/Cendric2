@@ -39,6 +39,10 @@ public:
 	void flipGravity();
 	// change gravity (used for leap of faith spell)
 	void setGravityScale(float scale);
+	// change x speed (used for ghost spell)
+	void setMaxXVelocityScale(float scale);
+	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
+	void setIgnoreDynamicTiles(bool value);
 
 	SpellManager* getSpellManager() const;
 	const AttributeData* getAttributes() const;
@@ -48,12 +52,23 @@ public:
 	bool isDead() const;
 	GameObjectState getState() const;
 
+	virtual float getMaxVelocityX() const = 0;
+	virtual float getMaxVelocityYUp() const = 0;
+	virtual float getMaxVelocityYDown() const = 0;
+
 protected:
 	virtual float getConfiguredWalkAcceleration() const;
 	virtual float getConfiguredGravityAcceleration() const;
 	virtual float getGravityAcceleration() const;
+	
+	float getConfiguredMaxVelocityX() const override;
+	float getConfiguredMaxVelocityYDown() const override;
+	float getConfiguredMaxVelocityYUp() const override;
+
 	// used for gliding
 	float m_maxVelocityYDownScale = 1.f;
+	// used for scaling X speed
+	float m_maxVelocityXScale = 1.f;
 	virtual sf::Time getConfiguredFightAnimationTime() const = 0;
 	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
 	virtual float getConfiguredDampingGroundPersS() const;
@@ -68,6 +83,7 @@ protected:
 	bool m_isGrounded = false;
 	bool m_isDead = false;
 	bool m_isFlippedGravity = false;
+	bool m_ignoreDynamicTiles = false;
 	float m_gravity;
 	Level* m_level;
 

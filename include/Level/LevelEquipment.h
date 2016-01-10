@@ -25,6 +25,9 @@ public:
 	void setDisposed() override;
 	void setScreen(Screen* screen) override;
 
+	// this value determines whether the level equipment takes into account the sprite color of the main character
+	void setCopyingMainCharColor(bool value);
+
 private:
 	LevelMainCharacter* m_mainChar;
 	std::string m_texturePath;
@@ -36,4 +39,6 @@ private:
 
 	// calculates position according to m_mainChar.
 	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
+
+	bool m_isCopyingMainCharColor = true;
 };
