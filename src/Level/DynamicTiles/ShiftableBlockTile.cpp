@@ -72,7 +72,14 @@ void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
 
 	// check for collision on x axis
-	if (isMovingX && m_level->collides(nextBoundingBoxX, this)) {
+	bool collidesX = isMovingX && m_level->collides(nextBoundingBoxX, this);
+
+	// check for mob collision
+	if (!collidesX && isMovingX) {
+		collidesX = m_level->collidesWithMobs(nextBoundingBoxX);
+	}
+
+	if (collidesX) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
