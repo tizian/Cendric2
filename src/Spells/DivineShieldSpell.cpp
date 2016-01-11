@@ -26,7 +26,7 @@ void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 	playCurrentAnimation(true);
 
 	Spell::load(bean, mob, target);
-	m_mob->addAttributes(m_duration, m_additionalResistance);
+	m_mob->addAttributes(m_data.duration, m_additionalResistance);
 	m_mob->addHeal(getHeal());
 }
 
@@ -35,10 +35,9 @@ void DivineShieldSpell::update(const sf::Time& frameTime) {
 	setPosition(m_nextPosition);
 
 	MovableGameObject::update(frameTime);
+	GameObject::updateTime(m_data.activeDuration, frameTime);
 
-	m_duration = m_duration - frameTime;
-
-	if (m_duration.asMilliseconds() <= 0) {
+	if (m_data.activeDuration.asMilliseconds() <= 0) {
 		setDisposed();
 	}
 }

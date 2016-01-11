@@ -76,11 +76,6 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 			stats.append(": ");
 			stats.append(to_string(bean.damagePerSecond));
 			stats.append("/s\n");
-
-			stats.append(g_textProvider->getText("Duration"));
-			stats.append(": ");
-			stats.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));
-			stats.append("s\n");
 		}
 	}
 
@@ -101,10 +96,10 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	}
 
 	// speed
-	if (bean.startVelocity > 0) {
+	if (bean.speed > 0) {
 		stats.append(g_textProvider->getText("Speed"));
 		stats.append(": ");
-		stats.append(toStrMaxDecimals(bean.startVelocity, 1));
+		stats.append(toStrMaxDecimals(bean.speed, 1));
 		stats.append("\n");
 	}
 
@@ -116,8 +111,8 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 		stats.append("\n");
 	}
 
-	// duration (is only displayed when there can be duration modifier additions)
-	if (bean.durationModifierAddition > sf::Time::Zero) {
+	// duration (is only displayed when duration is bigger than zero)
+	if (bean.duration > sf::Time::Zero) {
 		stats.append(g_textProvider->getText("Duration"));
 		stats.append(": ");
 		stats.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));

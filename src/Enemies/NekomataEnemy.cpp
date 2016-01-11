@@ -26,7 +26,7 @@ void NekomataEnemy::loadSpells() {
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 100;
 	fireBallSpell.cooldown = sf::milliseconds(3000);
-	fireBallSpell.startVelocity = 200.f;
+	fireBallSpell.speed = 200.f;
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(fireBallSpell);

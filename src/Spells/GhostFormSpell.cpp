@@ -10,16 +10,16 @@ GhostFormSpell::GhostFormSpell(const AttributeData& additionalDamage) : Spell() 
 }
 
 void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	float velocityScale = (bean.startVelocity + mob->getMaxVelocityX()) / mob->getMaxVelocityX();
+	float velocityScale = (bean.speed + mob->getMaxVelocityX()) / mob->getMaxVelocityX();
 	SpellData data(bean);
-	data.startVelocity = 0.f;
+	data.speed = 0.f;
 	data.boundingBox = *mob->getBoundingBox();
 	Spell::load(data, mob, target);
-	loadParticleSystem(bean.startVelocity);
+	loadParticleSystem(bean.speed);
 
 	m_mob->setMaxXVelocityScale(velocityScale);
 	m_mob->setIgnoreDynamicTiles(true);
-	m_mob->addAttributes(getDuration(), m_additionalDamage);
+	m_mob->addAttributes(getActiveDuration(), m_additionalDamage);
 	m_lastSafePosition = m_mob->getPosition();
 	loadMask();
 }
@@ -37,8 +37,8 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 		m_lastSafePosition = m_mob->getPosition();
 	}
 
-	GameObject::updateTime(m_duration, frameTime);
-	if (m_duration <= sf::Time::Zero) {
+	GameObject::updateTime(m_data.activeDuration, frameTime);
+	if (m_data.activeDuration <= sf::Time::Zero) {
 		setDisposed();
 	}
 }

@@ -58,7 +58,7 @@ void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {
 }
 
 void SpellCreator::addSpeedModifier(int level) {
-	m_spellData.startVelocity += m_spellData.speedModifierAddition * level;
+	m_spellData.speed += m_spellData.speedModifierAddition * level;
 }
 
 void SpellCreator::addDamageModifier(int level) {

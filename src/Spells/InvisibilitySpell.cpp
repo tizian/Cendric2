@@ -27,8 +27,8 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 			m_ps->emitRate = 0.f;
 	}
 
-	GameObject::updateTime(m_duration, frameTime);
-	if (m_duration <= sf::Time::Zero) {
+	GameObject::updateTime(m_data.activeDuration, frameTime);
+	if (m_data.activeDuration <= sf::Time::Zero) {
 		setDisposed();
 	}
 }

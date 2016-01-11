@@ -17,6 +17,7 @@
 #include "SpellCreators/FlashSpellCreator.h"
 #include "SpellCreators/LeapOfFaithSpellCreator.h"
 #include "SpellCreators/GhostFormSpellCreator.h"
+#include "SpellCreators/ShadowTrapSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -100,6 +101,11 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Strength);
 		types.push_back(SpellModifierType::Speed);
 		break;
+	case SpellID::ShadowTrap:
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Damage);
+		break;
 	default:
 		break;
 	}
@@ -160,6 +166,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::GhostForm:
 		creator = new GhostFormSpellCreator(data, owner);
 		break;
+	case SpellID::ShadowTrap:
+		creator = new ShadowTrapSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -205,6 +214,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getLeapOfFaithSpellData();
 	case SpellID::GhostForm:
 		return getGhostFormSpellData();
+	case SpellID::ShadowTrap:
+		return getShadowTrapSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -219,6 +230,7 @@ SpellData SpellData::getChopSpellData() {
 	chop.damageType = DamageType::Physical;
 	chop.damage = 3;
 	chop.activeDuration = sf::milliseconds(320);
+	chop.attachedToMob = true;
 
 	chop.inputKey = Key::Chop;
 
@@ -240,7 +252,7 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.duration = sf::seconds(3);
 	fireBall.needsTarget = true;
 	fireBall.damage = 10;
-	fireBall.startVelocity = 300.f;
+	fireBall.speed = 300.f;
 
 	fireBall.countModifierAddition = 1;
 	fireBall.damageModifierAddition = 20;
@@ -263,7 +275,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.activeDuration = sf::seconds(5);
 	iceBall.needsTarget = true;
 	iceBall.damage = 6;
-	iceBall.startVelocity = 200.f;
+	iceBall.speed = 200.f;
 
 	iceBall.countModifierAddition = 1;
 	iceBall.damageModifierAddition = 20;
@@ -284,6 +296,7 @@ SpellData SpellData::getDivineShieldSpellData() {
 	divineShield.duration = sf::seconds(3);
 	divineShield.activeDuration = divineShield.duration;
 	divineShield.heal = 20;
+	divineShield.attachedToMob = true;
 
 	divineShield.durationModifierAddition = sf::seconds(2);
 
@@ -306,7 +319,7 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.needsTarget = true;
 	aureola.damage = 10;
 	aureola.heal = 10;
-	aureola.startVelocity = 300.f;
+	aureola.speed = 300.f;
 	aureola.range = 150.f;
 
 	aureola.countModifierAddition = 2;
@@ -329,7 +342,7 @@ SpellData SpellData::getFearSpellData() {
 	fear.activeDuration = sf::seconds(5);
 	fear.duration = sf::seconds(2);
 	fear.needsTarget = true;
-	fear.startVelocity = 300.f;
+	fear.speed = 300.f;
 
 	fear.countModifierAddition = 1;
 	fear.reflectModifierAddition = 1;
@@ -349,6 +362,7 @@ SpellData SpellData::getAntiGravitySpellData() {
 	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
 	antiGravity.duration = sf::seconds(5);
 	antiGravity.activeDuration = antiGravity.duration;
+	antiGravity.attachedToMob = true;
 
 	antiGravity.durationModifierAddition = sf::seconds(3);
 
@@ -363,10 +377,10 @@ SpellData SpellData::getTelekinesisSpellData() {
 	telekinesis.iconTextureRect = sf::IntRect(100, 0, 50, 50);
 	telekinesis.cooldown = sf::seconds(3);
 	telekinesis.boundingBox = sf::FloatRect(0, 0, 20, 20);
-	telekinesis.startVelocity = 200.f;
+	telekinesis.speed = 200.f;
 	telekinesis.needsTarget = true;
 	telekinesis.range = 100;
-	telekinesis.activeDuration = sf::seconds(telekinesis.range/telekinesis.startVelocity);
+	telekinesis.activeDuration = sf::seconds(telekinesis.range / telekinesis.speed);
 
 	telekinesis.rangeModifierAddition = 150.f;
 	telekinesis.reflectModifierAddition = 1;
@@ -385,6 +399,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.boundingBox = sf::FloatRect(0, 0, windGust.range, 40);
 	windGust.duration = sf::seconds(1);
 	windGust.activeDuration = windGust.duration;
+	windGust.attachedToMob = true;
 
 	windGust.rangeModifierAddition = 50.f;
 	windGust.durationModifierAddition = sf::seconds(1);
@@ -405,7 +420,7 @@ SpellData SpellData::getLeechSpellData() {
 	leech.activeDuration = sf::seconds(5);
 	leech.needsTarget = true;
 	leech.damage = 10;
-	leech.startVelocity = 150.f;
+	leech.speed = 150.f;
 
 	leech.countModifierAddition = 1;
 	leech.damageModifierAddition = 10;
@@ -428,7 +443,7 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.duration = sf::seconds(1);
 	icyAmbush.needsTarget = true;
 	icyAmbush.damage = 100;
-	icyAmbush.startVelocity = 200.f;
+	icyAmbush.speed = 200.f;
 	icyAmbush.range = 70.f;
 
 	icyAmbush.damageModifierAddition = 50;
@@ -448,7 +463,7 @@ SpellData SpellData::getFlashSpellData() {
 	flash.cooldown = sf::seconds(5);
 	flash.damageType = DamageType::Light;
 	flash.activeDuration = sf::seconds(2.0);
-	flash.needsTarget = false;
+	flash.attachedToMob = true;
 	flash.damage = 20;
 	flash.range = 150.f;
 	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
@@ -470,6 +485,7 @@ SpellData SpellData::getLightSpellData() {
 	light.duration = sf::seconds(60);
 	light.activeDuration = light.duration;
 	light.range = 200.f;
+	light.attachedToMob = true;
 
 	light.durationModifierAddition = sf::seconds(60);
 	light.rangeModifierAddition = 100.f;
@@ -487,6 +503,7 @@ SpellData SpellData::getLeapOfFaithSpellData() {
 	leapOfFaith.boundingBox = sf::FloatRect(0, 0, 80, 120);
 	leapOfFaith.duration = sf::seconds(10);
 	leapOfFaith.activeDuration = leapOfFaith.duration;
+	leapOfFaith.attachedToMob = true;
 
 	leapOfFaith.durationModifierAddition = sf::seconds(10);
 
@@ -503,7 +520,7 @@ SpellData SpellData::getUnlockSpellData() {
 	unlock.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	unlock.activeDuration = sf::seconds(1);
 	unlock.needsTarget = true;
-	unlock.startVelocity = 200.f;
+	unlock.speed = 200.f;
 
 	return unlock;
 }
@@ -518,6 +535,7 @@ SpellData SpellData::getInvisibilitySpellData() {
 	invisibility.boundingBox = sf::FloatRect(0, 0, 1, 1);
 	invisibility.activeDuration = sf::seconds(5);
 	invisibility.duration = invisibility.activeDuration;
+	invisibility.attachedToMob = true;
 
 	invisibility.durationModifierAddition = sf::seconds(5);
 
@@ -534,12 +552,33 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);
 	ghostForm.activeDuration = sf::seconds(5);
 	ghostForm.duration = ghostForm.activeDuration;
-	ghostForm.startVelocity = 50.f;
+	ghostForm.speed = 50.f;
+	ghostForm.attachedToMob = true;
 
 	ghostForm.durationModifierAddition = sf::seconds(5);
 	ghostForm.speedModifierAddition = 50.f;
 
 	return ghostForm;
+}
+
+SpellData SpellData::getShadowTrapSpellData() {
+	SpellData shadowTrap = EMPTY_SPELL;
+	shadowTrap.id = SpellID::ShadowTrap;
+	shadowTrap.spellType = SpellType::Twilight;
+	shadowTrap.iconTextureRect = sf::IntRect(50, 50, 50, 50);
+
+	shadowTrap.cooldown = sf::seconds(10);
+	shadowTrap.boundingBox = sf::FloatRect(0, 0, 25, 10);
+	shadowTrap.divergenceAngle = 0.2f;
+	shadowTrap.damageType = DamageType::Shadow;
+	shadowTrap.activeDuration = sf::seconds(15);
+	shadowTrap.damagePerSecond = 5;
+	shadowTrap.duration = sf::seconds(3);
+
+	shadowTrap.damageModifierAddition = 5;
+	shadowTrap.durationModifierAddition = sf::seconds(1);
+
+	return shadowTrap;
 }
 
 

@@ -53,10 +53,9 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 		setDisposed();
 	}
 	MovableGameObject::update(frameTime);
+	GameObject::updateTime(m_data.activeDuration, frameTime);
 
-	m_duration = m_duration - frameTime;
-
-	if (m_duration.asMilliseconds() <= 0) {
+	if (m_data.activeDuration.asMilliseconds() <= 0) {
 		setDisposed();
 	}
 

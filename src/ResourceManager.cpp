@@ -52,6 +52,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_spell_flash, "res/assets/spells/spritesheet_spell_flash.png" },
 		{ ResourceID::Texture_spell_leapoffaith, "res/assets/spells/spritesheet_spell_leapoffaith.png" },
 		{ ResourceID::Texture_spell_ghost, "res/assets/spells/spritesheet_spell_ghost.png" },
+		{ ResourceID::Texture_spell_shadowtrap, "res/assets/spells/spritesheet_spell_shadowtrap.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
 		{ ResourceID::Texture_enemy_nekomata_blue_trans, "res/assets/enemies/spritesheet_enemy_nekomata_blue_trans.png" },
@@ -345,6 +346,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_spell_flash);
 	deleteResource(ResourceID::Texture_spell_leapoffaith);
 	deleteResource(ResourceID::Texture_spell_ghost);
+	deleteResource(ResourceID::Texture_spell_shadowtrap);
 
 	deleteResource(ResourceID::Sound_spell_fireball);
 
@@ -395,6 +397,7 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_spell_flash);
 	getTexture(ResourceID::Texture_spell_leapoffaith);
 	getTexture(ResourceID::Texture_spell_ghost);
+	getTexture(ResourceID::Texture_spell_shadowtrap);
 
 	getSoundBuffer(ResourceID::Sound_spell_fireball);
 

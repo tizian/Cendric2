@@ -345,7 +345,7 @@ void Spellbook::calculateSpellSlots() {
 			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 			text.setColor(CENDRIC_COLOR_WHITE);
 			text.setString(g_textProvider->getText(EnumNames::getSpellIDName(it2)));
-			text.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + MARGIN, yOffset + SpellSlot::ICON_OFFSET));
+			text.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + MARGIN, yOffset + SpellSlot::ICON_OFFSET / 2.f));
 
 			BitmapText textDesc;
 			textDesc.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -353,7 +353,7 @@ void Spellbook::calculateSpellSlots() {
 			textDesc.setString(g_textProvider->getCroppedText(
 				EnumNames::getSpellIDName(it2) + "Desc", GUIConstants::CHARACTER_SIZE_S,
 				static_cast<int>(WIDTH - (SpellSlot::SIZE + 4 * MARGIN))));
-			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f + SpellSlot::ICON_OFFSET));
+			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::SIZE + MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f + SpellSlot::ICON_OFFSET / 2.f));
 
 			std::pair<BitmapText, BitmapText> texts = std::pair<BitmapText, BitmapText>(text, textDesc);
 			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>(slot, texts));

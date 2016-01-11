@@ -38,7 +38,7 @@ void FlashSpell::update(const sf::Time& frameTime) {
 	if (m_flashDuration > sf::Time::Zero) {
 		m_flashDuration -= frameTime;
 		if (m_flashDuration <= sf::Time::Zero) {
-			m_damageType = DamageType::VOID;
+			m_data.damageType = DamageType::VOID;
 			m_isHurting = false;
 		}
 	}
@@ -47,7 +47,7 @@ void FlashSpell::update(const sf::Time& frameTime) {
 		m_flashingTime = FLASHING_TIME;
 	}
 	m_ps->update(frameTime);
-	if (m_ps->emitRate > 0 && m_duration < sf::seconds(1.f)) {
+	if (m_ps->emitRate > 0 && m_data.activeDuration < sf::seconds(1.f)) {
 		m_ps->emitRate = 0;
 	}
 }
@@ -65,7 +65,7 @@ void FlashSpell::execOnHit(LevelMovableGameObject* target) {
 		m_isHurting = false;
 	}
 	else {
-		m_damageType = DamageType::VOID;
+		m_data.damageType = DamageType::VOID;
 	}
 }
 

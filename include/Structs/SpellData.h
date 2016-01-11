@@ -21,13 +21,14 @@ struct SpellData {
 	sf::FloatRect boundingBox;
 	DamageType damageType;
 	bool needsTarget;
+	bool attachedToMob;
 
 	// modifiable by crystal modifiers
 	int damage;
 	int damagePerSecond;
 	int heal;
 	int reflectCount;
-	float startVelocity;
+	float speed;
 	int count;
 	float range;
 	sf::Time duration; // duration of an effect of a spell, for example the fear duration (fear spell)
@@ -58,7 +59,7 @@ private:
 	static SpellData getAntiGravitySpellData();
 
 	static SpellData getUnlockSpellData();
-	// static SpellData getShadowTrapSpellData();
+	static SpellData getShadowTrapSpellData();
 	static SpellData getInvisibilitySpellData();
 	static SpellData getFlashSpellData();
 	static SpellData getIcyAmbushSpellData();
@@ -84,6 +85,7 @@ const struct SpellData EMPTY_SPELL =
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),
 	DamageType::VOID,
+	false,
 	false,
 
 	0,

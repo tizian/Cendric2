@@ -18,5 +18,5 @@ void TelekinesisSpellCreator::executeSpell(const sf::Vector2f& target) {
 
 void TelekinesisSpellCreator::addRangeModifier(int level) {
 	SpellCreator::addRangeModifier(level);
-	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.startVelocity);
+	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.speed);
 }

@@ -28,8 +28,8 @@ void IcyAmbushSpell::update(const sf::Time& frameTime) {
 		updateParticleSystemPosition();
 	}
 	else {
-		AnimatedGameObject::updateTime(m_duration, frameTime);
-		if (m_duration <= sf::Time::Zero) setDisposed();
+		GameObject::updateTime(m_data.activeDuration, frameTime);
+		if (m_data.activeDuration <= sf::Time::Zero) setDisposed();
 	}
 }
 
@@ -50,10 +50,10 @@ void IcyAmbushSpell::execOnHit(LevelMovableGameObject *target) {
 	m_isDisposed = false;
 	if (!m_isStunning) {
 		m_isStunning = true;
-		m_duration = m_stunDuration;
-		m_damage = 0;
-		m_boundingBox.width = m_range * 2;
-		m_boundingBox.height = m_range * 2;
+		m_data.duration = m_stunDuration;
+		m_data.damage = 0;
+		m_boundingBox.width = m_data.range * 2;
+		m_boundingBox.height = m_data.range * 2;
 		setPosition(getPosition() + (getPosition() - getCenter()));
 
 		m_debugBox.setPosition(getPosition());

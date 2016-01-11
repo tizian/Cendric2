@@ -5,17 +5,7 @@
 using namespace std;
 
 void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	m_duration = data.activeDuration;
-	m_damage = data.damage;
-	m_damagePerSecond = data.damagePerSecond;
-	m_heal = data.heal;
-	m_damageType = data.damageType;
-	m_reflectCount = data.reflectCount;
-	m_speed = data.startVelocity;
-	m_id = data.id;
-	m_spellType = data.spellType;
-	m_range = data.range;
-	m_needsTarget = data.needsTarget;
+	m_data = data;
 	setBoundingBox(data.boundingBox);
 	setDebugBoundingBox(sf::Color::Red);
 
@@ -35,8 +25,8 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 	calculatePositionAccordingToMob(absolutePosition);
 	setPosition(absolutePosition);
 
-	// if the spell doesn't need a target, it is attached to main char and velocity is ignored 
-	if (!data.needsTarget) {
+	// if it is attached to mob, its velocity is ignored 
+	if (data.attachedToMob || !data.needsTarget) {
 		setVelocity(sf::Vector2f(0, 0));
 		return;
 	}
@@ -53,10 +43,10 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 		setSpriteRotation(atan2(direction.y, direction.x));
 	}
 
-	setVelocity(m_speed * direction);
+	setVelocity(m_data.speed * direction);
 }
 
-void Spell::execOnHit(LevelMovableGameObject *target) {
+void Spell::execOnHit(LevelMovableGameObject* target) {
 	setDisposed();
 }
 
@@ -77,7 +67,7 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
 }
 
 void Spell::update(const sf::Time& frameTime) {
-	if (!m_needsTarget) {
+	if (m_data.attachedToMob) {
 		calculatePositionAccordingToMob(m_nextPosition);
 		setPosition(m_nextPosition);
 	}
@@ -85,7 +75,7 @@ void Spell::update(const sf::Time& frameTime) {
 		calculateNextPosition(frameTime, m_nextPosition);
 	}
 
-	checkCollisions(m_nextPosition);
+	if (!m_data.attachedToMob) checkCollisions(m_nextPosition);
 	// check collisions with dynamic tiles
 	sf::FloatRect tmp(m_nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
 	m_level->collideWithDynamicTiles(this, &tmp);
@@ -97,9 +87,9 @@ void Spell::update(const sf::Time& frameTime) {
 	checkCollisionsWithEnemies(getBoundingBox());
 	MovableGameObject::update(frameTime);
 
-	GameObject::updateTime(m_duration, frameTime);
+	GameObject::updateTime(m_data.activeDuration, frameTime);
 
-	if (m_duration == sf::Time::Zero) {
+	if (m_data.activeDuration == sf::Time::Zero) {
 		setDisposed();
 	}
 }
@@ -127,7 +117,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool reflected = false;
 	// check for collision on x axis
 	if (isMovingX && m_level->collides(nextBoundingBoxX)) {
-		if (m_reflectCount <= 0) {
+		if (m_data.reflectCount <= 0) {
 			setDisposed();
 			return;
 		}
@@ -142,7 +132,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 	// check for collision on y axis
 	if (isMovingY && m_level->collides(nextBoundingBoxY)) {
-		if (m_reflectCount <= 0) {
+		if (m_data.reflectCount <= 0) {
 			setDisposed();
 			return;
 		}
@@ -156,7 +146,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 	}
 	if (reflected) {
-		m_reflectCount -= 1;
+		m_data.reflectCount -= 1;
 	}
 }
 
@@ -176,8 +166,12 @@ void Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
 	}
 }
 
+const sf::Time& Spell::getActiveDuration() const {
+	return m_data.activeDuration;
+}
+
 const sf::Time& Spell::getDuration() const {
-	return m_duration;
+	return m_data.duration;
 }
 
 GameObjectType Spell::getConfiguredType() const {
@@ -185,15 +179,15 @@ GameObjectType Spell::getConfiguredType() const {
 }
 
 DamageType Spell::getDamageType() const {
-	return m_damageType;
+	return m_data.damageType;
 }
 
 SpellID Spell::getSpellID() const {
-	return m_id;
+	return m_data.id;
 }
 
 SpellType Spell::getSpellType() const {
-	return m_spellType;
+	return m_data.spellType;
 }
 
 const MovableGameObject* Spell::getOwner() const {
@@ -201,15 +195,15 @@ const MovableGameObject* Spell::getOwner() const {
 }
 
 int Spell::getDamage() const {
-	return m_damage;
+	return m_data.damage;
 }
 
 int Spell::getDamagePerSecond() const {
-	return m_damagePerSecond;
+	return m_data.damagePerSecond;
 }
 
 int Spell::getHeal() const {
-	return m_heal;
+	return m_data.heal;
 }
 
 sf::Vector2f Spell::rotateVector(const sf::Vector2f &vec, float angle) {
