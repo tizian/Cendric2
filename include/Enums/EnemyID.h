@@ -5,5 +5,6 @@ enum class EnemyID {
 	Rat,
 	FireRat,
 	Nekomata_blue,
+	Crow,
 	MAX
 };

@@ -250,13 +250,24 @@ float Level::getCeiling(const sf::FloatRect& boundingBox) const {
 }
 
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const {
-	size_t size = m_dynamicTiles->size(); // Note: this loop type allows objects to be added to the back of the list while iterating over it.
-	for (size_t i = 0; i < size; ++i) {
-		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(m_dynamicTiles->at(i));
+	for (auto& it : *m_dynamicTiles) {
+		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 		if (tile != nullptr && (tile->getBoundingBox()->intersects(*boundingBox))) {
 			tile->onHit(spell);
 		}
 	}
+}
+
+bool Level::collidesWithDynamicTiles(const sf::FloatRect* boundingBox, const std::set<LevelDynamicTileID>& tiles) const {
+	for (auto& it : *m_dynamicTiles) {
+		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+		if (tile != nullptr &&
+			tiles.find(tile->getDynamicTileID()) != tiles.end() &&
+			(tile->getBoundingBox()->intersects(*boundingBox))) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect* boundingBox) const {

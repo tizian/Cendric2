@@ -1,7 +1,18 @@
 #include "Enemies/FireRatEnemy.h"
 #include "Level/LevelMainCharacter.h"
 
-FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::FireRat) {
+void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
+	if (gold != 0 || !loot.empty()) return;
+
+	loot.insert({ "fo_rawmeat", 1 });
+	loot.insert({ "fo_cheese", 1 });
+	gold = rand() % 4 + 1;
+}
+
+FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : 
+	WalkingEnemy(level, mainChar, EnemyID::FireRat),
+	Enemy(level, mainChar, EnemyID::FireRat),
+	LevelMovableGameObject(level) {
 	load();
 	loadAttributes();
 	loadSpells();
@@ -19,7 +30,7 @@ void FireRatEnemy::loadAttributes() {
 void FireRatEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 15;
-	chopSpell.duration = sf::milliseconds(500);
+	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 
@@ -47,12 +58,6 @@ void FireRatEnemy::handleAttackInput() {
 
 		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 	}
-}
-
-void FireRatEnemy::handleMovementInput() {
-	Enemy::handleMovementInput();
-	// handle attack input
-
 }
 
 void FireRatEnemy::load() {
@@ -112,7 +117,6 @@ float FireRatEnemy::getMaxVelocityYDown() const {
 float FireRatEnemy::getMaxVelocityX() const {
 	return 50.f;
 }
-
 
 sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(4 * 80);

@@ -5,6 +5,7 @@
 #include "Enemies/RatEnemy.h"
 #include "Enemies/FireRatEnemy.h"
 #include "Enemies/NekomataEnemy.h"
+#include "Enemies/CrowEnemy.h"
 #include "LightObject.h"
 
 using namespace std;
@@ -199,24 +200,19 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			switch (it.second.first) {
 			case EnemyID::Rat:
 				enemy = new RatEnemy(level, mainCharacter);
-				if (gold == 0 && loot.empty()) {
-					loot.insert({ "fo_cheese", 1 });
-					gold = 1;
-				}
+				RatEnemy::insertDefaultLoot(loot, gold);
 				break;
 			case EnemyID::FireRat:
 				enemy = new FireRatEnemy(level, mainCharacter);
-				if (gold == 0 && loot.empty()) {
-					loot.insert({ "fo_bread", 2 });
-					gold = 2;
-				}
+				FireRatEnemy::insertDefaultLoot(loot, gold);
 				break;
 			case EnemyID::Nekomata_blue:
 				enemy = new NekomataEnemy(level, mainCharacter);
-				if (gold == 0 && loot.empty()) {
-					loot.insert({ "mi_goldengoblet", 1 });
-					gold = 100;
-				}
+				NekomataEnemy::insertDefaultLoot(loot, gold);
+				break;
+			case EnemyID::Crow:
+				enemy = new CrowEnemy(level, mainCharacter);
+				CrowEnemy::insertDefaultLoot(loot, gold);
 				break;
 			case EnemyID::VOID:
 			default:

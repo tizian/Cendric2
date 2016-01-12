@@ -1,7 +1,17 @@
 #include "Enemies/RatEnemy.h"
 #include "Level/LevelMainCharacter.h"
 
-RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::Rat) {
+void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
+	if (gold != 0 || !loot.empty()) return;
+
+	loot.insert({ "fo_rawmeat", 1 });
+	gold = 1;
+}
+
+RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : 
+	WalkingEnemy(level, mainChar, EnemyID::Rat),
+	Enemy(level, mainChar, EnemyID::Rat),
+	LevelMovableGameObject(level) {
 	load();
 	loadAttributes();
 	loadSpells();
@@ -16,7 +26,7 @@ void RatEnemy::loadAttributes() {
 
 void RatEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.duration = sf::milliseconds(500);
+	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.damage = 2;
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
@@ -51,10 +61,6 @@ bool RatEnemy::getFleeCondition() const {
 
 float RatEnemy::getApproachingDistance() const {
 	return 10.f;
-}
-
-void RatEnemy::handleMovementInput() {
-	Enemy::handleMovementInput();
 }
 
 void RatEnemy::load() {

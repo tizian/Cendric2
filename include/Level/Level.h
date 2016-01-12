@@ -49,6 +49,8 @@ public:
 	bool collides(const sf::FloatRect& boundingBox, bool ignoreDynamicTiles = false) const;
 	// checks for collisions with mobs (enemies and level main character)
 	bool collidesWithMobs(const sf::FloatRect& boundingBox) const;
+	// checks for collisions with those specific dynamic tiles
+	bool collidesWithDynamicTiles(const sf::FloatRect* boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
 
 	bool collidesLevelBottom(const sf::FloatRect& boundingBox) const;
 	bool collidesLevelCeiling(const sf::FloatRect& boundingBox) const;

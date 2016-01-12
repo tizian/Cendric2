@@ -1,7 +1,17 @@
 #include "Enemies/NekomataEnemy.h"
 #include "Level/LevelMainCharacter.h"
 
-NekomataEnemy::NekomataEnemy(Level* level, LevelMainCharacter* mainChar) : Enemy(level, mainChar, EnemyID::FireRat) {
+void NekomataEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
+	if (gold != 0 || !loot.empty()) return;
+
+	loot.insert({ "fo_rawmeat", 1 });
+	gold = rand() % 10 + 2;
+}
+
+NekomataEnemy::NekomataEnemy(Level* level, LevelMainCharacter* mainChar) :
+	WalkingEnemy(level, mainChar, EnemyID::FireRat),
+	Enemy(level, mainChar, EnemyID::FireRat),
+	LevelMovableGameObject(level) {
 	load();
 	loadAttributes();
 	loadSpells();
@@ -19,7 +29,7 @@ void NekomataEnemy::loadAttributes() {
 void NekomataEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 50;
-	chopSpell.duration = sf::milliseconds(500);
+	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
 
@@ -47,12 +57,6 @@ void NekomataEnemy::handleAttackInput() {
 
 		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 	}
-}
-
-void NekomataEnemy::handleMovementInput() {
-	Enemy::handleMovementInput();
-	// handle attack input
-
 }
 
 void NekomataEnemy::load() {

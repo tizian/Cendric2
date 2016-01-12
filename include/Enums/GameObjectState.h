@@ -12,6 +12,7 @@ enum class GameObjectState {
 	Walking_down, // used by map main character
 	Walking_right, // used by map main character
 	Walking_left, // used by map main character
+	Flying, // used by flying mobs
 	Jumping, // used by mobs and its weapons
 	Jumping_start, // used by mobs 
 	Jumping_end, // used by mobs

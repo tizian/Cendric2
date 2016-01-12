@@ -1,13 +1,13 @@
 #pragma once
 
 #include "global.h"
-#include "Level/Enemy.h"
+#include "Level/WalkingEnemy.h"
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
 
 // A nasty fiery rat in a level
-class FireRatEnemy : public Enemy {
+class FireRatEnemy : public WalkingEnemy {
 public:
 	FireRatEnemy(Level* level, LevelMainCharacter* mainChar);
 	virtual ~FireRatEnemy() {}
@@ -23,9 +23,9 @@ public:
 	float getMaxVelocityX() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
+	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
+
 protected:
-	// handle input and calculate the next position
-	void handleMovementInput() override;
 	void handleAttackInput() override;
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
 	void loadAttributes() override;

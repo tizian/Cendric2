@@ -18,13 +18,13 @@ class LevelMainCharacter;
 class Spell;
 
 // An enemy in a level
-class Enemy : public LevelMovableGameObject {
+class Enemy : virtual public LevelMovableGameObject {
 public:
 	Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
-	~Enemy();
+	virtual ~Enemy();
 
 	virtual void load() = 0;
-	void checkCollisions(const sf::Vector2f& nextPosition) override;
+
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onRightClick() override;
 	void onMouseOver() override;
@@ -61,8 +61,6 @@ protected:
 
 	EnemyID m_id;
 	int m_objectID = -1;
-	// spells from these enemies won't hurt. default is its own type.
-	std::vector<EnemyID> m_immuneEnemies;
 	// spells of these damage types won't hurt. default is empty.
 	std::vector<DamageType> m_immuneDamageTypes;
 
@@ -75,17 +73,12 @@ protected:
 	virtual float getAggroRange() const = 0;
 	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
 	virtual bool getFleeCondition() const;
-	// how near does an enemy go to the abyss until it stops? default is 10.f. Can be 0 for unflinching enemies
-	virtual float getDistanceToAbyss() const;
 	// the distance from the center of the enemy to the center of the main char at which the enemy approaches the main char.
 	virtual float getApproachingDistance() const = 0;
 	// the target to be destroyed!
 	LevelMainCharacter* m_mainChar;
 	float distToMainChar() const;
-	// if this bool is set to true, the enemy jumps in the next frame. used by the AI
-	bool m_jumps = false;
-	// a decision the enemy has taken an that lasts until it decides anew. -1: walk left, 0: stay, 1: walk right
-	int m_randomDecision = 0;
+	virtual void makeRandomDecision() = 0;
 	// time until the enemy can attack after it has taken a hit
 	sf::Time m_recoveringTime = sf::Time::Zero;
 	// time stunned
@@ -99,14 +92,12 @@ protected:
 	// time the enemy will chase the main char anyway (even if it is out of aggro range)
 	sf::Time m_chasingTime = sf::Time::Zero;
 
-	virtual void handleMovementInput() override;
 	virtual sf::Time getConfiguredRecoveringTime() const;
 	virtual sf::Time getConfiguredRandomDecisionTime() const;
 	// time feared after the fear condition is true (has nothing to do with spells)
 	virtual sf::Time getConfiguredFearedTime() const;
 	virtual sf::Time getConfiguredWaitingTime() const;
 	virtual sf::Time getConfiguredChasingTime() const;
-	float m_jumpHeight = 0;
 
 private:
 	sf::RectangleShape m_hpBar;
@@ -122,7 +113,7 @@ private:
 	std::pair<std::string, std::string> m_questTarget;
 
 	// the enemy can only be looted if the main char is in this range
-	const float PICKUP_RANGE = 100.f;
+	static const float PICKUP_RANGE;
 
 	EnemyBuffBar* m_buffBar = nullptr;
 };

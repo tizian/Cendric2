@@ -1,16 +1,16 @@
 #pragma once
 
 #include "global.h"
-#include "Level/WalkingEnemy.h"
+#include "Level/FlyingEnemy.h"
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
 
-// A nasty rat in a level
-class RatEnemy : public WalkingEnemy {
+// A flying crow
+class CrowEnemy : public FlyingEnemy {
 public:
-	RatEnemy(Level* level, LevelMainCharacter* mainChar);
-	~RatEnemy() {}
+	CrowEnemy(Level* level, LevelMainCharacter* mainChar);
+	~CrowEnemy() {}
 
 	void load() override;
 
@@ -19,8 +19,9 @@ public:
 	float getMaxVelocityX() const override;
 	float getApproachingDistance() const override;
 	float getAggroRange() const override;
-	bool getFleeCondition() const override;
-	float getDistanceToAbyss() const override;
+
+	sf::Time getConfiguredWaitingTime() const override;
+	sf::Time getConfiguredChasingTime() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 

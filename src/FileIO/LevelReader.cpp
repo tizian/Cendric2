@@ -16,6 +16,7 @@ void LevelReader::initMaps() {
 		{ 1, EnemyID::Rat },
 		{ 2, EnemyID::FireRat },
 		{ 3, EnemyID::Nekomata_blue },
+		{ 4, EnemyID::Crow },
 	});
 }
 

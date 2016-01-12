@@ -6,11 +6,11 @@
 using namespace std;
 
 const float Enemy::HP_BAR_HEIGHT = 3.f;
+const float Enemy::PICKUP_RANGE = 100.f;
 
 Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMovableGameObject(level) {
 	m_id = id;
 	m_mainChar = mainChar;
-	m_immuneEnemies.push_back(id);
 	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = mainChar->getScreen();
 	m_spellManager = new SpellManager(this);
@@ -32,79 +32,12 @@ bool Enemy::getFleeCondition() const {
 	return false;
 }
 
-void Enemy::checkCollisions(const sf::Vector2f& nextPosition) {
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
-	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
-
-	bool isMovingDown = nextPosition.y > getBoundingBox()->top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
-	bool isMovingX = nextPosition.x != getBoundingBox()->left;
-
-	// check for collision on x axis
-	bool collidesX = false;
-	if (isMovingX && m_level->collides(nextBoundingBoxX, m_ignoreDynamicTiles)) {
-		collidesX = true;
-		setAccelerationX(0.0f);
-		setVelocityX(0.0f);
-	}
-	// check for collision on y axis
-	bool collidesY = m_level->collides(nextBoundingBoxY, m_ignoreDynamicTiles);
-
-	if (!isMovingDown && collidesY) {
-		setAccelerationY(0.0);
-		setVelocityY(0.0f);
-		// set mob up in case of anti gravity!
-		if (getIsUpsideDown()) {
-			setPositionY(m_level->getCeiling(nextBoundingBoxY));
-			m_isGrounded = true;
-			if (!m_isDead && m_level->collidesLevelCeiling(nextBoundingBoxY)) {
-				// colliding with level ceiling is deadly when the mob is upside down.
-				setDead();
-			}
-		}
-	}
-	else if (isMovingDown && collidesY) {
-		setAccelerationY(0.0f);
-		setVelocityY(0.0f);
-		// set mob down. in case of normal gravity.
-		if (!getIsUpsideDown()) {
-			setPositionY(m_level->getGround(nextBoundingBoxY));
-			m_isGrounded = true;
-			if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY)) {
-				// colliding with level bottom is deadly.
-				setDead();
-			}
-		}
-	}
-
-	m_jumps = false;
-	if (isMovingX && collidesX) {
-		// would a jump work? 
-		m_jumps = !m_level->collidesAfterJump(*getBoundingBox(), m_jumpHeight, m_isFacingRight, m_ignoreDynamicTiles);
-	}
-
-	// checks if the enemy falls would fall deeper than it can jump. 
-	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
-		setAccelerationX(0.0f);
-		setVelocityX(0.0f);
-		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
-	}
-
-	if (std::abs(getVelocity().y) > 0.f)
-		m_isGrounded = false;
-
-	// if the enemy collidesX but can't jump and is chasing, it waits for a certain time.
-	// the same if it can't reach the main char because of the y difference.
-	if (m_enemyState == EnemyState::Chasing && ((collidesX && !m_jumps) || abs(m_mainChar->getPosition().y - getPosition().y) > 2 * m_jumpHeight)) {
-		m_waitingTime = getConfiguredWaitingTime();
-	}
-}
-
 void Enemy::onHit(Spell* spell) {
 	if (m_isDead) {
 		return;
 	}
 	// check for owner
-	if (spell->getOwner() == this) {
+	if (spell->getOwner()->getConfiguredType() == GameObjectType::_Enemy) {
 		return;
 	}
 	// check for immune damage types, if yes, the spell will disappear, absorbed by the immuneness of this enemy
@@ -155,7 +88,7 @@ sf::Time Enemy::getConfiguredRecoveringTime() const {
 }
 
 sf::Time Enemy::getConfiguredWaitingTime() const {
-	return sf::seconds(2);
+	return sf::seconds(1.f);
 }
 
 sf::Time Enemy::getConfiguredRandomDecisionTime() const {
@@ -169,10 +102,6 @@ sf::Time Enemy::getConfiguredFearedTime() const {
 
 sf::Time Enemy::getConfiguredChasingTime() const {
 	return sf::seconds(1);
-}
-
-float Enemy::getDistanceToAbyss() const {
-	return 10.f;
 }
 
 GameObjectType Enemy::getConfiguredType() const {
@@ -215,6 +144,11 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 		return;
 	}
 
+	// the state must have been chasing a frame before. Wait now.
+	if (m_enemyState == EnemyState::Chasing) {
+		m_waitingTime = getConfiguredWaitingTime();
+	}
+
 	// handle waiting
 	if (m_waitingTime > sf::Time::Zero) {
 		m_enemyState = EnemyState::Waiting;
@@ -227,57 +161,8 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 		m_decisionTime == sf::Time::Zero) {
 		// decide again
 		m_decisionTime = getConfiguredRandomDecisionTime();
-		m_randomDecision = rand() % 3 - 1;
+		makeRandomDecision();
 	}
-}
-
-void Enemy::handleMovementInput() {
-	// movement AI
-	float newAccelerationX = 0;
-
-	if (m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Recovering) {
-
-		if (m_mainChar->getCenter().x < getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getApproachingDistance()) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= getConfiguredWalkAcceleration();
-		}
-
-		if (m_mainChar->getCenter().x > getCenter().x && std::abs(m_mainChar->getCenter().x - getCenter().x) > getApproachingDistance()) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += getConfiguredWalkAcceleration();
-		}
-
-		if (m_jumps && m_isGrounded) {
-			setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityYUp() : -getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-			m_jumps = false;
-		}
-	}
-	else if (m_enemyState == EnemyState::Fleeing) {
-
-		if (m_mainChar->getCenter().x < getCenter().x) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += getConfiguredWalkAcceleration();
-		}
-
-		if (m_mainChar->getCenter().x > getCenter().x) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= getConfiguredWalkAcceleration();
-		}
-
-		if (m_jumps && m_isGrounded) {
-			setVelocityY(-getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-			m_jumps = false;
-		}
-	}
-	else if (m_enemyState == EnemyState::Idle || m_enemyState == EnemyState::Waiting) {
-
-		if (m_randomDecision != 0) {
-			m_nextIsFacingRight = (m_randomDecision == 1);
-			newAccelerationX += (m_randomDecision * getConfiguredWalkAcceleration());
-		}
-	}
-
-	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getGravityAcceleration() : getGravityAcceleration())));
 }
 
 void Enemy::updateAggro() {
@@ -301,7 +186,7 @@ void Enemy::updateAggro() {
 		return;
 	}
 
-	if ((m_enemyState == EnemyState::Idle || m_enemyState == EnemyState::Chasing) && isInAggroRange) {
+	if (m_enemyState == EnemyState::Idle && isInAggroRange) {
 		m_chasingTime = getConfiguredChasingTime();
 		return;
 	}
