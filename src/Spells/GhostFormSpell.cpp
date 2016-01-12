@@ -45,8 +45,10 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 
 void GhostFormSpell::setDisposed() {
 	Spell::setDisposed();
-	if (m_mask != nullptr)
+	if (m_mask != nullptr) {
 		m_mask->setDisposed();
+	}
+		
 	m_mob->setMaxXVelocityScale(1.f);
 	m_mob->setIgnoreDynamicTiles(false);
 	m_mob->setPosition(m_lastSafePosition);

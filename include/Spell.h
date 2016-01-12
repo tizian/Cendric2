@@ -41,6 +41,7 @@ public:
 	const sf::Time& getActiveDuration() const;
 	const sf::Time& getDuration() const;
 	const MovableGameObject* getOwner() const;
+	bool isAttachedToMob() const;
 
 protected:
 	SpellData m_data;

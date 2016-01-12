@@ -236,6 +236,15 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 }
 
 void LevelMovableGameObject::setDead() { 
+	// dispose the spells that this mob is an owner of and that are attached to it
+	// that's how magic works, I guess?
+	for (auto& go : *m_screen->getObjects(GameObjectType::_Spell)) {
+		if (Spell* spell = dynamic_cast<Spell*>(go)) {
+			if (spell->getOwner() == this && spell->isAttachedToMob()) {
+				spell->setDisposed();
+			}
+		}
+	}
 	m_attributes.currentHealthPoints = 0;
 	m_isDead = true;
 }

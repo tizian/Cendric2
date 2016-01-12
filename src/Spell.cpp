@@ -194,6 +194,10 @@ const MovableGameObject* Spell::getOwner() const {
 	return m_mob;
 }
 
+bool Spell::isAttachedToMob() const {
+	return m_data.attachedToMob;
+}
+
 int Spell::getDamage() const {
 	return m_data.damage;
 }

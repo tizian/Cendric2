@@ -153,7 +153,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 		GameScreen::update(frameTime);
 	}
 
-	if (m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
+	if (!m_isGameOver &&m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
 		if (m_retryButton->isVisible()) {
 			m_retryButton->setVisible(false);
 			m_backToMenuButton->setVisible(false);
