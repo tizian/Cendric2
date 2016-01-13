@@ -65,8 +65,8 @@ sf::Time CrowEnemy::getConfiguredChasingTime() const {
 }
 
 void CrowEnemy::load() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
-	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
+	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 
 	Animation flyingAnimation;
 	flyingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
