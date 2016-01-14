@@ -20,6 +20,8 @@ typedef std::function<MapDynamicTile*(Map*)> MapDynamicTileConstructor;
 
 class ObjectFactory {
 public:
+	static ObjectFactory* ObjectFactory::Instance();
+
 	static Enemy* createEnemy(EnemyID id, Level* level, Screen* screen, bool controlled);
 	static void registerEnemy(EnemyID id, EnemyConstructor constructor);
 

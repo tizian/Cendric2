@@ -9,6 +9,11 @@ std::map<EnemyID, EnemyConstructor> ObjectFactory::enemyRegistry;
 std::map<LevelDynamicTileID, LevelDynamicTileConstructor> ObjectFactory::levelDynamicTileRegistry;
 std::map<MapDynamicTileID, MapDynamicTileConstructor> ObjectFactory::mapDynamicTileRegistry;
 
+ObjectFactory* ObjectFactory::Instance() {
+	static ObjectFactory factory;
+	return &factory;
+}
+
 void ObjectFactory::registerEnemy(EnemyID id, EnemyConstructor constructor) {
 	enemyRegistry.insert({ id, constructor });
 }
