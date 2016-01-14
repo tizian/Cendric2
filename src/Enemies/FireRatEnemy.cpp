@@ -1,7 +1,10 @@
 #include "Enemies/FireRatEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Registrar.h"
 
-void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
+REGISTER_ENEMY(EnemyID::FireRat, FireRatEnemy)
+
+void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	if (gold != 0 || !loot.empty()) return;
 
 	loot.insert({ "fo_rawmeat", 1 });
@@ -134,12 +137,4 @@ int FireRatEnemy::getMentalStrength() const {
 
 float FireRatEnemy::getApproachingDistance() const {
 	return 10.f;
-}
-
-Enemy* FireRatEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
-	Enemy* enemy = new FireRatEnemy(m_level, m_screen, true);
-	enemy->addAttributes(ttl, additionalAttributes);
-	enemy->setTimeToLive(ttl);
-	enemy->setPosition(getPosition());
-	return enemy;
 }

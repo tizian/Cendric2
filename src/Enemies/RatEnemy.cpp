@@ -1,7 +1,10 @@
 #include "Enemies/RatEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Registrar.h"
 
-void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
+REGISTER_ENEMY(EnemyID::Rat, RatEnemy)
+
+void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	if (gold != 0 || !loot.empty()) return;
 
 	loot.insert({ "fo_rawmeat", 1 });
@@ -124,12 +127,4 @@ float RatEnemy::getMaxVelocityYDown() const {
 
 float RatEnemy::getMaxVelocityX() const {
 	return 100.f;
-}
-
-Enemy* RatEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
-	Enemy* enemy = new RatEnemy(m_level, m_screen, true);
-	enemy->addAttributes(ttl, additionalAttributes);
-	enemy->setTimeToLive(ttl);
-	enemy->setPosition(getPosition());
-	return enemy;
 }

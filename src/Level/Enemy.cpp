@@ -2,6 +2,7 @@
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
+#include "ObjectFactory.h"
 
 using namespace std;
 
@@ -98,6 +99,7 @@ void Enemy::updateHpBar() {
 }
 
 float Enemy::distToTarget() const {
+	if (m_currentTarget == nullptr) return 10000.f;
 	sf::Vector2f dist = m_currentTarget->getCenter() - getCenter();
 	return sqrt(dist.x * dist.x + dist.y * dist.y);
 }
@@ -192,6 +194,9 @@ void Enemy::updateAggro() {
 	if (m_enemyState == EnemyState::Chasing && getFleeCondition()) {
 		m_fearedTime = getConfiguredFearedTime();
 		return;
+	}
+	if (m_currentTarget == nullptr || m_currentTarget->isDead() || m_currentTarget->isDisposed()) {
+		m_currentTarget = nullptr;
 	}
 	if (m_enemyState != EnemyState::Idle) return;
 

@@ -24,8 +24,7 @@ public:
 	float getDistanceToAbyss() const override;
 	void updateAnimation(const sf::Time& frameTime) override;
 
-	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
-	Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const override;
+	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 
 protected:
 	void handleAttackInput() override;

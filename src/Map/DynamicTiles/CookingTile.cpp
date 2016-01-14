@@ -1,10 +1,12 @@
 #include "Map/DynamicTiles/CookingTile.h"
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
+#include "Registrar.h"
 
-CookingTile::CookingTile(MapMainCharacter* mainChar, Map* map) : MapDynamicTile(map) {
+REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Cooking, CookingTile)
+
+CookingTile::CookingTile(Map* map) : MapDynamicTile(map) {
 	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(100.f, 100.f)));
-	m_mainCharacter = mainChar;
 }
 
 void CookingTile::init() {
@@ -85,4 +87,5 @@ void CookingTile::setDisposed() {
 void CookingTile::setScreen(Screen* screen) {
 	MapDynamicTile::setScreen(screen);
 	screen->addObject(m_lightObject);
+	m_mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
 }

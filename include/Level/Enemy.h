@@ -53,8 +53,7 @@ public:
 	// determines the distance from the top of the enemies bounding box to its
 	// hp bar. Default is 20px.
 	virtual float getConfiguredDistanceToHPBar() const;
-	// creates a new instance of this enemy that is controlled by the main char.
-	virtual Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const = 0;
+	virtual void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const = 0;
 
 protected:
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.

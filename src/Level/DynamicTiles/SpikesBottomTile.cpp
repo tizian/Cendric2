@@ -1,5 +1,8 @@
 #include "Level/DynamicTiles/SpikesBottomTile.h"
 #include "Spell.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::SpikesBottom, SpikesBottomTile)
 
 void SpikesBottomTile::init() {
 	setPositionOffset(sf::Vector2f(-5.f, -25.f));

@@ -1,6 +1,9 @@
 #include "Level/DynamicTiles/ShiftableBlockTile.h"
 #include "Spell.h"
 #include "Spells/WindGustSpell.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::ShiftableBlock, ShiftableBlockTile)
 
 ShiftableBlockTile::ShiftableBlockTile(Level* level) : LevelDynamicTile(level), MovableGameObject() {
 }

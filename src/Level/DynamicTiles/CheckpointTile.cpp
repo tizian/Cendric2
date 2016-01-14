@@ -2,6 +2,9 @@
 #include "Level/LevelMainCharacter.h"
 #include "Spell.h"
 #include "Screens/LevelScreen.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Checkpoint, CheckpointTile)
 
 void CheckpointTile::init() {
 	setSpriteOffset(sf::Vector2f(-15.f, -30.f));

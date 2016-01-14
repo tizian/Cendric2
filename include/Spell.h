@@ -9,6 +9,12 @@
 #include "Enums/DamageType.h"
 #include "Structs/SpellData.h"
 
+#include "Particles/ParticleGenerator.h"
+#include "Particles/ParticleSystem.h"
+#include "Particles/ParticleUpdater.h"
+
+#include "LightObject.h"
+
 class LevelMovableGameObject;
 
 // A spell cendric can cast
@@ -49,6 +55,7 @@ protected:
 	Level* m_level;
 	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.
 	GameObjectType m_ownerType;
+	bool m_isOwnerControlled = false; // is the owner an enemy that is controlled?
 	
 	// enemy list from screen
 	std::vector<GameObject*>* m_enemies;

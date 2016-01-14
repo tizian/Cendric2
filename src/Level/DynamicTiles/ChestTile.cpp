@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// this tile is special and is not registered
 ChestTile::ChestTile(LevelMainCharacter* mainChar, Level* level) : LevelDynamicTile(level) {
 	m_mainChar = mainChar;
 }

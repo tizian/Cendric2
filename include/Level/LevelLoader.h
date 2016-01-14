@@ -4,24 +4,19 @@
 
 #include "global.h"
 #include "Screen.h"
-#include "DynamicTiles/IceTile.h"
-#include "DynamicTiles/CrumblyBlockTile.h"
-#include "DynamicTiles/TorchTile.h"
-#include "DynamicTiles/ChestTile.h"
-#include "DynamicTiles/SpikesBottomTile.h"
-#include "DynamicTiles/SpikesTopTile.h"
-#include "DynamicTiles/SimulatedWaterTile.h"
-#include "DynamicTiles/ShiftableBlockTile.h"
-#include "DynamicTiles/CheckpointTile.h"
-#include "DynamicTiles/LeverTile.h"
-#include "DynamicTiles/SwitchableTile.h"
 
 #include "Enums/LevelDynamicTileID.h"
 #include "Enums/EnemyID.h"
 
+#include "Level/DynamicTiles/ChestTile.h"
+#include "Level/DynamicTiles/LeverTile.h"
+#include "Level/DynamicTiles/SwitchableTile.h"
+
 #include "Structs/LevelData.h"
 
 class Level;
+class Enemy;
+class LevelDynamicTile;
 
 // helper class used by the level to load dynamic tiles, level items and enemies
 class LevelLoader {

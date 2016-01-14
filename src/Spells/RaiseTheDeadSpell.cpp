@@ -1,5 +1,6 @@
 #include "Spells/RaiseTheDeadSpell.h"
 #include "Level/Enemy.h"
+#include "ObjectFactory.h"
 
 RaiseTheDeadSpell::RaiseTheDeadSpell(int strength) : Spell() {
 	m_strength = strength;
@@ -24,13 +25,18 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 		setDisposed();
 		return;
 	}
+
 	AttributeData attributes = ZERO_ATTRIBUTES;
 	attributes.damagePhysical = m_data.damage;
 	attributes.damageFire = m_data.damage;
 	attributes.damageIce = m_data.damage;
 	attributes.damageLight = m_data.damage;
 	attributes.damageShadow = m_data.damage;
-	Enemy* copy = enemy->createNewControlledInstance(m_data.duration, attributes);
+
+	Enemy* copy = ObjectFactory::createEnemy(enemy->getEnemyID(), m_level, m_screen, true);
+	copy->addAttributes(m_data.duration, attributes);
+	copy->setTimeToLive(m_data.duration);
+	copy->setPosition(enemy->getPosition());
 	m_screen->addObject(copy);
 	m_hasRisen = true;
 	setDisposed();

@@ -1,7 +1,10 @@
 #include "Enemies/NekomataEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Registrar.h"
 
-void NekomataEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
+REGISTER_ENEMY(EnemyID::Nekomata_blue, NekomataEnemy)
+
+void NekomataEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	if (gold != 0 || !loot.empty()) return;
 
 	loot.insert({ "fo_rawmeat", 1 });
@@ -218,14 +221,6 @@ void NekomataEnemy::updateAnimation(const sf::Time& frameTime) {
 		m_state = newState;
 		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	}
-}
-
-Enemy* NekomataEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
-	Enemy* enemy = new NekomataEnemy(m_level, m_screen, true);
-	enemy->addAttributes(ttl, additionalAttributes);
-	enemy->setTimeToLive(ttl);
-	enemy->setPosition(getPosition());
-	return enemy;
 }
 
 

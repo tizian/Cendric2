@@ -7,7 +7,7 @@
 
 class CookingTile : public MapDynamicTile {
 public:
-	CookingTile(MapMainCharacter* mainChar, Map* map);
+	CookingTile(Map* map);
 	void init() override;
 	void load(int skinNr) override;
 	void update(const sf::Time& frameTime) override;

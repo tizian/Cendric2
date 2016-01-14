@@ -1,7 +1,10 @@
 #include "Enemies/CrowEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Registrar.h"
 
-void CrowEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
+REGISTER_ENEMY(EnemyID::Crow, CrowEnemy)
+
+void CrowEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	if (gold != 0 || !loot.empty()) return;
 
 	gold = 2;
@@ -46,7 +49,12 @@ void CrowEnemy::handleAttackInput() {
 	if (distToTarget() < 50.f) {
 		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
 		m_chasingTime = sf::Time::Zero;
-		m_waitingTime = sf::seconds(static_cast<float>(rand() % 8 + 3));;
+		if (m_isControlled) {
+			m_waitingTime = sf::seconds(1);
+		} 
+		else {
+			m_waitingTime = sf::seconds(static_cast<float>(rand() % 8 + 3));
+		}
 	}
 }
 
@@ -116,13 +124,5 @@ float CrowEnemy::getMaxVelocityYDown() const {
 
 float CrowEnemy::getMaxVelocityX() const {
 	return 100.f;
-}
-
-Enemy* CrowEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
-	Enemy* enemy = new CrowEnemy(m_level, m_screen, true);
-	enemy->addAttributes(ttl, additionalAttributes);
-	enemy->setTimeToLive(ttl);
-	enemy->setPosition(getPosition());
-	return enemy;
 }
 

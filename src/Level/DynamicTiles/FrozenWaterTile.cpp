@@ -3,6 +3,7 @@
 
 #include "Level/DynamicTiles/SimulatedWaterTile.h"
 
+// this tile is special and is not registered
 FrozenWaterTile::FrozenWaterTile(SimulatedWaterTile *waterTile, int waterTileIndex) : LevelDynamicTile(nullptr) {
 	m_waterTile = waterTile;
 	m_waterTileIndex = waterTileIndex;

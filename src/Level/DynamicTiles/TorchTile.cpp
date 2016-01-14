@@ -1,5 +1,8 @@
 #include "Level/DynamicTiles/TorchTile.h"
 #include "Spell.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Torch, TorchTile)
 
 TorchTile::TorchTile(Level* level) : LevelDynamicTile(level) {
 	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(140.f, 200.f)));

@@ -2,11 +2,8 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/Level.h"
 #include "Level/Enemy.h"
-#include "Enemies/RatEnemy.h"
-#include "Enemies/FireRatEnemy.h"
-#include "Enemies/NekomataEnemy.h"
-#include "Enemies/CrowEnemy.h"
 #include "LightObject.h"
+#include "ObjectFactory.h"
 
 using namespace std;
 
@@ -94,39 +91,15 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
 	for (auto& it : data.dynamicTiles) {
-		LevelDynamicTile* tile = nullptr;
-		switch (it.id) {
-		case LevelDynamicTileID::Water:
-			tile = new SimulatedWaterTile(level);
-			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
-			break;
-		case LevelDynamicTileID::Ice:
-			tile = new IceTile(level);
-			break;
-		case LevelDynamicTileID::CrumblyBlock:
-			tile = new CrumblyBlockTile(level);
-			break;
-		case LevelDynamicTileID::Torch:
-			tile = new TorchTile(level);
-			break;
-		case LevelDynamicTileID::SpikesBottom:
-			tile = new SpikesBottomTile(level);
-			break;
-		case LevelDynamicTileID::SpikesTop:
-			tile = new SpikesTopTile(level);
-			break;
-		case LevelDynamicTileID::ShiftableBlock:
-			tile = new ShiftableBlockTile(level);
-			break;
-		case LevelDynamicTileID::Checkpoint:
-			tile = new CheckpointTile(level);
-			break;
-		default:
-			// unexpected error
+		LevelDynamicTile* tile = ObjectFactory::createLevelDynamicTile(it.id, level);
+		if (tile == nullptr) {
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
 		}
-
+		if (it.id == LevelDynamicTileID::Water) {
+			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
+		}
+		
 		tile->setTileSize(data.tileSize);
 		tile->init();
 		tile->setPosition(it.position - tile->getPositionOffset());
@@ -197,34 +170,16 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 					loot.insert({ item.first, item.second });
 				}
 			}
-			switch (it.second.first) {
-			case EnemyID::Rat:
-				enemy = new RatEnemy(level, screen);
-				RatEnemy::insertDefaultLoot(loot, gold);
-				break;
-			case EnemyID::FireRat:
-				enemy = new FireRatEnemy(level, screen);
-				FireRatEnemy::insertDefaultLoot(loot, gold);
-				break;
-			case EnemyID::Nekomata_blue:
-				enemy = new NekomataEnemy(level, screen);
-				NekomataEnemy::insertDefaultLoot(loot, gold);
-				break;
-			case EnemyID::Crow:
-				enemy = new CrowEnemy(level, screen);
-				CrowEnemy::insertDefaultLoot(loot, gold);
-				break;
-			case EnemyID::VOID:
-			default:
-				// unexpected error
+			enemy = ObjectFactory::createEnemy(it.second.first, level, screen, false);
+			if (enemy == nullptr) {
 				g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
 				return;
 			}
-
 			if (data.enemyQuesttarget.find(it.first) != data.enemyQuesttarget.end()) {
 				enemy->setQuestTarget(data.enemyQuesttarget.at(it.first));
 			}
 
+			enemy->insertDefaultLoot(loot, gold);
 			enemy->setLoot(loot, gold);
 			enemy->setPosition(it.second.second);
 			enemy->setObjectID(it.first);

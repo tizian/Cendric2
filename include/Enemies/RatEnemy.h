@@ -24,9 +24,8 @@ public:
 	sf::Time getConfiguredFightAnimationTime() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
-	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
-	Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const;
-
+	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
+	
 protected:
 	void handleAttackInput() override;
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.

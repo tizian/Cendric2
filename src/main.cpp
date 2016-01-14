@@ -5,6 +5,7 @@
 #include "InputController.h"
 #include "Logger.h"
 #include "TextProvider.h"
+#include "ObjectFactory.h"
 
 #ifdef _WIN32
 

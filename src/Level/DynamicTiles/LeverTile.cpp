@@ -2,6 +2,7 @@
 #include "Spell.h"
 #include "Level/LevelMainCharacter.h"
 
+// this tile is special and is not registered
 void LeverTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));

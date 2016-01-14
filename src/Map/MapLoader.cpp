@@ -4,6 +4,7 @@
 #include "Map/NPC.h"
 #include "LightObject.h"
 #include "Screens/MapScreen.h"
+#include "ObjectFactory.h"
 
 void MapLoader::loadNpcs(MapData& data, Screen* screen, Map* map) const {
 	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
@@ -36,17 +37,12 @@ void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const 
 	}
 
 	for (auto& it : data.dynamicTiles) {
-		MapDynamicTile* tile = nullptr;
-		switch (it.id) {
-		case MapDynamicTileID::Cooking:
-			tile = new CookingTile(mainCharacter, map);
-			break;
-		default:
-			// unexpected error
+		MapDynamicTile* tile = ObjectFactory::createMapDynamicTile(it.id, map);
+		if (tile == nullptr) {
 			g_logger->logError("MapLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
 		}
-
+		
 		tile->setTileSize(data.tileSize);
 		tile->init();
 		tile->setPosition(it.position - tile->getPositionOffset());

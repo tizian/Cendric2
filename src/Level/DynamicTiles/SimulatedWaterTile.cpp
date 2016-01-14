@@ -3,6 +3,9 @@
 
 #include "Level/DynamicTiles/FrozenWaterTile.h"
 #include "CustomParticleUpdaters.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Water, SimulatedWaterTile)
 
 using namespace std;
 

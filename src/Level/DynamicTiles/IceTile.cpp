@@ -1,5 +1,8 @@
 #include "Level/DynamicTiles/IceTile.h"
 #include "Spell.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Ice, IceTile)
 
 void IceTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));

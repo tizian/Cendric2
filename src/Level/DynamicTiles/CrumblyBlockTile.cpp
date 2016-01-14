@@ -1,5 +1,8 @@
 #include "Level/DynamicTiles/CrumblyBlockTile.h"
 #include "Spell.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::CrumblyBlock, CrumblyBlockTile)
 
 void CrumblyBlockTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));

@@ -23,8 +23,7 @@ public:
 	float getMaxVelocityX() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
-	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
-	Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const override;
+	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 
 protected:
 	void handleAttackInput() override;

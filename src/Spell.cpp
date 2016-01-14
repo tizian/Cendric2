@@ -15,6 +15,10 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 	m_ownerType = mob->getConfiguredType();
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
+	Enemy* enemy = dynamic_cast<Enemy*>(m_mob);
+	if (enemy && enemy->isControlled()) {
+		m_isOwnerControlled = true;
+	}
 	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
 
 	if (m_mainChar == nullptr) {
@@ -81,10 +85,8 @@ void Spell::update(const sf::Time& frameTime) {
 	sf::FloatRect tmp(m_nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
 	m_level->collideWithDynamicTiles(this, &tmp);
 	// check collisions with main char
-	if (m_ownerType != GameObjectType::_LevelMainCharacter) {
-		Enemy* enemy = dynamic_cast<Enemy*>(m_mob);
-		if (!(enemy && enemy->isControlled()))
-			checkCollisionsWithMainChar(getBoundingBox());	
+	if (m_ownerType != GameObjectType::_LevelMainCharacter && !m_isOwnerControlled) {
+		checkCollisionsWithMainChar(getBoundingBox());	
 	}
 	// check collisions with enemies
 	checkCollisionsWithEnemies(getBoundingBox());
