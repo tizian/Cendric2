@@ -7,10 +7,11 @@ void CrowEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
 	gold = 2;
 }
 
-CrowEnemy::CrowEnemy(Level* level, LevelMainCharacter* mainChar) : 
-	FlyingEnemy(level, mainChar, EnemyID::Crow),
-	Enemy(level, mainChar, EnemyID::Crow),
+CrowEnemy::CrowEnemy(Level* level, Screen* screen, bool isControlled) :
+	FlyingEnemy(level, screen, isControlled),
+	Enemy(level, screen, isControlled),
 	LevelMovableGameObject(level) {
+	m_id = EnemyID::Crow;
 	load();
 	loadAttributes();
 	loadSpells();
@@ -41,8 +42,9 @@ sf::Vector2f CrowEnemy::getConfiguredSpellOffset() const {
 
 void CrowEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (distToMainChar() < 50.f) {
-		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+	if (m_currentTarget == nullptr) return;
+	if (distToTarget() < 50.f) {
+		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
 		m_chasingTime = sf::Time::Zero;
 		m_waitingTime = sf::seconds(static_cast<float>(rand() % 8 + 3));;
 	}
@@ -109,9 +111,18 @@ float CrowEnemy::getMaxVelocityYUp() const {
 }
 
 float CrowEnemy::getMaxVelocityYDown() const {
-	return 100.f;
+	return 200.f;
 }
 
 float CrowEnemy::getMaxVelocityX() const {
 	return 100.f;
 }
+
+Enemy* CrowEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
+	Enemy* enemy = new CrowEnemy(m_level, m_screen, true);
+	enemy->addAttributes(ttl, additionalAttributes);
+	enemy->setTimeToLive(ttl);
+	enemy->setPosition(getPosition());
+	return enemy;
+}
+

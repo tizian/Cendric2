@@ -8,10 +8,11 @@ void NekomataEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	gold = rand() % 10 + 2;
 }
 
-NekomataEnemy::NekomataEnemy(Level* level, LevelMainCharacter* mainChar) :
-	WalkingEnemy(level, mainChar, EnemyID::FireRat),
-	Enemy(level, mainChar, EnemyID::FireRat),
+NekomataEnemy::NekomataEnemy(Level* level, Screen* screen, bool isControlled) :
+	WalkingEnemy(level, screen, isControlled),
+	Enemy(level, screen, isControlled),
 	LevelMovableGameObject(level) {
+	m_id = EnemyID::Nekomata_blue;
 	load();
 	loadAttributes();
 	loadSpells();
@@ -49,13 +50,14 @@ sf::Vector2f NekomataEnemy::getConfiguredSpellOffset() const {
 
 void NekomataEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (distToMainChar() < getAggroRange()) {
+	if (m_currentTarget == nullptr) return;
+	if (distToTarget() < getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (distToMainChar() < 150.f) {
+		if (distToTarget() < 150.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
-		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
 	}
 }
 
@@ -217,3 +219,13 @@ void NekomataEnemy::updateAnimation(const sf::Time& frameTime) {
 		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	}
 }
+
+Enemy* NekomataEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
+	Enemy* enemy = new NekomataEnemy(m_level, m_screen, true);
+	enemy->addAttributes(ttl, additionalAttributes);
+	enemy->setTimeToLive(ttl);
+	enemy->setPosition(getPosition());
+	return enemy;
+}
+
+

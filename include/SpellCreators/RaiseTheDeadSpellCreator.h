@@ -1,0 +1,23 @@
+#pragma once
+
+#include "global.h"
+#include "SpellCreator.h"
+
+#include "Spells/RaiseTheDeadSpell.h"
+
+// a class that creates raise the dead spells
+class RaiseTheDeadSpellCreator : public SpellCreator {
+public:
+	RaiseTheDeadSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
+
+	void executeSpell(const sf::Vector2f& target) override;
+	std::string getStrengthModifierName() const override;
+	int getStrengthModifierValue() const override;
+
+private:
+	int m_strength = 0;
+
+	void addStrengthModifier(int level) override;
+	void addDurationModifier(int level) override;
+	void addRangeModifier(int level) override;
+};

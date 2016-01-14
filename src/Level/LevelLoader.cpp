@@ -199,19 +199,19 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			}
 			switch (it.second.first) {
 			case EnemyID::Rat:
-				enemy = new RatEnemy(level, mainCharacter);
+				enemy = new RatEnemy(level, screen);
 				RatEnemy::insertDefaultLoot(loot, gold);
 				break;
 			case EnemyID::FireRat:
-				enemy = new FireRatEnemy(level, mainCharacter);
+				enemy = new FireRatEnemy(level, screen);
 				FireRatEnemy::insertDefaultLoot(loot, gold);
 				break;
 			case EnemyID::Nekomata_blue:
-				enemy = new NekomataEnemy(level, mainCharacter);
+				enemy = new NekomataEnemy(level, screen);
 				NekomataEnemy::insertDefaultLoot(loot, gold);
 				break;
 			case EnemyID::Crow:
-				enemy = new CrowEnemy(level, mainCharacter);
+				enemy = new CrowEnemy(level, screen);
 				CrowEnemy::insertDefaultLoot(loot, gold);
 				break;
 			case EnemyID::VOID:

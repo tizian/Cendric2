@@ -2,7 +2,9 @@
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 
-FlyingEnemy::FlyingEnemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : Enemy(level, mainChar, id), LevelMovableGameObject(level) {
+FlyingEnemy::FlyingEnemy(Level* level, Screen* screen, bool isControlled) : 
+	Enemy(level, screen, isControlled), 
+	LevelMovableGameObject(level) {
 	m_avoidableTiles.insert(LevelDynamicTileID::Water);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);
@@ -46,54 +48,73 @@ void FlyingEnemy::handleMovementInput() {
 	// movement AI
 	float newAccelerationX = 0.f;
 	float newAccelerationY = 0.f;
-	sf::Vector2f mainCharCenter = m_mainChar->getCenter();
+	bool hasTarget = m_currentTarget != nullptr;
 	sf::Vector2f center = getCenter();
+	sf::Vector2f targetCenter = hasTarget ? m_currentTarget->getCenter() : center;
 
-	if (m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Recovering) {
+	if (hasTarget && (m_enemyState == EnemyState::Chasing || m_enemyState == EnemyState::Recovering)) {
 
-		if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > getApproachingDistance()) {
+		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > getApproachingDistance()) {
 			m_nextIsFacingRight = false;
 			newAccelerationX -= getConfiguredWalkAcceleration();
 		}
-		else if (mainCharCenter.x > center.x && std::abs(mainCharCenter.x - center.x) > getApproachingDistance()) {
+		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > getApproachingDistance()) {
 			m_nextIsFacingRight = true;
 			newAccelerationX += getConfiguredWalkAcceleration();
 		}
 
-		if (mainCharCenter.y < center.y && std::abs(mainCharCenter.y - center.y) > getApproachingDistance()) {
+		if (targetCenter.y < center.y && std::abs(targetCenter.y - center.y) > getApproachingDistance()) {
 			newAccelerationY -= getConfiguredWalkAcceleration();
 		}
-		else if (mainCharCenter.y > center.y && std::abs(mainCharCenter.y - center.y) > getApproachingDistance()) {
+		else if (targetCenter.y > center.y && std::abs(targetCenter.y - center.y) > getApproachingDistance()) {
 			newAccelerationY += getConfiguredWalkAcceleration();
 		}
 	}
-	else if (m_enemyState == EnemyState::Fleeing) {
+	else if (hasTarget && m_enemyState == EnemyState::Fleeing) {
 
-		if (mainCharCenter.x < center.x) {
+		if (targetCenter.x < center.x) {
 			m_nextIsFacingRight = true;
 			newAccelerationX += getConfiguredWalkAcceleration();
 		}
-		else if (mainCharCenter.x > center.x) {
+		else if (targetCenter.x > center.x) {
 			m_nextIsFacingRight = false;
 			newAccelerationX -= getConfiguredWalkAcceleration();
 		}
 
-		if (mainCharCenter.y < center.y) {
+		if (targetCenter.y < center.y) {
 			newAccelerationY += getConfiguredWalkAcceleration();
 		}
-		else if (mainCharCenter.y > center.y) {
+		else if (targetCenter.y > center.y) {
 			newAccelerationY -= getConfiguredWalkAcceleration();
 		}
-
 	}
 	else if (m_enemyState == EnemyState::Idle || m_enemyState == EnemyState::Waiting) {
+		if (m_isControlled) {
+			sf::Vector2f mainCharCenter = m_mainChar->getCenter();
+			if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > 2 * getApproachingDistance()) {
+				m_nextIsFacingRight = false;
+				newAccelerationX -= getConfiguredWalkAcceleration();
+			}
+			else if (mainCharCenter.x > center.x && std::abs(mainCharCenter.x - center.x) > 2 * getApproachingDistance()) {
+				m_nextIsFacingRight = true;
+				newAccelerationX += getConfiguredWalkAcceleration();
+			}
 
-		if (m_randomDecisionX != 0) {
-			m_nextIsFacingRight = (m_randomDecisionX == 1);
-			newAccelerationX += (m_randomDecisionX * getConfiguredWalkAcceleration());
+			if (mainCharCenter.y < center.y && std::abs(mainCharCenter.y - center.y) > 2 * getApproachingDistance()) {
+				newAccelerationY -= getConfiguredWalkAcceleration();
+			}
+			else if (mainCharCenter.y > center.y && std::abs(mainCharCenter.y - center.y) > 2 * getApproachingDistance()) {
+				newAccelerationY += getConfiguredWalkAcceleration();
+			}
 		}
-		if (m_randomDecisionY != 0) {
-			newAccelerationY += (m_randomDecisionY * getConfiguredWalkAcceleration());
+		else {
+			if (m_randomDecisionX != 0) {
+				m_nextIsFacingRight = (m_randomDecisionX == 1);
+				newAccelerationX += (m_randomDecisionX * getConfiguredWalkAcceleration());
+			}
+			if (m_randomDecisionY != 0) {
+				newAccelerationY += (m_randomDecisionY * getConfiguredWalkAcceleration());
+			}
 		}
 	}
 
@@ -115,7 +136,7 @@ void FlyingEnemy::updateAnimation(const sf::Time& frameTime) {
 	else if (m_fightAnimationTime > sf::Time::Zero) {
 		newState = GameObjectState::Fighting;
 	}
-	else if (std::abs(getVelocity().x) > 20.0f || std::abs(getVelocity().y) > 20.0f) {
+	else if (std::abs(getVelocity().x) > 20.f || std::abs(getVelocity().y) > 20.f) {
 		newState = GameObjectState::Flying;
 	}
 

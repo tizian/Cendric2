@@ -9,7 +9,7 @@
 // A flying crow
 class CrowEnemy : public FlyingEnemy {
 public:
-	CrowEnemy(Level* level, LevelMainCharacter* mainChar);
+	CrowEnemy(Level* level, Screen* screen, bool isControlled = false);
 	~CrowEnemy() {}
 
 	void load() override;
@@ -26,6 +26,7 @@ public:
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
 	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
+	Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const override;
 
 protected:
 	void handleAttackInput() override;

@@ -18,6 +18,7 @@
 #include "SpellCreators/LeapOfFaithSpellCreator.h"
 #include "SpellCreators/GhostFormSpellCreator.h"
 #include "SpellCreators/ShadowTrapSpellCreator.h"
+#include "SpellCreators/RaiseTheDeadSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -106,6 +107,12 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Strength);
 		types.push_back(SpellModifierType::Damage);
 		break;
+	case SpellID::RaiseTheDead:
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Damage);
+		types.push_back(SpellModifierType::Range);
+		break;
 	default:
 		break;
 	}
@@ -169,6 +176,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::ShadowTrap:
 		creator = new ShadowTrapSpellCreator(data, owner);
 		break;
+	case SpellID::RaiseTheDead:
+		creator = new RaiseTheDeadSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -216,6 +226,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getGhostFormSpellData();
 	case SpellID::ShadowTrap:
 		return getShadowTrapSpellData();
+	case SpellID::RaiseTheDead:
+		return getRaiseTheDeadSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -579,6 +591,28 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.durationModifierAddition = sf::seconds(1);
 
 	return shadowTrap;
+}
+
+SpellData SpellData::getRaiseTheDeadSpellData() {
+	SpellData raiseTheDead = EMPTY_SPELL;
+	raiseTheDead.id = SpellID::RaiseTheDead;
+	raiseTheDead.spellType = SpellType::Necromancy;
+
+	raiseTheDead.iconTextureRect = sf::IntRect(100, 100, 50, 50);
+	raiseTheDead.cooldown = sf::seconds(10);
+	raiseTheDead.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	raiseTheDead.speed = 200.f;
+	raiseTheDead.damage = 5;
+	raiseTheDead.duration = sf::seconds(30.f);
+	raiseTheDead.needsTarget = true;
+	raiseTheDead.range = 100;
+	raiseTheDead.activeDuration = sf::seconds(raiseTheDead.range / raiseTheDead.speed);
+
+	raiseTheDead.rangeModifierAddition = 150.f;
+	raiseTheDead.damageModifierAddition = 5;
+	raiseTheDead.durationModifierAddition = sf::seconds(20.f);
+
+	return raiseTheDead;
 }
 
 

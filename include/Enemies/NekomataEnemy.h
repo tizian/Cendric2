@@ -9,7 +9,7 @@
 // A spooky Nekomata in a level
 class NekomataEnemy : public WalkingEnemy {
 public:
-	NekomataEnemy(Level* level, LevelMainCharacter* mainChar);
+	NekomataEnemy(Level* level, Screen* screen, bool isControlled = false);
 	virtual ~NekomataEnemy() {}
 
 	void load() override;
@@ -25,6 +25,7 @@ public:
 	void updateAnimation(const sf::Time& frameTime) override;
 
 	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
+	Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const override;
 
 protected:
 	void handleAttackInput() override;

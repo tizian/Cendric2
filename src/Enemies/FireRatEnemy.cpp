@@ -9,10 +9,11 @@ void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold
 	gold = rand() % 4 + 1;
 }
 
-FireRatEnemy::FireRatEnemy(Level* level, LevelMainCharacter* mainChar) : 
-	WalkingEnemy(level, mainChar, EnemyID::FireRat),
-	Enemy(level, mainChar, EnemyID::FireRat),
+FireRatEnemy::FireRatEnemy(Level* level, Screen* screen, bool isControlled) :
+	WalkingEnemy(level, screen, isControlled),
+	Enemy(level, screen, isControlled),
 	LevelMovableGameObject(level) {
+	m_id = EnemyID::FireRat;
 	load();
 	loadAttributes();
 	loadSpells();
@@ -50,13 +51,14 @@ sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const {
 
 void FireRatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (distToMainChar() < getAggroRange()) {
+	if (m_currentTarget == nullptr) return;
+	if (distToTarget() < getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (distToMainChar() < 100.f) {
+		if (distToTarget() < 100.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
-		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
 	}
 }
 
@@ -132,4 +134,12 @@ int FireRatEnemy::getMentalStrength() const {
 
 float FireRatEnemy::getApproachingDistance() const {
 	return 10.f;
+}
+
+Enemy* FireRatEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
+	Enemy* enemy = new FireRatEnemy(m_level, m_screen, true);
+	enemy->addAttributes(ttl, additionalAttributes);
+	enemy->setTimeToLive(ttl);
+	enemy->setPosition(getPosition());
+	return enemy;
 }

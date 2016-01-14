@@ -8,10 +8,11 @@ void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) {
 	gold = 1;
 }
 
-RatEnemy::RatEnemy(Level* level, LevelMainCharacter* mainChar) : 
-	WalkingEnemy(level, mainChar, EnemyID::Rat),
-	Enemy(level, mainChar, EnemyID::Rat),
+RatEnemy::RatEnemy(Level* level, Screen* screen, bool isControlled) :
+	WalkingEnemy(level, screen, isControlled),
+	Enemy(level, screen, isControlled),
 	LevelMovableGameObject(level) {
+	m_id = EnemyID::Rat;
 	load();
 	loadAttributes();
 	loadSpells();
@@ -41,8 +42,9 @@ sf::Vector2f RatEnemy::getConfiguredSpellOffset() const {
 
 void RatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (distToMainChar() < 100.f) {
-		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+	if (m_currentTarget == nullptr) return;
+	if (distToTarget() < 100.f) {
+		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
 	}
 }
 
@@ -122,4 +124,12 @@ float RatEnemy::getMaxVelocityYDown() const {
 
 float RatEnemy::getMaxVelocityX() const {
 	return 100.f;
+}
+
+Enemy* RatEnemy::createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const {
+	Enemy* enemy = new RatEnemy(m_level, m_screen, true);
+	enemy->addAttributes(ttl, additionalAttributes);
+	enemy->setTimeToLive(ttl);
+	enemy->setPosition(getPosition());
+	return enemy;
 }

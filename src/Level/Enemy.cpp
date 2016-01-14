@@ -8,19 +8,24 @@ using namespace std;
 const float Enemy::HP_BAR_HEIGHT = 3.f;
 const float Enemy::PICKUP_RANGE = 100.f;
 
-Enemy::Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id) : LevelMovableGameObject(level) {
-	m_id = id;
-	m_mainChar = mainChar;
+Enemy::Enemy(Level* level, Screen* screen, bool isControlled) : LevelMovableGameObject(level) {
+	m_mainChar = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	m_enemies = screen->getObjects(GameObjectType::_Enemy);
+	m_isControlled = isControlled;
 	m_attributes = ZERO_ATTRIBUTES;
-	m_screen = mainChar->getScreen();
+	m_screen = screen;
 	m_spellManager = new SpellManager(this);
 	m_questTarget.first = "";
 
 	// load hp bar
-	m_hpBar.setFillColor(sf::Color::Red);
+	m_hpBar.setFillColor(m_isControlled ? sf::Color::Green : sf::Color::Red);
 	updateHpBar();
 
 	m_buffBar = new EnemyBuffBar(this);
+
+	if (!m_isControlled) {
+		m_currentTarget = m_mainChar;
+	}
 }
 
 Enemy::~Enemy() {
@@ -34,10 +39,17 @@ bool Enemy::getFleeCondition() const {
 
 void Enemy::onHit(Spell* spell) {
 	if (m_isDead) {
+		if (spell->getSpellID() == SpellID::RaiseTheDead)
+			spell->execOnHit(this);
 		return;
 	}
 	// check for owner
-	if (spell->getOwner()->getConfiguredType() == GameObjectType::_Enemy) {
+	if (const Enemy* enemy = dynamic_cast<const Enemy*>(spell->getOwner())) {
+		if (m_isControlled && enemy->isControlled() || !m_isControlled && !enemy->isControlled()) {
+			return;
+		}
+	}
+	if (m_isControlled && spell->getOwner()->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
 		return;
 	}
 	// check for immune damage types, if yes, the spell will disappear, absorbed by the immuneness of this enemy
@@ -71,6 +83,13 @@ void Enemy::update(const sf::Time& frameTime) {
 	}
 	m_showLootWindow = m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips);
 	m_buffBar->update(frameTime);
+
+	if (m_isControlled) {
+		GameObject::updateTime(m_timeToLive, frameTime);
+		if (m_timeToLive == sf::Time::Zero) {
+			setDead();
+		}
+	}
 }
 
 void Enemy::updateHpBar() {
@@ -78,8 +97,8 @@ void Enemy::updateHpBar() {
 	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
 }
 
-float Enemy::distToMainChar() const {
-	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
+float Enemy::distToTarget() const {
+	sf::Vector2f dist = m_currentTarget->getCenter() - getCenter();
 	return sqrt(dist.x * dist.x + dist.y * dist.y);
 }
 
@@ -102,6 +121,10 @@ sf::Time Enemy::getConfiguredFearedTime() const {
 
 sf::Time Enemy::getConfiguredChasingTime() const {
 	return sf::seconds(1);
+}
+
+bool Enemy::isControlled() const {
+	return m_isControlled;
 }
 
 GameObjectType Enemy::getConfiguredType() const {
@@ -166,29 +189,55 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 }
 
 void Enemy::updateAggro() {
-	float invisibilityScaler;
-	int invLevel = m_mainChar->getInvisibilityLevel();
-	int mentalStr = getMentalStrength();
-	if (invLevel == 0) {
-		invisibilityScaler = 1.f;
-	}
-	else if (invLevel > mentalStr) {
-		invisibilityScaler = 0.f;
-	}
-	else {
-		invisibilityScaler = 1.f / (2 * (6 - mentalStr)) + 1.f / (invLevel + 1);
-	}
-	
-	bool isInAggroRange = distToMainChar() < (getAggroRange() * invisibilityScaler);
-
 	if (m_enemyState == EnemyState::Chasing && getFleeCondition()) {
 		m_fearedTime = getConfiguredFearedTime();
 		return;
 	}
+	if (m_enemyState != EnemyState::Idle) return;
 
-	if (m_enemyState == EnemyState::Idle && isInAggroRange) {
+	bool isInAggroRange = false;
+	if (!m_isControlled) {
+		// handle main character aggro
+		float invisibilityScaler = 1.f;
+		int invLevel = m_mainChar->getInvisibilityLevel();
+		int mentalStr = getMentalStrength();
+		if (invLevel == 0) {
+			invisibilityScaler = 1.f;
+		}
+		else if (invLevel > mentalStr) {
+			invisibilityScaler = 0.f;
+		}
+		else {
+			invisibilityScaler = 1.f / (2 * (6 - mentalStr)) + 1.f / (invLevel + 1);
+		}
+		isInAggroRange = distToTarget() < (getAggroRange() * invisibilityScaler);
+		if (isInAggroRange) {
+			m_chasingTime = getConfiguredChasingTime();
+			return;
+		}
+	}
+	else {
+		// search for new target
+		Enemy* nearest = nullptr;
+		float nearestDistance = 10000.f;
+		for (auto& go : *m_enemies) {
+			if (!go->isViewable()) continue;
+			Enemy* enemy = dynamic_cast<Enemy*>(go);
+			if (enemy->isDead() || enemy->isControlled()) continue;
+			sf::Vector2f dist = go->getCenter() - getCenter();
+			float distance = sqrt(dist.x * dist.x + dist.y * dist.y);
+			if (distance < nearestDistance) {
+				nearestDistance = distance;
+				nearest = enemy;
+			}
+		}
+		if (nearest == nullptr) {
+			m_currentTarget = nullptr;
+			m_waitingTime = getConfiguredWaitingTime();
+			return;
+		}
+		m_currentTarget = nearest;
 		m_chasingTime = getConfiguredChasingTime();
-		return;
 	}
 }
 
@@ -222,6 +271,11 @@ void Enemy::setObjectID(int id) {
 	m_objectID = id;
 }
 
+void Enemy::setTimeToLive(const sf::Time& ttl) {
+	if (!m_isControlled) return;
+	m_timeToLive = ttl;
+}
+
 void Enemy::setFeared(const sf::Time &fearedTime) {
 	m_fearedTime = fearedTime;
 	m_buffBar->addFeared(fearedTime);
@@ -239,14 +293,14 @@ void Enemy::addDamageOverTime(const DamageOverTimeData& data) {
 }
 
 void Enemy::onMouseOver() {
-	if (m_isDead) {
+	if (m_isDead && !m_isControlled) {
 		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
 		m_showLootWindow = true;
 	}
 }
 
 void Enemy::onRightClick() {
-	if (m_isDead) {
+	if (m_isDead && !m_isControlled) {
 		// check if the enemy body is in range
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 
@@ -267,10 +321,14 @@ void Enemy::onRightClick() {
 void Enemy::setDead() {
 	LevelMovableGameObject::setDead();
 	m_buffBar->clear();
+
+	if (m_isControlled) {
+		setDisposed();
+		return;
+	}
+
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
-
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
-
 	if (!m_questTarget.first.empty()) {
 		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(m_questTarget.first, m_questTarget.second);
 	}

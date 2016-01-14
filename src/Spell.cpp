@@ -1,6 +1,7 @@
 #include "Spell.h"
 #include "Level/LevelMovableGameObject.h"
 #include "Level/LevelMainCharacter.h"
+#include "Level/Enemy.h"
 
 using namespace std;
 
@@ -81,7 +82,9 @@ void Spell::update(const sf::Time& frameTime) {
 	m_level->collideWithDynamicTiles(this, &tmp);
 	// check collisions with main char
 	if (m_ownerType != GameObjectType::_LevelMainCharacter) {
-		checkCollisionsWithMainChar(getBoundingBox());
+		Enemy* enemy = dynamic_cast<Enemy*>(m_mob);
+		if (!(enemy && enemy->isControlled()))
+			checkCollisionsWithMainChar(getBoundingBox());	
 	}
 	// check collisions with enemies
 	checkCollisionsWithEnemies(getBoundingBox());

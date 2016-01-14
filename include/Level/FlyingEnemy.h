@@ -9,7 +9,7 @@
 // An enemy that is flying
 class FlyingEnemy : virtual public Enemy {
 public:
-	FlyingEnemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
+	FlyingEnemy(Level* level, Screen* screen, bool isControlled = false);
 	virtual ~FlyingEnemy();
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;

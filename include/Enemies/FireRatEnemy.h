@@ -9,7 +9,7 @@
 // A nasty fiery rat in a level
 class FireRatEnemy : public WalkingEnemy {
 public:
-	FireRatEnemy(Level* level, LevelMainCharacter* mainChar);
+	FireRatEnemy(Level* level, Screen* screen, bool isControlled = false);
 	virtual ~FireRatEnemy() {}
 
 	void load() override;
@@ -24,6 +24,7 @@ public:
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
 	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
+	Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const override;
 
 protected:
 	void handleAttackInput() override;

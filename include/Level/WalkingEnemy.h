@@ -7,7 +7,7 @@
 // An enemy that walks and jumps
 class WalkingEnemy : virtual public Enemy {
 public:
-	WalkingEnemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
+	WalkingEnemy(Level* level, Screen* screen, bool isControlled = false);
 	virtual ~WalkingEnemy();
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;

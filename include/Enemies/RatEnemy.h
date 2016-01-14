@@ -9,7 +9,7 @@
 // A nasty rat in a level
 class RatEnemy : public WalkingEnemy {
 public:
-	RatEnemy(Level* level, LevelMainCharacter* mainChar);
+	RatEnemy(Level* level, Screen* screen, bool isControlled = false);
 	~RatEnemy() {}
 
 	void load() override;
@@ -25,6 +25,7 @@ public:
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
 	static void insertDefaultLoot(std::map<std::string, int>& loot, int& gold);
+	Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const;
 
 protected:
 	void handleAttackInput() override;

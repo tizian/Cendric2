@@ -20,7 +20,7 @@ class Spell;
 // An enemy in a level
 class Enemy : virtual public LevelMovableGameObject {
 public:
-	Enemy(Level* level, LevelMainCharacter* mainChar, EnemyID id);
+	Enemy(Level* level, Screen* screen, bool isControlled = false);
 	virtual ~Enemy();
 
 	virtual void load() = 0;
@@ -34,22 +34,27 @@ public:
 	// the enemy flees for the given time
 	void setFeared(const sf::Time& fearedTime);
 	// the enemy is stunned for the given time
-	void setStunned(const sf::Time &stunnedTime);
+	void setStunned(const sf::Time& stunnedTime);
 	void addDamageOverTime(const DamageOverTimeData& data) override;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
 	// the object ID in the level enemy object layer.
 	void setObjectID(int id);
+	// sets the time to live for a controlled enemy
+	void setTimeToLive(const sf::Time& ttl);
 
+	bool isControlled() const;
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
-	// a level, ranges from 0 to 5. An enemy can only be feared / stunned, if the level of its spell is high enough.
+	// a level, ranges from 0 to 5. An enemy can only be feared / stunned / resurrected, if the level of its spell is high enough.
 	// default is 0. A enemy with level 5 can never be feared / stunned / controlled or affected in any other way!!
 	virtual int getMentalStrength() const;
 	// determines the distance from the top of the enemies bounding box to its
 	// hp bar. Default is 20px.
 	virtual float getConfiguredDistanceToHPBar() const;
+	// creates a new instance of this enemy that is controlled by the main char.
+	virtual Enemy* createNewControlledInstance(const sf::Time& ttl, const AttributeData& additionalAttributes) const = 0;
 
 protected:
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
@@ -59,10 +64,13 @@ protected:
 	// loads/updates hp bar
 	virtual void updateHpBar();
 
-	EnemyID m_id;
+	EnemyID m_id = EnemyID::VOID;
 	int m_objectID = -1;
 	// spells of these damage types won't hurt. default is empty.
 	std::vector<DamageType> m_immuneDamageTypes;
+	// when this bool is set to true, the enemy will help the player instead of hurting it
+	bool m_isControlled;
+	sf::Time m_timeToLive = sf::Time::Zero;
 
 	// AI
 	EnemyState m_enemyState = EnemyState::Idle;
@@ -76,8 +84,10 @@ protected:
 	// the distance from the center of the enemy to the center of the main char at which the enemy approaches the main char.
 	virtual float getApproachingDistance() const = 0;
 	// the target to be destroyed!
+	LevelMovableGameObject* m_currentTarget = nullptr;
 	LevelMainCharacter* m_mainChar;
-	float distToMainChar() const;
+	std::vector<GameObject*>* m_enemies;
+	float distToTarget() const;
 	virtual void makeRandomDecision() = 0;
 	// time until the enemy can attack after it has taken a hit
 	sf::Time m_recoveringTime = sf::Time::Zero;

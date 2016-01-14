@@ -36,7 +36,6 @@ private:
 
 	// initialize the animations
 	inline void initAnimations() {
-;
 		m_stunAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_stun));
 		m_stunAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
 		m_stunAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
