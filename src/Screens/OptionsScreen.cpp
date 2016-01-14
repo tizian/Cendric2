@@ -21,7 +21,8 @@ Screen* OptionsScreen::update(const sf::Time& frameTime) {
 		g_resourceManager->getConfiguration().isFullscreen = m_selectedFullscreenOn;
 		g_resourceManager->getConfiguration().isSmoothing = m_smoothingCheckbox->isChecked();
 		g_resourceManager->getConfiguration().isVSyncEnabled = m_vSyncCheckbox->isChecked();
-		g_resourceManager->getConfiguration().volume = m_volumeSlider->getSliderPosition();
+		g_resourceManager->getConfiguration().volumeMusic = m_volumeMusicSlider->getSliderPosition();
+		g_resourceManager->getConfiguration().volumeSound = m_volumeSoundSlider->getSliderPosition();
 		ConfigurationWriter writer;
 		writer.saveToFile(g_resourceManager->getConfiguration());
 		g_textProvider->reload();
@@ -153,12 +154,21 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 
 	distFromTop = distFromTop + 100;
 
-	m_volumeSlider = new Slider(0, 100);
+	m_volumeSoundSlider = new Slider(0, 100);
 	string volumeText = g_textProvider->getText("SoundVolume") + " (%)";
-	m_volumeSlider->setTextRaw(volumeText);
-	m_volumeSlider->setSliderPosition(g_resourceManager->getConfiguration().volume);
-	m_volumeSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	addObject(m_volumeSlider);
+	m_volumeSoundSlider->setTextRaw(volumeText);
+	m_volumeSoundSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeSound);
+	m_volumeSoundSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	addObject(m_volumeSoundSlider);
+
+	distFromTop = distFromTop + 100;
+
+	m_volumeMusicSlider = new Slider(0, 100);
+	volumeText = g_textProvider->getText("MusicVolume") + " (%)";
+	m_volumeMusicSlider->setTextRaw(volumeText);
+	m_volumeMusicSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeMusic);
+	m_volumeMusicSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	addObject(m_volumeMusicSlider);
 
 	// back
 	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));

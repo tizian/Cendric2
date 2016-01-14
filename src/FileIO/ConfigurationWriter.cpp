@@ -8,7 +8,8 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 	if (configuration.is_open()) {
 		configuration << writeConfigurationHeader();
 		configuration << writeSoundOn(data);
-		configuration << writeSoundVolume(data);
+		configuration << writeSoundVolumeSound(data);
+		configuration << writeSoundVolumeMusic(data);
 		configuration << writeLanguage(data);
 		configuration << writeQuickcastOn(data);
 		configuration << writeMainInputMap(data);
@@ -73,10 +74,16 @@ std::string ConfigurationWriter::writeSmoothingOn(const ConfigurationData& data)
 	return smoothingOn.append(string(SMOOTHING_ON) + ":" + (data.isSmoothing ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeSoundVolume(const ConfigurationData& data) const {
-	string soundVolume = "# this is the sound volume in percent (0 - 100)\n";
-	return soundVolume.append(string(SOUND_VOLUME) + ":" + to_string(data.volume) + "\n");
+std::string ConfigurationWriter::writeSoundVolumeSound(const ConfigurationData& data) const {
+	string soundVolume = "# this is the sound volume (sound effects) in percent (0 - 100)\n";
+	return soundVolume.append(string(SOUND_VOLUME_SOUND) + ":" + to_string(data.volumeSound) + "\n");
 }
+
+std::string ConfigurationWriter::writeSoundVolumeMusic(const ConfigurationData& data) const {
+	string soundVolume = "# this is the sound volume (music) in percent (0 - 100)\n";
+	return soundVolume.append(string(SOUND_VOLUME_MUSIC) + ":" + to_string(data.volumeMusic) + "\n");
+}
+
 
 std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const {
 	string language = "# 1 for EN, 2 for DE, 3 for CH\n";

@@ -147,7 +147,8 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowDamage'
 INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowResistance','Shadow Resistance','Schattenresistenz','Schatteresistenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Smoothing','Texture Smoothing','Texturen glätten','Texture verschmiere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Sound','Sound','Musik','Musig');
-INSERT INTO text (text_id, english, german, swiss_german) values ('SoundVolume','Volume','Lautstärke','Luutstärchi');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SoundVolume','Sound Volume','Lautstärke Soundeffekte','Soundeffekt-Luutstärchi');
+INSERT INTO text (text_id, english, german, swiss_german) values ('MusicVolume','Music Volume','Lautstärke Musik','Musig-Luutstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Speed','Speed','Geschwindigkeit','Gschwindigkeit');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellAntiGravity','Anti Gravity','Schwerkraft umkehren','Schwerchraft umchere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellAntiGravityDesc','Reverses gravity for Cendric for a certain duration.','Dreht Cendrics Schwerkraft für eine gewisse Zeit um.','Drüllt em Cendric sini Schwerchraft für e gwüssi Ziit um.');

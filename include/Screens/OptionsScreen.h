@@ -44,5 +44,6 @@ private:
 	Button* m_swissButton = nullptr;
 	void refreshLanguageText();
 
-	Slider* m_volumeSlider = nullptr;
+	Slider* m_volumeSoundSlider = nullptr;
+	Slider* m_volumeMusicSlider = nullptr;
 };

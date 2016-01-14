@@ -21,7 +21,8 @@ private:
 	bool readMainInputMapping(const std::string& line, ConfigurationData& data) const;
 	bool readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const;
 
-	bool readSoundVolume(const std::string& line, ConfigurationData& data) const;
+	bool readSoundVolumeMusic(const std::string& line, ConfigurationData& data) const;
+	bool readSoundVolumeSound(const std::string& line, ConfigurationData& data) const;
 	bool readSoundOn(const std::string& line, ConfigurationData& data) const;
 	bool readVSyncOn(const std::string& line, ConfigurationData& data) const;
 

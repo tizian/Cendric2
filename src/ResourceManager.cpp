@@ -299,7 +299,7 @@ void ResourceManager::playSound(sf::Sound& sound, ResourceID id) {
 	if (sound.getStatus() == sf::SoundSource::Status::Playing) return;
 	if (m_configuration.isSoundOn) {
 		sound.setBuffer(*getSoundBuffer(id));
-		sound.setVolume(static_cast<float>(m_configuration.volume));
+		sound.setVolume(static_cast<float>(m_configuration.volumeSound));
 		sound.play();
 	}
 }
@@ -308,7 +308,7 @@ void ResourceManager::playMusic(sf::Music& music, const std::string& filename) {
 	if (m_configuration.isSoundOn && !filename.empty()) {
 		if (music.openFromFile(filename)) {
 			music.setLoop(true);
-			music.setVolume(static_cast<float>(m_configuration.volume));
+			music.setVolume(static_cast<float>(m_configuration.volumeMusic));
 			music.play();
 		}
 		else {

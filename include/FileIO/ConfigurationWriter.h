@@ -17,7 +17,8 @@ public:
 private:
 	std::string writeConfigurationHeader() const;
 	std::string writeSoundOn(const ConfigurationData& data) const;
-	std::string writeSoundVolume(const ConfigurationData& data) const;
+	std::string writeSoundVolumeMusic(const ConfigurationData& data) const;
+	std::string writeSoundVolumeSound(const ConfigurationData& data) const;
 	std::string writeQuickcastOn(const ConfigurationData& data) const;
 
 	std::string writeLanguage(const ConfigurationData& data) const;

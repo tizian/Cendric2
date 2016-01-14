@@ -36,9 +36,13 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_ON));
 				noError = readSoundOn(line, data);
 			}
-			else if (line.compare(0, strlen(SOUND_VOLUME), string(SOUND_VOLUME)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_VOLUME));
-				noError = readSoundVolume(line, data);
+			else if (line.compare(0, strlen(SOUND_VOLUME_MUSIC), string(SOUND_VOLUME_MUSIC)) == 0) {
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_VOLUME_MUSIC));
+				noError = readSoundVolumeMusic(line, data);
+			}
+			else if (line.compare(0, strlen(SOUND_VOLUME_SOUND), string(SOUND_VOLUME_SOUND)) == 0) {
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_VOLUME_SOUND));
+				noError = readSoundVolumeSound(line, data);
 			}
 			else if (line.compare(0, strlen(QUICKCAST_ON), string(QUICKCAST_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(QUICKCAST_ON));
@@ -133,7 +137,22 @@ bool ConfigurationReader::readVSyncOn(const std::string& line, ConfigurationData
 	return true;
 }
 
-bool ConfigurationReader::readSoundVolume(const std::string& line, ConfigurationData& data) const {
+bool ConfigurationReader::readSoundVolumeMusic(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after music volume tag or no value after colon");
+		return false;
+	}
+	int volume = atoi(line.substr(colon + 1).c_str());
+	if (volume > 100 || volume < 0) {
+		g_logger->logWarning("ConfigurationReader", "Music volume has an invalid value, is left unchanged.");
+		return true;
+	}
+	data.volumeMusic = volume;
+	return true;
+}
+
+bool ConfigurationReader::readSoundVolumeSound(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
 	if (colon == string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after sound volume tag or no value after colon");
@@ -144,7 +163,7 @@ bool ConfigurationReader::readSoundVolume(const std::string& line, Configuration
 		g_logger->logWarning("ConfigurationReader", "Sound volume has an invalid value, is left unchanged.");
 		return true;
 	}
-	data.volume = volume;
+	data.volumeSound = volume;
 	return true;
 }
 

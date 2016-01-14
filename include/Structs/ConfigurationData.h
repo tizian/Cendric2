@@ -11,7 +11,9 @@ struct ConfigurationData {
 	Language language;
 	bool isSoundOn;
 	// in percent
-	int volume;
+	int volumeSound;
+	// in percent
+	int volumeMusic;
 	bool isVSyncEnabled;
 	std::map < Key, sf::Keyboard::Key > mainKeyMap;
 	// important: the alternative key map can't be seen, saved or changed by the user yet.
@@ -55,6 +57,7 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 {
 	Language::Lang_EN,
 	true,
+	100,
 	100,
 	true,
 	DEFAULT_KEYMAP,
