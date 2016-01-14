@@ -5,10 +5,6 @@
 #include "Level/LevelDynamicTile.h"
 #include "Map/MapDynamicTile.h"
 
-std::map<EnemyID, EnemyConstructor> ObjectFactory::enemyRegistry;
-std::map<LevelDynamicTileID, LevelDynamicTileConstructor> ObjectFactory::levelDynamicTileRegistry;
-std::map<MapDynamicTileID, MapDynamicTileConstructor> ObjectFactory::mapDynamicTileRegistry;
-
 ObjectFactory* ObjectFactory::Instance() {
 	static ObjectFactory factory;
 	return &factory;

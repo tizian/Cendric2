@@ -22,17 +22,17 @@ class ObjectFactory {
 public:
 	static ObjectFactory* ObjectFactory::Instance();
 
-	static Enemy* createEnemy(EnemyID id, Level* level, Screen* screen, bool controlled);
-	static void registerEnemy(EnemyID id, EnemyConstructor constructor);
+	Enemy* createEnemy(EnemyID id, Level* level, Screen* screen, bool controlled);
+	void registerEnemy(EnemyID id, EnemyConstructor constructor);
 
-	static LevelDynamicTile* createLevelDynamicTile(LevelDynamicTileID id, Level* level);
-	static void registerLevelDynamicTile(LevelDynamicTileID id, LevelDynamicTileConstructor constructor);
+	LevelDynamicTile* createLevelDynamicTile(LevelDynamicTileID id, Level* level);
+	void registerLevelDynamicTile(LevelDynamicTileID id, LevelDynamicTileConstructor constructor);
 
-	static MapDynamicTile* createMapDynamicTile(MapDynamicTileID id, Map* map);
-	static void registerMapDynamicTile(MapDynamicTileID id, MapDynamicTileConstructor constructor);
+	MapDynamicTile* createMapDynamicTile(MapDynamicTileID id, Map* map);
+	void registerMapDynamicTile(MapDynamicTileID id, MapDynamicTileConstructor constructor);
 
 private:
-	static std::map<EnemyID, EnemyConstructor> enemyRegistry;
-	static std::map<LevelDynamicTileID, LevelDynamicTileConstructor> levelDynamicTileRegistry;
-	static std::map<MapDynamicTileID, MapDynamicTileConstructor> mapDynamicTileRegistry;
+	std::map<EnemyID, EnemyConstructor> enemyRegistry;
+	std::map<LevelDynamicTileID, LevelDynamicTileConstructor> levelDynamicTileRegistry;
+	std::map<MapDynamicTileID, MapDynamicTileConstructor> mapDynamicTileRegistry;
 };

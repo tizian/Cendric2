@@ -91,7 +91,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
 	for (auto& it : data.dynamicTiles) {
-		LevelDynamicTile* tile = ObjectFactory::createLevelDynamicTile(it.id, level);
+		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(it.id, level);
 		if (tile == nullptr) {
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
@@ -170,7 +170,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 					loot.insert({ item.first, item.second });
 				}
 			}
-			enemy = ObjectFactory::createEnemy(it.second.first, level, screen, false);
+			enemy = ObjectFactory::Instance()->createEnemy(it.second.first, level, screen, false);
 			if (enemy == nullptr) {
 				g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
 				return;

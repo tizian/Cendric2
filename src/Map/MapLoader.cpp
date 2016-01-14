@@ -37,7 +37,7 @@ void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const 
 	}
 
 	for (auto& it : data.dynamicTiles) {
-		MapDynamicTile* tile = ObjectFactory::createMapDynamicTile(it.id, map);
+		MapDynamicTile* tile = ObjectFactory::Instance()->createMapDynamicTile(it.id, map);
 		if (tile == nullptr) {
 			g_logger->logError("MapLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
