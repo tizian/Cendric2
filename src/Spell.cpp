@@ -162,9 +162,9 @@ void Spell::checkCollisionsWithMainChar(const sf::FloatRect* boundingBox) {
 }
 
 void Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
-	for (std::vector<GameObject*>::iterator it = m_enemies->begin(); it != m_enemies->end(); ++it) {
-		if (!(*it)->isViewable()) continue;
-		Enemy* enemy = dynamic_cast<Enemy*>((*it));
+	for (auto& go : *m_enemies) {
+		if (!go->isViewable()) continue;
+		Enemy* enemy = dynamic_cast<Enemy*>(go);
 		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox))) {
 			enemy->onHit(this);
 		}

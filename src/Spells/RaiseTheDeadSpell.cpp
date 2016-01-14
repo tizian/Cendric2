@@ -18,7 +18,7 @@ void RaiseTheDeadSpell::update(const sf::Time& frameTime) {
 }
 
 void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
-	if (!target->isDead() || m_hasRisen) return;
+	if (!target->isDead()) return;
 	Enemy* enemy = dynamic_cast<Enemy*>(target);
 	if (enemy == nullptr) return;
 	if (enemy->getMentalStrength() > m_strength) {
@@ -38,8 +38,20 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	copy->setTimeToLive(m_data.duration);
 	copy->setPosition(enemy->getPosition());
 	m_screen->addObject(copy);
-	m_hasRisen = true;
 	setDisposed();
+}
+
+void RaiseTheDeadSpell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
+	// this method is overridden to guarantee that the spell only hits once
+	// and that the iterator is not invalidated (we change the enemy vector size on the fly)
+	for (auto& go : *m_enemies) {
+		if (!go->isViewable()) continue;
+		Enemy* enemy = dynamic_cast<Enemy*>(go);
+		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox))) {
+			enemy->onHit(this);
+			break;
+		}
+	}
 }
 
 void RaiseTheDeadSpell::render(sf::RenderTarget& target) {

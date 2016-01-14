@@ -66,6 +66,6 @@ protected:
 	// collisions with mainchar
 	void checkCollisionsWithMainChar(const sf::FloatRect* boundingBox);
 	// collisions with enemies
-	void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
+	virtual void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
 	sf::Vector2f rotateVector(const sf::Vector2f& vec, float angle);
 };

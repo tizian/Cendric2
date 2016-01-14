@@ -12,10 +12,11 @@ public:
 
 	void execOnHit(LevelMovableGameObject* target) override;
 
+protected:
+	void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) override;
+
 private:
 	int m_strength;
-	// a bool to check an unique rising per spell.
-	bool m_hasRisen = false;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
