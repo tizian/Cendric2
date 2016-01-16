@@ -192,7 +192,6 @@ bool Level::collides(const sf::FloatRect& boundingBox, const GameObject* exclude
 	// check collidable dynamic tiles
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-		if (!tile->isViewable() && !(tile->getDynamicTileID() == LevelDynamicTileID::ShiftableBlock)) continue;
 		if (ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
 		if (tile != nullptr && tile != exclude && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox)) {
 			return true;

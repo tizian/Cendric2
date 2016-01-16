@@ -369,6 +369,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_tile_switchable);
 
 	deleteResource(ResourceID::Sound_tile_water);
+	deleteResource(ResourceID::Sound_tile_lever);
 
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
@@ -423,6 +424,7 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_tile_switchable);
 
 	getSoundBuffer(ResourceID::Sound_tile_water);
+	getSoundBuffer(ResourceID::Sound_tile_lever);
 
 	// load game over sprite 
 	getTexture(ResourceID::Texture_screen_gameover);

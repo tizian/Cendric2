@@ -24,6 +24,9 @@ void WalkingEnemy::checkCollisions(const sf::Vector2f& nextPosition) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 	}
+	else {
+		nextBoundingBoxY.left = nextPosition.x;
+	}
 	// check for collision on y axis
 	bool collidesY = m_level->collides(nextBoundingBoxY, m_ignoreDynamicTiles);
 
@@ -34,10 +37,6 @@ void WalkingEnemy::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (getIsUpsideDown()) {
 			setPositionY(m_level->getCeiling(nextBoundingBoxY));
 			m_isGrounded = true;
-			if (!m_isDead && m_level->collidesLevelCeiling(nextBoundingBoxY)) {
-				// colliding with level ceiling is deadly when the mob is upside down.
-				setDead();
-			}
 		}
 	}
 	else if (isMovingDown && collidesY) {
@@ -47,10 +46,6 @@ void WalkingEnemy::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (!getIsUpsideDown()) {
 			setPositionY(m_level->getGround(nextBoundingBoxY));
 			m_isGrounded = true;
-			if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY)) {
-				// colliding with level bottom is deadly.
-				setDead();
-			}
 		}
 	}
 
@@ -61,7 +56,7 @@ void WalkingEnemy::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	// checks if the enemy falls would fall deeper than it can jump. 
-	if (isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
+	if (!collidesX && isMovingX && m_level->fallsDeep(*getBoundingBox(), m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.

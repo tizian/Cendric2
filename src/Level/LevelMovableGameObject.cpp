@@ -107,10 +107,6 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (getIsUpsideDown()) {
 			setPositionY(m_level->getCeiling(nextBoundingBoxY));
 			m_isGrounded = true;
-			if (!m_isDead && m_level->collidesLevelCeiling(nextBoundingBoxY)) {
-				// colliding with level ceiling is deadly when the mob is upside down.
-				setDead();
-			}
 		}
 	}
 	else if (isMovingDown && collidesY) {
@@ -120,10 +116,6 @@ void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (!getIsUpsideDown()) {
 			setPositionY(m_level->getGround(nextBoundingBoxY));
 			m_isGrounded = true;
-			if (!m_isDead && m_level->collidesLevelBottom(nextBoundingBoxY)) {
-				// colliding with level bottom is deadly.
-				setDead();
-			}
 		}
 	}
 
