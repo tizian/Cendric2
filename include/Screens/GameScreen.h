@@ -13,7 +13,7 @@ public:
 	GameScreen(CharacterCore* core);
 	virtual ~GameScreen();
 
-	Screen* update(const sf::Time& frameTime) override;
+	Screen* execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void updateProgressLog(const sf::Time& frameTime);
 

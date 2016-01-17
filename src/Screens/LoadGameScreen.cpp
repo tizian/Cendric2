@@ -6,7 +6,7 @@ using namespace std;
 LoadGameScreen::LoadGameScreen(CharacterCore* core) : Screen(core) {
 }
 
-Screen* LoadGameScreen::update(const sf::Time& frameTime) {
+Screen* LoadGameScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
 		return new MenuScreen(m_characterCore);
 	}
@@ -17,7 +17,6 @@ Screen* LoadGameScreen::update(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
-	deleteDisposedObjects();
 	if (!getObjects(GameObjectType::_Form)->empty()) return this;
 	if (m_loadSaveGameButton->isClicked() || m_saveGameWindow->isChosen()) {
 		if (m_characterCore == nullptr) {

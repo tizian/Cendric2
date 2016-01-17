@@ -29,8 +29,18 @@ Screen::Screen(CharacterCore* core) {
 }
 
 void Screen::addObject(GameObject* object) {
-	m_objects[object->getConfiguredType()].push_back(object);
+	m_toAdd.push_back(object);
 	object->setScreen(this);
+}
+
+Screen* Screen::update(const sf::Time& frameTime) {
+	for (auto& obj : m_toAdd) {
+		m_objects[obj->getConfiguredType()].push_back(obj);
+	}
+	m_toAdd.clear();
+	Screen* nextScreen = execUpdate(frameTime);
+	deleteDisposedObjects();
+	return nextScreen;
 }
 
 vector<GameObject*>* Screen::getObjects(GameObjectType type) {

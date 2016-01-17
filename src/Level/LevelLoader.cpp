@@ -1,6 +1,7 @@
 #include "Level/LevelLoader.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/Level.h"
+#include "Screens/LevelScreen.h"
 #include "Level/Enemy.h"
 #include "LightObject.h"
 #include "ObjectFactory.h"
@@ -8,7 +9,7 @@
 using namespace std;
 
 void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelLoader", "Could not find main character of game screen");
 		return;
@@ -40,7 +41,7 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 }
 
 void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelLoader", "Could not find main character of game screen");
 		return;
@@ -78,7 +79,7 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 }
 
 void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelLoader", "Could not find main character of game screen");
 		return;
@@ -107,7 +108,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 }
 
 void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelLoader", "Could not find main character of game screen");
 		return;
@@ -145,7 +146,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 }
 
 void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelLoader", "Could not find main character of game screen");
 		return;

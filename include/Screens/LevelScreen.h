@@ -18,7 +18,7 @@ public:
 	// called by the loading screen
 	void load();
 
-	Screen* update(const sf::Time& frameTime) override;
+	Screen* execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
@@ -36,6 +36,8 @@ public:
 	// the level screen does not use the original core, but runs on a copy.
 	// to update the original core, call this method. (used by the checkpoints)
 	void writeToCore();
+	// getter for the main char.
+	LevelMainCharacter* getMainCharacter() const;
 
 private:
 	Level m_currentLevel;

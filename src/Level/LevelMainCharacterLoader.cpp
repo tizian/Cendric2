@@ -1,5 +1,6 @@
 #include "Level/LevelMainCharacterLoader.h"
 #include "Level/LevelMainCharacter.h"
+#include "Screens/LevelScreen.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, 
 }
 
 void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelMainCharacterLoader", "Could not find main character of game screen");
 		return;

@@ -11,7 +11,7 @@ LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 	}
 }
 
-Screen* LoadingScreen::update(const sf::Time& frameTime) {
+Screen* LoadingScreen::execUpdate(const sf::Time& frameTime) {
 
 	// return once to render this screen, and then loads everything in the main thread.
 	if (!m_isRendered) {

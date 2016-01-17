@@ -6,7 +6,7 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_menu)));
 }
 
-Screen* MenuScreen::update(const sf::Time& frameTime) {
+Screen* MenuScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_startNewGame) {
 		return new LoadingScreen(m_characterCore);
 	}
@@ -52,7 +52,6 @@ Screen* MenuScreen::update(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Undefined, frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
-	deleteDisposedObjects();
 	return this;
 }
 

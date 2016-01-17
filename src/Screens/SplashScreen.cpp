@@ -24,7 +24,7 @@ void SplashScreen::execOnEnter(const Screen* previousScreen) {
 		WINDOW_HEIGHT - 18.f);
 }
 
-Screen* SplashScreen::update(const sf::Time& frameTime) {
+Screen* SplashScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || g_inputController->isMouseJustPressedLeft()) {
 		return new MenuScreen(nullptr);
 	}
