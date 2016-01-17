@@ -164,8 +164,8 @@ void LevelMainCharacter::addDamage(int damage, DamageType damageType) {
 }
 
 void LevelMainCharacter::load() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 100.f));
-	setSpriteOffset(sf::Vector2f(-25.f, -20.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
 
 	Animation walkingAnimation;
 	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
