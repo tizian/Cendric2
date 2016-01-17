@@ -1,17 +1,17 @@
 # time played, in seconds
-time.played:1124
-savegame.name:PUZZLING
-savegame.date:1453058744
+time.played:1153
+savegame.name:Patrikan
+savegame.date:1453065966
 level.id:res/level/forest/forest.tmx
-level.position:2175.000000,3175.000000
-is.in.level:0
+level.position:960.000000,1660.000000
+is.in.level:1
 map.id:res/map/firstmap/firstmap.tmx
-map.position:2499.636230,1009.966675
+map.position:1400.000000,830.872986
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:45
+gold:58
 # items in inventory:
 item.id:eq_head_necrot3,1
 item.id:eq_purpleback,1
@@ -22,9 +22,10 @@ item.id:fo_bread,2
 item.id:fo_caveberry,2
 item.id:fo_cheese,6
 item.id:fo_glowingshroom,2
-item.id:fo_healingherb,2
-item.id:fo_lesserhealingpotion,3
-item.id:fo_rawmeat,2
+item.id:fo_healingherb,3
+item.id:fo_lesserhealingpotion,4
+item.id:fo_rawmeat,3
+item.id:fo_roastedmeat,1
 item.id:fo_water,1
 item.id:mi_goldengoblet,4
 item.id:we_oathbreaker,1
@@ -48,11 +49,16 @@ equipped.weapon:we_icestaff
 quickslot:1,
 quickslot:2,
 # enemies killed in level:
+enemies.killed:res/level/forest/forest.tmx,1,2,4,20,29,30,31,34,36,38,40,41,42,45,59,60,61
 # enemies looted in level:
+enemies.looted:res/level/forest/forest.tmx,38,59,60
 # items looted in level:
+items.looted:res/level/forest/forest.tmx,3091,3541,3542,3543,3544,3874,3948
 # chests looted in level:
+items.looted:res/level/forest/forest.tmx,15,16
 # quest states:
 # quest targets killed:
+quest.progress.target:a_cave_of_rats,fire_rat,2,rat,1
 # quest conditions fulfilled:
 # npc states:
 # merchand states:
