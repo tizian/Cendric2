@@ -15,6 +15,7 @@ public:
 	~LevelMainCharacter();
 
 	void load();
+	void update(const sf::Time& frameTime) override;
 
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);
@@ -48,4 +49,8 @@ private:
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;
+
+	// makes it easier to jump
+	static const sf::Time JUMP_GRACE_TIME;
+	sf::Time m_jumpGraceTime = sf::Time::Zero;
 };

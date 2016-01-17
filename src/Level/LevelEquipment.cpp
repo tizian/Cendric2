@@ -7,7 +7,7 @@ LevelEquipment::~LevelEquipment() {
 
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
-	sf::Vector2f offset(-60.f, -20.f);
+	sf::Vector2f offset(-60.f, -30.f);
 	if (!m_mainChar->getIsFacingRight())
 		offset.x = -offset.x - getBoundingBox()->width;
 	if (m_mainChar->getIsUpsideDown())

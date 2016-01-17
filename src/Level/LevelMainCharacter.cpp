@@ -1,6 +1,8 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
 
+const sf::Time LevelMainCharacter::JUMP_GRACE_TIME = sf::milliseconds(200);
+
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
 	m_isQuickcast = g_resourceManager->getConfiguration().isQuickcast;
@@ -51,7 +53,8 @@ void LevelMainCharacter::handleMovementInput() {
 		m_nextIsFacingRight = true;
 		newAccelerationX += getConfiguredWalkAcceleration();
 	}
-	if (g_inputController->isKeyJustPressed(Key::Jump) && m_isGrounded) {
+	if (g_inputController->isKeyJustPressed(Key::Jump) && (m_isGrounded || m_jumpGraceTime > sf::Time::Zero)) {
+		m_jumpGraceTime = sf::Time::Zero;
 		setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityYUp() : -getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
 	}
 
@@ -163,6 +166,15 @@ void LevelMainCharacter::addDamage(int damage, DamageType damageType) {
 	LevelMovableGameObject::addDamage(damage, damageType);
 }
 
+void LevelMainCharacter::update(const sf::Time& frameTime) {
+	GameObject::updateTime(m_jumpGraceTime, frameTime);
+	bool wasGrounded = m_isGrounded;
+	LevelMovableGameObject::update(frameTime);
+	if (wasGrounded && !m_isGrounded) {
+		m_jumpGraceTime = JUMP_GRACE_TIME;
+	}
+}
+
 void LevelMainCharacter::load() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
@@ -222,7 +234,7 @@ float LevelMainCharacter::getMaxVelocityYUp() const {
 }
 
 float LevelMainCharacter::getMaxVelocityYDown() const {
-	return 600.f;
+	return 800.f;
 }
 
 float LevelMainCharacter::getMaxVelocityX() const {
