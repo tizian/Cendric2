@@ -18,26 +18,22 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 
 	// create chests if they are not looted yet
 	for (auto& it : data.chests) {
-		if (coreData.chestsLooted.at(data.id).find(it.first) == coreData.chestsLooted.at(data.id).end()) {
+		if (coreData.chestsLooted.at(data.id).find(it.objectID) == coreData.chestsLooted.at(data.id).end()) {
 			ChestTile* chestTile = nullptr;
+
 			// calculate loot.
-			std::map<string, int> loot;
-			int gold = 0;
-			if (data.chestLoot.find(it.first) != data.chestLoot.end()) {
-				gold = data.chestLoot.at(it.first).second;
-				for (auto& item : data.chestLoot.at(it.first).first) {
-					loot.insert({ item.first, item.second });
-				}
-			}
+			std::map<string, int> loot = it.loot.first;
+			int gold = it.loot.second;
+		
 			chestTile = new ChestTile(mainCharacter, level);
 			chestTile->setTileSize(data.tileSize);
 			chestTile->init();
-			chestTile->setObjectID(it.first);
-			if (data.chestStrength.find(it.first) != data.chestStrength.end()) chestTile->setStrength(data.chestStrength.at(it.first));
+			chestTile->setObjectID(it.objectID);
+			chestTile->setStrength(it.chestStrength);
 			chestTile->setLoot(loot, gold);
-			chestTile->setPosition(it.second.second - chestTile->getPositionOffset());
+			chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset());
 			chestTile->setDebugBoundingBox(sf::Color::Yellow);
-			chestTile->load(it.second.first);
+			chestTile->load(it.skinNr);
 			screen->addObject(chestTile);
 		}
 	}
@@ -159,32 +155,28 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 
 	// create enemies if they are not looted yet
 	for (auto& it : data.enemies) {
-		if (coreData.enemiesLooted.at(data.id).find(it.first) == coreData.enemiesLooted.at(data.id).end()) {
+		if (coreData.enemiesLooted.at(data.id).find(it.objectID) == coreData.enemiesLooted.at(data.id).end()) {
 			Enemy* enemy = nullptr;
 			// calculate loot.
-			std::map<string, int> loot;
-			int gold = 0;
-			if (data.enemyLoot.find(it.first) != data.enemyLoot.end()) {
-				gold = data.enemyLoot.at(it.first).second;
-				for (auto& item : data.enemyLoot.at(it.first).first) {
-					loot.insert({ item.first, item.second });
-				}
-			}
-			enemy = ObjectFactory::Instance()->createEnemy(it.second.first, level, screen, false);
+			std::map<string, int> loot = it.customizedLoot.first;
+			int gold = it.customizedLoot.second;
+		
+			enemy = ObjectFactory::Instance()->createEnemy(it.id, level, screen, false);
 			if (enemy == nullptr) {
 				g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
 				return;
 			}
-			if (data.enemyQuesttarget.find(it.first) != data.enemyQuesttarget.end()) {
-				enemy->setQuestTarget(data.enemyQuesttarget.at(it.first));
+			if (!it.questTarget.first.empty()) {
+				enemy->setQuestTarget(it.questTarget);
 			}
 
 			enemy->insertDefaultLoot(loot, gold);
 			enemy->setLoot(loot, gold);
-			enemy->setPosition(it.second.second);
-			enemy->setObjectID(it.first);
+			enemy->setPosition(it.spawnPosition);
+			enemy->setObjectID(it.objectID);
+			enemy->setPersistent(it.isPersistent);
 			enemy->setDebugBoundingBox(sf::Color::Magenta);
-			if (coreData.enemiesKilled.at(data.id).find(it.first) != coreData.enemiesKilled.at(data.id).end()) enemy->setDead();
+			if (coreData.enemiesKilled.at(data.id).find(it.objectID) != coreData.enemiesKilled.at(data.id).end()) enemy->setDead();
 			screen->addObject(enemy);
 		}
 	}

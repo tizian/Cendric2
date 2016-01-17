@@ -74,7 +74,7 @@ bool FlashSpell::getConfiguredRotateSprite() const {
 }
 
 sf::Vector2f FlashSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-50.f, -10.f);
+	return sf::Vector2f(-50.f, -20.f);
 }
 
 void FlashSpell::loadParticleSystem() {

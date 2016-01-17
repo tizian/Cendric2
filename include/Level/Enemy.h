@@ -39,6 +39,8 @@ public:
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
+	// an enemy that is persistent will not be marked as dead and respawn with every level reset
+	void setPersistent(bool value);
 	// the object ID in the level enemy object layer.
 	void setObjectID(int id);
 	// sets the time to live for a controlled enemy
@@ -65,6 +67,7 @@ protected:
 
 	EnemyID m_id = EnemyID::VOID;
 	int m_objectID = -1;
+	bool m_isPersistent = false;
 	// spells of these damage types won't hurt. default is empty.
 	std::vector<DamageType> m_immuneDamageTypes;
 	// when this bool is set to true, the enemy will help the player instead of hurting it

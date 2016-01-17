@@ -149,14 +149,17 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 		int offset = static_cast<int>(LevelDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
 		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
 
-		data.chests.insert({ id, std::pair<int, sf::Vector2f>(skinNr, sf::Vector2f(static_cast<float>(x), static_cast<float>(y))) });
+		ChestData chestData;
+		chestData.skinNr = skinNr;
+		chestData.objectID = id;
+		chestData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
 
 		// chest loot
 		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
+		std::pair<std::map<std::string, int>, int> items;
+		items.second = 0;
+
 		if (loot != nullptr) {
-			std::pair<std::map<std::string, int>, int> items;
-			items.second = 0;
-			items.first.clear();
 			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
 			while (item != nullptr) {
 				const char* textAttr = nullptr;
@@ -179,7 +182,7 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 4).");
 						return false;
 					}
-					data.chestStrength.insert({ id, amount });
+					chestData.chestStrength = amount;
 				}
 				else {
 					items.first.insert({ itemText, amount });
@@ -187,8 +190,9 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 
 				item = item->NextSiblingElement("property");
 			}
-			data.chestLoot.insert({ id, items });
 		}
+		chestData.loot = items;
+		data.chests.push_back(chestData);
 
 		object = object->NextSiblingElement("object");
 	}
@@ -221,15 +225,19 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 			return false;
 		}
 
-		data.enemies.insert({ id, std::pair<EnemyID, sf::Vector2f>(m_enemyMap.at(gid), sf::Vector2f(static_cast<float>(x), static_cast<float>(y))) });
-
+		EnemyData enemyData;
+		enemyData.objectID = id;
+		enemyData.id = m_enemyMap.at(gid);
+		enemyData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		
 		// enemy loot
-		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
-		if (loot != nullptr) {
-			std::pair<std::map<std::string, int>, int> items;
-			items.second = 0;
-			items.first.clear();
-			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+		std::pair<std::map<std::string, int>, int> items;
+		items.second = 0;
+
+		if (properties != nullptr) {
+			
+			tinyxml2::XMLElement* item = properties->FirstChildElement("property");
 			while (item != nullptr) {
 				const char* textAttr = nullptr;
 				textAttr = item->Attribute("name");
@@ -248,7 +256,10 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					std::string questtargetText = textAttr;
 					std::string questID = questtargetText.substr(0, questtargetText.find(","));
 					questtargetText.erase(0, questtargetText.find(",") + 1);
-					data.enemyQuesttarget.insert({ id, std::pair<std::string, std::string>(questID, questtargetText) });
+					enemyData.questTarget = std::pair<std::string, std::string>(questID, questtargetText);
+				}
+				else if (itemText.compare("persistent") == 0) {
+					enemyData.isPersistent = true;
 				}
 				else {
 					int amount;
@@ -264,10 +275,11 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				}
 
 				item = item->NextSiblingElement("property");
-			}
-			data.enemyLoot.insert({ id, items });
+			}	
 		}
+		enemyData.customizedLoot = items;
 
+		data.enemies.push_back(enemyData);
 		object = object->NextSiblingElement("object");
 	}
 	return true;
@@ -721,10 +733,17 @@ bool LevelReader::checkData(LevelData& data) const {
 			return false;
 		}
 	}
-	for (auto& it : data.enemyQuesttarget) {
-		if (it.second.first.empty() || it.second.second.empty()) {
-			logError("enemy quest target value strings (quest id and name) must not be empty.");
+	for (auto& it : data.enemies) {
+		if (!it.questTarget.first.empty() && it.questTarget.second.empty()) {
+			logError("enemy quest target name must not must not be empty when quest id is filled.");
 			return false;
+		}
+		if (it.isPersistent && (!it.questTarget.first.empty() || !it.customizedLoot.first.empty() || it.customizedLoot.second != 0)) {
+			g_logger->logWarning("LevelReader", "a persistent enemy cannot have customized loot or be a quest target.");
+			it.questTarget.first.clear();
+			it.questTarget.second.clear();
+			it.customizedLoot.first.clear();
+			it.customizedLoot.second = 0;
 		}
 	}
 	if (data.levelItems.size() != data.mapSize.x * data.mapSize.y) {

@@ -24,7 +24,7 @@ void WindGustSpell::render(sf::RenderTarget& target) {
 }
 
 sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(10.f, 20.f);
+	return sf::Vector2f(10.f, 10.f);
 }
 
 bool WindGustSpell::getConfiguredRotateSprite() const {

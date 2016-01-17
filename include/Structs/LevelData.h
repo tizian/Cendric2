@@ -8,6 +8,8 @@
 #include "Structs/LevelExitData.h"
 #include "Structs/LevelDynamicTileData.h"
 #include "Structs/LeverData.h"
+#include "Structs/EnemyData.h"
+#include "Structs/ChestData.h"
 
 struct LevelData : TMXData {
 	std::vector<BackgroundLayer> backgroundLayers;
@@ -17,12 +19,7 @@ struct LevelData : TMXData {
 	std::vector<LeverData> levers;
 	std::vector<std::string> levelItems;
 
-	std::map<int, std::pair<EnemyID, sf::Vector2f>> enemies;
-	std::map<int, std::pair<int, sf::Vector2f>> chests;
-	std::map<int, int> chestStrength;
-
-	std::map<int, std::pair<std::string, std::string>> enemyQuesttarget;
-	std::map<int, std::pair<std::map<std::string, int>, int>> enemyLoot;
-	std::map<int, std::pair<std::map<std::string, int>, int>> chestLoot;
+	std::vector<EnemyData> enemies;
+	std::vector<ChestData> chests;
 	std::vector<LevelExitData> levelExits;
 };

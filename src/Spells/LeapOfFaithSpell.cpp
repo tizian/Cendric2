@@ -23,7 +23,7 @@ void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 }
 
 sf::Vector2f LeapOfFaithSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-40.f, -16.f);
+	return sf::Vector2f(-40.f, -26.f);
 }
 
 void LeapOfFaithSpell::setDisposed() {

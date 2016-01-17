@@ -10,7 +10,7 @@ void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const 
 }
 
 sf::Vector2f LightSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(0.f, -50.f);
+	return sf::Vector2f(0.f, -60.f);
 }
 
 void LightSpell::setDisposed() {

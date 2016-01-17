@@ -32,7 +32,7 @@ void AntiGravitySpell::setDisposed() {
 }
 
 sf::Vector2f AntiGravitySpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-49.f, 0.f);
+	return sf::Vector2f(-49.f, -10.f);
 }
 
 bool AntiGravitySpell::getConfiguredRotateSprite() const {

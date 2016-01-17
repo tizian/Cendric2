@@ -47,7 +47,7 @@ void InvisibilitySpell::execOnHit(LevelMovableGameObject* target) {
 }
 
 sf::Vector2f InvisibilitySpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(0.f, 100.f);
+	return sf::Vector2f(0.f, 90.f);
 }
 
 bool InvisibilitySpell::getConfiguredRotateSprite() const {

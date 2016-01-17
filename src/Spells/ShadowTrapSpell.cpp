@@ -41,7 +41,7 @@ float ShadowTrapSpell::getConfiguredMaxVelocityYDown() const {
 }
 
 sf::Vector2f ShadowTrapSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(10.f, 20.f);
+	return sf::Vector2f(10.f, 10.f);
 }
 
 void ShadowTrapSpell::update(const sf::Time& frameTime) {

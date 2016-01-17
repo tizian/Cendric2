@@ -100,7 +100,7 @@ void Spell::update(const sf::Time& frameTime) {
 }
 
 sf::Vector2f Spell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(20.f, 0.f);
+	return sf::Vector2f(20.f, -20.f);
 }
 
 bool Spell::getConfiguredRotateSprite() const {

@@ -276,6 +276,10 @@ void Enemy::setObjectID(int id) {
 	m_objectID = id;
 }
 
+void Enemy::setPersistent(bool value) {
+	m_isPersistent = value;
+}
+
 void Enemy::setTimeToLive(const sf::Time& ttl) {
 	if (!m_isControlled) return;
 	m_timeToLive = ttl;
@@ -332,6 +336,9 @@ void Enemy::setDead() {
 		return;
 	}
 
+	if (m_isPersistent) {
+		return;
+	}
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
 	if (!m_questTarget.first.empty()) {

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="70" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="64">
  <properties>
-  <property name="backgroundlayers" value="-1.0,res/level/forest/layer_inf.png"/>
+  <property name="backgroundlayers" value="-1.0,res/level/forest/layer_inf.png,3.0,res/level/forest/layer_3.png"/>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/level/forest/forest_try.ogg"/>
   <property name="name" value="Forest"/>
   <property name="tilesetpath" value="res/level/forest/tileset_level_forest.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_forest" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_level_forest" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="../tilesets/tileset_level_forest.png" width="1000" height="1000"/>
  </tileset>
- <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
- <tileset firstgid="462" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="4">
+ <tileset firstgid="462" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="4" columns="4">
   <image source="../tilesets/tileset_enemies.png" width="208" height="52"/>
  </tileset>
- <tileset firstgid="466" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
+ <tileset firstgid="466" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -559,15 +559,15 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,362,0,0,362,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,362,0,0,362,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,362,0,0,362,0,0,0,0,362,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,362,0,0,362,0,0,0,0,362,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,362,0,0,362,0,0,0,0,362,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,362,0,0,362,0,0,0,0,362,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,362,0,0,362,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,362,0,0,362,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,362,0,0,362,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,362,0,0,362,0,0,0,0,0,0,362,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,362,362,362,362,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,362,0,0,362,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,362,0,0,362,0,0,0,0,0,0,0,0,
@@ -1239,7 +1239,11 @@
   <object id="34" gid="463" x="115" y="2649" width="50" height="50"/>
   <object id="36" gid="465" x="631" y="1799.67" width="50" height="50"/>
   <object id="38" gid="465" x="1613.67" y="2003.67" width="50" height="50"/>
-  <object id="39" gid="463" x="2471" y="1547.67" width="50" height="50"/>
+  <object id="39" gid="463" x="2471" y="1547.67" width="50" height="50">
+   <properties>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
   <object id="40" gid="465" x="2691" y="1731.67" width="50" height="50"/>
   <object id="41" gid="465" x="2660.33" y="1345" width="50" height="50"/>
   <object id="42" gid="462" x="2368.33" y="1993" width="50" height="50"/>
@@ -1247,7 +1251,11 @@
   <object id="46" gid="465" x="565.667" y="197" width="50" height="50"/>
   <object id="47" gid="465" x="889.667" y="373" width="50" height="50"/>
   <object id="48" gid="462" x="423" y="493" width="50" height="50"/>
-  <object id="54" gid="463" x="1320.33" y="403.667" width="50" height="50"/>
+  <object id="54" gid="463" x="1320.33" y="403.667" width="50" height="50">
+   <properties>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
   <object id="59" gid="465" x="1712.33" y="813" width="50" height="50"/>
   <object id="60" gid="465" x="2673.67" y="677" width="50" height="50"/>
   <object id="61" gid="463" x="2183" y="395.667" width="50" height="50"/>
