@@ -57,7 +57,7 @@ void FireRatEnemy::handleAttackInput() {
 	if (m_currentTarget == nullptr) return;
 	if (distToTarget() < getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (distToTarget() < 100.f) {
+		if (distToTarget() < 50.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
