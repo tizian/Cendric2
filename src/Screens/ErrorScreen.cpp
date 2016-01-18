@@ -32,7 +32,7 @@ void ErrorScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.draw(m_errorText);
 }
 
-Screen* ErrorScreen::update(const sf::Time& frameTime) {
+Screen* ErrorScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape)) {
 		m_requestQuit = true;
 	}

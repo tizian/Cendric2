@@ -16,7 +16,7 @@ void SaveGameScreen::setAllButtonsEnabled(bool value) {
 	m_saveGameWindow->setEnabled(value);
 }
 
-Screen* SaveGameScreen::update(const sf::Time& frameTime) {
+Screen* SaveGameScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
 		return new MenuScreen(m_characterCore);
 	}
@@ -24,7 +24,6 @@ Screen* SaveGameScreen::update(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
-	deleteDisposedObjects();
 	if (!getObjects(GameObjectType::_Form)->empty()) return this;
 	if (m_saveButton->isClicked() || m_saveGameWindow->isChosen()) {
 		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));

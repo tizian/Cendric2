@@ -10,7 +10,7 @@ const float Enemy::HP_BAR_HEIGHT = 3.f;
 const float Enemy::PICKUP_RANGE = 100.f;
 
 Enemy::Enemy(Level* level, Screen* screen, bool isControlled) : LevelMovableGameObject(level) {
-	m_mainChar = dynamic_cast<LevelMainCharacter*>(screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
+	m_mainChar = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	m_enemies = screen->getObjects(GameObjectType::_Enemy);
 	m_isControlled = isControlled;
 	m_attributes = ZERO_ATTRIBUTES;

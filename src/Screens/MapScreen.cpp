@@ -7,7 +7,7 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : GameScreen
 	m_mapID = mapID;
 }
 
-Screen* MapScreen::update(const sf::Time& frameTime) {
+Screen* MapScreen::execUpdate(const sf::Time& frameTime) {
 	// handle case where a dialogue is open
 	if (m_dialogueWindow != nullptr) {
 		if (!m_dialogueWindow->updateDialogue(frameTime)) {
@@ -31,7 +31,7 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 		return this;
 	}
 	else {
-		GameScreen::update(frameTime);
+		GameScreen::execUpdate(frameTime);
 		if (g_inputController->isKeyJustPressed(Key::Escape)) {
 			// store pos & go back to menu screen
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
@@ -65,7 +65,6 @@ Screen* MapScreen::update(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_Light, frameTime);
 			m_currentMap.update(frameTime);
 			updateTooltipText(frameTime);
-			deleteDisposedObjects();
 			return this;
 		}
 		else {
@@ -111,7 +110,7 @@ void MapScreen::execOnExit(const Screen *nextScreen) {
 	delete m_cookingWindow;
 }
 
-MapMainCharacter* MapScreen::getMainCharacter() {
+MapMainCharacter* MapScreen::getMainCharacter() const {
 	return m_mainChar;
 }
 

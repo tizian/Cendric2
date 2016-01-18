@@ -27,7 +27,7 @@ const std::set<sf::Keyboard::Key> KeyBindingsScreen::RESERVED_KEYS = {
 KeyBindingsScreen::KeyBindingsScreen(CharacterCore* core) : Screen(core) {
 }
 
-Screen* KeyBindingsScreen::update(const sf::Time& frameTime) {
+Screen* KeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 	if ((m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) || m_backButton->isClicked()) {
 		return new OptionsScreen(m_characterCore);
 	}
@@ -63,7 +63,6 @@ Screen* KeyBindingsScreen::update(const sf::Time& frameTime) {
 
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
-	deleteDisposedObjects();
 	return this;
 }
 

@@ -99,7 +99,12 @@ void LevelScreen::removeTypedBuffs(SpellID id) {
 	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeTypedSpellBuffs(id);
 }
 
-Screen* LevelScreen::update(const sf::Time& frameTime) {
+// getter for the main char.
+LevelMainCharacter* LevelScreen::getMainCharacter() const {
+	return m_mainChar;
+}
+
+Screen* LevelScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_isGoBackToCheckpoint) {
 		return new LoadingScreen(m_characterCore);
 	}
@@ -150,7 +155,7 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
 	if (!m_retryButton->isVisible()) {
-		GameScreen::update(frameTime);
+		GameScreen::execUpdate(frameTime);
 	}
 
 	if (!m_isGameOver &&m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
@@ -175,7 +180,6 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Light, frameTime);
 			m_currentLevel.update(frameTime);
-			deleteDisposedObjects();
 			return this;
 		}
 		else {
@@ -191,7 +195,6 @@ Screen* LevelScreen::update(const sf::Time& frameTime) {
 		}
 	}
 
-	deleteDisposedObjects();
 	return this;
 }
 

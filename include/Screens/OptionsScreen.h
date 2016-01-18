@@ -14,7 +14,7 @@ class OptionsScreen : public Screen {
 public:
 	OptionsScreen(CharacterCore* core);
 
-	Screen* update(const sf::Time& frameTime) override;
+	Screen* execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
 	void execOnEnter(const Screen *previousScreen) override;

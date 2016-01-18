@@ -7,7 +7,7 @@ using namespace std;
 OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core) {
 }
 
-Screen* OptionsScreen::update(const sf::Time& frameTime) {
+Screen* OptionsScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
 		return new MenuScreen(m_characterCore);
 	}
@@ -50,7 +50,6 @@ Screen* OptionsScreen::update(const sf::Time& frameTime) {
 	}
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
-	deleteDisposedObjects();
 	return this;
 }
 

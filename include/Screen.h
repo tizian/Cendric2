@@ -16,7 +16,7 @@ public:
 	Screen(CharacterCore* core);
 	virtual ~Screen() {}
 
-	virtual Screen* update(const sf::Time& frameTime) = 0;
+	Screen* update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget) = 0;
 
 	// initializes the m_object vector. called by ALL subclasses
@@ -26,7 +26,8 @@ public:
 	void onExit(const Screen* nextScreen);
 	virtual void execOnExit(const Screen* nextScreen);
 
-	// adds a gameobject to the screen.
+	// adds a gameobject to the screen. This object is only added to the vector in the next iteration
+	// to avoid invalidation of vector iterators.
 	void addObject(GameObject* object);
 
 	// gets the vector with the objects of type 'type'
@@ -50,8 +51,8 @@ public:
 	bool isQuitRequested() const;
 
 protected:
-	// deletes all objects marked as 'disposed'
-	void deleteDisposedObjects();
+	// the update part that is customized per screen
+	virtual Screen* execUpdate(const sf::Time& frameTime) = 0;
 	// deletes all objects
 	void deleteAllObjects();
 	// deletes all objects of type 'type'
@@ -73,7 +74,10 @@ protected:
 	virtual void setAllButtonsEnabled(bool value);
 
 private:
+	// deletes all objects marked as 'disposed'
+	void deleteDisposedObjects();
 	std::vector<std::vector<GameObject*>> m_objects;
+	std::vector<GameObject*> m_toAdd;
 	BitmapText m_tooltipText;
 
 	sf::Time m_tooltipTime = sf::Time::Zero;
