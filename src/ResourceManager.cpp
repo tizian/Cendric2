@@ -108,6 +108,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_slot_spell_gem, "res/assets/gui/slot_spell_gem.png" },
 		{ ResourceID::Texture_GUI_slot_highlight, "res/assets/gui/slot_highlight.png" },
 		{ ResourceID::Texture_GUI_slot_buff, "res/assets/gui/slot_buff.png" },
+		{ ResourceID::Texture_GUI_cursor, "res/assets/gui/cursor.png" },
 		{ ResourceID::Texture_Particle_circle, "res/assets/particles/circle.png" },
 		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" },
 		{ ResourceID::Texture_Particle_blob2, "res/assets/particles/blob2.png" },

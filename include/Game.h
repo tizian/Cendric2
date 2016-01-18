@@ -22,6 +22,7 @@ private:
 	sf::RenderTexture m_renderTexture;
 	sf::Sprite m_mainSprite;
 	ScreenManager* m_screenManager = nullptr;
+	sf::Sprite m_cursor;
 
 	// debug operations
 	std::list<float> m_fpsList;

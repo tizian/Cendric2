@@ -8,10 +8,12 @@ Game::Game() {
 	else {
 		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
 	}
+	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
 	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
+	m_cursor.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor));
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
 	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
 	m_running = true;
@@ -48,6 +50,7 @@ void Game::run() {
 
 		// input
 		g_inputController->update();
+		m_cursor.setPosition(g_inputController->getDefaultViewMousePosition() - sf::Vector2f(16.f, 16.f));
 
 		// don't count this loop into the frametime!
 		deltaTime = frameClock.restart();
@@ -95,6 +98,7 @@ void Game::run() {
 
 		m_renderTexture.display();
 		m_mainWindow.draw(m_mainSprite);
+		m_mainWindow.draw(m_cursor);
 		m_mainWindow.display();
 	}
 
