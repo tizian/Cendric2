@@ -58,7 +58,7 @@ public:
 	// The frame time is subtracted from the time but 
 	// if the time falls below sf::Time::Zero, it is set to sf::Time::Zero.
 	static void updateTime(sf::Time &time, const sf::Time &frameTime);
-	void setDebugBoundingBox(const sf::Color &debugColor);
+	virtual void setDebugBoundingBox(const sf::Color &debugColor);
 
 protected:
 	GameObjectState m_state;

@@ -38,13 +38,16 @@ public:
 	void addFrame(const sf::IntRect& rect);
 	void setSpriteSheet(const sf::Texture* texture);
 	void setFrameTime(const sf::Time& frameTime);
+	void setLooped(bool isLooped);
 
 	const sf::Texture* getSpriteSheet() const;
 	std::size_t getSize() const;
 	const sf::IntRect& getFrame(std::size_t n) const;
 	const sf::Time& getFrameTime() const;
+	bool isLooped() const;
 
 private:
+	bool m_isLooped = true;
 	std::vector<sf::IntRect> m_frames;
 	sf::Time m_frameTime;
 	const sf::Texture* m_texture = nullptr;

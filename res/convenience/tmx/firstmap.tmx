@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="41">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="42">
  <properties>
   <property name="dimming" value="0.4"/>
   <property name="name" value="Firstmap"/>
   <property name="tilesetpath" value="res/map/firstmap/tileset_map_firstmap.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_firstmap" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="598">
+ <tileset firstgid="1" name="tileset_map_firstmap" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="598" columns="23">
   <image source="../tilesets/tileset_map_firstmap.png" width="1200" height="1400"/>
   <tile id="167">
    <animation>
@@ -15,10 +15,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="599" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
+ <tileset firstgid="599" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
   <image source="../tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="634" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="634" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="100" height="100">
@@ -1000,11 +1000,11 @@
     <property name="y" value="1825"/>
    </properties>
   </object>
-  <object id="40" x="4602" y="1685.75" width="45.5" height="32.5">
+  <object id="41" x="4601.5" y="1673" width="47" height="38">
    <properties>
     <property name="level id" value="res/level/crypt/crypt.tmx"/>
-    <property name="x" value="2175"/>
-    <property name="y" value="3175"/>
+    <property name="x" value="350"/>
+    <property name="y" value="400"/>
    </properties>
   </object>
  </objectgroup>

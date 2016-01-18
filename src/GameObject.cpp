@@ -12,14 +12,14 @@ void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget) {
 }
 
 void GameObject::setDebugBoundingBox(const sf::Color &debugColor) {
-	if (g_resourceManager->getConfiguration().isDebugRendering) {
-		m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
-		m_debugBox.setPosition(m_position);
-		m_debugBox.setOutlineThickness(1.f);
-		m_debugBox.setFillColor(sf::Color::Transparent);
-		m_debugBox.setOutlineColor(debugColor);
-		m_isDrawBoundingBox = true;
-	}
+	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
+
+	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
+	m_debugBox.setPosition(m_position);
+	m_debugBox.setOutlineThickness(1.f);
+	m_debugBox.setFillColor(sf::Color::Transparent);
+	m_debugBox.setOutlineColor(debugColor);
+	m_isDrawBoundingBox = true;
 }
 
 void GameObject::update(const sf::Time& frameTime) {
@@ -50,7 +50,7 @@ void GameObject::setPosition(const sf::Vector2f &position) {
 	m_position = position;
 	m_boundingBox.left = position.x;
 	m_boundingBox.top = position.y;
-	
+
 	if (m_isDrawBoundingBox) {
 		m_debugBox.setPosition(position);
 	}

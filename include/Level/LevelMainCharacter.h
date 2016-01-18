@@ -16,6 +16,8 @@ public:
 
 	void load();
 	void update(const sf::Time& frameTime) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
+	void setDebugBoundingBox(const sf::Color &debugColor) override;
 
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);
@@ -53,4 +55,7 @@ private:
 	// makes it easier to jump
 	static const sf::Time JUMP_GRACE_TIME;
 	sf::Time m_jumpGraceTime = sf::Time::Zero;
+
+	// debug info
+	BitmapText* m_debugInfo = nullptr;
 };

@@ -16,12 +16,20 @@ void Animation::setFrameTime(const sf::Time& frameTime) {
 	m_frameTime = frameTime;
 }
 
+void Animation::setLooped(bool isLooped) {
+	m_isLooped = isLooped;
+}
+
 const sf::Texture* Animation::getSpriteSheet() const {
 	return m_texture;
 }
 
 size_t Animation::getSize() const {
 	return m_frames.size();
+}
+
+bool Animation::isLooped() const {
+	return m_isLooped;
 }
 
 const sf::Time& Animation::getFrameTime() const {

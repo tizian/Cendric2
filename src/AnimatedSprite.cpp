@@ -11,6 +11,7 @@ void AnimatedSprite::setAnimation(const Animation* animation) {
 	m_texture = m_animation->getSpriteSheet();
 	m_currentFrame = 0;
 	setFrame(m_currentFrame);
+	setLooped(m_animation->isLooped());
 }
 
 void AnimatedSprite::setFrameTime(sf::Time time) {
@@ -161,10 +162,11 @@ void AnimatedSprite::update(sf::Time deltaTime) {
 				m_currentFrame++;
 			else {
 				// animation has ended
-				m_currentFrame = 0; // reset to start
-
 				if (!m_isLooped) {
 					m_isPaused = true;
+				}
+				else {
+					m_currentFrame = 0; // reset to start
 				}
 
 			}

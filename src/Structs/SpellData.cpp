@@ -496,11 +496,11 @@ SpellData SpellData::getLightSpellData() {
 	light.boundingBox = sf::FloatRect(0, 0, 1, 1);
 	light.duration = sf::seconds(60);
 	light.activeDuration = light.duration;
-	light.range = 200.f;
+	light.range = 300.f;
 	light.attachedToMob = true;
 
 	light.durationModifierAddition = sf::seconds(60);
-	light.rangeModifierAddition = 100.f;
+	light.rangeModifierAddition = 200.f;
 
 	return light;
 }
