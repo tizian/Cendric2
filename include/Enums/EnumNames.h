@@ -119,8 +119,8 @@ public:
 			return "SpellRaiseTheDead";
 		case SpellID::ShadowTrap:
 			return "SpellShadowTrap";
-		case SpellID::SummonCreature:
-			return "SpellSummonCreature";
+		case SpellID::SummonGargoyle:
+			return "SpellSummonGargoyle";
 		case SpellID::Telekinesis:
 			return "SpellTelekinesis";
 		case SpellID::Unlock:

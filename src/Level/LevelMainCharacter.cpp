@@ -1,7 +1,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
 
-const sf::Time LevelMainCharacter::JUMP_GRACE_TIME = sf::milliseconds(10);
+const sf::Time LevelMainCharacter::JUMP_GRACE_TIME = sf::milliseconds(100);
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);

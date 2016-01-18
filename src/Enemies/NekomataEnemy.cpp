@@ -164,6 +164,10 @@ float NekomataEnemy::getDistanceToAbyss() const {
 	return 100.f;
 }
 
+int NekomataEnemy::getMentalStrength() const {
+	return 3;
+}
+
 void NekomataEnemy::updateAnimation(const sf::Time& frameTime) {
 	// a nekomata has additional states
 

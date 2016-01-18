@@ -23,6 +23,7 @@ public:
 	sf::Vector2f getConfiguredSpellOffset() const override;
 	float getDistanceToAbyss() const override;
 	void updateAnimation(const sf::Time& frameTime) override;
+	int getMentalStrength() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 

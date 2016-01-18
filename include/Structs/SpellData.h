@@ -68,7 +68,7 @@ private:
 	static SpellData getLeechSpellData();
 	static SpellData getRaiseTheDeadSpellData();
 	static SpellData getGhostFormSpellData();
-	// static SpellData getSummonCreatureSpellData();
+	// static SpellData getSummonGargoyleSpellData();
 
 	static SpellData getLightSpellData();
 	// static SpellData getHolyFireSpellData();

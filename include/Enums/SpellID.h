@@ -26,7 +26,7 @@ enum class SpellID {
 	Leech,
 	RaiseTheDead,
 	GhostForm,
-	SummonCreature,
+	SummonGargoyle,
 
 	// Divine
 	Light,
