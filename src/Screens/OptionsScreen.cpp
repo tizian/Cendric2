@@ -15,18 +15,23 @@ Screen* OptionsScreen::execUpdate(const sf::Time& frameTime) {
 		return new KeyBindingsScreen(m_characterCore);
 	}
 	else if (m_applyButton->isClicked()) {
-		g_resourceManager->getConfiguration().language = m_selectedLanguage;
-		g_resourceManager->getConfiguration().isSoundOn = m_soundCheckbox->isChecked();
-		g_resourceManager->getConfiguration().isQuickcast = m_quickCastCheckbox->isChecked();
-		g_resourceManager->getConfiguration().isFullscreen = m_selectedFullscreenOn;
-		g_resourceManager->getConfiguration().isSmoothing = m_smoothingCheckbox->isChecked();
-		g_resourceManager->getConfiguration().isVSyncEnabled = m_vSyncCheckbox->isChecked();
-		g_resourceManager->getConfiguration().volumeMusic = m_volumeMusicSlider->getSliderPosition();
-		g_resourceManager->getConfiguration().volumeSound = m_volumeSoundSlider->getSliderPosition();
+		ConfigurationData& config = g_resourceManager->getConfiguration();
+		bool fullscreenChanged = config.isFullscreen != m_selectedFullscreenOn;
+		config.language = m_selectedLanguage;
+		config.isSoundOn = m_soundCheckbox->isChecked();
+		config.isQuickcast = m_quickCastCheckbox->isChecked();
+		config.isFullscreen = m_selectedFullscreenOn;
+		config.isSmoothing = m_smoothingCheckbox->isChecked();
+		config.isVSyncEnabled = m_vSyncCheckbox->isChecked();
+		config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
+		config.volumeSound = m_volumeSoundSlider->getSliderPosition();
 		ConfigurationWriter writer;
-		writer.saveToFile(g_resourceManager->getConfiguration());
+		writer.saveToFile(config);
 		g_textProvider->reload();
 		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
+		if (fullscreenChanged) {
+			config.isWindowReload = true;
+		}
 	}
 	else if (m_englishButton->isClicked()) {
 		m_selectedLanguage = Language::Lang_EN;

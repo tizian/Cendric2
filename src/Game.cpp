@@ -2,19 +2,14 @@
 #include "Misc/icon.h"
 
 Game::Game() {
-	if (g_resourceManager->getConfiguration().isFullscreen) {
-		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Fullscreen);
-	}
-	else {
-		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
-	}
-	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
-	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
-	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
+	reloadWindow();
+
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
-	m_cursor.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor));
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
+	
+	m_cursor.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor));
+	
 	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
 	m_running = true;
 
@@ -37,6 +32,20 @@ Game::Game() {
 
 Game::~Game() {
 	delete m_screenManager;
+}
+
+void Game::reloadWindow() {
+	if (g_resourceManager->getConfiguration().isFullscreen) {
+		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Fullscreen);
+	}
+	else {
+		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
+	}
+	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
+	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
+	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
+
+	g_resourceManager->getConfiguration().isWindowReload = false;
 }
 
 void Game::run() {
@@ -86,6 +95,9 @@ void Game::run() {
 		}
 		if (g_resourceManager->pollError()->first != ErrorID::VOID) {
 			m_screenManager->setErrorScreen();
+		}
+		if (g_resourceManager->getConfiguration().isWindowReload) {
+			reloadWindow();
 		}
 
 		// render
