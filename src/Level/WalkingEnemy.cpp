@@ -77,12 +77,8 @@ void WalkingEnemy::makeRandomDecision() {
 }
 
 void WalkingEnemy::handleMovementInput() {
-	if (m_isDead) {
-		setAcceleration(sf::Vector2f(0.f, getConfiguredGravityAcceleration()));
-		return;
-	}
 	// movement AI
-	float newAccelerationX = 0;
+	float newAccelerationX = getAcceleration().x;
 	
 	bool hasTarget = m_currentTarget != nullptr;
 	sf::Vector2f center = getCenter();

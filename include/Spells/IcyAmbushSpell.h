@@ -5,7 +5,7 @@
 
 class IcyAmbushSpell : public Spell {
 public:
-	IcyAmbushSpell();
+	IcyAmbushSpell(int strength);
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
@@ -13,9 +13,7 @@ public:
 	void execOnHit(LevelMovableGameObject* target) override;
 
 private:
-	// is set to true when the spell has found its target
-	bool m_isStunning = false;
-	sf::Time m_stunDuration;
+	int m_strength;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;

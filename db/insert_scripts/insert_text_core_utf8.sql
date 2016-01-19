@@ -51,7 +51,8 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('English','Eng
 INSERT INTO text (text_id, english, german, swiss_german) values ('Equipment','Equipment','Ausrüstung','Usrüstig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Exit','Exit','Beenden','Beende');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Failed','Failed','Fehlgeschlagen','Gfailt');
-INSERT INTO text (text_id, english, german, swiss_german) values ('FearLevel','Fear Level','Furcht Stufe','Angscht Stufe');
+INSERT INTO text (text_id, english, german, swiss_german) values ('FearLevel','Fear Strength','Furchtstärke','Angschtstärchi');
+INSERT INTO text (text_id, english, german, swiss_german) values ('StunLevel','Stun Strength','Betäubungsstärke','Betäubigsstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FifthSpell','5. Spell','5. Zauber','5. Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FireDamage','Fire Damage','Feuerschaden','Füürschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FireResistance','Fire Resistance','Feuerresistenz','Füürresistenz');

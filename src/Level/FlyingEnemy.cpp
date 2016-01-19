@@ -40,13 +40,8 @@ void FlyingEnemy::checkCollisions(const sf::Vector2f& nextPosition) {
 }
 
 void FlyingEnemy::handleMovementInput() {
-	if (m_isDead) {
-		setAcceleration(sf::Vector2f(0.f, getConfiguredGravityAcceleration()));
-		return;
-	}
-
 	// movement AI
-	float newAccelerationX = 0.f;
+	float newAccelerationX = getAcceleration().x;
 	float newAccelerationY = 0.f;
 	bool hasTarget = m_currentTarget != nullptr;
 	sf::Vector2f center = getCenter();

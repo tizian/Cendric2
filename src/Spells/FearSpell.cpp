@@ -24,7 +24,7 @@ void FearSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const s
 
 void FearSpell::execOnHit(LevelMovableGameObject *target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() <= m_strength) {
+		if (enemy->getMentalStrength() < m_strength) {
 			enemy->setFeared(m_fearedDuration);
 			setDisposed();
 		}

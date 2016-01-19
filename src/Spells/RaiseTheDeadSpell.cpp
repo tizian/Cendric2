@@ -21,7 +21,7 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	if (!target->isDead()) return;
 	Enemy* enemy = dynamic_cast<Enemy*>(target);
 	if (enemy == nullptr) return;
-	if (enemy->getMentalStrength() > m_strength) {
+	if (enemy->getMentalStrength() >= m_strength) {
 		setDisposed();
 		return;
 	}

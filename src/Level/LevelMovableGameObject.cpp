@@ -33,6 +33,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	if (!m_isDead) {
 		updateAttributes(frameTime);
 	}
+	setAccelerationX(0.f);
 }
 
 void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
@@ -197,7 +198,7 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
 }
 
 void LevelMovableGameObject::addDamageOverTime(const DamageOverTimeData& data) {
-	if (m_isDead) return;
+	if (m_isDead || data.damageType == DamageType::VOID) return;
 	m_dots.push_back(data);
 }
 

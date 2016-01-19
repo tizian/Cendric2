@@ -44,7 +44,7 @@ void LevelMainCharacter::handleAttackInput() {
 }
 
 void LevelMainCharacter::handleMovementInput() {
-	float newAccelerationX = 0;
+	float newAccelerationX = getAcceleration().x;
 
 	if (g_inputController->isKeyActive(Key::Left)) {
 		m_nextIsFacingRight = false;
@@ -155,7 +155,7 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 }
 
 void LevelMainCharacter::addDamageOverTime(const DamageOverTimeData& data) {
-	if (m_isDead) return;
+	if (m_isDead || data.damageType == DamageType::VOID) return;
 	sf::IntRect textureLocation((static_cast<int>(data.damageType)-1) * 50, 0, 50, 50);
 	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, data.duration, data);
 	LevelMovableGameObject::addDamageOverTime(data);

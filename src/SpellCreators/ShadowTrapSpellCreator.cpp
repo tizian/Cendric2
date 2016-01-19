@@ -9,7 +9,7 @@ int ShadowTrapSpellCreator::getStrengthModifierValue() const {
 }
 
 std::string ShadowTrapSpellCreator::getStrengthModifierName() const {
-	return "Strength";
+	return "StunLevel";
 }
 
 void ShadowTrapSpellCreator::executeSpell(const sf::Vector2f &target) {

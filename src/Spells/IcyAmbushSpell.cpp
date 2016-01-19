@@ -1,11 +1,11 @@
 #include "Spells/IcyAmbushSpell.h"
 
-IcyAmbushSpell::IcyAmbushSpell() : Spell() {
+IcyAmbushSpell::IcyAmbushSpell(int strength) : Spell() {
+	m_strength = strength;
 }
 
 void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
-	m_stunDuration = bean.duration;
 
 	Animation spellAnimation(sf::seconds(10.f));
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_icyambush));
@@ -22,62 +22,35 @@ void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 }
 
 void IcyAmbushSpell::update(const sf::Time& frameTime) {
+	Spell::update(frameTime);
 	m_ps->update(frameTime);
-	if (!m_isStunning) {
-		Spell::update(frameTime);
-		updateParticleSystemPosition();
-	}
-	else {
-		GameObject::updateTime(m_data.activeDuration, frameTime);
-		if (m_data.activeDuration <= sf::Time::Zero) setDisposed();
-	}
+	updateParticleSystemPosition();
 }
 
 void IcyAmbushSpell::render(sf::RenderTarget& target) {
-	if (!m_isStunning) {
-		Spell::render(target);
-	}
+	Spell::render(target);
 	m_ps->render(target);
 }
 
 void IcyAmbushSpell::execOnHit(LevelMovableGameObject *target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() <= 2) {
-			enemy->setStunned(m_stunDuration);
+		if (enemy->getMentalStrength() < m_strength) {
+			enemy->setStunned(m_data.duration);
 		}
 	}
 	// main character can't be stunned yet.
-	m_isDisposed = false;
-	if (!m_isStunning) {
-		m_isStunning = true;
-		m_data.duration = m_stunDuration;
-		m_data.damage = 0;
-		m_boundingBox.width = m_data.range * 2;
-		m_boundingBox.height = m_data.range * 2;
-		setPosition(getPosition() + (getPosition() - getCenter()));
 
-		m_debugBox.setPosition(getPosition());
-		m_debugBox.setSize(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
-
-		updateParticleSystemPosition();
-
-		if (m_ownerType != GameObjectType::_LevelMainCharacter) {
-			checkCollisionsWithMainChar(getBoundingBox());
-		}
-		// check collisions with enemies
-		checkCollisionsWithEnemies(getBoundingBox());
-
-		// check if port of owner is possible
-		sf::FloatRect ownerBB = *(m_mob->getBoundingBox());
-		ownerBB.left = target->getBoundingBox()->left + target->getBoundingBox()->width / 2.f - ownerBB.width / 2.f;
-		ownerBB.top = target->getBoundingBox()->top + (target->getBoundingBox()->height - ownerBB.height);
-		if (!m_level->collides(ownerBB)) {
-			m_mob->setPosition(sf::Vector2f(ownerBB.left, ownerBB.top));
-		}
-		else {
-			g_logger->logInfo("IcyAmbushSpell", "Icy ambush port would stuck its owner. The port is not executed.");
-		}
+	// check if port of owner is possible
+	sf::FloatRect ownerBB = *(m_mob->getBoundingBox());
+	ownerBB.left = target->getBoundingBox()->left + target->getBoundingBox()->width / 2.f - ownerBB.width / 2.f;
+	ownerBB.top = target->getBoundingBox()->top + (target->getBoundingBox()->height - ownerBB.height);
+	if (!m_level->collides(ownerBB)) {
+		m_mob->setPosition(sf::Vector2f(ownerBB.left, ownerBB.top));
 	}
+	else {
+		g_logger->logInfo("IcyAmbushSpell", "Icy ambush port would stuck its owner. The port is not executed.");
+	}
+	setDisposed();
 }
 
 void IcyAmbushSpell::loadParticleSystem() {
@@ -121,8 +94,6 @@ void IcyAmbushSpell::loadParticleSystem() {
 }
 
 void IcyAmbushSpell::updateParticleSystemPosition() {
-	if (!m_isStunning) {
-		m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-		m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
-	}
+	m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
 }

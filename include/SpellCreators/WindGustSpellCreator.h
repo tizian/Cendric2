@@ -20,6 +20,7 @@ private:
 	void addRangeModifier(int level) override;
 	void addStrengthModifier(int level) override;
 	void addDurationModifier(int level) override;
+	void addDamageModifier(int level) override;
 
 	int m_strength = 1;
 };

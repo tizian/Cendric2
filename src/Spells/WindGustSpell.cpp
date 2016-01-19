@@ -2,12 +2,12 @@
 
 #define SPELL_OFFSET 10.f
 
-WindGustSpell::WindGustSpell(float pushAcceleration) : Spell() {
-	m_pushAcceleration = pushAcceleration;
+WindGustSpell::WindGustSpell(int strength) : Spell() {
+	m_strength = strength;
+	m_pushAcceleration = 100.f * strength;
 }
 
 void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	Spell::load(bean, mob, target);
 	loadParticleSystem();
 }
@@ -16,12 +16,28 @@ void WindGustSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
 	m_ps->update(frameTime);
 	updateParticleSystemPosition();
+	if (m_hasDamaged) {
+		m_data.damageType = DamageType::VOID;
+	}
 }
 
 void WindGustSpell::render(sf::RenderTarget& target) {
 	Spell::render(target);
 	m_ps->render(target);
 }
+
+void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
+	m_hasDamaged = true;
+	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
+		if (enemy->getMentalStrength() < m_strength) {
+			enemy->setAccelerationX(m_mob->getIsFacingRight() ? 4 * m_pushAcceleration : -4 * m_pushAcceleration);
+		}
+	}
+	else {
+		target->setAccelerationX(m_mob->getIsFacingRight() ? m_pushAcceleration : -m_pushAcceleration);
+	}
+}
+
 
 sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(10.f, 10.f);
@@ -36,9 +52,9 @@ float WindGustSpell::getPushAcceleration() const {
 }
 
 void WindGustSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(static_cast<int>(m_pushAcceleration * 2), g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
 	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 500.0f / 5.0f;
+	m_ps->emitRate = getBoundingBox()->width;
 
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();

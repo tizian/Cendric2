@@ -23,7 +23,7 @@ void ShadowTrapSpell::load(const SpellData& bean, LevelMovableGameObject* mob, c
 
 void ShadowTrapSpell::execOnHit(LevelMovableGameObject *target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() <= m_strength) {
+		if (enemy->getMentalStrength() < m_strength) {
 			enemy->setStunned(m_stunDuration);
 			setDisposed();
 		}

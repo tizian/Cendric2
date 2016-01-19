@@ -296,7 +296,7 @@ void Enemy::setStunned(const sf::Time &stunnedTime) {
 }
 
 void Enemy::addDamageOverTime(const DamageOverTimeData& data) {
-	if (m_isDead) return;
+	if (m_isDead || data.damageType == DamageType::VOID) return;
 	m_buffBar->addDotBuff(data.duration, data.damageType);
 	LevelMovableGameObject::addDamageOverTime(data);
 }

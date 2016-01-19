@@ -42,6 +42,8 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Speed);
 		types.push_back(SpellModifierType::Range);
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Strength);
 		break;
 	case SpellID::DivineShield:
 		types.push_back(SpellModifierType::Duration);
@@ -61,6 +63,7 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Range);
 		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Damage);
 		break;
 	case SpellID::Leech:
 		types.push_back(SpellModifierType::Damage);
@@ -71,8 +74,9 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	case SpellID::IcyAmbush:
 		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Range);
-		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Reflect);
+		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Duration);
 		break;
 	case SpellID::Unlock:
 		types.push_back(SpellModifierType::Strength);
@@ -329,6 +333,7 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.damageType = DamageType::Light;
 	aureola.activeDuration = sf::seconds(10);
 	aureola.needsTarget = true;
+	aureola.duration = sf::seconds(1.f);
 	aureola.damage = 10;
 	aureola.heal = 10;
 	aureola.speed = 300.f;
@@ -338,6 +343,7 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.damageModifierAddition = 10;
 	aureola.speedModifierAddition = 100.f;
 	aureola.rangeModifierAddition = 100.f;
+	aureola.durationModifierAddition = sf::seconds(0.5f);
 
 	return aureola;
 }
@@ -408,11 +414,14 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.iconTextureRect = sf::IntRect(150, 0, 50, 50);
 	windGust.cooldown = sf::seconds(3);
 	windGust.range = 50.f;
-	windGust.boundingBox = sf::FloatRect(0, 0, windGust.range, 40);
+	windGust.boundingBox = sf::FloatRect(0.f, 0.f, windGust.range, 60.f);
 	windGust.duration = sf::seconds(1);
 	windGust.activeDuration = windGust.duration;
 	windGust.attachedToMob = true;
+	windGust.damageType = DamageType::Ice;
+	windGust.damagePerSecond = 5;
 
+	windGust.damageModifierAddition = 5;
 	windGust.rangeModifierAddition = 50.f;
 	windGust.durationModifierAddition = sf::seconds(1);
 
@@ -451,17 +460,17 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.cooldown = sf::seconds(5);
 	icyAmbush.boundingBox = sf::FloatRect(0, 0, 20, 20);
 	icyAmbush.damageType = DamageType::Ice;
-	icyAmbush.activeDuration = sf::seconds(5);
-	icyAmbush.duration = sf::seconds(1);
+	icyAmbush.range = 300.f;
+	icyAmbush.speed = 200.f;
+	icyAmbush.activeDuration = sf::seconds(icyAmbush.range / icyAmbush.speed);
+	icyAmbush.duration = sf::seconds(1.5f); // stun duration;
 	icyAmbush.needsTarget = true;
 	icyAmbush.damage = 100;
-	icyAmbush.speed = 200.f;
-	icyAmbush.range = 70.f;
-
+	
 	icyAmbush.damageModifierAddition = 50;
 	icyAmbush.reflectModifierAddition = 1;
-	icyAmbush.durationModifierAddition = sf::seconds(1);
-	icyAmbush.rangeModifierAddition = 25.f;
+	icyAmbush.rangeModifierAddition = 200.f;
+	icyAmbush.durationModifierAddition = sf::seconds(0.5f);
 
 	return icyAmbush;
 }

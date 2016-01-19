@@ -49,8 +49,8 @@ public:
 	bool isControlled() const;
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
-	// a level, ranges from 0 to 5. An enemy can only be feared / stunned / resurrected, if the level of its spell is high enough.
-	// default is 0. A enemy with level 5 can never be feared / stunned / controlled or affected in any other way!!
+	// a level, ranges from 0 to 4. An enemy can only be feared / stunned / resurrected, if the level of its spell is high enough.
+	// default is 0. A enemy with level 4 can never be feared / stunned / controlled or affected in any other way!!
 	virtual int getMentalStrength() const;
 	// determines the distance from the top of the enemies bounding box to its
 	// hp bar. Default is 20px.

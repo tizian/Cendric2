@@ -1,6 +1,8 @@
 #include "Spells/AureolaSpell.h"
 
-AureolaSpell::AureolaSpell() : Spell() {
+AureolaSpell::AureolaSpell(int strength) : Spell() {
+	m_strength = strength;
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f));
 }
 
 void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -74,3 +76,29 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 sf::Vector2f AureolaSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(5.f, -5.f);
 }
+
+void AureolaSpell::setDisposed() {
+	Spell::setDisposed();
+	m_lightObject->setDisposed();
+}
+
+void AureolaSpell::setScreen(Screen* screen) {
+	Spell::setScreen(screen);
+	screen->addObject(m_lightObject);
+}
+
+void AureolaSpell::setPosition(const sf::Vector2f& pos) {
+	Spell::setPosition(pos);
+	m_lightObject->setPosition(pos);
+}
+
+void AureolaSpell::execOnHit(LevelMovableGameObject *target) {
+	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
+		if (enemy->getMentalStrength() < m_strength) {
+			enemy->setStunned(m_data.duration);
+			setDisposed();
+		}
+	}
+	// main character can't be stunned yet.
+}
+
