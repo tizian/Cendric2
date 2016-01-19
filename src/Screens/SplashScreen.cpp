@@ -24,12 +24,12 @@ void SplashScreen::execOnEnter(const Screen* previousScreen) {
 		WINDOW_HEIGHT - 18.f);
 }
 
-Screen* SplashScreen::execUpdate(const sf::Time& frameTime) {
+void SplashScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || g_inputController->isMouseJustPressedLeft()) {
-		return new MenuScreen(nullptr);
+		setNextScreen(new MenuScreen(nullptr));
+		return;
 	}
 	updateObjects(GameObjectType::_Undefined, frameTime);
-	return this;
 }
 
 void SplashScreen::render(sf::RenderTarget &renderTarget) {

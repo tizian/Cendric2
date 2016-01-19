@@ -6,9 +6,10 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_menu)));
 }
 
-Screen* MenuScreen::execUpdate(const sf::Time& frameTime) {
+void MenuScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_startNewGame) {
-		return new LoadingScreen(m_characterCore);
+		setNextScreen(new LoadingScreen(m_characterCore));
+		return;
 	}
 	else if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked()) {
 		// end the game
@@ -16,14 +17,16 @@ Screen* MenuScreen::execUpdate(const sf::Time& frameTime) {
 	}
 	else if ((m_resumeGameButton != nullptr && m_resumeGameButton->isClicked()) || (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr)) {
 		// resume game
-		return new LoadingScreen(m_characterCore);
+		setNextScreen(new LoadingScreen(m_characterCore));
+		return;
 	}
 	else if (m_newGameButton->isClicked() && m_yesOrNoForm == nullptr) {
 		if (m_characterCore == nullptr) {
 			// we start a new game with an empty character core
 			m_characterCore = new CharacterCore();
 			m_characterCore->loadNew();
-			return new LoadingScreen(m_characterCore);
+			setNextScreen(new LoadingScreen(m_characterCore));
+			return;
 		}
 		else {
 			m_newCharacterCore = new CharacterCore();
@@ -37,22 +40,25 @@ Screen* MenuScreen::execUpdate(const sf::Time& frameTime) {
 		}
 	}
 	else if (m_loadGameButton->isClicked()) {
-		return new LoadGameScreen(m_characterCore);
+		setNextScreen(new LoadGameScreen(m_characterCore));
+		return;
 	}
 	else if (m_saveGameButton->isClicked() && m_characterCore != nullptr) {
-		return new SaveGameScreen(m_characterCore);
+		setNextScreen(new SaveGameScreen(m_characterCore));
+		return;
 	}
 	else if (m_optionsButton->isClicked()) {
-		return new OptionsScreen(m_characterCore);
+		setNextScreen(new OptionsScreen(m_characterCore));
+		return;
 	}
 	else if (m_creditsButton->isClicked()) {
-		return new CreditsScreen(m_characterCore);
+		setNextScreen(new CreditsScreen(m_characterCore));
+		return;
 	}
 	updateTooltipText(frameTime);
 	updateObjects(GameObjectType::_Undefined, frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
-	return this;
 }
 
 void MenuScreen::setAllButtonsEnabled(bool value) {

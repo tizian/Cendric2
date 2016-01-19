@@ -7,12 +7,12 @@ CreditsScreen::CreditsScreen(CharacterCore* core) : Screen(core) {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_credits)));
 }
 
-Screen* CreditsScreen::execUpdate(const sf::Time& frameTime) {
+void CreditsScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
-		return new MenuScreen(m_characterCore);
+		setNextScreen(new MenuScreen(m_characterCore));
+		return;
 	}
 	updateObjects(GameObjectType::_Button, frameTime);
-	return this;
 }
 
 void CreditsScreen::render(sf::RenderTarget &renderTarget) {

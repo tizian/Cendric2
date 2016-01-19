@@ -7,12 +7,14 @@ using namespace std;
 OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core) {
 }
 
-Screen* OptionsScreen::execUpdate(const sf::Time& frameTime) {
+void OptionsScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
-		return new MenuScreen(m_characterCore);
+		setNextScreen(new MenuScreen(m_characterCore));
+		return;
 	}
 	else if (m_keyBindingsButton->isClicked()) {
-		return new KeyBindingsScreen(m_characterCore);
+		setNextScreen(new KeyBindingsScreen(m_characterCore));
+		return;
 	}
 	else if (m_applyButton->isClicked()) {
 		ConfigurationData& config = g_resourceManager->getConfiguration();
@@ -55,7 +57,6 @@ Screen* OptionsScreen::execUpdate(const sf::Time& frameTime) {
 	}
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
-	return this;
 }
 
 void OptionsScreen::render(sf::RenderTarget &renderTarget) {

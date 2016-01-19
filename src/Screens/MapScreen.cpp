@@ -7,7 +7,7 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : GameScreen
 	m_mapID = mapID;
 }
 
-Screen* MapScreen::execUpdate(const sf::Time& frameTime) {
+void MapScreen::execUpdate(const sf::Time& frameTime) {
 	// handle case where a dialogue is open
 	if (m_dialogueWindow != nullptr) {
 		if (!m_dialogueWindow->updateDialogue(frameTime)) {
@@ -17,7 +17,7 @@ Screen* MapScreen::execUpdate(const sf::Time& frameTime) {
 		updateProgressLog(frameTime);
 		updateTooltipText(frameTime);
 		updateObjects(GameObjectType::_Light, frameTime);
-		return this;
+		return;
 	}
 	// handle case where a cooking window is open
 	if (m_cookingWindow != nullptr) {
@@ -28,14 +28,15 @@ Screen* MapScreen::execUpdate(const sf::Time& frameTime) {
 		updateProgressLog(frameTime);
 		updateTooltipText(frameTime);
 		updateObjects(GameObjectType::_Light, frameTime);
-		return this;
+		return;
 	}
 	else {
 		GameScreen::execUpdate(frameTime);
 		if (g_inputController->isKeyJustPressed(Key::Escape)) {
 			// store pos & go back to menu screen
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			return new MenuScreen(m_characterCore);
+			setNextScreen(new MenuScreen(m_characterCore));
+			return;
 		}
 		if (g_inputController->isKeyJustPressed(Key::Quickload)) {
 			// store pos & go back to menu screen
@@ -48,7 +49,8 @@ Screen* MapScreen::execUpdate(const sf::Time& frameTime) {
 			else {
 				delete m_characterCore;
 				m_characterCore = newCharacterCore;
-				return new LoadingScreen(m_characterCore);
+				setNextScreen(new LoadingScreen(m_characterCore));
+				return;
 			}
 		}
 		if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
@@ -65,7 +67,7 @@ Screen* MapScreen::execUpdate(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_Light, frameTime);
 			m_currentMap.update(frameTime);
 			updateTooltipText(frameTime);
-			return this;
+			return;
 		}
 		else {
 			if (!data->levelID.empty()) {
@@ -76,7 +78,8 @@ Screen* MapScreen::execUpdate(const sf::Time& frameTime) {
 				m_characterCore->setMap(data->spawnPoint, data->mapID);
 			}
 			delete data;
-			return new LoadingScreen(getCharacterCore());
+			setNextScreen(new LoadingScreen(getCharacterCore()));
+			return;
 		}
 	}
 }

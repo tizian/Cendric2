@@ -33,14 +33,13 @@ void Screen::addObject(GameObject* object) {
 	object->setScreen(this);
 }
 
-Screen* Screen::update(const sf::Time& frameTime) {
+void Screen::update(const sf::Time& frameTime) {
 	for (auto& obj : m_toAdd) {
 		m_objects[obj->getConfiguredType()].push_back(obj);
 	}
 	m_toAdd.clear();
-	Screen* nextScreen = execUpdate(frameTime);
+	execUpdate(frameTime);
 	deleteDisposedObjects();
-	return nextScreen;
 }
 
 vector<GameObject*>* Screen::getObjects(GameObjectType type) {
@@ -182,4 +181,13 @@ void Screen::updateTooltipText(const sf::Time& frameTime) {
 
 bool Screen::isQuitRequested() const {
 	return m_requestQuit;
+}
+
+Screen* Screen::getNextScreen() const {
+	return m_nextScreen;
+}
+
+void Screen::setNextScreen(Screen* nextScreen) {
+	delete m_nextScreen;
+	m_nextScreen = nextScreen;
 }

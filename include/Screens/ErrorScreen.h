@@ -10,7 +10,7 @@ public:
 	ErrorScreen(CharacterCore* core);
 
 	void render(sf::RenderTarget& renderTarget) override;
-	Screen* execUpdate(const sf::Time& frameTime) override;
+	void execUpdate(const sf::Time& frameTime) override;
 
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;

@@ -104,12 +104,14 @@ LevelMainCharacter* LevelScreen::getMainCharacter() const {
 	return m_mainChar;
 }
 
-Screen* LevelScreen::execUpdate(const sf::Time& frameTime) {
+void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_isGoBackToCheckpoint) {
-		return new LoadingScreen(m_characterCore);
+		setNextScreen(new LoadingScreen(m_characterCore));
+		return;
 	}
 	if (m_isGoBackToMenu) {
-		return new MenuScreen(m_characterCore);
+		setNextScreen(new MenuScreen(m_characterCore));
+		return;
 	}
 
 	// handle game over
@@ -180,7 +182,7 @@ Screen* LevelScreen::execUpdate(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Light, frameTime);
 			m_currentLevel.update(frameTime);
-			return this;
+			return;
 		}
 		else {
 			writeToCore();
@@ -191,11 +193,10 @@ Screen* LevelScreen::execUpdate(const sf::Time& frameTime) {
 				m_characterCore->setLevel(leData->spawnPoint, leData->levelID);
 			}
 			delete leData;
-			return new LoadingScreen(m_characterCore);
+			setNextScreen(new LoadingScreen(m_characterCore));
+			return;
 		}
 	}
-
-	return this;
 }
 
 void LevelScreen::render(sf::RenderTarget &renderTarget) {

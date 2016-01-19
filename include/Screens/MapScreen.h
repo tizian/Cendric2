@@ -18,7 +18,7 @@ public:
 	// loads lights that need a seperate rendertexture
 	void loadForRenderTexture();
 
-	Screen* execUpdate(const sf::Time& frameTime) override;
+	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void setDialogue(const NPCData& data);
 	void setCooking();

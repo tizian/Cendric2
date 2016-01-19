@@ -10,7 +10,7 @@ class SplashScreen : public Screen {
 public:
 	SplashScreen();
 
-	Screen* execUpdate(const sf::Time& frameTime) override;
+	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
 	void execOnEnter(const Screen *previousScreen) override;

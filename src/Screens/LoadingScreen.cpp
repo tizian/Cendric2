@@ -11,12 +11,12 @@ LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 	}
 }
 
-Screen* LoadingScreen::execUpdate(const sf::Time& frameTime) {
+void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 
 	// return once to render this screen, and then loads everything in the main thread.
 	if (!m_isRendered) {
 		m_isRendered = true;
-		return this;
+		return;
 	}
 
 	if (m_levelToLoad != nullptr) {
@@ -28,15 +28,16 @@ Screen* LoadingScreen::execUpdate(const sf::Time& frameTime) {
 
 	if (m_mapToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_mapToLoad->loadForRenderTexture();
-		return m_mapToLoad;
+		setNextScreen(m_mapToLoad);
+		return;
 	}
 	if (m_levelToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_levelToLoad->loadForRenderTexture();
-		return m_levelToLoad;
+		setNextScreen(m_levelToLoad);
+		return;
 	}
 
 	g_resourceManager->setError(ErrorID::Error_dataCorrupted, "No level or map to load. Aborting.");
-	return this;
 }
 
 void LoadingScreen::render(sf::RenderTarget &renderTarget) {

@@ -16,7 +16,7 @@ public:
 	Screen(CharacterCore* core);
 	virtual ~Screen() {}
 
-	Screen* update(const sf::Time& frameTime);
+	void update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget) = 0;
 
 	// initializes the m_object vector. called by ALL subclasses
@@ -49,10 +49,12 @@ public:
 	void setTooltipPositionTop(bool top);
 	// the screen manager sees if a screen wants to end the game
 	bool isQuitRequested() const;
+	// the screen manager polls the next screen and changes to it if its not null
+	Screen* getNextScreen() const;
 
 protected:
 	// the update part that is customized per screen
-	virtual Screen* execUpdate(const sf::Time& frameTime) = 0;
+	virtual void execUpdate(const sf::Time& frameTime) = 0;
 	// deletes all objects
 	void deleteAllObjects();
 	// deletes all objects of type 'type'
@@ -68,10 +70,12 @@ protected:
 
 	CharacterCore* m_characterCore = nullptr;
 	bool m_requestQuit = false;
+	Screen* m_nextScreen = nullptr;
 
-protected:
 	// enables / disables all buttons on this screen
 	virtual void setAllButtonsEnabled(bool value);
+	// sets the next screen. If this is set, the screen manager will change to that next screen
+	void setNextScreen(Screen* nextScreen);
 
 private:
 	// deletes all objects marked as 'disposed'

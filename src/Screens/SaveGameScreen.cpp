@@ -16,15 +16,16 @@ void SaveGameScreen::setAllButtonsEnabled(bool value) {
 	m_saveGameWindow->setEnabled(value);
 }
 
-Screen* SaveGameScreen::execUpdate(const sf::Time& frameTime) {
+void SaveGameScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
-		return new MenuScreen(m_characterCore);
+		setNextScreen(new MenuScreen(m_characterCore));
+		return;
 	}
 	updateObjects(GameObjectType::_Window, frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
-	if (!getObjects(GameObjectType::_Form)->empty()) return this;
+	if (!getObjects(GameObjectType::_Form)->empty()) return;
 	if (m_saveButton->isClicked() || m_saveGameWindow->isChosen()) {
 		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 		m_yesOrNoForm->setMessage("QuestionOverwriteSaveGame");
@@ -48,7 +49,6 @@ Screen* SaveGameScreen::execUpdate(const sf::Time& frameTime) {
 		addObject(m_yesOrNoForm);
 		setAllButtonsEnabled(false);
 	}
-	return this;
 }
 
 void SaveGameScreen::render(sf::RenderTarget &renderTarget) {

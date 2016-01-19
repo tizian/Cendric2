@@ -6,18 +6,20 @@ using namespace std;
 LoadGameScreen::LoadGameScreen(CharacterCore* core) : Screen(core) {
 }
 
-Screen* LoadGameScreen::execUpdate(const sf::Time& frameTime) {
+void LoadGameScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
-		return new MenuScreen(m_characterCore);
+		setNextScreen(new MenuScreen(m_characterCore));
+		return;
 	}
 	else if (m_loadGame) {
-		return new LoadingScreen(m_characterCore);
+		setNextScreen(new LoadingScreen(m_characterCore));
+		return;
 	}
 	updateObjects(GameObjectType::_Window, frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
-	if (!getObjects(GameObjectType::_Form)->empty()) return this;
+	if (!getObjects(GameObjectType::_Form)->empty()) return;
 	if (m_loadSaveGameButton->isClicked() || m_saveGameWindow->isChosen()) {
 		if (m_characterCore == nullptr) {
 			// load a savegame
@@ -26,7 +28,8 @@ Screen* LoadGameScreen::execUpdate(const sf::Time& frameTime) {
 				string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
 				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 			}
-			return new LoadingScreen(m_characterCore);
+			setNextScreen(new LoadingScreen(m_characterCore));
+			return;
 		}
 		else {
 			m_newCharacterCore = new CharacterCore();
@@ -50,7 +53,6 @@ Screen* LoadGameScreen::execUpdate(const sf::Time& frameTime) {
 		addObject(m_yesOrNoForm);
 		setAllButtonsEnabled(false);
 	}
-	return this;
 }
 
 void LoadGameScreen::render(sf::RenderTarget &renderTarget) {

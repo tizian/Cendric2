@@ -11,7 +11,7 @@ class LoadingScreen : public Screen {
 public:
 	LoadingScreen(CharacterCore* core);
 
-	Screen* execUpdate(const sf::Time& frameTime) override;
+	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget &renderTarget) override;
 
 	virtual void execOnEnter(const Screen *previousScreen) override;

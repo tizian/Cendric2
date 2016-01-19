@@ -78,10 +78,9 @@ Inventory* GameScreen::getInventory() {
 	return m_interface->getInventory();
 }
 
-Screen* GameScreen::execUpdate(const sf::Time& frameTime) {
+void GameScreen::execUpdate(const sf::Time& frameTime) {
 	m_interface->update(frameTime);
 	m_progressLog->update(frameTime);
-	return this;
 }
 
 void GameScreen::updateProgressLog(const sf::Time& frameTime) {
