@@ -48,6 +48,10 @@ vector<GameObject*>* Screen::getObjects(GameObjectType type) {
 
 void Screen::onEnter(const Screen* previousScreen) {
 	execOnEnter(previousScreen);
+	for (auto& obj : m_toAdd) {
+		m_objects[obj->getConfiguredType()].push_back(obj);
+	}
+	m_toAdd.clear();
 }
 
 void Screen::execOnEnter(const Screen* previousScreen) {

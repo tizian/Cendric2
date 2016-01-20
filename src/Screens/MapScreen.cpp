@@ -8,80 +8,61 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : GameScreen
 }
 
 void MapScreen::execUpdate(const sf::Time& frameTime) {
-	// handle case where a dialogue is open
-	if (m_dialogueWindow != nullptr) {
-		if (!m_dialogueWindow->updateDialogue(frameTime)) {
-			delete m_dialogueWindow;
-			m_dialogueWindow = nullptr;
-		}
-		updateProgressLog(frameTime);
-		updateTooltipText(frameTime);
-		updateObjects(GameObjectType::_Light, frameTime);
+	handleCookingWindow(frameTime);
+	handleDialogueWindow(frameTime);
+	if (m_dialogueWindow != nullptr || m_cookingWindow != nullptr) return;
+
+	GameScreen::execUpdate(frameTime);
+	if (g_inputController->isKeyJustPressed(Key::Escape)) {
+		// store pos & go back to menu screen
+		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
+		setNextScreen(new MenuScreen(m_characterCore));
 		return;
 	}
-	// handle case where a cooking window is open
-	if (m_cookingWindow != nullptr) {
-		if (!m_cookingWindow->updateWindow(frameTime)) {
-			delete m_cookingWindow;
-			m_cookingWindow = nullptr;
+	if (g_inputController->isKeyJustPressed(Key::Quickload)) {
+		// store pos & go back to menu screen
+		CharacterCore* newCharacterCore = new CharacterCore();
+		if (!newCharacterCore->quickload()) {
+			// no quicksave exists
+			setTooltipText(g_textProvider->getText("NoQuicksaveExists"), sf::Color::Red, true);
+			delete newCharacterCore;
 		}
-		updateProgressLog(frameTime);
-		updateTooltipText(frameTime);
+		else {
+			delete m_characterCore;
+			m_characterCore = newCharacterCore;
+			setNextScreen(new LoadingScreen(m_characterCore));
+			return;
+		}
+	}
+	if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
+		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
+		m_characterCore->quicksave();
+		setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Green, true);
+	}
+	MapExitData* data = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
+	if (data == nullptr || m_isOnLevelEntry) {
+		m_isOnLevelEntry = (data != nullptr);
+		updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
+		depthSortObjects(GameObjectType::_MapMovableGameObject);
+		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_Light, frameTime);
+		m_currentMap.update(frameTime);
+		updateTooltipText(frameTime);
 		return;
 	}
 	else {
-		GameScreen::execUpdate(frameTime);
-		if (g_inputController->isKeyJustPressed(Key::Escape)) {
-			// store pos & go back to menu screen
+		if (!data->levelID.empty()) {
 			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			setNextScreen(new MenuScreen(m_characterCore));
-			return;
-		}
-		if (g_inputController->isKeyJustPressed(Key::Quickload)) {
-			// store pos & go back to menu screen
-			CharacterCore* newCharacterCore = new CharacterCore();
-			if (!newCharacterCore->quickload()) {
-				// no quicksave exists
-				setTooltipText(g_textProvider->getText("NoQuicksaveExists"), sf::Color::Red, true);
-				delete newCharacterCore;
-			}
-			else {
-				delete m_characterCore;
-				m_characterCore = newCharacterCore;
-				setNextScreen(new LoadingScreen(m_characterCore));
-				return;
-			}
-		}
-		if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
-			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			m_characterCore->quicksave();
-			setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Green, true);
-		}
-		MapExitData* data = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
-		if (data == nullptr || m_isOnLevelEntry) {
-			m_isOnLevelEntry = (data != nullptr);
-			updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
-			depthSortObjects(GameObjectType::_MapMovableGameObject);
-			updateObjects(GameObjectType::_DynamicTile, frameTime);
-			updateObjects(GameObjectType::_Light, frameTime);
-			m_currentMap.update(frameTime);
-			updateTooltipText(frameTime);
-			return;
+			m_characterCore->setLevel(data->spawnPoint, data->levelID);
 		}
 		else {
-			if (!data->levelID.empty()) {
-				m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-				m_characterCore->setLevel(data->spawnPoint, data->levelID);
-			} 
-			else {
-				m_characterCore->setMap(data->spawnPoint, data->mapID);
-			}
-			delete data;
-			setNextScreen(new LoadingScreen(getCharacterCore()));
-			return;
+			m_characterCore->setMap(data->spawnPoint, data->mapID);
 		}
+		delete data;
+		setNextScreen(new LoadingScreen(getCharacterCore()));
+		return;
 	}
+
 }
 
 void MapScreen::loadForRenderTexture() {
@@ -189,4 +170,26 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	}
 
 	renderTarget.setView(adjustedView);
+}
+
+void MapScreen::handleCookingWindow(const sf::Time& frameTime) {
+	if (m_cookingWindow == nullptr) return;
+	if (!m_cookingWindow->updateWindow(frameTime)) {
+		delete m_cookingWindow;
+		m_cookingWindow = nullptr;
+	}
+	updateProgressLog(frameTime);
+	updateTooltipText(frameTime);
+	updateObjects(GameObjectType::_Light, frameTime);
+}
+
+void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
+	if (m_dialogueWindow == nullptr) return;
+	if (!m_dialogueWindow->updateDialogue(frameTime)) {
+		delete m_dialogueWindow;
+		m_dialogueWindow = nullptr;
+	}
+	updateProgressLog(frameTime);
+	updateTooltipText(frameTime);
+	updateObjects(GameObjectType::_Light, frameTime);
 }

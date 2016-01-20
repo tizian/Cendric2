@@ -35,4 +35,7 @@ private:
 	bool m_isOnLevelEntry = true;
 	DialogueWindow* m_dialogueWindow = nullptr;
 	CookingWindow* m_cookingWindow = nullptr;
+
+	void handleDialogueWindow(const sf::Time& frameTime);
+	void handleCookingWindow(const sf::Time& frameTime);
 };
