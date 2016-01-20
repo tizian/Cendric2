@@ -20,10 +20,6 @@ public:
 	void execOnExit(const Screen *nextScreen) override;
 
 private:
-	Button* m_backButton = nullptr;
-	Button* m_applyButton = nullptr;
-	Button* m_useDefaultButton = nullptr;
-	Button* m_resetButton = nullptr;
 	BitmapText* m_title = nullptr;
 
 	Key m_selectedKey = Key::VOID;
@@ -31,7 +27,7 @@ private:
 	std::map<Key, std::pair<Button*, sf::Keyboard::Key>> m_keyButtons;
 	std::vector<BitmapText*> m_keyTexts;
 
-	std::map < Key, sf::Keyboard::Key > m_selectedKeys;
+	std::map<Key, sf::Keyboard::Key> m_selectedKeys;
 
 	void reload();
 	// returns true if succeeded, false if not allowed
@@ -40,4 +36,10 @@ private:
 
 	static const std::set<sf::Keyboard::Key> RESERVED_KEYS;
 	static const std::set<Key> UNMODIFIABLE_KEYS;
+
+	// agents for the buttons
+	void onBack();
+	void onApply();
+	void onUseDefault();
+	void onReset();
 };

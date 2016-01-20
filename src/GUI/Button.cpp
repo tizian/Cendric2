@@ -27,6 +27,9 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 
 	m_positionDefault = sf::Vector2f(box.left, box.top);
 	setPosition(m_positionDefault);
+
+	// agent placeholder
+	m_executeOnClick = std::bind(&Button::nop, this);
 }
 
 void Button::onLeftClick() {
@@ -90,6 +93,9 @@ void Button::update(const sf::Time& frameTime) {
 	}
 	m_isClicked = false;
 	GameObject::update(frameTime);
+	if (m_isClicked) {
+		m_executeOnClick();
+	}
 }
 
 void Button::setText(const std::string& text, const sf::Color& color, int charSize) {
@@ -176,4 +182,12 @@ bool Button::isVisible() const {
 
 GameObjectType Button::getConfiguredType() const {
 	return GameObjectType::_Button;
+}
+
+void Button::setOnClick(const std::function<void()>& agent) {
+	m_executeOnClick = agent;
+}
+
+void Button::nop() const {
+	// nop
 }

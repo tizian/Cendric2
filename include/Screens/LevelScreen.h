@@ -48,16 +48,19 @@ private:
 	bool m_isGameOver = false;
 	BitmapText* m_overlayText = nullptr;
 	sf::Sprite* m_overlaySprite = nullptr;
+	YesOrNoForm* m_yesOrNoForm = nullptr;
 	Button* m_retryButton = nullptr;
 	Button* m_backToMenuButton = nullptr;
-	YesOrNoForm* m_yesOrNoForm = nullptr;
 
-	// pretty little agents to give to our yes or no form.
+	void handleGameOver(const sf::Time& frameTime);
+
+	// pretty little agents to give to our yes or no form and buttons
 	void onNo();
 	void onYesToCheckpoint();
 	void onYesToMenu();
-	bool m_isGoBackToCheckpoint = false;
-	bool m_isGoBackToMenu = false;
+	void onBackToCheckpoint();
+	void onBackToMenu();
+	void onRetry();
 
 	// the level screen runs on a copy of the character core that only gets written back to the original core
 	// if a checkpoint is reached or the level is finished.

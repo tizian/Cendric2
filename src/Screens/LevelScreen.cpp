@@ -35,10 +35,13 @@ void LevelScreen::load() {
 	m_retryButton = new Button(sf::FloatRect(450, 410, 350, 50), ButtonOrnamentStyle::MEDIUM);
 	m_retryButton->setText("BackToCheckpoint");
 	m_retryButton->setVisible(false);
+	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
 	addObject(m_retryButton);
+
 	m_backToMenuButton = new Button(sf::FloatRect(450, 470, 350, 50), ButtonOrnamentStyle::MEDIUM);
 	m_backToMenuButton->setText("BackToMenu");
 	m_backToMenuButton->setVisible(false);
+	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));
 	addObject(m_backToMenuButton);
 
 	m_overlaySprite = new sf::Sprite(*g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
@@ -105,53 +108,7 @@ LevelMainCharacter* LevelScreen::getMainCharacter() const {
 }
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
-	if (m_isGoBackToCheckpoint) {
-		setNextScreen(new LoadingScreen(m_characterCore));
-		return;
-	}
-	if (m_isGoBackToMenu) {
-		setNextScreen(new MenuScreen(m_characterCore));
-		return;
-	}
-
-	// handle game over
-	if (!m_isGameOver && m_mainChar->isDead()) {
-		m_isGameOver = true;
-		m_overlaySprite->setTexture(*g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
-		m_overlayText->setString(g_textProvider->getText("YouDied"));
-		m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
-		m_retryButton->setVisible(true);
-		m_backToMenuButton->setVisible(true);
-		// update once to set hp bar down
-		m_interface->update(frameTime);
-	}
-	
-	if (m_retryButton->isClicked()) {
-		if (m_isGameOver) {
-			m_isGoBackToCheckpoint = true;
-		}
-		else {
-			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-			m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
-			m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
-			m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
-			addObject(m_yesOrNoForm);
-			setAllButtonsEnabled(false);
-		}
-	}
-	else if (m_backToMenuButton->isClicked()) {
-		if (m_isGameOver) {
-			m_isGoBackToMenu = true;
-		}
-		else {
-			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-			m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
-			m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
-			m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToMenu, this));
-			addObject(m_yesOrNoForm);
-			setAllButtonsEnabled(false);
-		}
-	}
+	handleGameOver(frameTime);
 
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
@@ -160,7 +117,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		GameScreen::execUpdate(frameTime);
 	}
 
-	if (!m_isGameOver &&m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
+	if (!m_isGameOver && m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
 		if (m_retryButton->isVisible()) {
 			m_retryButton->setVisible(false);
 			m_backToMenuButton->setVisible(false);
@@ -266,6 +223,20 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(oldView);
 }
 
+void LevelScreen::handleGameOver(const sf::Time& frameTime) {
+	// handle game over
+	if (m_isGameOver || !m_mainChar->isDead()) return;
+
+	m_isGameOver = true;
+	m_overlaySprite->setTexture(*g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
+	m_overlayText->setString(g_textProvider->getText("YouDied"));
+	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
+	m_retryButton->setVisible(true);
+	m_backToMenuButton->setVisible(true);
+	// update once to set hp bar down
+	m_interface->update(frameTime);
+}
+
 // yes or no form
 void LevelScreen::onNo() {
 	m_yesOrNoForm->setDisposed();
@@ -273,11 +244,44 @@ void LevelScreen::onNo() {
 }
 
 void LevelScreen::onYesToCheckpoint() {
-	m_isGoBackToCheckpoint = true;
+	setNextScreen(new LoadingScreen(m_characterCore));
 	m_yesOrNoForm->setDisposed();
 }
 
 void LevelScreen::onYesToMenu() {
-	m_isGoBackToMenu = true;
+	setNextScreen(new MenuScreen(m_characterCore));
 	m_yesOrNoForm->setDisposed();
+}
+
+void LevelScreen::onBackToMenu() {
+	if (m_isGameOver) {
+		setNextScreen(new MenuScreen(m_characterCore));
+	}
+	else {
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToMenu, this));
+		addObject(m_yesOrNoForm);
+		setAllButtonsEnabled(false);
+	}
+}
+
+void LevelScreen::onBackToCheckpoint() {
+	setNextScreen(new LoadingScreen(m_characterCore));
+}
+
+void LevelScreen::onRetry() {
+	if (m_isGameOver) {
+		onBackToCheckpoint();
+	}
+	else {
+		delete m_yesOrNoForm;
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
+		addObject(m_yesOrNoForm);
+		setAllButtonsEnabled(false);
+	}
 }

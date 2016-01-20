@@ -19,7 +19,8 @@ public:
 
 private:
 	sf::Sprite m_screenSprite;
-	Button* m_backButton = nullptr;
 	BitmapText* m_title = nullptr;
 	BitmapText* m_credits = nullptr;
+
+	void onBack();
 };

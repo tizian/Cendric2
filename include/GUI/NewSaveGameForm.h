@@ -34,10 +34,4 @@ private:
 
 	std::string m_savegameName;
 	BitmapText m_savegameNameText;
-
-	std::function<void()> m_executeOk;
-	std::function<void()> m_executeCancel;
-
-	// placeholder function for the agents.
-	void nop() const;
 };

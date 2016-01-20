@@ -7,54 +7,17 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 }
 
 void MenuScreen::execUpdate(const sf::Time& frameTime) {
-	if (m_startNewGame) {
-		setNextScreen(new LoadingScreen(m_characterCore));
-		return;
-	}
-	else if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr) || m_exitButton->isClicked()) {
+	if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr)) {
 		// end the game
 		m_requestQuit = true;
+		return;
 	}
-	else if ((m_resumeGameButton != nullptr && m_resumeGameButton->isClicked()) || (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr)) {
+	if (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr) {
 		// resume game
 		setNextScreen(new LoadingScreen(m_characterCore));
 		return;
 	}
-	else if (m_newGameButton->isClicked() && m_yesOrNoForm == nullptr) {
-		if (m_characterCore == nullptr) {
-			// we start a new game with an empty character core
-			m_characterCore = new CharacterCore();
-			m_characterCore->loadNew();
-			setNextScreen(new LoadingScreen(m_characterCore));
-			return;
-		}
-		else {
-			m_newCharacterCore = new CharacterCore();
-			m_newCharacterCore->loadNew();
-			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-			m_yesOrNoForm->setMessage("QuestionStartNewGame");
-			m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNo, this));
-			m_yesOrNoForm->setOnYesClicked(std::bind(&MenuScreen::onStartNewGame, this));
-			addObject(m_yesOrNoForm);
-			setAllButtonsEnabled(false);
-		}
-	}
-	else if (m_loadGameButton->isClicked()) {
-		setNextScreen(new LoadGameScreen(m_characterCore));
-		return;
-	}
-	else if (m_saveGameButton->isClicked() && m_characterCore != nullptr) {
-		setNextScreen(new SaveGameScreen(m_characterCore));
-		return;
-	}
-	else if (m_optionsButton->isClicked()) {
-		setNextScreen(new OptionsScreen(m_characterCore));
-		return;
-	}
-	else if (m_creditsButton->isClicked()) {
-		setNextScreen(new CreditsScreen(m_characterCore));
-		return;
-	}
+
 	updateTooltipText(frameTime);
 	updateObjects(GameObjectType::_Undefined, frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
@@ -100,36 +63,51 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	float addYOffset = 70.f;
 
 	// add buttons
+	Button* button;
 	if (m_characterCore != nullptr) {
-		m_resumeGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
-		m_resumeGameButton->setText("Resume");
-		addObject(m_resumeGameButton);
+		button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+		button->setText("Resume");
+		button->setOnClick(std::bind(&MenuScreen::onResume, this));
+		addObject(button);
 	}
 	yOffset += addYOffset;
-	m_newGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
-	m_newGameButton->setText("NewGame");
+
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button->setText("NewGame");
+	button->setOnClick(std::bind(&MenuScreen::onNewGame, this));
+	addObject(button);
 	yOffset += addYOffset;
-	m_loadGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
-	m_loadGameButton->setText("LoadGame");
+
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button->setText("LoadGame");
+	button->setOnClick(std::bind(&MenuScreen::onLoadGame, this));
+	addObject(button);
 	yOffset += addYOffset;
-	m_saveGameButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
-	m_saveGameButton->setText("SaveGame");
-	m_saveGameButton->setEnabled(m_characterCore != nullptr);
+
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button->setText("SaveGame");
+	button->setEnabled(m_characterCore != nullptr);
+	button->setOnClick(std::bind(&MenuScreen::onSaveGame, this));
+	m_saveGameButton = button;
+	addObject(button);
 	yOffset += addYOffset;
-	m_optionsButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
-	m_optionsButton->setText("Options");
+
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button->setText("Options");
+	button->setOnClick(std::bind(&MenuScreen::onOptions, this));
+	addObject(button);
 	yOffset += addYOffset;
-	m_creditsButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
-	m_creditsButton->setText("Credits");
+
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button->setText("Credits");
+	button->setOnClick(std::bind(&MenuScreen::onCredits, this));
+	addObject(button);
 	yOffset += addYOffset;
-	m_exitButton = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
-	m_exitButton->setText("Exit");
-	addObject(m_newGameButton);
-	addObject(m_loadGameButton);
-	addObject(m_optionsButton);
-	addObject(m_creditsButton);
-	addObject(m_exitButton);
-	addObject(m_saveGameButton);
+
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button->setText("Exit");
+	button->setOnClick(std::bind(&MenuScreen::onExit, this));
+	addObject(button);
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen) {
@@ -138,7 +116,7 @@ void MenuScreen::execOnExit(const Screen *nextScreen) {
 	delete m_newCharacterCore;
 }
 
-// <<< agents for the yes or no form >>>
+// <<< agents for the yes or no form and other buttons >>>
 
 void MenuScreen::onStartNewGame() {
 	m_yesOrNoForm->setDisposed();
@@ -146,7 +124,7 @@ void MenuScreen::onStartNewGame() {
 	delete m_characterCore;
 	m_characterCore = m_newCharacterCore;
 	m_newCharacterCore = nullptr;
-	m_startNewGame = true;
+	setNextScreen(new LoadingScreen(m_characterCore));
 }
 
 void MenuScreen::onNo() {
@@ -154,4 +132,49 @@ void MenuScreen::onNo() {
 	delete m_newCharacterCore;
 	m_newCharacterCore = nullptr;
 	setAllButtonsEnabled(true);
+}
+
+void MenuScreen::onExit() {
+	m_requestQuit = true;
+}
+
+void MenuScreen::onResume() {
+	setNextScreen(new LoadingScreen(m_characterCore));
+}
+
+void MenuScreen::onNewGame() {
+	if (m_yesOrNoForm != nullptr) return;
+	if (m_characterCore == nullptr) {
+		// we start a new game with an empty character core
+		m_characterCore = new CharacterCore();
+		m_characterCore->loadNew();
+		setNextScreen(new LoadingScreen(m_characterCore));
+	}
+	else {
+		m_newCharacterCore = new CharacterCore();
+		m_newCharacterCore->loadNew();
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionStartNewGame");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&MenuScreen::onStartNewGame, this));
+		addObject(m_yesOrNoForm);
+		setAllButtonsEnabled(false);
+	}
+}
+
+void MenuScreen::onLoadGame() {
+	setNextScreen(new LoadGameScreen(m_characterCore));
+}
+
+void MenuScreen::onSaveGame() {
+	if (m_characterCore == nullptr) return;
+	setNextScreen(new SaveGameScreen(m_characterCore));
+}
+
+void MenuScreen::onOptions() {
+	setNextScreen(new OptionsScreen(m_characterCore));
+}
+
+void MenuScreen::onCredits() {
+	setNextScreen(new CreditsScreen(m_characterCore));
 }

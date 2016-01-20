@@ -21,9 +21,6 @@ public:
 	void execOnExit(const Screen *nextScreen) override;
 
 private:
-	Button* m_backButton = nullptr;
-	Button* m_applyButton = nullptr;
-	Button* m_keyBindingsButton = nullptr;
 	BitmapText* m_title = nullptr;
 
 	Checkbox* m_soundCheckbox = nullptr;
@@ -33,17 +30,22 @@ private:
 
 	BitmapText* m_fullscreen = nullptr;
 	bool m_selectedFullscreenOn = false;
-	Button* m_fullscreenButton = nullptr;
-	Button* m_windowButton = nullptr;
 	void refreshFullscreenText();
 
 	Language m_selectedLanguage = Language::VOID;
 	BitmapText* m_languageText = nullptr;
-	Button* m_englishButton = nullptr;
-	Button* m_germanButton = nullptr;
-	Button* m_swissButton = nullptr;
 	void refreshLanguageText();
 
 	Slider* m_volumeSoundSlider = nullptr;
 	Slider* m_volumeMusicSlider = nullptr;
+
+	// button agents
+	void onEnglish();
+	void onSwiss();
+	void onGerman();
+	void onBack();
+	void onApply();
+	void onKeybindings();
+	void onFullscreen();
+	void onWindow();
 };

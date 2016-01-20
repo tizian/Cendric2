@@ -96,9 +96,9 @@ void AureolaSpell::execOnHit(LevelMovableGameObject *target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
 		if (enemy->getMentalStrength() < m_strength) {
 			enemy->setStunned(m_data.duration);
-			setDisposed();
 		}
 	}
+	setDisposed();
 	// main character can't be stunned yet.
 }
 

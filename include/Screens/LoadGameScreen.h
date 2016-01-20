@@ -21,7 +21,6 @@ public:
 
 private:
 	void setAllButtonsEnabled(bool value) override;
-	Button* m_backButton = nullptr;
 	Button* m_loadSaveGameButton = nullptr;
 	Button* m_deleteSaveGameButton = nullptr;
 	BitmapText* m_title = nullptr;
@@ -34,6 +33,9 @@ private:
 	void onNo();
 	void onLoadGame();
 	void onDeleteSaveGame();
+	void onLoadSaveGame();
+	void onYesDeleteSaveGame();
+	void onBack();
 
 	bool m_loadGame = false;
 };

@@ -19,10 +19,6 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
 
 	setBoundingBox(box);
 	setPosition(sf::Vector2f(box.left, box.top));
-
-	// agent placeholders
-	m_executeYes = std::bind(&YesOrNoForm::nop, this);
-	m_executeNo = std::bind(&YesOrNoForm::nop, this);
 }
 
 YesOrNoForm::~YesOrNoForm() {
@@ -43,12 +39,7 @@ void YesOrNoForm::update(const sf::Time& frameTime) {
 	m_yesButton->update(frameTime);
 	m_noButton->update(frameTime);
 
-	if (m_yesButton->isClicked()) {
-		m_executeYes();
-		setDisposed();
-	}
-	else if (m_noButton->isClicked()) {
-		m_executeNo();
+	if (m_yesButton->isClicked() || m_noButton->isClicked()) {
 		setDisposed();
 	}
 }
@@ -70,17 +61,13 @@ void YesOrNoForm::setMessage(const std::string& msg) {
 }
 
 void YesOrNoForm::setOnYesClicked(const std::function<void()>& agent) {
-	m_executeYes = agent;
+	m_yesButton->setOnClick(agent);
 }
 
 void YesOrNoForm::setOnNoClicked(const std::function<void()>& agent) {
-	m_executeNo = agent;
+	m_noButton->setOnClick(agent);
 }
 
 GameObjectType YesOrNoForm::getConfiguredType() const {
 	return GameObjectType::_Form;
-}
-
-void YesOrNoForm::nop() const {
-	// nop
 }

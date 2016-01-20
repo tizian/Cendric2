@@ -23,9 +23,7 @@ public:
 private:
 	void setAllButtonsEnabled(bool value) override;
 
-	Button* m_backButton = nullptr;
 	Button* m_saveButton = nullptr;
-	Button* m_newSaveGameButton = nullptr;
 	Button* m_deleteSaveGameButton = nullptr;
 	BitmapText* m_title = nullptr;
 
@@ -35,10 +33,16 @@ private:
 
 	// pretty little agents to give to our yes or no form.
 	void onNo();
-	void onOverwriteSaveGame();
-	void onDeleteSaveGame();
+	void onYesOverwriteSaveGame();
+	void onYesDeleteSaveGame();
 
 	// pretty little agents to give to our new save game form.
 	void onCancel();
+	void onYesNewSaveGame();
+
+	// pretty little button agents :3
+	void onDeleteSaveGame();
 	void onNewSaveGame();
+	void onBack();
+	void onSaveGame();
 };

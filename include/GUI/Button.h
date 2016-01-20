@@ -27,6 +27,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
 
+	void setOnClick(const std::function<void()>& agent);
+
 	// position will be set automatically as the center of the button.
 	// setting text using the text provider (translated)
 	void setText(const std::string& text, const sf::Color& color, int charSize);
@@ -72,4 +74,9 @@ protected:
 	sf::Color m_mouseOverColor = CENDRIC_COLOR_PURPLE;
 
 	BitmapText m_text;
+
+private:
+	std::function<void()> m_executeOnClick;
+	// placeholder for agents
+	void nop() const;
 };

@@ -28,7 +28,7 @@ KeyBindingsScreen::KeyBindingsScreen(CharacterCore* core) : Screen(core) {
 }
 
 void KeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
-	if ((m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) || m_backButton->isClicked()) {
+	if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) {
 		setNextScreen(new OptionsScreen(m_characterCore));
 		return;
 	}
@@ -39,20 +39,6 @@ void KeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedKey())) {
 			setTooltipText(g_textProvider->getText("KeyReserved"), sf::Color::Red, true);
 		}
-	}
-	else if (m_resetButton->isClicked()) {
-		m_selectedKeys = g_resourceManager->getConfiguration().mainKeyMap;
-		reload();
-	}
-	else if (m_useDefaultButton->isClicked()) {
-		m_selectedKeys = DEFAULT_KEYMAP;
-		reload();
-	}
-	else if (m_applyButton->isClicked()) {
-		g_resourceManager->getConfiguration().mainKeyMap = m_selectedKeys;
-		ConfigurationWriter writer;
-		writer.saveToFile(g_resourceManager->getConfiguration());
-		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
 	}
 
 	for (auto& it : m_keyButtons) {
@@ -93,22 +79,27 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
 	const float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
 	const float buttonSpacing = (buttonSpaceWidth - 4 * buttonWidth) / 3.f;
 
+	Button* button;
 	// back
-	m_backButton = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
-	m_backButton->setText("Back");
-	addObject(m_backButton);
+	button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
+	button->setText("Back");
+	button->setOnClick(std::bind(&KeyBindingsScreen::onBack, this));
+	addObject(button);
 	// reset
-	m_resetButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight));
-	m_resetButton->setText("Reset");
-	addObject(m_resetButton);
+	button = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight));
+	button->setText("Reset");
+	button->setOnClick(std::bind(&KeyBindingsScreen::onReset, this));
+	addObject(button);
 	// default values
-	m_useDefaultButton = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight));
-	m_useDefaultButton->setText("Default");
-	addObject(m_useDefaultButton);
+	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight));
+	button->setText("Default");
+	button->setOnClick(std::bind(&KeyBindingsScreen::onUseDefault, this));
+	addObject(button);
 	// apply
-	m_applyButton = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight));
-	m_applyButton->setText("Apply");
-	addObject(m_applyButton);
+	button = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight));
+	button->setText("Apply");
+	button->setOnClick(std::bind(&KeyBindingsScreen::onApply, this));
+	addObject(button);
 }
 
 bool KeyBindingsScreen::trySetKeyBinding(Key key, sf::Keyboard::Key keyboardKey) {
@@ -172,4 +163,25 @@ void KeyBindingsScreen::execOnExit(const Screen *nextScreen) {
 	m_keyButtons.clear();
 	m_selectedKeys.clear();
 	delete m_title;
+}
+
+void KeyBindingsScreen::onBack() {
+	setNextScreen(new OptionsScreen(m_characterCore));
+}
+
+void KeyBindingsScreen::onApply() {
+	g_resourceManager->getConfiguration().mainKeyMap = m_selectedKeys;
+	ConfigurationWriter writer;
+	writer.saveToFile(g_resourceManager->getConfiguration());
+	setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
+}
+
+void KeyBindingsScreen::onUseDefault() {
+	m_selectedKeys = DEFAULT_KEYMAP;
+	reload();
+}
+
+void KeyBindingsScreen::onReset() {
+	m_selectedKeys = g_resourceManager->getConfiguration().mainKeyMap;
+	reload();
 }

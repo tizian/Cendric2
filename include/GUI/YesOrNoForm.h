@@ -32,10 +32,4 @@ private:
 	BitmapText m_message;
 	Button* m_yesButton;
 	Button* m_noButton;
-
-	std::function<void()> m_executeYes;
-	std::function<void()> m_executeNo;
-
-	// placeholder for agents
-	void nop() const;
 };

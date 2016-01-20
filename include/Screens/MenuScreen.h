@@ -31,20 +31,19 @@ private:
 
 	void setAllButtonsEnabled(bool value) override;
 
-	// only used when character core is not null
-	Button* m_resumeGameButton = nullptr;
-	Button* m_newGameButton = nullptr;
-	Button* m_loadGameButton = nullptr;
-	Button* m_saveGameButton = nullptr;
-	Button* m_optionsButton = nullptr;
-	Button* m_creditsButton = nullptr;
-	Button* m_exitButton = nullptr;
-
 	YesOrNoForm* m_yesOrNoForm = nullptr;
 	CharacterCore* m_newCharacterCore = nullptr;
+	Button* m_saveGameButton = nullptr;
 
 	// agents for the yes or no form
 	void onStartNewGame();
 	void onNo();
-	bool m_startNewGame = false;
+	// agents for other buttons
+	void onExit();
+	void onResume();
+	void onNewGame();
+	void onLoadGame();
+	void onSaveGame();
+	void onOptions();
+	void onCredits();
 };

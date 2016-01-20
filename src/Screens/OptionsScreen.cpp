@@ -8,53 +8,11 @@ OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core) {
 }
 
 void OptionsScreen::execUpdate(const sf::Time& frameTime) {
-	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
-		setNextScreen(new MenuScreen(m_characterCore));
+	if (g_inputController->isKeyActive(Key::Escape)) {
+		onBack();
 		return;
 	}
-	else if (m_keyBindingsButton->isClicked()) {
-		setNextScreen(new KeyBindingsScreen(m_characterCore));
-		return;
-	}
-	else if (m_applyButton->isClicked()) {
-		ConfigurationData& config = g_resourceManager->getConfiguration();
-		bool fullscreenChanged = config.isFullscreen != m_selectedFullscreenOn;
-		config.language = m_selectedLanguage;
-		config.isSoundOn = m_soundCheckbox->isChecked();
-		config.isQuickcast = m_quickCastCheckbox->isChecked();
-		config.isFullscreen = m_selectedFullscreenOn;
-		config.isSmoothing = m_smoothingCheckbox->isChecked();
-		config.isVSyncEnabled = m_vSyncCheckbox->isChecked();
-		config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
-		config.volumeSound = m_volumeSoundSlider->getSliderPosition();
-		ConfigurationWriter writer;
-		writer.saveToFile(config);
-		g_textProvider->reload();
-		setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
-		if (fullscreenChanged) {
-			config.isWindowReload = true;
-		}
-	}
-	else if (m_englishButton->isClicked()) {
-		m_selectedLanguage = Language::Lang_EN;
-		refreshLanguageText();
-	}
-	else if (m_germanButton->isClicked()) {
-		m_selectedLanguage = Language::Lang_DE;
-		refreshLanguageText();
-	}
-	else if (m_swissButton->isClicked()) {
-		m_selectedLanguage = Language::Lang_CH;
-		refreshLanguageText();
-	}
-	else if (m_fullscreenButton->isClicked()) {
-		m_selectedFullscreenOn = true;
-		refreshFullscreenText();
-	}
-	else if (m_windowButton->isClicked()) {
-		m_selectedFullscreenOn = false;
-		refreshFullscreenText();
-	}
+
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
 }
@@ -84,16 +42,20 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_languageText->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	refreshLanguageText();
 
+	Button* button;
 	distFromTop = distFromTop + 30;
-	m_englishButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 130, 50));
-	m_englishButton->setText("English", 12);
-	addObject(m_englishButton);
-	m_germanButton = new Button(sf::FloatRect(distFromLeft + 140, distFromTop, 130, 50));
-	m_germanButton->setText("German", 12);
-	addObject(m_germanButton);
-	m_swissButton = new Button(sf::FloatRect(distFromLeft + 280, distFromTop, 240, 50));
-	m_swissButton->setText("SwissGerman", 12);
-	addObject(m_swissButton);
+	button = new Button(sf::FloatRect(distFromLeft, distFromTop, 130, 50));
+	button->setText("English", 12);
+	button->setOnClick(std::bind(&OptionsScreen::onEnglish, this));
+	addObject(button);
+	button = new Button(sf::FloatRect(distFromLeft + 140, distFromTop, 130, 50));
+	button->setText("German", 12);
+	button->setOnClick(std::bind(&OptionsScreen::onGerman, this));
+	addObject(button);
+	button = new Button(sf::FloatRect(distFromLeft + 280, distFromTop, 240, 50));
+	button->setText("SwissGerman", 12);
+	button->setOnClick(std::bind(&OptionsScreen::onSwiss, this));
+	addObject(button);
 
 	distFromTop = distFromTop + 100;
 
@@ -105,20 +67,23 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	refreshFullscreenText();
 
 	distFromTop = distFromTop + 30;
-	m_fullscreenButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 150, 50));
-	m_fullscreenButton->setText("Fullscreen", 12);
-	addObject(m_fullscreenButton);
-	m_windowButton = new Button(sf::FloatRect(distFromLeft + 160, distFromTop, 150, 50));
-	m_windowButton->setText("Window", 12);
-	addObject(m_windowButton);
+	button = new Button(sf::FloatRect(distFromLeft, distFromTop, 150, 50));
+	button->setText("Fullscreen", 12);
+	button->setOnClick(std::bind(&OptionsScreen::onFullscreen, this));
+	addObject(button);
+	button = new Button(sf::FloatRect(distFromLeft + 160, distFromTop, 150, 50));
+	button->setText("Window", 12);
+	button->setOnClick(std::bind(&OptionsScreen::onWindow, this));
+	addObject(button);
 
 	distFromTop = distFromTop + 100;
 
 	// keyboard mappings button
-	m_keyBindingsButton = new Button(sf::FloatRect(distFromLeft, distFromTop, 200, 50));
-	m_keyBindingsButton->setText("KeyBindings");
-	m_keyBindingsButton->setCharacterSize(12);
-	addObject(m_keyBindingsButton);
+	button = new Button(sf::FloatRect(distFromLeft, distFromTop, 200, 50));
+	button->setText("KeyBindings");
+	button->setCharacterSize(12);
+	button->setOnClick(std::bind(&OptionsScreen::onKeybindings, this));
+	addObject(button);
 
 	distFromTop = 150.f;
 	distFromLeft = WINDOW_WIDTH / 2.f + 50.f;
@@ -176,13 +141,15 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	addObject(m_volumeMusicSlider);
 
 	// back
-	m_backButton = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
-	m_backButton->setText("Back");
-	addObject(m_backButton);
+	button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
+	button->setText("Back");
+	button->setOnClick(std::bind(&OptionsScreen::onBack, this));
+	addObject(button);
 	// apply
-	m_applyButton = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 50));
-	m_applyButton->setText("Apply");
-	addObject(m_applyButton);
+	button = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 50));
+	button->setText("Apply");
+	button->setOnClick(std::bind(&OptionsScreen::onApply, this));
+	addObject(button);
 }
 
 void OptionsScreen::refreshLanguageText() {
@@ -203,4 +170,57 @@ void OptionsScreen::execOnExit(const Screen *nextScreen) {
 	// delete texts (buttons are deleted automatically by the screen)
 	delete m_title;
 	delete m_languageText;
+}
+
+void OptionsScreen::onEnglish() {
+	m_selectedLanguage = Language::Lang_EN;
+	refreshLanguageText();
+}
+
+void OptionsScreen::onSwiss() {
+	m_selectedLanguage = Language::Lang_CH;
+	refreshLanguageText();
+}
+
+void OptionsScreen::onGerman() {
+	m_selectedLanguage = Language::Lang_DE;
+	refreshLanguageText();
+}
+
+void OptionsScreen::onBack() {
+	setNextScreen(new MenuScreen(m_characterCore));
+}
+
+void OptionsScreen::onApply() {
+	ConfigurationData& config = g_resourceManager->getConfiguration();
+	bool fullscreenChanged = config.isFullscreen != m_selectedFullscreenOn;
+	config.language = m_selectedLanguage;
+	config.isSoundOn = m_soundCheckbox->isChecked();
+	config.isQuickcast = m_quickCastCheckbox->isChecked();
+	config.isFullscreen = m_selectedFullscreenOn;
+	config.isSmoothing = m_smoothingCheckbox->isChecked();
+	config.isVSyncEnabled = m_vSyncCheckbox->isChecked();
+	config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
+	config.volumeSound = m_volumeSoundSlider->getSliderPosition();
+	ConfigurationWriter writer;
+	writer.saveToFile(config);
+	g_textProvider->reload();
+	setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
+	if (fullscreenChanged) {
+		config.isWindowReload = true;
+	}
+}
+
+void OptionsScreen::onKeybindings() {
+	setNextScreen(new KeyBindingsScreen(m_characterCore));
+}
+
+void OptionsScreen::onFullscreen() {
+	m_selectedFullscreenOn = true;
+	refreshFullscreenText();
+}
+
+void OptionsScreen::onWindow() {
+	m_selectedFullscreenOn = false;
+	refreshFullscreenText();
 }

@@ -7,8 +7,8 @@ LoadGameScreen::LoadGameScreen(CharacterCore* core) : Screen(core) {
 }
 
 void LoadGameScreen::execUpdate(const sf::Time& frameTime) {
-	if (g_inputController->isKeyActive(Key::Escape) || m_backButton->isClicked()) {
-		setNextScreen(new MenuScreen(m_characterCore));
+	if (g_inputController->isKeyActive(Key::Escape)) {
+		onBack();
 		return;
 	}
 	else if (m_loadGame) {
@@ -20,38 +20,8 @@ void LoadGameScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
 	if (!getObjects(GameObjectType::_Form)->empty()) return;
-	if (m_loadSaveGameButton->isClicked() || m_saveGameWindow->isChosen()) {
-		if (m_characterCore == nullptr) {
-			// load a savegame
-			m_characterCore = new CharacterCore();
-			if (!(m_characterCore->load(m_saveGameWindow->getChosenFilename()))) {
-				string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
-				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
-			}
-			setNextScreen(new LoadingScreen(m_characterCore));
-			return;
-		}
-		else {
-			m_newCharacterCore = new CharacterCore();
-			if (!(m_newCharacterCore->load(m_saveGameWindow->getChosenFilename()))) {
-				string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
-				g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
-			}
-			m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-			m_yesOrNoForm->setMessage("QuestionLoadGame");
-			m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
-			m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onLoadGame, this));
-			addObject(m_yesOrNoForm);
-			setAllButtonsEnabled(false);
-		}
-	}
-	else if (m_deleteSaveGameButton->isClicked()) {
-		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-		m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
-		m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
-		m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
-		addObject(m_yesOrNoForm);
-		setAllButtonsEnabled(false);
+	if (m_saveGameWindow->isChosen()) {
+		onLoadSaveGame();
 	}
 }
 
@@ -78,16 +48,19 @@ void LoadGameScreen::execOnEnter(const Screen *previousScreen) {
 	float buttonSpacing = (buttonSpaceWidth - 3 * buttonWidth) / 2.f;
 
 	// add buttons
-	m_backButton = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
-	m_backButton->setText("Back");
-	addObject(m_backButton);
+	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
+	button->setText("Back");
+	button->setOnClick(std::bind(&LoadGameScreen::onBack, this));
+	addObject(button);
 
 	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight));
 	m_deleteSaveGameButton->setText("Delete");
+	m_deleteSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
 	addObject(m_deleteSaveGameButton);
 
 	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight));
 	m_loadSaveGameButton->setText("Load");
+	m_loadSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onLoadSaveGame, this));
 	addObject(m_loadSaveGameButton);
 
 	// savegame window
@@ -126,7 +99,7 @@ void LoadGameScreen::onLoadGame() {
 	m_loadGame = true;
 }
 
-void LoadGameScreen::onDeleteSaveGame() {
+void LoadGameScreen::onYesDeleteSaveGame() {
 	m_yesOrNoForm = nullptr;
 	if (remove(m_saveGameWindow->getChosenFilename().c_str()) == 0) {
 		setTooltipText(g_textProvider->getText("SavegameDeleted"), CENDRIC_COLOR_LIGHT_PURPLE, true);
@@ -137,4 +110,43 @@ void LoadGameScreen::onDeleteSaveGame() {
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);
+}
+
+void LoadGameScreen::onDeleteSaveGame() {
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+	m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
+	m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
+	m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onYesDeleteSaveGame, this));
+	addObject(m_yesOrNoForm);
+	setAllButtonsEnabled(false);
+}
+
+void LoadGameScreen::onLoadSaveGame() {
+	if (m_characterCore == nullptr) {
+		// load a savegame
+		m_characterCore = new CharacterCore();
+		if (!(m_characterCore->load(m_saveGameWindow->getChosenFilename()))) {
+			string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
+			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
+		}
+		setNextScreen(new LoadingScreen(m_characterCore));
+		return;
+	}
+	else {
+		m_newCharacterCore = new CharacterCore();
+		if (!(m_newCharacterCore->load(m_saveGameWindow->getChosenFilename()))) {
+			string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
+			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
+		}
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		m_yesOrNoForm->setMessage("QuestionLoadGame");
+		m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
+		m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onLoadGame, this));
+		addObject(m_yesOrNoForm);
+		setAllButtonsEnabled(false);
+	}
+}
+
+void LoadGameScreen::onBack() {
+	setNextScreen(new MenuScreen(m_characterCore));
 }
