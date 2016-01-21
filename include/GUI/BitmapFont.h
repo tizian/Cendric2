@@ -9,7 +9,7 @@ class BitmapFont {
 public:
 	BitmapFont();
 
-	bool loadFromFile(const std::string &path, int glyphWidth = 8, int glyphHeight = 8);
+	bool loadFromFile(const std::string &path);
 
 	const sf::Texture &getTexture() const;
 
