@@ -14,13 +14,22 @@ std::string transform(const std::string& str) {
 		unsigned char c = str.at(i);
 		if (c == 0xc3) {
 			unsigned char c2 = str.at(i + 1);
-			if (c2 == 0xa4u || c2 == 0x84u) {			// ä or Ä
+			if (c2 == 0xa4u) {			// ä
+				out.push_back(0xe4u);
+			}
+			else if (c2 == 0x84u) {		// Ä
 				out.push_back(0xc4u);
 			}
-			else if (c2 == 0xb6u || c2 == 0x96u) {	// ö or Ö
+			else if (c2 == 0xb6u) {	// ö
+				out.push_back(0xf6u);
+			}
+			else if (c2 == 0x96u) {	// Ö
 				out.push_back(0xd6u);
 			}
-			else if (c2 == 0xbcu || c2 == 0x9cu) {	// ü or Ü
+			else if (c2 == 0xbcu) {	// ü
+				out.push_back(0xfcu);
+			}
+			else if (c2 == 0x9cu) {	// Ü
 				out.push_back(0xdcu);
 			}
 			else {									// ?
@@ -29,7 +38,7 @@ std::string transform(const std::string& str) {
 			i++;
 		}
 		else {
-			c = toupper(c);
+			//c = toupper(c);
 			out.push_back(c);
 		}
 	}
