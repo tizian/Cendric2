@@ -1,21 +1,22 @@
 #pragma once
 
 #include "global.h"
-#include "Level/WalkingEnemy.h"
+#include "Level/Enemy.h"
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
 
 // A nasty fiery rat in a level
-class FireRatEnemy : public WalkingEnemy {
+class FireRatEnemy : public Enemy {
 public:
-	FireRatEnemy(Level* level, Screen* screen, bool isControlled = false);
+	FireRatEnemy(Level* level, Screen* screen);
 	virtual ~FireRatEnemy() {}
 
-	void load() override;
+	void loadAnimation() override;
 
-	float getApproachingDistance() const override;
-	float getAggroRange() const override;
+	MovingBehavior* createMovingBehavior() override;
+	AttackingBehavior* createAttackingBehavior() override;
+
 	int getMentalStrength() const override;
 	sf::Time getConfiguredFightAnimationTime() const override;
 	float getMaxVelocityYUp() const override;

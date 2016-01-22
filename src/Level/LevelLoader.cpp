@@ -162,7 +162,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			std::map<string, int> loot = it.customizedLoot.first;
 			int gold = it.customizedLoot.second;
 		
-			enemy = ObjectFactory::Instance()->createEnemy(it.id, level, screen, false);
+			enemy = ObjectFactory::Instance()->createEnemy(it.id, level, screen);
 			if (enemy == nullptr) {
 				g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
 				return;

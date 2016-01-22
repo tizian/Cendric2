@@ -1,5 +1,7 @@
 #include "Level/Enemies/FireRatEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Level/EnemyBehavior/WalkingBehavior.h"
+#include "Level/EnemyBehavior/AggressiveBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::FireRat, FireRatEnemy)
@@ -12,15 +14,10 @@ void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold
 	gold = rand() % 4 + 1;
 }
 
-FireRatEnemy::FireRatEnemy(Level* level, Screen* screen, bool isControlled) :
-	WalkingEnemy(level, screen, isControlled),
-	Enemy(level, screen, isControlled),
+FireRatEnemy::FireRatEnemy(Level* level, Screen* screen) :
+	Enemy(level, screen),
 	LevelMovableGameObject(level) {
-	m_id = EnemyID::FireRat;
-	load();
-	loadAttributes();
-	loadSpells();
-	m_jumpHeight = getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration());
+	load(EnemyID::FireRat);
 }
 
 void FireRatEnemy::loadAttributes() {
@@ -54,18 +51,18 @@ sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const {
 
 void FireRatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (m_currentTarget == nullptr) return;
-	if (distToTarget() < getAggroRange()) {
+	if (getCurrentTarget() == nullptr) return;
+	if (m_attackingBehavior->distToTarget() < m_attackingBehavior->getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (distToTarget() < 50.f) {
+		if (m_attackingBehavior->distToTarget() < 50.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
-		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
 
-void FireRatEnemy::load() {
+void FireRatEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 
@@ -111,6 +108,21 @@ void FireRatEnemy::load() {
 	playCurrentAnimation(true);
 }
 
+MovingBehavior* FireRatEnemy::createMovingBehavior() {
+	WalkingBehavior* behavior = new WalkingBehavior(this);
+	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
+	behavior->setDistanceToAbyss(20.f);
+	behavior->setApproachingDistance(10.f);
+	return behavior;
+}
+
+AttackingBehavior* FireRatEnemy::createAttackingBehavior() {
+	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+	behavior->setAggroRange(500.f);
+	behavior->setAttackInput(std::bind(&FireRatEnemy::handleAttackInput, this));
+	return behavior;
+}
+
 float FireRatEnemy::getMaxVelocityYUp() const {
 	return 400.f;
 }
@@ -127,14 +139,6 @@ sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(4 * 80);
 }
 
-float FireRatEnemy::getAggroRange() const {
-	return 500.f;
-}
-
 int FireRatEnemy::getMentalStrength() const {
 	return 1;
-}
-
-float FireRatEnemy::getApproachingDistance() const {
-	return 10.f;
 }

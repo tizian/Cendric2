@@ -1,5 +1,7 @@
 #include "Level/Enemies/RatEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Level/EnemyBehavior/WalkingBehavior.h"
+#include "Level/EnemyBehavior/AggressiveBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Rat, RatEnemy)
@@ -11,15 +13,10 @@ void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) co
 	gold = 1;
 }
 
-RatEnemy::RatEnemy(Level* level, Screen* screen, bool isControlled) :
-	WalkingEnemy(level, screen, isControlled),
-	Enemy(level, screen, isControlled),
+RatEnemy::RatEnemy(Level* level, Screen* screen) :
+	Enemy(level, screen),
 	LevelMovableGameObject(level) {
-	m_id = EnemyID::Rat;
-	load();
-	loadAttributes();
-	loadSpells();
-	m_jumpHeight = getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration());
+	load(EnemyID::Rat);
 }
 
 void RatEnemy::loadAttributes() {
@@ -43,20 +40,28 @@ sf::Vector2f RatEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
+MovingBehavior* RatEnemy::createMovingBehavior() {
+	WalkingBehavior* behavior = new WalkingBehavior(this);
+	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
+	behavior->setDistanceToAbyss(20.f);
+	behavior->setApproachingDistance(10.f);
+	return behavior;
+}
+
+AttackingBehavior* RatEnemy::createAttackingBehavior() {
+	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+	behavior->setAggroRange(300.f);
+	behavior->setAttackInput(std::bind(&RatEnemy::handleAttackInput, this));
+	return behavior;
+}
+
+
 void RatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (m_currentTarget == nullptr) return;
-	if (distToTarget() < 100.f) {
-		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
+	if (getCurrentTarget() == nullptr) return;
+	if (m_attackingBehavior->distToTarget() < 100.f) {
+		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
-}
-
-float RatEnemy::getAggroRange() const {
-	return 300.f;
-}
-
-float RatEnemy::getDistanceToAbyss() const {
-	return 20.f;
 }
 
 bool RatEnemy::getFleeCondition() const {
@@ -64,11 +69,7 @@ bool RatEnemy::getFleeCondition() const {
 	return m_attributes.currentHealthPoints < m_attributes.maxHealthPoints / 3;
 }
 
-float RatEnemy::getApproachingDistance() const {
-	return 10.f;
-}
-
-void RatEnemy::load() {
+void RatEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 

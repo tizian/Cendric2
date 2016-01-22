@@ -28,7 +28,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	m_level->collideWithDynamicTiles(this, getBoundingBox());
 	MovableGameObject::update(frameTime);
 	// update time
-	m_fightAnimationTime = (m_fightAnimationTime - frameTime) >= sf::Time::Zero ? m_fightAnimationTime - frameTime : sf::Time::Zero;
+	GameObject::updateTime(m_fightAnimationTime, frameTime);
 	updateAnimation(frameTime);
 	if (!m_isDead) {
 		updateAttributes(frameTime);
@@ -212,12 +212,9 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 	if (m_isDead) {
 		return;
 	}
-	// check for owner
-	if (spell->getOwner() == this) {
-		return;
-	}
 
 	spell->execOnHit(this);
+	if (spell->getDamageType() == DamageType::VOID) return;
 	addDamage(spell->getDamage(), spell->getDamageType());
 	if (spell->getDamagePerSecond() > 0.f && spell->getDuration() > sf::Time::Zero) {
 		DamageOverTimeData data;

@@ -1,5 +1,7 @@
 #include "Level/Enemies/CrowEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Level/EnemyBehavior/FlyingBehavior.h"
+#include "Level/EnemyBehavior/AggressiveBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Crow, CrowEnemy)
@@ -10,14 +12,10 @@ void CrowEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) c
 	gold = 2;
 }
 
-CrowEnemy::CrowEnemy(Level* level, Screen* screen, bool isControlled) :
-	FlyingEnemy(level, screen, isControlled),
-	Enemy(level, screen, isControlled),
+CrowEnemy::CrowEnemy(Level* level, Screen* screen) :
+	Enemy(level, screen),
 	LevelMovableGameObject(level) {
-	m_id = EnemyID::Crow;
-	load();
-	loadAttributes();
-	loadSpells();
+	load(EnemyID::Crow);
 }
 
 void CrowEnemy::loadAttributes() {
@@ -43,27 +41,32 @@ sf::Vector2f CrowEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
+MovingBehavior* CrowEnemy::createMovingBehavior() {
+	FlyingBehavior* behavior = new FlyingBehavior(this);
+	behavior->setApproachingDistance(10.f);
+	return behavior;
+}
+
+AttackingBehavior* CrowEnemy::createAttackingBehavior() {
+	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+	behavior->setAggroRange(400.f);
+	behavior->setAttackInput(std::bind(&CrowEnemy::handleAttackInput, this));
+	return behavior;
+}
+
 void CrowEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (m_currentTarget == nullptr) return;
-	if (distToTarget() < 50.f) {
-		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
+	if (getCurrentTarget() == nullptr) return;
+	if (m_attackingBehavior->distToTarget() < 50.f) {
+		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 		m_chasingTime = sf::Time::Zero;
-		if (m_isControlled) {
+		if (isAlly()) {
 			m_waitingTime = sf::seconds(1);
 		} 
 		else {
 			m_waitingTime = sf::seconds(static_cast<float>(rand() % 8 + 3));
 		}
 	}
-}
-
-float CrowEnemy::getAggroRange() const {
-	return 400.f;
-}
-
-float CrowEnemy::getApproachingDistance() const {
-	return 10.f;
 }
 
 sf::Time CrowEnemy::getConfiguredWaitingTime() const {
@@ -74,7 +77,7 @@ sf::Time CrowEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(rand() % 4 + 2));
 }
 
-void CrowEnemy::load() {
+void CrowEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 

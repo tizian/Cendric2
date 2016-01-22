@@ -33,11 +33,12 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	attributes.damageLight = m_data.damage;
 	attributes.damageShadow = m_data.damage;
 
-	Enemy* copy = ObjectFactory::Instance()->createEnemy(enemy->getEnemyID(), m_level, m_screen, true);
-	copy->addAttributes(m_data.duration, attributes);
-	copy->setTimeToLive(m_data.duration);
-	copy->setPosition(enemy->getPosition());
-	m_screen->addObject(copy);
+	// TODO: add an allied copy of that mob.
+	//Enemy* copy = ObjectFactory::Instance()->createEnemy(enemy->getEnemyID(), m_level, m_screen, true);
+	//copy->addAttributes(m_data.duration, attributes);
+	//copy->setTimeToLive(m_data.duration);
+	//copy->setPosition(enemy->getPosition());
+	//m_screen->addObject(copy);
 	setDisposed();
 }
 

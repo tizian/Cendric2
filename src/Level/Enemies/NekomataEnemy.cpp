@@ -1,5 +1,7 @@
 #include "Level/Enemies/NekomataEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Level/EnemyBehavior/WalkingBehavior.h"
+#include "Level/EnemyBehavior/AggressiveBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Nekomata_blue, NekomataEnemy)
@@ -11,15 +13,10 @@ void NekomataEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	gold = rand() % 10 + 2;
 }
 
-NekomataEnemy::NekomataEnemy(Level* level, Screen* screen, bool isControlled) :
-	WalkingEnemy(level, screen, isControlled),
-	Enemy(level, screen, isControlled),
+NekomataEnemy::NekomataEnemy(Level* level, Screen* screen) :
+	Enemy(level, screen),
 	LevelMovableGameObject(level) {
-	m_id = EnemyID::Nekomata_blue;
-	load();
-	loadAttributes();
-	loadSpells();
-	m_jumpHeight = getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration());
+	load(EnemyID::Nekomata_blue);
 }
 
 void NekomataEnemy::loadAttributes() {
@@ -51,20 +48,35 @@ sf::Vector2f NekomataEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(30.f, 20.f);
 }
 
+MovingBehavior* NekomataEnemy::createMovingBehavior() {
+	WalkingBehavior* behavior = new WalkingBehavior(this);
+	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
+	behavior->setDistanceToAbyss(100.f);
+	behavior->setApproachingDistance(30.f);
+	return behavior;
+}
+
+AttackingBehavior* NekomataEnemy::createAttackingBehavior() {
+	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+	behavior->setAggroRange(500.f);
+	behavior->setAttackInput(std::bind(&NekomataEnemy::handleAttackInput, this));
+	return behavior;
+}
+
 void NekomataEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
-	if (m_currentTarget == nullptr) return;
-	if (distToTarget() < getAggroRange()) {
+	if (getCurrentTarget() == nullptr) return;
+	if (m_attackingBehavior->distToTarget() < m_attackingBehavior->getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (distToTarget() < 150.f) {
+		if (m_attackingBehavior->distToTarget() < 150.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
-		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
 
-void NekomataEnemy::load() {
+void NekomataEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 130.f, 70.f));
 	setSpriteOffset(sf::Vector2f(-10.f, -11.f));
 
@@ -150,18 +162,6 @@ float NekomataEnemy::getMaxVelocityX() const {
 
 sf::Time NekomataEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(6 * 80);
-}
-
-float NekomataEnemy::getAggroRange() const {
-	return 500.f;
-}
-
-float NekomataEnemy::getApproachingDistance() const {
-	return 30.f;
-}
-
-float NekomataEnemy::getDistanceToAbyss() const {
-	return 100.f;
 }
 
 int NekomataEnemy::getMentalStrength() const {

@@ -16,7 +16,7 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	Enemy* enemy = dynamic_cast<Enemy*>(m_mob);
-	if (enemy && enemy->isControlled()) {
+	if (enemy && enemy->isAlly()) {
 		m_isOwnerControlled = true;
 	}
 	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));

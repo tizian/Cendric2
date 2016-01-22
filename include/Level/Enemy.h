@@ -10,25 +10,37 @@
 #include "Enums/SpellID.h"
 #include "Enums/DamageType.h"
 #include "Enums/EnemyState.h"
+#include "Enums/EnemyAttitude.h"
 
 #include "Level/EnemyBuffBar.h"
 
 class Level;
 class LevelMainCharacter;
 class Spell;
+class MovingBehavior;
+class AttackingBehavior;
 
 // An enemy in a level
 class Enemy : virtual public LevelMovableGameObject {
+	friend class MovingBehavior;
+	friend class WalkingBehavior;
+	friend class AttackingBehavior;
+	friend class AllyBehavior;
+	friend class AggressiveBehavior;
+	friend class FlyingBehavior;
 public:
-	Enemy(Level* level, Screen* screen, bool isControlled = false);
+	Enemy(Level* level, Screen* screen);
 	virtual ~Enemy();
 
-	virtual void load() = 0;
+	void load(EnemyID id);
 
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onRightClick() override;
 	void onMouseOver() override;
 	void update(const sf::Time& frameTime) override;
+	void handleMovementInput() override;
+	void handleAttackInput() override;
+	void updateAnimation(const sf::Time& frameTime) override;
 
 	void onHit(Spell* spell) override;
 	// the enemy flees for the given time
@@ -43,25 +55,31 @@ public:
 	void setPersistent(bool value);
 	// the object ID in the level enemy object layer.
 	void setObjectID(int id);
-	// sets the time to live for a controlled enemy
-	void setTimeToLive(const sf::Time& ttl);
 
-	bool isControlled() const;
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
+	EnemyAttitude getAttitude() const;
 	// a level, ranges from 0 to 4. An enemy can only be feared / stunned / resurrected, if the level of its spell is high enough.
 	// default is 0. A enemy with level 4 can never be feared / stunned / controlled or affected in any other way!!
 	virtual int getMentalStrength() const;
 	// determines the distance from the top of the enemies bounding box to its
 	// hp bar. Default is 20px.
 	virtual float getConfiguredDistanceToHPBar() const;
+	// returns whether the enemy is an ally of cendric
+	bool isAlly() const;
+
 	virtual void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const = 0;
 
 protected:
+	LevelMainCharacter* m_mainChar;
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
 	virtual void loadAttributes() = 0;
 	// loads spells and adds them to the spell manager. default does nothing.
 	virtual void loadSpells() = 0;
+	// loads the animation
+	virtual void loadAnimation() = 0;
+	// loads the behavior
+	void loadBehavior();
 	// loads/updates hp bar
 	virtual void updateHpBar();
 
@@ -70,27 +88,18 @@ protected:
 	bool m_isPersistent = false;
 	// spells of these damage types won't hurt. default is empty.
 	std::vector<DamageType> m_immuneDamageTypes;
-	// when this bool is set to true, the enemy will help the player instead of hurting it
-	bool m_isControlled;
-	sf::Time m_timeToLive = sf::Time::Zero;
 
 	// AI
 	EnemyState m_enemyState = EnemyState::Idle;
 	virtual void updateEnemyState(const sf::Time& frameTime);
-	virtual void updateAggro();
-	// if the enemy is not in this range, its state is idle and it will do some random movement.
-	// inside, it will probably chase & attack the main char.
-	virtual float getAggroRange() const = 0;
 	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
 	virtual bool getFleeCondition() const;
-	// the distance from the center of the enemy to the center of the main char at which the enemy approaches the main char.
-	virtual float getApproachingDistance() const = 0;
-	// the target to be destroyed!
-	LevelMovableGameObject* m_currentTarget = nullptr;
-	LevelMainCharacter* m_mainChar;
-	std::vector<GameObject*>* m_enemies;
-	float distToTarget() const;
-	virtual void makeRandomDecision() = 0;
+	// creates the moving behavior
+	virtual MovingBehavior* createMovingBehavior() = 0;
+	// creates the attacking behavior
+	virtual AttackingBehavior* createAttackingBehavior() = 0;
+	const LevelMovableGameObject* getCurrentTarget() const;
+	
 	// time until the enemy can attack after it has taken a hit
 	sf::Time m_recoveringTime = sf::Time::Zero;
 	// time stunned
@@ -110,6 +119,9 @@ protected:
 	virtual sf::Time getConfiguredFearedTime() const;
 	virtual sf::Time getConfiguredWaitingTime() const;
 	virtual sf::Time getConfiguredChasingTime() const;
+
+	MovingBehavior* m_movingBehavior = nullptr;
+	AttackingBehavior* m_attackingBehavior = nullptr;
 
 private:
 	sf::RectangleShape m_hpBar;

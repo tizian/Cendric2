@@ -7,18 +7,19 @@
 #include "Screen.h"
 
 // A flying crow
-class CrowEnemy : public FlyingEnemy {
+class CrowEnemy : public Enemy {
 public:
-	CrowEnemy(Level* level, Screen* screen, bool isControlled = false);
+	CrowEnemy(Level* level, Screen* screen);
 	~CrowEnemy() {}
 
-	void load() override;
+	void loadAnimation() override;
+
+	MovingBehavior* createMovingBehavior() override;
+	AttackingBehavior* createAttackingBehavior() override;
 
 	float getMaxVelocityYUp() const override;
 	float getMaxVelocityYDown() const override;
 	float getMaxVelocityX() const override;
-	float getApproachingDistance() const override;
-	float getAggroRange() const override;
 
 	sf::Time getConfiguredWaitingTime() const override;
 	sf::Time getConfiguredChasingTime() const override;

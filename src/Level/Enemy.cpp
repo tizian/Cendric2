@@ -1,4 +1,6 @@
 #include "Level/Enemy.h"
+#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/EnemyBehavior/AttackingBehavior.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
@@ -9,29 +11,29 @@ using namespace std;
 const float Enemy::HP_BAR_HEIGHT = 3.f;
 const float Enemy::PICKUP_RANGE = 100.f;
 
-Enemy::Enemy(Level* level, Screen* screen, bool isControlled) : LevelMovableGameObject(level) {
+Enemy::Enemy(Level* level, Screen* screen) : LevelMovableGameObject(level) {
 	m_mainChar = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
-	m_enemies = screen->getObjects(GameObjectType::_Enemy);
-	m_isControlled = isControlled;
 	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = screen;
 	m_spellManager = new SpellManager(this);
 	m_questTarget.first = "";
 
-	// load hp bar
-	m_hpBar.setFillColor(m_isControlled ? sf::Color::Green : sf::Color::Red);
-	updateHpBar();
-
 	m_buffBar = new EnemyBuffBar(this);
-
-	if (!m_isControlled) {
-		m_currentTarget = m_mainChar;
-	}
 }
 
 Enemy::~Enemy() {
 	delete m_lootWindow;
 	delete m_buffBar;
+	delete m_movingBehavior;
+	delete m_attackingBehavior;
+}
+
+void Enemy::load(EnemyID id) {
+	m_id = id;
+	loadAnimation();
+	loadAttributes();
+	loadSpells();
+	loadBehavior();
 }
 
 bool Enemy::getFleeCondition() const {
@@ -46,11 +48,11 @@ void Enemy::onHit(Spell* spell) {
 	}
 	// check for owner
 	if (const Enemy* enemy = dynamic_cast<const Enemy*>(spell->getOwner())) {
-		if (m_isControlled && enemy->isControlled() || !m_isControlled && !enemy->isControlled()) {
+		if (getAttitude() == enemy->getAttitude()) {
 			return;
 		}
 	}
-	if (m_isControlled && spell->getOwner()->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (isAlly() && spell->getOwner()->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
 		return;
 	}
 	// check for immune damage types, if yes, the spell will disappear, absorbed by the immuneness of this enemy
@@ -75,7 +77,9 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
 
 void Enemy::update(const sf::Time& frameTime) {
 	updateEnemyState(frameTime);
-	updateAggro();
+	m_attackingBehavior->update(frameTime);
+	m_attackingBehavior->updateAggro();
+	m_movingBehavior->update(frameTime);
 	LevelMovableGameObject::update(frameTime);
 	updateHpBar();
 	if (m_showLootWindow && m_lootWindow != nullptr) {
@@ -84,13 +88,18 @@ void Enemy::update(const sf::Time& frameTime) {
 	}
 	m_showLootWindow = m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips);
 	m_buffBar->update(frameTime);
+}
 
-	if (m_isControlled) {
-		GameObject::updateTime(m_timeToLive, frameTime);
-		if (m_timeToLive == sf::Time::Zero) {
-			setDead();
-		}
-	}
+void Enemy::handleAttackInput() {
+	m_attackingBehavior->handleAttackInput();
+}
+
+void Enemy::updateAnimation(const sf::Time& frameTime) {
+	m_movingBehavior->updateAnimation();
+}
+
+void Enemy::handleMovementInput() {
+	m_movingBehavior->handleMovementInput();
 }
 
 void Enemy::updateHpBar() {
@@ -98,10 +107,17 @@ void Enemy::updateHpBar() {
 	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
 }
 
-float Enemy::distToTarget() const {
-	if (m_currentTarget == nullptr) return 10000.f;
-	sf::Vector2f dist = m_currentTarget->getCenter() - getCenter();
-	return sqrt(dist.x * dist.x + dist.y * dist.y);
+void Enemy::loadBehavior() {
+	// attacking behavior
+	delete m_attackingBehavior;
+	m_attackingBehavior = createAttackingBehavior();
+
+	delete m_movingBehavior;
+	m_movingBehavior = createMovingBehavior();
+
+	// hp bar fill color is dependent on attacking behavior
+	m_hpBar.setFillColor(m_attackingBehavior->getConfiguredHealthColor());
+	updateHpBar();
 }
 
 sf::Time Enemy::getConfiguredRecoveringTime() const {
@@ -123,10 +139,6 @@ sf::Time Enemy::getConfiguredFearedTime() const {
 
 sf::Time Enemy::getConfiguredChasingTime() const {
 	return sf::seconds(1);
-}
-
-bool Enemy::isControlled() const {
-	return m_isControlled;
 }
 
 GameObjectType Enemy::getConfiguredType() const {
@@ -186,68 +198,24 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 		m_decisionTime == sf::Time::Zero) {
 		// decide again
 		m_decisionTime = getConfiguredRandomDecisionTime();
-		makeRandomDecision();
+		m_movingBehavior->makeRandomDecision();
 	}
 }
 
-void Enemy::updateAggro() {
-	if (m_enemyState == EnemyState::Chasing && getFleeCondition()) {
-		m_fearedTime = getConfiguredFearedTime();
-		return;
-	}
-	if (m_currentTarget == nullptr || m_currentTarget->isDead() || m_currentTarget->isDisposed()) {
-		m_currentTarget = nullptr;
-	}
-	if (m_enemyState != EnemyState::Idle) return;
+bool Enemy::isAlly() const {
+	return m_attackingBehavior->getAttitude() == EnemyAttitude::Ally;
+}
 
-	bool isInAggroRange = false;
-	if (!m_isControlled) {
-		// handle main character aggro
-		float invisibilityScaler = 1.f;
-		int invLevel = m_mainChar->getInvisibilityLevel();
-		int mentalStr = getMentalStrength();
-		if (invLevel == 0) {
-			invisibilityScaler = 1.f;
-		}
-		else if (invLevel > mentalStr) {
-			invisibilityScaler = 0.f;
-		}
-		else {
-			invisibilityScaler = 1.f / (2 * (6 - mentalStr)) + 1.f / (invLevel + 1);
-		}
-		isInAggroRange = distToTarget() < (getAggroRange() * invisibilityScaler);
-		if (isInAggroRange) {
-			m_chasingTime = getConfiguredChasingTime();
-			return;
-		}
-	}
-	else {
-		// search for new target
-		Enemy* nearest = nullptr;
-		float nearestDistance = 10000.f;
-		for (auto& go : *m_enemies) {
-			if (!go->isViewable()) continue;
-			Enemy* enemy = dynamic_cast<Enemy*>(go);
-			if (enemy->isDead() || enemy->isControlled()) continue;
-			sf::Vector2f dist = go->getCenter() - getCenter();
-			float distance = sqrt(dist.x * dist.x + dist.y * dist.y);
-			if (distance < nearestDistance) {
-				nearestDistance = distance;
-				nearest = enemy;
-			}
-		}
-		if (nearest == nullptr) {
-			m_currentTarget = nullptr;
-			m_waitingTime = getConfiguredWaitingTime();
-			return;
-		}
-		m_currentTarget = nearest;
-		m_chasingTime = getConfiguredChasingTime();
-	}
+const LevelMovableGameObject* Enemy::getCurrentTarget() const {
+	return m_attackingBehavior->getCurrentTarget();
 }
 
 EnemyID Enemy::getEnemyID() const {
 	return m_id;
+}
+
+EnemyAttitude Enemy::getAttitude() const {
+	return m_attackingBehavior->getAttitude();
 }
 
 float Enemy::getConfiguredDistanceToHPBar() const {
@@ -280,11 +248,6 @@ void Enemy::setPersistent(bool value) {
 	m_isPersistent = value;
 }
 
-void Enemy::setTimeToLive(const sf::Time& ttl) {
-	if (!m_isControlled) return;
-	m_timeToLive = ttl;
-}
-
 void Enemy::setFeared(const sf::Time &fearedTime) {
 	m_fearedTime = fearedTime;
 	m_buffBar->addFeared(fearedTime);
@@ -302,14 +265,14 @@ void Enemy::addDamageOverTime(const DamageOverTimeData& data) {
 }
 
 void Enemy::onMouseOver() {
-	if (m_isDead && !m_isControlled) {
+	if (m_isDead && !isAlly()) {
 		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
 		m_showLootWindow = true;
 	}
 }
 
 void Enemy::onRightClick() {
-	if (m_isDead && !m_isControlled) {
+	if (m_isDead && !isAlly()) {
 		// check if the enemy body is in range
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 
@@ -331,7 +294,7 @@ void Enemy::setDead() {
 	LevelMovableGameObject::setDead();
 	m_buffBar->clear();
 
-	if (m_isControlled) {
+	if (isAlly()) {
 		setDisposed();
 		return;
 	}
@@ -339,6 +302,7 @@ void Enemy::setDead() {
 	if (m_isPersistent) {
 		return;
 	}
+
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
 	if (!m_questTarget.first.empty()) {

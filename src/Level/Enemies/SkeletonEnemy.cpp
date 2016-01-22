@@ -1,5 +1,7 @@
 #include "Level/Enemies/SkeletonEnemy.h"
 #include "Level/LevelMainCharacter.h"
+#include "Level/EnemyBehavior/WalkingBehavior.h"
+#include "Level/EnemyBehavior/AggressiveBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Skeleton, SkeletonEnemy)
@@ -10,15 +12,10 @@ void SkeletonEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	gold = rand() % 30 + 210;
 }
 
-SkeletonEnemy::SkeletonEnemy(Level* level, Screen* screen, bool isControlled) :
-	WalkingEnemy(level, screen, isControlled),
-	Enemy(level, screen, isControlled),
+SkeletonEnemy::SkeletonEnemy(Level* level, Screen* screen) :
+	Enemy(level, screen),
 	LevelMovableGameObject(level) {
-	m_id = EnemyID::Skeleton;
-	load();
-	loadAttributes();
-	loadSpells();
-	m_jumpHeight = getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration());
+	load(EnemyID::Skeleton);
 }
 
 void SkeletonEnemy::loadAttributes() {
@@ -48,12 +45,12 @@ sf::Vector2f SkeletonEnemy::getConfiguredSpellOffset() const {
 }
 
 void SkeletonEnemy::handleAttackInput() {
-	if (distToTarget() < 180.f) {
-		m_spellManager->executeCurrentSpell(m_currentTarget->getCenter());
+	if (m_attackingBehavior->distToTarget() < 180.f) {
+		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
 
-void SkeletonEnemy::load() {
+void SkeletonEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 135.f));
 	setSpriteOffset(sf::Vector2f(-35.f, -15.f));
 
@@ -100,6 +97,21 @@ void SkeletonEnemy::load() {
 	playCurrentAnimation(true);
 }
 
+MovingBehavior* SkeletonEnemy::createMovingBehavior() {
+	WalkingBehavior* behavior = new WalkingBehavior(this);
+	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
+	behavior->setDistanceToAbyss(100.f);
+	behavior->setApproachingDistance(30.f);
+	return behavior;
+}
+
+AttackingBehavior* SkeletonEnemy::createAttackingBehavior() {
+	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+	behavior->setAggroRange(800.f);
+	behavior->setAttackInput(std::bind(&SkeletonEnemy::handleAttackInput, this));
+	return behavior;
+}
+
 float SkeletonEnemy::getMaxVelocityYUp() const {
 	return 600.f;
 }
@@ -114,18 +126,6 @@ float SkeletonEnemy::getMaxVelocityX() const {
 
 sf::Time SkeletonEnemy::getConfiguredFightAnimationTime() const {
 	return sf::milliseconds(8 * 50);
-}
-
-float SkeletonEnemy::getAggroRange() const {
-	return 800.f;
-}
-
-float SkeletonEnemy::getApproachingDistance() const {
-	return 30.f;
-}
-
-float SkeletonEnemy::getDistanceToAbyss() const {
-	return 100.f;
 }
 
 int SkeletonEnemy::getMentalStrength() const {

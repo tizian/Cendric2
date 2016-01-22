@@ -1,27 +1,27 @@
 #pragma once
 
 #include "global.h"
-#include "Level/WalkingEnemy.h"
+#include "Level/Enemy.h"
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
 
 // A spooky Nekomata in a level
-class NekomataEnemy : public WalkingEnemy {
+class NekomataEnemy : public Enemy {
 public:
-	NekomataEnemy(Level* level, Screen* screen, bool isControlled = false);
+	NekomataEnemy(Level* level, Screen* screen);
 	virtual ~NekomataEnemy() {}
 
-	void load() override;
+	void loadAnimation() override;
 
-	float getApproachingDistance() const override;
-	float getAggroRange() const override;
+	MovingBehavior* createMovingBehavior() override;
+	AttackingBehavior* createAttackingBehavior() override;
+
 	sf::Time getConfiguredFightAnimationTime() const override;
 	float getMaxVelocityYUp() const override;
 	float getMaxVelocityYDown() const override;
 	float getMaxVelocityX() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
-	float getDistanceToAbyss() const override;
 	void updateAnimation(const sf::Time& frameTime) override;
 	int getMentalStrength() const override;
 

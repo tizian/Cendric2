@@ -3,7 +3,7 @@
 
 #define REGISTER_ENEMY(ID, TYPE) \
     static Registrar registrar(ID, \
-        [](Level* l, Screen* s, bool c) -> Enemy* { return new TYPE(l, s, c);});
+        [](Level* l, Screen* s) -> Enemy* { return new TYPE(l, s);});
 
 #define REGISTER_LEVEL_DYNAMIC_TILE(ID, TYPE) \
     static Registrar registrar(ID, \

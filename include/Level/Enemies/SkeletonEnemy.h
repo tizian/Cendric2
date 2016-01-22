@@ -1,26 +1,26 @@
 #pragma once
 
 #include "global.h"
-#include "Level/WalkingEnemy.h"
+#include "Level/Enemy.h"
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
 
-class SkeletonEnemy : public WalkingEnemy {
+class SkeletonEnemy : public Enemy {
 public:
-	SkeletonEnemy(Level* level, Screen* screen, bool isControlled = false);
+	SkeletonEnemy(Level* level, Screen* screen);
 	virtual ~SkeletonEnemy() {}
 
-	void load() override;
+	void loadAnimation() override;
 
-	float getApproachingDistance() const override;
-	float getAggroRange() const override;
+	MovingBehavior* createMovingBehavior() override;
+	AttackingBehavior* createAttackingBehavior() override;
+
 	sf::Time getConfiguredFightAnimationTime() const override;
 	float getMaxVelocityYUp() const override;
 	float getMaxVelocityYDown() const override;
 	float getMaxVelocityX() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
-	float getDistanceToAbyss() const override;
 	int getMentalStrength() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
