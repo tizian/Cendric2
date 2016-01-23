@@ -1,8 +1,8 @@
 #include "Level/Enemies/SkeletonEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/EnemyBehavior/WalkingBehavior.h"
-#include "Level/EnemyBehavior/AggressiveBehavior.h"
-#include "Level/EnemyBehavior/AllyBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Skeleton, SkeletonEnemy)

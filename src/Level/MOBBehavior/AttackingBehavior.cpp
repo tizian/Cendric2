@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/AttackingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehavior.h"
 #include "Screens/LevelScreen.h"
 
 AttackingBehavior::AttackingBehavior(LevelMovableGameObject* mob) {

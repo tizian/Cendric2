@@ -1,5 +1,5 @@
 #include "Spells/LeapOfFaithSpell.h"
-#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehavior.h"
 
 LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 	m_gravityScale = gravityScale;

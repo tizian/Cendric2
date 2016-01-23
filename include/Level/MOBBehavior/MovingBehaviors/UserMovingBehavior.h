@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "InputController.h"
-#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehavior.h"
 
 // A moving behavior for the level main character
 class UserMovingBehavior : public MovingBehavior {

@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/EnemyMovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/EnemyMovingBehavior.h"
 
 EnemyMovingBehavior::EnemyMovingBehavior(Enemy* enemy) : MovingBehavior(enemy) {
 	m_enemy = enemy;

@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehavior.h"
 #include "Screens/LevelScreen.h"
 
 MovingBehavior::MovingBehavior(LevelMovableGameObject* mob) {

@@ -1,8 +1,8 @@
 #include "Level/LevelMovableGameObject.h"
 #include "SpellManager.h"
 #include "Level/Level.h"
-#include "Level/EnemyBehavior/MovingBehavior.h"
-#include "Level/EnemyBehavior/AttackingBehavior.h"
+#include "Level/MOBBehavior/MovingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehavior.h"
 
 LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject() {
 	m_level = level;

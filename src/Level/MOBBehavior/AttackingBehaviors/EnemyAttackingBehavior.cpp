@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/EnemyAttackingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/EnemyAttackingBehavior.h"
 #include "Screens/LevelScreen.h"
 
 EnemyAttackingBehavior::EnemyAttackingBehavior(Enemy* enemy) : AttackingBehavior(enemy) {

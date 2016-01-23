@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/AggressiveBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 
 AggressiveBehavior::AggressiveBehavior(Enemy* enemy) : 
 	EnemyAttackingBehavior(enemy),

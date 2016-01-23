@@ -2,7 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
 #include "Level/LevelEquipment.h"
-#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehavior.h"
 
 const sf::Color GhostFormSpell::GHOST_COLOR = sf::Color(100, 200, 255, 150);
 

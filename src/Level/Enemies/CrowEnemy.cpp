@@ -1,8 +1,8 @@
 #include "Level/Enemies/CrowEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/EnemyBehavior/FlyingBehavior.h"
-#include "Level/EnemyBehavior/AggressiveBehavior.h"
-#include "Level/EnemyBehavior/AllyBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/FlyingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Crow, CrowEnemy)

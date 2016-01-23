@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/ExtendedWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/ExtendedWalkingBehavior.h"
 
 ExtendedWalkingBehavior::ExtendedWalkingBehavior(Enemy* enemy) :
 WalkingBehavior(enemy),

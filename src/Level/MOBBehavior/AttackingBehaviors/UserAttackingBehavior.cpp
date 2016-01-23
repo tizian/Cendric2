@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/UserAttackingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
 
 UserAttackingBehavior::UserAttackingBehavior(LevelMainCharacter* mainChar) :
 	AttackingBehavior(mainChar) {

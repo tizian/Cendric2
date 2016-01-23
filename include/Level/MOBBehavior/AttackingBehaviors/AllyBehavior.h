@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/EnemyAttackingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/EnemyAttackingBehavior.h"
 
 // An allied enemy attacking behavior. These enemies help cendric and attack unfriendly enemies
 class AllyBehavior : public EnemyAttackingBehavior {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/WalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
 
 // A special moving behavior for walking enemies.
 // with jumping_start and fighting_start game object states.

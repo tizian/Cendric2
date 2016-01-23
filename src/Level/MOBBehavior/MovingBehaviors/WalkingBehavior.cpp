@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/WalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"

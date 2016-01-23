@@ -1,7 +1,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
-#include "Level/EnemyBehavior/UserAttackingBehavior.h"
-#include "Level/EnemyBehavior/UserMovingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);

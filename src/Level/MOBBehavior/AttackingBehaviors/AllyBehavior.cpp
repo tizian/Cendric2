@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/AllyBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 
 AllyBehavior::AllyBehavior(Enemy* enemy) :
 	EnemyAttackingBehavior(enemy),

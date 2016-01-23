@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/UserMovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 

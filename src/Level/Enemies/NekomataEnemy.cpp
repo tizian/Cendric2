@@ -1,8 +1,8 @@
 #include "Level/Enemies/NekomataEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/EnemyBehavior/ExtendedWalkingBehavior.h"
-#include "Level/EnemyBehavior/AggressiveBehavior.h"
-#include "Level/EnemyBehavior/AllyBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/ExtendedWalkingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Nekomata_blue, NekomataEnemy)

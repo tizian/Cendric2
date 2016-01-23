@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/AttackingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehavior.h"
 #include "Enums/EnemyAttitude.h"
 
 // An attacking behavior for enemies

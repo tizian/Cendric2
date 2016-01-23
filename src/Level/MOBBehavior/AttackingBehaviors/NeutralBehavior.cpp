@@ -1,4 +1,4 @@
-#include "Level/EnemyBehavior/NeutralBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
 
 NeutralBehavior::NeutralBehavior(Enemy* enemy) : 
 	EnemyAttackingBehavior(enemy),

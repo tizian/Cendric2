@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/EnemyMovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/EnemyMovingBehavior.h"
 
 // A moving behavior for walking enemies.
 class WalkingBehavior : virtual public EnemyMovingBehavior {
