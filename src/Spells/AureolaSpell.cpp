@@ -40,8 +40,9 @@ void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vec
 }
 
 void AureolaSpell::update(const sf::Time& frameTime) {
-	calculateNextPosition(frameTime, m_nextPosition);
-	sf::Vector2f div = m_nextPosition - getPosition();
+	sf::Vector2f nextPosition;
+	calculateNextPosition(frameTime, nextPosition);
+	sf::Vector2f div = nextPosition - getPosition();
 
 	// check collisions with main char
 	if (m_ownerType != GameObjectType::_LevelMainCharacter) {

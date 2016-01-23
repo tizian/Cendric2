@@ -1,5 +1,10 @@
 #include "Level/EnemyBehavior/AggressiveBehavior.h"
-#include "Level/LevelMainCharacter.h"
+
+AggressiveBehavior::AggressiveBehavior(Enemy* enemy) : 
+	EnemyAttackingBehavior(enemy),
+	AttackingBehavior(enemy) {
+	m_currentTarget = m_mainChar;
+}
 
 EnemyAttitude AggressiveBehavior::getAttitude() const {
 	return EnemyAttitude::Aggressive;
@@ -10,20 +15,20 @@ sf::Color AggressiveBehavior::getConfiguredHealthColor() const {
 } 
 
 void AggressiveBehavior::updateAggro() {
-	if (m_enemy->m_enemyState == EnemyState::Chasing && m_enemy->getFleeCondition()) {
-		m_enemy->m_fearedTime = m_enemy->getConfiguredFearedTime();
+	if (m_enemy->getEnemyState() == EnemyState::Chasing && m_enemy->getFleeCondition()) {
+		m_enemy->setFleeing();
 		return;
 	}
 	if (m_currentTarget == nullptr || m_currentTarget->isDead() || m_currentTarget->isDisposed()) {
 		m_currentTarget = nullptr;
 	}
-	if (m_enemy->m_enemyState != EnemyState::Idle) return;
+	if (m_enemy->getEnemyState() != EnemyState::Idle) return;
 
 	bool isInAggroRange = false;
 
 	// handle main character aggro
 	float invisibilityScaler = 1.f;
-	int invLevel = m_enemy->m_mainChar->getInvisibilityLevel();
+	int invLevel = m_mainChar->getInvisibilityLevel();
 	int mentalStr = m_enemy->getMentalStrength();
 	if (invLevel == 0) {
 		invisibilityScaler = 1.f;
@@ -36,7 +41,7 @@ void AggressiveBehavior::updateAggro() {
 	}
 	isInAggroRange = distToTarget() < (getAggroRange() * invisibilityScaler);
 	if (isInAggroRange) {
-		m_enemy->m_chasingTime = m_enemy->getConfiguredChasingTime();
+		m_enemy->setChasing();
 		return;
 	}
 }

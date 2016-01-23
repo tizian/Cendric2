@@ -8,9 +8,9 @@ LevelEquipment::~LevelEquipment() {
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
 	sf::Vector2f offset(-60.f, -30.f);
-	if (!m_mainChar->getIsFacingRight())
+	if (!m_mainChar->isFacingRight())
 		offset.x = -offset.x - getBoundingBox()->width;
-	if (m_mainChar->getIsUpsideDown())
+	if (m_mainChar->isUpsideDown())
 		offset.y = m_mainChar->getBoundingBox()->height - offset.y - getBoundingBox()->height;
 
 	position.x = (mainCharPosition + offset).x;
@@ -22,7 +22,7 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
 	if (m_lightObject != nullptr) {
 		sf::Vector2f lightPosition = mainCharPosition + m_lightObjectOffset;
-		if (!m_mainChar->getIsFacingRight()) {
+		if (!m_mainChar->isFacingRight()) {
 			lightPosition.x -= 2 * m_lightObjectOffset.x;
 		}
 		
@@ -37,14 +37,14 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		setDisposed();
 		return;
 	}
-	bool newFacingRight = m_mainChar->getIsFacingRight();
+	bool newFacingRight = m_mainChar->isFacingRight();
 	if (m_state != newState || newFacingRight != m_isFacingRight) {
 		m_state = newState;
 		m_isFacingRight = newFacingRight;
 		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 	}
-	if (m_mainChar->getIsUpsideDown() != m_animatedSprite.isFlippedY()) {
-		m_animatedSprite.setFlippedY(m_mainChar->getIsUpsideDown());
+	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
+		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());
 	}
 
 	if (m_isCopyingMainCharColor)

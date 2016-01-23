@@ -1,4 +1,5 @@
 #include "Spells/LeapOfFaithSpell.h"
+#include "Level/EnemyBehavior/MovingBehavior.h"
 
 LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 	m_gravityScale = gravityScale;
@@ -13,12 +14,12 @@ void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
-	m_isFacingRight = m_mob->getIsFacingRight();
+	m_isFacingRight = m_mob->isFacingRight();
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), !m_isFacingRight);
 	playCurrentAnimation(false);
 	
 	Spell::load(bean, mob, target);
-	m_mob->setGravityScale(m_gravityScale);
+	m_mob->getMovingBehavior()->setGravityScale(m_gravityScale);
 	loadParticleSystem();
 }
 
@@ -28,7 +29,7 @@ sf::Vector2f LeapOfFaithSpell::getConfiguredPositionOffset() const {
 
 void LeapOfFaithSpell::setDisposed() {
 	Spell::setDisposed();
-	m_mob->setGravityScale(1.f);
+	m_mob->getMovingBehavior()->setGravityScale(1.f);
 	m_lightObject->setDisposed();
 }
 
@@ -53,13 +54,14 @@ void LeapOfFaithSpell::render(sf::RenderTarget& target) {
 }
 
 void LeapOfFaithSpell::update(const sf::Time& frameTime) {
-	if (m_isFacingRight != m_mob->getIsFacingRight()) {
-		m_isFacingRight = m_mob->getIsFacingRight();
+	if (m_isFacingRight != m_mob->isFacingRight()) {
+		m_isFacingRight = m_mob->isFacingRight();
 		setCurrentAnimation(getAnimation(GameObjectState::Idle), !m_isFacingRight);
 	}
 
-	calculatePositionAccordingToMob(m_nextPosition);
-	setPosition(m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculatePositionAccordingToMob(nextPosition);
+	setPosition(nextPosition);
 
 	MovableGameObject::update(frameTime);
 

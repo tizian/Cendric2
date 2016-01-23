@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/EnemyBehavior/WalkingBehavior.h"
 #include "Level/EnemyBehavior/AggressiveBehavior.h"
+#include "Level/EnemyBehavior/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Skeleton, SkeletonEnemy)
@@ -45,7 +46,7 @@ sf::Vector2f SkeletonEnemy::getConfiguredSpellOffset() const {
 }
 
 void SkeletonEnemy::handleAttackInput() {
-	if (m_attackingBehavior->distToTarget() < 180.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 180.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
@@ -91,41 +92,33 @@ void SkeletonEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	m_isFacingRight = true;
-	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 }
 
 MovingBehavior* SkeletonEnemy::createMovingBehavior() {
 	WalkingBehavior* behavior = new WalkingBehavior(this);
-	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(30.f);
+	behavior->setMaxVelocityYDown(800.f);
+	behavior->setMaxVelocityYUp(600.f);
+	behavior->setMaxVelocityX(150.f);
+	behavior->setFightAnimationTime(sf::milliseconds(8 * 50));
+	behavior->calculateJumpHeight();
 	return behavior;
 }
 
-AttackingBehavior* SkeletonEnemy::createAttackingBehavior() {
-	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+AttackingBehavior* SkeletonEnemy::createAttackingBehavior(bool asAlly) {
+	EnemyAttackingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyBehavior(this);
+	}
+	else {
+		behavior = new AggressiveBehavior(this);
+	}
 	behavior->setAggroRange(800.f);
 	behavior->setAttackInput(std::bind(&SkeletonEnemy::handleAttackInput, this));
 	return behavior;
-}
-
-float SkeletonEnemy::getMaxVelocityYUp() const {
-	return 600.f;
-}
-
-float SkeletonEnemy::getMaxVelocityYDown() const {
-	return 800.f;
-}
-
-float SkeletonEnemy::getMaxVelocityX() const {
-	return 150.f;
-}
-
-sf::Time SkeletonEnemy::getConfiguredFightAnimationTime() const {
-	return sf::milliseconds(8 * 50);
 }
 
 int SkeletonEnemy::getMentalStrength() const {

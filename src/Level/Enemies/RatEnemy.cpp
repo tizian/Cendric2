@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/EnemyBehavior/WalkingBehavior.h"
 #include "Level/EnemyBehavior/AggressiveBehavior.h"
+#include "Level/EnemyBehavior/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Rat, RatEnemy)
@@ -42,24 +43,33 @@ sf::Vector2f RatEnemy::getConfiguredSpellOffset() const {
 
 MovingBehavior* RatEnemy::createMovingBehavior() {
 	WalkingBehavior* behavior = new WalkingBehavior(this);
-	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
 	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(10.f);
+	behavior->setMaxVelocityYDown(400.f);
+	behavior->setMaxVelocityYUp(400.f);
+	behavior->setMaxVelocityX(100.f);
+	behavior->setFightAnimationTime(sf::milliseconds(4 * 80));
+	behavior->calculateJumpHeight();
 	return behavior;
 }
 
-AttackingBehavior* RatEnemy::createAttackingBehavior() {
-	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+AttackingBehavior* RatEnemy::createAttackingBehavior(bool asAlly) {
+	EnemyAttackingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyBehavior(this);
+	}
+	else {
+		behavior = new AggressiveBehavior(this);
+	}
 	behavior->setAggroRange(300.f);
 	behavior->setAttackInput(std::bind(&RatEnemy::handleAttackInput, this));
 	return behavior;
 }
 
-
 void RatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
-	if (m_attackingBehavior->distToTarget() < 100.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 100.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
@@ -108,24 +118,6 @@ void RatEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	m_isFacingRight = true;
-	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
-}
-
-sf::Time RatEnemy::getConfiguredFightAnimationTime() const {
-	return sf::milliseconds(4 * 80);
-}
-
-float RatEnemy::getMaxVelocityYUp() const {
-	return 400.f;
-}
-
-float RatEnemy::getMaxVelocityYDown() const {
-	return 400.f;
-}
-
-float RatEnemy::getMaxVelocityX() const {
-	return 100.f;
 }

@@ -30,11 +30,11 @@ void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
 	m_hasDamaged = true;
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
 		if (enemy->getMentalStrength() < m_strength) {
-			enemy->setAccelerationX(m_mob->getIsFacingRight() ? 4 * m_pushAcceleration : -4 * m_pushAcceleration);
+			enemy->setAccelerationX(m_mob->isFacingRight() ? 4 * m_pushAcceleration : -4 * m_pushAcceleration);
 		}
 	}
 	else {
-		target->setAccelerationX(m_mob->getIsFacingRight() ? m_pushAcceleration : -m_pushAcceleration);
+		target->setAccelerationX(m_mob->isFacingRight() ? m_pushAcceleration : -m_pushAcceleration);
 	}
 }
 
@@ -92,7 +92,7 @@ void WindGustSpell::loadParticleSystem() {
 }
 
 void WindGustSpell::updateParticleSystemPosition() {
-	if (!m_mob->getIsFacingRight()) {
+	if (!m_mob->isFacingRight()) {
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
 		m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width - SPELL_OFFSET;

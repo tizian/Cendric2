@@ -1,6 +1,7 @@
 #include "Level/Enemy.h"
-#include "Level/EnemyBehavior/MovingBehavior.h"
-#include "Level/EnemyBehavior/AttackingBehavior.h"
+#include "Level/EnemyBehavior/EnemyMovingBehavior.h"
+#include "Level/EnemyBehavior/EnemyAttackingBehavior.h"
+#include "Level/EnemyBehavior/AllyBehavior.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
@@ -24,8 +25,6 @@ Enemy::Enemy(Level* level, Screen* screen) : LevelMovableGameObject(level) {
 Enemy::~Enemy() {
 	delete m_lootWindow;
 	delete m_buffBar;
-	delete m_movingBehavior;
-	delete m_attackingBehavior;
 }
 
 void Enemy::load(EnemyID id) {
@@ -77,9 +76,6 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
 
 void Enemy::update(const sf::Time& frameTime) {
 	updateEnemyState(frameTime);
-	m_attackingBehavior->update(frameTime);
-	m_attackingBehavior->updateAggro();
-	m_movingBehavior->update(frameTime);
 	LevelMovableGameObject::update(frameTime);
 	updateHpBar();
 	if (m_showLootWindow && m_lootWindow != nullptr) {
@@ -90,33 +86,21 @@ void Enemy::update(const sf::Time& frameTime) {
 	m_buffBar->update(frameTime);
 }
 
-void Enemy::handleAttackInput() {
-	m_attackingBehavior->handleAttackInput();
-}
-
-void Enemy::updateAnimation(const sf::Time& frameTime) {
-	m_movingBehavior->updateAnimation();
-}
-
-void Enemy::handleMovementInput() {
-	m_movingBehavior->handleMovementInput();
-}
-
 void Enemy::updateHpBar() {
 	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
 	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
 }
 
 void Enemy::loadBehavior() {
-	// attacking behavior
-	delete m_attackingBehavior;
-	m_attackingBehavior = createAttackingBehavior();
-
-	delete m_movingBehavior;
-	m_movingBehavior = createMovingBehavior();
-
+	LevelMovableGameObject::loadBehavior();
+	// cast the two behavior components so that we only have to cast them once.
+	m_enemyAttackingBehavior = dynamic_cast<EnemyAttackingBehavior*>(m_attackingBehavior);
+	m_enemyMovingBehavior = dynamic_cast<EnemyMovingBehavior*>(m_movingBehavior);
+	if (m_enemyAttackingBehavior == nullptr || m_enemyMovingBehavior == nullptr) {
+		g_logger->logError("Enemy", "Enemies can only have valid enemy behaviors!");
+	}
 	// hp bar fill color is dependent on attacking behavior
-	m_hpBar.setFillColor(m_attackingBehavior->getConfiguredHealthColor());
+	m_hpBar.setFillColor(m_enemyAttackingBehavior->getConfiguredHealthColor());
 	updateHpBar();
 }
 
@@ -198,16 +182,16 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 		m_decisionTime == sf::Time::Zero) {
 		// decide again
 		m_decisionTime = getConfiguredRandomDecisionTime();
-		m_movingBehavior->makeRandomDecision();
+		m_enemyMovingBehavior->makeRandomDecision();
 	}
 }
 
 bool Enemy::isAlly() const {
-	return m_attackingBehavior->getAttitude() == EnemyAttitude::Ally;
+	return m_enemyAttackingBehavior->getAttitude() == EnemyAttitude::Ally;
 }
 
 const LevelMovableGameObject* Enemy::getCurrentTarget() const {
-	return m_attackingBehavior->getCurrentTarget();
+	return m_enemyAttackingBehavior->getCurrentTarget();
 }
 
 EnemyID Enemy::getEnemyID() const {
@@ -215,7 +199,7 @@ EnemyID Enemy::getEnemyID() const {
 }
 
 EnemyAttitude Enemy::getAttitude() const {
-	return m_attackingBehavior->getAttitude();
+	return m_enemyAttackingBehavior->getAttitude();
 }
 
 float Enemy::getConfiguredDistanceToHPBar() const {
@@ -224,6 +208,22 @@ float Enemy::getConfiguredDistanceToHPBar() const {
 
 int Enemy::getMentalStrength() const {
 	return 0;
+}
+
+EnemyState Enemy::getEnemyState() const {
+	return m_enemyState;
+}
+
+void Enemy::setWaiting() {
+	m_waitingTime = getConfiguredWaitingTime();
+}
+
+void Enemy::setChasing() {
+	m_chasingTime = getConfiguredChasingTime();
+}
+
+void Enemy::setFleeing() {
+	m_fearedTime = getConfiguredFearedTime();
 }
 
 void Enemy::setLoot(const std::map<string, int>& items, int gold) {
@@ -242,6 +242,19 @@ void Enemy::setQuestTarget(const std::pair<std::string, std::string>& questtarge
 
 void Enemy::setObjectID(int id) {
 	m_objectID = id;
+}
+
+void Enemy::setAlly(const sf::Time& ttl) {
+	delete m_attackingBehavior;
+	m_attackingBehavior = createAttackingBehavior(true);
+	AllyBehavior* allyBehavior = dynamic_cast<AllyBehavior*>(m_attackingBehavior);
+	if (allyBehavior == nullptr) {
+		g_logger->logError("Enemy::setAlly", "Enemy can't be risen as an ally, no AllyBehavior created.");
+		return;
+	}
+	allyBehavior->setTimeToLive(ttl);
+	m_enemyAttackingBehavior = allyBehavior;
+	m_hpBar.setFillColor(m_enemyAttackingBehavior->getConfiguredHealthColor());
 }
 
 void Enemy::setPersistent(bool value) {

@@ -39,8 +39,9 @@ void LightSpell::render(sf::RenderTarget& target) {
 }
 
 void LightSpell::update(const sf::Time& frameTime) {
-	calculatePositionAccordingToMob(m_nextPosition);
-	setPosition(m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculatePositionAccordingToMob(nextPosition);
+	setPosition(nextPosition);
 
 	MovableGameObject::update(frameTime);
 

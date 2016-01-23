@@ -30,8 +30,9 @@ void ShiftableBlockTile::load(int skinNr) {
 
 void ShiftableBlockTile::update(const sf::Time& frameTime) {
 	setAcceleration(sf::Vector2f(m_pushAcceleration, GRAVITY_ACCELERATION));
-	calculateNextPosition(frameTime, m_nextPosition);
-	checkCollisions(m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculateNextPosition(frameTime, nextPosition);
+	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	m_pushAcceleration = 0.f;
 }

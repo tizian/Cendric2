@@ -14,8 +14,9 @@ void InvisibilitySpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 }
 
 void InvisibilitySpell::update(const sf::Time& frameTime) {
-	calculatePositionAccordingToMob(m_nextPosition);
-	setPosition(m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculatePositionAccordingToMob(nextPosition);
+	setPosition(nextPosition);
 
 	MovableGameObject::update(frameTime);
 	m_ps->update(frameTime);

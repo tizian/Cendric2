@@ -1,22 +1,20 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/EnemyBehavior/EnemyMovingBehavior.h"
 
 // A moving behavior for walking enemies.
-class WalkingBehavior : public MovingBehavior {
+class WalkingBehavior : virtual public EnemyMovingBehavior {
 public:
-	WalkingBehavior(Enemy* enemy) : MovingBehavior(enemy) {};
-	~WalkingBehavior() {};
+	WalkingBehavior(Enemy* enemy);
+	virtual ~WalkingBehavior() {};
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void handleMovementInput() override;
 	void makeRandomDecision() override;
 	void updateAnimation() override;
+	void calculateJumpHeight();
 
-	void setJumpHeight(float height);
-
-	float getJumpHeight() const;
 
 	void setDistanceToAbyss(float distance);
 
@@ -24,7 +22,7 @@ public:
 
 	int getRandomDecision() const;
 
-private:
+protected:
 	bool m_jumps = false;
 	float m_distanceToAbyss = 0.f;
 	float m_jumpHeight = 0.f;

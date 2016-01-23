@@ -44,7 +44,7 @@ public:
 	
 	virtual const sf::Vector2f& getPosition() const;
 	const sf::FloatRect* getBoundingBox() const;
-	const sf::Vector2f getCenter() const;
+	sf::Vector2f getCenter() const;
 	// is the object currently visible inside this view + margin?
 	bool isViewable() const;
 	// returns whether the game object should be deleted
@@ -62,8 +62,7 @@ public:
 
 protected:
 	GameObjectState m_state;
-	sf::Vector2f m_nextPosition;
-	
+
 	Screen* m_screen = nullptr;
 	sf::RectangleShape m_debugBox;
 

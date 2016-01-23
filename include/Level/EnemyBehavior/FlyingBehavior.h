@@ -1,12 +1,12 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/EnemyBehavior/EnemyMovingBehavior.h"
 
 #include "Enums/LevelDynamicTileID.h"
 
 // A moving behavior for flying enemies.
-class FlyingBehavior : public MovingBehavior {
+class FlyingBehavior : public EnemyMovingBehavior {
 public:
 	FlyingBehavior(Enemy* enemy);
 	~FlyingBehavior() {};
@@ -15,7 +15,6 @@ public:
 	void updateAnimation() override;
 	void handleMovementInput() override;
 	void makeRandomDecision() override;
-
 
 private:
 	// a flying enemy will never fly into those and handle them as collidable tiles.

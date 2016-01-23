@@ -16,8 +16,9 @@ void MapMainCharacter::setCharacterCore(CharacterCore* core) {
 
 void MapMainCharacter::update(const sf::Time& frameTime) {
 	handleInput();
-	calculateNextPosition(frameTime, m_nextPosition);
-	checkCollisions(m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculateNextPosition(frameTime, nextPosition);
+	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	updateAnimation(frameTime);
 }

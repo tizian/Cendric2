@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
 #include "Level/LevelEquipment.h"
+#include "Level/EnemyBehavior/MovingBehavior.h"
 
 const sf::Color GhostFormSpell::GHOST_COLOR = sf::Color(100, 200, 255, 150);
 
@@ -10,23 +11,25 @@ GhostFormSpell::GhostFormSpell(const AttributeData& additionalDamage) : Spell() 
 }
 
 void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	float velocityScale = (bean.speed + mob->getMaxVelocityX()) / mob->getMaxVelocityX();
+	MovingBehavior* mb = mob->getMovingBehavior();
+	float velocityScale = (bean.speed + mb->getMaxVelocityX()) / mb->getMaxVelocityX();
 	SpellData data(bean);
 	data.speed = 0.f;
 	data.boundingBox = *mob->getBoundingBox();
 	Spell::load(data, mob, target);
 	loadParticleSystem(bean.speed);
 
-	m_mob->setMaxXVelocityScale(velocityScale);
-	m_mob->setIgnoreDynamicTiles(true);
+	mb->setMaxXVelocityScale(velocityScale);
+	mb->setIgnoreDynamicTiles(true);
 	m_mob->addAttributes(getActiveDuration(), m_additionalDamage);
 	m_lastSafePosition = m_mob->getPosition();
 	loadMask();
 }
 
 void GhostFormSpell::update(const sf::Time& frameTime) {
-	calculatePositionAccordingToMob(m_nextPosition);
-	setPosition(m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculatePositionAccordingToMob(nextPosition);
+	setPosition(nextPosition);
 	m_mob->setSpriteColor(GHOST_COLOR, sf::milliseconds(100));
 
 	MovableGameObject::update(frameTime);
@@ -49,8 +52,9 @@ void GhostFormSpell::setDisposed() {
 		m_mask->setDisposed();
 	}
 		
-	m_mob->setMaxXVelocityScale(1.f);
-	m_mob->setIgnoreDynamicTiles(false);
+	MovingBehavior* mb = m_mob->getMovingBehavior();
+	mb->setMaxXVelocityScale(1.f);
+	mb->setIgnoreDynamicTiles(false);
 	m_mob->setPosition(m_lastSafePosition);
 }
 
@@ -109,7 +113,7 @@ void GhostFormSpell::loadParticleSystem(float startVelocity) {
 }
 
 void GhostFormSpell::updateParticleSystemPosition() {
-	if (m_mob->getIsFacingRight()) {
+	if (m_mob->isFacingRight()) {
 		m_velGenerator->minAngle = 260.f;
 		m_velGenerator->maxAngle = 280.f;
 	}

@@ -9,12 +9,13 @@ void AntiGravitySpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 }
 
 void AntiGravitySpell::render(sf::RenderTarget& target) {
-	// nop ... yet.
+	// nop
 }
 
 void AntiGravitySpell::update(const sf::Time& frameTime) {
-	calculatePositionAccordingToMob(m_nextPosition);
-	setPosition(m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculatePositionAccordingToMob(nextPosition);
+	setPosition(nextPosition);
 	if (m_isDrawBoundingBox) {
 		m_debugBox.setPosition(getPosition());
 	}

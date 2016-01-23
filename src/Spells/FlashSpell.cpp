@@ -19,7 +19,7 @@ void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const 
 	playCurrentAnimation(true);
 	
 	Spell::load(data, mob, target);
-	m_isFlashingRight = mob->getIsFacingRight();
+	m_isFlashingRight = mob->isFacingRight();
 	
 	m_flashingTime = FLASHING_TIME;
 	m_flashDuration = FLASH_DURATION;

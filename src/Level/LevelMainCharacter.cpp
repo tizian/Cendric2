@@ -1,7 +1,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
-
-const sf::Time LevelMainCharacter::JUMP_GRACE_TIME = sf::milliseconds(100);
+#include "Level/EnemyBehavior/UserAttackingBehavior.h"
+#include "Level/EnemyBehavior/UserMovingBehavior.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
@@ -12,6 +12,27 @@ LevelMainCharacter::~LevelMainCharacter() {
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
 	m_spellKeyMap.clear();
 	delete m_debugInfo;
+}
+
+void LevelMainCharacter::load() {
+	loadAnimation();
+	loadBehavior();
+}
+
+MovingBehavior* LevelMainCharacter::createMovingBehavior() {
+	UserMovingBehavior* behavior = new UserMovingBehavior(this);
+	behavior->setMaxVelocityYUp(600.f);
+	behavior->setMaxVelocityYDown(800.f);
+	behavior->setMaxVelocityX(200.f);
+	behavior->setDampingGroundPerS(0.999f);
+	behavior->setFightAnimationTime(sf::milliseconds(5 * 70));
+	return behavior;
+}
+
+AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
+	UserAttackingBehavior* behavior = new UserAttackingBehavior(this);
+	behavior->setAttackInput(std::bind(&LevelMainCharacter::handleAttackInput, this));
+	return behavior;
 }
 
 void LevelMainCharacter::handleAttackInput() {
@@ -41,25 +62,6 @@ void LevelMainCharacter::handleAttackInput() {
 			setInvisibilityLevel(0);
 		}
 	}
-}
-
-void LevelMainCharacter::handleMovementInput() {
-	float newAccelerationX = getAcceleration().x;
-
-	if (g_inputController->isKeyActive(Key::Left)) {
-		m_nextIsFacingRight = false;
-		newAccelerationX -= getConfiguredWalkAcceleration();
-	}
-	if (g_inputController->isKeyActive(Key::Right)) {
-		m_nextIsFacingRight = true;
-		newAccelerationX += getConfiguredWalkAcceleration();
-	}
-	if (g_inputController->isKeyJustPressed(Key::Jump) && (m_isGrounded || m_jumpGraceTime > sf::Time::Zero)) {
-		m_jumpGraceTime = sf::Time::Zero;
-		setVelocityY(m_isFlippedGravity ? getConfiguredMaxVelocityYUp() : -getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-	}
-
-	setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -getGravityAcceleration() : getGravityAcceleration())));
 }
 
 void LevelMainCharacter::loadWeapon() {
@@ -168,12 +170,7 @@ void LevelMainCharacter::addDamage(int damage, DamageType damageType) {
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime) {
-	GameObject::updateTime(m_jumpGraceTime, frameTime);
-	bool wasGrounded = m_isGrounded;
 	LevelMovableGameObject::update(frameTime);
-	if (wasGrounded && !m_isGrounded) {
-		m_jumpGraceTime = JUMP_GRACE_TIME;
-	}
 	if (m_debugInfo) {
 		m_debugInfo->setString("x: " + std::to_string(getPosition().x) + " y: " + std::to_string(getPosition().y));
 		m_debugInfo->setPosition(getPosition() + sf::Vector2f(0.f, -30.f));
@@ -195,7 +192,7 @@ void LevelMainCharacter::setDebugBoundingBox(const sf::Color &debugColor) {
 	m_debugInfo->setColor(sf::Color::Red);
 }
 
-void LevelMainCharacter::load() {
+void LevelMainCharacter::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
 
@@ -241,32 +238,10 @@ void LevelMainCharacter::load() {
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	m_isFacingRight = true;
-	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
 	setDebugBoundingBox(sf::Color::White);
-}
-
-float LevelMainCharacter::getMaxVelocityYUp() const {
-	return 600.f;
-}
-
-float LevelMainCharacter::getMaxVelocityYDown() const {
-	return 800.f;
-}
-
-float LevelMainCharacter::getMaxVelocityX() const {
-	return 200.f;
-}
-
-float LevelMainCharacter::getConfiguredDampingGroundPersS() const {
-	return 0.999f;
-}
-
-sf::Time LevelMainCharacter::getConfiguredFightAnimationTime() const {
-	return sf::milliseconds(5 * 70);
 }
 
 GameObjectType LevelMainCharacter::getConfiguredType() const {

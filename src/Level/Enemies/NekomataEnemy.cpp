@@ -1,7 +1,8 @@
 #include "Level/Enemies/NekomataEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/EnemyBehavior/WalkingBehavior.h"
+#include "Level/EnemyBehavior/ExtendedWalkingBehavior.h"
 #include "Level/EnemyBehavior/AggressiveBehavior.h"
+#include "Level/EnemyBehavior/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Nekomata_blue, NekomataEnemy)
@@ -49,15 +50,27 @@ sf::Vector2f NekomataEnemy::getConfiguredSpellOffset() const {
 }
 
 MovingBehavior* NekomataEnemy::createMovingBehavior() {
-	WalkingBehavior* behavior = new WalkingBehavior(this);
-	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
+	ExtendedWalkingBehavior* behavior = new ExtendedWalkingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(30.f);
+	behavior->setMaxVelocityYDown(600.f);
+	behavior->setMaxVelocityYUp(600.f);
+	behavior->setMaxVelocityX(80.f);
+	behavior->setFightAnimationTime(sf::milliseconds(6 * 80));
+	behavior->setFightStartTime(sf::milliseconds(1 * 80));
+	behavior->setJumpStartTime(sf::milliseconds(3 * 80));
+	behavior->calculateJumpHeight();
 	return behavior;
 }
 
-AttackingBehavior* NekomataEnemy::createAttackingBehavior() {
-	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+AttackingBehavior* NekomataEnemy::createAttackingBehavior(bool asAlly) {
+	EnemyAttackingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyBehavior(this);
+	}
+	else {
+		behavior = new AggressiveBehavior(this);
+	}
 	behavior->setAggroRange(500.f);
 	behavior->setAttackInput(std::bind(&NekomataEnemy::handleAttackInput, this));
 	return behavior;
@@ -66,9 +79,9 @@ AttackingBehavior* NekomataEnemy::createAttackingBehavior() {
 void NekomataEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
-	if (m_attackingBehavior->distToTarget() < m_attackingBehavior->getAggroRange()) {
+	if (m_enemyAttackingBehavior->distToTarget() < m_enemyAttackingBehavior->getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (m_attackingBehavior->distToTarget() < 150.f) {
+		if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
@@ -138,93 +151,13 @@ void NekomataEnemy::loadAnimation() {
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	m_jumpStartTime = sf::seconds(3 * 0.08f);
-	m_fightStartTime = sf::seconds(1 * 0.08f);
-
 	// initial values
-	m_state = GameObjectState::Idle;
-	m_isFacingRight = true;
-	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
-}
-
-float NekomataEnemy::getMaxVelocityYUp() const {
-	return 600.f;
-}
-
-float NekomataEnemy::getMaxVelocityYDown() const {
-	return 600.f;
-}
-
-float NekomataEnemy::getMaxVelocityX() const {
-	return 80.f;
-}
-
-sf::Time NekomataEnemy::getConfiguredFightAnimationTime() const {
-	return sf::milliseconds(6 * 80);
 }
 
 int NekomataEnemy::getMentalStrength() const {
 	return 3;
-}
-
-void NekomataEnemy::updateAnimation(const sf::Time& frameTime) {
-	// a nekomata has additional states
-
-	GameObjectState newState = GameObjectState::Idle;
-	if (m_isDead) {
-		newState = GameObjectState::Dead;
-	}
-	else if (m_fightAnimationTime > sf::Time::Zero) {
-		if (m_state == GameObjectState::Fighting) {
-			newState = GameObjectState::Fighting;
-		}
-		else {
-			if (m_currentFightStartTime == sf::Time::Zero) {
-				m_currentFightStartTime = m_fightStartTime;
-				newState = GameObjectState::Fighting_start;
-			}
-			else {
-				updateTime(m_currentFightStartTime, frameTime);
-				if (m_currentFightStartTime == sf::Time::Zero) {
-					newState = GameObjectState::Fighting;
-				}
-				else {
-					newState = GameObjectState::Fighting_start;
-				}
-			}
-		}
-	}
-	else if (!m_isGrounded) {
-		if (m_state == GameObjectState::Jumping) {
-			newState = GameObjectState::Jumping;
-		}
-		else {
-			if (m_currentJumpStartTime == sf::Time::Zero) {
-				m_currentJumpStartTime = m_jumpStartTime;
-				newState = GameObjectState::Jumping_start;
-			}
-			else {
-				updateTime(m_currentJumpStartTime, frameTime);
-				if (m_currentJumpStartTime == sf::Time::Zero) {
-					newState = GameObjectState::Jumping;
-				}
-				else {
-					newState = GameObjectState::Jumping_start;
-				}
-			}
-		}
-	}
-	else if (std::abs(getVelocity().x) > 20.0f) {
-		newState = GameObjectState::Walking;
-	}
-
-	// only update animation if we need to
-	if (m_state != newState || m_nextIsFacingRight != m_isFacingRight) {
-		m_isFacingRight = m_nextIsFacingRight;
-		m_state = newState;
-		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
-	}
 }
 
 

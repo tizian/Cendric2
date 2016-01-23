@@ -1,12 +1,12 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/AttackingBehavior.h"
+#include "Level/EnemyBehavior/EnemyAttackingBehavior.h"
 
 // An allied enemy attacking behavior. These enemies help cendric and attack unfriendly enemies
-class AllyBehavior : public AttackingBehavior {
+class AllyBehavior : public EnemyAttackingBehavior {
 public:
-	AllyBehavior(Enemy* enemy) : AttackingBehavior(enemy) {};
+	AllyBehavior(Enemy* enemy);
 	~AllyBehavior() {};
 
 	void update(const sf::Time& frameTime) override;

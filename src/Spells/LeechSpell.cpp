@@ -39,10 +39,11 @@ void LeechSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vecto
 }
 
 void LeechSpell::update(const sf::Time& frameTime) {
-	calculateNextPosition(frameTime, m_nextPosition);
+	sf::Vector2f nextPosition;
+	calculateNextPosition(frameTime, nextPosition);
 
 	if (!m_isReturning) {
-		checkCollisions(m_nextPosition);
+		checkCollisions(nextPosition);
 		// check collisions with main char
 		if (m_ownerType != GameObjectType::_LevelMainCharacter) {
 			if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {

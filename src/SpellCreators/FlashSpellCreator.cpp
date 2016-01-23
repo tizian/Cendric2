@@ -13,13 +13,13 @@ void FlashSpellCreator::executeSpell(const sf::Vector2f& target) {
 	float newRange = 0.f;
 	while (!m_level->collides(ownerBB, true) && newRange <= spellData.range + 1) {
 		newRange++;
-		ownerBB.left = m_owner->getIsFacingRight() ? ownerBB.left + 1 : ownerBB.left - 1;
+		ownerBB.left = m_owner->isFacingRight() ? ownerBB.left + 1 : ownerBB.left - 1;
 	}
 	// check if we are inside a dynamic tile and move backwards if so. 
 	// This is also used because we are one pixel inside the wall.
 	while (m_level->collides(ownerBB)) {
 		newRange--;
-		ownerBB.left = m_owner->getIsFacingRight() ? ownerBB.left - 1 : ownerBB.left + 1;
+		ownerBB.left = m_owner->isFacingRight() ? ownerBB.left - 1 : ownerBB.left + 1;
 	}
 	// apply
 	spellData.range = newRange;

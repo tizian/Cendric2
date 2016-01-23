@@ -1,7 +1,12 @@
 #include "Level/EnemyBehavior/AllyBehavior.h"
-#include "Level/LevelMainCharacter.h"
+
+AllyBehavior::AllyBehavior(Enemy* enemy) :
+	EnemyAttackingBehavior(enemy),
+	AttackingBehavior(enemy) {
+}
 
 void AllyBehavior::update(const sf::Time& frameTime) {
+	EnemyAttackingBehavior::update(frameTime);
 	GameObject::updateTime(m_timeToLive, frameTime);
 	if (m_timeToLive == sf::Time::Zero) {
 		m_enemy->setDead();
@@ -21,14 +26,14 @@ sf::Color AllyBehavior::getConfiguredHealthColor() const {
 }
 
 void AllyBehavior::updateAggro() {
-	if (m_enemy->m_enemyState == EnemyState::Chasing && m_enemy->getFleeCondition()) {
-		m_enemy->m_fearedTime = m_enemy->getConfiguredFearedTime();
+	if (m_enemy->getEnemyState() == EnemyState::Chasing && m_enemy->getFleeCondition()) {
+		m_enemy->setFleeing();
 		return;
 	}
 	if (m_currentTarget == nullptr || m_currentTarget->isDead() || m_currentTarget->isDisposed()) {
 		m_currentTarget = nullptr;
 	}
-	if (m_enemy->m_enemyState != EnemyState::Idle) return;
+	if (m_enemy->getEnemyState() != EnemyState::Idle) return;
 
 	bool isInAggroRange = false;
 
@@ -48,10 +53,10 @@ void AllyBehavior::updateAggro() {
 	}
 	if (nearest == nullptr) {
 		m_currentTarget = nullptr;
-		m_enemy->m_waitingTime = m_enemy->getConfiguredWaitingTime();
+		m_enemy->setWaiting();
 		return;
 	}
 	m_currentTarget = nearest;
-	m_enemy->m_chasingTime = m_enemy->getConfiguredChasingTime();
+	m_enemy->setChasing();
 }
 

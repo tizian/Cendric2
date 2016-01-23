@@ -12,16 +12,11 @@ public:
 	RatEnemy(Level* level, Screen* screen);
 	~RatEnemy() {}
 
-	float getMaxVelocityYUp() const override;
-	float getMaxVelocityYDown() const override;
-	float getMaxVelocityX() const override;
-
 	MovingBehavior* createMovingBehavior() override;
-	AttackingBehavior* createAttackingBehavior() override;
+	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 
 	bool getFleeCondition() const override;
 
-	sf::Time getConfiguredFightAnimationTime() const override;
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;

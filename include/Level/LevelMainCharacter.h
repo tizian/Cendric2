@@ -15,9 +15,13 @@ public:
 	~LevelMainCharacter();
 
 	void load();
+	
 	void update(const sf::Time& frameTime) override;
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void setDebugBoundingBox(const sf::Color &debugColor) override;
+
+	MovingBehavior* createMovingBehavior() override;
+	AttackingBehavior* createAttackingBehavior(bool asAlly = false) override;
 
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);
@@ -32,29 +36,19 @@ public:
 
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
-	float getMaxVelocityYUp() const override;
-	float getMaxVelocityYDown() const override;
-	float getMaxVelocityX() const override;
-	sf::Time getConfiguredFightAnimationTime() const override;
-	GameObjectType getConfiguredType() const override;
 
-protected:
-	float getConfiguredDampingGroundPersS() const;
-	// handle input and calculate the next position
-	void handleMovementInput() override;
-	void handleAttackInput() override;
+	GameObjectType getConfiguredType() const override;
 
 private:
 	CharacterCore* m_core;
 	// character core must be set when loading the weapon.
 	void loadWeapon();
+	void loadAnimation();
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;
 
-	// makes it easier to jump
-	static const sf::Time JUMP_GRACE_TIME;
-	sf::Time m_jumpGraceTime = sf::Time::Zero;
+	void handleAttackInput();
 
 	// debug info
 	BitmapText* m_debugInfo = nullptr;

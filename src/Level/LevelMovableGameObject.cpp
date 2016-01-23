@@ -1,35 +1,31 @@
 #include "Level/LevelMovableGameObject.h"
 #include "SpellManager.h"
 #include "Level/Level.h"
+#include "Level/EnemyBehavior/MovingBehavior.h"
+#include "Level/EnemyBehavior/AttackingBehavior.h"
 
 LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject() {
 	m_level = level;
 	m_foodAttributes.first = sf::Time::Zero;
 	m_foodAttributes.second = ZERO_ATTRIBUTES;
-	m_gravity = getConfiguredGravityAcceleration();
 }
 
 LevelMovableGameObject::~LevelMovableGameObject() {
 	delete m_spellManager;
+	delete m_movingBehavior;
+	delete m_attackingBehavior;
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
-	if (m_isDead) {
-		setAcceleration(sf::Vector2f(0, m_gravity));
-	}
-	else {
-		handleMovementInput();
-		handleAttackInput();
-	}
 
-	m_spellManager->update(frameTime);
-	calculateNextPosition(frameTime, m_nextPosition);
-	checkCollisions(m_nextPosition);
+	m_movingBehavior->update(frameTime);
+	m_attackingBehavior->update(frameTime);
+
 	m_level->collideWithDynamicTiles(this, getBoundingBox());
+	m_spellManager->update(frameTime);
+
 	MovableGameObject::update(frameTime);
-	// update time
-	GameObject::updateTime(m_fightAnimationTime, frameTime);
-	updateAnimation(frameTime);
+	
 	if (!m_isDead) {
 		updateAttributes(frameTime);
 	}
@@ -83,74 +79,8 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 	}
 }
 
-void LevelMovableGameObject::checkCollisions(const sf::Vector2f& nextPosition) {
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
-	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
-
-	bool isMovingDown = nextPosition.y > getBoundingBox()->top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
-	bool isMovingX = nextPosition.x != getBoundingBox()->left;
-
-	// check for collision on x axis
-	if (isMovingX && m_level->collides(nextBoundingBoxX, m_ignoreDynamicTiles)) {
-		setAccelerationX(0.0f);
-		setVelocityX(0.0f);
-	}
-	else {
-		nextBoundingBoxY.left = nextPosition.x;
-	}
-
-	// check for collision on y axis
-	bool collidesY = m_level->collides(nextBoundingBoxY, m_ignoreDynamicTiles);
-	if (!isMovingDown && collidesY) {
-		setAccelerationY(0.0);
-		setVelocityY(0.0f);
-		// set mob up in case of anti gravity!
-		if (getIsUpsideDown()) {
-			setPositionY(m_level->getCeiling(nextBoundingBoxY));
-			m_isGrounded = true;
-		}
-	}
-	else if (isMovingDown && collidesY) {
-		setAccelerationY(0.0f);
-		setVelocityY(0.0f);
-		// set mob down. in case of normal gravity.
-		if (!getIsUpsideDown()) {
-			setPositionY(m_level->getGround(nextBoundingBoxY));
-			m_isGrounded = true;
-		}
-	}
-
-	if (std::abs(getVelocity().y) > 0.f)
-		m_isGrounded = false;
-}
-
 sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const {
 	return sf::Vector2f(0, 0);
-}
-
-void LevelMovableGameObject::updateAnimation(const sf::Time& frameTime) {
-	// calculate new game state and set animation.
-
-	GameObjectState newState = GameObjectState::Idle;
-	if (m_isDead) {
-		newState = GameObjectState::Dead;
-	}
-	else if (m_fightAnimationTime > sf::Time::Zero) {
-		newState = GameObjectState::Fighting;
-	}
-	else if (!m_isGrounded) {
-		newState = GameObjectState::Jumping;
-	}
-	else if (std::abs(getVelocity().x) > 20.0f) {
-		newState = GameObjectState::Walking;
-	}
-
-	// only update animation if we need to
-	if (m_state != newState || m_nextIsFacingRight != m_isFacingRight) {
-		m_isFacingRight = m_nextIsFacingRight;
-		m_state = newState;
-		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
-	}
 }
 
 void LevelMovableGameObject::addAttributes(const sf::Time& duration, const AttributeData& attributes) {
@@ -159,12 +89,7 @@ void LevelMovableGameObject::addAttributes(const sf::Time& duration, const Attri
 }
 
 void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
-	// distinguish damping in the air and at the ground
-	float dampingPerSec = (getVelocity().y == 0.0f) ? getConfiguredDampingGroundPersS() : getConfiguredDampingAirPerS();
-	// don't damp when there is active acceleration 
-	if (getAcceleration().x != 0.0f) dampingPerSec = 0;
-	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
-	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
+	m_movingBehavior->calculateUnboundedVelocity(frameTime, nextVel);
 }
 
 void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
@@ -240,81 +165,48 @@ void LevelMovableGameObject::setDead() {
 }
 
 void LevelMovableGameObject::setFightAnimationTime() {
-	m_fightAnimationTime = getConfiguredFightAnimationTime();
+	m_movingBehavior->setFightAnimation();
 }
 
 Level* LevelMovableGameObject::getLevel() const {
 	return m_level;
 }
 
-bool LevelMovableGameObject::getIsFacingRight() const {
-	return m_isFacingRight;
+bool LevelMovableGameObject::isFacingRight() const {
+	return m_movingBehavior->isFacingRight();
 }
 
-bool LevelMovableGameObject::getIsUpsideDown() const {
-	return m_animatedSprite.isFlippedY();
+bool LevelMovableGameObject::isUpsideDown() const {
+	return m_movingBehavior->isUpsideDown();
 }
 
 bool LevelMovableGameObject::isDead() const {
 	return m_isDead;
 }
 
+void LevelMovableGameObject::loadBehavior() {
+	delete m_attackingBehavior;
+	m_attackingBehavior = createAttackingBehavior();
+
+	delete m_movingBehavior;
+	m_movingBehavior = createMovingBehavior();
+}
+
 void LevelMovableGameObject::flipGravity() {
-	m_isFlippedGravity = !m_isFlippedGravity;
-	m_animatedSprite.setFlippedY(m_isFlippedGravity);
-}
-
-void LevelMovableGameObject::setGravityScale(float scale) {
-	m_gravity = scale * getConfiguredGravityAcceleration();
-	m_maxVelocityYDownScale = scale;
-}
-
-void LevelMovableGameObject::setMaxXVelocityScale(float scale) {
-	m_maxVelocityXScale = scale;
-}
-
-void LevelMovableGameObject::setIgnoreDynamicTiles(bool value) {
-	m_ignoreDynamicTiles = value;
+	m_movingBehavior->flipGravity();
+	m_animatedSprite.setFlippedY(m_movingBehavior->isUpsideDown());
 }
 
 GameObjectState LevelMovableGameObject::getState() const {
 	return m_state;
 }
 
-float LevelMovableGameObject::getConfiguredWalkAcceleration() const {
-	return 1500.0f;
-}
-
-float LevelMovableGameObject::getConfiguredGravityAcceleration() const {
-	return 1000.f;
-}
-
-float LevelMovableGameObject::getGravityAcceleration() const {
-	return m_gravity;
-}
-
-float LevelMovableGameObject::getConfiguredDampingGroundPersS() const {
-	return 1.f;
-}
-
-float LevelMovableGameObject::getConfiguredMaxVelocityX() const {
-	return m_maxVelocityXScale * getMaxVelocityX();
-}
-
-float LevelMovableGameObject::getConfiguredMaxVelocityYDown() const {
-	return m_maxVelocityYDownScale * getMaxVelocityYDown();
-}
-
-float LevelMovableGameObject::getConfiguredMaxVelocityYUp() const {
-	return getMaxVelocityYUp();
-}
-
-float LevelMovableGameObject::getConfiguredDampingAirPerS() const {
-	return 0.7f;
-}
-
 SpellManager* LevelMovableGameObject::getSpellManager() const {
 	return m_spellManager;
+}
+
+MovingBehavior* LevelMovableGameObject::getMovingBehavior() const {
+	return m_movingBehavior;
 }
 
 const AttributeData* LevelMovableGameObject::getAttributes() const {
@@ -329,3 +221,16 @@ void LevelMovableGameObject::consumeFood(const sf::Time& duration, const Attribu
 	m_foodAttributes = std::pair<sf::Time, AttributeData>(duration, attributes);
 	m_attributes.addBean(attributes);
 }
+
+float LevelMovableGameObject::getConfiguredMaxVelocityX() const {
+	return m_movingBehavior->getMaxVelocityX();
+}
+
+float LevelMovableGameObject::getConfiguredMaxVelocityYDown() const {
+	return m_movingBehavior->getMaxVelocityYDown();
+}
+
+float LevelMovableGameObject::getConfiguredMaxVelocityYUp() const {
+	return m_movingBehavior->getMaxVelocityYUp();
+}
+

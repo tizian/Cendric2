@@ -62,9 +62,9 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
 	}
 	sf::Vector2f mobPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
 	sf::Vector2f offset = getConfiguredPositionOffset() + m_mob->getConfiguredSpellOffset();
-	if (!m_mob->getIsFacingRight())
+	if (!m_mob->isFacingRight())
 		offset.x = -offset.x - getBoundingBox()->width;
-	if (m_mob->getIsUpsideDown())
+	if (m_mob->isUpsideDown())
 		offset.y = m_mob->getBoundingBox()->height - offset.y - getBoundingBox()->height;
 
 	position.x = (mobPosition + offset).x;
@@ -72,17 +72,18 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
 }
 
 void Spell::update(const sf::Time& frameTime) {
+	sf::Vector2f nextPosition;
 	if (m_data.attachedToMob) {
-		calculatePositionAccordingToMob(m_nextPosition);
-		setPosition(m_nextPosition);
+		calculatePositionAccordingToMob(nextPosition);
+		setPosition(nextPosition);
 	}
 	else {
-		calculateNextPosition(frameTime, m_nextPosition);
+		calculateNextPosition(frameTime, nextPosition);
 	}
 
-	if (!m_data.attachedToMob) checkCollisions(m_nextPosition);
+	if (!m_data.attachedToMob) checkCollisions(nextPosition);
 	// check collisions with dynamic tiles
-	sf::FloatRect tmp(m_nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
+	sf::FloatRect tmp(nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
 	m_level->collideWithDynamicTiles(this, &tmp);
 	// check collisions with main char
 	if (m_ownerType != GameObjectType::_LevelMainCharacter && !m_isOwnerControlled) {

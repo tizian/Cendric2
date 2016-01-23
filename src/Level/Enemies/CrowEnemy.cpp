@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/EnemyBehavior/FlyingBehavior.h"
 #include "Level/EnemyBehavior/AggressiveBehavior.h"
+#include "Level/EnemyBehavior/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Crow, CrowEnemy)
@@ -44,11 +45,21 @@ sf::Vector2f CrowEnemy::getConfiguredSpellOffset() const {
 MovingBehavior* CrowEnemy::createMovingBehavior() {
 	FlyingBehavior* behavior = new FlyingBehavior(this);
 	behavior->setApproachingDistance(10.f);
+	behavior->setMaxVelocityYDown(200.f);
+	behavior->setMaxVelocityYUp(100.f);
+	behavior->setMaxVelocityX(100.f);
+	behavior->setFightAnimationTime(sf::milliseconds(3 * 100));
 	return behavior;
 }
 
-AttackingBehavior* CrowEnemy::createAttackingBehavior() {
-	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+AttackingBehavior* CrowEnemy::createAttackingBehavior(bool asAlly) {
+	EnemyAttackingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyBehavior(this);
+	}
+	else {
+		behavior = new AggressiveBehavior(this);
+	}
 	behavior->setAggroRange(400.f);
 	behavior->setAttackInput(std::bind(&CrowEnemy::handleAttackInput, this));
 	return behavior;
@@ -57,7 +68,7 @@ AttackingBehavior* CrowEnemy::createAttackingBehavior() {
 void CrowEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
-	if (m_attackingBehavior->distToTarget() < 50.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 50.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 		m_chasingTime = sf::Time::Zero;
 		if (isAlly()) {
@@ -107,25 +118,7 @@ void CrowEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	m_isFacingRight = true;
-	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
-}
-
-sf::Time CrowEnemy::getConfiguredFightAnimationTime() const {
-	return sf::milliseconds(3 * 100);
-}
-
-float CrowEnemy::getMaxVelocityYUp() const {
-	return 100.f;
-}
-
-float CrowEnemy::getMaxVelocityYDown() const {
-	return 200.f;
-}
-
-float CrowEnemy::getMaxVelocityX() const {
-	return 100.f;
 }
 

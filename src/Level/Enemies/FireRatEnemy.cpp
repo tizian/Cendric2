@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/EnemyBehavior/WalkingBehavior.h"
 #include "Level/EnemyBehavior/AggressiveBehavior.h"
+#include "Level/EnemyBehavior/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::FireRat, FireRatEnemy)
@@ -52,9 +53,9 @@ sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const {
 void FireRatEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
-	if (m_attackingBehavior->distToTarget() < m_attackingBehavior->getAggroRange()) {
+	if (m_enemyAttackingBehavior->distToTarget() < m_enemyAttackingBehavior->getAggroRange()) {
 		m_spellManager->setCurrentSpell(1); // fire ball
-		if (m_attackingBehavior->distToTarget() < 50.f) {
+		if (m_enemyAttackingBehavior->distToTarget() < 50.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
@@ -102,41 +103,33 @@ void FireRatEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	m_isFacingRight = true;
-	setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 }
 
 MovingBehavior* FireRatEnemy::createMovingBehavior() {
 	WalkingBehavior* behavior = new WalkingBehavior(this);
-	behavior->setJumpHeight(getConfiguredMaxVelocityYUp() * getConfiguredMaxVelocityYUp() / (2 * getConfiguredGravityAcceleration()));
 	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(10.f);
+	behavior->setMaxVelocityYDown(400.f);
+	behavior->setMaxVelocityYUp(400.f);
+	behavior->setMaxVelocityX(50.f);
+	behavior->setFightAnimationTime(sf::milliseconds(4 * 80));
+	behavior->calculateJumpHeight();
 	return behavior;
 }
 
-AttackingBehavior* FireRatEnemy::createAttackingBehavior() {
-	AggressiveBehavior* behavior = new AggressiveBehavior(this);
+AttackingBehavior* FireRatEnemy::createAttackingBehavior(bool asAlly) {
+	EnemyAttackingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyBehavior(this);
+	}
+	else {
+		behavior = new AggressiveBehavior(this);
+	}
 	behavior->setAggroRange(500.f);
 	behavior->setAttackInput(std::bind(&FireRatEnemy::handleAttackInput, this));
 	return behavior;
-}
-
-float FireRatEnemy::getMaxVelocityYUp() const {
-	return 400.f;
-}
-
-float FireRatEnemy::getMaxVelocityYDown() const {
-	return 400.f;
-}
-
-float FireRatEnemy::getMaxVelocityX() const {
-	return 50.f;
-}
-
-sf::Time FireRatEnemy::getConfiguredFightAnimationTime() const {
-	return sf::milliseconds(4 * 80);
 }
 
 int FireRatEnemy::getMentalStrength() const {

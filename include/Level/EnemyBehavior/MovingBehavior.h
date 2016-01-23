@@ -1,31 +1,76 @@
 #pragma once
 
 #include "global.h"
-#include "Level/Enemy.h"
+#include "Level/LevelMovableGameObject.h"
+#include "Level/LevelMainCharacter.h"
 
 // An enemy moving behavior
 class MovingBehavior {
 public:
-	MovingBehavior(Enemy* enemy);
+	MovingBehavior(LevelMovableGameObject* mob);
 	virtual ~MovingBehavior() {};
 
 	virtual void update(const sf::Time& frameTime);
+	// update animation based on the current velocity + grounded
 	virtual void updateAnimation() = 0;
 
 	virtual void checkCollisions(const sf::Vector2f& nextPosition) = 0;
+	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
+	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
 
 	virtual void handleMovementInput() = 0;
 
-	virtual void makeRandomDecision() = 0;
+	// gravity flip (used for anti gravity spell)
+	void flipGravity();
+	// change gravity (used for leap of faith spell)
+	void setGravityScale(float scale);
+	// change x speed (used for ghost spell)
+	void setMaxXVelocityScale(float scale);
+	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
+	void setIgnoreDynamicTiles(bool value);
 
-	void setApproachingDistance(float distance);
+	void setMaxVelocityX(float vel);
+	void setMaxVelocityYUp(float vel);
+	void setMaxVelocityYDown(float vel);
 
-	// the distance from the center of the enemy to the center of the main char at which the enemy approaches its target.
-	float getApproachingDistance() const;
+	float getMaxVelocityX() const;
+	float getMaxVelocityYUp() const;
+	float getMaxVelocityYDown() const;
 
-	
+	void setWalkAcceleration(float acceleration);
+	void setGravityAcceleration(float acceleration);
+	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
+	void setDampingGroundPerS(float damping);
+	void setDampingAirPerS(float damping);
+	void setFightAnimationTime(const sf::Time& fightAnimationTIme);
+	void setFightAnimation();
+	float getGravity() const;
+	bool isFacingRight() const;
+	bool isUpsideDown() const;
 
 protected:
-	Enemy* m_enemy;
-	float m_approachingDistance = 0.f;
+	LevelMovableGameObject* m_mob;
+	LevelMainCharacter* m_mainChar;
+	bool m_ignoreDynamicTiles = false;
+	bool m_isFacingRight = true;
+	bool m_nextIsFacingRight = true;
+	bool m_isGrounded = false;
+	bool m_isFlippedGravity = false;
+	float m_gravity = 1000.f;
+	float m_walkAcceleration = 1500.f;
+	float m_configuredGravity = 1000.f;
+	float m_dampingGroundPerS = 1.f;
+	float m_dampingAirPerS = 0.7f;
+
+	float m_maxVelocityX = 0.f;
+	float m_maxVelocityYUp = 0.f;
+	float m_maxVelocityYDown = 0.f;
+
+	float m_configuredMaxVelocityX = 0.f;
+	float m_configuredMaxVelocityYUp = 0.f;
+	float m_configuredMaxVelocityYDown = 0.f;
+
+	// as long as this time is not sf::Time::Zero, the mob will have the fighting animation. 
+	sf::Time m_fightAnimationTime = sf::Time::Zero;
+	sf::Time m_configuredFightAnimationTime = sf::Time::Zero;
 };

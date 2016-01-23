@@ -102,7 +102,7 @@ void GameObject::onLeftJustPressed() {
 	// nop
 }
 
-const sf::Vector2f GameObject::getCenter() const {
+sf::Vector2f GameObject::getCenter() const {
 	return sf::Vector2f(
 		m_boundingBox.left + (m_boundingBox.width / 2),
 		m_boundingBox.top + (m_boundingBox.height / 2));

@@ -1,5 +1,10 @@
 #include "Level/EnemyBehavior/NeutralBehavior.h"
 
+NeutralBehavior::NeutralBehavior(Enemy* enemy) : 
+	EnemyAttackingBehavior(enemy),
+	AttackingBehavior(enemy) {
+}
+
 EnemyAttitude NeutralBehavior::getAttitude() const {
 	return EnemyAttitude::Neutral;
 }

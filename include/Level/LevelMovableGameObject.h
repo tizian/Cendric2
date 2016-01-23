@@ -8,6 +8,8 @@
 class Level;
 class SpellManager;
 class Spell;
+class MovingBehavior;
+class AttackingBehavior;
 
 // a MOB in a level, enemies + main character.
 class LevelMovableGameObject : public MovableGameObject {
@@ -16,9 +18,10 @@ public:
 	virtual ~LevelMovableGameObject();
 
 	virtual void update(const sf::Time& frameTime) override;
-	virtual void checkCollisions(const sf::Vector2f& nextPosition);
+
 	// the offset to the from where a spell starts. it gets added to the spell offset defined by the spell itself. default is (0,0)
 	virtual sf::Vector2f getConfiguredSpellOffset() const;
+	
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 	virtual void onHit(Spell* spell);
 	// adds damage to the attribute health. this damage can't be negative
@@ -35,61 +38,37 @@ public:
 	void addAttributes(const sf::Time& duration, const AttributeData& attributes);
 	// adds a dot to this mob
 	virtual void addDamageOverTime(const DamageOverTimeData& data);
-	// gravity flip (used for anti gravity spell)
+	// flips the gravity and the sprite
 	void flipGravity();
-	// change gravity (used for leap of faith spell)
-	void setGravityScale(float scale);
-	// change x speed (used for ghost spell)
-	void setMaxXVelocityScale(float scale);
-	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
-	void setIgnoreDynamicTiles(bool value);
-
+	
 	SpellManager* getSpellManager() const;
+	MovingBehavior* getMovingBehavior() const;
 	const AttributeData* getAttributes() const;
 	Level* getLevel() const;
-	bool getIsFacingRight() const;
-	bool getIsUpsideDown() const;
+	bool isFacingRight() const;
+	bool isUpsideDown() const;
 	bool isDead() const;
 	GameObjectState getState() const;
 
-	virtual float getMaxVelocityX() const = 0;
-	virtual float getMaxVelocityYUp() const = 0;
-	virtual float getMaxVelocityYDown() const = 0;
-
-protected:
-	virtual float getConfiguredWalkAcceleration() const;
-	virtual float getConfiguredGravityAcceleration() const;
-	virtual float getGravityAcceleration() const;
-	
 	float getConfiguredMaxVelocityX() const override;
 	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityYUp() const override;
 
-	// used for gliding
-	float m_maxVelocityYDownScale = 1.f;
-	// used for scaling X speed
-	float m_maxVelocityXScale = 1.f;
-	virtual sf::Time getConfiguredFightAnimationTime() const = 0;
-	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
-	virtual float getConfiguredDampingGroundPersS() const;
-	virtual float getConfiguredDampingAirPerS() const;
-	// handle input and calculate the next position (AI or user input)
-	virtual void handleMovementInput() = 0;
-	virtual void handleAttackInput() = 0;
-	// update animation based on the current velocity + grounded
-	virtual void updateAnimation(const sf::Time& frameTime);
-	bool m_isFacingRight;
-	bool m_nextIsFacingRight;
-	bool m_isGrounded = false;
+protected:
+	// loads the behavior, deleting potential old ones.
+	virtual void loadBehavior();
+
+	// behavior strategies aka "components"
+	virtual MovingBehavior* createMovingBehavior() = 0;
+	virtual AttackingBehavior* createAttackingBehavior(bool asAlly = false) = 0;
+
+	MovingBehavior* m_movingBehavior = nullptr;
+	AttackingBehavior* m_attackingBehavior = nullptr;
+
 	bool m_isDead = false;
-	bool m_isFlippedGravity = false;
-	bool m_ignoreDynamicTiles = false;
-	float m_gravity;
 	Level* m_level;
 
 	SpellManager* m_spellManager;
-	// as long as this time is not sf::Time::Zero, the mob will have the fighting animation. 
-	sf::Time m_fightAnimationTime = sf::Time::Zero;
 
 	// store attributes given by food. if their time runs out, they get removed from the total attributes.
 	std::pair<sf::Time, AttributeData> m_foodAttributes;

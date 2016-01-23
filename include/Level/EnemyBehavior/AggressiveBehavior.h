@@ -1,12 +1,12 @@
 #pragma once
 
 #include "global.h"
-#include "Level/EnemyBehavior/AttackingBehavior.h"
+#include "Level/EnemyBehavior/EnemyAttackingBehavior.h"
 
 // An aggressive enemy attacking behavior. These enemies attack cendric
-class AggressiveBehavior : public AttackingBehavior {
+class AggressiveBehavior : public EnemyAttackingBehavior {
 public:
-	AggressiveBehavior(Enemy* enemy) : AttackingBehavior(enemy) {};
+	AggressiveBehavior(Enemy* enemy);
 	~AggressiveBehavior() {};
 
 	void updateAggro() override;
