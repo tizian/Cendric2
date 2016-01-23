@@ -10,7 +10,7 @@ class LevelMovableGameObject;
 class Level;
 
 // A dynamic tile in a level
-class LevelDynamicTile : virtual public AnimatedGameObject {
+class LevelDynamicTile : public virtual AnimatedGameObject {
 public:
 	LevelDynamicTile(Level* level);
 	virtual ~LevelDynamicTile() {};

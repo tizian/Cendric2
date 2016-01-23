@@ -4,12 +4,12 @@
 
 #include "global.h"
 #include "ResourceManager.h"
-#include "Structs/TMXData.h"
+#include "Structs/WorldData.h"
 #include "AnimatedTile.h"
 
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:
-	bool load(const TMXData& data, const std::vector<std::vector<int> >& layers);
+	bool load(const WorldData& data, const std::vector<std::vector<int> >& layers);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	void update(const sf::Time& frameTime);
 	void dispose();
@@ -25,5 +25,5 @@ private:
 	sf::String m_tilesetPath;
 	sf::Vector2i m_tilesize;
 
-	void readAnimatedTile(int tileNumber, int layerNr, int i, int j, const TMXData& data);
+	void readAnimatedTile(int tileNumber, int layerNr, int i, int j, const WorldData& data);
 };

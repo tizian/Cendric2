@@ -6,7 +6,7 @@
 #include "Structs/LightData.h"
 
 // A light ellipse in a level/map
-class LightObject : virtual public GameObject {
+class LightObject : public virtual GameObject {
 public:
 	LightObject(const LightData& data);
 	virtual ~LightObject() {};

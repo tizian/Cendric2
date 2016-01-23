@@ -11,7 +11,7 @@
 
 class CharacterCore;
 
-class CookingOption : virtual public GameObject {
+class CookingOption : public virtual GameObject {
 public:
 	CookingOption(const std::string& itemID, const std::string& cookedItemID, int count, int nr);
 	void render(sf::RenderTarget& renderTarget) override;

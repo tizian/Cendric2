@@ -2,7 +2,7 @@
 
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("LevelReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 
-LevelReader::LevelReader() : TMXReader() {
+LevelReader::LevelReader() : WorldReader() {
 	initMaps();
 }
 
@@ -600,7 +600,7 @@ bool LevelReader::readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data) {
 	return true;
 }
 
-bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, TMXData& data_) const {
+bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, WorldData& data_) const {
 	// we've found the property "backgroundlayers"
 	LevelData* data = static_cast<LevelData*>(&data_);
 	if (data == nullptr) return false;
@@ -635,7 +635,7 @@ bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, TMXData&
 }
 
 void LevelReader::updateData(LevelData& data)  const {
-	TMXReader::updateData(data);
+	WorldReader::updateData(data);
 
 	// calculate dynamic tiles
 	int tileWidth = data.tileSize.x;
@@ -709,7 +709,7 @@ void LevelReader::updateData(LevelData& data)  const {
 }
 
 bool LevelReader::checkData(LevelData& data) const {
-	if (!TMXReader::checkData(data)) return false;
+	if (!WorldReader::checkData(data)) return false;
 	for (int i = 0; i < data.dynamicTileLayers.size(); i++) {
 		if (data.dynamicTileLayers[i].first == LevelDynamicTileID::VOID) {
 			logError("level dynamic tile ID not recognized");

@@ -9,7 +9,7 @@ class Map;
 class MapMainCharacter;
 
 // A dynamic tile in a map
-class MapDynamicTile : virtual public AnimatedGameObject {
+class MapDynamicTile : public virtual AnimatedGameObject {
 public:
 	MapDynamicTile(Map* map);
 	virtual ~MapDynamicTile() {};

@@ -29,11 +29,19 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	bool isMovingY = nextPosition.y != getBoundingBox()->top;
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
+	bool isMovingRight = nextPosition.x > getBoundingBox()->left;
+	bool isMovingDown = nextPosition.y > getBoundingBox()->top;
 
 	// check for collision on x axis
 	if (isMovingX && m_map->collides(nextBoundingBoxX)) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
+		if (isMovingRight) {
+			setPositionX(m_map->getNonCollidingLeft(nextBoundingBoxX));
+		}
+		else {
+			setPositionX(m_map->getNonCollidingRight(nextBoundingBoxX));
+		}
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -42,6 +50,12 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (isMovingY && m_map->collides(nextBoundingBoxY)) {
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
+		if (isMovingDown) {
+			setPositionY(m_map->getNonCollidingTop(nextBoundingBoxY));
+		}
+		else {
+			setPositionY(m_map->getNonCollidingBottom(nextBoundingBoxY));
+		}
 	}
 }
 

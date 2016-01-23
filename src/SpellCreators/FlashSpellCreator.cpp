@@ -11,7 +11,7 @@ void FlashSpellCreator::executeSpell(const sf::Vector2f& target) {
 	// check where port of owner is possible
 	sf::FloatRect ownerBB = *(m_owner->getBoundingBox());
 	float newRange = 0.f;
-	while (!m_level->collides(ownerBB, true) && newRange <= spellData.range + 1) {
+	while (!m_level->collides(ownerBB, nullptr, true) && newRange <= spellData.range + 1) {
 		newRange++;
 		ownerBB.left = m_owner->isFacingRight() ? ownerBB.left + 1 : ownerBB.left - 1;
 	}

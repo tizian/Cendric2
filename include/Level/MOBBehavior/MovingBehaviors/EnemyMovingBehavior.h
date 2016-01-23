@@ -5,7 +5,7 @@
 #include "Level/Enemy.h"
 
 // A moving behavior for enemies.
-class EnemyMovingBehavior : virtual public MovingBehavior {
+class EnemyMovingBehavior : public virtual MovingBehavior {
 public:
 	EnemyMovingBehavior(Enemy* enemy);
 	virtual ~EnemyMovingBehavior() {};

@@ -7,7 +7,7 @@
 #include "GameObject.h"
 
 /* A game object with sprites an animations */
-class AnimatedGameObject : virtual public GameObject {
+class AnimatedGameObject : public virtual GameObject {
 public:
 	AnimatedGameObject() : GameObject() {}
 	virtual ~AnimatedGameObject() {}

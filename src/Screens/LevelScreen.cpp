@@ -160,7 +160,9 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	sf::Vector2f focus = m_mainChar->getCenter();
 
 	// Render level background and content to window				(Normal level background rendered)
-	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default, focus);
+	m_currentLevel.drawBackgroundLayers(renderTarget, sf::RenderStates::Default, focus);
+	m_currentLevel.setWorldView(renderTarget, focus);
+	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default);
 	sf::View oldView = renderTarget.getView();
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
@@ -168,7 +170,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
-	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default, focus);
+	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
@@ -186,7 +188,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	m_renderTexture.clear(sf::Color(0, 0, 0, 0));
 
 	// Render foreground layer to extra buffer
-	m_currentLevel.drawForeground(m_renderTexture, sf::RenderStates::Default, m_mainChar->getCenter());
+	m_currentLevel.drawForeground(m_renderTexture, sf::RenderStates::Default);
 	m_renderTexture.display();
 
 	// Render buffer to window										(Normal foreground rendered on top)

@@ -12,7 +12,7 @@
 class MapMainCharacter;
 
 // A npc on a map
-class NPC : virtual public MapMovableGameObject {
+class NPC : public virtual MapMovableGameObject {
 public:
 	NPC(Map* map) : MapMovableGameObject(map) {}
 	void load(MapMainCharacter* mainChar, const NPCData& data);

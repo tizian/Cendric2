@@ -18,7 +18,7 @@
 class LevelMovableGameObject;
 
 // A spell cendric can cast
-class Spell : virtual public MovableGameObject {
+class Spell : public virtual MovableGameObject {
 public:
 	Spell() : MovableGameObject() {}
 	virtual ~Spell() {}

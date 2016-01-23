@@ -21,7 +21,7 @@ class EnemyMovingBehavior;
 class EnemyAttackingBehavior;
 
 // An enemy in a level
-class Enemy : virtual public LevelMovableGameObject {
+class Enemy : public virtual LevelMovableGameObject {
 public:
 	Enemy(Level* level, Screen* screen);
 	virtual ~Enemy();

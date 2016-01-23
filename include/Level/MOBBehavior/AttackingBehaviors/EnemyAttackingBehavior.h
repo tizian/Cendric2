@@ -5,7 +5,7 @@
 #include "Enums/EnemyAttitude.h"
 
 // An attacking behavior for enemies
-class EnemyAttackingBehavior : virtual public AttackingBehavior {
+class EnemyAttackingBehavior : public virtual AttackingBehavior {
 public:
 	EnemyAttackingBehavior(Enemy* enemy);
 	virtual ~EnemyAttackingBehavior() {};

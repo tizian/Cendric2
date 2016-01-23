@@ -16,7 +16,7 @@ struct WeaponSlot_s {
 };
 
 // A weapon in cendrics / a npcs / a mobs inventory
-class Weapon : virtual public Item {
+class Weapon : public virtual Item {
 public:
 	Weapon(const std::string& itemID);
 

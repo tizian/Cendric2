@@ -16,39 +16,41 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
 	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
 	bool collidesX = false;
-	if (isMovingX && level.collides(nextBoundingBoxX, m_ignoreDynamicTiles)) {
+	if (isMovingX && level.collides(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles)) {
 		collidesX = true;
 		m_enemy->setAccelerationX(0.0f);
 		m_enemy->setVelocityX(0.0f);
+		if (isMovingRight) {
+			m_enemy->setPositionX(level.getNonCollidingLeft(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles));
+		}
+		else {
+			m_enemy->setPositionX(level.getNonCollidingRight(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles));
+		}
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
 	}
 	// check for collision on y axis
-	bool collidesY = level.collides(nextBoundingBoxY, m_ignoreDynamicTiles);
+	bool collidesY = level.collides(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles);
 
-	if (!isMovingDown && collidesY) {
+	if (collidesY) {
 		m_enemy->setAccelerationY(0.0);
 		m_enemy->setVelocityY(0.0f);
-		// set mob up in case of anti gravity!
-		if (isUpsideDown()) {
-			m_enemy->setPositionY(m_enemy->getLevel()->getCeiling(nextBoundingBoxY));
+		if (isUpsideDown() != isMovingDown) {
 			m_isGrounded = true;
 		}
-	}
-	else if (isMovingDown && collidesY) {
-		m_enemy->setAccelerationY(0.0f);
-		m_enemy->setVelocityY(0.0f);
-		// set mob down. in case of normal gravity.
-		if (!isUpsideDown()) {
-			m_enemy->setPositionY(level.getGround(nextBoundingBoxY));
-			m_isGrounded = true;
+		if (isMovingDown) {
+			m_enemy->setPositionY(level.getNonCollidingTop(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles));
+		}
+		else {
+			m_enemy->setPositionY(level.getNonCollidingBottom(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles));
 		}
 	}
-
+	
 	m_jumps = false;
 	if (isMovingX && collidesX) {
 		// would a jump work? 
@@ -68,6 +70,11 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	// if the enemy collidesX but can't jump and is chasing, it waits for a certain time.
 	if (m_enemy->getEnemyState() == EnemyState::Chasing && collidesX && !m_jumps) {
 		m_enemy->setWaiting();
+	}
+
+	if (!isMovingDown && nextBoundingBoxY.top - bb.height < level.getWorldRect().top ||
+		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
+		m_mob->setDead();
 	}
 }
 

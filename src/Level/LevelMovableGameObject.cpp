@@ -25,7 +25,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	m_spellManager->update(frameTime);
 
 	MovableGameObject::update(frameTime);
-	
+
 	if (!m_isDead) {
 		updateAttributes(frameTime);
 	}

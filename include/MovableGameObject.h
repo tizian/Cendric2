@@ -4,7 +4,7 @@
 #include "AnimatedGameObject.h"
 
 // A movable game object with physics.  Abstract class
-class MovableGameObject : virtual public AnimatedGameObject {
+class MovableGameObject : public virtual AnimatedGameObject {
 public:
 	MovableGameObject();
 	virtual ~MovableGameObject() {}

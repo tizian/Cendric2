@@ -9,7 +9,7 @@ void MapReader::logError(const std::string& error) const {
 }
 
 bool MapReader::checkData(MapData& data) const {
-	if (!TMXReader::checkData(data)) return false;
+	if (!WorldReader::checkData(data)) return false;
 	for (int i = 0; i < data.dynamicTileLayers.size(); i++) {
 		if (data.dynamicTileLayers[i].first == MapDynamicTileID::VOID) {
 			logError("map dynamic tile ID not recognized");
@@ -417,7 +417,7 @@ bool MapReader::readFirstGridIDs(tinyxml2::XMLElement* map, MapData& data) {
 }
 
 void MapReader::updateData(MapData& data) const {
-	TMXReader::updateData(data);
+	WorldReader::updateData(data);
 
 	// update dynamic tiles
 	int tileWidth = data.tileSize.x;

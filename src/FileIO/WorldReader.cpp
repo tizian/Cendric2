@@ -1,4 +1,4 @@
-#include "FileIO/TMXReader.h"
+#include "FileIO/WorldReader.h"
 
 #ifndef XMLCheckResult
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
@@ -6,11 +6,11 @@
 
 using namespace std;
 
-void TMXReader::logError(const std::string& error) const {
-	g_logger->logError("TMXReader", "Error in tmx data : " + error);
+void WorldReader::logError(const std::string& error) const {
+	g_logger->logError("WorldReader", "Error in world data : " + error);
 }
 
-bool TMXReader::checkData(TMXData& data) const {
+bool WorldReader::checkData(WorldData& data) const {
 	if (data.mapSize.x == 0 || data.mapSize.y == 0) {
 		logError("map size not set / invalid");
 		return false;
@@ -69,7 +69,7 @@ bool TMXReader::checkData(TMXData& data) const {
 	return true;
 }
 
-bool TMXReader::readLights(tinyxml2::XMLElement* objectgroup, TMXData& data) const {
+bool WorldReader::readLights(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
@@ -114,7 +114,7 @@ bool TMXReader::readLights(tinyxml2::XMLElement* objectgroup, TMXData& data) con
 					XMLCheckResult(result);
 					if (brightness < 0.f || brightness > 1.f) {
 						brightness = 1.f;
-						g_logger->logWarning("TMXReader", "Brightness must be between 0 and 1. It was " + std::to_string(brightness) + ", it is now 1");
+						g_logger->logWarning("WorldReader", "Brightness must be between 0 and 1. It was " + std::to_string(brightness) + ", it is now 1");
 					}
 					lightData.brightness = brightness;
 				}
@@ -132,7 +132,7 @@ bool TMXReader::readLights(tinyxml2::XMLElement* objectgroup, TMXData& data) con
 	return true;
 }
 
-bool TMXReader::readBackgroundTileLayer(const std::string& layer, TMXData& data) const {
+bool WorldReader::readBackgroundTileLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;
 
 	size_t pos = 0;
@@ -147,7 +147,7 @@ bool TMXReader::readBackgroundTileLayer(const std::string& layer, TMXData& data)
 	return true;
 }
 
-bool TMXReader::readCollidableLayer(const std::string& layer, TMXData& data) const {
+bool WorldReader::readCollidableLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;
 
 	size_t pos = 0;
@@ -162,7 +162,7 @@ bool TMXReader::readCollidableLayer(const std::string& layer, TMXData& data) con
 	return true;
 }
 
-bool TMXReader::readForegroundTileLayer(const std::string& layer, TMXData& data) const {
+bool WorldReader::readForegroundTileLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;
 
 	size_t pos = 0;
@@ -177,7 +177,7 @@ bool TMXReader::readForegroundTileLayer(const std::string& layer, TMXData& data)
 	return true;
 }
 
-bool TMXReader::readLightedForegroundTileLayer(const std::string& layer, TMXData& data) const {
+bool WorldReader::readLightedForegroundTileLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;
 
 	size_t pos = 0;
@@ -192,7 +192,7 @@ bool TMXReader::readLightedForegroundTileLayer(const std::string& layer, TMXData
 	return true;
 }
 
-bool TMXReader::readMapName(tinyxml2::XMLElement* _property, TMXData& data) const {
+bool WorldReader::readMapName(tinyxml2::XMLElement* _property, WorldData& data) const {
 	// we've found the property "name"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -204,7 +204,7 @@ bool TMXReader::readMapName(tinyxml2::XMLElement* _property, TMXData& data) cons
 	return true;
 }
 
-bool TMXReader::readTilesetPath(tinyxml2::XMLElement* _property, TMXData& data) const {
+bool WorldReader::readTilesetPath(tinyxml2::XMLElement* _property, WorldData& data) const {
 	// we've found the property "tilesetpath"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -216,7 +216,7 @@ bool TMXReader::readTilesetPath(tinyxml2::XMLElement* _property, TMXData& data) 
 	return true;
 }
 
-bool TMXReader::readMusicPath(tinyxml2::XMLElement* _property, TMXData& data) const {
+bool WorldReader::readMusicPath(tinyxml2::XMLElement* _property, WorldData& data) const {
 	// we've found the property "musicpath"
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
@@ -228,7 +228,7 @@ bool TMXReader::readMusicPath(tinyxml2::XMLElement* _property, TMXData& data) co
 	return true;
 }
 
-bool TMXReader::readDimming(tinyxml2::XMLElement* _property, TMXData& data) const {
+bool WorldReader::readDimming(tinyxml2::XMLElement* _property, WorldData& data) const {
 	// we've found the property "dimming"
 	float dimming = 0.f;
 	tinyxml2::XMLError result = _property->QueryFloatAttribute("value", &dimming);
@@ -243,12 +243,12 @@ bool TMXReader::readDimming(tinyxml2::XMLElement* _property, TMXData& data) cons
 	return true;
 }
 
-bool TMXReader::readBackgroundLayers(tinyxml2::XMLElement* _property, TMXData& data) const {
+bool WorldReader::readBackgroundLayers(tinyxml2::XMLElement* _property, WorldData& data) const {
 	// nop, is used by the level only and has no effect for the map.
 	return true;
 }
 
-bool TMXReader::readAnimatedTiles(tinyxml2::XMLElement* map, TMXData& data) const {
+bool WorldReader::readAnimatedTiles(tinyxml2::XMLElement* map, WorldData& data) const {
 	tinyxml2::XMLElement* tileset = map->FirstChildElement("tileset");
 	while (tileset != nullptr) {
 		int firstGid;
@@ -286,7 +286,7 @@ bool TMXReader::readAnimatedTiles(tinyxml2::XMLElement* map, TMXData& data) cons
 	return true;
 }
 
-bool TMXReader::readMapProperties(tinyxml2::XMLElement* map, TMXData& data) const {
+bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) const {
 	// check if renderorder is correct
 	const char* textAttr = nullptr;
 	textAttr = map->Attribute("renderorder");
@@ -367,7 +367,7 @@ bool TMXReader::readMapProperties(tinyxml2::XMLElement* map, TMXData& data) cons
 	return true;
 }
 
-void TMXReader::updateData(TMXData& data) const {
+void WorldReader::updateData(WorldData& data) const {
 	int x = 0;
 	int y = 0;
 

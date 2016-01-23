@@ -11,9 +11,9 @@
 
 #include "Structs/LevelData.h"
 #include "Enums/LevelDynamicTileID.h"
-#include "FileIO/TMXReader.h"
+#include "FileIO/WorldReader.h"
 
-class LevelReader : public TMXReader {
+class LevelReader : public WorldReader {
 public:
 	LevelReader();
 	~LevelReader();
@@ -24,7 +24,7 @@ private:
 	void logError(const std::string& error) const override;
 	void initMaps();
 
-	bool readBackgroundLayers(tinyxml2::XMLElement* _property, TMXData& data) const override;
+	bool readBackgroundLayers(tinyxml2::XMLElement* _property, WorldData& data) const override;
 	bool readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data);
 	bool readItemIDs(tinyxml2::XMLElement* firstTile);
 

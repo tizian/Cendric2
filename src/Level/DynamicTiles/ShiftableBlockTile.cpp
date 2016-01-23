@@ -69,46 +69,41 @@ void ShiftableBlockTile::calculateUnboundedVelocity(const sf::Time& frameTime, s
 }
 
 void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition) {
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
-	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	const sf::FloatRect& bb = *getBoundingBox();
+	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 
-	bool isMovingDown = nextPosition.y > getBoundingBox()->top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
-	bool isMovingX = nextPosition.x != getBoundingBox()->left;
+	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
+	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
-	bool collidesX = isMovingX && m_level->collides(nextBoundingBoxX, this);
-
-	// check for mob collision
-	if (!collidesX && isMovingX) {
-		collidesX = m_level->collidesWithMobs(nextBoundingBoxX);
-	}
+	bool collidesX = isMovingX && m_level->collides(nextBoundingBoxX, this, false, false);
 
 	if (collidesX) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
+		if (isMovingRight) {
+			setPositionX(m_level->getNonCollidingLeft(nextBoundingBoxX, this, false, false));
+		}
+		else {
+			setPositionX(m_level->getNonCollidingRight(nextBoundingBoxX, this, false, false));
+		}
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
 	}
 
 	// check for collision on y axis
-	bool collidesY = m_level->collides(nextBoundingBoxY, this);
-
-	if (!collidesY && isMovingDown && 
-		(std::floor(getBoundingBox()->top / m_tileSize.y) == (getBoundingBox()->top / m_tileSize.y) 
-			|| std::floor(getBoundingBox()->top) != std::floor(nextPosition.y))) {
-		// we've moved over a line in the grid. check for collisions with mobs.
-		sf::FloatRect mobCollisionBox = nextBoundingBoxY;
-		mobCollisionBox.top = (std::floor(nextPosition.y / m_tileSize.y) + 1) * m_tileSize.y;
-		collidesY = m_level->collidesWithMobs(mobCollisionBox);
-	}
-	if (!isMovingDown && collidesY) {
-		setAccelerationY(0.0f);
+	bool collidesY = m_level->collides(nextBoundingBoxY, this, false, false);
+	if (collidesY) {
+		setAccelerationY(0.0);
 		setVelocityY(0.0f);
-	}
-	else if (isMovingDown && collidesY) {
-		setAccelerationY(0.0f);
-		setVelocityY(0.0f);
-		setPositionY(m_level->getGround(nextBoundingBoxY));
+		if (isMovingDown) {
+			setPositionY(m_level->getNonCollidingTop(nextBoundingBoxY, this, false, false));
+		}
+		else {
+			setPositionY(m_level->getNonCollidingBottom(nextBoundingBoxY, this, false, false));
+		}
 	}
 }

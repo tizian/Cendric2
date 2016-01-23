@@ -1,15 +1,10 @@
 #include "Map/Map.h"
 
 Map::Map() {
+	m_worldData = &m_mapData;
 }
 
 Map::~Map() {
-	dispose();
-}
-
-void Map::dispose() {
-	m_backgroundTileMap.dispose();
-	m_foregroundTileMap.dispose();
 }
 
 bool Map::load(const std::string& id) {
@@ -18,11 +13,14 @@ bool Map::load(const std::string& id) {
 		return false;
 	}
 
+	m_mapData.id = id;
+	tileWidth = static_cast<float>(m_mapData.tileSize.x);
+	tileHeight = static_cast<float>(m_mapData.tileSize.y);
+
 	// load map
 	m_backgroundTileMap.load(m_mapData, m_mapData.backgroundTileLayers);
 	m_lightedForegroundTileMap.load(m_mapData, m_mapData.lightedForegroundTileLayers);
 	m_foregroundTileMap.load(m_mapData, m_mapData.foregroundTileLayers);
-	m_id = id;
 	return true;
 }
 
@@ -37,7 +35,7 @@ void Map::loadForRenderTexture(Screen* screen) {
 	loader.loadDynamicTiles(m_mapData, screen, this);
 }
 
-void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center, const TileMap& map) const {
+void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) const {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
@@ -46,70 +44,14 @@ void Map::draw(sf::RenderTarget &target, const sf::RenderStates states, const sf
 	float camCenterY = std::max((WINDOW_HEIGHT) / 2.f, std::min(m_mapData.mapRect.height - (WINDOW_HEIGHT) / 2.f, center.y));
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
-	map.draw(target, states);
 }
 
-void Map::update(const sf::Time& frameTime) {
-	m_backgroundTileMap.update(frameTime);
-	m_foregroundTileMap.update(frameTime);
-	m_lightedForegroundTileMap.update(frameTime);
-}
-
-void Map::drawBackground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
-	draw(target, states, center, m_backgroundTileMap);
-}
-
-void Map::drawLightedForeground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
-	draw(target, states, center, m_lightedForegroundTileMap);
-}
-
-void Map::drawForeground(sf::RenderTarget &target, const sf::RenderStates states, const sf::Vector2f& center) const {
-	draw(target, states, center, m_foregroundTileMap);
-}
-
-const sf::FloatRect& Map::getMapRect() const {
-	return m_mapData.mapRect;
-}
-
-const TileMap& Map::getBackgroundTilemap() const {
-	return m_backgroundTileMap;
-}
-
-const TileMap& Map::getForegroundTilemap() const {
-	return m_foregroundTileMap;
-}
-
-bool Map::collides(const sf::FloatRect& boundingBox) const {
-	// check for collision with level rect (x axis)
-	if (boundingBox.left < m_mapData.mapRect.left || boundingBox.left + boundingBox.width > m_mapData.mapRect.left + m_mapData.mapRect.width) {
-		return true;
-	}
-	// check for collision with level rect (y axis)
+bool Map::collides(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
+	// additional : check for collision with map rect (y axis)
 	if (boundingBox.top < m_mapData.mapRect.top || boundingBox.top + boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height) {
 		return true;
 	}
-
-	float tileWidth = static_cast<float>(m_backgroundTileMap.getTilesize().x);
-	float tileHeight = static_cast<float>(m_backgroundTileMap.getTilesize().y);
-
-	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
-	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
-	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
-	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
-	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
-	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
-	sf::Vector2i bottomRight(rightX, bottomY);
-
-	// check collision grid
-	for (int x = topLeft.x; x <= topRight.x; x++) {
-		for (int y = topLeft.y; y <= bottomLeft.y; y++) {
-			if (m_mapData.collidableTilePositions[y][x]) {
-				return true;
-			}
-		}
-	}
-
-	return false;
+	return World::collides(boundingBox);
 }
 
 MapExitData* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {
@@ -121,12 +63,4 @@ MapExitData* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {
 	}
 
 	return nullptr;
-}
-
-const std::string& Map::getID() const {
-	return m_id;
-}
-
-float Map::getDimming() const {
-	return m_mapData.dimming;
 }

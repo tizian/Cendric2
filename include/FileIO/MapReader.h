@@ -6,11 +6,11 @@
 
 #include "Structs/MapData.h"
 #include "Enums/MapDynamicTileID.h"
-#include "FileIO/TMXReader.h"
+#include "FileIO/WorldReader.h"
 
-class MapReader : public TMXReader {
+class MapReader : public WorldReader {
 public:
-	MapReader() : TMXReader() {};
+	MapReader() : WorldReader() {};
 
 	bool readMap(const char* fileName, MapData& data);
 

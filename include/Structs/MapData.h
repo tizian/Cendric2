@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Structs/TMXData.h"
+#include "Structs/WorldData.h"
 #include "Structs/MapExitData.h"
 #include "Structs/NPCData.h"
 #include "Structs/MapDynamicTileData.h"
 
-struct MapData : TMXData {
+struct MapData : WorldData {
 	std::vector<std::pair<MapDynamicTileID, std::vector<int>>> dynamicTileLayers;
 	std::vector<MapDynamicTileData> dynamicTiles;
 	

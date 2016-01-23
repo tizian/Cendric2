@@ -119,10 +119,11 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	sf::Vector2f focus = m_mainChar->getCenter();
 
 	// Render map background etc. to window							(Normal map background rendered)
-	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default, focus);
+	m_currentMap.setWorldView(renderTarget, focus);
+	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_MapMovableGameObject, renderTarget);
-	m_currentMap.drawLightedForeground(renderTarget, sf::RenderStates::Default, focus);
+	m_currentMap.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 	sf::View adjustedView = renderTarget.getView();
 
 	// Render ambient light level + light sprites to extra buffer	(Buffer contains light levels as grayscale colors)
@@ -141,7 +142,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	m_renderTexture.clear(sf::Color(0, 0, 0, 0));
 
 	// Render foreground layer to extra buffer
-	m_currentMap.drawForeground(m_renderTexture, sf::RenderStates::Default, focus);
+	m_currentMap.drawForeground(m_renderTexture, sf::RenderStates::Default);
 	m_renderTexture.display();
 
 	// Render buffer to window										(Normal foreground rendered on top)

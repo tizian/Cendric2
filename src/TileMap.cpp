@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool TileMap::load(const TMXData& data, const std::vector<std::vector<int> >& layers) {
+bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& layers) {
 	if (layers.empty()) return false;
 	m_tilesetPath = data.tileSetPath;
 	m_tileset = g_resourceManager->getTexture(data.tileSetPath);
@@ -72,7 +72,7 @@ bool TileMap::load(const TMXData& data, const std::vector<std::vector<int> >& la
 	return true;
 }
 
-void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const TMXData& data) {
+void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const WorldData& data) {
 	for (auto& tile : data.animatedTiles) {
 		if (tile.tileID == tileNumber) {
 

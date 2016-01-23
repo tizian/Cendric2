@@ -5,7 +5,7 @@
 #include "Structs/AnimatedTileData.h"
 #include "Structs/LightData.h"
 
-struct TMXData {
+struct WorldData {
 	std::string id;
 	std::string name;
 	sf::Vector2i mapSize;

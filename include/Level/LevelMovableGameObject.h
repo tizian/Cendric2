@@ -12,7 +12,7 @@ class MovingBehavior;
 class AttackingBehavior;
 
 // a MOB in a level, enemies + main character.
-class LevelMovableGameObject : public MovableGameObject {
+class LevelMovableGameObject : public virtual MovableGameObject {
 public:
 	LevelMovableGameObject(Level* level);
 	virtual ~LevelMovableGameObject();

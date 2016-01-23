@@ -60,6 +60,6 @@ void ShadowTrapSpell::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (collidesY) {
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
-		setPositionY(m_level->getGround(nextBoundingBoxY));
+		setPositionY(m_level->getNonCollidingTop(nextBoundingBoxY));
 	}
 }

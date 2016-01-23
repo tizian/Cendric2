@@ -26,39 +26,46 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
 	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
-	if (isMovingX && level.collides(nextBoundingBoxX, m_ignoreDynamicTiles)) {
+	if (isMovingX && level.collides(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles)) {
 		m_mainChar->setAccelerationX(0.0f);
 		m_mainChar->setVelocityX(0.0f);
+		if (isMovingRight) {
+			m_mainChar->setPositionX(level.getNonCollidingLeft(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles));
+		}
+		else {
+			m_mainChar->setPositionX(level.getNonCollidingRight(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles));
+		}
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
 	}
 
 	// check for collision on y axis
-	bool collidesY = level.collides(nextBoundingBoxY, m_ignoreDynamicTiles);
-	if (!isMovingDown && collidesY) {
+	bool collidesY = level.collides(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles);
+	if (collidesY) {
 		m_mainChar->setAccelerationY(0.0);
 		m_mainChar->setVelocityY(0.0f);
-		// set mob up in case of anti gravity!
-		if (m_isFlippedGravity) {
-			m_mainChar->setPositionY(level.getCeiling(nextBoundingBoxY));
+		if (isUpsideDown() != isMovingDown) {
 			m_isGrounded = true;
 		}
-	}
-	else if (isMovingDown && collidesY) {
-		m_mainChar->setAccelerationY(0.0f);
-		m_mainChar->setVelocityY(0.0f);
-		// set mob down. in case of normal gravity.
-		if (!m_isFlippedGravity) {
-			m_mainChar->setPositionY(level.getGround(nextBoundingBoxY));
-			m_isGrounded = true;
+		if (isMovingDown) {
+			m_mainChar->setPositionY(level.getNonCollidingTop(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles));
+		}
+		else {
+			m_mainChar->setPositionY(level.getNonCollidingBottom(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles));
 		}
 	}
 
 	if (std::abs(m_mainChar->getVelocity().y) > 0.f)
 		m_isGrounded = false;
+
+	if (!isMovingDown && nextBoundingBoxY.top - bb.height < level.getWorldRect().top || 
+		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
+		m_mob->setDead();
+	}
 }
 
 void UserMovingBehavior::handleMovementInput() {

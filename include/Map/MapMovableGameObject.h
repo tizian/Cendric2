@@ -6,7 +6,7 @@
 class Map;
 
 // a MOB in a map, npcs + main character.
-class MapMovableGameObject : virtual public MovableGameObject {
+class MapMovableGameObject : public virtual MovableGameObject {
 public:
 	MapMovableGameObject(Map* map);
 	virtual ~MapMovableGameObject();
