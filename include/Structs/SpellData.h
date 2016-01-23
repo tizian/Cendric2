@@ -68,10 +68,10 @@ private:
 	static SpellData getLeechSpellData();
 	static SpellData getRaiseTheDeadSpellData();
 	static SpellData getGhostFormSpellData();
-	// static SpellData getSummonGargoyleSpellData();
+	static SpellData getSummonGargoyleSpellData();
 
 	static SpellData getLightSpellData();
-	// static SpellData getHolyFireSpellData();
+	static SpellData getHolyFireSpellData();
 	static SpellData getDivineShieldSpellData();
 	static SpellData getLeapOfFaithSpellData();
 	static SpellData getAureolaSpellData();

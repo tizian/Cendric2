@@ -37,7 +37,7 @@ public:
 	// the mob adds these attributes to its own. if their time runs out, they get removed again. The attribute "current health" however will stay.
 	void addAttributes(const sf::Time& duration, const AttributeData& attributes);
 	// adds a dot to this mob
-	virtual void addDamageOverTime(const DamageOverTimeData& data);
+	virtual void addDamageOverTime(DamageOverTimeData& data);
 	// flips the gravity and the sprite
 	void flipGravity();
 	

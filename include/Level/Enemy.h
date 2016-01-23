@@ -38,7 +38,7 @@ public:
 	void setFeared(const sf::Time& fearedTime);
 	// the enemy is stunned for the given time
 	void setStunned(const sf::Time& stunnedTime);
-	void addDamageOverTime(const DamageOverTimeData& data) override;
+	void addDamageOverTime(DamageOverTimeData& data) override;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;

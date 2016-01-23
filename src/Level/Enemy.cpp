@@ -261,17 +261,17 @@ void Enemy::setPersistent(bool value) {
 	m_isPersistent = value;
 }
 
-void Enemy::setFeared(const sf::Time &fearedTime) {
+void Enemy::setFeared(const sf::Time& fearedTime) {
 	m_fearedTime = fearedTime;
 	m_buffBar->addFeared(fearedTime);
 }
 
-void Enemy::setStunned(const sf::Time &stunnedTime) {
+void Enemy::setStunned(const sf::Time& stunnedTime) {
 	m_stunnedTime = stunnedTime;
 	m_buffBar->addStunned(stunnedTime);
 }
 
-void Enemy::addDamageOverTime(const DamageOverTimeData& data) {
+void Enemy::addDamageOverTime(DamageOverTimeData& data) {
 	if (m_isDead || data.damageType == DamageType::VOID) return;
 	m_buffBar->addDotBuff(data.duration, data.damageType);
 	LevelMovableGameObject::addDamageOverTime(data);

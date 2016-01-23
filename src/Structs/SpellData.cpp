@@ -514,6 +514,26 @@ SpellData SpellData::getLightSpellData() {
 	return light;
 }
 
+SpellData SpellData::getHolyFireSpellData() {
+	SpellData holyFire = EMPTY_SPELL;
+	holyFire.id = SpellID::HolyFire;
+	holyFire.spellType = SpellType::Divine;
+	holyFire.iconTextureRect = sf::IntRect(50, 150, 50, 50);
+
+	holyFire.cooldown = sf::seconds(20);
+	holyFire.range = 300.f;
+	holyFire.boundingBox = sf::FloatRect(0, 0, 1, 1);
+	holyFire.duration = sf::seconds(2);
+	holyFire.activeDuration = sf::seconds(3);
+	holyFire.range = 300.f;
+	holyFire.attachedToMob = true;
+
+	holyFire.durationModifierAddition = sf::seconds(60);
+	holyFire.rangeModifierAddition = 200.f;
+
+	return holyFire;
+}
+
 SpellData SpellData::getLeapOfFaithSpellData() {
 	SpellData leapOfFaith = EMPTY_SPELL;
 	leapOfFaith.id = SpellID::LeapOfFaith;

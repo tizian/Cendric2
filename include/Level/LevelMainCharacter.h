@@ -26,7 +26,7 @@ public:
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);
 	void addDamage(int damage, DamageType damageType) override;
-	void addDamageOverTime(const DamageOverTimeData& data) override;
+	void addDamageOverTime(DamageOverTimeData& data) override;
 	// adds the item to the players inventory
 	void lootItem(const std::string& item, int quantity) const;
 	void lootItems(std::map<std::string, int>& items) const;

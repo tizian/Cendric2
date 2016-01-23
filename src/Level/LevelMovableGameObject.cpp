@@ -122,8 +122,11 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
 	setSpriteColor(sf::Color::Red, sf::milliseconds(200));
 }
 
-void LevelMovableGameObject::addDamageOverTime(const DamageOverTimeData& data) {
+void LevelMovableGameObject::addDamageOverTime(DamageOverTimeData& data) {
 	if (m_isDead || data.damageType == DamageType::VOID) return;
+	// set the time for the first tick down, the first tick should not
+	// hurt the mob. 
+	data.duration -= sf::milliseconds(1);
 	m_dots.push_back(data);
 }
 
