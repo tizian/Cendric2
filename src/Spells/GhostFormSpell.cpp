@@ -109,7 +109,7 @@ void GhostFormSpell::loadParticleSystem(float startVelocity) {
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
 	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::SizeUpdater>();
 }
 
 void GhostFormSpell::updateParticleSystemPosition() {

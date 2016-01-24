@@ -22,6 +22,7 @@ struct SpellData {
 	DamageType damageType;
 	bool needsTarget;
 	bool attachedToMob;
+	bool dynamicTileEffect;
 
 	// modifiable by crystal modifiers
 	int damage;
@@ -85,6 +86,7 @@ const struct SpellData EMPTY_SPELL =
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),
 	DamageType::VOID,
+	false,
 	false,
 	false,
 

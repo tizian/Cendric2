@@ -114,4 +114,5 @@ void FlashSpell::loadParticleSystem() {
 	m_ps->addUpdater<particles::TimeUpdater>();
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::SizeUpdater>();
 }

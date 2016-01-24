@@ -278,6 +278,7 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.damagePerSecond = 2;
 	fireBall.duration = sf::seconds(3);
 	fireBall.needsTarget = true;
+	fireBall.dynamicTileEffect = true;
 	fireBall.damage = 10;
 	fireBall.speed = 300.f;
 
@@ -300,6 +301,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.divergenceAngle = 0.2f;
 	iceBall.damageType = DamageType::Ice;
 	iceBall.activeDuration = sf::seconds(5);
+	iceBall.dynamicTileEffect = true;
 	iceBall.needsTarget = true;
 	iceBall.damage = 6;
 	iceBall.speed = 200.f;
@@ -407,6 +409,7 @@ SpellData SpellData::getTelekinesisSpellData() {
 	telekinesis.cooldown = sf::seconds(3);
 	telekinesis.boundingBox = sf::FloatRect(0, 0, 20, 20);
 	telekinesis.speed = 200.f;
+	telekinesis.dynamicTileEffect = true;
 	telekinesis.needsTarget = true;
 	telekinesis.range = 100;
 	telekinesis.activeDuration = sf::seconds(telekinesis.range / telekinesis.speed);
@@ -429,6 +432,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.duration = sf::seconds(1);
 	windGust.activeDuration = windGust.duration;
 	windGust.attachedToMob = true;
+	windGust.dynamicTileEffect = true;
 	windGust.damageType = DamageType::Ice;
 	windGust.damagePerSecond = 5;
 
@@ -574,6 +578,7 @@ SpellData SpellData::getUnlockSpellData() {
 	unlock.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	unlock.activeDuration = sf::seconds(1);
 	unlock.needsTarget = true;
+	unlock.dynamicTileEffect = true;
 	unlock.speed = 200.f;
 
 	return unlock;

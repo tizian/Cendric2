@@ -65,15 +65,15 @@ void HolyFireSpell::loadParticleSystem() {
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 40.f;
-	sizeGen->minEndSize = 1000.f;
-	sizeGen->maxEndSize = 1000.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 30.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(162, 7, 0, 50);
 	colGen->maxStartCol = sf::Color(234, 148, 0, 100);
-	colGen->minEndCol =  sf::Color(255, 244, 127, 100);
-	colGen->maxEndCol = sf::Color(255, 255, 255, 150);
+	colGen->minEndCol =  sf::Color(255, 244, 127, 30);
+	colGen->maxEndCol = sf::Color(255, 255, 255, 50);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -20.f;
@@ -89,6 +89,7 @@ void HolyFireSpell::loadParticleSystem() {
 	m_ps->addUpdater<particles::TimeUpdater>();
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::SizeUpdater>();
 }
 
 void HolyFireSpell::updateParticleSystemPosition() {
