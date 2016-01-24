@@ -109,13 +109,13 @@ void SpellSlot::initSpellSlot() {
 
 void SpellSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
-	sf::Vector2f positionOffset(SpellSlot::SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, SpellSlot::SIZE - 10.f);
+	sf::Vector2f positionOffset(SpellSlot::ICON_SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, SpellSlot::ICON_SIZE + 10.f);
 	m_inputKey.setPosition(pos + positionOffset);
-	m_cooldownRect.setPosition(pos.x + ICON_OFFSET, pos.y + ICON_OFFSET);
-	m_gems[0].setPosition(pos + sf::Vector2f(38.f, 6.f));
-	m_gems[1].setPosition(pos + sf::Vector2f(6.f, 38.f));
-	m_gems[2].setPosition(pos + sf::Vector2f(38.f, 70.f));
-	m_gems[3].setPosition(pos + sf::Vector2f(70.f, 38.f));
+	m_cooldownRect.setPosition(pos);
+	m_gems[0].setPosition(pos + sf::Vector2f(20.f, -12.f));
+	m_gems[1].setPosition(pos + sf::Vector2f(-12.f, 20.f));
+	m_gems[2].setPosition(pos + sf::Vector2f(20.f, 52.f));
+	m_gems[3].setPosition(pos + sf::Vector2f(52.f, 20.f));
 }
 
 void SpellSlot::render(sf::RenderTarget& renderTarget) {

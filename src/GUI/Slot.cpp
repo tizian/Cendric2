@@ -6,7 +6,7 @@ const float Slot::ICON_SIZE = 50.f;
 
 void Slot::initSlot() {
 	float size = getConfiguredSize();
-	setBoundingBox(sf::FloatRect(0.f, 0.f, size, size));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, ICON_SIZE, ICON_SIZE));
 	setDebugBoundingBox(sf::Color::Red);
 	setInputInDefaultView(true);
 
@@ -31,10 +31,10 @@ void Slot::initSlot() {
 void Slot::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	float iconOffset = getConfiguredIconOffset();
-	m_backgroundRect.setPosition(pos.x + iconOffset, pos.y + iconOffset);
-	m_iconRect.setPosition(pos.x + iconOffset, pos.y + iconOffset);
-	m_overlayRect.setPosition(pos.x + iconOffset, pos.y + iconOffset);
-	m_borderRect.setPosition(pos);
+	m_backgroundRect.setPosition(pos);
+	m_iconRect.setPosition(pos);
+	m_overlayRect.setPosition(pos);
+	m_borderRect.setPosition(pos.x - iconOffset, pos.y - iconOffset);
 }
 
 void Slot::activate() {

@@ -37,18 +37,19 @@ void SpellSelection::render(sf::RenderTarget& target) {
 	if (m_isVisible) {
 		for (auto& it : m_spellSlots) {
 			it.render(target);
+			it.renderAfterForeground(target);
 		}
 	}
 }
 
 void SpellSelection::reload() {
 	m_spellSlots.clear();
-	float offset = 0.f;
+	float offset = SpellSlot::ICON_OFFSET;
 	for (auto& it : m_spellManager->getSpellMap()) {
 		SpellSlot slot(it->getSpellData());
 		slot.setPosition(sf::Vector2f(
 			SPELLSELECTION_OFFSET.x + offset,
-			WINDOW_HEIGHT - (SpellSlot::SIZE + SPELLSELECTION_OFFSET.y)));
+			WINDOW_HEIGHT - (SpellSlot::ICON_SIZE + SPELLSELECTION_OFFSET.y + SpellSlot::ICON_OFFSET)));
 		m_spellSlots.push_back(slot);
 		offset += (SPELLSLOT_SPACING + SpellSlot::SIZE);
 	}

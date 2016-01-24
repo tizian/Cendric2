@@ -35,7 +35,7 @@ ModifierSlot::~ModifierSlot() {
 void ModifierSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
 	if (m_descriptionWindow != nullptr) {
-		sf::Vector2f pos(getBoundingBox()->left, getBoundingBox()->top - m_descriptionWindow->getSize().y - 10.f);
+		sf::Vector2f pos(getBoundingBox()->left, getBoundingBox()->top - m_descriptionWindow->getSize().y - 20.f);
 		m_descriptionWindow->setPosition(pos);
 	}
 }

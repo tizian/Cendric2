@@ -465,15 +465,15 @@ void Inventory::reload() {
 }
 
 void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slots) {
-	float yOffset = GUIConstants::TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y;
-	float xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
+	float yOffset = GUIConstants::TOP + 2 * GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y;
+	float xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET;
 	int y = 1;
 	int x = 1;
 	for (auto& it : slots) {
 		it.second.setPosition(sf::Vector2f(xOffset, yOffset));
 		if (x + 1 > SLOT_COUNT_X) {
 			x = 1;
-			xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
+			xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET;
 			y++;
 			yOffset += MARGIN + InventorySlot::SIZE;
 		}

@@ -25,13 +25,13 @@ void WeaponWindow::reload() {
 		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item_desc", GUIConstants::CHARACTER_SIZE_M,
 			static_cast<int>(WIDTH)));
 	}
-	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
+	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET, TOP + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET));
 
 	clearAllSlots();
 
 	if (m_weapon == nullptr) return;
 
-	float xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f;
+	float xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET;
 	float yOffset = TOP + Spellbook::SPELL_OFFSET;
 	int slotNr = 0;
 	for (auto& it : m_weapon->getWeaponSlots()) {
@@ -52,14 +52,14 @@ void WeaponWindow::reload() {
 		}
 		for (int i = 0; i < modifiers.size(); ++i) {
 			auto& mod = modifiers[i];
-			mod.setPosition(sf::Vector2f(xOffset, yOffset - ModifierSlot::ICON_OFFSET + SpellSlot::ICON_OFFSET));
+			mod.setPosition(sf::Vector2f(xOffset, yOffset));
 			mod.setSpellSlotNr(slotNr);
 			mod.setNr(i);
 			xOffset += ModifierSlot::SIZE + MARGIN;
 		}
 
 		yOffset += SpellSlot::SIZE + MARGIN;
-		xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f;
+		xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET;
 		slotNr++;
 		m_weaponSlots.push_back(std::pair<SpellSlot, std::vector<ModifierSlot>>({ spellSlot, modifiers }));
 	} 
@@ -258,6 +258,7 @@ void WeaponWindow::render(sf::RenderTarget& target) {
 
 	for (auto& it : m_weaponSlots) {
 		it.first.render(target);
+		it.first.renderAfterForeground(target);
 		for (auto& it2 : it.second) {
 			it2.render(target);
 		}
