@@ -10,6 +10,7 @@
 
 // Cendric in a level
 class LevelMainCharacter : public virtual LevelMovableGameObject {
+	friend class UserMovingBehavior;
 public:
 	LevelMainCharacter(Level* level);
 	~LevelMainCharacter();
@@ -27,6 +28,8 @@ public:
 	void setInvisibilityLevel(int level);
 	void addDamage(int damage, DamageType damageType) override;
 	void addDamageOverTime(DamageOverTimeData& data) override;
+	void setFeared(const sf::Time& fearedTime) override;
+	void setStunned(const sf::Time& stunnedTime) override;
 	// adds the item to the players inventory
 	void lootItem(const std::string& item, int quantity) const;
 	void lootItems(std::map<std::string, int>& items) const;

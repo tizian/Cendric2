@@ -21,7 +21,13 @@ bool Map::load(const std::string& id) {
 	m_backgroundTileMap.load(m_mapData, m_mapData.backgroundTileLayers);
 	m_lightedForegroundTileMap.load(m_mapData, m_mapData.lightedForegroundTileLayers);
 	m_foregroundTileMap.load(m_mapData, m_mapData.foregroundTileLayers);
+	g_resourceManager->loadMapResources();
 	return true;
+}
+
+void Map::dispose() {
+	World::dispose();
+	g_resourceManager->deleteMapResources();
 }
 
 void Map::loadAfterMainChar(Screen* screen) {

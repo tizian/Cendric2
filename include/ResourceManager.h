@@ -22,12 +22,13 @@ public:
 	void init();
 
 	void deleteResource(ResourceID id);
-	// deletes all spell + dynamic tile + enemy resources
-	void deleteLevelResources();
-	// loads all spell + dynamic tile + enemy resources
-	// called before loading a level so that the game won't lag when using a new spell.
-	void loadLevelResources();
 	void deleteResource(const std::string& filename);
+
+	void deleteLevelResources();
+	void loadLevelResources();
+
+	void deleteMapResources();
+	void loadMapResources();
 
 	void setError(ErrorID id, const std::string& description);
 

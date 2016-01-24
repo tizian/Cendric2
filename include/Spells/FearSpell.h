@@ -5,11 +5,6 @@
 
 class FearSpell : public Spell {
 public:
-	FearSpell(int strength);
+	FearSpell();
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
-	void execOnHit(LevelMovableGameObject* target) override;
-
-private:
-	int m_strength;
-	sf::Time m_fearedDuration;
 };

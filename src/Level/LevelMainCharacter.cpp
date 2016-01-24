@@ -36,6 +36,7 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 }
 
 void LevelMainCharacter::handleAttackInput() {
+	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 	// update current spell
 	for (auto const &it : m_spellKeyMap) {
@@ -161,6 +162,24 @@ void LevelMainCharacter::addDamageOverTime(DamageOverTimeData& data) {
 	sf::IntRect textureLocation((static_cast<int>(data.damageType)-1) * 50, 0, 50, 50);
 	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, data.duration, data);
 	LevelMovableGameObject::addDamageOverTime(data);
+}
+
+void LevelMainCharacter::setFeared(const sf::Time& fearedTime) {
+	if (m_isDead) return;
+	LevelMovableGameObject::setFeared(fearedTime);
+	DamageOverTimeData data;
+	data.isFeared = true;
+	sf::IntRect textureLocation(250, 0, 50, 50);
+	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, fearedTime, data);
+}
+
+void LevelMainCharacter::setStunned(const sf::Time& stunnedTime) {
+	if (m_isDead) return;
+	LevelMovableGameObject::setStunned(stunnedTime);
+	DamageOverTimeData data;
+	data.isStunned = true;
+	sf::IntRect textureLocation(300, 0, 50, 50);
+	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, stunnedTime, data);
 }
 
 void LevelMainCharacter::addDamage(int damage, DamageType damageType) {

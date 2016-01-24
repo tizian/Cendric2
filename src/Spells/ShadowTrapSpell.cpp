@@ -1,7 +1,6 @@
 #include "Spells/ShadowTrapSpell.h"
 
-ShadowTrapSpell::ShadowTrapSpell(int strength) : Spell() {
-	m_strength = strength;
+ShadowTrapSpell::ShadowTrapSpell() : Spell() {
 }
 
 void ShadowTrapSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -22,14 +21,21 @@ void ShadowTrapSpell::load(const SpellData& bean, LevelMovableGameObject* mob, c
 }
 
 void ShadowTrapSpell::execOnHit(LevelMovableGameObject *target) {
+	setDisposed();
+
+	if (!m_data.isFearing && !m_data.isStunning) {
+		return;
+	}
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() < m_strength) {
-			enemy->setStunned(m_stunDuration);
-			setDisposed();
+		if (enemy->getMentalStrength() >= m_data.strength) {
+			return;
 		}
 	}
-	setDisposed();
-	// main character can't be stunned yet.
+
+	if (m_data.isFearing)
+		target->setFeared(m_stunDuration);
+	else if (m_data.isStunning)
+		target->setStunned(m_stunDuration);
 }
 
 bool ShadowTrapSpell::getConfiguredRotateSprite() const {

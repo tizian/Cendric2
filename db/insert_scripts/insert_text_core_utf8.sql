@@ -82,6 +82,9 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Jump','Jump',
 INSERT INTO text (text_id, english, german, swiss_german) values ('KeyBindings','Key Bindings','Tastaturbelegung','Tastaturbelegig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('KeyReserved','This key is reserved and cannot be selected.','Diese Taste ist reserviert und kann nicht gewählt werden.','Die Taste isch reserviert und derf me nid bruche.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Killed','Killed','Getötet','Killt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Feared','Feared','Verängstigt','Verängstigt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Stunned','Stunned','Betäubt','Betäubt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('GargoyleStrength','Gargoyle Strength','Gargoyle-Stärke','Gargoyle-Stärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Language','Language','Sprache','Sproch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Level','Level','Stufe','Level');
 INSERT INTO text (text_id, english, german, swiss_german) values ('LightDamage','Light Damage','Lichtschaden','Liechtschade');

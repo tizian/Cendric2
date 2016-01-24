@@ -1,7 +1,6 @@
 #include "Spells/AureolaSpell.h"
 
-AureolaSpell::AureolaSpell(int strength) : Spell() {
-	m_strength = strength;
+AureolaSpell::AureolaSpell() : Spell() {
 	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f));
 }
 
@@ -42,28 +41,29 @@ void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vec
 void AureolaSpell::update(const sf::Time& frameTime) {
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
-	sf::Vector2f div = nextPosition - getPosition();
+	sf::Vector2f diff = nextPosition - getPosition();
 
 	// check collisions with main char
-	if (m_ownerType != GameObjectType::_LevelMainCharacter) {
+	if (m_ownerType != GameObjectType::_LevelMainCharacter && !m_isOwnerControlled) {
 		checkCollisionsWithMainChar(getBoundingBox());
 	}
 	// check collisions with enemies
 	checkCollisionsWithEnemies(getBoundingBox());
+	MovableGameObject::update(frameTime);
+	GameObject::updateTime(m_data.activeDuration, frameTime);
+
 	// check collisions with owner
 	if (m_isReturning && m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
 		m_mob->addHeal(getHeal());
 		setDisposed();
 	}
-	MovableGameObject::update(frameTime);
-	GameObject::updateTime(m_data.activeDuration, frameTime);
 
-	if (m_data.activeDuration.asMilliseconds() <= 0) {
+	if (m_data.activeDuration == sf::Time::Zero) {
 		setDisposed();
 	}
 
 	if (!m_isReturning) {
-		m_rangeLeft -= std::sqrt(div.x * div.x + div.y * div.y);
+		m_rangeLeft -= norm(diff);
 		if (m_rangeLeft <= 0.f) {
 			m_isReturning = true;
 			m_absVel = std::sqrt(getVelocity().x * getVelocity().x + getVelocity().y * getVelocity().y);
@@ -93,13 +93,4 @@ void AureolaSpell::setPosition(const sf::Vector2f& pos) {
 	m_lightObject->setPosition(pos);
 }
 
-void AureolaSpell::execOnHit(LevelMovableGameObject *target) {
-	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() < m_strength) {
-			enemy->setStunned(m_data.duration);
-		}
-	}
-	setDisposed();
-	// main character can't be stunned yet.
-}
 

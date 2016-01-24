@@ -134,10 +134,8 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 	if (m_enemyState == EnemyState::Dead) return;
 
 	// update times
-	GameObject::updateTime(m_stunnedTime, frameTime);
-	GameObject::updateTime(m_waitingTime, frameTime);
 	GameObject::updateTime(m_recoveringTime, frameTime);
-	GameObject::updateTime(m_fearedTime, frameTime);
+	GameObject::updateTime(m_waitingTime, frameTime);
 	GameObject::updateTime(m_chasingTime, frameTime);
 	GameObject::updateTime(m_decisionTime, frameTime);
 
@@ -262,12 +260,14 @@ void Enemy::setPersistent(bool value) {
 }
 
 void Enemy::setFeared(const sf::Time& fearedTime) {
-	m_fearedTime = fearedTime;
+	if (m_isDead) return;
+	LevelMovableGameObject::setFeared(fearedTime);
 	m_buffBar->addFeared(fearedTime);
 }
 
 void Enemy::setStunned(const sf::Time& stunnedTime) {
-	m_stunnedTime = stunnedTime;
+	if (m_isDead) return;
+	LevelMovableGameObject::setStunned(stunnedTime);
 	m_buffBar->addStunned(stunnedTime);
 }
 

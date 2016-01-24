@@ -4,10 +4,6 @@
 ShadowTrapSpellCreator::ShadowTrapSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
-int ShadowTrapSpellCreator::getStrengthModifierValue() const {
-	return m_strength;
-}
-
 std::string ShadowTrapSpellCreator::getStrengthModifierName() const {
 	return "StunLevel";
 }
@@ -16,14 +12,10 @@ void ShadowTrapSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamage(spellData);
 
-	ShadowTrapSpell* newSpell = new ShadowTrapSpell(m_strength);
+	ShadowTrapSpell* newSpell = new ShadowTrapSpell();
 
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
-}
-
-void ShadowTrapSpellCreator::addStrengthModifier(int level) {
-	m_strength += level;
 }
 
 void ShadowTrapSpellCreator::addDurationModifier(int level) {

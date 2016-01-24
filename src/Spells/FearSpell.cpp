@@ -1,12 +1,10 @@
 #include "Spells/FearSpell.h"
 
-FearSpell::FearSpell(int strength) : Spell() {
-	m_strength = strength;
+FearSpell::FearSpell() : Spell() {
 }
 
 void FearSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
-	m_fearedDuration = bean.duration;
 
 	Animation spellAnimation;
 	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fear));
@@ -20,14 +18,4 @@ void FearSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const s
 	playCurrentAnimation(true);
 
 	Spell::load(bean, mob, target);
-}
-
-void FearSpell::execOnHit(LevelMovableGameObject *target) {
-	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() < m_strength) {
-			enemy->setFeared(m_fearedDuration);
-			setDisposed();
-		}
-	}
-	// main character can't be feared yet.
 }

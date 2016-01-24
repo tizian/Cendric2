@@ -38,6 +38,10 @@ public:
 	void addAttributes(const sf::Time& duration, const AttributeData& attributes);
 	// adds a dot to this mob
 	virtual void addDamageOverTime(DamageOverTimeData& data);
+	// the mob flees for the given time
+	virtual void setFeared(const sf::Time& fearedTime);
+	// the mob is stunned for the given time
+	virtual void setStunned(const sf::Time& stunnedTime);
 	// flips the gravity and the sprite
 	void flipGravity();
 	
@@ -76,6 +80,10 @@ protected:
 	std::vector<std::pair<sf::Time, AttributeData>> m_buffAttributes;
 	// active debuffs (dots) with their type, remaining time and dps
 	std::vector<DamageOverTimeData> m_dots;
+	// time stunned
+	sf::Time m_stunnedTime = sf::Time::Zero;
+	// time feared
+	sf::Time m_fearedTime = sf::Time::Zero;
 
 	AttributeData m_attributes;
 

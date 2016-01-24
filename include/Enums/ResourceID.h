@@ -52,6 +52,7 @@ enum class ResourceID {
 	Texture_enemy_nekomata_blue_trans,
 	Texture_enemy_crow,
 	Texture_enemy_skeleton,
+	Texture_enemy_gargoyle,
 	Texture_levelitems,
 	Texture_items,
 	Texture_dialogue,

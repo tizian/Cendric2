@@ -4,6 +4,13 @@
 #include "Spell.h"
 #include "LightObject.h"
 
+/*
+the following skins are available:
+0: fiery fireball (default)
+1: icy fireball
+2: shadow fireball
+3: light fireball
+*/
 class FireBallSpell : public Spell {
 public:
 	FireBallSpell();
@@ -11,6 +18,7 @@ public:
 
 	void setPosition(const sf::Vector2f& pos) override;
 	void setScreen(Screen* screen) override;
+
 	void setDisposed() override;
 
 private:

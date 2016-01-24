@@ -3,6 +3,11 @@
 #include "global.h"
 #include "Spell.h"
 
+/*
+the following skins are available:
+0: holy fire (default)
+1: shadow fire
+*/
 class HolyFireSpell : public Spell {
 public:
 	HolyFireSpell();

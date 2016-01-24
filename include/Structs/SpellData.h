@@ -23,6 +23,9 @@ struct SpellData {
 	bool needsTarget;
 	bool attachedToMob;
 	bool dynamicTileEffect;
+	bool isStunning;
+	bool isFearing;
+	int skinNr; // can be used to change the skin of the spell. Must be implemented by the spell itself.
 
 	// modifiable by crystal modifiers
 	int damage;
@@ -32,6 +35,7 @@ struct SpellData {
 	float speed;
 	int count;
 	float range;
+	int strength; // used for the isStunning and isFearing variables.
 	sf::Time duration; // duration of an effect of a spell, for example the fear duration (fear spell)
 	sf::Time activeDuration;	// the duration for which a spell is active before it gets disposed. 
 								//This value is not displayed to the user in contrast to the duration.
@@ -89,6 +93,9 @@ const struct SpellData EMPTY_SPELL =
 	false,
 	false,
 	false,
+	false,
+	false,
+	0,
 
 	0,
 	0,
@@ -97,6 +104,7 @@ const struct SpellData EMPTY_SPELL =
 	0.f,
 	1,
 	0.f,
+	-1,
 	sf::Time::Zero,
 	sf::Time::Zero,
 

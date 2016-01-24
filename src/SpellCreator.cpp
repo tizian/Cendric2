@@ -82,7 +82,7 @@ void SpellCreator::addReflectModifier(int level) {
 }
 
 void SpellCreator::addStrengthModifier(int level) {
-	// nop, we don't know yet what this does but the method is implemented so its subclasses won't have to
+	m_spellData.strength += level;
 }
 
 const SpellData& SpellCreator::getSpellData() const {
@@ -94,7 +94,7 @@ void SpellCreator::updateDamage(SpellData& bean) const {
 }
 
 int SpellCreator::getStrengthModifierValue() const {
-	return 0;
+	return m_spellData.strength;
 }
 
 std::string SpellCreator::getStrengthModifierName() const {

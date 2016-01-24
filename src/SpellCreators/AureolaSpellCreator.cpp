@@ -4,10 +4,6 @@
 AureolaSpellCreator::AureolaSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
-int AureolaSpellCreator::getStrengthModifierValue() const {
-	return m_strength;
-}
-
 std::string AureolaSpellCreator::getStrengthModifierName() const {
 	return "StunLevel";
 }
@@ -16,7 +12,7 @@ void AureolaSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamage(spellData);
 	for (int i = 0; i < m_spellData.count; i++) {
-		AureolaSpell* newSpell = new AureolaSpell(m_strength);
+		AureolaSpell* newSpell = new AureolaSpell();
 		spellData.divergenceAngle = i * m_spellData.divergenceAngle;
 		newSpell->load(spellData, m_owner, target);
 		m_screen->addObject(newSpell);
@@ -32,10 +28,6 @@ void AureolaSpellCreator::addCountModifier(int level) {
 
 void AureolaSpellCreator::addDurationModifier(int level) {
 	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
-}
-
-void AureolaSpellCreator::addStrengthModifier(int level) {
-	m_strength += level;
 }
 
 void AureolaSpellCreator::addDamageModifier(int level) {

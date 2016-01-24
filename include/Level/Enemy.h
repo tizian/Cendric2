@@ -34,10 +34,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	void onHit(Spell* spell) override;
-	// the enemy flees for the given time
-	void setFeared(const sf::Time& fearedTime);
-	// the enemy is stunned for the given time
-	void setStunned(const sf::Time& stunnedTime);
+	void setFeared(const sf::Time& fearedTime) override;
+	void setStunned(const sf::Time& stunnedTime) override;
 	void addDamageOverTime(DamageOverTimeData& data) override;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
@@ -101,10 +99,6 @@ protected:
 	
 	// time until the enemy can attack after it has taken a hit
 	sf::Time m_recoveringTime = sf::Time::Zero;
-	// time stunned
-	sf::Time m_stunnedTime = sf::Time::Zero;
-	// time feared
-	sf::Time m_fearedTime = sf::Time::Zero;
 	// time while the enemy does nothing because it tried to get to the main char and it failed
 	sf::Time m_waitingTime = sf::Time::Zero;
 	// time until next random desicion in idle state

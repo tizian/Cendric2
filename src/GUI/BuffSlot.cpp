@@ -163,8 +163,17 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 	if (m_buffType != BuffType::DamageOverTime) return;
 
 	std::string tooltip = "";
-	tooltip.append(g_textProvider->getText(EnumNames::getDamageTypeName(data.damageType)) + "\n\n");
-	tooltip.append(g_textProvider->getText("DamagePerSecond") + ": " + std::to_string(data.damage));
+
+	if (data.isFeared) {
+		tooltip.append(g_textProvider->getText("Feared") + "\n");
+	}
+	else if (data.isStunned) {
+		tooltip.append(g_textProvider->getText("Stunned") + "\n");
+	}
+	if (data.damageType != DamageType::VOID) {
+		tooltip.append(g_textProvider->getText(EnumNames::getDamageTypeName(data.damageType)) + "\n\n");
+		tooltip.append(g_textProvider->getText("DamagePerSecond") + ": " + std::to_string(data.damage));
+	}
 
 	m_tooltipText.setString(tooltip);
 	m_tooltipWindow.setWidth(2 * TEXT_OFFSET.x + m_tooltipText.getLocalBounds().width);

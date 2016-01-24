@@ -70,10 +70,21 @@ void HolyFireSpell::loadParticleSystem() {
 	sizeGen->maxEndSize = 30.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(162, 7, 0, 50);
-	colGen->maxStartCol = sf::Color(234, 148, 0, 100);
-	colGen->minEndCol =  sf::Color(255, 244, 127, 30);
-	colGen->maxEndCol = sf::Color(255, 255, 255, 50);
+	if (m_data.skinNr == 1) {
+		// shadow fire
+		colGen->minStartCol = sf::Color(78, 60, 122, 50);
+		colGen->maxStartCol = sf::Color(215, 181, 221, 100);
+		colGen->minEndCol = sf::Color(20, 0, 30, 30);
+		colGen->maxEndCol = sf::Color(25, 5, 35, 50);
+	}
+	else {
+		// default holy fire
+		colGen->minStartCol = sf::Color(162, 7, 0, 50);
+		colGen->maxStartCol = sf::Color(234, 148, 0, 100);
+		colGen->minEndCol = sf::Color(255, 244, 127, 30);
+		colGen->maxEndCol = sf::Color(255, 255, 255, 50);
+	}
+	
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -20.f;

@@ -3,11 +3,11 @@
 
 *Cendric* is a 2D RPG Platformer game in which players explore a world by completing levels and quests.
 
-The game is currently still in development but major parts of it are shaped via crowdsourcing. We accept suggestions for a set of different <a href="http://cendric.ch/contribute">categories</a>, such as concept art, level design, or sound effects. See http://cendric.ch for more information about its development process and learn how you can contribute. [Currently only available in German]
+The game is currently still in development. See http://cendric.ch for more information about its development process.
 
 ## Gameplay
 
-Cendric moves through the world on a 2D map and interacts with NPCs to trade or accept quests. At many places, he can enter levels in which he fights enemies, collects items or completes tricky platforming challanges. To accomplish all this, Cendric can master various spells from five different classes of magic.
+Cendric moves through the world on a 2D map and interacts with NPCs to trade or accept quests. At many places, he can enter levels in which he fights enemies, collects items or completes tricky platforming challenges. To accomplish all this, Cendric can master various spells from five different classes of magic.
 
 ## Features
 

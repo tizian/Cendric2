@@ -5,7 +5,7 @@
 
 class ShadowTrapSpell : public Spell {
 public:
-	ShadowTrapSpell(int strength);
+	ShadowTrapSpell();
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void execOnHit(LevelMovableGameObject* target) override;
@@ -17,6 +17,5 @@ public:
 	float getConfiguredMaxVelocityYDown() const override;
 
 private:
-	int m_strength;
 	sf::Time m_stunDuration;
 };

@@ -35,13 +35,16 @@ void NekomataEnemy::loadSpells() {
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
 
-	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
-	fireBallSpell.damage = 100;
-	fireBallSpell.cooldown = sf::milliseconds(3000);
-	fireBallSpell.speed = 200.f;
+	SpellData shadowFireSpell = SpellData::getSpellData(SpellID::HolyFire);
+	shadowFireSpell.skinNr = 1;
+	shadowFireSpell.damagePerSecond = 20;
+	shadowFireSpell.duration = sf::seconds(3.f);
+	shadowFireSpell.cooldown = sf::seconds(3.f);
+	shadowFireSpell.damageType = DamageType::Shadow;
+	shadowFireSpell.range = 300.f;
 
 	m_spellManager->addSpell(chopSpell);
-	m_spellManager->addSpell(fireBallSpell);
+	m_spellManager->addSpell(shadowFireSpell);
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
@@ -79,8 +82,8 @@ AttackingBehavior* NekomataEnemy::createAttackingBehavior(bool asAlly) {
 void NekomataEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
-	if (m_enemyAttackingBehavior->distToTarget() < m_enemyAttackingBehavior->getAggroRange()) {
-		m_spellManager->setCurrentSpell(1); // fire ball
+	if (m_enemyAttackingBehavior->distToTarget() < 300.f) {
+		m_spellManager->setCurrentSpell(1); // shadow fire
 		if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}

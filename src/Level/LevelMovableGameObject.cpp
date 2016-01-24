@@ -17,6 +17,9 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
+	// update times
+	GameObject::updateTime(m_stunnedTime, frameTime);
+	GameObject::updateTime(m_fearedTime, frameTime);
 
 	m_movingBehavior->update(frameTime);
 	m_attackingBehavior->update(frameTime);
@@ -134,6 +137,16 @@ void LevelMovableGameObject::addHeal(int heal) {
 	if (m_isDead || heal <= 0) return;
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints + heal));
 	setSpriteColor(sf::Color::Green, sf::milliseconds(200));
+}
+
+void LevelMovableGameObject::setFeared(const sf::Time& fearedTime) {
+	if (m_isDead) return;
+	m_fearedTime = fearedTime;
+}
+
+void LevelMovableGameObject::setStunned(const sf::Time& stunnedTime) {
+	if (m_isDead) return;
+	m_stunnedTime = stunnedTime;
 }
 
 void LevelMovableGameObject::onHit(Spell* spell) {

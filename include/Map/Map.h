@@ -20,6 +20,7 @@ public:
 	bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const override;
 	// checks if the main char has reached a level entry. If no, nullptr, else the spawn point and id for that level
 	MapExitData* checkLevelEntry(const sf::FloatRect& boundingBox) const;
+	void dispose() override;
 
 private:
 	// data loaded by the map loader

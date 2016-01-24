@@ -7,5 +7,6 @@ enum class EnemyID {
 	Nekomata_blue,
 	Crow,
 	Skeleton,
+	Gargoyle,
 	MAX
 };

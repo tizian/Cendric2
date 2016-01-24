@@ -58,6 +58,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_enemy_nekomata_blue_trans, "res/assets/enemies/spritesheet_enemy_nekomata_blue_trans.png" },
 		{ ResourceID::Texture_enemy_crow, "res/assets/enemies/spritesheet_enemy_crow.png" },
 		{ ResourceID::Texture_enemy_skeleton, "res/assets/enemies/spritesheet_enemy_skeleton.png" },
+		{ ResourceID::Texture_enemy_gargoyle, "res/assets/enemies/spritesheet_enemy_gargoyle.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/level_dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_crumblyblock, "res/assets/level_dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png" },
@@ -381,6 +382,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_enemy_nekomata_blue_trans);
 	deleteResource(ResourceID::Texture_enemy_crow);
 	deleteResource(ResourceID::Texture_enemy_skeleton);
+	deleteResource(ResourceID::Texture_enemy_gargoyle);
 
 	// delete debuff resources
 	deleteResource(ResourceID::Texture_debuff_fear);
@@ -392,6 +394,18 @@ void ResourceManager::deleteLevelResources() {
 	// delete game over sprite
 	deleteResource(ResourceID::Texture_screen_gameover);
 
+}
+
+void ResourceManager::loadMapResources() {
+	getTexture(ResourceID::Texture_dialogue);
+
+	getTexture(ResourceID::Texture_tile_cooking);
+}
+
+void ResourceManager::deleteMapResources() {
+	deleteResource(ResourceID::Texture_dialogue);
+
+	deleteResource(ResourceID::Texture_tile_cooking);
 }
 
 void ResourceManager::loadLevelResources() {

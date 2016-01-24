@@ -20,6 +20,7 @@
 #include "SpellCreators/ShadowTrapSpellCreator.h"
 #include "SpellCreators/RaiseTheDeadSpellCreator.h"
 #include "SpellCreators/HolyFireSpellCreator.h"
+#include "SpellCreators/SummonGargoyleSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -123,6 +124,12 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Range);
 		break;
+	case SpellID::SummonGargoyle:
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Damage);
+		types.push_back(SpellModifierType::Count);
+		types.push_back(SpellModifierType::Strength);
+		break;
 	default:
 		break;
 	}
@@ -192,6 +199,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::HolyFire:
 		creator = new HolyFireSpellCreator(data, owner);
 		break;
+	case SpellID::SummonGargoyle:
+		creator = new SummonGargoyleSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -243,6 +253,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getRaiseTheDeadSpellData();
 	case SpellID::HolyFire:
 		return getHolyFireSpellData();
+	case SpellID::SummonGargoyle:
+		return getSummonGargoyleSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -347,6 +359,8 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.activeDuration = sf::seconds(10);
 	aureola.needsTarget = true;
 	aureola.duration = sf::seconds(1.f);
+	aureola.isStunning = true;
+	aureola.strength = 1;
 	aureola.damage = 10;
 	aureola.heal = 10;
 	aureola.speed = 300.f;
@@ -374,6 +388,8 @@ SpellData SpellData::getFearSpellData() {
 	fear.duration = sf::seconds(2);
 	fear.needsTarget = true;
 	fear.speed = 300.f;
+	fear.isFearing = true;
+	fear.strength = 1;
 
 	fear.countModifierAddition = 1;
 	fear.reflectModifierAddition = 1;
@@ -481,6 +497,8 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.duration = sf::seconds(1.5f); // stun duration;
 	icyAmbush.needsTarget = true;
 	icyAmbush.damage = 100;
+	icyAmbush.isStunning = true;
+	icyAmbush.strength = 1;
 	
 	icyAmbush.damageModifierAddition = 50;
 	icyAmbush.reflectModifierAddition = 1;
@@ -580,6 +598,7 @@ SpellData SpellData::getUnlockSpellData() {
 	unlock.needsTarget = true;
 	unlock.dynamicTileEffect = true;
 	unlock.speed = 200.f;
+	unlock.strength = 1;
 
 	return unlock;
 }
@@ -633,11 +652,32 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.activeDuration = sf::seconds(15);
 	shadowTrap.damagePerSecond = 5;
 	shadowTrap.duration = sf::seconds(3);
+	shadowTrap.isStunning = true;
+	shadowTrap.strength = 1;
 
 	shadowTrap.damageModifierAddition = 5;
 	shadowTrap.durationModifierAddition = sf::seconds(1);
 
 	return shadowTrap;
+}
+
+SpellData SpellData::getSummonGargoyleSpellData() {
+	SpellData summonGargoyle = EMPTY_SPELL;
+	summonGargoyle.id = SpellID::SummonGargoyle;
+	summonGargoyle.spellType = SpellType::Necromancy;
+	summonGargoyle.iconTextureRect = sf::IntRect(200, 100, 50, 50);
+
+	summonGargoyle.cooldown = sf::seconds(30);
+	summonGargoyle.damageType = DamageType::Physical;
+	summonGargoyle.damage = 0;
+	summonGargoyle.duration = sf::seconds(20);
+	summonGargoyle.strength = 1;
+
+	summonGargoyle.damageModifierAddition = 10;
+	summonGargoyle.durationModifierAddition = sf::seconds(20);
+	summonGargoyle.countModifierAddition = 1;
+
+	return summonGargoyle;
 }
 
 SpellData SpellData::getRaiseTheDeadSpellData() {
@@ -654,6 +694,7 @@ SpellData SpellData::getRaiseTheDeadSpellData() {
 	raiseTheDead.needsTarget = true;
 	raiseTheDead.range = 100;
 	raiseTheDead.activeDuration = sf::seconds(raiseTheDead.range / raiseTheDead.speed);
+	raiseTheDead.strength = 1;
 
 	raiseTheDead.rangeModifierAddition = 150.f;
 	raiseTheDead.damageModifierAddition = 5;

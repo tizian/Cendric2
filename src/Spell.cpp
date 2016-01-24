@@ -53,6 +53,20 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 
 void Spell::execOnHit(LevelMovableGameObject* target) {
 	setDisposed();
+	
+	if (!m_data.isFearing && !m_data.isStunning) {
+		return;
+	}
+	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
+		if (enemy->getMentalStrength() >= m_data.strength) {
+			return;
+		}
+	}
+
+	if (m_data.isFearing)
+		target->setFeared(m_data.duration);
+	else if (m_data.isStunning)
+		target->setStunned(m_data.duration);
 }
 
 void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
