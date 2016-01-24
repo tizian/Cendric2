@@ -1,0 +1,31 @@
+#pragma once
+
+#include "global.h"
+#include "Spell.h"
+
+class HolyFireSpell : public Spell {
+public:
+	HolyFireSpell();
+	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
+	void render(sf::RenderTarget& target) override;
+	void update(const sf::Time& frameTime) override;
+
+	void setPosition(const sf::Vector2f& pos) override;
+	void setScreen(Screen* screen) override;
+	void setDisposed() override;
+	void execOnHit(LevelMovableGameObject* target) override;
+
+	sf::Vector2f getConfiguredPositionOffset() const override;
+
+private:
+	LightObject* m_lightObject = nullptr;
+	bool m_hasDamaged = false; // this spell only applies its dot once.
+	sf::Time m_emitTime = sf::seconds(1.f);
+
+	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
+	particles::DiskPositionGenerator* m_posGenerator = nullptr;
+
+	void loadParticleSystem();
+
+	void updateParticleSystemPosition();
+};

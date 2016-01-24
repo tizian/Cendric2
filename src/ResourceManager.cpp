@@ -115,6 +115,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_Particle_longblob, "res/assets/particles/longblob.png" },
 		{ ResourceID::Texture_Particle_snowflake, "res/assets/particles/snowflake.png" },
 		{ ResourceID::Texture_Particle_smoke, "res/assets/particles/smoke.png" },
+		{ ResourceID::Texture_Particle_flame, "res/assets/particles/flame.png" },
 		{ ResourceID::Sound_spell_fireball, "res/sound/sound_spell_fireball.wav" },
 		{ ResourceID::Sound_tile_water, "res/sound/sound_tile_water.wav" },
 		{ ResourceID::Sound_tile_lever, "res/sound/sound_tile_lever.ogg" }
@@ -356,6 +357,7 @@ void ResourceManager::deleteLevelResources() {
 	// delete particle resources for spells
 	deleteResource(ResourceID::Texture_Particle_snowflake);
 	deleteResource(ResourceID::Texture_Particle_smoke);
+	deleteResource(ResourceID::Texture_Particle_flame);
 
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
@@ -412,6 +414,7 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_Particle_snowflake);
 	getTexture(ResourceID::Texture_Particle_smoke);
 	getTexture(ResourceID::Texture_Particle_blob2);
+	getTexture(ResourceID::Texture_Particle_flame);
 
 	// load dynamic tile resources
 	getTexture(ResourceID::Texture_tile_frozenwater);

@@ -141,7 +141,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 			m_currentLevel.update(frameTime);
 			return;
 		}
-		else {
+		else if (!m_isGameOver) {
 			writeToCore();
 			if (!leData->mapID.empty()) {
 				m_characterCore->setMap(leData->spawnPoint, leData->mapID);
@@ -151,7 +151,6 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 			}
 			delete leData;
 			setNextScreen(new LoadingScreen(m_characterCore));
-			return;
 		}
 	}
 }

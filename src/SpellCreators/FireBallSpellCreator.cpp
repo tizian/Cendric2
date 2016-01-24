@@ -22,3 +22,8 @@ void FireBallSpellCreator::executeSpell(const sf::Vector2f& target) {
 
 	m_owner->setFightAnimationTime();
 }
+
+void FireBallSpellCreator::addDamageModifier(int level) {
+	m_spellData.damage += m_spellData.damageModifierAddition * level;
+	m_spellData.damagePerSecond += static_cast<int>(std::floor(m_spellData.damageModifierAddition / m_spellData.duration.asSeconds())) * level;
+}

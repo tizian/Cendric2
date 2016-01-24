@@ -11,4 +11,7 @@ public:
 	FireBallSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
 	void executeSpell(const sf::Vector2f& target) override;
+
+private:
+	void addDamageModifier(int level) override;
 };

@@ -19,6 +19,7 @@
 #include "SpellCreators/GhostFormSpellCreator.h"
 #include "SpellCreators/ShadowTrapSpellCreator.h"
 #include "SpellCreators/RaiseTheDeadSpellCreator.h"
+#include "SpellCreators/HolyFireSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -117,6 +118,11 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Range);
 		break;
+	case SpellID::HolyFire:
+		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Damage);
+		types.push_back(SpellModifierType::Range);
+		break;
 	default:
 		break;
 	}
@@ -183,6 +189,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::RaiseTheDead:
 		creator = new RaiseTheDeadSpellCreator(data, owner);
 		break;
+	case SpellID::HolyFire:
+		creator = new HolyFireSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -232,6 +241,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getShadowTrapSpellData();
 	case SpellID::RaiseTheDead:
 		return getRaiseTheDeadSpellData();
+	case SpellID::HolyFire:
+		return getHolyFireSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -520,16 +531,18 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.spellType = SpellType::Divine;
 	holyFire.iconTextureRect = sf::IntRect(50, 150, 50, 50);
 
-	holyFire.cooldown = sf::seconds(20);
-	holyFire.range = 300.f;
-	holyFire.boundingBox = sf::FloatRect(0, 0, 1, 1);
+	holyFire.cooldown = sf::seconds(10);
+	holyFire.range = 100.f;
+	holyFire.boundingBox = sf::FloatRect(0, 0, 2 * holyFire.range, 2 * holyFire.range);
+	holyFire.damagePerSecond = 5;
+	holyFire.damageType = DamageType::Light;
 	holyFire.duration = sf::seconds(2);
 	holyFire.activeDuration = sf::seconds(3);
-	holyFire.range = 300.f;
 	holyFire.attachedToMob = true;
 
-	holyFire.durationModifierAddition = sf::seconds(60);
-	holyFire.rangeModifierAddition = 200.f;
+	holyFire.damageModifierAddition = 10;
+	holyFire.durationModifierAddition = sf::seconds(1);
+	holyFire.rangeModifierAddition = 50.f;
 
 	return holyFire;
 }
