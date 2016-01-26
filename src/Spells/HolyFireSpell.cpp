@@ -93,8 +93,8 @@ void HolyFireSpell::loadParticleSystem() {
 	velGen->maxStartVel = 30.f;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 2.f;
-	timeGen->maxTime = 2.f;
+	timeGen->minTime = 1.f;
+	timeGen->maxTime = 1.2f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();

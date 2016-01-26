@@ -94,9 +94,6 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="1148" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
-  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
- </tileset>
  <layer name="BG 1" width="60" height="70">
   <data encoding="csv">
 135,124,125,126,125,164,163,158,159,157,119,120,158,157,120,121,135,124,125,126,157,120,119,158,125,163,120,120,158,159,135,162,163,164,119,120,158,159,157,158,125,126,157,120,119,121,135,124,157,120,119,121,162,126,157,158,157,119,120,83,

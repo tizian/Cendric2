@@ -58,7 +58,7 @@ void ModifierTile::setScreen(Screen* screen) {
 
 void ModifierTile::setPosition(const sf::Vector2f& pos) {
 	LevelDynamicTile::setPosition(pos);
-	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
+	if (m_lightObject != nullptr) m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	updateParticleSystemPosition();
 }
 
@@ -69,7 +69,7 @@ void ModifierTile::render(sf::RenderTarget& target) {
 
 void ModifierTile::setDisposed() {
 	LevelDynamicTile::setDisposed();
-	m_lightObject->setDisposed();
+	if (m_lightObject != nullptr) m_lightObject->setDisposed();
 }
 
 void ModifierTile::setModifier(const SpellModifier& modififer) {
@@ -99,6 +99,9 @@ void ModifierTile::addModifier() {
 	screen->setTooltipText(text, sf::Color::Green, true);
 
 	m_ps->emitRate = 0;
+
+	m_lightObject->setDisposed();
+	m_lightObject = nullptr;
 }
  
 void ModifierTile::onHit(LevelMovableGameObject* mob) {
@@ -121,9 +124,9 @@ void ModifierTile::onHit(Spell* spell) {
 }
 
 void ModifierTile::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob2)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
 	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 100.f * m_modifier.level / 2.0f;
+	m_ps->emitRate = 100.f * m_modifier.level / 3.0f;
 
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
@@ -132,8 +135,8 @@ void ModifierTile::loadParticleSystem() {
 	m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 3.f;
-	sizeGen->maxStartSize = 7.f;
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 10.f;
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 1.f;
 
@@ -147,13 +150,13 @@ void ModifierTile::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
-	velGen->minStartVel = 50.f * m_modifier.level / 3;
-	velGen->maxStartVel = 100.f * m_modifier.level / 3;
+	velGen->minStartVel = 30.f * m_modifier.level / 3;
+	velGen->maxStartVel = 60.f * m_modifier.level / 3;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.f;
-	timeGen->maxTime = 2.f;
+	timeGen->minTime = 2.f;
+	timeGen->maxTime = 3.f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
