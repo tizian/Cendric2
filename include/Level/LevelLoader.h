@@ -25,6 +25,8 @@ public:
 	void loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const;
 	// loads chest tiles out of level data and adds them directly to the screen
 	void loadChestTiles(LevelData& data, Screen* screen, Level* level) const;
+	// loads modifier tiles out of level data and adds them directly to the screen
+	void loadModifierTiles(LevelData& data, Screen* screen, Level* level) const;
 	// loads lever tiles out of level data and adds them directly to the screen
 	void loadLeverTiles(LevelData& data, Screen* screen, Level* level) const;
 	// loads level items out of level data and adds them directly to the screen

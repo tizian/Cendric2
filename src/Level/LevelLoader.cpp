@@ -5,6 +5,7 @@
 #include "Level/Enemy.h"
 #include "LightObject.h"
 #include "ObjectFactory.h"
+#include "Level/DynamicTiles/ModifierTile.h"
 
 using namespace std;
 
@@ -19,26 +20,51 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 
 	// create chests if they are not looted yet
 	for (auto& it : data.chests) {
-		if (coreData.chestsLooted.at(data.id).find(it.objectID) == coreData.chestsLooted.at(data.id).end()) {
-			ChestTile* chestTile = nullptr;
-
-			// calculate loot.
-			std::map<string, int> loot = it.loot.first;
-			int gold = it.loot.second;
-		
-			chestTile = new ChestTile(mainCharacter, level);
-			chestTile->setTileSize(data.tileSize);
-			chestTile->init();
-			chestTile->setObjectID(it.objectID);
-			chestTile->setStrength(it.chestStrength);
-			chestTile->setLoot(loot, gold);
-			chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset());
-			chestTile->setDebugBoundingBox(sf::Color::Yellow);
-			chestTile->load(it.skinNr);
-			screen->addObject(chestTile);
+		if (coreData.chestsLooted.at(data.id).find(it.objectID) != coreData.chestsLooted.at(data.id).end()) {
+			continue;
 		}
+
+		ChestTile* chestTile = nullptr;
+
+		// calculate loot.
+		std::map<string, int> loot = it.loot.first;
+		int gold = it.loot.second;
+
+		chestTile = new ChestTile(mainCharacter, level);
+		chestTile->setTileSize(data.tileSize);
+		chestTile->init();
+		chestTile->setObjectID(it.objectID);
+		chestTile->setStrength(it.chestStrength);
+		chestTile->setLoot(loot, gold);
+		chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset() - sf::Vector2f(0.f, data.tileSize.y));
+		chestTile->setDebugBoundingBox(sf::Color::Yellow);
+		chestTile->load(it.skinNr);
+		screen->addObject(chestTile);
 	}
 }
+
+void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* level) const {
+	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
+
+	// create modifier tiles if they are not learned yet
+	for (auto& modifierData : data.modifiers) {
+		if (coreData.modfiersLearned.find(modifierData.modifier.type) != coreData.modfiersLearned.end()
+			&& coreData.modfiersLearned.at(modifierData.modifier.type) >= modifierData.modifier.level) {
+			continue;
+		}
+
+		ModifierTile* modifierTile = new ModifierTile(level);
+
+		modifierTile->setTileSize(data.tileSize);
+		modifierTile->setModifier(modifierData.modifier);
+		modifierTile->init();
+		modifierTile->setPosition(modifierData.spawnPosition - sf::Vector2f(0.f, data.tileSize.y));
+		modifierTile->setDebugBoundingBox(sf::Color::Yellow);
+		modifierTile->load(0);
+		screen->addObject(modifierTile);
+	}
+}
+
 
 void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) const {
 	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
@@ -48,7 +74,7 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 	}
 
 	for (auto& it : data.levers) {
-		
+
 		std::vector<SwitchableTile*> dependentTiles;
 
 		// create the switch tiles and add them.
@@ -93,10 +119,15 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
 		}
-		if (it.id == LevelDynamicTileID::Water) {
+		// special behavior
+		switch (it.id) {
+		case LevelDynamicTileID::Water:
 			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
+			break;
+		default:
+			break;
 		}
-		
+
 		tile->setTileSize(data.tileSize);
 		tile->init();
 		tile->setPosition(it.position - tile->getPositionOffset());
@@ -161,7 +192,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 			// calculate loot.
 			std::map<string, int> loot = it.customizedLoot.first;
 			int gold = it.customizedLoot.second;
-		
+
 			enemy = ObjectFactory::Instance()->createEnemy(it.id, level, screen);
 			if (enemy == nullptr) {
 				g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");

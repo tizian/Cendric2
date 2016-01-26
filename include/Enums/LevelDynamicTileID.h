@@ -15,5 +15,6 @@ enum class LevelDynamicTileID {
 	Lever,
 	SwitchableOn,
 	SwitchableOff,
+	Modifier,
 	MAX
 };

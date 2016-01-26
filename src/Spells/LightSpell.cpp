@@ -66,8 +66,8 @@ void LightSpell::loadParticleSystem() {
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 15.f;
 	sizeGen->maxStartSize = 20.f;
-	sizeGen->minEndSize = 1.f;
-	sizeGen->maxEndSize = 5.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 15.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(255, 255, 204, 100);

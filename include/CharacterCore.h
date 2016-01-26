@@ -99,6 +99,10 @@ public:
 	MerchantData getMerchantData(const std::string& merchantID);
 	// sets the merchant data of this merchant id
 	void setMerchantData(const std::string& merchantID, const MerchantData& data);
+	// learns the spell with id "spellID"
+	void learnSpell(SpellID spellID);
+	// learns this modifier
+	void learnModifier(const SpellModifier& modifier);
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;

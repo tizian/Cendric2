@@ -65,10 +65,10 @@ void IcyAmbushSpell::loadParticleSystem() {
 	m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 2.f;
-	sizeGen->maxStartSize = 6.f;
-	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 1.f;
+	sizeGen->minStartSize = 1.f;
+	sizeGen->maxStartSize = 2.f;
+	sizeGen->minEndSize = 5.f;
+	sizeGen->maxEndSize = 10.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(210, 230, 250, 255);
@@ -84,8 +84,8 @@ void IcyAmbushSpell::loadParticleSystem() {
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.0f;
-	timeGen->maxTime = 1.0f;
+	timeGen->minTime = 0.5f;
+	timeGen->maxTime = 1.5f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();

@@ -7,7 +7,7 @@ The game is currently still in development. See http://cendric.ch for more infor
 
 ## Gameplay
 
-Cendric moves through the world on a 2D map and interacts with NPCs to trade or accept quests. At many places, he can enter levels in which he fights enemies, collects items or completes tricky platforming challenges. To accomplish all this, Cendric can master various spells from five different classes of magic.
+Cendric moves through the world on a 2D map and interacts with NPCs to trade or accept quests. At many places, he can enter levels in which he fights enemies, collects items or completes tricky platforming challenges. To accomplish all this, Cendric can master various spells from different classes of magic.
 
 ## Features
 

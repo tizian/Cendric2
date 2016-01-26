@@ -8,6 +8,6 @@ public:
 	CheckpointTile(Level* level) : LevelDynamicTile(level) {};
 	void init() override;
 	void load(int skinNr) override;
-	void onHit(Spell* spell) override;
+	void onHit(Spell* spell) override {};
 	void onHit(LevelMovableGameObject* mob) override;
 };

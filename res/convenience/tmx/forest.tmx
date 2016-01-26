@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="70" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="64">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="70" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="70">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/forest/layer_inf.png,3.0,res/level/forest/layer_3.png"/>
   <property name="dimming" value="0.4"/>
@@ -10,13 +10,13 @@
  <tileset firstgid="1" name="tileset_level_forest" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="../tilesets/tileset_level_forest.png" width="1000" height="1000"/>
  </tileset>
- <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
+  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="462" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="5" columns="5">
-  <image source="../tilesets/tileset_enemies.png" width="260" height="52"/>
+ <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
+  <image source="../tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="467" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -93,6 +93,9 @@
     <property name="id" value="fo_roastedmeat"/>
    </properties>
   </tile>
+ </tileset>
+ <tileset firstgid="1148" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
+  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
  <layer name="BG 1" width="60" height="70">
   <data encoding="csv">
@@ -1183,21 +1186,21 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,492,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,494,492,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,597,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,599,597,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,518,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,471,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,623,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,576,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,517,494,469,494,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,494,0,0,0,0,
+0,622,599,574,599,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,599,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,518,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,492,542,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,623,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,597,647,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1205,60 +1208,60 @@
 </data>
  </layer>
  <objectgroup name="enemies">
-  <object id="1" gid="463" x="2557" y="2883" width="50" height="50">
+  <object id="1" gid="563" x="2557" y="2883" width="50" height="50">
    <properties>
     <property name="gold" value="2"/>
     <property name="mi_goldengoblet" value="3"/>
     <property name="questtarget" value="a_cave_of_rats,fire_rat"/>
    </properties>
   </object>
-  <object id="2" gid="462" x="2314" y="3290" width="50" height="50">
+  <object id="2" gid="562" x="2314" y="3290" width="50" height="50">
    <properties>
     <property name="questtarget" value="a_cave_of_rats,rat"/>
    </properties>
   </object>
-  <object id="3" gid="462" x="1373" y="3132" width="50" height="50"/>
-  <object id="4" gid="462" x="2294" y="2686" width="50" height="50"/>
-  <object id="20" gid="463" x="803" y="3293" width="50" height="50">
+  <object id="3" gid="562" x="1373" y="3132" width="50" height="50"/>
+  <object id="4" gid="562" x="2294" y="2686" width="50" height="50"/>
+  <object id="20" gid="563" x="803" y="3293" width="50" height="50">
    <properties>
     <property name="gold" value="2"/>
     <property name="mi_goldengoblet" value="3"/>
     <property name="questtarget" value="a_cave_of_rats,fire_rat"/>
    </properties>
   </object>
-  <object id="23" gid="463" x="125.333" y="1788.33" width="50" height="50">
+  <object id="23" gid="563" x="125.333" y="1788.33" width="50" height="50">
    <properties>
     <property name="gold" value="2"/>
     <property name="mi_goldengoblet" value="3"/>
     <property name="questtarget" value="a_cave_of_rats,fire_rat"/>
    </properties>
   </object>
-  <object id="29" gid="465" x="2600.33" y="3179.67" width="50" height="50"/>
-  <object id="30" gid="465" x="1729.67" y="3066.33" width="50" height="50"/>
-  <object id="31" gid="465" x="792.333" y="2994.33" width="50" height="50"/>
-  <object id="34" gid="463" x="115" y="2649" width="50" height="50"/>
-  <object id="36" gid="465" x="631" y="1799.67" width="50" height="50"/>
-  <object id="38" gid="465" x="1613.67" y="2003.67" width="50" height="50"/>
-  <object id="39" gid="463" x="2471" y="1547.67" width="50" height="50">
+  <object id="29" gid="565" x="2600.33" y="3179.67" width="50" height="50"/>
+  <object id="30" gid="565" x="1729.67" y="3066.33" width="50" height="50"/>
+  <object id="31" gid="565" x="792.333" y="2994.33" width="50" height="50"/>
+  <object id="34" gid="563" x="115" y="2649" width="50" height="50"/>
+  <object id="36" gid="565" x="631" y="1799.67" width="50" height="50"/>
+  <object id="38" gid="565" x="1613.67" y="2003.67" width="50" height="50"/>
+  <object id="39" gid="563" x="2471" y="1547.67" width="50" height="50">
    <properties>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="40" gid="465" x="2691" y="1731.67" width="50" height="50"/>
-  <object id="41" gid="465" x="2660.33" y="1345" width="50" height="50"/>
-  <object id="42" gid="462" x="2368.33" y="1993" width="50" height="50"/>
-  <object id="45" gid="465" x="97.6667" y="629" width="50" height="50"/>
-  <object id="46" gid="465" x="565.667" y="197" width="50" height="50"/>
-  <object id="47" gid="465" x="889.667" y="373" width="50" height="50"/>
-  <object id="48" gid="462" x="423" y="493" width="50" height="50"/>
-  <object id="54" gid="463" x="1320.33" y="403.667" width="50" height="50">
+  <object id="40" gid="565" x="2691" y="1731.67" width="50" height="50"/>
+  <object id="41" gid="565" x="2660.33" y="1345" width="50" height="50"/>
+  <object id="42" gid="562" x="2368.33" y="1993" width="50" height="50"/>
+  <object id="45" gid="565" x="97.6667" y="629" width="50" height="50"/>
+  <object id="46" gid="565" x="565.667" y="197" width="50" height="50"/>
+  <object id="47" gid="565" x="889.667" y="373" width="50" height="50"/>
+  <object id="48" gid="562" x="423" y="493" width="50" height="50"/>
+  <object id="54" gid="563" x="1320.33" y="403.667" width="50" height="50">
    <properties>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="59" gid="465" x="1712.33" y="813" width="50" height="50"/>
-  <object id="60" gid="465" x="2673.67" y="677" width="50" height="50"/>
-  <object id="61" gid="463" x="2183" y="395.667" width="50" height="50"/>
+  <object id="59" gid="565" x="1712.33" y="813" width="50" height="50"/>
+  <object id="60" gid="565" x="2673.67" y="677" width="50" height="50"/>
+  <object id="61" gid="563" x="2183" y="395.667" width="50" height="50"/>
  </objectgroup>
  <layer name="LFG 1" width="60" height="70">
   <data encoding="csv">
@@ -1756,6 +1759,44 @@
     <property name="brightness" value="0.7"/>
    </properties>
    <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="modifiers">
+  <object id="64" gid="374" x="2052" y="3280" width="50" height="50">
+   <properties>
+    <property name="level" value="1"/>
+    <property name="type" value="range"/>
+   </properties>
+  </object>
+  <object id="65" gid="374" x="2387" y="3273" width="50" height="50">
+   <properties>
+    <property name="level" value="3"/>
+    <property name="type" value="strength"/>
+   </properties>
+  </object>
+  <object id="66" gid="374" x="1846" y="3336" width="50" height="50">
+   <properties>
+    <property name="level" value="2"/>
+    <property name="type" value="damage"/>
+   </properties>
+  </object>
+  <object id="67" gid="1160" x="1696" y="3223" width="50" height="50">
+   <properties>
+    <property name="level" value="2"/>
+    <property name="type" value="duration"/>
+   </properties>
+  </object>
+  <object id="68" gid="1160" x="1320" y="3108" width="50" height="50">
+   <properties>
+    <property name="level" value="3"/>
+    <property name="type" value="count"/>
+   </properties>
+  </object>
+  <object id="69" gid="1160" x="1123" y="3114" width="50" height="50">
+   <properties>
+    <property name="level" value="1"/>
+    <property name="type" value="speed"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

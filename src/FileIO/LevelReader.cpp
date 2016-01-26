@@ -201,6 +201,77 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 	return true;
 }
 
+bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+		int id;
+		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
+		XMLCheckResult(result);
+
+		int gid;
+		result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int offset = static_cast<int>(LevelDynamicTileID::Modifier) + m_firstGidDynamicTiles - 1;
+
+		ModifierTileData modifierData;
+		modifierData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		modifierData.modifier = EMPTY_SPELLMODIFIER;
+
+		// modifier type and level
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
+			while (property_ != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = property_->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string propertyText = textAttr;
+
+				if (propertyText.compare("type") == 0 || propertyText.compare("Type") == 0) {
+					textAttr = property_->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("Modifer type must be set.");
+						return false;
+					}
+					std::string type = textAttr;
+					modifierData.modifier.type = SpellModifier::resolveType(textAttr);
+				}
+				else {
+					int amount;
+					result = property_->QueryIntAttribute("value", &amount);
+					XMLCheckResult(result);
+					if (amount > 3 || amount < 1) {
+						logError("Modifier level must be between 1 and 3");
+						return false;
+					}
+					modifierData.modifier.level = amount;
+				}
+
+				property_ = property_->NextSiblingElement("property");
+			}
+		}
+		
+		data.modifiers.push_back(modifierData);
+
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
 bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
@@ -309,6 +380,9 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 		}
 		else if (name.find("chests") != std::string::npos) {
 			if (!readChestTiles(objectgroup, data)) return false;
+		}
+		else if (name.find("modifiers") != std::string::npos) {
+			if (!readModifierTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;
@@ -732,6 +806,16 @@ bool LevelReader::checkData(LevelData& data) const {
 		}
 		if (it.spawnPoint.x < 0.f || it.spawnPoint.y < 0.f) {
 			logError("level exit spawn point is negative.");
+			return false;
+		}
+	}
+	for (auto& it : data.modifiers) {
+		if (it.modifier.level == 0) {
+			logError("modifier tile level is not set.");
+			return false;
+		}
+		if (it.modifier.type == SpellModifierType::VOID) {
+			logError("modifier tile type is not set.");
 			return false;
 		}
 	}

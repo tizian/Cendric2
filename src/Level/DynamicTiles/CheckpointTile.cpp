@@ -56,7 +56,3 @@ void CheckpointTile::onHit(LevelMovableGameObject* mob) {
 		}
 	}
 }
-
-void CheckpointTile::onHit(Spell* spell) {
-	// nop yet, maybe there is some spell that alters checkpoints?
-}

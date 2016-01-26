@@ -10,6 +10,7 @@
 #include "Structs/LeverData.h"
 #include "Structs/EnemyData.h"
 #include "Structs/ChestData.h"
+#include "structs/ModifierTileData.h"
 
 struct LevelData : WorldData {
 	std::vector<BackgroundLayer> backgroundLayers;
@@ -21,5 +22,6 @@ struct LevelData : WorldData {
 
 	std::vector<EnemyData> enemies;
 	std::vector<ChestData> chests;
+	std::vector<ModifierTileData> modifiers;
 	std::vector<LevelExitData> levelExits;
 };

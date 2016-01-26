@@ -100,6 +100,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('MaxHealthPoin
 INSERT INTO text (text_id, english, german, swiss_german) values ('MessageNewSaveGame','Please enter the name for your new save game (at most 24 characters)','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen)','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Meta','Meta','Meta','Meta');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Miscellaneous','Miscellaneous','Plunder','Grümpel');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveDown','Move down','Nach unten bewegen','Abelaufe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveLeft','Move left','Nach links laufen','Links laufe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveRight','Move right','Nach rechts bewegen','Rechts laufe');
