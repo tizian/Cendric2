@@ -270,6 +270,7 @@ SpellData SpellData::getChopSpellData() {
 	chop.damage = 3;
 	chop.activeDuration = sf::milliseconds(320);
 	chop.attachedToMob = true;
+	chop.dynamicTileEffect = true;
 
 	chop.inputKey = Key::Chop;
 

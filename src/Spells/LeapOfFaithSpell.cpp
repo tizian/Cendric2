@@ -3,7 +3,7 @@
 
 LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 	m_gravityScale = gravityScale;
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(100.f, 100.f), 0.6f));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(100.f, 100.f), 0.2f));
 }
 
 void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -44,7 +44,7 @@ void LeapOfFaithSpell::setScreen(Screen* screen) {
 
 void LeapOfFaithSpell::setPosition(const sf::Vector2f& pos) {
 	Spell::setPosition(pos);
-	m_lightObject->setPosition(pos);
+	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	updateParticleSystemPosition();
 }
 

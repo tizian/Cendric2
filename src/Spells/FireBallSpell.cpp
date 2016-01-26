@@ -1,7 +1,7 @@
 #include "Spells/FireBallSpell.h"
 
 FireBallSpell::FireBallSpell() : Spell() {
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f, 0.8f));
 }
 
 void FireBallSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {

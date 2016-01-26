@@ -1,7 +1,7 @@
 #include "Spells/AureolaSpell.h"
 
 AureolaSpell::AureolaSpell() : Spell() {
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f, 0.4f));
 }
 
 void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
