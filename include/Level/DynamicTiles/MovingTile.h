@@ -18,7 +18,7 @@ public:
 	void setPosition(const sf::Vector2f& position) override;
 
 	GameObjectType getConfiguredType() const override;
-
+	 
 private:
 	void setFrozen(bool frozen);
 	bool m_isOnHold;

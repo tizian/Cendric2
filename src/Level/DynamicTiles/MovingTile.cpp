@@ -120,7 +120,7 @@ void MovingTile::onHit(Spell* spell) {
 }
 
 void MovingTile::onHit(LevelMovableGameObject* mob) {
-	// register mob if it falls from above
+	// TODO: register mob if it falls from above
 }
 
 void MovingTile::setFrozen(bool frozen) {
