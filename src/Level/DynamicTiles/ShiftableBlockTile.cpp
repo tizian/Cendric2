@@ -10,7 +10,7 @@ ShiftableBlockTile::ShiftableBlockTile(Level* level) : LevelDynamicTile(level), 
 
 void ShiftableBlockTile::init() {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x) - 2.f, static_cast<float>(m_tileSize.y)));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE) - 2.f, TILE_SIZE_F));
 }
 
 void ShiftableBlockTile::load(int skinNr) {
@@ -18,7 +18,7 @@ void ShiftableBlockTile::load(int skinNr) {
 
 	Animation idleAnimation(sf::seconds(10.f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftableblock));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (m_tileSize.x + 2 * BORDER)), m_tileSize.x, m_tileSize.y));
+	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

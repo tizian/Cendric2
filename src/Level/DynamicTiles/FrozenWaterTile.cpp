@@ -11,7 +11,7 @@ FrozenWaterTile::FrozenWaterTile(SimulatedWaterTile *waterTile, int waterTileInd
 
 void FrozenWaterTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE), TILE_SIZE_F));
 }
 
 void FrozenWaterTile::load(int skinNr) {
@@ -19,8 +19,8 @@ void FrozenWaterTile::load(int skinNr) {
 
 	Animation idleAnimation(sf::seconds(0.5f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_frozenwater));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, m_tileSize.x, m_tileSize.y));
-	//idleAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + m_tileSize.x), BORDER, m_tileSize.x, m_tileSize.y));
+	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
+	//idleAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

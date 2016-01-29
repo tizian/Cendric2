@@ -40,8 +40,6 @@ bool Level::load(const std::string& id) {
 	m_lightedForegroundTileMap.load(m_levelData, m_levelData.lightedForegroundTileLayers);
 	m_foregroundTileMap.load(m_levelData, m_levelData.foregroundTileLayers);
 
-	tileWidth = static_cast<float>(m_levelData.tileSize.x);
-	tileHeight = static_cast<float>(m_levelData.tileSize.y);
 	g_resourceManager->loadLevelResources();
 	return true;
 }
@@ -100,7 +98,7 @@ bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool r
 		return false;
 	}
 	for (float y = boundingBox.top; y < boundingBox.top + jumpHeight; /* don't increment y here */) {
-		y = std::min(boundingBox.top + jumpHeight, y + tileHeight);
+		y = std::min(boundingBox.top + jumpHeight, y + TILE_SIZE_F);
 		dummyRect.top = y;
 		if (collides(dummyRect, nullptr, ignoreDynamicTiles)) {
 			return false;
@@ -112,7 +110,7 @@ bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool r
 bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles) const {
 	sf::FloatRect dummyRect = boundingBox;
 	for (float y = boundingBox.top; y > boundingBox.top - jumpHeight; /* don't decrement y here */) {
-		y = std::max(boundingBox.top - jumpHeight, y - tileHeight);
+		y = std::max(boundingBox.top - jumpHeight, y - TILE_SIZE_F);
 		dummyRect.top = y;
 		if (collides(dummyRect, nullptr, ignoreDynamicTiles)) {
 			return true;

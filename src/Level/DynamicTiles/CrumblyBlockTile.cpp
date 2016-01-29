@@ -6,7 +6,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::CrumblyBlock, CrumblyBlockTile)
 
 void CrumblyBlockTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 }
 
 void CrumblyBlockTile::load(int skinNr) {
@@ -14,7 +14,7 @@ void CrumblyBlockTile::load(int skinNr) {
 
 	Animation idleAnimation;
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_crumblyblock));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, m_tileSize.x, m_tileSize.y));
+	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -22,10 +22,10 @@ void CrumblyBlockTile::load(int skinNr) {
 	crumblingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_crumblyblock));
 	for (int i = 1; i < 5; i++) {
 		crumblingAnimation.addFrame(sf::IntRect(
-			BORDER + i * (2 * BORDER + m_tileSize.x), 
-			BORDER + (skinNr - 1) * (2 * BORDER + m_tileSize.y), 
-			m_tileSize.x, 
-			m_tileSize.y));
+			BORDER + i * (2 * BORDER + TILE_SIZE),
+			BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
+			TILE_SIZE,
+			TILE_SIZE));
 	}
 
 	addAnimation(GameObjectState::Crumbling, crumblingAnimation);

@@ -6,7 +6,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Ice, IceTile)
 
 void IceTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 }
 
 void IceTile::load(int skinNr) {
@@ -16,10 +16,10 @@ void IceTile::load(int skinNr) {
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_ice));
 	for (int i = 0; i < 2; i++) {
 		idleAnimation.addFrame(sf::IntRect(
-			BORDER + i * (2 * BORDER + m_tileSize.x),
-			BORDER + (skinNr - 1) * (2 * BORDER + m_tileSize.y),
-			m_tileSize.x,
-			m_tileSize.y));
+			BORDER + i * (2 * BORDER + TILE_SIZE),
+			BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
+			TILE_SIZE,
+			TILE_SIZE));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);

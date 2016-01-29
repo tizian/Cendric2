@@ -14,7 +14,7 @@ void SpikesBottomTile::load(int skinNr) {
 
 	Animation idleAnimation(sf::seconds(10.0f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikesbottom));
-	idleAnimation.addFrame(sf::IntRect(0, (skinNr - 1) * m_tileSize.y, m_tileSize.x, m_tileSize.y));
+	idleAnimation.addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

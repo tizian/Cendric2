@@ -11,19 +11,19 @@ CookingTile::CookingTile(Map* map) : MapDynamicTile(map) {
 
 void CookingTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 
-		static_cast<float>(m_tileSize.x), 
-		static_cast<float>(m_tileSize.y)));
+		TILE_SIZE_F, 
+		TILE_SIZE_F));
 	setSpriteOffset(sf::Vector2f(0.f, -50.f));
 }
 
 void CookingTile::load(int skinNr) {
 	m_isCollidable = false;
-	int textureHeight = 2 * m_tileSize.y;
+	int textureHeight = 2 * TILE_SIZE;
 
 	Animation burningAnimation(sf::seconds(0.15f));
 	burningAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_cooking));
 	for (int i = 0; i < 4; i++) {
-		burningAnimation.addFrame(sf::IntRect(m_tileSize.x * i, (skinNr - 1) * textureHeight, m_tileSize.x, textureHeight));
+		burningAnimation.addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
 	}
 
 	addAnimation(GameObjectState::Burning, burningAnimation);

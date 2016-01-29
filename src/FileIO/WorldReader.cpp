@@ -15,10 +15,6 @@ bool WorldReader::checkData(WorldData& data) const {
 		logError("map size not set / invalid");
 		return false;
 	}
-	if (data.tileSize.x == 0 || data.tileSize.y == 0) {
-		logError("tile size not set / invalid");
-		return false;
-	}
 	if (data.name.empty()) {
 		logError("map name not set / empty");
 		return false;
@@ -320,10 +316,15 @@ bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) 
 	XMLCheckResult(result);
 
 	// read tile size
-	result = map->QueryIntAttribute("tilewidth", &data.tileSize.x);
+	sf::Vector2i tileSize;
+	result = map->QueryIntAttribute("tilewidth", &tileSize.x);
 	XMLCheckResult(result);
-	result = map->QueryIntAttribute("tileheight", &data.tileSize.y);
+	result = map->QueryIntAttribute("tileheight", &tileSize.y);
 	XMLCheckResult(result);
+	if (tileSize.x != TILE_SIZE || tileSize.y != TILE_SIZE) {
+		logError("The tilesize for level and map must be " + std::to_string(TILE_SIZE));
+		return false;
+	}
 
 	// read level properties
 	tinyxml2::XMLElement* properties = map->FirstChildElement("properties");
@@ -388,12 +389,9 @@ void WorldReader::updateData(WorldData& data) const {
 		}
 	}
 
-	int tileWidth = data.tileSize.x;
-	int tileHeight = data.tileSize.y;
-
 	// calculate map rect
 	data.mapRect.left = 0;
 	data.mapRect.top = 0;
-	data.mapRect.height = static_cast<float>(data.tileSize.y * data.mapSize.y);
-	data.mapRect.width = static_cast<float>(data.tileSize.x * data.mapSize.x);
+	data.mapRect.height = TILE_SIZE_F * data.mapSize.y;
+	data.mapRect.width = TILE_SIZE_F * data.mapSize.x;
 }

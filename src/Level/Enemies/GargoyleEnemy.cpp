@@ -64,6 +64,7 @@ void GargoyleEnemy::loadSpells() {
 	fireBallSpell.count = m_spellCount;
 	fireBallSpell.isStunning = true;
 	fireBallSpell.strength = m_spellStrength;
+	fireBallSpell.isDynamicTileEffect = !m_isSummoned;
 
 	m_spellManager->addSpell(fireBallSpell);
 	m_maxSpell = 1;

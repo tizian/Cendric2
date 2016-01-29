@@ -12,10 +12,6 @@ bool LevelDynamicTile::getIsStrictlyCollidable() const {
 	return m_isStrictlyCollidable;
 }
 
-void LevelDynamicTile::setTileSize(const sf::Vector2i& tileSize) {
-	m_tileSize = tileSize;
-}
-
 void LevelDynamicTile::setPositionOffset(const sf::Vector2f& offset) {
 	m_positionOffset = offset;
 }

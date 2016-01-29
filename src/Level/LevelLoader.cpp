@@ -41,7 +41,6 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 		int gold = it.loot.second;
 
 		chestTile = new ChestTile(mainCharacter, level);
-		chestTile->setTileSize(data.tileSize);
 		chestTile->init();
 		chestTile->setObjectID(it.objectID);
 		chestTile->setStrength(it.chestStrength);
@@ -59,7 +58,6 @@ void LevelLoader::loadMovingTiles(LevelData& data, Screen* screen, Level* level)
 
 		MovingTile* movingTile = new MovingTile(level);
 
-		movingTile->setTileSize(data.tileSize);
 		movingTile->setMovingTileData(movingData);
 		movingTile->init();
 		movingTile->setDebugBoundingBox(sf::Color::Yellow);
@@ -82,7 +80,6 @@ void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* leve
 
 		ModifierTile* modifierTile = new ModifierTile(level);
 
-		modifierTile->setTileSize(data.tileSize);
 		modifierTile->setModifier(modifierData.modifier);
 		modifierTile->init();
 		modifierTile->load(0);
@@ -109,7 +106,6 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 		for (auto& switchBean : it.dependentTiles) {
 			SwitchableTile* tile = new SwitchableTile(level);
 			tile->setInitialState(switchBean.id == LevelDynamicTileID::SwitchableOn);
-			tile->setTileSize(data.tileSize);
 			tile->init();
 			tile->setPosition(switchBean.position);
 			tile->setDebugBoundingBox(sf::Color::Yellow);
@@ -121,7 +117,6 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 		// create the lever tiles and add them.
 		for (auto& leverBean : it.levers) {
 			LeverTile* tile = new LeverTile(level, mainCharacter);
-			tile->setTileSize(data.tileSize);
 			tile->init();
 			tile->setPosition(leverBean.position);
 			tile->setDebugBoundingBox(sf::Color::Yellow);
@@ -156,7 +151,6 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 			break;
 		}
 
-		tile->setTileSize(data.tileSize);
 		tile->init();
 		tile->setPosition(it.position - tile->getPositionOffset());
 		tile->setDebugBoundingBox(sf::Color::Yellow);
@@ -181,7 +175,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 	for (int i = 0; i < data.levelItems.size(); i++) {
 		auto& it = data.levelItems.at(i);
 		if (!it.empty() && (coreData.itemsLooted.at(data.id).find(i) == coreData.itemsLooted.at(data.id).end())) {
-			sf::Vector2f position(static_cast<float>(x * data.tileSize.x), static_cast<float>(y * data.tileSize.y));
+			sf::Vector2f position(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			ItemBean item = g_databaseManager->getItemBean(it);
 			if (item.status == BeanStatus::NotSet) {
 				// unexpected error

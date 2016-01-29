@@ -9,23 +9,23 @@ TorchTile::TorchTile(Level* level) : LevelDynamicTile(level) {
 }
 
 void TorchTile::init() {
-	setSpriteOffset(sf::Vector2f(-10.f, -static_cast<float>(m_tileSize.y) / 2));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x) / 2.f, static_cast<float>(m_tileSize.y)));
+	setSpriteOffset(sf::Vector2f(-10.f, -TILE_SIZE_F / 2));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F / 2.f, TILE_SIZE_F));
 }
 
 void TorchTile::load(int skinNr) {
-	int textureHeight = 2 * m_tileSize.y;
+	int textureHeight = 2 * TILE_SIZE;
 
 	Animation idleAnimation(sf::seconds(10.f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_torch));
-	idleAnimation.addFrame(sf::IntRect(0, 0, m_tileSize.x, 2 * m_tileSize.y));
+	idleAnimation.addFrame(sf::IntRect(0, 0, TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation burningAnimation(sf::seconds(0.12f));
 	burningAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_torch));
 	for (int i = 1; i < 9; i++) {
-		burningAnimation.addFrame(sf::IntRect(m_tileSize.x * i, (skinNr - 1) * textureHeight, m_tileSize.x, textureHeight));
+		burningAnimation.addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
 	}
 
 	addAnimation(GameObjectState::Burning, burningAnimation);

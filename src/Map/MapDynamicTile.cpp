@@ -8,10 +8,6 @@ bool MapDynamicTile::getIsCollidable() const {
 	return m_isCollidable;
 }
 
-void MapDynamicTile::setTileSize(const sf::Vector2i& tileSize) {
-	m_tileSize = tileSize;
-}
-
 void MapDynamicTile::setPositionOffset(const sf::Vector2f& offset) {
 	m_positionOffset = offset;
 }

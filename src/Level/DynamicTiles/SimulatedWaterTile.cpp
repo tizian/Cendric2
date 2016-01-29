@@ -27,7 +27,7 @@ void SimulatedWaterTile::load(int skinNr) {
 
 	setBoundingBox(sf::FloatRect(m_x, m_y + 11.f, m_width, m_height));
 
-	m_nTiles = static_cast<int>(bb->width / m_tileSize.x);
+	m_nTiles = static_cast<int>(bb->width / TILE_SIZE);
 
 	m_nColumns = NUMBER_COLUMNS_PER_SUBTILE * m_nTiles;
 	m_columns = vector<WaterColumn>();
@@ -221,7 +221,7 @@ void SimulatedWaterTile::render(sf::RenderTarget& target) {
 void SimulatedWaterTile::onHit(Spell* spell) {
 	auto id = spell->getSpellID();
 
-	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / m_tileSize.x));
+	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / TILE_SIZE));
 	bool frozen = isFrozen(index);
 	bool doSplash = !frozen;
 
@@ -244,7 +244,7 @@ void SimulatedWaterTile::onHit(Spell* spell) {
 
 void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
 	// don't splash if the mob is deeper than one tile below the surface
-	if (mob->getBoundingBox()->top > getBoundingBox()->top + m_tileSize.y) return;
+	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
 	float vx = mob->getVelocity().x;
 	float vy = mob->getVelocity().y;
 	float vel = std::sqrt(vx*vx + vy*vy);
@@ -258,7 +258,7 @@ void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
 void SimulatedWaterTile::freeze(int index) {
 	if (index >= 0 && index < m_nTiles) {
 		// check if this water tile can be frozen or if a mob is in the way
-		sf::FloatRect boundingBox(m_x + index * m_tileSize.x, m_y, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y));
+		sf::FloatRect boundingBox(m_x + index * TILE_SIZE, m_y, static_cast<float>(TILE_SIZE), TILE_SIZE_F);
 		if (m_level->collidesWithMobs(boundingBox)) {
 			g_logger->logInfo("SimulatedWaterTile::freeze", "Cannot freeze this tile as it would stuck a MOB!");
 			return;
@@ -271,9 +271,8 @@ void SimulatedWaterTile::freeze(int index) {
 		}
 
 		FrozenWaterTile *frozenTile = new FrozenWaterTile(this, index);
-		frozenTile->setTileSize(m_tileSize);
 		frozenTile->init();
-		frozenTile->setPosition(sf::Vector2f(m_x + index * m_tileSize.x, m_y));
+		frozenTile->setPosition(sf::Vector2f(m_x + index * TILE_SIZE, m_y));
 		const sf::FloatRect *bb = frozenTile->getBoundingBox();
 		frozenTile->setBoundingBox(sf::FloatRect(bb->left, bb->top, bb->width, bb->height - 35.f));	// ice tile is ca. 15 pixels thick
 		frozenTile->setDebugBoundingBox(sf::Color::Yellow);

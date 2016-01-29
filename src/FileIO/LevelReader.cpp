@@ -548,8 +548,6 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 	int skinNr;
 	int x = 0;
 	int y = 0;
-	int tileWidth = data.tileSize.x;
-	int tileHeight = data.tileSize.y;
 	while ((pos = layerData.find(",")) != std::string::npos) {
 		skinNr = std::stoi(layerData.substr(0, pos));
 		if (skinNr == 0) {
@@ -559,7 +557,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 			// we've found a lever!
 			LevelDynamicTileData lever;
 			lever.id = LevelDynamicTileID::Lever;
-			lever.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+			lever.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			lever.skinNr = ((skinNr - leverOffset) / DYNAMIC_TILE_COUNT) + 1;
 			lever.spawnPosition = y * data.mapSize.x + x;
 			leData.levers.push_back(lever);
@@ -567,7 +565,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 		else if ((skinNr - onOffset) % DYNAMIC_TILE_COUNT == 0) {
 			LevelDynamicTileData switchTile;
 			switchTile.id = LevelDynamicTileID::SwitchableOn;
-			switchTile.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+			switchTile.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			switchTile.skinNr = ((skinNr - onOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
 			leData.dependentTiles.push_back(switchTile);
@@ -575,7 +573,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 		else if ((skinNr - offOffset) % DYNAMIC_TILE_COUNT == 0) {
 			LevelDynamicTileData switchTile;
 			switchTile.id = LevelDynamicTileID::SwitchableOff;
-			switchTile.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+			switchTile.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			switchTile.skinNr = ((skinNr - offOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
 			leData.dependentTiles.push_back(switchTile);
@@ -799,9 +797,6 @@ void LevelReader::updateData(LevelData& data)  const {
 	WorldReader::updateData(data);
 
 	// calculate dynamic tiles
-	int tileWidth = data.tileSize.x;
-	int tileHeight = data.tileSize.y;
-
 	for (auto& layer : data.dynamicTileLayers) {
 		LevelDynamicTileID id = layer.first;
 
@@ -841,10 +836,10 @@ void LevelReader::updateData(LevelData& data)  const {
 						}
 
 						// Fill in info
-						ldtData.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+						ldtData.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 						ldtData.skinNr = skinNr;
 						ldtData.spawnPosition = y * data.mapSize.x + x;
-						ldtData.size = sf::Vector2f(static_cast<float>(tileWidth * width), static_cast<float>(tileHeight * height));
+						ldtData.size = sf::Vector2f(width * TILE_SIZE_F, height * TILE_SIZE_F);
 						data.dynamicTiles.push_back(ldtData);
 					}
 				}
@@ -858,7 +853,7 @@ void LevelReader::updateData(LevelData& data)  const {
 					if (skinNr != 0) {
 						LevelDynamicTileData ldeData;
 						ldeData.id = id;
-						ldeData.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+						ldeData.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 						ldeData.skinNr = skinNr;
 						ldeData.spawnPosition = y * data.mapSize.x + x;
 						data.dynamicTiles.push_back(ldeData);

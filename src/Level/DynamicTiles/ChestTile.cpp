@@ -10,7 +10,7 @@ ChestTile::ChestTile(LevelMainCharacter* mainChar, Level* level) : LevelDynamicT
 }
 
 void ChestTile::init() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(m_tileSize.x), static_cast<float>(m_tileSize.y)));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
 }
 
@@ -19,13 +19,13 @@ void ChestTile::load(int skinNr) {
 
 	Animation closedAnimation(sf::seconds(10.f));
 	closedAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_chest));
-	closedAnimation.addFrame(sf::IntRect(0, 0, 2 * m_tileSize.x, 2 * m_tileSize.y));
+	closedAnimation.addFrame(sf::IntRect(0, 0, 2 * TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Locked, closedAnimation);
 
 	Animation openAnimation(sf::seconds(10.f));
 	openAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_chest));
-	openAnimation.addFrame(sf::IntRect(2 * m_tileSize.x, 0, 2 * m_tileSize.x, 2 * m_tileSize.y));
+	openAnimation.addFrame(sf::IntRect(2 * TILE_SIZE, 0, 2 * TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Unlocked, openAnimation);
 

@@ -60,7 +60,4 @@ protected:
 	TileMap m_foregroundTileMap;
 
 	Screen* m_screen;
-
-	float tileHeight;
-	float tileWidth;
 };

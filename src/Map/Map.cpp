@@ -14,8 +14,6 @@ bool Map::load(const std::string& id) {
 	}
 
 	m_mapData.id = id;
-	tileWidth = static_cast<float>(m_mapData.tileSize.x);
-	tileHeight = static_cast<float>(m_mapData.tileSize.y);
 
 	// load map
 	m_backgroundTileMap.load(m_mapData, m_mapData.backgroundTileLayers);

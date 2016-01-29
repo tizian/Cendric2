@@ -21,7 +21,7 @@ bool MapReader::checkData(MapData& data) const {
 		}
 	}
 	for (auto it : data.mapExits) {
-		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x * data.tileSize.x || it.mapExitRect.top >= data.mapSize.y * data.tileSize.y) {
+		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x * TILE_SIZE_F || it.mapExitRect.top >= data.mapSize.y * TILE_SIZE_F) {
 			logError("a map exit rect is out of range for this map.");
 			return false;
 		}
@@ -420,9 +420,6 @@ void MapReader::updateData(MapData& data) const {
 	WorldReader::updateData(data);
 
 	// update dynamic tiles
-	int tileWidth = data.tileSize.x;
-	int tileHeight = data.tileSize.y;
-
 	for (auto& layer : data.dynamicTileLayers) {
 		MapDynamicTileID id = layer.first;
 
@@ -432,7 +429,7 @@ void MapReader::updateData(MapData& data) const {
 				if (skinNr != 0) {
 					MapDynamicTileData mdtData;
 					mdtData.id = id;
-					mdtData.position = sf::Vector2f(static_cast<float>(x * tileWidth), static_cast<float>(y * tileHeight));
+					mdtData.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 					mdtData.skinNr = skinNr;
 					mdtData.spawnPosition = y * data.mapSize.x + x;
 					data.dynamicTiles.push_back(mdtData);
@@ -443,6 +440,6 @@ void MapReader::updateData(MapData& data) const {
 
 	for (auto& npc : data.npcs) {
 		// why? why does tiled do that to our objects?
-		npc.position.y -= data.tileSize.y;
+		npc.position.y -= TILE_SIZE_F;
 	}
 }

@@ -41,11 +41,11 @@ bool World::collides(const sf::FloatRect& boundingBox, const GameObject* exclude
 	}
 
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
-	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / tileHeight) == (boundingBox.top + boundingBox.height) / tileHeight ? (boundingBox.top + boundingBox.height) / tileHeight - 1 : floor((boundingBox.top + boundingBox.height) / tileHeight));
-	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / tileWidth) == (boundingBox.left + boundingBox.width) / tileWidth ? (boundingBox.left + boundingBox.width) / tileWidth - 1 : floor((boundingBox.left + boundingBox.width) / tileWidth));
-	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), static_cast<int>(floor(boundingBox.top / tileHeight)));
-	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / tileHeight)));
-	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / tileWidth)), bottomY);
+	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / TILE_SIZE_F) == (boundingBox.top + boundingBox.height) / TILE_SIZE_F ? (boundingBox.top + boundingBox.height) / TILE_SIZE_F - 1 : floor((boundingBox.top + boundingBox.height) / TILE_SIZE_F));
+	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / TILE_SIZE_F) == (boundingBox.left + boundingBox.width) / TILE_SIZE_F ? (boundingBox.left + boundingBox.width) / TILE_SIZE_F - 1 : floor((boundingBox.left + boundingBox.width) / TILE_SIZE_F));
+	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / TILE_SIZE_F)), static_cast<int>(floor(boundingBox.top / TILE_SIZE_F)));
+	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / TILE_SIZE_F)));
+	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / TILE_SIZE_F)), bottomY);
 	sf::Vector2i bottomRight(rightX, bottomY);
 
 	// check level grid

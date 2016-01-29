@@ -21,8 +21,6 @@ public:
 	// gets called by the main character when it hits the dynamic tile. default does nothing
 	virtual void onHit(MapMainCharacter* mob);
 
-	// gets called by the level when initializing the tile
-	void setTileSize(const sf::Vector2i& tileSize);
 	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
 	void setPositionOffset(const sf::Vector2f& offset);
 
@@ -33,7 +31,6 @@ public:
 protected:
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
-	sf::Vector2i m_tileSize;
 	bool m_isCollidable = false;
 	Map* m_map;
 

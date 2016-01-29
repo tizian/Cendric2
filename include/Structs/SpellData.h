@@ -22,7 +22,7 @@ struct SpellData {
 	DamageType damageType;
 	bool needsTarget;
 	bool attachedToMob;
-	bool dynamicTileEffect;
+	bool isDynamicTileEffect;
 	bool isStunning;
 	bool isFearing;
 	int skinNr; // can be used to change the skin of the spell. Must be implemented by the spell itself.
