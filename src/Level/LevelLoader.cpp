@@ -6,8 +6,18 @@
 #include "LightObject.h"
 #include "ObjectFactory.h"
 #include "Level/DynamicTiles/ModifierTile.h"
+#include "Level/DynamicTiles/MovingTile.h"
 
 using namespace std;
+
+void LevelLoader::loadAfterMainChar(LevelData& data, Screen* screen, Level* level) const {
+	loadEnemies(data, screen, level);
+	loadLevelItems(data, screen);
+	loadModifierTiles(data, screen, level);
+	loadChestTiles(data, screen, level);
+	loadLeverTiles(data, screen, level);
+	loadMovingTiles(data, screen, level);
+}
 
 void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) const {
 	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
@@ -36,10 +46,27 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 		chestTile->setObjectID(it.objectID);
 		chestTile->setStrength(it.chestStrength);
 		chestTile->setLoot(loot, gold);
-		chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset() - sf::Vector2f(0.f, data.tileSize.y));
+		chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset() - sf::Vector2f(0.f, TILE_SIZE_F));
 		chestTile->setDebugBoundingBox(sf::Color::Yellow);
 		chestTile->load(it.skinNr);
 		screen->addObject(chestTile);
+	}
+}
+
+void LevelLoader::loadMovingTiles(LevelData& data, Screen* screen, Level* level) const {
+
+	for (auto& movingData : data.movingTiles) {
+
+		MovingTile* movingTile = new MovingTile(level);
+
+		movingTile->setTileSize(data.tileSize);
+		movingTile->setMovingTileData(movingData);
+		movingTile->init();
+		movingTile->setDebugBoundingBox(sf::Color::Yellow);
+		movingTile->load(movingData.skinNr);
+		movingTile->setPosition(movingData.spawnPosition - sf::Vector2f(0.f, TILE_SIZE_F));
+
+		screen->addObject(movingTile);
 	}
 }
 
@@ -58,9 +85,10 @@ void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* leve
 		modifierTile->setTileSize(data.tileSize);
 		modifierTile->setModifier(modifierData.modifier);
 		modifierTile->init();
-		modifierTile->setPosition(modifierData.spawnPosition - sf::Vector2f(0.f, data.tileSize.y));
-		modifierTile->setDebugBoundingBox(sf::Color::Yellow);
 		modifierTile->load(0);
+		modifierTile->setDebugBoundingBox(sf::Color::Yellow);
+		modifierTile->setPosition(modifierData.spawnPosition - sf::Vector2f(0.f, TILE_SIZE_F));
+
 		screen->addObject(modifierTile);
 	}
 }

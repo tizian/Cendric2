@@ -47,6 +47,8 @@ public:
 	sf::Vector2f getCenter() const;
 	// is the object currently visible inside this view + margin?
 	bool isViewable() const;
+	// should this GO be updated?
+	bool isUpdatable() const;
 	// returns whether the game object should be deleted
 	// if this is set, the game object gets deleted in the next game loop
 	bool isDisposed() const;
@@ -68,6 +70,7 @@ protected:
 
 	bool m_isDisposed = false;
 	bool m_isViewable = true;
+	bool m_isAlwaysUpdate = false; // this property can be set to true if this game object should always update
 
 	sf::FloatRect m_boundingBox;
 	// absolute position as seen from the upper left corner

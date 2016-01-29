@@ -71,6 +71,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_tile_lever, "res/assets/level_dynamic_tiles/spritesheet_tiles_lever.png" },
 		{ ResourceID::Texture_tile_switchable, "res/assets/level_dynamic_tiles/spritesheet_tiles_switchable.png" },
 		{ ResourceID::Texture_tile_cooking, "res/assets/map_dynamic_tiles/spritesheet_tiles_cooking.png" },
+		{ ResourceID::Texture_tile_moving, "res/assets/level_dynamic_tiles/spritesheet_tiles_moving.png" },
 		{ ResourceID::Texture_misc_cooking, "res/assets/misc/sprite_cooking.png" },
 		{ ResourceID::Texture_screen_splash, "res/assets/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
@@ -374,6 +375,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_tile_checkpoint);
 	deleteResource(ResourceID::Texture_tile_lever);
 	deleteResource(ResourceID::Texture_tile_switchable);
+	deleteResource(ResourceID::Texture_tile_moving);
 
 	deleteResource(ResourceID::Sound_tile_water);
 	deleteResource(ResourceID::Sound_tile_lever);
@@ -400,8 +402,6 @@ void ResourceManager::deleteLevelResources() {
 
 void ResourceManager::loadMapResources() {
 	getTexture(ResourceID::Texture_dialogue);
-
-	getTexture(ResourceID::Texture_tile_cooking);
 }
 
 void ResourceManager::deleteMapResources() {
@@ -433,19 +433,7 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_Particle_flame);
 	getTexture(ResourceID::Texture_Particle_star);
 
-	// load dynamic tile resources
-	getTexture(ResourceID::Texture_tile_frozenwater);
-	getTexture(ResourceID::Texture_tile_ice);
-	getTexture(ResourceID::Texture_tile_crumblyblock);
-	getTexture(ResourceID::Texture_tile_torch);
-	getTexture(ResourceID::Texture_tile_chest);
-	getTexture(ResourceID::Texture_tile_spikestop);
-	getTexture(ResourceID::Texture_tile_spikesbottom);
-	getTexture(ResourceID::Texture_tile_shiftableblock);
-	getTexture(ResourceID::Texture_tile_checkpoint);
-	getTexture(ResourceID::Texture_tile_lever);
-	getTexture(ResourceID::Texture_tile_switchable);
-
+	// get sounds
 	getSoundBuffer(ResourceID::Sound_tile_water);
 	getSoundBuffer(ResourceID::Sound_tile_lever);
 

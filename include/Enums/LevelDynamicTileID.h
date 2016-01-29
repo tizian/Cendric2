@@ -16,5 +16,6 @@ enum class LevelDynamicTileID {
 	SwitchableOn,
 	SwitchableOff,
 	Modifier,
+	Moving,
 	MAX
 };

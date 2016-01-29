@@ -109,7 +109,7 @@ void Screen::deleteObjects(GameObjectType type) {
 
 void Screen::updateObjects(GameObjectType type, const sf::Time& frameTime) {
 	for (auto& it : m_objects[type]) {
-		if (it->isViewable())
+		if (it->isUpdatable())
 			it->update(frameTime);
 	}
 }

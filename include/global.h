@@ -44,6 +44,10 @@ inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
+// fixed tile size (width and height) for level and map
+#define TILE_SIZE_F 50.f
+#define TILE_SIZE 50
+
 // cendric color palette
 #define CENDRIC_COLOR_WHITE			sf::Color(255, 255, 255)
 #define CENDRIC_COLOR_BLACK			sf::Color(0, 0, 0)

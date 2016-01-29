@@ -112,6 +112,10 @@ bool GameObject::isViewable() const {
 	return m_isViewable;
 }
 
+bool GameObject::isUpdatable() const {
+	return m_isAlwaysUpdate || m_isViewable;
+}
+
 void GameObject::setViewable(bool value) {
 	m_isViewable = value;
 }

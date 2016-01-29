@@ -209,10 +209,6 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
 		XMLCheckResult(result);
 
-		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
 		int x;
 		result = object->QueryIntAttribute("x", &x);
 		XMLCheckResult(result);
@@ -241,7 +237,7 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 				}
 				std::string propertyText = textAttr;
 
-				if (propertyText.compare("type") == 0 || propertyText.compare("Type") == 0) {
+				if (propertyText.compare("type") == 0) {
 					textAttr = property_->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("Modifer type must be set.");
@@ -266,6 +262,93 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 		}
 		
 		data.modifiers.push_back(modifierData);
+
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
+bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+		int id;
+		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
+		XMLCheckResult(result);
+
+		int gid;
+		result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int offset = static_cast<int>(LevelDynamicTileID::Moving) + m_firstGidDynamicTiles - 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+
+		MovingTileData movingTileData;
+		movingTileData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		movingTileData.skinNr = skinNr;
+
+		// modifier type and level
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
+			while (property_ != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = property_->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string propertyText = textAttr;
+
+				if (propertyText.compare("frozen") == 0) {
+					movingTileData.isFrozen = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
+
+				int amount;
+				result = property_->QueryIntAttribute("value", &amount);
+				XMLCheckResult(result);
+
+				if (propertyText.compare("speed") == 0) {
+					if (amount > 1000 || amount < 0) {
+						logError("Moving platform speed must be between 0 and 1000");
+						return false;
+					}
+					movingTileData.speed = amount;
+				}
+				if (propertyText.compare("direction") == 0) {
+					movingTileData.initialDirection = amount % 360;
+				}
+				else if (propertyText.compare("size") == 0 || propertyText.compare("length") == 0) {
+					if (amount > 10 || amount < 1) {
+						logError("Moving platform size (length in tiles) must be between 1 and 10");
+						return false;
+					}
+					movingTileData.length = amount;
+				}
+				else if (propertyText.compare("distance") == 0) {
+					if (amount > 5000 || amount < 0) {
+						logError("Moving platform distance (tiles) must be between 0 and 5000");
+						return false;
+					}
+					movingTileData.distance = amount;
+				}
+
+				property_ = property_->NextSiblingElement("property");
+			}
+		}
+
+		data.movingTiles.push_back(movingTileData);
 
 		object = object->NextSiblingElement("object");
 	}
@@ -383,6 +466,9 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 		}
 		else if (name.find("modifiers") != std::string::npos) {
 			if (!readModifierTiles(objectgroup, data)) return false;
+		}
+		else if (name.find("moving platforms") != std::string::npos) {
+			if (!readMovingTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;
@@ -817,6 +903,18 @@ bool LevelReader::checkData(LevelData& data) const {
 		if (it.modifier.type == SpellModifierType::VOID) {
 			logError("modifier tile type is not set.");
 			return false;
+		}
+	}
+	for (auto& it : data.movingTiles) {
+		if (it.initialDirection == -1) {
+			logError("Moving tile initial direction must be set.");
+			return false;
+		}
+		if (it.speed == 0.f) {
+			g_logger->logWarning("LevelReader","Moving tile speed is 0.");
+		}
+		if (it.distance == 0) {
+			g_logger->logWarning("LevelReader", "Moving tile distance is 0.");
 		}
 	}
 	for (auto& it : data.enemies) {

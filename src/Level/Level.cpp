@@ -25,11 +25,7 @@ void Level::dispose() {
 void Level::loadAfterMainChar(Screen* screen) {
 	LevelLoader loader;
 	m_screen = screen;
-	loader.loadEnemies(m_levelData, screen, this);
-	loader.loadLevelItems(m_levelData, screen);
-	loader.loadModifierTiles(m_levelData, screen, this);
-	loader.loadChestTiles(m_levelData, screen, this);
-	loader.loadLeverTiles(m_levelData, screen, this);
+	loader.loadAfterMainChar(m_levelData, screen, this);
 }
 
 bool Level::load(const std::string& id) {

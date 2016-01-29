@@ -37,6 +37,7 @@ enum class ResourceID {
 	Texture_tile_lever,
 	Texture_tile_switchable,
 	Texture_tile_cooking,
+	Texture_tile_moving,
 	Texture_debuff_fear,
 	Texture_debuff_stun,
 	Texture_screen_splash,

@@ -36,6 +36,7 @@ private:
 	bool readObjects(tinyxml2::XMLElement* map, LevelData& data) const;
 	bool readChestTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readModifierTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readMovingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readLevelExits(tinyxml2::XMLElement* objects, LevelData & data) const;
 
