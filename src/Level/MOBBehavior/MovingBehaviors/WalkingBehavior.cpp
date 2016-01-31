@@ -11,6 +11,7 @@ WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	const sf::FloatRect& bb = *m_enemy->getBoundingBox();
 	const Level& level = *m_enemy->getLevel();
+	float oldPositionX = m_enemy->getPosition().x;
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 
@@ -61,6 +62,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (!collidesX && isMovingX && level.fallsDeep(bb, m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
 		m_enemy->setAccelerationX(0.0f);
 		m_enemy->setVelocityX(0.0f);
+		m_enemy->setPositionX(oldPositionX);
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
 	}
 

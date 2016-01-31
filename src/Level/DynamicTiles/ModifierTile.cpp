@@ -16,7 +16,7 @@ void ModifierTile::init() {
 	loadParticleSystem();
 }
 
-void ModifierTile::load(int skinNr) {
+void ModifierTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
 	
 	sf::IntRect rect = sf::IntRect((m_modifier.level - 1) * 50, 50, 50, 50);

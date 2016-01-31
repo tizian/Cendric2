@@ -11,7 +11,7 @@ void CheckpointTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
 }
 
-void CheckpointTile::load(int skinNr) {
+void CheckpointTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
 
 	Animation idleAnimation;

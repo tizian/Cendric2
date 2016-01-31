@@ -103,10 +103,10 @@ void FlyingBehavior::handleMovementInput() {
 				newAccelerationX += m_walkAcceleration;
 			}
 
-			if (mainCharCenter.y < center.y && std::abs(mainCharCenter.y - center.y) > m_approachingDistance) {
+			if (mainCharCenter.y < center.y && std::abs(mainCharCenter.y - center.y) > 2 * m_approachingDistance) {
 				newAccelerationY -= m_walkAcceleration;
 			}
-			else if (mainCharCenter.y > center.y && std::abs(mainCharCenter.y - center.y) > m_approachingDistance) {
+			else if (mainCharCenter.y > center.y && std::abs(mainCharCenter.y - center.y) > 2 * m_approachingDistance) {
 				newAccelerationY += m_walkAcceleration;
 			}
 		}

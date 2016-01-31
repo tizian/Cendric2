@@ -11,6 +11,9 @@ void AllyBehavior::update(const sf::Time& frameTime) {
 	if (m_timeToLive == sf::Time::Zero) {
 		m_enemy->setDead();
 	}
+	if (m_timeToLive < sf::seconds(5)) {
+		m_enemy->setSpriteColor(sf::Color(255, 255, 255, m_timeToLive.asMilliseconds() / 20), sf::seconds(1));
+	}
 }
 
 void AllyBehavior::setTimeToLive(const sf::Time& ttl) {

@@ -16,7 +16,7 @@ void CookingTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, -50.f));
 }
 
-void CookingTile::load(int skinNr) {
+void CookingTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
 	int textureHeight = 2 * TILE_SIZE;
 

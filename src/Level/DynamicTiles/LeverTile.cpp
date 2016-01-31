@@ -8,7 +8,7 @@ void LeverTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 }
 
-void LeverTile::load(int skinNr) {
+void LeverTile::loadAnimation(int skinNr) {
 
 	Animation onAnimation(sf::seconds(10.0f));
 	onAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_lever));

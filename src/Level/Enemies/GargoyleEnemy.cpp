@@ -60,7 +60,7 @@ void GargoyleEnemy::loadSpells() {
 	fireBallSpell.damagePerSecond = 10 + m_spellAdditionalDamage / 2;
 	fireBallSpell.duration = sf::seconds(1.f);
 	fireBallSpell.cooldown = sf::seconds(1.f);
-	fireBallSpell.speed = 200.f;
+	fireBallSpell.speed = 300.f;
 	fireBallSpell.count = m_spellCount;
 	fireBallSpell.isStunning = true;
 	fireBallSpell.strength = m_spellStrength;
@@ -92,15 +92,15 @@ void GargoyleEnemy::loadSpells() {
 }
 
 sf::Vector2f GargoyleEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(-10.f, 0.f);
+	return sf::Vector2f(20.f, 50.f);
 }
 
 MovingBehavior* GargoyleEnemy::createMovingBehavior() {
 	FlyingBehavior* behavior = new FlyingBehavior(this);
-	behavior->setApproachingDistance(30.f);
-	behavior->setMaxVelocityYDown(200.f);
-	behavior->setMaxVelocityYUp(200.f);
-	behavior->setMaxVelocityX(200.f);
+	behavior->setApproachingDistance(60.f);
+	behavior->setMaxVelocityYDown(150.f);
+	behavior->setMaxVelocityYUp(150.f);
+	behavior->setMaxVelocityX(150.f);
 	behavior->setFightAnimationTime(sf::milliseconds(3 * 100));
 	return behavior;
 }
@@ -154,12 +154,14 @@ void GargoyleEnemy::loadAnimation() {
 
 void GargoyleEnemy::loadAnimation(int skinNr) {
 	m_animations.clear();
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 40.f));
-	setSpriteOffset(sf::Vector2f(-20.f, -20.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 80.f));
+	setSpriteOffset(sf::Vector2f(-127.f, -42.f));
 
 	Animation flyingAnimation;
 	flyingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
-	flyingAnimation.addFrame(sf::IntRect(0, skinNr * 80, 80, 80));
+	for (int i = 0; i < 8; i++) {
+		flyingAnimation.addFrame(sf::IntRect(195 * i, 0, 195, 180));
+	}
 
 	// TODO: add animations
 	addAnimation(GameObjectState::Flying, flyingAnimation);

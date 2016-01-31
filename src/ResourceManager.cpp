@@ -60,13 +60,13 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_enemy_skeleton, "res/assets/enemies/spritesheet_enemy_skeleton.png" },
 		{ ResourceID::Texture_enemy_gargoyle, "res/assets/enemies/spritesheet_enemy_gargoyle.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/level_dynamic_tiles/spritesheet_tiles_ice.png" },
-		{ ResourceID::Texture_tile_crumblyblock, "res/assets/level_dynamic_tiles/spritesheet_tiles_crumblyblock.png" },
+		{ ResourceID::Texture_tile_destructable, "res/assets/level_dynamic_tiles/spritesheet_tiles_destructable.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png" },
 		{ ResourceID::Texture_tile_chest, "res/assets/level_dynamic_tiles/spritesheet_tiles_chest.png" },
 		{ ResourceID::Texture_tile_spikesbottom, "res/assets/level_dynamic_tiles/spritesheet_tiles_spikesbottom.png" },
 		{ ResourceID::Texture_tile_spikestop, "res/assets/level_dynamic_tiles/spritesheet_tiles_spikestop.png" },
 		{ ResourceID::Texture_tile_frozenwater, "res/assets/level_dynamic_tiles/spritesheet_tiles_frozenwater.png" },
-		{ ResourceID::Texture_tile_shiftableblock, "res/assets/level_dynamic_tiles/spritesheet_tiles_shiftableblock.png" },
+		{ ResourceID::Texture_tile_shiftable, "res/assets/level_dynamic_tiles/spritesheet_tiles_shiftable.png" },
 		{ ResourceID::Texture_tile_checkpoint, "res/assets/level_dynamic_tiles/spritesheet_tiles_checkpoint.png" },
 		{ ResourceID::Texture_tile_lever, "res/assets/level_dynamic_tiles/spritesheet_tiles_lever.png" },
 		{ ResourceID::Texture_tile_switchable, "res/assets/level_dynamic_tiles/spritesheet_tiles_switchable.png" },
@@ -366,12 +366,12 @@ void ResourceManager::deleteLevelResources() {
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
 	deleteResource(ResourceID::Texture_tile_ice);
-	deleteResource(ResourceID::Texture_tile_crumblyblock);
+	deleteResource(ResourceID::Texture_tile_destructable);
 	deleteResource(ResourceID::Texture_tile_torch);
 	deleteResource(ResourceID::Texture_tile_chest);
 	deleteResource(ResourceID::Texture_tile_spikesbottom);
 	deleteResource(ResourceID::Texture_tile_spikestop);
-	deleteResource(ResourceID::Texture_tile_shiftableblock);
+	deleteResource(ResourceID::Texture_tile_shiftable);
 	deleteResource(ResourceID::Texture_tile_checkpoint);
 	deleteResource(ResourceID::Texture_tile_lever);
 	deleteResource(ResourceID::Texture_tile_switchable);

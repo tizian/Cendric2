@@ -4,11 +4,11 @@
 #include "Level/LevelDynamicTile.h"
 #include "MovableGameObject.h"
 
-class ShiftableBlockTile : public LevelDynamicTile, public MovableGameObject {
+class ShiftableTile : public LevelDynamicTile, public MovableGameObject {
 public:
-	ShiftableBlockTile(Level* level);
+	ShiftableTile(Level* level);
 	void init() override;
-	void load(int skinNr) override;
+	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 

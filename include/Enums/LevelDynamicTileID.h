@@ -3,14 +3,14 @@
 // NOTE: don't change this enum order. They are aligned with the level dynamic tile tileset.
 enum class LevelDynamicTileID {
 	VOID,
-	CrumblyBlock,
+	Destructable,
 	Ice,
 	Water,
 	Torch,
 	Chest,
 	SpikesBottom,
 	SpikesTop,
-	ShiftableBlock,
+	Shiftable,
 	Checkpoint,
 	Lever,
 	SwitchableOn,

@@ -253,6 +253,7 @@ void Enemy::setAlly(const sf::Time& ttl) {
 	allyBehavior->setTimeToLive(ttl);
 	m_enemyAttackingBehavior = allyBehavior;
 	m_hpBar.setFillColor(m_enemyAttackingBehavior->getConfiguredHealthColor());
+	m_isAlwaysUpdate = true;
 }
 
 void Enemy::setPersistent(bool value) {

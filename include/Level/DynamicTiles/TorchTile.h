@@ -8,7 +8,7 @@ class TorchTile : public LevelDynamicTile {
 public:
 	TorchTile(Level* level);
 	void init() override;
-	void load(int skinNr) override;
+	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 
 	void setPosition(const sf::Vector2f& pos) override;

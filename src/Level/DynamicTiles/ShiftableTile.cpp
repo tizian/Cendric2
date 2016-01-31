@@ -1,23 +1,23 @@
-#include "Level/DynamicTiles/ShiftableBlockTile.h"
+#include "Level/DynamicTiles/ShiftableTile.h"
 #include "Spell.h"
 #include "Spells/WindGustSpell.h"
 #include "Registrar.h"
 
-REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::ShiftableBlock, ShiftableBlockTile)
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Shiftable, ShiftableTile)
 
-ShiftableBlockTile::ShiftableBlockTile(Level* level) : LevelDynamicTile(level), MovableGameObject() {
+ShiftableTile::ShiftableTile(Level* level) : LevelDynamicTile(level), MovableGameObject() {
 }
 
-void ShiftableBlockTile::init() {
+void ShiftableTile::init() {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE) - 2.f, TILE_SIZE_F));
 }
 
-void ShiftableBlockTile::load(int skinNr) {
+void ShiftableTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 
 	Animation idleAnimation(sf::seconds(10.f));
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftableblock));
+	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftable));
 	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -28,7 +28,7 @@ void ShiftableBlockTile::load(int skinNr) {
 	playCurrentAnimation(true);
 }
 
-void ShiftableBlockTile::update(const sf::Time& frameTime) {
+void ShiftableTile::update(const sf::Time& frameTime) {
 	setAcceleration(sf::Vector2f(m_pushAcceleration, GRAVITY_ACCELERATION));
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
@@ -37,7 +37,7 @@ void ShiftableBlockTile::update(const sf::Time& frameTime) {
 	m_pushAcceleration = 0.f;
 }
 
-void ShiftableBlockTile::onHit(Spell* spell) {
+void ShiftableTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::WindGust: {
 		float pushAcceleration = dynamic_cast<WindGustSpell*>(spell)->getPushAcceleration();
@@ -55,11 +55,11 @@ void ShiftableBlockTile::onHit(Spell* spell) {
 	}
 }
 
-GameObjectType ShiftableBlockTile::getConfiguredType() const {
+GameObjectType ShiftableTile::getConfiguredType() const {
 	return LevelDynamicTile::getConfiguredType();
 }
 
-void ShiftableBlockTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
+void ShiftableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
 	// distinguish damping in the air and at the ground
 	float dampingPerSec = (getVelocity().y == 0.0f) ? DAMPING_GROUND : DAMPING_AIR;
 	// don't damp when there is active acceleration 
@@ -68,7 +68,7 @@ void ShiftableBlockTile::calculateUnboundedVelocity(const sf::Time& frameTime, s
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
 
-void ShiftableBlockTile::checkCollisions(const sf::Vector2f& nextPosition) {
+void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	const sf::FloatRect& bb = *getBoundingBox();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);

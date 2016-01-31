@@ -10,7 +10,7 @@ class LeverTile : public LevelDynamicTile {
 public:
 	LeverTile(Level* level, LevelMainCharacter* mainChar) : LevelDynamicTile(level), m_mainChar(mainChar) {}
 	void init() override;
-	void load(int skinNr) override;
+	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
 	void onInteractKey() override;

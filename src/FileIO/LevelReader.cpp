@@ -647,14 +647,14 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		else if (name.find("dynamic torch") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Torch, layerData, data)) return false;
 		}
-		else if (name.find("dynamic crumblyblock") != std::string::npos) {
-			if (!readDynamicTileLayer(LevelDynamicTileID::CrumblyBlock, layerData, data)) return false;
+		else if (name.find("dynamic destructable") != std::string::npos) {
+			if (!readDynamicTileLayer(LevelDynamicTileID::Destructable, layerData, data)) return false;
 		}
 		else if (name.find("dynamic water") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Water, layerData, data)) return false;
 		}
-		else if (name.find("dynamic shiftableblock") != std::string::npos) {
-			if (!readDynamicTileLayer(LevelDynamicTileID::ShiftableBlock, layerData, data)) return false;
+		else if (name.find("dynamic shiftable") != std::string::npos) {
+			if (!readDynamicTileLayer(LevelDynamicTileID::Shiftable, layerData, data)) return false;
 		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;

@@ -9,7 +9,7 @@ class FrozenWaterTile : public LevelDynamicTile {
 public:
 	FrozenWaterTile(SimulatedWaterTile *waterTile, int waterTileIndex);
 	void init() override;
-	void load(int skinNr) override;
+	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 
 private:

@@ -16,7 +16,7 @@ void SimulatedWaterTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 }
 
-void SimulatedWaterTile::load(int skinNr) {
+void SimulatedWaterTile::loadAnimation(int skinNr) {
 	m_data = SimulatedWaterTileData::getData(skinNr);
 
 	const sf::FloatRect *bb = getBoundingBox();
@@ -276,7 +276,7 @@ void SimulatedWaterTile::freeze(int index) {
 		const sf::FloatRect *bb = frozenTile->getBoundingBox();
 		frozenTile->setBoundingBox(sf::FloatRect(bb->left, bb->top, bb->width, bb->height - 35.f));	// ice tile is ca. 15 pixels thick
 		frozenTile->setDebugBoundingBox(sf::Color::Yellow);
-		frozenTile->load(0);
+		frozenTile->loadAnimation(0);
 		m_frozenTiles[index] = frozenTile;
 		m_screen->addObject(frozenTile);
 	}

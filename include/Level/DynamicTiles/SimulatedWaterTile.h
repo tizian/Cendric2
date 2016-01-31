@@ -31,7 +31,7 @@ class SimulatedWaterTile : public LevelDynamicTile {
 public:
 	SimulatedWaterTile(Level* level) : LevelDynamicTile(level) {}
 	void init() override;
-	void load(int skinNr) override;
+	void loadAnimation(int skinNr) override;
 	void onHit(LevelMovableGameObject* mob) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;

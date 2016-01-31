@@ -14,7 +14,7 @@ void FrozenWaterTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE), TILE_SIZE_F));
 }
 
-void FrozenWaterTile::load(int skinNr) {
+void FrozenWaterTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 
 	Animation idleAnimation(sf::seconds(0.5f));

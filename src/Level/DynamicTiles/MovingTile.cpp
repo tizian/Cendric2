@@ -22,7 +22,7 @@ void MovingTile::init() {
 	m_isAlwaysUpdate = true;
 }
 
-void MovingTile::load(int skinNr) {
+void MovingTile::loadAnimation(int skinNr) {
 
 	int length = static_cast<int>(m_boundingBox.width / TILE_SIZE_F);
 

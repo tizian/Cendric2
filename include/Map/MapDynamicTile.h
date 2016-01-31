@@ -17,7 +17,7 @@ public:
 	// loads sprite offset & bounding box. 
 	virtual void init() = 0;
 	// loads the dynamic tile with the specified skin nr
-	virtual void load(int skinNr) = 0;
+	virtual void loadAnimation(int skinNr) = 0;
 	// gets called by the main character when it hits the dynamic tile. default does nothing
 	virtual void onHit(MapMainCharacter* mob);
 

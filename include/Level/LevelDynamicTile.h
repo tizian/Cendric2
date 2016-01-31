@@ -18,7 +18,7 @@ public:
 	// loads sprite offset & bounding box.
 	virtual void init() = 0;
 	// loads the dynamic tile with the specified skin nr
-	virtual void load(int skinNr) = 0;
+	virtual void loadAnimation(int skinNr) = 0;
 	// gets called by a spell when it hits the dynamic tile
 	virtual void onHit(Spell* spell) = 0;
 	// gets called by a mob when it hits the dynamic tile. default does nothing

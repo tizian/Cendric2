@@ -46,7 +46,7 @@ void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const 
 		tile->init();
 		tile->setPosition(it.position - tile->getPositionOffset());
 		tile->setDebugBoundingBox(sf::Color::Yellow);
-		tile->load(it.skinNr);
+		tile->loadAnimation(it.skinNr);
 		screen->addObject(tile);
 	}
 }

@@ -3,11 +3,11 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 
-class CrumblyBlockTile : public LevelDynamicTile {
+class DestructableTile : public LevelDynamicTile {
 public:
-	CrumblyBlockTile(Level* level) : LevelDynamicTile(level) {}
+	DestructableTile(Level* level) : LevelDynamicTile(level) {}
 	void init() override;
-	void load(int skinNr) override;
+	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 

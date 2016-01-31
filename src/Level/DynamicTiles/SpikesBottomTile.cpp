@@ -10,7 +10,7 @@ void SpikesBottomTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 25.f));
 }
 
-void SpikesBottomTile::load(int skinNr) {
+void SpikesBottomTile::loadAnimation(int skinNr) {
 
 	Animation idleAnimation(sf::seconds(10.0f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikesbottom));

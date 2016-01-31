@@ -13,7 +13,7 @@ void TorchTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F / 2.f, TILE_SIZE_F));
 }
 
-void TorchTile::load(int skinNr) {
+void TorchTile::loadAnimation(int skinNr) {
 	int textureHeight = 2 * TILE_SIZE;
 
 	Animation idleAnimation(sf::seconds(10.f));

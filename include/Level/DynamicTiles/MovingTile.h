@@ -10,7 +10,7 @@ public:
 	MovingTile(Level* level) : LevelDynamicTile(level) {}
 	void setMovingTileData(const MovingTileData& data);
 	void init() override;
-	void load(int skinNr) override;
+	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onHit(LevelMovableGameObject* mob) override;
 	void update(const sf::Time& frameTime) override;

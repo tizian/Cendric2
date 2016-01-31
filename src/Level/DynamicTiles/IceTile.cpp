@@ -9,7 +9,7 @@ void IceTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 }
 
-void IceTile::load(int skinNr) {
+void IceTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 
 	Animation idleAnimation(sf::seconds(0.5f));

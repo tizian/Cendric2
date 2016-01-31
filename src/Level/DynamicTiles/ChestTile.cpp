@@ -14,7 +14,7 @@ void ChestTile::init() {
 	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
 }
 
-void ChestTile::load(int skinNr) {
+void ChestTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
 
 	Animation closedAnimation(sf::seconds(10.f));

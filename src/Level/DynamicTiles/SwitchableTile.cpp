@@ -12,7 +12,7 @@ void SwitchableTile::setInitialState(bool on) {
 	m_isStrictlyCollidable = on;
 }
 
-void SwitchableTile::load(int skinNr) {
+void SwitchableTile::loadAnimation(int skinNr) {
 
 	Animation onAnimation(sf::seconds(10.0f));
 	onAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_switchable));
