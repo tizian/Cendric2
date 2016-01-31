@@ -70,6 +70,7 @@ void InputController::init() {
 		{ Key::Quicksave, false },
 		{ Key::Inventory, false },
 		{ Key::CharacterInfo, false },
+		{ Key::Map, false },
 		{ Key::Journal, false },
 		{ Key::Spellbook, false },
 		{ Key::Interact, false },

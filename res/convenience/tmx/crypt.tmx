@@ -216,7 +216,7 @@
  <objectgroup name="levelexits">
   <object id="3" x="363" y="406" width="69" height="135">
    <properties>
-    <property name="map id" value="res/map/firstmap/firstmap.tmx"/>
+    <property name="map id" value="res/map/meadows/meadows.tmx"/>
     <property name="x" value="4625"/>
     <property name="y" value="1675"/>
    </properties>

@@ -95,6 +95,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Loading','Loa
 INSERT INTO text (text_id, english, german, swiss_german) values ('LockpickLevel','Lockpick Level','Dietrich Stufe','Dietrich Level');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Mana','Mana','Mana','Mana');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ManaRegeneration','Mana Regeneration','Manaregeneration','Manaregeneration');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Map','Map','Karte','Charte');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxFPS','Max. FPS','Max. FPS','Max. FPS');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxHealthPoints','Max. Health','Max. Lebensenergie','Max. Lebensenergie');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MessageNewSaveGame','Please enter the name for your new save game (at most 24 characters)','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen)','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)');

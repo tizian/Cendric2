@@ -277,7 +277,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="dynamic destructable" width="70" height="30">
+ <layer name="dynamic destructible" width="70" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -666,14 +666,14 @@
  <objectgroup name="levelexits">
   <object id="5" x="725" y="275" width="50" height="100">
    <properties>
-    <property name="map id" value="res/map/firstmap/firstmap.tmx"/>
+    <property name="map id" value="res/map/meadows/meadows.tmx"/>
     <property name="x" value="4450"/>
     <property name="y" value="300"/>
    </properties>
   </object>
   <object id="12" x="521" y="1166" width="61" height="119">
    <properties>
-    <property name="map id" value="res/map/firstmap/firstmap.tmx"/>
+    <property name="map id" value="res/map/meadows/meadows.tmx"/>
     <property name="x" value="4450"/>
     <property name="y" value="300"/>
    </properties>

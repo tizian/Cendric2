@@ -6,6 +6,7 @@ enum class Key {
 	Quicksave,
 	Quickload,
 	Inventory,
+	Map,
 	CharacterInfo,
 	Journal,
 	Spellbook,

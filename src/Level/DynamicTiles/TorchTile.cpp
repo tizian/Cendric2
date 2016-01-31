@@ -44,17 +44,21 @@ void TorchTile::onHit(Spell* spell) {
 		break;
 	case SpellID::IceBall:
 		if (m_state == GameObjectState::Burning) {
-			m_state = GameObjectState::Idle;
+			setState(GameObjectState::Idle);
 			m_lightObject->setVisible(false);
-			setCurrentAnimation(getAnimation(m_state), false);
 			spell->setDisposed();
+		}
+		break;
+	case SpellID::WindGust:
+		if (m_state == GameObjectState::Burning) {
+			setState(GameObjectState::Idle);
+			m_lightObject->setVisible(false);
 		}
 		break;
 	case SpellID::FireBall:
 		if (m_state == GameObjectState::Idle) {
-			m_state = GameObjectState::Burning;
+			setState(GameObjectState::Burning);
 			m_lightObject->setVisible(true);
-			setCurrentAnimation(getAnimation(m_state), false);
 			spell->setDisposed();
 		}
 		break;

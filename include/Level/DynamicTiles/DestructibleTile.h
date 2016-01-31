@@ -3,9 +3,9 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 
-class DestructableTile : public LevelDynamicTile {
+class DestructibleTile : public LevelDynamicTile {
 public:
-	DestructableTile(Level* level) : LevelDynamicTile(level) {}
+	DestructibleTile(Level* level) : LevelDynamicTile(level) {}
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;

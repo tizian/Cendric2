@@ -169,6 +169,8 @@ public:
 			return "Exit";
 		case Key::Inventory:
 			return "Inventory";
+		case Key::Map:
+			return "Map";
 		case Key::Spellbook:
 			return "Spellbook";
 		case Key::Jump:

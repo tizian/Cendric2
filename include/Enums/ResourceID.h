@@ -26,7 +26,7 @@ enum class ResourceID {
 	Texture_spell_ghost,
 	Texture_spell_shadowtrap,
 	Texture_tile_ice,
-	Texture_tile_destructable,
+	Texture_tile_destructible,
 	Texture_tile_torch,
 	Texture_tile_chest,
 	Texture_tile_spikestop,

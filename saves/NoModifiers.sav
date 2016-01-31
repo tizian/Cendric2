@@ -5,7 +5,7 @@ savegame.date:1453591930
 level.id:res/level/forest/forest.tmx
 level.position:2175.000000,3175.000000
 is.in.level:0
-map.id:res/map/firstmap/firstmap.tmx
+map.id:res/map/meadows/meadows.tmx
 map.position:2420.000000,981.568237
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 

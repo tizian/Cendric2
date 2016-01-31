@@ -2,11 +2,11 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="42">
  <properties>
   <property name="dimming" value="0.4"/>
-  <property name="name" value="Firstmap"/>
-  <property name="tilesetpath" value="res/map/firstmap/tileset_map_firstmap.png"/>
+  <property name="name" value="Meadows"/>
+  <property name="tilesetpath" value="res/map/meadows/tileset_map_meadows.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_firstmap" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="598" columns="23">
-  <image source="../tilesets/tileset_map_firstmap.png" width="1200" height="1400"/>
+ <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="598" columns="23">
+  <image source="../tilesets/tileset_map_meadows.png" width="1200" height="1400"/>
   <tile id="167">
    <animation>
     <frame tileid="167" duration="100"/>

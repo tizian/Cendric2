@@ -3,7 +3,7 @@
 
 *Cendric* is a 2D RPG Platformer game in which players explore a world by completing levels and quests.
 
-The game is currently still in development. See http://cendric.ch for more information about its development process.
+The game is currently in development. See http://cendric.ch for more information about its development process.
 
 ## Gameplay
 

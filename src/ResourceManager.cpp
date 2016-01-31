@@ -60,7 +60,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_enemy_skeleton, "res/assets/enemies/spritesheet_enemy_skeleton.png" },
 		{ ResourceID::Texture_enemy_gargoyle, "res/assets/enemies/spritesheet_enemy_gargoyle.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/level_dynamic_tiles/spritesheet_tiles_ice.png" },
-		{ ResourceID::Texture_tile_destructable, "res/assets/level_dynamic_tiles/spritesheet_tiles_destructable.png" },
+		{ ResourceID::Texture_tile_destructible, "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png" },
 		{ ResourceID::Texture_tile_chest, "res/assets/level_dynamic_tiles/spritesheet_tiles_chest.png" },
 		{ ResourceID::Texture_tile_spikesbottom, "res/assets/level_dynamic_tiles/spritesheet_tiles_spikesbottom.png" },
@@ -366,7 +366,7 @@ void ResourceManager::deleteLevelResources() {
 	// delete dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_frozenwater);
 	deleteResource(ResourceID::Texture_tile_ice);
-	deleteResource(ResourceID::Texture_tile_destructable);
+	deleteResource(ResourceID::Texture_tile_destructible);
 	deleteResource(ResourceID::Texture_tile_torch);
 	deleteResource(ResourceID::Texture_tile_chest);
 	deleteResource(ResourceID::Texture_tile_spikesbottom);
