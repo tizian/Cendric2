@@ -29,6 +29,7 @@ struct CharacterCoreData {
 	std::map<std::string, std::set<int>> enemiesKilled;
 	std::map<std::string, std::set<int>> itemsLooted;
 	std::map<std::string, std::set<int>> chestsLooted;
+	std::map<std::string, std::set<int>> waypointsUnlocked;
 
 	// quest & npc progress
 	std::map<std::string, NPCState> npcStates;
@@ -71,6 +72,7 @@ const CharacterCoreData DEFAULT_CORE
 	sf::Vector2f(),
 	"",
 	sf::Vector2f(),
+	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),

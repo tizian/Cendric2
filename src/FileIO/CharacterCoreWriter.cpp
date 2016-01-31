@@ -37,6 +37,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeEnemiesLooted(data);
 		savefile << writeItemsLooted(data);
 		savefile << writeChestsLooted(data);
+		savefile << writeWaypointsUnlocked(data);
 		savefile << writeQuestStates(data);
 		savefile << writeQuestProgressTargets(data);
 		savefile << writeQuestProgressConditions(data);
@@ -133,6 +134,22 @@ std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data)
 		itemsLooted.append(itemLooted);
 	}
 	return itemsLooted;
+}
+
+std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData& data) const {
+	string waypointsUnlocked = "# waypoints unlocked in map:\n";
+
+	for (auto it : data.waypointsUnlocked) {
+		string waypointUnlocked = string(WAYPOINTS_UNLOCKED);
+		waypointUnlocked.append(":");
+		waypointUnlocked.append(it.first);
+		for (auto it2 : it.second) {
+			waypointUnlocked.append("," + to_string(it2));
+		}
+		waypointUnlocked.append("\n");
+		waypointsUnlocked.append(waypointUnlocked);
+	}
+	return waypointsUnlocked;
 }
 
 std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data) const {

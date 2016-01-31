@@ -352,6 +352,9 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 		else if (name.find("dynamic cooking") != std::string::npos) {
 			if (!readDynamicTileLayer(MapDynamicTileID::Cooking, layerData, data)) return false;
 		}
+		else if (name.find("dynamic waypoint") != std::string::npos) {
+			if (!readDynamicTileLayer(MapDynamicTileID::Waypoint, layerData, data)) return false;
+		}
 		else {
 			logError("Layer with unknown name found in map.");
 			return false;

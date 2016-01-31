@@ -75,6 +75,9 @@ void MapScreen::load() {
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}
+
+	m_characterCore->initializeMapMaps(m_mapID);
+
 	m_mainChar = new MapMainCharacter(&m_currentMap);
 	m_mainChar->setCharacterCore(getCharacterCore());
 	addObject(m_mainChar);

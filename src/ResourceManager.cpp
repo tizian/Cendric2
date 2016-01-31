@@ -38,6 +38,7 @@ void ResourceManager::init() {
 		{ ResourceID::Quicksave, "saves/quicksave.sav" },
 		{ ResourceID::Items, "res/items.csv" },
 		{ ResourceID::Texture_spellicons, "res/assets/spells/spritesheet_spellicons.png" },
+		{ ResourceID::Texture_mapmarkers, "res/assets/misc/spritesheet_mapmarkers.png" },
 		{ ResourceID::Texture_damageTypes, "res/assets/debuffs/spritesheet_damagetypes.png" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },
 		{ ResourceID::Texture_mapMainChar, "res/assets/cendric/spritesheet_cendric_map.png" },
@@ -72,6 +73,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_tile_switchable, "res/assets/level_dynamic_tiles/spritesheet_tiles_switchable.png" },
 		{ ResourceID::Texture_tile_cooking, "res/assets/map_dynamic_tiles/spritesheet_tiles_cooking.png" },
 		{ ResourceID::Texture_tile_moving, "res/assets/level_dynamic_tiles/spritesheet_tiles_moving.png" },
+		{ ResourceID::Texture_tile_waypoint, "res/assets/map_dynamic_tiles/spritesheet_tiles_waypoint.png" },
 		{ ResourceID::Texture_misc_cooking, "res/assets/misc/sprite_cooking.png" },
 		{ ResourceID::Texture_screen_splash, "res/assets/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
@@ -402,12 +404,16 @@ void ResourceManager::deleteLevelResources() {
 
 void ResourceManager::loadMapResources() {
 	getTexture(ResourceID::Texture_dialogue);
+	getTexture(ResourceID::Texture_mapmarkers);
 }
 
 void ResourceManager::deleteMapResources() {
 	deleteResource(ResourceID::Texture_dialogue);
+	deleteResource(ResourceID::Texture_mapmarkers);
 
+	// dynamic tile resources
 	deleteResource(ResourceID::Texture_tile_cooking);
+	deleteResource(ResourceID::Texture_tile_waypoint);
 }
 
 void ResourceManager::loadLevelResources() {

@@ -264,12 +264,17 @@ void CharacterCore::clearItems() {
 	m_items.clear();
 }
 
-void CharacterCore::initializeMaps(const std::string& level) {
+void CharacterCore::initializeLevelMaps(const std::string& level) {
 	// if these entries for the given level already exist, an insert will do nothing.
 	m_data.enemiesKilled.insert({ level, std::set<int>() });
 	m_data.enemiesLooted.insert({ level, std::set<int>() });
 	m_data.itemsLooted.insert({ level, std::set<int>() });
 	m_data.chestsLooted.insert({ level, std::set<int>() });
+}
+
+void CharacterCore::initializeMapMaps(const std::string& map) {
+	// if these entries for the given map already exist, an insert will do nothing.
+	m_data.waypointsUnlocked.insert({ map, std::set<int>() });
 }
 
 void CharacterCore::setEnemyKilled(const std::string& level, int pos) {
@@ -286,6 +291,10 @@ void CharacterCore::setItemLooted(const std::string& level, int pos) {
 
 void CharacterCore::setChestLooted(const std::string& level, int pos) {
 	m_data.chestsLooted.at(level).insert(pos);
+}
+
+void CharacterCore::setWaypointUnlocked(const std::string& map, int pos) {
+	m_data.waypointsUnlocked.at(map).insert(pos);
 }
 
 const QuestData* CharacterCore::getQuestData(const std::string& questID) const {

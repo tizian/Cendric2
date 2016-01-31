@@ -72,7 +72,9 @@ public:
 	// getter for core part
 	const CharacterCoreData& getData() const;
 	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level
-	void initializeMaps(const std::string& level);
+	void initializeLevelMaps(const std::string& level);
+	// initializes an empty boolean maps (waypoint unlocked) for a given map
+	void initializeMapMaps(const std::string& map);
 	// signal enemy kill
 	void setEnemyKilled(const std::string& level, int pos);
 	// signal enemy looted
@@ -81,6 +83,8 @@ public:
 	void setItemLooted(const std::string& level, int pos);
 	// signal chest looted
 	void setChestLooted(const std::string& level, int pos);
+	// signal waypoint unlocked
+	void setWaypointUnlocked(const std::string& map, int pos);
 	// getter for quest data. If there is none for that id, returns nullptr
 	const QuestData* getQuestData(const std::string& questID) const;
 	// getter for number of targets with name "name" killed for quest with id "questID"

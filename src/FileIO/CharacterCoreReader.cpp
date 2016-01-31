@@ -637,6 +637,14 @@ bool CharacterCoreReader::readChestsLooted(char* start, char* end, CharacterCore
 	return true;
 }
 
+bool CharacterCoreReader::readWaypointsUnlocked(char* start, char* end, CharacterCoreData& data) const {
+	set<int> layer;
+	std::string id;
+	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	data.waypointsUnlocked.insert({ id, layer });
+	return true;
+}
+
 bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data) {
 	FILE* savFile;
 	savFile = fopen(filename.c_str(), "r");
@@ -730,6 +738,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, CHESTS_LOOTED, strlen(CHESTS_LOOTED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(CHESTS_LOOTED));
 			noError = readChestsLooted(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, WAYPOINTS_UNLOCKED, strlen(WAYPOINTS_UNLOCKED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(WAYPOINTS_UNLOCKED));
+			noError = readWaypointsUnlocked(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {

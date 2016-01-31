@@ -22,7 +22,7 @@ void LevelScreen::load() {
 		return;
 	}
 
-	m_characterCoreCopy->initializeMaps(m_levelID);
+	m_characterCoreCopy->initializeLevelMaps(m_levelID);
 
 	LevelMainCharacterLoader loader;
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);

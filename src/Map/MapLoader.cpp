@@ -5,6 +5,7 @@
 #include "LightObject.h"
 #include "Screens/MapScreen.h"
 #include "ObjectFactory.h"
+#include "Map/DynamicTiles/WaypointTile.h"
 
 void MapLoader::loadNpcs(MapData& data, Screen* screen, Map* map) const {
 	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
@@ -41,6 +42,13 @@ void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const 
 		if (tile == nullptr) {
 			g_logger->logError("MapLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
+		}
+
+		if (WaypointTile* wpTile = dynamic_cast<WaypointTile*>(tile)) {
+			wpTile->setSpawnPosition(it.spawnPosition);
+			const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
+			if (coreData.waypointsUnlocked.at(data.id).find(it.spawnPosition) != coreData.waypointsUnlocked.at(data.id).end())
+				wpTile->setActive();
 		}
 		
 		tile->init();

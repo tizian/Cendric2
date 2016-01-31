@@ -29,6 +29,7 @@ private:
 	bool readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readItemsLooted(char* start, char* end, CharacterCoreData& data) const;
 	bool readChestsLooted(char* start, char* end, CharacterCoreData& data) const;
+	bool readWaypointsUnlocked(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestStates(char* start, char* end, CharacterCoreData& data) const;
 	bool readMerchandState(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const;

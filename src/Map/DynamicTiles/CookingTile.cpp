@@ -17,7 +17,6 @@ void CookingTile::init() {
 }
 
 void CookingTile::loadAnimation(int skinNr) {
-	m_isCollidable = false;
 	int textureHeight = 2 * TILE_SIZE;
 
 	Animation burningAnimation(sf::seconds(0.15f));
@@ -29,15 +28,13 @@ void CookingTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Burning, burningAnimation);
 
 	// initial values
-	m_state = GameObjectState::Burning;
-	setCurrentAnimation(getAnimation(m_state), false);
+	setState(GameObjectState::Burning);
 	playCurrentAnimation(true);
 
 	// init tooltip
 	m_tooltipText.setString(g_textProvider->getText("Fireplace"));
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);
-	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
 }
 
 void CookingTile::update(const sf::Time& frameTime) {
@@ -52,7 +49,6 @@ void CookingTile::renderAfterForeground(sf::RenderTarget &renderTarget) {
 		renderTarget.draw(m_tooltipText);
 	}
 }
-
 
 void CookingTile::onRightClick() {
 	// check if this tile is in range

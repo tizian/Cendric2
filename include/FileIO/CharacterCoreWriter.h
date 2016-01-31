@@ -32,6 +32,7 @@ private:
 	std::string writeEnemiesLooted(const CharacterCoreData& data) const;
 	std::string writeItemsLooted(const CharacterCoreData& data) const;
 	std::string writeChestsLooted(const CharacterCoreData& data) const;
+	std::string writeWaypointsUnlocked(const CharacterCoreData& data) const;
 	std::string writeQuestStates(const CharacterCoreData& data) const;
 	std::string writeMerchandStates(const CharacterCoreData& data) const;
 	std::string writeQuestProgressTargets(const CharacterCoreData& data) const;
