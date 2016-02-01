@@ -44,17 +44,19 @@ void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const 
 			return;
 		}
 
+		tile->init();
+		tile->setPosition(it.position - tile->getPositionOffset());
+		tile->setDebugBoundingBox(sf::Color::Yellow);
+		tile->loadAnimation(it.skinNr);
+		tile->setDynamicTileID(it.id);
+
 		if (WaypointTile* wpTile = dynamic_cast<WaypointTile*>(tile)) {
 			wpTile->setSpawnPosition(it.spawnPosition);
 			const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 			if (coreData.waypointsUnlocked.at(data.id).find(it.spawnPosition) != coreData.waypointsUnlocked.at(data.id).end())
 				wpTile->setActive();
 		}
-		
-		tile->init();
-		tile->setPosition(it.position - tile->getPositionOffset());
-		tile->setDebugBoundingBox(sf::Color::Yellow);
-		tile->loadAnimation(it.skinNr);
+
 		screen->addObject(tile);
 	}
 }

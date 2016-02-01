@@ -28,6 +28,8 @@ public:
 	// getter for the main char as it lays in the movable go vector
 	MapMainCharacter* getMainCharacter() const;
 
+	const Map& getMap() const;
+
 private:
 	Map m_currentMap;
 	std::string m_mapID;

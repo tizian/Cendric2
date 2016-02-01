@@ -32,6 +32,10 @@ public:
 	// draws the world. foreground tilelayers
 	void drawForeground(sf::RenderTarget& target, const sf::RenderStates& states) const;
 
+	const TileMap* getBackgroundTileMap() const; 
+	const TileMap* getLightedForegroundTileMap() const;
+	const TileMap* getForegroundTileMap() const;
+
 	// checks collision with the collidable grid of that world and also the collidable dynamic tiles
 	// if the calling object itself wants to be excluded, it can give itself as an argument here.
 	// the last argument will ignore collidable dynamic tiles in the check, but no strictly collidable dynamic tiles.

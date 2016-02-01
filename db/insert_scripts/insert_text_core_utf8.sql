@@ -202,6 +202,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Type','Type',
 INSERT INTO text (text_id, english, german, swiss_german) values ('Unknown','Unknown','Unbekannt','Unbekannt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Unsalable','Cannot be sold','Unverkäuflich','Unverchäuflich');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Waypoint','Waypoint','Wegmarke','Wägpunkt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('WaypointNotActive','Waypoint not active!','Wegmarke ist nicht aktiv!','De Wägpunkt isch nid aktiv!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('WeaponDamage','Weapon Damage','Waffenschaden','Waffeschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('WindForce','Wind Force','Windstärke','Windstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Window','Window','Fenster','Fenster');

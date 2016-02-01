@@ -23,3 +23,11 @@ GameObjectType MapDynamicTile::getConfiguredType() const {
 void MapDynamicTile::onHit(MapMainCharacter* mob) {
 	// nop
 }
+
+void MapDynamicTile::setDynamicTileID(MapDynamicTileID id) {
+	m_dynamicTileID = id;
+}
+
+MapDynamicTileID MapDynamicTile::getDynamicTileID() const {
+	return m_dynamicTileID;
+}

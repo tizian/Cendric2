@@ -24,14 +24,17 @@ public:
 	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
 	void setPositionOffset(const sf::Vector2f& offset);
 
+	void setDynamicTileID(MapDynamicTileID id);
 	const sf::Vector2f& getPositionOffset() const;
 	virtual bool getIsCollidable() const;
 	GameObjectType getConfiguredType() const override;
+	MapDynamicTileID getDynamicTileID() const;
 
 protected:
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
 	bool m_isCollidable = false;
+	MapDynamicTileID m_dynamicTileID;
 	Map* m_map;
 
 private:

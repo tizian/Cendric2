@@ -30,6 +30,18 @@ void World::drawForeground(sf::RenderTarget& target, const sf::RenderStates& sta
 	m_foregroundTileMap.draw(target, states);
 }
 
+const TileMap* World::getBackgroundTileMap() const {
+	return &m_backgroundTileMap;
+}
+
+const TileMap* World::getLightedForegroundTileMap() const {
+	return &m_lightedForegroundTileMap;
+}
+
+const TileMap* World::getForegroundTileMap() const {
+	return &m_foregroundTileMap;
+}
+
 const sf::FloatRect& World::getWorldRect() const {
 	return m_worldData->mapRect;
 }

@@ -67,11 +67,14 @@ void WaypointTile::onMouseOver() {
 }
 
 void WaypointTile::onRightClick() {
-	if (m_state == GameObjectState::Idle) return;
+	if (m_state == GameObjectState::Idle) {
+		m_screen->setTooltipText(g_textProvider->getText("WaypointNotActive"), sf::Color::Red, true);
+		return;
+	}
 	const sf::FloatRect& bb = *m_mainCharacter->getBoundingBox();
 	m_mainCharacter->setPosition(sf::Vector2f(
-		getPosition().x + getBoundingBox()->width / 2.f - bb.width / 2.f,
-		getPosition().y - bb.height + getBoundingBox()->height / 2.f
+		getPosition().x + TILE_SIZE_F / 2.f - bb.width / 2.f,
+		getPosition().y - bb.height + TILE_SIZE_F / 2.f
 		));
 }
 
