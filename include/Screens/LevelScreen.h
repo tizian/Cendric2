@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
-#include "GameScreen.h"
+#include "WorldScreen.h"
 #include "ResourceManager.h"
 #include "Level/LevelMainCharacterLoader.h"
 #include "Level/LevelInterface.h"
@@ -12,7 +12,7 @@
 #include "GUI/YesOrNoForm.h"
 #include "GUI/ProgressLog.h"
 
-class LevelScreen : public GameScreen {
+class LevelScreen : public WorldScreen {
 public:
 	LevelScreen(const std::string& levelID, CharacterCore* core);
 	// called by the loading screen

@@ -6,7 +6,7 @@
 REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Waypoint, WaypointTile)
 
 WaypointTile::WaypointTile(Map* map) : MapDynamicTile(map) {
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(50.f, 50.f)));
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(50.f, 70.f), 0.5));
 }
 
 void WaypointTile::init() {
@@ -50,6 +50,7 @@ void WaypointTile::update(const sf::Time& frameTime) {
 	if (m_state == GameObjectState::Active) return;
 	if (m_mainCharacter->getBoundingBox()->intersects(*getBoundingBox())) {
 		m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition);
+		m_screen->setTooltipText(g_textProvider->getText("WaypointActivated"), sf::Color::Green, true);
 		setActive();
 	}
 }

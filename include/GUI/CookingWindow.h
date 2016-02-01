@@ -5,7 +5,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/GUIConstants.h"
 #include "Structs/NPCData.h"
-#include "Screens/GameScreen.h"
+#include "Screens/WorldScreen.h"
 #include "MerchantInterface.h"
 #include "Dialogue.h"
 

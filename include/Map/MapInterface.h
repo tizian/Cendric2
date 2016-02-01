@@ -1,15 +1,15 @@
 #pragma once
 
 #include "global.h"
-#include "GUI/GameInterface.h"
+#include "GUI/WorldInterface.h"
 
 #include "GUI/MapOverlay.h"
 
 // The interface overlay in a map
 // if the keys for character screen, spellbook and inventory are pressed, these will display.
-class MapInterface : public GameInterface {
+class MapInterface : public WorldInterface {
 public:
-	MapInterface(GameScreen* screen);
+	MapInterface(WorldScreen* screen);
 	~MapInterface();
 
 	void update(const sf::Time& frameTime) override;

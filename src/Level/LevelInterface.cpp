@@ -1,9 +1,9 @@
 #include "Level/LevelInterface.h"
 #include "Level/LevelMainCharacter.h"
-#include "Screens/GameScreen.h"
+#include "Screens/WorldScreen.h"
 #include "GUI/SlotClone.h"
 
-LevelInterface::LevelInterface(GameScreen* screen, LevelMainCharacter* character) : GameInterface(screen),
+LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
 m_character(character) {
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(character->getAttributes());
@@ -33,11 +33,11 @@ void LevelInterface::render(sf::RenderTarget& target) {
 	m_spellSelection->render(target);
 	m_quickSlotBar->render(target);
 
-	GameInterface::render(target);
+	WorldInterface::render(target);
 }
 
 void LevelInterface::update(const sf::Time& frameTime) {
-	GameInterface::update(frameTime);
+	WorldInterface::update(frameTime);
 
 	m_healthBar->update();
 	m_buffBar->update(frameTime);
@@ -73,7 +73,7 @@ void LevelInterface::highlightQuickslots(bool highlight) {
 }
 
 void LevelInterface::reloadInventory(const std::string& changedItemID) {
-	GameInterface::reloadInventory(changedItemID);
+	WorldInterface::reloadInventory(changedItemID);
 	m_quickSlotBar->reload();
 }
 

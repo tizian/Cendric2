@@ -3,8 +3,8 @@
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "Map/MapMainCharacter.h"
 
-float MapOverlay::TOP = 20.f;
-float MapOverlay::LEFT = 20.f;
+float MapOverlay::TOP = 30.f;
+float MapOverlay::LEFT = 30.f;
 
 MapOverlay::MapOverlay(MapScreen* screen) :
 	// copy those maps
@@ -46,10 +46,17 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 
 	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
+
+	m_title.setString(g_textProvider->getText(map.getName(), "location"));
+	m_title.setCharacterSize(16);
+	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
 }
 
 MapOverlay::~MapOverlay() {
-	
+	for (auto& wp : m_waypoints) {
+		delete wp;
+	}
+	m_waypoints.clear();
 }
 
 void MapOverlay::update(const sf::Time& frameTime) {
@@ -59,7 +66,7 @@ void MapOverlay::update(const sf::Time& frameTime) {
 		m_screen->getMainCharacter()->getCenter() * m_scale - sf::Vector2f(12.5f, 12.5f));
 
 	for (auto& wp : m_waypoints) {
-		wp.update(frameTime);
+		wp->update(frameTime);
 	}
 
 	if (g_inputController->isMouseOver(&m_boundingBox, true)) {
@@ -68,6 +75,9 @@ void MapOverlay::update(const sf::Time& frameTime) {
 } 
 
 void MapOverlay::reloadWaypoints() {
+	for (auto& wp : m_waypoints) {
+		delete wp;
+	}
 	m_waypoints.clear();
 
 	const std::vector<GameObject*>* tiles = m_screen->getObjects(GameObjectType::_DynamicTile);
@@ -75,13 +85,14 @@ void MapOverlay::reloadWaypoints() {
 		if (WaypointTile* tile = dynamic_cast<WaypointTile*>(go)) {
 			if (tile->getGameObjectState() == GameObjectState::Idle) continue;
 
-			WaypointMarker marker(m_screen->getMainCharacter(), tile->getPosition(), this);
-			marker.setPosition(m_position + tile->getPosition() * m_scale +
-				sf::Vector2f(TILE_SIZE * m_scale - 12.5f, TILE_SIZE * m_scale - 12.5f));
+			WaypointMarker* marker = new WaypointMarker(m_screen->getMainCharacter(), tile->getPosition(), this);
+			marker->loadAnimation();
+			marker->setPosition(m_position + tile->getCenter() * m_scale -
+				sf::Vector2f(12.5f, 12.5f));
 			m_waypoints.push_back(marker);
 		}
 	}
-}
+} 
 
 bool MapOverlay::isVisible() const {
 	return m_isVisible;
@@ -95,10 +106,11 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	target.draw(m_foregroundTileMap);
 
 	for (auto& wp : m_waypoints) {
-		wp.render(target);
+		wp->render(target);
 	}
 
 	target.draw(m_mainCharMarker);
+	target.draw(m_title);
 }
 
 void MapOverlay::show() {
@@ -117,13 +129,19 @@ WaypointMarker::WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& w
 	m_mainChar = mainChar;
 	m_waypointPosition = waypointPosition;
 	m_isInputInDefaultView = true;
+}
 
+void WaypointMarker::loadAnimation() {
 	// load animations
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 25.f, 25.f));
 
 	Animation activeAnimation;
 	activeAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
-	activeAnimation.addFrame(sf::IntRect(50, 0, 25, 25));
+	for (int i = 2; i < 6; i++)
+		activeAnimation.addFrame(sf::IntRect(i * 25, 0, 25, 25));
+
+	for (int i = 5; i > 1; i--)
+		activeAnimation.addFrame(sf::IntRect(i * 25, 0, 25, 25));
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
@@ -135,7 +153,15 @@ WaypointMarker::WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& w
 
 	// initial values
 	setState(GameObjectState::Idle);
-	playCurrentAnimation(false);
+	playCurrentAnimation(true);
+
+	m_tooltip.setCharacterSize(8);
+	m_tooltip.setString(g_textProvider->getText("ClickToTeleport"));
+}
+
+void WaypointMarker::setPosition(const sf::Vector2f& position) {
+	AnimatedGameObject::setPosition(position);
+	m_tooltip.setPosition(position + sf::Vector2f(0.f, -8.f));
 }
 
 void WaypointMarker::onMouseOver() {
@@ -149,6 +175,13 @@ void WaypointMarker::update(const sf::Time& frameTime) {
 	AnimatedGameObject::update(frameTime);
 	if (wasMouseOver && !m_isMouseOver) {
 		setState(GameObjectState::Idle);
+	}
+}
+
+void WaypointMarker::render(sf::RenderTarget& target) {
+	AnimatedGameObject::render(target);
+	if (m_state == GameObjectState::Active) {
+		target.draw(m_tooltip);
 	}
 }
 

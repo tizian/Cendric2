@@ -3,7 +3,7 @@
 
 using namespace std;
 
-MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : GameScreen(core) {
+MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScreen(core) {
 	m_mapID = mapID;
 }
 
@@ -12,7 +12,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	handleDialogueWindow(frameTime);
 	if (m_dialogueWindow != nullptr || m_cookingWindow != nullptr) return;
 
-	GameScreen::execUpdate(frameTime);
+	WorldScreen::execUpdate(frameTime);
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
 		// store pos & go back to menu screen
 		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
@@ -168,7 +168,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MapMovableGameObject, renderTarget);
 	renderTooltipText(renderTarget);
-	GameScreen::render(renderTarget); // this will set the view to the default view!
+	WorldScreen::render(renderTarget); // this will set the view to the default view!
 
 	if (m_dialogueWindow != nullptr) {
 		m_dialogueWindow->render(renderTarget);

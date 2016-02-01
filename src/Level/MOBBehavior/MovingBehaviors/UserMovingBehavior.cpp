@@ -69,6 +69,7 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 }
 
 void UserMovingBehavior::handleMovementInput() {
+	if (m_mainChar->isDead()) return;
 	float newAccelerationX = m_mainChar->getAcceleration().x;
 	if (m_mainChar->m_fearedTime == sf::Time::Zero &&
 		m_mainChar->m_stunnedTime == sf::Time::Zero) {

@@ -1,15 +1,15 @@
-#include "GUI/GameInterface.h"
-#include "Screens/GameScreen.h"
+#include "GUI/WorldInterface.h"
+#include "Screens/WorldScreen.h"
 
-GameInterface::GameInterface(GameScreen* screen) {
+WorldInterface::WorldInterface(WorldScreen* screen) {
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
 }
 
-GameInterface::~GameInterface() {
+WorldInterface::~WorldInterface() {
 }
 
-void GameInterface::render(sf::RenderTarget& target) {
+void WorldInterface::render(sf::RenderTarget& target) {
 	target.setView(target.getDefaultView());
 
 	m_characterInfo->render(target);
@@ -18,22 +18,22 @@ void GameInterface::render(sf::RenderTarget& target) {
 	m_inventory->render(target);
 }
 
-void GameInterface::update(const sf::Time& frameTime) {
+void WorldInterface::update(const sf::Time& frameTime) {
 	updateInventory(frameTime);
 	updateSpellbook(frameTime);
 	updateQuestLog(frameTime);
 	updateCharacterInfo();
 }
 
-void GameInterface::reloadInventory(const std::string& changedItemID) {
+void WorldInterface::reloadInventory(const std::string& changedItemID) {
 	m_inventory->notifyChange(changedItemID);
 }
 
-void GameInterface::reloadQuestLog() {
+void WorldInterface::reloadQuestLog() {
 	m_questLog->reload();
 }
 
-void GameInterface::updateCharacterInfo() {
+void WorldInterface::updateCharacterInfo() {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {
 			if (m_inventory->isVisible()) m_inventory->hide();
@@ -54,7 +54,7 @@ void GameInterface::updateCharacterInfo() {
 	m_characterInfo->update();
 }
 
-void GameInterface::updateSpellbook(const sf::Time& frameTime) {
+void WorldInterface::updateSpellbook(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Spellbook)) {
 		if (!m_spellbook->isVisible()) {
 			if (m_characterInfo->isVisible()) m_characterInfo->hide();
@@ -75,7 +75,7 @@ void GameInterface::updateSpellbook(const sf::Time& frameTime) {
 	m_spellbook->update(frameTime);
 }
 
-void GameInterface::updateInventory(const sf::Time& frameTime) {
+void WorldInterface::updateInventory(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Inventory)) {
 		if (!m_inventory->isVisible()) {
 			if (m_characterInfo->isVisible()) m_characterInfo->hide();
@@ -96,7 +96,7 @@ void GameInterface::updateInventory(const sf::Time& frameTime) {
 	m_inventory->update(frameTime);
 }
 
-void GameInterface::updateQuestLog(const sf::Time& frameTime) {
+void WorldInterface::updateQuestLog(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Journal)) {
 		if (!m_questLog->isVisible()) {
 			if (m_characterInfo->isVisible()) m_characterInfo->hide();
@@ -117,10 +117,10 @@ void GameInterface::updateQuestLog(const sf::Time& frameTime) {
 	m_questLog->update(frameTime);
 }
 
-CharacterCore* GameInterface::getCore() const {
+CharacterCore* WorldInterface::getCore() const {
 	return m_core;
 }
 
-Inventory* GameInterface::getInventory() const {
+Inventory* WorldInterface::getInventory() const {
 	return m_inventory;
 }

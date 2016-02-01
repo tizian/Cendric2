@@ -3,14 +3,14 @@
 #include "global.h"
 #include "Map/Map.h"
 #include "Map/MapMainCharacter.h"
-#include "Screens/GameScreen.h"
+#include "Screens/WorldScreen.h"
 #include "ResourceManager.h"
 #include "Screens/LoadingScreen.h"
 #include "GUI/DialogueWindow.h"
 #include "GUI/CookingWindow.h"
 #include "Map/MapInterface.h"
 
-class MapScreen : public GameScreen {
+class MapScreen : public WorldScreen {
 public:
 	MapScreen(const std::string& mapID, CharacterCore* core);
 	// called by the loadingScreen

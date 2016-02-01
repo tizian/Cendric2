@@ -36,6 +36,7 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 }
 
 void LevelMainCharacter::handleAttackInput() {
+	if (isDead()) return;
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 	// update current spell

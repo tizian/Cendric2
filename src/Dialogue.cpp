@@ -1,9 +1,9 @@
 #include "Dialogue.h"
-#include "Screens/GameScreen.h"
+#include "Screens/WorldScreen.h"
 #include "GUI/DialogueWindow.h"
 #include "DialogueLoader.h"
 
-void Dialogue::load(const std::string& id, GameScreen* screen, DialogueWindow* window) {
+void Dialogue::load(const std::string& id, WorldScreen* screen, DialogueWindow* window) {
 	m_id = id;
 	m_screen = screen;
 	m_window = window;

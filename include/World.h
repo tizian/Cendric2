@@ -54,6 +54,7 @@ public:
 	const std::string& getID() const;
 	float getDimming() const;
 	const std::string& getMusicPath() const;
+	const std::string& getName() const;
 
 protected:
 	// this pointer is set by the descendants (map and level)

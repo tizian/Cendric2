@@ -3,7 +3,7 @@
 #include "global.h"
 #include "SpellManager.h"
 
-#include "GUI/GameInterface.h"
+#include "GUI/WorldInterface.h"
 #include "GUI/HealthBar.h"
 #include "GUI/BuffBar.h"
 #include "GUI/QuickSlotBar.h"
@@ -11,9 +11,9 @@
 
 // The interface overlay in a level, displaying hp bar, spell cooldowns, buffs, quickslot bar
 // if the keys for character screen and inventory are pressed, these will display as well.
-class LevelInterface : public GameInterface {
+class LevelInterface : public WorldInterface {
 public:
-	LevelInterface(GameScreen* screen, LevelMainCharacter* character);
+	LevelInterface(WorldScreen* screen, LevelMainCharacter* character);
 	~LevelInterface();
 
 	// the spell manager of the level main character.

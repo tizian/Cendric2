@@ -1,7 +1,7 @@
 #include "Map/MapInterface.h"
 #include "Screens/MapScreen.h"
 
-MapInterface::MapInterface(GameScreen* screen) : GameInterface(screen) {
+MapInterface::MapInterface(WorldScreen* screen) : WorldInterface(screen) {
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(&m_core->getTotalAttributes());
 	m_spellbook = new Spellbook(m_core, true);
@@ -26,11 +26,11 @@ void MapInterface::update(const sf::Time& frameTime) {
 		m_mapOverlay->hide();
 	}
 	updateMapOverlay(frameTime);
-	GameInterface::update(frameTime);
+	WorldInterface::update(frameTime);
 }
 
 void MapInterface::render(sf::RenderTarget& target) {
-	GameInterface::render(target);
+	WorldInterface::render(target);
 
 	m_mapOverlay->render(target);
 }

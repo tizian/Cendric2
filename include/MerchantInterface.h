@@ -4,13 +4,13 @@
 #include "CharacterCore.h"
 #include "GUI/MerchantWindow.h"
 #include "Structs/MerchantData.h"
-#include "Screens/GameScreen.h"
+#include "Screens/WorldScreen.h"
 #include "GUI/Button.h"
 
 // the merchant interface, acting as a interface between dialogue and merchant actions
 class MerchantInterface {
 public:
-	MerchantInterface(GameScreen* screen, std::string merchantID);
+	MerchantInterface(WorldScreen* screen, std::string merchantID);
 	~MerchantInterface();
 
 	const MerchantData& getMerchantData() const;
@@ -28,7 +28,7 @@ public:
 
 private:
 	bool m_isCancelled = false;
-	GameScreen* m_screen = nullptr;
+	WorldScreen* m_screen = nullptr;
 	Inventory* m_inventory = nullptr;
 	CharacterCore* m_core = nullptr;
 	std::string m_merchantID;

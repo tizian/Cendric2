@@ -4,21 +4,26 @@
 #include "CharacterCore.h"
 #include "InputController.h"
 #include "TileMap.h"
+#include "BitmapText.h"
 
 class MapScreen;
 class MapMainCharacter;
 class MapOverlay;
 
-class WaypointMarker : public AnimatedGameObject {
+class WaypointMarker : public virtual AnimatedGameObject {
 public:
 	WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent);
 
 	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& target) override;
 
 	void onMouseOver() override;
 	void onRightClick() override;
 	void onLeftClick() override;
 	void onInteractKey() override;
+
+	void setPosition(const sf::Vector2f& position) override;
+	void loadAnimation();
 
 	GameObjectType getConfiguredType() const override;
 
@@ -27,6 +32,7 @@ private:
 	MapOverlay* m_parent;
 	bool m_isMouseOver = false;
 	sf::Vector2f m_waypointPosition;
+	BitmapText m_tooltip;
 };
 
 // the map overlay, as displayed in a map
@@ -57,11 +63,13 @@ private:
 	TileMap m_foregroundTileMap;
 
 	sf::Sprite m_mainCharMarker;
-	std::vector<WaypointMarker> m_waypoints;
+	std::vector<WaypointMarker*> m_waypoints;
 
 	bool m_isVisible = false;
 
 	float m_scale;
 	sf::FloatRect m_boundingBox;
 	sf::Vector2f m_position;
+
+	BitmapText m_title;
 };

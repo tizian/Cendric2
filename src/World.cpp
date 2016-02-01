@@ -127,3 +127,7 @@ float World::getDimming() const {
 const std::string& World::getMusicPath() const {
 	return m_worldData->musicPath;
 }
+
+const std::string& World::getName() const {
+	return m_worldData->name;
+}

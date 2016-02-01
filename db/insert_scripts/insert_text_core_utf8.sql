@@ -10,6 +10,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Cancel','Canc
 INSERT INTO text (text_id, english, german, swiss_german) values ('CharacterInfo','Character Info','Charakter Info','Charakter Info');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CheckpointReached','Checkpoint reached','Kontrollpunkt erreicht','Checkpoint erreicht');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chop','Chop','Hauen','Haue');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ClickToTeleport','Click to teleport','Klicken zum Teleportieren','Klicke zum Teleportiere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Completed','Completed','Abgeschlossen','Fertig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ConfigurationSaved','Configuration was saved.','Einstellungen wurden erfolgreich gespeichert. ','Iistellige sind erfolgriich gspeicheret.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Confirm','Confirm','Bestätigen','Bestätige');
@@ -203,6 +204,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Unknown','Unk
 INSERT INTO text (text_id, english, german, swiss_german) values ('Unsalable','Cannot be sold','Unverkäuflich','Unverchäuflich');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Waypoint','Waypoint','Wegmarke','Wägpunkt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('WaypointNotActive','Waypoint not active!','Wegmarke ist nicht aktiv!','De Wägpunkt isch nid aktiv!');
+INSERT INTO text (text_id, english, german, swiss_german) values ('WaypointActivated','Waypoint activated','Wegmarke aktiviert','Wägpunkt aktiviert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('WeaponDamage','Weapon Damage','Waffenschaden','Waffeschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('WindForce','Wind Force','Windstärke','Windstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Window','Window','Fenster','Fenster');

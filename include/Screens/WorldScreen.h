@@ -8,10 +8,10 @@
 #include "GUI/ProgressLog.h"
 
 // ancestor for level or map screen
-class GameScreen : public Screen {
+class WorldScreen : public Screen {
 public:
-	GameScreen(CharacterCore* core);
-	virtual ~GameScreen();
+	WorldScreen(CharacterCore* core);
+	virtual ~WorldScreen();
 
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
@@ -29,7 +29,7 @@ public:
 	Inventory* getInventory();
 
 protected:
-	GameInterface* m_interface = nullptr;
+	WorldInterface* m_interface = nullptr;
 	ProgressLog* m_progressLog = nullptr;
 
 	// For lighting

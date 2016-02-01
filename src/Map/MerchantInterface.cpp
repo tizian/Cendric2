@@ -1,6 +1,6 @@
 #include "MerchantInterface.h"
 
-MerchantInterface::MerchantInterface(GameScreen* screen, std::string merchantID) {
+MerchantInterface::MerchantInterface(WorldScreen* screen, std::string merchantID) {
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
 	m_merchantID = merchantID;

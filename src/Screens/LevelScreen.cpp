@@ -4,7 +4,7 @@
 
 using namespace std;
 
-LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : GameScreen(core) {
+LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : WorldScreen(core) {
 	m_levelID = levelID;
 }
 
@@ -114,7 +114,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
 	if (!m_retryButton->isVisible()) {
-		GameScreen::execUpdate(frameTime);
+		WorldScreen::execUpdate(frameTime);
 	}
 
 	if (!m_isGameOver && m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
@@ -212,7 +212,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
 
 	renderTooltipText(renderTarget);
-	GameScreen::render(renderTarget); // this will set the view to the default view!
+	WorldScreen::render(renderTarget); // this will set the view to the default view!
 
 	if (m_retryButton->isVisible()) {
 		renderTarget.draw(*m_overlaySprite);

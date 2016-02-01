@@ -33,12 +33,12 @@ DialogueWindow::~DialogueWindow() {
 	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
 }
 
-void DialogueWindow::load(const NPCData& npcData, GameScreen* screen) {
+void DialogueWindow::load(const NPCData& npcData, WorldScreen* screen) {
 	setNPC(npcData);
 	setDialogue(npcData.dialogueID, screen);
 }
 
-void DialogueWindow::setDialogue(const std::string& dialogueID, GameScreen* screen) {
+void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* screen) {
 	delete m_dialogue;
 	m_dialogue = new Dialogue();
 	m_dialogue->load(dialogueID, screen, this);
@@ -85,7 +85,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_speakerText->setString(m_npcName);
 	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x)));
 	delete m_merchantInterface;
-	m_merchantInterface = new MerchantInterface(dynamic_cast<GameScreen*>(m_screen), m_npcID);
+	m_merchantInterface = new MerchantInterface(dynamic_cast<WorldScreen*>(m_screen), m_npcID);
 	setPosition(sf::Vector2f(getPosition().x, getPosition().y + BOX.height / 2.f));
 	m_speakerSprite.setPosition(sf::Vector2f(getPosition().x, WINDOW_HEIGHT - 150.f));
 	setHeight(BOX.height / 2.f); 

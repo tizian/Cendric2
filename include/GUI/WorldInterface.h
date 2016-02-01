@@ -10,13 +10,13 @@
 #include "GUI/Spellbook.h"
 #include "GUI/QuestLog.h"
 
-class GameScreen;
+class WorldScreen;
 
 // abstract class for an interface in level or map
-class GameInterface {
+class WorldInterface {
 public:
-	GameInterface(GameScreen* screen);
-	virtual ~GameInterface();
+	WorldInterface(WorldScreen* screen);
+	virtual ~WorldInterface();
 
 	// reloads the inventory for the items that have changed. if the string equals "gold", reloads gold
 	virtual void reloadInventory(const std::string& changeditemID);
@@ -30,7 +30,7 @@ public:
 	Inventory* getInventory() const;
 
 protected:
-	GameScreen* m_screen;
+	WorldScreen* m_screen;
 	CharacterCore* m_core;
 
 	// <<< INVENTORY >>>
