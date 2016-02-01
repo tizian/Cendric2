@@ -50,6 +50,8 @@ void GameInterface::updateCharacterInfo() {
 		m_characterInfo->hide();
 		g_inputController->lockAction();
 	}
+
+	m_characterInfo->update();
 }
 
 void GameInterface::updateSpellbook(const sf::Time& frameTime) {
