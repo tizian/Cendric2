@@ -55,7 +55,7 @@ MapOverlay::~MapOverlay() {
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	m_mainCharMarker.setPosition(m_position + m_screen->getMainCharacter()->getPosition() / m_scale);
+	m_mainCharMarker.setPosition(m_position + m_screen->getMainCharacter()->getPosition() * m_scale);
 
 	for (auto& wp : m_waypoints) {
 		wp.update(frameTime);
