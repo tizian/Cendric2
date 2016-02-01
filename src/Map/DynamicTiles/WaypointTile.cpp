@@ -6,7 +6,6 @@
 REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Waypoint, WaypointTile)
 
 WaypointTile::WaypointTile(Map* map) : MapDynamicTile(map) {
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(50.f, 70.f), 0.5));
 }
 
 void WaypointTile::init() {
@@ -84,13 +83,17 @@ void WaypointTile::onInteractKey() {
 }
 
 void WaypointTile::setPosition(const sf::Vector2f& pos) {
-	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
+	if (m_lightObject != nullptr) m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	MapDynamicTile::setPosition(pos);
 	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
 }
 
 void WaypointTile::setActive() {
 	setState(GameObjectState::Active);
+	if (m_lightObject != nullptr) m_lightObject->setDisposed();
+	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(70.f, 50.f), 0.5f));
+	m_lightObject->setPosition(getPosition() + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
+	m_screen->addObject(m_lightObject);
 }
 
 void WaypointTile::setSpawnPosition(int spawnPosition) {
@@ -99,11 +102,10 @@ void WaypointTile::setSpawnPosition(int spawnPosition) {
 
 void WaypointTile::setDisposed() {
 	MapDynamicTile::setDisposed();
-	m_lightObject->setDisposed();
+	if (m_lightObject != nullptr) m_lightObject->setDisposed();
 }
 
 void WaypointTile::setScreen(Screen* screen) {
 	MapDynamicTile::setScreen(screen);
-	screen->addObject(m_lightObject);
 	m_mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
 }

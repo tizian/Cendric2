@@ -62,7 +62,7 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (std::abs(m_mainChar->getVelocity().y) > 0.f)
 		m_isGrounded = false;
 
-	if (!isMovingDown && nextBoundingBoxY.top - bb.height < level.getWorldRect().top || 
+	if (!isMovingDown && nextBoundingBoxY.top < -bb.height ||
 		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
 		m_mob->setDead();
 	}

@@ -74,7 +74,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		m_enemy->setWaiting();
 	}
 
-	if (!isMovingDown && nextBoundingBoxY.top - bb.height < level.getWorldRect().top ||
+	if (!isMovingDown && nextBoundingBoxY.top < -bb.height ||
 		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
 		m_mob->setDead();
 	}

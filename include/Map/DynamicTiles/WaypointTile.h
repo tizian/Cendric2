@@ -23,7 +23,7 @@ public:
 	void setScreen(Screen* screen) override;
 
 private:
-	LightObject* m_lightObject;
+	LightObject* m_lightObject = nullptr;
 	MapMainCharacter* m_mainCharacter;
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;

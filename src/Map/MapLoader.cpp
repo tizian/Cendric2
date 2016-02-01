@@ -50,13 +50,13 @@ void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const 
 		tile->loadAnimation(it.skinNr);
 		tile->setDynamicTileID(it.id);
 
+		screen->addObject(tile);
+
 		if (WaypointTile* wpTile = dynamic_cast<WaypointTile*>(tile)) {
 			wpTile->setSpawnPosition(it.spawnPosition);
 			const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 			if (coreData.waypointsUnlocked.at(data.id).find(it.spawnPosition) != coreData.waypointsUnlocked.at(data.id).end())
 				wpTile->setActive();
 		}
-
-		screen->addObject(tile);
 	}
 }
