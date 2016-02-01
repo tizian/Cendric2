@@ -7,10 +7,11 @@
 
 class MapScreen;
 class MapMainCharacter;
+class MapOverlay;
 
 class WaypointMarker : public AnimatedGameObject {
 public:
-	WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& waypointPosition);
+	WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent);
 
 	void update(const sf::Time& frameTime) override;
 
@@ -23,6 +24,7 @@ public:
 
 private:
 	MapMainCharacter* m_mainChar;
+	MapOverlay* m_parent;
 	bool m_isMouseOver = false;
 	sf::Vector2f m_waypointPosition;
 };

@@ -55,7 +55,8 @@ MapOverlay::~MapOverlay() {
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	m_mainCharMarker.setPosition(m_position + m_screen->getMainCharacter()->getPosition() * m_scale);
+	m_mainCharMarker.setPosition(m_position + 
+		m_screen->getMainCharacter()->getCenter() * m_scale - sf::Vector2f(12.5f, 12.5f));
 
 	for (auto& wp : m_waypoints) {
 		wp.update(frameTime);
@@ -74,7 +75,7 @@ void MapOverlay::reloadWaypoints() {
 		if (WaypointTile* tile = dynamic_cast<WaypointTile*>(go)) {
 			if (tile->getGameObjectState() == GameObjectState::Idle) continue;
 
-			WaypointMarker marker(m_screen->getMainCharacter(), tile->getPosition());
+			WaypointMarker marker(m_screen->getMainCharacter(), tile->getPosition(), this);
 			marker.setPosition(m_position + tile->getPosition() * m_scale +
 				sf::Vector2f(TILE_SIZE * m_scale - 12.5f, TILE_SIZE * m_scale - 12.5f));
 			m_waypoints.push_back(marker);
@@ -111,7 +112,8 @@ void MapOverlay::hide() {
 
 /////////// WAYPOINT MARKER /////////////
 
-WaypointMarker::WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& waypointPosition) {
+WaypointMarker::WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent) {
+	m_parent = parent;
 	m_mainChar = mainChar;
 	m_waypointPosition = waypointPosition;
 	m_isInputInDefaultView = true;
@@ -156,6 +158,7 @@ void WaypointMarker::onRightClick() {
 		m_waypointPosition.x + TILE_SIZE_F / 2.f - bb.width / 2.f,
 		m_waypointPosition.y - bb.height + TILE_SIZE_F / 2.f
 		));
+	m_parent->hide();
 }
 
 void WaypointMarker::onLeftClick() {
