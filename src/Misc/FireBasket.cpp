@@ -5,12 +5,12 @@ FireBasket::FireBasket() : AnimatedGameObject() {
 }
 
 void FireBasket::load() {
-	setBoundingBox(sf::FloatRect(0, 0, 192, 600));
+	setBoundingBox(sf::FloatRect(0, 0, 192, 800));
 
-	Animation idleAnimation;
+	Animation idleAnimation(sf::seconds(0.08f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_screen_splash_fireanimation));
-	for (int i = 0; i < 16; i++) {
-		idleAnimation.addFrame(sf::IntRect(192 * i, 0, 192, 600));
+	for (int i = 0; i < 39; i++) {
+		idleAnimation.addFrame(sf::IntRect(192 * i, 0, 192, 800));
 	}
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

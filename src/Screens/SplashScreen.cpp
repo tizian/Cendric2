@@ -10,8 +10,8 @@ void SplashScreen::execOnEnter(const Screen* previousScreen) {
 	// add burning fire baskets
 	FireBasket* fireBasket1 = new FireBasket();
 	FireBasket* fireBasket2 = new FireBasket();
-	fireBasket1->setPosition(sf::Vector2f(60.f, 120.f));
-	fireBasket2->setPosition(sf::Vector2f(1028.f, 120.f));
+	fireBasket1->setPosition(sf::Vector2f(60.f, -80.f));
+	fireBasket2->setPosition(sf::Vector2f(1028.f, -80.f));
 	addObject(fireBasket1);
 	addObject(fireBasket2);
 
