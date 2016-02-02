@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:1294
+time.played:1703
 savegame.name:wp
-savegame.date:1454284570
+savegame.date:1454371274
 level.id:res/level/forest/forest.tmx
 level.position:2175.000000,3175.000000
 is.in.level:0
 map.id:res/map/meadows/meadows.tmx
-map.position:2438.059082,1283.432617
+map.position:2420.000000,1015.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -55,7 +55,7 @@ enemies.looted:res/level/forest/forest.tmx
 items.looted:res/level/forest/forest.tmx
 # chests looted in level:
 # waypoints unlocked in map:
-waypoints.unlocked:res/map/meadows/meadows.tmx,1950
+waypoints.unlocked:res/map/meadows/meadows.tmx,2048
 # quest states:
 # quest targets killed:
 # quest conditions fulfilled:
