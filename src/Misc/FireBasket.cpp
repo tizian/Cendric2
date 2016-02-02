@@ -9,7 +9,7 @@ void FireBasket::load() {
 
 	Animation idleAnimation(sf::seconds(0.08f));
 	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_screen_splash_fireanimation));
-	for (int i = 0; i < 39; i++) {
+	for (int i = 0; i < 38; i++) {
 		idleAnimation.addFrame(sf::IntRect(192 * i, 0, 192, 800));
 	}
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -17,6 +17,8 @@ void FireBasket::load() {
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
+
+	m_animatedSprite.setScale(0.72, 0.72);
 }
 
 GameObjectType FireBasket::getConfiguredType() const {
