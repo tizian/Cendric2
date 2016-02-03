@@ -13,7 +13,7 @@ void UserMovingBehavior::update(const sf::Time& frameTime) {
 	GameObject::updateTime(m_jumpGraceTime, frameTime);
 	bool wasGrounded = m_isGrounded;
 	MovingBehavior::update(frameTime);
-	if (wasGrounded && !m_isGrounded) {
+	if (wasGrounded) {
 		m_jumpGraceTime = JUMP_GRACE_TIME;
 	}
 }
@@ -101,7 +101,7 @@ void UserMovingBehavior::updateAnimation() {
 	else if (m_fightAnimationTime > sf::Time::Zero) {
 		newState = GameObjectState::Fighting;
 	}
-	else if (!m_isGrounded) {
+	else if (!m_isGrounded && !m_nextIsGrounded) {
 		newState = GameObjectState::Jumping;
 	}
 	else if (std::abs(m_mainChar->getVelocity().x) > 20.0f) {

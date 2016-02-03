@@ -59,7 +59,7 @@ void Game::run() {
 
 		// input
 		g_inputController->update();
-		m_cursor.setPosition(g_inputController->getDefaultViewMousePosition() - sf::Vector2f(16.f, 16.f));
+		m_cursor.setPosition(g_inputController->getDefaultViewMousePosition() - sf::Vector2f(9.f, 9.f));
 
 		// don't count this loop into the frametime!
 		deltaTime = frameClock.restart();

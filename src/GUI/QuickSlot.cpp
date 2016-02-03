@@ -52,8 +52,8 @@ void QuickSlot::setPosition(const sf::Vector2f& pos) {
 	sf::Vector2f positionOffset(QuickSlot::ICON_SIZE / 2.f - m_keyText.getLocalBounds().width / 2.f, QuickSlot::SIZE - QuickSlot::ICON_OFFSET / 2.f);
 	m_keyText.setPosition(pos + positionOffset);
 	m_amountText.setPosition(sf::Vector2f(
-		pos.x + SIZE - m_amountText.getLocalBounds().width,
-		pos.y + SIZE - m_amountText.getLocalBounds().height));
+		pos.x + ICON_SIZE - m_amountText.getLocalBounds().width,
+		pos.y + ICON_SIZE - m_amountText.getLocalBounds().height));
 }
 
 void QuickSlot::setItemID(const std::string& itemID) {

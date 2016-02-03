@@ -49,6 +49,14 @@ void MovableGameObject::setAccelerationY(float accelerationY) {
 	m_acceleration.y = accelerationY;
 }
 
+void MovableGameObject::addAccelerationX(float accelerationX) {
+	m_acceleration.x += accelerationX;
+}
+
+void MovableGameObject::addAccelerationY(float accelerationY) {
+	m_acceleration.y += accelerationY;
+}
+
 void MovableGameObject::setVelocity(const sf::Vector2f& velocity) {
 	m_velocity = velocity;
 }
@@ -59,6 +67,14 @@ void MovableGameObject::setVelocityX(float velocityX) {
 
 void MovableGameObject::setVelocityY(float velocityY) {
 	m_velocity.y = velocityY;
+}
+
+void MovableGameObject::addVelocityX(float velocityX) {
+	m_velocity.x += velocityX;
+}
+
+void MovableGameObject::addVelocityY(float velocityY) {
+	m_velocity.y += velocityY;
 }
 
 float MovableGameObject::getConfiguredMaxVelocityX() const {

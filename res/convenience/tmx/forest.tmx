@@ -16,7 +16,7 @@
  <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
   <image source="../tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="577" columns="24">
+ <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -1763,24 +1763,6 @@
    <properties>
     <property name="level" value="3"/>
     <property name="type" value="damage"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="moving platforms">
-  <object id="70" gid="375" x="2340" y="3094" width="50" height="50">
-   <properties>
-    <property name="direction" value="270"/>
-    <property name="distance" value="400"/>
-    <property name="size" value="4"/>
-    <property name="speed" value="50"/>
-   </properties>
-  </object>
-  <object id="71" gid="395" x="2572" y="3178" width="50" height="50">
-   <properties>
-    <property name="direction" value="225"/>
-    <property name="distance" value="300"/>
-    <property name="frozen" value=""/>
-    <property name="speed" value="70"/>
    </properties>
   </object>
  </objectgroup>

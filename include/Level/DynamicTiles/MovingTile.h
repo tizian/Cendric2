@@ -29,4 +29,6 @@ private:
 
 	std::vector<sf::Sprite> m_normalSprites;
 	std::vector<sf::Sprite> m_frozenSprites;
+
+	static const float RAISE_THRESHOLD;
 };

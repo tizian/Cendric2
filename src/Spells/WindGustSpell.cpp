@@ -30,11 +30,11 @@ void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
 	m_hasDamaged = true;
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
 		if (enemy->getMentalStrength() < m_strength) {
-			enemy->setAccelerationX(m_mob->isFacingRight() ? 4 * m_pushAcceleration : -4 * m_pushAcceleration);
+			enemy->addAccelerationX(m_mob->isFacingRight() ? 4 * m_pushAcceleration : -4 * m_pushAcceleration);
 		}
 	}
 	else {
-		target->setAccelerationX(m_mob->isFacingRight() ? m_pushAcceleration : -m_pushAcceleration);
+		target->addAccelerationX(m_mob->isFacingRight() ? m_pushAcceleration : -m_pushAcceleration);
 	}
 }
 

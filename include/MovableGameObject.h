@@ -17,9 +17,13 @@ public:
 	void setAcceleration(const sf::Vector2f& acceleration);
 	void setAccelerationX(float accelerationX);
 	void setAccelerationY(float accelerationY);
+	void addAccelerationX(float accelerationX);
+	void addAccelerationY(float accelerationY);
 	void setVelocity(const sf::Vector2f& velocity);
 	void setVelocityX(float velocityX);
 	void setVelocityY(float velocityY);
+	void addVelocityX(float velocityX);
+	void addVelocityY(float velocityY);
 	
 	const sf::Vector2f& getVelocity() const;
 	const sf::Vector2f& getAcceleration() const;

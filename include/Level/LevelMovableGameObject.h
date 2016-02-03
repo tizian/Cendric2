@@ -44,6 +44,8 @@ public:
 	virtual void setStunned(const sf::Time& stunnedTime);
 	// flips the gravity and the sprite
 	void flipGravity();
+	// grounds the mob if it's of walking type
+	void setGrounded();
 	
 	SpellManager* getSpellManager() const;
 	MovingBehavior* getMovingBehavior() const;
@@ -51,6 +53,7 @@ public:
 	Level* getLevel() const;
 	bool isFacingRight() const;
 	bool isUpsideDown() const;
+	bool isIgnoreDynamicTiles() const;
 	bool isDead() const;
 	GameObjectState getState() const;
 

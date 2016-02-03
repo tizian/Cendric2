@@ -196,6 +196,10 @@ bool LevelMovableGameObject::isUpsideDown() const {
 	return m_movingBehavior->isUpsideDown();
 }
 
+bool LevelMovableGameObject::isIgnoreDynamicTiles() const {
+	return m_movingBehavior->isIgnoreDynamicTiles();
+}
+
 bool LevelMovableGameObject::isDead() const {
 	return m_isDead;
 }
@@ -211,6 +215,10 @@ void LevelMovableGameObject::loadBehavior() {
 void LevelMovableGameObject::flipGravity() {
 	m_movingBehavior->flipGravity();
 	m_animatedSprite.setFlippedY(m_movingBehavior->isUpsideDown());
+}
+
+void LevelMovableGameObject::setGrounded() {
+	m_movingBehavior->setGrounded();
 }
 
 GameObjectState LevelMovableGameObject::getState() const {

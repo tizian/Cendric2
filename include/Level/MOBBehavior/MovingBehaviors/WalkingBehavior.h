@@ -15,7 +15,6 @@ public:
 	void updateAnimation() override;
 	void calculateJumpHeight();
 
-
 	void setDistanceToAbyss(float distance);
 
 	float getDistanceToAbyss() const;

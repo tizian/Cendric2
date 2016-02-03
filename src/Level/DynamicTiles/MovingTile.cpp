@@ -4,6 +4,8 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
+const float MovingTile::RAISE_THRESHOLD = 5.f;
+
 void MovingTile::setMovingTileData(const MovingTileData& data) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, data.length * TILE_SIZE_F, TILE_SIZE_F));
 	float phi = degToRad(static_cast<float>(data.initialDirection));
@@ -120,7 +122,15 @@ void MovingTile::onHit(Spell* spell) {
 }
 
 void MovingTile::onHit(LevelMovableGameObject* mob) {
-	// TODO: register mob if it falls from above
+	const sf::Vector2f& vel = mob->getVelocity();
+	const sf::FloatRect& bb = *mob->getBoundingBox();
+	if (bb.top + bb.height + RAISE_THRESHOLD > m_position.y && vel.y > 0 
+		&& !m_level->collides(sf::FloatRect(bb.left, m_position.y - bb.height, bb.width, bb.height), nullptr, mob->isIgnoreDynamicTiles())) {
+		mob->setPositionY(m_position.y - bb.height);
+		mob->addVelocityX(m_velocity.x);
+		mob->addVelocityY(m_velocity.y);
+		mob->setGrounded();
+	}
 }
 
 void MovingTile::setFrozen(bool frozen) {

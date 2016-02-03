@@ -18,7 +18,7 @@ void FireBasket::load() {
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	m_animatedSprite.setScale(0.72, 0.72);
+	m_animatedSprite.setScale(0.86f, 0.86f);
 }
 
 GameObjectType FireBasket::getConfiguredType() const {
