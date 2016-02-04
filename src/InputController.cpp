@@ -63,35 +63,11 @@ void InputController::setWindow(sf::RenderWindow* window, sf::RenderTexture* tex
 
 
 void InputController::init() {
-	m_keyActiveMap.insert(
-	{
-		{ Key::Escape, false },
-		{ Key::Quickload, false },
-		{ Key::Quicksave, false },
-		{ Key::Inventory, false },
-		{ Key::CharacterInfo, false },
-		{ Key::Map, false },
-		{ Key::Journal, false },
-		{ Key::Spellbook, false },
-		{ Key::Interact, false },
-		{ Key::Confirm, false },
-		{ Key::Left, false },
-		{ Key::Right, false },
-		{ Key::Up, false },
-		{ Key::Down, false },
-		{ Key::Jump, false },
-		{ Key::Chop, false },
-		{ Key::FirstSpell, false },
-		{ Key::SecondSpell, false },
-		{ Key::ThirdSpell, false },
-		{ Key::FourthSpell, false },
-		{ Key::FifthSpell, false },
-		{ Key::QuickSlot1, false },
-		{ Key::QuickSlot2, false },
-		{ Key::ToggleTooltips, false }
-	});
+	for (int i = static_cast<int>(Key::VOID) + 1; i < static_cast<int>(Key::MAX); ++i) {
+		m_keyActiveMap.insert({ static_cast<Key>(i), false });
+	}
+	
 	m_keyJustPressedMap = m_keyActiveMap;
-
 
 	m_windowSize.x = WINDOW_WIDTH;
 	m_windowSize.y = WINDOW_HEIGHT;
