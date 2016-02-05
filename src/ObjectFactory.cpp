@@ -16,7 +16,7 @@ void ObjectFactory::registerEnemy(EnemyID id, EnemyConstructor constructor) {
 
 Enemy* ObjectFactory::createEnemy(EnemyID id, Level* level, Screen* screen) {
 	Enemy* instance = nullptr;
-	auto& it = enemyRegistry.find(id);
+	const auto& it = enemyRegistry.find(id);
 	if (it != enemyRegistry.end()) {
 		instance = it->second(level, screen);
 	}
@@ -29,7 +29,7 @@ void ObjectFactory::registerLevelDynamicTile(LevelDynamicTileID id, LevelDynamic
 
 LevelDynamicTile* ObjectFactory::createLevelDynamicTile(LevelDynamicTileID id, Level* level) {
 	LevelDynamicTile* instance = nullptr;
-	auto& it = levelDynamicTileRegistry.find(id);
+	const auto& it = levelDynamicTileRegistry.find(id);
 	if (it != levelDynamicTileRegistry.end()) {
 		instance = it->second(level);
 	}
@@ -42,7 +42,7 @@ void ObjectFactory::registerMapDynamicTile(MapDynamicTileID id, MapDynamicTileCo
 
 MapDynamicTile* ObjectFactory::createMapDynamicTile(MapDynamicTileID id, Map* map) {
 	MapDynamicTile* instance = nullptr;
-	auto& it = mapDynamicTileRegistry.find(id);
+	const auto& it = mapDynamicTileRegistry.find(id);
 	if (it != mapDynamicTileRegistry.end()) {
 		instance = it->second(map);
 	}
