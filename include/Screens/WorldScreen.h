@@ -34,6 +34,7 @@ protected:
 
 	// For lighting
 	sf::RenderTexture m_renderTexture;
+    sf::RenderTexture m_renderTexture2;
 	sf::Sprite m_sprite;
 	sf::Shader m_lightLayerShader;
 	sf::Shader m_foregroundLayerShader;
