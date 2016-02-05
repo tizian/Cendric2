@@ -12,6 +12,26 @@ using namespace std;
 const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
 const int SimulatedWaterTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 
+const int SimulatedWaterTile::SIN_COUNT = 7;
+const float SimulatedWaterTile::SIN_SPEED = 5.2f;
+const float SimulatedWaterTile::SIN_MAX_HEIGHT = 3.f;
+const float SimulatedWaterTile::SIN_MAX_FREQUENCY = 0.05f;
+
+inline float randomFloat(float low, float high) {
+	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));
+}
+
+SimulatedWaterTile::SimulatedWaterTile(Level* level) : LevelDynamicTile(level) {
+	m_time = 0.f;
+
+	for (int i = 0; i < SIN_COUNT; ++i) {
+		m_sinOffsets.push_back(randomFloat(-1.f, 1.f));
+		m_sinAmplitudes.push_back(randomFloat(0.f, SIN_MAX_HEIGHT));
+		m_sinFrequencies.push_back(randomFloat(0.f, SIN_MAX_FREQUENCY));
+		m_sinOffsetFrequencies.push_back(randomFloat(0.f, SIN_MAX_FREQUENCY));
+	}
+}
+
 void SimulatedWaterTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 }
@@ -89,6 +109,8 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 	float dt = frameTime.asSeconds();
 	dt *= 20.f;
 
+	m_time += SIN_SPEED * dt;
+
 	for (int i = 0; i < m_nColumns; ++i) {
 		m_columns[i].update(m_data.damping, m_data.tension, dt);
 	}
@@ -134,8 +156,14 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 	float thickness = 4.f;
 
 	for (int i = 0; i < m_nColumns - 1; ++i) {
-		sf::Vector2f p1 = sf::Vector2f(m_x + i * scale, m_y + m_height - m_columns[i].height);
-		sf::Vector2f p2 = sf::Vector2f(m_x + (i + 1) * scale, m_y + m_height - m_columns[i + 1].height);
+		bool fixed1 = m_columns[i].fixed;
+		bool fixed2 = m_columns[i+1].fixed;
+
+		float heightOffset1 = fixed1 ? 0.f : getSinHeight(i * scale, m_time);
+		float heightOffset2 = fixed2 ? 0.f : getSinHeight((i + 1) * scale, m_time);
+
+		sf::Vector2f p1 = sf::Vector2f(m_x + i * scale, m_y + m_height - m_columns[i].height - heightOffset1);
+		sf::Vector2f p2 = sf::Vector2f(m_x + (i + 1) * scale, m_y + m_height - m_columns[i + 1].height - heightOffset2);
 		sf::Vector2f p3 = sf::Vector2f(p2.x, m_y + m_height);
 		sf::Vector2f p4 = sf::Vector2f(p1.x, m_y + m_height);
 		sf::Vector2f p5 = sf::Vector2f(p2.x, p2.y - thickness);
@@ -163,12 +191,20 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 }
 
-float SimulatedWaterTile::getHeight(float xPosition) {
+float SimulatedWaterTile::getHeight(float xPosition) const {
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	if (index < 0 || index > m_nColumns - 1)
 		return m_height - 10;
 
 	return m_columns[index].height;
+}
+
+float SimulatedWaterTile::getSinHeight(float x, float t) const {
+	float result = 0.f;
+	for (int i = 0; i < SIN_COUNT; ++i) {
+		result += m_sinOffsets[i] + m_sinAmplitudes[i] * std::sin(x * m_sinFrequencies[i] + t * m_sinOffsetFrequencies[i]);
+	}
+	return result;
 }
 
 void SimulatedWaterTile::splash(float xPosition, float velocity) {

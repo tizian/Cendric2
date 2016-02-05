@@ -29,7 +29,7 @@ struct WaterColumn {
 // tizs awesome water
 class SimulatedWaterTile : public LevelDynamicTile {
 public:
-	SimulatedWaterTile(Level* level) : LevelDynamicTile(level) {}
+	SimulatedWaterTile(Level* level);
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(LevelMovableGameObject* mob) override;
@@ -37,7 +37,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
-	float getHeight(float xPosition);
+	float getHeight(float xPosition) const;
+	float getSinHeight(float x, float t) const;
 
 	void splash(float xPosition, float velocity);
 	void splash(float xPosition, float width, float velocity);
@@ -58,6 +59,13 @@ private:
 	float *m_leftDeltas;
 	float *m_rightDeltas;
 
+	float m_time;
+
+	std::vector<float> m_sinOffsets;
+	std::vector<float> m_sinAmplitudes;
+	std::vector<float> m_sinFrequencies;
+	std::vector<float> m_sinOffsetFrequencies;
+
 	sf::VertexArray m_vertexArray;
 
 	std::vector<FrozenWaterTile *> m_frozenTiles;
@@ -71,6 +79,11 @@ private:
 
 public:
 
-	static const float WATER_SURFACE_THICKNESS;
-	static const int NUMBER_COLUMNS_PER_SUBTILE;
+	static const float	WATER_SURFACE_THICKNESS;
+	static const int	NUMBER_COLUMNS_PER_SUBTILE;
+
+	static const int	SIN_COUNT;
+	static const float	SIN_SPEED;
+	static const float	SIN_MAX_HEIGHT;
+	static const float	SIN_MAX_FREQUENCY;
 };
