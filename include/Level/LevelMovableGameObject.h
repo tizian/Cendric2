@@ -44,8 +44,6 @@ public:
 	virtual void setStunned(const sf::Time& stunnedTime);
 	// flips the gravity and the sprite
 	void flipGravity();
-	// grounds the mob if it's of walking type
-	void setGrounded();
 	
 	SpellManager* getSpellManager() const;
 	MovingBehavior* getMovingBehavior() const;

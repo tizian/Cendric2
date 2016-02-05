@@ -28,7 +28,6 @@ public:
 	void setMaxXVelocityScale(float scale);
 	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
 	void setIgnoreDynamicTiles(bool value);
-	void setGrounded();
 
 	void setMaxVelocityX(float vel);
 	void setMaxVelocityYUp(float vel);
@@ -57,7 +56,6 @@ protected:
 	bool m_isFacingRight = true;
 	bool m_nextIsFacingRight = true;
 	bool m_isGrounded = false;
-	bool m_nextIsGrounded = false;
 	bool m_isFlippedGravity = false;
 	float m_gravity = 1000.f;
 	float m_walkAcceleration = 1500.f;

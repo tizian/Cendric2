@@ -1,6 +1,8 @@
 #include "MovableGameObject.h"
 
 MovableGameObject::MovableGameObject() : AnimatedGameObject() {
+	m_relativeVelocity.x = 0.f;
+	m_relativeVelocity.y = 0.f;
 }
 
 void MovableGameObject::update(const sf::Time& frameTime) {
@@ -9,14 +11,15 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 	setPosition(position);
 	calculateNextVelocity(frameTime, m_velocity);
 	AnimatedGameObject::update(frameTime);
+	m_relativeVelocity = sf::Vector2f();
 }
 
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const {
 	sf::Vector2f position = getPosition();
 	sf::Vector2f nextVel;
 	calculateNextVelocity(frameTime, nextVel);
-	nextPos.x = position.x + nextVel.x * frameTime.asSeconds();
-	nextPos.y = position.y + nextVel.y * frameTime.asSeconds();
+	nextPos.x = position.x + (nextVel.x + m_relativeVelocity.x) * frameTime.asSeconds();
+	nextPos.y = position.y + (nextVel.y + m_relativeVelocity.y) * frameTime.asSeconds();
 }
 
 void MovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
@@ -69,12 +72,8 @@ void MovableGameObject::setVelocityY(float velocityY) {
 	m_velocity.y = velocityY;
 }
 
-void MovableGameObject::addVelocityX(float velocityX) {
-	m_velocity.x += velocityX;
-}
-
-void MovableGameObject::addVelocityY(float velocityY) {
-	m_velocity.y += velocityY;
+void MovableGameObject::setRelativeVelocity(const sf::Vector2f& relVel) {
+	m_relativeVelocity = relVel;
 }
 
 float MovableGameObject::getConfiguredMaxVelocityX() const {

@@ -127,9 +127,9 @@ void MovingTile::onHit(LevelMovableGameObject* mob) {
 	if (bb.top + bb.height + RAISE_THRESHOLD > m_position.y && vel.y > 0 
 		&& !m_level->collides(sf::FloatRect(bb.left, m_position.y - bb.height, bb.width, bb.height), nullptr, mob->isIgnoreDynamicTiles())) {
 		mob->setPositionY(m_position.y - bb.height);
-		mob->addVelocityX(m_velocity.x);
-		mob->addVelocityY(m_velocity.y);
-		mob->setGrounded();
+		mob->setVelocityY(0.f);
+		mob->setAccelerationY(0.f);
+		mob->setRelativeVelocity(m_velocity);
 	}
 }
 

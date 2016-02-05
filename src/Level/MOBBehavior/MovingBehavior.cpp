@@ -16,7 +16,6 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 	// update animation
 	GameObject::updateTime(m_fightAnimationTime, frameTime);
 	updateAnimation();
-	m_nextIsGrounded = false;
 }
 
 void MovingBehavior::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
@@ -84,10 +83,6 @@ void MovingBehavior::setDampingGroundPerS(float damping) {
 
 void MovingBehavior::setDampingAirPerS(float damping) {
 	m_dampingAirPerS = damping;
-}
-
-void MovingBehavior::setGrounded() {
-	m_nextIsGrounded = true;
 }
 
 void MovingBehavior::setMaxVelocityX(float vel) {

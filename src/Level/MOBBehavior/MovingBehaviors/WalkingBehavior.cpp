@@ -137,7 +137,7 @@ void WalkingBehavior::handleMovementInput() {
 				newAccelerationX += m_walkAcceleration;
 			}
 
-			if (m_jumps && (m_isGrounded || m_nextIsGrounded)) {
+			if (m_jumps && m_isGrounded) {
 				m_enemy->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp); // first jump vel will always be max y vel. 
 				m_jumps = false;
 			}
@@ -183,7 +183,7 @@ void WalkingBehavior::updateAnimation() {
 	else if (m_fightAnimationTime > sf::Time::Zero) {
 		newState = GameObjectState::Fighting;
 	}
-	else if (!m_isGrounded && !m_nextIsGrounded) {
+	else if (!m_isGrounded) {
 		newState = GameObjectState::Jumping;
 	}
 	else if (std::abs(m_enemy->getVelocity().x) > 20.0f) {

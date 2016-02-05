@@ -13,7 +13,7 @@ void UserMovingBehavior::update(const sf::Time& frameTime) {
 	GameObject::updateTime(m_jumpGraceTime, frameTime);
 	bool wasGrounded = m_isGrounded;
 	MovingBehavior::update(frameTime);
-	if (wasGrounded) {
+	if (wasGrounded && !m_isGrounded) {
 		m_jumpGraceTime = JUMP_GRACE_TIME;
 	}
 }
@@ -30,8 +30,8 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on x axis
 	if (isMovingX && level.collides(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles)) {
-		m_mainChar->setAccelerationX(0.0f);
-		m_mainChar->setVelocityX(0.0f);
+		m_mainChar->setAccelerationX(0.f);
+		m_mainChar->setVelocityX(0.f);
 		if (isMovingRight) {
 			m_mainChar->setPositionX(level.getNonCollidingLeft(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles));
 		}
@@ -46,8 +46,8 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	// check for collision on y axis
 	bool collidesY = level.collides(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles);
 	if (collidesY) {
-		m_mainChar->setAccelerationY(0.0);
-		m_mainChar->setVelocityY(0.0f);
+		m_mainChar->setAccelerationY(0.f);
+		m_mainChar->setVelocityY(0.f);
 		if (isUpsideDown() != isMovingDown) {
 			m_isGrounded = true;
 		}
@@ -101,7 +101,7 @@ void UserMovingBehavior::updateAnimation() {
 	else if (m_fightAnimationTime > sf::Time::Zero) {
 		newState = GameObjectState::Fighting;
 	}
-	else if (!m_isGrounded && !m_nextIsGrounded) {
+	else if (!m_isGrounded) {
 		newState = GameObjectState::Jumping;
 	}
 	else if (std::abs(m_mainChar->getVelocity().x) > 20.0f) {

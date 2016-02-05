@@ -217,10 +217,6 @@ void LevelMovableGameObject::flipGravity() {
 	m_animatedSprite.setFlippedY(m_movingBehavior->isUpsideDown());
 }
 
-void LevelMovableGameObject::setGrounded() {
-	m_movingBehavior->setGrounded();
-}
-
 GameObjectState LevelMovableGameObject::getState() const {
 	return m_state;
 }
