@@ -7,6 +7,9 @@
 #include "Window.h"
 #include "GUI/InventorySlot.h"
 
+class InventorySlot;
+class SlotClone;
+
 // the equipment part of the inventory. it shows all equipped items
 class InventoryEquipment {
 public:

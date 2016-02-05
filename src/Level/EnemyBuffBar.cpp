@@ -41,7 +41,7 @@ void EnemyBuffBar::clear() {
 }
 
 void EnemyBuffBar::update(const sf::Time& frameTime) {
-	for (auto& buffIt = m_buffs.begin(); buffIt != m_buffs.end(); /*don't increment here*/) {
+	for (auto buffIt = m_buffs.begin(); buffIt != m_buffs.end(); /*don't increment here*/) {
 		GameObject::updateTime(buffIt->first, frameTime);
 		buffIt->second.update(frameTime);
 		if (buffIt->first <= sf::Time::Zero) {

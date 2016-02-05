@@ -95,7 +95,7 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 }
 
 void CookingWindow::cookItem(const std::string& itemID) {
-	auto& it = m_screen->getCharacterCore()->getItems()->find(itemID);
+	const auto& it = m_screen->getCharacterCore()->getItems()->find(itemID);
 	if (it == m_screen->getCharacterCore()->getItems()->end()) {
 		g_logger->logError("CookingWindow", "Item to cook not found in character core!");
 		return;

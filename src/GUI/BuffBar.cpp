@@ -83,7 +83,7 @@ void BuffBar::update(const sf::Time& frameTime) {
 		}
 	}
 
-	for (auto& it = m_buffSlots.begin(); it != m_buffSlots.end(); /*don't increment here*/) {
+	for (auto it = m_buffSlots.begin(); it != m_buffSlots.end(); /*don't increment here*/) {
 		(*it)->update(frameTime);
 		if ((*it)->isDisposed()) {
 			delete (*it);
