@@ -9,21 +9,27 @@ void FlashSpellCreator::executeSpell(const sf::Vector2f& target) {
 	updateDamage(spellData);
 	
 	// check where port of owner is possible
-	sf::FloatRect ownerBB = *(m_owner->getBoundingBox());
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *(m_owner->getBoundingBox());
+	rec.ignoreDynamicTiles = true;
 	float newRange = 0.f;
-	while (!m_level->collides(ownerBB, nullptr, true) && newRange <= spellData.range + 1) {
+	while (!m_level->collides(rec) && newRange <= spellData.range + 1) {
 		newRange++;
-		ownerBB.left = m_owner->isFacingRight() ? ownerBB.left + 1 : ownerBB.left - 1;
+		rec.boundingBox.left = m_owner->isFacingRight() ? 
+			rec.boundingBox.left + 1 : 
+			rec.boundingBox.left - 1;
 	}
 	// check if we are inside a dynamic tile and move backwards if so. 
 	// This is also used because we are one pixel inside the wall.
-	while (m_level->collides(ownerBB)) {
+	while (m_level->collides(rec)) {
 		newRange--;
-		ownerBB.left = m_owner->isFacingRight() ? ownerBB.left - 1 : ownerBB.left + 1;
+		rec.boundingBox.left = m_owner->isFacingRight() ? 
+			rec.boundingBox.left - 1 : 
+			rec.boundingBox.left + 1;
 	}
 	// apply
 	spellData.range = newRange;
-	m_owner->setPosition(sf::Vector2f(ownerBB.left, ownerBB.top));
+	m_owner->setPosition(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top));
 	FlashSpell* newSpell = new FlashSpell();
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);

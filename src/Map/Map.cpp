@@ -50,12 +50,12 @@ void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) con
 	target.setView(view);
 }
 
-bool Map::collides(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
+bool Map::collides(WorldCollisionQueryRecord& rec) const {
 	// additional : check for collision with map rect (y axis)
-	if (boundingBox.top < m_mapData.mapRect.top || boundingBox.top + boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height) {
+	if (rec.boundingBox.top < m_mapData.mapRect.top || rec.boundingBox.top + rec.boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height) {
 		return true;
 	}
-	return World::collides(boundingBox);
+	return World::collides(rec);
 }
 
 MapExitData* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {

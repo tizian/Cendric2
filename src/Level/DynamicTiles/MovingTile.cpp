@@ -4,8 +4,6 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
-const float MovingTile::RAISE_THRESHOLD = 5.f;
-
 void MovingTile::setMovingTileData(const MovingTileData& data) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, data.length * TILE_SIZE_F, TILE_SIZE_F));
 	float phi = degToRad(static_cast<float>(data.initialDirection));
@@ -69,7 +67,7 @@ void MovingTile::update(const sf::Time& frameTime) {
 		if (m_timeUntilTurn == sf::Time::Zero) {
 			m_timeUntilTurn = m_distanceTime;
 			m_currentVelocity = -m_currentVelocity;
-			setVelocity(m_currentVelocity);
+			setRelativeVelocity(m_currentVelocity);
 		}
 		MovableGameObject::update(frameTime);
 	}
@@ -121,20 +119,8 @@ void MovingTile::onHit(Spell* spell) {
 	}
 }
 
-void MovingTile::onHit(LevelMovableGameObject* mob) {
-	const sf::Vector2f& vel = mob->getVelocity();
-	const sf::FloatRect& bb = *mob->getBoundingBox();
-	if (bb.top + bb.height + RAISE_THRESHOLD > m_position.y && vel.y > 0 
-		&& !m_level->collides(sf::FloatRect(bb.left, m_position.y - bb.height, bb.width, bb.height), nullptr, mob->isIgnoreDynamicTiles())) {
-		mob->setPositionY(m_position.y - bb.height);
-		mob->setVelocityY(0.f);
-		mob->setAccelerationY(0.f);
-		mob->setRelativeVelocity(m_velocity);
-	}
-}
-
 void MovingTile::setFrozen(bool frozen) {
 	m_isFrozen = frozen;
-	setVelocity(m_isOnHold ? sf::Vector2f() : m_currentVelocity);
+	setRelativeVelocity(m_isOnHold ? sf::Vector2f() : m_currentVelocity);
 	setPosition(getPosition());
 }

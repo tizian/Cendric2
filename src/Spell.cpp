@@ -131,12 +131,14 @@ void Spell::setViewable(bool value) {
 void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	WorldCollisionQueryRecord rec;
 
 	bool isMovingY = nextPosition.y != getBoundingBox()->top;
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
 	bool reflected = false;
 	// check for collision on x axis
-	if (isMovingX && m_level->collides(nextBoundingBoxX)) {
+	rec.boundingBox = nextBoundingBoxX;
+	if (isMovingX && m_level->collides(rec)) {
 		if (m_data.reflectCount <= 0) {
 			setDisposed();
 			return;
@@ -151,7 +153,8 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 	}
 	// check for collision on y axis
-	if (isMovingY && m_level->collides(nextBoundingBoxY)) {
+	rec.boundingBox = nextBoundingBoxY;
+	if (isMovingY && m_level->collides(rec)) {
 		if (m_data.reflectCount <= 0) {
 			setDisposed();
 			return;

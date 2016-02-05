@@ -59,13 +59,16 @@ void ShadowTrapSpell::update(const sf::Time& frameTime) {
 void ShadowTrapSpell::checkCollisions(const sf::Vector2f& nextPosition) {
 	// a shadow trap is influenced by gravity and only falls in y direction,
 	// which simplificates the collisions.
-	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = sf::FloatRect(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
 	// check for collision on y axis down
-	bool collidesY = m_level->collides(nextBoundingBoxY);
+	rec.checkMovingPlatforms = true;
+	bool collidesY = m_level->collides(rec);
+	setRelativeVelocity(rec.gainedRelativeVelocity);
 	if (collidesY) {
 		setAccelerationY(0.0f);
 		setVelocityY(0.0f);
-		setPositionY(m_level->getNonCollidingTop(nextBoundingBoxY));
+		setPositionY(m_level->getNonCollidingTop(rec));
 	}
 }

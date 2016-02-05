@@ -41,11 +41,12 @@ void IcyAmbushSpell::execOnHit(LevelMovableGameObject *target) {
 	// main character can't be stunned yet.
 
 	// check if port of owner is possible
-	sf::FloatRect ownerBB = *(m_mob->getBoundingBox());
-	ownerBB.left = target->getBoundingBox()->left + target->getBoundingBox()->width / 2.f - ownerBB.width / 2.f;
-	ownerBB.top = target->getBoundingBox()->top + (target->getBoundingBox()->height - ownerBB.height);
-	if (!m_level->collides(ownerBB)) {
-		m_mob->setPosition(sf::Vector2f(ownerBB.left, ownerBB.top));
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *(m_mob->getBoundingBox());
+	rec.boundingBox.left = target->getBoundingBox()->left + target->getBoundingBox()->width / 2.f - rec.boundingBox.width / 2.f;
+	rec.boundingBox.top = target->getBoundingBox()->top + (target->getBoundingBox()->height - rec.boundingBox.height);
+	if (!m_level->collides(rec)) {
+		m_mob->setPosition(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top));
 	}
 	else {
 		g_logger->logInfo("IcyAmbushSpell", "Icy ambush port would stuck its owner. The port is not executed.");

@@ -1,5 +1,6 @@
 #include "Level/Level.h"
 #include "Screen.h"
+#include "Level/DynamicTiles/MovingTile.h"
 
 using namespace std;
 
@@ -92,15 +93,17 @@ void Level::update(const sf::Time& frameTime) {
 }
 
 bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize, bool ignoreDynamicTiles) const {
-	sf::FloatRect dummyRect = boundingBox;
-	dummyRect.left = right ? dummyRect.left + stepSize : dummyRect.left - stepSize;
-	if (collides(dummyRect, nullptr, ignoreDynamicTiles)) {
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = boundingBox;
+	rec.ignoreDynamicTiles = ignoreDynamicTiles;
+	rec.boundingBox.left = right ? rec.boundingBox.left + stepSize : rec.boundingBox.left - stepSize;
+	if (collides(rec)) {
 		return false;
 	}
 	for (float y = boundingBox.top; y < boundingBox.top + jumpHeight; /* don't increment y here */) {
 		y = std::min(boundingBox.top + jumpHeight, y + TILE_SIZE_F);
-		dummyRect.top = y;
-		if (collides(dummyRect, nullptr, ignoreDynamicTiles)) {
+		rec.boundingBox.top = y;
+		if (collides(rec)) {
 			return false;
 		}
 	}
@@ -108,47 +111,79 @@ bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool r
 }
 
 bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles) const {
-	sf::FloatRect dummyRect = boundingBox;
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = boundingBox;
+	rec.ignoreDynamicTiles = ignoreDynamicTiles;
 	for (float y = boundingBox.top; y > boundingBox.top - jumpHeight; /* don't decrement y here */) {
 		y = std::max(boundingBox.top - jumpHeight, y - TILE_SIZE_F);
-		dummyRect.top = y;
-		if (collides(dummyRect, nullptr, ignoreDynamicTiles)) {
+		rec.boundingBox.top = y;
+		if (collides(rec)) {
 			return true;
 		}
 	}
 
 	// depending on left or right, calculate one step left or right
-	dummyRect.left = right ? dummyRect.left + 10.f : dummyRect.left - 10.f;
-	if (collides(dummyRect, nullptr, ignoreDynamicTiles)) {
+	rec.boundingBox.left = right ? rec.boundingBox.left + 10.f : rec.boundingBox.left - 10.f;
+	if (collides(rec)) {
 		return true;
 	}
 	return false;
 }
 
-bool Level::collides(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
+bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	// additional : check for collision with map rect (y axis)
-	if (boundingBox.top - boundingBox.height < m_levelData.mapRect.top || boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height) {
+	if (rec.boundingBox.top - rec.boundingBox.height < m_levelData.mapRect.top || rec.boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height) {
 		return true;
 	}
-	if (World::collides(boundingBox)) {
+	if (World::collides(rec)) {
 		return true;
 	}
 
 	// check collidable dynamic tiles
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-		if (ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
-		if (tile != nullptr && tile != exclude && tile->getIsCollidable() && tile->getBoundingBox()->intersects(boundingBox)) {
-			return true;
+		MovingTile* movingTile = dynamic_cast<MovingTile*>(go);
+
+		// check moving tiles
+		if (rec.checkMovingPlatforms && movingTile != nullptr) {
+			if (movingTile == rec.excludedGameObject) continue;
+			if (!movingTile->getBoundingBox()->intersects(rec.boundingBox)) continue;
+			if (!rec.upsideDown) {
+				float yPos = rec.boundingBox.top + rec.boundingBox.height;
+				float movingTileY = movingTile->getBoundingBox()->top;
+				if (yPos > movingTileY && yPos < movingTileY + 20.f) {
+					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
+					return true;
+				}
+			}
+			else {
+				float yPos = rec.boundingBox.top;
+				float movingTileY = movingTile->getBoundingBox()->top + movingTile->getBoundingBox()->height;
+				if (yPos < movingTileY && yPos > movingTileY - 20.f) {
+					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
+					return true;
+				}
+			}
+		}
+		// check normal dynamic tiles
+		else {
+			if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
+			if (tile != rec.excludedGameObject && tile->getIsCollidable() && tile->getBoundingBox()->intersects(rec.boundingBox)) {
+				if (MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile)) {
+					// used by shiftable blocks.
+					rec.gainedRelativeVelocity = mob->getRelativeVelocity();
+				}
+				return true;
+			}
 		}
 	}
 
-	if (ignoreMobs) {
+	if (rec.ignoreMobs) {
 		return false;
 	}
 
 	// MOB collision
-	return collidesWithMobs(boundingBox);
+	return collidesWithMobs(rec.boundingBox);
 }
 
 bool Level::collidesWithMobs(const sf::FloatRect& boundingBox) const {

@@ -46,18 +46,19 @@ const sf::FloatRect& World::getWorldRect() const {
 	return m_worldData->mapRect;
 }
 
-bool World::collides(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
+bool World::collides(WorldCollisionQueryRecord& rec) const {
+	const sf::FloatRect& bb = rec.boundingBox;
 	// check for collision with map rect (x axis. y axis is not checked in levels, only in maps)
-	if (boundingBox.left < m_worldData->mapRect.left || boundingBox.left + boundingBox.width > m_worldData->mapRect.left + m_worldData->mapRect.width) {
+	if (bb.left < m_worldData->mapRect.left || bb.left + bb.width > m_worldData->mapRect.left + m_worldData->mapRect.width) {
 		return true;
 	}
 
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
-	int bottomY = static_cast<int>(floor((boundingBox.top + boundingBox.height) / TILE_SIZE_F) == (boundingBox.top + boundingBox.height) / TILE_SIZE_F ? (boundingBox.top + boundingBox.height) / TILE_SIZE_F - 1 : floor((boundingBox.top + boundingBox.height) / TILE_SIZE_F));
-	int rightX = static_cast<int>(floor((boundingBox.left + boundingBox.width) / TILE_SIZE_F) == (boundingBox.left + boundingBox.width) / TILE_SIZE_F ? (boundingBox.left + boundingBox.width) / TILE_SIZE_F - 1 : floor((boundingBox.left + boundingBox.width) / TILE_SIZE_F));
-	sf::Vector2i topLeft(static_cast<int>(floor(boundingBox.left / TILE_SIZE_F)), static_cast<int>(floor(boundingBox.top / TILE_SIZE_F)));
-	sf::Vector2i topRight(rightX, static_cast<int>(floor(boundingBox.top / TILE_SIZE_F)));
-	sf::Vector2i bottomLeft(static_cast<int>(floor(boundingBox.left / TILE_SIZE_F)), bottomY);
+	int bottomY = static_cast<int>(floor((bb.top + bb.height) / TILE_SIZE_F) == (bb.top + bb.height) / TILE_SIZE_F ? (bb.top + bb.height) / TILE_SIZE_F - 1 : floor((bb.top + bb.height) / TILE_SIZE_F));
+	int rightX = static_cast<int>(floor((bb.left + bb.width) / TILE_SIZE_F) == (bb.left + bb.width) / TILE_SIZE_F ? (bb.left + bb.width) / TILE_SIZE_F - 1 : floor((bb.left + bb.width) / TILE_SIZE_F));
+	sf::Vector2i topLeft(static_cast<int>(floor(bb.left / TILE_SIZE_F)), static_cast<int>(floor(bb.top / TILE_SIZE_F)));
+	sf::Vector2i topRight(rightX, static_cast<int>(floor(bb.top / TILE_SIZE_F)));
+	sf::Vector2i bottomLeft(static_cast<int>(floor(bb.left / TILE_SIZE_F)), bottomY);
 	sf::Vector2i bottomRight(rightX, bottomY);
 
 	// check level grid
@@ -76,41 +77,45 @@ bool World::collides(const sf::FloatRect& boundingBox, const GameObject* exclude
 	return false;
 }
 
-float World::getNonCollidingTop(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
-	sf::FloatRect bb = boundingBox;
+float World::getNonCollidingTop(const WorldCollisionQueryRecord& rec) const {
+	WorldCollisionQueryRecord rec2 = rec;
+	sf::FloatRect& bb = rec2.boundingBox;
 	bb.top = std::floor(bb.top);
 
-	while (bb.top > 0.f && collides(bb, exclude, ignoreDynamicTiles, ignoreMobs)) {
+	while (bb.top > 0.f && collides(rec2)) {
 		bb.top -= 1.f;
 	}
 	return bb.top;
 }
 
-float World::getNonCollidingBottom(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
-	sf::FloatRect bb = boundingBox;
+float World::getNonCollidingBottom(const WorldCollisionQueryRecord& rec) const {
+	WorldCollisionQueryRecord rec2 = rec;
+	sf::FloatRect& bb = rec2.boundingBox;
 	bb.top = std::ceil(bb.top);
 
-	while (bb.top + bb.height < m_worldData->mapRect.height && collides(bb, exclude, ignoreDynamicTiles, ignoreMobs)) {
+	while (bb.top + bb.height < m_worldData->mapRect.height && collides(rec2)) {
 		bb.top += 1.f;
 	}
 	return bb.top;
 }
 
-float World::getNonCollidingLeft(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
-	sf::FloatRect bb = boundingBox;
+float World::getNonCollidingLeft(const WorldCollisionQueryRecord& rec) const {
+	WorldCollisionQueryRecord rec2 = rec;
+	sf::FloatRect& bb = rec2.boundingBox;
 	bb.left = std::floor(bb.left);
 
-	while (bb.left > 0.f && collides(bb, exclude, ignoreDynamicTiles, ignoreMobs)) {
+	while (bb.left > 0.f && collides(rec2)) {
 		bb.left -= 1.f;
 	}
 	return bb.left;
 }
 
-float World::getNonCollidingRight(const sf::FloatRect& boundingBox, const GameObject* exclude, bool ignoreDynamicTiles, bool ignoreMobs) const {
-	sf::FloatRect bb = boundingBox;
+float World::getNonCollidingRight(const WorldCollisionQueryRecord& rec) const {
+	WorldCollisionQueryRecord rec2 = rec;
+	sf::FloatRect& bb = rec2.boundingBox;
 	bb.left = std::ceil(bb.left);
 
-	while (bb.left + bb.width < m_worldData->mapRect.width && collides(bb, exclude, ignoreDynamicTiles, ignoreMobs)) {
+	while (bb.left + bb.width < m_worldData->mapRect.width && collides(rec2)) {
 		bb.left += 1.f;
 	}
 	return bb.left;

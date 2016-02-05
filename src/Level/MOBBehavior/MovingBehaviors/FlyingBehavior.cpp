@@ -20,22 +20,27 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	const Level& level = *m_enemy->getLevel();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	WorldCollisionQueryRecord rec;
+	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
 	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
 	bool isMovingX = nextPosition.x != bb.left;
 	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
+	rec.boundingBox = nextBoundingBoxX;
 	bool collidesX = false;
 	if (isMovingX &&
-		(level.collides(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles) ||
+		(level.collides(rec) ||
 			level.collidesWithDynamicTiles(&nextBoundingBoxX, m_avoidableTiles))) {
 		m_enemy->setAccelerationX(0.0f);
 		m_enemy->setVelocityX(0.0f);
 		m_randomDecisionX = isMovingRight ? -1 : 1;
 	}
+
 	// check for collision on y axis
-	if (level.collides(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles) ||
+	rec.boundingBox = nextBoundingBoxY;
+	if (level.collides(rec) ||
 		level.collidesWithDynamicTiles(&nextBoundingBoxY, m_avoidableTiles)) {
 		m_enemy->setAccelerationY(0.0);
 		m_enemy->setVelocityY(0.0f);

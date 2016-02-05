@@ -27,6 +27,7 @@ public:
 	void setRelativeVelocity(const sf::Vector2f& relVel);
 	
 	const sf::Vector2f& getVelocity() const;
+	const sf::Vector2f& getRelativeVelocity() const;
 	const sf::Vector2f& getAcceleration() const;
 
 protected:

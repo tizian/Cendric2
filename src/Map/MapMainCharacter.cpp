@@ -26,6 +26,7 @@ void MapMainCharacter::update(const sf::Time& frameTime) {
 void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	WorldCollisionQueryRecord rec;
 
 	bool isMovingY = nextPosition.y != getBoundingBox()->top;
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;
@@ -33,28 +34,31 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool isMovingDown = nextPosition.y > getBoundingBox()->top;
 
 	// check for collision on x axis
-	if (isMovingX && m_map->collides(nextBoundingBoxX)) {
+	rec.boundingBox = nextBoundingBoxX;
+	if (isMovingX && m_map->collides(rec)) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 		if (isMovingRight) {
-			setPositionX(m_map->getNonCollidingLeft(nextBoundingBoxX));
+			setPositionX(m_map->getNonCollidingLeft(rec));
 		}
 		else {
-			setPositionX(m_map->getNonCollidingRight(nextBoundingBoxX));
+			setPositionX(m_map->getNonCollidingRight(rec));
 		}
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
 	}
+
 	// check for collision on y axis
-	if (isMovingY && m_map->collides(nextBoundingBoxY)) {
+	rec.boundingBox = nextBoundingBoxY;
+	if (isMovingY && m_map->collides(rec)) {
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
 		if (isMovingDown) {
-			setPositionY(m_map->getNonCollidingTop(nextBoundingBoxY));
+			setPositionY(m_map->getNonCollidingTop(rec));
 		}
 		else {
-			setPositionY(m_map->getNonCollidingBottom(nextBoundingBoxY));
+			setPositionY(m_map->getNonCollidingBottom(rec));
 		}
 	}
 }

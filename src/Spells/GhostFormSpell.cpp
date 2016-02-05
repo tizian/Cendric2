@@ -36,7 +36,9 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 	updateParticleSystemPosition();
 
-	if (!(m_level->collides(*m_mob->getBoundingBox()))) {
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *m_mob->getBoundingBox();
+	if (!(m_level->collides(rec))) {
 		m_lastSafePosition = m_mob->getPosition();
 	}
 

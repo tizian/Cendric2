@@ -8,6 +8,7 @@
 #include "ResourceManager.h"
 #include "Logger.h"
 #include "Structs/WorldData.h"
+#include "Structs/WorldCollisionQueryRecord.h"
 
 // a level or a map in the cendric world
 class World {
@@ -36,18 +37,15 @@ public:
 	const TileMap* getLightedForegroundTileMap() const;
 	const TileMap* getForegroundTileMap() const;
 
-	// checks collision with the collidable grid of that world and also the collidable dynamic tiles
-	// if the calling object itself wants to be excluded, it can give itself as an argument here.
-	// the last argument will ignore collidable dynamic tiles in the check, but no strictly collidable dynamic tiles.
-	virtual bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const;
+	virtual bool collides(WorldCollisionQueryRecord& rec) const;
 	// returns the first non-colliding location in the specific direction, floored.
 	// these locations refer to the top left location of the bounding box.
-	float getNonCollidingTop(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const;
-	float getNonCollidingBottom(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const;
-	float getNonCollidingLeft(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const;
-	float getNonCollidingRight(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const;
+	float getNonCollidingTop(const WorldCollisionQueryRecord& rec) const;
+	float getNonCollidingBottom(const WorldCollisionQueryRecord& rec) const;
+	float getNonCollidingLeft(const WorldCollisionQueryRecord& rec) const;
+	float getNonCollidingRight(const WorldCollisionQueryRecord& rec) const;
 	
-	// deletes the resources
+	// deletes the world resources
 	virtual void dispose();
 
 	const sf::FloatRect& getWorldRect() const;

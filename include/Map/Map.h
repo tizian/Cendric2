@@ -17,7 +17,7 @@ public:
 	void setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const override;
 	
 	// checks collision with the collidable grid of that map
-	bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const override;
+	bool collides(WorldCollisionQueryRecord& rec) const override;
 	// checks if the main char has reached a level entry. If no, nullptr, else the spawn point and id for that level
 	MapExitData* checkLevelEntry(const sf::FloatRect& boundingBox) const;
 	void dispose() override;

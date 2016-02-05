@@ -12,7 +12,6 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
-	void onHit(LevelMovableGameObject* mob) override;
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 	void setPosition(const sf::Vector2f& position) override;
@@ -29,6 +28,4 @@ private:
 
 	std::vector<sf::Sprite> m_normalSprites;
 	std::vector<sf::Sprite> m_frozenSprites;
-
-	static const float RAISE_THRESHOLD;
 };

@@ -14,41 +14,49 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	float oldPositionX = m_enemy->getPosition().x;
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	WorldCollisionQueryRecord rec;
+	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
 	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
 	bool isMovingX = nextPosition.x != bb.left;
 	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
+	rec.boundingBox = nextBoundingBoxX;
 	bool collidesX = false;
-	if (isMovingX && level.collides(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles)) {
+	if (isMovingX && level.collides(rec)) {
 		collidesX = true;
 		m_enemy->setAccelerationX(0.0f);
 		m_enemy->setVelocityX(0.0f);
 		if (isMovingRight) {
-			m_enemy->setPositionX(level.getNonCollidingLeft(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles));
+			m_enemy->setPositionX(level.getNonCollidingLeft(rec));
 		}
 		else {
-			m_enemy->setPositionX(level.getNonCollidingRight(nextBoundingBoxX, nullptr, m_ignoreDynamicTiles));
+			m_enemy->setPositionX(level.getNonCollidingRight(rec));
 		}
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
 	}
-	// check for collision on y axis
-	bool collidesY = level.collides(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles);
 
+	// check for collision on y axis
+	rec.boundingBox = nextBoundingBoxY;
+	bool isFalling = isUpsideDown() != isMovingDown;
+	rec.checkMovingPlatforms = isFalling;
+	rec.upsideDown = isUpsideDown();
+	bool collidesY = level.collides(rec);
+	m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
 	if (collidesY) {
 		m_enemy->setAccelerationY(0.0);
 		m_enemy->setVelocityY(0.0f);
-		if (isUpsideDown() != isMovingDown) {
+		if (isFalling) {
 			m_isGrounded = true;
 		}
 		if (isMovingDown) {
-			m_enemy->setPositionY(level.getNonCollidingTop(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles));
+			m_enemy->setPositionY(level.getNonCollidingTop(rec));
 		}
 		else {
-			m_enemy->setPositionY(level.getNonCollidingBottom(nextBoundingBoxY, nullptr, m_ignoreDynamicTiles));
+			m_enemy->setPositionY(level.getNonCollidingBottom(rec));
 		}
 	}
 	

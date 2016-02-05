@@ -11,7 +11,6 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 	setPosition(position);
 	calculateNextVelocity(frameTime, m_velocity);
 	AnimatedGameObject::update(frameTime);
-	m_relativeVelocity = sf::Vector2f();
 }
 
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const {
@@ -90,6 +89,10 @@ float MovableGameObject::getConfiguredMaxVelocityYDown() const {
 
 const sf::Vector2f& MovableGameObject::getVelocity() const {
 	return m_velocity;
+}
+
+const sf::Vector2f& MovableGameObject::getRelativeVelocity() const {
+	return m_relativeVelocity;
 }
 
 const sf::Vector2f& MovableGameObject::getAcceleration() const {

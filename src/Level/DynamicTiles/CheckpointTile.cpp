@@ -41,12 +41,13 @@ void CheckpointTile::onHit(LevelMovableGameObject* mob) {
 		m_state = GameObjectState::Active;
 		setCurrentAnimation(getAnimation(m_state), false);
 
-		sf::FloatRect bb = *(character->getBoundingBox());
-		bb.left = getBoundingBox()->left + getBoundingBox()->width / 2.f - bb.width / 2.f;
-		bb.top = getBoundingBox()->top + (getBoundingBox()->height - bb.height);
-		if (!m_level->collides(bb)) {
+		WorldCollisionQueryRecord rec;
+		rec.boundingBox = *(character->getBoundingBox());
+		rec.boundingBox.left = getBoundingBox()->left + getBoundingBox()->width / 2.f - rec.boundingBox.width / 2.f;
+		rec.boundingBox.top = getBoundingBox()->top + (getBoundingBox()->height - rec.boundingBox.height);
+		if (!m_level->collides(rec)) {
 			if (LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen())) {
-				screen->getCharacterCore()->setLevel(sf::Vector2f(bb.left, bb.top), m_level->getID());
+				screen->getCharacterCore()->setLevel(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top), m_level->getID());
 				screen->writeToCore();
 				screen->setTooltipText(g_textProvider->getText("CheckpointReached"), sf::Color::Green, true);
 			}

@@ -72,22 +72,26 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	const sf::FloatRect& bb = *getBoundingBox();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	WorldCollisionQueryRecord rec;
+	rec.excludedGameObject = this;
+	rec.ignoreMobs = false;
 
 	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
 	bool isMovingX = nextPosition.x != bb.left;
 	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
-	bool collidesX = isMovingX && m_level->collides(nextBoundingBoxX, this, false, false);
+	rec.boundingBox = nextBoundingBoxX;
+	bool collidesX = isMovingX && m_level->collides(rec);
 
 	if (collidesX) {
 		setAccelerationX(0.0f);
 		setVelocityX(0.0f);
 		if (isMovingRight) {
-			setPositionX(m_level->getNonCollidingLeft(nextBoundingBoxX, this, false, false));
+			setPositionX(m_level->getNonCollidingLeft(rec));
 		}
 		else {
-			setPositionX(m_level->getNonCollidingRight(nextBoundingBoxX, this, false, false));
+			setPositionX(m_level->getNonCollidingRight(rec));
 		}
 	}
 	else {
@@ -95,15 +99,18 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	// check for collision on y axis
-	bool collidesY = m_level->collides(nextBoundingBoxY, this, false, false);
+	rec.boundingBox = nextBoundingBoxY;
+	rec.checkMovingPlatforms = isMovingDown;
+	bool collidesY = m_level->collides(rec);
+	if (isMovingDown) setRelativeVelocity(rec.gainedRelativeVelocity);
 	if (collidesY) {
 		setAccelerationY(0.0);
 		setVelocityY(0.0f);
 		if (isMovingDown) {
-			setPositionY(m_level->getNonCollidingTop(nextBoundingBoxY, this, false, false));
+			setPositionY(m_level->getNonCollidingTop(rec));
 		}
 		else {
-			setPositionY(m_level->getNonCollidingBottom(nextBoundingBoxY, this, false, false));
+			setPositionY(m_level->getNonCollidingBottom(rec));
 		}
 	}
 }

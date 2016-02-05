@@ -34,10 +34,8 @@ public:
 	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles = false) const;
 	// calculates if the object would fall deeper than it can jump if it did one more step in the given direction.
 	bool fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize, bool ignoreDynamicTiles = false) const;
-	// checks collision with the collidable grid of that level and also the collidable dynamic tiles
-	// if the calling object itself wants to be excluded, it can give itself as an argument here.
-	// the last argument will ignore collidable dynamic tiles in the check, but no strictly collidable dynamic tiles.
-	bool collides(const sf::FloatRect& boundingBox, const GameObject* exclude = nullptr, bool ignoreDynamicTiles = false, bool ignoreMobs = true) const override;
+	// collision with the level, see WorldCollisionQueryRecord for more infos about the argument
+	bool collides(WorldCollisionQueryRecord& rec) const override;
 	// checks for collisions with those specific dynamic tiles
 	bool collidesWithDynamicTiles(const sf::FloatRect* boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
 	// checks for collisions with mobs (enemies and level main character)
