@@ -7,14 +7,14 @@ IcyAmbushSpell::IcyAmbushSpell(int strength) : Spell() {
 void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
-	Animation spellAnimation(sf::seconds(10.f));
-	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_icyambush));
-	spellAnimation.addFrame(sf::IntRect(0, 0, 40, 30));
+	Animation* spellAnimation = new Animation(sf::seconds(10.f));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_icyambush));
+	spellAnimation->addFrame(sf::IntRect(0, 0, 40, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
 	// initial values
-	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
 	Spell::load(bean, mob, target);

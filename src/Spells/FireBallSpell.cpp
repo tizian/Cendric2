@@ -7,12 +7,11 @@ FireBallSpell::FireBallSpell() : Spell() {
 void FireBallSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-20.f, -20.f));
 
-	Animation spellAnimation;
-	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fireball));
-	spellAnimation.addFrame(sf::IntRect(0, data.skinNr * 50, 50, 50));
-	spellAnimation.addFrame(sf::IntRect(50, data.skinNr * 50, 50, 50));
-	spellAnimation.addFrame(sf::IntRect(100, data.skinNr * 50, 50, 50));
-	spellAnimation.addFrame(sf::IntRect(150, data.skinNr * 50, 50, 50));
+	Animation* spellAnimation = new Animation();
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fireball));
+	for (int i = 0; i < 4; ++i) {
+		spellAnimation->addFrame(sf::IntRect(i * 50, data.skinNr * 50, 50, 50));
+	}
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

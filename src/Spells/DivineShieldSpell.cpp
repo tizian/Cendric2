@@ -8,15 +8,15 @@ DivineShieldSpell::DivineShieldSpell(const AttributeData& additionalResistance) 
 void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-12.f, -12.f));
 
-	Animation spellAnimation;
-	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_divineshield));
+	Animation* spellAnimation = new Animation();
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_divineshield));
 
 	for (int i = 0; i < 8; i++) {
-		spellAnimation.addFrame(sf::IntRect(i * 120, 0, 120, 120));
+		spellAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 120));
 	}
 
 	for (int i = 7; i > -1; i--) {
-		spellAnimation.addFrame(sf::IntRect(i * 120, 0, 120, 120));
+		spellAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 120));
 	}
 
 	addAnimation(GameObjectState::Idle, spellAnimation);

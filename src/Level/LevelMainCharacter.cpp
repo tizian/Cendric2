@@ -216,44 +216,39 @@ void LevelMainCharacter::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
 
-	Animation walkingAnimation;
-	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	walkingAnimation.addFrame(sf::IntRect(0, 0, 80, 120));
-	walkingAnimation.addFrame(sf::IntRect(80, 0, 80, 120));
-	walkingAnimation.addFrame(sf::IntRect(160, 0, 80, 120));
-	walkingAnimation.addFrame(sf::IntRect(240, 0, 80, 120));
-	walkingAnimation.addFrame(sf::IntRect(320, 0, 80, 120));
-	walkingAnimation.addFrame(sf::IntRect(400, 0, 80, 120));
-	walkingAnimation.addFrame(sf::IntRect(480, 0, 80, 120));
-	walkingAnimation.addFrame(sf::IntRect(560, 0, 80, 120));
-
+	Animation* walkingAnimation = new Animation();
+	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	for (int i = 0; i < 8; ++i) {
+		walkingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 120));
+	}
+	
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	idleAnimation.addFrame(sf::IntRect(640, 0, 80, 120));
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	idleAnimation->addFrame(sf::IntRect(640, 0, 80, 120));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation jumpingAnimation;
-	jumpingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	jumpingAnimation.addFrame(sf::IntRect(720, 0, 80, 120));
+	Animation* jumpingAnimation = new Animation();
+	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	jumpingAnimation->addFrame(sf::IntRect(720, 0, 80, 120));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation fightingAnimation(sf::milliseconds(70));
-	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	fightingAnimation.addFrame(sf::IntRect(800, 0, 80, 120));
-	fightingAnimation.addFrame(sf::IntRect(880, 0, 80, 120));
-	fightingAnimation.addFrame(sf::IntRect(960, 0, 80, 120));
-	fightingAnimation.addFrame(sf::IntRect(1040, 0, 80, 120));
-	fightingAnimation.addFrame(sf::IntRect(1040, 0, 80, 120));
+	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
+	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	for (int i = 10; i < 14; ++i) {
+		fightingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 120));
+	}
+	// duplicate last frame because of level equipment
+	fightingAnimation->addFrame(sf::IntRect(1040, 0, 80, 120));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
-	Animation deadAnimation;
-	deadAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	deadAnimation.addFrame(sf::IntRect(1120, 0, 80, 120));
+	Animation* deadAnimation = new Animation();
+	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	deadAnimation->addFrame(sf::IntRect(1120, 0, 80, 120));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 

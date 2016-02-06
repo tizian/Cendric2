@@ -1,17 +1,29 @@
 #include "AnimatedGameObject.h"
 #include "ResourceManager.h"
 
+AnimatedGameObject::~AnimatedGameObject() {
+	for (auto& it : m_animations) {
+		delete it.second;
+	}
+	m_animations.clear();
+}
+
 void AnimatedGameObject::setCurrentAnimation(const Animation *animation, bool isFlipped) {
 	m_animatedSprite.setFlippedX(isFlipped);
 	m_animatedSprite.setAnimation(animation);
 }
 
-void AnimatedGameObject::addAnimation(GameObjectState state, Animation &animation) {
+void AnimatedGameObject::addAnimation(GameObjectState state, Animation* animation) {
+	if (m_animations.find(state) != m_animations.end()) {
+		delete m_animations.at(state);
+		m_animations[state] = animation;
+		return;
+	}
 	m_animations.insert({ state, animation });
 }
 
 const Animation* AnimatedGameObject::getAnimation(GameObjectState state) {
-	return &m_animations[state];
+	return m_animations[state];
 }
 
 void AnimatedGameObject::render(sf::RenderTarget &renderTarget) {

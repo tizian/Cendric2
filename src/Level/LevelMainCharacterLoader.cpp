@@ -66,16 +66,16 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 		LevelEquipment* levelEquipment = new LevelEquipment();
 		levelEquipment->setBoundingBox(equipment.boundingBox);
 		for (auto &ani : equipment.texturePositions) {
-			Animation animation;
+			Animation* animation = new Animation();
 			if (ani.first == GameObjectState::Fighting) {
-				animation.setFrameTime(sf::milliseconds(70));
+				animation->setFrameTime(sf::milliseconds(70));
 			}
 			else if (ani.first == GameObjectState::Jumping) {
-				animation.setFrameTime(sf::milliseconds(200));
+				animation->setFrameTime(sf::milliseconds(200));
 			}
-			animation.setSpriteSheet(g_resourceManager->getTexture(item.getEquipmentBean().texture_path));
+			animation->setSpriteSheet(g_resourceManager->getTexture(item.getEquipmentBean().texture_path));
 			for (auto &frame : ani.second) {
-				animation.addFrame(frame);
+				animation->addFrame(frame);
 			}
 			levelEquipment->addAnimation(ani.first, animation);
 		}

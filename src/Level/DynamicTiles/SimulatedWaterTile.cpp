@@ -15,7 +15,7 @@ const int SimulatedWaterTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 const int SimulatedWaterTile::SIN_COUNT = 7;
 const float SimulatedWaterTile::SIN_SPEED = 5.2f;
 const float SimulatedWaterTile::SIN_MAX_HEIGHT = 3.f;
-const float SimulatedWaterTile::SIN_MAX_FREQUENCY = 0.05f;
+const float SimulatedWaterTile::SIN_MAX_FREQUENCY = 0.1f;
 
 inline float randomFloat(float low, float high) {
 	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));

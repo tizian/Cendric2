@@ -14,9 +14,9 @@ void SwitchableTile::setInitialState(bool on) {
 
 void SwitchableTile::loadAnimation(int skinNr) {
 
-	Animation onAnimation(sf::seconds(10.0f));
-	onAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_switchable));
-	onAnimation.addFrame(sf::IntRect(
+	Animation* onAnimation = new Animation(sf::seconds(10.0f));
+	onAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_switchable));
+	onAnimation->addFrame(sf::IntRect(
 		BORDER,
 		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
 		TILE_SIZE,
@@ -24,9 +24,9 @@ void SwitchableTile::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::On, onAnimation);
 
-	Animation offAnimation(sf::seconds(10.0f));
-	offAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_switchable));
-	offAnimation.addFrame(sf::IntRect(
+	Animation* offAnimation = new Animation(sf::seconds(10.0f));
+	offAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_switchable));
+	offAnimation->addFrame(sf::IntRect(
 		BORDER + (2 * BORDER + TILE_SIZE),
 		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
 		TILE_SIZE,

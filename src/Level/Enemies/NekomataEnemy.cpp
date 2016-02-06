@@ -96,60 +96,60 @@ void NekomataEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 130.f, 70.f));
 	setSpriteOffset(sf::Vector2f(-10.f, -11.f));
 
-	Animation walkingAnimation;
-	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
+	Animation* walkingAnimation = new Animation();
+	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 
 	for (int i = 0; i < 12; i++) {
-		walkingAnimation.addFrame(sf::IntRect(0, i * 81, 150, 81));
+		walkingAnimation->addFrame(sf::IntRect(0, i * 81, 150, 81));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
-	Animation jumpingAnimation;
-	jumpingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
+	Animation* jumpingAnimation = new Animation();
+	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	for (int i = 0; i < 1; i++) {
-		jumpingAnimation.addFrame(sf::IntRect(150, i * 81, 150, 81));
+		jumpingAnimation->addFrame(sf::IntRect(150, i * 81, 150, 81));
 	}
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation jumpingStartAnimation(sf::seconds(0.08f));
-	jumpingStartAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
+	Animation* jumpingStartAnimation = new Animation(sf::seconds(0.08f));
+	jumpingStartAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	for (int i = 1; i < 4; i++) {
-		jumpingStartAnimation.addFrame(sf::IntRect(150, i * 81, 150, 81));
+		jumpingStartAnimation->addFrame(sf::IntRect(150, i * 81, 150, 81));
 	}
 
 	addAnimation(GameObjectState::Jumping_start, jumpingStartAnimation);
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	for (int i = 0; i < 1; i++) {
-		idleAnimation.addFrame(sf::IntRect(300, i * 81, 150, 81));
+		idleAnimation->addFrame(sf::IntRect(300, i * 81, 150, 81));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation fightingStartAnimation(sf::seconds(0.08f));
-	fightingStartAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
+	Animation* fightingStartAnimation = new Animation(sf::seconds(0.08f));
+	fightingStartAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	for (int i = 0; i < 1; i++) {
-		fightingStartAnimation.addFrame(sf::IntRect(450, i * 81, 150, 81));
+		fightingStartAnimation->addFrame(sf::IntRect(450, i * 81, 150, 81));
 	}
 
 	addAnimation(GameObjectState::Fighting_start, fightingStartAnimation);
 
-	Animation fightingAnimation(sf::seconds(0.08f));
-	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
-	fightingAnimation.addFrame(sf::IntRect(450, 1 * 81, 150, 81));
-	fightingAnimation.addFrame(sf::IntRect(450, 2 * 81, 150, 81));
-	fightingAnimation.addFrame(sf::IntRect(450, 3 * 81, 150, 81));
-	fightingAnimation.addFrame(sf::IntRect(450, 2 * 81, 150, 81));
+	Animation* fightingAnimation = new Animation(sf::seconds(0.08f));
+	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
+	fightingAnimation->addFrame(sf::IntRect(450, 1 * 81, 150, 81));
+	fightingAnimation->addFrame(sf::IntRect(450, 2 * 81, 150, 81));
+	fightingAnimation->addFrame(sf::IntRect(450, 3 * 81, 150, 81));
+	fightingAnimation->addFrame(sf::IntRect(450, 2 * 81, 150, 81));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
-	Animation deadAnimation;
-	deadAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
+	Animation* deadAnimation = new Animation();
+	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata_blue_trans));
 	for (int i = 0; i < 1; i++) {
-		deadAnimation.addFrame(sf::IntRect(600, i * 81, 150, 81));
+		deadAnimation->addFrame(sf::IntRect(600, i * 81, 150, 81));
 	}
 
 	addAnimation(GameObjectState::Dead, deadAnimation);

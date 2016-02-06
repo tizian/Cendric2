@@ -24,7 +24,7 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 		layer.setPrimitiveType(sf::Quads);
 		layer.resize(width * height * 4);
 
-		m_animatedTiles.insert({ count, std::vector<AnimatedTile>() });
+		m_animatedTiles.insert({ count, std::vector<AnimatedTile*>() });
 
 		for (int i = 0; i < width; ++i) {
 			for (int j = 0; j < height; ++j) {
@@ -64,7 +64,7 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 
 	for (int i = 0; i < m_layers.size(); i++) {
 		for (auto& tile : m_animatedTiles.at(i)) {
-			tile.setState(GameObjectState::Idle);
+			tile->setState(GameObjectState::Idle);
 		}
 	}
 	return true;
@@ -74,30 +74,30 @@ void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const 
 	for (auto& tile : data.animatedTiles) {
 		if (tile.tileID == tileNumber) {
 
-			AnimatedTile animatedTile;
+			AnimatedTile* animatedTile = new AnimatedTile();
 			
-			Animation idleAnimation(tile.frames.at(0).second);
-			idleAnimation.setSpriteSheet(m_tileset);
+			Animation* idleAnimation = new Animation(tile.frames.at(0).second);
+			idleAnimation->setSpriteSheet(m_tileset);
 
 			for (auto& frame : tile.frames) {
 				int frameTileID = frame.first - 1;
 				int tu = frameTileID % (m_tileset->getSize().x / (TILE_SIZE + 2 * TILE_BORDER));
 				int tv = frameTileID / (m_tileset->getSize().x / (TILE_SIZE + 2 * TILE_BORDER));
 
-				idleAnimation.addFrame(sf::IntRect(
+				idleAnimation->addFrame(sf::IntRect(
 					tu * (TILE_SIZE + 2 * TILE_BORDER) + TILE_BORDER, 
 					tv * (TILE_SIZE + 2 * TILE_BORDER) + TILE_BORDER, 
 					TILE_SIZE, 
 					TILE_SIZE));
 			}
 			
-			animatedTile.addAnimation(GameObjectState::Idle, idleAnimation);
+			animatedTile->addAnimation(GameObjectState::Idle, idleAnimation);
 
 			sf::Vector2f position(i * TILE_SIZE_F, j * TILE_SIZE_F);
 
 			// initial values
-			animatedTile.playCurrentAnimation(true);
-			animatedTile.setPosition(position);
+			animatedTile->playCurrentAnimation(true);
+			animatedTile->setPosition(position);
 
 			m_animatedTiles[layerNr].push_back(animatedTile);
 			
@@ -112,7 +112,7 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	for (int i = 0; i < m_layers.size(); i++) {
 		target.draw(m_layers[i], states);
 		for (auto& tile : m_animatedTiles.at(i)) {
-			target.draw(tile.getAnimatedSprite(), states);
+			target.draw(tile->getAnimatedSprite(), states);
 		}
 	}
 }
@@ -120,13 +120,20 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 void TileMap::update(const sf::Time& frameTime) {
 	for (auto& it : m_animatedTiles) {
 		for (auto& tile : it.second) {
-			tile.update(frameTime);
+			tile->update(frameTime);
 		}
 	}
 }
 
 void TileMap::dispose() {
 	g_resourceManager->deleteResource(m_tilesetPath);
+
+	for (auto& it : m_animatedTiles) {
+		for (auto& tile : it.second) {
+			delete tile;
+		}
+		it.second.clear();
+	}
 }
 
 const sf::Vector2i& TileMap::getTilesize() const {

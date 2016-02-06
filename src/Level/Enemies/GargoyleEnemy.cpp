@@ -157,17 +157,39 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 80.f));
 	setSpriteOffset(sf::Vector2f(-127.f, -42.f));
 
-	Animation flyingAnimation;
-	flyingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	Animation* flyingAnimation = new Animation();
+	flyingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
 	for (int i = 0; i < 8; i++) {
-		flyingAnimation.addFrame(sf::IntRect(195 * i, 0, 195, 180));
+		flyingAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
 	}
 
-	// TODO: add animations
 	addAnimation(GameObjectState::Flying, flyingAnimation);
-	addAnimation(GameObjectState::Idle, flyingAnimation);
-	addAnimation(GameObjectState::Fighting, flyingAnimation);
-	addAnimation(GameObjectState::Dead, flyingAnimation);
+
+	
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	for (int i = 0; i < 8; i++) {
+		idleAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
+	}
+
+	addAnimation(GameObjectState::Idle, idleAnimation);
+
+	// TODO: create other animations
+	Animation* fightingAnimation = new Animation();
+	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	for (int i = 0; i < 8; i++) {
+		fightingAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
+	}
+
+	addAnimation(GameObjectState::Fighting, fightingAnimation);
+
+	Animation* deadAnimation = new Animation();
+	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	for (int i = 0; i < 8; i++) {
+		deadAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
+	}
+
+	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);

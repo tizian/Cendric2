@@ -19,10 +19,10 @@ void CookingTile::init() {
 void CookingTile::loadAnimation(int skinNr) {
 	int textureHeight = 2 * TILE_SIZE;
 
-	Animation burningAnimation(sf::seconds(0.15f));
-	burningAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_cooking));
-	for (int i = 0; i < 4; i++) {
-		burningAnimation.addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
+	Animation* burningAnimation = new Animation(sf::seconds(0.15f));
+	burningAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_cooking));
+	for (int i = 0; i < 4; ++i) {
+		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
 	}
 
 	addAnimation(GameObjectState::Burning, burningAnimation);

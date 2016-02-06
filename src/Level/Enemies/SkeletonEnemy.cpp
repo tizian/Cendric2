@@ -55,40 +55,40 @@ void SkeletonEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 135.f));
 	setSpriteOffset(sf::Vector2f(-35.f, -15.f));
 
-	Animation walkingAnimation(sf::seconds(0.1f));
-	walkingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
+	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation.addFrame(sf::IntRect(i * 150, 0, 150, 150));
+		walkingAnimation->addFrame(sf::IntRect(i * 150, 0, 150, 150));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
-	Animation jumpingAnimation;
-	jumpingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
-	jumpingAnimation.addFrame(sf::IntRect(0, 0, 150, 150));
+	Animation* jumpingAnimation = new Animation();
+	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	jumpingAnimation->addFrame(sf::IntRect(0, 0, 150, 150));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
-	idleAnimation.addFrame(sf::IntRect(00, 150, 150, 150));
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	idleAnimation->addFrame(sf::IntRect(00, 150, 150, 150));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation fightingAnimation(sf::seconds(0.05f));
-	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	Animation* fightingAnimation = new Animation(sf::seconds(0.05f));
+	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
 	for (int i = 0; i < 8; i++) {
-		fightingAnimation.addFrame(sf::IntRect(i * 150, 300, 150, 150));
+		fightingAnimation->addFrame(sf::IntRect(i * 150, 300, 150, 150));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
-	Animation deadAnimation;
-	deadAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	Animation* deadAnimation = new Animation();
+	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
 	for (int i = 0; i < 2; i++) {
-		deadAnimation.addFrame(sf::IntRect(i * 150, 450, 150, 150));
+		deadAnimation->addFrame(sf::IntRect(i * 150, 450, 150, 150));
 	}
-	deadAnimation.setLooped(false);
+	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values

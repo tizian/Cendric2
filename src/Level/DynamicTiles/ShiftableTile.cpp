@@ -16,9 +16,9 @@ void ShiftableTile::init() {
 void ShiftableTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 
-	Animation idleAnimation(sf::seconds(10.f));
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftable));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
+	Animation* idleAnimation = new Animation(sf::seconds(10.f));
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shiftable));
+	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

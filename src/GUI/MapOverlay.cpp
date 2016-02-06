@@ -135,19 +135,19 @@ void WaypointMarker::loadAnimation() {
 	// load animations
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 25.f, 25.f));
 
-	Animation activeAnimation;
-	activeAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
+	Animation* activeAnimation = new Animation();
+	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
 	for (int i = 2; i < 6; i++)
-		activeAnimation.addFrame(sf::IntRect(i * 25, 0, 25, 25));
+		activeAnimation->addFrame(sf::IntRect(i * 25, 0, 25, 25));
 
 	for (int i = 5; i > 1; i--)
-		activeAnimation.addFrame(sf::IntRect(i * 25, 0, 25, 25));
+		activeAnimation->addFrame(sf::IntRect(i * 25, 0, 25, 25));
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
-	idleAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
+	idleAnimation->addFrame(sf::IntRect(25, 0, 25, 25));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

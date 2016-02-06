@@ -22,14 +22,14 @@ void ModifierTile::loadAnimation(int skinNr) {
 	sf::IntRect rect = sf::IntRect((m_modifier.level - 1) * 50, 50, 50, 50);
 	m_animatedSprite.setColor(SpellModifier::getSpellModifierColor(m_modifier.type));
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_gems));
-	idleAnimation.addFrame(rect);
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_gems));
+	idleAnimation->addFrame(rect);
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation activatedAnimation(sf::seconds(10.f));
-	activatedAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_gems));
-	activatedAnimation.addFrame(sf::IntRect()); // idle
+	Animation* activatedAnimation = new Animation(sf::seconds(10.f));
+	activatedAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_gems));
+	activatedAnimation->addFrame(sf::IntRect()); // idle
 	addAnimation(GameObjectState::Active, activatedAnimation);
 
 	// initial values

@@ -12,9 +12,9 @@ void SpikesTopTile::init() {
 
 void SpikesTopTile::loadAnimation(int skinNr) {
 
-	Animation idleAnimation(sf::seconds(10.0f));
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikestop));
-	idleAnimation.addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE * 2, TILE_SIZE, TILE_SIZE * 2));
+	Animation* idleAnimation = new Animation(sf::seconds(10.0f));
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikestop));
+	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE * 2, TILE_SIZE, TILE_SIZE * 2));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

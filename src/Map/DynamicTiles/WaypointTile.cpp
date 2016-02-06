@@ -16,20 +16,20 @@ void WaypointTile::init() {
 
 void WaypointTile::loadAnimation(int skinNr) {
 
-	Animation activeAnimation;
-	activeAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_waypoint));
+	Animation* activeAnimation = new Animation();
+	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_waypoint));
 	for (int i = 0; i < 5; i++) {
-		activeAnimation.addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
 	for (int i = 4; i > -1; i--) {
-		activeAnimation.addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_waypoint));
-	idleAnimation.addFrame(sf::IntRect(250, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_waypoint));
+	idleAnimation->addFrame(sf::IntRect(250, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

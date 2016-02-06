@@ -92,28 +92,35 @@ void CrowEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 
-	Animation flyingAnimation;
-	flyingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
-	flyingAnimation.addFrame(sf::IntRect(0, 0, 70, 64));
-	flyingAnimation.addFrame(sf::IntRect(70, 0, 70, 64));
-	flyingAnimation.addFrame(sf::IntRect(140, 0, 70, 64));
-	flyingAnimation.addFrame(sf::IntRect(210, 0, 70, 64));
+	Animation* flyingAnimation = new Animation();
+	flyingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	flyingAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
+	flyingAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
+	flyingAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
+	flyingAnimation->addFrame(sf::IntRect(210, 0, 70, 64));
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
-	addAnimation(GameObjectState::Idle, flyingAnimation);
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	idleAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
+	idleAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
+	idleAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
+	idleAnimation->addFrame(sf::IntRect(210, 0, 70, 64));
 
-	Animation fightingAnimation;
-	fightingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
-	fightingAnimation.addFrame(sf::IntRect(0, 64, 70, 64));
-	fightingAnimation.addFrame(sf::IntRect(70, 64, 70, 64));
-	fightingAnimation.addFrame(sf::IntRect(140, 64, 70, 64));
+	addAnimation(GameObjectState::Idle, idleAnimation);
+
+	Animation* fightingAnimation = new Animation();
+	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	fightingAnimation->addFrame(sf::IntRect(0, 64, 70, 64));
+	fightingAnimation->addFrame(sf::IntRect(70, 64, 70, 64));
+	fightingAnimation->addFrame(sf::IntRect(140, 64, 70, 64));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
-	Animation deadAnimation;
-	deadAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
-	deadAnimation.addFrame(sf::IntRect(0, 128, 70, 64));
+	Animation* deadAnimation = new Animation();
+	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	deadAnimation->addFrame(sf::IntRect(0, 128, 70, 64));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 

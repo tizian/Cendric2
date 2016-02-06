@@ -17,16 +17,15 @@ void FrozenWaterTile::init() {
 void FrozenWaterTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 
-	Animation idleAnimation(sf::seconds(0.5f));
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_frozenwater));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
-	//idleAnimation.addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER, TILE_SIZE, TILE_SIZE));
+	Animation* idleAnimation = new Animation(sf::seconds(0.5f));
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_frozenwater));
+	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
+	//idleAnimation->addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
+	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 }
 

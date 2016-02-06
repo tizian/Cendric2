@@ -7,10 +7,10 @@ void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const 
 	setSpriteOffset(sf::Vector2f(-10.f, 0.f));
 	m_mob = mob;
 	
-	Animation spellAnimation(sf::milliseconds(200));
-	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_flash));
-	spellAnimation.addFrame(sf::IntRect(0, 0, 120, 120));
-	spellAnimation.addFrame(sf::IntRect(120, 0, 120, 120));
+	Animation* spellAnimation = new Animation(sf::milliseconds(200));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_flash));
+	spellAnimation->addFrame(sf::IntRect(0, 0, 120, 120));
+	spellAnimation->addFrame(sf::IntRect(120, 0, 120, 120));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

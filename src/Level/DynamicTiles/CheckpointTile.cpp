@@ -14,18 +14,18 @@ void CheckpointTile::init() {
 void CheckpointTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_checkpoint));
-	idleAnimation.addFrame(sf::IntRect(0, (skinNr - 1) * 80, 80, 80));
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_checkpoint));
+	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * 80, 80, 80));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation activatedAnimation(sf::seconds(0.2f));
-	activatedAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_checkpoint));
+	Animation* activatedAnimation = new Animation(sf::seconds(0.2f));
+	activatedAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_checkpoint));
 	for (int i = 1; i < 5; i++) {
-		activatedAnimation.addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
+		activatedAnimation->addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
 	}
 	for (int i = 3; i > 0; i--) {
-		activatedAnimation.addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
+		activatedAnimation->addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
 	}
 	addAnimation(GameObjectState::Active, activatedAnimation);
 

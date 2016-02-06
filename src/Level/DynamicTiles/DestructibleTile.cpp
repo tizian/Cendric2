@@ -12,16 +12,16 @@ void DestructibleTile::init() {
 void DestructibleTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 
-	Animation idleAnimation;
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
-	idleAnimation.addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
+	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation crumblingAnimation;
-	crumblingAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
+	Animation* crumblingAnimation = new Animation();
+	crumblingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
 	for (int i = 1; i < 5; i++) {
-		crumblingAnimation.addFrame(sf::IntRect(
+		crumblingAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
 			BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
 			TILE_SIZE,

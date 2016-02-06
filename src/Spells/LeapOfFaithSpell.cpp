@@ -8,9 +8,9 @@ LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 
 void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	m_mob = mob;
-	Animation spellAnimation;
-	spellAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_leapoffaith));
-	spellAnimation.addFrame(sf::IntRect(0, 0, 80, 120));
+	Animation* spellAnimation = new Animation();
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_leapoffaith));
+	spellAnimation->addFrame(sf::IntRect(0, 0, 80, 120));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

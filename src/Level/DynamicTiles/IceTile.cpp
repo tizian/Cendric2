@@ -12,10 +12,10 @@ void IceTile::init() {
 void IceTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 
-	Animation idleAnimation(sf::seconds(0.5f));
-	idleAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_ice));
+	Animation* idleAnimation = new Animation(sf::seconds(0.5f));
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_ice));
 	for (int i = 0; i < 2; i++) {
-		idleAnimation.addFrame(sf::IntRect(
+		idleAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
 			BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
 			TILE_SIZE,

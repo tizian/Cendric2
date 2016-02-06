@@ -8,8 +8,9 @@ World::~World() {
 }
 
 void World::dispose() {
-	// no need to dispose each tile map (lfg, fg + bg), as they share their resources
+	m_foregroundTileMap.dispose();
 	m_backgroundTileMap.dispose();
+	m_lightedForegroundTileMap.dispose();
 }
 
 void World::update(const sf::Time& frameTime) {
