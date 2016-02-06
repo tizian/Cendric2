@@ -26,5 +26,4 @@ struct WorldCollisionQueryRecord {
 	bool checkMovingPlatforms = false;
 	// is anti gravity for the object on?
 	bool upsideDown = false;
-	bool onlyCollision = false;
 };

@@ -169,7 +169,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 			if (!rec.upsideDown) {
 				float yPos = rec.boundingBox.top + rec.boundingBox.height;
 				float movingTileY = checkBB.top;
-				if (yPos >= movingTileY && yPos <= movingTileY + 20.f) {
+				if (yPos > movingTileY && yPos < movingTileY + 20.f) {
 					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
 					return true;
 				}
@@ -177,7 +177,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 			else {
 				float yPos = rec.boundingBox.top;
 				float movingTileY = checkBB.top + checkBB.height;
-				if (yPos <= movingTileY && yPos >= movingTileY - 20.f) {
+				if (yPos < movingTileY && yPos > movingTileY - 20.f) {
 					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
 					return true;
 				}

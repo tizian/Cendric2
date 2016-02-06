@@ -14,6 +14,8 @@ public:
 	GameObject() {}
 	virtual ~GameObject() {}
 
+	// used to update objects before the real updates, called by the screens.
+	virtual void updateFirst(const sf::Time& frameTime) {};
 	virtual void update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget);
 	// used for tooltips and loot windows

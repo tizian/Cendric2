@@ -107,6 +107,12 @@ void Screen::deleteObjects(GameObjectType type) {
 	}
 }
 
+void Screen::updateObjectsFirst(GameObjectType type, const sf::Time& frameTime) {
+	for (auto& it : m_objects[type]) {
+		it->updateFirst(frameTime);
+	}
+}
+
 void Screen::updateObjects(GameObjectType type, const sf::Time& frameTime) {
 	for (auto& it : m_objects[type]) {
 		if (it->isUpdatable())

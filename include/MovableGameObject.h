@@ -9,8 +9,9 @@ public:
 	MovableGameObject();
 	virtual ~MovableGameObject() {}
 
+	void updateFirst(const sf::Time& frameTime) override;
 	void update(const sf::Time& frameTime) override;
-	virtual void updateRelativeVelocity(const sf::Time& frameTime);
+	
 	void calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const;
 	void calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
 	virtual void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
@@ -32,6 +33,7 @@ public:
 	const sf::Vector2f& getAcceleration() const;
 
 protected:
+	virtual void updateRelativeVelocity(const sf::Time& frameTime);
 	virtual float getConfiguredMaxVelocityYUp() const;
 	virtual float getConfiguredMaxVelocityYDown() const;
 	virtual float getConfiguredMaxVelocityX() const;

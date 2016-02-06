@@ -5,6 +5,10 @@ MovableGameObject::MovableGameObject() : AnimatedGameObject() {
 	m_relativeVelocity.y = 0.f;
 }
 
+void MovableGameObject::updateFirst(const sf::Time& frameTime) {
+	updateRelativeVelocity(frameTime);
+}
+
 void MovableGameObject::update(const sf::Time& frameTime) {
 	sf::Vector2f position;
 	calculateNextPosition(frameTime, position);

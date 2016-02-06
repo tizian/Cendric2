@@ -131,13 +131,21 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_isGameOver || !m_retryButton->isVisible()) {
 		LevelExitData* leData = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
 		if (leData == nullptr) {
+			// update objects first for relative velocity
+			updateObjectsFirst(GameObjectType::_MovingPlatform, frameTime);
+			updateObjectsFirst(GameObjectType::_LevelMainCharacter, frameTime);
+			updateObjectsFirst(GameObjectType::_Enemy, frameTime);
+			updateObjectsFirst(GameObjectType::_DynamicTile, frameTime);
+			updateObjectsFirst(GameObjectType::_Spell, frameTime);
+			// and then normally
 			updateObjects(GameObjectType::_MovingPlatform, frameTime);
+			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Enemy, frameTime);
 			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
 			updateObjects(GameObjectType::_LevelEquipment, frameTime);
 			updateObjects(GameObjectType::_Spell, frameTime);
-			updateObjects(GameObjectType::_DynamicTile, frameTime);
+			
 			updateObjects(GameObjectType::_Light, frameTime);
 			m_currentLevel.update(frameTime);
 			return;
@@ -206,6 +214,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);
+	renderObjectsAfterForeground(GameObjectType::_MovingPlatform, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelMainCharacter, renderTarget);

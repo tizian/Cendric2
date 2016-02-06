@@ -51,7 +51,6 @@ sf::Vector2f ShadowTrapSpell::getConfiguredPositionOffset() const {
 }
 
 void ShadowTrapSpell::update(const sf::Time& frameTime) {
-	MovableGameObject::updateRelativeVelocity(frameTime);
 	// gravity
 	setAccelerationY(1000.f);
 	Spell::update(frameTime);

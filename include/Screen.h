@@ -59,6 +59,8 @@ protected:
 	void deleteAllObjects();
 	// deletes all objects of type 'type'
 	void deleteObjects(GameObjectType type);
+	// calls the update first method of all objects of type 'type'
+	void updateObjectsFirst(GameObjectType type, const sf::Time& frameTime);
 	// updates all objects of type 'type'
 	void updateObjects(GameObjectType type, const sf::Time& frameTime);
 	// depth sorts all objects (y coord asc) of type 'type'

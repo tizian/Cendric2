@@ -52,6 +52,7 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	rec.checkMovingPlatforms = isFalling;
 	rec.upsideDown = isUpsideDown();
 
+	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
 	bool collidesY = level.collides(rec);
 	m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
 
