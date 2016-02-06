@@ -50,6 +50,7 @@ void Level::loadForRenderTexture(Screen* screen) {
 	loader.loadDynamicTiles(m_levelData, screen, this);
 	loader.loadLights(m_levelData, screen);
 	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
+	m_movingPlatforms = screen->getObjects(GameObjectType::_MovingPlatform);
 }
 
 void Level::setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const {
@@ -142,10 +143,23 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	// check collidable dynamic tiles
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-		MovingTile* movingTile = dynamic_cast<MovingTile*>(go);
 
-		// check moving tiles
-		if (rec.checkMovingPlatforms && movingTile != nullptr) {
+		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
+		if (tile != rec.excludedGameObject && tile->getIsCollidable() && tile->getBoundingBox()->intersects(rec.boundingBox)) {
+			if (MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile)) {
+				// used by shiftable blocks.
+				rec.gainedRelativeVelocity = mob->getRelativeVelocity();
+			}
+			return true;
+		}
+
+	}
+
+	// check for moving platforms
+	if (rec.checkMovingPlatforms) {
+		for (GameObject* go : *m_movingPlatforms) {
+			MovingTile* movingTile = dynamic_cast<MovingTile*>(go);
+
 			if (movingTile == rec.excludedGameObject) continue;
 			if (!movingTile->getBoundingBox()->intersects(rec.boundingBox)) continue;
 			if (!rec.upsideDown) {
@@ -163,17 +177,6 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
 					return true;
 				}
-			}
-		}
-		// check normal dynamic tiles
-		else {
-			if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
-			if (tile != rec.excludedGameObject && tile->getIsCollidable() && tile->getBoundingBox()->intersects(rec.boundingBox)) {
-				if (MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile)) {
-					// used by shiftable blocks.
-					rec.gainedRelativeVelocity = mob->getRelativeVelocity();
-				}
-				return true;
 			}
 		}
 	}

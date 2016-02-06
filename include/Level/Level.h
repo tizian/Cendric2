@@ -48,6 +48,7 @@ private:
 	// data loaded by the level loader
 	LevelData m_levelData;
 	std::vector<GameObject*>* m_dynamicTiles;
+	std::vector<GameObject*>* m_movingPlatforms;
 
 	SpeedupPullCamera* m_camera;
 	const float CAMERA_WINDOW_WIDTH = 200.f;

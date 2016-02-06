@@ -131,6 +131,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_isGameOver || !m_retryButton->isVisible()) {
 		LevelExitData* leData = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
 		if (leData == nullptr) {
+			updateObjects(GameObjectType::_MovingPlatform, frameTime);
 			updateObjects(GameObjectType::_Enemy, frameTime);
 			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
@@ -163,6 +164,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	m_currentLevel.setWorldView(renderTarget, focus);
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default);
 	sf::View oldView = renderTarget.getView();
+	renderObjects(GameObjectType::_MovingPlatform, renderTarget);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_LevelMainCharacter, renderTarget);

@@ -101,7 +101,7 @@ void MovingTile::setPosition(const sf::Vector2f& position) {
 }
 
 GameObjectType MovingTile::getConfiguredType() const {
-	return GameObjectType::_DynamicTile;
+	return GameObjectType::_MovingPlatform;
 }
 
 void MovingTile::onHit(Spell* spell) {

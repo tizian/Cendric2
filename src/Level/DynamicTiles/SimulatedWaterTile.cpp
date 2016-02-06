@@ -12,9 +12,9 @@ using namespace std;
 const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
 const int SimulatedWaterTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 
-const int SimulatedWaterTile::SIN_COUNT = 7;
-const float SimulatedWaterTile::SIN_SPEED = 5.2f;
-const float SimulatedWaterTile::SIN_MAX_HEIGHT = 3.f;
+const int SimulatedWaterTile::SIN_COUNT = 10;
+const float SimulatedWaterTile::SIN_SPEED = 3.f;
+const float SimulatedWaterTile::SIN_MAX_HEIGHT = 1.f;
 const float SimulatedWaterTile::SIN_MAX_FREQUENCY = 0.1f;
 
 inline float randomFloat(float low, float high) {
