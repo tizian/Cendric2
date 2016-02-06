@@ -29,12 +29,21 @@ void ShiftableTile::loadAnimation(int skinNr) {
 }
 
 void ShiftableTile::update(const sf::Time& frameTime) {
+	updateRelativeVelocity(frameTime);
 	setAcceleration(sf::Vector2f(m_pushAcceleration, GRAVITY_ACCELERATION));
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	m_pushAcceleration = 0.f;
+}
+
+void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
+	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
+	sf::Vector2f nextPos;
+	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
+	nextPos.y = m_position.y + (m_relativeVelocity.y + 50.f) * frameTime.asSeconds();
+	setPosition(nextPos);
 }
 
 void ShiftableTile::onHit(Spell* spell) {

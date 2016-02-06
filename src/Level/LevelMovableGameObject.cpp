@@ -17,6 +17,7 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
+	updateRelativeVelocity(frameTime);
 	// update times
 	GameObject::updateTime(m_stunnedTime, frameTime);
 	GameObject::updateTime(m_fearedTime, frameTime);
@@ -33,6 +34,14 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 		updateAttributes(frameTime);
 	}
 	setAccelerationX(0.f);
+}
+
+void LevelMovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
+	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
+	sf::Vector2f nextPos;
+	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
+	nextPos.y = m_position.y + (m_relativeVelocity.y + (isUpsideDown() ? -50.f : 50.f)) * frameTime.asSeconds();
+	setPosition(nextPos);
 }
 
 void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {

@@ -13,12 +13,19 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 	AnimatedGameObject::update(frameTime);
 }
 
+void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
+	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
+	sf::Vector2f nextPos;
+	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
+	nextPos.y = m_position.y + m_relativeVelocity.y * frameTime.asSeconds();
+	setPosition(nextPos);
+}
+
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const {
-	sf::Vector2f position = getPosition();
 	sf::Vector2f nextVel;
 	calculateNextVelocity(frameTime, nextVel);
-	nextPos.x = position.x + (nextVel.x + m_relativeVelocity.x) * frameTime.asSeconds();
-	nextPos.y = position.y + (nextVel.y + m_relativeVelocity.y) * frameTime.asSeconds();
+	nextPos.x = m_position.x + nextVel.x * frameTime.asSeconds();
+	nextPos.y = m_position.y + nextVel.y * frameTime.asSeconds();
 }
 
 void MovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {

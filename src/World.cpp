@@ -84,7 +84,7 @@ float World::getNonCollidingTop(const WorldCollisionQueryRecord& rec) const {
 	bb.top = std::floor(bb.top);
 
 	while (bb.top > 0.f && collides(rec2)) {
-		bb.top -= 1.f;
+		bb.top -= 0.5f;
 	}
 	return bb.top;
 }
@@ -95,7 +95,7 @@ float World::getNonCollidingBottom(const WorldCollisionQueryRecord& rec) const {
 	bb.top = std::ceil(bb.top);
 
 	while (bb.top + bb.height < m_worldData->mapRect.height && collides(rec2)) {
-		bb.top += 1.f;
+		bb.top += 0.5f;
 	}
 	return bb.top;
 }
@@ -106,7 +106,7 @@ float World::getNonCollidingLeft(const WorldCollisionQueryRecord& rec) const {
 	bb.left = std::floor(bb.left);
 
 	while (bb.left > 0.f && collides(rec2)) {
-		bb.left -= 1.f;
+		bb.left -= 0.5f;
 	}
 	return bb.left;
 }
@@ -117,7 +117,7 @@ float World::getNonCollidingRight(const WorldCollisionQueryRecord& rec) const {
 	bb.left = std::ceil(bb.left);
 
 	while (bb.left + bb.width < m_worldData->mapRect.width && collides(rec2)) {
-		bb.left += 1.f;
+		bb.left += 0.5f;
 	}
 	return bb.left;
 }

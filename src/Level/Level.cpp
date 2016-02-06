@@ -161,19 +161,23 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 			MovingTile* movingTile = dynamic_cast<MovingTile*>(go);
 
 			if (movingTile == rec.excludedGameObject) continue;
-			if (!movingTile->getBoundingBox()->intersects(rec.boundingBox)) continue;
+
+			sf::FloatRect checkBB = *movingTile->getBoundingBox();
+
+			if (!checkBB.intersects(rec.boundingBox)) continue;
+
 			if (!rec.upsideDown) {
 				float yPos = rec.boundingBox.top + rec.boundingBox.height;
-				float movingTileY = movingTile->getBoundingBox()->top;
-				if (yPos > movingTileY && yPos < movingTileY + 20.f) {
+				float movingTileY = checkBB.top;
+				if (yPos >= movingTileY && yPos <= movingTileY + 20.f) {
 					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
 					return true;
 				}
 			}
 			else {
 				float yPos = rec.boundingBox.top;
-				float movingTileY = movingTile->getBoundingBox()->top + movingTile->getBoundingBox()->height;
-				if (yPos < movingTileY && yPos > movingTileY - 20.f) {
+				float movingTileY = checkBB.top + checkBB.height;
+				if (yPos <= movingTileY && yPos >= movingTileY - 20.f) {
 					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
 					return true;
 				}

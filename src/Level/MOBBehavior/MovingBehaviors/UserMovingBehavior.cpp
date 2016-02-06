@@ -51,9 +51,10 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool isFalling = isUpsideDown() != isMovingDown;
 	rec.checkMovingPlatforms = isFalling;
 	rec.upsideDown = isUpsideDown();
-	
+
 	bool collidesY = level.collides(rec);
 	m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
+
 	if (collidesY) {
 		m_mainChar->setAccelerationY(0.f);
 		m_mainChar->setVelocityY(0.f);
@@ -66,6 +67,7 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		else {
 			m_mainChar->setPositionY(level.getNonCollidingBottom(rec));
 		}
+
 	}
 
 	if (std::abs(m_mainChar->getVelocity().y) > 0.f)

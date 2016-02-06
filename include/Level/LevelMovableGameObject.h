@@ -18,6 +18,7 @@ public:
 	virtual ~LevelMovableGameObject();
 
 	virtual void update(const sf::Time& frameTime) override;
+	void updateRelativeVelocity(const sf::Time& frameTime) override;
 
 	// the offset to the from where a spell starts. it gets added to the spell offset defined by the spell itself. default is (0,0)
 	virtual sf::Vector2f getConfiguredSpellOffset() const;

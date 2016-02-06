@@ -10,6 +10,7 @@ public:
 	virtual ~MovableGameObject() {}
 
 	void update(const sf::Time& frameTime) override;
+	virtual void updateRelativeVelocity(const sf::Time& frameTime);
 	void calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const;
 	void calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
 	virtual void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;

@@ -11,6 +11,7 @@ public:
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
+	void updateRelativeVelocity(const sf::Time& frameTime) override;
 
 	GameObjectType getConfiguredType() const override;
 

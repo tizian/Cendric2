@@ -59,7 +59,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_enemy->setPositionY(level.getNonCollidingBottom(rec));
 		}
 	}
-	
+
 	m_jumps = false;
 	if (isMovingX && collidesX) {
 		// would a jump work? 

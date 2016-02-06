@@ -62,6 +62,7 @@ void MovingTile::loadAnimation(int skinNr) {
 }
 
 void MovingTile::update(const sf::Time& frameTime) {
+	MovableGameObject::updateRelativeVelocity(frameTime);
 	if (!(m_isFrozen || m_isOnHold)) {
 		updateTime(m_timeUntilTurn, frameTime);
 		if (m_timeUntilTurn == sf::Time::Zero) {
