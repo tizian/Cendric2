@@ -39,17 +39,28 @@ void LevelMovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
 	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
 	sf::Vector2f nextPos;
 	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
-	nextPos.y = m_position.y + (m_relativeVelocity.y + (isUpsideDown() ? -50.f : 50.f)) * frameTime.asSeconds();
+	nextPos.y = m_position.y + m_relativeVelocity.y * frameTime.asSeconds();
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_movingBehavior->isIgnoreDynamicTiles();
+	rec.checkMovingPlatforms = true;
 	rec.boundingBox = *getBoundingBox();
 	rec.boundingBox.left = nextPos.x;
-	if (!m_level->collides(rec))
-		setPositionX(nextPos.x);
-
 	rec.boundingBox.top = nextPos.y;
-	if (!m_level->collides(rec))
+	if (!m_level->collides(rec)) {
+		setPosition(nextPos);
+		return;
+	}
+	rec.boundingBox.top = m_position.y;
+	if (!m_level->collides(rec)) {
+		setPositionX(nextPos.x);
+		return;
+	}
+	rec.boundingBox.top = nextPos.y;
+	rec.boundingBox.left = m_position.x;
+	if (!m_level->collides(rec)) {
 		setPositionY(nextPos.y);
+		return;
+	}
 }
 
 void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {

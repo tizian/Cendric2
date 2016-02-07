@@ -2,15 +2,20 @@
 
 #include "global.h"
 #include "AnimatedGameObject.h"
+#include "GUI/BitmapText.h"
+#include "ResourceManager.h"
 
 // A movable game object with physics.  Abstract class
 class MovableGameObject : public virtual AnimatedGameObject {
 public:
 	MovableGameObject();
-	virtual ~MovableGameObject() {}
+	virtual ~MovableGameObject() { delete m_debugInfo; }
 
 	void updateFirst(const sf::Time& frameTime) override;
 	void update(const sf::Time& frameTime) override;
+
+	void renderAfterForeground(sf::RenderTarget& target) override;
+	void setDebugBoundingBox(const sf::Color &debugColor) override;
 	
 	void calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const;
 	void calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
@@ -41,4 +46,7 @@ protected:
 	sf::Vector2f m_relativeVelocity;
 	sf::Vector2f m_acceleration;
 	void boundVelocity(sf::Vector2f& vel) const;
+
+	// debug info
+	BitmapText* m_debugInfo = nullptr;
 };

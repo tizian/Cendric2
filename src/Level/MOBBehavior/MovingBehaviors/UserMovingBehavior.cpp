@@ -32,15 +32,11 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
+	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	if (isMovingX && level.collides(rec)) {
 		m_mainChar->setAccelerationX(0.f);
 		m_mainChar->setVelocityX(0.f);
-		if (isMovingRight) {
-			m_mainChar->setPositionX(level.getNonCollidingLeft(rec));
-		}
-		else {
-			m_mainChar->setPositionX(level.getNonCollidingRight(rec));
-		}
+		m_mainChar->setPositionX(rec.saveLeft);
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -48,6 +44,7 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;
+	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 	bool isFalling = isUpsideDown() != isMovingDown;
 	rec.checkMovingPlatforms = isFalling;
 	rec.upsideDown = isUpsideDown();
@@ -57,18 +54,12 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
 
 	if (collidesY) {
-		m_mainChar->setAccelerationY(0.f);
-		m_mainChar->setVelocityY(0.f);
 		if (isFalling) {
 			m_isGrounded = true;
 		}
-		if (isMovingDown) {
-			m_mainChar->setPositionY(level.getNonCollidingTop(rec));
-		}
-		else {
-			m_mainChar->setPositionY(level.getNonCollidingBottom(rec));
-		}
-
+		m_mainChar->setAccelerationY(0.f);
+		m_mainChar->setVelocityY(0.f);
+		m_mainChar->setPositionY(rec.saveTop);
 	}
 
 	if (std::abs(m_mainChar->getVelocity().y) > 0.f)

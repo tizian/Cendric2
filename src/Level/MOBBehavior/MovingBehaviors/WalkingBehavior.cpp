@@ -23,17 +23,13 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
+	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	bool collidesX = false;
 	if (isMovingX && level.collides(rec)) {
 		collidesX = true;
-		m_enemy->setAccelerationX(0.0f);
-		m_enemy->setVelocityX(0.0f);
-		if (isMovingRight) {
-			m_enemy->setPositionX(level.getNonCollidingLeft(rec));
-		}
-		else {
-			m_enemy->setPositionX(level.getNonCollidingRight(rec));
-		}
+		m_enemy->setAccelerationX(0.f);
+		m_enemy->setVelocityX(0.f);
+		m_enemy->setPositionX(rec.saveLeft);
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -41,23 +37,22 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;
+	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 	bool isFalling = isUpsideDown() != isMovingDown;
 	rec.checkMovingPlatforms = isFalling;
 	rec.upsideDown = isUpsideDown();
+
+	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
 	bool collidesY = level.collides(rec);
-	m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
+	m_enemy->setRelativeVelocity(rec.gainedRelativeVelocity);
+
 	if (collidesY) {
-		m_enemy->setAccelerationY(0.0);
-		m_enemy->setVelocityY(0.0f);
 		if (isFalling) {
 			m_isGrounded = true;
 		}
-		if (isMovingDown) {
-			m_enemy->setPositionY(level.getNonCollidingTop(rec));
-		}
-		else {
-			m_enemy->setPositionY(level.getNonCollidingBottom(rec));
-		}
+		m_enemy->setAccelerationY(0.f);
+		m_enemy->setVelocityY(0.f);
+		m_enemy->setPositionY(rec.saveTop);
 	}
 
 	m_jumps = false;
@@ -68,8 +63,8 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// checks if the enemy falls would fall deeper than it can jump. 
 	if (!collidesX && isMovingX && level.fallsDeep(bb, m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
-		m_enemy->setAccelerationX(0.0f);
-		m_enemy->setVelocityX(0.0f);
+		m_enemy->setAccelerationX(0.f);
+		m_enemy->setVelocityX(0.f);
 		m_enemy->setPositionX(oldPositionX);
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
 	}

@@ -53,6 +53,12 @@ void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) con
 bool Map::collides(WorldCollisionQueryRecord& rec) const {
 	// additional : check for collision with map rect (y axis)
 	if (rec.boundingBox.top < m_mapData.mapRect.top || rec.boundingBox.top + rec.boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height) {
+		if (rec.collisionDirection == CollisionDirection::Down) {
+			rec.saveTop = m_worldData->mapRect.top + m_worldData->mapRect.height - rec.boundingBox.height;
+		}
+		if (rec.collisionDirection == CollisionDirection::Up) {
+			rec.saveTop = m_worldData->mapRect.top;
+		}
 		return true;
 	}
 	return World::collides(rec);

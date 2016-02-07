@@ -35,15 +35,11 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
+	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	if (isMovingX && m_map->collides(rec)) {
-		setAccelerationX(0.0f);
-		setVelocityX(0.0f);
-		if (isMovingRight) {
-			setPositionX(m_map->getNonCollidingLeft(rec));
-		}
-		else {
-			setPositionX(m_map->getNonCollidingRight(rec));
-		}
+		setAccelerationX(0.f);
+		setVelocityX(0.f);
+		setPositionX(rec.saveLeft);
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -51,15 +47,11 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;
+	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 	if (isMovingY && m_map->collides(rec)) {
-		setAccelerationY(0.0);
-		setVelocityY(0.0f);
-		if (isMovingDown) {
-			setPositionY(m_map->getNonCollidingTop(rec));
-		}
-		else {
-			setPositionY(m_map->getNonCollidingBottom(rec));
-		}
+		setAccelerationY(0.f);
+		setVelocityY(0.f);
+		setPositionY(rec.saveTop);
 	}
 }
 
@@ -154,15 +146,15 @@ void MapMainCharacter::load() {
 }
 
 void MapMainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
-	if (getAcceleration().x == 0.0f) {
-		nextVel.x = 0;
+	if (getAcceleration().x == 0.f) {
+		nextVel.x = 0.f;
 	}
 	else {
 		nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds());
 	}
 
-	if (getAcceleration().y == 0.0f) {
-		nextVel.y = 0;
+	if (getAcceleration().y == 0.f) {
+		nextVel.y = 0.f;
 	}
 	else {
 		nextVel.y = (getVelocity().y + getAcceleration().y * frameTime.asSeconds());
@@ -170,15 +162,15 @@ void MapMainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf:
 }
 
 float MapMainCharacter::getConfiguredMaxVelocityYUp() const {
-	return 200.0f;
+	return 200.f;
 }
 
 float MapMainCharacter::getConfiguredMaxVelocityYDown() const {
-	return 200.0f;
+	return 200.f;
 }
 
 float MapMainCharacter::getConfiguredMaxVelocityX() const {
-	return 200.0f;
+	return 200.f;
 }
 
 GameObjectType MapMainCharacter::getConfiguredType() const {

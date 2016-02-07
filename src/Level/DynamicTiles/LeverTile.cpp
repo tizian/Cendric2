@@ -77,9 +77,11 @@ void LeverTile::setDependantTiles(const std::vector<SwitchableTile*>& dependentT
 }
 
 void LeverTile::switchLever() {
+	WorldCollisionQueryRecord rec;
 	for (auto& tile : m_dependentTiles) {
 		if (tile->getGameObjectState() == GameObjectState::On) continue;
-		if (m_level->collidesWithMobs(*tile->getBoundingBox())) {
+		rec.boundingBox = *tile->getBoundingBox();
+		if (m_level->collidesWithMobs(rec)) {
 			g_logger->logInfo("LeverTile::switchLever", "Cannot switch the lever as it would stuck a MOB!");
 			m_screen->setTooltipText(g_textProvider->getText("LeverStuck"), sf::Color::Red, true);
 			return;

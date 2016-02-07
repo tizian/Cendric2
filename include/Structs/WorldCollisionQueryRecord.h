@@ -4,6 +4,14 @@
 
 class GameObject;
 
+enum class CollisionDirection {
+	VOID,
+	Up,
+	Left,
+	Down,
+	Right
+};
+
 /*
 used by movable game objects to check a collision with the world.
 */
@@ -26,4 +34,11 @@ struct WorldCollisionQueryRecord {
 	bool checkMovingPlatforms = false;
 	// is anti gravity for the object on?
 	bool upsideDown = false;
+
+	// what direction are we checking? 
+	// Down and Down will yield a value in "safe top"
+	// Left and Right will yield a value in "safe left"
+	CollisionDirection collisionDirection = CollisionDirection::VOID;
+	float saveTop = -1.f;
+	float saveLeft = -1.f;
 };

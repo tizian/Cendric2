@@ -38,12 +38,6 @@ public:
 	const TileMap* getForegroundTileMap() const;
 
 	virtual bool collides(WorldCollisionQueryRecord& rec) const;
-	// returns the first non-colliding location in the specific direction, floored.
-	// these locations refer to the top left location of the bounding box.
-	float getNonCollidingTop(const WorldCollisionQueryRecord& rec) const;
-	float getNonCollidingBottom(const WorldCollisionQueryRecord& rec) const;
-	float getNonCollidingLeft(const WorldCollisionQueryRecord& rec) const;
-	float getNonCollidingRight(const WorldCollisionQueryRecord& rec) const;
 	
 	// deletes the world resources
 	virtual void dispose();

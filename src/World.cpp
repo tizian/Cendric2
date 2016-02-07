@@ -51,6 +51,12 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 	const sf::FloatRect& bb = rec.boundingBox;
 	// check for collision with map rect (x axis. y axis is not checked in levels, only in maps)
 	if (bb.left < m_worldData->mapRect.left || bb.left + bb.width > m_worldData->mapRect.left + m_worldData->mapRect.width) {
+		if (rec.collisionDirection == CollisionDirection::Right) {
+			rec.saveLeft = m_worldData->mapRect.left + m_worldData->mapRect.width - bb.width;
+		} 
+		if (rec.collisionDirection == CollisionDirection::Left) {
+			rec.saveLeft = m_worldData->mapRect.left;
+		}
 		return true;
 	}
 
@@ -70,56 +76,24 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 				continue;
 			}
 			if (m_worldData->collidableTilePositions[y][x]) {
+				if (rec.collisionDirection == CollisionDirection::Right) {
+					rec.saveLeft = x * TILE_SIZE_F - bb.width;
+				}
+				if (rec.collisionDirection == CollisionDirection::Left) {
+					rec.saveLeft = (x + 1) * TILE_SIZE_F;
+				}
+				if (rec.collisionDirection == CollisionDirection::Up) {
+					rec.saveTop = (y + 1) * TILE_SIZE_F;
+				}
+				if (rec.collisionDirection == CollisionDirection::Down) {
+					rec.saveTop = y * TILE_SIZE_F - bb.height;
+				}
 				return true;
 			}
 		}
 	}
 
 	return false;
-}
-
-float World::getNonCollidingTop(const WorldCollisionQueryRecord& rec) const {
-	WorldCollisionQueryRecord rec2 = rec;
-	sf::FloatRect& bb = rec2.boundingBox;
-	bb.top = std::floor(bb.top);
-
-	while (bb.top > 0.f && collides(rec2)) {
-		bb.top -= 1.f;
-	}
-	return bb.top;
-}
-
-float World::getNonCollidingBottom(const WorldCollisionQueryRecord& rec) const {
-	WorldCollisionQueryRecord rec2 = rec;
-	sf::FloatRect& bb = rec2.boundingBox;
-	bb.top = std::ceil(bb.top);
-
-	while (bb.top + bb.height < m_worldData->mapRect.height && collides(rec2)) {
-		bb.top += 1.f;
-	}
-	return bb.top;
-}
-
-float World::getNonCollidingLeft(const WorldCollisionQueryRecord& rec) const {
-	WorldCollisionQueryRecord rec2 = rec;
-	sf::FloatRect& bb = rec2.boundingBox;
-	bb.left = std::floor(bb.left);
-
-	while (bb.left > 0.f && collides(rec2)) {
-		bb.left -= 1.f;
-	}
-	return bb.left;
-}
-
-float World::getNonCollidingRight(const WorldCollisionQueryRecord& rec) const {
-	WorldCollisionQueryRecord rec2 = rec;
-	sf::FloatRect& bb = rec2.boundingBox;
-	bb.left = std::ceil(bb.left);
-
-	while (bb.left + bb.width < m_worldData->mapRect.width && collides(rec2)) {
-		bb.left += 1.f;
-	}
-	return bb.left;
 }
 
 const std::string& World::getID() const {

@@ -15,6 +15,25 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 	setPosition(position);
 	calculateNextVelocity(frameTime, m_velocity);
 	AnimatedGameObject::update(frameTime);
+	if (m_debugInfo) {
+		m_debugInfo->setString("x: " + std::to_string(getPosition().x) + " y: " + std::to_string(getPosition().y));
+		m_debugInfo->setPosition(getPosition() + sf::Vector2f(0.f, -30.f));
+	}
+}
+
+void MovableGameObject::setDebugBoundingBox(const sf::Color &debugColor) {
+	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
+	GameObject::setDebugBoundingBox(debugColor);
+	delete m_debugInfo;
+	m_debugInfo = new BitmapText();
+	m_debugInfo->setColor(sf::Color::Red);
+}
+
+void MovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
+	GameObject::renderAfterForeground(target);
+	if (m_debugInfo) {
+		target.draw(*m_debugInfo);
+	}
 }
 
 void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {

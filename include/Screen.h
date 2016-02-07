@@ -63,8 +63,8 @@ protected:
 	void updateObjectsFirst(GameObjectType type, const sf::Time& frameTime);
 	// updates all objects of type 'type'
 	void updateObjects(GameObjectType type, const sf::Time& frameTime);
-	// depth sorts all objects (y coord asc) of type 'type'
-	void depthSortObjects(GameObjectType type);
+	// depth sorts all objects (y coord asc or desc) of type 'type'
+	void depthSortObjects(GameObjectType type, bool asc);
 	// render all objects of type 'type'
 	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
 	// render all objects after foreground of type 'type'

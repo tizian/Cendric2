@@ -120,13 +120,21 @@ void Screen::updateObjects(GameObjectType type, const sf::Time& frameTime) {
 	}
 }
 
-inline bool compareYCoord(const GameObject* go1, const GameObject* go2) { 
+inline bool compareYCoordAsc(const GameObject* go1, const GameObject* go2) { 
 	return (go1->getPosition().y + go1->getBoundingBox()->height < 
 		go2->getPosition().y + go2->getBoundingBox()->height);
 }
 
-void Screen::depthSortObjects(GameObjectType type) {
-	std::sort(m_objects[type].begin(), m_objects[type].end(), compareYCoord);
+inline bool compareYCoordDesc(const GameObject* go1, const GameObject* go2) {
+	return (go1->getPosition().y + go1->getBoundingBox()->height >
+		go2->getPosition().y + go2->getBoundingBox()->height);
+}
+
+void Screen::depthSortObjects(GameObjectType type, bool asc) {
+	if (asc)
+		std::sort(m_objects[type].begin(), m_objects[type].end(), compareYCoordAsc);
+	else
+		std::sort(m_objects[type].begin(), m_objects[type].end(), compareYCoordDesc);
 }
 
 void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget) {

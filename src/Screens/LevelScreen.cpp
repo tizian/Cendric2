@@ -131,20 +131,22 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_isGameOver || !m_retryButton->isVisible()) {
 		LevelExitData* leData = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
 		if (leData == nullptr) {
+			// sort Movable Tiles
+			depthSortObjects(GameObjectType::_MovableTile, false);
 			// update objects first for relative velocity
-			updateObjectsFirst(GameObjectType::_MovingPlatform, frameTime);
+			updateObjectsFirst(GameObjectType::_MovableTile, frameTime);
 			updateObjectsFirst(GameObjectType::_LevelMainCharacter, frameTime);
 			updateObjectsFirst(GameObjectType::_Enemy, frameTime);
 			updateObjectsFirst(GameObjectType::_DynamicTile, frameTime);
 			updateObjectsFirst(GameObjectType::_Spell, frameTime);
 			// and then normally
-			updateObjects(GameObjectType::_MovingPlatform, frameTime);
+			updateObjects(GameObjectType::_MovableTile, frameTime);
 			updateObjects(GameObjectType::_DynamicTile, frameTime);
 			updateObjects(GameObjectType::_Enemy, frameTime);
-			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
 			updateObjects(GameObjectType::_LevelEquipment, frameTime);
 			updateObjects(GameObjectType::_Spell, frameTime);
+			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			
 			updateObjects(GameObjectType::_Light, frameTime);
 			m_currentLevel.update(frameTime);
@@ -172,7 +174,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	m_currentLevel.setWorldView(renderTarget, focus);
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default);
 	sf::View oldView = renderTarget.getView();
-	renderObjects(GameObjectType::_MovingPlatform, renderTarget);
+	renderObjects(GameObjectType::_MovableTile, renderTarget);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_LevelMainCharacter, renderTarget);
@@ -214,7 +216,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);
-	renderObjectsAfterForeground(GameObjectType::_MovingPlatform, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_MovableTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelMainCharacter, renderTarget);

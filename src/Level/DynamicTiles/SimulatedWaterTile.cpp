@@ -294,8 +294,9 @@ void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
 void SimulatedWaterTile::freeze(int index) {
 	if (index >= 0 && index < m_nTiles) {
 		// check if this water tile can be frozen or if a mob is in the way
-		sf::FloatRect boundingBox(m_x + index * TILE_SIZE, m_y, static_cast<float>(TILE_SIZE), TILE_SIZE_F);
-		if (m_level->collidesWithMobs(boundingBox)) {
+		WorldCollisionQueryRecord rec;
+		rec.boundingBox = sf::FloatRect(m_x + index * TILE_SIZE, m_y, static_cast<float>(TILE_SIZE), TILE_SIZE_F);
+		if (m_level->collidesWithMobs(rec)) {
 			g_logger->logInfo("SimulatedWaterTile::freeze", "Cannot freeze this tile as it would stuck a MOB!");
 			return;
 		}

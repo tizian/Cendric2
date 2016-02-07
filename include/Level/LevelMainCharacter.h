@@ -16,10 +16,6 @@ public:
 	~LevelMainCharacter();
 
 	void load();
-	
-	void update(const sf::Time& frameTime) override;
-	void renderAfterForeground(sf::RenderTarget& target) override;
-	void setDebugBoundingBox(const sf::Color &debugColor) override;
 
 	MovingBehavior* createMovingBehavior() override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly = false) override;
@@ -52,7 +48,4 @@ private:
 	int m_invisibilityLevel = 0;
 
 	void handleAttackInput();
-
-	// debug info
-	BitmapText* m_debugInfo = nullptr;
 };

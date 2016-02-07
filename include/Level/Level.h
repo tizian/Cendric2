@@ -39,7 +39,7 @@ public:
 	// checks for collisions with those specific dynamic tiles
 	bool collidesWithDynamicTiles(const sf::FloatRect* boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
 	// checks for collisions with mobs (enemies and level main character)
-	bool collidesWithMobs(const sf::FloatRect& boundingBox) const;
+	bool collidesWithMobs(WorldCollisionQueryRecord& rec) const;
 
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const;
 	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect* boundingBox) const;
@@ -48,7 +48,7 @@ private:
 	// data loaded by the level loader
 	LevelData m_levelData;
 	std::vector<GameObject*>* m_dynamicTiles;
-	std::vector<GameObject*>* m_movingPlatforms;
+	std::vector<GameObject*>* m_movableTiles;
 
 	SpeedupPullCamera* m_camera;
 	const float CAMERA_WINDOW_WIDTH = 200.f;

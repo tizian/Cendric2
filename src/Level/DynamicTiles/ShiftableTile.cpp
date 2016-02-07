@@ -35,43 +35,34 @@ void ShiftableTile::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	m_pushAcceleration = 0.f;
-
-	if (m_debugInfo) {
-		m_debugInfo->setString("x: " + std::to_string(getPosition().x) + " y: " + std::to_string(getPosition().y));
-		m_debugInfo->setPosition(getPosition() + sf::Vector2f(0.f, -30.f));
-	}
 }
 
 void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
 	sf::Vector2f nextPos;
 	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
-	nextPos.y = m_position.y + (m_relativeVelocity.y + 50.f) * frameTime.asSeconds();
+	nextPos.y = m_position.y + m_relativeVelocity.y * frameTime.asSeconds();
 	WorldCollisionQueryRecord rec;
 	rec.excludedGameObject = this;
 	rec.ignoreMobs = false;
+	rec.checkMovingPlatforms = true;
 	rec.boundingBox = *getBoundingBox();
 	rec.boundingBox.left = nextPos.x;
-	if (!m_level->collides(rec))
-		setPositionX(nextPos.x);
-
 	rec.boundingBox.top = nextPos.y;
-	if (!m_level->collides(rec))
+	if (!m_level->collides(rec)) {
+		setPosition(nextPos);
+		return;
+	}
+	rec.boundingBox.top = m_position.y;
+	if (!m_level->collides(rec)) {
+		setPositionX(nextPos.x);
+		return;
+	}
+	rec.boundingBox.top = nextPos.y;
+	rec.boundingBox.left = m_position.x;
+	if (!m_level->collides(rec)) {
 		setPositionY(nextPos.y);
-}
-
-void ShiftableTile::setDebugBoundingBox(const sf::Color &debugColor) {
-	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
-	LevelDynamicTile::setDebugBoundingBox(debugColor);
-	delete m_debugInfo;
-	m_debugInfo = new BitmapText();
-	m_debugInfo->setColor(sf::Color::Red);
-}
-
-void ShiftableTile::renderAfterForeground(sf::RenderTarget& target) {
-	LevelDynamicTile::renderAfterForeground(target);
-	if (m_debugInfo) {
-		target.draw(*m_debugInfo);
+		return;
 	}
 }
 
@@ -94,14 +85,14 @@ void ShiftableTile::onHit(Spell* spell) {
 }
 
 GameObjectType ShiftableTile::getConfiguredType() const {
-	return LevelDynamicTile::getConfiguredType();
+	return GameObjectType::_MovableTile;
 }
 
 void ShiftableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
 	// distinguish damping in the air and at the ground
 	float dampingPerSec = (getVelocity().y == 0.0f) ? DAMPING_GROUND : DAMPING_AIR;
 	// don't damp when there is active acceleration 
-	if (getAcceleration().x != 0.0f) dampingPerSec = 0;
+	if (getAcceleration().x != 0.f) dampingPerSec = 0;
 	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
@@ -120,17 +111,13 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
+	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	bool collidesX = isMovingX && m_level->collides(rec);
 
 	if (collidesX) {
 		setAccelerationX(0.f);
 		setVelocityX(0.f);
-		if (isMovingRight) {
-			setPositionX(m_level->getNonCollidingLeft(rec));
-		}
-		else {
-			setPositionX(m_level->getNonCollidingRight(rec));
-		}
+		setPositionX(rec.saveLeft);
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -138,19 +125,14 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;
+	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 	rec.checkMovingPlatforms = isMovingDown;
 	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
 	bool collidesY = m_level->collides(rec);
-	if (isMovingDown) setRelativeVelocity(rec.gainedRelativeVelocity);
+	setRelativeVelocity(rec.gainedRelativeVelocity);
 	if (collidesY) {
 		setAccelerationY(0.f);
-		setVelocityY(0.0f);
-		if (isMovingDown) {
-			float bla = m_level->getNonCollidingTop(rec);
-			setPositionY(bla);
-		}
-		else {
-			setPositionY(m_level->getNonCollidingBottom(rec));
-		}
+		setVelocityY(0.f);
+		setPositionY(rec.saveTop);
 	}
 }

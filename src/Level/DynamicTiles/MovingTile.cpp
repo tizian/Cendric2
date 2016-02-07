@@ -14,7 +14,6 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 	m_distanceTime = data.speed == 0 ? sf::Time::Zero : sf::seconds(static_cast<float>(data.distance) / static_cast<float>(data.speed));
 	m_timeUntilTurn = m_distanceTime;
 
-	m_isOnHold = false;
 	setFrozen(data.isFrozen);
 }
 
@@ -62,7 +61,7 @@ void MovingTile::loadAnimation(int skinNr) {
 }
 
 void MovingTile::update(const sf::Time& frameTime) {
-	if (!(m_isFrozen || m_isOnHold)) {
+	if (!m_isFrozen) {
 		updateTime(m_timeUntilTurn, frameTime);
 		if (m_timeUntilTurn == sf::Time::Zero) {
 			m_timeUntilTurn = m_distanceTime;
@@ -70,10 +69,6 @@ void MovingTile::update(const sf::Time& frameTime) {
 			setRelativeVelocity(m_currentVelocity);
 		}
 		MovableGameObject::update(frameTime);
-	}
-	if (m_debugInfo) {
-		m_debugInfo->setString("x: " + std::to_string(getPosition().x) + " y: " + std::to_string(getPosition().y));
-		m_debugInfo->setPosition(getPosition() + sf::Vector2f(0.f, -30.f));
 	}
 }
 
@@ -104,24 +99,8 @@ void MovingTile::setPosition(const sf::Vector2f& position) {
 	}
 }
 
-void MovingTile::setDebugBoundingBox(const sf::Color &debugColor) {
-	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
-	LevelDynamicTile::setDebugBoundingBox(debugColor);
-	delete m_debugInfo;
-	m_debugInfo = new BitmapText();
-	m_debugInfo->setColor(sf::Color::Red);
-}
-
-void MovingTile::renderAfterForeground(sf::RenderTarget& target) {
-	LevelDynamicTile::renderAfterForeground(target);
-	if (m_debugInfo) {
-		target.draw(*m_debugInfo);
-	}
-}
-
-
 GameObjectType MovingTile::getConfiguredType() const {
-	return GameObjectType::_MovingPlatform;
+	return GameObjectType::_MovableTile;
 }
 
 void MovingTile::onHit(Spell* spell) {
@@ -141,6 +120,6 @@ void MovingTile::onHit(Spell* spell) {
 
 void MovingTile::setFrozen(bool frozen) {
 	m_isFrozen = frozen;
-	setRelativeVelocity(m_isOnHold ? sf::Vector2f() : m_currentVelocity);
+	setRelativeVelocity(m_isFrozen ? sf::Vector2f() : m_currentVelocity);
 	setPosition(getPosition());
 }

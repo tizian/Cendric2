@@ -11,7 +11,6 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 LevelMainCharacter::~LevelMainCharacter() {
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
 	m_spellKeyMap.clear();
-	delete m_debugInfo;
 }
 
 void LevelMainCharacter::load() {
@@ -187,29 +186,6 @@ void LevelMainCharacter::addDamage(int damage, DamageType damageType) {
 	// damage taken will remove invisibility
 	setInvisibilityLevel(0);
 	LevelMovableGameObject::addDamage(damage, damageType);
-}
-
-void LevelMainCharacter::update(const sf::Time& frameTime) {
-	LevelMovableGameObject::update(frameTime);
-	if (m_debugInfo) {
-		m_debugInfo->setString("x: " + std::to_string(getPosition().x) + " y: " + std::to_string(getPosition().y));
-		m_debugInfo->setPosition(getPosition() + sf::Vector2f(0.f, -30.f));
-	}
-}
-
-void LevelMainCharacter::renderAfterForeground(sf::RenderTarget& target) {
-	LevelMovableGameObject::renderAfterForeground(target);
-	if (m_debugInfo) {
-		target.draw(*m_debugInfo);
-	}
-}
-
-void LevelMainCharacter::setDebugBoundingBox(const sf::Color &debugColor) {
-	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
-	LevelMovableGameObject::setDebugBoundingBox(debugColor);
-	delete m_debugInfo;
-	m_debugInfo = new BitmapText();
-	m_debugInfo->setColor(sf::Color::Red);
 }
 
 void LevelMainCharacter::loadAnimation() {

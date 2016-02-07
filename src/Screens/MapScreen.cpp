@@ -43,7 +43,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	if (data == nullptr || m_isOnLevelEntry) {
 		m_isOnLevelEntry = (data != nullptr);
 		updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
-		depthSortObjects(GameObjectType::_MapMovableGameObject);
+		depthSortObjects(GameObjectType::_MapMovableGameObject, true);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_Light, frameTime);
 		m_currentMap.update(frameTime);
