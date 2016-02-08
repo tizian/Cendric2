@@ -24,10 +24,12 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	m_movingBehavior->update(frameTime);
 	m_attackingBehavior->update(frameTime);
 
-	m_level->collideWithDynamicTiles(this, getBoundingBox());
+	m_level->collideWithDynamicTiles(this, *getBoundingBox());
 	m_spellManager->update(frameTime);
 
 	MovableGameObject::update(frameTime);
+
+	checkForCollisionPanic();
 
 	if (!m_isDead) {
 		updateAttributes(frameTime);
@@ -35,31 +37,14 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	setAccelerationX(0.f);
 }
 
-void LevelMovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
-	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
-	sf::Vector2f nextPos;
-	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
-	nextPos.y = m_position.y + m_relativeVelocity.y * frameTime.asSeconds();
+void LevelMovableGameObject::checkForCollisionPanic() {
 	WorldCollisionQueryRecord rec;
-	rec.ignoreDynamicTiles = m_movingBehavior->isIgnoreDynamicTiles();
-	rec.checkMovingPlatforms = true;
 	rec.boundingBox = *getBoundingBox();
-	rec.boundingBox.left = nextPos.x;
-	rec.boundingBox.top = nextPos.y;
-	if (!m_level->collides(rec)) {
-		setPosition(nextPos);
-		return;
-	}
-	rec.boundingBox.top = m_position.y;
-	if (!m_level->collides(rec)) {
-		setPositionX(nextPos.x);
-		return;
-	}
-	rec.boundingBox.top = nextPos.y;
-	rec.boundingBox.left = m_position.x;
-	if (!m_level->collides(rec)) {
-		setPositionY(nextPos.y);
-		return;
+	rec.ignoreDynamicTiles = m_movingBehavior->isIgnoreDynamicTiles();
+	if (m_level->collides(rec)) {
+		m_boundingBox.height = 0.f;
+		m_boundingBox.width = 0.f;
+		setDead();
 	}
 }
 

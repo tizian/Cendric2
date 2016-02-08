@@ -35,34 +35,13 @@ void ShiftableTile::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	m_pushAcceleration = 0.f;
-}
 
-void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
-	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
-	sf::Vector2f nextPos;
-	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
-	nextPos.y = m_position.y + m_relativeVelocity.y * frameTime.asSeconds();
+	// check for collision panic
 	WorldCollisionQueryRecord rec;
-	rec.excludedGameObject = this;
-	rec.ignoreMobs = false;
-	rec.checkMovingPlatforms = true;
 	rec.boundingBox = *getBoundingBox();
-	rec.boundingBox.left = nextPos.x;
-	rec.boundingBox.top = nextPos.y;
-	if (!m_level->collides(rec)) {
-		setPosition(nextPos);
-		return;
-	}
-	rec.boundingBox.top = m_position.y;
-	if (!m_level->collides(rec)) {
-		setPositionX(nextPos.x);
-		return;
-	}
-	rec.boundingBox.top = nextPos.y;
-	rec.boundingBox.left = m_position.x;
-	if (!m_level->collides(rec)) {
-		setPositionY(nextPos.y);
-		return;
+	rec.excludedGameObject = this;
+	if (m_level->collides(rec)) {
+		setDisposed();
 	}
 }
 
@@ -102,22 +81,23 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	WorldCollisionQueryRecord rec;
+
 	rec.excludedGameObject = this;
 	rec.ignoreMobs = false;
 
-	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
-	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingDown = nextPosition.y > bb.top;
 	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-	bool collidesX = isMovingX && m_level->collides(rec);
+	bool collidesX = m_level->collides(rec);
 
 	if (collidesX) {
 		setAccelerationX(0.f);
 		setVelocityX(0.f);
-		setPositionX(rec.saveLeft);
+		setPositionX(rec.safeLeft);
+		nextBoundingBoxY.left = rec.safeLeft;
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -133,6 +113,6 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (collidesY) {
 		setAccelerationY(0.f);
 		setVelocityY(0.f);
-		setPositionY(rec.saveTop);
+		setPositionY(rec.safeTop);
 	}
 }

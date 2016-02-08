@@ -26,17 +26,17 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
-	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
-	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingDown = nextPosition.y > bb.top;
 	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-	if (isMovingX && level.collides(rec)) {
-		m_mainChar->setAccelerationX(0.f);
-		m_mainChar->setVelocityX(0.f);
-		m_mainChar->setPositionX(rec.saveLeft);
+	if (level.collides(rec)) {
+		m_mob->setAccelerationX(0.f);
+		m_mob->setVelocityX(0.f);
+		m_mob->setPositionX(rec.safeLeft);
+		nextBoundingBoxY.left = rec.safeLeft;
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -59,7 +59,7 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 		m_mainChar->setAccelerationY(0.f);
 		m_mainChar->setVelocityY(0.f);
-		m_mainChar->setPositionY(rec.saveTop);
+		m_mainChar->setPositionY(rec.safeTop);
 	}
 
 	if (std::abs(m_mainChar->getVelocity().y) > 0.f)

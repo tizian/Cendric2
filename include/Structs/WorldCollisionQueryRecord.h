@@ -35,10 +35,11 @@ struct WorldCollisionQueryRecord {
 	// is anti gravity for the object on?
 	bool upsideDown = false;
 
-	// what direction are we checking? 
+	// what direction are we checking? this direction is set by the world and calculated
+	// by the mob velocity and the relative velocity of collisions it encounters.
 	// Down and Down will yield a value in "safe top"
-	// Left and Right will yield a value in "safe left"
+	// Left and Right will yield a value in "safe left" 
 	CollisionDirection collisionDirection = CollisionDirection::VOID;
-	float saveTop = -1.f;
-	float saveLeft = -1.f;
+	float safeTop = -1.f;
+	float safeLeft = -1.f;
 };

@@ -57,4 +57,8 @@ protected:
 	TileMap m_foregroundTileMap;
 
 	Screen* m_screen;
+
+	// helper method to calculate safe collision locations, regarding the collider bounding box 'bb'
+	// the record is updated with this safe values
+	void calculateCollisionLocations(WorldCollisionQueryRecord& rec, const sf::FloatRect& bb) const;
 };

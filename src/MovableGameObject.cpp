@@ -46,8 +46,8 @@ void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
 
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const {
 	sf::Vector2f nextVel;
-	calculateNextVelocity(frameTime, nextVel);
-	nextPos.x = m_position.x + nextVel.x * frameTime.asSeconds();
+	calculateNextVelocity(frameTime, nextVel); 
+	nextPos.x = m_position.x + nextVel.x * frameTime.asSeconds(); 
 	nextPos.y = m_position.y + nextVel.y * frameTime.asSeconds();
 }
 

@@ -17,7 +17,6 @@ void LightObject::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2.f * m_lightData.radius.x, 2.f * m_lightData.radius.y));
 
 	setPosition(m_lightData.center);
-	setDebugBoundingBox(sf::Color(255, 255, 0, 100));
 }
 
 GameObjectType LightObject::getConfiguredType() const {

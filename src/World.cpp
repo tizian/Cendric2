@@ -52,10 +52,10 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 	// check for collision with map rect (x axis. y axis is not checked in levels, only in maps)
 	if (bb.left < m_worldData->mapRect.left || bb.left + bb.width > m_worldData->mapRect.left + m_worldData->mapRect.width) {
 		if (rec.collisionDirection == CollisionDirection::Right) {
-			rec.saveLeft = m_worldData->mapRect.left + m_worldData->mapRect.width - bb.width;
+			rec.safeLeft = m_worldData->mapRect.left + m_worldData->mapRect.width - bb.width;
 		} 
 		if (rec.collisionDirection == CollisionDirection::Left) {
-			rec.saveLeft = m_worldData->mapRect.left;
+			rec.safeLeft = m_worldData->mapRect.left;
 		}
 		return true;
 	}
@@ -77,16 +77,16 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 			}
 			if (m_worldData->collidableTilePositions[y][x]) {
 				if (rec.collisionDirection == CollisionDirection::Right) {
-					rec.saveLeft = x * TILE_SIZE_F - bb.width;
+					rec.safeLeft = x * TILE_SIZE_F - bb.width;
 				}
 				if (rec.collisionDirection == CollisionDirection::Left) {
-					rec.saveLeft = (x + 1) * TILE_SIZE_F;
+					rec.safeLeft = (x + 1) * TILE_SIZE_F;
 				}
 				if (rec.collisionDirection == CollisionDirection::Up) {
-					rec.saveTop = (y + 1) * TILE_SIZE_F;
+					rec.safeTop = (y + 1) * TILE_SIZE_F;
 				}
 				if (rec.collisionDirection == CollisionDirection::Down) {
-					rec.saveTop = y * TILE_SIZE_F - bb.height;
+					rec.safeTop = y * TILE_SIZE_F - bb.height;
 				}
 				return true;
 			}
@@ -94,6 +94,21 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 	}
 
 	return false;
+}
+
+void World::calculateCollisionLocations(WorldCollisionQueryRecord& rec, const sf::FloatRect& bb) const {
+	if (rec.collisionDirection == CollisionDirection::Right) {
+		rec.safeLeft = bb.left - rec.boundingBox.width;
+	}
+	if (rec.collisionDirection == CollisionDirection::Left) {
+		rec.safeLeft = bb.left + bb.width;
+	}
+	if (rec.collisionDirection == CollisionDirection::Up) {
+		rec.safeTop = bb.top + bb.height;
+	}
+	if (rec.collisionDirection == CollisionDirection::Down) {
+		rec.safeTop = bb.top - rec.boundingBox.height;
+	}
 }
 
 const std::string& World::getID() const {

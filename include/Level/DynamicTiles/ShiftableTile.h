@@ -12,7 +12,6 @@ public:
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 	void updateFirst(const sf::Time& frameTime) override { MovableGameObject::updateFirst(frameTime); }
-	void updateRelativeVelocity(const sf::Time& frameTime) override;
 
 	void renderAfterForeground(sf::RenderTarget& target) override { MovableGameObject::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color &debugColor) override { MovableGameObject::setDebugBoundingBox(debugColor); }

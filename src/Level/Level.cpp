@@ -131,41 +131,49 @@ bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight
 	return false;
 }
 
+bool Level::collidesUnsureX(WorldCollisionQueryRecord& rec) const {
+	// check collidable movable tiles
+	for (GameObject* go : *m_movableTiles) {
+		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
+		if (tile->getDynamicTileID() == LevelDynamicTileID::Moving) continue;
+		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+			MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile);
+			rec.collisionDirection = mob->getRelativeVelocity().x > 0.f ? CollisionDirection::Left : CollisionDirection::Right;
+			calculateCollisionLocations(rec, tileBB);
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	// additional : check for collision with map rect (y axis)
 	// a game object in a level can go until we don't see it anymore on the y axis. (further than only map rect collision)
-	if (rec.boundingBox.top - rec.boundingBox.height < m_levelData.mapRect.top || rec.boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height) {
+	if (rec.boundingBox.top + rec.boundingBox.height < m_levelData.mapRect.top || rec.boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height) {
 		if (rec.collisionDirection == CollisionDirection::Up) {
-			rec.saveTop = m_worldData->mapRect.top - rec.boundingBox.height;
+			rec.safeTop = m_worldData->mapRect.top - rec.boundingBox.height;
 		}
 		if (rec.collisionDirection == CollisionDirection::Down) {
-			rec.saveTop = m_worldData->mapRect.top + m_worldData->mapRect.height;
+			rec.safeTop = m_worldData->mapRect.top + m_worldData->mapRect.height;
 		}
-		return true;
-	}
-	if (World::collides(rec)) {
 		return true;
 	}
 
+	if (World::collides(rec)) {
+		return true;
+	}
+	
 	// check collidable dynamic tiles
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
 
 		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile != rec.excludedGameObject && tile->getIsCollidable() && tileBB.intersects(rec.boundingBox)) {
-			if (rec.collisionDirection == CollisionDirection::Right) {
-				rec.saveLeft = tileBB.left - rec.boundingBox.width;
-			}
-			if (rec.collisionDirection == CollisionDirection::Left) {
-				rec.saveLeft = tileBB.left + tileBB.width;
-			}
-			if (rec.collisionDirection == CollisionDirection::Up) {
-				rec.saveTop = tileBB.top + tileBB.height;
-			}
-			if (rec.collisionDirection == CollisionDirection::Down) {
-				rec.saveTop = tileBB.top - rec.boundingBox.height;
-			}
+		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+			calculateCollisionLocations(rec, tileBB);
 			return true;
 		}
 	}
@@ -175,22 +183,20 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 		if (tile->getDynamicTileID() == LevelDynamicTileID::Moving) continue;
 		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile != rec.excludedGameObject && tile->getIsCollidable() && tileBB.intersects(rec.boundingBox)) {
-			if (MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile)) {
-				// used by shiftable blocks and unstable blocks
-				rec.gainedRelativeVelocity = mob->getRelativeVelocity();
+		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+			MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile);
+			rec.gainedRelativeVelocity = mob->getRelativeVelocity();
+
+			calculateCollisionLocations(rec, tileBB);
+
+			// did we really decide correctly?
+			if ((rec.collisionDirection == CollisionDirection::Left || rec.collisionDirection == CollisionDirection::Right) && std::abs(rec.safeLeft - rec.boundingBox.left) > TILE_SIZE_F / 2.f) {
+				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Left ? CollisionDirection::Right : CollisionDirection::Left;
+				calculateCollisionLocations(rec, tileBB);
 			}
-			if (rec.collisionDirection == CollisionDirection::Right) {
-				rec.saveLeft = tileBB.left - rec.boundingBox.width;
-			}
-			if (rec.collisionDirection == CollisionDirection::Left) {
-				rec.saveLeft = tileBB.left + tileBB.width;
-			}
-			if (rec.collisionDirection == CollisionDirection::Up) {
-				rec.saveTop = tileBB.top + tileBB.height;
-			}
-			if (rec.collisionDirection == CollisionDirection::Down) {
-				rec.saveTop = tileBB.top - rec.boundingBox.height;
+			else if ((rec.collisionDirection == CollisionDirection::Up || rec.collisionDirection == CollisionDirection::Down) && std::abs(rec.safeTop - rec.boundingBox.top) > TILE_SIZE_F / 2.f) {
+				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Down ? CollisionDirection::Up : CollisionDirection::Down;
+				calculateCollisionLocations(rec, tileBB);
 			}
 			return true;
 		}
@@ -203,16 +209,16 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 
 			if (movingTile == nullptr || movingTile == rec.excludedGameObject) continue;
 
-			sf::FloatRect checkBB = *movingTile->getBoundingBox();
+			const sf::FloatRect& checkBB = *movingTile->getBoundingBox();
 
-			if (!checkBB.intersects(rec.boundingBox)) continue;
+			if (!epsIntersect(checkBB, rec.boundingBox)) continue;
 
 			if (!rec.upsideDown) {
 				float yPos = rec.boundingBox.top + rec.boundingBox.height;
 				float movingTileY = checkBB.top;
 				if (yPos > movingTileY && yPos < movingTileY + 20.f) {
 					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
-					rec.saveTop = movingTileY - rec.boundingBox.height;
+					rec.safeTop = movingTileY - rec.boundingBox.height;
 					return true;
 				}
 			}
@@ -221,7 +227,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 				float movingTileY = checkBB.top + checkBB.height;
 				if (yPos < movingTileY && yPos > movingTileY - 20.f) {
 					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
-					rec.saveTop = movingTileY;
+					rec.safeTop = movingTileY;
 					return true;
 				}
 			}
@@ -242,87 +248,89 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec) const {
 
 	for (auto enemy : *enemies) {
 		const sf::FloatRect& mobBB = *enemy->getBoundingBox();
-		if (mobBB.intersects(rec.boundingBox)) {
-			if (rec.collisionDirection == CollisionDirection::Right) {
-				rec.saveLeft = mobBB.left - rec.boundingBox.width;
+		if (epsIntersect(mobBB, rec.boundingBox)) {
+			calculateCollisionLocations(rec, mobBB);
+			// did we really decide correctly?
+			if ((rec.collisionDirection == CollisionDirection::Left || rec.collisionDirection == CollisionDirection::Right) && std::abs(rec.safeLeft - rec.boundingBox.left) > TILE_SIZE_F / 2.f) {
+				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Left ? CollisionDirection::Right : CollisionDirection::Left;
+				calculateCollisionLocations(rec, mobBB);
 			}
-			if (rec.collisionDirection == CollisionDirection::Left) {
-				rec.saveLeft = mobBB.left + mobBB.width;
-			}
-			if (rec.collisionDirection == CollisionDirection::Up) {
-				rec.saveTop = mobBB.top + mobBB.height;
-			}
-			if (rec.collisionDirection == CollisionDirection::Down) {
-				rec.saveTop = mobBB.top - rec.boundingBox.height;
+			else if ((rec.collisionDirection == CollisionDirection::Up || rec.collisionDirection == CollisionDirection::Down) && std::abs(rec.safeTop - rec.boundingBox.top) > TILE_SIZE_F / 2.f) {
+				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Down ? CollisionDirection::Up : CollisionDirection::Down;
+				calculateCollisionLocations(rec, mobBB);
 			}
 			return true;
 		}
 	}
 
 	const sf::FloatRect& mobBB = *(*mainChar)[0]->getBoundingBox();
-	if (mobBB.intersects(rec.boundingBox)) {
-		if (rec.collisionDirection == CollisionDirection::Right) {
-			rec.saveLeft = mobBB.left - rec.boundingBox.width;
+	if (epsIntersect(mobBB, rec.boundingBox)) {
+		calculateCollisionLocations(rec, mobBB);
+		// did we really decide correctly?
+		if ((rec.collisionDirection == CollisionDirection::Left || rec.collisionDirection == CollisionDirection::Right) && std::abs(rec.safeLeft - rec.boundingBox.left) > TILE_SIZE_F / 2.f) {
+			rec.collisionDirection = rec.collisionDirection == CollisionDirection::Left ? CollisionDirection::Right : CollisionDirection::Left;
+			calculateCollisionLocations(rec, mobBB);
 		}
-		if (rec.collisionDirection == CollisionDirection::Left) {
-			rec.saveLeft = mobBB.left + mobBB.width;
-		}
-		if (rec.collisionDirection == CollisionDirection::Up) {
-			rec.saveTop = mobBB.top + mobBB.height;
-		}
-		if (rec.collisionDirection == CollisionDirection::Down) {
-			rec.saveTop = mobBB.top - rec.boundingBox.height;
+		else if ((rec.collisionDirection == CollisionDirection::Up || rec.collisionDirection == CollisionDirection::Down) && std::abs(rec.safeTop - rec.boundingBox.top) > TILE_SIZE_F / 2.f) {
+			rec.collisionDirection = rec.collisionDirection == CollisionDirection::Down ? CollisionDirection::Up : CollisionDirection::Down;
+			calculateCollisionLocations(rec, mobBB);
 		}
 		return true;
 	}
 	return false;
 }
 
-void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect* boundingBox) const {
+void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingBox) const {
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
-		if (tile != nullptr && (tile->getBoundingBox()->intersects(*boundingBox))) {
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (tile != nullptr && epsIntersect(tileBB, boundingBox)) {
 			tile->onHit(spell);
 		}
 	}
 	for (auto& it : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
-		if (tile != nullptr && (tile->getBoundingBox()->intersects(*boundingBox))) {
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (tile != nullptr && epsIntersect(tileBB, boundingBox)) {
 			tile->onHit(spell);
 		}
 	}
 }
 
-bool Level::collidesWithDynamicTiles(const sf::FloatRect* boundingBox, const std::set<LevelDynamicTileID>& tiles) const {
+bool Level::collidesWithDynamicTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const {
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (tile != nullptr &&
 			tiles.find(tile->getDynamicTileID()) != tiles.end() &&
-			(tile->getBoundingBox()->intersects(*boundingBox))) {
+			epsIntersect(tileBB, boundingBox)) {
 			return true;
 		}
 	}
 	for (auto& it : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (tile != nullptr &&
 			tiles.find(tile->getDynamicTileID()) != tiles.end() &&
-			(tile->getBoundingBox()->intersects(*boundingBox))) {
+			epsIntersect(tileBB, boundingBox)) {
 			return true;
 		}
 	}
 	return false;
 }
 
-void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect* boundingBox) const {
+void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const {
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
-		if (tile != nullptr && (tile->getBoundingBox()->intersects(*boundingBox))) {
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (tile != nullptr && epsIntersect(tileBB, boundingBox)) {
 			tile->onHit(mob);
 		}
 	}
 	for (auto& it : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
-		if (tile != nullptr && (tile->getBoundingBox()->intersects(*boundingBox))) {
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (tile != nullptr && epsIntersect(tileBB, boundingBox)) {
 			tile->onHit(mob);
 		}
 	}

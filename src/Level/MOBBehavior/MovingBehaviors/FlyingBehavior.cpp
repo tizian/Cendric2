@@ -32,7 +32,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool collidesX = false;
 	if (isMovingX &&
 		(level.collides(rec) ||
-			level.collidesWithDynamicTiles(&nextBoundingBoxX, m_avoidableTiles))) {
+			level.collidesWithDynamicTiles(nextBoundingBoxX, m_avoidableTiles))) {
 		m_enemy->setAccelerationX(0.0f);
 		m_enemy->setVelocityX(0.0f);
 		m_randomDecisionX = isMovingRight ? -1 : 1;
@@ -41,7 +41,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;
 	if (level.collides(rec) ||
-		level.collidesWithDynamicTiles(&nextBoundingBoxY, m_avoidableTiles)) {
+		level.collidesWithDynamicTiles(nextBoundingBoxY, m_avoidableTiles)) {
 		m_enemy->setAccelerationY(0.0);
 		m_enemy->setVelocityY(0.0f);
 		m_randomDecisionY = isMovingDown ? -1 : 1;

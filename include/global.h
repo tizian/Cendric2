@@ -17,6 +17,8 @@
 #define INV_PI       0.31830988618379067154f
 #define INV_TWOPI    0.15915494309189533577f
 
+#define Epsilon 1e-4f
+
 inline float radToDeg(float rad) {
 	return rad * (180.f / M_PI);
 }
@@ -35,6 +37,12 @@ inline float norm(const sf::Vector2f& v) {
 
 inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
 	return norm(v1 - v2);
+}
+
+inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
+	sf::FloatRect intersection;
+	if (!rect1.intersects(rect2, intersection)) return false;
+	return (intersection.width > Epsilon && intersection.height > Epsilon);
 }
 
 // versioning

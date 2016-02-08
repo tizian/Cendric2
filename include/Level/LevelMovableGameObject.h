@@ -18,7 +18,6 @@ public:
 	virtual ~LevelMovableGameObject();
 
 	virtual void update(const sf::Time& frameTime) override;
-	void updateRelativeVelocity(const sf::Time& frameTime) override;
 
 	// the offset to the from where a spell starts. it gets added to the spell offset defined by the spell itself. default is (0,0)
 	virtual sf::Vector2f getConfiguredSpellOffset() const;
@@ -92,4 +91,7 @@ protected:
 	// attributes, include regeneration (hp) and all buffs & dots.
 	void updateAttributes(const sf::Time& frameTime);
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
+
+	// checks whether the level mob collides anyway with something. if yes, it gets a reset and will be dead.
+	void checkForCollisionPanic();
 };

@@ -17,19 +17,19 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
-	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
-	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingDown = nextPosition.y > bb.top;
 	bool isMovingRight = nextPosition.x > bb.left;
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	bool collidesX = false;
-	if (isMovingX && level.collides(rec)) {
+	if (level.collides(rec)) {
 		collidesX = true;
-		m_enemy->setAccelerationX(0.f);
-		m_enemy->setVelocityX(0.f);
-		m_enemy->setPositionX(rec.saveLeft);
+		m_mob->setAccelerationX(0.f);
+		m_mob->setVelocityX(0.f);
+		m_mob->setPositionX(rec.safeLeft);
+		nextBoundingBoxY.left = rec.safeLeft;
 	}
 	else {
 		nextBoundingBoxY.left = nextPosition.x;
@@ -52,17 +52,17 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 		m_enemy->setAccelerationY(0.f);
 		m_enemy->setVelocityY(0.f);
-		m_enemy->setPositionY(rec.saveTop);
+		m_enemy->setPositionY(rec.safeTop);
 	}
 
 	m_jumps = false;
-	if (isMovingX && collidesX) {
+	if (collidesX) {
 		// would a jump work? 
 		m_jumps = !level.collidesAfterJump(bb, m_jumpHeight, m_isFacingRight, m_ignoreDynamicTiles);
 	}
 
 	// checks if the enemy falls would fall deeper than it can jump. 
-	if (!collidesX && isMovingX && level.fallsDeep(bb, m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
+	if (!collidesX && level.fallsDeep(bb, m_jumpHeight, m_isFacingRight, getDistanceToAbyss(), m_ignoreDynamicTiles)) {
 		m_enemy->setAccelerationX(0.f);
 		m_enemy->setVelocityX(0.f);
 		m_enemy->setPositionX(oldPositionX);

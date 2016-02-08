@@ -70,6 +70,6 @@ void ShadowTrapSpell::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (collidesY) {
 		setAccelerationY(0.f);
 		setVelocityY(0.f);
-		setPositionY(rec.saveTop);
+		setPositionY(rec.safeTop);
 	}
 }
