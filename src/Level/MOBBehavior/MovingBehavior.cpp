@@ -24,7 +24,7 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 }
 
 void MovingBehavior::checkForCollisionTilt(const sf::Vector2f& oldPosition) {
-	if (dist(oldPosition, m_mob->getPosition()) > TILE_SIZE_F/2.f + norm(m_mob->getVelocity())) {
+	if (dist(oldPosition, m_mob->getPosition()) > TILE_SIZE_F / 2.f + norm(m_mob->getVelocity())) {
 		m_mob->setPosition(oldPosition);
 		m_mob->setMovingParent(nullptr);
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
@@ -147,7 +147,7 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	if (level.collides(rec)) {
-		if (std::abs(nextPosition.x - rec.safeLeft) > m_mob->getVelocity().x + 10.f) {
+		if (std::abs(nextPosition.x - rec.safeLeft) > std::abs(m_mob->getVelocity().x) + 10.f) {
 			tryYfirst = true;
 		}
 	}

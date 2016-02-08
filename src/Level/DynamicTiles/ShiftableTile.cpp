@@ -22,6 +22,18 @@ void ShiftableTile::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
+	Animation* crumblingAnimation = new Animation();
+	crumblingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
+	for (int i = 1; i < 5; i++) {
+		crumblingAnimation->addFrame(sf::IntRect(
+			BORDER + i * (2 * BORDER + TILE_SIZE),
+			BORDER,
+			TILE_SIZE,
+			TILE_SIZE));
+	}
+
+	addAnimation(GameObjectState::Crumbling, crumblingAnimation);
+
 	// initial values
 	m_state = GameObjectState::Idle;
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
@@ -29,6 +41,14 @@ void ShiftableTile::loadAnimation(int skinNr) {
 }
 
 void ShiftableTile::update(const sf::Time& frameTime) {
+	if (m_state == GameObjectState::Crumbling) {
+		updateTime(m_crumblingTime, frameTime);
+		if (m_crumblingTime == sf::Time::Zero) {
+			setDisposed();
+		}
+		MovableGameObject::update(frameTime);
+		return;
+	}
 	setAcceleration(sf::Vector2f(m_pushAcceleration, GRAVITY_ACCELERATION));
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
@@ -61,9 +81,9 @@ GameObjectType ShiftableTile::getConfiguredType() const {
 
 void ShiftableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
 	// distinguish damping in the air and at the ground
-	float dampingPerSec = (getVelocity().y == 0.0f) ? DAMPING_GROUND : DAMPING_AIR;
+	float dampingPerSec = (getVelocity().y == 0.f) ? DAMPING_GROUND : DAMPING_AIR;
 	// don't damp when there is active acceleration 
-	if (getAcceleration().x != 0.f) dampingPerSec = 0;
+	if (getAcceleration().x != 0.f) dampingPerSec = 0.f;
 	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
@@ -86,6 +106,7 @@ void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 }
 
 void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
+	sf::Vector2f oldPosition = getPosition();
 	const sf::FloatRect& bb = *getBoundingBox();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
@@ -102,7 +123,7 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	if (m_level->collides(rec)) {
-		if (std::abs(nextPosition.x - rec.safeLeft) > getVelocity().x + 10.f) {
+		if (std::abs(nextPosition.x - rec.safeLeft) > std::abs(getVelocity().x) + 10.f) {
 			tryYfirst = true;
 		}
 	}
@@ -139,7 +160,7 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on y axis
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-		
+
 		bool collidesY = m_level->collides(rec);
 		if (collidesY) {
 			setMovingParent(rec.movingParent);
@@ -162,5 +183,13 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
 		}
+	}
+
+	if (dist(oldPosition, getPosition()) > TILE_SIZE_F / 2.f + norm(getVelocity())) {
+		setPosition(oldPosition);
+		setMovingParent(nullptr);
+		setVelocity(sf::Vector2f(0.f, 0.f));
+		setAcceleration(sf::Vector2f(0.f, 0.f));
+		setState(GameObjectState::Crumbling);
 	}
 }
