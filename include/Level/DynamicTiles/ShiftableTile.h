@@ -21,6 +21,7 @@ public:
 private:
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 	void checkCollisions(const sf::Vector2f& nextPosition);
+	void updateRelativeVelocity(const sf::Time& frameTime) override;
 
 	const float GRAVITY_ACCELERATION = 1000.f;
 	const float DAMPING_AIR = 0.7f;

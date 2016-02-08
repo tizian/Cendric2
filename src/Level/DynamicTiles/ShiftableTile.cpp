@@ -68,6 +68,23 @@ void ShiftableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Ve
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
 
+void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
+	if (m_movingParent == nullptr) return;
+	float oldPosX = m_position.x;
+	MovableGameObject::updateRelativeVelocity(frameTime);
+	float posDiffX = m_position.x - oldPosX;
+
+	// check if we hit the main char. moving tiles always have precedence
+	auto mainChar = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
+
+	LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>((*mainChar)[0]);
+	const sf::FloatRect& mobBB = *mob->getBoundingBox();
+	if (mob->getMovingParent() == getMovingParent() || mob->isDead()) return;
+	if (epsIntersect(mobBB, m_boundingBox)) {
+		mob->setPositionX(mob->getPosition().x + posDiffX);
+	}
+}
+
 void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	const sf::FloatRect& bb = *getBoundingBox();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);

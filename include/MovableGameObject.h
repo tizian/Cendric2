@@ -41,7 +41,7 @@ public:
 	MovingTile* getMovingParent() const;
 
 protected:
-	void updateRelativeVelocity(const sf::Time& frameTime);
+	virtual void updateRelativeVelocity(const sf::Time& frameTime);
 	virtual float getConfiguredMaxVelocityYUp() const;
 	virtual float getConfiguredMaxVelocityYDown() const;
 	virtual float getConfiguredMaxVelocityX() const;

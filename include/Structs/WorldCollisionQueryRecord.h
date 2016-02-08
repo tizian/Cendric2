@@ -37,4 +37,6 @@ struct WorldCollisionQueryRecord {
 	CollisionDirection collisionDirection = CollisionDirection::VOID;
 	float safeTop = -1.f;
 	float safeLeft = -1.f;
+
+	bool collides = false;
 };
