@@ -24,9 +24,9 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 }
 
 void MovingBehavior::checkForCollisionTilt(const sf::Vector2f& oldPosition) {
-	if (dist(oldPosition, m_mob->getPosition()) > TILE_SIZE_F) {
+	if (dist(oldPosition, m_mob->getPosition()) > TILE_SIZE_F/2.f + norm(m_mob->getVelocity())) {
 		m_mob->setPosition(oldPosition);
-		m_mob->setRelativeVelocity(sf::Vector2f(0.f, 0.f));
+		m_mob->setMovingParent(nullptr);
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_isCollisionTilt = true;
@@ -171,10 +171,10 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 		bool isFalling = isUpsideDown() != isMovingDown;
-		// reset relative velocity
-		rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
+		// reset moving p arent
+		rec.movingParent = nullptr;
 		collidesY = level.collides(rec);
-		m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
+		m_mob->setMovingParent(rec.movingParent);
 		if (collidesY) {
 			if (isFalling) {
 				m_isGrounded = true;
@@ -193,7 +193,7 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 		if (collidesY) {
 			if (isFalling) {
 				m_isGrounded = true;
-				m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
+				m_mob->setMovingParent(rec.movingParent);
 			}
 			m_mob->setAccelerationY(0.f);
 			m_mob->setVelocityY(0.f);

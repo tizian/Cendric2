@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 class GameObject;
+class MovingTile;
 
 enum class CollisionDirection {
 	VOID,
@@ -24,9 +25,8 @@ struct WorldCollisionQueryRecord {
 	// if set to false, the collision check will not include bounding boxes of mobs in the world.
 	// default is true.
 	bool ignoreMobs = true;
-	// this vector is set to the relative velocity of a movable game object 
-	// if the bounding box collides with it (used for moving platforms)
-	sf::Vector2f gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
+	// this is set to the moving platform parent of a movable game object if it hits one.
+	MovingTile* movingParent = nullptr;
 	// this game object will not be checked for collision
 	// used to avoid self-intersections
 	GameObject* excludedGameObject = nullptr;
@@ -37,8 +37,4 @@ struct WorldCollisionQueryRecord {
 	CollisionDirection collisionDirection = CollisionDirection::VOID;
 	float safeTop = -1.f;
 	float safeLeft = -1.f;
-
-	// is set to true when an object collides everywhere and cannot decide where to go.
-	// *PANIC*
-	bool isCollisionPanic = false;
 };

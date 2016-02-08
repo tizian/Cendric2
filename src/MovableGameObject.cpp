@@ -1,8 +1,7 @@
 #include "MovableGameObject.h"
+#include "Level/DynamicTiles/MovingTile.h"
 
 MovableGameObject::MovableGameObject() : AnimatedGameObject() {
-	m_relativeVelocity.x = 0.f;
-	m_relativeVelocity.y = 0.f;
 }
 
 void MovableGameObject::updateFirst(const sf::Time& frameTime) {
@@ -37,10 +36,10 @@ void MovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
 }
 
 void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
-	if (m_relativeVelocity.x == 0.f && m_relativeVelocity.y == 0.f) return;
+	if (m_movingParent == nullptr) return;
 	sf::Vector2f nextPos;
-	nextPos.x = m_position.x + m_relativeVelocity.x * frameTime.asSeconds();
-	nextPos.y = m_position.y + m_relativeVelocity.y * frameTime.asSeconds();
+	nextPos.x = m_position.x + m_movingParent->getRelativeVelocity().x * frameTime.asSeconds();
+	nextPos.y = m_position.y + m_movingParent->getRelativeVelocity().y * frameTime.asSeconds();
 	setPosition(nextPos);
 }
 
@@ -93,16 +92,16 @@ void MovableGameObject::setVelocity(const sf::Vector2f& velocity) {
 	m_velocity = velocity;
 }
 
+void MovableGameObject::setMovingParent(MovingTile* parent) {
+	m_movingParent = parent;
+}
+
 void MovableGameObject::setVelocityX(float velocityX) {
 	m_velocity.x = velocityX;
 }
 
 void MovableGameObject::setVelocityY(float velocityY) {
 	m_velocity.y = velocityY;
-}
-
-void MovableGameObject::setRelativeVelocity(const sf::Vector2f& relVel) {
-	m_relativeVelocity = relVel;
 }
 
 float MovableGameObject::getConfiguredMaxVelocityX() const {
@@ -121,10 +120,10 @@ const sf::Vector2f& MovableGameObject::getVelocity() const {
 	return m_velocity;
 }
 
-const sf::Vector2f& MovableGameObject::getRelativeVelocity() const {
-	return m_relativeVelocity;
-}
-
 const sf::Vector2f& MovableGameObject::getAcceleration() const {
 	return m_acceleration;
+}
+
+MovingTile* MovableGameObject::getMovingParent() const {
+	return m_movingParent;
 }

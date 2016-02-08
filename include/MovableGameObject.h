@@ -5,6 +5,8 @@
 #include "GUI/BitmapText.h"
 #include "ResourceManager.h"
 
+class MovingTile;
+
 // A movable game object with physics.  Abstract class
 class MovableGameObject : public virtual AnimatedGameObject {
 public:
@@ -29,23 +31,24 @@ public:
 	void setVelocity(const sf::Vector2f& velocity);
 	void setVelocityX(float velocityX);
 	void setVelocityY(float velocityY);
-	// the relative velocity is added independently of all other velocity calculations
-	// it is used by the moving tiles
-	void setRelativeVelocity(const sf::Vector2f& relVel);
+	// the moving parent of a movable game object is used to update the relative velocity
+	// it is used by moving platforms (which are parent to themselves)
+	void setMovingParent(MovingTile* parent);
 	
 	const sf::Vector2f& getVelocity() const;
-	const sf::Vector2f& getRelativeVelocity() const;
 	const sf::Vector2f& getAcceleration() const;
 
+	MovingTile* getMovingParent() const;
+
 protected:
-	virtual void updateRelativeVelocity(const sf::Time& frameTime);
+	void updateRelativeVelocity(const sf::Time& frameTime);
 	virtual float getConfiguredMaxVelocityYUp() const;
 	virtual float getConfiguredMaxVelocityYDown() const;
 	virtual float getConfiguredMaxVelocityX() const;
 	sf::Vector2f m_velocity;
-	sf::Vector2f m_relativeVelocity;
 	sf::Vector2f m_acceleration;
 	void boundVelocity(sf::Vector2f& vel) const;
+	MovingTile* m_movingParent = nullptr;
 
 	// debug info
 	BitmapText* m_debugInfo = nullptr;

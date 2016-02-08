@@ -58,8 +58,6 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on y axis
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-		// reset relative velocity
-		rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
 		collidesY = level.collides(rec);
 		if (collidesY) {
 			m_mob->setAccelerationY(0.f);

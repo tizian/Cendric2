@@ -109,9 +109,9 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on y axis
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-		rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
+		rec.movingParent = nullptr;
 		bool collidesY = m_level->collides(rec);
-		setRelativeVelocity(rec.gainedRelativeVelocity);
+		setMovingParent(rec.movingParent);
 		if (collidesY) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
@@ -125,7 +125,7 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		
 		bool collidesY = m_level->collides(rec);
 		if (collidesY) {
-			setRelativeVelocity(rec.gainedRelativeVelocity);
+			setMovingParent(rec.movingParent);
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
 			setPositionY(rec.safeTop);

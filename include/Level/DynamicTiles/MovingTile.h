@@ -7,7 +7,7 @@
 
 class MovingTile : public virtual LevelDynamicTile, public virtual MovableGameObject {
 public:
-	MovingTile(Level* level) : LevelDynamicTile(level) {}
+	MovingTile(Level* level);
 	void setMovingTileData(const MovingTileData& data);
 	void init() override;
 	void loadAnimation(int skinNr) override;
@@ -21,6 +21,7 @@ public:
 	void setDebugBoundingBox(const sf::Color &debugColor) override { MovableGameObject::setDebugBoundingBox(debugColor); }
 
 	GameObjectType getConfiguredType() const override;
+	const sf::Vector2f& getRelativeVelocity() const;
 
 private:
 	void setFrozen(bool frozen);
@@ -31,4 +32,6 @@ private:
 
 	std::vector<sf::Sprite> m_normalSprites;
 	std::vector<sf::Sprite> m_frozenSprites;
+
+	sf::Vector2f m_relativeVelocity;
 };
