@@ -131,24 +131,6 @@ bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight
 	return false;
 }
 
-bool Level::collidesUnsureX(WorldCollisionQueryRecord& rec) const {
-	// check collidable movable tiles
-	for (GameObject* go : *m_movableTiles) {
-		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-		if (tile->getDynamicTileID() == LevelDynamicTileID::Moving) continue;
-		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
-		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
-			MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile);
-			rec.collisionDirection = mob->getRelativeVelocity().x > 0.f ? CollisionDirection::Left : CollisionDirection::Right;
-			calculateCollisionLocations(rec, tileBB);
-			return true;
-		}
-	}
-
-	return false;
-}
-
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	// additional : check for collision with map rect (y axis)
 	// a game object in a level can go until we don't see it anymore on the y axis. (further than only map rect collision)
@@ -180,7 +162,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	// check collidable movable tiles
 	for (GameObject* go : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-		if (tile->getDynamicTileID() == LevelDynamicTileID::Moving) continue;
+
 		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
@@ -188,49 +170,8 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 			rec.gainedRelativeVelocity = mob->getRelativeVelocity();
 
 			calculateCollisionLocations(rec, tileBB);
-
-			// did we really decide correctly?
-			if ((rec.collisionDirection == CollisionDirection::Left || rec.collisionDirection == CollisionDirection::Right) && std::abs(rec.safeLeft - rec.boundingBox.left) > TILE_SIZE_F / 2.f) {
-				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Left ? CollisionDirection::Right : CollisionDirection::Left;
-				calculateCollisionLocations(rec, tileBB);
-			}
-			else if ((rec.collisionDirection == CollisionDirection::Up || rec.collisionDirection == CollisionDirection::Down) && std::abs(rec.safeTop - rec.boundingBox.top) > TILE_SIZE_F / 2.f) {
-				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Down ? CollisionDirection::Up : CollisionDirection::Down;
-				calculateCollisionLocations(rec, tileBB);
-			}
+			checkCollisionDescision(rec, tileBB);
 			return true;
-		}
-	}
-
-	// check for moving platforms
-	if (rec.checkMovingPlatforms) {
-		for (GameObject* go : *m_movableTiles) {
-			MovingTile* movingTile = dynamic_cast<MovingTile*>(go);
-
-			if (movingTile == nullptr || movingTile == rec.excludedGameObject) continue;
-
-			const sf::FloatRect& checkBB = *movingTile->getBoundingBox();
-
-			if (!epsIntersect(checkBB, rec.boundingBox)) continue;
-
-			if (!rec.upsideDown) {
-				float yPos = rec.boundingBox.top + rec.boundingBox.height;
-				float movingTileY = checkBB.top;
-				if (yPos > movingTileY && yPos < movingTileY + 20.f) {
-					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
-					rec.safeTop = movingTileY - rec.boundingBox.height;
-					return true;
-				}
-			}
-			else {
-				float yPos = rec.boundingBox.top;
-				float movingTileY = checkBB.top + checkBB.height;
-				if (yPos < movingTileY && yPos > movingTileY - 20.f) {
-					rec.gainedRelativeVelocity = movingTile->getRelativeVelocity();
-					rec.safeTop = movingTileY;
-					return true;
-				}
-			}
 		}
 	}
 
@@ -250,15 +191,7 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec) const {
 		const sf::FloatRect& mobBB = *enemy->getBoundingBox();
 		if (epsIntersect(mobBB, rec.boundingBox)) {
 			calculateCollisionLocations(rec, mobBB);
-			// did we really decide correctly?
-			if ((rec.collisionDirection == CollisionDirection::Left || rec.collisionDirection == CollisionDirection::Right) && std::abs(rec.safeLeft - rec.boundingBox.left) > TILE_SIZE_F / 2.f) {
-				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Left ? CollisionDirection::Right : CollisionDirection::Left;
-				calculateCollisionLocations(rec, mobBB);
-			}
-			else if ((rec.collisionDirection == CollisionDirection::Up || rec.collisionDirection == CollisionDirection::Down) && std::abs(rec.safeTop - rec.boundingBox.top) > TILE_SIZE_F / 2.f) {
-				rec.collisionDirection = rec.collisionDirection == CollisionDirection::Down ? CollisionDirection::Up : CollisionDirection::Down;
-				calculateCollisionLocations(rec, mobBB);
-			}
+			checkCollisionDescision(rec, mobBB);
 			return true;
 		}
 	}
@@ -266,18 +199,22 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec) const {
 	const sf::FloatRect& mobBB = *(*mainChar)[0]->getBoundingBox();
 	if (epsIntersect(mobBB, rec.boundingBox)) {
 		calculateCollisionLocations(rec, mobBB);
-		// did we really decide correctly?
-		if ((rec.collisionDirection == CollisionDirection::Left || rec.collisionDirection == CollisionDirection::Right) && std::abs(rec.safeLeft - rec.boundingBox.left) > TILE_SIZE_F / 2.f) {
-			rec.collisionDirection = rec.collisionDirection == CollisionDirection::Left ? CollisionDirection::Right : CollisionDirection::Left;
-			calculateCollisionLocations(rec, mobBB);
-		}
-		else if ((rec.collisionDirection == CollisionDirection::Up || rec.collisionDirection == CollisionDirection::Down) && std::abs(rec.safeTop - rec.boundingBox.top) > TILE_SIZE_F / 2.f) {
-			rec.collisionDirection = rec.collisionDirection == CollisionDirection::Down ? CollisionDirection::Up : CollisionDirection::Down;
-			calculateCollisionLocations(rec, mobBB);
-		}
+		checkCollisionDescision(rec, mobBB);
 		return true;
 	}
 	return false;
+}
+
+void Level::checkCollisionDescision(WorldCollisionQueryRecord& rec, const sf::FloatRect& bb) const {
+	// did we really decide correctly?
+	if ((rec.collisionDirection == CollisionDirection::Left || rec.collisionDirection == CollisionDirection::Right) && std::abs(rec.safeLeft - rec.boundingBox.left) > TILE_SIZE_F / 2.f) {
+		rec.collisionDirection = rec.collisionDirection == CollisionDirection::Left ? CollisionDirection::Right : CollisionDirection::Left;
+		calculateCollisionLocations(rec, bb);
+	}
+	else if ((rec.collisionDirection == CollisionDirection::Up || rec.collisionDirection == CollisionDirection::Down) && std::abs(rec.safeTop - rec.boundingBox.top) > TILE_SIZE_F / 2.f) {
+		rec.collisionDirection = rec.collisionDirection == CollisionDirection::Down ? CollisionDirection::Up : CollisionDirection::Down;
+		calculateCollisionLocations(rec, bb);
+	}
 }
 
 void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingBox) const {

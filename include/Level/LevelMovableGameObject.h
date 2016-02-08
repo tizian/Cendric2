@@ -91,7 +91,4 @@ protected:
 	// attributes, include regeneration (hp) and all buffs & dots.
 	void updateAttributes(const sf::Time& frameTime);
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
-
-	// checks whether the level mob collides anyway with something. if yes, it gets a reset and will be dead.
-	void checkForCollisionPanic();
 };

@@ -35,14 +35,6 @@ void ShiftableTile::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	m_pushAcceleration = 0.f;
-
-	// check for collision panic
-	WorldCollisionQueryRecord rec;
-	rec.boundingBox = *getBoundingBox();
-	rec.excludedGameObject = this;
-	if (m_level->collides(rec)) {
-		setDisposed();
-	}
 }
 
 void ShiftableTile::onHit(Spell* spell) {
@@ -106,7 +98,6 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;
 	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-	rec.checkMovingPlatforms = isMovingDown;
 	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
 	bool collidesY = m_level->collides(rec);
 	setRelativeVelocity(rec.gainedRelativeVelocity);

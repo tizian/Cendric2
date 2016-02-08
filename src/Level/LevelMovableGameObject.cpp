@@ -29,23 +29,10 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 
 	MovableGameObject::update(frameTime);
 
-	checkForCollisionPanic();
-
 	if (!m_isDead) {
 		updateAttributes(frameTime);
 	}
 	setAccelerationX(0.f);
-}
-
-void LevelMovableGameObject::checkForCollisionPanic() {
-	WorldCollisionQueryRecord rec;
-	rec.boundingBox = *getBoundingBox();
-	rec.ignoreDynamicTiles = m_movingBehavior->isIgnoreDynamicTiles();
-	if (m_level->collides(rec)) {
-		m_boundingBox.height = 0.f;
-		m_boundingBox.width = 0.f;
-		setDead();
-	}
 }
 
 void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {

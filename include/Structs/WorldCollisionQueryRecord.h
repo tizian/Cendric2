@@ -30,16 +30,15 @@ struct WorldCollisionQueryRecord {
 	// this game object will not be checked for collision
 	// used to avoid self-intersections
 	GameObject* excludedGameObject = nullptr;
-	// used for the levels moving platforms
-	bool checkMovingPlatforms = false;
-	// is anti gravity for the object on?
-	bool upsideDown = false;
 
-	// what direction are we checking? this direction is set by the world and calculated
-	// by the mob velocity and the relative velocity of collisions it encounters.
+	// what collision direction shall be checked?
 	// Down and Down will yield a value in "safe top"
 	// Left and Right will yield a value in "safe left" 
 	CollisionDirection collisionDirection = CollisionDirection::VOID;
 	float safeTop = -1.f;
 	float safeLeft = -1.f;
+
+	// is set to true when an object collides everywhere and cannot decide where to go.
+	// *PANIC*
+	bool isCollisionPanic = false;
 };

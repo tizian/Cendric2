@@ -63,7 +63,6 @@ void ShadowTrapSpell::checkCollisions(const sf::Vector2f& nextPosition) {
 	rec.boundingBox = sf::FloatRect(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 
 	// check for collision on y axis down
-	rec.checkMovingPlatforms = true;
 	rec.collisionDirection = CollisionDirection::Down;
 	bool collidesY = m_level->collides(rec);
 	setRelativeVelocity(rec.gainedRelativeVelocity);

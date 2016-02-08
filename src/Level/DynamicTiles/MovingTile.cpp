@@ -5,7 +5,7 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
 void MovingTile::setMovingTileData(const MovingTileData& data) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, data.length * TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, data.length * TILE_SIZE_F, 40.f));
 	float phi = degToRad(static_cast<float>(data.initialDirection));
 
 	m_currentVelocity.x = std::roundf(data.speed * std::cos(phi)); 
@@ -19,6 +19,8 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 
 void MovingTile::init() {
 	m_isAlwaysUpdate = true;
+	m_isCollidable = true;
+	m_isStrictlyCollidable = true;
 }
 
 void MovingTile::loadAnimation(int skinNr) {

@@ -46,8 +46,6 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	rec.boundingBox = nextBoundingBoxY;
 	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 	bool isFalling = isUpsideDown() != isMovingDown;
-	rec.checkMovingPlatforms = isFalling;
-	rec.upsideDown = isUpsideDown();
 
 	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
 	bool collidesY = level.collides(rec);
