@@ -16,35 +16,83 @@ void FlyingBehavior::makeRandomDecision() {
 }
 
 void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
-	const sf::FloatRect bb = *m_enemy->getBoundingBox();
-	const Level& level = *m_enemy->getLevel();
+	bool collidesX = false;
+	bool collidesY = false;
+
+	const sf::FloatRect& bb = *m_mob->getBoundingBox();
+	const Level& level = *m_mob->getLevel();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
-	bool isMovingDown = nextPosition.y > bb.top; // the mob is always moving either up or down, because of gravity. There are very, very rare, nearly impossible cases where they just cancel out.
-	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingDown = nextPosition.y > bb.top;
 	bool isMovingRight = nextPosition.x > bb.left;
 
-	// check for collision on x axis
+	// should we use strategy 2: try y direction first, then x direction?
+	bool tryYfirst = false;
 	rec.boundingBox = nextBoundingBoxX;
-	bool collidesX = false;
-	if (isMovingX &&
-		(level.collides(rec) ||
-			level.collidesWithDynamicTiles(nextBoundingBoxX, m_avoidableTiles))) {
-		m_enemy->setAccelerationX(0.0f);
-		m_enemy->setVelocityX(0.0f);
-		m_randomDecisionX = isMovingRight ? -1 : 1;
+	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+	if (level.collides(rec)) {
+		if (std::abs(nextPosition.x - rec.safeLeft) > m_mob->getVelocity().x + 10.f) {
+			tryYfirst = true;
+		}
 	}
 
-	// check for collision on y axis
-	rec.boundingBox = nextBoundingBoxY;
-	if (level.collides(rec) ||
-		level.collidesWithDynamicTiles(nextBoundingBoxY, m_avoidableTiles)) {
-		m_enemy->setAccelerationY(0.0);
-		m_enemy->setVelocityY(0.0f);
-		m_randomDecisionY = isMovingDown ? -1 : 1;
+	if (!tryYfirst) {
+
+		// check for collision on x axis
+		rec.boundingBox = nextBoundingBoxX;
+		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+		collidesX = level.collides(rec);
+		if (collidesX) {
+			m_mob->setAccelerationX(0.f);
+			m_mob->setVelocityX(0.f);
+			m_mob->setPositionX(rec.safeLeft);
+			nextBoundingBoxY.left = rec.safeLeft;
+		}
+		else {
+			nextBoundingBoxY.left = nextPosition.x;
+		}
+
+		// check for collision on y axis
+		rec.boundingBox = nextBoundingBoxY;
+		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
+		// reset relative velocity
+		rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
+		collidesY = level.collides(rec);
+		if (collidesY) {
+			m_mob->setAccelerationY(0.f);
+			m_mob->setVelocityY(0.f);
+			m_mob->setPositionY(rec.safeTop);
+		}
+	}
+	else {
+		// check for collision on y axis
+		rec.boundingBox = nextBoundingBoxY;
+		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
+		bool isFalling = isUpsideDown() != isMovingDown;
+		collidesY = level.collides(rec);
+		if (collidesY) {
+			m_mob->setAccelerationY(0.f);
+			m_mob->setVelocityY(0.f);
+			m_mob->setPositionY(rec.safeTop);
+			nextBoundingBoxX.top = rec.safeTop;
+		}
+		else {
+			nextBoundingBoxX.top = nextPosition.y;
+		}
+
+		// check for collision on x axis
+		rec.boundingBox = nextBoundingBoxX;
+		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+
+		collidesX = level.collides(rec);
+		if (collidesX) {
+			m_mob->setAccelerationX(0.f);
+			m_mob->setVelocityX(0.f);
+			m_mob->setPositionX(rec.safeLeft);
+		}
 	}
 }
 

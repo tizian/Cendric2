@@ -12,46 +12,10 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	const sf::FloatRect& bb = *m_enemy->getBoundingBox();
 	const Level& level = *m_enemy->getLevel();
 	float oldPositionX = m_enemy->getPosition().x;
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
-	WorldCollisionQueryRecord rec;
-	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
-
-	// check for collision on x axis
-	rec.boundingBox = nextBoundingBoxX;
-	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-	bool collidesX = false;
-	if (level.collides(rec)) {
-		collidesX = true;
-		m_mob->setAccelerationX(0.f);
-		m_mob->setVelocityX(0.f);
-		m_mob->setPositionX(rec.safeLeft);
-		nextBoundingBoxY.left = rec.safeLeft;
-	}
-	else {
-		nextBoundingBoxY.left = nextPosition.x;
-	}
-
-	// check for collision on y axis
-	rec.boundingBox = nextBoundingBoxY;
-	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-	bool isFalling = isUpsideDown() != isMovingDown;
-
-	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
-	bool collidesY = level.collides(rec);
-	m_enemy->setRelativeVelocity(rec.gainedRelativeVelocity);
-
-	if (collidesY) {
-		if (isFalling) {
-			m_isGrounded = true;
-		}
-		m_enemy->setAccelerationY(0.f);
-		m_enemy->setVelocityY(0.f);
-		m_enemy->setPositionY(rec.safeTop);
-	}
+	bool collidesX;
+	bool collidesY;
+	MovingBehavior::checkXYDirection(nextPosition, collidesX, collidesY);
 
 	m_jumps = false;
 	if (collidesX) {
@@ -67,17 +31,9 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
 	}
 
-	if (std::abs(m_enemy->getVelocity().y) > 0.f)
-		m_isGrounded = false;
-
 	// if the enemy collidesX but can't jump and is chasing, it waits for a certain time.
 	if (m_enemy->getEnemyState() == EnemyState::Chasing && collidesX && !m_jumps) {
 		m_enemy->setWaiting();
-	}
-
-	if (!isMovingDown && nextBoundingBoxY.top < -bb.height ||
-		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
-		m_mob->setDead();
 	}
 }
 

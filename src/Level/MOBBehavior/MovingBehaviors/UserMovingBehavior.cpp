@@ -19,54 +19,9 @@ void UserMovingBehavior::update(const sf::Time& frameTime) {
 }
 
 void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
-	const sf::FloatRect& bb = *m_mainChar->getBoundingBox();
-	const Level& level = *m_mainChar->getLevel();
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
-	WorldCollisionQueryRecord rec;
-	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
-
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
-
-	// check for collision on x axis
-	rec.boundingBox = nextBoundingBoxX;
-	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-	if (level.collides(rec)) {
-		m_mob->setAccelerationX(0.f);
-		m_mob->setVelocityX(0.f);
-		m_mob->setPositionX(rec.safeLeft);
-		nextBoundingBoxY.left = rec.safeLeft;
-	}
-	else {
-		nextBoundingBoxY.left = nextPosition.x;
-	}
-
-	// check for collision on y axis
-	rec.boundingBox = nextBoundingBoxY;
-	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-	bool isFalling = isUpsideDown() != isMovingDown;
-
-	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
-	bool collidesY = level.collides(rec);
-	m_mob->setRelativeVelocity(rec.gainedRelativeVelocity);
-
-	if (collidesY) {
-		if (isFalling) {
-			m_isGrounded = true;
-		}
-		m_mainChar->setAccelerationY(0.f);
-		m_mainChar->setVelocityY(0.f);
-		m_mainChar->setPositionY(rec.safeTop);
-	}
-
-	if (std::abs(m_mainChar->getVelocity().y) > 0.f)
-		m_isGrounded = false;
-
-	if (!isMovingDown && nextBoundingBoxY.top < -bb.height ||
-		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
-		m_mob->setDead();
-	}
+	bool collidesX;
+	bool collidesY;
+	MovingBehavior::checkXYDirection(nextPosition, collidesX, collidesY);
 }
 
 void UserMovingBehavior::handleMovementInput() {

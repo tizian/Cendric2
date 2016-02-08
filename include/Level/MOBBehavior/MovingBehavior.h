@@ -15,6 +15,7 @@ public:
 	virtual void updateAnimation() = 0;
 
 	virtual void checkCollisions(const sf::Vector2f& nextPosition) = 0;
+	
 	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
 
@@ -50,6 +51,12 @@ public:
 	bool isIgnoreDynamicTiles() const;
 	
 protected:
+	// helper method used for collision checking
+	void checkXYDirection(const sf::Vector2f& nextPosition, bool& collidesX, bool& collidesY);
+	// if the position delta is too high (> tileSize), the mob is killed and no further collisions are checked.
+	void checkForCollisionTilt(const sf::Vector2f& oldPosition);
+	bool m_isCollisionTilt = false;
+
 	LevelMovableGameObject* m_mob;
 	LevelMainCharacter* m_mainChar;
 	bool m_ignoreDynamicTiles = false;

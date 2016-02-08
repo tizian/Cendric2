@@ -314,6 +314,24 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 					property_ = property_->NextSiblingElement("property");
 					continue;
 				}
+				if (propertyText.compare("direction") == 0) {
+					textAttr = property_->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value (of name 'direction') attribute found.");
+						return false;
+					}
+					std::string initialDirectionString = textAttr;
+					try {
+						int initialDirection = std::stoi(textAttr);
+						movingTileData.initialDirection = initialDirection % 360;
+						property_ = property_->NextSiblingElement("property");
+						continue;
+					}
+					catch (const std::exception& e) { 
+						logError("Invalid moving tile direction, conversion to integer failed: " + std::string(e.what()) + " Direction attribute: " + initialDirectionString);
+						return false;
+					}
+				}
 
 				int amount;
 				result = property_->QueryIntAttribute("value", &amount);
@@ -325,9 +343,6 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 						return false;
 					}
 					movingTileData.speed = amount;
-				}
-				if (propertyText.compare("direction") == 0) {
-					movingTileData.initialDirection = amount % 360;
 				}
 				else if (propertyText.compare("size") == 0 || propertyText.compare("length") == 0) {
 					if (amount > 10 || amount < 1) {

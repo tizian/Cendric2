@@ -6,10 +6,10 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
 void MovingTile::setMovingTileData(const MovingTileData& data) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, data.length * TILE_SIZE_F, 40.f));
-	float phi = degToRad(static_cast<float>(data.initialDirection));
+	float phi = degToRad(static_cast<float>(data.initialDirection - 90));
 
-	m_currentVelocity.x = std::roundf(data.speed * std::cos(phi)); 
-	m_currentVelocity.y = std::roundf(data.speed * std::sin(phi));
+	m_currentVelocity.x = std::round(data.speed * std::cos(phi)); 
+	m_currentVelocity.y = std::round(data.speed * std::sin(phi));
 
 	m_distanceTime = data.speed == 0 ? sf::Time::Zero : sf::seconds(static_cast<float>(data.distance) / static_cast<float>(data.speed));
 	m_timeUntilTurn = m_distanceTime;

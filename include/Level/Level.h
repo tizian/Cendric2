@@ -40,6 +40,8 @@ public:
 	bool collidesWithDynamicTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
 	// checks for collisions with mobs (enemies and level main character)
 	bool collidesWithMobs(WorldCollisionQueryRecord& rec) const;
+	// checks for collisions with movable tiles (moving platforms, shiftable blocks and unstable blocks)
+	bool collidesWithMovableTiles(WorldCollisionQueryRecord& rec) const;
 
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const;

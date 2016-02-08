@@ -234,7 +234,7 @@
  <objectgroup name="moving platforms">
   <object id="11" gid="543" x="830" y="576" width="50" height="50">
    <properties>
-    <property name="direction" value="315"/>
+    <property name="direction" value="45"/>
     <property name="distance" value="100"/>
     <property name="size" value="2"/>
     <property name="speed" value="20"/>
@@ -242,14 +242,14 @@
   </object>
   <object id="12" gid="563" x="520" y="264" width="50" height="50">
    <properties>
-    <property name="direction" value="180"/>
+    <property name="direction" value="-90"/>
     <property name="distance" value="200"/>
     <property name="speed" value="40"/>
    </properties>
   </object>
   <object id="13" gid="563" x="650" y="220" width="50" height="50">
    <properties>
-    <property name="direction" value="90"/>
+    <property name="direction" value="180"/>
     <property name="distance" value="400"/>
     <property name="speed" value="50"/>
    </properties>

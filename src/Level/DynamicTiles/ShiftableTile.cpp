@@ -80,30 +80,70 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool isMovingDown = nextPosition.y > bb.top;
 	bool isMovingRight = nextPosition.x > bb.left;
 
-	// check for collision on x axis
+	// should we use strategy 2: try y direction first, then x direction?
+	bool tryYfirst = false;
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-	bool collidesX = m_level->collides(rec);
+	if (m_level->collides(rec)) {
+		if (std::abs(nextPosition.x - rec.safeLeft) > getVelocity().x + 10.f) {
+			tryYfirst = true;
+		}
+	}
 
-	if (collidesX) {
-		setAccelerationX(0.f);
-		setVelocityX(0.f);
-		setPositionX(rec.safeLeft);
-		nextBoundingBoxY.left = rec.safeLeft;
+	if (!tryYfirst) {
+		// check for collision on x axis
+		rec.boundingBox = nextBoundingBoxX;
+		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+		bool collidesX = m_level->collides(rec);
+
+		if (collidesX) {
+			setAccelerationX(0.f);
+			setVelocityX(0.f);
+			setPositionX(rec.safeLeft);
+			nextBoundingBoxY.left = rec.safeLeft;
+		}
+		else {
+			nextBoundingBoxY.left = nextPosition.x;
+		}
+
+		// check for collision on y axis
+		rec.boundingBox = nextBoundingBoxY;
+		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
+		rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
+		bool collidesY = m_level->collides(rec);
+		setRelativeVelocity(rec.gainedRelativeVelocity);
+		if (collidesY) {
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
+			setPositionY(rec.safeTop);
+		}
 	}
 	else {
-		nextBoundingBoxY.left = nextPosition.x;
-	}
+		// check for collision on y axis
+		rec.boundingBox = nextBoundingBoxY;
+		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
+		
+		bool collidesY = m_level->collides(rec);
+		if (collidesY) {
+			setRelativeVelocity(rec.gainedRelativeVelocity);
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
+			setPositionY(rec.safeTop);
+			nextBoundingBoxX.top = rec.safeTop;
+		}
+		else {
+			nextBoundingBoxX.top = nextPosition.y;
+		}
 
-	// check for collision on y axis
-	rec.boundingBox = nextBoundingBoxY;
-	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-	rec.gainedRelativeVelocity = sf::Vector2f(0.f, 0.f);
-	bool collidesY = m_level->collides(rec);
-	setRelativeVelocity(rec.gainedRelativeVelocity);
-	if (collidesY) {
-		setAccelerationY(0.f);
-		setVelocityY(0.f);
-		setPositionY(rec.safeTop);
+		// check for collision on x axis
+		rec.boundingBox = nextBoundingBoxX;
+		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+
+		bool collidesX = m_level->collides(rec);
+		if (collidesX) {
+			setAccelerationX(0.f);
+			setVelocityX(0.f);
+			setPositionX(rec.safeLeft);
+		}
 	}
 }

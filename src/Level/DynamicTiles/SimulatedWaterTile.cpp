@@ -296,8 +296,8 @@ void SimulatedWaterTile::freeze(int index) {
 		// check if this water tile can be frozen or if a mob is in the way
 		WorldCollisionQueryRecord rec;
 		rec.boundingBox = sf::FloatRect(m_x + index * TILE_SIZE, m_y, static_cast<float>(TILE_SIZE), TILE_SIZE_F);
-		if (m_level->collidesWithMobs(rec)) {
-			g_logger->logInfo("SimulatedWaterTile::freeze", "Cannot freeze this tile as it would stuck a MOB!");
+		if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
+			g_logger->logInfo("SimulatedWaterTile::freeze", "Cannot freeze this tile as it would stuck a MOB or a movable tile!");
 			return;
 		}
 
