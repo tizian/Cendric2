@@ -24,6 +24,7 @@ public:
 	const sf::Vector2f& getRelativeVelocity() const;
 
 private:
+	void updateRelativeVelocity(const sf::Time& frameTime) override;
 	void setFrozen(bool frozen);
 	bool m_isFrozen;
 	sf::Vector2f m_currentVelocity;

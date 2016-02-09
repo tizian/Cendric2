@@ -90,18 +90,42 @@ void ShiftableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Ve
 
 void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	if (m_movingParent == nullptr) return;
-	float oldPosX = m_position.x;
+	sf::Vector2f oldPos = m_position;
 	MovableGameObject::updateRelativeVelocity(frameTime);
-	float posDiffX = m_position.x - oldPosX;
+	sf::Vector2f posDiff = m_position - oldPos;
 
-	// check if we hit the main char. moving tiles always have precedence
-	auto mainChar = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
+	// check if we hit the other movable objects that do not have the same parent as us. we have precedence and shift other objects away.
+	auto mainChars = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
+	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
+	auto movableTiles = m_screen->getObjects(GameObjectType::_MovableTile);
 
-	LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>((*mainChar)[0]);
-	const sf::FloatRect& mobBB = *mob->getBoundingBox();
-	if (mob->getMovingParent() == getMovingParent() || mob->isDead()) return;
-	if (epsIntersect(mobBB, m_boundingBox)) {
-		mob->setPositionX(mob->getPosition().x + posDiffX);
+	LevelMovableGameObject* mainChar = dynamic_cast<LevelMovableGameObject*>((*mainChars)[0]);
+	if (mainChar->getMovingParent() != getMovingParent() && !mainChar->isDead()) {
+		const sf::FloatRect& mainCharBB = *mainChar->getBoundingBox();
+		if (epsIntersect(mainCharBB, m_boundingBox)) {
+			mainChar->setPosition(mainChar->getPosition() + posDiff);
+		}
+	}
+
+	for (auto enemy : *enemies) {
+		LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>(enemy);
+		if (mob->getMovingParent() != getMovingParent() && !mob->isDead()) {
+			const sf::FloatRect& mobBB = *mob->getBoundingBox();
+			if (epsIntersect(mobBB, m_boundingBox)) {
+				mob->setPosition(mob->getPosition() + posDiff);
+			}
+		}
+	}
+
+	for (auto movableTile : *movableTiles) {
+		MovableGameObject* mob = dynamic_cast<MovableGameObject*>(movableTile);
+		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(movableTile);
+		if (mob->getMovingParent() != getMovingParent() && tile->getDynamicTileID() != LevelDynamicTileID::Moving && tile->getIsCollidable()) {
+			const sf::FloatRect& mobBB = *mob->getBoundingBox();
+			if (epsIntersect(mobBB, m_boundingBox)) {
+				mob->setPosition(mob->getPosition() + posDiff);
+			}
+		}
 	}
 }
 
@@ -191,5 +215,6 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		setVelocity(sf::Vector2f(0.f, 0.f));
 		setAcceleration(sf::Vector2f(0.f, 0.f));
 		setState(GameObjectState::Crumbling);
+		m_isCollidable = false;
 	}
 }

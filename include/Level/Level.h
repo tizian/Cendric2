@@ -55,7 +55,4 @@ private:
 	SpeedupPullCamera* m_camera;
 	const float CAMERA_WINDOW_WIDTH = 200.f;
 	const float CAMERA_WINDOW_HEIGHT = 200.f;
-
-	// helper method to decide whether the collision direction was correct and/or if we have a collision panic
-	void checkCollisionDescision(WorldCollisionQueryRecord& rec, const sf::FloatRect& bb) const;
 };

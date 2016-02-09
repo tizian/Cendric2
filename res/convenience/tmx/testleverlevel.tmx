@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="50" tileheight="50" nextobjectid="15">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="50" tileheight="50" nextobjectid="17">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/testleverlevel/layer_inf.png"/>
   <property name="dimming" value="0.2"/>
   <property name="name" value="Testleverlevel"/>
   <property name="tilesetpath" value="res/level/testleverlevel/tileset_level_testleverlevel.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_ratcave" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
+ <tileset firstgid="1" name="tileset_level_ratcave" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529">
   <image source="../tilesets/tileset_level_ratcave.png" width="1200" height="1200"/>
  </tileset>
- <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
+ <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
   <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="730" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
+ <tileset firstgid="730" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10">
   <image source="../tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="740" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="740" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="1">
    <properties>
@@ -37,7 +37,7 @@
 51,52,0,0,0,0,96,97,98,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
 51,52,52,0,0,0,96,97,98,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
 51,52,0,0,0,0,50,51,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
-51,167,0,0,0,0,167,51,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+51,167,0,0,0,0,167,51,52,0,0,0,0,0,0,0,0,0,0,0,0,0,51,0,0,50,
 51,167,0,0,0,52,167,51,52,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,50,
 51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51
 </data>
@@ -126,12 +126,12 @@
 0,0,0,0,0,0,0,0,0,0,0,537,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,557,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,557,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,537,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,557,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,557,0,0,
+0,0,0,0,0,0,0,0,0,0,557,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -170,7 +170,7 @@
 0,167,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,167,
 0,167,167,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,167,
 0,167,0,0,0,0,167,167,167,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,167,
-0,167,0,0,0,0,167,167,167,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,167,
+0,167,0,0,0,0,167,167,167,0,0,0,0,0,0,0,0,0,0,0,0,0,167,0,0,167,
 0,167,0,0,0,167,167,167,167,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,167,
 0,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167,167
 </data>
@@ -214,7 +214,7 @@
  <objectgroup name="moving platforms">
   <object id="11" gid="543" x="864" y="557" width="50" height="50">
    <properties>
-    <property name="direction" value="-90"/>
+    <property name="direction" value="-80"/>
     <property name="distance" value="300"/>
     <property name="size" value="3"/>
     <property name="speed" value="60"/>
@@ -226,6 +226,20 @@
     <property name="distance" value="200"/>
     <property name="size" value="2"/>
     <property name="speed" value="40"/>
+   </properties>
+  </object>
+  <object id="15" gid="563" x="1165" y="647" width="50" height="50">
+   <properties>
+    <property name="direction" value="0"/>
+    <property name="distance" value="50"/>
+    <property name="speed" value="30"/>
+   </properties>
+  </object>
+  <object id="16" gid="563" x="476" y="642" width="50" height="50">
+   <properties>
+    <property name="direction" value="90"/>
+    <property name="distance" value="300"/>
+    <property name="speed" value="50"/>
    </properties>
   </object>
  </objectgroup>
