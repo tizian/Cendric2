@@ -14,6 +14,7 @@ LevelMainCharacter::~LevelMainCharacter() {
 }
 
 void LevelMainCharacter::load() {
+	m_isAlwaysUpdate = true;
 	loadAnimation();
 	loadBehavior();
 }

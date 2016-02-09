@@ -77,6 +77,7 @@ void MapMainCharacter::handleInput() {
 }
 
 void MapMainCharacter::load() {
+	m_isAlwaysUpdate = true;
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 10.f, 10.f));
 	setSpriteOffset(sf::Vector2f(-20.f, -40.f));
 

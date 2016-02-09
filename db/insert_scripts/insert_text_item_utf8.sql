@@ -16,7 +16,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe
 bla bla blaaaaaaaa bla blaaaa bla bla and you better bla bla soon! CU your enemy.','Lieber König
 blabla blaaaaaaaa bla bla bla lblaaaaa bla und sowieso','Liebe König
 bla blubb bla bla bli bla blaaaaaaaa bla ende.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item', 'Ice staff','Eisstab','Iisstab');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item', 'Ice Staff','Eisstab','Iisstab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_rustysword', 'item', 'Rusty sword','Rostiges Schwert','Rostigs Schwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_bread', 'item_desc', 'An ordinary loaf of bread.','Ein einfaches Brot.','Es Brot halt.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item_desc', 'Sweet','Süss','Süess');
@@ -48,7 +48,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item_desc', 'Would taste better if it was roasted on a fire.','Würde gebraten noch besser schmecken.','Wär chli feiner wenmes wür brötle.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_roastedmeat', 'item', 'Roasted Meat','Gebratenes Fleisch','Brotes Fleisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_roastedmeat', 'item_desc', 'A juicy piece of meat, seared, just as it should be.','Ein saftiges Stück Fleisch, kurz angebraten, wie es sein soll.','Es saftigs Stück Fleisch, churz abrote, genau wes sii söt.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_torch', 'item', 'Torch','Fackel','Fackle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_torch', 'item', 'Torch', 'Fackel', 'Fackle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_torch', 'item_desc', 'Lights the way.','Spendet Licht.','Git Liecht.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_sicklestaff', 'item','Sickle Staff', 'Sichelstab','Sichlestab');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_sicklestaff', 'item_desc', 'The ruby gem glows and concentrates elemental energy.','Der rubinfarbene Edelstein glimmt und bündelt Elementarenergie.','De rubinfarbig Stei lüchtet schwach und bündlet Elementarenergie.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item', 'Oathbreaker','Eidbrecher','Eidbrecher');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item_desc', 'The legendary twin-daggers Oath and Breaker. Some say that the cyan stones hold captured souls.','Die legendären Zwillingsdolche Eid und Brecher. Es wird erzählt, dass die zyanblauen Steine gefangene Seelen beherrbergen.','Di legendäre Zwillingsdolch Eid und Brecher. Me munklet dass ide zyanblaue Stei Seele gfange sind.');
