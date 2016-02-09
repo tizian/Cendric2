@@ -132,22 +132,19 @@ bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight
 }
 
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
+	World::collides(rec);
 	// additional : check for collision with map rect (y axis)
 	// a game object in a level can go until we don't see it anymore on the y axis. (further than only map rect collision)
 	if (rec.boundingBox.top + rec.boundingBox.height < m_levelData.mapRect.top || rec.boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height) {
 		if (rec.collisionDirection == CollisionDirection::Up) {
-			rec.safeTop = m_worldData->mapRect.top - rec.boundingBox.height;
+			rec.safeTop = std::max(rec.safeTop, m_worldData->mapRect.top - rec.boundingBox.height);
 		}
 		if (rec.collisionDirection == CollisionDirection::Down) {
-			rec.safeTop = m_worldData->mapRect.top + m_worldData->mapRect.height;
+			rec.safeTop = std::min(rec.safeTop, m_worldData->mapRect.top + m_worldData->mapRect.height);
 		}
-		return true;
+		rec.collides = true;
 	}
 
-	if (World::collides(rec)) {
-		return true;
-	}
-	
 	// check collidable dynamic tiles
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
@@ -156,11 +153,9 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
 			calculateCollisionLocations(rec, tileBB);
-			return true;
 		}
 	}
-	// check collidable movable tiles. the object may collide with more than one, check this.
-	bool collidesWithMovableTiles = false;
+
 	for (GameObject* go : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
 
@@ -168,41 +163,23 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
 			MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile);
-			rec.movingParent = mob->getMovingParent();
-			if (collidesWithMovableTiles) {
-				// it has already collided with a moving tile, calculate the max safe position.
-				WorldCollisionQueryRecord rec2 = rec;
-				calculateCollisionLocations(rec2, tileBB);
-				if (rec.collisionDirection == CollisionDirection::Left) {
-					rec.safeLeft = std::max(rec.safeLeft, rec2.safeLeft);
-				}
-				else if (rec.collisionDirection == CollisionDirection::Right) {
-					rec.safeLeft = std::min(rec.safeLeft, rec2.safeLeft);
-				}
-				else if (rec.collisionDirection == CollisionDirection::Up) {
-					rec.safeTop = std::max(rec.safeTop, rec2.safeTop);
-				}
-				else if (rec.collisionDirection == CollisionDirection::Down) {
-					rec.safeTop = std::min(rec.safeTop, rec2.safeTop);
-				}
-			}
-			else {
-				calculateCollisionLocations(rec, tileBB);
-				collidesWithMovableTiles = true;
-			}
+			rec.movingParent = mob->getMovingParent(); // question: should we only take the moving parent if the max collision is this tile?
+			calculateCollisionLocations(rec, tileBB);
 		}
 	}
-	if (collidesWithMovableTiles) return true;
-
-	if (rec.ignoreMobs) {
-		return false;
+	
+	// MOB collision
+	if (!rec.ignoreMobs) {
+		collidesWithMobs(rec, false);
 	}
 
-	// MOB collision
-	return collidesWithMobs(rec);
+	return rec.collides;
 }
 
-bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec) const {
+bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec, bool isInitialQuery) const {
+	if (isInitialQuery) {
+		rec.collides = false;
+	}
 	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	auto mainChar = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
 
@@ -212,7 +189,6 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec) const {
 		if (mob->isDead()) continue;
 		if (epsIntersect(mobBB, rec.boundingBox)) {
 			calculateCollisionLocations(rec, mobBB);
-			return true;
 		}
 	}
 
@@ -221,9 +197,9 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec) const {
 	if (mob->isDead()) return false;
 	if (epsIntersect(mobBB, rec.boundingBox)) {
 		calculateCollisionLocations(rec, mobBB);
-		return true;
 	}
-	return false;
+	
+	return rec.collides;
 }
 
 bool Level::collidesWithMovableTiles(WorldCollisionQueryRecord& rec) const {

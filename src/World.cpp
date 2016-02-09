@@ -48,16 +48,20 @@ const sf::FloatRect& World::getWorldRect() const {
 }
 
 bool World::collides(WorldCollisionQueryRecord& rec) const {
+	rec.collides = false;
+	rec.safeLeft = rec.collisionDirection == CollisionDirection::Left ? 0.f : m_worldData->mapRect.width;
+	rec.safeTop = rec.collisionDirection == CollisionDirection::Up ? 0.f : m_worldData->mapRect.height;
+	rec.movingParent = nullptr;
 	const sf::FloatRect& bb = rec.boundingBox;
 	// check for collision with map rect (x axis. y axis is not checked in levels, only in maps)
 	if (bb.left < m_worldData->mapRect.left || bb.left + bb.width > m_worldData->mapRect.left + m_worldData->mapRect.width) {
 		if (rec.collisionDirection == CollisionDirection::Right) {
-			rec.safeLeft = m_worldData->mapRect.left + m_worldData->mapRect.width - bb.width;
+			rec.safeLeft = std::min(rec.safeLeft, m_worldData->mapRect.left + m_worldData->mapRect.width - bb.width);
 		} 
 		if (rec.collisionDirection == CollisionDirection::Left) {
-			rec.safeLeft = m_worldData->mapRect.left;
+			rec.safeLeft = std::max(rec.safeLeft, m_worldData->mapRect.left);
 		}
-		return true;
+		rec.collides = true;
 	}
 
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
@@ -77,38 +81,40 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 			}
 			if (m_worldData->collidableTilePositions[y][x]) {
 				if (rec.collisionDirection == CollisionDirection::Right) {
-					rec.safeLeft = x * TILE_SIZE_F - bb.width;
+					rec.safeLeft = std::min(rec.safeLeft, x * TILE_SIZE_F - bb.width);
 				}
 				if (rec.collisionDirection == CollisionDirection::Left) {
-					rec.safeLeft = (x + 1) * TILE_SIZE_F;
+					rec.safeLeft = std::max(rec.safeLeft, (x + 1) * TILE_SIZE_F);
 				}
 				if (rec.collisionDirection == CollisionDirection::Up) {
-					rec.safeTop = (y + 1) * TILE_SIZE_F;
+					rec.safeTop = std::max(rec.safeTop, (y + 1) * TILE_SIZE_F);
 				}
 				if (rec.collisionDirection == CollisionDirection::Down) {
-					rec.safeTop = y * TILE_SIZE_F - bb.height;
+					rec.safeTop = std::min(rec.safeTop, y * TILE_SIZE_F - bb.height);
 				}
-				return true;
+				rec.collides = true;
+				break; // one collision with the world rec is sufficient? No? Do we have a really fat boss here? if yes, remove the break.
 			}
 		}
 	}
 
-	return false;
+	return rec.collides;
 }
 
 void World::calculateCollisionLocations(WorldCollisionQueryRecord& rec, const sf::FloatRect& bb) const {
 	if (rec.collisionDirection == CollisionDirection::Right) {
-		rec.safeLeft = bb.left - rec.boundingBox.width;
+		rec.safeLeft = std::min(rec.safeLeft, bb.left - rec.boundingBox.width);
 	}
 	if (rec.collisionDirection == CollisionDirection::Left) {
-		rec.safeLeft = bb.left + bb.width;
+		rec.safeLeft = std::max(rec.safeLeft, bb.left + bb.width);
 	}
 	if (rec.collisionDirection == CollisionDirection::Up) {
-		rec.safeTop = bb.top + bb.height;
+		rec.safeTop = std::max(rec.safeTop, bb.top + bb.height);
 	}
 	if (rec.collisionDirection == CollisionDirection::Down) {
-		rec.safeTop = bb.top - rec.boundingBox.height;
+		rec.safeTop = std::min(rec.safeTop, bb.top - rec.boundingBox.height);
 	}
+	rec.collides = true;
 }
 
 const std::string& World::getID() const {

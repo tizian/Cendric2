@@ -230,7 +230,7 @@
   </object>
   <object id="15" gid="563" x="176" y="403" width="50" height="50">
    <properties>
-    <property name="direction" value="135"/>
+    <property name="direction" value="170"/>
     <property name="distance" value="150"/>
     <property name="speed" value="30"/>
    </properties>
