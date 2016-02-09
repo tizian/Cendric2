@@ -1,12 +1,14 @@
 #include "Level/DynamicTiles/ShiftableTile.h"
-#include "Level/DynamicTiles/MovingTile.h"
 #include "Spell.h"
 #include "Spells/WindGustSpell.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Shiftable, ShiftableTile)
 
-ShiftableTile::ShiftableTile(Level* level) : LevelDynamicTile(level), MovableGameObject() {
+ShiftableTile::ShiftableTile(Level* level) : 
+	LevelMovableTile(level),
+	LevelDynamicTile(level)
+{
 }
 
 void ShiftableTile::init() {
@@ -76,10 +78,6 @@ void ShiftableTile::onHit(Spell* spell) {
 	}
 }
 
-GameObjectType ShiftableTile::getConfiguredType() const {
-	return GameObjectType::_MovableTile;
-}
-
 void ShiftableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
 	// distinguish damping in the air and at the ground
 	float dampingPerSec = (getVelocity().y == 0.f) ? DAMPING_GROUND : DAMPING_AIR;
@@ -89,161 +87,4 @@ void ShiftableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Ve
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
 
-void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
-	if (m_movingParent == nullptr) return;
-	sf::Vector2f oldPos = m_position;
-	MovableGameObject::updateRelativeVelocity(frameTime);
-	sf::Vector2f posDiff = m_position - oldPos;
 
-	sf::FloatRect newBoundingBoxX = m_boundingBox;
-	newBoundingBoxX.top -= posDiff.y;
-
-	sf::FloatRect newBoundingBoxY = m_boundingBox;
-	newBoundingBoxY.left -= posDiff.x;
-
-	// check if we hit the other movable objects that do not have the same parent as us. we have precedence and shift other objects away.
-	auto mainChars = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
-	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
-	auto movableTiles = m_screen->getObjects(GameObjectType::_MovableTile);
-
-	LevelMovableGameObject* mainChar = dynamic_cast<LevelMovableGameObject*>((*mainChars)[0]);
-	if (mainChar->getMovingParent() != getMovingParent() && !mainChar->isDead()) {
-		const sf::FloatRect& mainCharBB = *mainChar->getBoundingBox();
-		if (epsIntersect(mainCharBB, newBoundingBoxX)) {
-			mainChar->setPositionX(mainChar->getPosition().x + posDiff.x);
-			mainChar->lockRelativeVelocityX();
-		}
-		if (epsIntersect(mainCharBB, newBoundingBoxY)) {
-			mainChar->setPositionY(mainChar->getPosition().y + posDiff.y);
-			mainChar->lockRelativeVelocityY();
-		}
-	}
-
-	for (auto enemy : *enemies) {
-		LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>(enemy);
-		if (mob->getMovingParent() != getMovingParent() && !mob->isDead()) {
-			const sf::FloatRect& mobBB = *mob->getBoundingBox();
-			if (epsIntersect(mobBB, newBoundingBoxX)) {
-				mob->setPositionX(mob->getPosition().x + posDiff.x);
-				mob->lockRelativeVelocityX();
-			}
-			if (epsIntersect(mobBB, newBoundingBoxY)) {
-				mob->setPositionY(mob->getPosition().y + posDiff.y);
-				mob->lockRelativeVelocityY();
-			}
-		}
-	}
-
-	for (auto movableTile : *movableTiles) {
-		MovableGameObject* mob = dynamic_cast<MovableGameObject*>(movableTile);
-		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(movableTile);
-		if (mob->getMovingParent() != getMovingParent() && tile->getDynamicTileID() != LevelDynamicTileID::Moving && tile->getIsCollidable()) {
-			const sf::FloatRect& mobBB = *mob->getBoundingBox();
-			if (epsIntersect(mobBB, newBoundingBoxX)) {
-				mob->setPositionX(mob->getPosition().x + posDiff.x);
-				mob->lockRelativeVelocityX();
-			}
-			if (epsIntersect(mobBB, newBoundingBoxY)) {
-				mob->setPositionY(mob->getPosition().y + posDiff.y);
-				mob->lockRelativeVelocityY();
-			}
-		}
-	}
-}
-
-void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
-	sf::Vector2f oldPosition = getPosition();
-	const sf::FloatRect& bb = *getBoundingBox();
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
-	WorldCollisionQueryRecord rec;
-
-	rec.excludedGameObject = this;
-	rec.ignoreMobs = false;
-
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
-
-	// should we use strategy 2: try y direction first, then x direction?
-	bool tryYfirst = false;
-	rec.boundingBox = nextBoundingBoxX;
-	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-	if (m_level->collides(rec)) {
-		if (std::abs(nextPosition.x - rec.safeLeft) > std::abs(getVelocity().x) + 10.f) {
-			tryYfirst = true;
-		}
-	}
-
-	if (!tryYfirst) {
-		// check for collision on x axis
-		rec.boundingBox = nextBoundingBoxX;
-		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-		bool collidesX = m_level->collides(rec);
-
-		if (collidesX) {
-			setAccelerationX(0.f);
-			setVelocityX(0.f);
-			setPositionX(rec.safeLeft);
-			nextBoundingBoxY.left = rec.safeLeft;
-		}
-		else {
-			nextBoundingBoxY.left = nextPosition.x;
-		}
-
-		// check for collision on y axis
-		rec.boundingBox = nextBoundingBoxY;
-		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-		rec.movingParent = nullptr;
-		bool collidesY = m_level->collides(rec);
-		setMovingParent(rec.movingParent);
-		if (collidesY) {
-			setAccelerationY(0.f);
-			setVelocityY(0.f);
-			setPositionY(rec.safeTop);
-		}
-	}
-	else {
-		// check for collision on y axis
-		rec.boundingBox = nextBoundingBoxY;
-		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-
-		bool collidesY = m_level->collides(rec);
-		if (collidesY) {
-			setMovingParent(rec.movingParent);
-			setAccelerationY(0.f);
-			setVelocityY(0.f);
-			setPositionY(rec.safeTop);
-			nextBoundingBoxX.top = rec.safeTop;
-		}
-		else {
-			nextBoundingBoxX.top = nextPosition.y;
-		}
-
-		// check for collision on x axis
-		rec.boundingBox = nextBoundingBoxX;
-		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-
-		bool collidesX = m_level->collides(rec);
-		if (collidesX) {
-			setAccelerationX(0.f);
-			setVelocityX(0.f);
-			setPositionX(rec.safeLeft);
-		}
-	}
-
-	// check for wrong parent
-	if (MovingTile* mt = getMovingParent()) {
-		if (mt->getBoundingBox()->top + Epsilon < getBoundingBox()->top + getBoundingBox()->width) {
-			setMovingParent(nullptr);
-		}
-	}
-
-	if (dist(oldPosition, getPosition()) > TILE_SIZE_F / 2.f + norm(getVelocity())) {
-		setPosition(oldPosition);
-		setMovingParent(nullptr);
-		setVelocity(sf::Vector2f(0.f, 0.f));
-		setAcceleration(sf::Vector2f(0.f, 0.f));
-		setState(GameObjectState::Crumbling);
-		m_isCollidable = false;
-	}
-}
