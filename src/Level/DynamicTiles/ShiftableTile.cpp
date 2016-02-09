@@ -1,4 +1,5 @@
 #include "Level/DynamicTiles/ShiftableTile.h"
+#include "Level/DynamicTiles/MovingTile.h"
 #include "Spell.h"
 #include "Spells/WindGustSpell.h"
 #include "Registrar.h"
@@ -94,6 +95,12 @@ void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	MovableGameObject::updateRelativeVelocity(frameTime);
 	sf::Vector2f posDiff = m_position - oldPos;
 
+	sf::FloatRect newBoundingBoxX = m_boundingBox;
+	newBoundingBoxX.top -= posDiff.y;
+
+	sf::FloatRect newBoundingBoxY = m_boundingBox;
+	newBoundingBoxY.left -= posDiff.x;
+
 	// check if we hit the other movable objects that do not have the same parent as us. we have precedence and shift other objects away.
 	auto mainChars = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
 	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
@@ -102,8 +109,13 @@ void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	LevelMovableGameObject* mainChar = dynamic_cast<LevelMovableGameObject*>((*mainChars)[0]);
 	if (mainChar->getMovingParent() != getMovingParent() && !mainChar->isDead()) {
 		const sf::FloatRect& mainCharBB = *mainChar->getBoundingBox();
-		if (epsIntersect(mainCharBB, m_boundingBox)) {
-			mainChar->setPosition(mainChar->getPosition() + posDiff);
+		if (epsIntersect(mainCharBB, newBoundingBoxX)) {
+			mainChar->setPositionX(mainChar->getPosition().x + posDiff.x);
+			mainChar->lockRelativeVelocityX();
+		}
+		if (epsIntersect(mainCharBB, newBoundingBoxY)) {
+			mainChar->setPositionY(mainChar->getPosition().y + posDiff.y);
+			mainChar->lockRelativeVelocityY();
 		}
 	}
 
@@ -111,8 +123,13 @@ void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 		LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>(enemy);
 		if (mob->getMovingParent() != getMovingParent() && !mob->isDead()) {
 			const sf::FloatRect& mobBB = *mob->getBoundingBox();
-			if (epsIntersect(mobBB, m_boundingBox)) {
-				mob->setPosition(mob->getPosition() + posDiff);
+			if (epsIntersect(mobBB, newBoundingBoxX)) {
+				mob->setPositionX(mob->getPosition().x + posDiff.x);
+				mob->lockRelativeVelocityX();
+			}
+			if (epsIntersect(mobBB, newBoundingBoxY)) {
+				mob->setPositionY(mob->getPosition().y + posDiff.y);
+				mob->lockRelativeVelocityY();
 			}
 		}
 	}
@@ -122,8 +139,13 @@ void ShiftableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(movableTile);
 		if (mob->getMovingParent() != getMovingParent() && tile->getDynamicTileID() != LevelDynamicTileID::Moving && tile->getIsCollidable()) {
 			const sf::FloatRect& mobBB = *mob->getBoundingBox();
-			if (epsIntersect(mobBB, m_boundingBox)) {
-				mob->setPosition(mob->getPosition() + posDiff);
+			if (epsIntersect(mobBB, newBoundingBoxX)) {
+				mob->setPositionX(mob->getPosition().x + posDiff.x);
+				mob->lockRelativeVelocityX();
+			}
+			if (epsIntersect(mobBB, newBoundingBoxY)) {
+				mob->setPositionY(mob->getPosition().y + posDiff.y);
+				mob->lockRelativeVelocityY();
 			}
 		}
 	}
@@ -206,6 +228,13 @@ void ShiftableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
+		}
+	}
+
+	// check for wrong parent
+	if (MovingTile* mt = getMovingParent()) {
+		if (mt->getBoundingBox()->top + Epsilon < getBoundingBox()->top + getBoundingBox()->width) {
+			setMovingParent(nullptr);
 		}
 	}
 

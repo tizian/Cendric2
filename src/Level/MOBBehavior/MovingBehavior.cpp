@@ -1,5 +1,6 @@
 #include "Level/MOBBehavior/MovingBehavior.h"
 #include "Screens/LevelScreen.h"
+#include "Level/DynamicTiles/MovingTile.h"
 
 MovingBehavior::MovingBehavior(LevelMovableGameObject* mob) {
 	m_mob = mob;
@@ -222,5 +223,19 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 	if (!isMovingDown && nextBoundingBoxY.top < -bb.height ||
 		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
 		m_mob->setDead();
+	}
+
+	// check for wrong parent
+	if (MovingTile* mt = m_mob->getMovingParent()) {
+		if (!isUpsideDown()) {
+			if (mt->getBoundingBox()->top + Epsilon < m_mob->getBoundingBox()->top + m_mob->getBoundingBox()->width) {
+				m_mob->setMovingParent(nullptr);
+			}
+		}
+		else {
+			if (mt->getBoundingBox()->top + mt->getBoundingBox()->width > Epsilon + m_mob->getBoundingBox()->top) {
+				m_mob->setMovingParent(nullptr);
+			}
+		}
 	}
 }

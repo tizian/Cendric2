@@ -35,12 +35,26 @@ void MovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
 	}
 }
 
+void MovableGameObject::lockRelativeVelocityX() {
+	m_isLockedRelativeVelocityX = true; 
+}
+
+void MovableGameObject::lockRelativeVelocityY() {
+	m_isLockedRelativeVelocityY = true;
+} 
+
 void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
-	if (m_movingParent == nullptr) return;
-	sf::Vector2f nextPos;
-	nextPos.x = m_position.x + m_movingParent->getRelativeVelocity().x * frameTime.asSeconds();
-	nextPos.y = m_position.y + m_movingParent->getRelativeVelocity().y * frameTime.asSeconds();
+	if (m_movingParent == nullptr) {
+		m_isLockedRelativeVelocityX = false;
+		m_isLockedRelativeVelocityY = false;
+		return;
+	}
+	sf::Vector2f nextPos = m_position;
+	if (!m_isLockedRelativeVelocityX) nextPos.x += m_movingParent->getRelativeVelocity().x * frameTime.asSeconds();
+	if (!m_isLockedRelativeVelocityY) nextPos.y += m_movingParent->getRelativeVelocity().y * frameTime.asSeconds();
 	setPosition(nextPos);
+	m_isLockedRelativeVelocityX = false;
+	m_isLockedRelativeVelocityY = false;
 }
 
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const {

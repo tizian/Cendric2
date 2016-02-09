@@ -17,7 +17,7 @@
 #define INV_PI       0.31830988618379067154f
 #define INV_TWOPI    0.15915494309189533577f
 
-#define Epsilon 1e-4f
+#define Epsilon 1e-3f
 
 inline float radToDeg(float rad) {
 	return rad * (180.f / M_PI);

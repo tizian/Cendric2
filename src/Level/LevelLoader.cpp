@@ -63,6 +63,7 @@ void LevelLoader::loadMovingTiles(LevelData& data, Screen* screen, Level* level)
 		movingTile->setDebugBoundingBox(sf::Color::Yellow);
 		movingTile->loadAnimation(movingData.skinNr);
 		movingTile->setPosition(movingData.spawnPosition - sf::Vector2f(0.f, TILE_SIZE_F));
+		movingTile->setDynamicTileID(LevelDynamicTileID::Moving);
 
 		screen->addObject(movingTile);
 	}

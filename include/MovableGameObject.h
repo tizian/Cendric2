@@ -39,6 +39,8 @@ public:
 	const sf::Vector2f& getAcceleration() const;
 
 	MovingTile* getMovingParent() const;
+	void lockRelativeVelocityX();
+	void lockRelativeVelocityY();
 
 protected:
 	virtual void updateRelativeVelocity(const sf::Time& frameTime);
@@ -49,6 +51,8 @@ protected:
 	sf::Vector2f m_acceleration;
 	void boundVelocity(sf::Vector2f& vel) const;
 	MovingTile* m_movingParent = nullptr;
+	bool m_isLockedRelativeVelocityX = false;
+	bool m_isLockedRelativeVelocityY = false;
 
 	// debug info
 	BitmapText* m_debugInfo = nullptr;
