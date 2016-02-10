@@ -26,5 +26,6 @@ enum class GameObjectState {
 	Crumbling, // used by crumbly block tile
 	Active, // used by checkpoint tiles
 	On, // used by the lever and the switch tiles
-	Off // used by the lever and the switch tiles
+	Off, // used by the lever and the switch tiles
+	Trembling // used by unstable tiles
 };

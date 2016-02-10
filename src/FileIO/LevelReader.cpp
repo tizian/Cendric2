@@ -671,6 +671,9 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		else if (name.find("dynamic shiftable") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Shiftable, layerData, data)) return false;
 		}
+		else if (name.find("dynamic unstable") != std::string::npos) {
+			if (!readDynamicTileLayer(LevelDynamicTileID::Unstable, layerData, data)) return false;
+		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
 		}
