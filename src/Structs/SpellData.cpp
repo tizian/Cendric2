@@ -21,6 +21,7 @@
 #include "SpellCreators/RaiseTheDeadSpellCreator.h"
 #include "SpellCreators/HolyFireSpellCreator.h"
 #include "SpellCreators/SummonGargoyleSpellCreator.h"
+#include "SpellCreators/ProjectileSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -202,6 +203,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::SummonGargoyle:
 		creator = new SummonGargoyleSpellCreator(data, owner);
 		break;
+	case SpellID::Projectile:
+		creator = new ProjectileSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -255,6 +259,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getHolyFireSpellData();
 	case SpellID::SummonGargoyle:
 		return getSummonGargoyleSpellData();
+	case SpellID::Projectile:
+		return getProjectileSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -275,6 +281,27 @@ SpellData SpellData::getChopSpellData() {
 	chop.inputKey = Key::Chop;
 
 	return chop;
+}
+
+SpellData SpellData::getProjectileSpellData() {
+	SpellData projectile = EMPTY_SPELL;
+	projectile.id = SpellID::Projectile;
+
+	projectile.cooldown = sf::seconds(1);
+	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	projectile.divergenceAngle = 0.2f;
+	projectile.damageType = DamageType::Physical;
+	projectile.activeDuration = sf::seconds(5);
+	projectile.damagePerSecond = 2;
+	projectile.duration = sf::seconds(3);
+	projectile.needsTarget = true;
+	projectile.isDynamicTileEffect = true;
+	projectile.damage = 10;
+	projectile.speed = 600.f;
+
+	projectile.inputKey = Key::Chop;
+
+	return projectile;
 }
 
 SpellData SpellData::getFireBallSpellData() {

@@ -3,9 +3,10 @@
 enum class SpellID {
 	VOID,
 
-	// not really a spell, each and every weapon has it and its attributes are dependent on
+	// not really spells, each and every weapon has one of them and their attributes are dependent on
 	// the weapon and they not modifiable otherwise.
 	Chop,
+	Projectile,
 
 	// Elemental (Default spells)
 	FireBall,

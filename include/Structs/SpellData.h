@@ -56,6 +56,7 @@ struct SpellData {
 
 private:
 	static SpellData getChopSpellData();
+	static SpellData getProjectileSpellData();
 
 	static SpellData getFireBallSpellData();
 	static SpellData getIceBallSpellData();

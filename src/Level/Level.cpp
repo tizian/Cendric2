@@ -186,7 +186,7 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec, bool isInitialQuery
 	for (auto enemy : *enemies) {
 		const sf::FloatRect& mobBB = *enemy->getBoundingBox();
 		LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>(enemy);
-		if (mob->isDead()) continue;
+		if (mob->isDead() || mob->isIgnoreDynamicTiles()) continue;
 		if (epsIntersect(mobBB, rec.boundingBox)) {
 			calculateCollisionLocations(rec, mobBB);
 		}
@@ -194,8 +194,7 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec, bool isInitialQuery
 
 	const sf::FloatRect& mobBB = *(*mainChar)[0]->getBoundingBox();
 	LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>((*mainChar)[0]);
-	if (mob->isDead()) return false;
-	if (epsIntersect(mobBB, rec.boundingBox)) {
+	if (!(mob->isDead() || mob->isIgnoreDynamicTiles()) && epsIntersect(mobBB, rec.boundingBox)) {
 		calculateCollisionLocations(rec, mobBB);
 	}
 	
