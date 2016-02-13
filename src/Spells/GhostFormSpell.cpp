@@ -22,7 +22,6 @@ void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 	mb->setMaxXVelocityScale(velocityScale);
 	mb->setIgnoreDynamicTiles(true);
 	m_mob->addAttributes(getActiveDuration(), m_additionalDamage);
-	m_lastSafePosition = m_mob->getPosition();
 	loadMask();
 }
 
@@ -35,12 +34,6 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 	MovableGameObject::update(frameTime);
 	m_ps->update(frameTime);
 	updateParticleSystemPosition();
-
-	WorldCollisionQueryRecord rec;
-	rec.boundingBox = *m_mob->getBoundingBox();
-	if (!(m_level->collides(rec))) {
-		m_lastSafePosition = m_mob->getPosition();
-	}
 
 	GameObject::updateTime(m_data.activeDuration, frameTime);
 	if (m_data.activeDuration <= sf::Time::Zero) {
@@ -57,7 +50,12 @@ void GhostFormSpell::setDisposed() {
 	MovingBehavior* mb = m_mob->getMovingBehavior();
 	mb->setMaxXVelocityScale(1.f);
 	mb->setIgnoreDynamicTiles(false);
-	m_mob->setPosition(m_lastSafePosition);
+
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *m_mob->getBoundingBox();
+	if (m_level->collides(rec)) {
+		m_mob->setDead();
+	}
 }
 
 void GhostFormSpell::render(sf::RenderTarget& target) {

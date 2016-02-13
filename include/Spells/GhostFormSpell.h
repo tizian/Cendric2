@@ -23,9 +23,6 @@ private:
 	float m_velocityScale;
 	static const sf::Color GHOST_COLOR;
 
-	// when this spell fades, the owner is taken to the last safe (non-colliding) position
-	sf::Vector2f m_lastSafePosition;
-
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
 	particles::BoxPositionGenerator* m_posGenerator;
