@@ -6,7 +6,7 @@ FlashSpellCreator::FlashSpellCreator(const SpellData& spellData, LevelMovableGam
 
 void FlashSpellCreator::executeSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
-	updateDamage(spellData);
+	updateDamageAndHeal(spellData);
 	
 	// check where port of owner is possible
 	WorldCollisionQueryRecord rec;

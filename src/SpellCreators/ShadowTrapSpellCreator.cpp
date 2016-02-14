@@ -10,7 +10,7 @@ std::string ShadowTrapSpellCreator::getStrengthModifierName() const {
 
 void ShadowTrapSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
-	updateDamage(spellData);
+	updateDamageAndHeal(spellData);
 
 	ShadowTrapSpell* newSpell = new ShadowTrapSpell();
 
@@ -20,8 +20,4 @@ void ShadowTrapSpellCreator::executeSpell(const sf::Vector2f &target) {
 
 void ShadowTrapSpellCreator::addDurationModifier(int level) {
 	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
-}
-
-void ShadowTrapSpellCreator::addDamageModifier(int level) {
-	m_spellData.damagePerSecond += m_spellData.damageModifierAddition * level;
 }

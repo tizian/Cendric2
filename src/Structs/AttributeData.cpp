@@ -19,6 +19,7 @@ void AttributeData::appendAttributes(std::string& string, const AttributeData& a
 	string.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
 	string.append(getAttributeText("Haste", attr.haste));
 	string.append(getAttributeText("Critical", attr.critical));
+	string.append(getAttributeText("Heal", attr.heal));
 	string.append(getAttributeText("PhysicalDamage", attr.damagePhysical));
 	string.append(getAttributeText("FireDamage", attr.damageFire));
 	string.append(getAttributeText("IceDamage", attr.damageIce));

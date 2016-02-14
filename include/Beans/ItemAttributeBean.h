@@ -10,6 +10,7 @@ struct ItemAttributeBean : DatabaseBean {
 	int health_regeneration;
 	int haste;
 	int critical;
+	int heal;
 	int dmg_physical;
 	int dmg_fire;
 	int dmg_ice;

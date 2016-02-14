@@ -6,7 +6,7 @@ RaiseTheDeadSpellCreator::RaiseTheDeadSpellCreator(const SpellData& spellData, L
 
 void RaiseTheDeadSpellCreator::executeSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
-	updateDamage(spellData);
+	updateDamageAndHeal(spellData);
 
 	RaiseTheDeadSpell* newSpell = new RaiseTheDeadSpell(m_strength);
 	newSpell->load(spellData, m_owner, target);

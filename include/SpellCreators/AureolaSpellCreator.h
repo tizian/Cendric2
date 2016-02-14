@@ -17,6 +17,5 @@ public:
 
 private:
 	void addCountModifier(int level) override;
-	void addDamageModifier(int level) override;
 	void addDurationModifier(int level) override;
 };

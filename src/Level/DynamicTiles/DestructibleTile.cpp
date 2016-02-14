@@ -49,6 +49,7 @@ void DestructibleTile::update(const sf::Time& frameTime) {
 void DestructibleTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::Chop:
+	case SpellID::Projectile:
 		if (m_state == GameObjectState::Idle) {
 			m_state = GameObjectState::Crumbling;
 			setCurrentAnimation(getAnimation(m_state), false);

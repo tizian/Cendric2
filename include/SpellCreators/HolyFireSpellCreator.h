@@ -13,6 +13,5 @@ public:
 
 private:
 	void addDurationModifier(int level) override;
-	void addDamageModifier(int level) override;
 	void addRangeModifier(int level) override;
 };

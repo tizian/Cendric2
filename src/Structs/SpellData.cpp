@@ -29,19 +29,16 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	case SpellID::Chop:
 		break;
 	case SpellID::FireBall:
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Reflect);
 		types.push_back(SpellModifierType::Speed);
 		break;
 	case SpellID::IceBall:
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Reflect);
 		types.push_back(SpellModifierType::Speed);
 		break;
 	case SpellID::Aureola:
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Speed);
 		types.push_back(SpellModifierType::Range);
@@ -66,16 +63,13 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Range);
 		types.push_back(SpellModifierType::Strength);
-		types.push_back(SpellModifierType::Damage);
 		break;
 	case SpellID::Leech:
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Reflect);
 		types.push_back(SpellModifierType::Speed);
 		break;
 	case SpellID::IcyAmbush:
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Range);
 		types.push_back(SpellModifierType::Reflect);
 		types.push_back(SpellModifierType::Strength);
@@ -98,7 +92,6 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		break;
 	case SpellID::Flash:
 		types.push_back(SpellModifierType::Range);
-		types.push_back(SpellModifierType::Damage);
 		break;
 	case SpellID::LeapOfFaith:
 		types.push_back(SpellModifierType::Duration);
@@ -112,22 +105,18 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	case SpellID::ShadowTrap:
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Strength);
-		types.push_back(SpellModifierType::Damage);
 		break;
 	case SpellID::RaiseTheDead:
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Strength);
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Range);
 		break;
 	case SpellID::HolyFire:
 		types.push_back(SpellModifierType::Duration);
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Range);
 		break;
 	case SpellID::SummonGargoyle:
 		types.push_back(SpellModifierType::Duration);
-		types.push_back(SpellModifierType::Damage);
 		types.push_back(SpellModifierType::Count);
 		types.push_back(SpellModifierType::Strength);
 		break;

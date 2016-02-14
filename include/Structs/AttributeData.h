@@ -10,6 +10,7 @@ struct AttributeData {
 	int healthRegenerationPerS;
 	int haste;
 	int critical;
+	int heal;
 	int damagePhysical;
 	int damageFire;
 	int damageIce;
@@ -48,6 +49,7 @@ struct AttributeData {
 		healthRegenerationPerS = bean.health_regeneration;
 		haste = bean.haste;
 		critical = bean.critical;
+		heal = bean.heal;
 		damagePhysical = bean.dmg_physical;
 		damageFire = bean.dmg_fire;
 		damageIce = bean.dmg_ice;
@@ -128,6 +130,7 @@ struct AttributeData {
 
 const struct AttributeData ZERO_ATTRIBUTES =
 {
+	0,
 	0,
 	0,
 	0,

@@ -40,7 +40,7 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 
 	SpellCreator* creator = SpellData::getSpellCreator(bean, modifiers, nullptr);
 	bean = creator->getSpellData();
-	creator->updateDamage(bean, attributes, false);
+	creator->updateDamageAndHeal(bean, attributes, false);
 	strengthName = creator->getStrengthModifierName();
 	strengthValue = creator->getStrengthModifierValue();
 

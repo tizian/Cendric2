@@ -1,14 +1,14 @@
 #pragma once
 
+// if someone asks, they are arranged according to the wavelengths of their respective color. 
 enum class SpellModifierType {
 	VOID,
-	Damage,
-	Range,
-	Speed,
-	Reflect,
 	Count,
-	Strength,
 	Duration,
+	Reflect,
+	Speed,
+	Range,
+	Strength,
 	MAX
 };
 
@@ -19,10 +19,7 @@ struct SpellModifier {
 	int level;
 
 	static SpellModifierType resolveType(const std::string& name) {
-		if (name.compare("damage") == 0) {
-			return SpellModifierType::Damage;
-		}
-		else if (name.compare("duration") == 0) {
+		 if (name.compare("duration") == 0) {
 			return SpellModifierType::Duration;
 		}
 		else if (name.compare("count") == 0) {
@@ -47,20 +44,18 @@ struct SpellModifier {
 
 	static sf::Color getSpellModifierColor(SpellModifierType type) {
 		switch (type) {
-		case SpellModifierType::Damage:
-			return sf::Color(208 + 47, 24 + 17, 9 + 7);
 		case SpellModifierType::Range:
-			return sf::Color(228 + 27, 102 + 27, 0 );
+			return sf::Color(228 + 27, 102 + 27, 0 ); // orange
 		case SpellModifierType::Speed:
-			return sf::Color(228 + 27, 164 + 17, 6 + 7);
+			return sf::Color(228 + 27, 164 + 17, 6 + 7); // yellow
 		case SpellModifierType::Reflect:
-			return sf::Color(118 + 24, 221 + 34, 1 );
+			return sf::Color(118 + 24, 221 + 34, 1 ); // green
 		case SpellModifierType::Count:
-			return sf::Color(0 , 173 + 82, 76 + 42);
+			return sf::Color(136 + 17, 0, 228 + 27); // purple
 		case SpellModifierType::Strength:
-			return sf::Color(0, 86 + 43, 182 + 73);
+			return sf::Color(208 + 47, 24 + 17, 9 + 7); // red
 		case SpellModifierType::Duration:
-			return sf::Color(136 + 17, 0 , 228 + 27);
+			return sf::Color(0, 86 + 43, 182 + 73); // blue
 		default:
 			// unexpected
 			return sf::Color::Transparent;

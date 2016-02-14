@@ -10,7 +10,7 @@ std::string AureolaSpellCreator::getStrengthModifierName() const {
 
 void AureolaSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
-	updateDamage(spellData);
+	updateDamageAndHeal(spellData);
 	for (int i = 0; i < m_spellData.count; i++) {
 		AureolaSpell* newSpell = new AureolaSpell();
 		spellData.divergenceAngle = i * m_spellData.divergenceAngle;
@@ -28,9 +28,4 @@ void AureolaSpellCreator::addCountModifier(int level) {
 
 void AureolaSpellCreator::addDurationModifier(int level) {
 	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
-}
-
-void AureolaSpellCreator::addDamageModifier(int level) {
-	m_spellData.damage += m_spellData.damageModifierAddition * level;
-	m_spellData.heal += m_spellData.damageModifierAddition * level;
 }

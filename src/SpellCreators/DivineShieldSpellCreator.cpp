@@ -15,6 +15,7 @@ std::string DivineShieldSpellCreator::getStrengthModifierName() const {
 
 void DivineShieldSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
+	updateDamageAndHeal(spellData);
 	AttributeData resistance = ZERO_ATTRIBUTES;
 	resistance.resistancePhysical = m_additionalResistance;
 	resistance.resistanceFire = m_additionalResistance;

@@ -14,7 +14,7 @@ std::string IcyAmbushSpellCreator::getStrengthModifierName() const {
 
 void IcyAmbushSpellCreator::executeSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
-	updateDamage(spellData);
+	updateDamageAndHeal(spellData);
 
 	IcyAmbushSpell* newSpell = new IcyAmbushSpell(m_strength);
 	newSpell->load(spellData, m_owner, target);

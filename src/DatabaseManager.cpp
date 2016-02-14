@@ -110,8 +110,8 @@ ItemAttributeBean DatabaseManager::getItemAttributeBean(const std::string& item_
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 15) {
-			g_logger->logError("DatabaseManager::getItemAttributeBean", "number of returned columns must be 15");
+		if (cols != 16) {
+			g_logger->logError("DatabaseManager::getItemAttributeBean", "number of returned columns must be 16");
 			return bean;
 		}
 		int result = 0;
@@ -124,16 +124,17 @@ ItemAttributeBean DatabaseManager::getItemAttributeBean(const std::string& item_
 				bean.health_regeneration = sqlite3_column_int(statement, 2);
 				bean.haste = sqlite3_column_int(statement, 3);
 				bean.critical = sqlite3_column_int(statement, 4);
-				bean.dmg_physical = sqlite3_column_int(statement, 5);
-				bean.dmg_fire = sqlite3_column_int(statement, 6);
-				bean.dmg_ice = sqlite3_column_int(statement, 7);
-				bean.dmg_shadow = sqlite3_column_int(statement, 8);
-				bean.dmg_light = sqlite3_column_int(statement, 9);
-				bean.res_physical = sqlite3_column_int(statement, 10);
-				bean.res_fire = sqlite3_column_int(statement, 11);
-				bean.res_ice = sqlite3_column_int(statement, 12);
-				bean.res_shadow = sqlite3_column_int(statement, 13);
-				bean.res_light = sqlite3_column_int(statement, 14);
+				bean.heal = sqlite3_column_int(statement, 5);
+				bean.dmg_physical = sqlite3_column_int(statement, 6);
+				bean.dmg_fire = sqlite3_column_int(statement, 7);
+				bean.dmg_ice = sqlite3_column_int(statement, 8);
+				bean.dmg_shadow = sqlite3_column_int(statement, 9);
+				bean.dmg_light = sqlite3_column_int(statement, 10);
+				bean.res_physical = sqlite3_column_int(statement, 11);
+				bean.res_fire = sqlite3_column_int(statement, 12);
+				bean.res_ice = sqlite3_column_int(statement, 13);
+				bean.res_shadow = sqlite3_column_int(statement, 14);
+				bean.res_light = sqlite3_column_int(statement, 15);
 				bean.status = BeanStatus::Filled;
 			}
 			else {

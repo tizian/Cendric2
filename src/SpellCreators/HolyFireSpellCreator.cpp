@@ -6,6 +6,7 @@ HolyFireSpellCreator::HolyFireSpellCreator(const SpellData &spellData, LevelMova
 
 void HolyFireSpellCreator::executeSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
+	updateDamageAndHeal(spellData);
 	HolyFireSpell* newSpell = new HolyFireSpell();
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
@@ -13,10 +14,6 @@ void HolyFireSpellCreator::executeSpell(const sf::Vector2f &target) {
 
 void HolyFireSpellCreator::addDurationModifier(int level) {
 	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
-}
-
-void HolyFireSpellCreator::addDamageModifier(int level) {
-	m_spellData.damagePerSecond += static_cast<int>(std::floor(m_spellData.damageModifierAddition / m_spellData.duration.asSeconds())) * level;
 }
 
 void HolyFireSpellCreator::addRangeModifier(int level) {

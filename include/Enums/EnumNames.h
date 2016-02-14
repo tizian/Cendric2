@@ -91,8 +91,6 @@ public:
 			return "SpellAntiGravity";
 		case SpellID::Aureola:
 			return "SpellAureola";
-		case SpellID::Chop:
-			return "SpellChop";
 		case SpellID::DivineShield:
 			return "SpellDivineShield";
 		case SpellID::Fear:
@@ -140,8 +138,6 @@ public:
 			return "Unknown";
 		case SpellModifierType::Count:
 			return "Count";
-		case SpellModifierType::Damage:
-			return "Damage";
 		case SpellModifierType::Duration:
 			return "Duration";
 		case SpellModifierType::Range:

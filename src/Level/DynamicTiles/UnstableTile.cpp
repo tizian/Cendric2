@@ -4,7 +4,7 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Unstable, UnstableTile)
 
-const sf::Time UnstableTile::CRITICAL_TIME = sf::seconds(1.f);
+const sf::Time UnstableTile::CRITICAL_TIME = sf::seconds(0.6f);
 
 UnstableTile::UnstableTile(Level* level) :
 	LevelMovableTile(level),
@@ -86,6 +86,7 @@ void UnstableTile::onHit(Spell* spell) {
 	case SpellID::Chop:
 		m_isFalling = true;
 		break;
+	case SpellID::Projectile:
 	case SpellID::Telekinesis:
 		m_isFalling = true;
 		spell->setDisposed();

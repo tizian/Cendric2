@@ -310,10 +310,10 @@ void Spellbook::reload() {
 }
 
 void Spellbook::calculateModifierSlots() {
-	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y + ModifierSlot::ICON_OFFSET;
+	float yOffset = GUIConstants::TOP + SPELL_OFFSET;
 	float xOffset = GUIConstants::LEFT + 2 * GUIConstants::TEXT_OFFSET;
 	float modifierXOffset = 213.f;
-	float textYOffset = SpellSlot::SIZE / 2.f - GUIConstants::CHARACTER_SIZE_S / 2.f;
+	float textYOffset = SpellSlot::ICON_SIZE / 2.f - GUIConstants::CHARACTER_SIZE_S / 2.f;
 	for (auto& it : m_core->getData().modfiersLearned) {
 		BitmapText text;
 		text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -329,7 +329,7 @@ void Spellbook::calculateModifierSlots() {
 			slot.setPosition(sf::Vector2f(modifierXOffset + (i * (ModifierSlot::SIZE + MARGIN)), yOffset));
 			m_modifierSlots.push_back(slot);
 		}
-		yOffset += ModifierSlot::SIZE;
+		yOffset += ModifierSlot::SIZE + 6.f;
 	}
 }
 

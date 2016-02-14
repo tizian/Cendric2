@@ -6,7 +6,7 @@ TelekinesisSpellCreator::TelekinesisSpellCreator(const SpellData& spellData, Lev
 
 void TelekinesisSpellCreator::executeSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
-	updateDamage(spellData);
+	updateDamageAndHeal(spellData);
 
 	TelekinesisSpell* newSpell = new TelekinesisSpell();
 	newSpell->load(spellData, m_owner, target);

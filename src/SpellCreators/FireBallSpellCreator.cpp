@@ -6,7 +6,7 @@ FireBallSpellCreator::FireBallSpellCreator(const SpellData& spellData, LevelMova
 
 void FireBallSpellCreator::executeSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
-	updateDamage(spellData);
+	updateDamageAndHeal(spellData);
 	int div = 0;
 	int sign = 1;
 	for (int i = 0; i < m_spellData.count; i++) {
@@ -21,9 +21,4 @@ void FireBallSpellCreator::executeSpell(const sf::Vector2f& target) {
 	}
 
 	m_owner->setFightAnimationTime();
-}
-
-void FireBallSpellCreator::addDamageModifier(int level) {
-	m_spellData.damage += m_spellData.damageModifierAddition * level;
-	m_spellData.damagePerSecond += static_cast<int>(std::floor(m_spellData.damageModifierAddition / m_spellData.duration.asSeconds())) * level;
 }
