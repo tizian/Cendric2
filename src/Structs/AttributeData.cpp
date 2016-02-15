@@ -16,6 +16,7 @@ inline std::string getAttributeText(const std::string& name, int value) {
 }
 
 void AttributeData::appendAttributes(std::string& string, const AttributeData& attr) {
+	string.append(getAttributeText("Health", attr.maxHealthPoints));
 	string.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
 	string.append(getAttributeText("Haste", attr.haste));
 	string.append(getAttributeText("Critical", attr.critical));

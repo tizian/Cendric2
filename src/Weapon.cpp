@@ -45,14 +45,14 @@ int Weapon::getWeaponChopDamage() const {
 }
 
 SpellID Weapon::getCurrentSpellForSlot(int slotNr) const {
-	if (slotNr < 0 || slotNr > m_weaponSlots.size() - 1) {
+	if (slotNr < 0 || slotNr >= m_weaponSlots.size()) {
 		return SpellID::VOID;
 	}
 	return m_weaponSlots[slotNr].spellSlot.spellID;
 }
 
 const std::vector<SpellModifier>* Weapon::getCurrentModifiersForSlot(int slotNr) const {
-	if (slotNr < 0 || slotNr > m_weaponSlots.size() - 1) {
+	if (slotNr < 0 || slotNr >= m_weaponSlots.size()) {
 		return nullptr;
 	}
 	return &m_weaponSlots[slotNr].spellModifiers;
@@ -70,7 +70,7 @@ bool Weapon::addModifier(int slotNr, int modifierNr, const SpellModifier& modifi
 	}
 
 	// check if this modifierNr is allowed
-	if (modifierNr > modifiers.size() - 1 || modifierNr < 0) {
+	if (modifierNr >= modifiers.size() || modifierNr < 0) {
 		g_logger->logWarning("Weapon::addModifier", "Modifier slot with nr " + std::to_string(modifierNr) + " does not exist!");
 		return false;
 	}
@@ -130,7 +130,7 @@ bool Weapon::addSpell(int slotNr, SpellID id, bool force) {
 
 bool Weapon::doesSlotExist(int slotNr) const {
 	// check if slot with this nr exists 
-	if (slotNr < 0 || slotNr > m_weaponSlots.size() - 1) {
+	if (slotNr < 0 || slotNr >= m_weaponSlots.size()) {
 		g_logger->logError("Weapon", "This weapon has not enough slots for the modification (slots: " + std::to_string(m_weaponSlots.size()) + ", required nr: " + std::to_string(slotNr));
 		return false;
 	}
@@ -139,7 +139,7 @@ bool Weapon::doesSlotExist(int slotNr) const {
 
 bool Weapon::isSpellAllowed(int slotNr, SpellID id) const {
 	// check if slot with this nr exists
-	if (slotNr < 0 || (size_t)slotNr > (m_weaponSlots.size() - 1)) {
+	if (slotNr < 0 || slotNr >= m_weaponSlots.size()) {
 		g_logger->logError("Weapon", "This weapon has not enough slots to add this spell (slots: " + std::to_string(m_weaponSlots.size()) + ", required nr: " + std::to_string(slotNr));
 		return false;
 	}

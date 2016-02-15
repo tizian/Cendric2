@@ -31,6 +31,8 @@ item.id:we_icestaff,1
 item.id:we_oathbreaker,1
 item.id:we_rustysword,1
 item.id:we_torch,1
+item.id:we_luce,1
+item.id:we_walkingpole,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2
 equipped.spellslot:3

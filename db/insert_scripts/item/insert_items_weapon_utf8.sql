@@ -22,6 +22,17 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 4, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 5, 'elemental', 3);
 
+-- Luce
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_luce', 'eq_weapon', 300, 100, 50);
+INSERT INTO item_attribute (item_id, max_health, dmg_light, dmg_fire, dmg_ice) values ('we_luce', 10, 15, 15, 15);
+INSERT INTO item_equipment (item_id, texture_path) values ('we_luce', 'res/assets/equipment/weapon/spritesheet_weapon_luce.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_luce', 600, 10, 45, 80, 5);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_luce', 1, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_luce', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_luce', 3, 'divine', 3);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('we_luce', 20, 0, 50, 50, 0.7);
+
 -- Rusty Sword
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_rustysword', 'eq_weapon', 150, 150, 10);
@@ -32,6 +43,13 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_rustysword', 2, 'necromancy', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_rustysword', 3, 'twilight', 1);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_rustysword', 4, 'meta', 3);
+
+-- Walking Pole
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_walkingpole', 'eq_weapon', 250, 100, 10);
+INSERT INTO item_attribute (item_id, max_health) values ('we_walkingpole', 10);
+INSERT INTO item_equipment (item_id, texture_path) values ('we_walkingpole', 'res/assets/equipment/weapon/spritesheet_weapon_walkingpole.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_walkingpole', 500, 10, 40, 80, 5);
 
 -- Oathbreaker
 
