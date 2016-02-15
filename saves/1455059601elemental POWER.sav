@@ -1,7 +1,7 @@
 # time played, in seconds
-time.played:1341
+time.played:1358
 savegame.name:elemental POWER
-savegame.date:1455059601
+savegame.date:1455486332
 level.id:res/level/testleverlevel/testleverlevel.tmx
 level.position:350.000000,400.000000
 is.in.level:0
@@ -34,11 +34,11 @@ item.id:we_torch,1
 item.id:we_luce,1
 item.id:we_walkingpole,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:2
-equipped.spellslot:3
 equipped.spellslot:4
+equipped.spellslot:3
 equipped.spellslot:5
 equipped.spellslot:6
+equipped.spellslot:7
 # equipment:
 equipped.back:eq_back_necrot3
 equipped.body:eq_body_necrot3
@@ -80,4 +80,3 @@ modifier.learned:3,3
 modifier.learned:4,3
 modifier.learned:5,3
 modifier.learned:6,3
-
