@@ -57,7 +57,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_spell_projectile, "res/assets/spells/spritesheet_spell_projectile.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
-		{ ResourceID::Texture_enemy_nekomata_blue_trans, "res/assets/enemies/spritesheet_enemy_nekomata_blue_trans.png" },
+		{ ResourceID::Texture_enemy_nekomata, "res/assets/enemies/spritesheet_enemy_nekomata.png" },
 		{ ResourceID::Texture_enemy_crow, "res/assets/enemies/spritesheet_enemy_crow.png" },
 		{ ResourceID::Texture_enemy_skeleton, "res/assets/enemies/spritesheet_enemy_skeleton.png" },
 		{ ResourceID::Texture_enemy_gargoyle, "res/assets/enemies/spritesheet_enemy_gargoyle.png" },
@@ -389,7 +389,7 @@ void ResourceManager::deleteLevelResources() {
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
 	deleteResource(ResourceID::Texture_enemy_firerat);
-	deleteResource(ResourceID::Texture_enemy_nekomata_blue_trans);
+	deleteResource(ResourceID::Texture_enemy_nekomata);
 	deleteResource(ResourceID::Texture_enemy_crow);
 	deleteResource(ResourceID::Texture_enemy_skeleton);
 	deleteResource(ResourceID::Texture_enemy_gargoyle);

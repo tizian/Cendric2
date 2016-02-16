@@ -12,6 +12,7 @@ void AnimatedSprite::setAnimation(const Animation* animation) {
 	m_currentFrame = 0;
 	setFrame(m_currentFrame);
 	setLooped(m_animation->isLooped());
+	play();
 }
 
 void AnimatedSprite::setFrameTime(sf::Time time) {

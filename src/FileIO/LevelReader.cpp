@@ -15,7 +15,7 @@ void LevelReader::initMaps() {
 	m_enemyMap.insert({
 		{ 1, EnemyID::Rat },
 		{ 2, EnemyID::FireRat },
-		{ 3, EnemyID::Nekomata_blue },
+		{ 3, EnemyID::Nekomata },
 		{ 4, EnemyID::Crow },
 		{ 5, EnemyID::Skeleton },
 		{ 6, EnemyID::Gargoyle },
