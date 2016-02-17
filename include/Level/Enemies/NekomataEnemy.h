@@ -33,8 +33,7 @@ protected:
 	void loadSpells() override;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
-	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::DiskPositionGenerator* m_posGenerator;
+	particles::BoxPositionGenerator* m_posGenerator;
 
 	void loadParticleSystem();
 

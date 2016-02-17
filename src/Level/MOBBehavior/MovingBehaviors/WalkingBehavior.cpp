@@ -1,4 +1,5 @@
 #include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
@@ -34,6 +35,11 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	// if the enemy collidesX but can't jump and is chasing, it waits for a certain time.
 	if (m_enemy->getEnemyState() == EnemyState::Chasing && collidesX && !m_jumps) {
 		m_enemy->setWaiting();
+	}
+	// if the enemy collidesX but can't jump and is ally and idle, teleports to its owner.
+	if (m_enemy->getEnemyState() == EnemyState::Idle && m_enemy->isAlly() && collidesX && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded()) {
+		m_enemy->setPosition(sf::Vector2f(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->height - m_enemy->getBoundingBox()->height));
+		m_isCollisionTiltSuppressed = true;
 	}
 }
 

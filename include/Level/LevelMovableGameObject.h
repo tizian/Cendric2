@@ -46,6 +46,7 @@ public:
 	void flipGravity();
 	
 	SpellManager* getSpellManager() const;
+	AttackingBehavior* getAttackingBehavior() const;
 	MovingBehavior* getMovingBehavior() const;
 	const AttributeData* getAttributes() const;
 	Level* getLevel() const;

@@ -25,6 +25,11 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 }
 
 void MovingBehavior::checkForCollisionTilt(const sf::Vector2f& oldPosition) {
+	if (m_isCollisionTiltSuppressed) {
+		m_isCollisionTiltSuppressed = false;
+		return;
+	}
+
 	if (dist(oldPosition, m_mob->getPosition()) > TILE_SIZE_F / 2.f + norm(m_mob->getVelocity())) {
 		m_mob->setPosition(oldPosition);
 		m_mob->setMovingParent(nullptr);
@@ -80,6 +85,10 @@ float MovingBehavior::getGravity() const {
 
 bool MovingBehavior::isFacingRight() const {
 	return m_isFacingRight;
+}
+
+bool MovingBehavior::isGrounded() const {
+	return m_isGrounded;
 }
 
 bool MovingBehavior::isUpsideDown() const {

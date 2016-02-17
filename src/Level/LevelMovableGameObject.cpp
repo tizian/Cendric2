@@ -234,6 +234,10 @@ MovingBehavior* LevelMovableGameObject::getMovingBehavior() const {
 	return m_movingBehavior;
 }
 
+AttackingBehavior* LevelMovableGameObject::getAttackingBehavior() const {
+	return m_attackingBehavior;
+}
+
 const AttributeData* LevelMovableGameObject::getAttributes() const {
 	return &m_attributes;
 }

@@ -46,6 +46,7 @@ public:
 	void setFightAnimationTime(const sf::Time& fightAnimationTIme);
 	void setFightAnimation();
 	float getGravity() const;
+	bool isGrounded() const;
 	bool isFacingRight() const;
 	bool isUpsideDown() const;
 	bool isIgnoreDynamicTiles() const;
@@ -56,6 +57,7 @@ protected:
 	// if the position delta is too high (> tileSize), the mob is killed and no further collisions are checked.
 	void checkForCollisionTilt(const sf::Vector2f& oldPosition);
 	bool m_isCollisionTilt = false;
+	bool m_isCollisionTiltSuppressed = false;
 
 	LevelMovableGameObject* m_mob;
 	LevelMainCharacter* m_mainChar;

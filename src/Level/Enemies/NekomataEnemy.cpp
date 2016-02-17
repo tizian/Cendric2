@@ -168,25 +168,25 @@ void NekomataEnemy::render(sf::RenderTarget& target) {
 
 
 void NekomataEnemy::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(80, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
 	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 50.f;
+	m_ps->emitRate = 40.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::DiskPositionGenerator>();
+	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->radius = 20.f;
+	posGen->size = sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f);
 	m_posGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 40.f;
-	sizeGen->minEndSize = 30.f;
-	sizeGen->maxEndSize = 60.f;
+	sizeGen->maxStartSize = 20.f;
+	sizeGen->minEndSize = 20.f;
+	sizeGen->maxEndSize = 40.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(24, 21, 57, 100);
-	colGen->maxStartCol = sf::Color(51, 51, 71, 150);
+	colGen->minStartCol = sf::Color(24, 21, 57, 80);
+	colGen->maxStartCol = sf::Color(51, 51, 71, 100);
 	colGen->minEndCol = sf::Color(166, 167, 198, 0);
 	colGen->maxEndCol = sf::Color(198, 199, 210, 0);
 
@@ -195,7 +195,6 @@ void NekomataEnemy::loadParticleSystem() {
 	velGen->maxAngle = 45.f;
 	velGen->minStartVel = 50.f;
 	velGen->maxStartVel = 70.f;
-	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 2.f;
