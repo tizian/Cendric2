@@ -5,16 +5,23 @@
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
+#include "GUI/SpeechBubble.h"
 
-class SkeletonEnemy : public Enemy {
+// will be refactored to talking / scriptable / npc enemy sometime :)
+class HunterEnemy : public Enemy {
 public:
-	SkeletonEnemy(Level* level, Screen* screen);
-	~SkeletonEnemy() {}
+	HunterEnemy(Level* level, Screen* screen);
+	~HunterEnemy() { delete m_speechBubble; }
 
 	void loadAnimation() override;
+	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& target) override;
 
 	sf::Vector2f getConfiguredSpellOffset() const override;
 	int getMentalStrength() const override;
+
+	void setDisposed() override;
+	void setScreen(Screen* screen) override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 
@@ -26,4 +33,7 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
+
+	SpeechBubble* m_speechBubble = nullptr;
+	int m_speechBubbleState = 0;
 };

@@ -1,6 +1,7 @@
 #include "Level/Enemies/NekomataEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
@@ -62,8 +63,14 @@ sf::Vector2f NekomataEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(10.f, 20.f);
 }
 
-MovingBehavior* NekomataEnemy::createMovingBehavior() {
-	WalkingBehavior* behavior = new WalkingBehavior(this);
+MovingBehavior* NekomataEnemy::createMovingBehavior(bool asAlly) {
+	WalkingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyWalkingBehavior(this);
+	}
+	else {
+		behavior = new AggressiveWalkingBehavior(this);
+	}
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(600.f);

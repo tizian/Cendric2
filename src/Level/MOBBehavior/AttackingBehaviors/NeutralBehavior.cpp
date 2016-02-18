@@ -5,10 +5,6 @@ NeutralBehavior::NeutralBehavior(Enemy* enemy) :
 	AttackingBehavior(enemy) {
 }
 
-EnemyAttitude NeutralBehavior::getAttitude() const {
-	return EnemyAttitude::Neutral;
-}
-
 sf::Color NeutralBehavior::getConfiguredHealthColor() const {
 	return sf::Color::Yellow;
 }

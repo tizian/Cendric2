@@ -12,7 +12,7 @@ public:
 	RatEnemy(Level* level, Screen* screen);
 	~RatEnemy() {}
 
-	MovingBehavior* createMovingBehavior() override;
+	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 
 	bool getFleeCondition() const override;

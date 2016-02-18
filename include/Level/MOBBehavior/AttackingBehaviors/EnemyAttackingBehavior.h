@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Level/MOBBehavior/AttackingBehavior.h"
-#include "Enums/EnemyAttitude.h"
 
 // An attacking behavior for enemies
 class EnemyAttackingBehavior : public virtual AttackingBehavior {
@@ -20,7 +19,6 @@ public:
 	float getAggroRange() const;
 	float distToTarget() const;
 
-	virtual EnemyAttitude getAttitude() const = 0;
 	virtual sf::Color getConfiguredHealthColor() const = 0;
 
 protected:

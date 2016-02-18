@@ -8,5 +8,6 @@ enum class EnemyID {
 	Crow,
 	Skeleton,
 	Gargoyle,
+	Hunter, // only temporary here, should be NPC
 	MAX
 };

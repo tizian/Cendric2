@@ -17,7 +17,7 @@ public:
 	void loadAnimation() override;
 	void loadAnimation(int skinNr);
 
-	MovingBehavior* createMovingBehavior() override;
+	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 
 	sf::Time getConfiguredWaitingTime() const override;

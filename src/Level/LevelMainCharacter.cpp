@@ -19,7 +19,7 @@ void LevelMainCharacter::load() {
 	loadBehavior();
 }
 
-MovingBehavior* LevelMainCharacter::createMovingBehavior() {
+MovingBehavior* LevelMainCharacter::createMovingBehavior(bool asAlly) {
 	UserMovingBehavior* behavior = new UserMovingBehavior(this);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityYDown(800.f);

@@ -17,7 +17,7 @@ public:
 
 	void load();
 
-	MovingBehavior* createMovingBehavior() override;
+	MovingBehavior* createMovingBehavior(bool asAlly = false) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly = false) override;
 
 	void setCharacterCore(CharacterCore* core);

@@ -1,6 +1,7 @@
 #include "Level/Enemies/GargoyleEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/FlyingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveFlyingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AllyFlyingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
@@ -95,8 +96,14 @@ sf::Vector2f GargoyleEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(20.f, 50.f);
 }
 
-MovingBehavior* GargoyleEnemy::createMovingBehavior() {
-	FlyingBehavior* behavior = new FlyingBehavior(this);
+MovingBehavior* GargoyleEnemy::createMovingBehavior(bool asAlly) {
+	FlyingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyFlyingBehavior(this);
+	}
+	else {
+		behavior = new AggressiveFlyingBehavior(this);
+	}
 	behavior->setApproachingDistance(60.f);
 	behavior->setMaxVelocityYDown(150.f);
 	behavior->setMaxVelocityYUp(150.f);

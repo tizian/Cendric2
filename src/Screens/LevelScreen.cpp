@@ -146,6 +146,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
 			updateObjects(GameObjectType::_LevelEquipment, frameTime);
 			updateObjects(GameObjectType::_Spell, frameTime);
+			updateObjects(GameObjectType::_Window, frameTime);
 			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			
 			updateObjects(GameObjectType::_Light, frameTime);
@@ -224,6 +225,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_Enemy, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
+	renderObjects(GameObjectType::_Window, renderTarget);
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!

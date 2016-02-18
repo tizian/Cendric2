@@ -8,20 +8,23 @@ AllyBehavior::AllyBehavior(Enemy* enemy) :
 void AllyBehavior::update(const sf::Time& frameTime) {
 	EnemyAttackingBehavior::update(frameTime);
 	GameObject::updateTime(m_timeToLive, frameTime);
-	if (m_timeToLive == sf::Time::Zero) {
-		m_enemy->setDead();
-	}
-	if (m_timeToLive < sf::seconds(5)) {
-		m_enemy->setSpriteColor(sf::Color(255, 255, 255, m_timeToLive.asMilliseconds() / 20), sf::seconds(1));
+	if (m_hasTimeToLive) {
+		if (m_timeToLive == sf::Time::Zero) {
+			m_enemy->setDead();
+		}
+		if (m_timeToLive < sf::seconds(5)) {
+			m_enemy->setSpriteColor(sf::Color(255, 255, 255, m_timeToLive.asMilliseconds() / 20), sf::seconds(1));
+		}
 	}
 }
 
 void AllyBehavior::setTimeToLive(const sf::Time& ttl) {
+	if (ttl <= sf::Time::Zero) {
+		m_hasTimeToLive = false;
+		return;
+	}
+	m_hasTimeToLive = true;
 	m_timeToLive = ttl;
-}
-
-EnemyAttitude AllyBehavior::getAttitude() const {
-	return EnemyAttitude::Ally;
 }
 
 sf::Color AllyBehavior::getConfiguredHealthColor() const {

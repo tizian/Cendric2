@@ -6,17 +6,16 @@
 #include "Enums/LevelDynamicTileID.h"
 
 // A moving behavior for flying enemies.
-class FlyingBehavior : public EnemyMovingBehavior {
+class FlyingBehavior : public virtual EnemyMovingBehavior {
 public:
 	FlyingBehavior(Enemy* enemy);
 	~FlyingBehavior() {};
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void updateAnimation() override;
-	void handleMovementInput() override;
 	void makeRandomDecision() override;
 
-private:
+protected:
 	// a flying enemy will never fly into those and handle them as collidable tiles.
 	// default is water, spikes top, spikes bottom.
 	std::set<LevelDynamicTileID> m_avoidableTiles;

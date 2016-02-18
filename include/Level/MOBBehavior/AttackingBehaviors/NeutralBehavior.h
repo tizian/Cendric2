@@ -12,6 +12,5 @@ public:
 
 	void updateAggro() override;
 
-	EnemyAttitude getAttitude() const override;
 	sf::Color getConfiguredHealthColor() const override;
 };

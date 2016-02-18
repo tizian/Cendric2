@@ -1,6 +1,7 @@
 #include "Level/Enemies/RatEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
@@ -41,8 +42,14 @@ sf::Vector2f RatEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
-MovingBehavior* RatEnemy::createMovingBehavior() {
-	WalkingBehavior* behavior = new WalkingBehavior(this);
+MovingBehavior* RatEnemy::createMovingBehavior(bool asAlly) {
+	WalkingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyWalkingBehavior(this);
+	}
+	else {
+		behavior = new AggressiveWalkingBehavior(this);
+	}
 	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(10.f);
 	behavior->setMaxVelocityYDown(400.f);

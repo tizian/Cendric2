@@ -15,9 +15,9 @@ public:
 	// sets the time to live for an allied enemy
 	void setTimeToLive(const sf::Time& ttl);
 
-	EnemyAttitude getAttitude() const override;
 	sf::Color getConfiguredHealthColor() const override;
 
 private:
 	sf::Time m_timeToLive = sf::Time::Zero;
+	bool m_hasTimeToLive = false;
 };

@@ -10,7 +10,6 @@
 #include "Enums/SpellID.h"
 #include "Enums/DamageType.h"
 #include "Enums/EnemyState.h"
-#include "Enums/EnemyAttitude.h"
 
 #include "Level/EnemyBuffBar.h"
 
@@ -49,7 +48,6 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 	EnemyID getEnemyID() const;
-	EnemyAttitude getAttitude() const;
 	EnemyState getEnemyState() const;
 	// a level, ranges from 0 to 4. An enemy can only be feared / stunned / resurrected, if the level of its spell is high enough.
 	// default is 0. A enemy with level 4 can never be feared / stunned / controlled or affected in any other way!!
@@ -130,4 +128,6 @@ private:
 	static const float PICKUP_RANGE;
 
 	EnemyBuffBar* m_buffBar = nullptr;
+
+	bool m_isAlly = false;
 };

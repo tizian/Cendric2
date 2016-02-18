@@ -65,7 +65,7 @@ protected:
 	virtual void loadBehavior();
 
 	// behavior strategies aka "components"
-	virtual MovingBehavior* createMovingBehavior() = 0;
+	virtual MovingBehavior* createMovingBehavior(bool asAlly = false) = 0;
 	virtual AttackingBehavior* createAttackingBehavior(bool asAlly = false) = 0;
 
 	MovingBehavior* m_movingBehavior = nullptr;

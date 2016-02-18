@@ -6,10 +6,6 @@ AggressiveBehavior::AggressiveBehavior(Enemy* enemy) :
 	m_currentTarget = m_mainChar;
 }
 
-EnemyAttitude AggressiveBehavior::getAttitude() const {
-	return EnemyAttitude::Aggressive;
-}
-
 sf::Color AggressiveBehavior::getConfiguredHealthColor() const {
 	return sf::Color::Red;
 } 

@@ -1,6 +1,7 @@
 #include "Level/Enemies/CrowEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/FlyingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveFlyingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AllyFlyingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
@@ -42,8 +43,14 @@ sf::Vector2f CrowEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(-10.f, 0.f);
 }
 
-MovingBehavior* CrowEnemy::createMovingBehavior() {
-	FlyingBehavior* behavior = new FlyingBehavior(this);
+MovingBehavior* CrowEnemy::createMovingBehavior(bool asAlly) {
+	FlyingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyFlyingBehavior(this);
+	}
+	else {
+		behavior = new AggressiveFlyingBehavior(this);
+	}
 	behavior->setApproachingDistance(10.f);
 	behavior->setMaxVelocityYDown(200.f);
 	behavior->setMaxVelocityYUp(100.f);

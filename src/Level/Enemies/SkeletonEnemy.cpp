@@ -1,6 +1,7 @@
 #include "Level/Enemies/SkeletonEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
@@ -96,8 +97,14 @@ void SkeletonEnemy::loadAnimation() {
 	playCurrentAnimation(true);
 }
 
-MovingBehavior* SkeletonEnemy::createMovingBehavior() {
-	WalkingBehavior* behavior = new WalkingBehavior(this);
+MovingBehavior* SkeletonEnemy::createMovingBehavior(bool asAlly) {
+	WalkingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyWalkingBehavior(this);
+	}
+	else {
+		behavior = new AggressiveWalkingBehavior(this);
+	}
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);

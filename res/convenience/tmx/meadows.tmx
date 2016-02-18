@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="42">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="50" tileheight="50" nextobjectid="44">
  <properties>
   <property name="dimming" value="0.4"/>
   <property name="name" value="Meadows"/>
@@ -1109,6 +1109,13 @@
     <property name="level id" value="res/level/crypt/crypt.tmx"/>
     <property name="x" value="350"/>
     <property name="y" value="400"/>
+   </properties>
+  </object>
+  <object id="43" x="4303.5" y="862" width="47" height="38">
+   <properties>
+    <property name="level id" value="res/level/rockfall/rockfall.tmx"/>
+    <property name="x" value="300"/>
+    <property name="y" value="600"/>
    </properties>
   </object>
  </objectgroup>

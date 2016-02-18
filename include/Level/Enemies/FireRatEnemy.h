@@ -14,7 +14,7 @@ public:
 
 	void loadAnimation() override;
 
-	MovingBehavior* createMovingBehavior() override;
+	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 
 	int getMentalStrength() const override;

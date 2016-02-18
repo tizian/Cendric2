@@ -1,6 +1,7 @@
 #include "Level/Enemies/FireRatEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
@@ -107,8 +108,14 @@ void FireRatEnemy::loadAnimation() {
 	playCurrentAnimation(true);
 }
 
-MovingBehavior* FireRatEnemy::createMovingBehavior() {
-	WalkingBehavior* behavior = new WalkingBehavior(this);
+MovingBehavior* FireRatEnemy::createMovingBehavior(bool asAlly) {
+	WalkingBehavior* behavior;
+	if (asAlly) {
+		behavior = new AllyWalkingBehavior(this);
+	}
+	else {
+		behavior = new AggressiveWalkingBehavior(this);
+	}
 	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(10.f);
 	behavior->setMaxVelocityYDown(400.f);

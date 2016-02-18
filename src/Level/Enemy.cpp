@@ -47,7 +47,7 @@ void Enemy::onHit(Spell* spell) {
 	}
 	// check for owner
 	if (const Enemy* enemy = dynamic_cast<const Enemy*>(spell->getOwner())) {
-		if (getAttitude() == enemy->getAttitude()) {
+		if (isAlly() == enemy->isAlly()) {
 			return;
 		}
 	}
@@ -185,7 +185,7 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 }
 
 bool Enemy::isAlly() const {
-	return m_enemyAttackingBehavior->getAttitude() == EnemyAttitude::Ally;
+	return m_isAlly;
 }
 
 const LevelMovableGameObject* Enemy::getCurrentTarget() const {
@@ -194,10 +194,6 @@ const LevelMovableGameObject* Enemy::getCurrentTarget() const {
 
 EnemyID Enemy::getEnemyID() const {
 	return m_id;
-}
-
-EnemyAttitude Enemy::getAttitude() const {
-	return m_enemyAttackingBehavior->getAttitude();
 }
 
 float Enemy::getConfiguredDistanceToHPBar() const {
@@ -243,6 +239,11 @@ void Enemy::setObjectID(int id) {
 }
 
 void Enemy::setAlly(const sf::Time& ttl) {
+	m_isAlly = true;
+	delete m_movingBehavior;
+	m_movingBehavior = createMovingBehavior(true);
+	m_enemyMovingBehavior = dynamic_cast<EnemyMovingBehavior*>(m_movingBehavior);
+
 	delete m_attackingBehavior;
 	m_attackingBehavior = createAttackingBehavior(true);
 	AllyBehavior* allyBehavior = dynamic_cast<AllyBehavior*>(m_attackingBehavior);
