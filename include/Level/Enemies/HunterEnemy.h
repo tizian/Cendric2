@@ -11,11 +11,10 @@
 class HunterEnemy : public Enemy {
 public:
 	HunterEnemy(Level* level, Screen* screen);
-	~HunterEnemy() { delete m_speechBubble; }
+	~HunterEnemy() {}
 
 	void loadAnimation() override;
 	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& target) override;
 
 	sf::Vector2f getConfiguredSpellOffset() const override;
 	int getMentalStrength() const override;
@@ -34,6 +33,6 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 
-	SpeechBubble* m_speechBubble = nullptr;
+	SpeechBubble* m_speechBubble;
 	int m_speechBubbleState = 0;
 };

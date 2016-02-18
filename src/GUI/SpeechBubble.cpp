@@ -5,7 +5,7 @@
 using namespace std;
 
 const float SpeechBubble::MIN_SIZE = 20.f;
-const float SpeechBubble::MAX_LENGTH = 100.f;
+const float SpeechBubble::MAX_LENGTH = 150.f;
 const float SpeechBubble::TEXT_MARGIN = 5.f;
 const float SpeechBubble::FLOATING_HEIGHT = 30.f;
 
@@ -38,9 +38,9 @@ void SpeechBubble::setText(const std::string& text) {
 	m_boundingBox.width = newSize.x + 2 * TEXT_MARGIN;
 	m_boundingBox.height = newSize.y + 2 * TEXT_MARGIN;
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), sf::Color::Black, m_boundingBox.width, m_boundingBox.height);
-	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_LIGHT_PURPLE, m_boundingBox.width, m_boundingBox.height);
-	m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), sf::Color::White, m_boundingBox.width, m_boundingBox.height);
+	m_mainLayer.setSize(m_boundingBox.width, m_boundingBox.height);
+	m_backLayer.setSize(m_boundingBox.width, m_boundingBox.height);
+	m_ornamentLayer.setSize(m_boundingBox.width, m_boundingBox.height);
 }
 
 void SpeechBubble::render(sf::RenderTarget& renderTarget) {

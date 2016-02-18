@@ -18,7 +18,7 @@ HunterEnemy::HunterEnemy(Level* level, Screen* screen) :
 	load(EnemyID::Hunter);
 	setAlly(sf::Time::Zero);
 
-	
+	m_speechBubble = new SpeechBubble(this);
 }
 
 void HunterEnemy::loadAttributes() {
@@ -51,15 +51,8 @@ void HunterEnemy::handleAttackInput() {
 	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
 
-void HunterEnemy::render(sf::RenderTarget& target) {
-	Enemy::render(target);
-	if (m_speechBubble == nullptr) return;
-	m_speechBubble->render(target);
-}
-
 void HunterEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
-	if (m_speechBubble == nullptr) return;
 
 	m_speechBubble->update(frameTime);
 
@@ -67,19 +60,19 @@ void HunterEnemy::update(const sf::Time& frameTime) {
 	if (m_speechBubbleState >= 4) return;
 
 	if (m_speechBubbleState == 3 && getPosition().x > 1750) {
-		m_speechBubble++;
+		m_speechBubbleState++;
 		m_speechBubble->setText("KillRats");
 	}
 	else if (m_speechBubbleState == 2 && getPosition().x > 1500) {
-		m_speechBubble++;
+		m_speechBubbleState++;
 		m_speechBubble->setText("FindAWay");
 	}
 	else if (m_speechBubbleState == 1 && getPosition().x > 850) {
-		m_speechBubble++;
+		m_speechBubbleState++;
 		m_speechBubble->setText("SpikesAreBad");
 	}
 	else if (m_speechBubbleState == 0 && getPosition().x > 0) {
-		m_speechBubble++;
+		m_speechBubbleState++;
 		m_speechBubble->setText("DestroyBlocks");
 	}
 }
@@ -125,8 +118,6 @@ void HunterEnemy::loadAnimation() {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
-
-	//m_speechBubble = new SpeechBubble(this);
 }
 
 MovingBehavior* HunterEnemy::createMovingBehavior(bool asAlly) {
@@ -159,10 +150,10 @@ int HunterEnemy::getMentalStrength() const {
 
 void HunterEnemy::setDisposed() {
 	Enemy::setDisposed();
-	delete m_speechBubble;
-	m_speechBubble = nullptr;
+	m_speechBubble->setDisposed();
 }
 void HunterEnemy::setScreen(Screen* screen) {
 	Enemy::setScreen(screen);
+	screen->addObject(m_speechBubble);
 }
 
