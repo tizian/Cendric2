@@ -9,8 +9,16 @@ AllyWalkingBehavior::AllyWalkingBehavior(Enemy* enemy) :
 void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	WalkingBehavior::checkCollisions(nextPosition);
 	// if the enemy collidesX but can't jump and is ally and idle, teleports to its owner.
-	if (m_enemy->getEnemyState() == EnemyState::Idle && m_collidesX && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded()) {
-		m_enemy->setPosition(sf::Vector2f(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->height - m_enemy->getBoundingBox()->height));
+	EnemyState state = m_enemy->getEnemyState();
+	if (state != EnemyState::Chasing && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded() && dist(m_mainChar->getPosition(), m_enemy->getPosition()) > 400.f) {
+		sf::Vector2f newPos(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->height - m_enemy->getBoundingBox()->height);
+		WorldCollisionQueryRecord rec;
+		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
+		rec.boundingBox = *m_enemy->getBoundingBox();
+		rec.boundingBox.left = newPos.x;
+		rec.boundingBox.top = newPos.y;
+		if (m_enemy->getLevel()->collides(rec)) return;
+		m_enemy->setPosition(newPos);
 		m_isCollisionTiltSuppressed = true;
 	}
 }
@@ -63,11 +71,13 @@ void AllyWalkingBehavior::handleMovementInput() {
 
 		sf::Vector2f mainCharCenter = m_mainChar->getCenter();
 
-		if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > m_approachingDistance) {
+		float approachingDistance = (m_enemy->getState() == GameObjectState::Walking) ? (m_approachingDistance - 10.f) : m_approachingDistance;
+
+		if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > approachingDistance) {
 			m_nextIsFacingRight = false;
 			newAccelerationX -= m_walkAcceleration;
 		}
-		else if (mainCharCenter.x > center.x && std::abs(mainCharCenter.x - center.x) > m_approachingDistance) {
+		else if (mainCharCenter.x > center.x && std::abs(mainCharCenter.x - center.x) > approachingDistance) {
 			m_nextIsFacingRight = true;
 			newAccelerationX += m_walkAcceleration;
 		}

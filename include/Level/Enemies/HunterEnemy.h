@@ -21,6 +21,7 @@ public:
 
 	void setDisposed() override;
 	void setScreen(Screen* screen) override;
+	float getConfiguredDistanceToHPBar() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 

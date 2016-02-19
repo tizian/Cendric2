@@ -5,6 +5,7 @@
 FlyingBehavior::FlyingBehavior(Enemy* enemy) : 
 	EnemyMovingBehavior(enemy),
 	MovingBehavior(enemy) {
+
 	m_avoidableTiles.insert(LevelDynamicTileID::Water);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);

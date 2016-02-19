@@ -16,7 +16,7 @@ public:
 	void makeRandomDecision() override;
 
 protected:
-	// a flying enemy will never fly into those and handle them as collidable tiles.
+	// a enemy will never fly into those and handles them as collidable tiles.
 	// default is water, spikes top, spikes bottom.
 	std::set<LevelDynamicTileID> m_avoidableTiles;
 

@@ -19,6 +19,9 @@ HunterEnemy::HunterEnemy(Level* level, Screen* screen) :
 	setAlly(sf::Time::Zero);
 
 	m_speechBubble = new SpeechBubble(this);
+	m_speechBubble->setFloatingHeight(40.f);
+
+	m_isImmortal = true;
 }
 
 void HunterEnemy::loadAttributes() {
@@ -31,9 +34,9 @@ void HunterEnemy::loadAttributes() {
 
 void HunterEnemy::loadSpells() {
 	SpellData arrow = SpellData::getSpellData(SpellID::Projectile);
-	arrow.damage = 50;
+	arrow.damage = 10;
 	arrow.duration = sf::seconds(2.f);
-	arrow.damagePerSecond = 10;
+	arrow.damagePerSecond = 2;
 	arrow.cooldown = sf::milliseconds(2000);
 
 	m_spellManager->addSpell(arrow);
@@ -43,6 +46,10 @@ void HunterEnemy::loadSpells() {
 
 sf::Vector2f HunterEnemy::getConfiguredSpellOffset() const {
 	return sf::Vector2f(10.f, 20.f);
+}
+
+float HunterEnemy::getConfiguredDistanceToHPBar() const {
+	return 30.f;
 }
 
 void HunterEnemy::handleAttackInput() {
@@ -78,8 +85,8 @@ void HunterEnemy::update(const sf::Time& frameTime) {
 }
 
 void HunterEnemy::loadAnimation() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 90.f));
-	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 95.f));
+	setSpriteOffset(sf::Vector2f(-30.f, -25.f));
 
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_hunter));
@@ -125,11 +132,11 @@ MovingBehavior* HunterEnemy::createMovingBehavior(bool asAlly) {
 
 	behavior = new AllyWalkingBehavior(this);
 
-	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(30.f);
+	behavior->setDistanceToAbyss(10.f);
+	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(150.f);
+	behavior->setMaxVelocityYUp(500.f);
+	behavior->setMaxVelocityX(180.f);
 	behavior->setFightAnimationTime(sf::milliseconds(4 * 70));
 	behavior->calculateJumpHeight();
 	return behavior;
@@ -139,7 +146,7 @@ AttackingBehavior* HunterEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 
 	behavior = new AllyBehavior(this);
-	behavior->setAggroRange(800.f);
+	behavior->setAggroRange(600.f);
 	behavior->setAttackInput(std::bind(&HunterEnemy::handleAttackInput, this));
 	return behavior;
 }

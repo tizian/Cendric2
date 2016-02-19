@@ -72,6 +72,7 @@ protected:
 	AttackingBehavior* m_attackingBehavior = nullptr;
 
 	bool m_isDead = false;
+	bool m_isImmortal = false;
 	Level* m_level;
 
 	SpellManager* m_spellManager;

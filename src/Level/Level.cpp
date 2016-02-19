@@ -93,24 +93,6 @@ void Level::update(const sf::Time& frameTime) {
 	m_camera->update(frameTime);
 }
 
-bool Level::fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize, bool ignoreDynamicTiles) const {
-	WorldCollisionQueryRecord rec;
-	rec.boundingBox = boundingBox;
-	rec.ignoreDynamicTiles = ignoreDynamicTiles;
-	rec.boundingBox.left = right ? rec.boundingBox.left + stepSize : rec.boundingBox.left - stepSize;
-	if (collides(rec)) {
-		return false;
-	}
-	for (float y = boundingBox.top; y < boundingBox.top + jumpHeight; /* don't increment y here */) {
-		y = std::min(boundingBox.top + jumpHeight, y + TILE_SIZE_F);
-		rec.boundingBox.top = y;
-		if (collides(rec)) {
-			return false;
-		}
-	}
-	return true;
-}
-
 bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles) const {
 	WorldCollisionQueryRecord rec;
 	rec.boundingBox = boundingBox;

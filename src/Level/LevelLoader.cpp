@@ -45,7 +45,7 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 		chestTile->setObjectID(it.objectID);
 		chestTile->setStrength(it.chestStrength);
 		chestTile->setLoot(loot, gold);
-		chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset() - sf::Vector2f(0.f, TILE_SIZE_F));
+		chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset());
 		chestTile->setDebugBoundingBox(sf::Color::Yellow);
 		chestTile->loadAnimation(it.skinNr);
 		screen->addObject(chestTile);
@@ -62,7 +62,7 @@ void LevelLoader::loadMovingTiles(LevelData& data, Screen* screen, Level* level)
 		movingTile->init();
 		movingTile->setDebugBoundingBox(sf::Color::Yellow);
 		movingTile->loadAnimation(movingData.skinNr);
-		movingTile->setPosition(movingData.spawnPosition - sf::Vector2f(0.f, TILE_SIZE_F));
+		movingTile->setPosition(movingData.spawnPosition);
 		movingTile->setDynamicTileID(LevelDynamicTileID::Moving);
 
 		screen->addObject(movingTile);
@@ -85,7 +85,7 @@ void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* leve
 		modifierTile->init();
 		modifierTile->loadAnimation(0);
 		modifierTile->setDebugBoundingBox(sf::Color::Yellow);
-		modifierTile->setPosition(modifierData.spawnPosition - sf::Vector2f(0.f, TILE_SIZE_F));
+		modifierTile->setPosition(modifierData.spawnPosition);
 
 		screen->addObject(modifierTile);
 	}

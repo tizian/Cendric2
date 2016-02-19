@@ -155,7 +155,7 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 		ChestData chestData;
 		chestData.skinNr = skinNr;
 		chestData.objectID = id;
-		chestData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		chestData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
 
 		// chest loot
 		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
@@ -221,7 +221,7 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 		int offset = static_cast<int>(LevelDynamicTileID::Modifier) + m_firstGidDynamicTiles - 1;
 
 		ModifierTileData modifierData;
-		modifierData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		modifierData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
 		modifierData.modifier = EMPTY_SPELLMODIFIER;
 
 		// modifier type and level
@@ -293,7 +293,7 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
 
 		MovingTileData movingTileData;
-		movingTileData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		movingTileData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
 		movingTileData.skinNr = skinNr;
 
 		// modifier type and level
@@ -400,7 +400,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 		EnemyData enemyData;
 		enemyData.objectID = id;
 		enemyData.id = m_enemyMap.at(gid);
-		enemyData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		enemyData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
 		
 		// enemy loot
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");

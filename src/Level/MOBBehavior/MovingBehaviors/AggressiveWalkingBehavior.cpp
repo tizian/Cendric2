@@ -56,6 +56,11 @@ void AggressiveWalkingBehavior::handleMovementInput() {
 			m_nextIsFacingRight = m_randomDecision == 1;
 			newAccelerationX += m_randomDecision * m_walkAcceleration;
 		}
+
+		if (m_jumps && m_isGrounded) {
+			m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
+			m_jumps = false;
+		}
 	}
 
 	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -m_gravity : m_gravity)));

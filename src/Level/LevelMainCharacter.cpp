@@ -259,12 +259,14 @@ void LevelMainCharacter::lootItems(std::map<std::string, int>& items) const {
 }
 
 void LevelMainCharacter::addGold(int gold) const {
+	if (gold <= 0) return;
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange("gold", gold);
 	}
 }
 
 void LevelMainCharacter::removeGold(int gold) const {
+	if (gold >= 0) return;
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange("gold", -gold);
 	}

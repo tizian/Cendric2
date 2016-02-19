@@ -21,6 +21,7 @@ public:
 
 	void setText(const std::string& text);
 	void setPosition(const sf::Vector2f& position) override;
+	void setFloatingHeight(float height);
 
 	GameObjectType getConfiguredType() const override;
 
@@ -30,10 +31,11 @@ public:
 private:
 	LevelMovableGameObject* m_owner = nullptr;
 	bool m_isVisible = true;
+	// The height of the speech bubble above its owner, default is 30.f
+	float m_floatingHeight = 30.f;
 	BitmapText m_text;
 
 	SlicedSprite m_mainLayer;
-	SlicedSprite m_backLayer;
 	SlicedSprite m_ornamentLayer;
 
 	sf::Sprite m_pointer;
@@ -44,6 +46,4 @@ private:
 	static const float MAX_LENGTH;
 	// The margin outside of the speech bubble text.
 	static const float TEXT_MARGIN;
-	// The height of the speech bubble above its owner
-	static const float FLOATING_HEIGHT;
 };

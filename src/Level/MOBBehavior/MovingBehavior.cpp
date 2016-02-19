@@ -181,7 +181,7 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 		bool isFalling = isUpsideDown() != isMovingDown;
-		// reset moving p arent
+		// reset moving parent
 		rec.movingParent = nullptr;
 		collidesY = level.collides(rec);
 		m_mob->setMovingParent(rec.movingParent);

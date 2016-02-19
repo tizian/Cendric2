@@ -28,7 +28,7 @@ public:
 	// change x speed (used for ghost spell)
 	void setMaxXVelocityScale(float scale);
 	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
-	void setIgnoreDynamicTiles(bool value);
+	virtual void setIgnoreDynamicTiles(bool value);
 
 	void setMaxVelocityX(float vel);
 	void setMaxVelocityYUp(float vel);

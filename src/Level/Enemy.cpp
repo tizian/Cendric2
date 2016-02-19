@@ -308,6 +308,7 @@ void Enemy::onRightClick() {
 }
 
 void Enemy::setDead() {
+	if (m_isImmortal) return;
 	LevelMovableGameObject::setDead();
 	m_buffBar->clear();
 

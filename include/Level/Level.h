@@ -7,6 +7,7 @@
 #include "LevelLoader.h"
 #include "SpeedupPullCamera.h"
 #include "Structs/LevelExitData.h"
+#include "Structs/AIWalkingQueryRecord.h"
 
 // a sidescroller level
 class Level : public World {
@@ -32,8 +33,6 @@ public:
 	LevelExitData* checkLevelExit(const sf::FloatRect& boundingBox) const;
 	// formula for the jump height is vel_y_max^2 / (2*gravity acc)
 	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles = false) const;
-	// calculates if the object would fall deeper than it can jump if it did one more step in the given direction.
-	bool fallsDeep(const sf::FloatRect& boundingBox, float jumpHeight, bool right, float stepSize, bool ignoreDynamicTiles = false) const;
 	// collision with the level, see WorldCollisionQueryRecord for more infos about the argument
 	bool collides(WorldCollisionQueryRecord& rec) const override;
 	// checks for collisions with those specific dynamic tiles

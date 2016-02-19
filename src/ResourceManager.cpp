@@ -116,6 +116,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_slot_highlight, "res/assets/gui/slot_highlight.png" },
 		{ ResourceID::Texture_GUI_slot_buff, "res/assets/gui/slot_buff.png" },
 		{ ResourceID::Texture_GUI_cursor, "res/assets/gui/cursor.png" },
+		{ ResourceID::Texture_GUI_speechbubble_pointer, "res/assets/gui/speechbubble_pointer.png" },
 		{ ResourceID::Texture_Particle_circle, "res/assets/particles/circle.png" },
 		{ ResourceID::Texture_Particle_blob, "res/assets/particles/blob.png" },
 		{ ResourceID::Texture_Particle_blob2, "res/assets/particles/blob2.png" },
@@ -400,12 +401,10 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_debuff_fear);
 	deleteResource(ResourceID::Texture_debuff_stun);
 
-	// delete item in level resources
+	// delete other level resources
 	deleteResource(ResourceID::Texture_levelitems);
-
-	// delete game over sprite
 	deleteResource(ResourceID::Texture_screen_gameover);
-
+	deleteResource(ResourceID::Texture_GUI_speechbubble_pointer);
 }
 
 void ResourceManager::loadMapResources() {
