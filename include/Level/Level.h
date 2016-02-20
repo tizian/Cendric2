@@ -31,8 +31,6 @@ public:
 
 	// checks if the main char has reached a level exit. If no, it returns nullptr, the map id and spawn point for the map.
 	LevelExitData* checkLevelExit(const sf::FloatRect& boundingBox) const;
-	// formula for the jump height is vel_y_max^2 / (2*gravity acc)
-	bool collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles = false) const;
 	// collision with the level, see WorldCollisionQueryRecord for more infos about the argument
 	bool collides(WorldCollisionQueryRecord& rec) const override;
 	// checks for collisions with those specific dynamic tiles

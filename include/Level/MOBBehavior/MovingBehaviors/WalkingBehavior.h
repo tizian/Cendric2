@@ -20,18 +20,20 @@ public:
 
 	float getDistanceToAbyss() const;
 
-	int getRandomDecision() const;
+	int getWalkingDirection() const;
 
 protected:
 	AIWalkingQueryRecord m_aiRecord;
 
-	// this function returns whether an 
-	// ai jump should be done. check the ai Record for further details if this function returns true.
-	bool doAIJump();
+	// this function returns whether an ai jump has been calculated.
+	// check the ai Record for further details if this function returns true.
+	// the argument decides whether only a jump should be checked or if the option to walk on 
+	// should also be considered.
+	bool doAIJump(bool onlyJump);
 
-	float m_jumpHeight;
 	bool m_jumps = false;
 	bool m_walksBlindly = false;
 	bool m_collidesX = false;
-	int m_randomDecision = 0;
+	// 0 means stand still, 1 walk right, -1 walk left
+	int m_walkingDirection = 0;
 };

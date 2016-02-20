@@ -2,28 +2,34 @@
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
-#include "MovableGhost.h"
+#include "Level/MOBBehavior/JumpingGhost.h"
 
-WalkingBehavior::WalkingBehavior(Enemy* enemy) : 
+WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 	EnemyMovingBehavior(enemy),
 	MovingBehavior(enemy) {
 }
 
-bool WalkingBehavior::doAIJump() {
+bool WalkingBehavior::doAIJump(bool onlyJump) {
+	if (m_enemy->isDead()) {
+		return false;
+	}
 	sf::FloatRect bb = *m_enemy->getBoundingBox();
 
-	bb.left = m_isFacingRight ? bb.left + m_aiRecord.distanceToAbyss : bb.left - m_aiRecord.distanceToAbyss;
-	bb.top = m_isFlippedGravity ? bb.top - 1.f : bb.top + 1.f;
+	if (!onlyJump) {
+		bb.left = m_isFacingRight ? bb.left + m_aiRecord.distanceToAbyss : bb.left - m_aiRecord.distanceToAbyss;
+		bb.top = m_isFlippedGravity ? bb.top - 1.f : bb.top + 1.f;
 
-	WorldCollisionQueryRecord rec;
-	rec.boundingBox = bb;
-	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
-	if (m_enemy->getLevel()->collides(rec)) return false;
+		WorldCollisionQueryRecord rec;
+		rec.boundingBox = bb;
+		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
+		if (m_enemy->getLevel()->collides(rec)) return false;
+	} 
 
 	// we did not collide with our ghost rec. check if we can jump or walk on.
 	m_aiRecord.shouldJump = false;
 	m_aiRecord.shouldWalk = false;
 	
+	m_aiRecord.isFlippedGravity = m_isFlippedGravity;
 	m_aiRecord.accelerationGravity = m_isFlippedGravity ? -m_configuredGravity : m_configuredGravity;
 	m_aiRecord.accelerationX = m_isFacingRight ? m_walkAcceleration : -m_walkAcceleration;
 	m_aiRecord.maxVelX = m_maxVelocityX;
@@ -32,66 +38,25 @@ bool WalkingBehavior::doAIJump() {
 	m_aiRecord.dampingAirPerS = m_dampingAirPerS;
 	m_aiRecord.dampingGroundPerS = m_dampingGroundPerS;
 
-	const sf::Time fixedTimestep = sf::seconds(0.1f);
-
-	float landingYPosJump = -1000.f;
-	float landingYPosWalk = -1000.f;
-
-	// check the jump for 2 sec. 
+	float landingYPosJump = -1.f;
+	float landingYPosWalk = -1.f;
+ 
 	m_aiRecord.boundingBox = *m_enemy->getBoundingBox();
-	m_aiRecord.boundingBox.left = m_isFacingRight ? m_aiRecord.boundingBox.left - 1.f : m_aiRecord.boundingBox.left + 1.f;
-	MovableGhost* ghost = new MovableGhost(m_aiRecord, m_mob->getLevel(), m_mob->getScreen());
+	JumpingGhost* ghost = new JumpingGhost(m_aiRecord, m_mob->getLevel(), m_mob->getScreen());
 	ghost->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp);
-	for (int i = 1; i < 20; ++i) {
-		ghost->update(fixedTimestep);
-		if (ghost->getGhostRecord().collides) {
-
-			// got a collision! is it a good collision?
-			if (!ghost->getGhostRecord().evilTile && (
-				ghost->getGhostRecord().direction == CollisionDirection::Down && !m_isFlippedGravity || 
-				ghost->getGhostRecord().direction == CollisionDirection::Up && m_isFlippedGravity)) {
-				landingYPosJump = ghost->getGhostRecord().savePosY;
-				// is this position feasible?
-				if (std::abs(landingYPosJump - m_enemy->getPosition().y) > m_jumpHeight - 5.f) {
-					// not feasible, sorry.
-					landingYPosJump = -1000.f;
-				}
-			}
-			// bad collision. 
-			break;
-		}
-	}
-
+	landingYPosJump = ghost->calculateJump();
 	delete ghost;
-	m_aiRecord.boundingBox = bb;
-	ghost = new MovableGhost(m_aiRecord, m_mob->getLevel(), m_mob->getScreen());
 
-	for (int i = 1; i < 20; ++i) {
-		ghost->update(fixedTimestep);
-		if (ghost->getGhostRecord().collides) {
-
-			// got a collision! is it a good collision?
-			if (!ghost->getGhostRecord().evilTile && (
-				ghost->getGhostRecord().direction == CollisionDirection::Down && !m_isFlippedGravity ||
-				ghost->getGhostRecord().direction == CollisionDirection::Up && m_isFlippedGravity)) {
-				landingYPosWalk = ghost->getGhostRecord().savePosY;
-				// is this position feasible?
-				if (std::abs(landingYPosWalk - m_enemy->getPosition().y) > m_jumpHeight - 5.f) {
-					// not feasible, sorry.
-					landingYPosWalk = -1000.f;
-				}
-			}
-			// bad collision. 
-			break;
-		}
+	if (!onlyJump) {
+		m_aiRecord.boundingBox = bb;
+		ghost = new JumpingGhost(m_aiRecord, m_mob->getLevel(), m_mob->getScreen());
+		landingYPosWalk = ghost->calculateJump();
+		delete ghost;
 	}
-
-	delete ghost;
 
 	if (landingYPosJump > landingYPosWalk) {
 		// we can do a jump.
 		m_aiRecord.shouldJump = true;
-		m_aiRecord.shouldWalk = true;
 	}
 	else if (landingYPosWalk > 0.f) {
 		m_aiRecord.shouldWalk = true;
@@ -113,11 +78,12 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	MovingBehavior::checkXYDirection(nextPosition, m_collidesX, collidesY);
 	
 	m_jumps = false;
-	if (m_collidesX) {
+	if (m_collidesX && m_isGrounded) {
 		// would a jump work? 
-		m_jumps = !level.collidesAfterJump(bb, m_jumpHeight, m_isFacingRight, m_ignoreDynamicTiles);
+		doAIJump(true);
+		m_jumps = m_aiRecord.shouldJump;
 	}
-	else if (!m_walksBlindly && m_isGrounded && doAIJump()) {
+	else if (!m_walksBlindly && m_isGrounded && doAIJump(false)) {
 		if (!m_aiRecord.shouldJump && !m_aiRecord.shouldWalk) {
 			// we'd fall here. stop and change the direction we walk.
 			m_enemy->setAccelerationX(0.f);
@@ -131,18 +97,22 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		else {
 			// only walk
 			m_walksBlindly = true;
+			m_walkingDirection = m_isFacingRight ? 1 : -1;
 		}
 	}
 
-	// if the enemy collidesX but can't jump, it turns around and wait for a certain time.
-	if (m_collidesX && !m_jumps) {
+	// if the enemy collidesX but can't jump, it turns around and waits for a certain time.
+	if (m_collidesX && m_isGrounded && !m_jumps) {
 		m_enemy->setWaiting();
-		m_randomDecision = m_isFacingRight ? -1 : 1;
+		m_walkingDirection = m_isFacingRight ? -1 : 1;
+	}
+	if (m_jumps && m_walkingDirection == 0) {
+		m_walkingDirection = m_isFacingRight ? 1 : -1;
 	}
 }
 
 void WalkingBehavior::calculateJumpHeight() {
-	m_jumpHeight = m_configuredMaxVelocityYUp * m_configuredMaxVelocityYUp / (2 * m_configuredGravity);
+	m_aiRecord.jumpHeight = m_configuredMaxVelocityYUp * m_configuredMaxVelocityYUp / (2 * m_configuredGravity);
 }
 
 void WalkingBehavior::setDistanceToAbyss(float distance) {
@@ -160,11 +130,11 @@ float WalkingBehavior::getDistanceToAbyss() const {
 
 void WalkingBehavior::makeRandomDecision() {
 	if (!m_isGrounded || m_walksBlindly) return;
-	m_randomDecision = rand() % 3 - 1;
+	m_walkingDirection = rand() % 3 - 1;
 }
 
-int WalkingBehavior::getRandomDecision() const {
-	return m_randomDecision;
+int WalkingBehavior::getWalkingDirection() const {
+	return m_walkingDirection;
 }
 
 void WalkingBehavior::updateAnimation() {

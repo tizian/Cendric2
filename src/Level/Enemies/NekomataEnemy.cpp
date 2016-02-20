@@ -71,11 +71,11 @@ MovingBehavior* NekomataEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
-	behavior->setDistanceToAbyss(100.f);
+	behavior->setDistanceToAbyss(60.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(600.f);
 	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(80.f);
+	behavior->setMaxVelocityX(90.f);
 	behavior->setFightAnimationTime(sf::milliseconds(12 * 60));
 	behavior->calculateJumpHeight();
 	return behavior;

@@ -134,9 +134,9 @@ MovingBehavior* HunterEnemy::createMovingBehavior(bool asAlly) {
 
 	behavior->setDistanceToAbyss(10.f);
 	behavior->setApproachingDistance(100.f);
+	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(500.f);
-	behavior->setMaxVelocityX(180.f);
+	behavior->setMaxVelocityX(200.f);
 	behavior->setFightAnimationTime(sf::milliseconds(4 * 70));
 	behavior->calculateJumpHeight();
 	return behavior;

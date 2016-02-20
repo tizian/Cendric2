@@ -16,6 +16,5 @@ public:
 
 protected:
 	Enemy* m_enemy;
-	int m_randomDecision = 0;
 	float m_approachingDistance = 0.f;
 };

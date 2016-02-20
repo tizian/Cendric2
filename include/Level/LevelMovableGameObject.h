@@ -54,6 +54,7 @@ public:
 	bool isUpsideDown() const;
 	bool isIgnoreDynamicTiles() const;
 	bool isDead() const;
+	bool isImmortal() const;
 	GameObjectState getState() const;
 
 	float getConfiguredMaxVelocityX() const override;

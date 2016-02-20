@@ -25,7 +25,7 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 }
 
 void MovingBehavior::checkForCollisionTilt(const sf::Vector2f& oldPosition) {
-	if (m_isCollisionTiltSuppressed) {
+	if (m_isCollisionTiltSuppressed || m_mob->isImmortal()) {
 		m_isCollisionTiltSuppressed = false;
 		return;
 	}

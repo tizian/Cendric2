@@ -1,9 +1,9 @@
-#include "MovableGhost.h"
+#include "Level/MOBBehavior/JumpingGhost.h"
 #include "Level/LevelMovableGameObject.h"
 #include "SpellManager.h"
 #include "Level/Level.h"
 
-MovableGhost::MovableGhost(const AIWalkingQueryRecord& rec, Level* level, Screen* screen) : MovableGameObject() {
+JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, Level* level, Screen* screen) : MovableGameObject() {
 	m_level = level;
 	m_aiRec = rec;
 
@@ -12,15 +12,17 @@ MovableGhost::MovableGhost(const AIWalkingQueryRecord& rec, Level* level, Screen
 
 	m_boundingBox = m_aiRec.boundingBox;
 	setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
-
-	m_debugger = new MovingGhostDebugger();
-	screen->addObject(m_debugger);
+	
+	if (g_resourceManager->getConfiguration().isDebugRendering) {
+		m_debugger = new JumpingGhostDebugger();
+		screen->addObject(m_debugger);
+	}
 }
 
-MovableGhost::~MovableGhost() {
+JumpingGhost::~JumpingGhost() {
 }
 
-void MovableGhost::update(const sf::Time& frameTime) {
+void JumpingGhost::update(const sf::Time& frameTime) {
 	if (m_record.collides) return;
 	setAcceleration(sf::Vector2f(m_aiRec.accelerationX, m_aiRec.accelerationGravity));
 	sf::Vector2f nextPosition;
@@ -28,11 +30,48 @@ void MovableGhost::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 
 	MovableGameObject::update(frameTime);
-	m_debugger->addDebugBoundingBox(*getBoundingBox());
+	if (m_debugger != nullptr) m_debugger->addDebugBoundingBox(*getBoundingBox());
 	setAccelerationX(0.f);
 }
 
-void MovableGhost::checkCollisions(const sf::Vector2f& nextPosition) {
+float JumpingGhost::calculateJump() {
+	const sf::Time fixedTimestep = sf::seconds(0.1f);
+	float landingPosY = -1.f;
+
+	for (int i = 1; i < 20; ++i) {
+		update(fixedTimestep);
+		if (m_record.collides) {
+
+			// got a collision! is it a good collision?
+			if (!m_record.evilTile && (
+				m_record.direction == CollisionDirection::Down && !m_aiRec.isFlippedGravity ||
+				m_record.direction == CollisionDirection::Up && m_aiRec.isFlippedGravity)) {
+				landingPosY = m_record.savePosY;
+				// is this position feasible?
+				if (std::abs(landingPosY - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight - 5.f) {
+					// not feasible, sorry.
+					return -1.f;
+				}
+				// does this position differ enough from the one we started?
+				if (dist(getPosition(), sf::Vector2f(m_aiRec.boundingBox.left, m_aiRec.boundingBox.top)) < TILE_SIZE_F) {
+					return -1.f;
+				}
+				else if (m_debugger != nullptr) {
+					m_debugger->setGoodTrajectory();
+				}
+			}
+			// bad collision. 
+			break;
+		}
+		if (std::abs(getPosition().y - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight) {
+			break;
+		}
+	}
+
+	return landingPosY;
+}
+
+void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	const sf::FloatRect& bb = *getBoundingBox();
 
@@ -51,6 +90,7 @@ void MovableGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	bool isMovingDown = nextPosition.y > bb.top;
 	bool isMovingRight = nextPosition.x > bb.left;
+	bool isFalling = m_aiRec.isFlippedGravity != isMovingDown;
 
 	// should we use strategy 2: try y direction first, then x direction?
 	bool tryYfirst = false;
@@ -66,7 +106,7 @@ void MovableGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on x axis
 		rec.boundingBox = nextBoundingBoxX;
 		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-
+		
 		if (m_level->collides(rec)) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
@@ -82,10 +122,15 @@ void MovableGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 
 		if (m_level->collides(rec)) {
-			m_record.collides = true;
-			m_record.direction = rec.collisionDirection;
-			m_record.savePosY = rec.safeTop;
-			return;
+			if (isFalling) {
+				m_record.collides = true;
+				m_record.direction = rec.collisionDirection;
+				m_record.savePosY = rec.safeTop;
+				return;
+			}
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
+			setPositionY(rec.safeTop);
 		}
 	}
 	else {
@@ -94,13 +139,19 @@ void MovableGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 
 		if (m_level->collides(rec)) {
-			m_record.collides = true;
-			m_record.direction = rec.collisionDirection;
-			m_record.savePosY = rec.safeTop;
-			return;
+			if (isFalling) {
+				m_record.collides = true;
+				m_record.direction = rec.collisionDirection;
+				m_record.savePosY = rec.safeTop;
+				return;
+			}
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
+			setPositionY(rec.safeTop);
 		}
-		
-		nextBoundingBoxX.top = nextPosition.y;
+		else {
+			nextBoundingBoxX.top = nextPosition.y;
+		}
 
 		// check for collision on x axis
 		rec.boundingBox = nextBoundingBoxX;
@@ -121,7 +172,7 @@ void MovableGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
-void MovableGhost::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
+void JumpingGhost::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
 	// distinguish damping in the air and at the ground
 	float dampingPerSec = (getVelocity().y == 0.f) ? m_aiRec.dampingGroundPerS : m_aiRec.dampingAirPerS;
 	// don't damp when there is active acceleration 
@@ -130,23 +181,23 @@ void MovableGhost::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vec
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
 }
 
-float MovableGhost::getConfiguredMaxVelocityX() const {
+float JumpingGhost::getConfiguredMaxVelocityX() const {
 	return m_aiRec.maxVelX;
 }
 
-float MovableGhost::getConfiguredMaxVelocityYDown() const {
+float JumpingGhost::getConfiguredMaxVelocityYDown() const {
 	return m_aiRec.maxVelYDown;
 }
 
-float MovableGhost::getConfiguredMaxVelocityYUp() const {
+float JumpingGhost::getConfiguredMaxVelocityYUp() const {
 	return m_aiRec.maxVelYUp;
 }
 
-const GhostRecord& MovableGhost::getGhostRecord() const {
+const GhostRecord& JumpingGhost::getGhostRecord() const {
 	return m_record;
 }
 
-GameObjectType MovableGhost::getConfiguredType() const {
+GameObjectType JumpingGhost::getConfiguredType() const {
 	return GameObjectType::_Undefined;
 }
 

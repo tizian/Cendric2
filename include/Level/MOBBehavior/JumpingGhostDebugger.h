@@ -3,13 +3,15 @@
 #include "global.h"
 #include "GameObject.h"
 
-// a game object that gets created by a movable ghost and added to the screen to be rendered for debug purposes.
-class MovingGhostDebugger : public virtual GameObject {
+// a game object that gets created by a jumping ghost and added to the screen to be rendered for debug purposes.
+class JumpingGhostDebugger : public virtual GameObject {
 public:
-	MovingGhostDebugger();
-	~MovingGhostDebugger();
+	JumpingGhostDebugger();
+	~JumpingGhostDebugger();
 
 	void addDebugBoundingBox(const sf::FloatRect& boundingBox);
+	// marks a trajectory as successful, using green shapes instead of red ones.
+	void setGoodTrajectory();
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;

@@ -11,6 +11,7 @@ struct AIWalkingQueryRecord {
 	// if set to true, the collision check will not check for collidable dynamic tiles 
 	// (but strictly collidable dynamic tiles). Default is false
 	bool ignoreDynamicTiles = false;
+	bool isFlippedGravity = false;
 	// the acceleration in x direction (walking)
 	float accelerationX = 0.f;
 	// the gravity acceleration (must  be mirrored if the mob is upside down)
@@ -21,6 +22,9 @@ struct AIWalkingQueryRecord {
 	float maxVelX = 0.f;
 	float maxVelYDown = 0.f;
 	float maxVelYUp = 0.f;
+
+	// the calculated jump height for a mob
+	float jumpHeight;
 
 	// how close does a mob go to the abyss before it stops?
 	float distanceToAbyss = 0.f;

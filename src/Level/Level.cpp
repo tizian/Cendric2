@@ -93,26 +93,6 @@ void Level::update(const sf::Time& frameTime) {
 	m_camera->update(frameTime);
 }
 
-bool Level::collidesAfterJump(const sf::FloatRect& boundingBox, float jumpHeight, bool right, bool ignoreDynamicTiles) const {
-	WorldCollisionQueryRecord rec;
-	rec.boundingBox = boundingBox;
-	rec.ignoreDynamicTiles = ignoreDynamicTiles;
-	for (float y = boundingBox.top; y > boundingBox.top - jumpHeight; /* don't decrement y here */) {
-		y = std::max(boundingBox.top - jumpHeight, y - TILE_SIZE_F);
-		rec.boundingBox.top = y;
-		if (collides(rec)) {
-			return true;
-		}
-	}
-
-	// depending on left or right, calculate one step left or right
-	rec.boundingBox.left = right ? rec.boundingBox.left + 10.f : rec.boundingBox.left - 10.f;
-	if (collides(rec)) {
-		return true;
-	}
-	return false;
-}
-
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	World::collides(rec);
 	// additional : check for collision with map rect (y axis)

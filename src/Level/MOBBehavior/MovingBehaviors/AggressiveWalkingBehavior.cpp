@@ -18,49 +18,31 @@ void AggressiveWalkingBehavior::handleMovementInput() {
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
 	sf::Vector2f center = m_enemy->getCenter();
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
-	if (hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing || m_enemy->getEnemyState() == EnemyState::Recovering)) {
-
+	if (m_isGrounded && hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing || m_enemy->getEnemyState() == EnemyState::Recovering)) {
+		// the enemy tries to get near its target
 		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= m_walkAcceleration;
+			m_walkingDirection = -1;
 		}
 		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += m_walkAcceleration;
+			m_walkingDirection = 1;
 		}
-
-		if (m_jumps && m_isGrounded) {
-			m_enemy->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp); // first jump vel will always be max y vel. 
-			m_jumps = false;
+		else {
+			m_walkingDirection = 0;
 		}
 	}
-	else if (hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
-
-		if (targetCenter.x < center.x) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += m_walkAcceleration;
-		}
-		else if (targetCenter.x > center.x) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= m_walkAcceleration;
-		}
-
-		if (m_jumps && m_isGrounded) {
-			m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-			m_jumps = false;
-		}
+	else if (m_isGrounded && hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
+		// the enemy tries to get away from its target
+		m_walkingDirection = targetCenter.x < center.x ? 1 : -1;
 	}
-	else if (m_enemy->getEnemyState() == EnemyState::Idle || m_enemy->getEnemyState() == EnemyState::Waiting) {
 
-		if (m_randomDecision != 0) {
-			m_nextIsFacingRight = m_randomDecision == 1;
-			newAccelerationX += m_randomDecision * m_walkAcceleration;
-		}
+	if (m_walkingDirection != 0) {
+		m_nextIsFacingRight = m_walkingDirection == 1;
+		newAccelerationX += m_walkingDirection * m_walkAcceleration;
+	}
 
-		if (m_jumps && m_isGrounded) {
-			m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-			m_jumps = false;
-		}
+	if (m_jumps && m_isGrounded) {
+		m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
+		m_jumps = false;
 	}
 
 	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -m_gravity : m_gravity)));

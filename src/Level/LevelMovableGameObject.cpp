@@ -210,6 +210,10 @@ bool LevelMovableGameObject::isDead() const {
 	return m_isDead;
 }
 
+bool LevelMovableGameObject::isImmortal() const {
+	return m_isImmortal;
+}
+
 void LevelMovableGameObject::loadBehavior() {
 	delete m_attackingBehavior;
 	m_attackingBehavior = createAttackingBehavior();
