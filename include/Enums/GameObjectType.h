@@ -20,5 +20,6 @@ enum GameObjectType {
 	_Light,
 	_AnimatedTile,
 	_MovableTile, // moving tiles, shiftable tiles and unstable tiles.
+	_Overlay, // speech bubbles, debug ghost renderings...
 	_MAX
 };

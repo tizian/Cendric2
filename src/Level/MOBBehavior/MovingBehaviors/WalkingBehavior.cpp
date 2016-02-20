@@ -40,7 +40,7 @@ bool WalkingBehavior::doAIJump() {
 	// check the jump for 2 sec. 
 	m_aiRecord.boundingBox = *m_enemy->getBoundingBox();
 	m_aiRecord.boundingBox.left = m_isFacingRight ? m_aiRecord.boundingBox.left - 1.f : m_aiRecord.boundingBox.left + 1.f;
-	MovableGhost* ghost = new MovableGhost(m_aiRecord, m_mob->getLevel());
+	MovableGhost* ghost = new MovableGhost(m_aiRecord, m_mob->getLevel(), m_mob->getScreen());
 	ghost->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp);
 	for (int i = 1; i < 20; ++i) {
 		ghost->update(fixedTimestep);
@@ -64,7 +64,7 @@ bool WalkingBehavior::doAIJump() {
 
 	delete ghost;
 	m_aiRecord.boundingBox = bb;
-	ghost = new MovableGhost(m_aiRecord, m_mob->getLevel());
+	ghost = new MovableGhost(m_aiRecord, m_mob->getLevel(), m_mob->getScreen());
 
 	for (int i = 1; i < 20; ++i) {
 		ghost->update(fixedTimestep);
@@ -134,7 +134,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 	}
 
-	// if the enemy collidesX but can't jump, it turns arund and for a certain time.
+	// if the enemy collidesX but can't jump, it turns around and wait for a certain time.
 	if (m_collidesX && !m_jumps) {
 		m_enemy->setWaiting();
 		m_randomDecision = m_isFacingRight ? -1 : 1;

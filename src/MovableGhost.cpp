@@ -3,7 +3,7 @@
 #include "SpellManager.h"
 #include "Level/Level.h"
 
-MovableGhost::MovableGhost(const AIWalkingQueryRecord& rec, Level* level) : MovableGameObject() {
+MovableGhost::MovableGhost(const AIWalkingQueryRecord& rec, Level* level, Screen* screen) : MovableGameObject() {
 	m_level = level;
 	m_aiRec = rec;
 
@@ -12,6 +12,9 @@ MovableGhost::MovableGhost(const AIWalkingQueryRecord& rec, Level* level) : Mova
 
 	m_boundingBox = m_aiRec.boundingBox;
 	setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
+
+	m_debugger = new MovingGhostDebugger();
+	screen->addObject(m_debugger);
 }
 
 MovableGhost::~MovableGhost() {
@@ -25,7 +28,7 @@ void MovableGhost::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 
 	MovableGameObject::update(frameTime);
-
+	m_debugger->addDebugBoundingBox(*getBoundingBox());
 	setAccelerationX(0.f);
 }
 

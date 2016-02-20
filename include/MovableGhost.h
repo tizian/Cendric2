@@ -5,6 +5,7 @@
 #include "Structs/AIWalkingQueryRecord.h"
 #include "Structs/WorldCollisionQueryRecord.h"
 #include "Enums/LevelDynamicTileID.h"
+#include "MovingGhostDebugger.h"
 
 class Level;
 
@@ -19,7 +20,7 @@ struct GhostRecord {
 // a ghost (dummy) of a movable game object, used to simulate its path.
 class MovableGhost : public virtual MovableGameObject {
 public:
-	MovableGhost(const AIWalkingQueryRecord& rec, Level* level);
+	MovableGhost(const AIWalkingQueryRecord& rec, Level* level, Screen* screen);
 	~MovableGhost();
 
 	void update(const sf::Time& frameTime) override;
@@ -39,6 +40,7 @@ protected:
 	Level* m_level;
 	GhostRecord m_record;
 	AIWalkingQueryRecord m_aiRec;
+	MovingGhostDebugger* m_debugger = nullptr;
 
 	// an ghost will set its "evil tile" flag if it collided with those. Default are spikes top and bottom.
 	std::set<LevelDynamicTileID> m_avoidableTiles;

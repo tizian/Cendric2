@@ -146,7 +146,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
 			updateObjects(GameObjectType::_LevelEquipment, frameTime);
 			updateObjects(GameObjectType::_Spell, frameTime);
-			updateObjects(GameObjectType::_Window, frameTime);
+			updateObjects(GameObjectType::_Overlay, frameTime);
 			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			
 			updateObjects(GameObjectType::_Light, frameTime);
@@ -217,7 +217,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);
-	renderObjects(GameObjectType::_Window, renderTarget);
+	renderObjects(GameObjectType::_Overlay, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MovableTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
