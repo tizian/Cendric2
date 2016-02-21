@@ -14,8 +14,10 @@ attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:45
 # items in inventory:
 item.id:eq_head_necrot3,1
+item.id:eq_head_twilightt1,1
 item.id:eq_purpleback,1
 item.id:eq_rafishat,1
+item.id:eq_huntershat,1
 item.id:eq_wizardhatblue,1
 item.id:eq_wizardhatgrey,1
 item.id:fo_bread,2
@@ -27,6 +29,8 @@ item.id:fo_lesserhealingpotion,3
 item.id:fo_rawmeat,2
 item.id:fo_water,1
 item.id:mi_goldengoblet,4
+item.id:mi_neko_teeth,1
+item.id:mi_neko_fur,1
 item.id:we_icestaff,1
 item.id:we_oathbreaker,1
 item.id:we_rustysword,1

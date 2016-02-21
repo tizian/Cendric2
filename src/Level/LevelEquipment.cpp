@@ -31,7 +31,6 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 }
 
 void LevelEquipment::update(const sf::Time& frameTime) {
-	AnimatedGameObject::update(frameTime);
 	GameObjectState newState = m_mainChar->getState();
 	if (newState == GameObjectState::Dead) {
 		setDisposed();
@@ -53,6 +52,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	sf::Vector2f newPosition;
 	calculatePositionAccordingToMainChar(newPosition);
 	setPosition(newPosition);
+	AnimatedGameObject::update(frameTime);
 }
 
 void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar) {

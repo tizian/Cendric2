@@ -11,7 +11,8 @@ REGISTER_ENEMY(EnemyID::Nekomata, NekomataEnemy)
 void NekomataEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	if (gold != 0 || !loot.empty()) return;
 
-	loot.insert({ "fo_rawmeat", 1 });
+	loot.insert({ "mi_neko_fur", 1 });
+	loot.insert({ "mi_neko_teeth", 1 });
 	gold = rand() % 10 + 2;
 }
 

@@ -11,6 +11,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('go_onecoin', 'item', 'Golden coin','Goldmünze','Goldmünze');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('go_threecoins', 'item', 'A few coins','Ein paar Münzen','Es paar Münze');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_goldengoblet', 'item', 'Golden goblet','Goldener Pokal','Goldige Pokal');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_teeth', 'item', 'Fangs of a Nekomata','Zähne einer Nekomata','Fangzää vonere Nekomata');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_teeth', 'item_desc', 'It is rumoured that these enormous teeth have magical powers.','Diesen gewaltigen Zähnen wird nachgesagt, dass sie magische Kräfte zu besitzen.','Me munklet dass die riesige Fangzää magischi Chräft hend.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_fur', 'item', 'Fur of a Nekomata','Fell einer Nekomata','Fell vonere Nekomata');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_fur', 'item_desc', 'This fur is worth a lot on the market as these demonic cats are rarely spotted and hard to defeat.','Dieses Fell ist eine Menge wert auf dem Markt, da die dämonischen Katzen selten anzutreffen und schwierig zu besiegen sind.','Da Fell isch recht viel wert ufem Markt well die dämonische Chatze selte und schwierig z''besiege sind.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item', 'Sealed Letter','Versiegelter Brief','Versiglete Brief');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_text', 'Dear king
 bla bla blaaaaaaaa bla blaaaa bla bla and you better bla bla soon! CU your enemy.','Lieber König
@@ -32,14 +36,18 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_water', 'item_desc', 'Fresh clear water.','Frisches klares Wasser.','Frischs klars Wasser.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatblue', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatgrey', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt1', 'item', 'Blue Headband','Blaues Stirnband','Blaus Stirnband');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt1', 'item_desc', 'Worn by daredevils and sneaky thieves.','Wird gerne von Draufgängern und hinterhältigen Dieben getragen.','Wird gern vo Drufgänger und schliichigem Diebesgsindel treit.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item', 'Shadow Cowl','Schattengugel','Schattegugle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item_desc', 'Shields perfectly against any light','Schirmt perfekt jedwedes Licht ab.','Schirmt perfekt ab gege Liecht.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot3', 'item', 'Shadow Cloak','Schattenumhang','Schatteumhang');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot3', 'item_desc', 'A pliant piece of cloth.','Ein geschmeidiges Stück Stoff.','Es gschmeidigs Stück Stoff.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item', 'Horned Scalemail','Gehörnter Schuppenpanzer','Ghörnte Schuppepanzer');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item_desc', 'Only those who have proven themselves worthy to the necromancers of Admantris are allowed to wear that piece of armour.','Nur diejenigen, die sich bei den Nekromanten von Admantris als würdig erwiesen haben, dürfen diese Rüstung tragen.','Nur die, wo sich bide Nekromante vo Admantris als würdig erwise hend, derfed die Rüstig träge.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rafishat', 'item', 'Rafis Hat','Rafis Hut','Rafis Huet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rafishat', 'item', 'Rafi''s Hat','Rafis Hut','Rafis Huet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rafishat', 'item_desc', 'What a strange hat...','Was für ein seltsamer Hut...','Was füren komische Huet...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_huntershat', 'item', 'Hunter''s Hat','Jägerhut','Jägershuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_huntershat', 'item_desc', 'A brown leather hat with a red feather. Protects its wearer from foul weather.','Ein brauner Lederhut mit einer roten Feder. Schützt seinen Besitzer vor schlechtem Wetter.','En bruune Lederhuet mit enere rote Federe. Schützt sin Träger vor gruusigem Wetter.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item', 'Circlet of the Order','Reif des Ordens','Reif vom Orde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item_desc', 'Golden & shiny','Golden & glänzig','Goldig & glänzig');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item', 'Lesser Healing Potion','Geringer Heiltrank','Chliine Heiltrank');

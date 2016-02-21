@@ -40,11 +40,23 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet3', 10, 10, 10, 10, 10, 2, 5);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_divinet3', 'res/assets/equipment/head/spritesheet_head_divinet3.png');
 
--- Rafis Hat
+-- Rafi's Hat
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_rafishat', 'eq_head', 0, 250, 10);
 INSERT INTO item_attribute (item_id, haste, critical, res_fire, res_light, res_physical) values ('eq_rafishat', -20, 10, 2, 3, 1);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_rafishat', 'res/assets/equipment/head/spritesheet_head_rafishat.png');
+
+-- Hunter's Hat
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_huntershat', 'eq_head', 50, 250, 20);
+INSERT INTO item_attribute (item_id, haste, critical, res_light, res_physical, dmg_physical) values ('eq_huntershat', 2, 2, 10, 3, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_huntershat', 'res/assets/equipment/head/spritesheet_head_huntershat.png');
+
+-- Twilight T1 Head
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt1', 'eq_head', 100, 250, 30);
+INSERT INTO item_attribute (item_id, haste, critical, res_fire) values ('eq_head_twilightt1', 3, 3, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_twilightt1', 'res/assets/equipment/head/spritesheet_head_twilightt1.png');
 
 -- Ring of lesser health
 
