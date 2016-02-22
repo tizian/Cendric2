@@ -24,6 +24,12 @@ void SpellManager::setSpellSelection(SpellSelection* selection) {
 	m_spellSelection = selection;
 }
 
+void SpellManager::setSpellsAllied(bool value) {
+	for (auto& spellcreator : m_spellMap) {
+		spellcreator->setSpellAllied(value);
+	}
+}
+
 void SpellManager::addSpell(const SpellData& spell) {
 	addSpell(spell, std::vector<SpellModifier>());
 }

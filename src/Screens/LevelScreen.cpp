@@ -32,13 +32,13 @@ void LevelScreen::load() {
 	m_interface = new LevelInterface(this, m_mainChar);
 	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
 
-	m_retryButton = new Button(sf::FloatRect(450, 410, 350, 50), ButtonOrnamentStyle::MEDIUM);
+	m_retryButton = new Button(sf::FloatRect(450, 410, 400, 50), ButtonOrnamentStyle::MEDIUM);
 	m_retryButton->setText("BackToCheckpoint");
 	m_retryButton->setVisible(false);
 	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
 	addObject(m_retryButton);
 
-	m_backToMenuButton = new Button(sf::FloatRect(450, 470, 350, 50), ButtonOrnamentStyle::MEDIUM);
+	m_backToMenuButton = new Button(sf::FloatRect(450, 470, 400, 50), ButtonOrnamentStyle::MEDIUM);
 	m_backToMenuButton->setText("BackToMenu");
 	m_backToMenuButton->setVisible(false);
 	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));

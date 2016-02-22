@@ -33,6 +33,7 @@ void Enemy::load(EnemyID id) {
 	loadAttributes();
 	loadSpells();
 	loadBehavior();
+	m_spellManager->setSpellsAllied(m_isAlly);
 }
 
 bool Enemy::getFleeCondition() const {
@@ -45,15 +46,7 @@ void Enemy::onHit(Spell* spell) {
 			spell->execOnHit(this);
 		return;
 	}
-	// check for owner
-	if (const Enemy* enemy = dynamic_cast<const Enemy*>(spell->getOwner())) {
-		if (isAlly() == enemy->isAlly()) {
-			return;
-		}
-	}
-	if (isAlly() && spell->getOwner()->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
-		return;
-	}
+
 	// check for immune damage types, if yes, the spell will disappear, absorbed by the immuneness of this enemy
 	if (std::find(m_immuneDamageTypes.begin(), m_immuneDamageTypes.end(), spell->getDamageType()) != m_immuneDamageTypes.end()) {
 		spell->setDisposed();
@@ -255,6 +248,8 @@ void Enemy::setAlly(const sf::Time& ttl) {
 	m_enemyAttackingBehavior = allyBehavior;
 	m_hpBar.setFillColor(m_enemyAttackingBehavior->getConfiguredHealthColor());
 	m_isAlwaysUpdate = true;
+
+	m_spellManager->setSpellsAllied(true);
 
 	setDebugBoundingBox(sf::Color::Green);
 }

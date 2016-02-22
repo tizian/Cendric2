@@ -43,12 +43,15 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 	calculateNextPosition(frameTime, nextPosition);
 	sf::Vector2f diff = nextPosition - getPosition();
 
-	// check collisions with main char
-	if (m_ownerType != GameObjectType::_LevelMainCharacter && !m_isOwnerControlled) {
-		checkCollisionsWithMainChar(getBoundingBox());
+	if (!m_data.isAlly) {
+		// check collisions with allies
+		checkCollisionsWithAllies(getBoundingBox());
 	}
-	// check collisions with enemies
-	checkCollisionsWithEnemies(getBoundingBox());
+	else {
+		// check collisions with enemies
+		checkCollisionsWithEnemies(getBoundingBox());
+	}
+
 	MovableGameObject::update(frameTime);
 	GameObject::updateTime(m_data.activeDuration, frameTime);
 

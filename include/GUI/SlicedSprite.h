@@ -9,6 +9,7 @@ public:
 	SlicedSprite();
 	SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height);
 
+	void setSize(const sf::Vector2f& size);
 	void setSize(float width, float height);
 	void setTexture(sf::Texture *texture);
 	void setColor(const sf::Color &color);

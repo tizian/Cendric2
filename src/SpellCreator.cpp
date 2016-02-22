@@ -82,6 +82,10 @@ const SpellData& SpellCreator::getSpellData() const {
 	return m_spellData;
 }
 
+void SpellCreator::setSpellAllied(bool allied) {
+	m_spellData.isAlly = allied;
+}
+
 void SpellCreator::updateDamageAndHeal(SpellData& bean) const {
 	updateDamageAndHeal(bean, m_attributeData, true);
 }

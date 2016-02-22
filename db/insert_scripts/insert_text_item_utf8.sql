@@ -25,6 +25,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_bread', 'item_desc', 'An ordinary loaf of bread.','Ein einfaches Brot.','Es Brot halt.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item_desc', 'Sweet','Süss','Süess');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_cheese', 'item_desc', 'Smelly.','Riecht nicht sonderlich gut.','Er müffelet echli.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item', 'Apple', 'Apfel', 'Öpfel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item_desc', 'Fresh and juicy.', 'Frisch und saftig.', 'Frisch und saftig.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item_desc', 'It still glows...','Er leuchtet immer noch...','Er lüchtet immer na...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_goldengoblet', 'item_desc', 'A golden goblet','Ein goldener Pokal','En goldige Pokal');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item_desc', 'Heals wounds','Heilt Wunden','Heilt Wunde');

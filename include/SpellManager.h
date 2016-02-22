@@ -33,6 +33,9 @@ public:
 
 	void setSpellSelection(SpellSelection* spellSelection);
 
+	// sets all spells in the map allied / not allied
+	void setSpellsAllied(bool value);
+
 private:
 
 	int m_currentSpell;

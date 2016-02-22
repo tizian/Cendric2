@@ -34,6 +34,10 @@ SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, float width
 	init();
 }
 
+void SlicedSprite::setSize(const sf::Vector2f& size) {
+	setSize(size.x, size.y);
+}
+
 void SlicedSprite::setSize(float width, float height) {
 	m_width = width;
 	m_height = height;

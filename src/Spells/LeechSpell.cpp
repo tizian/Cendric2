@@ -44,21 +44,36 @@ void LeechSpell::update(const sf::Time& frameTime) {
 
 	if (!m_isReturning) {
 		checkCollisions(nextPosition);
-		// check collisions with main char
-		if (m_ownerType != GameObjectType::_LevelMainCharacter) {
+
+		if (!m_data.isAlly) {
+			// check collisions with allies
 			if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
 				m_mainChar->onHit(this);
 				m_isDisposed = false;
 				m_isReturning = true;
 			}
+			for (auto& go : *m_enemies) {
+				if (!go->isViewable()) continue;
+				Enemy* enemy = dynamic_cast<Enemy*>(go);
+				if (!enemy->isAlly()) continue;
+				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
+					enemy->onHit(this);
+					m_isDisposed = false;
+					m_isReturning = true;
+				}
+			}
 		}
-		// check collisions with enemies
-		for (std::vector<GameObject*>::iterator it = m_enemies->begin(); it != m_enemies->end(); ++it) {
-			Enemy* enemy = dynamic_cast<Enemy*>((*it));
-			if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*getBoundingBox()))) {
-				enemy->onHit(this);
-				m_isDisposed = false;
-				m_isReturning = true;
+		else {
+			// check collisions with enemies
+			for (auto& go : *m_enemies) {
+				if (!go->isViewable()) continue;
+				Enemy* enemy = dynamic_cast<Enemy*>(go);
+				if (enemy->isAlly()) continue;
+				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
+					enemy->onHit(this);
+					m_isDisposed = false;
+					m_isReturning = true;
+				}
 			}
 		}
 	}

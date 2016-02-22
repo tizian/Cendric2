@@ -12,13 +12,10 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 
 	m_level = mob->getLevel();
 	m_mob = mob;
-	m_ownerType = mob->getConfiguredType();
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	Enemy* enemy = dynamic_cast<Enemy*>(m_mob);
-	if (enemy && enemy->isAlly()) {
-		m_isOwnerControlled = true;
-	}
+
 	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
 
 	if (m_mainChar == nullptr) {
@@ -95,18 +92,27 @@ void Spell::update(const sf::Time& frameTime) {
 		calculateNextPosition(frameTime, nextPosition);
 	}
 
-	if (!m_data.attachedToMob) checkCollisions(nextPosition);
-	// check collisions with dynamic tiles
-	sf::FloatRect tmp(nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
-	if (m_data.isDynamicTileEffect) m_level->collideWithDynamicTiles(this, tmp);
-	// check collisions with main char
-	if (m_ownerType != GameObjectType::_LevelMainCharacter && !m_isOwnerControlled) {
-		checkCollisionsWithMainChar(getBoundingBox());	
+	// check collisions with the collidable level
+	if (!m_data.attachedToMob) {
+		checkCollisions(nextPosition);
 	}
-	// check collisions with enemies
-	checkCollisionsWithEnemies(getBoundingBox());
-	MovableGameObject::update(frameTime);
 
+	// check collisions with dynamic tiles
+	if (m_data.isDynamicTileEffect) {
+		sf::FloatRect tmp(nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
+		m_level->collideWithDynamicTiles(this, tmp);
+	}
+	
+	if (!m_data.isAlly) {
+		// check collisions with main char
+		checkCollisionsWithAllies(getBoundingBox());
+	}
+	else {
+		// check collisions with enemies
+		checkCollisionsWithEnemies(getBoundingBox());
+	}
+
+	MovableGameObject::update(frameTime);
 	GameObject::updateTime(m_data.activeDuration, frameTime);
 
 	if (m_data.activeDuration == sf::Time::Zero) {
@@ -173,9 +179,17 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
-void Spell::checkCollisionsWithMainChar(const sf::FloatRect* boundingBox) {
+void Spell::checkCollisionsWithAllies(const sf::FloatRect* boundingBox) {
 	if (m_mainChar->getBoundingBox()->intersects(*boundingBox)) {
 		m_mainChar->onHit(this);
+	}
+	for (auto& go : *m_enemies) {
+		if (!go->isViewable()) continue;
+		Enemy* enemy = dynamic_cast<Enemy*>(go);
+		if (!enemy->isAlly()) continue;
+		if (enemy->getBoundingBox()->intersects(*boundingBox)) {
+			enemy->onHit(this);
+		}
 	}
 }
 
@@ -183,7 +197,8 @@ void Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
 	for (auto& go : *m_enemies) {
 		if (!go->isViewable()) continue;
 		Enemy* enemy = dynamic_cast<Enemy*>(go);
-		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox))) {
+		if (enemy->isAlly()) continue;
+		if (enemy->getBoundingBox()->intersects(*boundingBox)) {
 			enemy->onHit(this);
 		}
 	}

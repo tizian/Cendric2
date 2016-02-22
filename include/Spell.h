@@ -54,8 +54,6 @@ protected:
 	
 	Level* m_level;
 	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.
-	GameObjectType m_ownerType;
-	bool m_isOwnerControlled = false; // is the owner an enemy that is controlled?
 	
 	// enemy list from screen
 	std::vector<GameObject*>* m_enemies;
@@ -63,8 +61,8 @@ protected:
 	LevelMainCharacter* m_mainChar;
 	// calculates position according to m_mob
 	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
-	// collisions with mainchar
-	void checkCollisionsWithMainChar(const sf::FloatRect* boundingBox);
+	// collisions with mainchar and allied enemies
+	void checkCollisionsWithAllies(const sf::FloatRect* boundingBox);
 	// collisions with enemies
 	virtual void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
 	sf::Vector2f rotateVector(const sf::Vector2f& vec, float angle);
