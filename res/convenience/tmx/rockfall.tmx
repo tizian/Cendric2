@@ -301,7 +301,11 @@
     <property name="fo_rawmeat" value="2"/>
    </properties>
   </object>
-  <object id="78" gid="568" x="343" y="691" width="50" height="50"/>
+  <object id="78" gid="568" x="343" y="691" width="50" height="50">
+   <properties>
+    <property name="luapath" value="res/behavior/hunter.lua"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="levelexits">
   <object id="76" x="2119.5" y="677.5" width="57" height="117">

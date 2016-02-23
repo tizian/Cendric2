@@ -422,7 +422,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				if (itemText.compare("questtarget") == 0) {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {
-						logError("XML file could not be read, quest target value attribute is void.");
+						logError("XML file could not be read, quest target value attribute is empty.");
 						return false;
 					}
 					std::string questtargetText = textAttr;
@@ -432,6 +432,15 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				}
 				else if (itemText.compare("persistent") == 0) {
 					enemyData.isPersistent = true;
+				}
+				else if (itemText.compare("luapath") == 0) {
+					textAttr = item->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, luapath value attribute is empty.");
+						return false;
+					}
+					
+					enemyData.luaPath = textAttr;
 				}
 				else {
 					int amount;

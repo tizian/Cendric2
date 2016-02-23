@@ -12,4 +12,5 @@ struct EnemyData {
 	std::pair<std::string, std::string> questTarget;
 	std::pair<std::map<std::string, int>, int> customizedLoot;
 	bool isPersistent = false; // marker for enemies that respawn with the level reset
+	std::string luaPath = ""; // the path to a possible lua script for behavior, mostly empty
 };
