@@ -8,5 +8,5 @@ class AllyFlyingBehavior : public virtual FlyingBehavior {
 public:
 	AllyFlyingBehavior(Enemy* enemy);
 
-	void handleMovementInput() override;
+	void execHandleMovementInput() override;
 };

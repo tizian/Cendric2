@@ -17,7 +17,7 @@ public:
 	void update(const sf::Time& frameTime);
 	void say(const std::string& text, int seconds);
 	void wait(int seconds);
-	void setSpeechBubbleFloatingHeight(float height);
+
 	bool isError() const;
 
 protected:

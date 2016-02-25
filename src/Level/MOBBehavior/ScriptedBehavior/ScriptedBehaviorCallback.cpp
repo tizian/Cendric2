@@ -14,7 +14,6 @@ ScriptedBehaviorCallback::ScriptedBehaviorCallback(const std::string& luaPath, C
 }
 
 ScriptedBehaviorCallback::~ScriptedBehaviorCallback() {
-	lua_close(m_L);
 }
 
 void ScriptedBehaviorCallback::setScriptedBehavior(ScriptedBehavior* behavior) {
@@ -36,9 +35,12 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("wait", &ScriptedBehaviorCallback::wait)
 		.addFunction("setKilled", &ScriptedBehaviorCallback::setKilled)
 		.addFunction("leaveLevel", &ScriptedBehaviorCallback::leaveLevel)
+		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
+		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
 		.endClass();
 
 	if (luaL_dofile(m_L, path.c_str()) != 0) {
+		
 		g_logger->logError("ScriptedBehaviorCallback", "Cannot read lua script: " + path);
 		return false;
 	}
@@ -60,15 +62,23 @@ void ScriptedBehaviorCallback::leaveLevel() {
 	m_enemy->setDisposed();
 }
 
+void ScriptedBehaviorCallback::setMovingTarget(int x, int y) {
+	m_enemy->setMovingTarget(x, y);
+}
+
+void ScriptedBehaviorCallback::resetMovingTarget() {
+	m_enemy->resetMovingTarget();
+}
+
 bool ScriptedBehaviorCallback::isLoaded() const {
 	return m_success;
 }
 
 void ScriptedBehaviorCallback::update() {
-	LuaRef update = getGlobal(m_L, "update");
+	LuaRef updateFunc = getGlobal(m_L, "update");
 	
 	try {
-		update(this);
+		updateFunc(this);
 	}
 	catch (LuaException const& e) {
 		g_logger->logError("ScriptedBehaviorCallback", "LuaException: " + std::string(e.what()));

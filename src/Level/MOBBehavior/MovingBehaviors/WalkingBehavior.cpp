@@ -97,17 +97,17 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		else {
 			// only walk
 			m_walksBlindly = true;
-			m_walkingDirection = m_isFacingRight ? 1 : -1;
+			m_movingDirectionX = m_isFacingRight ? 1 : -1;
 		}
 	}
 
 	// if the enemy collidesX but can't jump, it turns around and waits for a certain time.
 	if (m_collidesX && m_isGrounded && !m_jumps) {
 		m_enemy->setWaiting();
-		m_walkingDirection = m_isFacingRight ? -1 : 1;
+		m_movingDirectionX = m_isFacingRight ? -1 : 1;
 	}
-	if (m_jumps && m_walkingDirection == 0) {
-		m_walkingDirection = m_isFacingRight ? 1 : -1;
+	if (m_jumps && m_movingDirectionX == 0) {
+		m_movingDirectionX = m_isFacingRight ? 1 : -1;
 	}
 }
 
@@ -130,11 +130,11 @@ float WalkingBehavior::getDistanceToAbyss() const {
 
 void WalkingBehavior::makeRandomDecision() {
 	if (!m_isGrounded || m_walksBlindly) return;
-	m_walkingDirection = rand() % 3 - 1;
+	m_movingDirectionX = rand() % 3 - 1;
 }
 
 int WalkingBehavior::getWalkingDirection() const {
-	return m_walkingDirection;
+	return m_movingDirectionX;
 }
 
 void WalkingBehavior::updateAnimation() {

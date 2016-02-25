@@ -338,3 +338,12 @@ void Enemy::notifyKilled() {
 		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(m_questTarget.first, m_questTarget.second);
 	}
 }
+
+void Enemy::setMovingTarget(int x, int y) {
+	m_enemyMovingBehavior->setMovingTarget(x, y);
+}
+
+void Enemy::resetMovingTarget() {
+	m_enemyMovingBehavior->resetMovingTarget();
+}
+

@@ -12,8 +12,8 @@ FlyingBehavior::FlyingBehavior(Enemy* enemy) :
 };
 
 void FlyingBehavior::makeRandomDecision() {
-	m_randomDecisionX = rand() % 3 - 1;
-	m_randomDecisionY = rand() % 3 - 1;
+	m_movingDirectionX = rand() % 3 - 1;
+	m_movingDirectionY = rand() % 3 - 1;
 }
 
 void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {

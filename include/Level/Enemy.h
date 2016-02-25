@@ -42,6 +42,10 @@ public:
 	void setDead() override;
 	void setScriptedBehavior(const std::string& luaPath);
 	void notifyKilled();
+	// the enemy tries to move to this target as long as it is not reset.
+	void setMovingTarget(int x, int y);
+	// resets the moving target
+	void resetMovingTarget();
 	// an enemy that is persistent will not be marked as dead and respawn with every level reset
 	void setPersistent(bool value);
 	// the object ID in the level enemy object layer.

@@ -78,8 +78,6 @@ QuestData QuestLoader::loadQuest(const std::string& questID) const {
 		}
 	}
 
-	lua_close(L);
-
 	questData.id = questID;
 	return questData;
 }

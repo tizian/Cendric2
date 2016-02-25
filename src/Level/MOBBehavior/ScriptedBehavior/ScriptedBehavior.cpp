@@ -14,6 +14,7 @@ ScriptedBehavior::ScriptedBehavior(const std::string& luaPath, CharacterCore* co
 	m_callback.setScriptedBehavior(this);
 
 	m_speechBubble = new SpeechBubble(enemy);
+	m_speechBubble->setFloatingHeight(enemy->getConfiguredDistanceToHPBar() + 10.f);
 	m_speechBubble->hide();
 
 	enemy->getScreen()->addObject(m_speechBubble);
@@ -52,8 +53,4 @@ void ScriptedBehavior::wait(int seconds) {
 
 bool ScriptedBehavior::isError() const {
 	return !m_callback.isLoaded();
-}
-
-void ScriptedBehavior::setSpeechBubbleFloatingHeight(float height) {
-	m_speechBubble->setFloatingHeight(height);
 }

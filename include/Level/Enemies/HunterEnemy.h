@@ -14,13 +14,10 @@ public:
 	~HunterEnemy() {}
 
 	void loadAnimation() override;
-	void update(const sf::Time& frameTime) override;
 
 	sf::Vector2f getConfiguredSpellOffset() const override;
 	int getMentalStrength() const override;
 
-	void setDisposed() override;
-	void setScreen(Screen* screen) override;
 	float getConfiguredDistanceToHPBar() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
@@ -33,7 +30,4 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
-
-	SpeechBubble* m_speechBubble;
-	int m_speechBubbleState = 0;
 };

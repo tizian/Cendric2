@@ -8,5 +8,5 @@ class AggressiveFlyingBehavior : public virtual FlyingBehavior {
 public:
 	AggressiveFlyingBehavior(Enemy* enemy);
 
-	void handleMovementInput() override;
+	void execHandleMovementInput() override;
 };

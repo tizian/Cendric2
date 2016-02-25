@@ -6,12 +6,8 @@ AggressiveWalkingBehavior::AggressiveWalkingBehavior(Enemy* enemy) :
 	WalkingBehavior(enemy) {
 }
 
-void AggressiveWalkingBehavior::handleMovementInput() {
-	if (m_enemy->isDead()) {
-		m_enemy->setAcceleration(sf::Vector2f(0.f, getGravity()));
-		return;
-	}
-
+void AggressiveWalkingBehavior::execHandleMovementInput() {
+	
 	// movement AI
 	float newAccelerationX = m_enemy->getAcceleration().x;
 
@@ -21,23 +17,23 @@ void AggressiveWalkingBehavior::handleMovementInput() {
 	if (m_isGrounded && hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing || m_enemy->getEnemyState() == EnemyState::Recovering)) {
 		// the enemy tries to get near its target
 		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_walkingDirection = -1;
+			m_movingDirectionX = -1;
 		}
 		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_walkingDirection = 1;
+			m_movingDirectionX = 1;
 		}
 		else {
-			m_walkingDirection = 0;
+			m_movingDirectionX = 0;
 		}
 	}
 	else if (m_isGrounded && hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
 		// the enemy tries to get away from its target
-		m_walkingDirection = targetCenter.x < center.x ? 1 : -1;
+		m_movingDirectionX = targetCenter.x < center.x ? 1 : -1;
 	}
 
-	if (m_walkingDirection != 0) {
-		m_nextIsFacingRight = m_walkingDirection == 1;
-		newAccelerationX += m_walkingDirection * m_walkAcceleration;
+	if (m_movingDirectionX != 0) {
+		m_nextIsFacingRight = m_movingDirectionX == 1;
+		newAccelerationX += m_movingDirectionX * m_walkAcceleration;
 	}
 
 	if (m_jumps && m_isGrounded) {

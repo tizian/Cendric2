@@ -30,7 +30,10 @@ public:
 	void say(const std::string& text, int seconds);
 	// wait for a certain time before the next update is called
 	void wait(int seconds);
-
+	// the enemy tries to move to this target as long as it is not reset.
+	void setMovingTarget(int x, int y);
+	// resets the moving target
+	void resetMovingTarget();
 	// sets the enemy "killed" so that it will never appear again in this level
 	void setKilled();
 	// leaves the level

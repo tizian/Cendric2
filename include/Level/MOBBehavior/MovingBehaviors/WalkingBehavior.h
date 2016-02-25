@@ -34,6 +34,4 @@ protected:
 	bool m_jumps = false;
 	bool m_walksBlindly = false;
 	bool m_collidesX = false;
-	// 0 means stand still, 1 walk right, -1 walk left
-	int m_walkingDirection = 0;
 };

@@ -23,12 +23,7 @@ void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
-void AllyWalkingBehavior::handleMovementInput() {
-	if (m_enemy->isDead()) {
-		m_enemy->setAcceleration(sf::Vector2f(0.f, getGravity()));
-		return;
-	}
-
+void AllyWalkingBehavior::execHandleMovementInput() {
 	// movement AI
 	float newAccelerationX = m_enemy->getAcceleration().x;
 

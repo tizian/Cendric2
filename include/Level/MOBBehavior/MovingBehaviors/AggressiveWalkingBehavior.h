@@ -8,5 +8,5 @@ class AggressiveWalkingBehavior : public virtual WalkingBehavior {
 public:
 	AggressiveWalkingBehavior(Enemy* enemy);
 
-	void handleMovementInput() override;
+	void execHandleMovementInput() override;
 };

@@ -6,11 +6,7 @@ AllyFlyingBehavior::AllyFlyingBehavior(Enemy* enemy) :
 	FlyingBehavior(enemy) {
 }
 
-void AllyFlyingBehavior::handleMovementInput() {
-	if (m_enemy->isDead()) {
-		m_enemy->setAcceleration(sf::Vector2f(0, getGravity()));
-		return;
-	}
+void AllyFlyingBehavior::execHandleMovementInput() {
 
 	// movement AI
 	float newAccelerationX = m_mob->getAcceleration().x;

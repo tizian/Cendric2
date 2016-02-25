@@ -18,9 +18,6 @@ HunterEnemy::HunterEnemy(Level* level, Screen* screen) :
 	load(EnemyID::Hunter);
 	setAlly(sf::Time::Zero);
 
-	m_speechBubble = new SpeechBubble(this);
-	m_speechBubble->setFloatingHeight(40.f);
-
 	m_isImmortal = true;
 }
 
@@ -56,32 +53,6 @@ void HunterEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	// should be something scripted here
 	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
-}
-
-void HunterEnemy::update(const sf::Time& frameTime) {
-	Enemy::update(frameTime);
-
-	m_speechBubble->update(frameTime);
-
-	// will be scripted, only here for test purposes!
-	if (m_speechBubbleState >= 4) return;
-
-	if (m_speechBubbleState == 3 && getPosition().x > 1750) {
-		m_speechBubbleState++;
-		m_speechBubble->setText("KillRats");
-	}
-	else if (m_speechBubbleState == 2 && getPosition().x > 1500) {
-		m_speechBubbleState++;
-		m_speechBubble->setText("FindAWay");
-	}
-	else if (m_speechBubbleState == 1 && getPosition().x > 850) {
-		m_speechBubbleState++;
-		m_speechBubble->setText("SpikesAreBad");
-	}
-	else if (m_speechBubbleState == 0 && getPosition().x > 0) {
-		m_speechBubbleState++;
-		m_speechBubble->setText("DestroyBlocks");
-	}
 }
 
 void HunterEnemy::loadAnimation() {
@@ -154,13 +125,3 @@ AttackingBehavior* HunterEnemy::createAttackingBehavior(bool asAlly) {
 int HunterEnemy::getMentalStrength() const {
 	return 4;
 }
-
-void HunterEnemy::setDisposed() {
-	Enemy::setDisposed();
-	m_speechBubble->setDisposed();
-}
-void HunterEnemy::setScreen(Screen* screen) {
-	Enemy::setScreen(screen);
-	screen->addObject(m_speechBubble);
-}
-

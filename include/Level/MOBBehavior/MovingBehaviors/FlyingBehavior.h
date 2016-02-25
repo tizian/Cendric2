@@ -19,8 +19,4 @@ protected:
 	// a enemy will never fly into those and handles them as collidable tiles.
 	// default is water, spikes top, spikes bottom.
 	std::set<LevelDynamicTileID> m_avoidableTiles;
-
-	int m_randomDecisionX = 0;
-	// 0 means wait, -1 go up, 1 go down
-	int m_randomDecisionY = 0;
 };

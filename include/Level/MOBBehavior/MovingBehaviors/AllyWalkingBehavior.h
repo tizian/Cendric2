@@ -10,5 +10,5 @@ public:
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 
-	void handleMovementInput() override;
+	void execHandleMovementInput() override;
 };

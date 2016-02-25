@@ -6,11 +6,8 @@ AggressiveFlyingBehavior::AggressiveFlyingBehavior(Enemy* enemy) :
 	FlyingBehavior(enemy) {
 }
 
-void AggressiveFlyingBehavior::handleMovementInput() {
-	if (m_enemy->isDead()) {
-		m_enemy->setAcceleration(sf::Vector2f(0, getGravity()));
-		return;
-	}
+void AggressiveFlyingBehavior::execHandleMovementInput() {
+
 	// movement AI
 	float newAccelerationX = m_mob->getAcceleration().x;
 	float newAccelerationY = 0.f;
@@ -56,12 +53,12 @@ void AggressiveFlyingBehavior::handleMovementInput() {
 	}
 	else if (m_enemy->getEnemyState() == EnemyState::Idle || m_enemy->getEnemyState() == EnemyState::Waiting) {
 
-		if (m_randomDecisionX != 0) {
-			m_nextIsFacingRight = (m_randomDecisionX == 1);
-			newAccelerationX += (m_randomDecisionX * m_walkAcceleration);
+		if (m_movingDirectionX != 0) {
+			m_nextIsFacingRight = (m_movingDirectionX == 1);
+			newAccelerationX += (m_movingDirectionX * m_walkAcceleration);
 		}
-		if (m_randomDecisionY != 0) {
-			newAccelerationY += (m_randomDecisionY * m_walkAcceleration);
+		if (m_movingDirectionY != 0) {
+			newAccelerationY += (m_movingDirectionY * m_walkAcceleration);
 		}
 	}
 
