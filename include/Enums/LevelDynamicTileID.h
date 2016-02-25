@@ -5,7 +5,7 @@ enum class LevelDynamicTileID {
 	VOID,
 	Destructible,
 	Ice,
-	Water,
+	Fluid,
 	Torch,
 	Chest,
 	SpikesBottom,

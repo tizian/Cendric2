@@ -143,9 +143,10 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
 		}
+
 		// special behavior
 		switch (it.id) {
-		case LevelDynamicTileID::Water:
+		case LevelDynamicTileID::Fluid:
 			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
 			break;
 		default:

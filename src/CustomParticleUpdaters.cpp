@@ -1,20 +1,20 @@
 #include "CustomParticleUpdaters.h"
 
-#include "Level/DynamicTiles/SimulatedWaterTile.h"
+#include "Level/DynamicTiles/FluidTile.h"
 
 namespace particles
 {
-	void SimulatedWaterUpdater::update(ParticleData *data, float dt) {
+	void FluidUpdater::update(ParticleData *data, float dt) {
 		int endId = data->countAlive;
 
 		if (endId == 0) return;
 
-		const sf::FloatRect *bb = water->getBoundingBox();
+		const sf::FloatRect *bb = fluidTile->getBoundingBox();
 
 		for (int i = 0; i < endId; ++i) {
-			float y = water->getHeight(data->pos[i].x);
+			float y = fluidTile->getHeight(data->pos[i].x);
 
-			if (data->pos[i].y + data->size[i].x > bb->top + bb->height - y - water->WATER_SURFACE_THICKNESS) {
+			if (data->pos[i].y + 0.5f * data->size[i].y > bb->top + bb->height - y) {
 				data->kill(i);
 				if (data->countAlive < data->count) {
 					endId = data->countAlive;
