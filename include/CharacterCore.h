@@ -97,6 +97,12 @@ public:
 	void setQuestTargetKilled(const std::string& questID, const std::string& name);
 	// a condition for a quest has been fulfilled
 	void setQuestConditionFulfilled(const std::string& questID, const std::string& condition);
+	// is a quest condition for a certain quest fulfilled?
+	bool isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const;
+	// set a condition fulfilled
+	void setConditionFulfilled(const std::string& condition);
+	// is a condition fulfilled?
+	bool isConditionFulfilled(const std::string& condition) const;
 	// is a enemy in a certain level dead?
 	bool isEnemyKilled(const std::string& levelID, int objectID);
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.

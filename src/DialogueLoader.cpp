@@ -53,6 +53,8 @@ void DialogueLoader::loadDialogue() {
 	catch (LuaException const& e) {
 		g_logger->logError("DialogeLoader", "LuaException: " + std::string(e.what()));
 	}
+
+	lua_close(L);
 }
 
 void DialogueLoader::addChoice(int nextTag, const std::string& text) {

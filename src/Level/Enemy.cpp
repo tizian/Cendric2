@@ -2,6 +2,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/EnemyMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/EnemyAttackingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
@@ -25,6 +26,7 @@ Enemy::Enemy(Level* level, Screen* screen) : LevelMovableGameObject(level) {
 Enemy::~Enemy() {
 	delete m_lootWindow;
 	delete m_buffBar;
+	delete m_scriptedBehavior;
 }
 
 void Enemy::load(EnemyID id) {
@@ -70,6 +72,9 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
 void Enemy::update(const sf::Time& frameTime) {
 	updateEnemyState(frameTime);
 	LevelMovableGameObject::update(frameTime);
+	if (m_scriptedBehavior != nullptr) {
+		m_scriptedBehavior->update(frameTime);
+	}
 	updateHpBar();
 	if (m_showLootWindow && m_lootWindow != nullptr) {
 		sf::Vector2f pos(getBoundingBox()->left + getBoundingBox()->width, getBoundingBox()->top - m_lootWindow->getSize().y + 10.f);
@@ -302,6 +307,15 @@ void Enemy::onRightClick() {
 	}
 }
 
+void Enemy::setScriptedBehavior(const std::string& luaPath) {
+	delete m_scriptedBehavior;
+	m_scriptedBehavior = new ScriptedBehavior(luaPath, m_screen->getCharacterCore(), this);
+	if (m_scriptedBehavior->isError()) {
+		delete m_scriptedBehavior;
+		m_scriptedBehavior = nullptr;
+	}
+}
+
 void Enemy::setDead() {
 	if (m_isImmortal) return;
 	LevelMovableGameObject::setDead();
@@ -312,10 +326,12 @@ void Enemy::setDead() {
 		return;
 	}
 
-	if (m_isPersistent) {
-		return;
+	if (!m_isPersistent) {
+		notifyKilled();
 	}
+}
 
+void Enemy::notifyKilled() {
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
 	if (!m_questTarget.first.empty()) {

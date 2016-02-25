@@ -367,6 +367,34 @@ bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, Ch
 	return true;
 }
 
+bool CharacterCoreReader::readProgressConditions(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	endData++;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	
+	std::set<string> conditions;
+	while (startData != NULL) {
+		std::string condition(startData);
+		int count = countToNextChar(startData, endData, ',');
+		if (count == -1) {
+			count = countToNextChar(startData, endData, '\n');
+			if (count == -1) {
+				return false;
+			}
+			conditions.insert(condition.substr(0, count));
+			break;
+		}
+		conditions.insert(condition.substr(0, count));
+		startData = gotoNextChar(startData, endData, ',');
+		startData++;
+	}
+
+	data.conditionProgress = conditions;
+	return true;
+}
+
 bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');

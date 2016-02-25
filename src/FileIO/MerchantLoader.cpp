@@ -58,5 +58,7 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) const {
 		}
 	}
 
+	lua_close(L);
+
 	return merchantData;
 }

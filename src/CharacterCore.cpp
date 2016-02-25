@@ -381,6 +381,21 @@ void CharacterCore::setQuestConditionFulfilled(const std::string& questID, const
 	m_data.questConditionProgress.at(questID).insert(condition);
 }
 
+bool CharacterCore::isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const {
+	if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end()) {
+		return false;
+	}
+	return m_data.questConditionProgress.at(questID).find(condition) != m_data.questConditionProgress.at(questID).end();
+}
+
+void CharacterCore::setConditionFulfilled(const std::string& condition) {
+	m_data.conditionProgress.insert(condition);
+}
+
+bool CharacterCore::isConditionFulfilled(const std::string& condition) const {
+	return m_data.conditionProgress.find(condition) != m_data.conditionProgress.end();
+}
+
 bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) {
 	if (m_data.enemiesKilled.find(levelID) == m_data.enemiesKilled.end()) return false;
 	if (m_data.enemiesKilled.at(levelID).find(objectID) == m_data.enemiesKilled.at(levelID).end()) return false;

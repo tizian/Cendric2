@@ -18,6 +18,7 @@ class LevelMainCharacter;
 class Spell;
 class EnemyMovingBehavior;
 class EnemyAttackingBehavior;
+class ScriptedBehavior;
 
 // An enemy in a level
 class Enemy : public virtual LevelMovableGameObject {
@@ -39,6 +40,8 @@ public:
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
+	void setScriptedBehavior(const std::string& luaPath);
+	void notifyKilled();
 	// an enemy that is persistent will not be marked as dead and respawn with every level reset
 	void setPersistent(bool value);
 	// the object ID in the level enemy object layer.
@@ -94,6 +97,7 @@ protected:
 	virtual void updateEnemyState(const sf::Time& frameTime);
 	EnemyAttackingBehavior* m_enemyAttackingBehavior = nullptr;
 	EnemyMovingBehavior* m_enemyMovingBehavior = nullptr;
+	ScriptedBehavior* m_scriptedBehavior = nullptr;
 	
 	// time until the enemy can attack after it has taken a hit
 	sf::Time m_recoveringTime = sf::Time::Zero;

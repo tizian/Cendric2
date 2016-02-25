@@ -41,6 +41,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeQuestStates(data);
 		savefile << writeQuestProgressTargets(data);
 		savefile << writeQuestProgressConditions(data);
+		savefile << writeProgressConditions(data);
 		savefile << writeNPCStates(data);
 		savefile << writeMerchandStates(data);
 		savefile << writeSpellsLearned(data);
@@ -91,7 +92,7 @@ std::string CharacterCoreWriter::writeLevelPosition(const CharacterCoreData& dat
 std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& data) const {
 	string enemiesKilled = "# enemies killed in level:\n";
 
-	for (auto it : data.enemiesKilled) {
+	for (auto& it : data.enemiesKilled) {
 		string enemyKilled = string(ENEMIES_KILLED);
 		enemyKilled.append(":");
 		enemyKilled.append(it.first);
@@ -107,7 +108,7 @@ std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& dat
 std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& data) const {
 	string enemiesLooted = "# enemies looted in level:\n";
 
-	for (auto it : data.enemiesLooted) {
+	for (auto& it : data.enemiesLooted) {
 		string enemyLooted = string(ENEMIES_LOOTED);
 		enemyLooted.append(":");
 		enemyLooted.append(it.first);
@@ -123,7 +124,7 @@ std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& dat
 std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data) const {
 	string itemsLooted = "# items looted in level:\n";
 
-	for (auto it : data.itemsLooted) {
+	for (auto& it : data.itemsLooted) {
 		string itemLooted = string(ITEMS_LOOTED);
 		itemLooted.append(":");
 		itemLooted.append(it.first);
@@ -139,7 +140,7 @@ std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data)
 std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData& data) const {
 	string waypointsUnlocked = "# waypoints unlocked in map:\n";
 
-	for (auto it : data.waypointsUnlocked) {
+	for (auto& it : data.waypointsUnlocked) {
 		string waypointUnlocked = string(WAYPOINTS_UNLOCKED);
 		waypointUnlocked.append(":");
 		waypointUnlocked.append(it.first);
@@ -155,7 +156,7 @@ std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData&
 std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data) const {
 	string chestsLooted = "# chests looted in level:\n";
 
-	for (auto it : data.chestsLooted) {
+	for (auto& it : data.chestsLooted) {
 		string chestLooted = string(ITEMS_LOOTED);
 		chestLooted.append(":");
 		chestLooted.append(it.first);
@@ -171,7 +172,7 @@ std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data
 std::string CharacterCoreWriter::writeSpellsLearned(const CharacterCoreData& data) const {
 	string spellsLearned = "# spells learned:\n";
 
-	for (auto it : data.spellsLearned) {
+	for (auto& it : data.spellsLearned) {
 		string spellLearned = string(SPELL_LEARNED);
 		spellLearned.append(":");
 		spellLearned.append(std::to_string(static_cast<int>(it.first)));
@@ -187,7 +188,7 @@ std::string CharacterCoreWriter::writeSpellsLearned(const CharacterCoreData& dat
 std::string CharacterCoreWriter::writeModifiersLearned(const CharacterCoreData& data) const {
 	string modifiersLearned = "# modifiers learned:\n";
 
-	for (auto it : data.modfiersLearned) {
+	for (auto& it : data.modfiersLearned) {
 		string modifierLearned = string(MODIFIER_LEARNED);
 		modifierLearned.append(":");
 		modifierLearned.append(std::to_string(static_cast<int>(it.first)));
@@ -231,7 +232,7 @@ std::string CharacterCoreWriter::writeGold(const CharacterCoreData& data) const 
 std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data) const {
 	string quests = "# quest states:\n";
 
-	for (auto it : data.questStates) {
+	for (auto& it : data.questStates) {
 		string quest = string(QUEST_STATE);
 		quest.append(":");
 		quest.append(it.first);
@@ -246,7 +247,7 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 std::string CharacterCoreWriter::writeMerchandStates(const CharacterCoreData& data) const {
 	string states = "# merchand states:\n";
 
-	for (auto it : data.merchantStates) {
+	for (auto& it : data.merchantStates) {
 		string merchant = string(MERCHANT_STATE);
 		merchant.append(":");
 		merchant.append(it.first);
@@ -305,10 +306,24 @@ std::string CharacterCoreWriter::writeQuestProgressConditions(const CharacterCor
 	return quests;
 }
 
+std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData& data) const {
+	string progress = "# general conditions fulfilled:\n";
+	progress.append(string(QUEST_PROGRESS_CONDITION));
+	progress.append(":");
+
+	for (auto& it : data.conditionProgress) {
+		progress.append(",");
+		progress.append(it);
+	}
+	progress.append("\n");
+
+	return progress;
+}
+
 std::string CharacterCoreWriter::writeNPCStates(const CharacterCoreData& data) const {
 	string npcs = "# npc states:\n";
 
-	for (auto it : data.npcStates) {
+	for (auto& it : data.npcStates) {
 		string npc = string(NPC_STATE);
 		npc.append(":");
 		npc.append(it.first);
@@ -323,7 +338,7 @@ std::string CharacterCoreWriter::writeNPCStates(const CharacterCoreData& data) c
 std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) const {
 	string items = "# items in inventory:\n";
 
-	for (auto it : data.items) {
+	for (auto& it : data.items) {
 		string item = string(ITEM_ID);
 		item.append(":");
 		item.append(it.first);
