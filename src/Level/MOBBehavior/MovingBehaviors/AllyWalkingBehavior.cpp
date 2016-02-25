@@ -25,42 +25,22 @@ void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 void AllyWalkingBehavior::execHandleMovementInput() {
 	// movement AI
-	float newAccelerationX = m_enemy->getAcceleration().x;
-
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
 	sf::Vector2f center = m_enemy->getCenter();
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
 	if (hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing || m_enemy->getEnemyState() == EnemyState::Recovering)) {
-
 		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= m_walkAcceleration;
+			m_movingDirectionX = -1;
 		}
 		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += m_walkAcceleration;
+			m_movingDirectionX = 1;
 		}
-
-		if (m_jumps && m_isGrounded) {
-			m_enemy->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp); // first jump vel will always be max y vel. 
-			m_jumps = false;
+		else {
+			m_movingDirectionX = 0;
 		}
 	}
 	else if (hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
-
-		if (targetCenter.x < center.x) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += m_walkAcceleration;
-		}
-		else if (targetCenter.x > center.x) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= m_walkAcceleration;
-		}
-
-		if (m_jumps && m_isGrounded) {
-			m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-			m_jumps = false;
-		}
+		m_movingDirectionX = (targetCenter.x < center.x) ? 1 : -1;
 	}
 	else if (m_enemy->getEnemyState() == EnemyState::Idle || m_enemy->getEnemyState() == EnemyState::Waiting) {
 
@@ -69,20 +49,19 @@ void AllyWalkingBehavior::execHandleMovementInput() {
 		float approachingDistance = (m_enemy->getState() == GameObjectState::Walking) ? (m_approachingDistance - 10.f) : m_approachingDistance;
 
 		if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > approachingDistance) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= m_walkAcceleration;
+			m_movingDirectionX = -1;
 		}
 		else if (mainCharCenter.x > center.x && std::abs(mainCharCenter.x - center.x) > approachingDistance) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += m_walkAcceleration;
+			m_movingDirectionX = 1;
 		}
-
-		if (m_jumps && m_isGrounded) {
-			m_enemy->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp); // first jump vel will always be max y vel. 
-			m_jumps = false;
+		else {
+			m_movingDirectionX = 0;
 		}
 	}
 
-	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -m_gravity : m_gravity)));
+	if (m_jumps && m_isGrounded) {
+		m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
+		m_jumps = false;
+	}
 }
 

@@ -5,7 +5,8 @@ update = function(B)
 		if (speechBubbleState == 5) then
 			B:leaveLevel()
 		elseif (speechBubbleState == 4 and B:getPosX() > 2050) then
-			B:say("IamLeaving", 3)
+			B:say("IAmLeaving", 3)
+			B:setMovingTarget(2150, 0)
 			B:wait(3)
 			speechBubbleState = speechBubbleState + 1
 		elseif (speechBubbleState == 3 and B:getPosX() > 1750) then

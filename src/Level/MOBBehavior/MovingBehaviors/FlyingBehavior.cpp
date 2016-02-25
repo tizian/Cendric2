@@ -9,6 +9,8 @@ FlyingBehavior::FlyingBehavior(Enemy* enemy) :
 	m_avoidableTiles.insert(LevelDynamicTileID::Water);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);
+
+	m_isWalkingBehavior = false;
 };
 
 void FlyingBehavior::makeRandomDecision() {

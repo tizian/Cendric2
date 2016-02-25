@@ -7,10 +7,7 @@ AggressiveWalkingBehavior::AggressiveWalkingBehavior(Enemy* enemy) :
 }
 
 void AggressiveWalkingBehavior::execHandleMovementInput() {
-	
 	// movement AI
-	float newAccelerationX = m_enemy->getAcceleration().x;
-
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
 	sf::Vector2f center = m_enemy->getCenter();
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
@@ -31,16 +28,9 @@ void AggressiveWalkingBehavior::execHandleMovementInput() {
 		m_movingDirectionX = targetCenter.x < center.x ? 1 : -1;
 	}
 
-	if (m_movingDirectionX != 0) {
-		m_nextIsFacingRight = m_movingDirectionX == 1;
-		newAccelerationX += m_movingDirectionX * m_walkAcceleration;
-	}
-
 	if (m_jumps && m_isGrounded) {
 		m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
 		m_jumps = false;
 	}
-
-	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -m_gravity : m_gravity)));
 }
 

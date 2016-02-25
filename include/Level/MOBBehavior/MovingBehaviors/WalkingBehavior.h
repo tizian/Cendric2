@@ -20,8 +20,6 @@ public:
 
 	float getDistanceToAbyss() const;
 
-	int getWalkingDirection() const;
-
 protected:
 	AIWalkingQueryRecord m_aiRecord;
 

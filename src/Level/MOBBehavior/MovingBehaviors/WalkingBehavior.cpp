@@ -7,6 +7,7 @@
 WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 	EnemyMovingBehavior(enemy),
 	MovingBehavior(enemy) {
+	m_isWalkingBehavior = true;
 }
 
 bool WalkingBehavior::doAIJump(bool onlyJump) {
@@ -131,10 +132,6 @@ float WalkingBehavior::getDistanceToAbyss() const {
 void WalkingBehavior::makeRandomDecision() {
 	if (!m_isGrounded || m_walksBlindly) return;
 	m_movingDirectionX = rand() % 3 - 1;
-}
-
-int WalkingBehavior::getWalkingDirection() const {
-	return m_movingDirectionX;
 }
 
 void WalkingBehavior::updateAnimation() {

@@ -25,6 +25,7 @@ public:
 protected:
 	Enemy* m_enemy;
 	float m_approachingDistance = 0.f;
+	bool m_isWalkingBehavior = true;
 
 	sf::Vector2f* m_movingTarget = nullptr;
 
