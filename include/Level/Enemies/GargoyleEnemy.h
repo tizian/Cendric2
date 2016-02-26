@@ -1,7 +1,6 @@
 #pragma once
 
 #include "global.h"
-#include "Level/FlyingEnemy.h"
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"
@@ -16,6 +15,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void loadAnimation() override;
 	void loadAnimation(int skinNr);
+	void setDead() override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;

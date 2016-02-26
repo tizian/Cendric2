@@ -2,6 +2,7 @@
 #include "GUI/GUIConstants.h"
 #include "Spell.h"
 #include "Enums/EnumNames.h"
+#include "ScreenOverlay.h"
 
 using namespace std;
 
@@ -168,6 +169,8 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 		tooltip.append(g_textProvider->getText("Feared") + "\n");
 	}
 	else if (data.isStunned) {
+		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty())
+			m_screen->addObject(new ScreenOverlay(ResourceID::Texture_screen_overlay_stunned, m_duration));
 		tooltip.append(g_textProvider->getText("Stunned") + "\n");
 	}
 	if (data.damageType != DamageType::VOID) {

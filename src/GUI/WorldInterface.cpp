@@ -121,6 +121,11 @@ CharacterCore* WorldInterface::getCore() const {
 	return m_core;
 }
 
+Screen* WorldInterface::getScreen() const {
+	return m_screen;
+}
+
+
 Inventory* WorldInterface::getInventory() const {
 	return m_inventory;
 }

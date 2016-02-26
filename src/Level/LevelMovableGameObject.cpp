@@ -127,7 +127,7 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
 	if (m_attributes.currentHealthPoints == 0) {
 		setDead();
 	}
-	setSpriteColor(sf::Color::Red, sf::milliseconds(200));
+	setSpriteColor(sf::Color::Red, sf::milliseconds(400));
 }
 
 void LevelMovableGameObject::addDamageOverTime(DamageOverTimeData& data) {

@@ -84,6 +84,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/assets/screens/screen_error_datacorrupted.png" },
 		{ ResourceID::Texture_screen_gameover, "res/assets/screens/screen_gameover.png" },
 		{ ResourceID::Texture_screen_overlay, "res/assets/screens/screen_overlay.png" },
+		{ ResourceID::Texture_screen_overlay_stunned, "res/assets/screens/screen_overlay_stunned.png" },
 		{ ResourceID::Texture_screen_menu, "res/assets/screens/screen_menu.png" },
 		{ ResourceID::Texture_debuff_fear, "res/assets/debuffs/spritesheet_debuff_fear.png" },
 		{ ResourceID::Texture_debuff_stun, "res/assets/debuffs/spritesheet_debuff_stun.png" },
@@ -404,6 +405,7 @@ void ResourceManager::deleteLevelResources() {
 	// delete other level resources
 	deleteResource(ResourceID::Texture_levelitems);
 	deleteResource(ResourceID::Texture_screen_gameover);
+	deleteResource(ResourceID::Texture_screen_overlay_stunned);
 	deleteResource(ResourceID::Texture_GUI_speechbubble_pointer);
 }
 
@@ -452,6 +454,7 @@ void ResourceManager::loadLevelResources() {
 
 	// load game over sprite 
 	getTexture(ResourceID::Texture_screen_gameover);
+	getTexture(ResourceID::Texture_screen_overlay_stunned);
 
 	// load debuff sprites
 	getTexture(ResourceID::Texture_debuff_fear);

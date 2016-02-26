@@ -147,6 +147,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 			updateObjects(GameObjectType::_LevelEquipment, frameTime);
 			updateObjects(GameObjectType::_Spell, frameTime);
 			updateObjects(GameObjectType::_Overlay, frameTime);
+			updateObjects(GameObjectType::_ScreenOverlay, frameTime);
 			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 			
 			updateObjects(GameObjectType::_Light, frameTime);
@@ -227,13 +228,16 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
 
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
 	renderTooltipText(renderTarget);
-	WorldScreen::render(renderTarget); // this will set the view to the default view!
+	WorldScreen::render(renderTarget);
 
 	if (m_retryButton->isVisible()) {
 		renderTarget.draw(*m_overlaySprite);
 		renderTarget.draw(*m_overlayText);
 	}
+	
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
 

@@ -58,7 +58,7 @@ void EnemyMovingBehavior::setApproachingDistance(float distance) {
 
 void EnemyMovingBehavior::setMovingTarget(int x, int y) {
 	delete m_movingTarget;
-	m_movingTarget = new sf::Vector2f(x, y);
+	m_movingTarget = new sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
 }
 
 void EnemyMovingBehavior::resetMovingTarget() {

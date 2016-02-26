@@ -48,13 +48,6 @@ void GargoyleEnemy::loadAttributes() {
 
 void GargoyleEnemy::loadSpells() {
 	m_spellManager->clearSpells();
-	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.activeDuration = sf::milliseconds(500);
-	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.damage = 30 + m_spellAdditionalDamage;
-	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
-
-	m_spellManager->addSpell(chopSpell);
 
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 10 + m_spellAdditionalDamage / 2;
@@ -68,7 +61,7 @@ void GargoyleEnemy::loadSpells() {
 	fireBallSpell.isDynamicTileEffect = !m_isSummoned;
 
 	m_spellManager->addSpell(fireBallSpell);
-	m_maxSpell = 1;
+	m_maxSpell = 0;
 
 	if (m_isSummoned) {
 		fireBallSpell.skinNr = 1;
@@ -86,7 +79,7 @@ void GargoyleEnemy::loadSpells() {
 
 		m_spellManager->addSpell(fireBallSpell);
 
-		m_maxSpell = 4;
+		m_maxSpell = 3;
 	}
 
 	m_spellManager->setCurrentSpell(0);
@@ -108,7 +101,7 @@ MovingBehavior* GargoyleEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(150.f);
 	behavior->setMaxVelocityYUp(150.f);
 	behavior->setMaxVelocityX(150.f);
-	behavior->setFightAnimationTime(sf::milliseconds(3 * 100));
+	behavior->setFightAnimationTime(sf::milliseconds(500));
 	return behavior;
 }
 
@@ -128,21 +121,10 @@ AttackingBehavior* GargoyleEnemy::createAttackingBehavior(bool asAlly) {
 void GargoyleEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
-	if (m_enemyAttackingBehavior->distToTarget() < 50.f) {
-		m_spellManager->setCurrentSpell(0); // chop
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
-		m_chasingTime = sf::Time::Zero;
-		if (isAlly()) {
-			m_waitingTime = sf::seconds(static_cast<float>(rand() % 2) + 1);
-		}
-		else {
-			m_waitingTime = sf::seconds(static_cast<float>(rand() % 4));
-		}
-		return;
-	}
+	
 	if (m_attackWaitTime == sf::Time::Zero) {
 		m_attackWaitTime = sf::seconds(2.f);
-		m_spellManager->setCurrentSpell(rand() % m_maxSpell + 1); // random
+		if (m_maxSpell > 0) m_spellManager->setCurrentSpell(rand() % m_maxSpell); // random
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
@@ -184,23 +166,32 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	// TODO: create other animations
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
-	for (int i = 0; i < 8; i++) {
-		fightingAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
+	for (int i = 0; i < 3; i++) {
+		fightingAnimation->addFrame(sf::IntRect(195 * i, 180, 195, 180));
 	}
+	fightingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
-	for (int i = 0; i < 8; i++) {
-		deadAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
+	for (int i = 0; i < 10; i++) {
+		deadAnimation->addFrame(sf::IntRect(195 * i, 360, 195, 180));
 	}
+	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+}
+
+void GargoyleEnemy::setDead() {
+	m_boundingBox.width = 138.f;
+	m_boundingBox.height = 46.f;
+	setSpriteOffset(sf::Vector2f(-25.f, -133.f));
+	Enemy::setDead();
 }
 
 bool GargoyleEnemy::isSummoned() const {

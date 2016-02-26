@@ -50,6 +50,7 @@ enum class ResourceID {
 	Texture_screen_error_dataCorrupted,
 	Texture_screen_gameover,
 	Texture_screen_overlay,
+	Texture_screen_overlay_stunned,
 	Texture_screen_menu,
 	Texture_screen_credits,
 	Texture_enemy_rat,

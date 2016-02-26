@@ -54,7 +54,7 @@ void Cutscene::setNextText() {
 	}
 	else {
 		m_cutsceneText.setString(g_textProvider->getCroppedText(text.text, "cutscene",
-			GUIConstants::CHARACTER_SIZE_L, WINDOW_WIDTH - 2 * TEXT_OFFSET.x));
+			GUIConstants::CHARACTER_SIZE_L, WINDOW_WIDTH - 2 * static_cast<int>(TEXT_OFFSET.x)));
 	}
 	m_cutsceneText.setPosition(sf::Vector2f(
 		(WINDOW_WIDTH - m_cutsceneText.getLocalBounds().width) / 2.f, 

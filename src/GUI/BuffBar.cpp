@@ -41,6 +41,7 @@ void BuffBar::addFoodBuff(const sf::IntRect& textureLocation, const sf::Time& du
 
 void BuffBar::addDotBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
 	BuffSlot* buff = new BuffSlot(BuffType::DamageOverTime, textureLocation, duration);
+	buff->setScreen(m_interface->getScreen());
 	buff->setDotAttributes(data);
 	m_buffSlots.push_back(buff);
 	m_notifyInterface = true;

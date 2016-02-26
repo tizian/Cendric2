@@ -26,6 +26,14 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	const Level& level = *m_mob->getLevel();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, bb.width, bb.height);
+	
+	if (level.collidesWithDynamicTiles(nextBoundingBox, m_avoidableTiles)) {
+		m_mob->setAccelerationX(0.f);
+		m_mob->setVelocityX(0.f);
+		return;
+	}
+
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 

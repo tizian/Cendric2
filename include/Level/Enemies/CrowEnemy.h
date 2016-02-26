@@ -1,7 +1,6 @@
 #pragma once
 
 #include "global.h"
-#include "Level/FlyingEnemy.h"
 #include "Level/Level.h"
 #include "SpellManager.h"
 #include "Screen.h"

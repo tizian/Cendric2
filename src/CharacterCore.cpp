@@ -117,8 +117,7 @@ void CharacterCore::setNPCState(const std::string& id, NPCState state) {
 
 void CharacterCore::setQuestState(const std::string& id, QuestState state) {
 	if (state == QuestState::Started && m_data.questStates.find(id) == m_data.questStates.end()) {
-		QuestLoader loader;
-		QuestData newQuest = loader.loadQuest(id);
+		QuestData newQuest = QuestLoader::loadQuest(id);
 		if (newQuest.id.empty()) {
 			g_logger->logError("CharacterCore", "Could not load quest: " + id);
 			return;
