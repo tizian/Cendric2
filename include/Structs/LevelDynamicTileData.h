@@ -9,6 +9,6 @@ struct LevelDynamicTileData {
 	sf::Vector2f position;
 	int spawnPosition;
 	int skinNr;
-	// only used for SWE Simulated Water Tiles
+	// only used for FluidTile
 	sf::Vector2f size;
 };

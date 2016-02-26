@@ -2,18 +2,18 @@
 
 #include "Particles/ParticleSystem.h"
 
-class SimulatedWaterTile;
+class FluidTile;
 
 namespace particles
 {
-	class SimulatedWaterUpdater : public ParticleUpdater {
+	class FluidUpdater : public ParticleUpdater {
 	public:
-		SimulatedWaterUpdater() {}
-		~SimulatedWaterUpdater() {}
+		FluidUpdater() {}
+		~FluidUpdater() {}
 
 		void update(ParticleData *data, float dt);
 
 	public:
-		SimulatedWaterTile *water = nullptr;
+		FluidTile *fluidTile = nullptr;
 	};
 }

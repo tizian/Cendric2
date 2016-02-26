@@ -4,11 +4,11 @@
 
 #include "global.h"
 #include "Particles/ParticleSystem.h"
-#include "Level/DynamicTiles/SimulatedWaterTileData.h"
+#include "Level/DynamicTiles/FluidTileData.h"
 
 class FrozenWaterTile;
 
-struct WaterColumn {
+struct FluidColumn {
 	float targetHeight;
 	float height;
 	float velocity;
@@ -26,10 +26,9 @@ struct WaterColumn {
 	}
 };
 
-// tizs awesome water
-class SimulatedWaterTile : public LevelDynamicTile {
+class FluidTile : public LevelDynamicTile {
 public:
-	SimulatedWaterTile(Level* level) : LevelDynamicTile(level) {}
+	FluidTile(Level* level) : LevelDynamicTile(level) {}
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(LevelMovableGameObject* mob) override;
@@ -46,14 +45,15 @@ public:
 	void melt(int index);
 
 	bool isFrozen(int index);
+
 private:
-	SimulatedWaterTileData m_data;
+	FluidTileData m_data;
 	float m_x, m_y;
 	float m_width, m_height;
-	int m_nTiles;		// number tiles (width)
+	int m_nTiles;		// number subtiles (horizontally)
 
 	int m_nColumns;
-	std::vector<WaterColumn> m_columns;
+	std::vector<FluidColumn> m_columns;
 
 	float *m_leftDeltas;
 	float *m_rightDeltas;
@@ -70,7 +70,6 @@ private:
 	sf::Sound m_sound;
 
 public:
-
-	static const float	WATER_SURFACE_THICKNESS;
+	static const float	SURFACE_THICKNESS;
 	static const int	NUMBER_COLUMNS_PER_SUBTILE;
 };

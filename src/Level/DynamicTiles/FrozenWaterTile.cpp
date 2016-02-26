@@ -1,12 +1,12 @@
 #include "Level/DynamicTiles/FrozenWaterTile.h"
 #include "Spell.h"
 
-#include "Level/DynamicTiles/SimulatedWaterTile.h"
+#include "Level/DynamicTiles/FluidTile.h"
 
 // this tile is special and is not registered
-FrozenWaterTile::FrozenWaterTile(SimulatedWaterTile *waterTile, int waterTileIndex) : LevelDynamicTile(nullptr) {
-	m_waterTile = waterTile;
-	m_waterTileIndex = waterTileIndex;
+FrozenWaterTile::FrozenWaterTile(FluidTile *fluidTile, int fluidTileIndex) : LevelDynamicTile(nullptr) {
+	m_fluidTile = fluidTile;
+	m_fluidTileIndex = fluidTileIndex;
 }
 
 void FrozenWaterTile::init() {
@@ -34,7 +34,7 @@ void FrozenWaterTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::FireBall:
 		spell->setDisposed();
-		m_waterTile->melt(m_waterTileIndex);
+		m_fluidTile->melt(m_fluidTileIndex);
 		setDisposed();
 		break;
 	default:

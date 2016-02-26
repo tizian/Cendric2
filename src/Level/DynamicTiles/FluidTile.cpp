@@ -1,27 +1,25 @@
-#include "Level/DynamicTiles/SimulatedWaterTile.h"
+#include "Level/DynamicTiles/FluidTile.h"
 #include "Spell.h"
 
 #include "Level/DynamicTiles/FrozenWaterTile.h"
 #include "CustomParticleUpdaters.h"
 #include "Registrar.h"
 
-REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Water, SimulatedWaterTile)
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Fluid, FluidTile)
 
-using namespace std;
-
-const float SimulatedWaterTile::WATER_SURFACE_THICKNESS = 4.f;
-const int SimulatedWaterTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
+const float FluidTile::SURFACE_THICKNESS = 4.f;
+const int FluidTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 
 inline float randomFloat(float low, float high) {
 	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));
 }
 
-void SimulatedWaterTile::init() {
+void FluidTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 }
 
-void SimulatedWaterTile::loadAnimation(int skinNr) {
-	m_data = SimulatedWaterTileData::getData(skinNr);
+void FluidTile::loadAnimation(int skinNr) {
+	m_data = FluidTileData::getData(skinNr);
 
 	const sf::FloatRect *bb = getBoundingBox();
 	m_x = getPosition().x;
@@ -29,16 +27,17 @@ void SimulatedWaterTile::loadAnimation(int skinNr) {
 	m_width = bb->width;
 	m_height = bb->height;
 
-	setBoundingBox(sf::FloatRect(m_x, m_y + 11.f, m_width, m_height));
+	float dHeight = 50.f - m_data.height;
+	setBoundingBox(sf::FloatRect(m_x, m_y + dHeight, m_width, m_height - dHeight));
 
 	m_nTiles = static_cast<int>(bb->width / TILE_SIZE);
 
 	m_nColumns = NUMBER_COLUMNS_PER_SUBTILE * m_nTiles;
-	m_columns = vector<WaterColumn>();
+	m_columns = std::vector<FluidColumn>();
 	for (int i = 0; i < m_nColumns; ++i) {
-		WaterColumn c;
-		c.targetHeight = m_height - 10;
-		c.height = m_height - 10;
+		FluidColumn c;
+		c.targetHeight = m_height - dHeight;
+		c.height = c.targetHeight;
 		c.velocity = 0.f;
 		c.fixed = false;
 
@@ -59,9 +58,9 @@ void SimulatedWaterTile::loadAnimation(int skinNr) {
 	m_ps->threshold = 0.7f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::DiskPositionGenerator>();
+	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	m_particlePosition = &posGen->center;
-	posGen->radius = 40.f;
+	posGen->size = sf::Vector2f(20.f, 1.f);
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 8.f;
@@ -70,8 +69,8 @@ void SimulatedWaterTile::loadAnimation(int skinNr) {
 	sizeGen->maxEndSize = 8.0f;
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = -60.f;
-	velGen->maxAngle = 60.f;
+	velGen->minAngle = -40.f;
+	velGen->maxAngle = 40.f;
 	m_particleMinSpeed = &velGen->minStartVel;
 	m_particleMaxSpeed = &velGen->maxStartVel;
 
@@ -82,14 +81,14 @@ void SimulatedWaterTile::loadAnimation(int skinNr) {
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
 
-	auto waterUpdater = m_ps->addUpdater<particles::SimulatedWaterUpdater>();
-	waterUpdater->water = this;
+	auto fluidUpdater = m_ps->addUpdater<particles::FluidUpdater>();
+	fluidUpdater->fluidTile = this;
 
 	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
 	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);
 }
 
-void SimulatedWaterTile::update(const sf::Time& frameTime) {
+void FluidTile::update(const sf::Time& frameTime) {
 	float dt = frameTime.asSeconds();
 	dt *= 20.f;
 
@@ -135,7 +134,6 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 	sf::Color transparent = sf::Color(255, 255, 255, 0);
 
 	float scale = m_width / (float)(m_nColumns - 1);
-	float thickness = 4.f;
 
 	for (int i = 0; i < m_nColumns - 1; ++i) {
 		bool fixed1 = m_columns[i].fixed;
@@ -145,8 +143,8 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 		sf::Vector2f p2 = sf::Vector2f(m_x + (i + 1) * scale, m_y + m_height - m_columns[i + 1].height);
 		sf::Vector2f p3 = sf::Vector2f(p2.x, m_y + m_height);
 		sf::Vector2f p4 = sf::Vector2f(p1.x, m_y + m_height);
-		sf::Vector2f p5 = sf::Vector2f(p2.x, p2.y - thickness);
-		sf::Vector2f p6 = sf::Vector2f(p1.x, p1.y - thickness);
+		sf::Vector2f p5 = sf::Vector2f(p2.x, p2.y - SURFACE_THICKNESS);
+		sf::Vector2f p6 = sf::Vector2f(p1.x, p1.y - SURFACE_THICKNESS);
 
 		m_vertexArray[8 * i + 0].position = p1;
 		m_vertexArray[8 * i + 0].color = m_data.color;
@@ -170,34 +168,36 @@ void SimulatedWaterTile::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 }
 
-float SimulatedWaterTile::getHeight(float xPosition) const {
+float FluidTile::getHeight(float xPosition) const {
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
-	if (index < 0 || index > m_nColumns - 1)
-		return m_height - 10;
+	if (index < 0 || index > m_nColumns - 1) {
+		float dHeight = 50.f - m_data.height;
+		return m_height - dHeight;
+	}
 
 	return m_columns[index].height;
 }
 
-void SimulatedWaterTile::splash(float xPosition, float velocity) {
+void FluidTile::splash(float xPosition, float velocity) {
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	if (index > 0 && index < m_nColumns) {
 		m_columns[index].velocity = velocity;
 	}
 
-	velocity = std::abs(velocity);
+	velocity = std::abs(velocity) * m_data.velocityScale;
 	float y = getHeight(xPosition);
 	const sf::FloatRect *bb = getBoundingBox();
 
-	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y - WATER_SURFACE_THICKNESS);
+	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
 	*m_particleMinSpeed = 0.2f * velocity;
 	*m_particleMaxSpeed = 1.0f * velocity;
-	int nParticles = static_cast<int>(velocity / 8);
+	int nParticles = static_cast<int>(velocity / 12);
 	m_ps->emit(nParticles);
 	if (velocity > 100.f)
 		g_resourceManager->playSound(m_sound, m_data.sound);
 }
 
-void SimulatedWaterTile::splash(float xPosition, float width, float velocity) {
+void FluidTile::splash(float xPosition, float width, float velocity) {
 	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
 	for (int i = startIndex; i <= endIndex; ++i) {
@@ -206,26 +206,26 @@ void SimulatedWaterTile::splash(float xPosition, float width, float velocity) {
 		}
 	}
 
-	velocity = std::abs(velocity);
+	velocity = std::abs(velocity) * m_data.velocityScale;
 	xPosition = xPosition + 0.5f * width;
 	float y = getHeight(xPosition);
 	const sf::FloatRect *bb = getBoundingBox();
 
-	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y - WATER_SURFACE_THICKNESS);
+	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
 	*m_particleMinSpeed = 0.2f * velocity;
 	*m_particleMaxSpeed = 1.0f * velocity;
-	int nParticles = static_cast<int>(velocity / 8);
+	int nParticles = static_cast<int>(velocity / 12);
 	m_ps->emit(nParticles);
 	if (velocity > 100.f)
 		g_resourceManager->playSound(m_sound, m_data.sound);
 }
 
-void SimulatedWaterTile::render(sf::RenderTarget& target) {
+void FluidTile::render(sf::RenderTarget& target) {
 	target.draw(m_vertexArray);
 	m_ps->render(target);
 }
 
-void SimulatedWaterTile::onHit(Spell* spell) {
+void FluidTile::onHit(Spell* spell) {
 	auto id = spell->getSpellID();
 
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / TILE_SIZE));
@@ -241,20 +241,16 @@ void SimulatedWaterTile::onHit(Spell* spell) {
 	}
 
 	if (doSplash) {
-		float vx = spell->getVelocity().x;
-		float vy = spell->getVelocity().y;
-		float vel = std::sqrt(vx*vx + vy*vy);
+		float vel = norm(spell->getVelocity());
 		splash(spell->getPosition().x, -vel * 0.5f);
 		spell->setDisposed();
 	}
 }
 
-void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
+void FluidTile::onHit(LevelMovableGameObject* mob) {
 	// don't splash if the mob is deeper than one tile below the surface
 	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
-	float vx = mob->getVelocity().x;
-	float vy = mob->getVelocity().y;
-	float vel = std::sqrt(vx*vx + vy*vy);
+	float vel = norm(mob->getVelocity());
 	// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
 	splash(mob->getBoundingBox()->left, mob->getBoundingBox()->width, -vel * 0.5f);
 	if (m_data.isDeadly) {
@@ -262,18 +258,18 @@ void SimulatedWaterTile::onHit(LevelMovableGameObject* mob) {
 	}
 }
 
-void SimulatedWaterTile::freeze(int index) {
+void FluidTile::freeze(int index) {
 	if (index >= 0 && index < m_nTiles) {
-		// check if this water tile can be frozen or if a mob is in the way
+		// check if this fluid tile can be frozen or if a mob is in the way
 		WorldCollisionQueryRecord rec;
 		rec.boundingBox = sf::FloatRect(m_x + index * TILE_SIZE, m_y, static_cast<float>(TILE_SIZE), TILE_SIZE_F);
 		if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
-			g_logger->logInfo("SimulatedWaterTile::freeze", "Cannot freeze this tile as it would stuck a MOB or a movable tile!");
+			g_logger->logInfo("FluidTile::freeze", "Cannot freeze this tile as it would stuck a MOB or a movable tile!");
 			return;
 		}
 
 		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i) {
-			WaterColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
+			FluidColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
 			col.height = col.targetHeight;
 			col.fixed = true;
 		}
@@ -290,10 +286,10 @@ void SimulatedWaterTile::freeze(int index) {
 	}
 }
 
-void SimulatedWaterTile::melt(int index) {
+void FluidTile::melt(int index) {
 	if (index >= 0 && index < m_nTiles) {
 		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i) {
-			WaterColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
+			FluidColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
 			col.fixed = false;
 		}
 
@@ -301,7 +297,7 @@ void SimulatedWaterTile::melt(int index) {
 	}
 }
 
-bool SimulatedWaterTile::isFrozen(int index) {
+bool FluidTile::isFrozen(int index) {
 	if (m_frozenTiles.size() == 0) return false;
 	if (index < 0) index = 0;
 	if (index >= m_frozenTiles.size()) index = static_cast<int>(m_frozenTiles.size()) - 1;

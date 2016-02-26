@@ -676,7 +676,7 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Destructible, layerData, data)) return false;
 		}
 		else if (name.find("dynamic water") != std::string::npos) {
-			if (!readDynamicTileLayer(LevelDynamicTileID::Water, layerData, data)) return false;
+			if (!readDynamicTileLayer(LevelDynamicTileID::Fluid, layerData, data)) return false;
 		}
 		else if (name.find("dynamic shiftable") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Shiftable, layerData, data)) return false;
@@ -828,8 +828,8 @@ void LevelReader::updateData(LevelData& data)  const {
 	for (auto& layer : data.dynamicTileLayers) {
 		LevelDynamicTileID id = layer.first;
 
-		if (id == LevelDynamicTileID::Water) {
-			// Read in DynamicWaterTiles: Look for n x m tile rectangles inside layer
+		if (id == LevelDynamicTileID::Fluid) {
+			// Read in FluidTiles: Look for n x m tile rectangles inside layer
 
 			std::vector<bool> processed(layer.second.size(), false);
 			LevelDynamicTileData ldtData;
