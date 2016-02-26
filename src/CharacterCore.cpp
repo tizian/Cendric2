@@ -43,9 +43,8 @@ bool CharacterCore::load(const std::string& fileName) {
 
 void CharacterCore::loadQuests() {
 	m_quests.clear();
-	QuestLoader loader;
 	for (auto& it : m_data.questStates) {
-		QuestData data = loader.loadQuest(it.first);
+		QuestData data = QuestLoader::loadQuest(it.first);
 		if (data.id.empty()) {
 			g_logger->logError("CharacterCore::loadQuests", "Could not load quest: " + it.first);
 			continue;
@@ -411,8 +410,7 @@ MerchantData CharacterCore::getMerchantData(const std::string& merchantID) {
 		return m_data.merchantStates.at(merchantID);
 	}
 
-	MerchantLoader loader;
-	return loader.loadMerchant(merchantID);
+	return MerchantLoader::loadMerchant(merchantID);
 }
 
 void CharacterCore::setMerchantData(const std::string& merchantID, const MerchantData& data) {

@@ -1,4 +1,5 @@
 #include "Screens/MenuScreen.h"
+#include "Screens/CutsceneScreen.h"
 
 using namespace std;
 
@@ -124,7 +125,7 @@ void MenuScreen::onStartNewGame() {
 	delete m_characterCore;
 	m_characterCore = m_newCharacterCore;
 	m_newCharacterCore = nullptr;
-	setNextScreen(new LoadingScreen(m_characterCore));
+	setNextScreen(new CutsceneScreen(m_characterCore, "intro"));
 }
 
 void MenuScreen::onNo() {
@@ -148,7 +149,7 @@ void MenuScreen::onNewGame() {
 		// we start a new game with an empty character core
 		m_characterCore = new CharacterCore();
 		m_characterCore->loadNew();
-		setNextScreen(new LoadingScreen(m_characterCore));
+		setNextScreen(new CutsceneScreen(m_characterCore, "intro"));
 	}
 	else {
 		m_newCharacterCore = new CharacterCore();

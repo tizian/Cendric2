@@ -6,10 +6,8 @@
 
 #include "LuaBridge/LuaBridge.h"
 
-// helper class to load lua files for trading
+// static helper class to load lua files for trading
 class MerchantLoader {
 public:
-	MerchantLoader();
-	~MerchantLoader();
-	MerchantData loadMerchant(const std::string& merchantID) const;
+	static MerchantData loadMerchant(const std::string& merchantID);
 };

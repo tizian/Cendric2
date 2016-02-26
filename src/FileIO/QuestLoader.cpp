@@ -3,13 +3,9 @@
 using namespace std;
 using namespace luabridge;
 
-QuestLoader::QuestLoader() {
-}
+const std::string QuestLoader::QUEST_FOLDER = "res/quest/";
 
-QuestLoader::~QuestLoader() {
-}
-
-QuestData QuestLoader::loadQuest(const std::string& questID) const {
+QuestData QuestLoader::loadQuest(const std::string& questID) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 

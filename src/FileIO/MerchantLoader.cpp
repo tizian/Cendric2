@@ -4,13 +4,7 @@
 using namespace std;
 using namespace luabridge;
 
-MerchantLoader::MerchantLoader() {
-}
-
-MerchantLoader::~MerchantLoader() {
-}
-
-MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) const {
+MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 
