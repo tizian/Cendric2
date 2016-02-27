@@ -1,6 +1,7 @@
 #include "Map/NPCRoutine.h"
 #include "FileIO/NPCRoutineLoader.h"
 #include "Map/NPC.h"
+#include "Screen.h"
 
 void NPCRoutine::load(const std::string& id, NPC* npc) {
 	m_id = id;
@@ -8,7 +9,7 @@ void NPCRoutine::load(const std::string& id, NPC* npc) {
 	m_steps.clear();
 	m_currentStepID = 0;
 
-	NPCRoutineLoader loader(*this);
+	NPCRoutineLoader loader(*this, npc->getScreen()->getCharacterCore());
 	loader.loadRoutine();
 	if (m_steps.empty()) {
 		g_logger->logInfo("NPCRoutine", "This NPC has no routine!");
@@ -78,4 +79,8 @@ void NPCRoutine::setLooping(bool looping) {
 
 void NPCRoutine::setVelocity(float velocity) {
 	m_velocity = velocity;
+}
+
+NPC* NPCRoutine::getNPC() const {
+	return m_npc;
 }

@@ -1,11 +1,13 @@
 #include "FileIO/NPCRoutineLoader.h"
 #include "Map/NPC.h"
 #include "Map/NPCRoutine.h"
+#include "CharacterCore.h"
 
 using namespace std;
 using namespace luabridge;
 
-NPCRoutineLoader::NPCRoutineLoader(NPCRoutine& routine) : m_routine(routine) {
+NPCRoutineLoader::NPCRoutineLoader(NPCRoutine& routine, CharacterCore* core) : m_routine(routine) {
+	m_core = core;
 }
 
 NPCRoutineLoader::~NPCRoutineLoader() {
@@ -19,6 +21,9 @@ void NPCRoutineLoader::loadRoutine() {
 		.addFunction("wait", &NPCRoutineLoader::wait)
 		.addFunction("goToTile", &NPCRoutineLoader::goToTile)
 		.addFunction("setLooping", &NPCRoutineLoader::setLooping)
+		.addFunction("isConditionFulfilled", &NPCRoutineLoader::isConditionFulfilled)
+		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
+		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
 		.endClass();
 
 	if (luaL_dofile(L, m_routine.getID().c_str()) != 0) {
@@ -55,11 +60,28 @@ void NPCRoutineLoader::wait(int milliseconds) {
 void NPCRoutineLoader::goToTile(float x, float y) {
 	RoutineStep step;
 	step.state = RoutineState::GoingTo;
-	step.goal.x = x * 50.f;
-	step.goal.y = y * 50.f;
+	step.goal.x = x * TILE_SIZE_F;
+	step.goal.y = y * TILE_SIZE_F;
 	m_routine.addStep(step);
 }
 
 void NPCRoutineLoader::setLooping(bool looping) {
 	m_routine.setLooping(looping);
 }
+
+bool NPCRoutineLoader::isConditionFulfilled(const std::string& condition) const {
+	if (condition.empty()) {
+		g_logger->logError("NPCRoutineLoader", "Condition cannot be empty.");
+		return false;
+	}
+	return m_core->isConditionFulfilled(condition);
+}
+
+void NPCRoutineLoader::setTilePosition(float x, float y) {
+	m_routine.getNPC()->setPosition(sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F));
+}
+
+void NPCRoutineLoader::setDisposed() {
+	m_routine.getNPC()->setDisposed();
+}
+

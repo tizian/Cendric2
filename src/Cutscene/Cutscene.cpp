@@ -89,18 +89,18 @@ void Cutscene::setNextStep() {
 		sprite.setTexture(*g_resourceManager->getTexture(cutsceneImage.imagePath));
 
 		if (cutsceneImage.velocity.x >= 0.f && cutsceneImage.velocity.y >= 0.f) {
-			sprite.setPosition(0.f, 0.f);
+			sprite.setPosition(
+				WINDOW_WIDTH - sprite.getLocalBounds().width,
+				WINDOW_HEIGHT - sprite.getLocalBounds().height);
 		}
 		else if (cutsceneImage.velocity.x < 0.f && cutsceneImage.velocity.y >= 0.f) {
-			sprite.setPosition(WINDOW_WIDTH - sprite.getLocalBounds().width, 0.f);
-		}
-		else if (cutsceneImage.velocity.x >= 0.f && cutsceneImage.velocity.y < 0.f) {
 			sprite.setPosition(0.f, WINDOW_HEIGHT - sprite.getLocalBounds().height);
 		}
+		else if (cutsceneImage.velocity.x >= 0.f && cutsceneImage.velocity.y < 0.f) {
+			sprite.setPosition(WINDOW_WIDTH - sprite.getLocalBounds().width, 0.f);
+		}
 		else {
-			sprite.setPosition(
-				WINDOW_WIDTH - sprite.getLocalBounds().width, 
-				WINDOW_HEIGHT - sprite.getLocalBounds().height);
+			sprite.setPosition(0.f, 0.f);
 		}
 
 		m_cutsceneImages.push_back(sprite);

@@ -105,13 +105,13 @@ MapMainCharacter* MapScreen::getMainCharacter() const {
 	return m_mainChar;
 }
 
-void MapScreen::setDialogue(const NPCData& data) {
+void MapScreen::setDialogue(NPC* npc) {
 	delete m_dialogueWindow;
 	delete m_cookingWindow;
 	m_cookingWindow = nullptr;
 
 	m_dialogueWindow = new DialogueWindow();
-	m_dialogueWindow->load(data, this);
+	m_dialogueWindow->load(npc, this);
 }
 
 void MapScreen::setCooking() {

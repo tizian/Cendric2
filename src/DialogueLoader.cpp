@@ -20,6 +20,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isNPCState", &DialogueLoader::isNPCState)
 		.addFunction("isQuestState", &DialogueLoader::isQuestState)
 		.addFunction("isQuestComplete", &DialogueLoader::isQuestComplete)
+		.addFunction("isConditionFulfilled", &DialogueLoader::isConditionFulfilled)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
@@ -28,6 +29,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("changeNPCState", &DialogueLoader::changeNPCState)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
+		.addFunction("addConditionProgress", &DialogueLoader::addConditionProgress)
 		.addFunction("addItem", &DialogueLoader::addItem)
 		.addFunction("removeItem", &DialogueLoader::removeItem)
 		.addFunction("addGold", &DialogueLoader::addGold)
@@ -115,6 +117,18 @@ void DialogueLoader::addQuestProgress(const std::string& questID, const std::str
 	m_currentNode->questProgress.insert({ questID, progress });
 }
 
+void DialogueLoader::addConditionProgress(const std::string& condition) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot add condition progress: no node created.");
+		return;
+	}
+	if (condition.empty()) {
+		g_logger->logError("DialogueLoader", "Condition cannot be empty.");
+		return;
+	}
+	m_currentNode->conditionProgress.insert(condition);
+}
+
 bool DialogueLoader::isNPCState(const std::string& npcID, const std::string& state) const {
 	NPCState npcState = resolveNPCState(state);
 	if (npcState == NPCState::VOID) {
@@ -134,6 +148,14 @@ bool DialogueLoader::isQuestComplete(const std::string& questID) {
 		return false;
 	}
 	return m_core->isQuestComplete(questID);
+}
+
+bool DialogueLoader::isConditionFulfilled(const std::string& condition) const {
+	if (condition.empty()) {
+		g_logger->logError("DialogueLoader", "Condition cannot be empty.");
+		return false;
+	}
+	return m_core->isConditionFulfilled(condition);
 }
 
 void DialogueLoader::addItem(const std::string& itemID, int amount) {

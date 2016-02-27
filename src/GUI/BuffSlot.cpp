@@ -167,6 +167,8 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 
 	if (data.isFeared) {
 		tooltip.append(g_textProvider->getText("Feared") + "\n");
+		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty())
+			m_screen->addObject(new ScreenOverlay(ResourceID::Texture_screen_overlay_feared, m_duration));
 	}
 	else if (data.isStunned) {
 		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty())

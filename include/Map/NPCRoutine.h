@@ -33,10 +33,11 @@ public:
 	void addStep(const RoutineStep& step);
 	void setLooping(bool looping);
 	void setVelocity(float velocity);
+	NPC* getNPC() const;
 
 private:
 	NPC* m_npc;
-	std::string m_id;
+	std::string m_id = "";
 	bool m_isLooping = true;
 	std::vector<RoutineStep> m_steps;
 	sf::Time m_remainingStepTime = sf::Time::Zero;

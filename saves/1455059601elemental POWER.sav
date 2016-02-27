@@ -6,7 +6,7 @@ level.id:res/level/testleverlevel/testleverlevel.tmx
 level.position:350.000000,400.000000
 is.in.level:0
 map.id:res/map/meadows/meadows.tmx
-map.position:3900.000000,1000.000000
+map.position:1850.000000,700.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 

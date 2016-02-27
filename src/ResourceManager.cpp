@@ -85,6 +85,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_screen_gameover, "res/assets/screens/screen_gameover.png" },
 		{ ResourceID::Texture_screen_overlay, "res/assets/screens/screen_overlay.png" },
 		{ ResourceID::Texture_screen_overlay_stunned, "res/assets/screens/screen_overlay_stunned.png" },
+		{ ResourceID::Texture_screen_overlay_feared, "res/assets/screens/screen_overlay_feared.png" },
 		{ ResourceID::Texture_screen_menu, "res/assets/screens/screen_menu.png" },
 		{ ResourceID::Texture_debuff_fear, "res/assets/debuffs/spritesheet_debuff_fear.png" },
 		{ ResourceID::Texture_debuff_stun, "res/assets/debuffs/spritesheet_debuff_stun.png" },
@@ -406,6 +407,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_levelitems);
 	deleteResource(ResourceID::Texture_screen_gameover);
 	deleteResource(ResourceID::Texture_screen_overlay_stunned);
+	deleteResource(ResourceID::Texture_screen_overlay_feared);
 	deleteResource(ResourceID::Texture_GUI_speechbubble_pointer);
 }
 
@@ -452,9 +454,10 @@ void ResourceManager::loadLevelResources() {
 	getSoundBuffer(ResourceID::Sound_tile_water);
 	getSoundBuffer(ResourceID::Sound_tile_lever);
 
-	// load game over sprite 
+	// load overlays
 	getTexture(ResourceID::Texture_screen_gameover);
 	getTexture(ResourceID::Texture_screen_overlay_stunned);
+	getTexture(ResourceID::Texture_screen_overlay_feared);
 
 	// load debuff sprites
 	getTexture(ResourceID::Texture_debuff_fear);

@@ -10,6 +10,7 @@
 #include "Dialogue.h"
 
 class CharacterCore;
+class NPC;
 
 class DialogueOption : public GameObject {
 public:
@@ -33,7 +34,7 @@ class DialogueWindow : public Window {
 public:
 	DialogueWindow();
 	~DialogueWindow();
-	void load(const NPCData& npcBean, WorldScreen* screen);
+	void load(NPC* npc, WorldScreen* screen);
 	void render(sf::RenderTarget& renderTarget) override;
 	// returns true as long as the dialogue exists and false as soon as it ends
 	bool updateDialogue(const sf::Time frameTime);
@@ -44,8 +45,10 @@ public:
 	void setNPCTrading(const std::string& text);
 	void setPosition(const sf::Vector2f& pos) override;
 
+	NPC* getNPC();
+
 private:
-	void setNPC(const NPCData& bean);
+	void setNPC(NPC* npc);
 	void setDialogue(const std::string& dialogueID, WorldScreen* screen);
 	std::vector<DialogueOption> m_options;
 	int m_chosenOption = 0;
@@ -54,6 +57,7 @@ private:
 	BitmapText* m_speakerText = nullptr;
 	MerchantInterface* m_merchantInterface = nullptr;
 	sf::Sprite m_speakerSprite;
+	NPC* m_npc;
 	std::string m_npcName;
 	std::string m_npcID;
 	std::string m_dialogueTextID;

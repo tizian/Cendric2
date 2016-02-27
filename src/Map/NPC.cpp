@@ -81,8 +81,14 @@ void NPC::load(MapMainCharacter* mainChar, const NPCData& data) {
 	setTooltipText(g_textProvider->getText(data.id, "npc"));
 	setDebugBoundingBox(sf::Color::Magenta);
 
-	if (!data.spritesheetpath.empty()) {
+	if (!data.routineID.empty()) {
 		m_routine.load(data.routineID, this);
+	}
+}
+
+void NPC::reloadRoutine() {
+	if (!m_routine.getID().empty()) {
+		m_routine.load(m_routine.getID(), this);
 	}
 }
 
@@ -96,7 +102,7 @@ void NPC::onRightClick() {
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
 		turnToMainchar();
-		mapScreen->setDialogue(m_NPCdata);
+		mapScreen->setDialogue(this);
 	}
 	else {
 		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
@@ -137,7 +143,7 @@ void NPC::checkCollisionWithMainChar() {
 		turnToMainchar();
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
 		
-		mapScreen->setDialogue(m_NPCdata);
+		mapScreen->setDialogue(this);
 	}
 }
 
@@ -158,6 +164,10 @@ void NPC::setPosition(const sf::Vector2f& pos) {
 
 GameObjectType NPC::getConfiguredType() const {
 	return GameObjectType::_MapMovableGameObject;
+}
+
+const NPCData& NPC::getNPCData() const {
+	return m_NPCdata;
 }
 
 void NPC::setTooltipText(const std::string& tooltip) {

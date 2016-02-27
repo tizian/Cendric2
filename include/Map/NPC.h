@@ -32,8 +32,10 @@ public:
 	// if set to true, the npc will begin a dialogue with cendric when he enters its bounding box.
 	void setTalksActive(bool talksActive);
 	void setDialogueID(const std::string& id);
+	void reloadRoutine();
 
 	GameObjectType getConfiguredType() const override;
+	const NPCData& getNPCData() const;
 
 private:
 	MapMainCharacter* m_mainChar;

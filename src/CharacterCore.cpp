@@ -57,7 +57,7 @@ void CharacterCore::loadNew() {
 	// start map & position when a new game is loaded
 	m_data.isInLevel = false;
 	m_data.currentMap = "res/map/meadows/meadows.tmx";
-	m_data.currentMapPosition = sf::Vector2f(4400.0f, 650.0f);
+	m_data.currentMapPosition = sf::Vector2f(1850.f, 700.f);
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.critical = 5;

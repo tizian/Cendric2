@@ -2,6 +2,7 @@
 #include "Screens/WorldScreen.h"
 #include "GUI/DialogueWindow.h"
 #include "DialogueLoader.h"
+#include "Map/NPC.h"
 
 void Dialogue::load(const std::string& id, WorldScreen* screen, DialogueWindow* window) {
 	m_id = id;
@@ -27,6 +28,7 @@ const std::string& Dialogue::getID() const {
 
 bool Dialogue::updateWindow() {
 	if (m_currentNode == nullptr) {
+		m_window->getNPC()->reloadRoutine();
 		return false;
 	}
 	if (m_currentNode->type == DialogueNodeType::Choice) {
@@ -54,6 +56,9 @@ bool Dialogue::updateWindow() {
 		}
 		for (auto& it : m_currentNode->questProgress) {
 			m_screen->notifyQuestConditionFulfilled(it.first, it.second);
+		}
+		for (auto& it : m_currentNode->conditionProgress) {
+			m_screen->getCharacterCore()->setConditionFulfilled(it);
 		}
 		for (auto& it : m_currentNode->itemChanges) {
 			m_screen->notifyItemChange(it.first, it.second);

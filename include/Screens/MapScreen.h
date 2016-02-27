@@ -20,7 +20,7 @@ public:
 
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
-	void setDialogue(const NPCData& data);
+	void setDialogue(NPC* npc);
 	void setCooking();
 
 	void execOnEnter(const Screen* previousScreen) override;

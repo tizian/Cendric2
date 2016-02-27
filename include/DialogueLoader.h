@@ -20,6 +20,7 @@ public:
 	bool isNPCState(const std::string& npcID, const std::string& state) const;
 	bool isQuestState(const std::string& questID, const std::string& state) const;
 	bool isQuestComplete(const std::string& questID);
+	bool isConditionFulfilled(const std::string& condition) const;
 
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);
@@ -32,6 +33,7 @@ public:
 	void changeNPCState(const std::string& npcID, const std::string& state);
 	void changeQuestState(const std::string& questID, const std::string& state);
 	void addQuestProgress(const std::string& questID, const std::string& progress);
+	void addConditionProgress(const std::string& condition);
 	void addItem(const std::string& itemID, int amount);
 	void removeItem(const std::string& itemID, int amount);
 	void addGold(int amount);

@@ -1,5 +1,6 @@
 #include "GUI/DialogueWindow.h"
 #include "CharacterCore.h"
+#include "Map/NPC.h"
 
 using namespace std;
 
@@ -33,9 +34,13 @@ DialogueWindow::~DialogueWindow() {
 	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
 }
 
-void DialogueWindow::load(const NPCData& npcData, WorldScreen* screen) {
-	setNPC(npcData);
-	setDialogue(npcData.dialogueID, screen);
+void DialogueWindow::load(NPC* npc, WorldScreen* screen) {
+	setNPC(npc);
+	setDialogue(npc->getNPCData().dialogueID, screen);
+}
+
+NPC* DialogueWindow::getNPC() {
+	return m_npc;
 }
 
 void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* screen) {
@@ -58,10 +63,11 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* scr
 	}
 }
 
-void DialogueWindow::setNPC(const NPCData& npc) {
-	m_npcTexturePosition = npc.dialogueTexturePositon;
-	m_npcName = g_textProvider->getText(npc.id, "npc");
-	m_npcID = npc.id;
+void DialogueWindow::setNPC(NPC* npc) {
+	m_npc = npc;
+	m_npcTexturePosition = m_npc->getNPCData().dialogueTexturePositon;
+	m_npcID = m_npc->getNPCData().id;
+	m_npcName = g_textProvider->getText(m_npcID, "npc");
 }
 
 void DialogueWindow::setNPCTalking(const std::string& text) {
