@@ -13,6 +13,7 @@ void GargoyleEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 
 	gold = rand() % 20 + 8;
 	loot.insert({ "fo_lesserhealingpotion", 1 });
+	loot.insert({ "mi_gargoyle_dust", 1 });
 }
 
 GargoyleEnemy::GargoyleEnemy(Level* level, Screen* screen) :
@@ -97,7 +98,7 @@ MovingBehavior* GargoyleEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveFlyingBehavior(this);
 	}
-	behavior->setApproachingDistance(60.f);
+	behavior->setApproachingDistance(150.f);
 	behavior->setMaxVelocityYDown(150.f);
 	behavior->setMaxVelocityYUp(150.f);
 	behavior->setMaxVelocityX(150.f);

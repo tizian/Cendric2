@@ -29,8 +29,8 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, bb.width, bb.height);
 	
 	if (level.collidesWithDynamicTiles(nextBoundingBox, m_avoidableTiles)) {
-		m_mob->setAccelerationX(0.f);
-		m_mob->setVelocityX(0.f);
+		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
+		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
 		return;
 	}
 

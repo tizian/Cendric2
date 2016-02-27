@@ -174,6 +174,7 @@ bool SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
 
 void SaveGameWindow::render(sf::RenderTarget& renderTarget) {
 	Window::render(renderTarget);
+	if (m_entries.empty()) return;
 	for (int i = m_topEntry; i < m_bottomEntry + 1; i++) {
 		m_entries[i].render(renderTarget);
 	}

@@ -1,7 +1,7 @@
 # time played, in seconds
-time.played:1358
+time.played:1485
 savegame.name:elemental POWER
-savegame.date:1455486332
+savegame.date:1456583315
 level.id:res/level/testleverlevel/testleverlevel.tmx
 level.position:350.000000,400.000000
 is.in.level:0
@@ -13,11 +13,11 @@ map.position:3900.000000,1000.000000
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:45
 # items in inventory:
+item.id:eq_head_divinet3,1
 item.id:eq_head_necrot3,1
-item.id:eq_head_twilightt1,1
+item.id:eq_huntershat,1
 item.id:eq_purpleback,1
 item.id:eq_rafishat,1
-item.id:eq_huntershat,1
 item.id:eq_wizardhatblue,1
 item.id:eq_wizardhatgrey,1
 item.id:fo_bread,2
@@ -28,29 +28,33 @@ item.id:fo_healingherb,2
 item.id:fo_lesserhealingpotion,3
 item.id:fo_rawmeat,2
 item.id:fo_water,1
+item.id:mi_gargoyle_dust,1
 item.id:mi_goldengoblet,4
-item.id:mi_neko_teeth,1
 item.id:mi_neko_fur,1
+item.id:mi_neko_teeth,1
+item.id:mi_teeth,1
+item.id:qe_rope,1
 item.id:we_icestaff,1
+item.id:we_luce,1
 item.id:we_oathbreaker,1
 item.id:we_rustysword,1
+item.id:we_sicklestaff,1
 item.id:we_torch,1
-item.id:we_luce,1
 item.id:we_walkingpole,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:4
-equipped.spellslot:3
-equipped.spellslot:5
-equipped.spellslot:6
-equipped.spellslot:7
+equipped.spellslot:3,1,1,3,2,4,2
+equipped.spellslot:19,5,3
+equipped.spellslot:17,1,1
+equipped.spellslot:12,6,3,5,2
+equipped.spellslot:22,4,2
 # equipment:
 equipped.back:eq_back_necrot3
 equipped.body:eq_body_necrot3
-equipped.head:eq_head_divinet3
-equipped.neck:
-equipped.ring1:
+equipped.head:eq_head_twilightt1
+equipped.neck:eq_eyeofthemoon
+equipped.ring1:eq_ringoflesserhealth
 equipped.ring2:
-equipped.weapon:we_sicklestaff
+equipped.weapon:we_jasonsglaive
 # quickslot assignments:
 quickslot:1,
 quickslot:2,
@@ -69,6 +73,7 @@ waypoints.unlocked:res/map/meadows/meadows.tmx,2048,2475
 # quest states:
 # quest targets killed:
 # quest conditions fulfilled:
+# general conditions fulfilled:
 # npc states:
 # merchand states:
 merchant.state:guard,5,1.500000,fo_caveberry,1,fo_cheese,10,fo_healingherb,1,fo_water,10,mi_goldengoblet,2

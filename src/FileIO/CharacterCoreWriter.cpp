@@ -308,6 +308,9 @@ std::string CharacterCoreWriter::writeQuestProgressConditions(const CharacterCor
 
 std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData& data) const {
 	string progress = "# general conditions fulfilled:\n";
+	if (data.conditionProgress.empty()) {
+		return progress;
+	}
 	progress.append(string(QUEST_PROGRESS_CONDITION));
 	progress.append(":");
 

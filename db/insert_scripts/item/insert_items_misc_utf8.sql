@@ -11,3 +11,11 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Fur of a Nekomata
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_neko_fur', 'misc', 300, 0, 30);
+
+-- Pile of gargoyle dust
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_gargoyle_dust', 'misc', 350, 0, 20);
+
+-- Teeth
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_teeth', 'misc', 150, 0, 5);
