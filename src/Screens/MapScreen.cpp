@@ -1,6 +1,8 @@
 #include "Screens/MapScreen.h"
 #include "Screens/MenuScreen.h"
 
+#include "ScreenOverlay.h"
+
 using namespace std;
 
 MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScreen(core) {
@@ -45,6 +47,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
 		depthSortObjects(GameObjectType::_MapMovableGameObject, true);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
+		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
 		updateObjects(GameObjectType::_Light, frameTime);
 		m_currentMap.update(frameTime);
 		updateTooltipText(frameTime);
@@ -88,6 +91,7 @@ void MapScreen::load() {
 }
 
 void MapScreen::execOnEnter(const Screen *previousScreen) {
+	addObject(new ScreenOverlay("Chapter I - Whoami", ResourceID::Texture_screen_overlay_feared, sf::seconds(1.f), sf::seconds(0.5f)));
 	// nop
 }
 
@@ -168,8 +172,10 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(adjustedView);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MapMovableGameObject, renderTarget);
+
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
+	renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
 
 	if (m_dialogueWindow != nullptr) {
 		m_dialogueWindow->render(renderTarget);
