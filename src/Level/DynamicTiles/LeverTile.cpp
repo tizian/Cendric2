@@ -53,7 +53,7 @@ void LeverTile::onRightClick() {
 		switchLever();
 	}
 	else {
-		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
 	}
 	g_inputController->lockAction();
 }
@@ -83,7 +83,7 @@ void LeverTile::switchLever() {
 		rec.boundingBox = *tile->getBoundingBox();
 		if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
 			g_logger->logInfo("LeverTile::switchLever", "Cannot switch the lever as it would stuck a MOB or a movable tile!");
-			m_screen->setTooltipText(g_textProvider->getText("LeverStuck"), sf::Color::Red, true);
+			m_screen->setTooltipText("LeverStuck", sf::Color::Red, true);
 			return;
 		}
 	}

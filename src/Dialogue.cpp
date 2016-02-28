@@ -63,6 +63,9 @@ bool Dialogue::updateWindow() {
 		for (auto& it : m_currentNode->itemChanges) {
 			m_screen->notifyItemChange(it.first, it.second);
 		}
+		for (auto& it : m_currentNode->hints) {
+			m_screen->addScreenOverlay(new HintScreenOverlay(it));
+		}
 	}
 	return true;
 }

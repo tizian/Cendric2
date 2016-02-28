@@ -22,6 +22,7 @@ update = function(B)
 			speechBubbleState = speechBubbleState + 1
 		elseif (speechBubbleState == 0 and B:getPosX() > 0) then
 			B:say("DestroyBlocks", 5)
+			B:addHint("Chop")
 			speechBubbleState = speechBubbleState + 1
 		end
     end

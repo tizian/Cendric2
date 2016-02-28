@@ -114,7 +114,6 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 void MenuScreen::execOnExit(const Screen *nextScreen) {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash_fireanimation);
-	delete m_newCharacterCore;
 }
 
 // <<< agents for the yes or no form and other buttons >>>
@@ -123,15 +122,12 @@ void MenuScreen::onStartNewGame() {
 	m_yesOrNoForm->setDisposed();
 	m_yesOrNoForm = nullptr;
 	delete m_characterCore;
-	m_characterCore = m_newCharacterCore;
-	m_newCharacterCore = nullptr;
-	setNextScreen(new CutsceneScreen(m_characterCore, "intro"));
+	m_characterCore = nullptr;
+	onNewGame();
 }
 
 void MenuScreen::onNo() {
 	m_yesOrNoForm = nullptr;
-	delete m_newCharacterCore;
-	m_newCharacterCore = nullptr;
 	setAllButtonsEnabled(true);
 }
 
@@ -149,11 +145,12 @@ void MenuScreen::onNewGame() {
 		// we start a new game with an empty character core
 		m_characterCore = new CharacterCore();
 		m_characterCore->loadNew();
-		setNextScreen(new CutsceneScreen(m_characterCore, "intro"));
+		Screen* nextScreen = new CutsceneScreen(m_characterCore, "intro");
+		nextScreen->addScreenOverlay(new QuestScreenOverlay("who_am_i", QuestState::Started));
+		nextScreen->addScreenOverlay(new HintScreenOverlay("Journal"));
+		setNextScreen(nextScreen);;
 	}
 	else {
-		m_newCharacterCore = new CharacterCore();
-		m_newCharacterCore->loadNew();
 		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
 		m_yesOrNoForm->setMessage("QuestionStartNewGame");
 		m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNo, this));

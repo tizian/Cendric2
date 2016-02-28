@@ -32,7 +32,7 @@ private:
 	void setAllButtonsEnabled(bool value) override;
 
 	YesOrNoForm* m_yesOrNoForm = nullptr;
-	CharacterCore* m_newCharacterCore = nullptr;
+
 	Button* m_saveGameButton = nullptr;
 
 	// agents for the yes or no form

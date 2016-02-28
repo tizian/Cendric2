@@ -102,7 +102,7 @@ void NPC::onMouseOver() {
 
 void NPC::onRightClick() {
 	if (!m_NPCdata.talkingEnabled) {
-		m_screen->setTooltipText(g_textProvider->getText("NothingToSay"), sf::Color::Red, true);
+		m_screen->setTooltipText("NothingToSay", sf::Color::Red, true);
 		return;
 	}
 	// check if npc is in range
@@ -113,7 +113,7 @@ void NPC::onRightClick() {
 		mapScreen->setDialogue(this);
 	}
 	else {
-		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
 	}
 }
 

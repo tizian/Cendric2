@@ -38,6 +38,8 @@ public:
 	void setKilled();
 	// leaves the level
 	void leaveLevel();
+	// adds a hint to the screen
+	void addHint(const std::string& hint);
 	// sets a certain condition fulfilled
 	void addConditionProgress(const std::string& condition);
 

@@ -205,7 +205,7 @@ void OptionsScreen::onApply() {
 	ConfigurationWriter writer;
 	writer.saveToFile(config);
 	g_textProvider->reload();
-	setTooltipText(g_textProvider->getText("ConfigurationSaved"), sf::Color::Green, true);
+	setTooltipText("ConfigurationSaved", sf::Color::Green, true);
 	if (fullscreenChanged) {
 		config.isWindowReload = true;
 	}

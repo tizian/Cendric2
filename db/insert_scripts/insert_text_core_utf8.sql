@@ -72,6 +72,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Heal','Heal',
 INSERT INTO text (text_id, english, german, swiss_german) values ('Health','Health','Lebensenergie','Lebe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('HealthRegeneration','Health Regeneration','Lebensregeneration','Lebensregeneration');
 INSERT INTO text (text_id, english, german, swiss_german) values ('HealthRegenerationPerS','Health Regeneration / s','Lebensregeneration / s','Lebensregeneration / s');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Hint','Hint','Tipp','Tipp');
 INSERT INTO text (text_id, english, german, swiss_german) values ('HolyPower','Holy Power','Heilige Kraft','Heiligi Chraft');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceDamage','Ice Damage','Eisschaden','Iisschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceResistance','Ice Resistance','Eisresistenz','Iisresistenz');
@@ -125,6 +126,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Pending','Pen
 INSERT INTO text (text_id, english, german, swiss_german) values ('PhysicalDamage','Physical Damage','Physischer Schaden','Physische Schade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('PressAnyKey','<?>','<?>','<?>');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Price','Price','Preis','Priis');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Quest','Quest','Quest','Quest');
 INSERT INTO text (text_id, english, german, swiss_german) values ('QuestionDeleteSaveGame','Do you really want to delete this save game?','Willst du diesen Speicherstand wirklich löschen?','Wetsch de Speicherstand würkli lösche?');
 INSERT INTO text (text_id, english, german, swiss_german) values ('QuestionGoBackToCheckpoint','Your progress since the last checkpoint will be lost. Continue?','Dein Fortschritt seit dem letzten Kontrollpunkt geht verloren. Fortfahren?','Din Fortschritt sitt em letzte Checkpoint gaht verlore. Egal?');
 INSERT INTO text (text_id, english, german, swiss_german) values ('QuestionLoadGame','Load game?

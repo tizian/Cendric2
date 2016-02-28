@@ -34,6 +34,7 @@ public:
 	void changeQuestState(const std::string& questID, const std::string& state);
 	void addQuestProgress(const std::string& questID, const std::string& progress);
 	void addConditionProgress(const std::string& condition);
+	void addHint(const std::string& hint);
 	void addItem(const std::string& itemID, int amount);
 	void removeItem(const std::string& itemID, int amount);
 	void addGold(int amount);

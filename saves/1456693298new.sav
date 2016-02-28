@@ -1,0 +1,45 @@
+# time played, in seconds
+time.played:120
+savegame.name:new
+savegame.date:1456693298
+level.id:
+level.position:0.000000,0.000000
+is.in.level:0
+map.id:res/map/meadows/meadows.tmx
+map.position:2057.950928,913.604248
+# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
+# damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
+# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
+attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
+gold:0
+# items in inventory:
+item.id:we_walkingpole,1
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+# equipment:
+equipped.back:
+equipped.body:
+equipped.head:
+equipped.neck:
+equipped.ring1:
+equipped.ring2:
+equipped.weapon:
+# quickslot assignments:
+quickslot:1,
+quickslot:2,
+# enemies killed in level:
+# enemies looted in level:
+# items looted in level:
+# chests looted in level:
+# waypoints unlocked in map:
+waypoints.unlocked:res/map/meadows/meadows.tmx
+# quest states:
+quest.state:who_am_i,1
+# quest targets killed:
+# quest conditions fulfilled:
+# general conditions fulfilled:
+progress.condition:talked_to_edmond
+# npc states:
+npc.state:hunter_edmond,2
+# merchand states:
+# spells learned:
+# modifiers learned:

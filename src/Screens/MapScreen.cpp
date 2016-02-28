@@ -26,7 +26,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		CharacterCore* newCharacterCore = new CharacterCore();
 		if (!newCharacterCore->quickload()) {
 			// no quicksave exists
-			setTooltipText(g_textProvider->getText("NoQuicksaveExists"), sf::Color::Red, true);
+			setTooltipText("NoQuicksaveExists", sf::Color::Red, true);
 			delete newCharacterCore;
 		}
 		else {
@@ -39,7 +39,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
 		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
 		m_characterCore->quicksave();
-		setTooltipText(g_textProvider->getText("GameSaved"), sf::Color::Green, true);
+		setTooltipText("GameSaved", sf::Color::Green, true);
 	}
 	MapExitData* data = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
 	if (data == nullptr || m_isOnLevelEntry) {
@@ -91,8 +91,7 @@ void MapScreen::load() {
 }
 
 void MapScreen::execOnEnter(const Screen *previousScreen) {
-	addObject(new ScreenOverlay("Chapter I - Whoami", ResourceID::Texture_screen_overlay_feared, sf::seconds(1.f), sf::seconds(0.5f)));
-	// nop
+	addObject(new LocationScreenOverlay(m_currentMap.getName()));
 }
 
 void MapScreen::execOnExit(const Screen *nextScreen) {

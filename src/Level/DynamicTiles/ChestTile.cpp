@@ -123,7 +123,7 @@ void ChestTile::onRightClick() {
 			loot();
 		}
 		else {
-			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+			m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
 		}
 		g_inputController->lockAction();
 	}
@@ -135,11 +135,11 @@ void ChestTile::onRightClick() {
 			setState(GameObjectState::Unlocked);
 		}
 		else {
-			m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+			m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
 		}
 		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setTooltipText(g_textProvider->getText("IsLocked"), sf::Color::Red, true);
+		m_screen->setTooltipText("IsLocked", sf::Color::Red, true);
 	}
 }

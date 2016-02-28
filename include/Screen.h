@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "CharacterCore.h"
+#include "ScreenOverlay.h"
 
 #include "GUI/BitmapText.h"
 
@@ -14,16 +15,16 @@ class ScreenManager;
 class Screen {
 public:
 	Screen(CharacterCore* core);
-	virtual ~Screen() {}
+	virtual ~Screen();
 
 	void update(const sf::Time& frameTime);
 	virtual void render(sf::RenderTarget& renderTarget) = 0;
 
 	// initializes the m_object vector. called by ALL subclasses
-	void onEnter(const Screen* previousScreen);
+	void onEnter(Screen* previousScreen);
 	virtual void execOnEnter(const Screen* previousScreen);
 	// deletes all objects. called by ALL subclasses (screen manager)
-	void onExit(const Screen* nextScreen);
+	void onExit(Screen* nextScreen);
 	virtual void execOnExit(const Screen* nextScreen);
 
 	// adds a gameobject to the screen. This object is only added to the vector in the next iteration
@@ -38,15 +39,19 @@ public:
 	// gets the character core that is needed by each screen
 	virtual CharacterCore* getCharacterCore() const;
 
-	// sets the tooltip text to 'text' and display it at the tooltip position thats always at the bootom mid of the screen
+	// sets the tooltip text to the translated 'textKey' and display it at the tooltip position thats always at the bootom mid of the screen
 	// if override is set, this new text will display anyway, regardless of what other text is displaying.
-	void setTooltipText(const std::string& text, const sf::Color& color, bool isOverride);
+	void setTooltipText(const std::string& textKey, const sf::Color& color, bool isOverride);
+	// sets the tooltip text but without translating it
+	void setTooltipTextRaw(const std::string& text, const sf::Color& color, bool isOverride);
 	// updates the tooltip text in 'm_tooltipText'. used so tooltip texts don't get stuck.
 	void updateTooltipText(const sf::Time& frameTime);
 	// renders the tooltip text in 'm_tooltipText'
 	void renderTooltipText(sf::RenderTarget& target) const;
 	// sets the tooltip text to the top of the screen instead of the bottom (if top = true, else bottom)
 	void setTooltipPositionTop(bool top);
+	// add an overlay to the overlay queue they will be displayed within the next world screen
+	void addScreenOverlay(ScreenOverlay* overlay);
 	// the screen manager sees if a screen wants to end the game
 	bool isQuitRequested() const;
 	// the screen manager polls the next screen and changes to it if its not null
@@ -69,15 +74,16 @@ protected:
 	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
 	// render all objects after foreground of type 'type'
 	void renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget);
-
-	CharacterCore* m_characterCore = nullptr;
-	bool m_requestQuit = false;
-	Screen* m_nextScreen = nullptr;
-
 	// enables / disables all buttons on this screen
 	virtual void setAllButtonsEnabled(bool value);
 	// sets the next screen. If this is set, the screen manager will change to that next screen
 	void setNextScreen(Screen* nextScreen);
+
+protected:
+	CharacterCore* m_characterCore = nullptr;
+	bool m_requestQuit = false;
+	Screen* m_nextScreen = nullptr;
+	std::vector<ScreenOverlay*> m_overlayQueue;
 
 private:
 	// deletes all objects marked as 'disposed'

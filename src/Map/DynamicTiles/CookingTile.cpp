@@ -57,7 +57,7 @@ void CookingTile::onRightClick() {
 		dynamic_cast<MapScreen*>(m_screen)->setCooking();
 	}
 	else {
-		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
 	}
 }
 

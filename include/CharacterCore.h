@@ -12,6 +12,7 @@
 
 #include "Structs/AttributeData.h"
 #include "Structs/CharacterCoreData.h"
+#include "ScreenOverlay.h"
 
 class CharacterCore {
 public:

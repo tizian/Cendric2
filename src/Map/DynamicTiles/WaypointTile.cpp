@@ -18,10 +18,10 @@ void WaypointTile::loadAnimation(int skinNr) {
 
 	Animation* activeAnimation = new Animation();
 	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_waypoint));
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; ++i) {
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
-	for (int i = 4; i > -1; i--) {
+	for (int i = 4; i > -1; --i) {
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
 
@@ -49,7 +49,7 @@ void WaypointTile::update(const sf::Time& frameTime) {
 	if (m_state == GameObjectState::Active) return;
 	if (m_mainCharacter->getBoundingBox()->intersects(*getBoundingBox())) {
 		m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition);
-		m_screen->setTooltipText(g_textProvider->getText("WaypointActivated"), sf::Color::Green, true);
+		m_screen->setTooltipText("WaypointActivated", sf::Color::Green, true);
 		setActive();
 	}
 }
@@ -68,7 +68,7 @@ void WaypointTile::onMouseOver() {
 
 void WaypointTile::onRightClick() {
 	if (m_state == GameObjectState::Idle) {
-		m_screen->setTooltipText(g_textProvider->getText("WaypointNotActive"), sf::Color::Red, true);
+		m_screen->setTooltipText("WaypointNotActive", sf::Color::Red, true);
 		return;
 	}
 	const sf::FloatRect& bb = *m_mainCharacter->getBoundingBox();

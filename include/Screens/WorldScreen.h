@@ -38,4 +38,7 @@ protected:
 	sf::Sprite m_sprite;
 	sf::Shader m_lightLayerShader;
 	sf::Shader m_foregroundLayerShader;
+
+private:
+	void updateOverlayQueue();
 };

@@ -2,6 +2,7 @@
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "CharacterCore.h"
 #include "Level/Enemy.h"
+#include "Screen.h"
 
 using namespace std;
 using namespace luabridge;
@@ -34,6 +35,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("wait", &ScriptedBehaviorCallback::wait)
 		.addFunction("setKilled", &ScriptedBehaviorCallback::setKilled)
 		.addFunction("leaveLevel", &ScriptedBehaviorCallback::leaveLevel)
+		.addFunction("addHint", &ScriptedBehaviorCallback::addHint)
 		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
 		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
 		.addFunction("addConditionProgress", &ScriptedBehaviorCallback::addConditionProgress)
@@ -91,6 +93,11 @@ void ScriptedBehaviorCallback::update() {
 	catch (LuaException const& e) {
 		g_logger->logError("ScriptedBehaviorCallback", "LuaException: " + std::string(e.what()));
 	}
+}
+
+
+void ScriptedBehaviorCallback::addHint(const std::string& hint) {
+	m_enemy->getScreen()->addScreenOverlay(new HintScreenOverlay(hint));
 }
 
 bool ScriptedBehaviorCallback::isQuestComplete(const std::string& questID) const {

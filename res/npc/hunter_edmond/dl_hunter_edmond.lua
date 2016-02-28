@@ -70,6 +70,7 @@ loadDialogue = function(DL)
 			DL:createNPCNode(12, -1, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable. Here, take my walking pole, equip it and follow me.
 			DL:addConditionProgress("talked_to_edmond")
 			DL:addItem("we_walkingpole", 1)
+			DL:addHint("Inventory")
 			-- TODO screen overlay: equip
 			DL:addNode()
 				

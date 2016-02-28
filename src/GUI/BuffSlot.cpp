@@ -167,13 +167,19 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 
 	if (data.isFeared) {
 		tooltip.append(g_textProvider->getText("Feared") + "\n");
-		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty())
-			m_screen->addObject(new ScreenOverlay(ResourceID::Texture_screen_overlay_feared, m_duration));
+		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
+			ScreenOverlay* fearedOverlay = new ScreenOverlay(m_duration, sf::seconds(0.1f));
+			fearedOverlay->setTexture(ResourceID::Texture_screen_overlay_feared);
+			m_screen->addObject(fearedOverlay);
+		}
 	}
 	else if (data.isStunned) {
-		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty())
-			m_screen->addObject(new ScreenOverlay(ResourceID::Texture_screen_overlay_stunned, m_duration));
 		tooltip.append(g_textProvider->getText("Stunned") + "\n");
+		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
+			ScreenOverlay* stunnedOverlay = new ScreenOverlay(m_duration, sf::seconds(0.1f));
+			stunnedOverlay->setTexture(ResourceID::Texture_screen_overlay_stunned);
+			m_screen->addObject(stunnedOverlay);
+		}
 	}
 	if (data.damageType != DamageType::VOID) {
 		tooltip.append(g_textProvider->getText(EnumNames::getDamageTypeName(data.damageType)) + "\n\n");

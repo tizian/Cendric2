@@ -71,7 +71,15 @@ void WorldScreen::notifyQuestTargetKilled(const std::string& questID, const std:
 void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState state) {
 	getCharacterCore()->setQuestState(questID, state);
 	m_progressLog->addQuestStateChanged(questID, state);
+	addScreenOverlay(new QuestScreenOverlay(questID, state));
 	m_interface->reloadQuestLog();
+}
+
+void WorldScreen::updateOverlayQueue() {
+	if (m_overlayQueue.empty()) return;
+	if (!getObjects(GameObjectType::_ScreenOverlay)->empty()) return;
+	addObject(m_overlayQueue.at(0));
+	m_overlayQueue.erase(m_overlayQueue.begin());
 }
 
 Inventory* WorldScreen::getInventory() {
@@ -80,6 +88,7 @@ Inventory* WorldScreen::getInventory() {
 }
 
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
+	updateOverlayQueue();
 	m_interface->update(frameTime);
 	m_progressLog->update(frameTime);
 }

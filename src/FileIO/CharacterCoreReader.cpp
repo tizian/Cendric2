@@ -788,6 +788,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 			noError = readQuestProgressConditions(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
+		else if (strncmp(pos, PROGRESS_CONDITION, strlen(PROGRESS_CONDITION)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(PROGRESS_CONDITION));
+			noError = readProgressConditions(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
 		else if (strncmp(pos, NPC_STATE, strlen(NPC_STATE)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(NPC_STATE));
 			noError = readNPCStates(pos, end, data);

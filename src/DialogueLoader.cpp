@@ -30,6 +30,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
 		.addFunction("addConditionProgress", &DialogueLoader::addConditionProgress)
+		.addFunction("addHint", &DialogueLoader::addHint)
 		.addFunction("addItem", &DialogueLoader::addItem)
 		.addFunction("removeItem", &DialogueLoader::removeItem)
 		.addFunction("addGold", &DialogueLoader::addGold)
@@ -127,6 +128,18 @@ void DialogueLoader::addConditionProgress(const std::string& condition) {
 		return;
 	}
 	m_currentNode->conditionProgress.insert(condition);
+}
+
+void DialogueLoader::addHint(const std::string& hint) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot add hint: no node created.");
+		return;
+	}
+	if (hint.empty()) {
+		g_logger->logError("DialogueLoader", "Hint cannot be empty.");
+		return;
+	}
+	m_currentNode->hints.insert(hint);
 }
 
 bool DialogueLoader::isNPCState(const std::string& npcID, const std::string& state) const {

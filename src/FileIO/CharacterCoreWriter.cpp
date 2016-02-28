@@ -311,13 +311,14 @@ std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData
 	if (data.conditionProgress.empty()) {
 		return progress;
 	}
-	progress.append(string(QUEST_PROGRESS_CONDITION));
+	progress.append(string(PROGRESS_CONDITION));
 	progress.append(":");
 
 	for (auto& it : data.conditionProgress) {
-		progress.append(",");
 		progress.append(it);
+		progress.append(",");
 	}
+	progress.pop_back();
 	progress.append("\n");
 
 	return progress;

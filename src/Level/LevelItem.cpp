@@ -49,7 +49,7 @@ void LevelItem::onRightClick() {
 		pickup();
 	}
 	else {
-		m_screen->setTooltipText(g_textProvider->getText("OutOfRange"), sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
 	}
 	g_inputController->lockAction();
 }

@@ -28,6 +28,13 @@ Screen::Screen(CharacterCore* core) {
 	}
 }
 
+Screen::~Screen() {
+	for (auto& overlay : m_overlayQueue) {
+		delete overlay;
+	}
+	m_overlayQueue.clear();
+}
+
 void Screen::addObject(GameObject* object) {
 	m_toAdd.push_back(object);
 	object->setScreen(this);
@@ -46,7 +53,7 @@ vector<GameObject*>* Screen::getObjects(GameObjectType type) {
 	return &m_objects[type];
 }
 
-void Screen::onEnter(const Screen* previousScreen) {
+void Screen::onEnter(Screen* previousScreen) {
 	execOnEnter(previousScreen);
 	for (auto& obj : m_toAdd) {
 		m_objects[obj->getConfiguredType()].push_back(obj);
@@ -58,8 +65,14 @@ void Screen::execOnEnter(const Screen* previousScreen) {
 	// nop
 }
 
-void Screen::onExit(const Screen* nextScreen) {
+void Screen::onExit(Screen* nextScreen) {
 	deleteAllObjects();
+	if (nextScreen != nullptr) {
+		for (auto& overlay : m_overlayQueue) {
+			nextScreen->addScreenOverlay(overlay);
+		}
+	}
+	m_overlayQueue.clear();
 	execOnExit(nextScreen);
 }
 
@@ -156,11 +169,12 @@ const BitmapText* Screen::getTooltipText() const {
 	return &m_tooltipText;
 }
 
-void Screen::setTooltipText(const string& text, const sf::Color& color, bool isOverride) {
+void Screen::setTooltipTextRaw(const string& text, const sf::Color& color, bool isOverride) {
 	if (m_tooltipTime > sf::Time::Zero && !isOverride) {
 		// another text is still displaying
 		return;
 	}
+	
 	m_tooltipText = BitmapText(
 		text,
 		(*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default)));
@@ -168,6 +182,10 @@ void Screen::setTooltipText(const string& text, const sf::Color& color, bool isO
 	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), m_isTooltipTop ? 10.f : WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 10.f);
 	m_tooltipText.setColor(color);
 	m_tooltipTime = sf::seconds(1.f + 0.06f * static_cast<float>(text.length()));
+}
+
+void Screen::setTooltipText(const string& textKey, const sf::Color& color, bool isOverride) {
+	setTooltipTextRaw(g_textProvider->getText(textKey), color, isOverride);
 }
 
 void Screen::renderTooltipText(sf::RenderTarget& target) const {
@@ -206,6 +224,11 @@ Screen* Screen::getNextScreen() const {
 }
 
 void Screen::setNextScreen(Screen* nextScreen) {
+	if (nextScreen == this) return;
 	delete m_nextScreen;
 	m_nextScreen = nextScreen;
+}
+
+void Screen::addScreenOverlay(ScreenOverlay* overlay) {
+	m_overlayQueue.push_back(overlay);
 }

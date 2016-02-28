@@ -49,7 +49,7 @@ void CheckpointTile::onHit(LevelMovableGameObject* mob) {
 			if (LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen())) {
 				screen->getCharacterCore()->setLevel(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top), m_level->getID());
 				screen->writeToCore();
-				screen->setTooltipText(g_textProvider->getText("CheckpointReached"), sf::Color::Green, true);
+				screen->setTooltipText("CheckpointReached", sf::Color::Green, true);
 			}
 		}
 		else {
