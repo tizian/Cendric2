@@ -30,16 +30,9 @@ ScreenOverlay::~ScreenOverlay() {
 }
 
 void ScreenOverlay::load() {
-	if (m_fadeTime > sf::Time::Zero) {
-		m_bitmapText.setColor(sf::Color(255, 255, 255, 0));
-	}
-	else {
-		m_bitmapText.setColor(sf::Color(255, 255, 255));
-	}
-	
+	m_bitmapText.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_bitmapText.setCharacterSize(40);
-	sf::FloatRect& bounds = m_bitmapText.getBounds();
-	m_bitmapText.setPosition(0.5f * (WINDOW_WIDTH - bounds.width), 0.33f * (WINDOW_HEIGHT - bounds.height));
+	centerText();
 
 	m_sprite.setPosition(sf::Vector2f(0.f, 0.f));
 
@@ -56,12 +49,12 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 		GameObject::updateTime(m_fadeInTimer, frameTime);
 		float scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
 		m_sprite.setColor(sf::Color(255, 255, 255, (sf::Uint8)(scale * 255)));
-		const sf::Color &c = m_bitmapText.getColor();
+		const sf::Color& c = m_bitmapText.getColor();
 		m_bitmapText.setColor(sf::Color(c.r, c.g, c.b, (sf::Uint8)(scale * 255)));
 
 		if (m_fadeInTimer == sf::Time::Zero) {
 			m_sprite.setColor(sf::Color(255, 255, 255));
-			const sf::Color &c = m_bitmapText.getColor();
+			const sf::Color& c = m_bitmapText.getColor();
 			m_bitmapText.setColor(sf::Color(c.r, c.g, c.b));
 		}
 	}
@@ -91,18 +84,21 @@ void ScreenOverlay::setTexture(ResourceID texture) {
 
 void ScreenOverlay::setText(const std::string& text) {
 	m_bitmapText.setString(text);
-	sf::FloatRect& bounds = m_bitmapText.getBounds();
-	m_bitmapText.setPosition(0.5f * (WINDOW_WIDTH - bounds.width), 0.33f * (WINDOW_HEIGHT - bounds.height));
+	centerText();
 }
 
 void ScreenOverlay::setTextSize(int characterSize) {
 	m_bitmapText.setCharacterSize(characterSize);
-	sf::FloatRect& bounds = m_bitmapText.getBounds();
-	m_bitmapText.setPosition(0.5f * (WINDOW_WIDTH - bounds.width), 0.33f * (WINDOW_HEIGHT - bounds.height));
+	centerText();
 }
 
 void ScreenOverlay::setTextColor(const sf::Color& color) {
 	m_bitmapText.setColor(color);
+}
+
+void ScreenOverlay::centerText() {
+	sf::FloatRect& bounds = m_bitmapText.getLocalBounds();
+	m_bitmapText.setPosition(0.5f * (WINDOW_WIDTH - bounds.width), 0.33f * (WINDOW_HEIGHT - bounds.height));
 }
 
 GameObjectType ScreenOverlay::getConfiguredType() const {
