@@ -28,10 +28,12 @@ public:
 	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityX() const override;
 
+	void setDialogueID(const std::string& id);
 	void setTooltipText(const std::string& tooltip);
 	// if set to true, the npc will begin a dialogue with cendric when he enters its bounding box.
-	void setTalksActive(bool talksActive);
-	void setDialogueID(const std::string& id);
+	void setTalkingActive(bool active);
+	// if set to true, the npc can be talked to (cendrics initiative)
+	void setTalkingEnabled(bool enabled);
 	void reloadRoutine();
 
 	GameObjectType getConfiguredType() const override;

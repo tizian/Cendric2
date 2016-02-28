@@ -222,14 +222,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 				}
 				std::string attrText = textAttr;
 
-				if (attrText.compare("active") == 0) {
-					int active;
-					result = _property->QueryIntAttribute("value", &active);
-					XMLCheckResult(result);
-
-					npc.talksActive = (active != 0);
-				}
-				else if (attrText.compare("id") == 0) {
+				if (attrText.compare("id") == 0) {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {

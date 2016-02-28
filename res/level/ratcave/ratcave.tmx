@@ -526,7 +526,7 @@
     <property name="questtarget" value="a_cave_of_rats,rat"/>
    </properties>
   </object>
-  <object id="16" gid="735" x="607" y="1181" width="50" height="50"/>
+  <object id="16" gid="735" x="824" y="993" width="50" height="50"/>
  </objectgroup>
  <layer name="LFG 1" width="70" height="30">
   <data encoding="csv">
@@ -709,8 +709,8 @@
   <object id="9" x="522" y="1169" width="57" height="117">
    <properties>
     <property name="map id" value="res/map/meadows/meadows.tmx"/>
-    <property name="x" value="2900"/>
-    <property name="y" value="200"/>
+    <property name="x" value="2925"/>
+    <property name="y" value="250"/>
    </properties>
   </object>
  </objectgroup>

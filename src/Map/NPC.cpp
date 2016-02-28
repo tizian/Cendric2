@@ -82,12 +82,16 @@ void NPC::load(MapMainCharacter* mainChar, const NPCData& data) {
 	setDebugBoundingBox(sf::Color::Magenta);
 
 	if (!data.routineID.empty()) {
+		setTalkingActive(false);
+		setTalkingEnabled(true);
 		m_routine.load(data.routineID, this);
 	}
 }
 
 void NPC::reloadRoutine() {
 	if (!m_routine.getID().empty()) {
+		setTalkingActive(false);
+		setTalkingEnabled(true);
 		m_routine.load(m_routine.getID(), this, false);
 	}
 }
@@ -97,6 +101,10 @@ void NPC::onMouseOver() {
 }
 
 void NPC::onRightClick() {
+	if (!m_NPCdata.talkingEnabled) {
+		m_screen->setTooltipText(g_textProvider->getText("NothingToSay"), sf::Color::Red, true);
+		return;
+	}
 	// check if npc is in range
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
@@ -129,8 +137,12 @@ void NPC::update(const sf::Time& frameTime) {
 	checkCollisionWithMainChar();
 }
 
-void NPC::setTalksActive(bool talksActive) {
-	m_NPCdata.talksActive = talksActive;
+void NPC::setTalkingActive(bool active) {
+	m_NPCdata.talkingActive = active;
+}
+
+void NPC::setTalkingEnabled(bool enabled) {
+	m_NPCdata.talkingEnabled = enabled;
 }
 
 void NPC::setDialogueID(const std::string& id) {
@@ -138,8 +150,7 @@ void NPC::setDialogueID(const std::string& id) {
 }
 
 void NPC::checkCollisionWithMainChar() {
-	if (!m_NPCdata.dialogueID.empty() && m_NPCdata.talksActive && inRange(getCenter(), m_mainChar->getCenter(), TALKING_RANGE)) {
-		setTalksActive(false);
+	if (m_NPCdata.talkingActive && !m_NPCdata.dialogueID.empty() && inRange(getCenter(), m_mainChar->getCenter(), TALKING_RANGE)) {
 		turnToMainchar();
 		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
 		

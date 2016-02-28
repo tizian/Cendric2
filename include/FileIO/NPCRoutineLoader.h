@@ -21,6 +21,8 @@ public:
 	void wait(int milliseconds);
 	void goToTile(float x, float y);
 	void setLooped(bool looped);
+	void setTalkingActive(bool active);
+	void setTalkingEnabled(bool enabled);
 
 private:
 	bool m_isInitial = true;

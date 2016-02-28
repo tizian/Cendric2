@@ -19,6 +19,8 @@ void NPCRoutine::load(const std::string& id, NPC* npc, bool initial) {
 			m_remainingStepTime = m_steps[0].time;
 		}
 	}
+
+	m_npc->setVelocity(sf::Vector2f(0.f, 0.f));
 }
 
 const std::string& NPCRoutine::getID() const {

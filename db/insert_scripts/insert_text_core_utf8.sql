@@ -113,6 +113,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('NewGame','New
 INSERT INTO text (text_id, english, german, swiss_german) values ('No','No','Nein','Nai');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoQuicksaveExists','No quick save exists','Kein Schnelllade-Speicherstand existiert','Kein Schnelllade-Speicherstand existiert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NothingToSay','There''s nothing to talk about.','Es gibt nichts zu sagen.','Es git nüt zum rede.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoWeapon','No weapon ','Keine Waffe ','Kei Waffe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Off','Off','Aus','Uus');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Okay','Okay','Okay','Okee');

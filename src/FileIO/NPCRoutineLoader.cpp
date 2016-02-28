@@ -24,6 +24,8 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("isConditionFulfilled", &NPCRoutineLoader::isConditionFulfilled)
 		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
+		.addFunction("setTalkingActive", &NPCRoutineLoader::setTalkingActive)
+		.addFunction("setTalkingEnabled", &NPCRoutineLoader::setTalkingEnabled)
 		.endClass();
 
 	if (luaL_dofile(L, m_routine.getID().c_str()) != 0) {
@@ -68,6 +70,15 @@ void NPCRoutineLoader::goToTile(float x, float y) {
 
 void NPCRoutineLoader::setLooped(bool looped) {
 	m_routine.setLooped(looped);
+}
+
+void NPCRoutineLoader::setTalkingActive(bool active) {
+	if (!m_isInitial) return;
+	m_routine.getNPC()->setTalkingActive(active);
+}
+
+void NPCRoutineLoader::setTalkingEnabled(bool enabled) {
+	m_routine.getNPC()->setTalkingEnabled(enabled);
 }
 
 bool NPCRoutineLoader::isConditionFulfilled(const std::string& condition) const {
