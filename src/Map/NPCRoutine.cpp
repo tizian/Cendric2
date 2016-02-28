@@ -3,14 +3,14 @@
 #include "Map/NPC.h"
 #include "Screen.h"
 
-void NPCRoutine::load(const std::string& id, NPC* npc) {
+void NPCRoutine::load(const std::string& id, NPC* npc, bool initial) {
 	m_id = id;
 	m_npc = npc;
 	m_steps.clear();
 	m_currentStepID = 0;
 
 	NPCRoutineLoader loader(*this, npc->getScreen()->getCharacterCore());
-	loader.loadRoutine();
+	loader.loadRoutine(initial);
 	if (m_steps.empty()) {
 		g_logger->logInfo("NPCRoutine", "This NPC has no routine!");
 	}
@@ -62,6 +62,12 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 			0 : 
 			m_currentStepID + 1;
 
+		if (m_currentStepID == 0 && !m_isLooped) {
+			m_steps.clear();
+			m_npc->setVelocity(sf::Vector2f(0.f, 0.f));
+			return;
+		}
+
 		if (m_steps[m_currentStepID].state == RoutineState::Waiting) {
 			m_remainingStepTime = m_steps[m_currentStepID].time;
 			m_npc->setVelocity(sf::Vector2f(0.f, 0.f));
@@ -73,8 +79,8 @@ void NPCRoutine::addStep(const RoutineStep& step) {
 	m_steps.push_back(step);
 }
 
-void NPCRoutine::setLooping(bool looping) {
-	m_isLooping = looping;
+void NPCRoutine::setLooped(bool looped) {
+	m_isLooped = looped;
 }
 
 void NPCRoutine::setVelocity(float velocity) {

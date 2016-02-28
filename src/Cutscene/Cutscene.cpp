@@ -23,6 +23,10 @@ Cutscene::~Cutscene() {
 }
 
 void Cutscene::update(const sf::Time& frameTime) {
+	if (g_inputController->isKeyActive(Key::Escape)) {
+		m_isNoStepsLeft = true;
+		return;
+	}
 	GameObject::updateTime(m_currentTextTime, frameTime);
 	if (m_currentTextTime == sf::Time::Zero) {
 		setNextText();

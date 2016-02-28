@@ -88,7 +88,7 @@ void NPC::load(MapMainCharacter* mainChar, const NPCData& data) {
 
 void NPC::reloadRoutine() {
 	if (!m_routine.getID().empty()) {
-		m_routine.load(m_routine.getID(), this);
+		m_routine.load(m_routine.getID(), this, false);
 	}
 }
 

@@ -8,6 +8,8 @@ update = function(B)
 			B:say("IAmLeaving", 3)
 			B:setMovingTarget(2150, 0)
 			B:wait(3)
+			B:addConditionProgress("tutorial_complete")
+			B:setKilled()
 			speechBubbleState = speechBubbleState + 1
 		elseif (speechBubbleState == 3 and B:getPosX() > 1750) then
 			B:say("KillRats", 5)

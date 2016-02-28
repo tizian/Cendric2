@@ -3,7 +3,7 @@
 velocity = 50
 
 loadRoutine = function(R)
-		if (R:isConditionFulfilled("tutorial_complete") then 
+		if (R:isConditionFulfilled("tutorial_complete")) then 
 			R:setTilePosition(65, 17)
 			
 			R:wait(1000)
@@ -15,9 +15,18 @@ loadRoutine = function(R)
 			R:goToTile(61,13)
 			R:goToTile(60,13)
 			R:goToTile(60,17)
-		else
+			
+		elseif (R:isConditionFulfilled("talked_to_edmond")) then 
+		
 			R:setTilePosition(44, 17)
 			
+			R:wait(1000)
+			R:goToTile(46,17)
+			R:setLooped(false)
+			
+		else
+		
+			R:setTilePosition(44, 17)
 			R:wait(1000)
 			R:goToTile(40,17)
 			R:wait(1000)

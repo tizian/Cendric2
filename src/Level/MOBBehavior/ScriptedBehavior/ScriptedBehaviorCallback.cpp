@@ -20,7 +20,6 @@ void ScriptedBehaviorCallback::setScriptedBehavior(ScriptedBehavior* behavior) {
 	m_scriptedBehavior = behavior;
 }
 
-
 bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 	m_L = luaL_newstate();
 	luaL_openlibs(m_L);
@@ -37,6 +36,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("leaveLevel", &ScriptedBehaviorCallback::leaveLevel)
 		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
 		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
+		.addFunction("addConditionProgress", &ScriptedBehaviorCallback::addConditionProgress)
 		.endClass();
 
 	if (luaL_dofile(m_L, path.c_str()) != 0) {
@@ -60,6 +60,14 @@ void ScriptedBehaviorCallback::setKilled() {
 
 void ScriptedBehaviorCallback::leaveLevel() {
 	m_enemy->setDisposed();
+}
+
+void ScriptedBehaviorCallback::addConditionProgress(const std::string& condition) {
+	if (condition.empty()) {
+		g_logger->logError("ScriptedBehaviorCallback", "Condition cannot be empty.");
+		return;
+	}
+	m_core->setConditionFulfilled(condition);
 }
 
 void ScriptedBehaviorCallback::setMovingTarget(int x, int y) {

@@ -70,7 +70,7 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 		while (element.isString()) {
 			questData.conditions.insert(element.cast<std::string>());
 			i++;
-			element = targets[i];
+			element = conditions[i];
 		}
 	}
 

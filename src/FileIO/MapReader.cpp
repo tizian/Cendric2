@@ -20,7 +20,7 @@ bool MapReader::checkData(MapData& data) const {
 			return false;
 		}
 	}
-	for (auto it : data.mapExits) {
+	for (auto& it : data.mapExits) {
 		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x * TILE_SIZE_F || it.mapExitRect.top >= data.mapSize.y * TILE_SIZE_F) {
 			logError("a map exit rect is out of range for this map.");
 			return false;
@@ -33,8 +33,14 @@ bool MapReader::checkData(MapData& data) const {
 			logError("map exit spawn point is negative.");
 			return false;
 		}
+		for (auto& condition : it.conditions) {
+			if (condition.empty()) {
+				logError("map exit condition cannot be empty.");
+				return false;
+			}
+		}
 	}
-	for (auto it : data.npcs) {
+	for (auto& it : data.npcs) {
 		if (it.id.empty()) {
 			logError("a map npc has no id.");
 			return false;
@@ -111,6 +117,19 @@ bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) c
 				textAttr = _property->Attribute("value");
 				if (textAttr != nullptr) {
 					meData.mapID = textAttr;
+				}
+			}
+			else if (name.compare("conditions") == 0) {
+				textAttr = nullptr;
+				textAttr = _property->Attribute("value");
+				if (textAttr != nullptr) {
+					size_t pos = 0;
+					std::string conditions = textAttr;
+					while ((pos = conditions.find(",")) != std::string::npos) {
+						meData.conditions.insert(conditions.substr(0, pos));
+						conditions.erase(0, pos + 1);
+					}
+					meData.conditions.insert(conditions);
 				}
 			}
 			else if (name.compare("x") == 0) {

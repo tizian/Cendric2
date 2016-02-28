@@ -61,6 +61,7 @@ void CharacterCore::loadNew() {
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.critical = 5;
+	setQuestState("who_am_i", QuestState::Started);
 	m_stopwatch.restart();
 	reloadAttributes();
 }

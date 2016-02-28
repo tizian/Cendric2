@@ -31,6 +31,7 @@ void Map::dispose() {
 void Map::loadAfterMainChar(Screen* screen) {
 	MapLoader loader;
 	loader.loadNpcs(m_mapData, screen, this);
+	m_screen = screen;
 }
 
 void Map::loadForRenderTexture(Screen* screen) {
@@ -67,8 +68,13 @@ bool Map::collides(WorldCollisionQueryRecord& rec) const {
 }
 
 MapExitData* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {
-	for (auto it : m_mapData.mapExits) {
+	for (auto& it : m_mapData.mapExits) {
 		if (boundingBox.intersects(it.mapExitRect)) {
+			for (auto& condition : it.conditions) {
+				if (!m_screen->getCharacterCore()->isConditionFulfilled(condition)) {
+					return nullptr;
+				}
+			}
 			MapExitData* exit = new MapExitData(it);
 			return exit;
 		}

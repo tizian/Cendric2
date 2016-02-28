@@ -2,5 +2,5 @@
 title = "who_am_i"
 
 -- what to do?
-conditions = {"find_out_more"}
+conditions = {"who_am_i__find_out_more"}
 

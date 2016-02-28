@@ -13,14 +13,14 @@ NPCRoutineLoader::NPCRoutineLoader(NPCRoutine& routine, CharacterCore* core) : m
 NPCRoutineLoader::~NPCRoutineLoader() {
 }
 
-void NPCRoutineLoader::loadRoutine() {
+void NPCRoutineLoader::loadRoutine(bool isInitial) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 	getGlobalNamespace(L)
 		.beginClass<NPCRoutineLoader>("NPCRoutine")
 		.addFunction("wait", &NPCRoutineLoader::wait)
 		.addFunction("goToTile", &NPCRoutineLoader::goToTile)
-		.addFunction("setLooping", &NPCRoutineLoader::setLooping)
+		.addFunction("setLooped", &NPCRoutineLoader::setLooped)
 		.addFunction("isConditionFulfilled", &NPCRoutineLoader::isConditionFulfilled)
 		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
@@ -38,6 +38,7 @@ void NPCRoutineLoader::loadRoutine() {
 	}
 
 	try {
+		m_isInitial = isInitial;
 		function(this);
 	}
 	catch (LuaException const& e) {
@@ -65,8 +66,8 @@ void NPCRoutineLoader::goToTile(float x, float y) {
 	m_routine.addStep(step);
 }
 
-void NPCRoutineLoader::setLooping(bool looping) {
-	m_routine.setLooping(looping);
+void NPCRoutineLoader::setLooped(bool looped) {
+	m_routine.setLooped(looped);
 }
 
 bool NPCRoutineLoader::isConditionFulfilled(const std::string& condition) const {
@@ -78,6 +79,7 @@ bool NPCRoutineLoader::isConditionFulfilled(const std::string& condition) const 
 }
 
 void NPCRoutineLoader::setTilePosition(float x, float y) {
+	if (!m_isInitial) return;
 	m_routine.getNPC()->setPosition(sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F));
 }
 

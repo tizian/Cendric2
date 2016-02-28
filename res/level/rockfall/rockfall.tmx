@@ -311,8 +311,8 @@
   <object id="76" x="2119.5" y="677.5" width="57" height="117">
    <properties>
     <property name="map id" value="res/map/meadows/meadows.tmx"/>
-    <property name="x" value="2420"/>
-    <property name="y" value="920"/>
+    <property name="x" value="2850"/>
+    <property name="y" value="800"/>
    </properties>
   </object>
  </objectgroup>

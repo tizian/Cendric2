@@ -12,7 +12,7 @@ class NPCRoutineLoader {
 public:
 	NPCRoutineLoader(NPCRoutine& routine, CharacterCore* core);
 	~NPCRoutineLoader();
-	void loadRoutine();
+	void loadRoutine(bool isInitial);
 
 	// methods to call in lua script
 	bool isConditionFulfilled(const std::string& condition) const;
@@ -20,9 +20,10 @@ public:
 	void setDisposed();
 	void wait(int milliseconds);
 	void goToTile(float x, float y);
-	void setLooping(bool looping);
+	void setLooped(bool looped);
 
 private:
+	bool m_isInitial = true;
 	NPCRoutine& m_routine;
 	CharacterCore* m_core;
 };

@@ -44,7 +44,7 @@ loadDialogue = function(DL)
 				DL:addChoice(11, "DL_Choice_IWontHelp") --  No, that's your problem
 				DL:addNode()
 				
-			elseif (not DL:isConditionFulfilled("talked_to_edmond")) then
+			elseif (not DL:isConditionFulfilled("talked_to_edmond"))
 				
 				DL:createChoiceNode(50)
 				DL:addChoice(7, "DL_Choice_WhatCanWeDo") --  What can we do about those rocks?

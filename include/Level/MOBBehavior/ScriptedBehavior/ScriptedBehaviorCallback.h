@@ -38,6 +38,8 @@ public:
 	void setKilled();
 	// leaves the level
 	void leaveLevel();
+	// sets a certain condition fulfilled
+	void addConditionProgress(const std::string& condition);
 
 	bool isLoaded() const;
 
