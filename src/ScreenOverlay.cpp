@@ -143,13 +143,13 @@ HintScreenOverlay::HintScreenOverlay(const std::string& hintKey) : ScreenOverlay
 	std::string hintText = (g_textProvider->getText("Press", "hint")) + " ";
 	
 	if (hintKey.compare("Inventory") == 0) {
-		hintText.append(g_textProvider->getText(EnumNames::getKeyName(Key::Inventory)) + " ");
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Inventory)) + " ");
 	}
 	else if (hintKey.compare("Chop") == 0) {
-		hintText.append(g_textProvider->getText(EnumNames::getKeyName(Key::Chop)) + " ");
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Chop)) + " ");
 	}
 	else if (hintKey.compare("Journal") == 0) {
-		hintText.append(g_textProvider->getText(EnumNames::getKeyName(Key::Journal)) + " ");
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Journal)) + " ");
 	}
 	else {
 		hintText.clear();
