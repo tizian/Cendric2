@@ -67,13 +67,13 @@ void Screen::execOnEnter(const Screen* previousScreen) {
 
 void Screen::onExit(Screen* nextScreen) {
 	deleteAllObjects();
+	execOnExit(nextScreen);
 	if (nextScreen != nullptr) {
 		for (auto& overlay : m_overlayQueue) {
 			nextScreen->addScreenOverlay(overlay);
 		}
 	}
 	m_overlayQueue.clear();
-	execOnExit(nextScreen);
 }
 
 void Screen::execOnExit(const Screen* nextScreen) {

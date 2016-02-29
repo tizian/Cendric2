@@ -93,6 +93,13 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	m_progressLog->update(frameTime);
 }
 
+void WorldScreen::execOnExit(const Screen* nextScreen) {
+	for (auto& it : m_overlayQueue) {
+		delete it;
+	}
+	m_overlayQueue.clear();
+}
+
 void WorldScreen::updateProgressLog(const sf::Time& frameTime) {
 	m_progressLog->update(frameTime);
 }

@@ -113,7 +113,6 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 
 void MenuScreen::execOnExit(const Screen *nextScreen) {
 	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
-	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash_fireanimation);
 }
 
 // <<< agents for the yes or no form and other buttons >>>

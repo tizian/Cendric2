@@ -90,11 +90,12 @@ void MapScreen::load() {
 	m_progressLog = new ProgressLog(getCharacterCore());
 }
 
-void MapScreen::execOnEnter(const Screen *previousScreen) {
+void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(new LocationScreenOverlay(m_currentMap.getName()));
 }
 
-void MapScreen::execOnExit(const Screen *nextScreen) {
+void MapScreen::execOnExit(const Screen* nextScreen) {
+	WorldScreen::execOnExit(nextScreen);
 	m_currentMap.dispose();
 	delete m_dialogueWindow;
 	delete m_cookingWindow;

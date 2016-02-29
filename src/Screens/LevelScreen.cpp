@@ -75,11 +75,12 @@ void LevelScreen::writeToCore() {
 	m_characterCore = new CharacterCore(m_characterCoreCopy->getData());
 }
 
-void LevelScreen::execOnEnter(const Screen *previousScreen) {
+void LevelScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(new LocationScreenOverlay(m_currentLevel.getName()));
 }
 
-void LevelScreen::execOnExit(const Screen *nextScreen) {
+void LevelScreen::execOnExit(const Screen* nextScreen) {
+	WorldScreen::execOnExit(nextScreen);
 	cleanUp();
 }
 

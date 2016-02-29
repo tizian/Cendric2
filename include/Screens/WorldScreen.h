@@ -14,6 +14,7 @@ public:
 	virtual ~WorldScreen();
 
 	void execUpdate(const sf::Time& frameTime) override;
+	void execOnExit(const Screen* nextScreen) override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void updateProgressLog(const sf::Time& frameTime);
 
