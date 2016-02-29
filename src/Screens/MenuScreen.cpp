@@ -8,12 +8,12 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 }
 
 void MenuScreen::execUpdate(const sf::Time& frameTime) {
-	if ((g_inputController->isKeyActive(Key::Escape) && m_characterCore == nullptr)) {
+	if ((g_inputController->isKeyJustPressed(Key::Escape) && m_characterCore == nullptr)) {
 		// end the game
 		m_requestQuit = true;
 		return;
 	}
-	if (g_inputController->isKeyActive(Key::Escape) && m_characterCore != nullptr) {
+	if (g_inputController->isKeyJustPressed(Key::Escape) && m_characterCore != nullptr) {
 		// resume game
 		setNextScreen(new LoadingScreen(m_characterCore));
 		return;
