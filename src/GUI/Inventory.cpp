@@ -280,11 +280,20 @@ void Inventory::handleMapDrop() {
 void Inventory::handleLevelDrop() {
 	if (m_levelInterface == nullptr || m_currentClone == nullptr) return;
 	InventorySlot* selectedSlot = getSelectedSlot();
-	if (selectedSlot != nullptr && selectedSlot->getItemType() == ItemType::Consumable) {
+	if (selectedSlot == nullptr) return;
+	ItemType type = selectedSlot->getItemType();
+	if (type == ItemType::Consumable) {
 		m_levelInterface->notifyConsumableDrop(m_currentClone);
 		m_levelInterface->highlightQuickslots(false);
 	}
-	else if (m_isEquipmentSlotDragged) {
+	else if (m_isEquipmentSlotDragged 
+		|| type == ItemType::Equipment_back 
+		|| type == ItemType::Equipment_body
+		|| type == ItemType::Equipment_head
+		|| type == ItemType::Equipment_neck
+		|| type == ItemType::Equipment_ring_1
+		|| type == ItemType::Equipment_ring_2
+		|| type == ItemType::Equipment_weapon) {
 		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", sf::Color::Red, true);
 	}
 }
