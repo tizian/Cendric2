@@ -1,10 +1,11 @@
-----------------------------------------
--- This script sets up the database   --
--- and describes the schema for       --
--- the Cendric project. Run it to     --
--- set up the database anew.          --
--- run using sqlite> .read initdb.sql --
-----------------------------------------
+-----------------------------------------
+-- This script sets up the database    --
+-- and describes the schema for        --
+-- the read-only database 'game_data'  --
+-- of the Cendric project. Run it to   --
+-- set up the database anew. Run using -- 
+-- sqlite> .read init_game_data.sql    --
+-----------------------------------------
 PRAGMA encoding="UTF-8";
 PRAGMA foreign_keys = ON;
 

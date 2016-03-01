@@ -41,8 +41,6 @@ void AllyBehavior::updateAggro() {
 	}
 	if (m_enemy->getEnemyState() != EnemyState::Idle) return;
 
-	bool isInAggroRange = false;
-
 	// search for new target
 	Enemy* nearest = nullptr;
 	float nearestDistance = 10000.f;

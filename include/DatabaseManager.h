@@ -44,7 +44,7 @@ public:
 	bool itemExists(const std::string& item_id) const;
 
 private:
-	const std::string DB_FILENAME = "db/cendricdb.db";
+	const std::string DB_FILENAME = "db/game_data.db";
 	void checkError() const;
 
 	sqlite3 *m_db = nullptr;

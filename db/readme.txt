@@ -1,1 +1,1 @@
-call init.sh in an appropriate shell to execute the initdb.sql script and create the cendric database.
+call init.sh in an appropriate shell to execute the init_game_data.sql and init_game_state scripts and create the cendric databases.
