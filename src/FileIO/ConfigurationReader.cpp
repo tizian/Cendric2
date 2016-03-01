@@ -48,6 +48,10 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(QUICKCAST_ON));
 				noError = readQuickcastOn(line, data);
 			}
+			else if (line.compare(0, strlen(HINTS_ON), string(HINTS_ON)) == 0) {
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(HINTS_ON));
+				noError = readHintsOn(line, data);
+			}
 			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGMODE_ON));
 				noError = readDebugModeOn(line, data);
@@ -186,6 +190,17 @@ bool ConfigurationReader::readQuickcastOn(const std::string& line, Configuration
 	}
 	bool quickcastOn = (atoi(line.substr(colon + 1).c_str()) != 0);
 	data.isQuickcast = quickcastOn;
+	return true;
+}
+
+bool ConfigurationReader::readHintsOn(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after hints on tag or no value after colon.");
+		return false;
+	}
+	bool hintsOn = (atoi(line.substr(colon + 1).c_str()) != 0);
+	data.isDisplayHints = hintsOn;
 	return true;
 }
 

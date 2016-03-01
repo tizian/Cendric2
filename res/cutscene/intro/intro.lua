@@ -3,7 +3,7 @@ steps =
 {
 	{
 		{
-			{"Darkness", 3}
+			{"Darkness", 2}
 		},
 		{
 			{"darkness.png", 0, 0}
@@ -11,12 +11,12 @@ steps =
 	},
 	{
 		{
-			{"WhatHappened", 5},
-			{"WhereAmI", 5}
+			{"WhatHappened", 4},
+			{"WhereAmI", 4}
 		},
 		{
 			{"forest_background.png", 0, 0},
-			{"forest_foreground.png", 10, 85},
+			{"forest_foreground.png", 10, 95},
 			{"forest_trees.png", 40, 80},
 		}
 	}

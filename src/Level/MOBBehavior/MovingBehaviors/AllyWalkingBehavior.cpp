@@ -10,7 +10,7 @@ void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	WalkingBehavior::checkCollisions(nextPosition);
 	// if the enemy collidesX but can't jump and is ally and idle, teleports to its owner.
 	EnemyState state = m_enemy->getEnemyState();
-	if (state != EnemyState::Chasing && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded() && dist(m_mainChar->getPosition(), m_enemy->getPosition()) > 400.f) {
+	if (state != EnemyState::Chasing && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded() && dist(m_mainChar->getPosition(), m_enemy->getPosition()) > 600.f) {
 		sf::Vector2f newPos(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->height - m_enemy->getBoundingBox()->height);
 		WorldCollisionQueryRecord rec;
 		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
@@ -46,7 +46,7 @@ void AllyWalkingBehavior::execHandleMovementInput() {
 
 		sf::Vector2f mainCharCenter = m_mainChar->getCenter();
 
-		float approachingDistance = (m_enemy->getState() == GameObjectState::Walking) ? (m_approachingDistance - 10.f) : m_approachingDistance;
+		float approachingDistance = (std::abs(m_enemy->getVelocity().x) > 0.f) ? (m_approachingDistance - 10.f) : m_approachingDistance;
 
 		if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > approachingDistance) {
 			m_movingDirectionX = -1;

@@ -76,7 +76,7 @@ void LevelScreen::writeToCore() {
 }
 
 void LevelScreen::execOnEnter(const Screen* previousScreen) {
-	addObject(new LocationScreenOverlay(m_currentLevel.getName()));
+	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName()));
 }
 
 void LevelScreen::execOnExit(const Screen* nextScreen) {

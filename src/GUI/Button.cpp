@@ -79,6 +79,16 @@ void Button::setPosition(const sf::Vector2f& pos) {
 	m_positionDefault = pos;
 }
 
+void Button::setSize(const sf::Vector2f& size) {
+	m_ornamentLayer.setSize(size);
+	m_backLayer.setSize(size);
+	m_mainLayer.setSize(size);
+	m_boundingBox.width = size.x;
+	m_boundingBox.height = size.y;
+	// this re-centers the text
+	setCharacterSize(m_text.getCharacterSize());
+}
+
 void Button::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 

@@ -5,8 +5,8 @@
 using namespace std;
 
 const float SpeechBubble::MIN_SIZE = 20.f;
-const float SpeechBubble::MAX_LENGTH = 150.f;
-const float SpeechBubble::TEXT_MARGIN = 5.f;
+const float SpeechBubble::MAX_LENGTH = 250.f;
+const float SpeechBubble::TEXT_MARGIN = 10.f;
 
 SpeechBubble::SpeechBubble(LevelMovableGameObject* owner) : GameObject() {
 	m_owner = owner;
@@ -16,7 +16,7 @@ SpeechBubble::SpeechBubble(LevelMovableGameObject* owner) : GameObject() {
 	m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), sf::Color::White, m_boundingBox.width, m_boundingBox.height);
 	m_pointer.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_speechbubble_pointer));
 
-	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_text.setColor(CENDRIC_COLOR_WHITE);
 	m_isAlwaysUpdate = true;
 }
@@ -34,7 +34,7 @@ void SpeechBubble::setFloatingHeight(float height) {
 }
 
 void SpeechBubble::setText(const std::string& text) {
-	m_text.setString(g_textProvider->getCroppedText(text, "speech", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(MAX_LENGTH)));
+	m_text.setString(g_textProvider->getCroppedText(text, "speech", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(MAX_LENGTH)));
 
 	sf::Vector2f newSize(m_text.getLocalBounds().width, m_text.getLocalBounds().height);
 	m_boundingBox.width = newSize.x + 2 * TEXT_MARGIN;

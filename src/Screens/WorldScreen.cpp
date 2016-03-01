@@ -71,7 +71,7 @@ void WorldScreen::notifyQuestTargetKilled(const std::string& questID, const std:
 void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState state) {
 	getCharacterCore()->setQuestState(questID, state);
 	m_progressLog->addQuestStateChanged(questID, state);
-	addScreenOverlay(new QuestScreenOverlay(questID, state));
+	addScreenOverlay(ScreenOverlay::createQuestScreenOverlay(questID, state));
 	m_interface->reloadQuestLog();
 }
 

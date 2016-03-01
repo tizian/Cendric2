@@ -78,8 +78,8 @@ void MapMainCharacter::handleInput() {
 
 void MapMainCharacter::load() {
 	m_isAlwaysUpdate = true;
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 10.f, 10.f));
-	setSpriteOffset(sf::Vector2f(-20.f, -40.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 18.f, 15.f));
+	setSpriteOffset(sf::Vector2f(-16.f, -35.f));
 
 	Animation* walkingAnimationDown = new Animation(sf::seconds(0.15f));
 	walkingAnimationDown->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));

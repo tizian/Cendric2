@@ -130,10 +130,10 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 	}
 	if (!m_options.empty()) {
 		int oldOption = m_chosenOption;
-		if (g_inputController->isKeyJustPressed(Key::Up)) {
+		if (g_inputController->isScrolledUp()) {
 			m_chosenOption = std::max(m_chosenOption - 1, 0);
 		}
-		else if (g_inputController->isKeyJustPressed(Key::Down)) {
+		else if (g_inputController->isScrolledDown()) {
 			m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
 		}
 		for (int i = 0; i < m_options.size(); i++) {
@@ -157,7 +157,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 		return m_dialogue->updateWindow();
 	}
 
-	if (chooseOption || g_inputController->isKeyJustPressed(Key::Confirm) || g_inputController->isKeyJustPressed(Key::Interact)) {
+	if (chooseOption || g_inputController->isSelected()) {
 		if (m_options.empty()) {
 			m_dialogue->setNextNode(-1);
 		}

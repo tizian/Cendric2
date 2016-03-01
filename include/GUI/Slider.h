@@ -7,6 +7,7 @@
 
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
+#include "GUI/GUIConstants.h"
 
 class SliderKnob : public GameObject {
 public:
@@ -18,8 +19,6 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
-
-	void setColor(const sf::Color& color);
 
 	bool isPressed() const;
 
@@ -34,8 +33,8 @@ private:
 	static const float RADIUS;
 	static const float MARGIN;
 
-	sf::Color m_marginColor = CENDRIC_COLOR_LIGHT_PURPLE;
-	sf::Color m_fillColor = CENDRIC_COLOR_PURPLE;
+	static const sf::Color MARGIN_COLOR;
+	static const sf::Color FILL_COLOR;
 };
 
 // A simple ugly slider 
@@ -51,24 +50,14 @@ public:
 
 	// the text position will be set automatically to the right side of the checkbox.
 	// setting text using the text provider (translated)
-	void setText(const std::string& text, const sf::Color& color, int charSize);
-	void setText(const std::string& text, int charSize);
 	void setText(const std::string& text);
 	// setting raw text without text provider (not translated)
-	void setTextRaw(const std::string& text, const sf::Color& color, int charSize);
-	void setTextRaw(const std::string& text, int charSize);
 	void setTextRaw(const std::string& text);
-
-	void setCharacterSize(int size);
-	void setTextColor(const sf::Color& color);
 
 	// a slider can only be slided if its enabled. also, its color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
 	void setVisible(bool value);
 	void setSliderPosition(int value);
-	void setKnobColor(const sf::Color& color);
-	void setBackgroundColor(const sf::Color& color);
-	void setMarginColor(const sf::Color& color);
 
 	bool isEnabled() const;
 	bool isVisible() const;
@@ -87,6 +76,8 @@ protected:
 	void handleDragAndDrop();
 	// get the slider position from the current mouse position
 	int calculateSliderPosition(float mousePosX) const;
+	// setting the character size of the title, including repositioning
+	void setCharacterSize(int size);
 
 	sf::RectangleShape m_background;
 	sf::RectangleShape m_filler;
@@ -94,9 +85,9 @@ protected:
 	SliderKnob m_knob;
 	sf::Vector2f m_textOffset;
 
-	sf::Color m_backgroundColor = CENDRIC_COLOR_BLACK;
-	sf::Color m_marginColor = CENDRIC_COLOR_LIGHT_PURPLE;
-	sf::Color m_fillColor = CENDRIC_COLOR_PURPLE;
+	static const sf::Color BACKGROUND_COLOR;
+	static const sf::Color MARGIN_COLOR;
+	static const sf::Color FILL_COLOR;
 
 	std::string m_title;
 	BitmapText m_titleText;

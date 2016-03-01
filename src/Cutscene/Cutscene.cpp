@@ -23,7 +23,7 @@ Cutscene::~Cutscene() {
 }
 
 void Cutscene::update(const sf::Time& frameTime) {
-	if (g_inputController->isKeyActive(Key::Escape)) {
+	if (g_inputController->isKeyJustPressed(Key::Escape) || g_inputController->isSelected()) {
 		m_isNoStepsLeft = true;
 		return;
 	}

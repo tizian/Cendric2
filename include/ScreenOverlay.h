@@ -29,6 +29,11 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 
+	static ScreenOverlay* createQuestScreenOverlay(const std::string& questID, QuestState state);
+	static ScreenOverlay* createLocationScreenOverlay(const std::string& locationKey);
+	// returns nullptr if the configuration for display hints is false.
+	static ScreenOverlay* createHintScreenOverlay(const std::string& hintKey);
+
 private:
 	void load();
 	void repositionText();
@@ -42,19 +47,4 @@ private:
 	BitmapText m_title;
 	BitmapText m_subtitle;
 	sf::Sprite m_sprite;
-};
-
-class QuestScreenOverlay : public virtual ScreenOverlay {
-public:
-	QuestScreenOverlay(const std::string& questID, QuestState state);
-};
-
-class LocationScreenOverlay : public virtual ScreenOverlay {
-public:
-	LocationScreenOverlay(const std::string& locationKey);
-};
-
-class HintScreenOverlay : public virtual ScreenOverlay {
-public:
-	HintScreenOverlay(const std::string& hintKey);
 };

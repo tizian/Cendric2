@@ -27,6 +27,8 @@ private:
 	bool readVSyncOn(const std::string& line, ConfigurationData& data) const;
 
 	bool readQuickcastOn(const std::string& line, ConfigurationData& data) const;
+	bool readHintsOn(const std::string& line, ConfigurationData& data) const;
+
 	bool readDebugModeOn(const std::string& line, ConfigurationData& data) const;
 	bool readDebugRenderingOn(const std::string& line, ConfigurationData& data) const;
 	bool readFullscreenOn(const std::string& line, ConfigurationData& data) const;

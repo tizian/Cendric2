@@ -110,14 +110,14 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 			m_entries[oldEntry].deselect();
 			m_entries[m_chosenEntry].select();
 		}
-		if (g_inputController->isKeyJustPressed(Key::Confirm) || g_inputController->isKeyJustPressed(Key::Interact)) {
+		if (g_inputController->isSelected()) {
 			m_isChosen = true;
 		}
 	}
 }
 
 bool SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
-	if (g_inputController->isKeyJustPressed(Key::Up)) {
+	if (g_inputController->isScrolledUp()) {
 		m_chosenEntry = max(m_chosenEntry - 1, 0);
 		if (m_chosenEntry < m_topEntry) {
 			scrollUp();
@@ -125,7 +125,7 @@ bool SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
 		m_upActiveTime = frameTime;
 		return true;
 	}
-	if (g_inputController->isKeyJustPressed(Key::Down)) {
+	if (g_inputController->isScrolledDown()) {
 		m_chosenEntry = min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
 		if (m_chosenEntry > m_bottomEntry) {
 			scrollDown();

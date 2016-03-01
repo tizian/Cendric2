@@ -24,6 +24,7 @@ struct ConfigurationData {
 	bool isDebugMode;
 	bool isDebugRendering;
 	bool isWindowReload;
+	bool isDisplayHints;
 };
 
 const std::map < Key, sf::Keyboard::Key > DEFAULT_KEYMAP =
@@ -98,4 +99,5 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 	false,
 	false,
 	false,
+	true,
 };

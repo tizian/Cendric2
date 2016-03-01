@@ -26,6 +26,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
+	void setSize(const sf::Vector2f& size);
 
 	void setOnClick(const std::function<void()>& agent);
 

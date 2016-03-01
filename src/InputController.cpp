@@ -41,6 +41,9 @@ void InputController::update() {
 	m_isMousePressedLeft = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	m_isMousePressedRight = sf::Mouse::isButtonPressed(sf::Mouse::Right);
 
+	// update mouse wheel
+	m_mouseWheelScrollTicks = 0.f;
+
 	// update mouse positions
 	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
 	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
@@ -66,7 +69,7 @@ void InputController::init() {
 	for (int i = static_cast<int>(Key::VOID) + 1; i < static_cast<int>(Key::MAX); ++i) {
 		m_keyActiveMap.insert({ static_cast<Key>(i), false });
 	}
-	
+
 	m_keyJustPressedMap = m_keyActiveMap;
 
 	m_windowSize.x = WINDOW_WIDTH;
@@ -135,6 +138,14 @@ bool InputController::isMouseClickedRight() const {
 	return m_isWindowFocused && m_isMouseClickedRight;
 }
 
+bool InputController::isMouseWheelScrolledDown() const {
+	return m_mouseWheelScrollTicks < 0.f;
+}
+
+bool InputController::isMouseWheelScrolledUp() const {
+	return m_mouseWheelScrollTicks > 0.f;
+}
+
 bool InputController::isMousePressedLeft() const {
 	return m_isWindowFocused && m_isMousePressedLeft;
 }
@@ -144,20 +155,22 @@ bool InputController::isMousePressedRight() const {
 }
 
 bool InputController::isMouseJustPressedLeft() const {
-	return m_isWindowFocused && m_isMouseJustPressedLeft;
+	if (m_isActionLocked || !m_isWindowFocused) return false;
+	return m_isMouseJustPressedLeft;
 }
 
 bool InputController::isMouseJustPressedRight() const {
-	return m_isWindowFocused && m_isMouseJustPressedRight;
-}
-
-bool InputController::isKeyActive(Key key) {
-	return m_isWindowFocused && m_keyActiveMap[key];
-}
-
-bool InputController::isKeyJustPressed(Key key) {
 	if (m_isActionLocked || !m_isWindowFocused) return false;
-	return m_keyJustPressedMap[key];
+	return m_isMouseJustPressedRight;
+}
+
+bool InputController::isKeyActive(Key key) const {
+	return m_isWindowFocused && m_keyActiveMap.at(key);
+}
+
+bool InputController::isKeyJustPressed(Key key) const {
+	if (m_isActionLocked || !m_isWindowFocused) return false;
+	return m_keyJustPressedMap.at(key);
 }
 
 void InputController::startReadingText() {
@@ -190,11 +203,27 @@ void InputController::setLastPressedKey(sf::Keyboard::Key key) {
 	m_lastPressedKey = key;
 }
 
+void InputController::setMouseWheelScrollTicks(float deltaTicks) {
+	m_mouseWheelScrollTicks = deltaTicks;
+}
+
 bool InputController::isKeyPressed(sf::Keyboard::Key key) const {
 	if (key >= sf::Keyboard::KeyCount || key <= sf::Keyboard::Unknown) {
 		return false;
 	}
 	return sf::Keyboard::isKeyPressed(key);
+}
+
+bool InputController::isSelected() const {
+	return isKeyJustPressed(Key::Confirm) || isKeyJustPressed(Key::Interact) || isKeyJustPressed(Key::Jump);
+}
+
+bool InputController::isScrolledUp() const {
+	return isKeyJustPressed(Key::Up) || isMouseWheelScrolledUp();
+}
+
+bool InputController::isScrolledDown() const {
+	return isKeyJustPressed(Key::Down) || isMouseWheelScrolledDown();
 }
 
 

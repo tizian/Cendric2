@@ -219,10 +219,16 @@ void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::Float
 			tile->onHit(mob);
 		}
 	}
+
+	sf::FloatRect checkBB = boundingBox;
+	checkBB.top -= 1.f;
+	checkBB.left -= 1.f;
+	checkBB.width += 2.f;
+	checkBB.height += 2.f;
 	for (auto& it : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tileBB.intersects(boundingBox)) {
+		if (tileBB.intersects(checkBB)) {
 			tile->onHit(mob);
 		}
 	}

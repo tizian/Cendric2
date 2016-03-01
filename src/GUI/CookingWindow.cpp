@@ -80,7 +80,7 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 		m_options[m_chosenOption].select();
 	}
 
-	if (chooseOption || g_inputController->isKeyJustPressed(Key::Confirm) || g_inputController->isKeyJustPressed(Key::Interact)) {
+	if (chooseOption || g_inputController->isSelected()) {
 		const std::string& itemID = m_options[m_chosenOption].getItemID();
 		if (itemID.empty()) {
 			// end cooking window

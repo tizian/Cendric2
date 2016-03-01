@@ -30,13 +30,17 @@ std::string TextProvider::getCroppedText(const std::string& key, int characterSi
 }
 
 std::string TextProvider::getCroppedText(const std::string& key, const std::string& type, int characterSize, int maxWidth) {
+	return getCroppedString(getText(key, type), characterSize, maxWidth);
+}
+
+std::string TextProvider::getCroppedString(const std::string& string, int characterSize, int maxWidth) {
 	// preconditions
 	if (characterSize < 1 || maxWidth < characterSize) {
 		return "";
 	}
 
 	int maxLineChars = maxWidth / characterSize;
-	std::string uncroppedText = getText(key, type);
+	std::string uncroppedText = string;
 	std::string text = "";
 	while (uncroppedText.size() * characterSize > maxWidth) {
 		// check for forced newlines

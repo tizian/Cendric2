@@ -230,5 +230,6 @@ void Screen::setNextScreen(Screen* nextScreen) {
 }
 
 void Screen::addScreenOverlay(ScreenOverlay* overlay) {
+	if (overlay == nullptr) return;
 	m_overlayQueue.push_back(overlay);
 }

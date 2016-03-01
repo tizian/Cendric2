@@ -91,7 +91,7 @@ void MapScreen::load() {
 }
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
-	addObject(new LocationScreenOverlay(m_currentMap.getName()));
+	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
 }
 
 void MapScreen::execOnExit(const Screen* nextScreen) {

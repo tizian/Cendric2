@@ -105,7 +105,7 @@ void ScreenOverlay::setSubtitleColor(const sf::Color& color) {
 
 void ScreenOverlay::repositionText() {
 	sf::FloatRect& titleBounds = m_title.getLocalBounds();
-	m_title.setPosition(0.5f * (WINDOW_WIDTH - titleBounds.width), 0.33f * (WINDOW_HEIGHT - titleBounds.height));
+	m_title.setPosition(0.5f * (WINDOW_WIDTH - titleBounds.width), 0.3f * (WINDOW_HEIGHT - titleBounds.height));
 	sf::FloatRect& subtitleBounds = m_subtitle.getLocalBounds();
 	m_subtitle.setPosition(0.5f * (WINDOW_WIDTH - subtitleBounds.width), m_title.getPosition().y + titleBounds.height + subtitleBounds.height);
 }
@@ -114,34 +114,42 @@ GameObjectType ScreenOverlay::getConfiguredType() const {
 	return GameObjectType::_ScreenOverlay;
 }
 
-// Quest Screen Overlay
+ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questID, QuestState state) {
+	ScreenOverlay* questScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
-QuestScreenOverlay::QuestScreenOverlay(const std::string& questID, QuestState state) : ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f)) {
 	std::string titleText = g_textProvider->getText("Quest") + " ";
 	titleText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
-	setTitleColor(state == QuestState::Completed ? sf::Color::Green : state == QuestState::Failed ? sf::Color::Red : sf::Color::Yellow);
-	setTitleRaw(titleText);
+	questScreenOverlay->setTitleColor(state == QuestState::Completed ? sf::Color::Green : state == QuestState::Failed ? sf::Color::Red : sf::Color::Yellow);
+	questScreenOverlay->setTitleRaw(titleText);
 
-	setSubtitle(questID, "quest");
+	questScreenOverlay->setSubtitle(questID, "quest");
+
+	return questScreenOverlay;
 }
 
-// Location Screen Overlay
+ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& locationKey) {
+	ScreenOverlay* locationScreenOverlay = new ScreenOverlay(sf::seconds(1.f), sf::seconds(0.5f));
 
-LocationScreenOverlay::LocationScreenOverlay(const std::string& locationKey) : ScreenOverlay(sf::seconds(1.f), sf::seconds(0.5f)) {
-	setTitle(locationKey, "location");
+	locationScreenOverlay->setTitle(locationKey, "location");
+	return locationScreenOverlay;
 }
 
-// Hint Screen Overlay
+ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey) {
+	if (!g_resourceManager->getConfiguration().isDisplayHints) {
+		return nullptr;
+	}
 
-HintScreenOverlay::HintScreenOverlay(const std::string& hintKey) : ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f)) {
-	int characterSize = 32;
-	setTitleColor(sf::Color::Green);
-	setTitle("Hint");
+	ScreenOverlay* hintScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
-	setSubtitleCharacterSize(characterSize);
+	int characterSize = 16;
+	hintScreenOverlay->setTitleColor(sf::Color::Green);
+	hintScreenOverlay->setTitle("Hint");
+	hintScreenOverlay->setTitleCharacterSize(24);
+
+	hintScreenOverlay->setSubtitleCharacterSize(characterSize);
 
 	std::string hintText = (g_textProvider->getText("Press", "hint")) + " ";
-	
+
 	if (hintKey.compare("Inventory") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Inventory)) + " ");
 	}
@@ -155,5 +163,7 @@ HintScreenOverlay::HintScreenOverlay(const std::string& hintKey) : ScreenOverlay
 		hintText.clear();
 	}
 	hintText.append(g_textProvider->getCroppedText(hintKey, "hint", characterSize, WINDOW_WIDTH - 200));
-	setSubtitleRaw(hintText);
+	hintScreenOverlay->setSubtitleRaw(hintText);
+
+	return hintScreenOverlay;
 }

@@ -24,12 +24,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	m_movingBehavior->update(frameTime);
 	m_attackingBehavior->update(frameTime);
 
-	sf::FloatRect checkBB = *getBoundingBox();
-	checkBB.top -= 1.f;
-	checkBB.left -= 1.f;
-	checkBB.width += 2.f;
-	checkBB.height += 2.f;
-	m_level->collideWithDynamicTiles(this, checkBB);
+	m_level->collideWithDynamicTiles(this, *getBoundingBox());
 	m_spellManager->update(frameTime);
 
 	MovableGameObject::update(frameTime);

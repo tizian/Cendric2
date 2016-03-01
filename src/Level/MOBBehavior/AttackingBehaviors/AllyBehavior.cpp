@@ -57,7 +57,7 @@ void AllyBehavior::updateAggro() {
 			nearest = enemy;
 		}
 	}
-	if (nearest == nullptr) {
+	if (nearest == nullptr || nearestDistance > m_aggroRange) {
 		m_currentTarget = nullptr;
 		m_enemy->setWaiting();
 		return;

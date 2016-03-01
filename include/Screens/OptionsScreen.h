@@ -8,6 +8,7 @@
 #include "GUI/Button.h"
 #include "GUI/Checkbox.h"
 #include "GUI/Slider.h"
+#include "GUI/ArrowSelector.h"
 #include "GUI/BitmapText.h"
 
 class OptionsScreen : public Screen {
@@ -27,25 +28,16 @@ private:
 	Checkbox* m_quickCastCheckbox = nullptr;
 	Checkbox* m_vSyncCheckbox = nullptr;
 	Checkbox* m_smoothingCheckbox = nullptr;
-
-	BitmapText* m_fullscreen = nullptr;
-	bool m_selectedFullscreenOn = false;
-	void refreshFullscreenText();
-
-	Language m_selectedLanguage = Language::VOID;
-	BitmapText* m_languageText = nullptr;
-	void refreshLanguageText();
+	Checkbox* m_displayHintsCheckbox = nullptr;
 
 	Slider* m_volumeSoundSlider = nullptr;
 	Slider* m_volumeMusicSlider = nullptr;
 
+	ArrowSelector* m_languageSelector = nullptr;
+	ArrowSelector* m_displayModeSelector = nullptr;
+
 	// button agents
-	void onEnglish();
-	void onSwiss();
-	void onGerman();
 	void onBack();
 	void onApply();
 	void onKeybindings();
-	void onFullscreen();
-	void onWindow();
 };

@@ -9,6 +9,8 @@ public:
 	static float TOP;
 
 	static float TEXT_OFFSET;
+	static float LABEL_OFFSET;
+	static float BUTTON_MARGIN;
 
 	static int CHARACTER_SIZE_S;
 	static int CHARACTER_SIZE_M;

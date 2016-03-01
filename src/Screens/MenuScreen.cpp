@@ -145,8 +145,8 @@ void MenuScreen::onNewGame() {
 		m_characterCore = new CharacterCore();
 		m_characterCore->loadNew();
 		Screen* nextScreen = new CutsceneScreen(m_characterCore, "intro");
-		nextScreen->addScreenOverlay(new QuestScreenOverlay("who_am_i", QuestState::Started));
-		nextScreen->addScreenOverlay(new HintScreenOverlay("Journal"));
+		nextScreen->addScreenOverlay(ScreenOverlay::createQuestScreenOverlay("who_am_i", QuestState::Started));
+		nextScreen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay("Journal"));
 		setNextScreen(nextScreen);;
 	}
 	else {

@@ -117,7 +117,7 @@ AttackingBehavior* HunterEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 
 	behavior = new AllyBehavior(this);
-	behavior->setAggroRange(600.f);
+	behavior->setAggroRange(200.f);
 	behavior->setAttackInput(std::bind(&HunterEnemy::handleAttackInput, this));
 	return behavior;
 }

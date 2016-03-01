@@ -76,6 +76,9 @@ void Game::run() {
 			else if (e.type == sf::Event::KeyPressed) {
 				g_inputController->setLastPressedKey(e.key.code);
 			}
+			else if (e.type == sf::Event::MouseWheelScrolled) {
+				g_inputController->setMouseWheelScrollTicks(e.mouseWheelScroll.delta);
+			}
 		}
 
 		frameClock.restart();

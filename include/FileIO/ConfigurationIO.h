@@ -17,4 +17,5 @@ protected:
 	const char* DEBUGRENDERING_ON = "debugrendering.on";
 	const char* FULLSCREEN_ON = "fullscreen.on";
 	const char* SMOOTHING_ON = "smoothing.on";
+	const char* HINTS_ON = "hints.on";
 };

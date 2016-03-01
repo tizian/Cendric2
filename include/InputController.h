@@ -25,8 +25,11 @@ public:
 	void readUnicode(sf::Uint32 character);
 	void setLastPressedKey(sf::Keyboard::Key key);
 
-	bool isKeyActive(Key key);
-	bool isKeyJustPressed(Key key);
+	// mouse wheel input
+	void setMouseWheelScrollTicks(float deltaTicks);
+
+	bool isKeyActive(Key key) const;
+	bool isKeyJustPressed(Key key) const;
 	bool isMouseOver(const sf::FloatRect* boundingBox, bool useDefaultView) const;
 	bool isLeftClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const;
 	bool isRightClicked(const sf::FloatRect* boundingBox, bool useDefaultView) const;
@@ -41,6 +44,14 @@ public:
 	bool isMouseJustPressedRight() const;
 	bool isMouseClickedLeft() const;
 	bool isMouseClickedRight() const;
+
+	bool isMouseWheelScrolledDown() const;
+	bool isMouseWheelScrolledUp() const;
+
+	// helper methods as their combination is often used
+	bool isSelected() const;
+	bool isScrolledUp() const;
+	bool isScrolledDown() const;
 
 	// locks further input actions in this frame.
 	void lockAction();
@@ -70,6 +81,8 @@ private:
 	bool m_isMouseJustPressedRight = false;
 	bool m_isMouseClickedLeft = false;
 	bool m_isMouseClickedRight = false;
+
+	float m_mouseWheelScrollTicks = 0;
 
 	// current window size. Used for mouse position and dependent on resize events
 	sf::Vector2i m_windowSize;

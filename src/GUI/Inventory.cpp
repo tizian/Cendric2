@@ -81,7 +81,7 @@ void Inventory::init() {
 		textureOffset += 60;
 	}
 
-	selectTab(ItemType::Consumable);
+	selectTab(ItemType::Equipment_weapon);
 
 	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
 	reload();

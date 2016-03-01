@@ -20,6 +20,7 @@ private:
 	std::string writeSoundVolumeMusic(const ConfigurationData& data) const;
 	std::string writeSoundVolumeSound(const ConfigurationData& data) const;
 	std::string writeQuickcastOn(const ConfigurationData& data) const;
+	std::string writeHintsOn(const ConfigurationData& data) const;
 
 	std::string writeLanguage(const ConfigurationData& data) const;
 	std::string writeMainInputMap(const ConfigurationData& data) const;
