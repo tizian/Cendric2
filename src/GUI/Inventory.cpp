@@ -284,6 +284,9 @@ void Inventory::handleLevelDrop() {
 		m_levelInterface->notifyConsumableDrop(m_currentClone);
 		m_levelInterface->highlightQuickslots(false);
 	}
+	else if (m_isEquipmentSlotDragged) {
+		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", sf::Color::Red, true);
+	}
 }
 
 void Inventory::handleDragAndDrop() {
