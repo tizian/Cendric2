@@ -13,7 +13,9 @@
 // a reader to read a savegame.
 class CharacterCoreReader : public Reader, public CharacterCoreIO {
 public:
-	bool readCharacterCore(const std::string& fileName, CharacterCoreData& data);
+	// reads the whole character core when onlySaveGame is false and
+	// only reads the attributes relevant for a savegame (name, time played and date) if its true
+	bool readCharacterCore(const std::string& fileName, CharacterCoreData& data, bool onlySaveGame = false);
 
 private:
 	bool readTimePlayed(char* start, char* end, CharacterCoreData& data) const;

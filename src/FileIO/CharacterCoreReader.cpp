@@ -658,7 +658,7 @@ bool CharacterCoreReader::readWaypointsUnlocked(char* start, char* end, Characte
 	return true;
 }
 
-bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data) {
+bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
 	FILE* savFile;
 	savFile = fopen(filename.c_str(), "r");
 
@@ -706,6 +706,9 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, DATE_SAVED, strlen(DATE_SAVED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(DATE_SAVED));
 			noError = readSavegameDate(pos, end, data);
+			if (onlySaveGame) {
+				return noError;
+			}
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, ATTRIBUTES, strlen(ATTRIBUTES)) == 0) {

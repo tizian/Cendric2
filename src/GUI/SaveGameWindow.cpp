@@ -234,7 +234,7 @@ SaveGameEntry::SaveGameEntry() {
 bool SaveGameEntry::load(const std::string& filename) {
 	CharacterCoreReader reader;
 	CharacterCoreData data;
-	if (!reader.readCharacterCore(filename.c_str(), data)) {
+	if (!reader.readCharacterCore(filename.c_str(), data, true)) {
 		g_logger->logError("SaveGameEntry", "Could not load data from file: " + std::string(filename));
 		return false;
 	}
