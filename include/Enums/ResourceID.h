@@ -3,7 +3,8 @@
 enum class ResourceID {
 	VOID,
 
-	BitmapFont_default,
+	BitmapFont_default_8,
+	BitmapFont_default_12,
 	Configuration,
 	Quicksave,
 	Save_folder,

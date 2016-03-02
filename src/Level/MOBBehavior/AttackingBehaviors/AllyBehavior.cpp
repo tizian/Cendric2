@@ -48,8 +48,7 @@ void AllyBehavior::updateAggro() {
 		if (!go->isViewable()) continue;
 		Enemy* enemy = dynamic_cast<Enemy*>(go);
 		if (enemy->isDead() || enemy->isAlly()) continue;
-		sf::Vector2f dist = go->getCenter() - m_enemy->getCenter();
-		float distance = sqrt(dist.x * dist.x + dist.y * dist.y);
+		float distance = dist(go->getCenter(), m_enemy->getCenter());
 		if (distance < nearestDistance) {
 			nearestDistance = distance;
 			nearest = enemy;

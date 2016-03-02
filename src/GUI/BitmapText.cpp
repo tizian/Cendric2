@@ -48,7 +48,7 @@ std::string transform(const std::string& str) {
 BitmapText::BitmapText() {
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_color = sf::Color::White;
-	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
+	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
 	m_characterSize = m_font->getGlyphSize().y;
 	m_lineSpacing = 0.5f;
 }
@@ -64,7 +64,7 @@ BitmapText::BitmapText(const std::string& string, const BitmapFont &font) {
 }
 
 BitmapText::BitmapText(const std::string& string) {
-	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default);
+	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = transform(string);
 	m_color = sf::Color::White;
@@ -101,8 +101,14 @@ const sf::Color &BitmapText::getColor() const {
 }
 
 void BitmapText::setCharacterSize(int size) {
-	if (m_characterSize % m_font->getGlyphSize().y != 0) {
-		// g_logger->logWarning("BitmapText::setCharacterSize", "You should only use multiples of the bitmap glyph size to avoid aliasing problems!");
+	if (size % 12 == 0) {
+		m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_12);
+	}
+	else {
+		if (m_characterSize % 8 != 0) {
+			g_logger->logWarning("BitmapText::setCharacterSize", "You should only use multiples of the bitmap glyph sizes (8 or 12) to avoid aliasing problems!");
+		}
+		m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
 	}
 	m_characterSize = size;
 	init();

@@ -47,8 +47,7 @@ void YesOrNoForm::update(const sf::Time& frameTime) {
 void YesOrNoForm::setMessage(const std::string& msg, const sf::Color& color) {
 	int characterSize = 16;
 	m_message = BitmapText(
-		g_textProvider->getCroppedText(msg, characterSize, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER))),
-		*g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default));
+		g_textProvider->getCroppedText(msg, characterSize, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER))));
 
 	m_message.setColor(color);
 	m_message.setCharacterSize(characterSize);

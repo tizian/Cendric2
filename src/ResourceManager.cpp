@@ -31,7 +31,8 @@ ResourceManager::~ResourceManager() {
 void ResourceManager::init() {
 	m_fileNames.insert(
 	{
-		{ ResourceID::BitmapFont_default, "res/fonts/default_bitmap_font.png" },
+		{ ResourceID::BitmapFont_default_8, "res/fonts/default_bitmap_font_8.png" },
+		{ ResourceID::BitmapFont_default_12, "res/fonts/default_bitmap_font_12.png" },
 		{ ResourceID::Configuration, "config.ini" },
 		{ ResourceID::Save_folder, "saves/" },
 		{ ResourceID::Npc_folder, "res/npc/" },
@@ -133,7 +134,8 @@ void ResourceManager::init() {
 	});
 
 	// font should be always loaded to avoid lags when loading later
-	getBitmapFont(ResourceID::BitmapFont_default);
+	getBitmapFont(ResourceID::BitmapFont_default_8);
+	getBitmapFont(ResourceID::BitmapFont_default_12);
 
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration)) {
