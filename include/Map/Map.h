@@ -20,6 +20,8 @@ public:
 	bool collides(WorldCollisionQueryRecord& rec) const override;
 	// checks if the main char has reached a level entry. If no, nullptr, else the spawn point and id for that level
 	MapExitData* checkLevelEntry(const sf::FloatRect& boundingBox) const;
+	// updates the level entries conditions. called after each change of these conditions.
+	void updateLevelEntries();
 	void dispose() override;
 
 private:

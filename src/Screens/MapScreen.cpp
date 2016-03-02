@@ -1,5 +1,6 @@
 #include "Screens/MapScreen.h"
 #include "Screens/MenuScreen.h"
+#include "Map/NPC.h"
 
 #include "ScreenOverlay.h"
 
@@ -92,6 +93,16 @@ void MapScreen::load() {
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
+}
+
+void MapScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
+	WorldScreen::notifyConditionAdded(conditionType, condition);
+	m_currentMap.updateLevelEntries();
+	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
+		if (NPC* npc = dynamic_cast<NPC*>(it)) {
+			npc->reloadRoutine();
+		}
+	}
 }
 
 void MapScreen::execOnExit(const Screen* nextScreen) {

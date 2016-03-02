@@ -38,7 +38,6 @@ private:
 	std::string writeQuestProgressTargets(const CharacterCoreData& data) const;
 	std::string writeQuestProgressConditions(const CharacterCoreData& data) const;
 	std::string writeProgressConditions(const CharacterCoreData& data) const;
-	std::string writeNPCStates(const CharacterCoreData& data) const;
 	std::string writeSpellsLearned(const CharacterCoreData& data) const;
 	std::string writeModifiersLearned(const CharacterCoreData& data) const;
 

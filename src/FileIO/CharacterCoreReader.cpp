@@ -39,12 +39,6 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const {
 			return false;
 		}
 	}
-	for (auto& it : data.npcStates) {
-		if (it.first.empty()) {
-			g_logger->logError("CharacterCoreReader", "Error in savegame data : npc id empty");
-			return false;
-		}
-	}
 
 	return true;
 }
@@ -373,6 +367,19 @@ bool CharacterCoreReader::readProgressConditions(char* start, char* end, Charact
 	endData++;
 	startData = gotoNextChar(start, end, ':');
 	startData++;
+	string progressType(startData);
+	int count = countToNextChar(startData, endData, ',');
+	if (count == -1) {
+		return false;
+	}
+	progressType = progressType.substr(0, count);
+
+	if (data.conditionProgress.find(progressType) != data.conditionProgress.end()) {
+		g_logger->logError("CharacterCoreReader", "Duplicate condition progress type encountered: " + progressType);
+		return false;
+	}
+
+	startData = gotoNextChar(startData, endData, ',');
 	
 	std::set<string> conditions;
 	while (startData != NULL) {
@@ -391,7 +398,7 @@ bool CharacterCoreReader::readProgressConditions(char* start, char* end, Charact
 		startData++;
 	}
 
-	data.conditionProgress = conditions;
+	data.conditionProgress.insert({ progressType, conditions });
 	return true;
 }
 
@@ -433,28 +440,6 @@ bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, Chara
 	}
 
 	data.questTargetProgress.insert({ questID, targets });
-	return true;
-}
-
-bool CharacterCoreReader::readNPCStates(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	string npcID(startData);
-	int count = countToNextChar(startData, end, ',');
-	if (count == -1) {
-		return false;
-	}
-	npcID = npcID.substr(0, count);
-
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	NPCState state = static_cast<NPCState>(atoi(startData));
-	if (state <= NPCState::VOID || state >= NPCState::MAX) {
-		g_logger->logError("CharacterCoreReader", "NPC State not recognized: " + std::to_string(static_cast<int>(state)));
-		return false;
-	}
-	data.npcStates.insert({ npcID, state });
 	return true;
 }
 
@@ -791,11 +776,6 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, PROGRESS_CONDITION, strlen(PROGRESS_CONDITION)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(PROGRESS_CONDITION));
 			noError = readProgressConditions(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, NPC_STATE, strlen(NPC_STATE)) == 0) {
-			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(NPC_STATE));
-			noError = readNPCStates(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, GOLD, strlen(GOLD)) == 0) {

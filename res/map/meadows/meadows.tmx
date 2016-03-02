@@ -792,7 +792,7 @@
   </object>
   <object id="47" x="2308.5" y="876" width="39.5" height="66">
    <properties>
-    <property name="conditions" value="talked_to_edmond"/>
+    <property name="conditions" value="tutorial_started"/>
     <property name="level id" value="res/level/rockfall/rockfall.tmx"/>
     <property name="x" value="300"/>
     <property name="y" value="650"/>

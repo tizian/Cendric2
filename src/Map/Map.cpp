@@ -67,14 +67,21 @@ bool Map::collides(WorldCollisionQueryRecord& rec) const {
 	return rec.collides;
 }
 
+void Map::updateLevelEntries() {
+	for (auto& exit : m_mapData.mapExits) {
+		exit.conditionsFulfilled = true;
+		for (auto& condition : exit.conditions) {
+			if (!m_screen->getCharacterCore()->isConditionFulfilled("level_entry", condition)) {
+				exit.conditionsFulfilled = false;
+				break;
+			}
+		}
+	}
+}
+
 MapExitData* Map::checkLevelEntry(const sf::FloatRect& boundingBox) const {
 	for (auto& it : m_mapData.mapExits) {
-		if (boundingBox.intersects(it.mapExitRect)) {
-			for (auto& condition : it.conditions) {
-				if (!m_screen->getCharacterCore()->isConditionFulfilled(condition)) {
-					return nullptr;
-				}
-			}
+		if (it.conditionsFulfilled && boundingBox.intersects(it.mapExitRect)) {
 			MapExitData* exit = new MapExitData(it);
 			return exit;
 		}

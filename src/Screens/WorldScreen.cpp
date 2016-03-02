@@ -75,6 +75,10 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 	m_interface->reloadQuestLog();
 }
 
+void WorldScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
+	getCharacterCore()->setConditionFulfilled(conditionType, condition);
+}
+
 void WorldScreen::updateOverlayQueue() {
 	if (m_overlayQueue.empty()) return;
 	if (!getObjects(GameObjectType::_ScreenOverlay)->empty()) return;

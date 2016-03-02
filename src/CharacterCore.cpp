@@ -94,26 +94,11 @@ const Weapon* CharacterCore::getWeapon() {
 	return weapon;
 }
 
-NPCState CharacterCore::getNPCState(const std::string& id) const {
-	if (m_data.npcStates.find(id) != m_data.npcStates.end()) {
-		return m_data.npcStates.at(id);
-	}
-	return NPCState::Never_talked;
-}
-
 QuestState CharacterCore::getQuestState(const std::string& id) const {
 	if (m_data.questStates.find(id) != m_data.questStates.end()) {
 		return m_data.questStates.at(id);
 	}
 	return QuestState::VOID;
-}
-
-void CharacterCore::setNPCState(const std::string& id, NPCState state) {
-	if (m_data.npcStates.find(id) != m_data.npcStates.end()) {
-		m_data.npcStates[id] = state;
-		return;
-	}
-	m_data.npcStates.insert({ id, state });
 }
 
 void CharacterCore::setQuestState(const std::string& id, QuestState state) {
@@ -387,12 +372,19 @@ bool CharacterCore::isQuestConditionFulfilled(const std::string& questID, const 
 	return m_data.questConditionProgress.at(questID).find(condition) != m_data.questConditionProgress.at(questID).end();
 }
 
-void CharacterCore::setConditionFulfilled(const std::string& condition) {
-	m_data.conditionProgress.insert(condition);
+void CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
+	if (m_data.conditionProgress.find(conditionType) == m_data.conditionProgress.end()) {
+		m_data.conditionProgress.insert({ conditionType, std::set<std::string>() });
+	}
+	m_data.conditionProgress.at(conditionType).insert(condition);
 }
 
-bool CharacterCore::isConditionFulfilled(const std::string& condition) const {
-	return m_data.conditionProgress.find(condition) != m_data.conditionProgress.end();
+bool CharacterCore::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
+	if (m_data.conditionProgress.find(conditionType) == m_data.conditionProgress.end()) {
+		return false;
+	}
+	const std::set<std::string>& conditions = m_data.conditionProgress.at(conditionType);
+	return (conditions.find(condition) != conditions.end());
 }
 
 bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) {

@@ -42,7 +42,6 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeQuestProgressTargets(data);
 		savefile << writeQuestProgressConditions(data);
 		savefile << writeProgressConditions(data);
-		savefile << writeNPCStates(data);
 		savefile << writeMerchandStates(data);
 		savefile << writeSpellsLearned(data);
 		savefile << writeModifiersLearned(data);
@@ -307,36 +306,27 @@ std::string CharacterCoreWriter::writeQuestProgressConditions(const CharacterCor
 }
 
 std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData& data) const {
-	string progress = "# general conditions fulfilled:\n";
+	string progress = "# conditions of a certain type fulfilled:\n";
 	if (data.conditionProgress.empty()) {
 		return progress;
 	}
-	progress.append(string(PROGRESS_CONDITION));
-	progress.append(":");
 
-	for (auto& it : data.conditionProgress) {
-		progress.append(it);
+	for (auto& progressType : data.conditionProgress) {
+		progress.append(string(PROGRESS_CONDITION));
+		progress.append(":");
+		progress.append(progressType.first);
 		progress.append(",");
+
+		for (auto& condition : progressType.second) {
+			progress.append(condition);
+			progress.append(",");
+		}
+		// remove last comma
+		progress.pop_back();
+		progress.append("\n");
 	}
-	progress.pop_back();
-	progress.append("\n");
 
 	return progress;
-}
-
-std::string CharacterCoreWriter::writeNPCStates(const CharacterCoreData& data) const {
-	string npcs = "# npc states:\n";
-
-	for (auto& it : data.npcStates) {
-		string npc = string(NPC_STATE);
-		npc.append(":");
-		npc.append(it.first);
-		npc.append(",");
-		npc.append(to_string(static_cast<int>(it.second)));
-		npc.append("\n");
-		npcs.append(npc);
-	}
-	return npcs;
 }
 
 std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) const {

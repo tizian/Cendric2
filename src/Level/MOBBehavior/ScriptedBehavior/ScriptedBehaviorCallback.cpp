@@ -2,7 +2,7 @@
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "CharacterCore.h"
 #include "Level/Enemy.h"
-#include "Screen.h"
+#include "Screens/WorldScreen.h"
 
 using namespace std;
 using namespace luabridge;
@@ -64,12 +64,12 @@ void ScriptedBehaviorCallback::leaveLevel() {
 	m_enemy->setDisposed();
 }
 
-void ScriptedBehaviorCallback::addConditionProgress(const std::string& condition) {
-	if (condition.empty()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Condition cannot be empty.");
+void ScriptedBehaviorCallback::addConditionProgress(const std::string& conditionType, const std::string& condition) {
+	if (condition.empty() || conditionType.empty()) {
+		g_logger->logError("ScriptedBehaviorCallback", "Condition and condition type cannot be empty.");
 		return;
 	}
-	m_core->setConditionFulfilled(condition);
+	dynamic_cast<WorldScreen*>(m_enemy->getScreen())->notifyConditionAdded(conditionType, condition);
 }
 
 void ScriptedBehaviorCallback::setMovingTarget(int x, int y) {
@@ -108,12 +108,12 @@ bool ScriptedBehaviorCallback::isQuestComplete(const std::string& questID) const
 	return m_core->isQuestComplete(questID);
 }
 
-bool ScriptedBehaviorCallback::isConditionFulfilled(const std::string& condition) const {
-	if (condition.empty()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Condition cannot be empty.");
+bool ScriptedBehaviorCallback::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
+	if (condition.empty() || conditionType.empty()) {
+		g_logger->logError("ScriptedBehaviorCallback", "Condition and conditionType cannot be empty.");
 		return false;
 	}
-	return m_core->isConditionFulfilled(condition);
+	return m_core->isConditionFulfilled(conditionType, condition);
 }
 
 int ScriptedBehaviorCallback::getPosX() const {

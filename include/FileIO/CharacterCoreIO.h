@@ -29,7 +29,6 @@ protected:
 	const char* QUEST_PROGRESS_TARGET = "quest.progress.target";
 	const char* QUEST_PROGRESS_CONDITION = "quest.progress.condition";
 	const char* PROGRESS_CONDITION = "progress.condition";
-	const char* NPC_STATE = "npc.state";
 	const char* SPELL_LEARNED = "spell.learned";
 	const char* MODIFIER_LEARNED = "modifier.learned";
 

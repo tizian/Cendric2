@@ -1,9 +1,9 @@
 -- Dialogue for NPC "hunter_edmond"
 loadDialogue = function(DL)
-		if (not DL:isConditionFulfilled("tutorial_complete")) then
-			if (DL:isNPCState("hunter_edmond", "never_talked")) then
+		if (not DL:isConditionFulfilled("default","tutorial_complete")) then
+			if (not DL:isConditionFulfilled("hunter_edmond", "talked_to")) then
 				DL:createNPCNode(0, 1, "DL_Edmond_Hello") -- Hey you, stop! What are you doing here, so very alone? It's dangerous out here.
-				DL:changeNPCState("hunter_edmond", "passive")
+				DL:addConditionProgress("hunter_edmond", "talked_to")
 				DL:addNode()
 			
 				DL:setRoot(0)
@@ -44,7 +44,7 @@ loadDialogue = function(DL)
 				DL:addChoice(11, "DL_Choice_IWontHelp") --  No, that's your problem
 				DL:addNode()
 				
-			elseif (not DL:isConditionFulfilled("talked_to_edmond")) then
+			elseif (not DL:isConditionFulfilled("level_entry","tutorial_started")) then
 				
 				DL:createChoiceNode(50)
 				DL:addChoice(7, "DL_Choice_WhatCanWeDo") --  What can we do about those rocks?
@@ -68,8 +68,9 @@ loadDialogue = function(DL)
 
 						
 			DL:createNPCNode(12, -1, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable. Here, take my walking pole, equip it and follow me.
-			DL:addConditionProgress("talked_to_edmond")
+			DL:addConditionProgress("level_entry","tutorial_started")
 			DL:addItem("we_walkingpole", 1)
+			DL:equipItem("we_walkingpole")
 			DL:addHint("Inventory")
 			-- TODO screen overlay: equip
 			DL:addNode()

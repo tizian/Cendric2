@@ -26,9 +26,7 @@ public:
 	const Weapon* getWeapon();
 	// returns the item of id "id"
 	const Item* getItem(const std::string& id);
-	NPCState getNPCState(const std::string& id) const;
 	QuestState getQuestState(const std::string& id) const;
-	void setNPCState(const std::string& id, NPCState state);
 	void setQuestState(const std::string& id, QuestState state);
 	void setQuickslot(const std::string& item, int nr);
 	// loads a new game with a new core and default attributes
@@ -101,9 +99,9 @@ public:
 	// is a quest condition for a certain quest fulfilled?
 	bool isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const;
 	// set a condition fulfilled
-	void setConditionFulfilled(const std::string& condition);
+	void setConditionFulfilled(const std::string& conditionType, const std::string& condition);
 	// is a condition fulfilled?
-	bool isConditionFulfilled(const std::string& condition) const;
+	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	// is a enemy in a certain level dead?
 	bool isEnemyKilled(const std::string& levelID, int objectID);
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.

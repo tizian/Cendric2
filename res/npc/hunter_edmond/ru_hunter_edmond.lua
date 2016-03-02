@@ -3,7 +3,7 @@
 velocity = 50
 
 loadRoutine = function(R)
-		if (R:isConditionFulfilled("tutorial_complete")) then 
+		if (R:isConditionFulfilled("default","tutorial_complete")) then 
 			R:setTilePosition(57, 17)
 			R:setTalkingActive(true)
 			
@@ -18,7 +18,7 @@ loadRoutine = function(R)
 			R:goToTile(60,13)
 			R:goToTile(60,17)
 			
-		elseif (R:isConditionFulfilled("talked_to_edmond")) then 
+		elseif (R:isConditionFulfilled("level_entry","tutorial_started")) then 
 		
 			R:setTilePosition(44, 17)
 			R:setTalkingEnabled(false)

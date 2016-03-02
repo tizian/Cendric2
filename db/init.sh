@@ -8,6 +8,3 @@ do
 	SQLiteShell.exe game_data.db '.read '$f
 	echo 'read '$f
 done
-
-# game state
-SQLiteShell.exe game_data.db '.read init_game_state.sql'

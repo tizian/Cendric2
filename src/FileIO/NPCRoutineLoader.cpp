@@ -81,12 +81,12 @@ void NPCRoutineLoader::setTalkingEnabled(bool enabled) {
 	m_routine.getNPC()->setTalkingEnabled(enabled);
 }
 
-bool NPCRoutineLoader::isConditionFulfilled(const std::string& condition) const {
-	if (condition.empty()) {
-		g_logger->logError("NPCRoutineLoader", "Condition cannot be empty.");
+bool NPCRoutineLoader::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
+	if (condition.empty() || conditionType.empty()) {
+		g_logger->logError("NPCRoutineLoader", "Condition and condition type cannot be empty.");
 		return false;
 	}
-	return m_core->isConditionFulfilled(condition);
+	return m_core->isConditionFulfilled(conditionType, condition);
 }
 
 void NPCRoutineLoader::setTilePosition(float x, float y) {

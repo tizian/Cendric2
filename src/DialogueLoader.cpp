@@ -17,7 +17,6 @@ void DialogueLoader::loadDialogue() {
 	luaL_openlibs(L);
 	getGlobalNamespace(L)
 		.beginClass<DialogueLoader>("Dialogue")
-		.addFunction("isNPCState", &DialogueLoader::isNPCState)
 		.addFunction("isQuestState", &DialogueLoader::isQuestState)
 		.addFunction("isQuestComplete", &DialogueLoader::isQuestComplete)
 		.addFunction("isConditionFulfilled", &DialogueLoader::isConditionFulfilled)
@@ -26,12 +25,12 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
 		.addFunction("createTradeNode", &DialogueLoader::createTradeNode)
 		.addFunction("addChoice", &DialogueLoader::addChoice)
-		.addFunction("changeNPCState", &DialogueLoader::changeNPCState)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
 		.addFunction("addConditionProgress", &DialogueLoader::addConditionProgress)
 		.addFunction("addHint", &DialogueLoader::addHint)
 		.addFunction("addItem", &DialogueLoader::addItem)
+		.addFunction("equipItem", &DialogueLoader::equipItem)
 		.addFunction("removeItem", &DialogueLoader::removeItem)
 		.addFunction("addGold", &DialogueLoader::addGold)
 		.addFunction("removeGold", &DialogueLoader::removeGold)
@@ -64,24 +63,6 @@ void DialogueLoader::addChoice(int nextTag, const std::string& text) {
 		return;
 	}
 	m_currentNode->choices.push_back(std::pair<std::string, int>(text, nextTag));
-}
-
-void DialogueLoader::changeNPCState(const std::string& npcID, const std::string& state) {
-	if (m_currentNode == nullptr) {
-		g_logger->logError("DialogueLoader", "Cannot change state: no node created.");
-		return;
-	}
-	if (npcID.empty()) {
-		g_logger->logError("DialogueLoader", "Npc ID cannot be empty.");
-		return;
-	}
-	NPCState npcState = resolveNPCState(state);
-	if (npcState == NPCState::VOID) {
-		g_logger->logError("DialogueLoader", "Cannot change state: Npc state [" + state + "] does not exist.");
-		return;
-	}
-
-	m_currentNode->npcStates.insert({ npcID, npcState });
 }
 
 void DialogueLoader::changeQuestState(const std::string& questID, const std::string& state) {
@@ -118,16 +99,21 @@ void DialogueLoader::addQuestProgress(const std::string& questID, const std::str
 	m_currentNode->questProgress.insert({ questID, progress });
 }
 
-void DialogueLoader::addConditionProgress(const std::string& condition) {
+void DialogueLoader::addConditionProgress(const std::string& conditionType, const std::string& condition) {
 	if (m_currentNode == nullptr) {
 		g_logger->logError("DialogueLoader", "Cannot add condition progress: no node created.");
 		return;
 	}
-	if (condition.empty()) {
-		g_logger->logError("DialogueLoader", "Condition cannot be empty.");
+	if (condition.empty() || conditionType.empty()) {
+		g_logger->logError("DialogueLoader", "Condition and condition type cannot be empty.");
 		return;
 	}
-	m_currentNode->conditionProgress.insert(condition);
+	
+	auto& progress = m_currentNode->conditionProgress;
+	if (progress.find(conditionType) == progress.end()) {
+		progress.insert({ conditionType, std::set<std::string>() });
+	}
+	progress.at(conditionType).insert(condition);
 }
 
 void DialogueLoader::addHint(const std::string& hint) {
@@ -142,19 +128,6 @@ void DialogueLoader::addHint(const std::string& hint) {
 	m_currentNode->hints.insert(hint);
 }
 
-bool DialogueLoader::isNPCState(const std::string& npcID, const std::string& state) const {
-	NPCState npcState = resolveNPCState(state);
-	if (npcState == NPCState::VOID) {
-		g_logger->logError("DialogueLoader", "Npc State: [" + state + "] does not exist");
-		return false;
-	}
-	if (npcID.empty()) {
-		g_logger->logError("DialogueLoader", "Npc ID cannot be empty.");
-		return false;
-	}
-	return m_core->getNPCState(npcID) == npcState;
-}
-
 bool DialogueLoader::isQuestComplete(const std::string& questID) {
 	if (questID.empty()) {
 		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
@@ -163,12 +136,12 @@ bool DialogueLoader::isQuestComplete(const std::string& questID) {
 	return m_core->isQuestComplete(questID);
 }
 
-bool DialogueLoader::isConditionFulfilled(const std::string& condition) const {
-	if (condition.empty()) {
-		g_logger->logError("DialogueLoader", "Condition cannot be empty.");
+bool DialogueLoader::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
+	if (condition.empty() || conditionType.empty()) {
+		g_logger->logError("DialogueLoader", "Condition and condition type cannot be empty.");
 		return false;
 	}
-	return m_core->isConditionFulfilled(condition);
+	return m_core->isConditionFulfilled(conditionType, condition);
 }
 
 void DialogueLoader::addItem(const std::string& itemID, int amount) {
@@ -186,6 +159,23 @@ void DialogueLoader::addItem(const std::string& itemID, int amount) {
 	}
 	m_currentNode->itemChanges.insert({ itemID, amount });
 }
+
+void DialogueLoader::equipItem(const std::string& itemID) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot add equipment item: no node created.");
+		return;
+	}
+	if (itemID.empty()) {
+		g_logger->logError("DialogueLoader", "Item ID cannot be empty.");
+		return;
+	}
+	if (!m_currentNode->itemToEquip.empty()) {
+		g_logger->logError("DialogueLoader", "cannot equip to items in the same node.");
+		return;
+	}
+	m_currentNode->itemToEquip = itemID;
+}
+
 
 void DialogueLoader::removeItem(const std::string& itemID, int amount) {
 	if (m_currentNode == nullptr) {

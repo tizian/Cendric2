@@ -28,7 +28,6 @@ const std::string& Dialogue::getID() const {
 
 bool Dialogue::updateWindow() {
 	if (m_currentNode == nullptr) {
-		m_window->getNPC()->reloadRoutine();
 		return false;
 	}
 	if (m_currentNode->type == DialogueNodeType::Choice) {
@@ -45,9 +44,6 @@ bool Dialogue::updateWindow() {
 	}
 
 	if (m_currentNode != nullptr) {
-		for (auto& it : m_currentNode->npcStates) {
-			m_screen->getCharacterCore()->setNPCState(it.first, it.second);
-		}
 		for (auto& it : m_currentNode->questStates) {
 			m_screen->notifyQuestStateChanged(it.first, it.second);
 		}
@@ -58,13 +54,22 @@ bool Dialogue::updateWindow() {
 			m_screen->notifyQuestConditionFulfilled(it.first, it.second);
 		}
 		for (auto& it : m_currentNode->conditionProgress) {
-			m_screen->getCharacterCore()->setConditionFulfilled(it);
+			for (auto& condition : it.second) {
+				m_screen->notifyConditionAdded(it.first, condition);
+			}
 		}
 		for (auto& it : m_currentNode->itemChanges) {
 			m_screen->notifyItemChange(it.first, it.second);
 		}
 		for (auto& it : m_currentNode->hints) {
 			m_screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(it));
+		}
+		if (!m_currentNode->itemToEquip.empty()) {
+			auto bean = g_databaseManager->getItemBean(m_currentNode->itemToEquip);
+			if (bean.status == BeanStatus::Filled) {
+				m_screen->getCharacterCore()->equipItem(bean.item_id, bean.item_type);
+				m_screen->getInventory()->reload();
+			}
 		}
 	}
 	return true;

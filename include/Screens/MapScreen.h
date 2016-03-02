@@ -25,6 +25,7 @@ public:
 
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
+	void notifyConditionAdded(const std::string& conditionType, const std::string& condition) override;
 	// getter for the main char as it lays in the movable go vector
 	MapMainCharacter* getMainCharacter() const;
 

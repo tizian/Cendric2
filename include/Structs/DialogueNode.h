@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "Enums/NPCState.h"
 #include "Enums/QuestState.h"
 #include "Enums/FractionID.h"
 
@@ -25,13 +24,13 @@ struct DialogueNode {
 	// The next tag. It may be 0 to infinity, but -1 means that the dialogue ends after that node
 	int nextTag;
 	std::map<std::string, QuestState> questStates;
-	std::map<std::string, NPCState> npcStates;
 	std::map<std::string, std::string> questProgress;
 	std::map<FractionID, int> reputationProgress;
-	std::set<std::string> conditionProgress;
+	std::map<std::string, std::set<std::string>> conditionProgress;
 	std::set<std::string> hints;
 
 	// removes (amount < 0) or adds (amount > 0) items to cendrics inventory. The same goes for gold.
 	std::map<std::string, int> itemChanges;
+	std::string itemToEquip;
 	int goldChanges = 0;
 };

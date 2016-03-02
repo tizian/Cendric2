@@ -20,7 +20,7 @@ public:
 	// methods for questions about the current game (character core) state
 	bool isQuestState(const std::string& questID, const std::string& state) const;
 	bool isQuestComplete(const std::string& questID) const;
-	bool isConditionFulfilled(const std::string& condition) const;
+	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 
 	// methods for questions about the enemy's position
 	int getPosX() const;
@@ -41,7 +41,7 @@ public:
 	// adds a hint to the screen
 	void addHint(const std::string& hint);
 	// sets a certain condition fulfilled
-	void addConditionProgress(const std::string& condition);
+	void addConditionProgress(const std::string& conditionType, const std::string& condition);
 
 	bool isLoaded() const;
 

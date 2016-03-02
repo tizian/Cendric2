@@ -35,7 +35,6 @@ private:
 	bool readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const;
 	bool readProgressConditions(char* start, char* end, CharacterCoreData& data) const;
-	bool readNPCStates(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedSpells(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const;
 

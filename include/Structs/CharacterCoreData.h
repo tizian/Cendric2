@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <set>
 
-#include "Enums/NPCState.h"
 #include "Enums/QuestState.h"
 #include "Enums/SpellID.h"
 #include "Enums/SpellType.h"
@@ -32,12 +31,11 @@ struct CharacterCoreData {
 	std::map<std::string, std::set<int>> waypointsUnlocked;
 
 	// quest & npc progress
-	std::map<std::string, NPCState> npcStates;
+	std::map<std::string, std::set<std::string>> conditionProgress;
 	std::map<std::string, MerchantData> merchantStates;
 	std::map<std::string, QuestState> questStates;
 	std::map<std::string, std::map<std::string, int>> questTargetProgress;
 	std::map<std::string, std::set<std::string>> questConditionProgress;
-	std::set<std::string> conditionProgress;
 
 	// learning progress
 	std::map<SpellType, std::set<SpellID>> spellsLearned;
@@ -78,12 +76,11 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
-	std::map<std::string, NPCState>(),
+	std::map<std::string, std::set<std::string>>(),
 	std::map<std::string, MerchantData>(),
 	std::map<std::string, QuestState>(),
 	std::map<std::string, std::map<std::string, int>>(),
 	std::map<std::string, std::set<std::string>>(),
-	std::set<std::string>(),
 	std::map<SpellType, std::set<SpellID>>(),
 	std::map<SpellModifierType, int>(),
 	ZERO_ATTRIBUTES,

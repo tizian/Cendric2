@@ -26,6 +26,8 @@ public:
 	void notifyQuestTargetKilled(const std::string& questID, const std::string& name);
 	// notify quest state changed -> change in core, display text and reload quest log
 	void notifyQuestStateChanged(const std::string& questID, QuestState state);
+	// notify condition added -> add to core, reload everything that needs a reload when conditions are added
+	virtual void notifyConditionAdded(const std::string& conditionType, const std::string& condition);
 	// getter for the inventory of the interface
 	Inventory* getInventory();
 

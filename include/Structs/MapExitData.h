@@ -8,4 +8,5 @@ struct MapExitData {
 	sf::Vector2f spawnPoint;
 	sf::FloatRect mapExitRect;
 	std::set<std::string> conditions;
+	bool conditionsFulfilled = false;
 };

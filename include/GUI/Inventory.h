@@ -36,6 +36,11 @@ public:
 	void startTrading(MerchantInterface* _interface);
 	void stopTrading();
 
+	// fully reloads the inventory text & items, depending on the core. Heavy operation! Better use notifyChange if only one item changed.
+	void reload();
+	// reloads the inventory gold text
+	void reloadGold();
+
 private:
 	CharacterCore* m_core;
 	LevelInterface* m_levelInterface = nullptr;
@@ -43,11 +48,6 @@ private:
 	MerchantInterface* m_merchantInterface = nullptr;
 	bool m_isVisible = false;
 	void init();
-
-	// reloads the inventory text & items, depending on the core
-	void reload();
-	// reloads the inventory gold text
-	void reloadGold();
 
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector
