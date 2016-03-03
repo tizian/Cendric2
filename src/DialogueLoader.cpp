@@ -77,12 +77,14 @@ void DialogueLoader::changeQuestState(const std::string& questID, const std::str
 		return;
 	}
 	QuestState questState = resolveQuestState(state);
-	if (questState == QuestState::VOID) {
+	if (questState == QuestState::VOID || questState == QuestState::MAX) {
 		g_logger->logError("DialogueLoader", "Cannot change state: Quest state [" + state + "] does not exist.");
 		return;
 	}
-
-	m_currentNode->questStates.insert({ questID, questState });
+	DialogeNodeContent content(DialogueNodeContentType::QuestStateChange);
+	content.firstStringAttribute = questID;
+	content.integerAttribute = static_cast<int>(questState);
+	m_currentNode->content.push_back(content);
 }
 
 void DialogueLoader::addQuestDescription(const std::string& questID, int descriptionID) {
@@ -98,11 +100,10 @@ void DialogueLoader::addQuestDescription(const std::string& questID, int descrip
 		g_logger->logError("DialogueLoader", "Description ID must be > 0");
 		return;
 	}
-	if (m_currentNode->questDescriptionProgress.find(questID) != m_currentNode->questDescriptionProgress.end()) {
-		g_logger->logError("DialogueLoader", "Cannot add more than one quest description per node and quest.");
-		return;
-	}
-	m_currentNode->questDescriptionProgress.insert({ questID, descriptionID });
+	DialogeNodeContent content(DialogueNodeContentType::QuestDescriptionProgress);
+	content.firstStringAttribute = questID;
+	content.integerAttribute = descriptionID;
+	m_currentNode->content.push_back(content);
 }
 
 void DialogueLoader::addQuestProgress(const std::string& questID, const std::string& progress) {
@@ -110,15 +111,14 @@ void DialogueLoader::addQuestProgress(const std::string& questID, const std::str
 		g_logger->logError("DialogueLoader", "Cannot add quest progress: no node created.");
 		return;
 	}
-	if (questID.empty()) {
-		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
+	if (questID.empty() || progress.empty()) {
+		g_logger->logError("DialogueLoader", "Quest ID and quest progress cannot be empty.");
 		return;
 	}
-	if (m_currentNode->questProgress.find(questID) != m_currentNode->questProgress.end()) {
-		g_logger->logError("DialogueLoader", "Cannot add more than one quest progress per node and quest.");
-		return;
-	}
-	m_currentNode->questProgress.insert({ questID, progress });
+	DialogeNodeContent content(DialogueNodeContentType::QuestConditionProgress);
+	content.firstStringAttribute = questID;
+	content.secondStringAttribute = progress;
+	m_currentNode->content.push_back(content);
 }
 
 void DialogueLoader::addConditionProgress(const std::string& conditionType, const std::string& condition) {
@@ -130,12 +130,10 @@ void DialogueLoader::addConditionProgress(const std::string& conditionType, cons
 		g_logger->logError("DialogueLoader", "Condition and condition type cannot be empty.");
 		return;
 	}
-	
-	auto& progress = m_currentNode->conditionProgress;
-	if (progress.find(conditionType) == progress.end()) {
-		progress.insert({ conditionType, std::set<std::string>() });
-	}
-	progress.at(conditionType).insert(condition);
+	DialogeNodeContent content(DialogueNodeContentType::ConditionProgress);
+	content.firstStringAttribute = conditionType;
+	content.secondStringAttribute = condition;
+	m_currentNode->content.push_back(content);
 }
 
 void DialogueLoader::addHint(const std::string& hint) {
@@ -147,7 +145,9 @@ void DialogueLoader::addHint(const std::string& hint) {
 		g_logger->logError("DialogueLoader", "Hint cannot be empty.");
 		return;
 	}
-	m_currentNode->hints.insert(hint);
+	DialogeNodeContent content(DialogueNodeContentType::Hint);
+	content.firstStringAttribute = hint;
+	m_currentNode->content.push_back(content);
 }
 
 bool DialogueLoader::isQuestComplete(const std::string& questID) {
@@ -187,7 +187,10 @@ void DialogueLoader::addItem(const std::string& itemID, int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	m_currentNode->itemChanges.insert({ itemID, amount });
+	DialogeNodeContent content(DialogueNodeContentType::ItemChange);
+	content.firstStringAttribute = itemID;
+	content.integerAttribute = amount;
+	m_currentNode->content.push_back(content);
 }
 
 void DialogueLoader::equipItem(const std::string& itemID) {
@@ -199,11 +202,9 @@ void DialogueLoader::equipItem(const std::string& itemID) {
 		g_logger->logError("DialogueLoader", "Item ID cannot be empty.");
 		return;
 	}
-	if (!m_currentNode->itemToEquip.empty()) {
-		g_logger->logError("DialogueLoader", "cannot equip to items in the same node.");
-		return;
-	}
-	m_currentNode->itemToEquip = itemID;
+	DialogeNodeContent content(DialogueNodeContentType::ItemEquip);
+	content.firstStringAttribute = itemID;
+	m_currentNode->content.push_back(content);
 }
 
 
@@ -220,7 +221,10 @@ void DialogueLoader::removeItem(const std::string& itemID, int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	m_currentNode->itemChanges.insert({ itemID, -amount });
+	DialogeNodeContent content(DialogueNodeContentType::ItemChange);
+	content.firstStringAttribute = itemID;
+	content.integerAttribute = -amount;
+	m_currentNode->content.push_back(content);
 }
 
 void DialogueLoader::addGold(int amount) {
@@ -232,7 +236,9 @@ void DialogueLoader::addGold(int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	m_currentNode->goldChanges = amount;
+	DialogeNodeContent content(DialogueNodeContentType::GoldChange);
+	content.integerAttribute = amount;
+	m_currentNode->content.push_back(content);
 }
 
 void DialogueLoader::removeGold(int amount) {
@@ -244,7 +250,9 @@ void DialogueLoader::removeGold(int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	m_currentNode->goldChanges = -amount;
+	DialogeNodeContent content(DialogueNodeContentType::GoldChange);
+	content.integerAttribute = -amount;
+	m_currentNode->content.push_back(content);
 }
 
 bool DialogueLoader::isQuestState(const std::string& questID, const std::string& state) const {

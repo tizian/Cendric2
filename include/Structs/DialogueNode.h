@@ -12,8 +12,35 @@ enum class DialogueNodeType {
 	Trade
 };
 
+enum class DialogueNodeContentType {
+	QuestStateChange,
+	QuestConditionProgress,
+	QuestDescriptionProgress,
+	ConditionProgress,
+	ReputationProgress,
+	ItemChange,
+	GoldChange,
+	ItemEquip,
+	Hint
+};
+
+// holds a part of the dialogue node content.
+// the dialogue node content type decides which of 
+// the attributes are used.
+struct DialogeNodeContent {
+	DialogeNodeContent(DialogueNodeContentType type_) : type(type_){};
+	DialogueNodeContentType type;
+	std::string firstStringAttribute;
+	std::string secondStringAttribute;
+	int integerAttribute;
+};
+
 struct DialogueNode {
+	// the dialogue tag
 	int tag;
+	// The next tag. It may be 0 to infinity, but -1 means that the dialogue ends after that node
+	int nextTag;
+	// dialogue node type
 	DialogueNodeType type;
 	// it is an empty string if this is a choice
 	std::string text;
@@ -21,17 +48,6 @@ struct DialogueNode {
 	std::vector<std::pair<std::string, int>> choices;
 	// this is empty if it is not a trade
 	std::string merchantID;
-	// The next tag. It may be 0 to infinity, but -1 means that the dialogue ends after that node
-	int nextTag;
-	std::map<std::string, QuestState> questStates;
-	std::map<std::string, std::string> questProgress;
-	std::map<FractionID, int> reputationProgress;
-	std::map<std::string, std::set<std::string>> conditionProgress;
-	std::map<std::string, int> questDescriptionProgress;
-	std::set<std::string> hints;
-
-	// removes (amount < 0) or adds (amount > 0) items to cendrics inventory. The same goes for gold.
-	std::map<std::string, int> itemChanges;
-	std::string itemToEquip;
-	int goldChanges = 0;
+	// the content of this node, may be 0-n elements
+	std::vector<DialogeNodeContent> content;
 };

@@ -45,37 +45,43 @@ bool Dialogue::updateWindow() {
 	}
 
 	if (m_currentNode != nullptr) {
-		for (auto& it : m_currentNode->questStates) {
-			m_screen->notifyQuestStateChanged(it.first, it.second);
-		}
-		if (m_currentNode->goldChanges != 0) {
-			m_screen->notifyItemChange("gold", m_currentNode->goldChanges);
-		}
-		for (auto& it : m_currentNode->questProgress) {
-			m_screen->notifyQuestConditionFulfilled(it.first, it.second);
-		}
-		for (auto& it : m_currentNode->questDescriptionProgress) {
-			m_screen->notifyQuestDescriptionAdded(it.first, it.second);
-		}
-		for (auto& it : m_currentNode->conditionProgress) {
-			for (auto& condition : it.second) {
-				m_screen->notifyConditionAdded(it.first, condition);
+		for (auto& content : m_currentNode->content) {
+			switch (content.type) {
+			case DialogueNodeContentType::ConditionProgress:
+				m_screen->notifyConditionAdded(content.firstStringAttribute, content.secondStringAttribute);
+				break;
+			case DialogueNodeContentType::GoldChange:
+				m_screen->notifyItemChange("gold", content.integerAttribute);
+				break;
+			case DialogueNodeContentType::ItemChange:
+				m_screen->notifyItemChange(content.firstStringAttribute, content.integerAttribute);
+				break;
+			case DialogueNodeContentType::Hint:
+				m_screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(content.firstStringAttribute));
+				break;
+			case DialogueNodeContentType::ItemEquip: {
+				auto bean = g_databaseManager->getItemBean(content.firstStringAttribute);
+				if (bean.status == BeanStatus::Filled) {
+					m_screen->getCharacterCore()->equipItem(bean.item_id, bean.item_type);
+					m_screen->getInventory()->reload();
+				}
+				break;
 			}
-		}
-		for (auto& it : m_currentNode->itemChanges) {
-			m_screen->notifyItemChange(it.first, it.second);
-		}
-		for (auto& it : m_currentNode->hints) {
-			m_screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(it));
-		}
-		if (!m_currentNode->itemToEquip.empty()) {
-			auto bean = g_databaseManager->getItemBean(m_currentNode->itemToEquip);
-			if (bean.status == BeanStatus::Filled) {
-				m_screen->getCharacterCore()->equipItem(bean.item_id, bean.item_type);
-				m_screen->getInventory()->reload();
+			case DialogueNodeContentType::QuestConditionProgress:
+				m_screen->notifyQuestConditionFulfilled(content.firstStringAttribute, content.secondStringAttribute);
+				break;
+			case DialogueNodeContentType::QuestDescriptionProgress:
+				m_screen->notifyQuestDescriptionAdded(content.firstStringAttribute, content.integerAttribute);
+				break;
+			case DialogueNodeContentType::QuestStateChange:
+				m_screen->notifyQuestStateChanged(content.firstStringAttribute, static_cast<QuestState>(content.integerAttribute));
+				break;
+			default:
+				break;
 			}
 		}
 	}
+		
 	return true;
 }
 
