@@ -297,7 +297,7 @@ void Enemy::onRightClick() {
 			// loot, create the correct items + gold in the players inventory.
 			m_mainChar->lootItems(m_lootableItems);
 			m_mainChar->addGold(m_lootableGold);
-			m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_objectID);
+			notifyLooted();
 			setDisposed();
 		}
 		else {
@@ -329,6 +329,10 @@ void Enemy::setDead() {
 	if (!m_isPersistent) {
 		notifyKilled();
 	}
+}
+
+void Enemy::notifyLooted() {
+	m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_objectID);
 }
 
 void Enemy::notifyKilled() {

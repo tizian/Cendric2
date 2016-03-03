@@ -361,6 +361,56 @@ bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, Ch
 	return true;
 }
 
+bool CharacterCoreReader::readQuestProgressDescription(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	endData++;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	string questID(startData);
+	int count = countToNextChar(startData, endData, ',');
+	if (count == -1) {
+		return false;
+	}
+	questID = questID.substr(0, count);
+
+	startData = gotoNextChar(startData, endData, ',');
+	startData++;
+
+	std::set<int> descriptions;
+	while (startData != NULL) {
+		std::string description(startData);
+		count = countToNextChar(startData, endData, ',');
+		if (count == -1) {
+			count = countToNextChar(startData, endData, '\n');
+			if (count == -1) {
+				return false;
+			}
+
+			description = description.substr(0, count);
+			int descriptionID = atoi(description.c_str());
+			if (descriptionID < 1) {
+				g_logger->logError("CharacterCoreReader", "Cannot insert quest description id:" + description);
+				return false;
+			}
+			descriptions.insert(descriptionID);
+			break;
+		}
+		description = description.substr(0, count);
+		int descriptionID = atoi(description.c_str());
+		if (descriptionID < 1) {
+			g_logger->logError("CharacterCoreReader", "Cannot insert quest description id:" + description);
+			return false;
+		}
+		descriptions.insert(descriptionID);
+		startData = gotoNextChar(startData, endData, ',');
+		startData++;
+	}
+
+	data.questDescriptionProgress.insert({ questID, descriptions });
+	return true;
+}
+
 bool CharacterCoreReader::readProgressConditions(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');
@@ -707,6 +757,8 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(DATE_SAVED));
 			noError = readSavegameDate(pos, end, data);
 			if (onlySaveGame) {
+				std::fclose(savFile);
+				delete[] charBuffer;
 				return noError;
 			}
 			pos = gotoNextChar(pos, end, '\n');
@@ -774,6 +826,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, QUEST_PROGRESS_CONDITION, strlen(QUEST_PROGRESS_CONDITION)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUEST_PROGRESS_CONDITION));
 			noError = readQuestProgressConditions(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, QUEST_PROGRESS_DESCRIPTION, strlen(QUEST_PROGRESS_DESCRIPTION)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(QUEST_PROGRESS_DESCRIPTION));
+			noError = readQuestProgressDescription(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, PROGRESS_CONDITION, strlen(PROGRESS_CONDITION)) == 0) {

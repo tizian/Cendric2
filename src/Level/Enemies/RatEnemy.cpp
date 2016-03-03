@@ -22,7 +22,7 @@ RatEnemy::RatEnemy(Level* level, Screen* screen) :
 }
 
 void RatEnemy::loadAttributes() {
-	m_attributes.setHealth(40);
+	m_attributes.setHealth(30);
 	m_attributes.resistancePhysical = 10;
 	m_attributes.calculateAttributes();
 }
@@ -31,7 +31,7 @@ void RatEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.damage = 2;
+	chopSpell.damage = 5;
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 
 	m_spellManager->addSpell(chopSpell);

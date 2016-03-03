@@ -12,7 +12,8 @@ void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold
 	if (gold != 0 || !loot.empty()) return;
 
 	loot.insert({ "fo_rawmeat", 1 });
-	loot.insert({ "fo_cheese", 1 });
+	if (rand() % 2 > 0)
+		loot.insert({ "mi_teeth", 1 });
 	gold = rand() % 4 + 1;
 }
 
@@ -32,13 +33,15 @@ void FireRatEnemy::loadAttributes() {
 
 void FireRatEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 15;
+	chopSpell.damage = 6;
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
-	fireBallSpell.damage = 10;
+	fireBallSpell.damage = 6;
+	fireBallSpell.damagePerSecond = 2;
+	fireBallSpell.duration = sf::seconds(2);
 	fireBallSpell.cooldown = sf::milliseconds(3000);
 	fireBallSpell.speed = 200.f;
 

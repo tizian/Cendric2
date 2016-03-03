@@ -121,8 +121,10 @@ ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questI
 	titleText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
 	questScreenOverlay->setTitleColor(state == QuestState::Completed ? sf::Color::Green : state == QuestState::Failed ? sf::Color::Red : sf::Color::Yellow);
 	questScreenOverlay->setTitleRaw(titleText);
+	questScreenOverlay->setTitleCharacterSize(32);
 
 	questScreenOverlay->setSubtitle(questID, "quest");
+	questScreenOverlay->setSubtitleCharacterSize(24);
 
 	return questScreenOverlay;
 }
@@ -158,6 +160,14 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 	}
 	else if (hintKey.compare("Journal") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Journal)) + " ");
+	}
+	else if (hintKey.compare("LeaveLevel") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
+	}
+	else if (hintKey.compare("Scout") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
+		hintText.append(g_textProvider->getText("And") + " ");
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
 	}
 	else {
 		hintText.clear();

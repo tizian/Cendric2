@@ -42,6 +42,7 @@ public:
 	void setDead() override;
 	void setScriptedBehavior(const std::string& luaPath);
 	void notifyKilled();
+	void notifyLooted();
 	// the enemy tries to move to this target as long as it is not reset.
 	void setMovingTarget(int x, int y);
 	// resets the moving target

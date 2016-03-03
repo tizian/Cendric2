@@ -20,6 +20,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isQuestState", &DialogueLoader::isQuestState)
 		.addFunction("isQuestComplete", &DialogueLoader::isQuestComplete)
 		.addFunction("isConditionFulfilled", &DialogueLoader::isConditionFulfilled)
+		.addFunction("isQuestConditionFulfilled", &DialogueLoader::isQuestConditionFulfilled)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
@@ -27,6 +28,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("addChoice", &DialogueLoader::addChoice)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
+		.addFunction("addQuestDescription", &DialogueLoader::addQuestDescription)
 		.addFunction("addConditionProgress", &DialogueLoader::addConditionProgress)
 		.addFunction("addHint", &DialogueLoader::addHint)
 		.addFunction("addItem", &DialogueLoader::addItem)
@@ -81,6 +83,26 @@ void DialogueLoader::changeQuestState(const std::string& questID, const std::str
 	}
 
 	m_currentNode->questStates.insert({ questID, questState });
+}
+
+void DialogueLoader::addQuestDescription(const std::string& questID, int descriptionID) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot add quest description: no node created.");
+		return;
+	}
+	if (questID.empty()) {
+		g_logger->logError("DialogueLoader", "Quest ID cannot be empty.");
+		return;
+	}
+	if (descriptionID < 1) {
+		g_logger->logError("DialogueLoader", "Description ID must be > 0");
+		return;
+	}
+	if (m_currentNode->questDescriptionProgress.find(questID) != m_currentNode->questDescriptionProgress.end()) {
+		g_logger->logError("DialogueLoader", "Cannot add more than one quest description per node and quest.");
+		return;
+	}
+	m_currentNode->questDescriptionProgress.insert({ questID, descriptionID });
 }
 
 void DialogueLoader::addQuestProgress(const std::string& questID, const std::string& progress) {
@@ -142,6 +164,14 @@ bool DialogueLoader::isConditionFulfilled(const std::string& conditionType, cons
 		return false;
 	}
 	return m_core->isConditionFulfilled(conditionType, condition);
+}
+
+bool DialogueLoader::isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const {
+	if (quest.empty() || condition.empty()) {
+		g_logger->logError("DialogueLoader", "Quest ID and condition cannot be empty.");
+		return false;
+	}
+	return m_core->isQuestConditionFulfilled(quest, condition);
 }
 
 void DialogueLoader::addItem(const std::string& itemID, int amount) {

@@ -37,10 +37,24 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	}
 
 	m_titleText.setString(g_textProvider->getText(data->title, "quest"));
-	m_descriptionText.setString(g_textProvider->getCroppedText(
+	std::string description = g_textProvider->getCroppedText(
 		data->title, "quest_desc",
 		GUIConstants::CHARACTER_SIZE_S,
-		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
+	
+
+	if (m_core->getData().questDescriptionProgress.find(questID) != m_core->getData().questDescriptionProgress.end()) {
+		const std::set<int>& unlockedDescriptions = m_core->getData().questDescriptionProgress.at(questID);
+		for (auto& it : unlockedDescriptions) {
+			description.append("\n\n");
+			description.append(g_textProvider->getCroppedText(
+				data->title, "quest_desc_" + std::to_string(it),
+				GUIConstants::CHARACTER_SIZE_S,
+				static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+		}
+	}
+
+	m_descriptionText.setString(description);
 
 	QuestState currentState = m_core->getQuestState(questID);
 	if (currentState == QuestState::Completed) {
@@ -99,7 +113,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		BitmapText conditionText;
 
 		std::string condition = "";
-		condition.append(g_textProvider->getText(it, "condition"));
+		condition.append(g_textProvider->getText(it, questID));
 		condition.append(": ");
 
 		if ((m_core->getQuestState(questID) == QuestState::Completed)

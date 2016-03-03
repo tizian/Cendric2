@@ -36,6 +36,7 @@ private:
 	bool readMerchandState(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const;
+	bool readQuestProgressDescription(char* start, char* end, CharacterCoreData& data) const;
 	bool readProgressConditions(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedSpells(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const;

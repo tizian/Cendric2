@@ -11,7 +11,7 @@ WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 }
 
 bool WalkingBehavior::doAIJump(bool onlyJump) {
-	if (m_enemy->isDead()) {
+	if (m_enemy->isDead() || m_movingDirectionX == 0) {
 		return false;
 	}
 	sf::FloatRect bb = *m_enemy->getBoundingBox();

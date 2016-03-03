@@ -41,6 +41,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeQuestStates(data);
 		savefile << writeQuestProgressTargets(data);
 		savefile << writeQuestProgressConditions(data);
+		savefile << writeQuestProgressDescription(data);
 		savefile << writeProgressConditions(data);
 		savefile << writeMerchandStates(data);
 		savefile << writeSpellsLearned(data);
@@ -298,6 +299,24 @@ std::string CharacterCoreWriter::writeQuestProgressConditions(const CharacterCor
 		for (auto& it2 : it.second) {
 			quest.append(",");
 			quest.append(it2);
+		}
+		quest.append("\n");
+		quests.append(quest);
+	}
+	return quests;
+}
+
+std::string CharacterCoreWriter::writeQuestProgressDescription(const CharacterCoreData& data) const {
+	string quests = "# quest descriptions unlocked:\n";
+
+	for (auto& it : data.questDescriptionProgress) {
+		if (it.second.empty()) continue;
+		string quest = string(QUEST_PROGRESS_DESCRIPTION);
+		quest.append(":");
+		quest.append(it.first);
+		for (auto& it2 : it.second) {
+			quest.append(",");
+			quest.append(std::to_string(it2));
 		}
 		quest.append("\n");
 		quests.append(quest);

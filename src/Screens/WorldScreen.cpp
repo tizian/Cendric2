@@ -75,6 +75,13 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 	m_interface->reloadQuestLog();
 }
 
+void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int descriptionID) {
+	getCharacterCore()->unlockQuestDescription(questID, descriptionID);
+	m_progressLog->addQuestDescriptionAdded(questID);
+	m_interface->reloadQuestLog();
+}
+
+
 void WorldScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
 	getCharacterCore()->setConditionFulfilled(conditionType, condition);
 }

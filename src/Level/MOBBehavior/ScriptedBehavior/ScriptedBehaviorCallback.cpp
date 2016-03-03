@@ -33,7 +33,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("getPosY", &ScriptedBehaviorCallback::getPosY)
 		.addFunction("say", &ScriptedBehaviorCallback::say)
 		.addFunction("wait", &ScriptedBehaviorCallback::wait)
-		.addFunction("setKilled", &ScriptedBehaviorCallback::setKilled)
+		.addFunction("setDisposed", &ScriptedBehaviorCallback::setDisposed)
 		.addFunction("leaveLevel", &ScriptedBehaviorCallback::leaveLevel)
 		.addFunction("addHint", &ScriptedBehaviorCallback::addHint)
 		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
@@ -56,8 +56,9 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 	return true;
 }
 
-void ScriptedBehaviorCallback::setKilled() {
+void ScriptedBehaviorCallback::setDisposed() {
 	m_enemy->notifyKilled();
+	m_enemy->notifyLooted();
 }
 
 void ScriptedBehaviorCallback::leaveLevel() {

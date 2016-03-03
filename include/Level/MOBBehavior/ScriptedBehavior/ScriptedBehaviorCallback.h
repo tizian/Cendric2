@@ -34,8 +34,8 @@ public:
 	void setMovingTarget(int x, int y);
 	// resets the moving target
 	void resetMovingTarget();
-	// sets the enemy "killed" so that it will never appear again in this level
-	void setKilled();
+	// sets the enemy "killed" and "looted" so that it will never appear again in this level
+	void setDisposed();
 	// leaves the level
 	void leaveLevel();
 	// adds a hint to the screen

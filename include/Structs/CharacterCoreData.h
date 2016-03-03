@@ -36,6 +36,7 @@ struct CharacterCoreData {
 	std::map<std::string, QuestState> questStates;
 	std::map<std::string, std::map<std::string, int>> questTargetProgress;
 	std::map<std::string, std::set<std::string>> questConditionProgress;
+	std::map<std::string, std::set<int>> questDescriptionProgress;
 
 	// learning progress
 	std::map<SpellType, std::set<SpellID>> spellsLearned;
@@ -81,6 +82,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, QuestState>(),
 	std::map<std::string, std::map<std::string, int>>(),
 	std::map<std::string, std::set<std::string>>(),
+	std::map<std::string, std::set<int>>(),
 	std::map<SpellType, std::set<SpellID>>(),
 	std::map<SpellModifierType, int>(),
 	ZERO_ATTRIBUTES,

@@ -1,0 +1,52 @@
+# time played, in seconds
+time.played:120
+savegame.name:tutorial_complete
+savegame.date:1456966611
+level.id:res/level/rockfall/rockfall.tmx
+level.position:300.000000,650.000000
+is.in.level:0
+map.id:res/map/meadows/meadows.tmx
+map.position:2858.261475,915.061646
+# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
+# damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
+# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
+attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
+gold:1
+# items in inventory:
+item.id:fo_apple,1
+item.id:fo_lesserhealingpotion,1
+item.id:fo_rawmeat,4
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+# equipment:
+equipped.back:
+equipped.body:
+equipped.head:
+equipped.neck:
+equipped.ring1:
+equipped.ring2:
+equipped.weapon:we_walkingpole
+# quickslot assignments:
+quickslot:1,
+quickslot:2,
+# enemies killed in level:
+enemies.killed:res/level/rockfall/rockfall.tmx,74,75,78
+# enemies looted in level:
+enemies.looted:res/level/rockfall/rockfall.tmx,74,75,78
+# items looted in level:
+items.looted:res/level/rockfall/rockfall.tmx,419,420,894
+# chests looted in level:
+items.looted:res/level/rockfall/rockfall.tmx
+# waypoints unlocked in map:
+waypoints.unlocked:res/map/meadows/meadows.tmx
+# quest states:
+quest.state:who_am_i,1
+# quest targets killed:
+# quest conditions fulfilled:
+# quest descriptions unlocked:
+# conditions of a certain type fulfilled:
+progress.condition:default,tutorial_complete
+progress.condition:hunter_edmond,talked_after_tutorial,talked_to
+progress.condition:level_entry,tutorial_started
+# merchand states:
+# spells learned:
+# modifiers learned:

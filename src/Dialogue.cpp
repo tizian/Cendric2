@@ -54,6 +54,9 @@ bool Dialogue::updateWindow() {
 		for (auto& it : m_currentNode->questProgress) {
 			m_screen->notifyQuestConditionFulfilled(it.first, it.second);
 		}
+		for (auto& it : m_currentNode->questDescriptionProgress) {
+			m_screen->notifyQuestDescriptionAdded(it.first, it.second);
+		}
 		for (auto& it : m_currentNode->conditionProgress) {
 			for (auto& condition : it.second) {
 				m_screen->notifyConditionAdded(it.first, condition);

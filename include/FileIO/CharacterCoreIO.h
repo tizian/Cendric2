@@ -28,6 +28,7 @@ protected:
 	const char* QUEST_STATE = "quest.state";
 	const char* QUEST_PROGRESS_TARGET = "quest.progress.target";
 	const char* QUEST_PROGRESS_CONDITION = "quest.progress.condition";
+	const char* QUEST_PROGRESS_DESCRIPTION = "quest.progress.description";
 	const char* PROGRESS_CONDITION = "progress.condition";
 	const char* SPELL_LEARNED = "spell.learned";
 	const char* MODIFIER_LEARNED = "modifier.learned";

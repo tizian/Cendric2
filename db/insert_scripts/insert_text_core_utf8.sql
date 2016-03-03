@@ -113,6 +113,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('MoveUp','Move
 INSERT INTO text (text_id, english, german, swiss_german) values ('Necromancy','Necromancy','Nekromantie','Nekromantie');
 INSERT INTO text (text_id, english, german, swiss_german) values ('New','New','Neu','Neu');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NewGame','New Game','Neues Spiel','Neus Spiel');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NewJournalEntry','New journal entry','Neuer Tagebucheintrag','Neue Tagebuechiitrag');
 INSERT INTO text (text_id, english, german, swiss_german) values ('No','No','Nein','Nai');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoQuicksaveExists','No quick save exists','Kein Schnelllade-Speicherstand existiert','Kein Schnelllade-Speicherstand existiert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!');

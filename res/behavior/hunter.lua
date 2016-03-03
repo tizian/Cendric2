@@ -5,11 +5,12 @@ update = function(B)
 		if (speechBubbleState == 5) then
 			B:leaveLevel()
 		elseif (speechBubbleState == 4 and B:getPosX() > 2650) then
-			B:say("IAmLeaving", 3)
+			B:say("IAmLeaving", 5)
 			B:setMovingTarget(2900, 0)
-			B:wait(3)
+			B:wait(5)
 			B:addConditionProgress("default","tutorial_complete")
-			B:setKilled()
+			B:addHint("LeaveLevel")
+			B:setDisposed()
 			speechBubbleState = speechBubbleState + 1
 		elseif (speechBubbleState == 3 and B:getPosX() > 2000) then
 			B:say("KillRats", 6)

@@ -244,7 +244,7 @@ GameObjectType QuestEntry::getConfiguredType() const {
 }
 
 void QuestEntry::deselect() {
-	m_name.setColor(CENDRIC_COLOR_LIGHT_GREY);
+	m_name.setColor(CENDRIC_COLOR_GREY);
 	m_isSelected = false;
 }
 

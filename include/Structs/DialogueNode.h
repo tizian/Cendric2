@@ -27,6 +27,7 @@ struct DialogueNode {
 	std::map<std::string, std::string> questProgress;
 	std::map<FractionID, int> reputationProgress;
 	std::map<std::string, std::set<std::string>> conditionProgress;
+	std::map<std::string, int> questDescriptionProgress;
 	std::set<std::string> hints;
 
 	// removes (amount < 0) or adds (amount > 0) items to cendrics inventory. The same goes for gold.

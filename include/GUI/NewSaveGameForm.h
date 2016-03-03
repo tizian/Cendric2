@@ -32,6 +32,9 @@ private:
 	Button* m_okButton;
 	Button* m_cancelButton;
 
+	std::function<void()> m_executeOnOk;
+	void nop() const {};
+
 	std::string m_savegameName;
 	BitmapText m_savegameNameText;
 };

@@ -379,6 +379,13 @@ void CharacterCore::setConditionFulfilled(const std::string& conditionType, cons
 	m_data.conditionProgress.at(conditionType).insert(condition);
 }
 
+void CharacterCore::unlockQuestDescription(const std::string& questID, int descriptionID) {
+	if (m_data.questDescriptionProgress.find(questID) == m_data.questDescriptionProgress.end()) {
+		m_data.questDescriptionProgress.insert({ questID, std::set<int>() });
+	}
+	m_data.questDescriptionProgress.at(questID).insert(descriptionID);
+}
+
 bool CharacterCore::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
 	if (m_data.conditionProgress.find(conditionType) == m_data.conditionProgress.end()) {
 		return false;

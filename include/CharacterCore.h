@@ -100,6 +100,8 @@ public:
 	bool isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const;
 	// set a condition fulfilled
 	void setConditionFulfilled(const std::string& conditionType, const std::string& condition);
+	// unlock a certain quest description
+	void unlockQuestDescription(const std::string& questID, int descriptionID);
 	// is a condition fulfilled?
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	// is a enemy in a certain level dead?

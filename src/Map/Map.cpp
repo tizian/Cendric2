@@ -32,6 +32,7 @@ void Map::loadAfterMainChar(Screen* screen) {
 	MapLoader loader;
 	loader.loadNpcs(m_mapData, screen, this);
 	m_screen = screen;
+	updateLevelEntries();
 }
 
 void Map::loadForRenderTexture(Screen* screen) {

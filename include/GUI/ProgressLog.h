@@ -21,6 +21,7 @@ public:
 	void addQuestConditionFullfilled(const std::string& questID, const std::string& condition);
 	void addQuestTargetKilled(const std::string& questID, const std::string& name);
 	void addQuestStateChanged(const std::string& questID, QuestState state);
+	void addQuestDescriptionAdded(const std::string& questID);
 
 private:
 	// a vector filled with texts (and their time to live) that log progress
@@ -31,7 +32,7 @@ private:
 	void calculatePositions();
 
 	// how long can a single entry live?
-	const sf::Time TIME_TO_LIVE = sf::seconds(2);
+	const sf::Time TIME_TO_LIVE = sf::seconds(3.f);
 	// start text offset from the top of the screen
 	const float YOFFSET = 20.f;
 	// text offset from the right of the screen

@@ -102,6 +102,17 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 	calculatePositions();
 }
 
+void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
+	BitmapText progress;
+	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	progress.setColor(sf::Color::Green);
+	std::string progressText = g_textProvider->getText(questID, "quest") + ": ";
+	progressText.append(g_textProvider->getText("NewJournalEntry"));
+	progress.setString(progressText);
+	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
+	calculatePositions();
+}
+
 void ProgressLog::calculatePositions() {
 	float yOffset = YOFFSET;
 	for (auto& it : m_logTexts) {

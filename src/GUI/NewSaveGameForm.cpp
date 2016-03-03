@@ -37,6 +37,8 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_savegameNameText.setPosition(sf::Vector2f(2 * DIST_FROM_BORDER, box.height - (buttonHeight + DIST_FROM_BORDER + 50)) + getPosition());
 
 	g_inputController->startReadingText();
+	
+	m_executeOnOk = std::bind(&NewSaveGameForm::nop, this);
 }
 
 NewSaveGameForm::~NewSaveGameForm() {
@@ -66,14 +68,17 @@ void NewSaveGameForm::update(const sf::Time& frameTime) {
 	m_okButton->update(frameTime);
 	m_cancelButton->update(frameTime);
 
-	if (m_cancelButton->isClicked() 
-		|| m_okButton->isClicked() || 
-		(m_okButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Confirm))) {
+	if (m_okButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
+		m_executeOnOk();
+		setDisposed();
+	}
+	if (m_cancelButton->isClicked() || m_okButton->isClicked())  {
 		setDisposed();
 	}
 }
 
 void NewSaveGameForm::setOnOkClicked(const std::function<void()>& agent) {
+	m_executeOnOk = agent;
 	m_okButton->setOnClick(agent);
 }
 

@@ -4,19 +4,26 @@ velocity = 50
 
 loadRoutine = function(R)
 		if (R:isConditionFulfilled("default","tutorial_complete")) then 
-			R:setTilePosition(57, 17)
-			R:setTalkingActive(true)
+		
+			if (R:isConditionFulfilled("hunter_edmond", "talked_after_tutorial")) then
+				R:setTilePosition(57, 17)
+
+				R:goToTile(57,17)
+				R:goToTile(65,17)
+				R:goToTile(65,14)
+				R:goToTile(66,14)
+				R:goToTile(66,12)
+				R:goToTile(61,12)
+				R:goToTile(61,13)
+				R:goToTile(60,13)
+				R:goToTile(60,17)
+			else 
 			
-			R:wait(3000)
-			R:goToTile(57,17)
-			R:goToTile(65,17)
-			R:goToTile(65,14)
-			R:goToTile(66,14)
-			R:goToTile(66,12)
-			R:goToTile(61,12)
-			R:goToTile(61,13)
-			R:goToTile(60,13)
-			R:goToTile(60,17)
+				R:setTilePosition(57, 17)
+				R:setLooped(false)
+				R:setTalkingActive(true)
+				
+			end
 			
 		elseif (R:isConditionFulfilled("level_entry","tutorial_started")) then 
 		
