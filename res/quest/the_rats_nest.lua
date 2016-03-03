@@ -5,6 +5,6 @@ title = "the_rats_nest"
 targets = 
 {
 	{"fire_rat", 2},
-	{"rat", 5}
+	{"rat", 4}
 }
 
