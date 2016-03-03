@@ -10,10 +10,10 @@ public:
 	Map();
 	~Map();
 
-	bool load(const std::string& id);
-	void loadAfterMainChar(Screen* screen);
+	bool load(const std::string& id) override;
+	void loadAfterMainChar(Screen* screen) override;
 	// loads lights. this happens AFTER everything else and is because of our nice RENDERTEXTURE PROBLEM >:(
-	void loadForRenderTexture(Screen* screen);
+	void loadForRenderTexture(Screen* screen) override;
 	void setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const override;
 	
 	// checks collision with the collidable grid of that map

@@ -44,8 +44,8 @@ float JumpingGhost::calculateJump() {
 
 			// got a collision! is it a good collision?
 			if (!m_record.evilTile && (
-				m_record.direction == CollisionDirection::Down && !m_aiRec.isFlippedGravity ||
-				m_record.direction == CollisionDirection::Up && m_aiRec.isFlippedGravity)) {
+				(m_record.direction == CollisionDirection::Down && !m_aiRec.isFlippedGravity) ||
+				(m_record.direction == CollisionDirection::Up && m_aiRec.isFlippedGravity))) {
 				landingPosY = m_record.savePosY;
 				// is this position feasible?
 				if (std::abs(landingPosY - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight - 5.f) {
@@ -164,8 +164,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 	}
 
-	if (!isMovingDown && nextBoundingBoxY.top < -bb.height ||
-		isMovingDown && nextBoundingBoxY.top > m_level->getWorldRect().top + m_level->getWorldRect().height) {
+	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
+		(isMovingDown && nextBoundingBoxY.top > m_level->getWorldRect().top + m_level->getWorldRect().height)) {
 		m_record.collides = true;
 		m_record.evilTile = true;
 		return;
