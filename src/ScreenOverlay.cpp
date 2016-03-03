@@ -104,9 +104,9 @@ void ScreenOverlay::setSubtitleColor(const sf::Color& color) {
 }
 
 void ScreenOverlay::repositionText() {
-	sf::FloatRect& titleBounds = m_title.getLocalBounds();
+	const sf::FloatRect& titleBounds = m_title.getLocalBounds();
 	m_title.setPosition(0.5f * (WINDOW_WIDTH - titleBounds.width), 0.3f * (WINDOW_HEIGHT - titleBounds.height));
-	sf::FloatRect& subtitleBounds = m_subtitle.getLocalBounds();
+	const sf::FloatRect& subtitleBounds = m_subtitle.getLocalBounds();
 	m_subtitle.setPosition(0.5f * (WINDOW_WIDTH - subtitleBounds.width), m_title.getPosition().y + titleBounds.height + subtitleBounds.height);
 }
 

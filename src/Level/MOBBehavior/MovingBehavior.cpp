@@ -229,8 +229,8 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 	if (std::abs(m_mob->getVelocity().y) > 0.f)
 		m_isGrounded = false;
 
-	if (!isMovingDown && nextBoundingBoxY.top < -bb.height ||
-		isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height) {
+	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
+		(isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height)) {
 		m_mob->setDead();
 	}
 
