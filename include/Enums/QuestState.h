@@ -10,8 +10,9 @@ enum class QuestState {
 };
 
 inline QuestState resolveQuestState(const std::string& state) {
+	if (state.compare("void") == 0) return QuestState::VOID;
 	if (state.compare("started") == 0) return QuestState::Started;
 	if (state.compare("completed") == 0) return QuestState::Completed;
 	if (state.compare("failed") == 0) return QuestState::Failed;
-	return QuestState::VOID;
+	return QuestState::MAX;
 }

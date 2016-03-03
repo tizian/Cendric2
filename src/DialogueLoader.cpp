@@ -249,7 +249,7 @@ void DialogueLoader::removeGold(int amount) {
 
 bool DialogueLoader::isQuestState(const std::string& questID, const std::string& state) const {
 	QuestState questState = resolveQuestState(state);
-	if (questState == QuestState::VOID) {
+	if (questState == QuestState::MAX) {
 		g_logger->logError("DialogueLoader", "Quest State: [" + state + "] does not exist");
 		return false;
 	}
