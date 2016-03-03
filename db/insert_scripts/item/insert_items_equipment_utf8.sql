@@ -55,15 +55,22 @@ INSERT INTO item_equipment (item_id, texture_path) values ('eq_huntershat', 'res
 -- Twilight T1 Head
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt1', 'eq_head', 100, 250, 30);
-INSERT INTO item_attribute (item_id, haste, critical, res_fire) values ('eq_head_twilightt1', 3, 3, 5);
+INSERT INTO item_attribute (item_id, haste, critical, res_fire) values ('eq_head_twilightt1', 3, 2, 5);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_twilightt1', 'res/assets/equipment/head/spritesheet_head_twilightt1.png');
 
--- Ring of lesser health
+-- Ruby Ring
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_ringoflesserhealth', 'eq_ring', 100, 50, 10);
-INSERT INTO item_attribute (item_id, max_health) values ('eq_ringoflesserhealth', 10);
-INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_ringoflesserhealth', -14, -40, 5, 5);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_ringoflesserhealth', 1, 200, 0, 50, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_rubyring', 'eq_ring', 100, 50, 30);
+INSERT INTO item_attribute (item_id, dmg_fire, critical) values ('eq_rubyring', 5, 2);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_rubyring', -14, -40, 5, 5);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_rubyring', 1, 200, 0, 50, 50);
+
+-- Iron Ring
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_ironring', 'eq_ring', 350, 100, 15);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical) values ('eq_ironring', 6, 2);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_ironring', -14, -40, 5, 5);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_ironring', 1, 300, 100, 50, 50);
 
 -- Eye of the moon
 

@@ -9,6 +9,7 @@
 #include "Beans/ItemWeaponSlotBean.h"
 #include "Beans/LevelitemBean.h"
 #include "Beans/LevelitemFrameBean.h"
+#include "Beans/LevelitemLightBean.h"
 #include "Beans/TextBean.h"
 
 DatabaseManager *g_databaseManager;
@@ -228,6 +229,43 @@ ItemEquipmentLightBean DatabaseManager::getItemEquipmentLightBean(const std::str
 		int cols = sqlite3_column_count(statement);
 		if (cols != 6) {
 			g_logger->logError("DatabaseManager::getItemEquipmentLightBean", "number of returned columns must be 6");
+			return bean;
+		}
+		int result = 0;
+		while (true) {
+			result = sqlite3_step(statement);
+
+			if (result == SQLITE_ROW) {
+				bean.item_id = std::string((char*)sqlite3_column_text(statement, 0));
+				bean.light_offset.x = static_cast<float>(sqlite3_column_int(statement, 1));
+				bean.light_offset.y = static_cast<float>(sqlite3_column_int(statement, 2));
+				bean.light_radius.x = static_cast<float>(sqlite3_column_int(statement, 3));
+				bean.light_radius.y = static_cast<float>(sqlite3_column_int(statement, 4));
+				bean.brightness = static_cast<float>(sqlite3_column_double(statement, 5));
+				bean.status = BeanStatus::Filled;
+			}
+			else {
+				break;
+			}
+		}
+
+		sqlite3_finalize(statement);
+	}
+
+	checkError();
+
+	return bean;
+}
+
+LevelitemLightBean DatabaseManager::getLevelitemLightBean(const std::string& item_id) const {
+	LevelitemLightBean bean;
+	sqlite3_stmt *statement;
+	std::string query = "SELECT * FROM levelitem_light WHERE item_id = '" + item_id + "';";
+
+	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
+		int cols = sqlite3_column_count(statement);
+		if (cols != 6) {
+			g_logger->logError("DatabaseManager::getLevelitemLightBean", "number of returned columns must be 6");
 			return bean;
 		}
 		int result = 0;

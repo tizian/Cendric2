@@ -25,6 +25,13 @@ void LevelItem::load(LevelMainCharacter* mainChar, const Item& item, const sf::V
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(item.getFrames().size() > 1);
 
+	if (item.isLevelitemLightedItem()) {
+		const LevelitemLightBean& lightBean = item.getLevelitemLightBean();
+		LightData lightData(LightData(lightBean.light_offset, lightBean.light_radius, lightBean.brightness));
+		LightObject* light = new LightObject(lightData);
+		setLightObject(light);
+	}
+
 	setPosition(position - getSpriteOffset());
 	setTooltipText(g_textProvider->getText(item.getID(), "item"));
 	setDebugBoundingBox(sf::Color::Green);
@@ -85,6 +92,30 @@ void LevelItem::update(const sf::Time& frameTime) {
 			m_tooltipTime = sf::Time::Zero;
 		}
 	}
+}
+
+void LevelItem::setPosition(const sf::Vector2f& position) {
+	AnimatedGameObject::setPosition(position);
+	if (m_lightObject != nullptr) {
+		m_lightObject->setPosition(position + m_lightObjectOffset);
+	}
+}
+
+void LevelItem::setLightObject(LightObject* lightObject) {
+	m_lightObject = lightObject;
+	m_lightObjectOffset = m_lightObject->getCenter();
+}
+
+void LevelItem::setDisposed() {
+	AnimatedGameObject::setDisposed();
+	if (m_lightObject != nullptr)
+		m_lightObject->setDisposed();
+}
+
+void LevelItem::setScreen(Screen* screen) {
+	AnimatedGameObject::setScreen(screen);
+	if (m_lightObject != nullptr)
+		screen->addObject(m_lightObject);
 }
 
 GameObjectType LevelItem::getConfiguredType() const {

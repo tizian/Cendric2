@@ -38,6 +38,14 @@ INSERT INTO item_food (item_id, food_duration_s) values ('fo_caveberry', 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_caveberry', 0, -30, 50, 70);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_caveberry', 1, 0, 0, 50, 100);
 
+-- Physalis
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_physalis', 'consumable', 200, 200, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_shadow, dmg_physical, dmg_light) values ('fo_physalis', -2, 7, 7, 7);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_physalis', 20);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_physalis', 0, -20, 50, 45);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_physalis', 1, 250, 0, 50, 100);
+
 -- Glowing Shroom
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_glowingshroom', 'consumable', 150, 50, 2);

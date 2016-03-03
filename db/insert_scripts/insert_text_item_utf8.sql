@@ -1,5 +1,6 @@
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_purpleback', 'item', 'Purple cape','Violetter Umhang','Violette Umhang');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_ringoflesserhealth', 'item', 'Small ruby ring','Kleiner Rubinring','Chliine Rubinring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubyring', 'item', 'Ruby Ring','Rubinring','Rubinring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_ironring', 'item', 'Iron Ring','Eisener Ring','Isering');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatblue', 'item', 'Blue wizardhat','Blauer Spitzhut','Blaue Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatgrey', 'item', 'Grey wizardhat','Grauer Spitzhut','Graue Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_bread', 'item', 'Bread','Brot','Brot');
@@ -17,6 +18,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_fur', 'item_desc', 'This fur is worth a lot on the market as these demonic cats are rarely spotted and hard to defeat.','Dieses Fell ist eine Menge wert auf dem Markt, da die dämonischen Katzen selten anzutreffen und schwierig zu besiegen sind.','Da Fell isch recht viel wert ufem Markt well die dämonische Chatze selte und schwierig z''besiege sind.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_teeth', 'item', 'Teeth','Zähne','Zää');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_teeth', 'item_desc', 'Small and pointy.','Klein und spitz.','Chlii und spitzig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_silverplate', 'item', 'Silver Plate','Silberner Teller','Silbrige Teller');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_silverplate', 'item_desc', 'I can see my reflection in the glossy surface.','Ich kann mich darin spiegeln.','Ich chan mich drin spiegle.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_candleholder', 'item', 'Candleholder','Kerzenleuchter','Cherzeständer');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_candleholder', 'item_desc', 'Made of silver, must be worth something.','Aus Silber gefertigt, kann man sicher gut verkaufen.','Us Silber gmacht, cha me sicher guet verkaufe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item', 'Pile of gargoyle dust','Häufchen von Gargoylestaub','Es Hüüfeli Gargoylestaub');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pityful pile of dust.','War einmal ein mächtiges Steimonster  und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item', 'Sealed Letter','Versiegelter Brief','Versiglete Brief');
@@ -33,13 +38,16 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_cheese', 'item_desc', 'Smelly.','Riecht nicht sonderlich gut.','Er müffelet echli.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item', 'Apple', 'Apfel', 'Öpfel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item_desc', 'Fresh and juicy.', 'Frisch und saftig.', 'Frisch und saftig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item', 'Physalis', 'Physalis', 'Physalis');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item_desc', 'Looks tasty.', 'Sieht lecker aus.', 'Gseht fein uus.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item_desc', 'It still glows...','Er leuchtet immer noch...','Er lüchtet immer na...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_goldengoblet', 'item_desc', 'A golden goblet, some merchants might pay a lot for this.','Ein goldener Pokal, manche Händler würden viel dafür bezahlen.','En goldige Pokal, gwüssi Händler zahled sicher vil defür.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item_desc', 'Heals wounds.','Heilt Wunden.','Heilt Wunde.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item_desc', 'Feels ice cold.','Fühlt sich eiskalt an.','So chalt we Iis.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_desc', 'Sealed.','Versiegelt.','Versiglet.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_purpleback', 'item_desc', 'Ugly cape for testing. Needs some shading. Won''t appear in the final version.','Hässlicher Umhang, nur für Testing. Wird vermutlich nicht in dem Endgame auftauchen und wird entfernt.','Boaey we chame nur sonen hässliche Umhang designe, gaht ja gar nid. Schomal was vo Schatte und so ghört? Alteeeee');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_ringoflesserhealth', 'item_desc', 'The small ruby sparkles','Der kleine Rubin funkelt','De chli Rubin funklet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubyring', 'item_desc', 'The small ruby sparkles','Der kleine Rubin funkelt','De chli Rubin funklet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_ironring', 'item_desc', 'Looks quite chunky.','Wirkt klobig.','Gseht recht klobig us.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_rustysword', 'item_desc', 'This sword has seen better days.','Das Schwert hat schon bessere Tage gesehen.','Da Schwert het glaub scho besseri Täg gse.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_water', 'item_desc', 'Fresh clear water.','Frisches klares Wasser.','Frischs klars Wasser.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatblue', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');

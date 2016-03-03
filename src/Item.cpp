@@ -19,6 +19,7 @@ void Item::initBeans(const std::string& itemID) {
 	m_itemFoodBean = g_databaseManager->getItemFoodBean(itemID);
 	m_levelItemBean = g_databaseManager->getLevelitemBean(itemID);
 	m_levelItemFrameBeans = g_databaseManager->getLevelitemFrameBeans(itemID);
+	m_levelitemLightBean = g_databaseManager->getLevelitemLightBean(itemID);
 	m_attributeData = ZERO_ATTRIBUTES;
 	m_attributeData.create(g_databaseManager->getItemAttributeBean(itemID));
 	m_itemWeaponBean = g_databaseManager->getItemWeaponBean(itemID);
@@ -68,6 +69,10 @@ const std::vector<LevelitemFrameBean>& Item::getFrames() const {
 	return m_levelItemFrameBeans;
 }
 
+const LevelitemLightBean& Item::getLevelitemLightBean() const {
+	return m_levelitemLightBean;
+}
+
 void Item::checkItem() {
 	if (m_itemBean.status == BeanStatus::Filled) {
 		m_isValid = true;
@@ -86,10 +91,13 @@ void Item::checkItem() {
 		m_itemBean.item_type == ItemType::Equipment_ring_1 || 
 		m_itemBean.item_type == ItemType::Equipment_ring_2 || 
 		m_itemBean.item_type == ItemType::Equipment_weapon)) {
-		m_isEquipmentItem = true;
+		m_isEquipment = true;
 	}
-	if (m_isEquipmentItem && m_itemEquipmentLightBean.status == BeanStatus::Filled) {
-		m_isLightedItem = true;
+	if (m_isEquipment && m_itemEquipmentLightBean.status == BeanStatus::Filled) {
+		m_isEquipmentLighted = true;
+	}
+	if (m_isLevelitem && m_levelitemLightBean.status == BeanStatus::Filled) {
+		m_isLevelitemLighted = true;
 	}
 	if (m_itemWeaponBean.status == BeanStatus::Filled) {
 		m_isWeapon = true;
@@ -113,9 +121,13 @@ bool Item::isLevelitem() const {
 }
 
 bool Item::isEquipmentItem() const {
-	return m_isEquipmentItem;
+	return m_isEquipment;
 }
 
-bool Item::isLightedItem() const {
-	return m_isLightedItem;
+bool Item::isLevelitemLightedItem() const {
+	return m_isLevelitemLighted;
+}
+
+bool Item::isEquipmentLightedItem() const {
+	return m_isEquipmentLighted;
 }

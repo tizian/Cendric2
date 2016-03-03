@@ -28,10 +28,13 @@ item.id:fo_healingherb,2
 item.id:fo_lesserhealingpotion,3
 item.id:fo_rawmeat,2
 item.id:fo_water,1
+item.id:fo_physalis,1
 item.id:mi_gargoyle_dust,1
 item.id:mi_goldengoblet,4
 item.id:mi_neko_fur,1
 item.id:mi_neko_teeth,1
+item.id:mi_candleholder,1
+item.id:mi_silverplate,1
 item.id:mi_teeth,1
 item.id:qe_rope,1
 item.id:we_icestaff,1
@@ -52,8 +55,8 @@ equipped.back:eq_back_necrot3
 equipped.body:eq_body_necrot3
 equipped.head:eq_head_twilightt1
 equipped.neck:eq_eyeofthemoon
-equipped.ring1:eq_ringoflesserhealth
-equipped.ring2:
+equipped.ring1:eq_rubyring
+equipped.ring2:eq_ironring
 equipped.weapon:we_jasonsglaive
 # quickslot assignments:
 quickslot:1,

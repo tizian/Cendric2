@@ -14,6 +14,7 @@
 #include "Beans/ItemWeaponSlotBean.h"
 #include "Beans/LevelitemBean.h"
 #include "Beans/LevelitemFrameBean.h"
+#include "Beans/LevelitemLightBean.h"
 
 // An item in cendrics / a npcs / a mobs inventory
 class Item {
@@ -34,10 +35,10 @@ public:
 	// getter for levelitem values
 	const LevelitemBean& getLevelitemBean() const;
 	const std::vector<LevelitemFrameBean>& getFrames() const;
+	const LevelitemLightBean& getLevelitemLightBean() const;
 
 	// getter for equipment values
 	const ItemEquipmentBean& getEquipmentBean() const;
-	// getter for light values
 	const ItemEquipmentLightBean& getEquipmentLightBean() const;
 
 	// returns whether this is a valid item
@@ -50,8 +51,10 @@ public:
 	bool isLevelitem() const;
 	// returns whether this item is an equipment item and it is valid
 	bool isEquipmentItem() const;
-	// returns whether this item has a light attached
-	bool isLightedItem() const;
+	// returns whether this equipment item has a light attached
+	bool isEquipmentLightedItem() const;
+	// returns whether this equipment item has a light attached
+	bool isLevelitemLightedItem() const;
 
 protected:
 	ItemBean m_itemBean;
@@ -60,6 +63,7 @@ protected:
 	ItemEquipmentLightBean m_itemEquipmentLightBean;
 	LevelitemBean m_levelItemBean;
 	std::vector<LevelitemFrameBean> m_levelItemFrameBeans;
+	LevelitemLightBean m_levelitemLightBean;
 	AttributeData m_attributeData;
 	ItemWeaponBean m_itemWeaponBean;
 	std::vector<ItemWeaponSlotBean> m_itemWeaponSlotBeans;
@@ -71,6 +75,7 @@ protected:
 	bool m_isConsumable = false;
 	bool m_isWeapon = false;
 	bool m_isLevelitem = false;
-	bool m_isEquipmentItem = false;
-	bool m_isLightedItem = false;
+	bool m_isLevelitemLighted = false;
+	bool m_isEquipment = false;
+	bool m_isEquipmentLighted = false;
 };

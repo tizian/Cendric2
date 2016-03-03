@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Item.h"
+#include "LightObject.h"
 
 #include "GUI/BitmapText.h"
 #include "Enums/ItemType.h"
@@ -24,6 +25,11 @@ public:
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 
+	void setLightObject(LightObject* lightObject);
+	void setScreen(Screen* screen) override;
+	void setPosition(const sf::Vector2f& position) override;
+	void setDisposed() override;
+
 	GameObjectType getConfiguredType() const override;
 
 	void setTooltipText(const std::string& tooltip);
@@ -31,6 +37,7 @@ public:
 
 private:
 	LevelMainCharacter* m_mainChar;
+	
 	// the item can only be picked up if the main char is in this range
 	const float PICKUP_RANGE = 100.f;
 	std::string m_itemID;
@@ -40,4 +47,7 @@ private:
 	ItemType m_itemType;
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;
+
+	LightObject* m_lightObject = nullptr;
+	sf::Vector2f m_lightObjectOffset;
 };

@@ -15,7 +15,7 @@ struct ItemWeaponBean;
 struct ItemWeaponSlotBean;
 struct LevelitemBean;
 struct LevelitemFrameBean;
-struct ItemEquipmentLightBean;
+struct LevelitemLightBean;
 
 typedef std::vector<std::vector<std::string>> ResultSet;
 
@@ -40,6 +40,7 @@ public:
 	LevelitemBean getLevelitemBean(const std::string& item_id) const;
 	LevelitemFrameBean getLevelitemFrameBean(const std::string& item_id, int frame_nr) const;
 	std::vector<LevelitemFrameBean> getLevelitemFrameBeans(const std::string& item_id) const;
+	LevelitemLightBean getLevelitemLightBean(const std::string& item_id) const;
 
 	bool itemExists(const std::string& item_id) const;
 

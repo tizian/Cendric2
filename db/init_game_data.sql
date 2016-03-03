@@ -10,6 +10,7 @@ PRAGMA encoding="UTF-8";
 PRAGMA foreign_keys = ON;
 
 DROP TABLE text;
+DROP TABLE levelitem_light;
 DROP TABLE levelitem_frame;
 DROP TABLE levelitem;
 DROP TABLE item_weapon_slot;
@@ -116,7 +117,7 @@ CREATE TABLE levelitem(
 	sprite_offset_top INTEGER NOT NULL DEFAULT 0,
 	bounding_box_width INTEGER NOT NULL DEFAULT 0,
 	bounding_box_height INTEGER NOT NULL DEFAULT 0,
-	frame_time_ms INTEGER NOT NULL DEFAULT 1000,
+	frame_time_ms INTEGER NOT NULL DEFAULT 100,
 	PRIMARY KEY (item_id),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 );
@@ -129,5 +130,16 @@ CREATE TABLE levelitem_frame(
 	frame_width INTEGER NOT NULL DEFAULT 0,
 	frame_height INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY (item_id, frame_nr ASC),
+	FOREIGN KEY(item_id) REFERENCES levelitem(item_id)
+);
+
+CREATE TABLE levelitem_light(
+	item_id VARCHAR(50) NOT NULL, 
+	light_offset_x INTEGER NOT NULL DEFAULT 0,
+	light_offset_y INTEGER NOT NULL DEFAULT 0,
+	light_radius_x INTEGER NOT NULL DEFAULT 0,
+	light_radius_y INTEGER NOT NULL DEFAULT 0,
+	brightness DOUBLE NOT NULL DEFAULT 1.0,
+	PRIMARY KEY (item_id),
 	FOREIGN KEY(item_id) REFERENCES levelitem(item_id)
 );
