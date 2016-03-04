@@ -20,22 +20,184 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Cooldown','Co
 INSERT INTO text (text_id, english, german, swiss_german) values ('CooldownReduction','Cooldown Reduction','Abklingzeitverringerung','Abklingziitverringering');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Count','Count','Anzahl','Aazahl');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Credits','Credits','Mitwirkende','Credits');
-INSERT INTO text (text_id, english, german, swiss_german) values ('CreditsText','Project Lead:
-   Isa
-Lead Effects and Simulation:
-   Tizian
+INSERT INTO text (text_id, english, german, swiss_german) values ('CreditsText',
+'		<<< Project Lead >>>
+				Isa
+		
+		<<< Game Design >>>
+				Isa
+			   Tizian
+			   
+		<<< Programming >>>
+				Isa
+			   Tizian
+			   
+ <<< Special Effects & Simulation >>>
+			   Tizian
+			   
+			<<< Art >>> 
+				Isa
+			   Tizian
+			   
+		<<< Concept Art >>> 
+				Isa
+			   Tizian
+			  Brigitte
+			   Martin
+			   Markus 
+			    Emi
+				
+		   <<< Story >>> 
+				Isa
+			   Tizian
+				Haab
+				
+	  <<< Level & Map Design >>> 
+				Isa
+		
 Placeholder Soundeffects for Fireball and Water Splash
-   Mike Koenig','Project Lead:
-   Isa
-Lead Effects and Simulation:
-   Tizian
+			by Mike Koenig
+				
+		       ---
+			   
+  Inspired by GOTHIC from Piranha Bytes
+  
+			   ---
+
+  Levels and Maps were made using the 
+			TILED MAP EDITOR
+			
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		THANKS FOR PLAYING!',
+'		<<< Project Lead >>>
+				Isa
+		
+		<<< Game Design >>>
+				Isa
+			   Tizian
+			   
+		<<< Programming >>>
+				Isa
+			   Tizian
+			   
+ <<< Special Effects & Simulation >>>
+			   Tizian
+			   
+			<<< Art >>> 
+				Isa
+			   Tizian
+			   
+		<<< Concept Art >>> 
+				Isa
+			   Tizian
+			  Brigitte
+			   Martin
+			   Markus 
+			    Emi
+				
+		   <<< Story >>> 
+				Isa
+			   Tizian
+				Haab
+				
+	  <<< Level & Map Design >>> 
+				Isa
+		
 Placeholder Soundeffects for Fireball and Water Splash
-   Mike Koenig','Project Lead:
-   Isa
-Lead Effects and Simulation:
-   Tizian
+			by Mike Koenig
+				
+		       ---
+			   
+  Inspired by GOTHIC from Piranha Bytes
+  
+			   ---
+
+  Levels and Maps were made using the 
+			TILED MAP EDITOR
+			
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		THANKS FOR PLAYING!',
+'		<<< Project Lead >>>
+				Isa
+		
+		<<< Game Design >>>
+				Isa
+			   Tizian
+			   
+		<<< Programming >>>
+				Isa
+			   Tizian
+			   
+ <<< Special Effects & Simulation >>>
+			   Tizian
+			   
+			<<< Art >>> 
+				Isa
+			   Tizian
+			   
+		<<< Concept Art >>> 
+				Isa
+			   Tizian
+			  Brigitte
+			   Martin
+			   Markus 
+			    Emi
+				
+		   <<< Story >>> 
+				Isa
+			   Tizian
+				Haab
+				
+	  <<< Level & Map Design >>> 
+				Isa
+		
 Placeholder Soundeffects for Fireball and Water Splash
-   Mike Koenig');
+			by Mike Koenig
+				
+		       ---
+			   
+  Inspired by GOTHIC from Piranha Bytes
+  
+			   ---
+
+  Levels and Maps were made using the 
+			TILED MAP EDITOR
+			
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		THANKS FOR PLAYING!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Critical','Critical','Kritisch','Kritisch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CriticalHitChance','Critical Hit Chance','Chance auf kritische Treffer','Chance uf kritischi Treffer');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Damage','Damage','Schaden','Schade');

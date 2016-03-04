@@ -3,6 +3,8 @@
 
 using namespace std;
 
+const float CREDITS_VELOCITY_Y = -40.f;
+
 CreditsScreen::CreditsScreen(CharacterCore* core) : Screen(core) {
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_credits)));
 }
@@ -13,13 +15,18 @@ void CreditsScreen::execUpdate(const sf::Time& frameTime) {
 		return;
 	}
 	updateObjects(GameObjectType::_Button, frameTime);
+
+	if (m_credits->getPosition().y + m_credits->getLocalBounds().height > WINDOW_HEIGHT / 2.f) {
+		m_credits->setPosition(m_credits->getPosition() + 
+			sf::Vector2f(0.f, CREDITS_VELOCITY_Y * frameTime.asSeconds()));
+	}
 }
 
 void CreditsScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(*m_credits);
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(*m_title);
-	renderTarget.draw(*m_credits);
 	renderObjects(GameObjectType::_Button, renderTarget);
 }
 
@@ -29,11 +36,11 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	m_title->setCharacterSize(50);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
 
-	int creditsWidth = 400;
+	int creditsLeft = 425;
 	int creditsCharSize = 12;
-	m_credits = new BitmapText(g_textProvider->getCroppedText("CreditsText", creditsCharSize, creditsWidth));
+	m_credits = new BitmapText(g_textProvider->getText("CreditsText"));
 	m_credits->setCharacterSize(creditsCharSize);
-	m_credits->setPosition(sf::Vector2f((WINDOW_WIDTH - creditsWidth) / 2.f, 150.f));
+	m_credits->setPosition(sf::Vector2f(creditsLeft, WINDOW_HEIGHT / 2.f));
 
 	// add buttons
 	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
