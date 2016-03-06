@@ -111,6 +111,8 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 
 		std::string logString = "Saved screenshot under \"" + file + "\".";
 		g_logger->logInfo("WorldScreen", logString);
+
+		setTooltipText("ScreenshotSaved", sf::Color::Green, true);
 	}
 }
 
