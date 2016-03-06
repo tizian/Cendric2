@@ -240,7 +240,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Hint','Hint',
 INSERT INTO text (text_id, english, german, swiss_german) values ('HolyPower','Holy Power','Heilige Kraft','Heiligi Chraft');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceDamage','Ice Damage','Eisschaden','Iisschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceResistance','Ice Resistance','Eisresistenz','Iisresistenz');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Interact','Interact','Interagieren','Interagiere');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Screenshot','Screenshot','Bildschirmfoto','Bildschirmfoti');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Inventory','Inventory','Inventar','Inventar');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IsLocked','Is locked!','Ist verschlossen!','Da isch abgschlosse!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Journal','Journal','Tagebuch','Tagebuech');
