@@ -7,6 +7,7 @@
 #include "Enums/EnumNames.h"
 
 class CharacterCore;
+class Item;
 
 // a small visual interface to show progress in a screen, such as 
 // item, gold or quest changes
@@ -17,6 +18,7 @@ public:
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& renderTarget);
 
+	void addPermanentItemProgress(const Item& item);
 	void addItemProgress(const std::string& itemID, int amount);
 	void addQuestConditionFullfilled(const std::string& questID, const std::string& condition);
 	void addQuestTargetKilled(const std::string& questID, const std::string& name);
@@ -32,7 +34,7 @@ private:
 	void calculatePositions();
 
 	// how long can a single entry live?
-	const sf::Time TIME_TO_LIVE = sf::seconds(3.f);
+	const sf::Time TIME_TO_LIVE = sf::seconds(4.f);
 	// start text offset from the top of the screen
 	const float YOFFSET = 20.f;
 	// text offset from the right of the screen

@@ -8,6 +8,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('BackToCheckpo
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToMenu','Back to menu','Zurück zum Menu','Zrugg zum Menu');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Cancel','Cancel','Abbrechen','Abbreche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotEquipInLevel','You cannot equip items inside a level!','Gegenstände können nicht in einem Level ausgerüstet werden!','Gegeständ chönd nid imne Level agleit werde!');
+INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumePermanentInLevel','You cannot consume permanent items inside a level!','Gegenstände mit permanenten Boni können nicht in einem Level verwendet werden!','Gegeständ mit permanente Boni chönd nid imne Level verbruucht werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CharacterInfo','Character Info','Charakter Info','Charakter Info');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CheckpointReached','Checkpoint reached','Kontrollpunkt erreicht','Checkpoint erreicht');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chop','Chop','Hauen','Haue');
@@ -16,6 +17,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Completed','C
 INSERT INTO text (text_id, english, german, swiss_german) values ('ConfigurationSaved','Configuration was saved.','Einstellungen wurden erfolgreich gespeichert. ','Iistellige sind erfolgriich gspeicheret.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Confirm','Confirm','Bestätigen','Bestätige');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Consumables','Consumables','Tränke und Nahrung','Tränk und Ässe');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Consumed','consumed:','verbraucht:','verbruucht:');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Cooldown','Cooldown','Abklingzeit','Abklingziit');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CooldownReduction','Cooldown Reduction','Abklingzeitverringerung','Abklingziitverringering');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Count','Count','Anzahl','Aazahl');
@@ -288,6 +290,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('OperationFail
 INSERT INTO text (text_id, english, german, swiss_german) values ('Options','Options','Einstellungen','Iistellige');
 INSERT INTO text (text_id, english, german, swiss_german) values ('OutOfRange','Out of range','Ich muss näher ran','Da isch z''wiit weg');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Pending','Pending','Ausstehend','Nanig erfüllt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Permanent','Permanent','Permanent','Permanent');
 INSERT INTO text (text_id, english, german, swiss_german) values ('PhysicalDamage','Physical Damage','Physischer Schaden','Physische Schade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('PressAnyKey','<?>','<?>','<?>');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Price','Price','Preis','Priis');

@@ -8,6 +8,8 @@
 #include "ResourceManager.h"
 #include "Enums/QuestState.h"
 
+class Item;
+
 /* A screen overlay that supports arbitrary text, split in title and subtitle and/or a texture */
 class ScreenOverlay : public virtual GameObject {
 public:
@@ -33,6 +35,7 @@ public:
 	static ScreenOverlay* createLocationScreenOverlay(const std::string& locationKey);
 	// returns nullptr if the configuration for display hints is false.
 	static ScreenOverlay* createHintScreenOverlay(const std::string& hintKey);
+	static ScreenOverlay* createPermanentItemScreenOverlay(const Item& item);
 
 private:
 	void load();

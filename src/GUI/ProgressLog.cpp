@@ -1,5 +1,6 @@
 #include "GUI/ProgressLog.h"
 #include "CharacterCore.h"
+#include "Item.h"
 
 ProgressLog::ProgressLog(const CharacterCore* core) : m_core(core) {
 }
@@ -35,6 +36,28 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	text.append(itemID.compare("gold") == 0 ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID, "item"));
 	progress.setString(text);
 	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
+	calculatePositions();
+}
+
+void ProgressLog::addPermanentItemProgress(const Item& item) {
+	BitmapText progress;
+	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	progress.setColor(sf::Color::Green);
+
+	std::string text = g_textProvider->getText(item.getID(), "item") + " ";
+	text.append(g_textProvider->getText("Consumed"));
+	progress.setString(text);
+
+	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
+
+	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	progress.setColor(sf::Color::White);
+	text.clear();
+	AttributeData::appendAttributes(text, item.getAttributes());
+	progress.setString(text);
+
+	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
+	
 	calculatePositions();
 }
 

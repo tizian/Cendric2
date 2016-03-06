@@ -34,7 +34,7 @@ loadDialogue = function(DL)
 	DL:createNPCNode(20, -1, "DL_Ingrid_TakesRoastedMeat") -- Perfect, thanks a lot. Boy, you look hungry. Take this stew as a reward, it will strengthen you.
 	DL:changeQuestState("roast_meat_for_ingrid", "completed")
 	DL:removeItem("fo_roastedmeat", 5)
-	DL:addItem("fo_physalis", 1)
+	DL:addItem("pe_ingridstew", 1)
 	DL:addNode()
 	
 	DL:createNPCNode(30, 31, "DL_Ingrid_IAmIngrid") -- I'm Ingrid, the cook of this humble village, responsible to feed all the hungry mouths here. And what brings you here? 

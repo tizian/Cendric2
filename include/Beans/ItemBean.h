@@ -44,6 +44,9 @@ struct ItemBean : DatabaseBean {
 		if (_item_type.compare("eq_ring") == 0) {
 			return ItemType::Equipment_ring_1;
 		}
+		if (_item_type.compare("permanent") == 0) {
+			return ItemType::Permanent;
+		}
 		
 		return ItemType::VOID;
 	}

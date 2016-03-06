@@ -416,6 +416,11 @@ void CharacterCore::setMerchantData(const std::string& merchantID, const Merchan
 	m_data.merchantStates[merchantID] = data;
 }
 
+void CharacterCore::addPermanentAttributes(const AttributeData& attributes) {
+	m_data.attributes.addBean(attributes);
+	reloadAttributes();
+}
+
 void CharacterCore::learnSpell(SpellID spellID) {
 	SpellType type = SpellData::getSpellData(spellID).spellType;
 	if (m_data.spellsLearned.find(type) == m_data.spellsLearned.end()) {

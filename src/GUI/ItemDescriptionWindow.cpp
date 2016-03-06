@@ -59,6 +59,16 @@ void ItemDescriptionWindow::load(const Item& item) {
 	m_descriptionText.setString(g_textProvider->getCroppedText(item.getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
 	string stats = "\n";
+
+	if (item.getType() == ItemType::Permanent) {
+		m_statsText.setColor(sf::Color::Green);
+		stats.append(g_textProvider->getText("Permanent"));
+		stats.append("\n\n");
+	}
+	else {
+		m_statsText.setColor(sf::Color::White);
+	}
+
 	const AttributeData& attr = item.getAttributes();
 	AttributeData::appendAttributes(stats, attr);
 	stats.append("\n");

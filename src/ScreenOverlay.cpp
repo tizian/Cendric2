@@ -1,6 +1,7 @@
 #include "ScreenOverlay.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
+#include "Item.h"
 
 ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : GameObject() {
 	m_activeTime = activeTime;
@@ -134,6 +135,26 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 
 	locationScreenOverlay->setTitle(locationKey, "location");
 	return locationScreenOverlay;
+}
+
+ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {
+	ScreenOverlay* itemScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+
+	itemScreenOverlay->setTitleColor(sf::Color::Green);
+	itemScreenOverlay->setTitleCharacterSize(24);
+
+	std::string title = g_textProvider->getText(item.getID(), "item") + " ";
+	title.append(g_textProvider->getText("Consumed"));
+
+	itemScreenOverlay->setTitleRaw(title);
+
+	itemScreenOverlay->setSubtitleCharacterSize(16);
+
+	std::string attributes = "";
+	AttributeData::appendAttributes(attributes, item.getAttributes());
+	itemScreenOverlay->setSubtitleRaw(attributes);
+
+	return itemScreenOverlay;
 }
 
 ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey) {

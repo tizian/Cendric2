@@ -68,6 +68,8 @@ public:
 	// tries to add a modifier of type "type" to weapon slot nr "slotNr" into the modifier slot with nr "modifierNr"
 	// it uses "force" for that 
 	void addModifier(const SpellModifier& modifier, int slotNr, int modifierNr);
+	// adds permanent (!) attributes to the core.
+	void addPermanentAttributes(const AttributeData& attributes);
 	// getter for core part
 	const CharacterCoreData& getData() const;
 	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level

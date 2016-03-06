@@ -1,4 +1,5 @@
 #include "Screens/WorldScreen.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -49,6 +50,15 @@ WorldScreen::~WorldScreen() {
 	delete m_progressLog;
 }
 
+void WorldScreen::notifyPermanentItemConsumed(const Item& item) {
+	getCharacterCore()->addPermanentAttributes(item.getAttributes());
+	
+	addScreenOverlay(ScreenOverlay::createPermanentItemScreenOverlay(item));
+	m_progressLog->addPermanentItemProgress(item);
+	notifyItemChange(item.getID(), -1);
+	m_interface->reloadCharacterInfo();
+}
+
 void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	getCharacterCore()->notifyItemChange(itemID, amount);
 	m_progressLog->addItemProgress(itemID, amount);
@@ -80,7 +90,6 @@ void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int de
 	m_progressLog->addQuestDescriptionAdded(questID);
 	m_interface->reloadQuestLog();
 }
-
 
 void WorldScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
 	getCharacterCore()->setConditionFulfilled(conditionType, condition);

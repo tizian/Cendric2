@@ -22,6 +22,8 @@ public:
 	virtual void reloadInventory(const std::string& changeditemID);
 	// reloads the quest log 
 	virtual void reloadQuestLog();
+	// reload the character info
+	virtual void reloadCharacterInfo();
 
 	virtual void render(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);
@@ -41,7 +43,7 @@ protected:
 	// <<< CHARCTER INFO >>>
 	CharacterInfo* m_characterInfo = nullptr;
 	void updateCharacterInfo();
-
+	
 	// <<< SPELLBOOK >>>
 	Spellbook* m_spellbook = nullptr;
 	void updateSpellbook(const sf::Time& frameTime);

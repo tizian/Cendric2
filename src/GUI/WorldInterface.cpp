@@ -33,6 +33,10 @@ void WorldInterface::reloadQuestLog() {
 	m_questLog->reload();
 }
 
+void WorldInterface::reloadCharacterInfo() {
+	m_characterInfo->notifyChange();
+}
+
 void WorldInterface::updateCharacterInfo() {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {

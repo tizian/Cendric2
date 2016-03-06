@@ -45,6 +45,7 @@ void Inventory::init() {
 	// fill the helper map
 	m_typeMap.insert({
 		{ ItemType::Consumable, &m_consumableItems },
+		{ ItemType::Permanent, &m_consumableItems },
 		{ ItemType::Misc, &m_miscItems },
 		{ ItemType::Document, &m_documentItems },
 		{ ItemType::Quest, &m_questItems },
@@ -168,6 +169,8 @@ void Inventory::handleMapRightClick(InventorySlot* clicked) {
 	}
 	if (clicked->getItemType() == ItemType::Document)
 		showDocument(clicked->getItem());
+	else if (clicked->getItemType() == ItemType::Permanent)
+		dynamic_cast<WorldScreen*>(m_mapInterface->getScreen())->notifyPermanentItemConsumed(clicked->getItem());
 }
 
 void Inventory::handleLevelRightClick(InventorySlot* clicked) {
@@ -176,6 +179,8 @@ void Inventory::handleLevelRightClick(InventorySlot* clicked) {
 		m_levelInterface->consumeItem(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Document)
 		showDocument(clicked->getItem());
+	else if (clicked->getItemType() == ItemType::Permanent)
+		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", sf::Color::Red, true);
 }
 
 void Inventory::update(const sf::Time& frameTime) {
