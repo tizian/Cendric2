@@ -380,6 +380,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Yes','Yes','J
 INSERT INTO text (text_id, english, german, swiss_german) values ('YouDied','You died','Ihr seid tot','Du bisch verreckt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('VSync','Vsync','Vsync','Vsync');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GhostDamage','Ghost Damage','Geisterschaden','Geisterschade');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ScreenshotSaved','Screenshot saved','Screenshot gespeichert','Screenshot gspeicheret');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellTelekinesis','Telekinesis','Telekinese','Telekinese');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellTelekinesisDesc','What seemed to be far is now near.','Das, was unerreichbar schien, ist nun greifbar geworden.','Unerreichbar isch es Fremdwort worde.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellGhostForm','Ghost Form','Geistergestalt','Geistergstalt');
