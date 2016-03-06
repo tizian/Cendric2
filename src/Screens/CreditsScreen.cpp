@@ -36,7 +36,7 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	m_title->setCharacterSize(50);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
 
-	int creditsLeft = 425;
+	float creditsLeft = 425.f;
 	int creditsCharSize = 12;
 	m_credits = new BitmapText(g_textProvider->getText("CreditsText"));
 	m_credits->setCharacterSize(creditsCharSize);

@@ -169,6 +169,9 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 		hintText.append(g_textProvider->getText("And") + " ");
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
 	}
+	else if (hintKey.compare("Map") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Map)) + " ");
+	}
 	else {
 		hintText.clear();
 	}

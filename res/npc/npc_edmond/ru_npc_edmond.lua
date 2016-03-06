@@ -5,7 +5,7 @@ velocity = 50
 loadRoutine = function(R)
 		if (R:isConditionFulfilled("default","tutorial_complete")) then 
 		
-			if (R:isConditionFulfilled("hunter_edmond", "talked_after_tutorial")) then
+			if (R:isConditionFulfilled("npc_edmond", "talked_after_tutorial")) then
 				R:setTilePosition(57, 17)
 
 				R:goToTile(57,17)

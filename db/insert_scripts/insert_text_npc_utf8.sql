@@ -1,1 +1,2 @@
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('hunter_edmond','npc','Edmond','Edmond','Edmond');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_edmond','npc','Edmond','Edmond','Edmond');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_ingrid','npc','Ingrid','Ingrid','Ingrid');

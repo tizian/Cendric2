@@ -1,9 +1,9 @@
--- Dialogue for NPC "hunter_edmond"
+-- Dialogue for NPC "npc_edmond"
 loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("default","tutorial_complete")) then
-			if (not DL:isConditionFulfilled("hunter_edmond", "talked_to")) then
+			if (not DL:isConditionFulfilled("npc_edmond", "talked_to")) then
 				DL:createNPCNode(0, 1, "DL_Edmond_Hello") -- Hey you, stop! What are you doing here, so very alone? It's dangerous out here.
-				DL:addConditionProgress("hunter_edmond", "talked_to")
+				DL:addConditionProgress("npc_edmond", "talked_to")
 				DL:addNode()
 			
 				DL:setRoot(0)
@@ -87,16 +87,16 @@ loadDialogue = function(DL)
 			if (DL:isQuestState("the_rats_nest", "started") and not DL:isQuestState("the_rats_nest", "completed")) then
 				DL:addChoice(30, "DL_Choice_AboutTheRats") -- About the rats...
 			end
-			if (not DL:isConditionFulfilled("hunter_edmond", "who_am_i")) then
+			if (not DL:isConditionFulfilled("npc_edmond", "who_am_i")) then
 				DL:addChoice(40, "DL_Choice_YouHaveNeverSeenMe") -- So, you said you have never seen me before? 
 			end
 			
 			DL:addChoice(-1, "DL_Choice_CU") --  See you later
 			DL:addNode()
 		
-			if (not DL:isConditionFulfilled("hunter_edmond", "talked_after_tutorial")) then 
+			if (not DL:isConditionFulfilled("npc_edmond", "talked_after_tutorial")) then 
 				DL:createNPCNode(1, 2, "DL_Edmond_WeDidIt") -- We did it, thank you. Now our way to the village is clear. But I don't have enough meat yet, so I can't come with you. 
-				DL:addConditionProgress("hunter_edmond", "talked_after_tutorial")
+				DL:addConditionProgress("npc_edmond", "talked_after_tutorial")
 				DL:addNode()
 				
 				DL:createNPCNode(2, 3, "DL_Edmond_CanYouBringMeat") -- Would you mind bringing these five pieces of raw meat to the cook in the village for me? Her name is Ingrid.  
@@ -170,7 +170,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 			
 			DL:createNPCNode(42, -1, "DL_Edmond_TheWiseWillHelpYou") -- That's strange. Maybe you hit your head or you've drunken too much recently? I think the village elder can help you with your problem. You'll find him in his house in the middle of the village.
-			DL:addConditionProgress("hunter_edmond", "who_am_i")
+			DL:addConditionProgress("npc_edmond", "who_am_i")
 			DL:addQuestDescription("who_am_i", 1)
 			DL:addNode()
 			
