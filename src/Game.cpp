@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "Misc/icon.h"
 
+sf::RenderWindow* g_renderWindow;
+
 Game::Game() {
 	reloadWindow();
 
@@ -11,6 +13,7 @@ Game::Game() {
 	m_cursor.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor));
 	
 	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
+	g_renderWindow = &m_mainWindow;
 	m_running = true;
 
 	if (g_resourceManager->getConfiguration().isDebugMode) {
