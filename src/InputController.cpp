@@ -215,7 +215,7 @@ bool InputController::isKeyPressed(sf::Keyboard::Key key) const {
 }
 
 bool InputController::isSelected() const {
-	return isKeyJustPressed(Key::Confirm) || isKeyJustPressed(Key::Interact) || isKeyJustPressed(Key::Jump);
+	return isKeyJustPressed(Key::Confirm) || isKeyJustPressed(Key::Jump);
 }
 
 bool InputController::isScrolledUp() const {

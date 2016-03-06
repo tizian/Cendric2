@@ -61,10 +61,6 @@ void CookingTile::onRightClick() {
 	}
 }
 
-void CookingTile::onInteractKey() {
-	onRightClick();
-}
-
 void CookingTile::onMouseOver() {
 	m_tooltipTime = sf::seconds(1);
 }

@@ -117,10 +117,6 @@ void NPC::onRightClick() {
 	}
 }
 
-void NPC::onInteractKey() {
-	onRightClick();
-}
-
 void NPC::renderAfterForeground(sf::RenderTarget &renderTarget) {
 	MovableGameObject::renderAfterForeground(renderTarget);
 	bool showTooltip = g_inputController->isKeyActive(Key::ToggleTooltips);

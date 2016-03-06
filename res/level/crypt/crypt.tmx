@@ -6,16 +6,16 @@
   <property name="name" value="Crypt"/>
   <property name="tilesetpath" value="res/level/crypt/tileset_level_crypt.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_ratcave" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
+ <tileset firstgid="1" name="tileset_level_ratcave" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529">
   <image source="../tilesets/tileset_level_ratcave.png" width="1200" height="1200"/>
  </tileset>
- <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
+  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="630" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="5" columns="5">
-  <image source="../tilesets/tileset_enemies.png" width="260" height="52"/>
+ <tileset firstgid="730" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10">
+  <image source="../tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="635" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="740" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
   <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="1">
    <properties>
@@ -106,7 +106,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,636,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,741,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -217,8 +217,8 @@
   <object id="3" x="363" y="406" width="69" height="135">
    <properties>
     <property name="map id" value="res/map/meadows/meadows.tmx"/>
-    <property name="x" value="4625"/>
-    <property name="y" value="1675"/>
+    <property name="x" value="3225"/>
+    <property name="y" value="1772"/>
    </properties>
   </object>
  </objectgroup>
@@ -234,6 +234,6 @@
   </object>
  </objectgroup>
  <objectgroup name="enemies">
-  <object id="6" gid="634" x="954" y="612" width="50" height="50"/>
+  <object id="6" gid="734" x="954" y="612" width="50" height="50"/>
  </objectgroup>
 </map>

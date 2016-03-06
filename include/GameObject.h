@@ -31,7 +31,6 @@ public:
 	virtual void onLeftClick();
 	virtual void onRightJustPressed();
 	virtual void onLeftJustPressed();
-	virtual void onInteractKey();
 
 	void setBoundingBox(const sf::FloatRect& rect);
 	virtual void setPosition(const sf::Vector2f& pos);

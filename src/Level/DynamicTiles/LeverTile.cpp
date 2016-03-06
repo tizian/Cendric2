@@ -58,11 +58,6 @@ void LeverTile::onRightClick() {
 	g_inputController->lockAction();
 }
 
-void LeverTile::onInteractKey() {
-	// it is made impossible for a game object to have onInteractKey and onRightClick called in the same game loop
-	onRightClick();
-}
-
 void LeverTile::onMouseOver() {
 	m_animatedSprite.setColor(sf::Color::Red);
 }

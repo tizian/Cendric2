@@ -18,7 +18,6 @@ public:
 	LevelItem() : AnimatedGameObject() {}
 	void load(LevelMainCharacter* mainChar, const Item& item, const sf::Vector2f& position);
 	void onRightClick() override;
-	void onInteractKey() override;
 	void onMouseOver() override;
 	void pickup();
 	void render(sf::RenderTarget& renderTarget) override;

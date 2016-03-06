@@ -17,7 +17,6 @@ public:
 	NPC(Map* map) : MapMovableGameObject(map) {}
 	void load(MapMainCharacter* mainChar, const NPCData& data);
 	void onMouseOver() override;
-	void onInteractKey() override;
 	void onRightClick() override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
