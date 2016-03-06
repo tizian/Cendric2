@@ -5,7 +5,7 @@ using namespace std;
 
 const std::set<Key> KeyBindingsScreen::UNMODIFIABLE_KEYS = {
 	Key::Escape,
-	Key::Confirm,
+	Key::Confirm
 };
 
 const std::set<sf::Keyboard::Key> KeyBindingsScreen::RESERVED_KEYS = {
@@ -128,6 +128,8 @@ void KeyBindingsScreen::reload() {
 
 	// keyboard mappings
 	for (auto& it : m_selectedKeys) {
+		if (it.first == Key::Screenshot) continue;	// TODO: Find better solution. No space left for this button at the moment.
+
 		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
 		keyText->setCharacterSize(16);
 		keyText->setPosition(sf::Vector2f(distFromLeft, distFromTop));

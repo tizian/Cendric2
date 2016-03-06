@@ -89,11 +89,11 @@ class InputController;
 class DatabaseManager;
 
 // extern objects
-extern DatabaseManager *g_databaseManager;
-extern ResourceManager *g_resourceManager;
-extern InputController *g_inputController;
-extern Logger *g_logger;
-extern TextProvider *g_textProvider;
-extern sf::RenderTexture *g_renderTexture;
+extern DatabaseManager* g_databaseManager;
+extern ResourceManager* g_resourceManager;
+extern InputController* g_inputController;
+extern Logger* g_logger;
+extern TextProvider* g_textProvider;
+extern sf::RenderWindow* g_renderWindow;
 
 

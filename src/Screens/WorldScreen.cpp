@@ -102,6 +102,16 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	updateOverlayQueue();
 	m_interface->update(frameTime);
 	m_progressLog->update(frameTime);
+
+	if (g_inputController->isKeyJustPressed(Key::Screenshot)) {
+		std::string file = "screenshots/" + to_string(time(nullptr)) + ".png";
+
+		sf::Image image = g_renderWindow->capture();
+		image.saveToFile(file);
+
+		std::string logString = "Saved screenshot under \"" + file + "\".";
+		g_logger->logInfo("WorldScreen", logString);
+	}
 }
 
 void WorldScreen::execOnExit(const Screen* nextScreen) {

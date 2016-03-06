@@ -13,8 +13,6 @@
 
 #endif
 
-sf::RenderTexture *g_renderTexture;
-
 int main(int argc, char* argv[]) {
 
 // show console window in windows only when debug mode is enabled.
@@ -34,8 +32,6 @@ int main(int argc, char* argv[]) {
 	g_textProvider->reload();
 	g_inputController = new InputController();
 	g_inputController->init();
-	g_renderTexture = new sf::RenderTexture();
-	g_renderTexture->create(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	Game* game = new Game();
 	game->run();
