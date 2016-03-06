@@ -13,7 +13,6 @@ public:
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
-	void onInteractKey() override;
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
 

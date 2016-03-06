@@ -198,10 +198,6 @@ void WaypointMarker::onLeftClick() {
 	onRightClick();
 }
 
-void WaypointMarker::onInteractKey() {
-	onRightClick();
-}
-
 GameObjectType WaypointMarker::getConfiguredType() const {
 	return GameObjectType::_Interface;
 }

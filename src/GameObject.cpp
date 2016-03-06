@@ -28,10 +28,7 @@ void GameObject::update(const sf::Time& frameTime) {
 		// if the inputcontroller has locked actions, skip these methods.
 		if (g_inputController->isActionLocked()) return;
 
-		if (g_inputController->isKeyJustPressed(Key::Interact)) {
-			onInteractKey();
-		}
-		else if (g_inputController->isRightClicked(&m_boundingBox, m_isInputInDefaultView)) {
+		if (g_inputController->isRightClicked(&m_boundingBox, m_isInputInDefaultView)) {
 			onRightClick();
 		}
 		else if (g_inputController->isRightJustPressed(&m_boundingBox, m_isInputInDefaultView)) {
@@ -79,10 +76,6 @@ const sf::FloatRect* GameObject::getBoundingBox() const {
 }
 
 void GameObject::onMouseOver() {
-	// nop
-}
-
-void GameObject::onInteractKey() {
 	// nop
 }
 

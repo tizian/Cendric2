@@ -78,10 +78,6 @@ void WaypointTile::onRightClick() {
 		));
 }
 
-void WaypointTile::onInteractKey() {
-	onRightClick();
-}
-
 void WaypointTile::setPosition(const sf::Vector2f& pos) {
 	if (m_lightObject != nullptr) m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	MapDynamicTile::setPosition(pos);

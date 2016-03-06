@@ -179,8 +179,6 @@ public:
 			return "Quicksave";
 		case Key::Journal:
 			return "Journal";
-		case Key::Interact:
-			return "Interact";
 		case Key::Confirm:
 			return "Confirm";
 		case Key::Right:

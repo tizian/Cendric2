@@ -20,7 +20,6 @@ public:
 	void onMouseOver() override;
 	void onRightClick() override;
 	void onLeftClick() override;
-	void onInteractKey() override;
 
 	void setPosition(const sf::Vector2f& position) override;
 	void loadAnimation();

@@ -12,7 +12,6 @@ public:
 	void loadAnimation(int skinNr) override;
 	void update(const sf::Time& frameTime) override;
 	void onMouseOver() override;
-	void onInteractKey() override;
 	void onRightClick() override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 
