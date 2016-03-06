@@ -2,6 +2,7 @@
 #include "GUI/BitmapFont.h"
 #include "ResourceManager.h"
 #include <iterator>
+#include <sstream>
 
 const char FIRST_CHAR = ' ';
 
@@ -51,25 +52,28 @@ BitmapText::BitmapText() {
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
 	m_characterSize = m_font->getGlyphSize().y;
 	m_lineSpacing = 0.5f;
+	m_alignment = TextAlignment::Left;
 }
 
-BitmapText::BitmapText(const std::string& string, const BitmapFont &font) {
+BitmapText::BitmapText(const std::string& string, const BitmapFont& font, TextAlignment alignment) {
 	m_font = &font;
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = transform(string);
 	m_color = sf::Color::White;
 	m_characterSize = font.getGlyphSize().y;
 	m_lineSpacing = 0.5f;
+	m_alignment = alignment;
 	init();
 }
 
-BitmapText::BitmapText(const std::string& string) {
+BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
 	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = transform(string);
 	m_color = sf::Color::White;
 	m_characterSize = m_font->getGlyphSize().y;
 	m_lineSpacing = 0.5f;
+	m_alignment = alignment;
 	init();
 }
 
@@ -87,16 +91,16 @@ void BitmapText::setFont(const BitmapFont& font) {
 	init();
 }
 
-const BitmapFont *BitmapText::getFont() const {
+const BitmapFont* BitmapText::getFont() const {
 	return m_font;
 }
 
-void BitmapText::setColor(const sf::Color &color) {
+void BitmapText::setColor(const sf::Color& color) {
 	m_color = color;
 	init();	// TODO: could only replace vertex color attributes instead of all vertex data
 }
 
-const sf::Color &BitmapText::getColor() const {
+const sf::Color& BitmapText::getColor() const {
 	return m_color;
 }
 
@@ -127,6 +131,15 @@ const float BitmapText::getLineSpacing() const {
 	return m_lineSpacing;
 }
 
+void BitmapText::setTextAlignment(TextAlignment alignment) {
+	m_alignment = alignment;
+	init();
+}
+
+const TextAlignment BitmapText::getTextAlignment() const {
+	return m_alignment;
+}
+
 sf::FloatRect BitmapText::getLocalBounds() const {
 	return m_bounds;
 }
@@ -135,15 +148,28 @@ sf::FloatRect BitmapText::getBounds() const {
 	return getTransform().transformRect(m_bounds);
 }
 
-void BitmapText::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void BitmapText::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = &m_font->getTexture();
 	target.draw(m_vertices, states);
 }
 
 void BitmapText::init() {
-	using std::cout;
-	using std::endl;
+	if (m_string == "") return;
+
+	std::vector<std::string> lines;
+	std::istringstream ss(m_string);
+	std::string line;
+	while (getline(ss, line, '\n')) {
+		lines.push_back(line);
+	}
+	size_t maxLineLength = 0;
+	for (size_t i = 0; i < lines.size(); ++i) {
+		size_t size = lines[i].size();
+		if (size > maxLineLength) {
+			maxLineLength = size;
+		}
+	}
 
 	m_vertices.clear();
 
@@ -157,7 +183,15 @@ void BitmapText::init() {
 
 	float curX = 0.f;
 	float curY = 0.f;
-
+	
+	int lineNumber = 0;
+	if (m_alignment == TextAlignment::Center) {
+		curX = 0.5f * (lines[lineNumber].size() - maxLineLength) * dx;
+	}
+	else if (m_alignment == TextAlignment::Right) {
+		curX = (lines[lineNumber].size() - maxLineLength) * dx;
+	}
+	
 	for (size_t i = 0; i < m_string.length(); ++i) {
 		unsigned char c = m_string.at(i);
 		if (c == '\t') {
@@ -166,7 +200,16 @@ void BitmapText::init() {
 		}
 		else if (c == '\n') {
 			curY += dy * (m_lineSpacing + 1.f);
+			lineNumber++;
 			curX = 0.f;
+			if (lineNumber < lines.size()) {
+				if (m_alignment == TextAlignment::Center) {
+					curX = 0.5f * (maxLineLength - lines[lineNumber].size()) * dx;
+				}
+				else if (m_alignment == TextAlignment::Right) {
+					curX = (maxLineLength - lines[lineNumber].size()) * dx;
+				}
+			}
 			continue;
 		}
 
@@ -187,5 +230,7 @@ void BitmapText::init() {
 		curX += dx;
 	}
 
-	m_bounds = m_vertices.getBounds();
+	float width = dx * maxLineLength;
+	float height = dy * (m_lineSpacing + 1.f) * lines.size() - m_lineSpacing * dy;
+	m_bounds = sf::FloatRect(0.f, 0.f, width, height);
 }

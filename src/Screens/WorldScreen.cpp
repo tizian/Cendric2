@@ -113,7 +113,11 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	m_progressLog->update(frameTime);
 
 	if (g_inputController->isKeyJustPressed(Key::Screenshot)) {
-		std::string file = "screenshots/" + to_string(time(nullptr)) + ".png";
+		char buff[20];
+		std::time_t t = time(nullptr);
+		strftime(buff, 20, "%Y-%m-%d %H-%M-%S", localtime(&t));
+
+		std::string file = "screenshots/" + string(buff) + ".png";
 
 		sf::Image image = g_renderWindow->capture();
 		image.saveToFile(file);

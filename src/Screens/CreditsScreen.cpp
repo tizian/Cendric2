@@ -34,13 +34,12 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("Credits"));
 	m_title->setCharacterSize(50);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
+	m_title->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_title->getLocalBounds().width), 50.f));
 
-	float creditsLeft = 425.f;
 	int creditsCharSize = 12;
-	m_credits = new BitmapText(g_textProvider->getText("CreditsText"));
+	m_credits = new BitmapText(g_textProvider->getText("CreditsText"), TextAlignment::Center);
 	m_credits->setCharacterSize(creditsCharSize);
-	m_credits->setPosition(sf::Vector2f(creditsLeft, WINDOW_HEIGHT / 2.f));
+	m_credits->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_credits->getLocalBounds().width), 0.5f * WINDOW_HEIGHT));
 
 	// add buttons
 	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
