@@ -33,6 +33,8 @@ void ResourceManager::init() {
 	{
 		{ ResourceID::BitmapFont_default_8, "res/fonts/default_bitmap_font_8.png" },
 		{ ResourceID::BitmapFont_default_12, "res/fonts/default_bitmap_font_12.png" },
+		{ ResourceID::BitmapFont_shadowed_8, "res/fonts/shadowed_bitmap_font_8.png" },
+		{ ResourceID::BitmapFont_shadowed_12, "res/fonts/shadowed_bitmap_font_12.png" },
 		{ ResourceID::Configuration, "config.ini" },
 		{ ResourceID::Save_folder, "saves/" },
 		{ ResourceID::Npc_folder, "res/npc/" },
@@ -133,9 +135,11 @@ void ResourceManager::init() {
 		{ ResourceID::Sound_tile_lever, "res/sound/sound_tile_lever.ogg" }
 	});
 
-	// font should be always loaded to avoid lags when loading later
+	// fonts should be always loaded to avoid lags when loading later
 	getBitmapFont(ResourceID::BitmapFont_default_8);
 	getBitmapFont(ResourceID::BitmapFont_default_12);
+	getBitmapFont(ResourceID::BitmapFont_shadowed_8);
+	getBitmapFont(ResourceID::BitmapFont_shadowed_12);
 
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration)) {

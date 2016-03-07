@@ -10,10 +10,15 @@ enum class TextAlignment {
 	Right
 };
 
+enum class TextStyle {
+	Default,
+	Shadowed
+};
+
 class BitmapText : public sf::Drawable, public::sf::Transformable {
 public:
 	BitmapText();
-	BitmapText(const std::string& string, const BitmapFont& font, TextAlignment alignment = TextAlignment::Left);
+	BitmapText(const std::string& string, TextStyle style, TextAlignment alignment = TextAlignment::Left);
 	BitmapText(const std::string& string, TextAlignment alignment = TextAlignment::Left);
 
 	void setString(const std::string& string);
@@ -32,7 +37,10 @@ public:
 	const float getLineSpacing() const;
 
 	void setTextAlignment(TextAlignment alignment);
-	const TextAlignment getTextAlignment() const;
+	TextAlignment getTextAlignment() const;
+
+	void setTextStyle(TextStyle style);
+	TextStyle getTextStyle() const;
 
 	sf::FloatRect getLocalBounds() const;
 	sf::FloatRect getBounds() const;
@@ -40,7 +48,9 @@ public:
 private:
 	void init();	// Set vertexArray data
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	static BitmapFont* getFont(TextStyle style, int characterSize);
 
+private:
 	std::string			m_string;
 	const BitmapFont*   m_font = nullptr;
 	int					m_characterSize;
@@ -49,4 +59,5 @@ private:
 	sf::VertexArray		m_vertices;
 	sf::FloatRect		m_bounds;
 	TextAlignment		m_alignment;
+	TextStyle			m_style;
 };

@@ -49,29 +49,30 @@ std::string transform(const std::string& str) {
 BitmapText::BitmapText() {
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_color = sf::Color::White;
-	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
-	m_characterSize = m_font->getGlyphSize().y;
+	m_style = TextStyle::Default;
+	m_characterSize = 8;
+	m_font = getFont(m_style, m_characterSize);
 	m_lineSpacing = 0.5f;
 	m_alignment = TextAlignment::Left;
 }
 
-BitmapText::BitmapText(const std::string& string, const BitmapFont& font, TextAlignment alignment) {
-	m_font = &font;
+BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment alignment) {
+	m_style = style;
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = transform(string);
 	m_color = sf::Color::White;
-	m_characterSize = font.getGlyphSize().y;
+	m_characterSize = 8;
 	m_lineSpacing = 0.5f;
 	m_alignment = alignment;
 	init();
 }
 
 BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
-	m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
+	m_style = TextStyle::Default;
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = transform(string);
 	m_color = sf::Color::White;
-	m_characterSize = m_font->getGlyphSize().y;
+	m_characterSize = 8;
 	m_lineSpacing = 0.5f;
 	m_alignment = alignment;
 	init();
@@ -105,15 +106,6 @@ const sf::Color& BitmapText::getColor() const {
 }
 
 void BitmapText::setCharacterSize(int size) {
-	if (size % 12 == 0) {
-		m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_12);
-	}
-	else {
-		if (m_characterSize % 8 != 0) {
-			g_logger->logWarning("BitmapText::setCharacterSize", "You should only use multiples of the bitmap glyph sizes (8 or 12) to avoid aliasing problems!");
-		}
-		m_font = g_resourceManager->getBitmapFont(ResourceID::BitmapFont_default_8);
-	}
 	m_characterSize = size;
 	init();
 }
@@ -136,8 +128,17 @@ void BitmapText::setTextAlignment(TextAlignment alignment) {
 	init();
 }
 
-const TextAlignment BitmapText::getTextAlignment() const {
+TextAlignment BitmapText::getTextAlignment() const {
 	return m_alignment;
+}
+
+void BitmapText::setTextStyle(TextStyle style) {
+	m_style = style;
+	init();
+}
+
+TextStyle BitmapText::getTextStyle() const {
+	return m_style;
 }
 
 sf::FloatRect BitmapText::getLocalBounds() const {
@@ -155,6 +156,7 @@ void BitmapText::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 void BitmapText::init() {
+	m_font = getFont(m_style, m_characterSize);
 	if (m_string == "") return;
 
 	std::vector<std::string> lines;
@@ -183,7 +185,7 @@ void BitmapText::init() {
 
 	float curX = 0.f;
 	float curY = 0.f;
-	
+
 	int lineNumber = 0;
 	if (m_alignment == TextAlignment::Center) {
 		curX = 0.5f * (lines[lineNumber].size() - maxLineLength) * dx;
@@ -191,7 +193,7 @@ void BitmapText::init() {
 	else if (m_alignment == TextAlignment::Right) {
 		curX = (lines[lineNumber].size() - maxLineLength) * dx;
 	}
-	
+
 	for (size_t i = 0; i < m_string.length(); ++i) {
 		unsigned char c = m_string.at(i);
 		if (c == '\t') {
@@ -233,4 +235,23 @@ void BitmapText::init() {
 	float width = dx * maxLineLength;
 	float height = dy * (m_lineSpacing + 1.f) * lines.size() - m_lineSpacing * dy;
 	m_bounds = sf::FloatRect(0.f, 0.f, width, height);
+}
+
+BitmapFont* BitmapText::getFont(TextStyle style, int characterSize) {
+	bool useEightFont = true;
+	if (characterSize % 12 == 0) {
+		useEightFont = false;
+	}
+	else if (characterSize % 8 != 0) {
+		g_logger->logWarning("BitmapText::getFont", "You should only use multiples of the bitmap glyph sizes (8 or 12) to avoid aliasing problems!");
+	}
+
+	switch (style) {
+	case TextStyle::Default:
+		return g_resourceManager->getBitmapFont(useEightFont ? ResourceID::BitmapFont_default_8 : ResourceID::BitmapFont_default_12);
+	case TextStyle::Shadowed:
+		return g_resourceManager->getBitmapFont(useEightFont ? ResourceID::BitmapFont_shadowed_8 : ResourceID::BitmapFont_shadowed_12);
+	default:
+		return nullptr;
+	}
 }

@@ -119,6 +119,7 @@ GameObjectType LevelItem::getConfiguredType() const {
 
 void LevelItem::setTooltipText(const std::string& tooltip) {
 	m_tooltipText = BitmapText(tooltip);
+	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);
 	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));

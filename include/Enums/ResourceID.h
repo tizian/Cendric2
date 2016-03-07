@@ -5,6 +5,8 @@ enum class ResourceID {
 
 	BitmapFont_default_8,
 	BitmapFont_default_12,
+	BitmapFont_shadowed_8,
+	BitmapFont_shadowed_12,
 	Configuration,
 	Quicksave,
 	Save_folder,

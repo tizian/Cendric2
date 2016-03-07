@@ -179,6 +179,7 @@ const NPCData& NPC::getNPCData() const {
 
 void NPC::setTooltipText(const std::string& tooltip) {
 	m_tooltipText = BitmapText(tooltip);
+	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);
 }

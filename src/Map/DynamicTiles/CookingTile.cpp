@@ -32,6 +32,7 @@ void CookingTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 
 	// init tooltip
+	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setString(g_textProvider->getText("Fireplace"));
 	m_tooltipText.setColor(sf::Color::White);
 	m_tooltipText.setCharacterSize(8);
