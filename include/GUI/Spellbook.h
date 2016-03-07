@@ -6,7 +6,7 @@
 #include "ResourceManager.h"
 #include "Window.h"
 #include "GUI/SpellSlot.h"
-#include "GUI/TexturedButton.h"
+#include "GUI/TexturedTabBar.h"
 #include "GUI/ModifierSlot.h"
 #include "GUI/GUIConstants.h"
 
@@ -50,7 +50,7 @@ private:
 	BitmapText m_selectedTabText;
 	std::vector<BitmapText> m_modifierTexts;
 
-	std::vector<std::pair<TexturedButton, SpellType>> m_tabs;
+	TexturedTabBar* m_tabBar;
 
 	std::vector<ModifierSlot> m_modifierSlots;
 	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_elementalSlots;
@@ -80,6 +80,6 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(50.f, 50.f);
+	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(55.f, 55.f);
 	const float MARGIN = 5.f;
 };

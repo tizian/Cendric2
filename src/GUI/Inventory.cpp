@@ -58,27 +58,18 @@ void Inventory::init() {
 		{ ItemType::Equipment_weapon, &m_equipmentItems },
 	});
 
-	// init buttons
-	TexturedButton button = TexturedButton(sf::FloatRect(0, 0, BUTTON_SIZE.x, BUTTON_SIZE.y));
-	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Equipment_weapon));
-	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Consumable));
-	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Document));
-	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Quest));
-	m_tabs.push_back(std::pair<TexturedButton, ItemType>(button, ItemType::Misc));
+	// tabbar
+	int nTabs = 5;
+	float width = nTabs * BUTTON_SIZE.x;
+	float height = BUTTON_SIZE.y;
+	float x = INVENTORY_LEFT + 0.5f * (INVENTORY_WIDTH - width);
+	float y = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
+
+	m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
 
 	int textureOffset = 0;
-	float xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET;
-	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
-	float buttonMargin = (INVENTORY_WIDTH - 5 * BUTTON_SIZE.x - 2 * GUIConstants::TEXT_OFFSET) / 4.f;
-
-	for (auto& it : m_tabs) {
-		it.first.setTexture(g_resourceManager->getTexture(ResourceID::Texture_inventorytabs), sf::IntRect(textureOffset, 0, 60, 35));
-		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
-		it.first.setBackgroundLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		it.first.setOrnamentLayerColor(CENDRIC_COLOR_DARK_PURPLE);
-		it.first.setMouseOverColor(CENDRIC_COLOR_LIGHT_PURPLE);
-		xOffset += BUTTON_SIZE.x + buttonMargin;
+	for (int i = 0; i < nTabs; ++i) {
+		m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_inventorytabs), sf::IntRect(textureOffset, 0, 60, 35));
 		textureOffset += 60;
 	}
 
@@ -94,6 +85,7 @@ Inventory::~Inventory() {
 	delete m_documentWindow;
 	delete m_equipment;
 	delete m_currentClone;
+	delete m_tabBar;
 	clearAllSlots();
 }
 
@@ -200,12 +192,27 @@ void Inventory::update(const sf::Time& frameTime) {
 		}
 	}
 
-	for (auto& it : m_tabs) {
-		it.first.update(frameTime);
-		if (it.first.isClicked() && m_currentTab != it.second) {
-			selectTab(it.second);
-			return;
-		}
+	m_tabBar->update(frameTime);
+	int activeIndex = m_tabBar->getActiveTabIndex();
+	ItemType type;
+	if (activeIndex == 0) {
+		type = ItemType::Equipment_weapon;
+	}
+	else if (activeIndex == 1) {
+		type = ItemType::Consumable;
+	}
+	else if (activeIndex == 2) {
+		type = ItemType::Document;
+	}
+	else if (activeIndex == 3) {
+		type = ItemType::Quest;
+	}
+	else if (activeIndex == 4) {
+		type = ItemType::Misc;
+	}
+
+	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != type) {
+		selectTab(type);
 	}
 
 	// update equipment part
@@ -352,9 +359,7 @@ void Inventory::render(sf::RenderTarget& target) {
 		// it.second.renderAfterForeground(target); // uncomment for debug box
 	}
 
-	for (auto& it : m_tabs) {
-		it.first.render(target);
-	}
+	m_tabBar->render(target);
 
 	m_descriptionWindow->render(target);
 	if (m_documentWindow != nullptr) {
@@ -436,15 +441,6 @@ void Inventory::selectTab(ItemType type) {
 		m_window->getPosition().x +
 		INVENTORY_WIDTH / 2 -
 		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
-	// color selected tab
-	for (auto& it : m_tabs) {
-		if (it.second == m_currentTab) {
-			it.first.setMainLayerColor(CENDRIC_COLOR_LIGHT_GREY);
-		}
-		else {
-			it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		}
-	}
 }
 
 void Inventory::reloadGold() {
