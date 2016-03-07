@@ -188,10 +188,10 @@ void BitmapText::init() {
 
 	int lineNumber = 0;
 	if (m_alignment == TextAlignment::Center) {
-		curX = 0.5f * (lines[lineNumber].size() - maxLineLength) * dx;
+		curX = 0.5f * (maxLineLength - lines[lineNumber].size()) * dx;
 	}
 	else if (m_alignment == TextAlignment::Right) {
-		curX = (lines[lineNumber].size() - maxLineLength) * dx;
+		curX = (maxLineLength - lines[lineNumber].size()) * dx;
 	}
 
 	for (size_t i = 0; i < m_string.length(); ++i) {
@@ -232,9 +232,7 @@ void BitmapText::init() {
 		curX += dx;
 	}
 
-	float width = dx * maxLineLength;
-	float height = dy * (m_lineSpacing + 1.f) * lines.size() - m_lineSpacing * dy;
-	m_bounds = sf::FloatRect(0.f, 0.f, width, height);
+	m_bounds = m_vertices.getBounds();
 }
 
 BitmapFont* BitmapText::getFont(TextStyle style, int characterSize) {
