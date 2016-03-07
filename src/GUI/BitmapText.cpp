@@ -157,7 +157,11 @@ void BitmapText::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 void BitmapText::init() {
 	m_font = getFont(m_style, m_characterSize);
-	if (m_string == "") return;
+	if (m_string == "") {
+		m_vertices.clear();
+		m_bounds = m_vertices.getBounds();
+		return;
+	}
 
 	std::vector<std::string> lines;
 	std::istringstream ss(m_string);
