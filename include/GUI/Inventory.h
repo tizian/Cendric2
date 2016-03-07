@@ -8,7 +8,7 @@
 #include "GUI/InventorySlot.h"
 #include "GUI/ItemDescriptionWindow.h"
 #include "GUI/DocumentDescriptionWindow.h"
-#include "GUI/TexturedButton.h"
+#include "GUI/TexturedTabBar.h"
 #include "GUI/InventoryEquipment.h"
 
 class LevelInterface;
@@ -58,7 +58,7 @@ private:
 	BitmapText m_goldText;
 	BitmapText m_selectedTabText;
 
-	std::vector<std::pair<TexturedButton, ItemType>> m_tabs;
+	TexturedTabBar* m_tabBar;
 
 	std::map<std::string, InventorySlot> m_consumableItems;
 	std::map<std::string, InventorySlot> m_equipmentItems;
@@ -104,7 +104,7 @@ private:
 
 	const int SLOT_COUNT_X = 5;
 	const int SLOT_COUNT_Y = 5;
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 35.f);
+	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 40.f);
 
 	const float MARGIN = 7.f;
 	const float INVENTORY_LEFT = GUIConstants::LEFT + MARGIN + InventoryEquipment::WIDTH;

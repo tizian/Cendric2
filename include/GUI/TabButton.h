@@ -48,7 +48,7 @@ public:
 	static const float BORDER_OFFSET;
 	static const float ALIGNMENT_OFFSET;
 
-private:
+protected:
 	bool m_isActive = false;
 	bool m_isMouseOver = false;
 	bool m_isPressed = false;

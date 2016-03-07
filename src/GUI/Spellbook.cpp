@@ -28,35 +28,25 @@ void Spellbook::init() {
 	m_selectedTabText.setColor(sf::Color::White);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	// init buttons
-	TexturedButton button = TexturedButton(sf::FloatRect(0, 0, BUTTON_SIZE.x, BUTTON_SIZE.y));
-	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_gems), sf::IntRect(50, 0, 50, 50));
-	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::VOID));
-	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_elemental), sf::IntRect(50, 50, 400, 400));
-	button.setTextureColor(CENDRIC_COLOR_ELEMENTAL);
-	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Elemental));
-	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_divine), sf::IntRect(50, 50, 400, 400));
-	button.setTextureColor(CENDRIC_COLOR_DIVINE);
-	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Divine));
-	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_illusion), sf::IntRect(50, 50, 400, 400));
-	button.setTextureColor(CENDRIC_COLOR_NECROMANCY);
-	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Necromancy));
-	button.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight), sf::IntRect(50, 50, 400, 400));
-	button.setTextureColor(CENDRIC_COLOR_TWILIGHT);
-	m_tabs.push_back(std::pair<TexturedButton, SpellType>(button, SpellType::Twilight));
+	// tabbar
+	int nTabs = 5;
+	float width = nTabs * BUTTON_SIZE.x;
+	float height = BUTTON_SIZE.y;
+	float x = GUIConstants::LEFT + 0.5f * (Spellbook::WIDTH - width);
+	float y = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
 
-	float buttonMargin = (WIDTH - 6 * BUTTON_SIZE.x - 2 * GUIConstants::TEXT_OFFSET) / 5.f;
-	float yOffset = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + MARGIN;
-	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET + (BUTTON_SIZE.x + buttonMargin) / 2.f;
+	m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
 
-	for (auto& it : m_tabs) {
-		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
-		it.first.setBackgroundLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		it.first.setOrnamentLayerColor(CENDRIC_COLOR_DARK_PURPLE);
-		it.first.setMouseOverColor(CENDRIC_COLOR_LIGHT_PURPLE);
-		xOffset += BUTTON_SIZE.x + buttonMargin;
-	}
+	m_tabBar->getTabButton(0)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_gems), sf::IntRect(50, 0, 50, 50));
+	m_tabBar->getTabButton(1)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_elemental), sf::IntRect(50, 50, 400, 400));
+	m_tabBar->getTabButton(1)->setTextureColor(CENDRIC_COLOR_ELEMENTAL);
+	m_tabBar->getTabButton(2)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_divine), sf::IntRect(50, 50, 400, 400));
+	m_tabBar->getTabButton(2)->setTextureColor(CENDRIC_COLOR_DIVINE);
+	m_tabBar->getTabButton(3)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_necromancy), sf::IntRect(50, 50, 400, 400));
+	m_tabBar->getTabButton(3)->setTextureColor(CENDRIC_COLOR_NECROMANCY);
+	m_tabBar->getTabButton(4)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight), sf::IntRect(50, 50, 400, 400));
+	m_tabBar->getTabButton(4)->setTextureColor(CENDRIC_COLOR_TWILIGHT);
+
 
 	// fill the helper map
 	m_typeMap.insert({
@@ -80,6 +70,7 @@ Spellbook::~Spellbook() {
 	delete m_weaponWindow;
 	delete m_currentModifierClone;
 	delete m_currentSpellClone;
+	delete m_tabBar;
 	clearAllSlots();
 }
 
@@ -97,12 +88,27 @@ void Spellbook::clearAllSlots() {
 void Spellbook::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	for (auto& it : m_tabs) {
-		it.first.update(frameTime);
-		if (it.first.isClicked() && m_currentTab != it.second) {
-			selectTab(it.second);
-			return;
-		}
+	m_tabBar->update(frameTime);
+	int activeIndex = m_tabBar->getActiveTabIndex();
+	SpellType type;
+	if (activeIndex == 0) {
+		type = SpellType::VOID;
+	}
+	else if (activeIndex == 1) {
+		type = SpellType::Elemental;
+	}
+	else if (activeIndex == 2) {
+		type = SpellType::Divine;
+	}
+	else if (activeIndex == 3) {
+		type = SpellType::Necromancy;
+	}
+	else if (activeIndex == 4) {
+		type = SpellType::Twilight;
+	}
+
+	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != type) {
+		selectTab(type);
 	}
 
 	// update weapon part
@@ -240,9 +246,7 @@ void Spellbook::render(sf::RenderTarget& target) {
 		}
 	}
 
-	for (auto& it : m_tabs) {
-		it.first.render(target);
-	}
+	m_tabBar->render(target);
 
 	m_weaponWindow->render(target);
 
@@ -288,15 +292,6 @@ void Spellbook::selectTab(SpellType type) {
 		m_window->getPosition().x +
 		WIDTH / 2 -
 		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
-	// color selected tab
-	for (auto& it : m_tabs) {
-		if (it.second == m_currentTab) {
-			it.first.setMainLayerColor(CENDRIC_COLOR_LIGHT_GREY);
-		}
-		else {
-			it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		}
-	}
 }
 
 void Spellbook::reload() {
