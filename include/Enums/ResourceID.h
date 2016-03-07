@@ -92,6 +92,8 @@ enum class ResourceID {
 	Texture_GUI_slot_spell_gem,
 	Texture_GUI_slot_highlight,
 	Texture_GUI_slot_buff,
+	Texture_GUI_tab_inactive,
+	Texture_GUI_tab_active,
 	Texture_GUI_cursor,
 	Texture_GUI_speechbubble_pointer,
 	Texture_Particle_circle,

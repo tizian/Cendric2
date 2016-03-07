@@ -8,6 +8,7 @@
 #include "Structs/QuestData.h"
 #include "GUI/QuestDescriptionWindow.h"
 #include "GUI/Button.h"
+#include "GUI/TabBar.h"
 #include "Enums/EnumNames.h"
 
 class QuestDescriptionWindow;
@@ -68,7 +69,7 @@ private:
 
 	BitmapText m_title;
 
-	std::vector<std::pair<Button, QuestState>> m_tabs;
+	TabBar *m_tabBar;
 
 	std::vector<QuestEntry> m_startedQuests;
 	std::vector<QuestEntry> m_completedQuests;
