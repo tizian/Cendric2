@@ -53,6 +53,9 @@ void SpellSelection::reload() {
 		m_spellSlots.push_back(slot);
 		offset += (SPELLSLOT_SPACING + SpellSlot::SIZE);
 	}
+	if (!m_spellSlots.empty()) {
+		selectSlot(0);
+	}
 }
 
 void SpellSelection::show() {

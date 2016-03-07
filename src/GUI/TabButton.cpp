@@ -75,13 +75,13 @@ void TabButton::setPosition(const sf::Vector2f& pos) {
 }
 
 void TabButton::setSize(const sf::Vector2f& size) {
+	GameObject::setSize(size);
 	m_outerRect.width = size.x;
 	m_outerRect.height = size.y;
 	m_border.setSize(size);
 	sf::Vector2f innerSize(size.x - 2.f * BORDER_OFFSET, size.y - 2.f * BORDER_OFFSET);
 	m_background.setSize(innerSize);
-	m_boundingBox.width = innerSize.x;
-	m_boundingBox.height = innerSize.y;
+	
 	// this re-centers the text
 	setCharacterSize(m_text.getCharacterSize());
 }
