@@ -66,7 +66,7 @@ public:
 	virtual void setDebugBoundingBox(const sf::Color &debugColor);
 
 protected:
-	GameObjectState m_state;
+	GameObjectState m_state = GameObjectState::VOID;
 
 	Screen* m_screen = nullptr;
 	sf::RectangleShape m_debugBox;
