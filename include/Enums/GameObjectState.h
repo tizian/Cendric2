@@ -2,6 +2,7 @@
 
 // this enum is used for animations and used by all game objects
 enum class GameObjectState {
+	VOID,
 	Idle, // used by nearly every game object
 	Idle_up, // used by map main character
 	Idle_down, // used by map main character

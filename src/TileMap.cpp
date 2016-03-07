@@ -62,11 +62,6 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 		m_layers.push_back(layer);
 	}
 
-	for (int i = 0; i < m_layers.size(); i++) {
-		for (auto& tile : m_animatedTiles.at(i)) {
-			tile->setState(GameObjectState::Idle);
-		}
-	}
 	return true;
 }
 
@@ -99,6 +94,7 @@ void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const 
 			animatedTile->playCurrentAnimation(true);
 			animatedTile->setPosition(position);
 			animatedTile->setState(GameObjectState::Idle);
+			animatedTile->setCurrentAnimation(animatedTile->getAnimation(GameObjectState::Idle), false);
 
 			m_animatedTiles[layerNr].push_back(animatedTile);
 			
