@@ -78,7 +78,7 @@ loadDialogue = function(DL)
 		
 			DL:createChoiceNode(0)
 			
-			if (not DL:isQuestState("meat_delivery", "started")) then
+			if (DL:isQuestState("meat_delivery", "void")) then
 				DL:addChoice(10, "DL_Choice_GiveMeTheMeat") --  I will take the meat to the village for you, give it to me.
 			end
 			if (DL:isQuestState("the_rats_nest", "void")) then
