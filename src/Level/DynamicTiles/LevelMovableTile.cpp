@@ -11,9 +11,9 @@ GameObjectType LevelMovableTile::getConfiguredType() const {
 
 void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	if (m_movingParent == nullptr) return;
-	sf::Vector2f oldPos = m_position;
+	sf::Vector2f oldPos = getPosition();
 	MovableGameObject::updateRelativeVelocity(frameTime);
-	sf::Vector2f posDiff = m_position - oldPos;
+	sf::Vector2f posDiff = getPosition() - oldPos;
 
 	sf::FloatRect newBoundingBoxX = m_boundingBox;
 	newBoundingBoxX.top -= posDiff.y;

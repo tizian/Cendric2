@@ -65,7 +65,8 @@ void SpellSlot::initSpellSlot() {
 		m_iconTexture = g_resourceManager->getTexture(ResourceID::Texture_spellicons);
 	}
 
-	m_cooldownRect.setSize(ICON_SIZE, ICON_SIZE);
+	m_cooldownRect.
+		setSize(ICON_SIZE, ICON_SIZE);
 	m_cooldownRect.setFillColor(sf::Color(200, 200, 200, 128));
 
 	for (int i = 0; i < 4; ++i) {

@@ -177,7 +177,7 @@ vom Mike Koenig
 
 ---
 
-Inspriert vo GOTHIC vo Piranha Bytes
+Inspiriert vo GOTHIC vo Piranha Bytes
 
 ---
 
@@ -196,4 +196,4 @@ TILED MAP EDITOR
 
 
 
-DANKE FÜR''S SPIELE');
+DANKE FÜR''S SPIELE!');

@@ -129,8 +129,8 @@ void KeyBindingsScreen::reload() {
 	// keyboard mappings
 	for (auto& it : m_selectedKeys) {
 		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
-		keyText->setCharacterSize(16);
-		keyText->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+		keyText->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+		keyText->setPosition(sf::Vector2f(distFromLeft, distFromTop + 10.f));
 		m_keyTexts.push_back(keyText);
 		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
 		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);

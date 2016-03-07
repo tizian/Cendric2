@@ -76,7 +76,7 @@ std::string ConfigurationWriter::writeFullscreenOn(const ConfigurationData& data
 }
 
 std::string ConfigurationWriter::writeSmoothingOn(const ConfigurationData& data) const {
-	string smoothingOn = "# 0 means the resizing is handlet with Nearest Neighbor, 1 means with interpolation (smoothing)\n";
+	string smoothingOn = "# 0 means the resizing is handled with Nearest Neighbor, 1 means with interpolation (smoothing)\n";
 	return smoothingOn.append(string(SMOOTHING_ON) + ":" + (data.isSmoothing ? "1" : "0") + "\n");
 }
 

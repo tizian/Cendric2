@@ -49,7 +49,7 @@ void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
 		m_isLockedRelativeVelocityY = false;
 		return;
 	}
-	sf::Vector2f nextPos = m_position;
+	sf::Vector2f nextPos = getPosition();
 	if (!m_isLockedRelativeVelocityX) nextPos.x += m_movingParent->getRelativeVelocity().x * frameTime.asSeconds();
 	if (!m_isLockedRelativeVelocityY) nextPos.y += m_movingParent->getRelativeVelocity().y * frameTime.asSeconds();
 	setPosition(nextPos);
@@ -60,8 +60,9 @@ void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
 void MovableGameObject::calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const {
 	sf::Vector2f nextVel;
 	calculateNextVelocity(frameTime, nextVel); 
-	nextPos.x = m_position.x + nextVel.x * frameTime.asSeconds(); 
-	nextPos.y = m_position.y + nextVel.y * frameTime.asSeconds();
+	sf::Vector2f currentPos = getPosition();
+	nextPos.x = currentPos.x + nextVel.x * frameTime.asSeconds();
+	nextPos.y = currentPos.y + nextVel.y * frameTime.asSeconds();
 }
 
 void MovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {

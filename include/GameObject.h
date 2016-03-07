@@ -33,6 +33,7 @@ public:
 	virtual void onLeftJustPressed();
 
 	void setBoundingBox(const sf::FloatRect& rect);
+	virtual void setSize(const sf::Vector2f& size);
 	virtual void setPosition(const sf::Vector2f& pos);
 	virtual void setPositionX(float posX);
 	virtual void setPositionY(float posY);
@@ -42,9 +43,10 @@ public:
 	virtual void setScreen(Screen* screen);
 	void setInputInDefaultView(bool value);
 	virtual void setViewable(bool value);
-	
-	virtual const sf::Vector2f& getPosition() const;
+
 	const sf::FloatRect* getBoundingBox() const;
+	sf::Vector2f getPosition() const;
+	sf::Vector2f getSize() const;
 	sf::Vector2f getCenter() const;
 	// is the object currently visible inside this view + margin?
 	bool isViewable() const;
@@ -73,9 +75,8 @@ protected:
 	bool m_isViewable = true;
 	bool m_isAlwaysUpdate = false; // this property can be set to true if this game object should always update
 
+	// holds absolute position as seen from the upper left corner, and size
 	sf::FloatRect m_boundingBox;
-	// absolute position as seen from the upper left corner
-	sf::Vector2f m_position;
 
 	bool m_isDrawBoundingBox = false;
 	bool m_isInputInDefaultView = false;

@@ -14,8 +14,8 @@ void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget) {
 void GameObject::setDebugBoundingBox(const sf::Color &debugColor) {
 	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
 
-	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
-	m_debugBox.setPosition(m_position);
+	m_debugBox = sf::RectangleShape(getSize());
+	m_debugBox.setPosition(getPosition());
 	m_debugBox.setOutlineThickness(1.f);
 	m_debugBox.setFillColor(sf::Color::Transparent);
 	m_debugBox.setOutlineColor(debugColor);
@@ -44,7 +44,6 @@ void GameObject::update(const sf::Time& frameTime) {
 }
 
 void GameObject::setPosition(const sf::Vector2f &position) {
-	m_position = position;
 	m_boundingBox.left = position.x;
 	m_boundingBox.top = position.y;
 
@@ -54,12 +53,12 @@ void GameObject::setPosition(const sf::Vector2f &position) {
 }
 
 void GameObject::setPositionX(const float posX) {
-	const sf::Vector2f newPosition(posX, m_position.y);
+	const sf::Vector2f newPosition(posX, m_boundingBox.top);
 	setPosition(newPosition);
 }
 
 void GameObject::setPositionY(const float posY) {
-	const sf::Vector2f newPosition(m_position.x, posY);
+	const sf::Vector2f newPosition(m_boundingBox.left, posY);
 	setPosition(newPosition);
 }
 
@@ -69,6 +68,29 @@ void GameObject::setState(GameObjectState state) {
 
 void GameObject::setBoundingBox(const sf::FloatRect &rect) {
 	m_boundingBox = rect;
+
+	if (m_isDrawBoundingBox) {
+		m_debugBox.setSize(getSize());
+		m_debugBox.setPosition(getPosition());
+	}
+}
+
+void GameObject::setSize(const sf::Vector2f& size) {
+	setBoundingBox(sf::FloatRect(m_boundingBox.left, m_boundingBox.top, size.x, size.y));
+}
+
+sf::Vector2f GameObject::getPosition() const {
+	return sf::Vector2f(m_boundingBox.left, m_boundingBox.top);
+}
+
+sf::Vector2f GameObject::getSize() const {
+	return sf::Vector2f(m_boundingBox.width, m_boundingBox.height);
+}
+
+sf::Vector2f GameObject::getCenter() const {
+	return sf::Vector2f(
+		m_boundingBox.left + (m_boundingBox.width / 2),
+		m_boundingBox.top + (m_boundingBox.height / 2));
 }
 
 const sf::FloatRect* GameObject::getBoundingBox() const {
@@ -95,12 +117,6 @@ void GameObject::onLeftJustPressed() {
 	// nop
 }
 
-sf::Vector2f GameObject::getCenter() const {
-	return sf::Vector2f(
-		m_boundingBox.left + (m_boundingBox.width / 2),
-		m_boundingBox.top + (m_boundingBox.height / 2));
-}
-
 bool GameObject::isViewable() const {
 	return m_isViewable;
 }
@@ -115,10 +131,6 @@ void GameObject::setViewable(bool value) {
 
 void GameObject::setInputInDefaultView(bool value) {
 	m_isInputInDefaultView = value;
-}
-
-const sf::Vector2f& GameObject::getPosition() const {
-	return m_position;
 }
 
 bool GameObject::isDisposed() const {

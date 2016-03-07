@@ -80,11 +80,11 @@ void Button::setPosition(const sf::Vector2f& pos) {
 }
 
 void Button::setSize(const sf::Vector2f& size) {
+	GameObject::setSize(size);
 	m_ornamentLayer.setSize(size);
 	m_backLayer.setSize(size);
 	m_mainLayer.setSize(size);
-	m_boundingBox.width = size.x;
-	m_boundingBox.height = size.y;
+
 	// this re-centers the text
 	setCharacterSize(m_text.getCharacterSize());
 }

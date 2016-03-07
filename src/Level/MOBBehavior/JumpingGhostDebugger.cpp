@@ -7,13 +7,13 @@ JumpingGhostDebugger::JumpingGhostDebugger() {
 JumpingGhostDebugger::~JumpingGhostDebugger() {}
 
 void JumpingGhostDebugger::addDebugBoundingBox(const sf::FloatRect& boundingBox) {
+	setBoundingBox(boundingBox);
 	sf::RectangleShape shape;
-	shape.setSize(sf::Vector2f(boundingBox.width, boundingBox.height));
-	shape.setPosition(sf::Vector2f(boundingBox.left, boundingBox.top));
+	shape.setSize(getSize());
+	shape.setPosition(getPosition());
 	shape.setFillColor(sf::Color::Transparent);
 	shape.setOutlineColor(sf::Color::Red);
 	shape.setOutlineThickness(1.f);
-	setBoundingBox(boundingBox);
 	setPosition(shape.getPosition());
 	m_debugBoxes.push_back(shape);
 }

@@ -1,7 +1,7 @@
 #include "GUI/TexturedButton.h"
 
 TexturedButton::TexturedButton(const sf::FloatRect& box, ButtonOrnamentStyle style) : Button(box, style) {
-	m_texturedLayer.setSize(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
+	m_texturedLayer.setSize(getSize());
 	m_texturedLayer.setPosition(getPosition());
 }
 

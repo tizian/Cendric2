@@ -28,9 +28,10 @@ void ArrowSelector::render(sf::RenderTarget& renderTarget) {
 }
 
 void ArrowSelector::recalculatePosition() {
-	m_button.setPosition(sf::Vector2f(m_position.x + GUIConstants::LABEL_OFFSET, m_position.y));
+	sf::Vector2f pos = getPosition();
+	m_button.setPosition(sf::Vector2f(pos.x + GUIConstants::LABEL_OFFSET, pos.y));
 	float buttonHalf = m_button.getBoundingBox()->height / 2.f;
-	m_label.setPosition(sf::Vector2f(m_position.x, m_position.y + 
+	m_label.setPosition(sf::Vector2f(pos.x, pos.y +
 		buttonHalf - m_label.getLocalBounds().height / 2.f));
 	m_leftArrow.setPosition(m_button.getPosition() + sf::Vector2f(
 		-GUIConstants::BUTTON_MARGIN - m_leftArrow.getBoundingBox()->width,
@@ -167,7 +168,7 @@ void ArrowSelectorArrow::update(const sf::Time& frameTime) {
 
 void ArrowSelectorArrow::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
-	m_arrow.setPosition(pos + sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f));
+	m_arrow.setPosition(pos + 0.5f * getSize());
 }
 
 GameObjectType ArrowSelectorArrow::getConfiguredType() const {

@@ -23,14 +23,12 @@ public:
 
 	void setHeight(float height);
 	void setWidth(float width);
-	const sf::Vector2f& getSize() const;
+
 	virtual void setPosition(const sf::Vector2f& position) override;
 
 	GameObjectType getConfiguredType() const override;
 
 private:
-	sf::Vector2f m_size;
-
 	SlicedSprite m_mainLayer;
 	SlicedSprite m_backLayer;
 	SlicedSprite m_ornamentLayer;
