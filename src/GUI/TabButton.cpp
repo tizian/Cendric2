@@ -134,7 +134,6 @@ void TabButton::setCharacterSize(int size) {
 	float xOffset = std::max(0.5f * (m_outerRect.width - m_text.getLocalBounds().width), 0.f);
 	float yOffset = std::max(0.5f * (m_outerRect.height - m_text.getLocalBounds().height), 0.f);
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
-	sf::Vector2f pos = getPosition();
 	m_text.setPosition(getPosition() + m_textOffset);
 }
 

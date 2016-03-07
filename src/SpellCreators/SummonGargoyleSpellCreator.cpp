@@ -10,8 +10,6 @@ std::string SummonGargoyleSpellCreator::getStrengthModifierName() const {
 }
 
 void SummonGargoyleSpellCreator::executeSpell(const sf::Vector2f &target) {
-	SpellData spellData = m_spellData;
-
 	// dispose old summoned gargoyles. Doesn't check for owner though, but cendric is the only one that can have allied enemies.
 	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
 	for (auto& go : *enemies) {

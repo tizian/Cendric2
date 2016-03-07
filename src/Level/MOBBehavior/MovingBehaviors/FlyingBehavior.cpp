@@ -3,8 +3,8 @@
 #include "Level/LevelMainCharacter.h"
 
 FlyingBehavior::FlyingBehavior(Enemy* enemy) : 
-	EnemyMovingBehavior(enemy),
-	MovingBehavior(enemy) {
+	MovingBehavior(enemy),
+	EnemyMovingBehavior(enemy) {
 
 	m_avoidableTiles.insert(LevelDynamicTileID::Fluid);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
@@ -80,7 +80,6 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on y axis
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-		bool isFalling = isUpsideDown() != isMovingDown;
 		collidesY = level.collides(rec);
 		if (collidesY) {
 			m_mob->setAccelerationY(0.f);

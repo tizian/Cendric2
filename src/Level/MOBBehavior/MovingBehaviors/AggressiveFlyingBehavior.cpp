@@ -1,8 +1,8 @@
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveFlyingBehavior.h"
 
 AggressiveFlyingBehavior::AggressiveFlyingBehavior(Enemy* enemy) :
-	EnemyMovingBehavior(enemy),
 	MovingBehavior(enemy),
+	EnemyMovingBehavior(enemy),
 	FlyingBehavior(enemy) {
 }
 

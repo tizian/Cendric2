@@ -106,7 +106,8 @@ void ModifierTile::addModifier() {
  
 void ModifierTile::onHit(LevelMovableGameObject* mob) {
 	if (m_state == GameObjectState::Active) return;
-	if (LevelMainCharacter* character = dynamic_cast<LevelMainCharacter*>(mob)) {
+    LevelMainCharacter* character = dynamic_cast<LevelMainCharacter*>(mob);
+	if (character) {
 		addModifier();
 	}
 }

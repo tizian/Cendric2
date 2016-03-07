@@ -14,7 +14,4 @@ public:
 	sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredRotateSprite() const override;
 	void setDisposed() override;
-
-private:
-	AttributeData m_additionalResistance;
 };

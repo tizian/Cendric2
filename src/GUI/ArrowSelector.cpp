@@ -3,9 +3,9 @@
 using namespace std;
 
 ArrowSelector::ArrowSelector() : GameObject(),
-m_button(sf::FloatRect(0.f, 0.f, 50.f, 50.f)),
 m_rightArrow(true),
-m_leftArrow(false) {
+m_leftArrow(false),
+m_button(sf::FloatRect(0.f, 0.f, 50.f, 50.f)) {
 
 	m_label.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_button.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);

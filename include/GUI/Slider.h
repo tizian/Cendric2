@@ -25,7 +25,6 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 private:
-	bool m_isMouseOver = false;
 	bool m_isPressed = false;
 
 	sf::CircleShape m_knob;

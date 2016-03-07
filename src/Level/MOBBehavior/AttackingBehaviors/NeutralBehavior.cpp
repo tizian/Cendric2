@@ -1,8 +1,8 @@
 #include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
 
 NeutralBehavior::NeutralBehavior(Enemy* enemy) : 
-	EnemyAttackingBehavior(enemy),
-	AttackingBehavior(enemy) {
+	AttackingBehavior(enemy),
+	EnemyAttackingBehavior(enemy) {
 }
 
 sf::Color NeutralBehavior::getConfiguredHealthColor() const {

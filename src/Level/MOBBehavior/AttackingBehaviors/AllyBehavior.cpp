@@ -1,8 +1,8 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 
 AllyBehavior::AllyBehavior(Enemy* enemy) :
-	EnemyAttackingBehavior(enemy),
-	AttackingBehavior(enemy) {
+	AttackingBehavior(enemy),
+	EnemyAttackingBehavior(enemy) {
 }
 
 void AllyBehavior::update(const sf::Time& frameTime) {

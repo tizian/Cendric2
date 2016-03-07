@@ -6,8 +6,8 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Shiftable, ShiftableTile)
 
 ShiftableTile::ShiftableTile(Level* level) : 
-	LevelMovableTile(level),
-	LevelDynamicTile(level)
+	LevelDynamicTile(level),
+	LevelMovableTile(level)
 {
 }
 

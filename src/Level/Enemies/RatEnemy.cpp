@@ -16,8 +16,8 @@ void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) co
 }
 
 RatEnemy::RatEnemy(Level* level, Screen* screen) :
-	Enemy(level, screen),
-	LevelMovableGameObject(level) {
+	LevelMovableGameObject(level),
+    Enemy(level, screen) {
 	load(EnemyID::Rat);
 }
 

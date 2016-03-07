@@ -1,8 +1,8 @@
 #include "Level/MOBBehavior/MovingBehaviors/AllyFlyingBehavior.h"
 
 AllyFlyingBehavior::AllyFlyingBehavior(Enemy* enemy) :
-	EnemyMovingBehavior(enemy),
 	MovingBehavior(enemy),
+	EnemyMovingBehavior(enemy),
 	FlyingBehavior(enemy) {
 }
 

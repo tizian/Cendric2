@@ -135,8 +135,6 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 		return;
 	}
 
-	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
-
 	for (auto& it : data.dynamicTiles) {
 		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(it.id, level);
 		if (tile == nullptr) {

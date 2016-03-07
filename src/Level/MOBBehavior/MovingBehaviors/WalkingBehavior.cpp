@@ -5,8 +5,8 @@
 #include "Level/MOBBehavior/JumpingGhost.h"
 
 WalkingBehavior::WalkingBehavior(Enemy* enemy) :
-	EnemyMovingBehavior(enemy),
-	MovingBehavior(enemy) {
+	MovingBehavior(enemy),
+	EnemyMovingBehavior(enemy) {
 	m_isWalkingBehavior = true;
 }
 
@@ -67,8 +67,6 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 }
 
 void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
-	const sf::FloatRect& bb = *m_enemy->getBoundingBox();
-	const Level& level = *m_enemy->getLevel();
 	float oldPositionX = m_enemy->getPosition().x;
 
 	if (m_walksBlindly && !m_isGrounded) {

@@ -1,8 +1,8 @@
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 
 AllyWalkingBehavior::AllyWalkingBehavior(Enemy* enemy) :
-	EnemyMovingBehavior(enemy),
 	MovingBehavior(enemy),
+	EnemyMovingBehavior(enemy),
 	WalkingBehavior(enemy) {
 }
 

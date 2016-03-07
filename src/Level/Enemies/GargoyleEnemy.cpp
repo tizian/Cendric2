@@ -17,8 +17,8 @@ void GargoyleEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 }
 
 GargoyleEnemy::GargoyleEnemy(Level* level, Screen* screen) :
-	Enemy(level, screen),
-	LevelMovableGameObject(level) {
+	LevelMovableGameObject(level),
+    Enemy(level, screen) {
 	load(EnemyID::Gargoyle);
 }
 

@@ -1,8 +1,8 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 
 AggressiveBehavior::AggressiveBehavior(Enemy* enemy) : 
-	EnemyAttackingBehavior(enemy),
-	AttackingBehavior(enemy) {
+    AttackingBehavior(enemy),
+    EnemyAttackingBehavior(enemy) {
 	m_currentTarget = m_mainChar;
 }
 

@@ -20,7 +20,6 @@ public:
 
 private:
 	LevelEquipment* m_mask = nullptr;
-	float m_velocityScale;
 	static const sf::Color GHOST_COLOR;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;

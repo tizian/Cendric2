@@ -1,8 +1,8 @@
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
 
 AggressiveWalkingBehavior::AggressiveWalkingBehavior(Enemy* enemy) :
-	EnemyMovingBehavior(enemy),
 	MovingBehavior(enemy),
+	EnemyMovingBehavior(enemy),
 	WalkingBehavior(enemy) {
 }
 

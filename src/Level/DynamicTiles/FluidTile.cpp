@@ -136,9 +136,6 @@ void FluidTile::update(const sf::Time& frameTime) {
 	float scale = m_width / (float)(m_nColumns - 1);
 
 	for (int i = 0; i < m_nColumns - 1; ++i) {
-		bool fixed1 = m_columns[i].fixed;
-		bool fixed2 = m_columns[i+1].fixed;
-
 		sf::Vector2f p1 = sf::Vector2f(m_x + i * scale, m_y + m_height - m_columns[i].height);
 		sf::Vector2f p2 = sf::Vector2f(m_x + (i + 1) * scale, m_y + m_height - m_columns[i + 1].height);
 		sf::Vector2f p3 = sf::Vector2f(p2.x, m_y + m_height);

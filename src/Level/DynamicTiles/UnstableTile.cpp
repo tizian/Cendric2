@@ -7,8 +7,8 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Unstable, UnstableTile)
 const sf::Time UnstableTile::CRITICAL_TIME = sf::seconds(0.6f);
 
 UnstableTile::UnstableTile(Level* level) :
-	LevelMovableTile(level),
-	LevelDynamicTile(level) {
+    LevelDynamicTile(level),
+    LevelMovableTile(level) {
 	m_criticalTime = CRITICAL_TIME;
 }
 

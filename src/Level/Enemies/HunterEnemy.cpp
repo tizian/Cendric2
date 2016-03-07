@@ -13,8 +13,8 @@ void HunterEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold)
 }
 
 HunterEnemy::HunterEnemy(Level* level, Screen* screen) :
-	Enemy(level, screen),
-	LevelMovableGameObject(level) {
+	LevelMovableGameObject(level),
+    Enemy(level, screen) {
 	load(EnemyID::Hunter);
 	setAlly(sf::Time::Zero);
 

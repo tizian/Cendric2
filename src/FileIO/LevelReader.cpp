@@ -218,8 +218,6 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 		result = object->QueryIntAttribute("y", &y);
 		XMLCheckResult(result);
 
-		int offset = static_cast<int>(LevelDynamicTileID::Modifier) + m_firstGidDynamicTiles - 1;
-
 		ModifierTileData modifierData;
 		modifierData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
 		modifierData.modifier = EMPTY_SPELLMODIFIER;

@@ -26,7 +26,4 @@ private:
 	sf::RectangleShape m_borderRect;
 
 	sf::IntRect m_iconTextureRect;
-	const sf::Texture *m_iconTexture = nullptr;
-	const sf::Texture *m_borderTexture = nullptr;
-	const sf::Texture *m_borderTextureSelected = nullptr;
 };

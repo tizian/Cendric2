@@ -5,8 +5,8 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
 MovingTile::MovingTile(Level* level) :
-	LevelMovableTile(level),
-	LevelDynamicTile(level) {
+    LevelDynamicTile(level),
+	LevelMovableTile(level) {
 	m_movingParent = this; 
 	m_relativeVelocity.x = 0.f;
 	m_relativeVelocity.y = 0.f;

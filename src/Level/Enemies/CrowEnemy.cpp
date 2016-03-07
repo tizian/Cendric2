@@ -15,8 +15,8 @@ void CrowEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) c
 }
 
 CrowEnemy::CrowEnemy(Level* level, Screen* screen) :
-	Enemy(level, screen),
-	LevelMovableGameObject(level) {
+	LevelMovableGameObject(level),
+    Enemy(level, screen) {
 	load(EnemyID::Crow);
 }
 
