@@ -46,7 +46,7 @@ inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
 }
 
 // versioning
-#define CENDRIC_VERSION_NR "0.1.0"
+#define CENDRIC_VERSION_NR "0.2.0"
 
 // const canvas size (window can be rescaled though)
 #define WINDOW_WIDTH 1280
