@@ -100,6 +100,10 @@ void NPC::onMouseOver() {
 	m_tooltipTime = sf::seconds(1);
 }
 
+void NPC::onLeftClick() {
+	onRightClick();
+}
+
 void NPC::onRightClick() {
 	if (!m_NPCdata.talkingEnabled) {
 		m_screen->setTooltipText("NothingToSay", sf::Color::Red, true);
