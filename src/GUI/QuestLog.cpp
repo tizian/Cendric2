@@ -38,26 +38,17 @@ void QuestLog::init() {
 		{ QuestState::Failed, &m_failedQuests },
 	});
 
-	// init buttons
-	Button button = Button(sf::FloatRect(0, 0, BUTTON_SIZE.x, BUTTON_SIZE.y));
-	m_tabs.push_back(std::pair<Button, QuestState>(button, QuestState::Started));
-	m_tabs.push_back(std::pair<Button, QuestState>(button, QuestState::Completed));
-	m_tabs.push_back(std::pair<Button, QuestState>(button, QuestState::Failed));
-
-	float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
-	float yOffset = GUIConstants::TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M;
-	float buttonMargin = 10.f;
-
-	for (auto& it : m_tabs) {
-		it.first.setText(EnumNames::getQuestStateName(it.second));
-		it.first.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-		it.first.setPosition(sf::Vector2f(xOffset, yOffset));
-		it.first.setBackgroundLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		it.first.setOrnamentLayerColor(CENDRIC_COLOR_DARK_PURPLE);
-		it.first.setMouseOverColor(CENDRIC_COLOR_LIGHT_PURPLE);
-		it.first.setTextColor(CENDRIC_COLOR_WHITE);
-		xOffset += BUTTON_SIZE.x + buttonMargin;
+	// tabbar
+	int nTabs = 3;
+	float width = nTabs * BUTTON_SIZE.x;
+	float height = BUTTON_SIZE.y;
+	float x = GUIConstants::LEFT + 0.5f * (QuestLog::WIDTH - width);
+	float y = GUIConstants::TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M;
+	
+	m_tabBar = new TabBar(sf::FloatRect(x, y, width, height), nTabs);
+	for (int i = 0; i < nTabs; ++i) {
+		m_tabBar->getTabButton(i)->setText(EnumNames::getQuestStateName((QuestState)(i+1)));
+		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
 
 	delete m_descriptionWindow;
@@ -70,6 +61,7 @@ void QuestLog::init() {
 QuestLog::~QuestLog() {
 	delete m_window;
 	delete m_descriptionWindow;
+	delete m_tabBar;
 	clearAllEntries();
 }
 
@@ -92,12 +84,11 @@ void QuestLog::update(const sf::Time& frameTime) {
 		}
 	}
 
-	for (auto& it : m_tabs) {
-		it.first.update(frameTime);
-		if (it.first.isClicked() && m_currentTab != it.second) {
-			selectTab(it.second);
-			return;
-		}
+	m_tabBar->update(frameTime);
+	int activeIndex = m_tabBar->getActiveTabIndex();
+	QuestState state = (QuestState)(activeIndex + 1);
+	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != state) {
+		selectTab(state);
 	}
 }
 
@@ -127,9 +118,7 @@ void QuestLog::render(sf::RenderTarget& target) {
 		// it.renderAfterForeground(target); // uncomment for debug box
 	}
 
-	for (auto& it : m_tabs) {
-		it.first.render(target);
-	}
+	m_tabBar->render(target);
 
 	m_descriptionWindow->render(target);
 }
@@ -151,16 +140,6 @@ void QuestLog::selectTab(QuestState state) {
 		m_selectedEntry = nullptr;
 	}
 	m_currentTab = state;
-
-	// color selected tab
-	for (auto& it : m_tabs) {
-		if (it.second == m_currentTab) {
-			it.first.setMainLayerColor(CENDRIC_COLOR_PURPLE);
-		}
-		else {
-			it.first.setMainLayerColor(CENDRIC_COLOR_TRANS_BLACK);
-		}
-	}
 }
 
 void QuestLog::reload() {
