@@ -6,6 +6,7 @@
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::HEIGHT = WINDOW_HEIGHT - 150.f;
 float Spellbook::SPELL_OFFSET = 115.f;
+const sf::Vector2f Spellbook::BUTTON_SIZE = sf::Vector2f(70.f, 57.f);
 
 Spellbook::Spellbook(CharacterCore* core, bool modifiable) {
 	m_core = core;

@@ -4,7 +4,6 @@ using namespace std;
 
 // determines the distance of the message text and the buttons from border
 const float DIST_FROM_BORDER = 10.f;
-const int MAX_CHARS_IN_SAVEGAME_NAME = 24;
 
 NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_window = new Window(box, WindowOrnamentStyle::NONE);

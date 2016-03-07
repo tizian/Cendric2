@@ -104,7 +104,7 @@ private:
 
 	const int SLOT_COUNT_X = 5;
 	const int SLOT_COUNT_Y = 5;
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 40.f);
+	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 45.f);
 
 	const float MARGIN = 7.f;
 	const float INVENTORY_LEFT = GUIConstants::LEFT + MARGIN + InventoryEquipment::WIDTH;

@@ -60,6 +60,8 @@ public:
 	bool isFlippedX() const;
 	bool isFlippedY() const;
 
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
 private:
 	const Animation* m_animation = nullptr;
 	sf::Time m_frameTime;
@@ -71,6 +73,4 @@ private:
 	bool m_isFlippedY = false;
 	const sf::Texture* m_texture;
 	sf::Vertex m_vertices[4];
-
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

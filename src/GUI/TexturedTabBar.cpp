@@ -51,7 +51,7 @@ void TexturedTabBar::update(const sf::Time& frameTime) {
 		m_tabButtons[m_activeTabIndex]->setActive(true);
 
 		const sf::FloatRect* bbox = getBoundingBox();
-		int numberTabs = m_tabButtons.size();
+		int numberTabs = static_cast<int>(m_tabButtons.size());
 		float tabWidth = bbox->width / numberTabs + (numberTabs - 1) * TabButton::ALIGNMENT_OFFSET / numberTabs;
 		float x = bbox->left + m_activeTabIndex * (tabWidth - TabButton::ALIGNMENT_OFFSET);
 		m_activeOverlay.setPosition(x, bbox->top);

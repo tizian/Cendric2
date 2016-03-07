@@ -80,6 +80,6 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(55.f, 55.f);
+	static const sf::Vector2f BUTTON_SIZE;
 	const float MARGIN = 5.f;
 };

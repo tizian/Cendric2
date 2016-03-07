@@ -13,4 +13,5 @@ public:
 
 private:
 	sf::RectangleShape m_texturedLayer;
+	sf::FloatRect m_innerPos;
 };
