@@ -50,7 +50,7 @@ void SaveGameWindow::reload() {
 	DIR *dir;
 	struct dirent *de;
 
-	dir = opendir(SAVE_GAME_FOLDER.c_str());
+	dir = opendir(getPath(SAVE_GAME_FOLDER).c_str());
 	int nr = 0;
 	while (dir) {
 		de = readdir(dir);
