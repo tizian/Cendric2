@@ -12,8 +12,8 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) {
 
 	std::string filename = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + merchantID + "/me_" + merchantID + ".lua";
 
-	if (luaL_dofile(L, filename.c_str()) != 0) {
-		g_logger->logError("MerchantLoader", "Cannot read lua script: " + filename);
+	if (luaL_dofile(L, getPath(filename).c_str()) != 0) {
+		g_logger->logError("MerchantLoader", "Cannot read lua script: " + getPath(filename));
 		return merchantData;
 	}
 

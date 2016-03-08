@@ -45,6 +45,12 @@ inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
 	return (intersection.width > Epsilon && intersection.height > Epsilon);
 }
 
+// this function can be changed if the resource path is
+// not the same as the executables path
+inline std::string getPath(const std::string& path) {
+	return path;
+}
+
 // versioning
 #define CENDRIC_VERSION_NR "0.2.0"
 

@@ -163,14 +163,14 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename) {
 	sf::Texture* texture = new sf::Texture();
 
 	// search project's main directory
-	if (texture->loadFromFile(filename)) {
+	if (texture->loadFromFile(getPath(filename))) {
 		m_textures[filename] = texture;
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading texture");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": loading texture");
 		return m_textures[filename];
 	}
 
-	g_logger->logError("ResourceManager", "Texture could not be loaded from file: " + std::string(filename));
-	std::string tmp = "Texture could not be loaded from file: " + filename;
+	g_logger->logError("ResourceManager", "Texture could not be loaded from file: " + getPath(std::string(filename)));
+	std::string tmp = "Texture could not be loaded from file: " + getPath(filename);
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_textures[filename] = texture;
 	return m_textures[filename];
@@ -194,14 +194,14 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) {
 	sf::SoundBuffer* soundBuffer = new sf::SoundBuffer();
 
 	// search project's main directory
-	if (soundBuffer->loadFromFile(filename)) {
+	if (soundBuffer->loadFromFile(getPath(filename))) {
 		m_soundBuffers[filename] = soundBuffer;
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading soundbuffer");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": loading soundbuffer");
 		return m_soundBuffers[filename];
 	}
 
-	g_logger->logError("ResourceManager", "Soundbuffer could not be loaded from file: " + std::string(filename));
-	std::string tmp = "Soundbuffer could not be loaded from file: " + filename;
+	g_logger->logError("ResourceManager", "Soundbuffer could not be loaded from file: " + getPath(std::string(filename)));
+	std::string tmp = "Soundbuffer could not be loaded from file: " + getPath(filename);
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_soundBuffers[filename] = soundBuffer;
 	return m_soundBuffers[filename];
@@ -225,14 +225,14 @@ sf::Font* ResourceManager::getFont(const std::string &filename) {
 	sf::Font* font = new sf::Font();
 
 	// search project's main directory
-	if (font->loadFromFile(filename)) {
+	if (font->loadFromFile(getPath(filename))) {
 		m_fonts[filename] = font;
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading font");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": loading font");
 		return m_fonts[filename];
 	}
 
-	g_logger->logError("ResourceManager", "Font could not be loaded from file: " + std::string(filename));
-	std::string tmp = "Font could not be loaded from file: " + filename;
+	g_logger->logError("ResourceManager", "Font could not be loaded from file: " + getPath(std::string(filename)));
+	std::string tmp = "Font could not be loaded from file: " + getPath(filename);
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_fonts[filename] = font;
 	return m_fonts[filename];
@@ -256,14 +256,14 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string &filename) {
 	BitmapFont* font = new BitmapFont();
 
 	// search project's main directory
-	if (font->loadFromFile(filename)) {
+	if (font->loadFromFile(getPath(filename))) {
 		m_bitmapFonts[filename] = font;
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": loading bitmap font");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": loading bitmap font");
 		return m_bitmapFonts[filename];
 	}
 
-	g_logger->logError("ResourceManager", "Bitmap Font could not be loaded from file: " + std::string(filename));
-	std::string tmp = "Bitmap Font could not be loaded from file: " + filename;
+	g_logger->logError("ResourceManager", "Bitmap Font could not be loaded from file: " + getPath(std::string(filename)));
+	std::string tmp = "Bitmap Font could not be loaded from file: " + getPath(filename);
 	setError(ErrorID::Error_fileNotFound, tmp);
 	m_bitmapFonts[filename] = font;
 	return m_bitmapFonts[filename];
@@ -283,7 +283,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	if (textureIt != m_textures.end()) {
 		delete textureIt->second;
 		m_textures.erase(textureIt);
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing texture");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing texture");
 		return;
 	}
 
@@ -292,7 +292,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	if (fontIt != m_fonts.end()) {
 		delete fontIt->second;
 		m_fonts.erase(fontIt);
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing font");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing font");
 		return;
 	}
 
@@ -301,7 +301,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	if (bitmapFontIt != m_bitmapFonts.end()) {
 		delete bitmapFontIt->second;
 		m_bitmapFonts.erase(bitmapFontIt);
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing bitmap font");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing bitmap font");
 		return;
 	}
 
@@ -310,7 +310,7 @@ void ResourceManager::deleteResource(const std::string &filename) {
 	if (soundBufferIt != m_soundBuffers.end()) {
 		delete soundBufferIt->second;
 		m_soundBuffers.erase(soundBufferIt);
-		g_logger->logInfo("ResourceManager", std::string(filename) + ": releasing soundbuffer");
+		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing soundbuffer");
 		return;
 	}
 }
@@ -328,20 +328,20 @@ void ResourceManager::playSound(sf::Sound& sound, ResourceID id) {
 
 void ResourceManager::playMusic(sf::Music& music, const std::string& filename) {
 	if (m_configuration.isSoundOn && !filename.empty()) {
-		if (music.openFromFile(filename)) {
+		if (music.openFromFile(getPath(filename))) {
 			music.setLoop(true);
 			music.setVolume(static_cast<float>(m_configuration.volumeMusic));
 			music.play();
 		}
 		else {
-			g_logger->logError("ResourceManager", "Could not read music from file: " + filename);
+			g_logger->logError("ResourceManager", "Could not read music from file: " + getPath(filename));
 		}
 	}
 }
 
 
-char* ResourceManager::getFilename(ResourceID id) {
-	return &m_fileNames[id][0u];
+std::string ResourceManager::getFilename(ResourceID id) {
+	return getPath(m_fileNames[id]);
 }
 
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {

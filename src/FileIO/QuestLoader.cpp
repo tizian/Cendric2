@@ -14,8 +14,8 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 
 	std::string filename = QUEST_FOLDER + questID + ".lua";
 
-	if (luaL_dofile(L, filename.c_str()) != 0) {
-		g_logger->logError("QuestLoader", "Cannot read lua script: " + filename);
+	if (luaL_dofile(L, getPath(filename).c_str()) != 0) {
+		g_logger->logError("QuestLoader", "Cannot read lua script: " + getPath(filename));
 		return questData;
 	}
 
@@ -23,7 +23,7 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 
 	LuaRef title = getGlobal(L, "title");
 	if (!title.isString()) {
-		g_logger->logError("QuestLoader", "Quest [" + filename + "] has no title tag or of wrong type.");
+		g_logger->logError("QuestLoader", "Quest [" + getPath(filename) + "] has no title tag or of wrong type.");
 		return questData;
 	}
 

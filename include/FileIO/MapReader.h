@@ -12,7 +12,7 @@ class MapReader : public WorldReader {
 public:
 	MapReader() : WorldReader() {};
 
-	bool readMap(const char* fileName, MapData& data);
+	bool readMap(const std::string& filename, MapData& data);
 
 private:
 	void logError(const std::string& error) const override;

@@ -29,7 +29,7 @@ void LevelReader::logError(const std::string& error) const {
 
 bool LevelReader::readLevel(const std::string& fileName, LevelData& data) {
 	tinyxml2::XMLDocument xmlDoc;
-	tinyxml2::XMLError result = xmlDoc.LoadFile(fileName.c_str());
+	tinyxml2::XMLError result = xmlDoc.LoadFile(getPath(fileName).c_str());
 	XMLCheckResult(result);
 
 	tinyxml2::XMLElement* map = xmlDoc.FirstChildElement("map");

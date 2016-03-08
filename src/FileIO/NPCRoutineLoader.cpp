@@ -28,14 +28,14 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("setTalkingEnabled", &NPCRoutineLoader::setTalkingEnabled)
 		.endClass();
 
-	if (luaL_dofile(L, m_routine.getID().c_str()) != 0) {
-		g_logger->logError("NPCRoutineLoader", "Cannot read lua script: " + m_routine.getID());
+	if (luaL_dofile(L, getPath(m_routine.getID()).c_str()) != 0) {
+		g_logger->logError("NPCRoutineLoader", "Cannot read lua script: " + getPath(m_routine.getID()));
 		return;
 	}
 
 	LuaRef function = getGlobal(L, "loadRoutine");
 	if (!function.isFunction()) {
-		g_logger->logError("NPCRoutineLoader", "Lua script: " + m_routine.getID() + " has no loadRoutine function.");
+		g_logger->logError("NPCRoutineLoader", "Lua script: " + getPath(m_routine.getID()) + " has no loadRoutine function.");
 		return;
 	}
 

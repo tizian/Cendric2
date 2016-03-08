@@ -3,21 +3,21 @@
 using namespace std;
 
 bool CharacterCoreWriter::createFile(const std::string& filename) const {
-	if (std::ifstream(filename)) {
-		g_logger->logInfo("CharacterCoreWriter", "File already exists: " + filename);
+	if (std::ifstream(getPath(filename))) {
+		g_logger->logInfo("CharacterCoreWriter", "File already exists: " + getPath(filename));
 		return false;
 	}
-	std::ofstream file(filename);
-	g_logger->logInfo("CharacterCoreWriter", "Created new file: " + filename);
+	std::ofstream file(getPath(filename));
+	g_logger->logInfo("CharacterCoreWriter", "Created new file: " + getPath(filename));
 	if (!file) {
-		g_logger->logError("CharacterCoreWriter", "File could not be created: " + filename);
+		g_logger->logError("CharacterCoreWriter", "File could not be created: " + getPath(filename));
 		return false;
 	}
 	return true;
 }
 
 bool CharacterCoreWriter::saveToFile(const std::string& filename, const CharacterCoreData& data) const {
-	ofstream savefile(filename, ios::trunc);
+	ofstream savefile(getPath(filename), ios::trunc);
 	if (savefile.is_open()) {
 		savefile << writeTimePlayed(data);
 		savefile << writeSaveGameName(data);
@@ -50,7 +50,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile.close();
 	}
 	else {
-		g_logger->logError("CharacterCoreWriter", "Unable to open file: " + string(filename));
+		g_logger->logError("CharacterCoreWriter", "Unable to open file: " + getPath(string(filename)));
 		return false;
 	}
 	return true;

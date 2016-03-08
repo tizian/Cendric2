@@ -710,10 +710,10 @@ bool CharacterCoreReader::readWaypointsUnlocked(char* start, char* end, Characte
 
 bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
 	FILE* savFile;
-	savFile = fopen(filename.c_str(), "r");
+	savFile = fopen(getPath(filename).c_str(), "r");
 
 	if (savFile == NULL) {
-		g_logger->logError("CharacterCoreReader", "Error at opening file " + filename);
+		g_logger->logError("CharacterCoreReader", "Error at opening file " + getPath(filename));
 		return false;
 	}
 

@@ -46,7 +46,7 @@ public:
 	BitmapFont* getBitmapFont(ResourceID id);
 	BitmapFont* getBitmapFont(const std::string& filename);
 
-	char* getFilename(ResourceID id);
+	std::string getFilename(ResourceID id);
 	const std::pair<ErrorID, std::string>* pollError() const;
 	ConfigurationData& getConfiguration();
 
