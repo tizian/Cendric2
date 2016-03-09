@@ -56,6 +56,7 @@ void CookingWindow::reload() {
 
 bool CookingWindow::updateWindow(const sf::Time frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
+		g_inputController->lockAction();
 		return false;
 	}
 

@@ -277,6 +277,10 @@ void CharacterCore::setChestLooted(const std::string& level, int pos) {
 	m_data.chestsLooted.at(level).insert(pos);
 }
 
+void CharacterCore::setHintDisplayed(const std::string& hint) {
+	m_data.hintsDisplayed.insert(hint);
+}
+
 void CharacterCore::setWaypointUnlocked(const std::string& map, int pos) {
 	m_data.waypointsUnlocked.at(map).insert(pos);
 }
@@ -398,6 +402,10 @@ bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) {
 	if (m_data.enemiesKilled.find(levelID) == m_data.enemiesKilled.end()) return false;
 	if (m_data.enemiesKilled.at(levelID).find(objectID) == m_data.enemiesKilled.at(levelID).end()) return false;
 	return true;
+}
+
+bool CharacterCore::isHintDisplayed(const std::string& hint) {
+	return  m_data.hintsDisplayed.find(hint) != m_data.hintsDisplayed.end();
 }
 
 const CharacterCoreData& CharacterCore::getData() const {

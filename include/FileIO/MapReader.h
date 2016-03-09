@@ -18,12 +18,15 @@ private:
 	void logError(const std::string& error) const override;
 
 	bool readFirstGridIDs(tinyxml2::XMLElement* map, MapData& data);
+	bool readCollidableTiles(tinyxml2::XMLElement* firstTile);
+	bool readBackgroundTileLayer(const std::string& layer, MapData& data) const;
 	bool readLayers(tinyxml2::XMLElement* map, MapData& data) const;
 	bool readDynamicTileLayer(MapDynamicTileID id, const std::string& layer, MapData& data) const;
-
+	
 	bool readObjects(tinyxml2::XMLElement* map, MapData& data) const;
 	bool readMapExits(tinyxml2::XMLElement* objects, MapData& data) const;
 	bool readNPCs(tinyxml2::XMLElement* objects, MapData& data) const;
+	bool readCollidableObjectLayer(tinyxml2::XMLElement* objects, MapData& data) const;
 
 	// check map bean for validity before loading the map
 	bool checkData(MapData& data) const;
@@ -36,4 +39,6 @@ private:
 	const int DYNAMIC_TILE_COUNT = 20;
 
 	int m_firstGidDynamicTiles;
+
+	std::map<int, sf::FloatRect> m_tileColliderMap;
 };

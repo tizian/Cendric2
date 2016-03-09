@@ -39,4 +39,5 @@ struct WorldCollisionQueryRecord {
 	float safeLeft = -1.f;
 
 	bool collides = false;
+	bool noSafePos = false;
 };

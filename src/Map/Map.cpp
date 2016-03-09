@@ -64,6 +64,20 @@ bool Map::collides(WorldCollisionQueryRecord& rec) const {
 		}
 		rec.collides = true;
 	}
+
+	// check collidable rects
+	for (auto& rect  : m_mapData.collidableRects) {
+		if (rect.intersects(rec.boundingBox)) {
+			calculateCollisionLocations(rec, rect);
+		}
+	}
+
+	for (auto& triangle : m_mapData.collidableTriangles) {
+		if (triangle.intersects(rec.boundingBox)) {
+			rec.collides = true;
+			rec.noSafePos = true;
+		}
+	}
 	
 	return rec.collides;
 }

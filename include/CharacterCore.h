@@ -86,6 +86,8 @@ public:
 	void setChestLooted(const std::string& level, int pos);
 	// signal waypoint unlocked
 	void setWaypointUnlocked(const std::string& map, int pos);
+	// signal hint displayed
+	void setHintDisplayed(const std::string& hint);
 	// getter for quest data. If there is none for that id, returns nullptr
 	const QuestData* getQuestData(const std::string& questID) const;
 	// getter for number of targets with name "name" killed for quest with id "questID"
@@ -108,6 +110,8 @@ public:
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	// is a enemy in a certain level dead?
 	bool isEnemyKilled(const std::string& levelID, int objectID);
+	// was a hint already  displayed?
+	bool isHintDisplayed(const std::string& hint);
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.
 	MerchantData getMerchantData(const std::string& merchantID);
 	// sets the merchant data of this merchant id

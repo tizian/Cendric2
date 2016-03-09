@@ -6,6 +6,8 @@
 #include "Structs/LightData.h"
 
 struct WorldData {
+	virtual ~WorldData() {};
+
 	std::string id;
 	std::string name;
 	sf::Vector2i mapSize;

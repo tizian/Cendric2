@@ -96,6 +96,9 @@ void Dialogue::setRoot(int root) {
 bool Dialogue::isEndable() {
 	if (m_currentNode == nullptr) return true;
 
+	if (m_currentNode->choices.empty() && m_currentNode->nextTag == -1) {
+		return true;
+	}
 	for (auto& choice : m_currentNode->choices) {
 		if (choice.second == -1) {
 			return true;

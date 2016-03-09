@@ -198,7 +198,8 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 	else {
 		hintText.clear();
 	}
-	hintText.append(g_textProvider->getCroppedText(hintKey, "hint", characterSize, WINDOW_WIDTH - 200));
+	hintText.append(g_textProvider->getText(hintKey, "hint"));
+	hintText = g_textProvider->getCroppedString(hintText, characterSize, static_cast<int>(0.6f * WINDOW_WIDTH));
 	hintScreenOverlay->setSubtitleRaw(hintText);
 
 	return hintScreenOverlay;

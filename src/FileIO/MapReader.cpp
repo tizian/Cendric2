@@ -61,6 +61,112 @@ bool MapReader::checkData(MapData& data) const {
 	return true;
 }
 
+
+bool MapReader::readCollidableObjectLayer(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+		int x;
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int width;
+		result = object->QueryIntAttribute("width", &width);
+
+		// do we we have a rectangle here?
+		if (result == tinyxml2::XML_SUCCESS) {
+			// rectangle
+
+			int height;
+			result = object->QueryIntAttribute("height", &height);
+			XMLCheckResult(result);
+
+			data.collidableRects.push_back(sf::FloatRect(
+				static_cast<float>(x), 
+				static_cast<float>(y),
+				static_cast<float>(width), 
+				static_cast<float>(height)));
+
+			object = object->NextSiblingElement("object");
+			continue;
+		}
+
+		// we do have a polygon here and it should be a triangle. Let's parse those points.
+		tinyxml2::XMLElement* polygon = object->FirstChildElement("polygon");
+		if (polygon == nullptr) {
+			g_logger->logError("MapReader", "XML file could not be read, no polygon tag found on collidable object layer for a not-rectangle object.");
+			return false;
+		}
+
+		const char* textAttr = nullptr;
+		textAttr = polygon->Attribute("points");
+		if (textAttr == nullptr) {
+			g_logger->logError("MapReader", "XML file could not be read, no polygon->points attribute found for collidable object layer.");
+			return false;
+		}
+		std::string points = textAttr;
+
+		size_t pos = 0;
+		sf::Vector2f v1;
+		sf::Vector2f v2;
+		sf::Vector2f v3;
+
+		// vertex 1
+		pos = points.find(",");
+		if (pos == std::string::npos) {
+			logError("polygon triangle is wrongly defined.");
+			return false;
+		}
+		v1.x = static_cast<float>(atoi(points.substr(0, pos).c_str()) + x);
+		points.erase(0, pos + 1);
+
+		pos = points.find(" ");
+		if (pos == std::string::npos) {
+			logError("polygon triangle is wrongly defined.");
+			return false;
+		}
+		v1.y = static_cast<float>(atoi(points.substr(0, pos).c_str()) + y);
+		points.erase(0, pos + 1);
+
+		// vertex 2
+		pos = points.find(",");
+		if (pos == std::string::npos) {
+			logError("polygon triangle is wrongly defined.");
+			return false;
+		}
+		v2.x = static_cast<float>(atoi(points.substr(0, pos).c_str()) + x);
+		points.erase(0, pos + 1);
+
+		pos = points.find(" ");
+		if (pos == std::string::npos) {
+			logError("polygon triangle is wrongly defined.");
+			return false;
+		}
+		v2.y = static_cast<float>(atoi(points.substr(0, pos).c_str()) + y);
+		points.erase(0, pos + 1);
+
+		// vertex 3
+		pos = points.find(",");
+		if (pos == std::string::npos) {
+			logError("polygon triangle is wrongly defined.");
+			return false;
+		}
+		v3.x = static_cast<float>(atoi(points.substr(0, pos).c_str()) + x);
+		points.erase(0, pos + 1);
+
+		v3.y = static_cast<float>(atoi(points.c_str()) + y);
+		
+		data.collidableTriangles.push_back(FloatTriangle(v1, v2, v3));
+
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
 bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
@@ -176,6 +282,9 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;
+		}
+		else if (name.find("collidable") != std::string::npos) {
+			if (!readCollidableObjectLayer(objectgroup, data)) return false;
 		}
 		else {
 			logError("Objectgroup with unknown name found in level.");
@@ -399,6 +508,120 @@ bool MapReader::readMap(const std::string& filename, MapData& data) {
 	return true;
 }
 
+bool MapReader::readBackgroundTileLayer(const std::string& layer, MapData& data) const {
+	std::string layerData = layer;
+
+	size_t pos = 0;
+	int x = 0;
+	int y = 0;
+	std::vector<int> backgroundLayer;
+	while ((pos = layerData.find(",")) != std::string::npos) {
+		int tileID = std::stoi(layerData.substr(0, pos));
+
+		if (m_tileColliderMap.find(tileID) != m_tileColliderMap.end()) {
+			sf::FloatRect collider = m_tileColliderMap.at(tileID);
+			collider.left += x * TILE_SIZE_F;
+			collider.top += y * TILE_SIZE_F;
+
+			data.collidableRects.push_back(collider);
+		}
+
+		backgroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
+		layerData.erase(0, pos + 1);
+
+		if (x + 1 == data.mapSize.x) {
+			y++;
+			x = 0;
+		}
+		else {
+			x++;
+		}
+	}
+
+	backgroundLayer.push_back(std::stoi(layerData));
+
+	data.backgroundTileLayers.push_back(backgroundLayer);
+	return true;
+}
+
+bool MapReader::readCollidableTiles(tinyxml2::XMLElement* firstTile) {
+	m_tileColliderMap.clear();
+	
+	tinyxml2::XMLElement* tile = firstTile;
+
+	while (tile != nullptr) {
+		int tileID;
+		tinyxml2::XMLError result = tile->QueryIntAttribute("id", &tileID);
+		XMLCheckResult(result);
+
+		tinyxml2::XMLElement* properties = tile->FirstChildElement("properties");
+		if (properties == nullptr) {
+			// this is an animated tile, just move on.
+			tile = tile->NextSiblingElement("tile");
+			continue;
+		}
+		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+		if (_property == nullptr) {
+			logError("Could not read item tile properties, no tileset->tile->properties->property tag found.");
+			return false;
+		}
+		const char* textAttr = nullptr;
+		textAttr = _property->Attribute("name");
+		if (textAttr == nullptr) {
+			logError("XML file could not be read, no tileset->tile->properties->property name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+		if (name.compare("collider") != 0) {
+			logError("XML file could not be read, wrong tile property (not \"collider\").");
+			return false;
+		}
+		textAttr = nullptr;
+		textAttr = _property->Attribute("value");
+		if (textAttr == nullptr) {
+			logError("XML file could not be read, no tileset->tile->properties->property value attribute found.");
+			return false;
+		}
+
+		std::string colliderText = std::string(textAttr);
+
+		size_t pos = 0;
+		sf::FloatRect collider;
+
+		pos = colliderText.find(",");
+		if (pos == std::string::npos) {
+			logError("collider rect for tile " + std::to_string(tileID) + " is wrongly defined.");
+			return false;
+		}
+		collider.left = static_cast<float>(atoi(colliderText.substr(0, pos).c_str()));
+		colliderText.erase(0, pos + 1);
+
+		pos = colliderText.find(",");
+		if (pos == std::string::npos) {
+			logError("collider rect for tile " + std::to_string(tileID) + " is wrongly defined.");
+			return false;
+		}
+		collider.top = static_cast<float>(atoi(colliderText.substr(0, pos).c_str()));
+		colliderText.erase(0, pos + 1);
+
+		pos = colliderText.find(",");
+		if (pos == std::string::npos) {
+			logError("collider rect for tile " + std::to_string(tileID) + " is wrongly defined.");
+			return false;
+		}
+		collider.width = static_cast<float>(atoi(colliderText.substr(0, pos).c_str()));
+		colliderText.erase(0, pos + 1);
+
+		collider.height = static_cast<float>(atoi(colliderText.c_str()));
+
+		m_tileColliderMap.insert({ tileID + 1, collider });
+
+		tile = tile->NextSiblingElement("tile");
+	}
+
+	return true;
+}
+
 bool MapReader::readFirstGridIDs(tinyxml2::XMLElement* map, MapData& data) {
 	tinyxml2::XMLElement* tileset = map->FirstChildElement("tileset");
 
@@ -420,7 +643,11 @@ bool MapReader::readFirstGridIDs(tinyxml2::XMLElement* map, MapData& data) {
 		if (name.find("dynamic_tiles") != std::string::npos) {
 			m_firstGidDynamicTiles = gid;
 		}
-	
+		else if (gid == 1) {
+			// this is the main tileset
+			if (!readCollidableTiles(tileset->FirstChildElement("tile"))) return false;
+		}
+
 		tileset = tileset->NextSiblingElement("tileset");
 	}
 
