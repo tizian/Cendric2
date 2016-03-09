@@ -62,6 +62,4 @@ private:
 	std::string m_npcID;
 	std::string m_dialogueTextID;
 	sf::IntRect m_npcTexturePosition;
-	const sf::IntRect m_cendricTexturePosition = sf::IntRect(0, 0, 250, 250);
-	const std::string m_cendricName = "Cendric";
 };

@@ -93,6 +93,18 @@ void Dialogue::setRoot(int root) {
 	m_currentNode = &m_nodes[root];
 }
 
+bool Dialogue::isEndable() {
+	if (m_currentNode == nullptr) return true;
+
+	for (auto& choice : m_currentNode->choices) {
+		if (choice.second == -1) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void Dialogue::setNextNode(int choice) {
 	if (m_currentNode == nullptr) return;
 	int nextNode;

@@ -17,6 +17,8 @@ public:
 	void setNextNode(int tag);
 	void setRoot(int root);
 	bool updateWindow();
+	// returns whether the current dialogue is a choice node and one of them is an ending option
+	bool isEndable();
 
 private:
 	WorldScreen* m_screen;

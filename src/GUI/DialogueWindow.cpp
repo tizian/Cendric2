@@ -4,14 +4,17 @@
 
 using namespace std;
 
-const sf::Vector2f TEXT_OFFSET = sf::Vector2f(255.f, 10.f);
+const sf::Vector2f TEXT_OFFSET = sf::Vector2f(270.f, 10.f);
+const int TEXT_WIDTH = WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x) - 100;
 const sf::FloatRect BOX = sf::FloatRect(0.f, WINDOW_HEIGHT - 200.f, WINDOW_WIDTH, 200.f);
 const int CHAR_SIZE_SPEAKER = 16;
 const int CHAR_SIZE_DIALOGUE = 12;
+const sf::IntRect CENDRIC_TEX_POS = sf::IntRect(0, 0, 250, 250);
+const std::string CENDRIC_NAME = "Cendric";
 
 DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
-	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
+	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 	m_speakerText = new BitmapText("");
 	m_speakerText->setCharacterSize(CHAR_SIZE_SPEAKER);
 	m_speakerText->setColor(CENDRIC_COLOR_LIGHT_PURPLE);
@@ -74,14 +77,14 @@ void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTextureRect(m_npcTexturePosition);
 	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, TEXT_WIDTH));
 }
 
 void DialogueWindow::setCendricTalking(const std::string& text) {
 	m_options.clear();
-	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
-	m_speakerText->setString(m_cendricName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x)));
+	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
+	m_speakerText->setString(CENDRIC_NAME);
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, TEXT_WIDTH));
 }
 
 void DialogueWindow::setNPCTrading(const std::string& text) {
@@ -89,7 +92,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_speakerSprite.setTextureRect(m_npcTexturePosition);
 	m_speakerSprite.setScale(sf::Vector2f(0.6f, 0.6f));
 	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, WINDOW_WIDTH - static_cast<int>(TEXT_OFFSET.x)));
+	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, CHAR_SIZE_DIALOGUE, TEXT_WIDTH));
 	delete m_merchantInterface;
 	m_merchantInterface = new MerchantInterface(dynamic_cast<WorldScreen*>(m_screen), m_npcID);
 	setPosition(sf::Vector2f(getPosition().x, getPosition().y + BOX.height / 2.f));
@@ -100,8 +103,8 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices) {
 	m_options.clear();
 	m_dialogueText->setString("");
-	m_speakerSprite.setTextureRect(m_cendricTexturePosition);
-	m_speakerText->setString(m_cendricName);
+	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
+	m_speakerText->setString(CENDRIC_NAME);
 	for (int i = 0; i < choices.size(); i++) {
 		DialogueOption option(choices[i].first, m_dialogueTextID, i);
 		option.deselect();
@@ -112,6 +115,16 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 }
 
 bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
+	if (g_inputController->isKeyJustPressed(Key::Escape)) {
+		// check if we can leave the window
+		if (m_merchantInterface != nullptr) {
+			return false;
+		}
+		if (m_dialogue->isEndable()) {
+			return false;
+		}
+	}
+
 	bool chooseOption = false;
 
 	if (m_merchantInterface != nullptr) {

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const sf::Vector2f TEXT_OFFSET = sf::Vector2f(255.f, 10.f);
+const sf::Vector2f TEXT_OFFSET = sf::Vector2f(270.f, 10.f);
 const sf::FloatRect BOX = sf::FloatRect(0.f, WINDOW_HEIGHT - 200.f, WINDOW_WIDTH, 200.f);
 const int CHAR_SIZE_TITLE = 16;
 const int CHAR_SIZE_OPTIONS = 12;
@@ -55,6 +55,10 @@ void CookingWindow::reload() {
 }
 
 bool CookingWindow::updateWindow(const sf::Time frameTime) {
+	if (g_inputController->isKeyJustPressed(Key::Escape)) {
+		return false;
+	}
+
 	bool chooseOption = false;
 
 	int oldOption = m_chosenOption;
