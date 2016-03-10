@@ -31,11 +31,11 @@ void Level::loadAfterMainChar(Screen* screen) {
 
 bool Level::load(const std::string& id) {
 	LevelReader reader;
+	m_levelData.id = id;
 	if (!reader.readLevel(id, m_levelData)) {
 		return false;
 	}
 
-	m_levelData.id = id;
 	// load level
 	m_backgroundTileMap.load(m_levelData, m_levelData.backgroundTileLayers);
 	m_lightedForegroundTileMap.load(m_levelData, m_levelData.lightedForegroundTileLayers);

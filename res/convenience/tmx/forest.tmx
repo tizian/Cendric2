@@ -1135,7 +1135,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="items" width="60" height="70">
+ <layer name="item" width="60" height="70">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1209,7 +1209,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="enemies">
+ <objectgroup name="enemy">
   <object id="1" gid="563" x="2557" y="2883" width="50" height="50">
    <properties>
     <property name="gold" value="2"/>
@@ -1635,7 +1635,7 @@
 77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,0,0,0,77,77,77,77,77,77,77,77,0,0,0,0,0,0,0,0,77,77
 </data>
  </layer>
- <objectgroup name="levelexits">
+ <objectgroup name="levelexit">
   <object id="8" x="925" y="1837" width="50" height="100">
    <properties>
     <property name="map id" value="res/map/meadows/meadows.tmx"/>
@@ -1665,7 +1665,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="chests">
+ <objectgroup name="chest">
   <object id="15" gid="366" x="2876.34" y="2795.67" width="50" height="50"/>
   <object id="16" gid="366" x="55" y="3313" width="50" height="50"/>
   <object id="22" gid="366" x="100" y="2256" width="50" height="50">

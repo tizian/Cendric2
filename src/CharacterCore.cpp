@@ -254,11 +254,13 @@ void CharacterCore::initializeLevelMaps(const std::string& level) {
 	m_data.enemiesLooted.insert({ level, std::set<int>() });
 	m_data.itemsLooted.insert({ level, std::set<int>() });
 	m_data.chestsLooted.insert({ level, std::set<int>() });
+	m_data.triggersTriggered.insert({ level, std::set<int>() });
 }
 
 void CharacterCore::initializeMapMaps(const std::string& map) {
 	// if these entries for the given map already exist, an insert will do nothing.
 	m_data.waypointsUnlocked.insert({ map, std::set<int>() });
+	m_data.triggersTriggered.insert({ map, std::set<int>() });
 }
 
 void CharacterCore::setEnemyKilled(const std::string& level, int pos) {
@@ -277,8 +279,8 @@ void CharacterCore::setChestLooted(const std::string& level, int pos) {
 	m_data.chestsLooted.at(level).insert(pos);
 }
 
-void CharacterCore::setHintDisplayed(const std::string& hint) {
-	m_data.hintsDisplayed.insert(hint);
+void CharacterCore::setTriggerTriggered(const std::string& world, int pos) {
+	m_data.triggersTriggered.at(world).insert(pos);
 }
 
 void CharacterCore::setWaypointUnlocked(const std::string& map, int pos) {
@@ -404,8 +406,10 @@ bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) {
 	return true;
 }
 
-bool CharacterCore::isHintDisplayed(const std::string& hint) {
-	return  m_data.hintsDisplayed.find(hint) != m_data.hintsDisplayed.end();
+bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID) {
+	if (m_data.triggersTriggered.find(worldID) == m_data.triggersTriggered.end()) return false;
+	if (m_data.triggersTriggered.at(worldID).find(objectID) == m_data.triggersTriggered.at(worldID).end()) return false;
+	return true;
 }
 
 const CharacterCoreData& CharacterCore::getData() const {

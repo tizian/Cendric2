@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Structs/AnimatedTileData.h"
 #include "Structs/LightData.h"
+#include "Structs/TriggerData.h"
 
 struct WorldData {
 	virtual ~WorldData() {};
@@ -22,6 +23,7 @@ struct WorldData {
 	std::vector<std::vector<bool>> collidableTilePositions;
 
 	std::vector<LightData> lights;
+	std::vector<TriggerData> triggers;
 	
 	sf::FloatRect mapRect;
 	float dimming = 0.f;

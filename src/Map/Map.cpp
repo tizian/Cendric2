@@ -9,11 +9,10 @@ Map::~Map() {
 
 bool Map::load(const std::string& id) {
 	MapReader reader;
+	m_mapData.id = id;
 	if (!reader.readMap(id.c_str(), m_mapData)) {
 		return false;
 	}
-
-	m_mapData.id = id;
 
 	// load map
 	m_backgroundTileMap.load(m_mapData, m_mapData.backgroundTileLayers);
@@ -31,6 +30,7 @@ void Map::dispose() {
 void Map::loadAfterMainChar(Screen* screen) {
 	MapLoader loader;
 	loader.loadNpcs(m_mapData, screen, this);
+	loader.loadTriggers(m_mapData, screen);
 	m_screen = screen;
 	updateLevelEntries();
 }

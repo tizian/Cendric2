@@ -7,6 +7,7 @@
 #include "ObjectFactory.h"
 #include "Level/DynamicTiles/ModifierTile.h"
 #include "Level/DynamicTiles/MovingTile.h"
+#include "Trigger.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ void LevelLoader::loadAfterMainChar(LevelData& data, Screen* screen, Level* leve
 	loadChestTiles(data, screen, level);
 	loadLeverTiles(data, screen, level);
 	loadMovingTiles(data, screen, level);
+	loadTriggers(data, screen);
 }
 
 void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) const {
@@ -195,6 +197,22 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 		else {
 			x++;
 		}
+	}
+}
+
+void LevelLoader::loadTriggers(LevelData& data, Screen* screen) const {
+	LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(screen);
+	LevelMainCharacter* mainCharacter = levelScreen->getMainCharacter();
+	if (mainCharacter == nullptr) {
+		g_logger->logError("LevelLoader", "Could not find main character of game screen");
+		return;
+	}
+
+	for (auto& it : data.triggers) {
+		if (screen->getCharacterCore()->isTriggerTriggered(it.worldID, it.objectID))
+			continue;
+		Trigger* trigger = new Trigger(levelScreen, mainCharacter, it);
+		screen->addObject(trigger);
 	}
 }
 

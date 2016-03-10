@@ -274,7 +274,7 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 
 		std::string name = textAttr;
 
-		if (name.find("mapexits") != std::string::npos) {
+		if (name.find("mapexit") != std::string::npos) {
 			if (!readMapExits(objectgroup, data)) return false;
 		}
 		else if (name.find("npc") != std::string::npos) {
@@ -286,8 +286,11 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableObjectLayer(objectgroup, data)) return false;
 		}
+		else if (name.find("trigger") != std::string::npos) {
+			if (!readTriggers(objectgroup, data)) return false;
+		}
 		else {
-			logError("Objectgroup with unknown name found in level.");
+			logError("Objectgroup with unknown name found in map: " + name);
 			return false;
 		}
 

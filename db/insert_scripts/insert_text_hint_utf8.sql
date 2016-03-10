@@ -5,3 +5,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ch
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LeaveLevel', 'hint','when standing at a level exit to leave the level','wenn du bei einem Level-Ausgang stehst, um das Level zu verlassen','wenn du vor emne Level-Usgang stahsch zum use gah');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Scout', 'hint','to scout','um einen besseren Überblick zu bekommen.','zum en bessere Überblick z''ha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Map', 'hint','to open the map.','um die Karte zu öffnen.','zum d''Charte ufmache');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MapMove', 'hint','to move.','um dich zu bewegen.','zum dich bewege.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Pickup', 'hint','Click on an item with the right mouse key to pickup.','Klicke einen Gegenstand mit der rechten Maustaste an, um ihn aufzuheben.','Klick en Gegestand mit de rechte Muustaschte ah zum ihn neh.');
+

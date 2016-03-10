@@ -81,7 +81,7 @@ void DialogueLoader::changeQuestState(const std::string& questID, const std::str
 		g_logger->logError("DialogueLoader", "Cannot change state: Quest state [" + state + "] does not exist.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::QuestStateChange);
+	TriggerContent content(TriggerContentType::QuestStateChange);
 	content.firstStringAttribute = questID;
 	content.integerAttribute = static_cast<int>(questState);
 	m_currentNode->content.push_back(content);
@@ -100,7 +100,7 @@ void DialogueLoader::addQuestDescription(const std::string& questID, int descrip
 		g_logger->logError("DialogueLoader", "Description ID must be > 0");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::QuestDescriptionProgress);
+	TriggerContent content(TriggerContentType::QuestDescriptionProgress);
 	content.firstStringAttribute = questID;
 	content.integerAttribute = descriptionID;
 	m_currentNode->content.push_back(content);
@@ -115,7 +115,7 @@ void DialogueLoader::addQuestProgress(const std::string& questID, const std::str
 		g_logger->logError("DialogueLoader", "Quest ID and quest progress cannot be empty.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::QuestConditionProgress);
+	TriggerContent content(TriggerContentType::QuestConditionProgress);
 	content.firstStringAttribute = questID;
 	content.secondStringAttribute = progress;
 	m_currentNode->content.push_back(content);
@@ -130,7 +130,7 @@ void DialogueLoader::addConditionProgress(const std::string& conditionType, cons
 		g_logger->logError("DialogueLoader", "Condition and condition type cannot be empty.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::ConditionProgress);
+	TriggerContent content(TriggerContentType::ConditionProgress);
 	content.firstStringAttribute = conditionType;
 	content.secondStringAttribute = condition;
 	m_currentNode->content.push_back(content);
@@ -145,7 +145,7 @@ void DialogueLoader::addHint(const std::string& hint) {
 		g_logger->logError("DialogueLoader", "Hint cannot be empty.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::Hint);
+	TriggerContent content(TriggerContentType::Hint);
 	content.firstStringAttribute = hint;
 	m_currentNode->content.push_back(content);
 }
@@ -187,7 +187,7 @@ void DialogueLoader::addItem(const std::string& itemID, int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::ItemChange);
+	TriggerContent content(TriggerContentType::ItemChange);
 	content.firstStringAttribute = itemID;
 	content.integerAttribute = amount;
 	m_currentNode->content.push_back(content);
@@ -202,7 +202,7 @@ void DialogueLoader::equipItem(const std::string& itemID) {
 		g_logger->logError("DialogueLoader", "Item ID cannot be empty.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::ItemEquip);
+	TriggerContent content(TriggerContentType::ItemEquip);
 	content.firstStringAttribute = itemID;
 	m_currentNode->content.push_back(content);
 }
@@ -221,7 +221,7 @@ void DialogueLoader::removeItem(const std::string& itemID, int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::ItemChange);
+	TriggerContent content(TriggerContentType::ItemChange);
 	content.firstStringAttribute = itemID;
 	content.integerAttribute = -amount;
 	m_currentNode->content.push_back(content);
@@ -236,7 +236,7 @@ void DialogueLoader::addGold(int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::GoldChange);
+	TriggerContent content(TriggerContentType::GoldChange);
 	content.integerAttribute = amount;
 	m_currentNode->content.push_back(content);
 }
@@ -250,7 +250,7 @@ void DialogueLoader::removeGold(int amount) {
 		g_logger->logError("DialogueLoader", "amount cannot be negative.");
 		return;
 	}
-	DialogeNodeContent content(DialogueNodeContentType::GoldChange);
+	TriggerContent content(TriggerContentType::GoldChange);
 	content.integerAttribute = -amount;
 	m_currentNode->content.push_back(content);
 }

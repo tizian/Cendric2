@@ -22,4 +22,6 @@ public:
 	void loadNpcs(MapData& data, Screen* screen, Map* map) const;
 	// loads lights out of map data and adds them directly to the screen
 	void loadLights(MapData& data, Screen* screen) const;
+	// loads triggers out of map data and adds them directly to the screen
+	void loadTriggers(MapData& data, Screen* screen) const;
 };

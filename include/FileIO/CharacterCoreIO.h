@@ -24,6 +24,7 @@ protected:
 	const char* ITEMS_LOOTED = "items.looted";
 	const char* CHESTS_LOOTED = "chests.looted";
 	const char* WAYPOINTS_UNLOCKED = "waypoints.unlocked";
+	const char* TRIGGERS_TRIGGERED = "triggers.triggered";
 	const char* MERCHANT_STATE = "merchant.state";
 	const char* QUEST_STATE = "quest.state";
 	const char* QUEST_PROGRESS_TARGET = "quest.progress.target";

@@ -50,6 +50,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
 		updateObjects(GameObjectType::_Light, frameTime);
+		updateObjects(GameObjectType::_Overlay, frameTime);
 		m_currentMap.update(frameTime);
 		updateTooltipText(frameTime);
 		return;
@@ -183,6 +184,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(adjustedView);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MapMovableGameObject, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_Overlay, renderTarget);
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!

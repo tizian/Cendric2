@@ -2,6 +2,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Active','Acti
 INSERT INTO text (text_id, english, german, swiss_german) values ('AdditionalResistance','Additional Resistance','Zusätzlicher Widerstand','Zuesätzliche Widerstand');
 INSERT INTO text (text_id, english, german, swiss_german) values ('AllowedModifiers','Allowed Gem Types','Erlaubte Edelsteintypen','Erlaubti Edelsteitype');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Apply','Apply','Anwenden','Awende');
+INSERT INTO text (text_id, english, german, swiss_german) values ('And','and','und','und');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Armor','Armour','Rüstung','Rüstig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Back','Back','Zurück','Zrugg');
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint');

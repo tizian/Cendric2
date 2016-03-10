@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="107">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="108">
  <properties>
   <property name="dimming" value="0.4"/>
   <property name="name" value="Meadows"/>
@@ -923,7 +923,7 @@
   </object>
   <object id="106" x="3374" y="1423" width="25" height="1132"/>
  </objectgroup>
- <objectgroup name="mapexits">
+ <objectgroup name="mapexit">
   <object id="1" x="2908" y="213" width="85" height="45">
    <properties>
     <property name="level id" value="res/level/ratcave/ratcave.tmx"/>
@@ -978,6 +978,13 @@
     <property name="id" value="npc_ingrid"/>
     <property name="routineid" value="res/npc/npc_ingrid/ru_npc_ingrid.lua"/>
     <property name="spritesheetpath" value="res/npc/npc_ingrid/spritesheet_npc_ingrid.png"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="trigger">
+  <object id="107" x="1844" y="655" width="104" height="98">
+   <properties>
+    <property name="hint" value="MapMove"/>
    </properties>
   </object>
  </objectgroup>

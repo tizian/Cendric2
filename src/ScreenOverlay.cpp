@@ -195,6 +195,13 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 	else if (hintKey.compare("Map") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Map)) + " ");
 	}
+	else if (hintKey.compare("MapMove") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + ", ");
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Left)) + ", ");
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
+		hintText.append(g_textProvider->getText("And") + " ");
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Right)) + " ");
+	}
 	else {
 		hintText.clear();
 	}

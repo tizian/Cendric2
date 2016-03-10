@@ -708,6 +708,14 @@ bool CharacterCoreReader::readWaypointsUnlocked(char* start, char* end, Characte
 	return true;
 }
 
+bool CharacterCoreReader::readTriggersTriggered(char* start, char* end, CharacterCoreData& data) const {
+	set<int> layer;
+	std::string id;
+	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	data.triggersTriggered.insert({ id, layer });
+	return true;
+}
+
 bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
 	FILE* savFile;
 	savFile = fopen(getPath(filename).c_str(), "r");
@@ -811,6 +819,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, WAYPOINTS_UNLOCKED, strlen(WAYPOINTS_UNLOCKED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(WAYPOINTS_UNLOCKED));
 			noError = readWaypointsUnlocked(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, TRIGGERS_TRIGGERED, strlen(TRIGGERS_TRIGGERED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(TRIGGERS_TRIGGERED));
+			noError = readTriggersTriggered(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {

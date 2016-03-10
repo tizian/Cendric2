@@ -8,8 +8,6 @@ update = function(B)
 			B:say("IAmLeaving", 5)
 			B:setMovingTarget(2900, 0)
 			B:wait(5)
-			B:addConditionProgress("default","tutorial_complete")
-			B:addHint("LeaveLevel")
 			B:setDisposed()
 			speechBubbleState = speechBubbleState + 1
 		elseif (speechBubbleState == 3 and B:getPosX() > 2000) then

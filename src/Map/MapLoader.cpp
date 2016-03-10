@@ -6,6 +6,7 @@
 #include "Screens/MapScreen.h"
 #include "ObjectFactory.h"
 #include "Map/DynamicTiles/WaypointTile.h"
+#include "Trigger.h"
 
 void MapLoader::loadNpcs(MapData& data, Screen* screen, Map* map) const {
 	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
@@ -28,6 +29,22 @@ void MapLoader::loadLights(MapData& data, Screen* screen) const {
 	for (auto& it : data.lights) {
 		LightObject* lightObject = new LightObject(it);
 		screen->addObject(lightObject);
+	}
+}
+
+void MapLoader::loadTriggers(MapData& data, Screen* screen) const {
+	MapScreen* mapScreen = dynamic_cast<MapScreen*>(screen);
+	MapMainCharacter* mainCharacter = mapScreen->getMainCharacter();
+	if (mainCharacter == nullptr) {
+		g_logger->logError("MapLoader", "Could not find main character of game screen");
+		return;
+	}
+
+	for (auto& it : data.triggers) {
+		if (screen->getCharacterCore()->isTriggerTriggered(it.worldID, it.objectID))
+			continue;
+		Trigger* trigger = new Trigger(mapScreen, mainCharacter, it);
+		screen->addObject(trigger);
 	}
 }
 

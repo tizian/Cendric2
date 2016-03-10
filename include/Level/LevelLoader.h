@@ -41,4 +41,6 @@ private:
 	void loadLevelItems(LevelData& data, Screen* screen) const;
 	// loads enemies out of level data and adds them directly to the screen
 	void loadEnemies(LevelData& data, Screen* screen, Level* level) const;
+	// loads triggers out of level data and adds them directly to the screen
+	void loadTriggers(LevelData& data, Screen* screen) const;
 };

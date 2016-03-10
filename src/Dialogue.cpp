@@ -46,39 +46,7 @@ bool Dialogue::updateWindow() {
 
 	if (m_currentNode != nullptr) {
 		for (auto& content : m_currentNode->content) {
-			switch (content.type) {
-			case DialogueNodeContentType::ConditionProgress:
-				m_screen->notifyConditionAdded(content.firstStringAttribute, content.secondStringAttribute);
-				break;
-			case DialogueNodeContentType::GoldChange:
-				m_screen->notifyItemChange("gold", content.integerAttribute);
-				break;
-			case DialogueNodeContentType::ItemChange:
-				m_screen->notifyItemChange(content.firstStringAttribute, content.integerAttribute);
-				break;
-			case DialogueNodeContentType::Hint:
-				m_screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(content.firstStringAttribute));
-				break;
-			case DialogueNodeContentType::ItemEquip: {
-				auto bean = g_databaseManager->getItemBean(content.firstStringAttribute);
-				if (bean.status == BeanStatus::Filled) {
-					m_screen->getCharacterCore()->equipItem(bean.item_id, bean.item_type);
-					m_screen->getInventory()->reload();
-				}
-				break;
-			}
-			case DialogueNodeContentType::QuestConditionProgress:
-				m_screen->notifyQuestConditionFulfilled(content.firstStringAttribute, content.secondStringAttribute);
-				break;
-			case DialogueNodeContentType::QuestDescriptionProgress:
-				m_screen->notifyQuestDescriptionAdded(content.firstStringAttribute, content.integerAttribute);
-				break;
-			case DialogueNodeContentType::QuestStateChange:
-				m_screen->notifyQuestStateChanged(content.firstStringAttribute, static_cast<QuestState>(content.integerAttribute));
-				break;
-			default:
-				break;
-			}
+			TriggerContent::executeTrigger(content, m_screen);
 		}
 	}
 		

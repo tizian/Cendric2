@@ -4,35 +4,13 @@
 
 #include "Enums/QuestState.h"
 #include "Enums/FractionID.h"
+#include "Structs/TriggerContent.h"
 
 enum class DialogueNodeType {
 	CendricTalking,
 	NPCTalking,
 	Choice,
 	Trade
-};
-
-enum class DialogueNodeContentType {
-	QuestStateChange,
-	QuestConditionProgress,
-	QuestDescriptionProgress,
-	ConditionProgress,
-	ReputationProgress,
-	ItemChange,
-	GoldChange,
-	ItemEquip,
-	Hint
-};
-
-// holds a part of the dialogue node content.
-// the dialogue node content type decides which of 
-// the attributes are used.
-struct DialogeNodeContent {
-	DialogeNodeContent(DialogueNodeContentType type_) : type(type_){};
-	DialogueNodeContentType type;
-	std::string firstStringAttribute;
-	std::string secondStringAttribute;
-	int integerAttribute;
 };
 
 struct DialogueNode {
@@ -49,5 +27,5 @@ struct DialogueNode {
 	// this is empty if it is not a trade
 	std::string merchantID;
 	// the content of this node, may be 0-n elements
-	std::vector<DialogeNodeContent> content;
+	std::vector<TriggerContent> content;
 };

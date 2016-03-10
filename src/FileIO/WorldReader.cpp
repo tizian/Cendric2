@@ -128,6 +128,98 @@ bool WorldReader::readLights(tinyxml2::XMLElement* objectgroup, WorldData& data)
 	return true;
 }
 
+bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+		TriggerData trigger;
+		trigger.worldID = data.id;
+		tinyxml2::XMLError result = object->QueryIntAttribute("id", &trigger.objectID);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int width;
+		result = object->QueryIntAttribute("width", &width);
+		XMLCheckResult(result);
+
+		int height;
+		result = object->QueryIntAttribute("height", &height);
+		XMLCheckResult(result);
+
+		trigger.triggerRect.left = static_cast<float>(x);
+		trigger.triggerRect.top = static_cast<float>(y);
+		trigger.triggerRect.width = static_cast<float>(width);
+		trigger.triggerRect.height = static_cast<float>(height);
+
+		// trigger properties
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+			while (_property != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = _property->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no property->name attribute found for trigger.");
+					return false;
+				}
+				std::string name = textAttr;
+
+				if (name.compare("hint") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, hint value property not found.");
+						return false;
+					}
+					TriggerContent content(TriggerContentType::Hint);
+					content.firstStringAttribute = textAttr;
+					trigger.content.push_back(content);
+				}
+				else if (name.compare("condition progress") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, condition progress value property not found.");
+						return false;
+					}
+
+					std::string condition_progress = textAttr;
+
+					size_t pos = 0;
+					if ((pos = condition_progress.find(",")) == std::string::npos) {
+						logError("XML file could not be read, condition progress value must be two strings, seperated by a comma.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::ConditionProgress);
+					content.firstStringAttribute = condition_progress.substr(0, pos);
+					condition_progress.erase(0, pos + 1);
+					content.secondStringAttribute = condition_progress;
+					trigger.content.push_back(content);
+				}
+				else if (name.compare("persistent") == 0) {
+					trigger.isPersistent = true;
+				}
+				else {
+					logError("XML file could not be read, unknown property->name attribute found for trigger.");
+					return false;
+				}
+				_property = _property->NextSiblingElement("property");
+			}
+		}
+
+		data.triggers.push_back(trigger);
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
+
 bool WorldReader::readBackgroundTileLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;
 

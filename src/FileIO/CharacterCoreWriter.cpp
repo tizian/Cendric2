@@ -38,6 +38,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeItemsLooted(data);
 		savefile << writeChestsLooted(data);
 		savefile << writeWaypointsUnlocked(data);
+		savefile << writeTriggersTriggered(data);
 		savefile << writeQuestStates(data);
 		savefile << writeQuestProgressTargets(data);
 		savefile << writeQuestProgressConditions(data);
@@ -151,6 +152,22 @@ std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData&
 		waypointsUnlocked.append(waypointUnlocked);
 	}
 	return waypointsUnlocked;
+}
+
+std::string CharacterCoreWriter::writeTriggersTriggered(const CharacterCoreData& data) const {
+	string triggersTriggered = "# triggers triggered in world:\n";
+
+	for (auto& it : data.triggersTriggered) {
+		string triggerTriggered = string(TRIGGERS_TRIGGERED);
+		triggerTriggered.append(":");
+		triggerTriggered.append(it.first);
+		for (auto it2 : it.second) {
+			triggerTriggered.append("," + to_string(it2));
+		}
+		triggerTriggered.append("\n");
+		triggersTriggered.append(triggerTriggered);
+	}
+	return triggersTriggered;
 }
 
 std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data) const {

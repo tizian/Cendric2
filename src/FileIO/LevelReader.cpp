@@ -478,26 +478,29 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 
 		std::string name = textAttr;
 
-		if (name.find("levelexits") != std::string::npos) {
+		if (name.find("levelexit") != std::string::npos) {
 			if (!readLevelExits(objectgroup, data)) return false;
 		}
-		else if (name.find("enemies") != std::string::npos) {
+		else if (name.find("enemy") != std::string::npos) {
 			if (!readEnemies(objectgroup, data)) return false;
 		}
-		else if (name.find("chests") != std::string::npos) {
+		else if (name.find("chest") != std::string::npos) {
 			if (!readChestTiles(objectgroup, data)) return false;
 		}
-		else if (name.find("modifiers") != std::string::npos) {
+		else if (name.find("modifier") != std::string::npos) {
 			if (!readModifierTiles(objectgroup, data)) return false;
 		}
-		else if (name.find("moving platforms") != std::string::npos) {
+		else if (name.find("moving platform") != std::string::npos) {
 			if (!readMovingTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;
 		}
+		else if (name.find("trigger") != std::string::npos) {
+			if (!readTriggers(objectgroup, data)) return false;
+		}
 		else {
-			g_logger->logError("LevelReader", "Objectgroup with unknown name found in level.");
+			g_logger->logError("LevelReader", "Objectgroup with unknown name found in level: " + name);
 			return false;
 		}
 
@@ -685,11 +688,11 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
 		}
-		else if (name.find("items") != std::string::npos) {
+		else if (name.find("item") != std::string::npos) {
 			if (!readLevelItemLayer(layerData, data)) return false;
 		}
 		else {
-			g_logger->logError("LevelReader", "Layer with unknown name found in level.");
+			g_logger->logError("LevelReader", "Layer with unknown name found in level: " + name);
 			return false;
 		}
 
