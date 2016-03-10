@@ -16,7 +16,9 @@ enum class DialogueNodeType {
 struct DialogueNode {
 	// the dialogue tag
 	int tag;
-	// The next tag. It may be 0 to infinity, but -1 means that the dialogue ends after that node
+	// The next tag. It may be 0 to infinity, but 
+	// -1 means that the dialogue ends after that node and
+	// -2 tells the dialogue to reload and start at root after that node (is useful if conditions change)
 	int nextTag;
 	// dialogue node type
 	DialogueNodeType type;

@@ -94,7 +94,6 @@ void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const 
 			animatedTile->playCurrentAnimation(true);
 			animatedTile->setPosition(position);
 			animatedTile->setState(GameObjectState::Idle);
-			animatedTile->setCurrentAnimation(animatedTile->getAnimation(GameObjectState::Idle), false);
 
 			m_animatedTiles[layerNr].push_back(animatedTile);
 			

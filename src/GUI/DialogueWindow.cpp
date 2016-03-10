@@ -49,9 +49,9 @@ NPC* DialogueWindow::getNPC() {
 void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* screen) {
 	delete m_dialogue;
 	m_dialogue = new Dialogue();
-	m_dialogue->load(dialogueID, screen, this);
+	m_dialogue->reload(dialogueID, screen, this);
 	m_screen = screen;
-
+	
 	if (m_dialogue->getID().size() > 4) {
 		// removing the .lua
 		m_dialogueTextID = m_dialogue->getID().substr(0, m_dialogue->getID().size() - 4);
@@ -61,9 +61,7 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* scr
 		}
 	}
 
-	if (!m_dialogue->updateWindow()) {
-		g_logger->logError("DialogueWindow", "No node in current dialogue");
-	}
+	m_dialogue->updateWindow();
 }
 
 void DialogueWindow::setNPC(NPC* npc) {
@@ -106,7 +104,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 	m_speakerText->setString(CENDRIC_NAME);
 	for (int i = 0; i < choices.size(); i++) {
-		DialogueOption option(choices[i].first, m_dialogueTextID, i);
+		DialogueOption option(choices[i].first, m_dialogueTextID, i, choices[i].second == -1);
 		option.deselect();
 		m_options.push_back(option);
 	}
@@ -204,7 +202,12 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 
 // Dialogue Option
 
-DialogueOption::DialogueOption(const std::string& text, const std::string& dialogueID, int nr) : m_text(g_textProvider->getText(text, dialogueID)) {
+DialogueOption::DialogueOption(const std::string& text, const std::string& dialogueID, int nr, bool isEnd) {
+	std::string textString = g_textProvider->getText(text, dialogueID);
+	if (isEnd) {
+		textString.append(textString.empty() ? g_textProvider->getText("DialogueEnd") : " " + g_textProvider->getText("DialogueEnd"));
+	}
+	m_text.setString(textString);
 	m_text.setCharacterSize(CHAR_SIZE_DIALOGUE);
 	m_text.setColor(sf::Color::White);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));

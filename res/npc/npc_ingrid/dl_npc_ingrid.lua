@@ -55,16 +55,16 @@ loadDialogue = function(DL)
 	end
 	DL:addNode()
 	
-	DL:createNPCNode(32, -1, "DL_Ingrid_GivesMeat") -- Oh, you poor, poor boy. Here, take this piece of meat, this should help for now.
+	DL:createNPCNode(32, -2, "DL_Ingrid_GivesMeat") -- Oh, you poor, poor boy. Here, take this piece of meat, this should help for now.
 	DL:addItem("fo_roastedmeat", 1)
 	DL:addConditionProgress("npc_ingrid", "meat_given")
 	DL:addNode()
 	
-	DL:createNPCNode(33, -1, "DL_Ingrid_Location") -- You're lost? You're in the middle of the meadows, in the lands of Admantris. Why don't you just take a look on your map you got there?
+	DL:createNPCNode(33, -2, "DL_Ingrid_Location") -- You're lost? You're in the middle of the meadows, in the lands of Admantris. Why don't you just take a look on your map you got there?
 	DL:addHint("Map")
 	DL:addNode()
 	
-	DL:createNPCNode(34, -1, "DL_Ingrid_DontTrouble") -- Don't make trouble.
+	DL:createNPCNode(34, -2, "DL_Ingrid_DontTrouble") -- Don't make trouble.
 	DL:addNode()
 
 end	

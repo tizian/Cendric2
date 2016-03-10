@@ -4,14 +4,18 @@
 #include "DialogueLoader.h"
 #include "Map/NPC.h"
 
-void Dialogue::load(const std::string& id, WorldScreen* screen, DialogueWindow* window) {
+void Dialogue::reload(const std::string& id, WorldScreen* screen, DialogueWindow* window) {
 	m_id = id;
 	m_screen = screen;
 	m_window = window;
 	m_nodes.clear();
+	m_currentNode = nullptr;
 
 	DialogueLoader loader(*this, screen->getCharacterCore());
 	loader.loadDialogue();
+	if (m_currentNode == nullptr) {
+		g_logger->logError("Dialogue", "No node in current dialogue, root is not set.");
+	}
 }
 
 void Dialogue::addNode(int tag, const DialogueNode& node) {
@@ -88,6 +92,11 @@ void Dialogue::setNextNode(int choice) {
 
 	if (nextNode == -1) {
 		m_currentNode = nullptr;
+		return;
+	}
+	else if (nextNode == -2) {
+		reload(m_id, m_screen, m_window);
+		updateWindow();
 		return;
 	}
 

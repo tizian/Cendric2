@@ -115,12 +115,7 @@ loadDialogue = function(DL)
 				DL:addItem("fo_rawmeat", 5)
 				DL:addNode()
 			
-				DL:createNPCNode(6, 7, "DL_Edmond_INeedToGoHunt") -- Well, I need to go and hunt some more meat. But I worry about the giant rats we saw, they are going to scare off my prey.  
-				DL:addNode()
-				
-				DL:createChoiceNode(7)
-				DL:addChoice(20, "DL_Choice_ISearchForTheRats") -- I could search for the rats nest for you.  	
-				DL:addChoice(-1, "DL_Choice_CU") --  See you later.
+				DL:createNPCNode(6, -2, "DL_Edmond_INeedToGoHunt") -- Well, I need to go and hunt some more meat. But I worry about the giant rats we saw, they are going to scare off my prey.  
 				DL:addNode()
 				
 				DL:setRoot(1)

@@ -14,7 +14,7 @@ class NPC;
 
 class DialogueOption : public GameObject {
 public:
-	DialogueOption(const std::string& text, const std::string& dialogueID, int nr);
+	DialogueOption(const std::string& text, const std::string& dialogueID, int nr, bool isEnd = false);
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;

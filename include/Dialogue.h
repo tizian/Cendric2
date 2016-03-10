@@ -11,7 +11,7 @@ class DialogueWindow;
 // A dialogue with conditions, choices and text
 class Dialogue {
 public:
-	void load(const std::string& id, WorldScreen* screen, DialogueWindow* window);
+	void reload(const std::string& id, WorldScreen* screen, DialogueWindow* window);
 	const std::string& getID() const;
 	void addNode(int tag, const DialogueNode& node);
 	void setNextNode(int tag);
@@ -23,7 +23,7 @@ public:
 private:
 	WorldScreen* m_screen;
 	DialogueWindow* m_window;
-	DialogueNode* m_currentNode = nullptr;
+	DialogueNode* m_currentNode;
 	std::string m_id;
 	std::map<int, DialogueNode> m_nodes;
 };
