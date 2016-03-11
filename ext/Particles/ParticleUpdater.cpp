@@ -1,5 +1,7 @@
 #include "Particles/ParticleUpdater.h"
 
+#include <cmath>
+
 namespace particles
 {
 	inline float dot(const sf::Vector2f &a, const sf::Vector2f &b) {
@@ -36,20 +38,65 @@ namespace particles
 	}
 
 
-	void FloorUpdater::update(ParticleData *data, float dt) {
+	void HorizontalCollider::update(ParticleData *data, float dt) {
 		const int endId = data->countAlive;
 
-		for (int i = 0; i < endId; ++i) {
-			if (data->pos[i].y < floorY) {
-				sf::Vector2f force = data->acc[i];
-				float normalFactor = dot(force, sf::Vector2f(0.0f, 1.0f));
-				if (normalFactor < 0.0f) {
-					force -= sf::Vector2f(0.0f, 1.0f) * normalFactor;
-				}
+		if (invert) {
+			for (int i = 0; i < endId; ++i) {
+				if (data->pos[i].x < pos) {
+					data->pos[i].x = pos;
 
-				float velFactor = dot(data->vel[i], sf::Vector2f(0.0f, 1.0f));
-				data->vel[i] -= sf::Vector2f(0.0f, 1.0f) * (1.0f + bounceFactor) * velFactor;
-				data->acc[i] = force;
+					sf::Vector2f acc = data->acc[i];
+					data->acc[i] = sf::Vector2f(-acc.x * bounceFactor, acc.y);
+
+					sf::Vector2f vel = data->vel[i];
+					data->vel[i] = sf::Vector2f(-vel.x * bounceFactor, vel.y);
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < endId; ++i) {
+				if (data->pos[i].y > pos) {
+					data->pos[i].x = pos;
+
+					sf::Vector2f acc = data->acc[i];
+					data->acc[i] = sf::Vector2f(-acc.x * bounceFactor, acc.y);
+
+					sf::Vector2f vel = data->vel[i];
+					data->vel[i] = sf::Vector2f(-vel.x * bounceFactor, vel.y);
+				}
+			}
+		}
+	}
+
+
+	void VerticalCollider::update(ParticleData *data, float dt) {
+		const int endId = data->countAlive;
+
+		if (invert) {
+			for (int i = 0; i < endId; ++i) {
+				if (data->pos[i].y < pos) {
+					data->pos[i].y = pos;
+
+					sf::Vector2f acc = data->acc[i];
+					data->acc[i] = sf::Vector2f(acc.x, -acc.y * bounceFactor);
+
+					sf::Vector2f vel = data->vel[i];
+					data->vel[i] = sf::Vector2f(vel.x, -vel.y * bounceFactor);
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < endId; ++i) {
+				if (data->pos[i].y > pos) {
+					data->pos[i].y = pos;
+
+					sf::Vector2f acc = data->acc[i];
+					data->acc[i] = sf::Vector2f(acc.x, -acc.y * bounceFactor);
+
+					sf::Vector2f vel = data->vel[i];
+					data->vel[i] = sf::Vector2f(vel.x, -vel.y * bounceFactor);
+				}
 			}
 		}
 	}

@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 
-project(Cendric2)
+project(Cendric)
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
 
@@ -45,12 +45,14 @@ file(GLOB_RECURSE SQLiteShell_FILES
 	"${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
 )
 
-add_executable(Cendric2 ${Cendric_FILES})
+add_executable(Cendric
+	${Cendric_FILES}
+)
 
 set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
 if (WIN32)
-add_executable(SQLiteShell ${SQLiteShell_FILES})
+	add_executable(SQLiteShell ${SQLiteShell_FILES})
 endif()
 
-target_link_libraries(Cendric2 sfml-system sfml-window sfml-graphics sfml-audio)
+target_link_libraries(Cendric sfml-system sfml-window sfml-graphics sfml-audio)

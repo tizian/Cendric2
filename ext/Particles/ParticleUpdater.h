@@ -27,17 +27,33 @@ namespace particles
 	};
 
 
-	class FloorUpdater : public ParticleUpdater
+	class HorizontalCollider : public ParticleUpdater
 	{
 	public:
-		FloorUpdater() {}
-		~FloorUpdater() {}
+		HorizontalCollider() {}
+		~HorizontalCollider() {}
 
 		void update(ParticleData *data, float dt);
 
 	public:
-		float floorY{ 0.0f };
+		float pos{ 0.0f };
 		float bounceFactor{ 0.5f };
+		bool  invert{ false };
+	};
+
+
+	class VerticalCollider : public ParticleUpdater
+	{
+	public:
+		VerticalCollider() {}
+		~VerticalCollider() {}
+
+		void update(ParticleData *data, float dt);
+
+	public:
+		float pos{ 0.0f };
+		float bounceFactor{ 0.5f };
+		bool  invert{ false };
 	};
 
 
@@ -49,7 +65,7 @@ namespace particles
 
 		void update(ParticleData *data, float dt);
 
-		int numAttractors() const { return static_cast<int>(m_attractors.size()); }
+		int numAttractors() const { return m_attractors.size(); }
 		void add(const sf::Vector3f &attr) { m_attractors.push_back(attr); }
 		sf::Vector3f &get(int id) { return m_attractors[id]; }
 

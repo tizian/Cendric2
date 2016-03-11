@@ -183,7 +183,7 @@ namespace particles
 
 	MetaballParticleSystem::MetaballParticleSystem(int maxCount, sf::Texture *texture, int windowWidth, int windowHeight) : TextureParticleSystem(maxCount, texture) {
 		additiveBlendMode = true;
-		m_shader.setParameter("texture", sf::Shader::CurrentTexture);
+		m_shader.setUniform("texture", sf::Shader::CurrentTexture);
 		m_shader.loadFromMemory(vertexShader, fragmentShader);
 		m_renderTexture.create(windowWidth, windowHeight);
 	}
@@ -204,9 +204,10 @@ namespace particles
 		m_renderTexture.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
 		m_renderTexture.display();
 		m_sprite.setTexture(m_renderTexture.getTexture());
-		m_shader.setParameter("customColor", color);
-		m_shader.setParameter("threshold", threshold);
-
+		sf::Glsl::Vec4 colorVec = color;
+		m_shader.setUniform("customColor", colorVec);
+		m_shader.setUniform("threshold", threshold);
+		
 		renderTarget.setView(defaultView);
 		renderTarget.draw(m_sprite, &m_shader);
 		renderTarget.setView(oldView);
