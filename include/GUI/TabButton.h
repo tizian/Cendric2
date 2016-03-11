@@ -62,8 +62,8 @@ protected:
 
 	BitmapText m_text;
 
-	sf::Color m_backgroundColor = CENDRIC_COLOR_TRANS_BLACK;
-	sf::Color m_highlightColor = CENDRIC_COLOR_LIGHT_PURPLE;
+	sf::Color m_backgroundColor = COLOR_TRANS_BLACK;
+	sf::Color m_highlightColor = COLOR_LIGHT_PURPLE;
 
 private:
 	std::function<void()> m_executeOnClick;

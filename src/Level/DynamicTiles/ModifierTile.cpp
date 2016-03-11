@@ -96,7 +96,7 @@ void ModifierTile::addModifier() {
 	text.append(g_textProvider->getText("Level"));
 	text.append(" ");
 	text.append(std::to_string(m_modifier.level));
-	screen->setTooltipTextRaw(text, sf::Color::Green, true);
+	screen->setTooltipTextRaw(text, COLOR_GOOD, true);
 
 	m_ps->emitRate = 0;
 

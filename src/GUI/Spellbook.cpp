@@ -26,7 +26,7 @@ void Spellbook::init() {
 
 	// init text
 	m_selectedTabText.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
-	m_selectedTabText.setColor(sf::Color::White);
+	m_selectedTabText.setColor(COLOR_WHITE);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	// tabbar
@@ -40,13 +40,13 @@ void Spellbook::init() {
 
 	m_tabBar->getTabButton(0)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_gems), sf::IntRect(50, 0, 50, 50));
 	m_tabBar->getTabButton(1)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_elemental), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(1)->setTextureColor(CENDRIC_COLOR_ELEMENTAL);
+	m_tabBar->getTabButton(1)->setTextureColor(COLOR_ELEMENTAL);
 	m_tabBar->getTabButton(2)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_divine), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(2)->setTextureColor(CENDRIC_COLOR_DIVINE);
+	m_tabBar->getTabButton(2)->setTextureColor(COLOR_DIVINE);
 	m_tabBar->getTabButton(3)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_necromancy), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(3)->setTextureColor(CENDRIC_COLOR_NECROMANCY);
+	m_tabBar->getTabButton(3)->setTextureColor(COLOR_NECROMANCY);
 	m_tabBar->getTabButton(4)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(4)->setTextureColor(CENDRIC_COLOR_TWILIGHT);
+	m_tabBar->getTabButton(4)->setTextureColor(COLOR_TWILIGHT);
 
 
 	// fill the helper map
@@ -313,7 +313,7 @@ void Spellbook::calculateModifierSlots() {
 	for (auto& it : m_core->getData().modfiersLearned) {
 		BitmapText text;
 		text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-		text.setColor(CENDRIC_COLOR_WHITE);
+		text.setColor(COLOR_WHITE);
 		text.setPosition(sf::Vector2f(xOffset, yOffset + textYOffset));
 		text.setString(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it.first)));
 		m_modifierTexts.push_back(text);
@@ -340,13 +340,13 @@ void Spellbook::calculateSpellSlots() {
 
 			BitmapText text;
 			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-			text.setColor(CENDRIC_COLOR_WHITE);
+			text.setColor(COLOR_WHITE);
 			text.setString(g_textProvider->getText(EnumNames::getSpellIDName(it2)));
 			text.setPosition(sf::Vector2f(xOffset + SpellSlot::ICON_SIZE + SpellSlot::ICON_OFFSET + MARGIN, yOffset));
 
 			BitmapText textDesc;
 			textDesc.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-			textDesc.setColor(CENDRIC_COLOR_LIGHT_GREY);
+			textDesc.setColor(COLOR_LIGHT_GREY);
 			textDesc.setString(g_textProvider->getCroppedText(
 				EnumNames::getSpellIDName(it2) + "Desc", GUIConstants::CHARACTER_SIZE_S,
 				static_cast<int>(WIDTH - (SpellSlot::SIZE + 4 * MARGIN))));

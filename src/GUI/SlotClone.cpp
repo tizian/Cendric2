@@ -7,11 +7,11 @@ SlotClone::SlotClone(const Slot* original) {
 
 	float size = original->getConfiguredSize();
 	setBoundingBox(sf::FloatRect(0.f, 0.f, size, size));
-	setDebugBoundingBox(sf::Color::Red);
+	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
 	m_backgroundRect.setSize(sf::Vector2f(Slot::ICON_SIZE, Slot::ICON_SIZE));
-	m_backgroundRect.setFillColor(CENDRIC_COLOR_TRANS_GREY);
+	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
 
 	m_iconRect.setSize(sf::Vector2f(Slot::ICON_SIZE, Slot::ICON_SIZE));
 	m_iconRect.setTexture(original->m_iconTexture);

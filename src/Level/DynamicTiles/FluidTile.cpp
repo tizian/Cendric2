@@ -276,7 +276,7 @@ void FluidTile::freeze(int index) {
 		frozenTile->setPosition(sf::Vector2f(m_x + index * TILE_SIZE, m_y));
 		const sf::FloatRect *bb = frozenTile->getBoundingBox();
 		frozenTile->setBoundingBox(sf::FloatRect(bb->left, bb->top, bb->width, bb->height - 35.f));	// ice tile is ca. 15 pixels thick
-		frozenTile->setDebugBoundingBox(sf::Color::Yellow);
+		frozenTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		frozenTile->loadAnimation(0);
 		m_frozenTiles[index] = frozenTile;
 		m_screen->addObject(frozenTile);

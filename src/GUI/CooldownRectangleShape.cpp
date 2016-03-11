@@ -7,7 +7,7 @@ CooldownRectangleShape::CooldownRectangleShape() {
 	m_angle = 0.f;
 	m_triangleCount = 100;
 
-	m_color = sf::Color::White;
+	m_color = COLOR_WHITE;
 	m_vertices = sf::VertexArray(sf::Triangles);
 
 	init();

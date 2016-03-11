@@ -40,7 +40,7 @@ void WaypointTile::loadAnimation(int skinNr) {
 	// init tooltip
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setString(g_textProvider->getText("Waypoint"));
-	m_tooltipText.setColor(sf::Color::White);
+	m_tooltipText.setColor(COLOR_WHITE);
 	m_tooltipText.setCharacterSize(8);
 }
 
@@ -50,7 +50,7 @@ void WaypointTile::update(const sf::Time& frameTime) {
 	if (m_state == GameObjectState::Active) return;
 	if (m_mainCharacter->getBoundingBox()->intersects(*getBoundingBox())) {
 		m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition);
-		m_screen->setTooltipText("WaypointActivated", sf::Color::Green, true);
+		m_screen->setTooltipText("WaypointActivated", COLOR_GOOD, true);
 		setActive();
 	}
 }
@@ -69,7 +69,7 @@ void WaypointTile::onMouseOver() {
 
 void WaypointTile::onRightClick() {
 	if (m_state == GameObjectState::Idle) {
-		m_screen->setTooltipText("WaypointNotActive", sf::Color::Red, true);
+		m_screen->setTooltipText("WaypointNotActive", COLOR_BAD, true);
 		return;
 	}
 	const sf::FloatRect& bb = *m_mainCharacter->getBoundingBox();

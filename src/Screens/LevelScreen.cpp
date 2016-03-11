@@ -48,7 +48,7 @@ void LevelScreen::load() {
 
 	m_overlayText = new BitmapText(g_textProvider->getText("GamePaused"));
 	m_overlayText->setCharacterSize(56);
-	m_overlayText->setColor(sf::Color::Red);
+	m_overlayText->setColor(COLOR_BAD);
 	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
 
 	g_resourceManager->playMusic(m_backgroundMusic, m_currentLevel.getMusicPath());

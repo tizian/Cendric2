@@ -9,12 +9,12 @@ const sf::FloatRect BOX = sf::FloatRect(0.f, WINDOW_HEIGHT - 200.f, WINDOW_WIDTH
 const int CHAR_SIZE_TITLE = 16;
 const int CHAR_SIZE_OPTIONS = 12;
 
-CookingWindow::CookingWindow(MapScreen* screen) : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White) {
+CookingWindow::CookingWindow(MapScreen* screen) : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), COLOR_WHITE) {
 	m_screen = screen;
 	m_cookingSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_misc_cooking)));
 	m_title.setString(g_textProvider->getText("Fireplace"));
 	m_title.setCharacterSize(CHAR_SIZE_TITLE);
-	m_title.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+	m_title.setColor(COLOR_LIGHT_PURPLE);
 	
 	setPosition(getPosition());
 	reload();
@@ -143,7 +143,7 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 		m_text.setString(textString);
 	}
 	m_text.setCharacterSize(CHAR_SIZE_OPTIONS);
-	m_text.setColor(sf::Color::White);
+	m_text.setColor(COLOR_WHITE);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
 	setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y + 30.f + (nr * 20.f)));
 	setInputInDefaultView(true);
@@ -169,7 +169,7 @@ bool CookingOption::isClicked() {
 }
 
 void CookingOption::select() {
-	m_text.setColor(sf::Color::White);
+	m_text.setColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -178,7 +178,7 @@ GameObjectType CookingOption::getConfiguredType() const {
 }
 
 void CookingOption::deselect() {
-	m_text.setColor(CENDRIC_COLOR_GREY);
+	m_text.setColor(COLOR_GREY);
 	m_isSelected = false;
 }
 

@@ -62,31 +62,42 @@ inline std::string getPath(const std::string& path) {
 #define TILE_SIZE_F 50.f
 #define TILE_SIZE 50
 
-// cendric color palette
-#define CENDRIC_COLOR_WHITE			sf::Color(255, 255, 255)
-#define CENDRIC_COLOR_BLACK			sf::Color(0, 0, 0)
-#define CENDRIC_COLOR_TRANS_BLACK	sf::Color(0, 0, 0, 130)
-#define CENDRIC_COLOR_TRANS_GREY	sf::Color(150, 150, 150, 100)
-#define CENDRIC_COLOR_TRANS_WHITE	sf::Color(255, 255, 255, 100)
-#define CENDRIC_COLOR_TRANSPARENT	sf::Color(0, 0, 0, 0)
+// color palette
 
-#define CENDRIC_COLOR_LIGHT_GREY	sf::Color(200, 200, 200)
-#define CENDRIC_COLOR_MEDIUM_GREY	sf::Color(150, 150, 150)
-#define CENDRIC_COLOR_GREY			sf::Color(100, 100, 100)
-#define CENDRIC_COLOR_DARK_GREY		sf::Color(50, 50, 50)
-#define CENDRIC_COLOR_PURPLE		sf::Color(54, 11, 93, 255)
-#define CENDRIC_COLOR_DARK_PURPLE	sf::Color(41, 7, 63, 255)
-#define CENDRIC_COLOR_LIGHT_PURPLE	sf::Color(197, 175, 206, 251)
+// DON'T ever change white, black and transparent!!
+#define COLOR_WHITE			sf::Color(255, 255, 255)
+#define COLOR_BLACK			sf::Color(0, 0, 0)
+#define COLOR_TRANSPARENT	sf::Color(0, 0, 0, 0)
 
-#define CENDRIC_COLOR_ELEMENTAL 	sf::Color(144, 33, 7)
-#define CENDRIC_COLOR_TWILIGHT 		sf::Color(32, 43, 79)
-#define CENDRIC_COLOR_NECROMANCY 	sf::Color(23, 53, 18)
-#define CENDRIC_COLOR_DIVINE		sf::Color(178, 129, 52)
+#define COLOR_TRANS_BLACK	sf::Color(0, 0, 0, 130)
+#define COLOR_TRANS_GREY	sf::Color(150, 150, 150, 100)
+#define COLOR_TRANS_WHITE	sf::Color(255, 255, 255, 100)
 
-#define CENDRIC_COLOR_ELEMENTAL_INACTIVE 	sf::Color(143, 88, 76)
-#define CENDRIC_COLOR_TWILIGHT_INACTIVE 	sf::Color(56, 61, 79)
-#define CENDRIC_COLOR_NECROMANCY_INACTIVE 	sf::Color(46, 55, 43)
-#define CENDRIC_COLOR_DIVINE_INACTIVE		sf::Color(179, 155, 116)
+#define COLOR_GOOD			sf::Color(0, 255, 0)
+#define COLOR_NEUTRAL		sf::Color(255, 255, 0)
+#define COLOR_BAD			sf::Color(255, 0, 0)
+
+#define COLOR_DAMAGED		sf::Color(255, 0, 0)
+#define COLOR_HEALED		sf::Color(0, 255, 0)
+#define COLOR_LOOTABLE		sf::Color(255, 0, 0)
+
+#define COLOR_LIGHT_GREY	sf::Color(200, 200, 200)
+#define COLOR_MEDIUM_GREY	sf::Color(150, 150, 150)
+#define COLOR_GREY			sf::Color(100, 100, 100)
+#define COLOR_DARK_GREY		sf::Color(50, 50, 50)
+#define COLOR_PURPLE		sf::Color(54, 11, 93, 255)
+#define COLOR_DARK_PURPLE	sf::Color(41, 7, 63, 255)
+#define COLOR_LIGHT_PURPLE	sf::Color(197, 175, 206, 251)
+
+#define COLOR_ELEMENTAL 	sf::Color(144, 33, 7)
+#define COLOR_TWILIGHT 		sf::Color(32, 43, 79)
+#define COLOR_NECROMANCY 	sf::Color(23, 53, 18)
+#define COLOR_DIVINE		sf::Color(178, 129, 52)
+
+#define COLOR_ELEMENTAL_INACTIVE 	sf::Color(143, 88, 76)
+#define COLOR_TWILIGHT_INACTIVE 	sf::Color(56, 61, 79)
+#define COLOR_NECROMANCY_INACTIVE 	sf::Color(46, 55, 43)
+#define COLOR_DIVINE_INACTIVE		sf::Color(179, 155, 116)
 
 class Logger;
 class TextProvider;

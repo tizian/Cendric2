@@ -58,7 +58,7 @@ struct SpellModifier {
 			return sf::Color(0, 86 + 43, 182 + 73); // blue
 		default:
 			// unexpected
-			return sf::Color::Transparent;
+			return COLOR_TRANSPARENT;
 		}
 	}
 };

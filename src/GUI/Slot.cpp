@@ -7,24 +7,24 @@ const float Slot::ICON_SIZE = 50.f;
 void Slot::initSlot() {
 	float size = getConfiguredSize();
 	setBoundingBox(sf::FloatRect(0.f, 0.f, ICON_SIZE, ICON_SIZE));
-	setDebugBoundingBox(sf::Color::Red);
+	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
 	m_backgroundRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
-	m_backgroundRect.setFillColor(CENDRIC_COLOR_TRANS_GREY);
+	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
 
 	m_iconRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
 	m_iconRect.setTexture(m_iconTexture);
 	m_iconRect.setTextureRect(m_iconTextureRect);
 
 	m_overlayRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
-	m_overlayRect.setFillColor(CENDRIC_COLOR_TRANSPARENT);	
+	m_overlayRect.setFillColor(COLOR_TRANSPARENT);	
 
 	m_borderRect.setSize(sf::Vector2f(size, size));
 	m_borderRect.setTexture(m_borderTexture);
 
 	if (m_isEmpty) {
-		m_borderRect.setFillColor(CENDRIC_COLOR_MEDIUM_GREY);
+		m_borderRect.setFillColor(COLOR_MEDIUM_GREY);
 	}
 }
 

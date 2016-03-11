@@ -48,7 +48,7 @@ std::string transform(const std::string& str) {
 
 BitmapText::BitmapText() {
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_color = sf::Color::White;
+	m_color = COLOR_WHITE;
 	m_style = TextStyle::Default;
 	m_characterSize = 8;
 	m_font = getFont(m_style, m_characterSize);
@@ -60,7 +60,7 @@ BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment
 	m_style = style;
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = transform(string);
-	m_color = sf::Color::White;
+	m_color = COLOR_WHITE;
 	m_characterSize = 8;
 	m_lineSpacing = 0.5f;
 	m_alignment = alignment;
@@ -71,7 +71,7 @@ BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
 	m_style = TextStyle::Default;
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_string = transform(string);
-	m_color = sf::Color::White;
+	m_color = COLOR_WHITE;
 	m_characterSize = 8;
 	m_lineSpacing = 0.5f;
 	m_alignment = alignment;

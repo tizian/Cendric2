@@ -30,15 +30,15 @@ CharacterInfo::CharacterInfo(const AttributeData* attributes) {
 
 	m_namesText.setString(names);
 	m_namesText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_namesText.setColor(sf::Color::White);
+	m_namesText.setColor(COLOR_WHITE);
 
 	m_attributeText.setString("");
 	m_attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_attributeText.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+	m_attributeText.setColor(COLOR_LIGHT_PURPLE);
 
 	m_title = BitmapText(g_textProvider->getText("CharacterInfo"));
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_title.setColor(sf::Color::White);
+	m_title.setColor(COLOR_WHITE);
 
 	float width = 3 * GUIConstants::TEXT_OFFSET + 2 * m_namesText.getLocalBounds().width;
 	float height = 3 * GUIConstants::TEXT_OFFSET + m_title.getLocalBounds().height + m_namesText.getLocalBounds().height;

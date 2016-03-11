@@ -24,14 +24,14 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	int characterSize = 16;
 	m_message = BitmapText(
 		g_textProvider->getCroppedText("MessageNewSaveGame", characterSize, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER))));
-	m_message.setColor(sf::Color::White);
+	m_message.setColor(COLOR_WHITE);
 	m_message.setCharacterSize(characterSize);
 	// calculate position
 	m_message.setPosition(sf::Vector2f(DIST_FROM_BORDER, DIST_FROM_BORDER) + getPosition());
 
 	m_savegameName = "";
 	m_savegameNameText.setString(m_savegameName);
-	m_savegameNameText.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+	m_savegameNameText.setColor(COLOR_LIGHT_PURPLE);
 	m_savegameNameText.setCharacterSize(16);
 	m_savegameNameText.setPosition(sf::Vector2f(2 * DIST_FROM_BORDER, box.height - (buttonHeight + DIST_FROM_BORDER + 50)) + getPosition());
 

@@ -37,7 +37,7 @@ void KeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 	}
 	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedKey() != sf::Keyboard::Unknown) {
 		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedKey())) {
-			setTooltipText("KeyReserved", sf::Color::Red, true);
+			setTooltipText("KeyReserved", COLOR_BAD, true);
 		}
 	}
 
@@ -135,7 +135,7 @@ void KeyBindingsScreen::reload() {
 		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
 		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
 		if (it.second == sf::Keyboard::KeyCount) {
-			keyButton->setTextColor(sf::Color::Red);
+			keyButton->setTextColor(COLOR_BAD);
 		}
 		keyButton->setPosition(sf::Vector2f(distFromLeft + 300.f, distFromTop));
 		if (UNMODIFIABLE_KEYS.find(it.first) != UNMODIFIABLE_KEYS.end()) {
@@ -173,7 +173,7 @@ void KeyBindingsScreen::onApply() {
 	g_resourceManager->getConfiguration().mainKeyMap = m_selectedKeys;
 	ConfigurationWriter writer;
 	writer.saveToFile(g_resourceManager->getConfiguration());
-	setTooltipText("ConfigurationSaved", sf::Color::Green, true);
+	setTooltipText("ConfigurationSaved", COLOR_GOOD, true);
 }
 
 void KeyBindingsScreen::onUseDefault() {

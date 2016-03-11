@@ -26,8 +26,8 @@ inline bool ends_with(std::string const & value, std::string const & ending) {
 
 SaveGameWindow::SaveGameWindow() : Window(BOX,
 	WindowOrnamentStyle::SIMPLE,
-	CENDRIC_COLOR_DARK_PURPLE,
-	sf::Color(0, 0, 0, 100), sf::Color::White),
+	COLOR_DARK_PURPLE,
+	sf::Color(0, 0, 0, 100), COLOR_WHITE),
 	m_maxShowableEntries(static_cast<int>((BOX.height - 2 * TEXT_OFFSET.x) / LINE_PITCH)) {
 	reload();
 	m_arrowUp.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));
@@ -224,11 +224,11 @@ void SaveGameWindow::scrollDown() {
 
 SaveGameEntry::SaveGameEntry() {
 	m_dateSaved.setCharacterSize(CHAR_SIZE);
-	m_dateSaved.setColor(sf::Color::White);
+	m_dateSaved.setColor(COLOR_WHITE);
 	m_name.setCharacterSize(CHAR_SIZE);
-	m_name.setColor(sf::Color::White);
+	m_name.setColor(COLOR_WHITE);
 	m_timePlayed.setCharacterSize(CHAR_SIZE);
-	m_timePlayed.setColor(sf::Color::White);
+	m_timePlayed.setColor(COLOR_WHITE);
 }
 
 bool SaveGameEntry::load(const std::string& filename) {
@@ -297,9 +297,9 @@ bool SaveGameEntry::isClicked() {
 }
 
 void SaveGameEntry::select() {
-	m_name.setColor(sf::Color::White);
-	m_dateSaved.setColor(sf::Color::White);
-	m_timePlayed.setColor(sf::Color::White);
+	m_name.setColor(COLOR_WHITE);
+	m_dateSaved.setColor(COLOR_WHITE);
+	m_timePlayed.setColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -308,9 +308,9 @@ GameObjectType SaveGameEntry::getConfiguredType() const {
 }
 
 void SaveGameEntry::deselect() {
-	m_name.setColor(CENDRIC_COLOR_GREY);
-	m_dateSaved.setColor(CENDRIC_COLOR_GREY);
-	m_timePlayed.setColor(CENDRIC_COLOR_GREY);
+	m_name.setColor(COLOR_GREY);
+	m_dateSaved.setColor(COLOR_GREY);
+	m_timePlayed.setColor(COLOR_GREY);
 	m_isSelected = false;
 }
 

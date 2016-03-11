@@ -13,9 +13,9 @@ const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
 
 const sf::Vector2f TEXT_OFFSET = sf::Vector2f(10.f, 10.f);
 
-BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) : m_tooltipWindow(Window(sf::FloatRect(), WindowOrnamentStyle::NONE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White)) {
+BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) : m_tooltipWindow(Window(sf::FloatRect(), WindowOrnamentStyle::NONE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), COLOR_WHITE)) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
-	setDebugBoundingBox(sf::Color::Red);
+	setDebugBoundingBox(COLOR_BAD);
 	m_buffType = type;
 	setInputInDefaultView(true);
 
@@ -30,14 +30,14 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 
 	switch (type) {
 	case BuffType::Food:
-		m_outside.setFillColor(sf::Color::Green);
+		m_outside.setFillColor(COLOR_GOOD);
 		texture = g_resourceManager->getTexture(ResourceID::Texture_items);
 		break;
 	case BuffType::Spell:
 		texture = g_resourceManager->getTexture(ResourceID::Texture_spellicons);
 		break;
 	case BuffType::DamageOverTime:
-		m_outside.setFillColor(sf::Color::Red);
+		m_outside.setFillColor(COLOR_BAD);
 		texture = g_resourceManager->getTexture(ResourceID::Texture_damageTypes);
 		break;
 	default:
@@ -49,7 +49,7 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	m_inside.setTextureRect(textureLocation);
 
 	m_back.setSize(sf::Vector2f(50.f, 50.f));
-	m_back.setFillColor(CENDRIC_COLOR_TRANS_GREY);
+	m_back.setFillColor(COLOR_TRANS_GREY);
 
 	m_durationText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -124,16 +124,16 @@ void BuffSlot::setSpellAttributes(Spell* owner, const AttributeData& attributes)
 
 	switch (m_ownerSpell->getSpellType()) {
 	case SpellType::Elemental:
-		m_outside.setFillColor(CENDRIC_COLOR_ELEMENTAL);
+		m_outside.setFillColor(COLOR_ELEMENTAL);
 		break;
 	case SpellType::Twilight:
-		m_outside.setFillColor(CENDRIC_COLOR_TWILIGHT);
+		m_outside.setFillColor(COLOR_TWILIGHT);
 		break;
 	case SpellType::Necromancy:
-		m_outside.setFillColor(CENDRIC_COLOR_NECROMANCY);
+		m_outside.setFillColor(COLOR_NECROMANCY);
 		break;
 	case SpellType::Divine:
-		m_outside.setFillColor(CENDRIC_COLOR_DIVINE);
+		m_outside.setFillColor(COLOR_DIVINE);
 		break;
 	default:
 		break;

@@ -6,7 +6,7 @@ NeutralBehavior::NeutralBehavior(Enemy* enemy) :
 }
 
 sf::Color NeutralBehavior::getConfiguredHealthColor() const {
-	return sf::Color::Yellow;
+	return COLOR_NEUTRAL;
 }
 
 void NeutralBehavior::updateAggro() {

@@ -106,7 +106,7 @@ void NPC::onLeftClick() {
 
 void NPC::onRightClick() {
 	if (!m_NPCdata.talkingEnabled) {
-		m_screen->setTooltipText("NothingToSay", sf::Color::Red, true);
+		m_screen->setTooltipText("NothingToSay", COLOR_BAD, true);
 		return;
 	}
 	// check if npc is in range
@@ -117,7 +117,7 @@ void NPC::onRightClick() {
 		mapScreen->setDialogue(this);
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
 }
 
@@ -184,7 +184,7 @@ const NPCData& NPC::getNPCData() const {
 void NPC::setTooltipText(const std::string& tooltip) {
 	m_tooltipText = BitmapText(tooltip);
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
-	m_tooltipText.setColor(sf::Color::White);
+	m_tooltipText.setColor(COLOR_WHITE);
 	m_tooltipText.setCharacterSize(8);
 }
 

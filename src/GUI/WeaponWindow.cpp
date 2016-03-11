@@ -90,11 +90,11 @@ void WeaponWindow::init() {
 	m_spellDesc->setPosition(sf::Vector2f(LEFT + WIDTH + MARGIN, TOP));
 
 	m_weaponName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_weaponName.setColor(CENDRIC_COLOR_WHITE);
+	m_weaponName.setColor(COLOR_WHITE);
 	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET));
 
 	m_weaponDescription.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_weaponDescription.setColor(CENDRIC_COLOR_LIGHT_GREY);
+	m_weaponDescription.setColor(COLOR_LIGHT_GREY);
 	m_weaponDescription.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 4.f));
 
 	reload();

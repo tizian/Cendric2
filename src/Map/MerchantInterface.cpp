@@ -22,7 +22,7 @@ void MerchantInterface::completeTrade() {
 
 void MerchantInterface::sellItem(const Item& item) {
 	if (item.getValue() < 0) {
-		m_screen->setTooltipText("Unsalable", sf::Color::Red, true);
+		m_screen->setTooltipText("Unsalable", COLOR_BAD, true);
 		return;
 	}
 	m_screen->notifyItemChange("gold", item.getValue());
@@ -40,7 +40,7 @@ void MerchantInterface::sellItem(const Item& item) {
 
 void MerchantInterface::buyItem(const Item& item) {
 	if (m_core->getData().gold < (int)std::ceil(m_data.multiplier * item.getValue())) {
-		m_screen->setTooltipText("NotEnoughGold", sf::Color::Red, true);
+		m_screen->setTooltipText("NotEnoughGold", COLOR_BAD, true);
 		return;
 	}
 	m_screen->notifyItemChange("gold", -(int)std::ceil(m_data.multiplier * item.getValue()));

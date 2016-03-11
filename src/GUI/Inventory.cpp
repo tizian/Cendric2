@@ -35,11 +35,11 @@ void Inventory::init() {
 
 	// init text
 	m_selectedTabText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
-	m_selectedTabText.setColor(sf::Color::White);
+	m_selectedTabText.setColor(COLOR_WHITE);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	m_goldText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + INVENTORY_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
-	m_goldText.setColor(sf::Color::White);
+	m_goldText.setColor(COLOR_WHITE);
 	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	// fill the helper map
@@ -172,7 +172,7 @@ void Inventory::handleLevelRightClick(InventorySlot* clicked) {
 	else if (clicked->getItemType() == ItemType::Document)
 		showDocument(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Permanent)
-		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", sf::Color::Red, true);
+		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", COLOR_BAD, true);
 }
 
 void Inventory::update(const sf::Time& frameTime) {
@@ -306,7 +306,7 @@ void Inventory::handleLevelDrop() {
 		|| type == ItemType::Equipment_ring_1
 		|| type == ItemType::Equipment_ring_2
 		|| type == ItemType::Equipment_weapon) {
-		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", sf::Color::Red, true);
+		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
 	}
 }
 

@@ -17,7 +17,7 @@ void GameObject::setDebugBoundingBox(const sf::Color &debugColor) {
 	m_debugBox = sf::RectangleShape(getSize());
 	m_debugBox.setPosition(getPosition());
 	m_debugBox.setOutlineThickness(1.f);
-	m_debugBox.setFillColor(sf::Color::Transparent);
+	m_debugBox.setFillColor(COLOR_TRANSPARENT);
 	m_debugBox.setOutlineColor(debugColor);
 	m_isDrawBoundingBox = true;
 }

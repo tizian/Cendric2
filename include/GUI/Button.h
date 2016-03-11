@@ -69,10 +69,10 @@ protected:
 	SlicedSprite m_backLayer;
 	SlicedSprite m_ornamentLayer;
 
-	sf::Color m_backLayerColor = CENDRIC_COLOR_LIGHT_PURPLE;
-	sf::Color m_mainLayerColor = CENDRIC_COLOR_BLACK;
-	sf::Color m_ornamentLayerColor = CENDRIC_COLOR_WHITE;
-	sf::Color m_mouseOverColor = CENDRIC_COLOR_PURPLE;
+	sf::Color m_backLayerColor = COLOR_LIGHT_PURPLE;
+	sf::Color m_mainLayerColor = COLOR_BLACK;
+	sf::Color m_ornamentLayerColor = COLOR_WHITE;
+	sf::Color m_mouseOverColor = COLOR_PURPLE;
 
 	BitmapText m_text;
 

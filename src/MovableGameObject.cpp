@@ -25,7 +25,7 @@ void MovableGameObject::setDebugBoundingBox(const sf::Color &debugColor) {
 	GameObject::setDebugBoundingBox(debugColor);
 	delete m_debugInfo;
 	m_debugInfo = new BitmapText();
-	m_debugInfo->setColor(sf::Color::Red);
+	m_debugInfo->setColor(COLOR_BAD);
 }
 
 void MovableGameObject::renderAfterForeground(sf::RenderTarget& target) {

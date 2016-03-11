@@ -256,7 +256,7 @@ void Enemy::setAlly(const sf::Time& ttl) {
 
 	m_spellManager->setSpellsAllied(true);
 
-	setDebugBoundingBox(sf::Color::Green);
+	setDebugBoundingBox(COLOR_GOOD);
 }
 
 void Enemy::setPersistent(bool value) {
@@ -283,7 +283,7 @@ void Enemy::addDamageOverTime(DamageOverTimeData& data) {
 
 void Enemy::onMouseOver() {
 	if (m_isDead && !isAlly()) {
-		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
+		setSpriteColor(COLOR_LOOTABLE, sf::milliseconds(100));
 		m_showLootWindow = true;
 	}
 }
@@ -301,7 +301,7 @@ void Enemy::onRightClick() {
 			setDisposed();
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
+			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 		}
 		g_inputController->lockAction();
 	}

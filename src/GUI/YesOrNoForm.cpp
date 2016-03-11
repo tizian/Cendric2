@@ -56,7 +56,7 @@ void YesOrNoForm::setMessage(const std::string& msg, const sf::Color& color) {
 }
 
 void YesOrNoForm::setMessage(const std::string& msg) {
-	setMessage(msg, sf::Color::White);
+	setMessage(msg, COLOR_WHITE);
 }
 
 void YesOrNoForm::setOnYesClicked(const std::function<void()>& agent) {

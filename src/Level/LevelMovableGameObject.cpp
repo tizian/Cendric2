@@ -122,7 +122,7 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType) {
 	if (m_attributes.currentHealthPoints == 0) {
 		setDead();
 	}
-	setSpriteColor(sf::Color::Red, sf::milliseconds(400));
+	setSpriteColor(COLOR_DAMAGED, sf::milliseconds(400));
 }
 
 void LevelMovableGameObject::addDamageOverTime(DamageOverTimeData& data) {
@@ -136,7 +136,7 @@ void LevelMovableGameObject::addDamageOverTime(DamageOverTimeData& data) {
 void LevelMovableGameObject::addHeal(int heal) {
 	if (m_isDead || heal <= 0) return;
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints + heal));
-	setSpriteColor(sf::Color::Green, sf::milliseconds(200));
+	setSpriteColor(COLOR_HEALED, sf::milliseconds(200));
 }
 
 void LevelMovableGameObject::setFeared(const sf::Time& fearedTime) {

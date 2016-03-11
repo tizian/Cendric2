@@ -12,15 +12,15 @@ const int CHAR_SIZE_DIALOGUE = 12;
 const sf::IntRect CENDRIC_TEX_POS = sf::IntRect(0, 0, 250, 250);
 const std::string CENDRIC_NAME = "Cendric";
 
-DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), sf::Color::White) {
+DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), COLOR_WHITE) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 	m_speakerText = new BitmapText("");
 	m_speakerText->setCharacterSize(CHAR_SIZE_SPEAKER);
-	m_speakerText->setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+	m_speakerText->setColor(COLOR_LIGHT_PURPLE);
 	m_dialogueText = new BitmapText("");
 	m_dialogueText->setCharacterSize(CHAR_SIZE_DIALOGUE);
-	m_dialogueText->setColor(sf::Color::White);
+	m_dialogueText->setColor(COLOR_WHITE);
 	setPosition(getPosition());
 }
 
@@ -209,7 +209,7 @@ DialogueOption::DialogueOption(const std::string& text, const std::string& dialo
 	}
 	m_text.setString(textString);
 	m_text.setCharacterSize(CHAR_SIZE_DIALOGUE);
-	m_text.setColor(sf::Color::White);
+	m_text.setColor(COLOR_WHITE);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
 	setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y + 30.f + (nr * 20.f)));
 	setInputInDefaultView(true);
@@ -235,7 +235,7 @@ bool DialogueOption::isClicked() {
 }
 
 void DialogueOption::select() {
-	m_text.setColor(sf::Color::White);
+	m_text.setColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -244,7 +244,7 @@ GameObjectType DialogueOption::getConfiguredType() const {
 }
 
 void DialogueOption::deselect() {
-	m_text.setColor(CENDRIC_COLOR_GREY);
+	m_text.setColor(COLOR_GREY);
 	m_isSelected = false;
 }
 

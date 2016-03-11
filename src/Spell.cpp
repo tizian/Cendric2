@@ -8,7 +8,7 @@ using namespace std;
 void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	m_data = data;
 	setBoundingBox(data.boundingBox);
-	setDebugBoundingBox(sf::Color::Red);
+	setDebugBoundingBox(COLOR_BAD);
 
 	m_level = mob->getLevel();
 	m_mob = mob;

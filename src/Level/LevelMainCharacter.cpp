@@ -146,7 +146,7 @@ void LevelMainCharacter::setInvisibilityLevel(int level) {
 	m_invisibilityLevel = level;
 	if (m_invisibilityLevel == 0) {
 		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::Invisibility);
-		setSpriteColor(sf::Color::White, sf::milliseconds(1));
+		setSpriteColor(COLOR_WHITE, sf::milliseconds(1));
 	}
 	else {
 		// sets the color for a "sufficiently long" time. Other actions will reset invisibility.
@@ -233,7 +233,7 @@ void LevelMainCharacter::loadAnimation() {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	setDebugBoundingBox(sf::Color::White);
+	setDebugBoundingBox(COLOR_WHITE);
 }
 
 GameObjectType LevelMainCharacter::getConfiguredType() const {

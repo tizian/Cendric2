@@ -65,7 +65,7 @@ void AnimatedSprite::setFlippedY(bool flipped) {
 }
 
 void AnimatedSprite::reset() {
-	setColor(sf::Color::White);
+	setColor(COLOR_WHITE);
 	setRotation(0.f);
 	setFlippedX(false);
 	setFlippedY(false);

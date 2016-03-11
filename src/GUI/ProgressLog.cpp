@@ -32,7 +32,7 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	BitmapText progress;
 	progress.setTextStyle(TextStyle::Shadowed);
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	progress.setColor(amount < 0 ? sf::Color::Red : sf::Color::Green);
+	progress.setColor(amount < 0 ? COLOR_BAD : COLOR_GOOD);
 	std::string text = std::to_string(amount) + "x ";
 	text.append(itemID.compare("gold") == 0 ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID, "item"));
 	progress.setString(text);
@@ -44,7 +44,7 @@ void ProgressLog::addPermanentItemProgress(const Item& item) {
 	BitmapText progress;
 	progress.setTextStyle(TextStyle::Shadowed);
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	progress.setColor(sf::Color::Green);
+	progress.setColor(COLOR_GOOD);
 
 	std::string text = g_textProvider->getText(item.getID(), "item") + " ";
 	text.append(g_textProvider->getText("Consumed"));
@@ -53,7 +53,7 @@ void ProgressLog::addPermanentItemProgress(const Item& item) {
 	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
 
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	progress.setColor(sf::Color::White);
+	progress.setColor(COLOR_WHITE);
 	text.clear();
 	AttributeData::appendAttributes(text, item.getAttributes());
 	progress.setString(text);
@@ -83,7 +83,7 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 	BitmapText questName;
 	questName.setTextStyle(TextStyle::Shadowed);
 	questName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	questName.setColor(sf::Color::Green);
+	questName.setColor(COLOR_GOOD);
 	questName.setString("\"" + g_textProvider->getText(questID, "quest") + "\"");
 
 	std::string target = g_textProvider->getText(name, "enemy");
@@ -111,7 +111,7 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 	targetText.setTextStyle(TextStyle::Shadowed);
 	targetText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	targetText.setString(target);
-	targetText.setColor(progress >= goal ? sf::Color::Green : sf::Color::White);
+	targetText.setColor(progress >= goal ? COLOR_GOOD : COLOR_WHITE);
 	targetText.setString(target);
 
 	m_logTexts.push_back(std::make_pair(questName, TIME_TO_LIVE));
@@ -123,7 +123,7 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 	BitmapText progress;
 	progress.setTextStyle(TextStyle::Shadowed);
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	progress.setColor(state == QuestState::Completed ? sf::Color::Green : state == QuestState::Failed ? sf::Color::Red : sf::Color::Yellow);
+	progress.setColor(state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL);
 	std::string progressText = g_textProvider->getText(questID,  "quest") + ": ";
 	progressText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
 	progress.setString(progressText);
@@ -135,7 +135,7 @@ void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
 	BitmapText progress;
 	progress.setTextStyle(TextStyle::Shadowed);
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	progress.setColor(sf::Color::Green);
+	progress.setColor(COLOR_GOOD);
 	std::string progressText = g_textProvider->getText(questID, "quest") + ": ";
 	progressText.append(g_textProvider->getText("NewJournalEntry"));
 	progress.setString(progressText);

@@ -101,7 +101,7 @@ void ChestTile::setStrength(int strength) {
 
 void ChestTile::onMouseOver() {
 	if (m_state == GameObjectState::Unlocked) {
-		setSpriteColor(sf::Color::Red, sf::milliseconds(100));
+		setSpriteColor(COLOR_LOOTABLE, sf::milliseconds(100));
 		m_showLootWindow = true;
 	}
 }
@@ -123,7 +123,7 @@ void ChestTile::onRightClick() {
 			loot();
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
+			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 		}
 		g_inputController->lockAction();
 	}
@@ -135,11 +135,11 @@ void ChestTile::onRightClick() {
 			setState(GameObjectState::Unlocked);
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
+			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 		}
 		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setTooltipText("IsLocked", sf::Color::Red, true);
+		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
 	}
 }

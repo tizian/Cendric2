@@ -5,7 +5,7 @@ const float TabButton::ALIGNMENT_OFFSET = 14.f;
 
 TabButton::TabButton(const sf::FloatRect& box) {
 	// using default values for constructor.
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_tab_inactive), CENDRIC_COLOR_WHITE, box.width, box.height);
+	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_tab_inactive), COLOR_WHITE, box.width, box.height);
 	m_border.setPosition(box.left, box.top);
 
 	m_outerRect = box;
@@ -107,11 +107,11 @@ void TabButton::setText(const std::string& text, const sf::Color& color, int cha
 }
 
 void TabButton::setText(const std::string& text) {
-	setText(text, sf::Color::White, 16);
+	setText(text, COLOR_WHITE, 16);
 }
 
 void TabButton::setText(const std::string& text, int charSize) {
-	setText(text, sf::Color::White, charSize);
+	setText(text, COLOR_WHITE, charSize);
 }
 
 void TabButton::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
@@ -122,11 +122,11 @@ void TabButton::setTextRaw(const std::string& text, const sf::Color& color, int 
 }
 
 void TabButton::setTextRaw(const std::string& text, int charSize) {
-	setTextRaw(text, sf::Color::White, charSize);
+	setTextRaw(text, COLOR_WHITE, charSize);
 }
 
 void TabButton::setTextRaw(const std::string& text) {
-	setTextRaw(text, sf::Color::White, 16);
+	setTextRaw(text, COLOR_WHITE, 16);
 }
 
 void TabButton::setCharacterSize(int size) {

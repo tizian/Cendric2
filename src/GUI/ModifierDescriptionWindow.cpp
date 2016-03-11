@@ -8,7 +8,7 @@ ModifierDescriptionWindow::ModifierDescriptionWindow(const SpellModifier& modifi
 	sf::FloatRect(), WindowOrnamentStyle::NONE, 
 	sf::Color(0, 0, 0, 70), 
 	sf::Color(0, 0, 0, 70), 
-	sf::Color::White) 
+	COLOR_WHITE) 
 {
 	string description = "";
 

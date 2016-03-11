@@ -11,7 +11,7 @@ Cutscene::Cutscene(std::string& id) {
 	if (m_data.id.empty()) return;
 	
 	m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
-	m_cutsceneText.setColor(CENDRIC_COLOR_WHITE);
+	m_cutsceneText.setColor(COLOR_WHITE);
 
 	setNextStep();
 }

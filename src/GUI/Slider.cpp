@@ -6,9 +6,9 @@ const float Slider::WIDTH = 300.f;
 const float Slider::HEIGHT = 20.f;
 const float Slider::MARGIN = 2.f;
 
-const sf::Color Slider::BACKGROUND_COLOR = CENDRIC_COLOR_BLACK;
-const sf::Color Slider::MARGIN_COLOR = CENDRIC_COLOR_LIGHT_PURPLE;
-const sf::Color Slider::FILL_COLOR = CENDRIC_COLOR_PURPLE;
+const sf::Color Slider::BACKGROUND_COLOR = COLOR_BLACK;
+const sf::Color Slider::MARGIN_COLOR = COLOR_LIGHT_PURPLE;
+const sf::Color Slider::FILL_COLOR = COLOR_PURPLE;
 
 Slider::Slider(int minPos, int maxPos) : GameObject() {
 	if (minPos < 0) minPos = 0;
@@ -24,7 +24,7 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 	m_filler.setFillColor(FILL_COLOR);
 
 	m_margin.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_margin.setFillColor(sf::Color::Transparent);
+	m_margin.setFillColor(COLOR_TRANSPARENT);
 	m_margin.setOutlineThickness(-MARGIN);
 	m_margin.setOutlineColor(MARGIN_COLOR);
 
@@ -33,7 +33,7 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 	m_maxText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_maxText.setString(to_string(m_maxPosition));
 
-	m_titleText.setColor(sf::Color::White);
+	m_titleText.setColor(COLOR_WHITE);
 	setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	setBoundingBox(m_background.getGlobalBounds());
@@ -188,8 +188,8 @@ GameObjectType Slider::getConfiguredType() const {
 const float SliderKnob::RADIUS = 10.f;
 const float SliderKnob::MARGIN = 2.f;
 
-const sf::Color SliderKnob::MARGIN_COLOR = CENDRIC_COLOR_LIGHT_PURPLE;
-const sf::Color SliderKnob:: FILL_COLOR = CENDRIC_COLOR_PURPLE;
+const sf::Color SliderKnob::MARGIN_COLOR = COLOR_LIGHT_PURPLE;
+const sf::Color SliderKnob:: FILL_COLOR = COLOR_PURPLE;
 
 SliderKnob::SliderKnob() : GameObject() {
 	m_knob.setRadius(RADIUS);

@@ -19,7 +19,7 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	}
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(m_screenResource)));
 	m_errorText = BitmapText(g_resourceManager->pollError()->second);
-	m_errorText.setColor(sf::Color::Red);
+	m_errorText.setColor(COLOR_BAD);
 	m_errorText.setPosition(sf::Vector2f(64, 518));
 	m_errorText.setCharacterSize(12);
 }

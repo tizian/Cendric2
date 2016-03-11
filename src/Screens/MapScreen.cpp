@@ -27,7 +27,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		CharacterCore* newCharacterCore = new CharacterCore();
 		if (!newCharacterCore->quickload()) {
 			// no quicksave exists
-			setTooltipText("NoQuicksaveExists", sf::Color::Red, true);
+			setTooltipText("NoQuicksaveExists", COLOR_BAD, true);
 			delete newCharacterCore;
 		}
 		else {
@@ -40,7 +40,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
 		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
 		m_characterCore->quicksave();
-		setTooltipText("GameSaved", sf::Color::Green, true);
+		setTooltipText("GameSaved", COLOR_GOOD, true);
 	}
 
 	updateObjects(GameObjectType::_MapMovableGameObject, frameTime);

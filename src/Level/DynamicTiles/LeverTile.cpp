@@ -53,18 +53,18 @@ void LeverTile::onRightClick() {
 		switchLever();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
 	g_inputController->lockAction();
 }
 
 void LeverTile::onMouseOver() {
-	m_animatedSprite.setColor(sf::Color::Red);
+	m_animatedSprite.setColor(COLOR_BAD);
 }
 
 void LeverTile::render(sf::RenderTarget &renderTarget) {
 	AnimatedGameObject::render(renderTarget);
-	m_animatedSprite.setColor(sf::Color::White);
+	m_animatedSprite.setColor(COLOR_WHITE);
 }
 
 void LeverTile::setDependantTiles(const std::vector<SwitchableTile*>& dependentTiles) {
@@ -78,7 +78,7 @@ void LeverTile::switchLever() {
 		rec.boundingBox = *tile->getBoundingBox();
 		if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
 			g_logger->logInfo("LeverTile::switchLever", "Cannot switch the lever as it would stuck a MOB or a movable tile!");
-			m_screen->setTooltipText("LeverStuck", sf::Color::Red, true);
+			m_screen->setTooltipText("LeverStuck", COLOR_BAD, true);
 			return;
 		}
 	}

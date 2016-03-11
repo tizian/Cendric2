@@ -15,11 +15,11 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 	m_key = key;
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
-	setDebugBoundingBox(sf::Color::Red);
+	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
 	m_amountText.setCharacterSize(8);
-	m_amountText.setColor(CENDRIC_COLOR_WHITE);
+	m_amountText.setColor(COLOR_WHITE);
 
 	m_keyText.setString(key != Key::VOID ?
 		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[key]) :
@@ -28,7 +28,7 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 	if (m_keyText.getLocalBounds().width > SIZE - 10.f) m_keyText.setCharacterSize(8);
 
 	m_backgroundRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
-	m_backgroundRect.setFillColor(CENDRIC_COLOR_TRANS_GREY);
+	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
 
 	m_overlayRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 0));
@@ -90,7 +90,7 @@ void QuickSlot::reload() {
 		// the slot is empty
 		m_isEmpty = true;
 		m_iconRect.setTextureRect(sf::IntRect(0, 0, 0, 0));
-		m_keyText.setColor(CENDRIC_COLOR_GREY);
+		m_keyText.setColor(COLOR_GREY);
 		m_amountText.setString("");
 		m_itemID = "";
 	}
@@ -108,14 +108,14 @@ void QuickSlot::reload() {
 			static_cast<int>(ICON_SIZE)));
 
 		m_amountText.setString(to_string(amount));
-		m_keyText.setColor(CENDRIC_COLOR_WHITE);
+		m_keyText.setColor(COLOR_WHITE);
 
 		m_amountText.setPosition(sf::Vector2f(
 			getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().width,
 			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().height));
 	}
 
-	m_borderRect.setFillColor(m_isEmpty ? CENDRIC_COLOR_MEDIUM_GREY : CENDRIC_COLOR_WHITE);
+	m_borderRect.setFillColor(m_isEmpty ? COLOR_MEDIUM_GREY : COLOR_WHITE);
 }
 
 void QuickSlot::onLeftClick() {

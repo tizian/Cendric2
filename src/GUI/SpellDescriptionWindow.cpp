@@ -24,13 +24,13 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	GUIConstants::BACK_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_titleText.setColor(CENDRIC_COLOR_WHITE);
+	m_titleText.setColor(COLOR_WHITE);
 
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_descriptionText.setColor(CENDRIC_COLOR_LIGHT_GREY);
+	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
 	m_statsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_statsText.setColor(CENDRIC_COLOR_WHITE);
+	m_statsText.setColor(COLOR_WHITE);
 }
 
 void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData* attributes) {

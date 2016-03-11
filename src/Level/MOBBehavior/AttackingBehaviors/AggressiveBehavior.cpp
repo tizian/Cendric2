@@ -7,7 +7,7 @@ AggressiveBehavior::AggressiveBehavior(Enemy* enemy) :
 }
 
 sf::Color AggressiveBehavior::getConfiguredHealthColor() const {
-	return sf::Color::Red;
+	return COLOR_BAD;
 } 
 
 void AggressiveBehavior::updateAggro() {

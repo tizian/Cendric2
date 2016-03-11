@@ -34,7 +34,7 @@ void CookingTile::loadAnimation(int skinNr) {
 	// init tooltip
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setString(g_textProvider->getText("Fireplace"));
-	m_tooltipText.setColor(sf::Color::White);
+	m_tooltipText.setColor(COLOR_WHITE);
 	m_tooltipText.setCharacterSize(8);
 }
 
@@ -58,7 +58,7 @@ void CookingTile::onRightClick() {
 		dynamic_cast<MapScreen*>(m_screen)->setCooking();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
 }
 

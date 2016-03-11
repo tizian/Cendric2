@@ -35,9 +35,9 @@ void AnimatedGameObject::update(const sf::Time& frameTime) {
 	if (m_coloredTime > sf::Time::Zero) {
 		m_coloredTime -= frameTime;
 		if (m_coloredTime <= sf::Time::Zero) {
-			m_animatedSprite.setColor(sf::Color::White);
+			m_animatedSprite.setColor(COLOR_WHITE);
 			m_coloredTime = sf::Time::Zero;
-			m_currentSpriteColor = sf::Color::White;
+			m_currentSpriteColor = COLOR_WHITE;
 		}
 	}
 

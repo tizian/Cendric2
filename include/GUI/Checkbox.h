@@ -62,10 +62,10 @@ protected:
 	sf::CircleShape m_checkedSymbol;
 	sf::Vector2f m_textOffset;
 
-	sf::Color m_backgroundColor = CENDRIC_COLOR_BLACK;
-	sf::Color m_marginColor = CENDRIC_COLOR_LIGHT_PURPLE;
-	sf::Color m_symbolColor = CENDRIC_COLOR_WHITE;
-	sf::Color m_mouseOverColor = CENDRIC_COLOR_PURPLE;
+	sf::Color m_backgroundColor = COLOR_BLACK;
+	sf::Color m_marginColor = COLOR_LIGHT_PURPLE;
+	sf::Color m_symbolColor = COLOR_WHITE;
+	sf::Color m_mouseOverColor = COLOR_PURPLE;
 	
 	BitmapText m_text;
 

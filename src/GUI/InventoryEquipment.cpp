@@ -15,9 +15,9 @@ InventoryEquipment::InventoryEquipment(CharacterCore* core, bool isInLevel) {
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
-		CENDRIC_COLOR_TRANS_BLACK, // main
-		sf::Color::Transparent, // back
-		sf::Color::White); // ornament
+		COLOR_TRANS_BLACK, // main
+		COLOR_TRANSPARENT, // back
+		COLOR_WHITE); // ornament
 }
 
 InventoryEquipment::~InventoryEquipment() {

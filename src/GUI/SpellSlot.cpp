@@ -49,7 +49,7 @@ void SpellSlot::initSpellSlot() {
 		"");
 	m_inputKey.setCharacterSize(16);
 	if (m_inputKey.getLocalBounds().width > SIZE - 10.f) m_inputKey.setCharacterSize(8);
-	m_inputKey.setColor(CENDRIC_COLOR_WHITE);
+	m_inputKey.setColor(COLOR_WHITE);
 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_selected);
@@ -79,29 +79,29 @@ void SpellSlot::initSpellSlot() {
 	switch (m_spellType) {
 	case SpellType::Elemental:
 		for (auto& gem : m_gems) 
-			gem.setFillColor(CENDRIC_COLOR_ELEMENTAL);
+			gem.setFillColor(COLOR_ELEMENTAL);
 		break;
 	case SpellType::Twilight:
 		for (auto& gem : m_gems)
-			gem.setFillColor(CENDRIC_COLOR_TWILIGHT);
+			gem.setFillColor(COLOR_TWILIGHT);
 		break;
 	case SpellType::Necromancy:
 		for (auto& gem : m_gems)
-			gem.setFillColor(CENDRIC_COLOR_NECROMANCY);
+			gem.setFillColor(COLOR_NECROMANCY);
 		break;
 	case SpellType::Divine:
 		for (auto& gem : m_gems)
-			gem.setFillColor(CENDRIC_COLOR_DIVINE);
+			gem.setFillColor(COLOR_DIVINE);
 		break;
 	case SpellType::Meta:
-		m_gems[0].setFillColor(CENDRIC_COLOR_ELEMENTAL);
-		m_gems[1].setFillColor(CENDRIC_COLOR_TWILIGHT);
-		m_gems[2].setFillColor(CENDRIC_COLOR_NECROMANCY);
-		m_gems[3].setFillColor(CENDRIC_COLOR_DIVINE);
+		m_gems[0].setFillColor(COLOR_ELEMENTAL);
+		m_gems[1].setFillColor(COLOR_TWILIGHT);
+		m_gems[2].setFillColor(COLOR_NECROMANCY);
+		m_gems[3].setFillColor(COLOR_DIVINE);
 		break;
 	default:
 		for (auto& gem : m_gems)
-			gem.setFillColor(CENDRIC_COLOR_WHITE);
+			gem.setFillColor(COLOR_WHITE);
 		break;
 	}
 
@@ -170,11 +170,11 @@ void SpellSlot::update(const sf::Time& frameTime) {
 void SpellSlot::select() {
 	if (m_isSelected || m_isEmpty) return;
 	Slot::select();
-	m_inputKey.setColor(sf::Color::Red);
+	m_inputKey.setColor(COLOR_BAD);
 }
 
 void SpellSlot::deselect() {
 	if (!m_isSelected || m_isEmpty) return;
 	Slot::deselect();
-	m_inputKey.setColor(sf::Color::White);
+	m_inputKey.setColor(COLOR_WHITE);
 }

@@ -28,7 +28,7 @@ void AllyBehavior::setTimeToLive(const sf::Time& ttl) {
 }
 
 sf::Color AllyBehavior::getConfiguredHealthColor() const {
-	return sf::Color::Green;
+	return COLOR_GOOD;
 }
 
 void AllyBehavior::updateAggro() {

@@ -8,11 +8,11 @@ DocumentDescriptionWindow::DocumentDescriptionWindow(const Item& item) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	WindowOrnamentStyle::FANCY,
 	sf::Color(169, 141, 117), // main
-	sf::Color::Transparent, // back
+	COLOR_TRANSPARENT, // back
 	sf::Color(110, 76, 54)) // ornament
 {
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_text.setColor(sf::Color::Black);
+	m_text.setColor(COLOR_BLACK);
 	m_text.setString(g_textProvider->getCroppedText(
 		item.getID(), "item_text", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 

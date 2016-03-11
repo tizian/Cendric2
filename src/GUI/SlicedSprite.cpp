@@ -9,7 +9,7 @@ SlicedSprite::SlicedSprite() {
 	m_topSlice = 0;
 	m_bottomSlice = 0;
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_color = sf::Color::White;
+	m_color = COLOR_WHITE;
 }
 
 SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height) {

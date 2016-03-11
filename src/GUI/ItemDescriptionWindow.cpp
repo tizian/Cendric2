@@ -24,13 +24,13 @@ ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	GUIConstants::BACK_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_titleText.setColor(CENDRIC_COLOR_WHITE);
+	m_titleText.setColor(COLOR_WHITE);
 
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_descriptionText.setColor(CENDRIC_COLOR_LIGHT_GREY);
+	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
 	m_statsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_statsText.setColor(CENDRIC_COLOR_WHITE);
+	m_statsText.setColor(COLOR_WHITE);
 }
 
 std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
@@ -61,12 +61,12 @@ void ItemDescriptionWindow::load(const Item& item) {
 	string stats = "\n";
 
 	if (item.getType() == ItemType::Permanent) {
-		m_statsText.setColor(sf::Color::Green);
+		m_statsText.setColor(COLOR_GOOD);
 		stats.append(g_textProvider->getText("Permanent"));
 		stats.append("\n\n");
 	}
 	else {
-		m_statsText.setColor(sf::Color::White);
+		m_statsText.setColor(COLOR_WHITE);
 	}
 
 	const AttributeData& attr = item.getAttributes();

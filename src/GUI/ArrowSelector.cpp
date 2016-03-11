@@ -119,9 +119,9 @@ GameObjectType ArrowSelector::getConfiguredType() const {
 
 // ARROW SELECTOR ARROW
 
-const sf::Color ArrowSelectorArrow::MOUSEOVER_COLOR = CENDRIC_COLOR_PURPLE;
-const sf::Color ArrowSelectorArrow::MAIN_COLOR = CENDRIC_COLOR_WHITE;
-const sf::Color ArrowSelectorArrow::DISABLED_COLOR = CENDRIC_COLOR_DARK_GREY;
+const sf::Color ArrowSelectorArrow::MOUSEOVER_COLOR = COLOR_PURPLE;
+const sf::Color ArrowSelectorArrow::MAIN_COLOR = COLOR_WHITE;
+const sf::Color ArrowSelectorArrow::DISABLED_COLOR = COLOR_DARK_GREY;
 
 ArrowSelectorArrow::ArrowSelectorArrow(bool pointRight) : GameObject() {
 	m_arrow.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));

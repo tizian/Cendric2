@@ -13,13 +13,13 @@ QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Wind
 	m_core = core;
 
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_titleText.setColor(CENDRIC_COLOR_WHITE);
+	m_titleText.setColor(COLOR_WHITE);
 
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_descriptionText.setColor(CENDRIC_COLOR_LIGHT_GREY);
+	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
 	m_stateText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_stateText.setColor(CENDRIC_COLOR_LIGHT_PURPLE);
+	m_stateText.setColor(COLOR_LIGHT_PURPLE);
 
 	setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET + QuestLog::WIDTH, GUIConstants::TOP));
 }
@@ -59,11 +59,11 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	QuestState currentState = m_core->getQuestState(questID);
 	if (currentState == QuestState::Completed) {
 		m_stateText.setString(g_textProvider->getText(EnumNames::getQuestStateName(currentState)));
-		m_stateText.setColor(sf::Color::Green);
+		m_stateText.setColor(COLOR_GOOD);
 	}
 	else if (currentState == QuestState::Failed) {
 		m_stateText.setString(g_textProvider->getText(EnumNames::getQuestStateName(currentState)));
-		m_stateText.setColor(sf::Color::Red);
+		m_stateText.setColor(COLOR_BAD);
 	}
 	else {
 		m_stateText.setString("");
@@ -84,7 +84,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		BitmapText targetText;
 		targetText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 		targetText.setString(target);
-		targetText.setColor(progress == 0 ? sf::Color::Red : progress >= goal ? sf::Color::Green : sf::Color::Yellow);
+		targetText.setColor(progress == 0 ? COLOR_BAD : progress >= goal ? COLOR_GOOD : COLOR_NEUTRAL);
 		m_targetsTexts.push_back(targetText);
 	}
 
@@ -105,7 +105,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		BitmapText collectibleText;
 		collectibleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 		collectibleText.setString(collectible);
-		collectibleText.setColor(progress == 0 ? sf::Color::Red : progress >= goal ? sf::Color::Green : sf::Color::Yellow);
+		collectibleText.setColor(progress == 0 ? COLOR_BAD : progress >= goal ? COLOR_GOOD : COLOR_NEUTRAL);
 		m_collectiblesTexts.push_back(collectibleText);
 	}
 
@@ -121,11 +121,11 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 			(m_core->getData().questConditionProgress.find(questID) != m_core->getData().questConditionProgress.end() &&
 			m_core->getData().questConditionProgress.at(questID).find(it) != m_core->getData().questConditionProgress.at(questID).end())) {
 			condition.append(g_textProvider->getText("Done"));
-			conditionText.setColor(sf::Color::Green);
+			conditionText.setColor(COLOR_GOOD);
 		}
 		else {
 			condition.append(g_textProvider->getText("Pending"));
-			conditionText.setColor(sf::Color::Red);
+			conditionText.setColor(COLOR_BAD);
 		}
 
 		conditionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);

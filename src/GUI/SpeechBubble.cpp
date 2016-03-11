@@ -12,12 +12,12 @@ SpeechBubble::SpeechBubble(LevelMovableGameObject* owner) : GameObject() {
 	m_owner = owner;
 	setBoundingBox(sf::FloatRect(0.f, 0.f, MIN_SIZE, MIN_SIZE));
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), CENDRIC_COLOR_TRANS_BLACK, m_boundingBox.width, m_boundingBox.height);
-	m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), sf::Color::White, m_boundingBox.width, m_boundingBox.height);
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), COLOR_TRANS_BLACK, m_boundingBox.width, m_boundingBox.height);
+	m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, m_boundingBox.width, m_boundingBox.height);
 	m_pointer.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_speechbubble_pointer));
 
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_text.setColor(CENDRIC_COLOR_WHITE);
+	m_text.setColor(COLOR_WHITE);
 	m_isAlwaysUpdate = true;
 }
 

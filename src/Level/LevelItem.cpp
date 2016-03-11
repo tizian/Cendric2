@@ -34,7 +34,7 @@ void LevelItem::load(LevelMainCharacter* mainChar, const Item& item, const sf::V
 
 	setPosition(position - getSpriteOffset());
 	setTooltipText(g_textProvider->getText(item.getID(), "item"));
-	setDebugBoundingBox(sf::Color::Green);
+	setDebugBoundingBox(COLOR_GOOD);
 }
 
 void LevelItem::pickup() {
@@ -56,19 +56,19 @@ void LevelItem::onRightClick() {
 		pickup();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", sf::Color::Red, true);
+		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
 	g_inputController->lockAction();
 }
 
 void LevelItem::onMouseOver() {
-	m_animatedSprite.setColor(sf::Color::Red);
+	m_animatedSprite.setColor(COLOR_LOOTABLE);
 	m_tooltipTime = sf::seconds(1);
 }
 
 void LevelItem::render(sf::RenderTarget &renderTarget) {
 	AnimatedGameObject::render(renderTarget);
-	m_animatedSprite.setColor(sf::Color::White);
+	m_animatedSprite.setColor(COLOR_WHITE);
 }
 
 void LevelItem::renderAfterForeground(sf::RenderTarget& renderTarget) {
@@ -120,7 +120,7 @@ GameObjectType LevelItem::getConfiguredType() const {
 void LevelItem::setTooltipText(const std::string& tooltip) {
 	m_tooltipText = BitmapText(tooltip);
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
-	m_tooltipText.setColor(sf::Color::White);
+	m_tooltipText.setColor(COLOR_WHITE);
 	m_tooltipText.setCharacterSize(8);
 	m_tooltipText.setPosition(sf::Vector2f(getPosition().x, getPosition().y - 10.f));
 }

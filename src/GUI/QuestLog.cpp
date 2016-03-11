@@ -23,7 +23,7 @@ void QuestLog::init() {
 
 	// init text
 	m_title.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
-	m_title.setColor(sf::Color::White);
+	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_title.setString(g_textProvider->getText("Journal"));
 	m_title.setPosition(
@@ -183,7 +183,7 @@ void QuestLog::hide() {
 QuestEntry::QuestEntry(const std::string& questID) {
 	m_questID = questID;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_name.setColor(sf::Color::White);
+	m_name.setColor(COLOR_WHITE);
 	m_name.setString(">  " + g_textProvider->getText(questID, "quest"));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
@@ -214,7 +214,7 @@ bool QuestEntry::isClicked() {
 }
 
 void QuestEntry::select() {
-	m_name.setColor(sf::Color::White);
+	m_name.setColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -223,7 +223,7 @@ GameObjectType QuestEntry::getConfiguredType() const {
 }
 
 void QuestEntry::deselect() {
-	m_name.setColor(CENDRIC_COLOR_GREY);
+	m_name.setColor(COLOR_GREY);
 	m_isSelected = false;
 }
 

@@ -44,6 +44,6 @@ protected:
 private:
 	// the sprite will reset its color as soon as this time is zero.
 	sf::Time m_coloredTime = sf::Time::Zero;
-	sf::Color m_currentSpriteColor = sf::Color::White;
+	sf::Color m_currentSpriteColor = COLOR_WHITE;
 };
 

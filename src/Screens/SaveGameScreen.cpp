@@ -95,11 +95,11 @@ void SaveGameScreen::onNo() {
 void SaveGameScreen::onYesOverwriteSaveGame() {
 	m_yesOrNoForm = nullptr;
 	if (m_characterCore->save(m_saveGameWindow->getChosenFilename(), m_saveGameWindow->getChosenSaveName())) {
-		setTooltipText("GameSaved", sf::Color::Green, true);
+		setTooltipText("GameSaved", COLOR_GOOD, true);
 	}
 	else {
 		g_logger->logError("SaveGameScreen", "Savegame could not be saved");
-		setTooltipText("OperationFailed", sf::Color::Red, true);
+		setTooltipText("OperationFailed", COLOR_BAD, true);
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);
@@ -108,11 +108,11 @@ void SaveGameScreen::onYesOverwriteSaveGame() {
 void SaveGameScreen::onYesDeleteSaveGame() {
 	m_yesOrNoForm = nullptr;
 	if (remove(m_saveGameWindow->getChosenFilename().c_str()) == 0) {
-		setTooltipText("SavegameDeleted", CENDRIC_COLOR_LIGHT_PURPLE, true);
+		setTooltipText("SavegameDeleted", COLOR_LIGHT_PURPLE, true);
 	}
 	else {
 		g_logger->logError("SaveGameScreen", "Savegame could not be deleted");
-		setTooltipText("OperationFailed", sf::Color::Red, true);
+		setTooltipText("OperationFailed", COLOR_BAD, true);
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);
@@ -138,11 +138,11 @@ void SaveGameScreen::onYesNewSaveGame() {
 
 	m_newSaveGameForm = nullptr;
 	if (m_characterCore->save(file, name)) {
-		setTooltipText("GameSaved", sf::Color::Green, true);
+		setTooltipText("GameSaved", COLOR_GOOD, true);
 	}
 	else {
 		g_logger->logError("SaveGameScreen", "Savegame could not be created");
-		setTooltipText("OperationFailed", sf::Color::Red, true);
+		setTooltipText("OperationFailed", COLOR_BAD, true);
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);

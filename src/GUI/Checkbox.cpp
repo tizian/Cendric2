@@ -10,7 +10,7 @@ Checkbox::Checkbox() : GameObject() {
 	m_background.setFillColor(m_backgroundColor);
 
 	m_margin.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
-	m_margin.setFillColor(sf::Color::Transparent);
+	m_margin.setFillColor(COLOR_TRANSPARENT);
 	m_margin.setOutlineThickness(-MARGIN);
 	m_margin.setOutlineColor(m_marginColor);
 
@@ -121,11 +121,11 @@ void Checkbox::setText(const std::string& text, const sf::Color& color, int char
 }
 
 void Checkbox::setText(const std::string& text) {
-	setText(text, sf::Color::White, 12);
+	setText(text, COLOR_WHITE, 12);
 }
 
 void Checkbox::setText(const std::string& text, int charSize) {
-	setText(text, sf::Color::White, charSize);
+	setText(text, COLOR_WHITE, charSize);
 }
 
 void Checkbox::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
@@ -136,11 +136,11 @@ void Checkbox::setTextRaw(const std::string& text, const sf::Color& color, int c
 }
 
 void Checkbox::setTextRaw(const std::string& text, int charSize) {
-	setTextRaw(text, sf::Color::White, charSize);
+	setTextRaw(text, COLOR_WHITE, charSize);
 }
 
 void Checkbox::setTextRaw(const std::string& text) {
-	setTextRaw(text, sf::Color::White, 12);
+	setTextRaw(text, COLOR_WHITE, 12);
 }
 
 void Checkbox::setCharacterSize(int size) {

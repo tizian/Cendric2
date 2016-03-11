@@ -48,7 +48,7 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 		chestTile->setStrength(it.chestStrength);
 		chestTile->setLoot(loot, gold);
 		chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset());
-		chestTile->setDebugBoundingBox(sf::Color::Yellow);
+		chestTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		chestTile->loadAnimation(it.skinNr);
 		screen->addObject(chestTile);
 	}
@@ -62,7 +62,7 @@ void LevelLoader::loadMovingTiles(LevelData& data, Screen* screen, Level* level)
 
 		movingTile->setMovingTileData(movingData);
 		movingTile->init();
-		movingTile->setDebugBoundingBox(sf::Color::Yellow);
+		movingTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		movingTile->loadAnimation(movingData.skinNr);
 		movingTile->setPosition(movingData.spawnPosition);
 		movingTile->setDynamicTileID(LevelDynamicTileID::Moving);
@@ -86,7 +86,7 @@ void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* leve
 		modifierTile->setModifier(modifierData.modifier);
 		modifierTile->init();
 		modifierTile->loadAnimation(0);
-		modifierTile->setDebugBoundingBox(sf::Color::Yellow);
+		modifierTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		modifierTile->setPosition(modifierData.spawnPosition);
 
 		screen->addObject(modifierTile);
@@ -111,7 +111,7 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 			tile->setInitialState(switchBean.id == LevelDynamicTileID::SwitchableOn);
 			tile->init();
 			tile->setPosition(switchBean.position);
-			tile->setDebugBoundingBox(sf::Color::Yellow);
+			tile->setDebugBoundingBox(COLOR_NEUTRAL);
 			tile->loadAnimation(switchBean.skinNr);
 			screen->addObject(tile);
 			dependentTiles.push_back(tile);
@@ -122,7 +122,7 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 			LeverTile* tile = new LeverTile(level, mainCharacter);
 			tile->init();
 			tile->setPosition(leverBean.position);
-			tile->setDebugBoundingBox(sf::Color::Yellow);
+			tile->setDebugBoundingBox(COLOR_NEUTRAL);
 			tile->loadAnimation(leverBean.skinNr);
 			tile->setDependantTiles(dependentTiles);
 			screen->addObject(tile);
@@ -155,7 +155,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 
 		tile->init();
 		tile->setPosition(it.position - tile->getPositionOffset());
-		tile->setDebugBoundingBox(sf::Color::Yellow);
+		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		tile->loadAnimation(it.skinNr);
 		tile->setDynamicTileID(it.id);
 		screen->addObject(tile);

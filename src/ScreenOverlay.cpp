@@ -122,7 +122,7 @@ ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questI
 
 	std::string titleText = g_textProvider->getText("Quest") + " ";
 	titleText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
-	questScreenOverlay->setTitleColor(state == QuestState::Completed ? sf::Color::Green : state == QuestState::Failed ? sf::Color::Red : sf::Color::Yellow);
+	questScreenOverlay->setTitleColor(state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL);
 	questScreenOverlay->setTitleRaw(titleText);
 	questScreenOverlay->setTitleCharacterSize(32);
 
@@ -142,7 +142,7 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {
 	ScreenOverlay* itemScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
-	itemScreenOverlay->setTitleColor(sf::Color::Green);
+	itemScreenOverlay->setTitleColor(COLOR_GOOD);
 	itemScreenOverlay->setTitleCharacterSize(24);
 
 	std::string title = g_textProvider->getText(item.getID(), "item") + " ";
@@ -167,7 +167,7 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 	ScreenOverlay* hintScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
 	int characterSize = 16;
-	hintScreenOverlay->setTitleColor(sf::Color::Green);
+	hintScreenOverlay->setTitleColor(COLOR_GOOD);
 	hintScreenOverlay->setTitle("Hint");
 	hintScreenOverlay->setTitleCharacterSize(24);
 

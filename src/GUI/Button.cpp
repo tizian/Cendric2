@@ -16,13 +16,13 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_ornamentLayerColor, box.width, box.height);
 	}
 	else if (style == ButtonOrnamentStyle::SMALL) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), sf::Color::White, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), COLOR_WHITE, box.width, box.height);
 	}
 	else if (style == ButtonOrnamentStyle::MEDIUM) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), sf::Color::White, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), COLOR_WHITE, box.width, box.height);
 	}
 	else if (style == ButtonOrnamentStyle::LARGE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), sf::Color::White, box.width, box.height);
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), COLOR_WHITE, box.width, box.height);
 	}
 
 	m_positionDefault = sf::Vector2f(box.left, box.top);
@@ -116,11 +116,11 @@ void Button::setText(const std::string& text, const sf::Color& color, int charSi
 }
 
 void Button::setText(const std::string& text) {
-	setText(text, sf::Color::White, 16);
+	setText(text, COLOR_WHITE, 16);
 }
 
 void Button::setText(const std::string& text, int charSize) {
-	setText(text, sf::Color::White, charSize);
+	setText(text, COLOR_WHITE, charSize);
 }
 
 void Button::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
@@ -131,11 +131,11 @@ void Button::setTextRaw(const std::string& text, const sf::Color& color, int cha
 }
 
 void Button::setTextRaw(const std::string& text, int charSize) {
-	setTextRaw(text, sf::Color::White, charSize);
+	setTextRaw(text, COLOR_WHITE, charSize);
 }
 
 void Button::setTextRaw(const std::string& text) {
-	setTextRaw(text, sf::Color::White, 16);
+	setTextRaw(text, COLOR_WHITE, 16);
 }
 
 void Button::setCharacterSize(int size) {

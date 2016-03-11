@@ -15,7 +15,7 @@ InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getID()
 	m_iconTextureRect = sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_amountText.setColor(CENDRIC_COLOR_WHITE);
+	m_amountText.setColor(COLOR_WHITE);
 	setAmount(amount);
 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory);
@@ -31,7 +31,7 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos)
 	m_iconTextureRect = sf::IntRect(sf::IntRect(texPos.x, texPos.y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE)));
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_amountText.setColor(CENDRIC_COLOR_WHITE);
+	m_amountText.setColor(COLOR_WHITE);
 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected);
