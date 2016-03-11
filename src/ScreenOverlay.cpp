@@ -122,7 +122,7 @@ ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questI
 
 	std::string titleText = g_textProvider->getText("Quest") + " ";
 	titleText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
-	questScreenOverlay->setTitleColor(state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL);
+	questScreenOverlay->setTitleColor(state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_BAD);
 	questScreenOverlay->setTitleRaw(titleText);
 	questScreenOverlay->setTitleCharacterSize(32);
 

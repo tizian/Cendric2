@@ -65,39 +65,39 @@ inline std::string getPath(const std::string& path) {
 // color palette
 
 // DON'T ever change white, black and transparent!!
-#define COLOR_WHITE			sf::Color(255, 255, 255)
-#define COLOR_BLACK			sf::Color(0, 0, 0)
-#define COLOR_TRANSPARENT	sf::Color(0, 0, 0, 0)
+extern const sf::Color COLOR_WHITE;
+extern const sf::Color COLOR_BLACK;
+extern const sf::Color COLOR_TRANSPARENT;
 
-#define COLOR_TRANS_BLACK	sf::Color(0, 0, 0, 130)
-#define COLOR_TRANS_GREY	sf::Color(150, 150, 150, 100)
-#define COLOR_TRANS_WHITE	sf::Color(255, 255, 255, 100)
+extern const sf::Color COLOR_TRANS_BLACK;
+extern const sf::Color COLOR_TRANS_GREY;
+extern const sf::Color COLOR_TRANS_WHITE;
 
-#define COLOR_GOOD			sf::Color(18, 165, 18)
-#define COLOR_NEUTRAL		sf::Color(249, 188, 43)
-#define COLOR_BAD			sf::Color(255, 0, 0)
+extern const sf::Color COLOR_GOOD;
+extern const sf::Color COLOR_NEUTRAL;
+extern const sf::Color COLOR_BAD;
 
-#define COLOR_DAMAGED		sf::Color(255, 0, 0)
-#define COLOR_HEALED		sf::Color(0, 255, 0)
-#define COLOR_LOOTABLE		sf::Color(255, 0, 0)
+extern const sf::Color COLOR_DAMAGED;
+extern const sf::Color COLOR_HEALED;
+extern const sf::Color COLOR_LOOTABLE;
 
-#define COLOR_LIGHT_GREY	sf::Color(200, 200, 200)
-#define COLOR_MEDIUM_GREY	sf::Color(150, 150, 150)
-#define COLOR_GREY			sf::Color(100, 100, 100)
-#define COLOR_DARK_GREY		sf::Color(50, 50, 50)
-#define COLOR_PURPLE		sf::Color(54, 11, 93, 255)
-#define COLOR_DARK_PURPLE	sf::Color(41, 7, 63, 255)
-#define COLOR_LIGHT_PURPLE	sf::Color(197, 175, 206, 251)
+extern const sf::Color COLOR_LIGHT_GREY;
+extern const sf::Color COLOR_MEDIUM_GREY;
+extern const sf::Color COLOR_GREY;
+extern const sf::Color COLOR_DARK_GREY;
+extern const sf::Color COLOR_PURPLE;
+extern const sf::Color COLOR_DARK_PURPLE;
+extern const sf::Color COLOR_LIGHT_PURPLE;
 
-#define COLOR_ELEMENTAL 	sf::Color(144, 33, 7)
-#define COLOR_TWILIGHT 		sf::Color(32, 43, 79)
-#define COLOR_NECROMANCY 	sf::Color(23, 53, 18)
-#define COLOR_DIVINE		sf::Color(178, 129, 52)
+extern const sf::Color COLOR_ELEMENTAL;
+extern const sf::Color COLOR_TWILIGHT;
+extern const sf::Color COLOR_NECROMANCY;
+extern const sf::Color COLOR_DIVINE;
 
-#define COLOR_ELEMENTAL_INACTIVE 	sf::Color(143, 88, 76)
-#define COLOR_TWILIGHT_INACTIVE 	sf::Color(56, 61, 79)
-#define COLOR_NECROMANCY_INACTIVE 	sf::Color(46, 55, 43)
-#define COLOR_DIVINE_INACTIVE		sf::Color(179, 155, 116)
+extern const sf::Color COLOR_ELEMENTAL_INACTIVE;
+extern const sf::Color COLOR_TWILIGHT_INACTIVE;
+extern const sf::Color COLOR_NECROMANCY_INACTIVE;
+extern const sf::Color COLOR_DIVINE_INACTIVE;
 
 class Logger;
 class TextProvider;
