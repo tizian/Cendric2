@@ -20,26 +20,6 @@ bool MapReader::checkData(MapData& data) const {
 			return false;
 		}
 	}
-	for (auto& it : data.mapExits) {
-		if (it.mapExitRect.left < 0.0 || it.mapExitRect.top < 0.0 || it.mapExitRect.left >= data.mapSize.x * TILE_SIZE_F || it.mapExitRect.top >= data.mapSize.y * TILE_SIZE_F) {
-			logError("a map exit rect is out of range for this map.");
-			return false;
-		}
-		if ((it.mapID.empty() && it.levelID.empty()) || (!it.mapID.empty() && !it.levelID.empty())) {
-			logError("map exit map id and level id are both empty or both filled. Only one of them can be set.");
-			return false;
-		}
-		if (it.spawnPoint.x < 0.f || it.spawnPoint.y < 0.f) {
-			logError("map exit spawn point is negative.");
-			return false;
-		}
-		for (auto& condition : it.conditions) {
-			if (condition.empty()) {
-				logError("map exit condition cannot be empty.");
-				return false;
-			}
-		}
-	}
 	for (auto& it : data.npcs) {
 		if (it.id.empty()) {
 			logError("a map npc has no id.");
@@ -167,99 +147,6 @@ bool MapReader::readCollidableObjectLayer(tinyxml2::XMLElement* objectgroup, Map
 	return true;
 }
 
-bool MapReader::readMapExits(tinyxml2::XMLElement* objectgroup, MapData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
-
-	while (object != nullptr) {
-		int x;
-		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int width;
-		result = object->QueryIntAttribute("width", &width);
-		XMLCheckResult(result);
-
-		int height;
-		result = object->QueryIntAttribute("height", &height);
-		XMLCheckResult(result);
-
-		MapExitData meData;
-		meData.mapExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
-		meData.levelID = "";
-		meData.mapID = "";
-		meData.spawnPoint.x = -1.f;
-		meData.spawnPoint.y = -1.f;
-
-		// map spawn point for level exit
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-		if (properties == nullptr) {
-			g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties attribute found for level exit.");
-			return false;
-		}
-
-		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-		while (_property != nullptr) {
-			const char* textAttr = nullptr;
-			textAttr = _property->Attribute("name");
-			if (textAttr == nullptr) {
-				g_logger->logError("MapReader", "XML file could not be read, no objectgroup->object->properties->property->name attribute found for level exit.");
-				return false;
-			}
-			std::string name = textAttr;
-
-			if (name.compare("level id") == 0) {
-				textAttr = nullptr;
-				textAttr = _property->Attribute("value");
-				if (textAttr != nullptr) {
-					meData.levelID = textAttr;
-				}
-			}
-			else if (name.compare("map id") == 0) {
-				textAttr = nullptr;
-				textAttr = _property->Attribute("value");
-				if (textAttr != nullptr) {
-					meData.mapID = textAttr;
-				}
-			}
-			else if (name.compare("conditions") == 0) {
-				textAttr = nullptr;
-				textAttr = _property->Attribute("value");
-				if (textAttr != nullptr) {
-					size_t pos = 0;
-					std::string conditions = textAttr;
-					while ((pos = conditions.find(",")) != std::string::npos) {
-						meData.conditions.insert(conditions.substr(0, pos));
-						conditions.erase(0, pos + 1);
-					}
-					meData.conditions.insert(conditions);
-				}
-			}
-			else if (name.compare("x") == 0) {
-				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
-				XMLCheckResult(result);
-				meData.spawnPoint.x = static_cast<float>(x);
-			}
-			else if (name.compare("y") == 0) {
-				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
-				XMLCheckResult(result);
-				meData.spawnPoint.y = static_cast<float>(y);
-			}
-			else {
-				g_logger->logError("MapReader", "XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
-				return false;
-			}
-			_property = _property->NextSiblingElement("property");
-		}
-		data.mapExits.push_back(meData);
-		object = object->NextSiblingElement("object");
-	}
-	return true;
-}
-
 bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 	tinyxml2::XMLElement* objectgroup = map->FirstChildElement("objectgroup");
 
@@ -274,10 +161,7 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 
 		std::string name = textAttr;
 
-		if (name.find("mapexit") != std::string::npos) {
-			if (!readMapExits(objectgroup, data)) return false;
-		}
-		else if (name.find("npc") != std::string::npos) {
+		if (name.find("npc") != std::string::npos) {
 			if (!readNPCs(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {

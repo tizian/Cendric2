@@ -212,6 +212,7 @@ void LevelLoader::loadTriggers(LevelData& data, Screen* screen) const {
 		if (screen->getCharacterCore()->isTriggerTriggered(it.worldID, it.objectID))
 			continue;
 		Trigger* trigger = new Trigger(levelScreen, mainCharacter, it);
+		levelScreen->reloadTrigger(trigger);
 		screen->addObject(trigger);
 	}
 }

@@ -1,5 +1,6 @@
 #include "Screens/WorldScreen.h"
 #include "Item.h"
+#include "Trigger.h"
 
 using namespace std;
 
@@ -34,7 +35,7 @@ const std::string foregroundFragmentShader = \
 
 WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-    m_renderTexture2.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_renderTexture2.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	m_lightLayerShader.setUniform("texture", sf::Shader::CurrentTexture);
 	m_lightLayerShader.loadFromMemory(vertexShader, lightFragmentShader);
@@ -52,7 +53,7 @@ WorldScreen::~WorldScreen() {
 
 void WorldScreen::notifyPermanentItemConsumed(const Item& item) {
 	getCharacterCore()->addPermanentAttributes(item.getAttributes());
-	
+
 	addScreenOverlay(ScreenOverlay::createPermanentItemScreenOverlay(item));
 	m_progressLog->addPermanentItemProgress(item);
 	notifyItemChange(item.getID(), -1);
@@ -93,6 +94,24 @@ void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int de
 
 void WorldScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
 	getCharacterCore()->setConditionFulfilled(conditionType, condition);
+	reloadTriggers();
+}
+
+void WorldScreen::reloadTriggers() {
+	for (GameObject* go : *getObjects(GameObjectType::_Overlay)) {
+		Trigger* trigger = dynamic_cast<Trigger*>(go);
+		if (trigger == nullptr) continue;
+		reloadTrigger(trigger);
+	}
+}
+
+void WorldScreen::reloadTrigger(Trigger* trigger) const {
+	if (trigger->getData().condition.empty()) {
+		trigger->getData().isTriggerable = true;
+		return;
+	}
+
+	trigger->getData().isTriggerable = getCharacterCore()->isConditionFulfilled("trigger", trigger->getData().condition);
 }
 
 void WorldScreen::updateOverlayQueue() {

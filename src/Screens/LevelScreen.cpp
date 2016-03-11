@@ -75,6 +75,15 @@ void LevelScreen::writeToCore() {
 	m_characterCore = new CharacterCore(m_characterCoreCopy->getData());
 }
 
+bool LevelScreen::exitWorld() {
+	if (m_isGameOver) return false;
+
+	writeToCore();
+	delete m_characterCoreCopy;
+	m_characterCoreCopy = nullptr;
+	return true;
+}
+
 void LevelScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName()));
 }
@@ -103,7 +112,6 @@ void LevelScreen::removeTypedBuffs(SpellID id) {
 	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeTypedSpellBuffs(id);
 }
 
-// getter for the main char.
 LevelMainCharacter* LevelScreen::getMainCharacter() const {
 	return m_mainChar;
 }
@@ -130,42 +138,27 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	}
 
 	if (m_isGameOver || !m_retryButton->isVisible()) {
-		LevelExitData* leData = m_currentLevel.checkLevelExit((*m_mainChar->getBoundingBox()));
-		if (leData == nullptr) {
-			// sort Movable Tiles
-			depthSortObjects(GameObjectType::_MovableTile, false);
-			// update objects first for relative velocity
-			updateObjectsFirst(GameObjectType::_MovableTile, frameTime);
-			updateObjectsFirst(GameObjectType::_LevelMainCharacter, frameTime);
-			updateObjectsFirst(GameObjectType::_Enemy, frameTime);
-			updateObjectsFirst(GameObjectType::_DynamicTile, frameTime);
-			updateObjectsFirst(GameObjectType::_Spell, frameTime);
-			// and then normally
-			updateObjects(GameObjectType::_MovableTile, frameTime);
-			updateObjects(GameObjectType::_DynamicTile, frameTime);
-			updateObjects(GameObjectType::_Enemy, frameTime);
-			updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
-			updateObjects(GameObjectType::_LevelEquipment, frameTime);
-			updateObjects(GameObjectType::_Spell, frameTime);
-			updateObjects(GameObjectType::_Overlay, frameTime);
-			updateObjects(GameObjectType::_ScreenOverlay, frameTime);
-			if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
-			
-			updateObjects(GameObjectType::_Light, frameTime);
-			m_currentLevel.update(frameTime);
-			return;
-		}
-		else if (!m_isGameOver) {
-			writeToCore();
-			if (!leData->mapID.empty()) {
-				m_characterCore->setMap(leData->spawnPoint, leData->mapID);
-			}
-			else {
-				m_characterCore->setLevel(leData->spawnPoint, leData->levelID);
-			}
-			delete leData;
-			setNextScreen(new LoadingScreen(m_characterCore));
-		}
+		// sort Movable Tiles
+		depthSortObjects(GameObjectType::_MovableTile, false);
+		// update objects first for relative velocity
+		updateObjectsFirst(GameObjectType::_MovableTile, frameTime);
+		updateObjectsFirst(GameObjectType::_LevelMainCharacter, frameTime);
+		updateObjectsFirst(GameObjectType::_Enemy, frameTime);
+		updateObjectsFirst(GameObjectType::_DynamicTile, frameTime);
+		updateObjectsFirst(GameObjectType::_Spell, frameTime);
+		// and then normally
+		updateObjects(GameObjectType::_MovableTile, frameTime);
+		updateObjects(GameObjectType::_DynamicTile, frameTime);
+		updateObjects(GameObjectType::_Enemy, frameTime);
+		updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
+		updateObjects(GameObjectType::_LevelEquipment, frameTime);
+		updateObjects(GameObjectType::_Spell, frameTime);
+		updateObjects(GameObjectType::_Overlay, frameTime);
+		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
+		if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
+
+		updateObjects(GameObjectType::_Light, frameTime);
+		m_currentLevel.update(frameTime);
 	}
 }
 
@@ -189,7 +182,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
 	m_renderTexture.setView(oldView);
-    m_renderTexture2.setView(oldView);
+	m_renderTexture2.setView(oldView);
 	renderObjects(GameObjectType::_Light, m_renderTexture);
 	m_renderTexture.display();
 
@@ -238,7 +231,7 @@ void LevelScreen::render(sf::RenderTarget &renderTarget) {
 		renderTarget.draw(*m_overlaySprite);
 		renderTarget.draw(*m_overlayText);
 	}
-	
+
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
 

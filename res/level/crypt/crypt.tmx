@@ -213,12 +213,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="levelexit">
+ <objectgroup name="trigger">
   <object id="3" x="363" y="406" width="69" height="135">
    <properties>
-    <property name="map id" value="res/map/meadows/meadows.tmx"/>
-    <property name="x" value="3210"/>
-    <property name="y" value="1720"/>
+    <property name="keyguarded" value=""/>
+    <property name="map entry" value="res/map/meadows/meadows.tmx,3210,1720"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
  </objectgroup>

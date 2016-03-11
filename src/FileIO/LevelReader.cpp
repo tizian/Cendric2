@@ -49,86 +49,6 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data) {
 	return true;
 }
 
-bool LevelReader::readLevelExits(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
-
-	while (object != nullptr) {
-		int x;
-		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int width;
-		result = object->QueryIntAttribute("width", &width);
-		XMLCheckResult(result);
-
-		int height;
-		result = object->QueryIntAttribute("height", &height);
-		XMLCheckResult(result);
-
-		LevelExitData leData;
-		leData.levelExitRect = sf::FloatRect(static_cast<float>(x), static_cast<float>(y), static_cast<float>(width), static_cast<float>(height));
-		leData.mapID = "";
-		leData.levelID = "";
-		leData.spawnPoint.x = -1.f;
-		leData.spawnPoint.y = -1.f;
-
-		// map spawn point for level exit
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-		if (properties == nullptr) {
-			logError("XML file could not be read, no objectgroup->object->properties attribute found for level exit.");
-			return false;
-		}
-
-		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-		while (_property != nullptr) {
-			const char* textAttr = nullptr;
-			textAttr = _property->Attribute("name");
-			if (textAttr == nullptr) {
-				logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found for level exit.");
-				return false;
-			}
-			std::string name = textAttr;
-
-			if (name.compare("map id") == 0) {
-				textAttr = nullptr;
-				textAttr = _property->Attribute("value");
-				if (textAttr != nullptr) {
-					leData.mapID = textAttr;
-				}
-			}
-			else if (name.compare("level id") == 0) {
-				textAttr = nullptr;
-				textAttr = _property->Attribute("value");
-				if (textAttr != nullptr) {
-					leData.levelID = textAttr;
-				}
-			}
-			else if (name.compare("x") == 0) {
-				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &x);
-				XMLCheckResult(result);
-				leData.spawnPoint.x = static_cast<float>(x);
-			}
-			else if (name.compare("y") == 0) {
-				tinyxml2::XMLError result = _property->QueryIntAttribute("value", &y);
-				XMLCheckResult(result);
-				leData.spawnPoint.y = static_cast<float>(y);
-			}
-			else {
-				logError("XML file could not be read, unknown objectgroup->object->properties->property->name attribute found for level exit.");
-				return false;
-			}
-			_property = _property->NextSiblingElement("property");
-		}
-		data.levelExits.push_back(leData);
-		object = object->NextSiblingElement("object");
-	}
-	return true;
-}
-
 bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
@@ -478,10 +398,7 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 
 		std::string name = textAttr;
 
-		if (name.find("levelexit") != std::string::npos) {
-			if (!readLevelExits(objectgroup, data)) return false;
-		}
-		else if (name.find("enemy") != std::string::npos) {
+		if (name.find("enemy") != std::string::npos) {
 			if (!readEnemies(objectgroup, data)) return false;
 		}
 		else if (name.find("chest") != std::string::npos) {
@@ -902,20 +819,6 @@ bool LevelReader::checkData(LevelData& data) const {
 		}
 		if (data.dynamicTileLayers[i].second.empty() || data.dynamicTileLayers[i].second.size() != data.mapSize.x * data.mapSize.y) {
 			logError("dynamic tile layer has not correct size (map size)");
-			return false;
-		}
-	}
-	for (auto& it : data.levelExits) {
-		if (it.levelExitRect.height <= 0.f || it.levelExitRect.width <= 0.f) {
-			logError("level exit rectangle has volume negative or null.");
-			return false;
-		}
-		if ((it.mapID.empty() && it.levelID.empty()) || (!it.mapID.empty() && !it.levelID.empty())) {
-			logError("level exit map id and level id are both empty or both filled. Only one of them can be set.");
-			return false;
-		}
-		if (it.spawnPoint.x < 0.f || it.spawnPoint.y < 0.f) {
-			logError("level exit spawn point is negative.");
 			return false;
 		}
 	}

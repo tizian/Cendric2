@@ -56,6 +56,8 @@ public:
 	bool isQuitRequested() const;
 	// the screen manager polls the next screen and changes to it if its not null
 	Screen* getNextScreen() const;
+	// sets the next screen. If this is set, the screen manager will change to that next screen
+	void setNextScreen(Screen* nextScreen);
 
 protected:
 	// the update part that is customized per screen
@@ -76,8 +78,6 @@ protected:
 	void renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget);
 	// enables / disables all buttons on this screen
 	virtual void setAllButtonsEnabled(bool value);
-	// sets the next screen. If this is set, the screen manager will change to that next screen
-	void setNextScreen(Screen* nextScreen);
 
 protected:
 	CharacterCore* m_characterCore = nullptr;

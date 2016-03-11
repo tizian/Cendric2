@@ -24,7 +24,6 @@ private:
 	bool readDynamicTileLayer(MapDynamicTileID id, const std::string& layer, MapData& data) const;
 	
 	bool readObjects(tinyxml2::XMLElement* map, MapData& data) const;
-	bool readMapExits(tinyxml2::XMLElement* objects, MapData& data) const;
 	bool readNPCs(tinyxml2::XMLElement* objects, MapData& data) const;
 	bool readCollidableObjectLayer(tinyxml2::XMLElement* objects, MapData& data) const;
 

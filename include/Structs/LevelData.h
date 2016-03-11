@@ -5,7 +5,6 @@
 
 #include "BackgroundLayer.h"
 #include "Structs/WorldData.h"
-#include "Structs/LevelExitData.h"
 #include "Structs/LevelDynamicTileData.h"
 #include "Structs/LeverData.h"
 #include "Structs/EnemyData.h"
@@ -24,6 +23,5 @@ struct LevelData : WorldData {
 	std::vector<EnemyData> enemies;
 	std::vector<ChestData> chests;
 	std::vector<ModifierTileData> modifiers;
-	std::vector<LevelExitData> levelExits;
 	std::vector<MovingTileData> movingTiles;
 };

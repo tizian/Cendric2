@@ -34,10 +34,11 @@ public:
 	// the level screen doesn't return the original core here, but a mere copy.
 	CharacterCore* getCharacterCore() const override;
 	// the level screen does not use the original core, but runs on a copy.
-	// to update the original core, call this method. (used by the checkpoints)
+	// to update the original core, call this method. (used by the checkpoints and when leaving the world)
 	void writeToCore();
-	// getter for the main char.
-	LevelMainCharacter* getMainCharacter() const;
+	bool exitWorld() override;
+
+	LevelMainCharacter* getMainCharacter() const override;
 
 private:
 	Level m_currentLevel;

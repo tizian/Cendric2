@@ -1635,7 +1635,7 @@
 77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,0,0,0,77,77,77,77,77,77,77,77,0,0,0,0,0,0,0,0,77,77
 </data>
  </layer>
- <objectgroup name="levelexit">
+ <objectgroup name="trigger">
   <object id="8" x="925" y="1837" width="50" height="100">
    <properties>
     <property name="map id" value="res/map/meadows/meadows.tmx"/>
@@ -1645,30 +1645,30 @@
   </object>
   <object id="9" x="2169" y="3179" width="57" height="117">
    <properties>
-    <property name="map id" value="res/map/meadows/meadows.tmx"/>
-    <property name="x" value="2420"/>
-    <property name="y" value="920"/>
+    <property name="keyguarded" value=""/>
+    <property name="map entry" value="res/map/meadows/meadows.tmx,2420,920"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="62" x="2068.83" y="277.5" width="57" height="117">
    <properties>
-    <property name="map id" value="res/map/meadows/meadows.tmx"/>
-    <property name="x" value="2420"/>
-    <property name="y" value="920"/>
+    <property name="keyguarded" value=""/>
+    <property name="map id" value="res/map/meadows/meadows.tmx,2420,920"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="63" x="270.167" y="874.833" width="57" height="117">
    <properties>
-    <property name="map id" value="res/map/meadows/meadows.tmx"/>
-    <property name="x" value="2420"/>
-    <property name="y" value="920"/>
+    <property name="keyguarded" value=""/>
+    <property name="map entry" value="res/map/meadows/meadows.tmx,2420,920"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="chest">
-  <object id="15" gid="366" x="2876.34" y="2795.67" width="50" height="50"/>
-  <object id="16" gid="366" x="55" y="3313" width="50" height="50"/>
-  <object id="22" gid="366" x="100" y="2256" width="50" height="50">
+  <object id="15" gid="366" x="2877.34" y="2851.67" width="50" height="50"/>
+  <object id="16" gid="366" x="79" y="3344" width="50" height="50"/>
+  <object id="22" gid="366" x="103" y="2296" width="50" height="50">
    <properties>
     <property name="gold" value="100"/>
     <property name="strength" value="4"/>

@@ -923,44 +923,6 @@
   </object>
   <object id="106" x="3374" y="1423" width="25" height="1132"/>
  </objectgroup>
- <objectgroup name="mapexit">
-  <object id="1" x="2908" y="213" width="85" height="45">
-   <properties>
-    <property name="level id" value="res/level/ratcave/ratcave.tmx"/>
-    <property name="x" value="525"/>
-    <property name="y" value="1175"/>
-   </properties>
-  </object>
-  <object id="46" x="2455.5" y="361.5" width="85" height="45">
-   <properties>
-    <property name="level id" value="res/level/ratcave/ratcave.tmx"/>
-    <property name="x" value="725"/>
-    <property name="y" value="275"/>
-   </properties>
-  </object>
-  <object id="47" x="2308.5" y="876" width="39.5" height="66">
-   <properties>
-    <property name="conditions" value="tutorial_started"/>
-    <property name="level id" value="res/level/rockfall/rockfall.tmx"/>
-    <property name="x" value="300"/>
-    <property name="y" value="650"/>
-   </properties>
-  </object>
-  <object id="52" x="2855.25" y="783" width="43.75" height="36">
-   <properties>
-    <property name="level id" value="res/level/rockfall/rockfall.tmx"/>
-    <property name="x" value="2900"/>
-    <property name="y" value="700"/>
-   </properties>
-  </object>
-  <object id="64" x="3203.12" y="1682" width="43.75" height="36">
-   <properties>
-    <property name="level id" value="res/level/crypt/crypt.tmx"/>
-    <property name="x" value="350"/>
-    <property name="y" value="400"/>
-   </properties>
-  </object>
- </objectgroup>
  <objectgroup name="npc">
   <object id="51" gid="785" x="2231" y="936" width="50" height="50">
    <properties>
@@ -982,13 +944,44 @@
   </object>
  </objectgroup>
  <objectgroup name="trigger">
-  <object id="107" x="1844" y="655" width="104" height="98">
+  <object id="107" x="1653" y="780" width="697" height="85">
    <properties>
-    <property name="hint" value="MapMove"/>
+    <property name="hint" value="Journal"/>
+   </properties>
+  </object>
+  <object id="1" x="2908" y="213" width="85" height="45">
+   <properties>
+    <property name="level entry" value="res/level/ratcave/ratcave.tmx,525,1175"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="46" x="2455.5" y="361.5" width="85" height="45">
+   <properties>
+    <property name="level entry" value="res/level/ratcave/ratcave.tmx,725,275"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="47" x="2308.5" y="876" width="39.5" height="66">
+   <properties>
+    <property name="condition" value="tutorial_started"/>
+    <property name="level entry" value="res/level/rockfall/rockfall.tmx,300,650"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="52" x="2855.25" y="783" width="43.75" height="36">
+   <properties>
+    <property name="level entry" value="res/level/rockfall/rockfall.tmx,2900,700"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="64" x="3203.12" y="1682" width="43.75" height="36">
+   <properties>
+    <property name="level entry" value="res/level/crypt/crypt.tmx,350,400"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup name="light" visible="0">
   <object id="8" x="2802.5" y="249.5" width="151" height="129">
    <ellipse/>
   </object>

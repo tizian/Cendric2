@@ -8,6 +8,7 @@
 #include "GUI/ProgressLog.h"
 
 class Item;
+class Trigger;
 
 // ancestor for level or map screen
 class WorldScreen : public Screen {
@@ -34,8 +35,17 @@ public:
 	void notifyQuestDescriptionAdded(const std::string& questID, int descriptionID);
 	// notify condition added -> add to core, reload everything that needs a reload when conditions are added
 	virtual void notifyConditionAdded(const std::string& conditionType, const std::string& condition);
+	// reload all triggers, based on their conditions
+	void reloadTriggers();
+	// reloads a certain trigger
+	void reloadTrigger(Trigger* trigger) const;
 	// getter for the inventory of the interface
 	Inventory* getInventory();
+	// and for the main character
+	virtual GameObject* getMainCharacter() const = 0;
+	// do everything thats needed before leaving the world screen and entering a new level / world. 
+	// Return wheter this is possible (it's not possible on a game over, for example)
+	virtual bool exitWorld() = 0;
 
 protected:
 	WorldInterface* m_interface = nullptr;

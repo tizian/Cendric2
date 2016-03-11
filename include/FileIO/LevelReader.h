@@ -38,7 +38,6 @@ private:
 	bool readModifierTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readMovingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
-	bool readLevelExits(tinyxml2::XMLElement* objects, LevelData & data) const;
 
 	// this is the width in tiles of the dynamic tile tileset
 	// and used to calculate the skin of the dynamic tile.

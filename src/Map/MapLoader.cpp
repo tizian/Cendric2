@@ -44,6 +44,7 @@ void MapLoader::loadTriggers(MapData& data, Screen* screen) const {
 		if (screen->getCharacterCore()->isTriggerTriggered(it.worldID, it.objectID))
 			continue;
 		Trigger* trigger = new Trigger(mapScreen, mainCharacter, it);
+		mapScreen->reloadTrigger(trigger);
 		screen->addObject(trigger);
 	}
 }

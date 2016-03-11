@@ -14,18 +14,21 @@ enum class TriggerContentType {
 	ItemChange,
 	GoldChange,
 	ItemEquip,
-	Hint
+	Hint,
+	MapEntry,
+	LevelEntry,
 };
 
 // holds a part of the trigger content.
-// the Trigger content type decides which of 
+// the trigger content type decides which of 
 // the attributes are used.
 struct TriggerContent {
 	TriggerContent(TriggerContentType type_) : type(type_) {};
 	TriggerContentType type;
-	std::string firstStringAttribute;
-	std::string secondStringAttribute;
-	int integerAttribute;
+	std::string s1 = "";
+	std::string s2 = "";
+	int i1 = 0;
+	int i2 = 0;
 
 	// executes the trigger on the given world screen
 	static void executeTrigger(const TriggerContent& content, WorldScreen* screen);

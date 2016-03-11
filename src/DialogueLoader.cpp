@@ -36,6 +36,8 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("removeItem", &DialogueLoader::removeItem)
 		.addFunction("addGold", &DialogueLoader::addGold)
 		.addFunction("removeGold", &DialogueLoader::removeGold)
+		.addFunction("startLevel", &DialogueLoader::startLevel)
+		.addFunction("startMap", &DialogueLoader::startMap)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
 		.addFunction("addNode", &DialogueLoader::addNode)
 		.endClass();
@@ -82,8 +84,8 @@ void DialogueLoader::changeQuestState(const std::string& questID, const std::str
 		return;
 	}
 	TriggerContent content(TriggerContentType::QuestStateChange);
-	content.firstStringAttribute = questID;
-	content.integerAttribute = static_cast<int>(questState);
+	content.s1 = questID;
+	content.i1 = static_cast<int>(questState);
 	m_currentNode->content.push_back(content);
 }
 
@@ -101,8 +103,8 @@ void DialogueLoader::addQuestDescription(const std::string& questID, int descrip
 		return;
 	}
 	TriggerContent content(TriggerContentType::QuestDescriptionProgress);
-	content.firstStringAttribute = questID;
-	content.integerAttribute = descriptionID;
+	content.s1 = questID;
+	content.i1 = descriptionID;
 	m_currentNode->content.push_back(content);
 }
 
@@ -116,8 +118,8 @@ void DialogueLoader::addQuestProgress(const std::string& questID, const std::str
 		return;
 	}
 	TriggerContent content(TriggerContentType::QuestConditionProgress);
-	content.firstStringAttribute = questID;
-	content.secondStringAttribute = progress;
+	content.s1 = questID;
+	content.s2 = progress;
 	m_currentNode->content.push_back(content);
 }
 
@@ -131,8 +133,8 @@ void DialogueLoader::addConditionProgress(const std::string& conditionType, cons
 		return;
 	}
 	TriggerContent content(TriggerContentType::ConditionProgress);
-	content.firstStringAttribute = conditionType;
-	content.secondStringAttribute = condition;
+	content.s1 = conditionType;
+	content.s2 = condition;
 	m_currentNode->content.push_back(content);
 }
 
@@ -146,7 +148,7 @@ void DialogueLoader::addHint(const std::string& hint) {
 		return;
 	}
 	TriggerContent content(TriggerContentType::Hint);
-	content.firstStringAttribute = hint;
+	content.s1 = hint;
 	m_currentNode->content.push_back(content);
 }
 
@@ -188,8 +190,8 @@ void DialogueLoader::addItem(const std::string& itemID, int amount) {
 		return;
 	}
 	TriggerContent content(TriggerContentType::ItemChange);
-	content.firstStringAttribute = itemID;
-	content.integerAttribute = amount;
+	content.s1 = itemID;
+	content.i1 = amount;
 	m_currentNode->content.push_back(content);
 }
 
@@ -203,7 +205,7 @@ void DialogueLoader::equipItem(const std::string& itemID) {
 		return;
 	}
 	TriggerContent content(TriggerContentType::ItemEquip);
-	content.firstStringAttribute = itemID;
+	content.s1 = itemID;
 	m_currentNode->content.push_back(content);
 }
 
@@ -222,8 +224,8 @@ void DialogueLoader::removeItem(const std::string& itemID, int amount) {
 		return;
 	}
 	TriggerContent content(TriggerContentType::ItemChange);
-	content.firstStringAttribute = itemID;
-	content.integerAttribute = -amount;
+	content.s1 = itemID;
+	content.i1 = -amount;
 	m_currentNode->content.push_back(content);
 }
 
@@ -237,7 +239,7 @@ void DialogueLoader::addGold(int amount) {
 		return;
 	}
 	TriggerContent content(TriggerContentType::GoldChange);
-	content.integerAttribute = amount;
+	content.i1 = amount;
 	m_currentNode->content.push_back(content);
 }
 
@@ -251,7 +253,39 @@ void DialogueLoader::removeGold(int amount) {
 		return;
 	}
 	TriggerContent content(TriggerContentType::GoldChange);
-	content.integerAttribute = -amount;
+	content.i1 = -amount;
+	m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::startLevel(const std::string& levelID, int x, int y) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot start level: no node created.");
+		return;
+	}
+	if (levelID.empty() || x <= 0 || y <= 0) {
+		g_logger->logError("DialogueLoader", "Level ID cannot be empty and the spawn position (x and y) must be > 0");
+		return;
+	}
+	TriggerContent content(TriggerContentType::LevelEntry);
+	content.s1 = levelID;
+	content.i1 = x;
+	content.i2 = y;
+	m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::startMap(const std::string& mapID, int x, int y) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot start map: no node created.");
+		return;
+	}
+	if (mapID.empty() || x <= 0 || y <= 0) {
+		g_logger->logError("DialogueLoader", "Map ID cannot be empty and the spawn position (x and y) must be > 0");
+		return;
+	}
+	TriggerContent content(TriggerContentType::MapEntry);
+	content.s1 = mapID;
+	content.i1 = x;
+	content.i2 = y;
 	m_currentNode->content.push_back(content);
 }
 

@@ -42,32 +42,15 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		m_characterCore->quicksave();
 		setTooltipText("GameSaved", sf::Color::Green, true);
 	}
-	MapExitData* data = m_currentMap.checkLevelEntry((*m_mainChar->getBoundingBox()));
-	if (data == nullptr || m_isOnLevelEntry) {
-		m_isOnLevelEntry = (data != nullptr);
-		updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
-		depthSortObjects(GameObjectType::_MapMovableGameObject, true);
-		updateObjects(GameObjectType::_DynamicTile, frameTime);
-		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
-		updateObjects(GameObjectType::_Light, frameTime);
-		updateObjects(GameObjectType::_Overlay, frameTime);
-		m_currentMap.update(frameTime);
-		updateTooltipText(frameTime);
-		return;
-	}
-	else {
-		if (!data->levelID.empty()) {
-			m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-			m_characterCore->setLevel(data->spawnPoint, data->levelID);
-		}
-		else {
-			m_characterCore->setMap(data->spawnPoint, data->mapID);
-		}
-		delete data;
-		setNextScreen(new LoadingScreen(getCharacterCore()));
-		return;
-	}
 
+	updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
+	depthSortObjects(GameObjectType::_MapMovableGameObject, true);
+	updateObjects(GameObjectType::_DynamicTile, frameTime);
+	updateObjects(GameObjectType::_ScreenOverlay, frameTime);
+	updateObjects(GameObjectType::_Light, frameTime);
+	updateObjects(GameObjectType::_Overlay, frameTime);
+	m_currentMap.update(frameTime);
+	updateTooltipText(frameTime);
 }
 
 void MapScreen::loadForRenderTexture() {
@@ -98,7 +81,6 @@ void MapScreen::execOnEnter(const Screen* previousScreen) {
 
 void MapScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
 	WorldScreen::notifyConditionAdded(conditionType, condition);
-	m_currentMap.updateLevelEntries();
 	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
 			npc->reloadRoutine();
@@ -119,6 +101,11 @@ const Map& MapScreen::getMap() const {
 
 MapMainCharacter* MapScreen::getMainCharacter() const {
 	return m_mainChar;
+}
+
+bool MapScreen::exitWorld() {
+	m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
+	return true;
 }
 
 void MapScreen::setDialogue(NPC* npc) {

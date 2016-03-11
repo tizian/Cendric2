@@ -1,22 +1,23 @@
 #include "Structs/TriggerContent.h"
 #include "Screens/WorldScreen.h"
+#include "Screens/LoadingScreen.h"
 
 void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* screen) {
 	switch (content.type) {
 	case TriggerContentType::ConditionProgress:
-		screen->notifyConditionAdded(content.firstStringAttribute, content.secondStringAttribute);
+		screen->notifyConditionAdded(content.s1, content.s2);
 		break;
 	case TriggerContentType::GoldChange:
-		screen->notifyItemChange("gold", content.integerAttribute);
+		screen->notifyItemChange("gold", content.i1);
 		break;
 	case TriggerContentType::ItemChange:
-		screen->notifyItemChange(content.firstStringAttribute, content.integerAttribute);
+		screen->notifyItemChange(content.s1, content.i1);
 		break;
 	case TriggerContentType::Hint:
-		screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(content.firstStringAttribute));
+		screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(content.s1));
 		break;
 	case TriggerContentType::ItemEquip: {
-		auto bean = g_databaseManager->getItemBean(content.firstStringAttribute);
+		auto bean = g_databaseManager->getItemBean(content.s1);
 		if (bean.status == BeanStatus::Filled) {
 			screen->getCharacterCore()->equipItem(bean.item_id, bean.item_type);
 			screen->getInventory()->reload();
@@ -24,13 +25,23 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		break;
 	}
 	case TriggerContentType::QuestConditionProgress:
-		screen->notifyQuestConditionFulfilled(content.firstStringAttribute, content.secondStringAttribute);
+		screen->notifyQuestConditionFulfilled(content.s1, content.s2);
 		break;
 	case TriggerContentType::QuestDescriptionProgress:
-		screen->notifyQuestDescriptionAdded(content.firstStringAttribute, content.integerAttribute);
+		screen->notifyQuestDescriptionAdded(content.s1, content.i1);
 		break;
 	case TriggerContentType::QuestStateChange:
-		screen->notifyQuestStateChanged(content.firstStringAttribute, static_cast<QuestState>(content.integerAttribute));
+		screen->notifyQuestStateChanged(content.s1, static_cast<QuestState>(content.i1));
+		break;
+	case TriggerContentType::MapEntry:
+		screen->exitWorld();
+		screen->getCharacterCore()->setMap(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);
+		screen->setNextScreen(new LoadingScreen(screen->getCharacterCore()));
+		break;
+	case TriggerContentType::LevelEntry:
+		screen->exitWorld();
+		screen->getCharacterCore()->setLevel(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);
+		screen->setNextScreen(new LoadingScreen(screen->getCharacterCore()));
 		break;
 	default:
 		break;

@@ -178,7 +178,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 						return false;
 					}
 					TriggerContent content(TriggerContentType::Hint);
-					content.firstStringAttribute = textAttr;
+					content.s1 = textAttr;
 					trigger.content.push_back(content);
 				}
 				else if (name.compare("condition progress") == 0) {
@@ -188,25 +188,95 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 						return false;
 					}
 
-					std::string condition_progress = textAttr;
+					std::string conditionProgress = textAttr;
 
 					size_t pos = 0;
-					if ((pos = condition_progress.find(",")) == std::string::npos) {
+					if ((pos = conditionProgress.find(",")) == std::string::npos) {
 						logError("XML file could not be read, condition progress value must be two strings, seperated by a comma.");
 						return false;
 					}
 
 					TriggerContent content(TriggerContentType::ConditionProgress);
-					content.firstStringAttribute = condition_progress.substr(0, pos);
-					condition_progress.erase(0, pos + 1);
-					content.secondStringAttribute = condition_progress;
+					content.s1 = conditionProgress.substr(0, pos);
+					conditionProgress.erase(0, pos + 1);
+					content.s2 = conditionProgress;
+					trigger.content.push_back(content);
+				}
+				else if (name.compare("condition") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, condition value property not found.");
+						return false;
+					}
+
+					trigger.condition = textAttr;
+				}
+				else if (name.compare("map entry") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, map entry value property not found.");
+						return false;
+					}
+
+					std::string mapEntry = textAttr;
+
+					size_t pos = 0;
+					if ((pos = mapEntry.find(",")) == std::string::npos) {
+						logError("XML file could not be read, map entry value must be a string (map id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::MapEntry);
+					content.s1 = mapEntry.substr(0, pos);
+					mapEntry.erase(0, pos + 1);
+
+					if ((pos = mapEntry.find(",")) == std::string::npos) {
+						logError("XML file could not be read, map entry value must be a string (map id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+					content.i1 = std::atoi(mapEntry.substr(0, pos).c_str());
+					mapEntry.erase(0, pos + 1);
+
+					content.i2 = std::atoi(mapEntry.c_str());
+					trigger.content.push_back(content);
+				}
+				else if (name.compare("level entry") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, level entry value property not found.");
+						return false;
+					}
+
+					std::string mapEntry = textAttr;
+
+					size_t pos = 0;
+					if ((pos = mapEntry.find(",")) == std::string::npos) {
+						logError("XML file could not be read, level entry value must be a string (level id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::LevelEntry);
+					content.s1 = mapEntry.substr(0, pos);
+					mapEntry.erase(0, pos + 1);
+
+					if ((pos = mapEntry.find(",")) == std::string::npos) {
+						logError("XML file could not be read, level entry value must be a string (level id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+					content.i1 = std::atoi(mapEntry.substr(0, pos).c_str());
+					mapEntry.erase(0, pos + 1);
+
+					content.i2 = std::atoi(mapEntry.c_str());
 					trigger.content.push_back(content);
 				}
 				else if (name.compare("persistent") == 0) {
 					trigger.isPersistent = true;
 				}
+				else if (name.compare("keyguarded") == 0) {
+					trigger.isKeyGuarded = true;
+				}
 				else {
-					logError("XML file could not be read, unknown property->name attribute found for trigger.");
+					logError("XML file could not be read, unknown property->name attribute found for trigger: " + name);
 					return false;
 				}
 				_property = _property->NextSiblingElement("property");

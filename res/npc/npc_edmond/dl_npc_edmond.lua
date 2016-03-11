@@ -44,7 +44,7 @@ loadDialogue = function(DL)
 				DL:addChoice(11, "DL_Choice_IWontHelp") --  No, that's your problem
 				DL:addNode()
 				
-			elseif (not DL:isConditionFulfilled("level_entry","tutorial_started")) then
+			elseif (not DL:isConditionFulfilled("trigger","tutorial_started")) then
 				
 				DL:createChoiceNode(50)
 				DL:addChoice(7, "DL_Choice_WhatCanWeDo") --  What can we do about those rocks?
@@ -68,7 +68,7 @@ loadDialogue = function(DL)
 
 						
 			DL:createNPCNode(12, -1, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable. Here, take my walking pole and follow me.
-			DL:addConditionProgress("level_entry","tutorial_started")
+			DL:addConditionProgress("trigger","tutorial_started")
 			DL:addItem("we_walkingpole", 1)
 			DL:equipItem("we_walkingpole")
 			DL:addHint("Inventory")

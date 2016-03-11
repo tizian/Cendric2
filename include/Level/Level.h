@@ -6,7 +6,6 @@
 #include "Level/LevelDynamicTile.h"
 #include "LevelLoader.h"
 #include "SpeedupPullCamera.h"
-#include "Structs/LevelExitData.h"
 #include "Structs/AIWalkingQueryRecord.h"
 
 // a sidescroller level
@@ -29,8 +28,6 @@ public:
 	// deletes the resources
 	void dispose() override;
 
-	// checks if the main char has reached a level exit. If no, it returns nullptr, the map id and spawn point for the map.
-	LevelExitData* checkLevelExit(const sf::FloatRect& boundingBox) const;
 	// collision with the level, see WorldCollisionQueryRecord for more infos about the argument
 	bool collides(WorldCollisionQueryRecord& rec) const override;
 	// checks for collisions with those specific dynamic tiles

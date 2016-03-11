@@ -25,7 +25,7 @@ loadRoutine = function(R)
 				
 			end
 			
-		elseif (R:isConditionFulfilled("level_entry","tutorial_started")) then 
+		elseif (R:isConditionFulfilled("trigger","tutorial_started")) then 
 		
 			R:setTilePosition(44, 17)
 			R:setTalkingEnabled(false)

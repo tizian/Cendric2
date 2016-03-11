@@ -26,16 +26,15 @@ public:
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
 	void notifyConditionAdded(const std::string& conditionType, const std::string& condition) override;
-	// getter for the main char as it lays in the movable go vector
-	MapMainCharacter* getMainCharacter() const;
 
 	const Map& getMap() const;
+	MapMainCharacter* getMainCharacter() const override;
+	bool exitWorld() override;
 
 private:
 	Map m_currentMap;
 	std::string m_mapID;
 	MapMainCharacter* m_mainChar;
-	bool m_isOnLevelEntry = true;
 	DialogueWindow* m_dialogueWindow = nullptr;
 	CookingWindow* m_cookingWindow = nullptr;
 
