@@ -73,8 +73,8 @@ inline std::string getPath(const std::string& path) {
 #define COLOR_TRANS_GREY	sf::Color(150, 150, 150, 100)
 #define COLOR_TRANS_WHITE	sf::Color(255, 255, 255, 100)
 
-#define COLOR_GOOD			sf::Color(0, 255, 0)
-#define COLOR_NEUTRAL		sf::Color(255, 255, 0)
+#define COLOR_GOOD			sf::Color(18, 165, 18)
+#define COLOR_NEUTRAL		sf::Color(249, 188, 43)
 #define COLOR_BAD			sf::Color(255, 0, 0)
 
 #define COLOR_DAMAGED		sf::Color(255, 0, 0)
