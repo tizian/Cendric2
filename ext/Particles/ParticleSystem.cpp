@@ -204,7 +204,7 @@ namespace particles
 		m_renderTexture.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
 		m_renderTexture.display();
 		m_sprite.setTexture(m_renderTexture.getTexture());
-		sf::Glsl::Vec4 colorVec = color;
+		sf::Glsl::Vec4 colorVec = sf::Glsl::Vec4(color.r, color.g, color.b, color.a);
 		m_shader.setUniform("customColor", colorVec);
 		m_shader.setUniform("threshold", threshold);
 		
