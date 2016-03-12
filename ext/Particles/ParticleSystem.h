@@ -54,6 +54,7 @@ namespace particles
 		std::vector<ParticleUpdater *> m_updaters;
 	};
 
+
 	class PointParticleSystem : public ParticleSystem
 	{
 	public:
@@ -66,6 +67,7 @@ namespace particles
 		virtual void update(const sf::Time &dt) override;
 		virtual void render(sf::RenderTarget& renderTarget) override;
 	};
+
 
 	class TextureParticleSystem : public ParticleSystem
 	{
@@ -87,6 +89,20 @@ namespace particles
 	protected:
 		sf::Texture *m_texture;
 	};
+
+
+	class SpriteSheetParticleSystem : public TextureParticleSystem
+	{
+	public:
+		SpriteSheetParticleSystem(int maxCount, sf::Texture *texture) : TextureParticleSystem(maxCount, texture) {}
+		virtual ~SpriteSheetParticleSystem() {}
+
+		SpriteSheetParticleSystem(const SpriteSheetParticleSystem &) = delete;
+		SpriteSheetParticleSystem &operator=(const SpriteSheetParticleSystem &) = delete;
+
+		virtual void update(const sf::Time &dt) override;
+	};
+
 
 	class MetaballParticleSystem : public TextureParticleSystem
 	{

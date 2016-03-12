@@ -14,6 +14,9 @@ namespace particles
         vel.reset(new sf::Vector2f[maxSize]);
         acc.reset(new sf::Vector2f[maxSize]);
         time.reset(new sf::Vector3f[maxSize]);
+		texCoords.reset(new sf::IntRect[maxSize]);
+		frame.reset(new int[maxSize]);
+		frameTimer.reset(new float[maxSize]);
         alive.reset(new bool[maxSize]);
     }
 
@@ -42,6 +45,9 @@ namespace particles
         std::swap(vel[id1], vel[id2]);
         std::swap(acc[id1], acc[id2]);
         std::swap(time[id1], time[id2]);
+		std::swap(texCoords[id1], texCoords[id2]);
+		std::swap(frame[id1], frame[id2]);
+		std::swap(frameTimer[id1], frameTimer[id2]);
         std::swap(alive[id1], alive[id2]);
     }
 }

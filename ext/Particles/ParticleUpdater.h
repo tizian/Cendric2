@@ -65,7 +65,7 @@ namespace particles
 
 		void update(ParticleData *data, float dt);
 
-		int numAttractors() const { return m_attractors.size(); }
+		size_t numAttractors() const { return m_attractors.size(); }
 		void add(const sf::Vector3f &attr) { m_attractors.push_back(attr); }
 		sf::Vector3f &get(int id) { return m_attractors[id]; }
 
@@ -101,5 +101,20 @@ namespace particles
 		~TimeUpdater() {}
 
 		void update(ParticleData *data, float dt);
+	};
+
+
+	class AnimationUpdater : public ParticleUpdater
+	{
+	public:
+		AnimationUpdater() {}
+		~AnimationUpdater() {}
+
+		void update(ParticleData *data, float dt);
+
+	public:
+		std::vector<sf::IntRect> frames;
+		float frameTime;
+		bool looped{ false };
 	};
 }

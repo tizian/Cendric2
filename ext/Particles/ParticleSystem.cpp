@@ -100,11 +100,14 @@ namespace particles
 	TextureParticleSystem::TextureParticleSystem(int maxCount, sf::Texture *texture) : ParticleSystem(maxCount), m_texture(texture) {
 		m_vertices = sf::VertexArray(sf::Quads, maxCount * 4);
 
+		float x = static_cast<float>(m_texture->getSize().x);
+		float y = static_cast<float>(m_texture->getSize().y);
+
 		for (int i = 0; i < m_particles.count; ++i) {
-			m_vertices[4 * i + 0].texCoords.x = 0.0f;	m_vertices[4 * i + 0].texCoords.y = 0.0f;
-			m_vertices[4 * i + 1].texCoords.x = (float)m_texture->getSize().x;	m_vertices[4 * i + 1].texCoords.y = 0.0f;
-			m_vertices[4 * i + 2].texCoords.x = (float)m_texture->getSize().x;	m_vertices[4 * i + 2].texCoords.y = (float)m_texture->getSize().y;
-			m_vertices[4 * i + 3].texCoords.x = 0.0f;	m_vertices[4 * i + 3].texCoords.y = (float)m_texture->getSize().y;
+			m_vertices[4 * i + 0].texCoords = sf::Vector2f(0.f, 0.f);
+			m_vertices[4 * i + 1].texCoords = sf::Vector2f(x, 0.f);
+			m_vertices[4 * i + 2].texCoords = sf::Vector2f(x, y);
+			m_vertices[4 * i + 3].texCoords = sf::Vector2f(0.f, y);
 
 			m_vertices[4 * i + 0].color = sf::Color::White;
 			m_vertices[4 * i + 1].color = sf::Color::White;
@@ -118,11 +121,14 @@ namespace particles
 	void TextureParticleSystem::setTexture(sf::Texture *texture) {
 		m_texture = texture;
 
+		float x = static_cast<float>(m_texture->getSize().x);
+		float y = static_cast<float>(m_texture->getSize().y);
+
 		for (int i = 0; i < m_particles.count; ++i) {
-			m_vertices[4 * i + 0].texCoords.x = 0.0f;	m_vertices[4 * i + 0].texCoords.y = 0.0f;
-			m_vertices[4 * i + 1].texCoords.x = (float)m_texture->getSize().x;	m_vertices[4 * i + 1].texCoords.y = 0.0f;
-			m_vertices[4 * i + 2].texCoords.x = (float)m_texture->getSize().x;	m_vertices[4 * i + 2].texCoords.y = (float)m_texture->getSize().y;
-			m_vertices[4 * i + 3].texCoords.x = 0.0f;	m_vertices[4 * i + 3].texCoords.y = (float)m_texture->getSize().y;
+			m_vertices[4 * i + 0].texCoords = sf::Vector2f(0.f, 0.f);
+			m_vertices[4 * i + 1].texCoords = sf::Vector2f(x, 0.f);
+			m_vertices[4 * i + 2].texCoords = sf::Vector2f(x, y);
+			m_vertices[4 * i + 3].texCoords = sf::Vector2f(0.f, y);
 		}
 	}
 
@@ -155,6 +161,32 @@ namespace particles
 		renderTarget.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
 	}
 
+
+	void SpriteSheetParticleSystem::update(const sf::Time &dt) {
+		ParticleSystem::update(dt);
+
+		for (int i = 0; i < m_particles.countAlive; ++i) {
+			m_vertices[4 * i + 0].position.x = m_particles.pos[i].x - m_particles.size[i].x;	m_vertices[4 * i + 0].position.y = m_particles.pos[i].y - m_particles.size[i].x;
+			m_vertices[4 * i + 1].position.x = m_particles.pos[i].x + m_particles.size[i].x;	m_vertices[4 * i + 1].position.y = m_particles.pos[i].y - m_particles.size[i].x;
+			m_vertices[4 * i + 2].position.x = m_particles.pos[i].x + m_particles.size[i].x;	m_vertices[4 * i + 2].position.y = m_particles.pos[i].y + m_particles.size[i].x;
+			m_vertices[4 * i + 3].position.x = m_particles.pos[i].x - m_particles.size[i].x;	m_vertices[4 * i + 3].position.y = m_particles.pos[i].y + m_particles.size[i].x;
+
+			m_vertices[4 * i + 0].color = m_particles.col[i];
+			m_vertices[4 * i + 1].color = m_particles.col[i];
+			m_vertices[4 * i + 2].color = m_particles.col[i];
+			m_vertices[4 * i + 3].color = m_particles.col[i];
+
+			float left = static_cast<float>(m_particles.texCoords[i].left);
+			float top = static_cast<float>(m_particles.texCoords[i].top);
+			float width = static_cast<float>(m_particles.texCoords[i].width);
+			float height = static_cast<float>(m_particles.texCoords[i].height);
+
+			m_vertices[4 * i + 0].texCoords = sf::Vector2f(left, top);
+			m_vertices[4 * i + 1].texCoords = sf::Vector2f(left + width, top);
+			m_vertices[4 * i + 2].texCoords = sf::Vector2f(left + width, top + height);
+			m_vertices[4 * i + 3].texCoords = sf::Vector2f(left, top + height);
+		}
+	}
 
 
 	const std::string vertexShader = \

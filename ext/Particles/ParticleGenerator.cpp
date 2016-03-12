@@ -19,7 +19,7 @@ namespace particles
 	}
 
 	inline int randomInt(int low, int high) {
-		return (rand() % (int)(high - low + 1)) + low;
+		return (rand() % static_cast<int>(high - low + 1)) + low;
 	}
 
 	inline sf::Color randomColor(const sf::Color &low, const sf::Color &high) {
@@ -29,28 +29,28 @@ namespace particles
 			r = high.r;
 		}
 		else {
-			r = (rand() % (int)(high.r - low.r + 1)) + low.r;
+			r = (rand() % static_cast<int>(high.r - low.r + 1)) + low.r;
 		}
 
 		if (high.g <= low.g) {
 			g = high.g;
 		}
 		else {
-			g = (rand() % (int)(high.g - low.g + 1)) + low.g;
+			g = (rand() % static_cast<int>(high.g - low.g + 1)) + low.g;
 		}
 
 		if (high.b <= low.b) {
 			b = high.b;
 		}
 		else {
-			b = (rand() % (int)(high.b - low.b + 1)) + low.b;
+			b = (rand() % static_cast<int>(high.b - low.b + 1)) + low.b;
 		}
 
 		if (high.a <= low.a) {
 			a = high.a;
 		}
 		else {
-			a = (rand() % (int)(high.a - low.a + 1)) + low.a;
+			a = (rand() % static_cast<int>(high.a - low.a + 1)) + low.a;
 		}
 
 		return { r, g, b, a };
@@ -149,6 +149,28 @@ namespace particles
 		for (int i = startId; i < endId; ++i) {
 			data->time[i].x = data->time[i].y = randomFloat(minTime, maxTime);
 			data->time[i].z = 0.0f;
+		}
+	}
+
+
+	void TexCoordsGenerator::generate(ParticleData *data, int startId, int endId) {
+		for (int i = startId; i < endId; ++i) {
+			data->texCoords[i] = texCoords;
+			data->frame[i] = 0;
+			data->frameTimer[i] = 0.f;
+		}
+	}
+
+
+	void TexCoordsRandomGenerator::generate(ParticleData *data, int startId, int endId) {
+		int low = 0;
+		int high = static_cast<int>(texCoords.size() - 1);
+		if (high < low) return;
+		for (int i = startId; i < endId; ++i) {
+			int idx = randomInt(low, high);
+			data->texCoords[i] = texCoords[idx];
+			data->frame[i] = idx;
+			data->frameTimer[i] = 0.f;
 		}
 	}
 }

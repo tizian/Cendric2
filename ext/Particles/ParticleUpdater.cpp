@@ -104,7 +104,7 @@ namespace particles
 
 	void AttractorUpdater::update(ParticleData *data, float dt) {
 		const int endId = data->countAlive;
-		const int numAttractors = m_attractors.size();
+		size_t numAttractors = m_attractors.size();
 		sf::Vector2f off;
 		float dist;
 
@@ -159,6 +159,33 @@ namespace particles
 					endId = data->count;
 				}
 			}
+		}
+	}
+
+
+	void AnimationUpdater::update(ParticleData *data, float dt) {
+		const int endId = data->countAlive;
+		size_t animationSize = frames.size();
+
+		for (int i = 0; i < endId; ++i) {
+			float currentTime = data->frameTimer[i];
+			currentTime += dt;
+			
+			if (currentTime >= frameTime) {
+				currentTime = std::fmod(currentTime, frameTime);
+
+				int frame = data->frame[i];
+				if (frame + 1 < animationSize) {
+					frame++;
+				}
+				else if (looped) {
+					frame = 0;
+				}
+				data->frame[i] = frame;
+				data->texCoords[i] = frames[frame];
+			}
+
+			data->frameTimer[i] = currentTime;
 		}
 	}
 }

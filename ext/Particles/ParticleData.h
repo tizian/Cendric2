@@ -28,6 +28,9 @@ namespace particles
         std::unique_ptr<sf::Color[]> col;           // Current color
         std::unique_ptr<sf::Color[]> startCol;      // Start color
         std::unique_ptr<sf::Color[]> endCol;        // End color
+		std::unique_ptr<sf::IntRect[]> texCoords;	// Texture coordinates inside spritesheet
+		std::unique_ptr<int[]> frame;				// Frame index for animation
+		std::unique_ptr<float[]> frameTimer;		// Accumulator for animation
         std::unique_ptr<bool[]>  alive;
 
         int count{ 0 };

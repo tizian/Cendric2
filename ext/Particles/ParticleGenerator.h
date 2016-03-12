@@ -172,4 +172,29 @@ namespace particles
 		float minTime{ 0.0f };
 		float maxTime{ 0.0f };
 	};
+
+	class TexCoordsGenerator : public ParticleGenerator
+	{
+	public:
+		TexCoordsGenerator() {}
+		~TexCoordsGenerator() {}
+
+		void generate(ParticleData *data, int startId, int endId);
+
+	public:
+		sf::IntRect texCoords{ 0, 0, 1, 1 };
+	};
+
+
+	class TexCoordsRandomGenerator : public ParticleGenerator
+	{
+	public:
+		TexCoordsRandomGenerator() {}
+		~TexCoordsRandomGenerator() {}
+
+		void generate(ParticleData *data, int startId, int endId);
+
+	public:
+		std::vector<sf::IntRect> texCoords;
+	};
 }
