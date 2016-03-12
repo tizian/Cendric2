@@ -69,14 +69,14 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 	else if (g_inputController->isKeyJustPressed(Key::Down)) {
 		m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
 	}
-	for (int i = 0; i < m_options.size(); i++) {
+	for (size_t i = 0; i < m_options.size(); i++) {
 		m_options[i].update(frameTime);
 		if (m_options[i].isClicked()) {
-			if (i == m_chosenOption) {
+			if (static_cast<int>(i) == m_chosenOption) {
 				// a chosen option was clicked again
 				chooseOption = true;
 			}
-			m_chosenOption = i;
+			m_chosenOption = static_cast<int>(i);
 		}
 	}
 

@@ -35,7 +35,7 @@ void Cutscene::update(const sf::Time& frameTime) {
 		}
 	}
 
-	for (int i = 0; i < m_cutsceneImages.size(); ++i) {
+	for (size_t i = 0; i < m_cutsceneImages.size(); ++i) {
 		sf::Vector2f oldPos = m_cutsceneImages.at(i).getPosition();
 		sf::Vector2f velocity = m_data.steps.at(m_currentStep).images.at(i).velocity;
 		m_cutsceneImages.at(i).setPosition(oldPos + velocity * frameTime.asSeconds());
