@@ -107,7 +107,7 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	states.texture = m_tileset;
 	for (size_t i = 0; i < m_layers.size(); ++i) {
 		target.draw(m_layers[i], states);
-		for (auto& tile : m_animatedTiles.at(i)) {
+		for (auto& tile : m_animatedTiles.at(static_cast<int>(i))) {
 			target.draw(tile->getAnimatedSprite(), states);
 		}
 	}

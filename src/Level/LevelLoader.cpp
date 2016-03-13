@@ -176,7 +176,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 	// calculate level positions and create them if they are not looted yet
 	for (size_t i = 0; i < data.levelItems.size(); ++i) {
 		auto& it = data.levelItems.at(i);
-		if (!it.empty() && (coreData.itemsLooted.at(data.id).find(i) == coreData.itemsLooted.at(data.id).end())) {
+		if (!it.empty() && (coreData.itemsLooted.at(data.id).find(static_cast<int>(i)) == coreData.itemsLooted.at(data.id).end())) {
 			sf::Vector2f position(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			ItemBean item = g_databaseManager->getItemBean(it);
 			if (item.status == BeanStatus::NotSet) {

@@ -104,7 +104,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 	m_speakerText->setString(CENDRIC_NAME);
 	for (size_t i = 0; i < choices.size(); ++i) {
-		DialogueOption option(choices[i].first, m_dialogueTextID, i, choices[i].second == -1);
+		DialogueOption option(choices[i].first, m_dialogueTextID, static_cast<int>(i), choices[i].second == -1);
 		option.deselect();
 		m_options.push_back(option);
 	}
