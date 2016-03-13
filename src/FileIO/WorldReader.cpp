@@ -28,7 +28,7 @@ bool WorldReader::checkData(WorldData& data) const {
 			logError("background layer " + std::to_string(i) + std::string(" empty"));
 			return false;
 		}
-		if (data.backgroundTileLayers[i].size() != data.mapSize.x * data.mapSize.y) {
+		if (static_cast<int>(data.backgroundTileLayers[i].size()) != data.mapSize.x * data.mapSize.y) {
 			logError("background layer " + std::to_string(i) + std::string(" has not correct size (map size)"));
 			return false;
 		}

@@ -21,7 +21,7 @@ TexturedTabBar::TexturedTabBar(const sf::FloatRect& box, int numberTabs) {
 }
 
 TexturedTabBar::~TexturedTabBar() {
-	for (int i = 0; i < m_tabButtons.size(); ++i) {
+	for (size_t i = 0; i < m_tabButtons.size(); ++i) {
 		delete m_tabButtons[i];
 	}
 }

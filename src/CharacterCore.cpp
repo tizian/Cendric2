@@ -530,7 +530,7 @@ void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& le
 void CharacterCore::removeModifier(int slotNr, int modifierNr) {
 	if (slotNr < 0 || slotNr + 1 > static_cast<int>(m_data.equippedWeaponSlots.size())) return;
 	std::vector<SpellModifier>& modifiers = m_data.equippedWeaponSlots.at(slotNr).second;
-	if (modifierNr < 0 || modifierNr > modifiers.size() - 1) return;
+	if (modifierNr < 0 || modifierNr + 1 > static_cast<int>(modifiers.size())) return;
 
 	modifiers[modifierNr].type = SpellModifierType::VOID;
 
@@ -582,7 +582,7 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int m
 		// check if this modifier slot exist
 		if (static_cast<int>(slot.second.size()) < modifierNr + 1) {
 			g_logger->logInfo("CharacterCore", "Adding empty modifier slots slots to the weapon!");
-			for (size_t i = slot.second.size(); i < modifierNr + 1; ++i) {
+			for (size_t i = slot.second.size(); static_cast<int>(i) < modifierNr + 1; ++i) {
 				slot.second.push_back(EMPTY_SPELLMODIFIER);
 			}
 		}
