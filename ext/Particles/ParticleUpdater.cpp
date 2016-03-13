@@ -104,7 +104,7 @@ namespace particles
 
 	void AttractorUpdater::update(ParticleData *data, float dt) {
 		const int endId = data->countAlive;
-		size_t numAttractors = m_attractors.size();
+		int numAttractors = static_cast<int>(m_attractors.size());
 		sf::Vector2f off;
 		float dist;
 
@@ -165,7 +165,7 @@ namespace particles
 
 	void AnimationUpdater::update(ParticleData *data, float dt) {
 		const int endId = data->countAlive;
-		size_t animationSize = frames.size();
+		int animationSize = static_cast<int>(frames.size());
 
 		for (int i = 0; i < endId; ++i) {
 			float currentTime = data->frameTimer[i];
