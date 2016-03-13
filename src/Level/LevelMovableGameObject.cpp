@@ -46,7 +46,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 	}
 
 	// update buff attributes
-	for (int i = 0; i < m_buffAttributes.size();/* don't increment here, we remove on the fly */) {
+	for (size_t i = 0; i < m_buffAttributes.size();/* don't increment here, we remove on the fly */) {
 		m_buffAttributes[i].first -= frameTime;
 		if (m_buffAttributes[i].first <= sf::Time::Zero) {
 			m_attributes.removeBean(m_buffAttributes[i].second);
@@ -68,7 +68,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 	}
 
 	// update debuff attributes
-	for (int i = 0; i < m_dots.size();/* don't increment here, we remove on the fly */) {
+	for (size_t i = 0; i < m_dots.size();/* don't increment here, we remove on the fly */) {
 		int prevSecond = static_cast<int>(std::floor(m_dots[i].duration.asSeconds()));
 		m_dots[i].duration -= frameTime;
 		int thisSecond = std::max(-1, static_cast<int>(std::floor(m_dots[i].duration.asSeconds())));
@@ -83,7 +83,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 }
 
 sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const {
-	return sf::Vector2f(0, 0);
+	return sf::Vector2f(0.f, 0.f);
 }
 
 void LevelMovableGameObject::addAttributes(const sf::Time& duration, const AttributeData& attributes) {

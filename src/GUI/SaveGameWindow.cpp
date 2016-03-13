@@ -181,7 +181,7 @@ void SaveGameWindow::render(sf::RenderTarget& renderTarget) {
 	if (m_topEntry > 0) {
 		renderTarget.draw(m_arrowUp);
 	}
-	if (m_entries.size() - 1 > m_bottomEntry) {
+	if (static_cast<int>(m_entries.size()) > m_bottomEntry + 1) {
 		renderTarget.draw(m_arrowDown);
 	}
 }

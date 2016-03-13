@@ -50,11 +50,11 @@ void WeaponWindow::reload() {
 		for (auto& mod : it.spellModifiers) {
 			modifiers.push_back(ModifierSlot(mod));
 		}
-		for (int i = 0; i < modifiers.size(); ++i) {
+		for (size_t i = 0; i < modifiers.size(); ++i) {
 			auto& mod = modifiers[i];
 			mod.setPosition(sf::Vector2f(xOffset, yOffset));
 			mod.setSpellSlotNr(slotNr);
-			mod.setNr(i);
+			mod.setNr(static_cast<int>(i));
 			xOffset += ModifierSlot::SIZE + MARGIN;
 		}
 

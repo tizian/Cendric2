@@ -79,9 +79,9 @@ void ArrowSelector::addOptionRaw(const std::string& option) {
 }
 
 void ArrowSelector::setOptionIndex(int index) {
-	if (index < 0 || index + 1 > m_options.size()) return;
+	if (index < 0 || index + 1 > static_cast<int>(m_options.size())) return;
 	m_chosenOptionIndex = index;
-	m_rightArrow.setEnabled(m_chosenOptionIndex + 1 < m_options.size());
+	m_rightArrow.setEnabled(m_chosenOptionIndex + 1 < static_cast<int>(m_options.size()));
 	m_leftArrow.setEnabled(m_chosenOptionIndex > 0);
 	m_button.setTextRaw(m_options.at(m_chosenOptionIndex), GUIConstants::CHARACTER_SIZE_M);
 }
@@ -98,7 +98,7 @@ void ArrowSelector::setLabelTextRaw(const std::string& text) {
 void ArrowSelector::setEnabled(bool enabled) {
 	m_isEnabled = enabled;
 	m_leftArrow.setEnabled(enabled && m_chosenOptionIndex > 0);
-	m_rightArrow.setEnabled(enabled && m_chosenOptionIndex + 1 < m_options.size());
+	m_rightArrow.setEnabled(enabled && m_chosenOptionIndex + 1 < static_cast<int>(m_options.size()));
 }
 
 void ArrowSelector::setVisible(bool value) {

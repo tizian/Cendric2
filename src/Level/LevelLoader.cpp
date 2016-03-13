@@ -174,7 +174,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
 	// calculate level positions and create them if they are not looted yet
-	for (int i = 0; i < data.levelItems.size(); i++) {
+	for (size_t i = 0; i < data.levelItems.size(); ++i) {
 		auto& it = data.levelItems.at(i);
 		if (!it.empty() && (coreData.itemsLooted.at(data.id).find(i) == coreData.itemsLooted.at(data.id).end())) {
 			sf::Vector2f position(x * TILE_SIZE_F, y * TILE_SIZE_F);
@@ -187,7 +187,7 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 
 			LevelItem* levelItem = new LevelItem();
 			levelItem->load(mainCharacter, Item(item.item_id), position);
-			levelItem->setSpawnPosition(i);
+			levelItem->setSpawnPosition(static_cast<int>(i));
 			screen->addObject(levelItem);
 		}
 		if (x + 1 >= data.mapSize.x) {

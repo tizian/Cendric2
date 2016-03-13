@@ -60,7 +60,7 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 	}
 
 	if (updateStep) {
-		m_currentStepID = (m_currentStepID >= m_steps.size() - 1) ?
+		m_currentStepID = (m_currentStepID >= static_cast<int>(m_steps.size()) - 1) ?
 			0 : 
 			m_currentStepID + 1;
 

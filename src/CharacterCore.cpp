@@ -170,9 +170,9 @@ void CharacterCore::reloadWeaponSlots() {
 	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
 	if (wep == nullptr) return;
 	wep->reload();
-	for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++) {
+	for (int slot = 0; slot < static_cast<int>(m_data.equippedWeaponSlots.size()); ++slot) {
 		wep->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
-		for (int i = 0; i < m_data.equippedWeaponSlots[slot].second.size(); ++i) {
+		for (int i = 0; i < static_cast<int>(m_data.equippedWeaponSlots[slot].second.size()); ++i) {
 			wep->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
 		}
 	}
@@ -191,9 +191,9 @@ void CharacterCore::loadEquipmentItems() {
 	if (!m_data.equippedWeapon.empty() && g_databaseManager->itemExists(m_data.equippedWeapon)) {
 		eqWeapon = new Weapon(m_data.equippedWeapon);
 		// add equipped spells and their modifiers
-		for (int slot = 0; slot < m_data.equippedWeaponSlots.size(); slot++) {
+		for (int slot = 0; slot < static_cast<int>(m_data.equippedWeaponSlots.size()); ++slot) {
 			eqWeapon->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
-			for (int i = 0; i < m_data.equippedWeaponSlots[slot].second.size(); ++i) {
+			for (int i = 0; i < static_cast<int>(m_data.equippedWeaponSlots[slot].second.size()); ++i) {
 				eqWeapon->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
 			}
 		}
@@ -528,7 +528,7 @@ void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& le
 }
 
 void CharacterCore::removeModifier(int slotNr, int modifierNr) {
-	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
+	if (slotNr < 0 || slotNr + 1 > static_cast<int>(m_data.equippedWeaponSlots.size())) return;
 	std::vector<SpellModifier>& modifiers = m_data.equippedWeaponSlots.at(slotNr).second;
 	if (modifierNr < 0 || modifierNr > modifiers.size() - 1) return;
 
@@ -538,7 +538,7 @@ void CharacterCore::removeModifier(int slotNr, int modifierNr) {
 }
 
 void CharacterCore::removeSpell(int slotNr) {
-	if (slotNr < 0 || slotNr > m_data.equippedWeaponSlots.size() - 1) return;
+	if (slotNr < 0 || slotNr + 1 > static_cast<int>(m_data.equippedWeaponSlots.size())) return;
 	m_data.equippedWeaponSlots.at(slotNr).first = SpellID::VOID;
 	m_data.equippedWeaponSlots.at(slotNr).second.clear();
 	reloadWeaponSlots();
@@ -556,7 +556,7 @@ void CharacterCore::addSpell(SpellID id, int slotNr) {
 		}
 	}
 
-	while (m_data.equippedWeaponSlots.size() - 1 < slotNr) {
+	while (static_cast<int>(m_data.equippedWeaponSlots.size()) < slotNr + 1) {
 		m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>({SpellID::VOID, std::vector<SpellModifier>()}));
 	}
 
@@ -571,8 +571,8 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int m
 	if (wep == nullptr) return;
 	if (wep->addModifier(slotNr, modifierNr, modifier, true)) {
 		// check if this spell slot exists. If not, fill the slots
-		if (m_data.equippedWeaponSlots.size() < slotNr + 1) {
-			for (size_t i = m_data.equippedWeaponSlots.size(); i < slotNr + 1; ++i) {
+		if (static_cast<int>(m_data.equippedWeaponSlots.size()) < slotNr + 1) {
+			for (size_t i = m_data.equippedWeaponSlots.size(); static_cast<int>(i) < slotNr + 1; ++i) {
 				std::pair<SpellID, std::vector<SpellModifier>> newSlot;
 				newSlot.first = SpellID::VOID;
 				m_data.equippedWeaponSlots.push_back(newSlot);
@@ -580,7 +580,7 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int m
 		}
 		std::pair<SpellID, std::vector<SpellModifier>>& slot = m_data.equippedWeaponSlots.at(slotNr);
 		// check if this modifier slot exist
-		if (slot.second.size() < modifierNr + 1) {
+		if (static_cast<int>(slot.second.size()) < modifierNr + 1) {
 			g_logger->logInfo("CharacterCore", "Adding empty modifier slots slots to the weapon!");
 			for (size_t i = slot.second.size(); i < modifierNr + 1; ++i) {
 				slot.second.push_back(EMPTY_SPELLMODIFIER);
@@ -631,7 +631,7 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 		m_data.equippedWeaponSlots.clear();
 		if (!m_data.equippedWeapon.empty()) {
 			std::vector<ItemWeaponSlotBean> wep = g_databaseManager->getItemWeaponSlotBeans(m_data.equippedWeapon);
-			for (int i = 0; i < wep.size(); i++) {
+			for (size_t i = 0; i < wep.size(); ++i) {
 				m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
 			}
 			reloadWeaponSlots();

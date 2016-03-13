@@ -190,7 +190,7 @@ void BitmapText::init() {
 	float curX = 0.f;
 	float curY = 0.f;
 
-	int lineNumber = 0;
+	size_t lineNumber = 0;
 	if (m_alignment == TextAlignment::Center) {
 		curX = 0.5f * (maxLineLength - lines[lineNumber].size()) * dx;
 	}

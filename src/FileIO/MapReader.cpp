@@ -10,12 +10,12 @@ void MapReader::logError(const std::string& error) const {
 
 bool MapReader::checkData(MapData& data) const {
 	if (!WorldReader::checkData(data)) return false;
-	for (int i = 0; i < data.dynamicTileLayers.size(); i++) {
+	for (size_t i = 0; i < data.dynamicTileLayers.size(); ++i) {
 		if (data.dynamicTileLayers[i].first == MapDynamicTileID::VOID) {
 			logError("map dynamic tile ID not recognized");
 			return false;
 		}
-		if (data.dynamicTileLayers[i].second.empty() || data.dynamicTileLayers[i].second.size() != data.mapSize.x * data.mapSize.y) {
+		if (data.dynamicTileLayers[i].second.empty() || static_cast<int>(data.dynamicTileLayers[i].second.size()) != data.mapSize.x * data.mapSize.y) {
 			logError("dynamic tile layer has not correct size (map size)");
 			return false;
 		}

@@ -297,6 +297,6 @@ void FluidTile::melt(int index) {
 bool FluidTile::isFrozen(int index) {
 	if (m_frozenTiles.size() == 0) return false;
 	if (index < 0) index = 0;
-	if (index >= m_frozenTiles.size()) index = static_cast<int>(m_frozenTiles.size()) - 1;
+	if (index >= static_cast<int>(m_frozenTiles.size())) index = static_cast<int>(m_frozenTiles.size()) - 1;
 	return (m_frozenTiles[index] != nullptr);
 }

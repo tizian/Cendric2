@@ -40,10 +40,10 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 		return "";
 	}
 
-	int maxLineChars = maxWidth / characterSize;
+	size_t maxLineChars = static_cast<size_t>(maxWidth / characterSize);
 	std::string uncroppedText = string;
 	std::string text = "";
-	while (uncroppedText.size() * characterSize > maxWidth) {
+	while (static_cast<int>(uncroppedText.size()) * characterSize > maxWidth) {
 		// check for forced newlines
 		size_t found = uncroppedText.find("\n");
 		if (found != string::npos && found < maxLineChars && found++ != string::npos) {
@@ -60,7 +60,7 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 			continue;
 		}
 		// append words as long as we have still space for them
-		int space = maxLineChars;
+		size_t space = maxLineChars;
 		while (true) {
 			found = uncroppedText.find(" ");
 			if (found != string::npos && found++ < space) {

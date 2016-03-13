@@ -21,13 +21,13 @@ TabBar::TabBar(const sf::FloatRect& box, int numberTabs) {
 }
 
 TabBar::~TabBar() {
-	for (int i = 0; i < m_tabButtons.size(); ++i) {
+	for (size_t i = 0; i < m_tabButtons.size(); ++i) {
 		delete m_tabButtons[i];
 	}
 }
 
 void TabBar::render(sf::RenderTarget& renderTarget) {
-	for (int i = 0; i < m_tabButtons.size(); ++i) {
+	for (size_t i = 0; i < m_tabButtons.size(); ++i) {
 		m_tabButtons[i]->render(renderTarget);
 	}
 	renderTarget.draw(m_activeOverlay);
@@ -35,16 +35,16 @@ void TabBar::render(sf::RenderTarget& renderTarget) {
 
 void TabBar::update(const sf::Time& frameTime) {
 	int nextActiveIndex = -1;
-	for (int i = 0; i < m_tabButtons.size(); ++i) {
+	for (size_t i = 0; i < m_tabButtons.size(); ++i) {
 		TabButton* tab = m_tabButtons[i];
 		tab->update(frameTime);
 		if (tab->isClicked() && !tab->isActive()) {
-			nextActiveIndex = i;
+			nextActiveIndex = static_cast<int>(i);
 		}
 	}
 
 	if (nextActiveIndex != -1) {
-		for (int i = 0; i < m_tabButtons.size(); ++i) {
+		for (size_t i = 0; i < m_tabButtons.size(); ++i) {
 			m_tabButtons[i]->setActive(false);
 		}
 		m_activeTabIndex = nextActiveIndex;

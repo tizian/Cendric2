@@ -23,7 +23,7 @@ bool WorldReader::checkData(WorldData& data) const {
 		logError("tileset path not set / empty");
 		return false;
 	}
-	for (int i = 0; i < static_cast<int>(data.backgroundTileLayers.size()); i++) {
+	for (size_t i = 0; i < data.backgroundTileLayers.size(); ++i) {
 		if (data.backgroundTileLayers[i].empty()) {
 			logError("background layer " + std::to_string(i) + std::string(" empty"));
 			return false;
@@ -33,7 +33,7 @@ bool WorldReader::checkData(WorldData& data) const {
 			return false;
 		}
 	}
-	for (int i = 0; i < data.foregroundTileLayers.size(); i++) {
+	for (size_t i = 0; i < data.foregroundTileLayers.size(); ++i) {
 		if (data.foregroundTileLayers[i].empty()) {
 			logError("foreground layer " + std::to_string(i) + std::string(" empty"));
 			return false;
@@ -43,7 +43,7 @@ bool WorldReader::checkData(WorldData& data) const {
 			return false;
 		}
 	}
-	for (int i = 0; i < static_cast<int>(data.lightedForegroundTileLayers.size()); i++) {
+	for (size_t i = 0; i < data.lightedForegroundTileLayers.size(); ++i) {
 		if (data.lightedForegroundTileLayers[i].empty()) {
 			logError("lighted foreground layer " + std::to_string(i) + std::string(" empty"));
 			return false;

@@ -103,7 +103,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 	m_dialogueText->setString("");
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 	m_speakerText->setString(CENDRIC_NAME);
-	for (int i = 0; i < choices.size(); i++) {
+	for (size_t i = 0; i < choices.size(); ++i) {
 		DialogueOption option(choices[i].first, m_dialogueTextID, i, choices[i].second == -1);
 		option.deselect();
 		m_options.push_back(option);
@@ -148,10 +148,10 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 		else if (g_inputController->isScrolledDown()) {
 			m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
 		}
-		for (int i = 0; i < m_options.size(); i++) {
+		for (size_t i = 0; i < m_options.size(); ++i) {
 			m_options[i].update(frameTime);
 			if (m_options[i].isClicked()) {
-				if (i == m_chosenOption) {
+				if (static_cast<int>(i) == m_chosenOption) {
 					// a chosen option was clicked again
 					chooseOption = true;
 				}

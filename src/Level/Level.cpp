@@ -69,14 +69,14 @@ void Level::drawBackgroundLayers(sf::RenderTarget& target, const sf::RenderState
 	m_camera->setFocusCenter(focus);
 
 	// parallax background layers
-	for (int i = 0; i < m_levelData.backgroundLayers.size(); i++) {
+	for (auto& layer : m_levelData.backgroundLayers) {
 		// handle case for layer at infinity
-		if (m_levelData.backgroundLayers[i].getDistance() == -1.0f) {
-			view.setCenter(WINDOW_WIDTH / 2.f, WINDOW_HEIGHT / 2.f);
+		if (layer.getDistance() == -1.0f) {
+			view.setCenter(0.5f * WINDOW_WIDTH, 0.5f * WINDOW_HEIGHT);
 			target.setView(view);
 		}
 		else {
-			float d = m_levelData.backgroundLayers[i].getDistance();
+			float d = layer.getDistance();
 			float ominoeseOffsetX = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
 			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.mapRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffsetX;
 			float ominoeseOffsetY = (WINDOW_HEIGHT / 2) - (1 / d) * (WINDOW_HEIGHT / 2);
@@ -84,7 +84,7 @@ void Level::drawBackgroundLayers(sf::RenderTarget& target, const sf::RenderState
 			view.setCenter(viewCenterX, viewCenterY);
 			target.setView(view);
 		}
-		m_levelData.backgroundLayers[i].render(target, states);
+		layer.render(target, states);
 	}
 }
 

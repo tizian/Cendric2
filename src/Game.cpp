@@ -127,7 +127,7 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds) {
 	sf::View oldView = target.getView();
 	target.setView(target.getDefaultView());
 	m_fpsList.push_back(frameTimeSeconds);
-	if (m_fpsList.size() > FPS_AVERAGE_NR) {
+	if (static_cast<int>(m_fpsList.size()) > FPS_AVERAGE_NR) {
 		m_fpsList.pop_front();
 	}
 	// calc average

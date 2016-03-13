@@ -75,7 +75,7 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 	// check level grid
 	for (int x = topLeft.x; x <= topRight.x; x++) {
 		for (int y = topLeft.y; y <= bottomLeft.y; y++) {
-			if (y >= m_worldData->collidableTilePositions.size() || y < 0 || x < 0 || x >= m_worldData->collidableTilePositions[y].size()) {
+			if (y >= static_cast<int>(m_worldData->collidableTilePositions.size()) || y < 0 || x < 0 || x >= static_cast<int>(m_worldData->collidableTilePositions[y].size())) {
 				// check for out of range (happens seldom because of rounding problems above)
 				continue;
 			}

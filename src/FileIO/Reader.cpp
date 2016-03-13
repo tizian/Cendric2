@@ -56,7 +56,7 @@ std::string Reader::getFileContents(const char *filename) const {
 
  #ifdef __linux__
 		// ä ö ü conversion for beloved linux that interprets our ansi as utf-8
-		for (int i = 0; i < s.size(); i++) {
+		for (size_t i = 0; i < s.size(); ++i) {
 			if (s[i] == -28) {
 				res.append("ae");
 			}

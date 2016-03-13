@@ -812,12 +812,12 @@ void LevelReader::updateData(LevelData& data)  const {
 
 bool LevelReader::checkData(LevelData& data) const {
 	if (!WorldReader::checkData(data)) return false;
-	for (int i = 0; i < data.dynamicTileLayers.size(); i++) {
+	for (size_t i = 0; i < data.dynamicTileLayers.size(); ++i) {
 		if (data.dynamicTileLayers[i].first == LevelDynamicTileID::VOID) {
 			logError("level dynamic tile ID not recognized");
 			return false;
 		}
-		if (data.dynamicTileLayers[i].second.empty() || data.dynamicTileLayers[i].second.size() != data.mapSize.x * data.mapSize.y) {
+		if (data.dynamicTileLayers[i].second.empty() || static_cast<int>(data.dynamicTileLayers[i].second.size()) != data.mapSize.x * data.mapSize.y) {
 			logError("dynamic tile layer has not correct size (map size)");
 			return false;
 		}
@@ -857,7 +857,7 @@ bool LevelReader::checkData(LevelData& data) const {
 			it.customizedLoot.second = 0;
 		}
 	}
-	if (data.levelItems.size() != data.mapSize.x * data.mapSize.y) {
+	if (static_cast<int>(data.levelItems.size()) != data.mapSize.x * data.mapSize.y) {
 		logError("level item layer has not correct size (map size)");
 		return false;
 	}
