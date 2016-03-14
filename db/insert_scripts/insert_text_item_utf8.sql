@@ -47,6 +47,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item_desc', 'Heals wounds.','Heilt Wunden.','Heilt Wunde.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item_desc', 'Feels ice cold.','Fühlt sich eiskalt an.','So chalt we Iis.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_desc', 'Sealed.','Versiegelt.','Versiglet.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_silkweed', 'item', 'Silkweed','Seidenkraut','Sidechrütli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_silkweed', 'item_desc', 'Will hopefully bring my memories back when brewed into a potion.','Ein Trank daraus wird hoffentlich meine Erinnerungen zurückbringen.','En Trank mit dem wird hoffentlich mini Erinnerige zruggbringe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_purpleback', 'item_desc', 'Ugly cape for testing. Needs some shading. Won''t appear in the final version.','Hässlicher Umhang, nur für Testing. Wird vermutlich nicht in dem Endgame auftauchen und wird entfernt.','Boaey we chame nur sonen hässliche Umhang designe, gaht ja gar nid. Schomal was vo Schatte und so ghört? Alteeeee');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubyring', 'item_desc', 'The small ruby sparkles','Der kleine Rubin funkelt','De chli Rubin funklet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_ironring', 'item_desc', 'Looks quite chunky.','Wirkt klobig.','Gseht recht klobig us.');
@@ -71,7 +73,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item', 'The eye of the moon','Das Auge des Mondes','Es Mondaug');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item_desc', '...','...','...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item', 'Lesser Healing Potion','Geringer Heiltrank','Chliine Heiltrank');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item_desc', '...','...','...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item_desc', 'Brings some health back.','Gibt etwas Lebenskraft zurück.','Git echli Lebenschraft zrugg.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item', 'Raw Meat','Rohes Fleisch','Rohs Fleisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item_desc', 'Would taste better if it was roasted on a fire.','Würde gebraten noch besser schmecken.','Wär chli feiner wenmes wür brötle.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_roastedmeat', 'item', 'Roasted Meat','Gebratenes Fleisch','Brotes Fleisch');

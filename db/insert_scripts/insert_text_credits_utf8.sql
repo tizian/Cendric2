@@ -43,6 +43,8 @@ Isa
 Placeholder Soundeffects for Fireball and Water Splash
 by Mike Koenig
 
+Some tilesets are based on Celianna''s tileset
+
 ---
 
 Inspired by GOTHIC from Piranha Bytes
@@ -109,6 +111,8 @@ Isa
 Platzhalter Soundeffekte für Feuerball und Wasser
 von Mike Koenig
 
+Einige Tilesets basieren auf Celianna''s Tileset
+
 ---
 
 Inspiriert von GOTHIC von Piranha Bytes
@@ -174,6 +178,8 @@ Isa
 
 Platzhalter Soundeffekt für de Füürball und''s Wasser
 vom Mike Koenig
+
+Gewüssi Tiles basiered uf Celianna''s Tileset
 
 ---
 

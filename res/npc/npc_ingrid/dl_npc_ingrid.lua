@@ -15,6 +15,13 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_ingrid", "who_are_you")) then
 		DL:addChoice(30, "DL_Choice_WhoAreYou") -- Who are you? 
 	end
+	if (not DL:isConditionFulfilled("npc_rhendal", "talked") and not DL:isConditionFulfilled("npc_ingrid", "who_am_i")) then
+		if (DL:isConditionFulfilled("npc_edmond", "who_am_i")) then
+			DL:addChoice(40, "DL_Choice_WhereIsElder") -- Do you know where the village elder lives?
+		else
+			DL:addChoice(40, "DL_Choice_WhoCanHelp") -- I lost my memory. Do you know someone who could help me?
+		end
+	end
 			
 	DL:addChoice(-1, "DL_Choice_CU") --  See you later
 	DL:addNode()
@@ -65,6 +72,10 @@ loadDialogue = function(DL)
 	DL:addNode()
 	
 	DL:createNPCNode(34, -2, "DL_Ingrid_DontTrouble") -- Don't make trouble.
+	DL:addNode()
+	
+	DL:createNPCNode(40, -2, "DL_Ingrid_ElderLocation") -- Ah, you're looking for our village elder. A very wise man who always has an open ear for our problems. He lives in the wooden house in the middle of the village.
+	DL:addConditionProgress("npc_ingrid", "who_am_i")
 	DL:addNode()
 
 end	

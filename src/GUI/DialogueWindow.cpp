@@ -155,7 +155,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 					// a chosen option was clicked again
 					chooseOption = true;
 				}
-				m_chosenOption = i;
+				m_chosenOption = static_cast<int>(i);
 			}
 		}
 		if (oldOption != m_chosenOption) {
