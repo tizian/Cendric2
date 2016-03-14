@@ -4,11 +4,11 @@ loadDialogue = function(DL)
 	DL:createChoiceNode(10)
 			
 	if (DL:isQuestState("silkweed_potion", "started") and DL:isQuestComplete("silkweed_potion")) then
-		DL:addChoice(20, "DL_Choice_IGotSilkweed") --  I got the silkweed.
+		DL:addChoice(20, "DL_Choice_IGotSilkweed") --  I got the Silkweed.
 	end
 	if (DL:isQuestState("silkweed_potion", "started")) then
 		DL:addChoice(30, "DL_Choice_CanITrustYou") --  Can I trust you? What if that potion is going to poison me?
-		DL:addChoice(32, "DL_Choice_WhereIsYourGarden") --  Where can I find the silkweed?
+		DL:addChoice(32, "DL_Choice_WhereIsYourGarden") --  Where can I find the Silkweed?
 	end
 			
 	DL:addChoice(-1, "DL_Choice_CU") --  See you later
@@ -43,13 +43,13 @@ loadDialogue = function(DL)
 		DL:createNPCNode(4, 5, "DL_Rhendal_WhatIsProblem") -- So, what exactly is your problem?
 		DL:addNode()
 		
-		DL:createCendricNode(5, 6, "DL_Cendric_Problem") -- I've awakened in the forest in the north and I can't remember anything. I have no clue who I am and how I got there. My name is Cendric, that's the only thing I know.
+		DL:createCendricNode(5, 6, "DL_Cendric_Problem") -- I've awoken in the forest in the north and I can't remember anything. I have no clue who I am and how I got there. My name is Cendric, that's the only thing I know.
 		DL:addNode()
 		
 		DL:createNPCNode(6, 7, "DL_Rhendal_Eyeballing") -- That's interesting and worrying at the same time, boy. But you're lucky, I happen to be initiated in the art of alchemy and I know just the right potion that may help you.
 		DL:addNode()
 		
-		DL:createNPCNode(7, -2, "DL_Rhendal_BringMe") -- Luckily, I have all the ingredients here to create that potion. Oh, and I need the fresh leaves of a silkweed, but that grows in my garden. Be a nice boy and bring me some while I prepare your potion.
+		DL:createNPCNode(7, -2, "DL_Rhendal_BringMe") -- I have most ingredients for it right here. If you could go pick the fresh leaves of a Silkweed I can start to prepare the potion for you. It grows in my garden, just outside.
 		DL:changeQuestState("silkweed_potion", "started")
 		DL:addNode()
 
