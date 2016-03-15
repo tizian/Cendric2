@@ -21,6 +21,7 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("wait", &NPCRoutineLoader::wait)
 		.addFunction("goToTile", &NPCRoutineLoader::goToTile)
 		.addFunction("setLooped", &NPCRoutineLoader::setLooped)
+		.addFunction("isQuestState", &NPCRoutineLoader::isQuestState)
 		.addFunction("isConditionFulfilled", &NPCRoutineLoader::isConditionFulfilled)
 		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
@@ -87,6 +88,19 @@ bool NPCRoutineLoader::isConditionFulfilled(const std::string& conditionType, co
 		return false;
 	}
 	return m_core->isConditionFulfilled(conditionType, condition);
+}
+
+bool NPCRoutineLoader::isQuestState(const std::string& questID, const std::string& state) const {
+	QuestState questState = resolveQuestState(state);
+	if (questState == QuestState::MAX) {
+		g_logger->logError("NPCRoutineLoader", "Quest State: [" + state + "] does not exist");
+		return false;
+	}
+	if (questID.empty()) {
+		g_logger->logError("NPCRoutineLoader", "Quest ID cannot be empty.");
+		return false;
+	}
+	return m_core->getQuestState(questID) == questState;
 }
 
 void NPCRoutineLoader::setTilePosition(float x, float y) {

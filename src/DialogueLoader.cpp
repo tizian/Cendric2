@@ -38,6 +38,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("removeGold", &DialogueLoader::removeGold)
 		.addFunction("startLevel", &DialogueLoader::startLevel)
 		.addFunction("startMap", &DialogueLoader::startMap)
+		.addFunction("startCutscene", &DialogueLoader::startCutscene)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
 		.addFunction("addNode", &DialogueLoader::addNode)
 		.endClass();
@@ -286,6 +287,20 @@ void DialogueLoader::startMap(const std::string& mapID, int x, int y) {
 	content.s1 = mapID;
 	content.i1 = x;
 	content.i2 = y;
+	m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::startCutscene(const std::string& cutsceneID) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot start cutscene: no node created.");
+		return;
+	}
+	if (cutsceneID.empty()) {
+		g_logger->logError("DialogueLoader", "Cutscene ID cannot be empty");
+		return;
+	}
+	TriggerContent content(TriggerContentType::Cutscene);
+	content.s1 = cutsceneID;
 	m_currentNode->content.push_back(content);
 }
 

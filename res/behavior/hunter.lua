@@ -1,8 +1,12 @@
 -- Behavior for enemy hunter
 speechBubbleState = 0
+goodJob = false
 
 update = function(B)
-		if (speechBubbleState == 5) then
+		if (not goodJob and B:isConditionFulfilled("npc_edmond","puzzle_solved")) then
+			goodJob = true
+			B:say("GoodJob", 4)
+		elseif (speechBubbleState == 5) then
 			B:leaveLevel()
 		elseif (speechBubbleState == 4 and B:getPosX() > 2650) then
 			B:say("IAmLeaving", 5)

@@ -24,7 +24,7 @@ FireRatEnemy::FireRatEnemy(Level* level, Screen* screen) :
 }
 
 void FireRatEnemy::loadAttributes() {
-	m_attributes.setHealth(70);
+	m_attributes.setHealth(40);
 	m_attributes.resistanceIce = -20;
 	m_attributes.calculateAttributes();
 

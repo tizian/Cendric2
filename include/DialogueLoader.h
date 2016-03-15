@@ -41,6 +41,7 @@ public:
 	void removeGold(int amount);
 	void startLevel(const std::string& levelID, int x, int y);
 	void startMap(const std::string& mapID, int x, int y);
+	void startCutscene(const std::string& cutsceneID);
 	// TODO: learn spell, add reputation, etc.
 
 	// finally, adding the node to the dialogue

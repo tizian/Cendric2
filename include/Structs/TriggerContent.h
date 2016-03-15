@@ -17,6 +17,7 @@ enum class TriggerContentType {
 	Hint,
 	MapEntry,
 	LevelEntry,
+	Cutscene,
 };
 
 // holds a part of the trigger content.

@@ -4,17 +4,25 @@ loadDialogue = function(DL)
 	DL:createChoiceNode(10)
 			
 	if (DL:isQuestState("silkweed_potion", "started") and DL:isQuestComplete("silkweed_potion")) then
-		DL:addChoice(20, "DL_Choice_IGotSilkweed") --  I got the Silkweed.
+		DL:addChoice(30, "DL_Choice_IGotSilkweed") --  I got the Silkweed.
 	end
 	if (DL:isQuestState("silkweed_potion", "started")) then
-		DL:addChoice(30, "DL_Choice_CanITrustYou") --  Can I trust you? What if that potion is going to poison me?
-		DL:addChoice(32, "DL_Choice_WhereIsYourGarden") --  Where can I find the Silkweed?
+		DL:addChoice(20, "DL_Choice_CanITrustYou") --  Can I trust you? What if that potion is going to poison me?
+		DL:addChoice(22, "DL_Choice_WhereIsYourGarden") --  Where can I find the Silkweed?
 	end
 			
 	DL:addChoice(-1, "DL_Choice_CU") --  See you later
 	DL:addNode()
 	
-	if (DL:isConditionFulfilled("npc_rhendal", "talked")) then
+	if (DL:isQuestState("silkweed_potion", "started") and DL:isConditionFulfilled("npc_rhendal", "potion_drunk")) then
+	
+		DL:createNPCNode(0, -1, "DL_Rhendal_WhatDidYouSee") -- What did you see?
+		DL:changeQuestState("silkweed_potion", "completed")
+		DL:addNode()
+	
+		DL:setRoot(0)
+	
+	elseif (DL:isConditionFulfilled("npc_rhendal", "talked")) then
 
 		DL:setRoot(10)
 	else
@@ -55,13 +63,32 @@ loadDialogue = function(DL)
 
 	end
 	
-	DL:createNPCNode(30, 31, "DL_Rhendal_NoChoice") -- Do you have another choice?
+	DL:createNPCNode(20, 21, "DL_Rhendal_NoChoice") -- Do you have another choice?
 	DL:addNode()
 	
-	DL:createCendricNode(31, -2, "DL_Cendric_NoChoice") -- ...
+	DL:createCendricNode(21, -2, "DL_Cendric_NoChoice") -- ...
 	DL:addNode()
 	
-	DL:createNPCNode(32, -1, "DL_Rhendal_SilkweedLocation") -- It grows in my garden, right in front of this house.
+	DL:createNPCNode(22, -1, "DL_Rhendal_SilkweedLocation") -- It grows in my garden, right in front of this house.
+	DL:addNode()
+	
+	DL:createNPCNode(30, 31, "DL_Rhendal_DrinkThePotion") -- Very good. I just completed the other preparations. Now let's add that Silkweed ... Here, take it and drink it as fast as possible.
+	DL:addNode()
+	
+	DL:createChoiceNode(31)
+	DL:addChoice(35, "DL_Choice_Okay") --  Okay...
+	DL:addChoice(32, "DL_Choice_But") --  But...
+	DL:addNode()
+	
+	DL:createNPCNode(32, 33, "DL_Rhendal_NoBut") -- No "but"!
+	DL:addNode()
+	
+	DL:createCendricNode(33, 35, "DL_Cendric_OkayThen") -- ... Okay then.
+	DL:addNode()
+	
+	DL:createNPCNode(35, -1, "") -- 
+	DL:addConditionProgress("npc_rhendal", "potion_drunk")
+	DL:startCutscene("intro")
 	DL:addNode()
 	
 end	

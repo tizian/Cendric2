@@ -16,6 +16,7 @@ public:
 
 	// methods to call in lua script
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
+	bool isQuestState(const std::string& questID, const std::string& state) const;
 	void setTilePosition(float x, float y);
 	void setDisposed();
 	void wait(int milliseconds);

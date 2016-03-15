@@ -7,4 +7,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Sc
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Map', 'hint','to open the map.','um die Karte zu öffnen.','zum d''Charte ufmache');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MapMove', 'hint','to move.','um dich zu bewegen.','zum dich bewege.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Pickup', 'hint','Click on an item with the right mouse key to pickup.','Klicke einen Gegenstand mit der rechten Maustaste an, um ihn aufzuheben.','Klick en Gegestand mit de rechte Muustaschte ah zum ihn neh.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Highlight', 'hint','to highlight items that can be picked up.','um aufhebbare Gegenstände zu markieren.','zum ufhebbari Gegeständ markiere.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Reload', 'hint','Press the Escape key to go back to a previous checkpoint and reload the level.','Drücke Escape um zu einem vorherigen Kontrollpunkt zu gehen und das Level neu zu laden.','Druck Escape zum zumne vorherige Checkpoint zrugg z''ga und es Level neu z''lade.');
 

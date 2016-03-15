@@ -1,6 +1,7 @@
 #include "Structs/TriggerContent.h"
 #include "Screens/WorldScreen.h"
 #include "Screens/LoadingScreen.h"
+#include "Screens/CutsceneScreen.h"
 
 void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* screen) {
 	switch (content.type) {
@@ -42,6 +43,10 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		screen->exitWorld();
 		screen->getCharacterCore()->setLevel(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);
 		screen->setNextScreen(new LoadingScreen(screen->getCharacterCore()));
+		break;
+	case TriggerContentType::Cutscene:
+		screen->exitWorld();
+		screen->setNextScreen(new CutsceneScreen(screen->getCharacterCore(), content.s1));
 		break;
 	default:
 		break;

@@ -40,6 +40,9 @@ Isa
 <<< Level & Map Design >>>
 Isa
 
+<<< Quality Assurance >>>
+Tizian
+
 Placeholder Soundeffects for Fireball and Water Splash
 by Mike Koenig
 
@@ -108,6 +111,9 @@ Isa
 <<< Level & Karten Design >>>
 Isa
 
+<<< Qualitätssicherung >>>
+Tizian
+
 Platzhalter Soundeffekte für Feuerball und Wasser
 von Mike Koenig
 
@@ -175,6 +181,9 @@ Isa
 
 <<< Level & Chartä Design >>>
 Isa
+
+<<< Qualitätssicherig >>>
+Tizian
 
 Platzhalter Soundeffekt für de Füürball und''s Wasser
 vom Mike Koenig
