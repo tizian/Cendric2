@@ -175,7 +175,9 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
-	renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
+	if (m_dialogueWindow != nullptr || m_cookingWindow != nullptr) {
+		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
+	}
 
 	if (m_dialogueWindow != nullptr) {
 		m_dialogueWindow->render(renderTarget);
