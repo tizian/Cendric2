@@ -7,9 +7,6 @@ JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, Level* level, Screen
 	m_level = level;
 	m_aiRec = rec;
 
-	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
-	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);
-
 	m_boundingBox = m_aiRec.boundingBox;
 	setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
 	
@@ -79,7 +76,7 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, bb.width, bb.height);
 
-	if (m_level->collidesWithDynamicTiles(nextBoundingBox, m_avoidableTiles)) {
+	if (m_level->collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_record.collides = true;
 		m_record.evilTile = true;
 		return;

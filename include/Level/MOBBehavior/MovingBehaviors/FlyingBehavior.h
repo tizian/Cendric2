@@ -14,9 +14,4 @@ public:
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void updateAnimation() override;
 	void makeRandomDecision() override;
-
-protected:
-	// a enemy will never fly into those and handles them as collidable tiles.
-	// default is water, spikes top, spikes bottom.
-	std::set<LevelDynamicTileID> m_avoidableTiles;
 };

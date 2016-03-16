@@ -36,7 +36,18 @@ void FallingTile::setScreen(Screen* screen) {
 	m_startHeight = getPosition().y;
 }
 
+void FallingTile::onHit(LevelMovableGameObject* mob) {
+	mob->setDead();
+}
+
 void FallingTile::update(const sf::Time& frameTime) {
+	if (m_tileState == FallingTileState::Waiting) {
+		updateTime(m_waitingTime, frameTime);
+		if (m_waitingTime == sf::Time::Zero) {
+			m_tileState = FallingTileState::Returning;
+		}
+		return;
+	}
 	if (m_tileState == FallingTileState::Idle) {
 		if (std::abs(m_mainChar->getPosition().x - getCenter().x) < AGGRO_DISTANCE) {
 			m_tileState = FallingTileState::Falling;
@@ -57,12 +68,13 @@ void FallingTile::update(const sf::Time& frameTime) {
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
 	checkCollisions(nextPosition);
+	MovableGameObject::update(frameTime);
 	if (getVelocity().y == 0.f) {
 		if (m_tileState == FallingTileState::Falling) {
-			m_tileState = FallingTileState::Returning;
+			m_tileState = FallingTileState::Waiting;
+			m_waitingTime = WAITING_TIME;
 		}
 	}
-	MovableGameObject::update(frameTime);
 }
 
 void FallingTile::onHit(Spell* spell) {

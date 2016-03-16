@@ -9,6 +9,15 @@ Level::Level() : World() {
 	m_camera = new SpeedupPullCamera();
 	m_camera->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
 	m_camera->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
+
+	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
+	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);
+	m_avoidableTiles.insert(LevelDynamicTileID::Falling);
+	m_avoidableTiles.insert(LevelDynamicTileID::Fluid);
+
+	m_evilTiles.insert(LevelDynamicTileID::SpikesTop);
+	m_evilTiles.insert(LevelDynamicTileID::SpikesBottom);
+	m_evilTiles.insert(LevelDynamicTileID::Falling);
 }
 
 Level::~Level() {
@@ -191,7 +200,17 @@ void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingB
 	}
 }
 
-bool Level::collidesWithDynamicTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const {
+bool Level::collidesWithAvoidableTiles(const sf::FloatRect& boundingBox) const {
+	sf::FloatRect safeBB(boundingBox.left - 2, boundingBox.top - 2, boundingBox.width + 4, boundingBox.height + 4);
+	return collidesWithSpecificTiles(safeBB, m_avoidableTiles);
+}
+
+bool Level::collidesWithEvilTiles(const sf::FloatRect& boundingBox) const {
+	sf::FloatRect safeBB(boundingBox.left - 2, boundingBox.top - 2, boundingBox.width + 4, boundingBox.height + 4);
+	return collidesWithSpecificTiles(safeBB, m_evilTiles);
+}
+
+bool Level::collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const {
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();

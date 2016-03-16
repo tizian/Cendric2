@@ -30,8 +30,10 @@ public:
 
 	// collision with the level, see WorldCollisionQueryRecord for more infos about the argument
 	bool collides(WorldCollisionQueryRecord& rec) const override;
-	// checks for collisions with those specific dynamic tiles
-	bool collidesWithDynamicTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
+	// checks for collisions with tiles that will kill. adds a safety margin to the bb.
+	bool collidesWithEvilTiles(const sf::FloatRect& boundingBox) const;
+	// checks for collisions with tiles you'd better not touch. adds a safety margin to the bb.
+	bool collidesWithAvoidableTiles(const sf::FloatRect& boundingBox) const;
 	// checks for collisions with mobs (enemies and level main character)
 	bool collidesWithMobs(WorldCollisionQueryRecord& rec, bool isInitialQuery = true) const;
 	// checks for collisions with movable tiles (moving platforms, shiftable blocks and unstable blocks)
@@ -46,7 +48,13 @@ private:
 	std::vector<GameObject*>* m_dynamicTiles;
 	std::vector<GameObject*>* m_movableTiles;
 
+	// checks for collisions with those specific tiles
+	bool collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
+
 	SpeedupPullCamera* m_camera;
 	const float CAMERA_WINDOW_WIDTH = 200.f;
 	const float CAMERA_WINDOW_HEIGHT = 200.f;
+
+	std::set<LevelDynamicTileID> m_avoidableTiles;
+	std::set<LevelDynamicTileID> m_evilTiles;
 };

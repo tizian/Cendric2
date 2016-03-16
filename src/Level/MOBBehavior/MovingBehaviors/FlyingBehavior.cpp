@@ -6,10 +6,6 @@ FlyingBehavior::FlyingBehavior(Enemy* enemy) :
 	MovingBehavior(enemy),
 	EnemyMovingBehavior(enemy) {
 
-	m_avoidableTiles.insert(LevelDynamicTileID::Fluid);
-	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
-	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);
-
 	m_isWalkingBehavior = false;
 };
 
@@ -26,9 +22,9 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	const Level& level = *m_mob->getLevel();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
-	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBox(nextPosition.x , nextPosition.y, bb.width, bb.height);
 	
-	if (level.collidesWithDynamicTiles(nextBoundingBox, m_avoidableTiles)) {
+	if (level.collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
 		return;

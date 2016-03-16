@@ -65,6 +65,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_enemy_skeleton, "res/assets/enemies/spritesheet_enemy_skeleton.png" },
 		{ ResourceID::Texture_enemy_gargoyle, "res/assets/enemies/spritesheet_enemy_gargoyle.png" },
 		{ ResourceID::Texture_enemy_hunter, "res/assets/enemies/spritesheet_enemy_hunter.png" },
+		{ ResourceID::Texture_enemy_wisp, "res/assets/enemies/spritesheet_enemy_wisp.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/level_dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_destructible, "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png" },
@@ -408,6 +409,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_enemy_skeleton);
 	deleteResource(ResourceID::Texture_enemy_gargoyle);
 	deleteResource(ResourceID::Texture_enemy_hunter);
+	deleteResource(ResourceID::Texture_enemy_wisp);
 
 	// delete debuff resources
 	deleteResource(ResourceID::Texture_debuff_fear);

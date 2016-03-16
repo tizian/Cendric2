@@ -65,6 +65,7 @@ enum class ResourceID {
 	Texture_enemy_skeleton,
 	Texture_enemy_gargoyle,
 	Texture_enemy_hunter,
+	Texture_enemy_wisp,
 	Texture_levelitems,
 	Texture_items,
 	Texture_dialogue,

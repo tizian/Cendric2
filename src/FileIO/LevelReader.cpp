@@ -19,7 +19,8 @@ void LevelReader::initMaps() {
 		{ 4, EnemyID::Crow },
 		{ 5, EnemyID::Skeleton },
 		{ 6, EnemyID::Gargoyle },
-		{ 7, EnemyID::Hunter }, // only for test purposes
+		{ 7, EnemyID::Hunter }, 
+		{ 8, EnemyID::Wisp },
 	});
 }
 
@@ -601,6 +602,9 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		}
 		else if (name.find("dynamic unstable") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Unstable, layerData, data)) return false;
+		}
+		else if (name.find("dynamic falling") != std::string::npos) {
+			if (!readDynamicTileLayer(LevelDynamicTileID::Falling, layerData, data)) return false;
 		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;

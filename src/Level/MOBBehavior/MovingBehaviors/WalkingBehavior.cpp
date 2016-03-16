@@ -75,7 +75,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	
 	bool collidesY;
 	MovingBehavior::checkXYDirection(nextPosition, m_collidesX, collidesY);
-	
+
 	m_jumps = false;
 	if (m_collidesX && m_isGrounded) {
 		// would a jump work? 

@@ -146,6 +146,14 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 	const Level& level = *m_mob->getLevel();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, bb.width, bb.height);
+
+	if (level.collidesWithEvilTiles(nextBoundingBox)) {
+		m_mob->setAccelerationX(0.f);
+		m_mob->setVelocityX(0.f);
+		collidesX = true;
+	}
+
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 

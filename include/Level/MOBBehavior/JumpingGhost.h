@@ -47,7 +47,4 @@ protected:
 	GhostRecord m_record;
 	AIWalkingQueryRecord m_aiRec;
 	JumpingGhostDebugger* m_debugger = nullptr;
-
-	// an ghost will set its "evil tile" flag if it collided with those. Default are spikes top and bottom.
-	std::set<LevelDynamicTileID> m_avoidableTiles;
 };

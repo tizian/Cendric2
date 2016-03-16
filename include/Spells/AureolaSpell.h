@@ -3,6 +3,9 @@
 #include "global.h"
 #include "Spell.h"
 
+// skins:
+// 0: default, holy skin
+// 1: wisp skin 
 class AureolaSpell : public Spell {
 public:
 	AureolaSpell();
