@@ -286,7 +286,7 @@ void FluidTile::freeze(int index) {
 void FluidTile::melt(int index) {
 	if (index >= 0 && index < m_nTiles) {
 		for (int i = 0; i < NUMBER_COLUMNS_PER_SUBTILE; ++i) {
-			FluidColumn &col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
+			FluidColumn& col = m_columns[index * NUMBER_COLUMNS_PER_SUBTILE + i];
 			col.fixed = false;
 		}
 

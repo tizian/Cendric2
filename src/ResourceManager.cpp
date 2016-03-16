@@ -80,6 +80,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_tile_moving, "res/assets/level_dynamic_tiles/spritesheet_tiles_moving.png" },
 		{ ResourceID::Texture_tile_waypoint, "res/assets/map_dynamic_tiles/spritesheet_tiles_waypoint.png" },
 		{ ResourceID::Texture_tile_unstable, "res/assets/level_dynamic_tiles/spritesheet_tiles_unstable.png" },
+		{ ResourceID::Texture_tile_falling, "res/assets/level_dynamic_tiles/spritesheet_tiles_falling.png" },
 		{ ResourceID::Texture_misc_cooking, "res/assets/misc/sprite_cooking.png" },
 		{ ResourceID::Texture_screen_splash, "res/assets/screens/screen_splash.png" },
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
@@ -394,6 +395,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_tile_switchable);
 	deleteResource(ResourceID::Texture_tile_moving);
 	deleteResource(ResourceID::Texture_tile_unstable);
+	deleteResource(ResourceID::Texture_tile_falling);
 
 	deleteResource(ResourceID::Sound_tile_water);
 	deleteResource(ResourceID::Sound_tile_lever);
