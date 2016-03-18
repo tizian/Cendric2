@@ -6,13 +6,14 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Falling, FallingTile)
 
 FallingTile::FallingTile(Level* level) :
-	LevelDynamicTile(level),
-	LevelMovableTile(level) {
+	MovableGameObject(),
+	LevelDynamicTile(level) {
 }
 
 void FallingTile::init() {
-	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 10.f, TILE_SIZE_F - 10.f));
+	setSpriteOffset(sf::Vector2f(-3.f, -3.f));
+	setPositionOffset(sf::Vector2f(-3.f, -3.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 6.f, TILE_SIZE_F - 6.f));
 	m_tileState = FallingTileState::Idle;
 }
 
@@ -33,7 +34,6 @@ void FallingTile::loadAnimation(int skinNr) {
 void FallingTile::setScreen(Screen* screen) {
 	LevelDynamicTile::setScreen(screen);
 	m_mainChar = dynamic_cast<WorldScreen*>(screen)->getMainCharacter();
-	m_startHeight = getPosition().y;
 }
 
 void FallingTile::onHit(LevelMovableGameObject* mob) {
@@ -41,6 +41,7 @@ void FallingTile::onHit(LevelMovableGameObject* mob) {
 }
 
 void FallingTile::update(const sf::Time& frameTime) {
+	LevelDynamicTile::update(frameTime);
 	if (m_tileState == FallingTileState::Waiting) {
 		updateTime(m_waitingTime, frameTime);
 		if (m_waitingTime == sf::Time::Zero) {
@@ -58,10 +59,6 @@ void FallingTile::update(const sf::Time& frameTime) {
 		setAcceleration(sf::Vector2f(0.f, GRAVITY_ACCELERATION));
 	}
 	else {
-		if (getPosition().y <= m_startHeight) {
-			m_tileState = FallingTileState::Idle;
-			return;
-		}
 		setVelocity(sf::Vector2f(0.f, -RETURN_VELOCITY));
 	}
 
@@ -73,6 +70,9 @@ void FallingTile::update(const sf::Time& frameTime) {
 		if (m_tileState == FallingTileState::Falling) {
 			m_tileState = FallingTileState::Waiting;
 			m_waitingTime = WAITING_TIME;
+		}
+		else if (m_tileState == FallingTileState::Returning) {
+			m_tileState = FallingTileState::Idle;
 		}
 	}
 }
@@ -86,6 +86,29 @@ void FallingTile::onHit(Spell* spell) {
 	}
 	default:
 		break;
+	}
+}
+
+void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
+	sf::Vector2f oldPosition = getPosition();
+	const sf::FloatRect& bb = *getBoundingBox();
+	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	WorldCollisionQueryRecord rec;
+
+	rec.excludedGameObject = this;
+
+	bool isMovingDown = nextPosition.y > bb.top;
+
+	// check for collision on y axis
+	rec.boundingBox = nextBoundingBoxY;
+	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
+	rec.movingParent = nullptr;
+	bool collidesY = m_level->collides(rec);
+	setMovingParent(rec.movingParent);
+	if (collidesY) {
+		setAccelerationY(0.f);
+		setVelocityY(0.f);
+		setPositionY(rec.safeTop);
 	}
 }
 

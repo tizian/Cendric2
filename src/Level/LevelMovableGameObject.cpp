@@ -172,7 +172,7 @@ void LevelMovableGameObject::setDead() {
 	// that's how magic works, I guess?
 	for (auto& go : *m_screen->getObjects(GameObjectType::_Spell)) {
 		if (Spell* spell = dynamic_cast<Spell*>(go)) {
-			if (spell->getOwner() == this && spell->isAttachedToMob() && !spell->isDisposed()) {
+			if (spell->getOwner() == this && (spell->isAttachedToMob() || spell->getSpellID() == SpellID::Aureola) && !spell->isDisposed()) {
 				spell->setDisposed();
 			}
 		}
