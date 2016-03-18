@@ -7,16 +7,16 @@
   <property name="tilesetpath" value="res/level/rockfall/tileset_level_rockfall.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_forest" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
-  <image source="../tilesets/tileset_level_forest.png" width="1000" height="1000"/>
+  <image source="tileset_level_rockfall.png" width="1000" height="1000"/>
  </tileset>
  <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
-  <image source="../tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
+  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
  <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
-  <image source="../tilesets/tileset_enemies.png" width="260" height="104"/>
+  <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
  <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
-  <image source="../tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
+  <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
     <property name="id" value="fo_caveberry"/>

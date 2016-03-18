@@ -46,7 +46,7 @@ Tizian
 Placeholder Soundeffects for Fireball and Water Splash
 by Mike Koenig
 
-Some tilesets are based on Celianna''s tileset
+Some tiles are based on Celianna''s tilesets
 
 ---
 
@@ -117,7 +117,7 @@ Tizian
 Platzhalter Soundeffekte für Feuerball und Wasser
 von Mike Koenig
 
-Einige Tilesets basieren auf Celianna''s Tileset
+Einige Tiles basieren auf Celianna''s Tilesets
 
 ---
 
@@ -188,7 +188,7 @@ Tizian
 Platzhalter Soundeffekt für de Füürball und''s Wasser
 vom Mike Koenig
 
-Gewüssi Tiles basiered uf Celianna''s Tileset
+Gewüssi Tiles basiered uf Celianna''s Tilesets
 
 ---
 

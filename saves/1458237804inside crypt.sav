@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:60
-savegame.name:before_crypt
-savegame.date:1458212622
+time.played:89
+savegame.name:inside crypt
+savegame.date:1458237804
 level.id:res/level/crypt/crypt.tmx
-level.position:350.000000,400.000000
-is.in.level:0
+level.position:710.000000,1460.000000
+is.in.level:1
 map.id:res/map/meadows/meadows.tmx
-map.position:3210.000000,1720.000000
+map.position:3210.000000,1717.106079
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -28,7 +28,7 @@ equipped.weapon:we_walkingpole
 quickslot:1,fo_apple
 quickslot:2,fo_rawmeat
 # enemies killed in level:
-enemies.killed:res/level/crypt/crypt.tmx
+enemies.killed:res/level/crypt/crypt.tmx,10,11
 enemies.killed:res/level/rockfall/rockfall.tmx,74,75,78
 # enemies looted in level:
 enemies.looted:res/level/crypt/crypt.tmx
