@@ -37,7 +37,8 @@ void FallingTile::setScreen(Screen* screen) {
 }
 
 void FallingTile::onHit(LevelMovableGameObject* mob) {
-	mob->setDead();
+	if (mob->getConfiguredType() == GameObjectType::_LevelMainCharacter)
+		mob->setDead();
 }
 
 void FallingTile::update(const sf::Time& frameTime) {

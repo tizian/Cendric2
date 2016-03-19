@@ -34,7 +34,7 @@ private:
 	GameObject* m_mainChar;
 	const float GRAVITY_ACCELERATION = 1000.f;
 	const float RETURN_VELOCITY = 80.f;
-	const float AGGRO_DISTANCE = 100.f;
+	const float AGGRO_DISTANCE = 200.f;
 	const sf::Time WAITING_TIME = sf::seconds(2.f);
 
 	FallingTileState m_tileState;

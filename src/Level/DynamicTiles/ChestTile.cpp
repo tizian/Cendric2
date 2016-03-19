@@ -19,13 +19,13 @@ void ChestTile::loadAnimation(int skinNr) {
 
 	Animation* closedAnimation = new Animation(sf::seconds(10.f));
 	closedAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_chest));
-	closedAnimation->addFrame(sf::IntRect(0, 0, 2 * TILE_SIZE, 2 * TILE_SIZE));
+	closedAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * 2 * TILE_SIZE, 2 * TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Locked, closedAnimation);
 
 	Animation* openAnimation = new Animation(sf::seconds(10.f));
 	openAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_chest));
-	openAnimation->addFrame(sf::IntRect(2 * TILE_SIZE, 0, 2 * TILE_SIZE, 2 * TILE_SIZE));
+	openAnimation->addFrame(sf::IntRect(2 * TILE_SIZE, (skinNr - 1) * 2 * TILE_SIZE, 2 * TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Unlocked, openAnimation);
 
