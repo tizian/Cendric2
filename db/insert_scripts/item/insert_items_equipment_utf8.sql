@@ -76,3 +76,8 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_eyeofthemoon', 'eq_neck', 350, 50, 20);
 INSERT INTO item_attribute (item_id, dmg_shadow) values ('eq_eyeofthemoon', 10);
+
+-- Silver Necklace
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_silvernecklace', 'eq_neck', 350, 200, 10);
+INSERT INTO item_attribute (item_id, res_fire, critical) values ('eq_silvernecklace', 5, 1);

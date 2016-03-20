@@ -830,6 +830,8 @@
   </properties>
   <object id="18" gid="554" x="1349" y="1549" width="50" height="50">
    <properties>
+    <property name="eq_silvernecklace" value="1"/>
+    <property name="fo_lesserhealingpotion" value="1"/>
     <property name="gold" value="50"/>
    </properties>
   </object>
