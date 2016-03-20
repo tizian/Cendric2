@@ -47,6 +47,7 @@ void LevelScreen::load() {
 	m_overlaySprite = new sf::Sprite(*g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
 
 	m_overlayText = new BitmapText(g_textProvider->getText("GamePaused"));
+	m_overlayText->setTextStyle(TextStyle::Shadowed);
 	m_overlayText->setCharacterSize(56);
 	m_overlayText->setColor(COLOR_BAD);
 	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
@@ -245,6 +246,7 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	m_isGameOver = true;
 	m_overlaySprite->setTexture(*g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
 	m_overlayText->setString(g_textProvider->getText("YouDied"));
+	m_overlayText->setTextStyle(TextStyle::Shadowed);
 	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
 	m_retryButton->setVisible(true);
 	m_backToMenuButton->setVisible(true);
