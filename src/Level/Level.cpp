@@ -180,6 +180,14 @@ bool Level::collidesWithMovableTiles(WorldCollisionQueryRecord& rec) const {
 			return true;
 		}
 	}
+	for (auto& it : *m_dynamicTiles) {
+		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+		if (tile->getDynamicTileID() != LevelDynamicTileID::Falling) continue;
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (epsIntersect(tileBB, rec.boundingBox)) {
+			return true;
+		}
+	}
 	return false;
 }
 

@@ -75,6 +75,11 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	
 	bool collidesY;
 	MovingBehavior::checkXYDirection(nextPosition, m_collidesX, collidesY);
+	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
+	if (m_mob->getLevel()->collidesWithEvilTiles(nextBoundingBox)) {
+		m_mob->setAccelerationX(0.f);
+		m_mob->setVelocityX(0.f);
+	}
 
 	m_jumps = false;
 	if (m_collidesX && m_isGrounded) {
