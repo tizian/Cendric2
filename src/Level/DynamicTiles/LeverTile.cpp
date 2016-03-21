@@ -47,6 +47,7 @@ void LeverTile::onHit(Spell* spell) {
 }
 
 void LeverTile::onRightClick() {
+	if (m_mainChar->isDead()) return;
 	// check if lever is in range
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= ACTIVATE_RANGE) {

@@ -132,6 +132,7 @@ void LevelMainCharacter::loadWeapon() {
 		}
 		m_spellManager->addSpell(newBean, spellModifiers);
 	}
+	m_spellManager->setCurrentSpell(0);
 }
 
 void LevelMainCharacter::setCharacterCore(CharacterCore* core) {

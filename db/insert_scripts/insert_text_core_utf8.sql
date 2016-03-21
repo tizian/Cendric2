@@ -7,11 +7,13 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Armor','Armou
 INSERT INTO text (text_id, english, german, swiss_german) values ('Back','Back','Zurück','Zrugg');
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint');
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToMenu','Back to menu','Zurück zum Menu','Zrugg zum Menu');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Book','Book','Buch','Buech');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Cancel','Cancel','Abbrechen','Abbreche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotEquipInLevel','You cannot equip items inside a level!','Gegenstände können nicht in einem Level ausgerüstet werden!','Gegeständ chönd nid imne Level agleit werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumePermanentInLevel','You cannot consume permanent items inside a level!','Gegenstände mit permanenten Boni können nicht in einem Level verwendet werden!','Gegeständ mit permanente Boni chönd nid imne Level verbruucht werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CharacterInfo','Character Info','Charakter Info','Charakter Info');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CheckpointReached','Checkpoint reached','Kontrollpunkt erreicht','Checkpoint erreicht');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Chest','Chest','Truhe','True');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chop','Chop','Hauen','Haue');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ClickToTeleport','Click to teleport','Klicken zum Teleportieren','Klicke zum Teleportiere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Completed','Completed','Abgeschlossen','Fertig');
@@ -79,6 +81,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Stunned','Stu
 INSERT INTO text (text_id, english, german, swiss_german) values ('GargoyleStrength','Gargoyle Strength','Gargoyle-Stärke','Gargoyle-Stärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Language','Language','Sprache','Sproch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Level','Level','Stufe','Level');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Lever','Lever','Hebel','Hebel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('LightDamage','Light Damage','Lichtschaden','Liechtschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('LightResistance','Light Resistance','Lichtresistenz','Liechtresistenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Load','Load','Laden','Lade');

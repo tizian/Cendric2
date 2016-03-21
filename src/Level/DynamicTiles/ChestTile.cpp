@@ -116,6 +116,7 @@ void ChestTile::loot() {
 }
 
 void ChestTile::onRightClick() {
+	if (m_mainChar->isDead()) return;
 	if (m_state == GameObjectState::Unlocked) {
 		// check if the chest is in range
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();

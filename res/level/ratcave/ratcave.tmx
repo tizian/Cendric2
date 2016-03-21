@@ -108,6 +108,11 @@
     <property name="id" value="mi_silverplate"/>
    </properties>
   </tile>
+  <tile id="76">
+   <properties>
+    <property name="id" value="we_simplesword"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="BG 1" width="70" height="30">
   <data encoding="csv">
@@ -484,9 +489,6 @@
 </data>
  </layer>
  <layer name="item" width="70" height="30">
-  <properties>
-   <property name="we_simplesword" value=""/>
-  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

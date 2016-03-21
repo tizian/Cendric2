@@ -50,6 +50,7 @@ void LevelItem::pickup() {
 }
 
 void LevelItem::onRightClick() {
+	if (m_mainChar->isDead()) return;
 	// check if item is in range
 	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
