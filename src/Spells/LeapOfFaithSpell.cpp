@@ -1,9 +1,9 @@
 #include "Spells/LeapOfFaithSpell.h"
 #include "Level/MOBBehavior/MovingBehavior.h"
+#include "GameObjectComponents/LightComponent.h"
 
 LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 	m_gravityScale = gravityScale;
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(100.f, 100.f), 0.2f));
 }
 
 void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -21,6 +21,11 @@ void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 	Spell::load(bean, mob, target);
 	m_mob->getMovingBehavior()->setGravityScale(m_gravityScale);
 	loadParticleSystem();
+
+	LightData lightData(LightData(
+		sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.5f), 
+		sf::Vector2f(100.f, 100.f), 0.2f));
+	addComponent(new LightComponent(lightData, this));
 }
 
 sf::Vector2f LeapOfFaithSpell::getConfiguredPositionOffset() const {
@@ -30,21 +35,14 @@ sf::Vector2f LeapOfFaithSpell::getConfiguredPositionOffset() const {
 void LeapOfFaithSpell::setDisposed() {
 	Spell::setDisposed();
 	m_mob->getMovingBehavior()->setGravityScale(1.f);
-	m_lightObject->setDisposed();
 }
 
 void LeapOfFaithSpell::execOnHit(LevelMovableGameObject* target) {
 	// nop
 }
 
-void LeapOfFaithSpell::setScreen(Screen* screen) {
-	Spell::setScreen(screen);
-	screen->addObject(m_lightObject);
-}
-
 void LeapOfFaithSpell::setPosition(const sf::Vector2f& pos) {
 	Spell::setPosition(pos);
-	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	updateParticleSystemPosition();
 }
 

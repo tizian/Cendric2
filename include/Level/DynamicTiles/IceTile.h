@@ -5,7 +5,7 @@
 
 class IceTile : public LevelDynamicTile {
 public:
-	IceTile(Level* level) : LevelDynamicTile(level) {}
+	IceTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;

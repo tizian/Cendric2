@@ -5,7 +5,7 @@
 
 class UnstableTile : public virtual LevelMovableTile {
 public:
-	UnstableTile(Level* level);
+	UnstableTile(LevelScreen* levelScreen);
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;

@@ -3,11 +3,14 @@
 #include "Spells/Spell.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
+#include "GameObjectComponents/LightComponent.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Modifier, ModifierTile)
 
-ModifierTile::ModifierTile(Level* level) : LevelDynamicTile(level) {
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(200.f, 200.f), 0.5f));
+ModifierTile::ModifierTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
+	addComponent(new LightComponent(LightData(
+		sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f),
+		sf::Vector2f(200.f, 200.f), 0.5f), this));
 }
 
 void ModifierTile::init() {
@@ -51,25 +54,14 @@ void ModifierTile::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 }
 
-void ModifierTile::setScreen(Screen* screen) {
-	LevelDynamicTile::setScreen(screen);
-	screen->addObject(m_lightObject);
-}
-
 void ModifierTile::setPosition(const sf::Vector2f& pos) {
 	LevelDynamicTile::setPosition(pos);
-	if (m_lightObject != nullptr) m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
 	updateParticleSystemPosition();
 }
 
 void ModifierTile::render(sf::RenderTarget& target) {
 	m_ps->render(target);
 	LevelDynamicTile::render(target);
-}
-
-void ModifierTile::setDisposed() {
-	LevelDynamicTile::setDisposed();
-	if (m_lightObject != nullptr) m_lightObject->setDisposed();
 }
 
 void ModifierTile::setModifier(const SpellModifier& modififer) {
@@ -99,9 +91,6 @@ void ModifierTile::addModifier() {
 	screen->setTooltipTextRaw(text, COLOR_GOOD, true);
 
 	m_ps->emitRate = 0;
-
-	m_lightObject->setDisposed();
-	m_lightObject = nullptr;
 }
  
 void ModifierTile::onHit(LevelMovableGameObject* mob) {

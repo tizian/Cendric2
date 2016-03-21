@@ -2,7 +2,9 @@
 #include "Level/DynamicTiles/MovingTile.h"
 #include "Level/Level.h"
 
-LevelMovableTile::LevelMovableTile(Level* level) : LevelDynamicTile(level), MovableGameObject() {
+LevelMovableTile::LevelMovableTile(LevelScreen* levelScreen) : 
+	LevelDynamicTile(levelScreen), 
+	MovableGameObject() {
 }
 
 GameObjectType LevelMovableTile::getConfiguredType() const {

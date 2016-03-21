@@ -17,30 +17,31 @@
 class Level;
 class Enemy;
 class LevelDynamicTile;
+class LevelScreen;
 
 // helper class used by the level to load dynamic tiles, level items and enemies
 class LevelLoader {
 public:
-	void loadAfterMainChar(LevelData& data, Screen* screen, Level* level) const;
+	void loadAfterMainChar(LevelData& data, LevelScreen* screen, Level* level) const;
 	// loads lights out of level data and adds them directly to the screen
-	void loadLights(LevelData& data, Screen* screen) const;
+	void loadLights(LevelData& data, LevelScreen* screen) const;
 	// loads dynamic tiles out of level data and adds them directly to the screen. 
 	// An exeption are dynamic tiles that are loaded after the main char is loaded.
-	void loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const;
+	void loadDynamicTiles(LevelData& data, LevelScreen* screen) const;
 
 private:
 	// loads chest tiles out of level data and adds them directly to the screen
-	void loadChestTiles(LevelData& data, Screen* screen, Level* level) const;
+	void loadChestTiles(LevelData& data, LevelScreen* screen) const;
 	// loads modifier tiles out of level data and adds them directly to the screen
-	void loadModifierTiles(LevelData& data, Screen* screen, Level* level) const;
+	void loadModifierTiles(LevelData& data, LevelScreen* screen) const;
 	// loads moving tiles out of level data and adds them directly to the screen
-	void loadMovingTiles(LevelData& data, Screen* screen, Level* level) const;
+	void loadMovingTiles(LevelData& data, LevelScreen* screen) const;
 	// loads lever tiles out of level data and adds them directly to the screen
-	void loadLeverTiles(LevelData& data, Screen* screen, Level* level) const;
+	void loadLeverTiles(LevelData& data, LevelScreen* screen) const;
 	// loads level items out of level data and adds them directly to the screen
-	void loadLevelItems(LevelData& data, Screen* screen) const;
+	void loadLevelItems(LevelData& data, LevelScreen* screen) const;
 	// loads enemies out of level data and adds them directly to the screen
-	void loadEnemies(LevelData& data, Screen* screen, Level* level) const;
+	void loadEnemies(LevelData& data, LevelScreen* screen, Level* level) const;
 	// loads triggers out of level data and adds them directly to the screen
-	void loadTriggers(LevelData& data, Screen* screen) const;
+	void loadTriggers(LevelData& data, LevelScreen* screen) const;
 };

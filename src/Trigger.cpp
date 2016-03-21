@@ -1,9 +1,9 @@
 #include "Trigger.h"
 #include "Screens/WorldScreen.h"
 
-Trigger::Trigger(WorldScreen* screen, GameObject* mainCharacter, const TriggerData& data) {
+Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 	m_worldScreen = screen;
-	m_mainChar = mainCharacter;
+	m_mainChar = screen->getMainCharacter();
 	m_data = data;
 
 	setBoundingBox(data.triggerRect);

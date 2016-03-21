@@ -7,12 +7,13 @@
 #include "Enums/GameObjectType.h"
 
 class Screen;
+class GameObjectComponent;
 
 // A game object with position, bounding box, game state that can be added to a screen.
 class GameObject {
 public:
 	GameObject() {}
-	virtual ~GameObject() {}
+	virtual ~GameObject();
 
 	// used to update objects before the real updates, called by the screens.
 	virtual void updateFirst(const sf::Time& frameTime) {};
@@ -33,12 +34,12 @@ public:
 	virtual void onLeftJustPressed();
 
 	void setBoundingBox(const sf::FloatRect& rect);
+	virtual void setDebugBoundingBox(const sf::Color &debugColor);
 	virtual void setSize(const sf::Vector2f& size);
 	virtual void setPosition(const sf::Vector2f& pos);
 	virtual void setPositionX(float posX);
 	virtual void setPositionY(float posY);
 	virtual void setDisposed();
-	
 	virtual void setState(GameObjectState state);
 	virtual void setScreen(Screen* screen);
 	void setInputInDefaultView(bool value);
@@ -63,12 +64,12 @@ public:
 	// The frame time is subtracted from the time but 
 	// if the time falls below sf::Time::Zero, it is set to sf::Time::Zero.
 	static void updateTime(sf::Time &time, const sf::Time &frameTime);
-	virtual void setDebugBoundingBox(const sf::Color &debugColor);
 
 protected:
 	GameObjectState m_state = GameObjectState::VOID;
 
 	Screen* m_screen = nullptr;
+	std::vector<GameObjectComponent*> m_components;
 	sf::RectangleShape m_debugBox;
 
 	bool m_isDisposed = false;
@@ -80,4 +81,7 @@ protected:
 
 	bool m_isDrawBoundingBox = false;
 	bool m_isInputInDefaultView = false;
+
+protected:
+	void addComponent(GameObjectComponent* component);
 };

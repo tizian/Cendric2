@@ -6,7 +6,7 @@
 
 class MovingTile : public virtual LevelMovableTile {
 public:
-	MovingTile(Level* level);
+	MovingTile(LevelScreen* levelScreen);
 	void setMovingTileData(const MovingTileData& data);
 	void init() override;
 	void loadAnimation(int skinNr) override;

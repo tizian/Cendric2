@@ -94,3 +94,4 @@ void AnimatedGameObject::setSpriteColor(const sf::Color& color, const sf::Time& 
 	m_coloredTime = time;
 	m_currentSpriteColor = color;
 }
+

@@ -11,27 +11,19 @@
 #include "Enums/ItemType.h"
 
 class LevelMainCharacter;
+class LevelScreen;
 
 // A item cendric can collect in a level
 class LevelItem : public AnimatedGameObject {
 public:
-	LevelItem() : AnimatedGameObject() {}
-	void load(LevelMainCharacter* mainChar, const Item& item, const sf::Vector2f& position);
-	void onRightClick() override;
-	void onMouseOver() override;
-	void pickup();
-	void render(sf::RenderTarget& renderTarget) override;
-	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
-	void update(const sf::Time& frameTime) override;
+	LevelItem(LevelScreen* levelScreen);
 
-	void setLightObject(LightObject* lightObject);
-	void setScreen(Screen* screen) override;
-	void setPosition(const sf::Vector2f& position) override;
-	void setDisposed() override;
+	void load(const Item& item, const sf::Vector2f& position);
+	void onRightClick() override;
+	void pickup();
 
 	GameObjectType getConfiguredType() const override;
 
-	void setTooltipText(const std::string& tooltip);
 	void setSpawnPosition(int spawnPosition);
 
 private:
@@ -44,9 +36,4 @@ private:
 	int m_goldValue;
 	int m_spawnPosition = -1;
 	ItemType m_itemType;
-	BitmapText m_tooltipText;
-	sf::Time m_tooltipTime = sf::Time::Zero;
-
-	LightObject* m_lightObject = nullptr;
-	sf::Vector2f m_lightObjectOffset;
 };

@@ -8,14 +8,14 @@ class Map;
 // a MOB in a map, npcs + main character.
 class MapMovableGameObject : public virtual MovableGameObject {
 public:
-	MapMovableGameObject(Map* map);
+	MapMovableGameObject(const Map* map);
 	virtual ~MapMovableGameObject();
 	
-	Map* getMap() const;
+	const Map* getMap() const;
 	GameObjectState getState() const;
 
 protected:
 	// update animation based on the current velocity
 	virtual void updateAnimation(const sf::Time& frameTime);
-	Map* m_map;
+	const Map* m_map;
 };

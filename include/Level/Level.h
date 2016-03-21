@@ -20,9 +20,9 @@ public:
 	// loads a .tmx file
 	bool load(const std::string& id) override;
 	// loads dynamic tiles and lights. this happens AFTER everything else and is because of our nice RENDERTEXTURE PROBLEM >:(
-	void loadForRenderTexture(Screen* screen) override;
+	void loadForRenderTexture(WorldScreen* screen) override;
 	// loads enemies and level items for the level. must be called after a screen already has a main char
-	void loadAfterMainChar(Screen* screen) override;
+	void loadAfterMainChar(WorldScreen* screen) override;
 	void setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const override;
 	void drawBackgroundLayers(sf::RenderTarget& target, const sf::RenderStates& states, const sf::Vector2f& focus) const;
 	// deletes the resources

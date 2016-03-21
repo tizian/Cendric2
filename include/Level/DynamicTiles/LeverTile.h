@@ -8,19 +8,16 @@ class LevelMainCharacter;
 
 class LeverTile : public LevelDynamicTile {
 public:
-	LeverTile(Level* level, LevelMainCharacter* mainChar) : LevelDynamicTile(level), m_mainChar(mainChar) {}
+	LeverTile(LevelScreen* levelScreen);
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
-	void onMouseOver() override;
-	void render(sf::RenderTarget& renderTarget) override;
 
 	void setDependantTiles(const std::vector<SwitchableTile*>& dependentTiles);
 	void switchLever();
 
 private:
-	LevelMainCharacter* m_mainChar;
 	// the lever can only be used by hand if the main char is in this range.
 	// it is however always possible for a telekinesis spell to activate the lever if its projectile reaches the lever.
 	const float ACTIVATE_RANGE = 100.f;

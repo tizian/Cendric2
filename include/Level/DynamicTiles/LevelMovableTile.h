@@ -7,7 +7,7 @@
 
 class LevelMovableTile : public virtual LevelDynamicTile, public virtual MovableGameObject {
 public:
-	LevelMovableTile(Level* level);
+	LevelMovableTile(LevelScreen* levelScreen);
 	virtual ~LevelMovableTile() {};
 	
 	void updateFirst(const sf::Time& frameTime) override { MovableGameObject::updateFirst(frameTime); }

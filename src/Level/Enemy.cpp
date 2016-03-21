@@ -283,7 +283,7 @@ void Enemy::addDamageOverTime(DamageOverTimeData& data) {
 
 void Enemy::onMouseOver() {
 	if (m_isDead && !isAlly()) {
-		setSpriteColor(COLOR_LOOTABLE, sf::milliseconds(100));
+		setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
 		m_showLootWindow = true;
 	}
 }

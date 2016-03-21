@@ -1,7 +1,10 @@
 #include "Map/MapDynamicTile.h"
+#include "Screens/MapScreen.h"
 
-MapDynamicTile::MapDynamicTile(Map* map) : AnimatedGameObject() {
-	m_map = map;
+MapDynamicTile::MapDynamicTile(MapScreen* mapScreen) : AnimatedGameObject() {
+	m_map = mapScreen->getWorld();
+	m_screen = mapScreen;
+	m_mainChar = mapScreen->getMainCharacter();
 }
 
 bool MapDynamicTile::getIsCollidable() const {

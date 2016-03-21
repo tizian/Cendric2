@@ -5,10 +5,9 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Shiftable, ShiftableTile)
 
-ShiftableTile::ShiftableTile(Level* level) : 
-	LevelDynamicTile(level),
-	LevelMovableTile(level)
-{
+ShiftableTile::ShiftableTile(LevelScreen* levelScreen) :
+	LevelDynamicTile(levelScreen),
+	LevelMovableTile(levelScreen) {
 }
 
 void ShiftableTile::init() {

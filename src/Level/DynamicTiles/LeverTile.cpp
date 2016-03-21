@@ -1,6 +1,11 @@
 #include "Level/DynamicTiles/LeverTile.h"
 #include "Spells/Spell.h"
 #include "Level/LevelMainCharacter.h"
+#include "GameObjectComponents/TooltipComponent.h"
+
+LeverTile::LeverTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
+	addComponent(new TooltipComponent(g_textProvider->getText("Lever"), this));
+}
 
 // this tile is special and is not registered
 void LeverTile::init() {
@@ -57,15 +62,6 @@ void LeverTile::onRightClick() {
 		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
 	g_inputController->lockAction();
-}
-
-void LeverTile::onMouseOver() {
-	m_animatedSprite.setColor(COLOR_BAD);
-}
-
-void LeverTile::render(sf::RenderTarget &renderTarget) {
-	AnimatedGameObject::render(renderTarget);
-	m_animatedSprite.setColor(COLOR_WHITE);
 }
 
 void LeverTile::setDependantTiles(const std::vector<SwitchableTile*>& dependentTiles) {

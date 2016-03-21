@@ -1,11 +1,9 @@
 #include "Spells/LightSpell.h"
-
-LightSpell::LightSpell() : Spell() {
-}
+#include "GameObjectComponents/LightComponent.h"
 
 void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), bean.range));
+	addComponent(new LightComponent(LightData(sf::Vector2f(), bean.range), this));
 	loadParticleSystem();
 }
 
@@ -13,23 +11,12 @@ sf::Vector2f LightSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(0.f, -60.f);
 }
 
-void LightSpell::setDisposed() {
-	Spell::setDisposed();
-	m_lightObject->setDisposed();
-}
-
 void LightSpell::execOnHit(LevelMovableGameObject* target) {
 	// nop
 }
 
-void LightSpell::setScreen(Screen* screen) {
-	Spell::setScreen(screen);
-	screen->addObject(m_lightObject);
-}
-
 void LightSpell::setPosition(const sf::Vector2f& pos) {
 	Spell::setPosition(pos);
-	if (m_lightObject != nullptr) m_lightObject->setPosition(pos);
 	updateParticleSystemPosition();
 }
 

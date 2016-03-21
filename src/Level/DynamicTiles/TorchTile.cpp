@@ -1,11 +1,13 @@
 #include "Level/DynamicTiles/TorchTile.h"
+#include "GameObjectComponents/LightComponent.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Torch, TorchTile)
 
-TorchTile::TorchTile(Level* level) : LevelDynamicTile(level) {
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), sf::Vector2f(140.f, 200.f)));
+TorchTile::TorchTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
+	m_lightComponent = new LightComponent(LightData(sf::Vector2f(), sf::Vector2f(140.f, 200.f)), this);
+	addComponent(m_lightComponent);
 }
 
 void TorchTile::init() {
@@ -45,39 +47,24 @@ void TorchTile::onHit(Spell* spell) {
 	case SpellID::IceBall:
 		if (m_state == GameObjectState::Burning) {
 			setState(GameObjectState::Idle);
-			m_lightObject->setVisible(false);
+			m_lightComponent->setVisible(false);
 			spell->setDisposed();
 		}
 		break;
 	case SpellID::WindGust:
 		if (m_state == GameObjectState::Burning) {
 			setState(GameObjectState::Idle);
-			m_lightObject->setVisible(false);
+			m_lightComponent->setVisible(false);
 		}
 		break;
 	case SpellID::FireBall:
 		if (m_state == GameObjectState::Idle) {
 			setState(GameObjectState::Burning);
-			m_lightObject->setVisible(true);
+			m_lightComponent->setVisible(true);
 			spell->setDisposed();
 		}
 		break;
 	default:
 		break;
 	}
-}
-
-void TorchTile::setPosition(const sf::Vector2f& pos) {
-	m_lightObject->setPosition(pos + sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f));
-	LevelDynamicTile::setPosition(pos);
-}
-
-void TorchTile::setDisposed() {
-	LevelDynamicTile::setDisposed();
-	m_lightObject->setDisposed();
-}
-
-void TorchTile::setScreen(Screen* screen) {
-	LevelDynamicTile::setScreen(screen);
-	screen->addObject(m_lightObject);
 }

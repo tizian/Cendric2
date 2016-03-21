@@ -8,23 +8,17 @@
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "Trigger.h"
 
-void MapLoader::loadNpcs(MapData& data, Screen* screen, Map* map) const {
-	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("MapLoader", "Could not find main character of map screen");
-		return;
-	}
-
+void MapLoader::loadNpcs(MapData& data, MapScreen* screen) const {
 	// calculate npcs
 	for (auto& it : data.npcs) {
-		NPC* mapNPC = new NPC(map);
+		NPC* mapNPC = new NPC(screen);
 		mapNPC->setScreen(screen);
-		mapNPC->load(mainCharacter, it);
+		mapNPC->load(it);
 		screen->addObject(mapNPC);
 	}
 }
 
-void MapLoader::loadLights(MapData& data, Screen* screen) const {
+void MapLoader::loadLights(MapData& data, MapScreen* screen) const {
 	// calculate lights
 	for (auto& it : data.lights) {
 		LightObject* lightObject = new LightObject(it);
@@ -32,32 +26,19 @@ void MapLoader::loadLights(MapData& data, Screen* screen) const {
 	}
 }
 
-void MapLoader::loadTriggers(MapData& data, Screen* screen) const {
-	MapScreen* mapScreen = dynamic_cast<MapScreen*>(screen);
-	MapMainCharacter* mainCharacter = mapScreen->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("MapLoader", "Could not find main character of game screen");
-		return;
-	}
-
+void MapLoader::loadTriggers(MapData& data, MapScreen* screen) const {
 	for (auto& it : data.triggers) {
 		if (screen->getCharacterCore()->isTriggerTriggered(it.worldID, it.objectID))
 			continue;
-		Trigger* trigger = new Trigger(mapScreen, mainCharacter, it);
-		mapScreen->reloadTrigger(trigger);
+		Trigger* trigger = new Trigger(screen, it);
+		screen->reloadTrigger(trigger);
 		screen->addObject(trigger);
 	}
 }
 
-void MapLoader::loadDynamicTiles(MapData& data, Screen* screen, Map* map) const {
-	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("MapLoader", "Could not find main character of game screen");
-		return;
-	}
-
+void MapLoader::loadDynamicTiles(MapData& data, MapScreen* screen) const {
 	for (auto& it : data.dynamicTiles) {
-		MapDynamicTile* tile = ObjectFactory::Instance()->createMapDynamicTile(it.id, map);
+		MapDynamicTile* tile = ObjectFactory::Instance()->createMapDynamicTile(it.id, screen);
 		if (tile == nullptr) {
 			g_logger->logError("MapLoader", "Dynamic tile was not loaded, unknown id.");
 			return;

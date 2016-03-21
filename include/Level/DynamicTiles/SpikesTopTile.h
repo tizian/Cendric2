@@ -5,7 +5,7 @@
 
 class SpikesTopTile : public LevelDynamicTile {
 public:
-	SpikesTopTile(Level* level) : LevelDynamicTile(level) {}
+	SpikesTopTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(LevelMovableGameObject* mob) override;

@@ -13,7 +13,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('CannotEquipIn
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumePermanentInLevel','You cannot consume permanent items inside a level!','Gegenstände mit permanenten Boni können nicht in einem Level verwendet werden!','Gegeständ mit permanente Boni chönd nid imne Level verbruucht werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CharacterInfo','Character Info','Charakter Info','Charakter Info');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CheckpointReached','Checkpoint reached','Kontrollpunkt erreicht','Checkpoint erreicht');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Chest','Chest','Truhe','True');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Chest','Chest','Truhe','Chischte');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chop','Chop','Hauen','Haue');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ClickToTeleport','Click to teleport','Klicken zum Teleportieren','Klicke zum Teleportiere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Completed','Completed','Abgeschlossen','Fertig');
@@ -188,7 +188,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('SpellSummonGa
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellSummonGargoyleDesc','Cendric summons a mighty Gargoyle that serves him and attacks enemies.','Cendric beschwört einen mächtigen Gargoyle, der Gegner attackiert.','De Cendric beschwört en mächtige Gargoyle wo Gegner aagrift.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellSlots','Spell Slots','Verfügbare Zauber','Verfüegbari Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellUnlock','Summon Picklock','Dietrich beschwören','Dietrich beschwöre');
-INSERT INTO text (text_id, english, german, swiss_german) values ('SpellUnlockDesc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Beschwört einen Dietrich, der verschlossene Truhen knackt, sofern die Stärke des Zaubers ausreicht.','Beschwört en Dietrich ane wo e verschlosseni True knackt sofern de Zauber gnueg starch isch für die True.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellUnlockDesc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Beschwört einen Dietrich, der verschlossene Truhen knackt, sofern die Stärke des Zaubers ausreicht.','Beschwört en Dietrich ane wo e verschlosseni Chischte knackt sofern de Zauber gnueg starch isch für die Chischte.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellWindGust','Wind Gust','Windstoss','Windstoss');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellWindGustDesc','A wind gust that is able to shift certain objects.','Ein Windstoss der gewisse Objekte verschieben kann.','En Windstoss wo gwüssi Objekt verschiebe chan.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('StartGame','Start Game','Spiel starten','Spiel starte');

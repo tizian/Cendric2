@@ -1,6 +1,6 @@
 #include "Map/MapMovableGameObject.h"
 
-MapMovableGameObject::MapMovableGameObject(Map* map) : MovableGameObject() {
+MapMovableGameObject::MapMovableGameObject(const Map* map) : MovableGameObject() {
 	m_map = map;
 }
 
@@ -47,6 +47,6 @@ void MapMovableGameObject::updateAnimation(const sf::Time& frameTime) {
 	}
 }
 
-Map* MapMovableGameObject::getMap() const {
+const Map* MapMovableGameObject::getMap() const {
 	return m_map;
 }

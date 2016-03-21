@@ -8,11 +8,13 @@
 class Spell;
 class LevelMovableGameObject;
 class Level;
+class LevelMainCharacter;
+class LevelScreen;
 
 // A dynamic tile in a level
 class LevelDynamicTile : public virtual AnimatedGameObject {
 public:
-	LevelDynamicTile(Level* level);
+	LevelDynamicTile(LevelScreen* levelScreen);
 	virtual ~LevelDynamicTile() {};
 
 	// loads sprite offset & bounding box.
@@ -37,7 +39,8 @@ public:
 protected:
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
-	Level* m_level;
+	const Level* m_level;
+	LevelMainCharacter* m_mainChar;
 	LevelDynamicTileID m_dynamicTileID;
 	bool m_isCollidable = false;
 	bool m_isStrictlyCollidable = false;

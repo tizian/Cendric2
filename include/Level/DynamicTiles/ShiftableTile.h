@@ -5,7 +5,7 @@
 
 class ShiftableTile : public virtual LevelMovableTile {
 public:
-	ShiftableTile(Level* level);
+	ShiftableTile(LevelScreen* levelScreen);
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;

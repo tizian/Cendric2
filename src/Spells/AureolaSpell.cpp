@@ -1,8 +1,5 @@
 #include "Spells/AureolaSpell.h"
-
-AureolaSpell::AureolaSpell() : Spell() {
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), 80.f, 0.4f));
-}
+#include "GameObjectComponents/LightComponent.h"
 
 void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
@@ -21,6 +18,8 @@ void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, cons
 	m_rangeLeft = bean.range;
 
 	Spell::load(bean, mob, target);
+	LightData lightData(sf::Vector2f(), 80.f, 0.4f);
+	addComponent(new LightComponent(lightData, this));
 }
 
 void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
@@ -81,19 +80,5 @@ sf::Vector2f AureolaSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(5.f, -5.f);
 }
 
-void AureolaSpell::setDisposed() {
-	Spell::setDisposed();
-	m_lightObject->setDisposed();
-}
-
-void AureolaSpell::setScreen(Screen* screen) {
-	Spell::setScreen(screen);
-	screen->addObject(m_lightObject);
-}
-
-void AureolaSpell::setPosition(const sf::Vector2f& pos) {
-	Spell::setPosition(pos);
-	m_lightObject->setPosition(pos);
-}
 
 

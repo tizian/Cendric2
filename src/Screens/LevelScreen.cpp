@@ -117,6 +117,10 @@ LevelMainCharacter* LevelScreen::getMainCharacter() const {
 	return m_mainChar;
 }
 
+const Level* LevelScreen::getWorld() const {
+	return &m_currentLevel;
+}
+
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	handleGameOver(frameTime);
 

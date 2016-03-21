@@ -5,7 +5,7 @@
 
 class CheckpointTile : public LevelDynamicTile {
 public:
-	CheckpointTile(Level* level) : LevelDynamicTile(level) {};
+	CheckpointTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {};
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override {};

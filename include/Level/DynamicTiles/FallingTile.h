@@ -13,7 +13,7 @@ enum class FallingTileState {
 
 class FallingTile : public virtual LevelDynamicTile, public virtual MovableGameObject {
 public:
-	FallingTile(Level* level);
+	FallingTile(LevelScreen* levelScreen);
 
 	void updateFirst(const sf::Time& frameTime) override { MovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MovableGameObject::renderAfterForeground(target); }
@@ -23,7 +23,6 @@ public:
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
-	void setScreen(Screen* screen) override;
 	void onHit(LevelMovableGameObject* mob) override;
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
@@ -31,7 +30,6 @@ public:
 private:
 	void checkCollisions(const sf::Vector2f& nextPosition);
 
-	GameObject* m_mainChar;
 	const float GRAVITY_ACCELERATION = 1000.f;
 	const float RETURN_VELOCITY = 80.f;
 	const float AGGRO_DISTANCE = 200.f;

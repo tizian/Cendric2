@@ -8,7 +8,7 @@ class LevelMainCharacter;
 
 class ChestTile : public LevelDynamicTile {
 public:
-	ChestTile(LevelMainCharacter* mainChar, Level* level);
+	ChestTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 	void init() override;
@@ -25,7 +25,6 @@ public:
 	void setStrength(int strength);
 
 private:
-	LevelMainCharacter* m_mainChar;
 	int m_objectID = -1;
 	int m_strength = 0;
 	// lootable items 

@@ -14,7 +14,7 @@ const sf::Color COLOR_BAD =						sf::Color(217, 17, 17);
 
 const sf::Color COLOR_DAMAGED =					sf::Color(255, 0, 0);
 const sf::Color COLOR_HEALED =					sf::Color(0, 255, 0);
-const sf::Color COLOR_LOOTABLE =				sf::Color(255, 0, 0);
+const sf::Color COLOR_INTERACTIVE =				sf::Color(255, 0, 0);
 
 const sf::Color COLOR_LIGHT_GREY =				sf::Color(200, 200, 200);
 const sf::Color COLOR_MEDIUM_GREY =				sf::Color(150, 150, 150);

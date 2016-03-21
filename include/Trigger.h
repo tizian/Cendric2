@@ -10,7 +10,7 @@ class WorldScreen;
 // level and map exits are triggers too.
 class Trigger : public GameObject {
 public:
-	Trigger(WorldScreen* screen, GameObject* mainCharacter, const TriggerData& data);
+	Trigger(WorldScreen* screen, const TriggerData& data);
 	~Trigger() {};
 
 	void update(const sf::Time& frameTime) override;

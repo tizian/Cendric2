@@ -79,7 +79,7 @@ extern const sf::Color COLOR_BAD;
 
 extern const sf::Color COLOR_DAMAGED;
 extern const sf::Color COLOR_HEALED;
-extern const sf::Color COLOR_LOOTABLE;
+extern const sf::Color COLOR_INTERACTIVE;
 
 extern const sf::Color COLOR_LIGHT_GREY;
 extern const sf::Color COLOR_MEDIUM_GREY;

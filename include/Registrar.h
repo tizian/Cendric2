@@ -7,11 +7,11 @@
 
 #define REGISTER_LEVEL_DYNAMIC_TILE(ID, TYPE) \
     static Registrar registrar(ID, \
-        [](Level* l) -> LevelDynamicTile* { return new TYPE(l);});
+        [](LevelScreen* l) -> LevelDynamicTile* { return new TYPE(l);});
 
 #define REGISTER_MAP_DYNAMIC_TILE(ID, TYPE) \
     static Registrar registrar(ID, \
-        [](Map* m) -> MapDynamicTile* { return new TYPE(m);});
+        [](MapScreen* m) -> MapDynamicTile* { return new TYPE(m);});
 
 class Registrar {
 public:

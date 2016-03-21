@@ -142,7 +142,7 @@ void GhostFormSpell::loadMask() {
 		texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
 	}
 
-	LevelEquipment* levelEquipment = new LevelEquipment();
+	LevelEquipment* levelEquipment = new LevelEquipment(m_mainChar);
 	levelEquipment->setBoundingBox(sf::FloatRect(0, 0, 120, 120));
 	for (auto &ani : texturePositions) {
 		Animation* animation = new Animation();
@@ -162,7 +162,7 @@ void GhostFormSpell::loadMask() {
 	// initial values
 	levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 	levelEquipment->playCurrentAnimation(true);
-	levelEquipment->loadEquipment(m_mainChar);
+	levelEquipment->loadEquipment();
 	levelEquipment->setCopyingMainCharColor(false);
 	m_mask = levelEquipment;
 	m_screen->addObject(levelEquipment);

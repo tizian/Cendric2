@@ -5,7 +5,7 @@
 
 class DestructibleTile : public LevelDynamicTile {
 public:
-	DestructibleTile(Level* level) : LevelDynamicTile(level) {}
+	DestructibleTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;

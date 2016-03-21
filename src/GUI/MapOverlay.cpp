@@ -8,13 +8,13 @@ float MapOverlay::LEFT = 30.f;
 
 MapOverlay::MapOverlay(MapScreen* screen) :
 	// copy those maps
-	m_backgroundTileMap(*screen->getMap().getBackgroundTileMap()),
-	m_lightedForegroundTileMap(*screen->getMap().getLightedForegroundTileMap()),
-	m_foregroundTileMap(*screen->getMap().getForegroundTileMap()) {
+	m_backgroundTileMap(*screen->getWorld()->getBackgroundTileMap()),
+	m_lightedForegroundTileMap(*screen->getWorld()->getLightedForegroundTileMap()),
+	m_foregroundTileMap(*screen->getWorld()->getForegroundTileMap()) {
 
 	m_screen = screen;
 
-	const Map& map = m_screen->getMap();
+	const Map& map = *m_screen->getWorld();
 
 	sf::Vector2f mapSize(map.getWorldRect().width, map.getWorldRect().height);
 	// check out the limiting factor for our scale

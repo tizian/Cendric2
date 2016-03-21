@@ -13,11 +13,6 @@ public:
 	bool getConfiguredRotateSprite() const override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
-	void setPosition(const sf::Vector2f& pos) override;
-	void setScreen(Screen* screen) override;
-	void setDisposed() override;
-
 private:
 	AttributeData m_additionalResistance;
-	LightObject* m_lightObject;
 };

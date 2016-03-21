@@ -1,13 +1,18 @@
 #include "Map/NPC.h"
 #include "Map/MapMainCharacter.h"
 #include "Screens/MapScreen.h"
+#include "GameObjectComponents/TooltipComponent.h"
 
 inline bool inRange(const sf::Vector2f& center, const sf::Vector2f& mainCharCenter, const float range) {
 	return dist(center, mainCharCenter) <= range;
 }
 
-void NPC::load(MapMainCharacter* mainChar, const NPCData& data) {
-	m_mainChar = mainChar;
+NPC::NPC(MapScreen* mapScreen) : MapMovableGameObject(mapScreen->getWorld()) {
+	m_screen = mapScreen;
+	m_mainChar = mapScreen->getMainCharacter();
+}
+
+void NPC::load(const NPCData& data) {
 	m_NPCdata = data;
 	setBoundingBox(data.boundingBox);
 	setSpriteOffset(sf::Vector2f(-data.boundingBox.left, -data.boundingBox.top));
@@ -78,7 +83,7 @@ void NPC::load(MapMainCharacter* mainChar, const NPCData& data) {
 	playCurrentAnimation(true);
 
 	setPosition(data.position);
-	setTooltipText(g_textProvider->getText(data.id, "npc"));
+	addComponent(new TooltipComponent(g_textProvider->getText(data.id, "npc"), this, false));
 	setDebugBoundingBox(sf::Color::Magenta);
 
 	if (!data.routineID.empty()) {
@@ -94,10 +99,6 @@ void NPC::reloadRoutine() {
 		setTalkingEnabled(true);
 		m_routine.load(m_routine.getID(), this, false);
 	}
-}
-
-void NPC::onMouseOver() {
-	m_tooltipTime = sf::seconds(1);
 }
 
 void NPC::onLeftClick() {
@@ -121,16 +122,7 @@ void NPC::onRightClick() {
 	}
 }
 
-void NPC::renderAfterForeground(sf::RenderTarget &renderTarget) {
-	MovableGameObject::renderAfterForeground(renderTarget);
-	bool showTooltip = g_inputController->isKeyActive(Key::ToggleTooltips);
-	if (showTooltip || m_tooltipTime > sf::Time::Zero) {
-		renderTarget.draw(m_tooltipText);
-	}
-}
-
 void NPC::update(const sf::Time& frameTime) {
-	GameObject::updateTime(m_tooltipTime, frameTime);
 	m_routine.update(frameTime);
 	updateAnimation(frameTime);
 	MovableGameObject::update(frameTime);
@@ -168,24 +160,12 @@ void NPC::turnToMainchar() {
 	}
 }
 
-void NPC::setPosition(const sf::Vector2f& pos) {
-	MapMovableGameObject::setPosition(pos);
-	m_tooltipText.setPosition(sf::Vector2f(pos.x, pos.y - 10.f));
-}
-
 GameObjectType NPC::getConfiguredType() const {
 	return GameObjectType::_MapMovableGameObject;
 }
 
 const NPCData& NPC::getNPCData() const {
 	return m_NPCdata;
-}
-
-void NPC::setTooltipText(const std::string& tooltip) {
-	m_tooltipText = BitmapText(tooltip);
-	m_tooltipText.setTextStyle(TextStyle::Shadowed);
-	m_tooltipText.setColor(COLOR_WHITE);
-	m_tooltipText.setCharacterSize(8);
 }
 
 float NPC::getConfiguredMaxVelocityYUp() const {

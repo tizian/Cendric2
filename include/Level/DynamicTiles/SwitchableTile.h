@@ -5,7 +5,7 @@
 
 class SwitchableTile : public LevelDynamicTile {
 public:
-	SwitchableTile(Level* level) : LevelDynamicTile(level) {}
+	SwitchableTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void init() override;
 	void setInitialState(bool on);
 	void loadAnimation(int skinNr) override;

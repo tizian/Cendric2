@@ -5,6 +5,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
+#include "GameObjectComponents/LightComponent.h"
 
 REGISTER_ENEMY(EnemyID::Wisp, WispEnemy)
 
@@ -145,22 +146,7 @@ void WispEnemy::loadAnimation() {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	delete m_lightObject;
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), 100.f, 0.5f));
-}
-
-void WispEnemy::setDisposed() {
-	Enemy::setDisposed();
-	m_lightObject->setDisposed();
-}
-
-void WispEnemy::setScreen(Screen* screen) {
-	Enemy::setScreen(screen);
-	screen->addObject(m_lightObject);
-}
-
-void WispEnemy::setPosition(const sf::Vector2f& pos) {
-	Enemy::setPosition(pos);
-	m_lightObject->setPosition(pos + sf::Vector2f(10.f, 10.f));
+	LightData data(sf::Vector2f(10.f, 10.f), 100.f, 0.5f);
+	addComponent(new LightComponent(data, this));
 }
 

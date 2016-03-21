@@ -95,8 +95,8 @@ void MapScreen::execOnExit(const Screen* nextScreen) {
 	delete m_cookingWindow;
 }
 
-const Map& MapScreen::getMap() const {
-	return m_currentMap;
+const Map* MapScreen::getWorld() const {
+	return &m_currentMap;
 }
 
 MapMainCharacter* MapScreen::getMainCharacter() const {

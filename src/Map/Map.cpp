@@ -1,4 +1,5 @@
 #include "Map/Map.h"
+#include "Screens/MapScreen.h"
 
 Map::Map() {
 	m_worldData = &m_mapData;
@@ -27,17 +28,17 @@ void Map::dispose() {
 	g_resourceManager->deleteMapResources();
 }
 
-void Map::loadAfterMainChar(Screen* screen) {
+void Map::loadAfterMainChar(WorldScreen* screen) {
 	MapLoader loader;
-	loader.loadNpcs(m_mapData, screen, this);
-	loader.loadTriggers(m_mapData, screen);
+	loader.loadNpcs(m_mapData, dynamic_cast<MapScreen*>(screen));
+	loader.loadTriggers(m_mapData, dynamic_cast<MapScreen*>(screen));
 	m_screen = screen;
 }
 
-void Map::loadForRenderTexture(Screen* screen) {
+void Map::loadForRenderTexture(WorldScreen* screen) {
 	MapLoader loader;
-	loader.loadLights(m_mapData, screen);
-	loader.loadDynamicTiles(m_mapData, screen, this);
+	loader.loadLights(m_mapData, dynamic_cast<MapScreen*>(screen));
+	loader.loadDynamicTiles(m_mapData, dynamic_cast<MapScreen*>(screen));
 }
 
 void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) const {

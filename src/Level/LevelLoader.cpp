@@ -11,18 +11,18 @@
 
 using namespace std;
 
-void LevelLoader::loadAfterMainChar(LevelData& data, Screen* screen, Level* level) const {
+void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level* level) const {
 	loadEnemies(data, screen, level);
 	loadLevelItems(data, screen);
-	loadModifierTiles(data, screen, level);
-	loadChestTiles(data, screen, level);
-	loadLeverTiles(data, screen, level);
-	loadMovingTiles(data, screen, level);
+	loadModifierTiles(data, screen);
+	loadChestTiles(data, screen);
+	loadLeverTiles(data, screen);
+	loadMovingTiles(data, screen);
 	loadTriggers(data, screen);
 }
 
-void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
+void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
+	LevelMainCharacter* mainCharacter = screen->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelLoader", "Could not find main character of game screen");
 		return;
@@ -42,7 +42,7 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 		std::map<string, int> loot = it.loot.first;
 		int gold = it.loot.second;
 
-		chestTile = new ChestTile(mainCharacter, level);
+		chestTile = new ChestTile(screen);
 		chestTile->init();
 		chestTile->setObjectID(it.objectID);
 		chestTile->setStrength(it.chestStrength);
@@ -54,11 +54,10 @@ void LevelLoader::loadChestTiles(LevelData& data, Screen* screen, Level* level) 
 	}
 }
 
-void LevelLoader::loadMovingTiles(LevelData& data, Screen* screen, Level* level) const {
-
+void LevelLoader::loadMovingTiles(LevelData& data, LevelScreen* screen) const {
 	for (auto& movingData : data.movingTiles) {
 
-		MovingTile* movingTile = new MovingTile(level);
+		MovingTile* movingTile = new MovingTile(screen);
 
 		movingTile->setMovingTileData(movingData);
 		movingTile->init();
@@ -71,7 +70,7 @@ void LevelLoader::loadMovingTiles(LevelData& data, Screen* screen, Level* level)
 	}
 }
 
-void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* level) const {
+void LevelLoader::loadModifierTiles(LevelData& data, LevelScreen* screen) const {
 	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
 	// create modifier tiles if they are not learned yet
@@ -81,7 +80,7 @@ void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* leve
 			continue;
 		}
 
-		ModifierTile* modifierTile = new ModifierTile(level);
+		ModifierTile* modifierTile = new ModifierTile(screen);
 
 		modifierTile->setModifier(modifierData.modifier);
 		modifierTile->init();
@@ -94,20 +93,14 @@ void LevelLoader::loadModifierTiles(LevelData& data, Screen* screen, Level* leve
 }
 
 
-void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("LevelLoader", "Could not find main character of game screen");
-		return;
-	}
-
+void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 	for (auto& it : data.levers) {
 
 		std::vector<SwitchableTile*> dependentTiles;
 
 		// create the switch tiles and add them.
 		for (auto& switchBean : it.dependentTiles) {
-			SwitchableTile* tile = new SwitchableTile(level);
+			SwitchableTile* tile = new SwitchableTile(screen);
 			tile->setInitialState(switchBean.id == LevelDynamicTileID::SwitchableOn);
 			tile->init();
 			tile->setPosition(switchBean.position);
@@ -119,7 +112,7 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 
 		// create the lever tiles and add them.
 		for (auto& leverBean : it.levers) {
-			LeverTile* tile = new LeverTile(level, mainCharacter);
+			LeverTile* tile = new LeverTile(screen);
 			tile->init();
 			tile->setPosition(leverBean.position);
 			tile->setDebugBoundingBox(COLOR_NEUTRAL);
@@ -130,15 +123,9 @@ void LevelLoader::loadLeverTiles(LevelData& data, Screen* screen, Level* level) 
 	}
 }
 
-void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("LevelLoader", "Could not find main character of game screen");
-		return;
-	}
-
+void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 	for (auto& it : data.dynamicTiles) {
-		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(it.id, level);
+		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(it.id, screen);
 		if (tile == nullptr) {
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
 			return;
@@ -162,13 +149,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, Screen* screen, Level* level
 	}
 }
 
-void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("LevelLoader", "Could not find main character of game screen");
-		return;
-	}
-
+void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {
 	int x = 0;
 	int y = 0;
 	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
@@ -185,8 +166,8 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 				return;
 			}
 
-			LevelItem* levelItem = new LevelItem();
-			levelItem->load(mainCharacter, Item(item.item_id), position);
+			LevelItem* levelItem = new LevelItem(screen);
+			levelItem->load(Item(item.item_id), position);
 			levelItem->setSpawnPosition(static_cast<int>(i));
 			screen->addObject(levelItem);
 		}
@@ -200,30 +181,17 @@ void LevelLoader::loadLevelItems(LevelData& data, Screen* screen) const {
 	}
 }
 
-void LevelLoader::loadTriggers(LevelData& data, Screen* screen) const {
-	LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(screen);
-	LevelMainCharacter* mainCharacter = levelScreen->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("LevelLoader", "Could not find main character of game screen");
-		return;
-	}
-
+void LevelLoader::loadTriggers(LevelData& data, LevelScreen* screen) const {
 	for (auto& it : data.triggers) {
 		if (screen->getCharacterCore()->isTriggerTriggered(it.worldID, it.objectID))
 			continue;
-		Trigger* trigger = new Trigger(levelScreen, mainCharacter, it);
-		levelScreen->reloadTrigger(trigger);
+		Trigger* trigger = new Trigger(screen, it);
+		screen->reloadTrigger(trigger);
 		screen->addObject(trigger);
 	}
 }
 
-void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) const {
-	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("LevelLoader", "Could not find main character of game screen");
-		return;
-	}
-
+void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level) const {
 	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
 	// create enemies if they are not looted yet
@@ -258,7 +226,7 @@ void LevelLoader::loadEnemies(LevelData& data, Screen* screen, Level* level) con
 	}
 }
 
-void LevelLoader::loadLights(LevelData& data, Screen* screen) const {
+void LevelLoader::loadLights(LevelData& data, LevelScreen* screen) const {
 	// calculate lights
 	for (auto& it : data.lights) {
 		LightObject* lightObject = new LightObject(it);

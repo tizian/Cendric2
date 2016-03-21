@@ -27,7 +27,7 @@ public:
 	void execOnExit(const Screen* nextScreen) override;
 	void notifyConditionAdded(const std::string& conditionType, const std::string& condition) override;
 
-	const Map& getMap() const;
+	const Map* getWorld() const override;
 	MapMainCharacter* getMainCharacter() const override;
 	bool exitWorld() override;
 

@@ -1,5 +1,13 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "GameObjectComponents/GameObjectComponent.h"
+
+GameObject::~GameObject() {
+	for (auto& component : m_components) {
+		delete component;
+	}
+	m_components.clear();
+}
 
 void GameObject::render(sf::RenderTarget &renderTarget) {
 	// nop
@@ -8,6 +16,9 @@ void GameObject::render(sf::RenderTarget &renderTarget) {
 void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget) {
 	if (m_isDrawBoundingBox) {
 		renderTarget.draw(m_debugBox);
+	}
+	for (auto& component : m_components) {
+		component->renderAfterForeground(renderTarget);
 	}
 }
 
@@ -23,6 +34,9 @@ void GameObject::setDebugBoundingBox(const sf::Color &debugColor) {
 }
 
 void GameObject::update(const sf::Time& frameTime) {
+	for (auto& component : m_components) {
+		component->update(frameTime);
+	}
 	if (g_inputController->isMouseOver(&m_boundingBox, m_isInputInDefaultView)) {
 		onMouseOver();
 		// if the inputcontroller has locked actions, skip these methods.
@@ -43,12 +57,15 @@ void GameObject::update(const sf::Time& frameTime) {
 	}
 }
 
-void GameObject::setPosition(const sf::Vector2f &position) {
+void GameObject::setPosition(const sf::Vector2f& position) {
 	m_boundingBox.left = position.x;
 	m_boundingBox.top = position.y;
 
 	if (m_isDrawBoundingBox) {
 		m_debugBox.setPosition(position);
+	}
+	for (auto& component : m_components) {
+		component->setPosition(position);
 	}
 }
 
@@ -67,12 +84,14 @@ void GameObject::setState(GameObjectState state) {
 }
 
 void GameObject::setBoundingBox(const sf::FloatRect &rect) {
-	m_boundingBox = rect;
+	m_boundingBox.width = rect.width;
+	m_boundingBox.height = rect.height;
 
 	if (m_isDrawBoundingBox) {
 		m_debugBox.setSize(getSize());
-		m_debugBox.setPosition(getPosition());
 	}
+
+	setPosition(sf::Vector2f(rect.left, rect.top));
 }
 
 void GameObject::setSize(const sf::Vector2f& size) {
@@ -98,7 +117,9 @@ const sf::FloatRect* GameObject::getBoundingBox() const {
 }
 
 void GameObject::onMouseOver() {
-	// nop
+	for (auto& component : m_components) {
+		component->onParentMouseOver();
+	}
 }
 
 void GameObject::onRightClick() {
@@ -115,6 +136,10 @@ void GameObject::onRightJustPressed() {
 
 void GameObject::onLeftJustPressed() {
 	// nop
+}
+
+void GameObject::addComponent(GameObjectComponent* component) {
+	m_components.push_back(component);
 }
 
 bool GameObject::isViewable() const {

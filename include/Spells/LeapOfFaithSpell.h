@@ -11,7 +11,6 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	void setPosition(const sf::Vector2f& pos) override;
-	void setScreen(Screen* screen) override;
 	void setDisposed() override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
@@ -20,7 +19,6 @@ public:
 private:
 	float m_gravityScale;
 	bool m_isFacingRight;
-	LightObject* m_lightObject = nullptr;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
 	particles::AngledVelocityGenerator* m_velGenerator = nullptr;

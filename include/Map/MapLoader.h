@@ -11,17 +11,17 @@
 
 #include "Map/DynamicTiles/CookingTile.h"
 
-class Map;
+class MapScreen;
 
 // helper class used by the map to load npcs
 class MapLoader {
 public:
 	// loads dynamic tiles out of map data and adds them directly to the screen.
-	void loadDynamicTiles(MapData& data, Screen* screen, Map* map) const;
+	void loadDynamicTiles(MapData& data, MapScreen* screen) const;
 	// loads npcs out of map data and adds them directly to the screen
-	void loadNpcs(MapData& data, Screen* screen, Map* map) const;
+	void loadNpcs(MapData& data, MapScreen* screen) const;
 	// loads lights out of map data and adds them directly to the screen
-	void loadLights(MapData& data, Screen* screen) const;
+	void loadLights(MapData& data, MapScreen* screen) const;
 	// loads triggers out of map data and adds them directly to the screen
-	void loadTriggers(MapData& data, Screen* screen) const;
+	void loadTriggers(MapData& data, MapScreen* screen) const;
 };

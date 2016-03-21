@@ -13,15 +13,10 @@ the following skins are available:
 */
 class FireBallSpell : public Spell {
 public:
-	FireBallSpell();
+	FireBallSpell() {};
 	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
-
-	void setPosition(const sf::Vector2f& pos) override;
-	void setScreen(Screen* screen) override;
-
 	void setDisposed() override;
 
 private:
-	LightObject* m_lightObject;
 	sf::Sound m_sound;
 };

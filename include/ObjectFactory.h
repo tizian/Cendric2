@@ -10,13 +10,14 @@ class Enemy;
 class Spell;
 class LevelDynamicTile;
 class MapDynamicTile;
+class LevelScreen;
+class MapScreen;
 class Level;
-class Map;
 class Screen;
 
 typedef std::function<Enemy*(Level*, Screen*)> EnemyConstructor;
-typedef std::function<LevelDynamicTile*(Level*)> LevelDynamicTileConstructor;
-typedef std::function<MapDynamicTile*(Map*)> MapDynamicTileConstructor;
+typedef std::function<LevelDynamicTile*(LevelScreen*)> LevelDynamicTileConstructor;
+typedef std::function<MapDynamicTile*(MapScreen*)> MapDynamicTileConstructor;
 
 class ObjectFactory {
 public:
@@ -25,10 +26,10 @@ public:
 	Enemy* createEnemy(EnemyID id, Level* level, Screen* screen);
 	void registerEnemy(EnemyID id, EnemyConstructor constructor);
 
-	LevelDynamicTile* createLevelDynamicTile(LevelDynamicTileID id, Level* level);
+	LevelDynamicTile* createLevelDynamicTile(LevelDynamicTileID id, LevelScreen* level);
 	void registerLevelDynamicTile(LevelDynamicTileID id, LevelDynamicTileConstructor constructor);
 
-	MapDynamicTile* createMapDynamicTile(MapDynamicTileID id, Map* map);
+	MapDynamicTile* createMapDynamicTile(MapDynamicTileID id, MapScreen* map);
 	void registerMapDynamicTile(MapDynamicTileID id, MapDynamicTileConstructor constructor);
 
 private:

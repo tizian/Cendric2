@@ -21,9 +21,9 @@ public:
 	virtual void update(const sf::Time& frameTime);
 
 	virtual bool load(const std::string& id) = 0;
-	virtual void loadAfterMainChar(Screen* screen) = 0;
+	virtual void loadAfterMainChar(WorldScreen* screen) = 0;
 	// loads lights. this happens AFTER everything else and is because of our nice RENDERTEXTURE PROBLEM >:(
-	virtual void loadForRenderTexture(Screen* screen) = 0;
+	virtual void loadForRenderTexture(WorldScreen* screen) = 0;
 	// sets the target view to the correct world view with the focus center focus.
 	virtual void setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const = 0;
 	// draws the world. background tilelayers.

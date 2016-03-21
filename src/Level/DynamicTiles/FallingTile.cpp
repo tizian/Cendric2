@@ -5,9 +5,9 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Falling, FallingTile)
 
-FallingTile::FallingTile(Level* level) :
+FallingTile::FallingTile(LevelScreen* levelScreen) :
 	MovableGameObject(),
-	LevelDynamicTile(level) {
+	LevelDynamicTile(levelScreen) {
 }
 
 void FallingTile::init() {
@@ -29,11 +29,6 @@ void FallingTile::loadAnimation(int skinNr) {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
-}
-
-void FallingTile::setScreen(Screen* screen) {
-	LevelDynamicTile::setScreen(screen);
-	m_mainChar = dynamic_cast<WorldScreen*>(screen)->getMainCharacter();
 }
 
 void FallingTile::onHit(LevelMovableGameObject* mob) {

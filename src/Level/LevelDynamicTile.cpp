@@ -1,7 +1,11 @@
 #include "Level/LevelDynamicTile.h"
+#include "Screens/LevelScreen.h"
+#include "Level/LevelMainCharacter.h"
 
-LevelDynamicTile::LevelDynamicTile(Level* level) : AnimatedGameObject() {
-	m_level = level;
+LevelDynamicTile::LevelDynamicTile(LevelScreen* levelScreen) : AnimatedGameObject() {
+	m_level = levelScreen->getWorld();
+	m_screen = levelScreen;
+	m_mainChar = levelScreen->getMainCharacter();
 }
 
 bool LevelDynamicTile::getIsCollidable() const {

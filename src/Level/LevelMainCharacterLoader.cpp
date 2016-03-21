@@ -1,6 +1,7 @@
 #include "Level/LevelMainCharacterLoader.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
+#include "GameObjectComponents/LightComponent.h"
 
 using namespace std;
 
@@ -60,7 +61,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 			equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
 		}
 
-		LevelEquipment* levelEquipment = new LevelEquipment();
+		LevelEquipment* levelEquipment = new LevelEquipment(mainCharacter);
 		levelEquipment->setBoundingBox(equipment.boundingBox);
 		for (auto &ani : equipment.texturePositions) {
 			Animation* animation = new Animation();
@@ -80,14 +81,13 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 		if (item.isEquipmentLightedItem()) {
 			const ItemEquipmentLightBean& lightBean = item.getEquipmentLightBean();
 			LightData lightData(LightData(lightBean.light_offset, lightBean.light_radius, lightBean.brightness));
-			LightObject* light = new LightObject(lightData);
-			levelEquipment->setLightObject(light);
+			levelEquipment->setLightComponent(lightData);
 		}
 
 		// initial values
 		levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 		levelEquipment->playCurrentAnimation(true);
-		levelEquipment->loadEquipment(mainCharacter);
+		levelEquipment->loadEquipment();
 		screen->addObject(levelEquipment);
 	}
 }

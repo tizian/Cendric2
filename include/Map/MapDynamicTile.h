@@ -6,12 +6,13 @@
 #include "Enums/MapDynamicTileID.h"
 
 class Map;
+class MapScreen;
 class MapMainCharacter;
 
 // A dynamic tile in a map
 class MapDynamicTile : public virtual AnimatedGameObject {
 public:
-	MapDynamicTile(Map* map);
+	MapDynamicTile(MapScreen* mapScreen);
 	virtual ~MapDynamicTile() {};
 
 	// loads sprite offset & bounding box. 
@@ -35,7 +36,8 @@ protected:
 	const int BORDER = 1;
 	bool m_isCollidable = false;
 	MapDynamicTileID m_dynamicTileID;
-	Map* m_map;
+	const Map* m_map;
+	MapMainCharacter* m_mainChar;
 
 private:
 	sf::Vector2f m_positionOffset = sf::Vector2f(0.f, 0.f);

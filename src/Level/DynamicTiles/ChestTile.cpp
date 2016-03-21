@@ -1,17 +1,15 @@
 #include "Level/DynamicTiles/ChestTile.h"
 #include "Level/LevelMainCharacter.h"
 #include "Spells/UnlockSpell.h"
+#include "GameObjectComponents/TooltipComponent.h"
 
 using namespace std;
-
-// this tile is special and is not registered
-ChestTile::ChestTile(LevelMainCharacter* mainChar, Level* level) : LevelDynamicTile(level) {
-	m_mainChar = mainChar;
-}
 
 void ChestTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
+
+	addComponent(new TooltipComponent(g_textProvider->getText("Chest"), this, false));
 }
 
 void ChestTile::loadAnimation(int skinNr) {
@@ -100,8 +98,9 @@ void ChestTile::setStrength(int strength) {
 }
 
 void ChestTile::onMouseOver() {
+	LevelDynamicTile::onMouseOver();
 	if (m_state == GameObjectState::Unlocked) {
-		setSpriteColor(COLOR_LOOTABLE, sf::milliseconds(100));
+		setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
 		m_showLootWindow = true;
 	}
 }

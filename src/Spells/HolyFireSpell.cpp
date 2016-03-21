@@ -1,11 +1,11 @@
 #include "Spells/HolyFireSpell.h"
-
-HolyFireSpell::HolyFireSpell() : Spell() {
-}
+#include "GameObjectComponents/LightComponent.h"
 
 void HolyFireSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
-	m_lightObject = new LightObject(LightData(sf::Vector2f(), bean.range));
+
+	LightData lightData(sf::Vector2f(bean.range, bean.range), bean.range);
+	addComponent(new LightComponent(lightData, this));
 	loadParticleSystem();
 }
 
@@ -13,23 +13,12 @@ sf::Vector2f HolyFireSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(-m_data.range, -m_data.range);
 }
 
-void HolyFireSpell::setDisposed() {
-	Spell::setDisposed();
-	m_lightObject->setDisposed();
-}
-
 void HolyFireSpell::execOnHit(LevelMovableGameObject* target) {
 	m_hasDamaged = true;
 }
 
-void HolyFireSpell::setScreen(Screen* screen) {
-	Spell::setScreen(screen);
-	screen->addObject(m_lightObject);
-}
-
 void HolyFireSpell::setPosition(const sf::Vector2f& pos) {
 	Spell::setPosition(pos);
-	if (m_lightObject != nullptr) m_lightObject->setPosition(pos + sf::Vector2f(m_data.range, m_data.range));
 	updateParticleSystemPosition();
 }
 

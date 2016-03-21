@@ -43,6 +43,8 @@ public:
 	Inventory* getInventory();
 	// and for the main character
 	virtual GameObject* getMainCharacter() const = 0;
+	// and for the world
+	virtual const World* getWorld() const = 0;
 	// do everything thats needed before leaving the world screen and entering a new level / world. 
 	// Return wheter this is possible (it's not possible on a game over, for example)
 	virtual bool exitWorld() = 0;

@@ -39,6 +39,7 @@ public:
 	bool exitWorld() override;
 
 	LevelMainCharacter* getMainCharacter() const override;
+	const Level* getWorld() const override;
 
 private:
 	Level m_currentLevel;

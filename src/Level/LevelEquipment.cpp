@@ -1,5 +1,11 @@
 #include "Level/LevelEquipment.h"
 #include "Level/LevelMainCharacter.h"
+#include "GameObjectComponents/LightComponent.h"
+
+LevelEquipment::LevelEquipment(LevelMainCharacter* mainChar) : AnimatedGameObject() { 
+	m_mainChar = mainChar; 
+	m_screen = mainChar->getScreen();
+}
 
 LevelEquipment::~LevelEquipment() {
 	g_resourceManager->deleteResource(m_texturePath);
@@ -18,16 +24,10 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 }
 
 void LevelEquipment::setPosition(const sf::Vector2f& position) {
-	AnimatedGameObject::setPosition(position);
-	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
-	if (m_lightObject != nullptr) {
-		sf::Vector2f lightPosition = mainCharPosition + m_lightObjectOffset;
-		if (!m_mainChar->isFacingRight()) {
-			lightPosition.x -= 2 * m_lightObjectOffset.x;
-		}
-		
-		m_lightObject->setPosition(lightPosition);
+	if (m_lightComponent != nullptr) {
+		m_lightComponent->flipLightOffsetX(!m_isFacingRight);
 	}
+	AnimatedGameObject::setPosition(position);
 }
 
 void LevelEquipment::update(const sf::Time& frameTime) {
@@ -54,9 +54,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
 }
 
-void LevelEquipment::loadEquipment(LevelMainCharacter* mainChar) {
-	m_mainChar = mainChar;
-
+void LevelEquipment::loadEquipment() {
 	sf::Vector2f position;
 	calculatePositionAccordingToMainChar(position);
 	setPosition(position);
@@ -66,25 +64,13 @@ void LevelEquipment::setTexturePath(const std::string& texturePath) {
 	m_texturePath = texturePath;
 }
 
-void LevelEquipment::setLightObject(LightObject* lightObject) {
-	m_lightObject = lightObject;
-	m_lightObjectOffset = m_lightObject->getCenter();
+void LevelEquipment::setLightComponent(const LightData& data) {
+	m_lightComponent = new LightComponent(data, this);
+	addComponent(m_lightComponent);
 }
 
 GameObjectType LevelEquipment::getConfiguredType() const {
 	return GameObjectType::_LevelEquipment;
-}
-
-void LevelEquipment::setDisposed() {
-	AnimatedGameObject::setDisposed();
-	if (m_lightObject != nullptr)
-		m_lightObject->setDisposed();
-}
-
-void LevelEquipment::setScreen(Screen* screen) {
-	AnimatedGameObject::setScreen(screen);
-	if (m_lightObject != nullptr)
-		screen->addObject(m_lightObject);
 }
 
 void LevelEquipment::setCopyingMainCharColor(bool value) {
