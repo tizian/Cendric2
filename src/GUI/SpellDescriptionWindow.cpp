@@ -1,7 +1,7 @@
 #include <iomanip> 
 
 #include "GUI/SpellDescriptionWindow.h"
-#include "SpellCreator.h"
+#include "Spells/SpellCreator.h"
 
 using namespace std;
 

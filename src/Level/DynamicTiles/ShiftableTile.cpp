@@ -1,5 +1,5 @@
 #include "Level/DynamicTiles/ShiftableTile.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Spells/WindGustSpell.h"
 #include "Registrar.h"
 

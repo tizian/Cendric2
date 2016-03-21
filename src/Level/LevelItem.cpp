@@ -27,7 +27,7 @@ void LevelItem::load(LevelMainCharacter* mainChar, const Item& item, const sf::V
 
 	if (item.isLevelitemLightedItem()) {
 		const LevelitemLightBean& lightBean = item.getLevelitemLightBean();
-		LightData lightData(LightData(lightBean.light_offset, lightBean.light_radius, lightBean.brightness));
+		LightData lightData(lightBean.light_offset, lightBean.light_radius, lightBean.brightness);
 		LightObject* light = new LightObject(lightData);
 		setLightObject(light);
 	}

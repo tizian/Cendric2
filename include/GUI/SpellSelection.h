@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 #include "GUI/SpellSlot.h"
 
 // the spell selection in a level

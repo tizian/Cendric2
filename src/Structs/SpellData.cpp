@@ -1,5 +1,5 @@
 #include "Structs/SpellData.h"
-#include "SpellCreator.h"
+#include "Spells/SpellCreator.h"
 #include "SpellCreators/FireBallSpellCreator.h"
 #include "SpellCreators/IceBallSpellCreator.h"
 #include "SpellCreators/DivineShieldSpellCreator.h"

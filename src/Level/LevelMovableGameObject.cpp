@@ -1,5 +1,5 @@
 #include "Level/LevelMovableGameObject.h"
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 #include "Level/Level.h"
 #include "Level/MOBBehavior/MovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehavior.h"

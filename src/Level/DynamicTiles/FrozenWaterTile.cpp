@@ -1,5 +1,5 @@
 #include "Level/DynamicTiles/FrozenWaterTile.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 
 #include "Level/DynamicTiles/FluidTile.h"
 

@@ -1,7 +1,7 @@
-#include "Dialogue.h"
+#include "Map/Dialogue.h"
 #include "Screens/WorldScreen.h"
 #include "GUI/DialogueWindow.h"
-#include "DialogueLoader.h"
+#include "Map/DialogueLoader.h"
 #include "Map/NPC.h"
 
 void Dialogue::reload(const std::string& id, WorldScreen* screen, DialogueWindow* window) {

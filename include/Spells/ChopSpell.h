@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 
 class ChopSpell : public Spell {
 public:

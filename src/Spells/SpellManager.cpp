@@ -1,4 +1,4 @@
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 #include "GUI/SpellSelection.h"
 
 using namespace std;

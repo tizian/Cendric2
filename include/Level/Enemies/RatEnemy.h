@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/Enemy.h"
 #include "Level/Level.h"
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 #include "Screen.h"
 
 // A nasty rat in a level

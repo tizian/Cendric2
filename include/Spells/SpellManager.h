@@ -3,10 +3,10 @@
 #include <map>
 
 #include "global.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "InputController.h"
 #include "Structs/SpellModifier.h"
-#include "SpellCreator.h"
+#include "Spells/SpellCreator.h"
 
 class SpellSelection;
 

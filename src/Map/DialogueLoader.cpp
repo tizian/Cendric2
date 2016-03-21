@@ -1,4 +1,4 @@
-#include "DialogueLoader.h"
+#include "Map/DialogueLoader.h"
 #include "CharacterCore.h"
 
 using namespace std;

@@ -1,6 +1,6 @@
 #include "Level/MOBBehavior/JumpingGhost.h"
 #include "Level/LevelMovableGameObject.h"
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 #include "Level/Level.h"
 
 JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, Level* level, Screen* screen) : MovableGameObject() {

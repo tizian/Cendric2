@@ -1,6 +1,6 @@
 #include "Level/DynamicTiles/ModifierTile.h"
 #include "Level/LevelMainCharacter.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 

@@ -1,4 +1,4 @@
-#include "MerchantInterface.h"
+#include "Map/MerchantInterface.h"
 
 MerchantInterface::MerchantInterface(WorldScreen* screen, std::string merchantID) {
 	m_screen = screen;

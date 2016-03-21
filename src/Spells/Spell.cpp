@@ -1,4 +1,4 @@
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Level/LevelMovableGameObject.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/Enemy.h"

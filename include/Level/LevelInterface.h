@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 
 #include "GUI/WorldInterface.h"
 #include "GUI/HealthBar.h"

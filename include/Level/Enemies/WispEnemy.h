@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Level/Level.h"
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 #include "Screen.h"
 
 // A flying mysterious wisp

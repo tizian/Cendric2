@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Particles/ParticleSystem.h"
 
 class WindGustSpell : public Spell {

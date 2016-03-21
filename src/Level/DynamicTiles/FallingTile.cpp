@@ -1,5 +1,5 @@
 #include "Level/DynamicTiles/FallingTile.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Registrar.h"
 #include "Screens/WorldScreen.h"
 

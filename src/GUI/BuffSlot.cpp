@@ -1,6 +1,6 @@
 #include "GUI/BuffSlot.h"
 #include "GUI/GUIConstants.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Enums/EnumNames.h"
 #include "ScreenOverlay.h"
 

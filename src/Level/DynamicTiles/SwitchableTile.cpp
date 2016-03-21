@@ -1,5 +1,5 @@
 #include "Level/DynamicTiles/SwitchableTile.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 
 // this tile is special and is not registered
 void SwitchableTile::init() {

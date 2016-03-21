@@ -6,8 +6,8 @@
 #include "GUI/GUIConstants.h"
 #include "Structs/NPCData.h"
 #include "Screens/WorldScreen.h"
-#include "MerchantInterface.h"
-#include "Dialogue.h"
+#include "Map/MerchantInterface.h"
+#include "Map/Dialogue.h"
 
 class CharacterCore;
 

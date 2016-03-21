@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Dialogue.h"
+#include "Map/Dialogue.h"
 #include "Enums/QuestState.h"
 
 #include "LuaBridge/LuaBridge.h"

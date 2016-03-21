@@ -3,7 +3,7 @@
 #include <map>
 
 #include "global.h"
-#include "SpellCreator.h"
+#include "Spells/SpellCreator.h"
 
 // a spell creator that summons a mighty gargoyle
 class SummonGargoyleSpellCreator : public SpellCreator {

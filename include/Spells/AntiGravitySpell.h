@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 
 // not a spell projectile but it controls its mob. it is invisible for now (no texture), but that could change.
 class AntiGravitySpell : public Spell {

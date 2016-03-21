@@ -2,7 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/LevelInterface.h"
 #include "Map/MapInterface.h"
-#include "MerchantInterface.h"
+#include "Map/MerchantInterface.h"
 #include "GUI/GUIConstants.h"
 #include "GUI/SlotClone.h"
 

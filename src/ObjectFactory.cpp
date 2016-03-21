@@ -1,7 +1,7 @@
 #include "ObjectFactory.h"
 
 #include "Level/Enemy.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Level/LevelDynamicTile.h"
 #include "Map/MapDynamicTile.h"
 

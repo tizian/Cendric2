@@ -1,5 +1,5 @@
 #include "Level/DynamicTiles/MovingTile.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)

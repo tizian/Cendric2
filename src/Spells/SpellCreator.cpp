@@ -1,4 +1,4 @@
-#include "SpellCreator.h"
+#include "Spells/SpellCreator.h"
 #include "Screens/LevelScreen.h"
 
 SpellCreator::SpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) {

@@ -3,7 +3,7 @@
 #include <map>
 
 #include "global.h"
-#include "SpellCreator.h"
+#include "Spells/SpellCreator.h"
 
 #include "Spells/AureolaSpell.h"
 

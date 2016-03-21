@@ -1,5 +1,5 @@
 #include "Level/DynamicTiles/SpikesTopTile.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::SpikesTop, SpikesTopTile)

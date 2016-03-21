@@ -1,5 +1,5 @@
 #include "Level/DynamicTiles/LeverTile.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 #include "Level/LevelMainCharacter.h"
 
 // this tile is special and is not registered

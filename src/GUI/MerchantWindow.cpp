@@ -1,5 +1,5 @@
 #include "GUI/MerchantWindow.h"
-#include "MerchantInterface.h"
+#include "Map/MerchantInterface.h"
 
 MerchantWindow::MerchantWindow(MerchantInterface* _interface) {
 	m_interface = _interface;

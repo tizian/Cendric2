@@ -4,7 +4,7 @@
 #include "LevelMovableGameObject.h"
 #include "Level.h"
 #include "InputController.h"
-#include "SpellManager.h"
+#include "Spells/SpellManager.h"
 #include "Screen.h"
 #include "CharacterCore.h"
 

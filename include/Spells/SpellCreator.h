@@ -3,7 +3,7 @@
 #include <map>
 
 #include "global.h"
-#include "Spell.h"
+#include "Spells/Spell.h"
 
 #include "Structs/SpellModifier.h"
 
