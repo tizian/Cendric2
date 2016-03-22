@@ -41,7 +41,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Done','Done',
 INSERT INTO text (text_id, english, german, swiss_german) values ('Duration','Duration','Dauer','Duur');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Elemental','Elemental','Elementar','Elementar');
 INSERT INTO text (text_id, english, german, swiss_german) values ('English','English','Englisch','Englisch');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Equipment','Equipment','Ausrüstung','Usrüstig');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Equipment','Equipment','Ausrüstung','Usrüschtig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Exit','Exit','Beenden','Beende');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Failed','Failed','Fehlgeschlagen','Gfailt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FearLevel','Fear Strength','Furchtstärke','Angschtstärchi');
