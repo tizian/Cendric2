@@ -58,8 +58,8 @@ void WaypointTile::onRightClick() {
 	}
 	const sf::FloatRect& bb = *m_mainChar->getBoundingBox();
 	m_mainChar->setPosition(sf::Vector2f(
-		getPosition().x + TILE_SIZE_F / 2.f - bb.width / 2.f,
-		getPosition().y - bb.height + TILE_SIZE_F / 2.f
+		getPosition().x + TILE_SIZE_F * 0.5f - bb.width * 0.5f,
+		getPosition().y - bb.height + TILE_SIZE_F * 0.5f
 		));
 }
 

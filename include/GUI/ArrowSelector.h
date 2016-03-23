@@ -7,34 +7,7 @@
 
 #include "GUI/Button.h"
 #include "GUI/GUIConstants.h"
-
-class ArrowSelectorArrow : public GameObject {
-public:
-	ArrowSelectorArrow(bool pointRight);
-
-	void onLeftClick() override;
-	void onMouseOver() override;
-	void render(sf::RenderTarget& renderTarget) override;
-	void update(const sf::Time& frameTime) override;
-	void setPosition(const sf::Vector2f& pos) override;
-	void setEnabled(bool value);
-
-	bool isClicked() const;
-	
-	GameObjectType getConfiguredType() const override;
-
-private:
-	bool m_isMouseOver = false;
-	bool m_wasMouseOver = false;
-	bool m_isClicked = false;
-	bool m_isEnabled = false;
-
-	sf::Sprite m_arrow;
-
-	static const sf::Color MOUSEOVER_COLOR;
-	static const sf::Color MAIN_COLOR;
-	static const sf::Color DISABLED_COLOR;
-};
+#include "GUI/ArrowButton.h"
 
 // An arrow selector gui element, where different elements can be chosen (one is always active)
 class ArrowSelector : public GameObject {
@@ -72,8 +45,8 @@ protected:
 
 	std::vector<std::string> m_options;
 
-	ArrowSelectorArrow m_rightArrow;
-	ArrowSelectorArrow m_leftArrow;
+	ArrowButton m_rightArrow;
+	ArrowButton m_leftArrow;
 	BitmapText m_label;
 
 	Button m_button;

@@ -63,12 +63,10 @@ void ArrowSelector::addOption(const std::string& optionKey) {
 	addOptionRaw(g_textProvider->getText(optionKey));
 }
 
-void ArrowSelector::addOptionRaw(const std::string& option) {
+void ArrowSelector::addOptionRaw(const std::string& rawOption) {
+	std::string option = BitmapText::transform(rawOption);
 	m_options.push_back(option);
-	BitmapText dummy;
-	dummy.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	dummy.setString(option);
-	float usedWidth = dummy.getLocalBounds().width + 4 * GUIConstants::BUTTON_MARGIN;
+	float usedWidth = GUIConstants::CHARACTER_SIZE_M * static_cast<int>(option.length()) + 4 * GUIConstants::BUTTON_MARGIN;
 	if (usedWidth > m_button.getBoundingBox()->width) {
 		m_button.setSize(sf::Vector2f(usedWidth, m_button.getBoundingBox()->height));
 		recalculatePosition();
@@ -114,63 +112,5 @@ bool ArrowSelector::isVisible() const {
 }
 
 GameObjectType ArrowSelector::getConfiguredType() const {
-	return GameObjectType::_Button;
-}
-
-// ARROW SELECTOR ARROW
-
-const sf::Color ArrowSelectorArrow::MOUSEOVER_COLOR = COLOR_PURPLE;
-const sf::Color ArrowSelectorArrow::MAIN_COLOR = COLOR_WHITE;
-const sf::Color ArrowSelectorArrow::DISABLED_COLOR = COLOR_DARK_GREY;
-
-ArrowSelectorArrow::ArrowSelectorArrow(bool pointRight) : GameObject() {
-	m_arrow.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));
-
-	// center origin
-	m_arrow.setOrigin(sf::Vector2f(m_arrow.getLocalBounds().width / 2.f, m_arrow.getLocalBounds().height / 2.f));
-	m_arrow.rotate(pointRight ? 90.f : -90.f);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, m_arrow.getLocalBounds().height, m_arrow.getLocalBounds().width));
-}
-
-void ArrowSelectorArrow::onLeftClick() {
-	if (!m_isEnabled) return;
-	m_isClicked = true;
-	g_inputController->lockAction();
-}
-
-bool ArrowSelectorArrow::isClicked() const {
-	return m_isClicked;
-}
-
-void ArrowSelectorArrow::onMouseOver() {
-	if (!m_isEnabled) return;
-	m_isMouseOver = true;
-}
-
-void ArrowSelectorArrow::setEnabled(bool value) {
-	m_isEnabled = value;
-	m_arrow.setColor(m_isEnabled ? MAIN_COLOR : DISABLED_COLOR);
-}
-
-void ArrowSelectorArrow::render(sf::RenderTarget& renderTarget) {
-	renderTarget.draw(m_arrow);
-}
-
-void ArrowSelectorArrow::update(const sf::Time& frameTime) {
-	m_isClicked = false;
-	if (m_isMouseOver != m_wasMouseOver) {
-		m_arrow.setColor(m_isMouseOver ? MOUSEOVER_COLOR : m_isEnabled ? MAIN_COLOR : DISABLED_COLOR);
-	}
-	m_wasMouseOver = m_isMouseOver;
-	m_isMouseOver = false;
-	GameObject::update(frameTime);
-}
-
-void ArrowSelectorArrow::setPosition(const sf::Vector2f& pos) {
-	GameObject::setPosition(pos);
-	m_arrow.setPosition(pos + 0.5f * getSize());
-}
-
-GameObjectType ArrowSelectorArrow::getConfiguredType() const {
 	return GameObjectType::_Button;
 }

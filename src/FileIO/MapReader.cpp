@@ -170,6 +170,9 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableObjectLayer(objectgroup, data)) return false;
 		}
+		else if (name.find("book") != std::string::npos) {
+			if (!readBooks(objectgroup, data)) return false;
+		}
 		else if (name.find("trigger") != std::string::npos) {
 			if (!readTriggers(objectgroup, data)) return false;
 		}
@@ -179,6 +182,91 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 		}
 
 		objectgroup = objectgroup->NextSiblingElement("objectgroup");
+	}
+	return true;
+}
+
+bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+
+		int x;
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int gid;
+		result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int offset = static_cast<int>(MapDynamicTileID::Book) + m_firstGidDynamicTiles - 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+
+		BookData book;
+
+		book.skinNr = skinNr;
+		book.position.x = static_cast<float>(x);
+		book.position.y = static_cast<float>(y) - TILE_SIZE_F;
+
+		// npc properties
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+			while (_property != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = _property->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string attrText = textAttr;
+
+				if (attrText.compare("title") == 0) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					book.title = textAttr;
+				}
+				else if (attrText.find("page") != string::npos) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					
+					std::string tex = textAttr;
+
+					BookPage page;
+
+					size_t pos = 0;
+					if ((pos = tex.find(",")) == std::string::npos) {
+						// this page has only content, no title.
+						page.content = tex;
+					}
+					else {
+						// this page has content and a title
+						page.title = tex.substr(0, pos);
+						tex.erase(0, pos + 1);
+						page.content = tex;
+					}
+					
+					book.pages.push_back(page);
+				}
+				
+				_property = _property->NextSiblingElement("property");
+			}
+		}
+
+		data.books.push_back(book);
+		object = object->NextSiblingElement("object");
 	}
 	return true;
 }

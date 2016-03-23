@@ -25,6 +25,13 @@ void WorldInterface::update(const sf::Time& frameTime) {
 	updateCharacterInfo();
 }
 
+void WorldInterface::hideAll() {
+	m_characterInfo->hide();
+	m_spellbook->hide();
+	m_questLog->hide();
+	m_inventory->hide();
+}
+
 void WorldInterface::reloadInventory(const std::string& changedItemID) {
 	m_inventory->notifyChange(changedItemID);
 }

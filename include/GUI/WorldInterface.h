@@ -27,6 +27,7 @@ public:
 
 	virtual void render(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);
+	virtual void hideAll();
 
 	CharacterCore* getCore() const;
 	Screen* getScreen() const;

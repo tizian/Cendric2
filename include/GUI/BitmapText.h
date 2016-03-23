@@ -45,6 +45,9 @@ public:
 	sf::FloatRect getLocalBounds() const;
 	sf::FloatRect getBounds() const;
 
+	// transforms the special characters of a string to characters that can be used in the bitmap text
+	static std::string transform(const std::string& in);
+
 private:
 	void init();	// Set vertexArray data
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

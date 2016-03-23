@@ -20,6 +20,8 @@ public:
 	void loadDynamicTiles(MapData& data, MapScreen* screen) const;
 	// loads npcs out of map data and adds them directly to the screen
 	void loadNpcs(MapData& data, MapScreen* screen) const;
+	// loads books out of map data and adds them directly to the screen
+	void loadBooks(MapData& data, MapScreen* screen) const;
 	// loads lights out of map data and adds them directly to the screen
 	void loadLights(MapData& data, MapScreen* screen) const;
 	// loads triggers out of map data and adds them directly to the screen

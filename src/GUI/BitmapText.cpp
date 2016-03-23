@@ -9,7 +9,7 @@ const char FIRST_CHAR = ' ';
 const int NUM_GLYPHS_U = 16;
 const int NUM_GLYPHS_V = 14;
 
-std::string transform(const std::string& str) {
+std::string BitmapText::transform(const std::string& str) {
 	std::string out;
 	for (size_t i = 0; i < str.length(); ++i) {
 		unsigned char c = str.at(i);

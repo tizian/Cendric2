@@ -88,6 +88,8 @@ extern const sf::Color COLOR_DARK_GREY;
 extern const sf::Color COLOR_PURPLE;
 extern const sf::Color COLOR_DARK_PURPLE;
 extern const sf::Color COLOR_LIGHT_PURPLE;
+extern const sf::Color COLOR_LIGHT_BROWN;
+extern const sf::Color COLOR_DARK_BROWN;
 
 extern const sf::Color COLOR_ELEMENTAL;
 extern const sf::Color COLOR_TWILIGHT;

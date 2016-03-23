@@ -13,7 +13,8 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScree
 void MapScreen::execUpdate(const sf::Time& frameTime) {
 	handleCookingWindow(frameTime);
 	handleDialogueWindow(frameTime);
-	if (m_dialogueWindow != nullptr || m_cookingWindow != nullptr) return;
+	handleBookWindow(frameTime);
+	if (isOverlayActive()) return;
 
 	WorldScreen::execUpdate(frameTime);
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
@@ -91,8 +92,7 @@ void MapScreen::notifyConditionAdded(const std::string& conditionType, const std
 void MapScreen::execOnExit(const Screen* nextScreen) {
 	WorldScreen::execOnExit(nextScreen);
 	m_currentMap.dispose();
-	delete m_dialogueWindow;
-	delete m_cookingWindow;
+	clearOverlays();
 }
 
 const Map* MapScreen::getWorld() const {
@@ -108,19 +108,37 @@ bool MapScreen::exitWorld() {
 	return true;
 }
 
-void MapScreen::setDialogue(NPC* npc) {
-	delete m_dialogueWindow;
+void MapScreen::clearOverlays() {
 	delete m_cookingWindow;
+	delete m_dialogueWindow;
+	delete m_bookWindow;
 	m_cookingWindow = nullptr;
+	m_dialogueWindow = nullptr;
+	m_bookWindow = nullptr;
+}
+
+bool MapScreen::isOverlayActive() {
+	return (m_cookingWindow != nullptr ||
+		m_dialogueWindow != nullptr ||
+		m_bookWindow != nullptr);
+}
+
+void MapScreen::setDialogue(NPC* npc) {
+	clearOverlays();
 
 	m_dialogueWindow = new DialogueWindow();
 	m_dialogueWindow->load(npc, this);
 }
 
+void MapScreen::setBook(const BookData* bookData) {
+	clearOverlays();
+	m_interface->hideAll();
+
+	m_bookWindow = new BookWindow(*bookData, this);
+}
+
 void MapScreen::setCooking() {
-	delete m_dialogueWindow;
-	delete m_cookingWindow;
-	m_dialogueWindow = nullptr;
+	clearOverlays();
 
 	m_cookingWindow = new CookingWindow(this);
 }
@@ -175,7 +193,7 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
-	if (m_dialogueWindow == nullptr && m_cookingWindow == nullptr) {
+	if (!isOverlayActive()) {
 		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
 	}
 
@@ -184,6 +202,9 @@ void MapScreen::render(sf::RenderTarget &renderTarget) {
 	}
 	if (m_cookingWindow != nullptr) {
 		m_cookingWindow->render(renderTarget);
+	}
+	if (m_bookWindow != nullptr) {
+		m_bookWindow->render(renderTarget);
 	}
 
 	renderTarget.setView(adjustedView);
@@ -205,6 +226,17 @@ void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
 	if (!m_dialogueWindow->updateDialogue(frameTime)) {
 		delete m_dialogueWindow;
 		m_dialogueWindow = nullptr;
+	}
+	updateProgressLog(frameTime);
+	updateTooltipText(frameTime);
+	updateObjects(GameObjectType::_Light, frameTime);
+}
+
+void MapScreen::handleBookWindow(const sf::Time& frameTime) {
+	if (m_bookWindow == nullptr) return;
+	if (!m_bookWindow->updateWindow(frameTime)) {
+		delete m_bookWindow;
+		m_bookWindow = nullptr;
 	}
 	updateProgressLog(frameTime);
 	updateTooltipText(frameTime);

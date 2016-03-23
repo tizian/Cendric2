@@ -5,5 +5,6 @@ enum class MapDynamicTileID {
 	VOID,
 	Cooking,
 	Waypoint,
+	Book,
 	MAX
 };

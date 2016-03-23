@@ -39,6 +39,7 @@ void Map::loadForRenderTexture(WorldScreen* screen) {
 	MapLoader loader;
 	loader.loadLights(m_mapData, dynamic_cast<MapScreen*>(screen));
 	loader.loadDynamicTiles(m_mapData, dynamic_cast<MapScreen*>(screen));
+	loader.loadBooks(m_mapData, dynamic_cast<MapScreen*>(screen));
 }
 
 void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) const {

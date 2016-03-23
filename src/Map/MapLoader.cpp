@@ -6,6 +6,7 @@
 #include "Screens/MapScreen.h"
 #include "ObjectFactory.h"
 #include "Map/DynamicTiles/WaypointTile.h"
+#include "Map/DynamicTiles/BookTile.h"
 #include "Trigger.h"
 
 void MapLoader::loadNpcs(MapData& data, MapScreen* screen) const {
@@ -15,6 +16,20 @@ void MapLoader::loadNpcs(MapData& data, MapScreen* screen) const {
 		mapNPC->setScreen(screen);
 		mapNPC->load(it);
 		screen->addObject(mapNPC);
+	}
+}
+
+void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
+	// calculate books
+	for (auto& it : data.books) {
+		BookTile* book = new BookTile(it, screen);
+		book->init();
+		book->setPosition(it.position);
+		book->setDebugBoundingBox(COLOR_NEUTRAL);
+		book->loadAnimation(it.skinNr);
+		book->setDynamicTileID(MapDynamicTileID::Book);
+
+		screen->addObject(book);
 	}
 }
 

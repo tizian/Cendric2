@@ -1,6 +1,7 @@
 #include "TextProvider.h"
 #include "ResourceManager.h"
 #include "DatabaseManager.h"
+#include "GUI/BitmapText.h"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 	}
 
 	size_t maxLineChars = static_cast<size_t>(maxWidth / characterSize);
-	std::string uncroppedText = string;
+	std::string uncroppedText = BitmapText::transform(string);
 	std::string text = "";
 	while (static_cast<int>(uncroppedText.size()) * characterSize > maxWidth) {
 		// check for forced newlines

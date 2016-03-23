@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="127">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="128">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="name" value="ElderHome"/>
@@ -277,6 +277,15 @@
    <properties>
     <property name="map entry" value="res/map/meadows/meadows.tmx,2020,1830"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="book">
+  <object id="127" gid="399" x="451" y="363" width="50" height="50">
+   <properties>
+    <property name="page1" value="TitleElemental1,ContentElemental1"/>
+    <property name="page2" value="ContentElemental2"/>
+    <property name="title" value="BookTitleElemental"/>
    </properties>
   </object>
  </objectgroup>
