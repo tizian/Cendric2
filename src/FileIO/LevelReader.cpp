@@ -28,7 +28,8 @@ void LevelReader::logError(const std::string& error) const {
 	g_logger->logError("LevelReader", "Error in level data : " + error);
 }
 
-bool LevelReader::readLevel(const std::string& fileName, LevelData& data) {
+bool LevelReader::readLevel(const std::string& fileName, LevelData& data, const CharacterCore* core) {
+	m_core = core;
 	tinyxml2::XMLDocument xmlDoc;
 	tinyxml2::XMLError result = xmlDoc.LoadFile(getPath(fileName).c_str());
 	XMLCheckResult(result);
@@ -390,6 +391,10 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 
 	const char* textAttr;
 	while (objectgroup != nullptr) {
+		if (!layerConditionsFulfilled(objectgroup)) {
+			objectgroup = objectgroup->NextSiblingElement("objectgroup");
+			continue;
+		}
 		textAttr = nullptr;
 		textAttr = objectgroup->Attribute("name");
 		if (textAttr == nullptr) {
@@ -433,27 +438,37 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 	size_t pos = 0;
 
 	int id;
+	size_t index = 0;
 	std::string levelItem;
 	while ((pos = layerData.find(",")) != std::string::npos) {
 		id = std::stoi(layerData.substr(0, pos));
-		id = (id == 0) ? -1 : id - m_firstGidItems;
 		layerData.erase(0, pos + 1);
+		if (id == 0) {
+			index++;
+			continue;
+		}
+
+		id = id - m_firstGidItems;
+		
 		if (m_levelItemMap.find(id) == m_levelItemMap.end()) {
 			logError("Level item ID not recognized: " + std::to_string(id));
 			return false;
 		}
 		levelItem = m_levelItemMap.at(id);
-		data.levelItems.push_back(levelItem);
+		data.levelItems.at(index) = levelItem;
+		index++;
 	}
-	id = std::stoi(layerData);
-	id = (id == 0) ? -1 : id - m_firstGidItems;
-	if (m_levelItemMap.find(id) == m_levelItemMap.end()) {
-		logError("Level item ID not recognized: " + std::to_string(id));
-		return false;
-	}
-	levelItem = m_levelItemMap.at(id);
-	data.levelItems.push_back(levelItem);
 
+	id = std::stoi(layerData);
+	if (id > 0) {
+		id = id - m_firstGidItems;
+		if (m_levelItemMap.find(id) == m_levelItemMap.end()) {
+			logError("Level item ID not recognized: " + std::to_string(id));
+			return false;
+		}
+		levelItem = m_levelItemMap.at(id);
+		data.levelItems.at(index) = levelItem;
+	}
 	return true;
 }
 
@@ -544,10 +559,20 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 }
 
 bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
+	// pre-load level item layer
+	data.levelItems.clear();
+	for (int i = 0; i < data.mapSize.x * data.mapSize.y; ++i) {
+		data.levelItems.push_back("");
+	}
+
 	tinyxml2::XMLElement* layer = map->FirstChildElement("layer");
 
 	const char* textAttr;
 	while (layer != nullptr) {
+		if (!layerConditionsFulfilled(layer)) {
+			layer = layer->NextSiblingElement("layer");
+			continue;
+		}
 		textAttr = nullptr;
 		textAttr = layer->Attribute("name");
 		if (textAttr == nullptr) {

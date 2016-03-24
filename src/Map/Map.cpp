@@ -8,10 +8,11 @@ Map::Map() {
 Map::~Map() {
 }
 
-bool Map::load(const std::string& id) {
+bool Map::load(const std::string& id, WorldScreen* screen) {
+	m_screen = screen;
 	MapReader reader;
 	m_mapData.id = id;
-	if (!reader.readMap(id.c_str(), m_mapData)) {
+	if (!reader.readMap(id.c_str(), m_mapData, m_screen->getCharacterCore())) {
 		return false;
 	}
 
@@ -28,18 +29,17 @@ void Map::dispose() {
 	g_resourceManager->deleteMapResources();
 }
 
-void Map::loadAfterMainChar(WorldScreen* screen) {
+void Map::loadAfterMainChar() {
 	MapLoader loader;
-	loader.loadNpcs(m_mapData, dynamic_cast<MapScreen*>(screen));
-	loader.loadTriggers(m_mapData, dynamic_cast<MapScreen*>(screen));
-	m_screen = screen;
+	loader.loadNpcs(m_mapData, dynamic_cast<MapScreen*>(m_screen));
+	loader.loadTriggers(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 }
 
-void Map::loadForRenderTexture(WorldScreen* screen) {
+void Map::loadForRenderTexture() {
 	MapLoader loader;
-	loader.loadLights(m_mapData, dynamic_cast<MapScreen*>(screen));
-	loader.loadDynamicTiles(m_mapData, dynamic_cast<MapScreen*>(screen));
-	loader.loadBooks(m_mapData, dynamic_cast<MapScreen*>(screen));
+	loader.loadLights(m_mapData, dynamic_cast<MapScreen*>(m_screen));
+	loader.loadDynamicTiles(m_mapData, dynamic_cast<MapScreen*>(m_screen));
+	loader.loadBooks(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 }
 
 void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) const {

@@ -1,4 +1,5 @@
 #include "FileIO/WorldReader.h"
+#include "CharacterCore.h"
 
 #ifndef XMLCheckResult
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
@@ -309,14 +310,19 @@ bool WorldReader::readCollidableLayer(const std::string& layer, WorldData& data)
 	std::string layerData = layer;
 
 	size_t pos = 0;
-	std::vector<bool> collidableLayer;
-	while ((pos = layerData.find(",")) != std::string::npos) {
-		collidableLayer.push_back(std::stoi(layerData.substr(0, pos)) != 0);
+	size_t index = 0;
+	size_t maxindex = data.collidableTiles.size() - 1;
+	while ((pos = layerData.find(",")) != std::string::npos && maxindex >= index) {
+		if (std::stoi(layerData.substr(0, pos)) != 0) {
+			data.collidableTiles.at(index) = true;
+		}
 		layerData.erase(0, pos + 1);
+		index++;
 	}
-	collidableLayer.push_back(std::stoi(layerData) != 0);
+	if (std::stoi(layerData) != 0 && maxindex >= index) {
+		data.collidableTiles.at(index) = true;
+	}
 
-	data.collidableTiles = collidableLayer;
 	return true;
 }
 
@@ -477,6 +483,12 @@ bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) 
 	result = map->QueryIntAttribute("height", &data.mapSize.y);
 	XMLCheckResult(result);
 
+	// pre-load collidable layer
+	data.collidableTiles.clear();
+	for (int i = 0; i < data.mapSize.x * data.mapSize.y; ++i) {
+		data.collidableTiles.push_back(false);
+	}
+
 	// read tile size
 	sf::Vector2i tileSize;
 	result = map->QueryIntAttribute("tilewidth", &tileSize.x);
@@ -527,6 +539,77 @@ bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) 
 		_property = _property->NextSiblingElement("property");
 	}
 
+	return true;
+}
+
+bool WorldReader::layerConditionsFulfilled(tinyxml2::XMLElement* layer) const {
+	tinyxml2::XMLElement* properties = layer->FirstChildElement("properties");
+	if (properties == nullptr) {
+		return true;
+	}
+
+	tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+
+	while (_property != nullptr) {
+		const char* textAttr = nullptr;
+		textAttr = _property->Attribute("name");
+		if (textAttr == nullptr) {
+			logError("XML file could not be read, no property->name attribute found.");
+			continue;
+		}
+
+		std::string name = textAttr;
+		bool isNotCondition = false;
+		if (name.compare("not conditions") == 0) {
+			isNotCondition = true;
+		}
+		else if (name.compare("conditions") != 0) {
+			continue;
+		}
+
+		textAttr = _property->Attribute("value");
+		if (textAttr == nullptr) {
+			g_logger->logWarning("WorldReader", "property 'conditions' or 'not conditions' on layer properties has no content.");
+			continue;
+		}
+
+		std::string conditions = textAttr;
+
+		size_t pos = 0;
+
+		while (!conditions.empty()) {
+			if ((pos = conditions.find(",")) == std::string::npos) {
+				logError("Layer conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
+				continue;
+			}
+
+			std::string conditionType = conditions.substr(0, pos);
+			conditions.erase(0, pos + 1);
+			std::string conditionName;
+
+			if ((pos = conditions.find(",")) != std::string::npos) {
+				conditionName = conditions.substr(0, pos);
+				conditions.erase(0, pos + 1);
+			}
+			else {
+				conditionName = conditions;
+				conditions.clear();
+			}
+
+			if (isNotCondition) {
+				if (m_core->isConditionFulfilled(conditionType, conditionName)) {
+					return false;
+				}
+			}
+			else {
+				if (!m_core->isConditionFulfilled(conditionType, conditionName)) {
+					return false;
+				}
+			}
+		}
+
+		_property = _property->NextSiblingElement("property");
+	}
 	return true;
 }
 

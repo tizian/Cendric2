@@ -32,16 +32,16 @@ void Level::dispose() {
 	g_resourceManager->deleteLevelResources();
 }
 
-void Level::loadAfterMainChar(WorldScreen* screen) {
+void Level::loadAfterMainChar() {
 	LevelLoader loader;
-	m_screen = screen;
-	loader.loadAfterMainChar(m_levelData, dynamic_cast<LevelScreen*>(screen), this);
+	loader.loadAfterMainChar(m_levelData, dynamic_cast<LevelScreen*>(m_screen), this);
 }
 
-bool Level::load(const std::string& id) {
+bool Level::load(const std::string& id, WorldScreen* screen) {
+	m_screen = screen;
 	LevelReader reader;
 	m_levelData.id = id;
-	if (!reader.readLevel(id, m_levelData)) {
+	if (!reader.readLevel(id, m_levelData, m_screen->getCharacterCore())) {
 		return false;
 	}
 
@@ -54,12 +54,12 @@ bool Level::load(const std::string& id) {
 	return true;
 }
 
-void Level::loadForRenderTexture(WorldScreen* screen) {
+void Level::loadForRenderTexture() {
 	LevelLoader loader;
-	loader.loadDynamicTiles(m_levelData, dynamic_cast<LevelScreen*>(screen));
-	loader.loadLights(m_levelData, dynamic_cast<LevelScreen*>(screen));
-	m_dynamicTiles = screen->getObjects(GameObjectType::_DynamicTile);
-	m_movableTiles = screen->getObjects(GameObjectType::_MovableTile);
+	loader.loadDynamicTiles(m_levelData, dynamic_cast<LevelScreen*>(m_screen));
+	loader.loadLights(m_levelData, dynamic_cast<LevelScreen*>(m_screen));
+	m_dynamicTiles = m_screen->getObjects(GameObjectType::_DynamicTile);
+	m_movableTiles = m_screen->getObjects(GameObjectType::_MovableTile);
 }
 
 void Level::setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const {

@@ -152,6 +152,10 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 
 	const char* textAttr;
 	while (objectgroup != nullptr) {
+		if (!layerConditionsFulfilled(objectgroup)) {
+			objectgroup = objectgroup->NextSiblingElement("objectgroup");
+			continue;
+		}
 		textAttr = nullptr;
 		textAttr = objectgroup->Attribute("name");
 		if (textAttr == nullptr) {
@@ -417,6 +421,10 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 
 	const char* textAttr;
 	while (layer != nullptr) {
+		if (!layerConditionsFulfilled(layer)) {
+			layer = layer->NextSiblingElement("layer");
+			continue;
+		}
 		textAttr = nullptr;
 		textAttr = layer->Attribute("name");
 		if (textAttr == nullptr) {
@@ -461,7 +469,8 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readMap(const std::string& filename, MapData& data) {
+bool MapReader::readMap(const std::string& filename, MapData& data, const CharacterCore* core) {
+	m_core = core;
 	tinyxml2::XMLDocument xmlDoc;
 	tinyxml2::XMLError result = xmlDoc.LoadFile(getPath(filename).c_str());
 	XMLCheckResult(result);

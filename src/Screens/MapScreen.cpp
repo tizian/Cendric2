@@ -55,11 +55,11 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 }
 
 void MapScreen::loadForRenderTexture() {
-	m_currentMap.loadForRenderTexture(this);
+	m_currentMap.loadForRenderTexture();
 }
 
 void MapScreen::load() {
-	if (!(m_currentMap.load(m_mapID))) {
+	if (!(m_currentMap.load(m_mapID, this))) {
 		string errormsg = m_mapID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
@@ -70,7 +70,7 @@ void MapScreen::load() {
 	m_mainChar = new MapMainCharacter(&m_currentMap);
 	m_mainChar->setCharacterCore(getCharacterCore());
 	addObject(m_mainChar);
-	m_currentMap.loadAfterMainChar(this);
+	m_currentMap.loadAfterMainChar();
 
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());

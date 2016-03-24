@@ -5,6 +5,8 @@
 #include "tinyxml2/tinyxml2.h"
 #include "Structs/WorldData.h"
 
+class CharacterCore;
+
 class WorldReader {
 public:
 	virtual ~WorldReader() {};
@@ -33,4 +35,10 @@ protected:
 
 	// update data to prepare it for the map
 	void updateData(WorldData& data) const;
+
+	// returns true if all in the layer properties given layer conditions are fulfilled for that layer
+	bool layerConditionsFulfilled(tinyxml2::XMLElement* layer) const;
+
+protected:
+	const CharacterCore* m_core;
 };

@@ -9,14 +9,14 @@ LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : WorldScre
 }
 
 void LevelScreen::loadForRenderTexture() {
-	m_currentLevel.loadForRenderTexture(this);
+	m_currentLevel.loadForRenderTexture();
 }
 
 void LevelScreen::load() {
 	delete m_characterCoreCopy;
 	m_characterCoreCopy = new CharacterCore(m_characterCore->getData());
 
-	if (!(m_currentLevel.load(m_levelID))) {
+	if (!(m_currentLevel.load(m_levelID, this))) {
 		string errormsg = m_levelID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
@@ -26,7 +26,7 @@ void LevelScreen::load() {
 
 	LevelMainCharacterLoader loader;
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
-	m_currentLevel.loadAfterMainChar(this);
+	m_currentLevel.loadAfterMainChar();
 	loader.loadEquipment(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_interface = new LevelInterface(this, m_mainChar);
