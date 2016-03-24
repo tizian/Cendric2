@@ -5,6 +5,9 @@ Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 	m_worldScreen = screen;
 	m_mainChar = screen->getMainCharacter();
 	m_data = data;
+	if (m_data.isKeyGuarded) {
+		m_isOnTrigger = false;
+	}
 
 	setBoundingBox(data.triggerRect);
 	setDebugBoundingBox(sf::Color::Magenta);
