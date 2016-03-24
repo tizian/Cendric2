@@ -1,7 +1,8 @@
 #include "GUI/BookWindow.h"
+#include <map>
 
 const float BookWindow::WIDTH = WINDOW_WIDTH / 3.f;
-const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TEXT_OFFSET;
+const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TOP;
 
 BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, HEIGHT),
@@ -11,6 +12,11 @@ BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
 	COLOR_DARK_BROWN) // ornament 
 {
 	m_data = data;
+
+	std::map<char, int> charMap;
+
+	charMap.insert(std::make_pair('A', 0));
+
 
 	m_leftArrow = new ArrowButton(false);
 	m_leftArrow->setMainColor(COLOR_DARK_BROWN);
