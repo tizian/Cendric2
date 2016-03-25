@@ -16,8 +16,19 @@ loadDialogue = function(DL)
 	
 	if (DL:isQuestState("silkweed_potion", "started") and DL:isConditionFulfilled("npc_rhendal", "potion_drunk")) then
 	
-		DL:createNPCNode(0, -1, "DL_Rhendal_WhatDidYouSee") -- What did you see?
+		DL:createNPCNode(0, 1, "DL_Rhendal_SoYoureAMage") -- So, you're a magician, boy. I've felt that there you have a strong magic aura the first time you walked through that door.
 		DL:changeQuestState("silkweed_potion", "completed")
+		DL:addNode()
+		
+		DL:createChoiceNode(1)
+		DL:addChoice(2, "DL_Choice_WhatDoesThatMean") --  A magician... What does that mean?
+		DL:addChoice(-1, "DL_Choice_WhatAboutTheMark") --  About that mark on my wrist...
+		DL:addNode()
+		
+		DL:createNPCNode(2, 3, "DL_Rhendal_MageIs") -- It means that you are able to focus the magic energy that flows through this world and use it to your favour.
+		DL:addNode()
+		
+		DL:createNPCNode(3, -1, "DL_Rhendal_MagiciansAre") -- It's a special gift - not all people in Admantris have it. 
 		DL:addNode()
 	
 		DL:setRoot(0)
@@ -63,33 +74,34 @@ loadDialogue = function(DL)
 
 	end
 	
-	DL:createNPCNode(20, 21, "DL_Rhendal_NoChoice") -- Do you have another choice?
-	DL:addNode()
-	
-	DL:createCendricNode(21, -2, "DL_Cendric_NoChoice") -- ...
-	DL:addNode()
-	
-	DL:createNPCNode(22, -1, "DL_Rhendal_SilkweedLocation") -- It grows in my garden, right in front of this house.
-	DL:addNode()
-	
-	DL:createNPCNode(30, 31, "DL_Rhendal_DrinkThePotion") -- Very good. I just completed the other preparations. Now let's add that Silkweed ... Here, take it and drink it as fast as possible.
-	DL:addNode()
-	
-	DL:createChoiceNode(31)
-	DL:addChoice(35, "DL_Choice_Okay") --  Okay...
-	DL:addChoice(32, "DL_Choice_But") --  But...
-	DL:addNode()
-	
-	DL:createNPCNode(32, 33, "DL_Rhendal_NoBut") -- No "but"!
-	DL:addNode()
-	
-	DL:createCendricNode(33, 35, "DL_Cendric_OkayThen") -- ... Okay then.
-	DL:addNode()
-	
-	DL:createNPCNode(35, -1, "") -- 
-	DL:addConditionProgress("npc_rhendal", "potion_drunk")
-	DL:startCutscene("intro")
-	DL:addNode()
-	
+	if (DL:isQuestState("silkweed_potion", "started")) then
+		DL:createNPCNode(20, 21, "DL_Rhendal_NoChoice") -- Do you have another choice?
+		DL:addNode()
+		
+		DL:createCendricNode(21, -2, "DL_Cendric_NoChoice") -- ...
+		DL:addNode()
+		
+		DL:createNPCNode(22, -1, "DL_Rhendal_SilkweedLocation") -- It grows in my garden, right in front of this house.
+		DL:addNode()
+		
+		DL:createNPCNode(30, 31, "DL_Rhendal_DrinkThePotion") -- Very good. I just completed the other preparations. Now let's add that Silkweed ... Here, take it and drink it as fast as possible.
+		DL:addNode()
+		
+		DL:createChoiceNode(31)
+		DL:addChoice(35, "DL_Choice_Okay") --  Okay...
+		DL:addChoice(32, "DL_Choice_But") --  But...
+		DL:addNode()
+		
+		DL:createNPCNode(32, 33, "DL_Rhendal_NoBut") -- No "but"!
+		DL:addNode()
+		
+		DL:createCendricNode(33, 35, "DL_Cendric_OkayThen") -- ... Okay then.
+		DL:addNode()
+		
+		DL:createNPCNode(35, -1, "") -- 
+		DL:addConditionProgress("npc_rhendal", "potion_drunk")
+		DL:startCutscene("silkweed_potion")
+		DL:addNode()
+	end
 end	
 	
