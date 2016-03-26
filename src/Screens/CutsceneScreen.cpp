@@ -26,8 +26,9 @@ void CutsceneScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void CutsceneScreen::render(sf::RenderTarget &renderTarget) {
+void CutsceneScreen::render(sf::RenderTarget& renderTarget) {
 	if (m_cutscene == nullptr) return;
+	renderTarget.setView(renderTarget.getDefaultView());
 	m_cutscene->render(renderTarget);
 }
 

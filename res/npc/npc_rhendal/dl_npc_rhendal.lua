@@ -84,7 +84,7 @@ loadDialogue = function(DL)
 		DL:createNPCNode(22, -1, "DL_Rhendal_SilkweedLocation") -- It grows in my garden, right in front of this house.
 		DL:addNode()
 		
-		DL:createNPCNode(30, 31, "DL_Rhendal_DrinkThePotion") -- Very good. I just completed the other preparations. Now let's add that Silkweed ... Here, take it and drink it as fast as possible.
+		DL:createNPCNode(30, 31, "DL_Rhendal_DrinkThePotion") -- Very good. I just completed the other preparations. Now let's add that Silkweed ... And, it's done. You can drink it now.
 		DL:addNode()
 		
 		DL:createChoiceNode(31)

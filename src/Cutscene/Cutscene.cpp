@@ -2,7 +2,7 @@
 #include "GUI/GUIConstants.h"
 #include "GameObject.h"
 
-const sf::Vector2f Cutscene::TEXT_OFFSET = sf::Vector2f(50.f, 20.f);
+const sf::Vector2f Cutscene::TEXT_OFFSET = sf::Vector2f(100.f, 40.f);
 
 Cutscene::Cutscene(std::string& id) {
 	m_data = CutsceneLoader::loadCutscene(id);
@@ -12,6 +12,8 @@ Cutscene::Cutscene(std::string& id) {
 	
 	m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_cutsceneText.setColor(COLOR_WHITE);
+	m_cutsceneText.setTextStyle(TextStyle::Shadowed);
+	m_cutsceneText.setTextAlignment(TextAlignment::Center);
 
 	setNextStep();
 }
@@ -58,11 +60,11 @@ void Cutscene::setNextText() {
 	}
 	else {
 		m_cutsceneText.setString(g_textProvider->getCroppedText(text.text, "cutscene",
-			GUIConstants::CHARACTER_SIZE_L, WINDOW_WIDTH - 2 * static_cast<int>(TEXT_OFFSET.x)));
+			GUIConstants::CHARACTER_SIZE_XL, WINDOW_WIDTH - 2 * static_cast<int>(TEXT_OFFSET.x)));
 	}
 	m_cutsceneText.setPosition(sf::Vector2f(
 		(WINDOW_WIDTH - m_cutsceneText.getLocalBounds().width) / 2.f, 
-		WINDOW_HEIGHT - TEXT_OFFSET.y - m_cutsceneText.getLocalBounds().height));
+		TEXT_OFFSET.y));
 	
 	m_currentTextTime = text.time;
 }

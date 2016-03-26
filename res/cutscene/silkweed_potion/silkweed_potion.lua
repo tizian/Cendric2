@@ -3,21 +3,23 @@ steps =
 {
 	{
 		{
-			{"Cendric:LetsDrink", 2},
-			{"Cendric:UhOhSomethingsHappening", 2},
-			{"PotionFallsDownAndBreaks", 2},
-			{"FlashbackStarts", 2},
-			{"NiceYoungCendricWithIce", 2},
-			{"Awake", 2},
-			{"WaterIsFrozen", 2},
-			{"Elder:WhatsThisMark", 2},
-			{"Cendric:WTFIsThisMark", 2},
-			{"Elder:DarkMagic,WatchOut", 2},
-			{"Elder:YoureAMagician", 2},
-			{"Cendric:Oh", 2}
+			{"Elder:HereDrink", 4},
+			{"Elder:ItWillReveal", 4}
 		},
 		{
-			{"darkness.png", 0, 0}
+			{"1_i_1.png", 0, 0},
+			{"1_i_2.png", 10, 90},
+			{"1_i_3.png", 15, 90},
+		}
+	},
+	{
+		{
+			{"Cendric:LetsDrink", 6}
+		},
+		{
+			{"1_i_1.png", 0, 0},
+			{"1_i_2.png", 10, 270},
+			{"2_i_3.png", 15, 270},
 		}
 	}
 }
