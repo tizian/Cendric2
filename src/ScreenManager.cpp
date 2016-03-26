@@ -1,4 +1,5 @@
 #include "ScreenManager.h"
+#include "Screens/WorldScreen.h"
 
 ScreenManager::ScreenManager(Screen* initialScreen) : m_isErrorScreen(false) {
 	m_currentScreen = initialScreen;
@@ -65,6 +66,8 @@ void ScreenManager::resumeBackupScreen() {
 }
 
 void ScreenManager::clearBackupScreen() {
+	if (m_backUpScreen == nullptr) return;
+	m_backUpScreen->execOnExit(nullptr);
 	delete m_backUpScreen;
 	m_backUpScreen = nullptr;
 }

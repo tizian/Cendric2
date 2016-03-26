@@ -1,4 +1,5 @@
 #include "Screens/LoadingScreen.h"
+#include "ScreenManager.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 	// return once to render this screen, and then loads everything in the main thread.
 	if (!m_isRendered) {
 		m_isRendered = true;
+		m_screenManager->clearBackupScreen();
 		return;
 	}
 

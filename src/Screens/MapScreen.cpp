@@ -79,7 +79,6 @@ void MapScreen::load() {
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
-	m_screenManager->clearBackupScreen();
 }
 
 void MapScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
