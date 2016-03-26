@@ -1,5 +1,6 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/CutsceneScreen.h"
+#include "ScreenManager.h"
 
 using namespace std;
 
@@ -10,12 +11,12 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 void MenuScreen::execUpdate(const sf::Time& frameTime) {
 	if ((g_inputController->isKeyJustPressed(Key::Escape) && m_characterCore == nullptr)) {
 		// end the game
-		m_requestQuit = true;
+		m_screenManager->requestQuit();
 		return;
 	}
 	if (g_inputController->isKeyJustPressed(Key::Escape) && m_characterCore != nullptr) {
 		// resume game
-		setNextScreen(new LoadingScreen(m_characterCore));
+		m_screenManager->resumeBackupScreen();
 		return;
 	}
 
@@ -131,11 +132,11 @@ void MenuScreen::onNo() {
 }
 
 void MenuScreen::onExit() {
-	m_requestQuit = true;
+	m_screenManager->requestQuit();
 }
 
 void MenuScreen::onResume() {
-	setNextScreen(new LoadingScreen(m_characterCore));
+	m_screenManager->resumeBackupScreen();
 }
 
 void MenuScreen::onNewGame() {

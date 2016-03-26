@@ -14,6 +14,8 @@
 #include "Structs/CharacterCoreData.h"
 #include "ScreenOverlay.h"
 
+class ScreenManager;
+
 class CharacterCore {
 public:
 	CharacterCore();

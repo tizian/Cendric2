@@ -1,4 +1,5 @@
 #include "Screens/ErrorScreen.h"
+#include "ScreenManager.h"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ void ErrorScreen::render(sf::RenderTarget &renderTarget) {
 
 void ErrorScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Escape)) {
-		m_requestQuit = true;
+		m_screenManager->requestQuit();
 	}
 }
 

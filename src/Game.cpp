@@ -96,7 +96,7 @@ void Game::run() {
 
 		// game updates
 		m_screenManager->update(frameTime);
-		if (m_screenManager->getCurrentScreen()->isQuitRequested()) {
+		if (m_screenManager->isQuitRequested()) {
 			m_running = false;
 		}
 		if (g_resourceManager->pollError()->first != ErrorID::VOID) {

@@ -564,6 +564,7 @@ bool WorldReader::layerConditionsFulfilled(tinyxml2::XMLElement* layer) const {
 			isNotCondition = true;
 		}
 		else if (name.compare("conditions") != 0) {
+			_property = _property->NextSiblingElement("property");
 			continue;
 		}
 

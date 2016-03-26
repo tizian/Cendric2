@@ -52,12 +52,10 @@ public:
 	void setTooltipPositionTop(bool top);
 	// add an overlay to the overlay queue they will be displayed within the next world screen
 	void addScreenOverlay(ScreenOverlay* overlay);
-	// the screen manager sees if a screen wants to end the game
-	bool isQuitRequested() const;
-	// the screen manager polls the next screen and changes to it if its not null
-	Screen* getNextScreen() const;
-	// sets the next screen. If this is set, the screen manager will change to that next screen
-	void setNextScreen(Screen* nextScreen);
+	// sets the next screen on the screen manager. If the bool property is set for backup,
+	// this screen will be backed up and can be returned to by using screenManager->resume()
+	void setNextScreen(Screen* nextScreen, bool backupThis = false);
+	void setScreenManager(ScreenManager* screenManager);
 
 protected:
 	// the update part that is customized per screen
@@ -81,8 +79,7 @@ protected:
 
 protected:
 	CharacterCore* m_characterCore = nullptr;
-	bool m_requestQuit = false;
-	Screen* m_nextScreen = nullptr;
+	ScreenManager* m_screenManager = nullptr;
 	std::vector<ScreenOverlay*> m_overlayQueue;
 
 private:

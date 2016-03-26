@@ -1,5 +1,6 @@
 #include "Screen.h"
 #include "GUI/Button.h"
+#include "ScreenManager.h"
 
 using namespace std;
 
@@ -214,18 +215,13 @@ void Screen::updateTooltipText(const sf::Time& frameTime) {
 	}
 }
 
-bool Screen::isQuitRequested() const {
-	return m_requestQuit;
-}
-
-Screen* Screen::getNextScreen() const {
-	return m_nextScreen;
-}
-
-void Screen::setNextScreen(Screen* nextScreen) {
+void Screen::setNextScreen(Screen* nextScreen, bool backup) {
 	if (nextScreen == this) return;
-	delete m_nextScreen;
-	m_nextScreen = nextScreen;
+	m_screenManager->setNextScreen(nextScreen, backup);
+}
+
+void Screen::setScreenManager(ScreenManager* screenManager) {
+	m_screenManager = screenManager;
 }
 
 void Screen::addScreenOverlay(ScreenOverlay* overlay) {

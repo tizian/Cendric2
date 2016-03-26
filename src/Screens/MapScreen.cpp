@@ -1,6 +1,7 @@
 #include "Screens/MapScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Map/NPC.h"
+#include "ScreenManager.h"
 
 #include "ScreenOverlay.h"
 
@@ -20,7 +21,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
 		// store pos & go back to menu screen
 		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-		setNextScreen(new MenuScreen(m_characterCore));
+		setNextScreen(new MenuScreen(m_characterCore), true);
 		return;
 	}
 	if (g_inputController->isKeyJustPressed(Key::Quickload)) {
@@ -78,6 +79,7 @@ void MapScreen::load() {
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
+	m_screenManager->clearBackupScreen();
 }
 
 void MapScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {

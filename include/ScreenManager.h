@@ -11,11 +11,20 @@ public:
 
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& renderTarget);
+	void setNextScreen(Screen* nextScreen, bool backupCurrentScreen);
+	void resumeBackupScreen();
+	void clearBackupScreen();
 	void setErrorScreen();
+	void requestQuit();
 
-	Screen* getCurrentScreen() const;
+	bool isQuitRequested() const { return m_isQuitRequested; }
 
 private:
 	Screen* m_currentScreen = nullptr;
-	bool m_isErrorScreen;
+	Screen* m_nextScreen = nullptr;
+	Screen* m_backUpScreen = nullptr;
+	bool m_isErrorScreen = false;
+	bool m_isQuitRequested = false;
+	bool m_isBackupRequested = false;
+	bool m_isResumeBackupScreen = false;
 };

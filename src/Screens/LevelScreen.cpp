@@ -1,6 +1,7 @@
 #include "Screens/LevelScreen.h"
 #include "Screens/LoadingScreen.h"
 #include "Screens/MenuScreen.h"
+#include "ScreenManager.h"
 
 using namespace std;
 
@@ -31,6 +32,12 @@ void LevelScreen::load() {
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_interface = new LevelInterface(this, m_mainChar);
 	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
+
+	m_resumeButton = new Button(sf::FloatRect(450, 350, 400, 50), ButtonOrnamentStyle::MEDIUM);
+	m_resumeButton->setText("Resume");
+	m_resumeButton->setVisible(false);
+	m_resumeButton->setOnClick(std::bind(&LevelScreen::onResume, this));
+	addObject(m_resumeButton);
 
 	m_retryButton = new Button(sf::FloatRect(450, 410, 400, 50), ButtonOrnamentStyle::MEDIUM);
 	m_retryButton->setText("BackToCheckpoint");
@@ -87,6 +94,7 @@ bool LevelScreen::exitWorld() {
 
 void LevelScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName()));
+	m_screenManager->clearBackupScreen();
 }
 
 void LevelScreen::execOnExit(const Screen* nextScreen) {
@@ -135,10 +143,12 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		if (m_retryButton->isVisible()) {
 			m_retryButton->setVisible(false);
 			m_backToMenuButton->setVisible(false);
+			m_resumeButton->setVisible(false);
 		}
 		else {
 			m_retryButton->setVisible(true);
 			m_backToMenuButton->setVisible(true);
+			m_resumeButton->setVisible(true);
 		}
 	}
 
@@ -269,27 +279,24 @@ void LevelScreen::onYesToCheckpoint() {
 	m_yesOrNoForm->setDisposed();
 }
 
-void LevelScreen::onYesToMenu() {
-	setNextScreen(new MenuScreen(m_characterCore));
-	m_yesOrNoForm->setDisposed();
-}
-
 void LevelScreen::onBackToMenu() {
 	if (m_isGameOver) {
 		setNextScreen(new MenuScreen(m_characterCore));
 	}
 	else {
-		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
-		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
-		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
-		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToMenu, this));
-		addObject(m_yesOrNoForm);
-		setAllButtonsEnabled(false);
+		setNextScreen(new MenuScreen(m_characterCore), true);
+		onResume();
 	}
 }
 
 void LevelScreen::onBackToCheckpoint() {
 	setNextScreen(new LoadingScreen(m_characterCore));
+}
+
+void LevelScreen::onResume() {
+	m_retryButton->setVisible(false);
+	m_backToMenuButton->setVisible(false);
+	m_resumeButton->setVisible(false);
 }
 
 void LevelScreen::onRetry() {

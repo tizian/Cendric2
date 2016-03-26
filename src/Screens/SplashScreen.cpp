@@ -1,4 +1,5 @@
 #include "Screens/SplashScreen.h"
+#include "ScreenManager.h"
 
 using namespace std;
 
@@ -25,8 +26,12 @@ void SplashScreen::execOnEnter(const Screen* previousScreen) {
 }
 
 void SplashScreen::execUpdate(const sf::Time& frameTime) {
-	if (g_inputController->isKeyActive(Key::Escape) || g_inputController->isMouseJustPressedLeft()) {
+	if (g_inputController->isKeyActive(Key::Confirm) || g_inputController->isMouseJustPressedLeft()) {
 		setNextScreen(new MenuScreen(nullptr));
+		return;
+	}
+	if (g_inputController->isKeyActive(Key::Escape)) {
+		m_screenManager->requestQuit();
 		return;
 	}
 	updateObjects(GameObjectType::_Undefined, frameTime);
