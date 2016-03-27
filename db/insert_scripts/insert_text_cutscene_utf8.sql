@@ -12,7 +12,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ce
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:WhatsHappening', 'cutscene','What''s happening with me...','Was passiert mit mir...','Was passiert mit mir...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:IFeelSomething', 'cutscene','There, I feel something...','Da, ich spüre etwas...','Da, ich gspühr öppis...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:SoCold', 'cutscene','So cold...','So kalt...','So chalt...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:AmI', 'cutscene','Is this... myself?','Bin das... ich?','Bi das... ich?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:AmI', 'cutscene','It''s... me?','Bin das... ich?','Bi das... ich?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:AMage', 'cutscene','A mage, that''s what I was.','Ein Magier war ich also.','Ich bin also en Magier gsi.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:TheVisionOver', 'cutscene','The vision is over.','Die Vision ist vorbei.','D''Vision isch verbii.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:TheWaterFrozen', 'cutscene','The water... it''s frozen.','Das Wasser... Es ist gefroren.','Es Wasser... Es isch gfrore.');
