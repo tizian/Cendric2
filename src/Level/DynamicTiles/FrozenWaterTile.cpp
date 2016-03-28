@@ -1,10 +1,11 @@
 #include "Level/DynamicTiles/FrozenWaterTile.h"
+#include "Screens/LevelScreen.h"
 #include "Spells/Spell.h"
 
 #include "Level/DynamicTiles/FluidTile.h"
 
 // this tile is special and is not registered
-FrozenWaterTile::FrozenWaterTile(FluidTile *fluidTile, int fluidTileIndex) : LevelDynamicTile(nullptr) {
+FrozenWaterTile::FrozenWaterTile(FluidTile* fluidTile, int fluidTileIndex) : LevelDynamicTile(dynamic_cast<LevelScreen*>(fluidTile->getScreen())) {
 	m_fluidTile = fluidTile;
 	m_fluidTileIndex = fluidTileIndex;
 }
@@ -20,8 +21,7 @@ void FrozenWaterTile::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation(sf::seconds(0.5f));
 	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_frozenwater));
 	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
-	//idleAnimation->addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER, TILE_SIZE, TILE_SIZE));
-
+	
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// initial values

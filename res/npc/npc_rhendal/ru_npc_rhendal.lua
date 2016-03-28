@@ -6,7 +6,6 @@ loadRoutine = function(R)
 
 	R:setTilePosition(11,8)
 	R:setLooped(false)
-	R:goToTile(11,8.1)
 	
 	if (not R:isConditionFulfilled("npc_rhendal", "talked")) then
 		R:setTalkingActive(true)

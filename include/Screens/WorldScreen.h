@@ -35,6 +35,10 @@ public:
 	void notifyQuestDescriptionAdded(const std::string& questID, int descriptionID);
 	// notify condition added -> add to core, reload everything that needs a reload when conditions are added
 	virtual void notifyConditionAdded(const std::string& conditionType, const std::string& condition);
+	// notify spell learned -> add overlay and add to core.
+	void notifySpellLearned(SpellID id);
+	// notify modifier learned -> add overlay and add to core.
+	void notifyModifierLearned(const SpellModifier& modifier);
 	// reload all triggers, based on their conditions
 	void reloadTriggers();
 	// reloads a certain trigger

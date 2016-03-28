@@ -86,6 +86,16 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 	m_interface->reloadQuestLog();
 }
 
+void WorldScreen::notifySpellLearned(SpellID id) {
+	getCharacterCore()->learnSpell(id);
+	addScreenOverlay(ScreenOverlay::createSpellLearnedScreenOverlay(id));
+}
+
+void WorldScreen::notifyModifierLearned(const SpellModifier& modifier) {
+	getCharacterCore()->learnModifier(modifier);
+	addScreenOverlay(ScreenOverlay::createModifierLearnedLearnedScreenOverlay(modifier));
+}
+
 void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int descriptionID) {
 	getCharacterCore()->unlockQuestDescription(questID, descriptionID);
 	m_progressLog->addQuestDescriptionAdded(questID);

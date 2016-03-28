@@ -20,6 +20,7 @@ public:
 	bool isQuestComplete(const std::string& questID);
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const;
+	bool hasItem(const std::string& item, int amount) const;
 
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);
@@ -39,10 +40,11 @@ public:
 	void removeItem(const std::string& itemID, int amount);
 	void addGold(int amount);
 	void removeGold(int amount);
+	void learnSpell(int spellID);
 	void startLevel(const std::string& levelID, int x, int y);
 	void startMap(const std::string& mapID, int x, int y);
 	void startCutscene(const std::string& cutsceneID);
-	// TODO: learn spell, add reputation, etc.
+	void gotoNode(int node);
 
 	// finally, adding the node to the dialogue
 	void addNode();

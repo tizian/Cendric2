@@ -433,22 +433,13 @@ void CharacterCore::addPermanentAttributes(const AttributeData& attributes) {
 	reloadAttributes();
 }
 
-void CharacterCore::learnSpell(SpellID spellID) {
-	SpellType type = SpellData::getSpellData(spellID).spellType;
-	if (m_data.spellsLearned.find(type) == m_data.spellsLearned.end()) {
-		m_data.spellsLearned.insert({type, std::set<SpellID>()});
-	}
-	m_data.spellsLearned.at(type).insert(spellID);
-}
-
 void CharacterCore::learnModifier(const SpellModifier& modifier) {
 	if (m_data.modfiersLearned.find(modifier.type) == m_data.modfiersLearned.end()) {
 		m_data.modfiersLearned.insert({ modifier.type, modifier.level});
 	}
 	else {
 		m_data.modfiersLearned[modifier.type] = std::max(m_data.modfiersLearned[modifier.type], modifier.level);
-	}
-	
+	}	
 }
 
 const AttributeData& CharacterCore::getTotalAttributes() const {
@@ -596,6 +587,14 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int m
 		slot.second[modifierNr] = modifier;
 	}
 	reloadWeaponSlots();
+}
+
+void CharacterCore::learnSpell(SpellID id) {
+	SpellType type = SpellData::getSpellData(id).spellType;
+	if (m_data.spellsLearned.find(type) == m_data.spellsLearned.end()) {
+		m_data.spellsLearned.insert({ type, std::set<SpellID>() });
+	}
+	m_data.spellsLearned.at(type).insert(id);
 }
 
 void CharacterCore::equipItem(const std::string& item, ItemType type) {

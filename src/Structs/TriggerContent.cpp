@@ -48,6 +48,25 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		screen->exitWorld();
 		screen->setNextScreen(new CutsceneScreen(screen->getCharacterCore(), content.s1));
 		break;
+	case TriggerContentType::LearnSpell: {
+		SpellID id = static_cast<SpellID>(content.i1);
+		if (id <= SpellID::VOID || id >= SpellID::MAX) 
+			break;
+		screen->notifySpellLearned(id);
+		break;
+	}
+	case TriggerContentType::LearnModifier: {
+		SpellModifierType type = static_cast<SpellModifierType>(content.i1);
+		if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX)
+			break;
+		if (content.i2 < 1 || content.i2 > 3)
+			break;
+		SpellModifier modifier;
+		modifier.type = type;
+		modifier.level = content.i2;
+		screen->notifyModifierLearned(modifier);
+		break;
+	}
 	default:
 		break;
 	}

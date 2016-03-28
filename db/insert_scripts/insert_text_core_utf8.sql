@@ -97,6 +97,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('MessageNewSav
 INSERT INTO text (text_id, english, german, swiss_german) values ('Meta','Meta','Meta','Meta');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Miscellaneous','Miscellaneous','Plunder','Grümpel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLearned','Spell learned','Zauber erlernt','Zauber glernt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveDown','Move down','Nach unten bewegen','Abelaufe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveLeft','Move left','Nach links laufen','Links laufe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MoveRight','Move right','Nach rechts bewegen','Rechts laufe');

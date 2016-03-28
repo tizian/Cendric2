@@ -15,6 +15,14 @@ Cutscene::Cutscene(std::string& id) {
 	m_cutsceneText.setTextStyle(TextStyle::Shadowed);
 	m_cutsceneText.setTextAlignment(TextAlignment::Center);
 
+	// load all textures now
+	for (auto& step : m_data.steps) {
+		for (auto& img : step.images) {
+			g_resourceManager->getTexture(img.imagePath);
+			m_imagePaths.push_back(img.imagePath);
+		}
+	}
+
 	setNextStep();
 }
 
@@ -83,14 +91,9 @@ void Cutscene::setNextStep() {
 	m_isNoTextsLeft = false;
 	setNextText();
 
-	for (auto& imagePath : m_imagePaths) {
-		g_resourceManager->deleteResource(imagePath);
-	}
 	m_cutsceneImages.clear();
-	m_imagePaths.clear();
+
 	for (auto& cutsceneImage : step.images) {
-		
-		m_imagePaths.push_back(cutsceneImage.imagePath);
 		sf::Sprite sprite;
 		sprite.setTexture(*g_resourceManager->getTexture(cutsceneImage.imagePath));
 

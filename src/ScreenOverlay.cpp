@@ -139,6 +139,37 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 	return locationScreenOverlay;
 }
 
+ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
+	ScreenOverlay* spellScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+
+	spellScreenOverlay->setTitleColor(COLOR_LIGHT_PURPLE);
+	spellScreenOverlay->setTitleCharacterSize(36);
+
+	spellScreenOverlay->setTitle("SpellLearned");
+
+	spellScreenOverlay->setSubtitleCharacterSize(24);
+	spellScreenOverlay->setSubtitle(EnumNames::getSpellIDName(id));
+
+	return spellScreenOverlay;
+}
+
+ScreenOverlay* ScreenOverlay::createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier) {
+	ScreenOverlay* modifierScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+
+	modifierScreenOverlay->setTitleColor(COLOR_LIGHT_PURPLE);
+	modifierScreenOverlay->setTitleCharacterSize(24);
+
+	modifierScreenOverlay->setTitle("ModifierLearned");
+
+	modifierScreenOverlay->setSubtitleCharacterSize(16);
+
+	std::string subtitle = g_textProvider->getText(EnumNames::getSpellModifierTypeName(modifier.type)) + " ";
+	subtitle.append(g_textProvider->getText("Level") + " " + std::to_string(modifier.level));
+	modifierScreenOverlay->setSubtitleRaw(subtitle);
+
+	return modifierScreenOverlay;
+}
+
 ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {
 	ScreenOverlay* itemScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 

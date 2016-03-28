@@ -9,8 +9,8 @@ enum class SpellID {
 	Projectile,
 
 	// Elemental (Default spells)
-	FireBall,
 	IceBall,
+	FireBall,
 	Telekinesis,
 	WindGust,
 	AntiGravity,

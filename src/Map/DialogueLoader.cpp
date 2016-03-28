@@ -21,6 +21,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isQuestComplete", &DialogueLoader::isQuestComplete)
 		.addFunction("isConditionFulfilled", &DialogueLoader::isConditionFulfilled)
 		.addFunction("isQuestConditionFulfilled", &DialogueLoader::isQuestConditionFulfilled)
+		.addFunction("hasItem", &DialogueLoader::hasItem)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
@@ -39,6 +40,8 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("startLevel", &DialogueLoader::startLevel)
 		.addFunction("startMap", &DialogueLoader::startMap)
 		.addFunction("startCutscene", &DialogueLoader::startCutscene)
+		.addFunction("learnSpell", &DialogueLoader::learnSpell)
+		.addFunction("gotoNode", &DialogueLoader::gotoNode)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
 		.addFunction("addNode", &DialogueLoader::addNode)
 		.endClass();
@@ -177,6 +180,19 @@ bool DialogueLoader::isQuestConditionFulfilled(const std::string& quest, const s
 	return m_core->isQuestConditionFulfilled(quest, condition);
 }
 
+bool DialogueLoader::hasItem(const std::string& item, int amount) const {
+	if (item.empty() || amount < 1) {
+		g_logger->logError("DialogueLoader", "Item key cannot be empty and amount has to be > 0");
+		return false;
+	}
+	auto const items = m_core->getItems();
+	
+	if (items->find(item) == items->end()) 
+		return false;
+
+	return items->at(item) >= amount;
+}
+
 void DialogueLoader::addItem(const std::string& itemID, int amount) {
 	if (m_currentNode == nullptr) {
 		g_logger->logError("DialogueLoader", "Cannot add item change: no node created.");
@@ -255,6 +271,21 @@ void DialogueLoader::removeGold(int amount) {
 	}
 	TriggerContent content(TriggerContentType::GoldChange);
 	content.i1 = -amount;
+	m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::learnSpell(int id) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot learn spell: no node created.");
+		return;
+	}
+	SpellID spellID = static_cast<SpellID>(id);
+	if (spellID <= SpellID::VOID || spellID >= SpellID::MAX) {
+		g_logger->logError("DialogueLoader", "Cannot learn spell, spell ID not recognized.");
+		return;
+	}
+	TriggerContent content(TriggerContentType::LearnSpell);
+	content.i1 = id;
 	m_currentNode->content.push_back(content);
 }
 
@@ -361,6 +392,18 @@ void DialogueLoader::createChoiceNode(int tag) {
 	m_currentNode = new DialogueNode();
 	m_currentNode->type = DialogueNodeType::Choice;
 	m_currentNode->tag = tag;
+}
+
+void DialogueLoader::gotoNode(int tag) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot add goto, no node created.");
+		return;
+	}
+	if (tag < 0) {
+		g_logger->logError("DialogueLoader", "Cannot goto, node tag has to be >= 0");
+		return;
+	}
+	m_currentNode->reloadTag = tag;
 }
 
 void DialogueLoader::addNode() {

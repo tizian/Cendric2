@@ -20,6 +20,8 @@ struct DialogueNode {
 	// -1 means that the dialogue ends after that node and
 	// -2 tells the dialogue to reload and start at root after that node (is useful if conditions change)
 	int nextTag;
+	// if this is set (> -1), the dialogue will reload after that and jump to the node with this tag
+	int reloadTag = -1;
 	// dialogue node type
 	DialogueNodeType type;
 	// it is an empty string if this is a choice

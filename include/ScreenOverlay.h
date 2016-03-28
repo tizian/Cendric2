@@ -7,6 +7,8 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Enums/QuestState.h"
+#include "Enums/SpellID.h"
+#include "Structs/SpellModifier.h"
 
 class Item;
 
@@ -36,6 +38,8 @@ public:
 	// returns nullptr if the configuration for display hints is false.
 	static ScreenOverlay* createHintScreenOverlay(const std::string& hintKey);
 	static ScreenOverlay* createPermanentItemScreenOverlay(const Item& item);
+	static ScreenOverlay* createSpellLearnedScreenOverlay(SpellID id);
+	static ScreenOverlay* createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier);
 
 private:
 	void load();

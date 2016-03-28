@@ -90,15 +90,20 @@ void Dialogue::setNextNode(int choice) {
 		nextNode = m_currentNode->choices[choice].second;
 	}
 
+	if (nextNode == -2) {
+		int nextTag = m_currentNode->nextTag;
+		reload(m_id, m_screen, m_window);
+		if (nextTag > -1 && m_nodes.find(nextTag) != m_nodes.end()) {
+			setRoot(nextTag);
+		}
+		updateWindow();
+		return;
+	}
 	if (nextNode == -1) {
 		m_currentNode = nullptr;
 		return;
 	}
-	else if (nextNode == -2) {
-		reload(m_id, m_screen, m_window);
-		updateWindow();
-		return;
-	}
+	
 
 	m_currentNode = &m_nodes[nextNode];
 }
