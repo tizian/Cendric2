@@ -1,6 +1,7 @@
 #include "Screens/OptionsScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Screens/KeyBindingsScreen.h"
+#include "ScreenManager.h"
 
 using namespace std;
 
@@ -154,7 +155,9 @@ void OptionsScreen::onApply() {
 	ConfigurationData& config = g_resourceManager->getConfiguration();
 	bool fullScreenOn = m_displayModeSelector->getChosenOptionIndex() == 1;
 	bool fullscreenChanged = config.isFullscreen != fullScreenOn;
-	config.language = static_cast<Language>(m_languageSelector->getChosenOptionIndex() + 1);
+	Language language = static_cast<Language>(m_languageSelector->getChosenOptionIndex() + 1);
+	bool languageChanged = config.language != language;
+	config.language = language;
 	config.isSoundOn = m_soundCheckbox->isChecked();
 	config.isQuickcast = m_quickCastCheckbox->isChecked();
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
@@ -169,6 +172,10 @@ void OptionsScreen::onApply() {
 	setTooltipText("ConfigurationSaved", COLOR_GOOD, true);
 	if (fullscreenChanged) {
 		config.isWindowReload = true;
+	}
+	if (languageChanged) {
+		m_screenManager->clearBackupScreen();
+		setNextScreen(new OptionsScreen(getCharacterCore()));
 	}
 }
 

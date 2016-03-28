@@ -1,5 +1,6 @@
 #include "ScreenManager.h"
 #include "Screens/WorldScreen.h"
+#include "Screens/LoadingScreen.h"
 
 ScreenManager::ScreenManager(Screen* initialScreen) : m_isErrorScreen(false) {
 	m_currentScreen = initialScreen;
@@ -58,7 +59,11 @@ void ScreenManager::setNextScreen(Screen* nextScreen, bool backupCurrentScreen) 
 }
 
 void ScreenManager::resumeBackupScreen() {
-	if (m_backUpScreen == nullptr) return;
+	if (m_backUpScreen == nullptr) {
+		if (m_currentScreen == nullptr) return;
+		setNextScreen(new LoadingScreen(m_currentScreen->getCharacterCore()), false);
+		return;
+	}
 
 	setNextScreen(m_backUpScreen, false);
 	m_backUpScreen = nullptr;

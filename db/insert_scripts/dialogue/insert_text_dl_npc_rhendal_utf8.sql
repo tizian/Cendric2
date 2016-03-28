@@ -21,7 +21,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Rhendal_NoBut', 'dl_npc_rhendal', 'No "but"! You want to get your memories back, don''t you.','Kein "Aber"! Trink den Trank jetzt, du willst doch deine Erinnerungen zurück.','Nüt "Aber". Trink ez.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Cendric_OkayThen', 'dl_npc_rhendal', '... Okay then.','... Okay.','... Okay, dennhalt.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_IGotStaff', 'dl_npc_rhendal', 'I got the Hawthorn staff.','Ich habe den Weissdorn-Stab.','Ich han de Wiisdorn-Stab.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('', 'dl_npc_rhendal', 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_WhatDoesThatMean', 'dl_npc_rhendal', 'A mage... What does that mean?','Ein Magier... Was bedeutet das?','En Magier... Und was bedüütet das?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_WhatJob', 'dl_npc_rhendal', 'What job can you offer?','Was für einen Auftrag hast du anzubieten?','Was für en Uftrag hesch denn az''büüte?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_HowCanIHelp', 'dl_npc_rhendal', 'Okay, how can I help you?','Okay, wie kann ich euch helfen?','Okay, we chan ich eu hälfe?');

@@ -175,14 +175,12 @@ loadDialogue = function(DL)
 		if (DL:hasItem("we_hawthorn", 1)) then 
 		
 			DL:createNPCNode(60, 61, "DL_Rhendal_YouNeedAStaff") -- Before you can take this job, you need a staff to control and focus your magic. I grow a magical Hawthorn tree in my garden. Take a branch from this tree and you will have what you need.  
-			DL:changeQuestState("hawthorn_staff", "started")
 			DL:addNode()
 			
 			DL:createCendricNode(61, 62, "DL_Cendric_IAlreadyHave") -- ... I think I ...
 			DL:addNode()
 			
 			DL:createNPCNode(62, -2, "DL_Rhendal_YouAlreadyHave") -- Ah, I see, you already took a branch. Well, I won't be angry with you, but the next person from which you take things probably won't be that lenient... 
-			DL:changeQuestState("hawthorn_staff", "completed")
 			DL:addNode()
 		else
 		
