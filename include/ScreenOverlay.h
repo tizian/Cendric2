@@ -22,6 +22,11 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 
 	void setTexture(ResourceID texture);
+	void setTextureRect(const sf::IntRect& rect);
+	void setTextureColor(const sf::Color& color);
+	void setSpritePosition(const sf::Vector2f& position);
+	void setSpriteScale(const sf::Vector2f& factors);
+
 	void setTitle(const std::string& textKey, const std::string& textType = "core");
 	void setTitleRaw(const std::string& text);
 	void setTitleCharacterSize(int characterSize);
@@ -50,6 +55,8 @@ private:
 	sf::Time m_fadeTime;
 	sf::Time m_fadeInTimer;
 	sf::Time m_fadeOutTimer;
+
+	sf::Color m_textureColor;
 
 	BitmapText m_title;
 	BitmapText m_subtitle;

@@ -2,6 +2,7 @@
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 #include "Item.h"
+#include "Structs/SpellData.h"
 
 ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : GameObject() {
 	m_activeTime = activeTime;
@@ -23,6 +24,8 @@ void ScreenOverlay::load() {
 	m_subtitle.setTextStyle(TextStyle::Shadowed);
 
 	m_sprite.setPosition(sf::Vector2f(0.f, 0.f));
+
+	m_textureColor = sf::Color(255, 255, 255);
 
 	m_fadeInTimer = m_fadeTime;
 	m_fadeOutTimer = m_fadeTime;
@@ -55,7 +58,7 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 		return;
 	}
 
-	m_sprite.setColor(sf::Color(255, 255, 255, (sf::Uint8)(scale * 255)));
+	m_sprite.setColor(sf::Color(m_textureColor.r, m_textureColor.g, m_textureColor.b, (sf::Uint8)(scale * 255)));
 	m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(scale * 255)));
 	m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (sf::Uint8)(scale * 255)));
 }
@@ -68,6 +71,23 @@ void ScreenOverlay::render(sf::RenderTarget& renderTarget) {
 
 void ScreenOverlay::setTexture(ResourceID texture) {
 	m_sprite.setTexture(*g_resourceManager->getTexture(texture));
+}
+
+void ScreenOverlay::setTextureRect(const sf::IntRect& rect) {
+	m_sprite.setTextureRect(rect);
+}
+
+void ScreenOverlay::setTextureColor(const sf::Color& color) {
+	m_textureColor = color;
+	m_sprite.setColor(color);
+}
+
+void ScreenOverlay::setSpritePosition(const sf::Vector2f& position) {
+	m_sprite.setPosition(position);
+}
+
+void ScreenOverlay::setSpriteScale(const sf::Vector2f& factors) {
+	m_sprite.setScale(factors);
 }
 
 void ScreenOverlay::setTitle(const std::string& textKey, const std::string& textType) {
@@ -142,13 +162,21 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 	ScreenOverlay* spellScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
-	spellScreenOverlay->setTitleColor(COLOR_LIGHT_PURPLE);
-	spellScreenOverlay->setTitleCharacterSize(36);
+	spellScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
+	spellScreenOverlay->setTitleCharacterSize(32);
 
 	spellScreenOverlay->setTitle("SpellLearned");
 
 	spellScreenOverlay->setSubtitleCharacterSize(24);
 	spellScreenOverlay->setSubtitle(EnumNames::getSpellIDName(id));
+
+	spellScreenOverlay->setTexture(ResourceID::Texture_spellicons);
+
+	const SpellData& bean = SpellData::getSpellData(id);
+	spellScreenOverlay->setTextureRect(bean.iconTextureRect);
+
+	spellScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
+	spellScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
 
 	return spellScreenOverlay;
 }
@@ -156,16 +184,23 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 ScreenOverlay* ScreenOverlay::createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier) {
 	ScreenOverlay* modifierScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
-	modifierScreenOverlay->setTitleColor(COLOR_LIGHT_PURPLE);
-	modifierScreenOverlay->setTitleCharacterSize(24);
+	modifierScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
+	modifierScreenOverlay->setTitleCharacterSize(32);
 
 	modifierScreenOverlay->setTitle("ModifierLearned");
 
-	modifierScreenOverlay->setSubtitleCharacterSize(16);
+	modifierScreenOverlay->setSubtitleCharacterSize(24);
 
 	std::string subtitle = g_textProvider->getText(EnumNames::getSpellModifierTypeName(modifier.type)) + " ";
 	subtitle.append(g_textProvider->getText("Level") + " " + std::to_string(modifier.level));
 	modifierScreenOverlay->setSubtitleRaw(subtitle);
+
+	modifierScreenOverlay->setTexture(ResourceID::Texture_gems);
+	modifierScreenOverlay->setTextureRect(sf::IntRect((modifier.level - 1) * 50, 50, 50, 50));
+	modifierScreenOverlay->setTextureColor(SpellModifier::getSpellModifierColor(modifier.type));
+
+	modifierScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
+	modifierScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
 
 	return modifierScreenOverlay;
 }
