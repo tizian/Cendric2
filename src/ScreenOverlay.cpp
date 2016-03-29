@@ -138,7 +138,7 @@ GameObjectType ScreenOverlay::getConfiguredType() const {
 }
 
 ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questID, QuestState state) {
-	ScreenOverlay* questScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+	ScreenOverlay* questScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(0.5f));
 
 	std::string titleText = g_textProvider->getText("Quest") + " ";
 	titleText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
@@ -160,7 +160,7 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 }
 
 ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
-	ScreenOverlay* spellScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+	ScreenOverlay* spellScreenOverlay = new ScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
 
 	spellScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
 	spellScreenOverlay->setTitleCharacterSize(32);
@@ -182,7 +182,7 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 }
 
 ScreenOverlay* ScreenOverlay::createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier) {
-	ScreenOverlay* modifierScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+	ScreenOverlay* modifierScreenOverlay = new ScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
 
 	modifierScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
 	modifierScreenOverlay->setTitleCharacterSize(32);
@@ -230,7 +230,7 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 		return nullptr;
 	}
 
-	ScreenOverlay* hintScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+	ScreenOverlay* hintScreenOverlay = new ScreenOverlay(sf::seconds(2.5f), sf::seconds(0.5f));
 
 	int characterSize = 16;
 	hintScreenOverlay->setTitleColor(COLOR_GOOD);

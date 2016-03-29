@@ -35,11 +35,12 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(0, 1, "DL_Rhendal_NiceVision") -- *Smiles* It seems that your vision was of use. I've never seen a guest of mine freeze my water before.  
 		DL:learnSpell(3)
+		DL:changeQuestState("the_mark", "started")
 		DL:addQuestProgress("who_am_i", "information_gathered")
 		DL:changeQuestState("who_am_i", "completed")
 		DL:changeQuestState("silkweed_potion", "completed")
 		DL:addNode()
-		
+
 		DL:setRoot(0)
 		
 		DL:createNPCNode(1, -2, "DL_Rhendal_SoYoureAMage") -- You're a mage, boy. I've felt that you have a strong magic aura the first time you walked through that door.
@@ -112,7 +113,6 @@ loadDialogue = function(DL)
 		
 		DL:createNPCNode(35, -1, "") -- 
 		DL:addConditionProgress("npc_rhendal", "potion_drunk")
-		DL:changeQuestState("the_mark", "started")
 		DL:removeItem("qe_silkweed", 1)
 		DL:startCutscene("silkweed_potion")
 		DL:addNode()
