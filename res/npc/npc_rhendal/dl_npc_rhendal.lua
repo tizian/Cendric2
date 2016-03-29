@@ -22,7 +22,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("hawthorn_staff", "completed") and DL:isQuestState("broken_bridge", "void") and not DL:isConditionFulfilled("npc_rhendal", "evil")) then
 		DL:addChoice(80, "DL_Choice_HowCanIHelp") -- Okay, how can I help you?
 	end
-	if (DL:isConditionFulfilled("npc_rhendal", "potion_drunk") and DL:isQuestState("the_mark", "void")) then 
+	if (DL:isConditionFulfilled("npc_rhendal", "potion_drunk") and not DL:isConditionFulfilled("npc_rhendal", "the_mark")) then 
 		DL:addChoice(50, "DL_Choice_WhatAboutTheMark") --  About that mark on my wrist...
 	end
 	if (not DL:isConditionFulfilled("npc_rhendal", "potion_drunk") or not DL:isQuestState("hawthorn_staff", "void")) then
@@ -112,6 +112,8 @@ loadDialogue = function(DL)
 		
 		DL:createNPCNode(35, -1, "") -- 
 		DL:addConditionProgress("npc_rhendal", "potion_drunk")
+		DL:changeQuestState("the_mark", "started")
+		DL:removeItem("qe_silkweed", 1)
 		DL:startCutscene("silkweed_potion")
 		DL:addNode()
 	end
@@ -144,7 +146,7 @@ loadDialogue = function(DL)
 		
 	end
 	
-	if (DL:isConditionFulfilled("npc_rhendal", "potion_drunk") and DL:isQuestState("the_mark", "void")) then 
+	if (DL:isConditionFulfilled("npc_rhendal", "potion_drunk") and not DL:isConditionFulfilled("npc_rhendal", "the_mark")) then 
 		
 		DL:createNPCNode(50, 51, "DL_Rhendal_LetMeSee") -- Hmm, let me see... Interesting. It seems like the potion has not only brought you back some memories, but has also revealed this mark.
 		DL:addNode()
@@ -165,7 +167,8 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createNPCNode(55, -2, "DL_Rhendal_Curse") -- I think it's some kind of curse, and it's getting stronger. You'd be better off with finding someone that can break it. I have no knowledge about this kind of magic, I'm sorry.
-		DL:changeQuestState("the_mark", "started")
+		DL:addQuestDescription("the_mark", 1)
+		DL:addConditionProgress("npc_rhendal", "the_mark")
 		DL:addNode()
 		
 	end
