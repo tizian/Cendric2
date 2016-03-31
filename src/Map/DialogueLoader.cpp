@@ -185,12 +185,8 @@ bool DialogueLoader::hasItem(const std::string& item, int amount) const {
 		g_logger->logError("DialogueLoader", "Item key cannot be empty and amount has to be > 0");
 		return false;
 	}
-	auto const items = m_core->getItems();
-	
-	if (items->find(item) == items->end()) 
-		return false;
 
-	return items->at(item) >= amount;
+	return m_core->hasItem(item, amount);
 }
 
 void DialogueLoader::addItem(const std::string& itemID, int amount) {

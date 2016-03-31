@@ -26,8 +26,7 @@ public:
 	const Item* getEquippedItem(ItemType type);
 	// getter for currently equipped weapon. convenience method for getItem of type weapon with a dynamic cast.
 	const Weapon* getWeapon();
-	// returns the item of id "id"
-	const Item* getItem(const std::string& id);
+
 	QuestState getQuestState(const std::string& id) const;
 	void setQuestState(const std::string& id, QuestState state);
 	void setQuickslot(const std::string& item, int nr);
@@ -43,8 +42,6 @@ public:
 	bool quicksave();
 	// loads equipped itemvector (reload if not empty)
 	void loadEquipmentItems();
-	// loads itemvector (reload if not empty)
-	void loadItems();
 	// loads all quests that are started, completed or failed.
 	void loadQuests();
 	// reloads only the weapon slots.
@@ -114,6 +111,8 @@ public:
 	bool isEnemyKilled(const std::string& levelID, int objectID);
 	// was a trigger already triggered?
 	bool isTriggerTriggered(const std::string& world, int triggerID);
+	// returns whether cendric has at least the given amount of items of this key in his inventory and/or equipped.
+	bool hasItem(const std::string& itemID, int amount) const;
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.
 	MerchantData getMerchantData(const std::string& merchantID);
 	// sets the merchant data of this merchant id
@@ -129,8 +128,6 @@ public:
 private:
 	// clears equipped itemvector
 	void clearEquippedItems();
-	// clears itemvector
-	void clearItems();
 	// reload attributes based on equipped items (called by load). all attributes coming from food are removed.
 	void reloadAttributes();
 	// add gold to the data
@@ -145,7 +142,6 @@ private:
 	// base attributes plus the attributes of all currently equipped items
 	AttributeData m_totalAttributes;
 
-	std::map<std::string, Item> m_items;
 	std::map<ItemType, Item*> m_equippedItems;
 	std::map<std::string, QuestData> m_quests;
 

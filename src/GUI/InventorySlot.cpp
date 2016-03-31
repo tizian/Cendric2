@@ -8,11 +8,11 @@ using namespace std;
 const float InventorySlot::SIZE = 58.f;
 const float InventorySlot::ICON_OFFSET = 4.f;
 
-InventorySlot::InventorySlot(const Item& item, int amount) : m_item(item.getID()) {
+InventorySlot::InventorySlot(const std::string& itemID, int amount) : m_item(itemID) {
 	m_type = m_item.getType();
 
 	m_iconTexture = g_resourceManager->getTexture(ResourceID::Texture_items);
-	m_iconTextureRect = sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
+	m_iconTextureRect = sf::IntRect(m_item.getIconTextureLocation().x, m_item.getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);

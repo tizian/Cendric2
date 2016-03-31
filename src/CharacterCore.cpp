@@ -20,7 +20,6 @@ CharacterCore::CharacterCore(const CharacterCoreData& data) {
 
 CharacterCore::~CharacterCore() {
 	clearEquippedItems();
-	clearItems();
 }
 
 bool CharacterCore::quickload() {
@@ -71,18 +70,6 @@ const Item* CharacterCore::getEquippedItem(ItemType type) {
 		loadEquipmentItems();
 	}
 	return m_equippedItems.at(type);
-}
-
-const Item* CharacterCore::getItem(const std::string& id) {
-	if (m_items.empty()) {
-		loadItems();
-	}
-	if (m_items.find(id) == m_items.end()) {
-		g_logger->logError("CharacterCore", "Item with id: " + id + " does not exist!");
-		return nullptr;
-	}
-
-	return &m_items.at(id);
 }
 
 const Weapon* CharacterCore::getWeapon() {
@@ -226,26 +213,11 @@ void CharacterCore::loadEquipmentItems() {
 	m_equippedItems.insert({ ItemType::Equipment_ring_2, eqRing2 });
 }
 
-void CharacterCore::loadItems() {
-	clearItems();
-	for (auto& item : m_data.items) {
-		if (!g_databaseManager->itemExists(item.first)) {
-			g_logger->logError("CharacterCore", "Item not found: " + item.first);
-			continue;
-		}
-		m_items.insert({ item.first, Item(item.first) });
-	}
-}
-
 void CharacterCore::clearEquippedItems() {
 	for (auto& it : m_equippedItems) {
 		delete it.second;
 	}
 	m_equippedItems.clear();
-}
-
-void CharacterCore::clearItems() {
-	m_items.clear();
 }
 
 void CharacterCore::initializeLevelMaps(const std::string& level) {
@@ -344,9 +316,7 @@ bool CharacterCore::isQuestComplete(const std::string& questID) const {
 	// check collectibles
 	if (!data.collectibles.empty()) {
 		for (auto& it : data.collectibles) {
-			if (m_data.items.find(it.first) == m_data.items.end())
-				return false;
-			if (m_data.items.at(it.first) < it.second)
+			if (!hasItem(it.first, it.second))
 				return false;
 		}
 	}
@@ -410,6 +380,29 @@ bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID)
 	if (m_data.triggersTriggered.find(worldID) == m_data.triggersTriggered.end()) return false;
 	if (m_data.triggersTriggered.at(worldID).find(objectID) == m_data.triggersTriggered.at(worldID).end()) return false;
 	return true;
+}
+
+bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
+	int foundAmount = 0;
+	if (m_data.equippedBack.compare(itemID) == 0)
+		foundAmount++;
+	if (m_data.equippedBody.compare(itemID) == 0)
+		foundAmount++;
+	if (m_data.equippedHead.compare(itemID) == 0)
+		foundAmount++;
+	if (m_data.equippedNeck.compare(itemID) == 0)
+		foundAmount++;
+	if (m_data.equippedRing1.compare(itemID) == 0)
+		foundAmount++;
+	if (m_data.equippedRing2.compare(itemID) == 0)
+		foundAmount++;
+	if (m_data.equippedWeapon.compare(itemID) == 0)
+		foundAmount++;
+
+	if (m_data.items.find(itemID) != m_data.items.end())
+		foundAmount += m_data.items.at(itemID);
+
+	return foundAmount >= amount;
 }
 
 const CharacterCoreData& CharacterCore::getData() const {
@@ -487,12 +480,6 @@ void CharacterCore::addItem(const std::string& item, int quantity) {
 	else {
 		m_data.items.insert({ item, quantity });
 	}
-
-	if (!g_databaseManager->itemExists(item)) {
-		g_logger->logError("CharacterCore", "Item not found: " + item);
-		return;
-	}
-	m_items.insert({ item, Item(item) });
 }
 
 void CharacterCore::removeItem(const std::string& item, int quantity) {
@@ -644,5 +631,4 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 		addItem(oldItem, 1);
 	}
 	loadEquipmentItems();
-	loadItems();
 }

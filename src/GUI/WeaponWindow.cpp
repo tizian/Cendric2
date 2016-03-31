@@ -20,7 +20,7 @@ void WeaponWindow::reload() {
 		m_weaponDescription.setString("");
 	}
 	else {
-		m_weaponSlot = new InventorySlot(*m_weapon, -1);
+		m_weaponSlot = new InventorySlot(m_weapon->getID(), -1);
 		m_weaponName.setString(g_textProvider->getText(m_weapon->getID(), "item"));
 		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item_desc", GUIConstants::CHARACTER_SIZE_M,
 			static_cast<int>(WIDTH)));

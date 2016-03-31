@@ -134,7 +134,7 @@ void InventoryEquipment::reload() {
 			m_slots.insert({ it, InventorySlot(tex, texPos) });
 		}
 		else {
-			m_slots.insert({ it, InventorySlot(*(m_core->getEquippedItem(it)), -1) });
+			m_slots.insert({ it, InventorySlot(m_core->getEquippedItem(it)->getID(), -1) });
 		}
 		texPos.x += 50;
 		m_slots.at(it).setItemType(it);

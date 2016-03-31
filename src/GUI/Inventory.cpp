@@ -148,7 +148,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
 
-	(*tab).insert({ bean.item_id, InventorySlot(Item(itemID), m_core->getData().items.at(itemID)) });
+	(*tab).insert({ bean.item_id, InventorySlot(itemID, m_core->getData().items.at(itemID)) });
 
 	calculateSlotPositions(*tab);
 }
@@ -168,7 +168,7 @@ void Inventory::handleMapRightClick(InventorySlot* clicked) {
 void Inventory::handleLevelRightClick(InventorySlot* clicked) {
 	if (m_levelInterface == nullptr || clicked == nullptr) return;
 	if (clicked->getItemType() == ItemType::Consumable)
-		m_levelInterface->consumeItem(clicked->getItem());
+		m_levelInterface->consumeItem(clicked->getItemID());
 	else if (clicked->getItemType() == ItemType::Document)
 		showDocument(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Permanent)
@@ -460,11 +460,10 @@ void Inventory::reload() {
 	clearAllSlots();
 	hideDescription();
 	hideDocument();
-	m_core->loadItems();
 	for (auto& itemData : m_core->getData().items) {
-		const Item* item = m_core->getItem(itemData.first);
-		if (item == nullptr || m_typeMap.find(item->getType()) == m_typeMap.end()) continue;
-		m_typeMap.at(item->getType())->insert({ item->getID(), InventorySlot(*item, itemData.second) });
+		Item item(itemData.first);
+		if (m_typeMap.find(item.getType()) == m_typeMap.end()) continue;
+		m_typeMap.at(item.getType())->insert({ item.getID(), InventorySlot(item.getID(), itemData.second) });
 	}
 
 	calculateSlotPositions(m_consumableItems);

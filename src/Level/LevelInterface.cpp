@@ -54,7 +54,9 @@ void LevelInterface::notifyConsumableDrop(const SlotClone* item) {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
 
-void LevelInterface::consumeItem(const Item& item) {
+void LevelInterface::consumeItem(const std::string& itemID) {
+	Item item(itemID);
+	if (item.getType() != ItemType::Consumable) return;
 	m_character->consumeFood(
 		item.getFoodDuration(),
 		item.getAttributes());

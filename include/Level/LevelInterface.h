@@ -23,7 +23,7 @@ public:
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item);
 	// consumes a consumable item
-	void consumeItem(const Item& item);
+	void consumeItem(const std::string& itemID);
 	// highlight quickslots
 	void highlightQuickslots(bool highlight);
 	// reloads inventory and quickslot bar

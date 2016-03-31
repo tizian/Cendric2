@@ -79,9 +79,7 @@ void QuickSlot::render(sf::RenderTarget& renderTarget) {
 
 void QuickSlot::consume() {
 	if (m_isEmpty) return;
-	const Item* item = m_core->getItem(m_itemID);
-	if (item == nullptr) return;
-	m_interface->consumeItem(*item);
+	m_interface->consumeItem(m_itemID);
 }
 
 void QuickSlot::reload() {
@@ -97,13 +95,13 @@ void QuickSlot::reload() {
 	else {
 		// the slot is filled
 		m_isEmpty = false;
-		const Item* item = m_core->getItem(m_itemID);
-		if (item == nullptr) return;
+		Item item(m_itemID);
+		if (item.getType() == ItemType::VOID) return;
 		int amount = m_core->getItems()->at(m_itemID);
 
 		m_iconRect.setTextureRect(sf::IntRect(
-			item->getIconTextureLocation().x,
-			item->getIconTextureLocation().y,
+			item.getIconTextureLocation().x,
+			item.getIconTextureLocation().y,
 			static_cast<int>(ICON_SIZE),
 			static_cast<int>(ICON_SIZE)));
 

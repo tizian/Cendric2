@@ -8,7 +8,7 @@
 class InventorySlot : public Slot {
 public:
 	// constructor for filled slots. if amount is < 0, the amount text won't show.
-	InventorySlot(const Item& item, int amount);
+	InventorySlot(const std::string& itemID, int amount);
 	// constructor for placeholder slots
 	InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos);
 

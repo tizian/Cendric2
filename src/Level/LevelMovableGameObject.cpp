@@ -83,7 +83,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 }
 
 sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const {
-	return sf::Vector2f(0.f, 0.f);
+	return sf::Vector2f(0.f, 10.f);
 }
 
 void LevelMovableGameObject::addAttributes(const sf::Time& duration, const AttributeData& attributes) {

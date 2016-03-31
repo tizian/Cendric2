@@ -16,16 +16,16 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_rhendal", "potion_drunk") and not DL:isConditionFulfilled("npc_rhendal", "what_is_a_mage")) then 
 		DL:addChoice(40, "DL_Choice_WhatDoesThatMean") --  A mage... What does that mean?
 	end
-	if (DL:isConditionFulfilled("npc_rhendal", "what_is_a_mage") and DL:isQuestState("hawthorn_staff", "void")) then
+	if (DL:isConditionFulfilled("npc_rhendal", "what_is_a_mage") and not DL:isConditionFulfilled("npc_rhendal", "hawthorn_staff")) then
 		DL:addChoice(60, "DL_Choice_WhatJob") -- What job can you offer?
 	end
-	if (DL:isQuestState("hawthorn_staff", "completed") and DL:isQuestState("broken_bridge", "void") and not DL:isConditionFulfilled("npc_rhendal", "evil")) then
+	if (DL:isConditionFulfilled("npc_rhendal", "hawthorn_staff") and DL:isQuestState("broken_bridge", "void") and not DL:isConditionFulfilled("npc_rhendal", "evil")) then
 		DL:addChoice(80, "DL_Choice_HowCanIHelp") -- Okay, how can I help you?
 	end
 	if (DL:isConditionFulfilled("npc_rhendal", "potion_drunk") and not DL:isConditionFulfilled("npc_rhendal", "the_mark")) then 
 		DL:addChoice(50, "DL_Choice_WhatAboutTheMark") --  About that mark on my wrist...
 	end
-	if (not DL:isConditionFulfilled("npc_rhendal", "potion_drunk") or not DL:isQuestState("hawthorn_staff", "void")) then
+	if (not DL:isConditionFulfilled("npc_rhendal", "potion_drunk") or DL:isConditionFulfilled("npc_rhendal", "hawthorn_staff")) then
 		DL:addChoice(-1, "DL_Choice_CU") --  See you later
 	end
 
@@ -43,7 +43,7 @@ loadDialogue = function(DL)
 
 		DL:setRoot(0)
 		
-		DL:createNPCNode(1, -2, "DL_Rhendal_SoYoureAMage") -- You're a mage, boy. I've felt that you have a strong magic aura the first time you walked through that door.
+		DL:createNPCNode(1, -2, "DL_Rhendal_SoYoureAMage") -- So you're a mage. I've felt that you have a strong magic aura the first time you walked through that door.
 		DL:addNode()
 	
 	elseif (DL:isConditionFulfilled("npc_rhendal", "talked")) then
@@ -78,7 +78,7 @@ loadDialogue = function(DL)
 		DL:createCendricNode(5, 6, "DL_Cendric_Problem") -- I've awoken in the forest in the north and I can't remember anything. I have no clue who I am and how I got there. My name is Cendric, that's the only thing I know.
 		DL:addNode()
 		
-		DL:createNPCNode(6, 7, "DL_Rhendal_Eyeballing") -- That's interesting and worrying at the same time, boy. But you're lucky, I happen to be initiated in the art of alchemy and I know just the right potion that may help you.
+		DL:createNPCNode(6, 7, "DL_Rhendal_Eyeballing") -- That's interesting and worrying at the same time. But you're lucky, I happen to be initiated in the art of alchemy and I know just the right potion that may help you.
 		DL:addNode()
 		
 		DL:createNPCNode(7, -2, "DL_Rhendal_BringMe") -- I have most ingredients for it right here. If you could go pick the fresh leaves of a Silkweed I can start to prepare the potion for you. It grows in my garden, just outside.
@@ -173,11 +173,12 @@ loadDialogue = function(DL)
 		
 	end
 	
-	if (DL:isConditionFulfilled("npc_rhendal", "what_is_a_mage") and DL:isQuestState("hawthorn_staff", "void")) then
+	if (DL:isConditionFulfilled("npc_rhendal", "what_is_a_mage") and not DL:isConditionFulfilled("npc_rhendal", "hawthorn_staff")) then
 		
 		if (DL:hasItem("we_hawthorn", 1)) then 
 		
 			DL:createNPCNode(60, 61, "DL_Rhendal_YouNeedAStaff") -- Before you can take this job, you need a staff to control and focus your magic. I grow a magical Hawthorn tree in my garden. Take a branch from this tree and you will have what you need.  
+			DL:addConditionProgress("npc_rhendal", "hawthorn_staff")
 			DL:addNode()
 			
 			DL:createCendricNode(61, 62, "DL_Cendric_IAlreadyHave") -- ... I think I ...
@@ -189,6 +190,7 @@ loadDialogue = function(DL)
 		
 			DL:createNPCNode(60, -1, "DL_Rhendal_YouNeedAStaff") -- Before you can take this job, you need a staff to control and focus your magic. I grow a magical Hawthorn tree in my garden. Take a branch from this tree and you will have what you need.  
 			DL:changeQuestState("hawthorn_staff", "started")
+			DL:addConditionProgress("npc_rhendal", "hawthorn_staff")
 			DL:addNode()
 	
 		end
@@ -203,7 +205,7 @@ loadDialogue = function(DL)
 			
 	end
 	
-	if (DL:isQuestState("hawthorn_staff", "completed") and DL:isQuestState("broken_bridge", "void") and not DL:isConditionFulfilled("npc_rhendal", "evil")) then
+	if (DL:isConditionFulfilled("npc_rhendal", "hawthorn_staff") and DL:isQuestState("broken_bridge", "void") and not DL:isConditionFulfilled("npc_rhendal", "evil")) then
 		
 		DL:createNPCNode(80, 81, "DL_Rhendal_OurProblem") -- The only way between our village and the farmers that supply us with goods leads over the bridge in the West.  
 		DL:addNode()
