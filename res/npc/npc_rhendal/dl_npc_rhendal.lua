@@ -207,22 +207,23 @@ loadDialogue = function(DL)
 	
 	if (DL:isConditionFulfilled("npc_rhendal", "hawthorn_staff") and DL:isQuestState("broken_bridge", "void") and not DL:isConditionFulfilled("npc_rhendal", "evil")) then
 		
-		DL:createNPCNode(80, 81, "DL_Rhendal_OurProblem") -- The only way between our village and the farmers that supply us with goods leads over the bridge in the West.  
+		DL:createNPCNode(80, 81, "DL_Rhendal_OurProblem") -- The only way between our village and the tavern leads over the bridge in the West. The innkeeper brews a special kind of schnapps which I need for one of my potions.
 		DL:addNode()
 		
-		DL:createNPCNode(81, 82, "DL_Rhendal_BrokenBridge") -- Unfortunately, that bridge has broken lately and it will take us some days to rebuild it. But one of the farmers has promised that he will show up today.
+		DL:createNPCNode(81, 82, "DL_Rhendal_BrokenBridge") -- Unfortunately, that bridge has broken lately and it will take us some days to rebuild it.
 		DL:addNode()
 		
-		DL:createNPCNode(82, 83, "DL_Rhendal_YourJob") -- Your job would to get to the other side of the river by freezing a small passage, so that he can get through. Would you manage to do this?
+		DL:createNPCNode(82, 83, "DL_Rhendal_YourJob") -- Your job would to get to the other side of the river by freezing a small passage, and get me a bottle of this schnapps from the tavern.
 		DL:addNode()
 		
 		DL:createChoiceNode(83)
-		DL:addChoice(84, "DL_Choice_IWillHelp") --  Okay, I'll see what I can do.
+		DL:addChoice(84, "DL_Choice_IWillHelp") --  Okay, I'll see what I can do. 
 		DL:addChoice(85, "DL_Choice_WhatsInIt") --  So, what's in it for me then?
 		DL:addChoice(86, "DL_Choice_IWontHelp") --  I don't think I should waste my power like this...
 		DL:addNode()
 		
-		DL:createNPCNode(84, -2, "DL_Rhendal_BrokenBridgeQuest") -- Great. I wish you the best of luck!
+		DL:createNPCNode(84, -2, "DL_Rhendal_BrokenBridgeQuest") -- Great. Just ask the innkeeper for a "feudal fire", he'll know what you want. And take these coins, it should be enough.
+		DL:addGold(20)
 		DL:changeQuestState("broken_bridge", "started")
 		DL:addNode()
 		

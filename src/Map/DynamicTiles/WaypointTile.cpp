@@ -8,7 +8,7 @@
 REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Waypoint, WaypointTile)
 
 WaypointTile::WaypointTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
-	addComponent(new TooltipComponent(g_textProvider->getText("Fireplace"), this));
+	addComponent(new TooltipComponent(g_textProvider->getText("Waypoint"), this));
 }
 
 void WaypointTile::init() {

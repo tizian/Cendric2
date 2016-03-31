@@ -1,0 +1,93 @@
+# time played, in seconds
+time.played:89
+savegame.name:>>>Patrikan
+savegame.date:1459425179
+level.id:res/level/crypt/crypt.tmx
+level.position:710.000000,1460.000000
+is.in.level:0
+map.id:res/map/meadows/meadows.tmx
+map.position:1524.307495,1668.585205
+# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
+# damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
+# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
+attributes:102,0,0,5,0,0,0,0,0,0,0,0,0,0
+gold:332
+# items in inventory:
+item.id:fo_apple,1
+item.id:fo_caveberry,4
+item.id:fo_glowingshroom,3
+item.id:fo_healingherb,4
+item.id:fo_lesserhealingpotion,5
+item.id:fo_rawmeat,1
+item.id:fo_roastedmeat,5
+item.id:mi_candleholder,1
+item.id:mi_goldengoblet,3
+item.id:mi_teeth,1
+item.id:we_simplesword,1
+item.id:we_walkingpole,1
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+equipped.spellslot:3
+# equipment:
+equipped.back:
+equipped.body:
+equipped.head:
+equipped.neck:eq_silvernecklace
+equipped.ring1:
+equipped.ring2:eq_ironring
+equipped.weapon:we_hawthorn
+# quickslot assignments:
+quickslot:1,fo_roastedmeat
+quickslot:2,
+# enemies killed in level:
+enemies.killed:res/level/crypt/crypt.tmx,10,11,15,17
+enemies.killed:res/level/eldergarden/eldergarden.tmx,88
+enemies.killed:res/level/ratcave/ratcave.tmx,1,2,4,5,6,7
+enemies.killed:res/level/rockfall/rockfall.tmx,74,75,78
+# enemies looted in level:
+enemies.looted:res/level/crypt/crypt.tmx,10,11,15,17
+enemies.looted:res/level/eldergarden/eldergarden.tmx,88
+enemies.looted:res/level/ratcave/ratcave.tmx,1,2,4,5,6,7
+enemies.looted:res/level/rockfall/rockfall.tmx,78
+# items looted in level:
+items.looted:res/level/crypt/crypt.tmx,315,451,486,528,592,625
+items.looted:res/level/eldergarden/eldergarden.tmx,207,248,315,535,571,594
+items.looted:res/level/ratcave/ratcave.tmx,639,640,667,734,738,762,763,1052,1229,1302,1560,1758
+items.looted:res/level/rockfall/rockfall.tmx,514,517,518,572,894,1006
+# chests looted in level:
+items.looted:res/level/crypt/crypt.tmx,18
+items.looted:res/level/eldergarden/eldergarden.tmx
+items.looted:res/level/ratcave/ratcave.tmx
+items.looted:res/level/rockfall/rockfall.tmx
+# waypoints unlocked in map:
+waypoints.unlocked:res/map/elderhome/elderhome.tmx
+waypoints.unlocked:res/map/meadows/meadows.tmx,748,1387
+# triggers triggered in world:
+triggers.triggered:res/level/crypt/crypt.tmx
+triggers.triggered:res/level/eldergarden/eldergarden.tmx,92
+triggers.triggered:res/level/ratcave/ratcave.tmx,22
+triggers.triggered:res/level/rockfall/rockfall.tmx,82,83
+triggers.triggered:res/map/elderhome/elderhome.tmx
+triggers.triggered:res/map/meadows/meadows.tmx,107
+# quest states:
+quest.state:meat_delivery,2
+quest.state:roast_meat_for_ingrid,2
+quest.state:silkweed_potion,2
+quest.state:the_mark,1
+quest.state:the_rats_nest,2
+quest.state:who_am_i,2
+# quest targets killed:
+quest.progress.target:the_rats_nest,fire_rat,2,rat,4
+# quest conditions fulfilled:
+quest.progress.condition:who_am_i,information_gathered
+# quest descriptions unlocked:
+quest.progress.description:the_mark,1
+# conditions of a certain type fulfilled:
+progress.condition:default,tutorial_complete
+progress.condition:npc_edmond,talked_after_tutorial,talked_to
+progress.condition:npc_ingrid,meat_given,who_am_i
+progress.condition:npc_rhendal,evil,hawthorn_staff,potion_drunk,talked,the_mark,what_is_a_mage
+progress.condition:trigger,tutorial_started
+# merchand states:
+# spells learned:
+spell.learned:1,3
+# modifiers learned:
