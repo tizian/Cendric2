@@ -556,32 +556,7 @@ bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCore
 		return false;
 	}
 	item = item.substr(0, count);
-
-	switch (type) {
-	case ItemType::Equipment_head:
-		data.equippedHead = item;
-		break;
-	case ItemType::Equipment_ring_1:
-		data.equippedRing1 = item;
-		break;
-	case ItemType::Equipment_ring_2:
-		data.equippedRing2 = item;
-		break;
-	case ItemType::Equipment_weapon:
-		data.equippedWeapon = item;
-		break;
-	case ItemType::Equipment_body:
-		data.equippedBody = item;
-		break;
-	case ItemType::Equipment_neck:
-		data.equippedNeck = item;
-		break;
-	case ItemType::Equipment_back:
-		data.equippedBack = item;
-		break;
-	default:
-		return false;
-	}
+	data.equippedItems.at(type) = item;
 	return true;
 }
 
@@ -746,6 +721,10 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 
 	bool noError = true;
 
+	data.equippedItems.clear();
+	for (ItemType type = ItemType::Equipment_head; type <= ItemType::Equipment_back; type = static_cast<ItemType>((int)type + 1)) {
+		data.equippedItems.insert({ type, "" });
+	}
 	// read defined tags
 	while (pos < end) {
 		if (*pos == COMMENT_MARKER || *pos == '\n') {

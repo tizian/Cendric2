@@ -19,7 +19,7 @@ CharacterCore::CharacterCore(const CharacterCoreData& data) {
 }
 
 CharacterCore::~CharacterCore() {
-	clearEquippedItems();
+	delete m_weapon;
 }
 
 bool CharacterCore::quickload() {
@@ -33,10 +33,11 @@ bool CharacterCore::load(const std::string& fileName) {
 		return false;
 	}
 
-	// measuring the time played with this save.
-	m_stopwatch.restart();
+	loadWeapon();
 	reloadAttributes();
 	loadQuests();
+	// measuring the time played with this save.
+	m_stopwatch.restart();
 	return true;
 }
 
@@ -65,20 +66,12 @@ void CharacterCore::loadNew() {
 	reloadAttributes();
 }
 
-const Item* CharacterCore::getEquippedItem(ItemType type) {
-	if (m_equippedItems.empty()) {
-		loadEquipmentItems();
-	}
-	return m_equippedItems.at(type);
+const std::string& CharacterCore::getEquippedItem(ItemType type) {
+	return m_data.equippedItems.at(type);
 }
 
 const Weapon* CharacterCore::getWeapon() {
-	const Weapon* weapon;
-	if (!(weapon = dynamic_cast<const Weapon*>(getEquippedItem(ItemType::Equipment_weapon)))) {
-		// unexpected
-		return nullptr;
-	}
-	return weapon;
+	return m_weapon;
 }
 
 QuestState CharacterCore::getQuestState(const std::string& id) const {
@@ -145,79 +138,45 @@ bool CharacterCore::createFile(const std::string& fileName) const {
 
 void CharacterCore::reloadAttributes() {
 	m_totalAttributes = m_data.attributes;
-	loadEquipmentItems();
-	for (auto &it : m_equippedItems) {
-		if (it.second == nullptr) continue;
-		m_totalAttributes.addBean(it.second->getAttributes());
+	for (auto& it : m_data.equippedItems) {
+		if (it.second.empty()) continue;
+		Item item(it.second);
+		if (item.getType() == ItemType::VOID) continue;
+		m_totalAttributes.addBean(item.getAttributes());
 	}
 	m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 }
 
 void CharacterCore::reloadWeaponSlots() {
-	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
-	if (wep == nullptr) return;
-	wep->reload();
+	if (m_weapon == nullptr) return;
+	m_weapon->reload();
 	for (int slot = 0; slot < static_cast<int>(m_data.equippedWeaponSlots.size()); ++slot) {
-		wep->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
+		m_weapon->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
 		for (int i = 0; i < static_cast<int>(m_data.equippedWeaponSlots[slot].second.size()); ++i) {
-			wep->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
+			m_weapon->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
 		}
 	}
 }
 
-void CharacterCore::loadEquipmentItems() {
-	clearEquippedItems();
+void CharacterCore::loadWeapon() {
+	delete m_weapon;
+	m_weapon = nullptr;
 
-	Weapon* eqWeapon = nullptr;
-	Item* eqBack = nullptr;
-	Item* eqBody = nullptr;
-	Item* eqHead = nullptr;
-	Item* eqNeck = nullptr;
-	Item* eqRing1 = nullptr;
-	Item* eqRing2 = nullptr;
-	if (!m_data.equippedWeapon.empty() && g_databaseManager->itemExists(m_data.equippedWeapon)) {
-		eqWeapon = new Weapon(m_data.equippedWeapon);
+	if (!m_data.equippedItems.at(ItemType::Equipment_weapon).empty()) {
+		m_weapon = new Weapon(m_data.equippedItems.at(ItemType::Equipment_weapon));
+		if (m_weapon->getType() != ItemType::Equipment_weapon) {
+			delete m_weapon;
+			m_weapon = nullptr;
+			return;
+		}
 		// add equipped spells and their modifiers
 		for (int slot = 0; slot < static_cast<int>(m_data.equippedWeaponSlots.size()); ++slot) {
-			eqWeapon->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
+			m_weapon->addSpell(slot, m_data.equippedWeaponSlots[slot].first, false);
 			for (int i = 0; i < static_cast<int>(m_data.equippedWeaponSlots[slot].second.size()); ++i) {
-				eqWeapon->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
+				m_weapon->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
 			}
 		}
 	}
-	if (!m_data.equippedBack.empty() && g_databaseManager->itemExists(m_data.equippedBack)) {
-		eqBack = new Item(m_data.equippedBack);
-	}
-	if (!m_data.equippedBody.empty() && g_databaseManager->itemExists(m_data.equippedBody)) {
-		eqBody = new Item(m_data.equippedBody);
-	}
-	if (!m_data.equippedHead.empty() && g_databaseManager->itemExists(m_data.equippedHead)) {
-		eqHead = new Item(m_data.equippedHead);
-	}
-	if (!m_data.equippedNeck.empty() && g_databaseManager->itemExists(m_data.equippedNeck)) {
-		eqNeck = new Item(m_data.equippedNeck);
-	}
-	if (!m_data.equippedRing1.empty() && g_databaseManager->itemExists(m_data.equippedRing1)) {
-		eqRing1 = new Item(m_data.equippedRing1);
-	}
-	if (!m_data.equippedRing2.empty() && g_databaseManager->itemExists(m_data.equippedRing2)) {
-		eqRing2 = new Item(m_data.equippedRing2);
-	}
-
-	m_equippedItems.insert({ ItemType::Equipment_weapon, eqWeapon });
-	m_equippedItems.insert({ ItemType::Equipment_back, eqBack });
-	m_equippedItems.insert({ ItemType::Equipment_body, eqBody });
-	m_equippedItems.insert({ ItemType::Equipment_head, eqHead });
-	m_equippedItems.insert({ ItemType::Equipment_neck, eqNeck });
-	m_equippedItems.insert({ ItemType::Equipment_ring_1, eqRing1 });
-	m_equippedItems.insert({ ItemType::Equipment_ring_2, eqRing2 });
-}
-
-void CharacterCore::clearEquippedItems() {
-	for (auto& it : m_equippedItems) {
-		delete it.second;
-	}
-	m_equippedItems.clear();
 }
 
 void CharacterCore::initializeLevelMaps(const std::string& level) {
@@ -383,22 +342,14 @@ bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID)
 }
 
 bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
+	if (itemID.empty()) return false;
 	int foundAmount = 0;
-	if (m_data.equippedBack.compare(itemID) == 0)
-		foundAmount++;
-	if (m_data.equippedBody.compare(itemID) == 0)
-		foundAmount++;
-	if (m_data.equippedHead.compare(itemID) == 0)
-		foundAmount++;
-	if (m_data.equippedNeck.compare(itemID) == 0)
-		foundAmount++;
-	if (m_data.equippedRing1.compare(itemID) == 0)
-		foundAmount++;
-	if (m_data.equippedRing2.compare(itemID) == 0)
-		foundAmount++;
-	if (m_data.equippedWeapon.compare(itemID) == 0)
-		foundAmount++;
-
+	for (auto& item : m_data.equippedItems) {
+		if (item.second.compare(itemID) == 0) {
+			foundAmount++;
+		}
+	}
+	
 	if (m_data.items.find(itemID) != m_data.items.end())
 		foundAmount += m_data.items.at(itemID);
 
@@ -523,9 +474,8 @@ void CharacterCore::removeSpell(int slotNr) {
 }
 
 void CharacterCore::addSpell(SpellID id, int slotNr) {
-	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
-	if (wep == nullptr) return;
-	if (!wep->isSpellAllowed(slotNr, id)) return;
+	if (m_weapon == nullptr) return;
+	if (!m_weapon->isSpellAllowed(slotNr, id)) return;
 	// check if this spell is already in another slot, if yes, remove that
 	for (auto& it : m_data.equippedWeaponSlots) {
 		if (it.first == id) {
@@ -545,9 +495,8 @@ void CharacterCore::addSpell(SpellID id, int slotNr) {
 }
 
 void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int modifierNr) {
-	Weapon* wep = dynamic_cast<Weapon*>(m_equippedItems.at(ItemType::Equipment_weapon));
-	if (wep == nullptr) return;
-	if (wep->addModifier(slotNr, modifierNr, modifier, true)) {
+	if (m_weapon == nullptr) return;
+	if (m_weapon->addModifier(slotNr, modifierNr, modifier, true)) {
 		// check if this spell slot exists. If not, fill the slots
 		if (static_cast<int>(m_data.equippedWeaponSlots.size()) < slotNr + 1) {
 			for (size_t i = m_data.equippedWeaponSlots.size(); static_cast<int>(i) < slotNr + 1; ++i) {
@@ -585,50 +534,26 @@ void CharacterCore::learnSpell(SpellID id) {
 }
 
 void CharacterCore::equipItem(const std::string& item, ItemType type) {
-	std::string oldItem = "";
-	switch (type) {
-	case ItemType::Equipment_back:
-		oldItem = m_data.equippedBack;
-		m_data.equippedBack = item;
-		break;
-	case ItemType::Equipment_body:
-		oldItem = m_data.equippedBody;
-		m_data.equippedBody = item;
-		break;
-	case ItemType::Equipment_head:
-		oldItem = m_data.equippedHead;
-		m_data.equippedHead = item;
-		break;
-	case ItemType::Equipment_neck:
-		oldItem = m_data.equippedNeck;
-		m_data.equippedNeck = item;
-		break;
-	case ItemType::Equipment_ring_1:
-		oldItem = m_data.equippedRing1;
-		m_data.equippedRing1 = item;
-		break;
-	case ItemType::Equipment_ring_2:
-		oldItem = m_data.equippedRing2;
-		m_data.equippedRing2 = item;
-		break;
-	case ItemType::Equipment_weapon:
-		oldItem = m_data.equippedWeapon;
-		m_data.equippedWeapon = item;
+	if (m_data.equippedItems.find(type) == m_data.equippedItems.end())
+		return;
+	std::string oldItem = m_data.equippedItems.at(type);
+	m_data.equippedItems.at(type) = item;
+
+	// special case for weapon
+	if (type == ItemType::Equipment_weapon) {
 		m_data.equippedWeaponSlots.clear();
-		if (!m_data.equippedWeapon.empty()) {
-			std::vector<ItemWeaponSlotBean> wep = g_databaseManager->getItemWeaponSlotBeans(m_data.equippedWeapon);
+		loadWeapon();
+		if (item.empty()) {
+			std::vector<ItemWeaponSlotBean> wep = g_databaseManager->getItemWeaponSlotBeans(item);
 			for (size_t i = 0; i < wep.size(); ++i) {
 				m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
 			}
 			reloadWeaponSlots();
 		}
-		break;
-	default:
-		return;
 	}
+
 	removeItem(item, 1);
 	if (!oldItem.empty()) {
 		addItem(oldItem, 1);
 	}
-	loadEquipmentItems();
 }
