@@ -40,6 +40,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item_desc', 'Fresh and juicy.', 'Frisch und saftig.', 'Frisch und saftig.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_ingridstew', 'item', 'Ingrid''s Stew', 'Ingrids Eintopf', 'Ingrids Eintopf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_ingridstew', 'item_desc', 'A delicious dish cooked by Ingrid. Simply irresistible!', 'Ein köstliches Gericht, gekocht von Ingrid. Einfach unwiderstehlich!', 'Es köstlichs Gricht, kocht vode Ingrid. Eifach unwiderstehlich!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_feudalfire', 'item', 'Feudal Fire', 'Feudales Feuer', 'Feudals Füür');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_feudalfire', 'item_desc', 'A strong spirit, is used for alchemistic purposes.', 'Ziemlich hochprozentig, wird für alchemistische Zwecke verwendet.', 'Zimlich hochprozentig, wird für alchemistischi Zweck bruucht.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item', 'Physalis', 'Physalis', 'Physalis');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item_desc', 'Looks tasty.', 'Sieht lecker aus.', 'Gseht fein uus.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item_desc', 'It still glows...','Er leuchtet immer noch...','Er lüchtet immer na...');

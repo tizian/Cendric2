@@ -56,6 +56,7 @@ public:
 protected:
 	WorldInterface* m_interface = nullptr;
 	ProgressLog* m_progressLog = nullptr;
+	sf::Music m_backgroundMusic;
 
 	// For lighting
 	sf::RenderTexture m_renderTexture;

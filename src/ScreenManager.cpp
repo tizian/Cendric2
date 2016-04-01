@@ -95,3 +95,4 @@ void ScreenManager::render(sf::RenderTarget &renderTarget) {
 	m_currentScreen->render(renderTarget);
 }
 
+

@@ -43,7 +43,6 @@ public:
 
 private:
 	Level m_currentLevel;
-	sf::Music m_backgroundMusic;
 	LevelMainCharacter* m_mainChar = nullptr;
 	std::string m_levelID;
 

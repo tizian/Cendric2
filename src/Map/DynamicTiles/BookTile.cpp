@@ -5,7 +5,7 @@
 
 BookTile::BookTile(const BookData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_data = data;
-	addComponent(new TooltipComponent(g_textProvider->getText("Book"), this));
+	addComponent(new TooltipComponent("Book", this));
 }
 
 void BookTile::init() {

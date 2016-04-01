@@ -154,11 +154,17 @@ void OptionsScreen::onBack() {
 void OptionsScreen::onApply() {
 	ConfigurationData& config = g_resourceManager->getConfiguration();
 	bool fullScreenOn = m_displayModeSelector->getChosenOptionIndex() == 1;
-	bool fullscreenChanged = config.isFullscreen != fullScreenOn;
+	bool screenChanged = config.isFullscreen != fullScreenOn;
+	screenChanged = screenChanged || config.isVSyncEnabled != m_vSyncCheckbox->isChecked();
+	screenChanged = screenChanged || config.isSmoothing != m_smoothingCheckbox->isChecked();
 	Language language = static_cast<Language>(m_languageSelector->getChosenOptionIndex() + 1);
 	bool languageChanged = config.language != language;
 	config.language = language;
-	config.isSoundOn = m_soundCheckbox->isChecked();
+	bool soundOn = m_soundCheckbox->isChecked();
+	bool soundChanged = soundOn != config.isSoundOn;
+	soundChanged = soundChanged || config.volumeSound != m_volumeSoundSlider->getSliderPosition();
+	soundChanged = soundChanged || config.volumeMusic != m_volumeMusicSlider->getSliderPosition();
+	config.isSoundOn = soundOn;
 	config.isQuickcast = m_quickCastCheckbox->isChecked();
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
 	config.isFullscreen = fullScreenOn;
@@ -170,12 +176,14 @@ void OptionsScreen::onApply() {
 	writer.saveToFile(config);
 	g_textProvider->reload();
 	setTooltipText("ConfigurationSaved", COLOR_GOOD, true);
-	if (fullscreenChanged) {
+	if (screenChanged) {
 		config.isWindowReload = true;
 	}
 	if (languageChanged) {
-		m_screenManager->clearBackupScreen();
 		setNextScreen(new OptionsScreen(getCharacterCore()));
+	}
+	if (languageChanged || soundChanged) {
+		m_screenManager->clearBackupScreen();
 	}
 }
 

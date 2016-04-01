@@ -37,6 +37,8 @@ item.id:mi_candleholder,1
 item.id:mi_silverplate,1
 item.id:mi_teeth,1
 item.id:qe_rope,1
+item.id:pe_ingridstew,1
+item.id:pe_feudalfire,1
 item.id:we_icestaff,1
 item.id:we_hawthorn,1
 item.id:we_oathbreaker,1
