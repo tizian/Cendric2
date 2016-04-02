@@ -30,8 +30,8 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 	
 	vector<string> gameData;
 	for (auto& it : equipmentOrder) {
-		if (screen->getCharacterCore()->getEquippedItem(it) == nullptr) continue;
-		gameData.push_back(screen->getCharacterCore()->getEquippedItem(it)->getID());
+		if (screen->getCharacterCore()->getEquippedItem(it).empty()) continue;
+		gameData.push_back(screen->getCharacterCore()->getEquippedItem(it));
 	}
 
 	for (auto& it : gameData) {

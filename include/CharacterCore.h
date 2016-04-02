@@ -23,8 +23,8 @@ public:
 	~CharacterCore();
 
 	// returns the currently equipped item of type 'type'
-	const Item* getEquippedItem(ItemType type);
-	// getter for currently equipped weapon. convenience method for getItem of type weapon with a dynamic cast.
+	const std::string& getEquippedItem(ItemType type);
+	// getter for currently equipped weapon. 
 	const Weapon* getWeapon();
 
 	QuestState getQuestState(const std::string& id) const;
@@ -40,8 +40,8 @@ public:
 	// uses the character core writer to save a .sav file. The name is the name chosen by the user.
 	bool save(const std::string& fileName, const std::string& name);
 	bool quicksave();
-	// loads equipped itemvector (reload if not empty)
-	void loadEquipmentItems();
+	// loads the weapon with its slots (reload if already loaded)
+	void loadWeapon();
 	// loads all quests that are started, completed or failed.
 	void loadQuests();
 	// reloads only the weapon slots.
@@ -126,8 +126,6 @@ public:
 	static const char* DEBUGSAVE_LOCATION;
 
 private:
-	// clears equipped itemvector
-	void clearEquippedItems();
 	// reload attributes based on equipped items (called by load). all attributes coming from food are removed.
 	void reloadAttributes();
 	// add gold to the data
@@ -142,8 +140,8 @@ private:
 	// base attributes plus the attributes of all currently equipped items
 	AttributeData m_totalAttributes;
 
-	std::map<ItemType, Item*> m_equippedItems;
 	std::map<std::string, QuestData> m_quests;
+	Weapon* m_weapon = nullptr;
 
 	CharacterCoreData m_data;
 

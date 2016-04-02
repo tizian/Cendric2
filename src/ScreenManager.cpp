@@ -16,12 +16,10 @@ ScreenManager::~ScreenManager() {
 	}
 	if (m_backUpScreen != nullptr && m_backUpScreen != m_currentScreen) {
 		m_backUpScreen->onExit(nullptr);
-		delete m_backUpScreen->getCharacterCore();
 		delete m_backUpScreen;
 	}
 	if (m_nextScreen != nullptr && m_nextScreen != m_currentScreen && m_nextScreen != m_backUpScreen) {
 		m_nextScreen->onExit(nullptr);
-		delete m_nextScreen->getCharacterCore();
 		delete m_nextScreen;
 	}
 }

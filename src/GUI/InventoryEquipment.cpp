@@ -130,11 +130,11 @@ void InventoryEquipment::reload() {
 	float yOffset = GUIConstants::TOP + YOFFSET;
 
 	for (auto& it : types) {
-		if (m_core->getEquippedItem(it) == nullptr) {
+		if (m_core->getEquippedItem(it).empty()) {
 			m_slots.insert({ it, InventorySlot(tex, texPos) });
 		}
 		else {
-			m_slots.insert({ it, InventorySlot(m_core->getEquippedItem(it)->getID(), -1) });
+			m_slots.insert({ it, InventorySlot(m_core->getEquippedItem(it), -1) });
 		}
 		texPos.x += 50;
 		m_slots.at(it).setItemType(it);
