@@ -9,11 +9,11 @@ GameObject::~GameObject() {
 	m_components.clear();
 }
 
-void GameObject::render(sf::RenderTarget &renderTarget) {
+void GameObject::render(sf::RenderTarget& renderTarget) {
 	// nop
 }
 
-void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget) {
+void GameObject::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	if (m_isDrawBoundingBox) {
 		renderTarget.draw(m_debugBox);
 	}
@@ -22,7 +22,7 @@ void GameObject::renderAfterForeground(sf::RenderTarget &renderTarget) {
 	}
 }
 
-void GameObject::setDebugBoundingBox(const sf::Color &debugColor) {
+void GameObject::setDebugBoundingBox(const sf::Color& debugColor) {
 	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
 
 	m_debugBox = sf::RectangleShape(getSize());
@@ -83,7 +83,7 @@ void GameObject::setState(GameObjectState state) {
 	m_state = state;
 }
 
-void GameObject::setBoundingBox(const sf::FloatRect &rect) {
+void GameObject::setBoundingBox(const sf::FloatRect& rect) {
 	m_boundingBox.width = rect.width;
 	m_boundingBox.height = rect.height;
 
@@ -178,7 +178,7 @@ GameObjectState GameObject::getGameObjectState() const {
 	return m_state;
 }
 
-void GameObject::updateTime(sf::Time &time, const sf::Time &frameTime) {
+void GameObject::updateTime(sf::Time& time, const sf::Time& frameTime) {
 	if (time == sf::Time::Zero) return;
 	time -= frameTime;
 	if (time < sf::Time::Zero) time = sf::Time::Zero;

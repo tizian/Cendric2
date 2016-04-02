@@ -152,17 +152,17 @@ void Screen::depthSortObjects(GameObjectType type, bool asc) {
 }
 
 void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget) {
-	for (auto& it : m_objects[type]) {
-		it->setViewable(isInsideView(renderTarget.getView(), *(it->getBoundingBox())));
-		if (it->isViewable())
-			it->render(renderTarget);
+	for (auto& obj : m_objects[type]) {
+		obj->setViewable(isInsideView(renderTarget.getView(), *(it->getBoundingBox())));
+		if (obj->isViewable())
+			obj->render(renderTarget);
 	}
 }
 
 void Screen::renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget) {
-	for (auto &it : m_objects[type]) {
-		if (it->isViewable())
-			it->renderAfterForeground(renderTarget);
+	for (auto& obj : m_objects[type]) {
+		if (obj->isViewable())
+			obj->renderAfterForeground(renderTarget);
 	}
 }
 

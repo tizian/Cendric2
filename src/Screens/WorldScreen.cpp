@@ -169,7 +169,7 @@ void WorldScreen::updateProgressLog(const sf::Time& frameTime) {
 	m_progressLog->update(frameTime);
 }
 
-void WorldScreen::render(sf::RenderTarget &renderTarget) {
+void WorldScreen::render(sf::RenderTarget& renderTarget) {
 	m_interface->render(renderTarget);
 	m_progressLog->render(renderTarget);
 }

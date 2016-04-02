@@ -18,7 +18,7 @@ void OptionsScreen::execUpdate(const sf::Time& frameTime) {
 	updateTooltipText(frameTime);
 }
 
-void OptionsScreen::render(sf::RenderTarget &renderTarget) {
+void OptionsScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 	renderObjects(GameObjectType::_Button, renderTarget);

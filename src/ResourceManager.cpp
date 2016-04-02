@@ -214,7 +214,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(ResourceID id) {
 	return getSoundBuffer(m_fileNames[id]);
 }
 
-sf::Font* ResourceManager::getFont(const std::string &filename) {
+sf::Font* ResourceManager::getFont(const std::string& filename) {
 	// does the font exist yet?
 	for (std::map<std::string, sf::Font*>::iterator it = m_fonts.begin();
 		it != m_fonts.end();
@@ -245,7 +245,7 @@ sf::Font* ResourceManager::getFont(ResourceID id) {
 	return getFont(m_fileNames[id]);
 }
 
-BitmapFont* ResourceManager::getBitmapFont(const std::string &filename) {
+BitmapFont* ResourceManager::getBitmapFont(const std::string& filename) {
 	// does the font exist yet?
 	for (auto it = m_bitmapFonts.begin();
 		it != m_bitmapFonts.end();
@@ -280,7 +280,7 @@ void ResourceManager::deleteResource(ResourceID id) {
 	deleteResource(m_fileNames[id]);
 }
 
-void ResourceManager::deleteResource(const std::string &filename) {
+void ResourceManager::deleteResource(const std::string& filename) {
 	// delete texture
 	auto const &textureIt = m_textures.find(filename);
 	if (textureIt != m_textures.end()) {

@@ -144,7 +144,7 @@ void MapScreen::setCooking() {
 	m_cookingWindow = new CookingWindow(this);
 }
 
-void MapScreen::render(sf::RenderTarget &renderTarget) {
+void MapScreen::render(sf::RenderTarget& renderTarget) {
 	sf::Vector2f focus = m_mainChar->getCenter();
 
 	// Render map background etc. to window							(Normal map background rendered)

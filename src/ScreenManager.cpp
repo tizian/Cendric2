@@ -91,7 +91,7 @@ void ScreenManager::requestQuit() {
 	m_isQuitRequested = true;
 }
 
-void ScreenManager::render(sf::RenderTarget &renderTarget) {
+void ScreenManager::render(sf::RenderTarget& renderTarget) {
 	m_currentScreen->render(renderTarget);
 }
 

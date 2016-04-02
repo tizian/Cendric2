@@ -34,7 +34,7 @@ public:
 	virtual void onLeftJustPressed();
 
 	void setBoundingBox(const sf::FloatRect& rect);
-	virtual void setDebugBoundingBox(const sf::Color &debugColor);
+	virtual void setDebugBoundingBox(const sf::Color& debugColor);
 	virtual void setSize(const sf::Vector2f& size);
 	virtual void setPosition(const sf::Vector2f& pos);
 	virtual void setPositionX(float posX);
@@ -63,7 +63,7 @@ public:
 	// convenience method for updating time values (used in many GOs). 
 	// The frame time is subtracted from the time but 
 	// if the time falls below sf::Time::Zero, it is set to sf::Time::Zero.
-	static void updateTime(sf::Time &time, const sf::Time &frameTime);
+	static void updateTime(sf::Time& time, const sf::Time& frameTime);
 
 protected:
 	GameObjectState m_state = GameObjectState::VOID;

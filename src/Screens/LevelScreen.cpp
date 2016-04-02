@@ -176,7 +176,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void LevelScreen::render(sf::RenderTarget &renderTarget) {
+void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	sf::Vector2f focus = m_mainChar->getCenter();
 
 	// Render level background and content to window				(Normal level background rendered)
