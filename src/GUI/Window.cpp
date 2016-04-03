@@ -78,6 +78,18 @@ void Window::setWidth(float width) {
 	m_ornamentLayer.setSize(getSize());
 }
 
+void Window::setMainColor(const sf::Color& color) {
+	m_mainLayer.setColor(color);
+}
+
+void Window::setBackColor(const sf::Color& color) {
+	m_backLayer.setColor(color);
+}
+
+void Window::setOrnamentColor(const sf::Color& color) {
+	m_ornamentLayer.setColor(color);
+}
+
 GameObjectType Window::getConfiguredType() const {
 	return GameObjectType::_Window;
 }

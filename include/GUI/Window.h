@@ -25,6 +25,10 @@ public:
 	void setHeight(float height);
 	void setWidth(float width);
 
+	void setMainColor(const sf::Color& color);
+	void setBackColor(const sf::Color& color);
+	void setOrnamentColor(const sf::Color& color);
+
 	virtual void setPosition(const sf::Vector2f& position) override;
 
 	GameObjectType getConfiguredType() const override;
