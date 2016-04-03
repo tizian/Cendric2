@@ -721,10 +721,6 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 
 	bool noError = true;
 
-	data.equippedItems.clear();
-	for (ItemType type = ItemType::Equipment_head; type <= ItemType::Equipment_back; type = static_cast<ItemType>((int)type + 1)) {
-		data.equippedItems.insert({ type, "" });
-	}
 	// read defined tags
 	while (pos < end) {
 		if (*pos == COMMENT_MARKER || *pos == '\n') {
