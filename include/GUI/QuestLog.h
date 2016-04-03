@@ -86,7 +86,7 @@ private:
 	void showDescription(const std::string& itemID);
 	void hideDescription();
 
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f((WIDTH - 3 * (GUIConstants::TEXT_OFFSET)) / 3.f, 40.f);
+	const sf::Vector2f BUTTON_SIZE = sf::Vector2f((WIDTH - 2 * (GUIConstants::TEXT_OFFSET)) / 3.f, 40.f);
 
 	std::map<QuestState, std::vector<QuestEntry>*> m_stateMap;
 };

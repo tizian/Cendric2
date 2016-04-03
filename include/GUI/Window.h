@@ -21,6 +21,7 @@ public:
 
 	virtual void render(sf::RenderTarget& renderTarget) override;
 
+	void setSize(const sf::Vector2f& size) override;
 	void setHeight(float height);
 	void setWidth(float width);
 

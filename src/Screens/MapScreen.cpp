@@ -1,9 +1,9 @@
 #include "Screens/MapScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Map/NPC.h"
-#include "ScreenManager.h"
+#include "Screens/ScreenManager.h"
 
-#include "ScreenOverlay.h"
+#include "ScreenOverlays/ScreenOverlay.h"
 
 using namespace std;
 

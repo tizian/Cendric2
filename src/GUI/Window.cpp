@@ -56,6 +56,12 @@ void Window::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_ornamentLayer);
 }
 
+void Window::setSize(const sf::Vector2f& size) {
+	GameObject::setSize(size);
+	setWidth(size.x);
+	setHeight(size.y);
+}
+
 void Window::setHeight(float height) {
 	if (height < 0.f) return;
 	m_boundingBox.height = height;

@@ -1,5 +1,5 @@
 #include "GameObjectComponents/LightComponent.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 
 LightComponent::LightComponent(LightData lightData, GameObject* parent) : GameObjectComponent(parent) {
 	m_lightObject = new LightObject(lightData);

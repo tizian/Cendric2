@@ -12,7 +12,7 @@
 
 #include "Structs/AttributeData.h"
 #include "Structs/CharacterCoreData.h"
-#include "ScreenOverlay.h"
+#include "ScreenOverlays/ScreenOverlay.h"
 
 class ScreenManager;
 

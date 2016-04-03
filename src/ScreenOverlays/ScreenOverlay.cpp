@@ -1,4 +1,6 @@
-#include "ScreenOverlay.h"
+#include "ScreenOverlays/ScreenOverlay.h"
+#include "ScreenOverlays/TextureScreenOverlay.h"
+#include "ScreenOverlays/WindowScreenOverlay.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 #include "Item.h"
@@ -11,9 +13,6 @@ ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTim
 	load();
 }
 
-ScreenOverlay::~ScreenOverlay() {
-}
-
 void ScreenOverlay::load() {
 	m_title.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_title.setCharacterSize(40);
@@ -22,10 +21,6 @@ void ScreenOverlay::load() {
 	m_subtitle.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_subtitle.setCharacterSize(32);
 	m_subtitle.setTextStyle(TextStyle::Shadowed);
-
-	m_sprite.setPosition(sf::Vector2f(0.f, 0.f));
-
-	m_textureColor = sf::Color(255, 255, 255);
 
 	m_fadeInTimer = m_fadeTime;
 	m_fadeOutTimer = m_fadeTime;
@@ -41,53 +36,29 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 		return;
 	}
 
-	float scale;
 	const sf::Color& tc = m_title.getColor();
 	const sf::Color& stc = m_subtitle.getColor();
 
 	if (m_fadeInTimer > sf::Time::Zero) {
 		GameObject::updateTime(m_fadeInTimer, frameTime);
-		scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
+		m_scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
 	}
 	else if (m_fadeOutTimer > sf::Time::Zero) {
 		GameObject::updateTime(m_fadeOutTimer, frameTime);
-		scale = m_fadeOutTimer.asSeconds() / m_fadeTime.asSeconds();
+		m_scale = m_fadeOutTimer.asSeconds() / m_fadeTime.asSeconds();
 	}
 	else {
 		setDisposed();
 		return;
 	}
-
-	m_sprite.setColor(sf::Color(m_textureColor.r, m_textureColor.g, m_textureColor.b, (sf::Uint8)(scale * 255)));
-	m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(scale * 255)));
-	m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (sf::Uint8)(scale * 255)));
+	
+	m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(m_scale * 255)));
+	m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (sf::Uint8)(m_scale * 255)));
 }
 
 void ScreenOverlay::render(sf::RenderTarget& renderTarget) {
-	renderTarget.draw(m_sprite);
 	renderTarget.draw(m_title);
 	renderTarget.draw(m_subtitle);
-}
-
-void ScreenOverlay::setTexture(ResourceID texture) {
-	m_sprite.setTexture(*g_resourceManager->getTexture(texture));
-}
-
-void ScreenOverlay::setTextureRect(const sf::IntRect& rect) {
-	m_sprite.setTextureRect(rect);
-}
-
-void ScreenOverlay::setTextureColor(const sf::Color& color) {
-	m_textureColor = color;
-	m_sprite.setColor(color);
-}
-
-void ScreenOverlay::setSpritePosition(const sf::Vector2f& position) {
-	m_sprite.setPosition(position);
-}
-
-void ScreenOverlay::setSpriteScale(const sf::Vector2f& factors) {
-	m_sprite.setScale(factors);
 }
 
 void ScreenOverlay::setTitle(const std::string& textKey, const std::string& textType) {
@@ -160,14 +131,14 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 }
 
 ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
-	ScreenOverlay* spellScreenOverlay = new ScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
+	TextureScreenOverlay* spellScreenOverlay = new TextureScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
 
 	spellScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
 	spellScreenOverlay->setTitleCharacterSize(32);
 
 	spellScreenOverlay->setTitle("SpellLearned");
 
-	spellScreenOverlay->setSubtitleCharacterSize(24);
+	spellScreenOverlay->setSubtitleCharacterSize(32);
 	spellScreenOverlay->setSubtitle(EnumNames::getSpellIDName(id));
 
 	spellScreenOverlay->setTexture(ResourceID::Texture_spellicons);
@@ -182,7 +153,7 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 }
 
 ScreenOverlay* ScreenOverlay::createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier) {
-	ScreenOverlay* modifierScreenOverlay = new ScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
+	TextureScreenOverlay* modifierScreenOverlay = new TextureScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
 
 	modifierScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
 	modifierScreenOverlay->setTitleCharacterSize(32);
@@ -230,12 +201,12 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 		return nullptr;
 	}
 
-	ScreenOverlay* hintScreenOverlay = new ScreenOverlay(sf::seconds(2.5f), sf::seconds(0.5f));
+	WindowScreenOverlay* hintScreenOverlay = new WindowScreenOverlay(sf::seconds(8.f), sf::seconds(0.5f));
 
-	int characterSize = 16;
+	int characterSize = 12;
 	hintScreenOverlay->setTitleColor(COLOR_GOOD);
 	hintScreenOverlay->setTitle("Hint");
-	hintScreenOverlay->setTitleCharacterSize(24);
+	hintScreenOverlay->setTitleCharacterSize(16);
 
 	hintScreenOverlay->setSubtitleCharacterSize(characterSize);
 
@@ -275,7 +246,7 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 		hintText.clear();
 	}
 	hintText.append(g_textProvider->getText(hintKey, "hint"));
-	hintText = g_textProvider->getCroppedString(hintText, characterSize, static_cast<int>(0.6f * WINDOW_WIDTH));
+	hintText = g_textProvider->getCroppedString(hintText, characterSize, static_cast<int>(0.4f * WINDOW_WIDTH));
 	hintScreenOverlay->setSubtitleRaw(hintText);
 
 	return hintScreenOverlay;

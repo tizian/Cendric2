@@ -6,7 +6,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "CharacterCore.h"
-#include "ScreenOverlay.h"
+#include "ScreenOverlays/ScreenOverlay.h"
 
 #include "GUI/BitmapText.h"
 

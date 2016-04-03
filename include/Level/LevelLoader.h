@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "global.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 
 #include "Enums/LevelDynamicTileID.h"
 #include "Enums/EnemyID.h"

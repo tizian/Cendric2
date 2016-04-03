@@ -1,7 +1,7 @@
 #include "Map/NPCRoutine.h"
 #include "FileIO/NPCRoutineLoader.h"
 #include "Map/NPC.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 
 void NPCRoutine::load(const std::string& id, NPC* npc, bool initial) {
 	m_id = id;

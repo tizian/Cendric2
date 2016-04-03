@@ -1,6 +1,6 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/CutsceneScreen.h"
-#include "ScreenManager.h"
+#include "Screens/ScreenManager.h"
 
 using namespace std;
 

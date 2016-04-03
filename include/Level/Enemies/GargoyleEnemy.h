@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/Level.h"
 #include "Spells/SpellManager.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 
 // A flying Gargoyle that is mainly used for the necro spell "summon gargoyle"
 // but can also appear as a normal enemy.

@@ -3,7 +3,7 @@
 #include <list>
 
 #include "global.h"
-#include "ScreenManager.h"
+#include "Screens/ScreenManager.h"
 #include "Screens/SplashScreen.h"
 #include "InputController.h"
 

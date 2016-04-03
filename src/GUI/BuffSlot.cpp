@@ -2,7 +2,7 @@
 #include "GUI/GUIConstants.h"
 #include "Spells/Spell.h"
 #include "Enums/EnumNames.h"
-#include "ScreenOverlay.h"
+#include "ScreenOverlays/TextureScreenOverlay.h"
 
 using namespace std;
 
@@ -168,7 +168,7 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 	if (data.isFeared) {
 		tooltip.append(g_textProvider->getText("Feared") + "\n");
 		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
-			ScreenOverlay* fearedOverlay = new ScreenOverlay(m_duration, sf::seconds(0.1f));
+			TextureScreenOverlay* fearedOverlay = new TextureScreenOverlay(m_duration, sf::seconds(0.1f));
 			fearedOverlay->setTexture(ResourceID::Texture_screen_overlay_feared);
 			m_screen->addObject(fearedOverlay);
 		}
@@ -176,7 +176,7 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 	else if (data.isStunned) {
 		tooltip.append(g_textProvider->getText("Stunned") + "\n");
 		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
-			ScreenOverlay* stunnedOverlay = new ScreenOverlay(m_duration, sf::seconds(0.1f));
+			TextureScreenOverlay* stunnedOverlay = new TextureScreenOverlay(m_duration, sf::seconds(0.1f));
 			stunnedOverlay->setTexture(ResourceID::Texture_screen_overlay_stunned);
 			m_screen->addObject(stunnedOverlay);
 		}

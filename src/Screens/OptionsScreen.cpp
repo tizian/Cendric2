@@ -1,7 +1,7 @@
 #include "Screens/OptionsScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Screens/KeyBindingsScreen.h"
-#include "ScreenManager.h"
+#include "Screens/ScreenManager.h"
 
 using namespace std;
 

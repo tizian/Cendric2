@@ -1,5 +1,5 @@
 #include "Screens/SplashScreen.h"
-#include "ScreenManager.h"
+#include "Screens/ScreenManager.h"
 
 using namespace std;
 

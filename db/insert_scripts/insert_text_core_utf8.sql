@@ -16,7 +16,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('CheckpointRea
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chest','Chest','Truhe','Chischte');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chop','Chop','Hauen','Haue');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ClickToTeleport','Click to teleport','Klicken zum Teleportieren','Klicke zum Teleportiere');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Completed','Completed','Abgeschlossen','Fertig');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Completed','Completed','Fertig','Fertig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ConfigurationSaved','Configuration was saved.','Einstellungen wurden erfolgreich gespeichert. ','Iistellige sind erfolgriich gspeicheret.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Confirm','Confirm','Bestätigen','Bestätige');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Consumables','Consumables','Tränke und Nahrung','Tränk und Ässe');
@@ -43,7 +43,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Elemental','E
 INSERT INTO text (text_id, english, german, swiss_german) values ('English','English','Englisch','Englisch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Equipment','Equipment','Ausrüstung','Usrüschtig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Exit','Exit','Beenden','Beende');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Failed','Failed','Fehlgeschlagen','Gfailt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Failed','Failed','Gescheitert','Gfailt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FearLevel','Fear Strength','Furchtstärke','Angschtstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('StunLevel','Stun Strength','Betäubungsstärke','Betäubigsstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FifthSpell','5. Spell','5. Zauber','5. Zauber');

@@ -1,7 +1,7 @@
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "CharacterCore.h"
 #include "Level/Enemy.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 
 using namespace std;
 using namespace luabridge;

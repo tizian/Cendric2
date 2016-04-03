@@ -12,20 +12,14 @@
 
 class Item;
 
-/* A screen overlay that supports arbitrary text, split in title and subtitle and/or a texture */
+/* A screen overlay that supports arbitrary text, split in title and subtitle */
 class ScreenOverlay : public virtual GameObject {
 public:
 	ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime = sf::Time::Zero);
-	virtual ~ScreenOverlay();
+	virtual ~ScreenOverlay() {};
 
-	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& renderTarget) override;
-
-	void setTexture(ResourceID texture);
-	void setTextureRect(const sf::IntRect& rect);
-	void setTextureColor(const sf::Color& color);
-	void setSpritePosition(const sf::Vector2f& position);
-	void setSpriteScale(const sf::Vector2f& factors);
+	virtual void update(const sf::Time& frameTime) override;
+	virtual void render(sf::RenderTarget& renderTarget) override;
 
 	void setTitle(const std::string& textKey, const std::string& textType = "core");
 	void setTitleRaw(const std::string& text);
@@ -46,9 +40,13 @@ public:
 	static ScreenOverlay* createSpellLearnedScreenOverlay(SpellID id);
 	static ScreenOverlay* createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier);
 
-private:
-	void load();
-	void repositionText();
+protected: 
+	float m_scale;
+
+	BitmapText m_title;
+	BitmapText m_subtitle;
+
+	virtual void repositionText();
 
 private:
 	sf::Time m_activeTime;
@@ -56,9 +54,5 @@ private:
 	sf::Time m_fadeInTimer;
 	sf::Time m_fadeOutTimer;
 
-	sf::Color m_textureColor;
-
-	BitmapText m_title;
-	BitmapText m_subtitle;
-	sf::Sprite m_sprite;
+	void load();
 };

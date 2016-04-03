@@ -12,7 +12,7 @@ const int CHAR_SIZE_DIALOGUE = 12;
 const sf::IntRect CENDRIC_TEX_POS = sf::IntRect(0, 0, 250, 250);
 const std::string CENDRIC_NAME = "Cendric";
 
-DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), COLOR_WHITE) {
+DialogueWindow::DialogueWindow() : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 150), sf::Color(0, 0, 0, 150), COLOR_WHITE) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 	m_speakerText = new BitmapText("");

@@ -5,7 +5,7 @@
 #include "Level.h"
 #include "InputController.h"
 #include "Spells/SpellManager.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 #include "CharacterCore.h"
 
 // Cendric in a level

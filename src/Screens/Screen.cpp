@@ -1,6 +1,6 @@
-#include "Screen.h"
+#include "Screens/Screen.h"
 #include "GUI/Button.h"
-#include "ScreenManager.h"
+#include "Screens/ScreenManager.h"
 
 using namespace std;
 
@@ -153,7 +153,7 @@ void Screen::depthSortObjects(GameObjectType type, bool asc) {
 
 void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget) {
 	for (auto& obj : m_objects[type]) {
-		obj->setViewable(isInsideView(renderTarget.getView(), *(it->getBoundingBox())));
+		obj->setViewable(isInsideView(renderTarget.getView(), *(obj->getBoundingBox())));
 		if (obj->isViewable())
 			obj->render(renderTarget);
 	}

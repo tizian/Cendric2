@@ -4,7 +4,7 @@
 #include "Level/Enemy.h"
 #include "Level/Level.h"
 #include "Spells/SpellManager.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 #include "GUI/SpeechBubble.h"
 
 // will be refactored to talking / scriptable / npc enemy sometime :)

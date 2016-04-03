@@ -4,7 +4,7 @@
 #include "Map/MapMovableGameObject.h"
 #include "Map.h"
 #include "InputController.h"
-#include "Screen.h"
+#include "Screens/Screen.h"
 #include "CharacterCore.h"
 #include "GUI/DialogueWindow.h"
 
