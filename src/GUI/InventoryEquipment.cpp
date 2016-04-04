@@ -126,7 +126,7 @@ void InventoryEquipment::reload() {
 	types.push_back(ItemType::Equipment_ring_2);
 
 	sf::Vector2i texPos(0, 0);
-	float xOffset = GUIConstants::LEFT + ((WIDTH - InventorySlot::SIZE) / 2.f);
+	float xOffset = GUIConstants::LEFT + InventorySlot::ICON_OFFSET + 0.5f * (WIDTH - InventorySlot::SIZE);
 	float yOffset = GUIConstants::TOP + YOFFSET;
 
 	for (auto& it : types) {
