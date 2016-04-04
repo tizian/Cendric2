@@ -79,6 +79,7 @@ enum class ResourceID {
 	Texture_GUI_ornament_small,
 	Texture_GUI_ornament_medium,
 	Texture_GUI_ornament_large,
+	Texture_GUI_window_close_button,
 	Texture_GUI_window_ornament,
 	Texture_GUI_arrow,
 	Texture_GUI_spell_color_elemental,

@@ -15,7 +15,7 @@ public:
 	void show();
 	void hide();
 
-	void update();
+	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& target) const;
 	bool isVisible() const;
 

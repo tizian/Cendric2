@@ -21,6 +21,8 @@ void QuestLog::init() {
 		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
 
+	m_window->addCloseButton(std::bind(&QuestLog::hide, this));
+
 	// init text
 	m_title.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
 	m_title.setColor(COLOR_WHITE);
@@ -90,6 +92,8 @@ void QuestLog::update(const sf::Time& frameTime) {
 	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != state) {
 		selectTab(state);
 	}
+
+	m_window->update(frameTime);
 }
 
 void QuestLog::selectEntry(QuestEntry* entry) {

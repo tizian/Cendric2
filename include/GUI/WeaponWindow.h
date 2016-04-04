@@ -31,6 +31,8 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
+	void addCloseButton(const std::function<void()>& agent);
+
 	// highlights all slots that could take a spell modifier of this type.
 	// if highlight is false, unhighlights all modifier slots.
 	void highlightModifierSlots(SpellModifierType type, bool highlight);

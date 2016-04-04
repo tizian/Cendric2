@@ -9,6 +9,10 @@ WeaponWindow::WeaponWindow(CharacterCore* core, bool modifiable) {
 	init();
 }
 
+void WeaponWindow::addCloseButton(const std::function<void()>& agent) {
+	m_window->addCloseButton(agent);
+}
+
 void WeaponWindow::reload() {
 	m_requireReload = false;
 	// reload slot and text
@@ -118,6 +122,8 @@ void WeaponWindow::clearAllSlots() {
 
 void WeaponWindow::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+
+	m_window->update(frameTime);
 
 	if (m_requireReload) reload();
 

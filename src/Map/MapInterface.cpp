@@ -25,6 +25,7 @@ void MapInterface::update(const sf::Time& frameTime) {
 	{
 		m_mapOverlay->hide();
 	}
+	m_characterInfo->update(frameTime);
 	updateMapOverlay(frameTime);
 	WorldInterface::update(frameTime);
 }

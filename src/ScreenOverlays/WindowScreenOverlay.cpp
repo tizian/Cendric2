@@ -10,6 +10,8 @@ WindowScreenOverlay::WindowScreenOverlay(const sf::Time& activeTime, const sf::T
 	m_windowOrnamentColor = COLOR_WHITE;
 
 	m_window = new Window(sf::FloatRect(), WindowOrnamentStyle::FANCY, m_windowMainColor, m_windowBackColor, m_windowOrnamentColor);
+
+	m_window->addCloseButton(std::bind(&WindowScreenOverlay::close, this));
 }
 
 WindowScreenOverlay::~WindowScreenOverlay() {
@@ -33,6 +35,7 @@ void WindowScreenOverlay::update(const sf::Time& frameTime) {
 		m_windowOrnamentColor.g,
 		m_windowOrnamentColor.b,
 		(sf::Uint8)(m_scale * m_windowOrnamentColor.a)));
+	m_window->update(frameTime);
 }
 
 void WindowScreenOverlay::render(sf::RenderTarget& renderTarget) {
@@ -51,4 +54,8 @@ void WindowScreenOverlay::repositionText() {
 		3 * TEXT_OFFSET.y + titleBounds.height + subtitleBounds.height));
 
 	m_window->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_window->getSize().x), GUIConstants::TOP));
+}
+
+void WindowScreenOverlay::close() {
+	setDisposed();
 }

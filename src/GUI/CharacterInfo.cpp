@@ -60,6 +60,8 @@ CharacterInfo::CharacterInfo(const AttributeData* attributes) {
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
+
+	m_window->addCloseButton(std::bind(&CharacterInfo::hide, this));
 }
 
 CharacterInfo::~CharacterInfo() {
@@ -70,10 +72,11 @@ bool CharacterInfo::isVisible() const {
 	return m_isVisible;
 }
 
-void CharacterInfo::update() {
+void CharacterInfo::update(const sf::Time& frameTime) {
 	if (!m_isReloadNeeded || !m_isVisible) return;
 	reload();
 	m_isReloadNeeded = false;
+	m_window->update(frameTime);
 }
 
 void CharacterInfo::render(sf::RenderTarget& target) const {

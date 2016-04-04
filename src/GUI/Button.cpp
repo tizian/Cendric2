@@ -24,6 +24,9 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 	else if (style == ButtonOrnamentStyle::LARGE) {
 		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), COLOR_WHITE, box.width, box.height);
 	}
+	else if (style == ButtonOrnamentStyle::WINDOW_CLOSE) {
+		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_close_button), COLOR_WHITE, box.width, box.height);
+	}
 
 	m_positionDefault = sf::Vector2f(box.left, box.top);
 	setPosition(m_positionDefault);

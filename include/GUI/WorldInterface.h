@@ -43,7 +43,7 @@ protected:
 
 	// <<< CHARCTER INFO >>>
 	CharacterInfo* m_characterInfo = nullptr;
-	void updateCharacterInfo();
+	void updateCharacterInfo(const sf::Time& frameTime);
 	
 	// <<< SPELLBOOK >>>
 	Spellbook* m_spellbook = nullptr;

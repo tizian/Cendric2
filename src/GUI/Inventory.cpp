@@ -31,6 +31,8 @@ void Inventory::init() {
 		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
 
+	m_window->addCloseButton(std::bind(&Inventory::hide, this));
+
 	m_descriptionWindow = new ItemDescriptionWindow();
 
 	// init text
@@ -178,6 +180,8 @@ void Inventory::handleLevelRightClick(InventorySlot* clicked) {
 void Inventory::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
+	m_window->update(frameTime);
+
 	// check whether an item was selected
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
 		it.second.update(frameTime);
@@ -191,7 +195,7 @@ void Inventory::update(const sf::Time& frameTime) {
 			break;
 		}
 	}
-
+	
 	m_tabBar->update(frameTime);
 	int activeIndex = m_tabBar->getActiveTabIndex();
 	ItemType type;

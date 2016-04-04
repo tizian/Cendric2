@@ -43,7 +43,8 @@ void LevelInterface::update(const sf::Time& frameTime) {
 	m_buffBar->update(frameTime);
 	m_spellSelection->update(frameTime);
 	m_quickSlotBar->update(frameTime);
-	m_characterInfo->update();
+	m_characterInfo->update(frameTime);
+	m_characterInfo->update(frameTime);
 }
 
 BuffBar& LevelInterface::getBuffBar() {

@@ -13,11 +13,13 @@ public:
 	void render(sf::RenderTarget& target) override;
 
 private:
+	void close();
+	void repositionText() override;
+
+private:
 	Window* m_window;
 
 	sf::Color m_windowBackColor;
 	sf::Color m_windowMainColor;
 	sf::Color m_windowOrnamentColor;
-
-	void repositionText() override;
 };

@@ -22,7 +22,8 @@ void WorldInterface::update(const sf::Time& frameTime) {
 	updateInventory(frameTime);
 	updateSpellbook(frameTime);
 	updateQuestLog(frameTime);
-	updateCharacterInfo();
+	m_characterInfo->update(frameTime);
+	updateCharacterInfo(frameTime);
 }
 
 void WorldInterface::hideAll() {
@@ -44,7 +45,7 @@ void WorldInterface::reloadCharacterInfo() {
 	m_characterInfo->notifyChange();
 }
 
-void WorldInterface::updateCharacterInfo() {
+void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {
 			if (m_inventory->isVisible()) m_inventory->hide();
@@ -62,7 +63,7 @@ void WorldInterface::updateCharacterInfo() {
 		g_inputController->lockAction();
 	}
 
-	m_characterInfo->update();
+	m_characterInfo->update(frameTime);
 }
 
 void WorldInterface::updateSpellbook(const sf::Time& frameTime) {

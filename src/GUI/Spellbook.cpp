@@ -61,6 +61,7 @@ void Spellbook::init() {
 
 	delete m_weaponWindow;
 	m_weaponWindow = new WeaponWindow(m_core, m_isModifiable);
+	m_weaponWindow->addCloseButton(std::bind(&Spellbook::hide, this));
 
 	reload();
 }

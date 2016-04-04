@@ -12,7 +12,8 @@ enum class ButtonOrnamentStyle {
 	NONE,
 	SMALL,
 	MEDIUM,
-	LARGE
+	LARGE,
+	WINDOW_CLOSE
 };
 
 // A not so ugly button to click
