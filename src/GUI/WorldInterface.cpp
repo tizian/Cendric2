@@ -22,7 +22,6 @@ void WorldInterface::update(const sf::Time& frameTime) {
 	updateInventory(frameTime);
 	updateSpellbook(frameTime);
 	updateQuestLog(frameTime);
-	m_characterInfo->update(frameTime);
 	updateCharacterInfo(frameTime);
 }
 

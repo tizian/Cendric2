@@ -73,10 +73,11 @@ bool CharacterInfo::isVisible() const {
 }
 
 void CharacterInfo::update(const sf::Time& frameTime) {
-	if (!m_isReloadNeeded || !m_isVisible) return;
+	if (!m_isVisible) return;
+	m_window->update(frameTime);
+	if (!m_isReloadNeeded) return;
 	reload();
 	m_isReloadNeeded = false;
-	m_window->update(frameTime);
 }
 
 void CharacterInfo::render(sf::RenderTarget& target) const {
