@@ -161,6 +161,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjectsFirst(GameObjectType::_DynamicTile, frameTime);
 		updateObjectsFirst(GameObjectType::_Spell, frameTime);
 		// and then normally
+		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
 		updateObjects(GameObjectType::_MovableTile, frameTime);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
@@ -168,7 +169,6 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjects(GameObjectType::_LevelEquipment, frameTime);
 		updateObjects(GameObjectType::_Spell, frameTime);
 		updateObjects(GameObjectType::_Overlay, frameTime);
-		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
 		if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
 
 		updateObjects(GameObjectType::_Light, frameTime);

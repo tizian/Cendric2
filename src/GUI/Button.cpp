@@ -108,6 +108,7 @@ void Button::update(const sf::Time& frameTime) {
 	GameObject::update(frameTime);
 	if (m_isClicked) {
 		m_executeOnClick();
+		g_inputController->lockAction();
 	}
 }
 

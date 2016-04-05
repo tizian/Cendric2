@@ -18,6 +18,7 @@ CharacterCore::CharacterCore() {
 CharacterCore::CharacterCore(const CharacterCoreData& data) {
 	m_data = data;
 	m_stopwatch.restart();
+	loadWeapon();
 	reloadAttributes();
 	loadQuests();
 }

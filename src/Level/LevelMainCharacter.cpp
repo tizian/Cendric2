@@ -76,6 +76,7 @@ void LevelMainCharacter::loadWeapon() {
 		m_spellManager->addSpell(SpellData::getSpellData(SpellID::Chop));
 		return;
 	}
+
 	const Weapon* weapon = m_core->getWeapon();
 
 	int spellNr = 0;
