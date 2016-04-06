@@ -1,0 +1,3 @@
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Rumors', 'dl_npc_innkeeper', 'Heard any rumours?','Gibt es irgendwelche Gerüchte?','Gits irgendwelchi Grüchtli?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_ImThirsty', 'dl_npc_innkeeper', 'I''m thirsty. Give me something to drink.','Ich habe Durst. Gib mir etwas zu trinken.', 'Ich han Durst, gib mer öppis zum trinke.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Trade_TakeALook', 'dl_npc_innkeeper', 'Take a look at my wares.','Schau dir meine Waren an.','Lueg der mini Ware ah.');

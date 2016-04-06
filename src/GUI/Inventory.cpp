@@ -506,6 +506,10 @@ void Inventory::show() {
 }
 
 void Inventory::hide() {
+	if (m_merchantInterface != nullptr) {
+		m_merchantInterface->completeTrade();
+		m_merchantInterface = nullptr;
+	}
 	m_isVisible = false;
 	m_equipment->hide();
 	delete m_currentClone;

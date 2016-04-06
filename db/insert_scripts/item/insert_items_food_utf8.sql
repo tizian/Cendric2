@@ -72,8 +72,8 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Roasted Meat
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_roastedmeat', 'consumable', 250, 50, 2);
-INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_roastedmeat', 15, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_roastedmeat', 'consumable', 250, 50, 4);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_roastedmeat', 10, 7);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_roastedmeat', 10);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_roastedmeat', -7, -26, 40, 24);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_roastedmeat', 1, 150, 150, 50, 50);
@@ -81,7 +81,35 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Raw Meat
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_rawmeat', 'consumable', 200, 50, 2);
-INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_rawmeat', 2, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_rawmeat', 5, 5);
 INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) values ('fo_rawmeat', 10, 1, 'fo_roastedmeat');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rawmeat', -7, -26, 40, 24);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rawmeat', 1, 150, 100, 50, 50);
+
+-- Raw Fish
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_rawfish', 'consumable', 400, 0, 3);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice) values ('fo_rawfish', 5, 5);
+INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) values ('fo_rawfish', 6, 1, 'fo_fishsoup');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rawfish', 0, -30, 50, 35);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rawfish', 1, 50, 200, 50, 100);
+
+-- Fish Soup
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_fishsoup', 'consumable', 400, 100, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice) values ('fo_fishsoup', 6, 8);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_fishsoup', 10);
+
+-- Wine
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_wine', 'consumable', 400, 50, 10);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_ice, dmg_light, dmg_fire, dmg_shadow) values ('fo_wine', -1, 10, 5, 5, 5, 5);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_wine', 15);
+
+-- Beer
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_beer', 'consumable', 400, 150, 6);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_physical) values ('fo_beer', -1, 10, 10);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_beer', 10);
+
+

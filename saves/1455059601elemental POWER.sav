@@ -29,6 +29,10 @@ item.id:fo_lesserhealingpotion,3
 item.id:fo_rawmeat,2
 item.id:fo_water,1
 item.id:fo_physalis,1
+item.id:fo_rawfish,1
+item.id:fo_fishsoup,1
+item.id:fo_wine,1
+item.id:fo_beer,1
 item.id:mi_gargoyle_dust,1
 item.id:mi_goldengoblet,4
 item.id:mi_neko_fur,1

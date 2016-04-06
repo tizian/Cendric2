@@ -26,13 +26,9 @@ void MerchantWindow::init() {
 		WIDTH / 2 -
 		m_title.getLocalBounds().width / 2, m_window->getPosition().y + GUIConstants::TEXT_OFFSET);
 
-	// init Button
-	m_cancelButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
-	m_cancelButton->setPosition(sf::Vector2f(LEFT + 1.5f * GUIConstants::TEXT_OFFSET, TOP + HEIGHT - 2.f * GUIConstants::TEXT_OFFSET));
-	m_cancelButton->setText("Cancel");
-	m_cancelButton->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-
 	m_descriptionWindow = new MerchantItemDescriptionWindow(m_interface->getMerchantData().multiplier);
+
+	m_window->addCloseButton(std::bind(&MerchantWindow::completeTrade, this));
 
 	reload();
 }
@@ -40,13 +36,16 @@ void MerchantWindow::init() {
 MerchantWindow::~MerchantWindow() {
 	delete m_window;
 	delete m_descriptionWindow;
-	delete m_cancelButton;
 	clearAllSlots();
 }
 
 void MerchantWindow::clearAllSlots() {
 	m_items.clear();
 	m_selectedSlotId = "";
+}
+
+void MerchantWindow::completeTrade() {
+	m_interface->completeTrade();
 }
 
 void MerchantWindow::notifyChange(const std::string& itemID) {
@@ -91,9 +90,9 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 		}
 	}
 
-	m_cancelButton->update(frameTime);
-	if (g_inputController->isKeyJustPressed(Key::Escape) || m_cancelButton->isClicked()) {
-		m_interface->completeTrade();
+	m_window->update(frameTime);
+	if (g_inputController->isKeyJustPressed(Key::Escape)) {
+		completeTrade();
 	}
 }
 
@@ -140,7 +139,6 @@ void MerchantWindow::render(sf::RenderTarget& target) {
 	}
 
 	m_descriptionWindow->render(target);
-	m_cancelButton->render(target);
 }
 
 void MerchantWindow::showDescription(const Item& item) {

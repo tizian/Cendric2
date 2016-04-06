@@ -22,7 +22,6 @@ public:
 
 private:
 	MerchantInterface* m_interface;
-	Button* m_cancelButton = nullptr;
 	std::string m_id;
 
 	void init();
@@ -30,6 +29,7 @@ private:
 	// reloads the merchant items, depending on the core
 	void reload();
 	void clearAllSlots();
+	void completeTrade();
 	// reorganizes the positions of the 'm_items' map
 	void calculateSlotPositions();
 

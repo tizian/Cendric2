@@ -114,12 +114,9 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 
 bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
-		g_inputController->lockAction();
 		// check if we can leave the window
-		if (m_merchantInterface != nullptr) {
-			return false;
-		}
 		if (m_dialogue->isEndable()) {
+			g_inputController->lockAction();
 			return false;
 		}
 	}
