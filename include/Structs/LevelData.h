@@ -11,6 +11,7 @@
 #include "Structs/ChestData.h"
 #include "Structs/ModifierTileData.h"
 #include "Structs/MovingTileData.h"
+#include "Structs/JumpingTileData.h"
 
 struct LevelData : WorldData {
 	std::vector<BackgroundLayer> backgroundLayers;
@@ -24,4 +25,5 @@ struct LevelData : WorldData {
 	std::vector<ChestData> chests;
 	std::vector<ModifierTileData> modifiers;
 	std::vector<MovingTileData> movingTiles;
+	std::vector<JumpingTileData> jumpingTiles;
 };

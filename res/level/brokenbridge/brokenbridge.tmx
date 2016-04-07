@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="94">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="97">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/brokenbridge/layer_inf.png,3.0,res/level/brokenbridge/layer_3.png"/>
   <property name="dimming" value="0.2"/>
   <property name="name" value="BrokenBridge"/>
   <property name="tilesetpath" value="res/level/brokenbridge/tileset_level_brokenbridge.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_brokenbridge" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_level_brokenbridge" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_level_brokenbridge.png" width="1000" height="1000"/>
   <tile id="136">
    <animation>
@@ -16,13 +16,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
+ <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10">
+ <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
+ <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -397,6 +397,29 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="dynamic jumping">
+  <object id="94" gid="378" x="1263" y="1068" width="50" height="50">
+   <properties>
+    <property name="velocity" value="600"/>
+    <property name="waiting" value="1000"/>
+   </properties>
+  </object>
+  <object id="95" gid="398" x="1024" y="1074" width="50" height="50">
+   <properties>
+    <property name="aggro" value=""/>
+    <property name="direction" value="5"/>
+    <property name="velocity" value="500"/>
+   </properties>
+  </object>
+  <object id="96" gid="378" x="1522" y="1074" width="50" height="50">
+   <properties>
+    <property name="alternating" value=""/>
+    <property name="direction" value="-15"/>
+    <property name="velocity" value="1000"/>
+    <property name="waiting" value="100"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="collidable" width="50" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

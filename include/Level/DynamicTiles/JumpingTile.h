@@ -3,19 +3,15 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 #include "MovableGameObject.h"
-
-enum class JumpingTileState {
-	Idle,
-	Falling,
-	Waiting,
-	Returning
-};
+#include "Structs/JumpingTileData.h"
+#include "Structs/DamageOverTimeData.h"
 
 class JumpingTile : public virtual LevelDynamicTile, public virtual MovableGameObject {
 public:
 	JumpingTile(LevelScreen* levelScreen);
 
 	void updateFirst(const sf::Time& frameTime) override { MovableGameObject::updateFirst(frameTime); }
+	void render(sf::RenderTarget& target) override { LevelDynamicTile::render(target); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MovableGameObject::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color& debugColor) override { MovableGameObject::setDebugBoundingBox(debugColor); }
 
@@ -24,17 +20,26 @@ public:
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 	void onHit(LevelMovableGameObject* mob) override;
+	void setJumpingTileData(const JumpingTileData& data);
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 
 private:
 	void checkCollisions(const sf::Vector2f& nextPosition);
+	void changeDirection();
 
+private:
 	const float GRAVITY_ACCELERATION = 1000.f;
-	const float RETURN_VELOCITY = 80.f;
 	const float AGGRO_DISTANCE = 200.f;
-	const sf::Time WAITING_TIME = sf::seconds(2.f);
-
-	JumpingTileState m_tileState;
+	
+	sf::Vector2f m_initialVelocity;
+	sf::Time m_waitingSpan = sf::Time::Zero;
 	sf::Time m_waitingTime = sf::Time::Zero;
+	sf::Time m_damageCooldown = sf::Time::Zero;
+	bool m_isWaiting = false;
+	bool m_isAggro = false;
+	bool m_isAlternating = false;
+	bool m_isReturning = false;
+	DamageOverTimeData m_damage;
+	sf::Vector2f m_initialPosition;
 };

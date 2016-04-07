@@ -193,12 +193,9 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
-		int id;
-		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
-		XMLCheckResult(result);
 
 		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
+		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
 		XMLCheckResult(result);
 
 		int x;
@@ -285,6 +282,108 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 		}
 
 		data.movingTiles.push_back(movingTileData);
+
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
+bool LevelReader::readJumpingTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+
+		int gid;
+		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int offset = static_cast<int>(LevelDynamicTileID::Jumping) + m_firstGidDynamicTiles - 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+
+		JumpingTileData jumpingTileData;
+		jumpingTileData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
+		jumpingTileData.skinNr = skinNr;
+
+		// modifier type and level
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
+			while (property_ != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = property_->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string propertyText = textAttr;
+
+				if (propertyText.compare("alternating") == 0) {
+					jumpingTileData.isAlternating = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
+				if (propertyText.compare("aggro") == 0) {
+					jumpingTileData.isAggro = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
+				if (propertyText.compare("direction") == 0) {
+					textAttr = property_->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value (of name 'direction') attribute found.");
+						return false;
+					}
+					std::string directionString = textAttr;
+					try {
+						int direction = std::stoi(textAttr);
+
+						if (std::abs(direction) >= 90) {
+							logError("Invalid jumping tile direction, you can only use upwards directions (direction < 90 && direction > -90");
+							return false;
+						}
+						jumpingTileData.direction = direction % 360;
+						property_ = property_->NextSiblingElement("property");
+						continue;
+					}
+					catch (const std::exception& e) {
+						logError("Invalid jumping tile direction, conversion to integer failed: " + std::string(e.what()) + " Direction attribute: " + directionString);
+						return false;
+					}
+				}
+
+				int amount;
+				result = property_->QueryIntAttribute("value", &amount);
+				XMLCheckResult(result);
+				if (propertyText.compare("velocity") == 0) {
+					if (amount > 1000 || amount < 100) {
+						logError("jumping tile velocity must be between 200 and 1000");
+						return false;
+					}
+					jumpingTileData.velocity = amount;
+				}
+				else if (propertyText.compare("waiting") == 0) {
+					if (amount > 10000 || amount < 100) {
+						logError("waiting time (ms) for jumping tile must be between 100 and 10000");
+						return false;
+					}
+					jumpingTileData.waitingTime = amount;
+				}
+				
+
+				property_ = property_->NextSiblingElement("property");
+			}
+		}
+
+		data.jumpingTiles.push_back(jumpingTileData);
 
 		object = object->NextSiblingElement("object");
 	}
@@ -415,6 +514,9 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 		}
 		else if (name.find("moving platform") != std::string::npos) {
 			if (!readMovingTiles(objectgroup, data)) return false;
+		}
+		else if (name.find("dynamic jumping") != std::string::npos) {
+			if (!readJumpingTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;

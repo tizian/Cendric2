@@ -17,6 +17,7 @@ public:
 
 	void updateFirst(const sf::Time& frameTime) override { MovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MovableGameObject::renderAfterForeground(target); }
+	void render(sf::RenderTarget& target) override { LevelDynamicTile::render(target); }
 	void setDebugBoundingBox(const sf::Color &debugColor) override { MovableGameObject::setDebugBoundingBox(debugColor); }
 
 	void init() override;

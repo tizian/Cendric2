@@ -7,6 +7,7 @@
 #include "ObjectFactory.h"
 #include "Level/DynamicTiles/ModifierTile.h"
 #include "Level/DynamicTiles/MovingTile.h"
+#include "Level/DynamicTiles/JumpingTile.h"
 #include "Trigger.h"
 
 using namespace std;
@@ -18,6 +19,7 @@ void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level*
 	loadChestTiles(data, screen);
 	loadLeverTiles(data, screen);
 	loadMovingTiles(data, screen);
+	loadJumpingTiles(data, screen);
 	loadTriggers(data, screen);
 }
 
@@ -67,6 +69,22 @@ void LevelLoader::loadMovingTiles(LevelData& data, LevelScreen* screen) const {
 		movingTile->setDynamicTileID(LevelDynamicTileID::Moving);
 
 		screen->addObject(movingTile);
+	}
+}
+
+void LevelLoader::loadJumpingTiles(LevelData& data, LevelScreen* screen) const {
+	for (auto& jumpingData : data.jumpingTiles) {
+
+		JumpingTile* jumpingTile = new JumpingTile(screen);
+
+		jumpingTile->setJumpingTileData(jumpingData);
+		jumpingTile->init();
+		jumpingTile->setDebugBoundingBox(COLOR_NEUTRAL);
+		jumpingTile->loadAnimation(jumpingData.skinNr);
+		jumpingTile->setPosition(jumpingData.spawnPosition);
+		jumpingTile->setDynamicTileID(LevelDynamicTileID::Jumping);
+
+		screen->addObject(jumpingTile);
 	}
 }
 
