@@ -14,6 +14,10 @@ inline float randomFloat(float low, float high) {
 	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));
 }
 
+FluidTile::FluidTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
+	m_isRenderAfterObjects = true;
+}
+
 void FluidTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 }
@@ -89,6 +93,7 @@ void FluidTile::loadAnimation(int skinNr) {
 }
 
 void FluidTile::update(const sf::Time& frameTime) {
+	m_isFirstRenderIteration = true;
 	float dt = frameTime.asSeconds();
 	dt *= 20.f;
 
@@ -218,6 +223,10 @@ void FluidTile::splash(float xPosition, float width, float velocity) {
 }
 
 void FluidTile::render(sf::RenderTarget& target) {
+	if (m_isFirstRenderIteration) {
+		m_isFirstRenderIteration = false;
+		return;
+	}
 	target.draw(m_vertexArray);
 	m_ps->render(target);
 }

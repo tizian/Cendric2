@@ -8,6 +8,7 @@
 FrozenWaterTile::FrozenWaterTile(FluidTile* fluidTile, int fluidTileIndex) : LevelDynamicTile(dynamic_cast<LevelScreen*>(fluidTile->getScreen())) {
 	m_fluidTile = fluidTile;
 	m_fluidTileIndex = fluidTileIndex;
+	m_isRenderAfterObjects = true;
 }
 
 void FrozenWaterTile::init() {

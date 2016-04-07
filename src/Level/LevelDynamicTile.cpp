@@ -28,6 +28,25 @@ const sf::Vector2f& LevelDynamicTile::getPositionOffset() const {
 	return m_positionOffset;
 }
 
+void LevelDynamicTile::render(sf::RenderTarget& target) {
+	if (m_isFirstRenderIteration) {
+		if (!m_isRenderAfterObjects) {
+			AnimatedGameObject::render(target);
+		}
+		m_isFirstRenderIteration = false;
+	}
+	else {
+		if (m_isRenderAfterObjects) {
+			AnimatedGameObject::render(target);
+		}
+	}
+}
+
+void LevelDynamicTile::update(const sf::Time& frameTime) {
+	AnimatedGameObject::update(frameTime);
+	m_isFirstRenderIteration = true;
+}
+
 LevelDynamicTileID LevelDynamicTile::getDynamicTileID() const {
 	return m_dynamicTileID;
 }

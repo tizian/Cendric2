@@ -28,7 +28,7 @@ struct FluidColumn {
 
 class FluidTile : public LevelDynamicTile {
 public:
-	FluidTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
+	FluidTile(LevelScreen* levelScreen);
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(LevelMovableGameObject* mob) override;
