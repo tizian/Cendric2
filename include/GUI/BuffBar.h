@@ -39,7 +39,7 @@ private:
 	void calculateBuffPositions();
 
 	// as seen from the top left corner
-	const sf::Vector2f BUFFBAR_OFFSET = sf::Vector2f(220.f, 10.f);
+	const sf::Vector2f BUFFBAR_OFFSET = sf::Vector2f(360.f, 10.f);
 	// x space between two slots
 	const float BUFFSLOT_SPACING = 20.f;
 

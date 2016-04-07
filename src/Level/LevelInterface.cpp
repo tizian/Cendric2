@@ -39,7 +39,7 @@ void LevelInterface::render(sf::RenderTarget& target) {
 void LevelInterface::update(const sf::Time& frameTime) {
 	WorldInterface::update(frameTime);
 
-	m_healthBar->update();
+	m_healthBar->update(frameTime);
 	m_buffBar->update(frameTime);
 	m_spellSelection->update(frameTime);
 	m_quickSlotBar->update(frameTime);

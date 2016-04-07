@@ -9,16 +9,37 @@ public:
 	HealthBar(const AttributeData* attributes);
 
 	void render(sf::RenderTarget& target) const;
-	void update();
+	void update(const sf::Time& frameTime);
 
 private:
 	const AttributeData* m_attributes;
 
-	sf::RectangleShape m_barOutline;
+	int m_oldHP;			// HP before hit
+	int m_currentHP;		// HP after hit
+	int m_displayedHP;	// (visual only) HP during shrinking animation
+
+	sf::Time m_highlightTime;
+	sf::Time m_waitTime;
+	sf::Time m_shrinkTime;
+
+	sf::RectangleShape m_border;
 	sf::RectangleShape m_bar;
-	const float BAR_HEIGHT = 10.f;
-	const float BAR_WIDTH = 200.f;
-	const float BAR_OUTLINE_THICKNESS = 2.f;
-	const float BAR_LEFT = 10.f;
-	const float BAR_TOP = 10.f;
+	sf::RectangleShape m_hitOverlay;
+
+	const sf::Texture *m_borderTexture;
+	const sf::Texture *m_barTexture;
+	const sf::Texture *m_hitOverlayTexture;
+	const sf::Texture *m_hitOverlayHighlightTexture;
+
+	const float BAR_HEIGHT = 15.f;
+	const float BAR_WIDTH = 300.f;
+	const float BAR_LEFT = 30.f;
+	const float BAR_TOP = 30.f;
+
+	const float BORDER_OFFSET_X = 13.f;
+	const float BORDER_OFFSET_Y = 10.f;
+
+	const float HIGHLIGHT_TIME = 0.05f;
+	const float WAIT_TIME = 1.f;
+	const float SHRINK_TIME = 1.f;
 };
