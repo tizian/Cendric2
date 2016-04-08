@@ -34,7 +34,7 @@ void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const 
 
 void FlashSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
-	GameObject::updateTime(m_flashingTime, frameTime);
+	updateTime(m_flashingTime, frameTime);
 	if (m_flashDuration > sf::Time::Zero) {
 		m_flashDuration -= frameTime;
 		if (m_flashDuration <= sf::Time::Zero) {

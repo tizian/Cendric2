@@ -39,7 +39,7 @@ void DivineShieldSpell::update(const sf::Time& frameTime) {
 	setPosition(nextPosition);
 
 	MovableGameObject::update(frameTime);
-	GameObject::updateTime(m_data.activeDuration, frameTime);
+	updateTime(m_data.activeDuration, frameTime);
 
 	if (m_data.activeDuration.asMilliseconds() <= 0) {
 		setDisposed();

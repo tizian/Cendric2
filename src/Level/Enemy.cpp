@@ -132,10 +132,10 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 	if (m_enemyState == EnemyState::Dead) return;
 
 	// update times
-	GameObject::updateTime(m_recoveringTime, frameTime);
-	GameObject::updateTime(m_waitingTime, frameTime);
-	GameObject::updateTime(m_chasingTime, frameTime);
-	GameObject::updateTime(m_decisionTime, frameTime);
+	updateTime(m_recoveringTime, frameTime);
+	updateTime(m_waitingTime, frameTime);
+	updateTime(m_chasingTime, frameTime);
+	updateTime(m_decisionTime, frameTime);
 
 	// handle stunned
 	if (m_stunnedTime > sf::Time::Zero) {

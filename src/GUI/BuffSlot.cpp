@@ -99,10 +99,10 @@ void BuffSlot::onRightClick() {
 
 void BuffSlot::update(const sf::Time& frameTime) {
 	// update time
-	GameObject::updateTime(m_duration, frameTime);
-	GameObject::updateTime(m_tooltipTime, frameTime);
+	updateTime(m_duration, frameTime);
+	updateTime(m_tooltipTime, frameTime);
 	if (m_duration == sf::Time::Zero) setDisposed();
-	GameObject::updateTime(m_timeUntilFlash, frameTime);
+	updateTime(m_timeUntilFlash, frameTime);
 	if (m_timeUntilFlash == sf::Time::Zero) {
 		m_isVisible = !m_isVisible;
 		m_timeUntilFlash = FLASHING_INTERVAL;

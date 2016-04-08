@@ -10,7 +10,7 @@ UserMovingBehavior::UserMovingBehavior(LevelMainCharacter* mainChar) : MovingBeh
 }
 
 void UserMovingBehavior::update(const sf::Time& frameTime) {
-	GameObject::updateTime(m_jumpGraceTime, frameTime);
+	updateTime(m_jumpGraceTime, frameTime);
 	bool wasGrounded = m_isGrounded;
 	MovingBehavior::update(frameTime);
 	if (wasGrounded && !m_isGrounded) {

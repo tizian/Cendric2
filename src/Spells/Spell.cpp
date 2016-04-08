@@ -112,7 +112,7 @@ void Spell::update(const sf::Time& frameTime) {
 	}
 
 	MovableGameObject::update(frameTime);
-	GameObject::updateTime(m_data.activeDuration, frameTime);
+	updateTime(m_data.activeDuration, frameTime);
 
 	if (m_data.activeDuration == sf::Time::Zero) {
 		setDisposed();

@@ -23,12 +23,12 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 	updateParticleSystemPosition();
 	
 	if (m_smokeDuration > sf::Time::Zero) {
-		GameObject::updateTime(m_smokeDuration, frameTime);
+		updateTime(m_smokeDuration, frameTime);
 		if (m_smokeDuration == sf::Time::Zero)
 			m_ps->emitRate = 0.f;
 	}
 
-	GameObject::updateTime(m_data.activeDuration, frameTime);
+	updateTime(m_data.activeDuration, frameTime);
 	if (m_data.activeDuration <= sf::Time::Zero) {
 		setDisposed();
 	}

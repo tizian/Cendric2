@@ -26,7 +26,7 @@ ScriptedBehavior::~ScriptedBehavior() {
 
 void ScriptedBehavior::update(const sf::Time& frameTime) {
 	// update callback
-	GameObject::updateTime(m_scriptUpdateTime, frameTime);
+	updateTime(m_scriptUpdateTime, frameTime);
 	if (m_scriptUpdateTime == sf::Time::Zero) {
 		m_scriptUpdateTime = SCRIPT_UPDATE_INTERVAL;
 		m_callback.update();
@@ -34,7 +34,7 @@ void ScriptedBehavior::update(const sf::Time& frameTime) {
 
 	// update speech bubble
 	if (m_speechBubbleTime > sf::Time::Zero) {
-		GameObject::updateTime(m_speechBubbleTime, frameTime);
+		updateTime(m_speechBubbleTime, frameTime);
 		if (m_speechBubbleTime == sf::Time::Zero) {
 			m_speechBubble->hide();
 		}

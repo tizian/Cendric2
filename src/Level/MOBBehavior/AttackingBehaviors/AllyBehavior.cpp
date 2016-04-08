@@ -7,7 +7,7 @@ AllyBehavior::AllyBehavior(Enemy* enemy) :
 
 void AllyBehavior::update(const sf::Time& frameTime) {
 	EnemyAttackingBehavior::update(frameTime);
-	GameObject::updateTime(m_timeToLive, frameTime);
+	updateTime(m_timeToLive, frameTime);
 	if (m_hasTimeToLive) {
 		if (m_timeToLive == sf::Time::Zero) {
 			m_enemy->setDead();

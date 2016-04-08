@@ -18,8 +18,8 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	// update times
-	GameObject::updateTime(m_stunnedTime, frameTime);
-	GameObject::updateTime(m_fearedTime, frameTime);
+	updateTime(m_stunnedTime, frameTime);
+	updateTime(m_fearedTime, frameTime);
 
 	m_movingBehavior->update(frameTime);
 	m_attackingBehavior->update(frameTime);

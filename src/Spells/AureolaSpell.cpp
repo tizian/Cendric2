@@ -52,7 +52,7 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 	}
 
 	MovableGameObject::update(frameTime);
-	GameObject::updateTime(m_data.activeDuration, frameTime);
+	updateTime(m_data.activeDuration, frameTime);
 
 	// check collisions with owner
 	if (m_isReturning && m_mob->getBoundingBox()->intersects(*getBoundingBox())) {

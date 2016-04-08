@@ -2,12 +2,6 @@
 
 #include "ResourceManager.h"
 
-void updateTime(sf::Time& time, const sf::Time& frameTime) {	// NOTE: Should maybe be global function instead of GameObject method...?
-	if (time == sf::Time::Zero) return;
-	time -= frameTime;
-	if (time < sf::Time::Zero) time = sf::Time::Zero;
-}
-
 HealthBar::HealthBar(const AttributeData* attributes) {
 	m_attributes = attributes;
 	m_currentHP = attributes->currentHealthPoints;

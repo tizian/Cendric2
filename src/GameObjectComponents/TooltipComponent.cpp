@@ -14,7 +14,7 @@ TooltipComponent::TooltipComponent(std::string tooltip, AnimatedGameObject* pare
 }
 
 void TooltipComponent::update(const sf::Time& frameTime) {
-	GameObject::updateTime(m_tooltipTime, frameTime);
+	updateTime(m_tooltipTime, frameTime);
 }
 
 void TooltipComponent::setPosition(const sf::Vector2f& pos) {

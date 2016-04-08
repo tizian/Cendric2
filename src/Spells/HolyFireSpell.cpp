@@ -31,7 +31,7 @@ void HolyFireSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
 	m_ps->update(frameTime);
 	if (m_emitTime > sf::Time::Zero) {
-		GameObject::updateTime(m_emitTime, frameTime);
+		updateTime(m_emitTime, frameTime);
 		if (m_emitTime == sf::Time::Zero) {
 			m_ps->emitRate = 0.f;
 		}

@@ -238,6 +238,14 @@ bool Level::collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const st
 	return false;
 }
 
+const std::vector<GameObject*>* Level::getMovableTiles() const {
+	return m_movableTiles;
+}
+
+const std::vector<GameObject*>* Level::getDynamicTiles() const {
+	return m_dynamicTiles;
+}
+
 void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const {
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
