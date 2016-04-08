@@ -1,17 +1,13 @@
 #include "GUI/HealthBar.h"
 
 #include "ResourceManager.h"
-
-void updateTime(sf::Time& time, const sf::Time& frameTime) {	// NOTE: Should maybe be global function instead of GameObject method...?
-	if (time == sf::Time::Zero) return;
-	time -= frameTime;
-	if (time < sf::Time::Zero) time = sf::Time::Zero;
-}
+#include "GameObject.h"
 
 HealthBar::HealthBar(const AttributeData* attributes) {
 	m_attributes = attributes;
 	m_currentHP = attributes->currentHealthPoints;
-	m_displayedHP = m_currentHP;
+	m_overlayHP = m_currentHP;
+	m_maxOverlayHP = m_overlayHP;
 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_border);
 	m_barTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content);
@@ -33,6 +29,7 @@ HealthBar::HealthBar(const AttributeData* attributes) {
 	m_hitOverlay.setSize(sf::Vector2f(0.f, 0.f));
 	m_hitOverlay.setTexture(m_hitOverlayTexture);
 
+	m_highlightTime = sf::Time::Zero;
 	m_waitTime = sf::Time::Zero;
 	m_shrinkTime = sf::Time::Zero;
 }
@@ -48,9 +45,11 @@ void HealthBar::update(const sf::Time& frameTime) {
 	bool adjustOverlay = false;
 	if (newHP < m_currentHP) {
 		// Hit!
-		m_oldHP = m_displayedHP;	// Restart fading from last position
-		m_currentHP = newHP;		// Set new target
+		m_currentHP = newHP;
 
+		// Restart shrinking from last position
+		m_maxOverlayHP = m_overlayHP;
+		
 		// Highlight textures
 		m_hitOverlay.setTexture(m_hitOverlayHighlightTexture);
 
@@ -58,49 +57,43 @@ void HealthBar::update(const sf::Time& frameTime) {
 		m_waitTime = sf::seconds(WAIT_TIME);
 		m_shrinkTime = sf::seconds(SHRINK_TIME);
 		m_highlightTime = sf::seconds(HIGHLIGHT_TIME);
-
-		adjustOverlay = true;
 	}
 	else if (newHP > m_currentHP) {
 		// Heal!
 		m_currentHP = newHP;
-		adjustOverlay = true;
 	}
 
-	if (adjustOverlay) {
-		// Reset hit overlay
-		float overlayPos = BAR_LEFT + BAR_WIDTH * (static_cast<float>(newHP) / m_attributes->maxHealthPoints);
-		float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_oldHP - newHP) / m_attributes->maxHealthPoints));
-		m_hitOverlay.setPosition(sf::Vector2f(overlayPos, BAR_TOP));
-		m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
-	}
-
+	// Highlight on hit
 	if (m_highlightTime > sf::Time::Zero) {
-		updateTime(m_highlightTime, frameTime);
+		GameObject::updateTime(m_highlightTime, frameTime);
 		if (m_highlightTime <= sf::Time::Zero) {
 			m_hitOverlay.setTexture(m_hitOverlayTexture);
 		}
 	}
 
+	// Shrinking animation on hit
 	if (m_waitTime > sf::Time::Zero) {
-		updateTime(m_waitTime, frameTime);
+		// Wait before shrinking
+		GameObject::updateTime(m_waitTime, frameTime);
 	}
 	else if (m_shrinkTime > sf::Time::Zero) {
-		updateTime(m_shrinkTime, frameTime);
+		// Shrinking.
+		GameObject::updateTime(m_shrinkTime, frameTime);
 
-		float scale = m_shrinkTime.asMilliseconds() / (SHRINK_TIME * 1000);
-		m_displayedHP = lerp(scale * scale * scale, newHP, m_oldHP);
-
-		float overlayPos = BAR_LEFT + BAR_WIDTH * (static_cast<float>(newHP) / m_attributes->maxHealthPoints);
-		m_hitOverlay.setPosition(sf::Vector2f(overlayPos, BAR_TOP));
-		float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_displayedHP - newHP) / m_attributes->maxHealthPoints));
-		m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
+		float scale = m_shrinkTime.asSeconds() / SHRINK_TIME;
+		m_overlayHP = lerp(scale * scale * scale, m_currentHP, m_maxOverlayHP);
 	}
 	else {
-		m_displayedHP = newHP;
+		m_overlayHP = m_currentHP;
 	}
-	
-	// Set underlying normal HP bar
-	float barWidth = BAR_WIDTH * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints);
-	m_bar.setSize(sf::Vector2f(barWidth, BAR_HEIGHT));
+
+	// Set normal bar
+	float normalWidth = BAR_WIDTH * (static_cast<float>(m_currentHP) / m_attributes->maxHealthPoints);
+	m_bar.setSize(sf::Vector2f(normalWidth, BAR_HEIGHT));
+
+	// Set overlay
+	float overlayX = BAR_LEFT + normalWidth;
+	float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_overlayHP - m_currentHP) / m_attributes->maxHealthPoints));
+	m_hitOverlay.setPosition(sf::Vector2f(overlayX, BAR_TOP));
+	m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
 }

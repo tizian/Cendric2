@@ -14,9 +14,9 @@ public:
 private:
 	const AttributeData* m_attributes;
 
-	int m_oldHP;			// HP before hit
-	int m_currentHP;		// HP after hit
-	int m_displayedHP;	// (visual only) HP during shrinking animation
+	int m_currentHP;
+	int m_maxOverlayHP;
+	int m_overlayHP;
 
 	sf::Time m_highlightTime;
 	sf::Time m_waitTime;
