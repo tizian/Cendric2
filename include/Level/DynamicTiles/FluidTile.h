@@ -47,6 +47,9 @@ public:
 	bool isFrozen(int index);
 
 private:
+	void checkForMovableTiles();
+
+private:
 	FluidTileData m_data;
 	float m_x, m_y;
 	float m_width, m_height;

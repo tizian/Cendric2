@@ -42,6 +42,9 @@ public:
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const;
 
+	const std::vector<GameObject*>* getMovableTiles() const;
+	const std::vector<GameObject*>* getDynamicTiles() const;
+
 private:
 	// data loaded by the level loader
 	LevelData m_levelData;

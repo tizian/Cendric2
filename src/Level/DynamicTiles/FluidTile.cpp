@@ -91,9 +91,37 @@ void FluidTile::loadAnimation(int skinNr) {
 	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
 	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);
 }
+ 
+void FluidTile::checkForMovableTiles() {
+	for (auto& it : *m_level->getMovableTiles()) {
+		MovableGameObject* tile = dynamic_cast<MovableGameObject*>(it);
+		if (tile == nullptr) continue;
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (m_boundingBox.intersects(tileBB)) {
+			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
+			float vel = norm(tile->getVelocity());
+			// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
+			splash(tileBB.left, tileBB.width, -vel * 0.5f);
+		}
+	}
+	for (auto& it : *m_level->getDynamicTiles()) {
+		MovableGameObject* tile = dynamic_cast<MovableGameObject*>(it);
+		if (tile == nullptr) continue;
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (m_boundingBox.intersects(tileBB)) {
+			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
+			float vel = norm(tile->getVelocity());
+			// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
+			splash(tileBB.left, tileBB.width, -vel * 0.5f);
+		}
+	}
+}
 
 void FluidTile::update(const sf::Time& frameTime) {
 	m_isFirstRenderIteration = true;
+
+	checkForMovableTiles();
+
 	float dt = frameTime.asSeconds();
 	dt *= 20.f;
 
@@ -181,6 +209,7 @@ float FluidTile::getHeight(float xPosition) const {
 }
 
 void FluidTile::splash(float xPosition, float velocity) {
+	if (velocity == 0.f) return;
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	if (index > 0 && index < m_nColumns) {
 		m_columns[index].velocity = velocity;
@@ -200,6 +229,7 @@ void FluidTile::splash(float xPosition, float velocity) {
 }
 
 void FluidTile::splash(float xPosition, float width, float velocity) {
+	if (velocity == 0.f) return;
 	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
 	for (int i = startIndex; i <= endIndex; ++i) {

@@ -1,7 +1,6 @@
 #include "GUI/HealthBar.h"
 
 #include "ResourceManager.h"
-#include "GameObject.h"
 
 #include <iostream>
 using namespace std;
@@ -67,7 +66,7 @@ void HealthBar::update(const sf::Time& frameTime) {
 
 	// Highlight on hit
 	if (m_highlightTime > sf::Time::Zero) {
-		GameObject::updateTime(m_highlightTime, frameTime);
+		updateTime(m_highlightTime, frameTime);
 		if (m_highlightTime <= sf::Time::Zero) {
 			m_hitOverlay.setTexture(m_hitOverlayTexture);
 		}
@@ -76,14 +75,14 @@ void HealthBar::update(const sf::Time& frameTime) {
 	// Shrinking animation on hit
 	if (m_waitTime > sf::Time::Zero) {
 		// Wait before shrinking
-		GameObject::updateTime(m_waitTime, frameTime);
+		updateTime(m_waitTime, frameTime);
 	}
 	else if (m_shrinkTime > sf::Time::Zero) {
 		// Shrinking.
-		GameObject::updateTime(m_shrinkTime, frameTime);
+		updateTime(m_shrinkTime, frameTime);
 
 		float scale = m_shrinkTime.asSeconds() / SHRINK_TIME;
-		m_overlayHP = lerp(scale * scale * scale, m_currentHP, m_maxOverlayHP);
+		m_overlayHP = lerp(scale * scale * scale, static_cast<float>(m_currentHP), static_cast<float>(m_maxOverlayHP));
 	}
 	else {
 		m_overlayHP = m_currentHP;

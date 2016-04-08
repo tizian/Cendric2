@@ -25,7 +25,7 @@ void JumpingGhostDebugger::setGoodTrajectory() {
 }
 
 void JumpingGhostDebugger::update(const sf::Time& frameTime) {
-	GameObject::updateTime(m_renderTime, frameTime);
+	updateTime(m_renderTime, frameTime);
 	if (m_renderTime == sf::Time::Zero) {
 		setDisposed();
 	}

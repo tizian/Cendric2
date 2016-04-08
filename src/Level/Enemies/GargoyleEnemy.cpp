@@ -23,7 +23,7 @@ GargoyleEnemy::GargoyleEnemy(Level* level, Screen* screen) :
 }
 
 void GargoyleEnemy::update(const sf::Time& frameTime) {
-	GameObject::updateTime(m_attackWaitTime, frameTime);
+	updateTime(m_attackWaitTime, frameTime);
 	Enemy::update(frameTime);
 }
 

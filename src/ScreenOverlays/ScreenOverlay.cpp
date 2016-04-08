@@ -32,7 +32,7 @@ void ScreenOverlay::load() {
 
 void ScreenOverlay::update(const sf::Time& frameTime) {
 	if (m_fadeInTimer == sf::Time::Zero && m_activeTime > sf::Time::Zero) {
-		GameObject::updateTime(m_activeTime, frameTime);
+		updateTime(m_activeTime, frameTime);
 		return;
 	}
 
@@ -40,11 +40,11 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 	const sf::Color& stc = m_subtitle.getColor();
 
 	if (m_fadeInTimer > sf::Time::Zero) {
-		GameObject::updateTime(m_fadeInTimer, frameTime);
+		updateTime(m_fadeInTimer, frameTime);
 		m_scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
 	}
 	else if (m_fadeOutTimer > sf::Time::Zero) {
-		GameObject::updateTime(m_fadeOutTimer, frameTime);
+		updateTime(m_fadeOutTimer, frameTime);
 		m_scale = m_fadeOutTimer.asSeconds() / m_fadeTime.asSeconds();
 	}
 	else {

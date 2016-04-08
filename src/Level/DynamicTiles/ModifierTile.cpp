@@ -45,7 +45,7 @@ void ModifierTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 
 	if (m_state == GameObjectState::Active) {
-		GameObject::updateTime(m_particleTime, frameTime);
+		updateTime(m_particleTime, frameTime);
 		if (m_particleTime == sf::Time::Zero) {
 			setDisposed();
 		}

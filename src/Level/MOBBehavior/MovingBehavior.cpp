@@ -20,7 +20,7 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 	}
 
 	// update animation
-	GameObject::updateTime(m_fightAnimationTime, frameTime);
+	updateTime(m_fightAnimationTime, frameTime);
 	updateAnimation();
 }
 

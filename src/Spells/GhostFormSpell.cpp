@@ -35,7 +35,7 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 	updateParticleSystemPosition();
 
-	GameObject::updateTime(m_data.activeDuration, frameTime);
+	updateTime(m_data.activeDuration, frameTime);
 	if (m_data.activeDuration <= sf::Time::Zero) {
 		setDisposed();
 	}

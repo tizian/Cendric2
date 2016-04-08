@@ -20,7 +20,7 @@ void AntiGravitySpell::update(const sf::Time& frameTime) {
 		m_debugBox.setPosition(getPosition());
 	}
 
-	GameObject::updateTime(m_data.activeDuration, frameTime);
+	updateTime(m_data.activeDuration, frameTime);
 
 	if (m_data.activeDuration.asMilliseconds() <= 0) {
 		setDisposed();

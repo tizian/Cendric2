@@ -177,9 +177,3 @@ Screen* GameObject::getScreen() const {
 GameObjectState GameObject::getGameObjectState() const {
 	return m_state;
 }
-
-void GameObject::updateTime(sf::Time& time, const sf::Time& frameTime) {
-	if (time == sf::Time::Zero) return;
-	time -= frameTime;
-	if (time < sf::Time::Zero) time = sf::Time::Zero;
-}

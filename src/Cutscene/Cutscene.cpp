@@ -37,7 +37,7 @@ void Cutscene::update(const sf::Time& frameTime) {
 		m_isNoStepsLeft = true;
 		return;
 	}
-	GameObject::updateTime(m_currentTextTime, frameTime);
+	updateTime(m_currentTextTime, frameTime);
 	if (m_currentTextTime == sf::Time::Zero) {
 		setNextText();
 		if (m_isNoTextsLeft) {

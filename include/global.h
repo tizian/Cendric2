@@ -45,6 +45,15 @@ inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
 	return (intersection.width > Epsilon && intersection.height > Epsilon);
 }
 
+// convenience method for updating time values 
+// The frame time is subtracted from the time but 
+// if the time falls below sf::Time::Zero, it is set to sf::Time::Zero.
+inline void updateTime(sf::Time& time, const sf::Time& frameTime) {	
+	if (time == sf::Time::Zero) return;
+	time -= frameTime;
+	if (time < sf::Time::Zero) time = sf::Time::Zero;
+}
+
 // this function can be changed if the resource path is
 // not the same as the executables path
 inline std::string getPath(const std::string& path) {

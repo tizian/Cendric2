@@ -76,13 +76,13 @@ void JumpingTile::changeDirection() {
 
 void JumpingTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
-	GameObject::updateTime(m_damageCooldown, frameTime);
+	updateTime(m_damageCooldown, frameTime);
 
 	if (m_isWaiting) {
 		if (m_isAggro && dist(m_mainChar->getCenter(), getCenter()) > AGGRO_DISTANCE) {
 			return;
 		}
-		GameObject::updateTime(m_waitingTime, frameTime);
+		updateTime(m_waitingTime, frameTime);
 		if (m_waitingTime == sf::Time::Zero) {
 			m_isWaiting = false;
 			changeDirection();
