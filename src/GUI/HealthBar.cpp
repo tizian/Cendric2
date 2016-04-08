@@ -80,7 +80,7 @@ void HealthBar::update(const sf::Time& frameTime) {
 		updateTime(m_shrinkTime, frameTime);
 
 		float scale = m_shrinkTime.asSeconds() / SHRINK_TIME;
-		m_overlayHP = lerp(scale * scale * scale, m_currentHP, m_maxOverlayHP);
+		m_overlayHP = lerp(scale * scale * scale, static_cast<float>(m_currentHP), static_cast<float>(m_maxOverlayHP));
 	}
 	else {
 		m_overlayHP = m_currentHP;
