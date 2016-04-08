@@ -40,6 +40,6 @@ private:
 	const float BORDER_OFFSET_Y = 10.f;
 
 	const float HIGHLIGHT_TIME = 0.05f;
-	const float WAIT_TIME = 1.f;
+	const float WAIT_TIME = 0.8f;
 	const float SHRINK_TIME = 1.f;
 };

@@ -46,19 +46,17 @@ void HealthBar::update(const sf::Time& frameTime) {
 	int newHP = m_attributes->currentHealthPoints;
 	bool adjustOverlay = false;
 	if (newHP < m_currentHP) {
+		m_currentHP = newHP;
+
 		// Restart shrinking from last position
-		m_maxOverlayHP = m_currentHP;
-		m_overlayHP = m_maxOverlayHP;
+		m_maxOverlayHP = m_overlayHP;
 
 		// Highlight textures
 		m_hitOverlay.setTexture(m_hitOverlayHighlightTexture);
 
 		// Restart timers
-		m_waitTime = sf::seconds(WAIT_TIME);
 		m_shrinkTime = sf::seconds(SHRINK_TIME);
 		m_highlightTime = sf::seconds(HIGHLIGHT_TIME);
-
-		m_currentHP = newHP;
 	}
 	else if (newHP > m_currentHP) {
 		m_currentHP = newHP;
@@ -73,7 +71,7 @@ void HealthBar::update(const sf::Time& frameTime) {
 	}
 
 	// Shrinking animation on hit
-	if (m_waitTime > sf::Time::Zero) {
+	if (m_waitTime > sf::Time::Zero && m_shrinkTime > sf::Time::Zero) {
 		// Wait before shrinking
 		updateTime(m_waitTime, frameTime);
 	}
@@ -86,6 +84,7 @@ void HealthBar::update(const sf::Time& frameTime) {
 	}
 	else {
 		m_overlayHP = m_currentHP;
+		m_waitTime = sf::seconds(WAIT_TIME);
 	}
 
 	// Set normal bar
