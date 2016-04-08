@@ -7,6 +7,7 @@
 class HealthBar {
 public:
 	HealthBar(const AttributeData* attributes);
+	~HealthBar();
 
 	void render(sf::RenderTarget& target) const;
 	void update(const sf::Time& frameTime);

@@ -36,6 +36,13 @@ HealthBar::HealthBar(const AttributeData* attributes) {
 	m_shrinkTime = sf::Time::Zero;
 }
 
+HealthBar::~HealthBar() {
+	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_border);
+	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content);
+	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_hit);
+	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_highlight);
+}
+
 void HealthBar::render(sf::RenderTarget& target) const {
 	target.draw(m_bar);
 	target.draw(m_hitOverlay);
