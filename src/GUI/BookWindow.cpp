@@ -101,7 +101,7 @@ void BookWindow::setPage(int index) {
 	if (index < -1 || index + 1 > static_cast<int>(m_data.pages.size())) return;
 	m_currentPage = index;
 	m_rightArrow->setEnabled(m_currentPage + 1 < static_cast<int>(m_data.pages.size()));
-	m_leftArrow->setEnabled(!m_data.title.empty() && m_currentPage > -1 || m_currentPage > 0);
+	m_leftArrow->setEnabled((!m_data.title.empty() && m_currentPage > -1) || m_currentPage > 0);
 
 	if (m_currentPage >= 0) {
 		m_title.setString(g_textProvider->getText(m_data.pages.at(m_currentPage).title, "book"));
