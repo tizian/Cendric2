@@ -3,6 +3,9 @@
 #include "ResourceManager.h"
 #include "GameObject.h"
 
+#include <iostream>
+using namespace std;
+
 HealthBar::HealthBar(const AttributeData* attributes) {
 	m_attributes = attributes;
 	m_currentHP = attributes->currentHealthPoints;
@@ -44,12 +47,10 @@ void HealthBar::update(const sf::Time& frameTime) {
 	int newHP = m_attributes->currentHealthPoints;
 	bool adjustOverlay = false;
 	if (newHP < m_currentHP) {
-		// Hit!
-		m_currentHP = newHP;
-
 		// Restart shrinking from last position
-		m_maxOverlayHP = m_overlayHP;
-		
+		m_maxOverlayHP = m_currentHP;
+		m_overlayHP = m_maxOverlayHP;
+
 		// Highlight textures
 		m_hitOverlay.setTexture(m_hitOverlayHighlightTexture);
 
@@ -57,9 +58,10 @@ void HealthBar::update(const sf::Time& frameTime) {
 		m_waitTime = sf::seconds(WAIT_TIME);
 		m_shrinkTime = sf::seconds(SHRINK_TIME);
 		m_highlightTime = sf::seconds(HIGHLIGHT_TIME);
+
+		m_currentHP = newHP;
 	}
 	else if (newHP > m_currentHP) {
-		// Heal!
 		m_currentHP = newHP;
 	}
 
