@@ -5,7 +5,8 @@
 HealthBar::HealthBar(const AttributeData* attributes) {
 	m_attributes = attributes;
 	m_currentHP = attributes->currentHealthPoints;
-	m_displayedHP = m_currentHP;
+	m_overlayHP = m_currentHP;
+	m_maxOverlayHP = m_overlayHP;
 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_border);
 	m_barTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content);
@@ -27,6 +28,7 @@ HealthBar::HealthBar(const AttributeData* attributes) {
 	m_hitOverlay.setSize(sf::Vector2f(0.f, 0.f));
 	m_hitOverlay.setTexture(m_hitOverlayTexture);
 
+	m_highlightTime = sf::Time::Zero;
 	m_waitTime = sf::Time::Zero;
 	m_shrinkTime = sf::Time::Zero;
 }
@@ -39,10 +41,14 @@ void HealthBar::render(sf::RenderTarget& target) const {
 
 void HealthBar::update(const sf::Time& frameTime) {
 	int newHP = m_attributes->currentHealthPoints;
-	if (newHP < m_currentHP) {	// Hit!
-		m_oldHP = m_displayedHP;	// Restart fading from last position
-		m_currentHP = newHP;		// Set new target
+	bool adjustOverlay = false;
+	if (newHP < m_currentHP) {
+		// Hit!
+		m_currentHP = newHP;
 
+		// Restart shrinking from last position
+		m_maxOverlayHP = m_overlayHP;
+		
 		// Highlight textures
 		m_hitOverlay.setTexture(m_hitOverlayHighlightTexture);
 
@@ -50,35 +56,43 @@ void HealthBar::update(const sf::Time& frameTime) {
 		m_waitTime = sf::seconds(WAIT_TIME);
 		m_shrinkTime = sf::seconds(SHRINK_TIME);
 		m_highlightTime = sf::seconds(HIGHLIGHT_TIME);
-
-		// Reset hit overlay
-		float overlayPos = BAR_LEFT + BAR_WIDTH * (static_cast<float>(newHP) / m_attributes->maxHealthPoints);
-		float overlayWidth = BAR_WIDTH * (static_cast<float>(m_oldHP - newHP) / m_attributes->maxHealthPoints);
-		m_hitOverlay.setPosition(sf::Vector2f(overlayPos, BAR_TOP));
-		m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
+	}
+	else if (newHP > m_currentHP) {
+		// Heal!
+		m_currentHP = newHP;
 	}
 
+	// Highlight on hit
 	if (m_highlightTime > sf::Time::Zero) {
 		updateTime(m_highlightTime, frameTime);
-	}
-	else {
-		m_hitOverlay.setTexture(m_hitOverlayTexture);
+		if (m_highlightTime <= sf::Time::Zero) {
+			m_hitOverlay.setTexture(m_hitOverlayTexture);
+		}
 	}
 
+	// Shrinking animation on hit
 	if (m_waitTime > sf::Time::Zero) {
+		// Wait before shrinking
 		updateTime(m_waitTime, frameTime);
 	}
 	else if (m_shrinkTime > sf::Time::Zero) {
+		// Shrinking.
 		updateTime(m_shrinkTime, frameTime);
 
-		float scale = m_shrinkTime.asMilliseconds() / (SHRINK_TIME * 1000);
-		m_displayedHP = lerp(scale * scale * scale, newHP, m_oldHP);
-
-		float overlayWidth = BAR_WIDTH * (static_cast<float>(m_displayedHP - newHP) / m_attributes->maxHealthPoints);
-		m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
+		float scale = m_shrinkTime.asSeconds() / SHRINK_TIME;
+		m_overlayHP = lerp(scale * scale * scale, m_currentHP, m_maxOverlayHP);
 	}
-	
-	// Set underlying normal HP bar
-	float barWidth = BAR_WIDTH * (static_cast<float>(m_attributes->currentHealthPoints) / m_attributes->maxHealthPoints);
-	m_bar.setSize(sf::Vector2f(barWidth, BAR_HEIGHT));
+	else {
+		m_overlayHP = m_currentHP;
+	}
+
+	// Set normal bar
+	float normalWidth = BAR_WIDTH * (static_cast<float>(m_currentHP) / m_attributes->maxHealthPoints);
+	m_bar.setSize(sf::Vector2f(normalWidth, BAR_HEIGHT));
+
+	// Set overlay
+	float overlayX = BAR_LEFT + normalWidth;
+	float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_overlayHP - m_currentHP) / m_attributes->maxHealthPoints));
+	m_hitOverlay.setPosition(sf::Vector2f(overlayX, BAR_TOP));
+	m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
 }
