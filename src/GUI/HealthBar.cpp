@@ -45,7 +45,9 @@ void HealthBar::render(sf::RenderTarget& target) const {
 
 void HealthBar::update(const sf::Time& frameTime) {
 	int newHP = m_attributes->currentHealthPoints;
-	if (newHP < m_currentHP) {	// Hit!
+	bool adjustOverlay = false;
+	if (newHP < m_currentHP) {
+		// Hit!
 		m_oldHP = m_displayedHP;	// Restart fading from last position
 		m_currentHP = newHP;		// Set new target
 
@@ -57,18 +59,27 @@ void HealthBar::update(const sf::Time& frameTime) {
 		m_shrinkTime = sf::seconds(SHRINK_TIME);
 		m_highlightTime = sf::seconds(HIGHLIGHT_TIME);
 
+		adjustOverlay = true;
+	}
+	else if (newHP > m_currentHP) {
+		// Heal!
+		m_currentHP = newHP;
+		adjustOverlay = true;
+	}
+
+	if (adjustOverlay) {
 		// Reset hit overlay
 		float overlayPos = BAR_LEFT + BAR_WIDTH * (static_cast<float>(newHP) / m_attributes->maxHealthPoints);
-		float overlayWidth = BAR_WIDTH * (static_cast<float>(m_oldHP - newHP) / m_attributes->maxHealthPoints);
+		float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_oldHP - newHP) / m_attributes->maxHealthPoints));
 		m_hitOverlay.setPosition(sf::Vector2f(overlayPos, BAR_TOP));
 		m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
 	}
 
 	if (m_highlightTime > sf::Time::Zero) {
 		updateTime(m_highlightTime, frameTime);
-	}
-	else {
-		m_hitOverlay.setTexture(m_hitOverlayTexture);
+		if (m_highlightTime <= sf::Time::Zero) {
+			m_hitOverlay.setTexture(m_hitOverlayTexture);
+		}
 	}
 
 	if (m_waitTime > sf::Time::Zero) {
@@ -80,8 +91,13 @@ void HealthBar::update(const sf::Time& frameTime) {
 		float scale = m_shrinkTime.asMilliseconds() / (SHRINK_TIME * 1000);
 		m_displayedHP = lerp(scale * scale * scale, newHP, m_oldHP);
 
-		float overlayWidth = BAR_WIDTH * (static_cast<float>(m_displayedHP - newHP) / m_attributes->maxHealthPoints);
+		float overlayPos = BAR_LEFT + BAR_WIDTH * (static_cast<float>(newHP) / m_attributes->maxHealthPoints);
+		m_hitOverlay.setPosition(sf::Vector2f(overlayPos, BAR_TOP));
+		float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_displayedHP - newHP) / m_attributes->maxHealthPoints));
 		m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
+	}
+	else {
+		m_displayedHP = newHP;
 	}
 	
 	// Set underlying normal HP bar

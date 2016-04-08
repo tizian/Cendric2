@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:31
+time.played:39
 savegame.name:ratcave
-savegame.date:1460065637
+savegame.date:1460105148
 level.id:res/level/ratcave/ratcave.tmx
 level.position:525.000000,1175.000000
 is.in.level:1
 map.id:res/map/meadows/meadows.tmx
-map.position:2936.490723,256.269470
+map.position:2925.000000,256.616760
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -25,18 +25,23 @@ equipped.ring1:
 equipped.ring2:
 equipped.weapon:we_walkingpole
 # quickslot assignments:
-quickslot:1,
-quickslot:2,
+quickslot:1,fo_apple
+quickslot:2,fo_rawmeat
 # enemies killed in level:
+enemies.killed:res/level/ratcave/ratcave.tmx
 enemies.killed:res/level/rockfall/rockfall.tmx,74,75,78
 # enemies looted in level:
+enemies.looted:res/level/ratcave/ratcave.tmx
 enemies.looted:res/level/rockfall/rockfall.tmx,74,75,78
 # items looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
 items.looted:res/level/rockfall/rockfall.tmx,894,1006
 # chests looted in level:
+items.looted:res/level/ratcave/ratcave.tmx
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/meadows/meadows.tmx
 # triggers triggered in world:
+triggers.triggered:res/level/ratcave/ratcave.tmx
 triggers.triggered:res/level/rockfall/rockfall.tmx,82,83
 triggers.triggered:res/map/meadows/meadows.tmx,107
 # quest states:
