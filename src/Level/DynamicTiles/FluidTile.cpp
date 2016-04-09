@@ -78,13 +78,7 @@ void FluidTile::loadAnimation(int skinNr) {
 	m_particleMinSpeed = &velGen->minStartVel;
 	m_particleMaxSpeed = &velGen->maxStartVel;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 10.0f;
-	timeGen->maxTime = 10.0f;
-
 	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-
 	auto fluidUpdater = m_ps->addUpdater<particles::FluidUpdater>();
 	fluidUpdater->fluidTile = this;
 
@@ -184,7 +178,8 @@ float FluidTile::getHeight(float xPosition) const {
 }
 
 void FluidTile::splash(float xPosition, float velocity) {
-	if (velocity == 0.f) return;
+	if (std::abs(velocity) < Epsilon) return;
+
 	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	if (index > 0 && index < m_nColumns) {
 		m_columns[index].velocity = velocity;
@@ -197,14 +192,18 @@ void FluidTile::splash(float xPosition, float velocity) {
 	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
 	*m_particleMinSpeed = 0.2f * velocity;
 	*m_particleMaxSpeed = 1.0f * velocity;
+
 	int nParticles = static_cast<int>(velocity / 12);
 	m_ps->emit(nParticles);
-	if (velocity > 100.f)
+
+	if (velocity > 100.f) {
 		g_resourceManager->playSound(m_sound, m_data.sound);
+	}
 }
 
 void FluidTile::splash(float xPosition, float width, float velocity) {
-	if (velocity == 0.f) return;
+	if (std::abs(velocity) < Epsilon) return;
+
 	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
 	for (int i = startIndex; i <= endIndex; ++i) {
@@ -221,10 +220,13 @@ void FluidTile::splash(float xPosition, float width, float velocity) {
 	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
 	*m_particleMinSpeed = 0.2f * velocity;
 	*m_particleMaxSpeed = 1.0f * velocity;
+
 	int nParticles = static_cast<int>(velocity / 12);
 	m_ps->emit(nParticles);
-	if (velocity > 100.f)
+
+	if (velocity > 100.f) {
 		g_resourceManager->playSound(m_sound, m_data.sound);
+	}
 }
 
 void FluidTile::render(sf::RenderTarget& target) {
@@ -269,6 +271,9 @@ void FluidTile::onHit(LevelMovableGameObject* mob) {
 
 	float sign = mob->getVelocity().y > 0 ? -1.f : 1.f;
 	float vel = sign * velocityScale * norm(mob->getVelocity());
+	if (std::abs(mob->getVelocity().y) < Epsilon && std::abs(mob->getVelocity().x) > Epsilon) {
+		vel = -0.2f * velocityScale * norm(mob->getVelocity());
+	}
 
 	splash(mob->getBoundingBox()->left, mob->getBoundingBox()->width, vel);
 

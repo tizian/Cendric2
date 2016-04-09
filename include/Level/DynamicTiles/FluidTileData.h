@@ -60,11 +60,11 @@ const FluidTileData LAVA
 const FluidTileData SHALLOW_WATER
 {
 	FluidTileType::Water,
-	0.4f,
-	0.15f,
-	0.2f,
-	25.f,
-	0.4f,
+	1.1f,
+	0.1f,
+	1.0f,
+	20.f,
+	1.f,
 	sf::Color(20, 50, 100, 128),
 	false,
 	false,
