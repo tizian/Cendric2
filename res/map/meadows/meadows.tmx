@@ -5,7 +5,7 @@
   <property name="name" value="Meadows"/>
   <property name="tilesetpath" value="res/map/meadows/tileset_map_meadows.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311">
+ <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
   <image source="tileset_map_meadows.png" width="1200" height="3000"/>
   <tile id="25">
    <properties>
@@ -59,10 +59,10 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
+ <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="70" height="70">
@@ -1089,9 +1089,9 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="127" x="1436.12" y="1641" width="43.75" height="55">
+  <object id="127" x="1427.12" y="1643" width="43.75" height="55">
    <properties>
-    <property name="level entry" value="res/level/brokenbridge/brokenbridge.tmx,1700,750"/>
+    <property name="level entry" value="res/level/brokenbridge/brokenbridge.tmx,3100,1450"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

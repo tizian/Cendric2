@@ -1,9 +1,5 @@
 #include "GUI/HealthBar.h"
-
 #include "ResourceManager.h"
-
-#include <iostream>
-using namespace std;
 
 HealthBar::HealthBar(const AttributeData* attributes) {
 	m_attributes = attributes;

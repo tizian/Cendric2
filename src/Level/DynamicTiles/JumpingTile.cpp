@@ -11,9 +11,9 @@ JumpingTile::JumpingTile(LevelScreen* levelScreen) :
 }
 
 void JumpingTile::init() {
-	setSpriteOffset(sf::Vector2f(-3.f, -3.f));
-	setPositionOffset(sf::Vector2f(-3.f, -3.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 6.f, TILE_SIZE_F - 6.f));
+	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
+	setPositionOffset(sf::Vector2f(-10.f, -10.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F - 20.f));
 	m_damage.damageType = DamageType::Physical;
 	m_damage.duration = sf::seconds(4.f);
 	m_damage.damage = 40;
@@ -35,8 +35,10 @@ void JumpingTile::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	if (skinNr == 2) // fireball
+	if (skinNr == 2) { // fireball
 		m_damage.damageType = DamageType::Fire;
+		m_isMelting = true;
+	}
 }
 
 void JumpingTile::onHit(LevelMovableGameObject* mob) {
@@ -110,6 +112,7 @@ void JumpingTile::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 
+
 	// rotate sprite
 	setSpriteRotation(atan2(m_velocity.y, m_velocity.x));
 }
@@ -134,10 +137,21 @@ void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	rec.movingParent = nullptr;
 	bool collidesY = m_level->collides(rec);
 	setMovingParent(rec.movingParent);
-	if (collidesY) {
+	if (collidesY && getVelocity().y < 0.f) {
 		setAccelerationY(0.f);
 		setVelocityY(0.f);
 		setPositionY(rec.safeTop);
+	}
+
+	if (collidesY && m_isMelting) {
+		for (auto& it : *m_level->getDynamicTiles()) {
+			LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+			if (tile == nullptr || tile->getDynamicTileID() != LevelDynamicTileID::Ice) continue;
+			const sf::FloatRect& tileBB = *tile->getBoundingBox();
+			if (nextBoundingBoxY.intersects(tileBB)) {
+				tile->setDisposed();
+			}
+		}
 	}
 }
 

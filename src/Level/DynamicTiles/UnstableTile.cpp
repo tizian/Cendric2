@@ -78,6 +78,9 @@ void UnstableTile::update(const sf::Time& frameTime) {
 		setState(GameObjectState::Idle);
 	}
 	m_wasCritical = false;
+	if (m_boundingBox.top + m_boundingBox.height > (m_level->getWorldRect().top + m_level->getWorldRect().height)) {
+		setDisposed();
+	}
 }
 
 void UnstableTile::onHit(Spell* spell) {

@@ -57,6 +57,9 @@ void ShiftableTile::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	m_pushAcceleration = 0.f;
+	if (m_boundingBox.top + m_boundingBox.height > (m_level->getWorldRect().top + m_level->getWorldRect().height)) {
+		setDisposed();
+	}
 }
 
 void ShiftableTile::onHit(Spell* spell) {

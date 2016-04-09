@@ -461,6 +461,7 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_spell_shadowtrap);
 	getTexture(ResourceID::Texture_enemy_gargoyle);
 	getTexture(ResourceID::Texture_spell_projectile);
+	getTexture(ResourceID::Texture_tile_frozenwater);
 
 	getSoundBuffer(ResourceID::Sound_spell_fireball);
 

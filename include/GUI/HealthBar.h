@@ -27,10 +27,10 @@ private:
 	sf::RectangleShape m_bar;
 	sf::RectangleShape m_hitOverlay;
 
-	const sf::Texture *m_borderTexture;
-	const sf::Texture *m_barTexture;
-	const sf::Texture *m_hitOverlayTexture;
-	const sf::Texture *m_hitOverlayHighlightTexture;
+	const sf::Texture* m_borderTexture;
+	const sf::Texture* m_barTexture;
+	const sf::Texture* m_hitOverlayTexture;
+	const sf::Texture* m_hitOverlayHighlightTexture;
 
 	const float BAR_HEIGHT = 15.f;
 	const float BAR_WIDTH = 300.f;

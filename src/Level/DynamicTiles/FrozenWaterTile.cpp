@@ -9,6 +9,7 @@ FrozenWaterTile::FrozenWaterTile(FluidTile* fluidTile, int fluidTileIndex) : Lev
 	m_fluidTile = fluidTile;
 	m_fluidTileIndex = fluidTileIndex;
 	m_isRenderAfterObjects = true;
+	m_dynamicTileID = LevelDynamicTileID::Ice;
 }
 
 void FrozenWaterTile::init() {
@@ -30,12 +31,16 @@ void FrozenWaterTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
+void FrozenWaterTile::setDisposed() {
+	m_fluidTile->melt(m_fluidTileIndex);
+	LevelDynamicTile::setDisposed();
+}
+
 void FrozenWaterTile::onHit(Spell* spell) {
 	using std::cout; using std::endl;
 	switch (spell->getSpellID()) {
 	case SpellID::FireBall:
 		spell->setDisposed();
-		m_fluidTile->melt(m_fluidTileIndex);
 		setDisposed();
 		break;
 	default:

@@ -11,6 +11,7 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
+	void setDisposed() override;
 
 private:
 	FluidTile *m_fluidTile;			// Pointer to its fluid tile, to unfreeze

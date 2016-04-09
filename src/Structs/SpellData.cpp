@@ -333,7 +333,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.isDynamicTileEffect = true;
 	iceBall.needsTarget = true;
 	iceBall.damage = 6;
-	iceBall.speed = 200.f;
+	iceBall.speed = 250.f;
 
 	iceBall.countModifierAddition = 1;
 	iceBall.damageModifierAddition = 20;

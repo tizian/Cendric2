@@ -191,8 +191,8 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
-	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
+	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
 
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();

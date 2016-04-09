@@ -40,6 +40,7 @@ private:
 	bool m_isAggro = false;
 	bool m_isAlternating = false;
 	bool m_isReturning = false;
+	bool m_isMelting = false;
 	DamageOverTimeData m_damage;
 	sf::Vector2f m_initialPosition;
 };
