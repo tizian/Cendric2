@@ -37,14 +37,18 @@ namespace particles
 			return u;
 		}
 
-		void emit(int maxCount);		// emit a fix number of particles
-		void emit(float dt);			// emit a stream of particles defined by emitRate and dt
+		void emitParticles(int count) { m_particlesToEmit += count; }
+
+	protected:
+		void emitWithCount(int count);	// emit a fix number of particles
+		void emitWithRate(float dt);	// emit a stream of particles defined by emitRate and dt
 
 	public:
 		float	emitRate;	// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
 
 	protected:
 		float m_dt;
+		int m_particlesToEmit;
 
 		ParticleData *m_particles;
 		

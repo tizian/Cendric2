@@ -2,7 +2,7 @@
 
 namespace particles
 {
-	ParticleSystem::ParticleSystem(int maxCount) : emitRate(0.f), m_dt(0.f) {
+	ParticleSystem::ParticleSystem(int maxCount) : emitRate(0.f), m_dt(0.f), m_particlesToEmit(0) {
 		m_particles = new ParticleData(maxCount);
 	}
 
@@ -18,7 +18,7 @@ namespace particles
 		}
 	}
 
-	void ParticleSystem::emit(float dt) {
+	void ParticleSystem::emitWithRate(float dt) {
 		m_dt += dt;
 
 		int maxNewParticles = 0;
@@ -31,33 +31,36 @@ namespace particles
 		if (maxNewParticles == 0) return;
 
 		const int startId = m_particles->countAlive;
-		const int endId = std::min(startId + maxNewParticles - 1, m_particles->count - 1);
+		const int endId = std::min(startId + maxNewParticles, m_particles->count - 1);
+		const int newParticles = endId - startId;
 
 		for (auto &generator : m_generators) {
 			generator->generate(m_particles, startId, endId);
 		}
 
-		for (int i = startId; i < endId; ++i) {
-			m_particles->wake(i);
-		}
+		m_particles->countAlive += newParticles;
 	}
 
-	void ParticleSystem::emit(int maxCount) {
+	void ParticleSystem::emitWithCount(int count) {
 		const int startId = m_particles->countAlive;
-		const int endId = std::min(startId + maxCount - 1, m_particles->count - 1);
+		const int endId = std::min(startId + count, m_particles->count - 1);
+		const int newParticles = endId - startId;
 
 		for (auto &generator : m_generators) {
 			generator->generate(m_particles, startId, endId);
 		}
 
-		for (int i = startId; i < endId; ++i) {
-			m_particles->wake(i);
-		}
+		m_particles->countAlive += newParticles;
 	}
 
 	void ParticleSystem::update(const sf::Time &dt) {
 		if (emitRate > 0.0f) {
-			emit(dt.asSeconds());
+			emitWithRate(dt.asSeconds());
+		}
+
+		if (m_particlesToEmit > 0) {
+			emitWithCount(m_particlesToEmit);
+			m_particlesToEmit = 0;
 		}
 
 		for (int i = 0; i < m_particles->countAlive; ++i) {

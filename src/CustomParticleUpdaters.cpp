@@ -16,12 +16,7 @@ namespace particles
 
 			if (data->pos[i].y + 0.5f * data->size[i].y > bb->top + bb->height - y) {
 				data->kill(i);
-				if (data->countAlive < data->count) {
-					endId = data->countAlive;
-				}
-				else {
-					endId = data->count;
-				}
+				endId = data->countAlive;
 			}
 		}
 	}

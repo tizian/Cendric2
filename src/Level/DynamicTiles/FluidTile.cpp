@@ -194,7 +194,7 @@ void FluidTile::splash(float xPosition, float velocity) {
 	*m_particleMaxSpeed = 1.0f * velocity;
 
 	int nParticles = static_cast<int>(velocity / 12);
-	m_ps->emit(nParticles);
+	m_ps->emitParticles(nParticles);
 
 	if (velocity > 100.f) {
 		g_resourceManager->playSound(m_sound, m_data.sound);
@@ -222,7 +222,7 @@ void FluidTile::splash(float xPosition, float width, float velocity) {
 	*m_particleMaxSpeed = 1.0f * velocity;
 
 	int nParticles = static_cast<int>(velocity / 12);
-	m_ps->emit(nParticles);
+	m_ps->emitParticles(nParticles);
 
 	if (velocity > 100.f) {
 		g_resourceManager->playSound(m_sound, m_data.sound);

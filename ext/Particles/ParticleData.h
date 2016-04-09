@@ -16,7 +16,6 @@ namespace particles
         ParticleData &operator=(const ParticleData &) = delete;
 
         void kill(int id);
-        void wake(int id);
         void swapData(int id1, int id2);
 
     public:

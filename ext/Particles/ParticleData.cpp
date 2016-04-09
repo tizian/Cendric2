@@ -40,12 +40,6 @@ namespace particles
         }
     }
 
-    void ParticleData::wake(int id) {
-        if (countAlive < count) {
-            countAlive++;
-        }
-    }
-
     void ParticleData::swapData(int id1, int id2) {
         std::swap(pos[id1], pos[id2]);
 		std::swap(size[id1], size[id2]);
