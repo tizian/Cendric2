@@ -503,11 +503,12 @@ bool MapReader::readBackgroundTileLayer(const std::string& layer, MapData& data)
 		int tileID = std::stoi(layerData.substr(0, pos));
 
 		if (m_tileColliderMap.find(tileID) != m_tileColliderMap.end()) {
-			sf::FloatRect collider = m_tileColliderMap.at(tileID);
-			collider.left += x * TILE_SIZE_F;
-			collider.top += y * TILE_SIZE_F;
-
-			data.collidableRects.push_back(collider);
+			for (auto const& colliderRect : m_tileColliderMap.at(tileID)) {
+				sf::FloatRect collider = colliderRect;
+				collider.left += x * TILE_SIZE_F;
+				collider.top += y * TILE_SIZE_F;
+				data.collidableRects.push_back(collider);
+			}
 		}
 
 		backgroundLayer.push_back(std::stoi(layerData.substr(0, pos)));
@@ -538,67 +539,40 @@ bool MapReader::readCollidableTiles(tinyxml2::XMLElement* firstTile) {
 		tinyxml2::XMLError result = tile->QueryIntAttribute("id", &tileID);
 		XMLCheckResult(result);
 
-		tinyxml2::XMLElement* properties = tile->FirstChildElement("properties");
-		if (properties == nullptr) {
+		tinyxml2::XMLElement* colliders = tile->FirstChildElement("objectgroup");
+		if (colliders == nullptr) {
 			// this is an animated tile, just move on.
 			tile = tile->NextSiblingElement("tile");
 			continue;
 		}
-		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-		if (_property == nullptr) {
-			logError("Could not read item tile properties, no tileset->tile->properties->property tag found.");
-			return false;
-		}
-		const char* textAttr = nullptr;
-		textAttr = _property->Attribute("name");
-		if (textAttr == nullptr) {
-			logError("XML file could not be read, no tileset->tile->properties->property name attribute found.");
-			return false;
-		}
-		std::string name = textAttr;
-		if (name.compare("collider") != 0) {
-			logError("XML file could not be read, wrong tile property (not \"collider\").");
-			return false;
-		}
-		textAttr = nullptr;
-		textAttr = _property->Attribute("value");
-		if (textAttr == nullptr) {
-			logError("XML file could not be read, no tileset->tile->properties->property value attribute found.");
-			return false;
-		}
 
-		std::string colliderText = std::string(textAttr);
+		m_tileColliderMap.insert({ tileID + 1, std::vector<sf::FloatRect>() });
 
-		size_t pos = 0;
-		sf::FloatRect collider;
+		tinyxml2::XMLElement* collider = colliders->FirstChildElement("object");
+		while (collider != nullptr) {
+			sf::FloatRect colliderRect;
+			int res;
+			
+			result = collider->QueryIntAttribute("x", &res);
+			XMLCheckResult(result);
+			colliderRect.left = static_cast<float>(res);
 
-		pos = colliderText.find(",");
-		if (pos == std::string::npos) {
-			logError("collider rect for tile " + std::to_string(tileID) + " is wrongly defined.");
-			return false;
+			result = collider->QueryIntAttribute("y", &res);
+			XMLCheckResult(result);
+			colliderRect.top = static_cast<float>(res);
+
+			result = collider->QueryIntAttribute("width", &res);
+			XMLCheckResult(result);
+			colliderRect.width = static_cast<float>(res);
+
+			result = collider->QueryIntAttribute("height", &res);
+			XMLCheckResult(result);
+			colliderRect.height = static_cast<float>(res);
+
+			m_tileColliderMap.at(tileID + 1).push_back(colliderRect);
+
+			collider = collider->NextSiblingElement("object");
 		}
-		collider.left = static_cast<float>(atoi(colliderText.substr(0, pos).c_str()));
-		colliderText.erase(0, pos + 1);
-
-		pos = colliderText.find(",");
-		if (pos == std::string::npos) {
-			logError("collider rect for tile " + std::to_string(tileID) + " is wrongly defined.");
-			return false;
-		}
-		collider.top = static_cast<float>(atoi(colliderText.substr(0, pos).c_str()));
-		colliderText.erase(0, pos + 1);
-
-		pos = colliderText.find(",");
-		if (pos == std::string::npos) {
-			logError("collider rect for tile " + std::to_string(tileID) + " is wrongly defined.");
-			return false;
-		}
-		collider.width = static_cast<float>(atoi(colliderText.substr(0, pos).c_str()));
-		colliderText.erase(0, pos + 1);
-
-		collider.height = static_cast<float>(atoi(colliderText.c_str()));
-
-		m_tileColliderMap.insert({ tileID + 1, collider });
 
 		tile = tile->NextSiblingElement("tile");
 	}

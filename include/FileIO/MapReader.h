@@ -40,5 +40,5 @@ private:
 
 	int m_firstGidDynamicTiles;
 
-	std::map<int, sf::FloatRect> m_tileColliderMap;
+	std::map<int, std::vector<sf::FloatRect>> m_tileColliderMap;
 };
