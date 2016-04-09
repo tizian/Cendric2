@@ -32,9 +32,9 @@ struct FluidTileData {
 const FluidTileData WATER
 {
 	FluidTileType::Water,
-	0.4f,
-	0.05f,
-	0.7f,
+	1.1f,
+	0.0f,
+	1.0f,
 	40.f,
 	1.f,
 	sf::Color(20, 50, 100, 128),

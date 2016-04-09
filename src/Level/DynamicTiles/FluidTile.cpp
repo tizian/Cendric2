@@ -91,31 +91,6 @@ void FluidTile::loadAnimation(int skinNr) {
 	auto eulerUpdater = m_ps->addUpdater<particles::EulerUpdater>();
 	eulerUpdater->globalAcceleration = sf::Vector2f(0.0f, 500.0f);
 }
- 
-void FluidTile::checkForMovableTiles() {
-	for (auto& it : *m_level->getMovableTiles()) {
-		MovableGameObject* tile = dynamic_cast<MovableGameObject*>(it);
-		if (tile == nullptr) continue;
-		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (m_boundingBox.intersects(tileBB)) {
-			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
-			float vel = norm(tile->getVelocity());
-			// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
-			splash(tileBB.left, tileBB.width, -vel * 0.5f);
-		}
-	}
-	for (auto& it : *m_level->getDynamicTiles()) {
-		MovableGameObject* tile = dynamic_cast<MovableGameObject*>(it);
-		if (tile == nullptr) continue;
-		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (m_boundingBox.intersects(tileBB)) {
-			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
-			float vel = norm(tile->getVelocity());
-			// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
-			splash(tileBB.left, tileBB.width, -vel * 0.5f);
-		}
-	}
-}
 
 void FluidTile::update(const sf::Time& frameTime) {
 	m_isFirstRenderIteration = true;
@@ -123,7 +98,7 @@ void FluidTile::update(const sf::Time& frameTime) {
 	checkForMovableTiles();
 
 	float dt = frameTime.asSeconds();
-	dt *= 20.f;
+	dt *= 8;
 
 	for (int i = 0; i < m_nColumns; ++i) {
 		m_columns[i].update(m_data.damping, m_data.tension, dt);
@@ -277,20 +252,61 @@ void FluidTile::onHit(Spell* spell) {
 	}
 
 	if (doSplash) {
-		float vel = norm(spell->getVelocity());
-		splash(spell->getPosition().x, -vel * 0.5f);
+		float sign = spell->getVelocity().y > 0 ? -1.f : 1.f;
+		float vel = sign * norm(spell->getVelocity());
+
+		splash(spell->getPosition().x, vel);
+
 		spell->setDisposed();
 	}
 }
 
 void FluidTile::onHit(LevelMovableGameObject* mob) {
+	float velocityScale = 0.5f;
+
 	// don't splash if the mob is deeper than one tile below the surface
 	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
-	float vel = norm(mob->getVelocity());
-	// TODO: find maximum value for velocity, s.t. the waves stay inside the tile
-	splash(mob->getBoundingBox()->left, mob->getBoundingBox()->width, -vel * 0.5f);
+
+	float sign = mob->getVelocity().y > 0 ? -1.f : 1.f;
+	float vel = sign * velocityScale * norm(mob->getVelocity());
+
+	splash(mob->getBoundingBox()->left, mob->getBoundingBox()->width, vel);
+
 	if (m_data.isDeadly) {
 		mob->setDead();
+	}
+}
+
+void FluidTile::checkForMovableTiles() {
+	float velocityScale = 0.5f;
+
+	for (auto& it : *m_level->getMovableTiles()) {
+		MovableGameObject* tile = dynamic_cast<MovableGameObject*>(it);
+		if (tile == nullptr) continue;
+
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (m_boundingBox.intersects(tileBB)) {
+			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
+
+			float sign = tile->getVelocity().y > 0 ? -1.f : 1.f;
+			float vel = sign * velocityScale * norm(tile->getVelocity());
+
+			splash(tileBB.left, tileBB.width, vel);
+		}
+	}
+	for (auto& it : *m_level->getDynamicTiles()) {
+		MovableGameObject* tile = dynamic_cast<MovableGameObject*>(it);
+		if (tile == nullptr) continue;
+
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (m_boundingBox.intersects(tileBB)) {
+			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
+
+			float sign = tile->getVelocity().y > 0 ? -1.f : 1.f;
+			float vel = sign * velocityScale * norm(tile->getVelocity());
+
+			splash(tileBB.left, tileBB.width, vel);
+		}
 	}
 }
 
