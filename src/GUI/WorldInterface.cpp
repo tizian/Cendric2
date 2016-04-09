@@ -47,10 +47,7 @@ void WorldInterface::reloadCharacterInfo() {
 void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {
-			if (m_inventory->isVisible()) m_inventory->hide();
-			if (m_spellbook->isVisible()) m_spellbook->hide();
-			if (m_questLog->isVisible()) m_questLog->hide();
-
+			hideAll();
 			m_characterInfo->show();
 		}
 		else {
@@ -68,10 +65,7 @@ void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 void WorldInterface::updateSpellbook(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Spellbook)) {
 		if (!m_spellbook->isVisible()) {
-			if (m_characterInfo->isVisible()) m_characterInfo->hide();
-			if (m_inventory->isVisible()) m_inventory->hide();
-			if (m_questLog->isVisible()) m_questLog->hide();
-
+			hideAll();
 			m_spellbook->show();
 		}
 		else {
@@ -89,10 +83,7 @@ void WorldInterface::updateSpellbook(const sf::Time& frameTime) {
 void WorldInterface::updateInventory(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Inventory)) {
 		if (!m_inventory->isVisible()) {
-			if (m_characterInfo->isVisible()) m_characterInfo->hide();
-			if (m_spellbook->isVisible()) m_spellbook->hide();
-			if (m_questLog->isVisible()) m_questLog->hide();
-
+			hideAll();
 			m_inventory->show();
 		}
 		else {
@@ -110,10 +101,7 @@ void WorldInterface::updateInventory(const sf::Time& frameTime) {
 void WorldInterface::updateQuestLog(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Journal)) {
 		if (!m_questLog->isVisible()) {
-			if (m_characterInfo->isVisible()) m_characterInfo->hide();
-			if (m_spellbook->isVisible()) m_spellbook->hide();
-			if (m_inventory->isVisible()) m_inventory->hide();
-
+			hideAll();
 			m_questLog->show();
 		}
 		else {
@@ -135,7 +123,6 @@ CharacterCore* WorldInterface::getCore() const {
 Screen* WorldInterface::getScreen() const {
 	return m_screen;
 }
-
 
 Inventory* WorldInterface::getInventory() const {
 	return m_inventory;

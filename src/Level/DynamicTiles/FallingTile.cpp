@@ -102,6 +102,18 @@ void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool collidesY = m_level->collides(rec);
 	setMovingParent(rec.movingParent);
 	if (collidesY) {
+		for (auto& it : *m_level->getDynamicTiles()) {
+			bool melts = false;
+			LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+			if (tile == nullptr || tile->getDynamicTileID() != LevelDynamicTileID::Ice) continue;
+			const sf::FloatRect& tileBB = *tile->getBoundingBox();
+			if (nextBoundingBoxY.intersects(tileBB)) {
+				tile->setDisposed();
+				melts = true;
+			}
+			if (melts) return;
+		}
+
 		setAccelerationY(0.f);
 		setVelocityY(0.f);
 		setPositionY(rec.safeTop);
