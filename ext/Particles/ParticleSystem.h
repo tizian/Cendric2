@@ -20,8 +20,8 @@ namespace particles
 
 		virtual void reset();
 
-		virtual int numAllParticles() const { return m_particles.count; }
-		virtual int numAliveParticles() const { return m_particles.countAlive; }
+		virtual int numAllParticles() const { return m_particles->count; }
+		virtual int numAliveParticles() const { return m_particles->countAlive; }
 
 		template<typename T>
 		inline T *addGenerator() {
@@ -41,17 +41,17 @@ namespace particles
 		void emit(float dt);			// emit a stream of particles defined by emitRate and dt
 
 	public:
-		float	emitRate{ 0.0f };		// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
+		float	emitRate;	// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
 
 	protected:
-		float m_dt{ 0.0f };
-		int m_count{ 0 };
+		float m_dt;
 
-		ParticleData m_particles;
-		sf::VertexArray m_vertices;
-
+		ParticleData *m_particles;
+		
 		std::vector<ParticleGenerator *> m_generators;
 		std::vector<ParticleUpdater *> m_updaters;
+
+		sf::VertexArray m_vertices;
 	};
 
 

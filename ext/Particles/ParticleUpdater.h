@@ -38,7 +38,6 @@ namespace particles
 	public:
 		float pos{ 0.0f };
 		float bounceFactor{ 0.5f };
-		bool  invert{ false };
 	};
 
 
@@ -53,7 +52,6 @@ namespace particles
 	public:
 		float pos{ 0.0f };
 		float bounceFactor{ 0.5f };
-		bool  invert{ false };
 	};
 
 

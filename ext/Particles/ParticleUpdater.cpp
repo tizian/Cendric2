@@ -41,30 +41,18 @@ namespace particles
 	void HorizontalCollider::update(ParticleData *data, float dt) {
 		const int endId = data->countAlive;
 
-		if (invert) {
-			for (int i = 0; i < endId; ++i) {
-				if (data->pos[i].x < pos) {
-					data->pos[i].x = pos;
+		for (int i = 0; i < endId; ++i) {
+			float x = data->pos[i].x;
+			float xPrime = x + dt * data->vel[i].x;
 
-					sf::Vector2f acc = data->acc[i];
-					data->acc[i] = sf::Vector2f(-acc.x * bounceFactor, acc.y);
+			if ((x < pos && xPrime >= pos) || (x > pos && xPrime <= pos)) {
+				data->pos[i].x = pos;
 
-					sf::Vector2f vel = data->vel[i];
-					data->vel[i] = sf::Vector2f(-vel.x * bounceFactor, vel.y);
-				}
-			}
-		}
-		else {
-			for (int i = 0; i < endId; ++i) {
-				if (data->pos[i].y > pos) {
-					data->pos[i].x = pos;
+				sf::Vector2f acc = data->acc[i];
+				data->acc[i] = sf::Vector2f(-acc.x * bounceFactor, acc.y);
 
-					sf::Vector2f acc = data->acc[i];
-					data->acc[i] = sf::Vector2f(-acc.x * bounceFactor, acc.y);
-
-					sf::Vector2f vel = data->vel[i];
-					data->vel[i] = sf::Vector2f(-vel.x * bounceFactor, vel.y);
-				}
+				sf::Vector2f vel = data->vel[i];
+				data->vel[i] = sf::Vector2f(-vel.x * bounceFactor, vel.y);
 			}
 		}
 	}
@@ -73,30 +61,18 @@ namespace particles
 	void VerticalCollider::update(ParticleData *data, float dt) {
 		const int endId = data->countAlive;
 
-		if (invert) {
-			for (int i = 0; i < endId; ++i) {
-				if (data->pos[i].y < pos) {
-					data->pos[i].y = pos;
+		for (int i = 0; i < endId; ++i) {
+			float y = data->pos[i].y;
+			float yPrime = y + dt * data->vel[i].y;
 
-					sf::Vector2f acc = data->acc[i];
-					data->acc[i] = sf::Vector2f(acc.x, -acc.y * bounceFactor);
+			if ((y < pos && yPrime >= pos) || (y > pos && yPrime <= pos)) {
+				data->pos[i].y = pos;
 
-					sf::Vector2f vel = data->vel[i];
-					data->vel[i] = sf::Vector2f(vel.x, -vel.y * bounceFactor);
-				}
-			}
-		}
-		else {
-			for (int i = 0; i < endId; ++i) {
-				if (data->pos[i].y > pos) {
-					data->pos[i].y = pos;
+				sf::Vector2f acc = data->acc[i];
+				data->acc[i] = sf::Vector2f(acc.x, -acc.y * bounceFactor);
 
-					sf::Vector2f acc = data->acc[i];
-					data->acc[i] = sf::Vector2f(acc.x, -acc.y * bounceFactor);
-
-					sf::Vector2f vel = data->vel[i];
-					data->vel[i] = sf::Vector2f(vel.x, -vel.y * bounceFactor);
-				}
+				sf::Vector2f vel = data->vel[i];
+				data->vel[i] = sf::Vector2f(vel.x, -vel.y * bounceFactor);
 			}
 		}
 	}
@@ -152,12 +128,6 @@ namespace particles
 
 			if (data->time[i].x < 0.0f) {
 				data->kill(i);
-				if (data->countAlive < data->count) {
-					endId = data->countAlive;
-				}
-				else {
-					endId = data->count;
-				}
 			}
 		}
 	}

@@ -2,13 +2,13 @@
 
 namespace particles
 {
-	ParticleSystem::ParticleSystem(int maxCount) : m_count(maxCount), m_particles(maxCount) {
-		for (int i = 0; i < maxCount; ++i) {
-			m_particles.alive[i] = false;
-		}
+	ParticleSystem::ParticleSystem(int maxCount) : emitRate(0.f), m_dt(0.f) {
+		m_particles = new ParticleData(maxCount);
 	}
 
 	ParticleSystem::~ParticleSystem() {
+		delete m_particles;
+
 		for (auto g : m_generators) {
 			delete g;
 		}
@@ -30,28 +30,28 @@ namespace particles
 
 		if (maxNewParticles == 0) return;
 
-		const int startId = m_particles.countAlive;
-		const int endId = std::min(startId + maxNewParticles, m_particles.count - 1);
+		const int startId = m_particles->countAlive;
+		const int endId = std::min(startId + maxNewParticles - 1, m_particles->count - 1);
 
 		for (auto &generator : m_generators) {
-			generator->generate(&m_particles, startId, endId);
+			generator->generate(m_particles, startId, endId);
 		}
 
 		for (int i = startId; i < endId; ++i) {
-			m_particles.wake(i);
+			m_particles->wake(i);
 		}
 	}
 
 	void ParticleSystem::emit(int maxCount) {
-		const int startId = m_particles.countAlive;
-		const int endId = std::min(startId + maxCount, m_particles.count - 1);
+		const int startId = m_particles->countAlive;
+		const int endId = std::min(startId + maxCount - 1, m_particles->count - 1);
 
 		for (auto &generator : m_generators) {
-			generator->generate(&m_particles, startId, endId);
+			generator->generate(m_particles, startId, endId);
 		}
 
 		for (int i = startId; i < endId; ++i) {
-			m_particles.wake(i);
+			m_particles->wake(i);
 		}
 	}
 
@@ -60,17 +60,17 @@ namespace particles
 			emit(dt.asSeconds());
 		}
 
-		for (int i = 0; i < m_particles.countAlive; ++i) {
-			m_particles.acc[i] = { 0.0f, 0.0f };
+		for (int i = 0; i < m_particles->countAlive; ++i) {
+			m_particles->acc[i] = { 0.0f, 0.0f };
 		}
 
 		for (auto & updater : m_updaters) {
-			updater->update(&m_particles, dt.asSeconds());
+			updater->update(m_particles, dt.asSeconds());
 		}
 	}
 
 	void ParticleSystem::reset() {
-		m_particles.countAlive = 0;
+		m_particles->countAlive = 0;
 	}
 
 
@@ -82,9 +82,9 @@ namespace particles
 	void PointParticleSystem::update(const sf::Time &dt) {
 		ParticleSystem::update(dt);
 
-		for (int i = 0; i < m_particles.countAlive; ++i) {
-			m_vertices[i].position = m_particles.pos[i];
-			m_vertices[i].color = m_particles.col[i];
+		for (int i = 0; i < m_particles->countAlive; ++i) {
+			m_vertices[i].position = m_particles->pos[i];
+			m_vertices[i].color = m_particles->col[i];
 		}
 	}
 
@@ -92,7 +92,7 @@ namespace particles
 		sf::RenderStates states = sf::RenderStates::Default;
 
 		const sf::Vertex *ver = &m_vertices[0];
-		renderTarget.draw(ver, m_particles.countAlive, sf::Points, states);
+		renderTarget.draw(ver, m_particles->countAlive, sf::Points, states);
 	}
 
 
@@ -103,7 +103,7 @@ namespace particles
 		float x = static_cast<float>(m_texture->getSize().x);
 		float y = static_cast<float>(m_texture->getSize().y);
 
-		for (int i = 0; i < m_particles.count; ++i) {
+		for (int i = 0; i < m_particles->count; ++i) {
 			m_vertices[4 * i + 0].texCoords = sf::Vector2f(0.f, 0.f);
 			m_vertices[4 * i + 1].texCoords = sf::Vector2f(x, 0.f);
 			m_vertices[4 * i + 2].texCoords = sf::Vector2f(x, y);
@@ -124,7 +124,7 @@ namespace particles
 		float x = static_cast<float>(m_texture->getSize().x);
 		float y = static_cast<float>(m_texture->getSize().y);
 
-		for (int i = 0; i < m_particles.count; ++i) {
+		for (int i = 0; i < m_particles->count; ++i) {
 			m_vertices[4 * i + 0].texCoords = sf::Vector2f(0.f, 0.f);
 			m_vertices[4 * i + 1].texCoords = sf::Vector2f(x, 0.f);
 			m_vertices[4 * i + 2].texCoords = sf::Vector2f(x, y);
@@ -135,16 +135,16 @@ namespace particles
 	void TextureParticleSystem::update(const sf::Time &dt) {
 		ParticleSystem::update(dt);
 
-		for (int i = 0; i < m_particles.countAlive; ++i) {
-			m_vertices[4 * i + 0].position.x = m_particles.pos[i].x - m_particles.size[i].x;	m_vertices[4 * i + 0].position.y = m_particles.pos[i].y - m_particles.size[i].x;
-			m_vertices[4 * i + 1].position.x = m_particles.pos[i].x + m_particles.size[i].x;	m_vertices[4 * i + 1].position.y = m_particles.pos[i].y - m_particles.size[i].x;
-			m_vertices[4 * i + 2].position.x = m_particles.pos[i].x + m_particles.size[i].x;	m_vertices[4 * i + 2].position.y = m_particles.pos[i].y + m_particles.size[i].x;
-			m_vertices[4 * i + 3].position.x = m_particles.pos[i].x - m_particles.size[i].x;	m_vertices[4 * i + 3].position.y = m_particles.pos[i].y + m_particles.size[i].x;
+		for (int i = 0; i < m_particles->countAlive; ++i) {
+			m_vertices[4 * i + 0].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 0].position.y = m_particles->pos[i].y - m_particles->size[i].x;
+			m_vertices[4 * i + 1].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 1].position.y = m_particles->pos[i].y - m_particles->size[i].x;
+			m_vertices[4 * i + 2].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 2].position.y = m_particles->pos[i].y + m_particles->size[i].x;
+			m_vertices[4 * i + 3].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 3].position.y = m_particles->pos[i].y + m_particles->size[i].x;
 
-			m_vertices[4 * i + 0].color = m_particles.col[i];
-			m_vertices[4 * i + 1].color = m_particles.col[i];
-			m_vertices[4 * i + 2].color = m_particles.col[i];
-			m_vertices[4 * i + 3].color = m_particles.col[i];
+			m_vertices[4 * i + 0].color = m_particles->col[i];
+			m_vertices[4 * i + 1].color = m_particles->col[i];
+			m_vertices[4 * i + 2].color = m_particles->col[i];
+			m_vertices[4 * i + 3].color = m_particles->col[i];
 		}
 	}
 
@@ -158,28 +158,28 @@ namespace particles
 		states.texture = m_texture;
 
 		const sf::Vertex *ver = &m_vertices[0];
-		renderTarget.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
+		renderTarget.draw(ver, m_particles->countAlive * 4, sf::Quads, states);
 	}
 
 
 	void SpriteSheetParticleSystem::update(const sf::Time &dt) {
 		ParticleSystem::update(dt);
 
-		for (int i = 0; i < m_particles.countAlive; ++i) {
-			m_vertices[4 * i + 0].position.x = m_particles.pos[i].x - m_particles.size[i].x;	m_vertices[4 * i + 0].position.y = m_particles.pos[i].y - m_particles.size[i].x;
-			m_vertices[4 * i + 1].position.x = m_particles.pos[i].x + m_particles.size[i].x;	m_vertices[4 * i + 1].position.y = m_particles.pos[i].y - m_particles.size[i].x;
-			m_vertices[4 * i + 2].position.x = m_particles.pos[i].x + m_particles.size[i].x;	m_vertices[4 * i + 2].position.y = m_particles.pos[i].y + m_particles.size[i].x;
-			m_vertices[4 * i + 3].position.x = m_particles.pos[i].x - m_particles.size[i].x;	m_vertices[4 * i + 3].position.y = m_particles.pos[i].y + m_particles.size[i].x;
+		for (int i = 0; i < m_particles->countAlive; ++i) {
+			m_vertices[4 * i + 0].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 0].position.y = m_particles->pos[i].y - m_particles->size[i].x;
+			m_vertices[4 * i + 1].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 1].position.y = m_particles->pos[i].y - m_particles->size[i].x;
+			m_vertices[4 * i + 2].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 2].position.y = m_particles->pos[i].y + m_particles->size[i].x;
+			m_vertices[4 * i + 3].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 3].position.y = m_particles->pos[i].y + m_particles->size[i].x;
 
-			m_vertices[4 * i + 0].color = m_particles.col[i];
-			m_vertices[4 * i + 1].color = m_particles.col[i];
-			m_vertices[4 * i + 2].color = m_particles.col[i];
-			m_vertices[4 * i + 3].color = m_particles.col[i];
+			m_vertices[4 * i + 0].color = m_particles->col[i];
+			m_vertices[4 * i + 1].color = m_particles->col[i];
+			m_vertices[4 * i + 2].color = m_particles->col[i];
+			m_vertices[4 * i + 3].color = m_particles->col[i];
 
-			float left = static_cast<float>(m_particles.texCoords[i].left);
-			float top = static_cast<float>(m_particles.texCoords[i].top);
-			float width = static_cast<float>(m_particles.texCoords[i].width);
-			float height = static_cast<float>(m_particles.texCoords[i].height);
+			float left = static_cast<float>(m_particles->texCoords[i].left);
+			float top = static_cast<float>(m_particles->texCoords[i].top);
+			float width = static_cast<float>(m_particles->texCoords[i].width);
+			float height = static_cast<float>(m_particles->texCoords[i].height);
 
 			m_vertices[4 * i + 0].texCoords = sf::Vector2f(left, top);
 			m_vertices[4 * i + 1].texCoords = sf::Vector2f(left + width, top);
@@ -233,7 +233,7 @@ namespace particles
 
 		m_renderTexture.setView(oldView);
 		m_renderTexture.clear(sf::Color(0, 0, 0, 0));
-		m_renderTexture.draw(ver, m_particles.countAlive * 4, sf::Quads, states);
+		m_renderTexture.draw(ver, m_particles->countAlive * 4, sf::Quads, states);
 		m_renderTexture.display();
 		m_sprite.setTexture(m_renderTexture.getTexture());
 		sf::Glsl::Vec4 colorVec = sf::Glsl::Vec4(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
