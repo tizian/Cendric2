@@ -96,13 +96,6 @@ void FluidTile::loadAnimation(int skinNr) {
 }
 
 void FluidTile::update(const sf::Time& frameTime) {
-	if (!m_hasSplashed && !m_splashQueue.empty()) {
-		SplashData splashData = m_splashQueue.front();
-		splash(splashData, false);
-		m_splashQueue.erase(m_splashQueue.begin());
-		m_hasSplashed = true;
-	}
-
 	m_isFirstRenderIteration = true;
 
 	checkForMovableTiles();
@@ -181,7 +174,6 @@ void FluidTile::update(const sf::Time& frameTime) {
 	}
 
 	m_ps->update(frameTime);
-	m_hasSplashed = false;
 }
 
 float FluidTile::getHeight(float xPosition) const {
@@ -194,63 +186,65 @@ float FluidTile::getHeight(float xPosition) const {
 	return m_columns[index].height;
 }
 
-void FluidTile::addSplash(const MovableGameObject* source, float velocity, bool useWidth) {
-	if (!m_hasSplashed) {
-		SplashData data(source, velocity, useWidth);
-		splash(data, true);
-		m_hasSplashed = true;
-	}
-	else {
-		for (auto& data : m_splashQueue) {
-			if (data.source == source) return;
-		}
-		m_splashQueue.push_back(SplashData(source, velocity, useWidth));
-	}
-}
+void FluidTile::splash(const MovableGameObject* source, float xPosition, float velocity) {
+	if (std::abs(velocity) < Epsilon) return;
 
-
-void FluidTile::splash(const SplashData& data, bool playSound) {
-	if (std::abs(data.velocity) < Epsilon) return;
-	float xPosition = data.boundingBox.left;
-
-	if (!data.useWidth) {
-		int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
-		if (index > 0 && index < m_nColumns) {
-			m_columns[index].velocity = data.velocity;
-		}
-	}
-	else {
-		float width = data.boundingBox.width;
-
-		int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
-		int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
-		for (int i = startIndex; i <= endIndex; ++i) {
-			if (i > 0 && i < m_nColumns) {
-				m_columns[i].velocity = 0.1f * data.velocity;
-			}
-		}
-
-		xPosition = xPosition + 0.5f * width;
+	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
+	if (index > 0 && index < m_nColumns) {
+		m_columns[index].velocity = velocity;
 	}
 
-	float velocity_ = std::abs(data.velocity) * m_data.velocityScale;
+	velocity = std::abs(velocity) * m_data.velocityScale;
 	float y = getHeight(xPosition);
 	const sf::FloatRect *bb = getBoundingBox();
 
 	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
-	*m_particleMinSpeed = 0.2f * velocity_;
-	*m_particleMaxSpeed = 1.0f * velocity_;
+	*m_particleMinSpeed = 0.2f * velocity;
+	*m_particleMaxSpeed = 1.0f * velocity;
 
-	int nParticles = static_cast<int>(velocity_ / 12);
+	int nParticles = static_cast<int>(velocity / 12);
 	m_ps->emitParticles(nParticles);
 
-	if (playSound && velocity_ > 100.f) {
-		if (dist(sf::Vector2f(data.boundingBox.left, data.boundingBox.top), m_mainChar->getPosition()) > 1500.f) return;
-		if (m_soundMap.find(data.source) == m_soundMap.end()) {
-			m_soundMap.insert({ data.source, new sf::Sound() });
+	if (velocity > 100.f) {
+		if (dist(sf::Vector2f(source->getBoundingBox()->left, source->getBoundingBox()->top), m_mainChar->getPosition()) > 1500.f) return;
+		if (m_soundMap.find(source) == m_soundMap.end()) {
+			m_soundMap.insert({ source, new sf::Sound() });
 		}
-		
-		g_resourceManager->playSound(*m_soundMap.at(data.source), m_data.sound);
+
+		g_resourceManager->playSound(*m_soundMap.at(source), m_data.sound);
+	}
+}
+
+void FluidTile::splash(const MovableGameObject* source, float xPosition, float width, float velocity) {
+	if (std::abs(velocity) < Epsilon) return;
+
+	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
+	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
+	for (int i = startIndex; i <= endIndex; ++i) {
+		if (i > 0 && i < m_nColumns) {
+			m_columns[i].velocity = 0.1f * velocity;
+		}
+	}
+
+	velocity = std::abs(velocity) * m_data.velocityScale;
+	xPosition = xPosition + 0.5f * width;
+	float y = getHeight(xPosition);
+	const sf::FloatRect *bb = getBoundingBox();
+
+	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
+	*m_particleMinSpeed = 0.2f * velocity;
+	*m_particleMaxSpeed = 1.0f * velocity;
+
+	int nParticles = static_cast<int>(velocity / 12);
+	m_ps->emitParticles(nParticles);
+
+	if (velocity > 100.f) {
+		if (dist(sf::Vector2f(source->getBoundingBox()->left, source->getBoundingBox()->top), m_mainChar->getPosition()) > 1500.f) return;
+		if (m_soundMap.find(source) == m_soundMap.end()) {
+			m_soundMap.insert({ source, new sf::Sound() });
+		}
+
+		g_resourceManager->playSound(*m_soundMap.at(source), m_data.sound);
 	}
 }
 
@@ -282,7 +276,7 @@ void FluidTile::onHit(Spell* spell) {
 		float sign = spell->getVelocity().y > 0 ? -1.f : 1.f;
 		float vel = sign * norm(spell->getVelocity());
 
-		addSplash(spell, vel, false);
+		splash(spell, spell->getPosition().x, vel);
 
 		spell->setDisposed();
 	}
@@ -300,7 +294,7 @@ void FluidTile::onHit(LevelMovableGameObject* mob) {
 		vel = -0.2f * velocityScale * norm(mob->getVelocity());
 	}
 
-	addSplash(mob, vel, true);
+	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, vel);
 
 	if (m_data.isDeadly) {
 		mob->setDead();
@@ -324,7 +318,7 @@ void FluidTile::checkForMovableTiles() {
 			float sign = tile->getVelocity().y > 0 ? -1.f : 1.f;
 			float vel = sign * velocityScale * norm(tile->getVelocity());
 
-			addSplash(tile, vel, true);
+			splash(tile, tileBB.left, tileBB.width, vel);
 		}
 	}
 	for (auto& it : *m_level->getDynamicTiles()) {
@@ -341,7 +335,7 @@ void FluidTile::checkForMovableTiles() {
 			float sign = tile->getVelocity().y > 0 ? -1.f : 1.f;
 			float vel = sign * velocityScale * norm(tile->getVelocity());
 
-			addSplash(tile, vel, true);
+			splash(tile, tileBB.left, tileBB.width, vel);
 		}
 	}
 }
@@ -390,12 +384,4 @@ bool FluidTile::isFrozen(int index) {
 	if (index < 0) index = 0;
 	if (index >= static_cast<int>(m_frozenTiles.size())) index = static_cast<int>(m_frozenTiles.size()) - 1;
 	return (m_frozenTiles[index] != nullptr);
-}
-
-SplashData::SplashData(const MovableGameObject* source, float velocity, bool useWidth) :
-	source(source),
-	velocity(velocity),
-	useWidth(useWidth) {
-		// dereference "source" here. We cannot be sure that "source" still exists when executing the splash!
-		boundingBox = *source->getBoundingBox();
 }

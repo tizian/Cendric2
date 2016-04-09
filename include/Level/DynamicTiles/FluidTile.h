@@ -6,16 +6,8 @@
 #include "Particles/ParticleSystem.h"
 #include "Level/DynamicTiles/FluidTileData.h"
 
-class MovableGameObject;
 class FrozenWaterTile;
-
-struct SplashData {
-	SplashData(const MovableGameObject* source, float velocity, bool useWidth);
-	const MovableGameObject* source;
-	sf::FloatRect boundingBox;
-	float velocity; 
-	bool useWidth;
-};
+class MovableGameObject;
 
 struct FluidColumn {
 	float targetHeight;
@@ -48,7 +40,8 @@ public:
 
 	float getHeight(float xPosition) const;
 
-	void addSplash(const MovableGameObject* source, float velocity, bool useWidth);
+	void splash(const MovableGameObject* source, float xPosition, float velocity);
+	void splash(const MovableGameObject* source, float xPosition, float width, float velocity);
 
 	void freeze(int index);
 	void melt(int index);
@@ -57,7 +50,6 @@ public:
 
 private:
 	void checkForMovableTiles();
-	void splash(const SplashData& data, bool playSound);
 
 private:
 	FluidTileData m_data;
@@ -81,8 +73,6 @@ private:
 	float *m_particleMaxSpeed = nullptr;
 
 	std::map<const MovableGameObject*, sf::Sound*> m_soundMap;
-	std::vector<SplashData> m_splashQueue;
-	bool m_hasSplashed = false;
 
 public:
 	static const float	SURFACE_THICKNESS;
