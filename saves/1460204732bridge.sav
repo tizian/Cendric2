@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:127
+time.played:150
 savegame.name:bridge
-savegame.date:1460204732
+savegame.date:1460217900
 level.id:res/level/brokenbridge/brokenbridge.tmx
 level.position:3100.000000,1450.000000
 is.in.level:1
 map.id:res/map/meadows/meadows.tmx
-map.position:1468.609009,1668.124390
+map.position:1469.358154,1670.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -15,8 +15,9 @@ gold:20
 # items in inventory:
 item.id:fo_apple,2
 item.id:fo_rawmeat,4
-item.id:we_hawthorn,1
+item.id:we_walkingpole,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
+equipped.spellslot:3
 # equipment:
 equipped.back:
 equipped.body:
@@ -24,24 +25,29 @@ equipped.head:
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
-equipped.weapon:we_walkingpole
+equipped.weapon:we_hawthorn
 # quickslot assignments:
 quickslot:1,
 quickslot:2,
 # enemies killed in level:
+enemies.killed:res/level/brokenbridge/brokenbridge.tmx
 enemies.killed:res/level/eldergarden/eldergarden.tmx
 enemies.killed:res/level/rockfall/rockfall.tmx,74,75,78
 # enemies looted in level:
+enemies.looted:res/level/brokenbridge/brokenbridge.tmx
 enemies.looted:res/level/eldergarden/eldergarden.tmx
 enemies.looted:res/level/rockfall/rockfall.tmx,74,75,78
 # items looted in level:
+items.looted:res/level/brokenbridge/brokenbridge.tmx
 items.looted:res/level/eldergarden/eldergarden.tmx,207,315
 items.looted:res/level/rockfall/rockfall.tmx,894,1006
 # chests looted in level:
+items.looted:res/level/brokenbridge/brokenbridge.tmx
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/elderhome/elderhome.tmx
 waypoints.unlocked:res/map/meadows/meadows.tmx
 # triggers triggered in world:
+triggers.triggered:res/level/brokenbridge/brokenbridge.tmx
 triggers.triggered:res/level/eldergarden/eldergarden.tmx,92
 triggers.triggered:res/level/rockfall/rockfall.tmx,82,83
 triggers.triggered:res/map/elderhome/elderhome.tmx
