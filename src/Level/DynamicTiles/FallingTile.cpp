@@ -8,11 +8,11 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Falling, FallingTile)
 FallingTile::FallingTile(LevelScreen* levelScreen) :
 	MovableGameObject(),
 	LevelDynamicTile(levelScreen) {
+	setPositionOffset(sf::Vector2f(-3.f, -3.f));
 }
 
 void FallingTile::init() {
 	setSpriteOffset(sf::Vector2f(-3.f, -3.f));
-	setPositionOffset(sf::Vector2f(-3.f, -3.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 6.f, TILE_SIZE_F - 6.f));
 	m_tileState = FallingTileState::Idle;
 }
@@ -36,6 +36,10 @@ void FallingTile::onHit(LevelMovableGameObject* mob) {
 		mob->setDead();
 }
 
+void FallingTile::setInitialHeight(float height) {
+	m_initialHeight = height;
+}
+
 void FallingTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 	if (m_tileState == FallingTileState::Waiting) {
@@ -55,7 +59,13 @@ void FallingTile::update(const sf::Time& frameTime) {
 		setAcceleration(sf::Vector2f(0.f, GRAVITY_ACCELERATION));
 	}
 	else {
-		setVelocity(sf::Vector2f(0.f, -RETURN_VELOCITY));
+		// state is  returning
+		if (getPosition().y <= m_initialHeight) {
+			setPositionY(m_initialHeight);
+			m_tileState = FallingTileState::Idle;
+			return;
+		}
+			setVelocity(sf::Vector2f(0.f, -RETURN_VELOCITY));
 	}
 
 	sf::Vector2f nextPosition;

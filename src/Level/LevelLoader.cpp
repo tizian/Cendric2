@@ -8,6 +8,7 @@
 #include "Level/DynamicTiles/ModifierTile.h"
 #include "Level/DynamicTiles/MovingTile.h"
 #include "Level/DynamicTiles/JumpingTile.h"
+#include "Level/DynamicTiles/FallingTile.h"
 #include "Trigger.h"
 
 using namespace std;
@@ -153,6 +154,9 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 		switch (it.id) {
 		case LevelDynamicTileID::Fluid:
 			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
+			break;
+		case LevelDynamicTileID::Falling:
+			(dynamic_cast<FallingTile*>(tile))->setInitialHeight((it.position - tile->getPositionOffset()).y);
 			break;
 		default:
 			break;

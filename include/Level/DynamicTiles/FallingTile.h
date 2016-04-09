@@ -25,6 +25,7 @@ public:
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 	void onHit(LevelMovableGameObject* mob) override;
+	void setInitialHeight(float height);
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 
@@ -36,6 +37,7 @@ private:
 	const float AGGRO_DISTANCE = 200.f;
 	const sf::Time WAITING_TIME = sf::seconds(2.f);
 
+	float m_initialHeight = 0.f;
 	FallingTileState m_tileState;
 	sf::Time m_waitingTime = sf::Time::Zero;
 };
