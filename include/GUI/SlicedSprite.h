@@ -14,9 +14,12 @@ public:
 	void setTexture(sf::Texture *texture);
 	void setColor(const sf::Color &color);
 
+	sf::Color getColor() const;
+
 	void setSlicing(float left, float right, float top, float bottom);
 
 	sf::FloatRect getLocalBounds() const;
+	sf::FloatRect getBounds() const;
 
 private:
 	void init();	// Set vertexArray data

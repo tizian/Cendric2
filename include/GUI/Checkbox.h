@@ -57,13 +57,13 @@ protected:
 	void check();
 	void uncheck();
 
-	sf::RectangleShape m_background;
-	sf::RectangleShape m_margin;
-	sf::CircleShape m_checkedSymbol;
+	SlicedSprite m_background;
+	SlicedSprite m_margin;
+	sf::RectangleShape m_checkedSymbol;
 	sf::Vector2f m_textOffset;
 
 	sf::Color m_backgroundColor = COLOR_BLACK;
-	sf::Color m_marginColor = COLOR_LIGHT_PURPLE;
+	sf::Color m_marginColor = COLOR_WHITE;
 	sf::Color m_symbolColor = COLOR_WHITE;
 	sf::Color m_mouseOverColor = COLOR_PURPLE;
 	
