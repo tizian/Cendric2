@@ -38,6 +38,8 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 
 	setBoundingBox(m_background.getGlobalBounds());
 	setInputInDefaultView(true);
+
+	m_unit = "";
 }
 
 int Slider::getSliderPosition() const {
@@ -140,9 +142,13 @@ void Slider::setText(const std::string& text) {
 void Slider::setTextRaw(const std::string& text) {
 	m_title = text;
 	m_titleText = BitmapText(g_textProvider->getCroppedString(
-		m_title + ": " + to_string(m_sliderPosition), GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH)));
+		m_title + ": " + to_string(m_sliderPosition) + m_unit, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH)));
 
 	setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+}
+
+void Slider::setUnit(const std::string& unit) {
+	m_unit = unit;
 }
 
 void Slider::setCharacterSize(int size) {

@@ -58,8 +58,9 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	distFromTop = distFromTop + 150;
 
 	m_volumeSoundSlider = new Slider(0, 100);
-	string volumeText = g_textProvider->getText("SoundVolume") + " (%)";
+	string volumeText = g_textProvider->getText("SoundVolume");
 	m_volumeSoundSlider->setTextRaw(volumeText);
+	m_volumeSoundSlider->setUnit("%");
 	m_volumeSoundSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeSound);
 	m_volumeSoundSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	addObject(m_volumeSoundSlider);
@@ -67,8 +68,9 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	distFromTop = distFromTop + 100;
 
 	m_volumeMusicSlider = new Slider(0, 100);
-	volumeText = g_textProvider->getText("MusicVolume") + " (%)";
+	volumeText = g_textProvider->getText("MusicVolume");
 	m_volumeMusicSlider->setTextRaw(volumeText);
+	m_volumeMusicSlider->setUnit("%");
 	m_volumeMusicSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeMusic);
 	m_volumeMusicSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	addObject(m_volumeMusicSlider);

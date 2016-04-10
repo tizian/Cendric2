@@ -53,6 +53,9 @@ public:
 	// setting raw text without text provider (not translated)
 	void setTextRaw(const std::string& text);
 
+	// Optionally set a unit that is displayed at the end of tht title
+	void setUnit(const std::string& unit);
+
 	// a slider can only be slided if its enabled. also, its color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
 	void setVisible(bool value);
@@ -89,6 +92,7 @@ protected:
 	static const sf::Color FILL_COLOR;
 
 	std::string m_title;
+	std::string m_unit;
 	BitmapText m_titleText;
 	BitmapText m_maxText;
 	BitmapText m_minText;
