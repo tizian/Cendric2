@@ -27,13 +27,10 @@ public:
 private:
 	bool m_isPressed = false;
 
-	sf::CircleShape m_knob;
+	sf::RectangleShape m_knob;
 
-	static const float RADIUS;
-	static const float MARGIN;
-
-	static const sf::Color MARGIN_COLOR;
-	static const sf::Color FILL_COLOR;
+	static const float WIDTH;
+	static const float HEIGHT;
 };
 
 // A simple ugly slider 
@@ -83,12 +80,11 @@ protected:
 
 	sf::RectangleShape m_background;
 	sf::RectangleShape m_filler;
-	sf::RectangleShape m_margin;
+	SlicedSprite m_border;
 	SliderKnob m_knob;
 	sf::Vector2f m_textOffset;
 
 	static const sf::Color BACKGROUND_COLOR;
-	static const sf::Color MARGIN_COLOR;
 	static const sf::Color FILL_COLOR;
 
 	std::string m_title;
@@ -99,5 +95,5 @@ protected:
 
 	static const float HEIGHT;
 	static const float WIDTH;
-	static const float MARGIN;
+	static const float BORDER_OFFSET;
 };

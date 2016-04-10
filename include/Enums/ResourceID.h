@@ -84,6 +84,8 @@ enum class ResourceID {
 	Texture_GUI_window_ornament,
 	Texture_GUI_arrow,
 	Texture_GUI_checkbox,
+	Texture_GUI_slider,
+	Texture_GUI_slider_knob,
 	Texture_GUI_spell_color_elemental,
 	Texture_GUI_spell_color_twilight,
 	Texture_GUI_spell_color_necromancy,
