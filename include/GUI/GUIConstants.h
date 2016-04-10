@@ -16,6 +16,7 @@ public:
 	static int CHARACTER_SIZE_M;
 	static int CHARACTER_SIZE_L;
 	static int CHARACTER_SIZE_XL;
+	static int CHARACTER_SIZE_XXL;
 
 	// colors for windows
 	static sf::Color MAIN_COLOR;

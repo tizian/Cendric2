@@ -24,6 +24,16 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_candleholder', 'item_desc', 'Made of silver, must be worth something.','Aus Silber gefertigt, kann man sicher gut verkaufen.','Us Silber gmacht, cha me sicher guet verkaufe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item', 'Pile of gargoyle dust','Häufchen von Gargoylestaub','Es Hüüfeli Gargoylestaub');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pityful pile of dust.','War einmal ein mächtiges Steimonster  und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearl', 'item', 'Pearl','Perle','Perle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearl', 'item_desc', 'Can be found in some shells.','Kann man manchmal in Muscheln finden.','Cha me mengsmal in Muschle finde.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_shell', 'item', 'Shell','Muschel','Muschle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_shell', 'item_desc', 'Can be opened and contains a pearl, if you''re lucky.','Mit etwas Glück findet man eine Perle darin.','Mit echli Glück hets da e Perle dinne.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_smallpouch', 'item', 'Small Pouch','Schmaler Geldbeutel','Schmale Geldbüütel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_smallpouch', 'item_desc', 'A pouch with a few jingling coins.','Ein paar Münzen klimpern darin.','Es paar Münze klimperet drin.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_mediumpouch', 'item', 'Leather Pouch','Lederbeutel','Lederbüütel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_mediumpouch', 'item_desc', 'The pouch is filled with coins.','Der Beutel ist voller Münzen.','De Büütel isch gfüllt mit Münze.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item', 'Big Pouch','Praller Geldbeutel','Pralle Geldbüütel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item_desc', 'The pouch is bulging with golden coins.','Der Beutel ist prall gefüllt mit goldenen Münzen.','De Büütel isch prall gfüllt mit goldige Münze.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item', 'Sealed Letter','Versiegelter Brief','Versiglete Brief');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_text', 'Dear king
 bla bla blaaaaaaaa bla blaaaa bla bla and you better bla bla soon! CU your enemy.','Lieber König

@@ -99,6 +99,7 @@ private:
 	void hideDescription();
 	void showDocument(const Item& item);
 	void hideDocument();
+	void convertItem(const Item& item);
 
 	InventoryEquipment* m_equipment = nullptr;
 

@@ -6,7 +6,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('And','and','u
 INSERT INTO text (text_id, english, german, swiss_german) values ('Armor','Armour','Rüstung','Rüstig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Back','Back','Zurück','Zrugg');
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint');
-INSERT INTO text (text_id, english, german, swiss_german) values ('BackToMenu','Back to menu','Zurück zum Menu','Zrugg zum Menu');
+INSERT INTO text (text_id, english, german, swiss_german) values ('BackToMenu','Menu','Menu','Menu');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Book','Book','Buch','Buech');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Cancel','Cancel','Abbrechen','Abbreche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotEquipInLevel','You cannot equip items inside a level!','Gegenstände können nicht in einem Level ausgerüstet werden!','Gegeständ chönd nid imne Level agleit werde!');
@@ -153,7 +153,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowDamage'
 INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowResistance','Shadow Resistance','Schattenresistenz','Schatteresistenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Smoothing','Texture Smoothing','Texturen glätten','Texture verschmiere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Sound','Sound','Musik','Musig');
-INSERT INTO text (text_id, english, german, swiss_german) values ('SoundVolume','Sound Volume','Lautstärke Soundeffekte','Soundeffekt-Luutstärchi');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SoundVolume','Sound Volume','Lautstärke Effekte','Effekt-Luutstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MusicVolume','Music Volume','Lautstärke Musik','Musig-Luutstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Speed','Speed','Geschwindigkeit','Gschwindigkeit');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellAntiGravity','Anti Gravity','Schwerkraft umkehren','Schwerchraft umchere');

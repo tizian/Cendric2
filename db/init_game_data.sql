@@ -19,6 +19,7 @@ DROP TABLE item_equipment_light;
 DROP TABLE item_equipment;
 DROP TABLE item_attribute;
 DROP TABLE item_food;
+DROP TABLE item_convertible;
 DROP TABLE item;
 
 CREATE TABLE text(
@@ -39,6 +40,16 @@ CREATE TABLE item(
 	icon_top INTEGER NOT NULL DEFAULT 0,
 	gold_value INTEGER NOT NULL,
 	PRIMARY KEY(item_id ASC)
+);
+
+CREATE TABLE item_convertible (
+	item_id VARCHAR(50) NOT NULL, 
+	convertible_item_id VARCHAR(50) NOT NULL DEFAULT "",
+	convertible_gold INTEGER NOT NULL DEFAULT 0,
+	probability INTEGER NOT NULL DEFAULT 100,
+	PRIMARY KEY (item_id),
+	FOREIGN KEY(item_id) REFERENCES item(item_id)
+	FOREIGN KEY(convertible_item_id) REFERENCES item(item_id)
 );
 
 CREATE TABLE item_attribute(

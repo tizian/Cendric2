@@ -49,6 +49,7 @@ void Inventory::init() {
 		{ ItemType::Consumable, &m_consumableItems },
 		{ ItemType::Permanent, &m_consumableItems },
 		{ ItemType::Misc, &m_miscItems },
+		{ ItemType::Convertible, &m_miscItems },
 		{ ItemType::Document, &m_documentItems },
 		{ ItemType::Quest, &m_questItems },
 		{ ItemType::Equipment_back, &m_equipmentItems },
@@ -165,6 +166,8 @@ void Inventory::handleMapRightClick(InventorySlot* clicked) {
 		showDocument(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Permanent)
 		dynamic_cast<WorldScreen*>(m_mapInterface->getScreen())->notifyPermanentItemConsumed(clicked->getItem());
+	else if (clicked->getItemType() == ItemType::Convertible)
+		convertItem(clicked->getItem());
 }
 
 void Inventory::handleLevelRightClick(InventorySlot* clicked) {
@@ -175,6 +178,8 @@ void Inventory::handleLevelRightClick(InventorySlot* clicked) {
 		showDocument(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Permanent)
 		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", COLOR_BAD, true);
+	else if (clicked->getItemType() == ItemType::Convertible)
+		convertItem(clicked->getItem());
 }
 
 void Inventory::update(const sf::Time& frameTime) {
@@ -374,6 +379,30 @@ void Inventory::render(sf::RenderTarget& target) {
 	if (m_currentClone != nullptr) {
 		m_currentClone->render(target);
 	}
+}
+
+void Inventory::convertItem(const Item& item) {
+	if (!item.isConvertible()) return;
+
+	WorldScreen* worldScreen = nullptr;
+	if (m_mapInterface != nullptr) {
+		worldScreen = dynamic_cast<WorldScreen*>(m_mapInterface->getScreen());
+	}
+	else if (m_levelInterface != nullptr) {
+		worldScreen = dynamic_cast<WorldScreen*>(m_levelInterface->getScreen());
+	}
+	if (worldScreen == nullptr) return;
+
+	ItemConvertibleBean bean = item.getConvertibleBean();
+	worldScreen->notifyItemChange(item.getID(), -1);
+
+	float prob = bean.probability / 100.f;
+	if (prob <= randomFloat(0.f, 1.f)) return;
+
+	if (bean.convertible_gold > 0)
+		worldScreen->notifyItemChange("gold", bean.convertible_gold);
+	if (!bean.convertible_item_id.empty())
+		worldScreen->notifyItemChange(bean.convertible_item_id, 1);
 }
 
 void Inventory::showDocument(const Item& item) {

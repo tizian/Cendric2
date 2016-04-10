@@ -40,6 +40,11 @@ item.id:mi_neko_teeth,1
 item.id:mi_candleholder,1
 item.id:mi_silverplate,1
 item.id:mi_teeth,1
+item.id:mi_pearl,1
+item.id:co_shell,10
+item.id:co_smallpouch,2
+item.id:co_mediumpouch,2
+item.id:co_bigpouch,2
 item.id:qe_rope,1
 item.id:pe_ingridstew,1
 item.id:pe_feudalfire,1

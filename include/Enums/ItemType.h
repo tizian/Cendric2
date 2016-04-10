@@ -17,5 +17,6 @@ enum class ItemType {
 	// Gold items are converted to gold at pickup time (examples include cold coin, three gold coins, treasure...)
 	Gold,
 	Permanent, // permanent items are stored in the food tab but can be consumed on a map to get permanent stats.
+	Convertible, // convertible items are stored in the misc tab but can be converted to a other item and/or gold.
 	MAX
 };

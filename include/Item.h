@@ -7,6 +7,7 @@
 
 #include "Beans/ItemAttributeBean.h"
 #include "Beans/ItemBean.h"
+#include "Beans/ItemConvertibleBean.h"
 #include "Beans/ItemEquipmentBean.h"
 #include "Beans/ItemEquipmentLightBean.h"
 #include "Beans/ItemFoodBean.h"
@@ -41,15 +42,20 @@ public:
 	const ItemEquipmentBean& getEquipmentBean() const;
 	const ItemEquipmentLightBean& getEquipmentLightBean() const;
 
+	// getter for convertible bean
+	const ItemConvertibleBean& getConvertibleBean() const;
+
 	// returns whether this is a valid item
 	bool isValid() const;
-	// returns whether this item has a food component and it is valid
+	// returns whether this item has a food component and is valid
 	bool isConsumable() const;
+	// returns whether this item has a convertible component and is valid
+	bool isConvertible() const;
 	// returns whether this item is a weapon and it is valid
 	bool isWeapon() const;
-	// returns whether this item is a levelitem with frames and it is valid
+	// returns whether this item is a levelitem with frames and is valid
 	bool isLevelitem() const;
-	// returns whether this item is an equipment item and it is valid
+	// returns whether this item is an equipment item and is valid
 	bool isEquipmentItem() const;
 	// returns whether this equipment item has a light attached
 	bool isEquipmentLightedItem() const;
@@ -59,6 +65,7 @@ public:
 protected:
 	ItemBean m_itemBean;
 	ItemFoodBean m_itemFoodBean;
+	ItemConvertibleBean m_itemConvertibleBean;
 	ItemEquipmentBean m_itemEquipmentBean;
 	ItemEquipmentLightBean m_itemEquipmentLightBean;
 	LevelitemBean m_levelItemBean;
@@ -78,4 +85,5 @@ protected:
 	bool m_isLevelitemLighted = false;
 	bool m_isEquipment = false;
 	bool m_isEquipmentLighted = false;
+	bool m_isConvertible = false;
 };
