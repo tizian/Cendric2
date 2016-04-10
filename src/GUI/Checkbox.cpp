@@ -6,17 +6,14 @@ const float Checkbox::SIDE_LENGTH = 40.f;
 const float Checkbox::MARGIN = 2.f;
 
 Checkbox::Checkbox() : GameObject() {
-	m_background.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
-	m_background.setFillColor(m_backgroundColor);
+	m_background = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backgroundColor, SIDE_LENGTH, SIDE_LENGTH);
 
-	m_margin.setSize(sf::Vector2f(SIDE_LENGTH, SIDE_LENGTH));
-	m_margin.setFillColor(COLOR_TRANSPARENT);
-	m_margin.setOutlineThickness(-MARGIN);
-	m_margin.setOutlineColor(m_marginColor);
+	m_margin = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_marginColor, SIDE_LENGTH, SIDE_LENGTH);
 
-	m_checkedSymbol.setRadius(SIDE_LENGTH / 4.f);
+	m_checkedSymbol.setSize(sf::Vector2f(0.66f * SIDE_LENGTH, 0.66f * SIDE_LENGTH));
+	m_checkedSymbol.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_checkbox));
 
-	setBoundingBox(m_background.getGlobalBounds());
+	setBoundingBox(m_background.getLocalBounds());
 	setInputInDefaultView(true);
 }
 
@@ -55,7 +52,7 @@ void Checkbox::onLeftJustPressed() {
 void Checkbox::onMouseOver() {
 	m_isMouseOver = true;
 	if (m_isEnabled && !m_isPressed) {
-		m_background.setFillColor(m_mouseOverColor);
+		m_background.setColor(m_mouseOverColor);
 	}
 }
 
@@ -74,8 +71,8 @@ void Checkbox::setPosition(const sf::Vector2f& pos) {
 	m_background.setPosition(pos);
 	m_margin.setPosition(pos);
 	m_checkedSymbol.setPosition(pos + sf::Vector2f(
-		SIDE_LENGTH / 2.f - m_checkedSymbol.getRadius(),
-		SIDE_LENGTH / 2.f - m_checkedSymbol.getRadius()));
+		0.5f * (SIDE_LENGTH - m_checkedSymbol.getSize().x),
+		0.5f * (SIDE_LENGTH - m_checkedSymbol.getSize().y)));
 }
 
 void Checkbox::update(const sf::Time& frameTime) {
@@ -84,7 +81,7 @@ void Checkbox::update(const sf::Time& frameTime) {
 	if (m_isMouseOver && !(g_inputController->isMouseOver(getBoundingBox(), true))) {
 		m_isMouseOver = false;
 		m_isPressed = false;
-		m_background.setFillColor(m_backgroundColor);
+		m_background.setColor(m_backgroundColor);
 	}
 
 	GameObject::update(frameTime);
@@ -100,12 +97,12 @@ void Checkbox::setMouseOverColor(const sf::Color& color) {
 }
 
 void Checkbox::setBackgroundColor(const sf::Color& color) {
-	m_background.setFillColor(color);
+	m_background.setColor(color);
 	m_backgroundColor = color;
 }
 
 void Checkbox::setMarginColor(const sf::Color& color) {
-	m_margin.setOutlineColor(color);
+	m_margin.setColor(color);
 	m_marginColor = color;
 }
 
@@ -153,10 +150,10 @@ void Checkbox::setCharacterSize(int size) {
 
 void Checkbox::setEnabled(bool enabled) {
 	m_isEnabled = enabled;
-	m_margin.setOutlineColor(sf::Color(
-		m_margin.getOutlineColor().r, 
-		m_margin.getOutlineColor().g, 
-		m_margin.getOutlineColor().b, 
+	m_margin.setColor(sf::Color(
+		m_margin.getColor().r, 
+		m_margin.getColor().g, 
+		m_margin.getColor().b,
 		m_isEnabled ? 255 : 100));
 	m_text.setColor(sf::Color(
 		m_text.getColor().r, 

@@ -56,6 +56,10 @@ void SlicedSprite::setColor(const sf::Color &color) {
 	}
 }
 
+sf::Color SlicedSprite::getColor() const {
+	return m_color;
+}
+
 void SlicedSprite::setSlicing(float left, float right, float top, float bottom) {
 	m_leftSlice = left;
 	m_rightSlice = right;
@@ -66,6 +70,10 @@ void SlicedSprite::setSlicing(float left, float right, float top, float bottom) 
 
 sf::FloatRect SlicedSprite::getLocalBounds() const {
 	return m_bounds;
+}
+
+sf::FloatRect SlicedSprite::getBounds() const {
+	return getTransform().transformRect(m_bounds);
 }
 
 void SlicedSprite::draw(sf::RenderTarget &target, sf::RenderStates states) const {
