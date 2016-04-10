@@ -39,6 +39,10 @@ inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
 	return norm(v1 - v2);
 }
 
+inline float randomFloat(float low, float high) {
+	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));
+}
+
 inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
 	sf::FloatRect intersection;
 	if (!rect1.intersects(rect2, intersection)) return false;

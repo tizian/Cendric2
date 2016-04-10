@@ -12,10 +12,6 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Fluid, FluidTile)
 const float FluidTile::SURFACE_THICKNESS = 4.f;
 const int FluidTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 
-inline float randomFloat(float low, float high) {
-	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));
-}
-
 FluidTile::FluidTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_isRenderAfterObjects = true;
 }
@@ -65,7 +61,8 @@ void FluidTile::loadAnimation(int skinNr) {
 	m_vertexArray = sf::VertexArray(sf::Quads, 2 * 4 * (m_nColumns - 1));
 
 	// Particle System
-	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(200, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob), WINDOW_WIDTH, WINDOW_HEIGHT));
+	int maxNumberParticles = m_nTiles * 50;
+	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(maxNumberParticles, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob), WINDOW_WIDTH, WINDOW_HEIGHT));
 	g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)->setSmooth(true);
 	m_ps->color = m_data.color;
 	m_ps->threshold = 0.7f;
@@ -186,59 +183,35 @@ float FluidTile::getHeight(float xPosition) const {
 	return m_columns[index].height;
 }
 
-void FluidTile::splash(const MovableGameObject* source, float xPosition, float velocity) {
-	if (std::abs(velocity) < Epsilon) return;
+void FluidTile::splash(const MovableGameObject* source, float xPosition, float width, sf::Vector2f velocity, float waveVelocityScale, float particleVelocityScale) {
+	velocity = velocity * m_data.velocityScale;	// Apply global scale factor based on fluid parameters
+	float velocityNorm = norm(velocity);
 
-	int index = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
-	if (index > 0 && index < m_nColumns) {
-		m_columns[index].velocity = velocity;
-	}
-
-	velocity = std::abs(velocity) * m_data.velocityScale;
-	float y = getHeight(xPosition);
-	const sf::FloatRect *bb = getBoundingBox();
-
-	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
-	*m_particleMinSpeed = 0.2f * velocity;
-	*m_particleMaxSpeed = 1.0f * velocity;
-
-	int nParticles = static_cast<int>(velocity / 12);
-	m_ps->emitParticles(nParticles);
-
-	if (velocity > 100.f) {
-		if (dist(sf::Vector2f(source->getBoundingBox()->left, source->getBoundingBox()->top), m_mainChar->getPosition()) > 1500.f) return;
-		if (m_soundMap.find(source) == m_soundMap.end()) {
-			m_soundMap.insert({ source, new sf::Sound() });
-		}
-
-		g_resourceManager->playSound(*m_soundMap.at(source), m_data.sound);
-	}
-}
-
-void FluidTile::splash(const MovableGameObject* source, float xPosition, float width, float velocity) {
-	if (std::abs(velocity) < Epsilon) return;
-
+	if (velocityNorm < Epsilon) return;
+	
+	// Adjust velocity of water surface
 	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));
 	for (int i = startIndex; i <= endIndex; ++i) {
 		if (i > 0 && i < m_nColumns) {
-			m_columns[i].velocity = 0.1f * velocity;
+			m_columns[i].velocity = -1.f * waveVelocityScale * velocity.y;
 		}
 	}
 
-	velocity = std::abs(velocity) * m_data.velocityScale;
-	xPosition = xPosition + 0.5f * width;
-	float y = getHeight(xPosition);
+	// Create particle splashes
+	float particleVelocity = particleVelocityScale * std::abs(velocity.y);
+	float waterHeight = getHeight(xPosition + 0.5f * width);
 	const sf::FloatRect *bb = getBoundingBox();
 
-	*m_particlePosition = sf::Vector2f(xPosition, bb->top + bb->height - y);
-	*m_particleMinSpeed = 0.2f * velocity;
-	*m_particleMaxSpeed = 1.0f * velocity;
+	*m_particlePosition = sf::Vector2f(xPosition + 0.5f * width, bb->top + bb->height - waterHeight);
+	*m_particleMinSpeed = 0.2f * particleVelocity;
+	*m_particleMaxSpeed = 1.0f * particleVelocity;
 
-	int nParticles = static_cast<int>(velocity / 12);
+	int nParticles = static_cast<int>(0.05 * particleVelocity);
 	m_ps->emitParticles(nParticles);
 
-	if (velocity > 100.f) {
+	// Play sound
+	if (velocityNorm > 100.f) {
 		if (dist(sf::Vector2f(source->getBoundingBox()->left, source->getBoundingBox()->top), m_mainChar->getPosition()) > 1500.f) return;
 		if (m_soundMap.find(source) == m_soundMap.end()) {
 			m_soundMap.insert({ source, new sf::Sound() });
@@ -273,28 +246,16 @@ void FluidTile::onHit(Spell* spell) {
 	}
 
 	if (doSplash) {
-		float sign = spell->getVelocity().y > 0 ? -1.f : 1.f;
-		float vel = sign * norm(spell->getVelocity());
-
-		splash(spell, spell->getPosition().x, vel);
-
+		splash(spell, spell->getPosition().x, 0.f, spell->getVelocity());
 		spell->setDisposed();
 	}
 }
 
 void FluidTile::onHit(LevelMovableGameObject* mob) {
-	float velocityScale = 0.5f;
-
 	// don't splash if the mob is deeper than one tile below the surface
 	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
 
-	float sign = mob->getVelocity().y > 0 ? -1.f : 1.f;
-	float vel = sign * velocityScale * norm(mob->getVelocity());
-	if (std::abs(mob->getVelocity().y) < Epsilon && std::abs(mob->getVelocity().x) > Epsilon) {
-		vel = -0.2f * velocityScale * norm(mob->getVelocity());
-	}
-
-	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, vel);
+	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, mob->getVelocity(), 0.1f);
 
 	if (m_data.isDeadly) {
 		mob->setDead();
@@ -315,10 +276,7 @@ void FluidTile::checkForMovableTiles() {
 			int index = static_cast<int>(std::floor((tileBB.left - m_x) / TILE_SIZE));
 			if (isFrozen(index)) continue;
 
-			float sign = tile->getVelocity().y > 0 ? -1.f : 1.f;
-			float vel = sign * velocityScale * norm(tile->getVelocity());
-
-			splash(tile, tileBB.left, tileBB.width, vel);
+			splash(tile, tileBB.left, tileBB.width, tile->getVelocity(), 0.1f, 0.5f);
 		}
 	}
 	for (auto& it : *m_level->getDynamicTiles()) {
@@ -332,10 +290,7 @@ void FluidTile::checkForMovableTiles() {
 			int index = static_cast<int>(std::floor((tileBB.left - m_x) / TILE_SIZE));
 			if (isFrozen(index)) continue;
 
-			float sign = tile->getVelocity().y > 0 ? -1.f : 1.f;
-			float vel = sign * velocityScale * norm(tile->getVelocity());
-
-			splash(tile, tileBB.left, tileBB.width, vel);
+			splash(tile, tileBB.left, tileBB.width, tile->getVelocity(), 0.1f, 0.5f);
 		}
 	}
 }

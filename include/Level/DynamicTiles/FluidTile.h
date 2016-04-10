@@ -40,8 +40,7 @@ public:
 
 	float getHeight(float xPosition) const;
 
-	void splash(const MovableGameObject* source, float xPosition, float velocity);
-	void splash(const MovableGameObject* source, float xPosition, float width, float velocity);
+	void splash(const MovableGameObject* source, float xPosition, float width, sf::Vector2f velocity, float waveVelocityScale = 1.f, float particleVelocityScale = 1.f);
 
 	void freeze(int index);
 	void melt(int index);

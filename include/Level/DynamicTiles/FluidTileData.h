@@ -64,7 +64,7 @@ const FluidTileData SHALLOW_WATER
 	0.1f,
 	1.0f,
 	20.f,
-	1.f,
+	0.5f,
 	sf::Color(20, 50, 100, 128),
 	false,
 	false,
