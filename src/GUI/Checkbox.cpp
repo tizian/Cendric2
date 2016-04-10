@@ -3,14 +3,14 @@
 using namespace std;
 
 const float Checkbox::SIDE_LENGTH = 40.f;
-const float Checkbox::MARGIN = 2.f;
+const float Checkbox::CENTER_SIZE = 30.f;
 
 Checkbox::Checkbox() : GameObject() {
 	m_background = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backgroundColor, SIDE_LENGTH, SIDE_LENGTH);
 
 	m_margin = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_marginColor, SIDE_LENGTH, SIDE_LENGTH);
 
-	m_checkedSymbol.setSize(sf::Vector2f(0.66f * SIDE_LENGTH, 0.66f * SIDE_LENGTH));
+	m_checkedSymbol.setSize(sf::Vector2f(CENTER_SIZE, CENTER_SIZE));
 	m_checkedSymbol.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_checkbox));
 
 	setBoundingBox(m_background.getLocalBounds());
