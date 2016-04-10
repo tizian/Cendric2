@@ -47,6 +47,9 @@ struct ItemBean : DatabaseBean {
 		if (_item_type.compare("permanent") == 0) {
 			return ItemType::Permanent;
 		}
+		if (_item_type.compare("convertible") == 0) {
+			return ItemType::Convertible;
+		}
 		
 		return ItemType::VOID;
 	}

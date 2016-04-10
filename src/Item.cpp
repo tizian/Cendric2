@@ -14,6 +14,7 @@ Item::Item() {
 
 void Item::initBeans(const std::string& itemID) {
 	m_itemBean = g_databaseManager->getItemBean(itemID);
+	m_itemConvertibleBean = g_databaseManager->getItemConvertibleBean(itemID);
 	m_itemEquipmentBean = g_databaseManager->getItemEquipmentBean(itemID);
 	m_itemEquipmentLightBean = g_databaseManager->getItemEquipmentLightBean(itemID);
 	m_itemFoodBean = g_databaseManager->getItemFoodBean(itemID);
@@ -51,6 +52,10 @@ const AttributeData& Item::getAttributes() const {
 
 const sf::Time& Item::getFoodDuration() const {
 	return m_itemFoodBean.food_duration;
+}
+
+const ItemConvertibleBean& Item::getConvertibleBean() const {
+	return m_itemConvertibleBean;
 }
 
 const ItemEquipmentBean& Item::getEquipmentBean() const {
@@ -102,6 +107,9 @@ void Item::checkItem() {
 	if (m_itemWeaponBean.status == BeanStatus::Filled) {
 		m_isWeapon = true;
 	}
+	if (m_itemConvertibleBean.status == BeanStatus::Filled) {
+		m_isConvertible = true;
+	}
 }
 
 bool Item::isValid() const {
@@ -118,6 +126,10 @@ bool Item::isWeapon() const {
 
 bool Item::isLevelitem() const {
 	return m_isLevelitem;
+}
+
+bool Item::isConvertible() const {
+	return m_isConvertible;
 }
 
 bool Item::isEquipmentItem() const {
