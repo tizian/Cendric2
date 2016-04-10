@@ -2,7 +2,7 @@
 
 namespace particles
 {
-	ParticleSystem::ParticleSystem(int maxCount) : emitRate(0.f), m_dt(0.f), m_particlesToEmit(0) {
+	ParticleSystem::ParticleSystem(int maxCount) : emitRate(0.f), m_dt(0.f) {
 		m_particles = new ParticleData(maxCount);
 	}
 
@@ -41,7 +41,7 @@ namespace particles
 		m_particles->countAlive += newParticles;
 	}
 
-	void ParticleSystem::emitWithCount(int count) {
+	void ParticleSystem::emitParticles(int count) {
 		const int startId = m_particles->countAlive;
 		const int endId = std::min(startId + count, m_particles->count - 1);
 		const int newParticles = endId - startId;
@@ -56,11 +56,6 @@ namespace particles
 	void ParticleSystem::update(const sf::Time &dt) {
 		if (emitRate > 0.0f) {
 			emitWithRate(dt.asSeconds());
-		}
-
-		if (m_particlesToEmit > 0) {
-			emitWithCount(m_particlesToEmit);
-			m_particlesToEmit = 0;
 		}
 
 		for (int i = 0; i < m_particles->countAlive; ++i) {
@@ -82,20 +77,20 @@ namespace particles
 		m_vertices = sf::VertexArray(sf::Points, maxCount);
 	}
 
-	void PointParticleSystem::update(const sf::Time &dt) {
-		ParticleSystem::update(dt);
-
-		for (int i = 0; i < m_particles->countAlive; ++i) {
-			m_vertices[i].position = m_particles->pos[i];
-			m_vertices[i].color = m_particles->col[i];
-		}
-	}
-
 	void PointParticleSystem::render(sf::RenderTarget &renderTarget) {
+		updateVertices();
+
 		sf::RenderStates states = sf::RenderStates::Default;
 
 		const sf::Vertex *ver = &m_vertices[0];
 		renderTarget.draw(ver, m_particles->countAlive, sf::Points, states);
+	}
+
+	void PointParticleSystem::updateVertices() {
+		for (int i = 0; i < m_particles->countAlive; ++i) {
+			m_vertices[i].position = m_particles->pos[i];
+			m_vertices[i].color = m_particles->col[i];
+		}
 	}
 
 
@@ -135,9 +130,7 @@ namespace particles
 		}
 	}
 
-	void TextureParticleSystem::update(const sf::Time &dt) {
-		ParticleSystem::update(dt);
-
+	void TextureParticleSystem::updateVertices() {
 		for (int i = 0; i < m_particles->countAlive; ++i) {
 			m_vertices[4 * i + 0].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 0].position.y = m_particles->pos[i].y - m_particles->size[i].x;
 			m_vertices[4 * i + 1].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 1].position.y = m_particles->pos[i].y - m_particles->size[i].x;
@@ -152,6 +145,8 @@ namespace particles
 	}
 
 	void TextureParticleSystem::render(sf::RenderTarget &renderTarget) {
+		updateVertices();
+
 		sf::RenderStates states = sf::RenderStates::Default;
 
 		if (additiveBlendMode) {
@@ -165,9 +160,22 @@ namespace particles
 	}
 
 
-	void SpriteSheetParticleSystem::update(const sf::Time &dt) {
-		ParticleSystem::update(dt);
+	void SpriteSheetParticleSystem::render(sf::RenderTarget &renderTarget) {
+		updateVertices();
+		
+		sf::RenderStates states = sf::RenderStates::Default;
 
+		if (additiveBlendMode) {
+			states.blendMode = sf::BlendAdd;
+		}
+
+		states.texture = m_texture;
+
+		const sf::Vertex *ver = &m_vertices[0];
+		renderTarget.draw(ver, m_particles->countAlive * 4, sf::Quads, states);
+	}
+
+	void SpriteSheetParticleSystem::updateVertices() {
 		for (int i = 0; i < m_particles->countAlive; ++i) {
 			m_vertices[4 * i + 0].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 0].position.y = m_particles->pos[i].y - m_particles->size[i].x;
 			m_vertices[4 * i + 1].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 1].position.y = m_particles->pos[i].y - m_particles->size[i].x;
@@ -224,6 +232,8 @@ namespace particles
 	}
 
 	void MetaballParticleSystem::render(sf::RenderTarget &renderTarget) {
+		updateVertices();
+
 		sf::RenderStates states = sf::RenderStates::Default;
 		states.blendMode = sf::BlendAdd;
 

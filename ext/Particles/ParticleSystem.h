@@ -37,10 +37,9 @@ namespace particles
 			return u;
 		}
 
-		void emitParticles(int count) { m_particlesToEmit += count; }
+		void emitParticles(int count); 	// emit a fix number of particles
 
 	protected:
-		void emitWithCount(int count);	// emit a fix number of particles
 		void emitWithRate(float dt);	// emit a stream of particles defined by emitRate and dt
 
 	public:
@@ -48,7 +47,6 @@ namespace particles
 
 	protected:
 		float m_dt;
-		int m_particlesToEmit;
 
 		ParticleData *m_particles;
 		
@@ -68,8 +66,10 @@ namespace particles
 		PointParticleSystem(const PointParticleSystem &) = delete;
 		PointParticleSystem &operator=(const PointParticleSystem &) = delete;
 
-		virtual void update(const sf::Time &dt) override;
 		virtual void render(sf::RenderTarget& renderTarget) override;
+
+	protected:
+		void updateVertices();
 	};
 
 
@@ -82,10 +82,12 @@ namespace particles
 		TextureParticleSystem(const TextureParticleSystem &) = delete;
 		TextureParticleSystem &operator=(const TextureParticleSystem &) = delete;
 
-		virtual void update(const sf::Time &dt) override;
 		virtual void render(sf::RenderTarget &renderTarget) override;
 
 		void setTexture(sf::Texture *texture);
+
+	protected:
+		void updateVertices();
 
 	public:
 		bool additiveBlendMode;
@@ -104,7 +106,10 @@ namespace particles
 		SpriteSheetParticleSystem(const SpriteSheetParticleSystem &) = delete;
 		SpriteSheetParticleSystem &operator=(const SpriteSheetParticleSystem &) = delete;
 
-		virtual void update(const sf::Time &dt) override;
+		virtual void render(sf::RenderTarget &renderTarget) override;
+
+	protected:
+		void updateVertices();
 	};
 
 
