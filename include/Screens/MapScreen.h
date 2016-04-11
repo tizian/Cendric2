@@ -47,6 +47,8 @@ private:
 	CookingWindow* m_cookingWindow = nullptr;
 	BookWindow* m_bookWindow = nullptr;
 
+	bool m_bookWindowDisposed;
+
 	void handleDialogueWindow(const sf::Time& frameTime);
 	void handleCookingWindow(const sf::Time& frameTime);
 	void handleBookWindow(const sf::Time& frameTime);

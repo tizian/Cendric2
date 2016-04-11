@@ -136,6 +136,10 @@ void MapScreen::setBook(const BookData* bookData) {
 	m_interface->hideAll();
 
 	m_bookWindow = new BookWindow(*bookData, this);
+	m_bookWindowDisposed = false;
+	m_bookWindow->addCloseButton([&](){
+		m_bookWindowDisposed = true;
+	});
 }
 
 void MapScreen::setCooking() {
@@ -235,7 +239,7 @@ void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
 
 void MapScreen::handleBookWindow(const sf::Time& frameTime) {
 	if (m_bookWindow == nullptr) return;
-	if (!m_bookWindow->updateWindow(frameTime)) {
+	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
 		delete m_bookWindow;
 		m_bookWindow = nullptr;
 	}
