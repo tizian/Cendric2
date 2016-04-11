@@ -5,7 +5,7 @@
   <property name="name" value="ElderHome"/>
   <property name="tilesetpath" value="res/map/elderhome/tileset_map_elderhome.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_elderhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
+ <tileset firstgid="1" name="tileset_map_elderhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
   <image source="tileset_map_elderhome.png" width="1000" height="1000"/>
   <tile id="140">
    <animation>
@@ -21,10 +21,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -282,9 +282,9 @@
  <objectgroup name="book">
   <object id="127" gid="399" x="549" y="360" width="50" height="50">
    <properties>
-    <property name="page1" value="TitleElemental1,ContentElemental1"/>
-    <property name="page2" value="ContentElemental2"/>
-    <property name="title" value="BookTitleElemental"/>
+    <property name="page1" value="TitleRhendalMagic1,ContentRhendalMagic1"/>
+    <property name="page2" value="ContentRhendalMagic2"/>
+    <property name="title" value="BookRhendalMagic"/>
    </properties>
   </object>
  </objectgroup>

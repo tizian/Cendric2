@@ -35,7 +35,7 @@ private:
 	const float BAR_HEIGHT = 15.f;
 	const float BAR_WIDTH = 300.f;
 	const float BAR_LEFT = 30.f;
-	const float BAR_TOP = 30.f;
+	const float BAR_TOP = 25.f;
 
 	const float BORDER_OFFSET_X = 13.f;
 	const float BORDER_OFFSET_Y = 10.f;
