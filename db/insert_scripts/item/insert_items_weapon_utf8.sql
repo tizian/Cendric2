@@ -45,7 +45,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Hawthorn
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_hawthorn', 'eq_weapon', 300, 100, 50);
-INSERT INTO item_attribute (item_id, max_health, dmg_light, dmg_fire, dmg_ice) values ('we_hawthorn', 10, 15, 15, 15);
+INSERT INTO item_attribute (item_id, max_health, dmg_fire, dmg_ice) values ('we_hawthorn', 10, 2, 2);
 INSERT INTO item_equipment (item_id, texture_path) values ('we_hawthorn', 'res/assets/equipment/weapon/spritesheet_weapon_luce.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_hawthorn', 600, 10, 45, 80, 5);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_hawthorn', 1, 'elemental', 1);

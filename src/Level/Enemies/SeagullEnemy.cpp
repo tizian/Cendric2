@@ -33,7 +33,7 @@ void SeagullEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.damage = 2;
-	chopSpell.damagePerSecond = 10;
+	chopSpell.damagePerSecond = 3;
 	chopSpell.duration = sf::seconds(3.f);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 
