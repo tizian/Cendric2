@@ -70,5 +70,5 @@ protected:
 	BitmapText m_text;
 
 	static const float SIDE_LENGTH;
-	static const float MARGIN;
+	static const float CENTER_SIZE;
 };

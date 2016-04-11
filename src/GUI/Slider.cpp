@@ -7,7 +7,7 @@ const float Slider::HEIGHT = 17.f;
 const float Slider::BORDER_OFFSET = 6.f;
 
 const sf::Color Slider::BACKGROUND_COLOR = COLOR_BLACK;
-const sf::Color Slider::FILL_COLOR = COLOR_LIGHT_PURPLE;
+const sf::Color Slider::FILL_COLOR = COLOR_WHITE;
 
 Slider::Slider(int minPos, int maxPos) : GameObject() {
 	if (minPos < 0) minPos = 0;
