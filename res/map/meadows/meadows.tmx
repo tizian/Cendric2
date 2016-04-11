@@ -1111,7 +1111,7 @@
   </object>
   <object id="128" x="1311.12" y="1640.5" width="43.75" height="55">
    <properties>
-    <property name="level entry" value="res/level/brokenbridge/brokenbridge.tmx,700,800"/>
+    <property name="level entry" value="res/level/brokenbridge/brokenbridge.tmx,200,1450"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

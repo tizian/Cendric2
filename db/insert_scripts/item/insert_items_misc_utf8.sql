@@ -37,4 +37,4 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 -- Pearl
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearl', 'misc', 400, 250, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearl', 'misc', 400, 250, 15);

@@ -39,6 +39,7 @@ loadDialogue = function(DL)
 		DL:addQuestProgress("who_am_i", "information_gathered")
 		DL:changeQuestState("who_am_i", "completed")
 		DL:changeQuestState("silkweed_potion", "completed")
+		DL:addHint("Spellbook")
 		DL:addNode()
 
 		DL:setRoot(0)

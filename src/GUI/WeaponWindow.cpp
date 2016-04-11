@@ -26,8 +26,8 @@ void WeaponWindow::reload() {
 	else {
 		m_weaponSlot = new InventorySlot(m_weapon->getID(), -1);
 		m_weaponName.setString(g_textProvider->getText(m_weapon->getID(), "item"));
-		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item_desc", GUIConstants::CHARACTER_SIZE_M,
-			static_cast<int>(WIDTH)));
+		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S,
+			static_cast<int>(WIDTH - (2 * GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIZE))));
 	}
 	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET, TOP + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET));
 
@@ -38,6 +38,12 @@ void WeaponWindow::reload() {
 	float xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET;
 	float yOffset = TOP + Spellbook::SPELL_OFFSET;
 	int slotNr = 0;
+	if (m_weapon->getWeaponSlots().empty()) {
+		m_noSlotsText.setString(g_textProvider->getCroppedText("EquipWeapon", GUIConstants::CHARACTER_SIZE_M,
+			static_cast<int>(WIDTH - (GUIConstants::TEXT_OFFSET + SpellSlot::ICON_OFFSET))));
+		return;
+	}
+	m_noSlotsText.setString("");
 	for (auto& it : m_weapon->getWeaponSlots()) {
 		SpellSlot spellSlot = SpellSlot();
 		if (it.spellSlot.spellID == SpellID::VOID) {
@@ -100,6 +106,10 @@ void WeaponWindow::init() {
 	m_weaponDescription.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_weaponDescription.setColor(COLOR_LIGHT_GREY);
 	m_weaponDescription.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 4.f));
+
+	m_noSlotsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_noSlotsText.setColor(COLOR_WHITE);
+	m_noSlotsText.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET, TOP + Spellbook::SPELL_OFFSET));
 
 	reload();
 }
@@ -260,6 +270,7 @@ void WeaponWindow::render(sf::RenderTarget& target) {
 	m_spellDesc->render(target);
 	target.draw(m_weaponName);
 	target.draw(m_weaponDescription);
+	target.draw(m_noSlotsText);
 	m_weaponSlot->render(target);
 
 	for (auto& it : m_weaponSlots) {

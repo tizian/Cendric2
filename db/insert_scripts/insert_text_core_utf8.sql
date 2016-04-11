@@ -42,6 +42,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Duration','Du
 INSERT INTO text (text_id, english, german, swiss_german) values ('Elemental','Elemental','Elementar','Elementar');
 INSERT INTO text (text_id, english, german, swiss_german) values ('English','English','Englisch','Englisch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Equipment','Equipment','Ausrüstung','Usrüschtig');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EquipWeapon','Equip a weapon with spell slots to use spells.','Rüste eine Waffe mit Zauber-Slots aus, um Zauber einzusetzen.','Leg e Waffe mit Zauber-Slots ah zum Zauber iisetze.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Exit','Exit','Beenden','Beende');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Failed','Failed','Gescheitert','Gfailt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FearLevel','Fear Strength','Furchtstärke','Angschtstärchi');
@@ -110,7 +111,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('No','No','Nei
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoQuicksaveExists','No quick save exists','Kein Schnelllade-Speicherstand existiert','Kein Schnelllade-Speicherstand existiert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NothingToSay','There''s nothing to talk about.','Es gibt nichts zu sagen.','Es git nüt zum rede.');
-INSERT INTO text (text_id, english, german, swiss_german) values ('NoWeapon','No weapon ','Keine Waffe ','Kei Waffe');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NoWeapon','No weapon','Keine Waffe ','Kei Waffe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Off','Off','Aus','Uus');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Okay','Okay','Okay','Okee');
 INSERT INTO text (text_id, english, german, swiss_german) values ('On','On','An','Ii');

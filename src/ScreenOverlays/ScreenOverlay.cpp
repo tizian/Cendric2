@@ -109,7 +109,7 @@ GameObjectType ScreenOverlay::getConfiguredType() const {
 }
 
 ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questID, QuestState state) {
-	ScreenOverlay* questScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(0.5f));
+	ScreenOverlay* questScreenOverlay = new ScreenOverlay(sf::seconds(1.5f), sf::seconds(0.5f));
 
 	std::string titleText = g_textProvider->getText("Quest") + " ";
 	titleText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
@@ -220,6 +220,9 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 	}
 	else if (hintKey.compare("Journal") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Journal)) + " ");
+	}
+	else if (hintKey.compare("Spellbook") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Spellbook)) + " ");
 	}
 	else if (hintKey.compare("LeaveLevel") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
