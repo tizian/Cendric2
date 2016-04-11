@@ -20,6 +20,11 @@ item.id:eq_purpleback,1
 item.id:eq_rafishat,1
 item.id:eq_wizardhatblue,1
 item.id:eq_wizardhatgrey,1
+item.id:eq_bandana,1
+item.id:eq_leatherarmor,1
+item.id:eq_ironring,1
+item.id:eq_rubyring,1
+item.id:eq_aquamarinering,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
 item.id:fo_cheese,6
@@ -41,6 +46,7 @@ item.id:mi_candleholder,1
 item.id:mi_silverplate,1
 item.id:mi_teeth,1
 item.id:mi_pearl,1
+item.id:mi_feather,1
 item.id:co_shell,10
 item.id:co_smallpouch,2
 item.id:co_mediumpouch,2

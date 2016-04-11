@@ -10,6 +10,12 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire) values ('eq_wizardhatgrey', 5, 1, 2);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatgrey', 'res/assets/equipment/head/spritesheet_head_wizardhat_grey.png');
 
+-- Bandana
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bandana', 'eq_head', 0, 300, 20);
+INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire) values ('eq_bandana', 5, 1, 2);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_bandana', 'res/assets/equipment/head/spritesheet_head_bandana.png');
+
 -- Purple Back
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_purpleback', 'eq_back', 100, 150, 10);
@@ -40,6 +46,12 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet3', 10, 10, 10, 10, 10, 2, 5);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_divinet3', 'res/assets/equipment/head/spritesheet_head_divinet3.png');
 
+-- Leather Armour
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_leatherarmor', 'eq_body', 50, 300, 100);
+INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire, res_ice) values ('eq_leatherarmor', 10, 5, 3, 3);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_leatherarmor', 'res/assets/equipment/body/spritesheet_body_leatherarmor.png');
+
 -- Rafi's Hat
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_rafishat', 'eq_head', 0, 250, 10);
@@ -64,6 +76,11 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, dmg_fire, critical) values ('eq_rubyring', 5, 2);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_rubyring', -12, -37, 8, 8);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_rubyring', 1, 200, 0, 50, 50);
+
+-- Aquamarine Ring
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_aquamarinering', 'eq_ring', 100, 300, 30);
+INSERT INTO item_attribute (item_id, dmg_ice, critical) values ('eq_aquamarinering', 5, 1);
 
 -- Iron Ring
 

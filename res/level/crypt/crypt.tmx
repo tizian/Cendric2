@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="45" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="23">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="45" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="24">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/crypt/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
   <property name="name" value="Crypt"/>
   <property name="tilesetpath" value="res/level/crypt/tileset_level_crypt.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_crypt" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529">
+ <tileset firstgid="1" name="tileset_level_crypt" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
   <image source="tileset_level_crypt.png" width="1200" height="1200"/>
   <tile id="59">
    <animation>
@@ -23,13 +23,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
+ <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="730" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10">
+ <tileset firstgid="730" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="740" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
+ <tileset firstgid="740" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -878,6 +878,12 @@
     <property name="gold" value="50"/>
    </properties>
   </object>
+  <object id="23" gid="554" x="100" y="1651" width="50" height="50">
+   <properties>
+    <property name="eq_aquamarinering" value="1"/>
+    <property name="gold" value="10"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemy">
   <object id="10" gid="737" x="910" y="393" width="50" height="50"/>
@@ -885,7 +891,7 @@
   <object id="15" gid="734" x="1291" y="1904" width="50" height="50"/>
   <object id="17" gid="737" x="1370" y="1282" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup name="light" visible="0">
   <object id="8" x="628" y="269" width="300" height="308">
    <ellipse/>
   </object>

@@ -79,17 +79,7 @@ void ModifierTile::addModifier() {
 	setCurrentAnimation(getAnimation(m_state), false);
 
 	LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen());
-
-	screen->getCharacterCore()->learnModifier(m_modifier);
-	std::string text = g_textProvider->getText("ModifierLearned");
-	text.append(": ");
-	text.append(g_textProvider->getText(EnumNames::getSpellModifierTypeName(m_modifier.type)));
-	text.append(", ");
-	text.append(g_textProvider->getText("Level"));
-	text.append(" ");
-	text.append(std::to_string(m_modifier.level));
-	screen->setTooltipTextRaw(text, COLOR_GOOD, true);
-
+	screen->notifyModifierLearned(m_modifier);
 	m_ps->emitRate = 0;
 }
  

@@ -10,5 +10,6 @@ enum class EnemyID {
 	Gargoyle,
 	Hunter,
 	Wisp,
+	Seagull,
 	MAX
 };

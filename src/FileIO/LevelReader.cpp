@@ -21,6 +21,7 @@ void LevelReader::initMaps() {
 		{ 6, EnemyID::Gargoyle },
 		{ 7, EnemyID::Hunter }, 
 		{ 8, EnemyID::Wisp },
+		{ 9, EnemyID::Seagull },
 	});
 }
 
