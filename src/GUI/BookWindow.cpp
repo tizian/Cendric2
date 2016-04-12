@@ -107,10 +107,12 @@ void BookWindow::setPage(int index) {
 	if (m_currentPage >= 0) {
 		m_title.setString(g_textProvider->getText(m_data.pages.at(m_currentPage).title, "book"));
 		m_content.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).content, "book",
-			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * GUIConstants::LEFT)));
+			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * GUIConstants::LEFT + 10)));
 
 		m_title.setPosition(getPosition() + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
-		m_content.setPosition(getPosition() + sf::Vector2f(GUIConstants::LEFT, GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
+		m_content.setPosition(
+			getPosition() + sf::Vector2f(GUIConstants::LEFT,
+				m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
 	}
 }
 
@@ -122,5 +124,7 @@ void BookWindow::setPosition(const sf::Vector2f& pos) {
 
 	m_bookTitle.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_bookTitle.getLocalBounds().width, 0.3f * HEIGHT));
 	m_title.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
-	m_content.setPosition(pos + sf::Vector2f(GUIConstants::LEFT, GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
+	m_content.setPosition(
+		pos + sf::Vector2f(GUIConstants::LEFT, 
+			m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
 }

@@ -283,10 +283,9 @@
   <object id="127" gid="399" x="549" y="360" width="50" height="50">
    <properties>
     <property name="page1" value="TitleRhendalMagic1,ContentRhendalMagic1"/>
-    <property name="page2" value="TitleRhendalMagic2,ContentRhendalMagic2"/>
-    <property name="page3" value="ContentRhendalMagic3"/>
-    <property name="page4" value="TitleRhendalMagic4,ContentRhendalMagic4"/>
-    <property name="page5" value="ContentRhendalMagic5"/>
+    <property name="page2" value="ContentRhendalMagic2"/>
+    <property name="page3" value="TitleRhendalMagic3,ContentRhendalMagic3"/>
+    <property name="page4" value="ContentRhendalMagic4"/>
     <property name="title" value="BookRhendalMagic"/>
    </properties>
   </object>
