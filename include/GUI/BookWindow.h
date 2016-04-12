@@ -36,4 +36,6 @@ private:
 	// -1 is the title page, may be empty.
 	int m_currentPage = -1;
 	MapScreen* m_screen;
+
+	sf::Sound m_sound;
 };

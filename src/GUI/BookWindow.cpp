@@ -17,7 +17,6 @@ BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
 
 	charMap.insert(std::make_pair('A', 0));
 
-
 	m_leftArrow = new ArrowButton(false);
 	m_leftArrow->setMainColor(COLOR_DARK_BROWN);
 	m_leftArrow->setMouseoverColor(COLOR_WHITE);
@@ -59,6 +58,7 @@ BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
 BookWindow::~BookWindow() {
 	delete m_leftArrow;
 	delete m_rightArrow;
+	g_resourceManager->deleteResource(ResourceID::Sound_page);
 }
 
 void BookWindow::render(sf::RenderTarget& renderTarget) {
@@ -98,6 +98,7 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 }
 
 void BookWindow::setPage(int index) {
+	g_resourceManager->playSound(m_sound, ResourceID::Sound_page);
 	if (m_data.title.empty() && index < 0) return;
 	if (index < -1 || index + 1 > static_cast<int>(m_data.pages.size())) return;
 	m_currentPage = index;

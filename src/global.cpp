@@ -25,7 +25,7 @@ const sf::Color COLOR_PURPLE =					sf::Color(54, 11, 93, 255);
 const sf::Color COLOR_MEDIUM_PURPLE =			sf::Color(134, 63, 199, 255);
 const sf::Color COLOR_DARK_PURPLE	=			sf::Color(41, 7, 63, 255);
 const sf::Color COLOR_LIGHT_BROWN =				sf::Color(169, 141, 117);
-const sf::Color COLOR_DARK_BROWN =				sf::Color(110, 76, 54);
+const sf::Color COLOR_DARK_BROWN =				sf::Color(120, 86, 64);
 
 const sf::Color COLOR_ELEMENTAL =				sf::Color(144, 33, 7);
 const sf::Color COLOR_TWILIGHT =				sf::Color(32, 43, 79);

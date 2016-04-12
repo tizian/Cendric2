@@ -121,4 +121,5 @@ enum class ResourceID {
 	Sound_spell_fireball,
 	Sound_tile_water,
 	Sound_tile_lever,
+	Sound_page,
 };
