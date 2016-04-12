@@ -39,6 +39,9 @@ struct CharacterCoreData {
 	std::map<std::string, std::set<std::string>> questConditionProgress;
 	std::map<std::string, std::set<int>> questDescriptionProgress;
 
+	// reputation progress
+
+
 	// learning progress
 	std::map<SpellType, std::set<SpellID>> spellsLearned;
 	std::map<SpellModifierType, int> modfiersLearned;

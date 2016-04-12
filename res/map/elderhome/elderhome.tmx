@@ -5,7 +5,7 @@
   <property name="name" value="ElderHome"/>
   <property name="tilesetpath" value="res/map/elderhome/tileset_map_elderhome.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_elderhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_map_elderhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_map_elderhome.png" width="1000" height="1000"/>
   <tile id="140">
    <animation>
@@ -21,10 +21,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -243,7 +243,7 @@
   <object id="117" x="835" y="350" width="84" height="30"/>
   <object id="118" x="916" y="299" width="19" height="44"/>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup name="light" visible="0">
   <object id="120" x="271" y="293" width="209" height="183">
    <ellipse/>
   </object>
@@ -283,7 +283,10 @@
   <object id="127" gid="399" x="549" y="360" width="50" height="50">
    <properties>
     <property name="page1" value="TitleRhendalMagic1,ContentRhendalMagic1"/>
-    <property name="page2" value="ContentRhendalMagic2"/>
+    <property name="page2" value="TitleRhendalMagic2,ContentRhendalMagic2"/>
+    <property name="page3" value="ContentRhendalMagic3"/>
+    <property name="page4" value="TitleRhendalMagic4,ContentRhendalMagic4"/>
+    <property name="page5" value="ContentRhendalMagic5"/>
     <property name="title" value="BookRhendalMagic"/>
    </properties>
   </object>
