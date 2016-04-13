@@ -187,12 +187,11 @@ GameObjectType Slider::getConfiguredType() const {
 
 // SLIDER KNOB
 
-const float SliderKnob::WIDTH = 10.f;
+const float SliderKnob::WIDTH = 18.f;
 const float SliderKnob::HEIGHT = 30.f;
 
 SliderKnob::SliderKnob() : GameObject() {
-	m_knob.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slider_knob));
+	m_knob = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_slider_knob), COLOR_WHITE, WIDTH, HEIGHT);
 
 	setBoundingBox(m_knob.getLocalBounds());
 }
