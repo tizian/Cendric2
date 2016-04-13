@@ -57,9 +57,4 @@ private:
 		(SLOT_COUNT_X - 1) * MARGIN +
 		SLOT_COUNT_X * InventorySlot::SIZE;
 	const float LEFT = WINDOW_WIDTH - WIDTH - GUIConstants::LEFT;
-	const float HEIGHT =
-		5 * GUIConstants::TEXT_OFFSET +
-		2 * GUIConstants::CHARACTER_SIZE_M +
-		(SLOT_COUNT_Y + 1) * MARGIN +
-		SLOT_COUNT_Y * (MARGIN + InventorySlot::SIZE);
 };

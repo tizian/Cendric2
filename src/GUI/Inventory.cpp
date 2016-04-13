@@ -24,7 +24,7 @@ void Inventory::init() {
 	m_selectedSlotId.first = "";
 	m_selectedSlotId.second = ItemType::VOID;
 	// init window
-	sf::FloatRect box(INVENTORY_LEFT, GUIConstants::TOP, INVENTORY_WIDTH, INVENTORY_HEIGHT);
+	sf::FloatRect box(INVENTORY_LEFT, GUIConstants::TOP, INVENTORY_WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
@@ -40,7 +40,7 @@ void Inventory::init() {
 	m_selectedTabText.setColor(COLOR_WHITE);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	m_goldText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + INVENTORY_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
+	m_goldText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::GUI_WINDOW_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
 	m_goldText.setColor(COLOR_WHITE);
 	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
@@ -66,7 +66,7 @@ void Inventory::init() {
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
 	float x = INVENTORY_LEFT + 0.5f * (INVENTORY_WIDTH - width);
-	float y = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
+	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 
 	m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
 

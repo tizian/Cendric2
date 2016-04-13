@@ -4,7 +4,6 @@
 // <<< QUEST LOG >>>
 
 float QuestLog::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
-float QuestLog::HEIGHT = WINDOW_HEIGHT - 250.f;
 
 QuestLog::QuestLog(CharacterCore* core) {
 	m_core = core;
@@ -14,7 +13,7 @@ QuestLog::QuestLog(CharacterCore* core) {
 
 void QuestLog::init() {
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
+	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
@@ -45,7 +44,7 @@ void QuestLog::init() {
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
 	float x = GUIConstants::LEFT + 0.5f * (QuestLog::WIDTH - width);
-	float y = GUIConstants::TOP + 2 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M;
+	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 	
 	m_tabBar = new TabBar(sf::FloatRect(x, y, width, height), nTabs);
 	for (int i = 0; i < nTabs; ++i) {

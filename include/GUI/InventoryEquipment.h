@@ -36,7 +36,6 @@ public:
 	bool notifyEquipmentDrop(const SlotClone* item);
 
 	static float WIDTH;
-	static float HEIGHT;
 
 private:
 	CharacterCore* m_core;

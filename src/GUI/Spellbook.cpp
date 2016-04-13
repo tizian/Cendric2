@@ -4,7 +4,6 @@
 #include "GUI/SlotClone.h"
 
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
-float Spellbook::HEIGHT = WINDOW_HEIGHT - 160.f;
 float Spellbook::SPELL_OFFSET = 115.f;
 const sf::Vector2f Spellbook::BUTTON_SIZE = sf::Vector2f(70.f, 57.f);
 
@@ -17,7 +16,7 @@ Spellbook::Spellbook(CharacterCore* core, bool modifiable) {
 
 void Spellbook::init() {
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
+	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
@@ -34,7 +33,7 @@ void Spellbook::init() {
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
 	float x = GUIConstants::LEFT + 0.5f * (Spellbook::WIDTH - width);
-	float y = GUIConstants::TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN;
+	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 
 	m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
 

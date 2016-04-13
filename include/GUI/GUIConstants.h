@@ -8,6 +8,9 @@ public:
 	static float LEFT;
 	static float TOP;
 
+	static float GUI_WINDOW_HEIGHT;
+	static float GUI_TABS_TOP;
+
 	static float TEXT_OFFSET;
 	static float LABEL_OFFSET;
 	static float BUTTON_MARGIN;

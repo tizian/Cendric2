@@ -88,7 +88,7 @@ void WeaponWindow::reloadSpellDesc() {
 void WeaponWindow::init() {
 	// init window
 	delete m_window;
-	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
+	sf::FloatRect box(LEFT, TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,

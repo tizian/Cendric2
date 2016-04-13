@@ -2,6 +2,10 @@
 
 float GUIConstants::LEFT = 50.f;
 float GUIConstants::TOP = 50.f;
+
+float GUIConstants::GUI_WINDOW_HEIGHT = 560.f;
+float GUIConstants::GUI_TABS_TOP = 42.f;
+
 float GUIConstants::TEXT_OFFSET = 20.f;
 float GUIConstants::LABEL_OFFSET = 250.f;
 float GUIConstants::BUTTON_MARGIN = 5.f;

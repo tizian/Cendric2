@@ -33,7 +33,6 @@ public:
 	void reload();
 
 	static float WIDTH;
-	static float HEIGHT;
 	static float SPELL_OFFSET;
 
 private:

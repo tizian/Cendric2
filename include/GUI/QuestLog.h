@@ -55,7 +55,6 @@ public:
 	void reload();
 
 	static float WIDTH;
-	static float HEIGHT;
 
 private:
 	CharacterCore* m_core;

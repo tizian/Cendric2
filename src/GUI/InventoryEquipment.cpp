@@ -3,16 +3,15 @@
 #include "GUI/GUIConstants.h"
 
 float MARGIN = 10.f;
-float YOFFSET = 28.f;
+float YOFFSET = 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - 7 * InventorySlot::SIZE - 6 * MARGIN);
 float InventoryEquipment::WIDTH = 100.f;
-float InventoryEquipment::HEIGHT = 7 * (InventorySlot::SIZE + MARGIN) - MARGIN + 2 * YOFFSET;
 
 InventoryEquipment::InventoryEquipment(CharacterCore* core, bool isInLevel) {
 	m_core = core;
 	m_isInLevel = isInLevel;
 
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, HEIGHT);
+	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		COLOR_TRANS_BLACK, // main
@@ -126,8 +125,8 @@ void InventoryEquipment::reload() {
 	types.push_back(ItemType::Equipment_ring_2);
 
 	sf::Vector2i texPos(0, 0);
-	float xOffset = GUIConstants::LEFT + InventorySlot::ICON_OFFSET + 0.5f * (WIDTH - InventorySlot::SIZE);
-	float yOffset = GUIConstants::TOP + YOFFSET;
+	float xOffset = GUIConstants::LEFT + 0.5f * (WIDTH - InventorySlot::SIZE + 2 * InventorySlot::ICON_OFFSET);
+	float yOffset = GUIConstants::TOP + YOFFSET + InventorySlot::ICON_OFFSET;
 
 	for (auto& it : types) {
 		if (m_core->getEquippedItem(it).empty()) {

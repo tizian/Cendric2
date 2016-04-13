@@ -87,6 +87,5 @@ private:
 
 	const float TOP = GUIConstants::TOP;
 	const float LEFT = GUIConstants::LEFT + Spellbook::WIDTH + MARGIN;
-	const float HEIGHT = Spellbook::HEIGHT;
 	const float WIDTH = 2 * GUIConstants::TEXT_OFFSET + SpellSlot::SIZE + 4 * MARGIN + 3 * ModifierSlot::SIZE;
 };

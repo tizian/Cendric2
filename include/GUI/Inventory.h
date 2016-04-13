@@ -109,12 +109,6 @@ private:
 
 	const float MARGIN = 7.f;
 	const float INVENTORY_LEFT = GUIConstants::LEFT + MARGIN + InventoryEquipment::WIDTH;
-	const float INVENTORY_HEIGHT =
-		3 * GUIConstants::TEXT_OFFSET +
-		2 * GUIConstants::CHARACTER_SIZE_M +
-		BUTTON_SIZE.y +
-		(SLOT_COUNT_Y + 1) * MARGIN +
-		SLOT_COUNT_Y * (MARGIN + InventorySlot::SIZE);
 	const float INVENTORY_WIDTH =
 		2 * GUIConstants::TEXT_OFFSET +
 		(SLOT_COUNT_X - 1) * MARGIN +
