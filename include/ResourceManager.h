@@ -33,7 +33,8 @@ public:
 	void setError(ErrorID id, const std::string& description);
 
 	// loads a sound and applies the current configuration to it (sound on/off, volume) and starts it.
-	void playSound(sf::Sound& sound, ResourceID id);
+	// if the sound is already playing, it won't start again, unless the argument "force" is set to true
+	void playSound(sf::Sound& sound, ResourceID id, bool force = false);
 	// streams a music and applies the current configuration to it (sound on/off, volume), starts and loops it.
 	void playMusic(sf::Music& music, const std::string& filename);
 

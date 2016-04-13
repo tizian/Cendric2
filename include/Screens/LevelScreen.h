@@ -47,6 +47,7 @@ private:
 	std::string m_levelID;
 
 	bool m_isGameOver = false;
+	bool m_isPaused = false;
 	BitmapText* m_overlayText = nullptr;
 	sf::Sprite* m_overlaySprite = nullptr;
 	YesOrNoForm* m_yesOrNoForm = nullptr;

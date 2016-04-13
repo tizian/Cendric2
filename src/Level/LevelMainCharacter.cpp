@@ -10,6 +10,7 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 
 LevelMainCharacter::~LevelMainCharacter() {
 	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
+	g_resourceManager->deleteResource(ResourceID::Sound_cendric_death);
 	m_spellKeyMap.clear();
 }
 
@@ -18,6 +19,25 @@ void LevelMainCharacter::load() {
 	loadAnimation();
 	loadBehavior();
 }
+
+void LevelMainCharacter::update(const sf::Time& frameTime) {
+	LevelMovableGameObject::update(frameTime);
+	if (m_isDead) {
+		m_ps->update(frameTime);
+		updateTime(m_fadingTime, frameTime);
+		updateTime(m_particleTime, frameTime);
+		if (m_particleTime == sf::Time::Zero) {
+			m_ps->emitRate = 0;
+		}
+		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
+	}
+}
+
+void LevelMainCharacter::render(sf::RenderTarget& target) {
+	LevelMovableGameObject::render(target);
+	if (m_isDead) m_ps->render(target);
+}
+
 
 MovingBehavior* LevelMainCharacter::createMovingBehavior(bool asAlly) {
 	UserMovingBehavior* behavior = new UserMovingBehavior(this);
@@ -136,6 +156,13 @@ void LevelMainCharacter::loadWeapon() {
 	m_spellManager->setCurrentSpell(0);
 }
 
+void LevelMainCharacter::setPosition(const sf::Vector2f& pos) {
+	LevelMovableGameObject::setPosition(pos);
+	if (!m_isDead) return;
+	m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2.f;
+	m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height;
+}
+
 void LevelMainCharacter::setCharacterCore(CharacterCore* core) {
 	m_core = core;
 	m_attributes = core->getTotalAttributes();
@@ -158,6 +185,11 @@ void LevelMainCharacter::setInvisibilityLevel(int level) {
 
 int LevelMainCharacter::getInvisibilityLevel() const {
 	return m_invisibilityLevel;
+}
+
+void LevelMainCharacter::setDead() {
+	LevelMovableGameObject::setDead();
+	g_resourceManager->playSound(m_sound, ResourceID::Sound_cendric_death, true);
 }
 
 void LevelMainCharacter::addDamageOverTime(DamageOverTimeData& data) {
@@ -225,17 +257,12 @@ void LevelMainCharacter::loadAnimation() {
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
-	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
-	deadAnimation->addFrame(sf::IntRect(1120, 0, 80, 120));
-
-	addAnimation(GameObjectState::Dead, deadAnimation);
-
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
 	setDebugBoundingBox(COLOR_WHITE);
+	loadParticleSystem();
 }
 
 GameObjectType LevelMainCharacter::getConfiguredType() const {
@@ -272,4 +299,44 @@ void LevelMainCharacter::removeGold(int gold) const {
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange("gold", -gold);
 	}
+}
+
+void LevelMainCharacter::loadParticleSystem() {
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
+	m_ps->additiveBlendMode = true;
+	m_ps->emitRate = 100.f;
+
+	// Generators
+	auto posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
+	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	m_pointGenerator = posGen;
+
+	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 0.f;
+	sizeGen->maxEndSize = 1.f;
+
+	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	colGen->minStartCol = sf::Color(255, 255, 255, 255);
+	colGen->maxStartCol = sf::Color(255, 255, 255, 255);
+	colGen->minEndCol = sf::Color(255, 255, 255, 0);
+	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
+
+	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	velGen->minAngle = -45.f;
+	velGen->maxAngle = 45.f;
+	velGen->minStartVel = 50.f;
+	velGen->maxStartVel = 70.f;
+	m_velGenerator = velGen;
+
+	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	timeGen->minTime = 2.f;
+	timeGen->maxTime = 3.f;
+
+	// Updaters
+	m_ps->addUpdater<particles::TimeUpdater>();
+	m_ps->addUpdater<particles::ColorUpdater>();
+	m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::SizeUpdater>();
 }

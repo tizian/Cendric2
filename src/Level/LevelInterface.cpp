@@ -37,14 +37,17 @@ void LevelInterface::render(sf::RenderTarget& target) {
 }
 
 void LevelInterface::update(const sf::Time& frameTime) {
+	if (m_character->isDead()) {
+		m_healthBar->update(frameTime);
+		return;
+	}
+		
 	WorldInterface::update(frameTime);
 
 	m_healthBar->update(frameTime);
 	m_buffBar->update(frameTime);
 	m_spellSelection->update(frameTime);
 	m_quickSlotBar->update(frameTime);
-	m_characterInfo->update(frameTime);
-	m_characterInfo->update(frameTime);
 }
 
 BuffBar& LevelInterface::getBuffBar() {

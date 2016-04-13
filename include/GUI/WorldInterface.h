@@ -37,6 +37,8 @@ protected:
 	WorldScreen* m_screen;
 	CharacterCore* m_core;
 
+	sf::Sound m_openSound;
+
 	// <<< INVENTORY >>>
 	Inventory* m_inventory = nullptr;
 	void updateInventory(const sf::Time& frameTime);

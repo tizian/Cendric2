@@ -9,6 +9,7 @@
 ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : GameObject() {
 	m_activeTime = activeTime;
 	m_fadeTime = fadeTime;
+	m_isPermanent = false;
 
 	load();
 }
@@ -43,6 +44,11 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 		updateTime(m_fadeInTimer, frameTime);
 		m_scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
 	}
+	if (m_isPermanent) {
+		m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(m_scale * 255)));
+		m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (sf::Uint8)(m_scale * 255)));
+		return;
+	}
 	else if (m_fadeOutTimer > sf::Time::Zero) {
 		updateTime(m_fadeOutTimer, frameTime);
 		m_scale = m_fadeOutTimer.asSeconds() / m_fadeTime.asSeconds();
@@ -59,6 +65,10 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 void ScreenOverlay::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_title);
 	renderTarget.draw(m_subtitle);
+}
+
+void ScreenOverlay::setPermanent() {
+	m_isPermanent = true;
 }
 
 void ScreenOverlay::setTitle(const std::string& textKey, const std::string& textType) {
@@ -152,7 +162,7 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 	return spellScreenOverlay;
 }
 
-ScreenOverlay* ScreenOverlay::createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier) {
+ScreenOverlay* ScreenOverlay::createModifierLearnedScreenOverlay(const SpellModifier& modifier) {
 	TextureScreenOverlay* modifierScreenOverlay = new TextureScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
 
 	modifierScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
@@ -174,6 +184,20 @@ ScreenOverlay* ScreenOverlay::createModifierLearnedLearnedScreenOverlay(const Sp
 	modifierScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
 
 	return modifierScreenOverlay;
+}
+
+ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
+	TextureScreenOverlay* gameOverScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
+
+	gameOverScreenOverlay->setTitleColor(COLOR_BAD);
+	gameOverScreenOverlay->setTitleCharacterSize(56);
+
+	gameOverScreenOverlay->setTitle("YouDied");
+
+	gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover);
+	gameOverScreenOverlay->setPermanent();
+
+	return gameOverScreenOverlay;
 }
 
 ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {

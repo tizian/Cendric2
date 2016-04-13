@@ -44,8 +44,6 @@ void CookingWindow::reload() {
 		}
 	}
 
-
-
 	CookingOption cancelOption("", "", -1, nr);
 	cancelOption.deselect();
 	m_options.push_back(cancelOption);
@@ -83,6 +81,7 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 	if (oldOption != m_chosenOption) {
 		m_options[oldOption].deselect();
 		m_options[m_chosenOption].select();
+		g_resourceManager->playSound(m_sound, ResourceID::Sound_gui_menucursor, true);
 	}
 
 	if (chooseOption || g_inputController->isSelected()) {

@@ -48,6 +48,7 @@ void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {
 			hideAll();
+			g_resourceManager->playSound(m_openSound, ResourceID::Sound_gui_openwindow);
 			m_characterInfo->show();
 		}
 		else {
@@ -66,6 +67,7 @@ void WorldInterface::updateSpellbook(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Spellbook)) {
 		if (!m_spellbook->isVisible()) {
 			hideAll();
+			g_resourceManager->playSound(m_openSound, ResourceID::Sound_gui_openwindow);
 			m_spellbook->show();
 		}
 		else {
@@ -84,6 +86,7 @@ void WorldInterface::updateInventory(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Inventory)) {
 		if (!m_inventory->isVisible()) {
 			hideAll();
+			g_resourceManager->playSound(m_openSound, ResourceID::Sound_gui_openwindow);
 			m_inventory->show();
 		}
 		else {
@@ -102,6 +105,7 @@ void WorldInterface::updateQuestLog(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Journal)) {
 		if (!m_questLog->isVisible()) {
 			hideAll();
+			g_resourceManager->playSound(m_openSound, ResourceID::Sound_gui_openwindow);
 			m_questLog->show();
 		}
 		else {

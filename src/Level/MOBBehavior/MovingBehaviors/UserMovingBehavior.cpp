@@ -67,7 +67,8 @@ void UserMovingBehavior::updateAnimation() {
 	// only update animation if we need to
 	if (m_mainChar->getState() != newState || (m_nextIsFacingRight != m_isFacingRight)) {
 		m_isFacingRight = m_nextIsFacingRight;
-		m_mainChar->setState(newState);
-		m_mainChar->setCurrentAnimation(m_mainChar->getAnimation(m_mainChar->getState()), !m_isFacingRight);
+		m_mainChar->setState(newState, false);
+		if (newState != GameObjectState::Dead)
+			m_mainChar->setCurrentAnimation(m_mainChar->getAnimation(m_mainChar->getState()), !m_isFacingRight);
 	}
 }

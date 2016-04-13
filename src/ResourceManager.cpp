@@ -5,7 +5,7 @@ using namespace std;
 
 ResourceManager *g_resourceManager;
 
-ResourceManager::ResourceManager() : m_currentError(ErrorID::VOID, "") {
+ResourceManager::ResourceManager() : m_currentError({ErrorID::VOID, ""}) {
 }
 
 ResourceManager::~ResourceManager() {
@@ -146,10 +146,15 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_Particle_smoke, "res/assets/particles/smoke.png" },
 		{ ResourceID::Texture_Particle_flame, "res/assets/particles/flame.png" },
 		{ ResourceID::Texture_Particle_star, "res/assets/particles/star.png" },
-		{ ResourceID::Sound_spell_fireball, "res/sound/sound_spell_fireball.wav" },
-		{ ResourceID::Sound_tile_water, "res/sound/sound_tile_water.wav" },
-		{ ResourceID::Sound_tile_lever, "res/sound/sound_tile_lever.ogg" },
-		{ ResourceID::Sound_page, "res/sound/sound_page.ogg" }
+		{ ResourceID::Sound_spell_fireball, "res/sound/spell/fireball.ogg" },
+		{ ResourceID::Sound_tile_water, "res/sound/tile/water_splash.ogg" },
+		{ ResourceID::Sound_tile_lever, "res/sound/tile/lever_click.ogg" },
+		{ ResourceID::Sound_tile_waypoint, "res/sound/tile/teleport.ogg" },
+		{ ResourceID::Sound_gui_turnpage, "res/sound/gui/page_turn.ogg" },
+		{ ResourceID::Sound_gui_menucursor, "res/sound/gui/menu_cursor.ogg" },
+		{ ResourceID::Sound_gui_openwindow, "res/sound/gui/window_open.ogg" },
+		{ ResourceID::Sound_item_gold, "res/sound/item/pickup_gold.ogg" },
+		{ ResourceID::Sound_cendric_death, "res/sound/mob/cendric_death.ogg" },
 	});
 
 	// fonts should be always loaded to avoid lags when loading later
@@ -330,10 +335,10 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	}
 }
 
-void ResourceManager::playSound(sf::Sound& sound, ResourceID id) {
+void ResourceManager::playSound(sf::Sound& sound, ResourceID id, bool force) {
 	if (id == ResourceID::VOID) return;
-	// don't play the sound if it's already playing
-	if (sound.getStatus() == sf::SoundSource::Status::Playing) return;
+	// don't play the sound if it's already playing and we're not forcing
+	if (!force && sound.getStatus() == sf::SoundSource::Status::Playing) return;
 	if (m_configuration.isSoundOn) {
 		sound.setBuffer(*getSoundBuffer(id));
 		sound.setVolume(static_cast<float>(m_configuration.volumeSound));
@@ -354,22 +359,21 @@ void ResourceManager::playMusic(sf::Music& music, const std::string& filename) {
 	}
 }
 
-
-std::string ResourceManager::getFilename(ResourceID id) {
-	return getPath(m_fileNames[id]);
-}
-
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {
 	return &m_currentError;
-}
-
-ConfigurationData& ResourceManager::getConfiguration() {
-	return m_configuration;
 }
 
 void ResourceManager::setError(ErrorID id, const string &description) {
 	m_currentError.first = id;
 	m_currentError.second = description;
+}
+
+std::string ResourceManager::getFilename(ResourceID id) {
+	return getPath(m_fileNames[id]);
+}
+
+ConfigurationData& ResourceManager::getConfiguration() {
+	return m_configuration;
 }
 
 void ResourceManager::deleteLevelResources() {
@@ -451,6 +455,8 @@ void ResourceManager::deleteMapResources() {
 	deleteResource(ResourceID::Texture_tile_cooking);
 	deleteResource(ResourceID::Texture_tile_waypoint);
 	deleteResource(ResourceID::Texture_tile_book);
+
+	deleteResource(ResourceID::Sound_tile_waypoint);
 }
 
 void ResourceManager::loadLevelResources() {

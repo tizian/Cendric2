@@ -75,9 +75,14 @@ void AnimatedGameObject::setSpriteOffset(const sf::Vector2f &spriteOffset) {
 }
 
 void AnimatedGameObject::setState(GameObjectState state) {
+	setState(state, true);
+}
+
+void AnimatedGameObject::setState(GameObjectState state, bool updateAnimation) {
 	if (m_state == state) return;
 	GameObject::setState(state);
-	setCurrentAnimation(getAnimation(m_state), false);
+	if (updateAnimation)
+		setCurrentAnimation(getAnimation(m_state), false);
 }
 
 const sf::Vector2f& AnimatedGameObject::getSpriteOffset() const {

@@ -28,6 +28,7 @@ public:
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	// angle is in radian
 	virtual void setSpriteRotation(float angle);
+	void setState(GameObjectState state, bool updateAnimation);
 	void setState(GameObjectState state) override;
 	
 	const Animation* getAnimation(GameObjectState state);
