@@ -158,6 +158,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 		if (oldOption != m_chosenOption) {
 			m_options[oldOption].deselect();
 			m_options[m_chosenOption].select();
+			g_resourceManager->playSound(m_sound, ResourceID::Sound_gui_menucursor, true);
 		}
 	}
 

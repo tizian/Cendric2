@@ -43,8 +43,16 @@ Isa
 <<< Quality Assurance >>>
 Tizian
 
-Placeholder Soundeffects for Fireball and Water Splash
-by Mike Koenig
+<<< Alpha Tester >>>
+Tizian
+Andreas
+Brigitte
+Martin
+Haab
+
+<<< Sound Effects from OpenGameArt.org >>>
+Fireball, Water Splash - Mike Koenig
+Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
 
 Some tiles are based on Celianna''s tilesets
 
@@ -114,8 +122,16 @@ Isa
 <<< Qualitätssicherung >>>
 Tizian
 
-Platzhalter Soundeffekte für Feuerball und Wasser
-von Mike Koenig
+<<< Alpha Tester >>>
+Tizian
+Andreas
+Brigitte
+Martin
+Haab
+
+<<< Sound Effekte von OpenGameArt.org >>>
+Fireball, Water Splash - Mike Koenig
+Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
 
 Einige Tiles basieren auf Celianna''s Tilesets
 
@@ -187,10 +203,14 @@ Tizian
 
 <<< Alpha Tester >>>
 Tizian
+Andreas
+Brigitte
+Martin
+Haab
 
-
-Platzhalter Soundeffekt für de Füürball und''s Wasser
-vom Mike Koenig
+<<< Sound Effekte vo OpenGameArt.org >>>
+Fireball, Water Splash - Mike Koenig
+Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
 
 Gewüssi Tiles basiered uf Celianna''s Tilesets
 

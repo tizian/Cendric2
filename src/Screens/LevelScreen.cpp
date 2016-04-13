@@ -134,24 +134,18 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
-	if (!m_retryButton->isVisible()) {
+
+	// handle pause
+	if (!m_isGameOver && g_inputController->isKeyJustPressed(Key::Escape)) {
+		m_isPaused = !m_isPaused;
+		m_retryButton->setVisible(m_isPaused);
+		m_backToMenuButton->setVisible(m_isPaused);
+		m_resumeButton->setVisible(m_isPaused);
+	}
+
+	if (!m_isPaused) {
 		WorldScreen::execUpdate(frameTime);
-	}
 
-	if (!m_isGameOver && m_retryButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Escape)) {
-		if (m_retryButton->isVisible()) {
-			m_retryButton->setVisible(false);
-			m_backToMenuButton->setVisible(false);
-			m_resumeButton->setVisible(false);
-		}
-		else {
-			m_retryButton->setVisible(true);
-			m_backToMenuButton->setVisible(true);
-			m_resumeButton->setVisible(true);
-		}
-	}
-
-	if (m_isGameOver || !m_retryButton->isVisible()) {
 		// sort Movable Tiles
 		depthSortObjects(GameObjectType::_MovableTile, false);
 		// update objects first for relative velocity
@@ -242,7 +236,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget);
 
-	if (m_retryButton->isVisible()) {
+	if (m_isPaused) {
 		renderTarget.draw(*m_overlaySprite);
 		renderTarget.draw(*m_overlayText);
 	}
@@ -258,14 +252,9 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	if (m_isGameOver || !m_mainChar->isDead()) return;
 
 	m_isGameOver = true;
-	m_overlaySprite->setTexture(*g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
-	m_overlayText->setString(g_textProvider->getText("YouDied"));
-	m_overlayText->setTextStyle(TextStyle::Shadowed);
-	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
+	addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
 	m_retryButton->setVisible(true);
 	m_backToMenuButton->setVisible(true);
-	// update once to set hp bar down
-	m_interface->update(frameTime);
 }
 
 // yes or no form

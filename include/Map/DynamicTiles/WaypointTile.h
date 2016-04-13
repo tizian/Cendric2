@@ -18,4 +18,5 @@ public:
 
 private:
 	int m_spawnPosition = -1;
+	sf::Sound m_sound;
 };

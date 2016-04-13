@@ -58,6 +58,8 @@ private:
 	MerchantInterface* m_merchantInterface = nullptr;
 	sf::Sprite m_speakerSprite;
 	NPC* m_npc;
+	// the menu sound
+	sf::Sound m_sound;
 	std::string m_npcName;
 	std::string m_npcID;
 	std::string m_dialogueTextID;

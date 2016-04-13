@@ -70,6 +70,8 @@ private:
 	// triangle shapes to show that scrolling is possible
 	sf::Sprite m_arrowUp;
 	sf::Sprite m_arrowDown;
+	// the menu sound
+	sf::Sound m_sound;
 	// the time it waits from key active to scrolling
 	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
 	sf::Time m_upActiveTime = sf::Time::Zero;

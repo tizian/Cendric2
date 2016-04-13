@@ -32,6 +32,7 @@ private:
 	bool m_isMouseOver = false;
 	sf::Vector2f m_waypointPosition;
 	BitmapText m_tooltip;
+	sf::Sound m_sound;
 };
 
 // the map overlay, as displayed in a map

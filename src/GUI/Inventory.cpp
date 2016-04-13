@@ -545,6 +545,7 @@ void Inventory::hide() {
 	m_currentClone = nullptr;
 	m_isDragging = false;
 	m_hasDraggingStarted = false;
+	
 }
 
 void Inventory::startTrading(MerchantInterface* _interface) {

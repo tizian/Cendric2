@@ -51,6 +51,7 @@ private:
 	BitmapText m_title;
 	int m_chosenOption = 0;
 	MapScreen* m_screen = nullptr;
+	sf::Sound m_sound;
 	
 	sf::Sprite m_cookingSprite;
 };

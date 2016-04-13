@@ -29,6 +29,7 @@ public:
 	void setSubtitleRaw(const std::string& text);
 	void setSubtitleCharacterSize(int characterSize);
 	void setSubtitleColor(const sf::Color& color);
+	void setPermanent();
 
 	GameObjectType getConfiguredType() const override;
 
@@ -38,10 +39,12 @@ public:
 	static ScreenOverlay* createHintScreenOverlay(const std::string& hintKey);
 	static ScreenOverlay* createPermanentItemScreenOverlay(const Item& item);
 	static ScreenOverlay* createSpellLearnedScreenOverlay(SpellID id);
-	static ScreenOverlay* createModifierLearnedLearnedScreenOverlay(const SpellModifier& modifier);
+	static ScreenOverlay* createModifierLearnedScreenOverlay(const SpellModifier& modifier);
+	static ScreenOverlay* createGameOverScreenOverlay();
 
 protected: 
 	float m_scale;
+	bool m_isPermanent;
 
 	BitmapText m_title;
 	BitmapText m_subtitle;

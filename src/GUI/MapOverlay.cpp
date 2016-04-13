@@ -191,6 +191,7 @@ void WaypointMarker::onRightClick() {
 		m_waypointPosition.x + TILE_SIZE_F / 2.f - bb.width / 2.f,
 		m_waypointPosition.y - bb.height + TILE_SIZE_F / 2.f
 		));
+	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_waypoint, true);
 	m_parent->hide();
 }
 
