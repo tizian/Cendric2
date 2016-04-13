@@ -27,7 +27,7 @@ public:
 private:
 	bool m_isPressed = false;
 
-	sf::RectangleShape m_knob;
+	SlicedSprite m_knob;
 
 	static const float WIDTH;
 	static const float HEIGHT;
