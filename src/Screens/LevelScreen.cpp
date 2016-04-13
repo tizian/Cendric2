@@ -249,12 +249,19 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 
 void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	// handle game over
-	if (m_isGameOver || !m_mainChar->isDead()) return;
+	if (!m_mainChar->isDead()) return;
+	if (m_isGameOver) {
+		if (m_buttonWaitTime == sf::Time::Zero) return;
+		updateTime(m_buttonWaitTime, frameTime);
+		if (m_buttonWaitTime == sf::Time::Zero) {
+			m_retryButton->setVisible(true);
+			m_backToMenuButton->setVisible(true);
+		}
+		return;
+	}
 
 	m_isGameOver = true;
 	addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
-	m_retryButton->setVisible(true);
-	m_backToMenuButton->setVisible(true);
 }
 
 // yes or no form

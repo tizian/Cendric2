@@ -59,8 +59,7 @@ private:
 	sf::Time m_particleTime = sf::seconds(2.f);
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
-	particles::AngledVelocityGenerator* m_velGenerator = nullptr;
-	particles::PointPositionGenerator* m_pointGenerator = nullptr;
+	particles::DiskPositionGenerator* m_posGenerator = nullptr;
 
 	void loadParticleSystem();
 

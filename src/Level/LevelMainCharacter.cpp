@@ -159,8 +159,8 @@ void LevelMainCharacter::loadWeapon() {
 void LevelMainCharacter::setPosition(const sf::Vector2f& pos) {
 	LevelMovableGameObject::setPosition(pos);
 	if (!m_isDead) return;
-	m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2.f;
-	m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height;
+	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width * 2.f;
+	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height / 2.f;
 }
 
 void LevelMainCharacter::setCharacterCore(CharacterCore* core) {
@@ -188,6 +188,7 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 }
 
 void LevelMainCharacter::setDead() {
+	if (m_isDead) return;
 	LevelMovableGameObject::setDead();
 	g_resourceManager->playSound(m_sound, ResourceID::Sound_cendric_death, true);
 }
@@ -307,9 +308,8 @@ void LevelMainCharacter::loadParticleSystem() {
 	m_ps->emitRate = 100.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	m_pointGenerator = posGen;
+	m_posGenerator = m_ps->addGenerator<particles::DiskPositionGenerator>();
+	m_posGenerator->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 5.f;
@@ -328,7 +328,6 @@ void LevelMainCharacter::loadParticleSystem() {
 	velGen->maxAngle = 45.f;
 	velGen->minStartVel = 50.f;
 	velGen->maxStartVel = 70.f;
-	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 2.f;
