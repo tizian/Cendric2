@@ -143,6 +143,19 @@ void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
 	calculatePositions();
 }
 
+void ProgressLog::addReputationAdded(FractionID fraction, int amount) {
+	if (amount <= 0) return;
+	BitmapText progress;
+	progress.setTextStyle(TextStyle::Shadowed);
+	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	progress.setColor(COLOR_GOOD);
+	std::string progressText = g_textProvider->getText(EnumNames::getFractionIDName(fraction)) + ": ";
+	progressText.append("+" + std::to_string(amount));
+	progress.setString(progressText);
+	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
+	calculatePositions();
+}
+
 void ProgressLog::calculatePositions() {
 	float yOffset = YOFFSET;
 	for (auto& it : m_logTexts) {

@@ -1,10 +1,9 @@
 #include "GUI/CharacterInfo.h"
 
-int round_int(float r) {
-	return static_cast<int>((r > 0.0) ? (r + 0.5) : (r - 0.5));
-}
+const sf::Vector2f BUTTON_SIZE = sf::Vector2f(200.f, 40.f);
 
-CharacterInfo::CharacterInfo(const AttributeData* attributes) {
+CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* attributes) {
+	m_core = core;
 	m_attributes = attributes;
 
 	// init text
@@ -36,25 +35,18 @@ CharacterInfo::CharacterInfo(const AttributeData* attributes) {
 	m_attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_attributeText.setColor(COLOR_LIGHT_PURPLE);
 
-	m_title = BitmapText(g_textProvider->getText("CharacterInfo"));
-	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_title.setColor(COLOR_WHITE);
-
 	float width = 3 * GUIConstants::TEXT_OFFSET + 2 * m_namesText.getLocalBounds().width;
-	float height = 3 * GUIConstants::TEXT_OFFSET + m_title.getLocalBounds().height + m_namesText.getLocalBounds().height;
+	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 
-	m_title.setPosition(sf::Vector2f(
-		GUIConstants::LEFT + ((width - m_title.getLocalBounds().width) / 2.f),
-		GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
 	m_namesText.setPosition(sf::Vector2f(
 		GUIConstants::LEFT + GUIConstants::TEXT_OFFSET,
-		m_title.getPosition().y + m_title.getLocalBounds().height + GUIConstants::TEXT_OFFSET));
+		yOffset));
 	m_attributeText.setPosition(sf::Vector2f(
 		GUIConstants::LEFT + width / 2.f,
-		m_title.getPosition().y + m_title.getLocalBounds().height + GUIConstants::TEXT_OFFSET));
+		yOffset));
 
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, width, height);
+	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, width, 0);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
@@ -62,10 +54,37 @@ CharacterInfo::CharacterInfo(const AttributeData* attributes) {
 		GUIConstants::ORNAMENT_COLOR);
 
 	m_window->addCloseButton(std::bind(&CharacterInfo::hide, this));
+
+	reload();
+
+	// init tab bar
+	int nTabs = 2;
+	float barWidth = nTabs * BUTTON_SIZE.x;
+	float barHeight = BUTTON_SIZE.y;
+	float x = GUIConstants::LEFT + 0.5f * (m_window->getSize().x - barWidth);
+	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
+
+	m_tabBar = new TabBar(sf::FloatRect(x, y, barWidth, barHeight), nTabs);
+	m_tabBar->getTabButton(0)->setText("Stats");
+	m_tabBar->getTabButton(1)->setText("Reputation");
+	for (int i = 0; i < nTabs; ++i) {
+		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	}
+
+	// init title
+	m_title.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
+	m_title.setColor(COLOR_WHITE);
+	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_title.setString(g_textProvider->getText("CharacterInfo"));
+	m_title.setPosition(
+		m_window->getPosition().x +
+		m_window->getSize().x / 2 -
+		m_title.getLocalBounds().width / 2, m_title.getPosition().y);
 }
 
 CharacterInfo::~CharacterInfo() {
 	delete m_window;
+	delete m_tabBar;
 }
 
 bool CharacterInfo::isVisible() const {
@@ -75,17 +94,26 @@ bool CharacterInfo::isVisible() const {
 void CharacterInfo::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 	m_window->update(frameTime);
+	m_tabBar->update(frameTime);
 	if (!m_isReloadNeeded) return;
 	reload();
 	m_isReloadNeeded = false;
 }
 
 void CharacterInfo::render(sf::RenderTarget& target) const {
-	if (m_isVisible) {
-		m_window->render(target);
-		target.draw(m_title);
+	if (!m_isVisible) return;
+	m_window->render(target);
+	target.draw(m_title);
+	m_tabBar->render(target);
+
+	if (m_tabBar->getActiveTabIndex() == 0) {
 		target.draw(m_namesText);
 		target.draw(m_attributeText);
+	}
+	else {
+		for (auto& text : m_reputationTexts) {
+			target.draw(text);
+		}
 	}
 }
 
@@ -94,7 +122,12 @@ void CharacterInfo::notifyChange() {
 }
 
 void CharacterInfo::reload() {
-	// update attributes
+	updateAttributes();
+	updateReputation();
+}
+
+void CharacterInfo::updateAttributes() {
+	// health
 	std::string attributes = "";
 	attributes.append(std::to_string(m_attributes->currentHealthPoints));
 	attributes.append("/");
@@ -156,6 +189,34 @@ void CharacterInfo::reload() {
 	m_attributeText.setString(attributes);
 
 	m_window->setWidth(3 * GUIConstants::TEXT_OFFSET + m_namesText.getLocalBounds().width + m_attributeText.getLocalBounds().width);
+	m_window->setHeight(m_namesText.getLocalBounds().height + 5 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y);
+}
+
+void CharacterInfo::updateReputation() {
+	m_reputationTexts.clear();
+
+	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
+	for (auto& rep : m_core->getData().reputationProgress) {
+		BitmapText title;
+		title.setString(g_textProvider->getText(EnumNames::getFractionIDName(rep.first)) + ": " + std::to_string(rep.second));
+		title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+		title.setPosition(2 * GUIConstants::TEXT_OFFSET + GUIConstants::LEFT, yOffset);
+		title.setColor(COLOR_WHITE);
+		m_reputationTexts.push_back(title);
+
+		yOffset += title.getLocalBounds().height * (3 / 2.f);
+
+		BitmapText subtitle;
+		std::string key = EnumNames::getFractionIDName(rep.first) + "_" +
+			(rep.second >= 75 ? "100" : rep.second >= 50 ? "75" : rep.second >= 25 ? "50" : "25");
+		subtitle.setString(g_textProvider->getCroppedText(key, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 2 * GUIConstants::TEXT_OFFSET)));
+		subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+		subtitle.setPosition(2 * GUIConstants::TEXT_OFFSET + GUIConstants::LEFT, yOffset);
+		subtitle.setColor(COLOR_LIGHT_PURPLE);
+		m_reputationTexts.push_back(subtitle);
+
+		yOffset += subtitle.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_M;
+	}
 }
 
 void CharacterInfo::show() {

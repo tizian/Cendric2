@@ -65,10 +65,8 @@ private:
 	void clearAllEntries();
 
 	Window* m_window;
-
+	TabBar* m_tabBar;
 	BitmapText m_title;
-
-	TabBar *m_tabBar;
 
 	std::vector<QuestEntry> m_startedQuests;
 	std::vector<QuestEntry> m_completedQuests;

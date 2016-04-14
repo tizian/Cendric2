@@ -43,6 +43,10 @@ inline float randomFloat(float low, float high) {
 	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX / (high - low)));
 }
 
+inline int round_int(float r) {
+	return static_cast<int>((r > 0.0) ? (r + 0.5) : (r - 0.5));
+}
+
 inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
 	sf::FloatRect intersection;
 	if (!rect1.intersects(rect2, intersection)) return false;

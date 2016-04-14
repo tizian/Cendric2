@@ -41,6 +41,9 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 	case TriggerContentType::QuestStateChange:
 		screen->notifyQuestStateChanged(content.s1, static_cast<QuestState>(content.i1));
 		break;
+	case TriggerContentType::ReputationProgress:
+		screen->notifyReputationAdded(static_cast<FractionID>(content.i1), content.i2);
+		break;
 	case TriggerContentType::MapEntry:
 		screen->exitWorld();
 		screen->getCharacterCore()->setMap(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);

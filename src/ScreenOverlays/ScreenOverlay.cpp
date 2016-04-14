@@ -44,16 +44,11 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 		updateTime(m_fadeInTimer, frameTime);
 		m_scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
 	}
-	if (m_isPermanent) {
-		m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(m_scale * 255)));
-		m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (sf::Uint8)(m_scale * 255)));
-		return;
-	}
-	else if (m_fadeOutTimer > sf::Time::Zero) {
+	else if (!m_isPermanent && m_fadeOutTimer > sf::Time::Zero) {
 		updateTime(m_fadeOutTimer, frameTime);
 		m_scale = m_fadeOutTimer.asSeconds() / m_fadeTime.asSeconds();
 	}
-	else {
+	else if (!m_isPermanent) {
 		setDisposed();
 		return;
 	}

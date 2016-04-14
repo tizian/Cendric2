@@ -12,9 +12,9 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_ingrid", "meat_given")) then
 		DL:addChoice(32, "DL_Choice_ImHungry") --  I'm hungry.
 	end
-	if (not DL:isConditionFulfilled("npc_ingrid", "who_are_you")) then
+	--if (not DL:isConditionFulfilled("npc_ingrid", "who_are_you")) then
 		DL:addChoice(30, "DL_Choice_WhoAreYou") -- Who are you? 
-	end
+	--end
 	if (not DL:isConditionFulfilled("npc_rhendal", "talked") and not DL:isConditionFulfilled("npc_ingrid", "who_am_i")) then
 		if (DL:isConditionFulfilled("npc_edmond", "who_am_i")) then
 			DL:addChoice(40, "DL_Choice_WhereIsElder") -- Do you know where the village elder lives?
@@ -44,6 +44,11 @@ loadDialogue = function(DL)
 	
 	DL:createNPCNode(30, 31, "DL_Ingrid_IAmIngrid") -- I'm Ingrid, the cook of this humble village, responsible to feed all the hungry mouths here. And what brings you here? 
 	DL:addConditionProgress("npc_ingrid", "who_are_you")
+	DL:addReputationProgress("cleric", 10);
+	DL:addReputationProgress("elementalist", 10);
+	DL:addReputationProgress("thief", 10);
+	DL:addReputationProgress("druid", 10);
+	DL:addReputationProgress("necromancer", 10);
 	DL:addNode()
 	
 	DL:createChoiceNode(31)

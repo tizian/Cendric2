@@ -6,7 +6,7 @@
 LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
 m_character(character) {
 	m_inventory = new Inventory(this);
-	m_characterInfo = new CharacterInfo(character->getAttributes());
+	m_characterInfo = new CharacterInfo(m_core, character->getAttributes());
 	m_healthBar = new HealthBar(character->getAttributes());
 	m_quickSlotBar = new QuickSlotBar(this);
 	m_spellbook = new Spellbook(m_core, false);

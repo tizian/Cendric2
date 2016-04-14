@@ -24,6 +24,7 @@ public:
 	void addQuestTargetKilled(const std::string& questID, const std::string& name);
 	void addQuestStateChanged(const std::string& questID, QuestState state);
 	void addQuestDescriptionAdded(const std::string& questID);
+	void addReputationAdded(FractionID fraction, int amount);
 
 private:
 	// a vector filled with texts (and their time to live) that log progress
