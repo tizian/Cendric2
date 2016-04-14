@@ -36,11 +36,6 @@ void Spellbook::init() {
 		{ SpellType::Necromancy, &m_necromancySlots }
 	});
 
-	if (m_tabTypes.size() < 0) {
-		selectTab(m_tabTypes[0]);
-	}
-	
-
 	delete m_weaponWindow;
 	m_weaponWindow = new WeaponWindow(m_core, m_isModifiable);
 	m_weaponWindow->addCloseButton(std::bind(&Spellbook::hide, this));
@@ -80,31 +75,31 @@ void Spellbook::update(const sf::Time& frameTime) {
 		if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != type) {
 			selectTab(type);
 		}
+
+		if (m_currentTab == SpellType::VOID) {
+			// handle gems
+			for (auto& it : m_modifierSlots) {
+				it.update(frameTime);
+				if (it.isClicked()) {
+					selectModifierSlot(&it);
+					return;
+				}
+			}
+		}
+		else {
+			// handle spells
+			for (auto& it : *(m_typeMap[m_currentTab])) {
+				it.first.update(frameTime);
+				if (it.first.isClicked()) {
+					selectSpellSlot(&it.first);
+					return;
+				}
+			}
+		}
 	}
 
 	// update weapon part
 	m_weaponWindow->update(frameTime);
-
-	if (m_currentTab == SpellType::VOID) {
-		// handle gems
-		for (auto& it : m_modifierSlots) {
-			it.update(frameTime);
-			if (it.isClicked()) {
-				selectModifierSlot(&it);
-				return;
-			}
-		}
-	}
-	else {
-		// handle spells
-		for (auto& it : *(m_typeMap[m_currentTab])) {
-			it.first.update(frameTime);
-			if (it.first.isClicked()) {
-				selectSpellSlot(&it.first);
-				return;
-			}
-		}
-	}
 
 	if (!m_isModifiable) return;
 
@@ -326,6 +321,10 @@ void Spellbook::reload() {
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_TWILIGHT);
 			}
 		}
+	}
+
+	if (m_tabTypes.size() > 0) {
+		selectTab(m_tabTypes[0]);
 	}
 }
 
