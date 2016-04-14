@@ -35,7 +35,7 @@ private:
 // A simple ugly scroll bar 
 class ScrollBar : public GameObject {
 public:
-	ScrollBar();
+	ScrollBar(float height);
 
 	void onLeftJustPressed() override;
 	void onLeftClick() override;
@@ -53,7 +53,12 @@ public:
 	float getScrollPosition() const;
 	GameObjectType getConfiguredType() const override;
 
+public:
+	static const float WIDTH;
+
 protected:
+	float m_height;
+
 	bool m_isPressed = false;
 	bool m_isEnabled = true;
 	bool m_isVisible = true;
@@ -70,7 +75,4 @@ protected:
 
 	static const sf::Color BACKGROUND_COLOR;
 	static const sf::Color FILL_COLOR;
-
-	static const float HEIGHT;
-	static const float WIDTH;
 };

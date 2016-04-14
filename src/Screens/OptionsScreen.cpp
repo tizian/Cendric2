@@ -130,8 +130,6 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	button->setOnClick(std::bind(&OptionsScreen::onKeybindings, this));
 	addObject(button);
 
-	
-
 	// back
 	button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
 	button->setText("Back");

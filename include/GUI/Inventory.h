@@ -14,6 +14,7 @@
 class LevelInterface;
 class MapInterface;
 class MerchantInterface;
+class ScrollBar;
 
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
@@ -57,6 +58,10 @@ private:
 
 	BitmapText m_goldText;
 	BitmapText m_selectedTabText;
+
+	SlicedSprite m_scrollWindow;
+
+	ScrollBar* m_scrollBar = nullptr;
 
 	TexturedTabBar* m_tabBar;
 
@@ -103,16 +108,20 @@ private:
 
 	InventoryEquipment* m_equipment = nullptr;
 
-	const int SLOT_COUNT_X = 5;
-	const int SLOT_COUNT_Y = 5;
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 45.f);
+	static const int SLOT_COUNT_X;
+	static const int SLOT_COUNT_Y;
+	
+	static const sf::Vector2f BUTTON_SIZE;
 
-	const float MARGIN = 7.f;
-	const float INVENTORY_LEFT = GUIConstants::LEFT + MARGIN + InventoryEquipment::WIDTH;
-	const float INVENTORY_WIDTH =
-		2 * GUIConstants::TEXT_OFFSET +
-		(SLOT_COUNT_X - 1) * MARGIN +
-		SLOT_COUNT_X * InventorySlot::SIZE;
+	static const float MARGIN;
+
+	static const float INVENTORY_LEFT;
+	static const float SCROLL_WINDOW_LEFT;
+	static const float SCROLL_WINDOW_TOP;
+	static const float SCROLL_WINDOW_WIDTH;
+	static const float SCROLL_WINDOW_HEIGHT;
+
+	static const float INVENTORY_WIDTH;
 
 	std::map<ItemType, std::map<std::string, InventorySlot>*> m_typeMap;
 };

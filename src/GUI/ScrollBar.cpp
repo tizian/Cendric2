@@ -3,18 +3,18 @@
 using namespace std;
 
 const float ScrollBar::WIDTH = 20.f;
-const float ScrollBar::HEIGHT = 300.f;
 
-const sf::Color ScrollBar::BACKGROUND_COLOR = COLOR_BLACK;
+const sf::Color ScrollBar::BACKGROUND_COLOR = COLOR_TRANS_BLACK;
 const sf::Color ScrollBar::FILL_COLOR = COLOR_WHITE;
 
-ScrollBar::ScrollBar() : GameObject() {
+ScrollBar::ScrollBar(float height) : GameObject() {
+	m_height = height;
 	setScrollPosition(0.f);
 
-	m_background.setSize(sf::Vector2f(WIDTH, HEIGHT));
+	m_background.setSize(sf::Vector2f(WIDTH - 4.f, height - 4.f));
 	m_background.setFillColor(BACKGROUND_COLOR);
 
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border), COLOR_WHITE, WIDTH, HEIGHT);
+	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border), COLOR_WHITE, WIDTH, height);
 
 	setBoundingBox(m_background.getGlobalBounds());
 	setInputInDefaultView(true);
@@ -47,7 +47,7 @@ void ScrollBar::setScrollPosition(float pos) {
 	m_scrollPosition = pos;
 
 	// update knob
-	float yPos = m_scrollPosition * HEIGHT;
+	float yPos = m_scrollPosition * m_height;
 	m_knob.setPosition(sf::Vector2f(getBoundingBox()->left + 0.5f * WIDTH, getBoundingBox()->top + yPos));
 }
 
@@ -73,12 +73,12 @@ void ScrollBar::handleDragAndDrop() {
 float ScrollBar::calculateScrollPosition(float mousePosY) const {
 	float yOffset = mousePosY - getBoundingBox()->top;
 	// map the offset onto the values
-	return yOffset / HEIGHT;
+	return yOffset / m_height;
 }
 
 void ScrollBar::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
-	m_background.setPosition(pos);
+	m_background.setPosition(sf::Vector2f(pos.x + 2.f, pos.y + 2.f));
 	m_border.setPosition(pos);
 	setScrollPosition(m_scrollPosition);
 }
@@ -116,13 +116,14 @@ GameObjectType ScrollBar::getConfiguredType() const {
 // SLIDER KNOB
 
 const float ScrollBarKnob::WIDTH = 30.f;
-const float ScrollBarKnob::HEIGHT = 13.f;
+const float ScrollBarKnob::HEIGHT = 20.f;
 
 ScrollBarKnob::ScrollBarKnob() : GameObject() {
 	m_knob.setSize(sf::Vector2f(WIDTH, HEIGHT));
 	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border));
 
 	setBoundingBox(m_knob.getLocalBounds());
+	setInputInDefaultView(true);
 }
 
 void ScrollBarKnob::onLeftJustPressed() {
@@ -140,7 +141,6 @@ bool ScrollBarKnob::isPressed() const {
 }
 
 void ScrollBarKnob::onMouseOver() {
-
 }
 
 void ScrollBarKnob::render(sf::RenderTarget& renderTarget) {

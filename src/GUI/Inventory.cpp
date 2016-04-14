@@ -5,6 +5,22 @@
 #include "Map/MerchantInterface.h"
 #include "GUI/GUIConstants.h"
 #include "GUI/SlotClone.h"
+#include "GUI/ScrollBar.h"
+
+const int Inventory::SLOT_COUNT_X = 5;
+const int Inventory::SLOT_COUNT_Y = 6;
+
+const float Inventory::MARGIN = 7.f;
+
+const sf::Vector2f Inventory::BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 45.f);
+
+const float Inventory::SCROLL_WINDOW_LEFT = GUIConstants::TEXT_OFFSET;
+const float Inventory::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * MARGIN + BUTTON_SIZE.y;
+const float Inventory::SCROLL_WINDOW_WIDTH = SLOT_COUNT_X * InventorySlot::SIZE + (SLOT_COUNT_X - 1) * MARGIN + 4 * MARGIN + ScrollBar::WIDTH;
+const float Inventory::SCROLL_WINDOW_HEIGHT = SLOT_COUNT_Y * InventorySlot::SIZE + (SLOT_COUNT_Y - 1) * MARGIN+ 4 * MARGIN;
+
+const float Inventory::INVENTORY_LEFT = GUIConstants::LEFT + MARGIN + InventoryEquipment::WIDTH;
+const float Inventory::INVENTORY_WIDTH = SCROLL_WINDOW_WIDTH + 2 * SCROLL_WINDOW_LEFT;
 
 Inventory::Inventory(LevelInterface* _interface) {
 	m_levelInterface = _interface;
@@ -78,6 +94,12 @@ void Inventory::init() {
 
 	selectTab(ItemType::Equipment_weapon);
 
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollWindow.setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP));
+
+	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT);
+	m_scrollBar->setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, GUIConstants::TOP + SCROLL_WINDOW_TOP));
+
 	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
 	reload();
 }
@@ -89,6 +111,7 @@ Inventory::~Inventory() {
 	delete m_equipment;
 	delete m_currentClone;
 	delete m_tabBar;
+	delete m_scrollBar;
 	clearAllSlots();
 }
 
@@ -186,6 +209,7 @@ void Inventory::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
 	m_window->update(frameTime);
+	m_scrollBar->update(frameTime);
 
 	// check whether an item was selected
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
@@ -379,6 +403,9 @@ void Inventory::render(sf::RenderTarget& target) {
 	if (m_currentClone != nullptr) {
 		m_currentClone->render(target);
 	}
+
+	target.draw(m_scrollWindow);
+	m_scrollBar->render(target);
 }
 
 void Inventory::convertItem(const Item& item) {
@@ -510,15 +537,17 @@ void Inventory::reload() {
 }
 
 void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slots) {
-	float yOffset = GUIConstants::TOP + 2 * GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET + GUIConstants::CHARACTER_SIZE_M + 2 * MARGIN + BUTTON_SIZE.y;
-	float xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET;
+	float xOffsetStart = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET + 2 * MARGIN;
+
+	float yOffset = GUIConstants::TOP + SCROLL_WINDOW_TOP + InventorySlot::ICON_OFFSET + 2 * MARGIN;
+	float xOffset = xOffsetStart;
 	int y = 1;
 	int x = 1;
 	for (auto& it : slots) {
 		it.second.setPosition(sf::Vector2f(xOffset, yOffset));
 		if (x + 1 > SLOT_COUNT_X) {
 			x = 1;
-			xOffset = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET;
+			xOffset = xOffsetStart;
 			y++;
 			yOffset += MARGIN + InventorySlot::SIZE;
 		}
