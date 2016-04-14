@@ -3,7 +3,7 @@
 using namespace std;
 
 const float Slider::WIDTH = 300.f;
-const float Slider::HEIGHT = 17.f;
+const float Slider::HEIGHT = 18.f;
 const float Slider::BORDER_OFFSET = 6.f;
 
 const sf::Color Slider::BACKGROUND_COLOR = COLOR_BLACK;
