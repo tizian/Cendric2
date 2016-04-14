@@ -44,6 +44,10 @@ void WorldInterface::reloadCharacterInfo() {
 	m_characterInfo->notifyChange();
 }
 
+void WorldInterface::reloadSpellBook() {
+	m_spellbook->reload();
+}
+
 void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {

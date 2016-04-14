@@ -24,6 +24,8 @@ public:
 	virtual void reloadQuestLog();
 	// reload the character info
 	virtual void reloadCharacterInfo();
+	// reload the spellbook
+	virtual void reloadSpellBook();
 
 	virtual void render(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);
