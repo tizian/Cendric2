@@ -8,7 +8,9 @@ const sf::Color ScrollBar::BACKGROUND_COLOR = COLOR_TRANS_BLACK;
 const sf::Color ScrollBar::FILL_COLOR = COLOR_WHITE;
 
 ScrollBar::ScrollBar(float height) : GameObject() {
-	m_height = height;
+	m_discreteSteps = 1;
+
+	m_height = height - ScrollBarKnob::HEIGHT;
 	setScrollPosition(0.f);
 
 	m_background.setSize(sf::Vector2f(WIDTH - 4.f, height - 4.f));
@@ -31,23 +33,47 @@ void ScrollBar::onLeftClick() {
 
 		// update the position of the slider if it was clicked.
 		sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
+		float sign;
 		if (mousePos.y > m_knob.getPosition().y) {
-			setScrollPosition(m_scrollPosition + 0.1f);
+			sign = 1.f;
 		}
 		else {
-			setScrollPosition(m_scrollPosition - 0.1f);
+			sign = -1.f;
+		}
+
+		if (m_discreteSteps >= 2) {
+			float delta = 1.f / (m_discreteSteps - 1);
+			setScrollPosition(m_scrollPosition + sign * delta);
+		}
+		else {
+			setScrollPosition(m_scrollPosition + sign * 0.1f);
 		}
 	}
+}
+
+void ScrollBar::setDiscreteSteps(int steps) {
+	m_discreteSteps = steps;
 }
 
 void ScrollBar::setScrollPosition(float pos) {
 	if (pos < 0.f) pos = 0.f;
 	if (pos > 1.f) pos = 1.f;
+	
+	float snappedPosition = pos;
 
-	m_scrollPosition = pos;
+	if (m_discreteSteps >= 2) {
+		float delta = 1.f / (m_discreteSteps - 1);
+		int floored = std::floor(pos / delta);
+		snappedPosition = floored * delta;
+		if (std::fmod(pos, delta) >= 0.5f * delta) {
+			snappedPosition += delta;
+		}
+	}
+
+	m_scrollPosition = snappedPosition;
 
 	// update knob
-	float yPos = m_scrollPosition * m_height;
+	float yPos = 0.5f * ScrollBarKnob::HEIGHT + m_scrollPosition * m_height;
 	m_knob.setPosition(sf::Vector2f(getBoundingBox()->left + 0.5f * WIDTH, getBoundingBox()->top + yPos));
 }
 
@@ -62,7 +88,10 @@ void ScrollBar::render(sf::RenderTarget& renderTarget) {
 	if (!m_isVisible) return;
 	renderTarget.draw(m_background);
 	renderTarget.draw(m_border);
-	m_knob.render(renderTarget);
+
+	if (m_isEnabled) {
+		m_knob.render(renderTarget);
+	}
 }
 
 void ScrollBar::handleDragAndDrop() {
@@ -71,7 +100,7 @@ void ScrollBar::handleDragAndDrop() {
 }
 
 float ScrollBar::calculateScrollPosition(float mousePosY) const {
-	float yOffset = mousePosY - getBoundingBox()->top;
+	float yOffset = mousePosY - getBoundingBox()->top - 0.5f * ScrollBarKnob::HEIGHT;
 	// map the offset onto the values
 	return yOffset / m_height;
 }

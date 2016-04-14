@@ -23,13 +23,14 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 
+public:
+	static const float WIDTH;
+	static const float HEIGHT;
+
 private:
 	bool m_isPressed = false;
 
 	sf::RectangleShape m_knob;
-
-	static const float WIDTH;
-	static const float HEIGHT;
 };
 
 // A simple ugly scroll bar 
@@ -48,6 +49,8 @@ public:
 	void setVisible(bool value);
 	void setScrollPosition(float value);
 
+	void setDiscreteSteps(int steps);	// Only effective if greater or equal to 2
+
 	bool isEnabled() const;
 	bool isVisible() const;
 	float getScrollPosition() const;
@@ -58,6 +61,8 @@ public:
 
 protected:
 	float m_height;
+
+	int m_discreteSteps;
 
 	bool m_isPressed = false;
 	bool m_isEnabled = true;

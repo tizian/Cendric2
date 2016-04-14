@@ -99,6 +99,7 @@ void Inventory::init() {
 
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT);
 	m_scrollBar->setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, GUIConstants::TOP + SCROLL_WINDOW_TOP));
+	m_scrollBar->setDiscreteSteps(5);	// TODO: Change
 
 	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
 	reload();
