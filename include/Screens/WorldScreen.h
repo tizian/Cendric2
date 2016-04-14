@@ -39,6 +39,8 @@ public:
 	void notifySpellLearned(SpellID id);
 	// notify modifier learned -> add overlay and add to core.
 	void notifyModifierLearned(const SpellModifier& modifier);
+	// notify reputation added
+	void notifyReputationAdded(FractionID fraction, int amount);
 	// reload all triggers, based on their conditions
 	void reloadTriggers();
 	// reloads a certain trigger

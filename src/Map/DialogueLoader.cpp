@@ -22,6 +22,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isConditionFulfilled", &DialogueLoader::isConditionFulfilled)
 		.addFunction("isQuestConditionFulfilled", &DialogueLoader::isQuestConditionFulfilled)
 		.addFunction("hasItem", &DialogueLoader::hasItem)
+		.addFunction("getReputation", &DialogueLoader::getReputation)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
@@ -31,6 +32,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
 		.addFunction("addQuestDescription", &DialogueLoader::addQuestDescription)
 		.addFunction("addConditionProgress", &DialogueLoader::addConditionProgress)
+		.addFunction("addReputationProgress", &DialogueLoader::addReputationProgress)
 		.addFunction("addHint", &DialogueLoader::addHint)
 		.addFunction("addItem", &DialogueLoader::addItem)
 		.addFunction("equipItem", &DialogueLoader::equipItem)
@@ -142,6 +144,23 @@ void DialogueLoader::addConditionProgress(const std::string& conditionType, cons
 	m_currentNode->content.push_back(content);
 }
 
+void DialogueLoader::addReputationProgress(const std::string& fractionID, int amount) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot add reputation: no node created.");
+		return;
+	}
+	FractionID fraction = resolveFractionID(fractionID);
+	if (fraction == FractionID::VOID || amount < 0) {
+		g_logger->logError("DialogueLoader", "Fraction id not recognized or reputation amount < 0");
+		return;
+	}
+
+	TriggerContent content(TriggerContentType::ReputationProgress);
+	content.i1 = static_cast<int>(fraction);
+	content.i2 = amount;
+	m_currentNode->content.push_back(content);
+}
+
 void DialogueLoader::addHint(const std::string& hint) {
 	if (m_currentNode == nullptr) {
 		g_logger->logError("DialogueLoader", "Cannot add hint: no node created.");
@@ -178,6 +197,15 @@ bool DialogueLoader::isQuestConditionFulfilled(const std::string& quest, const s
 		return false;
 	}
 	return m_core->isQuestConditionFulfilled(quest, condition);
+}
+
+int DialogueLoader::getReputation(const std::string& fractionID) const {
+	FractionID frac = resolveFractionID(fractionID);
+	if (frac == FractionID::VOID) {
+		g_logger->logError("DialogueLoader", "Reputation could not be queried, fraction id not recognized");
+		return false;
+	}
+	return m_core->getReputation(frac);
 }
 
 bool DialogueLoader::hasItem(const std::string& item, int amount) const {

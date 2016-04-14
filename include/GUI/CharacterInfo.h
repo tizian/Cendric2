@@ -4,12 +4,15 @@
 #include "Level/LevelMainCharacter.h"
 #include "Window.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/TabBar.h"
+#include "Enums/EnumNames.h"
 
-// the character info, as displayed in a level
-// it takes its information from an attribute bean (of the level main char or the character core)
+// the character info, as displayed in a world
+// it is seperated in two parts, the reputation and the stats.
+// for the attributes, it takes them directly from the level main character (level) or the core (map)
 class CharacterInfo {
 public:
-	CharacterInfo(const AttributeData* attributes);
+	CharacterInfo(const CharacterCore* core, const AttributeData* attributes);
 	~CharacterInfo();
 
 	void show();
@@ -23,14 +26,20 @@ public:
 	void notifyChange();
 
 private:
-	// reloads the character info text, depending on the main char
 	void reload();
+	void updateAttributes();
+	void updateReputation();
+
+private:
+	const CharacterCore* m_core;
 	const AttributeData* m_attributes;
 	bool m_isVisible = false;
 	bool m_isReloadNeeded = true;
 
 	Window* m_window = nullptr;
+	TabBar* m_tabBar;
 	BitmapText m_title;
 	BitmapText m_namesText;
 	BitmapText m_attributeText;
+	std::vector<BitmapText> m_reputationTexts;
 };

@@ -21,6 +21,7 @@ public:
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const;
 	bool hasItem(const std::string& item, int amount) const;
+	int getReputation(const std::string& fractionID) const;
 
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);
@@ -34,6 +35,7 @@ public:
 	void addQuestProgress(const std::string& questID, const std::string& progress);
 	void addQuestDescription(const std::string& questID, int descriptionID);
 	void addConditionProgress(const std::string& conditionType, const std::string& condition);
+	void addReputationProgress(const std::string& fractionID, int amount);
 	void addHint(const std::string& hint);
 	void addItem(const std::string& itemID, int amount);
 	void equipItem(const std::string& itemID);

@@ -107,6 +107,13 @@ void WorldScreen::notifyConditionAdded(const std::string& conditionType, const s
 	reloadTriggers();
 }
 
+void WorldScreen::notifyReputationAdded(FractionID fraction, int amount) {
+	if (amount < 0) return;
+	getCharacterCore()->addReputation(fraction, amount);
+	m_progressLog->addReputationAdded(fraction, amount);
+	m_interface->reloadCharacterInfo();
+}
+
 void WorldScreen::reloadTriggers() {
 	for (GameObject* go : *getObjects(GameObjectType::_Overlay)) {
 		Trigger* trigger = dynamic_cast<Trigger*>(go);

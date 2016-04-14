@@ -402,6 +402,23 @@ const WeatherData* CharacterCore::getWeather(const std::string& worldID) const {
 	return &m_data.currentWeather.at(worldID);
 }
 
+void CharacterCore::addReputation(FractionID fraction, int amount) {
+	if (fraction == FractionID::VOID || amount < 0) return;
+
+	if (m_data.reputationProgress.find(fraction) == m_data.reputationProgress.end()) {
+		m_data.reputationProgress.insert({ fraction, 0 });
+	}
+
+	m_data.reputationProgress.at(fraction) = std::min(100, m_data.reputationProgress.at(fraction) + amount);
+}
+
+int CharacterCore::getReputation(FractionID fraction) const {
+	if (m_data.reputationProgress.find(fraction) == m_data.reputationProgress.end())
+		return 0;
+
+	return m_data.reputationProgress.at(fraction);
+}
+
 const AttributeData& CharacterCore::getTotalAttributes() const {
 	return m_totalAttributes;
 }

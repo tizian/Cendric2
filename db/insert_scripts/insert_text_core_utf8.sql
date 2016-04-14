@@ -144,6 +144,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Quickslot2','
 INSERT INTO text (text_id, english, german, swiss_german) values ('Range','Range','Reichweite','Riichwiiti');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Reduction','Reduction','Verminderung','Verminderig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Reflection','Reflection','Reflektion','Abpraller');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Reputation','Reputation','Ruf','Ruef');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Reset','Reset','Zurücksetzen','Zruggsetze');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Resume','Resume','Spiel fortsetzen','Zrugg zum Spiel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Save','Save','Speichern','Speichere');
@@ -194,6 +195,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('SpellUnlockDe
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellWindGust','Wind Gust','Windstoss','Windstoss');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellWindGustDesc','A wind gust that is able to shift certain objects.','Ein Windstoss der gewisse Objekte verschieben kann.','En Windstoss wo gwüssi Objekt verschiebe chan.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('StartGame','Start Game','Spiel starten','Spiel starte');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Stats','Stats','Statuswerte','Statuswert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Strength','Strength','Stärke','Stärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SwissGerman','Swiss German','Schweizerdeutsch','Schwiizerdüütsch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ThirdSpell','3. Spell','3. Zauber','3. Zauber');

@@ -53,6 +53,7 @@ loadDialogue = function(DL)
 	else
 		DL:createNPCNode(0, 1, "DL_Rhendal_Hello") -- Hello, young man. What brings you into my humble home?
 		DL:addConditionProgress("npc_rhendal", "talked")
+		DL:addReputationProgress("druid", 0);
 		DL:addNode()
 		
 		DL:createChoiceNode(1)
