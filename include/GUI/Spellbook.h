@@ -49,7 +49,8 @@ private:
 	BitmapText m_selectedTabText;
 	std::vector<BitmapText> m_modifierTexts;
 
-	TexturedTabBar* m_tabBar;
+	TexturedTabBar* m_tabBar = nullptr;
+	std::vector<SpellType> m_tabTypes;
 
 	std::vector<ModifierSlot> m_modifierSlots;
 	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_elementalSlots;

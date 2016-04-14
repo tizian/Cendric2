@@ -28,26 +28,6 @@ void Spellbook::init() {
 	m_selectedTabText.setColor(COLOR_WHITE);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	// tabbar
-	int nTabs = 5;
-	float width = nTabs * BUTTON_SIZE.x;
-	float height = BUTTON_SIZE.y;
-	float x = GUIConstants::LEFT + 0.5f * (Spellbook::WIDTH - width);
-	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
-
-	m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
-
-	m_tabBar->getTabButton(0)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_gems), sf::IntRect(50, 0, 50, 50));
-	m_tabBar->getTabButton(1)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_elemental), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(1)->setTextureColor(COLOR_ELEMENTAL);
-	m_tabBar->getTabButton(2)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_divine), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(2)->setTextureColor(COLOR_DIVINE);
-	m_tabBar->getTabButton(3)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_necromancy), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(3)->setTextureColor(COLOR_NECROMANCY);
-	m_tabBar->getTabButton(4)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight), sf::IntRect(50, 50, 400, 400));
-	m_tabBar->getTabButton(4)->setTextureColor(COLOR_TWILIGHT);
-
-
 	// fill the helper map
 	m_typeMap.insert({
 		{ SpellType::Twilight, &m_twilightSlots },
@@ -56,7 +36,10 @@ void Spellbook::init() {
 		{ SpellType::Necromancy, &m_necromancySlots }
 	});
 
-	selectTab(SpellType::VOID);
+	if (m_tabTypes.size() < 0) {
+		selectTab(m_tabTypes[0]);
+	}
+	
 
 	delete m_weaponWindow;
 	m_weaponWindow = new WeaponWindow(m_core, m_isModifiable);
@@ -89,27 +72,14 @@ void Spellbook::clearAllSlots() {
 void Spellbook::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	m_tabBar->update(frameTime);
-	int activeIndex = m_tabBar->getActiveTabIndex();
-	SpellType type;
-	if (activeIndex == 0) {
-		type = SpellType::VOID;
-	}
-	else if (activeIndex == 1) {
-		type = SpellType::Elemental;
-	}
-	else if (activeIndex == 2) {
-		type = SpellType::Divine;
-	}
-	else if (activeIndex == 3) {
-		type = SpellType::Necromancy;
-	}
-	else if (activeIndex == 4) {
-		type = SpellType::Twilight;
-	}
+	if (m_tabBar) {
+		m_tabBar->update(frameTime);
+		int activeIndex = m_tabBar->getActiveTabIndex();
+		SpellType type = m_tabTypes[activeIndex];
 
-	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != type) {
-		selectTab(type);
+		if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != type) {
+			selectTab(type);
+		}
 	}
 
 	// update weapon part
@@ -228,26 +198,31 @@ void Spellbook::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
 	m_window->render(target);
-	target.draw(m_selectedTabText);
 
-	if (m_currentTab == SpellType::VOID) {
-		for (auto& it : m_modifierSlots) {
-			it.render(target);
+	if (m_tabBar) {
+	
+		target.draw(m_selectedTabText);
+
+		m_tabBar->render(target);
+
+		if (m_currentTab == SpellType::VOID) {
+			for (auto& it : m_modifierSlots) {
+				it.render(target);
+			}
+			for (auto& it : m_modifierTexts) {
+				target.draw(it);
+			}
 		}
-		for (auto& it : m_modifierTexts) {
-			target.draw(it);
+		else {
+			for (auto& it : *m_typeMap[m_currentTab]) {
+				it.first.render(target);
+				it.first.renderAfterForeground(target);
+				target.draw(it.second.first);
+				target.draw(it.second.second);
+			}
 		}
 	}
-	else {
-		for (auto& it : *m_typeMap[m_currentTab]) {
-			it.first.render(target);
-			it.first.renderAfterForeground(target);
-			target.draw(it.second.first);
-			target.draw(it.second.second);
-		}
-	}
-
-	m_tabBar->render(target);
+	
 
 	m_weaponWindow->render(target);
 
@@ -303,6 +278,55 @@ void Spellbook::reload() {
 
 	// reload weapon
 	m_weaponWindow->reload();
+
+	// Setup tabs
+	m_tabTypes.clear();
+	if (m_core->getData().modfiersLearned.size() > 0) {
+		m_tabTypes.push_back(SpellType::VOID);	// SpellType::VOID for modifier tab
+	}
+	for (int i = static_cast<int>(SpellType::VOID) + 1; i < static_cast<int>(SpellType::Meta); ++i) {
+		SpellType spellType = static_cast<SpellType>(i);
+		if (m_core->getData().spellsLearned.count(spellType) > 0) {
+			m_tabTypes.push_back(spellType);
+		}
+	}
+
+	int nTabs = static_cast<int>(m_tabTypes.size());
+	float width = nTabs * BUTTON_SIZE.x;
+	float height = BUTTON_SIZE.y;
+	float x = GUIConstants::LEFT + 0.5f * (Spellbook::WIDTH - width);
+	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
+
+	if (m_tabBar) {
+		delete m_tabBar;
+		m_tabBar = nullptr;
+	}
+
+	if (nTabs > 0) {
+		m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
+
+		for (int i = 0; i < nTabs; ++i) {
+			if (m_tabTypes[i] == SpellType::VOID) {
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_gems), sf::IntRect(50, 0, 50, 50));
+			}
+			else if (m_tabTypes[i] == SpellType::Elemental) {
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_elemental), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTextureColor(COLOR_ELEMENTAL);
+			}
+			else if (m_tabTypes[i] == SpellType::Divine) {
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_divine), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTextureColor(COLOR_DIVINE);
+			}
+			else if (m_tabTypes[i] == SpellType::Necromancy) {
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_necromancy), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTextureColor(COLOR_NECROMANCY);
+			}
+			else if (m_tabTypes[i] == SpellType::Twilight) {
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTextureColor(COLOR_TWILIGHT);
+			}
+		}
+	}
 }
 
 void Spellbook::calculateModifierSlots() {
