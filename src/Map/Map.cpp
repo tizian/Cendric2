@@ -16,6 +16,11 @@ bool Map::load(const std::string& id, WorldScreen* screen) {
 		return false;
 	}
 
+	// adjust weather
+	if (const WeatherData* weather = m_screen->getCharacterCore()->getWeather(id)) {
+		m_mapData.dimming = weather->dimming;
+	}
+
 	// load map
 	m_backgroundTileMap.load(m_mapData, m_mapData.backgroundTileLayers);
 	m_lightedForegroundTileMap.load(m_mapData, m_mapData.lightedForegroundTileLayers);

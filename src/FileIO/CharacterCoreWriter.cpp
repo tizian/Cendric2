@@ -1,4 +1,5 @@
 #include "FileIO/CharacterCoreWriter.h"
+#include "Enums/EnumNames.h"
 
 using namespace std;
 
@@ -44,9 +45,11 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeQuestProgressConditions(data);
 		savefile << writeQuestProgressDescription(data);
 		savefile << writeProgressConditions(data);
+		savefile << writeReputationProgress(data);
 		savefile << writeMerchandStates(data);
 		savefile << writeSpellsLearned(data);
 		savefile << writeModifiersLearned(data);
+		savefile << writeWeather(data);
 
 		savefile.close();
 	}
@@ -259,6 +262,38 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 		quests.append(quest);
 	}
 	return quests;
+}
+
+std::string CharacterCoreWriter::writeReputationProgress(const CharacterCoreData& data) const {
+	string reputationProgress = "# reputation progress:\n";
+
+	for (auto& it : data.reputationProgress) {
+		string reputation = string(REPUTATION_PROGRESS);
+		reputation.append(":");
+		reputation.append(EnumNames::getFractionIDName(it.first));
+		reputation.append(",");
+		reputation.append(to_string(it.second));
+		reputation.append("\n");
+		reputationProgress.append(reputation);
+	}
+	return reputationProgress;
+}
+
+std::string CharacterCoreWriter::writeWeather(const CharacterCoreData& data) const {
+	string currentWeather = "# current weather:\n";
+
+	for (auto& it : data.currentWeather) {
+		string weather = string(WEATHER);
+		weather.append(":");
+		weather.append(it.first);
+		weather.append(",");
+		weather.append(to_string(it.second.dimming));
+		weather.append(",");
+		weather.append(it.second.weather);
+		weather.append("\n");
+		currentWeather.append(weather);
+	}
+	return currentWeather;
 }
 
 std::string CharacterCoreWriter::writeMerchandStates(const CharacterCoreData& data) const {

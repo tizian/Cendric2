@@ -33,6 +33,8 @@ protected:
 	const char* PROGRESS_CONDITION = "progress.condition";
 	const char* SPELL_LEARNED = "spell.learned";
 	const char* MODIFIER_LEARNED = "modifier.learned";
+	const char* REPUTATION_PROGRESS = "reputation.progress";
+	const char* WEATHER = "weather";
 
 	// equipment & items
 	const char* GOLD = "gold";

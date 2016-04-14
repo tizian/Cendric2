@@ -270,6 +270,40 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(mapEntry.c_str());
 					trigger.content.push_back(content);
 				}
+				else if (name.compare("weather") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, hint value property not found.");
+						return false;
+					}
+
+					std::string weatherString = textAttr;
+
+					size_t pos = 0;
+					if ((pos = weatherString.find(",")) == std::string::npos) {
+						logError("XML file could not be read, weather trigger value must be a string (world id) and the dimming (int between 0 and 100) and the weather (possibly empty), separated by commas.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::Weather);
+					content.s1 = weatherString.substr(0, pos);
+					weatherString.erase(0, pos + 1);
+
+					if ((pos = weatherString.find(",")) == std::string::npos) {
+						logError("XML file could not be read, weather trigger value must be a string (world id) and the dimming (int between 0 and 100) and the weather (possibly empty), separated by commas.");
+						return false;
+					}
+					content.i1 = std::atoi(weatherString.substr(0, pos).c_str());
+					if (content.i1 < 0 || content.i2 > 100) {
+						logError("XML file could not be read, weather trigger dimming must be an int between 0 and 100");
+						return false;
+					}
+
+					weatherString.erase(0, pos + 1);
+					content.s2 = weatherString;
+
+					trigger.content.push_back(content);
+				}
 				else if (name.compare("persistent") == 0) {
 					trigger.isPersistent = true;
 				}

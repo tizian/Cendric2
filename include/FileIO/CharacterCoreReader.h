@@ -39,8 +39,10 @@ private:
 	bool readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressDescription(char* start, char* end, CharacterCoreData& data) const;
 	bool readProgressConditions(char* start, char* end, CharacterCoreData& data) const;
+	bool readReputationProgress(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedSpells(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const;
+	bool readWeather(char* start, char* end, CharacterCoreData& data) const;
 
 	bool readLevelStateLayer(char* start, char* end, std::set<int>& layer, std::string& id) const;
 

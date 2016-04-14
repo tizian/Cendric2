@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="40" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="112">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="40" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="113">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/brokenbridge/layer_inf.png,3.0,res/level/brokenbridge/layer_3.png,2.0,res/level/brokenbridge/layer_2.png"/>
   <property name="dimming" value="0.2"/>
   <property name="name" value="BrokenBridge"/>
   <property name="tilesetpath" value="res/level/brokenbridge/tileset_level_brokenbridge.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_brokenbridge" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="399" columns="21">
+ <tileset firstgid="1" name="tileset_level_brokenbridge" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="399">
   <image source="tileset_level_brokenbridge.png" width="1100" height="1000"/>
   <tile id="318">
    <animation>
@@ -16,13 +16,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="400" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
+ <tileset firstgid="400" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="600" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
+ <tileset firstgid="600" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="610" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="610" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -954,6 +954,11 @@
   <object id="104" x="2129" y="412" width="38" height="37">
    <properties>
     <property name="hint" value="Modifier"/>
+   </properties>
+  </object>
+  <object id="112" x="212" y="1475" width="75" height="66">
+   <properties>
+    <property name="weather" value="res/map/meadows/meadows.tmx,80,rain"/>
    </properties>
   </object>
  </objectgroup>

@@ -11,6 +11,7 @@
 #include "Structs/SpellModifier.h"
 #include "Structs/AttributeData.h"
 #include "Structs/MerchantData.h"
+#include "Structs/WeatherData.h"
 
 struct CharacterCoreData {
 	// savegame attributes
@@ -40,11 +41,14 @@ struct CharacterCoreData {
 	std::map<std::string, std::set<int>> questDescriptionProgress;
 
 	// reputation progress
-
+	std::map<FractionID, int> reputationProgress;
 
 	// learning progress
 	std::map<SpellType, std::set<SpellID>> spellsLearned;
 	std::map<SpellModifierType, int> modfiersLearned;
+
+	// weather
+	std::map<std::string, WeatherData> currentWeather;
 
 	// base attributes
 	AttributeData attributes;
@@ -82,8 +86,10 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, std::map<std::string, int>>(),
 	std::map<std::string, std::set<std::string>>(),
 	std::map<std::string, std::set<int>>(),
+	std::map<FractionID, int>(),
 	std::map<SpellType, std::set<SpellID>>(),
 	std::map<SpellModifierType, int>(),
+	std::map<std::string, WeatherData>(),
 	ZERO_ATTRIBUTES,
 	0,
 	std::vector<std::pair<SpellID, std::vector<SpellModifier>>>(),

@@ -9,6 +9,7 @@
 #include "Structs/SpellModifier.h"
 #include "Enums/QuestState.h"
 #include "Enums/DamageType.h"
+#include "Enums/FractionID.h"
 
 // pure static class used to resolve enum names.
 class EnumNames {
@@ -25,6 +26,25 @@ public:
 			return "German";
 		case Language::Lang_EN:
 			return "English";
+		}
+	}
+
+	static std::string getFractionIDName(FractionID id) {
+		switch (id) {
+		default:
+		case FractionID::MAX:
+		case FractionID::VOID:
+			return "Unknown";
+		case FractionID::Cleric:
+			return "cleric";
+		case FractionID::Druid:
+			return "druid";
+		case FractionID::Elementalist:
+			return "elementalist";
+		case FractionID::Necromancer:
+			return "necromancer";
+		case FractionID::Thief:
+			return "thief";
 		}
 	}
 

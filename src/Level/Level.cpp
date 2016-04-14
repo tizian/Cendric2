@@ -45,6 +45,11 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 		return false;
 	}
 
+	// adjust weather
+	if (const WeatherData* weather = m_screen->getCharacterCore()->getWeather(id)) {
+		m_levelData.dimming = weather->dimming;
+	}
+
 	// load level
 	m_backgroundTileMap.load(m_levelData, m_levelData.backgroundTileLayers);
 	m_lightedForegroundTileMap.load(m_levelData, m_levelData.lightedForegroundTileLayers);

@@ -391,6 +391,17 @@ void CharacterCore::learnModifier(const SpellModifier& modifier) {
 	}	
 }
 
+void CharacterCore::setWeather(const std::string& worldID, const WeatherData& data) {
+	m_data.currentWeather[worldID] = data;
+}
+
+const WeatherData* CharacterCore::getWeather(const std::string& worldID) const {
+	if (m_data.currentWeather.find(worldID) == m_data.currentWeather.end()) {
+		return nullptr;
+	}
+	return &m_data.currentWeather.at(worldID);
+}
+
 const AttributeData& CharacterCore::getTotalAttributes() const {
 	return m_totalAttributes;
 }

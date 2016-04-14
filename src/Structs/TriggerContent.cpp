@@ -25,6 +25,13 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		}
 		break;
 	}
+	case TriggerContentType::Weather: {
+		WeatherData data;
+		data.dimming = content.i1 / 100.f;
+		data.weather = content.s2;
+		screen->getCharacterCore()->setWeather(content.s1, data);
+		break;
+	}
 	case TriggerContentType::QuestConditionProgress:
 		screen->notifyQuestConditionFulfilled(content.s1, content.s2);
 		break;

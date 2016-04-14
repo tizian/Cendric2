@@ -237,6 +237,50 @@ bool CharacterCoreReader::readIsInLevel(char* start, char* end, CharacterCoreDat
 	return true;
 }
 
+bool CharacterCoreReader::readWeather(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	endData++;
+	startData = gotoNextChar(start, endData, ':');
+	startData++;
+
+	string id(startData);
+	int count = countToNextChar(startData, end, ',');
+	if (count == -1) {
+		return false;
+	}
+	id = id.substr(0, count);
+
+	startData = gotoNextChar(start, endData, ',');
+	startData++;
+
+	float dimming = (float)(atof(startData));
+	if (dimming < 0.f || dimming > 1.f) {
+		g_logger->logError("CharacterCoreReader", "Weather could not be read: Dimming has to be between 0.f and 1.f!");
+		return false;
+	}
+
+	startData = gotoNextChar(startData, endData, ',');
+
+	std::string weather = "";
+	if (startData != NULL) {
+		startData++;
+		std::string name(startData);
+		count = countToNextChar(startData, endData, '\n');
+		if (count == -1) {
+			return false;
+		}
+		weather = name.substr(0, count);
+	}
+
+	WeatherData weatherData;
+	weatherData.dimming = dimming;
+	weatherData.weather = weather;
+
+	data.currentWeather.insert({ id, weatherData });
+	return true;
+}
+
 bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');
@@ -321,6 +365,36 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 		return false;
 	}
 	data.questStates.insert({ questID, state });
+	return true;
+}
+
+bool CharacterCoreReader::readReputationProgress(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	string fractionName(startData);
+	int count = countToNextChar(startData, end, ',');
+	if (count == -1) {
+		return false;
+	}
+	fractionName = fractionName.substr(0, count);
+
+	FractionID id = resolveFractionID(fractionName);
+	if (id == FractionID::VOID) {
+		g_logger->logError("CharacterCoreReader", "Fraction ID not recognized: " + fractionName);
+		return false;
+	}
+
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	
+	int reputation = atoi(startData);
+	if (reputation < 0 || reputation > 100) {
+		g_logger->logError("CharacterCoreReader", "Reputation for " + fractionName + " could not be read, it has to be between 0 and 100");
+		return false;
+	}
+
+	data.reputationProgress.insert({ id, reputation });
 	return true;
 }
 
@@ -899,6 +973,16 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, MODIFIER_LEARNED, strlen(MODIFIER_LEARNED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(MODIFIER_LEARNED));
 			noError = readLearnedModifiers(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, REPUTATION_PROGRESS, strlen(REPUTATION_PROGRESS)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(REPUTATION_PROGRESS));
+			noError = readReputationProgress(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, WEATHER, strlen(WEATHER)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(WEATHER));
+			noError = readWeather(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else {

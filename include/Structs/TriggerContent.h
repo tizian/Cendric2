@@ -19,7 +19,8 @@ enum class TriggerContentType {
 	LevelEntry,
 	Cutscene,
 	LearnSpell,
-	LearnModifier
+	LearnModifier,
+	Weather
 };
 
 // holds a part of the trigger content.
