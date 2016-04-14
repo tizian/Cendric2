@@ -33,26 +33,30 @@ void ScrollBar::onLeftClick() {
 
 		// update the position of the slider if it was clicked.
 		sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
-		float sign;
+		int direction;
 		if (mousePos.y > m_knob.getPosition().y) {
-			sign = 1.f;
+			direction = 1;
 		}
 		else {
-			sign = -1.f;
+			direction = -1;
 		}
 
-		if (m_discreteSteps >= 2) {
-			float delta = 1.f / (m_discreteSteps - 1);
-			setScrollPosition(m_scrollPosition + sign * delta);
-		}
-		else {
-			setScrollPosition(m_scrollPosition + sign * 0.1f);
-		}
+		scroll(direction);
 	}
 }
 
 void ScrollBar::setDiscreteSteps(int steps) {
 	m_discreteSteps = steps;
+}
+
+void ScrollBar::scroll(int direction) {
+	if (m_discreteSteps >= 2) {
+		float delta = 1.f / (m_discreteSteps - 1);
+		setScrollPosition(m_scrollPosition + direction * delta);
+	}
+	else {
+		setScrollPosition(m_scrollPosition + direction * 0.1f);
+	}
 }
 
 void ScrollBar::setScrollPosition(float pos) {
@@ -63,7 +67,7 @@ void ScrollBar::setScrollPosition(float pos) {
 
 	if (m_discreteSteps >= 2) {
 		float delta = 1.f / (m_discreteSteps - 1);
-		int floored = std::floor(pos / delta);
+		int floored = static_cast<int>(std::floor(pos / delta));
 		snappedPosition = floored * delta;
 		if (std::fmod(pos, delta) >= 0.5f * delta) {
 			snappedPosition += delta;
@@ -114,6 +118,13 @@ void ScrollBar::setPosition(const sf::Vector2f& pos) {
 
 void ScrollBar::update(const sf::Time& frameTime) {
 	if (!m_isVisible || !m_isEnabled) return;
+
+	if (g_inputController->isMouseWheelScrolledUp()) {
+		scroll(-1);
+	}
+	else if (g_inputController->isMouseWheelScrolledDown()) {
+		scroll(1);
+	}
 
 	m_knob.update(frameTime);
 	if (m_knob.isPressed()) {

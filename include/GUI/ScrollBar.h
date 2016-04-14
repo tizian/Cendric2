@@ -50,6 +50,7 @@ public:
 	void setScrollPosition(float value);
 
 	void setDiscreteSteps(int steps);	// Only effective if greater or equal to 2
+	void scroll(int direction);
 
 	bool isEnabled() const;
 	bool isVisible() const;
