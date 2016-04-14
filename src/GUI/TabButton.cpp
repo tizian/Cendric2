@@ -41,6 +41,7 @@ void TabButton::onLeftClick() {
 		m_isPressed = false;
 		g_inputController->lockAction();
 	}
+	m_background.setFillColor(m_backgroundColor);
 }
 
 void TabButton::onLeftJustPressed() {
