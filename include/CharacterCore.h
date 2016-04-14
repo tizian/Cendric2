@@ -19,8 +19,10 @@ class ScreenManager;
 class CharacterCore {
 public:
 	CharacterCore();
-	CharacterCore(const CharacterCoreData& data);
 	~CharacterCore();
+
+	// use this instead of a constructor to copy a character core
+	CharacterCore* createFromThis();
 
 	// returns the currently equipped item of type 'type'
 	const std::string& getEquippedItem(ItemType type);
@@ -132,6 +134,10 @@ public:
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;
+
+protected:
+	// protected constructor for copying
+	CharacterCore(const CharacterCoreData& data);
 
 private:
 	// reload attributes based on equipped items (called by load). all attributes coming from food are removed.

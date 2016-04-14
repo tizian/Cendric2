@@ -15,7 +15,7 @@ void LevelScreen::loadForRenderTexture() {
 
 void LevelScreen::load() {
 	delete m_characterCoreCopy;
-	m_characterCoreCopy = new CharacterCore(m_characterCore->getData());
+	m_characterCoreCopy = m_characterCore->createFromThis();
 
 	if (!(m_currentLevel.load(m_levelID, this))) {
 		string errormsg = m_levelID + ": file corrupted!";
@@ -80,7 +80,7 @@ CharacterCore* LevelScreen::getCharacterCore() const {
 
 void LevelScreen::writeToCore() {
 	delete m_characterCore;
-	m_characterCore = new CharacterCore(m_characterCoreCopy->getData());
+	m_characterCore = m_characterCoreCopy->createFromThis();
 }
 
 bool LevelScreen::exitWorld() {

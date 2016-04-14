@@ -1,29 +1,20 @@
 # time played, in seconds
-time.played:189
+time.played:62
 savegame.name:andi
-savegame.date:1457218589
+savegame.date:1460665991
 level.id:res/level/rockfall/rockfall.tmx
-level.position:2900.000000,700.000000
+level.position:300.000000,650.000000
 is.in.level:0
 map.id:res/map/meadows/meadows.tmx
-map.position:2942.830078,1807.645142
+map.position:2768.364014,989.904480
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:47
+gold:0
 # items in inventory:
-item.id:eq_ironring,1
-item.id:fo_apple,3
-item.id:fo_caveberry,1
-item.id:fo_glowingshroom,2
-item.id:fo_lesserhealingpotion,4
-item.id:fo_physalis,1
-item.id:fo_rawmeat,10
-item.id:fo_water,2
-item.id:mi_candleholder,1
-item.id:mi_goldengoblet,4
-item.id:mi_teeth,1
+item.id:fo_lesserhealingpotion,1
+item.id:fo_rawmeat,9
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:
@@ -34,34 +25,34 @@ equipped.ring1:
 equipped.ring2:
 equipped.weapon:we_walkingpole
 # quickslot assignments:
-quickslot:1,fo_rawmeat
+quickslot:1,
 quickslot:2,
 # enemies killed in level:
-enemies.killed:res/level/ratcave/ratcave.tmx,1,2,4,5,6,7
-enemies.killed:res/level/rockfall/rockfall.tmx,74,75,78
+enemies.killed:res/level/rockfall/rockfall.tmx,74,75
 # enemies looted in level:
-enemies.looted:res/level/ratcave/ratcave.tmx,1,2,4,5,6,7
-enemies.looted:res/level/rockfall/rockfall.tmx,74,75,78
+enemies.looted:res/level/rockfall/rockfall.tmx,74,75
 # items looted in level:
-items.looted:res/level/ratcave/ratcave.tmx,639,640,738,762,763,1200,1503,1562,1744,1778
-items.looted:res/level/rockfall/rockfall.tmx,419,420,514,517,518,572,894
+items.looted:res/level/rockfall/rockfall.tmx
 # chests looted in level:
-items.looted:res/level/ratcave/ratcave.tmx,10
 items.looted:res/level/rockfall/rockfall.tmx
 # waypoints unlocked in map:
-waypoints.unlocked:res/map/meadows/meadows.tmx,1387
+waypoints.unlocked:res/map/meadows/meadows.tmx
+# triggers triggered in world:
+triggers.triggered:res/level/rockfall/rockfall.tmx,82,83
+triggers.triggered:res/map/meadows/meadows.tmx,107
 # quest states:
 quest.state:meat_delivery,1
-quest.state:the_rats_nest,2
+quest.state:the_rats_nest,1
 quest.state:who_am_i,1
 # quest targets killed:
-quest.progress.target:the_rats_nest,fire_rat,2,rat,4
 # quest conditions fulfilled:
 # quest descriptions unlocked:
 # conditions of a certain type fulfilled:
-progress.condition:default,,tutorial_complete
-progress.condition:level_entry,,tutorial_started
-progress.condition:npc_edmond,,talked_after_tutorial,talked_to
+progress.condition:default,tutorial_complete
+progress.condition:npc_edmond,talked_after_tutorial,talked_to
+progress.condition:trigger,tutorial_started
+# reputation progress:
 # merchand states:
 # spells learned:
 # modifiers learned:
+# current weather:

@@ -23,6 +23,11 @@ CharacterCore::CharacterCore(const CharacterCoreData& data) {
 	loadQuests();
 }
 
+CharacterCore* CharacterCore::createFromThis() {
+	m_data.timePlayed += m_stopwatch.restart();
+	return new CharacterCore(m_data);
+}
+
 CharacterCore::~CharacterCore() {
 	delete m_weapon;
 }
