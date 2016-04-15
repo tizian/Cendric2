@@ -71,6 +71,7 @@ void CharacterCore::loadNew() {
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.critical = 5;
+	m_data.equippedItems.at(ItemType::Equipment_body) = "eq_defaultarmor";
 	setQuestState("who_am_i", QuestState::Started);
 	m_stopwatch.restart();
 	reloadAttributes();
