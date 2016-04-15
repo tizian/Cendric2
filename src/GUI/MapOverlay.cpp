@@ -50,6 +50,9 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 	m_title.setString(g_textProvider->getText(map.getName(), "location"));
 	m_title.setCharacterSize(16);
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
+
+	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_ornament), COLOR_WHITE, m_boundingBox.width, m_boundingBox.height);
+	m_border.setPosition(m_position);
 }
 
 MapOverlay::~MapOverlay() {
@@ -111,6 +114,8 @@ void MapOverlay::render(sf::RenderTarget& target) {
 
 	target.draw(m_mainCharMarker);
 	target.draw(m_title);
+
+	target.draw(m_border);
 }
 
 void MapOverlay::show() {

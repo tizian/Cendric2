@@ -5,6 +5,7 @@
 #include "InputController.h"
 #include "TileMap.h"
 #include "BitmapText.h"
+#include "SlicedSprite.h"
 
 class MapScreen;
 class MapMainCharacter;
@@ -72,4 +73,5 @@ private:
 	sf::Vector2f m_position;
 
 	BitmapText m_title;
+	SlicedSprite m_border;
 };
