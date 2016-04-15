@@ -196,7 +196,7 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 }
 
 ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {
-	ScreenOverlay* itemScreenOverlay = new ScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
+	TextureScreenOverlay* itemScreenOverlay = new TextureScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
 	itemScreenOverlay->setTitleColor(COLOR_GOOD);
 	itemScreenOverlay->setTitleCharacterSize(24);
@@ -207,6 +207,12 @@ ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item)
 	itemScreenOverlay->setTitleRaw(title);
 
 	itemScreenOverlay->setSubtitleCharacterSize(16);
+
+	itemScreenOverlay->setTexture(ResourceID::Texture_items);
+	itemScreenOverlay->setTextureRect(sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50));
+
+	itemScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
+	itemScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
 
 	std::string attributes = "";
 	AttributeData::appendAttributes(attributes, item.getAttributes());

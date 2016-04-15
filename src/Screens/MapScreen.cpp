@@ -124,6 +124,11 @@ bool MapScreen::isOverlayActive() {
 		m_bookWindow != nullptr);
 }
 
+bool MapScreen::isOverlayVisible() {
+	return isOverlayActive() || 
+		dynamic_cast<MapInterface*>(m_interface)->isMapOverlayVisible();
+}
+
 void MapScreen::setDialogue(NPC* npc) {
 	clearOverlays();
 
@@ -198,7 +203,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
-	if (!isOverlayActive()) {
+	if (!isOverlayVisible()) {
 		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
 	}
 

@@ -15,6 +15,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
+	bool isMapOverlayVisible() const;
+
 private:
 	void updateMapOverlay(const sf::Time& frameTime);
 

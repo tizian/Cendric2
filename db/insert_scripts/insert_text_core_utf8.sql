@@ -3,7 +3,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('AdditionalRes
 INSERT INTO text (text_id, english, german, swiss_german) values ('AllowedModifiers','Allowed Gem Types','Erlaubte Edelsteintypen','Erlaubti Edelsteitype');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Apply','Apply','Anwenden','Awende');
 INSERT INTO text (text_id, english, german, swiss_german) values ('And','and','und','und');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Armor','Armour','Rüstung','Rüstig');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Armor','Armour','Rüstung','Rüschtig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Back','Back','Zurück','Zrugg');
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint');
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToMenu','Menu','Menu','Menu');
@@ -11,6 +11,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Book','Book',
 INSERT INTO text (text_id, english, german, swiss_german) values ('Cancel','Cancel','Abbrechen','Abbreche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotEquipInLevel','You cannot equip items inside a level!','Gegenstände können nicht in einem Level ausgerüstet werden!','Gegeständ chönd nid imne Level agleit werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumePermanentInLevel','You cannot consume permanent items inside a level!','Gegenstände mit permanenten Boni können nicht in einem Level verwendet werden!','Gegeständ mit permanente Boni chönd nid imne Level verbruucht werde!');
+INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumeItemInMap','You cannot consume food items on a map!','Verzehrbare Gegenstände können nicht auf einer Karte verwendet werden!','Ässbari Gegeständ chönd nid ufere Charte verbruucht werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CharacterInfo','Character Info','Charakter Info','Charakter Info');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CheckpointReached','Checkpoint reached','Kontrollpunkt erreicht','Checkpoint erreicht');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chest','Chest','Truhe','Chischte');
