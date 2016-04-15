@@ -6,6 +6,7 @@
 #include "GUI/GUIConstants.h"
 #include "GUI/SlotClone.h"
 #include "GUI/ScrollBar.h"
+#include "GUI/ScrollHelper.h"
 
 const int Inventory::SLOT_COUNT_X = 5;
 const int Inventory::SLOT_COUNT_Y = 6;
@@ -101,6 +102,9 @@ void Inventory::init() {
 	m_scrollBar->setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, GUIConstants::TOP + SCROLL_WINDOW_TOP));
 	m_scrollBar->setDiscreteSteps(5);	// TODO: Change
 
+	sf::IntRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollHelper = new ScrollHelper(scrollBox);
+
 	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
 	reload();
 }
@@ -113,6 +117,7 @@ Inventory::~Inventory() {
 	delete m_currentClone;
 	delete m_tabBar;
 	delete m_scrollBar;
+	delete m_scrollHelper;
 	clearAllSlots();
 }
 

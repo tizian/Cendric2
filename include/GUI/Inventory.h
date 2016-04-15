@@ -15,6 +15,7 @@ class LevelInterface;
 class MapInterface;
 class MerchantInterface;
 class ScrollBar;
+class ScrollHelper;
 
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
@@ -62,6 +63,7 @@ private:
 	SlicedSprite m_scrollWindow;
 
 	ScrollBar* m_scrollBar = nullptr;
+	ScrollHelper *m_scrollHelper = nullptr;
 
 	TexturedTabBar* m_tabBar;
 
