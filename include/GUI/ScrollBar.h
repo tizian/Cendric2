@@ -8,6 +8,8 @@
 #include "GUI/SlicedSprite.h"
 #include "GUI/GUIConstants.h"
 
+class Window;
+
 class ScrollBarKnob : public GameObject {
 public:
 	ScrollBarKnob();
@@ -36,7 +38,7 @@ private:
 // A simple ugly scroll bar 
 class ScrollBar : public GameObject {
 public:
-	ScrollBar(float height);
+	ScrollBar(float height, const Window* window = nullptr);
 
 	void onLeftJustPressed() override;
 	void onLeftClick() override;
@@ -61,6 +63,7 @@ public:
 	static const float WIDTH;
 
 protected:
+	const Window* m_window;
 	float m_height;
 
 	int m_discreteSteps;
