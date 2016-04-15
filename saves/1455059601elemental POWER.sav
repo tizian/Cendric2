@@ -22,6 +22,7 @@ item.id:eq_wizardhatblue,1
 item.id:eq_wizardhatgrey,1
 item.id:eq_bandana,1
 item.id:eq_leatherarmor,1
+item.id:eq_defaultarmor,1
 item.id:eq_ironring,1
 item.id:eq_rubyring,1
 item.id:eq_aquamarinering,1
