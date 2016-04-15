@@ -38,6 +38,7 @@ private:
 	// deletes all overlays and sets them null
 	void clearOverlays();
 	bool isOverlayActive();
+	bool isOverlayVisible();
 
 private:
 	Map m_currentMap;

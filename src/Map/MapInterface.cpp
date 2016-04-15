@@ -35,6 +35,10 @@ void MapInterface::render(sf::RenderTarget& target) {
 	m_mapOverlay->render(target);
 }
 
+bool MapInterface::isMapOverlayVisible() const {
+	return m_mapOverlay->isVisible();
+}
+
 void MapInterface::updateMapOverlay(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Map)) {
 		if (!m_mapOverlay->isVisible()) {

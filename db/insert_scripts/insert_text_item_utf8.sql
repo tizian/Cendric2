@@ -19,7 +19,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_teeth', 'item', 'Teeth','Zähne','Zää');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_teeth', 'item_desc', 'Small and pointy.','Klein und spitz.','Chlii und spitzig.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_feather', 'item', 'Feather','Feder','Fädere');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_feather', 'item_desc', 'This tail feather is long and well preserved. It may be used as a quill pen.','Diese Schwanzfeder ist lang und gut erhalten. Man könnte sie als Schreibinstrument benutzen.','Die Schwanzfädere isch lang und guet erhalte. Me chönt si als e Schriibinstrument bruche.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_feather', 'item_desc', 'This tail feather is long and well preserved.','Diese Schwanzfeder ist lang und gut erhalten.','Die Schwanzfädere isch lang und guet erhalte.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_silverplate', 'item', 'Silver Plate','Silberner Teller','Silbrige Teller');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_silverplate', 'item_desc', 'I can see my reflection in the glossy surface.','Ich kann mich darin spiegeln.','Ich chan mich drin spiegle.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_candleholder', 'item', 'Candleholder','Kerzenleuchter','Cherzeständer');
@@ -87,7 +87,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot3', 'item', 'Shadow Cloak','Schattenumhang','Schatteumhang');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot3', 'item_desc', 'A pliant piece of cloth.','Ein geschmeidiges Stück Stoff.','Es gschmeidigs Stück Stoff.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item', 'Horned Scalemail','Gehörnter Schuppenpanzer','Ghörnte Schuppepanzer');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item_desc', 'Only those who have proven themselves worthy to the necromancers of Admantris are allowed to wear that piece of armour.','Nur diejenigen, die sich bei den Nekromanten von Admantris als würdig erwiesen haben, dürfen diese Rüstung tragen.','Nur die, wo sich bide Nekromante vo Admantris als würdig erwise hend, derfed die Rüstig träge.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item_desc', 'Only those who have proven themselves worthy to the necromancers of Admantris are allowed to wear that piece of armour.','Nur diejenigen, die sich bei den Nekromanten von Admantris als würdig erwiesen haben, dürfen diese Rüstung tragen.','Nur die, wo sich bide Nekromante vo Admantris als würdig erwise hend, derfed die Rüschtig träge.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rafishat', 'item', 'Rafi''s Hat','Rafis Hut','Rafis Huet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rafishat', 'item_desc', 'What a strange hat...','Was für ein seltsamer Hut...','Was füren komische Huet...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_huntershat', 'item', 'Hunter''s Hat','Jägerhut','Jägershuet');
@@ -96,9 +96,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item_desc', 'Golden & shiny.','Golden & glänzig.','Goldig & glänzig.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bandana', 'item', 'Green Bandana','Grünes Kopftuch','Grüens Chopftuech');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bandana', 'item_desc', 'The cloth is a bit tattered but it can still be worn.','Der Stoff ist ein wenig zerrissen, man kann es aber immer noch tragen.','De Stoff isch chli verschlisse, me chas aber immerna alege.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_leatherarmor', 'item', 'Leather Armour','Lederrüstung','Lederrüstig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_leatherarmor', 'item', 'Leather Armour','Lederrüstung','Lederrüschtig');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_leatherarmor', 'item_desc', 'The reinforced leather protects from attacks.','Das verstärkte Leder schützt vor Angriffen.','Es verstärcht Leder schützt vor Aagriff.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_defaultarmor', 'item', 'Grey Cloth Armour','Graue Stoffrüstung','Graui Stoffrüstig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_defaultarmor', 'item', 'Grey Cloth Armour','Graue Stoffrüstung','Graui Stoffrüschtig');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_defaultarmor', 'item_desc', 'I wore that piece of cloth when I lost my memory.','Das habe ich getragen, als ich meine Erinnerung verlor.','Das hani treit woni mini Erinnerige verlore han.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item', 'The eye of the moon','Das Auge des Mondes','Es Mondaug');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item_desc', '...','...','...');

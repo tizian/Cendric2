@@ -102,7 +102,11 @@ void Inventory::init() {
 	m_scrollBar->setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, GUIConstants::TOP + SCROLL_WINDOW_TOP));
 	m_scrollBar->setDiscreteSteps(5);	// TODO: Change
 
-	sf::IntRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	sf::IntRect scrollBox(
+		static_cast<int>(INVENTORY_LEFT + SCROLL_WINDOW_LEFT), 
+		static_cast<int>(GUIConstants::TOP + SCROLL_WINDOW_TOP), 
+		static_cast<int>(SCROLL_WINDOW_WIDTH), 
+		static_cast<int>(SCROLL_WINDOW_HEIGHT));
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
@@ -193,6 +197,8 @@ void Inventory::handleMapRightClick(InventorySlot* clicked) {
 	}
 	if (clicked->getItemType() == ItemType::Document)
 		showDocument(clicked->getItem());
+	else if (clicked->getItemType() == ItemType::Consumable)
+		m_mapInterface->getScreen()->setTooltipText("CannotConsumeItemInMap", COLOR_BAD, true);
 	else if (clicked->getItemType() == ItemType::Permanent)
 		dynamic_cast<WorldScreen*>(m_mapInterface->getScreen())->notifyPermanentItemConsumed(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Convertible)
