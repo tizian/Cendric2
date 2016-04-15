@@ -49,6 +49,7 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 
 void QuickSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
+	m_tooltipWindow.setPosition(sf::Vector2f(pos.x - m_tooltipWindow.getSize().x + ICON_SIZE, pos.y - m_tooltipWindow.getSize().y - TOOLTIP_TOP));
 	sf::Vector2f positionOffset(QuickSlot::ICON_SIZE / 2.f - m_keyText.getLocalBounds().width / 2.f, QuickSlot::SIZE - QuickSlot::ICON_OFFSET / 2.f);
 	m_keyText.setPosition(pos + positionOffset);
 	m_amountText.setPosition(sf::Vector2f(
