@@ -115,7 +115,8 @@ private:
 	
 	static const sf::Vector2f BUTTON_SIZE;
 
-	static const float MARGIN;
+	static const float ICON_MARGIN;
+	static const float WINDOW_MARGIN;
 
 	static const float INVENTORY_LEFT;
 	static const float SCROLL_WINDOW_LEFT;

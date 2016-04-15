@@ -31,6 +31,23 @@ inline float lerp(float t, float v1, float v2) {
 	return (1.f - t) * v1 + t * v2;
 }
 
+inline float clamp(float v, float low, float high) {
+	if (v < low) return low;
+	if (v > high) return high;
+	return v;
+}
+
+inline float linearTween(float t, float b, float c, float d) {
+	return c*t / d + b;
+};
+
+inline float easeInOutQuad(float t, float b, float c, float d) {
+	t /= d / 2;
+	if (t < 1) return c / 2 * t*t + b;
+	t--;
+	return -c / 2 * (t*(t - 2) - 1) + b;
+};
+
 inline float norm(const sf::Vector2f& v) {
 	return std::sqrt(v.x * v.x + v.y * v.y);
 }

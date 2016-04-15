@@ -57,6 +57,10 @@ public:
 	bool isEnabled() const;
 	bool isVisible() const;
 	float getScrollPosition() const;
+	int getDiscreteScrollPosition() const;
+
+	sf::Time getScrollTime() const;
+
 	GameObjectType getConfiguredType() const override;
 
 public:
@@ -81,6 +85,8 @@ protected:
 	sf::RectangleShape m_background;
 	SlicedSprite m_border;
 	ScrollBarKnob m_knob;
+
+	sf::Time m_time;
 
 	static const sf::Color BACKGROUND_COLOR;
 	static const sf::Color FILL_COLOR;

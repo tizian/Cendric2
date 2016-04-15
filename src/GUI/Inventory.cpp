@@ -11,16 +11,17 @@
 const int Inventory::SLOT_COUNT_X = 5;
 const int Inventory::SLOT_COUNT_Y = 6;
 
-const float Inventory::MARGIN = 7.f;
+const float Inventory::ICON_MARGIN = 8.f;
+const float Inventory::WINDOW_MARGIN = 6.f;
 
 const sf::Vector2f Inventory::BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 45.f);
 
 const float Inventory::SCROLL_WINDOW_LEFT = GUIConstants::TEXT_OFFSET;
-const float Inventory::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * MARGIN + BUTTON_SIZE.y;
-const float Inventory::SCROLL_WINDOW_WIDTH = SLOT_COUNT_X * InventorySlot::SIZE + (SLOT_COUNT_X - 1) * MARGIN + 4 * MARGIN + ScrollBar::WIDTH;
-const float Inventory::SCROLL_WINDOW_HEIGHT = SLOT_COUNT_Y * InventorySlot::SIZE + (SLOT_COUNT_Y - 1) * MARGIN+ 4 * MARGIN;
+const float Inventory::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y;
+const float Inventory::SCROLL_WINDOW_WIDTH = SLOT_COUNT_X * InventorySlot::SIZE + (SLOT_COUNT_X - 1) * ICON_MARGIN + 4 * WINDOW_MARGIN + ScrollBar::WIDTH;
+const float Inventory::SCROLL_WINDOW_HEIGHT = SLOT_COUNT_Y * InventorySlot::SIZE + (SLOT_COUNT_Y - 1) * ICON_MARGIN + 4 * WINDOW_MARGIN;
 
-const float Inventory::INVENTORY_LEFT = GUIConstants::LEFT + MARGIN + InventoryEquipment::WIDTH;
+const float Inventory::INVENTORY_LEFT = GUIConstants::LEFT + WINDOW_MARGIN + InventoryEquipment::WIDTH;
 const float Inventory::INVENTORY_WIDTH = SCROLL_WINDOW_WIDTH + 2 * SCROLL_WINDOW_LEFT;
 
 Inventory::Inventory(LevelInterface* _interface) {
@@ -93,8 +94,6 @@ void Inventory::init() {
 		textureOffset += 60;
 	}
 
-	selectTab(ItemType::Equipment_weapon);
-
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP));
 
@@ -102,11 +101,13 @@ void Inventory::init() {
 	m_scrollBar->setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, GUIConstants::TOP + SCROLL_WINDOW_TOP));
 	m_scrollBar->setDiscreteSteps(5);	// TODO: Change
 
-	sf::IntRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	sf::FloatRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
 	reload();
+
+	selectTab(ItemType::Equipment_weapon);
 }
 
 Inventory::~Inventory() {
@@ -219,6 +220,9 @@ void Inventory::update(const sf::Time& frameTime) {
 
 	// check whether an item was selected
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
+		sf::Vector2f pos = it.second.getPosition();
+		if (pos.y < GUIConstants::TOP + SCROLL_WINDOW_TOP ||
+			pos.y + InventorySlot::SIZE > GUIConstants::TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
 		it.second.update(frameTime);
 		if (it.second.isClicked()) {
 			selectSlot(it.second.getItemID(), ItemType::VOID);
@@ -245,14 +249,18 @@ void Inventory::update(const sf::Time& frameTime) {
 	}
 	else if (activeIndex == 3) {
 		type = ItemType::Quest;
+		
 	}
 	else if (activeIndex == 4) {
 		type = ItemType::Misc;
 	}
-
+	
 	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != type) {
 		selectTab(type);
 	}
+
+	std::map<std::string, InventorySlot>* tab = m_typeMap.at(type);
+	calculateSlotPositions(*tab);
 
 	// update equipment part
 	m_equipment->update(frameTime);
@@ -393,10 +401,13 @@ void Inventory::render(sf::RenderTarget& target) {
 	m_window->render(target);
 	target.draw(m_goldText);
 	target.draw(m_selectedTabText);
+
+	
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
-		it.second.render(target);
+		it.second.render(m_scrollHelper->texture);
 		// it.second.renderAfterForeground(target); // uncomment for debug box
 	}
+	m_scrollHelper->render(target);
 
 	m_tabBar->render(target);
 
@@ -443,10 +454,10 @@ void Inventory::showDocument(const Item& item) {
 	m_documentWindow = new DocumentDescriptionWindow(item);
 
 	sf::Vector2f pos = sf::Vector2f(
-		m_window->getPosition().x + MARGIN + m_window->getSize().x,
+		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,
 		m_window->getPosition().y);
 	if (m_descriptionWindow->isVisible()) {
-		pos.x += ItemDescriptionWindow::WIDTH + MARGIN;
+		pos.x += ItemDescriptionWindow::WIDTH + WINDOW_MARGIN;
 	}
 	m_documentWindow->setPosition(pos);
 }
@@ -455,11 +466,11 @@ void Inventory::showDescription(const Item& item) {
 	m_descriptionWindow->load(item);
 	m_descriptionWindow->show();
 	sf::Vector2f pos = sf::Vector2f(
-		m_window->getPosition().x + MARGIN + m_window->getSize().x,
+		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,
 		m_window->getPosition().y);
 	m_descriptionWindow->setPosition(pos);
 	if (m_documentWindow != nullptr) {
-		pos.x += ItemDescriptionWindow::WIDTH + MARGIN;
+		pos.x += ItemDescriptionWindow::WIDTH + WINDOW_MARGIN;
 		m_documentWindow->setPosition(pos);
 	}
 }
@@ -469,7 +480,7 @@ void Inventory::hideDescription() {
 	if (m_documentWindow != nullptr) {
 		m_documentWindow->setPosition(
 			m_documentWindow->getPosition() -
-			sf::Vector2f(ItemDescriptionWindow::WIDTH + MARGIN, 0.f));
+			sf::Vector2f(ItemDescriptionWindow::WIDTH + WINDOW_MARGIN, 0.f));
 	}
 }
 
@@ -507,6 +518,8 @@ void Inventory::selectTab(ItemType type) {
 		m_window->getPosition().x +
 		INVENTORY_WIDTH / 2 -
 		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
+
+	m_scrollBar->setScrollPosition(0.f);
 }
 
 void Inventory::reloadGold() {
@@ -519,6 +532,7 @@ void Inventory::reloadGold() {
 }
 
 void Inventory::reload() {
+	m_scrollBar->scroll(0);
 	// reload gold
 	reloadGold();
 
@@ -532,20 +546,43 @@ void Inventory::reload() {
 		m_typeMap.at(item.getType())->insert({ item.getID(), InventorySlot(item.getID(), itemData.second) });
 	}
 
-	calculateSlotPositions(m_consumableItems);
-	calculateSlotPositions(m_equipmentItems);
-	calculateSlotPositions(m_questItems);
-	calculateSlotPositions(m_documentItems);
-	calculateSlotPositions(m_miscItems);
-
 	// reload equipment
 	m_equipment->reload();
 }
 
 void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slots) {
-	float xOffsetStart = INVENTORY_LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET + 2 * MARGIN;
+	float number = static_cast<float>(slots.size());
+	int rows = static_cast<int>(std::ceil(number / SLOT_COUNT_X));
+	int steps = rows - SLOT_COUNT_Y + 1;
 
-	float yOffset = GUIConstants::TOP + SCROLL_WINDOW_TOP + InventorySlot::ICON_OFFSET + 2 * MARGIN;
+	if (steps >= 2) {
+		m_scrollBar->setDiscreteSteps(steps);
+		m_scrollBar->setEnabled(true);
+	}
+	else {
+		m_scrollBar->setDiscreteSteps(1);
+		m_scrollBar->setEnabled(false);
+	}
+
+	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
+
+	if (scrollPos * (ICON_MARGIN + InventorySlot::SIZE) != m_scrollHelper->nextOffset) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+		m_scrollHelper->nextOffset = scrollPos * (ICON_MARGIN + InventorySlot::SIZE);
+	}
+
+	float animationTime = 0.1f;
+	float time = m_scrollBar->getScrollTime().asSeconds();
+	if (time >= animationTime) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+	}
+	float start = m_scrollHelper->lastOffset;
+	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
+	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
+	
+	float xOffsetStart = INVENTORY_LEFT + SCROLL_WINDOW_LEFT + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN;
+
+	float yOffset = GUIConstants::TOP + SCROLL_WINDOW_TOP + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN - effectiveScrollOffset;
 	float xOffset = xOffsetStart;
 	int y = 1;
 	int x = 1;
@@ -555,11 +592,11 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slo
 			x = 1;
 			xOffset = xOffsetStart;
 			y++;
-			yOffset += MARGIN + InventorySlot::SIZE;
+			yOffset += ICON_MARGIN + InventorySlot::SIZE;
 		}
 		else {
 			x++;
-			xOffset += MARGIN + InventorySlot::SIZE;
+			xOffset += ICON_MARGIN + InventorySlot::SIZE;
 		}
 	}
 }

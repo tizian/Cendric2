@@ -29,6 +29,10 @@ float ScrollBar::getScrollPosition() const {
 	return m_scrollPosition;
 }
 
+int ScrollBar::getDiscreteScrollPosition() const {
+	return static_cast<int>( m_scrollPosition * (m_discreteSteps - 1));
+}
+
 void ScrollBar::onLeftClick() {
 	if (m_isEnabled && m_isPressed) {
 		m_isPressed = false;
@@ -53,6 +57,8 @@ void ScrollBar::setDiscreteSteps(int steps) {
 }
 
 void ScrollBar::scroll(int direction) {
+	float oldPos = m_scrollPosition;
+
 	if (m_discreteSteps >= 2) {
 		float delta = 1.f / (m_discreteSteps - 1);
 		setScrollPosition(m_scrollPosition + direction * delta);
@@ -60,11 +66,16 @@ void ScrollBar::scroll(int direction) {
 	else {
 		setScrollPosition(m_scrollPosition + direction * 0.1f);
 	}
+
+	float newPos = m_scrollPosition;
+	if (newPos != oldPos) {
+		m_time = sf::Time::Zero;
+	}
 }
 
 void ScrollBar::setScrollPosition(float pos) {
-	if (pos < 0.f) pos = 0.f;
-	if (pos > 1.f) pos = 1.f;
+	if (pos <= 0.f) pos = 0.f;
+	if (pos >= 1.f) pos = 1.f;
 	
 	float snappedPosition = pos;
 
@@ -72,7 +83,8 @@ void ScrollBar::setScrollPosition(float pos) {
 		float delta = 1.f / (m_discreteSteps - 1);
 		int floored = static_cast<int>(std::floor(pos / delta));
 		snappedPosition = floored * delta;
-		if (std::fmod(pos, delta) >= 0.5f * delta) {
+		float tmp = pos / delta;
+		if (pos - tmp * delta >= 0.5f * delta) {
 			snappedPosition += delta;
 		}
 	}
@@ -120,6 +132,8 @@ void ScrollBar::setPosition(const sf::Vector2f& pos) {
 }
 
 void ScrollBar::update(const sf::Time& frameTime) {
+	m_time += frameTime;
+
 	if (!m_isVisible || !m_isEnabled) return;
 
 	if (m_window == nullptr || m_window->getBoundingBox()->contains(g_inputController->getDefaultViewMousePosition())) {
@@ -152,6 +166,10 @@ bool ScrollBar::isEnabled() const {
 
 bool ScrollBar::isVisible() const {
 	return m_isVisible;
+}
+
+sf::Time ScrollBar::getScrollTime() const {
+	return m_time;
 }
 
 GameObjectType ScrollBar::getConfiguredType() const {
