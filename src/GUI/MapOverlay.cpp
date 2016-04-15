@@ -1,4 +1,5 @@
 #include "GUI/MapOverlay.h"
+#include "GUI/Window.h"
 #include "Screens/MapScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "Map/MapMainCharacter.h"
@@ -51,8 +52,14 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 	m_title.setCharacterSize(16);
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
 
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_ornament), COLOR_WHITE, m_boundingBox.width, m_boundingBox.height);
-	m_border.setPosition(m_position);
+	sf::FloatRect box(m_position.x, m_position.y, m_boundingBox.width, m_boundingBox.height);
+	m_border = new Window(box,
+		WindowOrnamentStyle::FANCY,
+		COLOR_TRANSPARENT,
+		COLOR_TRANSPARENT,
+		GUIConstants::ORNAMENT_COLOR);
+
+	m_border->addCloseButton(std::bind(&MapOverlay::hide, this));
 }
 
 MapOverlay::~MapOverlay() {
@@ -60,10 +67,13 @@ MapOverlay::~MapOverlay() {
 		delete wp;
 	}
 	m_waypoints.clear();
+	delete m_border;
 }
 
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+
+	m_border->update(frameTime);
 
 	m_mainCharMarker.setPosition(m_position + 
 		m_screen->getMainCharacter()->getCenter() * m_scale - sf::Vector2f(12.5f, 12.5f));
@@ -115,7 +125,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	target.draw(m_mainCharMarker);
 	target.draw(m_title);
 
-	target.draw(m_border);
+	m_border->render(target);
 }
 
 void MapOverlay::show() {

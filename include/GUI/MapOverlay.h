@@ -5,11 +5,11 @@
 #include "InputController.h"
 #include "TileMap.h"
 #include "BitmapText.h"
-#include "SlicedSprite.h"
 
 class MapScreen;
 class MapMainCharacter;
 class MapOverlay;
+class Window;
 
 class WaypointMarker : public virtual AnimatedGameObject {
 public:
@@ -73,5 +73,6 @@ private:
 	sf::Vector2f m_position;
 
 	BitmapText m_title;
-	SlicedSprite m_border;
+	
+	Window* m_border;
 };
