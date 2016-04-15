@@ -1,5 +1,7 @@
 #include "GUI/ScrollBar.h"
 
+#include "GUI/Window.h"
+
 using namespace std;
 
 const float ScrollBar::WIDTH = 20.f;
@@ -7,7 +9,8 @@ const float ScrollBar::WIDTH = 20.f;
 const sf::Color ScrollBar::BACKGROUND_COLOR = COLOR_TRANS_BLACK;
 const sf::Color ScrollBar::FILL_COLOR = COLOR_WHITE;
 
-ScrollBar::ScrollBar(float height) : GameObject() {
+ScrollBar::ScrollBar(float height, const Window* window) : GameObject() {
+	m_window = window;
 	m_discreteSteps = 1;
 
 	m_height = height - ScrollBarKnob::HEIGHT;
@@ -119,11 +122,13 @@ void ScrollBar::setPosition(const sf::Vector2f& pos) {
 void ScrollBar::update(const sf::Time& frameTime) {
 	if (!m_isVisible || !m_isEnabled) return;
 
-	if (g_inputController->isMouseWheelScrolledUp()) {
-		scroll(-1);
-	}
-	else if (g_inputController->isMouseWheelScrolledDown()) {
-		scroll(1);
+	if (m_window == nullptr || m_window->getBoundingBox()->contains(g_inputController->getDefaultViewMousePosition())) {
+		if (g_inputController->isMouseWheelScrolledUp()) {
+			scroll(-1);
+		}
+		else if (g_inputController->isMouseWheelScrolledDown()) {
+			scroll(1);
+		}
 	}
 
 	m_knob.update(frameTime);
