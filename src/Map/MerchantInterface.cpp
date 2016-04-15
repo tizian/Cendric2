@@ -66,6 +66,10 @@ void MerchantInterface::render(sf::RenderTarget& target) {
 	m_merchantWindow->render(target);
 }
 
+void MerchantInterface::renderAfterForeground(sf::RenderTarget& target) {
+	m_merchantWindow->renderAfterForeground(target);
+}
+
 void MerchantInterface::update(const sf::Time& frameTime) {
 	m_inventory->update(frameTime);
 	m_merchantWindow->update(frameTime);

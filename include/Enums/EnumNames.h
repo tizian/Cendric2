@@ -10,6 +10,7 @@
 #include "Enums/QuestState.h"
 #include "Enums/DamageType.h"
 #include "Enums/FractionID.h"
+#include "Enums/ItemType.h"
 
 // pure static class used to resolve enum names.
 class EnumNames {
@@ -26,6 +27,42 @@ public:
 			return "German";
 		case Language::Lang_EN:
 			return "English";
+		}
+	}
+
+	static std::string getItemTypeName(ItemType type) {
+		switch (type) {
+		default:
+		case ItemType::MAX:
+		case ItemType::VOID:
+			return "Unknown";
+		case ItemType::Consumable:
+			return "Consumable";
+		case ItemType::Convertible:
+			return "Convertible";
+		case ItemType::Document:
+			return "Document";
+		case ItemType::Equipment_back:
+			return "EqBack";
+		case ItemType::Equipment_body:
+			return "EqBody";
+		case ItemType::Equipment_head:
+			return "EqHead";
+		case ItemType::Equipment_neck:
+			return "EqNeck";
+		case ItemType::Equipment_ring_1:
+		case ItemType::Equipment_ring_2:
+			return "EqRing";
+		case ItemType::Equipment_weapon:
+			return "EqWeapon";
+		case ItemType::Gold:
+			return "Gold";
+		case ItemType::Misc:
+			return "Miscellaneous";
+		case ItemType::Permanent:
+			return "Permanent";
+		case ItemType::Quest:
+			return "Quest";
 		}
 	}
 
@@ -107,6 +144,8 @@ public:
 		case SpellID::MAX:
 		case SpellID::VOID:
 			return "Unknown";
+		case SpellID::Chop:
+			return "Chop";
 		case SpellID::AntiGravity:
 			return "SpellAntiGravity";
 		case SpellID::Aureola:

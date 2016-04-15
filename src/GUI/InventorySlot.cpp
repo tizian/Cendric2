@@ -10,6 +10,7 @@ const float InventorySlot::ICON_OFFSET = 4.f;
 
 InventorySlot::InventorySlot(const std::string& itemID, int amount) : m_item(itemID) {
 	m_type = m_item.getType();
+	m_tooltipWindow.setText(g_textProvider->getText(itemID, "item"));
 
 	m_iconTexture = g_resourceManager->getTexture(ResourceID::Texture_items);
 	m_iconTextureRect = sf::IntRect(m_item.getIconTextureLocation().x, m_item.getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
@@ -26,12 +27,14 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount) : m_item(ite
 	initSlot();
 }
 
-InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos) : m_item() {
+InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos, ItemType equipmentType) : m_item() {
 	m_iconTexture = tex;
 	m_iconTextureRect = sf::IntRect(sf::IntRect(texPos.x, texPos.y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE)));
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
+	m_tooltipWindow.setText(g_textProvider->getText(EnumNames::getItemTypeName(equipmentType)) + " (" 
+		+ g_textProvider->getText("Empty") + ")");
 
 	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory);
 	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected);

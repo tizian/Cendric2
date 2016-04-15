@@ -18,6 +18,7 @@ public:
 	CharacterCore* getCore() const;
 
 	void render(sf::RenderTarget& target);
+	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
 	void sellItem(const Item& item);

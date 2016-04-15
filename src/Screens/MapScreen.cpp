@@ -203,6 +203,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
+	WorldScreen::renderAfterForeground(renderTarget);
 	if (!isOverlayVisible()) {
 		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
 	}

@@ -135,10 +135,15 @@ void MerchantWindow::render(sf::RenderTarget& target) {
 	target.draw(m_title);
 	for (auto& it : m_items) {
 		it.second.render(target);
-		// it.renderAfterForeground(target); // uncomment for debug box
 	}
 
 	m_descriptionWindow->render(target);
+}
+
+void MerchantWindow::renderAfterForeground(sf::RenderTarget& target) {
+	for (auto& it : m_items) {
+		it.second.renderAfterForeground(target);
+	}
 }
 
 void MerchantWindow::showDescription(const Item& item) {

@@ -402,11 +402,9 @@ void Inventory::render(sf::RenderTarget& target) {
 	m_window->render(target);
 	target.draw(m_goldText);
 	target.draw(m_selectedTabText);
-
 	
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
 		it.second.render(m_scrollHelper->texture);
-		// it.second.renderAfterForeground(target); // uncomment for debug box
 	}
 	m_scrollHelper->render(target);
 
@@ -424,6 +422,13 @@ void Inventory::render(sf::RenderTarget& target) {
 
 	target.draw(m_scrollWindow);
 	m_scrollBar->render(target);
+}
+
+void Inventory::renderAfterForeground(sf::RenderTarget& target) {
+	for (auto& it : *(m_typeMap.at(m_currentTab))) {
+		it.second.renderAfterForeground(target);
+	}
+	m_equipment->renderAfterForeground(target);
 }
 
 void Inventory::convertItem(const Item& item) {
@@ -556,14 +561,7 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slo
 	int rows = static_cast<int>(std::ceil(number / SLOT_COUNT_X));
 	int steps = rows - SLOT_COUNT_Y + 1;
 
-	if (steps >= 2) {
-		m_scrollBar->setDiscreteSteps(steps);
-		m_scrollBar->setEnabled(true);
-	}
-	else {
-		m_scrollBar->setDiscreteSteps(1);
-		m_scrollBar->setEnabled(false);
-	}
+	m_scrollBar->setDiscreteSteps(steps);
 
 	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
 

@@ -193,6 +193,7 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 
 	if (m_merchantInterface != nullptr) {
 		m_merchantInterface->render(renderTarget);
+		m_merchantInterface->renderAfterForeground(renderTarget);
 	}
 
 	renderTarget.draw(m_speakerSprite);

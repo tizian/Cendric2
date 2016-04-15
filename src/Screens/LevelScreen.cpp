@@ -235,6 +235,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget);
+	WorldScreen::renderAfterForeground(renderTarget);
 
 	if (m_isPaused) {
 		renderTarget.draw(*m_overlaySprite);

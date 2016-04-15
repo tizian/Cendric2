@@ -42,8 +42,16 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Done','Done',
 INSERT INTO text (text_id, english, german, swiss_german) values ('Duration','Duration','Dauer','Duur');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Elemental','Elemental','Elementar','Elementar');
 INSERT INTO text (text_id, english, german, swiss_german) values ('English','English','Englisch','Englisch');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EqBack','Back','Rücken','Rugge');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EqBody','Chest','Brust','Bruscht');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EqHead','Head','Kopf','Chopf');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EqNeck','Neck','Hals','Hals');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EqRing','Finger','Finger','Finger');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EqWeapon','Weapon','Waffe','Waffe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Equipment','Equipment','Ausrüstung','Usrüschtig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('EquipWeapon','Equip a weapon with spell slots to use spells.','Rüste eine Waffe mit Zauber-Slots aus, um Zauber einzusetzen.','Leg e Waffe mit Zauber-Slots ah zum Zauber iisetze.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Empty','Empty','Leer','Läär');
+INSERT INTO text (text_id, english, german, swiss_german) values ('EmptySlot','Empty slot','Leerer Platz','Lääre Platz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Exit','Exit','Beenden','Beende');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Failed','Failed','Gescheitert','Gfailt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FearLevel','Fear Strength','Furchtstärke','Angschtstärchi');

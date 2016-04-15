@@ -32,6 +32,7 @@ public:
 	bool isVisible() const;
 
 	void render(sf::RenderTarget& target);
+	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
 	void notifyChange(const std::string& itemID);

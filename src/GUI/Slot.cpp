@@ -1,8 +1,10 @@
 #include "GUI/Slot.h"
+#include "GUI/SlotTooltipWindow.h"
 
 using namespace std;
 
 const float Slot::ICON_SIZE = 50.f;
+const float Slot::TOOLTIP_TOP = 10.f;
 
 void Slot::initSlot() {
 	float size = getConfiguredSize();
@@ -18,7 +20,7 @@ void Slot::initSlot() {
 	m_iconRect.setTextureRect(m_iconTextureRect);
 
 	m_overlayRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
-	m_overlayRect.setFillColor(COLOR_TRANSPARENT);	
+	m_overlayRect.setFillColor(COLOR_TRANSPARENT);
 
 	m_borderRect.setSize(sf::Vector2f(size, size));
 	m_borderRect.setTexture(m_borderTexture);
@@ -35,6 +37,7 @@ void Slot::setPosition(const sf::Vector2f& pos) {
 	m_iconRect.setPosition(pos);
 	m_overlayRect.setPosition(pos);
 	m_borderRect.setPosition(pos.x - iconOffset, pos.y - iconOffset);
+	m_tooltipWindow.setPosition(sf::Vector2f(pos.x, pos.y - m_tooltipWindow.getSize().y - TOOLTIP_TOP));
 }
 
 void Slot::activate() {
@@ -89,6 +92,14 @@ void Slot::render(sf::RenderTarget& renderTarget) {
 
 void Slot::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	GameObject::renderAfterForeground(renderTarget);
+	if (m_showTooltip) {
+		m_tooltipWindow.render(renderTarget);
+		m_showTooltip = false;
+	}
+}
+
+void Slot::onMouseOver() {
+	m_showTooltip = true;
 }
 
 void Slot::onLeftJustPressed() {

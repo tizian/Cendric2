@@ -19,7 +19,7 @@ void WeaponWindow::reload() {
 	delete m_weaponSlot;
 	m_weapon = m_core->getWeapon();
 	if (m_weapon == nullptr) {
-		m_weaponSlot = new InventorySlot(g_resourceManager->getTexture(ResourceID::Texture_equipmentplaceholders), sf::Vector2i(0, 0));
+		m_weaponSlot = new InventorySlot(g_resourceManager->getTexture(ResourceID::Texture_equipmentplaceholders), sf::Vector2i(0, 0), ItemType::Equipment_weapon);
 		m_weaponName.setString(g_textProvider->getText("NoWeapon"));
 		m_weaponDescription.setString("");
 	}

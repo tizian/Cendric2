@@ -36,6 +36,13 @@ void LevelInterface::render(sf::RenderTarget& target) {
 	WorldInterface::render(target);
 }
 
+void LevelInterface::renderAfterForeground(sf::RenderTarget& target) {
+	WorldInterface::renderAfterForeground(target);
+	
+	m_quickSlotBar->renderAfterForeground(target);
+	m_spellSelection->renderAfterForeground(target);
+}
+
 void LevelInterface::update(const sf::Time& frameTime) {
 	if (m_character->isDead()) {
 		m_healthBar->update(frameTime);

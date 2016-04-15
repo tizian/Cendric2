@@ -182,3 +182,7 @@ void WorldScreen::render(sf::RenderTarget& renderTarget) {
 	m_interface->render(renderTarget);
 	m_progressLog->render(renderTarget);
 }
+
+void WorldScreen::renderAfterForeground(sf::RenderTarget& renderTarget) {
+	m_interface->renderAfterForeground(renderTarget);
+}

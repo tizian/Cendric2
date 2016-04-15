@@ -32,6 +32,7 @@ public:
 	void notifyCharacterInfo();
 
 	void render(sf::RenderTarget& target) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 
 	LevelMainCharacter* getMainCharacter() const;

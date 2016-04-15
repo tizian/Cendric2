@@ -40,6 +40,12 @@ void QuickSlotBar::render(sf::RenderTarget& target) {
 	m_quickSlot2->render(target);
 }
 
+void QuickSlotBar::renderAfterForeground(sf::RenderTarget& target) {
+	if (!m_isVisible) return;
+	m_quickSlot1->renderAfterForeground(target);
+	m_quickSlot2->renderAfterForeground(target);
+}
+
 void QuickSlotBar::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 	m_quickSlot1->update(frameTime);

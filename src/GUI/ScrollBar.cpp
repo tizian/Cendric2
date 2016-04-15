@@ -54,6 +54,7 @@ void ScrollBar::onLeftClick() {
 
 void ScrollBar::setDiscreteSteps(int steps) {
 	m_discreteSteps = steps;
+	setEnabled(steps >= 2);
 }
 
 void ScrollBar::scroll(int direction) {

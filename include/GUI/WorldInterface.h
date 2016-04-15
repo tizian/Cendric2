@@ -28,6 +28,7 @@ public:
 	virtual void reloadSpellBook();
 
 	virtual void render(sf::RenderTarget& target);
+	virtual void renderAfterForeground(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);
 	virtual void hideAll();
 

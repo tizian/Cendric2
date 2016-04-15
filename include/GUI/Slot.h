@@ -4,11 +4,13 @@
 #include "GameObject.h"
 
 #include "GUI/BitmapText.h"
+#include "GUI/SlotTooltipWindow.h"
 
 class Slot : public GameObject {
 	friend class SlotClone;
 public:
-	Slot() {}
+	Slot() {};
+	virtual ~Slot() {};
 
 	void initSlot();
 
@@ -30,7 +32,7 @@ public:
 
 	virtual void onLeftJustPressed() override;
 	virtual void onRightClick() override;
-	virtual void onMouseOver() override {}
+	virtual void onMouseOver() override;
 
 	inline bool isClicked() const { return m_isClicked; }
 	inline bool isRightClicked() const { return m_isRightClicked; }
@@ -41,6 +43,7 @@ public:
 	virtual float getConfiguredIconOffset() const = 0;
 
 	static const float ICON_SIZE;
+	static const float TOOLTIP_TOP;
 
 protected:
 	bool m_isClicked = false;
@@ -55,8 +58,11 @@ protected:
 	sf::RectangleShape m_borderRect;
 
 	sf::IntRect m_iconTextureRect;
-	const sf::Texture *m_iconTexture = nullptr;
-	const sf::Texture *m_borderTexture = nullptr;			// TODO: Maybe use one single spritesheet for all "slot border" textures
-	const sf::Texture *m_borderTextureSelected = nullptr;
-	const sf::Texture *m_highlightTexture = nullptr;
+	const sf::Texture* m_iconTexture = nullptr;
+	const sf::Texture* m_borderTexture = nullptr;			// TODO: Maybe use one single spritesheet for all "slot border" textures
+	const sf::Texture* m_borderTextureSelected = nullptr;
+	const sf::Texture* m_highlightTexture = nullptr;
+
+	bool m_showTooltip = false;
+	SlotTooltipWindow m_tooltipWindow;
 };

@@ -16,6 +16,9 @@ SpellSlot::SpellSlot(SpellType type) {
 	m_isEmpty = true;
 
 	m_iconTextureRect = sf::IntRect(250, (static_cast<int>(m_spellType) - 1) * 50, 50, 50);
+	m_tooltipWindow.setText(
+		g_textProvider->getText("EmptySlot") + " (" + 
+		g_textProvider->getText(EnumNames::getSpellTypeName(type)) + ")");
 
 	initSpellSlot();
 }
@@ -28,6 +31,7 @@ SpellSlot::SpellSlot(SpellID id) {
 	m_isChopSlot = (id == SpellID::Chop);
 	m_inputKeyID = Key::VOID;
 	m_isEmpty = false;
+	m_tooltipWindow.setText(g_textProvider->getText(EnumNames::getSpellIDName(id)));
 
 	initSpellSlot();
 }
@@ -39,6 +43,7 @@ SpellSlot::SpellSlot(const SpellData& bean) {
 	m_isChopSlot = (bean.id == SpellID::Chop);
 	m_inputKeyID = bean.inputKey;
 	m_isEmpty = false;
+	m_tooltipWindow.setText(g_textProvider->getText(EnumNames::getSpellIDName(bean.id)));
 
 	initSpellSlot();
 }

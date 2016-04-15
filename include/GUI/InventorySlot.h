@@ -10,7 +10,7 @@ public:
 	// constructor for filled slots. if amount is < 0, the amount text won't show.
 	InventorySlot(const std::string& itemID, int amount);
 	// constructor for placeholder slots
-	InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos);
+	InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos, ItemType equipmentType);
 
 	void setPosition(const sf::Vector2f& pos) override;
 

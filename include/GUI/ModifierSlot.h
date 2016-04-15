@@ -11,14 +11,6 @@ class ModifierSlot : public Slot {
 public:
 	ModifierSlot(const SpellModifier& modifier);
 
-	~ModifierSlot();
-
-	void setPosition(const sf::Vector2f& pos) override;
-
-	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
-
-	virtual void onMouseOver() override;
-
 	const SpellModifier& getModifier() const { return m_spellModifier; }
 	inline int getSpellSlotNr() const { return m_spellSlotNr; }
 	inline int getNr() const { return m_nr; }
@@ -34,10 +26,8 @@ public:
 
 private:
 	SpellModifier m_spellModifier;
+	void initTooltip();
 
 	int m_nr = -1;
 	int m_spellSlotNr = -1;
-
-	bool m_showDescriptionWindow = false;
-	ModifierDescriptionWindow* m_descriptionWindow = nullptr;
 };

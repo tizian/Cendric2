@@ -20,6 +20,7 @@ public:
 	void hide();
 
 	void render(sf::RenderTarget& target);
+	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
 	// reloads the equipment items, depending on the core

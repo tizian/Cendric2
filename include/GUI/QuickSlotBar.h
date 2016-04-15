@@ -18,6 +18,7 @@ public:
 	void highlightSlots(bool highlight);
 
 	void render(sf::RenderTarget& target);
+	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
 	void notifyConsumableDrop(const SlotClone* item);

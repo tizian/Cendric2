@@ -34,11 +34,16 @@ void SpellSelection::update(const sf::Time& frametime) {
 }
 
 void SpellSelection::render(sf::RenderTarget& target) {
-	if (m_isVisible) {
-		for (auto& it : m_spellSlots) {
-			it.render(target);
-			it.renderAfterForeground(target);
-		}
+	if (!m_isVisible) return;
+	for (auto& it : m_spellSlots) {
+		it.render(target);
+	}
+}
+
+void SpellSelection::renderAfterForeground(sf::RenderTarget& target) {
+	if (!m_isVisible) return;
+	for (auto& it : m_spellSlots) {
+		it.renderAfterForeground(target);
 	}
 }
 

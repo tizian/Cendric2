@@ -91,6 +91,7 @@ void QuickSlot::reload() {
 		m_keyText.setColor(COLOR_GREY);
 		m_amountText.setString("");
 		m_itemID = "";
+		m_tooltipWindow.setText("(" + g_textProvider->getText("Empty") + ")");
 	}
 	else {
 		// the slot is filled
@@ -111,6 +112,8 @@ void QuickSlot::reload() {
 		m_amountText.setPosition(sf::Vector2f(
 			getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().width,
 			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().height));
+
+		m_tooltipWindow.setText(g_textProvider->getText(m_itemID, "item"));
 	}
 
 	m_borderRect.setFillColor(m_isEmpty ? COLOR_MEDIUM_GREY : COLOR_WHITE);

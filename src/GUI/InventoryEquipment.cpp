@@ -47,6 +47,14 @@ void InventoryEquipment::render(sf::RenderTarget& target) {
 	}
 }
 
+void InventoryEquipment::renderAfterForeground(sf::RenderTarget& target) {
+	if (!m_isVisible) return;
+
+	for (auto& it : m_slots) {
+		it.second.renderAfterForeground(target);
+	}
+}
+
 void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 	if (m_slots.find(type) == m_slots.end()) return;
 	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2) {
@@ -130,7 +138,7 @@ void InventoryEquipment::reload() {
 
 	for (auto& it : types) {
 		if (m_core->getEquippedItem(it).empty()) {
-			m_slots.insert({ it, InventorySlot(tex, texPos) });
+			m_slots.insert({ it, InventorySlot(tex, texPos, it) });
 		}
 		else {
 			m_slots.insert({ it, InventorySlot(m_core->getEquippedItem(it), -1) });

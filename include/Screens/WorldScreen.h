@@ -19,6 +19,7 @@ public:
 	void execUpdate(const sf::Time& frameTime) override;
 	void execOnExit(const Screen* nextScreen) override;
 	void render(sf::RenderTarget& renderTarget) override;
+	void renderAfterForeground(sf::RenderTarget& renderTarget);
 	void updateProgressLog(const sf::Time& frameTime);
 
 	// notify permanent item consumed -> change in core, display overlay and progresslog and reload inventory.
