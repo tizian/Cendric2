@@ -20,7 +20,7 @@ public:
 	bool isQuestComplete(const std::string& questID);
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const;
-	bool hasItem(const std::string& item, int amount) const;
+	bool hasItem(const std::string& item, int amount) const; // this can also query gold. with item id "gold"
 	int getReputation(const std::string& fractionID) const;
 
 	// methods to create a node

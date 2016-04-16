@@ -354,6 +354,12 @@ bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID)
 
 bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
 	if (itemID.empty()) return false;
+
+	if (itemID.compare("gold") == 0) {
+		// check for gold
+		return m_data.gold >= amount;
+	}
+
 	int foundAmount = 0;
 	for (auto& item : m_data.equippedItems) {
 		if (item.second.compare(itemID) == 0) {
