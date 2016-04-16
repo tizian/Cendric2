@@ -6,8 +6,11 @@
 #include "GUI/InventorySlot.h"
 #include "GUI/MerchantItemDescriptionWindow.h"
 #include "GUI/Button.h"
+#include "GUI/SlicedSprite.h"
 
 class MerchantInterface;
+class ScrollBar;
+class ScrollHelper;
 
 // the merchant window, operating on a merchant interface
 class MerchantWindow {
@@ -37,6 +40,10 @@ private:
 	Window* m_window;
 	BitmapText m_title;
 
+	SlicedSprite m_scrollWindow;
+	ScrollBar* m_scrollBar = nullptr;
+	ScrollHelper* m_scrollHelper = nullptr;
+
 	std::string m_selectedSlotId = "";
 	void selectSlot(const std::string& selectedSlotId);
 	void deselectCurrentSlot();
@@ -48,14 +55,18 @@ private:
 	void showDescription(const Item& item);
 	void hideDescription();
 
-	const int SLOT_COUNT_X = 5;
-	const int SLOT_COUNT_Y = 5;
+	static const int SLOT_COUNT_X;
+	static const int SLOT_COUNT_Y;
 
-	const float MARGIN = 7.f;
-	const float TOP = GUIConstants::TOP;
-	const float WIDTH =
-		2 * GUIConstants::TEXT_OFFSET +
-		(SLOT_COUNT_X - 1) * MARGIN +
-		SLOT_COUNT_X * InventorySlot::SIZE;
-	const float LEFT = WINDOW_WIDTH - WIDTH - GUIConstants::LEFT;
+	static const float ICON_MARGIN;
+	static const float WINDOW_MARGIN;
+
+	static const float SCROLL_WINDOW_LEFT;
+	static const float SCROLL_WINDOW_TOP;
+	static const float SCROLL_WINDOW_WIDTH;
+	static const float SCROLL_WINDOW_HEIGHT;
+
+	static const float WIDTH;
+	static const float TOP;
+	static const float LEFT;
 };
