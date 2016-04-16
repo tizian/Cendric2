@@ -40,12 +40,12 @@ void ScrollBar::onLeftClick() {
 
 		// update the position of the slider if it was clicked.
 		sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
-		int direction;
-		if (mousePos.y > m_knob.getPosition().y) {
-			direction = 1;
-		}
-		else {
+		int direction = 0;
+		if (mousePos.y < m_knob.getPosition().y) {
 			direction = -1;
+		}
+		else if (mousePos.y > m_knob.getPosition().y + m_knob.getSize().y) {
+			direction = 1;
 		}
 
 		scroll(direction);
@@ -58,23 +58,16 @@ void ScrollBar::setDiscreteSteps(int steps) {
 }
 
 void ScrollBar::scroll(int direction) {
-	float oldPos = m_scrollPosition;
-
 	if (m_discreteSteps >= 2) {
 		float delta = 1.f / (m_discreteSteps - 1);
-		setScrollPosition(m_scrollPosition + direction * delta);
+		setScrollPosition(m_scrollPosition + direction * delta, true);
 	}
 	else {
-		setScrollPosition(m_scrollPosition + direction * 0.1f);
-	}
-
-	float newPos = m_scrollPosition;
-	if (newPos != oldPos) {
-		m_time = sf::Time::Zero;
+		setScrollPosition(m_scrollPosition + direction * 0.1f, true);
 	}
 }
 
-void ScrollBar::setScrollPosition(float pos) {
+void ScrollBar::setScrollPosition(float pos, bool animated) {
 	if (pos <= 0.f) pos = 0.f;
 	if (pos >= 1.f) pos = 1.f;
 	
@@ -84,13 +77,18 @@ void ScrollBar::setScrollPosition(float pos) {
 		float delta = 1.f / (m_discreteSteps - 1);
 		int floored = static_cast<int>(std::floor(pos / delta));
 		snappedPosition = floored * delta;
-		float tmp = pos / delta;
-		if (pos - tmp * delta >= 0.5f * delta) {
+		float tmp = pos - snappedPosition;
+		if (tmp >= 0.5f * delta) {
 			snappedPosition += delta;
 		}
 	}
 
+	float oldPos = m_scrollPosition;
 	m_scrollPosition = snappedPosition;
+	float newPos = m_scrollPosition;
+	if ((newPos != oldPos) && animated) {
+		m_time = sf::Time::Zero;
+	}
 
 	// update knob
 	float yPos = 0.5f * ScrollBarKnob::HEIGHT + m_scrollPosition * m_height;
@@ -116,10 +114,11 @@ void ScrollBar::render(sf::RenderTarget& renderTarget) {
 
 void ScrollBar::handleDragAndDrop() {
 	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
-	setScrollPosition(calculateScrollPosition(mousePos.y));
+	setScrollPosition(calculateScrollPosition(mousePos.y), true);
 }
 
 float ScrollBar::calculateScrollPosition(float mousePosY) const {
+
 	float yOffset = mousePosY - getBoundingBox()->top - 0.5f * ScrollBarKnob::HEIGHT;
 	// map the offset onto the values
 	return yOffset / m_height;

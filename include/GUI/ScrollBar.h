@@ -49,7 +49,7 @@ public:
 	// a scroll bar can only be slided if its enabled. also, its color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
 	void setVisible(bool value);
-	void setScrollPosition(float value);
+	void setScrollPosition(float value, bool animated = false);
 
 	void setDiscreteSteps(int steps);	// Only effective if greater or equal to 2
 	void scroll(int direction);
