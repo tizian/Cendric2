@@ -14,6 +14,7 @@ QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Wind
 
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_titleText.setColor(COLOR_WHITE);
+	m_titleText.setTextAlignment(TextAlignment::Center);
 
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(COLOR_LIGHT_GREY);
@@ -36,13 +37,18 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		return;
 	}
 
-	m_titleText.setString(g_textProvider->getText(data->title, "quest"));
+	std::string title = g_textProvider->getCroppedText(
+		data->title, "quest",
+		GUIConstants::CHARACTER_SIZE_M,
+		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
+	m_titleText.setString(title);
+	
+
 	std::string description = g_textProvider->getCroppedText(
 		data->title, "quest_desc",
 		GUIConstants::CHARACTER_SIZE_S,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 	
-
 	if (m_core->getData().questDescriptionProgress.find(questID) != m_core->getData().questDescriptionProgress.end()) {
 		const std::set<int>& unlockedDescriptions = m_core->getData().questDescriptionProgress.at(questID);
 		for (auto& it : unlockedDescriptions) {
@@ -57,12 +63,17 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	m_descriptionText.setString(description);
 
 	QuestState currentState = m_core->getQuestState(questID);
+	std::string state = g_textProvider->getCroppedText(
+		EnumNames::getQuestStateName(currentState),
+		GUIConstants::CHARACTER_SIZE_S,
+		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
+
 	if (currentState == QuestState::Completed) {
-		m_stateText.setString(g_textProvider->getText(EnumNames::getQuestStateName(currentState)));
+		m_stateText.setString(state);
 		m_stateText.setColor(COLOR_GOOD);
 	}
 	else if (currentState == QuestState::Failed) {
-		m_stateText.setString(g_textProvider->getText(EnumNames::getQuestStateName(currentState)));
+		m_stateText.setString(state);
 		m_stateText.setColor(COLOR_BAD);
 	}
 	else {
@@ -80,11 +91,13 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 			 m_core->getNumberOfTargetsKilled(questID, it.first);
 
 		target.append(to_string(progress) + "/" + to_string(goal));
+		target = g_textProvider->getCroppedString(target, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
 		BitmapText targetText;
 		targetText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 		targetText.setString(target);
 		targetText.setColor(progress == 0 ? COLOR_BAD : progress >= goal ? COLOR_GOOD : COLOR_NEUTRAL);
+		
 		m_targetsTexts.push_back(targetText);
 	}
 
@@ -101,6 +114,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 			progress = m_core->getData().items.at(it.first);
 		}
 		collectible.append(to_string(progress) + "/" + to_string(goal));
+		collectible = g_textProvider->getCroppedString(collectible, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
 		BitmapText collectibleText;
 		collectibleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -128,6 +142,8 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 			conditionText.setColor(COLOR_BAD);
 		}
 
+		condition = g_textProvider->getCroppedString(condition, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
+
 		conditionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 		conditionText.setString(condition);
 		m_conditionTexts.push_back(conditionText);
@@ -151,7 +167,7 @@ void QuestDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	pos.x += GUIConstants::TEXT_OFFSET;
 
 	m_titleText.setPosition(position.x + ((WIDTH - m_titleText.getLocalBounds().width) / 2.f), pos.y);
-	pos.y += 2 * m_titleText.getLocalBounds().height;
+	pos.y += m_titleText.getLocalBounds().height + GUIConstants::TEXT_OFFSET;
 
 	m_descriptionText.setPosition(pos);
 

@@ -6,13 +6,14 @@
 // <<< QUEST LOG >>>
 
 const int QuestLog::ENTRY_COUNT = 10;
-const float QuestLog::MAX_ENTRY_LENGTH = 400.f;
+const int QuestLog::MAX_ENTRY_LENGTH_CHARACTERS = 34;
+const float QuestLog::MAX_ENTRY_LENGTH = static_cast<float>(MAX_ENTRY_LENGTH_CHARACTERS) * GUIConstants::CHARACTER_SIZE_M;
 
 const float QuestLog::WINDOW_MARGIN = 6.f;
 
 const float QuestLog::SCROLL_WINDOW_LEFT = GUIConstants::TEXT_OFFSET;
 const float QuestLog::SCROLL_WINDOW_WIDTH = MAX_ENTRY_LENGTH + 4 * WINDOW_MARGIN + ScrollBar::WIDTH;
-const float QuestLog::SCROLL_WINDOW_HEIGHT = ENTRY_COUNT * GUIConstants::CHARACTER_SIZE_M + (ENTRY_COUNT - 1) * 0.5f * GUIConstants::CHARACTER_SIZE_M + 4 * WINDOW_MARGIN;
+const float QuestLog::SCROLL_WINDOW_HEIGHT = ENTRY_COUNT * GUIConstants::CHARACTER_SIZE_M + (ENTRY_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * WINDOW_MARGIN;
 
 const float QuestLog::TOP = GUIConstants::TOP;
 const float QuestLog::LEFT = GUIConstants::LEFT;
@@ -110,6 +111,9 @@ void QuestLog::update(const sf::Time& frameTime) {
 
 	// check whether an entry was selected
 	for (auto& it : *(m_stateMap[m_currentTab])) {
+		sf::Vector2f pos = it.getPosition();
+		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
+			pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
 		it.update(frameTime);
 		if (it.isClicked()) {
 			selectEntry(&it);
@@ -128,14 +132,35 @@ void QuestLog::update(const sf::Time& frameTime) {
 }
 
 void QuestLog::calculateEntryPositions() {
-	for (auto& it : m_stateMap) {
-		float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
-		float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN;
+	std::vector<QuestEntry>* entries = m_stateMap[m_currentTab];
 
-		for (auto& it2 : *it.second) {
-			it2.setPosition(sf::Vector2f(xOffset, yOffset));
-			yOffset += 1.5f * GUIConstants::CHARACTER_SIZE_M;
-		}
+	int rows = static_cast<int>(entries->size());
+	int steps = rows - ENTRY_COUNT + 1;
+
+	m_scrollBar->setDiscreteSteps(steps);
+
+	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
+
+	if (2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M != m_scrollHelper->nextOffset) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+		m_scrollHelper->nextOffset = 2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M;
+	}
+
+	float animationTime = 0.1f;
+	float time = m_scrollBar->getScrollTime().asSeconds();
+	if (time >= animationTime) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+	}
+	float start = m_scrollHelper->lastOffset;
+	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
+	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
+
+	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
+	float yOffset = TOP + SCROLL_WINDOW_TOP + WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
+
+	for (auto& it : *entries) {
+		it.setPosition(sf::Vector2f(xOffset, yOffset));
+		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
 	}
 }
 
@@ -161,9 +186,10 @@ void QuestLog::render(sf::RenderTarget& target) {
 	m_window->render(target);
 	target.draw(m_title);
 	for (auto& it : *(m_stateMap[m_currentTab])) {
-		it.render(target);
+		it.render(m_scrollHelper->texture);
 		// it.renderAfterForeground(target); // uncomment for debug box
 	}
+	m_scrollHelper->render(target);
 
 	m_tabBar->render(target);
 
@@ -233,12 +259,18 @@ QuestEntry::QuestEntry(const std::string& questID, const CharacterCore* core) {
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_name.setColor(COLOR_WHITE);
 	const QuestData* data = core->getQuestData(questID);
+	std::string questTitle;
 	if (data == nullptr) {
-		m_name.setString(">  " + g_textProvider->getText("Unknown"));
+		questTitle = "> " + g_textProvider->getText("Unknown");
 	}
 	else {
-		m_name.setString(">  " + g_textProvider->getText(data->title, "quest"));
+		questTitle = "> " + g_textProvider->getText(data->title, "quest");
 	}
+	if (questTitle.size() > QuestLog::MAX_ENTRY_LENGTH_CHARACTERS) {
+		questTitle = questTitle.substr(0, QuestLog::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
+	}
+	m_name.setString(questTitle);
+
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
 }

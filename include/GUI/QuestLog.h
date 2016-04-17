@@ -58,6 +58,8 @@ public:
 	void reload();
 
 public:
+	static const int MAX_ENTRY_LENGTH_CHARACTERS;
+
 	static const float TOP;
 	static const float LEFT;
 	static const float WIDTH;
