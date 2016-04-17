@@ -5,7 +5,7 @@
 
 // <<< QUEST LOG >>>
 
-const int QuestLog::ENTRY_COUNT = 10;
+const int QuestLog::ENTRY_COUNT = 17;
 const int QuestLog::MAX_ENTRY_LENGTH_CHARACTERS = 34;
 const float QuestLog::MAX_ENTRY_LENGTH = static_cast<float>(MAX_ENTRY_LENGTH_CHARACTERS) * GUIConstants::CHARACTER_SIZE_M;
 
