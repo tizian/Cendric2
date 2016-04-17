@@ -8,6 +8,10 @@ SaveGameScreen::SaveGameScreen(CharacterCore* core) : Screen(core) {
 	assert(core != nullptr);
 }
 
+SaveGameScreen::~SaveGameScreen() {
+	delete m_saveGameWindow;
+}
+
 void SaveGameScreen::setAllButtonsEnabled(bool value) {
 	Screen::setAllButtonsEnabled(value);
 	bool empty = m_saveGameWindow->getChosenFilename().empty();
@@ -21,10 +25,10 @@ void SaveGameScreen::execUpdate(const sf::Time& frameTime) {
 		onBack();
 		return;
 	}
-	updateObjects(GameObjectType::_Window, frameTime);
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
+	m_saveGameWindow->update(frameTime);
 	if (!getObjects(GameObjectType::_Form)->empty()) return;
 	if (m_saveGameWindow->isChosen()) {
 		onSaveGame();
@@ -35,7 +39,7 @@ void SaveGameScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 	renderTooltipText(renderTarget);
-	renderObjects(GameObjectType::_Window, renderTarget);
+	m_saveGameWindow->render(renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
 }
@@ -77,7 +81,6 @@ void SaveGameScreen::execOnEnter(const Screen *previousScreen) {
 	// savegame window
 	m_saveGameWindow = new SaveGameWindow();
 	setAllButtonsEnabled(true);
-	addObject(m_saveGameWindow);
 }
 
 void SaveGameScreen::execOnExit(const Screen *nextScreen) {
@@ -154,7 +157,9 @@ void SaveGameScreen::onBack() {
 }
 
 void SaveGameScreen::onDeleteSaveGame() {
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+	float width = 450;
+	float height = 200;
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
 	m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
 	m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNo, this));
 	m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onYesDeleteSaveGame, this));
@@ -163,7 +168,9 @@ void SaveGameScreen::onDeleteSaveGame() {
 }
 
 void SaveGameScreen::onNewSaveGame() {
-	m_newSaveGameForm = new NewSaveGameForm(sf::FloatRect(400, 350, 450, 200));
+	float width = 450;
+	float height = 200;
+	m_newSaveGameForm = new NewSaveGameForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
 	m_newSaveGameForm->setOnOkClicked(std::bind(&SaveGameScreen::onYesNewSaveGame, this));
 	m_newSaveGameForm->setOnCancelClicked(std::bind(&SaveGameScreen::onCancel, this));
 	addObject(m_newSaveGameForm);
@@ -171,7 +178,9 @@ void SaveGameScreen::onNewSaveGame() {
 }
 
 void SaveGameScreen::onSaveGame() {
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+	float width = 450;
+	float height = 200;
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
 	m_yesOrNoForm->setMessage("QuestionOverwriteSaveGame");
 	m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNo, this));
 	m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onYesOverwriteSaveGame, this));

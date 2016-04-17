@@ -159,6 +159,7 @@ void QuestLog::calculateEntryPositions() {
 	float yOffset = TOP + SCROLL_WINDOW_TOP + WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
 
 	for (auto& it : *entries) {
+		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
 		it.setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
 	}

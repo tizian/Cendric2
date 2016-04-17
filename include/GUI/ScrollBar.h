@@ -21,6 +21,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
 
+	void setTexture(sf::Texture* texture);
+
 	bool isPressed() const;
 
 	GameObjectType getConfiguredType() const override;
@@ -45,6 +47,9 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
+	
+	void setTexture(sf::Texture* texture);
+	void setKnobTexture(sf::Texture* texture);
 
 	// a scroll bar can only be slided if its enabled. also, its color is less opaque if it is disabled.
 	void setEnabled(bool enabled);

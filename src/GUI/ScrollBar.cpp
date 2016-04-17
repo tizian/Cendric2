@@ -172,6 +172,14 @@ sf::Time ScrollBar::getScrollTime() const {
 	return m_time;
 }
 
+void ScrollBar::setTexture(sf::Texture* texture) {
+	m_border.setTexture(texture);
+}
+
+void ScrollBar::setKnobTexture(sf::Texture* texture) {
+	m_knob.setTexture(texture);
+}
+
 GameObjectType ScrollBar::getConfiguredType() const {
 	return GameObjectType::_Button;
 }
@@ -220,6 +228,10 @@ void ScrollBarKnob::update(const sf::Time& frameTime) {
 void ScrollBarKnob::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos - sf::Vector2f(0.5f * WIDTH, 0.5f * HEIGHT));
 	m_knob.setPosition(pos - sf::Vector2f(0.5f * WIDTH, 0.5f * HEIGHT));
+}
+
+void ScrollBarKnob::setTexture(sf::Texture* texture) {
+	m_knob.setTexture(texture);
 }
 
 GameObjectType ScrollBarKnob::getConfiguredType() const {

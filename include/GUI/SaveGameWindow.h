@@ -4,6 +4,10 @@
 #include "Window.h"
 
 #include "GUI/BitmapText.h"
+#include "GUI/SlicedSprite.h"
+
+class ScrollBar;
+class ScrollHelper;
 
 // a save game entry in a save game window
 class SaveGameEntry : public GameObject {
@@ -13,8 +17,6 @@ public:
 	// loads data from the filename via a character core reader.
 	// returns true if successful, else false.
 	bool load(const std::string& filename);
-	// gets called after load was successful and sets the entries positon. 
-	void init(const sf::Vector2f& position);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
@@ -39,13 +41,13 @@ private:
 
 // a window to show savegames in the saves/ folder. 
 // it is used inside the SaveGameScreen and the LoadGameScreen
-class SaveGameWindow : public Window {
+class SaveGameWindow {
 public:
 	SaveGameWindow();
 	~SaveGameWindow();
 
-	void render(sf::RenderTarget& renderTarget) override;
-	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& renderTarget);
+	void update(const sf::Time& frameTime);
 	// if this is true, the chosen file should be loaded. be aware that this "query" sets this bool to false again.
 	bool isChosen();
 	void reload();
@@ -54,31 +56,30 @@ public:
 	std::string getChosenSaveName() const;
 
 private:
+	void calculateEntryPositions();
+
+public:
+	static const float COLUMN_WIDTH;
+
+private:
 	std::vector<SaveGameEntry> m_entries;
 	int m_chosenEntry = 0;
 	bool m_isChosen = false;
 	bool m_isEnabled = true;
 
-	// <<< scrolling >>>
-	// scroll one entry up
-	void scrollUp();
-	// scroll one entry down
-	void scrollDown();
-	const int m_maxShowableEntries;
-	int m_topEntry = 0;
-	int m_bottomEntry = 0;
-	// triangle shapes to show that scrolling is possible
-	sf::Sprite m_arrowUp;
-	sf::Sprite m_arrowDown;
 	// the menu sound
 	sf::Sound m_sound;
-	// the time it waits from key active to scrolling
-	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
-	sf::Time m_upActiveTime = sf::Time::Zero;
-	sf::Time m_downActiveTime = sf::Time::Zero;
-	// the time between the scroll-ticks, determines the speed of the scrolling
-	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
-	sf::Time m_timeSinceTick = sf::Time::Zero;
-	// returns if a scrolling operation has been executed
-	bool updateScrolling(const sf::Time& frametime);
+
+	SlicedSprite m_scrollWindow;
+	ScrollBar* m_scrollBar = nullptr;
+	ScrollHelper *m_scrollHelper = nullptr;
+
+	static const int ENTRY_COUNT;
+
+	static const float WINDOW_MARGIN;
+	
+	static const float TOP;
+	static const float LEFT;
+	static const float WIDTH;
+	static const float HEIGHT;
 };

@@ -7,6 +7,7 @@ const float DIST_FROM_BORDER = 10.f;
 
 YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
 	m_window = new Window(box, WindowOrnamentStyle::NONE);
+
 	float buttonHeight = 50.f;
 	float buttonGap = 20.f;
 	float buttonWidth = (box.width - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;

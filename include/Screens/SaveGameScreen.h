@@ -13,6 +13,7 @@
 class SaveGameScreen : public Screen {
 public:
 	SaveGameScreen(CharacterCore* core);
+	~SaveGameScreen();
 
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

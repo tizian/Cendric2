@@ -302,7 +302,9 @@ void LevelScreen::onRetry() {
 	}
 	else {
 		delete m_yesOrNoForm;
-		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(400, 350, 450, 200));
+		float width = 450;
+		float height = 200;
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
 		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
 		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
 		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));

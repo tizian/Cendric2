@@ -1,0 +1,46 @@
+# time played, in seconds
+time.played:16
+savegame.name:8
+savegame.date:1460922018
+level.id:
+level.position:0.000000,0.000000
+is.in.level:0
+map.id:res/map/meadows/meadows.tmx
+map.position:1850.000000,700.000000
+# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
+# damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
+# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
+attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
+gold:0
+# items in inventory:
+# weapon slots. it is always: spell ID+, (modifier type, level)*:
+# equipment:
+equipped.back:
+equipped.body:eq_defaultarmor
+equipped.head:
+equipped.neck:
+equipped.ring1:
+equipped.ring2:
+equipped.weapon:
+# quickslot assignments:
+quickslot:1,
+quickslot:2,
+# enemies killed in level:
+# enemies looted in level:
+# items looted in level:
+# chests looted in level:
+# waypoints unlocked in map:
+waypoints.unlocked:res/map/meadows/meadows.tmx
+# triggers triggered in world:
+triggers.triggered:res/map/meadows/meadows.tmx
+# quest states:
+quest.state:who_am_i,1
+# quest targets killed:
+# quest conditions fulfilled:
+# quest descriptions unlocked:
+# conditions of a certain type fulfilled:
+# reputation progress:
+# merchand states:
+# spells learned:
+# modifiers learned:
+# current weather:

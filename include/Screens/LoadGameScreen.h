@@ -12,6 +12,7 @@
 class LoadGameScreen : public Screen {
 public:
 	LoadGameScreen(CharacterCore* core);
+	~LoadGameScreen();
 
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
