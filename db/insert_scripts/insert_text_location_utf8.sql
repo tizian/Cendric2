@@ -7,3 +7,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('St
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BrokenBridge','location','The Broken Bridge','Die kaputte Brücke','Di kabutt Brugg');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderHome','location','Home of the Elder','Haus des Ältesten','Huus vom Älteste');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderGarden','location','Garden of the Elder','Garten des Ältesten','Garte vom Älteste');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Tavern','location','Tavern','Taverne','Taverne');

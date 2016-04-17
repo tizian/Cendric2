@@ -1,14 +1,14 @@
 -- Routine for NPC "Innkeeper"
 
-velocity = 40
+velocity = 30
 
 loadRoutine = function(R)
 
-	R:setTilePosition(21,33)
+	R:setTilePosition(18,9.8)
 
 	R:wait(5000)	
-	R:goToTile(23,33)
+	R:goToTile(17,9.8)
 	R:wait(5000)
-	R:goToTile(23,33)
+	R:goToTile(19,9.8)
 
 end	

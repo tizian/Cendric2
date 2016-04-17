@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="131">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="132">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="name" value="Meadows"/>
@@ -1044,15 +1044,6 @@
     <property name="spritesheetpath" value="res/npc/npc_ingrid/spritesheet_npc_ingrid.png"/>
    </properties>
   </object>
-  <object id="123" gid="1317" x="1066" y="1690" width="50" height="50">
-   <properties>
-    <property name="dialogueid" value="res/npc/npc_innkeeper/dl_npc_innkeeper.lua"/>
-    <property name="dialoguetexture" value="500,250"/>
-    <property name="id" value="npc_innkeeper"/>
-    <property name="routineid" value="res/npc/npc_innkeeper/ru_npc_innkeeper.lua"/>
-    <property name="spritesheetpath" value="res/npc/npc_innkeeper/spritesheet_npc_innkeeper.png"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="trigger">
   <object id="107" x="1653" y="780" width="697" height="85">
@@ -1120,6 +1111,12 @@
     <property name="hint" value="Waypoint"/>
    </properties>
   </object>
+  <object id="131" x="853.125" y="1535" width="43.75" height="36">
+   <properties>
+    <property name="map entry" value="res/map/tavern/tavern.tmx,690,700"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="light" visible="0">
   <object id="8" x="2802.5" y="249.5" width="151" height="129">
@@ -1176,10 +1173,10 @@
   <object id="117" x="2008.88" y="1826.38" width="198.25" height="221.25">
    <ellipse/>
   </object>
-  <object id="124" x="758" y="1490" width="134" height="162">
+  <object id="124" x="733" y="1468" width="174" height="201">
    <ellipse/>
   </object>
-  <object id="125" x="864" y="1489" width="134" height="162">
+  <object id="125" x="839" y="1470" width="183" height="199">
    <ellipse/>
   </object>
   <object id="126" x="596" y="1485" width="189" height="242">

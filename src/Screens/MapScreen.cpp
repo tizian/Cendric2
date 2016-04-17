@@ -15,6 +15,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	handleCookingWindow(frameTime);
 	handleDialogueWindow(frameTime);
 	handleBookWindow(frameTime);
+	m_currentMap.update(frameTime);
 	if (isOverlayActive()) return;
 
 	WorldScreen::execUpdate(frameTime);
@@ -51,7 +52,6 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_ScreenOverlay, frameTime);
 	updateObjects(GameObjectType::_Light, frameTime);
 	updateObjects(GameObjectType::_Overlay, frameTime);
-	m_currentMap.update(frameTime);
 	updateTooltipText(frameTime);
 }
 
