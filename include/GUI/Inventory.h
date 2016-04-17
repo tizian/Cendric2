@@ -62,7 +62,6 @@ private:
 	BitmapText m_selectedTabText;
 
 	SlicedSprite m_scrollWindow;
-
 	ScrollBar* m_scrollBar = nullptr;
 	ScrollHelper *m_scrollHelper = nullptr;
 

@@ -9,14 +9,17 @@
 #include "GUI/QuestDescriptionWindow.h"
 #include "GUI/Button.h"
 #include "GUI/TabBar.h"
+#include "GUI/SlicedSprite.h"
 #include "Enums/EnumNames.h"
 
 class QuestDescriptionWindow;
+class ScrollBar;
+class ScrollHelper;
 
 // a quest entry in the quest log
 class QuestEntry : public GameObject {
 public:
-	QuestEntry(const std::string& questID);
+	QuestEntry(const std::string& questID, const CharacterCore* core);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
@@ -54,7 +57,10 @@ public:
 	// reloads the quests, depending on the core
 	void reload();
 
-	static float WIDTH;
+public:
+	static const float TOP;
+	static const float LEFT;
+	static const float WIDTH;
 
 private:
 	CharacterCore* m_core;
@@ -63,10 +69,17 @@ private:
 
 	void init();
 	void clearAllEntries();
+	void calculateEntryPositions();
 
 	Window* m_window;
-	TabBar* m_tabBar;
+	
 	BitmapText m_title;
+
+	TabBar* m_tabBar;
+
+	SlicedSprite m_scrollWindow;
+	ScrollBar* m_scrollBar = nullptr;
+	ScrollHelper *m_scrollHelper = nullptr;
 
 	std::vector<QuestEntry> m_startedQuests;
 	std::vector<QuestEntry> m_completedQuests;
@@ -83,7 +96,17 @@ private:
 	void showDescription(const std::string& itemID);
 	void hideDescription();
 
-	const sf::Vector2f BUTTON_SIZE = sf::Vector2f((WIDTH - 2 * (GUIConstants::TEXT_OFFSET)) / 3.f, 40.f);
-
 	std::map<QuestState, std::vector<QuestEntry>*> m_stateMap;
+
+	static const int ENTRY_COUNT;
+	static const float MAX_ENTRY_LENGTH;
+
+	static const float WINDOW_MARGIN;
+
+	static const sf::Vector2f BUTTON_SIZE;
+
+	static const float SCROLL_WINDOW_LEFT;
+	static const float SCROLL_WINDOW_TOP;
+	static const float SCROLL_WINDOW_WIDTH;
+	static const float SCROLL_WINDOW_HEIGHT;
 };
