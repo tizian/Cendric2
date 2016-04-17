@@ -16,7 +16,7 @@ class QuestDescriptionWindow;
 // a quest entry in the quest log
 class QuestEntry : public GameObject {
 public:
-	QuestEntry(const std::string& questID);
+	QuestEntry(const std::string& questID, const CharacterCore* core);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;

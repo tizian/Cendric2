@@ -150,7 +150,7 @@ void QuestLog::reload() {
 
 	for (auto& it : m_core->getData().questStates) {
 		if (m_stateMap[it.second] == nullptr) continue;
-		m_stateMap[it.second]->push_back(QuestEntry(it.first));
+		m_stateMap[it.second]->push_back(QuestEntry(it.first, m_core));
 		if (it.first.compare(m_selectedQuestID) == 0 && m_currentTab != it.second) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
@@ -183,11 +183,18 @@ void QuestLog::hide() {
 
 // <<< QUEST ENTRY >>>
 
-QuestEntry::QuestEntry(const std::string& questID) {
+QuestEntry::QuestEntry(const std::string& questID, const CharacterCore* core) {
 	m_questID = questID;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_name.setColor(COLOR_WHITE);
-	m_name.setString(">  " + g_textProvider->getText(questID, "quest"));
+	const QuestData* data = core->getQuestData(questID);
+	if (data == nullptr) {
+		m_name.setString(">  " + g_textProvider->getText("Unknown"));
+	}
+	else {
+		m_name.setString(">  " + g_textProvider->getText(data->title, "quest"));
+	}
+
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
 }
