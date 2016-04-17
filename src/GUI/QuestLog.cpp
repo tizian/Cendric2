@@ -1,9 +1,26 @@
 #include "GUI/QuestLog.h"
 #include "GUI/QuestDescriptionWindow.h"
+#include "GUI/ScrollBar.h"
+#include "GUI/ScrollHelper.h"
 
 // <<< QUEST LOG >>>
 
-float QuestLog::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
+const int QuestLog::ENTRY_COUNT = 10;
+const float QuestLog::MAX_ENTRY_LENGTH = 400.f;
+
+const float QuestLog::WINDOW_MARGIN = 6.f;
+
+const float QuestLog::SCROLL_WINDOW_LEFT = GUIConstants::TEXT_OFFSET;
+const float QuestLog::SCROLL_WINDOW_WIDTH = MAX_ENTRY_LENGTH + 4 * WINDOW_MARGIN + ScrollBar::WIDTH;
+const float QuestLog::SCROLL_WINDOW_HEIGHT = ENTRY_COUNT * GUIConstants::CHARACTER_SIZE_M + (ENTRY_COUNT - 1) * 0.5f * GUIConstants::CHARACTER_SIZE_M + 4 * WINDOW_MARGIN;
+
+const float QuestLog::TOP = GUIConstants::TOP;
+const float QuestLog::LEFT = GUIConstants::LEFT;
+const float QuestLog::WIDTH = SCROLL_WINDOW_WIDTH + 2 * SCROLL_WINDOW_LEFT;
+
+const sf::Vector2f QuestLog::BUTTON_SIZE = sf::Vector2f(SCROLL_WINDOW_WIDTH / 3.f, 40.f);
+
+const float QuestLog::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y;
 
 QuestLog::QuestLog(CharacterCore* core) {
 	m_core = core;
@@ -13,7 +30,7 @@ QuestLog::QuestLog(CharacterCore* core) {
 
 void QuestLog::init() {
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	sf::FloatRect box(LEFT, TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
@@ -22,8 +39,11 @@ void QuestLog::init() {
 
 	m_window->addCloseButton(std::bind(&QuestLog::hide, this));
 
+	delete m_descriptionWindow;
+	m_descriptionWindow = new QuestDescriptionWindow(m_core);
+
 	// init text
-	m_title.setPosition(sf::Vector2f(GUIConstants::LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
+	m_title.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
 	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_title.setString(g_textProvider->getText("Journal"));
@@ -43,8 +63,8 @@ void QuestLog::init() {
 	int nTabs = 3;
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
-	float x = GUIConstants::LEFT + 0.5f * (QuestLog::WIDTH - width);
-	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
+	float x = LEFT + 0.5f * (WIDTH - width);
+	float y = TOP + GUIConstants::GUI_TABS_TOP;
 	
 	m_tabBar = new TabBar(sf::FloatRect(x, y, width, height), nTabs);
 	for (int i = 0; i < nTabs; ++i) {
@@ -52,17 +72,26 @@ void QuestLog::init() {
 		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
 
-	delete m_descriptionWindow;
-	m_descriptionWindow = new QuestDescriptionWindow(m_core);
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollWindow.setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP));
+
+	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
+	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
+
+	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollHelper = new ScrollHelper(scrollBox);
+
+	reload();
 
 	selectTab(QuestState::Started);
-	reload();
 }
 
 QuestLog::~QuestLog() {
 	delete m_window;
 	delete m_descriptionWindow;
 	delete m_tabBar;
+	delete m_scrollBar;
+	delete m_scrollHelper;
 	clearAllEntries();
 }
 
@@ -75,6 +104,9 @@ void QuestLog::clearAllEntries() {
 
 void QuestLog::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+
+	m_window->update(frameTime);
+	m_scrollBar->update(frameTime);
 
 	// check whether an entry was selected
 	for (auto& it : *(m_stateMap[m_currentTab])) {
@@ -92,7 +124,19 @@ void QuestLog::update(const sf::Time& frameTime) {
 		selectTab(state);
 	}
 
-	m_window->update(frameTime);
+	calculateEntryPositions();
+}
+
+void QuestLog::calculateEntryPositions() {
+	for (auto& it : m_stateMap) {
+		float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
+		float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN;
+
+		for (auto& it2 : *it.second) {
+			it2.setPosition(sf::Vector2f(xOffset, yOffset));
+			yOffset += 1.5f * GUIConstants::CHARACTER_SIZE_M;
+		}
+	}
 }
 
 void QuestLog::selectEntry(QuestEntry* entry) {
@@ -124,6 +168,9 @@ void QuestLog::render(sf::RenderTarget& target) {
 	m_tabBar->render(target);
 
 	m_descriptionWindow->render(target);
+
+	target.draw(m_scrollWindow);
+	m_scrollBar->render(target);
 }
 
 void QuestLog::showDescription(const std::string& questID) {
@@ -143,9 +190,13 @@ void QuestLog::selectTab(QuestState state) {
 		m_selectedEntry = nullptr;
 	}
 	m_currentTab = state;
+
+	m_scrollBar->setScrollPosition(0.f);
 }
 
 void QuestLog::reload() {
+	m_scrollBar->scroll(0);
+
 	clearAllEntries();
 
 	for (auto& it : m_core->getData().questStates) {
@@ -157,15 +208,9 @@ void QuestLog::reload() {
 		}
 	}
 
-	// calculate positions
 	for (auto& it : m_stateMap) {
-		float xOffset = GUIConstants::LEFT + GUIConstants::TEXT_OFFSET;
-		float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
-
 		for (auto& it2 : *it.second) {
 			it2.deselect();
-			it2.setPosition(sf::Vector2f(xOffset, yOffset));
-			yOffset += 1.5f * GUIConstants::CHARACTER_SIZE_M;
 			if (it2.getQuestID().compare(m_selectedQuestID) == 0) {
 				selectEntry(&it2);
 			}
@@ -194,7 +239,6 @@ QuestEntry::QuestEntry(const std::string& questID, const CharacterCore* core) {
 	else {
 		m_name.setString(">  " + g_textProvider->getText(data->title, "quest"));
 	}
-
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
 }
