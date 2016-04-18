@@ -29,12 +29,7 @@ const float DialogueWindow::SCROLL_WINDOW_LEFT = LEFT_OFFSET;
 const float DialogueWindow::SCROLL_WINDOW_WIDTH = TEXT_WIDTH;
 const float DialogueWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COUNT * GUIConstants::CHARACTER_SIZE_M + (OPTION_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M;
 
-DialogueWindow::DialogueWindow() {
-	m_background.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_background.setFillColor(sf::Color(0, 0, 0, 200));
-
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_ornament), COLOR_WHITE, WIDTH, HEIGHT);
-	
+DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 
@@ -59,16 +54,10 @@ DialogueWindow::DialogueWindow() {
 }
 
 void DialogueWindow::setPosition(const sf::Vector2f& pos) {
-	m_border.setPosition(pos);
-	m_background.setPosition(sf::Vector2f(pos.x + 1.f, pos.y + 1.f));
+	Window::setPosition(pos);
 	m_speakerSprite.setPosition(sf::Vector2f(pos.x, WINDOW_HEIGHT - 250.f));
 	m_speakerText->setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + 3 * WINDOW_MARGIN));
 	m_dialogueText->setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + SCROLL_WINDOW_TOP));
-}
-
-void DialogueWindow::setHeight(float height) {
-	m_border.setSize(m_border.getSize().x, height);
-	m_background.setSize(sf::Vector2f(m_background.getSize().x, height - 2.f));
 }
 
 DialogueWindow::~DialogueWindow() {
@@ -141,6 +130,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 }
 
 void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices) {
+	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 	m_dialogueText->setString("");
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
@@ -324,8 +314,7 @@ void DialogueWindow::updateScrolling(const sf::Time& frameTime) {
 }
 
 void DialogueWindow::render(sf::RenderTarget& renderTarget) {
-	renderTarget.draw(m_background);
-	renderTarget.draw(m_border);
+	Window::render(renderTarget);
 
 	renderTarget.draw(*m_speakerText);
 	if (!m_options.empty()) {

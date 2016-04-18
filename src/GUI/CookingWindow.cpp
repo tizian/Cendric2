@@ -1,29 +1,56 @@
 #include "GUI/CookingWindow.h"
+#include "GUI/ScrollBar.h"
+#include "GUI/ScrollHelper.h"
+#include "GUI/SlicedSprite.h"
 #include "CharacterCore.h"
 #include "Screens/MapScreen.h"
 
 using namespace std;
 
-const sf::Vector2f TEXT_OFFSET = sf::Vector2f(270.f, 10.f);
-const sf::FloatRect BOX = sf::FloatRect(0.f, WINDOW_HEIGHT - 200.f, WINDOW_WIDTH, 200.f);
-const int CHAR_SIZE_TITLE = 16;
-const int CHAR_SIZE_OPTIONS = 12;
+const float CookingWindow::LEFT_OFFSET = 270.f;	// offset to have space for sprite
+const float CookingWindow::RIGHT_OFFSET = 100.f;
 
-CookingWindow::CookingWindow(MapScreen* screen) : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), COLOR_WHITE) {
+const float CookingWindow::TEXT_WIDTH = WINDOW_WIDTH - LEFT_OFFSET - RIGHT_OFFSET;
+
+const int CookingWindow::OPTION_COUNT = 5;
+
+const float CookingWindow::WINDOW_MARGIN = 6.f;
+
+const float CookingWindow::WIDTH = WINDOW_WIDTH;
+const float CookingWindow::HEIGHT = 200.f;
+const float CookingWindow::TOP = WINDOW_HEIGHT - HEIGHT;
+const float CookingWindow::LEFT = 0.f;
+
+const float CookingWindow::SCROLL_WINDOW_TOP = 2.f * WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_L + GUIConstants::TEXT_OFFSET;
+const float CookingWindow::SCROLL_WINDOW_LEFT = LEFT_OFFSET;
+const float CookingWindow::SCROLL_WINDOW_WIDTH = TEXT_WIDTH;
+const float CookingWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COUNT * GUIConstants::CHARACTER_SIZE_M + (OPTION_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M;
+
+CookingWindow::CookingWindow(MapScreen* screen) : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT) , WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_screen = screen;
 	m_cookingSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_misc_cooking)));
 	m_title.setString(g_textProvider->getText("Fireplace"));
-	m_title.setCharacterSize(CHAR_SIZE_TITLE);
+	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setColor(COLOR_LIGHT_PURPLE);
 	
 	setPosition(getPosition());
+
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollWindow.setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP));
+
+	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT);
+	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
+
+	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollHelper = new ScrollHelper(scrollBox);
+
 	reload();
 }
 
 void CookingWindow::setPosition(const sf::Vector2f& pos) {
 	Window::setPosition(pos); 
 	m_cookingSprite.setPosition(sf::Vector2f(pos.x, WINDOW_HEIGHT - 250.f));
-	m_title.setPosition(sf::Vector2f(pos.x + TEXT_OFFSET.x, pos.y + TEXT_OFFSET.y));
+	m_title.setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + 3 * WINDOW_MARGIN));
 }
 
 CookingWindow::~CookingWindow() {
@@ -31,6 +58,7 @@ CookingWindow::~CookingWindow() {
 }
 
 void CookingWindow::reload() {
+	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 
 	int nr = 0;
@@ -60,14 +88,15 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 
 	bool chooseOption = false;
 
+	m_scrollBar->update(frameTime);
+
 	int oldOption = m_chosenOption;
-	if (g_inputController->isKeyJustPressed(Key::Up)) {
-		m_chosenOption = std::max(m_chosenOption - 1, 0);
-	}
-	else if (g_inputController->isKeyJustPressed(Key::Down)) {
-		m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
-	}
+
+	updateScrolling(frameTime);
+
 	for (size_t i = 0; i < m_options.size(); i++) {
+		sf::Vector2f pos = m_options[i].getPosition();
+		if (pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT) continue;
 		m_options[i].update(frameTime);
 		if (m_options[i].isClicked()) {
 			if (static_cast<int>(i) == m_chosenOption) {
@@ -84,6 +113,8 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 		g_resourceManager->playSound(m_sound, ResourceID::Sound_gui_menucursor, true);
 	}
 
+	calculateEntryPositions();
+
 	if (chooseOption || g_inputController->isSelected()) {
 		const std::string& itemID = m_options[m_chosenOption].getItemID();
 		if (itemID.empty()) {
@@ -96,6 +127,103 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 	}
 
 	return true;
+}
+
+void CookingWindow::calculateEntryPositions() {
+	int rows = static_cast<int>(m_options.size());
+	int steps = rows - OPTION_COUNT + 1;
+
+	m_scrollBar->setDiscreteSteps(steps);
+
+	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
+
+	if (2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M != m_scrollHelper->nextOffset) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+		m_scrollHelper->nextOffset = 2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M;
+	}
+
+	float animationTime = 0.1f;
+	float time = m_scrollBar->getScrollTime().asSeconds();
+	if (time >= animationTime) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+	}
+	float start = m_scrollHelper->lastOffset;
+	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
+	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
+
+	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
+	float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset;
+
+	for (auto& it : m_options) {
+		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
+		it.setPosition(sf::Vector2f(xOffset, yOffset));
+		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
+	}
+}
+
+void CookingWindow::updateScrolling(const sf::Time& frameTime) {
+	if (g_inputController->isKeyJustPressed(Key::Up)) {
+		m_chosenOption = std::max(m_chosenOption - 1, 0);
+		CookingOption& option = m_options[m_chosenOption];
+		if (option.getPosition().y < TOP + SCROLL_WINDOW_TOP) {
+			m_scrollBar->scroll(-1);
+		}
+		m_upActiveTime = frameTime;
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Down)) {
+		m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
+		CookingOption& option = m_options[m_chosenOption];
+		if (option.getPosition().y + option.getSize().y > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) {
+			m_scrollBar->scroll(1);
+		}
+		m_downActiveTime = frameTime;
+		return;
+	}
+
+	if (m_upActiveTime > sf::Time::Zero) {
+		if (g_inputController->isKeyActive(Key::Up)) {
+			m_upActiveTime += frameTime;
+		}
+		else {
+			m_upActiveTime = sf::Time::Zero;
+			return;
+		}
+	}
+
+	if (m_downActiveTime > sf::Time::Zero) {
+		if (g_inputController->isKeyActive(Key::Down)) {
+			m_downActiveTime += frameTime;
+		}
+		else {
+			m_downActiveTime = sf::Time::Zero;
+			return;
+		}
+	}
+
+	m_timeSinceTick += frameTime;
+	if (m_timeSinceTick < SCROLL_TICK_TIME) return;
+
+	if (m_upActiveTime > SCROLL_TIMEOUT) {
+		m_chosenOption = std::max(m_chosenOption - 1, 0);
+		CookingOption& option = m_options[m_chosenOption];
+		m_timeSinceTick = sf::Time::Zero;
+		if (option.getPosition().y < TOP) {
+			m_scrollBar->scroll(-1);
+		}
+		return;
+	}
+
+	if (m_downActiveTime > SCROLL_TIMEOUT) {
+		m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
+		CookingOption& option = m_options[m_chosenOption];
+		m_timeSinceTick = sf::Time::Zero;
+		if (option.getPosition().y + option.getSize().y > TOP + HEIGHT) {
+			m_scrollBar->scroll(1);
+		}
+		return;
+	}
 }
 
 void CookingWindow::cookItem(const std::string& itemID) {
@@ -118,8 +246,12 @@ void CookingWindow::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_title);
 
 	for (auto& it : m_options) {
-		it.render(renderTarget);
+		it.render(m_scrollHelper->texture);
 	}
+	m_scrollHelper->render(renderTarget);
+
+	renderTarget.draw(m_scrollWindow);
+	m_scrollBar->render(renderTarget);
 
 	renderTarget.draw(m_cookingSprite);
 }
@@ -141,10 +273,9 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 		textString += " (" + g_textProvider->getText(itemID, "item") + " " + std::to_string(count)  + ")";
 		m_text.setString(textString);
 	}
-	m_text.setCharacterSize(CHAR_SIZE_OPTIONS);
+	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_text.setColor(COLOR_WHITE);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
-	setPosition(sf::Vector2f(TEXT_OFFSET.x, BOX.top + TEXT_OFFSET.y + 30.f + (nr * 20.f)));
 	setInputInDefaultView(true);
 }
 
