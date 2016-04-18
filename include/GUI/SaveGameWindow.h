@@ -57,6 +57,7 @@ public:
 
 private:
 	void calculateEntryPositions();
+	void updateScrolling(const sf::Time& frameTime);
 
 public:
 	static const float COLUMN_WIDTH;
@@ -73,6 +74,14 @@ private:
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;
 	ScrollHelper *m_scrollHelper = nullptr;
+
+	// the time it waits from key active to scrolling
+	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
+	sf::Time m_upActiveTime = sf::Time::Zero;
+	sf::Time m_downActiveTime = sf::Time::Zero;
+	// the time between the scroll-ticks, determines the speed of scrolling
+	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
+	sf::Time m_timeSinceTick = sf::Time::Zero;
 
 	static const int ENTRY_COUNT;
 

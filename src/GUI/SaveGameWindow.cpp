@@ -99,6 +99,8 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 
 	int oldEntry = m_chosenEntry;
 
+	updateScrolling(frameTime);
+
 	for (size_t i = 0; i < m_entries.size(); ++i) {
 		sf::Vector2f pos = m_entries[i].getPosition();
 		if (pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT) continue;
@@ -153,6 +155,71 @@ void SaveGameWindow::calculateEntryPositions() {
 		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
 		it.setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
+	}
+}
+
+void SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
+	if (g_inputController->isKeyJustPressed(Key::Up)) {
+		m_chosenEntry = std::max(m_chosenEntry - 1, 0);
+		SaveGameEntry& entry = m_entries[m_chosenEntry];
+		if (entry.getPosition().y < TOP) {
+			m_scrollBar->scroll(-1);
+		}
+		m_upActiveTime = frameTime;
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Down)) {
+		m_chosenEntry = std::min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
+		SaveGameEntry& entry = m_entries[m_chosenEntry];
+		if (entry.getPosition().y + entry.getSize().y > TOP + HEIGHT) {
+			m_scrollBar->scroll(1);
+		}
+		m_downActiveTime = frameTime;
+		return;
+	}
+
+	if (m_upActiveTime > sf::Time::Zero) {
+		if (g_inputController->isKeyActive(Key::Up)) {
+			m_upActiveTime += frameTime;
+		}
+		else {
+			m_upActiveTime = sf::Time::Zero;
+			return;
+		}
+	}
+
+	if (m_downActiveTime > sf::Time::Zero) {
+		if (g_inputController->isKeyActive(Key::Down)) {
+			m_downActiveTime += frameTime;
+		}
+		else {
+			m_downActiveTime = sf::Time::Zero;
+			return;
+		}
+	}
+
+	m_timeSinceTick += frameTime;
+	if (m_timeSinceTick < SCROLL_TICK_TIME) return;
+
+	if (m_upActiveTime > SCROLL_TIMEOUT) {
+		m_chosenEntry = std::max(m_chosenEntry - 1, 0);
+		SaveGameEntry& entry = m_entries[m_chosenEntry];
+		m_timeSinceTick = sf::Time::Zero;
+		if (entry.getPosition().y < TOP) {
+			m_scrollBar->scroll(-1);
+		}
+		return;
+	}
+
+	if (m_downActiveTime > SCROLL_TIMEOUT) {
+		m_chosenEntry = std::min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
+		SaveGameEntry& entry = m_entries[m_chosenEntry];
+		m_timeSinceTick = sf::Time::Zero;
+		if (entry.getPosition().y + entry.getSize().y > TOP + HEIGHT) {
+			m_scrollBar->scroll(1);
+		}
+		return;
 	}
 }
 
