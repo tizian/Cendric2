@@ -228,7 +228,7 @@ void QuestLog::reload() {
 
 	for (auto& it : m_core->getData().questStates) {
 		if (m_stateMap[it.second] == nullptr) continue;
-		m_stateMap[it.second]->push_back(QuestEntry(it.first, m_core));
+		m_stateMap[it.second]->push_back(QuestEntry(it.first));
 		if (it.first.compare(m_selectedQuestID) == 0 && m_currentTab != it.second) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
@@ -255,18 +255,12 @@ void QuestLog::hide() {
 
 // <<< QUEST ENTRY >>>
 
-QuestEntry::QuestEntry(const std::string& questID, const CharacterCore* core) {
+QuestEntry::QuestEntry(const std::string& questID) {
 	m_questID = questID;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_name.setColor(COLOR_WHITE);
-	const QuestData* data = core->getQuestData(questID);
-	std::string questTitle;
-	if (data == nullptr) {
-		questTitle = "> " + g_textProvider->getText("Unknown");
-	}
-	else {
-		questTitle = "> " + g_textProvider->getText(data->title, "quest");
-	}
+
+	std::string questTitle = "> " + g_textProvider->getText(questID, "quest");
 	if (questTitle.size() > QuestLog::MAX_ENTRY_LENGTH_CHARACTERS) {
 		questTitle = questTitle.substr(0, QuestLog::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
 	}

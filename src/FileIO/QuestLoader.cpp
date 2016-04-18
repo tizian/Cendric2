@@ -21,14 +21,6 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 
 	lua_pcall(L, 0, 0, 0);
 
-	LuaRef title = getGlobal(L, "title");
-	if (!title.isString()) {
-		g_logger->logError("QuestLoader", "Quest [" + getPath(filename) + "] has no title tag or of wrong type.");
-		return questData;
-	}
-
-	questData.title = title.cast<std::string>();
-
 	LuaRef targets = getGlobal(L, "targets");
 	if (targets.isTable()) {
 		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.

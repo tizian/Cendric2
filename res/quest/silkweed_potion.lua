@@ -1,5 +1,4 @@
 -- lua script for quest silkweed_potion
-title = "silkweed_potion"
 
 -- what to do?
 collectibles = 

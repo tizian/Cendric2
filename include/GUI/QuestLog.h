@@ -19,7 +19,7 @@ class ScrollHelper;
 // a quest entry in the quest log
 class QuestEntry : public GameObject {
 public:
-	QuestEntry(const std::string& questID, const CharacterCore* core);
+	QuestEntry(const std::string& questID);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;

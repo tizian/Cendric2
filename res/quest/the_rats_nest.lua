@@ -1,5 +1,4 @@
 -- lua script for kill quest the_rats_nest
-title = "the_rats_nest"
 
 -- what to do?
 targets = 

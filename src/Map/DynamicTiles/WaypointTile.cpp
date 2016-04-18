@@ -52,6 +52,10 @@ void WaypointTile::update(const sf::Time& frameTime) {
 	}
 }
 
+void WaypointTile::onLeftClick() {
+	onRightClick();
+}
+
 void WaypointTile::onRightClick() {
 	if (m_state == GameObjectState::Idle) {
 		m_screen->setTooltipText("WaypointNotActive", COLOR_BAD, true);

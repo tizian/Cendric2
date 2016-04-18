@@ -38,14 +38,14 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 	}
 
 	std::string title = g_textProvider->getCroppedText(
-		data->title, "quest",
+		questID, "quest",
 		GUIConstants::CHARACTER_SIZE_M,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 	m_titleText.setString(title);
 	
 
 	std::string description = g_textProvider->getCroppedText(
-		data->title, "quest_desc",
+		questID, "quest_desc",
 		GUIConstants::CHARACTER_SIZE_S,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 	
@@ -54,7 +54,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		for (auto& it : unlockedDescriptions) {
 			description.append("\n\n");
 			description.append(g_textProvider->getCroppedText(
-				data->title, "quest_desc_" + std::to_string(it),
+				questID, "quest_desc_" + std::to_string(it),
 				GUIConstants::CHARACTER_SIZE_S,
 				static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 		}

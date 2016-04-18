@@ -9,6 +9,11 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("hawthorn_staff", "started") and DL:isQuestComplete("hawthorn_staff")) then
 		DL:addChoice(70, "DL_Choice_IGotStaff") --  I got the Hawthorn staff.
 	end
+	if (DL:isQuestState("broken_bridge", "started") and (DL:isQuestComplete("broken_bridge") or DL:hasItem("qe_spoiledfeudalfire", 1))) then
+		DL:addChoice(90, "DL_Choice_IGotSchnapps") --  I got the schnapps for you.
+	elseif (DL:isQuestState("broken_bridge", "started") and not (DL:isQuestComplete("broken_bridge") or DL:hasItem("qe_spoiledfeudalfire", 1)) and DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire")) then
+		DL:addChoice(90, "DL_Choice_IDrankSchnapps") --  I got the schnaps for you... and it was delicious.
+	end
 	if (DL:isQuestState("silkweed_potion", "started")) then
 		DL:addChoice(20, "DL_Choice_CanITrustYou") --  Can I trust you? What if that potion is going to poison me?
 		DL:addChoice(22, "DL_Choice_WhereIsYourGarden") --  Where can I find the Silkweed?
@@ -53,7 +58,6 @@ loadDialogue = function(DL)
 	else
 		DL:createNPCNode(0, 1, "DL_Rhendal_Hello") -- Hello, young man. What brings you into my humble home?
 		DL:addConditionProgress("npc_rhendal", "talked")
-		DL:addReputationProgress("druid", 0);
 		DL:addNode()
 		
 		DL:createChoiceNode(1)
@@ -242,6 +246,48 @@ loadDialogue = function(DL)
 		DL:addChoice(86, "DL_Choice_IWontHelp") --  I don't think I should waste my power like this...
 		DL:addNode()
 		
+	end
+	
+	if (DL:isQuestState("broken_bridge", "started") and DL:isQuestComplete("broken_bridge")) then
+		DL:createNPCNode(90, 91, "DL_Rhendal_ThankForSchnaps") -- Oh, perfect, thank you. So you managed to cross the river. Hmm, a truly special drink. Do you want some? 
+		DL:changeQuestState("broken_bridge", "completed")
+		DL:addReputationProgress("druid", 10)
+		DL:removeItem("pe_feudalfire", 1)
+		DL:addNode()
+		
+		DL:createChoiceNode(91)
+		DL:addChoice(92, "DL_Choice_IWantDrink") --  Yes, why not.
+		DL:addChoice(94, "DL_Choice_IDontWantDrink") --  No, thank you.
+		DL:addNode()
+		
+		DL:createNPCNode(92, 93, "DL_Rhendal_GivesSchnapps") -- Yes, that's the right decision. Here, take a glass.
+		DL:addItem("pe_glassoffeudalfire", 1)
+		DL:addReputationProgress("druid", 5)
+		DL:addNode()
+		
+		DL:createCendricNode(93, -2, "DL_Cendric_Thanks") -- Thanks.
+		DL:addNode()
+		
+		DL:createNPCNode(94, -2, "DL_Rhendal_NoSchnappsPity") -- Oh, what a pity. You don't know what you're missing.
+		DL:addNode()
+		
+	elseif (DL:isQuestState("broken_bridge", "started") and DL:hasItem("qe_spoiledfeudalfire", 1)) then
+		DL:createNPCNode(90, 91, "DL_Rhendal_ThankForSchnaps") -- Oh, perfect, thank you. So you managed to cross the river. Hmm, a truly special drink. Do you want some? 
+		DL:changeQuestState("broken_bridge", "failed")
+		DL:addReputationProgress("druid", 5)
+		DL:addConditionProgress("npc_rhendal", "spoiled_schnapps")
+		DL:removeItem("qe_spoiledfeudalfire", 1)
+		DL:addNode()
+		
+		DL:createCendricNode(91, 94, "DL_Choice_IDontWantDrink") --  No, thank you.
+		DL:addNode()
+		
+		DL:createNPCNode(94, -2, "DL_Rhendal_NoSchnappsPity") -- Oh, what a pity. You don't know what you're missing.
+		DL:addNode()
+	elseif (DL:isQuestState("broken_bridge", "started") and not (DL:isQuestComplete("broken_bridge") or DL:hasItem("qe_spoiledfeudalfire", 1)) and DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire")) then
+		DL:createNPCNode(90, -1, "DL_Rhendal_YouDrankSchnaps") -- What? Oh you silly boy! You drank it yourself? You're not the sharpest knife in the drawer, are you.
+		DL:changeQuestState("broken_bridge", "failed")
+		DL:addNode()
 	end
 	
 end	
