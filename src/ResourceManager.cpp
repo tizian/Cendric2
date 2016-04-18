@@ -1,3 +1,4 @@
+
 #include "ResourceManager.h"
 #include "AnimatedSprite.h"
 
@@ -117,6 +118,8 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_checkbox, "res/assets/gui/checkbox.png" },
 		{ ResourceID::Texture_GUI_slider, "res/assets/gui/slider.png" },
 		{ ResourceID::Texture_GUI_slider_knob, "res/assets/gui/slider_knob.png" },
+		{ ResourceID::Texture_GUI_scrollbar_knob, "res/assets/gui/scrollbar_knob.png" },
+		{ ResourceID::Texture_GUI_scrollbar_knob_white, "res/assets/gui/scrollbar_knob_white.png" },
 		{ ResourceID::Texture_GUI_spell_color_elemental, "res/assets/gui/spell_color_elemental.png" },
 		{ ResourceID::Texture_GUI_spell_color_twilight, "res/assets/gui/spell_color_twilight.png" },
 		{ ResourceID::Texture_GUI_spell_color_necromancy, "res/assets/gui/spell_color_necromancy.png" },

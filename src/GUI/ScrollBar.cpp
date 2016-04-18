@@ -186,12 +186,12 @@ GameObjectType ScrollBar::getConfiguredType() const {
 
 // SLIDER KNOB
 
-const float ScrollBarKnob::WIDTH = 30.f;
-const float ScrollBarKnob::HEIGHT = 20.f;
+const float ScrollBarKnob::WIDTH = 20.f;
+const float ScrollBarKnob::HEIGHT = 30.f;
 
 ScrollBarKnob::ScrollBarKnob() : GameObject() {
 	m_knob.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border));
+	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_scrollbar_knob));
 
 	setBoundingBox(m_knob.getLocalBounds());
 	setInputInDefaultView(true);
