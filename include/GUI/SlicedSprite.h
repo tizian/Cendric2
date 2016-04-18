@@ -14,6 +14,8 @@ public:
 	void setTexture(sf::Texture *texture);
 	void setColor(const sf::Color &color);
 
+	sf::Vector2f getSize() const;
+
 	sf::Color getColor() const;
 
 	void setSlicing(float left, float right, float top, float bottom);

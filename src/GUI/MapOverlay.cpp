@@ -56,7 +56,6 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 	m_border = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		COLOR_TRANSPARENT,
-		COLOR_TRANSPARENT,
 		GUIConstants::ORNAMENT_COLOR);
 
 	m_border->addCloseButton(std::bind(&MapOverlay::hide, this));

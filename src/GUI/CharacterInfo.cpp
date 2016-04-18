@@ -50,7 +50,6 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
-		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
 
 	m_window->addCloseButton(std::bind(&CharacterInfo::hide, this));

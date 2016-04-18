@@ -7,8 +7,7 @@ const float DocumentDescriptionWindow::WIDTH = 340.f;
 DocumentDescriptionWindow::DocumentDescriptionWindow(const Item& item) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	WindowOrnamentStyle::FANCY,
-	COLOR_LIGHT_BROWN, // main
-	COLOR_TRANSPARENT, // back
+	COLOR_LIGHT_BROWN, // back
 	COLOR_DARK_BROWN) // ornament 
 {
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);

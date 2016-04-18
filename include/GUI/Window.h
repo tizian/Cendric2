@@ -18,7 +18,7 @@ enum class WindowOrnamentStyle {
 class Window : public GameObject {
 public:
 	Window(const sf::FloatRect& box, WindowOrnamentStyle style);
-	Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor);
+	Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor);
 
 	virtual ~Window();
 
@@ -31,7 +31,6 @@ public:
 	void setHeight(float height);
 	void setWidth(float width);
 
-	void setMainColor(const sf::Color& color);
 	void setBackColor(const sf::Color& color);
 	void setOrnamentColor(const sf::Color& color);
 
@@ -44,11 +43,9 @@ private:
 	void updateCloseButton();
 
 private:
-	SlicedSprite m_mainLayer;
 	SlicedSprite m_backLayer;
 	SlicedSprite m_ornamentLayer;
 
-	sf::Color m_mainColor;
 	sf::Color m_backColor;
 	sf::Color m_ornamentColor;
 

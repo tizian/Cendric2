@@ -11,10 +11,12 @@
 
 class CharacterCore;
 class NPC;
+class ScrollBar;
+class ScrollHelper;
 
 class DialogueOption : public GameObject {
 public:
-	DialogueOption(const std::string& text, const std::string& dialogueID, int nr, bool isEnd = false);
+	DialogueOption(const std::string& text, const std::string& dialogueID, bool isEnd = false);
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
@@ -30,12 +32,12 @@ private:
 	BitmapText m_text;
 };
 
-class DialogueWindow : public Window {
+class DialogueWindow {
 public:
 	DialogueWindow();
 	~DialogueWindow();
 	void load(NPC* npc, WorldScreen* screen);
-	void render(sf::RenderTarget& renderTarget) override;
+	void render(sf::RenderTarget& renderTarget);
 	// returns true as long as the dialogue exists and false as soon as it ends
 	bool updateDialogue(const sf::Time frameTime);
 
@@ -43,25 +45,71 @@ public:
 	void setCendricTalking(const std::string& text);
 	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices);
 	void setNPCTrading(const std::string& text);
-	void setPosition(const sf::Vector2f& pos) override;
+	void setPosition(const sf::Vector2f& pos);
+	void setHeight(float height);
 
 	NPC* getNPC();
 
 private:
 	void setNPC(NPC* npc);
 	void setDialogue(const std::string& dialogueID, WorldScreen* screen);
+
+	void calculateEntryPositions();
+	void updateScrolling(const sf::Time& frameTime);
+
+private:
 	std::vector<DialogueOption> m_options;
 	int m_chosenOption = 0;
-	Dialogue* m_dialogue = nullptr;
-	BitmapText* m_dialogueText = nullptr;
-	BitmapText* m_speakerText = nullptr;
-	MerchantInterface* m_merchantInterface = nullptr;
-	sf::Sprite m_speakerSprite;
+
+	Screen* m_screen = nullptr;
+
+	SlicedSprite m_border;
+	sf::RectangleShape m_background;
+
+	SlicedSprite m_scrollWindow;
+	ScrollBar* m_scrollBar = nullptr;
+	ScrollHelper *m_scrollHelper = nullptr;
+
 	NPC* m_npc;
-	// the menu sound
-	sf::Sound m_sound;
+	sf::Sprite m_speakerSprite;
+
 	std::string m_npcName;
 	std::string m_npcID;
 	std::string m_dialogueTextID;
 	sf::IntRect m_npcTexturePosition;
+
+	Dialogue* m_dialogue = nullptr;
+	BitmapText* m_dialogueText = nullptr;
+	BitmapText* m_speakerText = nullptr;
+	MerchantInterface* m_merchantInterface = nullptr;
+
+	// the menu sound
+	sf::Sound m_sound;
+
+	// the time it waits from key active to scrolling
+	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
+	sf::Time m_upActiveTime = sf::Time::Zero;
+	sf::Time m_downActiveTime = sf::Time::Zero;
+	// the time between the scroll-ticks, determines the speed of scrolling
+	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
+	sf::Time m_timeSinceTick = sf::Time::Zero;
+
+	static const int OPTION_COUNT;
+
+	static const float LEFT_OFFSET;
+	static const float RIGHT_OFFSET;
+
+	static const float TEXT_WIDTH;
+
+	static const float WINDOW_MARGIN;
+
+	static const float TOP;
+	static const float LEFT;
+	static const float WIDTH;
+	static const float HEIGHT;
+
+	static const float SCROLL_WINDOW_TOP;
+	static const float SCROLL_WINDOW_LEFT;
+	static const float SCROLL_WINDOW_WIDTH;
+	static const float SCROLL_WINDOW_HEIGHT;
 };

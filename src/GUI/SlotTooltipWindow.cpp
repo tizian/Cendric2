@@ -9,8 +9,7 @@ const int SlotTooltipWindow::MAX_WIDTH = 150;
 
 SlotTooltipWindow::SlotTooltipWindow() : Window(
 	sf::FloatRect(), WindowOrnamentStyle::NONE, 
-	sf::Color(0, 0, 0, 70), 
-	sf::Color(0, 0, 0, 70), 
+	sf::Color(0, 0, 0, 70),
 	COLOR_WHITE) 
 {
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);

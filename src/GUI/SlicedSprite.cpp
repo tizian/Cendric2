@@ -44,6 +44,10 @@ void SlicedSprite::setSize(float width, float height) {
 	init();
 }
 
+sf::Vector2f SlicedSprite::getSize() const {
+	return sf::Vector2f(m_width, m_height);
+}
+
 void SlicedSprite::setTexture(sf::Texture *texture) {
 	m_texture = texture;
 }

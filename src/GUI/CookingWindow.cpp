@@ -9,7 +9,7 @@ const sf::FloatRect BOX = sf::FloatRect(0.f, WINDOW_HEIGHT - 200.f, WINDOW_WIDTH
 const int CHAR_SIZE_TITLE = 16;
 const int CHAR_SIZE_OPTIONS = 12;
 
-CookingWindow::CookingWindow(MapScreen* screen) : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), COLOR_WHITE) {
+CookingWindow::CookingWindow(MapScreen* screen) : Window(BOX, WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 100), COLOR_WHITE) {
 	m_screen = screen;
 	m_cookingSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_misc_cooking)));
 	m_title.setString(g_textProvider->getText("Fireplace"));

@@ -5,11 +5,10 @@
 const sf::Vector2f TEXT_OFFSET = sf::Vector2f(30.f, 15.f);
 
 WindowScreenOverlay::WindowScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : ScreenOverlay(activeTime, fadeTime) {
-	m_windowMainColor = sf::Color(0, 0, 0, 70);
 	m_windowBackColor = sf::Color(0, 0, 0, 70);
 	m_windowOrnamentColor = COLOR_WHITE;
 
-	m_window = new Window(sf::FloatRect(), WindowOrnamentStyle::FANCY, m_windowMainColor, m_windowBackColor, m_windowOrnamentColor);
+	m_window = new Window(sf::FloatRect(), WindowOrnamentStyle::FANCY, m_windowBackColor, m_windowOrnamentColor);
 
 	m_window->addCloseButton(std::bind(&WindowScreenOverlay::close, this));
 }
@@ -20,11 +19,6 @@ WindowScreenOverlay::~WindowScreenOverlay() {
 
 void WindowScreenOverlay::update(const sf::Time& frameTime) {
 	ScreenOverlay::update(frameTime);
-	m_window->setMainColor(sf::Color(
-		m_windowMainColor.r,
-		m_windowMainColor.g,
-		m_windowMainColor.b,
-		(sf::Uint8)(m_scale * m_windowMainColor.a)));
 	m_window->setBackColor(sf::Color(
 		m_windowBackColor.r,
 		m_windowBackColor.g,
