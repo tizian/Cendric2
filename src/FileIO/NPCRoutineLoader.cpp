@@ -24,8 +24,10 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("isQuestState", &NPCRoutineLoader::isQuestState)
 		.addFunction("isConditionFulfilled", &NPCRoutineLoader::isConditionFulfilled)
 		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
+		.addFunction("setTilePositionForce", &NPCRoutineLoader::setTilePositionForce)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
 		.addFunction("setTalkingActive", &NPCRoutineLoader::setTalkingActive)
+		.addFunction("setTalkingActiveForce", &NPCRoutineLoader::setTalkingActiveForce)
 		.addFunction("setTalkingEnabled", &NPCRoutineLoader::setTalkingEnabled)
 		.endClass();
 
@@ -75,6 +77,10 @@ void NPCRoutineLoader::setLooped(bool looped) {
 
 void NPCRoutineLoader::setTalkingActive(bool active) {
 	if (!m_isInitial) return;
+	setTalkingActiveForce(active);
+}
+
+void NPCRoutineLoader::setTalkingActiveForce(bool active) {
 	m_routine.getNPC()->setTalkingActive(active);
 }
 
@@ -105,6 +111,10 @@ bool NPCRoutineLoader::isQuestState(const std::string& questID, const std::strin
 
 void NPCRoutineLoader::setTilePosition(float x, float y) {
 	if (!m_isInitial) return;
+	setTilePositionForce(x, y);
+}
+
+void NPCRoutineLoader::setTilePositionForce(float x, float y) {
 	m_routine.getNPC()->setPosition(sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F));
 }
 
