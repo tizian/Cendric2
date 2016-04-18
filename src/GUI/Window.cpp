@@ -4,15 +4,13 @@ using namespace std;
 
 Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject() {
 	// using default values for constructor.
-	m_mainColor = COLOR_BLACK;
-	m_backColor = COLOR_LIGHT_PURPLE;
+	m_backColor = COLOR_BLACK;
 	m_ornamentColor = COLOR_WHITE;
 
 	init(box, style);
 }
 
-Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& mainColor, const sf::Color& backColor, const sf::Color& ornamentColor) {
-	m_mainColor = mainColor;
+Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor) {
 	m_backColor = backColor;
 	m_ornamentColor = ornamentColor;
 
@@ -21,8 +19,6 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Co
 
 void Window::init(const sf::FloatRect& box, WindowOrnamentStyle style) {
 	setBoundingBox(box);
-
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_mainColor, box.width, box.height);
 
 	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backColor, box.width, box.height);
 
@@ -72,7 +68,6 @@ void Window::updateCloseButton() {
 
 void Window::setPosition(const sf::Vector2f& position) {
 	GameObject::setPosition(position);
-	m_mainLayer.setPosition(position);
 	m_backLayer.setPosition(position);
 	m_ornamentLayer.setPosition(position);
 
@@ -87,7 +82,6 @@ void Window::update(const sf::Time& frameTime) {
 
 void Window::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_backLayer);
-	renderTarget.draw(m_mainLayer);
 	renderTarget.draw(m_ornamentLayer);
 	if (m_closeButton) {
 		m_closeButton->render(renderTarget);
@@ -106,7 +100,6 @@ void Window::setHeight(float height) {
 	if (height < 0.f) return;
 	m_boundingBox.height = height;
 	m_backLayer.setSize(getSize());
-	m_mainLayer.setSize(getSize());
 	m_ornamentLayer.setSize(getSize());
 
 	updateCloseButton();
@@ -116,15 +109,7 @@ void Window::setWidth(float width) {
 	if (width < 0.f) return;
 	m_boundingBox.width = width;
 	m_backLayer.setSize(getSize());
-	m_mainLayer.setSize(getSize());
 	m_ornamentLayer.setSize(getSize());
-
-	updateCloseButton();
-}
-
-void Window::setMainColor(const sf::Color& color) {
-	m_mainColor = color;
-	m_mainLayer.setColor(color);
 
 	updateCloseButton();
 }

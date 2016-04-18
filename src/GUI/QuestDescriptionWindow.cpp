@@ -8,7 +8,6 @@ QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Wind
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	WindowOrnamentStyle::FANCY,
 	GUIConstants::MAIN_COLOR,
-	GUIConstants::BACK_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
 	m_core = core;
 

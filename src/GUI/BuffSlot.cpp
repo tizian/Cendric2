@@ -13,7 +13,7 @@ const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
 
 const sf::Vector2f TEXT_OFFSET = sf::Vector2f(10.f, 10.f);
 
-BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) : m_tooltipWindow(Window(sf::FloatRect(), WindowOrnamentStyle::NONE, sf::Color(0, 0, 0, 100), sf::Color(0, 0, 0, 100), COLOR_WHITE)) {
+BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) : m_tooltipWindow(Window(sf::FloatRect(), WindowOrnamentStyle::NONE, sf::Color(0, 0, 0, 100), COLOR_WHITE)) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
 	setDebugBoundingBox(COLOR_BAD);
 	m_buffType = type;

@@ -92,7 +92,6 @@ void WeaponWindow::init() {
 	m_window = new Window(box,
 		WindowOrnamentStyle::FANCY,
 		GUIConstants::MAIN_COLOR,
-		GUIConstants::BACK_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
 
 	delete m_spellDesc;
