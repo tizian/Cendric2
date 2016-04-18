@@ -10,6 +10,8 @@
 #include "Map/Dialogue.h"
 
 class CharacterCore;
+class ScrollBar;
+class ScrollHelper;
 
 class CookingOption : public virtual GameObject {
 public:
@@ -47,11 +49,49 @@ public:
 private:
 	void reload();
 	void cookItem(const std::string& itemID);
+
+	void calculateEntryPositions();
+	void updateScrolling(const sf::Time& frameTime);
+
+private:
 	std::vector<CookingOption> m_options;
-	BitmapText m_title;
 	int m_chosenOption = 0;
+
+	SlicedSprite m_scrollWindow;
+	ScrollBar* m_scrollBar = nullptr;
+	ScrollHelper *m_scrollHelper = nullptr;
+
+	sf::Sprite m_cookingSprite;
+	BitmapText m_title;
+	
 	MapScreen* m_screen = nullptr;
+
 	sf::Sound m_sound;
 	
-	sf::Sprite m_cookingSprite;
+	// the time it waits from key active to scrolling
+	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
+	sf::Time m_upActiveTime = sf::Time::Zero;
+	sf::Time m_downActiveTime = sf::Time::Zero;
+	// the time between the scroll-ticks, determines the speed of scrolling
+	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
+	sf::Time m_timeSinceTick = sf::Time::Zero;
+
+	static const int OPTION_COUNT;
+
+	static const float LEFT_OFFSET;
+	static const float RIGHT_OFFSET;
+
+	static const float TEXT_WIDTH;
+
+	static const float WINDOW_MARGIN;
+
+	static const float TOP;
+	static const float LEFT;
+	static const float WIDTH;
+	static const float HEIGHT;
+
+	static const float SCROLL_WINDOW_TOP;
+	static const float SCROLL_WINDOW_LEFT;
+	static const float SCROLL_WINDOW_WIDTH;
+	static const float SCROLL_WINDOW_HEIGHT;
 };
