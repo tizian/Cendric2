@@ -54,6 +54,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_beer', 'item_desc', 'Should be consumed in moderation.', 'Zu viel davon sollte man besser nicht geniessen.', 'Z''viel devo söt me besser nid trinke.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_wine', 'item', 'Wine', 'Wein', 'Wii');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_wine', 'item_desc', 'A noble wine.', 'Ein edler Wein.', 'En guete Tropfe.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_sausage', 'item', 'Sausage', 'Wurst', 'Wurscht');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_sausage', 'item_desc', 'Tasty.', 'Lecker.', 'Fein.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ham', 'item', 'Ham', 'Schinken', 'Schinke');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ham', 'item_desc', 'A juicy ham.', 'Ein saftiger Schinken.', 'En saftige Schinke.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item', 'Raw Fish', 'Roher Fisch', 'Rohe Fisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item_desc', 'I should cook this better first.', 'Den sollte ich wohl besser zuerst kochen.', 'Söttme glaub besser zersch choche.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item', 'Fish Soup', 'Fischsuppe', 'Fischsuppe');
@@ -64,8 +68,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_feudalfire', 'item_desc', 'A strong spirit, is used for alchemistic purposes.', 'Ziemlich hochprozentig, wird für alchemistische Zwecke verwendet.', 'Zimlich hochprozentig, wird für alchemistischi Zweck bruucht.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_glassoffeudalfire', 'item', 'Glass of Feudal Fire', 'Ein Glas Feudales Feuer', 'Es Glas Feudals Füür');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_glassoffeudalfire', 'item_desc', 'A strong spirit.', 'Ziemlich hochprozentig.', 'Zimlich hochprozentig.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item', 'Feudal Fire (Spoiled)', 'Feudales Feuer (Verdorbe)', 'Feudals Füür (Verdorbe)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item_desc', 'Vincent has mixed something in there. It doesn''t seem safe to drink anymore.', 'Vincent hat etwas hinein gemischt. Es ist vermutlich nicht mehr sicher, das zu trinken.', 'Vincent het da öppis ine gmischlet. Es isch vermuetlich nümme sicher, das z''trinke.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item', 'Feudal Fire (Spoiled)', 'Feudales Feuer (Verdorben)', 'Feudals Füür (Verdorbe)');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item_desc', 'Vincent has mixed something in there. It doesn''t seem safe to drink anymore.', 'Vincent hat etwas hinein gemischt. Es ist vermutlich nicht mehr sicher, das zu trinken.', 'De Vincent het da öppis ine gmischlet. Es isch vermuetlich nümme sicher, das z''trinke.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item', 'Physalis', 'Physalis', 'Physalis');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item_desc', 'Looks tasty.', 'Sieht lecker aus.', 'Gseht fein uus.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item_desc', 'It still glows...','Er leuchtet immer noch...','Er lüchtet immer na...');

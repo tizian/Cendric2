@@ -196,7 +196,18 @@ void CharacterInfo::updateReputation() {
 	m_reputationTexts.clear();
 
 	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
-	for (auto& rep : m_core->getData().reputationProgress) {
+	
+	if (m_core->getData().reputationProgress.empty()) {
+		BitmapText noRep;
+		noRep.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+		noRep.setPosition(2 * GUIConstants::TEXT_OFFSET + GUIConstants::LEFT, yOffset);
+		noRep.setColor(COLOR_LIGHT_PURPLE);
+		noRep.setString(g_textProvider->getCroppedText("NoReputation", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 2 * GUIConstants::TEXT_OFFSET)));
+		m_reputationTexts.push_back(noRep);
+		return;
+	}
+	
+	for (auto const& rep : m_core->getData().reputationProgress) {
 		BitmapText title;
 		title.setString(g_textProvider->getText(EnumNames::getFractionIDName(rep.first)) + ": " + std::to_string(rep.second));
 		title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);

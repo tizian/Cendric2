@@ -112,4 +112,16 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_physical) values ('fo_beer', -1, 10, 10);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_beer', 10);
 
+-- Sausage
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_sausage', 'consumable', 200, 300, 6);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_sausage', 15, 10);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_sausage', 10);
+
+-- Ham
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_ham', 'consumable', 250, 300, 20);
+INSERT INTO item_attribute (item_id, health_regeneration, res_ice, dmg_physical) values ('fo_ham', 20, 10, 10);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_ham', 15);
+
 
