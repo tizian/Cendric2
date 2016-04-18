@@ -32,12 +32,12 @@ private:
 	BitmapText m_text;
 };
 
-class DialogueWindow {
+class DialogueWindow : public Window {
 public:
 	DialogueWindow();
 	~DialogueWindow();
 	void load(NPC* npc, WorldScreen* screen);
-	void render(sf::RenderTarget& renderTarget);
+	void render(sf::RenderTarget& renderTarget) override;
 	// returns true as long as the dialogue exists and false as soon as it ends
 	bool updateDialogue(const sf::Time frameTime);
 
@@ -45,8 +45,7 @@ public:
 	void setCendricTalking(const std::string& text);
 	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices);
 	void setNPCTrading(const std::string& text);
-	void setPosition(const sf::Vector2f& pos);
-	void setHeight(float height);
+	void setPosition(const sf::Vector2f& pos) override;
 
 	NPC* getNPC();
 
@@ -60,11 +59,6 @@ private:
 private:
 	std::vector<DialogueOption> m_options;
 	int m_chosenOption = 0;
-
-	Screen* m_screen = nullptr;
-
-	SlicedSprite m_border;
-	sf::RectangleShape m_background;
 
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;
