@@ -135,14 +135,6 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Form, frameTime);
 	updateTooltipText(frameTime);
 
-	// handle pause
-	if (!m_isGameOver && g_inputController->isKeyJustPressed(Key::Escape)) {
-		m_isPaused = !m_isPaused;
-		m_retryButton->setVisible(m_isPaused);
-		m_backToMenuButton->setVisible(m_isPaused);
-		m_resumeButton->setVisible(m_isPaused);
-	}
-
 	if (!m_isPaused) {
 		WorldScreen::execUpdate(frameTime);
 
@@ -167,6 +159,14 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 
 		updateObjects(GameObjectType::_Light, frameTime);
 		m_currentLevel.update(frameTime);
+	}
+
+	// handle pause
+	if (!m_isGameOver && g_inputController->isKeyJustPressed(Key::Escape)) {
+		m_isPaused = !m_isPaused;
+		m_retryButton->setVisible(m_isPaused);
+		m_backToMenuButton->setVisible(m_isPaused);
+		m_resumeButton->setVisible(m_isPaused);
 	}
 }
 
@@ -294,6 +294,7 @@ void LevelScreen::onResume() {
 	m_retryButton->setVisible(false);
 	m_backToMenuButton->setVisible(false);
 	m_resumeButton->setVisible(false);
+	m_isPaused = false;
 }
 
 void LevelScreen::onRetry() {
@@ -310,5 +311,6 @@ void LevelScreen::onRetry() {
 		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
 		addObject(m_yesOrNoForm);
 		setAllButtonsEnabled(false);
+		m_isPaused = false;
 	}
 }

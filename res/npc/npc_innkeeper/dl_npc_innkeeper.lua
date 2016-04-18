@@ -5,14 +5,14 @@ loadDialogue = function(DL)
 		DL:addChoice(10, "DL_Choice_Rumors") -- Heard any rumours?
 		DL:addChoice(1, "DL_Choice_GiveBeer") -- I'm thirsty, give me a beer. (10 Gold)
 		DL:addChoice(2, "DL_Choice_SomethingElse") --  Do you also sell other things than beer? 
-		if (not DL:isConditionFulfilled("npc_innkeeper", "asked_for_feudal_fire")) then 
+		if (DL:isConditionFulfilled("npc_rhendal", "talked_about_schnapps") and not DL:isConditionFulfilled("npc_innkeeper", "asked_for_feudal_fire")) then 
 			DL:addChoice(30, "DL_Choice_INeedSchnapps") --  I'm looking for a special schnapps... 
 		end
 		if (not DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire") and DL:isConditionFulfilled("npc_innkeeper", "wrong_name")) then 
-			DL:addChoice(40, "DL_Choice_SellMeAnyway") --  Please, I really need your schnapps. (60 Gold) 
+			DL:addChoice(40, "DL_Choice_SellMeAnyway") --  Please, I really need your schnapps! (60 Gold) 
 		end
-		if (not DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire") and DL:isConditionFulfilled("npc_innkeeper", "wrong_name")) then 
-			DL:addChoice(40, "DL_Choice_SellMeSchnapps") --  Give me some Feudal Fire. (20 Gold)   
+		if (not DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire") and DL:isConditionFulfilled("npc_innkeeper", "right_name")) then 
+			DL:addChoice(40, "DL_Choice_SellMeSchnapps") --  Give me some "Feudal Fire". (20 Gold)   
 		end
 		DL:addChoice(-1, "") --
 		DL:addNode()
@@ -52,8 +52,24 @@ loadDialogue = function(DL)
 			end  
 		end
 		
-		DL:createNPCNode(10, -1, "No") -- NO (untranslated)
-		DL:addNode()
+		if (DL:isConditionFulfilled("npc_innkeeper", "second_rumor")) then 
+			DL:createNPCNode(10, -2, "DL_Innkeeper_NoRumor") -- Hm no, nothing of interest.
+			DL:addNode()
+		elseif (DL:isConditionFulfilled("npc_innkeeper", "first_rumor")) then
+			DL:createNPCNode(10, 11, "DL_Innkeeper_SecondRumorP1") -- Two farmers told me that recently that they are  visited regularly by bandits who steal their goods.
+			DL:addConditionProgress("npc_innkeeper", "second_rumor")
+			DL:addNode()
+			
+			DL:createNPCNode(11, -2, "DL_Innkeeper_SecondRumorP2") -- They suspect them to come from somewhere in the South. Sadly, the milita of Gandria doesn't seem to care too much about this incidents. 
+			DL:addNode()
+		else
+			DL:createNPCNode(10, 11, "DL_Innkeeper_FirstRumorP1") -- I heard that the king of Admantris has resigned - in favour of his son, Logan the Third. 
+			DL:addConditionProgress("npc_innkeeper", "first_rumor")
+			DL:addNode()
+			
+			DL:createNPCNode(11, -2, "DL_Innkeeper_FirstRumorP2") -- I don't really understand though why though, the old king seemed to be in good shape. And his son, well, he didn't bother often to show his face to the people. 
+			DL:addNode()
+		end
 		
 		DL:createTradeNode(2, 0, "DL_Trade_TakeALook") -- Sure, take a look.
 		DL:addNode()
@@ -65,7 +81,7 @@ loadDialogue = function(DL)
 			DL:createChoiceNode(31)
 			DL:addChoice(32, "DL_Choice_Name2") -- Fiery Frenzy.
 			DL:addChoice(32, "DL_Choice_Name3") -- Floral Force.
-			DL:addChoice(32, "DL_Choice_Name4") -- Furry Fox.
+			DL:addChoice(32, "DL_Choice_Name4") -- Flying Fox.
 			DL:addChoice(32, "DL_Choice_Name5") -- Fierce Farmer.
 			DL:addChoice(32, "DL_Choice_Name6") -- Fake Flame.
 			DL:addChoice(34, "DL_Choice_NameFeudalFire") -- Feudal Fire.

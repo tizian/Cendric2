@@ -1113,7 +1113,7 @@
   </object>
   <object id="131" x="853.125" y="1535" width="43.75" height="36">
    <properties>
-    <property name="map entry" value="res/map/tavern/tavern.tmx,690,700"/>
+    <property name="map entry" value="res/map/tavern_1/tavern_1.tmx,690,700"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

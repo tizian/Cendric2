@@ -32,15 +32,14 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 
 void LevelEquipment::update(const sf::Time& frameTime) {
 	GameObjectState newState = m_mainChar->getState();
-	if (newState == GameObjectState::Dead) {
-		setDisposed();
-		return;
-	}
+	
 	bool newFacingRight = m_mainChar->isFacingRight();
 	if (m_state != newState || newFacingRight != m_isFacingRight) {
 		m_state = newState;
 		m_isFacingRight = newFacingRight;
-		setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+		if (m_state != GameObjectState::Dead) {
+			setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+		}
 	}
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());

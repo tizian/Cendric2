@@ -6,6 +6,7 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 	if (layers.empty()) return false;
 	m_tilesetPath = data.tileSetPath;
 	m_tileset = g_resourceManager->getTexture(data.tileSetPath);
+	if (m_tileset->getSize().x == 0 || m_tileset->getSize().y == 0) return false;
 	m_tilesize = sf::Vector2i(TILE_SIZE, TILE_SIZE);
 	int width = static_cast<int>(data.mapRect.width / TILE_SIZE_F);
 	int height = static_cast<int>(data.mapRect.height / TILE_SIZE_F);

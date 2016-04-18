@@ -25,6 +25,7 @@ item.id:mi_goldengoblet,3
 item.id:mi_teeth,1
 item.id:we_simplesword,1
 item.id:we_walkingpole,1
+item.id:eq_defaultarmor,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:3
 # equipment:

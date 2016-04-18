@@ -2,11 +2,11 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="147">
  <properties>
   <property name="dimming" value="0.3"/>
-  <property name="name" value="Tavern"/>
-  <property name="tilesetpath" value="res/map/tavern/tileset_map_tavern.png"/>
+  <property name="name" value="Tavern1"/>
+  <property name="tilesetpath" value="res/map/tavern_1/tileset_map_tavern_1.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_tavern" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
-  <image source="tileset_map_tavern.png" width="1000" height="1000"/>
+ <tileset firstgid="1" name="tileset_map_tavern_1" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
+  <image source="tileset_map_tavern_1.png" width="1000" height="1000"/>
   <tile id="206">
    <animation>
     <frame tileid="206" duration="100"/>

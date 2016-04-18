@@ -216,6 +216,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createNPCNode(82, 83, "DL_Rhendal_YourJob") -- Your job would to get to the other side of the river by freezing a small passage, and get me a bottle of this schnapps from the tavern.
+		DL:addConditionProgress("npc_rhendal", "talked_about_schnapps")
 		DL:addNode()
 		
 		DL:createChoiceNode(83)
