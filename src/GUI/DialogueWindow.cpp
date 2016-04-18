@@ -130,6 +130,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 }
 
 void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices) {
+	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 	m_dialogueText->setString("");
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);

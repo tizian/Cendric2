@@ -58,6 +58,7 @@ CookingWindow::~CookingWindow() {
 }
 
 void CookingWindow::reload() {
+	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 
 	int nr = 0;
