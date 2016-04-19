@@ -44,7 +44,7 @@ void Inventory::init() {
 	// init window
 	sf::FloatRect box(INVENTORY_LEFT, GUIConstants::TOP, INVENTORY_WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
-		WindowOrnamentStyle::FANCY,
+		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
 

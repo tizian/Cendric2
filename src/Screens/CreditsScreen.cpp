@@ -42,7 +42,7 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	m_credits->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_credits->getLocalBounds().width), 0.5f * WINDOW_HEIGHT));
 
 	// add buttons
-	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
+	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&CreditsScreen::onBack, this));
 	addObject(button);

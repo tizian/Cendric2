@@ -3,11 +3,11 @@
 using namespace std;
 
 const float Slider::WIDTH = 300.f;
-const float Slider::HEIGHT = 18.f;
-const float Slider::BORDER_OFFSET = 6.f;
+const float Slider::HEIGHT = 20.f;
+const float Slider::BORDER_OFFSET = 7.f;
 
 const sf::Color Slider::BACKGROUND_COLOR = COLOR_BLACK;
-const sf::Color Slider::FILL_COLOR = COLOR_WHITE;
+const sf::Color Slider::FILL_COLOR = sf::Color(91, 73, 133);
 
 Slider::Slider(int minPos, int maxPos) : GameObject() {
 	if (minPos < 0) minPos = 0;
@@ -187,11 +187,12 @@ GameObjectType Slider::getConfiguredType() const {
 
 // SLIDER KNOB
 
-const float SliderKnob::WIDTH = 18.f;
+const float SliderKnob::WIDTH = 20.f;
 const float SliderKnob::HEIGHT = 30.f;
 
 SliderKnob::SliderKnob() : GameObject() {
-	m_knob = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_slider_knob), COLOR_WHITE, WIDTH, HEIGHT);
+	m_knob.setSize(sf::Vector2f(WIDTH, HEIGHT));
+	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_knob));
 
 	setBoundingBox(m_knob.getLocalBounds());
 }

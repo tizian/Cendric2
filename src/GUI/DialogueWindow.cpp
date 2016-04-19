@@ -29,7 +29,7 @@ const float DialogueWindow::SCROLL_WINDOW_LEFT = LEFT_OFFSET;
 const float DialogueWindow::SCROLL_WINDOW_WIDTH = TEXT_WIDTH;
 const float DialogueWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COUNT * GUIConstants::CHARACTER_SIZE_M + (OPTION_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M;
 
-DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), WindowOrnamentStyle::FANCY, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
+DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 

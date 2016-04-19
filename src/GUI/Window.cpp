@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject() {
+Window::Window(const sf::FloatRect& box, GUIOrnamentStyle style) : GameObject() {
 	// using default values for constructor.
 	m_backColor = COLOR_BLACK;
 	m_ornamentColor = COLOR_WHITE;
@@ -10,27 +10,18 @@ Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style) : GameObject
 	init(box, style);
 }
 
-Window::Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor) {
+Window::Window(const sf::FloatRect& box, GUIOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor) {
 	m_backColor = backColor;
 	m_ornamentColor = ornamentColor;
 
 	init(box, style);
 }
 
-void Window::init(const sf::FloatRect& box, WindowOrnamentStyle style) {
+void Window::init(const sf::FloatRect& box, GUIOrnamentStyle style) {
 	setBoundingBox(box);
 
 	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backColor, box.width, box.height);
-
-	if (style == WindowOrnamentStyle::NONE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_ornamentColor, box.width, box.height);
-	}
-	else if (style == WindowOrnamentStyle::SIMPLE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), m_ornamentColor, box.width, box.height);
-	}
-	else if (style == WindowOrnamentStyle::FANCY) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_ornament), m_ornamentColor, box.width, box.height);
-	}
+	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentColor, box.width, box.height);
 
 	setPosition(sf::Vector2f(box.left, box.top));
 }
@@ -42,7 +33,8 @@ Window::~Window() {
 }
 
 void Window::addCloseButton(const std::function<void()>& agent) {
-	m_closeButton = new Button(sf::FloatRect(0.f, 0.f, 33.f, 33.f), ButtonOrnamentStyle::WINDOW_CLOSE);
+	m_closeButton = new Button(sf::FloatRect(0.f, 0.f, 33.f, 33.f), GUIOrnamentStyle::NONE);
+	m_closeButton->setOrnamentLayerTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_close_button));
 	m_closeButton->setOnClick(agent);
 	updateCloseButton();
 }
@@ -55,14 +47,16 @@ void Window::updateCloseButton() {
 
 	m_closeButton->setPosition(sf::Vector2f(pos.x + size.x - 33.f, pos.y));
 
-	sf::Color mainColor(COLOR_BLACK);
+	sf::Color mainColor = m_closeButton->getMainLayerColor();
 	mainColor.a = m_ornamentColor.a;
-	sf::Color mouseOverColor(COLOR_LIGHT_PURPLE);
+	sf::Color backColor = m_closeButton->getBackgroundLayerColor();
+	mainColor.a = m_ornamentColor.a;
+	sf::Color mouseOverColor = m_closeButton->getMouseOverColor();
 	mouseOverColor.a = m_ornamentColor.a;
 
 	m_closeButton->setOrnamentLayerColor(m_ornamentColor);
 	m_closeButton->setMainLayerColor(mainColor);
-	m_closeButton->setBackgroundLayerColor(mainColor);
+	m_closeButton->setBackgroundLayerColor(backColor);
 	m_closeButton->setMouseOverColor(mouseOverColor);
 }
 

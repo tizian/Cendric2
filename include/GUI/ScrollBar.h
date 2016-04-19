@@ -94,5 +94,4 @@ protected:
 	sf::Time m_time;
 
 	static const sf::Color BACKGROUND_COLOR;
-	static const sf::Color FILL_COLOR;
 };

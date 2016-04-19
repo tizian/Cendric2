@@ -90,7 +90,7 @@ void WeaponWindow::init() {
 	delete m_window;
 	sf::FloatRect box(LEFT, TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
-		WindowOrnamentStyle::FANCY,
+		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
 

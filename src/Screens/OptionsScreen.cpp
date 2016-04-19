@@ -124,19 +124,19 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	distFromTop = distFromTop + 100;
 
 	// keyboard mappings button
-	Button* button = new Button(sf::FloatRect(distFromLeft, distFromTop, 200, 50));
+	Button* button = new Button(sf::FloatRect(distFromLeft, distFromTop, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("KeyBindings");
 	button->setCharacterSize(12);
 	button->setOnClick(std::bind(&OptionsScreen::onKeybindings, this));
 	addObject(button);
 
 	// back
-	button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 100, 200, 50));
+	button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&OptionsScreen::onBack, this));
 	addObject(button);
 	// apply
-	button = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 100, 200, 50));
+	button = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("Apply");
 	button->setOnClick(std::bind(&OptionsScreen::onApply, this));
 	addObject(button);

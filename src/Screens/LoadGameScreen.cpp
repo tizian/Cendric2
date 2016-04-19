@@ -47,22 +47,22 @@ void LoadGameScreen::execOnEnter(const Screen *previousScreen) {
 	float buttonWidth = 200.f;
 	float buttonHeight = 50.f;
 	float marginX = 60.f;
-	float marginY = WINDOW_HEIGHT - 100.f;
+	float marginY = WINDOW_HEIGHT - 80.f;
 	float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
 	float buttonSpacing = (buttonSpaceWidth - 3 * buttonWidth) / 2.f;
 
 	// add buttons
-	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
+	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&LoadGameScreen::onBack, this));
 	addObject(button);
 
-	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight));
+	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_deleteSaveGameButton->setText("Delete");
 	m_deleteSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
 	addObject(m_deleteSaveGameButton);
 
-	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight));
+	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_loadSaveGameButton->setText("Load");
 	m_loadSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onLoadSaveGame, this));
 	addObject(m_loadSaveGameButton);

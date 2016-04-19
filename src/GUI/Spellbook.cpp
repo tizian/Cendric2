@@ -18,7 +18,7 @@ void Spellbook::init() {
 	// init window
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
-		WindowOrnamentStyle::FANCY,
+		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
 		GUIConstants::ORNAMENT_COLOR);
 

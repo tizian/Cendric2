@@ -58,17 +58,22 @@ protected:
 	void uncheck();
 
 	SlicedSprite m_background;
-	SlicedSprite m_margin;
+	SlicedSprite m_ornament;
 	sf::RectangleShape m_checkedSymbol;
 	sf::Vector2f m_textOffset;
 
-	sf::Color m_backgroundColor = COLOR_BLACK;
-	sf::Color m_marginColor = COLOR_WHITE;
-	sf::Color m_symbolColor = COLOR_WHITE;
-	sf::Color m_mouseOverColor = COLOR_PURPLE;
+	sf::Color m_backgroundColor;
+	sf::Color m_ornamentColor;
+	sf::Color m_symbolColor;
+	sf::Color m_mouseOverColor;
 	
 	BitmapText m_text;
 
 	static const float SIDE_LENGTH;
 	static const float CENTER_SIZE;
+
+	static const sf::Color DEFAULT_BACK_COLOR;
+	static const sf::Color DEFAULT_ORNAMENT_COLOR;
+	static const sf::Color DEFAULT_SYMBOL_COLOR;
+	static const sf::Color DEFAULT_MOUSEOVER_COLOR;
 };

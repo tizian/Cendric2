@@ -7,7 +7,6 @@ using namespace std;
 const float ScrollBar::WIDTH = 20.f;
 
 const sf::Color ScrollBar::BACKGROUND_COLOR = COLOR_TRANS_BLACK;
-const sf::Color ScrollBar::FILL_COLOR = COLOR_WHITE;
 
 ScrollBar::ScrollBar(float height, const Window* window) : GameObject() {
 	m_window = window;
@@ -191,7 +190,7 @@ const float ScrollBarKnob::HEIGHT = 30.f;
 
 ScrollBarKnob::ScrollBarKnob() : GameObject() {
 	m_knob.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_scrollbar_knob));
+	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_knob));
 
 	setBoundingBox(m_knob.getLocalBounds());
 	setInputInDefaultView(true);

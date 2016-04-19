@@ -6,7 +6,7 @@ const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TOP;
 
 BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, HEIGHT),
-	WindowOrnamentStyle::FANCY,
+	GUIOrnamentStyle::LARGE,
 	COLOR_LIGHT_BROWN, // back
 	COLOR_DARK_BROWN) // ornament 
 {

@@ -81,22 +81,22 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
 
 	Button* button;
 	// back
-	button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight));
+	button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onBack, this));
 	addObject(button);
 	// reset
-	button = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight));
+	button = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Reset");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onReset, this));
 	addObject(button);
 	// default values
-	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight));
+	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Default");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onUseDefault, this));
 	addObject(button);
 	// apply
-	button = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight));
+	button = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Apply");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onApply, this));
 	addObject(button);

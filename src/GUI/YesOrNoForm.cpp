@@ -6,7 +6,7 @@ using namespace std;
 const float DIST_FROM_BORDER = 10.f;
 
 YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
-	m_window = new Window(box, WindowOrnamentStyle::NONE);
+	m_window = new Window(box, GUIOrnamentStyle::NONE);
 
 	float buttonHeight = 50.f;
 	float buttonGap = 20.f;

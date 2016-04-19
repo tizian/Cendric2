@@ -8,7 +8,7 @@ WindowScreenOverlay::WindowScreenOverlay(const sf::Time& activeTime, const sf::T
 	m_windowBackColor = sf::Color(0, 0, 0, 70);
 	m_windowOrnamentColor = COLOR_WHITE;
 
-	m_window = new Window(sf::FloatRect(), WindowOrnamentStyle::FANCY, m_windowBackColor, m_windowOrnamentColor);
+	m_window = new Window(sf::FloatRect(), GUIOrnamentStyle::LARGE, m_windowBackColor, m_windowOrnamentColor);
 
 	m_window->addCloseButton(std::bind(&WindowScreenOverlay::close, this));
 }

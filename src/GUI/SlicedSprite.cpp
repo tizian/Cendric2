@@ -50,6 +50,7 @@ sf::Vector2f SlicedSprite::getSize() const {
 
 void SlicedSprite::setTexture(sf::Texture *texture) {
 	m_texture = texture;
+	init();
 }
 
 void SlicedSprite::setColor(const sf::Color &color) {

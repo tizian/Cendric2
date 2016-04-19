@@ -54,7 +54,7 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 
 	sf::FloatRect box(m_position.x, m_position.y, m_boundingBox.width, m_boundingBox.height);
 	m_border = new Window(box,
-		WindowOrnamentStyle::FANCY,
+		GUIOrnamentStyle::LARGE,
 		COLOR_TRANSPARENT,
 		GUIConstants::ORNAMENT_COLOR);
 

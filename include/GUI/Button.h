@@ -7,19 +7,12 @@
 
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
-
-enum class ButtonOrnamentStyle {
-	NONE,
-	SMALL,
-	MEDIUM,
-	LARGE,
-	WINDOW_CLOSE
-};
+#include "GUI/OrnamentStyle.h"
 
 // A not so ugly button to click
 class Button : public GameObject {
 public:
-	Button(const sf::FloatRect& box, ButtonOrnamentStyle style = ButtonOrnamentStyle::NONE);
+	Button(const sf::FloatRect& box, GUIOrnamentStyle style = GUIOrnamentStyle::NONE);
 
 	void onLeftJustPressed() override;
 	void onLeftClick() override;
@@ -36,19 +29,30 @@ public:
 	void setText(const std::string& text, const sf::Color& color, int charSize);
 	void setText(const std::string& text, int charSize);
 	void setText(const std::string& text);
+
 	// setting raw text without text provider (not translated)
 	void setTextRaw(const std::string& text, const sf::Color& color, int charSize);
 	void setTextRaw(const std::string& text, int charSize);
 	void setTextRaw(const std::string& text);
+
 	// a button can only be clicked if its enabled. also, the color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
+	void setVisible(bool value);
+
 	void setCharacterSize(int size);
 	void setTextColor(const sf::Color& color);
+
+	void setOrnamentLayerTexture(sf::Texture* texture);
+
 	void setBackgroundLayerColor(const sf::Color& color);
 	void setMainLayerColor(const sf::Color& color);
 	void setOrnamentLayerColor(const sf::Color& color);
 	void setMouseOverColor(const sf::Color& color);
-	void setVisible(bool value);
+	
+	sf::Color getBackgroundLayerColor() const;
+	sf::Color getMainLayerColor() const;
+	sf::Color getOrnamentLayerColor() const;
+	sf::Color getMouseOverColor() const;
 
 	bool isClicked() const;
 	bool isEnabled() const;
@@ -70,10 +74,10 @@ protected:
 	SlicedSprite m_backLayer;
 	SlicedSprite m_ornamentLayer;
 
-	sf::Color m_backLayerColor = COLOR_LIGHT_PURPLE;
-	sf::Color m_mainLayerColor = COLOR_BLACK;
-	sf::Color m_ornamentLayerColor = COLOR_WHITE;
-	sf::Color m_mouseOverColor = COLOR_PURPLE;
+	sf::Color m_backLayerColor;
+	sf::Color m_mainLayerColor;
+	sf::Color m_ornamentLayerColor;
+	sf::Color m_mouseOverColor;
 
 	BitmapText m_text;
 
@@ -81,4 +85,9 @@ private:
 	std::function<void()> m_executeOnClick;
 	// placeholder for agents
 	void nop() const;
+
+	static const sf::Color DEFAULT_BACK_COLOR;
+	static const sf::Color DEFAULT_MAIN_COLOR;
+	static const sf::Color DEFAULT_ORNAMENT_COLOR;
+	static const sf::Color DEFAULT_MOUSEOVER_COLOR;
 };

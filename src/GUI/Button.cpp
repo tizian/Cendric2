@@ -1,8 +1,16 @@
 #include "GUI/Button.h"
 
-using namespace std;
+const sf::Color Button::DEFAULT_BACK_COLOR = COLOR_DARK_GREY;
+const sf::Color Button::DEFAULT_MAIN_COLOR = COLOR_BLACK;
+const sf::Color Button::DEFAULT_ORNAMENT_COLOR = COLOR_WHITE;
+const sf::Color Button::DEFAULT_MOUSEOVER_COLOR = sf::Color(91, 73, 133);
 
-Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject() {
+Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) : GameObject() {
+	m_backLayerColor = DEFAULT_BACK_COLOR;
+	m_mainLayerColor = DEFAULT_MAIN_COLOR;
+	m_ornamentLayerColor = DEFAULT_ORNAMENT_COLOR;
+	m_mouseOverColor = DEFAULT_MOUSEOVER_COLOR;
+
 	// using default values for constructor.
 	setBoundingBox(box);
 	setInputInDefaultView(true);
@@ -12,21 +20,7 @@ Button::Button(const sf::FloatRect& box, ButtonOrnamentStyle style) : GameObject
 	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backLayerColor, box.width, box.height);
 	m_backLayerOffset = sf::Vector2f(0, 2);
 
-	if (style == ButtonOrnamentStyle::NONE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_ornamentLayerColor, box.width, box.height);
-	}
-	else if (style == ButtonOrnamentStyle::SMALL) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small), COLOR_WHITE, box.width, box.height);
-	}
-	else if (style == ButtonOrnamentStyle::MEDIUM) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium), COLOR_WHITE, box.width, box.height);
-	}
-	else if (style == ButtonOrnamentStyle::LARGE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large), COLOR_WHITE, box.width, box.height);
-	}
-	else if (style == ButtonOrnamentStyle::WINDOW_CLOSE) {
-		m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_close_button), COLOR_WHITE, box.width, box.height);
-	}
+	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentLayerColor, box.width, box.height);
 
 	m_positionDefault = sf::Vector2f(box.left, box.top);
 	setPosition(m_positionDefault);
@@ -41,7 +35,8 @@ void Button::onLeftClick() {
 		m_isPressed = false;
 		m_mainLayer.move(0, 1);
 		m_ornamentLayer.move(0, 1);
-		m_mainLayer.setColor(m_backLayerColor);
+		m_text.move(0, 1);
+		m_mainLayer.setColor(m_mainLayerColor);
 		g_inputController->lockAction();
 	}
 }
@@ -53,7 +48,8 @@ void Button::onLeftJustPressed() {
 		m_ornamentLayer.setPosition(m_positionDefault);
 		m_mainLayer.move(0, 1);
 		m_ornamentLayer.move(0, 1);
-		m_mainLayer.setColor(m_backLayerColor);
+		m_text.move(0, 1);
+		m_mainLayer.setColor(m_mainLayerColor);
 		g_inputController->lockAction();
 	}
 }
@@ -144,8 +140,8 @@ void Button::setTextRaw(const std::string& text) {
 
 void Button::setCharacterSize(int size) {
 	m_text.setCharacterSize(size);
-	float xOffset = max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
-	float yOffset = max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
+	float xOffset = std::max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
+	float yOffset = std::max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
 	m_text.setPosition(getPosition() + m_textOffset);
 }
@@ -171,6 +167,26 @@ void Button::setMainLayerColor(const sf::Color& color) {
 void Button::setOrnamentLayerColor(const sf::Color& color) {
 	m_ornamentLayer.setColor(color);
 	m_ornamentLayerColor = color;
+}
+
+sf::Color Button::getBackgroundLayerColor() const {
+	return m_backLayerColor;
+}
+
+sf::Color Button::getMainLayerColor() const {
+	return m_mainLayerColor;
+}
+
+sf::Color Button::getOrnamentLayerColor() const {
+	return m_ornamentLayerColor;
+}
+
+sf::Color Button::getMouseOverColor() const {
+	return m_mouseOverColor;
+}
+
+void Button::setOrnamentLayerTexture(sf::Texture* texture) {
+	m_ornamentLayer.setTexture(texture);
 }
 
 void Button::setEnabled(bool enabled) {

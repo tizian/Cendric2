@@ -67,26 +67,26 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	// add buttons
 	Button* button;
 	if (m_characterCore != nullptr) {
-		button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+		button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 		button->setText("Resume");
 		button->setOnClick(std::bind(&MenuScreen::onResume, this));
 		addObject(button);
 	}
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("NewGame");
 	button->setOnClick(std::bind(&MenuScreen::onNewGame, this));
 	addObject(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("LoadGame");
 	button->setOnClick(std::bind(&MenuScreen::onLoadGame, this));
 	addObject(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("SaveGame");
 	button->setEnabled(m_characterCore != nullptr);
 	button->setOnClick(std::bind(&MenuScreen::onSaveGame, this));
@@ -94,19 +94,19 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	addObject(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("Options");
 	button->setOnClick(std::bind(&MenuScreen::onOptions, this));
 	addObject(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("Credits");
 	button->setOnClick(std::bind(&MenuScreen::onCredits, this));
 	addObject(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), ButtonOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("Exit");
 	button->setOnClick(std::bind(&MenuScreen::onExit, this));
 	addObject(button);

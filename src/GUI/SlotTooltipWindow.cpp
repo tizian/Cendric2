@@ -8,7 +8,7 @@ const sf::Vector2f TEXT_OFFSET = sf::Vector2f(5.f, 10.f);
 const int SlotTooltipWindow::MAX_WIDTH = 150;
 
 SlotTooltipWindow::SlotTooltipWindow() : Window(
-	sf::FloatRect(), WindowOrnamentStyle::NONE, 
+	sf::FloatRect(), GUIOrnamentStyle::NONE, 
 	sf::Color(0, 0, 0, 70),
 	COLOR_WHITE) 
 {

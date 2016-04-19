@@ -6,7 +6,7 @@
 // A button that takes a texture additionally.
 class TexturedButton : public Button {
 public:
-	TexturedButton(const sf::FloatRect& box, ButtonOrnamentStyle style = ButtonOrnamentStyle::NONE);
+	TexturedButton(const sf::FloatRect& box, GUIOrnamentStyle style = GUIOrnamentStyle::NONE);
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& pos) override;
 	void setTexture(const sf::Texture* tex, const sf::IntRect& textureRect);

@@ -6,7 +6,7 @@ const float QuestDescriptionWindow::WIDTH = 340.f;
 
 QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
-	WindowOrnamentStyle::FANCY,
+	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
 	m_core = core;

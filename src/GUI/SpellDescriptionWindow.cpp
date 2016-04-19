@@ -19,7 +19,7 @@ inline std::string toStrMaxDecimals(float value, int decimals) {
 
 SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
-	WindowOrnamentStyle::FANCY,
+	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
 	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);

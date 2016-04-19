@@ -8,17 +8,12 @@
 #include "GUI/Button.h"
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
-
-enum class WindowOrnamentStyle {
-	NONE,
-	SIMPLE,
-	FANCY
-};
+#include "GUI/OrnamentStyle.h"
 
 class Window : public GameObject {
 public:
-	Window(const sf::FloatRect& box, WindowOrnamentStyle style);
-	Window(const sf::FloatRect& box, WindowOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor);
+	Window(const sf::FloatRect& box, GUIOrnamentStyle style);
+	Window(const sf::FloatRect& box, GUIOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor);
 
 	virtual ~Window();
 
@@ -39,7 +34,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 private:
-	void init(const sf::FloatRect& box, WindowOrnamentStyle style);
+	void init(const sf::FloatRect& box, GUIOrnamentStyle style);
 	void updateCloseButton();
 
 private:

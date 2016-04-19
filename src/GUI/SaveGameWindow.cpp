@@ -30,13 +30,11 @@ inline bool ends_with(std::string const & value, std::string const & ending) {
 }
 
 SaveGameWindow::SaveGameWindow() {
-	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border_white), COLOR_WHITE, WIDTH, HEIGHT);
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, WIDTH, HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT, TOP));
 
 	m_scrollBar = new ScrollBar(HEIGHT);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + WIDTH - ScrollBar::WIDTH, TOP));
-	m_scrollBar->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border_white));
-	m_scrollBar->setKnobTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_scrollbar_knob_white));
 
 	sf::FloatRect scrollBox(LEFT, TOP, WIDTH, HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
