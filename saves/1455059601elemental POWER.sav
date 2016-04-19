@@ -39,6 +39,8 @@ item.id:fo_rawfish,1
 item.id:fo_fishsoup,1
 item.id:fo_wine,1
 item.id:fo_beer,1
+item.id:fo_ham,1
+item.id:fo_sausage,1
 item.id:mi_gargoyle_dust,1
 item.id:mi_goldengoblet,4
 item.id:mi_neko_fur,1
@@ -53,8 +55,10 @@ item.id:co_smallpouch,2
 item.id:co_mediumpouch,2
 item.id:co_bigpouch,2
 item.id:qe_rope,1
+item.id:qe_spoiledfeudalfire,1
 item.id:pe_ingridstew,1
 item.id:pe_feudalfire,1
+item.id:pe_glassoffeudalfire,1
 item.id:we_icestaff,1
 item.id:we_hawthorn,1
 item.id:we_oathbreaker,1

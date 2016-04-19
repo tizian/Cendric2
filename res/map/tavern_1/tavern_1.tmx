@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="147">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="148">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="name" value="Tavern1"/>
@@ -117,6 +117,15 @@
     <property name="id" value="npc_innkeeper"/>
     <property name="routineid" value="res/npc/npc_innkeeper/ru_npc_innkeeper.lua"/>
     <property name="spritesheetpath" value="res/npc/npc_innkeeper/spritesheet_npc_innkeeper.png"/>
+   </properties>
+  </object>
+  <object id="147" gid="368" x="542" y="430" width="50" height="50">
+  <properties>
+    <property name="dialogueid" value="res/npc/npc_vincent/dl_npc_vincent.lua"/>
+    <property name="dialoguetexture" value="0,500"/>
+    <property name="id" value="npc_vincent"/>
+    <property name="routineid" value="res/npc/npc_vincent/ru_npc_vincent.lua"/>
+    <property name="spritesheetpath" value="res/npc/npc_vincent/spritesheet_npc_vincent.png"/>
    </properties>
   </object>
  </objectgroup>

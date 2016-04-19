@@ -94,7 +94,7 @@ quest.progress.condition:who_am_i,information_gathered
 quest.progress.description:the_mark,1
 quest.progress.description:who_am_i,1
 # conditions of a certain type fulfilled:
-progress.condition:default,tutorial_complete
+progress.condition:default,tutorial_complete,bridge_crossed
 progress.condition:npc_edmond,puzzle_solved,talked_after_tutorial,talked_to,who_am_i
 progress.condition:npc_ingrid,meat_given,who_am_i,who_are_you
 progress.condition:npc_rhendal,hawthorn_staff,potion_drunk,talked,talked_about_schnapps,the_mark,what_is_a_mage

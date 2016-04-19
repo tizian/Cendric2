@@ -18,11 +18,13 @@ public:
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	bool isQuestState(const std::string& questID, const std::string& state) const;
 	void setTilePosition(float x, float y);
+	void setTilePositionForce(float x, float y);
 	void setDisposed();
 	void wait(int milliseconds);
 	void goToTile(float x, float y);
 	void setLooped(bool looped);
 	void setTalkingActive(bool active);
+	void setTalkingActiveForce(bool active);
 	void setTalkingEnabled(bool enabled);
 
 private:

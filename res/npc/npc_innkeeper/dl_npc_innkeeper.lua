@@ -26,6 +26,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 		else
 			DL:createNPCNode(1, -2, "DL_Innkeeper_NotEnoughGold") -- If you want to have a beer, you need enough gold to pay for it.
+			DL:addNode()
 		end
 		
 		if (not DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire") and DL:isConditionFulfilled("npc_innkeeper", "wrong_name")) then 
@@ -37,6 +38,7 @@ loadDialogue = function(DL)
 				DL:addNode()
 			else
 				DL:createNPCNode(40, -2, "DL_Innkeeper_NoSchnapps") -- I can't sell my schnapps any Tom, Dick or Harry, you know. And especially not to some beggarly guy like you.
+				DL:addNode()
 			end  
 		end
 		
@@ -49,6 +51,7 @@ loadDialogue = function(DL)
 				DL:addNode()
 			else
 				DL:createNPCNode(40, -2, "DL_Innkeeper_NotEnoughForSchnapps") -- You don't have enough gold to buy a bottle, I'm sorry.
+				DL:addNode()
 			end  
 		end
 		
