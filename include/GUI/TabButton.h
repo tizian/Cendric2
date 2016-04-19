@@ -63,7 +63,7 @@ protected:
 	BitmapText m_text;
 
 	sf::Color m_backgroundColor = COLOR_TRANS_BLACK;
-	sf::Color m_highlightColor = COLOR_LIGHT_PURPLE;
+	sf::Color m_highlightColor = sf::Color(91, 73, 133);
 
 private:
 	std::function<void()> m_executeOnClick;

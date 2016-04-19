@@ -18,7 +18,7 @@ ScrollBar::ScrollBar(float height, const Window* window) : GameObject() {
 	m_background.setSize(sf::Vector2f(WIDTH - 4.f, height - 4.f));
 	m_background.setFillColor(BACKGROUND_COLOR);
 
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_border), COLOR_WHITE, WIDTH, height);
+	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, WIDTH, height);
 
 	setBoundingBox(m_background.getGlobalBounds());
 	setInputInDefaultView(true);
