@@ -84,6 +84,10 @@ void SaveGameWindow::reload() {
 		m_chosenEntry = 0;
 		m_entries[m_chosenEntry].select();
 	}
+
+	if (m_entries.size() < ENTRY_COUNT) {
+		m_scrollBar->setScrollPosition(0.f);
+	}
 }
 
 bool SaveGameWindow::isChosen() {
