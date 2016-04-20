@@ -31,6 +31,16 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 		}
 		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
 	}
+
+	// Remove target if right-clicked anywhere
+	if (g_inputController->isMouseClickedRight()) {
+		targetEnemy(nullptr);
+	}
+
+	// enemy no longer targeted if it moves out of view
+	if (m_targetedEnemy && !m_targetedEnemy->isViewable()) {
+		targetEnemy(nullptr);
+	}
 }
 
 void LevelMainCharacter::render(sf::RenderTarget& target) {
@@ -59,12 +69,19 @@ void LevelMainCharacter::handleAttackInput() {
 	if (isDead()) return;
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
+
+	sf::Vector2f target = g_inputController->getMousePosition();
+	// Target lock
+	if (m_targetedEnemy != nullptr) {
+		target = m_targetedEnemy->getCenter();
+	}
+
 	// update current spell
 	for (auto const &it : m_spellKeyMap) {
 		if (g_inputController->isKeyJustPressed(it.first)) {
 			if (m_isQuickcast) {
 				m_spellManager->setCurrentSpell(it.second);
-				m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
+				m_spellManager->executeCurrentSpell(target);
 				if (m_invisibilityLevel > 0) {
 					setInvisibilityLevel(0);
 				}
@@ -78,7 +95,7 @@ void LevelMainCharacter::handleAttackInput() {
 
 	// handle attack input
 	if (g_inputController->isMouseJustPressedLeft()) {
-		m_spellManager->executeCurrentSpell(g_inputController->getMousePosition());
+		m_spellManager->executeCurrentSpell(target);
 		g_inputController->lockAction();
 		if (m_invisibilityLevel > 0) {
 			setInvisibilityLevel(0);
@@ -300,6 +317,16 @@ void LevelMainCharacter::removeGold(int gold) const {
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange("gold", -gold);
 	}
+}
+
+void LevelMainCharacter::targetEnemy(Enemy* enemy) {
+	if (m_targetedEnemy) m_targetedEnemy->setTargeted(false);
+	m_targetedEnemy = enemy;
+	if (m_targetedEnemy) m_targetedEnemy->setTargeted(true);
+}
+
+Enemy* LevelMainCharacter::getCurrentTarget() const {
+	return m_targetedEnemy;
 }
 
 void LevelMainCharacter::loadParticleSystem() {

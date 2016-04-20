@@ -37,31 +37,36 @@ public:
 	void removeGold(int gold) const;
 	void removeItems(const std::string& item, int quantity) const;
 
+	void targetEnemy(Enemy* enemy);
+	Enemy* getCurrentTarget() const;
+
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
 
 	GameObjectType getConfiguredType() const override;
 
 private:
-	CharacterCore* m_core;
-	// character core must be set when loading the weapon.
-	void loadWeapon();
+	void loadWeapon();		// character core must be set when loading the weapon.
 	void loadAnimation();
+
+	void handleAttackInput();
+
+	void loadParticleSystem();
+	void updateParticleSystemPosition();
+
+private:
+	CharacterCore* m_core;
+	
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;
 
-	void handleAttackInput();
+	Enemy* m_targetedEnemy = nullptr;
 
-private:
 	sf::Sound m_sound;
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
 	particles::DiskPositionGenerator* m_posGenerator = nullptr;
-
-	void loadParticleSystem();
-
-	void updateParticleSystemPosition();
 };

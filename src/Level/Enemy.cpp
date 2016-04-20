@@ -303,8 +303,11 @@ void Enemy::onRightClick() {
 		else {
 			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 		}
-		g_inputController->lockAction();
 	}
+	else if (!m_isDead && !isAlly()) {
+		m_mainChar->targetEnemy(this);
+	}
+	g_inputController->lockAction();
 }
 
 void Enemy::setScriptedBehavior(const std::string& luaPath) {
@@ -320,6 +323,10 @@ void Enemy::setDead() {
 	if (m_isImmortal) return;
 	LevelMovableGameObject::setDead();
 	m_buffBar->clear();
+
+	if (m_isTargeted) {
+		m_mainChar->targetEnemy(nullptr);
+	}
 
 	if (isAlly()) {
 		setDisposed();
@@ -351,3 +358,14 @@ void Enemy::resetMovingTarget() {
 	m_enemyMovingBehavior->resetMovingTarget();
 }
 
+void Enemy::setTargeted(bool targeted) {
+	m_isTargeted = targeted;
+
+	// temporarily color enemy when it's the current target
+	if (m_isTargeted) {
+		m_animatedSprite.setColor(sf::Color(50, 100, 250));
+	}
+	else {
+		m_animatedSprite.setColor(COLOR_WHITE);
+	}
+}
