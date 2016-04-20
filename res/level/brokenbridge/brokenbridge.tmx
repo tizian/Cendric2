@@ -5,6 +5,7 @@
   <property name="dimming" value="0.2"/>
   <property name="name" value="BrokenBridge"/>
   <property name="tilesetpath" value="res/level/brokenbridge/tileset_level_brokenbridge.png"/>
+  <property name="musicpath" value="res/level/brokenbridge/brokenbridge.ogg"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_brokenbridge" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="399" columns="21">
   <image source="tileset_level_brokenbridge.png" width="1100" height="1000"/>
