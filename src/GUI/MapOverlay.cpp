@@ -52,7 +52,7 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 	m_title.setCharacterSize(16);
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
 
-	sf::FloatRect box(m_position.x, m_position.y, m_boundingBox.width, m_boundingBox.height);
+	sf::FloatRect box(m_position.x - 1.f, m_position.y - 1.f, m_boundingBox.width + 2.f, m_boundingBox.height + 2.f);
 	m_border = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		COLOR_TRANSPARENT,
