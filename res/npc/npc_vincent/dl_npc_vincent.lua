@@ -71,7 +71,7 @@ loadDialogue = function(DL)
 			DL:createNPCNode(20, -1, "DL_Vincent_Cooperation") -- Very good. (Opens bottle and puts something in it) That should do it. (Closes bottle) Come back to me after you've done your job. I will pay you.
 			DL:addConditionProgress("npc_vincent","cooperated")
 			if (DL:isQuestState('broken_bridge','started')) then
-				DL:addQuestDescription("broken_bridge", 1)
+				DL:changeQuestState("broken_bridge", "failed")
 			end
 			DL:removeItem("pe_feudalfire",1)
 			DL:addItem("qe_spoiledfeudalfire",1)

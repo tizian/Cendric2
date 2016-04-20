@@ -2,7 +2,11 @@
 loadDialogue = function(DL)
 
 		DL:createChoiceNode(0)
-		DL:addChoice(10, "DL_Choice_Rumors") -- Heard any rumours?
+		if (not DL:isConditionFulfilled("npc_innkeeper", "first_rumor")) then
+			DL:addChoice(10, "DL_Choice_Rumors") -- Heard any rumours?
+		else
+			DL:addChoice(10, "DL_Choice_RumorsMore") -- Heard more rumours?
+		end
 		DL:addChoice(1, "DL_Choice_GiveBeer") -- I'm thirsty, give me a beer. (10 Gold)
 		DL:addChoice(2, "DL_Choice_SomethingElse") --  Do you also sell other things than beer? 
 		if (DL:isConditionFulfilled("npc_rhendal", "talked_about_schnapps") and not DL:isConditionFulfilled("npc_innkeeper", "asked_for_feudal_fire")) then 

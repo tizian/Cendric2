@@ -1,4 +1,5 @@
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Rumors', 'dl_npc_innkeeper', 'Heard any rumours?','Hast du irgendwelche Gerüchte gehört?','Sind irgendwelchli Grücht im Umlauf?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_RumorsMore', 'dl_npc_innkeeper', 'Heard more rumours?','Gibt es weitere Gerüchte?','Gits na me Grücht?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_GiveBeer', 'dl_npc_innkeeper', 'I''m thirsty, give me a beer. (10 Gold)','Ich habe Durst, gib mir ein Bier. (10 Gold)', 'Ich han Durst, gib mer es Bier. (10 Gold)');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_SomethingElse', 'dl_npc_innkeeper', 'Do you also sell other things than beer?','Verkaufst du auch noch etwas anderes als Bier?','Verchaufsch du au na öppis anderes wie Bier?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_INeedSchnapps', 'dl_npc_innkeeper', 'I''m looking for a special schnapps...','Ich suche einen speziellen Schnaps...','Ich suech en spezielle Schnaps...');

@@ -9,7 +9,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("hawthorn_staff", "started") and DL:isQuestComplete("hawthorn_staff")) then
 		DL:addChoice(70, "DL_Choice_IGotStaff") --  I got the Hawthorn staff.
 	end
-	if (DL:isQuestState("broken_bridge", "started") and (DL:isQuestComplete("broken_bridge") or DL:hasItem("qe_spoiledfeudalfire", 1))) then
+	if ((DL:isQuestState("broken_bridge", "started") and DL:isQuestComplete("broken_bridge")) or (DL:isQuestState("broken_bridge", "failed") and DL:hasItem("qe_spoiledfeudalfire", 1))) then
 		DL:addChoice(90, "DL_Choice_IGotSchnapps") --  I got the schnapps for you.
 	elseif (DL:hasItem("qe_spoiledfeudalfire", 1)) then
 		DL:addChoice(90, "DL_Choice_IGotSchnappsAnyway") --  I've changed my decision and brought you some schnapps, for free.
@@ -275,9 +275,6 @@ loadDialogue = function(DL)
 		
 	elseif (DL:hasItem("qe_spoiledfeudalfire", 1)) then
 		DL:createNPCNode(90, 91, "DL_Rhendal_ThankForSchnaps") -- Oh, perfect, thank you. So you managed to cross the river. Hmm, a truly special drink. Do you want some? 
-		if (DL:isQuestState("broken_bridge", "started")) then
-			DL:changeQuestState("broken_bridge", "failed")
-		end
 		DL:addReputationProgress("druid", 5)
 		DL:addConditionProgress("npc_rhendal", "spoiled_schnapps")
 		DL:removeItem("qe_spoiledfeudalfire", 1)
