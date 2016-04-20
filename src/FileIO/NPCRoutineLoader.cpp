@@ -23,6 +23,7 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("setLooped", &NPCRoutineLoader::setLooped)
 		.addFunction("isQuestState", &NPCRoutineLoader::isQuestState)
 		.addFunction("isConditionFulfilled", &NPCRoutineLoader::isConditionFulfilled)
+		.addFunction("hasItem", &NPCRoutineLoader::hasItem)
 		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
 		.addFunction("setTilePositionForce", &NPCRoutineLoader::setTilePositionForce)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
@@ -109,6 +110,15 @@ bool NPCRoutineLoader::isQuestState(const std::string& questID, const std::strin
 	return m_core->getQuestState(questID) == questState;
 }
 
+bool NPCRoutineLoader::hasItem(const std::string& item, int amount) const {
+	if (item.empty() || amount < 1) {
+		g_logger->logError("NPCRoutineLoader", "Item key cannot be empty and amount has to be > 0");
+		return false;
+	}
+
+	return m_core->hasItem(item, amount);
+}
+
 void NPCRoutineLoader::setTilePosition(float x, float y) {
 	if (!m_isInitial) return;
 	setTilePositionForce(x, y);
@@ -119,6 +129,12 @@ void NPCRoutineLoader::setTilePositionForce(float x, float y) {
 }
 
 void NPCRoutineLoader::setDisposed() {
-	m_routine.getNPC()->setDisposed();
+	if (m_isInitial) {
+		m_routine.getNPC()->setDisposed();
+		return;
+	}
+	RoutineStep step;
+	step.state = RoutineState::Disappearing;
+	m_routine.addStep(step);
 }
 

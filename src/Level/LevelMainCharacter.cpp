@@ -70,11 +70,10 @@ void LevelMainCharacter::handleAttackInput() {
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 
-	sf::Vector2f target = g_inputController->getMousePosition();
-	// Target lock
-	if (m_targetedEnemy != nullptr) {
-		target = m_targetedEnemy->getCenter();
-	}
+	sf::Vector2f target = m_targetedEnemy != nullptr ? 
+		// Target lock
+		m_targetedEnemy->getCenter() :
+		g_inputController->getMousePosition();
 
 	// update current spell
 	for (auto const &it : m_spellKeyMap) {

@@ -4,6 +4,7 @@
   <property name="dimming" value="0.3"/>
   <property name="name" value="Meadows"/>
   <property name="tilesetpath" value="res/map/meadows/tileset_map_meadows.png"/>
+  <property name="musicpath" value="res/map/meadows/meadows.ogg"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
   <image source="tileset_map_meadows.png" width="1200" height="3000"/>

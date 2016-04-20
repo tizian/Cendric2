@@ -11,7 +11,8 @@ class DialogueWindow;
 enum class RoutineState {
 	VOID,
 	Waiting,
-	GoingTo
+	GoingTo,
+	Disappearing
 };
 
 struct RoutineStep {

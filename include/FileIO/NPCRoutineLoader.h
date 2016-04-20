@@ -17,6 +17,7 @@ public:
 	// methods to call in lua script
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	bool isQuestState(const std::string& questID, const std::string& state) const;
+	bool hasItem(const std::string& item, int amount) const; // this can also query gold. with item id "gold"
 	void setTilePosition(float x, float y);
 	void setTilePositionForce(float x, float y);
 	void setDisposed();

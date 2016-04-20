@@ -75,6 +75,8 @@ void MapScreen::load() {
 
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
+
+	g_resourceManager->playMusic(m_backgroundMusic, m_currentMap.getMusicPath());
 }
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
@@ -92,6 +94,7 @@ void MapScreen::notifyConditionAdded(const std::string& conditionType, const std
 
 void MapScreen::execOnExit(const Screen* nextScreen) {
 	WorldScreen::execOnExit(nextScreen);
+	m_backgroundMusic.stop();
 	m_currentMap.dispose();
 	clearOverlays();
 }

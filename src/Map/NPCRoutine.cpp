@@ -32,7 +32,11 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 	bool updateStep = false;
 
 	RoutineStep& currentStep = m_steps[m_currentStepID];
-	if (currentStep.state == RoutineState::Waiting) {
+	if (currentStep.state == RoutineState::Disappearing) {
+		m_npc->setDisposed();
+		return;
+	}
+	else if (currentStep.state == RoutineState::Waiting) {
 		m_remainingStepTime -= frameTime;
 		if (m_remainingStepTime <= sf::Time::Zero) {
 			updateStep = true;

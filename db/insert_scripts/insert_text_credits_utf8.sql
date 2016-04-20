@@ -35,7 +35,32 @@ Tizian
 Haab
 
 <<< Music >>>
-Isa
+-- Isa --
+
+"Ratcave"
+
+---
+
+-- Eric Matyas --
+"Magical Discovery"
+
+"Left Behind"
+
+"Eerie Techno Game Open"
+
+"Drama in the Carribean"
+
+by Eric Matyas
+
+www.soundimage.org
+
+---
+
+-- Matthew Pablo --
+Featuring Music by Matthew Pablo
+http://www.matthewpablo.com
+
+---
 
 <<< Level & Map Design >>>
 Isa
@@ -114,7 +139,32 @@ Tizian
 Haab
 
 <<< Musik >>>
-Isa
+-- Isa --
+
+"Ratcave"
+
+---
+
+-- Eric Matyas --
+"Magical Discovery"
+
+"Left Behind"
+
+"Eerie Techno Game Open"
+
+"Drama in the Carribean"
+
+by Eric Matyas
+
+www.soundimage.org
+
+---
+
+-- Matthew Pablo --
+Featuring Music by Matthew Pablo
+http://www.matthewpablo.com
+
+---
 
 <<< Level & Karten Design >>>
 Isa
@@ -193,7 +243,35 @@ Tizian
 Haab
 
 <<< Musig >>>
-Isa
+-- Isa --
+
+"Ratcave"
+
+---
+
+-- Eric Matyas --
+"Magical Discovery"
+
+"Left Behind"
+
+"Eerie Techno Game Open"
+
+"Drama in the Carribean"
+
+by Eric Matyas
+
+www.soundimage.org
+
+---
+
+-- Matthew Pablo --
+Featuring Music by Matthew Pablo
+http://www.matthewpablo.com
+
+---
+
+Featuring Music by Matthew Pablo
+http://www.matthewpablo.com
 
 <<< Level & Chartä Design >>>
 Isa

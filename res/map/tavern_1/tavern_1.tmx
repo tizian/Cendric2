@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="148">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="151">
  <properties>
   <property name="dimming" value="0.3"/>
+  <property name="musicpath" value="res/map/tavern_1/tavern.ogg"/>
   <property name="name" value="Tavern1"/>
   <property name="tilesetpath" value="res/map/tavern_1/tileset_map_tavern_1.png"/>
  </properties>
@@ -67,7 +68,7 @@
 4,4,4,4,4,0,234,235,0,232,233,0,0,0,0,0,0,0,0,0,16,0,274,4,4,
 4,4,4,4,4,0,147,148,0,0,0,0,0,0,0,0,332,334,334,334,35,0,0,4,4,
 4,4,4,4,4,274,166,167,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,
-4,4,4,4,4,23,243,244,0,0,0,0,274,0,0,274,0,0,243,244,243,244,23,4,4,
+4,4,4,4,4,23,0,0,0,0,0,0,274,0,0,274,0,0,243,244,243,244,23,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,79,79,4,4,4,4,4,4,4,4,4,4
 </data>
  </layer>
@@ -120,12 +121,30 @@
    </properties>
   </object>
   <object id="147" gid="368" x="542" y="430" width="50" height="50">
-  <properties>
+   <properties>
     <property name="dialogueid" value="res/npc/npc_vincent/dl_npc_vincent.lua"/>
     <property name="dialoguetexture" value="0,500"/>
     <property name="id" value="npc_vincent"/>
     <property name="routineid" value="res/npc/npc_vincent/ru_npc_vincent.lua"/>
     <property name="spritesheetpath" value="res/npc/npc_vincent/spritesheet_npc_vincent.png"/>
+   </properties>
+  </object>
+  <object id="148" gid="369" x="316" y="555" width="50" height="50">
+   <properties>
+    <property name="dialogueid" value="res/npc/npc_thea/dl_npc_thea.lua"/>
+    <property name="dialoguetexture" value="750,250"/>
+    <property name="id" value="npc_thea"/>
+    <property name="routineid" value="res/npc/npc_thea/ru_npc_thea.lua"/>
+    <property name="spritesheetpath" value="res/npc/npc_thea/spritesheet_npc_thea.png"/>
+   </properties>
+  </object>
+  <object id="149" gid="370" x="322" y="489" width="50" height="50">
+   <properties>
+    <property name="dialogueid" value="res/npc/npc_andrew/dl_npc_andrew.lua"/>
+    <property name="dialoguetexture" value="250,500"/>
+    <property name="id" value="npc_andrew"/>
+    <property name="routineid" value="res/npc/npc_andrew/ru_npc_andrew.lua"/>
+    <property name="spritesheetpath" value="res/npc/npc_andrew/spritesheet_npc_andrew.png"/>
    </properties>
   </object>
  </objectgroup>
@@ -138,11 +157,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,154,154,154,154,154,154,154,154,0,154,0,0,
+0,0,0,0,0,0,0,98,0,99,0,0,0,154,154,154,154,154,154,154,154,0,154,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,215,216,0,213,214,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,255,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,255,147,148,0,215,216,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,255,0,0,255,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -243,7 +262,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="25" height="15" visible="0">
+ <layer name="collidable" width="25" height="15">
   <data encoding="csv">
 82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,
 82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,
@@ -258,21 +277,22 @@
 82,82,82,82,82,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,0,0,82,82,
 82,82,82,82,82,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,0,0,82,82,
 82,82,82,82,82,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,82,
-82,82,82,82,82,83,83,83,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,82,82,
+82,82,82,82,82,83,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,82,82,
 82,82,82,82,82,82,82,82,82,82,83,82,82,0,0,82,82,82,82,82,82,82,82,82,82
 </data>
  </layer>
  <objectgroup name="collidable">
   <object id="128" x="251" y="350" width="25" height="50"/>
   <object id="129" x="568" y="350" width="61" height="28"/>
-  <object id="130" x="466" y="568" width="64" height="43"/>
-  <object id="131" x="471" y="475" width="59" height="41"/>
-  <object id="133" x="365" y="405" width="25" height="34"/>
-  <object id="134" x="460" y="408" width="27" height="31"/>
-  <object id="135" x="319" y="470" width="61" height="46"/>
-  <object id="136" x="318" y="576" width="59" height="42"/>
+  <object id="130" x="471" y="579" width="64" height="56"/>
+  <object id="131" x="469" y="481" width="61" height="54"/>
+  <object id="133" x="366" y="400" width="25" height="35"/>
+  <object id="134" x="460" y="400" width="27" height="35"/>
+  <object id="135" x="318" y="482" width="61" height="46"/>
+  <object id="136" x="320" y="581" width="60" height="52"/>
+  <object id="150" x="651" y="251" width="15" height="146"/>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup name="light" visible="0">
   <object id="120" x="192" y="356" width="160" height="172">
    <ellipse/>
   </object>

@@ -32,8 +32,8 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire") and DL:isConditionFulfilled("npc_innkeeper", "wrong_name")) then 
 			if (DL:hasItem("gold", 60)) then
 				DL:createNPCNode(40, -2, "DL_Innkeeper_TakeItAnyway") -- Well, you seem to have enough money to convince me. Here you go.
-				DL:addConditionProgress("npc_innkeeper", "bought_feudal_fire")
 				DL:addItem("pe_feudalfire",1)
+				DL:addConditionProgress("npc_innkeeper", "bought_feudal_fire")
 				DL:removeGold(60)
 				DL:addNode()
 			else
@@ -64,6 +64,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 			
 			DL:createNPCNode(11, -2, "DL_Innkeeper_SecondRumorP2") -- They suspect them to come from somewhere in the South. Sadly, the milita of Gandria doesn't seem to care too much about this incidents. 
+			DL:changeQuestState("the_bandits_hideout","started")
 			DL:addNode()
 		else
 			DL:createNPCNode(10, 11, "DL_Innkeeper_FirstRumorP1") -- I heard that the king of Admantris has resigned - in favour of his son, Logan the Third. 
