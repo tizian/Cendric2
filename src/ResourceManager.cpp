@@ -128,7 +128,6 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_slot_spell_selected, "res/assets/gui/slot_spell_selected.png" },
 		{ ResourceID::Texture_GUI_slot_spell_gem, "res/assets/gui/slot_spell_gem.png" },
 		{ ResourceID::Texture_GUI_slot_highlight, "res/assets/gui/slot_highlight.png" },
-		{ ResourceID::Texture_GUI_slot_buff, "res/assets/gui/slot_buff.png" },
 		{ ResourceID::Texture_GUI_tab_inactive, "res/assets/gui/tab_inactive.png" },
 		{ ResourceID::Texture_GUI_tab_active, "res/assets/gui/tab_active.png" },
 		{ ResourceID::Texture_GUI_cursor, "res/assets/gui/cursor.png" },

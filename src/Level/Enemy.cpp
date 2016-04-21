@@ -21,6 +21,10 @@ Enemy::Enemy(Level* level, Screen* screen) : LevelMovableGameObject(level) {
 	m_questTarget.first = "";
 
 	m_buffBar = new EnemyBuffBar(this);
+
+	sf::Texture* cursorTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor);
+	m_targetSprite.setTexture(*cursorTexture);
+	m_targetSprite.setOrigin(sf::Vector2f(0.5f * cursorTexture->getSize().x, 0.5f * cursorTexture->getSize().y));
 }
 
 Enemy::~Enemy() {
@@ -63,6 +67,9 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
 	GameObject::renderAfterForeground(renderTarget);
 	m_buffBar->render(renderTarget);
 	renderTarget.draw(m_hpBar);
+	if (m_isTargeted) {
+		renderTarget.draw(m_targetSprite);
+	}
 	if (m_showLootWindow && m_lootWindow != nullptr) {
 		m_lootWindow->render(renderTarget);
 		m_showLootWindow = false;
@@ -82,6 +89,7 @@ void Enemy::update(const sf::Time& frameTime) {
 	}
 	m_showLootWindow = m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips);
 	m_buffBar->update(frameTime);
+	m_targetSprite.setPosition(getBoundingBox()->left + 0.5f * getBoundingBox()->width, getBoundingBox()->top + 0.5f * getBoundingBox()->height);
 }
 
 void Enemy::updateHpBar() {
@@ -361,11 +369,11 @@ void Enemy::resetMovingTarget() {
 void Enemy::setTargeted(bool targeted) {
 	m_isTargeted = targeted;
 
-	// temporarily color enemy when it's the current target
-	if (m_isTargeted) {
-		m_animatedSprite.setColor(sf::Color(50, 100, 250));
-	}
-	else {
-		m_animatedSprite.setColor(COLOR_WHITE);
-	}
+	//// temporarily color enemy when it's the current target
+	//if (m_isTargeted) {
+	//	m_animatedSprite.setColor(sf::Color(50, 100, 250));
+	//}
+	//else {
+	//	m_animatedSprite.setColor(COLOR_WHITE);
+	//}
 }

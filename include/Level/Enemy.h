@@ -143,4 +143,5 @@ private:
 	bool m_isAlly = false;
 	// is this enemy currently targeted by the main character
 	bool m_isTargeted = false;
+	sf::Sprite m_targetSprite;
 };

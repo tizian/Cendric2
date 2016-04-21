@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const float BuffSlot::MARGIN = 3.f;
+const float BuffSlot::MARGIN = 4.f;
 const float BuffSlot::SIZE = 50.f + 2 * MARGIN;
 const sf::Time BuffSlot::FLASHING_TIME = sf::seconds(5);
 const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
@@ -26,7 +26,7 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	sf::Texture* texture;
 
 	m_outside.setSize(sf::Vector2f(SIZE, SIZE));
-	m_outside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_buff));
+	m_outside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected));
 
 	switch (type) {
 	case BuffType::Food:
@@ -67,9 +67,9 @@ void BuffSlot::setPosition(const sf::Vector2f& pos) {
 
 void BuffSlot::render(sf::RenderTarget& renderTarget) {
 	if (m_isVisible) {
-		renderTarget.draw(m_outside);
 		renderTarget.draw(m_back);
 		renderTarget.draw(m_inside);
+		renderTarget.draw(m_outside);
 	}
 
 	renderTarget.draw(m_durationText);
