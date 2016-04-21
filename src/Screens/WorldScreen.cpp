@@ -1,4 +1,5 @@
 #include "Screens/WorldScreen.h"
+#include "Screens/LoadingScreen.h"
 #include "Item.h"
 #include "Trigger.h"
 
@@ -165,6 +166,33 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 
 		setTooltipText("ScreenshotSaved", COLOR_GOOD, true);
 	}
+
+	if (g_inputController->isKeyJustPressed(Key::Quickload)) {
+		quickload();
+	}
+	else if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
+		quicksave();
+	}
+}
+
+void WorldScreen::quickload() {
+	CharacterCore* newCharacterCore = new CharacterCore();
+	if (!newCharacterCore->quickload()) {
+		// no quicksave exists
+		setTooltipText("NoQuicksaveExists", COLOR_BAD, true);
+		delete newCharacterCore;
+	}
+	else {
+		delete m_characterCore;
+		m_characterCore = nullptr;
+		setNextScreen(new LoadingScreen(newCharacterCore));
+		return;
+	}
+}
+
+void WorldScreen::quicksave() {
+	m_characterCore->quicksave();
+	setTooltipText("GameSaved", COLOR_GOOD, true);
 }
 
 void WorldScreen::execOnExit(const Screen* nextScreen) {

@@ -6,7 +6,7 @@ using namespace std;
 
 ResourceManager *g_resourceManager;
 
-ResourceManager::ResourceManager() : m_currentError({ErrorID::VOID, ""}) {
+ResourceManager::ResourceManager() : m_currentError({ ErrorID::VOID, "" }) {
 }
 
 ResourceManager::~ResourceManager() {
@@ -345,17 +345,23 @@ void ResourceManager::playSound(sf::Sound& sound, ResourceID id, bool force) {
 	}
 }
 
-void ResourceManager::playMusic(sf::Music& music, const std::string& filename) {
-	if (m_configuration.isSoundOn && !filename.empty()) {
-		if (music.openFromFile(getPath(filename))) {
-			music.setLoop(true);
-			music.setVolume(static_cast<float>(m_configuration.volumeMusic));
-			music.play();
-		}
-		else {
-			g_logger->logError("ResourceManager", "Could not read music from file: " + getPath(filename));
-		}
+void ResourceManager::playMusic(const std::string& filename) {
+	if (!m_configuration.isSoundOn || filename.empty()) return;
+	if (m_currentMusic.first.compare(filename) == 0) return; // already playing
+	m_currentMusic.second.stop();
+	if (m_currentMusic.second.openFromFile(getPath(filename))) {
+		m_currentMusic.second.setLoop(true);
+		m_currentMusic.second.setVolume(static_cast<float>(m_configuration.volumeMusic));
+		m_currentMusic.second.play();
 	}
+	else {
+		g_logger->logError("ResourceManager", "Could not read music from file: " + getPath(filename));
+	}
+}
+
+void ResourceManager::stopMusic() {
+	m_currentMusic.second.stop();
+	m_currentMusic.first.clear();
 }
 
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {

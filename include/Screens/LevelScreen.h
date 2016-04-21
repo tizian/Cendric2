@@ -42,6 +42,9 @@ public:
 	const Level* getWorld() const override;
 
 private:
+	void quicksave() override;
+
+private:
 	Level m_currentLevel;
 	LevelMainCharacter* m_mainChar = nullptr;
 	std::string m_levelID;
