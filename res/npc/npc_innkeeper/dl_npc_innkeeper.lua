@@ -63,12 +63,14 @@ loadDialogue = function(DL)
 			DL:createNPCNode(10, -2, "DL_Innkeeper_NoRumor") -- Hm no, nothing of interest.
 			DL:addNode()
 		elseif (DL:isConditionFulfilled("npc_innkeeper", "first_rumor")) then
-			DL:createNPCNode(10, 11, "DL_Innkeeper_SecondRumorP1") -- Two farmers told me that recently that they are  visited regularly by bandits who steal their goods.
+			DL:createNPCNode(10, 11, "DL_Innkeeper_SecondRumorP1") -- Two farmers told me that recently they are  visited regularly by a monster who steals their sheep.
 			DL:addConditionProgress("npc_innkeeper", "second_rumor")
 			DL:addNode()
 			
-			DL:createNPCNode(11, -2, "DL_Innkeeper_SecondRumorP2") -- They suspect them to come from somewhere in the South. Sadly, the milita of Gandria doesn't seem to care too much about this incidents. 
-			DL:changeQuestState("the_bandits_hideout","started")
+			DL:createNPCNode(11, -2, "DL_Innkeeper_SecondRumorP2") -- Sadly, the milita of Gandria doesn't seem to care too much about these incidents. 
+			if (not DL:isQuestState("monster_problem", "started")) then
+				DL:changeQuestState("monster_problem","started")
+			end
 			DL:addNode()
 		else
 			DL:createNPCNode(10, 11, "DL_Innkeeper_FirstRumorP1") -- I heard that the king of Admantris has resigned - in favour of his son, Logan the Third. 

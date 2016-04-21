@@ -8,6 +8,9 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_andrew", "what_are_you_doing")) then
 		DL:addChoice(2, "DL_Choice_WhatAreYouDoing") -- What are you doing here?
 	end
+	if (not DL:isConditionFulfilled("npc_andrew", "mages")) then
+		DL:addChoice(4, "DL_Choice_Mages") -- What do you think about mages?
+	end
 	if (DL:isConditionFulfilled("npc_andrew", "what_are_you_doing") and not DL:isConditionFulfilled("npc_andrew", "bridge")) then
 		DL:addChoice(10, "DL_Choice_TheBridgeIsOk") -- The river is frozen, you can go home.
 	end
@@ -16,6 +19,10 @@ loadDialogue = function(DL)
 	
 	DL:createNPCNode(1, -2, "DL_Andrew_IAm") -- I'm Andrew... hic! Nice to meet ya. 
 	DL:addConditionProgress("npc_andrew", "who_are_you")
+	DL:addNode()
+	
+	DL:createNPCNode(4, -2, "DL_Andrew_Mages") -- A bunch of freaks, if y'ask me... hic!... I'm pretty glad that none of them livesh in our village.
+	DL:addConditionProgress("npc_andrew", "mages")
 	DL:addNode()
 	
 	DL:createNPCNode(2, 3, "DL_Andrew_IAmDrinking") -- Hehe... shilly question... Having some beers, enjoying my time here... I can't go back anyway.

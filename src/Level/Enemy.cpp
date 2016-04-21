@@ -368,12 +368,4 @@ void Enemy::resetMovingTarget() {
 
 void Enemy::setTargeted(bool targeted) {
 	m_isTargeted = targeted;
-
-	//// temporarily color enemy when it's the current target
-	//if (m_isTargeted) {
-	//	m_animatedSprite.setColor(sf::Color(50, 100, 250));
-	//}
-	//else {
-	//	m_animatedSprite.setColor(COLOR_WHITE);
-	//}
 }

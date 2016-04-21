@@ -2,10 +2,89 @@
 loadDialogue = function(DL)
 
 	DL:createChoiceNode(0)
-	DL:addChoice(-1, "DL_Choice_WhoAreYou") -- Who are you?
-	DL:addChoice(-1, "DL_Choice_WhatAreYouDoing") -- What are you doing here?
+	if (not DL:isConditionFulfilled("npc_thea", "who_are_you")) then 
+		DL:addChoice(1, "DL_Choice_WhoAreYou") -- Who are you?
+	end
+	if (not DL:isConditionFulfilled("npc_thea", "what_are_you_doing")) then
+		DL:addChoice(10, "DL_Choice_WhatAreYouDoing") -- What are you doing here?
+	end
+	if (not DL:isConditionFulfilled("npc_thea", "mages")) then
+		DL:addChoice(30, "DL_Choice_Mages") -- What do you think about mages?
+	end
+	if (not DL:isConditionFulfilled("npc_thea", "gandria") and DL:isConditionFulfilled("npc_thea", "what_are_you_doing")) then
+		DL:addChoice(40, "DL_Choice_Gandria") -- What do you know about the city Gandria?
+	end
+
 	DL:addChoice(-1, "") --  ""
 	DL:addNode()
+	
+	if (not DL:isConditionFulfilled("npc_thea", "who_are_you")) then
+		DL:createNPCNode(1, 2, "DL_Thea_IAm") -- My name is Thea... and you?
+		DL:addConditionProgress("npc_thea", "who_are_you")
+		DL:addNode()
+	
+		DL:createChoiceNode(2)
+		DL:addChoice(3, "DL_Choice_Cendric") -- I'm Cendric. Nice to meet you.
+		DL:addChoice(4, "DL_Choice_DoesntMatter") -- My name isn't of importance.
+		DL:addNode()
+	
+		DL:createNPCNode(3, -2, "DL_Thea_Nice") -- Nice to meet you, too!
+		DL:addNode()
+	
+		DL:createNPCNode(4, -2, "DL_Thea_Pity") -- Pity, I would have loved to know it.
+		DL:addNode()
+	end
+
+	if (not DL:isConditionFulfilled("npc_thea", "what_are_you_doing")) then
+		DL:createNPCNode(10, 11, "DL_Thea_WhatAmIDoing") -- I had to deliver some goods from the farmers and then decided to stay for a while.
+		DL:addConditionProgress("npc_thea", "what_are_you_doing")
+		DL:addNode()
+	
+		DL:createChoiceNode(11)
+		DL:addChoice(12, "DL_Choice_VeryAlone") -- You are traveling alone?
+		DL:addChoice(13, "DL_Choice_WorkForFarmers") -- Do you work for the farmers?
+		DL:addNode()
+	
+		DL:createNPCNode(12, 14, "DL_Thea_VeryAlone") -- Yes, I always travel on my own. But it has become dangerous lately. I'd rather take someone with me in the future.
+		DL:addNode()
+	
+		DL:createNPCNode(13, 15, "DL_Thea_WorkForFarmers") -- Yes, I'm a maid at Ivo's farm. But I'd rather find work in the city of Gandria. It's safe there, at least.
+		DL:addNode()
+		
+		DL:createChoiceNode(14)
+		DL:addChoice(16, "DL_Choice_WhatIsDangerous") -- What is dangerous out here, then?
+		DL:addChoice(13, "DL_Choice_WorkForFarmers") -- Do you work for the farmers?
+		DL:addNode()
+		
+		DL:createChoiceNode(15)
+		DL:addChoice(16, "DL_Choice_WhatIsDangerous") -- What is dangerous out here, then?
+		DL:addChoice(12, "DL_Choice_VeryAlone") -- You are traveling alone?
+		DL:addNode()
+		
+		DL:createNPCNode(16, -2, "DL_Thea_Beast") -- There is a beast lurking around, and it must be pretty hungry, as most of our sheeps are gone. Nobody has really seen it so far but I swear, I've seen a huge shadow disappear into the South last night. And in the morning, another sheep was missing.
+		if (not DL:isQuestState("monster_problem", "started")) then
+			DL:changeQuestState("monster_problem","started")
+		end
+		DL:addQuestDescription("monster_problem", 1)
+	
+		DL:addNode()
+	end
+	
+	if (not DL:isConditionFulfilled("npc_thea", "mages")) then
+		DL:createNPCNode(30, 31, "DL_Thea_Mages") -- Well, most of them are quite reasonable people. They lead our kingdom, at least.
+		DL:addConditionProgress("npc_thea", "mages")
+		DL:addNode()
+		
+		DL:createNPCNode(31, -2, "DL_Thea_Mages2") -- And I really think that we own them much - the farmer Ivo told me that in the past, there were even mages that controlled the weather to help farmers like him.
+		DL:addNode()
+	end
+	
+	if (not DL:isConditionFulfilled("npc_thea", "gandria") and DL:isConditionFulfilled("npc_thea", "what_are_you_doing")) then
+		DL:createNPCNode(40, -1, "DL_Thea_Gandria") -- It's the capital city of our kingdom. Where the king resides - and all the important people, of course. Ah, I wish I could live there!
+		DL:addConditionProgress("npc_thea", "gandria")
+		DL:addNode()
+
+	end
 	
 	DL:setRoot(0)
 	

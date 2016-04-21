@@ -20,7 +20,7 @@ void TorchTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_torch));
-	idleAnimation->addFrame(sf::IntRect(0, 0, TILE_SIZE, 2 * TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * textureHeight, TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
