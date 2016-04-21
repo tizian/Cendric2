@@ -59,17 +59,18 @@ private:
 	int m_nColumns;
 	std::vector<FluidColumn> m_columns;
 
-	float *m_leftDeltas;
-	float *m_rightDeltas;
+	float* m_leftDeltas;
+	float* m_rightDeltas;
 
 	sf::VertexArray m_vertexArray;
 
-	std::vector<FrozenWaterTile *> m_frozenTiles;
+	std::vector<FrozenWaterTile*> m_frozenTiles;
 
 	std::unique_ptr<particles::MetaballParticleSystem> m_ps;
-	sf::Vector2f *m_particlePosition = nullptr;
-	float *m_particleMinSpeed = nullptr;
-	float *m_particleMaxSpeed = nullptr;
+	sf::Vector2f* m_emitterPosition = nullptr;
+	sf::Vector2f* m_emitterSize = nullptr;
+	float* m_particleMinSpeed = nullptr;
+	float* m_particleMaxSpeed = nullptr;
 
 	std::map<const MovableGameObject*, sf::Sound*> m_soundMap;
 

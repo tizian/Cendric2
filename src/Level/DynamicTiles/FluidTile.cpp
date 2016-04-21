@@ -30,7 +30,7 @@ void FluidTile::init() {
 void FluidTile::loadAnimation(int skinNr) {
 	m_data = FluidTileData::getData(skinNr);
 
-	const sf::FloatRect *bb = getBoundingBox();
+	const sf::FloatRect* bb = getBoundingBox();
 	m_x = getPosition().x;
 	m_y = getPosition().y;
 	m_width = bb->width;
@@ -56,7 +56,7 @@ void FluidTile::loadAnimation(int skinNr) {
 	m_leftDeltas = new float[m_nColumns];
 	m_rightDeltas = new float[m_nColumns];
 
-	m_frozenTiles = std::vector<FrozenWaterTile *>(m_nTiles, nullptr);
+	m_frozenTiles = std::vector<FrozenWaterTile*>(m_nTiles, nullptr);
 
 	m_vertexArray = sf::VertexArray(sf::Quads, 2 * 4 * (m_nColumns - 1));
 
@@ -69,8 +69,8 @@ void FluidTile::loadAnimation(int skinNr) {
 
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	m_particlePosition = &posGen->center;
-	posGen->size = sf::Vector2f(20.f, 1.f);
+	m_emitterPosition = &posGen->center;
+	m_emitterSize = &posGen->size;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 8.f;
@@ -201,17 +201,18 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 	// Create particle splashes
 	float particleVelocity = particleVelocityScale * std::abs(velocity.y);
 	float waterHeight = getHeight(xPosition + 0.5f * width);
-	const sf::FloatRect *bb = getBoundingBox();
+	const sf::FloatRect* bb = getBoundingBox();
 
-	*m_particlePosition = sf::Vector2f(xPosition + 0.5f * width, bb->top + bb->height - waterHeight);
+	*m_emitterPosition = sf::Vector2f(xPosition + 0.5f * width, bb->top + bb->height - waterHeight);
+	*m_emitterSize = sf::Vector2f(0.4f * width, 1.f);
 	*m_particleMinSpeed = 0.2f * particleVelocity;
 	*m_particleMaxSpeed = 1.0f * particleVelocity;
 
-	int nParticles = static_cast<int>(0.05 * particleVelocity);
+	int nParticles = static_cast<int>(0.05f * particleVelocity);
 	m_ps->emitParticles(nParticles);
 
 	// Play sound
-	if (velocityNorm > 100.f) {
+	if (velocityNorm > 100.f && source) {
 		if (dist(sf::Vector2f(source->getBoundingBox()->left, source->getBoundingBox()->top), m_mainChar->getPosition()) > 1500.f) return;
 		if (m_soundMap.find(source) == m_soundMap.end()) {
 			m_soundMap.insert({ source, new sf::Sound() });
@@ -255,7 +256,7 @@ void FluidTile::onHit(LevelMovableGameObject* mob) {
 	// don't splash if the mob is deeper than one tile below the surface
 	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
 
-	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, mob->getVelocity(), 0.1f);
+	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, mob->getVelocity(), 0.1f, 0.5f);
 
 	if (m_data.isDeadly) {
 		mob->setDead();
@@ -311,10 +312,10 @@ void FluidTile::freeze(int index) {
 			col.fixed = true;
 		}
 
-		FrozenWaterTile *frozenTile = new FrozenWaterTile(this, index);
+		FrozenWaterTile* frozenTile = new FrozenWaterTile(this, index);
 		frozenTile->init();
 		frozenTile->setPosition(sf::Vector2f(m_x + index * TILE_SIZE, m_y));
-		const sf::FloatRect *bb = frozenTile->getBoundingBox();
+		const sf::FloatRect* bb = frozenTile->getBoundingBox();
 		frozenTile->setBoundingBox(sf::FloatRect(bb->left, bb->top, bb->width, bb->height - 35.f));	// ice tile is ca. 15 pixels thick
 		frozenTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		frozenTile->loadAnimation(0);
