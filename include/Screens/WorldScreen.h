@@ -53,13 +53,18 @@ public:
 	// and for the world
 	virtual const World* getWorld() const = 0;
 	// do everything thats needed before leaving the world screen and entering a new level / world. 
-	// Return wheter this is possible (it's not possible on a game over, for example)
+	// Return whether this is possible (it's not possible on a game over, for example)
 	virtual bool exitWorld() = 0;
+
+protected:
+	// handle quicksave
+	virtual void quicksave();
+	// handle quickload 
+	virtual void quickload();
 
 protected:
 	WorldInterface* m_interface = nullptr;
 	ProgressLog* m_progressLog = nullptr;
-	sf::Music m_backgroundMusic;
 
 	// For lighting
 	sf::RenderTexture m_renderTexture;

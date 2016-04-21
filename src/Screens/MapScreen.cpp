@@ -25,26 +25,6 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		setNextScreen(new MenuScreen(m_characterCore), true);
 		return;
 	}
-	if (g_inputController->isKeyJustPressed(Key::Quickload)) {
-		// store pos & go back to menu screen
-		CharacterCore* newCharacterCore = new CharacterCore();
-		if (!newCharacterCore->quickload()) {
-			// no quicksave exists
-			setTooltipText("NoQuicksaveExists", COLOR_BAD, true);
-			delete newCharacterCore;
-		}
-		else {
-			delete m_characterCore;
-			m_characterCore = newCharacterCore;
-			setNextScreen(new LoadingScreen(m_characterCore));
-			return;
-		}
-	}
-	if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
-		m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
-		m_characterCore->quicksave();
-		setTooltipText("GameSaved", COLOR_GOOD, true);
-	}
 
 	updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
 	depthSortObjects(GameObjectType::_MapMovableGameObject, true);
@@ -76,7 +56,7 @@ void MapScreen::load() {
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
 
-	g_resourceManager->playMusic(m_backgroundMusic, m_currentMap.getMusicPath());
+	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 }
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
@@ -94,7 +74,7 @@ void MapScreen::notifyConditionAdded(const std::string& conditionType, const std
 
 void MapScreen::execOnExit(const Screen* nextScreen) {
 	WorldScreen::execOnExit(nextScreen);
-	m_backgroundMusic.stop();
+	g_resourceManager->stopMusic();
 	m_currentMap.dispose();
 	clearOverlays();
 }
@@ -110,6 +90,11 @@ MapMainCharacter* MapScreen::getMainCharacter() const {
 bool MapScreen::exitWorld() {
 	m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
 	return true;
+}
+
+void MapScreen::quicksave() {
+	m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
+	WorldScreen::quicksave();
 }
 
 void MapScreen::clearOverlays() {
@@ -128,7 +113,7 @@ bool MapScreen::isOverlayActive() {
 }
 
 bool MapScreen::isOverlayVisible() {
-	return isOverlayActive() || 
+	return isOverlayActive() ||
 		dynamic_cast<MapInterface*>(m_interface)->isMapOverlayVisible();
 }
 
@@ -145,7 +130,7 @@ void MapScreen::setBook(const BookData* bookData) {
 
 	m_bookWindow = new BookWindow(*bookData, this);
 	m_bookWindowDisposed = false;
-	m_bookWindow->addCloseButton([&](){
+	m_bookWindow->addCloseButton([&]() {
 		m_bookWindowDisposed = true;
 	});
 }
@@ -170,7 +155,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	// Render ambient light level + light sprites to extra buffer	(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
 	m_renderTexture.setView(adjustedView);
-    m_renderTexture2.setView(adjustedView);
+	m_renderTexture2.setView(adjustedView);
 	renderObjects(GameObjectType::_Light, m_renderTexture);
 	m_renderTexture.display();
 
@@ -179,7 +164,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	m_lightLayerShader.setUniform("ambientLevel", m_currentMap.getDimming());
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite, &m_lightLayerShader);
-    
+
 	// Clear extra buffer
 	m_renderTexture2.clear(sf::Color(0, 0, 0, 0));
 
@@ -191,13 +176,13 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	m_sprite.setTexture(m_renderTexture2.getTexture());
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite);
-    
+
 	// Render extra buffer with foreground shader to window			(Ambient light level added on top of foreground)
 	m_sprite.setTexture(m_renderTexture2.getTexture());
 	m_foregroundLayerShader.setUniform("ambientLevel", m_currentMap.getDimming());
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite, &m_foregroundLayerShader);
-    
+
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(adjustedView);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);

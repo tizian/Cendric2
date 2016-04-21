@@ -39,6 +39,7 @@ private:
 	void clearOverlays();
 	bool isOverlayActive();
 	bool isOverlayVisible();
+	void quicksave() override;
 
 private:
 	Map m_currentMap;

@@ -36,7 +36,11 @@ public:
 	// if the sound is already playing, it won't start again, unless the argument "force" is set to true
 	void playSound(sf::Sound& sound, ResourceID id, bool force = false);
 	// streams a music and applies the current configuration to it (sound on/off, volume), starts and loops it.
-	void playMusic(sf::Music& music, const std::string& filename);
+	// if the music is already playing, it won't do anything.
+	// if another music is playing, it will stop that and start the new one.
+	void playMusic(const std::string& filename);
+	// stops the background music
+	void stopMusic();
 
 	sf::Texture* getTexture(ResourceID id);
 	sf::Texture* getTexture(const std::string& filename);
@@ -56,6 +60,8 @@ private:
 	std::map<std::string, sf::SoundBuffer*> m_soundBuffers;
 	std::map<std::string, BitmapFont*> m_bitmapFonts;
 	std::map<std::string, sf::Font*> m_fonts;
+	// the current background music and its path
+	std::pair<std::string, sf::Music> m_currentMusic;
 	// a map that is filled with all ResourceTags and the corresponding filenames
 	std::map <ResourceID, std::string> m_fileNames;
 	// this pair stores resource errors and gets checked in every game loop iteration. mostly and hopefully void.
