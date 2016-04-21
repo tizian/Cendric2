@@ -12,11 +12,8 @@ namespace particles
 		const sf::FloatRect *bb = fluidTile->getBoundingBox();
 
 		for (int i = 0; i < endId; ++i) {
-			float posX = data->pos[i].x;
-			float y = fluidTile->getHeight(posX);
-
+			float y = fluidTile->getHeight(data->pos[i].x);
 			if (data->pos[i].y + 0.5f * data->size[i].y > bb->top + bb->height - y) {
-				fluidTile->splash(nullptr, posX, 0.f, data->vel[i], 0.1f, 0.0f);
 				data->kill(i);
 				endId = data->countAlive;
 			}
