@@ -20,6 +20,7 @@ public:
 
 	bool isLoaded() const;
 	bool isNoStepsLeft() const;
+	const std::string& getMusicPath() const;
 
 private:
 	CutsceneData m_data;

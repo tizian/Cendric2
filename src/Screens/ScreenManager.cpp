@@ -63,6 +63,9 @@ void ScreenManager::resumeBackupScreen() {
 		return;
 	}
 
+	if (WorldScreen* worldScreen = dynamic_cast<WorldScreen*>(m_backUpScreen)) {
+		worldScreen->notifyBackFromMenu();
+	}
 	setNextScreen(m_backUpScreen, false);
 	m_backUpScreen = nullptr;
 	m_isResumeBackupScreen = true;

@@ -11,7 +11,7 @@ REGISTER_ENEMY(EnemyID::Skeleton, SkeletonEnemy)
 void SkeletonEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	if (gold != 0 || !loot.empty()) return;
 
-	gold = rand() % 30 + 210;
+	gold = rand() % 30 + 10;
 }
 
 SkeletonEnemy::SkeletonEnemy(Level* level, Screen* screen) :

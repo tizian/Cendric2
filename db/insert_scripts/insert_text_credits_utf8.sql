@@ -44,11 +44,17 @@ Haab
 -- Eric Matyas --
 "Magical Discovery"
 
-"Left Behind"
+"Dusk"
+
+"Stage Door"
+
+"Young Heroes"
+
+"The Castle Beyond the Forest"
 
 "Eerie Techno Game Open"
 
-"Drama in the Carribean"
+"Leaving Port"
 
 by Eric Matyas
 
@@ -148,11 +154,17 @@ Haab
 -- Eric Matyas --
 "Magical Discovery"
 
-"Left Behind"
+"Dusk"
+
+"Stage Door"
+
+"Young Heroes"
+
+"The Castle Beyond the Forest"
 
 "Eerie Techno Game Open"
 
-"Drama in the Carribean"
+"Leaving Port"
 
 by Eric Matyas
 
@@ -252,11 +264,17 @@ Haab
 -- Eric Matyas --
 "Magical Discovery"
 
-"Left Behind"
+"Dusk"
+
+"Stage Door"
+
+"Young Heroes"
+
+"The Castle Beyond the Forest"
 
 "Eerie Techno Game Open"
 
-"Drama in the Carribean"
+"Leaving Port"
 
 by Eric Matyas
 

@@ -93,6 +93,7 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* scr
 	}
 
 	m_dialogue->updateWindow();
+	m_dialogueTimeout = DIALOGUE_TIMEOUT;
 }
 
 void DialogueWindow::setNPC(NPC* npc) {
@@ -145,7 +146,9 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 }
 
 bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
-	if (g_inputController->isKeyJustPressed(Key::Escape)) {
+	updateTime(m_dialogueTimeout, frameTime);
+
+	if (g_inputController->isKeyJustPressed(Key::Escape) && m_dialogueTimeout == sf::Time::Zero) {
 		// check if we can leave the window
 		if (m_dialogue->isEndable()) {
 			g_inputController->lockAction();
@@ -199,18 +202,19 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 
 	}
 
-	if (m_options.empty() && (g_inputController->isMouseClickedLeft() || g_inputController->isMouseClickedRight())) {
+	if (m_dialogueTimeout == sf::Time::Zero && m_options.empty() && (g_inputController->isMouseClickedLeft() || g_inputController->isMouseClickedRight())) {
 		m_dialogue->setNextNode(-1);
 		return m_dialogue->updateWindow();
 	}
 
-	if (chooseOption || g_inputController->isSelected()) {
+	if (m_dialogueTimeout == sf::Time::Zero && (chooseOption || g_inputController->isSelected())) {
 		if (m_options.empty()) {
 			m_dialogue->setNextNode(-1);
 		}
 		else {
 			m_dialogue->setNextNode(m_chosenOption);
 		}
+		m_dialogueTimeout = DIALOGUE_TIMEOUT;
 		return m_dialogue->updateWindow();
 	}
 	return true;

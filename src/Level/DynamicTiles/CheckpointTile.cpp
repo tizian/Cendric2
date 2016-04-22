@@ -82,5 +82,8 @@ void CheckpointTile::onLeftClick() {
 
 void CheckpointTile::setActive(bool active) {
 	setState(active ? GameObjectState::Active : GameObjectState::Idle);
+	if (active) {
+		g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_checkpoint);
+	}
 }
 

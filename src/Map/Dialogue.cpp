@@ -32,7 +32,6 @@ const std::string& Dialogue::getID() const {
 
 bool Dialogue::updateWindow() {
 	if (m_currentNode == nullptr) {
-		m_window->getNPC()->reloadRoutine();
 		return false;
 	}
 	if (m_currentNode->type == DialogueNodeType::Choice) {
@@ -53,7 +52,7 @@ bool Dialogue::updateWindow() {
 			TriggerContent::executeTrigger(content, m_screen);
 		}
 	}
-		
+
 	return true;
 }
 

@@ -124,6 +124,10 @@ bool Cutscene::isNoStepsLeft() const {
 	return m_isNoStepsLeft;
 }
 
+const std::string& Cutscene::getMusicPath() const {
+	return m_data.musicPath;
+}
+
 void Cutscene::render(sf::RenderTarget& target) {
 	for (auto& sprite : m_cutsceneImages) {
 		target.draw(sprite);

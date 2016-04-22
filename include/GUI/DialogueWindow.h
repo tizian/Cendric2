@@ -87,14 +87,15 @@ private:
 	// the time between the scroll-ticks, determines the speed of scrolling
 	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
 	sf::Time m_timeSinceTick = sf::Time::Zero;
+	// the timeout before the next step of a dialogue can be activated
+	const sf::Time DIALOGUE_TIMEOUT = sf::milliseconds(200);
+	sf::Time m_dialogueTimeout = sf::Time::Zero;
 
 	static const int OPTION_COUNT;
 
 	static const float LEFT_OFFSET;
 	static const float RIGHT_OFFSET;
-
 	static const float TEXT_WIDTH;
-
 	static const float WINDOW_MARGIN;
 
 	static const float TOP;

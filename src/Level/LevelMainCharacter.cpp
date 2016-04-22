@@ -209,6 +209,10 @@ void LevelMainCharacter::setDead() {
 	g_resourceManager->playSound(m_sound, ResourceID::Sound_cendric_death, true);
 }
 
+void LevelMainCharacter::setQuickcast(bool quickcast) {
+	m_isQuickcast = quickcast;
+}
+
 void LevelMainCharacter::addDamageOverTime(DamageOverTimeData& data) {
 	if (m_isDead || data.damageType == DamageType::VOID) return;
 	sf::IntRect textureLocation((static_cast<int>(data.damageType)-1) * 50, 0, 50, 50);

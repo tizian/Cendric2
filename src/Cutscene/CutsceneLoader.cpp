@@ -22,6 +22,11 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 
 	lua_pcall(L, 0, 0, 0);
 
+	LuaRef musicpath = getGlobal(L, "musicpath");
+	if (musicpath.isString()) {
+		cutsceneData.musicPath = musicpath.cast<std::string>();
+	}
+
 	LuaRef steps = getGlobal(L, "steps");
 	if (steps.isTable()) {
 		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.

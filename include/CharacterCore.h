@@ -156,6 +156,7 @@ private:
 
 	std::map<std::string, QuestData> m_quests;
 	Weapon* m_weapon = nullptr;
+	sf::Sound m_pickupSound;
 
 	CharacterCoreData m_data;
 

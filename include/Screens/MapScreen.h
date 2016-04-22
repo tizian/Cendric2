@@ -33,6 +33,7 @@ public:
 	const Map* getWorld() const override;
 	MapMainCharacter* getMainCharacter() const override;
 	bool exitWorld() override;
+	void notifyBackFromMenu() override;
 
 private:
 	// deletes all overlays and sets them null

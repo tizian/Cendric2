@@ -22,3 +22,5 @@ steps =
 	}
 }
 
+musicpath = "res/cutscene/intro/intro.ogg"
+

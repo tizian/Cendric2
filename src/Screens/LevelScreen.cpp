@@ -92,6 +92,11 @@ bool LevelScreen::exitWorld() {
 	return true;
 }
 
+void LevelScreen::notifyBackFromMenu() {
+	m_mainChar->setQuickcast(g_resourceManager->getConfiguration().isQuickcast);
+	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
+}
+
 void LevelScreen::quicksave() {
 	if (m_isGameOver) return;
 	WorldScreen::quicksave();

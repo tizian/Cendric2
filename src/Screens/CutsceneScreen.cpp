@@ -12,7 +12,9 @@ void CutsceneScreen::execOnEnter(const Screen* previousScreen) {
 	if (!m_cutscene->isLoaded()) {
 		delete m_cutscene;
 		m_cutscene = nullptr;
+		return;
 	}
+	g_resourceManager->playMusic(m_cutscene->getMusicPath(), sf::seconds(3.f));
 }
 
 void CutsceneScreen::execUpdate(const sf::Time& frameTime) {
@@ -34,4 +36,5 @@ void CutsceneScreen::render(sf::RenderTarget& renderTarget) {
 
 void CutsceneScreen::execOnExit(const Screen *nextScreen) {
 	delete m_cutscene;
+	g_resourceManager->stopMusic();
 }

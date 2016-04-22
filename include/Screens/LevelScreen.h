@@ -37,6 +37,7 @@ public:
 	// to update the original core, call this method. (used by the checkpoints and when leaving the world)
 	void writeToCore();
 	bool exitWorld() override;
+	void notifyBackFromMenu() override;
 
 	LevelMainCharacter* getMainCharacter() const override;
 	const Level* getWorld() const override;

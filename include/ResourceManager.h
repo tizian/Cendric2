@@ -38,7 +38,8 @@ public:
 	// streams a music and applies the current configuration to it (sound on/off, volume), starts and loops it.
 	// if the music is already playing, it won't do anything.
 	// if another music is playing, it will stop that and start the new one.
-	void playMusic(const std::string& filename);
+	// the playing offset is an optional parameter.
+	void playMusic(const std::string& filename, const sf::Time& playingOffset = sf::Time::Zero);
 	// stops the background music
 	void stopMusic();
 

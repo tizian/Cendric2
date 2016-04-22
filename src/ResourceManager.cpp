@@ -148,6 +148,7 @@ void ResourceManager::init() {
 		{ ResourceID::Sound_tile_water, "res/sound/tile/water_splash.ogg" },
 		{ ResourceID::Sound_tile_lever, "res/sound/tile/lever_click.ogg" },
 		{ ResourceID::Sound_tile_waypoint, "res/sound/tile/teleport.ogg" },
+		{ ResourceID::Sound_tile_checkpoint, "res/sound/tile/gargoyle.ogg" },
 		{ ResourceID::Sound_gui_turnpage, "res/sound/gui/page_turn.ogg" },
 		{ ResourceID::Sound_gui_menucursor, "res/sound/gui/menu_cursor.ogg" },
 		{ ResourceID::Sound_gui_openwindow, "res/sound/gui/window_open.ogg" },
@@ -344,7 +345,7 @@ void ResourceManager::playSound(sf::Sound& sound, ResourceID id, bool force) {
 	}
 }
 
-void ResourceManager::playMusic(const std::string& filename) {
+void ResourceManager::playMusic(const std::string& filename, const sf::Time& playingOffset) {
 	if (!m_configuration.isSoundOn || filename.empty()) return;
 	if (m_currentMusic.first.compare(filename) == 0) return; // already playing
 	m_currentMusic.second.stop();
@@ -352,6 +353,7 @@ void ResourceManager::playMusic(const std::string& filename) {
 		m_currentMusic.second.setLoop(true);
 		m_currentMusic.second.setVolume(static_cast<float>(m_configuration.volumeMusic));
 		m_currentMusic.second.play();
+		m_currentMusic.second.setPlayingOffset(playingOffset);
 	}
 	else {
 		g_logger->logError("ResourceManager", "Could not read music from file: " + getPath(filename));

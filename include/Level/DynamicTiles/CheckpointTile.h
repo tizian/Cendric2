@@ -17,4 +17,5 @@ public:
 
 private:
 	static const float ACTIVATE_RANGE;
+	sf::Sound m_sound;
 };

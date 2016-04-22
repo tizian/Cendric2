@@ -449,7 +449,9 @@ void CharacterCore::removeGold(int gold) {
 
 void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 	if (itemID.empty()) return;
+	
 	if (itemID.compare("gold") == 0) {
+		g_resourceManager->playSound(m_pickupSound, ResourceID::Sound_item_gold, true);
 		if (amount < 0) {
 			removeGold(-amount);
 		}
@@ -462,6 +464,7 @@ void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 			removeItem(itemID, -amount);
 		}
 		else {
+			g_resourceManager->playSound(m_pickupSound, ResourceID::Sound_item_gold, true);
 			addItem(itemID, amount);
 		}
 	}
@@ -469,7 +472,7 @@ void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 
 void CharacterCore::addItem(const std::string& item, int quantity) {
 	auto it = m_data.items.find(item);
-
+	
 	if (it != m_data.items.end()) {
 		m_data.items.at(item) = m_data.items.at(item) + quantity;
 	}

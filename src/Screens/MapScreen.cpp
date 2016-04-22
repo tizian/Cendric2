@@ -92,6 +92,10 @@ bool MapScreen::exitWorld() {
 	return true;
 }
 
+void MapScreen::notifyBackFromMenu() {
+	g_resourceManager->playMusic(m_currentMap.getMusicPath());
+}
+
 void MapScreen::quicksave() {
 	m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
 	WorldScreen::quicksave();

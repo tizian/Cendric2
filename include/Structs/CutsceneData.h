@@ -22,5 +22,6 @@ struct CutsceneStep {
 
 struct CutsceneData {
 	std::string id = "";
+	std::string musicPath = "";
 	std::vector<CutsceneStep> steps;
 };

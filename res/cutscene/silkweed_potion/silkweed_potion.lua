@@ -100,3 +100,4 @@ steps =
 	}
 }
 
+musicpath = "res/cutscene/silkweed_potion/silkweed_potion.ogg"
