@@ -108,7 +108,7 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 		if (pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT) continue;
 		m_entries[i].update(frameTime);
 		if (m_entries[i].isClicked()) {
-			if (i == static_cast<int>(m_chosenEntry)) {
+			if (static_cast<int>(i) == m_chosenEntry) {
 				// a chosen option was clicked again
 				m_isChosen = true;
 			}
