@@ -12,7 +12,7 @@ SlicedSprite::SlicedSprite() {
 	m_color = COLOR_WHITE;
 }
 
-SlicedSprite::SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height) {
+SlicedSprite::SlicedSprite(sf::Texture* tex, const sf::Color& color, float width, float height) {
 	m_texture = tex;
 	m_width = width;
 	m_height = height;
