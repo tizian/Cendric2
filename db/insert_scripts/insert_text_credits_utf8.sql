@@ -68,22 +68,23 @@ http://www.matthewpablo.com
 
 ---
 
+<<< Sound Effects from OpenGameArt.org >>>
+Fireball, Water Splash - Mike Koenig
+Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+
 <<< Level & Map Design >>>
 Isa
 
 <<< Quality Assurance >>>
 Tizian
 
-<<< Alpha Tester >>>
-Tizian
-Andreas
-Brigitte
-Martin
-Haab
+<<< Proof Reading >>>
+Daniel Josephy Hernandez
 
-<<< Sound Effects from OpenGameArt.org >>>
-Fireball, Water Splash - Mike Koenig
-Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+<<< Alpha Tester >>>
+Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
+Daniel Josephy Hernandez, Martin Roesch, Andreas Roesch,
+Brigitte Roesch
 
 Some tiles are based on Celianna''s tilesets
 
@@ -95,6 +96,12 @@ Inspired by GOTHIC from Piranha Bytes
 
 Levels and Maps were made using the
 TILED MAP EDITOR
+
+---
+
+Made with the awesome multimedia library SFML
+
+---
 
 
 
@@ -178,22 +185,23 @@ http://www.matthewpablo.com
 
 ---
 
+<<< Sound Effekte von OpenGameArt.org >>>
+Fireball, Water Splash - Mike Koenig
+Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+
 <<< Level & Karten Design >>>
 Isa
 
 <<< Qualitätssicherung >>>
 Tizian
 
-<<< Alpha Tester >>>
-Tizian
-Andreas
-Brigitte
-Martin
-Haab
+<<< Korrekturlesen >>>
+Daniel Josephy Hernandez
 
-<<< Sound Effekte von OpenGameArt.org >>>
-Fireball, Water Splash - Mike Koenig
-Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+<<< Alpha Tester >>>
+Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
+Daniel Josephy Hernandez, Martin Roesch, Andreas Roesch,
+Brigitte Roesch
 
 Einige Tiles basieren auf Celianna''s Tilesets
 
@@ -206,7 +214,11 @@ Inspiriert von GOTHIC von Piranha Bytes
 Levels und Karten wurden erstellt mit dem
 TILED MAP EDITOR
 
+---
 
+Implementiert mit der fantastischen Multimedia Library SFML
+
+---
 
 
 
@@ -291,22 +303,27 @@ http://www.matthewpablo.com
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
 
+---
+
+<<< Sound Effekte vo OpenGameArt.org >>>
+Fireball, Water Splash - Mike Koenig
+Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+
 <<< Level & Chartä Design >>>
 Isa
 
 <<< Qualitätssicherig >>>
 Tizian
 
-<<< Alpha Tester >>>
-Tizian
-Andreas
-Brigitte
-Martin
-Haab
+<<< Korrekturläser >>>
+Daniel Josephy Hernandez
 
-<<< Sound Effekte vo OpenGameArt.org >>>
-Fireball, Water Splash - Mike Koenig
-Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+<<< Alpha Tester >>>
+Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
+Daniel Josephy Hernandez, Martin Roesch, Andreas Roesch,
+Brigitte Roesch
+
+---
 
 Gewüssi Tiles basiered uf Celianna''s Tilesets
 
@@ -318,6 +335,12 @@ Inspiriert vo GOTHIC vo Piranha Bytes
 
 Level und Chartä sind gmacht worde mitem
 TILED MAP EDITOR
+
+---
+
+Implementiert mit de fantastische Multimedia Library SFML
+
+---
 
 
 
