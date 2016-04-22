@@ -268,8 +268,6 @@ void FluidTile::onHit(LevelMovableGameObject* mob) {
 }
 
 void FluidTile::checkForMovableTiles() {
-	float velocityScale = 0.5f;
-
 	for (auto& it : *m_level->getMovableTiles()) {
 		MovableGameObject* tile = dynamic_cast<MovableGameObject*>(it);
 		if (tile == nullptr) continue;

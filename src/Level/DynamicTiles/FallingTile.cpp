@@ -6,8 +6,8 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Falling, FallingTile)
 
 FallingTile::FallingTile(LevelScreen* levelScreen) :
-	MovableGameObject(),
-	LevelDynamicTile(levelScreen) {
+	LevelDynamicTile(levelScreen),
+	MovableGameObject() {
 	setPositionOffset(sf::Vector2f(-3.f, -3.f));
 }
 
@@ -96,7 +96,6 @@ void FallingTile::onHit(Spell* spell) {
 }
 
 void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
-	sf::Vector2f oldPosition = getPosition();
 	const sf::FloatRect& bb = *getBoundingBox();
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	WorldCollisionQueryRecord rec;

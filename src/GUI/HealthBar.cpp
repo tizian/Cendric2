@@ -47,7 +47,6 @@ void HealthBar::render(sf::RenderTarget& target) const {
 
 void HealthBar::update(const sf::Time& frameTime) {
 	int newHP = m_attributes->currentHealthPoints;
-	bool adjustOverlay = false;
 	if (newHP < m_currentHP) {
 		m_currentHP = newHP;
 

@@ -6,8 +6,8 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Jumping, JumpingTile)
 
 JumpingTile::JumpingTile(LevelScreen* levelScreen) :
-	MovableGameObject(),
-	LevelDynamicTile(levelScreen) {
+	LevelDynamicTile(levelScreen),
+	MovableGameObject() {
 }
 
 void JumpingTile::init() {
@@ -122,7 +122,6 @@ void JumpingTile::onHit(Spell* spell) {
 }
 
 void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
-	sf::Vector2f oldPosition = getPosition();
 	const sf::FloatRect& bb = *getBoundingBox();
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	WorldCollisionQueryRecord rec;
