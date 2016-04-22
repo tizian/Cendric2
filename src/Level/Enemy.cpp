@@ -111,7 +111,7 @@ void Enemy::loadBehavior() {
 }
 
 sf::Time Enemy::getConfiguredRecoveringTime() const {
-	return sf::milliseconds(200);
+	return sf::milliseconds(400);
 }
 
 sf::Time Enemy::getConfiguredWaitingTime() const {

@@ -120,6 +120,7 @@ enum class ResourceID {
 	Sound_tile_lever,
 	Sound_tile_waypoint,
 	Sound_tile_checkpoint,
+	Sound_tile_destructible,
 	Sound_gui_turnpage,
 	Sound_gui_menucursor,
 	Sound_gui_openwindow,

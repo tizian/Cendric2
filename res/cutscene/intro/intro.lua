@@ -11,8 +11,8 @@ steps =
 	},
 	{
 		{
-			{"WhatHappened", 4},
-			{"WhereAmI", 4}
+			{"WhatHappened", 5},
+			{"WhereAmI", 6}
 		},
 		{
 			{"forest_background.png", 0, 0},

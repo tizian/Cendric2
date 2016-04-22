@@ -12,8 +12,8 @@ public:
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	void execOnEnter(const Screen *previousScreen) override;
-	void execOnExit(const Screen *nextScreen) override;
+	void execOnEnter(const Screen* previousScreen) override;
+	void execOnExit(const Screen* nextScreen) override;
 
 private:
 	Cutscene* m_cutscene = nullptr;

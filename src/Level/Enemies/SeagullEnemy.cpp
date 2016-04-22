@@ -23,8 +23,7 @@ SeagullEnemy::SeagullEnemy(Level* level, Screen* screen) :
 }
 
 void SeagullEnemy::loadAttributes() {
-	m_attributes.setHealth(50);
-	m_attributes.resistancePhysical = 10;
+	m_attributes.setHealth(30);
 	m_attributes.calculateAttributes();
 }
 
@@ -33,8 +32,8 @@ void SeagullEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.damage = 2;
-	chopSpell.damagePerSecond = 3;
-	chopSpell.duration = sf::seconds(3.f);
+	chopSpell.damagePerSecond = 5;
+	chopSpell.duration = sf::seconds(2.f);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 
 	m_spellManager->addSpell(chopSpell);

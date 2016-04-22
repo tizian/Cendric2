@@ -34,12 +34,13 @@ public:
 
 	// loads a sound and applies the current configuration to it (sound on/off, volume) and starts it.
 	// if the sound is already playing, it won't start again, unless the argument "force" is set to true
-	void playSound(sf::Sound& sound, ResourceID id, bool force = false);
+	// the scale is the volume scale, has to range from 0 to 1.f.
+	void playSound(sf::Sound& sound, ResourceID id, bool force = false, float scale = 1.f);
 	// streams a music and applies the current configuration to it (sound on/off, volume), starts and loops it.
 	// if the music is already playing, it won't do anything.
 	// if another music is playing, it will stop that and start the new one.
-	// the playing offset is an optional parameter.
-	void playMusic(const std::string& filename, const sf::Time& playingOffset = sf::Time::Zero);
+	// the playing offset and looping are optional parameters.
+	void playMusic(const std::string& filename, bool looping = true, const sf::Time& playingOffset = sf::Time::Zero);
 	// stops the background music
 	void stopMusic();
 

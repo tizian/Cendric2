@@ -14,7 +14,7 @@ void CutsceneScreen::execOnEnter(const Screen* previousScreen) {
 		m_cutscene = nullptr;
 		return;
 	}
-	g_resourceManager->playMusic(m_cutscene->getMusicPath(), sf::seconds(3.f));
+	g_resourceManager->playMusic(m_cutscene->getMusicPath(), false);
 }
 
 void CutsceneScreen::execUpdate(const sf::Time& frameTime) {

@@ -12,7 +12,7 @@ public:
 
 	virtual void update(const sf::Time& frameTime);
 	
-	void handleAttackInput();
+	virtual void handleAttackInput();
 
 	void setAttackInput(const std::function<void()>& agent);
 

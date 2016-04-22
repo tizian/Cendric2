@@ -149,6 +149,7 @@ void ResourceManager::init() {
 		{ ResourceID::Sound_tile_lever, "res/sound/tile/lever_click.ogg" },
 		{ ResourceID::Sound_tile_waypoint, "res/sound/tile/teleport.ogg" },
 		{ ResourceID::Sound_tile_checkpoint, "res/sound/tile/gargoyle.ogg" },
+		{ ResourceID::Sound_tile_destructible, "res/sound/tile/crumble.ogg" },
 		{ ResourceID::Sound_gui_turnpage, "res/sound/gui/page_turn.ogg" },
 		{ ResourceID::Sound_gui_menucursor, "res/sound/gui/menu_cursor.ogg" },
 		{ ResourceID::Sound_gui_openwindow, "res/sound/gui/window_open.ogg" },
@@ -334,23 +335,25 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	}
 }
 
-void ResourceManager::playSound(sf::Sound& sound, ResourceID id, bool force) {
+void ResourceManager::playSound(sf::Sound& sound, ResourceID id, bool force, float scale) {
 	if (id == ResourceID::VOID) return;
 	// don't play the sound if it's already playing and we're not forcing
 	if (!force && sound.getStatus() == sf::SoundSource::Status::Playing) return;
 	if (m_configuration.isSoundOn) {
 		sound.setBuffer(*getSoundBuffer(id));
-		sound.setVolume(static_cast<float>(m_configuration.volumeSound));
+		scale = clamp(scale, 0.f, 1.f);
+		sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);
 		sound.play();
 	}
 }
 
-void ResourceManager::playMusic(const std::string& filename, const sf::Time& playingOffset) {
+void ResourceManager::playMusic(const std::string& filename, bool looping, const sf::Time& playingOffset) {
 	if (!m_configuration.isSoundOn || filename.empty()) return;
 	if (m_currentMusic.first.compare(filename) == 0) return; // already playing
 	m_currentMusic.second.stop();
+	if (filename.empty()) return;
 	if (m_currentMusic.second.openFromFile(getPath(filename))) {
-		m_currentMusic.second.setLoop(true);
+		m_currentMusic.second.setLoop(looping);
 		m_currentMusic.second.setVolume(static_cast<float>(m_configuration.volumeMusic));
 		m_currentMusic.second.play();
 		m_currentMusic.second.setPlayingOffset(playingOffset);
@@ -424,6 +427,8 @@ void ResourceManager::deleteLevelResources() {
 
 	deleteResource(ResourceID::Sound_tile_water);
 	deleteResource(ResourceID::Sound_tile_lever);
+	deleteResource(ResourceID::Sound_tile_checkpoint);
+	deleteResource(ResourceID::Sound_tile_destructible);
 
 	// delete enemy resources
 	deleteResource(ResourceID::Texture_enemy_rat);
@@ -494,6 +499,8 @@ void ResourceManager::loadLevelResources() {
 	// get sounds
 	getSoundBuffer(ResourceID::Sound_tile_water);
 	getSoundBuffer(ResourceID::Sound_tile_lever);
+	getSoundBuffer(ResourceID::Sound_tile_checkpoint);
+	getSoundBuffer(ResourceID::Sound_tile_destructible);
 
 	// load overlays
 	getTexture(ResourceID::Texture_screen_gameover);
