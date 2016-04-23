@@ -85,9 +85,4 @@ private:
 	std::function<void()> m_executeOnClick;
 	// placeholder for agents
 	void nop() const;
-
-	static const sf::Color DEFAULT_BACK_COLOR;
-	static const sf::Color DEFAULT_MAIN_COLOR;
-	static const sf::Color DEFAULT_ORNAMENT_COLOR;
-	static const sf::Color DEFAULT_MOUSEOVER_COLOR;
 };

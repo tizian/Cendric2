@@ -6,8 +6,6 @@ using namespace std;
 
 const float ScrollBar::WIDTH = 20.f;
 
-const sf::Color ScrollBar::BACKGROUND_COLOR = COLOR_TRANS_BLACK;
-
 ScrollBar::ScrollBar(float height, const Window* window) : GameObject() {
 	m_window = window;
 	m_discreteSteps = 1;
@@ -16,7 +14,7 @@ ScrollBar::ScrollBar(float height, const Window* window) : GameObject() {
 	setScrollPosition(0.f);
 
 	m_background.setSize(sf::Vector2f(WIDTH - 4.f, height - 4.f));
-	m_background.setFillColor(BACKGROUND_COLOR);
+	m_background.setFillColor(COLOR_TRANS_BLACK);
 
 	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, WIDTH, height);
 

@@ -6,9 +6,6 @@ const float Slider::WIDTH = 300.f;
 const float Slider::HEIGHT = 20.f;
 const float Slider::BORDER_OFFSET = 7.f;
 
-const sf::Color Slider::BACKGROUND_COLOR = COLOR_BLACK;
-const sf::Color Slider::FILL_COLOR = sf::Color(91, 73, 133);
-
 Slider::Slider(int minPos, int maxPos) : GameObject() {
 	if (minPos < 0) minPos = 0;
 	if (maxPos < minPos) maxPos = minPos;
@@ -17,10 +14,10 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 	setSliderPosition(m_minPosition);
 
 	m_background.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_background.setFillColor(BACKGROUND_COLOR);
+	m_background.setFillColor(COLOR_BLACK);
 	
 	m_filler.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_filler.setFillColor(FILL_COLOR);
+	m_filler.setFillColor(sf::Color(91, 73, 133));
 
 	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_slider), COLOR_WHITE, 2.f * BORDER_OFFSET + WIDTH, 2.f * BORDER_OFFSET + HEIGHT);
 

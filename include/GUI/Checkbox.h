@@ -71,9 +71,4 @@ protected:
 
 	static const float SIDE_LENGTH;
 	static const float CENTER_SIZE;
-
-	static const sf::Color DEFAULT_BACK_COLOR;
-	static const sf::Color DEFAULT_ORNAMENT_COLOR;
-	static const sf::Color DEFAULT_SYMBOL_COLOR;
-	static const sf::Color DEFAULT_MOUSEOVER_COLOR;
 };

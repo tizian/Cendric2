@@ -5,17 +5,12 @@ using namespace std;
 const float Checkbox::SIDE_LENGTH = 40.f;
 const float Checkbox::CENTER_SIZE = 30.f;
 
-const sf::Color Checkbox::DEFAULT_BACK_COLOR = COLOR_BLACK;
-const sf::Color Checkbox::DEFAULT_ORNAMENT_COLOR = COLOR_WHITE;
-const sf::Color Checkbox::DEFAULT_SYMBOL_COLOR = COLOR_WHITE;
-const sf::Color Checkbox::DEFAULT_MOUSEOVER_COLOR = sf::Color(91, 73, 133);
-
-Checkbox::Checkbox() : GameObject() {
-	m_backgroundColor = DEFAULT_BACK_COLOR;
-	m_ornamentColor = DEFAULT_ORNAMENT_COLOR;
-	m_symbolColor = DEFAULT_SYMBOL_COLOR;
-	m_mouseOverColor = DEFAULT_MOUSEOVER_COLOR;
-
+Checkbox::Checkbox() :
+	GameObject(),
+	m_backgroundColor(COLOR_BLACK),
+	m_ornamentColor(COLOR_WHITE),
+	m_symbolColor(COLOR_WHITE),
+	m_mouseOverColor(sf::Color(91, 73, 133)) {
 	m_background = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backgroundColor, SIDE_LENGTH, SIDE_LENGTH);
 
 	m_ornament = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_ornamentColor, SIDE_LENGTH, SIDE_LENGTH);

@@ -1,16 +1,11 @@
 #include "GUI/Button.h"
 
-const sf::Color Button::DEFAULT_BACK_COLOR = COLOR_DARK_GREY;
-const sf::Color Button::DEFAULT_MAIN_COLOR = COLOR_BLACK;
-const sf::Color Button::DEFAULT_ORNAMENT_COLOR = COLOR_WHITE;
-const sf::Color Button::DEFAULT_MOUSEOVER_COLOR = sf::Color(91, 73, 133);
-
-Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) : GameObject() {
-	m_backLayerColor = DEFAULT_BACK_COLOR;
-	m_mainLayerColor = DEFAULT_MAIN_COLOR;
-	m_ornamentLayerColor = DEFAULT_ORNAMENT_COLOR;
-	m_mouseOverColor = DEFAULT_MOUSEOVER_COLOR;
-
+Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
+	GameObject(),
+	m_backLayerColor(COLOR_DARK_GREY),
+	m_mainLayerColor(COLOR_BLACK),
+	m_ornamentLayerColor(COLOR_WHITE),
+	m_mouseOverColor(sf::Color(91, 73, 133)) {
 	// using default values for constructor.
 	setBoundingBox(box);
 	setInputInDefaultView(true);

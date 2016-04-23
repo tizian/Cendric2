@@ -84,9 +84,6 @@ protected:
 	SliderKnob m_knob;
 	sf::Vector2f m_textOffset;
 
-	static const sf::Color BACKGROUND_COLOR;
-	static const sf::Color FILL_COLOR;
-
 	std::string m_title;
 	std::string m_unit;
 	BitmapText m_titleText;

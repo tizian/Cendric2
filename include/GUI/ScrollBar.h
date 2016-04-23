@@ -92,6 +92,4 @@ protected:
 	ScrollBarKnob m_knob;
 
 	sf::Time m_time;
-
-	static const sf::Color BACKGROUND_COLOR;
 };
