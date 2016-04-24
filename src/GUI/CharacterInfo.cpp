@@ -324,7 +324,6 @@ void CharacterInfo::updateAttributes() {
 
 void CharacterInfo::updateReputation() {
 	m_reputationTexts.clear();
-	m_selectedEntry = nullptr;
 
 	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 	
@@ -363,6 +362,7 @@ void CharacterInfo::updateReputation() {
 
 void CharacterInfo::updateHints() {
 	m_hintEntries.clear();
+	m_selectedEntry = nullptr;
 
 	const std::vector<std::string>& hints = m_core->getData().hintsLearned;
 
@@ -397,6 +397,7 @@ void CharacterInfo::show() {
 
 void CharacterInfo::hide() {
 	m_isVisible = false;
+	m_descriptionWindow->hide();
 	if (m_selectedEntry != nullptr) {
 		m_selectedEntry->deselect();
 		m_selectedEntry = nullptr;
