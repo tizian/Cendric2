@@ -104,6 +104,18 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 	updateScrolling(frameTime);
 
 	for (size_t i = 0; i < m_entries.size(); ++i) {
+		if (i == m_chosenEntry) {
+			m_entries[i].setColor(COLOR_WHITE);
+		}
+		else if (g_inputController->isMouseOver(m_entries[i].getBoundingBox(), true)) {
+			m_entries[i].setColor(COLOR_LIGHT_PURPLE);
+		}
+		else {
+			m_entries[i].setColor(COLOR_GREY);
+		}
+	}
+
+	for (size_t i = 0; i < m_entries.size(); ++i) {
 		sf::Vector2f pos = m_entries[i].getPosition();
 		if (pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT) continue;
 		m_entries[i].update(frameTime);
@@ -308,6 +320,12 @@ void SaveGameEntry::setPosition(const sf::Vector2f& pos) {
 	m_name.setPosition(pos);
 	m_timePlayed.setPosition(sf::Vector2f(pos.x + SaveGameWindow::COLUMN_WIDTH, pos.y));
 	m_dateSaved.setPosition(sf::Vector2f(pos.x + 2 * SaveGameWindow::COLUMN_WIDTH, pos.y));
+}
+
+void SaveGameEntry::setColor(const sf::Color& color) {
+	m_name.setColor(color);
+	m_timePlayed.setColor(color);
+	m_dateSaved.setColor(color);
 }
 
 void SaveGameEntry::render(sf::RenderTarget& renderTarget) {

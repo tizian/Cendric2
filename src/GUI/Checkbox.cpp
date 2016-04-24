@@ -10,7 +10,7 @@ Checkbox::Checkbox() :
 	m_backgroundColor(COLOR_BLACK),
 	m_ornamentColor(COLOR_WHITE),
 	m_symbolColor(COLOR_WHITE),
-	m_mouseOverColor(sf::Color(91, 73, 133)) {
+	m_mouseOverColor(COLOR_PURPLE) {
 	m_background = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backgroundColor, SIDE_LENGTH, SIDE_LENGTH);
 
 	m_ornament = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_ornamentColor, SIDE_LENGTH, SIDE_LENGTH);

@@ -181,6 +181,18 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 		updateScrolling(frameTime);
 
 		for (size_t i = 0; i < m_options.size(); ++i) {
+			if (i == m_chosenOption) {
+				m_options[i].setColor(COLOR_WHITE);
+			}
+			else if (g_inputController->isMouseOver(m_options[i].getBoundingBox(), true)) {
+				m_options[i].setColor(COLOR_LIGHT_PURPLE);
+			}
+			else {
+				m_options[i].setColor(COLOR_GREY);
+			}
+		}
+
+		for (size_t i = 0; i < m_options.size(); ++i) {
 			sf::Vector2f pos = m_options[i].getPosition();
 			if (pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT) continue;
 			m_options[i].update(frameTime);
@@ -363,6 +375,10 @@ void DialogueOption::setPosition(const sf::Vector2f& pos) {
 
 void DialogueOption::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_text);
+}
+
+void DialogueOption::setColor(const sf::Color& color) {
+	m_text.setColor(color);
 }
 
 void DialogueOption::onLeftClick() {

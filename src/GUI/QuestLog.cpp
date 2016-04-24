@@ -108,6 +108,20 @@ void QuestLog::update(const sf::Time& frameTime) {
 	m_window->update(frameTime);
 	m_scrollBar->update(frameTime);
 
+	std::vector<QuestEntry>* entries = m_stateMap[m_currentTab];
+	for (size_t i = 0; i < m_stateMap[m_currentTab]->size(); ++i) {
+		QuestEntry& entry = m_stateMap[m_currentTab]->at(i);
+		if (m_selectedEntry && m_selectedEntry->getQuestID() == entry.getQuestID()) {
+			entry.setColor(COLOR_WHITE);
+		}
+		else if (g_inputController->isMouseOver(entry.getBoundingBox(), true)) {
+			entry.setColor(COLOR_LIGHT_PURPLE);
+		}
+		else {
+			entry.setColor(COLOR_GREY);
+		}
+	}
+
 	// check whether an entry was selected
 	for (auto& it : *(m_stateMap[m_currentTab])) {
 		sf::Vector2f pos = it.getPosition();
@@ -285,6 +299,10 @@ void QuestEntry::render(sf::RenderTarget& renderTarget) {
 void QuestEntry::onLeftJustPressed() {
 	g_inputController->lockAction();
 	m_isClicked = true;
+}
+
+void QuestEntry::setColor(const sf::Color& color) {
+	m_name.setColor(color);
 }
 
 bool QuestEntry::isClicked() {

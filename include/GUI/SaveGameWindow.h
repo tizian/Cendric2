@@ -21,6 +21,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
+	void setColor(const sf::Color& color);
 	void onLeftClick() override;
 	void select();
 	void deselect();
