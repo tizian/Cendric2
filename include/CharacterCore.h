@@ -123,6 +123,8 @@ public:
 	void learnSpell(SpellID spellID);
 	// learns this modifier
 	void learnModifier(const SpellModifier& modifier);
+	// learns this hint
+	void learnHint(const std::string& hintKey);
 	// sets the weather for this particular world 
 	void setWeather(const std::string& worldID, const WeatherData& data);
 	// gets the weather for this particular world. if its not set, returns nullptr.

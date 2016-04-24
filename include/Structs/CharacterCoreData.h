@@ -47,6 +47,9 @@ struct CharacterCoreData {
 	std::map<SpellType, std::set<SpellID>> spellsLearned;
 	std::map<SpellModifierType, int> modfiersLearned;
 
+	// hints
+	std::vector<std::string> hintsLearned;
+
 	// weather
 	std::map<std::string, WeatherData> currentWeather;
 
@@ -89,6 +92,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<FractionID, int>(),
 	std::map<SpellType, std::set<SpellID>>(),
 	std::map<SpellModifierType, int>(),
+	std::vector<std::string>(),
 	std::map<std::string, WeatherData>(),
 	ZERO_ATTRIBUTES,
 	0,

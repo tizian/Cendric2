@@ -403,6 +403,12 @@ void CharacterCore::learnModifier(const SpellModifier& modifier) {
 	}	
 }
 
+void CharacterCore::learnHint(const std::string& hintKey) {
+	if (std::find(m_data.hintsLearned.begin(), m_data.hintsLearned.end(), hintKey) == m_data.hintsLearned.end()) {
+		m_data.hintsLearned.push_back(hintKey);
+	}
+}
+
 void CharacterCore::setWeather(const std::string& worldID, const WeatherData& data) {
 	m_data.currentWeather[worldID] = data;
 }

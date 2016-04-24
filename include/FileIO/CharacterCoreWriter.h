@@ -42,6 +42,7 @@ private:
 	std::string writeProgressConditions(const CharacterCoreData& data) const;
 	std::string writeSpellsLearned(const CharacterCoreData& data) const;
 	std::string writeModifiersLearned(const CharacterCoreData& data) const;
+	std::string writeHintsLearned(const CharacterCoreData& data) const;
 	std::string writeReputationProgress(const CharacterCoreData& data) const;
 	std::string writeWeather(const CharacterCoreData& data) const;
 
