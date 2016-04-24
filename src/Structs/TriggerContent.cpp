@@ -15,15 +15,10 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		screen->notifyItemChange(content.s1, content.i1);
 		break;
 	case TriggerContentType::Hint:
-		screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(content.s1));
-		screen->getCharacterCore()->learnHint(content.s1);
+		screen->notifyHintAdded(content.s1);
 		break;
 	case TriggerContentType::ItemEquip: {
-		auto bean = g_databaseManager->getItemBean(content.s1);
-		if (bean.status == BeanStatus::Filled) {
-			screen->getCharacterCore()->equipItem(bean.item_id, bean.item_type);
-			screen->getInventory()->reload();
-		}
+		screen->notifyItemEquip(content.s1);
 		break;
 	}
 	case TriggerContentType::Weather: {

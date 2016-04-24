@@ -65,6 +65,7 @@ void CharacterCore::loadQuests() {
 
 void CharacterCore::loadNew() {
 	// start map & position when a new game is loaded
+	m_isNew = true;
 	m_data.isInLevel = false;
 	m_data.currentMap = "res/map/meadows/meadows.tmx";
 	m_data.currentMapPosition = sf::Vector2f(1850.f, 700.f);
@@ -610,4 +611,14 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 	if (!oldItem.empty()) {
 		addItem(oldItem, 1);
 	}
+
+	reloadAttributes();
+}
+
+bool CharacterCore::isNewGame() {
+	if (m_isNew) {
+		m_isNew = false;
+		return true;
+	}
+	return m_isNew;
 }

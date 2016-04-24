@@ -16,6 +16,7 @@ class MapInterface;
 class MerchantInterface;
 class ScrollBar;
 class ScrollHelper;
+class WorldInterface;
 
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
@@ -49,6 +50,7 @@ private:
 	LevelInterface* m_levelInterface = nullptr;
 	MapInterface* m_mapInterface = nullptr;
 	MerchantInterface* m_merchantInterface = nullptr;
+	WorldInterface* getInterface() const;
 	bool m_isVisible = false;
 	void init();
 

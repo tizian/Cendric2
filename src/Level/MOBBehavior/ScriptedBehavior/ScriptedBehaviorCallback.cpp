@@ -96,10 +96,8 @@ void ScriptedBehaviorCallback::update() {
 	}
 }
 
-
 void ScriptedBehaviorCallback::addHint(const std::string& hint) {
-	m_enemy->getScreen()->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(hint));
-	m_core->learnHint(hint);
+	dynamic_cast<WorldScreen*>(m_enemy->getScreen())->notifyHintAdded(hint);
 }
 
 bool ScriptedBehaviorCallback::isQuestComplete(const std::string& questID) const {

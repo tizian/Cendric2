@@ -31,6 +31,11 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_mapToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_mapToLoad->loadForRenderTexture();
 		setNextScreen(m_mapToLoad);
+		if (m_mapToLoad->getCharacterCore()->isNewGame()) {
+			m_mapToLoad->addScreenOverlay(ScreenOverlay::createQuestScreenOverlay("who_am_i", QuestState::Started));
+			m_mapToLoad->addScreenOverlay(ScreenOverlay::createHintScreenOverlay("MapMove"));
+			m_mapToLoad->getCharacterCore()->learnHint("MapMove");
+		}
 		return;
 	}
 	if (m_levelToLoad != nullptr) {

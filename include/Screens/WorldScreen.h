@@ -26,6 +26,9 @@ public:
 	void notifyPermanentItemConsumed(const Item& item);
 	// notify item change -> change in core, display text and reload inventory. Also reload quest log.
 	void notifyItemChange(const std::string& itemID, int amount);
+	// notify item equip -> change in core, reload inventory and character info.
+	// if the second argument is not given (void, default), it gets determined in this method
+	void notifyItemEquip(const std::string& itemID, ItemType type = ItemType::VOID);
 	// notify quest condition progress -> change in core, display text and reload quest log
 	void notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 	// notify quest target killed -> change in core, display text and reload quest log
@@ -42,6 +45,8 @@ public:
 	void notifyModifierLearned(const SpellModifier& modifier);
 	// notify reputation added
 	void notifyReputationAdded(FractionID fraction, int amount);
+	// notify reputation added
+	void notifyHintAdded(const std::string& hintKey);
 	// reload all triggers, based on their conditions
 	void reloadTriggers();
 	// reloads a certain trigger
@@ -57,6 +62,8 @@ public:
 	virtual bool exitWorld() = 0;
 	// a return from the menu. reload a part of the configuration, restart music, etc.
 	virtual void notifyBackFromMenu() = 0;
+	// add an overlay to the overlay queue they will be displayed within the next world screen
+	void addScreenOverlay(ScreenOverlay* overlay);
 
 protected:
 	// handle quicksave
@@ -67,6 +74,7 @@ protected:
 protected:
 	WorldInterface* m_interface = nullptr;
 	ProgressLog* m_progressLog = nullptr;
+	std::vector<ScreenOverlay*> m_overlayQueue;
 
 	// For lighting
 	sf::RenderTexture m_renderTexture;

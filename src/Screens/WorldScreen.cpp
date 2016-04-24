@@ -50,6 +50,10 @@ WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
 WorldScreen::~WorldScreen() {
 	delete m_interface;
 	delete m_progressLog;
+	for (auto& overlay : m_overlayQueue) {
+		delete overlay;
+	}
+	m_overlayQueue.clear();
 }
 
 void WorldScreen::notifyPermanentItemConsumed(const Item& item) {
@@ -66,6 +70,20 @@ void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	m_progressLog->addItemProgress(itemID, amount);
 	m_interface->reloadInventory(itemID);
 	m_interface->reloadQuestLog();
+}
+
+void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
+	if (type != ItemType::VOID) {
+		getCharacterCore()->equipItem(itemID, type);
+	}
+	else {
+		auto bean = g_databaseManager->getItemBean(itemID);
+		if (bean.status != BeanStatus::Filled) return;
+		getCharacterCore()->equipItem(bean.item_id, bean.item_type);
+	}
+
+	m_interface->reloadInventory();
+	m_interface->reloadCharacterInfo();
 }
 
 void WorldScreen::notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition) {
@@ -114,6 +132,12 @@ void WorldScreen::notifyReputationAdded(FractionID fraction, int amount) {
 	if (amount < 0) return;
 	getCharacterCore()->addReputation(fraction, amount);
 	m_progressLog->addReputationAdded(fraction, amount);
+	m_interface->reloadCharacterInfo();
+}
+
+void WorldScreen::notifyHintAdded(const std::string& hintKey) {
+	addScreenOverlay(ScreenOverlay::createHintScreenOverlay(hintKey));
+	getCharacterCore()->learnHint(hintKey);
 	m_interface->reloadCharacterInfo();
 }
 
@@ -174,6 +198,11 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	else if (g_inputController->isKeyJustPressed(Key::Quicksave)) {
 		quicksave();
 	}
+}
+
+void WorldScreen::addScreenOverlay(ScreenOverlay* overlay) {
+	if (overlay == nullptr) return;
+	m_overlayQueue.push_back(overlay);
 }
 
 void WorldScreen::quickload() {

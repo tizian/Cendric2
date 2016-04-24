@@ -50,8 +50,6 @@ public:
 	void renderTooltipText(sf::RenderTarget& target) const;
 	// sets the tooltip text to the top of the screen instead of the bottom (if top = true, else bottom)
 	void setTooltipPositionTop(bool top);
-	// add an overlay to the overlay queue they will be displayed within the next world screen
-	void addScreenOverlay(ScreenOverlay* overlay);
 	// sets the next screen on the screen manager. If the bool property is set for backup,
 	// this screen will be backed up and can be returned to by using screenManager->resume()
 	void setNextScreen(Screen* nextScreen, bool backupThis = false);
@@ -80,7 +78,6 @@ protected:
 protected:
 	CharacterCore* m_characterCore = nullptr;
 	ScreenManager* m_screenManager = nullptr;
-	std::vector<ScreenOverlay*> m_overlayQueue;
 
 private:
 	// deletes all objects marked as 'disposed'

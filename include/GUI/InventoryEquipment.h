@@ -9,11 +9,12 @@
 
 class InventorySlot;
 class SlotClone;
+class WorldScreen;
 
 // the equipment part of the inventory. it shows all equipped items
 class InventoryEquipment {
 public:
-	InventoryEquipment(CharacterCore* core, bool isInLevel);
+	InventoryEquipment(WorldScreen* screen);
 	~InventoryEquipment();
 
 	void show();
@@ -33,13 +34,13 @@ public:
 	InventorySlot* getSelectedSlot(ItemType type);
 
 	void highlightEquipmentSlot(ItemType type, bool highlight);
-	// returns wheter an equipment change has happened.
-	bool notifyEquipmentDrop(const SlotClone* item);
+	void notifyEquipmentDrop(const SlotClone* item);
 
 	static float WIDTH;
 
 private:
 	CharacterCore* m_core;
+	WorldScreen* m_screen;
 
 	bool m_isVisible = false;
 	bool m_requiresReload = false;

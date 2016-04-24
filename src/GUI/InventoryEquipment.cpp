@@ -1,14 +1,17 @@
 #include "GUI/InventoryEquipment.h"
 #include "GUI/SlotClone.h"
 #include "GUI/GUIConstants.h"
+#include "Screens/WorldScreen.h"
+#include "Screens/MapScreen.h"
 
 float MARGIN = 10.f;
 float YOFFSET = 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - 7 * InventorySlot::SIZE - 6 * MARGIN);
 float InventoryEquipment::WIDTH = 100.f;
 
-InventoryEquipment::InventoryEquipment(CharacterCore* core, bool isInLevel) {
-	m_core = core;
-	m_isInLevel = isInLevel;
+InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
+	m_screen = screen;
+	m_core = screen->getCharacterCore();
+	m_isInLevel = (dynamic_cast<MapScreen*>(screen) == nullptr);
 
 	// init window
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
@@ -76,25 +79,21 @@ void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 	}
 }
 
-bool InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
-	if (item == nullptr) return false;
-	const InventorySlot *is = static_cast<const InventorySlot *>(item->getOriginalSlot());
-	if (m_slots.find(is->getItemType()) == m_slots.end()) return false;
+void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
+	if (item == nullptr) return;
+	const InventorySlot* is = static_cast<const InventorySlot* >(item->getOriginalSlot());
+	if (m_slots.find(is->getItemType()) == m_slots.end()) return;
 	if (is->getItemType() == ItemType::Equipment_ring_1 || is->getItemType() == ItemType::Equipment_ring_2) {
 		if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
-			m_core->equipItem(is->getItemID(), ItemType::Equipment_ring_1);
-			return true;
+			m_screen->notifyItemEquip(is->getItemID(), ItemType::Equipment_ring_1);
 		}
 		else if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
-			m_core->equipItem(is->getItemID(), ItemType::Equipment_ring_2);
-			return true;
+			m_screen->notifyItemEquip(is->getItemID(), ItemType::Equipment_ring_2);
 		}
 	}
 	else if (item->getBoundingBox()->intersects(*(m_slots.at(is->getItemType()).getBoundingBox()))) {
-		m_core->equipItem(is->getItemID(), is->getItemType());
-		return true;
+		m_screen->notifyItemEquip(is->getItemID(), is->getItemType());
 	}
-	return false;
 }
 
 InventorySlot* InventoryEquipment::getSelectedSlot() {

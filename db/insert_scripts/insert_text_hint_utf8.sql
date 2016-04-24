@@ -7,7 +7,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('In
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Inventory', 'hint_desc','to open the inventory.','um das Inventar zu öffnen.','zums Inventar ufmache.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Chop', 'hint','Attack (Chop)','Attackieren (Schlagen)','Attackiere (Haue)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Chop', 'hint_desc','to chop with your weapon. You can also use a left mouse klick, if that attack is selected.','um mit deiner Waffe zu schlagen. Du kannst auch einen linken Mausklick verwenden, wenn diese Attacke ausgwählt ist.','zum mit dinere Waffe haue. Du chasch au en lingge Muusklick verwende, wenn die Attacke usgwählt isch.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Chop', 'hint_desc','to chop with your weapon. You can also use a left mouse click, if that attack is selected.','um mit deiner Waffe zu schlagen. Du kannst auch einen linken Mausklick verwenden, wenn diese Attacke ausgwählt ist.','zum mit dinere Waffe haue. Du chasch au en lingge Muusklick verwende, wenn die Attacke usgwählt isch.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LeaveLevel', 'hint','Leave Level','Level verlassen','Level verlah');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LeaveLevel', 'hint_desc','when standing at a level exit to leave the level.','wenn du bei einem Level-Ausgang stehst, um das Level zu verlassen.','wenn du vor emne Level-Usgang stahsch zum use gah.');

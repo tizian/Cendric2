@@ -19,7 +19,8 @@ public:
 	virtual ~WorldInterface();
 
 	// reloads the inventory for the items that have changed. if the string equals "gold", reloads gold
-	virtual void reloadInventory(const std::string& changeditemID);
+	// if the string is empty, it does a full reload (heavy operation, only us this when equipment or more than one item changed)
+	virtual void reloadInventory(const std::string& changeditemID = "");
 	// reloads the quest log 
 	virtual void reloadQuestLog();
 	// reload the character info
@@ -35,7 +36,7 @@ public:
 	virtual bool isGuiOverlayVisible() const;
 
 	CharacterCore* getCore() const;
-	Screen* getScreen() const;
+	WorldScreen* getScreen() const;
 	Inventory* getInventory() const;
 
 protected:

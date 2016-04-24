@@ -38,6 +38,13 @@ Inventory::Inventory(MapInterface* _interface) {
 	init();
 }
 
+WorldInterface* Inventory::getInterface() const {
+	if (m_mapInterface == nullptr) { 
+		return m_levelInterface;
+	}
+	return m_mapInterface;
+}
+
 void Inventory::init() {
 	m_selectedSlotId.first = "";
 	m_selectedSlotId.second = ItemType::VOID;
@@ -102,7 +109,7 @@ void Inventory::init() {
 	sf::FloatRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
-	m_equipment = new InventoryEquipment(m_core, m_levelInterface != nullptr);
+	m_equipment = new InventoryEquipment(getInterface()->getScreen());
 	reload();
 
 	selectTab(ItemType::Equipment_weapon);
@@ -328,9 +335,7 @@ void Inventory::handleMapDrop() {
 		removeEquipmentItem();
 	}
 	else {
-		if (m_equipment->notifyEquipmentDrop(m_currentClone)) {
-			reload();
-		}
+		m_equipment->notifyEquipmentDrop(m_currentClone);
 		const InventorySlot *is = static_cast<const InventorySlot *>(m_currentClone->getOriginalSlot());
 		m_equipment->highlightEquipmentSlot(is->getItemType(), false);
 	}
@@ -433,14 +438,7 @@ void Inventory::renderAfterForeground(sf::RenderTarget& target) {
 void Inventory::convertItem(const Item& item) {
 	if (!item.isConvertible()) return;
 
-	WorldScreen* worldScreen = nullptr;
-	if (m_mapInterface != nullptr) {
-		worldScreen = dynamic_cast<WorldScreen*>(m_mapInterface->getScreen());
-	}
-	else if (m_levelInterface != nullptr) {
-		worldScreen = dynamic_cast<WorldScreen*>(m_levelInterface->getScreen());
-	}
-	if (worldScreen == nullptr) return;
+	WorldScreen* worldScreen = getInterface()->getScreen();
 
 	ItemConvertibleBean bean = item.getConvertibleBean();
 	worldScreen->notifyItemChange(item.getID(), -1);

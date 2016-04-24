@@ -49,6 +49,10 @@ bool WorldInterface::isGuiOverlayVisible() const {
 }
 
 void WorldInterface::reloadInventory(const std::string& changedItemID) {
+	if (changedItemID.empty()) {
+		m_inventory->reload();
+		return;
+	}
 	m_inventory->notifyChange(changedItemID);
 }
 
@@ -144,7 +148,7 @@ CharacterCore* WorldInterface::getCore() const {
 	return m_core;
 }
 
-Screen* WorldInterface::getScreen() const {
+WorldScreen* WorldInterface::getScreen() const {
 	return m_screen;
 }
 

@@ -30,10 +30,6 @@ Screen::Screen(CharacterCore* core) {
 }
 
 Screen::~Screen() {
-	for (auto& overlay : m_overlayQueue) {
-		delete overlay;
-	}
-	m_overlayQueue.clear();
 }
 
 void Screen::addObject(GameObject* object) {
@@ -69,12 +65,6 @@ void Screen::execOnEnter(const Screen* previousScreen) {
 void Screen::onExit(Screen* nextScreen) {
 	deleteAllObjects();
 	execOnExit(nextScreen);
-	if (nextScreen != nullptr) {
-		for (auto& overlay : m_overlayQueue) {
-			nextScreen->addScreenOverlay(overlay);
-		}
-	}
-	m_overlayQueue.clear();
 }
 
 void Screen::execOnExit(const Screen* nextScreen) {
@@ -222,9 +212,4 @@ void Screen::setNextScreen(Screen* nextScreen, bool backup) {
 
 void Screen::setScreenManager(ScreenManager* screenManager) {
 	m_screenManager = screenManager;
-}
-
-void Screen::addScreenOverlay(ScreenOverlay* overlay) {
-	if (overlay == nullptr) return;
-	m_overlayQueue.push_back(overlay);
 }

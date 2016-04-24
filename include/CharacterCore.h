@@ -133,6 +133,8 @@ public:
 	void addReputation(FractionID fraction, int amount);
 	// queries the reputation for the corresponding fraction
 	int getReputation(FractionID fraction) const;
+	// is this a new character core? (new game)
+	bool isNewGame();
 
 	static const char* QUICKSAVE_LOCATION;
 	static const char* DEBUGSAVE_LOCATION;
@@ -163,4 +165,6 @@ private:
 	CharacterCoreData m_data;
 
 	sf::Clock m_stopwatch;
+
+	bool m_isNew = false;
 };

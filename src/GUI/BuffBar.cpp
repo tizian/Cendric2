@@ -1,5 +1,6 @@
 #include "GUI/BuffBar.h"
 #include "Level/LevelInterface.h"
+#include "Screens/WorldScreen.h"
 
 const int BuffBar::MAX_SHOWABLE_BUFFSLOTS = 5;
 
