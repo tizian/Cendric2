@@ -148,6 +148,7 @@ Inventory* WorldScreen::getInventory() {
 
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	updateOverlayQueue();
+	
 	m_interface->update(frameTime);
 	m_progressLog->update(frameTime);
 

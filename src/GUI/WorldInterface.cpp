@@ -36,6 +36,9 @@ void WorldInterface::hideAll() {
 	m_spellbook->hide();
 	m_questLog->hide();
 	m_inventory->hide();
+	for (auto go : *m_screen->getObjects(GameObjectType::_ScreenOverlay)) {
+		go->setDisposed();
+	}
 }
 
 bool WorldInterface::isGuiOverlayVisible() const {

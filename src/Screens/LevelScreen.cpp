@@ -157,7 +157,9 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjectsFirst(GameObjectType::_DynamicTile, frameTime);
 		updateObjectsFirst(GameObjectType::_Spell, frameTime);
 		// and then normally
-		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
+		if (!m_interface->isGuiOverlayVisible()) {
+			updateObjects(GameObjectType::_ScreenOverlay, frameTime);
+		}
 		updateObjects(GameObjectType::_MovableTile, frameTime);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
