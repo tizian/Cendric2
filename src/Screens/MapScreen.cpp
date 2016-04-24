@@ -118,7 +118,7 @@ bool MapScreen::isOverlayActive() {
 
 bool MapScreen::isOverlayVisible() {
 	return isOverlayActive() ||
-		dynamic_cast<MapInterface*>(m_interface)->isMapOverlayVisible();
+		m_interface->isGuiOverlayVisible();
 }
 
 void MapScreen::setDialogue(NPC* npc) {

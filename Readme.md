@@ -22,11 +22,11 @@ Cendric moves through the world on a 2D map and interacts with NPCs to trade or 
 
 The final game will be available for Windows, Mac and Linux. As we are currently only focusing on one platform, most test builds will only be available for Windows at the moment. However, feel free to try and compile *Cendric* on any platform.
 
-[Cendric v0.2.0](https://github.com/tizian/Cendric2/releases/download/v0.2.0/Cendric_v0.2.0_win64.zip) (Windows x64)
+[Cendric v0.2.1](https://github.com/tizian/Cendric2/releases/download/v0.2.1/Cendric_v0.2.1_win64.zip) (Windows x64)
 
-[Cendric v0.2.0](https://github.com/tizian/Cendric2/releases/download/v0.2.0/Cendric_v0.2.0_mac.zip) (Mac OS X)
+[Cendric v0.2.1](https://github.com/tizian/Cendric2/releases/download/v0.2.1/Cendric_v0.2.1_mac.zip) (Mac OS X)
 
-[Cendric v0.2.0](https://github.com/tizian/Cendric2/releases/download/v0.2.0/Cendric_v0.2.0_ubuntu.tar.gz) (Ubuntu)
+[Cendric v0.2.1](https://github.com/tizian/Cendric2/releases/download/v0.2.1/Cendric_v0.2.1_ubuntu.tar.gz) (Ubuntu)
 
 
 A list of all builds is available [here](https://github.com/tizian/Cendric2/releases).

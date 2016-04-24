@@ -31,6 +31,8 @@ public:
 	virtual void renderAfterForeground(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);
 	virtual void hideAll();
+	// returns whether any gui overlay is open (inventory, spellbook, etc.)
+	virtual bool isGuiOverlayVisible() const;
 
 	CharacterCore* getCore() const;
 	Screen* getScreen() const;

@@ -38,6 +38,13 @@ void WorldInterface::hideAll() {
 	m_inventory->hide();
 }
 
+bool WorldInterface::isGuiOverlayVisible() const {
+	return m_characterInfo->isVisible() || 
+	m_spellbook->isVisible() || 
+	m_questLog->isVisible() ||
+	m_inventory->isVisible();
+}
+
 void WorldInterface::reloadInventory(const std::string& changedItemID) {
 	m_inventory->notifyChange(changedItemID);
 }

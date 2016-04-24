@@ -31,12 +31,12 @@ void MapInterface::update(const sf::Time& frameTime) {
 
 void MapInterface::render(sf::RenderTarget& target) {
 	WorldInterface::render(target);
-
 	m_mapOverlay->render(target);
 }
 
-bool MapInterface::isMapOverlayVisible() const {
-	return m_mapOverlay->isVisible();
+bool MapInterface::isGuiOverlayVisible() const {
+	return WorldInterface::isGuiOverlayVisible() ||
+		m_mapOverlay->isVisible();
 }
 
 void MapInterface::updateMapOverlay(const sf::Time& frameTime) {

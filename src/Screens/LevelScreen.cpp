@@ -242,7 +242,9 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
 
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
+	if (!m_interface->isGuiOverlayVisible()) {
+		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
+	}
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget);
 	WorldScreen::renderAfterForeground(renderTarget);
