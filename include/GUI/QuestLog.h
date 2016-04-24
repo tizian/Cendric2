@@ -25,6 +25,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
 	void onLeftJustPressed() override;
+	void setColor(const sf::Color& color);
 	void select();
 	void deselect();
 	bool isClicked();

@@ -17,7 +17,7 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 	m_background.setFillColor(COLOR_BLACK);
 	
 	m_filler.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_filler.setFillColor(sf::Color(91, 73, 133));
+	m_filler.setFillColor(COLOR_PURPLE);
 
 	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_slider), COLOR_WHITE, 2.f * BORDER_OFFSET + WIDTH, 2.f * BORDER_OFFSET + HEIGHT);
 

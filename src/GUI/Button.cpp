@@ -5,7 +5,7 @@ Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	m_backLayerColor(COLOR_DARK_GREY),
 	m_mainLayerColor(COLOR_BLACK),
 	m_ornamentLayerColor(COLOR_WHITE),
-	m_mouseOverColor(sf::Color(91, 73, 133)) {
+	m_mouseOverColor(COLOR_PURPLE) {
 	// using default values for constructor.
 	setBoundingBox(box);
 	setInputInDefaultView(true);

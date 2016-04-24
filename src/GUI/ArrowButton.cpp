@@ -11,7 +11,7 @@ ArrowButton::ArrowButton(bool pointRight) : GameObject() {
 	// default colors 
 	m_mainColor = COLOR_WHITE;
 	m_disabledColor = COLOR_DARK_GREY;
-	m_mouseoverColor = sf::Color(91, 73, 133);
+	m_mouseoverColor = COLOR_PURPLE;
 
 	m_isInputInDefaultView = true;
 }
