@@ -328,5 +328,3 @@ void QuestEntry::deselect() {
 bool QuestEntry::isSelected() const {
 	return m_isSelected;
 }
-
-

@@ -16,6 +16,7 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		break;
 	case TriggerContentType::Hint:
 		screen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay(content.s1));
+		screen->getCharacterCore()->learnHint(content.s1);
 		break;
 	case TriggerContentType::ItemEquip: {
 		auto bean = g_databaseManager->getItemBean(content.s1);

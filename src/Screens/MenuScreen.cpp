@@ -148,6 +148,7 @@ void MenuScreen::onNewGame() {
 		Screen* nextScreen = new CutsceneScreen(m_characterCore, "intro");
 		nextScreen->addScreenOverlay(ScreenOverlay::createQuestScreenOverlay("who_am_i", QuestState::Started));
 		nextScreen->addScreenOverlay(ScreenOverlay::createHintScreenOverlay("MapMove"));
+		m_characterCore->learnHint("MapMove");
 		setNextScreen(nextScreen);;
 	}
 	else {

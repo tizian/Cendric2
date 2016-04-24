@@ -1,6 +1,26 @@
 #include "GUI/CharacterInfo.h"
+#include "GUI/HintDescriptionWindow.h"
+#include "GUI/ScrollBar.h"
+#include "GUI/ScrollHelper.h"
 
-const sf::Vector2f BUTTON_SIZE = sf::Vector2f(200.f, 40.f);
+const float CharacterInfo::TOP = GUIConstants::TOP;
+const float CharacterInfo::LEFT = GUIConstants::LEFT;
+const float CharacterInfo::WIDTH = 760.f;
+const float CharacterInfo::HEIGHT = 434.f;
+
+const sf::Vector2f CharacterInfo::BUTTON_SIZE = sf::Vector2f(200.f, 40.f);
+
+const int CharacterInfo::ENTRY_COUNT = 12;
+const int CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS = 50;
+const float CharacterInfo::MAX_ENTRY_LENGTH = static_cast<float>(MAX_ENTRY_LENGTH_CHARACTERS) * GUIConstants::CHARACTER_SIZE_M;
+
+const float CharacterInfo::WINDOW_MARGIN = 6.f;
+
+const float CharacterInfo::SCROLL_WINDOW_WIDTH = MAX_ENTRY_LENGTH + 4 * WINDOW_MARGIN + ScrollBar::WIDTH;
+const float CharacterInfo::SCROLL_WINDOW_HEIGHT = ENTRY_COUNT * GUIConstants::CHARACTER_SIZE_M + (ENTRY_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M + 2 * GUIConstants::CHARACTER_SIZE_M + 2 * WINDOW_MARGIN;
+
+const float CharacterInfo::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y;
+const float CharacterInfo::SCROLL_WINDOW_LEFT = 0.5f * (WIDTH - SCROLL_WINDOW_WIDTH);
 
 CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* attributes) {
 	m_core = core;
@@ -35,18 +55,17 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 	m_attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_attributeText.setColor(COLOR_LIGHT_PURPLE);
 
-	float width = 3 * GUIConstants::TEXT_OFFSET + 2 * m_namesText.getLocalBounds().width;
 	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 
 	m_namesText.setPosition(sf::Vector2f(
 		GUIConstants::LEFT + GUIConstants::TEXT_OFFSET,
 		yOffset));
 	m_attributeText.setPosition(sf::Vector2f(
-		GUIConstants::LEFT + width / 2.f,
+		GUIConstants::LEFT + WIDTH / 2.f,
 		yOffset));
 
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, width, 0);
+	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
@@ -54,10 +73,23 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 
 	m_window->addCloseButton(std::bind(&CharacterInfo::hide, this));
 
+	delete m_descriptionWindow;
+	m_descriptionWindow = new HintDescriptionWindow(m_core);
+
+	// init hint tab section
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollWindow.setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP));
+
+	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
+	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
+
+	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollHelper = new ScrollHelper(scrollBox);
+
 	reload();
 
 	// init tab bar
-	int nTabs = 2;
+	int nTabs = 3;
 	float barWidth = nTabs * BUTTON_SIZE.x;
 	float barHeight = BUTTON_SIZE.y;
 	float x = GUIConstants::LEFT + 0.5f * (m_window->getSize().x - barWidth);
@@ -66,6 +98,7 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 	m_tabBar = new TabBar(sf::FloatRect(x, y, barWidth, barHeight), nTabs);
 	m_tabBar->getTabButton(0)->setText("Stats");
 	m_tabBar->getTabButton(1)->setText("Reputation");
+	m_tabBar->getTabButton(2)->setText("Hints");
 	for (int i = 0; i < nTabs; ++i) {
 		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
@@ -84,6 +117,9 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 CharacterInfo::~CharacterInfo() {
 	delete m_window;
 	delete m_tabBar;
+	delete m_descriptionWindow;
+	delete m_scrollBar;
+	delete m_scrollHelper;
 }
 
 bool CharacterInfo::isVisible() const {
@@ -92,15 +128,101 @@ bool CharacterInfo::isVisible() const {
 
 void CharacterInfo::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+
 	m_window->update(frameTime);
+	m_scrollBar->update(frameTime);
+
+	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
+		HintEntry& entry = m_hintEntries[i];
+		if (m_selectedEntry && m_selectedEntry->getHintKey() == entry.getHintKey()) {
+			entry.setColor(COLOR_WHITE);
+		}
+		else if (g_inputController->isMouseOver(entry.getBoundingBox(), true)) {
+			entry.setColor(COLOR_LIGHT_PURPLE);
+		}
+		else {
+			entry.setColor(COLOR_GREY);
+		}
+	}
+
+	// check whether an entry was selected
+	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
+		HintEntry& entry = m_hintEntries[i];
+		sf::Vector2f pos = entry.getPosition();
+		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
+			pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
+		entry.update(frameTime);
+		if (entry.isClicked()) {
+			selectEntry(&entry);
+			return;
+		}
+	}
+
+	int lastIndex = m_tabBar->getActiveTabIndex();
 	m_tabBar->update(frameTime);
+	int newIndex = m_tabBar->getActiveTabIndex();
+	if (lastIndex != newIndex) {
+		hideDescription();
+		if (m_selectedEntry != nullptr) {
+			m_selectedEntry->deselect();
+			m_selectedEntry = nullptr;
+		}
+		m_scrollBar->setScrollPosition(0.f);
+	}
+
 	if (!m_isReloadNeeded) return;
 	reload();
 	m_isReloadNeeded = false;
+
+	calculateEntryPositions();
 }
 
-void CharacterInfo::render(sf::RenderTarget& target) const {
+void CharacterInfo::calculateEntryPositions() {
+	int rows = static_cast<int>(m_hintEntries.size());
+	int steps = rows - ENTRY_COUNT + 1;
+
+	m_scrollBar->setDiscreteSteps(steps);
+
+	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
+
+	if (2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M != m_scrollHelper->nextOffset) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+		m_scrollHelper->nextOffset = 2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M;
+	}
+
+	float animationTime = 0.1f;
+	float time = m_scrollBar->getScrollTime().asSeconds();
+	if (time >= animationTime) {
+		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
+	}
+	float start = m_scrollHelper->lastOffset;
+	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
+	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
+
+	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
+	float yOffset = TOP + SCROLL_WINDOW_TOP + WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
+
+	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
+		HintEntry& entry = m_hintEntries[i];
+		entry.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
+		entry.setPosition(sf::Vector2f(xOffset, yOffset));
+		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
+	}
+}
+
+void CharacterInfo::showDescription(const std::string& hintKey) {
+	m_descriptionWindow->reload(hintKey);
+	m_descriptionWindow->show();
+}
+
+void CharacterInfo::hideDescription() {
+	m_descriptionWindow->hide();
+	m_selectedHintKey = "";
+}
+
+void CharacterInfo::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
+
 	m_window->render(target);
 	target.draw(m_title);
 	m_tabBar->render(target);
@@ -109,10 +231,21 @@ void CharacterInfo::render(sf::RenderTarget& target) const {
 		target.draw(m_namesText);
 		target.draw(m_attributeText);
 	}
-	else {
+	else if (m_tabBar->getActiveTabIndex() == 1) {
 		for (auto& text : m_reputationTexts) {
 			target.draw(text);
 		}
+	}
+	else {
+		for (size_t i = 0; i < m_hintEntries.size(); ++i) {
+			m_hintEntries[i].render(m_scrollHelper->texture);
+		}
+		m_scrollHelper->render(target);
+
+		m_descriptionWindow->render(target);
+
+		target.draw(m_scrollWindow);
+		m_scrollBar->render(target);
 	}
 }
 
@@ -123,6 +256,7 @@ void CharacterInfo::notifyChange() {
 void CharacterInfo::reload() {
 	updateAttributes();
 	updateReputation();
+	updateHints();
 }
 
 void CharacterInfo::updateAttributes() {
@@ -186,13 +320,11 @@ void CharacterInfo::updateAttributes() {
 	attributes.append("% " + g_textProvider->getText("Reduction"));
 	attributes.append("\n");
 	m_attributeText.setString(attributes);
-
-	m_window->setWidth(3 * GUIConstants::TEXT_OFFSET + m_namesText.getLocalBounds().width + m_attributeText.getLocalBounds().width);
-	m_window->setHeight(m_namesText.getLocalBounds().height + 5 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y);
 }
 
 void CharacterInfo::updateReputation() {
 	m_reputationTexts.clear();
+	m_selectedEntry = nullptr;
 
 	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 	
@@ -229,10 +361,108 @@ void CharacterInfo::updateReputation() {
 	}
 }
 
+void CharacterInfo::updateHints() {
+	m_hintEntries.clear();
+
+	const std::vector<std::string>& hints = m_core->getData().hintsLearned;
+
+	for (size_t i = 0; i < hints.size(); ++i) {
+		m_hintEntries.push_back(HintEntry(hints[i]));
+	}
+
+	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
+		HintEntry& entry = m_hintEntries[i];
+		entry.deselect();
+		if (entry.getHintKey().compare(m_selectedHintKey) == 0) {
+			selectEntry(&entry);
+		}
+	}
+}
+
+void CharacterInfo::selectEntry(HintEntry* entry) {
+	if (entry == nullptr) return;
+	if (entry == m_selectedEntry) return;
+	if (m_selectedEntry != nullptr) {
+		m_selectedEntry->deselect();
+	}
+	m_selectedEntry = entry;
+	m_selectedEntry->select();
+	showDescription(m_selectedEntry->getHintKey());
+	m_selectedHintKey = m_selectedEntry->getHintKey();
+}
+
 void CharacterInfo::show() {
 	m_isVisible = true;
 }
 
 void CharacterInfo::hide() {
 	m_isVisible = false;
+	if (m_selectedEntry != nullptr) {
+		m_selectedEntry->deselect();
+		m_selectedEntry = nullptr;
+	}
+	m_scrollBar->setScrollPosition(0.f);
+}
+
+// <<< HINT ENTRY >>>
+
+HintEntry::HintEntry(const std::string& hintKey) {
+	m_hintKey = hintKey;
+	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_name.setColor(COLOR_WHITE);
+
+	std::string hintTitle = "> " + g_textProvider->getText(hintKey, "hint");
+	if (hintTitle.size() > CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS) {
+		hintTitle = hintTitle.substr(0, CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
+	}
+	m_name.setString(hintTitle);
+
+	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
+	setInputInDefaultView(true);
+}
+
+const std::string& HintEntry::getHintKey() const {
+	return m_hintKey;
+}
+
+void HintEntry::setPosition(const sf::Vector2f& pos) {
+	GameObject::setPosition(pos);
+	m_name.setPosition(pos);
+}
+
+void HintEntry::render(sf::RenderTarget& renderTarget) {
+	renderTarget.draw(m_name);
+}
+
+void HintEntry::onLeftJustPressed() {
+	g_inputController->lockAction();
+	m_isClicked = true;
+}
+
+void HintEntry::setColor(const sf::Color& color) {
+	m_name.setColor(color);
+}
+
+bool HintEntry::isClicked() {
+	bool wasClicked = m_isClicked;
+	m_isClicked = false;
+	return wasClicked;
+}
+
+void HintEntry::select() {
+	m_name.setColor(COLOR_WHITE);
+	m_isSelected = true;
+}
+
+GameObjectType HintEntry::getConfiguredType() const {
+	return GameObjectType::_Interface;
+}
+
+void HintEntry::deselect() {
+	m_name.setColor(COLOR_GREY);
+	m_isSelected = false;
+}
+
+bool HintEntry::isSelected() const {
+	return m_isSelected;
 }

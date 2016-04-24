@@ -49,6 +49,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeMerchandStates(data);
 		savefile << writeSpellsLearned(data);
 		savefile << writeModifiersLearned(data);
+		savefile << writeHintsLearned(data);
 		savefile << writeWeather(data);
 
 		savefile.close();
@@ -262,6 +263,20 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 		quests.append(quest);
 	}
 	return quests;
+}
+
+std::string CharacterCoreWriter::writeHintsLearned(const CharacterCoreData& data) const {
+	string hintList = "# hints learned:\n";
+
+	for (auto& it : data.hintsLearned) {
+		string hint = string(HINT_LEARNED);
+		hint.append(":");
+		hint.append(it);
+		hint.append("\n");
+		hintList.append(hint);
+	}
+
+	return hintList;
 }
 
 std::string CharacterCoreWriter::writeReputationProgress(const CharacterCoreData& data) const {

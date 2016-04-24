@@ -620,6 +620,24 @@ bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, Character
 	return true;
 }
 
+bool CharacterCoreReader::readLearnedHints(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	char* endData = gotoNextChar(start, end, '\n');
+	endData++;
+	startData = gotoNextChar(start, endData, ':');
+	startData++;
+
+	std::string hintKey(startData);
+	int count = countToNextChar(startData, endData, '\n');
+	if (count == -1) {
+		return false;
+	}
+	hintKey = hintKey.substr(0, count);
+
+	data.hintsLearned.push_back(hintKey);
+	return true;
+}
+
 bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
@@ -973,6 +991,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, MODIFIER_LEARNED, strlen(MODIFIER_LEARNED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(MODIFIER_LEARNED));
 			noError = readLearnedModifiers(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, HINT_LEARNED, strlen(HINT_LEARNED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(HINT_LEARNED));
+			noError = readLearnedHints(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, REPUTATION_PROGRESS, strlen(REPUTATION_PROGRESS)) == 0) {

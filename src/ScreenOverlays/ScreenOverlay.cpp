@@ -5,6 +5,7 @@
 #include "Enums/EnumNames.h"
 #include "Item.h"
 #include "Structs/SpellData.h"
+#include "GUI/Hints.h"
 
 ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : GameObject() {
 	m_activeTime = activeTime;
@@ -235,45 +236,8 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 
 	hintScreenOverlay->setSubtitleCharacterSize(characterSize);
 
-	std::string hintText = (g_textProvider->getText("Press", "hint")) + " ";
-
-	if (hintKey.compare("Inventory") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Inventory)) + " ");
-	}
-	else if (hintKey.compare("Chop") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Chop)) + " ");
-	}
-	else if (hintKey.compare("Journal") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Journal)) + " ");
-	}
-	else if (hintKey.compare("Spellbook") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Spellbook)) + " ");
-	}
-	else if (hintKey.compare("LeaveLevel") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
-	}
-	else if (hintKey.compare("Scout") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
-		hintText.append(g_textProvider->getText("And") + " ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
-	}
-	else if (hintKey.compare("Map") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Map)) + " ");
-	}
-	else if (hintKey.compare("Highlight") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::ToggleTooltips)) + " ");
-	}
-	else if (hintKey.compare("MapMove") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + ", ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Left)) + ", ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
-		hintText.append(g_textProvider->getText("And") + " ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Right)) + " ");
-	}
-	else {
-		hintText.clear();
-	}
-	hintText.append(g_textProvider->getText(hintKey, "hint"));
+	std::string hintText = getHintDescription(hintKey);
+	
 	hintText = g_textProvider->getCroppedString(hintText, characterSize, static_cast<int>(0.4f * WINDOW_WIDTH));
 	hintScreenOverlay->setSubtitleRaw(hintText);
 

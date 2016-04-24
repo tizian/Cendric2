@@ -96,7 +96,7 @@ private:
 	void selectEntry(QuestEntry* selectedEntry);
 
 	QuestDescriptionWindow* m_descriptionWindow = nullptr;
-	void showDescription(const std::string& itemID);
+	void showDescription(const std::string& questID);
 	void hideDescription();
 
 	std::map<QuestState, std::vector<QuestEntry>*> m_stateMap;

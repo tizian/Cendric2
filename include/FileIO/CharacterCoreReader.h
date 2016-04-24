@@ -42,6 +42,7 @@ private:
 	bool readReputationProgress(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedSpells(char* start, char* end, CharacterCoreData& data) const;
 	bool readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const;
+	bool readLearnedHints(char* start, char* end, CharacterCoreData& data) const;
 	bool readWeather(char* start, char* end, CharacterCoreData& data) const;
 
 	bool readLevelStateLayer(char* start, char* end, std::set<int>& layer, std::string& id) const;
