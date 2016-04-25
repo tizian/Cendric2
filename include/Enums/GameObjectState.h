@@ -16,6 +16,7 @@ enum class GameObjectState {
 	Flying, // used by flying mobs
 	Jumping, // used by mobs and its weapons
 	Fighting, // used by mobs and its weapons
+	Fighting2, // used by mobs and its weapons
 	Dead, // used by mobs and its weapons
 	Frozen, // used by water tile
 	Locked, // used by chest tile

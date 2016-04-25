@@ -83,8 +83,10 @@ Daniel Josephy Hernandez
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
-Daniel Josephy Hernandez, Martin Roesch, Andreas Roesch,
-Brigitte Roesch
+Pascal Oberholzer, Daniel Josephy Hernandez, 
+Martin Roesch, Andreas Roesch, Brigitte Roesch
+
+---
 
 Some tiles are based on Celianna''s tilesets
 
@@ -200,8 +202,10 @@ Daniel Josephy Hernandez
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
-Daniel Josephy Hernandez, Martin Roesch, Andreas Roesch,
-Brigitte Roesch
+Pascal Oberholzer, Daniel Josephy Hernandez, 
+Martin Roesch, Andreas Roesch, Brigitte Roesch
+
+---
 
 Einige Tiles basieren auf Celianna''s Tilesets
 
@@ -320,8 +324,8 @@ Daniel Josephy Hernandez
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
-Daniel Josephy Hernandez, Martin Roesch, Andreas Roesch,
-Brigitte Roesch
+Pascal Oberholzer, Daniel Josephy Hernandez, 
+Martin Roesch, Andreas Roesch, Brigitte Roesch
 
 ---
 

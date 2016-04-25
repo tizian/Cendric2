@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="18" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="93">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="18" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="95">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/eldergarden/layer_inf.png,3.0,res/level/eldergarden/layer_3.png"/>
   <property name="dimming" value="0.2"/>
@@ -7,7 +7,7 @@
   <property name="name" value="ElderGarden"/>
   <property name="tilesetpath" value="res/level/eldergarden/tileset_level_eldergarden.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_eldergarden" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_level_eldergarden" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_level_eldergarden.png" width="1000" height="1000"/>
   <tile id="136">
    <animation>
@@ -17,13 +17,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
+ <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10">
+ <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
+ <tileset firstgid="572" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -389,6 +389,7 @@
  </objectgroup>
  <objectgroup name="enemy">
   <object id="88" gid="562" x="309" y="747" width="50" height="50"/>
+  <object id="94" gid="571" x="590" y="685" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="light" visible="0">
   <object id="89" x="294" y="386" width="210" height="266">
