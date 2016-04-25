@@ -42,6 +42,7 @@ void ResourceManager::init() {
 		{ ResourceID::Quicksave, "saves/quicksave.sav" },
 		{ ResourceID::Items, "res/items.csv" },
 		{ ResourceID::Texture_spellicons, "res/assets/spells/spritesheet_spellicons.png" },
+		{ ResourceID::Texture_spellscroll, "res/assets/spells/scroll.png" },
 		{ ResourceID::Texture_mapmarkers, "res/assets/misc/spritesheet_mapmarkers.png" },
 		{ ResourceID::Texture_damageTypes, "res/assets/debuffs/spritesheet_damagetypes.png" },
 		{ ResourceID::Texture_mainChar, "res/assets/cendric/spritesheet_cendric_level.png" },

@@ -14,6 +14,7 @@ enum class ResourceID {
 	Npc_folder,
 	Texture_mapmarkers,
 	Texture_spellicons,
+	Texture_spellscroll,
 	Texture_damageTypes,
 	Texture_mainChar,
 	Texture_mapMainChar,

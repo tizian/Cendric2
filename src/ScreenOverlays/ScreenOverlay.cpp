@@ -148,12 +148,18 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 	spellScreenOverlay->setSubtitle(EnumNames::getSpellIDName(id));
 
 	spellScreenOverlay->setTexture(ResourceID::Texture_spellicons);
+	spellScreenOverlay->setBackgroundTexture(ResourceID::Texture_spellscroll);
 
 	const SpellData& bean = SpellData::getSpellData(id);
 	spellScreenOverlay->setTextureRect(bean.iconTextureRect);
 
-	spellScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
-	spellScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
+	sf::Vector2f scale(2.f, 2.f);
+	spellScreenOverlay->setSpriteScale(scale);
+	spellScreenOverlay->setBackgroundScale(scale);
+
+	sf::Vector2f pos(0.5f * (WINDOW_WIDTH - 128), 0.5f * (WINDOW_HEIGHT - 50));
+	spellScreenOverlay->setSpritePosition(pos);
+	spellScreenOverlay->setBackgroundPosition(pos);
 
 	return spellScreenOverlay;
 }
