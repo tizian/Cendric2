@@ -9,7 +9,7 @@ loadDialogue = function(DL)
 		DL:addChoice(2, "DL_Choice_WhatAreYouDoing") -- What are you doing here?
 	end
 	if (not DL:isConditionFulfilled("npc_andrew", "mages")) then
-		DL:addChoice(4, "DL_Choice_Mages") -- What do you think about mages?
+		DL:addChoice(20, "DL_Choice_Mages") -- What do you think about mages?
 	end
 	if (DL:isConditionFulfilled("npc_andrew", "what_are_you_doing") and not DL:isConditionFulfilled("npc_andrew", "bridge")) then
 		DL:addChoice(10, "DL_Choice_TheBridgeIsOk") -- The river is frozen, you can go home.
@@ -21,7 +21,7 @@ loadDialogue = function(DL)
 	DL:addConditionProgress("npc_andrew", "who_are_you")
 	DL:addNode()
 	
-	DL:createNPCNode(4, -2, "DL_Andrew_Mages") -- A bunch of freaks, if y'ask me... hic!... I'm pretty glad that none of them livesh in our village.
+	DL:createNPCNode(20, -2, "DL_Andrew_Mages") -- A bunch of freaks, if y'ask me... hic!... I'm pretty glad that none of them livesh in our village.
 	DL:addConditionProgress("npc_andrew", "mages")
 	DL:addNode()
 	

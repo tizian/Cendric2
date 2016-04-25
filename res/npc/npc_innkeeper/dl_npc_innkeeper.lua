@@ -81,7 +81,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 		end
 		
-		DL:createTradeNode(2, 0, "DL_Trade_TakeALook") -- Sure, take a look.
+		DL:createTradeNode(2, -2, "DL_Trade_TakeALook") -- Sure, take a look.
 		DL:addNode()
 		
 		if (not DL:isConditionFulfilled("npc_innkeeper", "asked_for_feudal_fire")) then 
