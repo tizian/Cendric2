@@ -1192,15 +1192,15 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="signpost">
+ <objectgroup name="sign">
   <object id="135" gid="1350" x="450.455" y="1647.18" width="50" height="50">
    <properties>
-    <property name="title" value="Left"/>
+    <property name="text" value="MeadowsTest1"/>
    </properties>
   </object>
   <object id="136" gid="1370" x="451.909" y="1667" width="50" height="50">
    <properties>
-    <property name="title" value="Right"/>
+    <property name="text" value="MeadowsTest2"/>
    </properties>
   </object>
  </objectgroup>

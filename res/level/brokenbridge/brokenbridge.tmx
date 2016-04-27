@@ -1007,7 +1007,7 @@
  <objectgroup name="sign">
   <object id="115" gid="478" x="2919" y="1456" width="50" height="50">
    <properties>
-    <property name="title" value="No swimming"/>
+    <property name="text" value="BrokenBridgeTest"/>
    </properties>
   </object>
  </objectgroup>

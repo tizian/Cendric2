@@ -317,14 +317,14 @@ bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 				}
 				std::string attrText = textAttr;
 
-				if (attrText.compare("title") == 0) {
+				if (attrText.compare("text") == 0) {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
 						return false;
 					}
-					sign.title = textAttr;
+					sign.text = textAttr;
 				}
 				
 				_property = _property->NextSiblingElement("property");

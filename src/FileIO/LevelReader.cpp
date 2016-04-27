@@ -431,14 +431,14 @@ bool LevelReader::readSignTiles(tinyxml2::XMLElement* objectgroup, LevelData& da
 				}
 				std::string attrText = textAttr;
 
-				if (attrText.compare("title") == 0) {
+				if (attrText.compare("text") == 0) {
 					textAttr = nullptr;
 					textAttr = property_->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
 						return false;
 					}
-					sign.title = textAttr;
+					sign.text = textAttr;
 				}
 
 				property_ = property_->NextSiblingElement("property");

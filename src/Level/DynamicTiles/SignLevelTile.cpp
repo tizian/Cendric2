@@ -6,7 +6,7 @@ const float TOOLTIP_TOP = 20.f;
 
 SignLevelTile::SignLevelTile(const SignData& data, LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_data = data;
-	m_tooltipWindow.setText(data.title);
+	m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
 	m_showTooltip = false;
 }
