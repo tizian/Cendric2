@@ -32,6 +32,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
 	depthSortObjects(GameObjectType::_MapMovableGameObject, true);
 	updateObjects(GameObjectType::_DynamicTile, frameTime);
+	updateObjects(GameObjectType::_ForegroundDynamicTile, frameTime);
 	updateObjects(GameObjectType::_Light, frameTime);
 	updateObjects(GameObjectType::_Overlay, frameTime);
 	updateTooltipText(frameTime);
@@ -176,6 +177,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 
 	// Render foreground layer to extra buffer
 	m_currentMap.drawForeground(m_renderTexture2, sf::RenderStates::Default);
+	renderObjects(GameObjectType::_ForegroundDynamicTile, m_renderTexture2);
 	m_renderTexture2.display();
 
 	// Render buffer to window										(Normal foreground rendered on top)

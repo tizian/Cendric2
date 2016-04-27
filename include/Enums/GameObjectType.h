@@ -13,6 +13,7 @@ enum GameObjectType {
 	_Form, // form buttons will be rendered / updated with their form and not in the "button" context
 	_Spell,
 	_DynamicTile, // dynamic tiles on map and levels, an exception are moving platforms, shiftable tiles and unstable tliles.
+	_ForegroundDynamicTile,
 	_MapMovableGameObject, // npcs and main char on map
 	_Enemy,
 	_LevelItem,

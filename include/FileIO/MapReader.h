@@ -26,6 +26,7 @@ private:
 	bool readObjects(tinyxml2::XMLElement* map, MapData& data) const;
 	bool readNPCs(tinyxml2::XMLElement* objects, MapData& data) const;
 	bool readBooks(tinyxml2::XMLElement* objects, MapData& data) const;
+	bool readSigns(tinyxml2::XMLElement* objects, MapData& data) const;
 	bool readCollidableObjectLayer(tinyxml2::XMLElement* objects, MapData& data) const;
 
 	// check map bean for validity before loading the map
