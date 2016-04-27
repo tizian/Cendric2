@@ -6,7 +6,14 @@ const float TOOLTIP_TOP = 10.f;
 
 SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_data = data;
-	m_tooltipWindow.setText("blbdfasdf");
+	m_tooltipWindow.setText(data.title);
+	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
+	m_showTooltip = false;
+}
+
+void SignMapTile::update(const sf::Time& frameTime) {
+	m_showTooltip = false;
+	MapDynamicTile::update(frameTime);
 }
 
 void SignMapTile::init() {
@@ -34,11 +41,14 @@ void SignMapTile::setPosition(const sf::Vector2f& pos) {
 
 void SignMapTile::onMouseOver() {
 	setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
+	m_showTooltip = true;
 }
 
 void SignMapTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	MapDynamicTile::renderAfterForeground(renderTarget);
-	m_tooltipWindow.render(renderTarget);
+	if (m_showTooltip) {
+		m_tooltipWindow.render(renderTarget);
+	}
 }
 
 GameObjectType SignMapTile::getConfiguredType() const {

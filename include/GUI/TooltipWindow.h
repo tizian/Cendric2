@@ -15,9 +15,11 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
 	void setText(const std::string& text);
+	void setTextOffset(const sf::Vector2f& offset);
 
 	static const int MAX_WIDTH;
 
 private:
 	BitmapText m_text;
+	sf::Vector2f m_textOffset;
 };
