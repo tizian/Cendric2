@@ -1193,7 +1193,15 @@
   </object>
  </objectgroup>
  <objectgroup name="signpost">
-  <object id="135" gid="1350" x="450.455" y="1649.18" width="50" height="50"/>
-  <object id="136" gid="1370" x="451.909" y="1666" width="50" height="50"/>
+  <object id="135" gid="1350" x="450.455" y="1649.18" width="50" height="50">
+   <properties>
+    <property name="title" value="Left"/>
+   </properties>
+  </object>
+  <object id="136" gid="1370" x="451.909" y="1666" width="50" height="50">
+   <properties>
+    <property name="title" value="Right"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
