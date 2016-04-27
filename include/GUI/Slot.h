@@ -4,7 +4,7 @@
 #include "GameObject.h"
 
 #include "GUI/BitmapText.h"
-#include "GUI/SlotTooltipWindow.h"
+#include "GUI/TooltipWindow.h"
 
 class Slot : public GameObject {
 	friend class SlotClone;
@@ -64,5 +64,5 @@ protected:
 	const sf::Texture* m_highlightTexture = nullptr;
 
 	bool m_showTooltip = false;
-	SlotTooltipWindow m_tooltipWindow;
+	TooltipWindow m_tooltipWindow;
 };

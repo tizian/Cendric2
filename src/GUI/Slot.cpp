@@ -1,5 +1,5 @@
 #include "GUI/Slot.h"
-#include "GUI/SlotTooltipWindow.h"
+#include "GUI/TooltipWindow.h"
 
 using namespace std;
 

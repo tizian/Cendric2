@@ -2,8 +2,11 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
 
+const float TOOLTIP_TOP = 10.f;
+
 SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_data = data;
+	m_tooltipWindow.setText(data.title);
 }
 
 void SignMapTile::init() {
@@ -24,8 +27,18 @@ void SignMapTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(false);
 }
 
+void SignMapTile::setPosition(const sf::Vector2f& pos) {
+	MapDynamicTile::setPosition(pos);
+	m_tooltipWindow.setPosition(sf::Vector2f(pos.x, pos.y - m_tooltipWindow.getSize().y - TOOLTIP_TOP));
+}
+
 void SignMapTile::onMouseOver() {
 	setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
+}
+
+void SignMapTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
+	MapDynamicTile::renderAfterForeground(renderTarget);
+	m_tooltipWindow.render(renderTarget);
 }
 
 GameObjectType SignMapTile::getConfiguredType() const {

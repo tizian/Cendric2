@@ -8,9 +8,9 @@
 /// A tooltip for each slot. Created by the corresponding slots.
 /// Is rendered on mouseover.
 ///
-class SlotTooltipWindow : public Window {
+class TooltipWindow : public Window {
 public:
-	SlotTooltipWindow();
+	TooltipWindow();
 	
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
