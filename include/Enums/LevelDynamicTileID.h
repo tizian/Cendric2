@@ -20,5 +20,7 @@ enum class LevelDynamicTileID {
 	Unstable,
 	Falling,
 	Jumping,
+	Shooting,
+	Sign,
 	MAX
 };
