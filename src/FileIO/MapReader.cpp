@@ -295,7 +295,7 @@ bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 		result = object->QueryIntAttribute("gid", &gid);
 		XMLCheckResult(result);
 
-		int offset = static_cast<int>(MapDynamicTileID::Book) + m_firstGidDynamicTiles - 1;
+		int offset = static_cast<int>(MapDynamicTileID::Sign) + m_firstGidDynamicTiles - 1;
 		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
 
 		SignData sign;

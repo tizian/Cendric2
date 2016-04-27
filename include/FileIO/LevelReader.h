@@ -38,6 +38,7 @@ private:
 	bool readModifierTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readMovingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readJumpingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readSignTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
 
 	// this is the width in tiles of the dynamic tile tileset
