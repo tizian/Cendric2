@@ -10,9 +10,8 @@ ShootingTile::ShootingTile(LevelScreen* levelScreen) :
 }
 
 void ShootingTile::init() {
-	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
-	setPositionOffset(sf::Vector2f(10.f, 10.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F - 20.f));
+	setSpriteOffset(sf::Vector2f(-25.f, 0.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	m_damage.damageType = DamageType::Physical;
 	m_damage.duration = sf::seconds(4.f);
 	m_damage.damage = 40;
@@ -40,28 +39,9 @@ void ShootingTile::loadAnimation(int skinNr) {
 	}
 }
 
-void ShootingTile::onHit(LevelMovableGameObject* mob) {
-	if (m_damageCooldown > sf::Time::Zero) return;
-	if (mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
-		mob->addDamageOverTime(m_damage);
-		m_damageCooldown = sf::seconds(3.f);
-	}
-}
-
 void ShootingTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 	updateTime(m_damageCooldown, frameTime);
-
-	if (m_isWaiting) {
-		if (m_isAggro && dist(m_mainChar->getCenter(), getCenter()) > AGGRO_DISTANCE) {
-			return;
-		}
-		updateTime(m_waitingTime, frameTime);
-		if (m_waitingTime == sf::Time::Zero) {
-			m_isWaiting = false;
-		}
-		return;
-	}
 }
 
 void ShootingTile::onHit(Spell* spell) {
