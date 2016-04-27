@@ -50,7 +50,7 @@ void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
 		chestTile->setObjectID(it.objectID);
 		chestTile->setStrength(it.chestStrength);
 		chestTile->setLoot(loot, gold);
-		chestTile->setPosition(it.spawnPosition - chestTile->getPositionOffset());
+		chestTile->setPosition(it.spawnPosition + chestTile->getPositionOffset());
 		chestTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		chestTile->loadAnimation(it.skinNr);
 		screen->addObject(chestTile);
@@ -156,14 +156,14 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
 			break;
 		case LevelDynamicTileID::Falling:
-			(dynamic_cast<FallingTile*>(tile))->setInitialHeight((it.position - tile->getPositionOffset()).y);
+			(dynamic_cast<FallingTile*>(tile))->setInitialHeight((it.position + tile->getPositionOffset()).y);
 			break;
 		default:
 			break;
 		}
 
 		tile->init();
-		tile->setPosition(it.position - tile->getPositionOffset());
+		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		tile->loadAnimation(it.skinNr);
 		tile->setDynamicTileID(it.id);

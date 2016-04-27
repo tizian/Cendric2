@@ -25,10 +25,10 @@ void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
 	for (auto& it : data.books) {
 		BookTile* book = new BookTile(it, screen);
 		book->init();
-		book->setPosition(it.position);
+		book->setPosition(it.position + book->getPositionOffset());
 		book->setDebugBoundingBox(COLOR_NEUTRAL);
 		book->loadAnimation(it.skinNr);
-		book->setDynamicTileID(MapDynamicTileID::Sign);
+		book->setDynamicTileID(MapDynamicTileID::Book);
 
 		screen->addObject(book);
 	}
@@ -39,10 +39,10 @@ void MapLoader::loadSigns(MapData& data, MapScreen* screen) const {
 	for (auto& it : data.signs) {
 		SignMapTile* sign = new SignMapTile(it, screen);
 		sign->init();
-		sign->setPosition(it.position);
+		sign->setPosition(it.position + sign->getPositionOffset());
 		sign->setDebugBoundingBox(COLOR_NEUTRAL);
 		sign->loadAnimation(it.skinNr);
-		sign->setDynamicTileID(MapDynamicTileID::Book);
+		sign->setDynamicTileID(MapDynamicTileID::Sign);
 
 		screen->addObject(sign);
 	}
@@ -75,7 +75,7 @@ void MapLoader::loadDynamicTiles(MapData& data, MapScreen* screen) const {
 		}
 
 		tile->init();
-		tile->setPosition(it.position - tile->getPositionOffset());
+		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		tile->loadAnimation(it.skinNr);
 		tile->setDynamicTileID(it.id);

@@ -9,6 +9,7 @@ SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynami
 void SignMapTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, 20.f));
 	setPositionOffset(sf::Vector2f(0.f, 15.f));
+	setSpriteOffset(sf::Vector2f(0.f, -15.f));
 }
 
 void SignMapTile::loadAnimation(int skinNr) {

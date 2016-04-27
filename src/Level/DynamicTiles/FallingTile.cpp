@@ -8,7 +8,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Falling, FallingTile)
 FallingTile::FallingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),
 	MovableGameObject() {
-	setPositionOffset(sf::Vector2f(-3.f, -3.f));
+	setPositionOffset(sf::Vector2f(3.f, 3.f));
 }
 
 void FallingTile::init() {
