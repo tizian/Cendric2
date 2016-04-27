@@ -7,6 +7,7 @@
 #include "ObjectFactory.h"
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "Map/DynamicTiles/BookTile.h"
+#include "Map/DynamicTiles/SignMapTile.h"
 #include "Trigger.h"
 
 void MapLoader::loadNpcs(MapData& data, MapScreen* screen) const {
@@ -27,9 +28,23 @@ void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
 		book->setPosition(it.position);
 		book->setDebugBoundingBox(COLOR_NEUTRAL);
 		book->loadAnimation(it.skinNr);
-		book->setDynamicTileID(MapDynamicTileID::Book);
+		book->setDynamicTileID(MapDynamicTileID::Sign);
 
 		screen->addObject(book);
+	}
+}
+
+void MapLoader::loadSigns(MapData& data, MapScreen* screen) const {
+	// calculate signs
+	for (auto& it : data.signs) {
+		SignMapTile* sign = new SignMapTile(it, screen);
+		sign->init();
+		sign->setPosition(it.position);
+		sign->setDebugBoundingBox(COLOR_NEUTRAL);
+		sign->loadAnimation(it.skinNr);
+		sign->setDynamicTileID(MapDynamicTileID::Book);
+
+		screen->addObject(sign);
 	}
 }
 
