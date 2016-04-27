@@ -6,7 +6,7 @@ const float TOOLTIP_TOP = 10.f;
 
 SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_data = data;
-	m_tooltipWindow.setText(data.title);
+	m_tooltipWindow.setText("blbdfasdf");
 }
 
 void SignMapTile::init() {

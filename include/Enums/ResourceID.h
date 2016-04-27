@@ -50,6 +50,7 @@ enum class ResourceID {
 	Texture_tile_unstable,
 	Texture_tile_falling,
 	Texture_tile_jumping,
+	Texture_tile_shooting,
 	Texture_debuff_fear,
 	Texture_debuff_stun,
 	Texture_screen_splash,
