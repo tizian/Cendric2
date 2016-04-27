@@ -48,19 +48,6 @@ void ShootingTile::onHit(LevelMovableGameObject* mob) {
 	}
 }
 
-void ShootingTile::setShootingTileData(const ShootingTileData& data) {
-	m_isAggro = data.isAggro;
-	m_isAlternating = data.isAlternating;
-
-	float phi = degToRad(static_cast<float>(data.direction - 90));
-
-	m_initialVelocity.x = std::round(data.velocity * std::cos(phi));
-	m_initialVelocity.y = std::round(data.velocity * std::sin(phi));
-
-	m_waitingSpan = sf::milliseconds(data.waitingTime);
-	m_initialPosition = data.spawnPosition;
-}
-
 void ShootingTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 	updateTime(m_damageCooldown, frameTime);
