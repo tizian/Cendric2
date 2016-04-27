@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="40" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="113">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="40" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="116">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/brokenbridge/layer_inf.png,3.0,res/level/brokenbridge/layer_3.png,2.0,res/level/brokenbridge/layer_2.png"/>
   <property name="dimming" value="0.2"/>
+  <property name="musicpath" value="res/level/brokenbridge/brokenbridge.ogg"/>
   <property name="name" value="BrokenBridge"/>
   <property name="tilesetpath" value="res/level/brokenbridge/tileset_level_brokenbridge.png"/>
-  <property name="musicpath" value="res/level/brokenbridge/brokenbridge.ogg"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_brokenbridge" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="399" columns="21">
   <image source="tileset_level_brokenbridge.png" width="1100" height="1000"/>
@@ -1001,6 +1001,13 @@
    <properties>
     <property name="level" value="1"/>
     <property name="type" value="speed"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="sign">
+  <object id="115" gid="478" x="2919" y="1456" width="50" height="50">
+   <properties>
+    <property name="title" value="No swimming"/>
    </properties>
   </object>
  </objectgroup>

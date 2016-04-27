@@ -430,6 +430,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_tile_falling);
 	deleteResource(ResourceID::Texture_tile_jumping);
 	deleteResource(ResourceID::Texture_tile_shooting);
+	deleteResource(ResourceID::Texture_tile_sign_level);
 
 	deleteResource(ResourceID::Sound_tile_water);
 	deleteResource(ResourceID::Sound_tile_lever);
@@ -473,7 +474,7 @@ void ResourceManager::deleteMapResources() {
 	deleteResource(ResourceID::Texture_tile_cooking);
 	deleteResource(ResourceID::Texture_tile_waypoint);
 	deleteResource(ResourceID::Texture_tile_book);
-	deleteResource(ResourceID::Texture_tile_sign);
+	deleteResource(ResourceID::Texture_tile_sign_map);
 
 	deleteResource(ResourceID::Sound_tile_waypoint);
 }
