@@ -38,7 +38,6 @@ void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
 	}
 }
 
-
 sf::Vector2f WindGustSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(10.f, 10.f);
 }

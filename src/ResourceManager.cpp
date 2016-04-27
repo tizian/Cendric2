@@ -87,6 +87,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_tile_unstable, "res/assets/level_dynamic_tiles/spritesheet_tiles_unstable.png" },
 		{ ResourceID::Texture_tile_falling, "res/assets/level_dynamic_tiles/spritesheet_tiles_falling.png" },
 		{ ResourceID::Texture_tile_jumping, "res/assets/level_dynamic_tiles/spritesheet_tiles_jumping.png" },
+		{ ResourceID::Texture_tile_shooting, "res/assets/level_dynamic_tiles/spritesheet_tiles_shooting.png" },
 		{ ResourceID::Texture_tile_book, "res/assets/map_dynamic_tiles/spritesheet_tiles_book.png" },
 		{ ResourceID::Texture_tile_sign_map, "res/assets/map_dynamic_tiles/spritesheet_tiles_sign.png" },
 		{ ResourceID::Texture_tile_sign_level, "res/assets/level_dynamic_tiles/spritesheet_tiles_sign.png" },
@@ -428,6 +429,7 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_tile_unstable);
 	deleteResource(ResourceID::Texture_tile_falling);
 	deleteResource(ResourceID::Texture_tile_jumping);
+	deleteResource(ResourceID::Texture_tile_shooting);
 
 	deleteResource(ResourceID::Sound_tile_water);
 	deleteResource(ResourceID::Sound_tile_lever);
@@ -471,6 +473,7 @@ void ResourceManager::deleteMapResources() {
 	deleteResource(ResourceID::Texture_tile_cooking);
 	deleteResource(ResourceID::Texture_tile_waypoint);
 	deleteResource(ResourceID::Texture_tile_book);
+	deleteResource(ResourceID::Texture_tile_sign);
 
 	deleteResource(ResourceID::Sound_tile_waypoint);
 }
