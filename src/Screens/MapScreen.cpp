@@ -194,6 +194,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(adjustedView);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_ForegroundDynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MapMovableGameObject, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Overlay, renderTarget);
 
