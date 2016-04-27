@@ -2,8 +2,7 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
-#include "MovableGameObject.h"
-#include "Structs/DamageOverTimeData.h"
+#include "Structs/SpellData.h"
 
 class ShootingTile : public virtual LevelDynamicTile {
 public:
@@ -15,16 +14,14 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 private:
-	
-	sf::Vector2f m_initialVelocity;
-	sf::Time m_waitingSpan = sf::Time::Zero;
-	sf::Time m_waitingTime = sf::Time::Zero;
-	sf::Time m_damageCooldown = sf::Time::Zero;
-	bool m_isWaiting = false;
-	bool m_isAggro = false;
-	bool m_isAlternating = false;
-	bool m_isReturning = false;
-	bool m_isMelting = false;
-	DamageOverTimeData m_damage;
-	sf::Vector2f m_initialPosition;
+	void loadSpells(int skinNr);
+
+private:
+	// animation time of "Active"
+	sf::Time m_activeTime = sf::Time::Zero;
+	sf::Time m_remainingActiveTime = sf::Time::Zero;
+	// cooldown for the next spell
+	sf::Time m_cooldown = sf::Time::Zero;
+	sf::Time m_remainingCooldown = sf::Time::Zero;
+	SpellData m_spellData;
 };

@@ -735,6 +735,9 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		else if (name.find("dynamic falling") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Falling, layerData, data)) return false;
 		}
+		else if (name.find("dynamic shooting") != std::string::npos) {
+			if (!readDynamicTileLayer(LevelDynamicTileID::Shooting, layerData, data)) return false;
+		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
 		}
