@@ -26,6 +26,7 @@ item.id:eq_defaultarmor,1
 item.id:eq_ironring,1
 item.id:eq_rubyring,1
 item.id:eq_aquamarinering,1
+item.id:eq_oversizedhat,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
 item.id:fo_cheese,6

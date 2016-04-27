@@ -10,6 +10,12 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire) values ('eq_wizardhatgrey', 5, 1, 2);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatgrey', 'res/assets/equipment/head/spritesheet_head_wizardhat_grey.png');
 
+-- Oversized Hat
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_oversizedhat', 'eq_head', 450, 300, 40);
+INSERT INTO item_attribute (item_id, max_health, res_light, res_fire, dmg_shadow) values ('eq_oversizedhat', 5, 10, 3, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_oversizedhat', 'res/assets/equipment/head/spritesheet_head_oversizedhat.png');
+
 -- Bandana
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bandana', 'eq_head', 0, 300, 20);
