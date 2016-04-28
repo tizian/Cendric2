@@ -14,7 +14,7 @@ class AttackingBehavior;
 // a MOB in a level, enemies + main character.
 class LevelMovableGameObject : public virtual MovableGameObject {
 public:
-	LevelMovableGameObject(Level* level);
+	LevelMovableGameObject(const Level* level);
 	virtual ~LevelMovableGameObject();
 
 	virtual void update(const sf::Time& frameTime) override;
@@ -49,7 +49,7 @@ public:
 	AttackingBehavior* getAttackingBehavior() const;
 	MovingBehavior* getMovingBehavior() const;
 	const AttributeData* getAttributes() const;
-	Level* getLevel() const;
+	const Level* getLevel() const;
 	bool isFacingRight() const;
 	bool isUpsideDown() const;
 	bool isIgnoreDynamicTiles() const;
@@ -74,7 +74,7 @@ protected:
 
 	bool m_isDead = false;
 	bool m_isImmortal = false;
-	Level* m_level;
+	const Level* m_level;
 
 	SpellManager* m_spellManager;
 

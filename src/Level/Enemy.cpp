@@ -13,7 +13,7 @@ using namespace std;
 const float Enemy::HP_BAR_HEIGHT = 3.f;
 const float Enemy::PICKUP_RANGE = 100.f;
 
-Enemy::Enemy(Level* level, Screen* screen) : LevelMovableGameObject(level) {
+Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level) {
 	m_mainChar = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = screen;

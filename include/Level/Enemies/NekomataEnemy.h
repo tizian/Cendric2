@@ -9,7 +9,7 @@
 // A spooky Nekomata in a level
 class NekomataEnemy : public Enemy {
 public:
-	NekomataEnemy(Level* level, Screen* screen);
+	NekomataEnemy(const Level* level, Screen* screen);
 	virtual ~NekomataEnemy() {}
 
 	void update(const sf::Time& frameTime) override;

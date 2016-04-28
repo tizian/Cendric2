@@ -8,7 +8,7 @@
 // A flying mysterious wisp
 class WispEnemy : public Enemy {
 public:
-	WispEnemy(Level* level, Screen* screen);
+	WispEnemy(const Level* level, Screen* screen);
 	~WispEnemy() {}
 
 	void loadAnimation() override;

@@ -9,7 +9,7 @@
 // A nasty rat in a level
 class RatEnemy : public Enemy {
 public:
-	RatEnemy(Level* level, Screen* screen);
+	RatEnemy(const Level* level, Screen* screen);
 	~RatEnemy() {}
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;

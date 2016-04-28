@@ -10,7 +10,7 @@
 // will be refactored to talking / scriptable / npc enemy sometime :)
 class HunterEnemy : public Enemy {
 public:
-	HunterEnemy(Level* level, Screen* screen);
+	HunterEnemy(const Level* level, Screen* screen);
 	~HunterEnemy() {}
 
 	void loadAnimation() override;

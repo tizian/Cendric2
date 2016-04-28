@@ -40,6 +40,7 @@ public:
 	bool getIsCollidable() const;
 	bool getIsStrictlyCollidable() const;
 	GameObjectType getConfiguredType() const override;
+	const Level* getLevel() const;
 
 protected:
 	// dynamic tile textures have a border (border width in pixel)

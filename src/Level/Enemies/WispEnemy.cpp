@@ -15,7 +15,7 @@ void WispEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) c
 	gold = rand() % 5; // 0 - 4
 }
 
-WispEnemy::WispEnemy(Level* level, Screen* screen) :
+WispEnemy::WispEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	load(EnemyID::Wisp);

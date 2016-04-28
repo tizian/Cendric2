@@ -55,6 +55,10 @@ GameObjectType LevelDynamicTile::getConfiguredType() const {
 	return GameObjectType::_DynamicTile;
 }
 
+const Level* LevelDynamicTile::getLevel() const {
+	return m_level;
+}
+
 void LevelDynamicTile::onHit(LevelMovableGameObject* mob) {
 	// nop
 }

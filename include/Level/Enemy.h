@@ -23,7 +23,7 @@ class ScriptedBehavior;
 // An enemy in a level
 class Enemy : public virtual LevelMovableGameObject {
 public:
-	Enemy(Level* level, Screen* screen);
+	Enemy(const Level* level, Screen* screen);
 	virtual ~Enemy();
 
 	void load(EnemyID id);

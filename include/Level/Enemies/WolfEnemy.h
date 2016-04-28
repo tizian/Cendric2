@@ -8,7 +8,7 @@
 
 class WolfEnemy : public Enemy {
 public:
-	WolfEnemy(Level* level, Screen* screen);
+	WolfEnemy(const Level* level, Screen* screen);
 	~WolfEnemy() {}
 
 	void loadAnimation() override;

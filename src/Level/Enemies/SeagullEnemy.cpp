@@ -16,7 +16,7 @@ void SeagullEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold
 		loot.insert({ "mi_feather", feathers });
 }
 
-SeagullEnemy::SeagullEnemy(Level* level, Screen* screen) :
+SeagullEnemy::SeagullEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
 	load(EnemyID::Seagull);

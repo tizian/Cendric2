@@ -14,7 +14,7 @@ void ObjectFactory::registerEnemy(EnemyID id, EnemyConstructor constructor) {
 	enemyRegistry.insert({ id, constructor });
 }
 
-Enemy* ObjectFactory::createEnemy(EnemyID id, Level* level, Screen* screen) {
+Enemy* ObjectFactory::createEnemy(EnemyID id, const Level* level, Screen* screen) {
 	Enemy* instance = nullptr;
 	const auto& it = enemyRegistry.find(id);
 	if (it != enemyRegistry.end()) {

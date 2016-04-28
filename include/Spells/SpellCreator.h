@@ -47,7 +47,7 @@ protected:
 
 	const AttributeData* m_attributeData;
 	SpellData m_spellData;
-	Level* m_level = nullptr;
+	const Level* m_level = nullptr;
 	LevelScreen* m_screen = nullptr;
 	LevelMovableGameObject* m_owner = nullptr;
 };

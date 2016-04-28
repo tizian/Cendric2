@@ -14,9 +14,11 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 private:
-	void loadSpells(int skinNr);
+	void loadSpells();
+	void executeSpells();
 
 private:
+	int m_skinNr = 0;
 	// animation time of "Active"
 	sf::Time m_activeTime = sf::Time::Zero;
 	sf::Time m_remainingActiveTime = sf::Time::Zero;

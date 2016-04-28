@@ -8,7 +8,7 @@
 // A flying seagull
 class SeagullEnemy : public Enemy {
 public:
-	SeagullEnemy(Level* level, Screen* screen);
+	SeagullEnemy(const Level* level, Screen* screen);
 	~SeagullEnemy() {}
 
 	void loadAnimation() override;

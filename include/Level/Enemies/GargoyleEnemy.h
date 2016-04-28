@@ -9,7 +9,7 @@
 // but can also appear as a normal enemy.
 class GargoyleEnemy : public Enemy {
 public:
-	GargoyleEnemy(Level* level, Screen* screen);
+	GargoyleEnemy(const Level* level, Screen* screen);
 	~GargoyleEnemy() {}
 
 	void update(const sf::Time& frameTime) override;

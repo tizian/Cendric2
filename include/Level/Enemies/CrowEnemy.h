@@ -8,7 +8,7 @@
 // A flying crow
 class CrowEnemy : public Enemy {
 public:
-	CrowEnemy(Level* level, Screen* screen);
+	CrowEnemy(const Level* level, Screen* screen);
 	~CrowEnemy() {}
 
 	void loadAnimation() override;

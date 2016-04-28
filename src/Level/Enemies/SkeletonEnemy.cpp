@@ -14,7 +14,7 @@ void SkeletonEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	gold = rand() % 30 + 10;
 }
 
-SkeletonEnemy::SkeletonEnemy(Level* level, Screen* screen) :
+SkeletonEnemy::SkeletonEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	load(EnemyID::Skeleton);

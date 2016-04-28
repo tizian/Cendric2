@@ -21,7 +21,7 @@ struct GhostRecord {
 // a ghost (dummy) of a movable game object, used to simulate its path.
 class JumpingGhost : public virtual MovableGameObject {
 public:
-	JumpingGhost(const AIWalkingQueryRecord& rec, Level* level, Screen* screen);
+	JumpingGhost(const AIWalkingQueryRecord& rec, const Level* level, Screen* screen);
 	~JumpingGhost();
 
 	void update(const sf::Time& frameTime) override;
@@ -43,7 +43,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 protected:
-	Level* m_level;
+	const Level* m_level;
 	GhostRecord m_record;
 	AIWalkingQueryRecord m_aiRec;
 	JumpingGhostDebugger* m_debugger = nullptr;

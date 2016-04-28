@@ -9,7 +9,7 @@
 // A nasty fiery rat in a level
 class FireRatEnemy : public Enemy {
 public:
-	FireRatEnemy(Level* level, Screen* screen);
+	FireRatEnemy(const Level* level, Screen* screen);
 	virtual ~FireRatEnemy() {}
 
 	void loadAnimation() override;

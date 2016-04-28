@@ -52,7 +52,7 @@ public:
 protected:
 	SpellData m_data;
 	
-	Level* m_level;
+	const Level* m_level;
 	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.
 	
 	// enemy list from screen

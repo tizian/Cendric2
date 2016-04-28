@@ -16,7 +16,7 @@ void WolfEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) c
 	gold = 2;
 }
 
-WolfEnemy::WolfEnemy(Level* level, Screen* screen) :
+WolfEnemy::WolfEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	load(EnemyID::Wolf);

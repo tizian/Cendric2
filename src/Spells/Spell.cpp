@@ -1,7 +1,7 @@
 #include "Spells/Spell.h"
 #include "Level/LevelMovableGameObject.h"
-#include "Level/LevelMainCharacter.h"
 #include "Level/Enemy.h"
+#include "Screens/LevelScreen.h"
 
 using namespace std;
 
@@ -15,12 +15,7 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 	m_screen = mob->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 
-	m_mainChar = dynamic_cast<LevelMainCharacter*>(m_screen->getObjects(GameObjectType::_LevelMainCharacter)->at(0));
-
-	if (m_mainChar == nullptr) {
-		g_logger->logError("Spell", "Could not find main character of game screen");
-		return;
-	}
+	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
 
 	sf::Vector2f absolutePosition;
 	calculatePositionAccordingToMob(absolutePosition);

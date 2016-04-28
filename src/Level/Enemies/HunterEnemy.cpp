@@ -12,7 +12,7 @@ void HunterEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold)
 	// nop
 }
 
-HunterEnemy::HunterEnemy(Level* level, Screen* screen) :
+HunterEnemy::HunterEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
 	load(EnemyID::Hunter);

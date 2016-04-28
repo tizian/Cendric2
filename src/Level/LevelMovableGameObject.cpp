@@ -4,7 +4,7 @@
 #include "Level/MOBBehavior/MovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehavior.h"
 
-LevelMovableGameObject::LevelMovableGameObject(Level* level) : MovableGameObject() {
+LevelMovableGameObject::LevelMovableGameObject(const Level* level) : MovableGameObject() {
 	m_level = level;
 	m_foodAttributes.first = sf::Time::Zero;
 	m_foodAttributes.second = ZERO_ATTRIBUTES;
@@ -185,7 +185,7 @@ void LevelMovableGameObject::setFightAnimationTime() {
 	m_movingBehavior->setFightAnimation();
 }
 
-Level* LevelMovableGameObject::getLevel() const {
+const Level* LevelMovableGameObject::getLevel() const {
 	return m_level;
 }
 

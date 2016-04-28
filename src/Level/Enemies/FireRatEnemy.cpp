@@ -17,7 +17,7 @@ void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold
 	gold = rand() % 4 + 1;
 }
 
-FireRatEnemy::FireRatEnemy(Level* level, Screen* screen) :
+FireRatEnemy::FireRatEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
 	load(EnemyID::FireRat);

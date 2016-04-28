@@ -15,7 +15,7 @@ class MapScreen;
 class Level;
 class Screen;
 
-typedef std::function<Enemy*(Level*, Screen*)> EnemyConstructor;
+typedef std::function<Enemy*(const Level*, Screen*)> EnemyConstructor;
 typedef std::function<LevelDynamicTile*(LevelScreen*)> LevelDynamicTileConstructor;
 typedef std::function<MapDynamicTile*(MapScreen*)> MapDynamicTileConstructor;
 
@@ -23,7 +23,7 @@ class ObjectFactory {
 public:
 	static ObjectFactory* Instance();
 
-	Enemy* createEnemy(EnemyID id, Level* level, Screen* screen);
+	Enemy* createEnemy(EnemyID id, const Level* level, Screen* screen);
 	void registerEnemy(EnemyID id, EnemyConstructor constructor);
 
 	LevelDynamicTile* createLevelDynamicTile(LevelDynamicTileID id, LevelScreen* level);

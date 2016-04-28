@@ -3,7 +3,7 @@
 #include "Spells/SpellManager.h"
 #include "Level/Level.h"
 
-JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, Level* level, Screen* screen) : MovableGameObject() {
+JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, const Level* level, Screen* screen) : MovableGameObject() {
 	m_level = level;
 	m_aiRec = rec;
 

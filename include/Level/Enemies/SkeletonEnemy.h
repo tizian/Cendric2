@@ -8,7 +8,7 @@
 
 class SkeletonEnemy : public Enemy {
 public:
-	SkeletonEnemy(Level* level, Screen* screen);
+	SkeletonEnemy(const Level* level, Screen* screen);
 	~SkeletonEnemy() {}
 
 	void loadAnimation() override;
