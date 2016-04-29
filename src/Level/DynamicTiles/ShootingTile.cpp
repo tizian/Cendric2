@@ -25,6 +25,7 @@ void ShootingTile::loadSpells() {
 		m_spellData.damagePerSecond = 5;
 		m_spellData.divergenceAngle = 0.f;
 		m_activeTime = sf::seconds(1.f);
+		m_spellOffsetTime = sf::seconds(0.5f);
 		m_cooldown = sf::seconds(5.f);
 		break;
 	}
@@ -65,12 +66,19 @@ void ShootingTile::update(const sf::Time& frameTime) {
 		}
 	}
 
+	if (m_remainingSpellOffsetTime > sf::Time::Zero) {
+		updateTime(m_remainingSpellOffsetTime, frameTime);
+		if (m_remainingSpellOffsetTime == sf::Time::Zero) {
+			executeSpells();
+		}
+	}
+
 	updateTime(m_remainingCooldown, frameTime);
 	if (m_remainingCooldown == sf::Time::Zero) {
 		m_remainingCooldown = m_cooldown;
 		m_remainingActiveTime = m_activeTime;
+		m_remainingSpellOffsetTime = m_spellOffsetTime;
 		setState(GameObjectState::Active);
-		executeSpells();
 	}
 }
 

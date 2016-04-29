@@ -22,6 +22,9 @@ private:
 	// animation time of "Active"
 	sf::Time m_activeTime = sf::Time::Zero;
 	sf::Time m_remainingActiveTime = sf::Time::Zero;
+	// spell offset time
+	sf::Time m_spellOffsetTime = sf::Time::Zero;
+	sf::Time m_remainingSpellOffsetTime = sf::Time::Zero;
 	// cooldown for the next spell
 	sf::Time m_cooldown = sf::Time::Zero;
 	sf::Time m_remainingCooldown = sf::Time::Zero;
