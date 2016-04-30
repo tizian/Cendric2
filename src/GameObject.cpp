@@ -14,7 +14,7 @@ void GameObject::render(sf::RenderTarget& renderTarget) {
 }
 
 void GameObject::renderAfterForeground(sf::RenderTarget& renderTarget) {
-	if (m_isDrawBoundingBox) {
+	if (m_isDebugRendering) {
 		renderTarget.draw(m_debugBox);
 	}
 	for (auto& component : m_components) {
@@ -23,17 +23,16 @@ void GameObject::renderAfterForeground(sf::RenderTarget& renderTarget) {
 }
 
 void GameObject::setDebugBoundingBox(const sf::Color& debugColor) {
-	if (!g_resourceManager->getConfiguration().isDebugRendering) return;
-
 	m_debugBox = sf::RectangleShape(getSize());
 	m_debugBox.setPosition(getPosition());
 	m_debugBox.setOutlineThickness(1.f);
 	m_debugBox.setFillColor(COLOR_TRANSPARENT);
 	m_debugBox.setOutlineColor(debugColor);
-	m_isDrawBoundingBox = true;
 }
 
 void GameObject::update(const sf::Time& frameTime) {
+	m_isDebugRendering = g_resourceManager->getConfiguration().isDebugRendering;
+	
 	for (auto& component : m_components) {
 		component->update(frameTime);
 	}
@@ -61,7 +60,7 @@ void GameObject::setPosition(const sf::Vector2f& position) {
 	m_boundingBox.left = position.x;
 	m_boundingBox.top = position.y;
 
-	if (m_isDrawBoundingBox) {
+	if (m_isDebugRendering) {
 		m_debugBox.setPosition(position);
 	}
 	for (auto& component : m_components) {
@@ -87,7 +86,7 @@ void GameObject::setBoundingBox(const sf::FloatRect& rect) {
 	m_boundingBox.width = rect.width;
 	m_boundingBox.height = rect.height;
 
-	if (m_isDrawBoundingBox) {
+	if (m_isDebugRendering) {
 		m_debugBox.setSize(getSize());
 	}
 
