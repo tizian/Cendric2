@@ -74,7 +74,7 @@ protected:
 	// holds absolute position as seen from the upper left corner, and size
 	sf::FloatRect m_boundingBox;
 
-	bool m_isDrawBoundingBox = false;
+	bool m_isDebugRendering = false;
 	bool m_isInputInDefaultView = false;
 
 protected:

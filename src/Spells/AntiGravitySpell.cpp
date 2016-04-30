@@ -16,7 +16,7 @@ void AntiGravitySpell::update(const sf::Time& frameTime) {
 	sf::Vector2f nextPosition;
 	calculatePositionAccordingToMob(nextPosition);
 	setPosition(nextPosition);
-	if (m_isDrawBoundingBox) {
+	if (m_isDebugRendering) {
 		m_debugBox.setPosition(getPosition());
 	}
 

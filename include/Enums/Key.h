@@ -26,5 +26,6 @@ enum class Key {
 	QuickSlot2,
 	ToggleTooltips,
 	Screenshot,
+	Debug,
 	MAX
 };
