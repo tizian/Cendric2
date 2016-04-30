@@ -8,6 +8,10 @@ const std::set<Key> KeyBindingsScreen::UNMODIFIABLE_KEYS = {
 	Key::Confirm
 };
 
+const std::set<Key> KeyBindingsScreen::INVISIBLE_KEYS = {
+	Key::Debug
+};
+
 const std::set<sf::Keyboard::Key> KeyBindingsScreen::RESERVED_KEYS = {
 	sf::Keyboard::Escape,
 	sf::Keyboard::Numpad1,
@@ -128,6 +132,7 @@ void KeyBindingsScreen::reload() {
 
 	// keyboard mappings
 	for (auto& it : m_selectedKeys) {
+		if (INVISIBLE_KEYS.find(it.first) != INVISIBLE_KEYS.end()) continue;
 		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
 		keyText->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		keyText->setPosition(sf::Vector2f(distFromLeft, distFromTop + 10.f));

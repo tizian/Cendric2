@@ -36,6 +36,7 @@ private:
 
 	static const std::set<sf::Keyboard::Key> RESERVED_KEYS;
 	static const std::set<Key> UNMODIFIABLE_KEYS;
+	static const std::set<Key> INVISIBLE_KEYS;
 
 	// agents for the buttons
 	void onBack();
