@@ -389,7 +389,6 @@
  </objectgroup>
  <objectgroup name="enemy">
   <object id="88" gid="562" x="309" y="747" width="50" height="50"/>
-  <object id="94" gid="571" x="590" y="685" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="light" visible="0">
   <object id="89" x="294" y="386" width="210" height="266">
