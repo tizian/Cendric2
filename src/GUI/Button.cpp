@@ -31,6 +31,7 @@ void Button::onLeftClick() {
 		m_mainLayer.move(0, 1);
 		m_ornamentLayer.move(0, 1);
 		m_text.move(0, 1);
+		m_textureLayer.move(0, 1);
 		m_mainLayer.setColor(m_mainLayerColor);
 		g_inputController->lockAction();
 	}
@@ -44,6 +45,7 @@ void Button::onLeftJustPressed() {
 		m_mainLayer.move(0, 1);
 		m_ornamentLayer.move(0, 1);
 		m_text.move(0, 1);
+		m_textureLayer.move(0, 1);
 		m_mainLayer.setColor(m_mainLayerColor);
 		g_inputController->lockAction();
 	}
@@ -62,6 +64,7 @@ void Button::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_mainLayer);
 	renderTarget.draw(m_ornamentLayer);
 	renderTarget.draw(m_text);
+	if (m_hasTexture) renderTarget.draw(m_textureLayer);
 }
 
 void Button::setPosition(const sf::Vector2f& pos) {
@@ -70,6 +73,7 @@ void Button::setPosition(const sf::Vector2f& pos) {
 	m_backLayer.setPosition(pos + m_backLayerOffset);
 	m_ornamentLayer.setPosition(pos);
 	m_text.setPosition(pos + m_textOffset);
+	m_textureLayer.setPosition(pos + m_textureOffset);
 	m_positionDefault = pos;
 }
 
@@ -133,6 +137,26 @@ void Button::setTextRaw(const std::string& text) {
 	setTextRaw(text, COLOR_WHITE, 16);
 }
 
+void Button::setTexture(const sf::Texture* texture) {
+	if (texture == nullptr) {
+		m_hasTexture = false;
+		return;
+	}
+	m_hasTexture = true;
+	
+	sf::Vector2f textureSize(static_cast<float>(texture->getSize().x), static_cast<float>(texture->getSize().y));
+	sf::Vector2f pos = getPosition();
+	sf::Vector2f size = getSize();
+
+	m_textureLayer.setTexture(*texture);
+	m_textureOffset = 0.5f * (size - textureSize);
+	m_textureLayer.setPosition(pos + m_textureOffset);
+}
+
+void Button::setTextureColor(const sf::Color& color) {
+	m_textureLayer.setColor(color);
+}
+
 void Button::setCharacterSize(int size) {
 	m_text.setCharacterSize(size);
 	float xOffset = std::max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
@@ -187,6 +211,7 @@ void Button::setOrnamentLayerTexture(sf::Texture* texture) {
 void Button::setEnabled(bool enabled) {
 	m_isEnabled = enabled;
 	m_text.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
+	m_textureLayer.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
 }
 
 void Button::setVisible(bool value) {
