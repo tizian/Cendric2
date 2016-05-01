@@ -234,6 +234,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);
 	renderObjects(GameObjectType::_Overlay, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_Overlay, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_MovableTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);

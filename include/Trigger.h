@@ -14,6 +14,7 @@ public:
 	~Trigger() {};
 
 	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& renderTarget) override;
 	bool isTriggerable() const;
 	TriggerData& getData();
 
@@ -25,4 +26,9 @@ private:
 	bool m_isOnTrigger = true;
 	
 	TriggerData m_data;
+
+	// Arrow information
+	bool m_showSprite = false;
+	sf::Sprite m_sprite;
+	sf::Time m_time;
 };

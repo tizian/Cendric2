@@ -90,6 +90,7 @@ enum class ResourceID {
 	Texture_GUI_arrow,
 	Texture_GUI_arrow_left,
 	Texture_GUI_arrow_right,
+	Texture_GUI_exit_arrow,
 	Texture_GUI_checkbox,
 	Texture_GUI_slider,
 	Texture_GUI_knob,

@@ -119,6 +119,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_arrow, "res/assets/gui/arrow.png" },
 		{ ResourceID::Texture_GUI_arrow_left, "res/assets/gui/arrow_left.png" },
 		{ ResourceID::Texture_GUI_arrow_right, "res/assets/gui/arrow_right.png" },
+		{ ResourceID::Texture_GUI_exit_arrow, "res/assets/gui/exit_arrow.png" },
 		{ ResourceID::Texture_GUI_checkbox, "res/assets/gui/checkbox.png" },
 		{ ResourceID::Texture_GUI_slider, "res/assets/gui/slider.png" },
 		{ ResourceID::Texture_GUI_knob, "res/assets/gui/knob.png" },
