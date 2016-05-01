@@ -9,7 +9,7 @@ Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 		m_isOnTrigger = false;
 		const sf::Texture* texture = g_resourceManager->getTexture(ResourceID::Texture_GUI_exit_arrow);
 		m_sprite.setTexture(*texture);
-		m_sprite.setPosition(data.triggerRect.left + 0.5f * (data.triggerRect.width - texture->getSize().x), data.triggerRect.top + data.triggerRect.height - 2.f * m_mainChar->getSize().y);
+		m_sprite.setPosition(data.triggerRect.left + 0.5f * (data.triggerRect.width - texture->getSize().x), 0.f);
 	}
 
 	setBoundingBox(data.triggerRect);
@@ -25,7 +25,7 @@ void Trigger::update(const sf::Time& frameTime) {
 		float variance = 6.f;
 		float speed = 3.f;
 		float offset = variance * std::cos(speed * m_time.asSeconds());
-		float y = m_data.triggerRect.top + m_data.triggerRect.height - 2.f * m_mainChar->getSize().y - 0.5f * variance + offset;
+		float y = m_data.triggerRect.top + m_data.triggerRect.height - 2.5f * m_mainChar->getSize().y - 0.5f * variance + offset;
 		m_sprite.setPosition(pos.x, y);
 	}
 
