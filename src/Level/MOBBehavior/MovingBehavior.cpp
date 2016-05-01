@@ -8,9 +8,9 @@ MovingBehavior::MovingBehavior(LevelMovableGameObject* mob) {
 }
 
 void MovingBehavior::update(const sf::Time& frameTime) {
-	
 	if (!m_isCollisionTilt) {
-		handleMovementInput();
+		if (!m_isBlockingSpell || m_fightAnimationTime == sf::Time::Zero)
+			handleMovementInput();
 
 		sf::Vector2f nextPosition;
 		m_mob->calculateNextPosition(frameTime, nextPosition);
@@ -49,7 +49,8 @@ void MovingBehavior::calculateUnboundedVelocity(const sf::Time& frameTime, sf::V
 	nextVel.y = m_mob->getVelocity().y + m_mob->getAcceleration().y * frameTime.asSeconds();
 }
 
-void MovingBehavior::setFightAnimation(GameObjectState animation) {
+void MovingBehavior::setFightAnimation(GameObjectState animation, bool isBlocking) {
+	m_isBlockingSpell = isBlocking;
 	m_fightAnimationTime = m_configuredFightAnimationTime;
 	m_fightAnimationState = animation;
 }
@@ -100,8 +101,8 @@ bool MovingBehavior::isIgnoreDynamicTiles() const {
 	return m_ignoreDynamicTiles;
 }
 
-void MovingBehavior::setFightAnimationTime(const sf::Time& fightAnimationTIme) {
-	m_configuredFightAnimationTime = fightAnimationTIme;
+void MovingBehavior::setFightAnimationTime(const sf::Time& fightAnimationTime) {
+	m_configuredFightAnimationTime = fightAnimationTime;
 }
 
 void MovingBehavior::setDampingGroundPerS(float damping) {

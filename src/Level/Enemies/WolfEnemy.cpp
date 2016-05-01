@@ -43,6 +43,7 @@ void WolfEnemy::loadSpells() {
 	howlSpell.damage = 10;
 	howlSpell.cooldown = sf::milliseconds(10000);
 	howlSpell.fightAnimation = GameObjectState::Fighting2;
+	howlSpell.isBlocking = true;
 
 	m_spellManager->addSpell(howlSpell);
 
