@@ -4,7 +4,7 @@
 AntiGravitySpellCreator::AntiGravitySpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
-void AntiGravitySpellCreator::executeSpell(const sf::Vector2f& target) {
+void AntiGravitySpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	removeOldSpell();
 	SpellData spellData= m_spellData;
 	AntiGravitySpell* newSpell = new AntiGravitySpell();

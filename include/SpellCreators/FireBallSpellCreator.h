@@ -10,5 +10,5 @@ class FireBallSpellCreator : public SpellCreator {
 public:
 	FireBallSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
-	void executeSpell(const sf::Vector2f& target) override;
+	void execExecuteSpell(const sf::Vector2f& target) override;
 };

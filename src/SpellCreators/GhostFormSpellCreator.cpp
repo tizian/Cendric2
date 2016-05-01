@@ -13,7 +13,7 @@ std::string GhostFormSpellCreator::getStrengthModifierName() const {
 	return "GhostDamage";
 }
 
-void GhostFormSpellCreator::executeSpell(const sf::Vector2f &target) {
+void GhostFormSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	AttributeData additionalDamage = ZERO_ATTRIBUTES;
 	additionalDamage.damagePhysical = m_additionalChopDamage;

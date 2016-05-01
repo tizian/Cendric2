@@ -49,8 +49,9 @@ void MovingBehavior::calculateUnboundedVelocity(const sf::Time& frameTime, sf::V
 	nextVel.y = m_mob->getVelocity().y + m_mob->getAcceleration().y * frameTime.asSeconds();
 }
 
-void MovingBehavior::setFightAnimation() {
+void MovingBehavior::setFightAnimation(GameObjectState animation) {
 	m_fightAnimationTime = m_configuredFightAnimationTime;
+	m_fightAnimationState = animation;
 }
 
 void MovingBehavior::flipGravity() {

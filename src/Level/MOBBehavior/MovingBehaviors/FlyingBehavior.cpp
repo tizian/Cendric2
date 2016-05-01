@@ -108,7 +108,7 @@ void FlyingBehavior::updateAnimation() {
 		newState = GameObjectState::Dead;
 	}
 	else if (m_fightAnimationTime > sf::Time::Zero) {
-		newState = GameObjectState::Fighting;
+		newState = m_fightAnimationState;
 	}
 	else if (std::abs(m_enemy->getVelocity().x) > 20.f || std::abs(m_enemy->getVelocity().y) > 20.f) {
 		newState = GameObjectState::Flying;

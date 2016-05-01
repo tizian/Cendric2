@@ -22,6 +22,7 @@
 #include "SpellCreators/HolyFireSpellCreator.h"
 #include "SpellCreators/SummonGargoyleSpellCreator.h"
 #include "SpellCreators/ProjectileSpellCreator.h"
+#include "SpellCreators/BuffSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	std::vector<SpellModifierType> types;
@@ -195,6 +196,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::Projectile:
 		creator = new ProjectileSpellCreator(data, owner);
 		break;
+	case SpellID::Buff:
+		creator = new BuffSpellCreator(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -250,6 +254,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getSummonGargoyleSpellData();
 	case SpellID::Projectile:
 		return getProjectileSpellData();
+	case SpellID::Buff:
+		return getBuffSpellData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -355,12 +361,28 @@ SpellData SpellData::getDivineShieldSpellData() {
 	divineShield.activeDuration = divineShield.duration;
 	divineShield.heal = 20;
 	divineShield.attachedToMob = true;
+	divineShield.fightAnimation = GameObjectState::VOID;
 
 	divineShield.durationModifierAddition = sf::seconds(2);
 
 	return divineShield;
 }
 
+SpellData SpellData::getBuffSpellData() {
+	SpellData buffSpell = EMPTY_SPELL;
+	buffSpell.id = SpellID::Buff;
+	buffSpell.spellType = SpellType::VOID;
+
+	buffSpell.cooldown = sf::milliseconds(10000);
+	buffSpell.boundingBox = sf::FloatRect(0, 0, 200, 200);
+	buffSpell.duration = sf::seconds(5.f);
+	buffSpell.activeDuration = sf::seconds(1.f);
+	buffSpell.damage = 20;
+	buffSpell.attachedToMob = true;
+	buffSpell.fightAnimation = GameObjectState::VOID;
+
+	return buffSpell;
+}
 
 SpellData SpellData::getAureolaSpellData() {
 	SpellData aureola = EMPTY_SPELL;
@@ -427,6 +449,7 @@ SpellData SpellData::getAntiGravitySpellData() {
 	antiGravity.duration = sf::seconds(5);
 	antiGravity.activeDuration = antiGravity.duration;
 	antiGravity.attachedToMob = true;
+	antiGravity.fightAnimation = GameObjectState::VOID;
 
 	antiGravity.durationModifierAddition = sf::seconds(3);
 
@@ -538,6 +561,7 @@ SpellData SpellData::getFlashSpellData() {
 	flash.damage = 20;
 	flash.range = 150.f;
 	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
+	flash.fightAnimation = GameObjectState::VOID;
 
 	flash.damageModifierAddition = 20;
 	flash.rangeModifierAddition = 100.f;
@@ -557,6 +581,7 @@ SpellData SpellData::getLightSpellData() {
 	light.activeDuration = light.duration;
 	light.range = 300.f;
 	light.attachedToMob = true;
+	light.fightAnimation = GameObjectState::VOID;
 
 	light.durationModifierAddition = sf::seconds(60);
 	light.rangeModifierAddition = 200.f;
@@ -578,6 +603,7 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.duration = sf::seconds(2);
 	holyFire.activeDuration = sf::seconds(3);
 	holyFire.attachedToMob = true;
+	holyFire.fightAnimation = GameObjectState::VOID;
 
 	holyFire.damageModifierAddition = 10;
 	holyFire.durationModifierAddition = sf::seconds(1);
@@ -597,6 +623,7 @@ SpellData SpellData::getLeapOfFaithSpellData() {
 	leapOfFaith.duration = sf::seconds(10);
 	leapOfFaith.activeDuration = leapOfFaith.duration;
 	leapOfFaith.attachedToMob = true;
+	leapOfFaith.fightAnimation = GameObjectState::VOID;
 
 	leapOfFaith.durationModifierAddition = sf::seconds(10);
 
@@ -631,6 +658,7 @@ SpellData SpellData::getInvisibilitySpellData() {
 	invisibility.activeDuration = sf::seconds(5);
 	invisibility.duration = invisibility.activeDuration;
 	invisibility.attachedToMob = true;
+	invisibility.fightAnimation = GameObjectState::VOID;
 
 	invisibility.durationModifierAddition = sf::seconds(5);
 
@@ -649,6 +677,7 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.duration = ghostForm.activeDuration;
 	ghostForm.speed = 50.f;
 	ghostForm.attachedToMob = true;
+	ghostForm.fightAnimation = GameObjectState::VOID;
 
 	ghostForm.durationModifierAddition = sf::seconds(5);
 	ghostForm.speedModifierAddition = 50.f;
@@ -671,6 +700,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.duration = sf::seconds(3);
 	shadowTrap.isStunning = true;
 	shadowTrap.strength = 1;
+	shadowTrap.fightAnimation = GameObjectState::VOID;
 
 	shadowTrap.damageModifierAddition = 5;
 	shadowTrap.durationModifierAddition = sf::seconds(1);
@@ -689,6 +719,7 @@ SpellData SpellData::getSummonGargoyleSpellData() {
 	summonGargoyle.damage = 0;
 	summonGargoyle.duration = sf::seconds(20);
 	summonGargoyle.strength = 1;
+	summonGargoyle.fightAnimation = GameObjectState::VOID;
 
 	summonGargoyle.damageModifierAddition = 10;
 	summonGargoyle.durationModifierAddition = sf::seconds(20);

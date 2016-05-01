@@ -8,7 +8,7 @@ std::string FearSpellCreator::getStrengthModifierName() const {
 	return "FearLevel";
 }
 
-void FearSpellCreator::executeSpell(const sf::Vector2f &target) {
+void FearSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData= m_spellData;
 	updateDamageAndHeal(spellData);
 	int div = 0;
@@ -23,8 +23,6 @@ void FearSpellCreator::executeSpell(const sf::Vector2f &target) {
 			div += 1;
 		}
 	}
-
-	m_owner->setFightAnimationTime();
 }
 
 void FearSpellCreator::addDurationModifier(int level) {

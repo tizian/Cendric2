@@ -4,7 +4,7 @@
 FlashSpellCreator::FlashSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
-void FlashSpellCreator::executeSpell(const sf::Vector2f& target) {
+void FlashSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	

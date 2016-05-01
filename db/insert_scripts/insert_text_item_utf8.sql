@@ -1,4 +1,4 @@
-﻿INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_purpleback', 'item', 'Purple cape','Violetter Umhang','Violette Umhang');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_purpleback', 'item', 'Purple cape','Violetter Umhang','Violette Umhang');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubyring', 'item', 'Ruby Ring','Rubinring','Rubinring');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_ironring', 'item', 'Iron Ring','Eisener Ring','Isering');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatblue', 'item', 'Blue wizardhat','Blauer Spitzhut','Blaue Magierhuet');

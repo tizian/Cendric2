@@ -12,13 +12,12 @@ std::string WindGustSpellCreator::getStrengthModifierName() const {
 	return "WindForce";
 }
 
-void WindGustSpellCreator::executeSpell(const sf::Vector2f &target) {
+void WindGustSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	WindGustSpell* newSpell = new WindGustSpell(m_strength);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
-	m_owner->setFightAnimationTime();
 }
 
 void WindGustSpellCreator::addRangeModifier(int level) {

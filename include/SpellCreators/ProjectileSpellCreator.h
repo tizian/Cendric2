@@ -10,5 +10,5 @@ class ProjectileSpellCreator : public SpellCreator {
 public:
 	ProjectileSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
-	void executeSpell(const sf::Vector2f& target) override;
+	void execExecuteSpell(const sf::Vector2f& target) override;
 };

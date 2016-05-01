@@ -44,7 +44,7 @@ public:
 	void setDampingGroundPerS(float damping);
 	void setDampingAirPerS(float damping);
 	void setFightAnimationTime(const sf::Time& fightAnimationTIme);
-	void setFightAnimation();
+	void setFightAnimation(GameObjectState animation);
 	float getGravity() const;
 	bool isGrounded() const;
 	bool isFacingRight() const;
@@ -82,5 +82,6 @@ protected:
 
 	// as long as this time is not sf::Time::Zero, the mob will have the fighting animation. 
 	sf::Time m_fightAnimationTime = sf::Time::Zero;
+	GameObjectState m_fightAnimationState = GameObjectState::Fighting;
 	sf::Time m_configuredFightAnimationTime = sf::Time::Zero;
 };

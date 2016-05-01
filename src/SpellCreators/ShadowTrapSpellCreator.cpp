@@ -8,7 +8,7 @@ std::string ShadowTrapSpellCreator::getStrengthModifierName() const {
 	return "StunLevel";
 }
 
-void ShadowTrapSpellCreator::executeSpell(const sf::Vector2f &target) {
+void ShadowTrapSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 

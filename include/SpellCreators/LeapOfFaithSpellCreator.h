@@ -9,7 +9,7 @@
 class LeapOfFaithSpellCreator : public SpellCreator {
 public:
 	LeapOfFaithSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
-	void executeSpell(const sf::Vector2f& target) override;
+	void execExecuteSpell(const sf::Vector2f& target) override;
 	std::string getStrengthModifierName() const override;
 	int getStrengthModifierValue() const override;
 

@@ -4,15 +4,13 @@
 RaiseTheDeadSpellCreator::RaiseTheDeadSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
-void RaiseTheDeadSpellCreator::executeSpell(const sf::Vector2f& target) {
+void RaiseTheDeadSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 
 	RaiseTheDeadSpell* newSpell = new RaiseTheDeadSpell(m_strength);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
-
-	m_owner->setFightAnimationTime();
 }
 
 int RaiseTheDeadSpellCreator::getStrengthModifierValue() const {

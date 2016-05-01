@@ -13,7 +13,7 @@ public:
 	std::string getStrengthModifierName() const override;
 	int getStrengthModifierValue() const override;
 
-	void executeSpell(const sf::Vector2f& target) override;
+	void execExecuteSpell(const sf::Vector2f& target) override;
 
 protected:
 	void addStrengthModifier(int level) override;

@@ -17,8 +17,10 @@ public:
 
 	void addModifiers(const std::vector<SpellModifier>& modifiers);
 
+	// executes the spell and sets the fight animation.
+	void executeSpell(const sf::Vector2f& target);
 	// calculates spells using the owners attributes & the target, and executes their behaviour, adding objects to the screen.
-	virtual void executeSpell(const sf::Vector2f& target) = 0;
+	virtual void execExecuteSpell(const sf::Vector2f& target) = 0;
 	const SpellData& getSpellData() const;
 	void setSpellAllied(bool allied);
 

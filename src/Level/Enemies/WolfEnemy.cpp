@@ -35,9 +35,16 @@ void WolfEnemy::loadSpells() {
 	chopSpell.damagePerSecond = 10;
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 100);
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 60, 100);
 
 	m_spellManager->addSpell(chopSpell);
+
+	SpellData howlSpell = SpellData::getSpellData(SpellID::Buff);
+	howlSpell.damage = 10;
+	howlSpell.cooldown = sf::milliseconds(10000);
+	howlSpell.fightAnimation = GameObjectState::Fighting2;
+
+	m_spellManager->addSpell(howlSpell);
 
 	m_spellManager->setCurrentSpell(0); // chop
 }
@@ -47,9 +54,13 @@ sf::Vector2f WolfEnemy::getConfiguredSpellOffset() const {
 }
 
 void WolfEnemy::handleAttackInput() {
-	if (m_enemyAttackingBehavior->distToTarget() < 180.f) {
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	if (getCurrentTarget() == nullptr) return;
+	if (m_enemyAttackingBehavior->distToTarget() < 140.f) {
+		m_spellManager->setCurrentSpell(0);
+	} else {
+		m_spellManager->setCurrentSpell(1);
 	}
+	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
 
 void WolfEnemy::loadAnimation() {

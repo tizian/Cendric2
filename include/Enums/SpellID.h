@@ -36,5 +36,8 @@ enum class SpellID {
 	LeapOfFaith,
 	Aureola,
 
+	// Other
+	Buff,
+
 	MAX
 };

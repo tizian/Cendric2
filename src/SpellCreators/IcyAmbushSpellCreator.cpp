@@ -12,15 +12,13 @@ std::string IcyAmbushSpellCreator::getStrengthModifierName() const {
 	return "StunLevel";
 }
 
-void IcyAmbushSpellCreator::executeSpell(const sf::Vector2f& target) {
+void IcyAmbushSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 
 	IcyAmbushSpell* newSpell = new IcyAmbushSpell(m_strength);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
-
-	m_owner->setFightAnimationTime();
 }
 
 void IcyAmbushSpellCreator::addStrengthModifier(int level) {

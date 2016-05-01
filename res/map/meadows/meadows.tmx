@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="173">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="175">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/map/meadows/meadows.ogg"/>
@@ -1287,14 +1287,14 @@
   </object>
  </objectgroup>
  <objectgroup name="sign">
-  <object id="135" gid="1350" x="450.455" y="1647.18" width="50" height="50">
+  <object id="136" gid="1370" x="451.909" y="1657" width="50" height="50">
    <properties>
-    <property name="text" value="MeadowsTest1"/>
+    <property name="text" value="Inn"/>
    </properties>
   </object>
-  <object id="136" gid="1370" x="451.909" y="1667" width="50" height="50">
+  <object id="174" gid="1410" x="452" y="1686" width="50" height="50">
    <properties>
-    <property name="text" value="MeadowsTest2"/>
+    <property name="text" value="Gandria"/>
    </properties>
   </object>
  </objectgroup>

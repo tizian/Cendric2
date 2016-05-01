@@ -16,6 +16,12 @@ SpellCreator::SpellCreator(const SpellData& spellData, LevelMovableGameObject* o
 SpellCreator::~SpellCreator() {
 }
 
+void SpellCreator::executeSpell(const sf::Vector2f& target) {
+	execExecuteSpell(target);
+	if (m_spellData.fightAnimation != GameObjectState::VOID)
+		m_owner->setFightAnimation(m_spellData.fightAnimation);
+}
+
 void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {
 	for (auto& it : modifiers) {
 		if (it.type == SpellModifierType::VOID) continue;

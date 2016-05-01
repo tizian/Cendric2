@@ -55,7 +55,7 @@ void UserMovingBehavior::updateAnimation() {
 		newState = GameObjectState::Dead;
 	}
 	else if (m_fightAnimationTime > sf::Time::Zero) {
-		newState = GameObjectState::Fighting;
+		newState = m_fightAnimationState;
 	}
 	else if (!m_isGrounded) {
 		newState = GameObjectState::Jumping;

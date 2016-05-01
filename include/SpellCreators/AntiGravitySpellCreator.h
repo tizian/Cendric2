@@ -10,7 +10,7 @@ class AntiGravitySpellCreator : public SpellCreator {
 public:
 	AntiGravitySpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 
-	void executeSpell(const sf::Vector2f& target) override;
+	void execExecuteSpell(const sf::Vector2f& target) override;
 private:
 	void addDurationModifier(int level) override;
 	void removeOldSpell();

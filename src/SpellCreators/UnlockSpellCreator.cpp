@@ -12,14 +12,12 @@ std::string UnlockSpellCreator::getStrengthModifierName() const {
 	return "LockpickLevel";
 }
 
-void UnlockSpellCreator::executeSpell(const sf::Vector2f& target) {
+void UnlockSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 
 	UnlockSpell* newSpell = new UnlockSpell(m_strength);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
-
-	m_owner->setFightAnimationTime();
 }
 
 void UnlockSpellCreator::addStrengthModifier(int level) {

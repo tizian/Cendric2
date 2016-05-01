@@ -4,7 +4,7 @@
 IceBallSpellCreator::IceBallSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
-void IceBallSpellCreator::executeSpell(const sf::Vector2f &target) {
+void IceBallSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	int div = 0;
@@ -19,6 +19,4 @@ void IceBallSpellCreator::executeSpell(const sf::Vector2f &target) {
 			div += 1;
 		}
 	}
-
-	m_owner->setFightAnimationTime();
 }

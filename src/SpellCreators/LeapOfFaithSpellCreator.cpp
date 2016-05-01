@@ -4,7 +4,7 @@
 LeapOfFaithSpellCreator::LeapOfFaithSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
-void LeapOfFaithSpellCreator::executeSpell(const sf::Vector2f& target) {
+void LeapOfFaithSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	removeOldSpell();
 	SpellData spellData = m_spellData;
 	float gravityScale = 1.f / (1.f + 0.5f * m_strength);

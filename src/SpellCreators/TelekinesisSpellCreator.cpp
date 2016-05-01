@@ -4,7 +4,7 @@
 TelekinesisSpellCreator::TelekinesisSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
-void TelekinesisSpellCreator::executeSpell(const sf::Vector2f& target) {
+void TelekinesisSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 
@@ -12,8 +12,6 @@ void TelekinesisSpellCreator::executeSpell(const sf::Vector2f& target) {
 	newSpell->load(spellData, m_owner, target);
 	newSpell->setItemVector(m_screen->getObjects(GameObjectType::_LevelItem));
 	m_screen->addObject(newSpell);
-
-	m_owner->setFightAnimationTime();
 }
 
 void TelekinesisSpellCreator::addRangeModifier(int level) {

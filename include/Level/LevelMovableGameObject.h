@@ -30,8 +30,8 @@ public:
 	void addHeal(int heal);
 	// sets the dead bool and sets the attribute health to zero.
 	virtual void setDead();
-	// sets the fight animation time of this mob
-	void setFightAnimationTime();
+	// sets the fight animation time of this mob using the given animation
+	void setFightAnimation(GameObjectState fightAnimation);
 	// the mob consumes a food and gets its bonus attributes for its duration. they may also be negative.
 	void consumeFood(const sf::Time& duration, const AttributeData& attributes);
 	// the mob adds these attributes to its own. if their time runs out, they get removed again. The attribute "current health" however will stay.

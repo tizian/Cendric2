@@ -8,7 +8,7 @@ std::string AureolaSpellCreator::getStrengthModifierName() const {
 	return "StunLevel";
 }
 
-void AureolaSpellCreator::executeSpell(const sf::Vector2f &target) {
+void AureolaSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	for (int i = 0; i < m_spellData.count; i++) {
@@ -17,8 +17,6 @@ void AureolaSpellCreator::executeSpell(const sf::Vector2f &target) {
 		newSpell->load(spellData, m_owner, target);
 		m_screen->addObject(newSpell);
 	}
-
-	m_owner->setFightAnimationTime();
 }
 
 void AureolaSpellCreator::addCountModifier(int level) {

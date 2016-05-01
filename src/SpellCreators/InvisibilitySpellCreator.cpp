@@ -13,7 +13,7 @@ std::string InvisibilitySpellCreator::getStrengthModifierName() const {
 	return "InvisibilityLevel";
 }
 
-void InvisibilitySpellCreator::executeSpell(const sf::Vector2f &target) {
+void InvisibilitySpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	InvisibilitySpell* newSpell = new InvisibilitySpell();
 	newSpell->load(spellData, m_owner, target);

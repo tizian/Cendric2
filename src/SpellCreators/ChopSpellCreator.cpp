@@ -5,11 +5,10 @@ ChopSpellCreator::ChopSpellCreator(const SpellData &spellData, LevelMovableGameO
 	// no modifiers allowed on this one.
 }
 
-void ChopSpellCreator::executeSpell(const sf::Vector2f &target) {
+void ChopSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	ChopSpell* newSpell = new ChopSpell();
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
-	m_owner->setFightAnimationTime();
 }

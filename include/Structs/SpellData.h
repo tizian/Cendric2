@@ -7,6 +7,7 @@
 #include "Enums/SpellType.h"
 #include "Enums/DamageType.h"
 #include "Enums/Key.h"
+#include "Enums/GameObjectState.h"
 #include "Structs/SpellModifier.h"
 
 class SpellCreator;
@@ -20,6 +21,7 @@ struct SpellData {
 	sf::Time cooldown;
 	sf::FloatRect boundingBox;
 	DamageType damageType;
+	GameObjectState fightAnimation;
 	bool needsTarget;
 	bool attachedToMob;
 	bool isDynamicTileEffect;
@@ -58,6 +60,7 @@ struct SpellData {
 private:
 	static SpellData getChopSpellData();
 	static SpellData getProjectileSpellData();
+	static SpellData getBuffSpellData();
 
 	static SpellData getFireBallSpellData();
 	static SpellData getIceBallSpellData();
@@ -92,6 +95,7 @@ const struct SpellData EMPTY_SPELL =
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),
 	DamageType::VOID,
+	GameObjectState::Fighting,
 	false,
 	false,
 	false,
