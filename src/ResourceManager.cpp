@@ -117,6 +117,8 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_ornament_large, "res/assets/gui/ornament_large.png" },
 		{ ResourceID::Texture_GUI_window_close_button , "res/assets/gui/window_close_button.png" },
 		{ ResourceID::Texture_GUI_arrow, "res/assets/gui/arrow.png" },
+		{ ResourceID::Texture_GUI_arrow_left, "res/assets/gui/arrow_left.png" },
+		{ ResourceID::Texture_GUI_arrow_right, "res/assets/gui/arrow_right.png" },
 		{ ResourceID::Texture_GUI_checkbox, "res/assets/gui/checkbox.png" },
 		{ ResourceID::Texture_GUI_slider, "res/assets/gui/slider.png" },
 		{ ResourceID::Texture_GUI_knob, "res/assets/gui/knob.png" },
