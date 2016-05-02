@@ -16,6 +16,7 @@
 #include "LightObject.h"
 
 class LevelMovableGameObject;
+class LevelDynamicTile;
 
 // A spell cendric can cast
 class Spell : public virtual MovableGameObject {
@@ -24,6 +25,9 @@ public:
 	virtual ~Spell() {}
 
 	virtual void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target);
+	// there are spells that need a mob and can't use a tile as owner. If the spell is attached to a mob, this 
+	// method throws an exception.
+	virtual void load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector2f& target);
 	virtual void update(const sf::Time& frameTime) override;
 	virtual void setViewable(bool value) override;
 

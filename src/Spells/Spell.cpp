@@ -42,6 +42,42 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 	setVelocity(m_data.speed * direction);
 }
 
+void Spell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector2f& target) {
+	// very similar to Spell::load with a mob, but its using a LevelDynamicTile instead
+	if (data.attachedToMob) {
+		g_logger->logError("Spell", "Cannot load a spell that needs a mob with a tile as owner!");
+		throw;
+	}
+
+	m_data = data;
+	setBoundingBox(data.boundingBox);
+	setDebugBoundingBox(COLOR_BAD);
+
+	m_level = tile->getLevel();
+	m_mob = nullptr;
+	m_screen = tile->getScreen();
+	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
+
+	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
+
+	sf::Vector2f absolutePosition = tile->getCenter();
+	setPosition(absolutePosition);
+
+	sf::Vector2f trueDir = target - absolutePosition;
+	// normalize dir
+	float len = sqrt(trueDir.x * trueDir.x + trueDir.y * trueDir.y);
+	trueDir.x = (len == 0) ? 0 : trueDir.x / len;
+	trueDir.y = (len == 0) ? 0 : trueDir.y / len;
+
+	sf::Vector2f direction = rotateVector(trueDir, data.divergenceAngle);
+
+	if (getConfiguredRotateSprite()) {
+		setSpriteRotation(atan2(direction.y, direction.x));
+	}
+
+	setVelocity(m_data.speed * direction);
+}
+
 void Spell::execOnHit(LevelMovableGameObject* target) {
 	setDisposed();
 	
