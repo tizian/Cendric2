@@ -56,7 +56,6 @@ void InputController::update() {
 		m_renderTexture->getDefaultView().getCenter().y - m_renderTexture->getView().getSize().y / 2);
 	m_mousePosition = pos + view;
 	m_defaultViewMousePosition = pos + defaultview;
-	sf::FloatRect defaultViewRect(defaultview.x, defaultview.y, m_renderTexture->getView().getSize().x, m_renderTexture->getView().getSize().y);
 	m_isInputActive = m_isWindowFocused && pos.y >= 0.f;
 }
 
