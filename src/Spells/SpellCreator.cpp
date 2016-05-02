@@ -19,7 +19,7 @@ SpellCreator::~SpellCreator() {
 void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	execExecuteSpell(target);
 	if (m_spellData.fightAnimation != GameObjectState::VOID)
-		m_owner->setFightAnimation(m_spellData.fightAnimation);
+		m_owner->setFightAnimation(m_spellData.fightAnimation, m_spellData.isBlocking);
 }
 
 void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {

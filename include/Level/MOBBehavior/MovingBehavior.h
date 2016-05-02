@@ -43,8 +43,8 @@ public:
 	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
 	void setDampingGroundPerS(float damping);
 	void setDampingAirPerS(float damping);
-	void setFightAnimationTime(const sf::Time& fightAnimationTIme);
-	void setFightAnimation(GameObjectState animation);
+	void setFightAnimationTime(const sf::Time& fightAnimationTime);
+	void setFightAnimation(GameObjectState animation, bool isBlocking);
 	float getGravity() const;
 	bool isGrounded() const;
 	bool isFacingRight() const;
@@ -66,6 +66,7 @@ protected:
 	bool m_nextIsFacingRight = true;
 	bool m_isGrounded = false;
 	bool m_isFlippedGravity = false;
+	bool m_isBlockingSpell = false;
 	float m_gravity = 1000.f;
 	float m_walkAcceleration = 1500.f;
 	float m_configuredGravity = 1000.f;

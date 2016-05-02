@@ -27,6 +27,7 @@ struct SpellData {
 	bool isDynamicTileEffect;
 	bool isStunning;
 	bool isFearing;
+	bool isBlocking;
 	bool isAlly; // all spells sent by Cendric and allied mobs are "allied" spells that will hurt non-allied enemies and vice versa.
 	int skinNr; // can be used to change the skin of the spell. Must be implemented by the spell itself.
 
@@ -96,6 +97,7 @@ const struct SpellData EMPTY_SPELL =
 	sf::FloatRect(0, 0, 0, 0),
 	DamageType::VOID,
 	GameObjectState::Fighting,
+	false,
 	false,
 	false,
 	false,
