@@ -22,10 +22,10 @@ void Trigger::update(const sf::Time& frameTime) {
 
 	if (m_data.isKeyGuarded) {
 		sf::Vector2f pos = m_sprite.getPosition();
-		float variance = 6.f;
-		float speed = 3.f;
+		float variance = 4.f;
+		float speed = 6.f;
 		float offset = variance * std::cos(speed * m_time.asSeconds());
-		float y = m_data.triggerRect.top + m_data.triggerRect.height - 2.5f * m_mainChar->getSize().y - 0.5f * variance + offset;
+		float y = m_data.triggerRect.top + m_data.triggerRect.height - 2.f * m_mainChar->getSize().y - 0.5f * variance + offset;
 		m_sprite.setPosition(pos.x, y);
 	}
 
