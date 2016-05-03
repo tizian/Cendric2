@@ -45,7 +45,7 @@ private:
 class SaveGameWindow {
 public:
 	SaveGameWindow();
-	~SaveGameWindow();
+	virtual ~SaveGameWindow();
 
 	void render(sf::RenderTarget& renderTarget);
 	void update(const sf::Time& frameTime);

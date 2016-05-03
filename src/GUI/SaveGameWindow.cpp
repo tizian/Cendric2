@@ -43,7 +43,8 @@ SaveGameWindow::SaveGameWindow() {
 }
 
 SaveGameWindow::~SaveGameWindow() {
-	g_resourceManager->deleteResource(ResourceID::Texture_GUI_arrow);
+	delete m_scrollBar;
+	delete m_scrollHelper;
 }
 
 void SaveGameWindow::reload() {
