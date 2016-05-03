@@ -228,6 +228,8 @@ public:
 			return "Map";
 		case Key::Spellbook:
 			return "Spellbook";
+		case Key::Interact:
+			return "Interact";
 		case Key::Jump:
 			return "Jump";
 		case Key::Left:

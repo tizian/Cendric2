@@ -62,6 +62,7 @@ void KeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 		keyButton->update(frameTime);
 
 		if (keyButton->isClicked()) {
+			reload();
 			keyButton->setText("PressAnyKey");
 			m_selectedKey = it.first;
 		}

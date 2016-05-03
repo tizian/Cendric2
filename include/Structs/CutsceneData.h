@@ -23,5 +23,8 @@ struct CutsceneStep {
 struct CutsceneData {
 	std::string id = "";
 	std::string musicPath = "";
+	std::string levelID = "";
+	std::string mapID = "";
+	sf::Vector2f wordPosition;
 	std::vector<CutsceneStep> steps;
 };

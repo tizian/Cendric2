@@ -10,6 +10,7 @@ enum class Key {
 	CharacterInfo,
 	Journal,
 	Spellbook,
+	Interact,
 	Confirm,
 	Left,
 	Right,

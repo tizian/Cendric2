@@ -145,6 +145,8 @@ void MapMainCharacter::load() {
 
 	addAnimation(GameObjectState::Idle_up, idleAnimationUp);
 
+	setDebugBoundingBox(COLOR_WHITE);
+
 	// initial values
 	m_state = GameObjectState::Idle_down;
 	setCurrentAnimation(getAnimation(m_state), false);
