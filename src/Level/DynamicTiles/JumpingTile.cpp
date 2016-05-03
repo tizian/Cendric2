@@ -16,7 +16,7 @@ void JumpingTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F - 20.f));
 	m_damage.damageType = DamageType::Physical;
 	m_damage.duration = sf::seconds(4.f);
-	m_damage.damage = 40;
+	m_damage.damage = 10;
 	m_isAlwaysUpdate = true;
 }
 
