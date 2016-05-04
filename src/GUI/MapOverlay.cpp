@@ -37,17 +37,20 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 	m_position.x = m_boundingBox.left;
 	m_position.y = m_boundingBox.top;
 
-	m_fogOfWarTileMap.initFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
-
 	m_backgroundTileMap.setScale(sf::Vector2f(m_scale, m_scale));
 	m_lightedForegroundTileMap.setScale(sf::Vector2f(m_scale, m_scale));
 	m_foregroundTileMap.setScale(sf::Vector2f(m_scale, m_scale));
-	m_fogOfWarTileMap.setScale(sf::Vector2f(m_scale, m_scale));
 
 	m_backgroundTileMap.setPosition(m_position);
 	m_lightedForegroundTileMap.setPosition(m_position);
 	m_foregroundTileMap.setPosition(m_position);
-	m_fogOfWarTileMap.setPosition(m_position);
+
+	if (map.getWorldData()->explorable) {
+		m_fogOfWarTileMap.initFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
+		m_fogOfWarTileMap.setScale(sf::Vector2f(m_scale, m_scale));
+		m_fogOfWarTileMap.setPosition(m_position);
+		m_explorable = true;
+	}
 
 	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
@@ -76,8 +79,10 @@ MapOverlay::~MapOverlay() {
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	const Map& map = *m_screen->getWorld();
-	m_fogOfWarTileMap.updateFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
+	if (m_explorable) {
+		const Map& map = *m_screen->getWorld();
+		m_fogOfWarTileMap.updateFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
+	}
 
 	m_border->update(frameTime);
 
@@ -124,7 +129,9 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	target.draw(m_lightedForegroundTileMap);
 	target.draw(m_foregroundTileMap);
 
-	target.draw(m_fogOfWarTileMap);
+	if (m_explorable) {
+		target.draw(m_fogOfWarTileMap);
+	}
 
 	for (auto& wp : m_waypoints) {
 		wp->render(target);

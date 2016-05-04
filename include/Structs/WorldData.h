@@ -27,4 +27,5 @@ struct WorldData {
 	
 	sf::FloatRect mapRect;
 	float dimming = 0.f;
+	bool explorable = false;
 };

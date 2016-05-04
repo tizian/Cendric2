@@ -63,6 +63,7 @@ private:
 	TileMap m_lightedForegroundTileMap;
 	TileMap m_foregroundTileMap;
 	TileMap m_fogOfWarTileMap;
+	bool m_explorable = false;
 
 	sf::Sprite m_mainCharMarker;
 	std::vector<WaypointMarker*> m_waypoints;
