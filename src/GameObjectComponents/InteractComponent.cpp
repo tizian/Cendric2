@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
+#include "GUI/GUIConstants.h"
 
 InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* parent, MainCharacter* mainChar) : 
 	GameObjectComponent(parent), 
@@ -57,11 +58,12 @@ void InteractComponent::setFocused(bool focused) {
 	m_isFocused = focused;
 	if (m_isFocused) {
 		m_tooltipText.setString(m_interactString);
-		m_tooltipText.setColor(COLOR_LIGHT_PURPLE);
+		m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	} else {
 		m_tooltipText.setString(m_tooltipString);
-		m_tooltipText.setColor(COLOR_WHITE);
+		m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
+	setPosition(m_animatedParent->getPosition());
 }
 
 void InteractComponent::renderAfterForeground(sf::RenderTarget& renderTarget) {

@@ -1,4 +1,5 @@
 #include "GameObjectComponents/TooltipComponent.h"
+#include "GUI/GUIConstants.h"
 
 const sf::Time TooltipComponent::TOOLTIP_TIME = sf::seconds(1.f);
 
@@ -9,7 +10,7 @@ TooltipComponent::TooltipComponent(std::string tooltip, AnimatedGameObject* pare
 	m_tooltipText.setString(tooltip);
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setColor(COLOR_WHITE);
-	m_tooltipText.setCharacterSize(8);
+	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 
 	m_tooltipHeight = 10.f;
 }

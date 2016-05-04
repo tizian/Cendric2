@@ -7,6 +7,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
 #include "ObjectFactory.h"
+#include "GameObjectComponents/InteractComponent.h"
 
 using namespace std;
 
@@ -25,6 +26,13 @@ Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level)
 	sf::Texture* cursorTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor);
 	m_targetSprite.setTexture(*cursorTexture);
 	m_targetSprite.setOrigin(sf::Vector2f(0.5f * cursorTexture->getSize().x, 0.5f * cursorTexture->getSize().y));
+
+	m_interactComponent = new InteractComponent("", this, m_mainChar);
+	m_interactComponent->setInteractRange(PICKUP_RANGE);
+	m_interactComponent->setInteractText("ToPickup");
+	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
+	m_interactComponent->setInteractable(false);
+	addComponent(m_interactComponent);
 }
 
 Enemy::~Enemy() {
@@ -296,17 +304,18 @@ void Enemy::onMouseOver() {
 	}
 }
 
+void Enemy::loot() {
+	m_mainChar->lootItems(m_lootableItems);
+	m_mainChar->addGold(m_lootableGold);
+	notifyLooted();
+	setDisposed();
+}
+
 void Enemy::onRightClick() {
 	if (m_isDead && !isAlly()) {
 		// check if the enemy body is in range
-		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-
-		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
-			// loot, create the correct items + gold in the players inventory.
-			m_mainChar->lootItems(m_lootableItems);
-			m_mainChar->addGold(m_lootableGold);
-			notifyLooted();
-			setDisposed();
+		if (dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE) {
+			loot();
 		}
 		else {
 			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
@@ -343,6 +352,7 @@ void Enemy::setDead() {
 
 	if (!m_isPersistent) {
 		notifyKilled();
+		m_interactComponent->setInteractable(true);
 	}
 }
 

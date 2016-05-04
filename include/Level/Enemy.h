@@ -19,6 +19,7 @@ class Spell;
 class EnemyMovingBehavior;
 class EnemyAttackingBehavior;
 class ScriptedBehavior;
+class InteractComponent;
 
 // An enemy in a level
 class Enemy : public virtual LevelMovableGameObject {
@@ -92,6 +93,8 @@ protected:
 	virtual void updateHpBar();
 	// updates the hp bar after loading the behavior
 	void loadBehavior() override;
+	// loot, create the correct items + gold in the players inventory.
+	void loot();
 
 	EnemyID m_id = EnemyID::VOID;
 	int m_objectID = -1;
@@ -125,6 +128,8 @@ protected:
 private:
 	sf::RectangleShape m_hpBar;
 	static const float HP_BAR_HEIGHT;
+
+	InteractComponent* m_interactComponent;
 
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;

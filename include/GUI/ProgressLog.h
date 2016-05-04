@@ -35,7 +35,7 @@ private:
 	void calculatePositions();
 
 	// how long can a single entry live?
-	const sf::Time TIME_TO_LIVE = sf::seconds(4.f);
+	const sf::Time TIME_TO_LIVE = sf::seconds(5.f);
 	// start text offset from the top of the screen
 	const float YOFFSET = 20.f;
 	// text offset from the right of the screen
