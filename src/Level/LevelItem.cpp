@@ -1,7 +1,7 @@
 #include "Level/LevelItem.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
-#include "GameObjectComponents/TooltipComponent.h"
+#include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
 
 LevelItem::LevelItem(LevelScreen* screen) : AnimatedGameObject() {
@@ -39,7 +39,11 @@ void LevelItem::load(const Item& item, const sf::Vector2f& position) {
 		addComponent(new LightComponent(lightData, this));
 	}
 
-	addComponent(new TooltipComponent(g_textProvider->getText(item.getID(), "item"), this));
+	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText(item.getID(), "item"), this, m_mainChar);
+	interactComponent->setInteractRange(PICKUP_RANGE);
+	interactComponent->setInteractText("OnPickup");
+	interactComponent->setOnInteract(std::bind(&LevelItem::pickup, this));
+	addComponent(interactComponent);
 	setDebugBoundingBox(COLOR_GOOD);
 
 	setPosition(position - getSpriteOffset());
@@ -60,8 +64,7 @@ void LevelItem::pickup() {
 void LevelItem::onRightClick() {
 	if (m_mainChar->isDead()) return;
 	// check if item is in range
-	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
+	if (dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE) {
 		pickup();
 	}
 	else {

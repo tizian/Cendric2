@@ -94,5 +94,5 @@ protected:
 private:
 	std::function<void()> m_executeOnClick;
 	// placeholder for agents
-	void nop() const;
+	void nop() const {};
 };

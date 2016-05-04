@@ -8,6 +8,8 @@
 #include "Screens/Screen.h"
 #include "CharacterCore.h"
 
+class InteractComponent;
+
 // Cendric in a level
 class LevelMainCharacter : public virtual LevelMovableGameObject {
 	friend class UserMovingBehavior;
@@ -41,6 +43,9 @@ public:
 	void targetEnemy(Enemy* enemy);
 	Enemy* getCurrentTarget() const;
 
+	// registers an interactive object that's in range
+	void registerInteractiveObject(InteractComponent* component);
+
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
 
@@ -51,6 +56,7 @@ private:
 	void loadAnimation();
 
 	void handleAttackInput();
+	void handleInteraction();
 
 	void loadParticleSystem();
 	void updateParticleSystemPosition();
@@ -63,6 +69,8 @@ private:
 	int m_invisibilityLevel = 0;
 
 	Enemy* m_targetedEnemy = nullptr;
+	std::vector<InteractComponent*> m_interactiveObjects;
+	InteractComponent* m_nearestInteractive = nullptr;
 
 	sf::Sound m_sound;
 	sf::Time m_fadingTime = sf::seconds(2.f);

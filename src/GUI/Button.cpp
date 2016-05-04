@@ -237,7 +237,3 @@ GameObjectType Button::getConfiguredType() const {
 void Button::setOnClick(const std::function<void()>& agent) {
 	m_executeOnClick = agent;
 }
-
-void Button::nop() const {
-	// nop
-}
