@@ -65,7 +65,6 @@ void InputController::setWindow(sf::RenderWindow* window, sf::RenderTexture* tex
 	m_isWindowFocused = m_mainWindow->hasFocus();
 }
 
-
 void InputController::init() {
 	for (int i = static_cast<int>(Key::VOID) + 1; i < static_cast<int>(Key::MAX); ++i) {
 		m_keyActiveMap.insert({ static_cast<Key>(i), false });

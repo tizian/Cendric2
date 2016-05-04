@@ -7,7 +7,7 @@
   <property name="name" value="StoneGarden"/>
   <property name="tilesetpath" value="res/level/stonegarden/tileset_level_stonegarden.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_stonegarden" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="722" columns="19">
+ <tileset firstgid="1" name="tileset_level_stonegarden" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="722">
   <image source="tileset_level_stonegarden.png" width="1000" height="2000"/>
   <tile id="136">
    <animation>
@@ -17,13 +17,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="723" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
+ <tileset firstgid="723" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="923" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10" columns="5">
+ <tileset firstgid="923" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="10">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="104"/>
  </tileset>
- <tileset firstgid="933" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="933" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -394,7 +394,7 @@
   <object id="87" x="1288" y="630" width="76" height="67">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/meadows/meadows.tmx,1950,100"/>
+    <property name="map entry" value="res/map/meadows/meadows.tmx,1960,170"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

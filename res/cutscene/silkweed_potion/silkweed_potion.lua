@@ -1,4 +1,7 @@
 -- lua script for cutscene silkweed_potion
+mapid = "res/map/elderhome/elderhome.tmx"
+worldx = 580
+worldy = 440
 steps = 
 {
 	{

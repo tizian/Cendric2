@@ -14,7 +14,15 @@ void CutsceneScreen::execOnEnter(const Screen* previousScreen) {
 		m_cutscene = nullptr;
 		return;
 	}
-	g_resourceManager->playMusic(m_cutscene->getMusicPath(), false);
+
+	if (!m_cutscene->getData().mapID.empty()) {
+		m_characterCore->setMap(m_cutscene->getData().wordPosition, m_cutscene->getData().mapID);
+	}
+	else if (!m_cutscene->getData().levelID.empty()) {
+		m_characterCore->setLevel(m_cutscene->getData().wordPosition, m_cutscene->getData().levelID);
+	}
+
+	g_resourceManager->playMusic(m_cutscene->getData().musicPath, false);
 }
 
 void CutsceneScreen::execUpdate(const sf::Time& frameTime) {

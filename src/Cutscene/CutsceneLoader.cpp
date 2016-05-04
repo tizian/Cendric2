@@ -27,6 +27,26 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 		cutsceneData.musicPath = musicpath.cast<std::string>();
 	}
 
+	LuaRef levelid = getGlobal(L, "levelid");
+	if (levelid.isString()) {
+		cutsceneData.levelID = levelid.cast<std::string>();
+	}
+
+	LuaRef mapid = getGlobal(L, "mapid");
+	if (mapid.isString()) {
+		cutsceneData.mapID = mapid.cast<std::string>();
+	}
+
+	LuaRef worldy = getGlobal(L, "worldy");
+	if (worldy.isNumber()) {
+		cutsceneData.wordPosition.y = worldy.cast<float>();
+	}
+
+	LuaRef worldx = getGlobal(L, "worldx");
+	if (worldx.isNumber()) {
+		cutsceneData.wordPosition.x = worldx.cast<float>();
+	}
+
 	LuaRef steps = getGlobal(L, "steps");
 	if (steps.isTable()) {
 		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.
