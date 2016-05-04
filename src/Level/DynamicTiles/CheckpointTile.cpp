@@ -47,7 +47,7 @@ void CheckpointTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 
 	if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
-		setState(GameObjectState::Active);
+		setActive(true);
 	}
 }
 

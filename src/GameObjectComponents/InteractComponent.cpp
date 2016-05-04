@@ -12,7 +12,11 @@ InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* pa
 	m_mainChar = mainChar;
 	m_isFocused = false;
 	m_interactRange = 50.f;
-	m_tooltipString = tooltip;
+
+	m_interactText.setTextStyle(TextStyle::Shadowed);
+	m_interactText.setColor(COLOR_GOOD);
+	m_interactText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+
 	setInteractText("ToInteract");
 
 	m_executeOnInteract = std::bind(&InteractComponent::nop, this);
@@ -41,9 +45,10 @@ void InteractComponent::interact() {
 }
 
 void InteractComponent::setInteractText(const std::string& textKey) {
-	m_interactString = g_textProvider->getText("Press", "hint_desc") + " ";
-	m_interactString.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)));
-	m_interactString.append(" " + g_textProvider->getText(textKey));
+	std::string interactString = g_textProvider->getText("Press", "hint_desc") + " ";
+	interactString.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)));
+	interactString.append(" " + g_textProvider->getText(textKey));
+	m_interactText.setString(interactString);
 }
 
 void InteractComponent::setInteractRange(float range) {
@@ -56,19 +61,28 @@ void InteractComponent::setInteractable(bool interactable) {
 
 void InteractComponent::setFocused(bool focused) {
 	m_isFocused = focused;
-	if (m_isFocused) {
-		m_tooltipText.setString(m_interactString);
-		m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	} else {
-		m_tooltipText.setString(m_tooltipString);
-		m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	}
 	setPosition(m_animatedParent->getPosition());
+}
+
+void InteractComponent::setPosition(const sf::Vector2f& pos) {
+	if (!m_isFocused) {
+		TooltipComponent::setPosition(pos);
+	} else {
+		m_tooltipText.setPosition(pos + sf::Vector2f(
+			0.5f * (m_parent->getBoundingBox()->width - m_tooltipText.getLocalBounds().width),
+			-m_tooltipHeight - GUIConstants::CHARACTER_SIZE_M));
+		m_interactText.setPosition(pos + sf::Vector2f(
+			0.5f * (m_parent->getBoundingBox()->width - m_interactText.getLocalBounds().width),
+			-m_tooltipHeight));
+	}
 }
 
 void InteractComponent::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	bool showTooltip = g_inputController->isKeyActive(Key::ToggleTooltips);
 	if (m_isFocused || showTooltip || m_tooltipTime > sf::Time::Zero) {
 		renderTarget.draw(m_tooltipText);
+	}
+	if (m_isFocused) {
+		renderTarget.draw(m_interactText);
 	}
 }

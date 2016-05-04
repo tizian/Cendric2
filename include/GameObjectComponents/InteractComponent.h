@@ -12,6 +12,7 @@ public:
 
 	void update(const sf::Time& frameTime) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
+	void setPosition(const sf::Vector2f& pos) override;
 
 	void setOnInteract(const std::function<void()>& agent);
 	void interact();
@@ -31,7 +32,6 @@ private:
 	bool m_isFocused;
 	float m_interactRange;
 	MainCharacter* m_mainChar;
-	std::string m_interactString;
-	std::string m_tooltipString;
+	BitmapText m_interactText;
 	std::function<void()> m_executeOnInteract;
 };
