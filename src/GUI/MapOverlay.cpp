@@ -124,11 +124,11 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	target.draw(m_lightedForegroundTileMap);
 	target.draw(m_foregroundTileMap);
 
+	target.draw(m_fogOfWarTileMap);
+
 	for (auto& wp : m_waypoints) {
 		wp->render(target);
 	}
-
-	target.draw(m_fogOfWarTileMap);
 
 	target.draw(m_mainCharMarker);
 	target.draw(m_title);
