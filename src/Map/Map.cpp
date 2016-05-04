@@ -1,7 +1,7 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
 
-Map::Map() {
+Map::Map() : World() {
 	m_worldData = &m_mapData;
 }
 
@@ -26,6 +26,7 @@ bool Map::load(const std::string& id, WorldScreen* screen) {
 	m_lightedForegroundTileMap.load(m_mapData, m_mapData.lightedForegroundTileLayers);
 	m_foregroundTileMap.load(m_mapData, m_mapData.foregroundTileLayers);
 	g_resourceManager->loadMapResources();
+
 	return true;
 }
 
@@ -57,6 +58,10 @@ void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) con
 	float camCenterY = std::max((WINDOW_HEIGHT) / 2.f, std::min(m_mapData.mapRect.height - (WINDOW_HEIGHT) / 2.f, center.y));
 	view.setCenter(camCenterX, camCenterY);
 	target.setView(view);
+}
+
+const WorldData* Map::getWorldData() const {
+	return &m_mapData;
 }
 
 bool Map::collides(WorldCollisionQueryRecord& rec) const {

@@ -3,15 +3,22 @@
 #include "Screens/MapScreen.h"
 #include "Registrar.h"
 #include "GameObjectComponents/LightComponent.h"
-#include "GameObjectComponents/TooltipComponent.h"
+#include "GameObjectComponents/InteractComponent.h"
 
 REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Cooking, CookingTile)
+
+const float CookingTile::RANGE = 100.f;
 
 CookingTile::CookingTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(new LightComponent(LightData(
 		sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f),
 		sf::Vector2f(100.f, 100.f)), this));
-	addComponent(new TooltipComponent(g_textProvider->getText("Fireplace"), this));
+
+	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText("Fireplace"), this, m_mainChar);
+	interactComponent->setInteractRange(RANGE);
+	interactComponent->setInteractText("ToCook");
+	interactComponent->setOnInteract(std::bind(&CookingTile::startCooking, this));
+	addComponent(interactComponent);
 }
 
 void CookingTile::init() {
@@ -37,11 +44,14 @@ void CookingTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
+void CookingTile::startCooking() {
+	dynamic_cast<MapScreen*>(m_screen)->setCooking();
+}
+
 void CookingTile::onRightClick() {
 	// check if this tile is in range
-	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
-		dynamic_cast<MapScreen*>(m_screen)->setCooking();
+	if (dist(m_mainChar->getCenter(), getCenter()) <= RANGE) {
+		startCooking();
 	}
 	else {
 		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);

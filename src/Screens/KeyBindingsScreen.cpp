@@ -151,6 +151,9 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
 
 		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
 		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
+		if (UNMODIFIABLE_KEYS.find(it.first) != UNMODIFIABLE_KEYS.end()) {
+			keyButton->setEnabled(false);
+		}
 		m_keyButtons[it.first] = std::pair<Button*, sf::Keyboard::Key>(keyButton, it.second);
 	}
 
@@ -222,9 +225,6 @@ void KeyBindingsScreen::reload() {
 
 		if (it.second == sf::Keyboard::KeyCount) {
 			keyButton->setTextColor(COLOR_BAD);
-		}
-		if (UNMODIFIABLE_KEYS.find(it.first) != UNMODIFIABLE_KEYS.end()) {
-			keyButton->setEnabled(false);
 		}
 
 		distFromTop = distFromTop + 40;

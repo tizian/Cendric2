@@ -1,11 +1,7 @@
 #include "Map/NPC.h"
 #include "Map/MapMainCharacter.h"
 #include "Screens/MapScreen.h"
-#include "GameObjectComponents/TooltipComponent.h"
-
-inline bool inRange(const sf::Vector2f& center, const sf::Vector2f& mainCharCenter, const float range) {
-	return dist(center, mainCharCenter) <= range;
-}
+#include "GameObjectComponents/InteractComponent.h"
 
 NPC::NPC(MapScreen* mapScreen) : MapMovableGameObject(mapScreen->getWorld()) {
 	m_screen = mapScreen;
@@ -83,7 +79,13 @@ void NPC::load(const NPCData& data) {
 	playCurrentAnimation(true);
 
 	setPosition(data.position);
-	addComponent(new TooltipComponent(g_textProvider->getText(data.id, "npc"), this, false));
+
+	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText(data.id, "npc"), this, m_mainChar);
+	interactComponent->setInteractRange(TALKING_RANGE);
+	interactComponent->setInteractText("ToTalk");
+	interactComponent->setOnInteract(std::bind(&NPC::trySetDialogue, this));
+	addComponent(interactComponent);
+
 	setDebugBoundingBox(sf::Color::Magenta);
 
 	if (!data.routineID.empty()) {
@@ -106,16 +108,9 @@ void NPC::onLeftClick() {
 }
 
 void NPC::onRightClick() {
-	if (!m_NPCdata.talkingEnabled) {
-		m_screen->setTooltipText("NothingToSay", COLOR_BAD, true);
-		return;
-	}
 	// check if npc is in range
-	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
-		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
-		turnToMainchar();
-		mapScreen->setDialogue(this);
+	if (dist(m_mainChar->getCenter(), getCenter()) <= TALKING_RANGE) {
+		trySetDialogue();
 	}
 	else {
 		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
@@ -142,12 +137,19 @@ void NPC::setDialogueID(const std::string& id) {
 }
 
 void NPC::checkCollisionWithMainChar() {
-	if (m_NPCdata.talkingActive && !m_NPCdata.dialogueID.empty() && inRange(getCenter(), m_mainChar->getCenter(), TALKING_RANGE)) {
-		turnToMainchar();
-		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
-		
-		mapScreen->setDialogue(this);
+	if (m_NPCdata.talkingActive && dist(getCenter(), m_mainChar->getCenter()) <= TALKING_RANGE) {
+		trySetDialogue();
 	}
+}
+
+void NPC::trySetDialogue() {
+	if (m_NPCdata.dialogueID.empty() || !m_NPCdata.talkingEnabled) {
+		m_screen->setTooltipText("NothingToSay", COLOR_BAD, true);
+		return;
+	}
+	MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
+	turnToMainchar();
+	mapScreen->setDialogue(this);
 }
 
 void NPC::turnToMainchar() {

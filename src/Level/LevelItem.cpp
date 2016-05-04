@@ -41,7 +41,7 @@ void LevelItem::load(const Item& item, const sf::Vector2f& position) {
 
 	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText(item.getID(), "item"), this, m_mainChar);
 	interactComponent->setInteractRange(PICKUP_RANGE);
-	interactComponent->setInteractText("OnPickup");
+	interactComponent->setInteractText("ToPickup");
 	interactComponent->setOnInteract(std::bind(&LevelItem::pickup, this));
 	addComponent(interactComponent);
 	setDebugBoundingBox(COLOR_GOOD);

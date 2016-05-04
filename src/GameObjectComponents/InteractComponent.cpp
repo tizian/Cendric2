@@ -1,9 +1,10 @@
 #include "GameObjectComponents/InteractComponent.h"
-#include "Level/LevelMainCharacter.h"
+#include "MainCharacter.h"
+#include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 
-InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* parent, LevelMainCharacter* mainChar) : 
+InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* parent, MainCharacter* mainChar) : 
 	GameObjectComponent(parent), 
 	TooltipComponent(tooltip, parent, true) {
 	
@@ -19,12 +20,14 @@ InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* pa
 void InteractComponent::update(const sf::Time& frameTime) {
 	TooltipComponent::update(frameTime);
 
+	if (!m_isInteractable || m_animatedParent->isDisposed()) return;
+
 	if (getDistanceToMainChar() <= m_interactRange) {
 		m_mainChar->registerInteractiveObject(this);
 	}
 }
 
-bool InteractComponent::getDistanceToMainChar() const {
+float InteractComponent::getDistanceToMainChar() const {
 	return dist(m_mainChar->getCenter(), m_animatedParent->getCenter());
 }
 
@@ -39,11 +42,15 @@ void InteractComponent::interact() {
 void InteractComponent::setInteractText(const std::string& textKey) {
 	m_interactString = g_textProvider->getText("Press", "hint_desc") + " ";
 	m_interactString.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)));
-	m_interactString.append(g_textProvider->getText(textKey));
+	m_interactString.append(" " + g_textProvider->getText(textKey));
 }
 
 void InteractComponent::setInteractRange(float range) {
 	m_interactRange = range;
+}
+
+void InteractComponent::setInteractable(bool interactable) {
+	m_isInteractable = interactable;
 }
 
 void InteractComponent::setFocused(bool focused) {

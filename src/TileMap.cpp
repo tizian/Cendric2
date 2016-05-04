@@ -1,4 +1,5 @@
 #include "TileMap.h"
+#include "CharacterCore.h"
 
 using namespace std;
 
@@ -64,6 +65,49 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 	}
 
 	return true;
+}
+
+void TileMap::initFogOfWar(const WorldData& data, CharacterCore* core) {
+	m_tilesetPath = "";
+	m_tileset = nullptr;
+
+	m_tilesize = sf::Vector2i(TILE_SIZE, TILE_SIZE);
+	int width = static_cast<int>(data.mapRect.width / TILE_SIZE_F);
+	int height = static_cast<int>(data.mapRect.height / TILE_SIZE_F);
+
+	m_layers.clear();
+	sf::VertexArray layer;
+	layer.setPrimitiveType(sf::Quads);
+	layer.resize(width * height * 4);
+	m_layers.push_back(layer);
+
+	m_animatedTiles.insert({ 0, std::vector<AnimatedTile*>() });	
+}
+
+void TileMap::updateFogOfWar(const WorldData& data, CharacterCore* core) {
+	int width = static_cast<int>(data.mapRect.width / TILE_SIZE_F);
+	int height = static_cast<int>(data.mapRect.height / TILE_SIZE_F);
+
+	for (int k = 0; k < width * height; ++k) {
+		int i = k % width;
+		int j = k / width;
+
+		std::vector<bool>& tilesExplored = core->getExploredTiles().at(data.id);
+		bool discovered = tilesExplored[i + j * width];
+
+		sf::Vertex *quad = &m_layers[0][(i + j * width) * 4];
+		sf::Color color = discovered ? sf::Color::Transparent : sf::Color::Black;
+
+		quad[0].position = sf::Vector2f(i * TILE_SIZE_F, j * TILE_SIZE_F);
+		quad[1].position = sf::Vector2f((i + 1) * TILE_SIZE_F, j * TILE_SIZE_F);
+		quad[2].position = sf::Vector2f((i + 1) * TILE_SIZE_F, (j + 1) * TILE_SIZE_F);
+		quad[3].position = sf::Vector2f(i * TILE_SIZE_F, (j + 1) * TILE_SIZE_F);
+
+		quad[0].color = color;
+		quad[1].color = color;
+		quad[2].color = color;
+		quad[3].color = color;
+	}
 }
 
 void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const WorldData& data) {

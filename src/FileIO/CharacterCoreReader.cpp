@@ -783,6 +783,45 @@ bool CharacterCoreReader::readTriggersTriggered(char* start, char* end, Characte
 	return true;
 }
 
+bool CharacterCoreReader::readTilesExplored(char* start, char* end, CharacterCoreData& data) const {
+	std::vector<bool> tiles;
+	std::string id;
+
+	char* startData;
+	char* endData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	endData = gotoNextChar(startData, end, '\n');
+	endData++;
+	string levelID(startData);
+	int count = countToNextChar(startData, endData, ',');
+	int count2 = countToNextChar(startData, endData, '\n');
+	if (count == -1 && count2 == -1) {
+		return false;
+	}
+
+	if (count != -1) {
+		id = levelID.substr(0, count);
+		startData = gotoNextChar(start, endData, ',');
+		startData++;
+
+		while (startData != NULL) {
+			tiles.push_back(atoi(startData) == 1);
+			startData = gotoNextChar(startData, endData, ',');
+			if (startData != NULL) {
+				startData++;
+			}
+		}
+	}
+	else {
+		id = levelID.substr(0, count2);
+		tiles.clear();
+	}
+
+	data.tilesExplored.insert({ id, tiles });
+	return true;
+}
+
 bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
 	FILE* savFile;
 	savFile = fopen(getPath(filename).c_str(), "r");
@@ -891,6 +930,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, TRIGGERS_TRIGGERED, strlen(TRIGGERS_TRIGGERED)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(TRIGGERS_TRIGGERED));
 			noError = readTriggersTriggered(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, TILES_EXPLORED, strlen(TILES_EXPLORED)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(TILES_EXPLORED));
+			noError = readTilesExplored(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {

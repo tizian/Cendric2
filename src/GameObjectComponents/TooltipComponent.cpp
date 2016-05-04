@@ -1,7 +1,6 @@
 #include "GameObjectComponents/TooltipComponent.h"
 
 const sf::Time TooltipComponent::TOOLTIP_TIME = sf::seconds(1.f);
-const float TooltipComponent::TOOLTIP_HEIGHT = 10.f;
 
 TooltipComponent::TooltipComponent(std::string tooltip, AnimatedGameObject* parent, bool useInteractiveColor) : GameObjectComponent(parent) {
 	m_animatedParent = parent;
@@ -11,6 +10,8 @@ TooltipComponent::TooltipComponent(std::string tooltip, AnimatedGameObject* pare
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setColor(COLOR_WHITE);
 	m_tooltipText.setCharacterSize(8);
+
+	m_tooltipHeight = 10.f;
 }
 
 void TooltipComponent::update(const sf::Time& frameTime) {
@@ -20,7 +21,11 @@ void TooltipComponent::update(const sf::Time& frameTime) {
 void TooltipComponent::setPosition(const sf::Vector2f& pos) {
 	m_tooltipText.setPosition(pos + sf::Vector2f(
 		0.5f * (m_parent->getBoundingBox()->width - m_tooltipText.getLocalBounds().width), 
-		-TOOLTIP_HEIGHT));
+		-m_tooltipHeight));
+}
+
+void TooltipComponent::setTooltipHeight(float height) {
+	m_tooltipHeight = height;
 }
 
 void TooltipComponent::renderAfterForeground(sf::RenderTarget& renderTarget) {

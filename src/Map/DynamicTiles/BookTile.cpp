@@ -1,11 +1,18 @@
 #include "Map/DynamicTiles/BookTile.h"
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
-#include "GameObjectComponents/TooltipComponent.h"
+#include "GameObjectComponents/InteractComponent.h"
+
+const float BookTile::RANGE = 100.f;
 
 BookTile::BookTile(const BookData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_data = data;
-	addComponent(new TooltipComponent(g_textProvider->getText("Book"), this));
+	
+	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText("Book"), this, m_mainChar);
+	interactComponent->setInteractRange(RANGE);
+	interactComponent->setInteractText("ToRead");
+	interactComponent->setOnInteract(std::bind(&BookTile::startReading, this));
+	addComponent(interactComponent);
 }
 
 void BookTile::init() {
@@ -32,13 +39,15 @@ void BookTile::onLeftClick() {
 }
 
 void BookTile::onRightClick() {
-	// check if npc is in range
-	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= 100.f) {
-		MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
-		mapScreen->setBook(&m_data);
+	// check if book is in range
+	if (dist(m_mainChar->getCenter(), getCenter()) <= RANGE) {
+		startReading();
 	}
 	else {
 		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
+}
+
+void BookTile::startReading() {
+	dynamic_cast<MapScreen*>(m_screen)->setBook(&m_data);
 }

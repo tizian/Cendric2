@@ -2,7 +2,6 @@
 #include "Screens/LevelScreen.h"
 #include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
-#include "GameObjectComponents/InteractComponent.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
@@ -31,6 +30,7 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 			m_ps->emitRate = 0;
 		}
 		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
+		return;
 	}
 
 	// Remove target if right-clicked anywhere
@@ -42,6 +42,8 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 	if (m_targetedEnemy && !m_targetedEnemy->isViewable()) {
 		targetEnemy(nullptr);
 	}
+
+	MainCharacter::handleInteraction();
 }
 
 void LevelMainCharacter::render(sf::RenderTarget& target) {
@@ -64,34 +66,6 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 	UserAttackingBehavior* behavior = new UserAttackingBehavior(this);
 	behavior->setAttackInput(std::bind(&LevelMainCharacter::handleAttackInput, this));
 	return behavior;
-}
-
-void LevelMainCharacter::handleInteraction() {
-	if (m_nearestInteractive == nullptr && m_interactiveObjects.empty()) return;
-	if (m_nearestInteractive != nullptr) {
-		m_nearestInteractive->setFocused(false);
-		m_nearestInteractive = nullptr;
-	}
-
-	float nearest = 100000;
-
-	for (auto& obj : m_interactiveObjects) {
-		float newNearest = obj->getDistanceToMainChar();
-		if (obj->getDistanceToMainChar() < nearest) {
-			nearest = newNearest;
-			m_nearestInteractive = obj;
-		}
-	}
-
-	if (m_nearestInteractive != nullptr) {
-		m_nearestInteractive->setFocused(true);
-	}
-
-	m_interactiveObjects.clear();
-
-	if (m_nearestInteractive != nullptr && g_inputController->isKeyJustPressed(Key::Interact)) {
-		m_nearestInteractive->interact();
-	}
 }
 
 void LevelMainCharacter::handleAttackInput() {

@@ -3,9 +3,11 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 
+class InteractComponent;
+
 class CheckpointTile : public LevelDynamicTile {
 public:
-	CheckpointTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {};
+	CheckpointTile(LevelScreen* levelScreen);
 	void init() override;
 	void loadAnimation(int skinNr) override; 
 	void onRightClick() override;
@@ -18,4 +20,5 @@ public:
 private:
 	static const float ACTIVATE_RANGE;
 	sf::Sound m_sound;
+	InteractComponent* m_interactComponent;
 };

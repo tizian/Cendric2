@@ -41,7 +41,8 @@ private:
 	NPCRoutine m_routine;
 	MapMainCharacter* m_mainChar;
 
-	const float TALKING_RANGE = 30.f;
+	const float TALKING_RANGE = 100.f;
 
+	void trySetDialogue();
 	void turnToMainchar();
 };

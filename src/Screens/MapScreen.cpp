@@ -36,6 +36,8 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Light, frameTime);
 	updateObjects(GameObjectType::_Overlay, frameTime);
 	updateTooltipText(frameTime);
+
+	updateFogOfWar();
 }
 
 void MapScreen::loadForRenderTexture() {
@@ -64,6 +66,12 @@ void MapScreen::load() {
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
+
+	std::map<std::string, std::vector<bool>>& tilesExplored = m_characterCore->getExploredTiles();
+	if (tilesExplored.find(m_mapID) == tilesExplored.end()) {
+		sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
+		tilesExplored[m_mapID] = std::vector<bool>(size.x * size.y, false);
+	}
 }
 
 void MapScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
@@ -249,4 +257,26 @@ void MapScreen::handleBookWindow(const sf::Time& frameTime) {
 	updateProgressLog(frameTime);
 	updateTooltipText(frameTime);
 	updateObjects(GameObjectType::_Light, frameTime);
+}
+
+void MapScreen::updateFogOfWar() {
+	std::vector<bool>& tilesExplored = m_characterCore->getExploredTiles().at(m_mapID);
+
+	int range = 6;
+
+	sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
+	
+	sf::Vector2f pos = m_mainChar->getPosition();
+	int x = static_cast<int>(pos.x / TILE_SIZE_F);
+	int y = static_cast<int>(pos.y / TILE_SIZE_F);
+
+	for (int i = x - range; i <= x + range; ++i) {
+		for (int j = y - range; j < y + range; ++j) {
+			if (i < 0 || i >= size.x || j < 0 || j >= size.y) continue;
+
+			if ((x - i) * (x - i) + (y - j) * (y - j) < range * range) {
+				tilesExplored[i + j * size.x] = true;
+			}
+		}
+	}
 }

@@ -1,7 +1,7 @@
 #include "Level/DynamicTiles/ChestTile.h"
 #include "Level/LevelMainCharacter.h"
 #include "Spells/UnlockSpell.h"
-#include "GameObjectComponents/TooltipComponent.h"
+#include "GameObjectComponents/InteractComponent.h"
 
 using namespace std;
 
@@ -9,7 +9,11 @@ void ChestTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
 
-	addComponent(new TooltipComponent(g_textProvider->getText("Chest"), this, false));
+	m_interactComponent = new InteractComponent(g_textProvider->getText("Chest"), this, m_mainChar);
+	m_interactComponent->setInteractRange(PICKUP_RANGE);
+	m_interactComponent->setInteractText("ToOpen");
+	m_interactComponent->setOnInteract(std::bind(&ChestTile::onRightClick, this));
+	addComponent(m_interactComponent);
 }
 
 void ChestTile::loadAnimation(int skinNr) {
@@ -50,6 +54,7 @@ void ChestTile::onHit(Spell* spell) {
 		if (m_state == GameObjectState::Locked) {
 			unlock = dynamic_cast<UnlockSpell*>(spell);
 			if (unlock != nullptr && unlock->getStrength() >= m_strength) {
+				m_interactComponent->setInteractText("ToPickup");
 				m_state = GameObjectState::Unlocked;
 				setCurrentAnimation(getAnimation(m_state), false);
 			}
@@ -131,6 +136,7 @@ void ChestTile::onRightClick() {
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
 			// unlock!
+			m_interactComponent->setInteractText("ToPickup");
 			setState(GameObjectState::Unlocked);
 		}
 		else {

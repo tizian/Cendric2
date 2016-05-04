@@ -1,10 +1,14 @@
 #include "Level/DynamicTiles/LeverTile.h"
 #include "Spells/Spell.h"
 #include "Level/LevelMainCharacter.h"
-#include "GameObjectComponents/TooltipComponent.h"
+#include "GameObjectComponents/InteractComponent.h"
 
 LeverTile::LeverTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
-	addComponent(new TooltipComponent(g_textProvider->getText("Lever"), this));
+	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText("Lever"), this, m_mainChar);
+	interactComponent->setInteractRange(ACTIVATE_RANGE);
+	interactComponent->setInteractText("ToSwitch");
+	interactComponent->setOnInteract(std::bind(&LeverTile::switchLever, this));
+	addComponent(interactComponent);
 }
 
 // this tile is special and is not registered
@@ -54,8 +58,7 @@ void LeverTile::onHit(Spell* spell) {
 void LeverTile::onRightClick() {
 	if (m_mainChar->isDead()) return;
 	// check if lever is in range
-	sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-	if (sqrt(dist.x * dist.x + dist.y * dist.y) <= ACTIVATE_RANGE) {
+	if (dist(m_mainChar->getCenter(), getCenter()) <= ACTIVATE_RANGE) {
 		switchLever();
 	}
 	else {

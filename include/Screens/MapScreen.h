@@ -42,6 +42,8 @@ private:
 	bool isOverlayVisible();
 	void quicksave() override;
 
+	void updateFogOfWar();
+
 private:
 	Map m_currentMap;
 	std::string m_mapID;

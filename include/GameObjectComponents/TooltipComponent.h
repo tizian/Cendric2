@@ -13,6 +13,7 @@ public:
 
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
+	void setTooltipHeight(float height);
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void onParentMouseOver() override;
 
@@ -21,7 +22,7 @@ protected:
 	sf::Time m_tooltipTime = sf::Time::Zero;
 	AnimatedGameObject* m_animatedParent;
 	bool m_useInteractiveColor;
-	
+	float m_tooltipHeight;
+
 	static const sf::Time TOOLTIP_TIME;
-	static const float TOOLTIP_HEIGHT;
 };

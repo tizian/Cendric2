@@ -21,6 +21,7 @@ void MapMainCharacter::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	updateAnimation(frameTime);
+	MainCharacter::handleInteraction();
 }
 
 void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {

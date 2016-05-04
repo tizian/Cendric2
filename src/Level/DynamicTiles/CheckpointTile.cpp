@@ -2,11 +2,21 @@
 #include "Level/LevelMainCharacter.h"
 #include "Spells/Spell.h"
 #include "Screens/LevelScreen.h"
+#include "GameObjectComponents/InteractComponent.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Checkpoint, CheckpointTile)
 
 const float CheckpointTile::ACTIVATE_RANGE = 100.f;
+
+CheckpointTile::CheckpointTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
+	m_interactComponent = new InteractComponent(g_textProvider->getText("Checkpoint"), this, m_mainChar);
+	m_interactComponent->setInteractRange(ACTIVATE_RANGE);
+	m_interactComponent->setInteractText("ToActivate");
+	m_interactComponent->setOnInteract(std::bind(&CheckpointTile::setActive, this, true));
+	m_interactComponent->setTooltipHeight(30.f);
+	addComponent(m_interactComponent);
+}
 
 void CheckpointTile::init() {
 	setSpriteOffset(sf::Vector2f(-15.f, -30.f));
@@ -84,6 +94,7 @@ void CheckpointTile::setActive(bool active) {
 	setState(active ? GameObjectState::Active : GameObjectState::Idle);
 	if (active) {
 		g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_checkpoint);
-	}
+	} 
+	m_interactComponent->setInteractable(!active);
 }
 

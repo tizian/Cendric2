@@ -11,4 +11,8 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onRightClick() override;
+
+private:
+	static const float RANGE;
+	void startCooking();
 };

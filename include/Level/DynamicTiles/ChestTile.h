@@ -5,6 +5,7 @@
 #include "GUI/LootWindow.h"
 
 class LevelMainCharacter;
+class InteractComponent;
 
 class ChestTile : public LevelDynamicTile {
 public:
@@ -32,6 +33,7 @@ private:
 	int m_lootableGold = 0;
 	LootWindow* m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
+	InteractComponent* m_interactComponent;
 
 	// the chest can only be looted if the main char is in this range
 	const float PICKUP_RANGE = 100.f;

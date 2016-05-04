@@ -13,6 +13,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('CannotEquipIn
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumePermanentInLevel','You cannot consume permanent items inside a level!','Gegenstände mit permanenten Boni können nicht in einem Level verwendet werden!','Gegeständ mit permanente Boni chönd nid imne Level verbruucht werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumeItemInMap','You cannot consume food items on a map!','Verzehrbare Gegenstände können nicht auf einer Karte verwendet werden!','Ässbari Gegeständ chönd nid ufere Charte verbruucht werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CharacterInfo','Character Info','Charakter Info','Charakter Info');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Checkpoint','Checkpoint','Kontrollpunkt','Checkpoint');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CheckpointReached','Checkpoint reached','Kontrollpunkt erreicht','Checkpoint erreicht');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chest','Chest','Truhe','Chischte');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Chop','Chop','Hauen','Haue');
@@ -237,7 +238,9 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ToTalk','to t
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToCook','to cook','(kochen)','zum choche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToPickup','to pickup','(aufnehmen)','zum neh');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToActivate','to activate','(aktivieren)','zum aktiviere');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ToRead','to read','(lesen)','zum läse');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToSwitch','to switch','(umschalten)','zum drucke');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ToOpen','to open','(öffnen)','zum ufmache');
 INSERT INTO text (text_id, english, german, swiss_german) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Fireplace','Fireplace','Kochstelle','Chochstell');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NothingToCook','[Nothing to cook...]','[Nichts zu kochen...]','[Es git nüt zum chochä...]');

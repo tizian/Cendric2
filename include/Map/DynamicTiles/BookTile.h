@@ -15,5 +15,9 @@ public:
 	void onLeftClick() override;
 
 private:
+	void startReading();
+
+private:
 	BookData m_data;
+	static const float RANGE;
 };

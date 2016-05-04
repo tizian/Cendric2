@@ -7,11 +7,10 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 #include "CharacterCore.h"
-
-class InteractComponent;
+#include "MainCharacter.h"
 
 // Cendric in a level
-class LevelMainCharacter : public virtual LevelMovableGameObject {
+class LevelMainCharacter : public virtual LevelMovableGameObject, public virtual MainCharacter {
 	friend class UserMovingBehavior;
 public:
 	LevelMainCharacter(Level* level);
@@ -20,6 +19,12 @@ public:
 	void load();
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
+
+	void updateFirst(const sf::Time& frameTime) override { LevelMovableGameObject::updateFirst(frameTime); }
+	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableGameObject::renderAfterForeground(target); }
+	void setDebugBoundingBox(const sf::Color& color) override { LevelMovableGameObject::setDebugBoundingBox(color); }
+	void setState(GameObjectState state) override { LevelMovableGameObject::setState(state); }
+	void setState(GameObjectState state, bool updateAnimation) override { LevelMovableGameObject::setState(state, updateAnimation); }
 
 	MovingBehavior* createMovingBehavior(bool asAlly = false) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly = false) override;
@@ -43,9 +48,6 @@ public:
 	void targetEnemy(Enemy* enemy);
 	Enemy* getCurrentTarget() const;
 
-	// registers an interactive object that's in range
-	void registerInteractiveObject(InteractComponent* component);
-
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
 
@@ -56,7 +58,6 @@ private:
 	void loadAnimation();
 
 	void handleAttackInput();
-	void handleInteraction();
 
 	void loadParticleSystem();
 	void updateParticleSystemPosition();
@@ -69,8 +70,6 @@ private:
 	int m_invisibilityLevel = 0;
 
 	Enemy* m_targetedEnemy = nullptr;
-	std::vector<InteractComponent*> m_interactiveObjects;
-	InteractComponent* m_nearestInteractive = nullptr;
 
 	sf::Sound m_sound;
 	sf::Time m_fadingTime = sf::seconds(2.f);
