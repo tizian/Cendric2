@@ -7,12 +7,18 @@
 #include "Structs/WorldData.h"
 #include "AnimatedTile.h"
 
+class CharacterCore;
+
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:
 	bool load(const WorldData& data, const std::vector<std::vector<int> >& layers);
+	
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	void update(const sf::Time& frameTime);
 	void dispose();
+
+	void initFogOfWar(const WorldData& data, CharacterCore* core);
+	void updateFogOfWar(const WorldData& data, CharacterCore* core);
 
 	const sf::Vector2i& getTilesize() const;
 

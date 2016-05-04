@@ -31,6 +31,7 @@ struct CharacterCoreData {
 	std::map<std::string, std::set<int>> chestsLooted;
 	std::map<std::string, std::set<int>> waypointsUnlocked;
 	std::map<std::string, std::set<int>> triggersTriggered;
+	std::map<std::string, std::vector<bool>> tilesExplored;
 
 	// quest & npc progress
 	std::map<std::string, std::set<std::string>> conditionProgress;
@@ -83,6 +84,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
+	std::map<std::string, std::vector<bool>>(),
 	std::map<std::string, std::set<std::string>>(),
 	std::map<std::string, MerchantData>(),
 	std::map<std::string, QuestState>(),

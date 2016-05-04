@@ -206,6 +206,10 @@ void CharacterCore::initializeMapMaps(const std::string& map) {
 	m_data.triggersTriggered.insert({ map, std::set<int>() });
 }
 
+std::map<std::string, std::vector<bool>>& CharacterCore::getExploredTiles() {
+	return m_data.tilesExplored;
+}
+
 void CharacterCore::setEnemyKilled(const std::string& level, int pos) {
 	m_data.enemiesKilled.at(level).insert(pos);
 }

@@ -77,6 +77,8 @@ public:
 	void initializeLevelMaps(const std::string& level);
 	// initializes an empty boolean maps (waypoint unlocked) for a given map
 	void initializeMapMaps(const std::string& map);
+	// get explored tiles information
+	std::map<std::string, std::vector<bool>>& getExploredTiles();
 	// signal enemy kill
 	void setEnemyKilled(const std::string& level, int pos);
 	// signal enemy looted
