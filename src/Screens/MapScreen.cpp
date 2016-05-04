@@ -37,7 +37,9 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Overlay, frameTime);
 	updateTooltipText(frameTime);
 
-	updateFogOfWar();
+	if (m_currentMap.getWorldData()->explorable) {
+		updateFogOfWar();
+	}
 }
 
 void MapScreen::loadForRenderTexture() {
@@ -67,10 +69,12 @@ void MapScreen::load() {
 void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
 
-	std::map<std::string, std::vector<bool>>& tilesExplored = m_characterCore->getExploredTiles();
-	if (tilesExplored.find(m_mapID) == tilesExplored.end()) {
-		sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
-		tilesExplored[m_mapID] = std::vector<bool>(size.x * size.y, false);
+	if (m_currentMap.getWorldData()->explorable) {
+		std::map<std::string, std::vector<bool>>& tilesExplored = m_characterCore->getExploredTiles();
+		if (tilesExplored.find(m_mapID) == tilesExplored.end()) {
+			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
+			tilesExplored[m_mapID] = std::vector<bool>(size.x * size.y, false);
+		}
 	}
 }
 

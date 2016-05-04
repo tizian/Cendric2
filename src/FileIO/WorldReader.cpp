@@ -565,6 +565,9 @@ bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) 
 		else if (name.compare("dimming") == 0) {
 			if (!readDimming(_property, data)) return false;
 		}
+		else if (name.compare("explorable") == 0) {
+			data.explorable = true;
+		}
 		else {
 			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
 			return false;
