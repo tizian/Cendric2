@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="182">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="184">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -1104,6 +1104,24 @@
     <property name="id" value="npc_inina"/>
     <property name="routineid" value="res/npc/npc_inina/ru_npc_inina.lua"/>
     <property name="spritesheetpath" value="res/npc/npc_inina/spritesheet_npc_inina.png"/>
+   </properties>
+  </object>
+  <object id="182" gid="1322" x="2280" y="2752" width="50" height="50">
+  <properties>
+    <property name="dialogueid" value="res/npc/npc_paladin1/dl_npc_paladin1.lua"/>
+    <property name="dialoguetexture" value="750,500"/>
+    <property name="id" value="npc_paladin1"/>
+    <property name="routineid" value="res/npc/npc_paladin1/ru_npc_paladin1.lua"/>
+    <property name="spritesheetpath" value="res/npc/npc_paladin1/spritesheet_npc_paladin1.png"/>
+   </properties>
+  </object>
+  <object id="183" gid="1323" x="2163" y="2752" width="50" height="50">
+  <properties>
+    <property name="dialogueid" value="res/npc/npc_paladin2/dl_npc_paladin2.lua"/>
+    <property name="dialoguetexture" value="0,750"/>
+    <property name="id" value="npc_paladin2"/>
+    <property name="routineid" value="res/npc/npc_paladin2/ru_npc_paladin2.lua"/>
+    <property name="spritesheetpath" value="res/npc/npc_paladin2/spritesheet_npc_paladin2.png"/>
    </properties>
   </object>
  </objectgroup>

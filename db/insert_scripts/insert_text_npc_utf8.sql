@@ -6,3 +6,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_thea','npc','Thea','Thea','Thea');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_andrew','npc','Andrew','Andrew','Andrew');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_inina','npc','High Priestess Inina','Hohepriesterin Inina','Hohepriesterin Inina');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_paladin1','npc','Paladin','Paladin','Paladin');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_paladin2','npc','Paladin','Paladin','Paladin');
