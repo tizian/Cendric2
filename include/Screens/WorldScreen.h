@@ -9,6 +9,7 @@
 
 class Item;
 class Trigger;
+class TextureParticleSystem;
 
 // ancestor for level or map screen
 class WorldScreen : public Screen {
@@ -82,6 +83,9 @@ protected:
 	sf::Sprite m_sprite;
 	sf::Shader m_lightLayerShader;
 	sf::Shader m_foregroundLayerShader;
+
+	// For weather effects
+	particles::TextureParticleSystem* m_ps = nullptr;
 
 private:
 	void updateOverlayQueue();

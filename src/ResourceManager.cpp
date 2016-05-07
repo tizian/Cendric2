@@ -152,6 +152,8 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_Particle_smoke, "res/assets/particles/smoke.png" },
 		{ ResourceID::Texture_Particle_flame, "res/assets/particles/flame.png" },
 		{ ResourceID::Texture_Particle_star, "res/assets/particles/star.png" },
+		{ ResourceID::Texture_Particle_rain, "res/assets/particles/rain.png" },
+		{ ResourceID::Texture_Particle_snow, "res/assets/particles/snow.png" },
 		{ ResourceID::Sound_spell_fireball, "res/sound/spell/fireball.ogg" },
 		{ ResourceID::Sound_tile_water, "res/sound/tile/water_splash.ogg" },
 		{ ResourceID::Sound_tile_lever, "res/sound/tile/lever_click.ogg" },
