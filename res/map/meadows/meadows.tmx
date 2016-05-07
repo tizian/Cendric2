@@ -7,7 +7,7 @@
   <property name="name" value="Meadows"/>
   <property name="tilesetpath" value="res/map/meadows/tileset_map_meadows.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
+ <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311">
   <image source="tileset_map_meadows.png" width="1200" height="3000"/>
   <tile id="25">
    <objectgroup draworder="index">
@@ -94,10 +94,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
+ <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="70" height="70">
@@ -1081,20 +1081,14 @@
  <objectgroup name="npc">
   <object id="51" gid="1314" x="2231" y="936" width="50" height="50">
    <properties>
-    <property name="dialogueid" value="res/npc/npc_edmond/dl_npc_edmond.lua"/>
     <property name="dialoguetexture" value="750,0"/>
     <property name="id" value="npc_edmond"/>
-    <property name="routineid" value="res/npc/npc_edmond/ru_npc_edmond.lua"/>
-    <property name="spritesheetpath" value="res/npc/npc_edmond/spritesheet_npc_edmond.png"/>
    </properties>
   </object>
   <object id="62" gid="1315" x="2292" y="1694" width="50" height="50">
    <properties>
-    <property name="dialogueid" value="res/npc/npc_ingrid/dl_npc_ingrid.lua"/>
     <property name="dialoguetexture" value="0,250"/>
     <property name="id" value="npc_ingrid"/>
-    <property name="routineid" value="res/npc/npc_ingrid/ru_npc_ingrid.lua"/>
-    <property name="spritesheetpath" value="res/npc/npc_ingrid/spritesheet_npc_ingrid.png"/>
    </properties>
   </object>
   <object id="138" gid="1321" x="2203" y="2656" width="50" height="50">
@@ -1107,7 +1101,7 @@
    </properties>
   </object>
   <object id="182" gid="1322" x="2280" y="2752" width="50" height="50">
-  <properties>
+   <properties>
     <property name="dialogueid" value="res/npc/npc_paladin1/dl_npc_paladin1.lua"/>
     <property name="dialoguetexture" value="750,500"/>
     <property name="id" value="npc_paladin1"/>
@@ -1116,7 +1110,7 @@
    </properties>
   </object>
   <object id="183" gid="1323" x="2163" y="2752" width="50" height="50">
-  <properties>
+   <properties>
     <property name="dialogueid" value="res/npc/npc_paladin2/dl_npc_paladin2.lua"/>
     <property name="dialoguetexture" value="0,750"/>
     <property name="id" value="npc_paladin2"/>

@@ -1,4 +1,5 @@
 #include "FileIO/MapReader.h"
+#include "ResourceManager.h"
 
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 
@@ -380,33 +381,9 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 						return false;
 					}
 					npc.id = textAttr;
-				}
-				else if (attrText.compare("dialogueid") == 0) {
-					textAttr = nullptr;
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					npc.dialogueID = textAttr;
-				}
-				else if (attrText.compare("spritesheetpath") == 0) {
-					textAttr = nullptr;
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					npc.spritesheetpath = textAttr;
-				}
-				else if (attrText.compare("routineid") == 0) {
-					textAttr = nullptr;
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					npc.routineID = textAttr;
+					npc.dialogueID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/dl_" + npc.id + ".lua";
+					npc.routineID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/ru_" + npc.id + ".lua";
+					npc.spritesheetpath = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/spritesheet_" + npc.id + ".png";
 				}
 				else if (attrText.compare("dialoguetexture") == 0) {
 					textAttr = nullptr;
