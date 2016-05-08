@@ -2,12 +2,8 @@
 #include "Screens/MenuScreen.h"
 #include "Map/NPC.h"
 #include "Screens/ScreenManager.h"
-
 #include "ScreenOverlays/ScreenOverlay.h"
-
-#include "Particles/ParticleGenerator.h"
-#include "Particles/ParticleSystem.h"
-#include "Particles/ParticleUpdater.h"
+#include "WeatherSystem.h"
 
 using namespace std;
 
@@ -16,11 +12,7 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScree
 }
 
 void MapScreen::execUpdate(const sf::Time& frameTime) {
-	if (m_ps) {
-		sf::Vector2f &pos = m_mainChar->getPosition();
-		m_posGenerator->center = sf::Vector2f(pos.x, pos.y);
-		m_ps->update(frameTime);
-	}
+	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 
 	handleCookingWindow(frameTime);
 	handleDialogueWindow(frameTime);
@@ -76,43 +68,8 @@ void MapScreen::load() {
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 
 	// adjust weather
-	if (const WeatherData* weather = m_characterCore->getWeather(m_mapID)) {
-		if (weather->weather.compare("rain") == 0) {
-			m_ps = new particles::TextureParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_rain));
-			m_ps->emitRate = 200.0f;
-			
-			m_posGenerator = m_ps->addGenerator<particles::BoxPositionGenerator>();
-			const sf::FloatRect& rect = m_currentMap.getWorldRect();
-			m_posGenerator->size = sf::Vector2f(2.f * WINDOW_WIDTH, WINDOW_HEIGHT);
-
-			auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-			sizeGen->minStartSize = 5.f;
-			sizeGen->maxStartSize = 15.f;
-			sizeGen->minEndSize = 5.f;
-			sizeGen->maxEndSize = 15.f;
-
-			auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-			velGen->minAngle = 160.f;
-			velGen->maxAngle = 160.f;
-			velGen->minStartVel = 400.f;
-			velGen->maxStartVel = 500.f;
-
-			auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-			timeGen->minTime = 30.f;
-			timeGen->maxTime = 30.f;
-
-			auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-			colGen->minStartCol = sf::Color(255, 255, 255, 255);
-			colGen->maxStartCol = sf::Color(255, 255, 255, 255);
-			colGen->minEndCol = sf::Color(255, 255, 255, 0);
-			colGen->maxEndCol = sf::Color(255, 255, 255, 0);
-			
-			m_ps->addUpdater<particles::SizeUpdater>();
-			m_ps->addUpdater<particles::TimeUpdater>();
-			m_ps->addUpdater<particles::ColorUpdater>();
-			m_ps->addUpdater<particles::EulerUpdater>();	
-		}
-	}
+	m_weatherSystem = new WeatherSystem();
+	m_weatherSystem->load(m_characterCore->getWeather(m_mapID));
 }
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
@@ -259,9 +216,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_MapMovableGameObject, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Overlay, renderTarget);
 
-	if (m_ps != nullptr) {
-		m_ps->render(renderTarget);
-	}
+	m_weatherSystem->render(renderTarget);
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
