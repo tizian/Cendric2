@@ -5,6 +5,8 @@
 #include "Particles/ParticleUpdater.h"
 
 void WeatherSystem::load(const WeatherData* data) {
+	if (data == nullptr) return;
+
 	if (m_ps != nullptr) {
 		delete m_ps;
 	}
