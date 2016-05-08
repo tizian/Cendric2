@@ -64,6 +64,10 @@ void InteractComponent::setFocused(bool focused) {
 	setPosition(m_animatedParent->getPosition());
 }
 
+void InteractComponent::onDisposed() {
+	m_mainChar->notifyDisposed(this);
+}
+
 void InteractComponent::setPosition(const sf::Vector2f& pos) {
 	if (!m_isFocused) {
 		TooltipComponent::setPosition(pos);

@@ -27,7 +27,7 @@ void ShootingTile::loadSpells() {
 		m_spellData.divergenceAngle = 0.f;
 		m_activeTime = sf::seconds(1.f);
 		m_spellOffsetTime = sf::seconds(0.5f);
-		m_recoveringTime = sf::seconds(10.f);
+		m_recoveringTime = sf::seconds(20.f);
 		m_cooldown = sf::seconds(5.f);
 		break;
 	}
@@ -36,13 +36,13 @@ void ShootingTile::loadSpells() {
 	{
 		m_spellData = SpellData::getSpellData(SpellID::FireBall);
 		m_spellData.duration = sf::seconds(3.f);
-		m_spellData.damagePerSecond = 5;
-		m_spellData.damage = 10;
+		m_spellData.damagePerSecond = 10;
+		m_spellData.damage = 20;
 		m_spellData.divergenceAngle = 0.f;
-		m_cooldown = sf::seconds(5.f);
+		m_cooldown = sf::seconds(4.f);
 		m_activeTime = sf::seconds(0.6f);
 		m_spellOffsetTime = sf::seconds(0.1f);
-		m_recoveringTime = sf::seconds(6.f);
+		m_recoveringTime = sf::seconds(15.f);
 		break;
 	}
 	}

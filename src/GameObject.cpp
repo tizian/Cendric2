@@ -163,6 +163,9 @@ bool GameObject::isDisposed() const {
 
 void GameObject::setDisposed() {
 	m_isDisposed = true;
+	for (auto& component : m_components) {
+		component->onDisposed();
+	}
 }
 
 void GameObject::setScreen(Screen* screen) {

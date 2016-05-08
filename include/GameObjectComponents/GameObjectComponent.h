@@ -14,6 +14,7 @@ public:
 	virtual void setPosition(const sf::Vector2f& pos) {};
 	virtual void renderAfterForeground(sf::RenderTarget& renderTarget) {};
 	virtual void onParentMouseOver() {};
+	virtual void onDisposed() {};
 
 protected:
 	GameObject* m_parent = nullptr;

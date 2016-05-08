@@ -22,8 +22,10 @@ void MainCharacter::handleInteraction() {
 		m_nearestInteractive->setFocused(true);
 		if (g_inputController->isKeyJustPressed(Key::Interact)) {
 			m_nearestInteractive->interact();
-			m_nearestInteractive->setFocused(false);
-			m_nearestInteractive = nullptr;
+			if (m_nearestInteractive != nullptr) {
+				m_nearestInteractive->setFocused(false);
+				m_nearestInteractive = nullptr;
+			}
 		}
 	}
 
@@ -32,4 +34,9 @@ void MainCharacter::handleInteraction() {
 
 void MainCharacter::registerInteractiveObject(InteractComponent* component) {
 	m_interactiveObjects.push_back(component);
+}
+
+void MainCharacter::notifyDisposed(InteractComponent* component) {
+	if (m_nearestInteractive == component);
+		m_nearestInteractive = nullptr;
 }

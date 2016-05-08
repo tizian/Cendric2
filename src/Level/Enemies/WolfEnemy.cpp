@@ -130,7 +130,7 @@ MovingBehavior* WolfEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
-	behavior->setDistanceToAbyss(50.f);
+	behavior->setDistanceToAbyss(80.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);

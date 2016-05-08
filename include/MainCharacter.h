@@ -13,6 +13,8 @@ public:
 
 	// registers an interactive object that's in range
 	void registerInteractiveObject(InteractComponent* component);
+	// notifies that an interactive object has been disposed
+	void notifyDisposed(InteractComponent* component);
 
 protected:
 	void handleInteraction();

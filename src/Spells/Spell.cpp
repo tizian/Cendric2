@@ -60,10 +60,10 @@ void Spell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector
 
 	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
 
-	sf::Vector2f absolutePosition = tile->getCenter();
+	sf::Vector2f absolutePosition = tile->getCenter() - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f);
 	setPosition(absolutePosition);
 
-	sf::Vector2f trueDir = target - absolutePosition;
+	sf::Vector2f trueDir = target - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f) - absolutePosition;
 	// normalize dir
 	float len = sqrt(trueDir.x * trueDir.x + trueDir.y * trueDir.y);
 	trueDir.x = (len == 0) ? 0 : trueDir.x / len;

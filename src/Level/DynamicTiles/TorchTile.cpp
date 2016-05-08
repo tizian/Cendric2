@@ -6,7 +6,7 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Torch, TorchTile)
 
 TorchTile::TorchTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
-	m_lightComponent = new LightComponent(LightData(sf::Vector2f(), sf::Vector2f(140.f, 200.f)), this);
+	m_lightComponent = new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F / 4.f, TILE_SIZE_F / 4.f), sf::Vector2f(140.f, 200.f)), this);
 	addComponent(m_lightComponent);
 }
 

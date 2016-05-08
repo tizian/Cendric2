@@ -3,6 +3,8 @@
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/InteractComponent.h"
 
+const float LeverTile::ACTIVATE_RANGE = 80.f;
+
 LeverTile::LeverTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText("Lever"), this, m_mainChar);
 	interactComponent->setInteractRange(ACTIVATE_RANGE);

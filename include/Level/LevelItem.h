@@ -30,7 +30,7 @@ private:
 	LevelMainCharacter* m_mainChar;
 	
 	// the item can only be picked up if the main char is in this range
-	const float PICKUP_RANGE = 100.f;
+	const float PICKUP_RANGE = 80.f;
 	std::string m_itemID;
 	// only relevant for gold items. they have their item type "Gold".
 	int m_goldValue;

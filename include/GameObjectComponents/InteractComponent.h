@@ -13,6 +13,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& pos) override;
+	void onDisposed() override;
 
 	void setOnInteract(const std::function<void()>& agent);
 	void interact();
