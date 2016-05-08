@@ -25,7 +25,7 @@ void MainCharacter::handleInteraction() {
 			if (m_nearestInteractive != nullptr) {
 				m_nearestInteractive->setFocused(false);
 				m_nearestInteractive = nullptr;
-			}
+			} 
 		}
 	}
 
@@ -37,6 +37,6 @@ void MainCharacter::registerInteractiveObject(InteractComponent* component) {
 }
 
 void MainCharacter::notifyDisposed(InteractComponent* component) {
-	if (m_nearestInteractive == component);
+	if (m_nearestInteractive == component)
 		m_nearestInteractive = nullptr;
 }

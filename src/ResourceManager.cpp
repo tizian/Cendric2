@@ -366,7 +366,8 @@ void ResourceManager::playMusic(const std::string& filename, bool looping, const
 		m_currentMusic.second.setLoop(looping);
 		m_currentMusic.second.setVolume(static_cast<float>(m_configuration.volumeMusic));
 		m_currentMusic.second.play();
-		m_currentMusic.second.setPlayingOffset(playingOffset);
+		if (playingOffset < m_currentMusic.second.getDuration())
+			m_currentMusic.second.setPlayingOffset(playingOffset);
 	}
 	else {
 		g_logger->logError("ResourceManager", "Could not read music from file: " + getPath(filename));
