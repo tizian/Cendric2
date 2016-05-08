@@ -2,7 +2,6 @@
 #include "Screens/LoadingScreen.h"
 #include "Item.h"
 #include "Trigger.h"
-#include "Particles/ParticleSystem.h"
 
 using namespace std;
 
@@ -55,9 +54,6 @@ WorldScreen::~WorldScreen() {
 		delete overlay;
 	}
 	m_overlayQueue.clear();
-	if (m_ps) {
-		delete m_ps;
-	}
 }
 
 void WorldScreen::notifyPermanentItemConsumed(const Item& item) {
