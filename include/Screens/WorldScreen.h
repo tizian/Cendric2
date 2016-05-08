@@ -86,6 +86,7 @@ protected:
 
 	// For weather effects
 	particles::TextureParticleSystem* m_ps = nullptr;
+	particles::BoxPositionGenerator* m_posGenerator = nullptr;
 
 private:
 	void updateOverlayQueue();

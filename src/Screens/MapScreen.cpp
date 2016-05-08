@@ -17,6 +17,8 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScree
 
 void MapScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_ps) {
+		sf::Vector2f &pos = m_mainChar->getPosition();
+		m_posGenerator->center = sf::Vector2f(pos.x, pos.y);
 		m_ps->update(frameTime);
 	}
 
@@ -77,24 +79,23 @@ void MapScreen::load() {
 	if (const WeatherData* weather = m_characterCore->getWeather(m_mapID)) {
 		if (weather->weather.compare("rain") == 0) {
 			m_ps = new particles::TextureParticleSystem(10000, g_resourceManager->getTexture(ResourceID::Texture_Particle_rain));
-			m_ps->emitRate = 100.0f;
+			m_ps->emitRate = 200.0f;
 			
-			auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
+			m_posGenerator = m_ps->addGenerator<particles::BoxPositionGenerator>();
 			const sf::FloatRect& rect = m_currentMap.getWorldRect();
-			posGen->center = sf::Vector2f(0.5f * rect.width, -20.f);
-			posGen->size = sf::Vector2f(0.75f * rect.width, 10.f);
+			m_posGenerator->size = sf::Vector2f(2.f * WINDOW_WIDTH, WINDOW_HEIGHT);
 
 			auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 			sizeGen->minStartSize = 5.f;
-			sizeGen->maxStartSize = 10.f;
+			sizeGen->maxStartSize = 15.f;
 			sizeGen->minEndSize = 5.f;
-			sizeGen->maxEndSize = 10.f;
+			sizeGen->maxEndSize = 15.f;
 
 			auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 			velGen->minAngle = 160.f;
 			velGen->maxAngle = 160.f;
-			velGen->minStartVel = 160.f;
-			velGen->maxStartVel = 250.f;
+			velGen->minStartVel = 400.f;
+			velGen->maxStartVel = 500.f;
 
 			auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 			timeGen->minTime = 30.f;
