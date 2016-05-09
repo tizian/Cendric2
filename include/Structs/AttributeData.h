@@ -58,7 +58,7 @@ struct AttributeData {
 		resistancePhysical = bean.res_physical;
 		resistanceFire = bean.res_fire;
 		resistanceIce = bean.res_ice;
-		resistanceShadow = bean.res_ice;
+		resistanceShadow = bean.res_shadow;
 		resistanceLight = bean.res_light;
 
 		calculateAttributes();

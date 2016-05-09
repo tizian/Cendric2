@@ -8,7 +8,8 @@ LevelEquipment::LevelEquipment(LevelMainCharacter* mainChar) : AnimatedGameObjec
 }
 
 LevelEquipment::~LevelEquipment() {
-	g_resourceManager->deleteResource(m_texturePath);
+	if (m_hasTexture)
+		g_resourceManager->deleteResource(m_texturePath);
 }
 
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const {
@@ -31,6 +32,13 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 }
 
 void LevelEquipment::update(const sf::Time& frameTime) {
+	if (!m_hasTexture) {
+		sf::Vector2f newPosition;
+		calculatePositionAccordingToMainChar(newPosition);
+		setPosition(newPosition);
+		return;
+	}
+
 	GameObjectState newState = m_mainChar->getState();
 	
 	bool newFacingRight = m_mainChar->isFacingRight();
@@ -61,6 +69,7 @@ void LevelEquipment::loadEquipment() {
 
 void LevelEquipment::setTexturePath(const std::string& texturePath) {
 	m_texturePath = texturePath;
+	m_hasTexture = !m_texturePath.empty();
 }
 
 void LevelEquipment::setLightComponent(const LightData& data) {

@@ -30,6 +30,7 @@ public:
 private:
 	LevelMainCharacter* m_mainChar;
 	std::string m_texturePath;
+	bool m_hasTexture = false;
 
 	LightComponent* m_lightComponent = nullptr;
 	bool m_isFacingRight;

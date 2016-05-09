@@ -110,3 +110,10 @@ INSERT INTO item_attribute (item_id, dmg_shadow) values ('eq_eyeofthemoon', 10);
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_silvernecklace', 'eq_neck', 350, 200, 10);
 INSERT INTO item_attribute (item_id, res_fire, critical) values ('eq_silvernecklace', 5, 1);
+
+-- Light-Touched Pendant
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lightpendant', 'eq_neck', 450, 0, 50);
+INSERT INTO item_attribute (item_id, dmg_light, res_shadow) values ('eq_lightpendant', 5, 5);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('eq_lightpendant',60, 30, 100, 100, 0.5);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_lightpendant', '');

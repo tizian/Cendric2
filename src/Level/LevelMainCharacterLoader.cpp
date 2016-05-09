@@ -27,6 +27,9 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 	equipmentOrder.push_back(ItemType::Equipment_back);
 	equipmentOrder.push_back(ItemType::Equipment_head);
 	equipmentOrder.push_back(ItemType::Equipment_weapon);
+	equipmentOrder.push_back(ItemType::Equipment_neck);
+	equipmentOrder.push_back(ItemType::Equipment_ring_1);
+	equipmentOrder.push_back(ItemType::Equipment_ring_2);
 	
 	vector<string> gameData;
 	for (auto& it : equipmentOrder) {
@@ -43,8 +46,6 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 		}
 
 		equipment.texturePath = item.getEquipmentBean().texture_path;
-
-		if (equipment.texturePath.empty()) continue;
 
 		equipment.spriteOffset = sf::Vector2f(0.f, 0.f);
 		equipment.boundingBox = sf::FloatRect(0, 0, 120, 120);
@@ -63,20 +64,6 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 
 		LevelEquipment* levelEquipment = new LevelEquipment(mainCharacter);
 		levelEquipment->setBoundingBox(equipment.boundingBox);
-		for (auto &ani : equipment.texturePositions) {
-			Animation* animation = new Animation();
-			if (ani.first == GameObjectState::Fighting) {
-				animation->setFrameTime(sf::milliseconds(70));
-			}
-			else if (ani.first == GameObjectState::Jumping) {
-				animation->setFrameTime(sf::milliseconds(200));
-			}
-			animation->setSpriteSheet(g_resourceManager->getTexture(item.getEquipmentBean().texture_path));
-			for (auto &frame : ani.second) {
-				animation->addFrame(frame);
-			}
-			levelEquipment->addAnimation(ani.first, animation);
-		}
 
 		if (item.isEquipmentLightedItem()) {
 			const ItemEquipmentLightBean& lightBean = item.getEquipmentLightBean();
@@ -84,9 +71,28 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 			levelEquipment->setLightComponent(lightData);
 		}
 
-		// initial values
-		levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
-		levelEquipment->playCurrentAnimation(true);
+		if (!equipment.texturePath.empty()) {
+			for (auto &ani : equipment.texturePositions) {
+				Animation* animation = new Animation();
+				if (ani.first == GameObjectState::Fighting) {
+					animation->setFrameTime(sf::milliseconds(70));
+				}
+				else if (ani.first == GameObjectState::Jumping) {
+					animation->setFrameTime(sf::milliseconds(200));
+				}
+				animation->setSpriteSheet(g_resourceManager->getTexture(item.getEquipmentBean().texture_path));
+				for (auto &frame : ani.second) {
+					animation->addFrame(frame);
+				}
+				levelEquipment->addAnimation(ani.first, animation);
+			}
+
+			// initial values
+			levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
+			levelEquipment->playCurrentAnimation(true);
+		}
+
+		levelEquipment->setTexturePath(equipment.texturePath);
 		levelEquipment->loadEquipment();
 		screen->addObject(levelEquipment);
 	}
