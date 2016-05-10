@@ -11,6 +11,7 @@
 #include "Enums/DamageType.h"
 #include "Enums/FractionID.h"
 #include "Enums/ItemType.h"
+#include "Enums/EnemyID.h"
 
 // pure static class used to resolve enum names.
 class EnumNames {
@@ -207,6 +208,35 @@ public:
 			return "Speed";
 		case SpellModifierType::Strength:
 			return "Strength";
+		}
+	}
+
+	static std::string getEnemyKey(EnemyID enemy) {
+		switch (enemy) {
+		default:
+		case EnemyID::MAX:
+		case EnemyID::VOID:
+			return "Unknown";
+		case EnemyID::Rat:
+			return "Rat";
+		case EnemyID::FireRat:
+			return "FireRat";
+		case EnemyID::Nekomata:
+			return "Nekomata";
+		case EnemyID::Crow:
+			return "Crow";
+		case EnemyID::Skeleton:
+			return "Skeleton";
+		case EnemyID::Gargoyle:
+			return "Gargoyle";
+		case EnemyID::Hunter:
+			return "Hunter";
+		case EnemyID::Wisp:
+			return "Wisp";
+		case EnemyID::Seagull:
+			return "Seagull";
+		case EnemyID::Wolf:
+			return "Wolf";
 		}
 	}
 

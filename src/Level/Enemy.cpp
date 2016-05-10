@@ -8,6 +8,7 @@
 #include "Screens/LevelScreen.h"
 #include "ObjectFactory.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Enums/EnumNames.h"
 
 using namespace std;
 
@@ -26,13 +27,6 @@ Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level)
 	sf::Texture* cursorTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor);
 	m_targetSprite.setTexture(*cursorTexture);
 	m_targetSprite.setOrigin(sf::Vector2f(0.5f * cursorTexture->getSize().x, 0.5f * cursorTexture->getSize().y));
-
-	m_interactComponent = new InteractComponent("", this, m_mainChar);
-	m_interactComponent->setInteractRange(PICKUP_RANGE);
-	m_interactComponent->setInteractText("ToPickup");
-	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
-	m_interactComponent->setInteractable(false);
-	addComponent(m_interactComponent);
 }
 
 Enemy::~Enemy() {
@@ -48,6 +42,13 @@ void Enemy::load(EnemyID id) {
 	loadSpells();
 	loadBehavior();
 	m_spellManager->setSpellsAllied(m_isAlly);
+
+	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyKey(id), "enemy"), this, m_mainChar);
+	m_interactComponent->setInteractRange(PICKUP_RANGE);
+	m_interactComponent->setInteractText("ToPickup");
+	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
+	m_interactComponent->setInteractable(false);
+	addComponent(m_interactComponent);
 }
 
 bool Enemy::getFleeCondition() const {
@@ -298,6 +299,7 @@ void Enemy::addDamageOverTime(DamageOverTimeData& data) {
 }
 
 void Enemy::onMouseOver() {
+	LevelMovableGameObject::onMouseOver();
 	if (m_isDead && !isAlly()) {
 		setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
 		m_showLootWindow = true;
