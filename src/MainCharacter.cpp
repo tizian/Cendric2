@@ -39,4 +39,6 @@ void MainCharacter::registerInteractiveObject(InteractComponent* component) {
 void MainCharacter::notifyDisposed(InteractComponent* component) {
 	if (m_nearestInteractive == component)
 		m_nearestInteractive = nullptr;
+
+	m_interactiveObjects.erase(std::remove(m_interactiveObjects.begin(), m_interactiveObjects.end(), component), m_interactiveObjects.end());
 }
