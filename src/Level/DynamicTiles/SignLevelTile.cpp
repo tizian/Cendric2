@@ -8,6 +8,7 @@ SignLevelTile::SignLevelTile(const SignData& data, LevelScreen* levelScreen) : L
 	m_data = data;
 	m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
+	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 	m_showTooltip = false;
 }
 

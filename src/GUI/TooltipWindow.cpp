@@ -37,3 +37,7 @@ void TooltipWindow::setTextOffset(const sf::Vector2f& offset) {
 	setHeight(m_text.getLocalBounds().height + 2 * m_textOffset.y);
 	setWidth(m_text.getLocalBounds().width + 2 * m_textOffset.x);
 }
+
+void TooltipWindow::setTextAlignment(TextAlignment alignment) {
+	m_text.setTextAlignment(alignment);
+}
