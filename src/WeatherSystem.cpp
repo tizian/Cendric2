@@ -11,7 +11,7 @@ void WeatherSystem::load(const WeatherData* data) {
 		delete m_ps;
 	}
 
-	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(ResourceID::Texture_Particle_rain));
+	m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(ResourceID::Texture_Particle_rain));
 
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->size = sf::Vector2f(2.f * WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -33,8 +33,8 @@ void WeatherSystem::load(const WeatherData* data) {
 		velGen->maxStartVel = 500.f;
 
 		auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-		timeGen->minTime = 30.f;
-		timeGen->maxTime = 30.f;
+		timeGen->minTime = 10.f;
+		timeGen->maxTime = 10.f;
 
 		auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 		colGen->minStartCol = sf::Color(255, 255, 255, 255);
