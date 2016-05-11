@@ -8,6 +8,7 @@ SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynami
 	m_data = data;
 	m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
+	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 	m_showTooltip = false;
 }
 

@@ -16,6 +16,7 @@ public:
 	void setPosition(const sf::Vector2f& position) override;
 	void setText(const std::string& text);
 	void setTextOffset(const sf::Vector2f& offset);
+	void setTextAlignment(TextAlignment alignment);
 
 	static const int MAX_WIDTH;
 
