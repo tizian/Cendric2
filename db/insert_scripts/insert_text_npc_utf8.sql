@@ -8,3 +8,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_inina','npc','High Priestess Inina','Hohepriesterin Inina','Hohepriesterin Inina');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_paladin1','npc','Paladin','Paladin','Paladin');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_paladin2','npc','Paladin','Paladin','Paladin');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_sheep1','npc','Sheep','Schaf','Schöfli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_sheep2','npc','Sheep','Schaf','Schöfli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_ivo','npc','Ivo','Ivo','Ivo');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_tristan','npc','Tristan','Tristan','Tristan');
