@@ -1,10 +1,13 @@
 -- Dialogue for NPC "npc_sheep1"
 loadDialogue = function(DL)
 
-	DL:createChoiceNode(0)
-	DL:addChoice(-1, "") --  
+	DL:createNPCNode(0, 1, "DL_Sheep_Bah") -- Baaah!
+	DL:addNode()
+	
+	DL:createCendricNode(1, -1, "DL_Cendric_Nothing") -- ...
 	DL:addNode()
 	
 	DL:setRoot(0)
+	
 end	
 	
