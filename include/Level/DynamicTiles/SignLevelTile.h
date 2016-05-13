@@ -16,7 +16,7 @@ public:
 	void loadAnimation(int skinNr) override;
 	void setPosition(const sf::Vector2f& pos) override;
 	void onMouseOver() override;
-	void onHit(Spell* spell) {}
+	void onHit(Spell* spell) override {}
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 

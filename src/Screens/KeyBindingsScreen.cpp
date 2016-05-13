@@ -104,7 +104,7 @@ void KeyBindingsScreen::calculateEntryPositions() {
 
 	for (auto& it : m_keyButtons) {
 		BitmapText* keyText = m_keyTexts[it.first];
-		sf::FloatRect& bbox = keyText->getBounds();
+		const sf::FloatRect& bbox = keyText->getBounds();
 		keyText->setPosition(sf::Vector2f(center - 4.f * WINDOW_MARGIN - bbox.width, yOffset + 10.f));
 
 		Button* keyButton = m_keyButtons[it.first].first;
