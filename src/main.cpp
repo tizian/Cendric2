@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 
 g_documentsPath = "";
 
-// If this id defined, savegame and screenshot folders will be created outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windwos)
+// If this is defined, savegame and screenshot folders will be created outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows)
 // #define EXTERN_DOCUMENTS_FOLDER
 #ifdef EXTERN_DOCUMENTS_FOLDER
 
@@ -50,7 +50,7 @@ if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PERSONAL | CSIDL_FLAG_CREATE, NULL, SH
 			TCHAR pathCopy[MAX_PATH];
 			strcpy(pathCopy, path);
 			strcat(pathCopy, saves);
-			std::cout << pathCopy << std::endl;
+
 			int wchars_num_copy = MultiByteToWideChar(CP_UTF8, 0, pathCopy, -1, NULL, 0);
 			wchar_t* wstr_copy = new wchar_t[wchars_num_copy];
 			MultiByteToWideChar(CP_UTF8, 0, pathCopy, -1, wstr_copy, wchars_num_copy);
@@ -62,7 +62,7 @@ if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_PERSONAL | CSIDL_FLAG_CREATE, NULL, SH
 			TCHAR pathCopy[MAX_PATH];
 			strcpy(pathCopy, path);
 			strcat(pathCopy, screenshots);
-			std::cout << pathCopy << std::endl;
+
 			int wchars_num_copy = MultiByteToWideChar(CP_UTF8, 0, pathCopy, -1, NULL, 0);
 			wchar_t* wstr_copy = new wchar_t[wchars_num_copy];
 			MultiByteToWideChar(CP_UTF8, 0, pathCopy, -1, wstr_copy, wchars_num_copy);
