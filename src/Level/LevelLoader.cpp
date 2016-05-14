@@ -20,7 +20,6 @@ void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level*
 	loadModifierTiles(data, screen);
 	loadChestTiles(data, screen);
 	loadLeverTiles(data, screen);
-	loadMovingTiles(data, screen);
 	loadJumpingTiles(data, screen);
 	loadSignTiles(data, screen);
 	loadTriggers(data, screen);
@@ -56,22 +55,6 @@ void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
 		chestTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		chestTile->loadAnimation(it.skinNr);
 		screen->addObject(chestTile);
-	}
-}
-
-void LevelLoader::loadMovingTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& movingData : data.movingTiles) {
-
-		MovingTile* movingTile = new MovingTile(screen);
-
-		movingTile->setMovingTileData(movingData);
-		movingTile->init();
-		movingTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		movingTile->loadAnimation(movingData.skinNr);
-		movingTile->setPosition(movingData.spawnPosition);
-		movingTile->setDynamicTileID(LevelDynamicTileID::Moving);
-
-		screen->addObject(movingTile);
 	}
 }
 
@@ -132,11 +115,12 @@ void LevelLoader::loadModifierTiles(LevelData& data, LevelScreen* screen) const 
 void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 	for (auto& it : data.levers) {
 
-		std::vector<SwitchableTile*> dependentTiles;
+		std::vector<LeverDependentTile*> dependentTiles;
 
 		// create the switch tiles and add them.
-		for (auto& switchBean : it.dependentTiles) {
+		for (auto& switchBean : it.dependentSwitchableTiles) {
 			SwitchableTile* tile = new SwitchableTile(screen);
+
 			tile->setInitialState(switchBean.id == LevelDynamicTileID::SwitchableOn);
 			tile->init();
 			tile->setPosition(switchBean.position);
@@ -146,9 +130,24 @@ void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 			dependentTiles.push_back(tile);
 		}
 
+		// create the moving tiles and add them.
+		for (auto& movingData : it.dependentMovingTiles) {
+			MovingTile* movingTile = new MovingTile(screen);
+
+			movingTile->setMovingTileData(movingData);
+			movingTile->init();
+			movingTile->setDebugBoundingBox(COLOR_NEUTRAL);
+			movingTile->loadAnimation(movingData.skinNr);
+			movingTile->setPosition(movingData.spawnPosition);
+			movingTile->setDynamicTileID(LevelDynamicTileID::Moving);
+			screen->addObject(movingTile);
+			dependentTiles.push_back(movingTile);
+		}
+
 		// create the lever tiles and add them.
 		for (auto& leverBean : it.levers) {
 			LeverTile* tile = new LeverTile(screen);
+
 			tile->init();
 			tile->setPosition(leverBean.position);
 			tile->setDebugBoundingBox(COLOR_NEUTRAL);

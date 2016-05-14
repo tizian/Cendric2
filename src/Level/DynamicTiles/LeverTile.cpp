@@ -69,17 +69,13 @@ void LeverTile::onRightClick() {
 	g_inputController->lockAction();
 }
 
-void LeverTile::setDependantTiles(const std::vector<SwitchableTile*>& dependentTiles) {
+void LeverTile::setDependantTiles(const std::vector<LeverDependentTile*>& dependentTiles) {
 	m_dependentTiles = dependentTiles;
 }
 
 void LeverTile::switchLever() {
-	WorldCollisionQueryRecord rec;
 	for (auto& tile : m_dependentTiles) {
-		if (tile->getGameObjectState() == GameObjectState::On) continue;
-		rec.boundingBox = *tile->getBoundingBox();
-		if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
-			g_logger->logInfo("LeverTile::switchLever", "Cannot switch the lever as it would stuck a MOB or a movable tile!");
+		if (!tile->isSwitchable()) {
 			m_screen->setTooltipText("LeverStuck", COLOR_BAD, true);
 			return;
 		}

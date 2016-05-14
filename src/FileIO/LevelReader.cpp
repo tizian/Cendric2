@@ -193,6 +193,8 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 
 bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+	int leverOffset = static_cast<int>(LevelDynamicTileID::Lever) + m_firstGidDynamicTiles - 1;
+	LeverData leData;
 
 	while (object != nullptr) {
 
@@ -207,6 +209,19 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 		int y;
 		result = object->QueryIntAttribute("y", &y);
 		XMLCheckResult(result);
+
+		if ((gid - leverOffset) % DYNAMIC_TILE_COUNT == 0) {
+			// this is a lever on a moving tile layer
+			LevelDynamicTileData lever;
+			lever.id = LevelDynamicTileID::Lever;
+			lever.position = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
+			lever.skinNr = ((gid - leverOffset) / DYNAMIC_TILE_COUNT) + 1;
+			lever.spawnPosition = gid; // its an object now
+			leData.levers.push_back(lever);
+
+			object = object->NextSiblingElement("object");
+			continue;
+		}
 
 		int offset = static_cast<int>(LevelDynamicTileID::Moving) + m_firstGidDynamicTiles - 1;
 		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
@@ -231,6 +246,11 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 
 				if (propertyText.compare("frozen") == 0) {
 					movingTileData.isFrozen = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
+				if (propertyText.compare("inactive") == 0) {
+					movingTileData.isActive = false;
 					property_ = property_->NextSiblingElement("property");
 					continue;
 				}
@@ -283,10 +303,12 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 			}
 		}
 
-		data.movingTiles.push_back(movingTileData);
+		leData.dependentMovingTiles.push_back(movingTileData);
 
 		object = object->NextSiblingElement("object");
 	}
+
+	data.levers.push_back(leData);
 	return true;
 }
 
@@ -694,7 +716,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 			switchTile.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			switchTile.skinNr = ((skinNr - onOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
-			leData.dependentTiles.push_back(switchTile);
+			leData.dependentSwitchableTiles.push_back(switchTile);
 		}
 		else if ((skinNr - offOffset) % DYNAMIC_TILE_COUNT == 0) {
 			LevelDynamicTileData switchTile;
@@ -702,7 +724,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 			switchTile.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			switchTile.skinNr = ((skinNr - offOffset) / DYNAMIC_TILE_COUNT) + 1;
 			switchTile.spawnPosition = y * data.mapSize.x + x;
-			leData.dependentTiles.push_back(switchTile);
+			leData.dependentSwitchableTiles.push_back(switchTile);
 		}
 		else {
 			logError("Wrong tile id found on a lever layer, id=" + std::to_string(skinNr));
@@ -1031,16 +1053,18 @@ bool LevelReader::checkData(LevelData& data) const {
 			return false;
 		}
 	}
-	for (auto& it : data.movingTiles) {
-		if (it.initialDirection == -1) {
-			logError("Moving tile initial direction must be set.");
-			return false;
-		}
-		if (it.speed == 0.f) {
-			g_logger->logWarning("LevelReader","Moving tile speed is 0.");
-		}
-		if (it.distance == 0) {
-			g_logger->logWarning("LevelReader", "Moving tile distance is 0.");
+	for (auto& lever : data.levers) {
+		for (auto& it : lever.dependentMovingTiles) {
+			if (it.initialDirection == -1) {
+				logError("Moving tile initial direction must be set.");
+				return false;
+			}
+			if (it.speed == 0.f) {
+				g_logger->logWarning("LevelReader", "Moving tile speed is 0.");
+			}
+			if (it.distance == 0) {
+				g_logger->logWarning("LevelReader", "Moving tile distance is 0.");
+			}
 		}
 	}
 	for (auto& it : data.enemies) {

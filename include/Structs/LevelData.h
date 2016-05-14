@@ -25,7 +25,6 @@ struct LevelData : WorldData {
 	std::vector<EnemyData> enemies;
 	std::vector<ChestData> chests;
 	std::vector<ModifierTileData> modifiers;
-	std::vector<MovingTileData> movingTiles;
 	std::vector<JumpingTileData> jumpingTiles;
 	std::vector<SignData> signTiles;
 };

@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
-#include "Level/DynamicTiles/SwitchableTile.h"
+#include "Level/DynamicTiles/LeverDependentTile.h"
 
 class LevelMainCharacter;
 
@@ -14,14 +14,14 @@ public:
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
 
-	void setDependantTiles(const std::vector<SwitchableTile*>& dependentTiles);
+	void setDependantTiles(const std::vector<LeverDependentTile*>& dependentTiles);
 	void switchLever();
 
 private:
 	// the lever can only be used by hand if the main char is in this range.
 	// it is however always possible for a telekinesis spell to activate the lever if its projectile reaches the lever.
 	static const float ACTIVATE_RANGE;
-	std::vector<SwitchableTile*> m_dependentTiles;
+	std::vector<LeverDependentTile*> m_dependentTiles;
 
 	sf::Sound m_sound;
 };

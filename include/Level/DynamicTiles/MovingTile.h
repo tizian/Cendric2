@@ -2,9 +2,10 @@
 
 #include "global.h"
 #include "Level/DynamicTiles/LevelMovableTile.h"
+#include "Level/DynamicTiles/LeverDependentTile.h"
 #include "Structs/MovingTileData.h"
 
-class MovingTile : public virtual LevelMovableTile {
+class MovingTile : public virtual LevelMovableTile, public virtual LeverDependentTile {
 public:
 	MovingTile(LevelScreen* levelScreen);
 	void setMovingTileData(const MovingTileData& data);
@@ -18,9 +19,20 @@ public:
 
 	const sf::Vector2f& getRelativeVelocity() const;
 
+	void setInitialState(bool on) override;
+	void switchTile() override;
+	bool isSwitchable() const override;
+
+	// those methods are overridden to resolve the MI diamond of death:
+	void updateFirst(const sf::Time& frameTime) override { LevelMovableTile::updateFirst(frameTime); }
+	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableTile::renderAfterForeground(target); }
+	void setDebugBoundingBox(const sf::Color &debugColor) override { LevelMovableTile::setDebugBoundingBox(debugColor); }
+	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); };
+
 private:
 	void setFrozen(bool frozen);
 	bool m_isFrozen;
+	bool m_isActive;
 	sf::Vector2f m_currentVelocity;
 	sf::Time m_distanceTime;
 	sf::Time m_timeUntilTurn;

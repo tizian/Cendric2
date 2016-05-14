@@ -44,3 +44,14 @@ void SwitchableTile::switchTile() {
 	m_isStrictlyCollidable = m_isCollidable;
 	setState(m_isCollidable ? GameObjectState::On : GameObjectState::Off);
 }
+
+bool SwitchableTile::isSwitchable() const {
+	if (m_state == GameObjectState::On) return true;
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = m_boundingBox;
+	if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
+		g_logger->logInfo("SwitchableTile", "Cannot turn the tile on as it would stuck a MOB or a movable tile!");
+		return false;
+	}
+	return true;
+}

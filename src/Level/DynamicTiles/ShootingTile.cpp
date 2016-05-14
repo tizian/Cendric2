@@ -33,6 +33,8 @@ void ShootingTile::loadSpells() {
 	}
 	case 2:
 	case 3:
+	case 4:
+	case 5:
 	{
 		m_spellData = SpellData::getSpellData(SpellID::FireBall);
 		m_spellData.duration = sf::seconds(3.f);
@@ -73,6 +75,8 @@ void ShootingTile::loadAnimation(int skinNr) {
 		break;
 	case 2:
 	case 3:
+	case 4:
+	case 5:
 		// fire flowers
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
@@ -159,6 +163,20 @@ void ShootingTile::executeSpells() {
 	{
 		FireBallSpell* spell = new FireBallSpell();
 		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height));
+		m_screen->addObject(spell);
+		break;
+	}
+	case 4:
+	{
+		FireBallSpell* spell = new FireBallSpell();
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width, getPosition().y + getBoundingBox()->height / 2.f));
+		m_screen->addObject(spell);
+		break;
+	}
+	case 5:
+	{
+		FireBallSpell* spell = new FireBallSpell();
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->height / 2.f));
 		m_screen->addObject(spell);
 		break;
 	}

@@ -6,7 +6,8 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
 MovingTile::MovingTile(LevelScreen* levelScreen) :
     LevelDynamicTile(levelScreen),
-	LevelMovableTile(levelScreen) {
+	LevelMovableTile(levelScreen),
+	LeverDependentTile(levelScreen) {
 	m_movingParent = this; 
 	m_relativeVelocity.x = 0.f;
 	m_relativeVelocity.y = 0.f;
@@ -23,6 +24,7 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 	m_timeUntilTurn = m_distanceTime;
 
 	setFrozen(data.isFrozen);
+	setInitialState(data.isActive);
 }
 
 void MovingTile::init() {
@@ -71,7 +73,7 @@ void MovingTile::loadAnimation(int skinNr) {
 }
 
 void MovingTile::update(const sf::Time& frameTime) {
-	if (!m_isFrozen) {
+	if (!m_isFrozen && m_isActive) {
 		updateTime(m_timeUntilTurn, frameTime);
 		if (m_timeUntilTurn == sf::Time::Zero) {
 			m_timeUntilTurn = m_distanceTime;
@@ -130,6 +132,20 @@ void MovingTile::onHit(Spell* spell) {
 
 void MovingTile::setFrozen(bool frozen) {
 	m_isFrozen = frozen;
-	m_relativeVelocity = m_isFrozen ? sf::Vector2f() : m_currentVelocity;
+	m_relativeVelocity = m_isFrozen || !m_isActive ? sf::Vector2f() : m_currentVelocity;
 	setPosition(getPosition());
+}
+
+void MovingTile::setInitialState(bool on) {
+	m_isActive = on;
+	m_relativeVelocity = m_isFrozen || !m_isActive ? sf::Vector2f() : m_currentVelocity;
+	setPosition(getPosition());
+}
+
+void MovingTile::switchTile() {
+	setInitialState(!m_isActive);
+}
+
+bool MovingTile::isSwitchable() const {
+	return true;
 }

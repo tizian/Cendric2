@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
 g_documentsPath = "";
 
 // If this id defined, savegame and screenshot folders will be created outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windwos)
-// #define EXTERN_DOCUMENTS_FOLDER
+//#define EXTERN_DOCUMENTS_FOLDER
 #ifdef EXTERN_DOCUMENTS_FOLDER
 
 #if _WIN32

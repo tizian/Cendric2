@@ -10,4 +10,5 @@ struct MovingTileData {
 	int skinNr;
 	int initialDirection = -1; // in degree
 	bool isFrozen = false;
+	bool isActive = true;
 };
