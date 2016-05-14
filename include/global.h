@@ -148,5 +148,4 @@ extern InputController* g_inputController;
 extern Logger* g_logger;
 extern TextProvider* g_textProvider;
 extern sf::RenderWindow* g_renderWindow;
-
-
+extern std::string g_documentsPath;

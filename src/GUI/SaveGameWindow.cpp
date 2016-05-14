@@ -11,7 +11,6 @@
 #include <dirent.h>
 #endif
 
-const std::string SAVE_GAME_FOLDER = "saves/";
 const std::string QUICKSAVE_NAME = "quicksave.sav";
 
 const int SaveGameWindow::ENTRY_COUNT = 20;
@@ -54,7 +53,7 @@ void SaveGameWindow::reload() {
 	DIR *dir;
 	struct dirent *de;
 
-	dir = opendir(getPath(SAVE_GAME_FOLDER).c_str());
+	dir = opendir(getPath(g_documentsPath + "saves/").c_str());
 	int nr = 0;
 	while (dir) {
 		de = readdir(dir);
@@ -69,7 +68,7 @@ void SaveGameWindow::reload() {
 			continue;
 		}
 		SaveGameEntry entry;
-		std::string location = SAVE_GAME_FOLDER + std::string(de->d_name);
+		std::string location = g_documentsPath + "saves/" + std::string(de->d_name);
 		if (!entry.load(location.c_str())) {
 			g_logger->logError("SaveGameWindow", "Could not load savegame " + location);
 			continue;
@@ -239,8 +238,6 @@ void SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
 }
 
 void SaveGameWindow::render(sf::RenderTarget& renderTarget) {
-	if (m_entries.empty()) return;
-
 	for (size_t i = 0; i < m_entries.size(); ++i) {
 		m_entries[i].render(m_scrollHelper->texture);
 	}

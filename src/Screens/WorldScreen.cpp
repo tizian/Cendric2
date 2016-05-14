@@ -181,7 +181,7 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 		std::time_t t = time(nullptr);
 		strftime(buff, 20, "%Y-%m-%d %H-%M-%S", localtime(&t));
 
-		std::string file = "screenshots/" + string(buff) + ".png";
+		std::string file = g_documentsPath + "screenshots/" + string(buff) + ".png";
 
 		sf::Image image = g_renderWindow->capture();
 		image.saveToFile(getPath(file));

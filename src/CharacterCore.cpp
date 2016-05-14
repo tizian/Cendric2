@@ -4,7 +4,6 @@
 
 using namespace std;
 
-const char* CharacterCore::QUICKSAVE_LOCATION = "saves/quicksave.sav";
 const char* CharacterCore::DEBUGSAVE_LOCATION = "saves/debug.sav";
 
 CharacterCore::CharacterCore() {
@@ -33,7 +32,7 @@ CharacterCore::~CharacterCore() {
 }
 
 bool CharacterCore::quickload() {
-	return load(QUICKSAVE_LOCATION);
+	return load(g_documentsPath + "saves/quicksave.sav");
 }
 
 bool CharacterCore::load(const std::string& fileName) {
@@ -139,8 +138,8 @@ bool CharacterCore::quicksave() {
 
 	// write to savefile.
 	CharacterCoreWriter writer;
-	writer.createFile(QUICKSAVE_LOCATION);
-	return writer.saveToFile(QUICKSAVE_LOCATION, m_data);
+	writer.createFile(g_documentsPath + "saves/quicksave.sav");
+	return writer.saveToFile(g_documentsPath + "saves/quicksave.sav", m_data);
 }
 
 bool CharacterCore::createFile(const std::string& fileName) const {

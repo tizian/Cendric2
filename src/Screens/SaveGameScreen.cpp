@@ -137,7 +137,7 @@ void SaveGameScreen::onYesNewSaveGame() {
 		if (found) it = ' ';
 	}
 
-	std::string file = "saves/" + to_string(time(nullptr)) + cleanedName + ".sav";
+	std::string file = g_documentsPath + "saves/" + to_string(time(nullptr)) + cleanedName + ".sav";
 
 	m_newSaveGameForm = nullptr;
 	if (m_characterCore->save(file, name)) {

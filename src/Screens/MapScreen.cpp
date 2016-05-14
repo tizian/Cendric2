@@ -13,6 +13,9 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScree
 
 void MapScreen::execUpdate(const sf::Time& frameTime) {
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
+	if (m_currentMap.getWorldData()->explorable) {
+		updateFogOfWar();
+	}
 
 	handleCookingWindow(frameTime);
 	handleDialogueWindow(frameTime);
@@ -38,10 +41,6 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Light, frameTime);
 	updateObjects(GameObjectType::_Overlay, frameTime);
 	updateTooltipText(frameTime);
-
-	if (m_currentMap.getWorldData()->explorable) {
-		updateFogOfWar();
-	}
 }
 
 void MapScreen::loadForRenderTexture() {
