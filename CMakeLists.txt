@@ -23,6 +23,7 @@ endif()
 
 if (MSVC)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+  add_definitions (/D "_CRT_SECURE_NO_WARNINGS")
 endif()
 
 include_directories(
