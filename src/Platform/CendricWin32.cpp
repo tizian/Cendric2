@@ -3,6 +3,7 @@
 #ifdef _WIN32
 
 #include <ShlObj.h>
+#include <algorithm>
 
 std::string getDocumentPath() {
 	std::string resultPath = "";
