@@ -12,8 +12,6 @@ std::string getDocumentPath() {
 	NSString* path = [pathsArray firstObject];
 	resultPath = std::string([path UTF8String]) + std::string("/Cendric/");
 
-	std::cout << resultPath << std::endl;
-
 	NSString* savesPath = [path stringByAppendingString:@"/Cendric/saves"];
 	NSString* screenshotsPath = [path stringByAppendingString:@"/Cendric/screenshots"];
 
