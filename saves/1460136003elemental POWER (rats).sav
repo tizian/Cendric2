@@ -13,7 +13,7 @@ map.position:2916.096924,257.613770
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:45
 # items in inventory:
-item.id:eq_head_divinet3,1
+item.id:eq_head_divinet2,1
 item.id:eq_head_necrot3,1
 item.id:eq_huntershat,1
 item.id:eq_purpleback,1
