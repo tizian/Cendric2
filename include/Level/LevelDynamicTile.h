@@ -29,7 +29,6 @@ public:
 	// this is to seperate the water tiles which are rendered after the game objects
 	// from the other tiles.
 	virtual void render(sf::RenderTarget& target) override;
-	virtual void update(const sf::Time& frameTime) override;
 
 	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
 	void setPositionOffset(const sf::Vector2f& offset);
@@ -51,7 +50,7 @@ protected:
 	bool m_isCollidable = false;
 	bool m_isStrictlyCollidable = false;
 	bool m_isRenderAfterObjects = false;
-	bool m_isFirstRenderIteration = false;
+	bool m_isFirstRenderIteration = true;
 
 private:
 	sf::Vector2f m_positionOffset = sf::Vector2f(0.f, 0.f);
