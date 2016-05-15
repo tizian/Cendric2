@@ -14,7 +14,7 @@
 #include <windows.h>
 #include "Platform/CendricWin32.h"
 #elif __APPLE__
-#include "Platform/CendricWin32.h"
+#include "Platform/CendricApple.h"
 #endif
 
 std::string g_documentsPath;
