@@ -1131,6 +1131,9 @@
    <properties>
     <property name="dialoguetexture" value="250,750"/>
     <property name="id" value="npc_sheep2"/>
+	<property name="spritesheetpath" value="res/npc/npc_sheep1/spritesheet_npc_sheep1.png"/>
+	<property name="texttype" value="dl_npc_sheep1"/>
+	<property name="dialogueid" value="res/npc/npc_sheep1/dl_npc_sheep1.lua"/>
    </properties>
   </object>
  </objectgroup>

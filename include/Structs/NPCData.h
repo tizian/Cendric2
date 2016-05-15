@@ -17,6 +17,7 @@ struct NPCData {
 	bool talkingEnabled; // cendric can talk to the npc
 	std::string dialogueID;
 	sf::IntRect dialogueTexturePositon;
+	std::string textType;
 };
 
 const struct NPCData DEFAULT_NPC =
@@ -31,5 +32,6 @@ const struct NPCData DEFAULT_NPC =
 	false,
 	true,
 	"",
-	sf::IntRect(0, 0, 250, 250) // that's cendrics dialogue sprite
+	sf::IntRect(0, 0, 250, 250), // that's cendrics dialogue sprite
+	""
 };

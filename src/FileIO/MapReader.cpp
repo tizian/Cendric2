@@ -381,9 +381,54 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 						return false;
 					}
 					npc.id = textAttr;
-					npc.dialogueID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/dl_" + npc.id + ".lua";
-					npc.routineID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/ru_" + npc.id + ".lua";
-					npc.spritesheetpath = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/spritesheet_" + npc.id + ".png";
+					
+					if (npc.dialogueID.empty())
+						npc.dialogueID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/dl_" + npc.id + ".lua";
+					
+					if (npc.routineID.empty())
+						npc.routineID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/ru_" + npc.id + ".lua";
+					
+					if (npc.spritesheetpath.empty())
+						npc.spritesheetpath = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/spritesheet_" + npc.id + ".png";
+
+					if (npc.textType.empty())
+						npc.textType = "dl_" + npc.id;
+				}
+				else if (attrText.compare("dialogueid") == 0) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					npc.dialogueID = textAttr;
+				}
+				else if (attrText.compare("spritesheetpath") == 0) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					npc.spritesheetpath = textAttr;
+				}
+				else if (attrText.compare("routineid") == 0) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					npc.routineID = textAttr;
+				}
+				else if (attrText.compare("texttype") == 0) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					npc.textType = textAttr;
 				}
 				else if (attrText.compare("dialoguetexture") == 0) {
 					textAttr = nullptr;

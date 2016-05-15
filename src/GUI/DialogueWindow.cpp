@@ -82,15 +82,6 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* scr
 	m_dialogue = new Dialogue();
 	m_dialogue->reload(dialogueID, screen, this);
 	m_screen = screen;
-	
-	if (m_dialogue->getID().size() > 4) {
-		// removing the .lua
-		m_dialogueTextID = m_dialogue->getID().substr(0, m_dialogue->getID().size() - 4);
-		// removing everything from /
-		if (m_dialogueTextID.find('/') != std::string::npos) {
-			m_dialogueTextID = m_dialogueTextID.substr(m_dialogueTextID.find_last_of('/') + 1, m_dialogueTextID.size());
-		}
-	}
 
 	m_dialogue->updateWindow();
 	m_dialogueTimeout = DIALOGUE_TIMEOUT;
@@ -100,6 +91,7 @@ void DialogueWindow::setNPC(NPC* npc) {
 	m_npc = npc;
 	m_npcTexturePosition = m_npc->getNPCData().dialogueTexturePositon;
 	m_npcID = m_npc->getNPCData().id;
+	m_dialogueTextID = m_npc->getNPCData().textType;
 	m_npcName = g_textProvider->getText(m_npcID, "npc");
 }
 
