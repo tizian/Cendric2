@@ -28,6 +28,37 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, res_physical, res_ice) values ('eq_purpleback', 5, 1);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_purpleback', 'res/assets/equipment/back/spritesheet_back_purple.png');
 
+-- Demon Back
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonback', 'eq_back', 0, 350, 12);
+INSERT INTO item_attribute (item_id, res_physical, dmg_shadow) values ('eq_demonback', 7, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_demonback', 'res/assets/equipment/back/spritesheet_back_demon.png');
+
+-- Demon Head
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonhead', 'eq_head', 50, 350, 14);
+INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonhead', 8, 7, 7);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_demonhead', 'res/assets/equipment/head/spritesheet_head_demon.png');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('eq_demonhead',65, 25, 25, 25, 0.3);
+
+-- Demon Body
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonbody', 'eq_body', 100, 350, 18);
+INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonbody', 13, 9, 8);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_demonbody', 'res/assets/equipment/body/spritesheet_body_demon.png');
+
+-- Nekomata Back
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_nekomataback', 'eq_back', 0, 400, 13);
+INSERT INTO item_attribute (item_id, haste, critical, res_physical, res_shadow) values ('eq_nekomataback', 13, 12, 7, 6);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_nekomataback', 'res/assets/equipment/back/spritesheet_back_nekomata.png');
+
+-- Nekomata Head
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_nekomatahead', 'eq_head', 50, 400, 15);
+INSERT INTO item_attribute (item_id, critical, dmg_physical, res_physical, res_shadow) values ('eq_nekomatahead', 15, 10, 10, 8);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_nekomatahead', 'res/assets/equipment/head/spritesheet_head_nekomata.png');
+
 -- Necro T3 Head
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_necrot3', 'eq_head', 0, 200, 120);
@@ -46,11 +77,17 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, haste, critical, res_physical, res_shadow, dmg_shadow) values ('eq_body_necrot3', 30, 20, 10, 30, 20, 20);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_body_necrot3', 'res/assets/equipment/body/spritesheet_body_necrot3.png');
 
--- Divine T3 Head
+-- Divine T2 Back
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet3', 'eq_head', 150, 200, 120);
-INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet3', 10, 10, 10, 10, 10, 2, 5);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_divinet3', 'res/assets/equipment/head/spritesheet_head_divinet3.png');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet2', 'eq_back', 0, 450, 100);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet2', 8, 6, 5, 6, 8, 3, 6);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_back_divinet2', 'res/assets/equipment/back/spritesheet_back_divinet2.png');
+
+-- Divine T2 Head
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet2', 'eq_head', 150, 200, 120);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet2', 10, 10, 10, 10, 10, 2, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_divinet2', 'res/assets/equipment/head/spritesheet_head_divinet2.png');
 
 -- Leather Armour
 

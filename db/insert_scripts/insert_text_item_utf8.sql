@@ -1,4 +1,16 @@
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_purpleback', 'item', 'Purple cape','Violetter Umhang','Violette Umhang');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonback', 'item', 'Demon cape','Dämonen Umhang','Dämone Umhang');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonback', 'item_desc', 'Cape worn by demon hunters.','Umhang eines Dämonenjägers.','Umhang voneme Dämonejäger.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonhead', 'item', 'Demon helmet','Dämonen Helm','Dämone Helm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonhead', 'item_desc', 'Helmet worn by demon hunters.','Helm eines Dämonenjägers.','Helm voneme Dämonejäger.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonbody', 'item', 'Demon armour','Dämonen Rüstung','Dämone Rüschtig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonbody', 'item_desc', 'Armour worn by demon hunters.','Rüstung eines Dämonenjägers.','Rüschtig voneme Dämonejäger.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomataback', 'item', 'Nekomata cloak','Nekomata Mantel','Nekomata Mantel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomataback', 'item_desc', 'Both an experienced hunter and a skilled leatherworker are involved in the creation of such a cape.','Ein erfahrener Jäger sowie ein geschickter Lederer sind nötig um einen solchen Umhang herzustellen.','Es brucht en erfahrene Jäger und en gschickte Lederer zum sonen Umhang herzstelle.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomatahead', 'item', 'Nekomata head','Nekomata Kopf','Nekomata Chopf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomatahead', 'item_desc', 'Looking in the eyes of a Nekomata can fill the bravest warriors with terror.','In die Augen einer Nekomata zu schauen kann den mutigsten Kriegern Angst einflössen.','I''d Auge vonere Nekomata z''luege cha de muetigste Chrieger Angst ihflösse.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet2', 'item', 'Cover of the Order','Überwurf des Ordens','Überwurf vom Orde');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet2', 'item_desc', 'A noble cape with nice ornaments.','Ein nobler Umhang mit hübschen Ornamenten.','En noble Umhang mit hübsche Ornamentli.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubyring', 'item', 'Ruby Ring','Rubinring','Rubinring');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_ironring', 'item', 'Iron Ring','Eisener Ring','Isering');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatblue', 'item', 'Blue wizardhat','Blauer Spitzhut','Blaue Magierhuet');
@@ -106,8 +118,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rafishat', 'item_desc', 'What a strange hat...','Was für ein seltsamer Hut...','Was füren komische Huet...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_huntershat', 'item', 'Hunter''s Hat','Jägerhut','Jägershuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_huntershat', 'item_desc', 'A brown leather hat with a red feather. Protects its wearer from foul weather.','Ein brauner Lederhut mit einer roten Feder. Schützt seinen Besitzer vor schlechtem Wetter.','En bruune Lederhuet mit enere rote Federe. Schützt sin Träger vor gruusigem Wetter.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item', 'Circlet of the Order','Reif des Ordens','Reif vom Orde');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item_desc', 'Golden & shiny.','Golden & glänzig.','Goldig & glänzig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet2', 'item', 'Circlet of the Order','Reif des Ordens','Reif vom Orde');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet2', 'item_desc', 'Golden & shiny.','Golden & glänzig.','Goldig & glänzig.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bandana', 'item', 'Green Bandana','Grünes Kopftuch','Grüens Chopftuech');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bandana', 'item_desc', 'The cloth is a bit tattered but it can still be worn.','Der Stoff ist ein wenig zerrissen, man kann es aber immer noch tragen.','De Stoff isch chli verschlisse, me chas aber immerna alege.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_leatherarmor', 'item', 'Leather Armour','Lederrüstung','Lederrüschtig');
