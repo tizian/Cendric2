@@ -53,7 +53,7 @@ void SaveGameWindow::reload() {
 	DIR *dir;
 	struct dirent *de;
 
-	dir = opendir(getPath(g_documentsPath + "saves/").c_str());
+	dir = opendir((g_documentsPath + "saves/").c_str());
 	int nr = 0;
 	while (dir) {
 		de = readdir(dir);

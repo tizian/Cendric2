@@ -184,9 +184,9 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 		std::string file = g_documentsPath + "screenshots/" + string(buff) + ".png";
 
 		sf::Image image = g_renderWindow->capture();
-		image.saveToFile(getPath(file));
+		image.saveToFile(file);
 
-		std::string logString = "Saved screenshot under \"" + getPath(file) + "\".";
+		std::string logString = "Saved screenshot under \"" + file + "\".";
 		g_logger->logInfo("WorldScreen", logString);
 
 		setTooltipText("ScreenshotSaved", COLOR_GOOD, true);
