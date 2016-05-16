@@ -30,12 +30,12 @@ void WolfEnemy::loadAttributes() {
 
 void WolfEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 30;
+	chopSpell.damage = 20;
 	chopSpell.duration = sf::seconds(2.f);
-	chopSpell.damagePerSecond = 10;
+	chopSpell.damagePerSecond = 5;
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 60, 100);
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 100);
 
 	m_spellManager->addSpell(chopSpell);
 

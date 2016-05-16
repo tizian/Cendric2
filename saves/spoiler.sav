@@ -34,6 +34,7 @@ item.id:eq_nekomataback,1
 item.id:eq_nekomatahead,1
 item.id:eq_oversizedhat,1
 item.id:eq_purpleback,1
+item.id:eq_fireratscarf,1
 item.id:eq_rafishat,1
 item.id:eq_rubyring,1
 item.id:eq_wizardhatblue,1
@@ -64,6 +65,7 @@ item.id:mi_pearl,1
 item.id:mi_silverplate,1
 item.id:mi_teeth,1
 item.id:mi_wolf_fur,1
+item.id:mi_firerat_fur,1
 item.id:pe_feudalfire,1
 item.id:pe_glassoffeudalfire,1
 item.id:pe_ingridstew,1

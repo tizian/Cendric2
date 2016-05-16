@@ -5,3 +5,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Da
 Rockfall Area','GEFAHR
 Felssturz','ACHTUNG
 Felssturz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TryIceMagic','sign','Try ice magic','Versuch''s mit Eismagie','Probier''s mit Iismagie');

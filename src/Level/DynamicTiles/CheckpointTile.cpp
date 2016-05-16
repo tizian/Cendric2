@@ -13,7 +13,7 @@ CheckpointTile::CheckpointTile(LevelScreen* levelScreen) : LevelDynamicTile(leve
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Checkpoint"), this, m_mainChar);
 	m_interactComponent->setInteractRange(ACTIVATE_RANGE);
 	m_interactComponent->setInteractText("ToActivate");
-	m_interactComponent->setOnInteract(std::bind(&CheckpointTile::setActive, this, true));
+	m_interactComponent->setOnInteract(std::bind(&CheckpointTile::onLeftClick, this));
 	m_interactComponent->setTooltipHeight(30.f);
 	addComponent(m_interactComponent);
 }
