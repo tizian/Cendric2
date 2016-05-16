@@ -110,9 +110,11 @@ void Inventory::init() {
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	m_equipment = new InventoryEquipment(getInterface()->getScreen());
+
+	m_currentTab = ItemType::Equipment_weapon;
 	reload();
 
-	selectTab(ItemType::Equipment_weapon);
+	selectTab(m_currentTab);
 }
 
 Inventory::~Inventory() {
@@ -266,8 +268,7 @@ void Inventory::update(const sf::Time& frameTime) {
 		selectTab(type);
 	}
 
-	std::map<std::string, InventorySlot>* tab = m_typeMap.at(type);
-	calculateSlotPositions(*tab);
+	calculateSlotPositions(*(m_typeMap.at(type)));
 
 	// update equipment part
 	m_equipment->update(frameTime);
@@ -551,6 +552,8 @@ void Inventory::reload() {
 
 	// reload equipment
 	m_equipment->reload();
+
+	calculateSlotPositions(*(m_typeMap.at(m_currentTab)));
 }
 
 void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slots) {

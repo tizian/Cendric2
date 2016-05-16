@@ -39,12 +39,8 @@ void LevelDynamicTile::render(sf::RenderTarget& target) {
 		if (m_isRenderAfterObjects) {
 			AnimatedGameObject::render(target);
 		}
+		m_isFirstRenderIteration = true;
 	}
-}
-
-void LevelDynamicTile::update(const sf::Time& frameTime) {
-	AnimatedGameObject::update(frameTime);
-	m_isFirstRenderIteration = true;
 }
 
 LevelDynamicTileID LevelDynamicTile::getDynamicTileID() const {
