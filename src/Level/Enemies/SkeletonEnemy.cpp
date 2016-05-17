@@ -72,7 +72,7 @@ void SkeletonEnemy::loadAnimation() {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
-	idleAnimation->addFrame(sf::IntRect(00, 150, 150, 150));
+	idleAnimation->addFrame(sf::IntRect(0, 150, 150, 150));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

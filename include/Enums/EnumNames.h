@@ -237,6 +237,8 @@ public:
 			return "Seagull";
 		case EnemyID::Wolf:
 			return "Wolf";
+		case EnemyID::Stoneman:
+			return "Stoneman";
 		}
 	}
 

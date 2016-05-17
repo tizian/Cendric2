@@ -12,5 +12,6 @@ enum class EnemyID {
 	Wisp,
 	Seagull,
 	Wolf,
+	Stoneman,
 	MAX
 };

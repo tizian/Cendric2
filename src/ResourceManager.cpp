@@ -70,6 +70,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_enemy_wisp, "res/assets/enemies/spritesheet_enemy_wisp.png" },
 		{ ResourceID::Texture_enemy_seagull, "res/assets/enemies/spritesheet_enemy_seagull.png" },
 		{ ResourceID::Texture_enemy_wolf, "res/assets/enemies/spritesheet_enemy_wolf.png" },
+		{ ResourceID::Texture_enemy_stoneman, "res/assets/enemies/spritesheet_enemy_stoneman.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/level_dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_destructible, "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png" },
