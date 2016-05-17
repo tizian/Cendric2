@@ -10,8 +10,6 @@
 REGISTER_ENEMY(EnemyID::Wisp, WispEnemy)
 
 void WispEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	if (gold != 0 || !loot.empty()) return;
-
 	gold = rand() % 5; // 0 - 4
 }
 

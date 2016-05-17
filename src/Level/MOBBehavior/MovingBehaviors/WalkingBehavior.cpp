@@ -11,7 +11,7 @@ WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 }
 
 bool WalkingBehavior::doAIJump(bool onlyJump) {
-	if (!m_canJump || m_enemy->isDead() || m_movingDirectionX == 0) {
+	if (m_enemy->isDead() || m_movingDirectionX == 0) {
 		return false;
 	}
 	sf::FloatRect bb = *m_enemy->getBoundingBox();
@@ -117,7 +117,6 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 void WalkingBehavior::calculateJumpHeight() {
 	m_aiRecord.jumpHeight = m_configuredMaxVelocityYUp * m_configuredMaxVelocityYUp / (2 * m_configuredGravity);
-	m_canJump = m_aiRecord.jumpHeight > 0.f;
 }
 
 void WalkingBehavior::setDistanceToAbyss(float distance) {

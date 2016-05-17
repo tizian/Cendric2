@@ -9,8 +9,6 @@
 REGISTER_ENEMY(EnemyID::Stoneman, StonemanEnemy)
 
 void StonemanEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	if (gold != 0 || !loot.empty()) return;
-
 	gold = rand() % 30 + 10;
 }
 
@@ -90,7 +88,7 @@ MovingBehavior* StonemanEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
-	behavior->setDistanceToAbyss(50.f);
+	behavior->setDistanceToAbyss(30.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(0.f);

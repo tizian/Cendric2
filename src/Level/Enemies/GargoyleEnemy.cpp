@@ -9,8 +9,6 @@
 REGISTER_ENEMY(EnemyID::Gargoyle, GargoyleEnemy)
 
 void GargoyleEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	if (gold != 0 || !loot.empty()) return;
-
 	gold = rand() % 20 + 8;
 	loot.insert({ "fo_lesserhealingpotion", 1 });
 	loot.insert({ "mi_gargoyle_dust", 1 });

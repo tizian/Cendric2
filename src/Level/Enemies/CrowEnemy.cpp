@@ -9,8 +9,6 @@
 REGISTER_ENEMY(EnemyID::Crow, CrowEnemy)
 
 void CrowEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	if (gold != 0 || !loot.empty()) return;
-
 	gold = 2;
 }
 

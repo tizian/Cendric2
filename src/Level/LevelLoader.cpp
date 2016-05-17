@@ -249,7 +249,9 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 				enemy->setQuestTarget(it.questTarget);
 			}
 
-			enemy->insertDefaultLoot(loot, gold);
+			if (loot.empty() && gold == 0) {
+				enemy->insertDefaultLoot(loot, gold);
+			}
 			enemy->setLoot(loot, gold);
 			enemy->setPosition(it.spawnPosition);
 			enemy->setObjectID(it.objectID);

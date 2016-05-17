@@ -209,6 +209,14 @@ bool LevelMovableGameObject::isImmortal() const {
 	return m_isImmortal;
 }
 
+bool LevelMovableGameObject::isStunned() const {
+	return m_stunnedTime > sf::Time::Zero;
+}
+
+bool LevelMovableGameObject::isFeared() const {
+	return m_fearedTime > sf::Time::Zero;
+}
+
 void LevelMovableGameObject::loadBehavior() {
 	delete m_attackingBehavior;
 	m_attackingBehavior = createAttackingBehavior();

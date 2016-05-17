@@ -9,8 +9,6 @@
 REGISTER_ENEMY(EnemyID::FireRat, FireRatEnemy)
 
 void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	if (gold != 0 || !loot.empty()) return;
-
 	loot.insert({ "fo_rawmeat", 1 });
 	if (rand() % 2 > 0)
 		loot.insert({ "mi_teeth", 1 });

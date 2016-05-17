@@ -9,8 +9,6 @@
 REGISTER_ENEMY(EnemyID::Rat, RatEnemy)
 
 void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	if (gold != 0 || !loot.empty()) return;
-
 	loot.insert({ "fo_rawmeat", 1 });
 	gold = 1;
 }

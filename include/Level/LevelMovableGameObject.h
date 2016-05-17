@@ -55,6 +55,8 @@ public:
 	bool isIgnoreDynamicTiles() const;
 	bool isDead() const;
 	bool isImmortal() const;
+	bool isStunned() const;
+	bool isFeared() const;
 	GameObjectState getState() const;
 
 	float getConfiguredMaxVelocityX() const override;
