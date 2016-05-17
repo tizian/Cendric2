@@ -3,28 +3,10 @@
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("LevelReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 
 LevelReader::LevelReader() : WorldReader() {
-	initMaps();
 }
 
 LevelReader::~LevelReader() {
 	m_levelItemMap.clear();
-	m_enemyMap.clear();
-}
-
-void LevelReader::initMaps() {
-	m_enemyMap.insert({
-		{ 1, EnemyID::Rat },
-		{ 2, EnemyID::FireRat },
-		{ 3, EnemyID::Nekomata },
-		{ 4, EnemyID::Crow },
-		{ 5, EnemyID::Skeleton },
-		{ 6, EnemyID::Gargoyle },
-		{ 7, EnemyID::Hunter }, 
-		{ 8, EnemyID::Wisp },
-		{ 9, EnemyID::Seagull },
-		{ 10, EnemyID::Wolf },
-		{ 11, EnemyID::Stoneman },
-	});
 }
 
 void LevelReader::logError(const std::string& error) const {
@@ -496,14 +478,15 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 		XMLCheckResult(result);
 
 		gid = (gid == 0) ? gid : gid - m_firstGidEnemies + 1;
-		if (m_enemyMap.find(gid) == m_enemyMap.end()) {
+		EnemyID enemyId = static_cast<EnemyID>(gid);
+		if (enemyId <= EnemyID::VOID || enemyId >= EnemyID::MAX) {
 			logError("Enemy ID not recognized: " + std::to_string(gid));
 			return false;
 		}
 
 		EnemyData enemyData;
 		enemyData.objectID = id;
-		enemyData.id = m_enemyMap.at(gid);
+		enemyData.id = enemyId;
 		enemyData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
 		
 		// enemy loot

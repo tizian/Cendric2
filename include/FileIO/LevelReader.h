@@ -22,7 +22,6 @@ public:
 
 private:
 	void logError(const std::string& error) const override;
-	void initMaps();
 
 	bool readBackgroundLayers(tinyxml2::XMLElement* _property, WorldData& data) const override;
 	bool readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data);
@@ -52,7 +51,6 @@ private:
 	void updateData(LevelData& data) const;
 
 	std::map<int, std::string> m_levelItemMap;
-	std::map<int, EnemyID> m_enemyMap;
 
 	int m_firstGidEnemies;
 	int m_firstGidItems;
