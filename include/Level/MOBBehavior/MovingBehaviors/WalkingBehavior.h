@@ -32,4 +32,5 @@ protected:
 	bool m_jumps = false;
 	bool m_walksBlindly = false;
 	bool m_collidesX = false;
+	bool m_canJump = false;
 };
