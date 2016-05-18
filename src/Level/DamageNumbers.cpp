@@ -1,5 +1,6 @@
 #include "Level/DamageNumbers.h"
 #include "GUI/BitmapText.h"
+#include "GUI/GUIConstants.h"
 
 const int DamageNumbers::MAX_NUMBERS = 5;
 const float DamageNumbers::OFFSET = -15.f;
@@ -70,10 +71,10 @@ void DamageNumbers::emitNumber(int value, sf::Vector2f& position, DamageNumberTy
 	data.startPosition = startPosition.y;
 
 	if (type == DamageNumberType::DamageOverTime || type == DamageNumberType::HealOverTime) {
-		data.text->setCharacterSize(12);
+		data.text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	}
 	else {
-		data.text->setCharacterSize(16);
+		data.text->setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	}
 
 	if (type == DamageNumberType::Damage || type == DamageNumberType::DamageOverTime) {
