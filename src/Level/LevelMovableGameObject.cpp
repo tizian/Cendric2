@@ -79,11 +79,19 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 		m_timeSinceRegeneration -= sf::seconds(1);
 		m_attributes.currentHealthPoints += m_attributes.healthRegenerationPerS;
 		
-		if (m_attributes.healthRegenerationPerS > 0 && m_damageNumbers) {
+		if (m_damageNumbers) {
 			sf::Vector2f& pos = getPosition();
 			sf::Vector2f& size = getSize();
-			m_damageNumbers->emitNumber(m_attributes.healthRegenerationPerS, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), DamageNumberType::HealOverTime);
+			sf::Vector2f& numberPos = sf::Vector2f(pos.x + 0.5f * size.x, pos.y);
+
+			if (m_attributes.healthRegenerationPerS > 0 && m_damageNumbers) {
+				m_damageNumbers->emitNumber(m_attributes.healthRegenerationPerS, numberPos, DamageNumberType::HealOverTime);
+			}
+			else if (m_attributes.healthRegenerationPerS < 0) {
+				m_damageNumbers->emitNumber(std::abs(m_attributes.healthRegenerationPerS), numberPos, DamageNumberType::DamageOverTime);
+			}
 		}
+		
 
 		if (m_attributes.currentHealthPoints > m_attributes.maxHealthPoints) {
 			m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
