@@ -62,6 +62,8 @@ public:
 	bool isFeared() const;
 	GameObjectState getState() const;
 
+	virtual bool isAlly() const;
+
 	float getConfiguredMaxVelocityX() const override;
 	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityYUp() const override;

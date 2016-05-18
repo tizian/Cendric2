@@ -20,7 +20,7 @@ struct DamageNumberData {
 
 class DamageNumbers {
 public:
-	DamageNumbers();
+	DamageNumbers(bool isAlly);
 	~DamageNumbers();
 
 	void update(const sf::Time& frameTime);
@@ -36,4 +36,5 @@ private:
 
 	std::vector<DamageNumberData> m_data;
 	int m_nextIndex;
+	bool m_isAlly;
 };

@@ -9,6 +9,7 @@
 #include "ObjectFactory.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "Enums/EnumNames.h"
+#include "Level/DamageNumbers.h"
 
 using namespace std;
 
@@ -49,6 +50,8 @@ void Enemy::load(EnemyID id) {
 	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
 	m_interactComponent->setInteractable(false);
 	addComponent(m_interactComponent);
+
+	m_damageNumbers = new DamageNumbers(this->isAlly());
 }
 
 bool Enemy::getFleeCondition() const {

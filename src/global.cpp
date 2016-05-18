@@ -12,6 +12,11 @@ const sf::Color COLOR_GOOD =					sf::Color(45, 210, 45);
 const sf::Color COLOR_NEUTRAL =					sf::Color(249, 188, 43);
 const sf::Color COLOR_BAD =						sf::Color(217, 17, 17);
 
+const sf::Color COLOR_DAMAGE_ALLY =				sf::Color(217, 17, 17);
+const sf::Color COLOR_DAMAGE_ENEMY =			sf::Color(217, 66, 54);
+const sf::Color COLOR_HEAL_ALLY =				sf::Color(45, 210, 45);
+const sf::Color COLOR_HEAL_ENEMY =				sf::Color(119, 209, 84);
+
 const sf::Color COLOR_DAMAGED =					sf::Color(255, 0, 0);
 const sf::Color COLOR_HEALED =					sf::Color(0, 255, 0);
 const sf::Color COLOR_INTERACTIVE =				sf::Color(255, 0, 0);

@@ -9,14 +9,15 @@ LevelMovableGameObject::LevelMovableGameObject(const Level* level) : MovableGame
 	m_level = level;
 	m_foodAttributes.first = sf::Time::Zero;
 	m_foodAttributes.second = ZERO_ATTRIBUTES;
-	m_damageNumbers = new DamageNumbers();
 }
 
 LevelMovableGameObject::~LevelMovableGameObject() {
 	delete m_spellManager;
 	delete m_movingBehavior;
 	delete m_attackingBehavior;
-	delete m_damageNumbers;
+	if (m_damageNumbers) {
+		delete m_damageNumbers;
+	}
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
@@ -31,7 +32,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	m_spellManager->update(frameTime);
 
 	m_displayDamageNumbers = g_resourceManager->getConfiguration().isDisplayDamageNumbers;
-	if (m_displayDamageNumbers) {
+	if (m_displayDamageNumbers && m_damageNumbers) {
 		m_damageNumbers->update(frameTime);
 	}
 
@@ -45,7 +46,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 
 void LevelMovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
 	MovableGameObject::renderAfterForeground(target);
-	if (m_displayDamageNumbers) {
+	if (m_displayDamageNumbers && m_damageNumbers) {
 		m_damageNumbers->render(target);
 	}
 }
@@ -78,7 +79,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 		m_timeSinceRegeneration -= sf::seconds(1);
 		m_attributes.currentHealthPoints += m_attributes.healthRegenerationPerS;
 		
-		if (m_attributes.healthRegenerationPerS > 0) {
+		if (m_attributes.healthRegenerationPerS > 0 && m_damageNumbers) {
 			sf::Vector2f &pos = getPosition();
 			sf::Vector2f &size = getSize();
 			m_damageNumbers->emitNumber(m_attributes.healthRegenerationPerS, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), DamageNumberType::HealOverTime);
@@ -141,10 +142,12 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool 
 
 	if (m_isDead || damage <= 0) return;
 
-	sf::Vector2f &pos = getPosition();
-	sf::Vector2f &size = getSize();
-	m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
-
+	if (m_damageNumbers) {
+		sf::Vector2f &pos = getPosition();
+		sf::Vector2f &size = getSize();
+		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
+	}
+	
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
 	if (m_attributes.currentHealthPoints == 0) {
 		setDead();
@@ -163,9 +166,11 @@ void LevelMovableGameObject::addDamageOverTime(DamageOverTimeData& data) {
 void LevelMovableGameObject::addHeal(int heal, bool overTime) {
 	if (m_isDead || heal <= 0) return;
 
-	sf::Vector2f &pos = getPosition();
-	sf::Vector2f &size = getSize();
-	m_damageNumbers->emitNumber(heal, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::HealOverTime : DamageNumberType::Heal);
+	if (m_damageNumbers) {
+		sf::Vector2f &pos = getPosition();
+		sf::Vector2f &size = getSize();
+		m_damageNumbers->emitNumber(heal, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::HealOverTime : DamageNumberType::Heal);
+	}
 
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints + heal));
 	setSpriteColor(COLOR_HEALED, sf::milliseconds(200));
@@ -289,6 +294,10 @@ void LevelMovableGameObject::consumeFood(const sf::Time& duration, const Attribu
 	}
 	m_foodAttributes = std::pair<sf::Time, AttributeData>(duration, attributes);
 	m_attributes.addBean(attributes);
+}
+
+bool LevelMovableGameObject::isAlly() const {
+	return false;
 }
 
 float LevelMovableGameObject::getConfiguredMaxVelocityX() const {

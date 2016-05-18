@@ -6,7 +6,8 @@ const float DamageNumbers::OFFSET = -15.f;
 const float DamageNumbers::DISTANCE = -40.f;
 const float DamageNumbers::TIME = 0.8f;
 
-DamageNumbers::DamageNumbers() {
+DamageNumbers::DamageNumbers(bool isAlly) {
+	m_isAlly = isAlly;
 	m_nextIndex = 0;
 	for (int i = 0; i < MAX_NUMBERS; ++i) {
 		DamageNumberData numberData;
@@ -76,10 +77,20 @@ void DamageNumbers::emitNumber(int value, sf::Vector2f& position, DamageNumberTy
 	}
 
 	if (type == DamageNumberType::Damage || type == DamageNumberType::DamageOverTime) {
-		data.text->setColor(COLOR_BAD);
+		if (m_isAlly) {
+			data.text->setColor(COLOR_DAMAGE_ALLY);
+		}
+		else {
+			data.text->setColor(COLOR_DAMAGE_ENEMY);
+		}
 	}
 	else {
-		data.text->setColor(COLOR_GOOD);
+		if (m_isAlly) {
+			data.text->setColor(COLOR_HEAL_ALLY);
+		}
+		else {
+			data.text->setColor(COLOR_HEAL_ENEMY);
+		}
 	}
 
 	m_nextIndex++;

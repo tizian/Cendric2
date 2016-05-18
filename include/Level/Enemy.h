@@ -65,7 +65,7 @@ public:
 	// hp bar. Default is 20px.
 	virtual float getConfiguredDistanceToHPBar() const;
 	// returns whether the enemy is an ally of cendric
-	bool isAlly() const;
+	bool isAlly() const override;
 	// sets the waiting time to the configured waiting time
 	void setWaiting();
 	// sets the chasing time to the configured chasing time

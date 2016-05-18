@@ -111,6 +111,11 @@ extern const sf::Color COLOR_GOOD;
 extern const sf::Color COLOR_NEUTRAL;
 extern const sf::Color COLOR_BAD;
 
+extern const sf::Color COLOR_DAMAGE_ALLY;
+extern const sf::Color COLOR_DAMAGE_ENEMY;
+extern const sf::Color COLOR_HEAL_ALLY;
+extern const sf::Color COLOR_HEAL_ENEMY;
+
 extern const sf::Color COLOR_DAMAGED;
 extern const sf::Color COLOR_HEALED;
 extern const sf::Color COLOR_INTERACTIVE;

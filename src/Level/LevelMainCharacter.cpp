@@ -2,6 +2,7 @@
 #include "Screens/LevelScreen.h"
 #include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
+#include "Level/DamageNumbers.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
@@ -18,6 +19,8 @@ void LevelMainCharacter::load() {
 	m_isAlwaysUpdate = true;
 	loadAnimation();
 	loadBehavior();
+
+	m_damageNumbers = new DamageNumbers(this->isAlly());
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime) {
@@ -333,6 +336,10 @@ void LevelMainCharacter::targetEnemy(Enemy* enemy) {
 
 Enemy* LevelMainCharacter::getCurrentTarget() const {
 	return m_targetedEnemy;
+}
+
+bool LevelMainCharacter::isAlly() const {
+	return true;
 }
 
 void LevelMainCharacter::loadParticleSystem() {

@@ -45,6 +45,8 @@ public:
 	void removeGold(int gold) const;
 	void removeItems(const std::string& item, int quantity) const;
 
+	bool isAlly() const override;
+
 	void targetEnemy(Enemy* enemy);
 	Enemy* getCurrentTarget() const;
 
