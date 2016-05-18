@@ -162,6 +162,7 @@ void Spell::setViewable(bool value) {
 	if (!value) {
 		setDisposed();
 	}
+	MovableGameObject::setViewable(value);
 }
 
 void Spell::checkCollisions(const sf::Vector2f& nextPosition) {

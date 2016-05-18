@@ -14,7 +14,6 @@ loadDialogue = function(DL)
 		DL:addChoice(10, "DL_Choice_Mage") -- Are you a mage? 
 	end
 	DL:addChoice(-1, "DL_Choice_Bye") -- See you. 
-	end
 	DL:addNode()
 	
 	DL:createNPCNode(2, -2, "DL_Paladin2_GuardingInina") -- We're making sure that our High Priestess can fulfill her duty in peace.

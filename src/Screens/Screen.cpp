@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define VIEW_MARGIN 50.f;
+#define VIEW_MARGIN 250.f;
 
 inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundingBox) {
 	sf::FloatRect view(targetView.getCenter().x - targetView.getSize().x / 2.f,

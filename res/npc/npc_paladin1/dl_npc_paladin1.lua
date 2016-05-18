@@ -17,7 +17,6 @@ loadDialogue = function(DL)
 		DL:addChoice(20, "DL_Choice_Paladin") -- How is it like to be a paladin?  
 	end
 	DL:addChoice(-1, "DL_Choice_Bye") -- Nevermind...  
-	end
 	DL:addNode()
 	
 	DL:createNPCNode(2, -2, "DL_Paladin1_IAm") -- I'm a paladin of the Eternal Light, serving our lord and king Logan the Second.

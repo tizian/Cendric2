@@ -12,3 +12,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_sheep2','npc','Sheep','Schaf','Schöfli');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_ivo','npc','Ivo','Ivo','Ivo');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_tristan','npc','Tristan','Tristan','Tristan');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_zeff','npc','Zeff','Zeff','Zeff');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_cityguard1','npc','City Guard','Stadtwache','Stadtwach');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_cityguard2','npc','City Guard','Stadtwache','Stadtwach');
