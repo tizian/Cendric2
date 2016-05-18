@@ -2,9 +2,9 @@
 #include "GUI/BitmapText.h"
 
 const int DamageNumbers::MAX_NUMBERS = 5;
-const float DamageNumbers::OFFSET = -20.f;
-const float DamageNumbers::DISTANCE = -60.f;
-const float DamageNumbers::TIME = 1.f;
+const float DamageNumbers::OFFSET = -15.f;
+const float DamageNumbers::DISTANCE = -40.f;
+const float DamageNumbers::TIME = 0.8f;
 
 DamageNumbers::DamageNumbers() {
 	m_nextIndex = 0;
@@ -30,13 +30,18 @@ void DamageNumbers::update(const sf::Time& frameTime) {
 
 		if (data.active) {
 			data.time += frameTime.asSeconds();
-			if (data.time > TIME) {
-				data.active = false;
+			if (data.time < 0.8f * TIME) {
+				sf::Vector2f pos = data.text->getPosition();
+				pos.y = easeInOutQuad(data.time, data.startPosition, DISTANCE, 0.8f * TIME);
+				data.text->setPosition(pos);
+			}
+			else if (data.time < TIME) {
+				sf::Color col = data.text->getColor();
+				col.a = static_cast<int>(linearTween(data.time - 0.8f * TIME, 255.f, -255.f, 0.2f * TIME));
+				data.text->setColor(col);
 			}
 			else {
-				sf::Vector2f pos = data.text->getPosition();
-				pos.y = easeInOutQuad(data.time, data.startPosition, DISTANCE, TIME);
-				data.text->setPosition(pos);
+				data.active = false;
 			}
 		}
 	}
