@@ -163,8 +163,8 @@ void LevelMovableGameObject::addDamageOverTime(DamageOverTimeData& data) {
 void LevelMovableGameObject::addHeal(int heal, bool overTime) {
 	if (m_isDead || heal <= 0) return;
 
-	sf::Vector2f &pos = getPosition();
-	sf::Vector2f &size = getSize();
+	sf::Vector2f& pos = getPosition();
+	sf::Vector2f& size = getSize();
 	m_damageNumbers->emitNumber(heal, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::HealOverTime : DamageNumberType::Heal);
 
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints + heal));
