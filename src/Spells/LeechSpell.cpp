@@ -81,7 +81,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 		setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 		// check collisions with owner
 		if (m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
-			m_mob->addHeal(getDamage());
+			m_mob->addHeal(getDamage(), false);
 			setDisposed();
 		}
 	}

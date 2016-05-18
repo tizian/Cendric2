@@ -10,6 +10,7 @@ class SpellManager;
 class Spell;
 class MovingBehavior;
 class AttackingBehavior;
+class DamageNumbers;
 
 // a MOB in a level, enemies + main character.
 class LevelMovableGameObject : public virtual MovableGameObject {
@@ -19,15 +20,17 @@ public:
 
 	virtual void update(const sf::Time& frameTime) override;
 
+	void renderAfterForeground(sf::RenderTarget& target) override;
+
 	// the offset to the from where a spell starts. it gets added to the spell offset defined by the spell itself. default is (0,0)
 	virtual sf::Vector2f getConfiguredSpellOffset() const;
 	
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 	virtual void onHit(Spell* spell);
 	// adds damage to the attribute health. this damage can't be negative
-	virtual void addDamage(int damage, DamageType damageType);
+	virtual void addDamage(int damage, DamageType damageType, bool overTime);
 	// adds heal to the attribute health. the heal can't be negative
-	void addHeal(int heal);
+	void addHeal(int heal, bool overTime);
 	// sets the dead bool and sets the attribute health to zero.
 	virtual void setDead();
 	// sets the fight animation time of this mob using the given animation and whether its blocking.
@@ -79,6 +82,7 @@ protected:
 	const Level* m_level;
 
 	SpellManager* m_spellManager;
+	DamageNumbers* m_damageNumbers;
 
 	// store attributes given by food. if their time runs out, they get removed from the total attributes.
 	std::pair<sf::Time, AttributeData> m_foodAttributes;

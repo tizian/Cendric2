@@ -241,10 +241,10 @@ void LevelMainCharacter::setStunned(const sf::Time& stunnedTime) {
 	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, stunnedTime, data);
 }
 
-void LevelMainCharacter::addDamage(int damage, DamageType damageType) {
+void LevelMainCharacter::addDamage(int damage, DamageType damageType, bool overTime) {
 	// damage taken will remove invisibility
 	setInvisibilityLevel(0);
-	LevelMovableGameObject::addDamage(damage, damageType);
+	LevelMovableGameObject::addDamage(damage, damageType, overTime);
 }
 
 void LevelMainCharacter::loadAnimation() {

@@ -29,7 +29,7 @@ void DivineShieldSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
 		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, resistance);
 	}
 	
-	m_owner->addHeal(newSpell->getHeal());
+	m_owner->addHeal(newSpell->getHeal(), false);
 }
 
 void DivineShieldSpellCreator::addStrengthModifier(int level) {

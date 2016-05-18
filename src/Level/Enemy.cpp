@@ -73,7 +73,7 @@ void Enemy::onHit(Spell* spell) {
 }
 
 void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
-	GameObject::renderAfterForeground(renderTarget);
+	LevelMovableGameObject::renderAfterForeground(renderTarget);
 	m_buffBar->render(renderTarget);
 	renderTarget.draw(m_hpBar);
 	if (m_isTargeted) {
