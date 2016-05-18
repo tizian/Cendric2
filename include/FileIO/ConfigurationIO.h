@@ -18,4 +18,5 @@ protected:
 	const char* FULLSCREEN_ON = "fullscreen.on";
 	const char* SMOOTHING_ON = "smoothing.on";
 	const char* HINTS_ON = "hints.on";
+	const char* DAMAGENUMBERS_ON = "damagenumbers.on";
 };

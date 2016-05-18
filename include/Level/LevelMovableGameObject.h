@@ -82,6 +82,8 @@ protected:
 	const Level* m_level;
 
 	SpellManager* m_spellManager;
+
+	bool m_displayDamageNumbers;
 	DamageNumbers* m_damageNumbers;
 
 	// store attributes given by food. if their time runs out, they get removed from the total attributes.

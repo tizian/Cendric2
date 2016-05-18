@@ -29,6 +29,7 @@ private:
 	Checkbox* m_vSyncCheckbox = nullptr;
 	Checkbox* m_smoothingCheckbox = nullptr;
 	Checkbox* m_displayHintsCheckbox = nullptr;
+	Checkbox* m_displayDamageNumbersCheckbox = nullptr;
 
 	Slider* m_volumeSoundSlider = nullptr;
 	Slider* m_volumeMusicSlider = nullptr;

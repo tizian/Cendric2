@@ -13,6 +13,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeLanguage(data);
 		configuration << writeQuickcastOn(data);
 		configuration << writeHintsOn(data);
+		configuration << writeDamageNumbersOn(data);
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeVSyncOn(data);
@@ -54,8 +55,13 @@ std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data)
 }
 
 std::string ConfigurationWriter::writeHintsOn(const ConfigurationData& data) const {
-	string quickcastOn = "# 0 means hints are  not displayed, 1 means they are\n";
-	return quickcastOn.append(string(HINTS_ON) + ":" + (data.isDisplayHints ? "1" : "0") + "\n");
+	string hintsOn = "# 0 means hints are not displayed, 1 means they are\n";
+	return hintsOn.append(string(HINTS_ON) + ":" + (data.isDisplayHints ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeDamageNumbersOn(const ConfigurationData& data) const {
+	string damageNumbersOn = "# 0 means damage numbers are not displayed, 1 means they are\n";
+	return damageNumbersOn.append(string(DAMAGENUMBERS_ON) + ":" + (data.isDisplayDamageNumbers ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeDebugModeOn(const ConfigurationData& data) const {

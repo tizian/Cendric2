@@ -29,7 +29,11 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 
 	m_level->collideWithDynamicTiles(this, *getBoundingBox());
 	m_spellManager->update(frameTime);
-	m_damageNumbers->update(frameTime);
+
+	m_displayDamageNumbers = g_resourceManager->getConfiguration().isDisplayDamageNumbers;
+	if (m_displayDamageNumbers) {
+		m_damageNumbers->update(frameTime);
+	}
 
 	MovableGameObject::update(frameTime);
 
@@ -41,7 +45,9 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 
 void LevelMovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
 	MovableGameObject::renderAfterForeground(target);
-	m_damageNumbers->render(target);
+	if (m_displayDamageNumbers) {
+		m_damageNumbers->render(target);
+	}
 }
 
 void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {

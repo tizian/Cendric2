@@ -96,6 +96,15 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 
 	distFromTop = distFromTop + 50;
 
+	// display damage numbers
+	m_displayDamageNumbersCheckbox = new Checkbox();
+	m_displayDamageNumbersCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_displayDamageNumbersCheckbox->setChecked(g_resourceManager->getConfiguration().isDisplayDamageNumbers);
+	m_displayDamageNumbersCheckbox->setText("DisplayDamageNumbers");
+	addObject(m_displayDamageNumbersCheckbox);
+
+	distFromTop = distFromTop + 50;
+
 	// smoothing
 	m_smoothingCheckbox = new Checkbox();
 	m_smoothingCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
@@ -167,6 +176,7 @@ void OptionsScreen::onApply() {
 	config.isSoundOn = soundOn;
 	config.isQuickcast = m_quickCastCheckbox->isChecked();
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
+	config.isDisplayDamageNumbers = m_displayDamageNumbersCheckbox->isChecked();
 	config.isFullscreen = fullScreenOn;
 	config.isSmoothing = m_smoothingCheckbox->isChecked();
 	config.isVSyncEnabled = m_vSyncCheckbox->isChecked();

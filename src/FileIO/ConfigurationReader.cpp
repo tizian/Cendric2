@@ -52,6 +52,10 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(HINTS_ON));
 				noError = readHintsOn(line, data);
 			}
+			else if (line.compare(0, strlen(DAMAGENUMBERS_ON), string(DAMAGENUMBERS_ON)) == 0) {
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DAMAGENUMBERS_ON));
+				noError = readDamageNumbersOn(line, data);
+			}
 			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0) {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGMODE_ON));
 				noError = readDebugModeOn(line, data);
@@ -201,6 +205,17 @@ bool ConfigurationReader::readHintsOn(const std::string& line, ConfigurationData
 	}
 	bool hintsOn = (atoi(line.substr(colon + 1).c_str()) != 0);
 	data.isDisplayHints = hintsOn;
+	return true;
+}
+
+bool ConfigurationReader::readDamageNumbersOn(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after damage numbers on tag or no value after colon.");
+		return false;
+	}
+	bool damageNumbersOn = (atoi(line.substr(colon + 1).c_str()) != 0);
+	data.isDisplayDamageNumbers = damageNumbersOn;
 	return true;
 }
 
