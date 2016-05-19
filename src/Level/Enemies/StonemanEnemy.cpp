@@ -58,7 +58,9 @@ void StonemanEnemy::loadAnimation() {
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
-	deadAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
+	for (int i = 0; i < 6; ++i) {
+		deadAnimation->addFrame(sf::IntRect(800 + i * 100, 0, 100, 120));
+	}
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
