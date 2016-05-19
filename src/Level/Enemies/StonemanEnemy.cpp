@@ -39,8 +39,8 @@ void StonemanEnemy::handleAttackInput() {
 }
 
 void StonemanEnemy::loadAnimation() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 80.f));
-	setSpriteOffset(sf::Vector2f(-37.f, -40.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 88.f));
+	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.12f));
 	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));

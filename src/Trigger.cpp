@@ -9,7 +9,13 @@ Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 		m_isOnTrigger = false;
 		const sf::Texture* texture = g_resourceManager->getTexture(ResourceID::Texture_GUI_exit_arrow);
 		m_sprite.setTexture(*texture);
-		m_sprite.setPosition(data.triggerRect.left + 0.5f * (data.triggerRect.width - texture->getSize().x), 0.f);
+
+		float xPos = data.triggerRect.left + 0.5f * (data.triggerRect.width - texture->getSize().x);
+		// Avoid aliasing when centering sprite over trigger with odd width
+		if (static_cast<int>(data.triggerRect.width) % 2 == 1) {
+			xPos += 0.5f;
+		}
+		m_sprite.setPosition(xPos, 0.f);	
 	}
 
 	setBoundingBox(data.triggerRect);
