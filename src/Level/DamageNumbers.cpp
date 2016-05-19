@@ -58,14 +58,14 @@ void DamageNumbers::render(sf::RenderTarget& target) {
 	}
 }
 
-void DamageNumbers::emitNumber(int value, sf::Vector2f& position, DamageNumberType type) {
+void DamageNumbers::emitNumber(int value, const sf::Vector2f& position, DamageNumberType type) {
 	DamageNumberData& data = m_data[m_nextIndex];
 
 	data.active = true;
 	data.time = 0.f;
 	data.text->setString(std::to_string(value));
 
-	sf::FloatRect &rect = data.text->getBounds();
+	const sf::FloatRect& rect = data.text->getBounds();
 	sf::Vector2f startPosition = sf::Vector2f(position.x - 0.5f * rect.width, position.y + OFFSET);
 	data.text->setPosition(startPosition);
 	data.startPosition = startPosition.y;

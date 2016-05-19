@@ -80,9 +80,9 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 		m_attributes.currentHealthPoints += m_attributes.healthRegenerationPerS;
 		
 		if (m_damageNumbers) {
-			sf::Vector2f& pos = getPosition();
-			sf::Vector2f& size = getSize();
-			sf::Vector2f& numberPos = sf::Vector2f(pos.x + 0.5f * size.x, pos.y);
+			const sf::Vector2f& pos = getPosition();
+			const sf::Vector2f& size = getSize();
+			sf::Vector2f numberPos = sf::Vector2f(pos.x + 0.5f * size.x, pos.y);
 
 			if (m_attributes.healthRegenerationPerS > 0 && m_damageNumbers) {
 				m_damageNumbers->emitNumber(m_attributes.healthRegenerationPerS, numberPos, DamageNumberType::HealOverTime);
@@ -151,8 +151,8 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool 
 	if (m_isDead || damage <= 0) return;
 
 	if (m_damageNumbers) {
-		sf::Vector2f& pos = getPosition();
-		sf::Vector2f& size = getSize();
+		const sf::Vector2f& pos = getPosition();
+		const sf::Vector2f& size = getSize();
 		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
 	}
 	
@@ -175,8 +175,8 @@ void LevelMovableGameObject::addHeal(int heal, bool overTime) {
 	if (m_isDead || heal <= 0) return;
 
 	if (m_damageNumbers) {
-		sf::Vector2f& pos = getPosition();
-		sf::Vector2f& size = getSize();
+		const sf::Vector2f& pos = getPosition();
+		const sf::Vector2f& size = getSize();
 		m_damageNumbers->emitNumber(heal, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::HealOverTime : DamageNumberType::Heal);
 	}
 

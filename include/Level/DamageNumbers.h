@@ -26,7 +26,7 @@ public:
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& target);
 
-	void emitNumber(int value, sf::Vector2f& position, DamageNumberType type);
+	void emitNumber(int value, const sf::Vector2f& position, DamageNumberType type);
 
 private:
 	static const int MAX_NUMBERS;

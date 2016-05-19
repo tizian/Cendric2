@@ -39,8 +39,8 @@ void StonemanEnemy::handleAttackInput() {
 }
 
 void StonemanEnemy::loadAnimation() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 80.f));
-	setSpriteOffset(sf::Vector2f(-37.f, -40.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 88.f));
+	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.12f));
 	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
@@ -58,7 +58,9 @@ void StonemanEnemy::loadAnimation() {
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
-	deadAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
+	for (int i = 0; i < 6; ++i) {
+		deadAnimation->addFrame(sf::IntRect(800 + i * 100, 0, 100, 120));
+	}
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
