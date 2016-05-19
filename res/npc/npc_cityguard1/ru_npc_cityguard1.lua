@@ -2,7 +2,7 @@
 
 loadRoutine = function(R)
 
-	R:setTilePosition(45,54)
+	R:setTilePosition(66,59.7)
 	R:setLooped(false)
 	
 end	

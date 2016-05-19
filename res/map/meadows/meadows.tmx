@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="190">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="193">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -7,7 +7,7 @@
   <property name="name" value="Meadows"/>
   <property name="tilesetpath" value="res/map/meadows/tileset_map_meadows.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
+ <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311">
   <image source="tileset_map_meadows.png" width="1200" height="3000"/>
   <tile id="25">
    <objectgroup draworder="index">
@@ -94,10 +94,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
+ <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="70" height="70">
@@ -917,7 +917,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="70" height="70">
+ <layer name="collidable" width="70" height="70" visible="0">
   <data encoding="csv">
 30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,
 30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,0,0,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,30,0,30,
@@ -1140,6 +1140,20 @@
    <properties>
     <property name="dialoguetexture" value="0,1000"/>
     <property name="id" value="npc_zeff"/>
+   </properties>
+  </object>
+  <object id="190" gid="1328" x="3300" y="3035" width="50" height="50">
+   <properties>
+    <property name="dialoguetexture" value="250,1000"/>
+    <property name="id" value="npc_cityguard1"/>
+   </properties>
+  </object>
+  <object id="191" gid="1329" x="3395" y="3035" width="50" height="50">
+   <properties>
+    <property name="dialogueid" value="res/npc/npc_cityguard1/dl_npc_cityguard1.lua"/>
+    <property name="dialoguetexture" value="500,1000"/>
+    <property name="id" value="npc_cityguard2"/>
+    <property name="texttype" value="dl_npc_cityguard1"/>
    </properties>
   </object>
  </objectgroup>
