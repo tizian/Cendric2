@@ -28,6 +28,8 @@ public:
 	void addDotBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data);
 	void removeTypedBuffs(SpellID id);
 
+	void notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr);
+
 	// called by the loading screen. the dynamic tiles & light in level
 	void loadForRenderTexture();
 

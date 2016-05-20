@@ -32,6 +32,7 @@ void LevelScreen::load() {
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_interface = new LevelInterface(this, m_mainChar);
 	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
+	dynamic_cast<LevelInterface*>(m_interface)->setPermanentCore(m_characterCore);
 
 	m_resumeButton = new Button(sf::FloatRect(450, 350, 400, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
@@ -128,6 +129,11 @@ void LevelScreen::addDotBuffToInterface(const sf::IntRect& textureLocation, cons
 
 void LevelScreen::removeTypedBuffs(SpellID id) {
 	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeTypedSpellBuffs(id);
+}
+
+void LevelScreen::notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr) {
+	m_characterCore->setQuickslot(itemId, quickslotNr);
+	m_characterCoreCopy->setQuickslot(itemId, quickslotNr);
 }
 
 LevelMainCharacter* LevelScreen::getMainCharacter() const {

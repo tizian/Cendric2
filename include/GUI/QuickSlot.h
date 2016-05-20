@@ -9,6 +9,7 @@
 
 class CharacterCore;
 class LevelInterface;
+class LevelScreen;
 
 class QuickSlot : public Slot {
 public:
@@ -38,8 +39,9 @@ private:
 	// consumes the item
 	void consume();
 
-	CharacterCore* m_core = nullptr;
+	LevelScreen* m_screen = nullptr;
 	LevelInterface* m_interface = nullptr;
+	CharacterCore* m_core = nullptr;
 	std::string m_itemID = "";
 	Key m_key = Key::VOID;
 

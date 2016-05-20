@@ -100,6 +100,14 @@ void LevelInterface::setSpellManager(SpellManager* spellManager) {
 	m_spellSelection = new SpellSelection(spellManager);
 }
 
+void LevelInterface::setPermanentCore(CharacterCore* permanentCore) {
+	m_permanentCore = permanentCore;
+}
+
 LevelMainCharacter* LevelInterface::getMainCharacter() const {
 	return m_character;
+}
+
+CharacterCore* LevelInterface::getPermanentCore() const {
+	return m_permanentCore;
 }

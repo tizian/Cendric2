@@ -18,6 +18,8 @@ public:
 
 	// the spell manager of the level main character.
 	void setSpellManager(SpellManager* spellManager);
+	// the permanent core, set be the level screen
+	void setPermanentCore(CharacterCore* permanentCore);
 	// returns the buff bar
 	BuffBar& getBuffBar();
 	// an consumable item has been dropped. forward to quick slot bar
@@ -36,9 +38,13 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	LevelMainCharacter* getMainCharacter() const;
+	// the permanent core from the level screen
+	// used to write permanent states back.
+	CharacterCore* getPermanentCore() const;
 
 private:
 	LevelMainCharacter* m_character = nullptr;
+	CharacterCore* m_permanentCore = nullptr;
 
 	// <<< HEALTH BAR >>>
 	HealthBar* m_healthBar = nullptr;

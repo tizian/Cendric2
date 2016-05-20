@@ -36,7 +36,7 @@ public:
 	virtual bool isGuiOverlayVisible() const;
 
 	CharacterCore* getCore() const;
-	WorldScreen* getScreen() const;
+	virtual WorldScreen* getScreen() const;
 	Inventory* getInventory() const;
 
 protected:

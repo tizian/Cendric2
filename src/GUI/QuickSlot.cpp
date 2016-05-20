@@ -1,6 +1,7 @@
 #include "GUI/QuickSlot.h"
 #include "CharacterCore.h"
 #include "Level/LevelInterface.h"
+#include "Screens/LevelScreen.h"
 #include "ResourceManager.h"
 
 using namespace std;
@@ -10,6 +11,7 @@ const float QuickSlot::ICON_OFFSET = 4.f;
 
 QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key key) {
 	m_interface = _interface;
+	m_screen = dynamic_cast<LevelScreen*>(_interface->getScreen());
 	m_core = _interface->getCore();
 	m_itemID = itemID;
 	m_key = key;
@@ -59,7 +61,7 @@ void QuickSlot::setPosition(const sf::Vector2f& pos) {
 
 void QuickSlot::setItemID(const std::string& itemID) {
 	m_itemID = itemID;
-	m_core->setQuickslot(itemID, m_key == Key::QuickSlot1 ? 1 : 2);
+	m_screen->notifyQuickSlotAssignment(itemID, m_key == Key::QuickSlot1 ? 1 : 2);
 	reload();
 	g_inputController->lockAction();
 }
