@@ -20,61 +20,79 @@ StonemanEnemy::StonemanEnemy(const Level* level, Screen* screen) :
 
 void StonemanEnemy::loadAttributes() {
 	m_attributes.setHealth(100);
-	m_attributes.resistanceIce = 10;
+	m_attributes.resistanceIce = 15;
 	m_attributes.resistanceFire = 10;
 	m_attributes.resistanceShadow = 10;
 	m_attributes.calculateAttributes();
 }
 
 void StonemanEnemy::loadSpells() {
+	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
+	fireBallSpell.damage = 6;
+	fireBallSpell.damagePerSecond = 0;
+	fireBallSpell.duration = sf::seconds(2);
+	fireBallSpell.cooldown = sf::milliseconds(3000);
+	fireBallSpell.speed = 400.f;
+	fireBallSpell.isDynamicTileEffect = false;
+	fireBallSpell.damageType = DamageType::Ice;
+	fireBallSpell.skinNr = 1;
+	fireBallSpell.isBlocking = true;
 
+	m_spellManager->addSpell(fireBallSpell);
+	m_spellManager->setCurrentSpell(0);
 }
 
 sf::Vector2f StonemanEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(10.f, 0.f);
+	return sf::Vector2f(19.f, 14.f);
 }
 
 void StonemanEnemy::handleAttackInput() {
-
+	if (m_enemyState != EnemyState::Chasing) return;
+	if (getCurrentTarget() == nullptr) return;
+	if (m_enemyAttackingBehavior->distToTarget() < m_enemyAttackingBehavior->getAggroRange()) {
+		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	}
 }
 
 void StonemanEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 88.f));
 	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
 
+	// Idle
+	Animation* idleAnimation = new Animation();
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	idleAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
+	addAnimation(GameObjectState::Idle, idleAnimation);
+
+	// Walking
 	Animation* walkingAnimation = new Animation(sf::seconds(0.12f));
 	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
 	for (int i = 0; i < 8; i++) {
 		walkingAnimation->addFrame(sf::IntRect(i * 100, 0, 100, 120));
 	}
-
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
-	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
-	idleAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
+	// Fight
+	Animation* fightingAnimation = new Animation(sf::seconds(0.12f));
+	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	for (int i = 0; i < 7; ++i) {
+		fightingAnimation->addFrame(sf::IntRect(1400 + i * 100, 0, 100, 120));
+	}
+	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
-	addAnimation(GameObjectState::Idle, idleAnimation);
-
+	// Death
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
 	for (int i = 0; i < 6; ++i) {
 		deadAnimation->addFrame(sf::IntRect(800 + i * 100, 0, 100, 120));
 	}
 	deadAnimation->setLooped(false);
-
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	Animation* fightingAnimation = new Animation(sf::seconds(0.12f));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
-	fightingAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
-
-	addAnimation(GameObjectState::Fighting, fightingAnimation);
-
+	// Jump (not used)
 	Animation* jumpingAnimation = new Animation(sf::seconds(0.12f));
 	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
 	jumpingAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
-
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	// initial values
@@ -95,7 +113,7 @@ MovingBehavior* StonemanEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(0.f);
 	behavior->setMaxVelocityX(80.f);
-	behavior->setFightAnimationTime(sf::milliseconds(8 * 120));
+	behavior->setFightAnimationTime(sf::milliseconds(7 * 100));
 	behavior->calculateJumpHeight();
 	return behavior;
 }
