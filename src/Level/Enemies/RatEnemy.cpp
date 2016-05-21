@@ -31,6 +31,7 @@ void RatEnemy::loadSpells() {
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.damage = 7;
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
+	chopSpell.fightingTime = sf::milliseconds(4 * 80);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->setCurrentSpell(0);
@@ -53,7 +54,6 @@ MovingBehavior* RatEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(400.f);
 	behavior->setMaxVelocityYUp(400.f);
 	behavior->setMaxVelocityX(100.f);
-	behavior->setFightAnimationTime(sf::milliseconds(4 * 80));
 	behavior->calculateJumpHeight();
 	return behavior;
 }

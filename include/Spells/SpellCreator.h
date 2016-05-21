@@ -15,6 +15,8 @@ public:
 	SpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	virtual ~SpellCreator();
 
+	void update(const sf::Time& frametime);
+
 	void addModifiers(const std::vector<SpellModifier>& modifiers);
 
 	// executes the spell and sets the fight animation.
@@ -52,4 +54,8 @@ protected:
 	const Level* m_level = nullptr;
 	LevelScreen* m_screen = nullptr;
 	LevelMovableGameObject* m_owner = nullptr;
+
+private:
+	sf::Time m_currentCastingTime = sf::Time::Zero;
+	sf::Vector2f m_currentTarget;
 };

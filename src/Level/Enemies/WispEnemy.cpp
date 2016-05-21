@@ -37,6 +37,9 @@ void WispEnemy::loadSpells() {
 	shadowAureola.damageType = DamageType::Shadow;
 	shadowAureola.range = 200.f;
 	shadowAureola.speed = 150.f;
+	shadowAureola.fightingTime = sf::milliseconds(8 * 100);
+	shadowAureola.castingAnimation = GameObjectState::Fighting;
+	shadowAureola.castingTime = sf::milliseconds(8 * 100);
 
 	m_spellManager->addSpell(shadowAureola);
 	m_spellManager->setCurrentSpell(0);
@@ -58,7 +61,6 @@ MovingBehavior* WispEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(70.f);
 	behavior->setMaxVelocityYUp(70.f);
 	behavior->setMaxVelocityX(70.f);
-	behavior->setFightAnimationTime(sf::milliseconds(8 * 100));
 	return behavior;
 }
 

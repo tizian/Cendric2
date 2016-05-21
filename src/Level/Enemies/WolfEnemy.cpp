@@ -34,6 +34,7 @@ void WolfEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 100);
+	chopSpell.fightingTime = sf::milliseconds(6 * 100);
 
 	m_spellManager->addSpell(chopSpell);
 
@@ -42,6 +43,7 @@ void WolfEnemy::loadSpells() {
 	howlSpell.cooldown = sf::milliseconds(10000);
 	howlSpell.fightAnimation = GameObjectState::Fighting2;
 	howlSpell.isBlocking = true;
+	howlSpell.fightingTime = sf::milliseconds(1000);
 
 	m_spellManager->addSpell(howlSpell);
 
@@ -56,7 +58,8 @@ void WolfEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	if (m_enemyAttackingBehavior->distToTarget() < 140.f) {
 		m_spellManager->setCurrentSpell(0);
-	} else {
+	}
+	else {
 		m_spellManager->setCurrentSpell(1);
 	}
 	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
@@ -133,7 +136,6 @@ MovingBehavior* WolfEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(200.f);
-	behavior->setFightAnimationTime(sf::milliseconds(6 * 100));
 	behavior->calculateJumpHeight();
 	return behavior;
 }

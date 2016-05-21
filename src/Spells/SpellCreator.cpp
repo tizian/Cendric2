@@ -16,11 +16,31 @@ SpellCreator::SpellCreator(const SpellData& spellData, LevelMovableGameObject* o
 SpellCreator::~SpellCreator() {
 }
 
-void SpellCreator::executeSpell(const sf::Vector2f& target) {
-	execExecuteSpell(target);
-	if (m_spellData.fightAnimation != GameObjectState::VOID)
-		m_owner->setFightAnimation(m_spellData.fightAnimation, m_spellData.isBlocking);
+void SpellCreator::update(const sf::Time& frametime) {
+	if (m_currentCastingTime == sf::Time::Zero) return;
+
+	m_currentCastingTime -= frametime;
+	if (m_currentCastingTime <= sf::Time::Zero) {
+		m_currentCastingTime = sf::Time::Zero;
+
+		execExecuteSpell(m_currentTarget);
+		m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+	}
 }
+
+void SpellCreator::executeSpell(const sf::Vector2f& target) {
+	if (m_spellData.castingTime > sf::Time::Zero) {
+		m_currentCastingTime = m_spellData.castingTime;
+		m_currentTarget = target;
+		m_owner->setFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
+		return;
+	}
+
+	execExecuteSpell(target);
+	m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+}
+
+
 
 void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {
 	for (auto& it : modifiers) {

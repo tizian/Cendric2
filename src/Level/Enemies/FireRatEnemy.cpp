@@ -35,6 +35,7 @@ void FireRatEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
+	chopSpell.fightingTime = sf::milliseconds(4 * 80);
 
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 6;
@@ -42,6 +43,7 @@ void FireRatEnemy::loadSpells() {
 	fireBallSpell.duration = sf::seconds(2);
 	fireBallSpell.cooldown = sf::milliseconds(3000);
 	fireBallSpell.speed = 200.f;
+	fireBallSpell.fightingTime = sf::milliseconds(4 * 80);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(fireBallSpell);
@@ -122,7 +124,6 @@ MovingBehavior* FireRatEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(400.f);
 	behavior->setMaxVelocityYUp(400.f);
 	behavior->setMaxVelocityX(50.f);
-	behavior->setFightAnimationTime(sf::milliseconds(4 * 80));
 	behavior->calculateJumpHeight();
 	return behavior;
 }

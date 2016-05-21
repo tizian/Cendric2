@@ -37,6 +37,8 @@ void StonemanEnemy::loadSpells() {
 	fireBallSpell.damageType = DamageType::Ice;
 	fireBallSpell.skinNr = 1;
 	fireBallSpell.isBlocking = true;
+	fireBallSpell.castingTime = sf::milliseconds(7 * 100);
+	fireBallSpell.fightingTime = sf::Time::Zero;
 
 	m_spellManager->addSpell(fireBallSpell);
 	m_spellManager->setCurrentSpell(0);
@@ -72,13 +74,13 @@ void StonemanEnemy::loadAnimation() {
 	}
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
-	// Fight
-	Animation* fightingAnimation = new Animation(sf::seconds(0.12f));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	// Casting
+	Animation* castingAnimation = new Animation(sf::seconds(0.12f));
+	castingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
 	for (int i = 0; i < 7; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(1400 + i * 100, 0, 100, 120));
+		castingAnimation->addFrame(sf::IntRect(1400 + i * 100, 0, 100, 120));
 	}
-	addAnimation(GameObjectState::Fighting, fightingAnimation);
+	addAnimation(GameObjectState::Casting, castingAnimation);
 
 	// Death
 	Animation* deadAnimation = new Animation();
@@ -113,7 +115,6 @@ MovingBehavior* StonemanEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(0.f);
 	behavior->setMaxVelocityX(80.f);
-	behavior->setFightAnimationTime(sf::milliseconds(7 * 100));
 	behavior->calculateJumpHeight();
 	return behavior;
 }

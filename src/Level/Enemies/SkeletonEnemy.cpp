@@ -34,6 +34,7 @@ void SkeletonEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 100);
+	chopSpell.fightingTime = sf::milliseconds(8 * 50);
 
 	m_spellManager->addSpell(chopSpell);
 
@@ -108,7 +109,6 @@ MovingBehavior* SkeletonEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(150.f);
-	behavior->setFightAnimationTime(sf::milliseconds(8 * 50));
 	behavior->calculateJumpHeight();
 	return behavior;
 }

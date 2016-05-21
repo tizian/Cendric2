@@ -226,8 +226,8 @@ void LevelMovableGameObject::setDead() {
 	m_isDead = true;
 }
 
-void LevelMovableGameObject::setFightAnimation(GameObjectState fightAnimation, bool isBlocking) {
-	m_movingBehavior->setFightAnimation(fightAnimation, isBlocking);
+void LevelMovableGameObject::setFightAnimation(const sf::Time& animationTime, GameObjectState fightAnimation, bool isBlocking) {
+	m_movingBehavior->setFightAnimation(animationTime, fightAnimation, isBlocking);
 }
 
 const Level* LevelMovableGameObject::getLevel() const {

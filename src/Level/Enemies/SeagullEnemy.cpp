@@ -33,6 +33,7 @@ void SeagullEnemy::loadSpells() {
 	chopSpell.damagePerSecond = 5;
 	chopSpell.duration = sf::seconds(2.f);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
+	chopSpell.fightingTime = sf::milliseconds(3 * 100);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->setCurrentSpell(0);
@@ -54,7 +55,6 @@ MovingBehavior* SeagullEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(200.f);
 	behavior->setMaxVelocityYUp(100.f);
 	behavior->setMaxVelocityX(100.f);
-	behavior->setFightAnimationTime(sf::milliseconds(3 * 100));
 	return behavior;
 }
 

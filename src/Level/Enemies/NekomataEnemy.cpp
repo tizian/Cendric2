@@ -34,6 +34,7 @@ void NekomataEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 50);
+	chopSpell.fightingTime = sf::milliseconds(12 * 60);
 
 	SpellData shadowFireSpell = SpellData::getSpellData(SpellID::HolyFire);
 	shadowFireSpell.skinNr = 1;
@@ -41,6 +42,7 @@ void NekomataEnemy::loadSpells() {
 	shadowFireSpell.duration = sf::seconds(3.f);
 	shadowFireSpell.cooldown = sf::seconds(3.f);
 	shadowFireSpell.damageType = DamageType::Shadow;
+	shadowFireSpell.fightingTime = sf::milliseconds(6 * 60);
 	shadowFireSpell.range = 150.f;
 
 	SpellData shadowFireBallSpell = SpellData::getSpellData(SpellID::FireBall);
@@ -51,6 +53,7 @@ void NekomataEnemy::loadSpells() {
 	shadowFireBallSpell.duration = sf::seconds(2.f);
 	shadowFireBallSpell.cooldown = sf::seconds(2.f);
 	shadowFireBallSpell.damageType = DamageType::Shadow;
+	shadowFireBallSpell.fightingTime = sf::milliseconds(6 * 60);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(shadowFireSpell);
@@ -75,7 +78,6 @@ MovingBehavior* NekomataEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(600.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(90.f);
-	behavior->setFightAnimationTime(sf::milliseconds(12 * 60));
 	behavior->calculateJumpHeight();
 	return behavior;
 }

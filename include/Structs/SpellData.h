@@ -21,7 +21,10 @@ struct SpellData {
 	sf::Time cooldown;
 	sf::FloatRect boundingBox;
 	DamageType damageType;
+	GameObjectState castingAnimation;
 	GameObjectState fightAnimation;
+	sf::Time castingTime;
+	sf::Time fightingTime;
 	bool needsTarget;
 	bool attachedToMob;
 	bool isDynamicTileEffect;
@@ -96,7 +99,10 @@ const struct SpellData EMPTY_SPELL =
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),
 	DamageType::VOID,
+	GameObjectState::Casting,
 	GameObjectState::Fighting,
+	sf::Time::Zero,
+	sf::milliseconds(5 * 70), // cendric's default fighting time
 	false,
 	false,
 	false,

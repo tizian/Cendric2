@@ -49,9 +49,10 @@ void MovingBehavior::calculateUnboundedVelocity(const sf::Time& frameTime, sf::V
 	nextVel.y = m_mob->getVelocity().y + m_mob->getAcceleration().y * frameTime.asSeconds();
 }
 
-void MovingBehavior::setFightAnimation(GameObjectState animation, bool isBlocking) {
+void MovingBehavior::setFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking) {
+	if (animationTime == sf::Time::Zero || animation == GameObjectState::VOID) return;
 	m_isBlockingSpell = isBlocking;
-	m_fightAnimationTime = m_configuredFightAnimationTime;
+	m_fightAnimationTime = animationTime;
 	m_fightAnimationState = animation;
 }
 
@@ -99,10 +100,6 @@ bool MovingBehavior::isUpsideDown() const {
 
 bool MovingBehavior::isIgnoreDynamicTiles() const {
 	return m_ignoreDynamicTiles;
-}
-
-void MovingBehavior::setFightAnimationTime(const sf::Time& fightAnimationTime) {
-	m_configuredFightAnimationTime = fightAnimationTime;
 }
 
 void MovingBehavior::setDampingGroundPerS(float damping) {

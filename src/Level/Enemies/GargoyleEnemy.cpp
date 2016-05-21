@@ -58,6 +58,7 @@ void GargoyleEnemy::loadSpells() {
 	fireBallSpell.isStunning = true;
 	fireBallSpell.strength = m_spellStrength;
 	fireBallSpell.isDynamicTileEffect = !m_isSummoned;
+	fireBallSpell.fightingTime = sf::milliseconds(500);
 
 	m_spellManager->addSpell(fireBallSpell);
 	m_maxSpell = 0;
@@ -100,7 +101,6 @@ MovingBehavior* GargoyleEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(150.f);
 	behavior->setMaxVelocityYUp(150.f);
 	behavior->setMaxVelocityX(150.f);
-	behavior->setFightAnimationTime(sf::milliseconds(500));
 	return behavior;
 }
 
