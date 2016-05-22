@@ -89,8 +89,8 @@ void Dialogue::setNextNode(int choice) {
 		nextNode = m_currentNode->choices[choice].second;
 	}
 
-	if (nextNode == -2) {
-		int nextTag = m_currentNode->nextTag;
+	if (nextNode == -2 || m_currentNode->reloadTag > -1) {
+		int nextTag = m_currentNode->reloadTag > -1 ? m_currentNode->reloadTag : m_currentNode->nextTag;
 		reload(m_id, m_screen, m_window);
 		if (nextTag > -1 && m_nodes.find(nextTag) != m_nodes.end()) {
 			setRoot(nextTag);
