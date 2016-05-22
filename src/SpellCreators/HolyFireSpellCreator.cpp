@@ -1,10 +1,10 @@
 #include "SpellCreators/HolyFireSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-HolyFireSpellCreator::HolyFireSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+HolyFireSpellCreator::HolyFireSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
-void HolyFireSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void HolyFireSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	HolyFireSpell* newSpell = new HolyFireSpell();

@@ -13,7 +13,7 @@ CooldownRectangleShape::CooldownRectangleShape() {
 	init();
 }
 
-void CooldownRectangleShape::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void CooldownRectangleShape::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = m_texture;
 
@@ -102,7 +102,7 @@ void CooldownRectangleShape::setTexture(sf::Texture *texture) {
 	init();
 }
 
-void CooldownRectangleShape::setFillColor(const sf::Color &color) {
+void CooldownRectangleShape::setFillColor(const sf::Color& color) {
 	m_color = color;
 	for (unsigned int i = 0; i < m_vertices.getVertexCount(); ++i) {
 		m_vertices[i].color = m_color;

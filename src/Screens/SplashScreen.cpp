@@ -37,7 +37,7 @@ void SplashScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Undefined, frameTime);
 }
 
-void SplashScreen::render(sf::RenderTarget &renderTarget) {
+void SplashScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderObjects(GameObjectType::_Undefined, renderTarget);

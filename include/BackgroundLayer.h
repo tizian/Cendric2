@@ -9,7 +9,7 @@ public:
 	~BackgroundLayer();
 
 	void load(std::string& filename, float distance);
-	void render(sf::RenderTarget &target, sf::RenderStates states) const;
+	void render(sf::RenderTarget& target, sf::RenderStates states) const;
 	void dispose();
 
 	float getDistance() const;

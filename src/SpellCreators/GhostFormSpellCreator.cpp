@@ -1,7 +1,7 @@
 #include "SpellCreators/GhostFormSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-GhostFormSpellCreator::GhostFormSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+GhostFormSpellCreator::GhostFormSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 	m_additionalChopDamage = 10;
 }
 
@@ -13,7 +13,7 @@ std::string GhostFormSpellCreator::getStrengthModifierName() const {
 	return "GhostDamage";
 }
 
-void GhostFormSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void GhostFormSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	AttributeData additionalDamage = ZERO_ATTRIBUTES;
 	additionalDamage.damagePhysical = m_additionalChopDamage;

@@ -26,7 +26,7 @@ const Animation* AnimatedGameObject::getAnimation(GameObjectState state) {
 	return m_animations[state];
 }
 
-void AnimatedGameObject::render(sf::RenderTarget &renderTarget) {
+void AnimatedGameObject::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_animatedSprite);
 }
 
@@ -44,7 +44,7 @@ void AnimatedGameObject::update(const sf::Time& frameTime) {
 	GameObject::update(frameTime);
 }
 
-void AnimatedGameObject::setPosition(const sf::Vector2f &position) {
+void AnimatedGameObject::setPosition(const sf::Vector2f& position) {
 	GameObject::setPosition(position);
 	// origin is set to the center for rotation + flipping
 	sf::Vector2f spriteCenter(sf::Vector2f(m_boundingBox.width / 2, m_boundingBox.height / 2) - m_spriteOffset);
@@ -70,7 +70,7 @@ void AnimatedGameObject::loopCurrentAnimation(bool loop) {
 	m_animatedSprite.setLooped(loop);
 }
 
-void AnimatedGameObject::setSpriteOffset(const sf::Vector2f &spriteOffset) {
+void AnimatedGameObject::setSpriteOffset(const sf::Vector2f& spriteOffset) {
 	m_spriteOffset = spriteOffset;
 }
 

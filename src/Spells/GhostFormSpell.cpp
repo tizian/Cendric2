@@ -144,7 +144,7 @@ void GhostFormSpell::loadMask() {
 
 	LevelEquipment* levelEquipment = new LevelEquipment(m_mainChar);
 	levelEquipment->setBoundingBox(sf::FloatRect(0, 0, 120, 120));
-	for (auto &ani : texturePositions) {
+	for (auto& ani : texturePositions) {
 		Animation* animation = new Animation();
 		if (ani.first == GameObjectState::Fighting) {
 			animation->setFrameTime(sf::milliseconds(70));
@@ -153,7 +153,7 @@ void GhostFormSpell::loadMask() {
 			animation->setFrameTime(sf::milliseconds(200));
 		}
 		animation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_ghost));
-		for (auto &frame : ani.second) {
+		for (auto& frame : ani.second) {
 			animation->addFrame(frame);
 		}
 		levelEquipment->addAnimation(ani.first, animation);

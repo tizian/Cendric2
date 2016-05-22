@@ -18,7 +18,7 @@ void BackgroundLayer::load(string& filename, float distance) {
 	m_sprite = sf::Sprite((*g_resourceManager->getTexture(m_fileName)));
 }
 
-void BackgroundLayer::render(sf::RenderTarget &target, sf::RenderStates states) const {
+void BackgroundLayer::render(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(m_sprite, states);
 }
 

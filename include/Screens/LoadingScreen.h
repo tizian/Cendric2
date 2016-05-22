@@ -12,7 +12,7 @@ public:
 	LoadingScreen(CharacterCore* core);
 
 	void execUpdate(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget &renderTarget) override;
+	void render(sf::RenderTarget& renderTarget) override;
 
 	virtual void execOnEnter(const Screen *previousScreen) override;
 	virtual void execOnExit(const Screen *nextScreen) override;

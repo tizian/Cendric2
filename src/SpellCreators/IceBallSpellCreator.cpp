@@ -1,10 +1,10 @@
 #include "SpellCreators/IceBallSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-IceBallSpellCreator::IceBallSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+IceBallSpellCreator::IceBallSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
-void IceBallSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void IceBallSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	int div = 0;

@@ -1,7 +1,7 @@
 #include "SpellCreators/InvisibilitySpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-InvisibilitySpellCreator::InvisibilitySpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+InvisibilitySpellCreator::InvisibilitySpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 	m_invisibilityLevel = 1;
 }
 
@@ -13,7 +13,7 @@ std::string InvisibilitySpellCreator::getStrengthModifierName() const {
 	return "InvisibilityLevel";
 }
 
-void InvisibilitySpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void InvisibilitySpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	InvisibilitySpell* newSpell = new InvisibilitySpell();
 	newSpell->load(spellData, m_owner, target);

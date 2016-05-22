@@ -25,7 +25,7 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	m_errorText.setCharacterSize(12);
 }
 
-void ErrorScreen::render(sf::RenderTarget &renderTarget) {
+void ErrorScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(m_errorText);

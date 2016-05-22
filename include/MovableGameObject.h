@@ -17,7 +17,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	void renderAfterForeground(sf::RenderTarget& target) override;
-	void setDebugBoundingBox(const sf::Color &debugColor) override;
+	void setDebugBoundingBox(const sf::Color& debugColor) override;
 	
 	void calculateNextPosition(const sf::Time& frameTime, sf::Vector2f& nextPos) const; 
 	void calculateNextVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;

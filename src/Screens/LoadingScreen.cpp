@@ -47,7 +47,7 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 	g_resourceManager->setError(ErrorID::Error_dataCorrupted, "No level or map to load. Aborting.");
 }
 
-void LoadingScreen::render(sf::RenderTarget &renderTarget) {
+void LoadingScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 }

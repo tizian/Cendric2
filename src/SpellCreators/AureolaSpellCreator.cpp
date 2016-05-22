@@ -1,14 +1,14 @@
 #include "SpellCreators/AureolaSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-AureolaSpellCreator::AureolaSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+AureolaSpellCreator::AureolaSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
 std::string AureolaSpellCreator::getStrengthModifierName() const {
 	return "StunLevel";
 }
 
-void AureolaSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void AureolaSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	for (int i = 0; i < m_spellData.count; i++) {

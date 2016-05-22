@@ -53,18 +53,18 @@ public:
 
 	void setSize(float width, float height);
 	void setAngle(float angle);
-	void setTexture(sf::Texture *texture);
-	void setFillColor(const sf::Color &color);
+	void setTexture(sf::Texture* texture);
+	void setFillColor(const sf::Color& color);
 
 	float getAngle() const;
-	sf::Texture *getTexture() const;
+	sf::Texture* getTexture() const;
 	const sf::Color getFillColor() const;
 
 	sf::FloatRect getLocalBounds() const { return sf::FloatRect(0.f, 0.f, m_width, m_height); }
 
 private:
 	void init();	// Set vertexArray data
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	sf::Texture *m_texture = nullptr;
 

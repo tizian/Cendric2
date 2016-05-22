@@ -1,10 +1,10 @@
 #include "SpellCreators/LightSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-LightSpellCreator::LightSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+LightSpellCreator::LightSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
-void LightSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void LightSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	removeOldSpell();
 	SpellData spellData = m_spellData;
 	LightSpell* newSpell = new LightSpell();
