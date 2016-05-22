@@ -21,14 +21,17 @@ loadDialogue = function(DL)
 	
 	DL:createNPCNode(2, -2, "DL_Paladin1_IAm") -- I'm a paladin of the Eternal Light, serving our lord and king Logan the Second.
 	DL:addConditionProgress("npc_paladin1", "who_are_you")
+	DL:gotoNode(1)
 	DL:addNode()
 	
 	DL:createNPCNode(10, -2, "DL_Paladin1_Armor") -- Ye, right? But you'll need to work hard to get something like this, so don't even think about it. 
 	DL:addConditionProgress("npc_paladin1", "armor")
+	DL:gotoNode(1)
 	DL:addNode()
 	
 	DL:createNPCNode(20, -2, "DL_Paladin1_PissedOff") -- How is it like to be a little pain in the neck like you? 
 	DL:addConditionProgress("npc_paladin1", "paladin")
+	DL:gotoNode(1)
 	DL:addNode()
 end	
 	

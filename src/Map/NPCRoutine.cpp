@@ -11,10 +11,7 @@ void NPCRoutine::load(const std::string& id, NPC* npc, bool initial) {
 
 	NPCRoutineLoader loader(*this, npc->getScreen()->getCharacterCore());
 	loader.loadRoutine(initial);
-	if (m_steps.empty()) {
-		g_logger->logInfo("NPCRoutine", "This NPC has no routine!");
-	}
-	else {
+	if (!m_steps.empty()) {
 		if (m_steps[0].state == RoutineState::Waiting) {
 			m_remainingStepTime = m_steps[0].time;
 		}
@@ -65,7 +62,7 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 
 	if (updateStep) {
 		m_currentStepID = (m_currentStepID >= static_cast<int>(m_steps.size()) - 1) ?
-			0 : 
+			0 :
 			m_currentStepID + 1;
 
 		if (m_currentStepID == 0 && !m_isLooped) {
