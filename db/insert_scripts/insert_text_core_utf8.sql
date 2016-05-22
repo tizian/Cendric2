@@ -124,7 +124,11 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('No','No','Nei
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoQuicksaveExists','No quick save exists','Kein Schnelllade-Speicherstand existiert','Kein Schnelllade-Speicherstand existiert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NothingToSay','There''s nothing to talk about.','Es gibt nichts zu sagen.','Es git nüt zum rede.');
-INSERT INTO text (text_id, english, german, swiss_german) values ('NoWeapon','No weapon','Keine Waffe ','Kei Waffe');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NoWeapon','No weapon','Keine Waffe','Kei Waffe');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NoSpells','No spells learned.','Keine Zauber gelernt.','Kei Zauber glernt.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NoQuests','No quests found.','Keine Quests gefunden.','Kei Quests gfunde.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NoHints','No hints learned.','Keine Tipps gelernt.','Kei Tipps glernt.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('NoSaves','No saves found.','Kein Speicherstand gefunden.','Kein Speicherstand gfunde.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Off','Off','Aus','Uus');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Okay','Okay','Okay','Okee');
 INSERT INTO text (text_id, english, german, swiss_german) values ('On','On','An','Ii');

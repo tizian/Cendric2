@@ -77,6 +77,7 @@ private:
 	Window* m_window;
 	
 	BitmapText m_title;
+	BitmapText m_emptyText;
 
 	TabBar* m_tabBar;
 

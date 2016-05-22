@@ -100,6 +100,7 @@ void Inventory::init() {
 		textureOffset += 60;
 	}
 
+	// init scrolling
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP));
 
@@ -108,6 +109,13 @@ void Inventory::init() {
 
 	sf::FloatRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
+
+	// init empty text
+	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_emptyText.setString(g_textProvider->getText("Empty"));
+	const sf::FloatRect bounds = m_emptyText.getBounds();
+	m_emptyText.setPosition(scrollBox.left + 0.5f * (scrollBox.width - bounds.width), scrollBox.top + 0.5f * (scrollBox.height - bounds.height));
+
 
 	m_equipment = new InventoryEquipment(getInterface()->getScreen());
 
@@ -427,6 +435,10 @@ void Inventory::render(sf::RenderTarget& target) {
 
 	target.draw(m_scrollWindow);
 	m_scrollBar->render(target);
+
+	if (m_typeMap[m_currentTab]->size() == 0) {
+		target.draw(m_emptyText);
+	}
 }
 
 void Inventory::renderAfterForeground(sf::RenderTarget& target) {

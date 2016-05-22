@@ -59,7 +59,7 @@ void QuestLog::init() {
 		{ QuestState::Failed, &m_failedQuests },
 	});
 
-	// tabbar
+	// init tabbar
 	int nTabs = 3;
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
@@ -72,6 +72,7 @@ void QuestLog::init() {
 		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
 
+	// init scrolling
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP));
 
@@ -80,6 +81,12 @@ void QuestLog::init() {
 
 	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
+
+	// init empty text
+	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_emptyText.setString(g_textProvider->getText("NoQuests"));
+	const sf::FloatRect bounds = m_emptyText.getBounds();
+	m_emptyText.setPosition(scrollBox.left + 0.5f * (scrollBox.width - bounds.width), scrollBox.top + 0.5f * (scrollBox.height - bounds.height));
 
 	reload();
 
@@ -211,6 +218,10 @@ void QuestLog::render(sf::RenderTarget& target) {
 
 	target.draw(m_scrollWindow);
 	m_scrollBar->render(target);
+
+	if (m_stateMap[m_currentTab]->size() == 0) {
+		target.draw(m_emptyText);
+	}
 }
 
 void QuestLog::showDescription(const std::string& questID) {

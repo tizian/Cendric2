@@ -32,6 +32,13 @@ SaveGameWindow::SaveGameWindow() {
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, WIDTH, HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT, TOP));
 
+	// init empty text
+	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_emptyText.setString(g_textProvider->getText("NoSaves"));
+	const sf::FloatRect bounds = m_emptyText.getBounds();
+	m_emptyText.setPosition(LEFT + 0.5f * (WIDTH - bounds.width), TOP + 0.5f * (HEIGHT - bounds.height));
+
+	// init scrolling
 	m_scrollBar = new ScrollBar(HEIGHT);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + WIDTH - ScrollBar::WIDTH, TOP));
 
@@ -95,7 +102,12 @@ bool SaveGameWindow::isChosen() {
 }
 
 void SaveGameWindow::update(const sf::Time& frameTime) {
-	if (m_entries.empty() || !m_isEnabled) return;
+	if (!m_isEnabled) return;
+
+	if (m_entries.empty()) {
+		m_scrollBar->setEnabled(false);
+		return;
+	}
 
 	m_scrollBar->update(frameTime);
 
@@ -245,6 +257,10 @@ void SaveGameWindow::render(sf::RenderTarget& renderTarget) {
 
 	renderTarget.draw(m_scrollWindow);
 	m_scrollBar->render(renderTarget);
+
+	if (m_entries.size() == 0) {
+		renderTarget.draw(m_emptyText);
+	}
 }
 
 std::string SaveGameWindow::getChosenFilename() const {

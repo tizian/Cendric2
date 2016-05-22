@@ -1,4 +1,4 @@
--- Dialogue for NPC "npc_paladin1"
+-- Dialogue for NPC "npc_paladin2"
 loadDialogue = function(DL)
 
 	DL:createNPCNode(0, 1, "DL_Paladin2_WhatIsIt") -- What is it?
@@ -13,15 +13,26 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_paladin2", "mage")) then
 		DL:addChoice(10, "DL_Choice_Mage") -- Are you a mage? 
 	end
+	if (DL:isConditionFulfilled("npc_paladin2", "what_doing") and not DL:isConditionFulfilled("npc_paladin2", "duty")) then
+		DL:addChoice(11, "DL_Choice_WhatIsDuty") -- What is the Priestess' duty?
+	end
 	DL:addChoice(-1, "DL_Choice_Bye") -- See you. 
+	DL:addNode()
+	
+	DL:createNPCNode(11, -2, "DL_Paladin2_AskHer") -- I got no time to chit-chat. Go and ask her yourself. But you'd better show her some respect, we're watching you.
+	DL:addConditionProgress("npc_paladin2", "duty")
+	DL:gotoNode(1)
 	DL:addNode()
 	
 	DL:createNPCNode(2, -2, "DL_Paladin2_GuardingInina") -- We're making sure that our High Priestess can fulfill her duty in peace.
 	DL:addConditionProgress("npc_paladin2", "what_doing")
+	DL:gotoNode(1)
 	DL:addNode()
 	
 	DL:createNPCNode(10, -2, "DL_Paladin1_Mage") -- Of course. You can't get the rank of a paladin while being a mere commoner.
 	DL:addConditionProgress("npc_paladin2", "mage")
+	DL:gotoNode(1)
 	DL:addNode()
+	
 end	
 	
