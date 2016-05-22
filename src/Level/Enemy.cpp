@@ -46,7 +46,7 @@ void Enemy::load(EnemyID id) {
 
 	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyKey(id), "enemy"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
-	m_interactComponent->setInteractText("ToPickup");
+	m_interactComponent->setInteractText("ToLoot");
 	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
 	m_interactComponent->setInteractable(false);
 	addComponent(m_interactComponent);
