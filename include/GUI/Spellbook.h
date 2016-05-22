@@ -52,6 +52,8 @@ private:
 	TexturedTabBar* m_tabBar = nullptr;
 	std::vector<SpellType> m_tabTypes;
 
+	BitmapText m_emptyText;
+
 	std::vector<ModifierSlot> m_modifierSlots;
 	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_elementalSlots;
 	std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>> m_twilightSlots;

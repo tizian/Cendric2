@@ -30,6 +30,9 @@ HealthBar::HealthBar(const AttributeData* attributes) {
 	m_highlightTime = sf::Time::Zero;
 	m_waitTime = sf::Time::Zero;
 	m_shrinkTime = sf::Time::Zero;
+
+	m_tooltipWindow.setPosition(sf::Vector2f(BAR_LEFT + 0.5f * BAR_WIDTH, BAR_TOP + BAR_HEIGHT + 10.f));
+	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 }
 
 HealthBar::~HealthBar() {
@@ -39,10 +42,13 @@ HealthBar::~HealthBar() {
 	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_highlight);
 }
 
-void HealthBar::render(sf::RenderTarget& target) const {
+void HealthBar::render(sf::RenderTarget& target) {
 	target.draw(m_bar);
 	target.draw(m_hitOverlay);
 	target.draw(m_border);
+	if (m_showTooltip) {
+		m_tooltipWindow.render(target);
+	}
 }
 
 void HealthBar::update(const sf::Time& frameTime) {
@@ -98,4 +104,9 @@ void HealthBar::update(const sf::Time& frameTime) {
 	float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_overlayHP - m_currentHP) / m_attributes->maxHealthPoints));
 	m_hitOverlay.setPosition(sf::Vector2f(overlayX, BAR_TOP));
 	m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
+
+	// Update tooltip
+	sf::FloatRect rect(BAR_LEFT, BAR_TOP, BAR_WIDTH, BAR_HEIGHT);
+	m_showTooltip = g_inputController->isMouseOver(&rect, true);
+	m_tooltipWindow.setText("Cendric: " + std::to_string(m_currentHP) + "/" + std::to_string(m_attributes->maxHealthPoints));
 }

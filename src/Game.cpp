@@ -80,6 +80,7 @@ void Game::run() {
 				g_inputController->setLastPressedKey(e.key.code);
 			}
 			else if (e.type == sf::Event::MouseWheelScrolled) {
+				std::cout << e.mouseWheelScroll.delta << std::endl;
 				g_inputController->setMouseWheelScrollTicks(e.mouseWheelScroll.delta);
 			}
 		}

@@ -39,6 +39,12 @@ void Spellbook::init() {
 	m_weaponWindow = new WeaponWindow(m_core, m_isModifiable);
 	m_weaponWindow->addCloseButton(std::bind(&Spellbook::hide, this));
 
+	// init empty text
+	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_emptyText.setString(g_textProvider->getText("NoSpells"));
+	const sf::FloatRect bounds = m_emptyText.getBounds();
+	m_emptyText.setPosition(box.left + 0.5f * (box.width - bounds.width), box.top + 0.5f * (box.height - bounds.height));
+
 	reload();
 }
 
@@ -194,7 +200,6 @@ void Spellbook::render(sf::RenderTarget& target) {
 	m_window->render(target);
 
 	if (m_tabBar) {
-	
 		target.draw(m_selectedTabText);
 
 		m_tabBar->render(target);
@@ -216,7 +221,9 @@ void Spellbook::render(sf::RenderTarget& target) {
 			}
 		}
 	}
-	
+	else {
+		target.draw(m_emptyText);
+	}
 
 	m_weaponWindow->render(target);
 

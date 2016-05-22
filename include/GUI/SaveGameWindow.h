@@ -72,6 +72,8 @@ private:
 	// the menu sound
 	sf::Sound m_sound;
 
+	BitmapText m_emptyText;
+
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;
 	ScrollHelper *m_scrollHelper = nullptr;

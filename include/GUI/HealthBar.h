@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Structs/AttributeData.h"
+#include "GUI/TooltipWindow.h"
 
 // the health bar, as displayed in a level. It takes its data from the attributes of the main character.
 class HealthBar {
@@ -9,7 +10,7 @@ public:
 	HealthBar(const AttributeData* attributes);
 	~HealthBar();
 
-	void render(sf::RenderTarget& target) const;
+	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
 private:
@@ -22,6 +23,9 @@ private:
 	sf::Time m_highlightTime;
 	sf::Time m_waitTime;
 	sf::Time m_shrinkTime;
+
+	bool m_showTooltip = false;
+	TooltipWindow m_tooltipWindow;
 
 	sf::RectangleShape m_border;
 	sf::RectangleShape m_bar;

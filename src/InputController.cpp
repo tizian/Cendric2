@@ -204,6 +204,11 @@ void InputController::setLastPressedKey(sf::Keyboard::Key key) {
 }
 
 void InputController::setMouseWheelScrollTicks(float deltaTicks) {
+	if ((m_mouseWheelScrollTicks < 0.f && deltaTicks > 0.f) ||
+		(m_mouseWheelScrollTicks > 0.f && deltaTicks < 0.f) ||
+		(deltaTicks == 0.f)) {
+		return;
+	}
 	m_mouseWheelScrollTicks = deltaTicks;
 }
 

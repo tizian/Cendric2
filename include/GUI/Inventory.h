@@ -62,6 +62,7 @@ private:
 
 	BitmapText m_goldText;
 	BitmapText m_selectedTabText;
+	BitmapText m_emptyText;
 
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;

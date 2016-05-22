@@ -16,6 +16,7 @@ SlotClone::SlotClone(const Slot* original) {
 	m_iconRect.setSize(sf::Vector2f(Slot::ICON_SIZE, Slot::ICON_SIZE));
 	m_iconRect.setTexture(original->m_iconTexture);
 	m_iconRect.setTextureRect(original->m_iconTextureRect);
+	m_iconRect.setFillColor(original->m_iconRect.getFillColor());
 
 	m_borderRect.setSize(sf::Vector2f(size, size));
 	m_borderRect.setTexture(original->m_borderTextureSelected);
