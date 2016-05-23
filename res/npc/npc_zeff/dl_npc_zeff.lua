@@ -10,7 +10,7 @@ loadDialogue = function(DL)
 		DL:addChoice(20, "DL_Choice_WhatAreYouDoing") -- What are you doing here?
 	end
 	if (DL:isConditionFulfilled("npc_zeff", "curse") and not DL:isConditionFulfilled("npc_zeff", "curse_talked")) then
-		DL:addChoice(-1, "DL_Choice_Curse") -- What curse do you talk about?
+		DL:addChoice(-1, "DL_Choice_Curse") -- What's this curse you are talking about?
 	end
 	if (DL:isConditionFulfilled("npc_zeff", "leatherworker")) then
 		DL:addChoice(50, "DL_Choice_Leatherworking") -- Could you craft something for me?
