@@ -14,7 +14,7 @@ LootWindow::~LootWindow() {
 
 void LootWindow::loadItemNames(const std::map<std::string, int>& loot, std::map<std::string, std::string>& names) const {
 	names.clear();
-	for (auto &it : loot) {
+	for (auto& it : loot) {
 		ItemBean bean = g_databaseManager->getItemBean(it.first);
 		names.insert({ it.first, g_textProvider->getText(bean.item_id, "item") });
 	}
@@ -26,7 +26,7 @@ void LootWindow::setLoot(const std::map<string, int>& loot, int gold) {
 	// reload
 	std::map<std::string, std::string> names;
 	loadItemNames(loot, names);
-	for (auto &it : loot) {
+	for (auto& it : loot) {
 		if (!lootText.empty()) lootText.append("\n");
 		lootText.append(names.at(it.first));
 		lootText.append(": ");

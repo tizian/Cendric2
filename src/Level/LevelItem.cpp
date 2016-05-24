@@ -24,7 +24,7 @@ void LevelItem::load(const Item& item, const sf::Vector2f& position) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, item.getLevelitemBean().bounding_box.x, item.getLevelitemBean().bounding_box.y));
 	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_levelitems));
 	// add frames
-	for (auto &frame : item.getFrames()) {
+	for (auto& frame : item.getFrames()) {
 		idleAnimation->addFrame(frame.texture_location);
 	}
 	addAnimation(GameObjectState::Idle, idleAnimation);

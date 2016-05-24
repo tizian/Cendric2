@@ -4,7 +4,7 @@
 LeechSpellCreator::LeechSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 }
 
-void LeechSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void LeechSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	int div = 0;

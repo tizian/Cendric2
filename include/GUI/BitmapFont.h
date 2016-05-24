@@ -9,11 +9,11 @@ class BitmapFont {
 public:
 	BitmapFont();
 
-	bool loadFromFile(const std::string &path);
+	bool loadFromFile(const std::string& path);
 
-	const sf::Texture &getTexture() const;
+	const sf::Texture& getTexture() const;
 
-	const sf::Vector2i &getGlyphSize() const;
+	const sf::Vector2i& getGlyphSize() const;
 
 private:
 	sf::Texture m_texture;

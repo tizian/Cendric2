@@ -137,7 +137,7 @@ void SpellSlot::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_inputKey);
 }
 
-void SpellSlot::playAnimation(const sf::Time &cooldown) {
+void SpellSlot::playAnimation(const sf::Time& cooldown) {
 	if (!m_isEmpty) {
 		m_cooldown = cooldown;
 		m_animationTime = sf::Time::Zero;

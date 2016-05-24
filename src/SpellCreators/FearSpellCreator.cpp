@@ -1,14 +1,14 @@
 #include "SpellCreators/FearSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-FearSpellCreator::FearSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+FearSpellCreator::FearSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
 std::string FearSpellCreator::getStrengthModifierName() const {
 	return "FearLevel";
 }
 
-void FearSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void FearSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData= m_spellData;
 	updateDamageAndHeal(spellData);
 	int div = 0;

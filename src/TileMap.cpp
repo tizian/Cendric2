@@ -147,7 +147,7 @@ void TileMap::readAnimatedTile(int tileNumber, int layerNr, int i, int j, const 
 	}
 }
 
-void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = m_tileset;
 	for (size_t i = 0; i < m_layers.size(); ++i) {

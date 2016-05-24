@@ -49,7 +49,7 @@ void Map::loadForRenderTexture() {
 	loader.loadSigns(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 }
 
-void Map::setWorldView(sf::RenderTarget &target, const sf::Vector2f& center) const {
+void Map::setWorldView(sf::RenderTarget& target, const sf::Vector2f& center) const {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));

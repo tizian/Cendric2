@@ -9,6 +9,10 @@
 REGISTER_ENEMY(EnemyID::Seagull, SeagullEnemy)
 
 void SeagullEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
+	loot.insert({ "mi_feather", rand() % 3 + 1 });
+}
+
+void SeagullEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
 	int feathers = rand() % 3;
 	if (feathers > 0)
 		loot.insert({ "mi_feather", feathers });

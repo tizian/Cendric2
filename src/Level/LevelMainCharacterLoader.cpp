@@ -72,7 +72,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 		}
 
 		if (!equipment.texturePath.empty()) {
-			for (auto &ani : equipment.texturePositions) {
+			for (auto& ani : equipment.texturePositions) {
 				Animation* animation = new Animation();
 				if (ani.first == GameObjectState::Fighting) {
 					animation->setFrameTime(sf::milliseconds(70));
@@ -81,7 +81,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 					animation->setFrameTime(sf::milliseconds(200));
 				}
 				animation->setSpriteSheet(g_resourceManager->getTexture(item.getEquipmentBean().texture_path));
-				for (auto &frame : ani.second) {
+				for (auto& frame : ani.second) {
 					animation->addFrame(frame);
 				}
 				levelEquipment->addAnimation(ani.first, animation);

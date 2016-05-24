@@ -112,7 +112,9 @@ public:
 	// is a condition fulfilled?
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	// is a enemy in a certain level dead?
-	bool isEnemyKilled(const std::string& levelID, int objectID);
+	bool isEnemyKilled(const std::string& levelID, int objectID) const;
+	// is a enemy in a certain level looted?
+	bool isEnemyLooted(const std::string& levelID, int objectID) const;
 	// was a trigger already triggered?
 	bool isTriggerTriggered(const std::string& world, int triggerID);
 	// returns whether cendric has at least the given amount of items of this key in his inventory and/or equipped.

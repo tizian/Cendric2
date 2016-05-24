@@ -10,6 +10,25 @@ REGISTER_ENEMY(EnemyID::Stoneman, StonemanEnemy)
 
 void StonemanEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = rand() % 30 + 10;
+
+	float xi = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	if (xi < 0.8f) {
+		loot.insert({ "mi_stone", rand() % 3 + 1 });
+	}
+	else {
+		loot.insert({ "mi_corrupt_stone", 1 });
+	}
+}
+
+void StonemanEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	gold = rand() % 3 + 1;
+	float xi = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	if (xi < 0.9f) {
+		loot.insert({ "mi_stone", 1 });
+	}
+	else {
+		loot.insert({ "mi_corrupt_stone", 1 });
+	}
 }
 
 StonemanEnemy::StonemanEnemy(const Level* level, Screen* screen) :

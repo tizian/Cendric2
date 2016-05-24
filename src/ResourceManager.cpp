@@ -385,7 +385,7 @@ const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {
 	return &m_currentError;
 }
 
-void ResourceManager::setError(ErrorID id, const string &description) {
+void ResourceManager::setError(ErrorID id, const string& description) {
 	m_currentError.first = id;
 	m_currentError.second = description;
 }

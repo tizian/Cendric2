@@ -53,7 +53,7 @@ void SlicedSprite::setTexture(sf::Texture *texture) {
 	init();
 }
 
-void SlicedSprite::setColor(const sf::Color &color) {
+void SlicedSprite::setColor(const sf::Color& color) {
 	m_color = color;
 
 	for (unsigned int i = 0; i < m_vertices.getVertexCount(); ++i) {
@@ -81,7 +81,7 @@ sf::FloatRect SlicedSprite::getBounds() const {
 	return getTransform().transformRect(m_bounds);
 }
 
-void SlicedSprite::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void SlicedSprite::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	states.texture = m_texture;
 	target.draw(m_vertices, states);

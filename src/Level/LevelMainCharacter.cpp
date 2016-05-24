@@ -81,7 +81,7 @@ void LevelMainCharacter::handleAttackInput() {
 		g_inputController->getMousePosition();
 
 	// update current spell
-	for (auto const &it : m_spellKeyMap) {
+	for (const auto& it : m_spellKeyMap) {
 		if (g_inputController->isKeyJustPressed(it.first)) {
 			if (m_isQuickcast) {
 				m_spellManager->setCurrentSpell(it.second);

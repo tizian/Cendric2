@@ -15,6 +15,10 @@ void FireRatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold
 	gold = rand() % 4 + 1;
 }
 
+void FireRatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	loot.insert({ "fo_rawmeat", 1 });
+}
+
 FireRatEnemy::FireRatEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {

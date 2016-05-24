@@ -48,8 +48,8 @@ public:
 	void setMovingTarget(int x, int y);
 	// resets the moving target
 	void resetMovingTarget();
-	// an enemy that is persistent will not be marked as dead and respawn with every level reset
-	void setPersistent(bool value);
+	// an enemy that is unique be marked as dead and not respawn with every level reset
+	void setUnique(bool value);
 	// the object ID in the level enemy object layer.
 	void setObjectID(int id);
 	// sets the enemy as ally. The enemy dies after the time to live has run out.
@@ -80,7 +80,10 @@ public:
 	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
 	virtual bool getFleeCondition() const;
 
+	// the default loot of a mob, can be looted when first killed (&looted)
 	virtual void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const = 0;
+	// less loot, that can be still looted after a mob is looted 2-N times.
+	virtual void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const = 0;
 
 protected:
 	LevelMainCharacter* m_mainChar;
@@ -99,7 +102,7 @@ protected:
 
 	EnemyID m_id = EnemyID::VOID;
 	int m_objectID = -1;
-	bool m_isPersistent = false;
+	bool m_isUnique = false;
 	// spells of these damage types won't hurt. default is empty.
 	std::vector<DamageType> m_immuneDamageTypes;
 
@@ -135,7 +138,7 @@ private:
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;
 	int m_lootableGold;
-	LootWindow *m_lootWindow = nullptr;
+	LootWindow* m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
 
 	// is this enemy a quest target?

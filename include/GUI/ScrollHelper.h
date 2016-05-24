@@ -6,7 +6,7 @@ class ScrollBar;
 
 class ScrollHelper {
 public:
-	ScrollHelper(const sf::FloatRect &boundingBox);
+	ScrollHelper(const sf::FloatRect& boundingBox);
 	void render(sf::RenderTarget& target);
 
 public:

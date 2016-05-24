@@ -7,12 +7,12 @@
 class SlicedSprite : public sf::Drawable, public::sf::Transformable {
 public:
 	SlicedSprite();
-	SlicedSprite(sf::Texture *tex, const sf::Color &color, float width, float height);
+	SlicedSprite(sf::Texture* tex, const sf::Color& color, float width, float height);
 
 	void setSize(const sf::Vector2f& size);
 	void setSize(float width, float height);
 	void setTexture(sf::Texture *texture);
-	void setColor(const sf::Color &color);
+	void setColor(const sf::Color& color);
 
 	sf::Vector2f getSize() const;
 
@@ -25,7 +25,7 @@ public:
 
 private:
 	void init();	// Set vertexArray data
-	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	sf::Texture *m_texture = nullptr;
 

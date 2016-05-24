@@ -279,7 +279,7 @@ int Spell::getHeal() const {
 	return m_data.heal;
 }
 
-sf::Vector2f Spell::rotateVector(const sf::Vector2f &vec, float angle) {
+sf::Vector2f Spell::rotateVector(const sf::Vector2f& vec, float angle) {
 	float newX = vec.x * cos(angle) - vec.y * sin(angle);
 	float newY = vec.x * sin(angle) + vec.y * cos(angle);
 	return sf::Vector2f(newX, newY);

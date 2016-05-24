@@ -1,7 +1,7 @@
 #include "SpellCreators/WindGustSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-WindGustSpellCreator::WindGustSpellCreator(const SpellData &spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
+WindGustSpellCreator::WindGustSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
 }
 
 int WindGustSpellCreator::getStrengthModifierValue() const {
@@ -12,7 +12,7 @@ std::string WindGustSpellCreator::getStrengthModifierName() const {
 	return "WindForce";
 }
 
-void WindGustSpellCreator::execExecuteSpell(const sf::Vector2f &target) {
+void WindGustSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	WindGustSpell* newSpell = new WindGustSpell(m_strength);

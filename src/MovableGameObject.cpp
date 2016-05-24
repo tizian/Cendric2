@@ -20,7 +20,7 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 	}
 }
 
-void MovableGameObject::setDebugBoundingBox(const sf::Color &debugColor) {
+void MovableGameObject::setDebugBoundingBox(const sf::Color& debugColor) {
 	GameObject::setDebugBoundingBox(debugColor);
 	delete m_debugInfo;
 	m_debugInfo = new BitmapText();

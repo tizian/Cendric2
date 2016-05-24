@@ -76,7 +76,7 @@ void ChestTile::onHit(Spell* spell) {
 	}
 }
 
-void ChestTile::renderAfterForeground(sf::RenderTarget &renderTarget) {
+void ChestTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	GameObject::renderAfterForeground(renderTarget);
 	if (m_showLootWindow && m_lootWindow != nullptr) {
 		m_lootWindow->render(renderTarget);

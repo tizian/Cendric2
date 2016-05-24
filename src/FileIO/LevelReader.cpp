@@ -516,9 +516,10 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					std::string questID = questtargetText.substr(0, questtargetText.find(","));
 					questtargetText.erase(0, questtargetText.find(",") + 1);
 					enemyData.questTarget = std::pair<std::string, std::string>(questID, questtargetText);
+					enemyData.isUnique = true;
 				}
-				else if (itemText.compare("persistent") == 0) {
-					enemyData.isPersistent = true;
+				else if (itemText.compare("unique") == 0) {
+					enemyData.isUnique = true;
 				}
 				else if (itemText.compare("luapath") == 0) {
 					textAttr = item->Attribute("value");
@@ -1055,13 +1056,6 @@ bool LevelReader::checkData(LevelData& data) const {
 		if (!it.questTarget.first.empty() && it.questTarget.second.empty()) {
 			logError("enemy quest target name must not must not be empty when quest id is filled.");
 			return false;
-		}
-		if (it.isPersistent && (!it.questTarget.first.empty() || !it.customizedLoot.first.empty() || it.customizedLoot.second != 0)) {
-			g_logger->logWarning("LevelReader", "a persistent enemy cannot have customized loot or be a quest target.");
-			it.questTarget.first.clear();
-			it.questTarget.second.clear();
-			it.customizedLoot.first.clear();
-			it.customizedLoot.second = 0;
 		}
 	}
 	if (static_cast<int>(data.levelItems.size()) != data.mapSize.x * data.mapSize.y) {
