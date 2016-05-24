@@ -14,16 +14,13 @@ void LevelScreen::loadForRenderTexture() {
 }
 
 void LevelScreen::load() {
-	delete m_characterCoreCopy;
-	m_characterCoreCopy = m_characterCore->createFromThis();
-
 	if (!(m_currentLevel.load(m_levelID, this))) {
 		string errormsg = m_levelID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}
 
-	m_characterCoreCopy->initializeLevelMaps(m_levelID);
+	m_characterCore->initializeLevelMaps(m_levelID);
 
 	LevelMainCharacterLoader loader;
 	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
@@ -66,30 +63,13 @@ void LevelScreen::load() {
 void LevelScreen::cleanUp() {
 	g_resourceManager->stopMusic();
 	m_currentLevel.dispose();
-	delete m_characterCoreCopy;
-	m_characterCoreCopy = nullptr;
 	delete m_overlaySprite;
 	delete m_overlayText;
-}
-
-CharacterCore* LevelScreen::getCharacterCore() const {
-	if (m_characterCoreCopy == nullptr) {
-		return m_characterCore;
-	}
-	return m_characterCoreCopy;
-}
-
-void LevelScreen::writeToCore() {
-	delete m_characterCore;
-	m_characterCore = m_characterCoreCopy->createFromThis();
 }
 
 bool LevelScreen::exitWorld() {
 	if (m_isGameOver) return false;
 
-	writeToCore();
-	delete m_characterCoreCopy;
-	m_characterCoreCopy = nullptr;
 	return true;
 }
 
@@ -133,7 +113,6 @@ void LevelScreen::removeTypedBuffs(SpellID id) {
 
 void LevelScreen::notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr) {
 	m_characterCore->setQuickslot(itemId, quickslotNr);
-	m_characterCoreCopy->setQuickslot(itemId, quickslotNr);
 }
 
 LevelMainCharacter* LevelScreen::getMainCharacter() const {
