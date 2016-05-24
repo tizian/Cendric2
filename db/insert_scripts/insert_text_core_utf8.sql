@@ -246,7 +246,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ToLoot','to l
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToActivate','to activate','(aktivieren)','zum aktiviere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToRead','to read','- lesen','zum läse');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToSwitch','to toggle','- umschalten','zum drucke');
-INSERT INTO text (text_id, english, german, swiss_german) values ('ToOpen','to open','- öffnenzum ufmache');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ToOpen','to open','- öffnen', 'zum ufmache');
 INSERT INTO text (text_id, english, german, swiss_german) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Fireplace','Fireplace','Kochstelle','Chochstell');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NothingToCook','[Nothing to cook...]','[Nichts zu kochen...]','[Es git nüt zum chochä...]');
