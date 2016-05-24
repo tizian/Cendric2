@@ -10,6 +10,7 @@ InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* pa
 	TooltipComponent(tooltip, parent, true) {
 	
 	m_mainChar = mainChar;
+	m_isInteractable = true;
 	m_isFocused = false;
 	m_interactRange = 50.f;
 
