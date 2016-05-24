@@ -35,7 +35,6 @@ include_directories(
 file(GLOB_RECURSE Cendric_FILES
 	"${PROJECT_SOURCE_DIR}/include/*.h"
 	"${PROJECT_SOURCE_DIR}/src/*.cpp"
-	"${PROJECT_SOURCE_DIR}/src/*.mm"
 	"${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
 	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
 	"${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
@@ -50,6 +49,12 @@ file(GLOB_RECURSE SQLiteShell_FILES
 add_executable(Cendric
 	${Cendric_FILES}
 )
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	add_library(CendricApple STATIC "${PROJECT_SOURCE_DIR}/src/Platform/CendricApple.mm")
+	set_target_properties(CendricApple PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+	target_link_libraries(Cendric CendricApple)
+endif()
 
 set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
