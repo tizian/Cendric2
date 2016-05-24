@@ -12,6 +12,10 @@ void SkeletonEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	gold = rand() % 30 + 10;
 }
 
+void SkeletonEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	gold = rand() % 3 + 1;
+}
+
 SkeletonEnemy::SkeletonEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {

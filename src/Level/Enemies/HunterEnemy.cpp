@@ -8,10 +8,6 @@
 
 REGISTER_ENEMY(EnemyID::Hunter, HunterEnemy)
 
-void HunterEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	// nop
-}
-
 HunterEnemy::HunterEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {

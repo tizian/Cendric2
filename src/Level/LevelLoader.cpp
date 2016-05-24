@@ -78,7 +78,7 @@ void LevelLoader::loadSignTiles(LevelData& data, LevelScreen* screen) const {
 	for (auto& signData : data.signTiles) {
 
 		SignLevelTile* signTile = new SignLevelTile(signData, screen);
-		
+
 		signTile->init();
 		signTile->setPosition(signData.position + signTile->getPositionOffset());
 		signTile->setDebugBoundingBox(COLOR_NEUTRAL);
@@ -230,38 +230,49 @@ void LevelLoader::loadTriggers(LevelData& data, LevelScreen* screen) const {
 }
 
 void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level) const {
-	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
+	const CharacterCore* core = screen->getCharacterCore();
 
-	// create enemies if they are not looted yet
 	for (auto& it : data.enemies) {
-		if (coreData.enemiesLooted.at(data.id).find(it.objectID) == coreData.enemiesLooted.at(data.id).end()) {
-			Enemy* enemy = nullptr;
-			// calculate loot.
-			std::map<string, int> loot = it.customizedLoot.first;
-			int gold = it.customizedLoot.second;
+		// an unique enemy that is looted will not respawn!
+		if (it.isUnique && core->isEnemyLooted(data.id, it.objectID)) continue;
 
-			enemy = ObjectFactory::Instance()->createEnemy(it.id, level, screen);
-			if (enemy == nullptr) {
-				g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
-				return;
-			}
-			if (!it.questTarget.first.empty()) {
-				enemy->setQuestTarget(it.questTarget);
-			}
+		// create enemy
+		Enemy* enemy = nullptr;
+		enemy = ObjectFactory::Instance()->createEnemy(it.id, level, screen);
+		if (enemy == nullptr) {
+			g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
+			return;
+		}
 
+		// set quest target
+		if (!it.questTarget.first.empty()) {
+			enemy->setQuestTarget(it.questTarget);
+		}
+
+		// calculate loot.
+		std::map<string, int> loot;
+		int gold = 0;
+
+		if (core->isEnemyLooted(data.id, it.objectID)) {
+			enemy->insertRespawnLoot(loot, gold);
+		}
+		else {
+			loot = it.customizedLoot.first;
+			gold = it.customizedLoot.second;
 			if (loot.empty() && gold == 0) {
 				enemy->insertDefaultLoot(loot, gold);
 			}
-			enemy->setLoot(loot, gold);
-			enemy->setPosition(it.spawnPosition);
-			enemy->setObjectID(it.objectID);
-			enemy->setPersistent(it.isPersistent);
-			enemy->setDebugBoundingBox(sf::Color::Magenta);
-			if (coreData.enemiesKilled.at(data.id).find(it.objectID) != coreData.enemiesKilled.at(data.id).end()) enemy->setDead();
-			screen->addObject(enemy);
-			if (!it.luaPath.empty()) {
-				enemy->setScriptedBehavior(it.luaPath);
-			}
+		}
+
+		enemy->setLoot(loot, gold);
+		enemy->setPosition(it.spawnPosition);
+		enemy->setObjectID(it.objectID);
+		enemy->setUnique(it.isUnique);
+		enemy->setDebugBoundingBox(sf::Color::Magenta);
+		if (it.isUnique && core->isEnemyKilled(data.id, it.objectID)) enemy->setDead();
+		screen->addObject(enemy);
+		if (!it.luaPath.empty()) {
+			enemy->setScriptedBehavior(it.luaPath);
 		}
 	}
 }

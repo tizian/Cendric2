@@ -21,6 +21,7 @@ public:
 	sf::Vector2f getConfiguredSpellOffset() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
+	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
 protected:
 	void handleAttackInput();

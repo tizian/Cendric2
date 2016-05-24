@@ -279,8 +279,8 @@ void Enemy::setAlly(const sf::Time& ttl) {
 	setDebugBoundingBox(COLOR_GOOD);
 }
 
-void Enemy::setPersistent(bool value) {
-	m_isPersistent = value;
+void Enemy::setUnique(bool value) {
+	m_isUnique = value;
 }
 
 void Enemy::setFeared(const sf::Time& fearedTime) {
@@ -355,10 +355,11 @@ void Enemy::setDead() {
 		return;
 	}
 
-	if (!m_isPersistent) {
+	if (m_isUnique) {
 		notifyKilled();
-		m_interactComponent->setInteractable(true);
 	}
+
+	m_interactComponent->setInteractable(true);
 }
 
 void Enemy::notifyLooted() {

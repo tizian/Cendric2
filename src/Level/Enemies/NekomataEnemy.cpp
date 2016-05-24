@@ -14,6 +14,10 @@ void NekomataEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	gold = rand() % 10 + 2;
 }
 
+void NekomataEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	gold = rand() % 5 + 2;
+}
+
 NekomataEnemy::NekomataEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
