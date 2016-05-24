@@ -33,11 +33,6 @@ public:
 	// called by the loading screen. the dynamic tiles & light in level
 	void loadForRenderTexture();
 
-	// the level screen doesn't return the original core here, but a mere copy.
-	CharacterCore* getCharacterCore() const override;
-	// the level screen does not use the original core, but runs on a copy.
-	// to update the original core, call this method. (used by the checkpoints and when leaving the world)
-	void writeToCore();
 	bool exitWorld() override;
 	void notifyBackFromMenu() override;
 
@@ -71,10 +66,6 @@ private:
 	void onBackToMenu();
 	void onRetry();
 	void onResume();
-
-	// the level screen runs on a copy of the character core that only gets written back to the original core
-	// if a checkpoint is reached or the level is finished.
-	CharacterCore* m_characterCoreCopy = nullptr;
 
 	void cleanUp();
 };

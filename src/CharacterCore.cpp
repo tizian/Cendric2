@@ -344,9 +344,15 @@ bool CharacterCore::isConditionFulfilled(const std::string& conditionType, const
 	return (conditions.find(condition) != conditions.end());
 }
 
-bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) {
+bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) const {
 	if (m_data.enemiesKilled.find(levelID) == m_data.enemiesKilled.end()) return false;
 	if (m_data.enemiesKilled.at(levelID).find(objectID) == m_data.enemiesKilled.at(levelID).end()) return false;
+	return true;
+}
+
+bool CharacterCore::isEnemyLooted(const std::string& levelID, int objectID) const {
+	if (m_data.enemiesLooted.find(levelID) == m_data.enemiesLooted.end()) return false;
+	if (m_data.enemiesLooted.at(levelID).find(objectID) == m_data.enemiesLooted.at(levelID).end()) return false;
 	return true;
 }
 

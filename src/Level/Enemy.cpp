@@ -46,7 +46,7 @@ void Enemy::load(EnemyID id) {
 
 	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyKey(id), "enemy"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
-	m_interactComponent->setInteractText("ToPickup");
+	m_interactComponent->setInteractText("ToLoot");
 	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
 	m_interactComponent->setInteractable(false);
 	addComponent(m_interactComponent);
@@ -279,8 +279,8 @@ void Enemy::setAlly(const sf::Time& ttl) {
 	setDebugBoundingBox(COLOR_GOOD);
 }
 
-void Enemy::setPersistent(bool value) {
-	m_isPersistent = value;
+void Enemy::setUnique(bool value) {
+	m_isUnique = value;
 }
 
 void Enemy::setFeared(const sf::Time& fearedTime) {
@@ -355,10 +355,11 @@ void Enemy::setDead() {
 		return;
 	}
 
-	if (!m_isPersistent) {
+	if (m_isUnique) {
 		notifyKilled();
-		m_interactComponent->setInteractable(true);
 	}
+
+	m_interactComponent->setInteractable(true);
 }
 
 void Enemy::notifyLooted() {

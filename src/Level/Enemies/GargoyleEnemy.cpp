@@ -14,6 +14,10 @@ void GargoyleEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	loot.insert({ "mi_gargoyle_dust", 1 });
 }
 
+void GargoyleEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	gold = rand() % 5 + 3;
+}
+
 GargoyleEnemy::GargoyleEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {

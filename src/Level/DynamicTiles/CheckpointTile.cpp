@@ -70,7 +70,6 @@ void CheckpointTile::onLeftClick() {
 	if (!m_level->collides(rec)) {
 		if (LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen())) {
 			screen->getCharacterCore()->setLevel(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top), m_level->getID());
-			screen->writeToCore();
 			screen->setTooltipText("CheckpointReached", COLOR_GOOD, true);
 		}
 	}

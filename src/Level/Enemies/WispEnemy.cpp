@@ -10,7 +10,11 @@
 REGISTER_ENEMY(EnemyID::Wisp, WispEnemy)
 
 void WispEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	gold = rand() % 5; // 0 - 4
+	gold = rand() % 10; 
+}
+
+void WispEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	gold = rand() % 5;
 }
 
 WispEnemy::WispEnemy(const Level* level, Screen* screen) :

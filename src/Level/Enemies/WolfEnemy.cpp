@@ -11,7 +11,12 @@ REGISTER_ENEMY(EnemyID::Wolf, WolfEnemy)
 void WolfEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	loot.insert({ "mi_wolf_fur", 1 });
 	loot.insert({ "fo_rawmeat", 1 });
-	gold = 2;
+	gold = rand() % 6;
+}
+
+void WolfEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	loot.insert({ "fo_rawmeat", 1 });
+	gold = rand() % 3;
 }
 
 WolfEnemy::WolfEnemy(const Level* level, Screen* screen) :

@@ -45,9 +45,9 @@ void InteractComponent::interact() {
 }
 
 void InteractComponent::setInteractText(const std::string& textKey) {
-	std::string interactString = g_textProvider->getText("Press", "hint_desc") + " ";
+	std::string interactString = "<";
 	interactString.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)));
-	interactString.append(" " + g_textProvider->getText(textKey));
+	interactString.append("> " + g_textProvider->getText(textKey));
 	m_interactText.setString(interactString);
 }
 

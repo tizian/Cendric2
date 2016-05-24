@@ -10,7 +10,11 @@ REGISTER_ENEMY(EnemyID::Rat, RatEnemy)
 
 void RatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	loot.insert({ "fo_rawmeat", 1 });
-	gold = 1;
+	gold = rand() % 3 + 1;
+}
+
+void RatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+	loot.insert({ "fo_rawmeat", 1 });
 }
 
 RatEnemy::RatEnemy(const Level* level, Screen* screen) :
