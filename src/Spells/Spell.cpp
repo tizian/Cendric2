@@ -78,6 +78,13 @@ void Spell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector
 	setVelocity(m_data.speed * direction);
 }
 
+void Spell::onOwnerDisposed() {
+	if (isAttachedToMob() && !isDisposed()) {
+		setDisposed();
+	}
+	m_mob = nullptr;
+}
+
 void Spell::execOnHit(LevelMovableGameObject* target) {
 	setDisposed();
 	

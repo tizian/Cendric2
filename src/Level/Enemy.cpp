@@ -66,7 +66,7 @@ void Enemy::onHit(Spell* spell) {
 	}
 
 	const MovableGameObject* owner = spell->getOwner();
-	if (owner->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (owner != nullptr && owner->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
 		m_mainChar->setLastHitEnemy(this);
 	}
 
