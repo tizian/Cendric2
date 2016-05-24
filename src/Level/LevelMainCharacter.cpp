@@ -45,6 +45,9 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 	if (m_targetedEnemy && !m_targetedEnemy->isViewable()) {
 		setTargetEnemy(nullptr);
 	}
+	if (m_lastHitEnemy && !m_lastHitEnemy->isViewable()) {
+		setLastHitEnemy(nullptr);
+	}
 
 	MainCharacter::handleInteraction();
 }
