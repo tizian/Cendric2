@@ -36,8 +36,8 @@ private:
 
 	// how long can a single entry live?
 	const sf::Time TIME_TO_LIVE = sf::seconds(5.f);
-	// start text offset from the top of the screen
-	const float YOFFSET = 20.f;
+	// start text offset from the bottom of the screen
+	const float YOFFSET = 100.f;
 	// text offset from the right of the screen
 	const float XOFFSET = 20.f;
 };

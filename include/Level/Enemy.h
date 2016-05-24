@@ -75,6 +75,7 @@ public:
 	const LevelMovableGameObject* getCurrentTarget() const;
 
 	void setTargeted(bool targeted);
+	void setLastHit(bool lastHit);
 
 	// returns false as a default. can be anything, for example if the enemy hp drops below some limit
 	virtual bool getFleeCondition() const;
@@ -150,6 +151,7 @@ private:
 
 	bool m_isAlly = false;
 	// is this enemy currently targeted by the main character
-	bool m_isTargeted = false;
+	bool m_isTargetedEnemy = false;
+	bool m_isLastHitEnemy = false;
 	sf::Sprite m_targetSprite;
 };

@@ -46,8 +46,9 @@ private:
 	LevelMainCharacter* m_character = nullptr;
 	CharacterCore* m_permanentCore = nullptr;
 
-	// <<< HEALTH BAR >>>
-	HealthBar* m_healthBar = nullptr;
+	// <<< HEALTH BARS >>>
+	HealthBar* m_mainCharHealthBar = nullptr;
+	HealthBar* m_enemyHealthBar = nullptr;
 
 	// <<< SPELL SELECTION >>>
 	SpellSelection* m_spellSelection = nullptr;
