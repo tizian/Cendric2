@@ -47,6 +47,8 @@ public:
 
 	// effects executed on mob when it hits one. default does remove the spell object. executed by the mob itself.
 	virtual void execOnHit(LevelMovableGameObject* target);
+	// gets called when the owner is killed(disposed)
+	virtual void onOwnerDisposed();
 
 	const sf::Time& getActiveDuration() const;
 	const sf::Time& getDuration() const;

@@ -4,9 +4,10 @@ loadDialogue = function(DL)
 	
 	
 
-	if (not DL:isConditionFulfilled("npc_cityguard1", "talked")) then
+	if (not DL:isConditionFulfilled("npc_cityguard", "talked")) then
 		
-		DL:createNPCNode(0, 1, "DL_Citguard_Stop") -- Stop! The gates of Gandria are closed for strangers!
+		DL:createNPCNode(0, 1, "DL_Citguard_Stop") -- STOP! The gates of Gandria are closed for strangers!
+		DL:setConditionFulfilled("npc_cityguard", "talked")
 		DL:addNode()
 	
 		DL:setRoot(0)

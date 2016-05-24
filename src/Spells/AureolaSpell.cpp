@@ -80,5 +80,10 @@ sf::Vector2f AureolaSpell::getConfiguredPositionOffset() const {
 	return sf::Vector2f(5.f, -5.f);
 }
 
+void AureolaSpell::onOwnerDisposed() {
+	setDisposed();
+	m_mob = nullptr;
+}
+
 
 

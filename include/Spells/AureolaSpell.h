@@ -14,6 +14,7 @@ public:
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
 	sf::Vector2f getConfiguredPositionOffset() const override;
+	void onOwnerDisposed() override;
 
 private:
 	// the range left the spell has to fly until it returns to its mob
