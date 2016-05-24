@@ -1,29 +1,48 @@
 #include "GUI/HealthBar.h"
 #include "ResourceManager.h"
+#include "GUI/GUIConstants.h"
 
-HealthBar::HealthBar(const AttributeData* attributes) {
-	m_attributes = attributes;
-	m_currentHP = attributes->currentHealthPoints;
-	m_overlayHP = m_currentHP;
-	m_maxOverlayHP = m_overlayHP;
+HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
+	if (style == HealthBarStyle::MainCharacter) {
+		m_barWidth = 300.f;
+		m_barLeft = 18.f;
+		m_barTop = 18.f;
+		
+		m_borderOffsetX = 13.f;
+		m_borderOffsetY = 10.f;
 
-	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_border);
+		m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_mainChar_border);
+	}
+	else if (style == HealthBarStyle::Enemy) {
+		m_barWidth = 200.f;
+		m_barLeft = WINDOW_WIDTH - m_barWidth - 2.f * 18.f;
+		m_barTop = 18.f;
+		
+		m_borderOffsetX = 8.f;
+		m_borderOffsetY = 6.f;
+
+		m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_enemy_border);
+	}
+	else if (style == HealthBarStyle::Boss) {
+
+	}
+
 	m_barTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content);
 	m_hitOverlayTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content_hit);
 	m_hitOverlayHighlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content_highlight);
 
 	// init bar
-	m_bar.setPosition(sf::Vector2f(BAR_LEFT, BAR_TOP));
+	m_bar.setPosition(sf::Vector2f(m_barLeft, m_barTop));
 	m_bar.setSize(sf::Vector2f(0.f, BAR_HEIGHT));
 	m_bar.setTexture(m_barTexture);
 
 	// init border
-	m_border.setPosition(sf::Vector2f(BAR_LEFT - BORDER_OFFSET_X, BAR_TOP - BORDER_OFFSET_Y));
-	m_border.setSize(sf::Vector2f(BAR_WIDTH + 2.f * BORDER_OFFSET_X, BAR_HEIGHT + 2.f * BORDER_OFFSET_Y));
+	m_border.setPosition(sf::Vector2f(m_barLeft - m_borderOffsetX, m_barTop - m_borderOffsetY));
+	m_border.setSize(sf::Vector2f(m_barWidth + 2.f * m_borderOffsetX, BAR_HEIGHT + 2.f * m_borderOffsetY));
 	m_border.setTexture(m_borderTexture);
 
 	// init overlay
-	m_hitOverlay.setPosition(sf::Vector2f(BAR_LEFT, BAR_TOP));
+	m_hitOverlay.setPosition(sf::Vector2f(m_barLeft, m_barTop));
 	m_hitOverlay.setSize(sf::Vector2f(0.f, 0.f));
 	m_hitOverlay.setTexture(m_hitOverlayTexture);
 
@@ -31,27 +50,57 @@ HealthBar::HealthBar(const AttributeData* attributes) {
 	m_waitTime = sf::Time::Zero;
 	m_shrinkTime = sf::Time::Zero;
 
-	m_tooltipWindow.setPosition(sf::Vector2f(BAR_LEFT + 0.5f * BAR_WIDTH, BAR_TOP + BAR_HEIGHT + 10.f));
+	m_tooltipWindow.setPosition(sf::Vector2f(m_barLeft + 0.5f * m_barWidth, m_barTop + BAR_HEIGHT + 10.f));
 	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
+
+	setAttributes(attributes);
+
+	m_name.setTextAlignment(TextAlignment::Center);
+	m_name.setTextStyle(TextStyle::Shadowed);
+	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	setName("");
 }
 
 HealthBar::~HealthBar() {
-	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_border);
+	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_mainChar_border);
+	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_enemy_border);
 	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content);
 	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_hit);
 	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_highlight);
+}
+
+void HealthBar::setAttributes(const AttributeData* attributes) {
+	m_attributes = attributes;
+
+	if (attributes) {
+		m_currentHP = attributes->currentHealthPoints;
+	}
+	else {
+		m_currentHP = 0;
+	}
+	m_overlayHP = m_currentHP;
+	m_maxOverlayHP = m_overlayHP;
+}
+
+void HealthBar::setName(const std::string& name) {
+	m_name.setString(name);
+	sf::FloatRect bounds = m_name.getBounds();
+	m_name.setPosition(m_barLeft + 0.5f * (m_barWidth - bounds.width), m_barTop + BAR_HEIGHT + 10.f);
 }
 
 void HealthBar::render(sf::RenderTarget& target) {
 	target.draw(m_bar);
 	target.draw(m_hitOverlay);
 	target.draw(m_border);
+	target.draw(m_name);
 	if (m_showTooltip) {
 		m_tooltipWindow.render(target);
 	}
 }
 
 void HealthBar::update(const sf::Time& frameTime) {
+	if (m_attributes == nullptr) return;
+
 	int newHP = m_attributes->currentHealthPoints;
 	if (newHP < m_currentHP) {
 		m_currentHP = newHP;
@@ -96,17 +145,17 @@ void HealthBar::update(const sf::Time& frameTime) {
 	}
 
 	// Set normal bar
-	float normalWidth = BAR_WIDTH * (static_cast<float>(m_currentHP) / m_attributes->maxHealthPoints);
+	float normalWidth = m_barWidth * (static_cast<float>(m_currentHP) / m_attributes->maxHealthPoints);
 	m_bar.setSize(sf::Vector2f(normalWidth, BAR_HEIGHT));
 
 	// Set overlay
-	float overlayX = BAR_LEFT + normalWidth;
-	float overlayWidth = std::max(0.f, BAR_WIDTH * (static_cast<float>(m_overlayHP - m_currentHP) / m_attributes->maxHealthPoints));
-	m_hitOverlay.setPosition(sf::Vector2f(overlayX, BAR_TOP));
+	float overlayX = m_barLeft + normalWidth;
+	float overlayWidth = std::max(0.f, m_barWidth * (static_cast<float>(m_overlayHP - m_currentHP) / m_attributes->maxHealthPoints));
+	m_hitOverlay.setPosition(sf::Vector2f(overlayX, m_barTop));
 	m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
 
 	// Update tooltip
-	sf::FloatRect rect(BAR_LEFT, BAR_TOP, BAR_WIDTH, BAR_HEIGHT);
+	sf::FloatRect rect(m_barLeft, m_barTop, m_barWidth, BAR_HEIGHT);
 	m_showTooltip = g_inputController->isMouseOver(&rect, true);
-	m_tooltipWindow.setText("Cendric: " + std::to_string(m_currentHP) + "/" + std::to_string(m_attributes->maxHealthPoints));
+	m_tooltipWindow.setText(std::to_string(m_currentHP) + "/" + std::to_string(m_attributes->maxHealthPoints));
 }

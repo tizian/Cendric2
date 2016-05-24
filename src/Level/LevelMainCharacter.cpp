@@ -38,12 +38,12 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 
 	// Remove target if right-clicked anywhere
 	if (g_inputController->isMouseClickedRight()) {
-		targetEnemy(nullptr);
+		setTargetEnemy(nullptr);
 	}
 
 	// enemy no longer targeted if it moves out of view
 	if (m_targetedEnemy && !m_targetedEnemy->isViewable()) {
-		targetEnemy(nullptr);
+		setTargetEnemy(nullptr);
 	}
 
 	MainCharacter::handleInteraction();
@@ -327,14 +327,24 @@ void LevelMainCharacter::removeGold(int gold) const {
 	}
 }
 
-void LevelMainCharacter::targetEnemy(Enemy* enemy) {
+void LevelMainCharacter::setTargetEnemy(Enemy* enemy) {
 	if (m_targetedEnemy) m_targetedEnemy->setTargeted(false);
 	m_targetedEnemy = enemy;
 	if (m_targetedEnemy) m_targetedEnemy->setTargeted(true);
 }
 
-Enemy* LevelMainCharacter::getCurrentTarget() const {
+Enemy* LevelMainCharacter::getCurrentTargetEnemy() const {
 	return m_targetedEnemy;
+}
+
+void LevelMainCharacter::setLastHitEnemy(Enemy* enemy) {
+	if (m_lastHitEnemy) m_lastHitEnemy->setLastHit(false);
+	m_lastHitEnemy = enemy;
+	if (m_lastHitEnemy) m_lastHitEnemy->setLastHit(true);
+}
+
+Enemy* LevelMainCharacter::getLastHitEnemy() const {
+	return m_lastHitEnemy;
 }
 
 bool LevelMainCharacter::isAlly() const {

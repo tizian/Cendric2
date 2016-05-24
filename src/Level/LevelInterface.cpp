@@ -7,7 +7,8 @@ LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* characte
 m_character(character) {
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(m_core, character->getAttributes());
-	m_healthBar = new HealthBar(character->getAttributes());
+	m_mainCharHealthBar = new HealthBar(character->getAttributes(), HealthBarStyle::MainCharacter);
+	m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Enemy);
 	m_quickSlotBar = new QuickSlotBar(this);
 	m_spellbook = new Spellbook(m_core, false);
 	m_questLog = new QuestLog(m_core);
@@ -18,7 +19,8 @@ LevelInterface::~LevelInterface() {
 	delete m_spellSelection;
 	delete m_inventory;
 	delete m_characterInfo;
-	delete m_healthBar;
+	delete m_mainCharHealthBar;
+	delete m_enemyHealthBar;
 	delete m_quickSlotBar;
 	delete m_spellbook;
 	delete m_questLog;
@@ -29,7 +31,12 @@ void LevelInterface::render(sf::RenderTarget& target) {
 	target.setView(target.getDefaultView());
 	
 	m_buffBar->render(target);
-	m_healthBar->render(target);
+
+	m_mainCharHealthBar->render(target);
+	if (m_character->getCurrentTargetEnemy() || m_character->getLastHitEnemy()) {
+		m_enemyHealthBar->render(target);
+	}
+	
 	m_spellSelection->render(target);
 	m_quickSlotBar->render(target);
 
@@ -45,13 +52,25 @@ void LevelInterface::renderAfterForeground(sf::RenderTarget& target) {
 
 void LevelInterface::update(const sf::Time& frameTime) {
 	if (m_character->isDead()) {
-		m_healthBar->update(frameTime);
+		m_mainCharHealthBar->update(frameTime);
 		return;
 	}
 		
 	WorldInterface::update(frameTime);
 
-	m_healthBar->update(frameTime);
+	m_mainCharHealthBar->update(frameTime);
+	Enemy* targetEnemy = m_character->getCurrentTargetEnemy();
+	Enemy* lastHitEnemy = m_character->getLastHitEnemy();
+	if (targetEnemy) {
+		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyKey(targetEnemy->getEnemyID()), "enemy"));
+		m_enemyHealthBar->setAttributes(targetEnemy->getAttributes());
+	}
+	else if (lastHitEnemy) {
+		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyKey(lastHitEnemy->getEnemyID()), "enemy"));
+		m_enemyHealthBar->setAttributes(lastHitEnemy->getAttributes());
+	}
+	m_enemyHealthBar->update(frameTime);
+
 	m_buffBar->update(frameTime);
 	m_spellSelection->update(frameTime);
 	m_quickSlotBar->update(frameTime);

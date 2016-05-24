@@ -3,15 +3,25 @@
 #include "global.h"
 #include "Structs/AttributeData.h"
 #include "GUI/TooltipWindow.h"
+#include "GUI/BitmapText.h"
 
-// the health bar, as displayed in a level. It takes its data from the attributes of the main character.
+enum class HealthBarStyle {
+	MainCharacter,
+	Enemy,
+	Boss
+};
+
+// The health bar, as displayed in a level. It takes its data from an attribute struct
 class HealthBar {
 public:
-	HealthBar(const AttributeData* attributes);
+	HealthBar(const AttributeData* attributes, HealthBarStyle style);
 	~HealthBar();
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
+
+	void setAttributes(const AttributeData* attributes);
+	void setName(const std::string& name);
 
 private:
 	const AttributeData* m_attributes;
@@ -31,18 +41,21 @@ private:
 	sf::RectangleShape m_bar;
 	sf::RectangleShape m_hitOverlay;
 
+	BitmapText m_name;
+
+	float m_barWidth;
+	float m_barLeft;
+	float m_barTop;
+
+	float m_borderOffsetX;
+	float m_borderOffsetY;
+
 	const sf::Texture* m_borderTexture;
 	const sf::Texture* m_barTexture;
 	const sf::Texture* m_hitOverlayTexture;
 	const sf::Texture* m_hitOverlayHighlightTexture;
 
 	const float BAR_HEIGHT = 15.f;
-	const float BAR_WIDTH = 300.f;
-	const float BAR_LEFT = 18.f;
-	const float BAR_TOP = 18.f;
-
-	const float BORDER_OFFSET_X = 13.f;
-	const float BORDER_OFFSET_Y = 10.f;
 
 	const float HIGHLIGHT_TIME = 0.05f;
 	const float WAIT_TIME = 0.8f;

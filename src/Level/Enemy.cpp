@@ -65,6 +65,11 @@ void Enemy::onHit(Spell* spell) {
 		return;
 	}
 
+	const MovableGameObject* owner = spell->getOwner();
+	if (owner->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+		m_mainChar->setLastHitEnemy(this);
+	}
+
 	// check for immune damage types, if yes, the spell will disappear, absorbed by the immuneness of this enemy
 	if (std::find(m_immuneDamageTypes.begin(), m_immuneDamageTypes.end(), spell->getDamageType()) != m_immuneDamageTypes.end()) {
 		spell->setDisposed();
@@ -79,7 +84,7 @@ void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
 	LevelMovableGameObject::renderAfterForeground(renderTarget);
 	m_buffBar->render(renderTarget);
 	renderTarget.draw(m_hpBar);
-	if (m_isTargeted) {
+	if (m_isTargetedEnemy) {
 		renderTarget.draw(m_targetSprite);
 	}
 	if (m_showLootWindow && m_lootWindow != nullptr) {
@@ -327,7 +332,7 @@ void Enemy::onRightClick() {
 		}
 	}
 	else if (!m_isDead && !isAlly()) {
-		m_mainChar->targetEnemy(this);
+		m_mainChar->setTargetEnemy(this);
 	}
 	g_inputController->lockAction();
 }
@@ -346,8 +351,11 @@ void Enemy::setDead() {
 	LevelMovableGameObject::setDead();
 	m_buffBar->clear();
 
-	if (m_isTargeted) {
-		m_mainChar->targetEnemy(nullptr);
+	if (m_isTargetedEnemy) {
+		m_mainChar->setTargetEnemy(nullptr);
+	}
+	if (m_isLastHitEnemy) {
+		m_mainChar->setLastHitEnemy(nullptr);
 	}
 
 	if (isAlly()) {
@@ -382,5 +390,9 @@ void Enemy::resetMovingTarget() {
 }
 
 void Enemy::setTargeted(bool targeted) {
-	m_isTargeted = targeted;
+	m_isTargetedEnemy = targeted;
+}
+
+void Enemy::setLastHit(bool lastHit) {
+	m_isLastHitEnemy = lastHit;
 }

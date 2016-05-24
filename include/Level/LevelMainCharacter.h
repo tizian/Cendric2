@@ -47,8 +47,10 @@ public:
 
 	bool isAlly() const override;
 
-	void targetEnemy(Enemy* enemy);
-	Enemy* getCurrentTarget() const;
+	void setTargetEnemy(Enemy* enemy);
+	Enemy* getCurrentTargetEnemy() const;
+	void setLastHitEnemy(Enemy* enemy);
+	Enemy* getLastHitEnemy() const;
 
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
@@ -72,6 +74,7 @@ private:
 	int m_invisibilityLevel = 0;
 
 	Enemy* m_targetedEnemy = nullptr;
+	Enemy* m_lastHitEnemy = nullptr;
 
 	sf::Sound m_sound;
 	sf::Time m_fadingTime = sf::seconds(2.f);
