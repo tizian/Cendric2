@@ -126,7 +126,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		BitmapText conditionText;
 
 		std::string condition = "";
-		condition.append(g_textProvider->getText(it, questID));
+		condition.append(g_textProvider->getText(it, "quest_condition"));
 		condition.append(": ");
 
 		if ((m_core->getQuestState(questID) == QuestState::Completed)

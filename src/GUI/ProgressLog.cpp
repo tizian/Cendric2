@@ -71,7 +71,7 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 	progress.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	progress.setColor(sf::Color::Cyan);
 	std::string progressText = g_textProvider->getText(questID, "quest") + ":\n";
-	progressText.append(g_textProvider->getText(condition, questID) + " " + g_textProvider->getText("Done"));
+	progressText.append(g_textProvider->getText(condition, "quest_condition") + " " + g_textProvider->getText("Done"));
 	progress.setString(progressText);
 	m_logTexts.push_back(std::make_pair(progress, TIME_TO_LIVE));
 	calculatePositions();

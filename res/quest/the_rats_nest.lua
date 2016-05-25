@@ -3,7 +3,7 @@
 -- what to do?
 targets = 
 {
-	{"fire_rat", 2},
-	{"rat", 4}
+	{"FireRat", 2},
+	{"Rat", 4}
 }
 

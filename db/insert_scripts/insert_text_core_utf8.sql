@@ -35,7 +35,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('DamagePerSeco
 INSERT INTO text (text_id, english, german, swiss_german) values ('Default','Default','Standardwert','Standardwert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Delete','Delete','Löschen','Lösche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DisplayMode','Display Mode','Anzeigemodus','Aazeigemodus');
-INSERT INTO text (text_id, english, german, swiss_german) values ('DialogueEnd','[End]','[Ende]','[Fertig]');
+INSERT INTO text (text_id, english, german, swiss_german) values ('DialogueEnd','[END]','[ENDE]','[FERTIG]');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DisplayDamageNumbers','Display Damage Numbers','Schadensszahlen anzeigen','Schadensszahle aazeige');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DisplayHints','Display Hints','Tipps anzeigen','Tipps aazeige');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Divine','Divine','Heilig','Heilig');
