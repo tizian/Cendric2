@@ -72,6 +72,15 @@ INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_simplesword', -25, -40, 25, 60);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_simplesword', 1, 200, 150, 50, 100);
 
+-- Zeff's Skinning Knife
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_zeffssword', 'eq_weapon', 350, 350, 50);
+INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_zeffssword', 7, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('we_zeffssword', 'res/assets/equipment/weapon/spritesheet_weapon_zeffssword.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_zeffssword', 1000, 10, 50, 80, 15);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_zeffssword', 1, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_zeffssword', 2, 'elemental', 1);
+
 -- Walking Pole
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_walkingpole', 'eq_weapon', 250, 100, 10);
