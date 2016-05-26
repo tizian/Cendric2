@@ -23,7 +23,7 @@ void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, cons
 }
 
 void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
-	if (m_isReturning) {
+	if (m_isReturning && m_mob != nullptr) {
 		// an aureola spell will chase its owner.
 		sf::Vector2f dir = m_mob->getCenter() - getPosition();
 		float abs = std::sqrt(dir.x * dir.x + dir.y * dir.y);

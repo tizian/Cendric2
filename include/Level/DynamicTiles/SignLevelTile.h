@@ -5,6 +5,8 @@
 #include "Structs/SignData.h"
 #include "GUI/TooltipWindow.h"
 
+class InteractComponent;
+
 class SignLevelTile : public virtual LevelDynamicTile {
 public:
 	SignLevelTile(const SignData& data, LevelScreen* levelScreen);
@@ -20,8 +22,17 @@ public:
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 
+private: 
+	void onInteract();
+
 private:
 	SignData m_data;
 	TooltipWindow m_tooltipWindow;
 	bool m_showTooltip;
+	sf::Time m_tooltipWindowTime = sf::Time::Zero;
+	InteractComponent* m_interactComponent;
+
+	static const sf::Time TOOLTIP_WINDOW_TIME;
+	static const float READ_RANGE;
+	static const float TOOLTIP_TOP;
 };

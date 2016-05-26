@@ -33,9 +33,6 @@ void GameObject::setDebugBoundingBox(const sf::Color& debugColor) {
 void GameObject::update(const sf::Time& frameTime) {
 	m_isDebugRendering = g_resourceManager->getConfiguration().isDebugRendering;
 	
-	for (auto& component : m_components) {
-		component->update(frameTime);
-	}
 	if (g_inputController->isMouseOver(&m_boundingBox, m_isInputInDefaultView)) {
 		onMouseOver();
 		// if the inputcontroller has locked actions, skip these methods.
@@ -53,6 +50,9 @@ void GameObject::update(const sf::Time& frameTime) {
 		else if (g_inputController->isLeftJustPressed(&m_boundingBox, m_isInputInDefaultView)) {
 			onLeftJustPressed();
 		}
+	}
+	for (auto& component : m_components) {
+		component->update(frameTime);
 	}
 }
 
