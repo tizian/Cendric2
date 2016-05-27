@@ -23,8 +23,10 @@ void SpellCreator::update(const sf::Time& frametime) {
 	if (m_currentCastingTime <= sf::Time::Zero) {
 		m_currentCastingTime = sf::Time::Zero;
 
-		execExecuteSpell(m_currentTarget);
-		m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+		if (!m_owner->isDead()) {
+			execExecuteSpell(m_currentTarget);
+			m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+		}
 	}
 }
 
