@@ -11,8 +11,8 @@ steps = {
 	},
 	{
 		texts = {
-			{str="WhatHappened", time=2},
-			{str="WhereAmI", 	 time=2}
+			{str="WhatHappened", time=5},
+			{str="WhereAmI", 	 time=5}
 		},
 		images = {
 			{path="forest_background.png", 	vel=0, 	angle=0},
@@ -22,7 +22,7 @@ steps = {
 	},
 	{
 		texts = {
-			{str="Chapter1", time=2, centered=true}
+			{str="Chapter1", time=1, centered=true}
 		},
 		images = {
 			{path="darkness.png", vel=0, angle=0},
