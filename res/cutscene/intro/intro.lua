@@ -22,7 +22,7 @@ steps = {
 	},
 	{
 		texts = {
-			{str="Chapter1", time=1, centered=true}
+			{str="Chapter1", time=2, centered=true}
 		},
 		images = {
 			{path="darkness.png", vel=0, angle=0},

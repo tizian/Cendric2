@@ -30,6 +30,7 @@ private:
 
 	sf::Time m_currentTextTime = sf::Time::Zero;
 	sf::Time m_fadeTime;
+	sf::Time m_delayTimer;
 	sf::Time m_fadeInTimer;
 	sf::Time m_fadeOutTimer;
 

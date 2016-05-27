@@ -56,13 +56,17 @@ void Cutscene::update(const sf::Time& frameTime) {
 	}
 
 	float scale = 1.f;
-	if (m_fadeInTimer > sf::Time::Zero) {
+	if (m_delayTimer > sf::Time::Zero) {
+		updateTime(m_delayTimer, frameTime);
+		scale = 0.f;
+	}
+	else if (m_fadeInTimer > sf::Time::Zero) {
 		updateTime(m_fadeInTimer, frameTime);
-		scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
+		scale = easeInOutQuad((m_fadeTime - m_fadeInTimer).asSeconds(), 0.f, 1.f, m_fadeTime.asSeconds());
 	}
 	else if (m_currentTextTime == sf::Time::Zero && m_fadeOutTimer > sf::Time::Zero) {
 		updateTime(m_fadeOutTimer, frameTime);
-		scale = m_fadeOutTimer.asSeconds() / m_fadeTime.asSeconds();
+		scale = easeInOutQuad((m_fadeTime - m_fadeOutTimer).asSeconds(), 1.f, -1.f, m_fadeTime.asSeconds());
 	}
 
 	const sf::Color& tc = m_cutsceneText.getColor();
@@ -151,6 +155,7 @@ void Cutscene::setNextStep() {
 	m_fadeTime = step.fadeTime;
 	m_fadeInTimer = m_fadeTime;
 	m_fadeOutTimer = m_fadeTime;
+	m_delayTimer = m_fadeTime > sf::Time::Zero ? sf::seconds(0.3f) : sf::Time::Zero;
 }
 
 bool Cutscene::isLoaded() const {
