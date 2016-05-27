@@ -29,6 +29,10 @@ private:
 	std::vector<std::string> m_imagePaths;
 
 	sf::Time m_currentTextTime = sf::Time::Zero;
+	sf::Time m_fadeTime;
+	sf::Time m_fadeInTimer;
+	sf::Time m_fadeOutTimer;
+
 	int m_currentStep = -1;
 	int m_currentText = -1;
 

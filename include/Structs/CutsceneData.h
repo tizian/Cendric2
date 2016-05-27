@@ -13,11 +13,13 @@ struct CutsceneImage {
 struct CutsceneText {
 	sf::Time time;
 	std::string text;
+	bool centered;
 };
 
 struct CutsceneStep {
 	std::vector<CutsceneImage> images;
 	std::vector<CutsceneText> texts;
+	sf::Time fadeTime;
 };
 
 struct CutsceneData {

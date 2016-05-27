@@ -1,33 +1,34 @@
 -- lua script for cutscene intro
-steps = 
-{
+steps = {
 	{
-		{
-			{"Darkness", 2}
+		texts = {
+			{str="Darkness", time=2},
+
 		},
-		{
-			{"darkness.png", 0, 0}
+		images = {
+			{path="darkness.png", vel=0, angle=0}
 		}
 	},
 	{
-		{
-			{"WhatHappened", 5},
-			{"WhereAmI", 5}
+		texts = {
+			{str="WhatHappened", time=2},
+			{str="WhereAmI", 	 time=2}
 		},
-		{
-			{"forest_background.png", 0, 0},
-			{"forest_foreground.png", 10, 95},
-			{"forest_trees.png", 40, 80},
+		images = {
+			{path="forest_background.png", 	vel=0, 	angle=0},
+			{path="forest_foreground.png", 	vel=10, angle=95},
+			{path="forest_trees.png", 		vel=40, angle=80},
 		}
 	},
 	{
-		{
-			{"", 3}
+		texts = {
+			{str="Chapter1", time=2, centered=true}
 		},
-		{
-			{"darkness.png", 0, 0},
-			{"chapter1.png", 0, 0}
-		}
+		images = {
+			{path="darkness.png", vel=0, angle=0},
+			{path = {en="chapter1_en.png", de="chapter1_de.png", ch="chapter1_de.png"}, vel=0, angle=0}
+		},
+		fadetime=1.0
 	}
 }
 

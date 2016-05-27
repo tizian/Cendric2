@@ -1,4 +1,6 @@
 #include "Cutscene/CutsceneLoader.h"
+#include "ResourceManager.h"
+#include "Enums/Language.h"
 
 using namespace std;
 using namespace luabridge;
@@ -52,8 +54,8 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.
 		LuaRef step = steps[i];
 		while (!step.isNil()) {
-			LuaRef texts = step[1];
-			LuaRef images = step[2];
+			LuaRef texts = step["texts"];
+			LuaRef images = step["images"];
 			if (!texts.isTable() || !images.isTable()) {
 				g_logger->logError("CutsceneLoader", "Cutscene [" + filename + "]: step table not resolved, there must be one table for texts and one for images.");
 				return cutsceneData;
@@ -65,8 +67,8 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 			int j = 1;
 			LuaRef text = texts[j];
 			while (!text.isNil()) {
-				LuaRef textString = text[1];
-				LuaRef textTime = text[2];
+				LuaRef textString = text["str"];
+				LuaRef textTime = text["time"];
 
 				if (!textString.isString() || !textTime.isNumber()) {
 					g_logger->logError("CutsceneLoader", "Cutscene [" + filename + "]: text table not resolved, text string must be of type string and text time of type number.");
@@ -76,6 +78,12 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 				CutsceneText cutsceneText;
 				cutsceneText.text = textString.cast<std::string>();
 				cutsceneText.time = sf::seconds(static_cast<float>(textTime.cast<int>()));
+				cutsceneText.centered = false;
+
+				LuaRef centered = text["centered"];
+				if (!centered.isNil()) {
+					cutsceneText.centered = true;
+				}
 
 				cutsceneStep.texts.push_back(cutsceneText);
 
@@ -87,20 +95,48 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 			j = 1;
 			LuaRef image = images[j];
 			while (!image.isNil()) {
-				LuaRef imagePath = image[1];
-				LuaRef velocity = image[2];
-				LuaRef angle = image[3];
+				LuaRef imagePath = image["path"];
+				LuaRef velocity = image["vel"];
+				LuaRef angle = image["angle"];
 
-				if (!imagePath.isString() || !velocity.isNumber() || !angle.isNumber()) {
-					g_logger->logError("CutsceneLoader", "Cutscene [" + filename + "]: image table not resolved, image path must be of type string and velocity and angle of type number.");
+				if (!(imagePath.isString() || imagePath.isTable()) || !velocity.isNumber() || !angle.isNumber()) {
+					g_logger->logError("CutsceneLoader", "Cutscene [" + filename + "]: image table not resolved, image path must be of type string or table and velocity and angle of type number.");
 					return cutsceneData;
+				}
+
+				std::string imagePathStr;
+				if (imagePath.isString()) {
+					imagePathStr = imagePath.cast<std::string>();
+				}
+				else if (imagePath.isTable()) {
+
+					Language language = g_resourceManager->getConfiguration().language;
+					std::string key;
+					if (language == Language::Lang_EN) {
+						key = "en";
+					}
+					else if (language == Language::Lang_DE) {
+						key = "de";
+					}
+					else if (language == Language::Lang_CH) {
+						key = "ch";
+					}
+
+					LuaRef imagePathLang = imagePath[key];
+
+					if (!imagePathLang.isString()) {
+						g_logger->logError("CutsceneLoader", "Cutscene [" + filename + "]: image table not resolved, use a table of exactly 3 strings \"en\", \"de\" and \"ch\" to specify language dependent images.");
+						return cutsceneData;
+					}
+
+					imagePathStr = imagePathLang.cast<std::string>();
 				}
 
 				float phi = degToRad(static_cast<float>(angle.cast<int>() - 90));
 				float speed = static_cast<float>(velocity.cast<int>());
 
 				CutsceneImage cutsceneImage;
-				cutsceneImage.imagePath = foldername + imagePath.cast<std::string>();
+				cutsceneImage.imagePath = foldername + imagePathStr;
 				cutsceneImage.velocity.x = std::round(speed * std::cos(phi));
 				cutsceneImage.velocity.y = std::round(speed * std::sin(phi));
 
@@ -108,6 +144,15 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 
 				j++;
 				image = images[j];
+			}
+
+			// fadetime
+			LuaRef fadeTime = step["fadetime"];
+			if (fadeTime.isNumber()) {
+				cutsceneStep.fadeTime = sf::seconds(static_cast<float>(fadeTime.cast<float>()));
+			}
+			else {
+				cutsceneStep.fadeTime = sf::Time::Zero;
 			}
 
 			cutsceneData.steps.push_back(cutsceneStep);

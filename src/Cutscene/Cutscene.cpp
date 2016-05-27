@@ -37,8 +37,12 @@ void Cutscene::update(const sf::Time& frameTime) {
 		m_isNoStepsLeft = true;
 		return;
 	}
-	updateTime(m_currentTextTime, frameTime);
-	if (m_currentTextTime == sf::Time::Zero) {
+
+	if (m_fadeInTimer == sf::Time::Zero && m_currentTextTime > sf::Time::Zero) {
+		updateTime(m_currentTextTime, frameTime);
+	}
+	
+	if (m_currentTextTime == sf::Time::Zero && m_fadeOutTimer == sf::Time::Zero) {
 		setNextText();
 		if (m_isNoTextsLeft) {
 			setNextStep();
@@ -49,6 +53,24 @@ void Cutscene::update(const sf::Time& frameTime) {
 		sf::Vector2f oldPos = m_cutsceneImages.at(i).getPosition();
 		sf::Vector2f velocity = m_data.steps.at(m_currentStep).images.at(i).velocity;
 		m_cutsceneImages.at(i).setPosition(oldPos + velocity * frameTime.asSeconds());
+	}
+
+	float scale = 1.f;
+	if (m_fadeInTimer > sf::Time::Zero) {
+		updateTime(m_fadeInTimer, frameTime);
+		scale = 1.f - m_fadeInTimer.asSeconds() / m_fadeTime.asSeconds();
+	}
+	else if (m_currentTextTime == sf::Time::Zero && m_fadeOutTimer > sf::Time::Zero) {
+		updateTime(m_fadeOutTimer, frameTime);
+		scale = m_fadeOutTimer.asSeconds() / m_fadeTime.asSeconds();
+	}
+
+	const sf::Color& tc = m_cutsceneText.getColor();
+	m_cutsceneText.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(scale * 255)));
+
+	for (size_t i = 0; i < m_cutsceneImages.size(); ++i) {
+		const sf::Color& tc = m_cutsceneImages.at(i).getColor();
+		m_cutsceneImages.at(i).setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(scale * 255)));
 	}
 }
 
@@ -68,11 +90,22 @@ void Cutscene::setNextText() {
 	}
 	else {
 		m_cutsceneText.setString(g_textProvider->getCroppedText(text.text, "cutscene",
-			GUIConstants::CHARACTER_SIZE_XL, WINDOW_WIDTH - 2 * static_cast<int>(TEXT_OFFSET.x)));
+			GUIConstants::CHARACTER_SIZE_L, WINDOW_WIDTH - 2 * static_cast<int>(TEXT_OFFSET.x)));
 	}
-	m_cutsceneText.setPosition(sf::Vector2f(
-		(WINDOW_WIDTH - m_cutsceneText.getLocalBounds().width) / 2.f, 
-		TEXT_OFFSET.y));
+
+	if (text.centered) {
+		m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
+		m_cutsceneText.setPosition(sf::Vector2f(
+			0.5f * (WINDOW_WIDTH - m_cutsceneText.getLocalBounds().width), 
+			0.5f * (WINDOW_HEIGHT - m_cutsceneText.getLocalBounds().height)));
+	}
+	else {
+		m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+		m_cutsceneText.setPosition(sf::Vector2f(
+			0.5f * (WINDOW_WIDTH - m_cutsceneText.getLocalBounds().width), 
+			TEXT_OFFSET.y));
+	}
+	
 	
 	m_currentTextTime = text.time;
 }
@@ -114,6 +147,10 @@ void Cutscene::setNextStep() {
 
 		m_cutsceneImages.push_back(sprite);
 	}
+
+	m_fadeTime = step.fadeTime;
+	m_fadeInTimer = m_fadeTime;
+	m_fadeOutTimer = m_fadeTime;
 }
 
 bool Cutscene::isLoaded() const {

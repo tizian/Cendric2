@@ -2,103 +2,111 @@
 mapid = "res/map/elderhome/elderhome.tmx"
 worldx = 580
 worldy = 440
-steps = 
-{
+steps = {
 	{
-		{
-			{"Elder:HereDrink", 4},
-			{"Elder:ItWillReveal", 4}
+		texts = {
+			{str="Elder:HereDrink", 	time=2},
+			{str="Elder:ItWillReveal", time=4}
+
 		},
-		{
-			{"1_i_1.png", 0, 0},
-			{"1_i_2.png", 10, 90},
-			{"1_i_3.png", 15, 90},
+		images = {
+			{path="1_i_1.png", vel=0,  angle=0},
+			{path="1_i_2.png", vel=10, angle=90},
+			{path="1_i_3.png", vel=15, angle=90},
 		}
 	},
 	{
-		{
-			{"Cendric:LetsDrink", 6}
+		texts = {
+			{str="Cendric:LetsDrink", time=6}
+
 		},
-		{
-			{"1_i_1.png", 0, 0},
-			{"1_i_2.png", 10, 270},
-			{"2_i_3.png", 15, 270},
+		images = {
+			{path="1_i_1.png", vel=0,  angle=0},
+			{path="1_i_2.png", vel=10, angle=270},
+			{path="2_i_3.png", vel=15, angle=270},
 		}
 	},
 	{
-		{
-			{"Cendric:Cough", 2},
-			{"Cendric:Aah", 2},
+		texts = {
+			{str="Cendric:Cough", time=2},
+			{str="Cendric:Aah",   time=2},
+
 		},
-		{
-			{"3_i_1.png", 0, 0},
-			{"3_i_2.png", 120, 180}
+		images = {
+			{path="3_i_1.png", vel=0,   angle=0},
+			{path="3_i_2.png", vel=120, angle=180}
 		}
 	},
 	{
-		{
-			{"Crash", 4}
+		texts = {
+			{str="Crash", time=4}
+
 		},
-		{
-			{"4_i_1.png", 0, 0},
-			{"4_i_2.png", 30, 315},
-			{"4_i_3.png", 30, 45}
+		images = {
+			{path="4_i_1.png", vel=0,  angle=0},
+			{path="4_i_2.png", vel=30, angle=315},
+			{path="4_i_3.png", vel=30, angle=45}
 		}
 	},
 	{
-		{
-			{"Cendric:ItBurns", 3},
-			{"Cendric:WhatsHappening", 4}
+		texts = {
+			{str="Cendric:ItBurns",        time=3},
+			{str="Cendric:WhatsHappening", time=4}
+
 		},
-		{
-			{"5_i_1.png", 0, 0},
-			{"5_i_2.png", 50, 180},
-			{"5_i_3.png", 100, 180}
+		images = {
+			{path="5_i_1.png", vel=0,   angle=0},
+			{path="5_i_2.png", vel=50,  angle=180},
+			{path="5_i_3.png", vel=100, angle=180}
 		}
 	},
 	{
-		{
-			{"Cendric:IFeelSomething", 3},
-			{"Cendric:SoCold", 2}
+		texts = {
+			{str="Cendric:IFeelSomething", time=3},
+			{str="Cendric:SoCold",         time=2}
+
 		},
-		{
-			{"6_i_1.png", 0, 0}
+		images = {
+			{path="6_i_1.png", vel=0, angle=0}
 		}
 	},
 	{
-		{
-			{"Cendric:AmI", 3},
-			{"Cendric:AMage", 7}
+		texts = {
+			{str="Cendric:AmI",   time=3},
+			{str="Cendric:AMage", time=7}
+
 		},
-		{
-			{"6_i_1.png", 0, 0},
-			{"6_i_2.png", 10, 0},
-			{"6_i_3.png", 20, 0},
-			{"6_i_4.png", 40, 10},
-			{"6_i_5.png", 40, 350}
+		images = {
+			{path="6_i_1.png", vel=0,  angle=0},
+			{path="6_i_2.png", vel=10, angle=0},
+			{path="6_i_3.png", vel=20, angle=0},
+			{path="6_i_4.png", vel=40, angle=10},
+			{path="6_i_5.png", vel=40, angle=350}
 		}
 	},
-	{
-		{
-			{"Cendric:TheVisionOver", 3},
-			{"Cendric:TheWaterFrozen", 4},
-			{"Cendric:IDidThat", 4},
-			{"Cendric:WhatsThis", 3}
+	{	
+		texts = {
+			{str="Cendric:TheVisionOver", 	time=3},
+			{str="Cendric:TheWaterFrozen", time=4},
+			{str="Cendric:IDidThat", 		time=4},
+			{str="Cendric:WhatsThis", 		time=3}
+
 		},
-		{
-			{"7_i_1.png", 0, 0},
-			{"7_i_2.png", 10, 0},
-			{"5_i_3.png", 150, 0}
+		images = {
+			{path="7_i_1.png", vel=0, angle=0},
+			{path="7_i_2.png", vel=10, angle=0},
+			{path="5_i_3.png", vel=150, angle=0}
 		}
 	},
-	{
-		{
-			{"Cendric:AMark", 3},
-			{"Cendric:WasntHereBefore", 4}
+	{	
+		texts = {
+			{str="Cendric:AMark", 			 time=3},
+			{str="Cendric:WasntHereBefore", time=4}
+
 		},
-		{
-			{"8_i_1.png", 0, 0},
-			{"8_i_2.png", 10, 0}
+		images = {
+			{path="8_i_1.png", vel=0, angle=0},
+			{path="8_i_2.png", vel=10, angle=0}
 		}
 	}
 }
