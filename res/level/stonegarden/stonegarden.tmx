@@ -9,6 +9,21 @@
  </properties>
  <tileset firstgid="1" name="tileset_level_stonegarden" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="722" columns="19">
   <image source="tileset_level_stonegarden.png" width="1000" height="2000"/>
+  <tile id="96">
+   <properties>
+    <property name="light" value="48,35,150,200,1.0"/>
+   </properties>
+  </tile>
+  <tile id="216">
+   <properties>
+    <property name="light" value="25,30,150,200,1.0"/>
+   </properties>
+  </tile>
+  <tile id="344">
+   <properties>
+    <property name="light" value="25,20,60,70,0.5"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="723" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
@@ -872,71 +887,6 @@
   <object id="144" gid="933" x="2947" y="1345" width="50" height="50"/>
   <object id="145" gid="933" x="4511" y="345" width="50" height="50"/>
   <object id="146" gid="933" x="4345" y="915" width="50" height="50"/>
- </objectgroup>
- <objectgroup name="light">
-  <object id="99" x="3997" y="838" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="100" x="3897" y="887" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="101" x="4846" y="988" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="106" x="3601" y="469" width="253" height="310">
-   <ellipse/>
-  </object>
-  <object id="127" x="2598.5" y="526" width="253" height="310">
-   <ellipse/>
-  </object>
-  <object id="128" x="2748.5" y="475" width="253" height="310">
-   <ellipse/>
-  </object>
-  <object id="129" x="3023.5" y="724" width="253" height="310">
-   <ellipse/>
-  </object>
-  <object id="130" x="3497" y="885" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="131" x="2346" y="735" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="132" x="2747" y="535" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="133" x="2846" y="986" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="136" x="1847" y="636" width="154" height="168">
-   <properties>
-    <property name="brightness" value="0.4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="138" x="2097.5" y="776" width="253" height="310">
-   <ellipse/>
-  </object>
  </objectgroup>
  <objectgroup name="moving platform">
   <object id="96" gid="796" x="4125" y="1350" width="50" height="50">

@@ -40,9 +40,13 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 	for (auto& it : gameData) {
 		LevelEquipmentData equipment;
 		Item item = Item(it);
-		if (!item.isValid() || !item.isEquipmentItem()) {
+		if (!item.isValid()) {
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");
 			return;
+		}
+		if (!item.isEquipmentItem()) {
+			// this item has no equipment part
+			continue;
 		}
 
 		equipment.texturePath = item.getEquipmentBean().texture_path;

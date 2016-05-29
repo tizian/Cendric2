@@ -179,9 +179,9 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 		}
 
 		tile->init();
+		tile->loadAnimation(it.skinNr);
 		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
-		tile->loadAnimation(it.skinNr);
 		tile->setDynamicTileID(it.id);
 		screen->addObject(tile);
 	}

@@ -27,7 +27,7 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data, const 
 
 	if (!readMapProperties(map, data)) return false;
 	if (!readFirstGridIDs(map, data)) return false;
-	if (!readAnimatedTiles(map, data)) return false;
+	if (!readTileProperties(map, data)) return false;
 	if (!readLayers(map, data)) return false;
 	if (!readObjects(map, data)) return false;
 
@@ -808,6 +808,9 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		else if (name.find("dynamic shooting") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Shooting, layerData, data)) return false;
 		}
+		else if (name.find("dynamic particle") != std::string::npos) {
+			if (!readDynamicTileLayer(LevelDynamicTileID::Particle, layerData, data)) return false;
+		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
 		}
@@ -908,6 +911,101 @@ bool LevelReader::readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data) {
 		logError("Could not read firstgids, at least one of the required tilesets is missing.");
 		return false;
 	}
+	return true;
+}
+
+bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_) const {
+	if (!WorldReader::readMapProperties(map, data_)) return false;
+
+	// read level properties
+	tinyxml2::XMLElement* properties = map->FirstChildElement("properties");
+	if (properties == nullptr) {
+		logError("XML file could not be read, no properties node found.");
+		return false;
+	}
+	tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+
+	LevelData& data = static_cast<LevelData&>(data_);
+
+	const char* textAttr = nullptr;
+	while (_property != nullptr) {
+		textAttr = nullptr;
+		textAttr = _property->Attribute("name");
+		if (textAttr == nullptr) {
+			logError("XML file could not be read, no property->name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+		if (name.compare("name") == 0) {
+			if (!readMapName(_property, data)) return false;
+		}
+		else if (name.compare("backgroundlayers") == 0) {
+			if (!readBackgroundLayers(_property, data)) return false;
+		}
+		else if (name.compare("tilesetpath") == 0) {
+			if (!readTilesetPath(_property, data)) return false;
+		}
+		else if (name.compare("musicpath") == 0) {
+			if (!readMusicPath(_property, data)) return false;
+		}
+		else if (name.compare("dimming") == 0) {
+			if (!readDimming(_property, data)) return false;
+		}
+		else if (name.compare("weather") == 0) {
+			if (!readWeather(_property, data)) return false;
+		}
+		else if (name.compare("bosslevel") == 0) {
+			if (!readBossLevel(_property, data)) return false;
+		}
+		else {
+			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
+			return false;
+		}
+
+		_property = _property->NextSiblingElement("property");
+	}
+
+	return true;
+}
+
+bool LevelReader::readBossLevel(tinyxml2::XMLElement* _property, LevelData& data) const {
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr) {
+		logError("XML file could not be read, bosslevel value property not found.");
+		return false;
+	}
+
+	std::string bossLevel = textAttr;
+
+	size_t pos = 0;
+	if ((pos = bossLevel.find(",")) == std::string::npos) {
+		logError("XML file could not be read, bosslevel value must be a string (map or level), the map or level id and the x and y coords, seperated by commas.");
+		return false;
+	}
+
+	data.bossLevelData.isInLevel = bossLevel.substr(0, pos).compare("level") == 0;
+	bossLevel.erase(0, pos + 1);
+
+	if ((pos = bossLevel.find(",")) == std::string::npos) {
+		logError("XML file could not be read, bosslevel value must be a string (map or level), the map or level id and the x and y coords, seperated by commas.");
+		return false;
+	}
+
+	data.bossLevelData.currentWorld = bossLevel.substr(0, pos);
+	bossLevel.erase(0, pos + 1);
+
+	if ((pos = bossLevel.find(",")) == std::string::npos) {
+		logError("XML file could not be read, bosslevel value must be a string (map or level), the map or level id and the x and y coords, seperated by commas.");
+		return false;
+	}
+
+	data.bossLevelData.currentWorldPosition.x = static_cast<float>(std::atoi(bossLevel.substr(0, pos).c_str()));
+	bossLevel.erase(0, pos + 1);
+
+	data.bossLevelData.currentWorldPosition.y = static_cast<float>(std::atoi(bossLevel.c_str()));
+
+	data.bossLevelData.isBossLevel = true;
 	return true;
 }
 

@@ -1,8 +1,11 @@
 #include "Map/DynamicTiles/SignMapTile.h"
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
+#include "GameObjectComponents/InteractComponent.h"
 
-const float TOOLTIP_TOP = 20.f;
+const float SignMapTile::TOOLTIP_TOP = 20.f;
+const float SignMapTile::READ_RANGE = 50.f;
+const sf::Time SignMapTile::TOOLTIP_WINDOW_TIME = sf::seconds(3.f);
 
 SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_data = data;
@@ -10,10 +13,26 @@ SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynami
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
 	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 	m_showTooltip = false;
+
+	m_interactComponent = new InteractComponent(g_textProvider->getText("Sign"), this, m_mainChar);
+	m_interactComponent->setInteractRange(READ_RANGE);
+	m_interactComponent->setInteractText("ToRead");
+	m_interactComponent->setOnInteract(std::bind(&SignMapTile::onInteract, this));
+	addComponent(m_interactComponent);
+}
+
+void SignMapTile::onInteract() {
+	m_tooltipWindowTime = TOOLTIP_WINDOW_TIME;
+	m_tooltipWindow.setPosition(sf::Vector2f(
+		getPosition().x,
+		getPosition().y - m_tooltipWindow.getSize().y - TOOLTIP_TOP));
 }
 
 void SignMapTile::update(const sf::Time& frameTime) {
-	m_showTooltip = false;
+	m_showTooltip = m_tooltipWindowTime > sf::Time::Zero;
+	m_interactComponent->setInteractable(!m_showTooltip);
+	updateTime(m_tooltipWindowTime, frameTime);
+
 	MapDynamicTile::update(frameTime);
 }
 
@@ -43,6 +62,7 @@ void SignMapTile::setPosition(const sf::Vector2f& pos) {
 void SignMapTile::onMouseOver() {
 	setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
 	m_showTooltip = true;
+	m_interactComponent->setInteractable(false);
 	// update tooltip position
 	sf::Vector2f mouse = g_inputController->getMousePosition();
 	sf::Vector2f size = m_tooltipWindow.getSize();

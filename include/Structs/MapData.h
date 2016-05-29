@@ -18,4 +18,6 @@ struct MapData : WorldData {
 	std::vector<SignData> signs;
 	std::vector<sf::FloatRect> collidableRects;
 	std::vector<FloatTriangle> collidableTriangles;
+
+	bool explorable = false;
 };

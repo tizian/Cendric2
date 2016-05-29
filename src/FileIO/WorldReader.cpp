@@ -426,6 +426,18 @@ bool WorldReader::readMusicPath(tinyxml2::XMLElement* _property, WorldData& data
 	return true;
 }
 
+bool WorldReader::readWeather(tinyxml2::XMLElement* _property, WorldData& data) const {
+	// we've found the property "weather"
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr) {
+		logError("XML file could not be read, no value attribute found (map->properties->property->name=weather).");
+		return false;
+	}
+	data.weather.weather = textAttr;
+	return true;
+}
+
 bool WorldReader::readDimming(tinyxml2::XMLElement* _property, WorldData& data) const {
 	// we've found the property "dimming"
 	float dimming = 0.f;
@@ -437,21 +449,29 @@ bool WorldReader::readDimming(tinyxml2::XMLElement* _property, WorldData& data) 
 		return false;
 	}
 
-	data.dimming = dimming;
+	data.weather.dimming = dimming;
 	return true;
 }
+
 
 bool WorldReader::readBackgroundLayers(tinyxml2::XMLElement* _property, WorldData& data) const {
 	// nop, is used by the level only and has no effect for the map.
 	return true;
 }
 
-bool WorldReader::readAnimatedTiles(tinyxml2::XMLElement* map, WorldData& data) const {
+bool WorldReader::readTileProperties(tinyxml2::XMLElement* map, WorldData& data) {
 	tinyxml2::XMLElement* tileset = map->FirstChildElement("tileset");
 	while (tileset != nullptr) {
 		int firstGid;
 		tinyxml2::XMLError result = tileset->QueryIntAttribute("firstgid", &firstGid);
 		XMLCheckResult(result);
+		
+		if (firstGid != 1) {
+			// make sure that we only read tile properties from the first tileset (the level tileset)
+			tileset = tileset->NextSiblingElement("tileset");
+			continue;
+		}
+
 		tinyxml2::XMLElement* tile = tileset->FirstChildElement("tile");
 		while (tile != nullptr) {
 			AnimatedTileData tileData;
@@ -477,6 +497,74 @@ bool WorldReader::readAnimatedTiles(tinyxml2::XMLElement* map, WorldData& data) 
 			if (!tileData.frames.empty()) {
 				data.animatedTiles.push_back(tileData);
 			}
+
+			tinyxml2::XMLElement* properties = tile->FirstChildElement("properties");
+			if (properties != nullptr) {
+				const char* textAttr = nullptr;
+				tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+
+				while (_property != nullptr) {
+					textAttr = nullptr;
+					textAttr = _property->Attribute("name");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no property->name attribute found.");
+						return false;
+					}
+					std::string name = textAttr;
+
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no property->value attribute found.");
+						return false;
+					}
+					std::string value = textAttr;
+
+					if (name.compare("light") == 0) {
+						// read light
+						size_t pos = 0;
+						LightData lightData;
+
+						if ((pos = value.find(",")) == std::string::npos) {
+							logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
+							return false;
+						}
+						lightData.center.x = (float)std::stof(value.substr(0, pos));
+						value.erase(0, pos + 1);
+
+						if ((pos = value.find(",")) == std::string::npos) {
+							logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
+							return false;
+						}
+						lightData.center.y = (float)std::stof(value.substr(0, pos));
+						value.erase(0, pos + 1);
+
+						if ((pos = value.find(",")) == std::string::npos) {
+							logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
+							return false;
+						}
+						lightData.radius.x = (float)std::stof(value.substr(0, pos));
+						value.erase(0, pos + 1);
+
+						if ((pos = value.find(",")) == std::string::npos) {
+							logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
+							return false;
+						}
+						lightData.radius.y = (float)std::stof(value.substr(0, pos));
+						value.erase(0, pos + 1);
+
+						lightData.brightness = (float)std::stof(value);
+
+						m_lightTiles.insert({ tileData.tileID, lightData });
+					}
+					else {
+						logError("XML file could not be read, unknown name attribute found in tile properties (tile->properties->property->name).");
+						return false;
+					}
+
+					_property = _property->NextSiblingElement("property");
+				}
+			}
+
 			tile = tile->NextSiblingElement("tile");
 		}
 		tileset = tileset->NextSiblingElement("tileset");
@@ -532,48 +620,6 @@ bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) 
 	if (tileSize.x != TILE_SIZE || tileSize.y != TILE_SIZE) {
 		logError("The tilesize for level and map must be " + std::to_string(TILE_SIZE));
 		return false;
-	}
-
-	// read level properties
-	tinyxml2::XMLElement* properties = map->FirstChildElement("properties");
-	if (properties == nullptr) {
-		logError("XML file could not be read, no properties node found.");
-		return false;
-	}
-	tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-
-	while (_property != nullptr) {
-		textAttr = nullptr;
-		textAttr = _property->Attribute("name");
-		if (textAttr == nullptr) {
-			logError("XML file could not be read, no property->name attribute found.");
-			return false;
-		}
-		std::string name = textAttr;
-		if (name.compare("name") == 0) {
-			if (!readMapName(_property, data)) return false;
-		}
-		else if (name.compare("backgroundlayers") == 0) {
-			if (!readBackgroundLayers(_property, data)) return false;
-		}
-		else if (name.compare("tilesetpath") == 0) {
-			if (!readTilesetPath(_property, data)) return false;
-		}
-		else if (name.compare("musicpath") == 0) {
-			if (!readMusicPath(_property, data)) return false;
-		}
-		else if (name.compare("dimming") == 0) {
-			if (!readDimming(_property, data)) return false;
-		}
-		else if (name.compare("explorable") == 0) {
-			data.explorable = true;
-		}
-		else {
-			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
-			return false;
-		}
-
-		_property = _property->NextSiblingElement("property");
 	}
 
 	return true;
@@ -677,4 +723,32 @@ void WorldReader::updateData(WorldData& data) const {
 	data.mapRect.top = 0;
 	data.mapRect.height = TILE_SIZE_F * data.mapSize.y;
 	data.mapRect.width = TILE_SIZE_F * data.mapSize.x;
+
+	// calculate lights from tiles
+	readLightsFromLayers(data, data.backgroundTileLayers);
+	readLightsFromLayers(data, data.foregroundTileLayers);
+	readLightsFromLayers(data, data.lightedForegroundTileLayers);
+}
+
+void WorldReader::readLightsFromLayers(WorldData& data, std::vector<std::vector<int>>& layers) const {
+	for (auto& layer : layers) {
+		int x = 0;
+		int y = 0;
+		for (int i = 0; i < layer.size(); ++i) {
+			if (m_lightTiles.find(layer.at(i)) != m_lightTiles.end()) {
+				LightData light = m_lightTiles.at(layer.at(i));
+				light.center.x += TILE_SIZE_F * x;
+				light.center.y += TILE_SIZE_F * y;
+				data.lights.push_back(light);
+			}
+
+			if (x + 1 >= data.mapSize.x) {
+				x = 0;
+				y++;
+			}
+			else {
+				x++;
+			}
+		}
+	}
 }

@@ -18,7 +18,7 @@ public:
 
 	void drawFogOfWar(sf::RenderTarget& target, const sf::RenderStates& states) const;
 
-	const WorldData* getWorldData() const;
+	const MapData* getWorldData() const;
 	
 	// checks collision with the collidable grid of that map
 	bool collides(WorldCollisionQueryRecord& rec) const override;

@@ -17,6 +17,7 @@ public:
 private:
 	void logError(const std::string& error) const override;
 
+	bool readMapProperties(tinyxml2::XMLElement* map, WorldData& data) const override;
 	bool readFirstGridIDs(tinyxml2::XMLElement* map, MapData& data);
 	bool readCollidableTiles(tinyxml2::XMLElement* firstTile);
 	bool readBackgroundTileLayer(const std::string& layer, MapData& data) const;

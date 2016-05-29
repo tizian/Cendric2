@@ -49,7 +49,7 @@ private:
 
 	bool m_isGameOver = false;
 	bool m_isPaused = false;
-	sf::Time m_buttonWaitTime = sf::seconds(2.f);
+	sf::Time m_respawnWaitTime = sf::seconds(2.5f);
 	BitmapText* m_overlayText = nullptr;
 	sf::Sprite* m_overlaySprite = nullptr;
 	YesOrNoForm* m_yesOrNoForm = nullptr;

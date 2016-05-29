@@ -31,6 +31,17 @@ void LevelScreen::load() {
 	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
 	dynamic_cast<LevelInterface*>(m_interface)->setPermanentCore(m_characterCore);
 
+	// handle boss level
+	const BossLevelData& data = m_currentLevel.getWorldData()->bossLevelData;
+	if (data.isBossLevel) {
+		if (data.isInLevel) {
+			m_characterCore->setLevel(data.currentWorldPosition, data.currentWorld);
+		}
+		else {
+			m_characterCore->setMap(data.currentWorldPosition, data.currentWorld);
+		}
+	}
+
 	m_resumeButton = new Button(sf::FloatRect(450, 350, 400, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
 	m_resumeButton->setVisible(false);
@@ -252,17 +263,17 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	// handle game over
 	if (!m_mainChar->isDead()) return;
 	if (m_isGameOver) {
-		if (m_buttonWaitTime == sf::Time::Zero) return;
-		updateTime(m_buttonWaitTime, frameTime);
-		if (m_buttonWaitTime == sf::Time::Zero) {
-			m_retryButton->setVisible(true);
-			m_backToMenuButton->setVisible(true);
+		if (m_respawnWaitTime == sf::Time::Zero) return;
+		updateTime(m_respawnWaitTime, frameTime);
+		if (m_respawnWaitTime == sf::Time::Zero) {
+			onBackToCheckpoint();
 		}
 		return;
 	}
 
 	m_isGameOver = true;
 	addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
+	m_interface->hideAll();
 }
 
 // yes or no form
@@ -298,19 +309,14 @@ void LevelScreen::onResume() {
 }
 
 void LevelScreen::onRetry() {
-	if (m_isGameOver) {
-		onBackToCheckpoint();
-	}
-	else {
-		delete m_yesOrNoForm;
-		float width = 450;
-		float height = 200;
-		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
-		m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
-		m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
-		m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
-		addObject(m_yesOrNoForm);
-		setAllButtonsEnabled(false);
-		m_isPaused = false;
-	}
+	delete m_yesOrNoForm;
+	float width = 450;
+	float height = 200;
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+	m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
+	m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
+	m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
+	addObject(m_yesOrNoForm);
+	setAllButtonsEnabled(false);
+	m_isPaused = false;
 }

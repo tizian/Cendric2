@@ -7,7 +7,7 @@
   <property name="name" value="Meadows"/>
   <property name="tilesetpath" value="res/map/meadows/tileset_map_meadows.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311">
+ <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
   <image source="tileset_map_meadows.png" width="1200" height="3000"/>
   <tile id="25">
    <objectgroup draworder="index">
@@ -26,6 +26,9 @@
    </objectgroup>
   </tile>
   <tile id="167">
+   <properties>
+    <property name="light" value="25,15,100,90,1.0"/>
+   </properties>
    <objectgroup draworder="index"/>
    <animation>
     <frame tileid="167" duration="100"/>
@@ -65,6 +68,16 @@
     <object id="0" x="34" y="-1" width="35" height="33"/>
    </objectgroup>
   </tile>
+  <tile id="650">
+   <properties>
+    <property name="light" value="40,40,100,110,1.0"/>
+   </properties>
+  </tile>
+  <tile id="651">
+   <properties>
+    <property name="light" value="10,40,100,110,1.0"/>
+   </properties>
+  </tile>
   <tile id="673">
    <objectgroup draworder="index">
     <object id="0" x="9" y="0" width="7" height="49"/>
@@ -94,10 +107,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
+ <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="70" height="70">
@@ -1242,74 +1255,17 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="light" visible="0">
-  <object id="8" x="2802.5" y="249.5" width="151" height="129">
-   <ellipse/>
-  </object>
-  <object id="44" x="1723.5" y="629.5" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
+ <objectgroup name="light">
   <object id="49" x="2195.75" y="793.75" width="254.25" height="207.25">
    <ellipse/>
   </object>
-  <object id="50" x="2072.75" y="880.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="53" x="1984.75" y="139.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="54" x="2178.75" y="84.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="55" x="1980.75" y="84.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="56" x="2174.75" y="134.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
   <object id="57" x="1802.88" y="44.375" width="254.25" height="207.25">
-   <ellipse/>
-  </object>
-  <object id="58" x="3020.75" y="1627.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="59" x="3215.75" y="1628.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="63" x="2123.75" y="1582.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="65" x="2506.75" y="1476.75" width="198.25" height="221.25">
-   <ellipse/>
-  </object>
-  <object id="66" x="2625.75" y="1672.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="113" x="2592.88" y="1233.38" width="198.25" height="221.25">
-   <ellipse/>
-  </object>
-  <object id="114" x="1736.88" y="1775.38" width="198.25" height="221.25">
-   <ellipse/>
-  </object>
-  <object id="115" x="1421.88" y="1484.38" width="198.25" height="221.25">
-   <ellipse/>
-  </object>
-  <object id="117" x="2008.88" y="1826.38" width="198.25" height="221.25">
    <ellipse/>
   </object>
   <object id="124" x="733" y="1468" width="174" height="201">
    <ellipse/>
   </object>
   <object id="125" x="839" y="1470" width="183" height="199">
-   <ellipse/>
-  </object>
-  <object id="126" x="596" y="1485" width="189" height="242">
-   <ellipse/>
-  </object>
-  <object id="139" x="2074.75" y="2625.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="140" x="2220.75" y="2631.75" width="204.5" height="180.5">
    <ellipse/>
   </object>
   <object id="141" x="2239.75" y="2501.75" width="117.25" height="111.25">
@@ -1330,28 +1286,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="146" x="1220.75" y="182.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="147" x="1119.75" y="181.75" width="204.5" height="180.5">
-   <ellipse/>
-  </object>
-  <object id="148" x="899.5" y="2670" width="189" height="242">
-   <ellipse/>
-  </object>
-  <object id="149" x="664.5" y="3021" width="189" height="242">
-   <ellipse/>
-  </object>
-  <object id="150" x="1064.5" y="2716" width="189" height="242">
-   <ellipse/>
-  </object>
   <object id="151" x="1468.5" y="2568" width="189" height="242">
-   <ellipse/>
-  </object>
-  <object id="152" x="2613.5" y="2867" width="189" height="242">
-   <ellipse/>
-  </object>
-  <object id="153" x="3173.75" y="2926.75" width="204.5" height="180.5">
    <ellipse/>
   </object>
  </objectgroup>

@@ -33,7 +33,7 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("hungry_wolf", "void")) then
 			DL:addChoice(80, "DL_Choice_SheepWhatDo") -- What can I do to convince you to stop stealing sheep?
 		end
-		DL:addChoice(81, "DL_Choice_AttackHim") -- I was asked to kill the sheep thief. And I will do so. [ATTACK HIM]
+		DL:addChoice(81, "DL_Choice_AttackHim") -- I was asked to kill the sheep thief. And I will do so. [ATTACK]
 		
 	end
 	if (DL:isQuestState("hungry_wolf", "started") and DL:isQuestComplete("hungry_wolf")) then
@@ -172,7 +172,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createChoiceNode(62)
-		DL:addChoice(63, "DL_Choice_AttackHim") -- I was asked to kill the sheep thief. And I will do so. [ATTACK HIM]
+		DL:addChoice(63, "DL_Choice_AttackHim") -- I was asked to kill the sheep thief. And I will do so. [ATTACK]
 		DL:addChoice(65, "DL_Choice_BadassSword") -- You have a badass sword, killing sheep is just low.
 		DL:addChoice(66, "DL_Choice_SheepWhatDo") -- What can I do to convince you to stop stealing sheep?
 		DL:addNode()
@@ -184,7 +184,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createNPCNode(64, -1, "") -- ...
-		DL:startLevel("res/level/rockfall/rockfall.tmx", 200, 10)
+		DL:startLevel("res/level/boss_zeff/boss_zeff.tmx", 150, 500)
 		DL:addNode()
 
 		DL:createNPCNode(65, -2, "DL_Zeff_BadassSword") -- Yes, but when I get hungry, I can't control myself anymore. But better sheep than people, I guess.
@@ -216,7 +216,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createNPCNode(82, -1, "") -- ...
-		DL:startLevel("res/level/rockfall/rockfall.tmx", 200, 10)
+		DL:startLevel("res/level/boss_zeff/boss_zeff.tmx", 150, 500)
 		DL:addNode()
 		
 	end

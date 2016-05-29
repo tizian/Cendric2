@@ -3,10 +3,8 @@
 enum class SpellID {
 	VOID,
 
-	// not really spells, each and every weapon has one of them and their attributes are dependent on
-	// the weapon and they not modifiable otherwise.
+	// not really a spell, each and every weapon of cendric has them and it is not modifiable.
 	Chop,
-	Projectile,
 
 	// Elemental (Default spells)
 	IceBall,
@@ -36,8 +34,9 @@ enum class SpellID {
 	LeapOfFaith,
 	Aureola,
 
-	// Other
+	// Other, used by enemies
 	Buff,
+	Projectile,
 
 	MAX
 };

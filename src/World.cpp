@@ -122,7 +122,7 @@ const std::string& World::getID() const {
 }
 
 float World::getDimming() const {
-	return m_worldData->dimming;
+	return m_worldData->weather.dimming;
 }
 
 const std::string& World::getMusicPath() const {

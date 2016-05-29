@@ -23,7 +23,7 @@ item.id:fo_roastedmeat,6
 item.id:we_simplesword,1
 item.id:we_walkingpole,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:3,4,1
+equipped.spellslot:2,4,1
 # equipment:
 equipped.back:
 equipped.body:eq_leatherarmor
@@ -78,7 +78,7 @@ quest.state:the_mark,1
 quest.state:the_rats_nest,2
 quest.state:who_am_i,2
 # quest targets killed:
-quest.progress.target:the_rats_nest,fire_rat,2,rat,4
+quest.progress.target:the_rats_nest,FireRat,2,Rat,4
 # quest conditions fulfilled:
 quest.progress.condition:who_am_i,information_gathered
 # quest descriptions unlocked:
@@ -98,7 +98,7 @@ reputation.progress:druid,5
 # merchand states:
 merchant.state:npc_innkeeper,0,1.600000,eq_ironring,1,fo_apple,5,fo_beer,10,fo_bread,3,fo_cheese,3,fo_glowingshroom,2,fo_ham,3,fo_healingherb,2,fo_rawmeat,1,fo_roastedmeat,1,fo_sausage,5,fo_water,2,fo_wine,5,mi_candleholder,1,mi_feather,4,mi_goldengoblet,1,mi_pearl,4
 # spells learned:
-spell.learned:1,3
+spell.learned:1,2
 # modifiers learned:
 modifier.learned:4,1
 # hints learned:

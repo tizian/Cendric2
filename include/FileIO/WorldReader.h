@@ -15,12 +15,13 @@ protected:
 	virtual void logError(const std::string& error) const;
 
 	// reads properties name, tile size, map size, tileset, dimming starting @map node
-	bool readMapProperties(tinyxml2::XMLElement* map, WorldData& data) const;
+	virtual bool readMapProperties(tinyxml2::XMLElement* map, WorldData& data) const;
 	bool readMapName(tinyxml2::XMLElement* _property, WorldData& data) const;
 	bool readTilesetPath(tinyxml2::XMLElement* _property, WorldData& data) const;
 	bool readMusicPath(tinyxml2::XMLElement* _property, WorldData& data) const;
 	bool readDimming(tinyxml2::XMLElement* _property, WorldData& data) const;
-	bool readAnimatedTiles(tinyxml2::XMLElement* map, WorldData& data) const;
+	bool readWeather(tinyxml2::XMLElement* _property, WorldData& data) const;
+	bool readTileProperties(tinyxml2::XMLElement* map, WorldData& data);
 	virtual bool readBackgroundLayers(tinyxml2::XMLElement* _property, WorldData& data) const;
 
 	bool readBackgroundTileLayer(const std::string& layer, WorldData& data) const;
@@ -41,4 +42,8 @@ protected:
 
 protected:
 	const CharacterCore* m_core;
+	std::map<int, LightData> m_lightTiles;
+
+private:
+	void readLightsFromLayers(WorldData& data, std::vector<std::vector<int>>& layers) const;
 };

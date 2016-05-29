@@ -5,6 +5,7 @@
 #include "Structs/AnimatedTileData.h"
 #include "Structs/LightData.h"
 #include "Structs/TriggerData.h"
+#include "Structs/WeatherData.h"
 
 struct WorldData {
 	virtual ~WorldData() {};
@@ -26,6 +27,5 @@ struct WorldData {
 	std::vector<TriggerData> triggers;
 	
 	sf::FloatRect mapRect;
-	float dimming = 0.f;
-	bool explorable = false;
+	WeatherData weather;
 };

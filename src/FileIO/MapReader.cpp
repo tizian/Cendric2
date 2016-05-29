@@ -9,6 +9,60 @@ void MapReader::logError(const std::string& error) const {
 	g_logger->logError("MapReader", "Error in map data : " + error);
 }
 
+bool MapReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_) const {
+	if (!WorldReader::readMapProperties(map, data_)) return false;
+
+	// read level properties
+	tinyxml2::XMLElement* properties = map->FirstChildElement("properties");
+	if (properties == nullptr) {
+		logError("XML file could not be read, no properties node found.");
+		return false;
+	}
+	tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+
+	MapData& data = static_cast<MapData&>(data_);
+
+	const char* textAttr = nullptr;
+	while (_property != nullptr) {
+		textAttr = nullptr;
+		textAttr = _property->Attribute("name");
+		if (textAttr == nullptr) {
+			logError("XML file could not be read, no property->name attribute found.");
+			return false;
+		}
+		std::string name = textAttr;
+		if (name.compare("name") == 0) {
+			if (!readMapName(_property, data)) return false;
+		}
+		else if (name.compare("backgroundlayers") == 0) {
+			if (!readBackgroundLayers(_property, data)) return false;
+		}
+		else if (name.compare("tilesetpath") == 0) {
+			if (!readTilesetPath(_property, data)) return false;
+		}
+		else if (name.compare("musicpath") == 0) {
+			if (!readMusicPath(_property, data)) return false;
+		}
+		else if (name.compare("dimming") == 0) {
+			if (!readDimming(_property, data)) return false;
+		}
+		else if (name.compare("weather") == 0) {
+			if (!readWeather(_property, data)) return false;
+		}
+		else if (name.compare("explorable") == 0) {
+			data.explorable = true;
+		}
+		else {
+			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
+			return false;
+		}
+
+		_property = _property->NextSiblingElement("property");
+	}
+
+	return true;
+}
+
 bool MapReader::checkData(MapData& data) const {
 	if (!WorldReader::checkData(data)) return false;
 	for (size_t i = 0; i < data.dynamicTileLayers.size(); ++i) {
@@ -567,7 +621,7 @@ bool MapReader::readMap(const std::string& filename, MapData& data, const Charac
 
 	if (!readMapProperties(map, data)) return false;
 	if (!readFirstGridIDs(map, data)) return false;
-	if (!readAnimatedTiles(map, data)) return false;
+	if (!readTileProperties(map, data)) return false;
 	if (!readLayers(map, data)) return false;
 	if (!readObjects(map, data)) return false;
 

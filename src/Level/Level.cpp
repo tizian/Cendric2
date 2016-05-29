@@ -47,7 +47,7 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 
 	// adjust weather
 	if (const WeatherData* weather = m_screen->getCharacterCore()->getWeather(id)) {
-		m_levelData.dimming = weather->dimming;
+		m_levelData.weather = *weather;
 	}
 
 	// load level
@@ -249,6 +249,10 @@ const std::vector<GameObject*>* Level::getMovableTiles() const {
 
 const std::vector<GameObject*>* Level::getDynamicTiles() const {
 	return m_dynamicTiles;
+}
+
+const LevelData* Level::getWorldData() const {
+	return &m_levelData;
 }
 
 void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const {

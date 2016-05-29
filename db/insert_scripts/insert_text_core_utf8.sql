@@ -228,7 +228,6 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('WeaponDamage'
 INSERT INTO text (text_id, english, german, swiss_german) values ('WindForce','Wind Force','Windstärke','Windstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Window','Window','Fenster','Fenster');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Yes','Yes','Ja','Ja');
-INSERT INTO text (text_id, english, german, swiss_german) values ('YouDied','You died','Ihr seid tot','Du bisch verreckt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('VSync','Vsync','Vsync','Vsync');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GhostDamage','Ghost Damage','Geisterschaden','Geisterschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ScreenshotSaved','Screenshot saved','Bildschirmfoto gespeichert','Bildschirmföteli gspeicheret');

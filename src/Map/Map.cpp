@@ -18,7 +18,7 @@ bool Map::load(const std::string& id, WorldScreen* screen) {
 
 	// adjust weather
 	if (const WeatherData* weather = m_screen->getCharacterCore()->getWeather(id)) {
-		m_mapData.dimming = weather->dimming;
+		m_mapData.weather = *weather;
 	}
 
 	// load map
@@ -60,7 +60,7 @@ void Map::setWorldView(sf::RenderTarget& target, const sf::Vector2f& center) con
 	target.setView(view);
 }
 
-const WorldData* Map::getWorldData() const {
+const MapData* Map::getWorldData() const {
 	return &m_mapData;
 }
 

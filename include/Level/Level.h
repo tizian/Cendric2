@@ -44,6 +44,7 @@ public:
 
 	const std::vector<GameObject*>* getMovableTiles() const;
 	const std::vector<GameObject*>* getDynamicTiles() const;
+	const LevelData* getWorldData() const;
 
 private:
 	// data loaded by the level loader
