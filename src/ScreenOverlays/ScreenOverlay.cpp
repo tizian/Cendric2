@@ -3,6 +3,7 @@
 #include "ScreenOverlays/WindowScreenOverlay.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
+#include "Enums/Language.h"
 #include "Item.h"
 #include "Structs/SpellData.h"
 #include "GUI/Hints.h"
@@ -194,9 +195,17 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	gameOverScreenOverlay->setTitleColor(COLOR_BAD);
 	gameOverScreenOverlay->setTitleCharacterSize(56);
 
-	gameOverScreenOverlay->setTitle("YouDied");
+	Language language = g_resourceManager->getConfiguration().language;
+	if (language == Language::Lang_EN) {
+		gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover_en);
+	}
+	else if (language == Language::Lang_DE) {
+		gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover_de);
+	}
+	else if (language == Language::Lang_CH) {
+		gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover_ch);
+	}
 
-	gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover);
 	gameOverScreenOverlay->setPermanent();
 
 	return gameOverScreenOverlay;
