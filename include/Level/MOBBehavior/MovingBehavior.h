@@ -29,6 +29,8 @@ public:
 	void setMaxXVelocityScale(float scale);
 	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
 	virtual void setIgnoreDynamicTiles(bool value);
+	// recovers from all fighting animations/fighting times/casting times and is ready again (cooldowns don't recover)
+	void setReady();
 
 	void setMaxVelocityX(float vel);
 	void setMaxVelocityYUp(float vel);

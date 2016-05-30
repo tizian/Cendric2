@@ -21,8 +21,8 @@ void ParticleTile::loadAnimation(int skinNr) {
 
 	if (skinNr == 1) {
 		addComponent(new LightComponent(LightData(
-			sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f),
-			sf::Vector2f(200.f, 200.f), 0.5f), this));
+			sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.5f),
+			sf::Vector2f(200.f, 250.f), 0.6f), this));
 	}
 
 	loadParticleSystem(skinNr);

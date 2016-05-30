@@ -1,14 +1,17 @@
 #include "Structs/SpellData.h"
 #include "Spells/SpellCreator.h"
-#include "SpellCreators/FireBallSpellCreator.h"
-#include "SpellCreators/IceBallSpellCreator.h"
+#include "Spells/ProjectileSpell.h"
+#include "Spells/FireBallSpell.h"
+#include "Spells/IceBallSpell.h"
+#include "Spells/ChopSpell.h"
+#include "Spells/LeechSpell.h"
+#include "Spells/ReturningProjectileSpell.h"
+#include "Spells/BoomerangSpell.h"
 #include "SpellCreators/DivineShieldSpellCreator.h"
 #include "SpellCreators/AureolaSpellCreator.h"
-#include "SpellCreators/ChopSpellCreator.h"
 #include "SpellCreators/FearSpellCreator.h"
 #include "SpellCreators/AntiGravitySpellCreator.h"
 #include "SpellCreators/WindGustSpellCreator.h"
-#include "SpellCreators/LeechSpellCreator.h"
 #include "SpellCreators/IcyAmbushSpellCreator.h"
 #include "SpellCreators/UnlockSpellCreator.h"
 #include "SpellCreators/LightSpellCreator.h"
@@ -21,7 +24,7 @@
 #include "SpellCreators/RaiseTheDeadSpellCreator.h"
 #include "SpellCreators/HolyFireSpellCreator.h"
 #include "SpellCreators/SummonGargoyleSpellCreator.h"
-#include "SpellCreators/ProjectileSpellCreator.h"
+#include "SpellCreators/DefaultSpellCreator.h"
 #include "SpellCreators/BuffSpellCreator.h"
 
 std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
@@ -131,13 +134,13 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	SpellCreator* creator;
 	switch (data.id) {
 	case SpellID::Chop:
-		creator = new ChopSpellCreator(data, owner);
+		creator = new DefaultSpellCreator<ChopSpell>(data, owner);
 		break;
 	case SpellID::FireBall:
-		creator = new FireBallSpellCreator(data, owner);
+		creator = new DefaultSpellCreator<FireBallSpell>(data, owner);
 		break;
 	case SpellID::IceBall:
-		creator = new IceBallSpellCreator(data, owner);
+		creator = new DefaultSpellCreator<IceBallSpell>(data, owner);
 		break;
 	case SpellID::DivineShield:
 		creator = new DivineShieldSpellCreator(data, owner);
@@ -155,7 +158,7 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 		creator = new WindGustSpellCreator(data, owner);
 		break;
 	case SpellID::Leech:
-		creator = new LeechSpellCreator(data, owner);
+		creator = new DefaultSpellCreator<LeechSpell>(data, owner);
 		break;
 	case SpellID::IcyAmbush:
 		creator = new IcyAmbushSpellCreator(data, owner);
@@ -194,7 +197,13 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 		creator = new SummonGargoyleSpellCreator(data, owner);
 		break;
 	case SpellID::Projectile:
-		creator = new ProjectileSpellCreator(data, owner);
+		creator = new DefaultSpellCreator<ProjectileSpell>(data, owner);
+		break;
+	case SpellID::ReturningProjectile:
+		creator = new DefaultSpellCreator<ReturningProjectileSpell>(data, owner);
+		break;
+	case SpellID::BoomerangProjectile:
+		creator = new DefaultSpellCreator<BoomerangSpell>(data, owner);
 		break;
 	case SpellID::Buff:
 		creator = new BuffSpellCreator(data, owner);
@@ -254,6 +263,10 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getSummonGargoyleSpellData();
 	case SpellID::Projectile:
 		return getProjectileSpellData();
+	case SpellID::ReturningProjectile:
+		return getReturningProjectileSpellData();
+	case SpellID::BoomerangProjectile:
+		return getBoomerangSpellData();
 	case SpellID::Buff:
 		return getBuffSpellData();
 	default:
@@ -295,6 +308,44 @@ SpellData SpellData::getProjectileSpellData() {
 	projectile.speed = 600.f;
 
 	projectile.inputKey = Key::Chop;
+
+	return projectile;
+}
+
+SpellData SpellData::getReturningProjectileSpellData() {
+	SpellData projectile = EMPTY_SPELL;
+	projectile.id = SpellID::ReturningProjectile;
+
+	projectile.cooldown = sf::seconds(1);
+	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	projectile.divergenceAngle = 0.2f;
+	projectile.damageType = DamageType::Physical;
+	projectile.activeDuration = sf::seconds(5);
+	projectile.damagePerSecond = 2;
+	projectile.duration = sf::seconds(3);
+	projectile.needsTarget = true;
+	projectile.range = 300;
+	projectile.damage = 10;
+	projectile.speed = 600.f;
+
+	return projectile;
+}
+
+SpellData SpellData::getBoomerangSpellData() {
+	SpellData projectile = EMPTY_SPELL;
+	projectile.id = SpellID::BoomerangProjectile;
+
+	projectile.cooldown = sf::seconds(1);
+	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	projectile.divergenceAngle = 0.2f;
+	projectile.damageType = DamageType::Physical;
+	projectile.activeDuration = sf::seconds(5);
+	projectile.damagePerSecond = 2;
+	projectile.duration = sf::seconds(3);
+	projectile.needsTarget = true;
+	projectile.range = 100;
+	projectile.damage = 10;
+	projectile.speed = 600.f;
 
 	return projectile;
 }

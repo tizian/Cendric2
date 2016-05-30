@@ -45,6 +45,8 @@ public:
 	virtual void setFeared(const sf::Time& fearedTime);
 	// the mob is stunned for the given time
 	virtual void setStunned(const sf::Time& stunnedTime);
+	// cancels all blocking spells and fight animations and sets the state to idle
+	void setReady();
 	// flips the gravity and the sprite
 	void flipGravity();
 	

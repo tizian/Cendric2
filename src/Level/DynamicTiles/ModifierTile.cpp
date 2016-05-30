@@ -21,7 +21,7 @@ void ModifierTile::init() {
 
 void ModifierTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
-	
+
 	sf::IntRect rect = sf::IntRect((m_modifier.level - 1) * 50, 50, 50, 50);
 	m_animatedSprite.setColor(SpellModifier::getSpellModifierColor(m_modifier.type));
 
@@ -60,8 +60,14 @@ void ModifierTile::setPosition(const sf::Vector2f& pos) {
 }
 
 void ModifierTile::render(sf::RenderTarget& target) {
-	m_ps->render(target);
-	LevelDynamicTile::render(target);
+	if (m_isFirstRenderIteration) {
+		AnimatedGameObject::render(target);
+		m_ps->render(target);
+		m_isFirstRenderIteration = false;
+	}
+	else {
+		m_isFirstRenderIteration = true;
+	}
 }
 
 void ModifierTile::setModifier(const SpellModifier& modififer) {
@@ -82,10 +88,10 @@ void ModifierTile::addModifier() {
 	screen->notifyModifierLearned(m_modifier);
 	m_ps->emitRate = 0;
 }
- 
+
 void ModifierTile::onHit(LevelMovableGameObject* mob) {
 	if (m_state == GameObjectState::Active) return;
-    LevelMainCharacter* character = dynamic_cast<LevelMainCharacter*>(mob);
+	LevelMainCharacter* character = dynamic_cast<LevelMainCharacter*>(mob);
 	if (character) {
 		addModifier();
 	}

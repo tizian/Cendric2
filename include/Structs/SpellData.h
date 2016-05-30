@@ -63,8 +63,6 @@ struct SpellData {
 
 private:
 	static SpellData getChopSpellData();
-	static SpellData getProjectileSpellData();
-	static SpellData getBuffSpellData();
 
 	static SpellData getFireBallSpellData();
 	static SpellData getIceBallSpellData();
@@ -89,6 +87,11 @@ private:
 	static SpellData getDivineShieldSpellData();
 	static SpellData getLeapOfFaithSpellData();
 	static SpellData getAureolaSpellData();
+
+	static SpellData getProjectileSpellData();
+	static SpellData getBuffSpellData();
+	static SpellData getReturningProjectileSpellData();
+	static SpellData getBoomerangSpellData();
 };
 
 const struct SpellData EMPTY_SPELL =

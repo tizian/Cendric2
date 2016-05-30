@@ -37,6 +37,8 @@ enum class SpellID {
 	// Other, used by enemies
 	Buff,
 	Projectile,
+	ReturningProjectile,
+	BoomerangProjectile,
 
 	MAX
 };

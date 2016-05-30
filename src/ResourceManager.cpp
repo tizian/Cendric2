@@ -60,6 +60,8 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_spell_ghost, "res/assets/spells/spritesheet_spell_ghost.png" },
 		{ ResourceID::Texture_spell_shadowtrap, "res/assets/spells/spritesheet_spell_shadowtrap.png" },
 		{ ResourceID::Texture_spell_projectile, "res/assets/spells/spritesheet_spell_projectile.png" },
+		{ ResourceID::Texture_spell_returningprojectile, "res/assets/spells/spritesheet_spell_returningprojectile.png" },
+		{ ResourceID::Texture_spell_boomerang, "res/assets/spells/spritesheet_spell_boomerang.png" },
 		{ ResourceID::Texture_enemy_rat, "res/assets/enemies/spritesheet_enemy_rat.png" },
 		{ ResourceID::Texture_enemy_firerat, "res/assets/enemies/spritesheet_enemy_firerat.png" },
 		{ ResourceID::Texture_enemy_nekomata, "res/assets/enemies/spritesheet_enemy_nekomata.png" },
@@ -71,6 +73,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_enemy_seagull, "res/assets/enemies/spritesheet_enemy_seagull.png" },
 		{ ResourceID::Texture_enemy_wolf, "res/assets/enemies/spritesheet_enemy_wolf.png" },
 		{ ResourceID::Texture_enemy_stoneman, "res/assets/enemies/spritesheet_enemy_stoneman.png" },
+		{ ResourceID::Texture_boss_zeff, "res/assets/bosses/spritesheet_boss_zeff.png" },
 		{ ResourceID::Texture_tile_ice, "res/assets/level_dynamic_tiles/spritesheet_tiles_ice.png" },
 		{ ResourceID::Texture_tile_destructible, "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png" },
 		{ ResourceID::Texture_tile_torch, "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png" },
@@ -415,6 +418,8 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_spell_ghost);
 	deleteResource(ResourceID::Texture_spell_shadowtrap);
 	deleteResource(ResourceID::Texture_spell_projectile);
+	deleteResource(ResourceID::Texture_spell_returningprojectile);
+	deleteResource(ResourceID::Texture_spell_boomerang);
 
 	deleteResource(ResourceID::Sound_spell_fireball);
 
@@ -459,6 +464,10 @@ void ResourceManager::deleteLevelResources() {
 	deleteResource(ResourceID::Texture_enemy_wisp);
 	deleteResource(ResourceID::Texture_enemy_seagull);
 	deleteResource(ResourceID::Texture_enemy_wolf);
+	deleteResource(ResourceID::Texture_enemy_stoneman);
+
+	// delete boss resources
+	deleteResource(ResourceID::Texture_boss_zeff);
 
 	// delete debuff resources
 	deleteResource(ResourceID::Texture_debuff_fear);
@@ -509,6 +518,9 @@ void ResourceManager::loadLevelResources() {
 	getTexture(ResourceID::Texture_spell_shadowtrap);
 	getTexture(ResourceID::Texture_enemy_gargoyle);
 	getTexture(ResourceID::Texture_spell_projectile);
+	getTexture(ResourceID::Texture_spell_returningprojectile);
+	getTexture(ResourceID::Texture_spell_boomerang);
+
 	getTexture(ResourceID::Texture_tile_frozenwater);
 
 	getSoundBuffer(ResourceID::Sound_spell_fireball);
