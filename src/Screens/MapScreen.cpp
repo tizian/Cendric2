@@ -3,7 +3,6 @@
 #include "Map/NPC.h"
 #include "Screens/ScreenManager.h"
 #include "ScreenOverlays/ScreenOverlay.h"
-#include "WeatherSystem.h"
 
 using namespace std;
 

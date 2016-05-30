@@ -61,6 +61,10 @@ void LevelScreen::load() {
 	addObject(m_backToMenuButton);
 
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
+
+	// adjust weather
+	m_weatherSystem = new WeatherSystem();
+	m_weatherSystem->load(&m_currentLevel.getWorldData()->weather);
 }
 
 void LevelScreen::cleanUp() {
@@ -131,6 +135,7 @@ const Level* LevelScreen::getWorld() const {
 }
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
+	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 	handleGameOver(frameTime);
 	handleBossDefeated(frameTime);
 
@@ -248,6 +253,8 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_Enemy, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
+
+	m_weatherSystem->render(renderTarget);
 
 	renderTarget.setView(renderTarget.getDefaultView());
 	if (!m_interface->isGuiOverlayVisible()) {

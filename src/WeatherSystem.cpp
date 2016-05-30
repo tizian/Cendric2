@@ -28,6 +28,23 @@ void WeatherSystem::load(const WeatherData* data) {
 		velGen->minStartVel = 400.f;
 		velGen->maxStartVel = 500.f;
 	}
+	else if (data->weather.compare("rain_level") == 0) {
+		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(ResourceID::Texture_Particle_rain));
+
+		m_ps->emitRate = 200.f;
+
+		auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+		sizeGen->minStartSize = 5.f;
+		sizeGen->maxStartSize = 15.f;
+		sizeGen->minEndSize = 5.f;
+		sizeGen->maxEndSize = 15.f;
+
+		auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+		velGen->minAngle = 160.f;
+		velGen->maxAngle = 160.f;
+		velGen->minStartVel = 400.f;
+		velGen->maxStartVel = 500.f;
+	}
 	else if (data->weather.compare("snow") == 0) {
 		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(ResourceID::Texture_Particle_snow));
 

@@ -61,7 +61,7 @@ void ParticleTile::onHit(Spell* spell) {
 }
 
 void ParticleTile::loadParticleSystem(int skinNr) {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 60.f;
 
@@ -80,8 +80,8 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color::Yellow;
 	colGen->maxStartCol = sf::Color::Red;
-	colGen->minEndCol = sf::Color(0, 0, 0, 0);
-	colGen->maxEndCol = sf::Color(100, 0, 0, 0);
+	colGen->minEndCol = sf::Color(0, 100, 20, 0);
+	colGen->maxEndCol = sf::Color(100, 100, 20, 0);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -5.f;

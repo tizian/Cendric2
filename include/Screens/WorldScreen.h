@@ -4,12 +4,11 @@
 #include "Screen.h"
 #include "ResourceManager.h"
 #include "Level/LevelInterface.h"
-
+#include "WeatherSystem.h"
 #include "GUI/ProgressLog.h"
 
 class Item;
 class Trigger;
-class WeatherSystem;
 
 // ancestor for level or map screen
 class WorldScreen : public Screen {
