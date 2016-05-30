@@ -60,13 +60,7 @@ void LevelScreen::load() {
 	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));
 	addObject(m_backToMenuButton);
 
-	m_overlaySprite = new sf::Sprite(*g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
-
-	m_overlayText = new BitmapText(g_textProvider->getText("GamePaused"));
-	m_overlayText->setTextStyle(TextStyle::Shadowed);
-	m_overlayText->setCharacterSize(56);
-	m_overlayText->setColor(COLOR_BAD);
-	m_overlayText->setPosition(sf::Vector2f(std::max(0.f, (WINDOW_WIDTH - m_overlayText->getLocalBounds().width) / 2.f), 200.f));
+	m_gamePausedOverlay = ScreenOverlay::createGamePausedScreenOverlay();
 
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 }
@@ -74,8 +68,7 @@ void LevelScreen::load() {
 void LevelScreen::cleanUp() {
 	g_resourceManager->stopMusic();
 	m_currentLevel.dispose();
-	delete m_overlaySprite;
-	delete m_overlayText;
+	delete m_gamePausedOverlay;
 }
 
 bool LevelScreen::exitWorld() {
@@ -249,8 +242,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	WorldScreen::renderAfterForeground(renderTarget);
 
 	if (m_isPaused) {
-		renderTarget.draw(*m_overlaySprite);
-		renderTarget.draw(*m_overlayText);
+		m_gamePausedOverlay->render(renderTarget);
 	}
 
 	renderObjects(GameObjectType::_Button, renderTarget);

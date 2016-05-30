@@ -191,9 +191,7 @@ ScreenOverlay* ScreenOverlay::createModifierLearnedScreenOverlay(const SpellModi
 
 ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	TextureScreenOverlay* gameOverScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
-
-	gameOverScreenOverlay->setTitleColor(COLOR_BAD);
-	gameOverScreenOverlay->setTitleCharacterSize(56);
+	gameOverScreenOverlay->setPermanent();
 
 	Language language = g_resourceManager->getConfiguration().language;
 	if (language == Language::Lang_EN) {
@@ -206,9 +204,22 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 		gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover_ch);
 	}
 
-	gameOverScreenOverlay->setPermanent();
-
 	return gameOverScreenOverlay;
+}
+
+ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
+	TextureScreenOverlay* gamePausedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f));
+	gamePausedScreenOverlay->setPermanent();
+
+	Language language = g_resourceManager->getConfiguration().language;
+	if (language == Language::Lang_EN) {
+		gamePausedScreenOverlay->setTexture(ResourceID::Texture_screen_gamepaused_en);
+	}
+	else if (language == Language::Lang_DE || language == Language::Lang_CH) {
+		gamePausedScreenOverlay->setTexture(ResourceID::Texture_screen_gamepaused_chde);
+	}
+
+	return gamePausedScreenOverlay;
 }
 
 ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {
