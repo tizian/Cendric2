@@ -24,7 +24,14 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 		m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_enemy_border);
 	}
 	else if (style == HealthBarStyle::Boss) {
+		m_barWidth = 300.f;
+		m_barLeft = WINDOW_WIDTH - m_barWidth - 2.f * 18.f;
+		m_barTop = 18.f;
 
+		m_borderOffsetX = 12.f;
+		m_borderOffsetY = 10.f;
+
+		m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_boss_border);
 	}
 
 	m_barTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content);

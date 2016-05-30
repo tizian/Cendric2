@@ -149,6 +149,7 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_GUI_speechbubble_pointer, "res/assets/gui/speechbubble_pointer.png" },
 		{ ResourceID::Texture_GUI_healthbar_mainChar_border, "res/assets/gui/healthbar_mainChar_border.png" },
 		{ ResourceID::Texture_GUI_healthbar_enemy_border, "res/assets/gui/healthbar_enemy_border.png" },
+		{ ResourceID::Texture_GUI_healthbar_boss_border, "res/assets/gui/healthbar_boss_border.png" },
 		{ ResourceID::Texture_GUI_healthbar_content, "res/assets/gui/healthbar_content.png" },
 		{ ResourceID::Texture_GUI_healthbar_content_hit, "res/assets/gui/healthbar_content_hit.png" },
 		{ ResourceID::Texture_GUI_healthbar_content_highlight, "res/assets/gui/healthbar_content_highlight.png" },

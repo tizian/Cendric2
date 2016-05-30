@@ -237,6 +237,31 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 	return gamePausedScreenOverlay;
 }
 
+ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay() {
+	TextureScreenOverlay* enemyDefeatedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
+	enemyDefeatedScreenOverlay->setPermanent(true);
+
+	enemyDefeatedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
+
+	const sf::Texture* text = g_resourceManager->getTexture(ResourceID::Texture_text_defeated);
+	enemyDefeatedScreenOverlay->setSpriteTexture(text);
+	enemyDefeatedScreenOverlay->setSpriteScale(sf::Vector2f(3.f, 3.f));
+	enemyDefeatedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 3.f * text->getSize().x), 200.f - 0.5f * 3.f * 60.f));
+
+	Language language = g_resourceManager->getConfiguration().language;
+	if (language == Language::Lang_EN) {
+		enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
+	}
+	else if (language == Language::Lang_DE) {
+		enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
+	}
+	else if (language == Language::Lang_CH) {
+		enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
+	}
+
+	return enemyDefeatedScreenOverlay;
+}
+
 ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {
 	TextureScreenOverlay* itemScreenOverlay = new TextureScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 

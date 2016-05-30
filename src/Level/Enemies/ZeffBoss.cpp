@@ -22,6 +22,9 @@ ZeffBoss::ZeffBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	load(EnemyID::Boss_Zeff);
+
+	// Make boss hp bar appear from the start
+	m_mainChar->setLastHitEnemy(this);
 }
 
 void ZeffBoss::loadAttributes() {

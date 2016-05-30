@@ -80,8 +80,7 @@ void LevelScreen::notifyBackFromMenu() {
 }
 
 void LevelScreen::notifyBossKilled() {
-	// TODO: change to boss defeated overlay
-	addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
+	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay());
 	m_interface->hideAll();
 	m_isBossDefeated = true;
 }

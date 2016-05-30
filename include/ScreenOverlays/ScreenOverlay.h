@@ -42,6 +42,7 @@ public:
 	static ScreenOverlay* createModifierLearnedScreenOverlay(const SpellModifier& modifier);
 	static ScreenOverlay* createGameOverScreenOverlay();
 	static ScreenOverlay* createGamePausedScreenOverlay();
+	static ScreenOverlay* createEnemyDefeatedScreenOverlay();
 
 protected: 
 	float m_scale;

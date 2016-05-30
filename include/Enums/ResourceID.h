@@ -120,6 +120,7 @@ enum class ResourceID {
 	Texture_GUI_speechbubble_pointer,
 	Texture_GUI_healthbar_mainChar_border,
 	Texture_GUI_healthbar_enemy_border,
+	Texture_GUI_healthbar_boss_border,
 	Texture_GUI_healthbar_content,
 	Texture_GUI_healthbar_content_hit,
 	Texture_GUI_healthbar_content_highlight,

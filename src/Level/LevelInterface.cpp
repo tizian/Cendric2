@@ -7,12 +7,20 @@ LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* characte
 m_character(character) {
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(m_core, character->getAttributes());
-	m_mainCharHealthBar = new HealthBar(character->getAttributes(), HealthBarStyle::MainCharacter);
-	m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Enemy);
 	m_quickSlotBar = new QuickSlotBar(this);
 	m_spellbook = new Spellbook(m_core, false);
 	m_questLog = new QuestLog(m_core);
 	m_buffBar = new BuffBar(this);
+	m_mainCharHealthBar = new HealthBar(character->getAttributes(), HealthBarStyle::MainCharacter);
+
+	const Level* level = dynamic_cast<const Level*>(screen->getWorld());
+	if (level->getWorldData()->bossLevelData.isBossLevel) {
+		// Assume first enemy in level is boss
+		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Boss);
+	}
+	else {
+		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Enemy);
+	}
 }
 
 LevelInterface::~LevelInterface() {
