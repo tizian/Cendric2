@@ -56,6 +56,11 @@ void MovingBehavior::setFightAnimation(const sf::Time& animationTime, GameObject
 	m_fightAnimationState = animation;
 }
 
+void MovingBehavior::setReady() {
+	m_isBlockingSpell = false;
+	m_fightAnimationTime = sf::Time::Zero;
+}
+
 void MovingBehavior::flipGravity() {
 	m_isFlippedGravity = !m_isFlippedGravity;
 }

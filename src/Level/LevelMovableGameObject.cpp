@@ -270,6 +270,10 @@ void LevelMovableGameObject::loadBehavior() {
 	m_movingBehavior = createMovingBehavior();
 }
 
+void LevelMovableGameObject::setReady() {
+	m_movingBehavior->setReady();
+}
+
 void LevelMovableGameObject::flipGravity() {
 	m_movingBehavior->flipGravity();
 	m_animatedSprite.setFlippedY(m_movingBehavior->isUpsideDown());
