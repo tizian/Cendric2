@@ -9,7 +9,7 @@ class WeatherSystem {
 public:
 	~WeatherSystem();
 
-	void load(const WeatherData* data);
+	void load(const WeatherData* data, bool isLevel);
 	void update(const sf::Vector2f& center, const sf::Time& frameTime);
 	void render(sf::RenderTarget& renderTarget);
 

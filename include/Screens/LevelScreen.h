@@ -39,6 +39,7 @@ public:
 
 	LevelMainCharacter* getMainCharacter() const override;
 	const Level* getWorld() const override;
+	const LevelData* getWorldData() const override;
 
 private:
 	void quicksave() override;

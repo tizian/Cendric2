@@ -67,7 +67,14 @@ void MapScreen::load() {
 
 	// adjust weather
 	m_weatherSystem = new WeatherSystem();
-	m_weatherSystem->load(m_characterCore->getWeather(m_mapID));
+	const WorldData* worldData = getWorldData();
+	const WeatherData* weatherData = m_characterCore->getWeather(worldData->id);
+	if (weatherData) {
+		m_weatherSystem->load(weatherData, false);
+	}
+	else {
+		m_weatherSystem->load(&worldData->weather, false);
+	}
 }
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
@@ -100,6 +107,10 @@ void MapScreen::execOnExit(const Screen* nextScreen) {
 
 const Map* MapScreen::getWorld() const {
 	return &m_currentMap;
+}
+
+const MapData* MapScreen::getWorldData() const {
+	return m_currentMap.getWorldData();
 }
 
 MapMainCharacter* MapScreen::getMainCharacter() const {

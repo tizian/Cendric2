@@ -6,7 +6,7 @@
   <property name="dimming" value="0.5"/>
   <property name="name" value="BossZeff"/>
   <property name="tilesetpath" value="res/level/boss_zeff/tileset_level_boss_zeff.png"/>
-  <property name="weather" value="rain_level"/>
+  <property name="weather" value="rain"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_boss_zeff" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_level_boss_zeff.png" width="1000" height="1000"/>

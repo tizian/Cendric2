@@ -64,7 +64,14 @@ void LevelScreen::load() {
 
 	// adjust weather
 	m_weatherSystem = new WeatherSystem();
-	m_weatherSystem->load(&m_currentLevel.getWorldData()->weather);
+	const WorldData* worldData = getWorldData();
+	const WeatherData* weatherData = m_characterCore->getWeather(worldData->id);
+	if (weatherData) {
+		m_weatherSystem->load(weatherData, true);
+	}
+	else {
+		m_weatherSystem->load(&worldData->weather, true);
+	}
 }
 
 void LevelScreen::cleanUp() {
@@ -132,6 +139,10 @@ LevelMainCharacter* LevelScreen::getMainCharacter() const {
 
 const Level* LevelScreen::getWorld() const {
 	return &m_currentLevel;
+}
+
+const LevelData* LevelScreen::getWorldData() const {
+	return m_currentLevel.getWorldData();
 }
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {

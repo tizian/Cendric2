@@ -57,6 +57,8 @@ public:
 	virtual GameObject* getMainCharacter() const = 0;
 	// and for the world
 	virtual const World* getWorld() const = 0;
+	// and for the world data
+	virtual const WorldData* getWorldData() const = 0;
 	// do everything thats needed before leaving the world screen and entering a new level / world. 
 	// Return whether this is possible (it's not possible on a game over, for example)
 	virtual bool exitWorld() = 0;
