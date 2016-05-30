@@ -97,14 +97,14 @@ void ResourceManager::init() {
 		{ ResourceID::Texture_screen_splash_fireanimation, "res/assets/misc/spritesheet_fireanimation.png" },
 		{ ResourceID::Texture_screen_error_fileNotFound, "res/assets/screens/screen_error_filenotfound.png" },
 		{ ResourceID::Texture_screen_error_dataCorrupted, "res/assets/screens/screen_error_datacorrupted.png" },
-		{ ResourceID::Texture_screen_gameover_en, "res/assets/screens/screen_gameover_en.png" },
-		{ ResourceID::Texture_screen_gameover_de, "res/assets/screens/screen_gameover_de.png" },
-		{ ResourceID::Texture_screen_gameover_ch, "res/assets/screens/screen_gameover_ch.png" },
-		{ ResourceID::Texture_screen_gamepaused_en, "res/assets/screens/screen_gamepaused_en.png" },
-		{ ResourceID::Texture_screen_gamepaused_chde, "res/assets/screens/screen_gamepaused_chde.png" },
+		{ ResourceID::Texture_screen_gameover, "res/assets/screens/screen_gameover.png" },
+		{ ResourceID::Texture_screen_overlay, "res/assets/screens/screen_overlay.png" },
 		{ ResourceID::Texture_screen_overlay_stunned, "res/assets/screens/screen_overlay_stunned.png" },
 		{ ResourceID::Texture_screen_overlay_feared, "res/assets/screens/screen_overlay_feared.png" },
 		{ ResourceID::Texture_screen_menu, "res/assets/screens/screen_menu.png" },
+		{ ResourceID::Texture_text_gameover, "res/assets/screens/text_gameover.png" },
+		{ ResourceID::Texture_text_gamepaused, "res/assets/screens/text_gamepaused.png" },
+		{ ResourceID::Texture_text_defeated, "res/assets/screens/text_defeated.png" },
 		{ ResourceID::Texture_debuff_fear, "res/assets/debuffs/spritesheet_debuff_fear.png" },
 		{ ResourceID::Texture_debuff_stun, "res/assets/debuffs/spritesheet_debuff_stun.png" },
 		{ ResourceID::Texture_screen_credits, "res/assets/screens/screen_credits.png" },
@@ -466,13 +466,13 @@ void ResourceManager::deleteLevelResources() {
 
 	// delete other level resources
 	deleteResource(ResourceID::Texture_levelitems);
-	deleteResource(ResourceID::Texture_screen_gameover_en);
-	deleteResource(ResourceID::Texture_screen_gameover_de);
-	deleteResource(ResourceID::Texture_screen_gameover_ch);
-	deleteResource(ResourceID::Texture_screen_gamepaused_en);
-	deleteResource(ResourceID::Texture_screen_gamepaused_chde);
+	deleteResource(ResourceID::Texture_screen_gameover);
+	deleteResource(ResourceID::Texture_screen_overlay);
 	deleteResource(ResourceID::Texture_screen_overlay_stunned);
 	deleteResource(ResourceID::Texture_screen_overlay_feared);
+	deleteResource(ResourceID::Texture_text_gameover);
+	deleteResource(ResourceID::Texture_text_gamepaused);
+	deleteResource(ResourceID::Texture_text_defeated);
 	deleteResource(ResourceID::Texture_GUI_speechbubble_pointer);
 }
 
@@ -527,13 +527,13 @@ void ResourceManager::loadLevelResources() {
 	getSoundBuffer(ResourceID::Sound_tile_destructible);
 
 	// load overlays
-	getTexture(ResourceID::Texture_screen_gameover_en);
-	getTexture(ResourceID::Texture_screen_gameover_de);
-	getTexture(ResourceID::Texture_screen_gameover_ch);
-	getTexture(ResourceID::Texture_screen_gamepaused_en);
-	getTexture(ResourceID::Texture_screen_gamepaused_chde);
+	getTexture(ResourceID::Texture_screen_gameover);
+	getTexture(ResourceID::Texture_screen_overlay);
 	getTexture(ResourceID::Texture_screen_overlay_stunned);
 	getTexture(ResourceID::Texture_screen_overlay_feared);
+	getTexture(ResourceID::Texture_text_gameover);
+	getTexture(ResourceID::Texture_text_gamepaused);
+	getTexture(ResourceID::Texture_text_defeated);
 
 	// load debuff sprites
 	getTexture(ResourceID::Texture_debuff_fear);

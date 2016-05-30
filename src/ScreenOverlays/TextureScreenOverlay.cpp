@@ -1,28 +1,21 @@
 #include "ScreenOverlays/TextureScreenOverlay.h"
 
 TextureScreenOverlay::TextureScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : ScreenOverlay(activeTime, fadeTime) {
-	m_textureColor = sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255);
 	m_sprite.setPosition(sf::Vector2f(0.f, 0.f));
-	m_sprite.setColor(m_textureColor);
+	m_sprite.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 
-	m_backgroundColor = sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255);
 	m_background.setPosition(sf::Vector2f(0.f, 0.f));
-	m_background.setColor(m_backgroundColor);
+	m_background.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 }
 
 void TextureScreenOverlay::update(const sf::Time& frameTime) {
 	ScreenOverlay::update(frameTime);
-	m_sprite.setColor(sf::Color(
-		m_textureColor.r, 
-		m_textureColor.g, 
-		m_textureColor.b, 
-		(sf::Uint8)(m_scale * 255)));
 
-	m_background.setColor(sf::Color(
-		m_backgroundColor.r,
-		m_backgroundColor.g,
-		m_backgroundColor.b,
-		(sf::Uint8)(m_scale * 255)));
+	const sf::Color& sc = m_subtitle.getColor();
+	const sf::Color& bc = m_title.getColor();
+
+	m_sprite.setColor(sf::Color(sc.r, sc.g, sc.b, (sf::Uint8)(m_scale * 255)));
+	m_background.setColor(sf::Color(bc.r, bc.g, bc.b, (sf::Uint8)(m_scale * 255)));
 }
 
 void TextureScreenOverlay::render(sf::RenderTarget& renderTarget) {
@@ -31,16 +24,15 @@ void TextureScreenOverlay::render(sf::RenderTarget& renderTarget) {
 	ScreenOverlay::render(renderTarget);
 }
 
-void TextureScreenOverlay::setTexture(ResourceID texture) {
-	m_sprite.setTexture(*g_resourceManager->getTexture(texture));
+void TextureScreenOverlay::setSpriteTexture(const sf::Texture* texture) {
+	m_sprite.setTexture(*texture);
 }
 
-void TextureScreenOverlay::setTextureRect(const sf::IntRect& rect) {
+void TextureScreenOverlay::setSpriteTextureRect(const sf::IntRect& rect) {
 	m_sprite.setTextureRect(rect);
 }
 
-void TextureScreenOverlay::setTextureColor(const sf::Color& color) {
-	m_textureColor = color;
+void TextureScreenOverlay::setSpriteTextureColor(const sf::Color& color) {
 	m_sprite.setColor(color);
 }
 
@@ -52,8 +44,8 @@ void TextureScreenOverlay::setSpriteScale(const sf::Vector2f& factors) {
 	m_sprite.setScale(factors);
 }
 
-void TextureScreenOverlay::setBackgroundTexture(ResourceID texture) {
-	m_background.setTexture(*g_resourceManager->getTexture(texture));
+void TextureScreenOverlay::setBackgroundTexture(const sf::Texture* texture) {
+	m_background.setTexture(*texture);
 }
 
 void TextureScreenOverlay::setBackgroundTextureRect(const sf::IntRect& rect) {
@@ -61,7 +53,6 @@ void TextureScreenOverlay::setBackgroundTextureRect(const sf::IntRect& rect) {
 }
 
 void TextureScreenOverlay::setBackgroundColor(const sf::Color& color) {
-	m_backgroundColor = color;
 	m_background.setColor(color);
 }
 

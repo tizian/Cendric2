@@ -149,11 +149,11 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 	spellScreenOverlay->setSubtitleCharacterSize(32);
 	spellScreenOverlay->setSubtitle(EnumNames::getSpellIDName(id));
 
-	spellScreenOverlay->setTexture(ResourceID::Texture_spellicons);
-	spellScreenOverlay->setBackgroundTexture(ResourceID::Texture_spellscroll);
+	spellScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(ResourceID::Texture_spellicons));
+	spellScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_spellscroll));
 
 	const SpellData& bean = SpellData::getSpellData(id);
-	spellScreenOverlay->setTextureRect(bean.iconTextureRect);
+	spellScreenOverlay->setSpriteTextureRect(bean.iconTextureRect);
 
 	sf::Vector2f scale(2.f, 2.f);
 	spellScreenOverlay->setSpriteScale(scale);
@@ -180,9 +180,9 @@ ScreenOverlay* ScreenOverlay::createModifierLearnedScreenOverlay(const SpellModi
 	subtitle.append(g_textProvider->getText("Level") + " " + std::to_string(modifier.level));
 	modifierScreenOverlay->setSubtitleRaw(subtitle);
 
-	modifierScreenOverlay->setTexture(ResourceID::Texture_gems);
-	modifierScreenOverlay->setTextureRect(sf::IntRect((modifier.level - 1) * 50, 50, 50, 50));
-	modifierScreenOverlay->setTextureColor(SpellModifier::getSpellModifierColor(modifier.type));
+	modifierScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(ResourceID::Texture_gems));
+	modifierScreenOverlay->setSpriteTextureRect(sf::IntRect((modifier.level - 1) * 50, 50, 50, 50));
+	modifierScreenOverlay->setSpriteTextureColor(SpellModifier::getSpellModifierColor(modifier.type));
 
 	modifierScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
 	modifierScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
@@ -194,15 +194,22 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	TextureScreenOverlay* gameOverScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
 	gameOverScreenOverlay->setPermanent(true);
 
+	gameOverScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
+
+	const sf::Texture* text = g_resourceManager->getTexture(ResourceID::Texture_text_gameover);
+	gameOverScreenOverlay->setSpriteTexture(text);
+	gameOverScreenOverlay->setSpriteScale(sf::Vector2f(4.f, 4.f));
+	gameOverScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
+
 	Language language = g_resourceManager->getConfiguration().language;
 	if (language == Language::Lang_EN) {
-		gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover_en);
+		gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
 	}
 	else if (language == Language::Lang_DE) {
-		gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover_de);
+		gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
 	}
 	else if (language == Language::Lang_CH) {
-		gameOverScreenOverlay->setTexture(ResourceID::Texture_screen_gameover_ch);
+		gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
 	}
 
 	return gameOverScreenOverlay;
@@ -212,12 +219,19 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 	TextureScreenOverlay* gamePausedScreenOverlay = new TextureScreenOverlay(sf::milliseconds(1), sf::seconds(0.1f));
 	gamePausedScreenOverlay->setPermanent(true);
 
+	gamePausedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
+
+	const sf::Texture* text = g_resourceManager->getTexture(ResourceID::Texture_text_gamepaused);
+	gamePausedScreenOverlay->setSpriteTexture(text);
+	gamePausedScreenOverlay->setSpriteScale(sf::Vector2f(4.f, 4.f));
+	gamePausedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 200.f - 0.5f * 4.f * 60.f));
+
 	Language language = g_resourceManager->getConfiguration().language;
 	if (language == Language::Lang_EN) {
-		gamePausedScreenOverlay->setTexture(ResourceID::Texture_screen_gamepaused_en);
+		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
 	}
 	else if (language == Language::Lang_DE || language == Language::Lang_CH) {
-		gamePausedScreenOverlay->setTexture(ResourceID::Texture_screen_gamepaused_chde);
+		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
 	}
 
 	return gamePausedScreenOverlay;
@@ -236,8 +250,8 @@ ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item)
 
 	itemScreenOverlay->setSubtitleCharacterSize(16);
 
-	itemScreenOverlay->setTexture(ResourceID::Texture_items);
-	itemScreenOverlay->setTextureRect(sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50));
+	itemScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(ResourceID::Texture_items));
+	itemScreenOverlay->setSpriteTextureRect(sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50));
 
 	itemScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
 	itemScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
