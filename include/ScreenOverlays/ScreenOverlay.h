@@ -29,7 +29,7 @@ public:
 	void setSubtitleRaw(const std::string& text);
 	void setSubtitleCharacterSize(int characterSize);
 	void setSubtitleColor(const sf::Color& color);
-	void setPermanent();
+	void setPermanent(bool permanent);
 
 	GameObjectType getConfiguredType() const override;
 
@@ -52,9 +52,10 @@ protected:
 
 	virtual void repositionText();
 
+	sf::Time m_fadeTime;
+
 private:
 	sf::Time m_activeTime;
-	sf::Time m_fadeTime;
 	sf::Time m_fadeInTimer;
 	sf::Time m_fadeOutTimer;
 
