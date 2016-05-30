@@ -56,8 +56,8 @@ void ZeffBoss::loadSpells() {
 	projectile.fightAnimation = GameObjectState::Fighting2;
 	projectile.castingTime = sf::milliseconds(800);
 	projectile.castingAnimation = GameObjectState::Casting;
-	projectile.range = 400;
-	projectile.speed = 400;
+	projectile.range = 600;
+	projectile.speed = 500;
 	
 	m_spellManager->addSpell(projectile);
 
@@ -170,7 +170,7 @@ MovingBehavior* ZeffBoss::createMovingBehavior(bool asAlly) {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(100.f);
+	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(500.f);
 	behavior->setMaxVelocityX(150.f);
