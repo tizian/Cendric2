@@ -43,8 +43,6 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
 }
 
-
-
 void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {
 	for (auto& it : modifiers) {
 		if (it.type == SpellModifierType::VOID) continue;
