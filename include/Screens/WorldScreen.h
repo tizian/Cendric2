@@ -85,7 +85,8 @@ protected:
 	sf::Shader m_lightLayerShader;
 	sf::Shader m_foregroundLayerShader;
 
-	WeatherSystem* m_weatherSystem;
+	WeatherSystem* m_weatherSystem = nullptr;
+	void loadWeather();
 
 private:
 	void updateOverlayQueue();

@@ -66,15 +66,7 @@ void MapScreen::load() {
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 
 	// adjust weather
-	m_weatherSystem = new WeatherSystem();
-	const WorldData* worldData = getWorldData();
-	const WeatherData* weatherData = m_characterCore->getWeather(worldData->id);
-	if (weatherData) {
-		m_weatherSystem->load(weatherData, false);
-	}
-	else {
-		m_weatherSystem->load(&worldData->weather, false);
-	}
+	loadWeather();
 }
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {

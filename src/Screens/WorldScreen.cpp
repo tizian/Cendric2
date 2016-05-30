@@ -170,6 +170,20 @@ Inventory* WorldScreen::getInventory() {
 	return m_interface->getInventory();
 }
 
+void WorldScreen::loadWeather() {
+	delete m_weatherSystem;
+	m_weatherSystem = new WeatherSystem();
+	const WorldData* worldData = getWorldData();
+	const WeatherData* weatherData = m_characterCore->getWeather(worldData->id);
+	bool isLevel = dynamic_cast<const LevelData*>(worldData) != nullptr;
+	if (weatherData) {
+		m_weatherSystem->load(weatherData, isLevel);
+	}
+	else {
+		m_weatherSystem->load(&worldData->weather, isLevel);
+	}
+}
+
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	updateOverlayQueue();
 	

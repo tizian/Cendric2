@@ -63,15 +63,7 @@ void LevelScreen::load() {
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 
 	// adjust weather
-	m_weatherSystem = new WeatherSystem();
-	const WorldData* worldData = getWorldData();
-	const WeatherData* weatherData = m_characterCore->getWeather(worldData->id);
-	if (weatherData) {
-		m_weatherSystem->load(weatherData, true);
-	}
-	else {
-		m_weatherSystem->load(&worldData->weather, true);
-	}
+	loadWeather();
 }
 
 void LevelScreen::cleanUp() {
