@@ -9,10 +9,6 @@ void HolyFireSpell::load(const SpellData& bean, LevelMovableGameObject* mob, con
 	loadParticleSystem();
 }
 
-sf::Vector2f HolyFireSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-m_data.range, -m_data.range);
-}
-
 void HolyFireSpell::execOnHit(LevelMovableGameObject* target) {
 	m_hasDamaged = true;
 }

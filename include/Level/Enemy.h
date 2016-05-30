@@ -40,7 +40,9 @@ public:
 	void addDamageOverTime(DamageOverTimeData& data) override;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
+	void setQuestCondition(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
+	void setBoss(bool value);
 	void setScriptedBehavior(const std::string& luaPath);
 	void notifyKilled();
 	void notifyLooted();
@@ -66,6 +68,8 @@ public:
 	virtual float getConfiguredDistanceToHPBar() const;
 	// returns whether the enemy is an ally of cendric
 	bool isAlly() const override;
+	// returns whether the enemy is a boss
+	bool isBoss() const;
 	// sets the waiting time to the configured waiting time
 	void setWaiting();
 	// sets the chasing time to the configured chasing time
@@ -103,6 +107,7 @@ protected:
 	EnemyID m_id = EnemyID::VOID;
 	int m_objectID = -1;
 	bool m_isUnique = false;
+	bool m_isLooted = false;
 	// spells of these damage types won't hurt. default is empty.
 	std::vector<DamageType> m_immuneDamageTypes;
 
@@ -143,6 +148,8 @@ private:
 
 	// is this enemy a quest target?
 	std::pair<std::string, std::string> m_questTarget;
+	// is this enemies death a condition for a quest?
+	std::pair<std::string, std::string> m_questCondition;
 
 	// the enemy can only be looted if the main char is in this range
 	static const float PICKUP_RANGE;
@@ -150,6 +157,7 @@ private:
 	EnemyBuffBar* m_buffBar = nullptr;
 
 	bool m_isAlly = false;
+	bool m_isBoss = false;
 	// is this enemy currently targeted by the main character
 	bool m_isTargetedEnemy = false;
 	bool m_isLastHitEnemy = false;

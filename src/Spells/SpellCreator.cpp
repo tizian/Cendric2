@@ -34,6 +34,7 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	if (m_spellData.castingTime > sf::Time::Zero) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_currentTarget = target;
+		m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
 		m_owner->setFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
 		return;
 	}

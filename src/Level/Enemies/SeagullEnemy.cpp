@@ -38,13 +38,10 @@ void SeagullEnemy::loadSpells() {
 	chopSpell.duration = sf::seconds(2.f);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 	chopSpell.fightingTime = sf::milliseconds(3 * 100);
+	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->setCurrentSpell(0);
-}
-
-sf::Vector2f SeagullEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(-10.f, 0.f);
 }
 
 MovingBehavior* SeagullEnemy::createMovingBehavior(bool asAlly) {

@@ -33,8 +33,6 @@ public:
 
 	virtual void checkCollisions(const sf::Vector2f& nextPosition);
 
-	// the offset of the spells start position, as seen from the upper mid of the mobs bounding box. The default is the position of the staff head
-	virtual sf::Vector2f getConfiguredPositionOffset() const;
 	// if true, the spell sprite will be rotated accordingly. default is true.
 	virtual bool getConfiguredRotateSprite() const;
 	int getDamage() const;

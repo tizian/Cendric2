@@ -16,6 +16,7 @@ public:
 
 	void handleMovementInput() override;
 	virtual void execHandleMovementInput() = 0;
+	void setFacingRight(bool value) override;
 
 	// sets the target where an enemy wants to go to. As long as this is not reset, 
 	// the enemy will ignore its current target and try to move to this spot.

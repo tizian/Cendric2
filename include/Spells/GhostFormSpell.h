@@ -13,7 +13,6 @@ public:
 	void render(sf::RenderTarget& target) override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredRotateSprite() const override;
 
 	void setDisposed() override;

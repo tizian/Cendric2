@@ -44,7 +44,7 @@ void Enemy::load(EnemyID id) {
 	loadBehavior();
 	m_spellManager->setSpellsAllied(m_isAlly);
 
-	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyKey(id), "enemy"), this, m_mainChar);
+	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyName(id), "enemy"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
 	m_interactComponent->setInteractText("ToLoot");
 	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
@@ -189,6 +189,7 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 	// the state must have been chasing a frame before. Wait now.
 	if (m_enemyState == EnemyState::Chasing) {
 		m_waitingTime = getConfiguredWaitingTime();
+		if (m_waitingTime == sf::Time::Zero) return;
 	}
 
 	// handle waiting
@@ -209,6 +210,10 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 
 bool Enemy::isAlly() const {
 	return m_isAlly;
+}
+
+bool Enemy::isBoss() const {
+	return m_isBoss;
 }
 
 const LevelMovableGameObject* Enemy::getCurrentTarget() const {
@@ -255,6 +260,10 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold) {
 
 void Enemy::setQuestTarget(const std::pair<std::string, std::string>& questtarget) {
 	m_questTarget = questtarget;
+}
+
+void Enemy::setQuestCondition(const std::pair<std::string, std::string>& questcondition) {
+	m_questCondition = questcondition;
 }
 
 void Enemy::setObjectID(int id) {
@@ -307,6 +316,7 @@ void Enemy::addDamageOverTime(DamageOverTimeData& data) {
 }
 
 void Enemy::onMouseOver() {
+	if (m_isLooted) return;
 	LevelMovableGameObject::onMouseOver();
 	if (m_isDead && !isAlly()) {
 		setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
@@ -315,6 +325,7 @@ void Enemy::onMouseOver() {
 }
 
 void Enemy::loot() {
+	if (m_isLooted) return;
 	m_mainChar->lootItems(m_lootableItems);
 	m_mainChar->addGold(m_lootableGold);
 	notifyLooted();
@@ -346,8 +357,12 @@ void Enemy::setScriptedBehavior(const std::string& luaPath) {
 	}
 }
 
+void Enemy::setBoss(bool value) {
+	m_isBoss = value;
+}
+
 void Enemy::setDead() {
-	if (m_isImmortal) return;
+	if (m_isImmortal || m_mainChar->isDead()) return;
 	LevelMovableGameObject::setDead();
 	m_buffBar->clear();
 
@@ -367,11 +382,26 @@ void Enemy::setDead() {
 		notifyKilled();
 	}
 
-	m_interactComponent->setInteractable(true);
+	if (m_isBoss) {
+		m_screen->getCharacterCore()->setConditionFulfilled("boss", EnumNames::getEnemyName(m_id));
+
+		// loot (but without set disposed)
+		m_mainChar->lootItems(m_lootableItems);
+		m_mainChar->addGold(m_lootableGold);
+		notifyLooted();
+		m_interactComponent->setInteractable(false);
+
+		// TODO: what if we have multiple bosses?
+		dynamic_cast<LevelScreen*>(m_screen)->notifyBossKilled();
+	}
+	else {
+		m_interactComponent->setInteractable(true);
+	}
 }
 
 void Enemy::notifyLooted() {
 	m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_objectID);
+	m_isLooted = true;
 }
 
 void Enemy::notifyKilled() {
@@ -379,6 +409,9 @@ void Enemy::notifyKilled() {
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
 	if (!m_questTarget.first.empty()) {
 		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(m_questTarget.first, m_questTarget.second);
+	}
+	if (!m_questCondition.first.empty()) {
+		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestConditionFulfilled(m_questCondition.first, m_questCondition.second);
 	}
 }
 

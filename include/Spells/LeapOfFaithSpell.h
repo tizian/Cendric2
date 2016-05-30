@@ -14,8 +14,6 @@ public:
 	void setDisposed() override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
-
 private:
 	float m_gravityScale;
 	bool m_isFacingRight;

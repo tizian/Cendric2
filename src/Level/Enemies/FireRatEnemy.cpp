@@ -40,6 +40,7 @@ void FireRatEnemy::loadSpells() {
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 	chopSpell.fightingTime = sf::milliseconds(4 * 80);
+	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 6;
@@ -52,10 +53,6 @@ void FireRatEnemy::loadSpells() {
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(fireBallSpell);
 	m_spellManager->setCurrentSpell(0); // chop
-}
-
-sf::Vector2f FireRatEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(-10.f, 0.f);
 }
 
 void FireRatEnemy::handleAttackInput() {

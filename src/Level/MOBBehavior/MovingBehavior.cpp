@@ -7,9 +7,13 @@ MovingBehavior::MovingBehavior(LevelMovableGameObject* mob) {
 	m_mainChar = dynamic_cast<LevelScreen*>(mob->getScreen())->getMainCharacter();
 }
 
+bool MovingBehavior::isReady() const {
+	return !m_isBlockingSpell || m_fightAnimationTime == sf::Time::Zero;
+}
+
 void MovingBehavior::update(const sf::Time& frameTime) {
 	if (!m_isCollisionTilt) {
-		if (!m_isBlockingSpell || m_fightAnimationTime == sf::Time::Zero)
+		if (isReady())
 			handleMovementInput();
 
 		sf::Vector2f nextPosition;
@@ -54,6 +58,11 @@ void MovingBehavior::setFightAnimation(const sf::Time& animationTime, GameObject
 	m_isBlockingSpell = isBlocking;
 	m_fightAnimationTime = animationTime;
 	m_fightAnimationState = animation;
+}
+
+void MovingBehavior::setFacingRight(bool value) {
+	m_isFacingRight = value;
+	m_nextIsFacingRight = value;
 }
 
 void MovingBehavior::setReady() {

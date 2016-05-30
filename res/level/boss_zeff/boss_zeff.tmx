@@ -8,7 +8,7 @@
   <property name="tilesetpath" value="res/level/boss_zeff/tileset_level_boss_zeff.png"/>
   <property name="weather" value="rain"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_boss_zeff" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_level_boss_zeff" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_level_boss_zeff.png" width="1000" height="1000"/>
   <tile id="96">
    <properties>
@@ -16,13 +16,13 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200">
+ <tileset firstgid="362" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="200" columns="20">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1040" height="520"/>
  </tileset>
- <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="20">
+ <tileset firstgid="562" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="20" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="208"/>
  </tileset>
- <tileset firstgid="582" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576">
+ <tileset firstgid="582" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="1">
    <properties>
@@ -164,6 +164,11 @@
 </data>
  </layer>
  <objectgroup name="enemy">
-  <object id="20" gid="573" x="656" y="593" width="50" height="50"/>
+  <object id="20" gid="573" x="656" y="593" width="50" height="50">
+   <properties>
+    <property name="boss" value=""/>
+    <property name="questcondition" value="monster_problem,monster_banished"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

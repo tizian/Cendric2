@@ -13,7 +13,6 @@ public:
 
 	void setDisposed() override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredRotateSprite() const override;
 
 private:

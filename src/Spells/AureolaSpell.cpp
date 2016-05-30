@@ -38,6 +38,8 @@ void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vec
 }
 
 void AureolaSpell::update(const sf::Time& frameTime) {
+	if (m_isDisposed) return;
+
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
 	sf::Vector2f diff = nextPosition - getPosition();
@@ -68,16 +70,12 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 		m_rangeLeft -= norm(diff);
 		if (m_rangeLeft <= 0.f) {
 			m_isReturning = true;
-			m_absVel = std::sqrt(getVelocity().x * getVelocity().x + getVelocity().y * getVelocity().y);
+			m_absVel = norm(getVelocity());
 		}
 	}
 	else {
 		setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 	}
-}
-
-sf::Vector2f AureolaSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(5.f, -5.f);
 }
 
 void AureolaSpell::onOwnerDisposed() {

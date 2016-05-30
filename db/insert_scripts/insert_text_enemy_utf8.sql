@@ -10,3 +10,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Se
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Wolf','enemy','Wolf','Wolf','Wolf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Stoneman','enemy','Cairn Wraith','Cairn Geist','Cairn Geist');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MysteriousBeast','enemy','Mysterious Beast','Mysteriöses Biest','Mysteriöses Biescht');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossZeff','enemy','Zeff','Zeff','Zeff');

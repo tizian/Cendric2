@@ -39,6 +39,7 @@ void NekomataEnemy::loadSpells() {
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 50);
 	chopSpell.fightingTime = sf::milliseconds(12 * 60);
+	chopSpell.spellOffset = sf::Vector2f(20.f, 20.f);
 
 	SpellData shadowFireSpell = SpellData::getSpellData(SpellID::HolyFire);
 	shadowFireSpell.skinNr = 1;
@@ -58,15 +59,12 @@ void NekomataEnemy::loadSpells() {
 	shadowFireBallSpell.cooldown = sf::seconds(2.f);
 	shadowFireBallSpell.damageType = DamageType::Shadow;
 	shadowFireBallSpell.fightingTime = sf::milliseconds(6 * 60);
+	shadowFireBallSpell.spellOffset = sf::Vector2f(20.f, 20.f);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->addSpell(shadowFireSpell);
 	m_spellManager->addSpell(shadowFireBallSpell);
 	m_spellManager->setCurrentSpell(0); // chop
-}
-
-sf::Vector2f NekomataEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(10.f, 20.f);
 }
 
 MovingBehavior* NekomataEnemy::createMovingBehavior(bool asAlly) {

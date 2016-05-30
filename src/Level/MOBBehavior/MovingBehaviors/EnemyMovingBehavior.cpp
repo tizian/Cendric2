@@ -8,6 +8,11 @@ EnemyMovingBehavior::~EnemyMovingBehavior() {
 	delete m_movingTarget;
 }
 
+void EnemyMovingBehavior::setFacingRight(bool value) {
+	MovingBehavior::setFacingRight(value);
+	m_movingDirectionX = value ? 1 : -1;
+}
+
 void EnemyMovingBehavior::handleMovementInput() {
 	if (m_enemy->isDead()) {
 		m_enemy->setAcceleration(sf::Vector2f(0.f, getGravity()));

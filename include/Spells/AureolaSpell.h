@@ -13,7 +13,6 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
 	void onOwnerDisposed() override;
 
 private:

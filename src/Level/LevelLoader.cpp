@@ -248,6 +248,10 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 		if (!it.questTarget.first.empty()) {
 			enemy->setQuestTarget(it.questTarget);
 		}
+		// set quest condition
+		if (!it.questCondition.first.empty()) {
+			enemy->setQuestCondition(it.questCondition);
+		}
 
 		// calculate loot.
 		std::map<string, int> loot;
@@ -268,6 +272,7 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 		enemy->setPosition(it.spawnPosition);
 		enemy->setObjectID(it.objectID);
 		enemy->setUnique(it.isUnique);
+		enemy->setBoss(it.isBoss);
 		enemy->setDebugBoundingBox(sf::Color::Magenta);
 		if (it.isUnique && core->isEnemyKilled(data.id, it.objectID)) enemy->setDead();
 		screen->addObject(enemy);

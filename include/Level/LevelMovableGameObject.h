@@ -21,9 +21,6 @@ public:
 	virtual void update(const sf::Time& frameTime) override;
 
 	void renderAfterForeground(sf::RenderTarget& target) override;
-
-	// the offset to the from where a spell starts. it gets added to the spell offset defined by the spell itself. default is (0,0)
-	virtual sf::Vector2f getConfiguredSpellOffset() const;
 	
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 	virtual void onHit(Spell* spell);
@@ -49,6 +46,8 @@ public:
 	void setReady();
 	// flips the gravity and the sprite
 	void flipGravity();
+	// forces a facing right value
+	void setFacingRight(bool value);
 	
 	SpellManager* getSpellManager() const;
 	AttackingBehavior* getAttackingBehavior() const;

@@ -9,7 +9,6 @@ public:
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
 	bool getConfiguredRotateSprite() const override;
 	void execOnHit(LevelMovableGameObject* target) override;
 

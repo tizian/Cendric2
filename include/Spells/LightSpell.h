@@ -13,8 +13,6 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
-
 private:
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
 	particles::AngledVelocityGenerator* m_velGenerator = nullptr;

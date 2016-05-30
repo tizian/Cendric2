@@ -1,16 +1,18 @@
 #include "Spells/ReturningProjectileSpell.h"
+#include "Level/LevelMainCharacter.h"
 
 void ReturningProjectileSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	init(data);
 	Spell::load(data, mob, target);
+	m_absVel = norm(getVelocity());
 }
 
 void ReturningProjectileSpell::init(const SpellData& data) {
-	setSpriteOffset(sf::Vector2f(-19.f, 1.f));
+	setSpriteOffset(sf::Vector2f(-30.f, -5.f));
 
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_returningprojectile));
-	spellAnimation->addFrame(sf::IntRect(0, data.skinNr - 1 * 30, 90, 30));
+	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 30, 90, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
@@ -36,48 +38,120 @@ void ReturningProjectileSpell::calculateUnboundedVelocity(const sf::Time& frameT
 	}
 }
 
+void ReturningProjectileSpell::checkCollisions(const sf::Vector2f& nextPosition) {
+	if (m_isReturning) return;
+
+	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
+	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	WorldCollisionQueryRecord rec;
+
+	bool isMovingY = nextPosition.y != getBoundingBox()->top;
+	bool isMovingX = nextPosition.x != getBoundingBox()->left;
+	bool reflected = false;
+	// check for collision on x axis
+	rec.boundingBox = nextBoundingBoxX;
+	if (isMovingX && m_level->collides(rec)) {
+		if (m_data.reflectCount <= 0) {
+			m_isReturning = true;
+			return;
+		}
+		else {
+			reflected = true;
+			setAcceleration(sf::Vector2f(0.f, 0.f));
+			setVelocityX(-getVelocity().x);
+			if (getConfiguredRotateSprite()) {
+				setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
+			}
+		}
+	}
+	// check for collision on y axis
+	rec.boundingBox = nextBoundingBoxY;
+	if (isMovingY && m_level->collides(rec)) {
+		if (m_data.reflectCount <= 0) {
+			m_isReturning = true;
+			return;
+		}
+		else {
+			reflected = true;
+			setAcceleration(sf::Vector2f(0.f, 0.f));
+			setVelocityY(-getVelocity().y);
+			if (getConfiguredRotateSprite()) {
+				setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
+			}
+		}
+	}
+	if (reflected) {
+		m_data.reflectCount -= 1;
+	}
+}
+
 void ReturningProjectileSpell::update(const sf::Time& frameTime) {
+	if (m_isDisposed) return;
+
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
 	sf::Vector2f diff = nextPosition - getPosition();
 
-	if (!m_data.isAlly) {
-		// check collisions with allies
-		checkCollisionsWithAllies(getBoundingBox());
-	}
-	else {
-		// check collisions with enemies
-		checkCollisionsWithEnemies(getBoundingBox());
-	}
+	checkCollisions(nextPosition);
 
-	MovableGameObject::update(frameTime);
-	updateTime(m_data.activeDuration, frameTime);
-
-	// check collisions with owner
-	if (m_isReturning && m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
-		setDisposed();
-		m_mob->setReady();
-	}
-
-	if (m_data.activeDuration == sf::Time::Zero) {
-		setDisposed();
-		m_mob->setReady();
+	if (m_isDamaging) {
+		if (!m_data.isAlly) {
+			// check collisions with allies
+			if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
+				m_mainChar->onHit(this);
+				m_isDisposed = false;
+				m_isReturning = true;
+				m_isDamaging = false;
+			}
+			for (auto& go : *m_enemies) {
+				if (!go->isViewable()) continue;
+				Enemy* enemy = dynamic_cast<Enemy*>(go);
+				if (!enemy->isAlly()) continue;
+				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
+					enemy->onHit(this);
+					m_isDisposed = false;
+					m_isReturning = true;
+					m_isDamaging = false;
+				}
+			}
+		}
+		else {
+			// check collisions with enemies
+			for (auto& go : *m_enemies) {
+				if (!go->isViewable()) continue;
+				Enemy* enemy = dynamic_cast<Enemy*>(go);
+				if (enemy->isAlly()) continue;
+				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
+					enemy->onHit(this);
+					m_isDisposed = false;
+					m_isReturning = true;
+					m_isDamaging = false;
+				}
+			}
+		}
 	}
 
 	if (!m_isReturning) {
 		m_rangeLeft -= norm(diff);
 		if (m_rangeLeft <= 0.f) {
 			m_isReturning = true;
-			m_absVel = std::sqrt(getVelocity().x * getVelocity().x + getVelocity().y * getVelocity().y);
 		}
 	}
 	else {
 		setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
+		// check collisions with owner
+		if (m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
+			setDisposed();
+			m_mob->setReady();
+		}
 	}
-}
 
-sf::Vector2f ReturningProjectileSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(5.f, -5.f);
+	MovableGameObject::update(frameTime);
+	updateTime(m_data.activeDuration, frameTime);
+
+	if (m_data.activeDuration.asMilliseconds() <= 0) {
+		setDisposed();
+	}
 }
 
 void ReturningProjectileSpell::onOwnerDisposed() {

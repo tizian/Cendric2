@@ -58,13 +58,10 @@ void StonemanEnemy::loadSpells() {
 	fireBallSpell.isBlocking = true;
 	fireBallSpell.castingTime = sf::milliseconds(7 * 100);
 	fireBallSpell.fightingTime = sf::Time::Zero;
+	fireBallSpell.spellOffset = sf::Vector2f(10.f, 10.f);
 
 	m_spellManager->addSpell(fireBallSpell);
 	m_spellManager->setCurrentSpell(0);
-}
-
-sf::Vector2f StonemanEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(19.f, 14.f);
 }
 
 void StonemanEnemy::handleAttackInput() {

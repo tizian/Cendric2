@@ -46,10 +46,6 @@ void DivineShieldSpell::update(const sf::Time& frameTime) {
 	}
 }
 
-sf::Vector2f DivineShieldSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-49.f, -10.f);
-}
-
 bool DivineShieldSpell::getConfiguredRotateSprite() const {
 	return false;
 }

@@ -18,8 +18,6 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
-
 private:
 	bool m_hasDamaged = false; // this spell only applies its dot once.
 	sf::Time m_emitTime = sf::seconds(1.f);

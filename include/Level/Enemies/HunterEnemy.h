@@ -15,7 +15,6 @@ public:
 
 	void loadAnimation() override;
 
-	sf::Vector2f getConfiguredSpellOffset() const override;
 	int getMentalStrength() const override;
 
 	float getConfiguredDistanceToHPBar() const override;

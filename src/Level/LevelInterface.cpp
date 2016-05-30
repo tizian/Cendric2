@@ -62,11 +62,11 @@ void LevelInterface::update(const sf::Time& frameTime) {
 	Enemy* targetEnemy = m_character->getCurrentTargetEnemy();
 	Enemy* lastHitEnemy = m_character->getLastHitEnemy();
 	if (targetEnemy) {
-		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyKey(targetEnemy->getEnemyID()), "enemy"));
+		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyName(targetEnemy->getEnemyID()), "enemy"));
 		m_enemyHealthBar->setAttributes(targetEnemy->getAttributes());
 	}
 	else if (lastHitEnemy) {
-		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyKey(lastHitEnemy->getEnemyID()), "enemy"));
+		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyName(lastHitEnemy->getEnemyID()), "enemy"));
 		m_enemyHealthBar->setAttributes(lastHitEnemy->getAttributes());
 	}
 	m_enemyHealthBar->update(frameTime);

@@ -66,10 +66,6 @@ void GhostFormSpell::execOnHit(LevelMovableGameObject* target) {
 	// nop
 }
 
-sf::Vector2f GhostFormSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-20.f, -10.f);
-}
-
 bool GhostFormSpell::getConfiguredRotateSprite() const {
 	return false;
 }

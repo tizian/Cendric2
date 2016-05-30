@@ -32,14 +32,11 @@ void HunterEnemy::loadSpells() {
 	arrow.damagePerSecond = 2;
 	arrow.cooldown = sf::milliseconds(2000);
 	arrow.fightingTime = sf::milliseconds(4 * 70);
+	arrow.spellOffset = sf::Vector2f(10.f, 20.f);
 
 	m_spellManager->addSpell(arrow);
 
 	m_spellManager->setCurrentSpell(0); // projectile
-}
-
-sf::Vector2f HunterEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(10.f, 20.f);
 }
 
 float HunterEnemy::getConfiguredDistanceToHPBar() const {

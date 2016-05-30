@@ -28,10 +28,6 @@ void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 	addComponent(new LightComponent(lightData, this));
 }
 
-sf::Vector2f LeapOfFaithSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-40.f, -26.f);
-}
-
 void LeapOfFaithSpell::setDisposed() {
 	Spell::setDisposed();
 	m_mob->getMovingBehavior()->setGravityScale(1.f);

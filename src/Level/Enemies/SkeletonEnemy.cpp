@@ -38,15 +38,12 @@ void SkeletonEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 100);
+	chopSpell.spellOffset = sf::Vector2f(10.f, 0.f);
 	chopSpell.fightingTime = sf::milliseconds(8 * 50);
-
+	
 	m_spellManager->addSpell(chopSpell);
 
 	m_spellManager->setCurrentSpell(0); // chop
-}
-
-sf::Vector2f SkeletonEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(10.f, 0.f);
 }
 
 void SkeletonEnemy::handleAttackInput() {

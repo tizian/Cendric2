@@ -46,10 +46,12 @@ public:
 	void setDampingGroundPerS(float damping);
 	void setDampingAirPerS(float damping);
 	void setFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking);
+	virtual void setFacingRight(bool value);
 	float getGravity() const;
 	bool isGrounded() const;
 	bool isFacingRight() const;
 	bool isUpsideDown() const;
+	bool isReady() const;
 	bool isIgnoreDynamicTiles() const;
 	
 protected:

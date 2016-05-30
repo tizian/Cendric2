@@ -46,10 +46,6 @@ float ShadowTrapSpell::getConfiguredMaxVelocityYDown() const {
 	return 300.f;
 }
 
-sf::Vector2f ShadowTrapSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(10.f, 10.f);
-}
-
 void ShadowTrapSpell::update(const sf::Time& frameTime) {
 	// gravity
 	setAccelerationY(1000.f);

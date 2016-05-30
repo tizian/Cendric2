@@ -109,7 +109,7 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
 		return;
 	}
 	sf::Vector2f mobPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
-	sf::Vector2f offset = getConfiguredPositionOffset() + m_mob->getConfiguredSpellOffset();
+	sf::Vector2f offset = m_data.spellOffset;
 	if (!m_mob->isFacingRight())
 		offset.x = -offset.x - getBoundingBox()->width;
 	if (m_mob->isUpsideDown())
@@ -155,10 +155,6 @@ void Spell::update(const sf::Time& frameTime) {
 	if (m_data.activeDuration == sf::Time::Zero) {
 		setDisposed();
 	}
-}
-
-sf::Vector2f Spell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(20.f, -20.f);
 }
 
 bool Spell::getConfiguredRotateSprite() const {

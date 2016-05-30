@@ -12,7 +12,6 @@ public:
 
 	void execOnHit(LevelMovableGameObject* target) override;
 	bool getConfiguredRotateSprite() const override;
-	sf::Vector2f getConfiguredPositionOffset() const override;
 
 private:
 	bool m_isFlashingRight;

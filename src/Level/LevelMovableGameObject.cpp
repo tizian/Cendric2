@@ -113,10 +113,6 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 	}
 }
 
-sf::Vector2f LevelMovableGameObject::getConfiguredSpellOffset() const {
-	return sf::Vector2f(0.f, 10.f);
-}
-
 void LevelMovableGameObject::addAttributes(const sf::Time& duration, const AttributeData& attributes) {
 	m_attributes.addBean(attributes);
 	m_buffAttributes.push_back(std::pair<sf::Time, AttributeData>(duration, attributes));
@@ -277,6 +273,10 @@ void LevelMovableGameObject::setReady() {
 void LevelMovableGameObject::flipGravity() {
 	m_movingBehavior->flipGravity();
 	m_animatedSprite.setFlippedY(m_movingBehavior->isUpsideDown());
+}
+
+void LevelMovableGameObject::setFacingRight(bool value) {
+	m_movingBehavior->setFacingRight(value);
 }
 
 GameObjectState LevelMovableGameObject::getState() const {

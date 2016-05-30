@@ -10,8 +10,6 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void execOnHit(LevelMovableGameObject* target) override;
 
-	sf::Vector2f getConfiguredPositionOffset() const override;
-
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	bool getConfiguredRotateSprite() const override;
 	float getConfiguredMaxVelocityYDown() const override;

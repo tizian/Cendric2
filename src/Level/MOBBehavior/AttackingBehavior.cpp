@@ -1,4 +1,5 @@
 #include "Level/MOBBehavior/AttackingBehavior.h"
+#include "Level/MOBBehavior/MovingBehavior.h"
 #include "Screens/LevelScreen.h"
 
 AttackingBehavior::AttackingBehavior(LevelMovableGameObject* mob) {
@@ -7,7 +8,7 @@ AttackingBehavior::AttackingBehavior(LevelMovableGameObject* mob) {
 }
 
 void AttackingBehavior::handleAttackInput() {
-	if (m_mob->isDead()) {
+	if (m_mob->isDead() || !m_mob->getMovingBehavior()->isReady()) {
 		return;
 	}
 	m_executeAttack();

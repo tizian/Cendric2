@@ -36,13 +36,10 @@ void RatEnemy::loadSpells() {
 	chopSpell.damage = 7;
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
 	chopSpell.fightingTime = sf::milliseconds(4 * 80);
+	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->setCurrentSpell(0);
-}
-
-sf::Vector2f RatEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(-10.f, 0.f);
 }
 
 MovingBehavior* RatEnemy::createMovingBehavior(bool asAlly) {

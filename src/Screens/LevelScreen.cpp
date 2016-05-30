@@ -79,6 +79,13 @@ void LevelScreen::notifyBackFromMenu() {
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 }
 
+void LevelScreen::notifyBossKilled() {
+	// TODO: change to boss defeated overlay
+	addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
+	m_interface->hideAll();
+	m_isBossDefeated = true;
+}
+
 void LevelScreen::quicksave() {
 	if (m_isGameOver) return;
 	WorldScreen::quicksave();
@@ -126,6 +133,7 @@ const Level* LevelScreen::getWorld() const {
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	handleGameOver(frameTime);
+	handleBossDefeated(frameTime);
 
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
@@ -257,6 +265,17 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_Form, renderTarget);
 
 	renderTarget.setView(oldView);
+}
+
+void LevelScreen::handleBossDefeated(const sf::Time& frameTime) {
+	if (!m_isBossDefeated) return;
+
+	if (m_bossDefeatedWaitTime == sf::Time::Zero) return;
+	updateTime(m_bossDefeatedWaitTime, frameTime);
+	if (m_bossDefeatedWaitTime == sf::Time::Zero) {
+		onBackToCheckpoint();
+	}
+	return;
 }
 
 void LevelScreen::handleGameOver(const sf::Time& frameTime) {

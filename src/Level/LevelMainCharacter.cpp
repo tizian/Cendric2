@@ -136,6 +136,8 @@ void LevelMainCharacter::loadWeapon() {
 	// handle chop spell
 	SpellData chop = SpellData::getSpellData(SpellID::Chop);
 	chop.boundingBox = weapon->getWeaponChopRect();
+	chop.spellOffset.x = chop.boundingBox.left;
+	chop.spellOffset.y = chop.boundingBox.top;
 	chop.cooldown = weapon->getWeaponCooldown();
 	chop.damage = weapon->getWeaponChopDamage();
 	chop.iconTextureRect = sf::IntRect(weapon->getIconTextureLocation().x, weapon->getIconTextureLocation().y, 50, 50);

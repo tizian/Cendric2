@@ -37,14 +37,11 @@ void CrowEnemy::loadSpells() {
 	chopSpell.damagePerSecond = 10;
 	chopSpell.duration = sf::seconds(3.f);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
+	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 	chopSpell.fightingTime = sf::milliseconds(3 * 100);
 
 	m_spellManager->addSpell(chopSpell);
 	m_spellManager->setCurrentSpell(0);
-}
-
-sf::Vector2f CrowEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(-10.f, 0.f);
 }
 
 MovingBehavior* CrowEnemy::createMovingBehavior(bool asAlly) {

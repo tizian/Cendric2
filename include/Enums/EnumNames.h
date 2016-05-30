@@ -211,7 +211,7 @@ public:
 		}
 	}
 
-	static std::string getEnemyKey(EnemyID enemy) {
+	static std::string getEnemyName(EnemyID enemy) {
 		switch (enemy) {
 		default:
 		case EnemyID::MAX:
@@ -239,6 +239,8 @@ public:
 			return "Wolf";
 		case EnemyID::Stoneman:
 			return "Stoneman";
+		case EnemyID::Boss_Zeff:
+			return "BossZeff";
 		}
 	}
 

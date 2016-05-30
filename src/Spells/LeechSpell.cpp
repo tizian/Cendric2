@@ -39,6 +39,8 @@ void LeechSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vecto
 }
 
 void LeechSpell::update(const sf::Time& frameTime) {
+	if (m_isDisposed) return;
+
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
 
@@ -93,4 +95,9 @@ void LeechSpell::update(const sf::Time& frameTime) {
 	if (m_data.activeDuration.asMilliseconds() <= 0) {
 		setDisposed();
 	}
+}
+
+void LeechSpell::onOwnerDisposed() {
+	setDisposed();
+	m_mob = nullptr;
 }

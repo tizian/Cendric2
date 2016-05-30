@@ -63,6 +63,7 @@ void GargoyleEnemy::loadSpells() {
 	fireBallSpell.strength = m_spellStrength;
 	fireBallSpell.isDynamicTileEffect = !m_isSummoned;
 	fireBallSpell.fightingTime = sf::milliseconds(500);
+	fireBallSpell.spellOffset = sf::Vector2f(30.f, 60.f);
 
 	m_spellManager->addSpell(fireBallSpell);
 	m_maxSpell = 0;
@@ -87,10 +88,6 @@ void GargoyleEnemy::loadSpells() {
 	}
 
 	m_spellManager->setCurrentSpell(0);
-}
-
-sf::Vector2f GargoyleEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(20.f, 50.f);
 }
 
 MovingBehavior* GargoyleEnemy::createMovingBehavior(bool asAlly) {

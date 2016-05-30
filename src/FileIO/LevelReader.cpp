@@ -518,7 +518,23 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					enemyData.questTarget = std::pair<std::string, std::string>(questID, questtargetText);
 					enemyData.isUnique = true;
 				}
+				if (itemText.compare("questcondition") == 0) {
+					textAttr = item->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, quest condition value attribute is empty.");
+						return false;
+					}
+					std::string questcondition = textAttr;
+					std::string questID = questcondition.substr(0, questcondition.find(","));
+					questcondition.erase(0, questcondition.find(",") + 1);
+					enemyData.questCondition = std::pair<std::string, std::string>(questID, questcondition);
+					enemyData.isUnique = true;
+				}
 				else if (itemText.compare("unique") == 0) {
+					enemyData.isUnique = true;
+				}
+				else if (itemText.compare("boss") == 0) {
+					enemyData.isBoss = true;
 					enemyData.isUnique = true;
 				}
 				else if (itemText.compare("luapath") == 0) {

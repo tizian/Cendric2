@@ -39,6 +39,7 @@ void WolfEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 100);
+	chopSpell.spellOffset = sf::Vector2f(0, 30);
 	chopSpell.fightingTime = sf::milliseconds(6 * 100);
 
 	m_spellManager->addSpell(chopSpell);
@@ -53,10 +54,6 @@ void WolfEnemy::loadSpells() {
 	m_spellManager->addSpell(howlSpell);
 
 	m_spellManager->setCurrentSpell(0); // chop
-}
-
-sf::Vector2f WolfEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(10.f, 0.f);
 }
 
 void WolfEnemy::handleAttackInput() {

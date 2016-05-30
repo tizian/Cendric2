@@ -49,10 +49,6 @@ void WispEnemy::loadSpells() {
 	m_spellManager->setCurrentSpell(0);
 }
 
-sf::Vector2f WispEnemy::getConfiguredSpellOffset() const {
-	return sf::Vector2f(0.f, 0.f);
-}
-
 MovingBehavior* WispEnemy::createMovingBehavior(bool asAlly) {
 	FlyingBehavior* behavior;
 	if (asAlly) {

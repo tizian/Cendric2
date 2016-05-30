@@ -93,8 +93,6 @@ void FluidTile::loadAnimation(int skinNr) {
 }
 
 void FluidTile::update(const sf::Time& frameTime) {
-	m_isFirstRenderIteration = true;
-
 	checkForMovableTiles();
 
 	float dt = frameTime.asSeconds();
@@ -231,6 +229,7 @@ void FluidTile::render(sf::RenderTarget& target) {
 		m_isFirstRenderIteration = false;
 		return;
 	}
+	m_isFirstRenderIteration = true;
 	target.draw(m_vertexArray);
 	m_ps->render(target);
 }

@@ -73,10 +73,6 @@ bool FlashSpell::getConfiguredRotateSprite() const {
 	return false;
 }
 
-sf::Vector2f FlashSpell::getConfiguredPositionOffset() const {
-	return sf::Vector2f(-50.f, -20.f);
-}
-
 void FlashSpell::loadParticleSystem() {
 	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
 	m_ps->additiveBlendMode = true;

@@ -64,7 +64,6 @@ private:
 	void handleAttackInput();
 
 	void loadParticleSystem();
-	void updateParticleSystemPosition();
 
 private:
 	CharacterCore* m_core;

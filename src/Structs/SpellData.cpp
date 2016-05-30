@@ -317,7 +317,7 @@ SpellData SpellData::getReturningProjectileSpellData() {
 	projectile.id = SpellID::ReturningProjectile;
 
 	projectile.cooldown = sf::seconds(1);
-	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	projectile.boundingBox = sf::FloatRect(0, 0, 30, 20);
 	projectile.divergenceAngle = 0.2f;
 	projectile.damageType = DamageType::Physical;
 	projectile.activeDuration = sf::seconds(5);
@@ -408,6 +408,7 @@ SpellData SpellData::getDivineShieldSpellData() {
 
 	divineShield.cooldown = sf::milliseconds(10000);
 	divineShield.boundingBox = sf::FloatRect(0, 0, 98, 98);
+	divineShield.spellOffset = sf::Vector2f(-49.f, 0.f);
 	divineShield.duration = sf::seconds(3);
 	divineShield.activeDuration = divineShield.duration;
 	divineShield.heal = 20;
@@ -443,6 +444,7 @@ SpellData SpellData::getAureolaSpellData() {
 
 	aureola.cooldown = sf::milliseconds(10000);
 	aureola.boundingBox = sf::FloatRect(0, 0, 20, 20);
+	aureola.spellOffset = sf::Vector2f(0, 0);
 	aureola.count = 4;
 	aureola.divergenceAngle = 2 * M_PI / aureola.count;
 	aureola.damageType = DamageType::Light;
@@ -497,6 +499,7 @@ SpellData SpellData::getAntiGravitySpellData() {
 
 	antiGravity.cooldown = sf::seconds(15);
 	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
+	antiGravity.spellOffset = sf::Vector2f(-49.f, 0.f);
 	antiGravity.duration = sf::seconds(5);
 	antiGravity.activeDuration = antiGravity.duration;
 	antiGravity.attachedToMob = true;
@@ -536,6 +539,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.cooldown = sf::seconds(3);
 	windGust.range = 50.f;
 	windGust.boundingBox = sf::FloatRect(0.f, 0.f, windGust.range, 60.f);
+	windGust.spellOffset = sf::Vector2f(10.f, 10.f);
 	windGust.duration = sf::seconds(1);
 	windGust.activeDuration = windGust.duration;
 	windGust.attachedToMob = true;
@@ -612,6 +616,7 @@ SpellData SpellData::getFlashSpellData() {
 	flash.damage = 20;
 	flash.range = 150.f;
 	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
+	flash.spellOffset = sf::Vector2f(-50.f, -20.f);
 	flash.fightAnimation = GameObjectState::VOID;
 
 	flash.damageModifierAddition = 20;
@@ -628,6 +633,7 @@ SpellData SpellData::getLightSpellData() {
 
 	light.cooldown = sf::seconds(60);
 	light.boundingBox = sf::FloatRect(0, 0, 1, 1);
+	light.spellOffset = sf::Vector2f(0.f, -60.f);
 	light.duration = sf::seconds(60);
 	light.activeDuration = light.duration;
 	light.range = 300.f;
@@ -655,6 +661,7 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.activeDuration = sf::seconds(3);
 	holyFire.attachedToMob = true;
 	holyFire.fightAnimation = GameObjectState::VOID;
+	holyFire.spellOffset = sf::Vector2f(-holyFire.range, -holyFire.range);
 
 	holyFire.damageModifierAddition = 10;
 	holyFire.durationModifierAddition = sf::seconds(1);
@@ -671,6 +678,7 @@ SpellData SpellData::getLeapOfFaithSpellData() {
 
 	leapOfFaith.cooldown = sf::seconds(30);
 	leapOfFaith.boundingBox = sf::FloatRect(0, 0, 80, 120);
+	leapOfFaith.spellOffset = sf::Vector2f(-40.f, -26.f);
 	leapOfFaith.duration = sf::seconds(10);
 	leapOfFaith.activeDuration = leapOfFaith.duration;
 	leapOfFaith.attachedToMob = true;
@@ -706,6 +714,7 @@ SpellData SpellData::getInvisibilitySpellData() {
 
 	invisibility.cooldown = sf::seconds(30);
 	invisibility.boundingBox = sf::FloatRect(0, 0, 1, 1);
+	invisibility.spellOffset = sf::Vector2f(0.f, 80.f);
 	invisibility.activeDuration = sf::seconds(5);
 	invisibility.duration = invisibility.activeDuration;
 	invisibility.attachedToMob = true;
@@ -724,6 +733,7 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.iconTextureRect = sf::IntRect(150, 100, 50, 50);
 	ghostForm.cooldown = sf::seconds(30);
 	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);
+	ghostForm.spellOffset = sf::Vector2f(-20.f, 0.f);
 	ghostForm.activeDuration = sf::seconds(5);
 	ghostForm.duration = ghostForm.activeDuration;
 	ghostForm.speed = 50.f;
@@ -744,6 +754,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 
 	shadowTrap.cooldown = sf::seconds(10);
 	shadowTrap.boundingBox = sf::FloatRect(0, 0, 25, 10);
+	shadowTrap.spellOffset = sf::Vector2f(10.f, 10.f);
 	shadowTrap.divergenceAngle = 0.2f;
 	shadowTrap.damageType = DamageType::Shadow;
 	shadowTrap.activeDuration = sf::seconds(15);
