@@ -17,6 +17,7 @@ ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTim
 }
 
 void ScreenOverlay::load() {
+	m_scale = (m_fadeTime > sf::Time::Zero) ? 0.f : 1.f;
 	m_title.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_title.setCharacterSize(40);
 	m_title.setTextStyle(TextStyle::Shadowed);
@@ -64,8 +65,8 @@ void ScreenOverlay::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_subtitle);
 }
 
-void ScreenOverlay::setPermanent() {
-	m_isPermanent = true;
+void ScreenOverlay::setPermanent(bool permanent) {
+	m_isPermanent = permanent;
 }
 
 void ScreenOverlay::setTitle(const std::string& textKey, const std::string& textType) {
@@ -191,7 +192,7 @@ ScreenOverlay* ScreenOverlay::createModifierLearnedScreenOverlay(const SpellModi
 
 ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	TextureScreenOverlay* gameOverScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
-	gameOverScreenOverlay->setPermanent();
+	gameOverScreenOverlay->setPermanent(true);
 
 	Language language = g_resourceManager->getConfiguration().language;
 	if (language == Language::Lang_EN) {
@@ -208,8 +209,8 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 }
 
 ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
-	TextureScreenOverlay* gamePausedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f));
-	gamePausedScreenOverlay->setPermanent();
+	TextureScreenOverlay* gamePausedScreenOverlay = new TextureScreenOverlay(sf::milliseconds(1), sf::seconds(0.1f));
+	gamePausedScreenOverlay->setPermanent(true);
 
 	Language language = g_resourceManager->getConfiguration().language;
 	if (language == Language::Lang_EN) {

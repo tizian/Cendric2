@@ -60,15 +60,12 @@ void LevelScreen::load() {
 	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));
 	addObject(m_backToMenuButton);
 
-	m_gamePausedOverlay = ScreenOverlay::createGamePausedScreenOverlay();
-
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 }
 
 void LevelScreen::cleanUp() {
 	g_resourceManager->stopMusic();
 	m_currentLevel.dispose();
-	delete m_gamePausedOverlay;
 }
 
 bool LevelScreen::exitWorld() {
@@ -162,9 +159,21 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		m_currentLevel.update(frameTime);
 	}
 
+	if (m_gamePausedOverlay) {
+		m_gamePausedOverlay->update(frameTime);
+	}
+
 	// handle pause
 	if (!m_isGameOver && g_inputController->isKeyJustPressed(Key::Escape)) {
 		m_isPaused = !m_isPaused;
+
+		if (m_isPaused) {
+			m_gamePausedOverlay = ScreenOverlay::createGamePausedScreenOverlay();
+		}
+		else {
+			m_gamePausedOverlay->setPermanent(false);
+		}
+		
 		m_retryButton->setVisible(m_isPaused);
 		m_backToMenuButton->setVisible(m_isPaused);
 		m_resumeButton->setVisible(m_isPaused);
@@ -237,13 +246,12 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	if (!m_interface->isGuiOverlayVisible()) {
 		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
 	}
+	if (m_gamePausedOverlay) {
+		m_gamePausedOverlay->render(renderTarget);
+	}
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget);
 	WorldScreen::renderAfterForeground(renderTarget);
-
-	if (m_isPaused) {
-		m_gamePausedOverlay->render(renderTarget);
-	}
 
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
@@ -298,6 +306,7 @@ void LevelScreen::onResume() {
 	m_backToMenuButton->setVisible(false);
 	m_resumeButton->setVisible(false);
 	m_isPaused = false;
+	m_gamePausedOverlay->setPermanent(false);
 }
 
 void LevelScreen::onRetry() {

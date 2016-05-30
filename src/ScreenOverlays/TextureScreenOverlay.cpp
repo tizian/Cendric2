@@ -1,11 +1,13 @@
 #include "ScreenOverlays/TextureScreenOverlay.h"
 
 TextureScreenOverlay::TextureScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : ScreenOverlay(activeTime, fadeTime) {
+	m_textureColor = sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255);
 	m_sprite.setPosition(sf::Vector2f(0.f, 0.f));
-	m_textureColor = sf::Color(255, 255, 255);
+	m_sprite.setColor(m_textureColor);
 
+	m_backgroundColor = sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255);
 	m_background.setPosition(sf::Vector2f(0.f, 0.f));
-	m_backgroundColor = sf::Color(255, 255, 255);
+	m_background.setColor(m_backgroundColor);
 }
 
 void TextureScreenOverlay::update(const sf::Time& frameTime) {
