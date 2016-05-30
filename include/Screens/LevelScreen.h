@@ -50,12 +50,12 @@ private:
 	bool m_isGameOver = false;
 	bool m_isPaused = false;
 	sf::Time m_respawnWaitTime = sf::seconds(2.5f);
-	BitmapText* m_overlayText = nullptr;
-	sf::Sprite* m_overlaySprite = nullptr;
 	YesOrNoForm* m_yesOrNoForm = nullptr;
 	Button* m_retryButton = nullptr;
 	Button* m_backToMenuButton = nullptr;
 	Button* m_resumeButton = nullptr;
+
+	ScreenOverlay* m_gamePausedOverlay = nullptr;
 
 	void handleGameOver(const sf::Time& frameTime);
 

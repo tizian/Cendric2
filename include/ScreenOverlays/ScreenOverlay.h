@@ -41,6 +41,7 @@ public:
 	static ScreenOverlay* createSpellLearnedScreenOverlay(SpellID id);
 	static ScreenOverlay* createModifierLearnedScreenOverlay(const SpellModifier& modifier);
 	static ScreenOverlay* createGameOverScreenOverlay();
+	static ScreenOverlay* createGamePausedScreenOverlay();
 
 protected: 
 	float m_scale;
