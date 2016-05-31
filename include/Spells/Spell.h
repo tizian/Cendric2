@@ -65,9 +65,9 @@ protected:
 	LevelMainCharacter* m_mainChar;
 	// calculates position according to m_mob
 	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
-	// collisions with mainchar and allied enemies
-	void checkCollisionsWithAllies(const sf::FloatRect* boundingBox);
-	// collisions with enemies
-	virtual void checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
+	// collisions with mainchar and allied enemies. executes on hit and returns whether a collision happened.
+	virtual bool checkCollisionsWithAllies(const sf::FloatRect* boundingBox);
+	// collisions with enemies. executes on hit and returns whether a collision happened.
+	virtual bool checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
 	sf::Vector2f rotateVector(const sf::Vector2f& vec, float angle);
 };

@@ -47,9 +47,9 @@ void ZeffBoss::loadSpells() {
 	m_spellManager->addSpell(chopSpell);
 
 	SpellData projectile = SpellData::getSpellData(SpellID::ReturningProjectile);
-	projectile.damage = 10;
+	projectile.damage = 15;
 	projectile.duration = sf::seconds(2.f);
-	projectile.damagePerSecond = 2;
+	projectile.damagePerSecond = 5;
 	projectile.cooldown = sf::milliseconds(5000);
 	projectile.isBlocking = true;
 	projectile.fightingTime = sf::seconds(10000);
@@ -61,6 +61,21 @@ void ZeffBoss::loadSpells() {
 	
 	m_spellManager->addSpell(projectile);
 
+	SpellData boomerang = SpellData::getSpellData(SpellID::Boomerang);
+	boomerang.damage = 10;
+	boomerang.duration = sf::seconds(2.f);
+	boomerang.damagePerSecond = 2;
+	boomerang.cooldown = sf::milliseconds(5000);
+	boomerang.isBlocking = true;
+	boomerang.fightingTime = sf::seconds(10000);
+	boomerang.fightAnimation = GameObjectState::Fighting2;
+	boomerang.castingTime = sf::milliseconds(800);
+	boomerang.castingAnimation = GameObjectState::Casting2;
+	boomerang.range = 600;
+	boomerang.speed = 500;
+
+	m_spellManager->addSpell(boomerang);
+
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
@@ -69,7 +84,7 @@ void ZeffBoss::handleAttackInput() {
 		m_spellManager->setCurrentSpell(0); // spin
 	}
 	else {
-		m_spellManager->setCurrentSpell(1); // sword throw
+		m_spellManager->setCurrentSpell(rand() % 2 + 1); // sword throw or boomerang
 	}
 
 	if (getCurrentTarget() != nullptr)

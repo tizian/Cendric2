@@ -15,6 +15,7 @@ public:
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 
 	void onOwnerDisposed() override;
+	void setDisposed() override;
 
 private:
 	void init(const SpellData& data);

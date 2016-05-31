@@ -202,7 +202,7 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::ReturningProjectile:
 		creator = new DefaultSpellCreator<ReturningProjectileSpell>(data, owner);
 		break;
-	case SpellID::BoomerangProjectile:
+	case SpellID::Boomerang:
 		creator = new DefaultSpellCreator<BoomerangSpell>(data, owner);
 		break;
 	case SpellID::Buff:
@@ -265,7 +265,7 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getProjectileSpellData();
 	case SpellID::ReturningProjectile:
 		return getReturningProjectileSpellData();
-	case SpellID::BoomerangProjectile:
+	case SpellID::Boomerang:
 		return getBoomerangSpellData();
 	case SpellID::Buff:
 		return getBuffSpellData();
@@ -333,7 +333,7 @@ SpellData SpellData::getReturningProjectileSpellData() {
 
 SpellData SpellData::getBoomerangSpellData() {
 	SpellData projectile = EMPTY_SPELL;
-	projectile.id = SpellID::BoomerangProjectile;
+	projectile.id = SpellID::Boomerang;
 
 	projectile.cooldown = sf::seconds(1);
 	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);

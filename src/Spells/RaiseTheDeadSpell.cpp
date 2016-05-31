@@ -42,7 +42,7 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	setDisposed();
 }
 
-void RaiseTheDeadSpell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
+bool RaiseTheDeadSpell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
 	// this method is overridden to guarantee that the spell only hits once
 	// and that the iterator is not invalidated (we change the enemy vector size on the fly)
 	for (auto& go : *m_enemies) {
@@ -50,9 +50,10 @@ void RaiseTheDeadSpell::checkCollisionsWithEnemies(const sf::FloatRect* bounding
 		Enemy* enemy = dynamic_cast<Enemy*>(go);
 		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox))) {
 			enemy->onHit(this);
-			break;
+			return true;
 		}
 	}
+	return false;
 }
 
 void RaiseTheDeadSpell::render(sf::RenderTarget& target) {

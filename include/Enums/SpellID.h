@@ -38,7 +38,7 @@ enum class SpellID {
 	Buff,
 	Projectile,
 	ReturningProjectile,
-	BoomerangProjectile,
+	Boomerang,
 
 	MAX
 };

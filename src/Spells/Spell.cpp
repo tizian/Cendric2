@@ -213,9 +213,11 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
-void Spell::checkCollisionsWithAllies(const sf::FloatRect* boundingBox) {
+bool Spell::checkCollisionsWithAllies(const sf::FloatRect* boundingBox) {
+	bool collided = false;
 	if (m_mainChar->getBoundingBox()->intersects(*boundingBox)) {
 		m_mainChar->onHit(this);
+		collided = true;
 	}
 	for (auto& go : *m_enemies) {
 		if (!go->isViewable()) continue;
@@ -223,19 +225,24 @@ void Spell::checkCollisionsWithAllies(const sf::FloatRect* boundingBox) {
 		if (!enemy->isAlly()) continue;
 		if (enemy->getBoundingBox()->intersects(*boundingBox)) {
 			enemy->onHit(this);
+			collided = true;
 		}
 	}
+	return collided;;
 }
 
-void Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
+bool Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
+	bool collided = false;
 	for (auto& go : *m_enemies) {
 		if (!go->isViewable()) continue;
 		Enemy* enemy = dynamic_cast<Enemy*>(go);
 		if (enemy->isAlly()) continue;
 		if (enemy->getBoundingBox()->intersects(*boundingBox)) {
 			enemy->onHit(this);
+			collided = true;
 		}
 	}
+	return collided;
 }
 
 const sf::Time& Spell::getActiveDuration() const {

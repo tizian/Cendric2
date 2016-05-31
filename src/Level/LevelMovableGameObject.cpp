@@ -258,6 +258,10 @@ bool LevelMovableGameObject::isFeared() const {
 	return m_fearedTime > sf::Time::Zero;
 }
 
+bool LevelMovableGameObject::isReady() const {
+	return m_movingBehavior->isReady();
+}
+
 void LevelMovableGameObject::loadBehavior() {
 	delete m_attackingBehavior;
 	m_attackingBehavior = createAttackingBehavior();

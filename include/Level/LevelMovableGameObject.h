@@ -61,6 +61,7 @@ public:
 	bool isImmortal() const;
 	bool isStunned() const;
 	bool isFeared() const;
+	bool isReady() const;
 	GameObjectState getState() const;
 
 	virtual bool isAlly() const;

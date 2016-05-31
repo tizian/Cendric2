@@ -97,36 +97,18 @@ void ReturningProjectileSpell::update(const sf::Time& frameTime) {
 	if (m_isDamaging) {
 		if (!m_data.isAlly) {
 			// check collisions with allies
-			if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
-				m_mainChar->onHit(this);
+			if (checkCollisionsWithAllies(getBoundingBox())) {
 				m_isDisposed = false;
 				m_isReturning = true;
 				m_isDamaging = false;
 			}
-			for (auto& go : *m_enemies) {
-				if (!go->isViewable()) continue;
-				Enemy* enemy = dynamic_cast<Enemy*>(go);
-				if (!enemy->isAlly()) continue;
-				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
-					enemy->onHit(this);
-					m_isDisposed = false;
-					m_isReturning = true;
-					m_isDamaging = false;
-				}
-			}
 		}
 		else {
 			// check collisions with enemies
-			for (auto& go : *m_enemies) {
-				if (!go->isViewable()) continue;
-				Enemy* enemy = dynamic_cast<Enemy*>(go);
-				if (enemy->isAlly()) continue;
-				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
-					enemy->onHit(this);
-					m_isDisposed = false;
-					m_isReturning = true;
-					m_isDamaging = false;
-				}
+			if (checkCollisionsWithEnemies(getBoundingBox())) {
+				m_isDisposed = false;
+				m_isReturning = true;
+				m_isDamaging = false;
 			}
 		}
 	}
@@ -142,7 +124,6 @@ void ReturningProjectileSpell::update(const sf::Time& frameTime) {
 		// check collisions with owner
 		if (m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
 			setDisposed();
-			m_mob->setReady();
 		}
 	}
 
@@ -157,6 +138,11 @@ void ReturningProjectileSpell::update(const sf::Time& frameTime) {
 void ReturningProjectileSpell::onOwnerDisposed() {
 	setDisposed();
 	m_mob = nullptr;
+}
+
+void ReturningProjectileSpell::setDisposed() {
+	Spell::setDisposed();
+	m_mob->setReady();
 }
 
 
