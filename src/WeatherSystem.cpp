@@ -16,11 +16,17 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 
 		m_ps->emitRate = 200.f;
 
+		float minSize = 5.f;
+		float maxSize = 15.f;
+		if (isLevel) {
+			minSize = 8.f;
+			maxSize = 20.f;
+		}
 		auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-		sizeGen->minStartSize = 5.f;
-		sizeGen->maxStartSize = 15.f;
-		sizeGen->minEndSize = 5.f;
-		sizeGen->maxEndSize = 15.f;
+		sizeGen->minStartSize = minSize;
+		sizeGen->maxStartSize = maxSize;
+		sizeGen->minEndSize = minSize;
+		sizeGen->maxEndSize = maxSize;
 
 		auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 		velGen->minAngle = 160.f;
