@@ -76,6 +76,10 @@ HealthBar::~HealthBar() {
 	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_highlight);
 }
 
+const AttributeData* HealthBar::getAttributes() const {
+	return m_attributes;
+}
+
 void HealthBar::setAttributes(const AttributeData* attributes) {
 	m_attributes = attributes;
 
