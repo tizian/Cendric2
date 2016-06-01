@@ -67,7 +67,7 @@ void LeapOfFaithSpell::update(const sf::Time& frameTime) {
 }
 
 void LeapOfFaithSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob2)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
 

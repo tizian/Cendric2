@@ -9,10 +9,10 @@ LightObject::LightObject(const LightData& data) : GameObject() {
 void LightObject::init() {
 	m_sprite.setSize(sf::Vector2f(2.f, 2.f));
 	m_sprite.setOrigin(1.f, 1.f); // setting the origin to the center
-	m_sprite.setScale(m_lightData.radius.x, m_lightData.radius.y);
+	m_sprite.setScale(2 * m_lightData.radius.x, 2 * m_lightData.radius.y);
 	m_sprite.setFillColor(sf::Color(255, 255, 255, (sf::Uint8)(255 * m_lightData.brightness)));
-	g_resourceManager->getTexture(ResourceID::Texture_Particle_blob2)->setSmooth(true);
-	m_sprite.setTexture(g_resourceManager->getTexture(ResourceID::Texture_Particle_blob2));
+	g_resourceManager->getTexture(ResourceID::Texture_Particle_light)->setSmooth(true);
+	m_sprite.setTexture(g_resourceManager->getTexture(ResourceID::Texture_Particle_light));
 	m_animationTimer = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2.f * m_lightData.radius.x, 2.f * m_lightData.radius.y));
 
