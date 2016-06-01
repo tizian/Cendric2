@@ -20,6 +20,7 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
+	const AttributeData* getAttributes() const;
 	void setAttributes(const AttributeData* attributes);
 	void setName(const std::string& name);
 

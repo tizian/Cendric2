@@ -156,11 +156,14 @@ void ProgressLog::addReputationAdded(FractionID fraction, int amount) {
 	calculatePositions();
 }
 
+void ProgressLog::setYOffset(float yOffset) {
+	m_yOffset = yOffset;
+}
+
 void ProgressLog::calculatePositions() {
-	float yOffset = YOFFSET;
 	for (auto& it : m_logTexts) {
 		it.first.setPosition(sf::Vector2f(
-			WINDOW_WIDTH - it.first.getLocalBounds().width - XOFFSET, yOffset));
-		yOffset += it.first.getLocalBounds().height + 0.5f * GUIConstants::CHARACTER_SIZE_M;
+			WINDOW_WIDTH - it.first.getLocalBounds().width - XOFFSET, m_yOffset));
+		m_yOffset += it.first.getLocalBounds().height + 0.5f * GUIConstants::CHARACTER_SIZE_M;
 	}
 }

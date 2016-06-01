@@ -139,6 +139,12 @@ const LevelData* LevelScreen::getWorldData() const {
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
+	if (dynamic_cast<LevelInterface*>(m_interface)->isEnemyHealthBarDisplayed()) {
+		m_progressLog->setYOffset(80.f);
+	}
+	else {
+		m_progressLog->setYOffset(20.f);
+	}
 	handleGameOver(frameTime);
 	handleBossDefeated(frameTime);
 
