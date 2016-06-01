@@ -169,7 +169,7 @@ void SaveGameScreen::onDeleteSaveGame() {
 
 void SaveGameScreen::onNewSaveGame() {
 	float width = 450;
-	float height = 200;
+	float height = 230;
 	m_newSaveGameForm = new NewSaveGameForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
 	m_newSaveGameForm->setOnOkClicked(std::bind(&SaveGameScreen::onYesNewSaveGame, this));
 	m_newSaveGameForm->setOnCancelClicked(std::bind(&SaveGameScreen::onCancel, this));
