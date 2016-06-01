@@ -120,6 +120,10 @@ void LevelInterface::reloadInventory(const std::string& changedItemID) {
 void LevelInterface::notifyCharacterInfo() {
 	m_characterInfo->notifyChange();
 }
+
+bool LevelInterface::isEnemyHealthBarDisplayed() {
+	return m_enemyHealthBar->getAttributes() != nullptr;
+}
  
 void LevelInterface::setSpellManager(SpellManager* spellManager) {
 	// use this spell manager for the interface bar.

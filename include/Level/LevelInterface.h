@@ -32,6 +32,8 @@ public:
 	void reloadInventory(const std::string& changeditemID) override;
 	// notifies the character info
 	void notifyCharacterInfo();
+	// returns if an enemy health bar is currently displayed
+	bool isEnemyHealthBarDisplayed();
 
 	void render(sf::RenderTarget& target) override;
 	void renderAfterForeground(sf::RenderTarget& target) override;
