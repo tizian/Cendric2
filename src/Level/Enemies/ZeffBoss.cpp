@@ -28,10 +28,10 @@ ZeffBoss::ZeffBoss(const Level* level, Screen* screen) :
 }
 
 void ZeffBoss::loadAttributes() {
-	m_attributes.setHealth(100);
-	m_attributes.resistanceIce = 0;
-	m_attributes.resistanceFire = 30;
-	m_attributes.resistanceShadow = 30;
+	m_attributes.setHealth(200);
+	m_attributes.resistanceIce = -20;
+	m_attributes.resistancePhysical = 50;
+	m_attributes.critical = 20;
 	m_attributes.calculateAttributes();
 }
 
@@ -41,7 +41,7 @@ void ZeffBoss::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(400);
 	chopSpell.cooldown = sf::milliseconds(400);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 100);
-	chopSpell.spellOffset = sf::Vector2f(-60.f, 0.f);
+	chopSpell.spellOffset = sf::Vector2f(-60.f, 20.f);
 	chopSpell.fightingTime = sf::milliseconds(400);
 	
 	m_spellManager->addSpell(chopSpell);
@@ -50,7 +50,7 @@ void ZeffBoss::loadSpells() {
 	projectile.damage = 15;
 	projectile.duration = sf::seconds(2.f);
 	projectile.damagePerSecond = 5;
-	projectile.cooldown = sf::milliseconds(5000);
+	projectile.cooldown = sf::milliseconds(7000);
 	projectile.isBlocking = true;
 	projectile.fightingTime = sf::seconds(10000);
 	projectile.fightAnimation = GameObjectState::Fighting2;
@@ -65,13 +65,13 @@ void ZeffBoss::loadSpells() {
 	boomerang.damage = 10;
 	boomerang.duration = sf::seconds(2.f);
 	boomerang.damagePerSecond = 2;
-	boomerang.cooldown = sf::milliseconds(5000);
+	boomerang.cooldown = sf::milliseconds(8000);
 	boomerang.isBlocking = true;
 	boomerang.fightingTime = sf::seconds(10000);
 	boomerang.fightAnimation = GameObjectState::Fighting2;
 	boomerang.castingTime = sf::milliseconds(800);
 	boomerang.castingAnimation = GameObjectState::Casting2;
-	boomerang.range = 600;
+	boomerang.range = 700;
 	boomerang.speed = 500;
 
 	m_spellManager->addSpell(boomerang);
@@ -188,7 +188,7 @@ MovingBehavior* ZeffBoss::createMovingBehavior(bool asAlly) {
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(500.f);
-	behavior->setMaxVelocityX(150.f);
+	behavior->setMaxVelocityX(170.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }

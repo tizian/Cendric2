@@ -33,6 +33,7 @@ private:
 	float m_b;
 	float m_theta;
 	float m_t;
-	float m_u;
+	float m_u; // circumference
+	int m_direction;  // 1 or -1, the trajectory direction
 	sf::Vector2f m_center;
 };

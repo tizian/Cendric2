@@ -243,7 +243,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ToTalk','to t
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToCook','to cook','- kochen','zum choche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToPickup','to pickup','- aufnehmen','zum neh');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToLoot','to loot','- plündern','zum neh');
-INSERT INTO text (text_id, english, german, swiss_german) values ('ToActivate','to activate','(aktivieren)','zum aktiviere');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ToActivate','to activate','- aktivieren','zum aktiviere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToRead','to read','- lesen','zum läse');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToSwitch','to toggle','- umschalten','zum drucke');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToOpen','to open','- öffnen', 'zum ufmache');

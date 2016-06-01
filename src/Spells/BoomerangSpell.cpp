@@ -8,12 +8,13 @@ void BoomerangSpell::load(const SpellData& data, LevelMovableGameObject* mob, co
 	Spell::load(data, mob, target);
 
 	// ellipse params
-	m_a = 0.5f * std::min(dist(mob->getCenter(), target), data.range);
+	m_a = 0.5f * std::min(dist(mob->getCenter(), target) + 50.f, data.range);
 	m_b = 0.5f * m_a;
 	m_theta = std::atan2(m_velocity.y, m_velocity.x);
-	m_t = 0.f;
 	m_u = M_PI * std::sqrt(2 * (m_a * m_a + m_b * m_b));
 	m_center = m_mob->getCenter() + sf::Vector2f(m_mob->isFacingRight() ? m_a : -m_a, 0.f);
+	m_direction = m_mob->isFacingRight() ? -1 : 1;
+	m_t = m_mob->isFacingRight() ? M_TWOPI : 0.f;
 }
 
 void BoomerangSpell::init(const SpellData& data) {
@@ -38,8 +39,8 @@ void BoomerangSpell::update(const sf::Time& frameTime) {
 	if (m_currentRotation > M_TWOPI) m_currentRotation -= M_TWOPI;
 
 	// update t
-	m_t += frameTime.asSeconds() * m_data.speed * M_TWOPI / m_u;
-	if (m_t > M_TWOPI) {
+	m_t += m_direction * frameTime.asSeconds() * m_data.speed * M_TWOPI / m_u;
+	if (m_t > M_TWOPI || m_t < 0.f) {
 		setDisposed();
 	}
 
