@@ -82,8 +82,8 @@ void LevelScreen::notifyBackFromMenu() {
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 }
 
-void LevelScreen::notifyBossKilled() {
-	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay());
+void LevelScreen::notifyBossKilled(std::map<std::string, int>& items, int gold) {
+	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay(items, gold));
 	m_interface->hideAll();
 	m_isBossDefeated = true;
 }

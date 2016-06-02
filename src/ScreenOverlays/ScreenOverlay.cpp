@@ -237,7 +237,7 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 	return gamePausedScreenOverlay;
 }
 
-ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay() {
+ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay(std::map<std::string, int>& items, int gold) {
 	TextureScreenOverlay* enemyDefeatedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
 	enemyDefeatedScreenOverlay->setPermanent(true);
 

@@ -50,7 +50,7 @@ private:
 
 	// <<< HEALTH BARS >>>
 	HealthBar* m_mainCharHealthBar = nullptr;
-	HealthBar* m_enemyHealthBar = nullptr;
+	HealthBar* m_enemyHealthBar = nullptr;	// TODO: what if we have multiple bosses?
 
 	// <<< SPELL SELECTION >>>
 	SpellSelection* m_spellSelection = nullptr;

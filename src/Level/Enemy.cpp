@@ -392,7 +392,7 @@ void Enemy::setDead() {
 		m_interactComponent->setInteractable(false);
 
 		// TODO: what if we have multiple bosses?
-		dynamic_cast<LevelScreen*>(m_screen)->notifyBossKilled();
+		dynamic_cast<LevelScreen*>(m_screen)->notifyBossKilled(m_lootableItems, m_lootableGold);
 	}
 	else {
 		m_interactComponent->setInteractable(true);

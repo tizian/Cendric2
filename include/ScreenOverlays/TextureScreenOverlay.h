@@ -7,8 +7,8 @@ class TextureScreenOverlay : public virtual ScreenOverlay {
 public:
 	TextureScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime = sf::Time::Zero);
 
-	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& target) override;
+	virtual void update(const sf::Time& frameTime) override;
+	virtual void render(sf::RenderTarget& target) override;
 
 	void setSpriteTexture(const sf::Texture* texture);
 	void setSpriteTextureRect(const sf::IntRect& rect);
