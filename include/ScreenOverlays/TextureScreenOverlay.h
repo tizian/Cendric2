@@ -22,7 +22,7 @@ public:
 	void setBackgroundPosition(const sf::Vector2f& position);
 	void setBackgroundScale(const sf::Vector2f& factors);
 
-private:	
+protected:	
 	sf::Sprite m_sprite;
 	sf::Sprite m_background;
 };

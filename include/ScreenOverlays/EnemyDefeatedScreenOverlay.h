@@ -7,14 +7,14 @@
 class EnemyDefeatedScreenOverlay : public virtual TextureScreenOverlay {
 public:
 	EnemyDefeatedScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime = sf::Time::Zero);
+	~EnemyDefeatedScreenOverlay();
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
-	void setLootItems(std::map<std::string, int>& items);
-	void setGold(int gold);
+	void setLoot(std::map<std::string, int>& items, int gold);
 
 private:
-	std::vector<InventorySlot> m_sprites;
-	std::vector<BitmapText> m_texts;
+	std::vector<InventorySlot*> m_items;
+	std::vector<BitmapText*> m_texts;
 };
