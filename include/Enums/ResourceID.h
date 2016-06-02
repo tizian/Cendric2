@@ -126,7 +126,7 @@ enum class ResourceID {
 	Texture_GUI_healthbar_content_highlight,
 	Texture_Particle_circle,
 	Texture_Particle_blob,
-	Texture_Particle_blob2,
+	Texture_Particle_light,
 	Texture_Particle_longblob,
 	Texture_Particle_snowflake,
 	Texture_Particle_smoke,
