@@ -1,7 +1,8 @@
 #include "GUI/ArrowButton.h"
+#include "GlobalResource.h"
 
 ArrowButton::ArrowButton(bool pointRight) : GameObject() {
-	m_arrow.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_arrow));
+	m_arrow.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_ARROW));
 
 	// center origin
 	m_arrow.setOrigin(sf::Vector2f(m_arrow.getLocalBounds().width / 2.f, m_arrow.getLocalBounds().height / 2.f));

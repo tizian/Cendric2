@@ -19,6 +19,8 @@ public:
 
 	// loads sprite offset & bounding box.
 	virtual void init() = 0;
+	// loads the resources (sprite, sound)
+	virtual void loadResources();
 	// loads the dynamic tile with the specified skin nr
 	virtual void loadAnimation(int skinNr) = 0;
 	// gets called by a spell when it hits the dynamic tile
@@ -42,6 +44,8 @@ public:
 	const Level* getLevel() const;
 
 protected:
+	virtual std::string getSpritePath() const { return ""; }
+	virtual std::string getSoundPath() const { return ""; }
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
 	const Level* m_level;

@@ -4,6 +4,7 @@
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GlobalResource.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Particle, ParticleTile)
 
@@ -61,7 +62,7 @@ void ParticleTile::onHit(Spell* spell) {
 }
 
 void ParticleTile::loadParticleSystem(int skinNr) {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 60.f;
 

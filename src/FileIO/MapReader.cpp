@@ -1,5 +1,5 @@
 #include "FileIO/MapReader.h"
-#include "ResourceManager.h"
+#include "GlobalResource.h"
 
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 
@@ -437,13 +437,13 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					npc.id = textAttr;
 					
 					if (npc.dialogueID.empty())
-						npc.dialogueID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/dl_" + npc.id + ".lua";
+						npc.dialogueID = GlobalResource::NPC_FOLDER + npc.id + "/dl_" + npc.id + ".lua";
 					
 					if (npc.routineID.empty())
-						npc.routineID = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/ru_" + npc.id + ".lua";
+						npc.routineID = GlobalResource::NPC_FOLDER + npc.id + "/ru_" + npc.id + ".lua";
 					
 					if (npc.spritesheetpath.empty())
-						npc.spritesheetpath = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + npc.id + "/spritesheet_" + npc.id + ".png";
+						npc.spritesheetpath = GlobalResource::NPC_FOLDER + npc.id + "/spritesheet_" + npc.id + ".png";
 
 					if (npc.textType.empty())
 						npc.textType = "dl_" + npc.id;

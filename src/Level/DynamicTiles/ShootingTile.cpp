@@ -49,6 +49,8 @@ void ShootingTile::loadSpells() {
 	}
 	}
 	m_spellData.isAlly = false;
+	g_resourceManager->loadTexture(m_spellData.spritesheetPath, ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(m_spellData.soundPath, ResourceType::Level);
 }
 
 void ShootingTile::loadAnimation(int skinNr) {
@@ -56,14 +58,16 @@ void ShootingTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
 	loadSpells();
 
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
+
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shooting));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* activeAnimation = new Animation(sf::milliseconds(60));
-	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shooting));
+	activeAnimation->setSpriteSheet(tex);
 
 	switch (skinNr) {
 	case 1:
@@ -89,13 +93,13 @@ void ShootingTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Active, activeAnimation);
 
 	Animation* brokenAnimation = new Animation();
-	brokenAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shooting));
+	brokenAnimation->setSpriteSheet(tex);
 	brokenAnimation->addFrame(sf::IntRect(TILE_SIZE * 4, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Broken, brokenAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_shooting));
+	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(TILE_SIZE * 5, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -195,6 +199,10 @@ void ShootingTile::onHit(Spell* spell) {
 	}
 	spell->setDisposed();
 	m_remainingRecoveringTime = m_recoveringTime;
+}
+
+std::string ShootingTile::getSpritePath() const {
+	return "res/assets/spells/spritesheet_spell_shooting.png";
 }
 
 

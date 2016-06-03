@@ -23,10 +23,9 @@ typedef std::vector<std::vector<std::string>> ResultSet;
 /* interface to the SQLite database */
 class DatabaseManager {
 public:
-	DatabaseManager() {};
+	DatabaseManager();
 	~DatabaseManager();
 
-	void init();
 	ResultSet query(const std::string& query) const;
 
 	TextBean getTextBean(const std::string& text_id, const std::string& text_type) const;
@@ -49,6 +48,7 @@ public:
 private:
 	const std::string DB_FILENAME = "db/game_data.db";
 	void checkError() const;
+	void init();
 
 	sqlite3 *m_db = nullptr;
 };

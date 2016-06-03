@@ -11,9 +11,10 @@ void SpikesTopTile::init() {
 }
 
 void SpikesTopTile::loadAnimation(int skinNr) {
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.0f));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikestop));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE * 2, TILE_SIZE, TILE_SIZE * 2));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -23,7 +24,10 @@ void SpikesTopTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(false);
 }
 
-
 void SpikesTopTile::onHit(LevelMovableGameObject* mob) {
 	mob->setDead();
+}
+
+std::string SpikesTopTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_spikestop.png";
 }

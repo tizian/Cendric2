@@ -7,17 +7,18 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	ErrorID error = g_resourceManager->pollError()->first;
 	switch (error) {
 	case ErrorID::Error_fileNotFound:
-		m_screenResource = ResourceID::Texture_screen_error_fileNotFound;
+		m_screenResource = "res/assets/screens/screen_error_filenotfound.png";
 		break;
 	case ErrorID::Error_dataCorrupted:
-		m_screenResource = ResourceID::Texture_screen_error_dataCorrupted;
+		m_screenResource = "res/assets/screens/screen_error_datacorrupted.png";
 		break;
 	default:
 		// unexpected
 		g_logger->logError("ErrorScreen", "Error screen has been set without an error occurring");
-		m_screenResource = ResourceID::Texture_screen_error_dataCorrupted;
+		m_screenResource = "res/assets/screens/screen_error_datacorrupted.png";
 		break;
 	}
+	g_resourceManager->loadTexture(m_screenResource, ResourceType::Unique, this);
 	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(m_screenResource)));
 	m_errorText = BitmapText(g_resourceManager->pollError()->second);
 	m_errorText.setColor(COLOR_BAD);
@@ -41,5 +42,5 @@ void ErrorScreen::execOnEnter(const Screen *previousScreen) {
 }
 
 void ErrorScreen::execOnExit(const Screen *nextScreen) {
-	g_resourceManager->deleteResource(m_screenResource);
+	g_resourceManager->deleteUniqueResources(this);
 }

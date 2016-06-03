@@ -4,6 +4,7 @@
 #include "GUI/SlicedSprite.h"
 #include "CharacterCore.h"
 #include "Map/NPC.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ const float DialogueWindow::SCROLL_WINDOW_WIDTH = TEXT_WIDTH;
 const float DialogueWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COUNT * GUIConstants::CHARACTER_SIZE_M + (OPTION_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M;
 
 DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
-	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_dialogue)));
+	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE)));
 	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 
 	m_speakerText = new BitmapText("");
@@ -45,7 +46,7 @@ DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT
 
 	setPosition(sf::Vector2f(LEFT, TOP));
 
-	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP));
 
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT);
@@ -67,7 +68,6 @@ DialogueWindow::~DialogueWindow() {
 	delete m_speakerText;
 	delete m_scrollBar;
 	delete m_scrollHelper;
-	g_resourceManager->deleteResource(ResourceID::Texture_dialogue);
 }
 
 void DialogueWindow::load(NPC* npc, WorldScreen* screen) {
@@ -201,7 +201,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 		if (oldOption != m_chosenOption) {
 			m_options[oldOption].deselect();
 			m_options[m_chosenOption].select();
-			g_resourceManager->playSound(m_sound, ResourceID::Sound_gui_menucursor, true);
+			g_resourceManager->playSound(m_sound, GlobalResource::SOUND_GUI_MENUCURSOR, true);
 		}
 
 		calculateEntryPositions();

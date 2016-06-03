@@ -18,8 +18,7 @@ Cutscene::Cutscene(std::string& id) {
 	// load all textures now
 	for (auto& step : m_data.steps) {
 		for (auto& img : step.images) {
-			g_resourceManager->getTexture(img.imagePath);
-			m_imagePaths.push_back(img.imagePath);
+			g_resourceManager->loadTexture(img.imagePath, ResourceType::Unique, this);
 		}
 	}
 
@@ -27,9 +26,7 @@ Cutscene::Cutscene(std::string& id) {
 }
 
 Cutscene::~Cutscene() {
-	for (auto& imagePath : m_imagePaths) {
-		g_resourceManager->deleteResource(imagePath);
-	}
+	g_resourceManager->deleteUniqueResources(this);
 }
 
 void Cutscene::update(const sf::Time& frameTime) {

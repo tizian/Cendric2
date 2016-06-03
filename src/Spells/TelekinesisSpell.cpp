@@ -1,4 +1,5 @@
 #include "Spells/TelekinesisSpell.h"
+#include "GlobalResource.h"
 
 TelekinesisSpell::TelekinesisSpell() : Spell() {
 }
@@ -7,7 +8,7 @@ void TelekinesisSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_telekinesis));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, 0, 40, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
@@ -50,7 +51,7 @@ void TelekinesisSpell::render(sf::RenderTarget& target) {
 }
 
 void TelekinesisSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f / 2.0f;
 

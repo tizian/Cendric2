@@ -17,15 +17,16 @@ void TorchTile::init() {
 
 void TorchTile::loadAnimation(int skinNr) {
 	int textureHeight = 2 * TILE_SIZE;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_torch));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * textureHeight, TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* burningAnimation = new Animation(sf::seconds(0.12f));
-	burningAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_torch));
+	burningAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 9; i++) {
 		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
 	}
@@ -67,4 +68,8 @@ void TorchTile::onHit(Spell* spell) {
 	default:
 		break;
 	}
+}
+
+std::string TorchTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png";
 }

@@ -34,11 +34,11 @@ void MovingTile::init() {
 }
 
 void MovingTile::loadAnimation(int skinNr) {
-
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	int length = static_cast<int>(m_boundingBox.width / TILE_SIZE_F);
 
 	sf::Sprite sprite;
-	sprite.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_tile_moving));
+	sprite.setTexture(*tex);
 
 	if (length == 1) {
 		sprite.setTextureRect(sf::IntRect(150, skinNr * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
@@ -148,4 +148,8 @@ void MovingTile::switchTile() {
 
 bool MovingTile::isSwitchable() const {
 	return true;
+}
+
+std::string MovingTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_moving.png";
 }

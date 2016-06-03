@@ -1,4 +1,5 @@
 #include "Spells/FlashSpell.h"
+#include "GlobalResource.h"
 
 FlashSpell::FlashSpell() : Spell() {
 }
@@ -6,9 +7,10 @@ FlashSpell::FlashSpell() : Spell() {
 void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, 0.f));
 	m_mob = mob;
+	const sf::Texture* tex = g_resourceManager->getTexture(data.spritesheetPath);
 	
 	Animation* spellAnimation = new Animation(sf::milliseconds(200));
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_flash));
+	spellAnimation->setSpriteSheet(tex);
 	spellAnimation->addFrame(sf::IntRect(0, 0, 120, 120));
 	spellAnimation->addFrame(sf::IntRect(120, 0, 120, 120));
 
@@ -74,7 +76,7 @@ bool FlashSpell::getConfiguredRotateSprite() const {
 }
 
 void FlashSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SMOKE)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.f;
 

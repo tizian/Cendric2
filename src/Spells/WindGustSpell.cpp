@@ -1,4 +1,5 @@
 #include "Spells/WindGustSpell.h"
+#include "GlobalResource.h"
 
 #define SPELL_OFFSET 10.f
 
@@ -47,7 +48,7 @@ float WindGustSpell::getPushAcceleration() const {
 }
 
 void WindGustSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(static_cast<int>(m_pushAcceleration * 2), g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(static_cast<int>(m_pushAcceleration * 2), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = getBoundingBox()->width;
 

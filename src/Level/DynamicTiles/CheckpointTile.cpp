@@ -25,14 +25,15 @@ void CheckpointTile::init() {
 
 void CheckpointTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_checkpoint));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * 80, 80, 80));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* activatedAnimation = new Animation(sf::seconds(0.2f));
-	activatedAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_checkpoint));
+	activatedAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 5; i++) {
 		activatedAnimation->addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
 	}
@@ -92,8 +93,16 @@ void CheckpointTile::onLeftClick() {
 void CheckpointTile::setActive(bool active) {
 	setState(active ? GameObjectState::Active : GameObjectState::Idle);
 	if (active) {
-		g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_checkpoint);
+		g_resourceManager->playSound(m_sound, getSoundPath());
 	} 
 	m_interactComponent->setInteractable(!active);
+}
+
+std::string CheckpointTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_checkpoint.png";
+}
+
+std::string CheckpointTile::getSoundPath() const {
+	return "res/sound/tile/gargoyle.ogg";
 }
 

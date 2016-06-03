@@ -1,4 +1,5 @@
 #include "GUI/Checkbox.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -11,12 +12,12 @@ Checkbox::Checkbox() :
 	m_ornamentColor(COLOR_WHITE),
 	m_symbolColor(COLOR_WHITE),
 	m_mouseOverColor(COLOR_PURPLE) {
-	m_background = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backgroundColor, SIDE_LENGTH, SIDE_LENGTH);
+	m_background = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backgroundColor, SIDE_LENGTH, SIDE_LENGTH);
 
-	m_ornament = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), m_ornamentColor, SIDE_LENGTH, SIDE_LENGTH);
+	m_ornament = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), m_ornamentColor, SIDE_LENGTH, SIDE_LENGTH);
 
 	m_checkedSymbol.setSize(sf::Vector2f(CENTER_SIZE, CENTER_SIZE));
-	m_checkedSymbol.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_checkbox));
+	m_checkedSymbol.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_CHECKBOX));
 
 	setBoundingBox(m_background.getLocalBounds());
 	setInputInDefaultView(true);

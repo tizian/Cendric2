@@ -17,6 +17,8 @@ class LevelMovableGameObject;
 struct SpellData {
 	SpellID id;
 	SpellType spellType;
+	std::string spritesheetPath;
+	std::string soundPath;
 	sf::IntRect iconTextureRect;
 	sf::Time cooldown;
 	sf::FloatRect boundingBox;
@@ -99,6 +101,8 @@ const struct SpellData EMPTY_SPELL =
 {
 	SpellID::VOID,
 	SpellType::VOID,
+	"",
+	"",
 	sf::IntRect(0, 0, 0, 0),
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),

@@ -145,9 +145,10 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	m_animations.clear();
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 80.f));
 	setSpriteOffset(sf::Vector2f(-127.f, -42.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* flyingAnimation = new Animation();
-	flyingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
 		flyingAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
 	}
@@ -156,7 +157,7 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 
 	
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
 		idleAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
 	}
@@ -165,7 +166,7 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 
 	// TODO: create other animations
 	Animation* fightingAnimation = new Animation();
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; i++) {
 		fightingAnimation->addFrame(sf::IntRect(195 * i, 180, 195, 180));
 	}
@@ -174,7 +175,7 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_gargoyle));
+	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 10; i++) {
 		deadAnimation->addFrame(sf::IntRect(195 * i, 360, 195, 180));
 	}
@@ -196,5 +197,9 @@ void GargoyleEnemy::setDead() {
 
 bool GargoyleEnemy::isSummoned() const {
 	return m_isSummoned;
+}
+
+std::string GargoyleEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_gargoyle.png";
 }
 

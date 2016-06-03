@@ -4,8 +4,11 @@
 
 using namespace std;
 
+const std::string SPRITE_PATH = "res/assets/screens/screen_menu.png";
+
 MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_menu)));
+	g_resourceManager->loadTexture(SPRITE_PATH, ResourceType::Unique, this);
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH)));
 }
 
 void MenuScreen::execUpdate(const sf::Time& frameTime) {
@@ -113,7 +116,7 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen) {
-	g_resourceManager->deleteResource(ResourceID::Texture_screen_menu);
+	g_resourceManager->deleteUniqueResources(this);
 }
 
 // <<< agents for the yes or no form and other buttons >>>

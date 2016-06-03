@@ -1,6 +1,7 @@
 #include "GUI/SpeechBubble.h"
 #include "GUI/GUIConstants.h"
 #include "Level/LevelMovableGameObject.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -12,9 +13,9 @@ SpeechBubble::SpeechBubble(LevelMovableGameObject* owner) : GameObject() {
 	m_owner = owner;
 	setBoundingBox(sf::FloatRect(0.f, 0.f, MIN_SIZE, MIN_SIZE));
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), COLOR_TRANS_BLACK, m_boundingBox.width, m_boundingBox.height);
-	m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, m_boundingBox.width, m_boundingBox.height);
-	m_pointer.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_speechbubble_pointer));
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), COLOR_TRANS_BLACK, m_boundingBox.width, m_boundingBox.height);
+	m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, m_boundingBox.width, m_boundingBox.height);
+	m_pointer.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPEECHBUBBLE_POINTER));
 
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_text.setColor(COLOR_WHITE);

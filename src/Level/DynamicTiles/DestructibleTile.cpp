@@ -11,15 +11,16 @@ void DestructibleTile::init() {
 
 void DestructibleTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* crumblingAnimation = new Animation();
-	crumblingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
+	crumblingAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 5; i++) {
 		crumblingAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
@@ -52,7 +53,7 @@ void DestructibleTile::onHit(Spell* spell) {
 	case SpellID::Projectile:
 		if (m_state == GameObjectState::Idle) {
 			m_state = GameObjectState::Crumbling;
-			g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_destructible);
+			g_resourceManager->playSound(m_sound, getSoundPath());
 			setCurrentAnimation(getAnimation(m_state), false);
 			m_isCollidable = false;
 			spell->setDisposed();
@@ -61,4 +62,12 @@ void DestructibleTile::onHit(Spell* spell) {
 	default:
 		break;
 	}
+}
+
+std::string DestructibleTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png";
+}
+
+std::string DestructibleTile::getSoundPath() const {
+	return "res/sound/tile/crumble.ogg";
 }

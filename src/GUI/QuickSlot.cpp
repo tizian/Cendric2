@@ -3,6 +3,7 @@
 #include "Level/LevelInterface.h"
 #include "Screens/LevelScreen.h"
 #include "ResourceManager.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -35,16 +36,16 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 	m_overlayRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 0));
 
-	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory);
-	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected);
+	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY);
+	m_borderTextureSelected = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY_SELECTED);
 
-	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
+	m_highlightTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_HIGHLIGHT);
 
 	m_borderRect.setSize(sf::Vector2f(SIZE, SIZE));
 	m_borderRect.setTexture(m_borderTexture);
 
 	m_iconRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
-	m_iconRect.setTexture(g_resourceManager->getTexture(ResourceID::Texture_items));
+	m_iconRect.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
 
 	reload();
 }

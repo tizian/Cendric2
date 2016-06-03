@@ -11,9 +11,10 @@ void IceTile::init() {
 
 void IceTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(0.5f));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_ice));
+	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 2; i++) {
 		idleAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
@@ -38,4 +39,8 @@ void IceTile::onHit(Spell* spell) {
 	default:
 		break;
 	}
+}
+
+std::string IceTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_ice.png";
 }

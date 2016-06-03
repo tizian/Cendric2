@@ -11,6 +11,8 @@ SpellCreator::SpellCreator(const SpellData& spellData, LevelMovableGameObject* o
 	m_spellData = spellData;
 
 	m_allowedModifiers = SpellData::getAllowedModifiers(spellData.id);
+	g_resourceManager->loadTexture(m_spellData.spritesheetPath, ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(m_spellData.soundPath, ResourceType::Level);
 }
 
 SpellCreator::~SpellCreator() {

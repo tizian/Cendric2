@@ -1,11 +1,12 @@
 #include "GUI/TabButton.h"
+#include "GlobalResource.h"
 
 const float TabButton::BORDER_OFFSET = 5.f;
 const float TabButton::ALIGNMENT_OFFSET = 14.f;
 
 TabButton::TabButton(const sf::FloatRect& box) {
 	// using default values for constructor.
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_tab_inactive), COLOR_WHITE, box.width, box.height);
+	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_INACTIVE), COLOR_WHITE, box.width, box.height);
 	m_border.setPosition(box.left, box.top);
 
 	m_outerRect = box;

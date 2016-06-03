@@ -13,5 +13,6 @@ public:
 	void onHit(Spell* spell) override;
 
 private:
+	std::string getSpritePath() const override;
 	LightComponent* m_lightComponent;
 };

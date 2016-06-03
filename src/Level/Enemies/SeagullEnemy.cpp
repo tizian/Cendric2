@@ -98,9 +98,10 @@ sf::Time SeagullEnemy::getConfiguredChasingTime() const {
 void SeagullEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* flyingAnimation = new Animation();
-	flyingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_seagull));
+	flyingAnimation->setSpriteSheet(tex);
 	flyingAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
 	flyingAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
 	flyingAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
@@ -109,7 +110,7 @@ void SeagullEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_seagull));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
 	idleAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
 	idleAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
@@ -118,7 +119,7 @@ void SeagullEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation();
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_seagull));
+	fightingAnimation->setSpriteSheet(tex);
 	fightingAnimation->addFrame(sf::IntRect(0, 64, 70, 64));
 	fightingAnimation->addFrame(sf::IntRect(70, 64, 70, 64));
 	fightingAnimation->addFrame(sf::IntRect(140, 64, 70, 64));
@@ -126,7 +127,7 @@ void SeagullEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_seagull));
+	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(0, 128, 70, 64));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -135,4 +136,9 @@ void SeagullEnemy::loadAnimation() {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 }
+
+std::string SeagullEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_seagull.png";
+}
+
 

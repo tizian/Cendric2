@@ -26,6 +26,7 @@ private:
 	void onInteract();
 
 private:
+	std::string getSpritePath() const override;
 	SignData m_data;
 	TooltipWindow m_tooltipWindow;
 	bool m_showTooltip;

@@ -75,16 +75,17 @@ void StonemanEnemy::handleAttackInput() {
 void StonemanEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 88.f));
 	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	// Idle
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// Walking
 	Animation* walkingAnimation = new Animation(sf::seconds(0.12f));
-	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
 		walkingAnimation->addFrame(sf::IntRect(i * 100, 0, 100, 120));
 	}
@@ -92,7 +93,7 @@ void StonemanEnemy::loadAnimation() {
 
 	// Casting
 	Animation* castingAnimation = new Animation(sf::seconds(0.12f));
-	castingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	castingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 7; ++i) {
 		castingAnimation->addFrame(sf::IntRect(1400 + i * 100, 0, 100, 120));
 	}
@@ -100,7 +101,7 @@ void StonemanEnemy::loadAnimation() {
 
 	// Death
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
 		deadAnimation->addFrame(sf::IntRect(800 + i * 100, 0, 100, 120));
 	}
@@ -109,7 +110,7 @@ void StonemanEnemy::loadAnimation() {
 
 	// Jump (not used)
 	Animation* jumpingAnimation = new Animation(sf::seconds(0.12f));
-	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_stoneman));
+	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
@@ -150,5 +151,9 @@ AttackingBehavior* StonemanEnemy::createAttackingBehavior(bool asAlly) {
 
 int StonemanEnemy::getMentalStrength() const {
 	return 2;
+}
+
+std::string StonemanEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_stoneman.png";
 }
 

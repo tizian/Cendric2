@@ -13,9 +13,10 @@ void SwitchableTile::setInitialState(bool on) {
 }
 
 void SwitchableTile::loadAnimation(int skinNr) {
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* onAnimation = new Animation(sf::seconds(10.0f));
-	onAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_switchable));
+	onAnimation->setSpriteSheet(tex);
 	onAnimation->addFrame(sf::IntRect(
 		BORDER,
 		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
@@ -25,7 +26,7 @@ void SwitchableTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::On, onAnimation);
 
 	Animation* offAnimation = new Animation(sf::seconds(10.0f));
-	offAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_switchable));
+	offAnimation->setSpriteSheet(tex);
 	offAnimation->addFrame(sf::IntRect(
 		BORDER + (2 * BORDER + TILE_SIZE),
 		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
@@ -54,4 +55,8 @@ bool SwitchableTile::isSwitchable() const {
 		return false;
 	}
 	return true;
+}
+
+std::string SwitchableTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_switchable.png";
 }

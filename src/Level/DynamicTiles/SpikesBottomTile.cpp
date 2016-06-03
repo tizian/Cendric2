@@ -11,9 +11,10 @@ void SpikesBottomTile::init() {
 }
 
 void SpikesBottomTile::loadAnimation(int skinNr) {
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.0f));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_spikesbottom));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -25,4 +26,8 @@ void SpikesBottomTile::loadAnimation(int skinNr) {
 
 void SpikesBottomTile::onHit(LevelMovableGameObject* mob) {
 	mob->setDead();
+}
+
+std::string SpikesBottomTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_spikesbottom.png";
 }

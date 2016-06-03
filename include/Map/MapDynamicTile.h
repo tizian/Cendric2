@@ -17,6 +17,8 @@ public:
 
 	// loads sprite offset & bounding box. 
 	virtual void init() = 0;
+	// loads the resources (sprite, sound)
+	virtual void loadResources();
 	// loads the dynamic tile with the specified skin nr
 	virtual void loadAnimation(int skinNr) = 0;
 	// gets called by the main character when it hits the dynamic tile. default does nothing
@@ -32,6 +34,8 @@ public:
 	MapDynamicTileID getDynamicTileID() const;
 
 protected:
+	virtual std::string getSpritePath() const { return ""; }
+	virtual std::string getSoundPath() const { return ""; }
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
 	bool m_isCollidable = false;

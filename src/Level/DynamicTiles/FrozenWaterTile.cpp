@@ -19,9 +19,10 @@ void FrozenWaterTile::init() {
 
 void FrozenWaterTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(0.5f));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_frozenwater));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
 	
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -46,4 +47,8 @@ void FrozenWaterTile::onHit(Spell* spell) {
 	default:
 		break;
 	}
+}
+
+std::string FrozenWaterTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_frozenwater.png";
 }

@@ -5,6 +5,7 @@
 #include "AnimatedSprite.h"
 #include "Enums/DamageType.h"
 #include "ResourceManager.h"
+#include "GlobalResource.h"
 
 class Enemy;
 
@@ -36,15 +37,15 @@ private:
 
 	// initialize the animations
 	inline void initAnimations() {
-		m_stunAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_stun));
+		m_stunAnimation.setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_DEBUFF_STUN));
 		m_stunAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
 		m_stunAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
-		m_fearAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_debuff_fear));
+		m_fearAnimation.setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_DEBUFF_FEAR));
 		m_fearAnimation.addFrame(sf::IntRect(0, 0, 25, 25));
 		m_fearAnimation.addFrame(sf::IntRect(25, 0, 25, 25));
 
 		Animation dotAnimation;
-		dotAnimation.setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_damageTypes));
+		dotAnimation.setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_DAMAGETYPES));
 		sf::IntRect textureLocation(0, 50, 25, 25);
 
 		for (int dmgType = static_cast<int>(DamageType::VOID) + 1; dmgType < static_cast<int>(DamageType::MAX); dmgType++) {

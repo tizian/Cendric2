@@ -1,5 +1,6 @@
 #include "Trigger.h"
 #include "Screens/WorldScreen.h"
+#include "GlobalResource.h"
 
 Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 	m_worldScreen = screen;
@@ -7,7 +8,7 @@ Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 	m_data = data;
 	if (m_data.isKeyGuarded) {
 		m_isOnTrigger = false;
-		const sf::Texture* texture = g_resourceManager->getTexture(ResourceID::Texture_GUI_exit_arrow);
+		const sf::Texture* texture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_EXIT_ARROW);
 		m_sprite.setTexture(*texture);
 
 		float xPos = data.triggerRect.left + 0.5f * (data.triggerRect.width - texture->getSize().x);

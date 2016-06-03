@@ -1,6 +1,7 @@
 #include "Spells/InvisibilitySpell.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
+#include "GlobalResource.h"
 
 const sf::Time InvisibilitySpell::SMOKE_DURATION = sf::seconds(1);
 
@@ -52,7 +53,7 @@ bool InvisibilitySpell::getConfiguredRotateSprite() const {
 }
 
 void InvisibilitySpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SMOKE)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.f;
 

@@ -27,6 +27,11 @@ void MapDynamicTile::onHit(MapMainCharacter* mob) {
 	// nop
 }
 
+void MapDynamicTile::loadResources() {
+	g_resourceManager->loadTexture(getSpritePath(), ResourceType::Map);
+	g_resourceManager->loadSoundbuffer(getSoundPath(), ResourceType::Map);
+}
+
 void MapDynamicTile::setDynamicTileID(MapDynamicTileID id) {
 	m_dynamicTileID = id;
 }

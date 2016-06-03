@@ -57,6 +57,10 @@ public:
 
 	GameObjectType getConfiguredType() const override;
 
+protected:
+	std::string getSpritePath() const override;
+	std::string getDeathSoundPath() const override;
+
 private:
 	void loadWeapon();		// character core must be set when loading the weapon.
 	void loadAnimation();
@@ -75,7 +79,6 @@ private:
 	Enemy* m_targetedEnemy = nullptr;
 	Enemy* m_lastHitEnemy = nullptr;
 
-	sf::Sound m_sound;
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);
 

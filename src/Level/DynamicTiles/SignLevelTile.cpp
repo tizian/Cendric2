@@ -44,7 +44,8 @@ void SignLevelTile::init() {
 
 void SignLevelTile::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_sign_level));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -74,4 +75,8 @@ void SignLevelTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	if (m_showTooltip) {
 		m_tooltipWindow.render(renderTarget);
 	}
+}
+
+std::string SignLevelTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_sign.png";
 }

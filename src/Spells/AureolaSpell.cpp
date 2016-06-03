@@ -5,7 +5,7 @@ void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, cons
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation* spellAnimation = new Animation(sf::seconds(0.3f));
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_aureola));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, bean.skinNr * 40, 40, 40));
 	spellAnimation->addFrame(sf::IntRect(40, bean.skinNr * 40, 40, 40));
 

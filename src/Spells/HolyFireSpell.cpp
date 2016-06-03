@@ -1,5 +1,6 @@
 #include "Spells/HolyFireSpell.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GlobalResource.h"
 
 void HolyFireSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
@@ -38,7 +39,7 @@ void HolyFireSpell::update(const sf::Time& frameTime) {
 }
 
 void HolyFireSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(static_cast<int>(m_data.range), g_resourceManager->getTexture(ResourceID::Texture_Particle_flame)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(static_cast<int>(m_data.range), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = m_data.range;
 

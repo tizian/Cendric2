@@ -71,9 +71,10 @@ void FireRatEnemy::handleAttackInput() {
 void FireRatEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
-	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_firerat));
+	walkingAnimation->setSpriteSheet(tex);
 	walkingAnimation->addFrame(sf::IntRect(0, 0, 50, 50));
 	walkingAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
 	walkingAnimation->addFrame(sf::IntRect(100, 0, 50, 50));
@@ -82,27 +83,27 @@ void FireRatEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_firerat));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
 	idleAnimation->addFrame(sf::IntRect(300, 0, 50, 50));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
-	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_firerat));
+	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(150, 0, 50, 50));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.08f));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_firerat));
+	fightingAnimation->setSpriteSheet(tex);
 	fightingAnimation->addFrame(sf::IntRect(200, 0, 50, 50));
 	fightingAnimation->addFrame(sf::IntRect(250, 0, 50, 50));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_firerat));
+	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(350, 0, 50, 50));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -144,4 +145,8 @@ AttackingBehavior* FireRatEnemy::createAttackingBehavior(bool asAlly) {
 
 int FireRatEnemy::getMentalStrength() const {
 	return 1;
+}
+
+std::string FireRatEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_firerat.png";
 }

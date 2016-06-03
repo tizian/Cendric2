@@ -1,12 +1,16 @@
 #include "Screens/CreditsScreen.h"
 #include "Screens/MenuScreen.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
 const float CREDITS_VELOCITY_Y = -40.f;
 
+const std::string SPRITE_PATH = "res/assets/screens/screen_credits.png";
+
 CreditsScreen::CreditsScreen(CharacterCore* core) : Screen(core) {
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_credits)));
+	g_resourceManager->loadTexture(SPRITE_PATH, ResourceType::Unique, this);
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH)));
 }
 
 void CreditsScreen::execUpdate(const sf::Time& frameTime) {
@@ -49,7 +53,7 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 }
 
 void CreditsScreen::execOnExit(const Screen *nextScreen) {
-	g_resourceManager->deleteResource(ResourceID::Texture_screen_credits);
+	g_resourceManager->deleteUniqueResources(this);
 	delete m_title;
 	delete m_credits;
 }

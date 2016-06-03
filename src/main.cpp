@@ -37,13 +37,9 @@ int main(int argc, char* argv[]) {
 
 	g_logger = new Logger();
 	g_databaseManager = new DatabaseManager();
-	g_databaseManager->init();
 	g_resourceManager = new ResourceManager();
-	g_resourceManager->init();
 	g_textProvider = new TextProvider();
-	g_textProvider->reload();
 	g_inputController = new InputController();
-	g_inputController->init();
 
 	Game* game = new Game();
 	game->run();

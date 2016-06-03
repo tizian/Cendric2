@@ -1,5 +1,5 @@
 #include "FileIO/MerchantLoader.h"
-#include "ResourceManager.h"
+#include "GlobalResource.h"
 
 using namespace std;
 using namespace luabridge;
@@ -10,7 +10,7 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) {
 
 	MerchantData merchantData;
 
-	std::string filename = std::string(g_resourceManager->getFilename(ResourceID::Npc_folder)) + merchantID + "/me_" + merchantID + ".lua";
+	std::string filename = GlobalResource::NPC_FOLDER + merchantID + "/me_" + merchantID + ".lua";
 
 	if (luaL_dofile(L, getPath(filename).c_str()) != 0) {
 		g_logger->logError("MerchantLoader", "Cannot read lua script: " + getPath(filename));

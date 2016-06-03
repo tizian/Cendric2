@@ -1,10 +1,10 @@
 #include "FileIO/ConfigurationWriter.h"
-#include "ResourceManager.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
 bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
-	ofstream configuration(g_resourceManager->getFilename(ResourceID::Configuration), ios::trunc);
+	ofstream configuration(GlobalResource::CONFIGURATION_PATH, ios::trunc);
 	if (configuration.is_open()) {
 		configuration << writeConfigurationHeader();
 		configuration << writeSoundOn(data);
@@ -25,7 +25,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration.close();
 	}
 	else {
-		g_logger->logError("ConfigurationWriter", "Unable to open file: " + string(g_resourceManager->getFilename(ResourceID::Configuration)));
+		g_logger->logError("ConfigurationWriter", "Unable to open file: " + GlobalResource::CONFIGURATION_PATH);
 		return false;
 	}
 	return true;

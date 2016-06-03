@@ -2,6 +2,7 @@
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
 #include "Map/MerchantInterface.h"
+#include "GlobalResource.h"
 
 const int MerchantWindow::SLOT_COUNT_X = 3;
 const int MerchantWindow::SLOT_COUNT_Y = 7;
@@ -47,7 +48,7 @@ void MerchantWindow::init() {
 		m_title.getLocalBounds().width / 2, m_window->getPosition().y + GUIConstants::TEXT_OFFSET);
 
 	// scrolling
-	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP));
 
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);

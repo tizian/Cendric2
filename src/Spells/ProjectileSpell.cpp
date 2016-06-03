@@ -14,7 +14,7 @@ void ProjectileSpell::init(const SpellData& data) {
 	setSpriteOffset(sf::Vector2f(-19.f, 1.f));
 
 	Animation* spellAnimation = new Animation();
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_projectile));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 9, 48, 9));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);

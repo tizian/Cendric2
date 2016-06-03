@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "Structs/SpellData.h"
 #include "GUI/Hints.h"
+#include "GlobalResource.h"
 
 ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : GameObject() {
 	m_activeTime = activeTime;
@@ -149,8 +150,8 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 	spellScreenOverlay->setSubtitleCharacterSize(32);
 	spellScreenOverlay->setSubtitle(EnumNames::getSpellIDName(id));
 
-	spellScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(ResourceID::Texture_spellicons));
-	spellScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_spellscroll));
+	spellScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS));
+	spellScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLSCROLL));
 
 	const SpellData& bean = SpellData::getSpellData(id);
 	spellScreenOverlay->setSpriteTextureRect(bean.iconTextureRect);
@@ -180,7 +181,7 @@ ScreenOverlay* ScreenOverlay::createModifierLearnedScreenOverlay(const SpellModi
 	subtitle.append(g_textProvider->getText("Level") + " " + std::to_string(modifier.level));
 	modifierScreenOverlay->setSubtitleRaw(subtitle);
 
-	modifierScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(ResourceID::Texture_gems));
+	modifierScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_GEMS));
 	modifierScreenOverlay->setSpriteTextureRect(sf::IntRect((modifier.level - 1) * 50, 50, 50, 50));
 	modifierScreenOverlay->setSpriteTextureColor(SpellModifier::getSpellModifierColor(modifier.type));
 
@@ -194,9 +195,9 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	TextureScreenOverlay* gameOverScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
 	gameOverScreenOverlay->setPermanent(true);
 
-	gameOverScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_gameover));
+	gameOverScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_GAMEOVER));
 
-	const sf::Texture* text = g_resourceManager->getTexture(ResourceID::Texture_text_gameover);
+	const sf::Texture* text = g_resourceManager->getTexture(GlobalResource::TEX_TEXT_GAMEOVER);
 	gameOverScreenOverlay->setSpriteTexture(text);
 	gameOverScreenOverlay->setSpriteScale(sf::Vector2f(4.f, 4.f));
 	gameOverScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
@@ -219,9 +220,9 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 	TextureScreenOverlay* gamePausedScreenOverlay = new TextureScreenOverlay(sf::milliseconds(1), sf::seconds(0.1f));
 	gamePausedScreenOverlay->setPermanent(true);
 
-	gamePausedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
+	gamePausedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
 
-	const sf::Texture* text = g_resourceManager->getTexture(ResourceID::Texture_text_gamepaused);
+	const sf::Texture* text = g_resourceManager->getTexture(GlobalResource::TEX_TEXT_GAMEPAUSED);
 	gamePausedScreenOverlay->setSpriteTexture(text);
 	gamePausedScreenOverlay->setSpriteScale(sf::Vector2f(4.f, 4.f));
 	gamePausedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 200.f - 0.5f * 4.f * 60.f));
@@ -241,9 +242,9 @@ ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay() {
 	TextureScreenOverlay* enemyDefeatedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
 	enemyDefeatedScreenOverlay->setPermanent(true);
 
-	enemyDefeatedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
+	enemyDefeatedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
 
-	const sf::Texture* text = g_resourceManager->getTexture(ResourceID::Texture_text_defeated);
+	const sf::Texture* text = g_resourceManager->getTexture(GlobalResource::TEX_TEXT_DEFEATED);
 	enemyDefeatedScreenOverlay->setSpriteTexture(text);
 	enemyDefeatedScreenOverlay->setSpriteScale(sf::Vector2f(3.f, 3.f));
 	enemyDefeatedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 3.f * text->getSize().x), 200.f - 0.5f * 3.f * 60.f));
@@ -275,7 +276,7 @@ ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item)
 
 	itemScreenOverlay->setSubtitleCharacterSize(16);
 
-	itemScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(ResourceID::Texture_items));
+	itemScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
 	itemScreenOverlay->setSpriteTextureRect(sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50));
 
 	itemScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));

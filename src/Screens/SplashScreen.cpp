@@ -3,8 +3,11 @@
 
 using namespace std;
 
+const std::string SPRITE_PATH = "res/assets/screens/screen_splash.png";
+
 SplashScreen::SplashScreen() : Screen(nullptr) {
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(ResourceID::Texture_screen_splash)));
+	g_resourceManager->loadTexture(SPRITE_PATH, ResourceType::Unique, this);
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH)));
 }
 
 void SplashScreen::execOnEnter(const Screen* previousScreen) {
@@ -46,5 +49,5 @@ void SplashScreen::render(sf::RenderTarget& renderTarget) {
 }
 
 void SplashScreen::execOnExit(const Screen *nextScreen) {
-	g_resourceManager->deleteResource(ResourceID::Texture_screen_splash);
+	g_resourceManager->deleteUniqueResources(this);
 }

@@ -1,6 +1,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/BitmapFont.h"
 #include "ResourceManager.h"
+#include "GlobalResource.h"
 #include <iterator>
 #include <sstream>
 
@@ -250,9 +251,9 @@ BitmapFont* BitmapText::getFont(TextStyle style, int characterSize) {
 
 	switch (style) {
 	case TextStyle::Default:
-		return g_resourceManager->getBitmapFont(useEightFont ? ResourceID::BitmapFont_default_8 : ResourceID::BitmapFont_default_12);
+		return g_resourceManager->getBitmapFont(useEightFont ? GlobalResource::FONT_8 : GlobalResource::FONT_12);
 	case TextStyle::Shadowed:
-		return g_resourceManager->getBitmapFont(useEightFont ? ResourceID::BitmapFont_shadowed_8 : ResourceID::BitmapFont_shadowed_12);
+		return g_resourceManager->getBitmapFont(useEightFont ? GlobalResource::FONT_8_SHADOWED : GlobalResource::FONT_12_SHADOWED);
 	default:
 		return nullptr;
 	}

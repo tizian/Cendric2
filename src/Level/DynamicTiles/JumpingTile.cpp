@@ -22,9 +22,10 @@ void JumpingTile::init() {
 
 void JumpingTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_jumping));
+	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; ++i) {
 		idleAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
@@ -154,4 +155,6 @@ void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
-
+std::string JumpingTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_jumping.png";
+}

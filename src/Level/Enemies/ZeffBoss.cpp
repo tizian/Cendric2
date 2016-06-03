@@ -5,6 +5,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
+#include "GlobalResource.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Zeff, ZeffBoss)
 
@@ -107,9 +108,10 @@ void ZeffBoss::update(const sf::Time& frameTime) {
 void ZeffBoss::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 120.f));
 	setSpriteOffset(sf::Vector2f(-30.f, -20.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
-	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
 		walkingAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 140));
 	}
@@ -117,25 +119,25 @@ void ZeffBoss::loadAnimation() {
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, 140, 120, 140));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 	
 	Animation* jumpingAnimation = new Animation();
-	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(120, 140, 120, 140));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(2 * 120, 140, 120, 140));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
 		fightingAnimation->addFrame(sf::IntRect(i * 120, 5 * 140, 120, 140));
 	}
@@ -143,7 +145,7 @@ void ZeffBoss::loadAnimation() {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 	
 	Animation* fighting2Animation = new Animation(sf::seconds(0.1f));
-	fighting2Animation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	fighting2Animation->setSpriteSheet(tex);
 	fighting2Animation->addFrame(sf::IntRect(0 * 120, 4 * 140, 120, 140));
 	fighting2Animation->addFrame(sf::IntRect(1 * 120, 4 * 140, 120, 140));
 	fighting2Animation->addFrame(sf::IntRect(2 * 120, 4 * 140, 120, 140));
@@ -152,7 +154,7 @@ void ZeffBoss::loadAnimation() {
 	addAnimation(GameObjectState::Fighting2, fighting2Animation);
 
 	Animation* castingAnimation = new Animation(sf::seconds(0.1f));
-	castingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	castingAnimation->setSpriteSheet(tex);
 	castingAnimation->setLooped(false);
 	for (int i = 0; i < 4; ++i) {
 		castingAnimation->addFrame(sf::IntRect(i * 120, 2 * 140, 120, 140));
@@ -161,7 +163,7 @@ void ZeffBoss::loadAnimation() {
 	addAnimation(GameObjectState::Casting, castingAnimation);
 
 	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
-	casting2Animation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_boss_zeff));
+	casting2Animation->setSpriteSheet(tex);
 	casting2Animation->setLooped(false);
 	for (int i = 0; i < 4; ++i) {
 		casting2Animation->addFrame(sf::IntRect(i * 120, 3 * 140, 120, 140));
@@ -214,7 +216,6 @@ void ZeffBoss::render(sf::RenderTarget& target) {
 void ZeffBoss::setDead() {
 	if (m_isDead) return;
 	Enemy::setDead();
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_cendric_death, true);
 	updateParticleSystemPosition();
 }
 
@@ -232,7 +233,7 @@ void ZeffBoss::updateParticleSystemPosition() {
 }
 
 void ZeffBoss::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 100.f;
 
@@ -268,6 +269,14 @@ void ZeffBoss::loadParticleSystem() {
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
 	m_ps->addUpdater<particles::SizeUpdater>();
+}
+
+std::string ZeffBoss::getSpritePath() const {
+	return "res/assets/bosses/spritesheet_boss_zeff.png";
+}
+
+std::string ZeffBoss::getDeathSoundPath() const {
+	return "res/sound/mob/cendric_death.ogg";
 }
 
 

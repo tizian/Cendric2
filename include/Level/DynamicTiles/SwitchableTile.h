@@ -15,4 +15,7 @@ public:
 
 	void switchTile() override;
 	bool isSwitchable() const override;
+
+private:
+	std::string getSpritePath() const override;
 };

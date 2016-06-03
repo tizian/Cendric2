@@ -3,6 +3,7 @@
 #include "Screens/MapScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "Map/MapMainCharacter.h"
+#include "GlobalResource.h"
 
 float MapOverlay::TOP = 30.f;
 float MapOverlay::LEFT = 30.f;
@@ -52,7 +53,7 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 		m_explorable = true;
 	}
 
-	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
+	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
 
 	m_title.setString(g_textProvider->getText(map.getName(), "location"));
@@ -166,7 +167,7 @@ void WaypointMarker::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 25.f, 25.f));
 
 	Animation* activeAnimation = new Animation();
-	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
+	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
 	for (int i = 2; i < 6; i++)
 		activeAnimation->addFrame(sf::IntRect(i * 25, 0, 25, 25));
 
@@ -176,7 +177,7 @@ void WaypointMarker::loadAnimation() {
 	addAnimation(GameObjectState::Active, activeAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapmarkers));
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
 	idleAnimation->addFrame(sf::IntRect(25, 0, 25, 25));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -221,7 +222,7 @@ void WaypointMarker::onRightClick() {
 		m_waypointPosition.x + TILE_SIZE_F / 2.f - bb.width / 2.f,
 		m_waypointPosition.y - bb.height + TILE_SIZE_F / 2.f
 		));
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_waypoint, true);
+	g_resourceManager->playSound(m_sound, GlobalResource::SOUND_TELEPORT, true);
 	m_parent->hide();
 }
 

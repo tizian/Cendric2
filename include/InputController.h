@@ -12,8 +12,6 @@ public:
 
 	// refreshes the keymap
 	void update();
-	// initializes the keymaps
-	void init();
 
 	void setWindow(sf::RenderWindow* window, sf::RenderTexture* texture);
 	void setCurrentWindowSize(int width, int height);
@@ -66,6 +64,9 @@ public:
 	sf::Keyboard::Key getLastPressedKey() const;
 
 private:
+	// initializes the keymaps
+	void init();
+
 	std::map<Key, bool> m_keyActiveMap;
 	std::map<Key, bool> m_keyJustPressedMap;
 	sf::RenderWindow* m_mainWindow;

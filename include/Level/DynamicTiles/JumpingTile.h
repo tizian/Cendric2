@@ -27,6 +27,7 @@ public:
 private:
 	void checkCollisions(const sf::Vector2f& nextPosition);
 	void changeDirection();
+	std::string getSpritePath() const override;
 
 private:
 	const float GRAVITY_ACCELERATION = 1000.f;

@@ -30,6 +30,7 @@ public:
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 
 private:
+	std::string getSpritePath() const override;
 	void checkCollisions(const sf::Vector2f& nextPosition);
 
 	const float GRAVITY_ACCELERATION = 1000.f;

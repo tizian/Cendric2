@@ -1,6 +1,7 @@
 #include "GUI/HealthBar.h"
 #include "ResourceManager.h"
 #include "GUI/GUIConstants.h"
+#include "GlobalResource.h"
 
 HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 	if (style == HealthBarStyle::MainCharacter) {
@@ -11,7 +12,7 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 		m_borderOffsetX = 13.f;
 		m_borderOffsetY = 10.f;
 
-		m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_mainChar_border);
+		m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_MAINCHAR_BORDER);
 	}
 	else if (style == HealthBarStyle::Enemy) {
 		m_barWidth = 200.f;
@@ -21,7 +22,7 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 		m_borderOffsetX = 8.f;
 		m_borderOffsetY = 6.f;
 
-		m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_enemy_border);
+		m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_ENEMY_BORDER);
 	}
 	else if (style == HealthBarStyle::Boss) {
 		m_barWidth = 300.f;
@@ -31,12 +32,12 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 		m_borderOffsetX = 12.f;
 		m_borderOffsetY = 10.f;
 
-		m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_boss_border);
+		m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_BOSS_BORDER);
 	}
 
-	m_barTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content);
-	m_hitOverlayTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content_hit);
-	m_hitOverlayHighlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_healthbar_content_highlight);
+	m_barTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_CONTENT);
+	m_hitOverlayTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_CONTENT_HIT);
+	m_hitOverlayHighlightTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_CONTENT_HIGHLIGHT);
 
 	// init bar
 	m_bar.setPosition(sf::Vector2f(m_barLeft, m_barTop));
@@ -69,11 +70,6 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 }
 
 HealthBar::~HealthBar() {
-	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_mainChar_border);
-	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_enemy_border);
-	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content);
-	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_hit);
-	g_resourceManager->deleteResource(ResourceID::Texture_GUI_healthbar_content_highlight);
 }
 
 const AttributeData* HealthBar::getAttributes() const {

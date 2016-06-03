@@ -18,6 +18,7 @@ private:
 	void startReading();
 
 private:
+	std::string getSpritePath() const override;
 	BookData m_data;
 	static const float RANGE;
 };

@@ -8,7 +8,7 @@ void LeechSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const 
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation* spellAnimation = new Animation();
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fear));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, 0, 30, 30));
 	spellAnimation->addFrame(sf::IntRect(30, 0, 30, 30));
 

@@ -37,6 +37,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 private:
+	std::string getSpritePath() const;
 	const float WALK_ACCELERATION = 1500.0f;
 	// handle input and calculate the next position
 	void handleInput();

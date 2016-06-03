@@ -43,8 +43,9 @@ void SignMapTile::init() {
 }
 
 void SignMapTile::loadAnimation(int skinNr) {
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_sign_map));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -52,6 +53,10 @@ void SignMapTile::loadAnimation(int skinNr) {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(false);
+}
+
+std::string SignMapTile::getSpritePath() const {
+	return "res/assets/map_dynamic_tiles/spritesheet_tiles_cooking.png";
 }
 
 void SignMapTile::setPosition(const sf::Vector2f& pos) {

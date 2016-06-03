@@ -1,5 +1,6 @@
 #include "Spells/LightSpell.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GlobalResource.h"
 
 void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
@@ -36,7 +37,7 @@ void LightSpell::update(const sf::Time& frameTime) {
 }
 
 void LightSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f / 2.0f;
 

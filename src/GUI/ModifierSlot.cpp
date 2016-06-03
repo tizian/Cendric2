@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -12,7 +13,7 @@ const float ModifierSlot::ICON_OFFSET = 8.f;
 ModifierSlot::ModifierSlot(const SpellModifier& modifier) {
 	m_spellModifier = modifier;
 
-	m_iconTexture = g_resourceManager->getTexture(ResourceID::Texture_gems);
+	m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_GEMS);
 	if (modifier.type == SpellModifierType::VOID) {
 		m_isEmpty = true;
 		m_iconTextureRect = sf::IntRect(0, 0, 50, 50);
@@ -22,10 +23,10 @@ ModifierSlot::ModifierSlot(const SpellModifier& modifier) {
 		m_iconRect.setFillColor(SpellModifier::getSpellModifierColor(modifier.type));
 	}
 
-	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_modifier);
-	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_modifier_selected);
+	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_MODIFIER);
+	m_borderTextureSelected = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_MODIFIER_SELECTED);
 
-	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
+	m_highlightTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_HIGHLIGHT);
 
 	initSlot();
 	initTooltip();

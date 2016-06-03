@@ -12,7 +12,7 @@ class LightComponent;
 class LevelEquipment : public AnimatedGameObject {
 public:
 	LevelEquipment(LevelMainCharacter* mainChar);
-	~LevelEquipment();
+	~LevelEquipment() {};
 
 	void update(const sf::Time& frameTime) override;
 	void loadEquipment();

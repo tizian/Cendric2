@@ -1,6 +1,7 @@
 #include "Spells/LeapOfFaithSpell.h"
 #include "Level/MOBBehavior/MovingBehavior.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GlobalResource.h"
 
 LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 	m_gravityScale = gravityScale;
@@ -9,7 +10,7 @@ LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	m_mob = mob;
 	Animation* spellAnimation = new Animation();
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_leapoffaith));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, 0, 80, 120));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
@@ -67,7 +68,7 @@ void LeapOfFaithSpell::update(const sf::Time& frameTime) {
 }
 
 void LeapOfFaithSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
 

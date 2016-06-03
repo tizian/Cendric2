@@ -3,6 +3,7 @@
 
 const float BookWindow::WIDTH = WINDOW_WIDTH / 3.f;
 const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TOP;
+const std::string SOUND_PATH = "res/sound/gui/page_turn.ogg";
 
 BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, HEIGHT),
@@ -52,12 +53,14 @@ BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
 	m_content.setColor(COLOR_BLACK);
 
 	setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - WIDTH), 0.5f * (WINDOW_HEIGHT - HEIGHT)));
+
+	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);
 }
 
 BookWindow::~BookWindow() {
 	delete m_leftArrow;
 	delete m_rightArrow;
-	g_resourceManager->deleteResource(ResourceID::Sound_gui_turnpage);
+	g_resourceManager->deleteUniqueResources(this);
 }
 
 void BookWindow::render(sf::RenderTarget& renderTarget) {
@@ -97,7 +100,7 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 }
 
 void BookWindow::setPage(int index) {
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_gui_turnpage);
+	g_resourceManager->playSound(m_sound, SOUND_PATH);
 	if (m_data.title.empty() && index < 0) return;
 	if (index < -1 || index + 1 > static_cast<int>(m_data.pages.size())) return;
 	m_currentPage = index;

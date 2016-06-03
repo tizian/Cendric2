@@ -5,6 +5,7 @@
 
 #include "Level/DynamicTiles/FrozenWaterTile.h"
 #include "CustomParticleUpdaters.h"
+#include "GlobalResource.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Fluid, FluidTile)
@@ -29,6 +30,7 @@ void FluidTile::init() {
 
 void FluidTile::loadAnimation(int skinNr) {
 	m_data = FluidTileData::getData(skinNr);
+	g_resourceManager->loadSoundbuffer(m_data.soundPath, ResourceType::Level);
 
 	const sf::FloatRect* bb = getBoundingBox();
 	m_x = getPosition().x;
@@ -62,8 +64,8 @@ void FluidTile::loadAnimation(int skinNr) {
 
 	// Particle System
 	int maxNumberParticles = m_nTiles * 50;
-	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(maxNumberParticles, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob), WINDOW_WIDTH, WINDOW_HEIGHT));
-	g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)->setSmooth(true);
+	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(maxNumberParticles, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB), WINDOW_WIDTH, WINDOW_HEIGHT));
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)->setSmooth(true);
 	m_ps->color = m_data.color;
 	m_ps->threshold = 0.7f;
 
@@ -220,7 +222,7 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 
 		float scale = 1.f - distance / maxDist;
 
-		g_resourceManager->playSound(*m_soundMap.at(source), m_data.sound, false, scale);
+		g_resourceManager->playSound(*m_soundMap.at(source), m_data.soundPath, false, scale);
 	}
 }
 

@@ -6,6 +6,7 @@ using namespace std;
 bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& layers) {
 	if (layers.empty()) return false;
 	m_tilesetPath = data.tileSetPath;
+	g_resourceManager->loadTexture(m_tilesetPath, ResourceType::Unique, this);
 	m_tileset = g_resourceManager->getTexture(data.tileSetPath);
 	if (m_tileset->getSize().x == 0 || m_tileset->getSize().y == 0) return false;
 	m_tilesize = sf::Vector2i(TILE_SIZE, TILE_SIZE);
@@ -167,7 +168,7 @@ void TileMap::update(const sf::Time& frameTime) {
 }
 
 void TileMap::dispose() {
-	g_resourceManager->deleteResource(m_tilesetPath);
+	g_resourceManager->deleteUniqueResources(this);
 
 	for (auto& it : m_animatedTiles) {
 		for (auto& tile : it.second) {

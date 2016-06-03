@@ -9,12 +9,14 @@ NPC::NPC(MapScreen* mapScreen) : MapMovableGameObject(mapScreen->getWorld()) {
 }
 
 void NPC::load(const NPCData& data) {
+	g_resourceManager->loadTexture(data.spritesheetpath, ResourceType::Map);
+	const sf::Texture* tex = g_resourceManager->getTexture(data.spritesheetpath);
 	m_NPCdata = data;
 	setBoundingBox(data.boundingBox);
 	setSpriteOffset(sf::Vector2f(-data.boundingBox.left, -data.boundingBox.top));
 
 	Animation* walkingAnimationDown = new Animation(sf::seconds(0.15f));
-	walkingAnimationDown->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationDown->setSpriteSheet(tex);
 	walkingAnimationDown->addFrame(sf::IntRect(0, 0, 50, 50));
 	walkingAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
 	walkingAnimationDown->addFrame(sf::IntRect(100, 0, 50, 50));
@@ -23,7 +25,7 @@ void NPC::load(const NPCData& data) {
 	addAnimation(GameObjectState::Walking_down, walkingAnimationDown);
 
 	Animation* walkingAnimationLeft = new Animation(sf::seconds(0.15f));
-	walkingAnimationLeft->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationLeft->setSpriteSheet(tex);
 	walkingAnimationLeft->addFrame(sf::IntRect(0, 50, 50, 50));
 	walkingAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
 	walkingAnimationLeft->addFrame(sf::IntRect(100, 50, 50, 50));
@@ -32,7 +34,7 @@ void NPC::load(const NPCData& data) {
 	addAnimation(GameObjectState::Walking_left, walkingAnimationLeft);
 
 	Animation* walkingAnimationRight = new Animation(sf::seconds(0.15f));
-	walkingAnimationRight->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationRight->setSpriteSheet(tex);
 	walkingAnimationRight->addFrame(sf::IntRect(0, 100, 50, 50));
 	walkingAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
 	walkingAnimationRight->addFrame(sf::IntRect(100, 100, 50, 50));
@@ -41,7 +43,7 @@ void NPC::load(const NPCData& data) {
 	addAnimation(GameObjectState::Walking_right, walkingAnimationRight);
 
 	Animation* walkingAnimationUp = new Animation(sf::seconds(0.15f));
-	walkingAnimationUp->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	walkingAnimationUp->setSpriteSheet(tex);
 	walkingAnimationUp->addFrame(sf::IntRect(0, 150, 50, 50));
 	walkingAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
 	walkingAnimationUp->addFrame(sf::IntRect(100, 150, 50, 50));
@@ -50,25 +52,25 @@ void NPC::load(const NPCData& data) {
 	addAnimation(GameObjectState::Walking_up, walkingAnimationUp);
 
 	Animation* idleAnimationDown = new Animation();
-	idleAnimationDown->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationDown->setSpriteSheet(tex);
 	idleAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
 
 	addAnimation(GameObjectState::Idle_down, idleAnimationDown);
 
 	Animation* idleAnimationLeft = new Animation();
-	idleAnimationLeft->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationLeft->setSpriteSheet(tex);
 	idleAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
 
 	addAnimation(GameObjectState::Idle_left, idleAnimationLeft);
 
 	Animation* idleAnimationRight = new Animation();
-	idleAnimationRight->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationRight->setSpriteSheet(tex);
 	idleAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
 
 	addAnimation(GameObjectState::Idle_right, idleAnimationRight);
 
 	Animation* idleAnimationUp = new Animation();
-	idleAnimationUp->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetpath));
+	idleAnimationUp->setSpriteSheet(tex);
 	idleAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
 
 	addAnimation(GameObjectState::Idle_up, idleAnimationUp);

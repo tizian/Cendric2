@@ -1,6 +1,6 @@
 #include "GUI/SpellSlot.h"
-
 #include "ResourceManager.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -56,18 +56,18 @@ void SpellSlot::initSpellSlot() {
 	if (m_inputKey.getLocalBounds().width > SIZE - 10.f) m_inputKey.setCharacterSize(8);
 	m_inputKey.setColor(COLOR_WHITE);
 
-	m_borderTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell);
-	m_borderTextureSelected = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_selected);
+	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_SPELL);
+	m_borderTextureSelected = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_SPELL_SELECTED);
 
-	m_highlightTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_highlight);
+	m_highlightTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_HIGHLIGHT);
 
 	if (m_spellID != SpellID::VOID) {
 		m_iconTexture = m_isChopSlot ?
-			g_resourceManager->getTexture(ResourceID::Texture_items) :
-			g_resourceManager->getTexture(ResourceID::Texture_spellicons);
+			g_resourceManager->getTexture(GlobalResource::TEX_ITEMS) :
+			g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS);
 	}
 	else {
-		m_iconTexture = g_resourceManager->getTexture(ResourceID::Texture_spellicons);
+		m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS);
 	}
 
 	m_cooldownRect.
@@ -77,7 +77,7 @@ void SpellSlot::initSpellSlot() {
 	for (int i = 0; i < 4; ++i) {
 		sf::RectangleShape gem;
 		gem.setSize(sf::Vector2f(GEM_SIZE, GEM_SIZE));
-		gem.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_spell_gem));
+		gem.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_SPELL_GEM));
 		m_gems.push_back(gem);
 	}
 

@@ -14,6 +14,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 private:
+	std::string getSpritePath() const override;
 	void loadSpells();
 	void executeSpells();
 

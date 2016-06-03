@@ -26,6 +26,7 @@ public:
 	void setStrength(int strength);
 
 private:
+	std::string getSpritePath() const override;
 	int m_objectID = -1;
 	int m_strength = 0;
 	// lootable items 

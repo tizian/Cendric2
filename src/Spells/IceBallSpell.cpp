@@ -8,7 +8,7 @@ void IceBallSpell::load(const SpellData& data, LevelMovableGameObject* mob, cons
 	setBoundingBox(sf::FloatRect(0, 0, 10, 10));
 
 	Animation* spellAnimation = new Animation();
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_iceball));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, 0, 30, 30));
 	spellAnimation->addFrame(sf::IntRect(30, 0, 30, 30));
 

@@ -6,7 +6,6 @@ MapMainCharacter::MapMainCharacter(Map* map) : MapMovableGameObject(map) {
 }
 
 MapMainCharacter::~MapMainCharacter() {
-	g_resourceManager->deleteResource(ResourceID::Texture_mapMainChar);
 }
 
 void MapMainCharacter::setCharacterCore(CharacterCore* core) {
@@ -82,12 +81,14 @@ void MapMainCharacter::handleInput() {
 }
 
 void MapMainCharacter::load() {
+	g_resourceManager->loadTexture(getSpritePath(), ResourceType::Map);
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	m_isAlwaysUpdate = true;
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 18.f, 15.f));
 	setSpriteOffset(sf::Vector2f(-16.f, -35.f));
 
 	Animation* walkingAnimationDown = new Animation(sf::seconds(0.15f));
-	walkingAnimationDown->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	walkingAnimationDown->setSpriteSheet(tex);
 	walkingAnimationDown->addFrame(sf::IntRect(0, 0, 50, 50));
 	walkingAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
 	walkingAnimationDown->addFrame(sf::IntRect(100, 0, 50, 50));
@@ -96,7 +97,7 @@ void MapMainCharacter::load() {
 	addAnimation(GameObjectState::Walking_down, walkingAnimationDown);
 
 	Animation* walkingAnimationLeft = new Animation(sf::seconds(0.15f));
-	walkingAnimationLeft->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	walkingAnimationLeft->setSpriteSheet(tex);
 	walkingAnimationLeft->addFrame(sf::IntRect(0, 50, 50, 50));
 	walkingAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
 	walkingAnimationLeft->addFrame(sf::IntRect(100, 50, 50, 50));
@@ -105,7 +106,7 @@ void MapMainCharacter::load() {
 	addAnimation(GameObjectState::Walking_left, walkingAnimationLeft);
 
 	Animation* walkingAnimationRight = new Animation(sf::seconds(0.15f));
-	walkingAnimationRight->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	walkingAnimationRight->setSpriteSheet(tex);
 	walkingAnimationRight->addFrame(sf::IntRect(0, 100, 50, 50));
 	walkingAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
 	walkingAnimationRight->addFrame(sf::IntRect(100, 100, 50, 50));
@@ -114,7 +115,7 @@ void MapMainCharacter::load() {
 	addAnimation(GameObjectState::Walking_right, walkingAnimationRight);
 
 	Animation* walkingAnimationUp = new Animation(sf::seconds(0.15f));
-	walkingAnimationUp->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	walkingAnimationUp->setSpriteSheet(tex);
 	walkingAnimationUp->addFrame(sf::IntRect(0, 150, 50, 50));
 	walkingAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
 	walkingAnimationUp->addFrame(sf::IntRect(100, 150, 50, 50));
@@ -123,25 +124,25 @@ void MapMainCharacter::load() {
 	addAnimation(GameObjectState::Walking_up, walkingAnimationUp);
 
 	Animation* idleAnimationDown = new Animation();
-	idleAnimationDown->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	idleAnimationDown->setSpriteSheet(tex);
 	idleAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
 
 	addAnimation(GameObjectState::Idle_down, idleAnimationDown);
 
 	Animation* idleAnimationLeft = new Animation();
-	idleAnimationLeft->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	idleAnimationLeft->setSpriteSheet(tex);
 	idleAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
 
 	addAnimation(GameObjectState::Idle_left, idleAnimationLeft);
 
 	Animation* idleAnimationRight = new Animation();
-	idleAnimationRight->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	idleAnimationRight->setSpriteSheet(tex);
 	idleAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
 
 	addAnimation(GameObjectState::Idle_right, idleAnimationRight);
 
 	Animation* idleAnimationUp = new Animation();
-	idleAnimationUp->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mapMainChar));
+	idleAnimationUp->setSpriteSheet(tex);
 	idleAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
 
 	addAnimation(GameObjectState::Idle_up, idleAnimationUp);
@@ -184,4 +185,8 @@ float MapMainCharacter::getConfiguredMaxVelocityX() const {
 
 GameObjectType MapMainCharacter::getConfiguredType() const {
 	return GameObjectType::_MapMovableGameObject;
+}
+
+std::string MapMainCharacter::getSpritePath() const {
+	return "res/assets/cendric/spritesheet_cendric_map.png";
 }

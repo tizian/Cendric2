@@ -3,9 +3,10 @@
 
 void FireBallSpell::init(const SpellData& data) {
 	setSpriteOffset(sf::Vector2f(-20.f, -20.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(data.spritesheetPath);
 
 	Animation* spellAnimation = new Animation();
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_fireball));
+	spellAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
 		spellAnimation->addFrame(sf::IntRect(i * 50, data.skinNr * 50, 50, 50));
 	}
@@ -23,7 +24,7 @@ void FireBallSpell::load(const SpellData& data, LevelMovableGameObject* mob, con
 
 	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 80.f, 0.8f);
 	addComponent(new LightComponent(lightData, this));
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_spell_fireball);
+	g_resourceManager->playSound(m_sound, data.soundPath);
 }
 
 void FireBallSpell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector2f& target) {
@@ -32,7 +33,7 @@ void FireBallSpell::load(const SpellData& data, LevelDynamicTile* tile, const sf
 
 	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 80.f, 0.8f);
 	addComponent(new LightComponent(lightData, this));
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_spell_fireball);
+	g_resourceManager->playSound(m_sound, data.soundPath);
 }
 
 void FireBallSpell::setDisposed() {

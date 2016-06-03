@@ -4,6 +4,7 @@
 #include "GUI/SlicedSprite.h"
 #include "CharacterCore.h"
 #include "Screens/MapScreen.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -28,14 +29,14 @@ const float CookingWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COU
 
 CookingWindow::CookingWindow(MapScreen* screen) : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT) , GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_screen = screen;
-	m_cookingSprite = sf::Sprite(*(g_resourceManager->getTexture(ResourceID::Texture_misc_cooking)));
+	m_cookingSprite = sf::Sprite(*(g_resourceManager->getTexture(GlobalResource::TEX_COOKING)));
 	m_title.setString(g_textProvider->getText("Fireplace"));
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setColor(COLOR_LIGHT_PURPLE);
 	
 	setPosition(getPosition());
 
-	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP));
 
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT);
@@ -54,7 +55,6 @@ void CookingWindow::setPosition(const sf::Vector2f& pos) {
 }
 
 CookingWindow::~CookingWindow() {
-	g_resourceManager->deleteResource(ResourceID::Texture_misc_cooking);
 }
 
 void CookingWindow::reload() {
@@ -122,7 +122,7 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 	if (oldOption != m_chosenOption) {
 		m_options[oldOption].deselect();
 		m_options[m_chosenOption].select();
-		g_resourceManager->playSound(m_sound, ResourceID::Sound_gui_menucursor, true);
+		g_resourceManager->playSound(m_sound, GlobalResource::SOUND_GUI_MENUCURSOR, true);
 	}
 
 	calculateEntryPositions();

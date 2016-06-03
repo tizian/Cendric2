@@ -3,7 +3,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Logger.h"
-#include "Enums/ResourceID.h"
 
 enum class FluidTileType {
 	VOID,
@@ -24,7 +23,7 @@ struct FluidTileData {
 	sf::Color color;
 	bool isDeadly;
 	bool isFreezable;
-	ResourceID sound;
+	std::string soundPath;
 
 	static FluidTileData getData(int skinNr);
 };
@@ -40,7 +39,7 @@ const FluidTileData WATER
 	sf::Color(20, 50, 100, 128),
 	false,
 	true,
-	ResourceID::Sound_tile_water
+	"res/sound/tile/water_splash.ogg"
 };
 
 const FluidTileData LAVA
@@ -54,7 +53,7 @@ const FluidTileData LAVA
 	sf::Color(245, 69, 10, 128),
 	true,
 	false,
-	ResourceID::VOID
+	""
 };
 
 const FluidTileData SHALLOW_WATER
@@ -68,5 +67,5 @@ const FluidTileData SHALLOW_WATER
 	sf::Color(20, 50, 100, 128),
 	false,
 	false,
-	ResourceID::Sound_tile_water
+	"res/sound/tile/water_splash.ogg"
 };

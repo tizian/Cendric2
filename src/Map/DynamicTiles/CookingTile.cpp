@@ -30,9 +30,9 @@ void CookingTile::init() {
 
 void CookingTile::loadAnimation(int skinNr) {
 	int textureHeight = 2 * TILE_SIZE;
-
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	Animation* burningAnimation = new Animation(sf::seconds(0.15f));
-	burningAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_cooking));
+	burningAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
 		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
 	}
@@ -56,4 +56,8 @@ void CookingTile::onRightClick() {
 	else {
 		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
+}
+
+std::string CookingTile::getSpritePath() const {
+	return "res/assets/map_dynamic_tiles/spritesheet_tiles_cooking.png";
 }

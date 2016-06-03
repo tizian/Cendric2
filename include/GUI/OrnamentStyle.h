@@ -1,6 +1,7 @@
 #pragma once
 
 #include "global.h"
+#include "GlobalResource.h"
 
 enum class GUIOrnamentStyle {
 	NONE,
@@ -11,15 +12,15 @@ enum class GUIOrnamentStyle {
 
 inline sf::Texture *getOrnamentStyleTexture(GUIOrnamentStyle style) {
 	if (style == GUIOrnamentStyle::SMALL) {
-		return g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_small);
+		return g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_SMALL);
 	}
 	else if (style == GUIOrnamentStyle::MEDIUM) {
-		return g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_medium);
+		return g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_MEDIUM);
 	}
 	else if (style == GUIOrnamentStyle::LARGE) {
-		return g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_large);
+		return g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_LARGE);
 	}
 	else {
-		return g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none);
+		return g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE);
 	}
 }

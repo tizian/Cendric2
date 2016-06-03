@@ -68,7 +68,7 @@ void WolfEnemy::handleAttackInput() {
 }
 
 void WolfEnemy::loadAnimation() {
-	sf::Texture* tex = g_resourceManager->getTexture(ResourceID::Texture_enemy_wolf);
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 106.f, 55.f));
 	setSpriteOffset(sf::Vector2f(-17.f, -45.f));
 
@@ -157,5 +157,9 @@ AttackingBehavior* WolfEnemy::createAttackingBehavior(bool asAlly) {
 
 int WolfEnemy::getMentalStrength() const {
 	return 2;
+}
+
+std::string WolfEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_wolf.png";
 }
 

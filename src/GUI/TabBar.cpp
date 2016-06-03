@@ -1,4 +1,5 @@
 #include "GUI/TabBar.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ TabBar::TabBar(const sf::FloatRect& box, int numberTabs) {
 	m_activeTabIndex = 0;
 	m_tabButtons[0]->setActive(true);
 
-	m_activeOverlay = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_tab_active), COLOR_WHITE, tabWidth, box.height);
+	m_activeOverlay = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ACTIVE), COLOR_WHITE, tabWidth, box.height);
 	m_activeOverlay.setPosition(sf::Vector2f(box.left, box.top));
 }
 

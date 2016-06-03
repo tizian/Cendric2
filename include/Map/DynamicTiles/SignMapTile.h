@@ -23,6 +23,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 private:
+	std::string getSpritePath() const override;
 	void onInteract();
 
 private:

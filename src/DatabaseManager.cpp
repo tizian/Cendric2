@@ -15,6 +15,10 @@
 
 DatabaseManager *g_databaseManager;
 
+DatabaseManager::DatabaseManager() {
+	init();
+}
+
 DatabaseManager::~DatabaseManager() {
 	if (m_db != nullptr)
 		sqlite3_close(m_db);

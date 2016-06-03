@@ -21,7 +21,7 @@ void BoomerangSpell::init(const SpellData& data) {
 	setSpriteOffset(sf::Vector2f(-30.f, -5.f));
 
 	Animation* spellAnimation = new Animation();
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_boomerang));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 30, 90, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);

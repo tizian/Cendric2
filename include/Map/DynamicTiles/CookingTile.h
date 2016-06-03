@@ -13,6 +13,7 @@ public:
 	void onRightClick() override;
 
 private:
+	std::string getSpritePath() const override;
 	static const float RANGE;
 	void startCooking();
 };

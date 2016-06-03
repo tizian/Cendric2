@@ -13,6 +13,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 private:
+	std::string getSpritePath() const override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
 	const float GRAVITY_ACCELERATION = 1000.f;

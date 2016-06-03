@@ -1,4 +1,5 @@
 #include "Spells/IcyAmbushSpell.h"
+#include "GlobalResource.h"
 
 IcyAmbushSpell::IcyAmbushSpell(int strength) : Spell() {
 	m_strength = strength;
@@ -8,7 +9,7 @@ void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_icyambush));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, 0, 40, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
@@ -55,7 +56,7 @@ void IcyAmbushSpell::execOnHit(LevelMovableGameObject *target) {
 }
 
 void IcyAmbushSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(ResourceID::Texture_Particle_snowflake)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(500, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SNOWFLAKE)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 500.0f / 5.0f;
 

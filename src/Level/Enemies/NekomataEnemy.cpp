@@ -5,6 +5,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
+#include "GlobalResource.h"
 
 REGISTER_ENEMY(EnemyID::Nekomata, NekomataEnemy)
 
@@ -115,9 +116,10 @@ void NekomataEnemy::handleAttackInput() {
 void NekomataEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 90.f, 60.f));
 	setSpriteOffset(sf::Vector2f(-20.f, -10.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
-	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata));
+	walkingAnimation->setSpriteSheet(tex);
 
 	for (int i = 0; i < 12; i++) {
 		walkingAnimation->addFrame(sf::IntRect(0, i * 70, 130, 70));
@@ -127,7 +129,7 @@ void NekomataEnemy::loadAnimation() {
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setLooped(false);
-	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata));
+	jumpingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; i++) {
 		jumpingAnimation->addFrame(sf::IntRect(130, i * 70, 130, 70));
 	}
@@ -135,13 +137,13 @@ void NekomataEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(260, 0, 130, 70));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.06f));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata));
+	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; i++) {
 		fightingAnimation->addFrame(sf::IntRect(390, i * 70, 130, 70));
 	}
@@ -149,7 +151,7 @@ void NekomataEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_nekomata));
+	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(520, 0, 130, 70));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -176,9 +178,8 @@ void NekomataEnemy::render(sf::RenderTarget& target) {
 	m_ps->render(target);
 }
 
-
 void NekomataEnemy::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(80, g_resourceManager->getTexture(ResourceID::Texture_Particle_smoke)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(80, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 40.f;
 
@@ -220,5 +221,9 @@ void NekomataEnemy::loadParticleSystem() {
 void NekomataEnemy::updateParticleSystemPosition() {
 	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
 	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+}
+
+std::string NekomataEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_nekomata.png";
 }
 

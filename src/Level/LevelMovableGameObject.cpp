@@ -78,7 +78,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 	if (m_timeSinceRegeneration >= sf::seconds(1)) {
 		m_timeSinceRegeneration -= sf::seconds(1);
 		m_attributes.currentHealthPoints += m_attributes.healthRegenerationPerS;
-		
+
 		if (m_damageNumbers) {
 			const sf::Vector2f& pos = getPosition();
 			const sf::Vector2f& size = getSize();
@@ -91,7 +91,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 				m_damageNumbers->emitNumber(std::abs(m_attributes.healthRegenerationPerS), numberPos, DamageNumberType::DamageOverTime);
 			}
 		}
-		
+
 
 		if (m_attributes.currentHealthPoints > m_attributes.maxHealthPoints) {
 			m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
@@ -151,7 +151,7 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool 
 		const sf::Vector2f& size = getSize();
 		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
 	}
-	
+
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
 	if (m_attributes.currentHealthPoints == 0) {
 		setDead();
@@ -207,7 +207,7 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 	}
 }
 
-void LevelMovableGameObject::setDead() { 
+void LevelMovableGameObject::setDead() {
 	if (m_isImmortal) return;
 	// dispose the spells that this mob is an owner of and that are attached to it
 	// that's how magic works, I guess?
@@ -220,6 +220,7 @@ void LevelMovableGameObject::setDead() {
 	}
 	m_attributes.currentHealthPoints = 0;
 	m_isDead = true;
+	g_resourceManager->playSound(m_deathSound, getDeathSoundPath(), true);
 }
 
 void LevelMovableGameObject::setFightAnimation(const sf::Time& animationTime, GameObjectState fightAnimation, bool isBlocking) {
@@ -262,6 +263,10 @@ bool LevelMovableGameObject::isReady() const {
 	return m_movingBehavior->isReady();
 }
 
+void LevelMovableGameObject::setReady() {
+	m_movingBehavior->setReady();
+}
+
 void LevelMovableGameObject::loadBehavior() {
 	delete m_attackingBehavior;
 	m_attackingBehavior = createAttackingBehavior();
@@ -270,8 +275,9 @@ void LevelMovableGameObject::loadBehavior() {
 	m_movingBehavior = createMovingBehavior();
 }
 
-void LevelMovableGameObject::setReady() {
-	m_movingBehavior->setReady();
+void LevelMovableGameObject::loadResources() {
+	g_resourceManager->loadTexture(getSpritePath(), ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(getDeathSoundPath(), ResourceType::Level);
 }
 
 void LevelMovableGameObject::flipGravity() {

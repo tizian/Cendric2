@@ -18,5 +18,5 @@ public:
 private:
 	sf::Sprite m_screenSprite;
 	BitmapText m_errorText;
-	ResourceID m_screenResource;
+	std::string m_screenResource;
 };

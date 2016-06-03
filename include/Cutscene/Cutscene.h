@@ -26,7 +26,6 @@ private:
 	CutsceneData m_data;
 	BitmapText m_cutsceneText;
 	std::vector<sf::Sprite> m_cutsceneImages;
-	std::vector<std::string> m_imagePaths;
 
 	sf::Time m_currentTextTime = sf::Time::Zero;
 	sf::Time m_fadeTime;

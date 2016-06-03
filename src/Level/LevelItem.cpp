@@ -3,6 +3,7 @@
 #include "Screens/LevelScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GlobalResource.h"
 
 LevelItem::LevelItem(LevelScreen* screen) : AnimatedGameObject() {
 	m_screen = screen;
@@ -22,7 +23,7 @@ void LevelItem::load(const Item& item, const sf::Vector2f& position) {
 	Animation* idleAnimation = new Animation(item.getLevelitemBean().frame_time);
 	setSpriteOffset(item.getLevelitemBean().sprite_offset);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, item.getLevelitemBean().bounding_box.x, item.getLevelitemBean().bounding_box.y));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_levelitems));
+	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_LEVELITEMS));
 	// add frames
 	for (auto& frame : item.getFrames()) {
 		idleAnimation->addFrame(frame.texture_location);

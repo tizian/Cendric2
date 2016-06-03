@@ -98,9 +98,10 @@ sf::Time CrowEnemy::getConfiguredChasingTime() const {
 void CrowEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* flyingAnimation = new Animation();
-	flyingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	flyingAnimation->setSpriteSheet(tex);
 	flyingAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
 	flyingAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
 	flyingAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
@@ -109,7 +110,7 @@ void CrowEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
 	idleAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
 	idleAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
@@ -118,7 +119,7 @@ void CrowEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation();
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	fightingAnimation->setSpriteSheet(tex);
 	fightingAnimation->addFrame(sf::IntRect(0, 64, 70, 64));
 	fightingAnimation->addFrame(sf::IntRect(70, 64, 70, 64));
 	fightingAnimation->addFrame(sf::IntRect(140, 64, 70, 64));
@@ -126,7 +127,7 @@ void CrowEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_crow));
+	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(0, 128, 70, 64));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -134,5 +135,9 @@ void CrowEnemy::loadAnimation() {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+}
+
+std::string CrowEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_crow.png";
 }
 

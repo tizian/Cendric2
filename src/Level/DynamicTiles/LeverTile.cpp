@@ -20,9 +20,10 @@ void LeverTile::init() {
 }
 
 void LeverTile::loadAnimation(int skinNr) {
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* onAnimation = new Animation(sf::seconds(10.0f));
-	onAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_lever));
+	onAnimation->setSpriteSheet(tex);
 	onAnimation->addFrame(sf::IntRect(
 		BORDER,
 		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
@@ -32,7 +33,7 @@ void LeverTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::On, onAnimation);
 
 	Animation* offAnimation = new Animation(sf::seconds(10.0f));
-	offAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_lever));
+	offAnimation->setSpriteSheet(tex);
 	offAnimation->addFrame(sf::IntRect(
 		BORDER + (2 * BORDER + TILE_SIZE),
 		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
@@ -85,9 +86,17 @@ void LeverTile::switchLever() {
 		setState(GameObjectState::Off) : 
 		setState(GameObjectState::On);
 
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_lever);
+	g_resourceManager->playSound(m_sound, getSoundPath());
 
 	for (auto& tile : m_dependentTiles) {
 		tile->switchTile();
 	}
+}
+
+std::string LeverTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_lever.png";
+}
+
+std::string LeverTile::getSoundPath() const {
+	return "res/sound/tile/lever_click.ogg";
 }

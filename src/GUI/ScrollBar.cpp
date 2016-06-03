@@ -1,5 +1,5 @@
 #include "GUI/ScrollBar.h"
-
+#include "GlobalResource.h"
 #include "GUI/Window.h"
 
 using namespace std;
@@ -16,7 +16,7 @@ ScrollBar::ScrollBar(float height, const Window* window) : GameObject() {
 	m_background.setSize(sf::Vector2f(WIDTH - 4.f, height - 4.f));
 	m_background.setFillColor(COLOR_TRANS_BLACK);
 
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, WIDTH, height);
+	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, WIDTH, height);
 
 	setBoundingBox(m_background.getGlobalBounds());
 	setInputInDefaultView(true);
@@ -188,7 +188,7 @@ const float ScrollBarKnob::HEIGHT = 30.f;
 
 ScrollBarKnob::ScrollBarKnob() : GameObject() {
 	m_knob.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_knob));
+	m_knob.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_KNOB));
 
 	setBoundingBox(m_knob.getLocalBounds());
 	setInputInDefaultView(true);

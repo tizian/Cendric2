@@ -6,6 +6,7 @@ InputController* g_inputController;
 InputController::InputController() {
 	m_mainKeyMap = &(g_resourceManager->getConfiguration().mainKeyMap);
 	m_alternativeKeyMap = &(g_resourceManager->getConfiguration().alternativeKeyMap);
+	init();
 }
 
 InputController::~InputController() {

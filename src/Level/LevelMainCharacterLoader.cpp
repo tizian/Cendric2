@@ -76,6 +76,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 		}
 
 		if (!equipment.texturePath.empty()) {
+			g_resourceManager->loadTexture(equipment.texturePath, ResourceType::Level);
 			for (auto& ani : equipment.texturePositions) {
 				Animation* animation = new Animation();
 				if (ani.first == GameObjectState::Fighting) {

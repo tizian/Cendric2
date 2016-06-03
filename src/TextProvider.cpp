@@ -7,6 +7,10 @@ using namespace std;
 
 TextProvider* g_textProvider;
 
+TextProvider::TextProvider() {
+	reload();
+}
+
 void TextProvider::reload() {
 	setLanguage(g_resourceManager->getConfiguration().language);
 }

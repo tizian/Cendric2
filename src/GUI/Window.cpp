@@ -1,4 +1,5 @@
 #include "GUI/Window.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ Window::Window(const sf::FloatRect& box, GUIOrnamentStyle style, const sf::Color
 void Window::init(const sf::FloatRect& box, GUIOrnamentStyle style) {
 	setBoundingBox(box);
 
-	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backColor, box.width, box.height);
+	m_backLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backColor, box.width, box.height);
 	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentColor, box.width, box.height);
 
 	setPosition(sf::Vector2f(box.left, box.top));
@@ -34,7 +35,7 @@ Window::~Window() {
 
 void Window::addCloseButton(const std::function<void()>& agent) {
 	m_closeButton = new Button(sf::FloatRect(0.f, 0.f, 33.f, 33.f), GUIOrnamentStyle::NONE);
-	m_closeButton->setOrnamentLayerTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_window_close_button));
+	m_closeButton->setOrnamentLayerTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_WINDOW_CLOSE_BUTTON));
 	m_closeButton->setOnClick(agent);
 	updateCloseButton();
 }

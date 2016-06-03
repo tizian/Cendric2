@@ -55,9 +55,10 @@ void SkeletonEnemy::handleAttackInput() {
 void SkeletonEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 135.f));
 	setSpriteOffset(sf::Vector2f(-35.f, -15.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
-	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
 		walkingAnimation->addFrame(sf::IntRect(i * 150, 0, 150, 150));
 	}
@@ -65,19 +66,19 @@ void SkeletonEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* jumpingAnimation = new Animation();
-	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(0, 0, 150, 150));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, 150, 150, 150));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.05f));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
 		fightingAnimation->addFrame(sf::IntRect(i * 150, 300, 150, 150));
 	}
@@ -85,7 +86,7 @@ void SkeletonEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_skeleton));
+	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 2; i++) {
 		deadAnimation->addFrame(sf::IntRect(i * 150, 450, 150, 150));
 	}
@@ -129,5 +130,9 @@ AttackingBehavior* SkeletonEnemy::createAttackingBehavior(bool asAlly) {
 
 int SkeletonEnemy::getMentalStrength() const {
 	return 2;
+}
+
+std::string SkeletonEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_skeleton.png";
 }
 

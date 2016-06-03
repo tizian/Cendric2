@@ -8,7 +8,7 @@ void ShadowTrapSpell::load(const SpellData& bean, LevelMovableGameObject* mob, c
 	m_stunDuration = sf::seconds(2.f);
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_shadowtrap));
+	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
 	spellAnimation->addFrame(sf::IntRect(0, 0, 45, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);

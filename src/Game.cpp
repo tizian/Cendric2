@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Misc/icon.h"
+#include "GlobalResource.h"
 
 sf::RenderWindow* g_renderWindow;
 
@@ -10,7 +11,7 @@ Game::Game() {
 	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
 	
-	m_cursor.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor));
+	m_cursor.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
 	
 	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
 	g_renderWindow = &m_mainWindow;

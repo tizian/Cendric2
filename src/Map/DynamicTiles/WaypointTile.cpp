@@ -18,9 +18,9 @@ void WaypointTile::init() {
 }
 
 void WaypointTile::loadAnimation(int skinNr) {
-
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	Animation* activeAnimation = new Animation();
-	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_waypoint));
+	activeAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 5; ++i) {
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
@@ -31,7 +31,7 @@ void WaypointTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Active, activeAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_waypoint));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(250, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -47,7 +47,7 @@ void WaypointTile::update(const sf::Time& frameTime) {
 	if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
 		m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition);
 		m_screen->setTooltipText("WaypointActivated", COLOR_GOOD, true);
-		g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_waypoint);
+		g_resourceManager->playSound(m_sound, getSoundPath());
 		setActive();
 	}
 }
@@ -66,7 +66,7 @@ void WaypointTile::onRightClick() {
 		getPosition().x + TILE_SIZE_F * 0.5f - bb.width * 0.5f,
 		getPosition().y - bb.height + TILE_SIZE_F * 0.5f
 		));
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_tile_waypoint, true);
+	g_resourceManager->playSound(m_sound, getSoundPath(), true);
 }
 
 void WaypointTile::setActive() {
@@ -79,5 +79,13 @@ void WaypointTile::setActive() {
 
 void WaypointTile::setSpawnPosition(int spawnPosition) {
 	m_spawnPosition = spawnPosition;
+}
+
+std::string WaypointTile::getSpritePath() const {
+	return "res/assets/map_dynamic_tiles/spritesheet_tiles_waypoint.png";
+}
+
+std::string WaypointTile::getSoundPath() const {
+	return GlobalResource::SOUND_TELEPORT;
 }
 

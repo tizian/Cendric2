@@ -7,11 +7,6 @@ LevelEquipment::LevelEquipment(LevelMainCharacter* mainChar) : AnimatedGameObjec
 	m_screen = mainChar->getScreen();
 }
 
-LevelEquipment::~LevelEquipment() {
-	if (m_hasTexture)
-		g_resourceManager->deleteResource(m_texturePath);
-}
-
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const {
 	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
 	sf::Vector2f offset(-60.f, -30.f);

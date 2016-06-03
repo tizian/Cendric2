@@ -2,6 +2,7 @@
 #include "Screens/OptionsScreen.h"
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
+#include "GlobalResource.h"
 
 const float KeyBindingsScreen::WINDOW_MARGIN = 6.f;
 
@@ -159,7 +160,7 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
 
 	reload();
 
-	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, WIDTH, HEIGHT);
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, WIDTH, HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT, TOP));
 
 	m_scrollBar = new ScrollBar(HEIGHT);

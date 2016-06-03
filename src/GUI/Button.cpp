@@ -1,4 +1,5 @@
 #include "GUI/Button.h"
+#include "GlobalResource.h"
 
 Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	GameObject(),
@@ -10,9 +11,9 @@ Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	setBoundingBox(box);
 	setInputInDefaultView(true);
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_mainLayerColor, box.width, box.height);
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_mainLayerColor, box.width, box.height);
 
-	m_backLayer = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_rounded_rectangle), m_backLayerColor, box.width, box.height);
+	m_backLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backLayerColor, box.width, box.height);
 	m_backLayerOffset = sf::Vector2f(0, 2);
 
 	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentLayerColor, box.width, box.height);

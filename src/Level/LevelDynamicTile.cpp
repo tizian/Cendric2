@@ -58,3 +58,8 @@ const Level* LevelDynamicTile::getLevel() const {
 void LevelDynamicTile::onHit(LevelMovableGameObject* mob) {
 	// nop
 }
+
+void LevelDynamicTile::loadResources() {
+	g_resourceManager->loadTexture(getSpritePath(), ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(getSoundPath(), ResourceType::Level);
+}

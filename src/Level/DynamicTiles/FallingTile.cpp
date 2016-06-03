@@ -19,9 +19,10 @@ void FallingTile::init() {
 
 void FallingTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_falling));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -127,6 +128,10 @@ void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		setVelocityY(0.f);
 		setPositionY(rec.safeTop);
 	}
+}
+
+std::string FallingTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_falling.png";
 }
 
 

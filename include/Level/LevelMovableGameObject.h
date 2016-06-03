@@ -71,6 +71,8 @@ public:
 	float getConfiguredMaxVelocityYUp() const override;
 
 protected:
+	// loads resources (textures, sound) for this mob
+	virtual void loadResources();
 	// loads the behavior, deleting potential old ones.
 	virtual void loadBehavior();
 
@@ -106,4 +108,11 @@ protected:
 	// attributes, include regeneration (hp) and all buffs & dots.
 	void updateAttributes(const sf::Time& frameTime);
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
+
+	// the sprite path of this mob, used for resource loading
+	// can be empty if the mob has no sprite.
+	virtual std::string getSpritePath() const { return ""; }
+	virtual std::string getDeathSoundPath() const { return ""; }
+
+	sf::Sound m_deathSound;
 };

@@ -1,6 +1,7 @@
 #include "Spells/RaiseTheDeadSpell.h"
 #include "Level/Enemy.h"
 #include "ObjectFactory.h"
+#include "GlobalResource.h"
 
 RaiseTheDeadSpell::RaiseTheDeadSpell(int strength) : Spell() {
 	m_strength = strength;
@@ -62,7 +63,7 @@ void RaiseTheDeadSpell::render(sf::RenderTarget& target) {
 }
 
 void RaiseTheDeadSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(ResourceID::Texture_Particle_blob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
 

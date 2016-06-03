@@ -3,6 +3,7 @@
 #include "GUI/GUIConstants.h"
 #include "Screens/WorldScreen.h"
 #include "Screens/MapScreen.h"
+#include "GlobalResource.h"
 
 float MARGIN = 10.f;
 float YOFFSET = 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - 7 * InventorySlot::SIZE - 6 * MARGIN);
@@ -119,7 +120,7 @@ bool InventoryEquipment::requiresReload() {
 void InventoryEquipment::reload() {
 	m_slots.clear();
 
-	const sf::Texture* tex = g_resourceManager->getTexture(ResourceID::Texture_equipmentplaceholders);
+	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS);
 
 	std::vector<ItemType> types;
 	types.push_back(ItemType::Equipment_weapon);

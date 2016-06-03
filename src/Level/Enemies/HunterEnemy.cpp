@@ -52,9 +52,10 @@ void HunterEnemy::handleAttackInput() {
 void HunterEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 95.f));
 	setSpriteOffset(sf::Vector2f(-30.f, -25.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
-	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_hunter));
+	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
 		walkingAnimation->addFrame(sf::IntRect(i * 100, 0, 100, 120));
 	}
@@ -62,19 +63,19 @@ void HunterEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_hunter));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
-	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_hunter));
+	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(900, 0, 100, 120));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_hunter));
+	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 14; ++i) {
 		fightingAnimation->addFrame(sf::IntRect(i * 100, 0, 100, 120));
 	}
@@ -82,7 +83,7 @@ void HunterEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_hunter));
+	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(1400, 0, 100, 120));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -117,4 +118,8 @@ AttackingBehavior* HunterEnemy::createAttackingBehavior(bool asAlly) {
 
 int HunterEnemy::getMentalStrength() const {
 	return 4;
+}
+
+std::string HunterEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_hunter.png";
 }

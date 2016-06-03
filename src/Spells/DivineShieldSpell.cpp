@@ -7,9 +7,10 @@ DivineShieldSpell::DivineShieldSpell(const AttributeData& additionalResistance) 
 
 void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-12.f, -12.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(bean.spritesheetPath);
 
 	Animation* spellAnimation = new Animation();
-	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_divineshield));
+	spellAnimation->setSpriteSheet(tex);
 
 	for (int i = 0; i < 8; i++) {
 		spellAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 120));

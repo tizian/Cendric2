@@ -2,6 +2,7 @@
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
 #include "FileIO/CharacterCoreReader.h"
+#include "GlobalResource.h"
 
 #include <sstream>
 
@@ -29,7 +30,7 @@ inline bool ends_with(std::string const & value, std::string const & ending) {
 }
 
 SaveGameWindow::SaveGameWindow() {
-	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_ornament_none), COLOR_WHITE, WIDTH, HEIGHT);
+	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, WIDTH, HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT, TOP));
 
 	// init empty text
@@ -143,7 +144,7 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 	if (oldEntry != m_chosenEntry) {
 		m_entries[oldEntry].deselect();
 		m_entries[m_chosenEntry].select();
-		g_resourceManager->playSound(m_sound, ResourceID::Sound_gui_menucursor, true);
+		g_resourceManager->playSound(m_sound, GlobalResource::SOUND_GUI_MENUCURSOR, true);
 	}
 	if (g_inputController->isSelected()) {
 		m_isChosen = true;

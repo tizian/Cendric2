@@ -9,4 +9,7 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
+
+private:
+	std::string getSpritePath() const override;
 };

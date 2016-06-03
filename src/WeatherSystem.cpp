@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Particles/ParticleGenerator.h"
 #include "Particles/ParticleUpdater.h"
+#include "GlobalResource.h"
 
 void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 	if (data == nullptr) return;
@@ -12,10 +13,10 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 	}
 
 	if (data->weather.compare("rain") == 0) {
-		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(ResourceID::Texture_Particle_rain));
+		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_RAIN));
 
 		m_ps->emitRate = 200.f;
-
+		
 		float minSize = 5.f;
 		float maxSize = 15.f;
 		if (isLevel) {
@@ -35,7 +36,7 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		velGen->maxStartVel = 500.f;
 	}
 	else if (data->weather.compare("snow") == 0) {
-		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(ResourceID::Texture_Particle_snow));
+		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SNOW));
 
 		m_ps->emitRate = 100.f;
 

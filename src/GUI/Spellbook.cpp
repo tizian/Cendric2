@@ -2,6 +2,7 @@
 #include "Map/MapInterface.h"
 #include "GUI/WeaponWindow.h"
 #include "GUI/SlotClone.h"
+#include "GlobalResource.h"
 
 float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
 float Spellbook::SPELL_OFFSET = 115.f;
@@ -308,22 +309,22 @@ void Spellbook::reload() {
 
 		for (int i = 0; i < nTabs; ++i) {
 			if (m_tabTypes[i] == SpellType::VOID) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_gems), sf::IntRect(50, 0, 50, 50));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GEMS), sf::IntRect(50, 0, 50, 50));
 			}
 			else if (m_tabTypes[i] == SpellType::Elemental) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_elemental), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_ELEMENTAL), sf::IntRect(50, 50, 400, 400));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_ELEMENTAL);
 			}
 			else if (m_tabTypes[i] == SpellType::Divine) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_divine), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_DIVINE), sf::IntRect(50, 50, 400, 400));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_DIVINE);
 			}
 			else if (m_tabTypes[i] == SpellType::Necromancy) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_necromancy), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_NECROMANCY), sf::IntRect(50, 50, 400, 400));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_NECROMANCY);
 			}
 			else if (m_tabTypes[i] == SpellType::Twilight) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_spell_color_twilight), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_TWILIGHT), sf::IntRect(50, 50, 400, 400));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_TWILIGHT);
 			}
 		}

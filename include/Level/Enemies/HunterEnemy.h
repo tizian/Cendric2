@@ -23,6 +23,7 @@ public:
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {}
 
 protected:
+	std::string getSpritePath() const override;
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 	void handleAttackInput();

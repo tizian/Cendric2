@@ -3,6 +3,7 @@
 #include "Screens/LevelScreen.h"
 #include "Level/LevelEquipment.h"
 #include "Level/MOBBehavior/MovingBehavior.h"
+#include "GlobalResource.h"
 
 const sf::Color GhostFormSpell::GHOST_COLOR = sf::Color(100, 200, 255, 150);
 
@@ -71,7 +72,7 @@ bool GhostFormSpell::getConfiguredRotateSprite() const {
 }
 
 void GhostFormSpell::loadParticleSystem(float startVelocity) {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(ResourceID::Texture_Particle_longblob)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LONGBLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
 
@@ -148,7 +149,7 @@ void GhostFormSpell::loadMask() {
 		else if (ani.first == GameObjectState::Jumping) {
 			animation->setFrameTime(sf::milliseconds(200));
 		}
-		animation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_spell_ghost));
+		animation->setSpriteSheet(g_resourceManager->getTexture(m_data.spritesheetPath));
 		for (auto& frame : ani.second) {
 			animation->addFrame(frame);
 		}

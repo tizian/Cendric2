@@ -3,6 +3,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
 #include "Level/DamageNumbers.h"
+#include "GlobalResource.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
@@ -10,13 +11,12 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 }
 
 LevelMainCharacter::~LevelMainCharacter() {
-	g_resourceManager->deleteResource(ResourceID::Texture_mainChar);
-	g_resourceManager->deleteResource(ResourceID::Sound_cendric_death);
 	m_spellKeyMap.clear();
 }
 
 void LevelMainCharacter::load() {
 	m_isAlwaysUpdate = true;
+	loadResources();
 	loadAnimation();
 	loadBehavior();
 
@@ -216,7 +216,6 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 void LevelMainCharacter::setDead() {
 	if (m_isDead) return;
 	LevelMovableGameObject::setDead();
-	g_resourceManager->playSound(m_sound, ResourceID::Sound_cendric_death, true);
 }
 
 void LevelMainCharacter::setQuickcast(bool quickcast) {
@@ -257,9 +256,10 @@ void LevelMainCharacter::addDamage(int damage, DamageType damageType, bool overT
 void LevelMainCharacter::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
+	sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
-	walkingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
 		walkingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 120));
 	}
@@ -267,19 +267,19 @@ void LevelMainCharacter::loadAnimation() {
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(640, 0, 80, 120));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
-	jumpingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(720, 0, 80, 120));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_mainChar));
+	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 14; ++i) {
 		fightingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 120));
 	}
@@ -298,6 +298,14 @@ void LevelMainCharacter::loadAnimation() {
 
 GameObjectType LevelMainCharacter::getConfiguredType() const {
 	return GameObjectType::_LevelMainCharacter;
+}
+
+std::string LevelMainCharacter::getSpritePath() const {
+	return "res/assets/cendric/spritesheet_cendric_level.png";
+}
+
+std::string LevelMainCharacter::getDeathSoundPath() const {
+	return "res/sound/mob/cendric_death.ogg";
 }
 
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const {
@@ -357,7 +365,7 @@ bool LevelMainCharacter::isAlly() const {
 }
 
 void LevelMainCharacter::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 100.f;
 

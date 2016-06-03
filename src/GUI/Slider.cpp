@@ -1,4 +1,5 @@
 #include "GUI/Slider.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -19,7 +20,7 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 	m_filler.setSize(sf::Vector2f(WIDTH, HEIGHT));
 	m_filler.setFillColor(COLOR_PURPLE);
 
-	m_border = SlicedSprite(g_resourceManager->getTexture(ResourceID::Texture_GUI_slider), COLOR_WHITE, 2.f * BORDER_OFFSET + WIDTH, 2.f * BORDER_OFFSET + HEIGHT);
+	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLIDER), COLOR_WHITE, 2.f * BORDER_OFFSET + WIDTH, 2.f * BORDER_OFFSET + HEIGHT);
 
 	m_minText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_minText.setString(to_string(m_minPosition));
@@ -189,7 +190,7 @@ const float SliderKnob::HEIGHT = 30.f;
 
 SliderKnob::SliderKnob() : GameObject() {
 	m_knob.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_knob.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_knob));
+	m_knob.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_KNOB));
 
 	setBoundingBox(m_knob.getLocalBounds());
 }

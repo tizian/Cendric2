@@ -4,6 +4,7 @@
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GlobalResource.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Modifier, ModifierTile)
 
@@ -25,13 +26,14 @@ void ModifierTile::loadAnimation(int skinNr) {
 	sf::IntRect rect = sf::IntRect((m_modifier.level - 1) * 50, 50, 50, 50);
 	m_animatedSprite.setColor(SpellModifier::getSpellModifierColor(m_modifier.type));
 
+	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_GEMS);
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_gems));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(rect);
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* activatedAnimation = new Animation(sf::seconds(10.f));
-	activatedAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_gems));
+	activatedAnimation->setSpriteSheet(tex);
 	activatedAnimation->addFrame(sf::IntRect()); // idle
 	addAnimation(GameObjectState::Active, activatedAnimation);
 
@@ -110,7 +112,7 @@ void ModifierTile::onHit(Spell* spell) {
 }
 
 void ModifierTile::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(ResourceID::Texture_Particle_star)));
+	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 100.f * m_modifier.level / 3.0f;
 

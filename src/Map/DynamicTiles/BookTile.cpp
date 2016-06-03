@@ -22,9 +22,9 @@ void BookTile::init() {
 }
 
 void BookTile::loadAnimation(int skinNr) {
-
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_book));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -51,3 +51,8 @@ void BookTile::onRightClick() {
 void BookTile::startReading() {
 	dynamic_cast<MapScreen*>(m_screen)->setBook(&m_data);
 }
+
+std::string BookTile::getSpritePath() const {
+	return "res/assets/map_dynamic_tiles/spritesheet_tiles_book.png";
+}
+

@@ -1,5 +1,6 @@
 #include "FileIO/ConfigurationReader.h"
-#include "ResourceManager.h"
+#include "GlobalResource.h"
+
 
 #include <cstring>
 
@@ -9,7 +10,7 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 	data = DEFAULT_CONFIGURATION;
 
 	string line;
-	ifstream configuration(g_resourceManager->getFilename(ResourceID::Configuration));
+	ifstream configuration(GlobalResource::CONFIGURATION_PATH);
 	bool noError = true;
 	if (configuration.is_open()) {
 		while (getline(configuration, line)) {

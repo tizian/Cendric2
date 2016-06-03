@@ -8,6 +8,8 @@
 
 class TextProvider {
 public:
+	TextProvider();
+
 	// this assumes a text of type "core"
 	std::string getText(const std::string& key);
 	std::string getText(const std::string& key, const std::string& type);

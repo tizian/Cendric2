@@ -10,6 +10,7 @@
 #include "GameObjectComponents/InteractComponent.h"
 #include "Enums/EnumNames.h"
 #include "Level/DamageNumbers.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level)
 
 	m_buffBar = new EnemyBuffBar(this);
 
-	sf::Texture* cursorTexture = g_resourceManager->getTexture(ResourceID::Texture_GUI_cursor);
+	sf::Texture* cursorTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR);
 	m_targetSprite.setTexture(*cursorTexture);
 	m_targetSprite.setOrigin(sf::Vector2f(0.5f * cursorTexture->getSize().x, 0.5f * cursorTexture->getSize().y));
 }
@@ -38,6 +39,7 @@ Enemy::~Enemy() {
 
 void Enemy::load(EnemyID id) {
 	m_id = id;
+	loadResources();
 	loadAnimation();
 	loadAttributes();
 	loadSpells();

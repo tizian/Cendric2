@@ -103,9 +103,10 @@ sf::Time WispEnemy::getConfiguredChasingTime() const {
 void WispEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 20.f, 20.f));
 	setSpriteOffset(sf::Vector2f(-30.f, -30.f));
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* flyingAnimation = new Animation();
-	flyingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_wisp));
+	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; i++) {
 		flyingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 80));
 	}
@@ -116,7 +117,7 @@ void WispEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
 	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_wisp));
+	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; i++) {
 		idleAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 80));
 	}
@@ -127,7 +128,7 @@ void WispEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation();
-	fightingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_wisp));
+	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; i++) {
 		fightingAnimation->addFrame(sf::IntRect(i * 80, 80, 80, 80));
 	}
@@ -135,7 +136,7 @@ void WispEnemy::loadAnimation() {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation(sf::seconds(0.2f));
-	deadAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_enemy_wisp));
+	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 2; i++) {
 		deadAnimation->addFrame(sf::IntRect(i * 80, 160, 80, 80));
 	}
@@ -148,5 +149,9 @@ void WispEnemy::loadAnimation() {
 
 	LightData data(sf::Vector2f(10.f, 10.f), 100.f, 0.5f);
 	addComponent(new LightComponent(data, this));
+}
+
+std::string WispEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_wisp.png";
 }
 

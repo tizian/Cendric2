@@ -19,22 +19,23 @@ void UnstableTile::init() {
 
 void UnstableTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
+	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
-	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_unstable));
+	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* tremblingAnimation = new Animation(sf::seconds(0.1f));
-	tremblingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_unstable));
+	tremblingAnimation->setSpriteSheet(tex);
 	tremblingAnimation->addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 	tremblingAnimation->addFrame(sf::IntRect(BORDER + 2 * (2 * BORDER + TILE_SIZE), BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Trembling, tremblingAnimation);
 
 	Animation* crumblingAnimation = new Animation();
-	crumblingAnimation->setSpriteSheet(g_resourceManager->getTexture(ResourceID::Texture_tile_destructible));
+	crumblingAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 5; i++) {
 		crumblingAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
@@ -116,6 +117,10 @@ void UnstableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vec
 	if (getAcceleration().x != 0.f) dampingPerSec = 0.f;
 	nextVel.x = (getVelocity().x + getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
 	nextVel.y = getVelocity().y + getAcceleration().y * frameTime.asSeconds();
+}
+
+std::string UnstableTile::getSpritePath() const {
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_unstable.png";
 }
 
 

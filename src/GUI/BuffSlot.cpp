@@ -3,6 +3,7 @@
 #include "Spells/Spell.h"
 #include "Enums/EnumNames.h"
 #include "ScreenOverlays/TextureScreenOverlay.h"
+#include "GlobalResource.h"
 
 using namespace std;
 
@@ -26,19 +27,19 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	sf::Texture* texture;
 
 	m_outside.setSize(sf::Vector2f(SIZE, SIZE));
-	m_outside.setTexture(g_resourceManager->getTexture(ResourceID::Texture_GUI_slot_inventory_selected));
+	m_outside.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY_SELECTED));
 
 	switch (type) {
 	case BuffType::Food:
 		m_outside.setFillColor(COLOR_GOOD);
-		texture = g_resourceManager->getTexture(ResourceID::Texture_items);
+		texture = g_resourceManager->getTexture(GlobalResource::TEX_ITEMS);
 		break;
 	case BuffType::Spell:
-		texture = g_resourceManager->getTexture(ResourceID::Texture_spellicons);
+		texture = g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS);
 		break;
 	case BuffType::DamageOverTime:
 		m_outside.setFillColor(COLOR_BAD);
-		texture = g_resourceManager->getTexture(ResourceID::Texture_damageTypes);
+		texture = g_resourceManager->getTexture(GlobalResource::TEX_DAMAGETYPES);
 		break;
 	default:
 		break;
@@ -169,7 +170,7 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 		tooltip.append(g_textProvider->getText("Feared") + "\n");
 		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
 			TextureScreenOverlay* fearedOverlay = new TextureScreenOverlay(m_duration, sf::seconds(0.1f));
-			fearedOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_overlay_feared));
+			fearedOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY_FEARED));
 			m_screen->addObject(fearedOverlay);
 		}
 	}
@@ -177,7 +178,7 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 		tooltip.append(g_textProvider->getText("Stunned") + "\n");
 		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
 			TextureScreenOverlay* stunnedOverlay = new TextureScreenOverlay(m_duration, sf::seconds(0.1f));
-			stunnedOverlay->setBackgroundTexture(g_resourceManager->getTexture(ResourceID::Texture_screen_overlay_stunned));
+			stunnedOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY_STUNNED));
 			m_screen->addObject(stunnedOverlay);
 		}
 	}

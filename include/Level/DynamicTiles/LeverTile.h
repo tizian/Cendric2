@@ -18,6 +18,8 @@ public:
 	void switchLever();
 
 private:
+	std::string getSpritePath() const override;
+	std::string getSoundPath() const override;
 	// the lever can only be used by hand if the main char is in this range.
 	// it is however always possible for a telekinesis spell to activate the lever if its projectile reaches the lever.
 	static const float ACTIVATE_RANGE;
