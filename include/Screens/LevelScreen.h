@@ -35,7 +35,7 @@ public:
 
 	bool exitWorld() override;
 	void notifyBackFromMenu() override;
-	void notifyBossKilled();
+	void notifyBossKilled(std::map<std::string, int>& items, int gold);
 
 	LevelMainCharacter* getMainCharacter() const override;
 	const Level* getWorld() const override;

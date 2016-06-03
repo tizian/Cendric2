@@ -62,3 +62,14 @@ void InventorySlot::setAmount(int amount) {
 	m_amountText.setString(amount < 0 ? "" : to_string(amount));
 	setPosition(getPosition());
 }
+
+void InventorySlot::setAlpha(sf::Uint8 alpha) {
+	const sf::Color &ic = m_iconRect.getFillColor();
+	m_iconRect.setFillColor(sf::Color(ic.r, ic.g, ic.b, alpha));
+
+	const sf::Color &bc = m_borderRect.getFillColor();
+	m_borderRect.setFillColor(sf::Color(bc.r, bc.g, bc.b, alpha));
+
+	const sf::Color &tc = m_amountText.getColor();
+	m_amountText.setColor(sf::Color(tc.r, tc.g, tc.b, alpha));
+}

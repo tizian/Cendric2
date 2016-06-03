@@ -1,5 +1,6 @@
 #include "ScreenOverlays/ScreenOverlay.h"
 #include "ScreenOverlays/TextureScreenOverlay.h"
+#include "ScreenOverlays/EnemyDefeatedScreenOverlay.h"
 #include "ScreenOverlays/WindowScreenOverlay.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
@@ -238,9 +239,8 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 	return gamePausedScreenOverlay;
 }
 
-ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay() {
-	TextureScreenOverlay* enemyDefeatedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
-	enemyDefeatedScreenOverlay->setPermanent(true);
+ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay(std::map<std::string, int>& items, int gold) {
+	EnemyDefeatedScreenOverlay* enemyDefeatedScreenOverlay = new EnemyDefeatedScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
 
 	enemyDefeatedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
 
@@ -260,6 +260,7 @@ ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay() {
 		enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
 	}
 
+	enemyDefeatedScreenOverlay->setLoot(items, gold);
 	return enemyDefeatedScreenOverlay;
 }
 
