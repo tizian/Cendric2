@@ -239,7 +239,7 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 }
 
 ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay(std::map<std::string, int>& items, int gold) {
-	EnemyDefeatedScreenOverlay* enemyDefeatedScreenOverlay = new EnemyDefeatedScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
+	EnemyDefeatedScreenOverlay* enemyDefeatedScreenOverlay = new EnemyDefeatedScreenOverlay(sf::seconds(3.f), sf::seconds(2.f));
 
 	enemyDefeatedScreenOverlay->setLoot(items, gold);
 
