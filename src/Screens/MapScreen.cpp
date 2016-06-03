@@ -16,6 +16,13 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		updateFogOfWar();
 	}
 
+	if (m_dialogueWindow) {
+		m_progressLog->setYOffset(270.f);
+	}
+	else {
+		m_progressLog->setYOffset(30.f);
+	}
+
 	handleCookingWindow(frameTime);
 	handleDialogueWindow(frameTime);
 	handleBookWindow(frameTime);
@@ -62,6 +69,7 @@ void MapScreen::load() {
 
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
+	m_progressLog->setYOffset(30.f);
 
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 

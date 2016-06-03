@@ -161,9 +161,10 @@ void ProgressLog::setYOffset(float yOffset) {
 }
 
 void ProgressLog::calculatePositions() {
+	float y = WINDOW_HEIGHT - m_yOffset;
 	for (auto& it : m_logTexts) {
-		it.first.setPosition(sf::Vector2f(
-			WINDOW_WIDTH - it.first.getLocalBounds().width - XOFFSET, m_yOffset));
-		m_yOffset += it.first.getLocalBounds().height + 0.5f * GUIConstants::CHARACTER_SIZE_M;
+		it.first.setPosition(sf::Vector2f(XOFFSET, y));
+
+		y -= it.first.getLocalBounds().height + 0.5f * GUIConstants::CHARACTER_SIZE_M;
 	}
 }

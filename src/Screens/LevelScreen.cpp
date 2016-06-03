@@ -27,6 +27,7 @@ void LevelScreen::load() {
 	m_currentLevel.loadAfterMainChar();
 	loader.loadEquipment(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
+	m_progressLog->setYOffset(140.f);
 	m_interface = new LevelInterface(this, m_mainChar);
 	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
 	dynamic_cast<LevelInterface*>(m_interface)->setPermanentCore(m_characterCore);
@@ -139,12 +140,6 @@ const LevelData* LevelScreen::getWorldData() const {
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
-	if (dynamic_cast<LevelInterface*>(m_interface)->isEnemyHealthBarDisplayed()) {
-		m_progressLog->setYOffset(80.f);
-	}
-	else {
-		m_progressLog->setYOffset(20.f);
-	}
 	handleGameOver(frameTime);
 	handleBossDefeated(frameTime);
 
