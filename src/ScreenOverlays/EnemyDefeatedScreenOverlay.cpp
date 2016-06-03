@@ -71,7 +71,7 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 
 		std::string str = g_textProvider->getText(it.first, "item");
 		if (it.second > 1) str += " x" + std::to_string(it.second);
-		std::string croppedStr = g_textProvider->getCroppedString(str, GUIConstants::CHARACTER_SIZE_M, TEXT_WIDTH);
+		std::string croppedStr = g_textProvider->getCroppedString(str, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH));
 
 		BitmapText* text = new BitmapText(croppedStr, TextStyle::Shadowed, TextAlignment::Left);
 		text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
