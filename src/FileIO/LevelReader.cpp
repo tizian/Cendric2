@@ -518,7 +518,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					enemyData.questTarget = std::pair<std::string, std::string>(questID, questtargetText);
 					enemyData.isUnique = true;
 				}
-				if (itemText.compare("questcondition") == 0) {
+				else if (itemText.compare("questcondition") == 0) {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, quest condition value attribute is empty.");
