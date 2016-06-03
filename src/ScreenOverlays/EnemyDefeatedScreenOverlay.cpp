@@ -8,9 +8,9 @@ EnemyDefeatedScreenOverlay::EnemyDefeatedScreenOverlay(const sf::Time& activeTim
 	TextureScreenOverlay(activeTime, fadeTime),
 	ScreenOverlay(activeTime, fadeTime) {
 	m_isPermanent = true;
-	m_background.setTexture(*g_resourceManager->getTexture(ResourceID::Texture_screen_overlay));
+	m_background.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
 
-	const sf::Texture* text = g_resourceManager->getTexture(ResourceID::Texture_text_defeated);
+	const sf::Texture* text = g_resourceManager->getTexture(GlobalResource::TEX_TEXT_DEFEATED);
 	m_sprite.setTexture(*text);
 	m_sprite.setScale(sf::Vector2f(3.f, 3.f));
 	m_sprite.setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 3.f * text->getSize().x), 200.f - 0.5f * 3.f * 60.f));

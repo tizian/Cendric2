@@ -51,6 +51,15 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_PARTICLE_SNOW, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_FLAME, ResourceType::Global);
 
+	// load global miscanellous resources
+	loadTexture(GlobalResource::TEX_ITEMS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_LEVELITEMS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SPELLICONS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SPELLSCROLL, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_INVENTORYTABS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GEMS, ResourceType::Global);
+
 	// load gui resources
 	loadTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE, ResourceType::Global);
