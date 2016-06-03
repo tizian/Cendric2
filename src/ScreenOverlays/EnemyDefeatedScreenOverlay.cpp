@@ -1,8 +1,13 @@
 #include "ScreenOverlays/EnemyDefeatedScreenOverlay.h"
 #include "ResourceManager.h"
+#include "GUI/GUIConstants.h"
 
-const float MARGIN = 40.f;
-const float yOffset = 0.66f * WINDOW_HEIGHT + InventorySlot::ICON_OFFSET;
+const float YOFFSET = 0.5f * WINDOW_HEIGHT;
+const float COLUMN_MARGIN = 20.f;
+const float TEXT_MARGIN = 10.f;
+
+const float TEXT_WIDTH = 4 * InventorySlot::ICON_SIZE;
+const float COLUMN_WIDTH = InventorySlot::SIZE + TEXT_MARGIN + TEXT_WIDTH;
 
 EnemyDefeatedScreenOverlay::EnemyDefeatedScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) :
 	TextureScreenOverlay(activeTime, fadeTime),
@@ -39,34 +44,43 @@ EnemyDefeatedScreenOverlay::~EnemyDefeatedScreenOverlay() {
 void EnemyDefeatedScreenOverlay::update(const sf::Time& frameTime) {
 	TextureScreenOverlay::update(frameTime);
 	for (size_t i = 0; i < m_items.size(); ++i) {
-		InventorySlot* slot = m_items[i];
-		slot->setAlpha((sf::Uint8)(m_scale * 255));
+		m_items[i]->setAlpha((sf::Uint8)(m_scale * 255));
+		m_texts[i]->setColor(sf::Color(255, 255, 255, (sf::Uint8)(m_scale * 255)));
 	}
 }
 
 void EnemyDefeatedScreenOverlay::render(sf::RenderTarget& renderTarget) {
 	TextureScreenOverlay::render(renderTarget);
 	for (size_t i = 0; i < m_items.size(); ++i) {
-		InventorySlot* slot = m_items[i];
-		slot->render(renderTarget);
+		m_items[i]->render(renderTarget);
+		renderTarget.draw(*m_texts[i]);
 	}
 }
 
 void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int gold) {
 	size_t nItems = items.size();
 
-	float width = nItems * InventorySlot::SIZE + (nItems - 1) * MARGIN;
-	float xOffset = 0.5f * (WINDOW_WIDTH - width) + InventorySlot::ICON_OFFSET;
+	float width = nItems * COLUMN_WIDTH + (nItems - 1) * COLUMN_MARGIN;
+	float xOffset = 0.5f * (WINDOW_WIDTH - width);
 
 	int i = 0;
 	for (auto& it : items) {
 		InventorySlot* slot = new InventorySlot(it.first, it.second);
-
-		slot->setPosition(sf::Vector2f(xOffset, yOffset));
-
+		slot->setPosition(sf::Vector2f(xOffset + InventorySlot::ICON_OFFSET, YOFFSET + InventorySlot::ICON_OFFSET));
 		m_items.push_back(slot);
 
-		xOffset += MARGIN + InventorySlot::SIZE;
+		std::string str = g_textProvider->getText(it.first, "item");
+		if (it.second > 1) str += " x" + std::to_string(it.second);
+		std::string croppedStr = g_textProvider->getCroppedString(str, GUIConstants::CHARACTER_SIZE_M, TEXT_WIDTH);
+
+		BitmapText* text = new BitmapText(croppedStr, TextStyle::Shadowed, TextAlignment::Left);
+		text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+		sf::FloatRect bbox = text->getLocalBounds();
+		text->setPosition(xOffset + InventorySlot::SIZE + TEXT_MARGIN,
+				YOFFSET + InventorySlot::ICON_OFFSET + 0.5f * (InventorySlot::SIZE - 2 * InventorySlot::ICON_OFFSET - bbox.height));
+		m_texts.push_back(text);
+
+		xOffset += COLUMN_WIDTH + COLUMN_MARGIN;
 		i++;
 	}
 }

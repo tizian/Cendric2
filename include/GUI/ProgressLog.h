@@ -34,13 +34,13 @@ private:
 	// the core to calculate the correct number of killed targets
 	const CharacterCore* m_core;
 
-	// start text offset from the top of the screen
-	float m_yOffset = 20.f;
+	// start text offset from the bottom of the screen
+	float m_yOffset = 80.f;
 
 	void calculatePositions();
 
 	// how long can a single entry live?
 	const sf::Time TIME_TO_LIVE = sf::seconds(5.f);
-	// text offset from the right of the screen
+	// text offset from the left of the screen
 	const float XOFFSET = 20.f;
 };
