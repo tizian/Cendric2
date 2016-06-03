@@ -38,6 +38,10 @@ EnemyDefeatedScreenOverlay::~EnemyDefeatedScreenOverlay() {
 
 void EnemyDefeatedScreenOverlay::update(const sf::Time& frameTime) {
 	TextureScreenOverlay::update(frameTime);
+	for (size_t i = 0; i < m_items.size(); ++i) {
+		InventorySlot* slot = m_items[i];
+		slot->setAlpha((sf::Uint8)(m_scale * 255));
+	}
 }
 
 void EnemyDefeatedScreenOverlay::render(sf::RenderTarget& renderTarget) {
@@ -49,8 +53,7 @@ void EnemyDefeatedScreenOverlay::render(sf::RenderTarget& renderTarget) {
 }
 
 void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int gold) {
-	//int nItems = items.size() + (gold > 0 ? 1 : 0);
-	int nItems = items.size();
+	size_t nItems = items.size();
 
 	float width = nItems * InventorySlot::SIZE + (nItems - 1) * MARGIN;
 	float xOffset = 0.5f * (WINDOW_WIDTH - width) + InventorySlot::ICON_OFFSET;

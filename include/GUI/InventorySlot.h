@@ -27,6 +27,8 @@ public:
 	inline float getConfiguredSize() const override { return SIZE; }
 	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
 
+	void setAlpha(sf::Uint8 alpha);
+
 	static const float SIZE;
 	static const float ICON_OFFSET;
 
