@@ -168,6 +168,10 @@ void WorldScreen::updateOverlayQueue() {
 Inventory* WorldScreen::getInventory() {
 	if (m_interface == nullptr) return nullptr;
 	return m_interface->getInventory();
+} 
+
+ProgressLog* WorldScreen::getProgressLog() {
+	return m_progressLog;
 }
 
 void WorldScreen::loadWeather() {

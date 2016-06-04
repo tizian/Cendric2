@@ -12,9 +12,9 @@ void LightObject::init() {
 	m_sprite.setOrigin(1.f, 1.f); // setting the origin to the center
 	m_sprite.setScale(2 * m_lightData.radius.x, 2 * m_lightData.radius.y);
 	m_sprite.setFillColor(sf::Color(255, 255, 255, (sf::Uint8)(255 * m_lightData.brightness)));
-	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)->setSmooth(true);
-	m_sprite.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
-	m_animationTimer = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LIGHT)->setSmooth(true);
+	m_sprite.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LIGHT));
+	m_animationTimer = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2.f * m_lightData.radius.x, 2.f * m_lightData.radius.y));
 
 	setPosition(m_lightData.center);

@@ -16,7 +16,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		updateFogOfWar();
 	}
 
-	if (m_dialogueWindow) {
+	if (m_dialogueWindow || m_cookingWindow) {
 		m_progressLog->setYOffset(270.f);
 	}
 	else {

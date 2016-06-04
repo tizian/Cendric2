@@ -53,6 +53,8 @@ public:
 	void reloadTrigger(Trigger* trigger) const;
 	// getter for the inventory of the interface
 	Inventory* getInventory();
+	// getter for the progress log of the interface
+	ProgressLog* getProgressLog();
 	// and for the main character
 	virtual GameObject* getMainCharacter() const = 0;
 	// and for the world

@@ -68,8 +68,10 @@ public:
 	void addReputationAdded(FractionID fraction, int amount);
 
 	void setYOffset(float yOffset);
+	void setVisible(bool visible);
 
 private:
+	bool m_isVisible = true;
 	// a vector filled with texts (and their time to live) that log progress
 	std::vector<ProgressLogEntry*> m_logTexts;
 	// the core to calculate the correct number of killed targets
