@@ -27,6 +27,7 @@ void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
 		book->init();
 		book->setPosition(it.position + book->getPositionOffset());
 		book->setDebugBoundingBox(COLOR_NEUTRAL);
+		book->loadResources();
 		book->loadAnimation(it.skinNr);
 		book->setDynamicTileID(MapDynamicTileID::Book);
 
@@ -41,6 +42,7 @@ void MapLoader::loadSigns(MapData& data, MapScreen* screen) const {
 		sign->init();
 		sign->setPosition(it.position + sign->getPositionOffset());
 		sign->setDebugBoundingBox(COLOR_NEUTRAL);
+		sign->loadResources();
 		sign->loadAnimation(it.skinNr);
 		sign->setDynamicTileID(MapDynamicTileID::Sign);
 
