@@ -20,7 +20,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 		m_progressLog->setYOffset(270.f);
 	}
 	else {
-		m_progressLog->setYOffset(30.f);
+		m_progressLog->setYOffset(40.f);
 	}
 
 	handleCookingWindow(frameTime);
