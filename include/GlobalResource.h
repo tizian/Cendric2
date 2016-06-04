@@ -90,6 +90,7 @@ public:
 	static const std::string TEX_GUI_SLOT_SPELL_SELECTED;
 	static const std::string TEX_GUI_SLOT_SPELL_GEM;
 	static const std::string TEX_GUI_SLOT_HIGHLIGHT;
+	static const std::string TEX_GUI_SLOT_PROGRESS_LOG;
 	static const std::string TEX_GUI_TAB_INACTIVE;
 	static const std::string TEX_GUI_TAB_ACTIVE;
 	static const std::string TEX_GUI_CURSOR;

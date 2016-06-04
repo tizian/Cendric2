@@ -9,6 +9,37 @@
 class CharacterCore;
 class Item;
 
+class ProgressLogEntry {
+public:
+	ProgressLogEntry(const std::string& str, const sf::Color& color);
+	ProgressLogEntry(const std::string& str, const sf::Color& color, const std::string &itemID);
+	~ProgressLogEntry();
+
+	void update(const sf::Time& frameTime);
+	void render(sf::RenderTarget& renderTarget);
+	void setPosition(const sf::Vector2f& position);
+
+	float getHeight() const;
+	inline sf::Time getTime() const { return m_time; }
+
+public:
+	static const float ENTRY_SPACING;
+
+private:
+	sf::Time m_time;
+	BitmapText* m_text = nullptr;
+	sf::RectangleShape* m_icon = nullptr;
+	sf::RectangleShape* m_background = nullptr;
+	sf::RectangleShape* m_border = nullptr;
+
+	// how long can a single entry live?
+	static const float TIME_TO_LIVE;
+	static const float BORDER_SIZE;
+	static const float ICON_SIZE;
+	static const float ICON_OFFSET;
+	static const float ICON_MARGIN;
+};
+
 // a small visual interface to show progress in a screen, such as 
 // item, gold or quest changes
 class ProgressLog {
@@ -30,7 +61,7 @@ public:
 
 private:
 	// a vector filled with texts (and their time to live) that log progress
-	std::vector<std::pair<BitmapText, sf::Time>> m_logTexts;
+	std::vector<ProgressLogEntry*> m_logTexts;
 	// the core to calculate the correct number of killed targets
 	const CharacterCore* m_core;
 
@@ -39,8 +70,6 @@ private:
 
 	void calculatePositions();
 
-	// how long can a single entry live?
-	const sf::Time TIME_TO_LIVE = sf::seconds(5.f);
 	// text offset from the left of the screen
 	const float XOFFSET = 20.f;
 };

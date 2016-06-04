@@ -87,6 +87,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_GUI_SLOT_SPELL_SELECTED, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_SLOT_SPELL_GEM, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_SLOT_HIGHLIGHT, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUI_SLOT_PROGRESS_LOG, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_TAB_INACTIVE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_TAB_ACTIVE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_CURSOR, ResourceType::Global);

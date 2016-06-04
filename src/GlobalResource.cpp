@@ -80,6 +80,7 @@ const std::string GlobalResource::TEX_GUI_SLOT_SPELL = "res/assets/gui/slot_spel
 const std::string GlobalResource::TEX_GUI_SLOT_SPELL_SELECTED = "res/assets/gui/slot_spell_selected.png";
 const std::string GlobalResource::TEX_GUI_SLOT_SPELL_GEM = "res/assets/gui/slot_spell_gem.png";
 const std::string GlobalResource::TEX_GUI_SLOT_HIGHLIGHT = "res/assets/gui/slot_highlight.png";
+const std::string GlobalResource::TEX_GUI_SLOT_PROGRESS_LOG = "res/assets/gui/slot_progress_log.png";
 const std::string GlobalResource::TEX_GUI_TAB_INACTIVE = "res/assets/gui/tab_inactive.png";
 const std::string GlobalResource::TEX_GUI_TAB_ACTIVE = "res/assets/gui/tab_active.png";
 const std::string GlobalResource::TEX_GUI_CURSOR = "res/assets/gui/cursor.png";
