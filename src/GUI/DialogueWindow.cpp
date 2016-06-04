@@ -221,6 +221,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 			m_dialogue->setNextNode(m_chosenOption);
 		}
 		m_dialogueTimeout = DIALOGUE_TIMEOUT;
+		g_inputController->lockAction();
 		return m_dialogue->updateWindow();
 	}
 	return true;

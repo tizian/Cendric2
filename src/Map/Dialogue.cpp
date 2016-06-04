@@ -102,7 +102,6 @@ void Dialogue::setNextNode(int choice) {
 		m_currentNode = nullptr;
 		return;
 	}
-	
 
 	m_currentNode = &m_nodes[nextNode];
 }
