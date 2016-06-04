@@ -26,7 +26,7 @@ void ProgressLog::update(const sf::Time& frameTime) {
 			recalculate = true;
 		}
 		else {
-			it++;
+			++it;
 		}
 	}
 
@@ -36,6 +36,7 @@ void ProgressLog::update(const sf::Time& frameTime) {
 }
 
 void ProgressLog::render(sf::RenderTarget& renderTarget) {
+	if (!m_isVisible) return;
 	for (auto it : m_logTexts) {
 		it->render(renderTarget);
 	}
@@ -131,6 +132,10 @@ void ProgressLog::addReputationAdded(FractionID fraction, int amount) {
 
 void ProgressLog::setYOffset(float yOffset) {
 	m_yOffset = yOffset;
+}
+
+void ProgressLog::setVisible(bool visible) {
+	m_isVisible = visible;
 }
 
 void ProgressLog::calculatePositions() {
