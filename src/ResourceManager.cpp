@@ -158,31 +158,31 @@ void ResourceManager::loadBitmapFont(const std::string& filename, ResourceType t
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {
-	auto& it = m_textures.find(filename);
+	const auto& it = m_textures.find(filename);
 	if (it == m_textures.end()) return nullptr;
 	return it->second;
 }
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) {
-	auto& it = m_soundBuffers.find(filename);
+	const auto& it = m_soundBuffers.find(filename);
 	if (it == m_soundBuffers.end()) return nullptr;
 	return it->second;
 }
 
 sf::Font* ResourceManager::getFont(const std::string& filename) {
-	auto& it = m_fonts.find(filename);
+	const auto& it = m_fonts.find(filename);
 	if (it == m_fonts.end()) return nullptr;
 	return it->second;
 }
 
 BitmapFont* ResourceManager::getBitmapFont(const std::string& filename) {
-	auto& it = m_bitmapFonts.find(filename);
+	const auto& it = m_bitmapFonts.find(filename);
 	if (it == m_bitmapFonts.end()) return nullptr;
 	return it->second;
 }
 
 void ResourceManager::deleteUniqueResources(void* owner) {
-	auto const &it = m_resourceOwners.find(owner);
+	const auto &it = m_resourceOwners.find(owner);
 	if (it == m_resourceOwners.end()) return;
 
 	for (auto& resource : it->second) {
