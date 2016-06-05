@@ -1,6 +1,7 @@
 #include "Screens/Screen.h"
 #include "GUI/Button.h"
 #include "Screens/ScreenManager.h"
+#include "GUI/GUIConstants.h"
 
 using namespace std;
 
@@ -166,10 +167,11 @@ void Screen::setTooltipTextRaw(const string& text, const sf::Color& color, bool 
 		return;
 	}
 	
-	m_tooltipText = BitmapText(text);
+	m_tooltipText = BitmapText(g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(0.4f * WINDOW_WIDTH)));
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
-	m_tooltipText.setCharacterSize(12);
-	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), m_isTooltipTop ? 10.f : WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 10.f);
+	m_tooltipText.setTextAlignment(TextAlignment::Center);
+	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), m_isTooltipTop ? 12.f : WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 12.f);
 	m_tooltipText.setColor(color);
 	m_tooltipTime = sf::seconds(1.f + 0.06f * static_cast<float>(text.length()));
 }
