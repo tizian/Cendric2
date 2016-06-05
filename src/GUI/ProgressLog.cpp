@@ -52,14 +52,15 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 }
 
 void ProgressLog::addPermanentItemProgress(const Item& item) {
-	std::string text = g_textProvider->getText(item.getID(), "item") + " ";
-	text.append(g_textProvider->getText("Consumed"));
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_GOOD));
-
-	text.clear();
-	AttributeData::appendAttributes(text, item.getAttributes());
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_WHITE));
+	std::string itemConsumed = g_textProvider->getText(item.getID(), "item") + " ";
+	itemConsumed.append(g_textProvider->getText("Consumed"));
 	
+	std::string attributes = "";
+	AttributeData::appendAttributes(attributes, item.getAttributes());
+	
+	m_logTexts.push_back(new ProgressLogEntry(attributes, COLOR_WHITE));
+	m_logTexts.push_back(new ProgressLogEntry(itemConsumed, COLOR_GOOD));
+
 	calculatePositions();
 }
 
@@ -99,8 +100,8 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 		target.append(" ");
 	}
 
-	m_logTexts.push_back(new ProgressLogEntry(questName, COLOR_GOOD));
 	m_logTexts.push_back(new ProgressLogEntry(target, progress >= goal ? COLOR_GOOD : COLOR_WHITE));
+	m_logTexts.push_back(new ProgressLogEntry(questName, COLOR_GOOD));
 
 	calculatePositions();
 }
