@@ -63,6 +63,7 @@ protected:
 	BitmapText m_text;
 
 	sf::Color m_backgroundColor = COLOR_TRANS_BLACK;
+	sf::Color m_activeColor = COLOR_TRANS_GREY;
 	sf::Color m_highlightColor = COLOR_PURPLE;
 
 private:

@@ -30,6 +30,12 @@ TabButton::TabButton(const sf::FloatRect& box) {
 
 void TabButton::setActive(bool active) {
 	m_isActive = active;
+	if (m_isActive) {
+		m_background.setFillColor(m_activeColor);
+	}
+	else {
+		m_background.setFillColor(m_backgroundColor);
+	}
 }
 
 bool TabButton::isActive() const {
@@ -92,7 +98,9 @@ void TabButton::update(const sf::Time& frameTime) {
 	if (m_isMouseOver && !(g_inputController->isMouseOver(getBoundingBox(), true))) {
 		m_isMouseOver = false;
 		m_isPressed = false;
-		m_background.setFillColor(m_backgroundColor);
+		if (!m_isActive) {
+			m_background.setFillColor(m_backgroundColor);
+		}
 	}
 	m_isClicked = false;
 	GameObject::update(frameTime);
