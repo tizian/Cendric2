@@ -215,7 +215,6 @@ bool KeyBindingsScreen::trySetKeyBinding(Key key, sf::Keyboard::Key keyboardKey)
 
 void KeyBindingsScreen::reload() {
 	float distFromTop = 120.f;
-	float distFromLeft = 150.f;
 
 	// keyboard mappings
 	for (auto& it : m_selectedKeys) {

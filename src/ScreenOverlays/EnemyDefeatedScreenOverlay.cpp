@@ -10,8 +10,8 @@ const float TEXT_WIDTH = 4 * InventorySlot::ICON_SIZE;
 const float COLUMN_WIDTH = InventorySlot::SIZE + TEXT_MARGIN + TEXT_WIDTH;
 
 EnemyDefeatedScreenOverlay::EnemyDefeatedScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) :
-	TextureScreenOverlay(activeTime, fadeTime),
-	ScreenOverlay(activeTime, fadeTime) {
+	ScreenOverlay(activeTime, fadeTime),
+	TextureScreenOverlay(activeTime, fadeTime) {
 	m_isPermanent = true;
 	m_background.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
 

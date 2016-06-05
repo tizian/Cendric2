@@ -734,7 +734,7 @@ void WorldReader::readLightsFromLayers(WorldData& data, std::vector<std::vector<
 	for (auto& layer : layers) {
 		int x = 0;
 		int y = 0;
-		for (int i = 0; i < layer.size(); ++i) {
+		for (size_t i = 0; i < layer.size(); ++i) {
 			if (m_lightTiles.find(layer.at(i)) != m_lightTiles.end()) {
 				LightData light = m_lightTiles.at(layer.at(i));
 				light.center.x += TILE_SIZE_F * x;
