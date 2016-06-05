@@ -4,7 +4,7 @@
 
 using namespace std;
 
-ResourceManager *g_resourceManager;
+ResourceManager* g_resourceManager;
 
 ResourceManager::ResourceManager() : m_currentError({ ErrorID::VOID, "" }) {
 	init();
@@ -233,18 +233,18 @@ void ResourceManager::deleteResource(const std::string& filename) {
 }
 
 void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, bool force, float scale) {
+	if (!m_configuration.isSoundOn || filename.empty()) return;
 	if (m_soundBuffers.find(filename) == m_soundBuffers.end()) {
 		g_logger->logError("ResourceManager", "Cannot play sound: '" + filename + "', sound not loaded!");
 		return;
 	}
 	// don't play the sound if it's already playing and we're not forcing
 	if (!force && sound.getStatus() == sf::SoundSource::Status::Playing) return;
-	if (m_configuration.isSoundOn) {
-		sound.setBuffer(*getSoundBuffer(filename));
-		scale = clamp(scale, 0.f, 1.f);
-		sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);
-		sound.play();
-	}
+
+	sound.setBuffer(*getSoundBuffer(filename));
+	scale = clamp(scale, 0.f, 1.f);
+	sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);
+	sound.play();
 }
 
 void ResourceManager::playMusic(const std::string& filename, bool looping, const sf::Time& playingOffset) {

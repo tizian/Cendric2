@@ -11,8 +11,8 @@ TextureScreenOverlay::TextureScreenOverlay(const sf::Time& activeTime, const sf:
 void TextureScreenOverlay::update(const sf::Time& frameTime) {
 	ScreenOverlay::update(frameTime);
 
-	const sf::Color& sc = m_subtitle.getColor();
-	const sf::Color& bc = m_title.getColor();
+	const sf::Color& sc = m_sprite.getColor();
+	const sf::Color& bc = m_background.getColor();
 
 	m_sprite.setColor(sf::Color(sc.r, sc.g, sc.b, (sf::Uint8)(m_scale * 255)));
 	m_background.setColor(sf::Color(bc.r, bc.g, bc.b, (sf::Uint8)(m_scale * 255)));

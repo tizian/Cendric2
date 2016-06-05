@@ -6,6 +6,7 @@
 class TextureScreenOverlay : public virtual ScreenOverlay {
 public:
 	TextureScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime = sf::Time::Zero);
+	virtual ~TextureScreenOverlay() {};
 
 	virtual void update(const sf::Time& frameTime) override;
 	virtual void render(sf::RenderTarget& target) override;
