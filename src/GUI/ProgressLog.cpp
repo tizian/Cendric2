@@ -146,7 +146,7 @@ void ProgressLog::calculatePositions() {
 
 	float time = m_logTexts[0]->getScrollTime().asSeconds();
 	float start = 0.f;
-	float change = m_logTexts[0]->getHeight();
+	float change = m_logTexts[0]->getHeight() + ProgressLogEntry::ENTRY_SPACING;
 	float animationTime = ProgressLogEntry::TIME_TO_SCROLL.asSeconds();
 	float scrollOffset = easeInOutQuad(time, start, change, animationTime);
 
@@ -160,8 +160,8 @@ void ProgressLog::calculatePositions() {
 
 /* ProgressLogEntry */
 
-const sf::Time ProgressLogEntry::TIME_TO_LIVE = sf::seconds(4.f);
-const sf::Time ProgressLogEntry::TIME_TO_FADE = sf::seconds(0.2f);
+const sf::Time ProgressLogEntry::TIME_TO_LIVE = sf::seconds(3.f);
+const sf::Time ProgressLogEntry::TIME_TO_FADE = sf::seconds(0.1f);
 const sf::Time ProgressLogEntry::TIME_TO_SCROLL = sf::seconds(0.2f);
 
 const float ProgressLogEntry::BORDER_SIZE = 31.f;
