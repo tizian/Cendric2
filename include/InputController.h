@@ -88,8 +88,8 @@ private:
 	// current window size. Used for mouse position and dependent on resize events
 	sf::Vector2i m_windowSize;
 
-	// We only count input events if the window is focused and the mouse is inside the view.
-	bool m_isInputActive;
+	// is the mouse inside our view? we only count mouse clicks if it is so!
+	bool m_isMouseInsideView;
 	// is the window currently focused? we only count input events if it is so!
 	bool m_isWindowFocused;
 	// the mouse position gets calculated once in every frame. This is the mouse position according to the current view

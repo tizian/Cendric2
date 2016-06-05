@@ -10,11 +10,8 @@ Game::Game() {
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
-	
 	m_cursor.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
 	
-	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
-	g_renderWindow = &m_mainWindow;
 	m_running = true;
 
 	if (g_resourceManager->getConfiguration().isDebugMode) {
@@ -50,6 +47,9 @@ void Game::reloadWindow() {
 	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
 
 	g_resourceManager->getConfiguration().isWindowReload = false;
+
+	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
+	g_renderWindow = &m_mainWindow;
 }
 
 void Game::run() {
