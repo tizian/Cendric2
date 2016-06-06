@@ -17,10 +17,10 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	}
 
 	if (m_dialogueWindow || m_cookingWindow) {
-		m_progressLog->setYOffset(270.f);
+		m_progressLog->setYOffset(290.f);
 	}
 	else {
-		m_progressLog->setYOffset(40.f);
+		m_progressLog->setYOffset(89.f);
 	}
 
 	handleCookingWindow(frameTime);
@@ -69,7 +69,6 @@ void MapScreen::load() {
 
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
-	m_progressLog->setYOffset(30.f);
 
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 
