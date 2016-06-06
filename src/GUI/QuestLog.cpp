@@ -116,7 +116,6 @@ void QuestLog::update(const sf::Time& frameTime) {
 	m_window->update(frameTime);
 	m_scrollBar->update(frameTime);
 
-	std::vector<QuestEntry>* entries = m_stateMap[m_currentTab];
 	for (size_t i = 0; i < m_stateMap[m_currentTab]->size(); ++i) {
 		QuestEntry& entry = m_stateMap[m_currentTab]->at(i);
 		if (m_selectedEntry && m_selectedEntry->getQuestID() == entry.getQuestID()) {

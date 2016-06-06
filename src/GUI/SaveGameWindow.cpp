@@ -117,7 +117,7 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 	updateScrolling(frameTime);
 
 	for (size_t i = 0; i < m_entries.size(); ++i) {
-		if (i == m_chosenEntry) {
+		if (i == static_cast<size_t>(m_chosenEntry)) {
 			m_entries[i].setColor(COLOR_WHITE);
 		}
 		else if (g_inputController->isMouseOver(m_entries[i].getBoundingBox(), true)) {

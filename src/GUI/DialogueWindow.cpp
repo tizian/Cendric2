@@ -178,7 +178,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 		updateScrolling(frameTime);
 
 		for (size_t i = 0; i < m_options.size(); ++i) {
-			if (i == m_chosenOption) {
+			if (i == static_cast<size_t>(m_chosenOption)) {
 				m_options[i].setColor(COLOR_WHITE);
 			}
 			else if (g_inputController->isMouseOver(m_options[i].getBoundingBox(), true)) {
