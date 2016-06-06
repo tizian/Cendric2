@@ -94,6 +94,8 @@ public:
 	static const std::string TEX_GUI_TAB_INACTIVE;
 	static const std::string TEX_GUI_TAB_ACTIVE;
 	static const std::string TEX_GUI_CURSOR;
+	static const std::string TEX_GUI_PROGRESSLOG_QUEST;
+	static const std::string TEX_GUI_PROGRESSLOG_REPUTATION;
 	static const std::string SOUND_GUI_MENUCURSOR;
 	static const std::string SOUND_GUI_PICKUP;
 	static const std::string SOUND_GUI_OPENWINDOW;

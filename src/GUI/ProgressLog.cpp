@@ -47,7 +47,7 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	std::string text = std::to_string(amount) + "x ";
 	text.append(itemID.compare("gold") == 0 ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID, "item"));
 
-	m_logTexts.push_back(new ProgressLogEntry(text, amount < 0 ? COLOR_MEDIUM_GREY : COLOR_WHITE, itemID));
+	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, amount < 0 ? COLOR_MEDIUM_GREY : COLOR_WHITE, itemID));
 
 	calculatePositions();
 }
@@ -58,7 +58,7 @@ void ProgressLog::addPermanentItemProgress(const Item& item) {
 	text.append("\n");
 	AttributeData::appendAttributes(text, item.getAttributes());
 	
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_WHITE));
+	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, COLOR_NEUTRAL, item.getID()));
 
 	calculatePositions();
 }
@@ -68,7 +68,7 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 
 	std::string text = g_textProvider->getText(questID, "quest") + ":\n";
 	text.append(g_textProvider->getText(condition, "quest_condition") + " " + g_textProvider->getText("Done"));
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_WHITE));
+	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, COLOR_WHITE));
 
 	calculatePositions();
 }
@@ -91,7 +91,7 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 	}
 	text.append(std::to_string(progress) + "/" + std::to_string(goal) + ")");
 
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_WHITE));
+	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, COLOR_WHITE));
 
 	calculatePositions();
 }
@@ -99,7 +99,7 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState state) {
 	std::string text = g_textProvider->getText(questID,  "quest") + ": ";
 	text.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
-	m_logTexts.push_back(new ProgressLogEntry(text, state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL));
+	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL));
 
 	calculatePositions();
 }
@@ -107,7 +107,7 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
 	std::string text = g_textProvider->getText(questID, "quest") + ": ";
 	text.append(g_textProvider->getText("NewJournalEntry"));
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_NEUTRAL));
+	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, COLOR_NEUTRAL));
 
 	calculatePositions();
 }
@@ -117,7 +117,7 @@ void ProgressLog::addReputationAdded(FractionID fraction, int amount) {
 
 	std::string text = g_textProvider->getText(EnumNames::getFractionIDName(fraction)) + ": ";
 	text.append("+" + std::to_string(amount));
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_NEUTRAL));
+	m_logTexts.push_back(ProgressLogEntry::createReputationEntry(text, COLOR_NEUTRAL));
 
 	calculatePositions();
 }
@@ -161,7 +161,7 @@ const float ProgressLogEntry::ICON_OFFSET = 3.f;
 const float ProgressLogEntry::ICON_MARGIN = 10.f;
 const float ProgressLogEntry::ENTRY_SPACING = 8.f;
 
-ProgressLogEntry::ProgressLogEntry(const std::string& str, const sf::Color& color) {
+ProgressLogEntry::ProgressLogEntry() {
 	m_time = TIME_TO_LIVE;
 	m_fadeInTimer = TIME_TO_FADE;
 	m_fadeOutTimer = TIME_TO_FADE;
@@ -170,29 +170,9 @@ ProgressLogEntry::ProgressLogEntry(const std::string& str, const sf::Color& colo
 	m_text = new BitmapText();
 	m_text->setTextStyle(TextStyle::Shadowed);
 	m_text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_text->setColor(color);
-	m_text->setString(str);
-
-	setAlpha(0.f);
-}
-ProgressLogEntry::ProgressLogEntry(const std::string& str, const sf::Color& color, const std::string &itemID) {
-	m_time = TIME_TO_LIVE;
-	m_fadeInTimer = TIME_TO_FADE;
-	m_fadeOutTimer = TIME_TO_FADE;
-	m_scrollTimer = TIME_TO_SCROLL;
-
-	m_text = new BitmapText();
-	m_text->setTextStyle(TextStyle::Shadowed);
-	m_text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_text->setColor(color);
-	m_text->setString(str);
 
 	m_icon = new sf::RectangleShape();
 	m_icon->setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
-	m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
-	Item item(itemID);
-	sf::IntRect textureRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50);
-	m_icon->setTextureRect(textureRect);
 
 	m_background = new sf::RectangleShape();
 	m_background->setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
@@ -205,13 +185,47 @@ ProgressLogEntry::ProgressLogEntry(const std::string& str, const sf::Color& colo
 	setAlpha(0.f);
 }
 
+ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, const sf::Color& color, const std::string &itemID) {
+	ProgressLogEntry* entry = new ProgressLogEntry();
+
+	entry->m_text->setColor(color);
+	entry->m_text->setString(str);
+
+	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
+	Item item(itemID);
+	sf::IntRect textureRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50);
+	entry->m_icon->setTextureRect(textureRect);
+
+	return entry;
+}
+
+ProgressLogEntry* ProgressLogEntry::createQuestEntry(const std::string& str, const sf::Color& color) {
+	ProgressLogEntry* entry = new ProgressLogEntry();
+
+	entry->m_text->setColor(color);
+	entry->m_text->setString(str);
+
+	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_QUEST));
+
+	return entry;
+}
+
+ProgressLogEntry* ProgressLogEntry::createReputationEntry(const std::string& str, const sf::Color& color) {
+	ProgressLogEntry* entry = new ProgressLogEntry();
+
+	entry->m_text->setColor(color);
+	entry->m_text->setString(str);
+
+	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_REPUTATION));
+
+	return entry;
+}
+
 ProgressLogEntry::~ProgressLogEntry() {
 	delete m_text;
-	if (m_icon) {
-		delete m_icon;
-		delete m_background;
-		delete m_border;
-	}
+	delete m_icon;
+	delete m_background;
+	delete m_border;
 }
 
 void ProgressLogEntry::updateFadeIn(const sf::Time& frameTime) {
@@ -240,25 +254,18 @@ void ProgressLogEntry::update(const sf::Time& frameTime) {
 
 void ProgressLogEntry::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(*m_text);
-	if (m_icon) {
-		renderTarget.draw(*m_background);
-		renderTarget.draw(*m_icon);
-		renderTarget.draw(*m_border);
-	}
+	renderTarget.draw(*m_background);
+	renderTarget.draw(*m_icon);
+	renderTarget.draw(*m_border);
 }
 
 void ProgressLogEntry::setPosition(const sf::Vector2f& position) {
 	float textHeight = m_text->getLocalBounds().height;
-	if (m_icon) {
-		m_border->setPosition(position);
-		m_text->setPosition(position.x + BORDER_SIZE + ICON_MARGIN, position.y + 0.5f * (BORDER_SIZE - textHeight));
+	m_border->setPosition(position);
+	m_text->setPosition(position.x + BORDER_SIZE + ICON_MARGIN, position.y + 0.5f * (BORDER_SIZE - textHeight));
 
-		m_background->setPosition(position.x + ICON_OFFSET, position.y + ICON_OFFSET);
-		m_icon->setPosition(position.x + ICON_OFFSET, position.y + ICON_OFFSET);
-	}
-	else {
-		m_text->setPosition(position);
-	}
+	m_background->setPosition(position.x + ICON_OFFSET, position.y + ICON_OFFSET);
+	m_icon->setPosition(position.x + ICON_OFFSET, position.y + ICON_OFFSET);
 }
 
 void ProgressLogEntry::setAlpha(float alpha) {
@@ -268,16 +275,14 @@ void ProgressLogEntry::setAlpha(float alpha) {
 	const sf::Color &tc = m_text->getColor();
 	m_text->setColor(sf::Color(tc.r, tc.g, tc.b, a));
 
-	if (m_icon) {
-		const sf::Color &ic = m_icon->getFillColor();
-		m_icon->setFillColor(sf::Color(ic.r, ic.g, ic.b, a));
+	const sf::Color &ic = m_icon->getFillColor();
+	m_icon->setFillColor(sf::Color(ic.r, ic.g, ic.b, a));
 
-		const sf::Color &bgc = m_background->getFillColor();
-		m_background->setFillColor(sf::Color(bgc.r, bgc.g, bgc.b, aBackground));
+	const sf::Color &bgc = m_background->getFillColor();
+	m_background->setFillColor(sf::Color(bgc.r, bgc.g, bgc.b, aBackground));
 
-		const sf::Color &bdc = m_border->getFillColor();
-		m_border->setFillColor(sf::Color(bdc.r, bdc.g, bdc.b, a));
-	}
+	const sf::Color &bdc = m_border->getFillColor();
+	m_border->setFillColor(sf::Color(bdc.r, bdc.g, bdc.b, a));
 }
 
 sf::Time ProgressLogEntry::getScrollTime() const {
@@ -285,6 +290,7 @@ sf::Time ProgressLogEntry::getScrollTime() const {
 }
 
 float ProgressLogEntry::getHeight() const {
-	if (m_icon) return BORDER_SIZE;
-	else return m_text->getLocalBounds().height;
+	float textHeight = m_text->getLocalBounds().height;
+	if (textHeight > BORDER_SIZE) return textHeight;
+	else return BORDER_SIZE;
 }

@@ -11,8 +11,7 @@ class Item;
 
 class ProgressLogEntry {
 public:
-	ProgressLogEntry(const std::string& str, const sf::Color& color);
-	ProgressLogEntry(const std::string& str, const sf::Color& color, const std::string &itemID);
+	ProgressLogEntry();
 	~ProgressLogEntry();
 
 	void updateFadeIn(const sf::Time& frameTime);
@@ -25,6 +24,10 @@ public:
 	float getHeight() const;
 	sf::Time getScrollTime() const;
 	inline bool isOver() const { return m_scrollTimer <= sf::Time::Zero; }
+
+	static ProgressLogEntry* createItemEntry(const std::string& str, const sf::Color& color, const std::string &itemID);
+	static ProgressLogEntry* createQuestEntry(const std::string& str, const sf::Color& color);
+	static ProgressLogEntry* createReputationEntry(const std::string& str, const sf::Color& color);
 
 public:
 	static const float ENTRY_SPACING;
