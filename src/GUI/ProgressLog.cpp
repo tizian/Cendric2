@@ -46,20 +46,19 @@ void ProgressLog::render(sf::RenderTarget& renderTarget) {
 void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	std::string text = std::to_string(amount) + "x ";
 	text.append(itemID.compare("gold") == 0 ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID, "item"));
-	m_logTexts.push_back(new ProgressLogEntry(text, amount < 0 ? COLOR_BAD : COLOR_GOOD, itemID));
+
+	m_logTexts.push_back(new ProgressLogEntry(text, amount < 0 ? COLOR_MEDIUM_GREY : COLOR_WHITE, itemID));
 
 	calculatePositions();
 }
 
 void ProgressLog::addPermanentItemProgress(const Item& item) {
-	std::string itemConsumed = g_textProvider->getText(item.getID(), "item") + " ";
-	itemConsumed.append(g_textProvider->getText("Consumed"));
+	std::string text = g_textProvider->getText(item.getID(), "item") + " ";
+	text.append(g_textProvider->getText("Consumed"));
+	text.append("\n");
+	AttributeData::appendAttributes(text, item.getAttributes());
 	
-	std::string attributes = "";
-	AttributeData::appendAttributes(attributes, item.getAttributes());
-	
-	m_logTexts.push_back(new ProgressLogEntry(attributes, COLOR_WHITE));
-	m_logTexts.push_back(new ProgressLogEntry(itemConsumed, COLOR_GOOD));
+	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_WHITE));
 
 	calculatePositions();
 }
@@ -69,7 +68,7 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 
 	std::string text = g_textProvider->getText(questID, "quest") + ":\n";
 	text.append(g_textProvider->getText(condition, "quest_condition") + " " + g_textProvider->getText("Done"));
-	m_logTexts.push_back(new ProgressLogEntry(text, sf::Color::Cyan));
+	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_WHITE));
 
 	calculatePositions();
 }
@@ -77,10 +76,8 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::string& name) {
 	if (m_core->getQuestState(questID) != QuestState::Started) return;
 
-	std::string questName = "\"" + g_textProvider->getText(questID, "quest") + "\"";
-
-	std::string target = g_textProvider->getText(name, "enemy");
-	target.append(": ");
+	std::string text = g_textProvider->getText(name, "enemy");
+	text.append(" (");
 	int progress = m_core->getNumberOfTargetsKilled(questID, name);
 	int goal = m_core->getNumberOfTotalTargets(questID, name);
 	if (m_core->getQuestData(questID) != nullptr) {
@@ -92,16 +89,9 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 		m_core->getData().questTargetProgress.at(questID).find(name) != m_core->getData().questTargetProgress.at(questID).end()) {
 		progress = m_core->getData().questTargetProgress.at(questID).at(name);
 	}
-	target.append(std::to_string(progress) + "/" + std::to_string(goal));
+	text.append(std::to_string(progress) + "/" + std::to_string(goal) + ")");
 
-	// identation
-	int spacesToAdd = (int)(questName.size() - target.size()) / 2;
-	for (int i = 0; i < spacesToAdd; i++) {
-		target.append(" ");
-	}
-
-	m_logTexts.push_back(new ProgressLogEntry(target, progress >= goal ? COLOR_GOOD : COLOR_WHITE));
-	m_logTexts.push_back(new ProgressLogEntry(questName, COLOR_GOOD));
+	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_WHITE));
 
 	calculatePositions();
 }
@@ -117,7 +107,7 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
 	std::string text = g_textProvider->getText(questID, "quest") + ": ";
 	text.append(g_textProvider->getText("NewJournalEntry"));
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_GOOD));
+	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_NEUTRAL));
 
 	calculatePositions();
 }
@@ -127,7 +117,7 @@ void ProgressLog::addReputationAdded(FractionID fraction, int amount) {
 
 	std::string text = g_textProvider->getText(EnumNames::getFractionIDName(fraction)) + ": ";
 	text.append("+" + std::to_string(amount));
-	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_GOOD));
+	m_logTexts.push_back(new ProgressLogEntry(text, COLOR_NEUTRAL));
 
 	calculatePositions();
 }
