@@ -37,28 +37,28 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_thea", "what_are_you_doing")) then
 		DL:createNPCNode(10, 11, "DL_Thea_WhatAmIDoing") -- I had to deliver some goods from the farmers and then decided to stay for a while.
-		DL:addConditionProgress("npc_thea", "what_are_you_doing")
 		DL:addNode()
 	
 		DL:createChoiceNode(11)
-		DL:addChoice(12, "DL_Choice_VeryAlone") -- You are traveling alone?
-		DL:addChoice(13, "DL_Choice_WorkForFarmers") -- Do you work for the farmers?
+		if (not DL:isConditionFulfilled("npc_thea", "traveling_alone")) then
+			DL:addChoice(12, "DL_Choice_VeryAlone") -- You are traveling alone?
+		end
+		if (not DL:isConditionFulfilled("npc_thea", "work_farmers")) then
+			DL:addChoice(13, "DL_Choice_WorkForFarmers") -- Do you work for the farmers?
+		end
+		if (DL:isConditionFulfilled("npc_thea", "work_farmers") or DL:isConditionFulfilled("npc_thea", "traveling_alone")) then
+			DL:addChoice(16, "DL_Choice_WhatIsDangerous") -- What is dangerous out here, then?
+		end
 		DL:addNode()
 	
-		DL:createNPCNode(12, 14, "DL_Thea_VeryAlone") -- Yes, I always travel on my own. But it has become dangerous lately. I'd rather take someone with me in the future.
+		DL:createNPCNode(12, 11, "DL_Thea_VeryAlone") -- Yes, I always travel on my own. But it has become dangerous lately outside of the city walls of Gandria. I'd rather take someone with me in the future.
+		DL:addConditionProgress("npc_thea", "traveling_alone");
+		DL:gotoNode(11)
 		DL:addNode()
 	
-		DL:createNPCNode(13, 15, "DL_Thea_WorkForFarmers") -- Yes, I'm a maid at Ivo's farm. But I'd rather find work in the city of Gandria. It's safe there, at least.
-		DL:addNode()
-		
-		DL:createChoiceNode(14)
-		DL:addChoice(16, "DL_Choice_WhatIsDangerous") -- What is dangerous out here, then?
-		DL:addChoice(13, "DL_Choice_WorkForFarmers") -- Do you work for the farmers?
-		DL:addNode()
-		
-		DL:createChoiceNode(15)
-		DL:addChoice(16, "DL_Choice_WhatIsDangerous") -- What is dangerous out here, then?
-		DL:addChoice(12, "DL_Choice_VeryAlone") -- You are traveling alone?
+		DL:createNPCNode(13, 11, "DL_Thea_WorkForFarmers") -- Yes, I'm a maid at Ivo's farm. But I'd rather find work in the city of Gandria. It's safe there, at least.
+		DL:addConditionProgress("npc_thea", "work_farmers");
+		DL:gotoNode(11)
 		DL:addNode()
 		
 		DL:createNPCNode(16, -2, "DL_Thea_Beast") -- There is a beast lurking around, and it must be pretty hungry, as most of our sheeps are gone. Nobody has really seen it so far but I swear, I've seen a huge shadow disappear into the South last night. And in the morning, another sheep was missing.
@@ -66,7 +66,7 @@ loadDialogue = function(DL)
 			DL:changeQuestState("monster_problem","started")
 		end
 		DL:addQuestDescription("monster_problem", 1)
-	
+		DL:addConditionProgress("npc_thea", "what_are_you_doing")
 		DL:addNode()
 	end
 	

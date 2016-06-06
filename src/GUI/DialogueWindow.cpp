@@ -113,17 +113,12 @@ void DialogueWindow::setCendricTalking(const std::string& text) {
 
 void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_options.clear();
-	m_speakerSprite.setTextureRect(m_npcTexturePosition);
-	m_speakerSprite.setScale(sf::Vector2f(0.6f, 0.6f));
-	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH)));
+	
 	delete m_merchantInterface;
 	WorldScreen* worldScreen = dynamic_cast<WorldScreen*>(m_screen);
 	m_merchantInterface = new MerchantInterface(worldScreen, m_npcID);
 	worldScreen->getProgressLog()->setVisible(false);
-	setPosition(sf::Vector2f(LEFT, TOP + 0.5f * HEIGHT));
-	m_speakerSprite.setPosition(sf::Vector2f(LEFT, WINDOW_HEIGHT - 150.f));
-	setHeight(0.5f * HEIGHT); 
+	setPosition(sf::Vector2f(LEFT, TOP + HEIGHT));
 }
 
 void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices) {
@@ -161,8 +156,6 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 			m_merchantInterface = nullptr;
 			dynamic_cast<WorldScreen*>(m_screen)->getProgressLog()->setVisible(true);
 			setPosition(sf::Vector2f(LEFT, TOP));
-			m_speakerSprite.setScale(sf::Vector2f(1.f, 1.f));
-			setHeight(HEIGHT);
 			m_dialogue->setNextNode(-1);
 			return m_dialogue->updateWindow();
 		}

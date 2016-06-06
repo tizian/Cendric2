@@ -74,6 +74,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_cheese', 'item_desc', 'Smelly.','Riecht nicht sonderlich gut.','Er müffelet echli.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item', 'Apple', 'Apfel', 'Öpfel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item_desc', 'Fresh and juicy.', 'Frisch und saftig.', 'Frisch und saftig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_milk', 'item', 'Milk', 'Milch', 'Milch');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_milk', 'item_desc', 'Milk is good for your bones.', 'Milch ist gut für die Knochen.', 'Milch isch guet für d''Chnoche.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_beer', 'item', 'Beer', 'Bier', 'Bier');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_beer', 'item_desc', 'Should be consumed in moderation.', 'Zu viel davon sollte man besser nicht geniessen.', 'Z''viel devo söt me besser nid trinke.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_wine', 'item', 'Wine', 'Wein', 'Wii');

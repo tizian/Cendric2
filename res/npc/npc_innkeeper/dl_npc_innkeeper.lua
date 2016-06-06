@@ -7,16 +7,16 @@ loadDialogue = function(DL)
 		else
 			DL:addChoice(10, "DL_Choice_RumorsMore") -- Heard more rumours?
 		end
-		DL:addChoice(1, "DL_Choice_GiveBeer") -- I'm thirsty, give me a beer. (10 Gold)
-		DL:addChoice(2, "DL_Choice_SomethingElse") --  Do you also sell other things than beer? 
+		DL:addChoice(1, "DL_Choice_GiveBeer") -- I'm thirsty, give me a beer. [10 Gold]
+		DL:addChoice(2, "DL_Choice_SomethingElse") --  Do you also sell other things than beer? [TRADE]
 		if (DL:isConditionFulfilled("npc_rhendal", "talked_about_schnapps") and not DL:isConditionFulfilled("npc_innkeeper", "asked_for_feudal_fire")) then 
 			DL:addChoice(30, "DL_Choice_INeedSchnapps") --  I'm looking for a special schnapps... 
 		end
 		if (not DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire") and DL:isConditionFulfilled("npc_innkeeper", "wrong_name")) then 
-			DL:addChoice(40, "DL_Choice_SellMeAnyway") --  Please, I really need your schnapps! (60 Gold) 
+			DL:addChoice(40, "DL_Choice_SellMeAnyway") --  Please, I really need your schnapps! [60 Gold]
 		end
 		if (not DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire") and DL:isConditionFulfilled("npc_innkeeper", "right_name")) then 
-			DL:addChoice(40, "DL_Choice_SellMeSchnapps") --  Give me some "Feudal Fire". (20 Gold)   
+			DL:addChoice(40, "DL_Choice_SellMeSchnapps") --  Give me some "Feudal Fire". [20 Gold]   
 		end
 		DL:addChoice(-1, "") --
 		DL:addNode()
@@ -81,7 +81,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 		end
 		
-		DL:createTradeNode(2, -2, "DL_Trade_TakeALook") -- Sure, take a look.
+		DL:createTradeNode(2, -2) -- Sure, take a look.
 		DL:addNode()
 		
 		if (not DL:isConditionFulfilled("npc_innkeeper", "asked_for_feudal_fire")) then 

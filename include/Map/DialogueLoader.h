@@ -26,7 +26,7 @@ public:
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);
 	void createNPCNode(int tag, int nextTag, const std::string& text);
-	void createTradeNode(int tag, int nextTag, const std::string& text);
+	void createTradeNode(int tag, int nextTag);
 	void createChoiceNode(int tag);
 
 	// methods to add properties to that node
