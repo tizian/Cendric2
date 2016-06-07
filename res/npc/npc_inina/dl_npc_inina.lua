@@ -25,7 +25,7 @@ loadDialogue = function(DL)
 			DL:addChoice(10, "DL_Choice_Mage") -- How do you know I'm a mage?
 		end
 		if (DL:isConditionFulfilled("npc_inina", "mage") and not DL:isConditionFulfilled("npc_inina", "aura")) then
-			DL:addChoice(11, "DL_Choice_Aura") -- Can you "see" my aura?
+			DL:addChoice(11, "DL_Choice_Aura") -- You can see my aura?
 		end
 		if (not DL:isConditionFulfilled("npc_inina", "farmers")) then
 			DL:addChoice(12, "DL_Choice_Farmers") -- Why do you oppress the farmers? They need your help.
@@ -34,7 +34,7 @@ loadDialogue = function(DL)
 			DL:addChoice(20, "DL_Choice_MissingPeople") -- What do you know about the missing people of Gandria?
 		end
 		if (DL:isConditionFulfilled("npc_inina", "what_doing") and DL:isQuestState("missing_paladin", "void")) then
-			DL:addChoice(30, "DL_Choice_MissingPaladin") -- Maybe I could search for the paladin?
+			DL:addChoice(30, "DL_Choice_MissingPaladin") -- Maybe I could look for the paladin?
 		end
 		if (not DL:isQuestState("missing_paladin", "void") and not DL:isQuestState("missing_paladin", "completed")) then
 			DL:addChoice(40, "DL_Choice_AboutPaladin") -- About the missing paladin...
@@ -66,17 +66,16 @@ loadDialogue = function(DL)
 			end
 			DL:addNode()
 			
-			DL:createNPCNode(4, -2, "DL_Inina_Shrine") -- It's a shrine for the Eternal Light. Mages and commoners can come here and find strength and peace in prayer.
+			DL:createNPCNode(4, -2, "DL_Inina_Shrine") -- It''s a shrine for the Eternal Light. Mages and commoners can come here and find strength and peace in prayer.
 			DL:addConditionProgress("npc_inina", "shrine")
 			DL:gotoNode(3)
 			DL:addNode()
 			
-			DL:createNPCNode(5, -2, "DL_Inina_PowerWeakened") -- It seems like there is some magic around that is disturbing the divine magic of the shrine. We need to find the cause of this interfering magic.
-			DL:addConditionProgress("npc_inina", "power_weakened")
+			DL:createNPCNode(5, -2, "DL_Inina_PowerWeakened") -- It seems like there is some magic around that is disturbing the divine magic of the shrine. We need to find the cause of this interfering magic.			DL:addConditionProgress("npc_inina", "power_weakened")
 			DL:gotoNode(3)
 			DL:addNode()
 
-			DL:createNPCNode(6, -2, "DL_Inina_WhatDo") -- We've sent one of our paladins in the cave behind the shrine, but he has not returned until now. 
+			DL:createNPCNode(6, -2, "DL_Inina_WhatDo") -- We''ve sent one of our paladins in the cave behind the shrine, but he has not yet returned.
 			DL:addConditionProgress("npc_inina", "what_doing")
 			DL:addNode()
 	
@@ -84,13 +83,13 @@ loadDialogue = function(DL)
 		
 		if (DL:isConditionFulfilled("npc_inina", "what_doing") and DL:isQuestState("missing_paladin", "void")) then
 			
-			DL:createNPCNode(30, 31, "DL_Inina_MissingPaladin1") -- Yes, maybe you could help us. The name of the paladin I sent into the cave is Marcus.  
+			DL:createNPCNode(30, 31, "DL_Inina_MissingPaladin1") -- Yes, maybe you could help us. The name of the paladin I sent into the cave is Marcus.
 			DL:addNode()
 			
-			DL:createNPCNode(31, 32, "DL_Inina_MissingPaladin2") -- He has taken my pendant with him. A special pendant that holds some divine energy, it shines in the dark, so you should find him.
+			DL:createNPCNode(31, 32, "DL_Inina_MissingPaladin2") -- He has taken my pendant with him. A special pendant that holds some divine energy and shines in the dark, so you should be able to find him.
 			DL:addNode()
 			
-			DL:createNPCNode(32, -2, "DL_Inina_MissingPaladin3") -- You'll better take something with you that lights your way. I cannot accompany you, as I'm still trying to purify the magic of the shrine.
+			DL:createNPCNode(32, -2, "DL_Inina_MissingPaladin3") -- You''d better take something with you that lights your way. I cannot accompany you, as I''m still trying to purify the magic of the shrine.
 			DL:changeQuestState("missing_paladin", "started")
 			DL:addNode()
 		
@@ -98,7 +97,7 @@ loadDialogue = function(DL)
 		
 		if (not DL:isConditionFulfilled("npc_inina", "farmers")) then
 		
-			DL:createNPCNode(12, -2, "DL_Inina_Farmers") -- There were some incidents where people left the city and didn't return. We have to tackle this problem first before we take care of some missing sheep.
+			DL:createNPCNode(12, -2, "DL_Inina_Farmers") -- There were some incidents where people left the city and didn''t return. We have to tackle this problem first before we take care of some missing sheep.
 			DL:addConditionProgress("npc_inina", "farmers")
 			DL:addNode()
 			
@@ -106,7 +105,7 @@ loadDialogue = function(DL)
 		
 		if (DL:isConditionFulfilled("npc_inina", "farmers") and not DL:isConditionFulfilled("npc_inina", "missing_people")) then
 		
-			DL:createNPCNode(20, -2, "DL_Inina_MissingPeople") -- We suppose that these incidents are connected to the strange magical energy we are observing here. But this has yet to be confirmed.
+			DL:createNPCNode(20, -2, "DL_Inina_MissingPeople") -- We suspect that these incidents are connected to the strange magical energy we are observing here. But this has yet to be confirmed.
 			DL:addQuestDescription("gates_of_gandria", 1)
 			DL:addConditionProgress("npc_inina", "missing_people")
 			DL:addNode()
@@ -123,7 +122,7 @@ loadDialogue = function(DL)
 		
 		if (DL:isConditionFulfilled("npc_inina", "mage") and not DL:isConditionFulfilled("npc_inina", "aura")) then
 		
-			DL:createNPCNode(11, -2, "DL_Inina_Aura") -- No, I can only feel it, like most mages do. There are very few mages out there that are able to see auras, the clairvoyant, but I'm not one of them.
+			DL:createNPCNode(11, -2, "DL_Inina_Aura") -- No, I can only feel it. There are very few mages out there that are able to see auras, the clairvoyant. Sadly, I''m not one of them.
 			DL:addConditionProgress("npc_inina", "aura")
 			DL:addNode()
 			
@@ -133,10 +132,10 @@ loadDialogue = function(DL)
 
 			DL:createChoiceNode(40)
 			if (not DL:isConditionFulfilled("npc_inina", "where_light")) then
-				DL:addChoice(41, "DL_Choice_WhereLight") -- Where can I get a light?
+				DL:addChoice(41, "DL_Choice_WhereLight") -- Where can I get something to light my way?
 			end
 			if (not DL:isConditionFulfilled("npc_inina", "where_search")) then
-				DL:addChoice(42, "DL_Choice_WhereSearch") -- Where should I start to search for him?
+				DL:addChoice(42, "DL_Choice_WhereSearch") -- Where should I start the search?
 			end
 			if (not DL:isConditionFulfilled("npc_inina", "whats_reward")) then
 				DL:addChoice(43, "DL_Choice_WhatsInForMe") -- What's in for me if I find him?
@@ -147,7 +146,7 @@ loadDialogue = function(DL)
 			DL:addChoice(-2, "DL_Choice_Back") -- [BACK]
 			DL:addNode()
 			
-			DL:createNPCNode(41, -2, "DL_Inina_WhereLight") -- You'll need a torch. I don't have one, but I'm certain that you can buy one at the farm.
+			DL:createNPCNode(41, -2, "DL_Inina_WhereLight") -- You'll need a torch. I don't have one, but I'm sure that you can buy one at the farm.
 			DL:addConditionProgress("npc_inina", "where_light")
 			DL:gotoNode(40)
 			DL:addNode()
@@ -186,7 +185,7 @@ loadDialogue = function(DL)
 			
 			else
 				
-				DL:createNPCNode(50, -2, "DL_Inina_NoTeach") -- We can't tell yet whether your heart is pure. You have to prove first that you are willing to help us.
+				DL:createNPCNode(50, -2, "DL_Inina_NoTeach") -- We can't tell yet whether your heart is pure. You first have to prove that you are willing to help us.
 				DL:addNode()
 				
 			end
