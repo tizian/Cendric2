@@ -77,11 +77,6 @@ public:
 	static const std::string TEX_GUI_CHECKBOX;
 	static const std::string TEX_GUI_SLIDER;
 	static const std::string TEX_GUI_KNOB;
-	static const std::string TEX_GUI_SPELL_COLOR_ELEMENTAL;
-	static const std::string TEX_GUI_SPELL_COLOR_TWILIGHT;
-	static const std::string TEX_GUI_SPELL_COLOR_NECROMANCY;
-	static const std::string TEX_GUI_SPELL_COLOR_DIVINE;
-	static const std::string TEX_GUI_SPELL_COLOR_ILLUSION;
 	static const std::string TEX_GUI_SLOT_INVENTORY;
 	static const std::string TEX_GUI_SLOT_INVENTORY_SELECTED;
 	static const std::string TEX_GUI_SLOT_MODIFIER;

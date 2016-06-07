@@ -74,11 +74,6 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_GUI_CHECKBOX, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_SLIDER, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_KNOB, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_SPELL_COLOR_ELEMENTAL, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_SPELL_COLOR_TWILIGHT, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_SPELL_COLOR_NECROMANCY, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_SPELL_COLOR_DIVINE, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_SPELL_COLOR_ILLUSION, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY_SELECTED, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_SLOT_MODIFIER, ResourceType::Global);

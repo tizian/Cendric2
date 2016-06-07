@@ -312,19 +312,19 @@ void Spellbook::reload() {
 				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GEMS), sf::IntRect(50, 0, 50, 50));
 			}
 			else if (m_tabTypes[i] == SpellType::Elemental) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_ELEMENTAL), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS), sf::IntRect(250, 0, 50, 50));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_ELEMENTAL);
 			}
 			else if (m_tabTypes[i] == SpellType::Divine) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_DIVINE), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS), sf::IntRect(250, 150, 50, 50));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_DIVINE);
 			}
 			else if (m_tabTypes[i] == SpellType::Necromancy) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_NECROMANCY), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS), sf::IntRect(250, 100, 50, 50));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_NECROMANCY);
 			}
 			else if (m_tabTypes[i] == SpellType::Twilight) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPELL_COLOR_TWILIGHT), sf::IntRect(50, 50, 400, 400));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS), sf::IntRect(250, 50, 50, 50));
 				m_tabBar->getTabButton(i)->setTextureColor(COLOR_TWILIGHT);
 			}
 		}

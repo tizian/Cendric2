@@ -110,6 +110,26 @@ void SpellSlot::initSpellSlot() {
 		break;
 	}
 
+	if (m_isEmpty) {
+		switch (m_spellType) {
+		case SpellType::Elemental:
+			m_iconRect.setFillColor(COLOR_ELEMENTAL_INACTIVE);
+			break;
+		case SpellType::Twilight:
+			m_iconRect.setFillColor(COLOR_TWILIGHT_INACTIVE);
+			break;
+		case SpellType::Necromancy:
+			m_iconRect.setFillColor(COLOR_NECROMANCY_INACTIVE);
+			break;
+		case SpellType::Divine:
+			m_iconRect.setFillColor(COLOR_DIVINE_INACTIVE);
+			break;
+		default:
+			m_iconRect.setFillColor(COLOR_WHITE);
+			break;
+		}
+	}
+
 	initSlot();
 }
 
