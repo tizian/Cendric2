@@ -6,7 +6,7 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_inina", "hi")) then
 			DL:addChoice(2, "DL_Choice_Hey") -- Hey.
 		end
-		DL:addChoice(-1, "DL_Choice_Bye") -- ""
+		DL:addChoice(-1, "") -- ""
 		DL:addNode()
 		
 		DL:setRoot(0)
@@ -43,7 +43,7 @@ loadDialogue = function(DL)
 			DL:addChoice(50, "DL_Choice_CanYouTeachMe") -- Can you teach me something?
 		end
 		
-		DL:addChoice(-1, "DL_Choice_Bye") -- ""
+		DL:addChoice(-1, "") -- ""
 		DL:addNode()
 
 		DL:setRoot(0)

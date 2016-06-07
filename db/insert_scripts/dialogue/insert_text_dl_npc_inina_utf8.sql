@@ -1,10 +1,4 @@
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('', 'dl_npc_inina','','','');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('', 'dl_npc_inina','','','');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('', 'dl_npc_inina','','','');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('', 'dl_npc_inina','','','');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('', 'dl_npc_inina','','','');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Hey', 'dl_npc_inina','Hey.','Hallo.','Hoi.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Bye', 'dl_npc_inina','','','');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Inina_Hey', 'dl_npc_inina','Hello, young mage. I''m Inina, High Priestess of the Clerics. How can I help you?','','');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_WhatDoing', 'dl_npc_inina','What are you doing here?','','');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Mage', 'dl_npc_inina','How do you know I''m a mage?','','');
