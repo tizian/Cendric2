@@ -12,12 +12,12 @@ loadDialogue = function(DL)
 		DL:addChoice(30, "DL_Choice_Gandria") -- What can you tell me about Gandria?
 	end 
 	if (DL:isQuestState("monster_problem", "void") and DL:isConditionFulfilled("npc_ivo", "who_are_you")) then
-		DL:addChoice(5, "DL_Choice_Job") -- What job can you offer?
+		DL:addChoice(6, "DL_Choice_Job") -- What job can you offer?
 	end 
 	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "complete")) then
 		DL:addChoice(10, "DL_Choice_Sheep") -- About your sheep...
 	end
-	DL:addChoice(-1, "DL_Choice_Bye") -- Bye  
+	DL:addChoice(-1, "DL_Choice_Bye") -- Bye.  
 	DL:addNode()
 	
 	DL:setRoot(0)
@@ -76,20 +76,23 @@ loadDialogue = function(DL)
 	
 	if (not DL:isConditionFulfilled("npc_ivo", "sheep_asked")) then
 	
-		DL:createNPCNode(4, -2, "DL_Ivo_SheepDisappearing") -- That's true, unfortunately. I would be very grateful if you could take care of the thief.
+		DL:createNPCNode(4, 5, "DL_Ivo_SheepDisappearing") -- That's true, unfortunately.
 		DL:addConditionProgress("npc_ivo", "sheep_asked")
+		DL:addNode()
+		
+		DL:createNPCNode(5, -2, "DL_Ivo_Grateful") -- I would be very grateful if you could take care of the thief.
 		DL:addNode()
 		
 	end
 	
 	if (DL:isQuestState("monster_problem", "void")) then
 		
-		DL:createNPCNode(5, 6 "DL_Ivo_SheepQuest") -- Lately, some of my sheep went missing. Could be a wolf, could be some bandits. 
+		DL:createNPCNode(6, 7, "DL_Ivo_SheepQuest") -- Lately, some of my sheep went missing. Could be a wolf, could be some bandits. 
 		DL:addConditionProgress("npc_ivo", "sheep_asked")
 		DL:changeQuestState("monster_problem", "started")
 		DL:addNode()
 		
-		DL:createNPCNode(6, -2, "DL_Ivo_Grateful") -- I would be very grateful if you could take care of the thief.
+		DL:createNPCNode(7, -2, "DL_Ivo_Grateful") -- I would be very grateful if you could take care of the thief.
 		DL:addNode()
 		
 	end 

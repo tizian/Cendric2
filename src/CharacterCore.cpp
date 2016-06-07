@@ -499,12 +499,29 @@ void CharacterCore::addItem(const std::string& item, int quantity) {
 }
 
 void CharacterCore::removeItem(const std::string& item, int quantity) {
+	int quantityEreased = 0;
+
 	auto it = m_data.items.find(item);
 
 	if (it != m_data.items.end()) {
 		m_data.items.at(item) = m_data.items.at(item) - quantity;
 		if (m_data.items.at(item) <= 0) {
+			quantityEreased = quantity + m_data.items.at(item);
 			m_data.items.erase(item);
+		}
+		else {
+			quantityEreased = quantity;
+		}
+	}
+
+	// also look for equipped items
+	if (quantityEreased < quantity) {
+		for (auto& eqItem : m_data.equippedItems) {
+			if (eqItem.second.compare(item) == 0) {
+				eqItem.second.clear();
+				++quantityEreased;
+			}
+			if (quantityEreased == quantity) break;
 		}
 	}
 }

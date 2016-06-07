@@ -40,8 +40,8 @@ loadDialogue = function(DL)
 	
 	if (DL:isQuestState("silkweed_potion", "started") and DL:isConditionFulfilled("npc_rhendal", "potion_drunk")) then
 
-		DL:createNPCNode(0, 1, "DL_Rhendal_NiceVision") -- *Smiles* It seems that your vision was of use. I've never seen a guest of mine freeze my water before.  
-		DL:learnSpell(3)
+		DL:createNPCNode(0, 1, "DL_Rhendal_NiceVision") -- (Smiles) It seems that your vision was of use. I've never seen a guest of mine freeze my water before.  
+		DL:learnSpell(2)
 		DL:changeQuestState("the_mark", "started")
 		DL:addQuestProgress("who_am_i", "information_gathered")
 		DL:changeQuestState("who_am_i", "completed")

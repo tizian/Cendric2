@@ -18,7 +18,7 @@ loadDialogue = function(DL)
 		DL:addChoice(50, "DL_Choice_Trade") -- Show me your wares. [TRADE]
 	end 
 	
-	DL:addChoice(-1, "DL_Choice_Bye") -- Bye  
+	DL:addChoice(-1, "DL_Choice_Bye") -- Bye.  
 	DL:addNode()
 	
 	DL:setRoot(0)

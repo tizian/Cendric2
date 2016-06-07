@@ -70,6 +70,7 @@ void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	m_progressLog->addItemProgress(itemID, amount);
 	m_interface->reloadInventory(itemID);
 	m_interface->reloadQuestLog();
+	m_interface->reloadCharacterInfo();
 }
 
 void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {

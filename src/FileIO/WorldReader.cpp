@@ -744,10 +744,10 @@ void WorldReader::readLightsFromLayers(WorldData& data, std::vector<std::vector<
 
 			if (x + 1 >= data.mapSize.x) {
 				x = 0;
-				y++;
+				++y;
 			}
 			else {
-				x++;
+				++x;
 			}
 		}
 	}

@@ -1,0 +1,26 @@
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Farmer', 'dl_npc_tristan','Is this your farm?','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Merchant', 'dl_npc_tristan','Do you trade with the goods of your farm?','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_GiveReward', 'dl_npc_tristan','Your father told me to collect my reward from you.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Sheep', 'dl_npc_tristan','About your sheep...','Wegen deinen Schafen...','Wege dine Schöfli...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Trade', 'dl_npc_tristan','Show me your wares. [TRADE]','Zeig mir deine Waren. [HANDELN]','Zeig mir dini Ware [HANDLE]');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Bye', 'dl_npc_tristan','Bye.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_Merchant', 'dl_npc_tristan','Yes, you can buy meat, hearbs and also some other things here if you have gold.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_Farmer', 'dl_npc_tristan','Not yet. It still belongs to my father, Ivo. But in a few years, it''s mine.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_SoundsGreat', 'dl_npc_tristan','Sounds amazing.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Shepherd', 'dl_npc_tristan','So for now you''re not more than a shepherd then.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_SoundsGreat', 'dl_npc_tristan','Right? I''ll be very rich someday.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_Shepherd', 'dl_npc_tristan','Don''t be rude, I guess you''re only jelly because you don''t have a rich father like me.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Whatever', 'dl_npc_tristan','Whatever...','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Rude', 'dl_npc_tristan','I don''t need a rich father to be something, wally.','Ich brauche keinen reichen Vater, um etwas zu sein, Trottel.','Ich bruch ken riiche Vater zum öppis si, Tubel.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_Rude', 'dl_npc_tristan','How dare you talk to me like that. This won''t win you any friends...','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_Reward', 'dl_npc_tristan','So, you took care of the sheep thief? I''m impressed.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_RudeReward', 'dl_npc_tristan','You''re at least good for something. Ivo offered a reward of 70 gold to the person who''d get rid of the thief. But I don''t like how you talked to me earlier... I guess 50 is enough.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_NormalReward', 'dl_npc_tristan','Here, take this gold. And a torch, you might need it. You were really a huge help.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_ThiefSeen', 'dl_npc_tristan','Have you seen anything you could tell me about the thief?','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Bandits', 'dl_npc_tristan','So you think the thieves are bandits?','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_MonsterBanished', 'dl_npc_tristan','I took care of the sheep thief.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Choice_Back', 'dl_npc_tristan','[BACK]','[ZURÜCK]','[ZRUGG]');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_ThiefSeen', 'dl_npc_tristan','Hm, no. The thief only appeared when it was dark. I don''t really think it was a wolf, I would have found some carcass of the stolen sheep.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_Bandits', 'dl_npc_tristan','Maybe. If you are looking for them, don''t search near the city, they prefer hiding in the woods.','','');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DL_Tristan_MonsterBanished', 'dl_npc_tristan','Great. Go to Ivo to tell him the good news.','','');
+
