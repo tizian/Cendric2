@@ -25,7 +25,7 @@ loadDialogue = function(DL)
 			DL:addChoice(10, "DL_Choice_Mage") -- How do you know I'm a mage?
 		end
 		if (DL:isConditionFulfilled("npc_inina", "mage") and not DL:isConditionFulfilled("npc_inina", "aura")) then
-			DL:addChoice(11, "DL_Choice_Aura") -- Can you "see" my aura?
+			DL:addChoice(11, "DL_Choice_Aura") -- You can see my aura?
 		end
 		if (not DL:isConditionFulfilled("npc_inina", "farmers")) then
 			DL:addChoice(12, "DL_Choice_Farmers") -- Why do you oppress the farmers? They need your help.
