@@ -116,7 +116,7 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_inina", "mage")) then
 		
 			DL:createNPCNode(10, -2, "DL_Inina_Mage") -- (Smiles) The Eternal Light is well-disposed towards you. You have a very special aura.
-			DL:addConditionProgress("npc_inina", "what_doing")
+			DL:addConditionProgress("npc_inina", "mage")
 			DL:addNode()
 			
 		end
@@ -144,7 +144,7 @@ loadDialogue = function(DL)
 			if (DL:isQuestComplete("missing_paladin")) then
 				DL:addChoice(44, "DL_Choice_FoundPaladin") -- I found the Paladin. He's dead. [Give the pendant]
 			end
-			DL:addChoice("", "DL_Choice_Back") -- [BACK]
+			DL:addChoice(-2, "DL_Choice_Back") -- [BACK]
 			DL:addNode()
 			
 			DL:createNPCNode(41, -2, "DL_Inina_WhereLight") -- You'll need a torch. I don't have one, but I'm certain that you can buy one at the farm.
