@@ -27,6 +27,7 @@ const std::string GlobalResource::TEX_LEVELITEMS = "res/assets/items/spritesheet
 const std::string GlobalResource::TEX_SPELLICONS = "res/assets/spells/spritesheet_spellicons.png";
 const std::string GlobalResource::TEX_SPELLSCROLL = "res/assets/spells/scroll.png";
 const std::string GlobalResource::TEX_INVENTORYTABS = "res/assets/misc/spritesheet_inventorytabs.png";
+const std::string GlobalResource::TEX_SPELLBOOKTABS = "res/assets/misc/spritesheet_spellbooktabs.png";
 const std::string GlobalResource::TEX_EQUIPMENTPLACEHOLDERS = "res/assets/misc/spritesheet_equipmentplaceholders.png";
 const std::string GlobalResource::TEX_GEMS = "res/assets/misc/spritesheet_gems.png";
 

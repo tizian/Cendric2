@@ -57,6 +57,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_SPELLICONS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_SPELLSCROLL, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_INVENTORYTABS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SPELLBOOKTABS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GEMS, ResourceType::Global);
 

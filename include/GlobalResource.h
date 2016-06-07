@@ -33,6 +33,7 @@ public:
 	static const std::string TEX_SPELLICONS;
 	static const std::string TEX_SPELLSCROLL;
 	static const std::string TEX_INVENTORYTABS;
+	static const std::string TEX_SPELLBOOKTABS;
 	static const std::string TEX_EQUIPMENTPLACEHOLDERS;
 	static const std::string TEX_GEMS;
 	
