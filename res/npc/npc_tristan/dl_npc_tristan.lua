@@ -42,7 +42,7 @@ loadDialogue = function(DL)
 		
 		DL:createChoiceNode(3)
 		DL:addChoice(4, "DL_Choice_SoundsGreat") -- Sounds amazing.
-		DL:addChoice(5, "DL_Choice_Shepherd") -- But until then, you're only a shepherd.
+		DL:addChoice(5, "DL_Choice_Shepherd") -- So for now you're not more than a shepherd then.
 		DL:addNode()
 		
 		DL:createNPCNode(4, 6, "DL_Tristan_SoundsGreat") -- Right? I'll be very rich someday.
@@ -70,7 +70,7 @@ loadDialogue = function(DL)
 		
 		if (DL:isConditionFulfilled("npc_tristan", "rude")) then
 		
-			DL:createNPCNode(41, -2, "DL_Tristan_RudeReward") -- You're at least good for something. But I will keep some of the coins for myself. That's what you get for being so rude.
+			DL:createNPCNode(41, -2, "DL_Tristan_RudeReward") -- You're at least good for something. Ivo offered a reward of 70 gold to the person who'd get rid of the thief. But I don't like how you talked to me earlier... I guess 50 is enough.
 			DL:addGold(50)
 			DL:addNode()
 			

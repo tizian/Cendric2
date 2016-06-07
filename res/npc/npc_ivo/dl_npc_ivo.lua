@@ -58,7 +58,7 @@ loadDialogue = function(DL)
 		DL:createNPCNode(33, -2, "DL_Ivo_FightBack") -- It wouldn't be a good idea to rebel against the Clerics. As long as they leave us alone, we're good.
 		DL:addNode()
 		
-		DL:createNPCNode(34, -2, "DL_Ivo_TalkToThem") -- Talking is no use.. We've tried it over and over. Commoners like us are nothing more than slaves to them.
+		DL:createNPCNode(34, -2, "DL_Ivo_TalkToThem") -- Like we've never tried reasoning with them before... No. Talking is no use. Commoners like us are only scum to them.
 		DL:addNode()
 		
 		DL:createNPCNode(35, -2, "DL_Ivo_MyProblem") -- I guess it is.
@@ -118,7 +118,7 @@ loadDialogue = function(DL)
 		DL:addConditionProgress("npc_ivo", "zeff_is_it")
 		DL:addNode()
 		
-		DL:createNPCNode(13, -2, "DL_Ivo_GoAndKill") -- Interesting. And now go and make sure that he won't steal any more sheep. How you do it, is for you to decide.
+		DL:createNPCNode(13, -2, "DL_Ivo_GoAndKill") -- Interesting. And now go and make sure that he won't steal any more sheep. How you do it is for you to decide.
 		DL:gotoNode(10)
 		DL:addNode()
 		
