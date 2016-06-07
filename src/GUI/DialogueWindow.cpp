@@ -58,12 +58,13 @@ DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT
 
 void DialogueWindow::setPosition(const sf::Vector2f& pos) {
 	Window::setPosition(pos);
-	m_speakerSprite.setPosition(sf::Vector2f(pos.x, WINDOW_HEIGHT - 250.f));
+	m_speakerSprite.setPosition(sf::Vector2f(pos.x, pos.y - 250.f + HEIGHT));
 	m_speakerText->setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + 3 * WINDOW_MARGIN));
 	m_dialogueText->setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + SCROLL_WINDOW_TOP));
 }
 
 DialogueWindow::~DialogueWindow() {
+	delete m_merchantInterface;
 	delete m_dialogueText;
 	delete m_speakerText;
 	delete m_scrollBar;
@@ -118,7 +119,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 	WorldScreen* worldScreen = dynamic_cast<WorldScreen*>(m_screen);
 	m_merchantInterface = new MerchantInterface(worldScreen, m_npcID);
 	worldScreen->getProgressLog()->setVisible(false);
-	setPosition(sf::Vector2f(LEFT, TOP + HEIGHT));
+	setPosition(sf::Vector2f(LEFT, TOP + HEIGHT + 50.f));
 }
 
 void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices) {

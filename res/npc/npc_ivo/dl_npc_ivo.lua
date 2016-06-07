@@ -14,6 +14,9 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("monster_problem", "void") and DL:isConditionFulfilled("npc_ivo", "who_are_you")) then
 		DL:addChoice(6, "DL_Choice_Job") -- What job can you offer?
 	end 
+	if (DL:isConditionFulfilled("npc_ivo", "who_are_you") and not DL:isConditionFulfilled("npc_ivo", "sheep_asked")) then
+		DL:addChoice(4, "DL_Choice_AskSheep") -- I heard that your sheep are disappearing?
+	end
 	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "complete")) then
 		DL:addChoice(10, "DL_Choice_Sheep") -- About your sheep...
 	end
