@@ -87,6 +87,7 @@ item.id:we_simplesword,1
 item.id:we_torch,1
 item.id:we_walkingpole,1
 item.id:we_zeffssword,1
+item.id:we_ordermace,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:eq_back_necrot3
