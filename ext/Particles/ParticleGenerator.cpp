@@ -71,8 +71,10 @@ namespace particles
 	}
 
 	void BoxPositionGenerator::generate(ParticleData *data, int startId, int endId) {
-		sf::Vector2f posMin{ center.x - size.x, center.y - size.y };
-		sf::Vector2f posMax{ center.x + size.x, center.y + size.y };
+		float sx = 0.5f * size.x;
+		float sy = 0.5f * size.y;
+		sf::Vector2f posMin{ center.x - sx, center.y - sy };
+		sf::Vector2f posMax{ center.x + sx, center.y + sy };
 
 		for (int i = startId; i < endId; ++i) {
 			data->pos[i] = randomVector2f(posMin, posMax);
@@ -113,6 +115,32 @@ namespace particles
 	}
 
 
+	void RotationGenerator::generate(ParticleData *data, int startId, int endId) {
+		for (int i = startId; i < endId; ++i) {
+			float startPhi = DEG_TO_RAD * (randomFloat(minStartAngle, maxStartAngle));
+			float endPhi = DEG_TO_RAD * (randomFloat(minEndAngle, maxEndAngle));
+			data->angle[i].x = data->angle[i].y = startPhi;
+			data->angle[i].z = endPhi;
+		}
+	}
+
+
+	void ConstantRotationGenerator::generate(ParticleData *data, int startId, int endId) {
+		for (int i = startId; i < endId; ++i) {
+			float phi = DEG_TO_RAD * (angle);
+			data->angle[i].x = data->angle[i].y = data->angle[i].z = phi;
+		}
+	}
+
+
+	void DirectionDefinedRotationGenerator::generate(ParticleData *data, int startId, int endId) {
+		for (int i = startId; i < endId; ++i) {
+			float phi = 0.5f * M_PI - std::atan2(-data->vel[i].y, data->vel[i].x);
+			data->angle[i].x = data->angle[i].y = data->angle[i].z = phi;
+		}
+	}
+
+
 	void ColorGenerator::generate(ParticleData *data, int startId, int endId) {
 		for (int i = startId; i < endId; ++i) {
 			data->startCol[i] = randomColor(minStartCol, maxStartCol);
@@ -139,7 +167,7 @@ namespace particles
 		for (int i = startId; i < endId; ++i) {
 			float phi = DEG_TO_RAD * (randomFloat(minAngle, maxAngle) - 90.0f);		// offset to start at top instead of "mathematical 0 degrees"
 			sf::Vector2f dir{ std::cos(phi), std::sin(phi) };
-			float len = randomFloat(minStartVel, maxStartVel);
+			float len = randomFloat(minStartSpeed, maxStartSpeed);
 			data->vel[i] = dir * len;
 		}
 	}

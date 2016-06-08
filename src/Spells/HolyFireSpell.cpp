@@ -50,10 +50,10 @@ void HolyFireSpell::loadParticleSystem() {
 	m_posGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 10.f;
-	sizeGen->minEndSize = 10.f;
-	sizeGen->maxEndSize = 30.f;
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 20.f;
+	sizeGen->minEndSize = 20.f;
+	sizeGen->maxEndSize = 60.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	if (m_data.skinNr == 1) {
@@ -75,8 +75,8 @@ void HolyFireSpell::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -20.f;
 	velGen->maxAngle = 20.f;
-	velGen->minStartVel = 10.f;
-	velGen->maxStartVel = 30.f;
+	velGen->minStartSpeed = 10.f;
+	velGen->maxStartSpeed = 30.f;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 1.f;

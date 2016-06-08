@@ -82,6 +82,16 @@ namespace particles
 	};
 
 
+	class RotationUpdater : public ParticleUpdater
+	{
+	public:
+		RotationUpdater() {}
+		~RotationUpdater() {}
+
+		void update(ParticleData *data, float dt);
+	};
+
+
 	class ColorUpdater : public ParticleUpdater
 	{
 	public:

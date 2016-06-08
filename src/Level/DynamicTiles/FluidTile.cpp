@@ -75,16 +75,16 @@ void FluidTile::loadAnimation(int skinNr) {
 	m_emitterSize = &posGen->size;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 8.f;
-	sizeGen->maxStartSize = 16.0f;
-	sizeGen->minEndSize = 4.0f;
-	sizeGen->maxEndSize = 8.0f;
+	sizeGen->minStartSize = 16.f;
+	sizeGen->maxStartSize = 32.0f;
+	sizeGen->minEndSize = 8.0f;
+	sizeGen->maxEndSize = 16.0f;
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -40.f;
 	velGen->maxAngle = 40.f;
-	m_particleMinSpeed = &velGen->minStartVel;
-	m_particleMaxSpeed = &velGen->maxStartVel;
+	m_particleMinSpeed = &velGen->minStartSpeed;
+	m_particleMaxSpeed = &velGen->maxStartSpeed;
 
 	// Updaters
 	auto fluidUpdater = m_ps->addUpdater<particles::FluidUpdater>();
@@ -204,7 +204,7 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 	const sf::FloatRect* bb = getBoundingBox();
 
 	*m_emitterPosition = sf::Vector2f(xPosition + 0.5f * width, bb->top + bb->height - waterHeight);
-	*m_emitterSize = sf::Vector2f(0.4f * width, 1.f);
+	*m_emitterSize = sf::Vector2f(0.8f * width, 2.f);
 	*m_particleMinSpeed = 0.2f * particleVelocity;
 	*m_particleMaxSpeed = 1.0f * particleVelocity;
 

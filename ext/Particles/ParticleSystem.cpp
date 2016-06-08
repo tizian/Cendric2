@@ -1,5 +1,7 @@
 #include "Particles/ParticleSystem.h"
 
+#include <iostream>
+
 namespace particles
 {
 	ParticleSystem::ParticleSystem(int maxCount) : emitRate(0.f), m_dt(0.f) {
@@ -132,10 +134,30 @@ namespace particles
 
 	void TextureParticleSystem::updateVertices() {
 		for (int i = 0; i < m_particles->countAlive; ++i) {
-			m_vertices[4 * i + 0].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 0].position.y = m_particles->pos[i].y - m_particles->size[i].x;
-			m_vertices[4 * i + 1].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 1].position.y = m_particles->pos[i].y - m_particles->size[i].x;
-			m_vertices[4 * i + 2].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 2].position.y = m_particles->pos[i].y + m_particles->size[i].x;
-			m_vertices[4 * i + 3].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 3].position.y = m_particles->pos[i].y + m_particles->size[i].x;
+			float size = 0.5f * m_particles->size[i].x;
+			float angle = m_particles->angle[i].x;
+			
+			m_vertices[4 * i + 0].position.x = -size;	m_vertices[4 * i + 0].position.y = -size;
+			m_vertices[4 * i + 1].position.x = +size;	m_vertices[4 * i + 1].position.y = -size;
+			m_vertices[4 * i + 2].position.x = +size;	m_vertices[4 * i + 2].position.y = +size;
+			m_vertices[4 * i + 3].position.x = -size;	m_vertices[4 * i + 3].position.y = +size;
+
+			if (angle != 0.f) {
+				float sin = std::sin(angle); float cos = std::cos(angle);
+
+				for (int j = 0; j < 4; ++j) {
+					float x = m_vertices[4 * i + j].position.x;
+					float y = m_vertices[4 * i + j].position.y;
+
+					m_vertices[4 * i + j].position.x = cos * x - sin * y;
+					m_vertices[4 * i + j].position.y = sin * x + cos * y;
+				}
+			}
+
+			m_vertices[4 * i + 0].position.x += m_particles->pos[i].x;	m_vertices[4 * i + 0].position.y += m_particles->pos[i].y;
+			m_vertices[4 * i + 1].position.x += m_particles->pos[i].x;	m_vertices[4 * i + 1].position.y += m_particles->pos[i].y;
+			m_vertices[4 * i + 2].position.x += m_particles->pos[i].x;	m_vertices[4 * i + 2].position.y += m_particles->pos[i].y;
+			m_vertices[4 * i + 3].position.x += m_particles->pos[i].x;	m_vertices[4 * i + 3].position.y += m_particles->pos[i].y;
 
 			m_vertices[4 * i + 0].color = m_particles->col[i];
 			m_vertices[4 * i + 1].color = m_particles->col[i];
@@ -176,17 +198,9 @@ namespace particles
 	}
 
 	void SpriteSheetParticleSystem::updateVertices() {
+		TextureParticleSystem::updateVertices();
+
 		for (int i = 0; i < m_particles->countAlive; ++i) {
-			m_vertices[4 * i + 0].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 0].position.y = m_particles->pos[i].y - m_particles->size[i].x;
-			m_vertices[4 * i + 1].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 1].position.y = m_particles->pos[i].y - m_particles->size[i].x;
-			m_vertices[4 * i + 2].position.x = m_particles->pos[i].x + m_particles->size[i].x;	m_vertices[4 * i + 2].position.y = m_particles->pos[i].y + m_particles->size[i].x;
-			m_vertices[4 * i + 3].position.x = m_particles->pos[i].x - m_particles->size[i].x;	m_vertices[4 * i + 3].position.y = m_particles->pos[i].y + m_particles->size[i].x;
-
-			m_vertices[4 * i + 0].color = m_particles->col[i];
-			m_vertices[4 * i + 1].color = m_particles->col[i];
-			m_vertices[4 * i + 2].color = m_particles->col[i];
-			m_vertices[4 * i + 3].color = m_particles->col[i];
-
 			float left = static_cast<float>(m_particles->texCoords[i].left);
 			float top = static_cast<float>(m_particles->texCoords[i].top);
 			float width = static_cast<float>(m_particles->texCoords[i].width);

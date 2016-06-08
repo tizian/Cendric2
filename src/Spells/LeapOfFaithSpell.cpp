@@ -75,14 +75,14 @@ void LeapOfFaithSpell::loadParticleSystem() {
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(20.f, 20.f);
+	posGen->size = sf::Vector2f(40.f, 40.f);
 	m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 2.f;
-	sizeGen->maxStartSize = 5.f;
-	sizeGen->minEndSize = 0.5f;
-	sizeGen->maxEndSize = 2.f;
+	sizeGen->minStartSize = 4.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 1.f;
+	sizeGen->maxEndSize = 4.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(255, 255, 204, 150);
@@ -93,8 +93,8 @@ void LeapOfFaithSpell::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 170.f;
 	velGen->maxAngle = 190.f;
-	velGen->minStartVel = 20.f;
-	velGen->maxStartVel = 30.f;
+	velGen->minStartSpeed = 20.f;
+	velGen->maxStartSpeed = 30.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

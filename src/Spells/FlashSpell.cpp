@@ -86,10 +86,10 @@ void FlashSpell::loadParticleSystem() {
 	m_posGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 40.f;
-	sizeGen->minEndSize = 30.f;
-	sizeGen->maxEndSize = 60.f;
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 80.f;
+	sizeGen->minEndSize = 60.f;
+	sizeGen->maxEndSize = 120.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(24, 21, 57, 100);
@@ -100,8 +100,8 @@ void FlashSpell::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -30.f;
 	velGen->maxAngle = 30.f;
-	velGen->minStartVel = 70.f;
-	velGen->maxStartVel = 100.f;
+	velGen->minStartSpeed = 70.f;
+	velGen->maxStartSpeed = 100.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

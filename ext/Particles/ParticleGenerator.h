@@ -101,6 +101,45 @@ namespace particles
 	};
 
 
+	class RotationGenerator : public ParticleGenerator
+	{
+	public:
+		RotationGenerator() {}
+		~RotationGenerator() {}
+
+		void generate(ParticleData *data, int startId, int endId);
+
+	public:
+		float minStartAngle{ 0.0f };
+		float maxStartAngle{ 0.0f };
+		float minEndAngle{ 0.0f };
+		float maxEndAngle{ 0.0f };
+	};
+
+
+	class DirectionDefinedRotationGenerator : public ParticleGenerator
+	{
+	public:
+		DirectionDefinedRotationGenerator() {}
+		~DirectionDefinedRotationGenerator() {}
+
+		void generate(ParticleData *data, int startId, int endId);
+	};
+
+
+	class ConstantRotationGenerator : public ParticleGenerator
+	{
+	public:
+		ConstantRotationGenerator() {}
+		~ConstantRotationGenerator() {}
+
+		void generate(ParticleData *data, int startId, int endId);
+
+	public:
+		float angle{ 0.0f };
+	};
+
+
 	class ColorGenerator : public ParticleGenerator
 	{
 	public:
@@ -155,8 +194,8 @@ namespace particles
 	public:
 		float minAngle{ 0.0f };
 		float maxAngle{ 0.0f };
-		float minStartVel{ 0.0f };
-		float maxStartVel{ 0.0f };
+		float minStartSpeed{ 0.0f };
+		float maxStartSpeed{ 0.0f };
 	};
 
 

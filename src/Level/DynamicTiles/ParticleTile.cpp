@@ -73,10 +73,10 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	m_diskPosGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 10.f;
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 1.f;
+	sizeGen->maxEndSize = 2.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color::Yellow;
@@ -87,8 +87,8 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -5.f;
 	velGen->maxAngle = 5.f;
-	velGen->minStartVel = 20.f;
-	velGen->maxStartVel = 50.f;
+	velGen->minStartSpeed = 20.f;
+	velGen->maxStartSpeed = 50.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

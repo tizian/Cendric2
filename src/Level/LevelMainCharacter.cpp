@@ -375,10 +375,10 @@ void LevelMainCharacter::loadParticleSystem() {
 	m_posGenerator->radius = 20.f;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 10.f;
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 1.f;
+	sizeGen->maxEndSize = 2.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(255, 255, 255, 255);
@@ -389,8 +389,8 @@ void LevelMainCharacter::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -45.f;
 	velGen->maxAngle = 45.f;
-	velGen->minStartVel = 50.f;
-	velGen->maxStartVel = 70.f;
+	velGen->minStartSpeed = 50.f;
+	velGen->maxStartSpeed = 70.f;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 2.f;

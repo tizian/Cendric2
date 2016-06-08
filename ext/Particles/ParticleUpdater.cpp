@@ -107,6 +107,16 @@ namespace particles
 	}
 
 
+	void RotationUpdater::update(ParticleData *data, float dt) {
+		const int endId = data->countAlive;
+
+		for (int i = 0; i < endId; ++i) {
+			float a = data->time[i].z;
+			data->angle[i].x = lerpFloat(data->angle[i].y, data->angle[i].z, a);
+		}
+	}
+
+
 	void ColorUpdater::update(ParticleData *data, float dt) {
 		const int endId = data->countAlive;
 

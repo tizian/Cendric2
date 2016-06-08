@@ -17,11 +17,11 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 
 		m_ps->emitRate = 200.f;
 		
-		float minSize = 5.f;
-		float maxSize = 15.f;
+		float minSize = 10.f;
+		float maxSize = 30.f;
 		if (isLevel) {
-			minSize = 8.f;
-			maxSize = 20.f;
+			minSize = 16.f;
+			maxSize = 40.f;
 		}
 		auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 		sizeGen->minStartSize = minSize;
@@ -32,8 +32,8 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 		velGen->minAngle = 160.f;
 		velGen->maxAngle = 160.f;
-		velGen->minStartVel = 400.f;
-		velGen->maxStartVel = 500.f;
+		velGen->minStartSpeed = 400.f;
+		velGen->maxStartSpeed = 500.f;
 	}
 	else if (data->weather.compare("snow") == 0) {
 		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SNOW));
@@ -41,23 +41,23 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		m_ps->emitRate = 100.f;
 
 		auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-		sizeGen->minStartSize = 2.f;
-		sizeGen->maxStartSize = 8.f;
-		sizeGen->minEndSize = 2.f;
-		sizeGen->maxEndSize = 8.f;
+		sizeGen->minStartSize = 4.f;
+		sizeGen->maxStartSize = 16.f;
+		sizeGen->minEndSize = 4.f;
+		sizeGen->maxEndSize = 16.f;
 
 		auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 		velGen->minAngle = 160.f;
 		velGen->maxAngle = 200.f;
-		velGen->minStartVel = 100.f;
-		velGen->maxStartVel = 250.f;
+		velGen->minStartSpeed = 100.f;
+		velGen->maxStartSpeed = 250.f;
 	}
 	else {
 		return;
 	}
 
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->size = sf::Vector2f(2.f * WINDOW_WIDTH, WINDOW_HEIGHT);
+	posGen->size = sf::Vector2f(4.f * WINDOW_WIDTH, 2.f * WINDOW_HEIGHT);
 	m_center = &posGen->center;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

@@ -55,14 +55,14 @@ void WindGustSpell::loadParticleSystem() {
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + SPELL_OFFSET, getPosition().y + getBoundingBox()->height / 2);
-	posGen->size = sf::Vector2f(0.f, getBoundingBox()->height / 2.f);
+	posGen->size = sf::Vector2f(0.f, getBoundingBox()->height);
 	m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 2.f;
-	sizeGen->maxStartSize = 6.f;
+	sizeGen->minStartSize = 4.f;
+	sizeGen->maxStartSize = 12.f;
 	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 1.f;
+	sizeGen->maxEndSize = 2.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(210, 230, 250, 255);
@@ -73,13 +73,13 @@ void WindGustSpell::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 90 + -20.f;
 	velGen->maxAngle = 90 + 20.f;
-	velGen->minStartVel = m_pushAcceleration;
-	velGen->maxStartVel = m_pushAcceleration;
+	velGen->minStartSpeed = m_pushAcceleration;
+	velGen->maxStartSpeed = m_pushAcceleration;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 1.0f;
-	timeGen->maxTime = getBoundingBox()->width / velGen->maxStartVel;
+	timeGen->maxTime = getBoundingBox()->width / velGen->maxStartSpeed;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();

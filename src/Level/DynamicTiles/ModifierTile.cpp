@@ -122,10 +122,10 @@ void ModifierTile::loadParticleSystem() {
 	m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 10.f;
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 1.f;
+	sizeGen->maxEndSize = 2.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = SpellModifier::getSpellModifierColor(m_modifier.type);
@@ -137,8 +137,8 @@ void ModifierTile::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
-	velGen->minStartVel = 30.f * m_modifier.level / 3;
-	velGen->maxStartVel = 60.f * m_modifier.level / 3;
+	velGen->minStartSpeed = 30.f * m_modifier.level / 3;
+	velGen->maxStartSpeed = 60.f * m_modifier.level / 3;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

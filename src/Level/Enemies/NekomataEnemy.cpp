@@ -186,14 +186,14 @@ void NekomataEnemy::loadParticleSystem() {
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(getBoundingBox()->width / 2.f, getBoundingBox()->height / 2.f);
+	posGen->size = sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height);
 	m_posGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 5.f;
-	sizeGen->maxStartSize = 20.f;
-	sizeGen->minEndSize = 20.f;
-	sizeGen->maxEndSize = 40.f;
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 40.f;
+	sizeGen->minEndSize = 40.f;
+	sizeGen->maxEndSize = 80.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(24, 21, 57, 80);
@@ -204,8 +204,8 @@ void NekomataEnemy::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = -45.f;
 	velGen->maxAngle = 45.f;
-	velGen->minStartVel = 50.f;
-	velGen->maxStartVel = 70.f;
+	velGen->minStartSpeed = 50.f;
+	velGen->maxStartSpeed = 70.f;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 2.f;

@@ -71,7 +71,7 @@ bool GhostFormSpell::getConfiguredRotateSprite() const {
 	return false;
 }
 
-void GhostFormSpell::loadParticleSystem(float startVelocity) {
+void GhostFormSpell::loadParticleSystem(float startSpeed) {
 	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LONGBLOB)));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
@@ -79,14 +79,14 @@ void GhostFormSpell::loadParticleSystem(float startVelocity) {
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(1.f, m_mob->getBoundingBox()->height / 2.f);
+	posGen->size = sf::Vector2f(2.f, m_mob->getBoundingBox()->height);
 	m_posGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 2.f;
-	sizeGen->maxStartSize = 5.f;
-	sizeGen->minEndSize = 0.5f;
-	sizeGen->maxEndSize = 2.f;
+	sizeGen->minStartSize = 4.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 1.f;
+	sizeGen->maxEndSize = 4.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(89, 222, 100, 200);
@@ -95,8 +95,8 @@ void GhostFormSpell::loadParticleSystem(float startVelocity) {
 	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minStartVel = startVelocity / 2.f - 10.f;
-	velGen->maxStartVel = startVelocity / 2.f + 10.f;
+	velGen->minStartSpeed = startSpeed / 2.f - 10.f;
+	velGen->maxStartSpeed = startSpeed / 2.f + 10.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

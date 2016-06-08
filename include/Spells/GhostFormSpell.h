@@ -25,7 +25,7 @@ private:
 	particles::AngledVelocityGenerator* m_velGenerator;
 	particles::BoxPositionGenerator* m_posGenerator;
 
-	void loadParticleSystem(float startVelocity);
+	void loadParticleSystem(float startSpeed);
 	void loadMask();
 
 	void updateParticleSystemPosition();

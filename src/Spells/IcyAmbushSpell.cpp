@@ -63,14 +63,14 @@ void IcyAmbushSpell::loadParticleSystem() {
 	// Generators
 	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(getBoundingBox()->width / 2.f, 0.f);
+	posGen->size = sf::Vector2f(getBoundingBox()->width, 0.f);
 	m_pointGenerator = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 1.f;
-	sizeGen->maxStartSize = 2.f;
-	sizeGen->minEndSize = 5.f;
-	sizeGen->maxEndSize = 10.f;
+	sizeGen->minStartSize = 2.f;
+	sizeGen->maxStartSize = 4.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 20.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(210, 230, 250, 255);
@@ -81,8 +81,8 @@ void IcyAmbushSpell::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
-	velGen->minStartVel = 200.f;
-	velGen->maxStartVel = 200.f;
+	velGen->minStartSpeed = 200.f;
+	velGen->maxStartSpeed = 200.f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
