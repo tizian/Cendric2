@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Spells/UnlockSpell.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "GameObjectComponents/LightComponent.h"
 
 using namespace std;
 
@@ -38,7 +39,7 @@ void ChestTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(false);
 }
 
-void ChestTile::setLoot(const std::map<string, int>& items, int gold) {
+void ChestTile::setLoot(const std::map<std::string, int>& items, int gold) {
 	m_lootableItems = items;
 	m_lootableGold = gold;
 	delete m_lootWindow;
@@ -91,16 +92,26 @@ void ChestTile::update(const sf::Time& frameTime) {
 		sf::Vector2f pos(getBoundingBox()->left + getBoundingBox()->width, getBoundingBox()->top - m_lootWindow->getSize().y + 10.f);
 		m_lootWindow->setPosition(pos);
 	}
-	m_showLootWindow = m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips);
+	m_showLootWindow = m_interactComponent->isInteractable() && (m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips));
 }
 
-void ChestTile::setObjectID(int id) {
-	m_objectID = id;
-}
-
-void ChestTile::setStrength(int strength) {
-	if (strength < 0 || strength > 4) return;
-	m_strength = strength;
+void ChestTile::setChestData(const ChestData& data) {
+	m_objectID = data.objectID;
+	if (data.chestStrength >= 0 && data.chestStrength <= 4) {
+		m_strength = data.chestStrength;
+	}
+	setLoot(data.loot.first, data.loot.second);
+	m_isPermanent = data.isPermanent;
+	if (data.isOpen) {
+		unlock();
+	}
+	if (!data.tooltipText.empty()) {
+		m_interactComponent->setTooltipText(g_textProvider->getText(data.tooltipText, "chest"));
+	}
+	if (data.lightData.radius.x > 0.f && data.lightData.radius.y > 0.f) {
+		m_lightComponent = new LightComponent(data.lightData, this);
+		addComponent(m_lightComponent);
+	}
 }
 
 void ChestTile::onMouseOver() {
@@ -111,17 +122,28 @@ void ChestTile::onMouseOver() {
 	}
 }
 
+void ChestTile::unlock() {
+	m_interactComponent->setInteractText("ToPickup");
+	setState(GameObjectState::Unlocked);
+}
+
 void ChestTile::loot() {
 	// loot, create the correct items + gold in the players inventory.
 	m_mainChar->lootItems(m_lootableItems);
 	if (m_lootableGold > 0)
 		m_mainChar->addGold(m_lootableGold);
 	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
-	setDisposed();
+	m_interactComponent->setInteractable(false);
+	if (m_lightComponent != nullptr) {
+		m_lightComponent->setVisible(false);
+	}
+	if (!m_isPermanent) {
+		setDisposed();
+	}
 }
 
 void ChestTile::onRightClick() {
-	if (m_mainChar->isDead()) return;
+	if (m_mainChar->isDead() || !m_interactComponent->isInteractable()) return;
 	if (m_state == GameObjectState::Unlocked) {
 		// check if the chest is in range
 		if (dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE) {
@@ -136,9 +158,7 @@ void ChestTile::onRightClick() {
 		// check if the chest is in range
 		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
 		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
-			// unlock!
-			m_interactComponent->setInteractText("ToPickup");
-			setState(GameObjectState::Unlocked);
+			unlock();
 		}
 		else {
 			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);

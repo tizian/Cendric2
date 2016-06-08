@@ -44,6 +44,10 @@ protected:
 	const CharacterCore* m_core;
 	std::map<int, LightData> m_lightTiles;
 
+	// used to resolve a light string (x offset, y offset, width, height, brightness)
+	// and write into the light data. Returns whether it was successful.
+	bool resolveLightString(const std::string& lightString, LightData& data) const;
+
 private:
 	void readLightsFromLayers(WorldData& data, std::vector<std::vector<int>>& layers) const;
 };

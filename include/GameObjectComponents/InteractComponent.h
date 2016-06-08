@@ -23,6 +23,7 @@ public:
 	void setInteractable(bool interactable);
 
 	float getDistanceToMainChar() const;
+	bool isInteractable() const;
 
 private:
 	// placeholder for agents

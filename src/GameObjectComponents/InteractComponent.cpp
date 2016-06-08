@@ -37,6 +37,10 @@ float InteractComponent::getDistanceToMainChar() const {
 	return dist(m_mainChar->getCenter(), m_animatedParent->getCenter());
 }
 
+bool InteractComponent::isInteractable() const {
+	return m_isInteractable;
+}
+
 void InteractComponent::setOnInteract(const std::function<void()>& agent) {
 	m_executeOnInteract = agent;
 }

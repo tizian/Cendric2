@@ -3,7 +3,7 @@
 
 const sf::Time TooltipComponent::TOOLTIP_TIME = sf::seconds(1.f);
 
-TooltipComponent::TooltipComponent(std::string tooltip, AnimatedGameObject* parent, bool useInteractiveColor) : GameObjectComponent(parent) {
+TooltipComponent::TooltipComponent(const std::string& tooltip, AnimatedGameObject* parent, bool useInteractiveColor) : GameObjectComponent(parent) {
 	m_animatedParent = parent;
 	m_useInteractiveColor = useInteractiveColor;
 
@@ -27,6 +27,11 @@ void TooltipComponent::setPosition(const sf::Vector2f& pos) {
 
 void TooltipComponent::setTooltipHeight(float height) {
 	m_tooltipHeight = height;
+}
+
+void TooltipComponent::setTooltipText(const std::string& tooltip) {
+	m_tooltipText.setString(tooltip);
+	setPosition(m_parent->getPosition());
 }
 
 void TooltipComponent::renderAfterForeground(sf::RenderTarget& renderTarget) {

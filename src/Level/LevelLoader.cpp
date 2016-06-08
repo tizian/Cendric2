@@ -42,19 +42,13 @@ void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
 
 		ChestTile* chestTile = nullptr;
 
-		// calculate loot.
-		std::map<string, int> loot = it.loot.first;
-		int gold = it.loot.second;
-
 		chestTile = new ChestTile(screen);
-		chestTile->init();
-		chestTile->setObjectID(it.objectID);
-		chestTile->setStrength(it.chestStrength);
-		chestTile->setLoot(loot, gold);
-		chestTile->setPosition(it.spawnPosition + chestTile->getPositionOffset());
+		chestTile->init();	
 		chestTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		chestTile->loadResources();
 		chestTile->loadAnimation(it.skinNr);
+		chestTile->setChestData(it);
+		chestTile->setPosition(it.spawnPosition + chestTile->getPositionOffset());
 		screen->addObject(chestTile);
 	}
 }
