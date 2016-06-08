@@ -54,7 +54,7 @@ void StonemanEnemy::loadSpells() {
 	fireBallSpell.speed = 400.f;
 	fireBallSpell.isDynamicTileEffect = false;
 	fireBallSpell.damageType = DamageType::Ice;
-	fireBallSpell.skinNr = 1;
+	fireBallSpell.skinNr = 4;
 	fireBallSpell.isBlocking = true;
 	fireBallSpell.castingTime = sf::milliseconds(7 * 100);
 	fireBallSpell.fightingTime = sf::Time::Zero;
