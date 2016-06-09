@@ -59,6 +59,7 @@ INSERT INTO item_attribute (item_id, health_regeneration, dmg_light, res_shadow)
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_glowingshroom', 15);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_glowingshroom', -10, -20, 30, 30);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_glowingshroom', 1, 100, 50, 50, 50);
+INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('fo_glowingshroom',10, 10, 50, 50, 0.2);
 
 -- Healing Herb
 
