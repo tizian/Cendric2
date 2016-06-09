@@ -31,7 +31,8 @@ const std::string foregroundFragmentShader = \
 "void main()" \
 "{" \
 "    vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
-"	 gl_FragColor = vec4(0.0, 0.0, 0.0, min(ambientLevel, pixel.a)); " \
+"	 float a = pixel.a > 0.0 ? ambientLevel : 0.0;"
+"	 gl_FragColor = vec4(0.0, 0.0, 0.0, a); " \
 "}";
 
 WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
