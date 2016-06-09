@@ -1,6 +1,6 @@
 #include "Particles/ParticleSystem.h"
 
-#include <iostream>
+#include <cmath>
 
 namespace particles
 {
