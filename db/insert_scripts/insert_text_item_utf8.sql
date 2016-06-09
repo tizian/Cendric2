@@ -158,7 +158,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_hawthorn', 'item_desc', 'This staff grew on a magic tree but was broken off before it reached its full magical power.','Dieser Stab wuchs an einem magischen Baum und wurde abgebrochen bevor er seine volle magische Kraft entfaltete.','De Stab isch amne magische Bäumli gwachse und isch abbroche worde bevor er sini voll magisch Kraft entfaltet het.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item','Iron Claw', 'Eisenklaue','Isechlaue');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item_desc', '...','...','...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pikeofgod', 'item','Pike of Gods', 'Pike der Götter','Götterlanze');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pikeofgod', 'item','Pike of the Eternal Light', 'Pike des Ewigen Lichts','Lanze vom Ewige Liecht');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pikeofgod', 'item_desc', '...','...','...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_simplesword', 'item','Simple Sword', 'Einfaches Schwert','Eifachs Schwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_simplesword', 'item_desc', 'There''s nothing special about this sword.','Ein ganz normales Schwert.','Es hundskomuns Schwert.');
