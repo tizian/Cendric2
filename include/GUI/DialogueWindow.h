@@ -89,7 +89,7 @@ private:
 	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
 	sf::Time m_timeSinceTick = sf::Time::Zero;
 	// the timeout before the next step of a dialogue can be activated
-	const sf::Time DIALOGUE_TIMEOUT = sf::milliseconds(200);
+	const sf::Time DIALOGUE_TIMEOUT = sf::milliseconds(500);
 	sf::Time m_dialogueTimeout = sf::Time::Zero;
 
 	static const int OPTION_COUNT;
