@@ -21,6 +21,7 @@ const std::string GlobalResource::TEX_PARTICLE_STAR = "res/assets/particles/star
 const std::string GlobalResource::TEX_PARTICLE_RAIN = "res/assets/particles/rain.png";
 const std::string GlobalResource::TEX_PARTICLE_SNOW = "res/assets/particles/snow.png";
 const std::string GlobalResource::TEX_PARTICLE_FLAME = "res/assets/particles/flame.png";
+const std::string GlobalResource::TEX_PARTICLE_FIRE = "res/assets/particles/fire.png";
 
 const std::string GlobalResource::TEX_ITEMS = "res/assets/items/spritesheet_items.png";
 const std::string GlobalResource::TEX_LEVELITEMS = "res/assets/items/spritesheet_levelitems.png";

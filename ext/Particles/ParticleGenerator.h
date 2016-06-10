@@ -199,6 +199,21 @@ namespace particles
 	};
 
 
+	class AimedVelocityGenerator : public ParticleGenerator
+	{
+	public:
+		AimedVelocityGenerator() {}
+		~AimedVelocityGenerator() {}
+
+		void generate(ParticleData *data, int startId, int endId);
+
+	public:
+		sf::Vector2f goal{ 0.f, 0.f };
+		float minStartSpeed{ 0.0f };
+		float maxStartSpeed{ 0.0f };
+	};
+
+
 	class TimeGenerator : public ParticleGenerator
 	{
 	public:

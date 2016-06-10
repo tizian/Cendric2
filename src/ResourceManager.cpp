@@ -50,6 +50,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_PARTICLE_STAR, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_SNOW, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_FLAME, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_PARTICLE_FIRE, ResourceType::Global);
 
 	// load global miscanellous resources
 	loadTexture(GlobalResource::TEX_ITEMS, ResourceType::Global);

@@ -24,8 +24,8 @@ public:
 
 private:
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
-	particles::AngledVelocityGenerator* m_velGenerator = nullptr;
-	particles::DiskPositionGenerator* m_diskPosGenerator = nullptr;
+	particles::AimedVelocityGenerator* m_velGenerator = nullptr;
+	particles::BoxPositionGenerator* m_posGenerator = nullptr;
 
 	void loadParticleSystem(int skinNr);
 };

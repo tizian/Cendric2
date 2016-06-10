@@ -7,6 +7,7 @@ using namespace std;
 
 LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : WorldScreen(core) {
 	m_levelID = levelID;
+	m_particleRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void LevelScreen::loadForRenderTexture() {
@@ -138,6 +139,10 @@ const LevelData* LevelScreen::getWorldData() const {
 	return m_currentLevel.getWorldData();
 }
 
+sf::RenderTexture& LevelScreen::getParticleRenderTexture() {
+	return m_particleRenderTexture;
+}
+
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 	handleGameOver(frameTime);
@@ -197,6 +202,8 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 }
 
 void LevelScreen::render(sf::RenderTarget& renderTarget) {
+	m_particleRenderTexture.clear(sf::Color(0, 0, 0, 0));
+
 	sf::Vector2f focus = m_mainChar->getCenter();
 
 	// Render level background and content to window				(Normal level background rendered)
@@ -213,6 +220,11 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_Spell, renderTarget);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
+
+	m_particleRenderTexture.display();
+	m_sprite.setTexture(m_particleRenderTexture.getTexture());
+	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_sprite);
 
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();

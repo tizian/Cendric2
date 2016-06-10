@@ -41,6 +41,8 @@ public:
 	const Level* getWorld() const override;
 	const LevelData* getWorldData() const override;
 
+	sf::RenderTexture& getParticleRenderTexture();
+
 private:
 	void quicksave() override;
 
@@ -60,6 +62,8 @@ private:
 	Button* m_resumeButton = nullptr;
 
 	ScreenOverlay* m_gamePausedOverlay = nullptr;
+
+	sf::RenderTexture m_particleRenderTexture;
 
 	void handleGameOver(const sf::Time& frameTime);
 	void handleBossDefeated(const sf::Time& frameTime);

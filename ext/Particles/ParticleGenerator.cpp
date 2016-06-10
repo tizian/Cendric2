@@ -173,6 +173,17 @@ namespace particles
 	}
 
 
+	void AimedVelocityGenerator::generate(ParticleData *data, int startId, int endId) {
+		for (int i = startId; i < endId; ++i) {
+			sf::Vector2f dir = goal - data->pos[i];
+			float magnitude = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+			dir /= magnitude;
+			float len = randomFloat(minStartSpeed, maxStartSpeed);
+			data->vel[i] = dir * len;
+		}
+	}
+
+
 	void TimeGenerator::generate(ParticleData *data, int startId, int endId) {
 		for (int i = startId; i < endId; ++i) {
 			data->time[i].x = data->time[i].y = randomFloat(minTime, maxTime);

@@ -27,6 +27,7 @@ public:
 	static const std::string TEX_PARTICLE_RAIN;
 	static const std::string TEX_PARTICLE_SNOW;
 	static const std::string TEX_PARTICLE_FLAME;
+	static const std::string TEX_PARTICLE_FIRE;
 
 	static const std::string TEX_ITEMS;
 	static const std::string TEX_LEVELITEMS;
