@@ -43,6 +43,9 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		if (m_state != GameObjectState::Dead) {
 			setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 		}
+		else {
+			loopCurrentAnimation(false);
+		}
 	}
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());
