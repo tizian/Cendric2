@@ -205,7 +205,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 
 	}
 
-	if (m_dialogueTimeout == sf::Time::Zero && m_options.empty() && (g_inputController->isMouseClickedLeft() || g_inputController->isMouseClickedRight())) {
+	if (m_options.empty() && ((m_dialogueTimeout == sf::Time::Zero && g_inputController->isMouseClickedLeft()) || g_inputController->isMouseClickedRight())) {
 		m_dialogue->setNextNode(-1);
 		return m_dialogue->updateWindow();
 	}
