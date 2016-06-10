@@ -213,6 +213,13 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	sf::View oldView = renderTarget.getView();
 	renderObjects(GameObjectType::_MovableTile, renderTarget);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
+	{
+		m_particleRenderTexture.display();
+		m_sprite.setTexture(m_particleRenderTexture.getTexture());
+		renderTarget.setView(renderTarget.getDefaultView());
+		renderTarget.draw(m_sprite);
+		renderTarget.setView(oldView);
+	}
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_LevelMainCharacter, renderTarget);
 	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
@@ -220,11 +227,6 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_Spell, renderTarget);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
-
-	m_particleRenderTexture.display();
-	m_sprite.setTexture(m_particleRenderTexture.getTexture());
-	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite);
 
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
