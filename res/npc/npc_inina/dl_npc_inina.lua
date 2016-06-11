@@ -51,7 +51,6 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_inina", "what_doing")) then
 	
 			DL:createNPCNode(2, 3, "DL_Inina_WhatDoing") -- Do you see this shrine? Its power is weakened. We're here to find out why.
-			DL:addConditionProgress("npc_inina", "what_doing")
 			DL:addNode()
 
 			DL:createChoiceNode(3)
@@ -71,7 +70,8 @@ loadDialogue = function(DL)
 			DL:gotoNode(3)
 			DL:addNode()
 			
-			DL:createNPCNode(5, -2, "DL_Inina_PowerWeakened") -- It seems like there is some magic around that is disturbing the divine magic of the shrine. We need to find the cause of this interfering magic.			DL:addConditionProgress("npc_inina", "power_weakened")
+			DL:createNPCNode(5, -2, "DL_Inina_PowerWeakened") -- It seems like there is some magic around that is disturbing the divine magic of the shrine. We need to find the cause of this interfering magic.			
+			DL:addConditionProgress("npc_inina", "power_weakened")
 			DL:gotoNode(3)
 			DL:addNode()
 
