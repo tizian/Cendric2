@@ -20,6 +20,7 @@ DROP TABLE item_equipment;
 DROP TABLE item_attribute;
 DROP TABLE item_food;
 DROP TABLE item_convertible;
+DROP TABLE item_spell;
 DROP TABLE item;
 
 CREATE TABLE text(
@@ -85,7 +86,14 @@ CREATE TABLE item_food(
 
 CREATE TABLE item_equipment(
 	item_id VARCHAR(50) NOT NULL, 
-	texture_path VARCHAR(200) NOT NULL,
+	texture_path INTEGER NOT NULL DEFAULT 0,
+	PRIMARY KEY (item_id),
+	FOREIGN KEY(item_id) REFERENCES item(item_id)
+);
+
+CREATE TABLE item_spell(
+	item_id VARCHAR(50) NOT NULL, 
+	spell_id VARCHAR(200) NOT NULL,
 	PRIMARY KEY (item_id),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 );
