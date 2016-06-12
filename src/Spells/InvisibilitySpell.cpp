@@ -9,6 +9,10 @@ InvisibilitySpell::InvisibilitySpell() : Spell() {
 	m_smokeDuration = SMOKE_DURATION;
 }
 
+InvisibilitySpell::~InvisibilitySpell() {
+	delete m_ps;
+}
+
 void InvisibilitySpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
 	loadParticleSystem();
@@ -53,7 +57,7 @@ bool InvisibilitySpell::getConfiguredRotateSprite() const {
 }
 
 void InvisibilitySpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SMOKE)));
+	m_ps = new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SMOKE));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.f;
 

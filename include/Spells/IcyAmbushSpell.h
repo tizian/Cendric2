@@ -3,11 +3,11 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-#include <memory>
-
 class IcyAmbushSpell : public Spell {
 public:
 	IcyAmbushSpell(int strength);
+	virtual ~IcyAmbushSpell();
+	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
@@ -17,7 +17,7 @@ public:
 private:
 	int m_strength;
 
-	std::unique_ptr<particles::TextureParticleSystem> m_ps;
+	particles::TextureParticleSystem* m_ps;
 	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();

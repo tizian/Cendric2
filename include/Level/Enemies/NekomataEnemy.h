@@ -7,13 +7,11 @@
 #include "Screens/Screen.h"
 #include "Particles/ParticleSystem.h"
 
-#include <memory>
-
 // A spooky Nekomata in a level
 class NekomataEnemy : public Enemy {
 public:
 	NekomataEnemy(const Level* level, Screen* screen);
-	virtual ~NekomataEnemy() {}
+	virtual ~NekomataEnemy();
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
@@ -36,7 +34,7 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 
-	std::unique_ptr<particles::TextureParticleSystem> m_ps;
+	particles::TextureParticleSystem* m_ps;
 	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();

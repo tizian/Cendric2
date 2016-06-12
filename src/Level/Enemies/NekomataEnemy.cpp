@@ -25,6 +25,10 @@ NekomataEnemy::NekomataEnemy(const Level* level, Screen* screen) :
 	load(EnemyID::Nekomata);
 }
 
+NekomataEnemy::~NekomataEnemy() {
+	delete m_ps;
+}
+
 void NekomataEnemy::loadAttributes() {
 	m_attributes.setHealth(300);
 	m_attributes.resistanceLight = -30;
@@ -179,7 +183,7 @@ void NekomataEnemy::render(sf::RenderTarget& target) {
 }
 
 void NekomataEnemy::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(80, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
+	m_ps = new particles::TextureParticleSystem(80, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 40.f;
 

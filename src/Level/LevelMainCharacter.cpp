@@ -12,6 +12,7 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 
 LevelMainCharacter::~LevelMainCharacter() {
 	m_spellKeyMap.clear();
+	delete m_ps;
 }
 
 void LevelMainCharacter::load() {
@@ -365,7 +366,7 @@ bool LevelMainCharacter::isAlly() const {
 }
 
 void LevelMainCharacter::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)));
+	m_ps = new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 100.f;
 

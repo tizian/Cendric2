@@ -11,6 +11,10 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Particle, ParticleTile)
 ParticleTile::ParticleTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 }
 
+ParticleTile::~ParticleTile() {
+	delete m_ps;
+}
+
 void ParticleTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
 	m_isCollidable = false;
@@ -65,7 +69,7 @@ void ParticleTile::onHit(Spell* spell) {
 }
 
 void ParticleTile::loadParticleSystem(int skinNr) {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)));
+	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 60.f;
 

@@ -6,8 +6,6 @@
 #include "Particles/ParticleSystem.h"
 #include "Level/DynamicTiles/FluidTileData.h"
 
-#include <memory>
-
 class FrozenWaterTile;
 class MovableGameObject;
 
@@ -68,7 +66,7 @@ private:
 
 	std::vector<FrozenWaterTile*> m_frozenTiles;
 
-	std::unique_ptr<particles::MetaballParticleSystem> m_ps;
+	particles::MetaballParticleSystem* m_ps;
 	sf::Vector2f* m_emitterPosition = nullptr;
 	sf::Vector2f* m_emitterSize = nullptr;
 	float* m_particleMinSpeed = nullptr;

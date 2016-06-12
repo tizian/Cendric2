@@ -22,6 +22,7 @@ FluidTile::~FluidTile() {
 		delete entry.second;
 	}
 	m_soundMap.clear();
+	delete m_ps;
 }
 
 void FluidTile::init() {
@@ -64,7 +65,7 @@ void FluidTile::loadAnimation(int skinNr) {
 
 	// Particle System
 	int maxNumberParticles = m_nTiles * 50;
-	m_ps = std::unique_ptr<particles::MetaballParticleSystem>(new particles::MetaballParticleSystem(maxNumberParticles, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB), WINDOW_WIDTH, WINDOW_HEIGHT));
+	m_ps = new particles::MetaballParticleSystem(maxNumberParticles, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB), WINDOW_WIDTH, WINDOW_HEIGHT);
 	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)->setSmooth(true);
 	m_ps->color = m_data.color;
 	m_ps->threshold = 0.7f;

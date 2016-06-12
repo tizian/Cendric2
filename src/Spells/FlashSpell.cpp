@@ -4,6 +4,10 @@
 FlashSpell::FlashSpell() : Spell() {
 }
 
+FlashSpell::~FlashSpell() {
+	delete m_ps;
+}
+
 void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, 0.f));
 	m_mob = mob;
@@ -76,7 +80,7 @@ bool FlashSpell::getConfiguredRotateSprite() const {
 }
 
 void FlashSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SMOKE)));
+	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SMOKE));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.f;
 

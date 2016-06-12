@@ -3,11 +3,10 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-#include <memory>
-
 class FlashSpell : public Spell {
 public:
 	FlashSpell();
+	virtual ~FlashSpell();
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
@@ -26,7 +25,7 @@ private:
 	sf::Time m_flashDuration;
 	const sf::Time FLASH_DURATION = sf::milliseconds(500);
 
-	std::unique_ptr<particles::TextureParticleSystem> m_ps;
+	particles::TextureParticleSystem* m_ps;
 	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();

@@ -15,6 +15,10 @@ void ZeffBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) co
 	loot.insert({ "fo_ham", 2 });
 }
 
+ZeffBoss::~ZeffBoss() {
+	delete m_ps;
+}
+
 void ZeffBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
 	// nothing
 }
@@ -233,7 +237,7 @@ void ZeffBoss::updateParticleSystemPosition() {
 }
 
 void ZeffBoss::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)));
+	m_ps = new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 100.f;
 

@@ -4,6 +4,10 @@
 TelekinesisSpell::TelekinesisSpell() : Spell() {
 }
 
+TelekinesisSpell::~TelekinesisSpell() {
+	delete m_ps;
+}
+
 void TelekinesisSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
@@ -51,7 +55,7 @@ void TelekinesisSpell::render(sf::RenderTarget& target) {
 }
 
 void TelekinesisSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
+	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f / 2.0f;
 

@@ -3,11 +3,11 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-#include <memory>
-
 class LeapOfFaithSpell : public Spell {
 public:
 	LeapOfFaithSpell(float gravityScale);
+	virtual ~LeapOfFaithSpell();
+	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
@@ -20,7 +20,7 @@ private:
 	float m_gravityScale;
 	bool m_isFacingRight;
 
-	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
+	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
 
 	void loadParticleSystem();

@@ -11,6 +11,10 @@ GhostFormSpell::GhostFormSpell(const AttributeData& additionalDamage) : Spell() 
 	m_additionalDamage = additionalDamage;
 }
 
+GhostFormSpell::~GhostFormSpell() {
+	delete m_ps;
+}
+
 void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	MovingBehavior* mb = mob->getMovingBehavior();
 	float velocityScale = (bean.speed + mb->getMaxVelocityX()) / mb->getMaxVelocityX();
@@ -72,7 +76,7 @@ bool GhostFormSpell::getConfiguredRotateSprite() const {
 }
 
 void GhostFormSpell::loadParticleSystem(float startSpeed) {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LONGBLOB)));
+	m_ps = new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LONGBLOB));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
 

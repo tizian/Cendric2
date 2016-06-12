@@ -6,13 +6,12 @@
 #include "LightObject.h"
 #include "Particles/ParticleSystem.h"
 
-#include <memory>
-
 // available skins:
 // 1: fire
 class ParticleTile : public LevelDynamicTile {
 public:
 	ParticleTile(LevelScreen* levelScreen);
+	virtual ~ParticleTile();
 
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
@@ -25,7 +24,7 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 
 private:
-	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
+	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::AimedVelocityGenerator* m_velGenerator = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
 

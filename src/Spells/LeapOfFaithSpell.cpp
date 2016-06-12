@@ -7,6 +7,10 @@ LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
 	m_gravityScale = gravityScale;
 }
 
+LeapOfFaithSpell::~LeapOfFaithSpell() {
+	delete m_ps;
+}
+
 void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	m_mob = mob;
 	Animation* spellAnimation = new Animation();
@@ -68,7 +72,7 @@ void LeapOfFaithSpell::update(const sf::Time& frameTime) {
 }
 
 void LeapOfFaithSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
+	m_ps = new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
 

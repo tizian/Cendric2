@@ -8,6 +8,10 @@ void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const 
 	loadParticleSystem();
 }
 
+LightSpell::~LightSpell() {
+	delete m_ps;
+}
+
 void LightSpell::execOnHit(LevelMovableGameObject* target) {
 	// nop
 }
@@ -37,7 +41,7 @@ void LightSpell::update(const sf::Time& frameTime) {
 }
 
 void LightSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
+	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f / 2.0f;
 

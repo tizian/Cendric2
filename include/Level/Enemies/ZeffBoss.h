@@ -6,12 +6,10 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-#include <memory>
-
 class ZeffBoss : public Enemy {
 public:
 	ZeffBoss(const Level* level, Screen* screen);
-	~ZeffBoss() {}
+	virtual ~ZeffBoss();
 
 	void loadAnimation() override;
 	void render(sf::RenderTarget& target) override;
@@ -42,6 +40,6 @@ protected:
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);
 
-	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
+	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
 };

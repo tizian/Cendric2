@@ -7,6 +7,10 @@ RaiseTheDeadSpell::RaiseTheDeadSpell(int strength) : Spell() {
 	m_strength = strength;
 }
 
+RaiseTheDeadSpell::~RaiseTheDeadSpell() {
+	delete m_ps;
+}
+
 void RaiseTheDeadSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
 	loadParticleSystem();
@@ -63,7 +67,7 @@ void RaiseTheDeadSpell::render(sf::RenderTarget& target) {
 }
 
 void RaiseTheDeadSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
+	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 50.0f;
 

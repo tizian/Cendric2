@@ -14,6 +14,10 @@ ModifierTile::ModifierTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScr
 		sf::Vector2f(200.f, 200.f), 0.5f), this));
 }
 
+ModifierTile::~ModifierTile() {
+	delete m_ps;
+}
+
 void ModifierTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
 
@@ -112,7 +116,7 @@ void ModifierTile::onHit(Spell* spell) {
 }
 
 void ModifierTile::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR)));
+	m_ps = new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 100.f * m_modifier.level / 3.0f;
 

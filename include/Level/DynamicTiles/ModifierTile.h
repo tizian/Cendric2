@@ -6,11 +6,10 @@
 #include "LightObject.h"
 #include "Particles/ParticleSystem.h"
 
-#include <memory>
-
 class ModifierTile : public LevelDynamicTile {
 public:
 	ModifierTile(LevelScreen* levelScreen);
+	virtual ~ModifierTile();
 
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
@@ -28,7 +27,7 @@ private:
 	SpellModifier m_modifier;
 	sf::Time m_particleTime = sf::seconds(3.f);
 
-	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
+	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::AngledVelocityGenerator* m_velGenerator = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
 

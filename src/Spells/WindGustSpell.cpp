@@ -8,6 +8,10 @@ WindGustSpell::WindGustSpell(int strength) : Spell() {
 	m_pushAcceleration = 100.f * strength;
 }
 
+WindGustSpell::~WindGustSpell() {
+	delete m_ps;
+}
+
 void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
 	loadParticleSystem();
@@ -48,7 +52,7 @@ float WindGustSpell::getPushAcceleration() const {
 }
 
 void WindGustSpell::loadParticleSystem() {
-	m_ps = std::unique_ptr<particles::TextureParticleSystem>(new particles::TextureParticleSystem(static_cast<int>(m_pushAcceleration * 2), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)));
+	m_ps = new particles::TextureParticleSystem(static_cast<int>(m_pushAcceleration * 2), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = getBoundingBox()->width;
 
