@@ -4,11 +4,23 @@
 
 using namespace std;
 
-const std::string SPRITE_PATH = "res/assets/screens/screen_menu.png";
+const std::string SPRITE_PATH_BG = "res/assets/screens/screen_menu_bg.png";
+const std::string SPRITE_PATH_FG = "res/assets/screens/screen_splash_fg.png";
 
 MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
-	g_resourceManager->loadTexture(SPRITE_PATH, ResourceType::Unique, this);
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH)));
+	g_resourceManager->loadTexture(SPRITE_PATH_BG, ResourceType::Unique, this);
+	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_BG)));
+	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_FG)));
+
+	m_ps_right = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
+	m_ps_left = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
+	SplashScreen::loadFireParticles(m_ps_left, sf::Vector2f(155.f, 330.f));
+	SplashScreen::loadFireParticles(m_ps_right, sf::Vector2f(1130.f, 330.f));
+}
+
+MenuScreen::~MenuScreen() {
+	delete m_ps_left;
+	delete m_ps_right;
 }
 
 void MenuScreen::execUpdate(const sf::Time& frameTime) {
@@ -24,9 +36,11 @@ void MenuScreen::execUpdate(const sf::Time& frameTime) {
 	}
 
 	updateTooltipText(frameTime);
-	updateObjects(GameObjectType::_Undefined, frameTime);
+
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
+	m_ps_left->update(frameTime);
+	m_ps_right->update(frameTime);
 }
 
 void MenuScreen::setAllButtonsEnabled(bool value) {
@@ -36,7 +50,10 @@ void MenuScreen::setAllButtonsEnabled(bool value) {
 
 void MenuScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_screenSprite);
+	renderTarget.draw(m_screenSpriteBackground);
+	m_ps_left->render(renderTarget);
+	m_ps_right->render(renderTarget);
+	renderTarget.draw(m_screenSpriteForeground);
 	renderTarget.draw(m_versionText);
 	renderObjects(GameObjectType::_Undefined, renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
@@ -45,14 +62,6 @@ void MenuScreen::render(sf::RenderTarget &renderTarget) {
 }
 
 void MenuScreen::execOnEnter(const Screen *previousScreen) {
-	// add burning fire baskets
-	FireBasket* fireBasket1 = new FireBasket();
-	FireBasket* fireBasket2 = new FireBasket();
-	fireBasket1->setPosition(sf::Vector2f(60.f, -80.f));
-	fireBasket2->setPosition(sf::Vector2f(1028.f, -80.f));
-	addObject(fireBasket1);
-	addObject(fireBasket2);
-
 	// add version nr
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
 	m_versionText.setCharacterSize(8);
@@ -64,8 +73,8 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	float buttonHeight = 50.f;
 	float buttonWidth = 300.f;
 	float xOffset = (WINDOW_WIDTH - buttonWidth) / 2.f;
-	float yOffset = 200.f;
-	float addYOffset = 70.f;
+	float yOffset = 220.f;
+	float addYOffset = 60.f;
 
 	// add buttons
 	Button* button;

@@ -9,7 +9,6 @@
 #include "Screens/OptionsScreen.h"
 #include "Screens/LoadGameScreen.h"
 #include "Screens/SaveGameScreen.h"
-#include "Misc/FireBasket.h"
 #include "CharacterCore.h"
 #include "GUI/Button.h"
 #include "GUI/BitmapText.h"
@@ -18,6 +17,7 @@
 class MenuScreen : public Screen {
 public:
 	MenuScreen(CharacterCore* core);
+	~MenuScreen();
 
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
@@ -26,8 +26,12 @@ public:
 	void execOnExit(const Screen *nextScreen) override;
 
 private:
-	sf::Sprite m_screenSprite;
+	sf::Sprite m_screenSpriteBackground;
+	sf::Sprite m_screenSpriteForeground;
 	BitmapText m_versionText;
+
+	particles::TextureParticleSystem* m_ps_left = nullptr;
+	particles::TextureParticleSystem* m_ps_right = nullptr;
 
 	void setAllButtonsEnabled(bool value) override;
 
