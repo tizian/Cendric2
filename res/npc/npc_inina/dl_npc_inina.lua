@@ -178,9 +178,9 @@ loadDialogue = function(DL)
 				DL:createNPCNode(50, 51, "DL_Inina_LearnLight1") -- Yes, you've proven yourself worthy to learn the way of the Eternal Light.
 				DL:addNode()
 				
-				DL:createNPCNode(51, -1, "DL_Inina_LearnLight2") -- To create a magical light, you'll need a weapon that is capable of focusing divine magic. Then, concentrate the divine energy around you and let it shine. 
+				DL:createNPCNode(51, -1, "DL_Inina_LearnLight2") -- To create a magical light, you'll need a weapon that is capable of focusing divine magic. Then, concentrate the divine energy around you and let it shine. Take this scroll. It will teach you everything you need to know.
 				DL:addConditionProgress("npc_inina", "learned_light")
-				DL:learnSpell(17)
+				DL:addItem("sp_light", 1)
 				DL:addNode()
 			
 			else

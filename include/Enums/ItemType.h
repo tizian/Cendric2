@@ -18,5 +18,6 @@ enum class ItemType {
 	Gold,
 	Permanent, // permanent items are stored in the food tab but can be consumed on a map to get permanent stats.
 	Convertible, // convertible items are stored in the misc tab but can be converted to a other item and/or gold.
+	Spell,
 	MAX
 };

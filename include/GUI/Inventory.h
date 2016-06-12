@@ -110,6 +110,7 @@ private:
 	void showDocument(const Item& item);
 	void hideDocument();
 	void convertItem(const Item& item);
+	void learnSpell(const Item& item);
 
 	InventoryEquipment* m_equipment = nullptr;
 

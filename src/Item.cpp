@@ -15,6 +15,7 @@ Item::Item() {
 void Item::initBeans(const std::string& itemID) {
 	m_itemBean = g_databaseManager->getItemBean(itemID);
 	m_itemConvertibleBean = g_databaseManager->getItemConvertibleBean(itemID);
+	m_itemSpellBean = g_databaseManager->getItemSpellBean(itemID);
 	m_itemEquipmentBean = g_databaseManager->getItemEquipmentBean(itemID);
 	m_itemEquipmentLightBean = g_databaseManager->getItemEquipmentLightBean(itemID);
 	m_itemFoodBean = g_databaseManager->getItemFoodBean(itemID);
@@ -56,6 +57,10 @@ const sf::Time& Item::getFoodDuration() const {
 
 const ItemConvertibleBean& Item::getConvertibleBean() const {
 	return m_itemConvertibleBean;
+}
+
+const ItemSpellBean& Item::getSpellBean() const {
+	return m_itemSpellBean;
 }
 
 const ItemEquipmentBean& Item::getEquipmentBean() const {
@@ -110,6 +115,9 @@ void Item::checkItem() {
 	if (m_itemConvertibleBean.status == BeanStatus::Filled) {
 		m_isConvertible = true;
 	}
+	if (m_itemSpellBean.status == BeanStatus::Filled) {
+		m_isSpell = true;
+	}
 }
 
 bool Item::isValid() const {
@@ -130,6 +138,10 @@ bool Item::isLevelitem() const {
 
 bool Item::isConvertible() const {
 	return m_isConvertible;
+}
+
+bool Item::isSpell() const {
+	return m_isSpell;
 }
 
 bool Item::isEquipmentItem() const {

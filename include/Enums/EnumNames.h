@@ -64,6 +64,8 @@ public:
 			return "Permanent";
 		case ItemType::Quest:
 			return "Quest";
+		case ItemType::Spell:
+			return "Spell";
 		}
 	}
 

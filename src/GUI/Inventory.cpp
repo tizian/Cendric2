@@ -75,6 +75,7 @@ void Inventory::init() {
 		{ ItemType::Permanent, &m_consumableItems },
 		{ ItemType::Misc, &m_miscItems },
 		{ ItemType::Convertible, &m_miscItems },
+		{ ItemType::Spell, &m_documentItems },
 		{ ItemType::Document, &m_documentItems },
 		{ ItemType::Quest, &m_questItems },
 		{ ItemType::Equipment_back, &m_equipmentItems },
@@ -210,6 +211,8 @@ void Inventory::handleMapRightClick(InventorySlot* clicked) {
 	}
 	if (clicked->getItemType() == ItemType::Document)
 		showDocument(clicked->getItem());
+	else if (clicked->getItemType() == ItemType::Spell)
+		learnSpell(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Consumable)
 		m_mapInterface->getScreen()->setTooltipText("CannotConsumeItemInMap", COLOR_BAD, true);
 	else if (clicked->getItemType() == ItemType::Permanent)
@@ -464,6 +467,16 @@ void Inventory::convertItem(const Item& item) {
 		worldScreen->notifyItemChange("gold", bean.convertible_gold);
 	if (!bean.convertible_item_id.empty())
 		worldScreen->notifyItemChange(bean.convertible_item_id, 1);
+}
+
+void Inventory::learnSpell(const Item& item) {
+	if (!item.isSpell()) return;
+
+	WorldScreen* worldScreen = getInterface()->getScreen();
+
+	ItemSpellBean bean = item.getSpellBean();
+	worldScreen->notifyItemChange(item.getID(), -1);
+	worldScreen->notifySpellLearned(static_cast<SpellID>(bean.spell_id));
 }
 
 void Inventory::showDocument(const Item& item) {

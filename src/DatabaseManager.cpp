@@ -4,6 +4,7 @@
 #include "Beans/ItemBean.h"
 #include "Beans/ItemEquipmentBean.h"
 #include "Beans/ItemConvertibleBean.h"
+#include "Beans/ItemSpellBean.h"
 #include "Beans/ItemEquipmentLightBean.h"
 #include "Beans/ItemFoodBean.h"
 #include "Beans/ItemWeaponBean.h"
@@ -214,6 +215,39 @@ ItemConvertibleBean DatabaseManager::getItemConvertibleBean(const std::string& i
 				bean.probability = sqlite3_column_int(statement, 3);
 				if (bean.probability > 100) bean.probability = 100;
 				if (bean.probability < 0) bean.probability = 0;
+				bean.status = BeanStatus::Filled;
+			}
+			else {
+				break;
+			}
+		}
+
+		sqlite3_finalize(statement);
+	}
+
+	checkError();
+
+	return bean;
+}
+
+ItemSpellBean DatabaseManager::getItemSpellBean(const std::string& item_id) const {
+	ItemSpellBean bean;
+	sqlite3_stmt *statement;
+	std::string query = "SELECT * FROM item_spell WHERE item_id = '" + item_id + "';";
+
+	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
+		int cols = sqlite3_column_count(statement);
+		if (cols != 2) {
+			g_logger->logError("DatabaseManager::getItemSpellBean", "number of returned columns must be 2");
+			return bean;
+		}
+		int result = 0;
+		while (true) {
+			result = sqlite3_step(statement);
+
+			if (result == SQLITE_ROW) {
+				bean.item_id = std::string((char*)sqlite3_column_text(statement, 0));
+				bean.spell_id = sqlite3_column_int(statement, 1);
 				bean.status = BeanStatus::Filled;
 			}
 			else {

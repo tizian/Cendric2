@@ -8,6 +8,7 @@
 #include "Beans/ItemAttributeBean.h"
 #include "Beans/ItemBean.h"
 #include "Beans/ItemConvertibleBean.h"
+#include "Beans/ItemSpellBean.h"
 #include "Beans/ItemEquipmentBean.h"
 #include "Beans/ItemEquipmentLightBean.h"
 #include "Beans/ItemFoodBean.h"
@@ -45,12 +46,17 @@ public:
 	// getter for convertible bean
 	const ItemConvertibleBean& getConvertibleBean() const;
 
+	// getter for spell bean
+	const ItemSpellBean& getSpellBean() const;
+
 	// returns whether this is a valid item
 	bool isValid() const;
 	// returns whether this item has a food component and is valid
 	bool isConsumable() const;
 	// returns whether this item has a convertible component and is valid
 	bool isConvertible() const;
+	// returns whether this item is a spell
+	bool isSpell() const;
 	// returns whether this item is a weapon and it is valid
 	bool isWeapon() const;
 	// returns whether this item is a levelitem with frames and is valid
@@ -66,6 +72,7 @@ protected:
 	ItemBean m_itemBean;
 	ItemFoodBean m_itemFoodBean;
 	ItemConvertibleBean m_itemConvertibleBean;
+	ItemSpellBean m_itemSpellBean;
 	ItemEquipmentBean m_itemEquipmentBean;
 	ItemEquipmentLightBean m_itemEquipmentLightBean;
 	LevelitemBean m_levelItemBean;
@@ -86,4 +93,5 @@ protected:
 	bool m_isEquipment = false;
 	bool m_isEquipmentLighted = false;
 	bool m_isConvertible = false;
+	bool m_isSpell = false;
 };

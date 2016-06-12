@@ -50,6 +50,9 @@ struct ItemBean : DatabaseBean {
 		if (_item_type.compare("convertible") == 0) {
 			return ItemType::Convertible;
 		}
+		if (_item_type.compare("spell") == 0) {
+			return ItemType::Spell;
+		}
 		
 		return ItemType::VOID;
 	}
