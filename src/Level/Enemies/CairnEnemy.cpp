@@ -1,4 +1,4 @@
-#include "Level/Enemies/StonemanEnemy.h"
+#include "Level/Enemies/CairnEnemy.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
@@ -6,9 +6,9 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 
-REGISTER_ENEMY(EnemyID::Stoneman, StonemanEnemy)
+REGISTER_ENEMY(EnemyID::Cairn, CairnEnemy)
 
-void StonemanEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
+void CairnEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = rand() % 30 + 10;
 
 	float xi = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -20,7 +20,7 @@ void StonemanEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gol
 	}
 }
 
-void StonemanEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+void CairnEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = rand() % 3 + 1;
 	float xi = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 	if (xi < 0.9f) {
@@ -31,13 +31,13 @@ void StonemanEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 	}
 }
 
-StonemanEnemy::StonemanEnemy(const Level* level, Screen* screen) :
+CairnEnemy::CairnEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load(EnemyID::Stoneman);
+	load(EnemyID::Cairn);
 }
 
-void StonemanEnemy::loadAttributes() {
+void CairnEnemy::loadAttributes() {
 	m_attributes.setHealth(100);
 	m_attributes.resistanceIce = 15;
 	m_attributes.resistanceFire = 10;
@@ -45,7 +45,7 @@ void StonemanEnemy::loadAttributes() {
 	m_attributes.calculateAttributes();
 }
 
-void StonemanEnemy::loadSpells() {
+void CairnEnemy::loadSpells() {
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	fireBallSpell.damage = 6;
 	fireBallSpell.damagePerSecond = 0;
@@ -64,7 +64,7 @@ void StonemanEnemy::loadSpells() {
 	m_spellManager->setCurrentSpell(0);
 }
 
-void StonemanEnemy::handleAttackInput() {
+void CairnEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
 	if (m_enemyAttackingBehavior->distToTarget() < m_enemyAttackingBehavior->getAggroRange()) {
@@ -72,7 +72,7 @@ void StonemanEnemy::handleAttackInput() {
 	}
 }
 
-void StonemanEnemy::loadAnimation() {
+void CairnEnemy::loadAnimation() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 88.f));
 	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -119,7 +119,7 @@ void StonemanEnemy::loadAnimation() {
 	playCurrentAnimation(true);
 }
 
-MovingBehavior* StonemanEnemy::createMovingBehavior(bool asAlly) {
+MovingBehavior* CairnEnemy::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	if (asAlly) {
 		behavior = new AllyWalkingBehavior(this);
@@ -136,7 +136,7 @@ MovingBehavior* StonemanEnemy::createMovingBehavior(bool asAlly) {
 	return behavior;
 }
 
-AttackingBehavior* StonemanEnemy::createAttackingBehavior(bool asAlly) {
+AttackingBehavior* CairnEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 	if (asAlly) {
 		behavior = new AllyBehavior(this);
@@ -145,15 +145,15 @@ AttackingBehavior* StonemanEnemy::createAttackingBehavior(bool asAlly) {
 		behavior = new AggressiveBehavior(this);
 	}
 	behavior->setAggroRange(800.f);
-	behavior->setAttackInput(std::bind(&StonemanEnemy::handleAttackInput, this));
+	behavior->setAttackInput(std::bind(&CairnEnemy::handleAttackInput, this));
 	return behavior;
 }
 
-int StonemanEnemy::getMentalStrength() const {
+int CairnEnemy::getMentalStrength() const {
 	return 2;
 }
 
-std::string StonemanEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_stoneman.png";
+std::string CairnEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_cairn.png";
 }
 

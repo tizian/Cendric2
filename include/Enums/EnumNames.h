@@ -239,10 +239,12 @@ public:
 			return "Seagull";
 		case EnemyID::Wolf:
 			return "Wolf";
-		case EnemyID::Stoneman:
-			return "Stoneman";
+		case EnemyID::Cairn:
+			return "Cairn";
 		case EnemyID::Boss_Zeff:
 			return "BossZeff";
+		case EnemyID::Boss_Wolf:
+			return "BossWolf";
 		}
 	}
 

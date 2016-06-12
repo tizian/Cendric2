@@ -6,10 +6,10 @@
 class Level;
 class Screen;
 
-class StonemanEnemy : public Enemy {
+class CairnEnemy : public Enemy {
 public:
-	StonemanEnemy(const Level* level, Screen* screen);
-	~StonemanEnemy() {}
+	CairnEnemy(const Level* level, Screen* screen);
+	~CairnEnemy() {}
 
 	void loadAnimation() override;
 
