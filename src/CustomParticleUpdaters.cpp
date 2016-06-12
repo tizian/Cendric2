@@ -2,6 +2,8 @@
 
 #include "Level/DynamicTiles/FluidTile.h"
 
+#include "Particles/ParticleData.h"
+
 namespace particles
 {
 	void FluidUpdater::update(ParticleData *data, float dt) {

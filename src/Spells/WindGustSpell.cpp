@@ -53,10 +53,10 @@ void WindGustSpell::loadParticleSystem() {
 	m_ps->emitRate = getBoundingBox()->width;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
+	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + SPELL_OFFSET, getPosition().y + getBoundingBox()->height / 2);
 	posGen->size = sf::Vector2f(0.f, getBoundingBox()->height);
-	m_pointGenerator = posGen;
+	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 4.f;
@@ -91,13 +91,13 @@ void WindGustSpell::updateParticleSystemPosition() {
 	if (!m_mob->isFacingRight()) {
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
-		m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width - SPELL_OFFSET;
-		m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width - SPELL_OFFSET;
+		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 	}
 	else {
 		m_velGenerator->minAngle = 90 + -20.f;
 		m_velGenerator->maxAngle = 90 + 20.f;
-		m_pointGenerator->center.x = getPosition().x + SPELL_OFFSET;
-		m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+		m_particleSpawner->center.x = getPosition().x + SPELL_OFFSET;
+		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 	}
 }

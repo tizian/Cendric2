@@ -58,10 +58,10 @@ void InvisibilitySpell::loadParticleSystem() {
 	m_ps->emitRate = 50.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::DiskPositionGenerator>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->radius = 20.f;
-	m_posGenerator = posGen;
+	auto spawner = m_ps->addSpawner<particles::DiskSpawner>();
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	spawner->radius = 20.f;
+	m_particleSpawner = spawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 10.f;
@@ -80,7 +80,6 @@ void InvisibilitySpell::loadParticleSystem() {
 	velGen->maxAngle = 45.f;
 	velGen->minStartSpeed = 50.f;
 	velGen->maxStartSpeed = 70.f;
-	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 2.f;
@@ -94,6 +93,6 @@ void InvisibilitySpell::loadParticleSystem() {
 }
 
 void InvisibilitySpell::updateParticleSystemPosition() {
-	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }

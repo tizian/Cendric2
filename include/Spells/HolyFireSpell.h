@@ -3,6 +3,8 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+#include <memory>
+
 /*
 the following skins are available:
 0: holy fire (default)
@@ -23,7 +25,7 @@ private:
 	sf::Time m_emitTime = sf::seconds(1.f);
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
-	particles::DiskPositionGenerator* m_posGenerator = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
 
 	void loadParticleSystem();
 

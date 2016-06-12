@@ -77,10 +77,10 @@ void GhostFormSpell::loadParticleSystem(float startSpeed) {
 	m_ps->emitRate = 50.0f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(2.f, m_mob->getBoundingBox()->height);
-	m_posGenerator = posGen;
+	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	spawner->size = sf::Vector2f(2.f, m_mob->getBoundingBox()->height);
+	m_particleSpawner = spawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 4.f;
@@ -118,8 +118,8 @@ void GhostFormSpell::updateParticleSystemPosition() {
 		m_velGenerator->minAngle = 80.f;
 		m_velGenerator->maxAngle = 100.f;
 	}
-	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }
 
 void GhostFormSpell::loadMask() {

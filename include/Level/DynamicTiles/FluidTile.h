@@ -6,6 +6,8 @@
 #include "Particles/ParticleSystem.h"
 #include "Level/DynamicTiles/FluidTileData.h"
 
+#include <memory>
+
 class FrozenWaterTile;
 class MovableGameObject;
 

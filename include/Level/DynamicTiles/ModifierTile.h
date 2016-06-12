@@ -6,6 +6,8 @@
 #include "LightObject.h"
 #include "Particles/ParticleSystem.h"
 
+#include <memory>
+
 class ModifierTile : public LevelDynamicTile {
 public:
 	ModifierTile(LevelScreen* levelScreen);
@@ -28,7 +30,7 @@ private:
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
 	particles::AngledVelocityGenerator* m_velGenerator = nullptr;
-	particles::PointPositionGenerator* m_pointGenerator = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
 
 	void addModifier();
 

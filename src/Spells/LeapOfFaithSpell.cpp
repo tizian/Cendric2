@@ -73,10 +73,10 @@ void LeapOfFaithSpell::loadParticleSystem() {
 	m_ps->emitRate = 50.0f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(40.f, 40.f);
-	m_pointGenerator = posGen;
+	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	spawner->size = sf::Vector2f(40.f, 40.f);
+	m_particleSpawner = spawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 4.f;
@@ -95,7 +95,6 @@ void LeapOfFaithSpell::loadParticleSystem() {
 	velGen->maxAngle = 190.f;
 	velGen->minStartSpeed = 20.f;
 	velGen->maxStartSpeed = 30.f;
-	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 1.f;
@@ -109,8 +108,8 @@ void LeapOfFaithSpell::loadParticleSystem() {
 }
 
 void LeapOfFaithSpell::updateParticleSystemPosition() {
-	if (m_pointGenerator == nullptr) return;
-	m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+	if (m_particleSpawner == nullptr) return;
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }
 

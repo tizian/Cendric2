@@ -3,6 +3,8 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+#include <memory>
+
 class LevelEquipment;
 
 class GhostFormSpell : public Spell {
@@ -23,7 +25,7 @@ private:
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::BoxPositionGenerator* m_posGenerator;
+	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem(float startSpeed);
 	void loadMask();

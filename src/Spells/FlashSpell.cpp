@@ -31,7 +31,7 @@ void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const 
 	position.y += m_mob->getBoundingBox()->height - 20;
 	position.x = m_isFlashingRight ? position.x - data.range : position.x + data.range;
 	loadParticleSystem();
-	m_posGenerator->center = position;
+	m_particleSpawner->center = position;
 }
 
 void FlashSpell::update(const sf::Time& frameTime) {
@@ -81,9 +81,9 @@ void FlashSpell::loadParticleSystem() {
 	m_ps->emitRate = 50.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::DiskPositionGenerator>();
-	posGen->radius = 20.f;
-	m_posGenerator = posGen;
+	auto spawner = m_ps->addSpawner<particles::DiskSpawner>();
+	spawner->radius = 20.f;
+	m_particleSpawner = spawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 10.f;
@@ -102,7 +102,6 @@ void FlashSpell::loadParticleSystem() {
 	velGen->maxAngle = 30.f;
 	velGen->minStartSpeed = 70.f;
 	velGen->maxStartSpeed = 100.f;
-	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 1.f;

@@ -228,8 +228,8 @@ sf::Time ZeffBoss::getConfiguredWaitingTime() const {
 }
 
 void ZeffBoss::updateParticleSystemPosition() {
-	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width / 2.f;
-	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height * (2.f / 3.f);
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2.f;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * (2.f / 3.f);
 }
 
 void ZeffBoss::loadParticleSystem() {
@@ -238,9 +238,10 @@ void ZeffBoss::loadParticleSystem() {
 	m_ps->emitRate = 100.f;
 
 	// Generators
-	m_posGenerator = m_ps->addGenerator<particles::DiskPositionGenerator>();
-	m_posGenerator->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	m_posGenerator->radius = 20.f;
+	auto spawner = m_ps->addSpawner<particles::DiskSpawner>();
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	spawner->radius = 20.f;
+	m_particleSpawner = spawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 10.f;

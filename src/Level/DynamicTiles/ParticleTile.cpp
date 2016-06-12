@@ -38,9 +38,9 @@ void ParticleTile::update(const sf::Time& frameTime) {
 void ParticleTile::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 
-	if (m_posGenerator == nullptr) return;
-	m_posGenerator->center.x = getPosition().x + 0.5f * getBoundingBox()->width;
-	m_posGenerator->center.y = getPosition().y + 0.5f * getBoundingBox()->height;
+	if (m_particleSpawner == nullptr) return;
+	m_particleSpawner->center.x = getPosition().x + 0.5f * getBoundingBox()->width;
+	m_particleSpawner->center.y = getPosition().y + 0.5f * getBoundingBox()->height;
 	m_velGenerator->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
 }
 
@@ -70,10 +70,10 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	m_ps->emitRate = 60.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
+	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y + 0.5f * getBoundingBox()->height);
 	posGen->size = sf::Vector2f(45.f, 0.f);
-	m_posGenerator = posGen;
+	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 30.f;

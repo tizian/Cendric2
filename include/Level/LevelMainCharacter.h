@@ -9,6 +9,8 @@
 #include "CharacterCore.h"
 #include "MainCharacter.h"
 
+#include <memory>
+
 // Cendric in a level
 class LevelMainCharacter : public virtual LevelMovableGameObject, public virtual MainCharacter {
 	friend class UserMovingBehavior;
@@ -83,5 +85,5 @@ private:
 	sf::Time m_particleTime = sf::seconds(2.f);
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
-	particles::DiskPositionGenerator* m_posGenerator = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
 };

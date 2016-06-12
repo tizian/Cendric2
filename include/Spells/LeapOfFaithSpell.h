@@ -3,6 +3,8 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+#include <memory>
+
 class LeapOfFaithSpell : public Spell {
 public:
 	LeapOfFaithSpell(float gravityScale);
@@ -19,8 +21,7 @@ private:
 	bool m_isFacingRight;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
-	particles::AngledVelocityGenerator* m_velGenerator = nullptr;
-	particles::BoxPositionGenerator* m_pointGenerator = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
 
 	void loadParticleSystem();
 

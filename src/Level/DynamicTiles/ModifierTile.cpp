@@ -77,9 +77,9 @@ void ModifierTile::setModifier(const SpellModifier& modififer) {
 }
 
 void ModifierTile::updateParticleSystemPosition() {
-	if (m_pointGenerator == nullptr) return;
-	m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+	if (m_particleSpawner == nullptr) return;
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }
 
 void ModifierTile::addModifier() {
@@ -117,9 +117,9 @@ void ModifierTile::loadParticleSystem() {
 	m_ps->emitRate = 100.f * m_modifier.level / 3.0f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::PointPositionGenerator>();
+	auto posGen = m_ps->addSpawner<particles::PointSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	m_pointGenerator = posGen;
+	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 10.f;

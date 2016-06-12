@@ -184,10 +184,10 @@ void NekomataEnemy::loadParticleSystem() {
 	m_ps->emitRate = 40.f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
+	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 	posGen->size = sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height);
-	m_posGenerator = posGen;
+	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 10.f;
@@ -219,8 +219,8 @@ void NekomataEnemy::loadParticleSystem() {
 }
 
 void NekomataEnemy::updateParticleSystemPosition() {
-	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }
 
 std::string NekomataEnemy::getSpritePath() const {

@@ -1,136 +1,167 @@
 #pragma once
 
-#include "Particles/ParticleData.h"
-#include "Particles/ParticleUpdater.h"
+#include <SFML/Graphics.hpp>
+
 #include "Particles/ParticleGenerator.h"
+#include "Particles/ParticleSpawner.h"
+#include "Particles/ParticleUpdater.h"
 
-namespace particles
-{
-	class ParticleSystem : public sf::Transformable
-	{
-	public:
-		ParticleSystem(int maxCount);
-		virtual ~ParticleSystem();
+namespace particles {
 
-		ParticleSystem(const ParticleSystem &) = delete;
-		ParticleSystem &operator=(const ParticleSystem &) = delete;
+class ParticleData;
 
-		virtual void update(const sf::Time &dt);
-		virtual void render(sf::RenderTarget &renderTarget) = 0;
+/* Abstract base class for all particle system types */
+class ParticleSystem : public sf::Transformable {
+public:
+	ParticleSystem(int maxCount);
+	virtual ~ParticleSystem();
 
-		virtual void reset();
+	ParticleSystem(const ParticleSystem &) = delete;
+	ParticleSystem &operator=(const ParticleSystem &) = delete;
 
-		virtual int numAllParticles() const { return m_particles->count; }
-		virtual int numAliveParticles() const { return m_particles->countAlive; }
+	virtual void update(const sf::Time &dt);
+	virtual void render(sf::RenderTarget &renderTarget) = 0;
 
-		template<typename T>
-		inline T *addGenerator() {
-			T *g = new T();
-			m_generators.push_back(g);
-			return g;
+	virtual void reset();
+
+	template<typename T>
+	inline T *addGenerator() {
+		T *g = new T();
+		m_generators.push_back(g);
+		return g;
+	}
+
+	template<typename T>
+	inline T *addSpawner() {
+		T *s = new T();
+		m_spawners.push_back(s);
+		return s;
+	}
+
+	template<typename T>
+	inline T *addUpdater() {
+		T *u = new T();
+		m_updaters.push_back(u);
+		return u;
+	}
+
+	void emitParticles(int count); 	// emit a fix number of particles
+
+	inline size_t getNumberGenerators() const { return m_generators.size(); }
+	inline size_t getNumberSpawners() const { return m_spawners.size(); }
+	inline size_t getNumberUpdaters() const { return m_updaters.size(); }
+
+	inline void clearGenerators() { 
+		for (auto g : m_generators) {
+			delete g;
 		}
+		m_generators.clear();
+	}
 
-		template<typename T>
-		inline T *addUpdater() {
-			T *u = new T();
-			m_updaters.push_back(u);
-			return u;
+	inline void clearSpawners() {
+		for (auto s : m_spawners) {
+			delete s;
 		}
+		m_spawners.clear();
+	}
 
-		void emitParticles(int count); 	// emit a fix number of particles
+	inline void clearUpdaters() {
+		for (auto u : m_updaters) {
+			delete u;
+		}
+		m_updaters.clear();
+	}
 
-	protected:
-		void emitWithRate(float dt);	// emit a stream of particles defined by emitRate and dt
+protected:
+	void emitWithRate(float dt);	// emit a stream of particles defined by emitRate and dt
 
-	public:
-		float	emitRate;	// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
+public:
+	float	emitRate;	// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
 
-	protected:
-		float m_dt;
+protected:
+	float m_dt;
 
-		ParticleData *m_particles;
-		
-		std::vector<ParticleGenerator *> m_generators;
-		std::vector<ParticleUpdater *> m_updaters;
+	ParticleData *m_particles;
+	
+	std::vector<ParticleGenerator *> m_generators;
+	std::vector<ParticleSpawner *> m_spawners;
+	std::vector<ParticleUpdater *> m_updaters;
 
-		sf::VertexArray m_vertices;
-	};
-
-
-	class PointParticleSystem : public ParticleSystem
-	{
-	public:
-		PointParticleSystem(int maxCount);
-		virtual ~PointParticleSystem() {}
-
-		PointParticleSystem(const PointParticleSystem &) = delete;
-		PointParticleSystem &operator=(const PointParticleSystem &) = delete;
-
-		virtual void render(sf::RenderTarget& renderTarget) override;
-
-	protected:
-		void updateVertices();
-	};
+	sf::VertexArray m_vertices;
+};
 
 
-	class TextureParticleSystem : public ParticleSystem
-	{
-	public:
-		TextureParticleSystem(int maxCount, sf::Texture *texture);
-		virtual ~TextureParticleSystem() {}
+class PointParticleSystem : public ParticleSystem {
+public:
+	PointParticleSystem(int maxCount);
+	virtual ~PointParticleSystem() {}
 
-		TextureParticleSystem(const TextureParticleSystem &) = delete;
-		TextureParticleSystem &operator=(const TextureParticleSystem &) = delete;
+	PointParticleSystem(const PointParticleSystem &) = delete;
+	PointParticleSystem &operator=(const PointParticleSystem &) = delete;
 
-		virtual void render(sf::RenderTarget &renderTarget) override;
+	virtual void render(sf::RenderTarget& renderTarget) override;
 
-		void setTexture(sf::Texture *texture);
-
-	protected:
-		void updateVertices();
-
-	public:
-		bool additiveBlendMode;
-
-	protected:
-		sf::Texture *m_texture;
-	};
+protected:
+	void updateVertices();
+};
 
 
-	class SpriteSheetParticleSystem : public TextureParticleSystem
-	{
-	public:
-		SpriteSheetParticleSystem(int maxCount, sf::Texture *texture) : TextureParticleSystem(maxCount, texture) {}
-		virtual ~SpriteSheetParticleSystem() {}
+class TextureParticleSystem : public ParticleSystem {
+public:
+	TextureParticleSystem(int maxCount, sf::Texture *texture);
+	virtual ~TextureParticleSystem() {}
 
-		SpriteSheetParticleSystem(const SpriteSheetParticleSystem &) = delete;
-		SpriteSheetParticleSystem &operator=(const SpriteSheetParticleSystem &) = delete;
+	TextureParticleSystem(const TextureParticleSystem &) = delete;
+	TextureParticleSystem &operator=(const TextureParticleSystem &) = delete;
 
-		virtual void render(sf::RenderTarget &renderTarget) override;
+	virtual void render(sf::RenderTarget &renderTarget) override;
 
-	protected:
-		void updateVertices();
-	};
+	void setTexture(sf::Texture *texture);
+
+protected:
+	void updateVertices();
+
+public:
+	bool additiveBlendMode;
+
+protected:
+	sf::Texture *m_texture;
+};
 
 
-	class MetaballParticleSystem : public TextureParticleSystem
-	{
-	public:
-		MetaballParticleSystem(int maxCount, sf::Texture *texture, int windowWidth, int windowHeight);
-		virtual ~MetaballParticleSystem() {}
+class SpriteSheetParticleSystem : public TextureParticleSystem {
+public:
+	SpriteSheetParticleSystem(int maxCount, sf::Texture *texture) : TextureParticleSystem(maxCount, texture) {}
+	virtual ~SpriteSheetParticleSystem() {}
 
-		MetaballParticleSystem(const MetaballParticleSystem &) = delete;
-		MetaballParticleSystem &operator=(const MetaballParticleSystem &) = delete;
+	SpriteSheetParticleSystem(const SpriteSheetParticleSystem &) = delete;
+	SpriteSheetParticleSystem &operator=(const SpriteSheetParticleSystem &) = delete;
 
-		virtual void render(sf::RenderTarget &renderTarget) override;
+	virtual void render(sf::RenderTarget &renderTarget) override;
 
-	public:
-		sf::Color color{ sf::Color::White };
-		float threshold{ 0.5f };
+protected:
+	void updateVertices();
+};
 
-	protected:
-		sf::RenderTexture m_renderTexture;
-		sf::Sprite m_sprite;
-		sf::Shader m_shader;
-	};
+
+class MetaballParticleSystem : public TextureParticleSystem {
+public:
+	MetaballParticleSystem(int maxCount, sf::Texture *texture, int windowWidth, int windowHeight);
+	virtual ~MetaballParticleSystem() {}
+
+	MetaballParticleSystem(const MetaballParticleSystem &) = delete;
+	MetaballParticleSystem &operator=(const MetaballParticleSystem &) = delete;
+
+	virtual void render(sf::RenderTarget &renderTarget) override;
+
+public:
+	sf::Color color{ sf::Color::White };
+	float threshold{ 0.5f };
+
+protected:
+	sf::RenderTexture m_renderTexture;
+	sf::Sprite m_sprite;
+	sf::Shader m_shader;
+};
+
 }

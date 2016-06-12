@@ -3,6 +3,8 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+#include <memory>
+
 class InvisibilitySpell : public Spell {
 public:
 	InvisibilitySpell();
@@ -20,8 +22,7 @@ private:
 	static const sf::Time SMOKE_DURATION;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
-	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::DiskPositionGenerator* m_posGenerator;
+	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();
 

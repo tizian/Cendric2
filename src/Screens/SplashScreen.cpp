@@ -70,9 +70,9 @@ void SplashScreen::loadFireParticles(particles::TextureParticleSystem* ps, const
 	ps->emitRate = 70.f;
 
 	// Generators
-	auto posGen = ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->center = center;
-	posGen->size = sf::Vector2f(65.f, 0.f);
+	auto spawner = ps->addSpawner<particles::BoxSpawner>();
+	spawner->center = center;
+	spawner->size = sf::Vector2f(65.f, 0.f);
 
 	auto sizeGen = ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 60.f;

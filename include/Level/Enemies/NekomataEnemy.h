@@ -5,6 +5,9 @@
 #include "Level/Level.h"
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
+#include "Particles/ParticleSystem.h"
+
+#include <memory>
 
 // A spooky Nekomata in a level
 class NekomataEnemy : public Enemy {
@@ -34,7 +37,7 @@ protected:
 	void loadSpells() override;
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
-	particles::BoxPositionGenerator* m_posGenerator;
+	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();
 

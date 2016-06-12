@@ -56,9 +56,9 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		return;
 	}
 
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->size = sf::Vector2f(4.f * WINDOW_WIDTH, 2.f * WINDOW_HEIGHT);
-	m_center = &posGen->center;
+	auto spwaner = m_ps->addSpawner<particles::BoxSpawner>();
+	spwaner->size = sf::Vector2f(4.f * WINDOW_WIDTH, 2.f * WINDOW_HEIGHT);
+	m_center = &spwaner->center;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 10.f;

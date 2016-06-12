@@ -3,6 +3,8 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+#include <memory>
+
 class TelekinesisSpell : public Spell {
 public:
 	TelekinesisSpell();
@@ -14,8 +16,7 @@ public:
 
 private:
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
-	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::BoxPositionGenerator* m_pointGenerator;
+	particles::ParticleSpawner* m_particleSpawner;
 	// collisions with levelitems
 	void checkCollisionsWithItems();
 

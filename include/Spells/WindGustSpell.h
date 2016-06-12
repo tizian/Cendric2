@@ -4,6 +4,8 @@
 #include "Spells/Spell.h"
 #include "Particles/ParticleSystem.h"
 
+#include <memory>
+
 class WindGustSpell : public Spell {
 public:
 	WindGustSpell(int strength);
@@ -21,7 +23,7 @@ private:
 	bool m_hasDamaged = false; // this spell only applies its dot once.
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::BoxPositionGenerator* m_pointGenerator;
+	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();
 

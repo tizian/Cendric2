@@ -70,7 +70,7 @@ void FluidTile::loadAnimation(int skinNr) {
 	m_ps->threshold = 0.7f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
+	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
 	m_emitterPosition = &posGen->center;
 	m_emitterSize = &posGen->size;
 

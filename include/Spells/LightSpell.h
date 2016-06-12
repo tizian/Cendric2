@@ -3,6 +3,8 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+#include <memory>
+
 class LightSpell : public Spell {
 public:
 	LightSpell() {};
@@ -15,8 +17,7 @@ public:
 
 private:
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
-	particles::AngledVelocityGenerator* m_velGenerator = nullptr;
-	particles::BoxPositionGenerator* m_pointGenerator = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
 
 	void loadParticleSystem();
 

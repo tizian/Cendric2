@@ -1,38 +1,36 @@
 #pragma once
 
-#include <memory>
-
 #include <SFML/Graphics.hpp>
 
-namespace particles
-{
-    class ParticleData
-    {
-    public:
-        explicit ParticleData(int maxCount);
-        ~ParticleData();
+namespace particles {
 
-        ParticleData(const ParticleData &) = delete;
-        ParticleData &operator=(const ParticleData &) = delete;
+class ParticleData {
+public:
+    explicit ParticleData(int maxCount);
+    ~ParticleData();
 
-        void kill(int id);
-        void swapData(int id1, int id2);
+    ParticleData(const ParticleData &) = delete;
+    ParticleData &operator=(const ParticleData &) = delete;
 
-    public:
-        sf::Vector2f *pos;        // Current position
-        sf::Vector2f *vel;        // Current velocity
-        sf::Vector2f *acc;        // Current acceleration
-        sf::Vector3f *time;       // x: remaining time to live,   y: time to live,    z: interpolation value in [0, 1] of lifetime
-        sf::Vector3f *size;       // x: current size,     y: start size,      z: end size
-		sf::Vector3f *angle;	  // x: current angle,    y: start rotation,  z: end rotation
-        sf::Color *col;           // Current color
-        sf::Color *startCol;      // Start color
-        sf::Color *endCol;        // End color
-		sf::IntRect *texCoords;	  // Texture coordinates inside spritesheet
-		int *frame;				  // Frame index for animation
-		float *frameTimer;		  // Accumulator for animation
+    void kill(int id);
+    void swapData(int id1, int id2);
 
-        int count;
-        int countAlive;
-    };
+public:
+    sf::Vector2f *pos;        // Current position
+    sf::Vector2f *vel;        // Current velocity
+    sf::Vector2f *acc;        // Current acceleration
+    sf::Vector3f *time;       // x: remaining time to live,   y: time to live,    z: interpolation value in [0, 1] of lifetime
+    sf::Vector3f *size;       // x: current size,             y: start size,      z: end size
+	sf::Vector3f *angle;	  // x: current angle,            y: start rotation,  z: end rotation
+    sf::Color    *col;        // Current color
+    sf::Color    *startCol;   // Start color
+    sf::Color    *endCol;     // End color
+	sf::IntRect  *texCoords;  // Texture coordinates inside spritesheet
+	int          *frame;	  // Frame index for animation
+	float        *frameTimer; // Accumulator for animation
+
+    int           count;
+    int           countAlive;
+};
+
 }

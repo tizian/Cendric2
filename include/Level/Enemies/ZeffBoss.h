@@ -6,6 +6,8 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
+#include <memory>
+
 class ZeffBoss : public Enemy {
 public:
 	ZeffBoss(const Level* level, Screen* screen);
@@ -41,5 +43,5 @@ protected:
 	sf::Time m_particleTime = sf::seconds(2.f);
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
-	particles::DiskPositionGenerator* m_posGenerator = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
 };

@@ -3,6 +3,8 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+#include <memory>
+
 class FlashSpell : public Spell {
 public:
 	FlashSpell();
@@ -25,8 +27,7 @@ private:
 	const sf::Time FLASH_DURATION = sf::milliseconds(500);
 
 	std::unique_ptr<particles::TextureParticleSystem> m_ps;
-	particles::AngledVelocityGenerator* m_velGenerator;
-	particles::DiskPositionGenerator* m_posGenerator;
+	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();
 

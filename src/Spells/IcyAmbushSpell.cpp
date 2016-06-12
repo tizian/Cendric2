@@ -61,10 +61,10 @@ void IcyAmbushSpell::loadParticleSystem() {
 	m_ps->emitRate = 500.0f / 5.0f;
 
 	// Generators
-	auto posGen = m_ps->addGenerator<particles::BoxPositionGenerator>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(getBoundingBox()->width, 0.f);
-	m_pointGenerator = posGen;
+	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
+	m_particleSpawner = spawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 2.f;
@@ -83,7 +83,6 @@ void IcyAmbushSpell::loadParticleSystem() {
 	velGen->maxAngle = 360.f;
 	velGen->minStartSpeed = 200.f;
 	velGen->maxStartSpeed = 200.f;
-	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 0.5f;
@@ -97,6 +96,6 @@ void IcyAmbushSpell::loadParticleSystem() {
 }
 
 void IcyAmbushSpell::updateParticleSystemPosition() {
-	m_pointGenerator->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_pointGenerator->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }

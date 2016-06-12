@@ -6,6 +6,8 @@
 #include "LightObject.h"
 #include "Particles/ParticleSystem.h"
 
+#include <memory>
+
 // available skins:
 // 1: fire
 class ParticleTile : public LevelDynamicTile {
@@ -25,7 +27,7 @@ public:
 private:
 	std::unique_ptr<particles::TextureParticleSystem> m_ps = nullptr;
 	particles::AimedVelocityGenerator* m_velGenerator = nullptr;
-	particles::BoxPositionGenerator* m_posGenerator = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
 
 	void loadParticleSystem(int skinNr);
 };

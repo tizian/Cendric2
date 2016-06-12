@@ -185,8 +185,8 @@ void LevelMainCharacter::loadWeapon() {
 void LevelMainCharacter::setPosition(const sf::Vector2f& pos) {
 	LevelMovableGameObject::setPosition(pos);
 	if (!m_isDead) return;
-	m_posGenerator->center.x = getPosition().x + getBoundingBox()->width / 2.f;
-	m_posGenerator->center.y = getPosition().y + getBoundingBox()->height * (2.f/3.f);
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2.f;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * (2.f/3.f);
 }
 
 void LevelMainCharacter::setCharacterCore(CharacterCore* core) {
@@ -370,9 +370,10 @@ void LevelMainCharacter::loadParticleSystem() {
 	m_ps->emitRate = 100.f;
 
 	// Generators
-	m_posGenerator = m_ps->addGenerator<particles::DiskPositionGenerator>();
-	m_posGenerator->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	m_posGenerator->radius = 20.f;
+	auto posSpawner = m_ps->addSpawner<particles::DiskSpawner>();
+	posSpawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	posSpawner->radius = 20.f;
+	m_particleSpawner = posSpawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 10.f;
