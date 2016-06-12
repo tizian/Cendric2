@@ -7,7 +7,7 @@
   <property name="name" value="Meadows"/>
   <property name="tilesetpath" value="res/map/meadows/tileset_map_meadows.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
+ <tileset firstgid="1" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311">
   <image source="tileset_map_meadows.png" width="1200" height="3000"/>
   <tile id="25">
    <objectgroup draworder="index">
@@ -107,13 +107,13 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
+ <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="1347" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
- <layer name="BG 1" width="70" height="70" visible="0">
+ <layer name="BG 1" width="70" height="70">
   <data encoding="csv">
 371,371,371,394,395,394,395,371,371,371,371,371,371,371,372,372,373,124,124,124,124,124,124,124,124,124,124,124,124,124,124,124,124,124,324,218,218,124,394,395,394,395,394,395,394,395,394,395,124,171,124,124,372,372,372,372,372,372,372,372,372,372,372,372,372,372,371,371,371,371,
 394,395,371,371,371,371,371,371,371,371,371,371,371,371,372,372,396,124,124,124,124,124,124,124,124,124,124,124,124,124,218,349,124,124,347,218,218,124,218,218,218,124,124,124,218,218,218,218,124,124,171,218,372,218,124,171,171,124,171,171,171,124,171,124,371,348,348,349,219,219,
@@ -261,7 +261,7 @@
 0,307,307,307,307,307,307,307,307,307,307,307,307,307,307,307,307,308,0,0,0,0,0,0,0,0,0,0,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237
 </data>
  </layer>
- <layer name="BG 3" width="70" height="70" visible="0">
+ <layer name="BG 3" width="70" height="70">
   <data encoding="csv">
 0,0,373,374,0,0,0,0,0,0,0,0,0,0,0,0,0,374,0,0,0,0,0,0,0,0,0,0,0,0,0,419,441,323,440,441,392,0,0,0,0,0,404,241,242,0,0,0,0,0,0,0,397,0,0,0,0,0,0,0,0,0,0,0,0,0,358,359,0,0,
 0,0,396,397,0,0,0,0,0,0,0,0,0,0,0,0,0,397,0,0,0,0,0,0,0,0,0,0,0,0,0,442,440,441,0,0,0,0,0,0,0,0,427,264,265,0,0,0,0,423,424,425,0,0,0,103,104,0,0,0,0,0,0,0,0,0,381,382,0,0,
@@ -335,7 +335,7 @@
 0,374,0,0,0,330,0,355,0,0,0,0,0,0,0,330,0,0,355,331,0,0,0,0,0,330,0,0,330,0,0,0,0,354,0,0,0,0,0,0,0,0,0,331,0,0,0,0,0,330,0,0,355,0,0,0,0,0,0,330,0,0,331,355,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="70" height="70" visible="0">
+ <layer name="BG 4" width="70" height="70">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,264,265,441,0,0,0,0,0,0,0,0,360,361,0,0,0,0,0,0,0,0,0,446,447,0,0,0,0,0,0,0,0,0,360,361,0,0,360,361,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,360,361,0,0,0,0,0,0,0,0,0,0,0,0,0,441,287,288,0,0,0,423,424,0,421,422,0,383,384,0,0,0,0,0,0,0,0,358,359,0,0,0,0,0,0,0,0,0,0,383,384,360,361,383,384,

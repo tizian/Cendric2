@@ -44,7 +44,6 @@ const std::string GlobalResource::TEX_SCREEN_GAMEOVER = "res/assets/screens/scre
 const std::string GlobalResource::TEX_SCREEN_OVERLAY = "res/assets/screens/screen_overlay.png";
 const std::string GlobalResource::TEX_SCREEN_OVERLAY_STUNNED = "res/assets/screens/screen_overlay_stunned.png";
 const std::string GlobalResource::TEX_SCREEN_OVERLAY_FEARED = "res/assets/screens/screen_overlay_feared.png";
-const std::string GlobalResource::TEX_SCREEN_MENU = "res/assets/screens/screen_menu.png";
 const std::string GlobalResource::TEX_TEXT_GAMEOVER = "res/assets/screens/text_gameover.png";
 const std::string GlobalResource::TEX_TEXT_GAMEPAUSED = "res/assets/screens/text_gamepaused.png";
 const std::string GlobalResource::TEX_TEXT_DEFEATED = "res/assets/screens/text_defeated.png";

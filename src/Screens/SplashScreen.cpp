@@ -26,7 +26,7 @@ SplashScreen::~SplashScreen() {
 void SplashScreen::execOnEnter(const Screen* previousScreen) {
 	// add version nr
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
-	m_versionText.setCharacterSize(8);
+	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_versionText.setColor(COLOR_WHITE);
 	m_versionText.setPosition(
 		(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,

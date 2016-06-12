@@ -311,7 +311,6 @@ void ResourceManager::loadLevelResources() {
 	loadTexture(GlobalResource::TEX_SCREEN_OVERLAY, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_SCREEN_OVERLAY_STUNNED, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_SCREEN_OVERLAY_FEARED, ResourceType::Level);
-	loadTexture(GlobalResource::TEX_SCREEN_MENU, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_TEXT_GAMEOVER, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_TEXT_GAMEPAUSED, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_TEXT_DEFEATED, ResourceType::Level);
