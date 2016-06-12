@@ -18,7 +18,6 @@ public:
 	void execOnExit(const Screen* nextScreen) override;
 
 public:
-
 	static void loadFireParticles(particles::TextureParticleSystem* ps, const sf::Vector2f& center);
 
 private:
@@ -28,6 +27,4 @@ private:
 	
 	particles::TextureParticleSystem* m_ps_left = nullptr;
 	particles::TextureParticleSystem* m_ps_right = nullptr;
-
-	
 };

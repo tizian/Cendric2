@@ -11,16 +11,18 @@ MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 	g_resourceManager->loadTexture(SPRITE_PATH_BG, ResourceType::Unique, this);
 	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_BG)));
 	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_FG)));
-
-	m_ps_right = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
-	m_ps_left = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
-	SplashScreen::loadFireParticles(m_ps_left, sf::Vector2f(155.f, 330.f));
-	SplashScreen::loadFireParticles(m_ps_right, sf::Vector2f(1130.f, 330.f));
 }
 
 MenuScreen::~MenuScreen() {
 	delete m_ps_left;
 	delete m_ps_right;
+}
+
+void MenuScreen::setFireParticles(particles::TextureParticleSystem* ps_left, particles::TextureParticleSystem* ps_right) {
+	delete m_ps_left;
+	delete m_ps_right;
+	m_ps_left = ps_left;
+	m_ps_right = ps_right;
 }
 
 void MenuScreen::execUpdate(const sf::Time& frameTime) {
@@ -62,6 +64,13 @@ void MenuScreen::render(sf::RenderTarget &renderTarget) {
 }
 
 void MenuScreen::execOnEnter(const Screen *previousScreen) {
+	// add fire particles
+	if (m_ps_left == nullptr && m_ps_right == nullptr) {
+		m_ps_right = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
+		m_ps_left = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
+		SplashScreen::loadFireParticles(m_ps_left, sf::Vector2f(155.f, 330.f));
+		SplashScreen::loadFireParticles(m_ps_right, sf::Vector2f(1130.f, 330.f));
+	}
 	// add version nr
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
 	m_versionText.setCharacterSize(8);

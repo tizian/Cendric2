@@ -25,6 +25,8 @@ public:
 	void execOnEnter(const Screen *previousScreen) override;
 	void execOnExit(const Screen *nextScreen) override;
 
+	void setFireParticles(particles::TextureParticleSystem* ps_left, particles::TextureParticleSystem* ps_right);
+
 private:
 	sf::Sprite m_screenSpriteBackground;
 	sf::Sprite m_screenSpriteForeground;

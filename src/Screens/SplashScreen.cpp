@@ -35,7 +35,11 @@ void SplashScreen::execOnEnter(const Screen* previousScreen) {
 
 void SplashScreen::execUpdate(const sf::Time& frameTime) {
 	if (g_inputController->isKeyActive(Key::Confirm) || g_inputController->isMouseJustPressedLeft()) {
-		setNextScreen(new MenuScreen(nullptr));
+		MenuScreen* menuScreen = new MenuScreen(nullptr);
+		menuScreen->setFireParticles(m_ps_left, m_ps_right);
+		m_ps_left = nullptr;
+		m_ps_right = nullptr;
+		setNextScreen(menuScreen);
 		return;
 	}
 	if (g_inputController->isKeyActive(Key::Escape)) {
