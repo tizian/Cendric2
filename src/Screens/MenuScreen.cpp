@@ -1,6 +1,7 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/CutsceneScreen.h"
 #include "Screens/ScreenManager.h"
+#include "GUI/GUIConstants.h"
 
 using namespace std;
 
@@ -57,7 +58,6 @@ void MenuScreen::render(sf::RenderTarget &renderTarget) {
 	m_ps_right->render(renderTarget);
 	renderTarget.draw(m_screenSpriteForeground);
 	renderTarget.draw(m_versionText);
-	renderObjects(GameObjectType::_Undefined, renderTarget);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
 	renderTooltipText(renderTarget);
@@ -73,7 +73,7 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	}
 	// add version nr
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
-	m_versionText.setCharacterSize(8);
+	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_versionText.setColor(COLOR_WHITE);
 	m_versionText.setPosition(
 		(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,
