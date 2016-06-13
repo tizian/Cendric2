@@ -33,9 +33,9 @@ void WolfEnemy::loadAttributes() {
 
 void WolfEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 20;
+	chopSpell.damage = 10;
 	chopSpell.duration = sf::seconds(2.f);
-	chopSpell.damagePerSecond = 5;
+	chopSpell.damagePerSecond = 2;
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 100);
@@ -45,11 +45,12 @@ void WolfEnemy::loadSpells() {
 	m_spellManager->addSpell(chopSpell);
 
 	SpellData howlSpell = SpellData::getSpellData(SpellID::Buff);
-	howlSpell.damage = 10;
+	howlSpell.damage = 5;
 	howlSpell.cooldown = sf::milliseconds(10000);
 	howlSpell.fightAnimation = GameObjectState::Fighting2;
 	howlSpell.isBlocking = true;
-	howlSpell.fightingTime = sf::milliseconds(1000);
+	howlSpell.fightingTime = sf::milliseconds(2000);
+	howlSpell.duration = sf::seconds(5.f);
 	howlSpell.soundPath = "res/sound/mob/wolfhowl.ogg";
 
 	m_spellManager->addSpell(howlSpell);
@@ -137,8 +138,8 @@ MovingBehavior* WolfEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setDistanceToAbyss(80.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(200.f);
+	behavior->setMaxVelocityYUp(500.f);
+	behavior->setMaxVelocityX(150.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
@@ -151,7 +152,7 @@ AttackingBehavior* WolfEnemy::createAttackingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveBehavior(this);
 	}
-	behavior->setAggroRange(800.f);
+	behavior->setAggroRange(500.f);
 	behavior->setAttackInput(std::bind(&WolfEnemy::handleAttackInput, this));
 	return behavior;
 }

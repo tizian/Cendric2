@@ -35,6 +35,7 @@ item.id:mi_teeth,1
 item.id:we_simplesword,1
 item.id:we_torch,1
 item.id:we_walkingpole,1
+item.id:eq_lightpendant,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:

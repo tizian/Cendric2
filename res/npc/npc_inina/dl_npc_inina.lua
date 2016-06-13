@@ -163,7 +163,8 @@ loadDialogue = function(DL)
 			
 			DL:createNPCNode(44, 45, "DL_Inina_FoundPaladin") -- Oh no. That's terrible. He was a good man. I'm going to pray for him. Thank you for bringing my pendant back.
 			DL:changeQuestState("missing_paladin", "completed")
-			DL:removeItem("it_lightpendant", 1)
+			DL:removeItem("eq_lightpendant", 1)
+			DL:addReputationProgress("cleric", 10)
 			DL:addNode()
 			
 			DL:createNPCNode(45, -2, "DL_Inina_FoundPaladin2") -- We really need to find out what's behind all this.
@@ -178,10 +179,14 @@ loadDialogue = function(DL)
 				DL:createNPCNode(50, 51, "DL_Inina_LearnLight1") -- Yes, you've proven yourself worthy to learn the way of the Eternal Light.
 				DL:addNode()
 				
-				DL:createNPCNode(51, -1, "DL_Inina_LearnLight2") -- To create a magical light, you'll need a weapon that is capable of focusing divine magic. Then, concentrate the divine energy around you and let it shine. Take this scroll. It will teach you everything you need to know.
+				DL:createNPCNode(51, 52, "DL_Inina_LearnLight2") -- To create a magical light, you'll need a weapon that is capable of focusing divine magic. Then, concentrate the divine energy around you and let it shine.
+				DL:addNode()
+				
+				DL:createNPCNode(52, -1, "DL_Inina_LearnLight3") -- Take this scroll. It will teach you everything you need to know.
 				DL:addConditionProgress("npc_inina", "learned_light")
 				DL:addItem("sp_light", 1)
 				DL:addNode()
+			
 			
 			else
 				
