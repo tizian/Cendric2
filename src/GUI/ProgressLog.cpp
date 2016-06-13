@@ -5,6 +5,9 @@
 
 /* ProgressLog */
 
+const float ProgressLog::XOFFSET = 20.f;
+const int ProgressLog::MAX_ENTRIES = 6;
+
 ProgressLog::ProgressLog(const CharacterCore* core) : m_core(core) {
 }
 
@@ -147,6 +150,14 @@ void ProgressLog::calculatePositions() {
 			y -= m_logTexts[i + 1]->getHeight() + ProgressLogEntry::ENTRY_SPACING;
 		}
 	}
+
+	if (m_logTexts.size() > MAX_ENTRIES) {
+		auto it = m_logTexts.begin();
+		if (it == m_logTexts.end()) return;
+
+		ProgressLogEntry* entry = (*it);
+		entry->forceRemove();
+	}
 }
 
 /* ProgressLogEntry */
@@ -283,6 +294,11 @@ void ProgressLogEntry::setAlpha(float alpha) {
 
 	const sf::Color &bdc = m_border->getFillColor();
 	m_border->setFillColor(sf::Color(bdc.r, bdc.g, bdc.b, a));
+}
+
+void ProgressLogEntry::forceRemove() {
+	m_fadeInTimer = sf::Time::Zero;
+	m_time = sf::Time::Zero;
 }
 
 sf::Time ProgressLogEntry::getScrollTime() const {

@@ -21,6 +21,8 @@ public:
 	void setPosition(const sf::Vector2f& position);
 	void setAlpha(float alpha);
 
+	void forceRemove();
+
 	float getHeight() const;
 	sf::Time getScrollTime() const;
 	inline bool isOver() const { return m_scrollTimer <= sf::Time::Zero; }
@@ -88,5 +90,7 @@ private:
 	sf::Time m_scrollTime;
 
 	// text offset from the left of the screen
-	const float XOFFSET = 20.f;
+	static const float XOFFSET;
+	// soft cap on number of entries
+	static const int MAX_ENTRIES;
 };
