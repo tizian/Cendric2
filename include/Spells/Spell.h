@@ -47,6 +47,7 @@ public:
 	virtual void execOnHit(LevelMovableGameObject* target);
 	// gets called when the owner is killed(disposed)
 	virtual void onOwnerDisposed();
+	virtual void setDisposed() override;
 
 	const sf::Time& getActiveDuration() const;
 	const sf::Time& getDuration() const;
@@ -55,6 +56,7 @@ public:
 
 protected:
 	SpellData m_data;
+	sf::Sound m_sound;
 	
 	const Level* m_level;
 	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.

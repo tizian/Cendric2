@@ -16,6 +16,7 @@ void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::V
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 
 	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
+	g_resourceManager->playSound(m_sound, data.soundPath);
 
 	sf::Vector2f absolutePosition;
 	calculatePositionAccordingToMob(absolutePosition);
@@ -59,6 +60,7 @@ void Spell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 
 	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
+	g_resourceManager->playSound(m_sound, data.soundPath);
 
 	sf::Vector2f absolutePosition = tile->getCenter() - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f);
 	setPosition(absolutePosition);
@@ -83,6 +85,11 @@ void Spell::onOwnerDisposed() {
 		setDisposed();
 	}
 	m_mob = nullptr;
+}
+
+void Spell::setDisposed() {
+	m_sound.stop();
+	MovableGameObject::setDisposed();
 }
 
 void Spell::execOnHit(LevelMovableGameObject* target) {

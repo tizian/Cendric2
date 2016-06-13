@@ -16,9 +16,7 @@ public:
 	FireBallSpell() {};
 	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector2f& target) override;
-	void setDisposed() override;
 
 private:
 	void init(const SpellData& data);
-	sf::Sound m_sound;
 };

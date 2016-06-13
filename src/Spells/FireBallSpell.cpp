@@ -33,11 +33,4 @@ void FireBallSpell::load(const SpellData& data, LevelDynamicTile* tile, const sf
 
 	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 80.f, 0.8f);
 	addComponent(new LightComponent(lightData, this));
-	g_resourceManager->playSound(m_sound, data.soundPath);
 }
-
-void FireBallSpell::setDisposed() {
-	Spell::setDisposed();
-	m_sound.stop();
-}
-
