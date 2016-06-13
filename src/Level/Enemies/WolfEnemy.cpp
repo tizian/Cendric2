@@ -50,6 +50,7 @@ void WolfEnemy::loadSpells() {
 	howlSpell.fightAnimation = GameObjectState::Fighting2;
 	howlSpell.isBlocking = true;
 	howlSpell.fightingTime = sf::milliseconds(1000);
+	howlSpell.soundPath = "res/sound/mob/wolfhowl.ogg";
 
 	m_spellManager->addSpell(howlSpell);
 
