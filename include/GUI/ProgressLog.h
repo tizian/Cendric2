@@ -14,7 +14,7 @@ public:
 	ProgressLogEntry();
 	~ProgressLogEntry();
 
-	void updateFadeIn(const sf::Time& frameTime);
+	void updateBottom(const sf::Time& frameTime);
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& renderTarget);
 

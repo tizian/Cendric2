@@ -18,7 +18,7 @@ void ProgressLog::update(const sf::Time& frameTime) {
 	auto it = m_logTexts.begin();
 	while (it != m_logTexts.end()) {
 		ProgressLogEntry* entry = (*it);
-		entry->updateFadeIn(frameTime);
+		entry->update(frameTime);
 		++it;
 	}
 
@@ -27,7 +27,7 @@ void ProgressLog::update(const sf::Time& frameTime) {
 	if (it == m_logTexts.end()) return;
 
 	ProgressLogEntry* entry = (*it);
-	entry->update(frameTime);
+	entry->updateBottom(frameTime);
 	if (entry->isOver()) {
 		delete entry;
 		it = m_logTexts.erase(it);
@@ -151,9 +151,9 @@ void ProgressLog::calculatePositions() {
 
 /* ProgressLogEntry */
 
-const sf::Time ProgressLogEntry::TIME_TO_LIVE = sf::seconds(3.f);
-const sf::Time ProgressLogEntry::TIME_TO_FADE = sf::seconds(0.1f);
-const sf::Time ProgressLogEntry::TIME_TO_SCROLL = sf::seconds(0.2f);
+const sf::Time ProgressLogEntry::TIME_TO_LIVE = sf::seconds(6.f);
+const sf::Time ProgressLogEntry::TIME_TO_FADE = sf::seconds(0.2f);
+const sf::Time ProgressLogEntry::TIME_TO_SCROLL = sf::seconds(0.3f);
 
 const float ProgressLogEntry::BORDER_SIZE = 31.f;
 const float ProgressLogEntry::ICON_SIZE = 25.f;
@@ -228,21 +228,21 @@ ProgressLogEntry::~ProgressLogEntry() {
 	delete m_border;
 }
 
-void ProgressLogEntry::updateFadeIn(const sf::Time& frameTime) {
+void ProgressLogEntry::update(const sf::Time& frameTime) {
 	if (m_fadeInTimer > sf::Time::Zero) {
 		updateTime(m_fadeInTimer, frameTime);
 		float scale = 1.f - m_fadeInTimer.asSeconds() / TIME_TO_FADE.asSeconds();
 		setAlpha(scale);
 	}
-}
-
-void ProgressLogEntry::update(const sf::Time& frameTime) {
-	if (m_fadeInTimer > sf::Time::Zero) return;
-
-	if (m_time > sf::Time::Zero) {
+	else if (m_time > sf::Time::Zero) {
 		updateTime(m_time, frameTime);
 	}
-	else if (m_fadeOutTimer > sf::Time::Zero) {
+}
+
+void ProgressLogEntry::updateBottom(const sf::Time& frameTime) {
+	if (m_time > sf::Time::Zero) return;
+	
+	if (m_fadeOutTimer > sf::Time::Zero) {
 		updateTime(m_fadeOutTimer, frameTime);
 		float scale = m_fadeOutTimer.asSeconds() / TIME_TO_FADE.asSeconds();
 		setAlpha(scale);
