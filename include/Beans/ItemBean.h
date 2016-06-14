@@ -53,6 +53,9 @@ struct ItemBean : DatabaseBean {
 		if (_item_type.compare("spell") == 0) {
 			return ItemType::Spell;
 		}
+		if (_item_type.compare("key") == 0) {
+			return ItemType::Key;
+		}
 		
 		return ItemType::VOID;
 	}

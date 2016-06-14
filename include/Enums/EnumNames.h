@@ -66,6 +66,8 @@ public:
 			return "Quest";
 		case ItemType::Spell:
 			return "Spell";
+		case ItemType::Key:
+			return "Key";
 		}
 	}
 
