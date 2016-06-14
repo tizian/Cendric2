@@ -1,8 +1,7 @@
 #include "Particles/ParticleSystem.h"
 
 #include "Particles/ParticleData.h"
-
-#include <iostream>
+#include "Particles/ParticleHelpers.h"
 
 namespace particles {
 
