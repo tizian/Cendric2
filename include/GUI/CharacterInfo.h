@@ -83,6 +83,7 @@ private:
 	TabBar* m_tabBar;
 	BitmapText m_title;
 
+	sf::Sprite m_statsIcons;
 	BitmapText m_namesText;
 	BitmapText m_attributeText;
 

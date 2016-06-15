@@ -92,6 +92,7 @@ public:
 	static const std::string TEX_GUI_CURSOR;
 	static const std::string TEX_GUI_PROGRESSLOG_QUEST;
 	static const std::string TEX_GUI_PROGRESSLOG_REPUTATION;
+	static const std::string TEX_GUI_STATS_ICONS;
 	static const std::string SOUND_GUI_MENUCURSOR;
 	static const std::string SOUND_GUI_PICKUP;
 	static const std::string SOUND_GUI_OPENWINDOW;

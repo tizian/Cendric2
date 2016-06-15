@@ -90,6 +90,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_GUI_CURSOR, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_PROGRESSLOG_QUEST, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_PROGRESSLOG_REPUTATION, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUI_STATS_ICONS, ResourceType::Global);
 
 	loadSoundbuffer(GlobalResource::SOUND_GUI_MENUCURSOR, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_PICKUP, ResourceType::Global);

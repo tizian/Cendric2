@@ -6,8 +6,8 @@
 
 const float CharacterInfo::TOP = GUIConstants::TOP;
 const float CharacterInfo::LEFT = GUIConstants::LEFT;
-const float CharacterInfo::WIDTH = 760.f;
-const float CharacterInfo::HEIGHT = 434.f;
+const float CharacterInfo::WIDTH = 784.f;
+const float CharacterInfo::HEIGHT = 494.f;
 
 const sf::Vector2f CharacterInfo::BUTTON_SIZE = sf::Vector2f(200.f, 40.f);
 
@@ -51,15 +51,22 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 	m_namesText.setString(names);
 	m_namesText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_namesText.setColor(COLOR_WHITE);
+	m_namesText.setLineSpacing(0.833f);
 
 	m_attributeText.setString("");
 	m_attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_attributeText.setColor(COLOR_LIGHT_PURPLE);
+	m_attributeText.setLineSpacing(0.833f);
 
 	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 
-	m_namesText.setPosition(sf::Vector2f(
+	m_statsIcons.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_STATS_ICONS));
+	m_statsIcons.setPosition(
 		GUIConstants::LEFT + GUIConstants::TEXT_OFFSET,
+		yOffset - 4.f);
+
+	m_namesText.setPosition(sf::Vector2f(
+		GUIConstants::LEFT + GUIConstants::TEXT_OFFSET + 24.f,
 		yOffset));
 	m_attributeText.setPosition(sf::Vector2f(
 		GUIConstants::LEFT + WIDTH / 2.f,
@@ -229,6 +236,7 @@ void CharacterInfo::render(sf::RenderTarget& target) {
 	m_tabBar->render(target);
 
 	if (m_tabBar->getActiveTabIndex() == 0) {
+		target.draw(m_statsIcons);
 		target.draw(m_namesText);
 		target.draw(m_attributeText);
 	}

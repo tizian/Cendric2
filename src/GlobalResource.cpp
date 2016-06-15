@@ -82,6 +82,7 @@ const std::string GlobalResource::TEX_GUI_TAB_ACTIVE = "res/assets/gui/tab_activ
 const std::string GlobalResource::TEX_GUI_CURSOR = "res/assets/gui/cursor.png";
 const std::string GlobalResource::TEX_GUI_PROGRESSLOG_QUEST = "res/assets/gui/progresslog_quest.png";
 const std::string GlobalResource::TEX_GUI_PROGRESSLOG_REPUTATION = "res/assets/gui/progresslog_reputation.png";
+const std::string GlobalResource::TEX_GUI_STATS_ICONS = "res/assets/gui/stats_icons.png";
 const std::string GlobalResource::SOUND_GUI_MENUCURSOR = "res/sound/gui/menu_cursor.ogg";
 const std::string GlobalResource::SOUND_GUI_PICKUP = "res/sound/item/pickup_gold.ogg";
 const std::string GlobalResource::SOUND_GUI_OPENWINDOW = "res/sound/gui/window_open.ogg";
