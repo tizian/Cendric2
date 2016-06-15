@@ -6,41 +6,8 @@
 using namespace std;
 
 void Spell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
-	m_data = data;
-	setBoundingBox(data.boundingBox);
-	setDebugBoundingBox(COLOR_BAD);
-
-	m_level = mob->getLevel();
 	m_mob = mob;
-	m_screen = mob->getScreen();
-	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
-
-	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
-	g_resourceManager->playSound(m_sound, data.soundPath);
-
-	sf::Vector2f absolutePosition;
-	calculatePositionAccordingToMob(absolutePosition);
-	setPosition(absolutePosition);
-
-	// if it is attached to mob, its velocity is ignored 
-	if (data.attachedToMob || !data.needsTarget) {
-		setVelocity(sf::Vector2f(0, 0));
-		return;
-	}
-
-	sf::Vector2f trueDir = target - absolutePosition;
-	// normalize dir
-	float len = sqrt(trueDir.x * trueDir.x + trueDir.y * trueDir.y);
-	trueDir.x = (len == 0) ? 0 : trueDir.x / len;
-	trueDir.y = (len == 0) ? 0 : trueDir.y / len;
-
-	sf::Vector2f direction = rotateVector(trueDir, data.divergenceAngle);
-
-	if (getConfiguredRotateSprite()) {
-		setSpriteRotation(atan2(direction.y, direction.x));
-	}
-
-	setVelocity(m_data.speed * direction);
+	initialize(data, mob, target);
 }
 
 void Spell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector2f& target) {
@@ -50,22 +17,45 @@ void Spell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector
 		throw;
 	}
 
+	m_mob = nullptr;
+	initialize(data, tile, target);
+}
+
+void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f& target) {
 	m_data = data;
 	setBoundingBox(data.boundingBox);
 	setDebugBoundingBox(COLOR_BAD);
 
-	m_level = tile->getLevel();
-	m_mob = nullptr;
-	m_screen = tile->getScreen();
+	m_screen = go->getScreen();
 	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
 
 	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
-	g_resourceManager->playSound(m_sound, data.soundPath);
+	m_level = m_mainChar->getLevel();
 
-	sf::Vector2f absolutePosition = tile->getCenter() - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f);
+	sf::Vector2f absolutePosition;
+	if (dynamic_cast<LevelMovableGameObject*>(go)) {
+		calculatePositionAccordingToMob(absolutePosition);
+	}
+	else {
+		absolutePosition = go->getCenter() - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f);
+	}
+	
 	setPosition(absolutePosition);
 
-	sf::Vector2f trueDir = target - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f) - absolutePosition;
+	// handle sound
+	float distance = dist(getCenter(), m_mainChar->getPosition());
+	if (distance <= WINDOW_WIDTH) {
+		float scale = 1.f - distance / WINDOW_WIDTH;
+		g_resourceManager->playSound(m_sound, data.soundPath, false, scale);
+	}
+
+	// if it is attached to mob, its velocity is ignored 
+	if (data.attachedToMob || !data.needsTarget) {
+		setVelocity(sf::Vector2f(0.f, 0.f));
+		return;
+	}
+
+	sf::Vector2f trueDir = target - absolutePosition;
 	// normalize dir
 	float len = sqrt(trueDir.x * trueDir.x + trueDir.y * trueDir.y);
 	trueDir.x = (len == 0) ? 0 : trueDir.x / len;

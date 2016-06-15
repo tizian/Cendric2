@@ -2,6 +2,7 @@
 #include "Spells/Spell.h"
 #include "Registrar.h"
 #include "Screens/WorldScreen.h"
+#include "GameObjectComponents/LightComponent.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Jumping, JumpingTile)
 
@@ -39,6 +40,16 @@ void JumpingTile::loadAnimation(int skinNr) {
 	if (skinNr == 2) { // fireball
 		m_damage.damageType = DamageType::Fire;
 		m_isMelting = true;
+		addComponent(new LightComponent(LightData(
+			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f),
+			sf::Vector2f(100.f, 150.f)), this));
+	}
+	else if (skinNr = 3) { // glowing magic-infused shadow piranha
+		m_damage.damageType = DamageType::Shadow;
+		addComponent(new LightComponent(LightData(
+			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f), 
+			sf::Vector2f(100.f, 100.f), 
+			0.3f), this));
 	}
 }
 

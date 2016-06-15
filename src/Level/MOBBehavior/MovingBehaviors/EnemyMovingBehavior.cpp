@@ -14,11 +14,6 @@ void EnemyMovingBehavior::setFacingRight(bool value) {
 }
 
 void EnemyMovingBehavior::handleMovementInput() {
-	if (m_enemy->isDead()) {
-		m_enemy->setAcceleration(sf::Vector2f(0.f, getGravity()));
-		return;
-	}
-
 	if (!m_enemy->isStunned()) {
 		if (m_movingTarget != nullptr) {
 			sf::Vector2f center = m_enemy->getCenter();

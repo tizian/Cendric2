@@ -8,13 +8,19 @@ MovingBehavior::MovingBehavior(LevelMovableGameObject* mob) {
 }
 
 bool MovingBehavior::isReady() const {
-	return !m_isBlockingSpell || m_fightAnimationTime == sf::Time::Zero;
+	return !m_mob->isDead() && (!m_isBlockingSpell || m_fightAnimationTime == sf::Time::Zero);
 }
 
 void MovingBehavior::update(const sf::Time& frameTime) {
 	if (!m_isCollisionTilt) {
-		if (isReady())
+		
+
+		if (isReady()) {
 			handleMovementInput();
+		}
+		else {
+			handleDefaultAcceleration();
+		}
 
 		sf::Vector2f nextPosition;
 		m_mob->calculateNextPosition(frameTime, nextPosition);
@@ -26,6 +32,16 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 	// update animation
 	updateTime(m_fightAnimationTime, frameTime);
 	updateAnimation();
+}
+
+void MovingBehavior::handleDefaultAcceleration() {
+	if (m_mob->isDead()) {
+		m_mob->setAcceleration(sf::Vector2f(0.f, getGravity()));
+		return;
+	}
+
+	float newAccelerationX = m_mob->getAcceleration().x;
+	m_mob->setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -m_gravity : m_gravity)));
 }
 
 void MovingBehavior::checkForCollisionTilt(const sf::Vector2f& oldPosition) {

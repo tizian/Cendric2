@@ -72,4 +72,7 @@ protected:
 	// collisions with enemies. executes on hit and returns whether a collision happened.
 	virtual bool checkCollisionsWithEnemies(const sf::FloatRect* boundingBox);
 	sf::Vector2f rotateVector(const sf::Vector2f& vec, float angle);
+
+private:
+	void initialize(const SpellData& data, GameObject* go, const sf::Vector2f& target);
 };

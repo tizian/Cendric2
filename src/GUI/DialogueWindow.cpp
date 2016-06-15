@@ -140,7 +140,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 	updateTime(m_dialogueTimeout, frameTime);
 
-	if (g_inputController->isKeyJustPressed(Key::Escape) && m_dialogueTimeout == sf::Time::Zero) {
+	if (g_inputController->isKeyJustPressed(Key::Escape)) {
 		// check if we can leave the window
 		if (m_dialogue->isEndable()) {
 			g_inputController->lockAction();
@@ -210,7 +210,7 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 		return m_dialogue->updateWindow();
 	}
 
-	if (m_dialogueTimeout == sf::Time::Zero && (chooseOption || g_inputController->isSelected())) {
+	if ((m_dialogueTimeout == sf::Time::Zero && chooseOption) || g_inputController->isSelected()) {
 		if (m_options.empty()) {
 			m_dialogue->setNextNode(-1);
 		}
