@@ -66,6 +66,7 @@ void MenuScreen::render(sf::RenderTarget &renderTarget) {
 void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	// add fire particles
 	if (m_ps_left == nullptr && m_ps_right == nullptr) {
+		g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
 		m_ps_right = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 		m_ps_left = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 		SplashScreen::loadFireParticles(m_ps_left, sf::Vector2f(155.f, 330.f));

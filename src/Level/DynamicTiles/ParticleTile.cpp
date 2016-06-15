@@ -69,6 +69,7 @@ void ParticleTile::onHit(Spell* spell) {
 }
 
 void ParticleTile::loadParticleSystem(int skinNr) {
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
 	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 60.f;
