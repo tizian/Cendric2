@@ -12,6 +12,7 @@ SplashScreen::SplashScreen() : Screen(nullptr) {
 	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_BG)));
 	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_FG)));
 
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
 	m_ps_right = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	m_ps_left = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	loadFireParticles(m_ps_left, sf::Vector2f(155.f, 330.f));

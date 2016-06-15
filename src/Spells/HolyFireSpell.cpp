@@ -43,6 +43,7 @@ void HolyFireSpell::update(const sf::Time& frameTime) {
 }
 
 void HolyFireSpell::loadParticleSystem() {
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
 	m_ps = new particles::TextureParticleSystem(static_cast<int>(m_data.range), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = m_data.range;

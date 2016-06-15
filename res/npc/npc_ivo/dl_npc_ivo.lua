@@ -17,7 +17,7 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_ivo", "who_are_you") and not DL:isConditionFulfilled("npc_ivo", "sheep_asked")) then
 		DL:addChoice(4, "DL_Choice_AskSheep") -- I heard that your sheep are disappearing?
 	end
-	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "complete")) then
+	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "completed")) then
 		DL:addChoice(10, "DL_Choice_Sheep") -- About your sheep...
 	end
 	DL:addChoice(-1, "DL_Choice_Bye") -- Bye.  
@@ -100,7 +100,7 @@ loadDialogue = function(DL)
 		
 	end 
 	
-	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "complete")) then
+	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "completed")) then
 	
 		DL:createChoiceNode(10)
 		if (not DL:isConditionFulfilled("npc_ivo", "ask_tristan")) then
@@ -129,7 +129,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createNPCNode(14, -2, "DL_Ivo_ThankYou") -- Really? The thief won't come again? Thank you so much for helping us! Go to Tristan and tell him to give you a reward.
-		DL:changeQuestState("monster_problem", "complete")
+		DL:changeQuestState("monster_problem", "completed")
 		DL:addNode()
 		
 	end
