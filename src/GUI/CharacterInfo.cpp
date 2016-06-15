@@ -6,13 +6,13 @@
 
 const float CharacterInfo::TOP = GUIConstants::TOP;
 const float CharacterInfo::LEFT = GUIConstants::LEFT;
-const float CharacterInfo::WIDTH = 784.f;
+const float CharacterInfo::WIDTH = 560.f;
 const float CharacterInfo::HEIGHT = 494.f;
 
-const sf::Vector2f CharacterInfo::BUTTON_SIZE = sf::Vector2f(200.f, 40.f);
+const sf::Vector2f CharacterInfo::BUTTON_SIZE = sf::Vector2f(120.f, 40.f);
 
 const int CharacterInfo::ENTRY_COUNT = 12;
-const int CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS = 50;
+const int CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS = 40;
 const float CharacterInfo::MAX_ENTRY_LENGTH = static_cast<float>(MAX_ENTRY_LENGTH_CHARACTERS) * GUIConstants::CHARACTER_SIZE_M;
 
 const float CharacterInfo::WINDOW_MARGIN = 6.f;
@@ -60,17 +60,19 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 
 	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 
-	m_statsIcons.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_STATS_ICONS));
+	m_namesText.setPosition(sf::Vector2f(
+		GUIConstants::LEFT + 2.f * GUIConstants::TEXT_OFFSET,
+		yOffset));
+
+	m_attributeText.setPosition(sf::Vector2f(
+		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET,
+		yOffset));
+
 	m_statsIcons.setPosition(
-		GUIConstants::LEFT + GUIConstants::TEXT_OFFSET,
+		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET - 28.f,
 		yOffset - 4.f);
 
-	m_namesText.setPosition(sf::Vector2f(
-		GUIConstants::LEFT + GUIConstants::TEXT_OFFSET + 24.f,
-		yOffset));
-	m_attributeText.setPosition(sf::Vector2f(
-		GUIConstants::LEFT + WIDTH / 2.f,
-		yOffset));
+	m_statsIcons.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_STATS_ICONS));
 
 	// init window
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
@@ -286,9 +288,9 @@ void CharacterInfo::updateAttributes() {
 
 	// cooldown reduction
 	attributes.append(std::to_string(m_attributes->haste));
-	attributes.append(" - ");
-	attributes.append(std::to_string(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
-	attributes.append("% " + g_textProvider->getText("CooldownReduction"));
+	//attributes.append(" - ");
+	//attributes.append(std::to_string(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
+	//attributes.append("% " + g_textProvider->getText("CooldownReduction"));
 	attributes.append("\n\n");
 
 	// dmg 
@@ -300,35 +302,44 @@ void CharacterInfo::updateAttributes() {
 
 	// resistance
 	attributes.append(std::to_string(m_attributes->resistancePhysical));
-	attributes.append(" - ");
-	attributes.append(std::to_string(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
-	attributes.append("% " + g_textProvider->getText("Reduction"));
+	//attributes.append(" - ");
+	//attributes.append(std::to_string(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
+	//attributes.append("% " + g_textProvider->getText("Reduction"));
 	attributes.append("\n");
 
 	attributes.append(std::to_string(m_attributes->resistanceFire));
-	attributes.append(" - ");
-	attributes.append(std::to_string(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
-	attributes.append("% " + g_textProvider->getText("Reduction"));
+	//attributes.append(" - ");
+	//attributes.append(std::to_string(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
+	//attributes.append("% " + g_textProvider->getText("Reduction"));
 	attributes.append("\n");
 
 	attributes.append(std::to_string(m_attributes->resistanceIce));
-	attributes.append(" - ");
-	attributes.append(std::to_string(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
-	attributes.append("% " + g_textProvider->getText("Reduction"));
+	//attributes.append(" - ");
+	//attributes.append(std::to_string(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
+	//attributes.append("% " + g_textProvider->getText("Reduction"));
 	attributes.append("\n");
 
 	attributes.append(std::to_string(m_attributes->resistanceShadow));
-	attributes.append(" - ");
-	attributes.append(std::to_string(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
-	attributes.append("% " + g_textProvider->getText("Reduction"));
+	//attributes.append(" - ");
+	//attributes.append(std::to_string(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
+	//attributes.append("% " + g_textProvider->getText("Reduction"));
 	attributes.append("\n");
 
 	attributes.append(std::to_string(m_attributes->resistanceLight));
-	attributes.append(" - ");
-	attributes.append(std::to_string(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
-	attributes.append("% " + g_textProvider->getText("Reduction"));
+	//attributes.append(" - ");
+	//attributes.append(std::to_string(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
+	//attributes.append("% " + g_textProvider->getText("Reduction"));
 	attributes.append("\n");
 	m_attributeText.setString(attributes);
+
+	const sf::Vector2f pos = m_attributeText.getPosition();
+	m_attributeText.setPosition(sf::Vector2f(
+		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET,
+		pos.y));
+
+	m_statsIcons.setPosition(
+		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET - 28.f,
+		pos.y - 4.f);
 }
 
 void CharacterInfo::updateReputation() {
