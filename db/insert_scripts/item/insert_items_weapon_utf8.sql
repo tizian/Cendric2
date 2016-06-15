@@ -129,5 +129,4 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, dmg_fire) values ('we_torch', 10);
 INSERT INTO item_equipment (item_id, texture_path) values ('we_torch', 'res/assets/equipment/weapon/spritesheet_weapon_torch.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_torch', 400, 10, 40, 80, 10);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_torch', 1, 'elemental', 1);
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y) values ('we_torch', 30, 30, 300, 400);

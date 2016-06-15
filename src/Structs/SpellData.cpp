@@ -649,7 +649,7 @@ SpellData SpellData::getLightSpellData() {
 	light.spellOffset = sf::Vector2f(0.f, -60.f);
 	light.duration = sf::seconds(60);
 	light.activeDuration = light.duration;
-	light.range = 300.f;
+	light.range = 400.f;
 	light.attachedToMob = true;
 	light.fightAnimation = GameObjectState::VOID;
 

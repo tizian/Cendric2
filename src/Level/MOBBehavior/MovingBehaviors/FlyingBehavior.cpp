@@ -14,6 +14,16 @@ void FlyingBehavior::makeRandomDecision() {
 	m_movingDirectionY = rand() % 3 - 1;
 }
 
+void FlyingBehavior::handleDefaultAcceleration() {
+	if (m_mob->isDead()) {
+		m_mob->setAcceleration(sf::Vector2f(0.f, getGravity()));
+		return;
+	}
+
+	float newAccelerationX = m_mob->getAcceleration().x;
+	m_mob->setAcceleration(sf::Vector2f(newAccelerationX, 0.f));
+}
+
 void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool collidesX = false;
 	bool collidesY = false;

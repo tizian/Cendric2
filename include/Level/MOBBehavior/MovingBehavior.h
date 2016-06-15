@@ -20,6 +20,7 @@ public:
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const;
 
 	virtual void handleMovementInput() = 0;
+	virtual void handleDefaultAcceleration();
 
 	// gravity flip (used for anti gravity spell)
 	void flipGravity();

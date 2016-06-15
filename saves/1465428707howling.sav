@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:2624
+time.played:2643
 savegame.name:howling
-savegame.date:1465429868
+savegame.date:1465898494
 level.id:res/level/howlingcaverns/howlingcaverns.tmx
 level.position:525.000000,1175.000000
 is.in.level:0
 map.id:res/map/meadows/meadows.tmx
-map.position:1590.000000,2421.894287
+map.position:1590.000000,2320.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -14,6 +14,7 @@ attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:75
 # items in inventory:
 item.id:co_smallpouch,1
+item.id:eq_lightpendant,1
 item.id:fo_apple,4
 item.id:fo_beer,1
 item.id:fo_caveberry,3
@@ -32,10 +33,9 @@ item.id:mi_firerat_fur,1
 item.id:mi_goldengoblet,3
 item.id:mi_stone,3
 item.id:mi_teeth,1
+item.id:we_hawthorn,1
 item.id:we_simplesword,1
-item.id:we_torch,1
 item.id:we_walkingpole,1
-item.id:eq_lightpendant,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:
@@ -44,7 +44,7 @@ equipped.head:eq_bandana
 equipped.neck:eq_silvernecklace
 equipped.ring1:
 equipped.ring2:
-equipped.weapon:we_hawthorn
+equipped.weapon:we_torch
 # quickslot assignments:
 quickslot:1,fo_lesserhealingpotion
 quickslot:2,fo_apple
@@ -73,6 +73,7 @@ items.looted:res/level/ratcave/ratcave.tmx,640,667,734,738,762,763,1076,1200,156
 items.looted:res/level/rockfall/rockfall.tmx,894,1006
 items.looted:res/level/stonegarden/stonegarden.tmx,1034,1151,1935,2285,2501,2509,2550
 # chests looted in level:
+items.looted:res/level/howlingcaverns/howlingcaverns.tmx
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/elderhome/elderhome.tmx
 waypoints.unlocked:res/map/meadows/meadows.tmx,748,1002,1387,2327,2496,3872,3893,4337

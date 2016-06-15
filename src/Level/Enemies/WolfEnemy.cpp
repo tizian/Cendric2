@@ -49,7 +49,8 @@ void WolfEnemy::loadSpells() {
 	howlSpell.cooldown = sf::milliseconds(10000);
 	howlSpell.fightAnimation = GameObjectState::Fighting2;
 	howlSpell.isBlocking = true;
-	howlSpell.fightingTime = sf::milliseconds(2000);
+	howlSpell.fightingTime = sf::seconds(2.f);
+	howlSpell.activeDuration = sf::seconds(2.f);
 	howlSpell.duration = sf::seconds(5.f);
 	howlSpell.soundPath = "res/sound/mob/wolfhowl.ogg";
 

@@ -14,4 +14,5 @@ public:
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void updateAnimation() override;
 	void makeRandomDecision() override;
+	void handleDefaultAcceleration() override;
 };
