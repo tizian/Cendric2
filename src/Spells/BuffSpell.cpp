@@ -12,7 +12,7 @@ void BuffSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const s
 
 void BuffSpell::update(const sf::Time& frameTime) {
 	sf::Vector2f nextPosition;
-	calculatePositionAccordingToMob(nextPosition);
+	calculatePositionAccordingToMob(nextPosition, m_mob);
 	setPosition(nextPosition);
 
 	MovableGameObject::update(frameTime);

@@ -36,7 +36,7 @@ void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 
 void DivineShieldSpell::update(const sf::Time& frameTime) {
 	sf::Vector2f nextPosition;
-	calculatePositionAccordingToMob(nextPosition);
+	calculatePositionAccordingToMob(nextPosition, m_mob);
 	setPosition(nextPosition);
 
 	MovableGameObject::update(frameTime);

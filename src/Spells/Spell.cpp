@@ -33,8 +33,8 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 	m_level = m_mainChar->getLevel();
 
 	sf::Vector2f absolutePosition;
-	if (dynamic_cast<LevelMovableGameObject*>(go)) {
-		calculatePositionAccordingToMob(absolutePosition);
+	if (m_mob != nullptr) {
+		calculatePositionAccordingToMob(absolutePosition, m_mob);
 	}
 	else {
 		absolutePosition = go->getCenter() - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f);
@@ -55,7 +55,8 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 		return;
 	}
 
-	sf::Vector2f trueDir = target - absolutePosition;
+	sf::Vector2f trueDir = target - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f) - absolutePosition;
+
 	// normalize dir
 	float len = sqrt(trueDir.x * trueDir.x + trueDir.y * trueDir.y);
 	trueDir.x = (len == 0) ? 0 : trueDir.x / len;
@@ -100,17 +101,17 @@ void Spell::execOnHit(LevelMovableGameObject* target) {
 		target->setStunned(m_data.duration);
 }
 
-void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
-	if (m_mob == nullptr) {
+void Spell::calculatePositionAccordingToMob(sf::Vector2f& position, const LevelMovableGameObject* mob) const {
+	if (mob == nullptr) {
 		// owner could be dead and looted.
 		return;
 	}
-	sf::Vector2f mobPosition(m_mob->getPosition().x + (m_mob->getBoundingBox()->width / 2), m_mob->getPosition().y);
+	sf::Vector2f mobPosition(mob->getPosition().x + (mob->getBoundingBox()->width / 2), mob->getPosition().y);
 	sf::Vector2f offset = m_data.spellOffset;
-	if (!m_mob->isFacingRight())
+	if (!mob->isFacingRight())
 		offset.x = -offset.x - getBoundingBox()->width;
-	if (m_mob->isUpsideDown())
-		offset.y = m_mob->getBoundingBox()->height - offset.y - getBoundingBox()->height;
+	if (mob->isUpsideDown())
+		offset.y = mob->getBoundingBox()->height - offset.y - getBoundingBox()->height;
 
 	position.x = (mobPosition + offset).x;
 	position.y = (mobPosition + offset).y;
@@ -119,7 +120,7 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position) const {
 void Spell::update(const sf::Time& frameTime) {
 	sf::Vector2f nextPosition;
 	if (m_data.attachedToMob) {
-		calculatePositionAccordingToMob(nextPosition);
+		calculatePositionAccordingToMob(nextPosition, m_mob);
 		setPosition(nextPosition);
 	}
 	else {

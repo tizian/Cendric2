@@ -44,7 +44,7 @@ void JumpingTile::loadAnimation(int skinNr) {
 			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f),
 			sf::Vector2f(100.f, 150.f)), this));
 	}
-	else if (skinNr = 3) { // glowing magic-infused shadow piranha
+	else if (skinNr == 3) { // glowing magic-infused shadow piranha
 		m_damage.damageType = DamageType::Shadow;
 		addComponent(new LightComponent(LightData(
 			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f), 

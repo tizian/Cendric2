@@ -32,7 +32,7 @@ void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 
 void GhostFormSpell::update(const sf::Time& frameTime) {
 	sf::Vector2f nextPosition;
-	calculatePositionAccordingToMob(nextPosition);
+	calculatePositionAccordingToMob(nextPosition, m_mob);
 	setPosition(nextPosition);
 	m_mob->setSpriteColor(GHOST_COLOR, sf::milliseconds(100));
 
