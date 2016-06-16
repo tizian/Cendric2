@@ -65,8 +65,8 @@ protected:
 	std::vector<GameObject*>* m_enemies;
 	// main character from screen
 	LevelMainCharacter* m_mainChar;
-	// calculates position according to m_mob
-	void calculatePositionAccordingToMob(sf::Vector2f& position) const;
+	// calculates position according to mob
+	void calculatePositionAccordingToMob(sf::Vector2f& position, const LevelMovableGameObject* mob) const;
 	// collisions with mainchar and allied enemies. executes on hit and returns whether a collision happened.
 	virtual bool checkCollisionsWithAllies(const sf::FloatRect* boundingBox);
 	// collisions with enemies. executes on hit and returns whether a collision happened.
