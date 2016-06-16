@@ -482,15 +482,16 @@ std::string CharacterCoreWriter::writeWeaponConfigurations(const CharacterCoreDa
 	for (auto& it : data.weaponConfigurations) {
 		weaponConfigs.append(string(WEAPON_CONFIGS) + ":");
 		weaponConfigs.append(it.first);
+		weaponConfigs.append(";");
 
 		for (auto it2 = it.second.begin(); it2 != it.second.end(); ++it2) {
-			weaponConfigs.append(";");
 			weaponConfigs.append(to_string(static_cast<int>(it2->first)));
 			for (auto& it3 : it2->second) {
 				weaponConfigs.append(",");
 				weaponConfigs.append(to_string(static_cast<int>(it3.type)) + ",");
 				weaponConfigs.append(to_string(it3.level));
 			}
+			weaponConfigs.append(";");
 		}
 		weaponConfigs.append("\n");
 	}

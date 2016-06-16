@@ -84,34 +84,38 @@ bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, Chara
 	char* endData = gotoNextChar(startData, end, '\n');
 	if (endData == nullptr) return false;
 
-
 	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;
 
 	while (startData != nullptr && startData < endData) {
+		startData = gotoNextChar(startData, endData, ';');
 		startData++;
+
+		if (*startData == '\n') break;
 
 		SpellID spell = static_cast<SpellID>(atoi(startData));
 		if (spell < SpellID::VOID || spell >= SpellID::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + to_string(static_cast<int>(spell)));
 			return false;
 		}
+		
+		char* startSpellData = gotoNextChar(startData, endData, ',');
+		if (startSpellData == nullptr) return false;
 
 		char* endSpellData = gotoNextChar(startData, endData, ';');
 		if (endSpellData == nullptr) return false;
 
 		vector<SpellModifier> modifiers;
 
-		startData = gotoNextChar(startData, endSpellData, ',');
-		while (startData != nullptr && startData < endSpellData) {
-			startData++;
-			SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
+		while (startSpellData != nullptr && startSpellData < endSpellData) {
+			startSpellData++;
+			SpellModifierType type = static_cast<SpellModifierType>(atoi(startSpellData));
 			if (type < SpellModifierType::VOID || type >= SpellModifierType::MAX) {
 				g_logger->logError("CharacterCoreReader", "Spell Modifier type not recognized: " + to_string(static_cast<int>(type)));
 				return false;
 			}
-			startData = gotoNextChar(startData, endSpellData, ',');
-			startData++;
-			int level = atoi(startData);
+			startSpellData = gotoNextChar(startSpellData, endSpellData, ',');
+			startSpellData++;
+			int level = atoi(startSpellData);
 			if (level < 1 || level > 3) {
 				if (type == SpellModifierType::VOID) {
 					level = 0;
@@ -126,7 +130,7 @@ bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, Chara
 			modifier.level = level;
 			modifiers.push_back(modifier);
 
-			startData = gotoNextChar(startData, endSpellData, ',');
+			startSpellData = gotoNextChar(startSpellData, endSpellData, ',');
 		}
 
 		equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(spell, modifiers));

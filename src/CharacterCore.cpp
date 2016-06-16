@@ -628,9 +628,7 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 	if (type == ItemType::Equipment_weapon) {
 		m_data.equippedWeaponSlots.clear();
 		loadWeapon();
-		std::cout << m_weapon << std::endl;
 		if (m_weapon && m_data.weaponConfigurations.find(m_weapon->getID()) != m_data.weaponConfigurations.end()) {
-			std::cout << "found" << std::endl;
 			m_data.equippedWeaponSlots = m_data.weaponConfigurations[m_weapon->getID()];
 		}
 		else if (item.empty()) {
