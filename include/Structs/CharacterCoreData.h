@@ -59,9 +59,12 @@ struct CharacterCoreData {
 
 	// items & equipment
 	int gold;
-	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;;
+	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;
 	std::map<ItemType, std::string> equippedItems;
 	std::map<std::string, int> items;
+
+	// weapon configurations
+	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>> weaponConfigurations;
 
 	// quickslot assignment
 	std::string quickSlot1;
@@ -101,7 +104,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::vector<std::pair<SpellID, std::vector<SpellModifier>>>(),
 	std::map<ItemType, std::string>(),
 	std::map<std::string, int>(),
-
+	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>>(),
 	"",
 	"",
 };

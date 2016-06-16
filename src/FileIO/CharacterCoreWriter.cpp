@@ -33,6 +33,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeItemID(data);
 		savefile << writeEquippedWeaponSlots(data);
 		savefile << writeEquippedItems(data);
+		savefile << writeWeaponConfigurations(data);
 		savefile << writeQuickslots(data);
 		savefile << writeEnemiesKilled(data);
 		savefile << writeEnemiesLooted(data);
@@ -473,6 +474,28 @@ std::string CharacterCoreWriter::writeEquippedItems(const CharacterCoreData& dat
 	equipment.append(string(EQUIPPED_WEAPON) + ":" + data.equippedItems.at(ItemType::Equipment_weapon) + "\n");
 
 	return equipment;
+}
+
+std::string CharacterCoreWriter::writeWeaponConfigurations(const CharacterCoreData& data) const {
+	string weaponConfigs = "# weapon configurations:\n";
+
+	for (auto& it : data.weaponConfigurations) {
+		weaponConfigs.append(string(WEAPON_CONFIGS) + ":");
+		weaponConfigs.append(it.first);
+
+		for (auto it2 = it.second.begin(); it2 != it.second.end(); ++it2) {
+			weaponConfigs.append(";");
+			weaponConfigs.append(to_string(static_cast<int>(it2->first)));
+			for (auto& it3 : it2->second) {
+				weaponConfigs.append(",");
+				weaponConfigs.append(to_string(static_cast<int>(it3.type)) + ",");
+				weaponConfigs.append(to_string(it3.level));
+			}
+		}
+		weaponConfigs.append("\n");
+	}
+
+	return weaponConfigs;
 }
 
 std::string CharacterCoreWriter::writeQuickslots(const CharacterCoreData& data) const {

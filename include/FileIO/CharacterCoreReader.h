@@ -54,6 +54,7 @@ private:
 	bool readItemID(char* start, char* end, CharacterCoreData& data) const;
 	bool readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const;
 	bool readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const;
+	bool readWeaponConfigurations(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuickslot(char* start, char* end, CharacterCoreData& data) const;
 
 	// check map bean for validity before loading the savegame

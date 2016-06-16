@@ -53,5 +53,6 @@ private:
 	std::string writeItemID(const CharacterCoreData& data) const;
 	std::string writeEquippedWeaponSlots(const CharacterCoreData& data) const;
 	std::string writeEquippedItems(const CharacterCoreData& data) const;
+	std::string writeWeaponConfigurations(const CharacterCoreData& data) const;
 	std::string writeQuickslots(const CharacterCoreData& data) const;
 };

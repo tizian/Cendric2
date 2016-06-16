@@ -168,6 +168,9 @@ void CharacterCore::reloadWeaponSlots() {
 			m_weapon->addModifier(slot, i, m_data.equippedWeaponSlots[slot].second[i], false);
 		}
 	}
+
+	std::string itemID = m_weapon->getID();
+	m_data.weaponConfigurations[itemID] = m_data.equippedWeaponSlots;
 }
 
 void CharacterCore::loadWeapon() {
@@ -625,13 +628,18 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 	if (type == ItemType::Equipment_weapon) {
 		m_data.equippedWeaponSlots.clear();
 		loadWeapon();
-		if (item.empty()) {
+		std::cout << m_weapon << std::endl;
+		if (m_weapon && m_data.weaponConfigurations.find(m_weapon->getID()) != m_data.weaponConfigurations.end()) {
+			std::cout << "found" << std::endl;
+			m_data.equippedWeaponSlots = m_data.weaponConfigurations[m_weapon->getID()];
+		}
+		else if (item.empty()) {
 			std::vector<ItemWeaponSlotBean> wep = g_databaseManager->getItemWeaponSlotBeans(item);
 			for (size_t i = 0; i < wep.size(); ++i) {
 				m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
 			}
-			reloadWeaponSlots();
 		}
+		reloadWeaponSlots();
 	}
 
 	removeItem(item, 1);

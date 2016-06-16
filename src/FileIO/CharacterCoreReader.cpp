@@ -69,6 +69,75 @@ bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCore
 	return true;
 }
 
+bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+
+	string itemID(startData);
+	int count = countToNextChar(startData, end, ';');
+	if (count == -1) {
+		return false;
+	}
+	itemID = itemID.substr(0, count);
+
+	char* endData = gotoNextChar(startData, end, '\n');
+	if (endData == nullptr) return false;
+
+
+	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;
+
+	while (startData != nullptr && startData < endData) {
+		startData++;
+
+		SpellID spell = static_cast<SpellID>(atoi(startData));
+		if (spell < SpellID::VOID || spell >= SpellID::MAX) {
+			g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + to_string(static_cast<int>(spell)));
+			return false;
+		}
+
+		char* endSpellData = gotoNextChar(startData, endData, ';');
+		if (endSpellData == nullptr) return false;
+
+		vector<SpellModifier> modifiers;
+
+		startData = gotoNextChar(startData, endSpellData, ',');
+		while (startData != nullptr && startData < endSpellData) {
+			startData++;
+			SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
+			if (type < SpellModifierType::VOID || type >= SpellModifierType::MAX) {
+				g_logger->logError("CharacterCoreReader", "Spell Modifier type not recognized: " + to_string(static_cast<int>(type)));
+				return false;
+			}
+			startData = gotoNextChar(startData, endSpellData, ',');
+			startData++;
+			int level = atoi(startData);
+			if (level < 1 || level > 3) {
+				if (type == SpellModifierType::VOID) {
+					level = 0;
+				}
+				else {
+					g_logger->logError("CharacterCoreReader", "Spell Modifier level is not allowed: " + to_string(level));
+					return false;
+				}
+			}
+			SpellModifier modifier;
+			modifier.type = type;
+			modifier.level = level;
+			modifiers.push_back(modifier);
+
+			startData = gotoNextChar(startData, endSpellData, ',');
+		}
+
+		equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(spell, modifiers));
+
+	}
+
+	data.weaponConfigurations[itemID] = equippedWeaponSlots;
+
+	return true;
+}
+
 bool CharacterCoreReader::readQuickslot(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
@@ -1010,6 +1079,11 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		else if (strncmp(pos, EQUIPPED_HEAD, strlen(EQUIPPED_HEAD)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(EQUIPPED_HEAD));
 			noError = readEquippedItem(pos, end, data, ItemType::Equipment_head);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, WEAPON_CONFIGS, strlen(WEAPON_CONFIGS)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(WEAPON_CONFIGS));
+			noError = readWeaponConfigurations(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, QUICKSLOT, strlen(QUICKSLOT)) == 0) {

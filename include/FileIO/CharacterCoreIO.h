@@ -50,6 +50,9 @@ protected:
 	const char* EQUIPPED_NECK = "equipped.neck";
 	const char* EQUIPPED_BACK = "equipped.back";
 
+	// weapon configurations
+	const char* WEAPON_CONFIGS = "weapon.configs";
+
 	// quickslot assignment
 	const char* QUICKSLOT = "quickslot";
 };
