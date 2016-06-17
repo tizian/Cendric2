@@ -6,13 +6,13 @@
 
 const float CharacterInfo::TOP = GUIConstants::TOP;
 const float CharacterInfo::LEFT = GUIConstants::LEFT;
-const float CharacterInfo::WIDTH = 560.f;
-const float CharacterInfo::HEIGHT = 494.f;
+const float CharacterInfo::WIDTH = 500.f;
+const float CharacterInfo::HEIGHT = GUIConstants::GUI_WINDOW_HEIGHT;
 
 const sf::Vector2f CharacterInfo::BUTTON_SIZE = sf::Vector2f(120.f, 40.f);
 
-const int CharacterInfo::ENTRY_COUNT = 12;
-const int CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS = 40;
+const int CharacterInfo::ENTRY_COUNT = 16;
+const int CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS = 34;
 const float CharacterInfo::MAX_ENTRY_LENGTH = static_cast<float>(MAX_ENTRY_LENGTH_CHARACTERS) * GUIConstants::CHARACTER_SIZE_M;
 
 const float CharacterInfo::WINDOW_MARGIN = 6.f;
@@ -58,7 +58,7 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 	m_attributeText.setColor(COLOR_LIGHT_PURPLE);
 	m_attributeText.setLineSpacing(0.833f);
 
-	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
+	float yOffset = GUIConstants::TOP + 4 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
 
 	m_namesText.setPosition(sf::Vector2f(
 		GUIConstants::LEFT + 2.f * GUIConstants::TEXT_OFFSET,
@@ -72,7 +72,7 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET - 28.f,
 		yOffset - 4.f);
 
-	m_statsIcons.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_STATS_ICONS));
+	m_statsIcons.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CHARACTERINFO_ICONS));
 
 	// init window
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
