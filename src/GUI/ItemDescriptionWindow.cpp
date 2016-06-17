@@ -84,7 +84,7 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	}
 }
 
-sf::RectangleShape* getStatSprite(sf::IntRect& rect) {
+sf::RectangleShape* ItemDescriptionWindow::getStatSprite(const sf::IntRect& rect) const {
 	sf::RectangleShape *shape = new sf::RectangleShape();
 	shape->setSize(sf::Vector2f(20.f, 20.f));
 	shape->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_STATS_ICONS));

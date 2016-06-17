@@ -29,6 +29,7 @@ public:
 protected:
 	virtual std::string getGoldLabelText() const;
 	virtual std::string getGoldValueText(const Item& item) const;
+	sf::RectangleShape* getStatSprite(const sf::IntRect& rect) const;
 
 private:
 	BitmapText m_titleText;
