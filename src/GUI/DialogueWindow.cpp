@@ -11,8 +11,6 @@ using namespace std;
 const sf::IntRect CENDRIC_TEX_POS = sf::IntRect(0, 0, 250, 250);
 const std::string CENDRIC_NAME = "Cendric";
 
-const int MAX_CHARS_PER_OPTION = 72;
-
 const float DialogueWindow::LEFT_OFFSET = 270.f;	// offset to have space for sprite
 const float DialogueWindow::RIGHT_OFFSET = 100.f;
 
@@ -350,9 +348,6 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 
 DialogueOption::DialogueOption(const std::string& text, const std::string& dialogueID, bool isEnd) {
 	std::string textString = g_textProvider->getText(text, dialogueID);
-	if (textString.size() > MAX_CHARS_PER_OPTION) {
-		g_logger->logWarning("DialogueOption::DialogueOption", "You should keep option strings below 72 characters.");
-	}
 	if (isEnd) {
 		textString.append(textString.empty() ? g_textProvider->getText("DialogueEnd") : " " + g_textProvider->getText("DialogueEnd"));
 	}

@@ -102,8 +102,6 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Load','Load',
 INSERT INTO text (text_id, english, german, swiss_german) values ('LoadGame','Load Game','Spiel laden','Spiel lade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Loading','Loading...','Lädt...','Es ladet...');
 INSERT INTO text (text_id, english, german, swiss_german) values ('LockpickLevel','Lockpick Level','Dietrich Stufe','Dietrich Level');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Mana','Mana','Mana','Mana');
-INSERT INTO text (text_id, english, german, swiss_german) values ('ManaRegeneration','Mana Regeneration','Manaregeneration','Manaregeneration');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Map','Map','Karte','Charte');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxFPS','Max. FPS','Max. FPS','Max. FPS');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxHealthPoints','Max. Health','Max. Lebensenergie','Max. Lebensenergie');

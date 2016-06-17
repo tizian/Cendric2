@@ -91,6 +91,7 @@ struct AttributeData {
 		maxHealthPoints += secondBean.maxHealthPoints;
 		haste += secondBean.haste;
 		critical += secondBean.critical;
+		heal += secondBean.heal;
 		healthRegenerationPerS += secondBean.healthRegenerationPerS;
 		currentHealthPoints = (maxHealthPoints < currentHealthPoints + secondBean.currentHealthPoints) ? maxHealthPoints : (currentHealthPoints + secondBean.currentHealthPoints);
 
@@ -112,6 +113,7 @@ struct AttributeData {
 		maxHealthPoints -= secondBean.maxHealthPoints;
 		haste -= secondBean.haste;
 		critical -= secondBean.critical;
+		heal -= secondBean.heal;
 		healthRegenerationPerS -= secondBean.healthRegenerationPerS;
 		currentHealthPoints = std::min(currentHealthPoints, maxHealthPoints);
 

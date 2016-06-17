@@ -27,6 +27,9 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_inina", "mage") and not DL:isConditionFulfilled("npc_inina", "aura")) then
 			DL:addChoice(11, "DL_Choice_Aura") -- You can see my aura?
 		end
+		if (DL:isConditionFulfilled("npc_inina", "mage") and not DL:isConditionFulfilled("npc_inina", "mark")) then
+			DL:addChoice(60, "DL_Choice_Mark") -- Maybe *this* influences my magic? (Show the mark)
+		end
 		if (not DL:isConditionFulfilled("npc_inina", "farmers")) then
 			DL:addChoice(12, "DL_Choice_Farmers") -- Why do you oppress the farmers? They need your help.
 		end
@@ -114,7 +117,7 @@ loadDialogue = function(DL)
 		
 		if (not DL:isConditionFulfilled("npc_inina", "mage")) then
 		
-			DL:createNPCNode(10, -2, "DL_Inina_Mage") -- (Smiles) The Eternal Light is well-disposed towards you. You have a very special aura.
+			DL:createNPCNode(10, -2, "DL_Inina_Mage") -- The Eternal Light is well-disposed towards you. You have a very special aura. (Frowns) Although... something seems to be wrong with you. I feel a slight disturbance in your magic. 
 			DL:addConditionProgress("npc_inina", "mage")
 			DL:addNode()
 			
@@ -124,6 +127,45 @@ loadDialogue = function(DL)
 		
 			DL:createNPCNode(11, -2, "DL_Inina_Aura") -- No, I can only feel it. There are very few mages out there that are able to see auras, the clairvoyant. Sadly, I''m not one of them.
 			DL:addConditionProgress("npc_inina", "aura")
+			DL:addNode()
+			
+		end
+		
+		if (DL:isConditionFulfilled("npc_inina", "mage") and not DL:isConditionFulfilled("npc_inina", "mark")) then
+		
+			DL:createNPCNode(60, 61, "DL_Inina_Mark") -- (Flinches) By the Eternal Light! That's a curse, and it doesn't look good, no, not at all... 
+			DL:addNode()
+			
+			DL:createChoiceNode(61)
+			if (not DL:isConditionFulfilled("npc_inina", "mark_whatis")) then
+				DL:addChoice(62, "DL_Choice_WhatIsMark") -- Do you know what it is?
+			end
+			if (DL:isConditionFulfilled("npc_inina", "mark_whatis") and not DL:isConditionFulfilled("npc_inina", "mark_getrid")) then
+				DL:addChoice(63, "DL_Choice_MarkGetRid") -- Can you help me get rid of it?
+			end
+			if (DL:isConditionFulfilled("npc_inina", "mark_whatis") and not DL:isConditionFulfilled("npc_inina", "mark_whowould")) then
+				DL:addChoice(65, "DL_Choice_MarkWhoWould") -- Why would someone try to track me?
+			end
+
+			DL:addNode()
+
+			DL:createNPCNode(62, -2, "DL_Inina_WhatIsMark") -- Unless I am very much mistaken, this is a curse designed to track you.
+			DL:addConditionProgress("npc_inina", "mark_whatis")
+			DL:gotoNode(61)
+			DL:addNode()
+			
+			DL:createNPCNode(63, 64, "DL_Inina_MarkGetRid") -- May I? (Places her finger on the mark but pulls it back instantly) No, that won't work. I'm not familiar with this kind of magic.
+			DL:addConditionProgress("npc_inina", "mark_getrid")
+			DL:addNode()
+			
+			DL:createNPCNode(64, -2, "DL_Inina_MarkGetRid2") -- If you really plan to get rid of that, ask the alchemist Myrdan when you arrive in Gandria. He knows much more about curses than I do.
+			DL:addQuestDescription("the_mark", 2)
+			DL:addConditionProgress("npc_inina", "mark")
+			DL:addNode()
+			
+			DL:createNPCNode(65, -2, "DL_Inina_MarkWhoWould") -- Well, the Paladins use a similar technique to mark and track down prisoners. But I'd know those marks. If you really don't know why you bear it, you may be in trouble.
+			DL:addConditionProgress("npc_inina", "mark_whowould")
+			DL:gotoNode(61)
 			DL:addNode()
 			
 		end
