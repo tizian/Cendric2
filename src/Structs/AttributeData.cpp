@@ -4,13 +4,13 @@
 inline std::string getAttributeText(const std::string& name, int value) {
 	if (value == 0) return "";
 	std::string s;
-	s.append(g_textProvider->getText(name));
-	s.append(": ");
 	if (value > 0) {
 		// these are boni on stats and should be signed
 		s.append("+");
 	}
 	s.append(std::to_string(value));
+	s.append(" ");
+	s.append(g_textProvider->getText(name));
 	s.append("\n");
 	return s;
 }
@@ -36,6 +36,31 @@ inline std::string getAttributeValueText(const std::string& name, int value) {
 	return s;
 }
 
+inline std::string getPositiveAttributeText(const std::string& name, int value, int& number) {
+	if (value <= 0) return "";
+	number++;
+
+	std::string s;
+	s.append("+");
+	s.append(std::to_string(value));
+	s.append(" ");
+	s.append(g_textProvider->getText(name));
+	s.append("\n");
+	return s;
+}
+
+inline std::string getNegativeAttributeText(const std::string& name, int value, int& number) {
+	if (value >= 0) return "";
+	number++;
+
+	std::string s;
+	s.append(std::to_string(value));
+	s.append(" ");
+	s.append(g_textProvider->getText(name));
+	s.append("\n");
+	return s;
+}
+
 void AttributeData::appendAttributes(std::string& string, const AttributeData& attr) {
 	string.append(getAttributeText("Health", attr.maxHealthPoints));
 	string.append(getAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS));
@@ -54,56 +79,40 @@ void AttributeData::appendAttributes(std::string& string, const AttributeData& a
 	string.append(getAttributeText("ShadowResistance", attr.resistanceShadow));
 }
 
-void AttributeData::appendAttributeLabels(std::string& string, const AttributeData& attr) {
-	string.append(getAttributeLabelText("Health", attr.maxHealthPoints));
-	string.append(getAttributeLabelText("HealthRegenerationPerS", attr.healthRegenerationPerS));
-	string.append(getAttributeLabelText("Haste", attr.haste));
-	string.append(getAttributeLabelText("Critical", attr.critical));
-	string.append(getAttributeLabelText("Heal", attr.heal));
-	string.append(getAttributeLabelText("PhysicalDamage", attr.damagePhysical));
-	string.append(getAttributeLabelText("FireDamage", attr.damageFire));
-	string.append(getAttributeLabelText("IceDamage", attr.damageIce));
-	string.append(getAttributeLabelText("LightDamage", attr.damageLight));
-	string.append(getAttributeLabelText("ShadowDamage", attr.damageShadow));
-	string.append(getAttributeLabelText("Armor", attr.resistancePhysical));
-	string.append(getAttributeLabelText("FireResistance", attr.resistanceFire));
-	string.append(getAttributeLabelText("IceResistance", attr.resistanceIce));
-	string.append(getAttributeLabelText("LightResistance", attr.resistanceLight));
-	string.append(getAttributeLabelText("ShadowResistance", attr.resistanceShadow));
+void AttributeData::appendPositiveAttributes(std::string& string, const AttributeData& attr, int& number) {
+	number = 0;
+	string.append(getPositiveAttributeText("Health", attr.maxHealthPoints, number));
+	string.append(getPositiveAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS, number));
+	string.append(getPositiveAttributeText("Haste", attr.haste, number));
+	string.append(getPositiveAttributeText("Critical", attr.critical, number));
+	string.append(getPositiveAttributeText("Heal", attr.heal, number));
+	string.append(getPositiveAttributeText("PhysicalDamage", attr.damagePhysical, number));
+	string.append(getPositiveAttributeText("FireDamage", attr.damageFire, number));
+	string.append(getPositiveAttributeText("IceDamage", attr.damageIce, number));
+	string.append(getPositiveAttributeText("LightDamage", attr.damageLight, number));
+	string.append(getPositiveAttributeText("ShadowDamage", attr.damageShadow, number));
+	string.append(getPositiveAttributeText("Armor", attr.resistancePhysical, number));
+	string.append(getPositiveAttributeText("FireResistance", attr.resistanceFire, number));
+	string.append(getPositiveAttributeText("IceResistance", attr.resistanceIce, number));
+	string.append(getPositiveAttributeText("LightResistance", attr.resistanceLight, number));
+	string.append(getPositiveAttributeText("ShadowResistance", attr.resistanceShadow, number));
 }
 
-void AttributeData::appendAttributeValues(std::string& string, const AttributeData& attr) {
-	string.append(getAttributeValueText("Health", attr.maxHealthPoints));
-	string.append(getAttributeValueText("HealthRegenerationPerS", attr.healthRegenerationPerS));
-	string.append(getAttributeValueText("Haste", attr.haste));
-	string.append(getAttributeValueText("Critical", attr.critical));
-	string.append(getAttributeValueText("Heal", attr.heal));
-	string.append(getAttributeValueText("PhysicalDamage", attr.damagePhysical));
-	string.append(getAttributeValueText("FireDamage", attr.damageFire));
-	string.append(getAttributeValueText("IceDamage", attr.damageIce));
-	string.append(getAttributeValueText("LightDamage", attr.damageLight));
-	string.append(getAttributeValueText("ShadowDamage", attr.damageShadow));
-	string.append(getAttributeValueText("Armor", attr.resistancePhysical));
-	string.append(getAttributeValueText("FireResistance", attr.resistanceFire));
-	string.append(getAttributeValueText("IceResistance", attr.resistanceIce));
-	string.append(getAttributeValueText("LightResistance", attr.resistanceLight));
-	string.append(getAttributeValueText("ShadowResistance", attr.resistanceShadow));
-}
-
-void AttributeData::getTextureRectangles(std::vector<sf::IntRect>& rects, const AttributeData& attr) {
-	if (attr.maxHealthPoints != 0) rects.push_back(sf::IntRect(0, 0, 20, 20));
-	if (attr.healthRegenerationPerS != 0) rects.push_back(sf::IntRect(20, 0, 20, 20));
-	if (attr.haste != 0) rects.push_back(sf::IntRect(60, 0, 20, 20));
-	if (attr.critical != 0) rects.push_back(sf::IntRect(40, 0, 20, 20));
-	if (attr.heal != 0) rects.push_back(sf::IntRect(0, 0, 20, 20));
-	if (attr.damagePhysical != 0) rects.push_back(sf::IntRect(0, 20, 20, 20));
-	if (attr.damageFire != 0) rects.push_back(sf::IntRect(20, 20, 20, 20));
-	if (attr.damageIce != 0) rects.push_back(sf::IntRect(40, 20, 20, 20));
-	if (attr.damageLight != 0) rects.push_back(sf::IntRect(80, 20, 20, 20));
-	if (attr.damageShadow != 0) rects.push_back(sf::IntRect(60, 20, 20, 20));
-	if (attr.resistancePhysical != 0) rects.push_back(sf::IntRect(0, 40, 20, 20));
-	if (attr.resistanceFire != 0) rects.push_back(sf::IntRect(20, 40, 20, 20));
-	if (attr.resistanceIce != 0) rects.push_back(sf::IntRect(40, 40, 20, 20));
-	if (attr.resistanceLight != 0) rects.push_back(sf::IntRect(80, 40, 20, 20));
-	if (attr.resistanceShadow != 0) rects.push_back(sf::IntRect(60, 40, 20, 20));
+void AttributeData::appendNegativeAttributes(std::string& string, const AttributeData& attr, int& number) {
+	number = 0;
+	string.append(getNegativeAttributeText("Health", attr.maxHealthPoints, number));
+	string.append(getNegativeAttributeText("HealthRegenerationPerS", attr.healthRegenerationPerS, number));
+	string.append(getNegativeAttributeText("Haste", attr.haste, number));
+	string.append(getNegativeAttributeText("Critical", attr.critical, number));
+	string.append(getNegativeAttributeText("Heal", attr.heal, number));
+	string.append(getNegativeAttributeText("PhysicalDamage", attr.damagePhysical, number));
+	string.append(getNegativeAttributeText("FireDamage", attr.damageFire, number));
+	string.append(getNegativeAttributeText("IceDamage", attr.damageIce, number));
+	string.append(getNegativeAttributeText("LightDamage", attr.damageLight, number));
+	string.append(getNegativeAttributeText("ShadowDamage", attr.damageShadow, number));
+	string.append(getNegativeAttributeText("Armor", attr.resistancePhysical, number));
+	string.append(getNegativeAttributeText("FireResistance", attr.resistanceFire, number));
+	string.append(getNegativeAttributeText("IceResistance", attr.resistanceIce, number));
+	string.append(getNegativeAttributeText("LightResistance", attr.resistanceLight, number));
+	string.append(getNegativeAttributeText("ShadowResistance", attr.resistanceShadow, number));
 }

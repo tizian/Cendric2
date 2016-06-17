@@ -29,172 +29,146 @@ ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
-	m_statsLabelsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_statsLabelsText.setLineSpacing(1.75f);
-	m_statsLabelsText.setColor(COLOR_WHITE);
-
-	m_statsValuesText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_statsValuesText.setLineSpacing(1.75f);
-	m_statsValuesText.setColor(COLOR_WHITE);
+	m_whiteText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_greenText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_redText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	
+	m_whiteText.setColor(COLOR_WHITE);
+	m_greenText.setColor(COLOR_GOOD);
+	m_redText.setColor(COLOR_BAD);
 }
 
-ItemDescriptionWindow::~ItemDescriptionWindow() {
-	for (auto& it : m_sprites) {
-		delete it.second;
-	}
-}
+ItemDescriptionWindow::~ItemDescriptionWindow() {}
 
-std::string ItemDescriptionWindow::getGoldLabelText() const {
+std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
 	std::string text;
 	text.append(g_textProvider->getText("GoldValue"));
-	text.append(":\n");
-	return text;
-}
-
-std::string ItemDescriptionWindow::getGoldValueText(const Item& item) const {
-	std::string text;
+	text.append(": ");
 	text.append(item.getValue() < 0 ? g_textProvider->getText("Unsalable") : to_string(item.getValue()));
-	text.append("\n");
 	return text;
 }
 
 void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
-	float y = position.y + GUIConstants::TEXT_OFFSET;
-	m_titleText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
-	y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	m_descriptionText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
-	y += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
 
-	if (m_statsLabelsText.getLocalBounds().height == GUIConstants::CHARACTER_SIZE_S) {
-		y -= GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S;
-	}
+	sf::Vector2f pos(position);
+	pos.x += GUIConstants::TEXT_OFFSET;
+	pos.y += GUIConstants::TEXT_OFFSET;
 
-	y += GUIConstants::CHARACTER_SIZE_S;
+	m_titleText.setPosition(pos);
 
-	sf::Vector2f statsOrigin(position.x + GUIConstants::TEXT_OFFSET, y);
+	pos.y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
 
-	m_statsLabelsText.setPosition(statsOrigin);
-	m_statsValuesText.setPosition(statsOrigin.x + ICON_OFFSET + 28.f, y);
+	m_descriptionText.setPosition(pos);
 
-	for (auto& it : m_sprites) {
-		sf::Vector2f pos = statsOrigin + it.first;
-		pos.y -= 6.f;
-		it.second->setPosition(pos);
-	}
-}
+	pos.y += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
 
-sf::RectangleShape* getStatSprite(sf::IntRect& rect) {
-	sf::RectangleShape *shape = new sf::RectangleShape();
-	shape->setSize(sf::Vector2f(20.f, 20.f));
-	shape->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_STATS_ICONS));
-	shape->setTextureRect(rect);
-	return shape;
+	sf::Vector2f statsOrigin(pos);
+
+	m_whiteText.setPosition(statsOrigin);
+	m_greenText.setPosition(statsOrigin);
+	m_redText.setPosition(statsOrigin);
 }
 
 void ItemDescriptionWindow::load(const Item& item) {
-	for (auto& it : m_sprites) {
-		delete it.second;
-	}
-	m_sprites.clear();
-
 	m_titleText.setString(g_textProvider->getText(item.getID(), "item"));
 	m_descriptionText.setString(g_textProvider->getCroppedText(item.getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
-	string statsLabels = "";
-	string statsValues = "";
-	int position = 0;
+	int lines = 0;
+	std::string white = "";
+	std::string green = "";
+	std::string red = "";
 
 	if (item.getType() == ItemType::Permanent) {
-		m_statsLabelsText.setColor(COLOR_GOOD);
-		m_statsValuesText.setColor(COLOR_GOOD);
-		statsLabels.append(g_textProvider->getText("Permanent"));
-		statsLabels.append("\n\n");
-		position += 2;
+		green.append(g_textProvider->getText("Permanent"));
+		green.append("\n\n");
+		white.append("\n\n");
+		red.append("\n\n");
+		lines += 2;
 	}
-	else {
-		m_statsLabelsText.setColor(COLOR_WHITE);
-		m_statsValuesText.setColor(COLOR_WHITE);
-	}
-
-	const AttributeData& attr = item.getAttributes();
-	AttributeData::appendAttributeLabels(statsLabels, attr);
-	AttributeData::appendAttributeValues(statsValues, attr);
-
-	std::vector<sf::IntRect> rects;
-	AttributeData::getTextureRectangles(rects, attr);
-	int nAttributes = static_cast<int>(rects.size());
-	
-	for (int i = 0; i < nAttributes; ++i) {
-		m_sprites.push_back(std::pair<sf::Vector2f, sf::RectangleShape*>(sf::Vector2f(ICON_OFFSET, 22.f * position), getStatSprite(rects[i])));
-		position++;
-	}
-
-	statsLabels.append("\n");
-	statsValues.append("\n");
-	position++;
-
-	if (item.getFoodDuration() > sf::Time::Zero) {
-		statsLabels.append(g_textProvider->getText("Duration"));
-		statsLabels.append(": ");
-		statsLabels.append("\n");
-
-		statsValues.append(to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))));
-		statsValues.append(" s\n");
-
-		position++;
-	}
-
-	statsLabels.append(getGoldLabelText());
-	statsValues.append(getGoldValueText(item));
-	m_sprites.push_back(std::pair<sf::Vector2f, sf::RectangleShape*>(sf::Vector2f(ICON_OFFSET, 22.f * position), getStatSprite(sf::IntRect(80, 0, 20, 20))));
-	position++;
-
-	statsLabels.append("\n");
-	statsValues.append("\n");
-	position++;
 
 	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
 		Weapon weapon(item.getID());
 
-		statsLabels.append(g_textProvider->getText("WeaponDamage"));
-		statsLabels.append(": ");
-		statsLabels.append("\n");
+		white.append(g_textProvider->getText("WeaponDamage"));
+		white.append(": ");
+		white.append(to_string(weapon.getWeaponChopDamage()));
+		white.append("\n");
 
-		m_sprites.push_back(std::pair<sf::Vector2f, sf::RectangleShape*>(sf::Vector2f(ICON_OFFSET, 22.f * position), getStatSprite(sf::IntRect(0, 20, 20, 20))));
-		position++;
-		
-		statsValues.append(to_string(weapon.getWeaponChopDamage()));
-		statsValues.append("\n");
+		white.append(g_textProvider->getText("Cooldown"));
+		white.append(": ");
+		white.append(toStrMaxDecimals(weapon.getWeaponCooldown().asSeconds(), 1));
+		white.append("s\n\n");
 
-		statsLabels.append(g_textProvider->getText("Cooldown"));
-		statsLabels.append(": ");
-		statsLabels.append("\n");
+		green.append("\n\n\n");
+		red.append("\n\n\n");
+		lines += 3;
+	}
 
-		statsValues.append(toStrMaxDecimals(weapon.getWeaponCooldown().asSeconds(), 1));
-		statsValues.append("s\n");
+	const AttributeData& attr = item.getAttributes();
 
-		m_sprites.push_back(std::pair<sf::Vector2f, sf::RectangleShape*>(sf::Vector2f(ICON_OFFSET, 22.f * position), getStatSprite(sf::IntRect(60, 0, 20, 20))));
-		position++;
+	int numberPositive, numberNegative;
+	AttributeData::appendPositiveAttributes(green, attr, numberPositive);
+	red.append(std::string(numberPositive, '\n'));
+	AttributeData::appendNegativeAttributes(red, attr, numberNegative);
+	green.append(std::string(numberNegative, '\n'));
+	white.append(std::string(numberPositive + numberNegative, '\n'));
+	lines += numberPositive + numberNegative;
 
+	if (item.getFoodDuration() > sf::Time::Zero) {
+		white.append("\n");
+		green.append("\n");
+		red.append("\n");
+		lines++;
+
+		white.append(g_textProvider->getText("Duration"));
+		white.append(": ");
+		white.append(to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))));
+		white.append(" s\n");
+
+		green.append("\n");
+		red.append("\n");
+		lines++;
+	}
+
+	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
+		Weapon weapon(item.getID());
 		if (weapon.getWeaponSlots().size() > 0) {
-			statsLabels.append("\n");
-			statsLabels.append("<<< " + g_textProvider->getText("SpellSlots") + " >>>\n");
+			white.append("\n");
+			white.append("<<< " + g_textProvider->getText("SpellSlots") + " >>>\n");
+			lines += 2;
 			for (auto& it : weapon.getWeaponSlots()) {
-				statsLabels.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
-				statsLabels.append(" - " + g_textProvider->getText("GemSockets") + ": ");
-				statsLabels.append(to_string(it.spellModifiers.size()) + "\n");
+				white.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
+				white.append(": ");
+				white.append(to_string(it.spellModifiers.size()));
+				white.append(" ");
+				white.append(g_textProvider->getText("GemSockets"));
+				white.append("\n");
+				lines++;
 			}
 		}
 	}
 
-	m_statsLabelsText.setString(statsLabels);
-	m_statsValuesText.setString(statsValues);
+	if (lines > 0) {
+		white.append("\n");
+		green.append("\n");
+		red.append("\n");
+		lines++;
+	}
+	
+	white.append(getGoldText(item));
+	lines++;
 
-	float height = 2 * GUIConstants::TEXT_OFFSET;
-	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S * 2;
-	height += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	height += m_statsLabelsText.getLocalBounds().height;
+	m_whiteText.setString(white);
+	m_greenText.setString(green);
+	m_redText.setString(red);
+
+	float height = GUIConstants::TEXT_OFFSET;
+	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	height += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
+	height += lines * GUIConstants::CHARACTER_SIZE_S + (lines - 1) * 0.5f * GUIConstants::CHARACTER_SIZE_S;
+	height += GUIConstants::TEXT_OFFSET;
+
 	setHeight(height);
 }
 
@@ -203,11 +177,9 @@ void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	Window::render(renderTarget);
 	renderTarget.draw(m_titleText);
 	renderTarget.draw(m_descriptionText);
-	renderTarget.draw(m_statsLabelsText);
-	renderTarget.draw(m_statsValuesText);
-	for (auto& it : m_sprites) {
-		renderTarget.draw(*it.second);
-	}
+	renderTarget.draw(m_whiteText);
+	renderTarget.draw(m_greenText);
+	renderTarget.draw(m_redText);
 }
 
 void ItemDescriptionWindow::show() {

@@ -27,14 +27,14 @@ public:
 	static const float ICON_OFFSET;
 
 protected:
-	virtual std::string getGoldLabelText() const;
-	virtual std::string getGoldValueText(const Item& item) const;
+	virtual std::string getGoldText(const Item& item) const;
 
 private:
 	BitmapText m_titleText;
 	BitmapText m_descriptionText;
-	BitmapText m_statsLabelsText;
-	BitmapText m_statsValuesText;
-	std::vector<std::pair<sf::Vector2f, sf::RectangleShape*>> m_sprites;
+	BitmapText m_whiteText;
+	BitmapText m_greenText;
+	BitmapText m_redText;
+
 	bool m_isVisible = false;
 };
