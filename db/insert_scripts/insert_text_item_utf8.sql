@@ -60,6 +60,27 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_mediumpouch', 'item_desc', 'The pouch is filled with coins.','Der Beutel ist voller Münzen.','De Büütel isch gfüllt mit Münze.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item', 'Big Pouch','Praller Geldbeutel','Pralle Geldbüütel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item_desc', 'The pouch is bulging with golden coins.','Der Beutel ist prall gefüllt mit goldenen Münzen.','De Büütel isch prall gfüllt mit goldige Münze.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item', 'Note','Notiz','Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item_desc', 'I''ve found this note nailed to a post in the Howling Caverns.','Diese Notiz habe ich in den Heulenden Höhlen gefunden, an einen Pfosten genagelt.','Die Notiz hani anen Pfoste gnaglet gfunde, ide Hüülende Höhle.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item_text', 'To whoever reads this: Beware!
+
+These caverns are full of traps, I only made it with a lot of luck to where I am now. The five levers are designed to kill you if you pull the wrong one. Use the last one first and the first one last and leave the others untouched.
+
+I hope I''ll find a way out of this cave...
+
+-- Paladin Marcus','Wer das auch immer liest: Nehmt Euch in Acht!
+
+Diese Höhlen sind gspickt mit Fallen, ich habe es nur mit viel Glück da hin geschafft, wo ich jetzt bin. Die fünf Hebel werden Euch töten wenn Ihr den falschen zieht. Benutzt den letzten als erstes und den ersten als letztes und berührt keinen der anderen.
+
+Ich hoffe, ich komme irgendwie wieder aus diesen Höhlen hinaus...
+
+-- Paladin Marcus','Wer das auch immer lese tuet: Passed uuf!
+
+Die Höhle sind voll mit Fallene, ich has nur mit viel Glück det ane gschafft, woni ez bin. Di füf Hebel werded jede töte, wo am falsche ziet. Druck de letzt als ersts und de erst als letzts und langed di andere ja nid ah!
+
+Ich hoff, ich chum irgendwie wider us dene Höhlene use...
+
+-- Paladin Marcus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item', 'Sealed Letter','Versiegelter Brief','Versiglete Brief');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_text', 'Dear king
 bla bla blaaaaaaaa bla blaaaa bla bla and you better bla bla soon! CU your enemy.','Lieber König
