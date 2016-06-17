@@ -18,6 +18,9 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and DL:isQuestState("zeffs_curse", "void")) then
 		DL:addChoice(40, "DL_Choice_HelpCurse") -- Can I help you somehow breaking that curse?
 	end
+	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_zeff", "mark_curse")) then
+		DL:addChoice(100, "DL_Choice_MyCurse") -- I got cursed too, do you know what it is? (Show the mark)
+	end
 	if (DL:isConditionFulfilled("npc_zeff", "leatherworker")) then
 		DL:addChoice(50, "DL_Choice_Leatherworking") -- Could you craft something for me?
 	end
@@ -105,6 +108,25 @@ loadDialogue = function(DL)
 		
 		DL:createNPCNode(41, -2, "DL_Zeff_HelpCurse2") -- The cave where it hides is right outside of the city. But be cautious and don't let it stare into your eyes.
 		DL:changeQuestState("zeffs_curse", "started")
+		DL:addNode()
+		
+	end
+	
+	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_zeff", "mark_curse")) then
+		
+		DL:createNPCNode(100, 101, "DL_Zeff_ShowMark") -- Hrr... (Glares at your mark) I've never seen something like that. 
+		DL:addConditionProgress("npc_zeff", "mark_curse")
+		DL:addNode()
+		
+		DL:createNPCNode(101, 102, "DL_Zeff_ShowMark2") -- But I think you got off cheaply... I mean look at my face! Having a fancy tattoo can't be worse than be forced to kill sheep every night.
+		DL:addNode()
+		
+		DL:createChoiceNode(102)
+		if (DL:isQuestState("monster_problem","started") and not DL:isConditionFulfilled("npc_zeff", "sheep")) then
+			DL:addChoice(61, "DL_Choice_ItWasYou") -- So it was YOU who stole the sheep from the farmers!
+		end
+		DL:addChoice(-2, "DL_Choice_YouAreRight") -- Maybe you're right...
+		DL:addChoice(-2, "DL_Choice_MyCurseIsWorse") -- My curse could be worse, I just don't know.
 		DL:addNode()
 		
 	end
