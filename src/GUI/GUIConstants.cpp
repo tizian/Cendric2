@@ -17,6 +17,6 @@ int GUIConstants::CHARACTER_SIZE_XL = 24;
 int GUIConstants::CHARACTER_SIZE_XXL = 36;
 int GUIConstants::CHARACTER_SIZE_XXXL = 48;
 
-sf::Color GUIConstants::MAIN_COLOR = COLOR_TRANS_BLACK;
-sf::Color GUIConstants::BACK_COLOR = COLOR_TRANSPARENT;
-sf::Color GUIConstants::ORNAMENT_COLOR = COLOR_WHITE;
+sf::Color GUIConstants::MAIN_COLOR = sf::Color(0, 0, 0, 130);
+sf::Color GUIConstants::BACK_COLOR = sf::Color(0, 0, 0, 0);
+sf::Color GUIConstants::ORNAMENT_COLOR = sf::Color(255, 255, 255);
