@@ -10,7 +10,8 @@ public:
 	MerchantItemDescriptionWindow(float goldMultiplier);
 
 protected:
-	std::string getGoldText(const Item& item) const override;
+	std::string getGoldLabelText() const override;
+	std::string getGoldValueText(const Item& item) const override;
 
 private:
 	float m_goldMultiplier;

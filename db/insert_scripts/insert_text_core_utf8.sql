@@ -28,7 +28,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('CooldownReduc
 INSERT INTO text (text_id, english, german, swiss_german) values ('Count','Count','Anzahl','Aazahl');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Credits','Credits','Mitwirkende','Credits');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Critical','Critical','Kritisch','Kritisch');
-INSERT INTO text (text_id, english, german, swiss_german) values ('CriticalHitChance','Critical Hit Chance','Chance auf kritische Treffer','Chance uf kritischi Treffer');
+INSERT INTO text (text_id, english, german, swiss_german) values ('CriticalHitChance','Critical Hit Chance','Kritische Trefferchance','Kritischi Trefferchance');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Damage','Damage','Schaden','Schade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DamageType','Damage Type','Schadenstyp','Schadetyp');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DamagePerSecond','Damage per second','Schaden pro Sekunde','Schade pro Sekunde');

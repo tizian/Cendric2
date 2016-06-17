@@ -128,6 +128,10 @@ struct AttributeData {
 
 	// appends the attributes to the string, seperated with \n and prefixed with + or -
 	static void appendAttributes(std::string& string, const AttributeData& attr);
+	static void appendAttributeLabels(std::string& string, const AttributeData& attr);
+	static void appendAttributeValues(std::string& string, const AttributeData& attr);
+
+	static void getTextureRectangles(std::vector<sf::IntRect>& rects, const AttributeData& attr);
 };
 
 const struct AttributeData ZERO_ATTRIBUTES =
