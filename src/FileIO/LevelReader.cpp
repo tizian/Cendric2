@@ -124,11 +124,19 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 					result = item->QueryIntAttribute("value", &amount);
 					XMLCheckResult(result);
 
-					if (amount < 0 || amount > 4) {
-						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 4).");
+					if (amount < 0 || amount > 5) {
+						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 5).");
 						return false;
 					}
 					chestData.chestStrength = amount;
+				}
+				else if (itemText.compare("key") == 0 || itemText.compare("Key") == 0) {
+					std::string keyItemID = item->Attribute("value");
+					if (keyItemID.compare("") == 0) {
+						logError("XML file could not be read, key itemID is not specified.");
+						return false;
+					}
+					chestData.keyItemID = keyItemID;
 				}
 				else {
 					int amount;

@@ -27,10 +27,12 @@ private:
 	std::string getSpritePath() const override;
 	// the object id in the dynamic chest tiles object layer.
 	int m_objectID = -1;
-	// strength of the chest lock. It ranges from 0 to 3. Levels 1 to 3 need an unlock spell to unlock, level 0 only a right click :)
+	// strength of the chest lock. It ranges from 0 to 5. Levels 1 to 4 need an unlock spell to unlock. Level 5 is key only. Level 0 only a right click :)
 	int m_strength = 0;
 	// a permanent chest will stay in an "opened" state after it has been looted. It cannot be looted again though.
 	bool m_isPermanent = false;
+	// a chest with a key item id can be opened with the corresponding key.
+	std::string m_keyItemID;
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;
 	int m_lootableGold = 0;

@@ -97,9 +97,10 @@ void ChestTile::update(const sf::Time& frameTime) {
 
 void ChestTile::setChestData(const ChestData& data) {
 	m_objectID = data.objectID;
-	if (data.chestStrength >= 0 && data.chestStrength <= 4) {
+	if (data.chestStrength >= 0 && data.chestStrength <= 5) {
 		m_strength = data.chestStrength;
 	}
+	m_keyItemID = data.keyItemID;
 	setLoot(data.loot.first, data.loot.second);
 	m_isPermanent = data.isPermanent;
 	if (data.isOpen) {
@@ -144,9 +145,12 @@ void ChestTile::loot() {
 
 void ChestTile::onRightClick() {
 	if (m_mainChar->isDead() || !m_interactComponent->isInteractable()) return;
+	
+	// check if the chest is in range
+	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE;
+
 	if (m_state == GameObjectState::Unlocked) {
-		// check if the chest is in range
-		if (dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE) {
+		if (inRange) {
 			loot();
 		}
 		else {
@@ -155,10 +159,20 @@ void ChestTile::onRightClick() {
 		g_inputController->lockAction();
 	}
 	else if (m_strength == 0 && m_state == GameObjectState::Locked) {
-		// check if the chest is in range
-		sf::Vector2f dist = m_mainChar->getCenter() - getCenter();
-		if (sqrt(dist.x * dist.x + dist.y * dist.y) <= PICKUP_RANGE) {
+		if (inRange) {
 			unlock();
+		}
+		else {
+			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		}
+		g_inputController->lockAction();
+	}
+	else if (m_keyItemID.compare("") != 0 && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
+		if (inRange) {
+			unlock();
+			std::string tooltipText = g_textProvider->getText("Used");
+			tooltipText.append(g_textProvider->getText(m_keyItemID, "item"));
+			m_screen->setTooltipTextRaw(tooltipText, COLOR_BAD, true);
 		}
 		else {
 			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);

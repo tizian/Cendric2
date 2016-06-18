@@ -12,6 +12,7 @@ struct ChestData {
 	int chestStrength = 0;
 	bool isOpen = false;
 	bool isPermanent = false;
+	std::string keyItemID = "";
 	std::string tooltipText = "";
 	LightData lightData;
 	std::pair<std::map<std::string, int>, int> loot;

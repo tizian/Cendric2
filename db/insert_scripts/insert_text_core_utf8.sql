@@ -250,4 +250,5 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('InvisibilityL
 INSERT INTO text (text_id, english, german, swiss_german) values ('Fireplace','Fireplace','Kochstelle','Chochstell');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NothingToCook','[Nothing to cook...]','[Nichts zu kochen...]','[Es git nüt zum chochä...]');
 INSERT INTO text (text_id, english, german, swiss_german) values ('LeverStuck','The lever is stuck!','Der Hebel ist verklemmt!','De Hebel isch verchlemmt!');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Used','Used ','Benutzt: ','Brucht: ');
 INSERT INTO text (text_id, english, german, swiss_german) values ('','','','');
