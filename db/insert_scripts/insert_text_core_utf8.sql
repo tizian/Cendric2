@@ -68,6 +68,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('GamePaused','
 INSERT INTO text (text_id, english, german, swiss_german) values ('GameSaved','Game saved','Spiel gespeichert','Spiel gspeicheret');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Gems','Gems','Edelsteine','Edelstei');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GemSockets','Gem Sockets','Edelstein Sockel','Edelstei Sockel');
+INSERT INTO text (text_id, english, german, swiss_german) values ('GemSocket','Gem Socket','Edelstein Sockel','Edelstei Sockel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('German','German','Deutsch','Düütsch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Gold','Gold','Gold','Gold');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GoldValue','Gold Value','Goldwert','Goldwert');

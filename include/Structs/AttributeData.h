@@ -128,8 +128,7 @@ struct AttributeData {
 
 	// appends the attributes to the string, seperated with \n and prefixed with + or -
 	static void appendAttributes(std::string& string, const AttributeData& attr);
-	static void appendPositiveAttributes(std::string& string, const AttributeData& attr, int& number);
-	static void appendNegativeAttributes(std::string& string, const AttributeData& attr, int& number);
+	static void appendItemDescriptionAttributes(std::string& string, const AttributeData& attr, int& number);
 };
 
 const struct AttributeData ZERO_ATTRIBUTES =

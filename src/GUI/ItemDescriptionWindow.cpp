@@ -30,12 +30,7 @@ ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
 	m_whiteText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_greenText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_redText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	
-	m_whiteText.setColor(COLOR_WHITE);
-	m_greenText.setColor(COLOR_GOOD);
-	m_redText.setColor(COLOR_BAD);
+	m_coloredText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 }
 
 ItemDescriptionWindow::~ItemDescriptionWindow() {}
@@ -66,8 +61,7 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	sf::Vector2f statsOrigin(pos);
 
 	m_whiteText.setPosition(statsOrigin);
-	m_greenText.setPosition(statsOrigin);
-	m_redText.setPosition(statsOrigin);
+	m_coloredText.setPosition(statsOrigin);
 }
 
 void ItemDescriptionWindow::load(const Item& item) {
@@ -76,15 +70,18 @@ void ItemDescriptionWindow::load(const Item& item) {
 
 	int lines = 0;
 	std::string white = "";
-	std::string green = "";
-	std::string red = "";
+	std::string colored = "";
 
 	if (item.getType() == ItemType::Permanent) {
-		green.append(g_textProvider->getText("Permanent"));
-		green.append("\n\n");
+		colored.append(g_textProvider->getText("Permanent"));
+		colored.append("\n\n");
 		white.append("\n\n");
-		red.append("\n\n");
 		lines += 2;
+
+		m_coloredText.setColor(COLOR_GOOD);
+	}
+	else {
+		m_coloredText.setColor(COLOR_LIGHT_PURPLE);
 	}
 
 	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
@@ -100,36 +97,26 @@ void ItemDescriptionWindow::load(const Item& item) {
 		white.append(toStrMaxDecimals(weapon.getWeaponCooldown().asSeconds(), 1));
 		white.append("s\n\n");
 
-		green.append("\n\n\n");
-		red.append("\n\n\n");
+		colored.append("\n\n\n");
 		lines += 3;
+	}
+
+	if (item.getFoodDuration() > sf::Time::Zero) {
+		white.append(g_textProvider->getText("Duration"));
+		white.append(": ");
+		white.append(to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))));
+		white.append(" s\n\n");
+
+		colored.append("\n\n");
+		lines += 2;
 	}
 
 	const AttributeData& attr = item.getAttributes();
 
-	int numberPositive, numberNegative;
-	AttributeData::appendPositiveAttributes(green, attr, numberPositive);
-	red.append(std::string(numberPositive, '\n'));
-	AttributeData::appendNegativeAttributes(red, attr, numberNegative);
-	green.append(std::string(numberNegative, '\n'));
-	white.append(std::string(numberPositive + numberNegative, '\n'));
-	lines += numberPositive + numberNegative;
-
-	if (item.getFoodDuration() > sf::Time::Zero) {
-		white.append("\n");
-		green.append("\n");
-		red.append("\n");
-		lines++;
-
-		white.append(g_textProvider->getText("Duration"));
-		white.append(": ");
-		white.append(to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))));
-		white.append(" s\n");
-
-		green.append("\n");
-		red.append("\n");
-		lines++;
-	}
+	int numberAttributes;
+	AttributeData::appendItemDescriptionAttributes(colored, attr, numberAttributes);
+	white.append(std::string(numberAttributes, '\n'));
+	lines += numberAttributes;
 
 	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
 		Weapon weapon(item.getID());
@@ -140,9 +127,15 @@ void ItemDescriptionWindow::load(const Item& item) {
 			for (auto& it : weapon.getWeaponSlots()) {
 				white.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
 				white.append(": ");
-				white.append(to_string(it.spellModifiers.size()));
+				size_t numberSlots = it.spellModifiers.size();
+				white.append(to_string(numberSlots));
 				white.append(" ");
-				white.append(g_textProvider->getText("GemSockets"));
+				if (numberSlots > 1) {
+					white.append(g_textProvider->getText("GemSockets"));
+				}
+				else {
+					white.append(g_textProvider->getText("GemSocket"));
+				}
 				white.append("\n");
 				lines++;
 			}
@@ -151,8 +144,7 @@ void ItemDescriptionWindow::load(const Item& item) {
 
 	if (lines > 0) {
 		white.append("\n");
-		green.append("\n");
-		red.append("\n");
+		colored.append("\n");
 		lines++;
 	}
 	
@@ -160,8 +152,7 @@ void ItemDescriptionWindow::load(const Item& item) {
 	lines++;
 
 	m_whiteText.setString(white);
-	m_greenText.setString(green);
-	m_redText.setString(red);
+	m_coloredText.setString(colored);
 
 	float height = GUIConstants::TEXT_OFFSET;
 	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
@@ -178,8 +169,7 @@ void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_titleText);
 	renderTarget.draw(m_descriptionText);
 	renderTarget.draw(m_whiteText);
-	renderTarget.draw(m_greenText);
-	renderTarget.draw(m_redText);
+	renderTarget.draw(m_coloredText);
 }
 
 void ItemDescriptionWindow::show() {

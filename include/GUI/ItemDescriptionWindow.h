@@ -33,8 +33,7 @@ private:
 	BitmapText m_titleText;
 	BitmapText m_descriptionText;
 	BitmapText m_whiteText;
-	BitmapText m_greenText;
-	BitmapText m_redText;
+	BitmapText m_coloredText;
 
 	bool m_isVisible = false;
 };
