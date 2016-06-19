@@ -77,14 +77,14 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y + 0.5f * getBoundingBox()->height);
-	posGen->size = sf::Vector2f(42.f, 0.f);
+	posGen->size = sf::Vector2f(40.f, 0.f);
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 	sizeGen->minStartSize = 30.f;
-	sizeGen->maxStartSize = 60.f;
+	sizeGen->maxStartSize = 50.f;
 	sizeGen->minEndSize = 30.f;
-	sizeGen->maxEndSize = 60.f;
+	sizeGen->maxEndSize = 50.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 
