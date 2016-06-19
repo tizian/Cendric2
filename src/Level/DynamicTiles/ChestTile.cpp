@@ -167,12 +167,12 @@ void ChestTile::onRightClick() {
 		}
 		g_inputController->lockAction();
 	}
-	else if (m_keyItemID.compare("") != 0 && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
+	else if (!m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
 		if (inRange) {
 			unlock();
 			std::string tooltipText = g_textProvider->getText("Used");
 			tooltipText.append(g_textProvider->getText(m_keyItemID, "item"));
-			m_screen->setTooltipTextRaw(tooltipText, COLOR_BAD, true);
+			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 		}
 		else {
 			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
