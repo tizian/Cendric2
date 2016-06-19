@@ -106,7 +106,7 @@ const struct SpellData EMPTY_SPELL =
 	sf::IntRect(0, 0, 0, 0),
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),
-	sf::Vector2f(30.f, -20.f), // cendrics staff position
+	sf::Vector2f(30.f, 0.f), // cendrics staff position
 	DamageType::VOID,
 	GameObjectState::Casting,
 	GameObjectState::Fighting,

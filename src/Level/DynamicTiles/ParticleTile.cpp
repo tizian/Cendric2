@@ -24,7 +24,7 @@ void ParticleTile::loadAnimation(int skinNr) {
 	// initial values
 	m_state = GameObjectState::Idle;
 
-	if (skinNr == 1) {
+	if (skinNr == 1 || skinNr == 2) {
 		addComponent(new LightComponent(LightData(
 			sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.5f),
 			sf::Vector2f(200.f, 250.f), 0.6f), this));
@@ -77,7 +77,7 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y + 0.5f * getBoundingBox()->height);
-	posGen->size = sf::Vector2f(45.f, 0.f);
+	posGen->size = sf::Vector2f(42.f, 0.f);
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
@@ -87,10 +87,22 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	sizeGen->maxEndSize = 60.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(255, 160, 64);
-	colGen->maxStartCol = sf::Color(255, 160, 64);
-	colGen->minEndCol = sf::Color(255, 0, 0, 200);
-	colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+
+	switch (skinNr) {
+	default:
+	case 1:
+		colGen->minStartCol = sf::Color(255, 160, 64);
+		colGen->maxStartCol = sf::Color(255, 160, 64);
+		colGen->minEndCol = sf::Color(255, 0, 0, 200);
+		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+		break;
+	case 2:
+		colGen->minStartCol = sf::Color(100, 146, 186);
+		colGen->maxStartCol = sf::Color(100, 146, 186);
+		colGen->minEndCol = sf::Color(20, 83, 255, 200);
+		colGen->maxEndCol = sf::Color(20, 83, 255, 200);
+		break;
+	}
 
 	auto velGen = m_ps->addGenerator<particles::AimedVelocityGenerator>();
 	velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);

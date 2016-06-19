@@ -8,6 +8,7 @@
 
 // available skins:
 // 1: fire
+// 2: blue fire
 class ParticleTile : public LevelDynamicTile {
 public:
 	ParticleTile(LevelScreen* levelScreen);

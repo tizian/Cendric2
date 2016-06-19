@@ -132,7 +132,7 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 				}
 				else if (itemText.compare("key") == 0 || itemText.compare("Key") == 0) {
 					std::string keyItemID = item->Attribute("value");
-					if (keyItemID.compare("") == 0) {
+					if (keyItemID.empty()) {
 						logError("XML file could not be read, key itemID is not specified.");
 						return false;
 					}

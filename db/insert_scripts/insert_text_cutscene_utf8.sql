@@ -5,7 +5,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ch
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Elder:HereDrink', 'cutscene','Here, take the potion and drink it as fast as possible.','Da, nimm den Trank und trink ihn so schnell wie möglich.','Da, nimm de Trank und trink ihn so schnell we möglich.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Elder:ItWillReveal', 'cutscene','It might feel a little bit strange, but it will bring clarity.','Es wird sich vielleicht etwas komisch anfühlen, aber der Trank wird Klarheit bringen.','Es wird sich vilicht chli komisch afühle aber de Trank wird Klarheit bringe.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:LetsDrink', 'cutscene','Okay, let''s get through this quickly.','Okay, bringen wir''s hinter uns.','Okay, bringemers hinter üs.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Elder:TakeWater', 'cutscene','And take this water, it will help you get rid of the potions'' raw, burning taste.','Und trink danach dieses Wasser, es hilft gegen den brennenden Geschmack des Trankes.','Und nimm na chli Wasser, es hilft der de gruusig Trank abezspüele.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:LetsDrink', 'cutscene','Okay, let''s get this over with.','Okay, bringen wir''s hinter uns.','Okay, bringemers hinter üs.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:Cough', 'cutscene','*Cough!*','*Hust!*','*Huest!*');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:Aah', 'cutscene','Aaah!','Aaah!','Aaah!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Crash', 'cutscene','*Crash*','*Splitter*','*Scherbel*');
