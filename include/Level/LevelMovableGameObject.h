@@ -4,6 +4,7 @@
 #include "MovableGameObject.h"
 #include "Structs/AttributeData.h"
 #include "Structs/DamageOverTimeData.h"
+#include "Particles/ParticleSystem.h"
 
 class Level;
 class SpellManager;
@@ -19,6 +20,7 @@ public:
 	virtual ~LevelMovableGameObject();
 
 	virtual void update(const sf::Time& frameTime) override;
+	virtual void render(sf::RenderTarget& renderTarget) override;
 
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	
@@ -115,4 +117,8 @@ protected:
 	virtual std::string getDeathSoundPath() const { return ""; }
 
 	sf::Sound m_deathSound;
+
+	particles::MetaballParticleSystem* m_bloodPS = nullptr;
+	particles::ParticleSpawner* m_bloodSpawner = nullptr;
+	particles::AngledVelocityGenerator* m_bloodVelGen = nullptr;
 };

@@ -22,10 +22,36 @@ void LevelMainCharacter::load() {
 	loadBehavior();
 
 	m_damageNumbers = new DamageNumbers(this->isAlly());
+
+	m_bloodPS = new particles::MetaballParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB), WINDOW_WIDTH, WINDOW_HEIGHT);
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB)->setSmooth(true);
+	m_bloodPS->color = sf::Color(106, 12, 15, 220);
+
+	auto spawner = m_bloodPS->addSpawner<particles::BoxSpawner>();
+	spawner->size = sf::Vector2f(0.5f * getBoundingBox()->width, 0.4f * getBoundingBox()->height);
+	m_bloodSpawner = spawner;
+
+	auto timeGen = m_bloodPS->addGenerator<particles::TimeGenerator>();
+	timeGen->minTime = 0.01f;
+	timeGen->maxTime = 0.2f;
+
+	auto sizeGen = m_bloodPS->addGenerator<particles::SizeGenerator>();
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 12.f;
+	sizeGen->minEndSize = 5.f;
+	sizeGen->maxEndSize = 12.f;
+
+	m_bloodVelGen = m_bloodPS->addGenerator<particles::AngledVelocityGenerator>();
+
+	m_bloodPS->addUpdater<particles::TimeUpdater>();
+	m_bloodPS->addUpdater<particles::SizeUpdater>();
+	auto euler = m_bloodPS->addUpdater<particles::EulerUpdater>();
+	euler->globalAcceleration = sf::Vector2f(0.f, 300.f);
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
+
 	if (m_isDead) {
 		m_ps->update(frameTime);
 		updateTime(m_fadingTime, frameTime);

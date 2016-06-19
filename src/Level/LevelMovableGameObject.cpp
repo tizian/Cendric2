@@ -18,6 +18,9 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 	if (m_damageNumbers) {
 		delete m_damageNumbers;
 	}
+	if (m_bloodPS) {
+		delete m_bloodPS;
+	}
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
@@ -38,10 +41,21 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 
 	MovableGameObject::update(frameTime);
 
+	if (m_bloodPS) {
+		m_bloodPS->update(frameTime);
+	}
+
 	if (!m_isDead) {
 		updateAttributes(frameTime);
 	}
 	setAccelerationX(0.f);
+}
+
+void LevelMovableGameObject::render(sf::RenderTarget& renderTarget) {
+	if (m_bloodPS) {
+		m_bloodPS->render(renderTarget);
+	}
+	MovableGameObject::render(renderTarget);
 }
 
 void LevelMovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
@@ -197,7 +211,22 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 
 	spell->execOnHit(this);
 	if (spell->getDamageType() == DamageType::VOID) return;
-	addDamage(spell->getDamage(), spell->getDamageType(), false);
+	int dmg = spell->getDamage();
+	addDamage(dmg, spell->getDamageType(), false);
+
+	if (m_bloodPS && spell->getDamageType() == DamageType::Physical) {
+		m_bloodSpawner->center.x = getPosition().x + 0.5f * getBoundingBox()->width;
+		m_bloodSpawner->center.y = getPosition().y + 0.25f * getBoundingBox()->height;
+
+		m_bloodVelGen->minStartSpeed = 10.f * dmg;
+		m_bloodVelGen->maxStartSpeed = 50.f * dmg;
+		float angle = radToDeg(std::atan2(spell->getVelocity().y, spell->getVelocity().x)) - 90.f;
+		m_bloodVelGen->minAngle = angle - 8.f;
+		m_bloodVelGen->maxAngle = angle + 8.f;
+
+		m_bloodPS->emitParticles(20 * dmg);
+	}
+
 	if (spell->getDamagePerSecond() > 0.f && spell->getDuration() > sf::Time::Zero) {
 		DamageOverTimeData data;
 		data.damage = spell->getDamagePerSecond();
