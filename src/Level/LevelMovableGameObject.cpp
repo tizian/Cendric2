@@ -309,8 +309,12 @@ const AttributeData* LevelMovableGameObject::getAttributes() const {
 	return &m_attributes;
 }
 
+bool LevelMovableGameObject::isEating() const {
+	return m_foodAttributes.first > sf::Time::Zero;
+}
+
 void LevelMovableGameObject::consumeFood(const sf::Time& duration, const AttributeData& attributes) {
-	if (m_foodAttributes.first > sf::Time::Zero) {
+	if (isEating()) {
 		// old food attributes have to be removed
 		m_attributes.removeBean(m_foodAttributes.second);
 	}

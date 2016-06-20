@@ -57,6 +57,10 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_brokenstaff1', 0, -20, 50, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_brokenstaff1', 1, 300, 150, 50, 100);
 
+-- Heart of the First Guardian
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_firstguardianheart', 'misc', 450, 350, -1);
+
 -- Stone
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_stone', 'misc', 250, 350, 4);

@@ -48,6 +48,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearl', 'item_desc', 'Can be found in some shells.','Kann man manchmal in Muscheln finden.','Cha me mengsmal in Muschle finde.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff1', 'item', 'Broken Shaft','Zerbrochener Schaft','Kabutte Schaft');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff1', 'item_desc', 'This shaft seems to be a part of something bigger. Maybe I can find someone who can repair it.','Dieser Schaft scheint ein Teil von etwas grösserem zu sein. Vielleicht finde ich jemanden, der das reparieren kann.','De Schaft isch glaub en Teil vo öppis grösserem. Vilicht chani öpper finde, wo das flicke chan.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firstguardianheart', 'item', 'Heart of the First Guardian','Herz des Ersten Wächters','Herz vom Erste Wächter');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firstguardianheart', 'item_desc', 'This gem is the only thing left from the giant wolf guardian of the howling caverns.','Dieses Juwel ist das Einzige, was vom riesigen Wächterwolf aus den Heulenden Höhlen noch übrig ist.','Da Juwel ischs Einzig, wo vom riesige Wächterwolf us de Hüülende Höhle übrig blibe isch.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_stone', 'item', 'Stone','Stein','Stei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_stone', 'item_desc', 'A small stone.','Ein kleiner Stein.','En chline stei.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone', 'item', 'Corrupted Stone','Verdorbener Stein','Verdorbene Stei');
@@ -81,6 +83,27 @@ Die Höhle sind voll mit Fallene, ich has nur mit viel Glück det ane gschafft, 
 Ich hoff, ich chum irgendwie wider us dene Höhlene use...
 
 -- Paladin Marcus');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_bloodnotemarcus', 'item', 'Bloodstained Note','Blutverschmierte Notiz','Bluetverschmierti Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_bloodnotemarcus', 'item_desc', 'Paladin Marcus must have scribbled those words on this sheet of paper before he was killed.','Paladin Marcus muss das hingekritzelt haben, bevor er getötet wurde.','De Paladin Marcus mun das anekritzlet ha bevor er töted worde isch.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_bloodnotemarcus', 'item_text', 'The beast! Transforms...
+
+ Humans into wolves
+ 
+ They keep coming
+		surrounded, I''ll fight.','Das Biest!
+Verwandelt...
+
+ Menschen in Wölfe
+ 
+	Es kommen immer mehr
+		eingekreist, Ich muss kämpfen.'
+ ,'Es Biest!
+ Verwandlet...
+ 
+ Mensche i Wölf
+
+	Es chömed immer me
+		umzingled, ich mun kämpfe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item', 'Sealed Letter','Versiegelter Brief','Versiglete Brief');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_text', 'Dear king
 bla bla blaaaaaaaa bla blaaaa bla bla and you better bla bla soon! CU your enemy.','Lieber König
@@ -105,10 +128,20 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_sausage', 'item_desc', 'Tasty.', 'Lecker.', 'Fein.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ham', 'item', 'Ham', 'Schinken', 'Schinke');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ham', 'item_desc', 'A juicy ham.', 'Ein saftiger Schinken.', 'En saftige Schinke.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_devilberry', 'item', 'Devil''s Berry', 'Teufelsbeere', 'Tüüfelsbeeri');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_devilberry', 'item_desc', 'Eating those will increase all resistances dramatically. But that has a price...', 'Erhöht alle Resistenzen dramatisch... aber das hat seinen Preis.', 'Mit dem ischme ziemlich resistent gege alles... Aber das het sin Priis.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item', 'Raw Fish', 'Roher Fisch', 'Rohe Fisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item_desc', 'I should cook this better first.', 'Den sollte ich wohl besser zuerst kochen.', 'Söttme glaub besser zersch choche.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item', 'Fish Soup', 'Fischsuppe', 'Fischsuppe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item_desc', 'Hot and delicious.', 'Heiss und lecker.', 'Heiss und gluschtig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirfire', 'item', 'Elixir of Fire', 'Elixier des Feuers', 'Füür Elixier');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirfire', 'item_desc', 'Increases the fire damage permanently.', 'Erhöht den Feuerschaden permanent.', 'Erhöht de Füürschade permanent.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirice', 'item', 'Elixir of Ice', 'Elixier des Eises', 'Iis Elixier');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirice', 'item_desc', 'Increases the ice damage permanently.', 'Erhöht den Eisschaden permanent.', 'Erhöht de Iisschade permanent.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirlight', 'item', 'Elixir of Light', 'Elixier des Lichts', 'Liecht Elixier');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirlight', 'item_desc', 'Increases the light damage permanently.', 'Erhöht den Lichtschaden permanent.', 'Erhöht de Liechtschade permanent.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirshadow', 'item', 'Elixir of Shadows', 'Elixier der Schatten', 'Schatte Elixier');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_elixirshadow', 'item_desc', 'Increases the shadow damage permanently.', 'Erhöht den Schattenschaden permanent.', 'Erhöht de Schatteschade permanent.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_ingridstew', 'item', 'Ingrid''s Stew', 'Ingrids Eintopf', 'Ingrids Eintopf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_ingridstew', 'item_desc', 'A delicious dish cooked by Ingrid. Simply irresistible!', 'Ein köstliches Gericht, gekocht von Ingrid. Einfach unwiderstehlich!', 'Es köstlichs Gricht, kocht vode Ingrid. Eifach unwiderstehlich!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_feudalfire', 'item', 'Feudal Fire', 'Feudales Feuer', 'Feudals Füür');
@@ -166,7 +199,13 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_silvernecklace', 'item', 'Silver Necklace','Silberne Halskette','Silbrigi Halskette');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_silvernecklace', 'item_desc', 'The small chain links shine.','Die kleinen Kettenglieder glänzen.','Di chliine Ketteglider glänzed.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item', 'Lesser Healing Potion','Geringer Heiltrank','Chliine Heiltrank');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item_desc', 'Brings some health back.','Gibt etwas Lebenskraft zurück.','Git echli Lebenschraft zrugg.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item_desc', 'Heals small wounds and scratches.','Heilt kleine Wunden und Kratzer.','Heilt chliini Wunde und Chratzer.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_mediumhealingpotion', 'item', 'Medium Healing Potion','Mittlere Heiltrank','Mittlere Heiltrank');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_mediumhealingpotion', 'item_desc', 'Heals most moderate injuries.','Heilt die meisten mittelschweren Verletzungen.','Heilt di meiste mittleschwere Verletzige.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_greaterhealingpotion', 'item', 'Greater Healing Potion','Grosser Heiltrank','Grosse Heiltrank');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_greaterhealingpotion', 'item_desc', 'Heals nearly everything.','Heilt fast alles.','Heilt fascht alles.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ultimatehealingpotion', 'item', 'Ultimate Healing Potion','Ultimativer Heiltrank','Ultimative Heiltrank');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ultimatehealingpotion', 'item_desc', 'Ultimate healing power!','Ultimative Heilkraft!','Ultimativi Heilchraft!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item', 'Raw Meat','Rohes Fleisch','Rohs Fleisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawmeat', 'item_desc', 'Would taste better if it was roasted on a fire.','Würde gebraten noch besser schmecken.','Wär chli feiner wenmes wür brötle.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_roastedmeat', 'item', 'Roasted Meat','Gebratenes Fleisch','Brotes Fleisch');

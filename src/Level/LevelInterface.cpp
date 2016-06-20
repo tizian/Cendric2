@@ -95,6 +95,7 @@ void LevelInterface::notifyConsumableDrop(const SlotClone* item) {
 void LevelInterface::consumeItem(const std::string& itemID) {
 	Item item(itemID);
 	if (item.getType() != ItemType::Consumable) return;
+	if (m_character->isEating()) return;
 	m_character->consumeFood(
 		item.getFoodDuration(),
 		item.getAttributes());

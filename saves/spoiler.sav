@@ -42,12 +42,16 @@ item.id:eq_wizardhatgrey,1
 item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
+item.id:fo_devilberry,1
 item.id:fo_cheese,6
 item.id:fo_fishsoup,1
 item.id:fo_glowingshroom,2
 item.id:fo_ham,1
 item.id:fo_healingherb,2
 item.id:fo_lesserhealingpotion,3
+item.id:fo_mediumhealingpotion,1
+item.id:fo_greaterhealingpotion,1
+item.id:fo_ultimatehealingpotion,1
 item.id:fo_physalis,1
 item.id:fo_rawfish,1
 item.id:fo_rawmeat,2
@@ -69,9 +73,14 @@ item.id:mi_wolf_fur,1
 item.id:mi_firerat_fur,1
 item.id:mi_stone,1
 item.id:mi_corrupt_stone,1
+item.id:mi_firstguardianheart,1
 item.id:pe_feudalfire,1
 item.id:pe_glassoffeudalfire,1
 item.id:pe_ingridstew,1
+item.id:pe_elixirfire,1
+item.id:pe_elixirice,1
+item.id:pe_elixirlight,1
+item.id:pe_elixirshadow,1
 item.id:qe_letter,1
 item.id:qe_rope,1
 item.id:qe_spoiledfeudalfire,1
@@ -93,6 +102,7 @@ item.id:ke_test_1,1
 item.id:ke_test_2,1
 item.id:ke_test_3,1
 item.id:do_notemarcus,1
+item.id:do_bloodnotemarcus,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:eq_back_necrot3

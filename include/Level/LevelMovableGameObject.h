@@ -62,6 +62,7 @@ public:
 	bool isStunned() const;
 	bool isFeared() const;
 	bool isReady() const;
+	bool isEating() const;
 	GameObjectState getState() const;
 
 	virtual bool isAlly() const;

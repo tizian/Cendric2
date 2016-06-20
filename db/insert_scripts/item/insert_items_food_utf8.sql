@@ -38,11 +38,21 @@ INSERT INTO item_food (item_id, food_duration_s) values ('fo_caveberry', 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_caveberry', 0, -35, 50, 70);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_caveberry', 1, 0, 0, 50, 100);
 
+-- Devil's Berries
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_devilberry', 'consumable', 100, 100, 4);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical, res_fire, res_ice, res_shadow, res_light) values ('fo_devilberry', -3, 50, 50, 50, 50, 50);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_devilberry', 20);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_devilberry', -13, -10, 34, 40);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_devilberry', 1, 150, 250, 50, 50);
+
 -- Milk
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_milk', 'consumable', 500, 50, 6);
-INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_ice, dmg_physical) values ('fo_milk', 5, 2, 5, 3);
+INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_ice, dmg_physical) values ('fo_milk', 2, 2, 5, 3);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_milk', 20);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_milk', -7, -20, 35, 35);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_milk', 1, 350, 150, 50, 100);
 
 -- Physalis
 
@@ -71,11 +81,35 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Lesser Healing Potion
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_lesserhealingpotion', 'consumable', 100, 100, 15);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_lesserhealingpotion', 'consumable', 200, 450, 10);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_lesserhealingpotion', 10);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_lesserhealingpotion', 5);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_lesserhealingpotion', -15, -4, 20, 46);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_lesserhealingpotion', 1, 100, 100, 50, 50);
+
+-- Medium Healing Potion
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_mediumhealingpotion', 'consumable', 250, 450, 20);
+INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_mediumhealingpotion', 20);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_mediumhealingpotion', 5);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_mediumhealingpotion', -15, -4, 20, 46);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_mediumhealingpotion', 1, 0, 250, 50, 50);
+
+-- Greater Healing Potion
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_greaterhealingpotion', 'consumable', 300, 450, 30);
+INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_greaterhealingpotion', 30);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_greaterhealingpotion', 5);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_greaterhealingpotion', -15, -4, 20, 46);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_greaterhealingpotion', 1, 100, 250, 50, 50);
+
+-- Ultimate Healing Potion
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_ultimatehealingpotion', 'consumable', 350, 450, 50);
+INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_ultimatehealingpotion', 50);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_ultimatehealingpotion', 5);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_ultimatehealingpotion', -15, -4, 20, 46);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_ultimatehealingpotion', 1, 150, 250, 50, 50);
 
 -- Roasted Meat
 

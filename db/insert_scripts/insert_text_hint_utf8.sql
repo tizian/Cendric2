@@ -42,4 +42,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Mo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Waypoint', 'hint','Waypoint','Wegpunkt','Wägpunkt');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Waypoint', 'hint_desc','After you''ve activated a waypoint, you can take a teleport back, as long as you''re in the same region. Use a mouse click on the map or the minimap to teleport.','Nachdem du einen Wegpunkt aktiviert hast, kannst du dich dorthin zurück teleportieren, sofern du dich im selben Gebiet befindest. Teleportiere dich mit einem Mausklick auf der Karte zu einem Wegpunkt.','Wenn du en Wägpunkt aktiviert hesch, chasch dich det ane zrugg teleportiere, sofern du im gliiche Gebiet bisch. Teleportier dich mitme Muusklick uf de Karte zumne Wägpunkt.');
 
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Document', 'hint','Documents','Dokumente','Dokument');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Document', 'hint_desc','Documents can be read by left-clicking them in the inventory.','Dokumente können im Inventar mit einem Linksklick gelesen werden.','Dokument chasch im Inventar mit me Linksklick läse.');
+
 
