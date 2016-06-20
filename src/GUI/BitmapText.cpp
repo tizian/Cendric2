@@ -10,6 +10,8 @@ const char FIRST_CHAR = ' ';
 const int NUM_GLYPHS_U = 16;
 const int NUM_GLYPHS_V = 14;
 
+const int TAB_TO_SPACES = 4;
+
 std::string BitmapText::transform(const std::string& str) {
 	std::string out;
 	for (size_t i = 0; i < str.length(); ++i) {
@@ -39,8 +41,13 @@ std::string BitmapText::transform(const std::string& str) {
 			}
 			i++;
 		}
+		else if (c == 0x09) {
+			// convert tabs to spaces
+			for (int j = 0; j < TAB_TO_SPACES; ++j) {
+				out.push_back(0x20);
+			}
+		}
 		else {
-			//c = toupper(c);
 			out.push_back(c);
 		}
 	}
@@ -202,7 +209,7 @@ void BitmapText::init() {
 	for (size_t i = 0; i < m_string.length(); ++i) {
 		unsigned char c = m_string.at(i);
 		if (c == '\t') {
-			curX += 4 * dx;
+			curX += TAB_TO_SPACES * dx;
 			continue;
 		}
 		else if (c == '\n') {
