@@ -1,17 +1,17 @@
 # time played, in seconds
-time.played:2693
+time.played:2821
 savegame.name:Quicksave
-savegame.date:1466079355
+savegame.date:1466539949
 level.id:res/level/howlingcaverns/howlingcaverns.tmx
-level.position:3675.000000,1150.000000
-is.in.level:0
+level.position:4610.000000,560.000000
+is.in.level:1
 map.id:res/map/meadows/meadows.tmx
-map.position:2835.000000,2410.000000
+map.position:2835.000000,2405.899658
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:75
+gold:89
 # items in inventory:
 item.id:co_smallpouch,1
 item.id:eq_silvernecklace,1
@@ -20,11 +20,11 @@ item.id:fo_beer,1
 item.id:fo_caveberry,3
 item.id:fo_cheese,1
 item.id:fo_fishsoup,3
-item.id:fo_glowingshroom,1
+item.id:fo_glowingshroom,2
 item.id:fo_ham,1
 item.id:fo_healingherb,1
-item.id:fo_lesserhealingpotion,5
-item.id:fo_rawmeat,5
+item.id:fo_lesserhealingpotion,4
+item.id:fo_rawmeat,6
 item.id:fo_roastedmeat,6
 item.id:fo_sausage,2
 item.id:fo_water,1
@@ -46,6 +46,7 @@ equipped.neck:eq_lightpendant
 equipped.ring1:
 equipped.ring2:
 equipped.weapon:we_hawthorn
+# weapon configurations:
 # quickslot assignments:
 quickslot:1,fo_lesserhealingpotion
 quickslot:2,fo_apple
@@ -61,7 +62,7 @@ enemies.killed:res/level/stonegarden/stonegarden.tmx
 enemies.looted:res/level/brokenbridge/brokenbridge.tmx,106,107,108
 enemies.looted:res/level/crypt/crypt.tmx,10,17
 enemies.looted:res/level/eldergarden/eldergarden.tmx
-enemies.looted:res/level/howlingcaverns/howlingcaverns.tmx
+enemies.looted:res/level/howlingcaverns/howlingcaverns.tmx,42,45,46
 enemies.looted:res/level/ratcave/ratcave.tmx,1,2,4,5,7
 enemies.looted:res/level/rockfall/rockfall.tmx,74,75,78
 enemies.looted:res/level/stonegarden/stonegarden.tmx,126,137,141,142,144
@@ -69,7 +70,7 @@ enemies.looted:res/level/stonegarden/stonegarden.tmx,126,137,141,142,144
 items.looted:res/level/brokenbridge/brokenbridge.tmx,737,738,849,1203,1231,1239,1240,1697,1933,2103,2107,2116,2249,2250,2336
 items.looted:res/level/crypt/crypt.tmx,451,486,528,592,625
 items.looted:res/level/eldergarden/eldergarden.tmx,207,248,315
-items.looted:res/level/howlingcaverns/howlingcaverns.tmx
+items.looted:res/level/howlingcaverns/howlingcaverns.tmx,1291,1294
 items.looted:res/level/ratcave/ratcave.tmx,640,667,734,738,762,763,1076,1200,1560,1744,1758
 items.looted:res/level/rockfall/rockfall.tmx,894,1006
 items.looted:res/level/stonegarden/stonegarden.tmx,1034,1151,1935,2285,2501,2509,2550

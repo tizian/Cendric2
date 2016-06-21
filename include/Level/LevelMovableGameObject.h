@@ -44,6 +44,8 @@ public:
 	virtual void setStunned(const sf::Time& stunnedTime);
 	// cancels all blocking spells and fight animations and sets the state to idle
 	void setReady();
+	// sets the mob invincible
+	void setInvincible(bool value);
 	// flips the gravity and the sprite
 	void flipGravity();
 	// forces a facing right value
@@ -85,7 +87,8 @@ protected:
 	AttackingBehavior* m_attackingBehavior = nullptr;
 
 	bool m_isDead = false;
-	bool m_isImmortal = false;
+	bool m_isImmortal = false; // this mob can't die (but takes damage)
+	bool m_isInvincible = false; // this mob won't take any damage
 	const Level* m_level;
 
 	SpellManager* m_spellManager;

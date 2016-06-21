@@ -39,7 +39,7 @@ public:
 	void setStunned(const sf::Time& stunnedTime) override;
 	void addDamageOverTime(DamageOverTimeData& data) override;
 	void setLoot(const std::map<std::string, int>& items, int gold);
-	void setQuestTarget(const std::pair<std::string, std::string>& questtarget);
+	void addQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void setQuestCondition(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
 	void setBoss(bool value);
@@ -146,8 +146,8 @@ private:
 	LootWindow* m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
 
-	// is this enemy a quest target?
-	std::pair<std::string, std::string> m_questTarget;
+	// quest targets for this enemy
+	std::vector<std::pair<std::string, std::string>> m_questTargets;
 	// is this enemies death a condition for a quest?
 	std::pair<std::string, std::string> m_questCondition;
 

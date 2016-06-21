@@ -22,7 +22,6 @@ Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level)
 	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = screen;
 	m_spellManager = new SpellManager(this);
-	m_questTarget.first = "";
 
 	m_buffBar = new EnemyBuffBar(this);
 
@@ -260,8 +259,8 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold) {
 	m_lootWindow->setLoot(items, gold);
 }
 
-void Enemy::setQuestTarget(const std::pair<std::string, std::string>& questtarget) {
-	m_questTarget = questtarget;
+void Enemy::addQuestTarget(const std::pair<std::string, std::string>& questtarget) {
+	m_questTargets.push_back(questtarget);
 }
 
 void Enemy::setQuestCondition(const std::pair<std::string, std::string>& questcondition) {
@@ -409,8 +408,10 @@ void Enemy::notifyLooted() {
 void Enemy::notifyKilled() {
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
-	if (!m_questTarget.first.empty()) {
-		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(m_questTarget.first, m_questTarget.second);
+	for (auto& target : m_questTargets) {
+		if (!target.first.empty()) {
+			dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(target.first, target.second);
+		}
 	}
 	if (!m_questCondition.first.empty()) {
 		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestConditionFulfilled(m_questCondition.first, m_questCondition.second);

@@ -17,9 +17,14 @@ enum class GameObjectState {
 	Jumping, // used by mobs and its weapons
 	Casting, // used by mobs and its weapons
 	Casting2, // used by mobs and its weapons
+	Casting3, // used by mobs and its weapons
 	Fighting, // used by mobs and its weapons
 	Fighting2, // used by mobs and its weapons
+	Fighting3, // used by mobs and its weapons
 	Dead, // used by mobs and its weapons
+	TripOver, // used by mobs and its weapons
+	Standup, // used by mobs and its weapons
+	Laying, // used by mobs and its weapons
 	Frozen, // used by water tile
 	Locked, // used by chest tile
 	Unlocked, // used by chest tile

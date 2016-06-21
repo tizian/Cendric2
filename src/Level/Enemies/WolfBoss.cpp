@@ -1,9 +1,7 @@
 #include "Level/Enemies/WolfBoss.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
-#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/WolfBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -11,7 +9,7 @@ REGISTER_ENEMY(EnemyID::Boss_Wolf, WolfBoss)
 
 void WolfBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = 50;
-	loot.insert({ "we_zeffssword", 1 });
+	loot.insert({ "mi_firstguardianheart", 1 });
 	loot.insert({ "fo_ham", 2 });
 }
 
@@ -26,7 +24,7 @@ void WolfBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) co
 WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load(EnemyID::Boss_Zeff);
+	load(EnemyID::Boss_Wolf);
 
 	// Make boss hp bar appear from the start
 	m_mainChar->setLastHitEnemy(this);
@@ -36,61 +34,29 @@ void WolfBoss::loadAttributes() {
 	m_attributes.setHealth(200);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 50;
-	m_attributes.critical = 20;
+	m_attributes.critical = 10;
 	m_attributes.calculateAttributes();
 }
 
 void WolfBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 20;
-	chopSpell.activeDuration = sf::milliseconds(400);
-	chopSpell.cooldown = sf::milliseconds(400);
+	chopSpell.activeDuration = sf::seconds(1000.f);
+	chopSpell.cooldown = sf::seconds(10.f);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 100);
 	chopSpell.spellOffset = sf::Vector2f(-60.f, 20.f);
 	chopSpell.fightingTime = sf::milliseconds(400);
-	
+	chopSpell.castingTime = sf::seconds(1.f);
+	chopSpell.castingAnimation = GameObjectState::Casting;
+	chopSpell.fightAnimation = GameObjectState::Walking;
+
 	m_spellManager->addSpell(chopSpell);
-
-	SpellData projectile = SpellData::getSpellData(SpellID::ReturningProjectile);
-	projectile.damage = 15;
-	projectile.duration = sf::seconds(2.f);
-	projectile.damagePerSecond = 5;
-	projectile.cooldown = sf::milliseconds(7000);
-	projectile.isBlocking = true;
-	projectile.fightingTime = sf::seconds(10000);
-	projectile.fightAnimation = GameObjectState::Fighting2;
-	projectile.castingTime = sf::milliseconds(800);
-	projectile.castingAnimation = GameObjectState::Casting;
-	projectile.range = 600;
-	projectile.speed = 500;
-	
-	m_spellManager->addSpell(projectile);
-
-	SpellData boomerang = SpellData::getSpellData(SpellID::Boomerang);
-	boomerang.damage = 10;
-	boomerang.duration = sf::seconds(2.f);
-	boomerang.damagePerSecond = 2;
-	boomerang.cooldown = sf::milliseconds(8000);
-	boomerang.isBlocking = true;
-	boomerang.fightingTime = sf::seconds(10000);
-	boomerang.fightAnimation = GameObjectState::Fighting2;
-	boomerang.castingTime = sf::milliseconds(800);
-	boomerang.castingAnimation = GameObjectState::Casting2;
-	boomerang.range = 700;
-	boomerang.speed = 500;
-
-	m_spellManager->addSpell(boomerang);
 
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
 void WolfBoss::handleAttackInput() {
-	if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
-		m_spellManager->setCurrentSpell(0); // spin
-	}
-	else {
-		m_spellManager->setCurrentSpell(rand() % 2 + 1); // sword throw or boomerang
-	}
+	m_spellManager->setCurrentSpell(0); // spin
 
 	if (getCurrentTarget() != nullptr)
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
@@ -110,70 +76,107 @@ void WolfBoss::update(const sf::Time& frameTime) {
 }
 
 void WolfBoss::loadAnimation() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 120.f));
-	setSpriteOffset(sf::Vector2f(-30.f, -20.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 200.f, 90.f));
+	setSpriteOffset(sf::Vector2f(-50.f, -160.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
-	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
+	Animation* walkingAnimation = new Animation(sf::seconds(0.05f));
 	walkingAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 140));
+	for (int i = 0; i < 13; ++i) {
+		walkingAnimation->addFrame(sf::IntRect(i * 300, 0, 300, 250));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, 140, 120, 140));
+	idleAnimation->addFrame(sf::IntRect(4 * 300, 250, 300, 250));
+	idleAnimation->addFrame(sf::IntRect(5 * 300, 250, 300, 250));
+	idleAnimation->addFrame(sf::IntRect(6 * 300, 250, 300, 250));
+	idleAnimation->addFrame(sf::IntRect(5 * 300, 250, 300, 250));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-	
+
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(120, 140, 120, 140));
+	jumpingAnimation->addFrame(sf::IntRect(3 * 300, 250, 300, 250));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(2 * 120, 140, 120, 140));
+	deadAnimation->addFrame(sf::IntRect(9 * 300, 750, 300, 250));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
-	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 4; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 120, 5 * 140, 120, 140));
-	}
-
-	addAnimation(GameObjectState::Fighting, fightingAnimation);
-	
-	Animation* fighting2Animation = new Animation(sf::seconds(0.1f));
-	fighting2Animation->setSpriteSheet(tex);
-	fighting2Animation->addFrame(sf::IntRect(0 * 120, 4 * 140, 120, 140));
-	fighting2Animation->addFrame(sf::IntRect(1 * 120, 4 * 140, 120, 140));
-	fighting2Animation->addFrame(sf::IntRect(2 * 120, 4 * 140, 120, 140));
-	fighting2Animation->addFrame(sf::IntRect(1 * 120, 4 * 140, 120, 140));
-
-	addAnimation(GameObjectState::Fighting2, fighting2Animation);
-
-	Animation* castingAnimation = new Animation(sf::seconds(0.1f));
+	// casting before charge attack
+	Animation* castingAnimation = new Animation();
 	castingAnimation->setSpriteSheet(tex);
-	castingAnimation->setLooped(false);
-	for (int i = 0; i < 4; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * 120, 2 * 140, 120, 140));
-	}
+	castingAnimation->addFrame(sf::IntRect(0 * 300, 250, 300, 250));
+	castingAnimation->addFrame(sf::IntRect(1 * 300, 250, 300, 250));
+	castingAnimation->addFrame(sf::IntRect(2 * 300, 250, 300, 250));
+	castingAnimation->addFrame(sf::IntRect(1 * 300, 250, 300, 250));
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
 
-	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
-	casting2Animation->setSpriteSheet(tex);
-	casting2Animation->setLooped(false);
-	for (int i = 0; i < 4; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * 120, 3 * 140, 120, 140));
+	// casting before beam attack
+	Animation* casting2Animation = new Animation();
+	for (int i = 0; i < 12; ++i) {
+		casting2Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
 	}
+	casting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
+
+	// beam attack
+	Animation* beamAnimation = new Animation();
+	beamAnimation->setSpriteSheet(tex);
+	beamAnimation->addFrame(sf::IntRect(11 * 300, 500, 300, 250));
+
+	addAnimation(GameObjectState::Fighting2, beamAnimation);
+
+	// casting before windgust attack
+	Animation* casting3Animation = new Animation();
+	for (int i = 0; i < 4; ++i) {
+		casting3Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
+	}
+	casting3Animation->setLooped(false);
+
+	addAnimation(GameObjectState::Casting3, casting3Animation);
+
+	// windgust attack
+	Animation* windgustAnimation = new Animation();
+	windgustAnimation->setSpriteSheet(tex);
+	windgustAnimation->addFrame(sf::IntRect(7 * 300, 250, 300, 250));
+
+	addAnimation(GameObjectState::Fighting3, windgustAnimation);
+
+	// trip over
+	Animation* tripoverAnimation = new Animation();
+	for (int i = 0; i < 5; ++i) {
+		tripoverAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
+	}
+	tripoverAnimation->setLooped(false);
+
+	addAnimation(GameObjectState::TripOver, tripoverAnimation);
+
+	// laying
+	Animation* layingAnimation = new Animation();
+	layingAnimation->addFrame(sf::IntRect(4 * 300, 750, 300, 250));
+	layingAnimation->addFrame(sf::IntRect(5 * 300, 750, 300, 250));
+	layingAnimation->addFrame(sf::IntRect(6 * 300, 750, 300, 250));
+	layingAnimation->addFrame(sf::IntRect(5 * 300, 750, 300, 250));
+
+	addAnimation(GameObjectState::Laying, layingAnimation);
+
+	// standup
+	Animation* standupAnimation = new Animation();
+	for (int i = 8; i < 11; ++i) {
+		standupAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
+	}
+	standupAnimation->setLooped(false);
+
+	addAnimation(GameObjectState::Standup, standupAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);
@@ -184,29 +187,20 @@ void WolfBoss::loadAnimation() {
 
 MovingBehavior* WolfBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
-	if (asAlly) {
-		behavior = new AllyWalkingBehavior(this);
-	}
-	else {
-		behavior = new AggressiveWalkingBehavior(this);
-	}
+
+	behavior = new WolfBossMovingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(50.f);
+	behavior->setApproachingDistance(10000.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(500.f);
-	behavior->setMaxVelocityX(170.f);
+	behavior->setMaxVelocityYUp(300.f);
+	behavior->setMaxVelocityX(200.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
 
 AttackingBehavior* WolfBoss::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
-	if (asAlly) {
-		behavior = new AllyBehavior(this);
-	}
-	else {
-		behavior = new AggressiveBehavior(this);
-	}
+	behavior = new AggressiveBehavior(this);
 	behavior->setAggroRange(10000.f);
 	behavior->setAttackInput(std::bind(&WolfBoss::handleAttackInput, this));
 	return behavior;
@@ -228,7 +222,7 @@ int WolfBoss::getMentalStrength() const {
 }
 
 sf::Time WolfBoss::getConfiguredWaitingTime() const {
-	return sf::Time::Zero;
+	return sf::seconds(2.f);
 }
 
 void WolfBoss::updateParticleSystemPosition() {
@@ -277,7 +271,7 @@ void WolfBoss::loadParticleSystem() {
 }
 
 std::string WolfBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_wolf.png";
+	return "res/assets/bosses/spritesheet_boss_wolfmonster.png";
 }
 
 std::string WolfBoss::getDeathSoundPath() const {

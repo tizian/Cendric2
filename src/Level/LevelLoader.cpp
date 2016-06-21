@@ -247,10 +247,13 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 			return;
 		}
 
-		// set quest target
-		if (!it.questTarget.first.empty()) {
-			enemy->setQuestTarget(it.questTarget);
+		// set quest targets
+		for (auto& target : it.questTargets) {
+			if (!target.first.empty()) {
+				enemy->addQuestTarget(target);
+			}
 		}
+		
 		// set quest condition
 		if (!it.questCondition.first.empty()) {
 			enemy->setQuestCondition(it.questCondition);

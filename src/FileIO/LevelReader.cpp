@@ -554,7 +554,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				}
 				std::string itemText = textAttr;
 
-				if (itemText.compare("questtarget") == 0) {
+				if (itemText.find("questtarget") != std::string::npos) {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, quest target value attribute is empty.");
@@ -563,7 +563,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					std::string questtargetText = textAttr;
 					std::string questID = questtargetText.substr(0, questtargetText.find(","));
 					questtargetText.erase(0, questtargetText.find(",") + 1);
-					enemyData.questTarget = std::pair<std::string, std::string>(questID, questtargetText);
+					enemyData.questTargets.push_back(std::pair<std::string, std::string>(questID, questtargetText));
 					enemyData.isUnique = true;
 				}
 				else if (itemText.compare("questcondition") == 0) {
@@ -1215,9 +1215,11 @@ bool LevelReader::checkData(LevelData& data) const {
 		}
 	}
 	for (auto& it : data.enemies) {
-		if (!it.questTarget.first.empty() && it.questTarget.second.empty()) {
-			logError("enemy quest target name must not must not be empty when quest id is filled.");
-			return false;
+		for (auto& target : it.questTargets) {
+			if (target.first.empty() || target.second.empty()) {
+				logError("enemy quest target quest and name must be filled.");
+				return false;
+			}
 		}
 	}
 	if (static_cast<int>(data.levelItems.size()) != data.mapSize.x * data.mapSize.y) {

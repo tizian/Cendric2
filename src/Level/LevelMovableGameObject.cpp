@@ -149,6 +149,10 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool 
 	if (m_damageNumbers) {
 		const sf::Vector2f& pos = getPosition();
 		const sf::Vector2f& size = getSize();
+		if (m_isInvincible) {
+			m_damageNumbers->emitNumber(0, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
+			return;
+		}
 		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
 	}
 
@@ -265,6 +269,10 @@ bool LevelMovableGameObject::isReady() const {
 
 void LevelMovableGameObject::setReady() {
 	m_movingBehavior->setReady();
+}
+
+void LevelMovableGameObject::setInvincible(bool value) {
+	m_isInvincible = value;
 }
 
 void LevelMovableGameObject::loadBehavior() {

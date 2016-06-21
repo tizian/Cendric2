@@ -10,3 +10,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('El
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Tavern1','location','The River Inn','Gasthaus am Fluss','Gaschthuus am Fluss');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossZeff','location','Boss: Zeff','Boss: Zeff','Boss: Zeff');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('HowlingCaverns','location','The Howling Caverns','Die Heulenden Höhlen','Di Hüülende Höhle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossKhajag','location','Boss: Khajag,
+the Cavern Guardian','Boss: Khajag,
+Wächter der Höhlen','Boss: Khajag, 
+Wächter vode Höhlene');
