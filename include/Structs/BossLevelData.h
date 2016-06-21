@@ -6,7 +6,11 @@
 struct BossLevelData {
 	bool isBossLevel = false;
 
-	bool isInLevel;
-	std::string currentWorld;
-	sf::Vector2f currentWorldPosition;
+	bool isOnWinLevel;
+	std::string onWinWorld;
+	sf::Vector2f onWinPosition;
+
+	bool isOnLoseLevel;
+	std::string onLoseWorld;
+	sf::Vector2f onLosePosition;
 };

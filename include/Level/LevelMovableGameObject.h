@@ -50,6 +50,10 @@ public:
 	void flipGravity();
 	// forces a facing right value
 	void setFacingRight(bool value);
+	// clears spells owned by this mob
+	// argument true clears all spells
+	// argument false clears only the attached spells, as if the enemy died.
+	void clearSpells(bool clearAll);
 	
 	SpellManager* getSpellManager() const;
 	AttackingBehavior* getAttackingBehavior() const;

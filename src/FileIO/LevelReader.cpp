@@ -1018,8 +1018,11 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 		else if (name.compare("weather") == 0) {
 			if (!readWeather(_property, data)) return false;
 		}
-		else if (name.compare("bosslevel") == 0) {
-			if (!readBossLevel(_property, data)) return false;
+		else if (name.compare("onwin") == 0) {
+			if (!readBossLevelOnWin(_property, data)) return false;
+		}
+		else if (name.compare("onlose") == 0) {
+			if (!readBossLevelOnLose(_property, data)) return false;
 		}
 		else {
 			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
@@ -1032,7 +1035,7 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 	return true;
 }
 
-bool LevelReader::readBossLevel(tinyxml2::XMLElement* _property, LevelData& data) const {
+bool LevelReader::readBossLevelOnLose(tinyxml2::XMLElement* _property, LevelData& data) const {
 	const char* textAttr = nullptr;
 	textAttr = _property->Attribute("value");
 	if (textAttr == nullptr) {
@@ -1048,7 +1051,7 @@ bool LevelReader::readBossLevel(tinyxml2::XMLElement* _property, LevelData& data
 		return false;
 	}
 
-	data.bossLevelData.isInLevel = bossLevel.substr(0, pos).compare("level") == 0;
+	data.bossLevelData.isOnLoseLevel = bossLevel.substr(0, pos).compare("level") == 0;
 	bossLevel.erase(0, pos + 1);
 
 	if ((pos = bossLevel.find(",")) == std::string::npos) {
@@ -1056,7 +1059,7 @@ bool LevelReader::readBossLevel(tinyxml2::XMLElement* _property, LevelData& data
 		return false;
 	}
 
-	data.bossLevelData.currentWorld = bossLevel.substr(0, pos);
+	data.bossLevelData.onLoseWorld = bossLevel.substr(0, pos);
 	bossLevel.erase(0, pos + 1);
 
 	if ((pos = bossLevel.find(",")) == std::string::npos) {
@@ -1064,10 +1067,51 @@ bool LevelReader::readBossLevel(tinyxml2::XMLElement* _property, LevelData& data
 		return false;
 	}
 
-	data.bossLevelData.currentWorldPosition.x = static_cast<float>(std::atoi(bossLevel.substr(0, pos).c_str()));
+	data.bossLevelData.onLosePosition.x = static_cast<float>(std::atoi(bossLevel.substr(0, pos).c_str()));
 	bossLevel.erase(0, pos + 1);
 
-	data.bossLevelData.currentWorldPosition.y = static_cast<float>(std::atoi(bossLevel.c_str()));
+	data.bossLevelData.onLosePosition.y = static_cast<float>(std::atoi(bossLevel.c_str()));
+
+	data.bossLevelData.isBossLevel = true;
+	return true;
+}
+
+bool LevelReader::readBossLevelOnWin(tinyxml2::XMLElement* _property, LevelData& data) const {
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr) {
+		logError("XML file could not be read, bosslevel value property not found.");
+		return false;
+	}
+
+	std::string bossLevel = textAttr;
+
+	size_t pos = 0;
+	if ((pos = bossLevel.find(",")) == std::string::npos) {
+		logError("XML file could not be read, bosslevel value must be a string (map or level), the map or level id and the x and y coords, seperated by commas.");
+		return false;
+	}
+
+	data.bossLevelData.isOnWinLevel = bossLevel.substr(0, pos).compare("level") == 0;
+	bossLevel.erase(0, pos + 1);
+
+	if ((pos = bossLevel.find(",")) == std::string::npos) {
+		logError("XML file could not be read, bosslevel value must be a string (map or level), the map or level id and the x and y coords, seperated by commas.");
+		return false;
+	}
+
+	data.bossLevelData.onWinWorld = bossLevel.substr(0, pos);
+	bossLevel.erase(0, pos + 1);
+
+	if ((pos = bossLevel.find(",")) == std::string::npos) {
+		logError("XML file could not be read, bosslevel value must be a string (map or level), the map or level id and the x and y coords, seperated by commas.");
+		return false;
+	}
+
+	data.bossLevelData.onWinPosition.x = static_cast<float>(std::atoi(bossLevel.substr(0, pos).c_str()));
+	bossLevel.erase(0, pos + 1);
+
+	data.bossLevelData.onWinPosition.y = static_cast<float>(std::atoi(bossLevel.c_str()));
 
 	data.bossLevelData.isBossLevel = true;
 	return true;
@@ -1220,6 +1264,16 @@ bool LevelReader::checkData(LevelData& data) const {
 				logError("enemy quest target quest and name must be filled.");
 				return false;
 			}
+		}
+	}
+	if (data.bossLevelData.isBossLevel) {
+		if (data.bossLevelData.onLoseWorld.empty()) {
+			logError("Bosslevel: On lose world must be set!");
+			return false;
+		}
+		if (data.bossLevelData.onWinWorld.empty()) {
+			logError("Bosslevel: On win world must be set!");
+			return false;
 		}
 	}
 	if (static_cast<int>(data.levelItems.size()) != data.mapSize.x * data.mapSize.y) {

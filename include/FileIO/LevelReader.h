@@ -26,7 +26,8 @@ private:
 	bool readMapProperties(tinyxml2::XMLElement* map, WorldData& data) const override;
 	bool readBackgroundLayers(tinyxml2::XMLElement* _property, WorldData& data) const override;
 	bool readFirstGridIDs(tinyxml2::XMLElement* map, LevelData& data);
-	bool readBossLevel(tinyxml2::XMLElement* _property, LevelData& data) const;
+	bool readBossLevelOnWin(tinyxml2::XMLElement* _property, LevelData& data) const;
+	bool readBossLevelOnLose(tinyxml2::XMLElement* _property, LevelData& data) const;
 	bool readItemIDs(tinyxml2::XMLElement* firstTile);
 
 	bool readLayers(tinyxml2::XMLElement* map, LevelData& data) const;

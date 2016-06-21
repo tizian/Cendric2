@@ -23,10 +23,12 @@ void ScreenOverlay::load() {
 	m_title.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_title.setCharacterSize(40);
 	m_title.setTextStyle(TextStyle::Shadowed);
-
+	m_title.setTextAlignment(TextAlignment::Center);
+		
 	m_subtitle.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_subtitle.setCharacterSize(32);
 	m_subtitle.setTextStyle(TextStyle::Shadowed);
+	m_subtitle.setTextAlignment(TextAlignment::Center);
 
 	m_fadeInTimer = m_fadeTime;
 	m_fadeOutTimer = m_fadeTime;

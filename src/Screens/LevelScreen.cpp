@@ -36,11 +36,11 @@ void LevelScreen::load() {
 	// handle boss level
 	const BossLevelData& data = m_currentLevel.getWorldData()->bossLevelData;
 	if (data.isBossLevel) {
-		if (data.isInLevel) {
-			m_characterCore->setLevel(data.currentWorldPosition, data.currentWorld);
+		if (data.isOnLoseLevel) {
+			m_characterCore->setLevel(data.onLosePosition, data.onLoseWorld);
 		}
 		else {
-			m_characterCore->setMap(data.currentWorldPosition, data.currentWorld);
+			m_characterCore->setMap(data.onLosePosition, data.onLoseWorld);
 		}
 	}
 
@@ -194,7 +194,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		else {
 			m_gamePausedOverlay->setPermanent(false);
 		}
-		
+
 		m_retryButton->setVisible(m_isPaused);
 		m_backToMenuButton->setVisible(m_isPaused);
 		m_resumeButton->setVisible(m_isPaused);
@@ -297,6 +297,15 @@ void LevelScreen::handleBossDefeated(const sf::Time& frameTime) {
 	if (m_bossDefeatedWaitTime == sf::Time::Zero) return;
 	updateTime(m_bossDefeatedWaitTime, frameTime);
 	if (m_bossDefeatedWaitTime == sf::Time::Zero) {
+
+		const BossLevelData& data = getWorldData()->bossLevelData;
+		if (data.isOnWinLevel) {
+			m_characterCore->setLevel(data.onWinPosition, data.onWinWorld);
+		}
+		else {
+			m_characterCore->setMap(data.onWinPosition, data.onWinWorld);
+		}
+
 		onBackToCheckpoint();
 	}
 	return;

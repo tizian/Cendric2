@@ -25,6 +25,7 @@ WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	load(EnemyID::Boss_Wolf);
+	m_isInvincible = true;
 
 	// Make boss hp bar appear from the start
 	m_mainChar->setLastHitEnemy(this);
@@ -40,12 +41,12 @@ void WolfBoss::loadAttributes() {
 
 void WolfBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 20;
+	chopSpell.damage = 50;
 	chopSpell.activeDuration = sf::seconds(1000.f);
 	chopSpell.cooldown = sf::seconds(10.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 100);
-	chopSpell.spellOffset = sf::Vector2f(-60.f, 20.f);
-	chopSpell.fightingTime = sf::milliseconds(400);
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 20, 100);
+	chopSpell.spellOffset = sf::Vector2f(80.f, 0.f);
+	chopSpell.fightingTime = sf::seconds(1000.f);
 	chopSpell.castingTime = sf::seconds(1.f);
 	chopSpell.castingAnimation = GameObjectState::Casting;
 	chopSpell.fightAnimation = GameObjectState::Walking;
@@ -56,8 +57,16 @@ void WolfBoss::loadSpells() {
 }
 
 void WolfBoss::handleAttackInput() {
-	m_spellManager->setCurrentSpell(0); // spin
+	// Cendric is too far away to charge.
+	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 400.f)
+		return;
 
+	// We are doing something else
+	if (getState() != GameObjectState::Idle)
+		return;
+
+	m_spellManager->setCurrentSpell(0); // charge
+	
 	if (getCurrentTarget() != nullptr)
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
@@ -121,6 +130,7 @@ void WolfBoss::loadAnimation() {
 
 	// casting before beam attack
 	Animation* casting2Animation = new Animation();
+	casting2Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 12; ++i) {
 		casting2Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
 	}
@@ -137,6 +147,7 @@ void WolfBoss::loadAnimation() {
 
 	// casting before windgust attack
 	Animation* casting3Animation = new Animation();
+	casting3Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
 		casting3Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
 	}
@@ -153,6 +164,7 @@ void WolfBoss::loadAnimation() {
 
 	// trip over
 	Animation* tripoverAnimation = new Animation();
+	tripoverAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 5; ++i) {
 		tripoverAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
 	}
@@ -162,6 +174,7 @@ void WolfBoss::loadAnimation() {
 
 	// laying
 	Animation* layingAnimation = new Animation();
+	layingAnimation->setSpriteSheet(tex);
 	layingAnimation->addFrame(sf::IntRect(4 * 300, 750, 300, 250));
 	layingAnimation->addFrame(sf::IntRect(5 * 300, 750, 300, 250));
 	layingAnimation->addFrame(sf::IntRect(6 * 300, 750, 300, 250));
@@ -171,6 +184,7 @@ void WolfBoss::loadAnimation() {
 
 	// standup
 	Animation* standupAnimation = new Animation();
+	standupAnimation->setSpriteSheet(tex);
 	for (int i = 8; i < 11; ++i) {
 		standupAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
 	}
@@ -193,7 +207,7 @@ MovingBehavior* WolfBoss::createMovingBehavior(bool asAlly) {
 	behavior->setApproachingDistance(10000.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(300.f);
-	behavior->setMaxVelocityX(200.f);
+	behavior->setMaxVelocityX(300.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
@@ -222,7 +236,7 @@ int WolfBoss::getMentalStrength() const {
 }
 
 sf::Time WolfBoss::getConfiguredWaitingTime() const {
-	return sf::seconds(2.f);
+	return sf::Time::Zero;
 }
 
 void WolfBoss::updateParticleSystemPosition() {

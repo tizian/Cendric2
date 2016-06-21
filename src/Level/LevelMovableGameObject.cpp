@@ -215,16 +215,22 @@ void LevelMovableGameObject::setDead() {
 	if (m_isImmortal) return;
 	// dispose the spells that this mob is an owner of and that are attached to it
 	// that's how magic works, I guess?
+	clearSpells(false);
+	m_attributes.currentHealthPoints = 0;
+	m_isDead = true;
+	g_resourceManager->playSound(m_deathSound, getDeathSoundPath(), true);
+}
+
+void LevelMovableGameObject::clearSpells(bool clearAll) {
 	for (auto& go : *m_screen->getObjects(GameObjectType::_Spell)) {
 		if (Spell* spell = dynamic_cast<Spell*>(go)) {
 			if (spell->getOwner() == this) {
 				spell->onOwnerDisposed();
+				if (clearAll)
+					spell->setDisposed();
 			}
 		}
 	}
-	m_attributes.currentHealthPoints = 0;
-	m_isDead = true;
-	g_resourceManager->playSound(m_deathSound, getDeathSoundPath(), true);
 }
 
 void LevelMovableGameObject::setFightAnimation(const sf::Time& animationTime, GameObjectState fightAnimation, bool isBlocking) {
