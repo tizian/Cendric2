@@ -566,8 +566,8 @@ void Inventory::reloadGold() {
 	m_goldText.setString(gold);
 
 	sf::Vector2f pos = m_goldText.getPosition();
-	pos.x += m_goldText.getBounds().width + 0.5f * GUIConstants::TEXT_OFFSET;
-	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 12.f;
+	pos.x += m_goldText.getBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
+	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 13.f;
 	m_goldSprite.setPosition(pos);
 }
 
