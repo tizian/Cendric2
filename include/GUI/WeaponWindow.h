@@ -62,7 +62,6 @@ private:
 
 	InventorySlot* m_weaponSlot = nullptr;
 	BitmapText m_weaponName;
-	BitmapText m_weaponDescription;
 	BitmapText m_noSlotsText;
 
 	std::vector<std::pair<SpellSlot, std::vector<ModifierSlot>>> m_weaponSlots;
