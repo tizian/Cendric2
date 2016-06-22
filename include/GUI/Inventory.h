@@ -70,6 +70,8 @@ private:
 
 	TexturedTabBar* m_tabBar;
 
+	sf::Sprite m_goldSprite;
+
 	std::map<std::string, InventorySlot> m_consumableItems;
 	std::map<std::string, InventorySlot> m_equipmentItems;
 	std::map<std::string, InventorySlot> m_miscItems;

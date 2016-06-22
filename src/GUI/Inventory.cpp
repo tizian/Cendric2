@@ -69,6 +69,10 @@ void Inventory::init() {
 	m_goldText.setColor(COLOR_WHITE);
 	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
+	m_goldSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
+	m_goldSprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
+	m_goldSprite.setScale(sf::Vector2f(0.5f, 0.5f));
+
 	// fill the helper map
 	m_typeMap.insert({
 		{ ItemType::Consumable, &m_consumableItems },
@@ -118,7 +122,6 @@ void Inventory::init() {
 	m_emptyText.setString(g_textProvider->getText("Empty"));
 	const sf::FloatRect bounds = m_emptyText.getBounds();
 	m_emptyText.setPosition(scrollBox.left + 0.5f * (scrollBox.width - bounds.width), scrollBox.top + 0.5f * (scrollBox.height - bounds.height));
-
 
 	m_equipment = new InventoryEquipment(getInterface()->getScreen());
 
@@ -419,6 +422,7 @@ void Inventory::render(sf::RenderTarget& target) {
 
 	m_window->render(target);
 	target.draw(m_goldText);
+	target.draw(m_goldSprite);
 	target.draw(m_selectedTabText);
 	
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
@@ -560,6 +564,11 @@ void Inventory::reloadGold() {
 	gold.append(std::to_string(m_core->getData().gold));
 	gold.append("\n\n");
 	m_goldText.setString(gold);
+
+	sf::Vector2f pos = m_goldText.getPosition();
+	pos.x += m_goldText.getBounds().width + 0.5f * GUIConstants::TEXT_OFFSET;
+	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 12.f;
+	m_goldSprite.setPosition(pos);
 }
 
 void Inventory::reload() {
