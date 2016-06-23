@@ -22,15 +22,14 @@ void WeaponWindow::reload() {
 	if (m_weapon == nullptr) {
 		m_weaponSlot = new InventorySlot(g_resourceManager->getTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS), sf::Vector2i(0, 0), ItemType::Equipment_weapon);
 		m_weaponName.setString(g_textProvider->getText("NoWeapon"));
-		m_weaponDescription.setString("");
 	}
 	else {
 		m_weaponSlot = new InventorySlot(m_weapon->getID(), -1);
-		m_weaponName.setString(g_textProvider->getText(m_weapon->getID(), "item"));
-		m_weaponDescription.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S,
-			static_cast<int>(WIDTH - (2 * GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIZE))));
+		m_weaponName.setString(g_textProvider->getCroppedText(m_weapon->getID(), "item", GUIConstants::CHARACTER_SIZE_M,
+			static_cast<int>(WIDTH - (2 * GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE))));
 	}
 	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET, TOP + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET));
+	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + 0.5f * (InventorySlot::SIZE - m_weaponName.getBounds().height)));
 
 	clearAllSlots();
 
@@ -101,11 +100,6 @@ void WeaponWindow::init() {
 
 	m_weaponName.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_weaponName.setColor(COLOR_WHITE);
-	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET));
-
-	m_weaponDescription.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_weaponDescription.setColor(COLOR_LIGHT_GREY);
-	m_weaponDescription.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + 4.f));
 
 	m_noSlotsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_noSlotsText.setColor(COLOR_WHITE);
@@ -269,7 +263,6 @@ void WeaponWindow::render(sf::RenderTarget& target) {
 	m_window->render(target);
 	m_spellDesc->render(target);
 	target.draw(m_weaponName);
-	target.draw(m_weaponDescription);
 	target.draw(m_noSlotsText);
 	m_weaponSlot->render(target);
 
