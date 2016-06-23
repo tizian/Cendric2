@@ -16,6 +16,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	int getMentalStrength() const override;
+	float getConfiguredDistanceToHPBar() const override;
 	sf::Time getConfiguredWaitingTime() const override;
 	void setDead() override;
 

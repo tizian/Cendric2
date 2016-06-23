@@ -1,19 +1,15 @@
 #include "Spells/WindGustSpell.h"
 #include "GlobalResource.h"
 
-#define SPELL_OFFSET 10.f
-
-WindGustSpell::WindGustSpell(int strength) : Spell() {
-	m_strength = strength;
-	m_pushAcceleration = 100.f * strength;
-}
-
 WindGustSpell::~WindGustSpell() {
 	delete m_ps;
 }
 
 void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
+	m_damageType = m_data.damageType;
+	m_data.damageType = DamageType::VOID;
+	m_pushAcceleration = 100.f * m_data.strength;
 	loadParticleSystem();
 }
 
@@ -21,7 +17,12 @@ void WindGustSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
 	m_ps->update(frameTime);
 	updateParticleSystemPosition();
-	if (m_hasDamaged) {
+	updateTime(m_timeUntilDamage, frameTime);
+	if (m_timeUntilDamage == sf::Time::Zero) {
+		m_data.damageType = m_damageType;
+		m_timeUntilDamage = sf::seconds(1.f);
+	}
+	else {
 		m_data.damageType = DamageType::VOID;
 	}
 }
@@ -32,9 +33,8 @@ void WindGustSpell::render(sf::RenderTarget& target) {
 }
 
 void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
-	m_hasDamaged = true;
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() < m_strength) {
+		if (enemy->getMentalStrength() < m_data.ccStrength) {
 			enemy->addAccelerationX(m_mob->isFacingRight() ? 4 * m_pushAcceleration : -4 * m_pushAcceleration);
 		}
 	}
@@ -52,14 +52,14 @@ float WindGustSpell::getPushAcceleration() const {
 }
 
 void WindGustSpell::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(static_cast<int>(m_pushAcceleration * 2), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
+	m_ps = new particles::TextureParticleSystem(static_cast<int>((getBoundingBox()->width * getBoundingBox()->height) / 400.f * m_data.strength), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
 	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = getBoundingBox()->width;
+	m_ps->emitRate = getBoundingBox()->width / 5.f * m_data.strength;
 
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
-	posGen->center = sf::Vector2f(getPosition().x + SPELL_OFFSET, getPosition().y + getBoundingBox()->height / 2);
-	posGen->size = sf::Vector2f(0.f, getBoundingBox()->height);
+	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 10.f, getPosition().y + getBoundingBox()->height / 2);
+	posGen->size = sf::Vector2f(getBoundingBox()->width / 5.f, getBoundingBox()->height);
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
@@ -82,7 +82,7 @@ void WindGustSpell::loadParticleSystem() {
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.0f;
+	timeGen->minTime = getBoundingBox()->width / (velGen->maxStartSpeed * 3.f);
 	timeGen->maxTime = getBoundingBox()->width / velGen->maxStartSpeed;
 
 	// Updaters
@@ -92,16 +92,17 @@ void WindGustSpell::loadParticleSystem() {
 }
 
 void WindGustSpell::updateParticleSystemPosition() {
+	if (m_mob == nullptr) return;
 	if (!m_mob->isFacingRight()) {
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
-		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width - SPELL_OFFSET;
+		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width - getBoundingBox()->width / 10.f;
 		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 	}
 	else {
 		m_velGenerator->minAngle = 90 + -20.f;
 		m_velGenerator->maxAngle = 90 + 20.f;
-		m_particleSpawner->center.x = getPosition().x + SPELL_OFFSET;
+		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 10.f;
 		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 	}
 }

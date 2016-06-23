@@ -1,10 +1,6 @@
 #include "Spells/IcyAmbushSpell.h"
 #include "GlobalResource.h"
 
-IcyAmbushSpell::IcyAmbushSpell(int strength) : Spell() {
-	m_strength = strength;
-}
-
 IcyAmbushSpell::~IcyAmbushSpell() {
 	delete m_ps;
 }
@@ -39,7 +35,7 @@ void IcyAmbushSpell::render(sf::RenderTarget& target) {
 
 void IcyAmbushSpell::execOnHit(LevelMovableGameObject *target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() < m_strength) {
+		if (enemy->getMentalStrength() < m_data.ccStrength) {
 			enemy->setStunned(m_data.duration);
 		}
 	}

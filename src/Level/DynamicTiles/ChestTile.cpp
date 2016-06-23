@@ -1,6 +1,5 @@
 #include "Level/DynamicTiles/ChestTile.h"
 #include "Level/LevelMainCharacter.h"
-#include "Spells/UnlockSpell.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
 
@@ -50,12 +49,10 @@ void ChestTile::setLoot(const std::map<std::string, int>& items, int gold) {
 }
 
 void ChestTile::onHit(Spell* spell) {
-	UnlockSpell* unlock;
 	switch (spell->getSpellID()) {
 	case SpellID::Unlock:
 		if (m_state == GameObjectState::Locked) {
-			unlock = dynamic_cast<UnlockSpell*>(spell);
-			if (unlock != nullptr && unlock->getStrength() >= m_strength) {
+			if (spell->getStrength() >= m_strength) {
 				m_interactComponent->setInteractText("ToPickup");
 				m_state = GameObjectState::Unlocked;
 				setCurrentAnimation(getAnimation(m_state), false);

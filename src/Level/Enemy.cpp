@@ -71,11 +71,6 @@ void Enemy::onHit(Spell* spell) {
 		m_mainChar->setLastHitEnemy(this);
 	}
 
-	// check for immune damage types, if yes, the spell will disappear, absorbed by the immuneness of this enemy
-	if (std::find(m_immuneDamageTypes.begin(), m_immuneDamageTypes.end(), spell->getDamageType()) != m_immuneDamageTypes.end()) {
-		spell->setDisposed();
-		return;
-	}
 	LevelMovableGameObject::onHit(spell);
 	m_chasingTime = getConfiguredChasingTime();
 	m_recoveringTime = getConfiguredRecoveringTime();

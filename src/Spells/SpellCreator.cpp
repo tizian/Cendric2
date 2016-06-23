@@ -28,11 +28,13 @@ void SpellCreator::update(const sf::Time& frametime) {
 		if (!m_owner->isDead()) {
 			execExecuteSpell(m_currentTarget);
 			m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+			m_isReady = true;
 		}
 	}
 }
 
 void SpellCreator::executeSpell(const sf::Vector2f& target) {
+	m_isReady = false;
 	if (m_spellData.castingTime > sf::Time::Zero) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_currentTarget = target;
@@ -43,6 +45,7 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 
 	execExecuteSpell(target);
 	m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+	m_isReady = true;
 }
 
 void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {
@@ -104,7 +107,7 @@ void SpellCreator::addReflectModifier(int level) {
 }
 
 void SpellCreator::addStrengthModifier(int level) {
-	m_spellData.strength += level;
+	m_spellData.ccStrength += level;
 }
 
 const SpellData& SpellCreator::getSpellData() const {
@@ -119,8 +122,12 @@ void SpellCreator::updateDamageAndHeal(SpellData& bean) const {
 	updateDamageAndHeal(bean, m_attributeData, true);
 }
 
+bool SpellCreator::isReady() const {
+	return m_isReady;
+}
+
 int SpellCreator::getStrengthModifierValue() const {
-	return m_spellData.strength;
+	return m_spellData.ccStrength;
 }
 
 std::string SpellCreator::getStrengthModifierName() const {

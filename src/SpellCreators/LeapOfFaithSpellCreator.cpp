@@ -7,7 +7,7 @@ LeapOfFaithSpellCreator::LeapOfFaithSpellCreator(const SpellData& spellData, Lev
 void LeapOfFaithSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	removeOldSpell();
 	SpellData spellData = m_spellData;
-	float gravityScale = 1.f / (1.f + 0.5f * m_strength);
+	float gravityScale = 1.f / (1.f + 0.5f * m_spellData.strength);
 	LeapOfFaithSpell* newSpell = new LeapOfFaithSpell(gravityScale);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
@@ -25,7 +25,7 @@ void LeapOfFaithSpellCreator::addDurationModifier(int level) {
 }
 
 void LeapOfFaithSpellCreator::addStrengthModifier(int level) {
-	m_strength += level;
+	m_spellData.strength += level;
 }
 
 void LeapOfFaithSpellCreator::removeOldSpell() {
@@ -44,7 +44,7 @@ void LeapOfFaithSpellCreator::removeOldSpell() {
 }
 
 int LeapOfFaithSpellCreator::getStrengthModifierValue() const {
-	return m_strength;
+	return m_spellData.strength;
 }
 
 std::string LeapOfFaithSpellCreator::getStrengthModifierName() const {

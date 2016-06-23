@@ -39,6 +39,12 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_inina", "what_doing") and DL:isQuestState("missing_paladin", "void")) then
 			DL:addChoice(30, "DL_Choice_MissingPaladin") -- Maybe I could look for the paladin?
 		end
+		if (DL:isQuestState("missing_paladin", "completed") and DL:hasItem("do_bloodnotemarcus", 1) and DL:isQuestState("cavern_beast", "void")) then
+			DL:addChoice(70, "DL_Choice_IFoundNote") -- Paladin Marcus has carried this note with him... (Show note)
+		end
+		if (DL:isQuestState("cavern_beast", "started") and DL:isQuestComplete("cavern_beast")) then
+			DL:addChoice(80, "DL_Choice_BeastSlain") -- I've slain the beast in the caverns.
+		end
 		if (not DL:isQuestState("missing_paladin", "void") and not DL:isQuestState("missing_paladin", "completed")) then
 			DL:addChoice(40, "DL_Choice_AboutPaladin") -- About the missing paladin...
 		end
@@ -212,6 +218,41 @@ loadDialogue = function(DL)
 			DL:createNPCNode(45, -2, "DL_Inina_FoundPaladin2") -- We really need to find out what's behind all this.
 			DL:addNode()
 
+		end
+		
+		if (DL:isQuestState("missing_paladin", "completed") and DL:hasItem("do_bloodnotemarcus", 1) and DL:isQuestState("cavern_beast", "void")) then
+			
+			DL:createNPCNode(70, 71, "DL_Inina_FoundNote") -- Oh thank you. Let me see... (Reads the note carefully)
+			DL:addNode()
+			
+			DL:createNPCNode(71, 72, "DL_Inina_FoundNote2") -- It seems like he tried to write about a beast that transforms humans into wolves? Maybe that thing is also responsible for his strange aura here. 
+			DL:addNode()
+			
+			DL:createNPCNode(72, -2, "DL_Inina_FoundNote3") -- As you already got out of the cave alive, maybe you got a chance to hunt that beast down and slay it. I would offer you my undying gratitude and a great reward, of course.
+			DL:changeQuestState("cavern_beast", "started")
+			DL:addNode()
+		
+		end
+		
+		if (DL:isQuestState("cavern_beast", "started") and DL:isQuestComplete("cavern_beast")) then
+			
+			DL:createNPCNode(80, 81, "DL_Inina_BeastSlain") -- Yes, I've already felt it. The evil magic that was corrupting the shrine is gone.
+			DL:addNode()
+			
+			DL:createNPCNode(81, 82, "DL_Inina_BeastSlain2") -- You did us a great favour. Here, take this pouch filled with gold as a reward.  
+			DL:changeQuestState("cavern_beast", "completed")
+			DL:addItem('co_mediumpouch', 1)
+			DL:addReputationProgress("cleric", 10)			
+			DL:addNode()
+			
+			DL:createNPCNode(82, 83, "DL_Inina_BeastSlain3") -- I'm greatly impressed by your skills, mage. You may be a worthy initiant for the Clerics. Take this letter of recommendation with you and bring it to General Lloyd once you're in the city, he is the leader of the Paladins.
+			DL:changeQuestState("clerics_recommendation", "started")
+			DL:addItem("qe_recommendationletter", 1)
+			DL:addNode()
+			
+			DL:createNPCNode(83, -2, "DL_Inina_BeastSlain4") -- May the Eternal Light guide you.
+			DL:addNode()
+			
 		end
 		
 		if (not DL:isConditionFulfilled("npc_inina", "learned_light")) then

@@ -5,6 +5,7 @@
 #include "Spells/IceBallSpell.h"
 #include "Spells/ChopSpell.h"
 #include "Spells/LeechSpell.h"
+#include "Spells/TransformBeamSpell.h"
 #include "Spells/ReturningProjectileSpell.h"
 #include "Spells/BoomerangSpell.h"
 #include "SpellCreators/DivineShieldSpellCreator.h"
@@ -207,6 +208,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 		break;
 	case SpellID::Buff:
 		creator = new BuffSpellCreator(data, owner);
+		break;
+	case SpellID::TransformBeam:
+		creator = new DefaultSpellCreator<TransformBeamSpell>(data, owner);
 		break;
 	default:
 		return nullptr;
@@ -460,7 +464,7 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.needsTarget = true;
 	aureola.duration = sf::seconds(1.f);
 	aureola.isStunning = true;
-	aureola.strength = 1;
+	aureola.ccStrength = 1;
 	aureola.damage = 10;
 	aureola.heal = 10;
 	aureola.speed = 300.f;
@@ -490,7 +494,7 @@ SpellData SpellData::getFearSpellData() {
 	fear.needsTarget = true;
 	fear.speed = 300.f;
 	fear.isFearing = true;
-	fear.strength = 1;
+	fear.ccStrength = 1;
 
 	fear.countModifierAddition = 1;
 	fear.reflectModifierAddition = 1;
@@ -556,6 +560,8 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.isDynamicTileEffect = true;
 	windGust.damageType = DamageType::Ice;
 	windGust.damagePerSecond = 5;
+	windGust.ccStrength = 1;
+	windGust.strength = 1;
 
 	windGust.damageModifierAddition = 5;
 	windGust.rangeModifierAddition = 50.f;
@@ -605,7 +611,7 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.needsTarget = true;
 	icyAmbush.damage = 100;
 	icyAmbush.isStunning = true;
-	icyAmbush.strength = 1;
+	icyAmbush.ccStrength = 1;
 	
 	icyAmbush.damageModifierAddition = 50;
 	icyAmbush.reflectModifierAddition = 1;
@@ -697,6 +703,7 @@ SpellData SpellData::getLeapOfFaithSpellData() {
 	leapOfFaith.activeDuration = leapOfFaith.duration;
 	leapOfFaith.attachedToMob = true;
 	leapOfFaith.fightAnimation = GameObjectState::VOID;
+	leapOfFaith.strength = 1;
 
 	leapOfFaith.durationModifierAddition = sf::seconds(10);
 
@@ -734,6 +741,7 @@ SpellData SpellData::getInvisibilitySpellData() {
 	invisibility.duration = invisibility.activeDuration;
 	invisibility.attachedToMob = true;
 	invisibility.fightAnimation = GameObjectState::VOID;
+	invisibility.strength = 1;
 
 	invisibility.durationModifierAddition = sf::seconds(5);
 
@@ -755,6 +763,7 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.speed = 50.f;
 	ghostForm.attachedToMob = true;
 	ghostForm.fightAnimation = GameObjectState::VOID;
+	ghostForm.strength = 10; // additional chop damage
 
 	ghostForm.durationModifierAddition = sf::seconds(5);
 	ghostForm.speedModifierAddition = 50.f;
@@ -778,7 +787,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.damagePerSecond = 5;
 	shadowTrap.duration = sf::seconds(3);
 	shadowTrap.isStunning = true;
-	shadowTrap.strength = 1;
+	shadowTrap.ccStrength = 1;
 	shadowTrap.fightAnimation = GameObjectState::VOID;
 
 	shadowTrap.damageModifierAddition = 5;
@@ -798,7 +807,7 @@ SpellData SpellData::getSummonGargoyleSpellData() {
 	summonGargoyle.damageType = DamageType::Physical;
 	summonGargoyle.damage = 0;
 	summonGargoyle.duration = sf::seconds(20);
-	summonGargoyle.strength = 1;
+	summonGargoyle.ccStrength = 1;
 	summonGargoyle.fightAnimation = GameObjectState::VOID;
 
 	summonGargoyle.damageModifierAddition = 10;

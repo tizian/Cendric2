@@ -15,8 +15,6 @@ public:
 	int getStrengthModifierValue() const override;
 
 private:
-	int m_strength = 1;
-
 	void addStrengthModifier(int level) override;
 	void addDurationModifier(int level) override;
 	void addRangeModifier(int level) override;

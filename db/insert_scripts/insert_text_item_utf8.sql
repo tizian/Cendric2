@@ -104,11 +104,8 @@ Verwandelt...
 
 	Es chömed immer me
 		umzingled, ich mun kämpfe.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item', 'Sealed Letter','Versiegelter Brief','Versiglete Brief');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_text', 'Dear king
-bla bla blaaaaaaaa bla blaaaa bla bla and you better bla bla soon! CU your enemy.','Lieber König
-blabla blaaaaaaaa bla bla bla lblaaaaa bla und sowieso','Liebe König
-bla blubb bla bla bli bla blaaaaaaaa bla ende.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_recommendationletter', 'item', 'Letter of Recommendation','Empfehlungsschreiben','Empfehligsschriibe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_recommendationletter', 'item_desc', 'A letter of recommendation from the High Priestess Inina. It is sealed.','Ein Empfehlungsschreiben der Hohepriesterin Inina. Es ist versiegelt.','Es Empfehligsschriibe vode Hohepriesterin Inina. Es isch versiglet.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_rope', 'item', 'Rope','Seil','Seil');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_rope', 'item_desc', 'A strong coil of hemp rope.','Ein starkes Seil, aus Hanf gefertigt.','Es starchs Hanfseil.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item', 'Ice Staff','Eisstab','Iisstab');
@@ -156,7 +153,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_goldengoblet', 'item_desc', 'A golden goblet, some merchants might pay a lot for this.','Ein goldener Pokal, manche Händler würden viel dafür bezahlen.','En goldige Pokal, gwüssi Händler zahled sicher vil defür.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item_desc', 'Heals wounds.','Heilt Wunden.','Heilt Wunde.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item_desc', 'Feels ice cold.','Fühlt sich eiskalt an.','So chalt we Iis.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_letter', 'item_desc', 'Sealed.','Versiegelt.','Versiglet.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_silkweed', 'item', 'Silkweed','Seidenkraut','Sidechrütli');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_silkweed', 'item_desc', 'Will hopefully bring my memories back when brewed into a potion.','Ein Trank daraus wird hoffentlich meine Erinnerungen zurückbringen.','En Trank mit dem wird hoffentlich mini Erinnerige zruggbringe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_proofmonsterdeath', 'item', 'Proof of the Monster''s Death','Beweis für den Tod des Monsters','Bewiis für de Tod vom Monster');

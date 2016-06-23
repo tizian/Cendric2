@@ -108,8 +108,6 @@ protected:
 	int m_objectID = -1;
 	bool m_isUnique = false;
 	bool m_isLooted = false;
-	// spells of these damage types won't hurt. default is empty.
-	std::vector<DamageType> m_immuneDamageTypes;
 
 	// AI
 	EnemyState m_enemyState = EnemyState::Idle;
@@ -134,11 +132,12 @@ protected:
 	virtual sf::Time getConfiguredWaitingTime() const;
 	virtual sf::Time getConfiguredChasingTime() const;
 
+protected:
+	InteractComponent* m_interactComponent;
+
 private:
 	sf::RectangleShape m_hpBar;
 	static const float HP_BAR_HEIGHT;
-
-	InteractComponent* m_interactComponent;
 
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;

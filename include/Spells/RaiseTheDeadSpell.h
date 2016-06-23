@@ -5,7 +5,7 @@
 
 class RaiseTheDeadSpell : public Spell {
 public:
-	RaiseTheDeadSpell(int strength);
+	RaiseTheDeadSpell() : Spell() {};
 	virtual ~RaiseTheDeadSpell();
 
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
@@ -18,8 +18,6 @@ protected:
 	bool checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) override;
 
 private:
-	int m_strength;
-
 	particles::TextureParticleSystem* m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
 	particles::ParticleSpawner* m_particleSpawner;

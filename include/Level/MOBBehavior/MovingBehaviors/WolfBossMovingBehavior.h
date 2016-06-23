@@ -12,11 +12,12 @@ public:
 	void execHandleMovementInput() override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void updateAnimation() override;
+	void setFacingRight(bool value) override;
 
 private:
 	sf::Time m_tripOverTime = sf::Time::Zero;
 	sf::Time m_layingTime = sf::Time::Zero;
 	sf::Time m_standupTime = sf::Time::Zero;
 
-	int m_chargeMovingDirection = 0;
+	int m_chargeMovingDirection = 1;
 };

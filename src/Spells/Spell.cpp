@@ -90,7 +90,7 @@ void Spell::execOnHit(LevelMovableGameObject* target) {
 		return;
 	}
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() >= m_data.strength) {
+		if (enemy->getMentalStrength() >= m_data.ccStrength) {
 			return;
 		}
 	}
@@ -285,6 +285,14 @@ int Spell::getDamagePerSecond() const {
 
 int Spell::getHeal() const {
 	return m_data.heal;
+}
+
+int Spell::getCCStrength() const {
+	return m_data.ccStrength;
+}
+
+int Spell::getStrength() const {
+	return m_data.strength;
 }
 
 sf::Vector2f Spell::rotateVector(const sf::Vector2f& vec, float angle) {

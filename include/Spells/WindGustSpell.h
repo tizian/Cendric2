@@ -6,7 +6,7 @@
 
 class WindGustSpell : public Spell {
 public:
-	WindGustSpell(int strength);
+	WindGustSpell() : Spell() {};
 	virtual ~WindGustSpell();
 	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
@@ -19,8 +19,8 @@ public:
 
 private:
 	float m_pushAcceleration;
-	int m_strength;
-	bool m_hasDamaged = false; // this spell only applies its dot once.
+	DamageType m_damageType;
+	sf::Time m_timeUntilDamage = sf::Time::Zero; // this spell only applies its dot once per second
 	particles::TextureParticleSystem* m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
 	particles::ParticleSpawner* m_particleSpawner;

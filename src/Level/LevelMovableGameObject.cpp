@@ -221,6 +221,18 @@ void LevelMovableGameObject::setDead() {
 	g_resourceManager->playSound(m_deathSound, getDeathSoundPath(), true);
 }
 
+int LevelMovableGameObject::getActiveSpellCount() const {
+	int count = 0;
+	for (auto& go : *m_screen->getObjects(GameObjectType::_Spell)) {
+		if (Spell* spell = dynamic_cast<Spell*>(go)) {
+			if (spell->getOwner() == this) {
+				++count;
+			}
+		}
+	}
+	return count;
+}
+
 void LevelMovableGameObject::clearSpells(bool clearAll) {
 	for (auto& go : *m_screen->getObjects(GameObjectType::_Spell)) {
 		if (Spell* spell = dynamic_cast<Spell*>(go)) {

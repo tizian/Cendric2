@@ -59,6 +59,7 @@ public:
 	AttackingBehavior* getAttackingBehavior() const;
 	MovingBehavior* getMovingBehavior() const;
 	const AttributeData* getAttributes() const;
+	int getActiveSpellCount() const;
 	const Level* getLevel() const;
 	bool isFacingRight() const;
 	bool isUpsideDown() const;

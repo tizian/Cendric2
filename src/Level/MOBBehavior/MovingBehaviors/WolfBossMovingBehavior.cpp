@@ -11,13 +11,21 @@ WolfBossMovingBehavior::WolfBossMovingBehavior(Enemy* enemy) :
 }
 
 void WolfBossMovingBehavior::execHandleMovementInput() {
-	if (m_enemy->getState() == GameObjectState::Casting && m_chargeMovingDirection == 0) {
-		m_chargeMovingDirection = m_movingDirectionX;
+	if (m_enemy->getState() == GameObjectState::Walking && m_enemy->getActiveSpellCount() == 0) {
+		// we hit our target.
+		setReady();
+		m_movingDirectionX = 0;
+		m_enemy->setState(GameObjectState::Idle);
+	}
+	else if (m_enemy->getState() != GameObjectState::Walking) {
 		m_movingDirectionX = 0;
 	}
-	else if (m_enemy->getState() == GameObjectState::Walking && m_movingDirectionX == 0) {
+	else {
 		m_movingDirectionX = m_chargeMovingDirection;
-		m_chargeMovingDirection = 0;
+	}
+
+	if (m_enemy->getState() == GameObjectState::Fighting3) {
+		m_nextIsFacingRight = (m_mainChar->getCenter().x > m_enemy->getCenter().x);
 	}
 }
 
@@ -61,6 +69,10 @@ void WolfBossMovingBehavior::update(const sf::Time& frameTime) {
 	WalkingBehavior::update(frameTime);
 }
 
+void WolfBossMovingBehavior::setFacingRight(bool value) {
+	WalkingBehavior::setFacingRight(value);
+	m_chargeMovingDirection = m_movingDirectionX;
+}
 
 void WolfBossMovingBehavior::updateAnimation() {
 	// calculate new game state and set animation.

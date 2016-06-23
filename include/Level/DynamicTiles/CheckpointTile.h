@@ -15,7 +15,7 @@ public:
 	void onHit(Spell* spell) override {};
 	void onHit(LevelMovableGameObject* mob) override {};
 
-	void setActive(bool active);
+	void setActive(bool active, bool playSound = true);
 
 private:
 	std::string getSpritePath() const override;

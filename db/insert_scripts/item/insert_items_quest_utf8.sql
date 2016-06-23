@@ -16,3 +16,10 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_proofmonsterdeath', 'quest', 300, 300, -1);
 
+-- Letter of Recommendation
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_recommendationletter', 'quest', 200, 0, -1);
+-- Levelitem not used here, values are commented out for later use.
+--INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_recommendationletter', 0, -30, 50, 20);
+--INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_recommendationletter', 1, 150, 0, 50, 50);
+

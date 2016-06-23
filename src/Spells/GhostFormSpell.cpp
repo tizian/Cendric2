@@ -87,10 +87,10 @@ void GhostFormSpell::loadParticleSystem(float startSpeed) {
 	m_particleSpawner = spawner;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 4.f;
-	sizeGen->maxStartSize = 10.f;
-	sizeGen->minEndSize = 1.f;
-	sizeGen->maxEndSize = 4.f;
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 20.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 20.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(89, 222, 100, 200);
@@ -102,6 +102,8 @@ void GhostFormSpell::loadParticleSystem(float startSpeed) {
 	velGen->minStartSpeed = startSpeed / 2.f - 10.f;
 	velGen->maxStartSpeed = startSpeed / 2.f + 10.f;
 	m_velGenerator = velGen;
+
+	m_ps->addGenerator<particles::DirectionDefinedRotationGenerator>();
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
 	timeGen->minTime = 0.5f;

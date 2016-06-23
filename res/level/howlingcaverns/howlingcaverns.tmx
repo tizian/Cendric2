@@ -1037,7 +1037,7 @@
   <object id="49" x="4728.5" y="521.5" width="92.5" height="117">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="level entry" value="res/level/boss_khajag/boss_khajag.tmx,150,450"/>
+    <property name="level entry" value="res/level/boss_khajag/boss_khajag.tmx,150,270"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

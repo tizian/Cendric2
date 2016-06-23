@@ -38,6 +38,8 @@ public:
 	int getDamage() const;
 	int getDamagePerSecond() const;
 	int getHeal() const;
+	int getCCStrength() const;
+	int getStrength() const;
 	SpellID getSpellID() const;
 	SpellType getSpellType() const;
 	DamageType getDamageType() const;

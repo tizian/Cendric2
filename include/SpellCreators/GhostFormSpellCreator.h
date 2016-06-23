@@ -18,6 +18,4 @@ public:
 protected:
 	void addStrengthModifier(int level) override;
 	void addDurationModifier(int level) override;
-
-	int m_additionalChopDamage;
 };

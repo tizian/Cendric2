@@ -45,7 +45,8 @@ struct SpellData {
 	float speed;
 	int count;
 	float range;
-	int strength; // used for the isStunning and isFearing variables.
+	int strength; // used for special values, such as wind force or lockpick strength.
+	int ccStrength; // used for the isStunning and isFearing variables. (crowd control)
 	sf::Time duration; // duration of an effect of a spell, for example the fear duration (fear spell)
 	sf::Time activeDuration;	// the duration for which a spell is active before it gets disposed. 
 								//This value is not displayed to the user in contrast to the duration.
@@ -128,6 +129,7 @@ const struct SpellData EMPTY_SPELL =
 	0.f,
 	1,
 	0.f,
+	1,
 	-1,
 	sf::Time::Zero,
 	sf::Time::Zero,

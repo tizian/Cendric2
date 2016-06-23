@@ -15,7 +15,5 @@ public:
 	void execExecuteSpell(const sf::Vector2f& target) override;
 
 private:
-	int m_strength = 1;
-
 	void addStrengthModifier(int level) override;
 };

@@ -25,13 +25,16 @@ public:
 	virtual void execExecuteSpell(const sf::Vector2f& target) = 0;
 	const SpellData& getSpellData() const;
 	void setSpellAllied(bool allied);
+	
 
 	// used by the descriptions to show what this creator does if it has a strength modifier
 	// default returns empty string
 	virtual std::string getStrengthModifierName() const;
 	// used by the descriptions to return strength modifier value
-	// default returns 0
+	// default returns the ccStrength
 	virtual int getStrengthModifierValue() const;
+	// has the current spell been cast and the spell creator can be used again?
+	bool isReady() const;
 
 	// updates the spells damage and heal, using the attribute data. It adds damage/heal and uses some rng and calculates critical hits if told so
 	static void updateDamageAndHeal(SpellData& bean, const AttributeData* attributes, bool includeRngAndCrit);
@@ -56,6 +59,7 @@ protected:
 	LevelMovableGameObject* m_owner = nullptr;
 
 private:
+	bool m_isReady = true;
 	sf::Time m_currentCastingTime = sf::Time::Zero;
 	sf::Vector2f m_currentTarget;
 };

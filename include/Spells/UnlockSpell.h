@@ -5,11 +5,6 @@
 
 class UnlockSpell : public Spell {
 public:
-	UnlockSpell(int strength);
+	UnlockSpell() : Spell() {};
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
-
-	int getStrength() const;
-
-private:
-	int m_strength;
 };

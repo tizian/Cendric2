@@ -2,11 +2,10 @@
 #include "Screens/LevelScreen.h"
 
 GhostFormSpellCreator::GhostFormSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
-	m_additionalChopDamage = 10;
 }
 
 int GhostFormSpellCreator::getStrengthModifierValue() const {
-	return m_additionalChopDamage;
+	return m_spellData.strength;
 }
 
 std::string GhostFormSpellCreator::getStrengthModifierName() const {
@@ -16,7 +15,7 @@ std::string GhostFormSpellCreator::getStrengthModifierName() const {
 void GhostFormSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	AttributeData additionalDamage = ZERO_ATTRIBUTES;
-	additionalDamage.damagePhysical = m_additionalChopDamage;
+	additionalDamage.damagePhysical = m_spellData.strength;
 	GhostFormSpell* newSpell = new GhostFormSpell(additionalDamage);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
@@ -27,7 +26,7 @@ void GhostFormSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 }
 
 void GhostFormSpellCreator::addStrengthModifier(int level) {
-	m_additionalChopDamage += level * 10;
+	m_spellData.strength += level * 10;
 }
 
 void GhostFormSpellCreator::addDurationModifier(int level) {

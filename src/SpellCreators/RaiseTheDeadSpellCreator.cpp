@@ -8,13 +8,13 @@ void RaiseTheDeadSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 
-	RaiseTheDeadSpell* newSpell = new RaiseTheDeadSpell(m_strength);
+	RaiseTheDeadSpell* newSpell = new RaiseTheDeadSpell();
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 }
 
 int RaiseTheDeadSpellCreator::getStrengthModifierValue() const {
-	return m_strength;
+	return m_spellData.strength;
 }
 
 std::string RaiseTheDeadSpellCreator::getStrengthModifierName() const {
@@ -27,7 +27,7 @@ void RaiseTheDeadSpellCreator::addRangeModifier(int level) {
 }
 
 void RaiseTheDeadSpellCreator::addStrengthModifier(int level) {
-	m_strength += level;
+	m_spellData.strength += level;
 }
 
 void RaiseTheDeadSpellCreator::addDurationModifier(int level) {

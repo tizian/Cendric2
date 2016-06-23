@@ -60,7 +60,7 @@ void GargoyleEnemy::loadSpells() {
 	fireBallSpell.speed = 300.f;
 	fireBallSpell.count = m_spellCount;
 	fireBallSpell.isStunning = true;
-	fireBallSpell.strength = m_spellStrength;
+	fireBallSpell.ccStrength = m_spellStrength;
 	fireBallSpell.isDynamicTileEffect = !m_isSummoned;
 	fireBallSpell.fightingTime = sf::milliseconds(500);
 	fireBallSpell.spellOffset = sf::Vector2f(30.f, 60.f);

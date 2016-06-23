@@ -48,7 +48,7 @@ void CheckpointTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 
 	if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
-		setActive(true);
+		setActive(true, false);
 	}
 }
 
@@ -90,9 +90,9 @@ void CheckpointTile::onLeftClick() {
 	setActive(true);
 }
 
-void CheckpointTile::setActive(bool active) {
+void CheckpointTile::setActive(bool active, bool playSound) {
 	setState(active ? GameObjectState::Active : GameObjectState::Idle);
-	if (active) {
+	if (active && playSound) {
 		g_resourceManager->playSound(m_sound, getSoundPath());
 	} 
 	m_interactComponent->setInteractable(!active);

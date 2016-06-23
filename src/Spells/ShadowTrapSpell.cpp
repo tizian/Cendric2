@@ -27,7 +27,7 @@ void ShadowTrapSpell::execOnHit(LevelMovableGameObject *target) {
 		return;
 	}
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() >= m_data.strength) {
+		if (enemy->getMentalStrength() >= m_data.ccStrength) {
 			return;
 		}
 	}

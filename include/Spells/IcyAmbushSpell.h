@@ -5,7 +5,7 @@
 
 class IcyAmbushSpell : public Spell {
 public:
-	IcyAmbushSpell(int strength);
+	IcyAmbushSpell() : Spell() {};
 	virtual ~IcyAmbushSpell();
 	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
@@ -15,8 +15,6 @@ public:
 	void execOnHit(LevelMovableGameObject* target) override;
 
 private:
-	int m_strength;
-
 	particles::TextureParticleSystem* m_ps;
 	particles::ParticleSpawner* m_particleSpawner;
 

@@ -2,11 +2,10 @@
 #include "Screens/LevelScreen.h"
 
 InvisibilitySpellCreator::InvisibilitySpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
-	m_invisibilityLevel = 1;
 }
 
 int InvisibilitySpellCreator::getStrengthModifierValue() const {
-	return m_invisibilityLevel;
+	return m_spellData.strength;
 }
 
 std::string InvisibilitySpellCreator::getStrengthModifierName() const {
@@ -20,13 +19,13 @@ void InvisibilitySpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	m_screen->addObject(newSpell);
 	LevelMainCharacter* mainChar = dynamic_cast<LevelMainCharacter*>(m_owner);
 	if (mainChar != nullptr) {
-		mainChar->setInvisibilityLevel(m_invisibilityLevel);
+		mainChar->setInvisibilityLevel(m_spellData.strength);
 		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, ZERO_ATTRIBUTES);
 	}
 }
 
 void InvisibilitySpellCreator::addStrengthModifier(int level) {
-	m_invisibilityLevel += level;
+	m_spellData.strength += level;
 }
 
 void InvisibilitySpellCreator::addDurationModifier(int level) {

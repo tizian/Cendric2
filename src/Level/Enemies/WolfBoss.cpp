@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/WolfBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
+#include "GameObjectComponents/InteractComponent.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -21,11 +22,17 @@ void WolfBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) co
 	// nothing
 }
 
+float WolfBoss::getConfiguredDistanceToHPBar() const {
+	return 60.f;
+}
+
 WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	load(EnemyID::Boss_Wolf);
+	m_interactComponent->setTooltipHeight(70.f);
 	m_isInvincible = true;
+	m_isAlwaysUpdate = true;
 
 	// Make boss hp bar appear from the start
 	m_mainChar->setLastHitEnemy(this);
@@ -35,7 +42,7 @@ void WolfBoss::loadAttributes() {
 	m_attributes.setHealth(200);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 50;
-	m_attributes.critical = 10;
+	m_attributes.critical = 20;
 	m_attributes.calculateAttributes();
 }
 
@@ -43,9 +50,9 @@ void WolfBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 50;
 	chopSpell.activeDuration = sf::seconds(1000.f);
-	chopSpell.cooldown = sf::seconds(10.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 20, 100);
-	chopSpell.spellOffset = sf::Vector2f(80.f, 0.f);
+	chopSpell.cooldown = sf::seconds(0.f);
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 140);
+	chopSpell.spellOffset = sf::Vector2f(-20.f, -50.f);
 	chopSpell.fightingTime = sf::seconds(1000.f);
 	chopSpell.castingTime = sf::seconds(1.f);
 	chopSpell.castingAnimation = GameObjectState::Casting;
@@ -53,22 +60,68 @@ void WolfBoss::loadSpells() {
 
 	m_spellManager->addSpell(chopSpell);
 
+	SpellData transformBeamSpell = SpellData::getSpellData(SpellID::WindGust);
+	transformBeamSpell.id = SpellID::TransformBeam;
+	transformBeamSpell.activeDuration = sf::seconds(2.f);
+	transformBeamSpell.damagePerSecond = 0;
+	transformBeamSpell.damageType = DamageType::VOID;
+	transformBeamSpell.cooldown = sf::seconds(5.f);
+	transformBeamSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
+	transformBeamSpell.spellOffset = sf::Vector2f(40.f, -100.f);
+	transformBeamSpell.fightingTime = sf::seconds(2.f);
+	transformBeamSpell.castingTime = sf::seconds(2.f);
+	transformBeamSpell.castingAnimation = GameObjectState::Casting2;
+	transformBeamSpell.fightAnimation = GameObjectState::Fighting2;
+
+	m_spellManager->addSpell(transformBeamSpell);
+
+	SpellData windgustSpell = SpellData::getSpellData(SpellID::WindGust);
+	windgustSpell.activeDuration = sf::seconds(1000.f);
+	windgustSpell.damagePerSecond = 8;
+	windgustSpell.damageType = DamageType::Ice;
+	windgustSpell.cooldown = sf::seconds(0.f);
+	windgustSpell.boundingBox = sf::FloatRect(0, 0, 1200, 350);
+	windgustSpell.spellOffset = sf::Vector2f(10.f, -250.f);
+	windgustSpell.fightingTime = sf::seconds(1000.f);
+	windgustSpell.castingTime = sf::seconds(1.f);
+	windgustSpell.castingAnimation = GameObjectState::Casting3;
+	windgustSpell.fightAnimation = GameObjectState::Fighting3;
+	windgustSpell.strength = 2;
+
+	m_spellManager->addSpell(windgustSpell);
+
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
 void WolfBoss::handleAttackInput() {
-	// Cendric is too far away to charge.
+	// Cendric is too far away to attack with any attack
 	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 400.f)
 		return;
+
+	if (getState() == GameObjectState::Fighting3 && std::abs(m_mainChar->getPosition().y - getPosition().y) < 100.f) {
+		// cendric has come down.
+		setReady();
+		clearSpells(true);
+		return;
+	}
 
 	// We are doing something else
 	if (getState() != GameObjectState::Idle)
 		return;
 
-	m_spellManager->setCurrentSpell(0); // charge
+	// Cendric is standing too high to reach with charge or beam, so we're going to use windgust
+	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 100.f)
+		m_spellManager->setCurrentSpell(2); // windgust
+	else {
+		if (m_mainChar->isStunned()) {
+			m_spellManager->setCurrentSpell(0); // only charge
+		}
+		else {
+			m_spellManager->setCurrentSpell(rand() % 2); // charge or beam
+		}
+	}
 	
-	if (getCurrentTarget() != nullptr)
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 }
 
 void WolfBoss::update(const sf::Time& frameTime) {
@@ -207,7 +260,7 @@ MovingBehavior* WolfBoss::createMovingBehavior(bool asAlly) {
 	behavior->setApproachingDistance(10000.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(300.f);
-	behavior->setMaxVelocityX(300.f);
+	behavior->setMaxVelocityX(700.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
