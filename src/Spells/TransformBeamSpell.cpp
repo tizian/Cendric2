@@ -54,21 +54,23 @@ bool TransformBeamSpell::getConfiguredRotateSprite() const {
 }
 
 void TransformBeamSpell::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(400, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LONGBLOB));
+	sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BEAM);
+	tex->setSmooth(true);
+	m_ps = new particles::TextureParticleSystem(400, tex);
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 200.f;
 
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::DiskSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2, getPosition().y + getBoundingBox()->height / 2);
-	posGen->radius = 20.f;
+	posGen->radius = 10.f;
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 30.f;
-	sizeGen->maxStartSize = 40.f;
-	sizeGen->minEndSize = 30.f;
-	sizeGen->maxEndSize = 40.f;
+	sizeGen->minStartSize = 200.f;
+	sizeGen->maxStartSize = 500.f;
+	sizeGen->minEndSize = 200.f;
+	sizeGen->maxEndSize = 500.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(100, 146, 186);
@@ -80,17 +82,17 @@ void TransformBeamSpell::loadParticleSystem() {
 	float angle = radToDeg(atan2(direction.y, direction.x) + M_PI * 0.5f);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = angle - 30.f;
-	velGen->maxAngle = angle + 30.f;
-	velGen->minStartSpeed = 200.f;
-	velGen->maxStartSpeed = 400.f;
+	velGen->minAngle = angle - 40.f;
+	velGen->maxAngle = angle + 40.f;
+	velGen->minStartSpeed = 10.f;
+	velGen->maxStartSpeed = 20.f;
 	m_velGenerator = velGen;
 
 	m_ps->addGenerator<particles::DirectionDefinedRotationGenerator>();
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.f;
-	timeGen->maxTime = 2.f;
+	timeGen->minTime = 1.5f;
+	timeGen->maxTime = 1.5f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();

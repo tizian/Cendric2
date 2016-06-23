@@ -20,6 +20,7 @@ public:
 	static const std::string TEX_PARTICLE_CIRCLE;
 	static const std::string TEX_PARTICLE_BLOB;
 	static const std::string TEX_PARTICLE_LONGBLOB;
+	static const std::string TEX_PARTICLE_BEAM;
 	static const std::string TEX_PARTICLE_LIGHT;
 	static const std::string TEX_PARTICLE_SNOWFLAKE;
 	static const std::string TEX_PARTICLE_SMOKE;

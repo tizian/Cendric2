@@ -62,12 +62,12 @@ void WolfBoss::loadSpells() {
 
 	SpellData transformBeamSpell = SpellData::getSpellData(SpellID::WindGust);
 	transformBeamSpell.id = SpellID::TransformBeam;
-	transformBeamSpell.activeDuration = sf::seconds(3.f);
+	transformBeamSpell.activeDuration = sf::seconds(2.f);
 	transformBeamSpell.damagePerSecond = 0;
 	transformBeamSpell.damageType = DamageType::VOID;
 	transformBeamSpell.cooldown = sf::seconds(5.f);
 	transformBeamSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
-	transformBeamSpell.spellOffset = sf::Vector2f(40.f, -100.f);
+	transformBeamSpell.spellOffset = sf::Vector2f(12.f, -120.f);
 	transformBeamSpell.fightingTime = sf::seconds(2.f);
 	transformBeamSpell.castingTime = sf::seconds(2.f);
 	transformBeamSpell.castingAnimation = GameObjectState::Casting2;

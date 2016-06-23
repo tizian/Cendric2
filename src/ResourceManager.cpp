@@ -43,6 +43,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_PARTICLE_CIRCLE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_BLOB, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_LONGBLOB, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_PARTICLE_BEAM, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_LIGHT, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_SNOWFLAKE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_SMOKE, ResourceType::Global);

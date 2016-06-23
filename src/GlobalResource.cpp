@@ -14,6 +14,7 @@ const std::string GlobalResource::FONT_12_SHADOWED = "res/fonts/shadowed_bitmap_
 const std::string GlobalResource::TEX_PARTICLE_CIRCLE = "res/assets/particles/circle.png";
 const std::string GlobalResource::TEX_PARTICLE_BLOB = "res/assets/particles/blob.png";
 const std::string GlobalResource::TEX_PARTICLE_LONGBLOB = "res/assets/particles/longblob.png";
+const std::string GlobalResource::TEX_PARTICLE_BEAM = "res/assets/particles/beam.png";
 const std::string GlobalResource::TEX_PARTICLE_LIGHT = "res/assets/particles/light.png";
 const std::string GlobalResource::TEX_PARTICLE_SNOWFLAKE = "res/assets/particles/snowflake.png";
 const std::string GlobalResource::TEX_PARTICLE_SMOKE = "res/assets/particles/smoke.png";
