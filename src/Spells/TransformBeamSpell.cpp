@@ -58,7 +58,7 @@ void TransformBeamSpell::loadParticleSystem() {
 	tex->setSmooth(true);
 	m_ps = new particles::TextureParticleSystem(400, tex);
 	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 200.f;
+	m_ps->emitRate = 120.f;
 
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::DiskSpawner>();
@@ -73,10 +73,10 @@ void TransformBeamSpell::loadParticleSystem() {
 	sizeGen->maxEndSize = 500.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(100, 146, 186);
-	colGen->maxStartCol = sf::Color(100, 146, 186);
-	colGen->minEndCol = sf::Color(20, 83, 255, 200);
-	colGen->maxEndCol = sf::Color(20, 83, 255, 200);
+	colGen->minStartCol = sf::Color(88, 129, 164, 100);
+	colGen->maxStartCol = sf::Color(88, 129, 164, 100);
+	colGen->minEndCol = sf::Color(16, 68, 209, 20);
+	colGen->maxEndCol = sf::Color(16, 68, 209, 20);
 
 	sf::Vector2f direction = m_mainChar->getCenter() - getCenter();
 	float angle = radToDeg(atan2(direction.y, direction.x) + M_PI * 0.5f);
