@@ -59,6 +59,7 @@ void EnemyDefeatedScreenOverlay::render(sf::RenderTarget& renderTarget) {
 
 void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int gold) {
 	size_t nItems = items.size();
+	if (gold > 0) nItems++;
 
 	float width = nItems * COLUMN_WIDTH + (nItems - 1) * COLUMN_MARGIN;
 	float xOffset = 0.5f * (WINDOW_WIDTH - width);
@@ -82,5 +83,22 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 
 		xOffset += COLUMN_WIDTH + COLUMN_MARGIN;
 		i++;
+	}
+
+	if (gold > 0) {
+		InventorySlot* slot = new InventorySlot("gold", gold);
+		slot->setPosition(sf::Vector2f(xOffset + InventorySlot::ICON_OFFSET, YOFFSET + InventorySlot::ICON_OFFSET));
+		m_items.push_back(slot);
+
+		std::string str = g_textProvider->getText("Gold");
+		if (gold > 1) str += " x" + std::to_string(gold);
+		std::string croppedStr = g_textProvider->getCroppedString(str, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH));
+
+		BitmapText* text = new BitmapText(croppedStr, TextStyle::Shadowed, TextAlignment::Left);
+		text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+		sf::FloatRect bbox = text->getLocalBounds();
+		text->setPosition(xOffset + InventorySlot::SIZE + TEXT_MARGIN,
+			YOFFSET + InventorySlot::ICON_OFFSET + 0.5f * (InventorySlot::SIZE - 2 * InventorySlot::ICON_OFFSET - bbox.height));
+		m_texts.push_back(text);
 	}
 }
