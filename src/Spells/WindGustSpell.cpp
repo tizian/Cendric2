@@ -59,7 +59,7 @@ void WindGustSpell::loadParticleSystem() {
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 10.f, getPosition().y + getBoundingBox()->height / 2);
-	posGen->size = sf::Vector2f(getBoundingBox()->width / 5.f, getBoundingBox()->height);
+	posGen->size = sf::Vector2f(getBoundingBox()->width / 5.f, getBoundingBox()->height * 0.5f);
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();

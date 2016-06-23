@@ -7,6 +7,7 @@
 class WolfBossMovingBehavior : public virtual WalkingBehavior {
 public:
 	WolfBossMovingBehavior(Enemy* enemy);
+	~WolfBossMovingBehavior();
 
 	void update(const sf::Time& frameTime) override;
 	void execHandleMovementInput() override;
@@ -20,4 +21,5 @@ private:
 	sf::Time m_standupTime = sf::Time::Zero;
 
 	int m_chargeMovingDirection = 1;
+	sf::Sound m_sound;
 };

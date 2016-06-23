@@ -4,10 +4,17 @@ const sf::Time TRIPOVER_TIME = sf::milliseconds(500);
 const sf::Time LAYING_TIME = sf::seconds(5.f);
 const sf::Time STANDUP_TIME = sf::milliseconds(500);
 
+const std::string CRASH_SOUNDPATH = "res/sound/mob/khajag_crash.ogg";
+
 WolfBossMovingBehavior::WolfBossMovingBehavior(Enemy* enemy) :
 	MovingBehavior(enemy),
 	EnemyMovingBehavior(enemy),
 	WalkingBehavior(enemy) {
+	g_resourceManager->loadSoundbuffer(CRASH_SOUNDPATH, ResourceType::Unique, this);
+}
+
+WolfBossMovingBehavior::~WolfBossMovingBehavior() {
+	g_resourceManager->deleteUniqueResources(this);
 }
 
 void WolfBossMovingBehavior::execHandleMovementInput() {
@@ -46,6 +53,7 @@ void WolfBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		m_tripOverTime = TRIPOVER_TIME;
 		m_enemy->clearSpells(true);
 		m_fightAnimationTime = sf::Time::Zero;
+		g_resourceManager->playSound(m_sound, CRASH_SOUNDPATH, true);
 	}
 }
 
