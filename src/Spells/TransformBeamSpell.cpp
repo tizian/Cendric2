@@ -25,6 +25,16 @@ void TransformBeamSpell::update(const sf::Time& frameTime) {
 	if (m_hasStunned)
 		return;
 
+	// this spell only hurts after a certain time that is dependant on the distance to the main char
+	float distToMainChar = dist(m_mainChar->getCenter(), getCenter()); 
+	m_timeSinceStart += frameTime;
+
+	if (m_ps->emitRate > 0 && m_timeSinceStart > sf::seconds(0.5f)) {
+		m_ps->emitRate = 0;
+	}
+	if (m_timeSinceStart.asSeconds() < distToMainChar / 400.f) // the constant is the velocity of the spells fastest particles
+		return;
+
 	bool isLeftOfMainChar = m_mainChar->getPosition().x > getPosition().x;
 	if (m_mainChar->isFacingRight() ^ isLeftOfMainChar) {
 		// he's looking into the direction of the spell, stun him (for eternity)
@@ -55,10 +65,10 @@ void TransformBeamSpell::loadParticleSystem() {
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 50.f;
-	sizeGen->maxStartSize = 80.f;
-	sizeGen->minEndSize = 50.f;
-	sizeGen->maxEndSize = 80.f;
+	sizeGen->minStartSize = 30.f;
+	sizeGen->maxStartSize = 40.f;
+	sizeGen->minEndSize = 30.f;
+	sizeGen->maxEndSize = 40.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(100, 146, 186);
@@ -70,10 +80,10 @@ void TransformBeamSpell::loadParticleSystem() {
 	float angle = radToDeg(atan2(direction.y, direction.x) + M_PI * 0.5f);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = angle - 5.f;
-	velGen->maxAngle = angle + 5.f;
-	velGen->minStartSpeed = 500.f;
-	velGen->maxStartSpeed = 1000.f;
+	velGen->minAngle = angle - 30.f;
+	velGen->maxAngle = angle + 30.f;
+	velGen->minStartSpeed = 200.f;
+	velGen->maxStartSpeed = 400.f;
 	m_velGenerator = velGen;
 
 	m_ps->addGenerator<particles::DirectionDefinedRotationGenerator>();

@@ -19,6 +19,7 @@ public:
 
 private:
 	bool m_hasStunned = false;
+	sf::Time m_timeSinceStart = sf::Time::Zero;
 	particles::TextureParticleSystem* m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;
 	particles::ParticleSpawner* m_particleSpawner;

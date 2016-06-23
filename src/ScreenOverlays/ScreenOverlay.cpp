@@ -135,8 +135,8 @@ ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questI
 	return questScreenOverlay;
 }
 
-ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& locationKey) {
-	ScreenOverlay* locationScreenOverlay = new ScreenOverlay(sf::seconds(1.f), sf::seconds(0.5f));
+ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& locationKey, bool isBossLevel) {
+	ScreenOverlay* locationScreenOverlay = new ScreenOverlay(sf::seconds(isBossLevel ? 2.f : 1.f), sf::seconds(isBossLevel? 1.f : 0.5f));
 
 	locationScreenOverlay->setTitle(locationKey, "location");
 	return locationScreenOverlay;
