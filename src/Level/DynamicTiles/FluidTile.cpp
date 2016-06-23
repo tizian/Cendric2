@@ -223,7 +223,7 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 		float scale = 1.f - distance / WINDOW_WIDTH;
 		scale /= 2.f;
 
-		g_resourceManager->playSound(*m_soundMap.at(source), m_data.soundPath, false, scale);
+		g_resourceManager->playSound(*m_soundMap.at(source), m_data.soundPath, false, false, scale);
 	}
 }
 

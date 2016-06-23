@@ -234,7 +234,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	}
 }
 
-void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, bool force, float scale) {
+void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, bool force, bool loop, float scale) {
 	if (!m_configuration.isSoundOn || filename.empty()) return;
 	if (m_soundBuffers.find(filename) == m_soundBuffers.end()) {
 		g_logger->logError("ResourceManager", "Cannot play sound: '" + filename + "', sound not loaded!");
@@ -246,6 +246,7 @@ void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, b
 	sound.setBuffer(*getSoundBuffer(filename));
 	scale = clamp(scale, 0.f, 1.f);
 	sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);
+	sound.setLoop(loop);
 	sound.play();
 }
 

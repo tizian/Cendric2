@@ -15,8 +15,8 @@ void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, con
 
 void WindGustSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
-	m_ps->update(frameTime);
 	updateParticleSystemPosition();
+	m_ps->update(frameTime);
 	updateTime(m_timeUntilDamage, frameTime);
 	if (m_timeUntilDamage == sf::Time::Zero) {
 		m_data.damageType = m_damageType;

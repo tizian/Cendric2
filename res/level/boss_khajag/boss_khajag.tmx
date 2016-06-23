@@ -4,6 +4,7 @@
   <property name="backgroundlayers" value="-1.0,res/level/boss_khajag/layer_inf.png"/>
   <property name="dimming" value="0.8"/>
   <property name="name" value="BossKhajag"/>
+  <property name="musicpath" value="res/level/boss_khajag/boss_khajag.ogg"/>
   <property name="onlose" value="level,res/level/howlingcaverns/howlingcaverns.tmx,4610,560"/>
   <property name="onwin" value="map,res/map/meadows/meadows.tmx,1060,1025"/>
   <property name="tilesetpath" value="res/level/boss_khajag/tileset_level_boss_khajag.png"/>

@@ -91,8 +91,8 @@ void TransformBeamSpell::loadParticleSystem() {
 	m_ps->addGenerator<particles::DirectionDefinedRotationGenerator>();
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.5f;
-	timeGen->maxTime = 1.5f;
+	timeGen->minTime = 2.f;
+	timeGen->maxTime = 2.f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();

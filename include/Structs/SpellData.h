@@ -19,6 +19,7 @@ struct SpellData {
 	SpellType spellType;
 	std::string spritesheetPath;
 	std::string soundPath;
+	bool isSoundLooping;
 	sf::IntRect iconTextureRect;
 	sf::Time cooldown;
 	sf::FloatRect boundingBox;
@@ -104,6 +105,7 @@ const struct SpellData EMPTY_SPELL =
 	SpellType::VOID,
 	"",
 	"",
+	false,
 	sf::IntRect(0, 0, 0, 0),
 	sf::seconds(1),
 	sf::FloatRect(0, 0, 0, 0),
