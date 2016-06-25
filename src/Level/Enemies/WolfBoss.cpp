@@ -65,7 +65,7 @@ void WolfBoss::loadSpells() {
 	transformBeamSpell.activeDuration = sf::seconds(2.5f);
 	transformBeamSpell.damagePerSecond = 0;
 	transformBeamSpell.damageType = DamageType::VOID;
-	transformBeamSpell.cooldown = sf::seconds(5.f);
+	transformBeamSpell.cooldown = sf::seconds(10.f);
 	transformBeamSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
 	transformBeamSpell.spellOffset = sf::Vector2f(12.f, -120.f);
 	transformBeamSpell.fightingTime = sf::seconds(3.f);

@@ -26,6 +26,10 @@ public:
 	void notifyConsumableDrop(const SlotClone* item);
 	// consumes a consumable item
 	void consumeItem(const std::string& itemID);
+	// clears the consumabed food fector
+	void clearConsumedFood();
+	// restores the consumed food
+	void restoreConsumedFood();
 	// highlight quickslots
 	void highlightQuickslots(bool highlight);
 	// reloads inventory and quickslot bar
@@ -60,4 +64,7 @@ private:
 
 	// <<< BUFF BAR >>>
 	BuffBar* m_buffBar = nullptr;
+
+	// food items consumed in this run
+	std::map<std::string, int> m_consumedFood;
 };

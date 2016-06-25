@@ -72,6 +72,7 @@ void CheckpointTile::onLeftClick() {
 		if (LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen())) {
 			screen->getCharacterCore()->setLevel(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top), m_level->getID());
 			screen->setTooltipText("CheckpointReached", COLOR_GOOD, true);
+			screen->clearConsumedFood();
 		}
 	}
 	else {

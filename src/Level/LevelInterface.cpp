@@ -92,6 +92,17 @@ void LevelInterface::notifyConsumableDrop(const SlotClone* item) {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
 
+void LevelInterface::clearConsumedFood() {
+	m_consumedFood.clear();
+}
+
+void LevelInterface::restoreConsumedFood() {
+	for (auto& it : m_consumedFood) {
+		getScreen()->getCharacterCore()->notifyItemChange(it.first, it.second);
+	}
+	m_consumedFood.clear();
+}
+
 void LevelInterface::consumeItem(const std::string& itemID) {
 	Item item(itemID);
 	if (item.getType() != ItemType::Consumable) return;
@@ -104,6 +115,11 @@ void LevelInterface::consumeItem(const std::string& itemID) {
 		item.getFoodDuration(),
 		item.getID(),
 		item.getAttributes());
+
+	if (m_consumedFood.find(item.getID()) == m_consumedFood.end()) {
+		m_consumedFood.insert({ item.getID(), 0 });
+	}
+	m_consumedFood[item.getID()] += 1;
 
 	m_screen->notifyItemChange(item.getID(), -1);
 	m_quickSlotBar->reload();

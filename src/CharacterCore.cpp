@@ -471,7 +471,6 @@ void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 	if (itemID.empty()) return;
 	
 	if (itemID.compare("gold") == 0) {
-		g_resourceManager->playSound(m_pickupSound, GlobalResource::SOUND_GUI_PICKUP, true);
 		if (amount < 0) {
 			removeGold(-amount);
 		}
@@ -484,7 +483,6 @@ void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 			removeItem(itemID, -amount);
 		}
 		else {
-			g_resourceManager->playSound(m_pickupSound, GlobalResource::SOUND_GUI_PICKUP, true);
 			addItem(itemID, amount);
 		}
 	}
