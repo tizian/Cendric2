@@ -245,12 +245,15 @@ loadDialogue = function(DL)
 			DL:addReputationProgress("cleric", 10)			
 			DL:addNode()
 			
-			DL:createNPCNode(82, 83, "DL_Inina_BeastSlain3") -- I'm greatly impressed by your skills, mage. You may be a worthy initiant for the Clerics. Take this letter of recommendation with you and bring it to General Lloyd once you're in the city, he is the leader of the Paladins.
+			DL:createNPCNode(82, 83, "DL_Inina_BeastSlain3") -- I'm greatly impressed by your skills, mage. You may be a worthy initiant for the Clerics. (Takes a piece of paper and writes something down.)
+			DL:addNode()
+			
+			DL:createNPCNode(83, 84, "DL_Inina_BeastSlain4") -- Here, take this letter of recommendation with you and bring it to Commander Lloyd once you're in the city, he is the leader of the Paladins.
 			DL:changeQuestState("clerics_recommendation", "started")
 			DL:addItem("qe_recommendationletter", 1)
 			DL:addNode()
 			
-			DL:createNPCNode(83, -2, "DL_Inina_BeastSlain4") -- May the Eternal Light guide you.
+			DL:createNPCNode(84, -2, "DL_Inina_BeastSlain5") -- May the Eternal Light guide you.
 			DL:addNode()
 			
 		end

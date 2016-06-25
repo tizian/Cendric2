@@ -1061,6 +1061,7 @@
     <property name="eq_lightpendant" value="1"/>
     <property name="gold" value="10"/>
     <property name="light" value="50,0,100,100,0.8"/>
+    <property name="mi_feather" value="1"/>
     <property name="open" value=""/>
     <property name="permanent" value=""/>
     <property name="text" value="DeadPaladinMarcus"/>
