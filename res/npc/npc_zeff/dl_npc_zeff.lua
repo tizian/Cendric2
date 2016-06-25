@@ -42,6 +42,9 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("hungry_wolf", "started") and DL:isQuestComplete("hungry_wolf")) then
 		DL:addChoice(90, "DL_Choice_IGotMeat") --  I got some meat for you. I hope that's enough.
 	end
+	if (DL:isQuestState("zeffs_curse", "started") and DL:isQuestComplete("zeffs_curse")) then
+		DL:addChoice(110, "DL_Choice_BeastSlain") -- I found the beast that cursed you in the caverns...
+	end
 
 	DL:addChoice(-1, "DL_Choice_CU") --  See you later.
 	DL:addNode()
@@ -239,6 +242,33 @@ loadDialogue = function(DL)
 		
 		DL:createNPCNode(82, -1, "") -- ...
 		DL:startLevel("res/level/boss_zeff/boss_zeff.tmx", 150, 500)
+		DL:addNode()
+		
+	end
+	
+	if (DL:isQuestState("zeffs_curse", "started") and DL:isQuestComplete("zeffs_curse")) then
+	
+		DL:createCendricNode(110, 111, "DL_Cendric_BeastSlain") -- ... It's dead.
+		DL:addNode()
+	
+		DL:createNPCNode(111, 112, "DL_Zeff_BeastSlain") -- Really? (Stares at his paws) I don't feel any difference. 
+		DL:addConditionProgress("npc_zeff", "beast_slain")
+		DL:addNode()
+		
+		DL:createNPCNode(112, 113, "DL_Zeff_BeastSlain2") -- The curse didn't get worse though lately. Maybe the transformation just stopped...
+		DL:addNode()
+		
+		DL:createChoiceNode(113)
+		DL:addChoice(114, "DL_Choice_StayWolf") -- Yes, it seems like you'll stay a wolf.
+		DL:addChoice(115, "DL_Choice_ReturnToGandria") -- Will you be able to return to Gandria anyway?
+		DL:addNode()
+		
+		DL:createNPCNode(114, 115, "DL_Zeff_StayWolf") -- I guess so. If my mind keeps clear, I think I can even get to like that form. But when I think about returning home...
+		DL:addNode()
+		
+		DL:createNPCNode(115, -2, "DL_Zeff_ReturningHome") -- I'm afraid, I still can't get past the guards. Maybe you could try to tell them what happened and convince them to let me in? When I get my workshop back, I'm sure I could craft you a piece of armour as a reward.
+		DL:changeQuestState("zeffs_curse", "completed")
+		DL:changeQuestState("zeff_returns", "started")
 		DL:addNode()
 		
 	end

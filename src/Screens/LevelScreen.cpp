@@ -90,6 +90,10 @@ void LevelScreen::notifyBossKilled(std::map<std::string, int>& items, int gold) 
 	m_isBossDefeated = true;
 }
 
+void LevelScreen::clearConsumedFood() {
+	dynamic_cast<LevelInterface*>(m_interface)->clearConsumedFood();
+}
+
 void LevelScreen::quicksave() {
 	if (m_isGameOver) return;
 	WorldScreen::quicksave();
@@ -318,6 +322,7 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 		if (m_respawnWaitTime == sf::Time::Zero) return;
 		updateTime(m_respawnWaitTime, frameTime);
 		if (m_respawnWaitTime == sf::Time::Zero) {
+			dynamic_cast<LevelInterface*>(m_interface)->restoreConsumedFood();
 			onBackToCheckpoint();
 		}
 		return;
@@ -350,6 +355,7 @@ void LevelScreen::onBackToMenu() {
 }
 
 void LevelScreen::onBackToCheckpoint() {
+	dynamic_cast<LevelInterface*>(m_interface)->clearConsumedFood();
 	setNextScreen(new LoadingScreen(m_characterCore));
 }
 

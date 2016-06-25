@@ -89,8 +89,12 @@ protected:
 	sf::Shader m_lightLayerShader;
 	sf::Shader m_foregroundLayerShader;
 
+	// weather
 	WeatherSystem* m_weatherSystem = nullptr;
 	void loadWeather();
+
+	// sound
+	sf::Sound m_pickupSound;
 
 private:
 	void updateOverlayQueue();

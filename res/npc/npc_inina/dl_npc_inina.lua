@@ -236,7 +236,7 @@ loadDialogue = function(DL)
 		
 		if (DL:isQuestState("cavern_beast", "started") and DL:isQuestComplete("cavern_beast")) then
 			
-			DL:createNPCNode(80, 81, "DL_Inina_BeastSlain") -- Yes, I've already felt it. The evil magic that was corrupting the shrine is gone.
+			DL:createNPCNode(80, 81, "DL_Inina_BeastSlain") -- Yes, I've already felt it. The evil magic that was obscuring the shrine is gone.
 			DL:addNode()
 			
 			DL:createNPCNode(81, 82, "DL_Inina_BeastSlain2") -- You did us a great favour. Here, take this pouch filled with gold as a reward.  
@@ -245,7 +245,7 @@ loadDialogue = function(DL)
 			DL:addReputationProgress("cleric", 10)			
 			DL:addNode()
 			
-			DL:createNPCNode(82, 83, "DL_Inina_BeastSlain3") -- I'm greatly impressed by your skills, mage. You may be a worthy initiant for the Clerics. (Takes a piece of paper and writes something down.)
+			DL:createNPCNode(82, 83, "DL_Inina_BeastSlain3") -- I'm greatly impressed by your skills, mage. You may be a worthy initiant for the Clerics. (Takes a piece of paper and writes something down)
 			DL:addNode()
 			
 			DL:createNPCNode(83, 84, "DL_Inina_BeastSlain4") -- Here, take this letter of recommendation with you and bring it to Commander Lloyd once you're in the city, he is the leader of the Paladins.
