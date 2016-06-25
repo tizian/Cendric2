@@ -249,8 +249,7 @@ void CookingWindow::cookItem(const std::string& itemID) {
 		g_logger->logError("CookingWindow", "Cannot cook item with id " + itemID);
 		return;
 	}
-	m_screen->notifyItemChange(itemID, -1);
-	m_screen->notifyItemChange(food.cooked_item_id, 1);
+	m_screen->notifyItemConversion(itemID, food.cooked_item_id, 1);
 }
 
 void CookingWindow::render(sf::RenderTarget& renderTarget) {

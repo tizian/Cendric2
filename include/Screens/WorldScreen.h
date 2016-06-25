@@ -26,6 +26,8 @@ public:
 	void notifyPermanentItemConsumed(const Item& item);
 	// notify item change -> change in core, display text and reload inventory. Also reload quest log.
 	void notifyItemChange(const std::string& itemID, int amount);
+	// notify item conversion -> change in core, display text and reload inventory. Also reload quest log.
+	void notifyItemConversion(const std::string& oldItemID, const std::string& newItemID, int amount);
 	// notify item equip -> change in core, reload inventory and character info.
 	// if the second argument is not given (void, default), it gets determined in this method
 	void notifyItemEquip(const std::string& itemID, ItemType type = ItemType::VOID);

@@ -74,6 +74,16 @@ void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	m_interface->reloadCharacterInfo();
 }
 
+void WorldScreen::notifyItemConversion(const std::string& oldItemID, const std::string& newItemID, int amount) {
+	getCharacterCore()->notifyItemChange(oldItemID, -amount);
+	getCharacterCore()->notifyItemChange(newItemID, amount);
+	m_progressLog->addItemConversionProgress(oldItemID, newItemID, amount);
+	m_interface->reloadInventory(oldItemID);
+	m_interface->reloadInventory(newItemID);
+	m_interface->reloadQuestLog();
+	m_interface->reloadCharacterInfo();
+}
+
 void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	if (type != ItemType::VOID) {
 		getCharacterCore()->equipItem(itemID, type);

@@ -66,6 +66,7 @@ public:
 
 	void addPermanentItemProgress(const Item& item);
 	void addItemProgress(const std::string& itemID, int amount);
+	void addItemConversionProgress(const std::string& oldItemID, const std::string& newItemID, int amount);
 	void addQuestConditionFullfilled(const std::string& questID, const std::string& condition);
 	void addQuestTargetKilled(const std::string& questID, const std::string& name);
 	void addQuestStateChanged(const std::string& questID, QuestState state);
