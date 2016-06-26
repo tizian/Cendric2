@@ -55,11 +55,10 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	calculatePositions();
 }
 
-void ProgressLog::addItemConversionProgress(const std::string& oldItemID, const std::string& newItemID, int amount) {
+void ProgressLog::addItemConversionProgress(const std::string& oldItemID, const std::string& newItemID) {
 	std::string text = g_textProvider->getText(oldItemID, "item")
 					+ " -> "
-					+ g_textProvider->getText(newItemID, "item")
-					+ " (" + std::to_string(amount) + "x)";
+					+ g_textProvider->getText(newItemID, "item");
 	
 	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, COLOR_WHITE, newItemID));
 
