@@ -14,3 +14,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 the Cavern Guardian','Boss: Khajag,
 Wächter der Höhlen','Boss: Khajag, 
 Wächter vode Höhlene');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CrystalCrypt','location','The Crystal Crypt','Die Kristallkrypta','D''Kristall Krypta');

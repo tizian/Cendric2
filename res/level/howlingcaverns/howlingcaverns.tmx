@@ -1042,14 +1042,14 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger 3" visible="0">
+ <objectgroup name="trigger 3">
   <properties>
    <property name="conditions" value="boss,BossKhajag"/>
   </properties>
   <object id="51" x="4728.5" y="521.5" width="92.5" height="117">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="level entry" value="res/level/crystalcrypt/crystalcrypt.tmx,0,0"/>
+    <property name="level entry" value="res/level/crystalcrypt/crystalcrypt.tmx,150,270"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

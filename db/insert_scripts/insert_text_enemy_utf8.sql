@@ -11,5 +11,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Wo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cairn','enemy','Cairn Wraith','Cairn Geist','Cairn Geist');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MysteriousBeast','enemy','Mysterious Beast','Mysteriöses Biest','Mysteriöses Biescht');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CavernBeast','enemy','Cavern Beast','Höhlenmonster','Höhlemonster');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossWolf','enemy','Khajag, the Cavern Guardian','Khajag, Wächter der Höhlen','Khajag, Wächter vode Höhlene');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossKhajag','enemy','Khajag, the Cavern Guardian','Khajag, Wächter der Höhlen','Khajag, Wächter vode Höhlene');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossZeff','enemy','Zeff','Zeff','Zeff');
