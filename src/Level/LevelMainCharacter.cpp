@@ -75,7 +75,7 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 }
 
 void LevelMainCharacter::handleAttackInput() {
-	if (isDead()) return;
+	if (isDead() || isClimbing()) return;
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 
@@ -279,6 +279,20 @@ void LevelMainCharacter::loadAnimation() {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
+	Animation* climbing1Animation = new Animation();
+	climbing1Animation->setSpriteSheet(tex);
+	climbing1Animation->addFrame(sf::IntRect(14 * 80, 0, 80, 120));
+	climbing1Animation->setLooped(false);
+
+	addAnimation(GameObjectState::Climbing_1, climbing1Animation);
+
+	Animation* climbing2Animation = new Animation();
+	climbing2Animation->setSpriteSheet(tex);
+	climbing2Animation->addFrame(sf::IntRect(15 * 80, 0, 80, 120));
+	climbing2Animation->setLooped(false);
+
+	addAnimation(GameObjectState::Climbing_2, climbing2Animation);
+
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 14; ++i) {
@@ -363,6 +377,11 @@ Enemy* LevelMainCharacter::getLastHitEnemy() const {
 
 bool LevelMainCharacter::isAlly() const {
 	return true;
+}
+
+bool LevelMainCharacter::isClimbing() const {
+	return getState() == GameObjectState::Climbing_1 ||
+		getState() == GameObjectState::Climbing_2;
 }
 
 void LevelMainCharacter::loadParticleSystem() {

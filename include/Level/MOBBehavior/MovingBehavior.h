@@ -30,7 +30,7 @@ public:
 	void setMaxXVelocityScale(float scale);
 	// the mob ignores collidable dynamic tiles in its collision logic but still collides with strictly dynamic tiles
 	virtual void setIgnoreDynamicTiles(bool value);
-	// recovers from all fighting animations/fighting times/casting times and is ready again (cooldowns don't recover)
+	// recovers from all fighting animations/fighting times/casting times and is ready again (cooldowns don't recover and climbing properties don't, too)
 	void setReady();
 
 	void setMaxVelocityX(float vel);
@@ -48,11 +48,12 @@ public:
 	void setDampingAirPerS(float damping);
 	void setFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking);
 	virtual void setFacingRight(bool value);
+
 	float getGravity() const;
 	bool isGrounded() const;
 	bool isFacingRight() const;
 	bool isUpsideDown() const;
-	bool isReady() const;
+	virtual bool isReady() const;
 	bool isIgnoreDynamicTiles() const;
 	
 protected:

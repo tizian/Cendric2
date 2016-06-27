@@ -41,11 +41,12 @@ private:
 	bool readMovingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readJumpingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readSignTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readLadderTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
 
 	// this is the width in tiles of the dynamic tile tileset
 	// and used to calculate the skin of the dynamic tile.
-	const int DYNAMIC_TILE_COUNT = 20;
+	const int DYNAMIC_TILE_COUNT = 30;
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data) const;

@@ -132,17 +132,23 @@ void GhostFormSpell::loadMask() {
 	if (m_mob->getConfiguredType() != GameObjectType::_LevelMainCharacter || m_mask != nullptr) return;
 	
 	std::map<GameObjectState, std::vector<sf::IntRect>> texturePositions;
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 8; ++i) {
 		texturePositions[GameObjectState::Walking].push_back(sf::IntRect(i * 120, 0, 120, 120));
 	}
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; ++i) {
 		texturePositions[GameObjectState::Idle].push_back(sf::IntRect(960 + i * 120, 0, 120, 120));
 	}
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; ++i) {
 		texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(1200 + i * 120, 0, 120, 120));
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; ++i) {
 		texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
+	}
+	for (int i = 0; i < 2; ++i) {
+		texturePositions[GameObjectState::Climbing_1].push_back(sf::IntRect(2040 + i * 120, 0, 120, 120));
+	}
+	for (int i = 0; i < 2; ++i) {
+		texturePositions[GameObjectState::Climbing_2].push_back(sf::IntRect(2280 + i * 120, 0, 120, 120));
 	}
 
 	LevelEquipment* levelEquipment = new LevelEquipment(m_mainChar);

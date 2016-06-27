@@ -8,12 +8,11 @@ MovingBehavior::MovingBehavior(LevelMovableGameObject* mob) {
 }
 
 bool MovingBehavior::isReady() const {
-	return !m_mob->isDead() && (!m_isBlockingSpell || m_fightAnimationTime == sf::Time::Zero);
+	return !m_mob->isDead() && !m_mob->isStunned() && (!m_isBlockingSpell || m_fightAnimationTime == sf::Time::Zero);
 }
 
 void MovingBehavior::update(const sf::Time& frameTime) {
 	if (!m_isCollisionTilt) {
-		
 
 		if (isReady()) {
 			handleMovementInput();

@@ -46,6 +46,7 @@ public:
 	void removeItems(const std::string& item, int quantity) const;
 
 	bool isAlly() const override;
+	bool isClimbing() const;
 
 	void setTargetEnemy(Enemy* enemy);
 	Enemy* getCurrentTargetEnemy() const;

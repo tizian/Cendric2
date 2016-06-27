@@ -60,9 +60,7 @@ void GameObject::setPosition(const sf::Vector2f& position) {
 	m_boundingBox.left = position.x;
 	m_boundingBox.top = position.y;
 
-	if (m_isDebugRendering) {
-		m_debugBox.setPosition(position);
-	}
+	m_debugBox.setPosition(position);
 	for (auto& component : m_components) {
 		component->setPosition(position);
 	}

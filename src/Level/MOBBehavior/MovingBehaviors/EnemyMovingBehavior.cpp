@@ -14,43 +14,39 @@ void EnemyMovingBehavior::setFacingRight(bool value) {
 }
 
 void EnemyMovingBehavior::handleMovementInput() {
-	if (!m_enemy->isStunned()) {
-		if (m_movingTarget != nullptr) {
-			sf::Vector2f center = m_enemy->getCenter();
-			// the enemy tries to get near its target
-			if (m_movingTarget->x < center.x && std::abs(m_movingTarget->x - center.x) > 10.f) {
-				m_movingDirectionX = -1;
-			}
-			else if (m_movingTarget->x > center.x && std::abs(m_movingTarget->x - center.x) > 10.f) {
-				m_movingDirectionX = 1;
-			}
-			else {
-				m_movingDirectionX = 0;
-			}
-
-			if (m_movingTarget->y < center.y && std::abs(m_movingTarget->y - center.y) > 10.f) {
-				m_movingDirectionY = -1;
-			}
-			else if (m_movingTarget->y > center.x && std::abs(m_movingTarget->y - center.y) > 10.f) {
-				m_movingDirectionY = 1;
-			}
-			else {
-				m_movingDirectionY = 0;
-			}
+	if (m_movingTarget != nullptr) {
+		sf::Vector2f center = m_enemy->getCenter();
+		// the enemy tries to get near its target
+		if (m_movingTarget->x < center.x && std::abs(m_movingTarget->x - center.x) > 10.f) {
+			m_movingDirectionX = -1;
+		}
+		else if (m_movingTarget->x > center.x && std::abs(m_movingTarget->x - center.x) > 10.f) {
+			m_movingDirectionX = 1;
 		}
 		else {
-			execHandleMovementInput();
+			m_movingDirectionX = 0;
 		}
+
+		if (m_movingTarget->y < center.y && std::abs(m_movingTarget->y - center.y) > 10.f) {
+			m_movingDirectionY = -1;
+		}
+		else if (m_movingTarget->y > center.x && std::abs(m_movingTarget->y - center.y) > 10.f) {
+			m_movingDirectionY = 1;
+		}
+		else {
+			m_movingDirectionY = 0;
+		}
+	}
+	else {
+		execHandleMovementInput();
 	}
 
 	float newAccelerationX = m_enemy->getAcceleration().x;
 	m_nextIsFacingRight = (m_movingDirectionX == 0) ? m_nextIsFacingRight : (m_movingDirectionX == 1);
 
-	if (!m_enemy->isStunned()) {
-		newAccelerationX += m_movingDirectionX * m_walkAcceleration;
-	}
+	newAccelerationX += m_movingDirectionX * m_walkAcceleration;
 
-	float newAccelerationY = m_isWalkingBehavior ? 
+	float newAccelerationY = m_isWalkingBehavior ?
 		(m_isFlippedGravity ? -m_gravity : m_gravity) :
 		m_movingDirectionY * m_walkAcceleration;
 

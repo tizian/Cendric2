@@ -23,5 +23,6 @@ enum class LevelDynamicTileID {
 	Shooting,
 	Sign,
 	Particle,
+	Ladder,
 	MAX
 };

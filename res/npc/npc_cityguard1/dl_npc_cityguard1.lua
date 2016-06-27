@@ -8,8 +8,12 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_cityguard", "stranger")) then
 		DL:addChoice(2, "DL_Choice_Stranger") -- Do I look like a stranger to you?
 	end
-	if (DL:isConditionFulfilled("npc_cityguard", "gates_closed") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_cityguard", "zeff")) then
-		DL:addChoice(20, "DL_Choice_Zeff") -- Do you know a guy called "Zeff"?
+	if (DL:isConditionFulfilled("npc_cityguard", "gates_closed")) then
+	
+		if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_cityguard", "zeff")) then
+			DL:addChoice(20, "DL_Choice_Zeff") -- Do you know a guy called "Zeff"?
+		end
+		
 	end
 	DL:addChoice(-1, "") -- ...  
 	DL:addNode()
@@ -56,19 +60,23 @@ loadDialogue = function(DL)
 		
 	end
 	
-	if (DL:isConditionFulfilled("npc_cityguard", "gates_closed") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_cityguard", "zeff")) then
-		
-		DL:createNPCNode(20, 21, "DL_Citguard_Zeff") -- Hmm, let me think... Yes, if I recall correctly, there's a leatherworker Zeff who lives in Gandria. But he's actually one of the people who are missing. Why do you ask?
-		DL:addConditionProgress("npc_cityguard", "zeff")
-		DL:addNode()
-		
-		DL:createChoiceNode(21)
-		DL:addChoice(-2, "DL_Choice_Nevermind") -- Nevermind...
-		DL:addChoice(22, "DL_Choice_IveSeenZeff") -- I've seen him! He was turned into a monster!
-		DL:addNode()
-		
-		DL:createNPCNode(22, -1, "DL_Citguard_Laughs") -- (Laughs) Yes, yes, of course, a monster. And now tell this bullshit someone who actually believes it. Off you go.
-		DL:addNode()
+	if (DL:isConditionFulfilled("npc_cityguard", "gates_closed")) then
+	
+		if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_cityguard", "zeff")) then
+			
+			DL:createNPCNode(20, 21, "DL_Citguard_Zeff") -- Hmm, let me think... Yes, if I recall correctly, there's a leatherworker Zeff who lives in Gandria. But he's actually one of the people who are missing. Why do you ask?
+			DL:addConditionProgress("npc_cityguard", "zeff")
+			DL:addNode()
+			
+			DL:createChoiceNode(21)
+			DL:addChoice(-2, "DL_Choice_Nevermind") -- Nevermind...
+			DL:addChoice(22, "DL_Choice_IveSeenZeff") -- I've seen him! He was turned into a monster!
+			DL:addNode()
+			
+			DL:createNPCNode(22, -1, "DL_Citguard_Laughs") -- (Laughs) Yes, yes, of course, a monster. And now tell this bullshit someone who actually believes it. Off you go.
+			DL:addNode()
+			
+		end
 		
 	end
 	

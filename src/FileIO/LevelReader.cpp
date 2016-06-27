@@ -445,6 +445,68 @@ bool LevelReader::readJumpingTiles(tinyxml2::XMLElement* objectgroup, LevelData&
 	return true;
 }
 
+bool LevelReader::readLadderTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+
+		int gid;
+		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int offset = static_cast<int>(LevelDynamicTileID::Ladder) + m_firstGidDynamicTiles - 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+
+		LadderTileData ladderData;
+		ladderData.position = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
+		ladderData.skinNr = skinNr;
+
+		// modifier type and level
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
+			while (property_ != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = property_->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string propertyText = textAttr;
+
+				if (propertyText.compare("size") == 0) {
+					int amount;
+					result = property_->QueryIntAttribute("value", &amount);
+					XMLCheckResult(result);
+
+					if (amount > 100 || amount < 2) {
+						logError("ladder size (height in tiles) must be between 2 and 100");
+						return false;
+					}
+
+					ladderData.size = amount;
+				}
+
+				property_ = property_->NextSiblingElement("property");
+			}
+		}
+
+		data.ladderTiles.push_back(ladderData);
+
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
 bool LevelReader::readSignTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
@@ -653,6 +715,9 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 		}
 		else if (name.find("sign") != std::string::npos) {
 			if (!readSignTiles(objectgroup, data)) return false;
+		}
+		else if (name.find("ladder") != std::string::npos) {
+			if (!readLadderTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;

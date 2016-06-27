@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="128">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="129">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/map/elderhome/elderhome.ogg"/>
   <property name="name" value="ElderHome"/>
   <property name="tilesetpath" value="res/map/elderhome/tileset_map_elderhome.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_elderhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_map_elderhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_map_elderhome.png" width="1000" height="1000"/>
   <tile id="140">
    <animation>
@@ -22,10 +22,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -218,7 +218,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="25" height="15" visible="0">
+ <layer name="collidable" width="25" height="15">
   <data encoding="csv">
 82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,
 82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,
@@ -273,6 +273,12 @@
   <object id="126" x="503" y="722" width="45" height="27">
    <properties>
     <property name="map entry" value="res/map/meadows/meadows.tmx,2020,1830"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="128" x="249" y="351" width="38.5" height="50">
+   <properties>
+    <property name="level entry" value="res/level/elderbackroom/elderbackroom.tmx,1300,550"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

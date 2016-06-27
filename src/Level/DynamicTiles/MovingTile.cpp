@@ -85,13 +85,19 @@ void MovingTile::update(const sf::Time& frameTime) {
 }
 
 void MovingTile::render(sf::RenderTarget& target) {
-	for (auto& sprite : m_normalSprites) {
-		target.draw(sprite);
-	}
-	if (m_isFrozen) {
-		for (auto& sprite : m_frozenSprites) {
+	if (m_isFirstRenderIteration) {
+		for (auto& sprite : m_normalSprites) {
 			target.draw(sprite);
 		}
+		if (m_isFrozen) {
+			for (auto& sprite : m_frozenSprites) {
+				target.draw(sprite);
+			}
+		}
+		m_isFirstRenderIteration = false;
+	}
+	else {
+		m_isFirstRenderIteration = true;
 	}
 }
 
