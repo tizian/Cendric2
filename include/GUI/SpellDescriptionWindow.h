@@ -30,5 +30,6 @@ private:
 
 	BitmapText m_titleText;
 	BitmapText m_descriptionText;
-	BitmapText m_statsText;
+	BitmapText m_whiteText;
+	BitmapText m_coloredText;
 };

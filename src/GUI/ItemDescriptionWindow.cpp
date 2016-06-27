@@ -58,10 +58,8 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 
 	pos.y += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
 
-	sf::Vector2f statsOrigin(pos);
-
-	m_whiteText.setPosition(statsOrigin);
-	m_coloredText.setPosition(statsOrigin);
+	m_whiteText.setPosition(pos);
+	m_coloredText.setPosition(pos);
 }
 
 void ItemDescriptionWindow::load(const Item& item) {

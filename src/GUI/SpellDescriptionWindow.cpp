@@ -3,8 +3,6 @@
 #include "GUI/SpellDescriptionWindow.h"
 #include "Spells/SpellCreator.h"
 
-using namespace std;
-
 const float SpellDescriptionWindow::WIDTH = 340.f;
 
 inline std::string toStrMaxDecimals(float value, int decimals) {
@@ -28,8 +26,11 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_descriptionText.setColor(COLOR_LIGHT_GREY);
 
-	m_statsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_statsText.setColor(COLOR_WHITE);
+	m_whiteText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_coloredText.setColor(COLOR_WHITE);
+
+	m_coloredText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_coloredText.setColor(COLOR_LIGHT_PURPLE);
 }
 
 void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData* attributes) {
@@ -48,110 +49,139 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	m_titleText.setString(g_textProvider->getText(EnumNames::getSpellIDName(bean.id)));
 	m_descriptionText.setString(g_textProvider->getCroppedText(EnumNames::getSpellIDName(bean.id) + "Desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
 
-	string stats = "\n";
+	int lines = 0;
+	std::string white = "";
+	std::string colored = "";
 
 	// cooldown
-	stats.append(g_textProvider->getText("Cooldown"));
-	stats.append(": ");
-	stats.append(toStrMaxDecimals(bean.cooldown.asSeconds(), 1));
-	stats.append("s\n");
+	colored.append(g_textProvider->getText("Cooldown"));
+	colored.append(": ");
+	colored.append(toStrMaxDecimals(bean.cooldown.asSeconds(), 1));
+	colored.append("s\n");
+	white.append("\n");
+	lines++;
+
 
 	// damage type & damage
 	if (bean.damageType != DamageType::VOID) {
-		stats.append(g_textProvider->getText("DamageType"));
-		stats.append(": ");
-		stats.append(g_textProvider->getText(EnumNames::getDamageTypeName(bean.damageType)));
-		stats.append("\n");
+		colored.append(g_textProvider->getText("DamageType"));
+		colored.append(": ");
+		colored.append(g_textProvider->getText(EnumNames::getDamageTypeName(bean.damageType)));
+		colored.append("\n");
+		white.append("\n");
+		lines++;
 
 		if (bean.damage > 0) {
-			stats.append(g_textProvider->getText("Damage"));
-			stats.append(": ");
-			stats.append(to_string(bean.damage));
-			stats.append("\n");
+			colored.append(g_textProvider->getText("Damage"));
+			colored.append(": ");
+			colored.append(std::to_string(bean.damage));
+			colored.append("\n");
+			white.append("\n");
+			lines++;
 		}
 
 		if (bean.damagePerSecond > 0) {
-			stats.append(g_textProvider->getText("DamagePerSecond"));
-			stats.append(": ");
-			stats.append(to_string(bean.damagePerSecond));
-			stats.append("/s\n");
+			colored.append(g_textProvider->getText("DamagePerSecond"));
+			colored.append(": ");
+			colored.append(std::to_string(bean.damagePerSecond));
+			colored.append("/s\n");
+			white.append("\n");
+			lines++;
 		}
 	}
 
 	// heal
 	if (bean.heal > 0) {
-		stats.append(g_textProvider->getText("Heal"));
-		stats.append(": ");
-		stats.append(to_string(bean.heal));
-		stats.append("\n");
+		colored.append(g_textProvider->getText("Heal"));
+		colored.append(": ");
+		colored.append(std::to_string(bean.heal));
+		colored.append("\n");
+		white.append("\n");
+		lines++;
 	}
 
 	// reflection
 	if (bean.reflectCount > 0) {
-		stats.append(g_textProvider->getText("Reflection"));
-		stats.append(": ");
-		stats.append(to_string(bean.reflectCount));
-		stats.append("\n");
+		colored.append(g_textProvider->getText("Reflection"));
+		colored.append(": ");
+		colored.append(std::to_string(bean.reflectCount));
+		colored.append("\n");
+		white.append("\n");
+		lines++;
 	}
 
 	// speed
 	if (bean.speed > 0) {
-		stats.append(g_textProvider->getText("Speed"));
-		stats.append(": ");
-		stats.append(toStrMaxDecimals(bean.speed, 1));
-		stats.append("\n");
+		colored.append(g_textProvider->getText("Speed"));
+		colored.append(": ");
+		colored.append(toStrMaxDecimals(bean.speed, 1));
+		colored.append("\n");
+		white.append("\n");
+		lines++;
 	}
 
 	// count (is only displayed when there can be count modifier additions)
 	if (bean.countModifierAddition > 0) {
-		stats.append(g_textProvider->getText("Count"));
-		stats.append(": ");
-		stats.append(to_string(bean.count));
-		stats.append("\n");
+		colored.append(g_textProvider->getText("Count"));
+		colored.append(": ");
+		colored.append(std::to_string(bean.count));
+		colored.append("\n");
+		white.append("\n");
+		lines++;
 	}
 
 	// duration (is only displayed when duration is bigger than zero)
 	if (bean.duration > sf::Time::Zero) {
-		stats.append(g_textProvider->getText("Duration"));
-		stats.append(": ");
-		stats.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));
-		stats.append("s\n");
+		colored.append(g_textProvider->getText("Duration"));
+		colored.append(": ");
+		colored.append(toStrMaxDecimals(bean.duration.asSeconds(), 1));
+		colored.append("s\n");
+		white.append("\n");
+		lines++;
 	}
 
 	// range (is only displayed when there can be range modifier additions)
 	if (bean.rangeModifierAddition > 0.f) {
-		stats.append(g_textProvider->getText("Range"));
-		stats.append(": ");
-		stats.append(toStrMaxDecimals(bean.range, 1));
-		stats.append("\n");
+		colored.append(g_textProvider->getText("Range"));
+		colored.append(": ");
+		colored.append(toStrMaxDecimals(bean.range, 1));
+		colored.append("\n");
+		white.append("\n");
+		lines++;
 	}
 
 	// strength (only if there is a strength modifier name set)
 	if (!strengthName.empty()) {
-		stats.append(g_textProvider->getText(strengthName));
-		stats.append(": ");
-		stats.append(to_string(strengthValue));
-		stats.append("\n");
+		colored.append(g_textProvider->getText(strengthName));
+		colored.append(": ");
+		colored.append(std::to_string(strengthValue));
+		colored.append("\n");
+		white.append("\n");
+		lines++;
 	}
 
 	// allowed modifiers
-	stats.append("\n");
-	stats.append("<<< " + g_textProvider->getText("AllowedModifiers") + " >>>");
-	stats.append("\n");
+	white.append("\n");
+	white.append("<<< " + g_textProvider->getText("AllowedModifiers") + " >>>");
+	white.append("\n");
+	lines += 2;
 
 	for (auto& it : SpellData::getAllowedModifiers(id)) {
-		stats.append(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it)));
-		stats.append("\n");
+		white.append(g_textProvider->getText(EnumNames::getSpellModifierTypeName(it)));
+		white.append("\n");
+		lines++;
 	}
 
-	m_statsText.setString(stats);
+	m_whiteText.setString(white);
+	m_coloredText.setString(colored);
 
-	float height = 2 * GUIConstants::TEXT_OFFSET;
-	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S * 2;
-	height += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	height += m_statsText.getLocalBounds().height;
+	float height = GUIConstants::TEXT_OFFSET;
+	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	height += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
+	height += lines * GUIConstants::CHARACTER_SIZE_S + (lines - 1) * 0.5f * GUIConstants::CHARACTER_SIZE_S;
+	height += GUIConstants::TEXT_OFFSET;
+	
 	setHeight(height);
-
 	setPosition(getPosition());
 }
 
@@ -165,12 +195,21 @@ void SpellDescriptionWindow::hide() {
 
 void SpellDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
-	float y = position.y + GUIConstants::TEXT_OFFSET;
-	m_titleText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
-	y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	m_descriptionText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
-	y += m_descriptionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	m_statsText.setPosition(position.x + GUIConstants::TEXT_OFFSET, y);
+
+	sf::Vector2f pos(position);
+	pos.x += GUIConstants::TEXT_OFFSET;
+	pos.y += GUIConstants::TEXT_OFFSET;
+
+	m_titleText.setPosition(pos);
+
+	pos.y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+
+	m_descriptionText.setPosition(pos);
+
+	pos.y += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
+
+	m_whiteText.setPosition(pos);
+	m_coloredText.setPosition(pos);
 }
 
 void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget) {
@@ -178,5 +217,6 @@ void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	Window::render(renderTarget);
 	renderTarget.draw(m_titleText);
 	renderTarget.draw(m_descriptionText);
-	renderTarget.draw(m_statsText);
+	renderTarget.draw(m_whiteText);
+	renderTarget.draw(m_coloredText);
 }
