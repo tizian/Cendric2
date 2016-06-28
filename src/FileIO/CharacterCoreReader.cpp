@@ -99,10 +99,11 @@ bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, Chara
 		}
 		
 		char* startSpellData = gotoNextChar(startData, endData, ',');
-		if (startSpellData == nullptr) return false;
 
 		char* endSpellData = gotoNextChar(startData, endData, ';');
 		if (endSpellData == nullptr) return false;
+
+		if (startSpellData == nullptr || startSpellData > endSpellData) continue;
 
 		vector<SpellModifier> modifiers;
 

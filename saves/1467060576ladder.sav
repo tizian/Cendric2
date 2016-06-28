@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:1648
+time.played:1851
 savegame.name:ladder
-savegame.date:1467069934
+savegame.date:1467073026
 level.id:res/level/elderbackroom/elderbackroom.tmx
 level.position:1300.000000,550.000000
 is.in.level:1
 map.id:res/map/elderhome/elderhome.tmx
-map.position:284.948914,376.244354
+map.position:284.948120,380.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -104,6 +104,8 @@ item.id:we_zeffssword,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:6,2,3
 equipped.spellslot:20
+equipped.spellslot:15,2,1
+equipped.spellslot:10
 # equipment:
 equipped.back:eq_back_necrot3
 equipped.body:eq_demonbody
@@ -113,7 +115,7 @@ equipped.ring1:eq_rubyring
 equipped.ring2:eq_ironring
 equipped.weapon:we_oathbreaker
 # weapon configurations:
-weapon.configs:we_oathbreaker;6,2,3;20;
+weapon.configs:we_oathbreaker;6,2,3;15,2,1;
 # quickslot assignments:
 quickslot:1,
 quickslot:2,
@@ -153,7 +155,7 @@ quest.state:silkweed_potion,1
 # conditions of a certain type fulfilled:
 progress.condition:default,,tutorial_complete
 progress.condition:npc_edmond,,talked_after_tutorial,talked_to
-progress.condition:npc_rhendal,spoiled_schnapps,talked
+progress.condition:npc_rhendal,,spoiled_schnapps,talked
 progress.condition:trigger,,tutorial_started
 # reputation progress:
 reputation.progress:druid,5
