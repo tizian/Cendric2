@@ -125,9 +125,13 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
 
-		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
+		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
+		if (tile->isOneWay()) {
+			if (rec.collisionDirection == CollisionDirection::Up) continue;
+			if (rec.boundingBox.top + rec.boundingBox.height * 0.5f > tile->getCenter().y) continue;
+		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+		if (tile != rec.excludedGameObject && tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
 			calculateCollisionLocations(rec, tileBB);
 		}
 	}
@@ -135,9 +139,13 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	for (GameObject* go : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
 
-		if (rec.ignoreDynamicTiles && !(tile->getIsStrictlyCollidable())) continue;
+		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
+		if (tile->isOneWay()) {
+			if (rec.collisionDirection == CollisionDirection::Up) continue;
+			if (rec.boundingBox.top + rec.boundingBox.height * 0.5f > tile->getCenter().y) continue;
+		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile != rec.excludedGameObject && tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+		if (tile != rec.excludedGameObject && tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
 			MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile);
 			rec.movingParent = mob->getMovingParent(); // question: should we only take the moving parent if the max collision is this tile?
 			calculateCollisionLocations(rec, tileBB);
@@ -181,7 +189,7 @@ bool Level::collidesWithMovableTiles(WorldCollisionQueryRecord& rec) const {
 	for (auto& it : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile->getIsCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+		if (tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
 			return true;
 		}
 	}

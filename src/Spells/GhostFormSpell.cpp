@@ -169,6 +169,7 @@ void GhostFormSpell::loadMask() {
 	}
 
 	// initial values
+	levelEquipment->setTexturePath(m_data.spritesheetPath);
 	levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 	levelEquipment->playCurrentAnimation(true);
 	levelEquipment->loadEquipment();

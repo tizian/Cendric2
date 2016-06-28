@@ -27,6 +27,21 @@ void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	MovingBehavior::checkXYDirection(nextPosition, collidesX, collidesY);
 }
 
+void UserMovingBehavior::stopClimbing() {
+	m_climbStepTime = sf::Time::Zero;
+	m_isClimbing = false;
+	m_currentLadder = nullptr;
+}
+
+void UserMovingBehavior::startClimbing(GameObject* ladder, float yPos) {
+	m_isClimbing = true;
+	m_currentLadder = ladder;
+	m_mob->setPositionY(yPos);
+	m_mob->setAccelerationY(0.f);
+	m_mob->setVelocityY(0.f);
+	g_inputController->lockAction();
+}
+
 void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 	if (m_isClimbing) {
 		// handle climb step timing
@@ -34,15 +49,19 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 			m_climbStepTime += frameTime;
 			if (m_climbStepTime >= CLIMB_STEP_TIME) {
 				m_climbStepTime = sf::Time::Zero;
-				float diffY = static_cast<float>(g_inputController->isKeyActive(Key::Up) ? -LadderTile::LADDER_STEP : LadderTile::LADDER_STEP);
+				bool up = g_inputController->isKeyActive(Key::Up);
+				float diffY = static_cast<float>(up ? -LadderTile::LADDER_STEP : LadderTile::LADDER_STEP);
 				
 				WorldCollisionQueryRecord rec;
+				rec.collisionDirection = up ? CollisionDirection::Up : CollisionDirection::Down;
 				rec.boundingBox = *(m_mob->getBoundingBox());
 				rec.boundingBox.top += diffY;
 				rec.ignoreDynamicTiles = m_mob->isIgnoreDynamicTiles();
 
 				if (m_mob->getLevel()->collides(rec)) {
-					g_logger->logWarning("UserMovingBehavior", "Cannot climb on this ladder, it would stuck the mob.");
+					if (!up ^ m_mob->isUpsideDown()) {
+						stopClimbing();
+					}
 					return;
 				}
 
@@ -56,9 +75,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 
 		// check if we're still on our ladder
 		if (!m_mob->getBoundingBox()->intersects(*m_currentLadder->getBoundingBox())) {
-			m_climbStepTime = sf::Time::Zero;
-			m_isClimbing = false;
-			m_currentLadder = nullptr;
+			stopClimbing();
 		}
 	}
 	else {
@@ -85,12 +102,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 					return;
 				}
 
-				m_isClimbing = true;
-				m_currentLadder = tile;
-				m_mob->setPositionY(climbingY);
-				m_mob->setAccelerationY(0.f);
-				m_mob->setVelocityY(0.f);
-				g_inputController->lockAction();
+				startClimbing(tile, climbingY);
 			}
 		}
 	}
@@ -111,12 +123,12 @@ void UserMovingBehavior::handleMovementInput() {
 	if (!m_mainChar->isFeared()) {
 
 		if (g_inputController->isKeyActive(Key::Left)) {
-			m_nextIsFacingRight = false;
-			newAccelerationX -= m_walkAcceleration;
+			if (!m_isClimbing) m_nextIsFacingRight = false;
+			newAccelerationX -= m_isClimbing ? m_walkAcceleration * 0.2f : m_walkAcceleration;
 		}
 		if (g_inputController->isKeyActive(Key::Right)) {
-			m_nextIsFacingRight = true;
-			newAccelerationX += m_walkAcceleration;
+			if (!m_isClimbing) m_nextIsFacingRight = true;
+			newAccelerationX += m_isClimbing ? m_walkAcceleration * 0.2f : m_walkAcceleration;
 		}
 		if (!m_isClimbing && g_inputController->isKeyJustPressed(Key::Jump) && (m_isGrounded || m_jumpGraceTime > sf::Time::Zero)) {
 			m_jumpGraceTime = sf::Time::Zero;

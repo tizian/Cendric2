@@ -58,7 +58,7 @@ void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 
 	for (auto movableTile : *movableTiles) {
 		LevelMovableTile* tile = dynamic_cast<LevelMovableTile*>(movableTile);
-		if (tile->getMovingParent() != getMovingParent() && tile->getDynamicTileID() != LevelDynamicTileID::Moving && tile->getIsCollidable()) {
+		if (tile->getMovingParent() != getMovingParent() && tile->getDynamicTileID() != LevelDynamicTileID::Moving && tile->isCollidable()) {
 			const sf::FloatRect& mobBB = *tile->getBoundingBox();
 			if (epsIntersect(mobBB, newBoundingBoxX)) {
 				tile->setPositionX(tile->getPosition().x + posDiff.x);

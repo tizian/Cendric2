@@ -28,4 +28,6 @@ private:
 	bool m_isClimbing = false;
 	bool m_isClimbingStep1; // used for the climbing animation
 	void handleClimbing(const sf::Time& frameTime);
+	void stopClimbing();
+	void startClimbing(GameObject* ladder, float yPos);
 };

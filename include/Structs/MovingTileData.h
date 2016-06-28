@@ -11,4 +11,5 @@ struct MovingTileData {
 	int initialDirection = -1; // in degree
 	bool isFrozen = false;
 	bool isActive = true;
+	bool isOneWay = false;
 };

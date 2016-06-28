@@ -25,6 +25,8 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 
 	setFrozen(data.isFrozen);
 	setInitialState(data.isActive);
+
+	m_isOneWay = data.isOneWay;
 }
 
 void MovingTile::init() {

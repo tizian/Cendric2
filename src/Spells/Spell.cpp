@@ -110,8 +110,9 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position, const LevelM
 	sf::Vector2f offset = m_data.spellOffset;
 	if (!mob->isFacingRight())
 		offset.x = -offset.x - getBoundingBox()->width;
-	if (mob->isUpsideDown())
+	if (mob->isUpsideDown()) {
 		offset.y = mob->getBoundingBox()->height - offset.y - getBoundingBox()->height;
+	}
 
 	position.x = (mobPosition + offset).x;
 	position.y = (mobPosition + offset).y;
@@ -122,6 +123,9 @@ void Spell::update(const sf::Time& frameTime) {
 	if (m_data.attachedToMob) {
 		calculatePositionAccordingToMob(nextPosition, m_mob);
 		setPosition(nextPosition);
+		if (m_mob != nullptr && m_mob->isUpsideDown() != m_animatedSprite.isFlippedY()) {
+			m_animatedSprite.setFlippedY(m_mob->isUpsideDown());
+		}
 	}
 	else {
 		calculateNextPosition(frameTime, nextPosition);

@@ -8,12 +8,16 @@ LevelDynamicTile::LevelDynamicTile(LevelScreen* levelScreen) : AnimatedGameObjec
 	m_mainChar = levelScreen->getMainCharacter();
 }
 
-bool LevelDynamicTile::getIsCollidable() const {
+bool LevelDynamicTile::isCollidable() const {
 	return m_isCollidable;
 }
 
-bool LevelDynamicTile::getIsStrictlyCollidable() const {
+bool LevelDynamicTile::isStrictlyCollidable() const {
 	return m_isStrictlyCollidable;
+}
+
+bool LevelDynamicTile::isOneWay() const {
+	return m_isOneWay;
 }
 
 void LevelDynamicTile::setPositionOffset(const sf::Vector2f& offset) {

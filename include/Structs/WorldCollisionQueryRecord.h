@@ -32,7 +32,7 @@ struct WorldCollisionQueryRecord {
 	GameObject* excludedGameObject = nullptr;
 
 	// what collision direction shall be checked?
-	// Down and Down will yield a value in "safe top"
+	// Up and Down will yield a value in "safe top"
 	// Left and Right will yield a value in "safe left" 
 	CollisionDirection collisionDirection = CollisionDirection::VOID;
 	float safeTop = -1.f;

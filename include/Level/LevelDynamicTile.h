@@ -38,8 +38,9 @@ public:
 
 	const sf::Vector2f& getPositionOffset() const;
 	LevelDynamicTileID getDynamicTileID() const;
-	bool getIsCollidable() const;
-	bool getIsStrictlyCollidable() const;
+	bool isCollidable() const;
+	bool isStrictlyCollidable() const;
+	bool isOneWay() const;
 	GameObjectType getConfiguredType() const override;
 	const Level* getLevel() const;
 
@@ -53,6 +54,7 @@ protected:
 	LevelDynamicTileID m_dynamicTileID;
 	bool m_isCollidable = false;
 	bool m_isStrictlyCollidable = false;
+	bool m_isOneWay = false;
 	bool m_isRenderAfterObjects = false;
 	bool m_isFirstRenderIteration = true;
 
