@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/forest/layer_inf.png,3.0,res/level/forest/layer_3.png"/>
   <property name="dimming" value="0.4"/>
-  <property name="musicpath" value="res/level/forest/forest_try.ogg"/>
+  <property name="musicpath" value="res/music/forest_try.ogg"/>
   <property name="name" value="Forest"/>
   <property name="tilesetpath" value="res/level/forest/tileset_level_forest.png"/>
  </properties>

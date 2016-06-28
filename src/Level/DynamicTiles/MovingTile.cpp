@@ -5,10 +5,10 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
 MovingTile::MovingTile(LevelScreen* levelScreen) :
-    LevelDynamicTile(levelScreen),
+	LevelDynamicTile(levelScreen),
 	LevelMovableTile(levelScreen),
 	LeverDependentTile(levelScreen) {
-	m_movingParent = this; 
+	m_movingParent = this;
 	m_relativeVelocity.x = 0.f;
 	m_relativeVelocity.y = 0.f;
 }
@@ -17,7 +17,7 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, data.length * TILE_SIZE_F, 40.f));
 	float phi = degToRad(static_cast<float>(data.initialDirection - 90));
 
-	m_currentVelocity.x = std::round(data.speed * std::cos(phi)); 
+	m_currentVelocity.x = std::round(data.speed * std::cos(phi));
 	m_currentVelocity.y = std::round(data.speed * std::sin(phi));
 
 	m_distanceTime = data.speed == 0 ? sf::Time::Zero : sf::seconds(static_cast<float>(data.distance) / static_cast<float>(data.speed));
@@ -86,20 +86,24 @@ void MovingTile::update(const sf::Time& frameTime) {
 	}
 }
 
-void MovingTile::render(sf::RenderTarget& target) {
-	if (m_isFirstRenderIteration) {
-		for (auto& sprite : m_normalSprites) {
-			target.draw(sprite);
-		}
-		if (m_isFrozen) {
-			for (auto& sprite : m_frozenSprites) {
-				target.draw(sprite);
-			}
-		}
-		m_isFirstRenderIteration = false;
+void MovingTile::updateRelativeVelocity(const sf::Time& frameTime) {
+	if (m_isOneWay) {
+		MovableGameObject::updateRelativeVelocity(frameTime);
+		return;
 	}
 	else {
-		m_isFirstRenderIteration = true;
+		LevelMovableTile::updateRelativeVelocity(frameTime);
+	}
+}
+
+void MovingTile::render(sf::RenderTarget& target) {
+	for (auto& sprite : m_normalSprites) {
+		target.draw(sprite);
+	}
+	if (m_isFrozen) {
+		for (auto& sprite : m_frozenSprites) {
+			target.draw(sprite);
+		}
 	}
 }
 

@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/crypt/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
-  <property name="musicpath" value="res/level/crypt/crypt.ogg"/>
+  <property name="musicpath" value="res/music/crypt.ogg"/>
   <property name="name" value="Crypt"/>
   <property name="tilesetpath" value="res/level/crypt/tileset_level_crypt.png"/>
  </properties>

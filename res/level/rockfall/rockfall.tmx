@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/rockfall/layer_inf.png,6.0,res/level/rockfall/layer_6.png,4.0,res/level/rockfall/layer_4.png,3.0,res/level/rockfall/layer_3.png"/>
   <property name="dimming" value="0.2"/>
-  <property name="musicpath" value="res/level/rockfall/rockfall.ogg"/>
+  <property name="musicpath" value="res/music/rockfall.ogg"/>
   <property name="name" value="Rockfall"/>
   <property name="tilesetpath" value="res/level/rockfall/tileset_level_rockfall.png"/>
  </properties>

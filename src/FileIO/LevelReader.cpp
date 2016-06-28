@@ -285,6 +285,11 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 					property_ = property_->NextSiblingElement("property");
 					continue;
 				}
+				if (propertyText.compare("oneway") == 0) {
+					movingTileData.isOneWay = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
 				if (propertyText.compare("direction") == 0) {
 					textAttr = property_->Attribute("value");
 					if (textAttr == nullptr) {
@@ -939,6 +944,9 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		}
 		else if (name.find("dynamic particle") != std::string::npos) {
 			if (!readDynamicTileLayer(LevelDynamicTileID::Particle, layerData, data)) return false;
+		}
+		else if (name.find("dynamic oneway") != std::string::npos) {
+			if (!readDynamicTileLayer(LevelDynamicTileID::Oneway, layerData, data)) return false;
 		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;

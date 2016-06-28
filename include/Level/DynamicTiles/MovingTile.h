@@ -30,6 +30,7 @@ public:
 	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); };
 
 private:
+	void updateRelativeVelocity(const sf::Time& frameTime) override;
 	std::string getSpritePath() const override;
 	void setFrozen(bool frozen);
 	bool m_isFrozen;

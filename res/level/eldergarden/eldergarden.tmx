@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/eldergarden/layer_inf.png,3.0,res/level/eldergarden/layer_3.png"/>
   <property name="dimming" value="0.2"/>
-  <property name="musicpath" value="res/map/meadows/meadows.ogg"/>
+  <property name="musicpath" value="res/music/meadows.ogg"/>
   <property name="name" value="ElderGarden"/>
   <property name="tilesetpath" value="res/level/eldergarden/tileset_level_eldergarden.png"/>
  </properties>

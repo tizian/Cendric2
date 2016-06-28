@@ -26,7 +26,7 @@ public:
 	LogLevel getLogLevel() const;
 
 private:
-	LogLevel m_logLevel = LogLevel::Verbose;
+	LogLevel m_logLevel = LogLevel::Debug;
 
 	const std::string RED = "\033[31m";
 	const std::string GREEN = "\033[32m";

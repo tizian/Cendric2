@@ -8,7 +8,9 @@ LadderTile::LadderTile(const LadderTileData& data, LevelScreen* levelScreen) : L
 }
 
 void LadderTile::init() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F * m_size));
+	setSpriteOffset(sf::Vector2f(-10.f, 0.f));
+	setPositionOffset(sf::Vector2f(10.f, 0.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F * m_size));
 }
 
 void LadderTile::loadAnimation(int skinNr) {
@@ -52,7 +54,7 @@ void LadderTile::setPosition(const sf::Vector2f& position) {
 	GameObject::setPosition(position);
 	float offset = 0.f;
 	for (auto& sprite : m_sprites) {
-		sprite.setPosition(getPosition().x, getPosition().y + offset);
+		sprite.setPosition(getPosition().x + getSpriteOffset().x, getPosition().y + getSpriteOffset().y + offset);
 		offset += TILE_SIZE;
 	}
 }

@@ -127,8 +127,8 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 
 		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
 		if (tile->isOneWay()) {
-			if (rec.collisionDirection == CollisionDirection::Up) continue;
-			if (rec.boundingBox.top + rec.boundingBox.height * 0.5f > tile->getCenter().y) continue;
+			if (rec.collisionDirection != CollisionDirection::Down) continue;
+			if (rec.boundingBox.top + rec.boundingBox.height > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (tile != rec.excludedGameObject && tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
@@ -141,8 +141,8 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 
 		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
 		if (tile->isOneWay()) {
-			if (rec.collisionDirection == CollisionDirection::Up) continue;
-			if (rec.boundingBox.top + rec.boundingBox.height * 0.5f > tile->getCenter().y) continue;
+			if (rec.collisionDirection != CollisionDirection::Down) continue;
+			if (rec.boundingBox.top + rec.boundingBox.height > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (tile != rec.excludedGameObject && tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {

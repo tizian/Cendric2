@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="100">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="102">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/elderbackroom/layer_inf.png"/>
   <property name="dimming" value="0.2"/>
-  <property name="musicpath" value="res/map/meadows/meadows.ogg"/>
+  <property name="musicpath" value="res/music/meadows.ogg"/>
   <property name="name" value="ElderBackroom"/>
   <property name="tilesetpath" value="res/level/elderbackroom/tileset_level_elderbackroom.png"/>
  </properties>
@@ -251,6 +251,28 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <layer name="dynamic oneway" width="30" height="18">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,551,581,581,611,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,641,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <layer name="dynamic spikesbottom" width="30" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -389,6 +411,25 @@
   <object id="99" gid="550" x="400" y="150" width="50" height="50">
    <properties>
     <property name="size" value="5"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="moving platform">
+  <object id="100" gid="663" x="1184" y="657" width="50" height="50">
+   <properties>
+    <property name="direction" value="0"/>
+    <property name="distance" value="300"/>
+    <property name="oneway" value=""/>
+    <property name="size" value="2"/>
+    <property name="speed" value="50"/>
+   </properties>
+  </object>
+  <object id="101" gid="633" x="504" y="715" width="50" height="50">
+   <properties>
+    <property name="direction" value="0"/>
+    <property name="distance" value="400"/>
+    <property name="size" value="1"/>
+    <property name="speed" value="50"/>
    </properties>
   </object>
  </objectgroup>
