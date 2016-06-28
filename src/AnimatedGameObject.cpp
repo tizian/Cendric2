@@ -8,9 +8,16 @@ AnimatedGameObject::~AnimatedGameObject() {
 	m_animations.clear();
 }
 
-void AnimatedGameObject::setCurrentAnimation(const Animation *animation, bool isFlipped) {
+void AnimatedGameObject::setCurrentAnimation(const Animation *animation, bool isFlipped, bool force) {
+	if (animation == nullptr || m_isAnimationLocked && !force) return;
 	m_animatedSprite.setFlippedX(isFlipped);
 	m_animatedSprite.setAnimation(animation);
+	if (force)
+		m_isAnimationLocked = true;
+}
+
+void AnimatedGameObject::unlockAnimation() {
+	m_isAnimationLocked = false;
 }
 
 void AnimatedGameObject::addAnimation(GameObjectState state, Animation* animation) {
@@ -22,8 +29,14 @@ void AnimatedGameObject::addAnimation(GameObjectState state, Animation* animatio
 	m_animations.insert({ state, animation });
 }
 
-const Animation* AnimatedGameObject::getAnimation(GameObjectState state) {
-	return m_animations[state];
+const Animation* AnimatedGameObject::getAnimation(GameObjectState state) const {
+	if (m_animations.find(state) == m_animations.end())
+		return nullptr;
+	return m_animations.at(state);
+}
+
+bool AnimatedGameObject::isAnimationLocked() const {
+	return m_isAnimationLocked;
 }
 
 void AnimatedGameObject::render(sf::RenderTarget& renderTarget) {

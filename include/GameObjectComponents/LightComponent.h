@@ -11,6 +11,7 @@ public:
 	~LightComponent();
 
 	void flipLightOffsetX(bool flipped);
+	void flipLightOffsetY(bool flipped);
 	void setVisible(bool visible);
 	void setPosition(const sf::Vector2f& pos) override;
 
@@ -18,4 +19,5 @@ protected:
 	LightObject* m_lightObject = nullptr;
 	sf::Vector2f m_lightOffset;
 	bool m_isLightOffsetFlippedX = false;
+	bool m_isLightOffsetFlippedY = false;
 };

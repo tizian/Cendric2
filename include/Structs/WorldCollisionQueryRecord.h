@@ -25,6 +25,8 @@ struct WorldCollisionQueryRecord {
 	// if set to false, the collision check will not include bounding boxes of mobs in the world.
 	// default is true.
 	bool ignoreMobs = true;
+	// if this is set to true, the collision check will not include oneway tiles
+	bool ignoreOnewayTiles = false;
 	// this is set to the moving platform parent of a movable game object if it hits one.
 	MovingTile* movingParent = nullptr;
 	// this game object will not be checked for collision

@@ -57,9 +57,10 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 				rec.boundingBox = *(m_mob->getBoundingBox());
 				rec.boundingBox.top += diffY;
 				rec.ignoreDynamicTiles = m_mob->isIgnoreDynamicTiles();
+				rec.ignoreOnewayTiles = true;
 
 				if (m_mob->getLevel()->collides(rec)) {
-					if (!up ^ m_mob->isUpsideDown()) {
+					if (!up != m_mob->isUpsideDown()) {
 						stopClimbing();
 					}
 					return;
@@ -80,7 +81,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 	}
 	else {
 		// check if a climbing just started
-		if (!g_inputController->isKeyJustPressed(Key::Up)) return;
+		if (!(g_inputController->isKeyJustPressed(Key::Up) || g_inputController->isKeyJustPressed(Key::Down))) return;
 
 		for (auto& go : *(m_mob->getScreen()->getObjects(GameObjectType::_DynamicTile))) {
 			LadderTile* tile = dynamic_cast<LadderTile*>(go);

@@ -23,6 +23,8 @@ public:
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
+	static const std::string TRANSFORM_SPRITEPATH;
+
 protected:
 	std::string getSpritePath() const override;
 	std::string getDeathSoundPath() const override;

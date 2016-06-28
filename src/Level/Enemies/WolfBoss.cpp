@@ -8,6 +8,8 @@
 
 REGISTER_ENEMY(EnemyID::Boss_Wolf, WolfBoss)
 
+const std::string WolfBoss::TRANSFORM_SPRITEPATH = "res/assets/cendric/cendric_transform_wolf.png";
+
 void WolfBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = 50;
 	loot.insert({ "mi_firstguardianheart", 1 });
@@ -59,6 +61,13 @@ void WolfBoss::loadSpells() {
 	chopSpell.fightAnimation = GameObjectState::Walking;
 
 	m_spellManager->addSpell(chopSpell);
+
+	// transform spell sprite for cendric
+	g_resourceManager->loadTexture(TRANSFORM_SPRITEPATH, ResourceType::Level);
+	Animation* transformedAnimation = new Animation();
+	transformedAnimation->setSpriteSheet(g_resourceManager->getTexture(WolfBoss::TRANSFORM_SPRITEPATH));
+	transformedAnimation->addFrame(sf::IntRect(0, 0, 110, 120));
+	m_mainChar->addAnimation(GameObjectState::Broken, transformedAnimation);
 
 	SpellData transformBeamSpell = SpellData::getSpellData(SpellID::WindGust);
 	transformBeamSpell.id = SpellID::TransformBeam;
@@ -116,7 +125,7 @@ void WolfBoss::handleAttackInput() {
 	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 100.f)
 		m_spellManager->setCurrentSpell(2); // windgust
 	else {
-		if (m_mainChar->isStunned()) {
+		if (m_mainChar->isStunned() || std::abs(m_mainChar->getPosition().x - getPosition().x) > 1000.f) {
 			m_spellManager->setCurrentSpell(0); // only charge
 		}
 		else {

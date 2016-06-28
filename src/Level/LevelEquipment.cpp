@@ -49,6 +49,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	}
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());
+		m_lightComponent->flipLightOffsetY(m_mainChar->isUpsideDown());
 	}
 
 	sf::Vector2f newPosition;

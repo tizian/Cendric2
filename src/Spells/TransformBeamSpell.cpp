@@ -36,11 +36,15 @@ void TransformBeamSpell::update(const sf::Time& frameTime) {
 		return;
 
 	bool isLeftOfMainChar = m_mainChar->getPosition().x > getPosition().x;
-	if (m_mainChar->isFacingRight() ^ isLeftOfMainChar) {
-		// he's looking into the direction of the spell, stun him (for eternity)
+	if (m_mainChar->isFacingRight() != isLeftOfMainChar) {
+		// he's looking into the direction of the spell, stun him (for eternity) and turn him into a wolf
 		m_mainChar->setStunned(sf::seconds(1000.f));
+		m_mainChar->setCurrentAnimation(m_mainChar->getAnimation(GameObjectState::Broken), !m_mainChar->isFacingRight(), true);
 		m_hasStunned = true;
-		// TODO: transform?
+		// striptease 
+		for (auto& go : *m_screen->getObjects(GameObjectType::_LevelEquipment)) {
+			go->setDisposed();
+		}
 	}
 }
 

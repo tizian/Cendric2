@@ -127,7 +127,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 
 		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
 		if (tile->isOneWay()) {
-			if (rec.collisionDirection != CollisionDirection::Down) continue;
+			if (rec.ignoreOnewayTiles || rec.collisionDirection != CollisionDirection::Down) continue;
 			if (rec.boundingBox.top + rec.boundingBox.height > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
@@ -141,7 +141,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 
 		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
 		if (tile->isOneWay()) {
-			if (rec.collisionDirection != CollisionDirection::Down) continue;
+			if (rec.ignoreOnewayTiles || rec.collisionDirection != CollisionDirection::Down) continue;
 			if (rec.boundingBox.top + rec.boundingBox.height > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
