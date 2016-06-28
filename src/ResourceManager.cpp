@@ -73,7 +73,6 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_GUI_ARROW, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_ARROW_LEFT, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_ARROW_RIGHT, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_EXIT_ARROW, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_CHECKBOX, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_SLIDER, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_KNOB, ResourceType::Global);
@@ -326,6 +325,8 @@ void ResourceManager::loadLevelResources() {
 	loadTexture(GlobalResource::TEX_GUI_HEALTHBAR_CONTENT, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_GUI_HEALTHBAR_CONTENT_HIT, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_GUI_HEALTHBAR_CONTENT_HIGHLIGHT, ResourceType::Level);
+	loadTexture(GlobalResource::TEX_GUI_EXIT_ARROW, ResourceType::Level);
+	loadTexture(GlobalResource::TEX_GUI_LADDER_ARROW, ResourceType::Level);
 }
 
 

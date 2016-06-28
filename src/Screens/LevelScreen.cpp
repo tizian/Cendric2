@@ -215,8 +215,8 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_currentLevel.setWorldView(renderTarget, focus);
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default);
 	sf::View oldView = renderTarget.getView();
-	renderObjects(GameObjectType::_MovableTile, renderTarget);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
+	renderObjects(GameObjectType::_MovableTile, renderTarget);
 	{
 		m_particleRenderTexture.display();
 		m_sprite.setTexture(m_particleRenderTexture.getTexture());

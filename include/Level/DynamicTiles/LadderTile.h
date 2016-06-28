@@ -9,8 +9,10 @@ public:
 	LadderTile(const LadderTileData& data, LevelScreen* levelScreen);
 	void init() override;
 	void loadAnimation(int skinNr) override;
+	void update(const sf::Time& frametime) override;
 	void render(sf::RenderTarget& target) override;
-	void onHit(LevelMovableGameObject* mob) override { /*nop*/ }
+	void renderAfterForeground(sf::RenderTarget& target) override;
+	void onHit(LevelMovableGameObject* mob) override;
 	void onHit(Spell* spell) override { /*nop*/ }
 	void setPosition(const sf::Vector2f& position) override;
 
@@ -24,4 +26,9 @@ private:
 	std::string getSpritePath() const override;
 	std::vector<sf::Sprite> m_sprites;
 	int m_size;
+
+	// Arrow information
+	bool m_showSprite = false;
+	sf::Sprite m_arrow;
+	sf::Time m_time = sf::Time::Zero;
 };

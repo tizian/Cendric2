@@ -76,6 +76,7 @@ public:
 	static const std::string TEX_GUI_ARROW_LEFT;
 	static const std::string TEX_GUI_ARROW_RIGHT;
 	static const std::string TEX_GUI_EXIT_ARROW;
+	static const std::string TEX_GUI_LADDER_ARROW;
 	static const std::string TEX_GUI_CHECKBOX;
 	static const std::string TEX_GUI_SLIDER;
 	static const std::string TEX_GUI_KNOB;

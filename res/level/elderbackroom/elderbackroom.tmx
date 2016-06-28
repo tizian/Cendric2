@@ -393,7 +393,7 @@
   </object>
  </objectgroup>
  <objectgroup name="ladder">
-  <object id="96" gid="550" x="950" y="335" width="50" height="50">
+  <object id="96" gid="550" x="950" y="299" width="50" height="50">
    <properties>
     <property name="size" value="8"/>
    </properties>

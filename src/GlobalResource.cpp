@@ -66,6 +66,7 @@ const std::string GlobalResource::TEX_GUI_ARROW = "res/assets/gui/arrow.png";
 const std::string GlobalResource::TEX_GUI_ARROW_LEFT = "res/assets/gui/arrow_left.png";
 const std::string GlobalResource::TEX_GUI_ARROW_RIGHT = "res/assets/gui/arrow_right.png";
 const std::string GlobalResource::TEX_GUI_EXIT_ARROW = "res/assets/gui/exit_arrow.png";
+const std::string GlobalResource::TEX_GUI_LADDER_ARROW = "res/assets/gui/ladder_arrows.png";
 const std::string GlobalResource::TEX_GUI_CHECKBOX = "res/assets/gui/checkbox.png";
 const std::string GlobalResource::TEX_GUI_SLIDER = "res/assets/gui/slider.png";
 const std::string GlobalResource::TEX_GUI_KNOB = "res/assets/gui/knob.png";

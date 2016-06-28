@@ -20,6 +20,7 @@ void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
 	m_isFacingRight = m_mob->isFacingRight();
+	m_isUpsideDown = m_mob->isUpsideDown();
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), !m_isFacingRight);
 	playCurrentAnimation(false);
 	
@@ -56,6 +57,11 @@ void LeapOfFaithSpell::update(const sf::Time& frameTime) {
 	if (m_isFacingRight != m_mob->isFacingRight()) {
 		m_isFacingRight = m_mob->isFacingRight();
 		setCurrentAnimation(getAnimation(GameObjectState::Idle), !m_isFacingRight);
+	}
+
+	if (m_isUpsideDown != m_mob->isUpsideDown()) {
+		m_isUpsideDown = m_mob->isUpsideDown();
+		m_animatedSprite.setFlippedY(m_isUpsideDown);
 	}
 
 	sf::Vector2f nextPosition;

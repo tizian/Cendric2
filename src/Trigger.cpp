@@ -27,7 +27,10 @@ void Trigger::update(const sf::Time& frameTime) {
 	GameObject::update(frameTime);
 	m_time += frameTime;
 
-	if (m_data.isKeyGuarded) {
+	bool intersects = m_mainChar->getBoundingBox()->intersects(m_data.triggerRect);
+	if (m_data.isKeyGuarded && intersects) {
+		m_showSprite = intersects;
+
 		sf::Vector2f pos = m_sprite.getPosition();
 		float variance = 4.f;
 		float speed = 6.f;
@@ -35,9 +38,6 @@ void Trigger::update(const sf::Time& frameTime) {
 		float y = m_data.triggerRect.top + m_data.triggerRect.height - 2.f * m_mainChar->getSize().y - 0.5f * variance + offset;
 		m_sprite.setPosition(pos.x, y);
 	}
-
-	bool intersects = m_mainChar->getBoundingBox()->intersects(m_data.triggerRect);
-	m_showSprite = intersects;
 
 	if (m_isOnTrigger && !intersects) {
 		m_isOnTrigger = false;
@@ -60,7 +60,7 @@ void Trigger::update(const sf::Time& frameTime) {
 
 void Trigger::render(sf::RenderTarget& renderTarget) {
 	GameObject::render(renderTarget);
-	if (m_data.isKeyGuarded && m_showSprite) {
+	if (m_showSprite) {
 		renderTarget.draw(m_sprite);
 	}
 }

@@ -19,6 +19,7 @@ public:
 private:
 	float m_gravityScale;
 	bool m_isFacingRight;
+	bool m_isUpsideDown;
 
 	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
