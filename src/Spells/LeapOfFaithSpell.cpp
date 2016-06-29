@@ -20,7 +20,7 @@ void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
 	m_isFacingRight = m_mob->isFacingRight();
-	m_isUpsideDown = m_mob->isUpsideDown();
+	m_isUpsideDown = false;
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), !m_isFacingRight);
 	playCurrentAnimation(false);
 	
