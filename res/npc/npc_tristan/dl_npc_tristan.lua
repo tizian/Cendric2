@@ -11,7 +11,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("monster_problem", "completed") and not DL:isConditionFulfilled("npc_tristan", "reward")) then
 		DL:addChoice(40, "DL_Choice_GiveReward") -- Your father told me to collect my reward from you.
 	end 
-	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "complete")) then
+	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "completed")) then
 		DL:addChoice(10, "DL_Choice_Sheep") -- About your sheep...
 	end
 	if (DL:isConditionFulfilled("npc_tristan", "merchant")) then
@@ -85,7 +85,7 @@ loadDialogue = function(DL)
 		
 	end 
 	
-	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "complete")) then
+	if (DL:isConditionFulfilled("npc_ivo", "sheep_asked") and not DL:isQuestState("monster_problem", "completed")) then
 	
 		DL:createChoiceNode(10)
 		if (not DL:isConditionFulfilled("npc_tristan", "thief_seen")) then

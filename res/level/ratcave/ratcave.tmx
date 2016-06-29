@@ -759,13 +759,6 @@
     <property name="gold" value="10"/>
    </properties>
   </object>
-  <object id="24" gid="534" x="287" y="1282" width="50" height="50">
-   <properties>
-    <property name="gold" value="50"/>
-    <property name="key" value="ke_test_1"/>
-    <property name="strength" value="5"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="light" visible="0">
   <object id="11" x="57" y="1367" width="1001" height="161">
