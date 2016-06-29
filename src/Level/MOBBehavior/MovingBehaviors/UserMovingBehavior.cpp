@@ -45,6 +45,12 @@ void UserMovingBehavior::startClimbing(GameObject* ladder, float yPos) {
 
 void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 	if (m_isClimbing) {
+		if (g_inputController->isKeyJustPressed(Key::Jump)) {
+			stopClimbing();
+			g_inputController->lockAction();
+			return;
+		}
+
 		// handle climb step timing
 		if (g_inputController->isKeyActive(Key::Up) || g_inputController->isKeyActive(Key::Down)) {
 			m_climbStepTime += frameTime;
