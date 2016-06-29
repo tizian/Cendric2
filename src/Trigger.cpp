@@ -26,6 +26,7 @@ Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 void Trigger::update(const sf::Time& frameTime) {
 	GameObject::update(frameTime);
 	m_time += frameTime;
+	m_showSprite = false;
 
 	bool intersects = m_mainChar->getBoundingBox()->intersects(m_data.triggerRect);
 	if (m_data.isKeyGuarded && intersects) {

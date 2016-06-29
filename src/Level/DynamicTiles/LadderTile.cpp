@@ -10,7 +10,7 @@ LadderTile::LadderTile(const LadderTileData& data, LevelScreen* levelScreen) : L
 
 void LadderTile::init() {
 	setSpriteOffset(sf::Vector2f(-10.f, -TILE_SIZE_F));
-	setPositionOffset(sf::Vector2f(10.f, TILE_SIZE_F));
+	setPositionOffset(sf::Vector2f(10.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F * m_size));
 }
 
@@ -69,7 +69,7 @@ void LadderTile::renderAfterForeground(sf::RenderTarget& target) {
 
 void LadderTile::onHit(LevelMovableGameObject* mob) {
 	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter)  return;
-	if (mob->getState() == GameObjectState::Climbing_1 || mob->getState() != GameObjectState::Climbing_2) return;
+	if (mob->getState() == GameObjectState::Climbing_1 || mob->getState() == GameObjectState::Climbing_2) return;
 	m_showSprite = true;
 
 	float variance = 4.f;

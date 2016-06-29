@@ -35,6 +35,7 @@ void UserMovingBehavior::stopClimbing() {
 
 void UserMovingBehavior::startClimbing(GameObject* ladder, float yPos) {
 	m_isClimbing = true;
+	m_isGrounded = false;
 	m_currentLadder = ladder;
 	m_mob->setPositionY(yPos);
 	m_mob->setAccelerationY(0.f);
