@@ -30,6 +30,7 @@ public:
 private:
 	sf::Sprite m_screenSpriteBackground;
 	sf::Sprite m_screenSpriteForeground;
+	sf::Sprite m_logoSprite;
 	BitmapText m_versionText;
 
 	particles::TextureParticleSystem* m_ps_left = nullptr;

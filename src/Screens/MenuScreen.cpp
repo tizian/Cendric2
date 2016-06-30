@@ -6,12 +6,18 @@
 using namespace std;
 
 const std::string SPRITE_PATH_BG = "res/assets/screens/screen_menu_bg.png";
-const std::string SPRITE_PATH_FG = "res/assets/screens/screen_splash_fg.png";
+const std::string SPRITE_PATH_FG = "res/assets/screens/screen_menu_fg.png";
+const std::string SPRITE_PATH_LOGO = "res/assets/screens/logo.png";
 
 MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
-	g_resourceManager->loadTexture(SPRITE_PATH_BG, ResourceType::Unique, this);
 	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_BG)));
 	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_FG)));
+
+	float scale = 4.f;
+	sf::Texture* tex = g_resourceManager->getTexture(SPRITE_PATH_LOGO);
+	m_logoSprite = sf::Sprite(*tex);
+	m_logoSprite.setScale(sf::Vector2f(scale, scale));
+	m_logoSprite.setPosition(0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 30.f);
 }
 
 MenuScreen::~MenuScreen() {
@@ -58,6 +64,7 @@ void MenuScreen::render(sf::RenderTarget &renderTarget) {
 	m_ps_right->render(renderTarget);
 	renderTarget.draw(m_screenSpriteForeground);
 	renderTarget.draw(m_versionText);
+	renderTarget.draw(m_logoSprite);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderObjects(GameObjectType::_Form, renderTarget);
 	renderTooltipText(renderTarget);

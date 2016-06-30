@@ -3,14 +3,23 @@
 
 using namespace particles;
 
-const std::string SPRITE_PATH_BG = "res/assets/screens/screen_splash_bg.png";
-const std::string SPRITE_PATH_FG = "res/assets/screens/screen_splash_fg.png";
+const std::string SPRITE_PATH_BG = "res/assets/screens/screen_menu_bg.png";
+const std::string SPRITE_PATH_FG = "res/assets/screens/screen_menu_fg.png";
+const std::string SPRITE_PATH_LOGO = "res/assets/screens/logo.png";
 
 SplashScreen::SplashScreen() : Screen(nullptr) {
-	g_resourceManager->loadTexture(SPRITE_PATH_BG, ResourceType::Unique, this);
+	g_resourceManager->loadTexture(SPRITE_PATH_BG, ResourceType::Global);
 	g_resourceManager->loadTexture(SPRITE_PATH_FG, ResourceType::Global);
+	g_resourceManager->loadTexture(SPRITE_PATH_LOGO, ResourceType::Global);
+
 	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_BG)));
 	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_FG)));
+
+	float scale = 5.f;
+	sf::Texture* tex = g_resourceManager->getTexture(SPRITE_PATH_LOGO);
+	m_logoSprite = sf::Sprite(*tex);
+	m_logoSprite.setScale(sf::Vector2f(scale, scale));
+	m_logoSprite.setPosition(0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 0.5f * (WINDOW_HEIGHT - scale * tex->getSize().y));
 
 	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
 	m_ps_right = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
@@ -58,6 +67,7 @@ void SplashScreen::render(sf::RenderTarget& renderTarget) {
 	m_ps_left->render(renderTarget);
 	m_ps_right->render(renderTarget);
 	renderTarget.draw(m_screenSpriteForeground);
+	renderTarget.draw(m_logoSprite);
 	renderObjects(GameObjectType::_Interface, renderTarget);
 	renderTarget.draw(m_versionText);
 }
