@@ -1,4 +1,4 @@
-![cendric logo](images/title.png)
+![cendric logo](images/logo.png)
 # Cendric - RPG Platformer
 
 *Cendric* is a 2D RPG Platformer game in which players explore a world by completing levels and quests.
