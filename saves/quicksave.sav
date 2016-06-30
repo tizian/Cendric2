@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:3332
+time.played:3342
 savegame.name:Quicksave
-savegame.date:1467225590
+savegame.date:1467295037
 level.id:res/level/howlingcaverns/howlingcaverns.tmx
 level.position:4610.000000,560.000000
 is.in.level:0
 map.id:res/map/meadows/meadows.tmx
-map.position:2898.275635,3071.873779
+map.position:3276.743652,3071.873779
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -113,7 +113,7 @@ tiles.explored:res/map/meadows/meadows.tmx,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 quest.state:broken_bridge,3
 quest.state:cavern_beast,2
 quest.state:clerics_recommendation,1
-quest.state:gates_of_gandria,1
+quest.state:gates_of_gandria,2
 quest.state:hungry_wolf,2
 quest.state:meat_delivery,2
 quest.state:missing_paladin,2

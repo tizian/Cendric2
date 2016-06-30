@@ -24,6 +24,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ce
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cendric:WasntHereBefore', 'cutscene','... It wasn''t there before!','Es war vorher noch nicht da!','Da isch vorene nanig da gsi!');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Chapter2', 'cutscene','- The City of Gandria -','- Gandria -','- Gandria -');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Guard:OpenTheGates', 'cutscene','Open the gates!','Öffnet das Tor!','Mached s''Tor uf!');
 
 
 
