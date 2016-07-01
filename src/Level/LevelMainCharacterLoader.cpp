@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const int EQ_SIZE = 120;
+
 LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const {
 	LevelMainCharacter* mainChar = new LevelMainCharacter(level);
 	screen->addObject(mainChar);
@@ -39,37 +41,46 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 
 	for (auto& it : gameData) {
 		LevelEquipmentData equipment;
-		Item item = Item(it);
-		if (!item.isValid()) {
-			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id.");
-			return;
+		Item* item_ = g_resourceManager->getItem(it);
+		if (item_ == nullptr || !item_->isValid()) {
+			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id: " + it);
+			continue;
 		}
+		Item& item = *item_;
 		if (!item.isEquipmentItem()) {
 			// this item has no equipment part
 			continue;
 		}
 
-		equipment.texturePath = item.getEquipmentBean().texture_path;
+		const ItemEquipmentBean& eq = item.getEquipmentBean();
+		equipment.texturePath = eq.texture_path;
 
 		equipment.spriteOffset = sf::Vector2f(0.f, 0.f);
-		equipment.boundingBox = sf::FloatRect(0, 0, 120, 120);
-		for (int i = 0; i < 8; ++i) {
-			equipment.texturePositions[GameObjectState::Walking].push_back(sf::IntRect(i * 120, 0, 120, 120));
+		equipment.boundingBox = sf::FloatRect(0, 0, static_cast<float>(EQ_SIZE), static_cast<float>(EQ_SIZE));
+		int offset = 0;
+		for (int i = 0; i < eq.frames_walk; ++i) {
+			equipment.texturePositions[GameObjectState::Walking].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+			++offset;
 		}
-		for (int i = 0; i < 2; ++i) {
-			equipment.texturePositions[GameObjectState::Idle].push_back(sf::IntRect(960 + i * 120, 0, 120, 120));
+		for (int i = 0; i < eq.frames_idle; ++i) {
+			equipment.texturePositions[GameObjectState::Idle].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+			++offset;
 		}
-		for (int i = 0; i < 2; ++i) {
-			equipment.texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(1200 + i * 120, 0, 120, 120));
+		for (int i = 0; i < eq.frames_jump; ++i) {
+			equipment.texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+			++offset;
 		}
-		for (int i = 0; i < 5; ++i) {
-			equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
+		for (int i = 0; i < eq.frames_fight; ++i) {
+			equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+			++offset;
 		}
-		for (int i = 0; i < 2; ++i) {
-			equipment.texturePositions[GameObjectState::Climbing_1].push_back(sf::IntRect(2040 + i * 120, 0, 120, 120));
+		for (int i = 0; i < eq.frames_climb1; ++i) {
+			equipment.texturePositions[GameObjectState::Climbing_1].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+			++offset;
 		}
-		for (int i = 0; i < 2; ++i) {
-			equipment.texturePositions[GameObjectState::Climbing_2].push_back(sf::IntRect(2280 + i * 120, 0, 120, 120));
+		for (int i = 0; i < eq.frames_climb2; ++i) {
+			equipment.texturePositions[GameObjectState::Climbing_2].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+			++offset;
 		}
 
 		LevelEquipment* levelEquipment = new LevelEquipment(mainCharacter);
@@ -87,9 +98,6 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 				Animation* animation = new Animation();
 				if (ani.first == GameObjectState::Fighting) {
 					animation->setFrameTime(sf::milliseconds(70));
-				}
-				else if (ani.first == GameObjectState::Jumping) {
-					animation->setFrameTime(sf::milliseconds(200));
 				}
 				animation->setSpriteSheet(g_resourceManager->getTexture(item.getEquipmentBean().texture_path));
 				for (auto& frame : ani.second) {

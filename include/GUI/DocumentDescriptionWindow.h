@@ -9,7 +9,7 @@
 
 class DocumentDescriptionWindow : public Window {
 public:
-	DocumentDescriptionWindow(const Item& item);
+	DocumentDescriptionWindow(const Item* item);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;

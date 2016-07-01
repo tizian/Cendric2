@@ -57,12 +57,13 @@ WorldScreen::~WorldScreen() {
 	m_overlayQueue.clear();
 }
 
-void WorldScreen::notifyPermanentItemConsumed(const Item& item) {
-	getCharacterCore()->addPermanentAttributes(item.getAttributes());
+void WorldScreen::notifyPermanentItemConsumed(const Item* item) {
+	if (item == nullptr) return;
+	getCharacterCore()->addPermanentAttributes(item->getAttributes());
 
 	addScreenOverlay(ScreenOverlay::createPermanentItemScreenOverlay(item));
 	m_progressLog->addPermanentItemProgress(item);
-	notifyItemChange(item.getID(), -1);
+	notifyItemChange(item->getID(), -1);
 	m_interface->reloadCharacterInfo();
 }
 

@@ -1,6 +1,7 @@
 #include "ResourceManager.h"
 #include "AnimatedSprite.h"
 #include "GlobalResource.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ ResourceManager::~ResourceManager() {
 	m_resourceOwners.clear();
 	m_levelResources.clear();
 	m_mapResources.clear();
+	deleteItemResources();
 }
 
 void ResourceManager::init() {
@@ -157,6 +159,17 @@ void ResourceManager::loadFont(const std::string& filename, ResourceType type, v
 
 void ResourceManager::loadBitmapFont(const std::string& filename, ResourceType type, void* owner) {
 	loadResource<BitmapFont>(m_bitmapFonts, "bitmap font", filename, type, owner);
+}
+
+Item* ResourceManager::getItem(const std::string& itemID) {
+	if (itemID.empty()) return nullptr;
+	if (m_items.find(itemID) == m_items.end()) {
+		Item* item = new Item(itemID);
+		m_items.insert({ itemID, item });
+		if (!item->isValid())
+			g_logger->logError("ResourceManager", "Item not loaded, unknown id: " + itemID);
+	}
+	return m_items.at(itemID);
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {
@@ -329,5 +342,9 @@ void ResourceManager::loadLevelResources() {
 	loadTexture(GlobalResource::TEX_GUI_LADDER_ARROW, ResourceType::Level);
 }
 
-
-
+void ResourceManager::deleteItemResources() {
+	for (auto& item : m_items) {
+		delete item.second;
+	}
+	m_items.clear();
+}

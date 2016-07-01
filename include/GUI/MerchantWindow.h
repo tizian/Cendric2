@@ -52,7 +52,7 @@ private:
 	std::map<std::string, InventorySlot> m_items;
 	MerchantItemDescriptionWindow* m_descriptionWindow = nullptr;
 
-	void showDescription(const Item& item);
+	void showDescription(const Item* item);
 	void hideDescription();
 
 	static const int SLOT_COUNT_X;

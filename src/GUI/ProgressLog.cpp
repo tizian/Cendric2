@@ -65,13 +65,14 @@ void ProgressLog::addItemConversionProgress(const std::string& oldItemID, const 
 	calculatePositions();
 }
 
-void ProgressLog::addPermanentItemProgress(const Item& item) {
-	std::string text = g_textProvider->getText(item.getID(), "item") + " ";
+void ProgressLog::addPermanentItemProgress(const Item* item) {
+	if (item == nullptr) return;
+	std::string text = g_textProvider->getText(item->getID(), "item") + " ";
 	text.append(g_textProvider->getText("Consumed"));
 	text.append("\n");
-	AttributeData::appendAttributes(text, item.getAttributes());
+	AttributeData::appendAttributes(text, item->getAttributes());
 	
-	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, COLOR_NEUTRAL, item.getID()));
+	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, COLOR_NEUTRAL, item->getID()));
 
 	calculatePositions();
 }
@@ -206,15 +207,18 @@ ProgressLogEntry::ProgressLogEntry() {
 	setAlpha(0.f);
 }
 
-ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, const sf::Color& color, const std::string &itemID) {
+ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, const sf::Color& color, const std::string& itemID) {
 	ProgressLogEntry* entry = new ProgressLogEntry();
 
 	entry->m_text->setColor(color);
 	entry->m_text->setString(str);
 
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
-	Item item(itemID);
-	sf::IntRect textureRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50);
+	Item* item = g_resourceManager->getItem(itemID);
+	if (item == nullptr) {
+		return entry;
+	}
+	sf::IntRect textureRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50);
 	entry->m_icon->setTextureRect(textureRect);
 
 	return entry;

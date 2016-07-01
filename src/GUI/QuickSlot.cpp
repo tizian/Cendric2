@@ -100,13 +100,13 @@ void QuickSlot::reload() {
 	else {
 		// the slot is filled
 		m_isEmpty = false;
-		Item item(m_itemID);
-		if (item.getType() == ItemType::VOID) return;
+		Item* item = g_resourceManager->getItem(m_itemID);
+		if (item == nullptr || item->getType() == ItemType::VOID) return;
 		int amount = m_core->getItems()->at(m_itemID);
 
 		m_iconRect.setTextureRect(sf::IntRect(
-			item.getIconTextureLocation().x,
-			item.getIconTextureLocation().y,
+			item->getIconTextureLocation().x,
+			item->getIconTextureLocation().y,
 			static_cast<int>(ICON_SIZE),
 			static_cast<int>(ICON_SIZE)));
 

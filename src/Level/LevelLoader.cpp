@@ -226,7 +226,7 @@ void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {
 			}
 
 			LevelItem* levelItem = new LevelItem(screen);
-			levelItem->load(Item(item.item_id), position);
+			levelItem->load(item.item_id, position);
 			levelItem->setSpawnPosition(static_cast<int>(i));
 			screen->addObject(levelItem);
 		}

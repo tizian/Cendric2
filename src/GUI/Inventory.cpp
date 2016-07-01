@@ -457,13 +457,13 @@ void Inventory::renderAfterForeground(sf::RenderTarget& target) {
 	m_equipment->renderAfterForeground(target);
 }
 
-void Inventory::convertItem(const Item& item) {
-	if (!item.isConvertible()) return;
+void Inventory::convertItem(const Item* item) {
+	if (item == nullptr || !item->isConvertible()) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
 
-	ItemConvertibleBean bean = item.getConvertibleBean();
-	worldScreen->notifyItemChange(item.getID(), -1);
+	ItemConvertibleBean bean = item->getConvertibleBean();
+	worldScreen->notifyItemChange(item->getID(), -1);
 
 	float prob = bean.probability / 100.f;
 	if (prob <= randomFloat(0.f, 1.f)) return;
@@ -474,17 +474,18 @@ void Inventory::convertItem(const Item& item) {
 		worldScreen->notifyItemChange(bean.convertible_item_id, 1);
 }
 
-void Inventory::learnSpell(const Item& item) {
-	if (!item.isSpell()) return;
+void Inventory::learnSpell(const Item* item) {
+	if (item == nullptr || !item->isSpell()) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
 
-	ItemSpellBean bean = item.getSpellBean();
-	worldScreen->notifyItemChange(item.getID(), -1);
+	ItemSpellBean bean = item->getSpellBean();
+	worldScreen->notifyItemChange(item->getID(), -1);
 	worldScreen->notifySpellLearned(static_cast<SpellID>(bean.spell_id));
 }
 
-void Inventory::showDocument(const Item& item) {
+void Inventory::showDocument(const Item* item) {
+	if (item == nullptr) return;
 	delete m_documentWindow;
 	m_documentWindow = new DocumentDescriptionWindow(item);
 
@@ -497,8 +498,9 @@ void Inventory::showDocument(const Item& item) {
 	m_documentWindow->setPosition(pos);
 }
 
-void Inventory::showDescription(const Item& item) {
-	m_descriptionWindow->load(item);
+void Inventory::showDescription(const Item* item) {
+	if (item == nullptr) return;
+	m_descriptionWindow->load(*item);
 	m_descriptionWindow->show();
 	sf::Vector2f pos = sf::Vector2f(
 		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,
@@ -581,9 +583,9 @@ void Inventory::reload() {
 	hideDescription();
 	hideDocument();
 	for (auto& itemData : m_core->getData().items) {
-		Item item(itemData.first);
-		if (m_typeMap.find(item.getType()) == m_typeMap.end()) continue;
-		m_typeMap.at(item.getType())->insert({ item.getID(), InventorySlot(item.getID(), itemData.second) });
+		Item* item = g_resourceManager->getItem(itemData.first);
+		if (item == nullptr || m_typeMap.find(item->getType()) == m_typeMap.end()) continue;
+		m_typeMap.at(item->getType())->insert({ item->getID(), InventorySlot(item->getID(), itemData.second) });
 	}
 
 	// reload equipment

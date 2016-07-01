@@ -20,10 +20,11 @@
 
 // An item in cendrics / a npcs / a mobs inventory
 class Item {
-public:
+	friend class ResourceManager;
+protected:
+	// constructor is protected, only the resource manager can create items
 	Item(const std::string& itemID);
-	// default constructor, creates an invalid item
-	Item();
+public:
 	virtual ~Item();
 
 	const std::string& getID() const;

@@ -10,7 +10,12 @@ LevelItem::LevelItem(LevelScreen* screen) : AnimatedGameObject() {
 	m_mainChar = screen->getMainCharacter();
 }
 
-void LevelItem::load(const Item& item, const sf::Vector2f& position) {
+void LevelItem::load(const std::string& itemID, const sf::Vector2f& position) {
+	Item* item_ = g_resourceManager->getItem(itemID);
+	if (item_ == nullptr) {
+		return;
+	}
+	Item& item = *item_;
 	m_itemID = item.getID();
 	m_itemType = item.getType();
 	m_goldValue = item.getValue();

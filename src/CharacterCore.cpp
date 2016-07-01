@@ -48,6 +48,7 @@ bool CharacterCore::load(const std::string& fileName) {
 	loadQuests();
 	// measuring the time played with this save.
 	m_stopwatch.restart();
+	g_resourceManager->deleteItemResources();
 	return true;
 }
 
@@ -75,6 +76,7 @@ void CharacterCore::loadNew() {
 	m_data.equippedItems.at(ItemType::Equipment_body) = "eq_defaultarmor";
 	setQuestState("who_am_i", QuestState::Started);
 	m_stopwatch.restart();
+	g_resourceManager->deleteItemResources();
 	reloadAttributes();
 }
 
@@ -152,9 +154,9 @@ void CharacterCore::reloadAttributes() {
 	m_totalAttributes = m_data.attributes;
 	for (auto& it : m_data.equippedItems) {
 		if (it.second.empty()) continue;
-		Item item(it.second);
-		if (item.getType() == ItemType::VOID) continue;
-		m_totalAttributes.addBean(item.getAttributes());
+		Item* item = g_resourceManager->getItem(it.second);
+		if (item == nullptr || !item->isEquipmentItem()) continue;
+		m_totalAttributes.addBean(item->getAttributes());
 	}
 	m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;
 }

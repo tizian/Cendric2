@@ -6,7 +6,7 @@ steps = {
 		{
 		texts = {
 			{str="Guard:OpenTheGates", time=10},
-			{str="", time=8},
+			{str="", time=7},
 		},
 		images = {
 			{path="1_background.png", vel=0, angle=0},

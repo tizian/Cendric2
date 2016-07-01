@@ -44,5 +44,4 @@ private:
 	std::vector<WeaponSlot_s> m_weaponSlots;
 
 	bool doesSlotExist(int slotNr) const;
-
 };

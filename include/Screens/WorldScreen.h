@@ -23,7 +23,7 @@ public:
 	void updateProgressLog(const sf::Time& frameTime);
 
 	// notify permanent item consumed -> change in core, display overlay and progresslog and reload inventory.
-	void notifyPermanentItemConsumed(const Item& item);
+	void notifyPermanentItemConsumed(const Item* item);
 	// notify item change -> change in core, display text and reload inventory. Also reload quest log.
 	void notifyItemChange(const std::string& itemID, int amount);
 	// notify item conversion -> change in core, display text and reload inventory. Also reload quest log.

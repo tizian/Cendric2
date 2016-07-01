@@ -36,11 +36,12 @@ item.id:eq_lightpendant,1
 item.id:eq_nekomataback,1
 item.id:eq_nekomatahead,1
 item.id:eq_oversizedhat,1
-item.id:eq_purpleback,1
 item.id:eq_rafishat,1
 item.id:eq_rubyring,1
-item.id:eq_wizardhatblue,1
-item.id:eq_wizardhatgrey,1
+item.id:eq_wizardhatfire,1
+item.id:eq_wizardhatice,1
+item.id:eq_wizardhatlight,1
+item.id:eq_wizardhatshadow,1
 item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
@@ -96,7 +97,7 @@ item.id:we_icestaff,1
 item.id:we_jasonsglaive,1
 item.id:we_oathbreaker,1
 item.id:we_ordermace,1
-item.id:we_pikeofgod,1
+item.id:we_pikeoflight,1
 item.id:we_rustysword,1
 item.id:we_sicklestaff,1
 item.id:we_simplesword,1

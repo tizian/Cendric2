@@ -1,14 +1,26 @@
 -- Blue Wizard Hat
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatblue', 'eq_head', 0, 150, 22);
-INSERT INTO item_attribute (item_id, dmg_ice, res_physical, res_ice) values ('eq_wizardhatblue', 5, 1, 2);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatblue', 'res/assets/equipment/head/spritesheet_head_wizardhat_blue.png');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatice', 'eq_head', 500, 100, 22);
+INSERT INTO item_attribute (item_id, dmg_ice, res_physical, res_ice) values ('eq_wizardhatice', 5, 1, 2);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatice', 'res/assets/equipment/head/spritesheet_head_wizardhat_ice.png');
+
+-- Red Wizard Hat
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatfire', 'eq_head', 500, 150, 20);
+INSERT INTO item_attribute (item_id, dmg_fire, res_physical, res_fire) values ('eq_wizardhatfire', 5, 1, 2);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatfire', 'res/assets/equipment/head/spritesheet_head_wizardhat_fire.png');
+
+-- White Wizard Hat
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatlight', 'eq_head', 500, 200, 20);
+INSERT INTO item_attribute (item_id, dmg_light, res_physical, res_light) values ('eq_wizardhatlight', 5, 1, 2);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatlight', 'res/assets/equipment/head/spritesheet_head_wizardhat_light.png');
 
 -- Grey Wizard Hat
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatgrey', 'eq_head', 50, 150, 20);
-INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire) values ('eq_wizardhatgrey', 5, 1, 2);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatgrey', 'res/assets/equipment/head/spritesheet_head_wizardhat_grey.png');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatshadow', 'eq_head', 500, 250, 20);
+INSERT INTO item_attribute (item_id, max_health, res_shadow, res_shadow) values ('eq_wizardhatshadow', 5, 1, 2);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_wizardhatshadow', 'res/assets/equipment/head/spritesheet_head_wizardhat_shadow.png');
 
 -- Oversized Hat
 
@@ -22,12 +34,6 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire) values ('eq_bandana', 5, 1, 2);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_bandana', 'res/assets/equipment/head/spritesheet_head_bandana.png');
 
--- Purple Back
-
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_purpleback', 'eq_back', 100, 150, 10);
-INSERT INTO item_attribute (item_id, res_physical, res_ice) values ('eq_purpleback', 5, 1);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_purpleback', 'res/assets/equipment/back/spritesheet_back_purple.png');
-
 -- Scarf of the Fire Rat
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_fireratscarf', 'eq_back', 150, 350, 12);
@@ -38,7 +44,7 @@ INSERT INTO item_equipment (item_id, texture_path) values ('eq_fireratscarf', 'r
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonback', 'eq_back', 0, 350, 30);
 INSERT INTO item_attribute (item_id, res_physical, dmg_shadow) values ('eq_demonback', 7, 5);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_demonback', 'res/assets/equipment/back/spritesheet_back_demon.png');
+INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_demonback', 'res/assets/equipment/back/spritesheet_back_demon.png', 3);
 
 -- Demon Head
 
@@ -57,7 +63,7 @@ INSERT INTO item_equipment (item_id, texture_path) values ('eq_demonbody', 'res/
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_nekomataback', 'eq_back', 0, 400, 40);
 INSERT INTO item_attribute (item_id, haste, critical, res_physical, res_shadow) values ('eq_nekomataback', 13, 12, 7, 6);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_nekomataback', 'res/assets/equipment/back/spritesheet_back_nekomata.png');
+INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_nekomataback', 'res/assets/equipment/back/spritesheet_back_nekomata.png', 3);
 
 -- Nekomata Head
 
@@ -75,7 +81,7 @@ INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_necrot3', 'r
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_necrot3', 'eq_back', 50, 200, 150);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, res_physical, res_shadow, dmg_shadow) values ('eq_back_necrot3', 20, 20, 10, 5, 10, 10);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_back_necrot3', 'res/assets/equipment/back/spritesheet_back_necrot3.png');
+INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_back_necrot3', 'res/assets/equipment/back/spritesheet_back_necrot3.png', 3);
 
 -- Necro T3 Body
 
@@ -83,11 +89,23 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, haste, critical, res_physical, res_shadow, dmg_shadow) values ('eq_body_necrot3', 30, 20, 10, 30, 20, 20);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_body_necrot3', 'res/assets/equipment/body/spritesheet_body_necrot3.png');
 
+-- Divine T1 Back
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet1', 'eq_back', 0, 450, 50);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet1', 4, 3, 2, 3, 4, 2, 3);
+INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_back_divinet1', 'res/assets/equipment/back/spritesheet_back_divinet1.png', 3);
+
 -- Divine T2 Back
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet2', 'eq_back', 0, 450, 100);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet2', 'eq_back', 0, 500, 100);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet2', 8, 6, 5, 6, 8, 3, 6);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_back_divinet2', 'res/assets/equipment/back/spritesheet_back_divinet2.png');
+INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_back_divinet2', 'res/assets/equipment/back/spritesheet_back_divinet2.png', 3);
+
+-- Divine T3 Back
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet3', 'eq_back', 0, 550, 200);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet3', 15, 12, 10, 12, 16, 6, 12);
+INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_back_divinet3', 'res/assets/equipment/back/spritesheet_back_divinet3.png', 3);
 
 -- Divine T2 Head
 
