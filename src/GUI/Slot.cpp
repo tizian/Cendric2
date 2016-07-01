@@ -44,27 +44,32 @@ void Slot::activate() {
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 0));
 	if (m_isSelected) {
 		m_borderRect.setTexture(m_borderTextureSelected);
+		m_backgroundRect.setFillColor(COLOR_TRANS_WHITE);
 	}
 	else {
 		m_borderRect.setTexture(m_borderTexture);
+		m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
 	}
 }
 
 void Slot::deactivate() {
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 128));
 	m_borderRect.setTexture(m_borderTexture);
+	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
 }
 
 void Slot::select() {
 	if (m_isSelected || m_isEmpty) return;
 	m_isSelected = true;
 	m_borderRect.setTexture(m_borderTextureSelected);
+	m_backgroundRect.setFillColor(COLOR_TRANS_WHITE);
 }
 
 void Slot::deselect() {
 	if (!m_isSelected || m_isEmpty) return;
 	m_isSelected = false;
 	m_borderRect.setTexture(m_borderTexture);
+	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
 }
 
 void Slot::highlight() {
