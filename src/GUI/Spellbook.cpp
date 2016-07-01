@@ -67,7 +67,7 @@ void Spellbook::clearAllSlots() {
 	m_divineSlots.clear();
 	m_twilightSlots.clear();
 	m_selectedModifierSlot = nullptr;
-	m_selectedSpellSlot = nullptr;
+	m_weaponWindow->m_selectedSpellSlot = nullptr;
 }
 
 void Spellbook::update(const sf::Time& frameTime) {
@@ -130,12 +130,14 @@ void Spellbook::selectSpellSlot(SpellSlot* selectedSlot) {
 	m_hasDraggingStarted = true;
 
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
-	if (selectedSlot == m_selectedSpellSlot) return;
-	if (m_selectedSpellSlot != nullptr) {
-		m_selectedSpellSlot->deselect();
+	if (selectedSlot == m_weaponWindow->m_selectedSpellSlot) return;
+	if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
+		m_weaponWindow->m_selectedSpellSlot->deselect();
 	}
-	m_selectedSpellSlot = selectedSlot;
-	m_selectedSpellSlot->select();
+	m_weaponWindow->m_selectedSpellSlot = selectedSlot;
+	m_weaponWindow->m_selectedSpellSlot->select();
+
+	m_weaponWindow->reloadSpellDesc();
 }
 
 void Spellbook::handleDragAndDrop() {
@@ -144,8 +146,8 @@ void Spellbook::handleDragAndDrop() {
 		if (m_selectedModifierSlot != nullptr) {
 			m_selectedModifierSlot->activate();
 		}
-		if (m_selectedSpellSlot != nullptr) {
-			m_selectedSpellSlot->activate();
+		if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
+			m_weaponWindow->m_selectedSpellSlot->activate();
 		}
 		m_weaponWindow->notifyModifierDrop(m_currentModifierClone);
 		m_weaponWindow->notifySpellDrop(m_currentSpellClone);
@@ -175,11 +177,11 @@ void Spellbook::handleDragAndDrop() {
 				m_selectedModifierSlot->deactivate();
 				m_weaponWindow->highlightModifierSlots(m_selectedModifierSlot->getModifier().type, true);
 			}
-			else if (m_selectedSpellSlot != nullptr) {
-				m_currentSpellClone = new SlotClone(m_selectedSpellSlot);
+			else if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
+				m_currentSpellClone = new SlotClone(m_weaponWindow->m_selectedSpellSlot);
 				m_currentSpellClone->setPosition(mousePos - sf::Vector2f(SpellSlot::SIZE / 2.f, SpellSlot::SIZE / 2.f));
-				m_selectedSpellSlot->deactivate();
-				m_weaponWindow->highlightSpellSlots(m_selectedSpellSlot->getSpellType(), true);
+				m_weaponWindow->m_selectedSpellSlot->deactivate();
+				m_weaponWindow->highlightSpellSlots(m_weaponWindow->m_selectedSpellSlot->getSpellType(), true);
 			}
 		}
 	}
@@ -243,13 +245,15 @@ void Spellbook::render(sf::RenderTarget& target) {
 }
 
 void Spellbook::selectTab(SpellType type) {
+	bool reload = false;
 	if (m_selectedModifierSlot != nullptr) {
 		m_selectedModifierSlot->deselect();
 		m_selectedModifierSlot = nullptr;
 	}
-	if (m_selectedSpellSlot != nullptr) {
-		m_selectedSpellSlot->deselect();
-		m_selectedSpellSlot = nullptr;
+	if (m_weaponWindow->m_selectedSpellSlot != nullptr && m_weaponWindow->m_selectedSpellSlot->getNr() == -1) {
+		m_weaponWindow->m_selectedSpellSlot->deselect();
+		m_weaponWindow->m_selectedSpellSlot = nullptr;
+		reload = true;
 	}
 	m_currentTab = type;
 	switch (type) {
@@ -270,6 +274,10 @@ void Spellbook::selectTab(SpellType type) {
 		m_window->getPosition().x +
 		WIDTH / 2 -
 		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
+
+	if (reload) {
+		m_weaponWindow->reload();
+	}
 }
 
 void Spellbook::reload() {

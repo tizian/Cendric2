@@ -72,14 +72,19 @@ void WeaponWindow::reload() {
 		xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET;
 		slotNr++;
 		m_weaponSlots.push_back(std::pair<SpellSlot, std::vector<ModifierSlot>>({ spellSlot, modifiers }));
-	} 
+	}
+	if (m_selectedSpellSlot != nullptr && m_selectedSpellSlot->getNr() != -1) {
+		m_weaponSlots.at(m_selectedSpellSlot->getNr()).first.select();
+	}
 }
 
 void WeaponWindow::reloadSpellDesc() {
 	if (m_selectedSpellSlot == nullptr) return;
 	std::vector<SpellModifier> modifiers;
-	for (auto& it : m_weaponSlots.at(m_selectedSpellSlot->getNr()).second) {
-		modifiers.push_back(it.getModifier());
+	if (m_selectedSpellSlot->getNr() != -1) {
+		for (auto& it : m_weaponSlots.at(m_selectedSpellSlot->getNr()).second) {
+			modifiers.push_back(it.getModifier());
+		}
 	}
 	m_spellDesc->reload(m_selectedSpellSlot->getSpellID(), modifiers, &m_core->getTotalAttributes());
 	m_spellDesc->show();
@@ -120,8 +125,9 @@ WeaponWindow::~WeaponWindow() {
 void WeaponWindow::clearAllSlots() {
 	m_weaponSlots.clear();
 	m_selectedModifierSlot = nullptr;
-	m_selectedSpellSlot = nullptr;
-	m_spellDesc->hide();
+	if (m_selectedSpellSlot == nullptr) {
+		m_spellDesc->hide();
+	}
 }
 
 void WeaponWindow::update(const sf::Time& frameTime) {

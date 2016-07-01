@@ -19,6 +19,7 @@ class SlotClone;
 // is displayed and updated as a part of the Spellbook.
 // is only modifiable when modifiable is true
 class WeaponWindow {
+	friend class Spellbook;
 public:
 	WeaponWindow(CharacterCore* core, bool modifiable);
 	~WeaponWindow();

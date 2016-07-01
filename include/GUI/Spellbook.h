@@ -65,7 +65,6 @@ private:
 
 	SpellType m_currentTab;
 	ModifierSlot* m_selectedModifierSlot = nullptr;
-	SpellSlot* m_selectedSpellSlot = nullptr;
 
 	void selectTab(SpellType type);
 	void selectModifierSlot(ModifierSlot* selectedSlot);
