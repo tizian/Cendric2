@@ -74,9 +74,10 @@ void LadderTile::onHit(LevelMovableGameObject* mob) {
 
 	float variance = 4.f;
 	float speed = 6.f;
-	float offset = 40.f + variance * std::cos(speed * m_time.asSeconds());
+	float offset = 60.f + variance * std::cos(speed * m_time.asSeconds());
 	
-	m_arrow.setPosition(m_mainChar->getPosition().x, m_mainChar->getPosition().y - offset);
+	float width = m_arrow.getTexture()->getSize().x;
+	m_arrow.setPosition(m_mainChar->getPosition().x + 0.5f * (m_mainChar->getSize().x - width), m_mainChar->getPosition().y - offset);
 }
 
 void LadderTile::setPosition(const sf::Vector2f& position) {
