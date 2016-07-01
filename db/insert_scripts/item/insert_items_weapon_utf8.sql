@@ -36,7 +36,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pikeoflight', 'eq_weapon', 300, 250, 100);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_light, dmg_fire) values ('we_pikeoflight', 10, 15, 10, 5);
-INSERT INTO item_equipment (item_id, texture_path) values ('we_pikeoflight', 'res/assets/equipment/weapon/spritesheet_weapon_we_pikeoflight.png');
+INSERT INTO item_equipment (item_id, texture_path) values ('we_pikeoflight', 'res/assets/equipment/weapon/spritesheet_weapon_pikeoflight.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pikeoflight', 600, 10, 45, 80, 10);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 2, 'divine', 2);
