@@ -64,7 +64,7 @@ public:
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& renderTarget);
 
-	void addPermanentItemProgress(const Item& item);
+	void addPermanentItemProgress(const Item* item);
 	void addItemProgress(const std::string& itemID, int amount);
 	void addItemConversionProgress(const std::string& oldItemID, const std::string& newItemID);
 	void addQuestConditionFullfilled(const std::string& questID, const std::string& condition);

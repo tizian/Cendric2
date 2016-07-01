@@ -9,12 +9,16 @@ using namespace std;
 const float InventorySlot::SIZE = 58.f;
 const float InventorySlot::ICON_OFFSET = 4.f;
 
-InventorySlot::InventorySlot(const std::string& itemID, int amount) : m_item(itemID) {
-	m_type = m_item.getType();
+InventorySlot::InventorySlot(const std::string& itemID, int amount) {
+	m_itemID = itemID;
+	Item* item = g_resourceManager->getItem(itemID);
+	if (item == nullptr)
+		return;
+	m_type = item->getType();
 	m_tooltipWindow.setText(g_textProvider->getText(itemID, "item"));
 
 	m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_ITEMS);
-	m_iconTextureRect = sf::IntRect(m_item.getIconTextureLocation().x, m_item.getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
+	m_iconTextureRect = sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
@@ -28,7 +32,8 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount) : m_item(ite
 	initSlot();
 }
 
-InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos, ItemType equipmentType) : m_item() {
+InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos, ItemType equipmentType) {
+	m_itemID = "";
 	m_iconTexture = tex;
 	m_iconTextureRect = sf::IntRect(sf::IntRect(texPos.x, texPos.y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE)));
 

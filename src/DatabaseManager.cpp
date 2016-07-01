@@ -270,8 +270,8 @@ ItemEquipmentBean DatabaseManager::getItemEquipmentBean(const std::string& item_
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 2) {
-			g_logger->logError("DatabaseManager::getItemEquipmentBean", "number of returned columns must be 2");
+		if (cols != 8) {
+			g_logger->logError("DatabaseManager::getItemEquipmentBean", "number of returned columns must be 8");
 			return bean;
 		}
 		int result = 0;
@@ -281,6 +281,12 @@ ItemEquipmentBean DatabaseManager::getItemEquipmentBean(const std::string& item_
 			if (result == SQLITE_ROW) {
 				bean.item_id = std::string((char*)sqlite3_column_text(statement, 0));
 				bean.texture_path = std::string((char*)sqlite3_column_text(statement, 1));
+				bean.frames_walk = sqlite3_column_int(statement, 2);
+				bean.frames_idle = sqlite3_column_int(statement, 3);
+				bean.frames_jump = sqlite3_column_int(statement, 4);
+				bean.frames_fight = sqlite3_column_int(statement, 5);
+				bean.frames_climb1 = sqlite3_column_int(statement, 6);
+				bean.frames_climb2 = sqlite3_column_int(statement, 7);
 				bean.status = BeanStatus::Filled;
 			}
 			else {

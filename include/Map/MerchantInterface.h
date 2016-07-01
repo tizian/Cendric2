@@ -21,8 +21,8 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	void sellItem(const Item& item);
-	void buyItem(const Item& item);
+	void sellItem(const Item* item);
+	void buyItem(const Item* item);
 	// saves the data to the core and exits
 	void completeTrade();
 	bool isCancelled();

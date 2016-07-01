@@ -266,13 +266,14 @@ ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay(std::map<std::str
 	return enemyDefeatedScreenOverlay;
 }
 
-ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item) {
+ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item* item) {
+	if (item == nullptr) return nullptr;
 	TextureScreenOverlay* itemScreenOverlay = new TextureScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
 	itemScreenOverlay->setTitleColor(COLOR_GOOD);
 	itemScreenOverlay->setTitleCharacterSize(24);
 
-	std::string title = g_textProvider->getText(item.getID(), "item") + " ";
+	std::string title = g_textProvider->getText(item->getID(), "item") + " ";
 	title.append(g_textProvider->getText("Consumed"));
 
 	itemScreenOverlay->setTitleRaw(title);
@@ -280,13 +281,13 @@ ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item& item)
 	itemScreenOverlay->setSubtitleCharacterSize(16);
 
 	itemScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
-	itemScreenOverlay->setSpriteTextureRect(sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50));
+	itemScreenOverlay->setSpriteTextureRect(sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50));
 
 	itemScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
 	itemScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
 
 	std::string attributes = "";
-	AttributeData::appendAttributes(attributes, item.getAttributes());
+	AttributeData::appendAttributes(attributes, item->getAttributes());
 	itemScreenOverlay->setSubtitleRaw(attributes);
 
 	return itemScreenOverlay;

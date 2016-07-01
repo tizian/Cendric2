@@ -32,21 +32,21 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 2, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 3, 'necromancy', 3);
 
--- Pike of God
+-- Pike of Light
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pikeofgod', 'eq_weapon', 300, 250, 100);
-INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_light, dmg_fire) values ('we_pikeofgod', 10, 15, 10, 5);
-INSERT INTO item_equipment (item_id, texture_path) values ('we_pikeofgod', 'res/assets/equipment/weapon/spritesheet_weapon_pikeofgod.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pikeofgod', 600, 10, 45, 80, 10);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeofgod', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeofgod', 2, 'divine', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeofgod', 3, 'divine', 3);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pikeoflight', 'eq_weapon', 300, 250, 100);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_light, dmg_fire) values ('we_pikeoflight', 10, 15, 10, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('we_pikeoflight', 'res/assets/equipment/weapon/spritesheet_weapon_we_pikeoflight.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pikeoflight', 600, 10, 45, 80, 10);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 2, 'divine', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 3, 'divine', 3);
 
 -- Hawthorn
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_hawthorn', 'eq_weapon', 300, 100, 50);
 INSERT INTO item_attribute (item_id, max_health, dmg_fire, dmg_ice) values ('we_hawthorn', 10, 2, 2);
-INSERT INTO item_equipment (item_id, texture_path) values ('we_hawthorn', 'res/assets/equipment/weapon/spritesheet_weapon_luce.png');
+INSERT INTO item_equipment (item_id, texture_path) values ('we_hawthorn', 'res/assets/equipment/weapon/spritesheet_weapon_hawthorn.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_hawthorn', 600, 10, 45, 80, 5);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_hawthorn', 1, 'elemental', 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_hawthorn', 0, -10, 40, 80);
@@ -127,6 +127,6 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_torch', 'eq_weapon', 200, 100, 10);
 INSERT INTO item_attribute (item_id, dmg_fire) values ('we_torch', 10);
-INSERT INTO item_equipment (item_id, texture_path) values ('we_torch', 'res/assets/equipment/weapon/spritesheet_weapon_torch.png');
+INSERT INTO item_equipment (item_id, texture_path, frames_idle, frames_jump, frames_climb1, frames_climb2) values ('we_torch', 'res/assets/equipment/weapon/spritesheet_weapon_torch.png', 2, 2, 2, 2);
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_torch', 400, 10, 40, 80, 10);
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y) values ('we_torch', 30, 30, 300, 400);

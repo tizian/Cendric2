@@ -18,8 +18,8 @@ public:
 
 	void setAmount(int amount);
 
-	inline const Item& getItem() const { return m_item; }
-	inline const std::string& getItemID() const { return m_item.getID(); }
+	inline const std::string& getItemID() const { return m_itemID; }
+	inline const Item* getItem() const { return g_resourceManager->getItem(m_itemID); }
 
 	inline ItemType getItemType() const { return m_type; }
 	inline void setItemType(ItemType type) { m_type = type; }
@@ -33,8 +33,8 @@ public:
 	static const float ICON_OFFSET;
 
 protected:
-	Item m_item;
-	ItemType m_type;
+	std::string m_itemID;
+	ItemType m_type = ItemType::VOID;
 
 	BitmapText m_amountText;
 };

@@ -107,12 +107,12 @@ private:
 
 	ItemDescriptionWindow* m_descriptionWindow = nullptr;
 	DocumentDescriptionWindow* m_documentWindow = nullptr;
-	void showDescription(const Item& item);
+	void showDescription(const Item* item);
 	void hideDescription();
-	void showDocument(const Item& item);
+	void showDocument(const Item* item);
 	void hideDocument();
-	void convertItem(const Item& item);
-	void learnSpell(const Item& item);
+	void convertItem(const Item* item);
+	void learnSpell(const Item* item);
 
 	InventoryEquipment* m_equipment = nullptr;
 

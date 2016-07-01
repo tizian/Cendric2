@@ -86,7 +86,13 @@ CREATE TABLE item_food(
 
 CREATE TABLE item_equipment(
 	item_id VARCHAR(50) NOT NULL, 
-	texture_path INTEGER NOT NULL DEFAULT 0,
+	texture_path VARCHAR(50) NOT NULL, 
+	frames_walk INTEGER NOT NULL DEFAULT 8,
+	frames_idle INTEGER NOT NULL DEFAULT 1,
+	frames_jump INTEGER NOT NULL DEFAULT 1,
+	frames_fight INTEGER NOT NULL DEFAULT 5,
+	frames_climb1 INTEGER NOT NULL DEFAULT 1,
+	frames_climb2 INTEGER NOT NULL DEFAULT 1,
 	PRIMARY KEY (item_id),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 );

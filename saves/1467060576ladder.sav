@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:1851
+time.played:2128
 savegame.name:ladder
-savegame.date:1467073026
+savegame.date:1467392149
 level.id:res/level/elderbackroom/elderbackroom.tmx
 level.position:1300.000000,550.000000
 is.in.level:1
 map.id:res/map/elderhome/elderhome.tmx
-map.position:284.948120,380.000000
+map.position:284.891388,380.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
@@ -25,22 +25,23 @@ item.id:eq_bandana,1
 item.id:eq_body_necrot3,1
 item.id:eq_defaultarmor,1
 item.id:eq_demonback,1
+item.id:eq_demonbody,1
+item.id:eq_demonhead,1
 item.id:eq_fireratscarf,1
 item.id:eq_head_divinet2,1
 item.id:eq_head_necrot3,1
 item.id:eq_head_twilightt1,1
 item.id:eq_huntershat,1
 item.id:eq_ironring,1
-item.id:eq_leatherarmor,1
 item.id:eq_lightpendant,1
 item.id:eq_nekomataback,1
 item.id:eq_nekomatahead,1
 item.id:eq_oversizedhat,1
-item.id:eq_purpleback,1
 item.id:eq_rafishat,1
 item.id:eq_rubyring,1
-item.id:eq_wizardhatblue,1
-item.id:eq_wizardhatgrey,1
+item.id:eq_wizardhatfire,1
+item.id:eq_wizardhatice,1
+item.id:eq_wizardhatshadow,1
 item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
@@ -89,12 +90,12 @@ item.id:pe_ingridstew,1
 item.id:qe_recommendationletter,1
 item.id:qe_rope,1
 item.id:sp_light,1
-item.id:we_claw,1
 item.id:we_hawthorn,1
 item.id:we_icestaff,1
 item.id:we_jasonsglaive,1
+item.id:we_oathbreaker,1
 item.id:we_ordermace,1
-item.id:we_pikeofgod,1
+item.id:we_pikeoflight,1
 item.id:we_rustysword,1
 item.id:we_sicklestaff,1
 item.id:we_simplesword,1
@@ -102,19 +103,16 @@ item.id:we_torch,1
 item.id:we_walkingpole,2
 item.id:we_zeffssword,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:6,2,3
-equipped.spellslot:20
-equipped.spellslot:15,2,1
-equipped.spellslot:10
 # equipment:
 equipped.back:eq_back_necrot3
-equipped.body:eq_demonbody
-equipped.head:eq_demonhead
+equipped.body:eq_leatherarmor
+equipped.head:eq_wizardhatlight
 equipped.neck:eq_eyeofthemoon
 equipped.ring1:eq_rubyring
 equipped.ring2:eq_ironring
-equipped.weapon:we_oathbreaker
+equipped.weapon:we_claw
 # weapon configurations:
+weapon.configs:we_claw;
 weapon.configs:we_oathbreaker;6,2,3;15,2,1;
 # quickslot assignments:
 quickslot:1,

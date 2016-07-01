@@ -37,7 +37,7 @@ public:
 	static ScreenOverlay* createLocationScreenOverlay(const std::string& locationKey, bool isBossLevel = false);
 	// returns nullptr if the configuration for display hints is false.
 	static ScreenOverlay* createHintScreenOverlay(const std::string& hintKey);
-	static ScreenOverlay* createPermanentItemScreenOverlay(const Item& item);
+	static ScreenOverlay* createPermanentItemScreenOverlay(const Item* item);
 	static ScreenOverlay* createSpellLearnedScreenOverlay(SpellID id);
 	static ScreenOverlay* createModifierLearnedScreenOverlay(const SpellModifier& modifier);
 	static ScreenOverlay* createGameOverScreenOverlay();

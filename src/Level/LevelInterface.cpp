@@ -104,24 +104,24 @@ void LevelInterface::restoreConsumedFood() {
 }
 
 void LevelInterface::consumeItem(const std::string& itemID) {
-	Item item(itemID);
-	if (item.getType() != ItemType::Consumable) return;
+	Item* item = g_resourceManager->getItem(itemID);
+	if (item == nullptr || item->getType() != ItemType::Consumable) return;
 	if (m_character->isEating()) return;
 	m_character->consumeFood(
-		item.getFoodDuration(),
-		item.getAttributes());
+		item->getFoodDuration(),
+		item->getAttributes());
 	getBuffBar().addFoodBuff(
-		sf::IntRect(item.getIconTextureLocation().x, item.getIconTextureLocation().y, 50, 50),
-		item.getFoodDuration(),
-		item.getID(),
-		item.getAttributes());
+		sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50),
+		item->getFoodDuration(),
+		item->getID(),
+		item->getAttributes());
 
-	if (m_consumedFood.find(item.getID()) == m_consumedFood.end()) {
-		m_consumedFood.insert({ item.getID(), 0 });
+	if (m_consumedFood.find(item->getID()) == m_consumedFood.end()) {
+		m_consumedFood.insert({ item->getID(), 0 });
 	}
-	m_consumedFood[item.getID()] += 1;
+	m_consumedFood[item->getID()] += 1;
 
-	m_screen->notifyItemChange(item.getID(), -1);
+	m_screen->notifyItemChange(item->getID(), -1);
 	m_quickSlotBar->reload();
 }
 

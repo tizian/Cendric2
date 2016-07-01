@@ -18,7 +18,7 @@ class LevelItem : public AnimatedGameObject {
 public:
 	LevelItem(LevelScreen* levelScreen);
 
-	void load(const Item& item, const sf::Vector2f& position);
+	void load(const std::string& itemID, const sf::Vector2f& position);
 	void onRightClick() override;
 	void pickup();
 

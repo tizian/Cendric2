@@ -13,6 +13,8 @@
 
 #include "GUI/BitmapFont.h"
 
+class Item;
+
 class ResourceManager {
 public:
 	ResourceManager();
@@ -26,6 +28,8 @@ public:
 
 	void deleteMapResources();
 	void loadMapResources();
+
+	void deleteItemResources();
 
 	void setError(ErrorID id, const std::string& description);
 
@@ -54,6 +58,7 @@ public:
 	sf::SoundBuffer* getSoundBuffer(const std::string& filename);
 	sf::Font* getFont(const std::string& filename);
 	BitmapFont* getBitmapFont(const std::string& filename);
+	Item* getItem(const std::string& itemID);
 
 	const std::pair<ErrorID, std::string>* pollError() const;
 	ConfigurationData& getConfiguration();
@@ -74,6 +79,7 @@ private:
 	std::map<std::string, sf::SoundBuffer*> m_soundBuffers;
 	std::map<std::string, BitmapFont*> m_bitmapFonts;
 	std::map<std::string, sf::Font*> m_fonts;
+	std::map<std::string, Item*> m_items;
 
 	// the current background music and its path
 	std::pair<std::string, sf::Music> m_currentMusic;

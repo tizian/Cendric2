@@ -7,11 +7,6 @@ Item::Item(const std::string& itemID) {
 	checkItem();
 }
 
-Item::Item() {
-	// invalid item
-	m_itemBean.item_type = ItemType::VOID;
-}
-
 void Item::initBeans(const std::string& itemID) {
 	m_itemBean = g_databaseManager->getItemBean(itemID);
 	m_itemConvertibleBean = g_databaseManager->getItemConvertibleBean(itemID);

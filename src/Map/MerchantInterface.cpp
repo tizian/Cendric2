@@ -20,42 +20,46 @@ void MerchantInterface::completeTrade() {
 	m_isCancelled = true;
 }
 
-void MerchantInterface::sellItem(const Item& item) {
-	if (item.getValue() < 0) {
+void MerchantInterface::sellItem(const Item* item) {
+	if (item == nullptr) return;
+	if (item->getValue() < 0) {
 		m_screen->setTooltipText("Unsalable", COLOR_BAD, true);
 		return;
 	}
-	m_screen->notifyItemChange("gold", item.getValue());
-	if (m_data.wares.find(item.getID()) == m_data.wares.end()) {
-		m_data.wares.insert({ item.getID(), 1 });
+	std::string id = item->getID();
+	m_screen->notifyItemChange("gold", item->getValue());
+	if (m_data.wares.find(id) == m_data.wares.end()) {
+		m_data.wares.insert({ id, 1 });
 	}
 	else {
-		int amount = m_data.wares.at(item.getID());
+		int amount = m_data.wares.at(id);
 		amount++;
-		m_data.wares[item.getID()] = amount;
+		m_data.wares[id] = amount;
 	}
-	m_merchantWindow->notifyChange(item.getID());
-	m_screen->notifyItemChange(item.getID(), -1);
+	m_merchantWindow->notifyChange(id);
+	m_screen->notifyItemChange(id, -1);
 }
 
-void MerchantInterface::buyItem(const Item& item) {
-	if (m_core->getData().gold < (int)std::ceil(m_data.multiplier * item.getValue())) {
+void MerchantInterface::buyItem(const Item* item) {
+	if (item == nullptr) return;
+	if (m_core->getData().gold < (int)std::ceil(m_data.multiplier * item->getValue())) {
 		m_screen->setTooltipText("NotEnoughGold", COLOR_BAD, true);
 		return;
 	}
-	m_screen->notifyItemChange("gold", -(int)std::ceil(m_data.multiplier * item.getValue()));
-	m_screen->notifyItemChange(item.getID(), 1);
-	if (m_data.wares.find(item.getID()) != m_data.wares.end()) {
-		int amount = m_data.wares.at(item.getID());
+	std::string id = item->getID();
+	m_screen->notifyItemChange("gold", -(int)std::ceil(m_data.multiplier * item->getValue()));
+	m_screen->notifyItemChange(id, 1);
+	if (m_data.wares.find(id) != m_data.wares.end()) {
+		int amount = m_data.wares.at(id);
 		amount--;
 		if (amount <= 0) {
-			m_data.wares.erase(m_data.wares.find(item.getID()));
+			m_data.wares.erase(m_data.wares.find(id));
 		}
 		else {
-			m_data.wares[item.getID()] = amount;
+			m_data.wares[id] = amount;
 		}
 	}
-	m_merchantWindow->notifyChange(item.getID());
+	m_merchantWindow->notifyChange(id);
 }
 
 bool MerchantInterface::isCancelled() {
