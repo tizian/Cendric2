@@ -35,6 +35,7 @@ public:
 
 	void highlightEquipmentSlot(ItemType type, bool highlight);
 	void notifyEquipmentDrop(const SlotClone* item);
+	void equipItem(const InventorySlot* slot);
 
 	static float WIDTH;
 

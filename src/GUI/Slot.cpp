@@ -5,6 +5,7 @@ using namespace std;
 
 const float Slot::ICON_SIZE = 50.f;
 const float Slot::TOOLTIP_TOP = 10.f;
+const sf::Time Slot::DOUBLE_CLICK_TIME = sf::milliseconds(500);
 
 void Slot::initSlot() {
 	float size = getConfiguredSize();
@@ -85,6 +86,8 @@ void Slot::unhighlight() {
 void Slot::update(const sf::Time& frameTime) {
 	m_isClicked = false;
 	m_isRightClicked = false;
+	m_isDoubleClicked = false;
+	updateTime(m_doubleClickTime, frameTime);
 	GameObject::update(frameTime);
 }
 
@@ -110,6 +113,10 @@ void Slot::onMouseOver() {
 void Slot::onLeftJustPressed() {
 	if (m_isEmpty) return;
 	m_isClicked = true;
+	if (m_doubleClickTime > sf::Time::Zero) {
+		m_isDoubleClicked = true;
+	}
+	m_doubleClickTime = DOUBLE_CLICK_TIME;
 	g_inputController->lockAction();
 }
 

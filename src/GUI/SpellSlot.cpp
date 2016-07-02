@@ -8,6 +8,10 @@ const float SpellSlot::SIZE = 86.f;
 const float SpellSlot::ICON_OFFSET = 18.f;
 const float SpellSlot::GEM_SIZE = 10.f;
 
+SpellSlot::~SpellSlot() {
+	m_gems.clear();
+}
+
 SpellSlot::SpellSlot(SpellType type) {
 	m_spellType = type;
 	m_spellID = SpellID::VOID;

@@ -87,8 +87,11 @@ private:
 	void deselectCurrentSlot();
 	InventorySlot* getSelectedSlot() const;
 
-	void handleMapRightClick(InventorySlot* clicked);
-	void handleLevelRightClick(InventorySlot* clicked);
+	void handleMapRightClick(const InventorySlot* clicked);
+	void handleLevelRightClick(const InventorySlot* clicked);
+
+	void handleLevelDoubleClick(const InventorySlot* clicked);
+	void handleMapDoubleClick(const InventorySlot* clicked);
 
 	// used for drag & drop handling
 	SlotClone* m_currentClone = nullptr;
@@ -99,6 +102,7 @@ private:
 	const float DRAG_DISTANCE = 10.f;
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
+	
 	void removeEquipmentItem();
 	void handleMapDrag();
 	void handleLevelDrag();

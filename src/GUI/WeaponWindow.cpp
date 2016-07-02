@@ -45,7 +45,7 @@ void WeaponWindow::reload() {
 	}
 	m_noSlotsText.setString("");
 	for (auto& it : m_weapon->getWeaponSlots()) {
-		SpellSlot spellSlot = SpellSlot();
+		SpellSlot spellSlot;
 		if (it.spellSlot.spellID == SpellID::VOID) {
 			spellSlot = SpellSlot(it.spellSlot.spellType);
 		}

@@ -6,7 +6,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/TooltipWindow.h"
 
-class Slot : public GameObject {
+class Slot : virtual public GameObject {
 	friend class SlotClone;
 public:
 	Slot() {};
@@ -36,6 +36,9 @@ public:
 
 	inline bool isClicked() const { return m_isClicked; }
 	inline bool isRightClicked() const { return m_isRightClicked; }
+	inline bool isDoubleClicked() const { return m_isDoubleClicked; }
+
+	inline bool isEmpty() const { return m_isEmpty; }
 
 	GameObjectType getConfiguredType() const override;
 
@@ -48,6 +51,9 @@ public:
 protected:
 	bool m_isClicked = false;
 	bool m_isRightClicked = false;
+
+	bool m_isDoubleClicked = false;
+	sf::Time m_doubleClickTime = sf::Time::Zero;
 
 	bool m_isEmpty = false;
 	bool m_isSelected = false;
@@ -65,4 +71,6 @@ protected:
 
 	bool m_showTooltip = false;
 	TooltipWindow m_tooltipWindow;
+
+	static const sf::Time DOUBLE_CLICK_TIME;
 };

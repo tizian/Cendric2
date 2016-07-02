@@ -207,7 +207,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	calculateSlotPositions(*tab);
 }
 
-void Inventory::handleMapRightClick(InventorySlot* clicked) {
+void Inventory::handleMapRightClick(const InventorySlot* clicked) {
 	if (m_mapInterface == nullptr || clicked == nullptr) return;
 	if (m_merchantInterface != nullptr) {
 		m_merchantInterface->sellItem(clicked->getItem());
@@ -225,7 +225,7 @@ void Inventory::handleMapRightClick(InventorySlot* clicked) {
 		convertItem(clicked->getItem());
 }
 
-void Inventory::handleLevelRightClick(InventorySlot* clicked) {
+void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 	if (m_levelInterface == nullptr || clicked == nullptr) return;
 	if (clicked->getItemType() == ItemType::Consumable)
 		m_levelInterface->consumeItem(clicked->getItemID());
@@ -235,6 +235,22 @@ void Inventory::handleLevelRightClick(InventorySlot* clicked) {
 		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", COLOR_BAD, true);
 	else if (clicked->getItemType() == ItemType::Convertible)
 		convertItem(clicked->getItem());
+}
+
+
+void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {
+	if (m_mapInterface == nullptr || clicked == nullptr) return;
+
+	handleMapRightClick(clicked);
+	if (Item::isEquipmentType(clicked->getItemType())) {
+		m_equipment->equipItem(clicked);
+	}
+}
+
+void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) {
+	if (m_levelInterface == nullptr || clicked == nullptr) return;
+
+	handleLevelRightClick(clicked);
 }
 
 void Inventory::update(const sf::Time& frameTime) {
@@ -251,6 +267,10 @@ void Inventory::update(const sf::Time& frameTime) {
 		it.second.update(frameTime);
 		if (it.second.isClicked()) {
 			selectSlot(it.second.getItemID(), ItemType::VOID);
+			if (it.second.isDoubleClicked()) {
+				handleLevelDoubleClick(&it.second);
+				handleMapDoubleClick(&it.second);
+			}
 			return;
 		}
 		if (it.second.isRightClicked()) {
@@ -367,14 +387,7 @@ void Inventory::handleLevelDrop() {
 		m_levelInterface->notifyConsumableDrop(m_currentClone);
 		m_levelInterface->highlightQuickslots(false);
 	}
-	else if (m_isEquipmentSlotDragged 
-		|| type == ItemType::Equipment_back 
-		|| type == ItemType::Equipment_body
-		|| type == ItemType::Equipment_head
-		|| type == ItemType::Equipment_neck
-		|| type == ItemType::Equipment_ring_1
-		|| type == ItemType::Equipment_ring_2
-		|| type == ItemType::Equipment_weapon) {
+	else if (m_isEquipmentSlotDragged && Item::isEquipmentType(type)) {
 		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
 	}
 }

@@ -69,6 +69,8 @@ public:
 	// returns whether this equipment item has a light attached
 	bool isLevelitemLightedItem() const;
 
+	static bool isEquipmentType(ItemType type);
+
 protected:
 	ItemBean m_itemBean;
 	ItemFoodBean m_itemFoodBean;

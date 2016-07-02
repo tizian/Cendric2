@@ -97,6 +97,26 @@ void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	}
 }
 
+void InventoryEquipment::equipItem(const InventorySlot* slot) {
+	if (slot == nullptr) return;
+
+	if (m_slots.find(slot->getItemType()) == m_slots.end()) return;
+	if (slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2) {
+		if (m_slots.at(ItemType::Equipment_ring_1).isEmpty()) {
+			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
+		}
+		else if (m_slots.at(ItemType::Equipment_ring_2).isEmpty()) {
+			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
+		}
+		else {
+			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
+		}
+	}
+	else {
+		m_screen->notifyItemEquip(slot->getItemID(), slot->getItemType());
+	}
+}
+
 InventorySlot* InventoryEquipment::getSelectedSlot() {
 	for (auto& it : m_slots) {
 		if (it.second.isClicked()) {

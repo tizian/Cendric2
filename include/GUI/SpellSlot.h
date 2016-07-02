@@ -18,6 +18,8 @@ public:
 	// creates a filled spell slot for a spell with data "data"
 	SpellSlot(const SpellData& data);
 
+	~SpellSlot();
+
 	void setPosition(const sf::Vector2f& pos) override;
 
 	void render(sf::RenderTarget& renderTarget) override;

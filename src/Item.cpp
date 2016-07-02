@@ -88,14 +88,7 @@ void Item::checkItem() {
 	if (m_levelItemBean.status == BeanStatus::Filled && m_levelItemFrameBeans.size() > 0) {
 		m_isLevelitem = true;
 	}
-	if (m_itemEquipmentBean.status == BeanStatus::Filled && (
-		m_itemBean.item_type == ItemType::Equipment_back ||
-		m_itemBean.item_type == ItemType::Equipment_body || 
-		m_itemBean.item_type == ItemType::Equipment_head || 
-		m_itemBean.item_type == ItemType::Equipment_neck || 
-		m_itemBean.item_type == ItemType::Equipment_ring_1 || 
-		m_itemBean.item_type == ItemType::Equipment_ring_2 || 
-		m_itemBean.item_type == ItemType::Equipment_weapon)) {
+	if (m_itemEquipmentBean.status == BeanStatus::Filled && isEquipmentType(m_itemBean.item_type)) {
 		m_isEquipment = true;
 	}
 	if (m_isEquipment && m_itemEquipmentLightBean.status == BeanStatus::Filled) {
@@ -149,4 +142,14 @@ bool Item::isLevelitemLightedItem() const {
 
 bool Item::isEquipmentLightedItem() const {
 	return m_isEquipmentLighted;
+}
+
+bool Item::isEquipmentType(ItemType type) {
+	return type == ItemType::Equipment_back ||
+		type == ItemType::Equipment_body ||
+		type == ItemType::Equipment_head ||
+		type == ItemType::Equipment_neck ||
+		type == ItemType::Equipment_ring_1 ||
+		type == ItemType::Equipment_ring_2 ||
+		type == ItemType::Equipment_weapon;
 }
