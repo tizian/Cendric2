@@ -9,7 +9,7 @@ AnimatedGameObject::~AnimatedGameObject() {
 }
 
 void AnimatedGameObject::setCurrentAnimation(const Animation *animation, bool isFlipped, bool force) {
-	if (animation == nullptr || m_isAnimationLocked && !force) return;
+	if (animation == nullptr || (m_isAnimationLocked && !force)) return;
 	m_animatedSprite.setFlippedX(isFlipped);
 	m_animatedSprite.setAnimation(animation);
 	if (force)

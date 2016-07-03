@@ -97,9 +97,6 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 
 				float climbingY = tile->getClimbingPositionY(m_mob);
 
-				sf::FloatRect checkBB = *m_mob->getBoundingBox();
-				checkBB.top = climbingY;
-
 				WorldCollisionQueryRecord rec;
 				rec.boundingBox = *(m_mob->getBoundingBox());
 				rec.boundingBox.top = climbingY;
