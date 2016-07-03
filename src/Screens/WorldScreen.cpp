@@ -277,8 +277,8 @@ void WorldScreen::updateProgressLog(const sf::Time& frameTime) {
 }
 
 void WorldScreen::render(sf::RenderTarget& renderTarget) {
-	m_interface->render(renderTarget);
 	m_progressLog->render(renderTarget);
+	m_interface->render(renderTarget);
 }
 
 void WorldScreen::renderAfterForeground(sf::RenderTarget& renderTarget) {
