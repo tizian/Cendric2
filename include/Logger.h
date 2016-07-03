@@ -15,6 +15,7 @@ enum class LogLevel {
 
 class Logger {
 public:
+	Logger();
 	void logError(const std::string& source, const std::string& message) const;
 	void logWarning(const std::string& source, const std::string& message) const;
 	void logInfo(const std::string& source, const std::string& message) const;
@@ -26,7 +27,7 @@ public:
 	LogLevel getLogLevel() const;
 
 private:
-	LogLevel m_logLevel = LogLevel::Debug;
+	LogLevel m_logLevel;
 
 	const std::string RED = "\033[31m";
 	const std::string GREEN = "\033[32m";

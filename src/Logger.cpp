@@ -4,6 +4,10 @@ using namespace std;
 
 Logger* g_logger;
 
+Logger::Logger() {
+	m_logLevel = LogLevel::Warning;
+}
+
 void Logger::log(LogLevel level, const std::string& source, const std::string& message) const {
 	if (level <= m_logLevel && level != LogLevel::None) {
 		string levelString;
