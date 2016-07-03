@@ -43,6 +43,7 @@ public:
 	// if highlight is false, unhighlights all spell slots.
 	void highlightSpellSlots(SpellType type, bool highlight);
 	void notifySpellDrop(SlotClone* clone);
+	void equipSpell(const SpellSlot* spellSlot);
 
 	// reloads depending on the core and its weapon
 	void reload();

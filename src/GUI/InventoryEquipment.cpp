@@ -33,7 +33,7 @@ void InventoryEquipment::update(const sf::Time& frameTime) {
 	// check whether an item was selected
 	for (auto& it : m_slots) {
 		it.second.update(frameTime);
-		if (!m_isInLevel && it.second.isRightClicked()) {
+		if (!m_isInLevel && (it.second.isRightClicked() || it.second.isDoubleClicked())) {
 			// unequip item
 			m_core->equipItem("", it.first);
 			m_requiresReload = true;

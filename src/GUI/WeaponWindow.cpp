@@ -141,6 +141,10 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 		it.first.update(frameTime);
 		if (it.first.isClicked()) {
 			selectSpellSlot(&it.first);
+			if (it.first.isDoubleClicked()) {
+				m_core->removeSpell(it.first.getNr());
+				m_requireReload = true;
+			}
 			return;
 		}
 		else if (m_isModifiable && it.first.isRightClicked()) {
@@ -152,6 +156,10 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 			it2.update(frameTime);
 			if (it2.isClicked()) {
 				selectModifierSlot(&it2);
+				if (it2.isDoubleClicked()) {
+					m_core->removeModifier(it2.getSpellSlotNr(), it2.getNr());
+					m_requireReload = true;
+				}
 				return;
 			}
 			else if (m_isModifiable && it2.isRightClicked()) {
@@ -325,7 +333,7 @@ void WeaponWindow::highlightModifierSlots(SpellModifierType type, bool highlight
 
 void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 	if (clone == nullptr) return;
-	const ModifierSlot *ms = static_cast<const ModifierSlot *>(clone->getOriginalSlot());
+	const ModifierSlot* ms = static_cast<const ModifierSlot*>(clone->getOriginalSlot());
 	SpellModifier modifier = ms->getModifier();
 
 	for (auto& it : m_weaponSlots) {
@@ -344,7 +352,7 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 
 void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 	if (clone == nullptr) return;
-	const SpellSlot *ss = static_cast<const SpellSlot *>(clone->getOriginalSlot());
+	const SpellSlot* ss = static_cast<const SpellSlot*>(clone->getOriginalSlot());
 	SpellType type = ss->getSpellType();
 	for (auto& slot : m_weaponSlots) {
 		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType()) 
@@ -355,6 +363,26 @@ void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 			break;
 		}
 	}
+}
+
+void WeaponWindow::equipSpell(const SpellSlot* spellSlot) {
+	if (spellSlot == nullptr) return;
+
+	bool isEquipped = false;
+	SpellType type = spellSlot->getSpellType();
+	for (auto& slot : m_weaponSlots) {
+		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType())
+			&& slot.first.isEmpty()) {
+			m_core->addSpell(spellSlot->getSpellID(), slot.first.getNr());
+			isEquipped = true;
+			break;
+		}
+	}
+	if (!isEquipped) {
+		auto& slot = m_weaponSlots.at(0);
+		m_core->addSpell(spellSlot->getSpellID(), slot.first.getNr());
+	}
+	m_requireReload = true;
 }
 
 void WeaponWindow::show() {

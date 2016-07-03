@@ -65,6 +65,18 @@ void QuickSlotBar::notifyConsumableDrop(const SlotClone* item) {
 	}
 }
 
+void QuickSlotBar::equipConsumable(const std::string& itemID) {
+	if (m_quickSlot1->isEmpty()) {
+		m_quickSlot1->setItemID(itemID);
+	}
+	else if (m_quickSlot2->isEmpty()) {
+		m_quickSlot2->setItemID(itemID);
+	}
+	else {
+		m_quickSlot1->setItemID(itemID);
+	}
+}
+
 void QuickSlotBar::reload() {
 	m_quickSlot1->reload();
 	m_quickSlot2->reload();

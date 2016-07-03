@@ -101,6 +101,9 @@ void Spellbook::update(const sf::Time& frameTime) {
 				it.first.update(frameTime);
 				if (it.first.isClicked()) {
 					selectSpellSlot(&it.first);
+					if (it.first.isDoubleClicked()) {
+						equipSpell(&it.first);
+					}
 					return;
 				}
 			}
@@ -141,6 +144,12 @@ void Spellbook::selectSpellSlot(SpellSlot* selectedSlot) {
 	m_weaponWindow->m_selectedSpellSlot->select();
 
 	m_weaponWindow->reloadSpellDesc();
+}
+
+void Spellbook::equipSpell(SpellSlot* selectedSlot) {
+	if (selectedSlot == nullptr) return;
+	
+	m_weaponWindow->equipSpell(selectedSlot);
 }
 
 void Spellbook::handleDragAndDrop() {

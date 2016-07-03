@@ -40,7 +40,7 @@ Inventory::Inventory(MapInterface* _interface) {
 }
 
 WorldInterface* Inventory::getInterface() const {
-	if (m_mapInterface == nullptr) { 
+	if (m_mapInterface == nullptr) {
 		return m_levelInterface;
 	}
 	return m_mapInterface;
@@ -198,7 +198,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 		}
 		return;
 	}
-	
+
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
 
@@ -223,6 +223,8 @@ void Inventory::handleMapRightClick(const InventorySlot* clicked) {
 		dynamic_cast<WorldScreen*>(m_mapInterface->getScreen())->notifyPermanentItemConsumed(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Convertible)
 		convertItem(clicked->getItem());
+	else if (Item::isEquipmentType(clicked->getItemType()))
+		m_equipment->equipItem(clicked);
 }
 
 void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
@@ -235,22 +237,26 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", COLOR_BAD, true);
 	else if (clicked->getItemType() == ItemType::Convertible)
 		convertItem(clicked->getItem());
+	else if (Item::isEquipmentType(clicked->getItemType()))
+		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
 }
 
 
 void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {
 	if (m_mapInterface == nullptr || clicked == nullptr) return;
 
-	handleMapRightClick(clicked);
-	if (Item::isEquipmentType(clicked->getItemType())) {
+	if (Item::isEquipmentType(clicked->getItemType())) 
 		m_equipment->equipItem(clicked);
-	}
+	
 }
 
 void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) {
 	if (m_levelInterface == nullptr || clicked == nullptr) return;
 
-	handleLevelRightClick(clicked);
+	if (Item::isEquipmentType(clicked->getItemType()))
+		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
+	else if (clicked->getItemType() == ItemType::Consumable)
+		m_levelInterface->equipConsumable(clicked->getItemID());
 }
 
 void Inventory::update(const sf::Time& frameTime) {
@@ -279,7 +285,7 @@ void Inventory::update(const sf::Time& frameTime) {
 			break;
 		}
 	}
-	
+
 	m_tabBar->update(frameTime);
 	int activeIndex = m_tabBar->getActiveTabIndex();
 	ItemType type;
@@ -294,12 +300,12 @@ void Inventory::update(const sf::Time& frameTime) {
 	}
 	else if (activeIndex == 3) {
 		type = ItemType::Quest;
-		
+
 	}
 	else if (activeIndex == 4) {
 		type = ItemType::Misc;
 	}
-	
+
 	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != type) {
 		selectTab(type);
 	}
@@ -330,7 +336,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 
 	if (selectedSlotId.compare(m_selectedSlotId.first) == 0) return;
-	
+
 	deselectCurrentSlot();
 	m_selectedSlotId.first = selectedSlotId;
 	m_selectedSlotId.second = type;
@@ -437,7 +443,7 @@ void Inventory::render(sf::RenderTarget& target) {
 	target.draw(m_goldText);
 	target.draw(m_goldSprite);
 	target.draw(m_selectedTabText);
-	
+
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
 		it.second.render(m_scrollHelper->texture);
 	}
@@ -629,7 +635,7 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slo
 	float start = m_scrollHelper->lastOffset;
 	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
 	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
-	
+
 	float xOffsetStart = INVENTORY_LEFT + SCROLL_WINDOW_LEFT + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN;
 
 	float yOffset = GUIConstants::TOP + SCROLL_WINDOW_TOP + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN - effectiveScrollOffset;
@@ -667,7 +673,7 @@ void Inventory::hide() {
 	m_currentClone = nullptr;
 	m_isDragging = false;
 	m_hasDraggingStarted = false;
-	
+
 }
 
 void Inventory::startTrading(MerchantInterface* _interface) {

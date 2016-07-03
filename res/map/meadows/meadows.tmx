@@ -1087,7 +1087,7 @@
   </properties>
   <object id="217" x="3350" y="2950" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="collidable">
+ <objectgroup name="collidable" visible="0">
   <object id="69" x="2950" y="1850" width="26" height="49"/>
   <object id="70" x="2651" y="601">
    <polygon points="0,0 45,1 0,45"/>

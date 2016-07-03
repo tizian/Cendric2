@@ -86,7 +86,7 @@ CREATE TABLE item_food(
 
 CREATE TABLE item_equipment(
 	item_id VARCHAR(50) NOT NULL, 
-	texture_path VARCHAR(50) NOT NULL, 
+	texture_path VARCHAR(100) NOT NULL, 
 	frames_walk INTEGER NOT NULL DEFAULT 8,
 	frames_idle INTEGER NOT NULL DEFAULT 1,
 	frames_jump INTEGER NOT NULL DEFAULT 1,

@@ -92,6 +92,10 @@ void LevelInterface::notifyConsumableDrop(const SlotClone* item) {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
 
+void LevelInterface::equipConsumable(const std::string& itemID) {
+	m_quickSlotBar->equipConsumable(itemID);
+}
+
 void LevelInterface::clearConsumedFood() {
 	m_consumedFood.clear();
 }

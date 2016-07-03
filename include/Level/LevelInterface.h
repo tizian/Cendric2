@@ -24,6 +24,8 @@ public:
 	BuffBar& getBuffBar();
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item);
+	// an item should be equiped in quick slot bar. forward to quick slot bar
+	void equipConsumable(const std::string& itemID);
 	// consumes a consumable item
 	void consumeItem(const std::string& itemID);
 	// clears the consumabed food fector

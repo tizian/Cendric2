@@ -86,7 +86,7 @@ inline std::string getPath(const std::string& path) {
 }
 
 // versioning
-#define CENDRIC_VERSION_NR "0.2.1"
+#define CENDRIC_VERSION_NR "0.3.0"
 
 // const canvas size (window can be rescaled though)
 #define WINDOW_WIDTH 1280

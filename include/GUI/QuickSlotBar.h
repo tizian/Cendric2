@@ -22,6 +22,7 @@ public:
 	void update(const sf::Time& frameTime);
 
 	void notifyConsumableDrop(const SlotClone* item);
+	void equipConsumable(const std::string& itemID);
 	void reload();
 
 private:

@@ -31,7 +31,7 @@ void WolfBossMovingBehavior::execHandleMovementInput() {
 		m_movingDirectionX = m_chargeMovingDirection;
 	}
 
-	if (m_enemy->getState() == GameObjectState::Fighting3) {
+	if (m_enemy->getState() == GameObjectState::Fighting3 || m_enemy->getState() == GameObjectState::Fighting2) {
 		m_nextIsFacingRight = (m_mainChar->getCenter().x > m_enemy->getCenter().x);
 	}
 }
