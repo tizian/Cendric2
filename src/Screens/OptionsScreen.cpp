@@ -27,7 +27,7 @@ void OptionsScreen::render(sf::RenderTarget& renderTarget) {
 
 void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	// title
-	m_title = new BitmapText(g_textProvider->getText("Options"));
+	m_title = new BitmapText(g_textProvider->getText("Options"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
 

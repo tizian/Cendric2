@@ -40,7 +40,7 @@ void LoadGameScreen::render(sf::RenderTarget &renderTarget) {
 
 void LoadGameScreen::execOnEnter(const Screen *previousScreen) {
 	// text
-	m_title = new BitmapText(g_textProvider->getText("LoadGame"));
+	m_title = new BitmapText(g_textProvider->getText("LoadGame"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getBounds().width) / 2.f, 25.f));
 

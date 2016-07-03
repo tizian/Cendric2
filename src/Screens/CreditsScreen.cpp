@@ -36,7 +36,7 @@ void CreditsScreen::render(sf::RenderTarget &renderTarget) {
 
 void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	// text
-	m_title = new BitmapText(g_textProvider->getText("Credits"));
+	m_title = new BitmapText(g_textProvider->getText("Credits"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
 	m_title->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_title->getLocalBounds().width), 50.f));
 
