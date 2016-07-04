@@ -41,6 +41,7 @@ void ProgressLog::update(const sf::Time& frameTime) {
 
 void ProgressLog::render(sf::RenderTarget& renderTarget) {
 	if (!m_isVisible) return;
+	renderTarget.setView(renderTarget.getDefaultView());
 	for (auto it : m_logTexts) {
 		it->render(renderTarget);
 	}

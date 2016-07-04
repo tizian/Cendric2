@@ -7,7 +7,7 @@
 #include "TextProvider.h"
 
 // If this is defined, savegame and screenshot folders will be created outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows)
-// #define EXTERN_DOCUMENTS_FOLDER
+//#define EXTERN_DOCUMENTS_FOLDER
 
 #ifdef _WIN32
 #define _WIN32_WINNT 0x0500
