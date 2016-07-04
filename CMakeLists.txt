@@ -15,6 +15,13 @@ if(WIN32)
 	else()
 	        message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 	endif()
+	
+	add_executable(
+		icon
+		${GUI_TYPE}
+		${SOURCE_FILES}
+		${CMAKE_CURRENT_SOURCE_DIR}/icon.rc
+	)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
 else()
