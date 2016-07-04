@@ -216,6 +216,8 @@ ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, cons
 
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
 	if (itemID.compare("gold") == 0) {
+		sf::IntRect textureRect(0, 0, 50, 50);
+		entry->m_icon->setTextureRect(textureRect);
 		return entry;
 	}
 	Item* item = g_resourceManager->getItem(itemID);
