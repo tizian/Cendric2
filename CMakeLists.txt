@@ -15,13 +15,6 @@ if(WIN32)
 	else()
 	        message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 	endif()
-	
-	add_executable(
-		icon
-		${GUI_TYPE}
-		${SOURCE_FILES}
-		${CMAKE_CURRENT_SOURCE_DIR}/icon.rc
-	)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
 else()
@@ -53,9 +46,17 @@ file(GLOB_RECURSE SQLiteShell_FILES
 	"${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
 )
 
-add_executable(Cendric
-	${Cendric_FILES}
-)
+
+if (WIN32)
+	add_executable(Cendric
+		${Cendric_FILES}
+		${CMAKE_CURRENT_SOURCE_DIR}/icon.rc
+	)
+else()
+	add_executable(Cendric
+		${Cendric_FILES}
+	)
+endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	add_library(CendricApple STATIC "${PROJECT_SOURCE_DIR}/src/Platform/CendricApple.mm")
