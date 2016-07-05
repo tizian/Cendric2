@@ -14,7 +14,7 @@ public:
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
 
-	void setDependantTiles(const std::vector<LeverDependentTile*>& dependentTiles);
+	void setDependentTiles(const std::vector<LeverDependentTile*>& dependentTiles);
 	void switchLever();
 
 private:

@@ -70,7 +70,7 @@ void LeverTile::onRightClick() {
 	g_inputController->lockAction();
 }
 
-void LeverTile::setDependantTiles(const std::vector<LeverDependentTile*>& dependentTiles) {
+void LeverTile::setDependentTiles(const std::vector<LeverDependentTile*>& dependentTiles) {
 	m_dependentTiles = dependentTiles;
 }
 

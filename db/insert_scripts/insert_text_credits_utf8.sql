@@ -39,6 +39,8 @@ Haab
 
 "Ratcave"
 
+"Howling Caverns"
+
 ---
 
 -- Eric Matyas --
@@ -69,7 +71,7 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effects from OpenGameArt.org >>>
-Fireball, Water Splash - Mike Koenig
+Water Splash - Mike Koenig
 Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
 
 <<< Level & Map Design >>>
@@ -84,7 +86,8 @@ Daniel Josephy Hernandez
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernandez, 
-Martin Roesch, Andreas Roesch, Brigitte Roesch
+Martin Roesch, Andreas Roesch, Brigitte Roesch,
+Milan Bombsch
 
 ---
 
@@ -158,6 +161,9 @@ Haab
 
 "Ratcave"
 
+"Howling Caverns"
+
+
 ---
 
 -- Eric Matyas --
@@ -188,7 +194,7 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effekte von OpenGameArt.org >>>
-Fireball, Water Splash - Mike Koenig
+Water Splash - Mike Koenig
 Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
 
 <<< Level & Karten Design >>>
@@ -203,7 +209,8 @@ Daniel Josephy Hernandez
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernandez, 
-Martin Roesch, Andreas Roesch, Brigitte Roesch
+Martin Roesch, Andreas Roesch, Brigitte Roesch,
+Milan Bombsch
 
 ---
 
@@ -275,6 +282,8 @@ Haab
 
 "Ratcave"
 
+"Howling Caverns"
+
 ---
 
 -- Eric Matyas --
@@ -310,7 +319,7 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effekte vo OpenGameArt.org >>>
-Fireball, Water Splash - Mike Koenig
+Water Splash - Mike Koenig
 Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
 
 <<< Level & Chartä Design >>>
@@ -325,7 +334,8 @@ Daniel Josephy Hernandez
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernandez, 
-Martin Roesch, Andreas Roesch, Brigitte Roesch
+Martin Roesch, Andreas Roesch, Brigitte Roesch,
+Milan Bombsch
 
 ---
 

@@ -171,7 +171,7 @@ void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 			tile->setDebugBoundingBox(COLOR_NEUTRAL);
 			tile->loadResources();
 			tile->loadAnimation(leverBean.skinNr);
-			tile->setDependantTiles(dependentTiles);
+			tile->setDependentTiles(dependentTiles);
 			screen->addObject(tile);
 		}
 	}
