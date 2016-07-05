@@ -51,7 +51,7 @@ protected:
 	const int BORDER = 1;
 	const Level* m_level;
 	LevelMainCharacter* m_mainChar;
-	LevelDynamicTileID m_dynamicTileID;
+	LevelDynamicTileID m_dynamicTileID = LevelDynamicTileID::VOID;
 	bool m_isCollidable = false;
 	bool m_isStrictlyCollidable = false;
 	bool m_isOneWay = false;
