@@ -143,6 +143,7 @@ void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 			tile->setDebugBoundingBox(COLOR_NEUTRAL);
 			tile->loadResources();
 			tile->loadAnimation(switchBean.skinNr);
+			tile->setDynamicTileID(switchBean.id);
 			screen->addObject(tile);
 			dependentTiles.push_back(tile);
 		}
