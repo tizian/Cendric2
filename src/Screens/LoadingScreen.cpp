@@ -13,8 +13,7 @@ LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 }
 
 void LoadingScreen::execUpdate(const sf::Time& frameTime) {
-
-	// return once to render this screen, and then loads everything in the main thread.
+	// return once to render this screen.
 	if (!m_isRendered) {
 		m_isRendered = true;
 		m_screenManager->clearBackupScreen();
@@ -36,11 +35,13 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 			m_mapToLoad->addScreenOverlay(ScreenOverlay::createHintScreenOverlay("MapMove"));
 			m_mapToLoad->getCharacterCore()->learnHint("MapMove");
 		}
+		m_characterCore->autosave();
 		return;
 	}
 	if (m_levelToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_levelToLoad->loadForRenderTexture();
 		setNextScreen(m_levelToLoad);
+		m_characterCore->autosave();
 		return;
 	}
 

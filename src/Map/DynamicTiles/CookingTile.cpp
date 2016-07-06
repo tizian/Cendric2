@@ -61,3 +61,4 @@ void CookingTile::onRightClick() {
 std::string CookingTile::getSpritePath() const {
 	return "res/assets/map_dynamic_tiles/spritesheet_tiles_cooking.png";
 }
+

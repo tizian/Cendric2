@@ -42,6 +42,7 @@ public:
 	// uses the character core writer to save a .sav file. The name is the name chosen by the user.
 	bool save(const std::string& fileName, const std::string& name);
 	bool quicksave();
+	bool autosave();
 	// loads the weapon with its slots (reload if already loaded)
 	void loadWeapon();
 	// loads all quests that are started, completed or failed.
@@ -139,9 +140,6 @@ public:
 	int getReputation(FractionID fraction) const;
 	// is this a new character core? (new game)
 	bool isNewGame();
-
-	static const char* QUICKSAVE_LOCATION;
-	static const char* DEBUGSAVE_LOCATION;
 
 protected:
 	// protected constructor for copying

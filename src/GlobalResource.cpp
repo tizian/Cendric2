@@ -3,6 +3,7 @@
 const std::string GlobalResource::SAVEGAME_FOLDER = "saves/";
 const std::string GlobalResource::CONFIGURATION_PATH = "config.ini";
 const std::string GlobalResource::QUICKSAVE_PATH = "saves/quicksave.sav";
+const std::string GlobalResource::AUTOSAVE_PATH = "saves/autosave.sav";
 const std::string GlobalResource::NPC_FOLDER = "res/npc/";
 const std::string GlobalResource::QUEST_FOLDER = "res/quest/";
 

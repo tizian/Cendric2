@@ -34,10 +34,9 @@ public:
 
 	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
 	void setPositionOffset(const sf::Vector2f& offset);
-	void setDynamicTileID(LevelDynamicTileID id);
 
 	const sf::Vector2f& getPositionOffset() const;
-	LevelDynamicTileID getDynamicTileID() const;
+	virtual LevelDynamicTileID getDynamicTileID() const = 0;
 	bool isCollidable() const;
 	bool isStrictlyCollidable() const;
 	bool isOneWay() const;
@@ -51,7 +50,6 @@ protected:
 	const int BORDER = 1;
 	const Level* m_level;
 	LevelMainCharacter* m_mainChar;
-	LevelDynamicTileID m_dynamicTileID = LevelDynamicTileID::VOID;
 	bool m_isCollidable = false;
 	bool m_isStrictlyCollidable = false;
 	bool m_isOneWay = false;

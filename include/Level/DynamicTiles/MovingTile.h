@@ -27,7 +27,8 @@ public:
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableTile::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableTile::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color& debugColor) override { LevelMovableTile::setDebugBoundingBox(debugColor); }
-	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); };
+	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); }
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Moving; } 
 
 private:
 	void updateRelativeVelocity(const sf::Time& frameTime) override;

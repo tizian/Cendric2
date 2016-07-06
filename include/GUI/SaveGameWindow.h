@@ -28,7 +28,11 @@ public:
 	bool isClicked();
 	bool isSelected() const;
 	const std::string& getFilename() const;
-	const std::string getSaveName() const;
+	const std::string& getSaveName() const;
+
+	bool operator> (const SaveGameEntry& save) const {
+		return (m_dateSavedNr > save.m_dateSavedNr);
+	}
 
 private:
 	bool m_isSelected = false;
@@ -38,6 +42,7 @@ private:
 	BitmapText m_timePlayed;
 
 	std::string m_filename;
+	std::time_t m_dateSavedNr;
 };
 
 // a window to show savegames in the saves/ folder. 
@@ -56,6 +61,9 @@ public:
 	std::string getChosenFilename() const;
 	std::string getChosenSaveName() const;
 
+	// fills the given vector with saves and orders them (newest first)
+	static void loadSaves(std::vector<SaveGameEntry*>& entries);
+
 private:
 	void calculateEntryPositions();
 	void updateScrolling(const sf::Time& frameTime);
@@ -64,7 +72,7 @@ public:
 	static const float COLUMN_WIDTH;
 
 private:
-	std::vector<SaveGameEntry> m_entries;
+	std::vector<SaveGameEntry*> m_entries;
 	int m_chosenEntry = 0;
 	bool m_isChosen = false;
 	bool m_isEnabled = true;

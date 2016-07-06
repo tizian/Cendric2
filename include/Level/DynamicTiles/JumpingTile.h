@@ -23,6 +23,7 @@ public:
 	void setJumpingTileData(const JumpingTileData& data);
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Jumping; }
 
 private:
 	void checkCollisions(const sf::Vector2f& nextPosition);

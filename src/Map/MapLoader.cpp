@@ -29,7 +29,6 @@ void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
 		book->setDebugBoundingBox(COLOR_NEUTRAL);
 		book->loadResources();
 		book->loadAnimation(it.skinNr);
-		book->setDynamicTileID(MapDynamicTileID::Book);
 
 		screen->addObject(book);
 	}
@@ -44,7 +43,6 @@ void MapLoader::loadSigns(MapData& data, MapScreen* screen) const {
 		sign->setDebugBoundingBox(COLOR_NEUTRAL);
 		sign->loadResources();
 		sign->loadAnimation(it.skinNr);
-		sign->setDynamicTileID(MapDynamicTileID::Sign);
 
 		screen->addObject(sign);
 	}
@@ -81,7 +79,6 @@ void MapLoader::loadDynamicTiles(MapData& data, MapScreen* screen) const {
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		tile->loadResources();
 		tile->loadAnimation(it.skinNr);
-		tile->setDynamicTileID(it.id);
 
 		screen->addObject(tile);
 

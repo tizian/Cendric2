@@ -39,14 +39,16 @@ void Logger::log(LogLevel level, const std::string& source, const std::string& m
 
 		cout << color << levelString << "-[" << source << "]: " << message << DEFAULT << endl;
 	}
-
 }
+
 void Logger::logError(const std::string& source, const std::string& message) const {
 	log(LogLevel::Error, source, message);
 }
+
 void Logger::logWarning(const std::string& source, const std::string& message) const {
 	log(LogLevel::Warning, source, message);
 }
+
 void Logger::logInfo(const std::string& source, const std::string& message) const {
 	log(LogLevel::Info, source, message);
 }

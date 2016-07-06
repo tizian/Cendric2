@@ -5,8 +5,6 @@
 
 using namespace std;
 
-const char* CharacterCore::DEBUGSAVE_LOCATION = "saves/debug.sav";
-
 CharacterCore::CharacterCore() {
 	m_data = DEFAULT_CORE;
 
@@ -32,10 +30,6 @@ CharacterCore::~CharacterCore() {
 	delete m_weapon;
 }
 
-bool CharacterCore::quickload() {
-	return load(g_documentsPath + "saves/quicksave.sav");
-}
-
 bool CharacterCore::load(const std::string& fileName) {
 	CharacterCoreReader reader;
 
@@ -50,6 +44,10 @@ bool CharacterCore::load(const std::string& fileName) {
 	m_stopwatch.restart();
 	g_resourceManager->deleteItemResources();
 	return true;
+}
+
+bool CharacterCore::quickload() {
+	return load(g_documentsPath + GlobalResource::QUICKSAVE_PATH);
 }
 
 void CharacterCore::loadQuests() {
@@ -135,14 +133,11 @@ bool CharacterCore::save(const std::string& fileName, const string& name) {
 }
 
 bool CharacterCore::quicksave() {
-	m_data.timePlayed += m_stopwatch.restart();
-	m_data.dateSaved = time(nullptr);
-	m_data.saveGameName = "Quicksave";
+	return save(g_documentsPath + GlobalResource::QUICKSAVE_PATH, "Quicksave");
+}
 
-	// write to savefile.
-	CharacterCoreWriter writer;
-	writer.createFile(g_documentsPath + "saves/quicksave.sav");
-	return writer.saveToFile(g_documentsPath + "saves/quicksave.sav", m_data);
+bool CharacterCore::autosave() {
+	return save(g_documentsPath + GlobalResource::AUTOSAVE_PATH, "Autosave");
 }
 
 bool CharacterCore::createFile(const std::string& fileName) const {

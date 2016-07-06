@@ -13,6 +13,8 @@ public:
 	void onHit(Spell* spell) override;
 	void setDisposed() override;
 
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Ice; }
+
 private:
 	std::string getSpritePath() const override;
 	FluidTile* m_fluidTile;			// Pointer to its fluid tile, to unfreeze

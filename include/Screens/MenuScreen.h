@@ -22,8 +22,8 @@ public:
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	void execOnEnter(const Screen *previousScreen) override;
-	void execOnExit(const Screen *nextScreen) override;
+	void execOnEnter(const Screen* previousScreen) override;
+	void execOnExit(const Screen* nextScreen) override;
 
 	void setFireParticles(particles::TextureParticleSystem* ps_left, particles::TextureParticleSystem* ps_right);
 
@@ -41,6 +41,8 @@ private:
 	YesOrNoForm* m_yesOrNoForm = nullptr;
 
 	Button* m_saveGameButton = nullptr;
+
+	void loadNewestSave();
 
 	// agents for the yes or no form
 	void onStartNewGame();

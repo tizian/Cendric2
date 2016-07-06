@@ -9,6 +9,7 @@ public:
 	static const std::string SAVEGAME_FOLDER;
 	static const std::string CONFIGURATION_PATH;
 	static const std::string QUICKSAVE_PATH;
+	static const std::string AUTOSAVE_PATH;
 	static const std::string NPC_FOLDER;
 	static const std::string QUEST_FOLDER;
 

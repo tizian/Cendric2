@@ -47,6 +47,8 @@ public:
 
 	bool isFrozen(int index);
 
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Fluid; }
+
 private:
 	void checkForMovableTiles();
 

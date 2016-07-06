@@ -51,7 +51,6 @@ void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
 		chestTile->loadAnimation(it.skinNr);
 		chestTile->setChestData(it);
 		chestTile->setPosition(it.spawnPosition + chestTile->getPositionOffset());
-		chestTile->setDynamicTileID(LevelDynamicTileID::Chest);
 		screen->addObject(chestTile);
 	}
 }
@@ -67,7 +66,6 @@ void LevelLoader::loadJumpingTiles(LevelData& data, LevelScreen* screen) const {
 		jumpingTile->loadResources();
 		jumpingTile->loadAnimation(jumpingData.skinNr);
 		jumpingTile->setPosition(jumpingData.spawnPosition);
-		jumpingTile->setDynamicTileID(LevelDynamicTileID::Jumping);
 
 		screen->addObject(jumpingTile);
 	}
@@ -83,7 +81,6 @@ void LevelLoader::loadSignTiles(LevelData& data, LevelScreen* screen) const {
 		signTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		signTile->loadResources();
 		signTile->loadAnimation(signData.skinNr);
-		signTile->setDynamicTileID(LevelDynamicTileID::Sign);
 
 		screen->addObject(signTile);
 	}
@@ -99,7 +96,6 @@ void LevelLoader::loadLadderTiles(LevelData& data, LevelScreen* screen) const {
 		ladderTile->loadResources();
 		ladderTile->loadAnimation(ladderData.skinNr);
 		ladderTile->setPosition(ladderData.position + ladderTile->getPositionOffset());
-		ladderTile->setDynamicTileID(LevelDynamicTileID::Ladder);
 
 		screen->addObject(ladderTile);
 	}
@@ -123,7 +119,6 @@ void LevelLoader::loadModifierTiles(LevelData& data, LevelScreen* screen) const 
 		modifierTile->loadAnimation(0);
 		modifierTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		modifierTile->setPosition(modifierData.spawnPosition);
-		modifierTile->setDynamicTileID(LevelDynamicTileID::Modifier);
 
 		screen->addObject(modifierTile);
 	}
@@ -145,7 +140,6 @@ void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 			tile->setDebugBoundingBox(COLOR_NEUTRAL);
 			tile->loadResources();
 			tile->loadAnimation(switchBean.skinNr);
-			tile->setDynamicTileID(LevelDynamicTileID::SwitchableOn);
 			screen->addObject(tile);
 			dependentTiles.push_back(tile);
 		}
@@ -160,7 +154,6 @@ void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 			movingTile->loadResources();
 			movingTile->loadAnimation(movingData.skinNr);
 			movingTile->setPosition(movingData.spawnPosition);
-			movingTile->setDynamicTileID(LevelDynamicTileID::Moving);
 			screen->addObject(movingTile);
 			dependentTiles.push_back(movingTile);
 		}
@@ -175,7 +168,6 @@ void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
 			tile->loadResources();
 			tile->loadAnimation(leverBean.skinNr);
 			tile->setDependentTiles(dependentTiles);
-			tile->setDynamicTileID(LevelDynamicTileID::Lever);
 			screen->addObject(tile);
 		}
 	}
@@ -207,7 +199,6 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 		tile->loadAnimation(it.skinNr);
 		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
-		tile->setDynamicTileID(it.id);
 		screen->addObject(tile);
 	}
 }

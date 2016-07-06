@@ -28,6 +28,7 @@ public:
 	void setInitialHeight(float height);
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Falling; }
 
 private:
 	std::string getSpritePath() const override;

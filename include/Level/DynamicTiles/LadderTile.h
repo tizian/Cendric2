@@ -15,6 +15,7 @@ public:
 	void onHit(LevelMovableGameObject* mob) override;
 	void onHit(Spell* spell) override { /*nop*/ }
 	void setPosition(const sf::Vector2f& position) override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Ladder; }
 
 	// returns a feasable position of a game object relative to this ladder
 	// when a GO starts climbing on a ladder, it starts at this position.

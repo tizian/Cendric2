@@ -57,7 +57,7 @@ void MenuScreen::setAllButtonsEnabled(bool value) {
 	m_saveGameButton->setEnabled(value && (m_characterCore != nullptr));
 }
 
-void MenuScreen::render(sf::RenderTarget &renderTarget) {
+void MenuScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_screenSpriteBackground);
 	m_ps_left->render(renderTarget);
@@ -70,7 +70,9 @@ void MenuScreen::render(sf::RenderTarget &renderTarget) {
 	renderTooltipText(renderTarget);
 }
 
-void MenuScreen::execOnEnter(const Screen *previousScreen) {
+void MenuScreen::execOnEnter(const Screen* previousScreen) {
+	loadNewestSave();
+
 	// add fire particles
 	if (m_ps_left == nullptr && m_ps_right == nullptr) {
 		g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
@@ -139,6 +141,29 @@ void MenuScreen::execOnEnter(const Screen *previousScreen) {
 	button->setText("Exit");
 	button->setOnClick(std::bind(&MenuScreen::onExit, this));
 	addObject(button);
+}
+
+void MenuScreen::loadNewestSave() {
+	if (m_characterCore != nullptr) return;
+	
+	std::vector<SaveGameEntry*> entries;
+	SaveGameWindow::loadSaves(entries);
+	if (entries.empty()) {
+		return;
+	}
+
+	std::string filename = entries.at(0)->getFilename();
+
+	for (auto& entry : entries) {
+		delete entry;
+	}
+	entries.clear();
+
+	m_characterCore = new CharacterCore();
+	if (!m_characterCore->load(filename)) {
+		delete m_characterCore;
+		m_characterCore = nullptr;
+	}
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen) {

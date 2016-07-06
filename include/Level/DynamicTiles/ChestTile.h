@@ -22,6 +22,7 @@ public:
 	void loot();
 	
 	void setChestData(const ChestData& data);
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Chest; }
 
 private:
 	std::string getSpritePath() const override;

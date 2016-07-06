@@ -11,6 +11,7 @@ public:
 	void onHit(Spell* spell) override;
 	void onHit(LevelMovableGameObject* mob) override;
 	void update(const sf::Time& frameTime) override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Unstable; }
 
 private:
 	std::string getSpritePath() const override;

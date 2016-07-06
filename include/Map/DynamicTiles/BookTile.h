@@ -13,6 +13,7 @@ public:
 	void loadAnimation(int skinNr) override;
 	void onRightClick() override;
 	void onLeftClick() override;
+	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Book; }
 
 private:
 	void startReading();

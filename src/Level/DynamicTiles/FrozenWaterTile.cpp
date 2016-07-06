@@ -9,7 +9,6 @@ FrozenWaterTile::FrozenWaterTile(FluidTile* fluidTile, int fluidTileIndex) : Lev
 	m_fluidTile = fluidTile;
 	m_fluidTileIndex = fluidTileIndex;
 	m_isRenderAfterObjects = true;
-	m_dynamicTileID = LevelDynamicTileID::Ice;
 }
 
 void FrozenWaterTile::init() {
