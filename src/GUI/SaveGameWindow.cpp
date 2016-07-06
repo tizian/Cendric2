@@ -61,7 +61,7 @@ void SaveGameWindow::reload() {
 	DIR *dir;
 	struct dirent *de;
 
-	dir = opendir((g_documentsPath + "saves/").c_str());
+	dir = opendir((getDocumentsPath(GlobalResource::SAVEGAME_FOLDER)).c_str());
 	int nr = 0;
 	while (dir) {
 		de = readdir(dir);
@@ -76,7 +76,7 @@ void SaveGameWindow::reload() {
 			continue;
 		}
 		SaveGameEntry entry;
-		std::string location = g_documentsPath + "saves/" + std::string(de->d_name);
+		std::string location = getDocumentsPath(GlobalResource::SAVEGAME_FOLDER) + std::string(de->d_name);
 		if (!entry.load(location.c_str())) {
 			g_logger->logError("SaveGameWindow", "Could not load savegame " + location);
 			continue;

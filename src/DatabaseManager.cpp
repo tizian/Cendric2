@@ -26,7 +26,7 @@ DatabaseManager::~DatabaseManager() {
 }
 
 void DatabaseManager::init() {
-	int rc = sqlite3_open(getPath(DB_FILENAME).c_str(), &m_db);
+	int rc = sqlite3_open(getResourcePath(DB_FILENAME).c_str(), &m_db);
 
 	if (rc) {
 		g_logger->logError("DatabaseManager", "Can't open database:" + std::string(sqlite3_errmsg(m_db)));

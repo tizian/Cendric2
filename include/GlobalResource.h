@@ -11,6 +11,7 @@ public:
 	static const std::string QUICKSAVE_PATH;
 	static const std::string NPC_FOLDER;
 	static const std::string QUEST_FOLDER;
+	static const std::string SCREENSHOT_FOLDER;
 
 	static const std::string FONT_8;
 	static const std::string FONT_8_SHADOWED;

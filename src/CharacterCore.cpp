@@ -33,7 +33,7 @@ CharacterCore::~CharacterCore() {
 }
 
 bool CharacterCore::quickload() {
-	return load(g_documentsPath + "saves/quicksave.sav");
+	return load(getDocumentsPath(GlobalResource::QUICKSAVE_PATH));
 }
 
 bool CharacterCore::load(const std::string& fileName) {
@@ -141,8 +141,8 @@ bool CharacterCore::quicksave() {
 
 	// write to savefile.
 	CharacterCoreWriter writer;
-	writer.createFile(g_documentsPath + "saves/quicksave.sav");
-	return writer.saveToFile(g_documentsPath + "saves/quicksave.sav", m_data);
+	writer.createFile(getDocumentsPath(GlobalResource::QUICKSAVE_PATH));
+	return writer.saveToFile(getDocumentsPath(GlobalResource::QUICKSAVE_PATH), m_data);
 }
 
 bool CharacterCore::createFile(const std::string& fileName) const {

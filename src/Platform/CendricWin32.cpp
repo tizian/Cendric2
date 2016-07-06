@@ -5,7 +5,7 @@
 #include <ShlObj.h>
 #include <algorithm>
 
-std::string getDocumentPath() {
+std::string getExternalDocumentsPath() {
 	std::string resultPath = "";
 
 	TCHAR path[MAX_PATH];

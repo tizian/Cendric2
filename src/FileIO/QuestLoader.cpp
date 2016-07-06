@@ -14,8 +14,8 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 
 	std::string filename = QUEST_FOLDER + questID + ".lua";
 
-	if (luaL_dofile(L, getPath(filename).c_str()) != 0) {
-		g_logger->logError("QuestLoader", "Cannot read lua script: " + getPath(filename));
+	if (luaL_dofile(L, getResourcePath(filename).c_str()) != 0) {
+		g_logger->logError("QuestLoader", "Cannot read lua script: " + getResourcePath(filename));
 		return questData;
 	}
 

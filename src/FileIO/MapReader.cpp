@@ -610,7 +610,7 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 bool MapReader::readMap(const std::string& filename, MapData& data, const CharacterCore* core) {
 	m_core = core;
 	tinyxml2::XMLDocument xmlDoc;
-	tinyxml2::XMLError result = xmlDoc.LoadFile(getPath(filename).c_str());
+	tinyxml2::XMLError result = xmlDoc.LoadFile(getResourcePath(filename).c_str());
 	XMLCheckResult(result);
 
 	tinyxml2::XMLElement* map = xmlDoc.FirstChildElement("map");

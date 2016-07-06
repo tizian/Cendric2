@@ -79,12 +79,6 @@ inline void updateTime(sf::Time& time, const sf::Time& frameTime) {
 	if (time < sf::Time::Zero) time = sf::Time::Zero;
 }
 
-// this function can be changed if the resource path is
-// not the same as the executables path
-inline std::string getPath(const std::string& path) {
-	return path;
-}
-
 // versioning
 #define CENDRIC_VERSION_NR "0.3.0"
 
@@ -153,4 +147,16 @@ extern InputController* g_inputController;
 extern Logger* g_logger;
 extern TextProvider* g_textProvider;
 extern sf::RenderWindow* g_renderWindow;
+
+extern std::string g_resourcePath;
 extern std::string g_documentsPath;
+
+// Platform independent resource path handling
+inline std::string getResourcePath(const std::string& path) {
+	return g_resourcePath + path;
+}
+
+// Platform independent document path handling
+inline std::string getDocumentsPath(const std::string& path) {
+	return g_documentsPath + path;
+}

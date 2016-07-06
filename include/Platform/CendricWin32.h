@@ -2,4 +2,4 @@
 
 #include <string>
 
-std::string getDocumentPath();
+std::string getExternalDocumentsPath();

@@ -2,4 +2,5 @@
 
 #include <string>
 
-std::string getDocumentPath();
+std::string getAppResourcePath();
+std::string getExternalDocumentsPath();
