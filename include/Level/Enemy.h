@@ -27,7 +27,7 @@ public:
 	Enemy(const Level* level, Screen* screen);
 	virtual ~Enemy();
 
-	void load(EnemyID id);
+	void load();
 
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onRightClick() override;
@@ -58,7 +58,7 @@ public:
 	void setAlly(const sf::Time& ttl);
 
 	GameObjectType getConfiguredType() const override;
-	EnemyID getEnemyID() const;
+	
 	EnemyState getEnemyState() const;
 	// a level, ranges from 0 to 4. An enemy can only be feared / stunned / resurrected, if the level of its spell is high enough.
 	// default is 0. A enemy with level 4 can never be feared / stunned / controlled or affected in any other way!!
@@ -89,6 +89,8 @@ public:
 	// less loot, that can be still looted after a mob is looted 2-N times.
 	virtual void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const = 0;
 
+	virtual EnemyID getEnemyID() const = 0;
+
 protected:
 	LevelMainCharacter* m_mainChar;
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
@@ -104,7 +106,6 @@ protected:
 	// loot, create the correct items + gold in the players inventory.
 	void loot();
 
-	EnemyID m_id = EnemyID::VOID;
 	int m_objectID = -1;
 	bool m_isUnique = false;
 	bool m_isLooted = false;

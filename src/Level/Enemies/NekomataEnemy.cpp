@@ -22,7 +22,7 @@ void NekomataEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 NekomataEnemy::NekomataEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load(EnemyID::Nekomata);
+	load();
 }
 
 NekomataEnemy::~NekomataEnemy() {

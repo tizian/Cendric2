@@ -22,7 +22,7 @@ void WolfEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 WolfEnemy::WolfEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load(EnemyID::Wolf);
+	load();
 }
 
 void WolfEnemy::loadAttributes() {

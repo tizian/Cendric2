@@ -34,7 +34,7 @@ void CairnEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) 
 CairnEnemy::CairnEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load(EnemyID::Cairn);
+	load();
 }
 
 void CairnEnemy::loadAttributes() {

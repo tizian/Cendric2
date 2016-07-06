@@ -20,7 +20,7 @@ void WispEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 WispEnemy::WispEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load(EnemyID::Wisp);
+	load();
 }
 
 void WispEnemy::loadAttributes() {

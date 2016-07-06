@@ -20,7 +20,7 @@ void CrowEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 CrowEnemy::CrowEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load(EnemyID::Crow);
+	load();
 }
 
 void CrowEnemy::loadAttributes() {

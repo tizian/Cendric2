@@ -11,7 +11,7 @@ REGISTER_ENEMY(EnemyID::Hunter, HunterEnemy)
 HunterEnemy::HunterEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load(EnemyID::Hunter);
+	load();
 	setAlly(sf::Time::Zero);
 
 	m_isImmortal = true;

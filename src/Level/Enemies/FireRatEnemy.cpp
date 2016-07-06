@@ -22,7 +22,7 @@ void FireRatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold
 FireRatEnemy::FireRatEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load(EnemyID::FireRat);
+	load();
 }
 
 void FireRatEnemy::loadAttributes() {
