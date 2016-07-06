@@ -21,6 +21,7 @@ public:
 	void onHit(Spell* spell) override {}
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Sign; }
 
 private: 
 	void onInteract();

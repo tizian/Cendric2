@@ -24,10 +24,6 @@ void LevelDynamicTile::setPositionOffset(const sf::Vector2f& offset) {
 	m_positionOffset = offset;
 }
 
-void LevelDynamicTile::setDynamicTileID(LevelDynamicTileID id) {
-	m_dynamicTileID = id;
-}
-
 const sf::Vector2f& LevelDynamicTile::getPositionOffset() const {
 	return m_positionOffset;
 }
@@ -45,10 +41,6 @@ void LevelDynamicTile::render(sf::RenderTarget& target) {
 		}
 		m_isFirstRenderIteration = true;
 	}
-}
-
-LevelDynamicTileID LevelDynamicTile::getDynamicTileID() const {
-	return m_dynamicTileID;
 }
 
 GameObjectType LevelDynamicTile::getConfiguredType() const {

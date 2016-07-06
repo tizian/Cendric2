@@ -9,6 +9,7 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Ice; }
 
 private:
 	std::string getSpritePath() const override;

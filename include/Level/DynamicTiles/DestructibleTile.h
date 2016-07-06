@@ -10,6 +10,7 @@ public:
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Destructible; }
 
 private:
 	std::string getSpritePath() const override;

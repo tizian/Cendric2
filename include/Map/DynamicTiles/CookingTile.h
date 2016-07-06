@@ -11,6 +11,7 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onRightClick() override;
+	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Cooking; }
 
 private:
 	std::string getSpritePath() const override;

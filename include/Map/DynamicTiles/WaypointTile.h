@@ -16,6 +16,7 @@ public:
 
 	void setActive();
 	void setSpawnPosition(int spawnPosition);
+	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Waypoint; }
 
 private:
 	std::string getSpritePath() const override;

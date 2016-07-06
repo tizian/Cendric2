@@ -21,6 +21,7 @@ public:
 	void onMouseOver() override;
 
 	GameObjectType getConfiguredType() const override;
+	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Sign; }
 
 private:
 	std::string getSpritePath() const override;

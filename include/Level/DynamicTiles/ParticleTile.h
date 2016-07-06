@@ -23,6 +23,7 @@ public:
 	void onHit(LevelMovableGameObject* mob) override;
 
 	void setPosition(const sf::Vector2f& pos) override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Particle; }
 
 private:
 	particles::TextureParticleSystem* m_ps = nullptr;

@@ -15,6 +15,7 @@ public:
 
 	void switchTile() override;
 	bool isSwitchable() const override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::SwitchableOn; }
 
 private:
 	std::string getSpritePath() const override;

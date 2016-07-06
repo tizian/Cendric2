@@ -22,6 +22,7 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 
 	void setModifier(const SpellModifier& modififer);
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Modifier; }
 
 private:
 	SpellModifier m_modifier;

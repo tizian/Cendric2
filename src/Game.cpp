@@ -14,21 +14,7 @@ Game::Game() {
 	
 	m_running = true;
 
-	if (g_resourceManager->getConfiguration().isDebugMode) {
-		CharacterCore* core = new CharacterCore();
-		if (!(core->load(CharacterCore::DEBUGSAVE_LOCATION))) {
-			std::string errormsg = std::string(CharacterCore::DEBUGSAVE_LOCATION) + ": save file corrupted!";
-			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
-			m_screenManager = new ScreenManager(new SplashScreen());
-			delete core;
-		}
-		else {
-			m_screenManager = new ScreenManager(new LoadingScreen(core));
-		}
-	}
-	else {
-		m_screenManager = new ScreenManager(new SplashScreen());
-	}
+	m_screenManager = new ScreenManager(new SplashScreen());
 }
 
 Game::~Game() {

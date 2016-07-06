@@ -11,6 +11,7 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Torch; }
 
 private:
 	std::string getSpritePath() const override;

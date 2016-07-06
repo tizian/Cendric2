@@ -14,6 +14,7 @@ public:
 	void onLeftClick() override;
 	void onHit(Spell* spell) override {};
 	void onHit(LevelMovableGameObject* mob) override {};
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Checkpoint; }
 
 	void setActive(bool active, bool playSound = true);
 

@@ -16,6 +16,7 @@ public:
 
 	void setDependentTiles(const std::vector<LeverDependentTile*>& dependentTiles);
 	void switchLever();
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Lever; }
 
 private:
 	std::string getSpritePath() const override;
