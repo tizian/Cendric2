@@ -13,7 +13,7 @@ BEGIN
       VALUE "InternalName", "Cendric"
       VALUE "LegalCopyright", "Cendric"
       VALUE "OriginalFilename", "Cendric.exe"
-      VALUE "ProductName", "Tone Mapper"
+      VALUE "ProductName", "Cendric"
       VALUE "ProductVersion", "0.3.0"
     END
   END
