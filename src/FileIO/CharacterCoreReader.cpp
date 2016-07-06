@@ -898,10 +898,10 @@ bool CharacterCoreReader::readTilesExplored(char* start, char* end, CharacterCor
 
 bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
 	FILE* savFile;
-	savFile = fopen(getResourcePath(filename).c_str(), "r");
+	savFile = fopen(filename.c_str(), "r");
 
 	if (savFile == NULL) {
-		g_logger->logError("CharacterCoreReader", "Error at opening file " + getResourcePath(filename));
+		g_logger->logError("CharacterCoreReader", "Error at opening file " + filename);
 		return false;
 	}
 
