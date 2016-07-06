@@ -6,6 +6,7 @@ const std::string GlobalResource::QUICKSAVE_PATH = "saves/quicksave.sav";
 const std::string GlobalResource::AUTOSAVE_PATH = "saves/autosave.sav";
 const std::string GlobalResource::NPC_FOLDER = "res/npc/";
 const std::string GlobalResource::QUEST_FOLDER = "res/quest/";
+const std::string GlobalResource::SCREENSHOT_FOLDER = "screenshots/";
 
 const std::string GlobalResource::FONT_8 = "res/fonts/default_bitmap_font_8.png";
 const std::string GlobalResource::FONT_8_SHADOWED = "res/fonts/shadowed_bitmap_font_8.png";

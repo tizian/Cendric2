@@ -41,15 +41,15 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("addConditionProgress", &ScriptedBehaviorCallback::addConditionProgress)
 		.endClass();
 
-	if (luaL_dofile(m_L, getPath(path).c_str()) != 0) {
+	if (luaL_dofile(m_L, getResourcePath(path).c_str()) != 0) {
 		
-		g_logger->logError("ScriptedBehaviorCallback", "Cannot read lua script: " + getPath(path));
+		g_logger->logError("ScriptedBehaviorCallback", "Cannot read lua script: " + getResourcePath(path));
 		return false;
 	}
 
 	LuaRef update = getGlobal(m_L, "update");
 	if (!update.isFunction()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Lua script: " + getPath(path) + " has no update function.");
+		g_logger->logError("ScriptedBehaviorCallback", "Lua script: " + getResourcePath(path) + " has no update function.");
 		return false;
 	}
 

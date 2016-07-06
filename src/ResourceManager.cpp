@@ -110,16 +110,16 @@ template<typename T> void ResourceManager::loadResource(std::map<std::string, T*
 	if (holder.find(filename) != holder.end()) return; // resource already loaded
 
 	if (type == ResourceType::Unique && owner == nullptr) {
-		g_logger->logError("ResourceManager", typeName + " could not be registered as unique, owner not set: " + getPath(std::string(filename)));
+		g_logger->logError("ResourceManager", typeName + " could not be registered as unique, owner not set: " + getResourcePath(std::string(filename)));
 		return;
 	}
 
 	T* resource = new T();
 
 	// search project's main directory
-	if (resource->loadFromFile(getPath(filename))) {
+	if (resource->loadFromFile(getResourcePath(filename))) {
 		holder[filename] = resource;
-		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": loading " + typeName);
+		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": loading " + typeName);
 
 		switch (type) {
 		case ResourceType::Unique:
@@ -139,8 +139,8 @@ template<typename T> void ResourceManager::loadResource(std::map<std::string, T*
 		}
 	}
 	else {
-		g_logger->logError("ResourceManager", typeName + " could not be loaded from file: " + getPath(std::string(filename)));
-		std::string tmp = typeName + " could not be loaded from file: " + getPath(filename);
+		g_logger->logError("ResourceManager", typeName + " could not be loaded from file: " + getResourcePath(std::string(filename)));
+		std::string tmp = typeName + " could not be loaded from file: " + getResourcePath(filename);
 		setError(ErrorID::Error_fileNotFound, tmp);
 	}
 }
@@ -214,7 +214,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (textureIt != m_textures.end()) {
 		delete textureIt->second;
 		m_textures.erase(textureIt);
-		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing texture");
+		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing texture");
 		return;
 	}
 
@@ -223,7 +223,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (fontIt != m_fonts.end()) {
 		delete fontIt->second;
 		m_fonts.erase(fontIt);
-		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing font");
+		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing font");
 		return;
 	}
 
@@ -232,7 +232,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (bitmapFontIt != m_bitmapFonts.end()) {
 		delete bitmapFontIt->second;
 		m_bitmapFonts.erase(bitmapFontIt);
-		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing bitmap font");
+		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing bitmap font");
 		return;
 	}
 
@@ -241,7 +241,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (soundBufferIt != m_soundBuffers.end()) {
 		delete soundBufferIt->second;
 		m_soundBuffers.erase(soundBufferIt);
-		g_logger->logInfo("ResourceManager", getPath(std::string(filename)) + ": releasing soundbuffer");
+		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing soundbuffer");
 		return;
 	}
 }
@@ -267,7 +267,7 @@ void ResourceManager::playMusic(const std::string& filename, bool looping, const
 	if (m_currentMusic.first.compare(filename) == 0) return; // already playing
 	m_currentMusic.second.stop();
 	if (filename.empty()) return;
-	if (m_currentMusic.second.openFromFile(getPath(filename))) {
+	if (m_currentMusic.second.openFromFile(getResourcePath(filename))) {
 		m_currentMusic.second.setLoop(looping);
 		m_currentMusic.second.setVolume(static_cast<float>(m_configuration.volumeMusic));
 		m_currentMusic.second.play();
@@ -275,7 +275,7 @@ void ResourceManager::playMusic(const std::string& filename, bool looping, const
 			m_currentMusic.second.setPlayingOffset(playingOffset);
 	}
 	else {
-		g_logger->logError("ResourceManager", "Could not read music from file: " + getPath(filename));
+		g_logger->logError("ResourceManager", "Could not read music from file: " + getResourcePath(filename));
 	}
 }
 

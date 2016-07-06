@@ -48,14 +48,14 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("addNode", &DialogueLoader::addNode)
 		.endClass();
 
-	if (luaL_dofile(L, getPath(m_dialogue.getID()).c_str()) != 0) {
-		g_logger->logError("DialogeLoader", "Cannot read lua script: " + getPath(m_dialogue.getID()));
+	if (luaL_dofile(L, getResourcePath(m_dialogue.getID()).c_str()) != 0) {
+		g_logger->logError("DialogeLoader", "Cannot read lua script: " + getResourcePath(m_dialogue.getID()));
 		return;
 	}
 
 	LuaRef function = getGlobal(L, "loadDialogue");
 	if (!function.isFunction()) {
-		g_logger->logError("DialogeLoader", "Lua script: " + getPath(m_dialogue.getID()) + " has no loadDialogue function.");
+		g_logger->logError("DialogeLoader", "Lua script: " + getResourcePath(m_dialogue.getID()) + " has no loadDialogue function.");
 		return;
 	}
 

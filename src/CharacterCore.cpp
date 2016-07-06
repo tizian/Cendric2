@@ -133,11 +133,11 @@ bool CharacterCore::save(const std::string& fileName, const string& name) {
 }
 
 bool CharacterCore::quicksave() {
-	return save(g_documentsPath + GlobalResource::QUICKSAVE_PATH, "Quicksave");
+	return save(getDocumentsPath(GlobalResource::QUICKSAVE_PATH), "Quicksave");
 }
 
 bool CharacterCore::autosave() {
-	return save(g_documentsPath + GlobalResource::AUTOSAVE_PATH, "Autosave");
+	return save(getDocumentsPath(GlobalResource::AUTOSAVE_PATH), "Autosave");
 }
 
 bool CharacterCore::createFile(const std::string& fileName) const {
