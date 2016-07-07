@@ -26,6 +26,8 @@ public:
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
+	EnemyID getEnemyID() const override { return EnemyID::Gargoyle; }
+
 	// called from the spell that summons this gargoyle.
 	// the parameters are set by the spell.
 	void setSummoned(int strength, int damage, int count, const sf::Time& ttl);

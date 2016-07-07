@@ -36,8 +36,7 @@ Enemy::~Enemy() {
 	delete m_scriptedBehavior;
 }
 
-void Enemy::load(EnemyID id) {
-	m_id = id;
+void Enemy::load() {
 	loadResources();
 	loadAnimation();
 	loadAttributes();
@@ -45,7 +44,7 @@ void Enemy::load(EnemyID id) {
 	loadBehavior();
 	m_spellManager->setSpellsAllied(m_isAlly);
 
-	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyName(id), "enemy"), this, m_mainChar);
+	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyName(getEnemyID()), "enemy"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
 	m_interactComponent->setInteractText("ToLoot");
 	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
@@ -216,10 +215,6 @@ const LevelMovableGameObject* Enemy::getCurrentTarget() const {
 	return m_enemyAttackingBehavior->getCurrentTarget();
 }
 
-EnemyID Enemy::getEnemyID() const {
-	return m_id;
-}
-
 float Enemy::getConfiguredDistanceToHPBar() const {
 	return 20.f;
 }
@@ -379,7 +374,7 @@ void Enemy::setDead() {
 	}
 
 	if (m_isBoss) {
-		m_screen->getCharacterCore()->setConditionFulfilled("boss", EnumNames::getEnemyName(m_id));
+		m_screen->getCharacterCore()->setConditionFulfilled("boss", EnumNames::getEnemyName(getEnemyID()));
 
 		// loot (but without set disposed)
 		m_mainChar->lootItems(m_lootableItems);

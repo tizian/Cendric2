@@ -19,7 +19,7 @@ void SkeletonEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 SkeletonEnemy::SkeletonEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load(EnemyID::Skeleton);
+	load();
 }
 
 void SkeletonEnemy::loadAttributes() {

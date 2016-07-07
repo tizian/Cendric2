@@ -21,7 +21,7 @@ void GargoyleEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 GargoyleEnemy::GargoyleEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load(EnemyID::Gargoyle);
+	load();
 }
 
 void GargoyleEnemy::update(const sf::Time& frameTime) {

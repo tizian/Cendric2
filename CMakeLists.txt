@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Cendric)
 
+set(CMAKE_BUILD_TYPE Release)
+
+option(CENDRIC_APPLE_BUILD_APP_BUNDLE "Build .app bundle on Mac platform?" OFF)
+
 add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
 
 if(WIN32)
@@ -50,7 +54,12 @@ file(GLOB_RECURSE SQLiteShell_FILES
 if (WIN32)
 	add_executable(Cendric
 		${Cendric_FILES}
-		${CMAKE_CURRENT_SOURCE_DIR}/icon.rc
+		${PROJECT_SOURCE_DIR}/res/info.rc
+	)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND CENDRIC_APPLE_BUILD_APP_BUNDLE)
+	add_executable(Cendric MACOSX_BUNDLE
+		${Cendric_FILES}
+		${PROJECT_SOURCE_DIR}/res/icon.icns
 	)
 else()
 	add_executable(Cendric
@@ -66,8 +75,13 @@ endif()
 
 set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
+target_link_libraries(Cendric sfml-system sfml-window sfml-graphics sfml-audio)
+
+if (APPLE)
+	set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/info.plist)
+	set_source_files_properties(res/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+endif()
+
 if (WIN32)
 	add_executable(SQLiteShell ${SQLiteShell_FILES})
 endif()
-
-target_link_libraries(Cendric sfml-system sfml-window sfml-graphics sfml-audio)

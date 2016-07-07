@@ -21,7 +21,7 @@ void SeagullEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold
 SeagullEnemy::SeagullEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load(EnemyID::Seagull);
+	load();
 }
 
 void SeagullEnemy::loadAttributes() {

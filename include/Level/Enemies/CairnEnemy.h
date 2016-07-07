@@ -18,6 +18,8 @@ public:
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
+	EnemyID getEnemyID() const override { return EnemyID::Cairn; }
+
 protected:
 	std::string getSpritePath() const override;
 	MovingBehavior* createMovingBehavior(bool asAlly) override;

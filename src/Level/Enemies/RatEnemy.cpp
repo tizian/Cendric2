@@ -20,7 +20,7 @@ void RatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) co
 RatEnemy::RatEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load(EnemyID::Rat);
+	load();
 }
 
 void RatEnemy::loadAttributes() {

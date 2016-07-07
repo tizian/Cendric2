@@ -15,7 +15,7 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 	cutsceneData.id = "";
 
 	std::string foldername = CUTSCENE_FOLDER + cutsceneID + "/";
-	std::string filename = foldername + cutsceneID + ".lua";
+	std::string filename = getResourcePath(CUTSCENE_FOLDER) + cutsceneID + "/" + cutsceneID + ".lua";
 
 	if (luaL_dofile(L, filename.c_str()) != 0) {
 		g_logger->logError("CutsceneLoader", "Cannot read lua script: " + filename);
