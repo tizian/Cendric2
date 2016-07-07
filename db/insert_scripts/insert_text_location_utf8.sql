@@ -16,3 +16,4 @@ Wächter der Höhlen','Boss: Khajag,
 Wächter vode Höhlene');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CrystalCrypt','location','The Crystal Crypt','Die Kristallkrypta','D''Kristall Krypta');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderBackroom','location','The Secret Laboratory','Das Geheimlabor','Es Gheimlabor');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Gandria','location','Gandria','Gandria','Gandria');
