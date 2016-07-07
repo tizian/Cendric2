@@ -22,7 +22,6 @@ public:
 private:
 	LevelEquipment* m_mask = nullptr;
 	static const sf::Color GHOST_COLOR;
-	bool m_isFacingRight = true;
 
 	particles::TextureParticleSystem* m_ps;
 	particles::AngledVelocityGenerator* m_velGenerator;

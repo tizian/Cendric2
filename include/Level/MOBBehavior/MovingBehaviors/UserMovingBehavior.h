@@ -27,7 +27,6 @@ private:
 	GameObject* m_currentLadder = nullptr;
 	bool m_isClimbing = false;
 	bool m_isClimbingStep1; // used for the climbing animation
-	bool m_isIgnoringOnewayTiles = false;
 	void handleClimbing(const sf::Time& frameTime);
 	void stopClimbing();
 	void startClimbing(GameObject* ladder, float yPos);

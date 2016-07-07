@@ -5,7 +5,7 @@ const float BookWindow::WIDTH = WINDOW_WIDTH / 3.f;
 const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TOP;
 const std::string SOUND_PATH = "res/sound/gui/page_turn.ogg";
 
-BookWindow::BookWindow(const BookData& data, MapScreen* screen) : Window(
+BookWindow::BookWindow(const BookData& data) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, HEIGHT),
 	GUIOrnamentStyle::LARGE,
 	COLOR_LIGHT_BROWN, // back

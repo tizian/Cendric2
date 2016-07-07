@@ -161,7 +161,7 @@ void MapScreen::setBook(const BookData* bookData) {
 	clearOverlays();
 	m_interface->hideAll();
 
-	m_bookWindow = new BookWindow(*bookData, this);
+	m_bookWindow = new BookWindow(*bookData);
 	m_bookWindowDisposed = false;
 	m_bookWindow->addCloseButton([&]() {
 		m_bookWindowDisposed = true;

@@ -19,7 +19,6 @@ protected:
 
 private:
 	particles::TextureParticleSystem* m_ps;
-	particles::AngledVelocityGenerator* m_velGenerator;
 	particles::ParticleSpawner* m_particleSpawner;
 
 	void loadParticleSystem();

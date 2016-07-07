@@ -11,7 +11,7 @@ class MapScreen;
 
 class BookWindow : public Window {
 public:
-	BookWindow(const BookData& data, MapScreen* screen);
+	BookWindow(const BookData& data);
 	~BookWindow();
 
 	void render(sf::RenderTarget& renderTarget) override;
@@ -35,7 +35,6 @@ private:
 
 	// -1 is the title page, may be empty.
 	int m_currentPage = -1;
-	MapScreen* m_screen;
 
 	sf::Sound m_sound;
 };
