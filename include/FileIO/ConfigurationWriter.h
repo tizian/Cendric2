@@ -24,12 +24,12 @@ private:
 	std::string writeDamageNumbersOn(const ConfigurationData& data) const;
 
 	std::string writeLanguage(const ConfigurationData& data) const;
+	std::string writeDisplayMode(const ConfigurationData& data) const;
 	std::string writeMainInputMap(const ConfigurationData& data) const;
 	std::string writeAlternativeInputMap(const ConfigurationData& data) const;
 	std::string writeVSyncOn(const ConfigurationData& data) const;
 
 	std::string writeDebugModeOn(const ConfigurationData& data) const;
 	std::string writeDebugRenderingOn(const ConfigurationData& data) const;
-	std::string writeFullscreenOn(const ConfigurationData& data) const;
 	std::string writeSmoothingOn(const ConfigurationData& data) const;
 };

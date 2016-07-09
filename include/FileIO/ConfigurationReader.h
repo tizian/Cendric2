@@ -18,6 +18,7 @@ public:
 
 private:
 	bool readLanguage(const std::string& line, ConfigurationData& data) const;
+	bool readDisplayMode(const std::string& line, ConfigurationData& data) const;
 	bool readMainInputMapping(const std::string& line, ConfigurationData& data) const;
 	bool readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const;
 
@@ -32,6 +33,5 @@ private:
 
 	bool readDebugModeOn(const std::string& line, ConfigurationData& data) const;
 	bool readDebugRenderingOn(const std::string& line, ConfigurationData& data) const;
-	bool readFullscreenOn(const std::string& line, ConfigurationData& data) const;
 	bool readSmoothingOn(const std::string& line, ConfigurationData& data) const;
 };

@@ -226,6 +226,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('WaypointActiv
 INSERT INTO text (text_id, english, german, swiss_german) values ('WeaponDamage','Weapon Damage','Waffenschaden','Waffeschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('WindForce','Wind Force','Windstärke','Windstärchi');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Window','Window','Fenster','Fenster');
+INSERT INTO text (text_id, english, german, swiss_german) values ('WindowedFullscreen','Full Window','Vollbild im Fenster','Vollbild im Fenster');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Yes','Yes','Ja','Ja');
 INSERT INTO text (text_id, english, german, swiss_german) values ('VSync','Vsync','Vsync','Vsync');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GhostDamage','Ghost Damage','Geisterschaden','Geisterschade');

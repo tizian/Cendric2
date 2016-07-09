@@ -49,9 +49,10 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	// displayMode
 	m_displayModeSelector = new ArrowSelector();
 	m_displayModeSelector->setLabelText("DisplayMode");
-	m_displayModeSelector->addOption("Window");
-	m_displayModeSelector->addOption("Fullscreen");
-	m_displayModeSelector->setOptionIndex(g_resourceManager->getConfiguration().isFullscreen ? 1 : 0);
+	for (int mode = 1; mode < static_cast<int>(Language::MAX); ++mode) {
+		m_displayModeSelector->addOption(EnumNames::getDisplayModeName(static_cast<DisplayMode>(mode)));
+	}
+	m_displayModeSelector->setOptionIndex(static_cast<int>(g_resourceManager->getConfiguration().displayMode) - 1);
 	m_displayModeSelector->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	addObject(m_displayModeSelector);
 
@@ -162,26 +163,29 @@ void OptionsScreen::onBack() {
 
 void OptionsScreen::onApply() {
 	ConfigurationData& config = g_resourceManager->getConfiguration();
-	bool fullScreenOn = m_displayModeSelector->getChosenOptionIndex() == 1;
-	bool screenChanged = config.isFullscreen != fullScreenOn;
+	DisplayMode mode = static_cast<DisplayMode>(m_displayModeSelector->getChosenOptionIndex() + 1);
+
+	bool screenChanged = config.displayMode != mode;
 	screenChanged = screenChanged || config.isVSyncEnabled != m_vSyncCheckbox->isChecked();
 	screenChanged = screenChanged || config.isSmoothing != m_smoothingCheckbox->isChecked();
 	Language language = static_cast<Language>(m_languageSelector->getChosenOptionIndex() + 1);
 	bool languageChanged = config.language != language;
-	config.language = language;
 	bool soundOn = m_soundCheckbox->isChecked();
 	bool soundChanged = soundOn != config.isSoundOn;
 	soundChanged = soundChanged || config.volumeSound != m_volumeSoundSlider->getSliderPosition();
 	soundChanged = soundChanged || config.volumeMusic != m_volumeMusicSlider->getSliderPosition();
+
+	config.language = language;
+	config.displayMode = mode;
 	config.isSoundOn = soundOn;
 	config.isQuickcast = m_quickCastCheckbox->isChecked();
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
 	config.isDisplayDamageNumbers = m_displayDamageNumbersCheckbox->isChecked();
-	config.isFullscreen = fullScreenOn;
 	config.isSmoothing = m_smoothingCheckbox->isChecked();
 	config.isVSyncEnabled = m_vSyncCheckbox->isChecked();
 	config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
 	config.volumeSound = m_volumeSoundSlider->getSliderPosition();
+
 	ConfigurationWriter writer;
 	writer.saveToFile(config);
 	g_textProvider->reload();

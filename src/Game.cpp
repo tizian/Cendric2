@@ -22,12 +22,20 @@ Game::~Game() {
 }
 
 void Game::reloadWindow() {
-	if (g_resourceManager->getConfiguration().isFullscreen) {
+	switch (g_resourceManager->getConfiguration().displayMode) {
+	case DisplayMode::Fullscreen:
 		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Fullscreen);
-	}
-	else {
+		break;
+	case DisplayMode::WindowedFullscreen:
+		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::None);
+		m_mainWindow.setSize(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
+		m_mainWindow.setPosition(sf::Vector2i(0, 0));
+		break;
+	case DisplayMode::Window:
+	default:
 		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
 	}
+
 	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
 	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);

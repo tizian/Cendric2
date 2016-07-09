@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Enums/Language.h"
+#include "Enums/DisplayMode.h"
 #include "Enums/Key.h"
 
 // describes the configuration that can be modified by the user.
@@ -15,11 +16,11 @@ struct ConfigurationData {
 	// in percent
 	int volumeMusic;
 	bool isVSyncEnabled;
-	std::map < Key, sf::Keyboard::Key > mainKeyMap;
-	// important: the alternative key map can't be seen, saved or changed by the user yet.
-	std::map < Key, sf::Keyboard::Key > alternativeKeyMap;
+	std::map<Key, sf::Keyboard::Key> mainKeyMap;
+	// important: the alternative key map can't be seen, saved or changed by the user.
+	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
+	DisplayMode displayMode;
 	bool isQuickcast;
-	bool isFullscreen;
 	bool isSmoothing;
 	bool isDebugMode;
 	bool isDebugRendering;
@@ -98,8 +99,8 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 		{ Key::Screenshot, sf::Keyboard::KeyCount },
 		{ Key::Debug, sf::Keyboard::KeyCount }
 	}),
+	DisplayMode::Window,
 	true,
-	false,
 	true,
 	false,
 	false,

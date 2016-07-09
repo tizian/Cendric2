@@ -11,13 +11,13 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeSoundVolumeSound(data);
 		configuration << writeSoundVolumeMusic(data);
 		configuration << writeLanguage(data);
+		configuration << writeDisplayMode(data);
 		configuration << writeQuickcastOn(data);
 		configuration << writeHintsOn(data);
 		configuration << writeDamageNumbersOn(data);
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeVSyncOn(data);
-		configuration << writeFullscreenOn(data);
 		configuration << writeSmoothingOn(data);
 		configuration << writeDebugModeOn(data);
 		configuration << writeDebugRenderingOn(data);
@@ -76,11 +76,6 @@ std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& 
 	return debugRenderingOn.append(string(DEBUGRENDERING_ON) + ":" + (data.isDebugRendering ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeFullscreenOn(const ConfigurationData& data) const {
-	string fullscreenOn = "# 0 means window mode, 1 means fullscreen mode\n";
-	return fullscreenOn.append(string(FULLSCREEN_ON) + ":" + (data.isFullscreen ? "1" : "0") + "\n");
-}
-
 std::string ConfigurationWriter::writeSmoothingOn(const ConfigurationData& data) const {
 	string smoothingOn = "# 0 means the resizing is handled with Nearest Neighbor, 1 means with interpolation (smoothing)\n";
 	return smoothingOn.append(string(SMOOTHING_ON) + ":" + (data.isSmoothing ? "1" : "0") + "\n");
@@ -100,6 +95,11 @@ std::string ConfigurationWriter::writeSoundVolumeMusic(const ConfigurationData& 
 std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const {
 	string language = "# 1 for EN, 2 for DE, 3 for CH\n";
 	return language.append(string(LANGUAGE) + ":" + to_string(static_cast<int>(data.language)) + "\n");
+}
+
+std::string ConfigurationWriter::writeDisplayMode(const ConfigurationData& data) const {
+	string mode = "# 1 for Window, 2 for Fullscreen, 3 for Windowed Fullscreen\n";
+	return mode.append(string(DISPLAYMODE) + ":" + to_string(static_cast<int>(data.displayMode)) + "\n");
 }
 
 std::string ConfigurationWriter::writeVSyncOn(const ConfigurationData& data) const {

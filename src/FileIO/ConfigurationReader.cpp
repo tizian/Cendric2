@@ -69,9 +69,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SMOOTHING_ON));
 				noError = readSmoothingOn(line, data);
 			}
-			else if (line.compare(0, strlen(FULLSCREEN_ON), string(FULLSCREEN_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(FULLSCREEN_ON));
-				noError = readFullscreenOn(line, data);
+			else if (line.compare(0, strlen(DISPLAYMODE), string(DISPLAYMODE)) == 0) {
+				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DISPLAYMODE));
+				noError = readDisplayMode(line, data);
 			}
 			else {
 				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file.");
@@ -132,6 +132,21 @@ bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationDat
 		return false;
 	}
 	data.language = language;
+	return true;
+}
+
+bool ConfigurationReader::readDisplayMode(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after display mode tag or no value after colon.");
+		return false;
+	}
+	DisplayMode mode = static_cast<DisplayMode>(atoi(line.substr(colon + 1).c_str()));
+	if (mode >= DisplayMode::MAX || mode <= DisplayMode::VOID) {
+		g_logger->logError("ConfigurationReader", "Display mode not recognized.");
+		return false;
+	}
+	data.displayMode = mode;
 	return true;
 }
 
@@ -239,17 +254,6 @@ bool ConfigurationReader::readDebugRenderingOn(const std::string& line, Configur
 	}
 	bool debugOn = (atoi(line.substr(colon + 1).c_str()) != 0);
 	data.isDebugRendering = debugOn;
-	return true;
-}
-
-bool ConfigurationReader::readFullscreenOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after debug fullscreen on tag or no value after colon.");
-		return false;
-	}
-	bool fullscreenOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isFullscreen = fullscreenOn;
 	return true;
 }
 

@@ -12,6 +12,7 @@
 #include "Enums/FractionID.h"
 #include "Enums/ItemType.h"
 #include "Enums/EnemyID.h"
+#include "Enums/DisplayMode.h"
 
 // pure static class used to resolve enum names.
 class EnumNames {
@@ -28,6 +29,21 @@ public:
 			return "German";
 		case Language::Lang_EN:
 			return "English";
+		}
+	}
+
+	static std::string getDisplayModeName(DisplayMode mode) {
+		switch (mode) {
+		default:
+		case DisplayMode::MAX:
+		case DisplayMode::VOID:
+			return "Unknown";
+		case DisplayMode::Window:
+			return "Window";
+		case DisplayMode::Fullscreen:
+			return "Fullscreen";
+		case DisplayMode::WindowedFullscreen:
+			return "WindowedFullscreen";
 		}
 	}
 
