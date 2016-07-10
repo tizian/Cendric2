@@ -16,6 +16,8 @@ void TransformBeamSpell::load(const SpellData& bean, LevelMovableGameObject* mob
 
 	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 200.f, 0.8f);
 	addComponent(new LightComponent(lightData, this));
+
+	m_graceTime = sf::milliseconds(500);
 }
 
 void TransformBeamSpell::update(const sf::Time& frameTime) {
@@ -25,15 +27,15 @@ void TransformBeamSpell::update(const sf::Time& frameTime) {
 	if (m_hasStunned)
 		return;
 
-	// this spell only hurts after a certain time that is dependant on the distance to the main char
-	float distToMainChar = dist(m_mainChar->getCenter(), getCenter()); 
-	m_timeSinceStart += frameTime;
+	updateTime(m_graceTime, frameTime);
 
-	if (m_ps->emitRate > 0 && m_timeSinceStart > sf::seconds(0.5f)) {
+	if (m_ps->emitRate > 0 && m_graceTime == sf::Time::Zero) {
 		m_ps->emitRate = 0;
 	}
-	if (m_timeSinceStart.asSeconds() < distToMainChar / 400.f) // the constant is the velocity of the spells fastest particles
+
+	if (m_graceTime > sf::Time::Zero) {
 		return;
+	}
 
 	bool isLeftOfMainChar = m_mainChar->getPosition().x > getPosition().x;
 	if (m_mainChar->isFacingRight() != isLeftOfMainChar) {
