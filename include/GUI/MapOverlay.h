@@ -76,5 +76,5 @@ private:
 
 	BitmapText m_title;
 	
-	Window* m_border;
+	Window* m_window;
 };

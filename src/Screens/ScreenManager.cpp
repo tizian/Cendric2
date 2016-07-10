@@ -89,6 +89,9 @@ void ScreenManager::setErrorScreen() {
 }
 
 void ScreenManager::requestQuit() {
+	if (m_currentScreen != nullptr && m_currentScreen->getCharacterCore() != nullptr) {
+		m_currentScreen->getCharacterCore()->autosave();
+	}
 	m_isQuitRequested = true;
 }
 

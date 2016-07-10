@@ -61,12 +61,12 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
 
 	sf::FloatRect box(m_position.x - 1.f, m_position.y - 1.f, m_boundingBox.width + 2.f, m_boundingBox.height + 2.f);
-	m_border = new Window(box,
+	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		COLOR_TRANSPARENT,
 		GUIConstants::ORNAMENT_COLOR);
 
-	m_border->addCloseButton(std::bind(&MapOverlay::hide, this));
+	m_window->addCloseButton(std::bind(&MapOverlay::hide, this));
 }
 
 MapOverlay::~MapOverlay() {
@@ -74,7 +74,7 @@ MapOverlay::~MapOverlay() {
 		delete wp;
 	}
 	m_waypoints.clear();
-	delete m_border;
+	delete m_window;
 }
 
 void MapOverlay::update(const sf::Time& frameTime) {
@@ -85,7 +85,7 @@ void MapOverlay::update(const sf::Time& frameTime) {
 		m_fogOfWarTileMap.updateFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
 	}
 
-	m_border->update(frameTime);
+	
 
 	m_mainCharMarker.setPosition(m_position + 
 		m_screen->getMainCharacter()->getCenter() * m_scale - sf::Vector2f(12.5f, 12.5f));
@@ -97,6 +97,8 @@ void MapOverlay::update(const sf::Time& frameTime) {
 	if (g_inputController->isMouseOver(&m_boundingBox, true)) {
 		g_inputController->lockAction();
 	}
+
+	m_window->update(frameTime);
 } 
 
 void MapOverlay::reloadWaypoints() {
@@ -141,7 +143,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	target.draw(m_mainCharMarker);
 	target.draw(m_title);
 
-	m_border->render(target);
+	m_window->render(target);
 }
 
 void MapOverlay::show() {
