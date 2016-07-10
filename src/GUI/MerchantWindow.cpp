@@ -106,7 +106,6 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 }
 
 void MerchantWindow::update(const sf::Time& frameTime) {
-	m_window->update(frameTime);
 	m_scrollBar->update(frameTime);
 
 	// check whether an item was selected
@@ -130,6 +129,8 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
 		completeTrade();
 	}
+
+	m_window->update(frameTime);
 }
 
 void MerchantWindow::selectSlot(const std::string& selectedSlotId) {

@@ -16,8 +16,8 @@ steps = {
 		},
 		images = {
 			{path="forest_background.png", 	vel=0, 	angle=0},
-			{path="forest_foreground.png", 	vel=10, angle=95},
-			{path="forest_trees.png", 		vel=40, angle=80},
+			{path="forest_foreground.png", 	vel=8, angle=95},
+			{path="forest_trees.png", 		vel=35, angle=80},
 		}
 	},
 	{

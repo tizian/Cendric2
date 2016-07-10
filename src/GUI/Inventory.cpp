@@ -247,7 +247,6 @@ void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {
 
 	if (Item::isEquipmentType(clicked->getItemType())) 
 		m_equipment->equipItem(clicked);
-	
 }
 
 void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) {
@@ -262,7 +261,6 @@ void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) {
 void Inventory::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	m_window->update(frameTime);
 	m_scrollBar->update(frameTime);
 
 	// check whether an item was selected
@@ -324,6 +322,8 @@ void Inventory::update(const sf::Time& frameTime) {
 	if (m_equipment->requiresReload()) {
 		reload();
 	}
+
+	m_window->update(frameTime);
 }
 
 void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
@@ -393,7 +393,7 @@ void Inventory::handleLevelDrop() {
 		m_levelInterface->notifyConsumableDrop(m_currentClone);
 		m_levelInterface->highlightQuickslots(false);
 	}
-	else if (m_isEquipmentSlotDragged && Item::isEquipmentType(type)) {
+	else if (m_isEquipmentSlotDragged || Item::isEquipmentType(type)) {
 		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
 	}
 }
@@ -470,6 +470,7 @@ void Inventory::render(sf::RenderTarget& target) {
 }
 
 void Inventory::renderAfterForeground(sf::RenderTarget& target) {
+	if (!m_isVisible) return;
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
 		it.second.renderAfterForeground(target);
 	}

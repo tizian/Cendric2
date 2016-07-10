@@ -133,8 +133,6 @@ void WeaponWindow::clearAllSlots() {
 void WeaponWindow::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	m_window->update(frameTime);
-
 	if (m_requireReload) reload();
 
 	for (auto& it : m_weaponSlots) {
@@ -173,6 +171,8 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 	if (!m_isModifiable) return;
 
 	handleDragAndDrop();
+
+	m_window->update(frameTime);
 }
 
 void WeaponWindow::selectModifierSlot(ModifierSlot* selectedSlot) {

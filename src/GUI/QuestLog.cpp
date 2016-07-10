@@ -113,7 +113,6 @@ void QuestLog::clearAllEntries() {
 void QuestLog::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	m_window->update(frameTime);
 	m_scrollBar->update(frameTime);
 
 	for (size_t i = 0; i < m_stateMap[m_currentTab]->size(); ++i) {
@@ -149,6 +148,8 @@ void QuestLog::update(const sf::Time& frameTime) {
 	}
 
 	calculateEntryPositions();
+
+	m_window->update(frameTime);
 }
 
 void QuestLog::calculateEntryPositions() {

@@ -105,10 +105,10 @@ float LadderTile::getClimbingPositionY(GameObject* object) const {
 	}
 
 	float newBottom = goBottom + sign * goDiff;
-	if (newBottom - goHeight > ladderBottom) {
+	if (newBottom - goHeight > ladderBottom - 1) {
 		newBottom -= LADDER_STEP;
 	}
-	else if (newBottom < getPosition().y) {
+	else if (newBottom < getPosition().y + 1) {
 		newBottom += LADDER_STEP;
 	}
 

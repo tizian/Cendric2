@@ -19,6 +19,10 @@ public:
 
 	virtual void update(const sf::Time& frameTime) override;
 	virtual void render(sf::RenderTarget& renderTarget) override;
+	virtual void onLeftClick() override;
+	virtual void onRightClick() override;
+	virtual void onRightJustPressed() override;
+	virtual void onLeftJustPressed() override;
 
 	void addCloseButton(const std::function<void()>& agent);
 

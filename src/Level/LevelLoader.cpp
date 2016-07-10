@@ -18,12 +18,6 @@ using namespace std;
 void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level* level) const {
 	loadEnemies(data, screen, level);
 	loadLevelItems(data, screen);
-	loadModifierTiles(data, screen);
-	loadChestTiles(data, screen);
-	loadLeverTiles(data, screen);
-	loadJumpingTiles(data, screen);
-	loadSignTiles(data, screen);
-	loadLadderTiles(data, screen);
 	loadTriggers(data, screen);
 }
 
@@ -201,6 +195,13 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		screen->addObject(tile);
 	}
+
+	loadModifierTiles(data, screen);
+	loadChestTiles(data, screen);
+	loadLeverTiles(data, screen);
+	loadJumpingTiles(data, screen);
+	loadSignTiles(data, screen);
+	loadLadderTiles(data, screen);
 }
 
 void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {

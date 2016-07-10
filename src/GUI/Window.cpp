@@ -20,6 +20,7 @@ Window::Window(const sf::FloatRect& box, GUIOrnamentStyle style, const sf::Color
 
 void Window::init(const sf::FloatRect& box, GUIOrnamentStyle style) {
 	setBoundingBox(box);
+	m_isInputInDefaultView = true;
 
 	m_backLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backColor, box.width, box.height);
 	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentColor, box.width, box.height);
@@ -73,6 +74,23 @@ void Window::update(const sf::Time& frameTime) {
 	if (m_closeButton) {
 		m_closeButton->update(frameTime);
 	}
+	GameObject::update(frameTime);
+}
+
+void Window::onLeftClick() {
+	g_inputController->lockAction();
+}
+
+void Window::onRightClick() {
+	g_inputController->lockAction();
+}
+
+void Window::onLeftJustPressed() {
+	g_inputController->lockAction();
+}
+
+void Window::onRightJustPressed() {
+	g_inputController->lockAction();
 }
 
 void Window::render(sf::RenderTarget& renderTarget) {

@@ -278,7 +278,7 @@
   </object>
   <object id="128" x="249" y="351" width="38.5" height="50">
    <properties>
-    <property name="level entry" value="res/level/elderbackroom/elderbackroom.tmx,1300,550"/>
+    <property name="level entry" value="res/level/elderbackroom/elderbackroom.tmx,1300,1170"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

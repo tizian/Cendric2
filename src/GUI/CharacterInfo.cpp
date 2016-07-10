@@ -139,7 +139,6 @@ bool CharacterInfo::isVisible() const {
 void CharacterInfo::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	m_window->update(frameTime);
 	m_scrollBar->update(frameTime);
 
 	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
@@ -185,6 +184,8 @@ void CharacterInfo::update(const sf::Time& frameTime) {
 	m_isReloadNeeded = false;
 
 	calculateEntryPositions();
+
+	m_window->update(frameTime);
 }
 
 void CharacterInfo::calculateEntryPositions() {
