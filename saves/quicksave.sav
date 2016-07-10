@@ -1,7 +1,7 @@
 # time played, in seconds
-time.played:3342
+time.played:3434
 savegame.name:Quicksave
-savegame.date:1467295037
+savegame.date:1468106188
 level.id:res/level/howlingcaverns/howlingcaverns.tmx
 level.position:4610.000000,560.000000
 is.in.level:0
@@ -54,8 +54,9 @@ equipped.ring1:
 equipped.ring2:
 equipped.weapon:we_ordermace
 # weapon configurations:
-weapon.configs:we_ordermace;2,4,1;
+weapon.configs:we_ordermace;17;2,4,1;
 weapon.configs:we_torch;
+weapon.configs:we_walkingpole;
 # quickslot assignments:
 quickslot:1,fo_lesserhealingpotion
 quickslot:2,fo_apple

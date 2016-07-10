@@ -379,8 +379,12 @@ void WeaponWindow::equipSpell(const SpellSlot* spellSlot) {
 		}
 	}
 	if (!isEquipped) {
-		auto& slot = m_weaponSlots.at(0);
-		m_core->addSpell(spellSlot->getSpellID(), slot.first.getNr());
+		for (auto& slot : m_weaponSlots) {
+			if (slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType()) {
+				m_core->addSpell(spellSlot->getSpellID(), slot.first.getNr());
+				break;
+			}
+		}
 	}
 	m_requireReload = true;
 }
