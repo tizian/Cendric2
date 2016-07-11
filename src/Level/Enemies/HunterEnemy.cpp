@@ -50,8 +50,8 @@ void HunterEnemy::handleAttackInput() {
 }
 
 void HunterEnemy::loadAnimation() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 95.f));
-	setSpriteOffset(sf::Vector2f(-30.f, -25.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setSpriteOffset(sf::Vector2f(-35.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();

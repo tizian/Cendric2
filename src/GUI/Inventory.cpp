@@ -415,6 +415,7 @@ void Inventory::handleDragAndDrop() {
 	}
 	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
 	if (!m_isDragging) {
+		if (selectedSlot == nullptr) return;
 		if (DRAG_DISTANCE < std::sqrt(
 			(mousePos.x - m_startMousePosition.x) * (mousePos.x - m_startMousePosition.x) +
 			(mousePos.y - m_startMousePosition.y) * (mousePos.y - m_startMousePosition.y))) {

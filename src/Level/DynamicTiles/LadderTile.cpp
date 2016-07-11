@@ -22,7 +22,7 @@ void LadderTile::loadAnimation(int skinNr) {
 
 	int length = std::max(1, m_size);
 	length++;
-	int tilepart = 0;
+	int tilepart = 2 - length % 3;
 
 	sprite.setTextureRect(sf::IntRect((skinNr - 1) * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
 	m_sprites.push_back(sprite);
