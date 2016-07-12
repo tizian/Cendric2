@@ -44,8 +44,8 @@ public:
 	const ItemEquipmentBean& getEquipmentBean() const;
 	const ItemEquipmentLightBean& getEquipmentLightBean() const;
 
-	// getter for convertible bean
-	const ItemConvertibleBean& getConvertibleBean() const;
+	// getter for convertible beans
+	const std::vector<ItemConvertibleBean>& getConvertibleBeans() const;
 
 	// getter for spell bean
 	const ItemSpellBean& getSpellBean() const;
@@ -74,7 +74,7 @@ public:
 protected:
 	ItemBean m_itemBean;
 	ItemFoodBean m_itemFoodBean;
-	ItemConvertibleBean m_itemConvertibleBean;
+	std::vector<ItemConvertibleBean> m_itemConvertibleBeans;
 	ItemSpellBean m_itemSpellBean;
 	ItemEquipmentBean m_itemEquipmentBean;
 	ItemEquipmentLightBean m_itemEquipmentLightBean;

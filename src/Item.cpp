@@ -9,7 +9,7 @@ Item::Item(const std::string& itemID) {
 
 void Item::initBeans(const std::string& itemID) {
 	m_itemBean = g_databaseManager->getItemBean(itemID);
-	m_itemConvertibleBean = g_databaseManager->getItemConvertibleBean(itemID);
+	m_itemConvertibleBeans = g_databaseManager->getItemConvertibleBeans(itemID);
 	m_itemSpellBean = g_databaseManager->getItemSpellBean(itemID);
 	m_itemEquipmentBean = g_databaseManager->getItemEquipmentBean(itemID);
 	m_itemEquipmentLightBean = g_databaseManager->getItemEquipmentLightBean(itemID);
@@ -50,8 +50,8 @@ const sf::Time& Item::getFoodDuration() const {
 	return m_itemFoodBean.food_duration;
 }
 
-const ItemConvertibleBean& Item::getConvertibleBean() const {
-	return m_itemConvertibleBean;
+const std::vector<ItemConvertibleBean>& Item::getConvertibleBeans() const {
+	return m_itemConvertibleBeans;
 }
 
 const ItemSpellBean& Item::getSpellBean() const {
@@ -100,7 +100,7 @@ void Item::checkItem() {
 	if (m_itemWeaponBean.status == BeanStatus::Filled) {
 		m_isWeapon = true;
 	}
-	if (m_itemConvertibleBean.status == BeanStatus::Filled) {
+	if (m_itemConvertibleBeans.size() > 0) {
 		m_isConvertible = true;
 	}
 	if (m_itemSpellBean.status == BeanStatus::Filled) {

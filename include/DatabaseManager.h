@@ -32,7 +32,7 @@ public:
 	TextBean getTextBean(const std::string& text_id, const std::string& text_type) const;
 	ItemAttributeBean getItemAttributeBean(const std::string& item_id) const;
 	ItemBean getItemBean(const std::string& item_id) const;
-	ItemConvertibleBean getItemConvertibleBean(const std::string& item_id) const;
+	std::vector<ItemConvertibleBean> getItemConvertibleBeans(const std::string& item_id) const;
 	ItemSpellBean getItemSpellBean(const std::string& item_id) const;
 	ItemEquipmentBean getItemEquipmentBean(const std::string& item_id) const;
 	ItemEquipmentLightBean getItemEquipmentLightBean(const std::string& item_id) const;

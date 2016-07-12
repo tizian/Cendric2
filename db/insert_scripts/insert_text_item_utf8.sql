@@ -23,6 +23,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatfire', 'item', 'Red wizardhat','Roter Spitzhut','Rote Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatlight', 'item', 'White wizardhat','Weisser Spitzhut','Wiisse Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatshadow', 'item', 'Grey wizardhat','Grauer Spitzhut','Graue Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_travelhat', 'item', 'Travel Hat','Reisehut','Reisehuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_travelhat', 'item_desc', 'This hat belonged to me once.','Dieser Hut gehörte einmal mir.','De Huet het mal mir ghört.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_bread', 'item', 'Bread','Brot','Brot');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item', 'Cave berries','Höhlenbeeren','Höhlebeeri');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_cheese', 'item', 'Cheese','Käse','Chääs');
@@ -68,6 +70,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_mediumpouch', 'item_desc', 'The pouch is filled with coins.','Der Beutel ist voller Münzen.','De Büütel isch gfüllt mit Münze.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item', 'Big Pouch','Praller Geldbeutel','Pralle Geldbüütel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item_desc', 'The pouch is bulging with golden coins.','Der Beutel ist prall gefüllt mit goldenen Münzen.','De Büütel isch prall gfüllt mit goldige Münze.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_travelbag', 'item', 'Old Travel Bag','Alter Reiserucksack','Alte Reiserucksack');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_travelbag', 'item_desc', 'I wonder what''s inside?','Was ist da wohl drin?','Wa isch do echt drin?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item', 'Note','Notiz','Notiz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item_desc', 'I''ve found this note nailed to a post in the Howling Caverns.','Diese Notiz habe ich in den Heulenden Höhlen gefunden, an einen Pfosten genagelt.','Die Notiz hani anen Pfoste gnaglet gfunde, ide Hüülende Höhle.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item_text', 'To whoever reads this: Beware!
@@ -110,6 +114,10 @@ Verwandelt...
 
 	Es chömed immer me
 		umzingled, ich mun kämpfe.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_eleletter', 'item', 'Letter','Brief','Brief');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_eleletter', 'item_desc', 'I found this letter in the old travel bag that belonged to me once.','Ich habe diesen Brief in dem alten Reiserucksack gefunden, der einmal mir gehört hat.','Ich ha de Brief im alte Reiserucksack gfunde, wo mal mir ghört het.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item', 'Map','Karte','Charte');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', '...','...','...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_recommendationletter', 'item', 'Letter of Recommendation','Empfehlungsschreiben','Empfehligsschriibe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_recommendationletter', 'item_desc', 'A letter of recommendation from the High Priestess Inina. It is sealed.','Ein Empfehlungsschreiben der Hohepriesterin Inina. Es ist versiegelt.','Es Empfehligsschriibe vode Hohepriesterin Inina. Es isch versiglet.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_rope', 'item', 'Rope','Seil','Seil');
@@ -153,6 +161,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_glassoffeudalfire', 'item_desc', 'A strong spirit.', 'Ziemlich hochprozentig.', 'Zimlich hochprozentig.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item', 'Feudal Fire (Spoiled)', 'Feudales Feuer (Verdorben)', 'Feudals Füür (Verdorbe)');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item_desc', 'Vincent has mixed something in there. It doesn''t seem safe to drink anymore.', 'Vincent hat etwas hinein gemischt. Es ist vermutlich nicht mehr sicher, das zu trinken.', 'De Vincent het da öppis ine gmischlet. Es isch vermuetlich nümme sicher, das z''trinke.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_compass', 'item', 'Compass', 'Kompass', 'Kompass');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_compass', 'item_desc', 'A golden compass I found with my old belongings. It still works.', 'Ein goldener Kompass, den ich bei meinen alten Habseligkeiten gefunden habe. Er funktioniert noch.', 'En goldige Kompass woni bi mine alte Sache gfunde ha. Er tuet na.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item', 'Physalis', 'Physalis', 'Physalis');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_physalis', 'item_desc', 'Looks tasty.', 'Sieht lecker aus.', 'Gseht fein uus.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item_desc', 'It still glows...','Er leuchtet immer noch...','Er lüchtet immer na...');

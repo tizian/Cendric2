@@ -483,16 +483,25 @@ void Inventory::convertItem(const Item* item) {
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
 
-	ItemConvertibleBean bean = item->getConvertibleBean();
+	const std::vector<ItemConvertibleBean>& beans = item->getConvertibleBeans();
 	worldScreen->notifyItemChange(item->getID(), -1);
 
-	float prob = bean.probability / 100.f;
-	if (prob <= randomFloat(0.f, 1.f)) return;
+	for (auto const& bean : beans) {
+		if (bean.probability == 0) continue;
+		if (bean.probability == 100) {
+			worldScreen->notifyItemChange(bean.convertible_item_id, bean.convertible_amount);
+			continue;
+		}
 
-	if (bean.convertible_gold > 0)
-		worldScreen->notifyItemChange("gold", bean.convertible_gold);
-	if (!bean.convertible_item_id.empty())
-		worldScreen->notifyItemChange(bean.convertible_item_id, 1);
+		float prob = bean.probability / 100.f;
+		int amount = 0;
+		for (int i = 0; i < bean.convertible_amount; ++i) {
+			if (prob <= randomFloat(0.f, 1.f)) continue;
+			++amount;
+		}
+
+		worldScreen->notifyItemChange(bean.convertible_item_id, amount);
+	}
 }
 
 void Inventory::learnSpell(const Item* item) {

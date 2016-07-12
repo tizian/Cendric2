@@ -45,10 +45,10 @@ CREATE TABLE item(
 
 CREATE TABLE item_convertible (
 	item_id VARCHAR(50) NOT NULL, 
-	convertible_item_id VARCHAR(50) NOT NULL DEFAULT "",
-	convertible_gold INTEGER NOT NULL DEFAULT 0,
+	convertible_item_id VARCHAR(50) NOT NULL,
+	convertible_amount INTEGER NOT NULL DEFAULT 1,
 	probability INTEGER NOT NULL DEFAULT 100,
-	PRIMARY KEY (item_id),
+	PRIMARY KEY (item_id, convertible_item_id),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 	FOREIGN KEY(convertible_item_id) REFERENCES item(item_id)
 );

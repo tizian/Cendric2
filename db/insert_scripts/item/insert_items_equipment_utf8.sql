@@ -28,6 +28,12 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, res_light, res_fire, dmg_shadow) values ('eq_oversizedhat', 5, 10, 3, 5);
 INSERT INTO item_equipment (item_id, texture_path) values ('eq_oversizedhat', 'res/assets/equipment/head/spritesheet_head_oversizedhat.png');
 
+-- Travel Hat
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_travelhat', 'eq_head', 0, 150, 20);
+INSERT INTO item_attribute (item_id, dmg_ice, res_physical, max_health) values ('eq_travelhat', 2, 2, 5);
+INSERT INTO item_equipment (item_id, texture_path) values ('eq_travelhat', 'res/assets/equipment/head/spritesheet_head_travelhat.png');
+
 -- Bandana
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bandana', 'eq_head', 0, 300, 20);

@@ -17,6 +17,7 @@ item.id:co_bigpouch,2
 item.id:co_mediumpouch,2
 item.id:co_shell,10
 item.id:co_smallpouch,2
+item.id:co_travelbag,1
 item.id:eq_aquamarinering,1
 item.id:eq_back_divinet1,1
 item.id:eq_back_divinet2,1
@@ -42,6 +43,7 @@ item.id:eq_wizardhatfire,1
 item.id:eq_wizardhatice,1
 item.id:eq_wizardhatlight,1
 item.id:eq_wizardhatshadow,1
+item.id:eq_travelhat,1
 item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
@@ -87,6 +89,7 @@ item.id:pe_elixirshadow,1
 item.id:qe_recommendationletter,1
 item.id:qe_rope,1
 item.id:qe_spoiledfeudalfire,1
+item.id:qe_compass,1
 item.id:we_claw,1
 item.id:we_hawthorn,1
 item.id:we_icestaff,1
@@ -106,6 +109,8 @@ item.id:ke_test_2,1
 item.id:ke_test_3,1
 item.id:do_notemarcus,1
 item.id:do_bloodnotemarcus,1
+item.id:do_eleletter,1
+item.id:do_elemap,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:eq_back_necrot3
