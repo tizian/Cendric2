@@ -7,6 +7,7 @@
 struct ItemEquipmentBean : DatabaseBean {
 	std::string item_id;
 	std::string texture_path;
+	std::string map_texture_path;
 	int frames_walk;
 	int frames_idle;
 	int frames_jump;
