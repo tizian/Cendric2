@@ -24,7 +24,7 @@ The final game will be available for Windows, Mac and Linux. As we are currently
 
 [Cendric v0.3.0](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0_win64.zip) (Windows x64)
 
-[Cendric v0.3.0](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0_mac.zip) (Mac OS X)
+[Cendric v0.3.0a](https://github.com/tizian/Cendric2/releases/download/v0.3.0/cendric_v0.3.0a_mac.zip) (Mac OS X)
 
 [Cendric v0.3.0](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0_ubuntu.tar.gz) (Ubuntu)
 
