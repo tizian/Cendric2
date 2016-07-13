@@ -60,12 +60,6 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
 }
 
-void LevelEquipment::loadEquipment() {
-	sf::Vector2f position;
-	calculatePositionAccordingToMainChar(position);
-	setPosition(position);
-}
-
 void LevelEquipment::setTexturePath(const std::string& texturePath) {
 	m_texturePath = texturePath;
 	m_hasTexture = !m_texturePath.empty();

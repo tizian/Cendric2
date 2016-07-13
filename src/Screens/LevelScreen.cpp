@@ -23,10 +23,9 @@ void LevelScreen::load() {
 
 	m_characterCore->initializeLevelMaps(m_levelID);
 
-	LevelMainCharacterLoader loader;
-	m_mainChar = loader.loadMainCharacter(this, &m_currentLevel);
+	m_mainChar = LevelMainCharacterLoader::loadMainCharacter(this, &m_currentLevel);
 	m_currentLevel.loadAfterMainChar();
-	loader.loadEquipment(this);
+	LevelMainCharacterLoader::loadEquipment(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_progressLog->setYOffset(150.f);
 	m_interface = new LevelInterface(this, m_mainChar);

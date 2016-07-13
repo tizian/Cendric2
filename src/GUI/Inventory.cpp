@@ -319,10 +319,6 @@ void Inventory::update(const sf::Time& frameTime) {
 
 	handleDragAndDrop();
 
-	if (m_equipment->requiresReload()) {
-		reload();
-	}
-
 	m_window->update(frameTime);
 }
 

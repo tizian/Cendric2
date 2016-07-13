@@ -26,8 +26,6 @@ public:
 
 	// reloads the equipment items, depending on the core
 	void reload();
-	// checks if the equipment part of the inventory needs a reload and sets the bool to false again (!)
-	bool requiresReload();
 	// returns an inventory slot* if one was selected, else nullptr
 	InventorySlot* getSelectedSlot();
 	// returns an inventory slot* of the selected type, could be nullptr.
@@ -44,7 +42,6 @@ private:
 	WorldScreen* m_screen;
 
 	bool m_isVisible = false;
-	bool m_requiresReload = false;
 	bool m_isInLevel = false;
 
 	std::map<ItemType, InventorySlot> m_slots;

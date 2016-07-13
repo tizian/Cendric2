@@ -44,7 +44,7 @@ void TransformBeamSpell::update(const sf::Time& frameTime) {
 		m_mainChar->setCurrentAnimation(m_mainChar->getAnimation(GameObjectState::Broken), !m_mainChar->isFacingRight(), true);
 		m_hasStunned = true;
 		// striptease 
-		for (auto& go : *m_screen->getObjects(GameObjectType::_LevelEquipment)) {
+		for (auto& go : *m_screen->getObjects(GameObjectType::_Equipment)) {
 			go->setDisposed();
 		}
 	}

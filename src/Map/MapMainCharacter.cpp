@@ -60,6 +60,11 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
+void MapMainCharacter::render(sf::RenderTarget& target) { 
+	MapMovableGameObject::render(target); 
+	dynamic_cast<MapScreen*>(m_screen)->renderEquipment(target);
+}
+
 void MapMainCharacter::handleInput() {
 	float newAccelerationX = 0.f;
 	float newAccelerationY = 0.f;

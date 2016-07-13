@@ -19,11 +19,11 @@ public:
 
 	void load();
 	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& target) override;
 	void checkCollisions(const sf::Vector2f& nextPosition);
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
 	void updateFirst(const sf::Time& frameTime) override { MapMovableGameObject::updateFirst(frameTime); }
-	void render(sf::RenderTarget& target) override { MapMovableGameObject::render(target); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MapMovableGameObject::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color& color) override { MapMovableGameObject::setDebugBoundingBox(color); }
 	void setState(GameObjectState state) override { MapMovableGameObject::setState(state); }
@@ -41,6 +41,5 @@ private:
 	const float WALK_ACCELERATION = 1500.0f;
 	// handle input and calculate the next position
 	void handleInput();
-	GameObjectState m_state;
 	CharacterCore* m_core;
 };

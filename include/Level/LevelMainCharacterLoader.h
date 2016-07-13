@@ -15,7 +15,7 @@
 class LevelMainCharacterLoader {
 public:
 	// loads the main character and adds it directly to the screen
-	LevelMainCharacter* loadMainCharacter(Screen* screen, Level* level) const;
+	static LevelMainCharacter* loadMainCharacter(Screen* screen, Level* level);
 	// loads level equipment adds it directly to the screen
-	void loadEquipment(Screen* screen) const;
+	static void loadEquipment(Screen* screen);
 };

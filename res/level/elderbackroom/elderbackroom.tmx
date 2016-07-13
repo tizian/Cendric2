@@ -21,7 +21,7 @@
   </tile>
   <tile id="81">
    <properties>
-    <property name="light" value="40,25,100,150,0.6"/>
+    <property name="light" value="10,25,100,150,0.6"/>
    </properties>
    <animation>
     <frame tileid="81" duration="100"/>

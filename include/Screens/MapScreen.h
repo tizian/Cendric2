@@ -22,6 +22,7 @@ public:
 
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
+	void renderEquipment(sf::RenderTarget& renderTarget);
 	void setDialogue(NPC* npc);
 	void setBook(const BookData* bookData);
 	void setCooking();
@@ -29,6 +30,7 @@ public:
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
 	void notifyConditionAdded(const std::string& conditionType, const std::string& condition) override;
+	void notifyItemEquip(const std::string& itemID, ItemType type) override;
 
 	const Map* getWorld() const override;
 	const MapData* getWorldData() const override;

@@ -1,11 +1,8 @@
 #include "Map/MapMainCharacterLoader.h"
 #include "Map/MapMainCharacter.h"
 #include "Screens/MapScreen.h"
-#include "Animation.h"
 
-const int EQ_SIZE = 120;
-
-MapMainCharacter* MapMainCharacterLoader::loadMainCharacter(Screen* screen, Map* map) const {
+MapMainCharacter* MapMainCharacterLoader::loadMainCharacter(Screen* screen, Map* map) {
 	MapMainCharacter* mainChar = new MapMainCharacter(map);
 	screen->addObject(mainChar);
 	mainChar->load();
@@ -13,11 +10,16 @@ MapMainCharacter* MapMainCharacterLoader::loadMainCharacter(Screen* screen, Map*
 	return mainChar;
 }
 
-void MapMainCharacterLoader::loadEquipment(Screen* screen) const {
+void MapMainCharacterLoader::loadEquipment(Screen* screen) {
 	MapMainCharacter* mainCharacter = dynamic_cast<MapScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("MapMainCharacterLoader", "Could not find main character of game screen");
 		return;
+	}
+
+	// make sure to clear all equipment pieces.
+	for (auto& go : *screen->getObjects(GameObjectType::_Equipment)) {
+		go->setDisposed();
 	}
 
 	// the order of the ids in this vector determine the update and rendering order. 
@@ -56,7 +58,7 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) const {
 		MapEquipment* mapEquipment = new MapEquipment(mainCharacter);
 
 		mapEquipment->setBoundingBox(*mainCharacter->getBoundingBox());
-		mapEquipment->setSpriteOffset(mainCharacter->getSpriteOffset())
+		mapEquipment->setSpriteOffset(mainCharacter->getSpriteOffset());
 
 		Animation* walkingAnimationDown = new Animation(sf::seconds(0.15f));
 		walkingAnimationDown->setSpriteSheet(tex);
@@ -65,7 +67,7 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) const {
 		walkingAnimationDown->addFrame(sf::IntRect(100, 0, 50, 50));
 		walkingAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
 
-		addAnimation(GameObjectState::Walking_down, walkingAnimationDown);
+		mapEquipment->addAnimation(GameObjectState::Walking_down, walkingAnimationDown);
 
 		Animation* walkingAnimationLeft = new Animation(sf::seconds(0.15f));
 		walkingAnimationLeft->setSpriteSheet(tex);
@@ -74,7 +76,7 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) const {
 		walkingAnimationLeft->addFrame(sf::IntRect(100, 50, 50, 50));
 		walkingAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
 
-		addAnimation(GameObjectState::Walking_left, walkingAnimationLeft);
+		mapEquipment->addAnimation(GameObjectState::Walking_left, walkingAnimationLeft);
 
 		Animation* walkingAnimationRight = new Animation(sf::seconds(0.15f));
 		walkingAnimationRight->setSpriteSheet(tex);
@@ -83,7 +85,7 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) const {
 		walkingAnimationRight->addFrame(sf::IntRect(100, 100, 50, 50));
 		walkingAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
 
-		addAnimation(GameObjectState::Walking_right, walkingAnimationRight);
+		mapEquipment->addAnimation(GameObjectState::Walking_right, walkingAnimationRight);
 
 		Animation* walkingAnimationUp = new Animation(sf::seconds(0.15f));
 		walkingAnimationUp->setSpriteSheet(tex);
@@ -92,64 +94,37 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) const {
 		walkingAnimationUp->addFrame(sf::IntRect(100, 150, 50, 50));
 		walkingAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
 
-		addAnimation(GameObjectState::Walking_up, walkingAnimationUp);
+		mapEquipment->addAnimation(GameObjectState::Walking_up, walkingAnimationUp);
 
 		Animation* idleAnimationDown = new Animation();
 		idleAnimationDown->setSpriteSheet(tex);
 		idleAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
 
-		addAnimation(GameObjectState::Idle_down, idleAnimationDown);
+		mapEquipment->addAnimation(GameObjectState::Idle_down, idleAnimationDown);
 
 		Animation* idleAnimationLeft = new Animation();
 		idleAnimationLeft->setSpriteSheet(tex);
 		idleAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
 
-		addAnimation(GameObjectState::Idle_left, idleAnimationLeft);
+		mapEquipment->addAnimation(GameObjectState::Idle_left, idleAnimationLeft);
 
 		Animation* idleAnimationRight = new Animation();
 		idleAnimationRight->setSpriteSheet(tex);
 		idleAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
 
-		addAnimation(GameObjectState::Idle_right, idleAnimationRight);
+		mapEquipment->addAnimation(GameObjectState::Idle_right, idleAnimationRight);
 
 		Animation* idleAnimationUp = new Animation();
 		idleAnimationUp->setSpriteSheet(tex);
 		idleAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
 
-		addAnimation(GameObjectState::Idle_up, idleAnimationUp);
+		mapEquipment->addAnimation(GameObjectState::Idle_up, idleAnimationUp);
 
-		setDebugBoundingBox(COLOR_WHITE);
+		mapEquipment->setDebugBoundingBox(COLOR_WHITE);
 
 		// initial values
-		m_state = GameObjectState::Idle_down;
-		setCurrentAnimation(getAnimation(m_state), false);
-		playCurrentAnimation(true);
-
-		int offset = 0;
-		for (int i = 0; i < eq.frames_walk; ++i) {
-			equipment.texturePositions[GameObjectState::Walking].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
-			++offset;
-		}
-		for (int i = 0; i < eq.frames_idle; ++i) {
-			equipment.texturePositions[GameObjectState::Idle].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
-			++offset;
-		}
-		for (int i = 0; i < eq.frames_jump; ++i) {
-			equipment.texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
-			++offset;
-		}
-		for (int i = 0; i < eq.frames_fight; ++i) {
-			equipment.texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
-			++offset;
-		}
-		for (int i = 0; i < eq.frames_climb1; ++i) {
-			equipment.texturePositions[GameObjectState::Climbing_1].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
-			++offset;
-		}
-		for (int i = 0; i < eq.frames_climb2; ++i) {
-			equipment.texturePositions[GameObjectState::Climbing_2].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
-			++offset;
-		}
+		mapEquipment->setState(GameObjectState::Idle_down, true);
+		mapEquipment->playCurrentAnimation(true);
 
 		screen->addObject(mapEquipment);
 	}

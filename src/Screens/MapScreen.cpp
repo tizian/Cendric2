@@ -1,6 +1,7 @@
 #include "Screens/MapScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Map/NPC.h"
+#include "Map/MapMainCharacterLoader.h"
 #include "Screens/ScreenManager.h"
 #include "ScreenOverlays/ScreenOverlay.h"
 
@@ -42,6 +43,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	}
 	updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
 	depthSortObjects(GameObjectType::_MapMovableGameObject, true);
+	updateObjects(GameObjectType::_Equipment, frameTime);
 	updateObjects(GameObjectType::_DynamicTile, frameTime);
 	updateObjects(GameObjectType::_ForegroundDynamicTile, frameTime);
 	updateObjects(GameObjectType::_Light, frameTime);
@@ -62,10 +64,9 @@ void MapScreen::load() {
 
 	m_characterCore->initializeMapMaps(m_mapID);
 
-	m_mainChar = new MapMainCharacter(&m_currentMap);
-	m_mainChar->setCharacterCore(getCharacterCore());
-	addObject(m_mainChar);
+	m_mainChar = MapMainCharacterLoader::loadMainCharacter(this, &m_currentMap);
 	m_currentMap.loadAfterMainChar();
+	MapMainCharacterLoader::loadEquipment(this);
 
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
@@ -95,6 +96,11 @@ void MapScreen::notifyConditionAdded(const std::string& conditionType, const std
 			npc->reloadRoutine();
 		}
 	}
+}
+
+void MapScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
+	WorldScreen::notifyItemEquip(itemID, type);
+	MapMainCharacterLoader::loadEquipment(this);
 }
 
 void MapScreen::execOnExit(const Screen* nextScreen) {
@@ -299,4 +305,8 @@ void MapScreen::updateFogOfWar() {
 			}
 		}
 	}
+}
+
+void MapScreen::renderEquipment(sf::RenderTarget& renderTarget) {
+	renderObjects(GameObjectType::_Equipment, renderTarget);
 }

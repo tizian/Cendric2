@@ -7,7 +7,7 @@ using namespace std;
 
 const int EQ_SIZE = 120;
 
-LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) const {
+LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) {
 	LevelMainCharacter* mainChar = new LevelMainCharacter(level);
 	screen->addObject(mainChar);
 	mainChar->load();
@@ -15,7 +15,7 @@ LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, 
 	return mainChar;
 }
 
-void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
+void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 	LevelMainCharacter* mainCharacter = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
 	if (mainCharacter == nullptr) {
 		g_logger->logError("LevelMainCharacterLoader", "Could not find main character of game screen");
@@ -112,7 +112,6 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) const {
 		}
 
 		levelEquipment->setTexturePath(equipment.texturePath);
-		levelEquipment->loadEquipment();
 		screen->addObject(levelEquipment);
 	}
 }

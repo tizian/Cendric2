@@ -30,7 +30,7 @@ public:
 	void notifyItemConversion(const std::string& oldItemID, const std::string& newItemID, int amount);
 	// notify item equip -> change in core, reload inventory and character info.
 	// if the second argument is not given (void, default), it gets determined in this method
-	void notifyItemEquip(const std::string& itemID, ItemType type = ItemType::VOID);
+	virtual void notifyItemEquip(const std::string& itemID, ItemType type = ItemType::VOID);
 	// notify quest condition progress -> change in core, display text and reload quest log
 	void notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 	// notify quest target killed -> change in core, display text and reload quest log

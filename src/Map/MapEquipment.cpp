@@ -8,21 +8,15 @@ MapEquipment::MapEquipment(MapMainCharacter* mainChar) : AnimatedGameObject() {
 }
 
 void MapEquipment::update(const sf::Time& frameTime) {
-	GameObjectState newState = m_mainChar->getState();
+	AnimatedGameObject::update(frameTime);
+	GameObjectState newState = m_mainChar->getGameObjectState();
 
 	if (m_state != newState) {
 		m_state = newState;
 		setCurrentAnimation(getAnimation(m_state), false);
 	}
 	
-	sf::Vector2f newPosition;
-	
-	setPosition(newPosition);
-	AnimatedGameObject::update(frameTime);
-}
-
-void MapEquipment::setTexturePath(const std::string& texturePath) {
-	m_texturePath = texturePath;
+	setPosition(m_mainChar->getPosition());
 }
 
 GameObjectType MapEquipment::getConfiguredType() const {

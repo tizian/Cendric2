@@ -35,8 +35,8 @@ void InventoryEquipment::update(const sf::Time& frameTime) {
 		it.second.update(frameTime);
 		if (!m_isInLevel && (it.second.isRightClicked() || it.second.isDoubleClicked())) {
 			// unequip item
-			m_core->equipItem("", it.first);
-			m_requiresReload = true;
+			m_screen->notifyItemEquip("", it.first);
+			break;
 		}
 	}
 }
@@ -129,12 +129,6 @@ InventorySlot* InventoryEquipment::getSelectedSlot() {
 InventorySlot* InventoryEquipment::getSelectedSlot(ItemType type) {
 	if (m_slots.find(type) == m_slots.end()) return nullptr;
 	return &m_slots.at(type);
-}
-
-bool InventoryEquipment::requiresReload() {
-	bool wasRequireReload = m_requiresReload;
-	m_requiresReload = false;
-	return wasRequireReload;
 }
 
 void InventoryEquipment::reload() {

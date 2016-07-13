@@ -172,7 +172,6 @@ void GhostFormSpell::loadMask() {
 	levelEquipment->setTexturePath(m_data.spritesheetPath);
 	levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 	levelEquipment->playCurrentAnimation(true);
-	levelEquipment->loadEquipment();
 	levelEquipment->setCopyingMainCharColor(false);
 	m_mask = levelEquipment;
 	m_screen->addObject(levelEquipment);

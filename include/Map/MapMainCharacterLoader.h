@@ -13,7 +13,7 @@
 class MapMainCharacterLoader {
 public:
 	// loads the main character and adds it directly to the screen
-	MapMainCharacter* loadMainCharacter(Screen* screen, Map* map) const;
+	static MapMainCharacter* loadMainCharacter(Screen* screen, Map* map);
 	// loads map equipment adds it directly to the screen
-	void loadEquipment(Screen* screen) const;
+	static void loadEquipment(Screen* screen);
 };
