@@ -77,7 +77,7 @@ void LevelEquipment::setLightComponent(const LightData& data) {
 }
 
 GameObjectType LevelEquipment::getConfiguredType() const {
-	return GameObjectType::_LevelEquipment;
+	return GameObjectType::_Equipment;
 }
 
 void LevelEquipment::setCopyingMainCharColor(bool value) {

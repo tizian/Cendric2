@@ -7,7 +7,7 @@
 enum GameObjectType {
 	_Undefined,
 	_LevelMainCharacter,
-	_LevelEquipment, // includes everything cendric can wear
+	_Equipment, // includes everything cendric can wear, on level and map
 	_Button,
 	_Window,
 	_Form, // form buttons will be rendered / updated with their form and not in the "button" context

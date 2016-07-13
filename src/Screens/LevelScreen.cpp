@@ -175,7 +175,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
 		updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
-		updateObjects(GameObjectType::_LevelEquipment, frameTime);
+		updateObjects(GameObjectType::_Equipment, frameTime);
 		updateObjects(GameObjectType::_Spell, frameTime);
 		updateObjects(GameObjectType::_Overlay, frameTime);
 		if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
@@ -226,7 +226,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	}
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_LevelMainCharacter, renderTarget);
-	renderObjects(GameObjectType::_LevelEquipment, renderTarget);
+	renderObjects(GameObjectType::_Equipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
@@ -271,7 +271,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_LevelMainCharacter, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_LevelEquipment, renderTarget);
+	renderObjectsAfterForeground(GameObjectType::_Equipment, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Enemy, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
 	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
