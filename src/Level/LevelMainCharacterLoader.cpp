@@ -112,6 +112,9 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 		}
 
 		levelEquipment->setTexturePath(equipment.texturePath);
+		sf::Vector2f newPosition;
+		levelEquipment->calculatePositionAccordingToMainChar(newPosition);
+		levelEquipment->setPosition(newPosition);
 		screen->addObject(levelEquipment);
 	}
 }

@@ -25,6 +25,8 @@ public:
 
 	// this value determines whether the level equipment takes into account the sprite color of the main character
 	void setCopyingMainCharColor(bool value);
+	// calculates position according to m_mainChar.
+	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
 
 private:
 	LevelMainCharacter* m_mainChar;
@@ -33,9 +35,6 @@ private:
 
 	LightComponent* m_lightComponent = nullptr;
 	bool m_isFacingRight;
-
-	// calculates position according to m_mainChar.
-	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
 
 	bool m_isCopyingMainCharColor = true;
 };
