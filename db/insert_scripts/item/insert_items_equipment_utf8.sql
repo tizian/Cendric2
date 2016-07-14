@@ -38,7 +38,7 @@ INSERT INTO item_equipment (item_id, texture_path) values ('eq_travelhat', 'res/
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bandana', 'eq_head', 0, 300, 20);
 INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire) values ('eq_bandana', 5, 1, 2);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_bandana', 'res/assets/equipment/head/spritesheet_head_bandana.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_bandana', 'res/assets/equipment/head/spritesheet_head_bandana.png', 'res/assets/equipment/head/spritesheet_map_head_bandana.png');
 
 -- Scarf of the Fire Rat
 
@@ -56,14 +56,14 @@ INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_demo
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonhead', 'eq_head', 50, 350, 50);
 INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonhead', 8, 7, 7);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_demonhead', 'res/assets/equipment/head/spritesheet_head_demon.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_demonhead', 'res/assets/equipment/head/spritesheet_head_demon.png', 'res/assets/equipment/head/map_spritesheet_head_demon.png');
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('eq_demonhead',65, 25, 25, 25, 0.3);
 
 -- Demon Body
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonbody', 'eq_body', 100, 350, 100);
 INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonbody', 13, 9, 8);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_demonbody', 'res/assets/equipment/body/spritesheet_body_demon.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_demonbody', 'res/assets/equipment/body/spritesheet_body_demon.png', 'res/assets/equipment/body/spritesheet_map_body_demon.png');
 
 -- Nekomata Back
 
@@ -93,7 +93,7 @@ INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_back
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_necrot3', 'eq_body', 100, 200, 200);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, res_physical, res_shadow, dmg_shadow) values ('eq_body_necrot3', 30, 20, 10, 30, 20, 20);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_body_necrot3', 'res/assets/equipment/body/spritesheet_body_necrot3.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_necrot3', 'res/assets/equipment/body/spritesheet_body_necrot3.png', 'res/assets/equipment/body/spritesheet_map_body_necrot3.png');
 
 -- Divine T1 Back
 
@@ -117,7 +117,7 @@ INSERT INTO item_equipment (item_id, texture_path, frames_jump) values ('eq_back
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet2', 'eq_head', 150, 200, 120);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet2', 10, 10, 10, 10, 10, 2, 5);
-INSERT INTO item_equipment (item_id, texture_path) values ('eq_head_divinet2', 'res/assets/equipment/head/spritesheet_head_divinet2.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_divinet2', 'res/assets/equipment/head/spritesheet_head_divinet2.png', 'res/assets/equipment/head/spritesheet_map_head_divinet2.png');
 
 -- Leather Armour
 
