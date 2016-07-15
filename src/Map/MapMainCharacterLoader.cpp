@@ -127,5 +127,6 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) {
 		mapEquipment->playCurrentAnimation(true);
 
 		screen->addObject(mapEquipment);
+		mapEquipment->setPosition(mainCharacter->getPosition());
 	}
 }
