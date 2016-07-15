@@ -63,6 +63,7 @@ void BookEnemy::loadSpells() {
 	pageSpell.castingAnimation = GameObjectState::VOID;
 	pageSpell.fightAnimation = GameObjectState::VOID;
 	pageSpell.speed = 400.f;
+	pageSpell.cooldown = sf::seconds(1.f);
 
 	m_spellManager->addSpell(pageSpell);
 	m_spellManager->setCurrentSpell(0);
@@ -165,14 +166,13 @@ void BookEnemy::setDead() {
 	setSpriteOffset(sf::Vector2f(-20.f, -12.f));
 
 	m_ps->emitParticles(10);
-	m_ps->emitRate = 0.f;
 	Enemy::setDead();
 }
 
 void BookEnemy::loadParticleSystem() {
 	m_ps = new particles::SpriteSheetParticleSystem(80, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_CONFETTI));
 	m_ps->additiveBlendMode = false;
-	m_ps->emitRate = 2.f;
+	m_ps->emitRate = 0.f;
 
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::DiskSpawner>();
@@ -190,14 +190,14 @@ void BookEnemy::loadParticleSystem() {
 	colGen->color = sf::Color(255, 255, 255, 255);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = -45.f;
-	velGen->maxAngle = 45.f;
-	velGen->minStartSpeed = 50.f;
-	velGen->maxStartSpeed = 70.f;
+	velGen->minAngle = -60.f;
+	velGen->maxAngle = 60.f;
+	velGen->minStartSpeed = 70.f;
+	velGen->maxStartSpeed = 90.f;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 0.7f;
-	timeGen->maxTime = 2.5f;
+	timeGen->minTime = 0.6f;
+	timeGen->maxTime = 1.5f;
 
 	auto texCoordGen = m_ps->addGenerator<particles::TexCoordsRandomGenerator>();
 	texCoordGen->texCoords.push_back(sf::IntRect(0, 0, 8, 8));
@@ -215,7 +215,7 @@ void BookEnemy::loadParticleSystem() {
 	m_ps->addUpdater<particles::TimeUpdater>();
 	m_ps->addUpdater<particles::ColorUpdater>();
 	auto euler = m_ps->addUpdater<particles::EulerUpdater>();
-	euler->globalAcceleration = sf::Vector2f(0.f, 100.f);
+	euler->globalAcceleration = sf::Vector2f(0.f, 200.f);
 	m_ps->addUpdater<particles::SizeUpdater>();
 	m_ps->addUpdater<particles::RotationUpdater>();
 }
