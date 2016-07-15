@@ -52,6 +52,7 @@ void BookEnemy::loadAttributes() {
 	m_attributes.resistanceIce = 10;
 	m_attributes.resistanceShadow = 10;
 	m_attributes.resistanceLight = 10;
+	m_attributes.resistanceFire = -15;
 	m_attributes.calculateAttributes();
 }
 
