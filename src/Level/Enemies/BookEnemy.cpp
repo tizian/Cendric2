@@ -122,21 +122,22 @@ void BookEnemy::loadAnimation() {
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation* fightingAnimation = new Animation();
-	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(0, 0, 100, 64));
-
-	addAnimation(GameObjectState::Fighting, fightingAnimation);
-
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(0, 0, 100, 64));
+	deadAnimation->addFrame(sf::IntRect(300, 0, 100, 64));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+}
+
+void BookEnemy::setDead() {
+	m_boundingBox.width = 70.f;
+	m_boundingBox.height = 25.f;
+	setSpriteOffset(sf::Vector2f(-20.f, -12.f));
+	Enemy::setDead();
 }
 
 std::string BookEnemy::getSpritePath() const {

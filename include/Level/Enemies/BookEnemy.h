@@ -12,6 +12,7 @@ public:
 	~BookEnemy() {}
 
 	void loadAnimation() override;
+	void setDead() override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
