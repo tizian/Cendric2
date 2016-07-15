@@ -59,8 +59,6 @@ void ParticleSystem::emitParticles(int count) {
 		spawnerStartId += numberToSpawn;
 	}
 
-	m_spawners[0]->spawn(m_particles, startId, endId);
-
 	for (auto &generator : m_generators) {
 		generator->generate(m_particles, startId, endId);
 	}

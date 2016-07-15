@@ -22,6 +22,30 @@ BookEnemy::BookEnemy(const Level* level, Screen* screen) :
 	load();
 }
 
+void BookEnemy::update(const sf::Time& frameTime) {
+	Enemy::update(frameTime);
+	
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_ps->update(frameTime);
+}
+
+void BookEnemy::render(sf::RenderTarget& target) {
+	m_ps->render(target);
+	Enemy::render(target);
+}
+
+void BookEnemy::onHit(Spell* spell) {
+	Enemy::onHit(spell);
+
+	if (spell->getSpellID() == SpellID::Chop) {
+		m_ps->emitParticles(5);
+		if (m_isDead) {
+			spell->setDisposed();
+		}
+	}
+}
+
 void BookEnemy::loadAttributes() {
 	m_attributes.setHealth(30);
 	m_attributes.resistancePhysical = 5;
@@ -131,13 +155,69 @@ void BookEnemy::loadAnimation() {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+
+	loadParticleSystem();
 }
 
 void BookEnemy::setDead() {
 	m_boundingBox.width = 70.f;
 	m_boundingBox.height = 25.f;
 	setSpriteOffset(sf::Vector2f(-20.f, -12.f));
+
+	m_ps->emitParticles(10);
+	m_ps->emitRate = 0.f;
 	Enemy::setDead();
+}
+
+void BookEnemy::loadParticleSystem() {
+	m_ps = new particles::SpriteSheetParticleSystem(80, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_CONFETTI));
+	m_ps->additiveBlendMode = false;
+	m_ps->emitRate = 2.f;
+
+	// Generators
+	auto posGen = m_ps->addSpawner<particles::DiskSpawner>();
+	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	posGen->radius = 30.f;
+	m_particleSpawner = posGen;
+
+	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	sizeGen->minStartSize = 6.f;
+	sizeGen->maxStartSize = 18.;
+	sizeGen->minEndSize = 4.f;
+	sizeGen->maxEndSize = 10.f;
+
+	auto colGen = m_ps->addGenerator<particles::ConstantColorGenerator>();
+	colGen->color = sf::Color(255, 255, 255, 255);
+
+	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	velGen->minAngle = -45.f;
+	velGen->maxAngle = 45.f;
+	velGen->minStartSpeed = 50.f;
+	velGen->maxStartSpeed = 70.f;
+
+	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	timeGen->minTime = 0.7f;
+	timeGen->maxTime = 2.5f;
+
+	auto texCoordGen = m_ps->addGenerator<particles::TexCoordsRandomGenerator>();
+	texCoordGen->texCoords.push_back(sf::IntRect(0, 0, 8, 8));
+	texCoordGen->texCoords.push_back(sf::IntRect(8, 0, 8, 8));
+	texCoordGen->texCoords.push_back(sf::IntRect(16, 0, 8, 8));
+	texCoordGen->texCoords.push_back(sf::IntRect(24, 0, 8, 8));
+
+	auto rotGen = m_ps->addGenerator<particles::RotationGenerator>();
+	rotGen->minStartAngle = -90.f;
+	rotGen->maxStartAngle = 90.f;
+	rotGen->minEndAngle = -20.f;
+	rotGen->maxEndAngle = 20.f;
+
+	// Updaters
+	m_ps->addUpdater<particles::TimeUpdater>();
+	m_ps->addUpdater<particles::ColorUpdater>();
+	auto euler = m_ps->addUpdater<particles::EulerUpdater>();
+	euler->globalAcceleration = sf::Vector2f(0.f, 100.f);
+	m_ps->addUpdater<particles::SizeUpdater>();
+	m_ps->addUpdater<particles::RotationUpdater>();
 }
 
 std::string BookEnemy::getSpritePath() const {
