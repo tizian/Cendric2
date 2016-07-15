@@ -259,6 +259,8 @@ public:
 			return "Wolf";
 		case EnemyID::Cairn:
 			return "Cairn";
+		case EnemyID::Book:
+			return "Book";
 		case EnemyID::Boss_Zeff:
 			return "BossZeff";
 		case EnemyID::Boss_Wolf:

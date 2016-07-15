@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Spells/Spell.h"
-#include "LightObject.h"
 
 /*
 projectiles that return to their owner

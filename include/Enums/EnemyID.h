@@ -1,5 +1,6 @@
 #pragma once
 
+// NOTE: don't change this enum order. They are aligned with the enemy tile tileset.
 enum class EnemyID {
 	VOID,
 	Rat,
@@ -15,5 +16,6 @@ enum class EnemyID {
 	Cairn,
 	Boss_Zeff,
 	Boss_Wolf,
+	Book,
 	MAX
 };

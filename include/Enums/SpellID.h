@@ -40,6 +40,7 @@ enum class SpellID {
 	ReturningProjectile,
 	Boomerang,
 	TransformBeam,
+	RotatingProjectile,
 
 	MAX
 };
