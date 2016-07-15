@@ -127,7 +127,8 @@ void LoadGameScreen::onDeleteSaveGame() {
 }
 
 void LoadGameScreen::onLoadSaveGame() {
-	if (m_characterCore == nullptr) {
+	if (m_characterCore == nullptr || m_characterCore->isAutosave()) {
+		delete m_characterCore;
 		// load a savegame
 		m_characterCore = new CharacterCore();
 		if (!(m_characterCore->load(m_saveGameWindow->getChosenFilename()))) {

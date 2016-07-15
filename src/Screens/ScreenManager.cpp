@@ -59,6 +59,7 @@ void ScreenManager::setNextScreen(Screen* nextScreen, bool backupCurrentScreen) 
 void ScreenManager::resumeBackupScreen() {
 	if (m_backUpScreen == nullptr) {
 		if (m_currentScreen == nullptr) return;
+		m_currentScreen->getCharacterCore()->setAutosave(false);
 		setNextScreen(new LoadingScreen(m_currentScreen->getCharacterCore()), false);
 		return;
 	}

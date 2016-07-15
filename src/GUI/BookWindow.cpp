@@ -78,14 +78,14 @@ void BookWindow::render(sf::RenderTarget& renderTarget) {
 }
 
 bool BookWindow::updateWindow(const sf::Time frameTime) {
+	m_leftArrow->update(frameTime);
+	m_rightArrow->update(frameTime);
+
 	Window::update(frameTime);
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
 		g_inputController->lockAction();
 		return false;
 	}
-
-	m_leftArrow->update(frameTime);
-	m_rightArrow->update(frameTime);
 
 	if (g_inputController->isKeyJustPressed(Key::Left) || m_leftArrow->isClicked()) {
 		g_inputController->lockAction();

@@ -140,6 +140,10 @@ public:
 	int getReputation(FractionID fraction) const;
 	// is this a new character core? (new game)
 	bool isNewGame();
+	// is this an autosave?
+	bool isAutosave();
+	// mark as autosave
+	void setAutosave(bool value);
 
 protected:
 	// protected constructor for copying
@@ -168,4 +172,5 @@ private:
 	sf::Clock m_stopwatch;
 
 	bool m_isNew = false;
+	bool m_isAutosave = false;
 };

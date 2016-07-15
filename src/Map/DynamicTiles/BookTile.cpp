@@ -13,6 +13,8 @@ BookTile::BookTile(const BookData& data, MapScreen* mapScreen) : MapDynamicTile(
 	interactComponent->setInteractText("ToRead");
 	interactComponent->setOnInteract(std::bind(&BookTile::startReading, this));
 	addComponent(interactComponent);
+
+	g_resourceManager->loadSoundbuffer("res/sound/gui/page_turn.ogg", ResourceType::Map);
 }
 
 void BookTile::init() {

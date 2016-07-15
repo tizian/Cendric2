@@ -80,7 +80,7 @@ void Screen::deleteDisposedObjects() {
 				it = m_objects[t].erase(it);
 			}
 			else {
-				it++;
+				++it;
 			}
 		}
 	}

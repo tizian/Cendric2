@@ -650,3 +650,15 @@ bool CharacterCore::isNewGame() {
 	}
 	return m_isNew;
 }
+
+bool CharacterCore::isAutosave() {
+	if (m_isAutosave) {
+		m_isAutosave = false;
+		return true;
+	}
+	return m_isAutosave;
+}
+
+void CharacterCore::setAutosave(bool value) {
+	m_isAutosave = value;
+}

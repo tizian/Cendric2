@@ -163,7 +163,9 @@ void MenuScreen::loadNewestSave() {
 	if (!m_characterCore->load(filename)) {
 		delete m_characterCore;
 		m_characterCore = nullptr;
+		return;
 	}
+	m_characterCore->setAutosave(true);
 }
 
 void MenuScreen::execOnExit(const Screen *nextScreen) {
