@@ -214,12 +214,12 @@ ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, cons
 	entry->m_text->setColor(color);
 	entry->m_text->setString(str);
 
-	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
 	if (itemID.compare("gold") == 0) {
-		sf::IntRect textureRect(0, 0, 50, 50);
-		entry->m_icon->setTextureRect(textureRect);
+		entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
+		entry->m_icon->setTextureRect(sf::IntRect(0, 0, 25, 25));
 		return entry;
 	}
+	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
 	Item* item = g_resourceManager->getItem(itemID);
 	if (item == nullptr) {
 		return entry;
