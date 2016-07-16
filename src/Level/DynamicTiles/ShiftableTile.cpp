@@ -34,6 +34,7 @@ void ShiftableTile::loadAnimation(int skinNr) {
 			TILE_SIZE,
 			TILE_SIZE));
 	}
+	crumblingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Crumbling, crumblingAnimation);
 
