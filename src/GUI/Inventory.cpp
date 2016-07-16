@@ -69,9 +69,8 @@ void Inventory::init() {
 	m_goldText.setColor(COLOR_WHITE);
 	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	m_goldSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
-	m_goldSprite.setTextureRect(sf::IntRect(0, 0, 50, 50));
-	m_goldSprite.setScale(sf::Vector2f(0.5f, 0.5f));
+	m_goldSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
+	m_goldSprite.setTextureRect(sf::IntRect(0, 0, 25, 25));
 
 	// fill the helper map
 	m_typeMap.insert({

@@ -91,8 +91,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_GUI_TAB_INACTIVE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_TAB_ACTIVE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_CURSOR, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_PROGRESSLOG_QUEST, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUI_PROGRESSLOG_REPUTATION, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_CHARACTERINFO_ICONS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_STATS_ICONS, ResourceType::Global);
 

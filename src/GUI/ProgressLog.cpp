@@ -236,7 +236,8 @@ ProgressLogEntry* ProgressLogEntry::createQuestEntry(const std::string& str, con
 	entry->m_text->setColor(color);
 	entry->m_text->setString(str);
 
-	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_QUEST));
+	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
+	entry->m_icon->setTextureRect(sf::IntRect(25, 0, 25, 25));
 
 	return entry;
 }
@@ -247,7 +248,8 @@ ProgressLogEntry* ProgressLogEntry::createReputationEntry(const std::string& str
 	entry->m_text->setColor(color);
 	entry->m_text->setString(str);
 
-	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_REPUTATION));
+	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
+	entry->m_icon->setTextureRect(sf::IntRect(50, 0, 25, 25));
 
 	return entry;
 }
