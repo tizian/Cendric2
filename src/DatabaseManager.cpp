@@ -313,8 +313,8 @@ ItemEquipmentLightBean DatabaseManager::getItemEquipmentLightBean(const std::str
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 6) {
-			g_logger->logError("DatabaseManager::getItemEquipmentLightBean", "number of returned columns must be 6");
+		if (cols != 8) {
+			g_logger->logError("DatabaseManager::getItemEquipmentLightBean", "number of returned columns must be 8");
 			return bean;
 		}
 		int result = 0;
@@ -327,7 +327,9 @@ ItemEquipmentLightBean DatabaseManager::getItemEquipmentLightBean(const std::str
 				bean.light_offset.y = static_cast<float>(sqlite3_column_int(statement, 2));
 				bean.light_radius.x = static_cast<float>(sqlite3_column_int(statement, 3));
 				bean.light_radius.y = static_cast<float>(sqlite3_column_int(statement, 4));
-				bean.brightness = static_cast<float>(sqlite3_column_double(statement, 5));
+				bean.map_light_radius.x = static_cast<float>(sqlite3_column_int(statement, 5));
+				bean.map_light_radius.y = static_cast<float>(sqlite3_column_int(statement, 6));
+				bean.brightness = static_cast<float>(sqlite3_column_double(statement, 7));
 				bean.status = BeanStatus::Filled;
 			}
 			else {

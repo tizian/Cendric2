@@ -8,6 +8,11 @@ MapEquipment::MapEquipment(MapMainCharacter* mainChar) : AnimatedGameObject() {
 }
 
 void MapEquipment::update(const sf::Time& frameTime) {
+	if (!m_hasTexture) {
+		setPosition(m_mainChar->getPosition());
+		return;
+	}
+
 	AnimatedGameObject::update(frameTime);
 	GameObjectState newState = m_mainChar->getGameObjectState();
 
@@ -17,6 +22,15 @@ void MapEquipment::update(const sf::Time& frameTime) {
 	}
 	
 	setPosition(m_mainChar->getPosition());
+}
+
+void MapEquipment::setLightComponent(const LightData& data) {
+	m_lightComponent = new LightComponent(data, this);
+	addComponent(m_lightComponent);
+}
+
+void MapEquipment::setHasTexture() {
+	m_hasTexture = true;
 }
 
 GameObjectType MapEquipment::getConfiguredType() const {

@@ -60,9 +60,8 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
 }
 
-void LevelEquipment::setTexturePath(const std::string& texturePath) {
-	m_texturePath = texturePath;
-	m_hasTexture = !m_texturePath.empty();
+void LevelEquipment::setHasTexture() {
+	m_hasTexture = true;
 }
 
 void LevelEquipment::setLightComponent(const LightData& data) {

@@ -87,7 +87,7 @@ CREATE TABLE item_food(
 CREATE TABLE item_equipment(
 	item_id VARCHAR(50) NOT NULL, 
 	texture_path VARCHAR(100) NOT NULL, 
-	map_texture_path VARCHAR(100) NOT NULL DEFAULT "", 
+	map_texture_path VARCHAR(100) NOT NULL, 
 	frames_walk INTEGER NOT NULL DEFAULT 8,
 	frames_idle INTEGER NOT NULL DEFAULT 1,
 	frames_jump INTEGER NOT NULL DEFAULT 1,
@@ -111,6 +111,8 @@ CREATE TABLE item_equipment_light(
 	light_offset_y INTEGER NOT NULL DEFAULT 0,
 	light_radius_x INTEGER NOT NULL DEFAULT 0,
 	light_radius_y INTEGER NOT NULL DEFAULT 0,
+	map_light_radius_x INTEGER NOT NULL DEFAULT 0,
+	map_light_radius_y INTEGER NOT NULL DEFAULT 0,
 	brightness DOUBLE NOT NULL DEFAULT 1.0,
 	PRIMARY KEY (item_id),
 	FOREIGN KEY(item_id) REFERENCES equipment(item_id)

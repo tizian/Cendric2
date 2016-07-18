@@ -17,7 +17,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void setLightComponent(const LightData& lightData);
 
-	void setTexturePath(const std::string& texturePath);
+	void setHasTexture();
 
 	GameObjectType getConfiguredType() const override;
 
@@ -30,7 +30,6 @@ public:
 
 private:
 	LevelMainCharacter* m_mainChar;
-	std::string m_texturePath;
 	bool m_hasTexture = false;
 
 	LightComponent* m_lightComponent = nullptr;

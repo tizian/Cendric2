@@ -109,9 +109,10 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 			// initial values
 			levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
 			levelEquipment->playCurrentAnimation(true);
+
+			levelEquipment->setHasTexture();
 		}
 
-		levelEquipment->setTexturePath(equipment.texturePath);
 		sf::Vector2f newPosition;
 		levelEquipment->calculatePositionAccordingToMainChar(newPosition);
 		levelEquipment->setPosition(newPosition);
