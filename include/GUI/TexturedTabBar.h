@@ -11,6 +11,7 @@ public:
 	~TexturedTabBar();
 
 	void render(sf::RenderTarget& renderTarget) override;
+	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 
 	int getActiveTabIndex() const;

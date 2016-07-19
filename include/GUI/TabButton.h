@@ -20,8 +20,6 @@ public:
 	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
-	void setPosition(const sf::Vector2f& pos) override;
-	void setSize(const sf::Vector2f& size) override;
 
 	void setOnClick(const std::function<void()>& agent);
 
@@ -46,6 +44,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 	static const float BORDER_OFFSET;
+	static const float BOUNDING_BOX_OFFSET;
 	static const float ALIGNMENT_OFFSET;
 
 protected:
@@ -59,6 +58,7 @@ protected:
 
 	sf::Vector2f m_textOffset;
 	sf::FloatRect m_outerRect;
+	sf::FloatRect m_innerRect;
 
 	BitmapText m_text;
 

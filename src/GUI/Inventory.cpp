@@ -471,6 +471,8 @@ void Inventory::renderAfterForeground(sf::RenderTarget& target) {
 		it.second.renderAfterForeground(target);
 	}
 	m_equipment->renderAfterForeground(target);
+
+	m_tabBar->renderAfterForeground(target);
 }
 
 void Inventory::convertItem(const Item* item) {

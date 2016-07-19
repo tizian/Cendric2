@@ -13,6 +13,7 @@ TexturedTabBar::TexturedTabBar(const sf::FloatRect& box, int numberTabs) {
 	}
 
 	setBoundingBox(box);
+	setDebugBoundingBox(COLOR_GOOD);
 
 	m_activeTabIndex = 0;
 	m_tabButtons[0]->setActive(true);
@@ -32,6 +33,13 @@ void TexturedTabBar::render(sf::RenderTarget& renderTarget) {
 		m_tabButtons[i]->render(renderTarget);
 	}
 	renderTarget.draw(m_activeOverlay);
+}
+
+void TexturedTabBar::renderAfterForeground(sf::RenderTarget& renderTarget) {
+	GameObject::renderAfterForeground(renderTarget);
+	for (size_t i = 0; i < m_tabButtons.size(); ++i) {
+		m_tabButtons[i]->renderAfterForeground(renderTarget);
+	}
 }
 
 void TexturedTabBar::update(const sf::Time& frameTime) {

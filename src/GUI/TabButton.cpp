@@ -2,6 +2,7 @@
 #include "GlobalResource.h"
 
 const float TabButton::BORDER_OFFSET = 5.f;
+const float TabButton::BOUNDING_BOX_OFFSET = 9.f;
 const float TabButton::ALIGNMENT_OFFSET = 14.f;
 
 TabButton::TabButton(const sf::FloatRect& box) {
@@ -10,17 +11,16 @@ TabButton::TabButton(const sf::FloatRect& box) {
 	m_border.setPosition(box.left, box.top);
 
 	m_outerRect = box;
-	sf::FloatRect innerBox = sf::FloatRect(box.left + BORDER_OFFSET, box.top + BORDER_OFFSET, box.width - 2.f * BORDER_OFFSET, box.height - 2.f * BORDER_OFFSET);
-
-	m_background = sf::RectangleShape();
-	m_background.setPosition(sf::Vector2f(innerBox.left, innerBox.top));
-	m_background.setSize(sf::Vector2f(innerBox.width, innerBox.height));
+	sf::FloatRect backgroundBox = sf::FloatRect(box.left + BORDER_OFFSET, box.top + BORDER_OFFSET, box.width - 2.f * BORDER_OFFSET, box.height - 2.f * BORDER_OFFSET);
+	m_background.setPosition(sf::Vector2f(backgroundBox.left, backgroundBox.top));
+	m_background.setSize(sf::Vector2f(backgroundBox.width, backgroundBox.height));
 	m_background.setFillColor(m_backgroundColor);
 
-	setBoundingBox(innerBox);
-	setInputInDefaultView(true);
+	sf::FloatRect boundingBox = sf::FloatRect(box.left + BOUNDING_BOX_OFFSET, box.top + BORDER_OFFSET, box.width - 2.f * BOUNDING_BOX_OFFSET, box.height - 2.f * BORDER_OFFSET);
+	setBoundingBox(boundingBox);
 
-	setPosition(sf::Vector2f(box.left, box.top));
+	setInputInDefaultView(true);
+	setDebugBoundingBox(COLOR_BAD);
 
 	m_isActive = false;
 
@@ -69,31 +69,6 @@ void TabButton::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_background);
 	renderTarget.draw(m_border);
 	renderTarget.draw(m_text);
-}
-
-void TabButton::setPosition(const sf::Vector2f& pos) {
-	GameObject::setPosition(pos);
-
-	m_border.setPosition(pos);
-
-	m_outerRect.left = pos.x;
-	m_outerRect.top = pos.y;
-	sf::Vector2f innerPos(pos.x + BORDER_OFFSET, pos.y + BORDER_OFFSET);
-	m_background.setPosition(innerPos);
-
-	m_text.setPosition(pos + m_textOffset);
-}
-
-void TabButton::setSize(const sf::Vector2f& size) {
-	GameObject::setSize(size);
-	m_outerRect.width = size.x;
-	m_outerRect.height = size.y;
-	m_border.setSize(size);
-	sf::Vector2f innerSize(size.x - 2.f * BORDER_OFFSET, size.y - 2.f * BORDER_OFFSET);
-	m_background.setSize(innerSize);
-	
-	// this re-centers the text
-	setCharacterSize(m_text.getCharacterSize());
 }
 
 void TabButton::update(const sf::Time& frameTime) {
