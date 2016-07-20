@@ -20,7 +20,7 @@ Cendric moves through the world on a 2D map and interacts with NPCs to trade or 
 
 ## Current stable build
 
-The final game will be available for Windows, Mac and Linux. As we are currently only focusing on one platform, most test builds will only be available for Windows at the moment. However, feel free to try and compile *Cendric* on any platform.
+Pre-alpha builds are available for Windows x64, Mac and Ubuntu. However, feel free to try and compile *Cendric* on any platform.
 
 [Cendric v0.3.0](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0_win64.zip) (Windows x64)
 
