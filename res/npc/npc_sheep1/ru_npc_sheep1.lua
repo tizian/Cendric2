@@ -2,7 +2,7 @@
 
 velocity = 20
 
-loadRoutine = function(R)
+loadRoutine = function(R, W)
 
 	R:setTilePosition(4,60)
 

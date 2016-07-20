@@ -101,4 +101,9 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 			YOFFSET + InventorySlot::ICON_OFFSET + 0.5f * (InventorySlot::SIZE - 2 * InventorySlot::ICON_OFFSET - bbox.height));
 		m_texts.push_back(text);
 	}
+
+	for (size_t i = 0; i < m_items.size(); ++i) {
+		m_items[i]->setAlpha((sf::Uint8)(0));
+		m_texts[i]->setColor(COLOR_TRANSPARENT);
+	}
 }

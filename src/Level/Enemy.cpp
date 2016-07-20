@@ -341,7 +341,7 @@ void Enemy::onRightClick() {
 
 void Enemy::setScriptedBehavior(const std::string& luaPath) {
 	delete m_scriptedBehavior;
-	m_scriptedBehavior = new ScriptedBehavior(luaPath, m_screen->getCharacterCore(), this);
+	m_scriptedBehavior = new ScriptedBehavior(luaPath, this);
 	if (m_scriptedBehavior->isError()) {
 		delete m_scriptedBehavior;
 		m_scriptedBehavior = nullptr;
@@ -371,6 +371,10 @@ void Enemy::setDead() {
 
 	if (m_isUnique) {
 		notifyKilled();
+	}
+
+	if (m_scriptedBehavior != nullptr) {
+		m_scriptedBehavior->onDeath();
 	}
 
 	if (m_isBoss) {

@@ -11,14 +11,25 @@ const float InventorySlot::ICON_OFFSET = 4.f;
 
 InventorySlot::InventorySlot(const std::string& itemID, int amount) {
 	m_itemID = itemID;
-	Item* item = g_resourceManager->getItem(itemID);
-	if (item == nullptr)
-		return;
-	m_type = item->getType();
-	m_tooltipWindow.setText(g_textProvider->getText(itemID, "item"));
+
+	if (itemID.compare("gold") == 0) {
+		m_type = ItemType::Gold;
+		m_tooltipWindow.setText(g_textProvider->getText("Gold"));
+
+		m_iconTextureRect = sf::IntRect(0, 0, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
+
+	} else {
+
+		Item* item = g_resourceManager->getItem(itemID);
+		if (item == nullptr)
+			return;
+		m_type = item->getType();
+		m_tooltipWindow.setText(g_textProvider->getText(itemID, "item"));
+
+		m_iconTextureRect = sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
+	}
 
 	m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_ITEMS);
-	m_iconTextureRect = sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
@@ -69,12 +80,15 @@ void InventorySlot::setAmount(int amount) {
 }
 
 void InventorySlot::setAlpha(sf::Uint8 alpha) {
-	const sf::Color &ic = m_iconRect.getFillColor();
+	const sf::Color& ic = m_iconRect.getFillColor();
 	m_iconRect.setFillColor(sf::Color(ic.r, ic.g, ic.b, alpha));
 
-	const sf::Color &bc = m_borderRect.getFillColor();
+	const sf::Color& bc = m_borderRect.getFillColor();
 	m_borderRect.setFillColor(sf::Color(bc.r, bc.g, bc.b, alpha));
 
-	const sf::Color &tc = m_amountText.getColor();
+	const sf::Color& bac = m_backgroundRect.getFillColor();
+	m_backgroundRect.setFillColor(sf::Color(bac.r, bac.g, bac.b, alpha));
+
+	const sf::Color& tc = m_amountText.getColor();
 	m_amountText.setColor(sf::Color(tc.r, tc.g, tc.b, alpha));
 }

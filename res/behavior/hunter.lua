@@ -2,8 +2,8 @@
 speechBubbleState = 0
 goodJob = false
 
-update = function(B)
-		if (not goodJob and B:isConditionFulfilled("npc_edmond","puzzle_solved")) then
+update = function(B, W)
+		if (not goodJob and W:isConditionFulfilled("npc_edmond","puzzle_solved")) then
 			goodJob = true
 			B:say("GoodJob", 4)
 		elseif (speechBubbleState == 5) then

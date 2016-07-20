@@ -3,12 +3,13 @@
 #include "CharacterCore.h"
 #include "Level/Enemy.h"
 #include "Screens/WorldScreen.h"
+#include "Callbacks/WorldCallback.h"
 
 using namespace std;
 using namespace luabridge;
 
-ScriptedBehaviorCallback::ScriptedBehaviorCallback(const std::string& luaPath, CharacterCore* core, Enemy* enemy) {
-	m_core = core;
+ScriptedBehaviorCallback::ScriptedBehaviorCallback(const std::string& luaPath, Enemy* enemy) {
+	m_worldCallback = new WorldCallback(dynamic_cast<WorldScreen*>(enemy->getScreen()));
 	m_enemy = enemy;
 
 	m_success = loadLua(luaPath);
@@ -24,11 +25,9 @@ void ScriptedBehaviorCallback::setScriptedBehavior(ScriptedBehavior* behavior) {
 bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 	m_L = luaL_newstate();
 	luaL_openlibs(m_L);
+	m_worldCallback->bindFunctions(m_L);
 	getGlobalNamespace(m_L)
 		.beginClass<ScriptedBehaviorCallback>("Behavior")
-		.addFunction("isQuestState", &ScriptedBehaviorCallback::isQuestState)
-		.addFunction("isQuestComplete", &ScriptedBehaviorCallback::isQuestComplete)
-		.addFunction("isConditionFulfilled", &ScriptedBehaviorCallback::isConditionFulfilled)
 		.addFunction("getPosX", &ScriptedBehaviorCallback::getPosX)
 		.addFunction("getPosY", &ScriptedBehaviorCallback::getPosY)
 		.addFunction("say", &ScriptedBehaviorCallback::say)
@@ -48,9 +47,13 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 	}
 
 	LuaRef update = getGlobal(m_L, "update");
-	if (!update.isFunction()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Lua script: " + getResourcePath(path) + " has no update function.");
-		return false;
+	if (update.isFunction()) {
+		m_hasUpdateFunc = true;
+	}
+
+	LuaRef onDeath = getGlobal(m_L, "onDeath");
+	if (onDeath.isFunction()) {
+		m_hasDeathFunc = true;
 	}
 
 	return true;
@@ -86,10 +89,23 @@ bool ScriptedBehaviorCallback::isLoaded() const {
 }
 
 void ScriptedBehaviorCallback::update() {
+	if (!m_hasUpdateFunc) return;
 	LuaRef updateFunc = getGlobal(m_L, "update");
 	
 	try {
-		updateFunc(this);
+		updateFunc(this, m_worldCallback);
+	}
+	catch (LuaException const& e) {
+		g_logger->logError("ScriptedBehaviorCallback", "LuaException: " + std::string(e.what()));
+	}
+}
+
+void ScriptedBehaviorCallback::onDeath() {
+	if (!m_hasDeathFunc) return;
+	LuaRef deathFunc = getGlobal(m_L, "onDeath");
+
+	try {
+		deathFunc(this, m_worldCallback);
 	}
 	catch (LuaException const& e) {
 		g_logger->logError("ScriptedBehaviorCallback", "LuaException: " + std::string(e.what()));
@@ -98,22 +114,6 @@ void ScriptedBehaviorCallback::update() {
 
 void ScriptedBehaviorCallback::addHint(const std::string& hint) {
 	dynamic_cast<WorldScreen*>(m_enemy->getScreen())->notifyHintAdded(hint);
-}
-
-bool ScriptedBehaviorCallback::isQuestComplete(const std::string& questID) const {
-	if (questID.empty()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Quest ID cannot be empty.");
-		return false;
-	}
-	return m_core->isQuestComplete(questID);
-}
-
-bool ScriptedBehaviorCallback::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
-	if (condition.empty() || conditionType.empty()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Condition and conditionType cannot be empty.");
-		return false;
-	}
-	return m_core->isConditionFulfilled(conditionType, condition);
 }
 
 int ScriptedBehaviorCallback::getPosX() const {
@@ -132,16 +132,4 @@ void ScriptedBehaviorCallback::wait(int seconds) {
 	m_scriptedBehavior->wait(seconds);
 }
 
-bool ScriptedBehaviorCallback::isQuestState(const std::string& questID, const std::string& state) const {
-	QuestState questState = resolveQuestState(state);
-	if (questState == QuestState::VOID) {
-		g_logger->logError("ScriptedBehaviorCallback", "Quest State: [" + state + "] does not exist");
-		return false;
-	}
-	if (questID.empty()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Quest ID cannot be empty.");
-		return false;
-	}
-	return m_core->getQuestState(questID) == questState;
-}
 

@@ -435,18 +435,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 						return false;
 					}
 					npc.id = textAttr;
-					
-					if (npc.dialogueID.empty())
-						npc.dialogueID = GlobalResource::NPC_FOLDER + npc.id + "/dl_" + npc.id + ".lua";
-					
-					if (npc.routineID.empty())
-						npc.routineID = GlobalResource::NPC_FOLDER + npc.id + "/ru_" + npc.id + ".lua";
-					
-					if (npc.spritesheetpath.empty())
-						npc.spritesheetpath = GlobalResource::NPC_FOLDER + npc.id + "/spritesheet_" + npc.id + ".png";
-
-					if (npc.textType.empty())
-						npc.textType = "dl_" + npc.id;
+					npc.calculateDefaultFromID();
 				}
 				else if (attrText.compare("dialogueid") == 0) {
 					textAttr = nullptr;

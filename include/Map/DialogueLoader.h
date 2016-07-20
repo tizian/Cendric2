@@ -5,23 +5,24 @@
 #include "Enums/QuestState.h"
 
 #include "LuaBridge/LuaBridge.h"
+#include "Callbacks/WorldCallback.h"
 
-class CharacterCore;
+class WorldScreen;
 
 // helper class to load lua files for dialogues
 class DialogueLoader {
 public:
-	DialogueLoader(Dialogue& dialogue, CharacterCore* core);
+	DialogueLoader(Dialogue& dialogue, WorldScreen* screen);
 	~DialogueLoader();
 	void loadDialogue();
 
 	// methods for questions about the current game state
-	bool isQuestState(const std::string& questID, const std::string& state) const;
-	bool isQuestComplete(const std::string& questID);
-	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
-	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const;
-	bool hasItem(const std::string& item, int amount) const; // this can also query gold. with item id "gold"
-	int getReputation(const std::string& fractionID) const;
+	bool isQuestState(const std::string& questID, const std::string& state) const { return m_worldCallback->isQuestState(questID, state); }
+	bool isQuestComplete(const std::string& questID) const { return m_worldCallback->isQuestComplete(questID); }
+	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const { return m_worldCallback->isConditionFulfilled(conditionType, condition); }
+	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const { return m_worldCallback->isQuestConditionFulfilled(quest, condition); }
+	bool hasItem(const std::string& item, int amount) const { return m_worldCallback->hasItem(item, amount); }
+	int getReputation(const std::string& fractionID) const { return m_worldCallback->getReputation(fractionID); }
 
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);
@@ -29,8 +30,7 @@ public:
 	void createTradeNode(int tag, int nextTag);
 	void createChoiceNode(int tag);
 
-	// methods to add properties to that node
-	void addChoice(int nextTag, const std::string& text);
+	// methods to add properties to that node (trigger properties)
 	void changeQuestState(const std::string& questID, const std::string& state);
 	void addQuestProgress(const std::string& questID, const std::string& progress);
 	void addQuestDescription(const std::string& questID, int descriptionID);
@@ -46,6 +46,9 @@ public:
 	void startLevel(const std::string& levelID, int x, int y);
 	void startMap(const std::string& mapID, int x, int y);
 	void startCutscene(const std::string& cutsceneID);
+
+	// special node properties
+	void addChoice(int nextTag, const std::string& text);
 	void gotoNode(int node);
 
 	// finally, adding the node to the dialogue
@@ -54,6 +57,6 @@ public:
 
 private:
 	Dialogue& m_dialogue;
-	CharacterCore* m_core;
+	WorldCallback* m_worldCallback;
 	DialogueNode* m_currentNode = nullptr;
 };

@@ -135,9 +135,10 @@ loadDialogue = function(DL)
 			DL:createNPCNode(37, 38, "DL_Citguard_TryLetter") -- Hm, the seal of the High Priestess Inina. I'll have to believe you, then.
 			DL:addNode()
 			
-			DL:createNPCNode(38, -2, "DL_Citguard_LetZeffIn") -- I can promise that we two won't attack him when he comes back. But still, you'll need to inform Commander Lloyd about this when you get into the city.
+			DL:createNPCNode(38, -2, "DL_Citguard_LetZeffIn") -- Alright, I will inform the other guards. You can tell him it is safe to return to Gandria.
 			DL:addConditionProgress("npc_cityguard", "letin_zeff")
 			DL:addQuestDescription("zeff_returns", 1)
+			DL:addQuestProgress("zeff_returns", "guards_convinced")
 			DL:addNode()
 			
 		end

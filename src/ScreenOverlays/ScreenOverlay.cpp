@@ -88,7 +88,7 @@ void ScreenOverlay::setTitleCharacterSize(int characterSize) {
 }
 
 void ScreenOverlay::setTitleColor(const sf::Color& color) {
-	m_title.setColor(color);
+	m_title.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(m_scale * 255)));
 }
 
 void ScreenOverlay::setSubtitle(const std::string& textKey, const std::string& textType) {
@@ -106,7 +106,7 @@ void ScreenOverlay::setSubtitleCharacterSize(int characterSize) {
 }
 
 void ScreenOverlay::setSubtitleColor(const sf::Color& color) {
-	m_subtitle.setColor(color);
+	m_subtitle.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(m_scale * 255)));
 }
 
 void ScreenOverlay::repositionText() {

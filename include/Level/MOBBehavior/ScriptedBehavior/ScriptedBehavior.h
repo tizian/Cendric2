@@ -11,10 +11,11 @@ class Enemy;
 // used for enemies with a special behavior, like talking
 class ScriptedBehavior {
 public:
-	ScriptedBehavior(const std::string& luaPath, CharacterCore* core, Enemy* enemy);
+	ScriptedBehavior(const std::string& luaPath, Enemy* enemy);
 	~ScriptedBehavior();
 
 	void update(const sf::Time& frameTime);
+	void onDeath();
 	void say(const std::string& text, int seconds);
 	void wait(int seconds);
 

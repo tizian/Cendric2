@@ -2,9 +2,14 @@
 
 velocity = 60
 
-loadRoutine = function(R)
+loadRoutine = function(R, W)
 
-	if (R:hasItem("pe_feudalfire",1) and not R:isConditionFulfilled("npc_vincent","talked")) then 
+	if (W:isConditionFulfilled("npc_vincent","vincent_gone")) then
+		R:setDisposed()
+		return
+	end
+	
+	if (W:hasItem("pe_feudalfire",1) and not W:isConditionFulfilled("npc_vincent","talked")) then 
 
 		R:goToTile(10.2,10)
 		R:goToTile(15,10)
@@ -12,14 +17,15 @@ loadRoutine = function(R)
 		R:setTalkingActiveForce(true)
 		R:setLooped(false)
 		
-	elseif (R:isConditionFulfilled("npc_vincent","talked") and (not R:isConditionFulfilled("npc_vincent", "cooperated") or R:isQuestState("spoiled_fire", "completed"))) then
+	elseif (W:isConditionFulfilled("npc_vincent","talked") and (not W:isConditionFulfilled("npc_vincent", "cooperated") or W:isQuestState("spoiled_fire", "completed"))) then
 		
 		-- vincent is leaving....
+		R:setReloadEnabled(false)
 		R:setTilePosition(13.5,20)
 		R:goToTile(10.2,10)
 		R:goToTile(13.5,10)
 		R:goToTile(13.5,20)
-		R:setDisposed()
+		W:addConditionProgress("npc_vincent", "vincent_gone")
 
 	else
 

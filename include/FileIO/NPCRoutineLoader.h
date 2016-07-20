@@ -5,19 +5,17 @@
 
 #include "LuaBridge/LuaBridge.h"
 
-class CharacterCore;
+class WorldCallback;
+class WorldScreen;
 
 // helper class to load lua files for npc routines
 class NPCRoutineLoader {
 public:
-	NPCRoutineLoader(NPCRoutine& routine, CharacterCore* core);
+	NPCRoutineLoader(NPCRoutine& routine, WorldScreen* screen);
 	~NPCRoutineLoader();
 	void loadRoutine(bool isInitial);
 
 	// methods to call in lua script
-	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
-	bool isQuestState(const std::string& questID, const std::string& state) const;
-	bool hasItem(const std::string& item, int amount) const; // this can also query gold. with item id "gold"
 	void setTilePosition(float x, float y);
 	void setTilePositionForce(float x, float y);
 	void setDisposed();
@@ -27,9 +25,10 @@ public:
 	void setTalkingActive(bool active);
 	void setTalkingActiveForce(bool active);
 	void setTalkingEnabled(bool enabled);
+	void setReloadEnabled(bool enabled);
 
 private:
 	bool m_isInitial = true;
 	NPCRoutine& m_routine;
-	CharacterCore* m_core;
+	WorldCallback* m_worldCallback;
 };

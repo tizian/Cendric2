@@ -11,7 +11,7 @@ void Dialogue::reload(const std::string& id, WorldScreen* screen, DialogueWindow
 	m_nodes.clear();
 	m_currentNode = nullptr;
 
-	DialogueLoader loader(*this, screen->getCharacterCore());
+	DialogueLoader loader(*this, screen);
 	loader.loadDialogue();
 	if (m_currentNode == nullptr) {
 		g_logger->logError("Dialogue", "No node in current dialogue, root is not set.");
@@ -48,7 +48,7 @@ bool Dialogue::updateWindow() {
 	}
 
 	if (m_currentNode != nullptr) {
-		for (auto& content : m_currentNode->content) {
+		for (auto content : m_currentNode->content) {
 			TriggerContent::executeTrigger(content, m_screen);
 		}
 	}

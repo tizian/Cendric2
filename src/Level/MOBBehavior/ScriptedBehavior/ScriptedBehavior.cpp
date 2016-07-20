@@ -8,8 +8,8 @@ using namespace luabridge;
 
 const sf::Time ScriptedBehavior::SCRIPT_UPDATE_INTERVAL = sf::seconds(0.5f);
 
-ScriptedBehavior::ScriptedBehavior(const std::string& luaPath, CharacterCore* core, Enemy* enemy) : 
-	m_callback(luaPath, core, enemy) {
+ScriptedBehavior::ScriptedBehavior(const std::string& luaPath, Enemy* enemy) : 
+	m_callback(luaPath, enemy) {
 
 	m_callback.setScriptedBehavior(this);
 
@@ -39,6 +39,10 @@ void ScriptedBehavior::update(const sf::Time& frameTime) {
 			m_speechBubble->hide();
 		}
 	}
+}
+
+void ScriptedBehavior::onDeath() {
+	m_callback.onDeath();
 }
 
 void ScriptedBehavior::say(const std::string& text, int seconds) {

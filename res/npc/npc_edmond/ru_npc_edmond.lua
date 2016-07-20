@@ -2,10 +2,10 @@
 
 velocity = 50
 
-loadRoutine = function(R)
-		if (R:isConditionFulfilled("default","tutorial_complete")) then 
+loadRoutine = function(R, W)
+		if (W:isConditionFulfilled("default","tutorial_complete")) then 
 		
-			if (R:isConditionFulfilled("npc_edmond", "talked_after_tutorial")) then
+			if (W:isConditionFulfilled("npc_edmond", "talked_after_tutorial")) then
 				R:setTilePosition(57, 17)
 
 				R:goToTile(57,17)
@@ -25,7 +25,7 @@ loadRoutine = function(R)
 				
 			end
 			
-		elseif (R:isConditionFulfilled("trigger","tutorial_started")) then 
+		elseif (W:isConditionFulfilled("trigger","tutorial_started")) then 
 		
 			R:setTilePosition(44, 17)
 			R:setTalkingEnabled(false)

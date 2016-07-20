@@ -31,17 +31,25 @@ public:
 	void setTalkingActive(bool active);
 	// if set to true, the npc can be talked to (cendrics initiative)
 	void setTalkingEnabled(bool enabled);
-	void reloadRoutine();
+	// if set to false, the npcs routine will not reload if a condition has changed. 
+	void setReloadEnabled(bool enabled);
+	// this npc will reload its routine in the next update
+	void notifyReloadNeeded();
+	
 
 	GameObjectType getConfiguredType() const override;
 	const NPCData& getNPCData() const;
 
 private:
+	void reloadRoutine();
+
 	NPCData m_NPCdata;
 	NPCRoutine m_routine;
 	MapMainCharacter* m_mainChar;
 
 	const float TALKING_RANGE = 100.f;
+	bool m_routineReloadNeeded = false;
+	bool m_routineReloadEnabled = true;
 
 	void trySetDialogue();
 	void turnToMainchar();

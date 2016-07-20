@@ -1,35 +1,35 @@
 #include "FileIO/NPCRoutineLoader.h"
 #include "Map/NPC.h"
 #include "Map/NPCRoutine.h"
-#include "CharacterCore.h"
+#include "Screens/WorldScreen.h"
+#include "Callbacks/WorldCallback.h"
 
-using namespace std;
 using namespace luabridge;
 
-NPCRoutineLoader::NPCRoutineLoader(NPCRoutine& routine, CharacterCore* core) : m_routine(routine) {
-	m_core = core;
+NPCRoutineLoader::NPCRoutineLoader(NPCRoutine& routine, WorldScreen* screen) : m_routine(routine) {
+	m_worldCallback = new WorldCallback(screen);
 }
 
 NPCRoutineLoader::~NPCRoutineLoader() {
+	delete m_worldCallback;
 }
 
 void NPCRoutineLoader::loadRoutine(bool isInitial) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
+	m_worldCallback->bindFunctions(L);
 	getGlobalNamespace(L)
 		.beginClass<NPCRoutineLoader>("NPCRoutine")
 		.addFunction("wait", &NPCRoutineLoader::wait)
 		.addFunction("goToTile", &NPCRoutineLoader::goToTile)
 		.addFunction("setLooped", &NPCRoutineLoader::setLooped)
-		.addFunction("isQuestState", &NPCRoutineLoader::isQuestState)
-		.addFunction("isConditionFulfilled", &NPCRoutineLoader::isConditionFulfilled)
-		.addFunction("hasItem", &NPCRoutineLoader::hasItem)
 		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
 		.addFunction("setTilePositionForce", &NPCRoutineLoader::setTilePositionForce)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
 		.addFunction("setTalkingActive", &NPCRoutineLoader::setTalkingActive)
 		.addFunction("setTalkingActiveForce", &NPCRoutineLoader::setTalkingActiveForce)
 		.addFunction("setTalkingEnabled", &NPCRoutineLoader::setTalkingEnabled)
+		.addFunction("setReloadEnabled", &NPCRoutineLoader::setReloadEnabled)
 		.endClass();
 
 	if (luaL_dofile(L, getResourcePath(m_routine.getID()).c_str()) != 0) {
@@ -45,7 +45,7 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 
 	try {
 		m_isInitial = isInitial;
-		function(this);
+		function(this, m_worldCallback);
 	}
 	catch (LuaException const& e) {
 		g_logger->logError("NPCRoutineLoader", "LuaException: " + std::string(e.what()));
@@ -89,34 +89,8 @@ void NPCRoutineLoader::setTalkingEnabled(bool enabled) {
 	m_routine.getNPC()->setTalkingEnabled(enabled);
 }
 
-bool NPCRoutineLoader::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
-	if (condition.empty() || conditionType.empty()) {
-		g_logger->logError("NPCRoutineLoader", "Condition and condition type cannot be empty.");
-		return false;
-	}
-	return m_core->isConditionFulfilled(conditionType, condition);
-}
-
-bool NPCRoutineLoader::isQuestState(const std::string& questID, const std::string& state) const {
-	QuestState questState = resolveQuestState(state);
-	if (questState == QuestState::MAX) {
-		g_logger->logError("NPCRoutineLoader", "Quest State: [" + state + "] does not exist");
-		return false;
-	}
-	if (questID.empty()) {
-		g_logger->logError("NPCRoutineLoader", "Quest ID cannot be empty.");
-		return false;
-	}
-	return m_core->getQuestState(questID) == questState;
-}
-
-bool NPCRoutineLoader::hasItem(const std::string& item, int amount) const {
-	if (item.empty() || amount < 1) {
-		g_logger->logError("NPCRoutineLoader", "Item key cannot be empty and amount has to be > 0");
-		return false;
-	}
-
-	return m_core->hasItem(item, amount);
+void NPCRoutineLoader::setReloadEnabled(bool enabled) {
+	m_routine.getNPC()->setReloadEnabled(enabled);
 }
 
 void NPCRoutineLoader::setTilePosition(float x, float y) {
@@ -129,10 +103,6 @@ void NPCRoutineLoader::setTilePositionForce(float x, float y) {
 }
 
 void NPCRoutineLoader::setDisposed() {
-	if (m_isInitial) {
-		m_routine.getNPC()->setDisposed();
-		return;
-	}
 	RoutineStep step;
 	step.state = RoutineState::Disappearing;
 	m_routine.addStep(step);

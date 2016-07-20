@@ -15,7 +15,7 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_zeff", "curse_stronger")) then
 		DL:addChoice(30, "DL_Choice_CurseStronger") -- So, this curse is getting stronger?
 	end
-	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and DL:isQuestState("zeffs_curse", "void")) then
+	if (DL:isQuestState("hungry_wolf", "completed") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and DL:isQuestState("zeffs_curse", "void")) then
 		DL:addChoice(40, "DL_Choice_HelpCurse") -- Can I help you somehow breaking that curse?
 	end
 	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_zeff", "mark_curse")) then
@@ -44,6 +44,9 @@ loadDialogue = function(DL)
 	end
 	if (DL:isQuestState("zeffs_curse", "started") and DL:isQuestComplete("zeffs_curse")) then
 		DL:addChoice(110, "DL_Choice_BeastSlain") -- I found the beast that cursed you in the caverns...
+	end
+	if (DL:isQuestState("zeff_returns", "started") and DL:isQuestComplete("zeff_returns")) then
+		DL:addChoice(120, "DL_Choice_GoHomeZeff") -- I've talked to the guards. They'll let you in.
 	end
 
 	DL:addChoice(-1, "DL_Choice_CU") --  See you later.
@@ -166,7 +169,7 @@ loadDialogue = function(DL)
 		DL:createNPCNode(35, 36, "DL_Zeff_Hunting2") -- So I entered that cave, hoping to get one or two of them with my "skinning knife" (holds up his sword). But I didn't get far.
 		DL:addNode()
 		
-		DL:createNPCNode(36, -2, "DL_Zeff_Hunting3") -- Then this... thing appeared. I couldn't see much, because it was dark in there, but it was huge. Two glowing eyes, staring at me... The next thing I remember is waking up at the entry of the cave, covered in fur.
+		DL:createNPCNode(36, -2, "DL_Zeff_Hunting3") -- Then this... thing appeared. I couldn't see much, because it was dark in there, but it was huge. One glowing eye, staring at me... The next thing I remember is waking up at the entry of the cave, covered in fur.
 		DL:addNode()
 		
 	end
@@ -203,9 +206,6 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createNPCNode(63, 64, "DL_Zeff_ComeAndTry") -- That's the last mistake you'll ever make.
-		if (DL:isQuestState("zeffs_curse", "started")) then
-			DL:changeQuestState("zeffs_curse", "failed")
-		end
 		DL:addNode()
 		
 		DL:createNPCNode(64, -1, "") -- ...
@@ -232,12 +232,6 @@ loadDialogue = function(DL)
 		end
 		
 		DL:createNPCNode(81, 82, "DL_Zeff_ComeAndTry") -- That's the last mistake you'll ever make.
-		if (DL:isQuestState("zeffs_curse", "started")) then
-			DL:changeQuestState("zeffs_curse", "failed")
-		end
-		if (DL:isQuestState("hungry_wolf", "started")) then
-			DL:changeQuestState("hungry_wolf", "failed")
-		end
 		DL:addNode()
 		
 		DL:createNPCNode(82, -1, "") -- ...
@@ -302,6 +296,15 @@ loadDialogue = function(DL)
 		DL:addItem("eq_fireratscarf", 1)
 		DL:removeItem("mi_firerat_fur", 1)
 		DL:gotoNode(51)
+		DL:addNode()
+		
+	end
+	
+	if (DL:isQuestState("zeff_returns", "started") and DL:isQuestComplete("zeff_returns")) then
+	
+		DL:createNPCNode(120, -1, "DL_Zeff_IWillGoHome") -- Thank you for the great news. I can't wait to see my beautiful house again! Don't forget to visit me in Gandria to get your reward.
+		DL:changeQuestState("zeff_returns", "completed")
+		DL:addConditionProgress("npc_zeff", "zeff_goes")
 		DL:addNode()
 		
 	end

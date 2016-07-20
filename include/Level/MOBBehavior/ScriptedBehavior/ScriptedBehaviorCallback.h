@@ -4,23 +4,19 @@
 
 #include "LuaBridge/LuaBridge.h"
 
-class CharacterCore;
 class Enemy;
 class ScriptedBehavior;
+class WorldCallback;
 
 class ScriptedBehaviorCallback {
 public:
-	ScriptedBehaviorCallback(const std::string& luaPath, CharacterCore* core, Enemy* enemy);
+	ScriptedBehaviorCallback(const std::string& luaPath, Enemy* enemy);
 	~ScriptedBehaviorCallback();
 
 	void update();
+	void onDeath();
 
 	void setScriptedBehavior(ScriptedBehavior* behavior);
-
-	// methods for questions about the current game (character core) state
-	bool isQuestState(const std::string& questID, const std::string& state) const;
-	bool isQuestComplete(const std::string& questID) const;
-	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 
 	// methods for questions about the enemy's position
 	int getPosX() const;
@@ -46,12 +42,15 @@ public:
 	bool isLoaded() const;
 
 private:
-	CharacterCore* m_core;
 	Enemy* m_enemy;
 	ScriptedBehavior* m_scriptedBehavior;
+	WorldCallback* m_worldCallback;
 	luabridge::lua_State* m_L;
 
 	// return whether it was successful in loading or not
 	bool loadLua(const std::string& path);
 	bool m_success = false;
+
+	bool m_hasUpdateFunc = false;
+	bool m_hasDeathFunc = false;
 };

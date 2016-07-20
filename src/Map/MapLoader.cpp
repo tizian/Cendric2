@@ -14,7 +14,6 @@ void MapLoader::loadNpcs(MapData& data, MapScreen* screen) const {
 	// calculate npcs
 	for (auto& it : data.npcs) {
 		NPC* mapNPC = new NPC(screen);
-		mapNPC->setScreen(screen);
 		mapNPC->load(it);
 		screen->addObject(mapNPC);
 	}

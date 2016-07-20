@@ -18,6 +18,8 @@ struct NPCData {
 	std::string dialogueID;
 	sf::IntRect dialogueTexturePositon;
 	std::string textType;
+
+	void calculateDefaultFromID();
 };
 
 const struct NPCData DEFAULT_NPC =

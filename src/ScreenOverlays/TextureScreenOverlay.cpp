@@ -33,7 +33,7 @@ void TextureScreenOverlay::setSpriteTextureRect(const sf::IntRect& rect) {
 }
 
 void TextureScreenOverlay::setSpriteTextureColor(const sf::Color& color) {
-	m_sprite.setColor(color);
+	m_sprite.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(m_scale * 255)));
 }
 
 void TextureScreenOverlay::setSpritePosition(const sf::Vector2f& position) {
@@ -53,7 +53,7 @@ void TextureScreenOverlay::setBackgroundTextureRect(const sf::IntRect& rect) {
 }
 
 void TextureScreenOverlay::setBackgroundColor(const sf::Color& color) {
-	m_background.setColor(color);
+	m_background.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(m_scale * 255)));
 }
 
 void TextureScreenOverlay::setBackgroundPosition(const sf::Vector2f& position) {

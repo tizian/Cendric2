@@ -93,7 +93,7 @@ void MapScreen::notifyConditionAdded(const std::string& conditionType, const std
 	WorldScreen::notifyConditionAdded(conditionType, condition);
 	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
-			npc->reloadRoutine();
+			npc->notifyReloadNeeded();
 		}
 	}
 }

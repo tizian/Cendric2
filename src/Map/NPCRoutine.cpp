@@ -1,7 +1,7 @@
 #include "Map/NPCRoutine.h"
 #include "FileIO/NPCRoutineLoader.h"
 #include "Map/NPC.h"
-#include "Screens/Screen.h"
+#include "Screens/WorldScreen.h"
 
 void NPCRoutine::load(const std::string& id, NPC* npc, bool initial) {
 	m_id = id;
@@ -9,7 +9,7 @@ void NPCRoutine::load(const std::string& id, NPC* npc, bool initial) {
 	m_steps.clear();
 	m_currentStepID = 0;
 
-	NPCRoutineLoader loader(*this, npc->getScreen()->getCharacterCore());
+	NPCRoutineLoader loader(*this, static_cast<WorldScreen*>(m_npc->getScreen()));
 	loader.loadRoutine(initial);
 	if (!m_steps.empty()) {
 		if (m_steps[0].state == RoutineState::Waiting) {

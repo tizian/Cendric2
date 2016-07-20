@@ -120,10 +120,21 @@ void NPC::onRightClick() {
 }
 
 void NPC::update(const sf::Time& frameTime) {
+	if (m_routineReloadNeeded) {
+		reloadRoutine();
+		m_routineReloadNeeded = false;
+	}
+
 	m_routine.update(frameTime);
 	updateAnimation(frameTime);
 	MovableGameObject::update(frameTime);
 	checkCollisionWithMainChar();
+}
+
+void NPC::notifyReloadNeeded() {
+	if (m_routineReloadEnabled) {
+		m_routineReloadNeeded = true;
+	}
 }
 
 void NPC::setTalkingActive(bool active) {
@@ -132,6 +143,10 @@ void NPC::setTalkingActive(bool active) {
 
 void NPC::setTalkingEnabled(bool enabled) {
 	m_NPCdata.talkingEnabled = enabled;
+}
+
+void NPC::setReloadEnabled(bool enabled) {
+	m_routineReloadEnabled = enabled;
 }
 
 void NPC::setDialogueID(const std::string& id) {
