@@ -128,6 +128,7 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 	calculateEntryPositions();
 
 	if (chooseOption || g_inputController->isSelected()) {
+		g_inputController->lockAction();
 		const std::string& itemID = m_options[m_chosenOption].getItemID();
 		if (itemID.empty()) {
 			// end cooking window
@@ -277,7 +278,7 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 		if (nr == 0) {
 			text += g_textProvider->getText("NothingToCook") + " ";
 		}
-		m_text.setString(text + g_textProvider->getText("Cancel"));
+		m_text.setString(text + g_textProvider->getText("CancelCooking"));
 	}
 	else {
 		std::string textString = g_textProvider->getText(cookedItemID, "item");
