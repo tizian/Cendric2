@@ -963,7 +963,7 @@
  <objectgroup name="sign">
   <object id="116" gid="568" x="2929" y="1459" width="50" height="50">
    <properties>
-    <property name="text" value="BrokenBridgeTest"/>
+    <property name="text" value="NoSwimming"/>
    </properties>
   </object>
  </objectgroup>

@@ -4,6 +4,7 @@ loadRoutine = function(R, W)
 	if (W:isConditionFulfilled("boss","BossZeff") or W:isConditionFulfilled("npc_zeff", "zeff_goes")) then
 		R:setDisposed()
 	end
+	
 	R:setTilePosition(22,20)
 	R:setLooped(false)
 	
