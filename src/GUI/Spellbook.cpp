@@ -101,7 +101,7 @@ void Spellbook::update(const sf::Time& frameTime) {
 				it.first.update(frameTime);
 				if (it.first.isClicked()) {
 					selectSpellSlot(&it.first);
-					if (it.first.isDoubleClicked()) {
+					if (it.first.isDoubleClicked() && m_isModifiable) {
 						equipSpell(&it.first);
 					}
 					return;

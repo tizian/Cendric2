@@ -139,7 +139,7 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 		it.first.update(frameTime);
 		if (it.first.isClicked()) {
 			selectSpellSlot(&it.first);
-			if (it.first.isDoubleClicked()) {
+			if (m_isModifiable && it.first.isDoubleClicked()) {
 				m_core->removeSpell(it.first.getNr());
 				m_requireReload = true;
 			}
@@ -154,7 +154,7 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 			it2.update(frameTime);
 			if (it2.isClicked()) {
 				selectModifierSlot(&it2);
-				if (it2.isDoubleClicked()) {
+				if (m_isModifiable && it2.isDoubleClicked()) {
 					m_core->removeModifier(it2.getSpellSlotNr(), it2.getNr());
 					m_requireReload = true;
 				}
@@ -168,9 +168,9 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 		}
 	}
 
-	if (!m_isModifiable) return;
-
-	handleDragAndDrop();
+	if (m_isModifiable) {
+		handleDragAndDrop();
+	}
 
 	m_window->update(frameTime);
 }
