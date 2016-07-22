@@ -252,6 +252,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_zeffssword', 'item_desc', 'This oversized knife belonged to the leatherworker Zeff.','Dieses übergrosse Messer gehörte dem Lederer Zeff.','Da übergrosse Messer het em Lederer Zeff ghört.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item', 'Mace of the Order','Streitkolben des Ordens','Striitcholbe vom Orde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item_desc', 'This weapon is mostly used by Paladins of the Order.','Diese Waffe wird meistens von den Paladinen des Ordens getragen.', 'Die Waffe wird meistens vo de Paladin vom Orde treit.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_tearstaff', 'item', 'Tear Staff','Tränenstab','Tränestab');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_tearstaff', 'item_desc', 'A tear shaped aquamarine decorates the head of this staff.','Ein tränenförmiger Aquamarin ziert den Kopf dieses Stabes.', 'En träneförmige Aquamarin ziert de Chopf vo dem Stab.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firestaff', 'item', 'Fire Staff','Feuerstab','Füürstab');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firestaff', 'item_desc', 'The ruby stone reflects different shades of red.','Der grosse Rubinkopf leuchtet in warmen Rottönen.', 'De gross Rubinchopf lüüchtet in warme Rottön.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('sp_light', 'item', 'Scroll - Light','Schriftrolle - Licht','Schriftrolle - Liecht');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('sp_light', 'item_desc', 'There shall be light!','Es werde Licht!','Chasch chli heller mache, bitte?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_test_1', 'item', 'Test Key 1','Test Schlüssel 1','Test Schlüssel 1');

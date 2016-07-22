@@ -87,7 +87,7 @@ Daniel Josephy Hernandez
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernandez, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
-Milan Bombsch
+Milan Bombsch, Rafael Häuselmann, Nick Pützer
 
 ---
 
@@ -210,7 +210,7 @@ Daniel Josephy Hernandez
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernandez, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
-Milan Bombsch
+Milan Bombsch, Rafael Häuselmann, Nick Pützer
 
 ---
 
@@ -335,7 +335,7 @@ Daniel Josephy Hernandez
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernandez, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
-Milan Bombsch
+Milan Bombsch, Rafael Häuselmann, Nick Pützer
 
 ---
 
