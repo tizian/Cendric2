@@ -2,6 +2,7 @@
 
 onDeath = function(B, W)
 		B:say("Argh", 4)
+		W:addConditionProgress("boss", "BossZeff")
 		if (W:isQuestState("zeffs_curse", "started")) then
 			W:changeQuestState("zeffs_curse", "failed")
 		end

@@ -37,7 +37,6 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("addHint", &ScriptedBehaviorCallback::addHint)
 		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
 		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
-		.addFunction("addConditionProgress", &ScriptedBehaviorCallback::addConditionProgress)
 		.endClass();
 
 	if (luaL_dofile(m_L, getResourcePath(path).c_str()) != 0) {
@@ -66,14 +65,6 @@ void ScriptedBehaviorCallback::setDisposed() {
 
 void ScriptedBehaviorCallback::leaveLevel() {
 	m_enemy->setDisposed();
-}
-
-void ScriptedBehaviorCallback::addConditionProgress(const std::string& conditionType, const std::string& condition) {
-	if (condition.empty() || conditionType.empty()) {
-		g_logger->logError("ScriptedBehaviorCallback", "Condition and condition type cannot be empty.");
-		return;
-	}
-	dynamic_cast<WorldScreen*>(m_enemy->getScreen())->notifyConditionAdded(conditionType, condition);
 }
 
 void ScriptedBehaviorCallback::setMovingTarget(int x, int y) {

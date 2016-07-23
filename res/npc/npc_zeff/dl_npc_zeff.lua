@@ -107,8 +107,8 @@ loadDialogue = function(DL)
 		
 	end
 	
-	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and DL:isQuestState("zeffs_curse", "void")) then
-		
+	if (DL:isQuestState("hungry_wolf", "completed") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and DL:isQuestState("zeffs_curse", "void")) then
+
 		DL:createNPCNode(40, 41, "DL_Zeff_HelpCurse") -- Maybe. If you are brave enough, you can go and try to kill that thing. Killing the creator of a curse will break it in most cases.
 		DL:addNode()
 		

@@ -17,7 +17,6 @@ struct TriggerData {
 	bool isTriggerable = false;
 	// a trigger condition, saved with the conditionkey "trigger". For now, only can be set.
 	std::string condition; 
-
 	// the content of this trigger, will get executed on trigger.
 	std::vector<TriggerContent> content;
 };

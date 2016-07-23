@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="222">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="223">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -1389,8 +1389,14 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
+  <object id="222" x="3351.12" y="2940" width="43.75" height="36">
+   <properties>
+    <property name="map entry" value="res/map/gandria/gandria.tmx,690,700"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup name="light" visible="0">
   <object id="49" x="2195.75" y="793.75" width="254.25" height="207.25">
    <ellipse/>
   </object>

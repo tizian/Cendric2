@@ -85,19 +85,13 @@ void MapOverlay::update(const sf::Time& frameTime) {
 		m_fogOfWarTileMap.updateFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
 	}
 
-	
-
 	m_mainCharMarker.setPosition(m_position + 
 		m_screen->getMainCharacter()->getCenter() * m_scale - sf::Vector2f(12.5f, 12.5f));
 
 	for (auto& wp : m_waypoints) {
 		wp->update(frameTime);
 	}
-
-	if (g_inputController->isMouseOver(&m_boundingBox, true)) {
-		g_inputController->lockAction();
-	}
-
+	
 	m_window->update(frameTime);
 } 
 

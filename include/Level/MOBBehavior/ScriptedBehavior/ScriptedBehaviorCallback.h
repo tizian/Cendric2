@@ -36,9 +36,6 @@ public:
 	void leaveLevel();
 	// adds a hint to the screen
 	void addHint(const std::string& hint);
-	// sets a certain condition fulfilled
-	void addConditionProgress(const std::string& conditionType, const std::string& condition);
-
 	bool isLoaded() const;
 
 private:

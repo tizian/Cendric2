@@ -5,10 +5,9 @@
 sf::RenderWindow* g_renderWindow;
 
 Game::Game() {
+	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	reloadWindow();
 
-	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
 	m_cursor.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
 	
@@ -39,6 +38,8 @@ void Game::reloadWindow() {
 	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
 	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
+
+	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
 
 	g_resourceManager->getConfiguration().isWindowReload = false;
 

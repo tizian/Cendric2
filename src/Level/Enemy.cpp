@@ -378,8 +378,6 @@ void Enemy::setDead() {
 	}
 
 	if (m_isBoss) {
-		m_screen->getCharacterCore()->setConditionFulfilled("boss", EnumNames::getEnemyName(getEnemyID()));
-
 		// loot (but without set disposed)
 		m_mainChar->lootItems(m_lootableItems);
 		m_mainChar->addGold(m_lootableGold);
