@@ -257,10 +257,24 @@ INSERT INTO item_attribute (item_id, dmg_shadow) values ('eq_eyeofthemoon', 10);
 
 -- Silver Necklace
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_silvernecklace', 'item', 'Silver Necklace','Silberne Halskette','Silbrigi Halskette');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_silvernecklace', 'item', 'Silver Necklace','Silberne Halskette','Silbrigi Halschette');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_silvernecklace', 'item_desc', 'The small chain links shine.','Die kleinen Kettenglieder glänzen.','Di chliine Ketteglider glänzed.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_silvernecklace', 'eq_neck', 350, 200, 10);
 INSERT INTO item_attribute (item_id, res_fire, critical) values ('eq_silvernecklace', 5, 1);
+
+-- Ruby Necklace
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubynecklace', 'item', 'Ruby Necklace','Rubinhalskette','Rubinhalschette');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubynecklace', 'item_desc', '...','...','...');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_rubynecklace', 'eq_neck', 550, 300, 50);
+INSERT INTO item_attribute (item_id, dmg_fire, critical) values ('eq_rubynecklace', 7, 1);
+
+-- Star Talisman
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_startalisman', 'item', 'Star Talisman','Sternentalisman','Sterne Talisman');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_startalisman', 'item_desc', '...','...','...');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_startalisman', 'eq_neck', 550, 250, 50);
+INSERT INTO item_attribute (item_id, dmg_ice, critical) values ('eq_startalisman', 7, 1);
 
 -- Light-Touched Pendant
 

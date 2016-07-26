@@ -81,6 +81,20 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_brokenstaff1', 0, -20, 50, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_brokenstaff1', 1, 300, 150, 50, 100);
 
+-- Broken Staff Head (part 2 of the broken staff)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff2', 'item', 'Broken Staff Head','Zerbrochener Stabkopf','Kabutte Stabchopf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff2', 'item_desc', 'Seems like a part of a staff. Maybe I can find someone who can repair it.','Scheint ein Stück eines Stabes zu sein. Vielleicht finde ich jemanden, der das reparieren kann.','Da isch glaub es Stück vomne Stab. Vilicht chani öpper finde, wo das flicke chan.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_brokenstaff2', 'misc', 550, 0, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_brokenstaff2', 0, -20, 50, 40);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_brokenstaff2', 1, 400, 250, 50, 100);
+
+-- Tear Stone (part 3 of the broken staff)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff3', 'item', 'Tear Stone','Tränenstein','Tränestei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff3', 'item_desc', 'A tear-shaped stone which focuses magic energy around it. Would fit perfectly into a staff head.','Ein tränenförmiger Stein, der die Magie um sich herum konzentriert. Er würde perfekt in einen Stabkopf passen.','En träneförmige Stei wo d''Magie um sich konzentriert. Er wür perfekt inen Stabchopf passe.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_brokenstaff3', 'misc', 550, 50, -1);
+
 -- Heart of the First Guardian
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firstguardianheart', 'item', 'Heart of Khajag','Herz von Khajag','Herz vom Khajag');

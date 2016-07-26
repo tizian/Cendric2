@@ -36,6 +36,8 @@ item.id:eq_huntershat,1
 item.id:eq_ironring,1
 item.id:eq_leatherarmor,1
 item.id:eq_lightpendant,1
+item.id:eq_rubynecklace,1
+item.id:eq_startalisman,1
 item.id:eq_nekomataback,1
 item.id:eq_nekomatahead,1
 item.id:eq_oversizedhat,1
@@ -51,6 +53,9 @@ item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
 item.id:fo_devilberry,1
+item.id:fo_redhat,1
+item.id:fo_windrose,1
+item.id:fo_stormweed,1
 item.id:fo_cheese,6
 item.id:fo_fishsoup,1
 item.id:fo_glowingshroom,2
@@ -68,6 +73,8 @@ item.id:fo_water,1
 item.id:fo_wine,1
 item.id:fo_milk,1
 item.id:mi_brokenstaff1,1
+item.id:mi_brokenstaff2,1
+item.id:mi_brokenstaff3,1
 item.id:mi_candleholder,1
 item.id:mi_feather,1
 item.id:mi_gargoyle_dust,1

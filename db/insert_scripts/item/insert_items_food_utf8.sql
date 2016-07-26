@@ -40,13 +40,23 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Cave Berries
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item', 'Cave berries','Höhlenbeeren','Höhlebeeri');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item', 'Cave Berries','Höhlenbeeren','Höhlebeeri');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item_desc', 'Sweet, but its pip is poisonous.','Süss aber der Kern ist giftig.','Süess aber de Chern isch giftig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_caveberry', 'consumable', 500, 0, 3);
 INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_shadow, res_light) values ('fo_caveberry', -1, 5, 5, 3);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_caveberry', 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_caveberry', 0, -35, 50, 70);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_caveberry', 1, 0, 0, 50, 100);
+
+-- Wind Rose
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_windrose', 'item', 'Wind Rose','Windrose','Windrose');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_windrose', 'item_desc', 'A rare herb that grants incredible reflexes when eaten.','Ein seltenes Kraut das unglaubliche Reflexe gewährt wenn man es verzehrt.','Es seltenigs Chrütli wo eim unglaublichi Reflex git wenmes isst.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_windrose', 'consumable', 550, 100, 20);
+INSERT INTO item_attribute (item_id, haste) values ('fo_windrose', 50);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_windrose', 15);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_windrose', -10, -25, 40, 75);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_windrose', 1, 450, 50, 50, 100);
 
 -- Devil's Berry
 
@@ -57,6 +67,26 @@ INSERT INTO item_attribute (item_id, health_regeneration, res_physical, res_fire
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_devilberry', 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_devilberry', -13, -10, 34, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_devilberry', 1, 150, 200, 50, 50);
+
+-- Storm Weed
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_stormweed', 'item', 'Storm Weed', 'Sturmkraut', 'Sturm Chruut');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_stormweed', 'item_desc', 'Is only fully effective as a component of a potion.', 'Entfaltet seine volle Wirkung erst als Zutat eines Trankes.', 'Entfaltet sini voll Würkig erst als Zuetat vomne Trank.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_stormweed', 'consumable', 550, 150, 5);
+INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_stormweed', 1);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_stormweed', 10);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_stormweed', 0, 0, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_stormweed', 1, 450, 150, 50, 50);
+
+-- Red Hat
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_redhat', 'item', 'Red Hat', 'Rotkappe', 'Rotchappe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_redhat', 'item_desc', 'Mildly toxic.', 'Leicht giftig.', 'Liecht giftig.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_redhat', 'consumable', 550, 200, 4);
+INSERT INTO item_attribute (item_id, health_regeneration, critical) values ('fo_redhat', -1, 8);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_redhat', 20);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_redhat', -15, -20, 30, 30);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_redhat', 1, 450, 200, 50, 50);
 
 -- Milk
 
@@ -185,6 +215,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_wine', 'consumable', 400, 50, 10);
 INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_ice, dmg_light, dmg_fire, dmg_shadow) values ('fo_wine', -1, 10, 5, 5, 5, 5);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_wine', 15);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_wine', -15, -10, 20, 40);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_wine', 1, 450, 250, 50, 50);
 
 -- Beer
 
