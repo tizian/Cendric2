@@ -371,6 +371,12 @@ void WeaponWindow::equipSpell(const SpellSlot* spellSlot) {
 	bool isEquipped = false;
 	SpellType type = spellSlot->getSpellType();
 	for (auto& slot : m_weaponSlots) {
+		if (slot.first.getSpellID() == spellSlot->getSpellID()) {
+			// spell already equipped.
+			return;
+		}
+	}
+	for (auto& slot : m_weaponSlots) {
 		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType())
 			&& slot.first.isEmpty()) {
 			m_core->addSpell(spellSlot->getSpellID(), slot.first.getNr());

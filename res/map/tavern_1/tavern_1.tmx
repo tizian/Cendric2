@@ -113,25 +113,21 @@
  <objectgroup name="npc">
   <object id="125" gid="367" x="874" y="550" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="500,250"/>
     <property name="id" value="npc_innkeeper"/>
    </properties>
   </object>
   <object id="147" gid="368" x="542" y="430" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="0,500"/>
     <property name="id" value="npc_vincent"/>
    </properties>
   </object>
   <object id="148" gid="369" x="316" y="555" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="750,250"/>
     <property name="id" value="npc_thea"/>
    </properties>
   </object>
   <object id="149" gid="370" x="322" y="489" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="250,500"/>
     <property name="id" value="npc_andrew"/>
    </properties>
   </object>

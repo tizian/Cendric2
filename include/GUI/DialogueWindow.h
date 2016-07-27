@@ -71,7 +71,6 @@ private:
 	std::string m_npcName;
 	std::string m_npcID;
 	std::string m_dialogueTextID;
-	sf::IntRect m_npcTexturePosition;
 
 	Dialogue* m_dialogue = nullptr;
 	BitmapText* m_dialogueText = nullptr;

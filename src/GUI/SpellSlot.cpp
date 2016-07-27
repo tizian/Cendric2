@@ -191,9 +191,7 @@ void SpellSlot::update(const sf::Time& frameTime) {
 
 		}
 	}
-	m_isClicked = false;
-	m_isRightClicked = false;
-	GameObject::update(frameTime);
+	Slot::update(frameTime);
 }
 
 void SpellSlot::select() {

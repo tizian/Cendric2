@@ -92,7 +92,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Tear Stone (part 3 of the broken staff)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff3', 'item', 'Tear Stone','Tränenstein','Tränestei');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff3', 'item_desc', 'A tear-shaped stone which focuses magic energy around it. Would fit perfectly into a staff head.','Ein tränenförmiger Stein, der die Magie um sich herum konzentriert. Er würde perfekt in einen Stabkopf passen.','En träneförmige Stei wo d''Magie um sich konzentriert. Er wür perfekt inen Stabchopf passe.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff3', 'item_desc', 'A tear shaped stone which focuses magic energy around it. Would fit perfectly into a staff head.','Ein tränenförmiger Stein, der die Magie um sich herum konzentriert. Er würde perfekt in einen Stabkopf passen.','En träneförmige Stei wo d''Magie um sich konzentriert. Er wür perfekt inen Stabchopf passe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_brokenstaff3', 'misc', 550, 50, -1);
 
 -- Heart of the First Guardian

@@ -11,12 +11,13 @@ struct NPCData {
 	sf::FloatRect boundingBox;
 	std::string spritesheetpath;
 	std::string routineID;
+	
 
 	// dialogue
 	bool talkingActive; // the npc will talk without being clicked at when in range
 	bool talkingEnabled; // cendric can talk to the npc
 	std::string dialogueID;
-	sf::IntRect dialogueTexturePositon;
+	std::string dialoguetexture;
 	std::string textType;
 
 	void calculateDefaultFromID();
@@ -34,6 +35,6 @@ const struct NPCData DEFAULT_NPC =
 	false,
 	true,
 	"",
-	sf::IntRect(0, 0, 250, 250), // that's cendrics dialogue sprite
+	"",
 	""
 };

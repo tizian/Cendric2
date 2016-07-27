@@ -10,6 +10,7 @@ NPC::NPC(MapScreen* mapScreen) : MapMovableGameObject(mapScreen->getWorld()) {
 
 void NPC::load(const NPCData& data) {
 	g_resourceManager->loadTexture(data.spritesheetpath, ResourceType::Map);
+	
 	const sf::Texture* tex = g_resourceManager->getTexture(data.spritesheetpath);
 	m_NPCdata = data;
 	setBoundingBox(data.boundingBox);

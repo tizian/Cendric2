@@ -47,7 +47,7 @@ public:
 	// commands to spawn entities
 
 	// this works only on a map
-	void spawnNPC(const std::string& npcID, int x, int y, int dialogue_x, int dialogue_y) const;
+	void spawnNPC(const std::string& npcID, int x, int y) const;
 	// this works only in a level
 	void spawnEnemy(int enemyID, int x, int y) const;
 

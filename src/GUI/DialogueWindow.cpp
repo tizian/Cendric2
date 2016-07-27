@@ -8,7 +8,6 @@
 
 using namespace std;
 
-const sf::IntRect CENDRIC_TEX_POS = sf::IntRect(0, 0, 250, 250);
 const std::string CENDRIC_NAME = "Cendric";
 
 const float DialogueWindow::LEFT_OFFSET = 270.f;	// offset to have space for sprite
@@ -32,7 +31,6 @@ const float DialogueWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_CO
 
 DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE)));
-	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
 
 	m_speakerText = new BitmapText("");
 	m_speakerText->setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
@@ -70,6 +68,8 @@ DialogueWindow::~DialogueWindow() {
 }
 
 void DialogueWindow::load(NPC* npc, WorldScreen* screen) {
+	g_resourceManager->loadTexture(npc->getNPCData().dialoguetexture, ResourceType::Map);
+
 	setNPC(npc);
 	setDialogue(npc->getNPCData().dialogueID, screen);
 }
@@ -90,7 +90,6 @@ void DialogueWindow::setDialogue(const std::string& dialogueID, WorldScreen* scr
 
 void DialogueWindow::setNPC(NPC* npc) {
 	m_npc = npc;
-	m_npcTexturePosition = m_npc->getNPCData().dialogueTexturePositon;
 	m_npcID = m_npc->getNPCData().id;
 	m_dialogueTextID = m_npc->getNPCData().textType;
 	m_npcName = g_textProvider->getText(m_npcID, "npc");
@@ -98,14 +97,14 @@ void DialogueWindow::setNPC(NPC* npc) {
 
 void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
-	m_speakerSprite.setTextureRect(m_npcTexturePosition);
+	m_speakerSprite.setTexture(*g_resourceManager->getTexture(m_npc->getNPCData().dialoguetexture));
 	m_speakerText->setString(m_npcName);
 	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH)));
 }
 
 void DialogueWindow::setCendricTalking(const std::string& text) {
 	m_options.clear();
-	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
+	m_speakerSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE));
 	m_speakerText->setString(CENDRIC_NAME);
 	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH)));
 }
@@ -124,7 +123,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, 
 	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 	m_dialogueText->setString("");
-	m_speakerSprite.setTextureRect(CENDRIC_TEX_POS);
+	m_speakerSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE));
 	m_speakerText->setString(CENDRIC_NAME);
 	for (size_t i = 0; i < choices.size(); ++i) {
 		DialogueOption option(choices[i].first, m_dialogueTextID, choices[i].second == -1);

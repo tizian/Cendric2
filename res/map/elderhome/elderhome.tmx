@@ -264,7 +264,6 @@
  <objectgroup name="npc">
   <object id="125" gid="366" x="549" y="446" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="250,250"/>
     <property name="id" value="npc_rhendal"/>
    </properties>
   </object>

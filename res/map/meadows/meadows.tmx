@@ -1212,56 +1212,48 @@
  <objectgroup name="npc">
   <object id="51" gid="1314" x="2231" y="936" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="750,0"/>
     <property name="id" value="npc_edmond"/>
    </properties>
   </object>
   <object id="62" gid="1315" x="2292" y="1694" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="0,250"/>
     <property name="id" value="npc_ingrid"/>
    </properties>
   </object>
   <object id="138" gid="1321" x="2203" y="2656" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="500,500"/>
     <property name="id" value="npc_inina"/>
    </properties>
   </object>
   <object id="182" gid="1322" x="2280" y="2752" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="750,500"/>
     <property name="id" value="npc_paladin1"/>
    </properties>
   </object>
   <object id="183" gid="1323" x="2163" y="2752" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="0,750"/>
     <property name="id" value="npc_paladin2"/>
    </properties>
   </object>
   <object id="184" gid="1324" x="277" y="3231" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="750,750"/>
     <property name="id" value="npc_tristan"/>
    </properties>
   </object>
   <object id="185" gid="1325" x="835" y="3119" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="500,750"/>
     <property name="id" value="npc_ivo"/>
    </properties>
   </object>
   <object id="186" gid="1326" x="313" y="3110" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="250,750"/>
     <property name="id" value="npc_sheep1"/>
    </properties>
   </object>
   <object id="187" gid="1326" x="211" y="3059" width="50" height="50">
    <properties>
     <property name="dialogueid" value="res/npc/npc_sheep1/dl_npc_sheep1.lua"/>
-    <property name="dialoguetexture" value="250,750"/>
+    <property name="dialoguetexture" value="res/npc/npc_sheep1/npc_sheep1.png"/>
     <property name="id" value="npc_sheep2"/>
     <property name="spritesheetpath" value="res/npc/npc_sheep1/spritesheet_npc_sheep1.png"/>
     <property name="texttype" value="dl_npc_sheep1"/>
@@ -1269,20 +1261,17 @@
   </object>
   <object id="189" gid="1327" x="1100" y="1050" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="0,1000"/>
     <property name="id" value="npc_zeff"/>
    </properties>
   </object>
   <object id="190" gid="1328" x="3300" y="3035" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="250,1000"/>
     <property name="id" value="npc_cityguard1"/>
    </properties>
   </object>
   <object id="191" gid="1329" x="3395" y="3035" width="50" height="50">
    <properties>
     <property name="dialogueid" value="res/npc/npc_cityguard1/dl_npc_cityguard1.lua"/>
-    <property name="dialoguetexture" value="500,1000"/>
     <property name="id" value="npc_cityguard2"/>
     <property name="texttype" value="dl_npc_cityguard1"/>
    </properties>

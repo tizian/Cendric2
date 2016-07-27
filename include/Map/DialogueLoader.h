@@ -56,6 +56,7 @@ public:
 	void setRoot(int tag);
 
 private:
+	int m_root = -1;
 	Dialogue& m_dialogue;
 	WorldCallback* m_worldCallback;
 	DialogueNode* m_currentNode = nullptr;

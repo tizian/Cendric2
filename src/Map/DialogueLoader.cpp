@@ -67,6 +67,8 @@ void DialogueLoader::loadDialogue() {
 	catch (LuaException const& e) {
 		g_logger->logError("DialogeLoader", "LuaException: " + std::string(e.what()));
 	}
+	
+	m_dialogue.setRoot(m_root);
 }
 
 void DialogueLoader::addChoice(int nextTag, const std::string& text) {
@@ -283,7 +285,7 @@ void DialogueLoader::addNode() {
 		g_logger->logWarning("DialogueLoader", "Loop detected in dialogue. Tag cannot equal next tag.");
 	}
 	if (m_currentNode->tag < 0) {
-		g_logger->logWarning("DialogueLoader", "Tag of node should not be negative. -1 is reserved to end a dialogue.");
+		g_logger->logWarning("DialogueLoader", "Tag of node should not be negative. -1 and -2 are reserved to end a dialogue.");
 	}
 	m_dialogue.addNode(m_currentNode->tag, *m_currentNode);
 	delete m_currentNode;
@@ -291,5 +293,5 @@ void DialogueLoader::addNode() {
 }
 
 void DialogueLoader::setRoot(int tag) {
-	m_dialogue.setRoot(tag);
+	m_root = tag;
 }

@@ -19,7 +19,7 @@ void Dialogue::reload(const std::string& id, WorldScreen* screen, DialogueWindow
 }
 
 void Dialogue::addNode(int tag, const DialogueNode& node) {
-	if (m_nodes.find(tag) != m_nodes.end()) {
+	if (hasNode(tag)) {
 		g_logger->logWarning("Dialogue", "Node with tag [" + std::to_string(tag) + "] already exists in the dialogoue tree.");
 		return;
 	}
@@ -56,15 +56,19 @@ bool Dialogue::updateWindow() {
 	return true;
 }
 
+bool Dialogue::hasNode(int tag) const {
+	return m_nodes.find(tag) != m_nodes.end();
+}
+
 void Dialogue::setRoot(int root) {
-	if (m_nodes.find(root) == m_nodes.end()) {
+	if (!hasNode(root)) {
 		g_logger->logWarning("Dialogue", "Node with tag [" + std::to_string(root) + "] does not exist in the tree and cannot be set as root.");
 		return;
 	}
 	m_currentNode = &m_nodes[root];
 }
 
-bool Dialogue::isEndable() {
+bool Dialogue::isEndable() const {
 	if (m_currentNode == nullptr) return true;
 
 	if (m_currentNode->choices.empty() && m_currentNode->nextTag == -1) {
@@ -92,7 +96,7 @@ void Dialogue::setNextNode(int choice) {
 	if (nextNode == -2 || m_currentNode->reloadTag > -1) {
 		int nextTag = m_currentNode->reloadTag > -1 ? m_currentNode->reloadTag : m_currentNode->nextTag;
 		reload(m_id, m_screen, m_window);
-		if (nextTag > -1 && m_nodes.find(nextTag) != m_nodes.end()) {
+		if (nextTag > -1 && hasNode(nextTag)) {
 			setRoot(nextTag);
 		}
 		updateWindow();

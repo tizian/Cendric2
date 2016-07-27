@@ -115,6 +115,9 @@ void Slot::onLeftJustPressed() {
 	m_isClicked = true;
 	if (m_doubleClickTime > sf::Time::Zero) {
 		m_isDoubleClicked = true;
+		m_doubleClickTime = sf::Time::Zero;
+		g_inputController->lockAction();
+		return;
 	}
 	m_doubleClickTime = DOUBLE_CLICK_TIME;
 	g_inputController->lockAction();

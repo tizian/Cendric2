@@ -164,7 +164,7 @@ void WorldCallback::startCutscene(const std::string& cutsceneID) const {
 	TriggerContent::executeTrigger(TriggerContent::startCutscene(cutsceneID), m_screen);
 }
 
-void WorldCallback::spawnNPC(const std::string& npcID, int x, int y, int dialogue_x, int dialogue_y) const {
+void WorldCallback::spawnNPC(const std::string& npcID, int x, int y) const {
 	MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);
 	if (mapScreen == nullptr) {
 		g_logger->logError("WorldCallback", "A npc can only be spawned on a map.");
@@ -176,8 +176,6 @@ void WorldCallback::spawnNPC(const std::string& npcID, int x, int y, int dialogu
 	data.calculateDefaultFromID();
 	data.position.x = static_cast<float>(x);
 	data.position.y = static_cast<float>(y);
-	data.dialogueTexturePositon.left = dialogue_x;
-	data.dialogueTexturePositon.top = dialogue_y;
 
 	NPC* mapNPC = new NPC(mapScreen);
 	mapNPC->setScreen(mapScreen);

@@ -480,13 +480,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
 						return false;
 					}
-					std::string tex = textAttr;
-
-					size_t pos = 0;
-					if ((pos = tex.find(",")) == std::string::npos) return false;
-					npc.dialogueTexturePositon.left = std::stoi(tex.substr(0, pos));
-					tex.erase(0, pos + 1);
-					npc.dialogueTexturePositon.top = std::stoi(tex);
+					npc.dialoguetexture = textAttr;
 				}
 				else if (attrText.compare("boundingbox") == 0) {
 					textAttr = nullptr;

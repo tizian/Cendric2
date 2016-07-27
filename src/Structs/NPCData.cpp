@@ -13,4 +13,7 @@ void NPCData::calculateDefaultFromID() {
 
 	if (textType.empty())
 		textType = "dl_" + id;
+
+	if (dialoguetexture.empty())
+		dialoguetexture = GlobalResource::NPC_FOLDER + id + "/" + id + ".png";
 }

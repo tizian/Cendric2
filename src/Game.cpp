@@ -64,7 +64,7 @@ void Game::run() {
 		deltaTime = frameClock.restart();
 		while (m_mainWindow.pollEvent(e)) {
 			if (e.type == sf::Event::Closed) {
-				m_running = false;
+				m_screenManager->requestQuit();
 			}
 			else if (e.type == sf::Event::Resized) {
 				g_inputController->setCurrentWindowSize(e.size.width, e.size.height);

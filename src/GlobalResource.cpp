@@ -37,7 +37,7 @@ const std::string GlobalResource::TEX_EQUIPMENTPLACEHOLDERS = "res/assets/misc/s
 const std::string GlobalResource::TEX_GEMS = "res/assets/misc/spritesheet_gems.png";
 
 const std::string GlobalResource::TEX_MAPMARKERS = "res/assets/misc/spritesheet_mapmarkers.png";
-const std::string GlobalResource::TEX_DIALOGUE = "res/assets/dialogue/spritesheet_dialogue.png";
+const std::string GlobalResource::TEX_DIALOGUE = "res/assets/cendric/cendric.png";
 const std::string GlobalResource::TEX_COOKING = "res/assets/misc/sprite_cooking.png";
 const std::string GlobalResource::SOUND_TELEPORT = "res/sound/tile/teleport.ogg";
 
