@@ -50,6 +50,14 @@ file(GLOB_RECURSE SQLiteShell_FILES
 	"${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
 )
 
+file(GLOB_RECURSE DialogueTool_FILES
+	"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include/*.h"
+	"${PROJECT_SOURCE_DIR}/tools/DialogueTool/src/*.cpp"
+	"${PROJECT_SOURCE_DIR}/ext/imgui/imgui.cpp"
+	"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_draw.cpp"
+	"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_demo.cpp"
+	"${PROJECT_SOURCE_DIR}/ext/imgui-sfml/imgui-SFML.cpp"
+)
 
 if (WIN32)
 	add_executable(Cendric
@@ -84,4 +92,7 @@ endif()
 
 if (WIN32)
 	add_executable(SQLiteShell ${SQLiteShell_FILES})
+	add_executable(DialogueTool ${DialogueTool_FILES})
+	
+	target_link_libraries(DialogueTool sfml-system sfml-graphics sfml-window)
 endif()
