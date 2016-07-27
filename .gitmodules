@@ -4,9 +4,6 @@
 [submodule "ext/imgui"]
 	path = ext/imgui
 	url = git://github.com/ocornut/imgui.git
-[submodule "ext/glfw"]
-	path = ext/glfw
-	url = git://github.com/glfw/glfw.git
 [submodule "ext/imgui-sfml"]
 	path = ext/imgui-sfml
 	url = git://github.com/eliasdaler/imgui-sfml.git
