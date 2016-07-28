@@ -1,10 +1,12 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 
 project(Cendric)
 
 set(CMAKE_BUILD_TYPE Release)
 
 option(CENDRIC_APPLE_BUILD_APP_BUNDLE "Build .app bundle on Mac platform?" OFF)
+option(BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
+option(BUILD_DIALOGUE_TOOL "Build Dialogue Tool?" ON)
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
 
@@ -30,12 +32,6 @@ if (MSVC)
   add_definitions (/D "_CRT_SECURE_NO_WARNINGS")
 endif()
 
-include_directories(
-	"${PROJECT_SOURCE_DIR}/ext/sfml/include"
-	"${PROJECT_SOURCE_DIR}/ext"
-	"${PROJECT_SOURCE_DIR}/include"
-)
-
 file(GLOB_RECURSE Cendric_FILES
 	"${PROJECT_SOURCE_DIR}/include/*.h"
 	"${PROJECT_SOURCE_DIR}/src/*.cpp"
@@ -43,20 +39,6 @@ file(GLOB_RECURSE Cendric_FILES
 	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
 	"${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
 	"${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
-)
-
-file(GLOB_RECURSE SQLiteShell_FILES
-	"${PROJECT_SOURCE_DIR}/ext/sqlite/*.c"
-	"${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
-)
-
-file(GLOB_RECURSE DialogueTool_FILES
-	"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include/*.h"
-	"${PROJECT_SOURCE_DIR}/tools/DialogueTool/src/*.cpp"
-	"${PROJECT_SOURCE_DIR}/ext/imgui/imgui.cpp"
-	"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_draw.cpp"
-	"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_demo.cpp"
-	"${PROJECT_SOURCE_DIR}/ext/imgui-sfml/imgui-SFML.cpp"
 )
 
 if (WIN32)
@@ -85,14 +67,48 @@ set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
 target_link_libraries(Cendric sfml-system sfml-window sfml-graphics sfml-audio)
 
+target_include_directories(Cendric PRIVATE 
+	"${PROJECT_SOURCE_DIR}/ext/sfml/include"
+	"${PROJECT_SOURCE_DIR}/ext"
+	"${PROJECT_SOURCE_DIR}/include"
+)
+
 if (APPLE)
 	set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/info.plist)
 	set_source_files_properties(res/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 endif()
 
-if (WIN32)
+if (WIN32 AND BUILD_SQLITE_SHELL)
+
+	file(GLOB_RECURSE SQLiteShell_FILES
+		"${PROJECT_SOURCE_DIR}/ext/sqlite/*.c"
+		"${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
+	)
+
 	add_executable(SQLiteShell ${SQLiteShell_FILES})
+	
+endif()
+
+if (BUILD_DIALOGUE_TOOL)
+
+	file(GLOB_RECURSE DialogueTool_FILES
+		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include/*.h"
+		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/src/*.cpp"
+		"${PROJECT_SOURCE_DIR}/ext/imgui/imgui.cpp"
+		"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_draw.cpp"
+		"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_demo.cpp"
+		"${PROJECT_SOURCE_DIR}/ext/imgui-sfml/imgui-SFML.cpp"
+	)
+
 	add_executable(DialogueTool ${DialogueTool_FILES})
 	
 	target_link_libraries(DialogueTool sfml-system sfml-graphics sfml-window)
+	
+	target_include_directories(DialogueTool PRIVATE 
+		"${PROJECT_SOURCE_DIR}/ext/sfml/include"
+		"${PROJECT_SOURCE_DIR}/ext/imgui"
+		"${PROJECT_SOURCE_DIR}/ext/imgui-sfml"
+		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include"
+	)
+
 endif()
