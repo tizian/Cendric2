@@ -15,3 +15,10 @@
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 #define IM_MAX(_A,_B)       (((_A) >= (_B)) ? (_A) : (_B))
+
+// extern objects
+class ApplicationState;
+extern ApplicationState* g_state;
+
+#define G_DIA g_state->getDialogue()
+#define G_CONF g_state->getConfiguration()

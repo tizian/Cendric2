@@ -1,5 +1,6 @@
 #include "DialogueTool.h"
-#include "MainWindow.h"
+#include "GUI/MainWindow.h"
+#include "ApplicationState.h"
 
 void DialogueTool::run() {
 
@@ -13,23 +14,27 @@ void DialogueTool::run() {
 
 	// run
 	sf::Clock deltaClock;
-	while (window.isOpen()) {
+	bool isRunning = true;
+	while (isRunning) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			ImGui::SFML::ProcessEvent(event);
 
 			if (event.type == sf::Event::Closed) {
-				window.close();
+				isRunning = false;
 			}
 		}
 
 		ImGui::SFML::Update(deltaClock.restart());
-
+		
 		mainWindow.update();
 		window.clear();
 		mainWindow.render();
 		window.display();
+
+		isRunning = isRunning && !g_state->isQuitRequested();
 	}
 
+	window.close();
 	ImGui::SFML::Shutdown();
 }
