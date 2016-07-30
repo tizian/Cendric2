@@ -3,6 +3,9 @@
 #include "global.h"
 
 class Toolbar;
+class TreeWindow;
+class ErrorWindow;
+class NodeWindow;
 
 // top level controller over the main window
 // holds the toolbar, the tree window and the node windows
@@ -16,4 +19,7 @@ public:
 
 private:
 	Toolbar* m_toolbar;
+	TreeWindow* m_treeWindow;
+	ErrorWindow* m_errorWindow;
+	NodeWindow* m_nodeWindow;
 };

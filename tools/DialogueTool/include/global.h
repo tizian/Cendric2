@@ -9,6 +9,7 @@
 
 #ifdef _WIN32
 #define IM_NEWLINE "\r\n"
+#include <direct.h>
 #else
 #define IM_NEWLINE "\n"
 #endif
@@ -22,3 +23,11 @@ extern ApplicationState* g_state;
 
 #define G_DIA g_state->getDialogue()
 #define G_CONF g_state->getConfiguration()
+#define ERROR(_MSG) g_state->setError(_MSG)
+
+inline std::string tabs(int count) {
+	if (count < 1) return "";
+	std::string s;
+	while (count--) { s += "\t"; }
+	return s;
+}

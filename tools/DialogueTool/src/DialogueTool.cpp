@@ -28,7 +28,7 @@ void DialogueTool::run() {
 		ImGui::SFML::Update(deltaClock.restart());
 		
 		mainWindow.update();
-		window.clear();
+		window.clear(sf::Color(50, 50, 60));
 		mainWindow.render();
 		window.display();
 

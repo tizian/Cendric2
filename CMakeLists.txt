@@ -5,8 +5,8 @@ project(Cendric)
 set(CMAKE_BUILD_TYPE Release)
 
 option(CENDRIC_APPLE_BUILD_APP_BUNDLE "Build .app bundle on Mac platform?" OFF)
-option(BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
-option(BUILD_DIALOGUE_TOOL "Build Dialogue Tool?" ON)
+option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
+option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool?" ON)
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
 
@@ -78,7 +78,7 @@ if (APPLE)
 	set_source_files_properties(res/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 endif()
 
-if (WIN32 AND BUILD_SQLITE_SHELL)
+if (WIN32 AND CENDRIC_BUILD_SQLITE_SHELL)
 
 	file(GLOB_RECURSE SQLiteShell_FILES
 		"${PROJECT_SOURCE_DIR}/ext/sqlite/*.c"
@@ -89,7 +89,7 @@ if (WIN32 AND BUILD_SQLITE_SHELL)
 	
 endif()
 
-if (BUILD_DIALOGUE_TOOL)
+if (CENDRIC_BUILD_DIALOGUE_TOOL)
 
 	file(GLOB_RECURSE DialogueTool_FILES
 		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include/*.h"

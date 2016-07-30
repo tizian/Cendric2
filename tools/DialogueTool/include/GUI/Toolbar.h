@@ -11,8 +11,10 @@ public:
 
 private:
 	void showFileMenu();
+	void createDialogue();
 
 	char m_npcFolder[100];
 	char m_sqlFolder[100];
 	char m_dialogueFolder[100];
+	char m_dialogueID[50];
 };

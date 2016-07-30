@@ -2,7 +2,6 @@
 #include "ApplicationState.h"
 
 #include <fstream>
-#include <iostream>
 #include <sstream>
 
 const std::string ConfigurationIO::CONFIGURATION_PATH = "config.ini";
@@ -31,7 +30,7 @@ bool ConfigurationIO::loadConfiguration() {
 				noError = readPath(data.dialogueFolder, line);
 			}
 			else {
-				std::cout << "[Configuration]: Unknown tag found in configuration file." << std::endl;
+				ERROR("[Configuration]: Unknown tag found in configuration file.");
 				noError = false;
 			}
 			if (!noError) {
@@ -45,7 +44,7 @@ bool ConfigurationIO::loadConfiguration() {
 		}
 	}
 	else {
-		std::cout << "[Configuration]: Unable to open configuration file. Default configuration is used." << std::endl;
+		ERROR("[Configuration]: Unable to open configuration file. Default configuration is used.");
 		g_state->setConfiguration(DEFAULT_CONFIGURATION);
 		return false;
 	}
@@ -58,7 +57,7 @@ bool ConfigurationIO::loadConfiguration() {
 bool ConfigurationIO::readPath(std::string& path, const std::string& line) {
 	size_t colon = line.find(':');
 	if (colon == std::string::npos || line.length() < colon + 1) {
-		std::cout << "[Configuration]: No colon found after display mode tag or no value after colon." << std::endl;
+		ERROR("[Configuration]: No colon found after display mode tag or no value after colon.");
 		return false;
 	}
 	// enforce 100 limit to avoid buffer overflow
@@ -77,7 +76,7 @@ bool ConfigurationIO::saveConfiguration() {
 		configuration.close();
 	}
 	else {
-		std::cout << "[Configuration]: Unable to open file: " + CONFIGURATION_PATH << std::endl;
+		ERROR("[Configuration]: Unable to open file: " + CONFIGURATION_PATH );
 		return false;
 	}
 	return true;
