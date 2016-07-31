@@ -118,10 +118,13 @@ void TabButton::setTextRaw(const std::string& text) {
 
 void TabButton::setCharacterSize(int size) {
 	m_text.setCharacterSize(size);
-	float xOffset = std::max(0.5f * (m_outerRect.width - m_text.getLocalBounds().width), 0.f);
-	float yOffset = std::max(0.5f * (m_outerRect.height - m_text.getLocalBounds().height), 0.f);
-	m_textOffset = sf::Vector2f(xOffset, yOffset);
-	m_text.setPosition(getPosition() + m_textOffset);
+
+	float width = m_text.getLocalBounds().width;
+	float height = m_text.getLocalBounds().height;
+	float x = getBoundingBox()->left + 0.5f * (getBoundingBox()->width - width);
+	float y = getBoundingBox()->top + 0.5f * (getBoundingBox()->height - height);
+
+	m_text.setPosition(sf::Vector2f(x, y));
 }
 
 void TabButton::setTextColor(const sf::Color& color) {

@@ -56,7 +56,6 @@ protected:
 	SlicedSprite m_border;
 	sf::RectangleShape m_background;
 
-	sf::Vector2f m_textOffset;
 	sf::FloatRect m_outerRect;
 	sf::FloatRect m_innerRect;
 

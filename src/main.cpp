@@ -10,7 +10,7 @@
 // #define EXTERNAL_DOCUMENTS_FOLDER
 
 // Resolve .app package internal resource path for mac builds
-#define APPLE_APP_BUILD
+// #define APPLE_APP_BUILD
 
 #ifdef _WIN32
 #define _WIN32_WINNT 0x0500
