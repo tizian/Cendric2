@@ -1,7 +1,7 @@
 -- lua script for cutscene gandria
-mapid = "res/map/meadows/meadows.tmx"
-worldx = 3360
-worldy = 3030
+mapid = "res/map/gandria/gandria.tmx"
+worldx = 215
+worldy = 4725
 steps = {
 		{
 		texts = {
