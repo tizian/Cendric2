@@ -12,9 +12,11 @@ NodeCondition::~NodeCondition() {
 }
 
 std::string NodeCondition::exportToLua() const {
-	return m_conditionString;
+	if (m_type == NodeConditionType::Raw) {
+		return m_conditionString;
+	}
 
-	/*if (isLeaf()) {
+	if (isLeaf()) {
 		return m_condition->exportToLua();
 	}
 
@@ -32,7 +34,7 @@ std::string NodeCondition::exportToLua() const {
 		break;
 	}
 
-	return "--[[ ERROR: node condition could not be parsed --]]";*/
+	return "--[[ ERROR: node condition could not be parsed --]]";
 }
 
 bool NodeCondition::isLeaf() const {

@@ -1,11 +1,7 @@
 #include "Nodes/Condition.h"
 
-const char* Condition::CONDITION_TYPES[] = { 
-	"Condition", 
-	"QuestState", 
-	"QuestComplete", 
-	"HasItem"
-};
+const char* Condition::CONDITION_TYPES =
+"Condition\0Quest State\0Quest Complete\0Has Item\0\0";
 
 std::string Condition::exportToLua() const {
 	switch (type) {

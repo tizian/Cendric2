@@ -2,6 +2,27 @@
 #include "Nodes/NodeCondition.h"
 #include <sstream>
 
+// Start Goto Node
+
+StartGotoNode::~StartGotoNode() {
+	delete condition; 
+}
+
+void StartGotoNode::addConditionTemplate() {
+	if (condition == nullptr) return;
+	ConditionType type = static_cast<ConditionType>(currentPreselectedCondition + 1);
+	if (type <= ConditionType::VOID || type >= ConditionType::MAX) return;
+	Condition cond;
+	cond.type = type;
+	std::string templateString = std::string(condition->getConditionString()) + " \n" + cond.exportToLua();
+	if (templateString.size() > RAW_CONDITION_LENGTH) {
+		return;
+	}
+	strcpy(condition->getConditionString(), templateString.c_str());
+}
+
+// Start Node
+
 StartNode::StartNode() : DialogueNode(-1) {
 }
 
@@ -63,6 +84,6 @@ int* StartNode::getDefaultRoot() {
 	return &m_defaultRoot; 
 }
 
-const std::vector<StartGotoNode*>& StartNode::getRootNodes() const { 
+std::vector<StartGotoNode*>& StartNode::getRootNodes() { 
 	return m_rootNodes; 
 }

@@ -5,10 +5,16 @@
 #include "Nodes/NodeCondition.h"
 
 struct StartGotoNode {
-	~StartGotoNode() { delete condition; }
+	~StartGotoNode();
+
+	// adds the currently selected condition template to the 
+	// condition string
+	void addConditionTemplate();
 
 	int nextTag = -1;
+	int nextType = static_cast<int>(DialogueNodeType::End); 
 	NodeCondition* condition = nullptr;
+	int currentPreselectedCondition = 0;
 };
 
 // Start Node, it determines the root of the dialogue
@@ -25,7 +31,7 @@ public:
 	// getters
 	DialogueNodeType getType() const override;
 	int* getDefaultRoot();
-	const std::vector<StartGotoNode*>& getRootNodes() const;
+	std::vector<StartGotoNode*>& getRootNodes();
 
 protected:
 	std::string getName() const override { return "Start Node"; }

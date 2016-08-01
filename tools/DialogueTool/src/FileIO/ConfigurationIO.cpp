@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 
-const std::string ConfigurationIO::CONFIGURATION_PATH = "config.ini";
+const std::string ConfigurationIO::CONFIGURATION_PATH = "dialogue_tool.ini";
 const std::string ConfigurationIO::SQL_PATH = "path.sql";
 const std::string ConfigurationIO::NPC_PATH = "path.npc";
 const std::string ConfigurationIO::DIALOGUE_PATH =  "path.dialogue";
