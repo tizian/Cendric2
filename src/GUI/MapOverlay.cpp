@@ -182,13 +182,14 @@ void WaypointMarker::loadAnimation() {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	m_tooltip.setCharacterSize(8);
+	m_tooltip.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_tooltip.setTextStyle(TextStyle::Shadowed);
 	m_tooltip.setString(g_textProvider->getText("ClickToTeleport"));
 }
 
 void WaypointMarker::setPosition(const sf::Vector2f& position) {
 	AnimatedGameObject::setPosition(position);
-	m_tooltip.setPosition(position + sf::Vector2f(0.f, -8.f));
+	m_tooltip.setPosition(position + sf::Vector2f(-0.5f * (m_tooltip.getBounds().width - m_boundingBox.width), -8.f));
 }
 
 void WaypointMarker::onMouseOver() {
