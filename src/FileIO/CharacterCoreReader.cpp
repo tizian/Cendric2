@@ -591,7 +591,8 @@ bool CharacterCoreReader::readProgressConditions(char* start, char* end, Charact
 			conditions.insert(condition.substr(0, count));
 			break;
 		}
-		conditions.insert(condition.substr(0, count));
+		condition = condition.substr(0, count);
+		if (!condition.empty()) conditions.insert(condition);
 		startData = gotoNextChar(startData, endData, ',');
 		startData++;
 	}

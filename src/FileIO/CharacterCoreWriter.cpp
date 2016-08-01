@@ -416,17 +416,17 @@ std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData
 	}
 
 	for (auto& progressType : data.conditionProgress) {
+		if (progressType.second.empty()) continue;
+
 		progress.append(string(PROGRESS_CONDITION));
 		progress.append(":");
 		progress.append(progressType.first);
-		progress.append(",");
-
+		
 		for (auto& condition : progressType.second) {
-			progress.append(condition);
 			progress.append(",");
+			progress.append(condition);
 		}
-		// remove last comma
-		progress.pop_back();
+
 		progress.append("\n");
 	}
 

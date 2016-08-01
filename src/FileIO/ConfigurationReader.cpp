@@ -74,7 +74,7 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				noError = readDisplayMode(line, data);
 			}
 			else {
-				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file.");
+				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file on line: " + line);
 				noError = false;
 			}
 			if (!noError) {
