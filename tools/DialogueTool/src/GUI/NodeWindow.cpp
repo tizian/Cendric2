@@ -58,7 +58,7 @@ void NodeWindow::showStartNodeWindow() {
 	if (ImGui::Button("Add Root")) {
 		// adds a new dummy condition
 		StartGotoNode* gotoRoot = new StartGotoNode();
-		gotoRoot->condition = new NodeCondition(NodeConditionType::Leaf);
+		gotoRoot->condition = new NodeCondition(NodeConditionType::Direct);
 		sNode->addGotoRoot(gotoRoot);
 	}
 }

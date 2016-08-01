@@ -4,6 +4,7 @@
 #include "Condition.h"
 
 enum class NodeConditionType {
+	Direct,
 	Leaf,
 	And,
 	Or,
