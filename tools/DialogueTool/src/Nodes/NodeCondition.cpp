@@ -12,7 +12,7 @@ NodeCondition::~NodeCondition() {
 }
 
 std::string NodeCondition::exportToLua() const {
-	if (m_type == NodeConditionType::Direct) {
+	if (m_type == NodeConditionType::Raw) {
 		return m_conditionString;
 	}
 

@@ -3,8 +3,10 @@
 #include "global.h"
 #include "Condition.h"
 
+#define RAW_CONDITION_LENGTH 2000
+
 enum class NodeConditionType {
-	Direct,
+	Raw,
 	Leaf,
 	And,
 	Or,
@@ -21,11 +23,11 @@ public:
 	// when a node is a leaf, the condition is filled and both children nodes are null
 	bool isLeaf() const;
 	NodeConditionType getType() const;
-	char(&getConditionString())[2000] { return m_conditionString; }
+	char(&getConditionString())[RAW_CONDITION_LENGTH] { return m_conditionString; }
 
 private:
 	NodeConditionType m_type;
-	char m_conditionString[2000];
+	char m_conditionString[RAW_CONDITION_LENGTH];
 
 	Condition* m_condition = nullptr;
 	NodeCondition* m_child1 = nullptr;

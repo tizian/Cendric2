@@ -19,10 +19,12 @@ inline QuestState resolveQuestState(const std::string& state) {
 }
 
 enum class ConditionType {
+	VOID,
 	Condition,
 	QuestState,
 	QuestComplete,
-	HasItem
+	HasItem,
+	MAX
 };
 
 // a condition that can be evaluated in lua.
@@ -31,9 +33,9 @@ struct Condition {
 	ConditionType type;
 	std::string s1;
 	std::string s2;
-	int i1;
+	int i1 = 1;
 
 	std::string exportToLua() const;
 
-	static const char* CONDITION_TYPES[];
+	static const char* CONDITION_TYPES;
 };
