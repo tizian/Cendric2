@@ -24,7 +24,7 @@ Pre-alpha builds are available for Windows x64, Mac and Ubuntu. However, feel fr
 
 [Cendric v0.3.0](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0_win64.zip) (Windows x64)
 
-[Cendric v0.3.0a](https://github.com/tizian/Cendric2/releases/download/v0.3.0/cendric_v0.3.0a_mac.zip) (Mac OS X)
+[Cendric v0.3.0b](https://github.com/tizian/Cendric2/releases/download/v0.3.0/cendric_v0.3.0b_mac.zip) (Mac OS X)
 
 [Cendric v0.3.0](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0_ubuntu.tar.gz) (Ubuntu)
 
