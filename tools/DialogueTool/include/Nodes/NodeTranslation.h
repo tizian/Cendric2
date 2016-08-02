@@ -5,7 +5,7 @@
 
 // holds a translation for a node (npc, choice or cendric node)
 struct NodeTranslation {
-	NodeTranslation(int nodeTag);
+	NodeTranslation(int nodeTag, const std::string& tag);
 	char tag[50];
 	char englishTranslation[MAX_DIALOGUE_SIZE];
 	char germanTranslation[MAX_DIALOGUE_SIZE];

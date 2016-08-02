@@ -13,6 +13,7 @@ enum class DialogueNodeType {
 
 class DialogueNode;
 class NodeCondition;
+struct NodeTranslation;
 
 // This node acts as a link between nodes and their children.
 struct LinkNode {
@@ -31,6 +32,7 @@ struct LinkNode {
 	bool isReload = false;
 
 	NodeCondition* condition = nullptr;
+	NodeTranslation* translation = nullptr; // used for choice nodes
 	int currentPreselectedCondition = 0;
 	int currentPreselectedNodetype = 0;
 };

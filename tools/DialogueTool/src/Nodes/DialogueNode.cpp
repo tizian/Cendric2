@@ -1,6 +1,9 @@
 #include "Nodes/DialogueNode.h"
 #include "Nodes/NodeCondition.h"
 #include "Nodes/NPCNode.h"
+#include "Nodes/CendricNode.h"
+#include "Nodes/TradeNode.h"
+#include "Nodes/ChoiceNode.h"
 #include "ApplicationState.h"
 #include "Dialogue.h"
 
@@ -9,6 +12,7 @@
 LinkNode::~LinkNode() {
 	delete condition;
 	delete nextNode;
+	delete translation;
 }
 
 int LinkNode::getNextTag() {
@@ -49,10 +53,16 @@ void LinkNode::linkNodeTemplate() {
 		nextNode = new NpcNode();
 		break;
 	case DialogueNodeType::Choice:
+		delete nextNode;
+		nextNode = new ChoiceNode();
 		break;
 	case DialogueNodeType::Cendric:
+		delete nextNode;
+		nextNode = new CendricNode();
 		break;
 	case DialogueNodeType::Trade:
+		delete nextNode;
+		nextNode = new TradeNode();
 		break;
 	case DialogueNodeType::End:
 		delete nextNode;

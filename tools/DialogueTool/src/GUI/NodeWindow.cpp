@@ -2,7 +2,9 @@
 #include "GUI/TranslationWindow.h"
 #include "Nodes/DialogueNode.h"
 #include "Nodes/StartNode.h"
-#include "Nodes/NpcNode.h"
+#include "Nodes/TriggerableNode.h"
+#include "Nodes/TradeNode.h"
+#include "Nodes/ChoiceNode.h"
 #include "Nodes/Condition.h"
 #include "Nodes/NodeTrigger.h"
 
@@ -24,7 +26,8 @@ void NodeWindow::update() {
 		showChoiceNodeWindow();
 		break;
 	case DialogueNodeType::NPC:
-		showNpcNodeWindow();
+	case DialogueNodeType::Cendric:
+		showTriggerableNode();
 		break;
 	case DialogueNodeType::Trade:
 		showTradeNodeWindow();
@@ -42,12 +45,15 @@ void NodeWindow::setNode(DialogueNode* node) {
 	switch (m_node->getType()) {
 	case DialogueNodeType::Start:
 	case DialogueNodeType::Trade:
-	case DialogueNodeType::Choice:
 	default:
 		m_translationWindow->setNodeTranslation(nullptr);
 		break;
 	case DialogueNodeType::NPC:
-		m_translationWindow->setNodeTranslation(dynamic_cast<NpcNode*>(m_node)->getTranslation());
+	case DialogueNodeType::Cendric:
+		m_translationWindow->setNodeTranslation(dynamic_cast<TriggerableNode*>(m_node)->getTranslation());
+		break;
+	case DialogueNodeType::Choice:
+		m_translationWindow->setNodeTranslation(m_node->getLinkNodes().at(0)->translation);
 		break;
 	}
 }
@@ -63,7 +69,7 @@ void NodeWindow::showStartNodeWindow() {
 		// calculate sub window size
 		const bool hasCondition = (*it)->condition != nullptr;
 		float size = 80;
-		if (moreThanOneNode) size += 20.f;
+		if (moreThanOneNode || hasCondition) size += 20.f;
 		if (hasCondition) size += 40.f;
 		// show root node sub window
 		ImGui::BeginChild(("Sub" + std::to_string(counter)).c_str(), ImVec2(0, size), true);
@@ -85,6 +91,14 @@ void NodeWindow::showStartNodeWindow() {
 			it = sNode->getLinkNodes().erase(it);
 		}
 		else {
+			if (hasCondition) {
+				if (moreThanOneNode) ImGui::SameLine();
+				if (ImGui::Button("Remove Condition")) {
+					delete (*it)->condition;
+					(*it)->condition = nullptr;
+				}
+			}
+
 			++it;
 		}
 
@@ -101,14 +115,70 @@ void NodeWindow::showStartNodeWindow() {
 }
 
 void NodeWindow::showChoiceNodeWindow() {
+	ChoiceNode* cNode = dynamic_cast<ChoiceNode*>(m_node);
+	if (cNode == nullptr) return;
 
+	int counter = 0;
+	const bool moreThanOneNode = cNode->getLinkNodes().size() > 1;
+	for (auto it = cNode->getLinkNodes().begin(); it != cNode->getLinkNodes().end(); /*don't increment here*/) {
+
+		// calculate sub window size
+		const bool hasCondition = (*it)->condition != nullptr;
+		float size = 100;
+		if (moreThanOneNode || hasCondition) size += 20.f;
+		if (hasCondition) size += 40.f;
+		// show root node sub window
+		ImGui::BeginChild(("Sub" + std::to_string(counter)).c_str(), ImVec2(0, size), true);
+		ImGui::Text(("Next Tag: [" + std::to_string((*it)->getNextTag()) + "]").c_str());
+		if (ImGui::Button("Translation")) {
+			m_translationWindow->setNodeTranslation((*it)->translation);
+		}
+		ImGui::Combo("", &(*it)->currentPreselectedCondition, Condition::CONDITION_TYPES);
+		ImGui::SameLine();
+		if (ImGui::Button("Add Condition")) {
+			(*it)->addConditionTemplate();
+		}
+		if (hasCondition) {
+			ImGui::InputTextMultiline("Condition", (*it)->condition->getConditionString(), IM_ARRAYSIZE((*it)->condition->getConditionString()), ImVec2(-1.0f, ImGui::GetTextLineHeight() * 3), ImGuiInputTextFlags_AllowTabInput);
+		}
+		if (ImGui::Combo("Next Node", &(*it)->currentPreselectedNodetype, DialogueNode::NODE_TYPES)) {
+			(*it)->linkNodeTemplate();
+		}
+
+		if (moreThanOneNode && ImGui::Button("Remove Choice")) {
+			delete (*it);
+			it = cNode->getLinkNodes().erase(it);
+		}
+		else {
+			if (hasCondition) {
+				if (moreThanOneNode) ImGui::SameLine();
+				if (ImGui::Button("Remove Condition")) {
+					delete (*it)->condition;
+					(*it)->condition = nullptr;
+				}
+			}
+			
+			++it;
+		}
+
+		ImGui::EndChild();
+		ImGui::Spacing();
+		++counter;
+	}
+
+	if (ImGui::Button("Add Choice")) {
+		// adds a new dummy condition
+		LinkNode* linkNode = new LinkNode();
+		cNode->addLinkNode(linkNode);
+	}
 }
 
-void NodeWindow::showNpcNodeWindow() {
-	NpcNode* nNode = dynamic_cast<NpcNode*>(m_node);
+void NodeWindow::showTriggerableNode() {
+	TriggerableNode* nNode = dynamic_cast<TriggerableNode*>(m_node);
 	if (nNode == nullptr || nNode->getLinkNodes().size() != 1) return;
 	auto child = nNode->getLinkNodes().at(0);
 
+	ImGui::Text(("Next Tag: [" + std::to_string(child->getNextTag()) + "]").c_str());
 	if (ImGui::Combo("Next Node", &child->currentPreselectedNodetype, DialogueNode::NODE_TYPES)) {
 		child->linkNodeTemplate();
 	}
@@ -142,5 +212,12 @@ void NodeWindow::showNpcNodeWindow() {
 }
 
 void NodeWindow::showTradeNodeWindow() {
+	TradeNode* tNode = dynamic_cast<TradeNode*>(m_node);
+	if (tNode == nullptr || tNode->getLinkNodes().size() != 1) return;
+	auto child = tNode->getLinkNodes().at(0);
 
+	ImGui::Text(("Next Tag: [" + std::to_string(child->getNextTag()) + "]").c_str());
+	if (ImGui::Combo("Next Node", &child->currentPreselectedNodetype, DialogueNode::NODE_TYPES)) {
+		child->linkNodeTemplate();
+	}
 }

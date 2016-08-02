@@ -74,5 +74,5 @@ DialogueNodeType StartNode::getType() const {
 }
 
 float StartNode::getButtonHue() const {
-	return 0.75f;
+	return 0.0f;
 }

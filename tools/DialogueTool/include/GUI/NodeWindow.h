@@ -21,8 +21,8 @@ private:
 	// choice node
 	void showChoiceNodeWindow();
 
-	// npc node
-	void showNpcNodeWindow();
+	// npc/cendric node
+	void showTriggerableNode();
 
 	// trade node
 	void showTradeNodeWindow();
