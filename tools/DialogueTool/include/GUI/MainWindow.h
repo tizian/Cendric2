@@ -6,6 +6,7 @@ class Toolbar;
 class TreeWindow;
 class ErrorWindow;
 class NodeWindow;
+class TranslationWindow;
 
 // top level controller over the main window
 // holds the toolbar, the tree window and the node windows
@@ -20,6 +21,7 @@ public:
 private:
 	Toolbar* m_toolbar;
 	TreeWindow* m_treeWindow;
+	TranslationWindow* m_translationWindow;
 	ErrorWindow* m_errorWindow;
 	NodeWindow* m_nodeWindow;
 };

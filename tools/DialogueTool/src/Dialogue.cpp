@@ -25,6 +25,26 @@ StartNode* Dialogue::getStartNode() const {
 	return m_startNode;
 }
 
+const std::string&  Dialogue::getNpcID() const {
+	return m_npcID;
+}
+
+int Dialogue::generateTag() {
+	int tag = 1;
+	while (m_usedTags.find(tag) != m_usedTags.end()) {
+		++tag;
+	}
+	m_usedTags.insert(tag);
+	return tag;
+}
+
+void Dialogue::freeTag(int tag) {
+	if (tag < 1) return;
+	auto pos = m_usedTags.find(tag);
+	if (pos == m_usedTags.end()) return;
+	m_usedTags.erase(pos);
+}
+
 bool Dialogue::exportDialogue() {
 	// first create a directory
 	std::string folderPath = G_CONF.npcFolder + "/" + m_npcID;
@@ -42,18 +62,41 @@ bool Dialogue::exportDialogue() {
 		}
 	}
 
-	// then create the file
-	std::string path = folderPath + "/dl_" + m_npcID + ".lua";
-	std::ofstream dialogueFile(path, std::ios::trunc);
+	// then create the file  (lua export)
+	std::string luaPath = folderPath + "/dl_" + m_npcID + ".lua";
+	std::ofstream dialogueFile(luaPath, std::ios::trunc);
 	if (dialogueFile.is_open()) {
 		dialogueFile << exportToLua();
 		dialogueFile.close();
 	}
 	else {
-		ERROR("[Dialogue]: Unable to open file: " + path);
+		ERROR("[Dialogue]: Lua export: Unable to open file: " + luaPath);
 		return false;
 	}
+
+	// then the sql export
+	std::string sqlPath = G_CONF.sqlFolder + "/insert_text_dl_" + m_npcID + "_utf8.sql";
+	std::ofstream sqlFile(sqlPath, std::ios::trunc);
+	if (sqlFile.is_open()) {
+		sqlFile << exportToSQL();
+		sqlFile.close();
+	}
+	else {
+		ERROR("[Dialogue]: SQL export: Unable to open file: " + sqlPath);
+		return false;
+	}
+
 	return true;
+}
+
+void Dialogue::recursiveLuaExport(DialogueNode* node, std::string& stack, int indentationLevel) const {
+	if (node == nullptr) return;
+
+	stack.append(node->exportToLua(indentationLevel) + "\n");
+
+	for (auto child : node->getLinkNodes()) {
+		recursiveLuaExport(child->nextNode, stack, indentationLevel);
+	}
 }
 
 std::string Dialogue::exportToLua() const {
@@ -61,10 +104,28 @@ std::string Dialogue::exportToLua() const {
 	int indentationLevel = 0;
 	ss << "-- Dialogue for NPC \"" << m_npcID << "\"\n";
 
-	ss << "loadDialogue = function(DL) \n";
+	ss << "loadDialogue = function(DL) \n\n";
 
-	ss << m_startNode->exportToLua(indentationLevel + 1);
+	std::string stack = "";
+	recursiveLuaExport(m_startNode, stack, indentationLevel + 1);
+	ss << stack;
 
 	ss << "end";
 	return ss.str();
+}
+
+void Dialogue::recursiveSQLExport(DialogueNode* node, std::string& stack) const {
+	if (node == nullptr) return;
+
+	stack.append(node->exportToSQL());
+
+	for (auto child : node->getLinkNodes()) {
+		recursiveSQLExport(child->nextNode, stack);
+	}
+}
+
+std::string Dialogue::exportToSQL() const {
+	std::string stack = "";
+	recursiveSQLExport(m_startNode, stack);
+	return stack;
 }

@@ -3,12 +3,13 @@
 #include "global.h"
 
 class DialogueNode;
+class TranslationWindow;
 
 // The node window displays a specific node. It can handle all kinds of nodes. 
 class NodeWindow {
 
 public:
-	NodeWindow();
+	NodeWindow(TranslationWindow* translationWindow);
 	void update();
 
 	void setNode(DialogueNode* node);
@@ -27,4 +28,5 @@ private:
 	void showTradeNodeWindow();
 
 	DialogueNode* m_node = nullptr;
+	TranslationWindow* m_translationWindow;
 };

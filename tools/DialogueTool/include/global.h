@@ -8,10 +8,7 @@
 #include <SFML/Window/Event.hpp>
 
 #ifdef _WIN32
-#define IM_NEWLINE "\r\n"
-#include <direct.h>
-#else
-#define IM_NEWLINE "\n"
+	#include <direct.h>
 #endif
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
@@ -30,4 +27,16 @@ inline std::string tabs(int count) {
 	std::string s;
 	while (count--) { s += "\t"; }
 	return s;
+}
+
+inline std::string duplicateApostrophs(const std::string& in) {
+	std::string out;
+	for (auto c : in) {
+		if (c == '\'') {
+			out += c;
+		}
+		out += c;
+	}
+
+	return out;
 }

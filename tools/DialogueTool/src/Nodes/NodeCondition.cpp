@@ -2,7 +2,7 @@
 
 NodeCondition::NodeCondition(NodeConditionType type) {
 	m_type = type;
-	strcpy(m_conditionString, "true");
+	strcpy(m_conditionString, "");
 }
 
 NodeCondition::~NodeCondition() {

@@ -15,7 +15,6 @@ public:
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
-	bool isTriggerable() const;
 	TriggerData& getData();
 
 	GameObjectType getConfiguredType() const override;
