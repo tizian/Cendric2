@@ -16,35 +16,20 @@ std::string BitmapText::transform(const std::string& str) {
 	std::string out;
 	for (size_t i = 0; i < str.length(); ++i) {
 		unsigned char c = str.at(i);
-		if (c == 0xc3) {
+		if (c == 0xc3u) {
 			unsigned char c2 = str.at(i + 1);
-			if (c2 == 0xa4u) {			// ä
-				out.push_back(0xe4u);
-			}
-			else if (c2 == 0x84u) {		// Ä
-				out.push_back(0xc4u);
-			}
-			else if (c2 == 0xb6u) {	// ö
-				out.push_back(0xf6u);
-			}
-			else if (c2 == 0x96u) {	// Ö
-				out.push_back(0xd6u);
-			}
-			else if (c2 == 0xbcu) {	// ü
-				out.push_back(0xfcu);
-			}
-			else if (c2 == 0x9cu) {	// Ü
-				out.push_back(0xdcu);
-			}
-			else {									// ?
-				out.push_back(0x3fu);
-			}
-			i++;
+			out.push_back(c2 + 0x40u);
+			++i;
 		}
-		else if (c == 0x09) {
+		else if (c == 0xc2u) {
+			unsigned char c2 = str.at(i + 1);
+			out.push_back(c2);
+			++i;
+		}
+		else if (c == 0x09u) {
 			// convert tabs to spaces
 			for (int j = 0; j < TAB_TO_SPACES; ++j) {
-				out.push_back(0x20);
+				out.push_back(0x20u);
 			}
 		}
 		else {
@@ -60,7 +45,7 @@ BitmapText::BitmapText() {
 	m_style = TextStyle::Default;
 	m_characterSize = 8;
 	m_font = getFont(m_style, m_characterSize);
-	m_lineSpacing = 0.5f;
+	m_lineSpacing = 0.2f;
 	m_alignment = TextAlignment::Left;
 }
 
@@ -70,7 +55,7 @@ BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment
 	m_string = transform(string);
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
-	m_lineSpacing = 0.5f;
+	m_lineSpacing = 0.2f;
 	m_alignment = alignment;
 	init();
 }
@@ -81,7 +66,7 @@ BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
 	m_string = transform(string);
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
-	m_lineSpacing = 0.5f;
+	m_lineSpacing = 0.2f;
 	m_alignment = alignment;
 	init();
 }
@@ -189,8 +174,8 @@ void BitmapText::init() {
 
 	sf::Vector2i glyphSize = m_font->getGlyphSize();
 
-	float dy = static_cast<float>(m_characterSize);
-	float dx = glyphSize.x * (dy / glyphSize.y);
+	float dx = static_cast<float>(m_characterSize);
+	float dy = glyphSize.y * (dx / glyphSize.x);
 
 	float du = 1.f / NUM_GLYPHS_U * m_font->getTexture().getSize().x;
 	float dv = 1.f / NUM_GLYPHS_V * m_font->getTexture().getSize().y;
