@@ -92,10 +92,20 @@ bool Dialogue::exportDialogue() {
 void Dialogue::recursiveLuaExport(DialogueNode* node, std::string& stack, int indentationLevel) const {
 	if (node == nullptr) return;
 
-	stack.append(node->exportToLua(indentationLevel) + "\n");
+	stack.append("\n");
+	stack.append(node->exportToLua(indentationLevel));
+	stack.append("\n");
 
 	for (auto child : node->getLinkNodes()) {
-		recursiveLuaExport(child->nextNode, stack, indentationLevel);
+		
+		if (child->condition == nullptr) {
+			recursiveLuaExport(child->nextNode, stack, indentationLevel);
+		}
+		else {
+			stack.append(tabs(indentationLevel) + "if (" + child->condition->exportToLua() + ") then \n");
+			recursiveLuaExport(child->nextNode, stack, indentationLevel + 1);
+			stack.append(tabs(indentationLevel) + "end\n\n");
+		}
 	}
 }
 
@@ -104,7 +114,7 @@ std::string Dialogue::exportToLua() const {
 	int indentationLevel = 0;
 	ss << "-- Dialogue for NPC \"" << m_npcID << "\"\n";
 
-	ss << "loadDialogue = function(DL) \n\n";
+	ss << "loadDialogue = function(DL) \n";
 
 	std::string stack = "";
 	recursiveLuaExport(m_startNode, stack, indentationLevel + 1);

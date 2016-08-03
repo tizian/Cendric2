@@ -32,7 +32,7 @@ std::string ChoiceNode::exportToLua(int indent) const {
 			ss << tabs(indent) << "if (" << child->condition->exportToLua() << ") then \n";
 			ss << tabs(indent + 1) << "DL:addChoice(" + std::to_string(getTag()) + ", \"" + child->translation->tag + "\")";
 			ss << " -- " << child->translation->englishTranslation << "\n";
-			ss << "end\n";
+			ss << tabs(indent) << "end\n";
 		}
 	}
 
@@ -43,6 +43,9 @@ std::string ChoiceNode::exportToLua(int indent) const {
 void ChoiceNode::addLinkNode(LinkNode* node) {
 	delete node->translation;
 	node->translation = new NodeTranslation(node->getNextTag(), "Choice");
+	delete node->condition;
+	node->condition = new NodeCondition(NodeConditionType::Raw);
+	strcpy(node->condition->getConditionString(), ("not DL:isConditionFulfilled(\"" + G_DIA->getNpcID() + "\", \"Choice" +  std::to_string(node->getNextTag()) + "\")").c_str());
 	DialogueNode::addLinkNode(node);
 }
 
