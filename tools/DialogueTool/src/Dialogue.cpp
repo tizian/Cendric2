@@ -3,6 +3,7 @@
 #include "Nodes/ChoiceNode.h"
 #include "Nodes/NPCNode.h"
 #include "FileIO/ConfigurationIO.h"
+#include "FileIO/DialogueIO.h"
 #include "ApplicationState.h"
 
 #include <sstream>
@@ -14,19 +15,35 @@
 
 Dialogue::Dialogue(const std::string& npcID) {
 	m_npcID = npcID;
+	m_dialogueName = npcID;
 	m_startNode = new StartNode();
+}
+
+Dialogue::Dialogue(const std::string& npcID, const std::string& dialogueName, StartNode* startNode) {
+	assert(startNode != nullptr);
+	m_npcID = npcID;
+	m_dialogueName = dialogueName;
+	m_startNode = startNode;
 }
 
 Dialogue::~Dialogue() {
 	delete m_startNode;
 }
 
-StartNode* Dialogue::getStartNode() const {
+void Dialogue::setDialogueName(const std::string& dialogueName) {
+	m_dialogueName = dialogueName;
+}
+
+StartNode* Dialogue::getStartNode() {
 	return m_startNode;
 }
 
 const std::string&  Dialogue::getNpcID() const {
 	return m_npcID;
+}
+
+const std::string&  Dialogue::getDialogueName() const {
+	return m_dialogueName;
 }
 
 int Dialogue::generateTag() {
@@ -43,6 +60,31 @@ void Dialogue::freeTag(int tag) {
 	auto pos = m_usedTags.find(tag);
 	if (pos == m_usedTags.end()) return;
 	m_usedTags.erase(pos);
+}
+
+bool Dialogue::exportToDia() {
+	// first create a directory
+	std::string folderPath = G_CONF.dialogueFolder;
+	int nError = 0;
+#if defined(_WIN32)
+	nError = _mkdir(folderPath.c_str()); // windows style mkdir
+#else 
+	nError = mkdir(sPath.c_str(), 0733); // non-Windows style mkdir
+#endif
+	if (nError != 0) {
+		struct stat info;
+		if (stat(folderPath.c_str(), &info) != 0) {
+			ERROR("[Dialogue]: Unable to create directory: " + folderPath);
+			return false;
+		}
+	}
+
+	std::string filePath = folderPath + "/" + m_dialogueName + ".dia";
+	if (DialogueIO::saveDialogue(filePath, *this)) {
+		LOG("[Dialogue]: Dialogue written successfully to file: " + filePath);
+		return true;
+	}
+	return false;
 }
 
 bool Dialogue::exportDialogue() {
@@ -74,6 +116,8 @@ bool Dialogue::exportDialogue() {
 		return false;
 	}
 
+	LOG("[Dialogue]: Lua export complete to file: " + luaPath);
+
 	// then the sql export
 	std::string sqlPath = G_CONF.sqlFolder + "/insert_text_dl_" + m_npcID + "_utf8.sql";
 	std::ofstream sqlFile(sqlPath, std::ios::trunc);
@@ -86,6 +130,7 @@ bool Dialogue::exportDialogue() {
 		return false;
 	}
 
+	LOG("[Dialogue]: SQL export complete to file: " + sqlPath);
 	return true;
 }
 

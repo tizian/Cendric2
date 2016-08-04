@@ -37,8 +37,19 @@ void Toolbar::showFileMenu() {
 		ImGui::EndMenu();
 	}
 	if (ImGui::MenuItem("Open Dialogue", "Ctrl+O")) {}
-	if (ImGui::MenuItem("Save Dialogue", "Ctrl+S")) {}
-	if (ImGui::MenuItem("Save Dialogue As ...")) {}
+	if (ImGui::MenuItem("Save Dialogue", "Ctrl+S")) { if (G_DIA != nullptr) G_DIA->exportToDia(); }
+	if (ImGui::BeginMenu("Save Dialogue As ...")) {
+		if (G_DIA != nullptr) {
+			ImGui::InputText("File name", m_dialogueName, IM_ARRAYSIZE(m_dialogueName));
+			if (ImGui::Button("Save As")) {
+				std::string trimmed = getFileName(m_dialogueName);
+				strcpy(m_dialogueName, trimmed.c_str());
+				G_DIA->setDialogueName(m_dialogueName);
+				G_DIA->exportToDia();
+			};
+		}
+		ImGui::EndMenu();
+	}
 	if (ImGui::MenuItem("Export Dialogue ...")) { if (G_DIA != nullptr) G_DIA->exportDialogue(); }
 	ImGui::Separator();
 	if (ImGui::BeginMenu("Options")) {
@@ -54,7 +65,10 @@ void Toolbar::createDialogue() {
 	if (std::string(m_dialogueID).compare(0, std::string(NPC_PREFIX).size(), NPC_PREFIX) != 0) {
 		std::string newID = (NPC_PREFIX + std::string(m_dialogueID)).substr(0, 49);
 		strcpy(m_dialogueID, newID.c_str());
+		
 	}
-	g_state->requestNewDialogue(std::string(m_dialogueID));
+	if (g_state->requestNewDialogue(std::string(m_dialogueID))) {
+		strcpy(m_dialogueName, G_DIA->getDialogueName().c_str());
+	}
 }
 

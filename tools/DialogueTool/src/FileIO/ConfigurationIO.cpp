@@ -30,7 +30,7 @@ bool ConfigurationIO::loadConfiguration() {
 				noError = readPath(data.dialogueFolder, line);
 			}
 			else {
-				ERROR("[Configuration]: Unknown tag found in configuration file.");
+				ERROR("[Configuration]: Unknown tag found in configuration file in line: " + line);
 				noError = false;
 			}
 			if (!noError) {

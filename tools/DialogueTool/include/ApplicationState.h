@@ -3,7 +3,7 @@
 #include "global.h"
 
 class Dialogue;
-class ErrorWindow;
+class LogWindow;
 
 // describes the configuration that can be modified by the user via options.
 // it stores mainly paths.
@@ -29,8 +29,8 @@ public:
 	void load();
 	
 	void setConfiguration(const Configuration& configuration);
-	void setErrorWindow(ErrorWindow* window);
-	void setError(const std::string& errorMessage);
+	void setLogWindow(LogWindow* window);
+	void setLogMessage(const std::string& logMessage, const sf::Color& color);
 	// returns the current dialogue of the application. May return null.
 	Dialogue* getDialogue() const;
 	Configuration& getConfiguration();
@@ -46,5 +46,5 @@ private:
 	Dialogue* m_dialogue = nullptr;
 	Configuration m_configuration;
 	bool m_isQuitRequested = false;
-	ErrorWindow* m_errorWindow = nullptr;
+	LogWindow* m_logWindow = nullptr;
 };

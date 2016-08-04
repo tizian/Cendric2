@@ -1,7 +1,7 @@
 #include "ApplicationState.h"
 #include "FileIO/ConfigurationIO.h"
 #include "Dialogue.h"
-#include "GUI/ErrorWindow.h"
+#include "GUI/LogWindow.h"
 
 #include <iostream>
 
@@ -29,16 +29,16 @@ void ApplicationState::setConfiguration(const Configuration& configuration) {
 	m_configuration = configuration;
 }
 
-void ApplicationState::setErrorWindow(ErrorWindow* window) {
-	m_errorWindow = window;
+void ApplicationState::setLogWindow(LogWindow* window) {
+	m_logWindow = window;
 }
 
-void ApplicationState::setError(const std::string& errorMessage) {
-	if (m_errorWindow == nullptr) {
-		std::cout << errorMessage << std::endl;
+void ApplicationState::setLogMessage(const std::string& logMessage, const sf::Color& color) {
+	if (m_logWindow == nullptr) {
+		std::cout << logMessage << std::endl;
 		return;
 	}
-	m_errorWindow->addError(errorMessage);
+	m_logWindow->addLog(logMessage, color);
 }
 
 bool ApplicationState::isQuitRequested() const {

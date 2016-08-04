@@ -17,4 +17,5 @@ private:
 	char m_sqlFolder[100];
 	char m_dialogueFolder[100];
 	char m_dialogueID[50];
+	char m_dialogueName[50];
 };

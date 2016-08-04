@@ -10,6 +10,7 @@ class DialogueNode;
 class Dialogue {
 public:
 	Dialogue(const std::string& npcID);
+	Dialogue(const std::string& npcID, const std::string& dialogueName, StartNode* startNode);
 	~Dialogue();
 
 	// generates a new, unused tag
@@ -19,13 +20,19 @@ public:
 
 	// returns whether the export was successful
 	bool exportDialogue();
+	// exports to a dia file and returns whether the export was successful
+	bool exportToDia();
+	// used for the dialogue file name
+	void setDialogueName(const std::string& dialogueName);
 
 	// getters
-	StartNode* getStartNode() const;
+	StartNode* getStartNode();
 	const std::string& getNpcID() const;
+	const std::string& getDialogueName() const;
 
 private:
 	std::string m_npcID;
+	std::string m_dialogueName;
 	StartNode* m_startNode;
 	std::set<int> m_usedTags;
 

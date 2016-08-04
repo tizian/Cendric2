@@ -4,8 +4,10 @@
 #include "Nodes/CendricNode.h"
 #include "Nodes/TradeNode.h"
 #include "Nodes/ChoiceNode.h"
+#include "Nodes/NodeTranslation.h"
 #include "ApplicationState.h"
 #include "Dialogue.h"
+#include "FileIO/DialogueIO.h"
 
 // Link Node
 
@@ -15,7 +17,7 @@ LinkNode::~LinkNode() {
 	delete translation;
 }
 
-int LinkNode::getNextTag() {
+int LinkNode::getNextTag() const {
 	if (nextNode == nullptr) {
 		return isReload ? -2 : -1;
 	}
@@ -74,6 +76,24 @@ void LinkNode::linkNodeTemplate() {
 	}
 }
 
+std::string LinkNode::exportToDia(int indentationLevel) const {
+	std::string diaExport;
+	diaExport.append(tabs(indentationLevel) + "# Link node, tag is next tag\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TAG + ":" + std::to_string(getNextTag()) + "\n");
+	if (translation != nullptr) {
+		diaExport.append(tabs(indentationLevel) + "# translation: \n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_TAG + ":" + std::string(translation->tag) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_EN + ":" + std::string(translation->englishTranslation) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_DE + ":" + std::string(translation->germanTranslation) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + std::string(translation->swissgermanTranslation) + "\n");
+	}
+	if (condition != nullptr) {
+		diaExport.append(tabs(indentationLevel) + "# condition: \n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::CONDITION + ":" + std::string(condition->getConditionString()) + "\n");
+	}
+	return diaExport;
+}
+
 // DialogueNode
 
 const char* DialogueNode::NODE_TYPES =
@@ -111,4 +131,12 @@ const std::string& DialogueNode::getDescription() {
 		m_description = "[" + std::to_string(m_tag) + "] " + getName();
 	}
 	return  m_description;
+}
+
+std::string DialogueNode::exportToDia(int indentationLevel) {
+	std::string diaExport;
+	diaExport.append(tabs(indentationLevel) + "# " + getDescription() + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TAG + ":" + std::to_string(m_tag) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TYPE + ":" + std::to_string(static_cast<int>(getType())) + "\n");
+	return diaExport;
 }

@@ -19,13 +19,15 @@ struct NodeTranslation;
 struct LinkNode {
 	~LinkNode();
 
+	// exports the link node to part of a dia file
+	std::string exportToDia(int indentationLevel) const;
 	// adds the currently selected condition template to the 
 	// condition string
 	void addConditionTemplate();
 	// links a new node of the current preselected node type to this node
 	void linkNodeTemplate();
 	// returns the tag of the next node (can be -1 for end or -2 for reload)
-	int getNextTag();
+	int getNextTag() const;
 
 	int nextType = static_cast<int>(DialogueNodeType::End);
 	DialogueNode* nextNode = nullptr;
@@ -45,6 +47,7 @@ public:
 
 	virtual std::string exportToLua(int indentationLevel) const = 0;
 	virtual std::string exportToSQL() const { return ""; }
+	virtual std::string exportToDia(int indentationLevel);
 	virtual void addLinkNode(LinkNode* node);
 	
 	const std::string& getDescription();

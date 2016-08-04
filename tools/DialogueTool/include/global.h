@@ -20,7 +20,8 @@ extern ApplicationState* g_state;
 
 #define G_DIA g_state->getDialogue()
 #define G_CONF g_state->getConfiguration()
-#define ERROR(_MSG) g_state->setError(_MSG)
+#define ERROR(_MSG) g_state->setLogMessage(_MSG, sf::Color::Red)
+#define LOG(_MSG) g_state->setLogMessage(_MSG, sf::Color::White)
 
 inline std::string tabs(int count) {
 	if (count < 1) return "";
@@ -39,4 +40,17 @@ inline std::string duplicateApostrophs(const std::string& in) {
 	}
 
 	return out;
+}
+
+inline std::string getFileName(const std::string filePath) {
+	std::string fileName = filePath;
+	const size_t last_slash_idx = fileName.find_last_of("\\/");
+	if (std::string::npos != last_slash_idx) {
+		fileName.erase(0, last_slash_idx + 1);
+	}
+	const size_t period_idx = fileName.rfind('.');
+	if (std::string::npos != period_idx) {
+		fileName.erase(period_idx);
+	}
+	return fileName;
 }

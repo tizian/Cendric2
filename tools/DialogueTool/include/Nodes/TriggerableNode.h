@@ -14,6 +14,7 @@ public:
 
 	std::string exportToLua(int indentationLevel) const override;
 	std::string exportToSQL() const override;
+	std::string exportToDia(int indentationLevel) override;
 
 	NodeTranslation* getTranslation();
 	std::vector<NodeTrigger*>& getTriggers();

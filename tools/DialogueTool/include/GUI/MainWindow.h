@@ -4,7 +4,7 @@
 
 class Toolbar;
 class TreeWindow;
-class ErrorWindow;
+class LogWindow;
 class NodeWindow;
 class TranslationWindow;
 
@@ -22,6 +22,6 @@ private:
 	Toolbar* m_toolbar;
 	TreeWindow* m_treeWindow;
 	TranslationWindow* m_translationWindow;
-	ErrorWindow* m_errorWindow;
+	LogWindow* m_logWindow;
 	NodeWindow* m_nodeWindow;
 };

@@ -2,6 +2,7 @@
 #include "Nodes/NodeCondition.h"
 #include "Nodes/NodeTranslation.h"
 #include "Nodes/NodeTrigger.h"
+#include "FileIO/DialogueIO.h"
 #include "ApplicationState.h"
 #include "Dialogue.h"
 #include <sstream>
@@ -66,6 +67,20 @@ std::string TriggerableNode::exportToSQL() const {
 	ss << m_translation->tag << "', '" << G_DIA->getNpcID() << "', '" << en + "', '" + de + "', '" + ch + "');\n";
 
 	return ss.str();
+}
+
+std::string TriggerableNode::exportToDia(int indentationLevel) {
+	std::string diaExport = DialogueNode::exportToDia(indentationLevel);
+	diaExport.append(tabs(indentationLevel) + "# triggers: \n");
+	for (auto& trigger : m_triggers) {
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRIGGER + ":" + std::string(trigger->rawTrigger) + "\n");
+	}
+	diaExport.append(tabs(indentationLevel) + "# translation: \n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_TAG + ":" + std::string(m_translation->tag) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_EN + ":" + std::string(m_translation->englishTranslation) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_DE + ":" + std::string(m_translation->germanTranslation) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + std::string(m_translation->swissgermanTranslation) + "\n");
+	return diaExport;
 }
 
 NodeTranslation* TriggerableNode::getTranslation() {
