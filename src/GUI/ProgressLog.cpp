@@ -213,6 +213,7 @@ ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, cons
 
 	entry->m_text->setColor(color);
 	entry->m_text->setString(str);
+	entry->setAlpha(0.f);
 
 	if (itemID.compare("gold") == 0) {
 		entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
@@ -235,6 +236,7 @@ ProgressLogEntry* ProgressLogEntry::createQuestEntry(const std::string& str, con
 
 	entry->m_text->setColor(color);
 	entry->m_text->setString(str);
+	entry->setAlpha(0.f);
 
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
 	entry->m_icon->setTextureRect(sf::IntRect(25, 0, 25, 25));
@@ -267,7 +269,7 @@ void ProgressLogEntry::update(const sf::Time& frameTime) {
 		float scale = 1.f - m_fadeInTimer.asSeconds() / TIME_TO_FADE.asSeconds();
 		setAlpha(scale);
 	}
-	else if (m_time > sf::Time::Zero) {
+	else {
 		updateTime(m_time, frameTime);
 	}
 }
@@ -280,7 +282,7 @@ void ProgressLogEntry::updateBottom(const sf::Time& frameTime) {
 		float scale = m_fadeOutTimer.asSeconds() / TIME_TO_FADE.asSeconds();
 		setAlpha(scale);
 	}
-	else if (m_scrollTimer > sf::Time::Zero) {
+	else {
 		updateTime(m_scrollTimer, frameTime);
 	}
 }

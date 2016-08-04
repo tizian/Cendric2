@@ -899,9 +899,9 @@
   </object>
  </objectgroup>
  <objectgroup name="moving platform 2">
-  <object id="110" gid="826" x="500" y="1150" width="50" height="50">
+  <object id="110" gid="826" x="1150" y="1150" width="50" height="50">
    <properties>
-    <property name="direction" value="90"/>
+    <property name="direction" value="-90"/>
     <property name="distance" value="650"/>
     <property name="inactive" value=""/>
     <property name="size" value="3"/>

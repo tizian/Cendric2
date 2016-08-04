@@ -111,15 +111,17 @@ void ShootingTile::loadAnimation(int skinNr) {
 
 void ShootingTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
+	if (m_state == GameObjectState::Dead)
+		return;
+
 	if (m_remainingRecoveringTime > sf::Time::Zero) {
 		updateTime(m_remainingRecoveringTime, frameTime);
 		if (m_remainingRecoveringTime == sf::Time::Zero) {
 			setState(GameObjectState::Idle);
 			m_isBroken = false;
 		}
-		if (m_state == GameObjectState::Dead)
-			return;
 	}
+
 	if (m_remainingActiveTime > sf::Time::Zero) {
 		updateTime(m_remainingActiveTime, frameTime);
 		if (m_remainingActiveTime == sf::Time::Zero) {

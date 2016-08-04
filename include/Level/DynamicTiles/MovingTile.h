@@ -39,6 +39,10 @@ private:
 	sf::Vector2f m_currentVelocity;
 	sf::Time m_distanceTime;
 	sf::Time m_timeUntilTurn;
+	sf::Time m_frozenTime;
+
+	static const sf::Time FROZEN_TIME;
+	static const sf::Time FROZEN_FADING_TIME;
 
 	std::vector<sf::Sprite> m_normalSprites;
 	std::vector<sf::Sprite> m_frozenSprites;

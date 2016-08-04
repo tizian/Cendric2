@@ -4,6 +4,9 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
+const sf::Time MovingTile::FROZEN_TIME = sf::seconds(10.f);
+const sf::Time MovingTile::FROZEN_FADING_TIME = sf::seconds(2.f);
+
 MovingTile::MovingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),
 	LevelMovableTile(levelScreen),
@@ -75,7 +78,21 @@ void MovingTile::loadAnimation(int skinNr) {
 }
 
 void MovingTile::update(const sf::Time& frameTime) {
-	if (!m_isFrozen && m_isActive) {
+	if (m_isFrozen) {
+		updateTime(m_frozenTime, frameTime);
+		if (m_frozenTime == sf::Time::Zero) {
+			setFrozen(false);
+			return;
+		}
+		// scale frozen sprites accordingly for fading
+		float scale = m_frozenTime > FROZEN_FADING_TIME ? 1.f : m_frozenTime / FROZEN_FADING_TIME;
+		sf::Uint8 scaleU = static_cast<sf::Uint8>(scale * 255);
+		for (auto& sprite : m_frozenSprites) {
+			sprite.setColor(sf::Color(255, 255, 255, scaleU));
+		}
+		return;
+	}
+	if (m_isActive) {
 		updateTime(m_timeUntilTurn, frameTime);
 		if (m_timeUntilTurn == sf::Time::Zero) {
 			m_timeUntilTurn = m_distanceTime;
@@ -146,6 +163,9 @@ void MovingTile::setFrozen(bool frozen) {
 	m_isFrozen = frozen;
 	m_relativeVelocity = m_isFrozen || !m_isActive ? sf::Vector2f() : m_currentVelocity;
 	setPosition(getPosition());
+	if (m_isFrozen) {
+		m_frozenTime = FROZEN_TIME;
+	}
 }
 
 void MovingTile::setInitialState(bool on) {

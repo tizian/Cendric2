@@ -25,7 +25,7 @@ private:
 	// animation time of "Active"
 	sf::Time m_activeTime = sf::Time::Zero;
 	sf::Time m_remainingActiveTime = sf::Time::Zero;
-	// recovering time: if the tile's state is broken or dead, it will recover after this time
+	// recovering time: if the tile's state is broken it will recover after this time
 	sf::Time m_recoveringTime = sf::Time::Zero;
 	sf::Time m_remainingRecoveringTime = sf::Time::Zero;
 	// spell offset time
