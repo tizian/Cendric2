@@ -37,10 +37,14 @@ struct LinkNode {
 	NodeTranslation* translation = nullptr; // used for choice nodes
 	int currentPreselectedCondition = 0;
 	int currentPreselectedNodetype = 0;
+
+	// only used for IO, otherwise call getNextTag()
+	int ioNextTag;
 };
 
 // A node in the dialogue, abstract class. It holds methods for exporting.
 class DialogueNode {
+	friend class DialogueIO;
 public:
 	DialogueNode(int tag);
 	virtual ~DialogueNode();

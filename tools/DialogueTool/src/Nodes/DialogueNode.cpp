@@ -80,16 +80,15 @@ std::string LinkNode::exportToDia(int indentationLevel) const {
 	std::string diaExport;
 	diaExport.append(tabs(indentationLevel) + "# Link node, tag is next tag\n");
 	diaExport.append(tabs(indentationLevel) + DialogueIO::TAG + ":" + std::to_string(getNextTag()) + "\n");
+	if (condition != nullptr) {
+		diaExport.append(tabs(indentationLevel) + DialogueIO::CONDITION + ":" + replaceNewlines(condition->getConditionString()) + "\n");
+	}
 	if (translation != nullptr) {
 		diaExport.append(tabs(indentationLevel) + "# translation: \n");
-		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_TAG + ":" + std::string(translation->tag) + "\n");
-		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_EN + ":" + std::string(translation->englishTranslation) + "\n");
-		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_DE + ":" + std::string(translation->germanTranslation) + "\n");
-		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + std::string(translation->swissgermanTranslation) + "\n");
-	}
-	if (condition != nullptr) {
-		diaExport.append(tabs(indentationLevel) + "# condition: \n");
-		diaExport.append(tabs(indentationLevel) + DialogueIO::CONDITION + ":" + std::string(condition->getConditionString()) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_TAG + ":" + replaceNewlines(translation->tag) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_EN + ":" + replaceNewlines(translation->englishTranslation) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_DE + ":" + replaceNewlines(translation->germanTranslation) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + replaceNewlines(translation->swissgermanTranslation) + "\n");
 	}
 	return diaExport;
 }
@@ -101,13 +100,15 @@ const char* DialogueNode::NODE_TYPES =
 
 DialogueNode::DialogueNode(int tag) {
 	m_tag = tag;
-	LinkNode* nextNode = new LinkNode();
-	m_children.push_back(nextNode);
+	if (tag != 0) {
+		LinkNode* nextNode = new LinkNode();
+		m_children.push_back(nextNode);
+	}
 }
 
 DialogueNode::~DialogueNode() {
 	// recursive cleanup
-	G_DIA->freeTag(m_tag);
+	if (G_DIA != nullptr) G_DIA->freeTag(m_tag);
 	for (auto& node : m_children) {
 		delete node;
 	}
@@ -137,6 +138,5 @@ std::string DialogueNode::exportToDia(int indentationLevel) {
 	std::string diaExport;
 	diaExport.append(tabs(indentationLevel) + "# " + getDescription() + "\n");
 	diaExport.append(tabs(indentationLevel) + DialogueIO::TAG + ":" + std::to_string(m_tag) + "\n");
-	diaExport.append(tabs(indentationLevel) + DialogueIO::TYPE + ":" + std::to_string(static_cast<int>(getType())) + "\n");
 	return diaExport;
 }

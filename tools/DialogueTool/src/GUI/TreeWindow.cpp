@@ -12,7 +12,7 @@ void TreeWindow::recursiveShowNode(DialogueNode* node, int depth) {
 	if (node == nullptr) return;
 
 	ImGui::Spacing();
-	ImGui::SameLine(depth * 10);
+	ImGui::SameLine(depth * 10.f);
 
 	ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(node->getButtonHue(), 0.6f, 0.6f));
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(node->getButtonHue(), 0.7f, 0.7f));

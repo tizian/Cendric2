@@ -2,6 +2,7 @@
 #include "FileIO/ConfigurationIO.h"
 #include "Dialogue.h"
 #include "GUI/LogWindow.h"
+#include "FileIO/DialogueIO.h"
 
 #include <iostream>
 
@@ -23,6 +24,13 @@ Dialogue* ApplicationState::getDialogue() const {
 
 Configuration& ApplicationState::getConfiguration() {
 	return m_configuration;
+}
+
+void ApplicationState::loadDialogue(const std::string& dialogueName) {
+	std::string path = m_configuration.dialogueFolder + "/" + dialogueName + ".dia";
+	if (DialogueIO::loadDialogue(path, &m_dialogue)) {
+		LOG("[DialogueIO] Dialogue successfully loaded: " + path);
+	}
 }
 
 void ApplicationState::setConfiguration(const Configuration& configuration) {

@@ -6,6 +6,10 @@
 #include "Dialogue.h"
 #include <sstream>
 
+CendricNode::CendricNode(int tag) : DialogueNode(tag) {
+	m_translation = new NodeTranslation(getTag(), "Cendric");
+}
+
 CendricNode::CendricNode() : DialogueNode(G_DIA->generateTag()) {
 	m_translation = new NodeTranslation(getTag(), "Cendric");
 }

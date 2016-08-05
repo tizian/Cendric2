@@ -108,6 +108,7 @@ if (CENDRIC_BUILD_DIALOGUE_TOOL)
 		"${PROJECT_SOURCE_DIR}/ext/sfml/include"
 		"${PROJECT_SOURCE_DIR}/ext/imgui"
 		"${PROJECT_SOURCE_DIR}/ext/imgui-sfml"
+		"${PROJECT_SOURCE_DIR}/ext/dirent"
 		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include"
 	)
 

@@ -8,6 +8,7 @@ struct NodeTrigger;
 
 // NPC and Cendric Node
 class TriggerableNode : public virtual DialogueNode {
+	friend class DialogueIO;
 public:
 	TriggerableNode();
 	virtual ~TriggerableNode();

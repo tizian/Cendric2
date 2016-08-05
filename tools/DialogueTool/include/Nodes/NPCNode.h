@@ -6,6 +6,7 @@
 // NPC Node, it holds a link to the next node, 0 to n triggers and a translation
 class NpcNode : public virtual TriggerableNode {
 public:
+	NpcNode(int tag);
 	NpcNode();
 
 	DialogueNodeType getType() const override;

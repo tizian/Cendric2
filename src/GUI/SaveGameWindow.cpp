@@ -24,7 +24,7 @@ const float SaveGameWindow::HEIGHT = ENTRY_COUNT * GUIConstants::CHARACTER_SIZE_
 const float SaveGameWindow::TOP = 75.f;
 const float SaveGameWindow::LEFT = 0.5f * (WINDOW_WIDTH - WIDTH);
 
-inline bool ends_with(std::string const & value, std::string const & ending) {
+inline bool ends_with(const std::string& value, const std::string& ending) {
 	if (ending.size() > value.size()) return false;
 	return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }

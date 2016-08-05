@@ -7,6 +7,7 @@
 // Start Node, it determines the root of the dialogue
 class StartNode : public virtual DialogueNode {
 public:
+	StartNode(int tag);
 	StartNode();
 	~StartNode();
 

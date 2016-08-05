@@ -7,12 +7,13 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include <algorithm>
+
 #ifdef _WIN32
 	#include <direct.h>
 #endif
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
-#define IM_MAX(_A,_B)       (((_A) >= (_B)) ? (_A) : (_B))
 
 // extern objects
 class ApplicationState;
@@ -53,4 +54,10 @@ inline std::string getFileName(const std::string filePath) {
 		fileName.erase(period_idx);
 	}
 	return fileName;
+}
+
+inline std::string replaceNewlines(const char* in) {
+	std::string out = in;
+	std::replace(out.begin(), out.end(), '\n', ' '); 
+	return out;
 }

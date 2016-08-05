@@ -24,6 +24,7 @@ Dialogue::Dialogue(const std::string& npcID, const std::string& dialogueName, St
 	m_npcID = npcID;
 	m_dialogueName = dialogueName;
 	m_startNode = startNode;
+	recursiveCalculateUsedTags(m_startNode);
 }
 
 Dialogue::~Dialogue() {
@@ -38,11 +39,11 @@ StartNode* Dialogue::getStartNode() {
 	return m_startNode;
 }
 
-const std::string&  Dialogue::getNpcID() const {
+const std::string& Dialogue::getNpcID() const {
 	return m_npcID;
 }
 
-const std::string&  Dialogue::getDialogueName() const {
+const std::string& Dialogue::getDialogueName() const {
 	return m_dialogueName;
 }
 
@@ -60,6 +61,15 @@ void Dialogue::freeTag(int tag) {
 	auto pos = m_usedTags.find(tag);
 	if (pos == m_usedTags.end()) return;
 	m_usedTags.erase(pos);
+}
+
+void Dialogue::recursiveCalculateUsedTags(DialogueNode* node) {
+	if (node == nullptr) return;
+	m_usedTags.insert(node->getTag());
+
+	for (auto child : node->getLinkNodes()) {
+		recursiveCalculateUsedTags(child->nextNode);
+	}
 }
 
 bool Dialogue::exportToDia() {

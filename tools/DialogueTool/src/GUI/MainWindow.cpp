@@ -7,10 +7,10 @@
 #include "ApplicationState.h"
 
 MainWindow::MainWindow() {
-	m_toolbar = new Toolbar();
 	m_translationWindow = new TranslationWindow();
 	m_nodeWindow = new NodeWindow(m_translationWindow);
 	m_treeWindow = new TreeWindow(m_nodeWindow);
+	m_toolbar = new Toolbar(m_nodeWindow);
 	m_logWindow = new LogWindow();
 	g_state->setLogWindow(m_logWindow);
 }

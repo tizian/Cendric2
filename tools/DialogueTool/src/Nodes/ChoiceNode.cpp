@@ -5,6 +5,13 @@
 #include "Dialogue.h"
 #include <sstream>
 
+ChoiceNode::ChoiceNode(int tag) : DialogueNode(tag) {
+	if (tag != 0) {
+		m_children.at(0)->translation = new NodeTranslation(m_children.at(0)->getNextTag(), "Choice");
+		strcpy(m_children.at(0)->translation->tag, "");
+	}
+}
+
 ChoiceNode::ChoiceNode() : DialogueNode(G_DIA->generateTag()) {
 	m_children.at(0)->translation = new NodeTranslation(m_children.at(0)->getNextTag(), "Choice");
 	strcpy(m_children.at(0)->translation->tag, "");
@@ -45,7 +52,13 @@ void ChoiceNode::addLinkNode(LinkNode* node) {
 	node->translation = new NodeTranslation(node->getNextTag(), "Choice");
 	delete node->condition;
 	node->condition = new NodeCondition(NodeConditionType::Raw);
-	strcpy(node->condition->getConditionString(), ("not DL:isConditionFulfilled(\"" + G_DIA->getNpcID() + "\", \"Choice" +  std::to_string(node->getNextTag()) + "\")").c_str());
+	if (G_DIA == nullptr) {
+		strcpy(node->condition->getConditionString(), "");
+	}
+	else {
+		strcpy(node->condition->getConditionString(), ("not DL:isConditionFulfilled(\"" + G_DIA->getNpcID() + "\", \"Choice" + std::to_string(node->getNextTag()) + "\")").c_str());
+	}
+	
 	DialogueNode::addLinkNode(node);
 }
 

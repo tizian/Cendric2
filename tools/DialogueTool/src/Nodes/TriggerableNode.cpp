@@ -7,7 +7,7 @@
 #include "Dialogue.h"
 #include <sstream>
 
-TriggerableNode::TriggerableNode() : DialogueNode(G_DIA->generateTag()) {
+TriggerableNode::TriggerableNode() : DialogueNode(0) {
 }
 
 TriggerableNode::~TriggerableNode() {
@@ -73,13 +73,13 @@ std::string TriggerableNode::exportToDia(int indentationLevel) {
 	std::string diaExport = DialogueNode::exportToDia(indentationLevel);
 	diaExport.append(tabs(indentationLevel) + "# triggers: \n");
 	for (auto& trigger : m_triggers) {
-		diaExport.append(tabs(indentationLevel) + DialogueIO::TRIGGER + ":" + std::string(trigger->rawTrigger) + "\n");
+		diaExport.append(tabs(indentationLevel) + DialogueIO::TRIGGER + ":" + replaceNewlines(trigger->rawTrigger) + "\n");
 	}
 	diaExport.append(tabs(indentationLevel) + "# translation: \n");
-	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_TAG + ":" + std::string(m_translation->tag) + "\n");
-	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_EN + ":" + std::string(m_translation->englishTranslation) + "\n");
-	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_DE + ":" + std::string(m_translation->germanTranslation) + "\n");
-	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + std::string(m_translation->swissgermanTranslation) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_TAG + ":" + replaceNewlines(m_translation->tag) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_EN + ":" + replaceNewlines(m_translation->englishTranslation) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_DE + ":" + replaceNewlines(m_translation->germanTranslation) + "\n");
+	diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + replaceNewlines(m_translation->swissgermanTranslation) + "\n");
 	return diaExport;
 }
 

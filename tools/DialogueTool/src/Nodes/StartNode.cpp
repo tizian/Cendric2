@@ -3,6 +3,9 @@
 #include "ApplicationState.h"
 #include <sstream>
 
+StartNode::StartNode(int tag) : DialogueNode(tag) {
+}
+
 StartNode::StartNode() : DialogueNode(-1) {
 }
 

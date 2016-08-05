@@ -28,6 +28,7 @@ public:
 
 	void load();
 	
+	void loadDialogue(const std::string& dialogueName);
 	void setConfiguration(const Configuration& configuration);
 	void setLogWindow(LogWindow* window);
 	void setLogMessage(const std::string& logMessage, const sf::Color& color);

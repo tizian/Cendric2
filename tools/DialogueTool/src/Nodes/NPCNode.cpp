@@ -6,6 +6,10 @@
 #include "Dialogue.h"
 #include <sstream>
 
+NpcNode::NpcNode(int tag) : DialogueNode(tag) {
+	m_translation = new NodeTranslation(getTag(), "npc");
+}
+
 NpcNode::NpcNode() : DialogueNode(G_DIA->generateTag()) {
 	m_translation = new NodeTranslation(getTag(), G_DIA->getNpcID());
 }

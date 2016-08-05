@@ -3,6 +3,9 @@
 #include "Dialogue.h"
 #include <sstream>
 
+TradeNode::TradeNode(int tag) : DialogueNode(tag) {
+}
+
 TradeNode::TradeNode() : DialogueNode(G_DIA->generateTag()) {
 }
 

@@ -44,4 +44,6 @@ private:
 	// exports all nodes to a sql string
 	std::string exportToSQL() const;
 	void recursiveSQLExport(DialogueNode* node, std::string& stack) const;
+
+	void recursiveCalculateUsedTags(DialogueNode* node);
 };

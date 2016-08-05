@@ -7,6 +7,7 @@
 // Choice Node, splits the flow into multiple children
 class ChoiceNode : public virtual DialogueNode {
 public:
+	ChoiceNode(int tag);
 	ChoiceNode();
 	~ChoiceNode();
 
