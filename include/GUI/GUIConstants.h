@@ -7,6 +7,7 @@ class GUIConstants {
 public:
 	static float LEFT;
 	static float TOP;
+	static float LEFT_BAR;
 
 	static float GUI_WINDOW_HEIGHT;
 	static float GUI_TABS_TOP;

@@ -11,7 +11,7 @@ const sf::Vector2f Spellbook::BUTTON_SIZE = sf::Vector2f(70.f, 57.f);
 Spellbook::Spellbook(CharacterCore* core, bool modifiable) {
 	m_core = core;
 	m_isModifiable = modifiable;
-	 
+
 	init();
 }
 
@@ -354,7 +354,7 @@ void Spellbook::reload() {
 void Spellbook::calculateModifierSlots() {
 	float yOffset = GUIConstants::TOP + SPELL_OFFSET;
 	float xOffset = GUIConstants::LEFT + 2 * GUIConstants::TEXT_OFFSET;
-	float modifierXOffset = 213.f;
+	float modifierXOffset = 289.f;
 	float textYOffset = SpellSlot::ICON_SIZE / 2.f - GUIConstants::CHARACTER_SIZE_S / 2.f;
 	for (auto& it : m_core->getData().modfiersLearned) {
 		BitmapText text;
