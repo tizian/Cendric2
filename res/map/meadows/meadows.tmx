@@ -1381,7 +1381,7 @@
   </object>
   <object id="222" x="3351.12" y="2940" width="43.75" height="36">
    <properties>
-    <property name="map entry" value="res/map/gandria/gandria.tmx,215,4725"/>
+    <property name="map entry" value="res/map/gandria/gandria.tmx,215,3225"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
