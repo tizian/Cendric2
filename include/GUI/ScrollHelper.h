@@ -8,6 +8,7 @@ class ScrollHelper {
 public:
 	ScrollHelper(const sf::FloatRect& boundingBox);
 	void render(sf::RenderTarget& target);
+	void setPosition(const sf::Vector2f& position);
 
 public:
 	sf::RenderTexture texture;
@@ -16,5 +17,5 @@ public:
 
 private:
 	sf::Sprite m_sprite;
-	const sf::IntRect m_boundingBox;
+	sf::FloatRect m_boundingBox;
 };

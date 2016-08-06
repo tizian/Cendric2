@@ -8,17 +8,14 @@ const float TabButton::ALIGNMENT_OFFSET = 14.f;
 TabButton::TabButton(const sf::FloatRect& box) {
 	// using default values for constructor.
 	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_INACTIVE), COLOR_WHITE, box.width, box.height);
-	m_border.setPosition(box.left, box.top);
 
 	m_outerRect = box;
 	sf::FloatRect backgroundBox = sf::FloatRect(box.left + BORDER_OFFSET, box.top + BORDER_OFFSET, box.width - 2.f * BORDER_OFFSET, box.height - 2.f * BORDER_OFFSET);
-	m_background.setPosition(sf::Vector2f(backgroundBox.left, backgroundBox.top));
 	m_background.setSize(sf::Vector2f(backgroundBox.width, backgroundBox.height));
 	m_background.setFillColor(m_backgroundColor);
-
 	sf::FloatRect boundingBox = sf::FloatRect(box.left + BOUNDING_BOX_OFFSET, box.top + BORDER_OFFSET, box.width - 2.f * BOUNDING_BOX_OFFSET, box.height - 2.f * BORDER_OFFSET);
 	setBoundingBox(boundingBox);
-
+	
 	setInputInDefaultView(true);
 	setDebugBoundingBox(COLOR_BAD);
 
@@ -26,6 +23,23 @@ TabButton::TabButton(const sf::FloatRect& box) {
 
 	// agent placeholder
 	m_executeOnClick = std::bind(&TabButton::nop, this);
+
+	setPosition(sf::Vector2f(box.left, box.top));
+}
+
+void TabButton::setPosition(const sf::Vector2f& position) {
+	GameObject::setPosition(position + sf::Vector2f(BOUNDING_BOX_OFFSET, BORDER_OFFSET));
+	m_border.setPosition(position);
+
+	sf::Vector2f backgroundPos = sf::Vector2f(position.x + BORDER_OFFSET, position.y + BORDER_OFFSET);
+	m_background.setPosition(backgroundPos);
+
+	float width = m_text.getLocalBounds().width;
+	float height = m_text.getLocalBounds().height;
+	float x = getBoundingBox()->left + 0.5f * (getBoundingBox()->width - width);
+	float y = getBoundingBox()->top + 0.5f * (getBoundingBox()->height - height);
+
+	m_text.setPosition(sf::Vector2f(x, y));
 }
 
 void TabButton::setActive(bool active) {

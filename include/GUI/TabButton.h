@@ -22,6 +22,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	void setOnClick(const std::function<void()>& agent);
+	void setPosition(const sf::Vector2f& position) override;
 
 	// position will be set automatically as the center of the button.
 

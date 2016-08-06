@@ -20,11 +20,26 @@ InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 		GUIOrnamentStyle::LARGE,
 		COLOR_TRANS_BLACK, // back
 		COLOR_WHITE); // ornament
+
+	setPosition(sf::Vector2f(GUIConstants::LEFT, GUIConstants::TOP));
 }
 
 InventoryEquipment::~InventoryEquipment() {
 	m_slots.clear();
 	delete m_window;
+}
+
+void InventoryEquipment::setPosition(const sf::Vector2f& position) {
+	m_position = position;
+	m_window->setPosition(position);
+
+	float xOffset = position.x + 0.5f * (WIDTH - InventorySlot::SIZE + 2 * InventorySlot::ICON_OFFSET);
+	float yOffset = position.y + YOFFSET + InventorySlot::ICON_OFFSET;
+
+	for (auto& slot : m_slots) {
+		slot.second.setPosition(sf::Vector2f(xOffset, yOffset));
+		yOffset += InventorySlot::SIZE + MARGIN;
+	}
 }
 
 void InventoryEquipment::update(const sf::Time& frameTime) {
@@ -146,8 +161,6 @@ void InventoryEquipment::reload() {
 	types.push_back(ItemType::Equipment_ring_2);
 
 	sf::Vector2i texPos(0, 0);
-	float xOffset = GUIConstants::LEFT + 0.5f * (WIDTH - InventorySlot::SIZE + 2 * InventorySlot::ICON_OFFSET);
-	float yOffset = GUIConstants::TOP + YOFFSET + InventorySlot::ICON_OFFSET;
 
 	for (auto& it : types) {
 		if (m_core->getEquippedItem(it).empty()) {
@@ -158,9 +171,9 @@ void InventoryEquipment::reload() {
 		}
 		texPos.x += 50;
 		m_slots.at(it).setItemType(it);
-		m_slots.at(it).setPosition(sf::Vector2f(xOffset, yOffset));
-		yOffset += InventorySlot::SIZE + MARGIN;
 	}
+
+	setPosition(m_position);
 }
 
 void InventoryEquipment::show() {

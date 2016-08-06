@@ -51,8 +51,12 @@ private:
 	MapInterface* m_mapInterface = nullptr;
 	MerchantInterface* m_merchantInterface = nullptr;
 	WorldInterface* getInterface() const;
+
 	bool m_isVisible = false;
+	sf::Vector2f m_position;
+
 	void init();
+	void setPosition(const sf::Vector2f& position);
 
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector

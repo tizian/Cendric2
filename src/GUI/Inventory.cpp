@@ -61,11 +61,9 @@ void Inventory::init() {
 	m_descriptionWindow = new ItemDescriptionWindow();
 
 	// init text
-	m_selectedTabText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::TEXT_OFFSET));
 	m_selectedTabText.setColor(COLOR_WHITE);
 	m_selectedTabText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	m_goldText.setPosition(sf::Vector2f(INVENTORY_LEFT + GUIConstants::TEXT_OFFSET, GUIConstants::TOP + GUIConstants::GUI_WINDOW_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
 	m_goldText.setColor(COLOR_WHITE);
 	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
@@ -95,10 +93,8 @@ void Inventory::init() {
 	int nTabs = 5;
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
-	float x = INVENTORY_LEFT + 0.5f * (INVENTORY_WIDTH - width);
-	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 
-	m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
+	m_tabBar = new TexturedTabBar(sf::FloatRect(0, 0, width, height), nTabs);
 
 	int textureOffset = 0;
 	for (int i = 0; i < nTabs; ++i) {
@@ -108,10 +104,7 @@ void Inventory::init() {
 
 	// init scrolling
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
-	m_scrollWindow.setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP));
-
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
-	m_scrollBar->setPosition(sf::Vector2f(INVENTORY_LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, GUIConstants::TOP + SCROLL_WINDOW_TOP));
 
 	sf::FloatRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
@@ -119,15 +112,53 @@ void Inventory::init() {
 	// init empty text
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_emptyText.setString(g_textProvider->getText("Empty"));
-	const sf::FloatRect bounds = m_emptyText.getBounds();
-	m_emptyText.setPosition(scrollBox.left + 0.5f * (scrollBox.width - bounds.width), scrollBox.top + 0.5f * (scrollBox.height - bounds.height));
 
 	m_equipment = new InventoryEquipment(getInterface()->getScreen());
 
 	m_currentTab = ItemType::Equipment_weapon;
+	setPosition(sf::Vector2f(INVENTORY_LEFT, GUIConstants::TOP));
 	reload();
-
 	selectTab(m_currentTab);
+}
+
+void Inventory::setPosition(const sf::Vector2f& position) {
+	hideDescription();
+	hideDocument();
+	deselectCurrentSlot();
+
+	m_position = position;
+	m_window->setPosition(position);
+
+	m_selectedTabText.setPosition(position + 
+		sf::Vector2f(
+			0.5f * INVENTORY_WIDTH - 0.5f * m_selectedTabText.getLocalBounds().width, 
+			GUIConstants::TEXT_OFFSET));
+
+	m_goldText.setPosition(position + sf::Vector2f(
+		GUIConstants::TEXT_OFFSET, 
+		GUIConstants::GUI_WINDOW_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
+
+	sf::Vector2f pos = m_goldText.getPosition();
+	pos.x += m_goldText.getBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
+	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 13.f;
+	m_goldSprite.setPosition(pos);
+
+	m_tabBar->setPosition(position + sf::Vector2f(
+		0.5f * (INVENTORY_WIDTH - m_tabBar->getTabButtons().size() * BUTTON_SIZE.x), 
+		GUIConstants::GUI_TABS_TOP));
+
+	m_scrollWindow.setPosition(position + sf::Vector2f(SCROLL_WINDOW_LEFT, SCROLL_WINDOW_TOP));
+	m_scrollBar->setPosition(position + sf::Vector2f(SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, SCROLL_WINDOW_TOP));
+	m_scrollHelper->setPosition(position + sf::Vector2f(SCROLL_WINDOW_LEFT, SCROLL_WINDOW_TOP));
+
+	const sf::FloatRect bounds = m_emptyText.getBounds();
+	m_emptyText.setPosition(position + sf::Vector2f(
+		SCROLL_WINDOW_LEFT + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.width),
+		SCROLL_WINDOW_TOP + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.height)));
+
+	m_equipment->setPosition(position - sf::Vector2f(WINDOW_MARGIN + InventoryEquipment::WIDTH, 0.f));
+
+	calculateSlotPositions(*(m_typeMap.at(m_currentTab)));
 }
 
 Inventory::~Inventory() {
@@ -644,9 +675,9 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slo
 	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
 	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
 
-	float xOffsetStart = INVENTORY_LEFT + SCROLL_WINDOW_LEFT + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN;
+	float xOffsetStart = m_position.x + SCROLL_WINDOW_LEFT + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN;
 
-	float yOffset = GUIConstants::TOP + SCROLL_WINDOW_TOP + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN - effectiveScrollOffset;
+	float yOffset = m_position.y + SCROLL_WINDOW_TOP + InventorySlot::ICON_OFFSET + 2 * WINDOW_MARGIN - effectiveScrollOffset;
 	float xOffset = xOffsetStart;
 	int y = 1;
 	int x = 1;
@@ -686,10 +717,12 @@ void Inventory::hide() {
 
 void Inventory::startTrading(MerchantInterface* _interface) {
 	m_merchantInterface = _interface;
+	setPosition(sf::Vector2f(GUIConstants::LEFT_BAR + WINDOW_MARGIN + InventoryEquipment::WIDTH, GUIConstants::TOP));
 	show();
 }
 
 void Inventory::stopTrading() {
 	m_merchantInterface = nullptr;
+	setPosition(sf::Vector2f(INVENTORY_LEFT, GUIConstants::TOP));
 	hide();
 }

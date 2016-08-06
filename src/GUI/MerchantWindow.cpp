@@ -17,7 +17,7 @@ const float MerchantWindow::SCROLL_WINDOW_HEIGHT = SLOT_COUNT_Y * InventorySlot:
 
 const float MerchantWindow::WIDTH = SCROLL_WINDOW_WIDTH + 2 * SCROLL_WINDOW_LEFT;
 const float MerchantWindow::TOP = GUIConstants::TOP;
-const float MerchantWindow::LEFT = WINDOW_WIDTH - WIDTH - GUIConstants::LEFT;
+const float MerchantWindow::LEFT = WINDOW_WIDTH - WIDTH - GUIConstants::LEFT_BAR;
 
 MerchantWindow::MerchantWindow(MerchantInterface* _interface) {
 	m_interface = _interface;

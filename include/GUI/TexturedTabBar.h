@@ -13,9 +13,10 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
+	void setPosition(const sf::Vector2f& position) override;
 
 	int getActiveTabIndex() const;
-	std::vector<TexturedTabButton*>& getTabButtons();
+	const std::vector<TexturedTabButton*>& getTabButtons() const ;
 	TexturedTabButton* getTabButton(int index);
 
 	GameObjectType getConfiguredType() const override;
@@ -24,4 +25,5 @@ private:
 	int m_activeTabIndex;
 	std::vector<TexturedTabButton*> m_tabButtons;
 	SlicedSprite m_activeOverlay;
+	float m_tabWidth;
 };

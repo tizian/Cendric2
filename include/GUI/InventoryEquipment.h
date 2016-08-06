@@ -23,6 +23,7 @@ public:
 	void render(sf::RenderTarget& target);
 	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
+	void setPosition(const sf::Vector2f& position);
 
 	// reloads the equipment items, depending on the core
 	void reload();
@@ -45,6 +46,7 @@ private:
 	bool m_isInLevel = false;
 
 	std::map<ItemType, InventorySlot> m_slots;
+	sf::Vector2f m_position;
 
 	Window* m_window;
 };
