@@ -21,6 +21,15 @@ InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 		COLOR_TRANS_BLACK, // back
 		COLOR_WHITE); // ornament
 
+	// order of items displayed
+	m_types.push_back(ItemType::Equipment_weapon);
+	m_types.push_back(ItemType::Equipment_head);
+	m_types.push_back(ItemType::Equipment_neck);
+	m_types.push_back(ItemType::Equipment_body);
+	m_types.push_back(ItemType::Equipment_back);
+	m_types.push_back(ItemType::Equipment_ring_1);
+	m_types.push_back(ItemType::Equipment_ring_2);
+
 	setPosition(sf::Vector2f(GUIConstants::LEFT, GUIConstants::TOP));
 }
 
@@ -36,8 +45,9 @@ void InventoryEquipment::setPosition(const sf::Vector2f& position) {
 	float xOffset = position.x + 0.5f * (WIDTH - InventorySlot::SIZE + 2 * InventorySlot::ICON_OFFSET);
 	float yOffset = position.y + YOFFSET + InventorySlot::ICON_OFFSET;
 
-	for (auto& slot : m_slots) {
-		slot.second.setPosition(sf::Vector2f(xOffset, yOffset));
+	for (auto type : m_types) {
+		if (m_slots.find(type) == m_slots.end()) continue;
+		m_slots.at(type).setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += InventorySlot::SIZE + MARGIN;
 	}
 }
@@ -151,18 +161,9 @@ void InventoryEquipment::reload() {
 
 	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS);
 
-	std::vector<ItemType> types;
-	types.push_back(ItemType::Equipment_weapon);
-	types.push_back(ItemType::Equipment_head);
-	types.push_back(ItemType::Equipment_neck);
-	types.push_back(ItemType::Equipment_body);
-	types.push_back(ItemType::Equipment_back);
-	types.push_back(ItemType::Equipment_ring_1);
-	types.push_back(ItemType::Equipment_ring_2);
-
 	sf::Vector2i texPos(0, 0);
 
-	for (auto& it : types) {
+	for (auto& it : m_types) {
 		if (m_core->getEquippedItem(it).empty()) {
 			m_slots.insert({ it, InventorySlot(tex, texPos, it) });
 		}
