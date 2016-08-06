@@ -1,0 +1,194 @@
+# dia file for dialogue for npc: npc_stephen
+
+npc.id:npc_stephen
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_stephen", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_stephen", "talked")
+	# translation: 
+	translation.tag:DL_NPC_ANewFace
+	translation.en:And again, a new face in the city. As if we hadn't already troublemakers here. 
+	translation.de:Und wieder ein neues Gesicht in der Stadt. Als hätten wir nicht schon genug Störenfriede hier.
+	translation.ch:Und wider es neus Gsicht ide Stadt. Als hettemer nid scho gnueg Störefried da.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_YouShouldKnowRules
+	translation.en:You should know the rules of the city, if you don't want to end up jailed.
+	translation.de:Du solltest die Regeln dieser Stadt kennen, wenn du nicht im Gefängnis landen willst. 
+	translation.ch:Du sötsch d'Regle vo dere Stadt kenne, wend nid wetsch hinter Gitter cho.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_ExplainRules
+		translation.en:Explain me the rules of the city.
+		translation.de:Erklär mir die Regeln der Stadt.
+		translation.ch:Erklär mer d'Regle vode Stadt.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:not DL:isConditionFulfilled("npc_stephen", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du eigentlich?
+		translation.ch:Wer bisch du überhaupt?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_choice_NoTime
+		translation.en:I don't have time for this.
+		translation.de:Ich habe keine Zeit für das.
+		translation.ch:Ich han grad ke Ziit für das.
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_Rules1
+	translation.en:Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore, respect us and follow our orders as long as you're here, or it won't be a very pleasant stay in Gandria.
+	translation.de:Nun, zuerst solltest du wissen, dass der Orden des Ewigen Lichts hier regiert - also respektiere uns und unsere Gesetze, sonst wird das ein nicht sehr angenehmer Aufenthalt für dich in Gandria.
+	translation.ch:Zersch mal sött der klar si, dass de Orde vom Ewige Liecht da regiert - also halt dich besser a üsi Gsetz, susch wird das en nid sehr agnehme Ufenthalt für dich in Gandria.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_Rules2
+	translation.en:Behave well if you go into a stranger's house - we don't like thieves here. Most citicens of Gandria use observer spells to avoid being robbed.
+	translation.de:Benimm dich wenn du ein fremdes Haus betrittst - Wir mögen keine Diebe hier. Die meisten Bürger hier haben Beobachter-Zauber, um Diebstähle zu verhindern.
+	translation.ch:Benimm dich wend ines fremds Huus gasch - Mer gsehnd Diebe nid gern da. Di meiste Bürger hend Beobachter-Zauber, wo verhinderet, das öpper öppis chluppet.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_Rules3
+	translation.en:And, last but not least, we don't really like seeing other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
+	translation.de:Und, zum Schluss: Wir sehen es nicht sonderlich gerne, wenn jemand Zauber wirkt, die nicht zur hohen Kunst der heiligen Magie gehören. Wenn wir dich bei Nekromantie erwischen, kannst du aufgeknöpft werden.
+	translation.ch:Und, zum Schluss: Mir gsehnds nid bsunders gern, wenn öpper mit Zauber hantiert, wo nid zude hoche heilige Schuel ghöred. Wennd bi Nekromantie verwütscht wirsch, chasch ufknöpft werde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_stephen", "who_are_you")
+	# translation: 
+	translation.tag:DL_NPC_WhoAreYou
+	translation.en:I'm Stephen, paladin and vigilante of Gandria and so to say directly the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
+	translation.de:Ich bin Stephen, Paladin und Ordnungshüter von Gandria, sozusagen die rechte Hand von unserem Kommandanten, Lloyd. Leg dich nicht mit mir oder meiner Stadt an, verstanden?
+	translation.ch:Ich bi de Stephen, Paladin und Gsetzeshüeter vo Gandria, sozsege grad di recht Hand vom Kommandant Lloyd. Leg dich nid mit mir oder minere Stadt ah, verstande? 
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{2
+	# [7] Choice Node
+	tag:7
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_choice_Understood
+		translation.en:Understood.
+		translation.de:Verstanden.
+		translation.ch:Verstande.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_MaybeUnderstood
+		translation.en:I'll try.
+		translation.de:Ich werde es versuchen.
+		translation.ch:Ich wirds probiere.
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_NotUnderstood
+		translation.en:... (Grin disparagingly)
+		translation.de:... (Abschätzig Grinsen)
+		translation.ch:... (Abschätzig Grinse)
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_IKeepEyeOnYou
+	translation.en:I'll keep an eye on you, boy.
+	translation.de:Ich werde dich im Auge behalten, Junge.
+	translation.ch:Dich wirdi im Aug phalte, Bürschtli.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_DontTrouble
+	translation.en:Well then... Don't make trouble!
+	translation.de:Na dann... Mach bloss keinen Ärger!
+	translation.ch:Ja dänn... Mach bloss ken Ärger!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

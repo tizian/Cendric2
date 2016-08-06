@@ -53,18 +53,13 @@ std::string TriggerableNode::exportToLua(int indent) const {
 }
 
 std::string TriggerableNode::exportToSQL() const {
-	if (m_children.size() != 1) {
-		return "-- ERROR: " + getTriggerableNodeType() + " node must only have exactly one child\n";
-	}
-
 	std::stringstream ss;
-	auto child = m_children.at(0);
 
 	std::string en = duplicateApostrophs(m_translation->englishTranslation);
 	std::string de = duplicateApostrophs(m_translation->germanTranslation);
 	std::string ch = duplicateApostrophs(m_translation->swissgermanTranslation);
 	ss << "INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('";
-	ss << m_translation->tag << "', '" << G_DIA->getNpcID() << "', '" << en + "', '" + de + "', '" + ch + "');\n";
+	ss << m_translation->tag << "', 'dl_" << G_DIA->getNpcID() << "', '" << en + "', '" + de + "', '" + ch + "');\n";
 
 	return ss.str();
 }

@@ -7,6 +7,7 @@
 #include "Nodes/ChoiceNode.h"
 #include "Nodes/Condition.h"
 #include "Nodes/NodeTrigger.h"
+#include <algorithm>
 
 NodeWindow::NodeWindow(TranslationWindow* translationWindow) {
 	m_translationWindow = translationWindow;
@@ -74,6 +75,9 @@ void NodeWindow::showStartNodeWindow() {
 		// show root node sub window
 		ImGui::BeginChild(("Sub" + std::to_string(counter)).c_str(), ImVec2(0, size), true);
 		ImGui::Text(("Next Tag: [" + std::to_string((*it)->getNextTag()) + "]").c_str());
+		if (ImGui::Combo("Next Node", &(*it)->currentPreselectedNodetype, DialogueNode::NODE_TYPES)) {
+			(*it)->linkNodeTemplate();
+		}
 		ImGui::Combo("", &(*it)->currentPreselectedCondition, Condition::CONDITION_TYPES);
 		ImGui::SameLine();
 		if (ImGui::Button("Add Condition")) {
@@ -81,9 +85,6 @@ void NodeWindow::showStartNodeWindow() {
 		}
 		if (hasCondition) {
 			ImGui::InputTextMultiline("Condition", (*it)->condition->getConditionString(), IM_ARRAYSIZE((*it)->condition->getConditionString()), ImVec2(-1.0f, ImGui::GetTextLineHeight() * 3), ImGuiInputTextFlags_AllowTabInput);
-		}
-		if (ImGui::Combo("Next Node", &(*it)->currentPreselectedNodetype, DialogueNode::NODE_TYPES)) {
-			(*it)->linkNodeTemplate();
 		}
 
 		if (moreThanOneNode && ImGui::Button("Remove Root")) {
@@ -130,8 +131,28 @@ void NodeWindow::showChoiceNodeWindow() {
 		// show root node sub window
 		ImGui::BeginChild(("Sub" + std::to_string(counter)).c_str(), ImVec2(0, size), true);
 		ImGui::Text(("Next Tag: [" + std::to_string((*it)->getNextTag()) + "]").c_str());
-		if (ImGui::Button("Translation")) {
+		if (ImGui::Combo("Next Node", &(*it)->currentPreselectedNodetype, DialogueNode::NODE_TYPES)) {
+			(*it)->linkNodeTemplate();
+		}
+
+		if (ImGui::Button("Show Translation")) {
 			m_translationWindow->setNodeTranslation((*it)->translation);
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("^")) {
+			if (it != cNode->getLinkNodes().begin()) {
+				std::iter_swap(it - 1, it);
+				ImGui::EndChild();
+				break;
+			}
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("v")) {
+			if (it + 1 != cNode->getLinkNodes().end()) {
+				std::iter_swap(it + 1, it);
+				ImGui::EndChild();
+				break;
+			}
 		}
 		ImGui::Combo("", &(*it)->currentPreselectedCondition, Condition::CONDITION_TYPES);
 		ImGui::SameLine();
@@ -140,9 +161,6 @@ void NodeWindow::showChoiceNodeWindow() {
 		}
 		if (hasCondition) {
 			ImGui::InputTextMultiline("Condition", (*it)->condition->getConditionString(), IM_ARRAYSIZE((*it)->condition->getConditionString()), ImVec2(-1.0f, ImGui::GetTextLineHeight() * 3), ImGuiInputTextFlags_AllowTabInput);
-		}
-		if (ImGui::Combo("Next Node", &(*it)->currentPreselectedNodetype, DialogueNode::NODE_TYPES)) {
-			(*it)->linkNodeTemplate();
 		}
 
 		if (moreThanOneNode && ImGui::Button("Remove Choice")) {

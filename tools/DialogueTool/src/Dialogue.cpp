@@ -185,6 +185,10 @@ void Dialogue::recursiveSQLExport(DialogueNode* node, std::string& stack) const 
 	stack.append(node->exportToSQL());
 
 	for (auto child : node->getLinkNodes()) {
+		stack.append(child->exportToSQL());
+	}
+
+	for (auto child : node->getLinkNodes()) {
 		recursiveSQLExport(child->nextNode, stack);
 	}
 }

@@ -11,7 +11,7 @@ NpcNode::NpcNode(int tag) : DialogueNode(tag) {
 }
 
 NpcNode::NpcNode() : DialogueNode(G_DIA->generateTag()) {
-	m_translation = new NodeTranslation(getTag(), G_DIA->getNpcID());
+	m_translation = new NodeTranslation(getTag(), "NPC");
 }
 
 DialogueNodeType NpcNode::getType() const {

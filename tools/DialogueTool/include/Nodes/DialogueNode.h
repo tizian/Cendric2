@@ -21,6 +21,8 @@ struct LinkNode {
 
 	// exports the link node to part of a dia file
 	std::string exportToDia(int indentationLevel) const;
+	// exports the link node to part of a sql file
+	std::string exportToSQL() const;
 	// adds the currently selected condition template to the 
 	// condition string
 	void addConditionTemplate();

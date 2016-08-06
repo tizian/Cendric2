@@ -217,11 +217,13 @@ bool DialogueIO::loadDialogue(const std::string& filePath, Dialogue** dialogue) 
 				delete link->nextNode;
 				link->nextNode = nullptr;
 				link->isReload = false;
+				link->currentPreselectedNodetype = static_cast<int>(DialogueNodeType::End);
 			}
 			else if (link->ioNextTag == -2) {
 				delete link->nextNode;
 				link->nextNode = nullptr;
 				link->isReload = true;
+				link->currentPreselectedNodetype = static_cast<int>(DialogueNodeType::Start);
 			}
 			else {
 				if (tagToNode.find(link->ioNextTag) == tagToNode.end()) {
@@ -233,6 +235,7 @@ bool DialogueIO::loadDialogue(const std::string& filePath, Dialogue** dialogue) 
 				}
 				delete link->nextNode;
 				link->nextNode = tagToNode.at(link->ioNextTag);
+				link->currentPreselectedNodetype = static_cast<int>(link->nextNode->getType());
 			}
 		}
 	}

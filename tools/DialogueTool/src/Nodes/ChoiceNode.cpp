@@ -32,12 +32,12 @@ std::string ChoiceNode::exportToLua(int indent) const {
 	for (auto child : m_children) {
 
 		if (child->condition == nullptr) {
-			ss << tabs(indent) << "DL:addChoice(" + std::to_string(getTag()) + ", \"" + child->translation->tag + "\")";
+			ss << tabs(indent) << "DL:addChoice(" + std::to_string(child->getNextTag()) + ", \"" + child->translation->tag + "\")";
 			ss << " -- "<< child->translation->englishTranslation << "\n";
 		}
 		else {
 			ss << tabs(indent) << "if (" << child->condition->exportToLua() << ") then \n";
-			ss << tabs(indent + 1) << "DL:addChoice(" + std::to_string(getTag()) + ", \"" + child->translation->tag + "\")";
+			ss << tabs(indent + 1) << "DL:addChoice(" + std::to_string(child->getNextTag()) + ", \"" + child->translation->tag + "\")";
 			ss << " -- " << child->translation->englishTranslation << "\n";
 			ss << tabs(indent) << "end\n";
 		}
@@ -51,11 +51,9 @@ void ChoiceNode::addLinkNode(LinkNode* node) {
 	delete node->translation;
 	node->translation = new NodeTranslation(node->getNextTag(), "Choice");
 	delete node->condition;
-	node->condition = new NodeCondition(NodeConditionType::Raw);
-	if (G_DIA == nullptr) {
-		strcpy(node->condition->getConditionString(), "");
-	}
-	else {
+	
+	if (G_DIA != nullptr) {
+		node->condition = new NodeCondition(NodeConditionType::Raw);
 		strcpy(node->condition->getConditionString(), ("not DL:isConditionFulfilled(\"" + G_DIA->getNpcID() + "\", \"Choice" + std::to_string(node->getNextTag()) + "\")").c_str());
 	}
 	

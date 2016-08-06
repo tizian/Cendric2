@@ -9,6 +9,8 @@
 #include "Dialogue.h"
 #include "FileIO/DialogueIO.h"
 
+#include <sstream>
+
 // Link Node
 
 LinkNode::~LinkNode() {
@@ -91,6 +93,19 @@ std::string LinkNode::exportToDia(int indentationLevel) const {
 		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + replaceNewlines(translation->swissgermanTranslation) + "\n");
 	}
 	return diaExport;
+}
+
+std::string LinkNode::exportToSQL() const {
+	if (translation == nullptr) return "";
+	std::stringstream ss;
+
+	std::string en = duplicateApostrophs(translation->englishTranslation);
+	std::string de = duplicateApostrophs(translation->germanTranslation);
+	std::string ch = duplicateApostrophs(translation->swissgermanTranslation);
+	ss << "INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('";
+	ss << translation->tag << "', 'dl_" << G_DIA->getNpcID() << "', '" << en + "', '" + de + "', '" + ch + "');\n";
+
+	return ss.str();
 }
 
 // DialogueNode
