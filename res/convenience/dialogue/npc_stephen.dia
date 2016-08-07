@@ -22,7 +22,7 @@ npc.id:npc_stephen
 	trigger:DL:addConditionProgress("npc_stephen", "talked")
 	# translation: 
 	translation.tag:DL_NPC_ANewFace
-	translation.en:And again, a new face in the city. As if we hadn't already troublemakers here. 
+	translation.en:And again, a new face in the city. As if we hadn't already enough troublemakers here. 
 	translation.de:Und wieder ein neues Gesicht in der Stadt. Als hätten wir nicht schon genug Störenfriede hier.
 	translation.ch:Und wider es neus Gsicht ide Stadt. Als hettemer nid scho gnueg Störefried da.
 	[
@@ -50,6 +50,7 @@ npc.id:npc_stephen
 	[
 		# Link node, tag is next tag
 		tag:5
+		condition:not DL:isConditionFulfilled("npc_stephen", "rules")
 		# translation: 
 		translation.tag:DL_Choice_ExplainRules
 		translation.en:Explain me the rules of the city.
@@ -69,11 +70,22 @@ npc.id:npc_stephen
 	[
 		# Link node, tag is next tag
 		tag:4
+		condition:not DL:isConditionFulfilled("npc_stephen", "rules")
 		# translation: 
 		translation.tag:DL_choice_NoTime
 		translation.en:I don't have time for this.
 		translation.de:Ich habe keine Zeit für das.
 		translation.ch:Ich han grad ke Ziit für das.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		condition:DL:isConditionFulfilled("npc_stephen", "rules")
+		# translation: 
+		translation.tag:DL_Choice_CU
+		translation.en:See you.
+		translation.de:Bis später.
+		translation.ch:Bis spöter.
 	]
 }
 {1
@@ -113,6 +125,21 @@ npc.id:npc_stephen
 	translation.en:And, last but not least, we don't really like seeing other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
 	translation.de:Und, zum Schluss: Wir sehen es nicht sonderlich gerne, wenn jemand Zauber wirkt, die nicht zur hohen Kunst der heiligen Magie gehören. Wenn wir dich bei Nekromantie erwischen, kannst du aufgeknöpft werden.
 	translation.ch:Und, zum Schluss: Mir gsehnds nid bsunders gern, wenn öpper mit Zauber hantiert, wo nid zude hoche heilige Schuel ghöred. Wennd bi Nekromantie verwütscht wirsch, chasch ufknöpft werde.
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{3
+	# [11] Cendric Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_stephen", "rules")
+	# translation: 
+	translation.tag:DL_Cendric_Okay
+	translation.en:Okay.
+	translation.de:Okay.
+	translation.ch:Okay.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -159,9 +186,9 @@ npc.id:npc_stephen
 		tag:8
 		# translation: 
 		translation.tag:DL_Choice_NotUnderstood
-		translation.en:... (Grin disparagingly)
-		translation.de:... (Abschätzig Grinsen)
-		translation.ch:... (Abschätzig Grinse)
+		translation.en:... (Mischievous grin)
+		translation.de:... (Schelmisch grinsen)
+		translation.ch:... (Schelmisch grinse)
 	]
 }
 {1
