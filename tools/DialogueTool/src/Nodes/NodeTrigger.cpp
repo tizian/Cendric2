@@ -27,6 +27,8 @@ std::string NodeTrigger::exportToLua() const {
 		return "DL:addHint(\"" + s1 + "\")";
 	case TriggerType::AddItem:
 		return "DL:addItem(\"" + s1 + "\", " + std::to_string(i1) + ")";
+	case TriggerType::RemoveItem:
+		return "DL:removeItem(\"" + s1 + "\", " + std::to_string(i1) + ")";
 	case TriggerType::EquipItem:
 		return "DL:equipItem(\"" + s1 + "\")";
 	case TriggerType::AddGold:

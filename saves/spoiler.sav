@@ -72,9 +72,6 @@ item.id:fo_sausage,1
 item.id:fo_water,1
 item.id:fo_wine,1
 item.id:fo_milk,1
-item.id:mi_brokenstaff1,1
-item.id:mi_brokenstaff2,1
-item.id:mi_brokenstaff3,1
 item.id:mi_candleholder,1
 item.id:mi_feather,1
 item.id:mi_gargoyle_dust,1
@@ -100,6 +97,9 @@ item.id:qe_recommendationletter,1
 item.id:qe_rope,1
 item.id:qe_spoiledfeudalfire,1
 item.id:qe_compass,1
+item.id:qe_brokenstaff1,1
+item.id:qe_brokenstaff2,1
+item.id:qe_brokenstaff3,1
 item.id:we_claw,1
 item.id:we_hawthorn,1
 item.id:we_icestaff,1

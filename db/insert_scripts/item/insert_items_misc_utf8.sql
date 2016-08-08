@@ -73,28 +73,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearl', 'item_desc', 'Can be found in some shells.','Kann man manchmal in Muscheln finden.','Cha me mengsmal in Muschle finde.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearl', 'misc', 400, 250, 15);
 
--- Broken Shaft (part 1 of the broken staff)
-
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff1', 'item', 'Broken Shaft','Zerbrochener Schaft','Kabutte Schaft');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff1', 'item_desc', 'This shaft seems to be a part of something bigger. Maybe I can find someone who can repair it.','Dieser Schaft scheint ein Teil von etwas grösserem zu sein. Vielleicht finde ich jemanden, der das reparieren kann.','De Schaft isch glaub en Teil vo öppis grösserem. Vilicht chani öpper finde, wo das flicke chan.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_brokenstaff1', 'misc', 450, 50, -1);
-INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_brokenstaff1', 0, -20, 50, 40);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_brokenstaff1', 1, 300, 150, 50, 100);
-
--- Broken Staff Head (part 2 of the broken staff)
-
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff2', 'item', 'Broken Staff Head','Zerbrochener Stabkopf','Kabutte Stabchopf');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff2', 'item_desc', 'Seems like a part of a staff. Maybe I can find someone who can repair it.','Scheint ein Stück eines Stabes zu sein. Vielleicht finde ich jemanden, der das reparieren kann.','Da isch glaub es Stück vomne Stab. Vilicht chani öpper finde, wo das flicke chan.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_brokenstaff2', 'misc', 550, 0, -1);
-INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_brokenstaff2', 0, -20, 50, 40);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_brokenstaff2', 1, 400, 250, 50, 100);
-
--- Tear Stone (part 3 of the broken staff)
-
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff3', 'item', 'Tear Stone','Tränenstein','Tränestei');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_brokenstaff3', 'item_desc', 'A tear shaped stone which focuses magic energy around it. Would fit perfectly into a staff head.','Ein tränenförmiger Stein, der die Magie um sich herum konzentriert. Er würde perfekt in einen Stabkopf passen.','En träneförmige Stei wo d''Magie um sich konzentriert. Er wür perfekt inen Stabchopf passe.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_brokenstaff3', 'misc', 550, 50, -1);
-
 -- Heart of the First Guardian
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firstguardianheart', 'item', 'Heart of Khajag','Herz von Khajag','Herz vom Khajag');
@@ -112,3 +90,9 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone', 'item', 'Corrupted Stone','Verdorbener Stein','Verdorbene Stei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone', 'misc', 300, 350, 28);
+
+-- Iron Ore
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item', 'Iron Ore','Eisenerz','Iseerz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item_desc', 'A sought-after ingredient for smithing.','Eine begehrte Schmiedezutat.','E begehrti Schmiedezuetat.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_ironore', 'misc', 0, 0, 10);
