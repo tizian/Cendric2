@@ -80,12 +80,15 @@ Isa
 <<< Quality Assurance >>>
 Tizian
 
+<<< Spanish Localization >>>
+Juan José Flores
+
 <<< Proof Reading >>>
-Daniel Josephy Hernandez
+Daniel Josephy Hernández
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
-Pascal Oberholzer, Daniel Josephy Hernandez, 
+Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer
 
@@ -203,12 +206,15 @@ Isa
 <<< Qualitätssicherung >>>
 Tizian
 
+<<< Spanische Übersetzungen >>>
+Juan José Flores
+
 <<< Korrekturlesen >>>
-Daniel Josephy Hernandez
+Daniel Josephy Hernández
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
-Pascal Oberholzer, Daniel Josephy Hernandez, 
+Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer
 
@@ -328,12 +334,15 @@ Isa
 <<< Qualitätssicherig >>>
 Tizian
 
+<<< Spanischi Übersetzige >>>
+Juan José Flores
+
 <<< Korrekturläser >>>
-Daniel Josephy Hernandez
+Daniel Josephy Hernández
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
-Pascal Oberholzer, Daniel Josephy Hernandez, 
+Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer
 

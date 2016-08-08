@@ -29,6 +29,7 @@ CREATE TABLE text(
 	english TEXT NOT NULL DEFAULT '',
 	german TEXT NOT NULL DEFAULT '',
 	swiss_german TEXT NOT NULL DEFAULT '',
+	spanish TEXT NOT NULL DEFAULT '',
 	PRIMARY KEY(text_id, text_type ASC)
 );
 

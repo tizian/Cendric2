@@ -90,6 +90,9 @@ void TextProvider::setLanguage(Language lang) {
 	case Language::Lang_CH:
 		m_language = "swiss_german";
 		break;
+	case Language::LANG_ES:
+		m_language = "spanish";
+		break;
 	case Language::Lang_EN:
 	default:
 		m_language = "english";

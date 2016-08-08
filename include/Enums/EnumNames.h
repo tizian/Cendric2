@@ -29,6 +29,8 @@ public:
 			return "German";
 		case Language::Lang_EN:
 			return "English";
+		case Language::LANG_ES:
+			return "Spanish";
 		}
 	}
 

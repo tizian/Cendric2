@@ -108,7 +108,7 @@ npc.id:npc_stephen
 	# triggers: 
 	# translation: 
 	translation.tag:DL_NPC_Rules2
-	translation.en:Behave well if you go into a stranger's house - we don't like thieves here. Most citicens of Gandria use observer spells to avoid being robbed.
+	translation.en:Behave well if you go into a stranger's house - we don't like thieves here. Most citizens of Gandria use observer spells to avoid being robbed.
 	translation.de:Benimm dich wenn du ein fremdes Haus betrittst - Wir mögen keine Diebe hier. Die meisten Bürger hier haben Beobachter-Zauber, um Diebstähle zu verhindern.
 	translation.ch:Benimm dich wend ines fremds Huus gasch - Mer gsehnd Diebe nid gern da. Di meiste Bürger hend Beobachter-Zauber, wo verhinderet, das öpper öppis chluppet.
 	[
