@@ -83,9 +83,9 @@ private:
 	TabBar* m_tabBar;
 	BitmapText m_title;
 
-	sf::Sprite m_statsIcons;
-	BitmapText m_namesText;
-	BitmapText m_attributeText;
+	std::vector<sf::Sprite> m_statIcons;
+	std::vector<BitmapText> m_nameTexts;
+	std::vector<BitmapText> m_attributeTexts;
 
 	std::vector<BitmapText> m_reputationTexts;
 

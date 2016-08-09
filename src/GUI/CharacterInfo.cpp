@@ -23,56 +23,57 @@ const float CharacterInfo::SCROLL_WINDOW_HEIGHT = ENTRY_COUNT * GUIConstants::CH
 const float CharacterInfo::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y;
 const float CharacterInfo::SCROLL_WINDOW_LEFT = 0.5f * (WIDTH - SCROLL_WINDOW_WIDTH);
 
+std::vector<std::string> labels = {
+	"Health",
+	"HealthRegeneration",
+	"CriticalHitChance",
+	"Haste",
+	"",
+	"PhysicalDamage",
+	"FireDamage",
+	"IceDamage",
+	"ShadowDamage",
+	"LightDamage",
+	"",
+	"Armor",
+	"FireResistance",
+	"IceResistance",
+	"ShadowResistance",
+	"LightResistance",
+};
+
 CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* attributes) {
 	m_core = core;
 	m_attributes = attributes;
 
-	// init text
-	std::string names = "";
-	names.append(g_textProvider->getText("Health") + ":\n");
-	names.append(g_textProvider->getText("HealthRegeneration") + ":\n");
-	names.append(g_textProvider->getText("CriticalHitChance") + ":\n");
-	names.append(g_textProvider->getText("Haste") + ":\n\n");
+	BitmapText name;
+	name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	name.setColor(COLOR_WHITE);
+	name.setString("Placeholder");
 
-	// dmg 
-	names.append(g_textProvider->getText("PhysicalDamage") + ":\n");
-	names.append(g_textProvider->getText("FireDamage") + ":\n");
-	names.append(g_textProvider->getText("IceDamage") + ":\n");
-	names.append(g_textProvider->getText("ShadowDamage") + ":\n");
-	names.append(g_textProvider->getText("LightDamage") + ":\n\n");
+	sf::Sprite icon;
+	icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CHARACTERINFO_ICONS));
 
-	// resistance
-	names.append(g_textProvider->getText("Armor") + ":\n");
-	names.append(g_textProvider->getText("FireResistance") + ":\n");
-	names.append(g_textProvider->getText("IceResistance") + ":\n");
-	names.append(g_textProvider->getText("ShadowResistance") + ":\n");
-	names.append(g_textProvider->getText("LightResistance") + ":\n");
+	float yOffset = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y + GUIConstants::CHARACTER_SIZE_M;
+	float textHeight = name.getLocalBounds().height;
+	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
-	m_namesText.setString(names);
-	m_namesText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_namesText.setColor(COLOR_WHITE);
-	m_namesText.setLineSpacing(0.833f);
+	for (size_t i = 0; i < labels.size(); ++i) {
+		if (labels[i].compare("") == 0) {
+			yOffset += dy;
+			continue;
+		}
 
-	m_attributeText.setString("");
-	m_attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_attributeText.setColor(COLOR_LIGHT_PURPLE);
-	m_attributeText.setLineSpacing(0.833f);
+		name.setPosition(LEFT + 2 * GUIConstants::TEXT_OFFSET, yOffset);
+		name.setString(g_textProvider->getText(labels[i]) + ":");
+		m_nameTexts.push_back(name);
 
-	float yOffset = GUIConstants::TOP + 4 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
+		icon.setTextureRect(sf::IntRect(0, i * 18, 18, 18));
+		icon.setPosition(sf::Vector2f(LEFT + WIDTH - 160.f, yOffset + 0.5f * (textHeight - 18)));
+		m_statIcons.push_back(icon);
 
-	m_namesText.setPosition(sf::Vector2f(
-		GUIConstants::LEFT + 2.f * GUIConstants::TEXT_OFFSET,
-		yOffset));
-
-	m_attributeText.setPosition(sf::Vector2f(
-		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET,
-		yOffset));
-
-	m_statsIcons.setPosition(
-		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET - 28.f,
-		yOffset - 4.f);
-
-	m_statsIcons.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CHARACTERINFO_ICONS));
+		yOffset += dy;
+	}
 
 	// init window
 	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
@@ -239,9 +240,15 @@ void CharacterInfo::render(sf::RenderTarget& target) {
 	m_tabBar->render(target);
 
 	if (m_tabBar->getActiveTabIndex() == 0) {
-		target.draw(m_statsIcons);
-		target.draw(m_namesText);
-		target.draw(m_attributeText);
+		for (auto& text : m_nameTexts) {
+			target.draw(text);
+		}
+		for (auto& text : m_attributeTexts) {
+			target.draw(text);
+		}
+		for (auto& icon : m_statIcons) {
+			target.draw(icon);
+		}
 	}
 	else if (m_tabBar->getActiveTabIndex() == 1) {
 		for (auto& text : m_reputationTexts) {
@@ -272,81 +279,74 @@ void CharacterInfo::reload() {
 }
 
 void CharacterInfo::updateAttributes() {
+	m_attributeTexts.clear();
+
+	std::vector<std::string> attributes;
+
 	// health
-	std::string attributes = "";
-	attributes.append(std::to_string(m_attributes->currentHealthPoints));
-	attributes.append("/");
-	attributes.append(std::to_string(m_attributes->maxHealthPoints));
-	attributes.append("\n");
+	std::string health = std::to_string(m_attributes->currentHealthPoints) +
+						 "/" +
+						 std::to_string(m_attributes->maxHealthPoints);
+	attributes.push_back(health);
 
 	// health regeneration
-	attributes.append(std::to_string(m_attributes->healthRegenerationPerS));
-	attributes.append("/s\n");
+	std::string healthRegen = std::to_string(m_attributes->healthRegenerationPerS)
+							  + "/s";
+	attributes.push_back(healthRegen);
 
 	// crit
-	attributes.append(std::to_string(m_attributes->criticalHitChance));
-	attributes.append("%\n");
+	std::string crit = std::to_string(m_attributes->criticalHitChance) +
+					   "%";
+	attributes.push_back(crit);
 
 	// cooldown reduction
-	attributes.append(std::to_string(m_attributes->haste));
-	//attributes.append(" - ");
-	//attributes.append(std::to_string(-round_int(m_attributes->cooldownMultiplier * 100.f - 100.f)));
-	//attributes.append("% " + g_textProvider->getText("CooldownReduction"));
-	attributes.append("\n\n");
+	attributes.push_back(std::to_string(m_attributes->haste));
+
+	attributes.push_back("");
 
 	// dmg 
-	attributes.append(std::to_string(m_attributes->damagePhysical) + "\n");
-	attributes.append(std::to_string(m_attributes->damageFire) + "\n");
-	attributes.append(std::to_string(m_attributes->damageIce) + "\n");
-	attributes.append(std::to_string(m_attributes->damageShadow) + "\n");
-	attributes.append(std::to_string(m_attributes->damageLight) + "\n\n");
+	attributes.push_back(std::to_string(m_attributes->damagePhysical));
+	attributes.push_back(std::to_string(m_attributes->damageFire));
+	attributes.push_back(std::to_string(m_attributes->damageIce));
+	attributes.push_back(std::to_string(m_attributes->damageShadow));
+	attributes.push_back(std::to_string(m_attributes->damageLight));
+
+	attributes.push_back("");
 
 	// resistance
-	attributes.append(std::to_string(m_attributes->resistancePhysical));
-	//attributes.append(" - ");
-	//attributes.append(std::to_string(-round_int(m_attributes->physicalMultiplier * 100.f - 100.f)));
-	//attributes.append("% " + g_textProvider->getText("Reduction"));
-	attributes.append("\n");
+	attributes.push_back(std::to_string(m_attributes->resistancePhysical));
+	attributes.push_back(std::to_string(m_attributes->resistanceFire));
+	attributes.push_back(std::to_string(m_attributes->resistanceIce));
+	attributes.push_back(std::to_string(m_attributes->resistanceShadow));
+	attributes.push_back(std::to_string(m_attributes->resistanceLight));
 
-	attributes.append(std::to_string(m_attributes->resistanceFire));
-	//attributes.append(" - ");
-	//attributes.append(std::to_string(-round_int(m_attributes->fireMultiplier * 100.f - 100.f)));
-	//attributes.append("% " + g_textProvider->getText("Reduction"));
-	attributes.append("\n");
+	BitmapText attributeText;
+	attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	attributeText.setColor(COLOR_WHITE);
+	attributeText.setString("Placeholder");
 
-	attributes.append(std::to_string(m_attributes->resistanceIce));
-	//attributes.append(" - ");
-	//attributes.append(std::to_string(-round_int(m_attributes->iceMultiplier * 100.f - 100.f)));
-	//attributes.append("% " + g_textProvider->getText("Reduction"));
-	attributes.append("\n");
+	float yOffset = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y + GUIConstants::CHARACTER_SIZE_M;
+	float textHeight = attributeText.getLocalBounds().height;
+	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
-	attributes.append(std::to_string(m_attributes->resistanceShadow));
-	//attributes.append(" - ");
-	//attributes.append(std::to_string(-round_int(m_attributes->shadowMultiplier * 100.f - 100.f)));
-	//attributes.append("% " + g_textProvider->getText("Reduction"));
-	attributes.append("\n");
+	for (size_t i = 0; i < attributes.size(); ++i) {
+		if (attributes[i].compare("") == 0) {
+			yOffset += dy;
+			continue;
+		}
 
-	attributes.append(std::to_string(m_attributes->resistanceLight));
-	//attributes.append(" - ");
-	//attributes.append(std::to_string(-round_int(m_attributes->lightMultiplier * 100.f - 100.f)));
-	//attributes.append("% " + g_textProvider->getText("Reduction"));
-	attributes.append("\n");
-	m_attributeText.setString(attributes);
+		attributeText.setPosition(LEFT + WIDTH - 136.f, yOffset);
+		attributeText.setString(attributes[i]);
+		m_attributeTexts.push_back(attributeText);
 
-	const sf::Vector2f pos = m_attributeText.getPosition();
-	m_attributeText.setPosition(sf::Vector2f(
-		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET,
-		pos.y));
-
-	m_statsIcons.setPosition(
-		GUIConstants::LEFT + WIDTH - m_attributeText.getBounds().width - 2.f * GUIConstants::TEXT_OFFSET - 28.f,
-		pos.y - 4.f);
+		yOffset += dy;
+	}
 }
 
 void CharacterInfo::updateReputation() {
 	m_reputationTexts.clear();
 
-	float yOffset = GUIConstants::TOP + 3 * GUIConstants::TEXT_OFFSET + GUIConstants::CHARACTER_SIZE_M + BUTTON_SIZE.y;
+	float yOffset = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y + GUIConstants::CHARACTER_SIZE_M;
 	
 	if (m_core->getData().reputationProgress.empty()) {
 		BitmapText noRep;
