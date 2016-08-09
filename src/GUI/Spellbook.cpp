@@ -4,7 +4,7 @@
 #include "GUI/SlotClone.h"
 #include "GlobalResource.h"
 
-float Spellbook::WIDTH = (WINDOW_WIDTH - GUIConstants::LEFT - 20.f) / 3.f;
+float Spellbook::WIDTH = 420.f;
 float Spellbook::SPELL_OFFSET = 115.f;
 const sf::Vector2f Spellbook::BUTTON_SIZE = sf::Vector2f(70.f, 57.f);
 
@@ -354,7 +354,7 @@ void Spellbook::reload() {
 void Spellbook::calculateModifierSlots() {
 	float yOffset = GUIConstants::TOP + SPELL_OFFSET;
 	float xOffset = GUIConstants::LEFT + 2 * GUIConstants::TEXT_OFFSET;
-	float modifierXOffset = 289.f;
+	float modifierXOffset = GUIConstants::LEFT + WIDTH - 3 * ModifierSlot::SIZE - 2 * MARGIN - 2 * GUIConstants::TEXT_OFFSET;
 	float textYOffset = SpellSlot::ICON_SIZE / 2.f - GUIConstants::CHARACTER_SIZE_S / 2.f;
 	for (auto& it : m_core->getData().modfiersLearned) {
 		BitmapText text;
