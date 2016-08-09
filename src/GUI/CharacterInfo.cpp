@@ -23,7 +23,7 @@ const float CharacterInfo::SCROLL_WINDOW_HEIGHT = ENTRY_COUNT * GUIConstants::CH
 const float CharacterInfo::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y;
 const float CharacterInfo::SCROLL_WINDOW_LEFT = 0.5f * (WIDTH - SCROLL_WINDOW_WIDTH);
 
-std::vector<std::string> labels = {
+const std::vector<std::string> CharacterInfo::LABELS = {
 	"Health",
 	"HealthRegeneration",
 	"CriticalHitChance",
@@ -58,14 +58,14 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 	float textHeight = name.getLocalBounds().height;
 	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
-	for (size_t i = 0; i < labels.size(); ++i) {
-		if (labels[i].compare("") == 0) {
+	for (size_t i = 0; i < LABELS.size(); ++i) {
+		if (LABELS[i].compare("") == 0) {
 			yOffset += dy;
 			continue;
 		}
 
 		name.setPosition(LEFT + 2 * GUIConstants::TEXT_OFFSET, yOffset);
-		name.setString(g_textProvider->getText(labels[i]) + ":");
+		name.setString(g_textProvider->getText(LABELS[i]) + ":");
 		m_nameTexts.push_back(name);
 
 		icon.setTextureRect(sf::IntRect(0, i * 18, 18, 18));

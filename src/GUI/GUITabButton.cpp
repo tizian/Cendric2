@@ -2,6 +2,7 @@
 
 #include "GlobalResource.h"
 #include "Enums/EnumNames.h"
+#include "GUI/GUIConstants.h"
 
 const float GUITabButton::SIZE = 58.f;
 const float GUITabButton::OFFSET = 4.f;
@@ -42,8 +43,9 @@ GUITabButton::GUITabButton(GUIElement element) {
 	m_element = element;
 
 	m_inputKey.setString(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[key]));
-	m_inputKey.setCharacterSize(16);
-	if (m_inputKey.getLocalBounds().width > SIZE - 10.f) m_inputKey.setCharacterSize(8);
+	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ? 
+		GUIConstants::CHARACTER_SIZE_S :
+		GUIConstants::CHARACTER_SIZE_L);
 }
 
 void GUITabButton::setPosition(const sf::Vector2f& position) {

@@ -110,4 +110,6 @@ private:
 	static const float SCROLL_WINDOW_TOP;
 	static const float SCROLL_WINDOW_WIDTH;
 	static const float SCROLL_WINDOW_HEIGHT;
+
+	static const std::vector<std::string> LABELS;
 };

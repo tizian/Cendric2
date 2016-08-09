@@ -1,4 +1,5 @@
 #include "GUI/SpellSlot.h"
+#include "GUI/GUIConstants.h"
 #include "ResourceManager.h"
 #include "GlobalResource.h"
 
@@ -56,8 +57,9 @@ void SpellSlot::initSpellSlot() {
 	m_inputKey.setString(m_inputKeyID != Key::VOID ?
 		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[m_inputKeyID]) :
 		"");
-	m_inputKey.setCharacterSize(16);
-	if (m_inputKey.getLocalBounds().width > SIZE - 10.f) m_inputKey.setCharacterSize(8);
+	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ?
+		GUIConstants::CHARACTER_SIZE_S :
+		GUIConstants::CHARACTER_SIZE_L);
 	m_inputKey.setColor(COLOR_WHITE);
 
 	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_SPELL);
