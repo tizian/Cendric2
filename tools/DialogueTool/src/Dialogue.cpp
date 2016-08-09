@@ -79,7 +79,7 @@ bool Dialogue::exportToDia() {
 #if defined(_WIN32)
 	nError = _mkdir(folderPath.c_str()); // windows style mkdir
 #else 
-	nError = mkdir(sPath.c_str(), 0733); // non-Windows style mkdir
+	nError = mkdir(folderPath.c_str(), 0733); // non-Windows style mkdir
 #endif
 	if (nError != 0) {
 		struct stat info;
@@ -104,7 +104,7 @@ bool Dialogue::exportDialogue() {
 #if defined(_WIN32)
 	nError = _mkdir(folderPath.c_str()); // windows style mkdir
 #else 
-	nError = mkdir(sPath.c_str(), 0733); // non-Windows style mkdir
+	nError = mkdir(folderPath.c_str(), 0733); // non-Windows style mkdir
 #endif
 	if (nError != 0) {
 		struct stat info;

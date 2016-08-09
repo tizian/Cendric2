@@ -3,8 +3,10 @@
 #include "global.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "GUI/BitmapText.h"
 
-enum GUIElement : int {
+enum class GUIElement : int {
+	VOID = -1,
 	Character = 0,
 	Inventory,
 	Spellbook,
@@ -30,6 +32,8 @@ public:
 	
 	bool isClicked() const;
 
+	GUIElement getElement() const;
+
 	GameObjectType getConfiguredType() const override;
 
 public:
@@ -42,10 +46,13 @@ protected:
 	bool m_isPressed = false;
 	bool m_isClicked = false;
 
+	GUIElement m_element;
+
 	sf::Sprite m_border;
 	sf::Sprite m_icon;
 	sf::CircleShape m_background;
-	sf::CircleShape m_overlay;
+
+	BitmapText m_inputKey;
 
 	sf::Color m_backgroundColor = COLOR_TRANS_BLACK;
 	sf::Color m_activeColor = COLOR_TRANS_GREY;

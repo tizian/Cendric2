@@ -36,6 +36,11 @@ void MapInterface::render(sf::RenderTarget& target) {
 	m_mapOverlay->render(target);
 }
 
+void MapInterface::hideAll() {
+	m_mapOverlay->hide();
+	WorldInterface::hideAll();
+}
+
 bool MapInterface::isGuiOverlayVisible() const {
 	return WorldInterface::isGuiOverlayVisible() ||
 		m_mapOverlay->isVisible();
@@ -44,21 +49,27 @@ bool MapInterface::isGuiOverlayVisible() const {
 void MapInterface::updateMapOverlay(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Map)) {
 		if (!m_mapOverlay->isVisible()) {
-			if (m_inventory->isVisible()) m_inventory->hide();
-			if (m_spellbook->isVisible()) m_spellbook->hide();
-			if (m_questLog->isVisible()) m_questLog->hide();
-			if (m_characterInfo->isVisible()) m_characterInfo->hide();
-
+			hideAll();
+			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_mapOverlay->show();
-			m_sidebar->show();
+			m_sidebar->show(GUIElement::Map);
 		}
 		else {
 			m_mapOverlay->hide();
+			m_sidebar->hide();
 		}
 	}
 	else if (m_mapOverlay->isVisible() && g_inputController->isKeyJustPressed(Key::Escape)) {
 		m_mapOverlay->hide();
+		m_sidebar->hide();
 		g_inputController->lockAction();
 	}
+	else if (!m_mapOverlay->isVisible() && m_sidebar->getActiveElement() == GUIElement::Map) {
+		hideAll();
+		g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+		m_mapOverlay->show();
+		m_sidebar->show(GUIElement::Map);
+	}
+
 	m_mapOverlay->update(frameTime);
 }

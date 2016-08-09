@@ -4,11 +4,11 @@
 #include "InputController.h"
 #include "ResourceManager.h"
 #include "Window.h"
+#include "GUI/GUITabButton.h"
 
 class LevelInterface;
 class MapInterface;
 class WorldInterface;
-class GUITabButton;
 
 class GUITabBar {
 public:
@@ -16,14 +16,15 @@ public:
 	GUITabBar(MapInterface* _interface);
 	~GUITabBar();
 
-	void show();
+	void show(GUIElement activeElement);
 	void hide();
 
 	bool isVisible() const;
 
 	void render(sf::RenderTarget& target);
-	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
+
+	GUIElement getActiveElement() const;
 
 private:
 	WorldInterface* getInterface() const;
@@ -45,4 +46,6 @@ private:
 	float TOP;
 	float WIDTH;
 	float HEIGHT;
+
+	static const float BUTTON_MARGIN;
 };

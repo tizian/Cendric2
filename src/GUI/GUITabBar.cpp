@@ -4,8 +4,9 @@
 #include "Map/MapInterface.h"
 #include "GUI/WorldInterface.h"
 #include "GUI/GUIConstants.h"
-#include "GUI/GUITabButton.h"
 #include "GlobalResource.h"
+
+const float GUITabBar::BUTTON_MARGIN = 24.f;
 
 GUITabBar::GUITabBar(LevelInterface* _interface) {
 	m_levelInterface = _interface;
@@ -31,7 +32,7 @@ void GUITabBar::init() {
 	}
 
 	WIDTH = 80.f;
-	HEIGHT = n * GUITabButton::SIZE + (n - 1) * 2 * GUIConstants::BUTTON_MARGIN + 4 * GUIConstants::TEXT_OFFSET;
+	HEIGHT = n * GUITabButton::SIZE + (n - 1) * BUTTON_MARGIN + 4 * GUIConstants::TEXT_OFFSET;
 	LEFT = GUIConstants::LEFT_BAR;
 	TOP = GUIConstants::TOP + 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - HEIGHT);
 
@@ -42,11 +43,11 @@ void GUITabBar::init() {
 	float y = TOP + 2 * GUIConstants::TEXT_OFFSET;
 
 	for (int i = 0; i < n; ++i) {
-		GUITabButton *button = new GUITabButton(GUIElement(i));
+		GUITabButton *button = new GUITabButton(static_cast<GUIElement>(i));
 		button->setPosition(sf::Vector2f(x, y));
 		m_buttons.push_back(button);
 
-		y += GUITabButton::SIZE + 2 * GUIConstants::BUTTON_MARGIN;
+		y += GUITabButton::SIZE + BUTTON_MARGIN;
 	}
 }
 
@@ -74,6 +75,15 @@ void GUITabBar::update(const sf::Time& frameTime) {
 	}
 }
 
+GUIElement GUITabBar::getActiveElement() const {
+	for (size_t i = 0; i < m_buttons.size(); ++i) {
+		if (m_buttons[i]->isActive()) {
+			return static_cast<GUIElement>(i);
+		}
+	}
+	return GUIElement::VOID;
+}
+
 void GUITabBar::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
@@ -83,16 +93,23 @@ void GUITabBar::render(sf::RenderTarget& target) {
 	}
 }
 
-void GUITabBar::renderAfterForeground(sf::RenderTarget& target) {
-
-}
-
-void GUITabBar::show() {
+void GUITabBar::show(GUIElement activeElement) {
 	m_isVisible = true;
+
+	for (size_t i = 0; i < m_buttons.size(); ++i) {
+		m_buttons[i]->setActive(false);
+	}
+
+	int index = static_cast<int>(activeElement);
+	m_buttons[index]->setActive(true);	
 }
 
 void GUITabBar::hide() {
 	m_isVisible = false;
+
+	for (size_t i = 0; i < m_buttons.size(); ++i) {
+		m_buttons[i]->setActive(false);
+	}
 }
 
 bool GUITabBar::isVisible() const {

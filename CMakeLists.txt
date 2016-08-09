@@ -59,6 +59,7 @@ endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	add_library(CendricApple STATIC "${PROJECT_SOURCE_DIR}/src/Platform/CendricApple.mm")
+	target_include_directories(CendricApple PRIVATE "${PROJECT_SOURCE_DIR}/include")
 	set_target_properties(CendricApple PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 	target_link_libraries(Cendric CendricApple)
 endif()
@@ -108,7 +109,7 @@ if (CENDRIC_BUILD_DIALOGUE_TOOL)
 		"${PROJECT_SOURCE_DIR}/ext/sfml/include"
 		"${PROJECT_SOURCE_DIR}/ext/imgui"
 		"${PROJECT_SOURCE_DIR}/ext/imgui-sfml"
-		"${PROJECT_SOURCE_DIR}/ext/dirent"
+		"${PROJECT_SOURCE_DIR}/ext"
 		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include"
 	)
 

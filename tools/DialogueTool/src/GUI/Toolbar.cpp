@@ -7,7 +7,7 @@
 #define NPC_PREFIX "npc_"
 
 #ifdef _WIN32
-#include "dirent.h"
+#include "dirent/dirent.h"
 #else
 #include <dirent.h>
 #endif
