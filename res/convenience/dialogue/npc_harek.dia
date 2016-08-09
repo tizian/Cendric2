@@ -74,9 +74,9 @@ npc.id:npc_harek
 		tag:5
 		# translation: 
 		translation.tag:DL_Choice_Trade
-		translation.en:Show me your wares.
-		translation.de:Zeig mir deine Waren.
-		translation.ch:Zeig mir dini Ware.
+		translation.en:Show me your wares. [TRADE]
+		translation.de:Zeig mir deine Waren. [HANDELN]
+		translation.ch:Zeig mir dini Ware. [TRADE]
 	]
 	[
 		# Link node, tag is next tag
@@ -197,7 +197,7 @@ npc.id:npc_harek
 	trigger:DL:changeQuestState("ice_armor", "started")
 	# translation: 
 	translation.tag:DL_Harek_NiceStone2
-	translation.en:On the other hand, I still need some iron ore. If you could bring me some from the mine of Gandria, I'll smith you your armour right away!
+	translation.en:However, I still need some iron ore. If you could bring me some from the mine of Gandria, I'll smith you your armour right away!
 	translation.de:Ich brauche allerdings auch noch etwas Eisenerz. Wenn du mir etwas aus den Minen von Gandria bringen kannst, werde ich dir deine Rüstung sofort anfertigen.
 	translation.ch:Ich bruch allerdings au na chli Iseerz. Wend mer chli chöntsch bringe us de Mine vo Gandria, wird ich dir dini Rüstig sofort schmiede!
 	[

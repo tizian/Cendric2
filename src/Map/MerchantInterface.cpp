@@ -11,11 +11,16 @@ MerchantInterface::MerchantInterface(WorldScreen* screen, std::string merchantID
 }
 
 MerchantInterface::~MerchantInterface() {
+	if (m_screen->getInventory() != nullptr) {
+		m_screen->getInventory()->stopTrading();
+	}
 	delete m_merchantWindow;
 }
 
 void MerchantInterface::completeTrade() {
-	if (m_screen->getInventory() != nullptr) m_screen->getInventory()->stopTrading();
+	if (m_screen->getInventory() != nullptr) {
+		m_screen->getInventory()->stopTrading();
+	}
 	m_core->setMerchantData(m_merchantID, m_data);
 	m_isCancelled = true;
 }
