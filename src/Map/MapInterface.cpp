@@ -2,6 +2,7 @@
 #include "Screens/MapScreen.h"
 
 MapInterface::MapInterface(WorldScreen* screen) : WorldInterface(screen) {
+	m_sidebar = new GUITabBar(this);
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(m_core, &m_core->getTotalAttributes());
 	m_spellbook = new Spellbook(m_core, true);
@@ -10,6 +11,7 @@ MapInterface::MapInterface(WorldScreen* screen) : WorldInterface(screen) {
 }
 
 MapInterface::~MapInterface() {
+	delete m_sidebar;
 	delete m_inventory;
 	delete m_characterInfo;
 	delete m_spellbook;
@@ -48,6 +50,7 @@ void MapInterface::updateMapOverlay(const sf::Time& frameTime) {
 			if (m_characterInfo->isVisible()) m_characterInfo->hide();
 
 			m_mapOverlay->show();
+			m_sidebar->show();
 		}
 		else {
 			m_mapOverlay->hide();

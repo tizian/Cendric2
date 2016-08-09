@@ -13,6 +13,7 @@ WorldInterface::~WorldInterface() {
 void WorldInterface::render(sf::RenderTarget& target) {
 	target.setView(target.getDefaultView());
 
+	m_sidebar->render(target);
 	m_characterInfo->render(target);
 	m_spellbook->render(target);
 	m_questLog->render(target);
@@ -21,11 +22,12 @@ void WorldInterface::render(sf::RenderTarget& target) {
 
 void WorldInterface::renderAfterForeground(sf::RenderTarget& target) {
 	target.setView(target.getDefaultView());
-
+	m_sidebar->renderAfterForeground(target);
 	m_inventory->renderAfterForeground(target);
 }
 
 void WorldInterface::update(const sf::Time& frameTime) {
+	updateSidebar(frameTime);
 	updateInventory(frameTime);
 	updateSpellbook(frameTime);
 	updateQuestLog(frameTime);
@@ -33,6 +35,7 @@ void WorldInterface::update(const sf::Time& frameTime) {
 }
 
 void WorldInterface::hideAll() {
+	m_sidebar->hide();
 	m_characterInfo->hide();
 	m_spellbook->hide();
 	m_questLog->hide();
@@ -69,12 +72,17 @@ void WorldInterface::reloadSpellBook() {
 	m_spellbook->reload();
 }
 
+void WorldInterface::updateSidebar(const sf::Time& frameTime) {
+	m_sidebar->update(frameTime);
+}
+
 void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {
 			hideAll();
 			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_characterInfo->show();
+			m_sidebar->show();
 		}
 		else {
 			m_characterInfo->hide();
@@ -94,6 +102,7 @@ void WorldInterface::updateSpellbook(const sf::Time& frameTime) {
 			hideAll();
 			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_spellbook->show();
+			m_sidebar->show();
 		}
 		else {
 			m_spellbook->hide();
@@ -113,6 +122,7 @@ void WorldInterface::updateInventory(const sf::Time& frameTime) {
 			hideAll();
 			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_inventory->show();
+			m_sidebar->show();
 		}
 		else {
 			m_inventory->hide();
@@ -132,6 +142,7 @@ void WorldInterface::updateQuestLog(const sf::Time& frameTime) {
 			hideAll();
 			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_questLog->show();
+			m_sidebar->show();
 		}
 		else {
 			m_questLog->hide();

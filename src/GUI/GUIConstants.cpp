@@ -1,6 +1,6 @@
 #include "GUI/GUIConstants.h"
 
-float GUIConstants::LEFT = 126.f;
+float GUIConstants::LEFT = 136.f;
 float GUIConstants::TOP = 50.f;
 float GUIConstants::LEFT_BAR = 50.f;
 

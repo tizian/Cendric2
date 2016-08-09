@@ -94,6 +94,9 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_CHARACTERINFO_ICONS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GUI_STATS_ICONS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUI_BUTTON_ROUND, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUI_BUTTON_ROUND_SELECTED, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUI_TAB_ICONS, ResourceType::Global);
 
 	loadSoundbuffer(GlobalResource::SOUND_GUI_MENUCURSOR, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_PICKUP, ResourceType::Global);

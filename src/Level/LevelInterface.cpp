@@ -5,6 +5,7 @@
 
 LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
 m_character(character) {
+	m_sidebar = new GUITabBar(this);
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(m_core, character->getAttributes());
 	m_quickSlotBar = new QuickSlotBar(this);
@@ -24,6 +25,7 @@ m_character(character) {
 }
 
 LevelInterface::~LevelInterface() {
+	delete m_sidebar;
 	delete m_spellSelection;
 	delete m_inventory;
 	delete m_characterInfo;

@@ -9,6 +9,7 @@
 #include "GUI/CharacterInfo.h"
 #include "GUI/Spellbook.h"
 #include "GUI/QuestLog.h"
+#include "GUI/GUITabBar.h"
 
 class WorldScreen;
 
@@ -44,6 +45,10 @@ protected:
 	CharacterCore* m_core;
 
 	sf::Sound m_openSound;
+
+	// <<< GUI TAB SIDEBAR >>>
+	GUITabBar* m_sidebar = nullptr;
+	void updateSidebar(const sf::Time& frameTime);
 
 	// <<< INVENTORY >>>
 	Inventory* m_inventory = nullptr;
