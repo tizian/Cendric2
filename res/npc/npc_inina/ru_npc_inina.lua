@@ -4,6 +4,10 @@ velocity = 40
 
 loadRoutine = function(R, W)
 
+	if (W:isConditionFulfilled("default","gandria_open")) then
+		R:setDisposed()
+	end
+
 	R:setTilePosition(44,52)
 	R:setReloadEnabled(false)
 

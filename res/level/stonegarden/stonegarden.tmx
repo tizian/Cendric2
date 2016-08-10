@@ -953,7 +953,7 @@
   <object id="135" gid="757" x="248" y="495" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="sign">
-  <object id="119" gid="801" x="1349" y="929" width="50" height="50">
+  <object id="119" gid="801" x="1354" y="957" width="50" height="50">
    <properties>
     <property name="text" value="TryIceMagic"/>
    </properties>

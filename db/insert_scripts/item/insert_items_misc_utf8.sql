@@ -95,4 +95,6 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item', 'Iron Ore','Eisenerz','Iseerz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item_desc', 'A sought-after ingredient for smithing.','Eine begehrte Schmiedezutat.','E begehrti Schmiedezuetat.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_ironore', 'misc', 0, 0, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_ironore', 'misc', 200, 500, 10);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_ironore', 0, -35, 30, 15);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_ironore', 1, 500, 50, 50, 50);
