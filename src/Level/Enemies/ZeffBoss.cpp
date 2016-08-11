@@ -52,9 +52,9 @@ void ZeffBoss::loadSpells() {
 	m_spellManager->addSpell(chopSpell);
 
 	SpellData projectile = SpellData::getSpellData(SpellID::ReturningProjectile);
-	projectile.damage = 15;
+	projectile.damage = 25;
 	projectile.duration = sf::seconds(2.f);
-	projectile.damagePerSecond = 5;
+	projectile.damagePerSecond = 6;
 	projectile.cooldown = sf::milliseconds(7000);
 	projectile.isBlocking = true;
 	projectile.fightingTime = sf::seconds(10000);
@@ -67,9 +67,9 @@ void ZeffBoss::loadSpells() {
 	m_spellManager->addSpell(projectile);
 
 	SpellData boomerang = SpellData::getSpellData(SpellID::Boomerang);
-	boomerang.damage = 10;
+	boomerang.damage = 20;
 	boomerang.duration = sf::seconds(2.f);
-	boomerang.damagePerSecond = 2;
+	boomerang.damagePerSecond = 5;
 	boomerang.cooldown = sf::milliseconds(8000);
 	boomerang.isBlocking = true;
 	boomerang.fightingTime = sf::seconds(10000);

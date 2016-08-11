@@ -3,6 +3,7 @@
 #include "Nodes/StartNode.h"
 #include "ApplicationState.h"
 #include "Dialogue.h"
+#include "FileIO/InsertScriptParser.h"
 
 #define NPC_PREFIX "npc_"
 
@@ -23,6 +24,8 @@ Toolbar::Toolbar(NodeWindow* nodeWindow) {
 	strcpy(m_sqlFolder, G_CONF.sqlFolder.c_str());
 	strcpy(m_dialogueFolder, G_CONF.dialogueFolder.c_str());
 	strcpy(m_dialogueID, NPC_PREFIX);
+
+	m_parser = new InsertScriptParser();
 }
 
 Toolbar::~Toolbar() {
@@ -30,6 +33,7 @@ Toolbar::~Toolbar() {
 		delete[] m_folderSaves[i];
 	}
 	m_folderSaves.clear();
+	delete m_parser;
 }
 
 void Toolbar::notifyNewDialogue() {
@@ -56,6 +60,10 @@ void Toolbar::update() {
 			if (ImGui::MenuItem("Cut", "CTRL+X")) {}
 			if (ImGui::MenuItem("Copy", "CTRL+C")) {}
 			if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Parse")) {
+			m_parser->showParseMenu();
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();

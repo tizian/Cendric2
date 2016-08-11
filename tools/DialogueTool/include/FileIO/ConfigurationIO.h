@@ -21,4 +21,6 @@ private:
 	static const std::string SQL_PATH;
 	static const std::string NPC_PATH;
 	static const std::string DIALOGUE_PATH;
+	static const std::string PARSE_IN;
+	static const std::string PARSE_OUT;
 };

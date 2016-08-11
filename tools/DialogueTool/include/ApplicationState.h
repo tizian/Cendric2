@@ -11,6 +11,8 @@ struct Configuration {
 	std::string npcFolder;
 	std::string sqlFolder;
 	std::string dialogueFolder;
+	std::string parseFileIn;
+	std::string parseFileOut;
 };
 
 const struct Configuration DEFAULT_CONFIGURATION {

@@ -81,7 +81,7 @@ Isa
 Tizian
 
 <<< Spanish Localization >>>
-Juan José Flores
+Juan José Flores González
 
 <<< Proof Reading >>>
 Daniel Josephy Hernández
@@ -208,7 +208,7 @@ Isa
 Tizian
 
 <<< Spanische Übersetzungen >>>
-Juan José Flores
+Juan José Flores González
 
 <<< Korrekturlesen >>>
 Daniel Josephy Hernández
@@ -337,7 +337,7 @@ Isa
 Tizian
 
 <<< Spanischi Übersetzige >>>
-Juan José Flores
+Juan José Flores González
 
 <<< Korrekturläser >>>
 Daniel Josephy Hernández

@@ -3,10 +3,10 @@
 #include "global.h"
 
 class NodeWindow;
+class InsertScriptParser;
 
 // main window toolbar
 class Toolbar {
-
 public:
 	Toolbar(NodeWindow* nodeWindow);
 	~Toolbar();
@@ -26,5 +26,7 @@ private:
 
 	bool m_needReloadFolder = true;
 	NodeWindow* m_nodeWindow;
-	std::vector<const char *> m_folderSaves;
+	std::vector<const char*> m_folderSaves;
+
+	InsertScriptParser* m_parser;
 };
