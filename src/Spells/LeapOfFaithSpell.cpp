@@ -54,6 +54,7 @@ void LeapOfFaithSpell::render(sf::RenderTarget& target) {
 }
 
 void LeapOfFaithSpell::update(const sf::Time& frameTime) {
+	if (m_mob == nullptr) return;
 	if (m_isFacingRight != m_mob->isFacingRight()) {
 		m_isFacingRight = m_mob->isFacingRight();
 		setCurrentAnimation(getAnimation(GameObjectState::Idle), !m_isFacingRight);

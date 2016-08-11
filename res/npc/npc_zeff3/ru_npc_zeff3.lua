@@ -5,13 +5,13 @@ loadRoutine = function(R, W)
 		R:setDisposed()
 	end
 	
-	R:setTilePosition(9.5,59.7)
+	R:setTilePosition(9.5,49.7)
 	
-	R:goToTile(10.5,59.5)
-	R:goToTile(10.5,59.7)
+	R:goToTile(10.5,49.7)
+	R:goToTile(10.5,49.5)
 	R:wait(7000)
-	R:goToTile(9.5,59.5)
-	R:goToTile(9.5,59.7)
+	R:goToTile(9.5,49.5)
+	R:goToTile(9.5,49.7)
 	R:wait(7000)
 
 end	

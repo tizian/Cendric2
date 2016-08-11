@@ -35,6 +35,11 @@ Tizian
 Haab
 
 <<< Music >>>
+
+-- Susanne Aubert --
+
+"Meadows Theme"
+
 -- Isa --
 
 "Ratcave"
@@ -161,12 +166,16 @@ Tizian
 Haab
 
 <<< Musik >>>
+
+-- Susanne Aubert --
+
+"Meadows Theme"
+
 -- Isa --
 
 "Ratcave"
 
 "Howling Caverns"
-
 
 ---
 
@@ -286,15 +295,19 @@ Tizian
 Haab
 
 <<< Musig >>>
+
+-- Susanne Aubert --
+
+"Meadows Theme"
+
 -- Isa --
 
 "Ratcave"
 
 "Howling Caverns"
 
----
-
 -- Eric Matyas --
+
 "Magical Discovery"
 
 "Dusk"
@@ -316,11 +329,6 @@ www.soundimage.org
 ---
 
 -- Matthew Pablo --
-Featuring Music by Matthew Pablo
-http://www.matthewpablo.com
-
----
-
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
 
