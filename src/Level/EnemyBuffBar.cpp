@@ -48,7 +48,7 @@ void EnemyBuffBar::update(const sf::Time& frameTime) {
 			buffIt = m_buffs.erase(buffIt);
 		}
 		else {
-			buffIt++;
+			++buffIt;
 		}
 	}
 	calculateBuffPositions();

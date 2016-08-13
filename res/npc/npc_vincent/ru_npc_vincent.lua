@@ -4,7 +4,7 @@ velocity = 60
 
 loadRoutine = function(R, W)
 
-	if (W:isConditionFulfilled("npc_vincent","vincent_gone")) then
+	if (W:isConditionFulfilled("default", "gandria_open") or W:isConditionFulfilled("npc_vincent","vincent_gone")) then
 		R:setDisposed()
 		return
 	end
