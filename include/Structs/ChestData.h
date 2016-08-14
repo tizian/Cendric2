@@ -16,4 +16,5 @@ struct ChestData {
 	std::string tooltipText = "";
 	LightData lightData;
 	std::pair<std::map<std::string, int>, int> loot;
+	std::pair<std::string, std::string> conditionProgress;
 };

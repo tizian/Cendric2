@@ -36,6 +36,8 @@ private:
 	std::string m_keyItemID;
 	// lootable items 
 	std::map<std::string, int> m_lootableItems;
+	// maybe, opening this chest fulfills a condition
+	std::pair<std::string, std::string> m_conditionProgress;
 	int m_lootableGold = 0;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void unlock();
