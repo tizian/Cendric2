@@ -5,6 +5,7 @@
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/meadows.ogg"/>
   <property name="name" value="ElderBackroom"/>
+  <property name="observed" value=""/>
   <property name="tilesetpath" value="res/level/elderbackroom/tileset_level_elderbackroom.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_elderbackroom" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
@@ -734,8 +735,9 @@
  <objectgroup name="chest">
   <object id="102" gid="534" x="1225" y="300" width="50" height="50">
    <properties>
+    <property name="condition progress" value="npc_vincent2,rhendal_chest_looted"/>
     <property name="gold" value="35"/>
-    <property name="key" value="ke_test1"/>
+    <property name="key" value="ke_rhendal"/>
     <property name="pe_elixirfire" value="1"/>
     <property name="strength" value="2"/>
    </properties>

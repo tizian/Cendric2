@@ -135,10 +135,16 @@ ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questI
 	return questScreenOverlay;
 }
 
-ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& locationKey, bool isBossLevel) {
+ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& locationKey, bool isBossLevel, bool isObserved) {
 	ScreenOverlay* locationScreenOverlay = new ScreenOverlay(sf::seconds(isBossLevel ? 2.f : 1.f), sf::seconds(isBossLevel? 1.f : 0.5f));
 
 	locationScreenOverlay->setTitle(locationKey, "location");
+	if (isObserved) {
+		std::string subtitle = "\n(" + g_textProvider->getText("Observed") + ")";
+		locationScreenOverlay->setSubtitleRaw(subtitle);
+		locationScreenOverlay->setSubtitleColor(COLOR_BAD);
+	}
+	
 	return locationScreenOverlay;
 }
 

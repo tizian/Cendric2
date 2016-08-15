@@ -34,7 +34,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 	static ScreenOverlay* createQuestScreenOverlay(const std::string& questID, QuestState state);
-	static ScreenOverlay* createLocationScreenOverlay(const std::string& locationKey, bool isBossLevel = false);
+	static ScreenOverlay* createLocationScreenOverlay(const std::string& locationKey, bool isBossLevel = false, bool isObserved = false);
 	// returns nullptr if the configuration for display hints is false.
 	static ScreenOverlay* createHintScreenOverlay(const std::string& hintKey);
 	static ScreenOverlay* createPermanentItemScreenOverlay(const Item* item);

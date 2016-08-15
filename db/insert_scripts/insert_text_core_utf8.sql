@@ -127,6 +127,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('NoSpells','No
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoQuests','No quests found.','Keine Quests gefunden.','Kei Quests gfunde.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoHints','No hints learned.','Keine Tipps gelernt.','Kei Tipps glernt.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoSaves','No saves found.','Kein Speicherstand gefunden.','Kein Speicherstand gfunde.');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Observed','Observed','Beobachtet','Beobachtet', 'Observado');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Off','Off','Aus','Uus');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Okay','Okay','Okay','Okee');
 INSERT INTO text (text_id, english, german, swiss_german) values ('On','On','An','Ii');
@@ -246,6 +247,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ToLoot','to l
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToActivate','to activate','- aktivieren','zum aktiviere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToRead','to read','- lesen','zum läse');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToSwitch','to toggle','- umschalten','zum drucke');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ToSteal','to steal','- stehlen','zum chlaue');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToOpen','to open','- öffnen', 'zum ufmache');
 INSERT INTO text (text_id, english, german, swiss_german) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Fireplace','Fireplace','Kochstelle','Chochstell');

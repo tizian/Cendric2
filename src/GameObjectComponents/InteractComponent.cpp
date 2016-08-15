@@ -56,6 +56,10 @@ void InteractComponent::setInteractText(const std::string& textKey) {
 	m_interactText.setString(interactString);
 }
 
+void InteractComponent::setInteractTextColor(const sf::Color& color) {
+	m_interactText.setColor(color);
+}
+
 void InteractComponent::setInteractRange(float range) {
 	m_interactRange = range;
 }

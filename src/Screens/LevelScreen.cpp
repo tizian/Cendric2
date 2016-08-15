@@ -99,7 +99,9 @@ void LevelScreen::quicksave() {
 }
 
 void LevelScreen::execOnEnter(const Screen* previousScreen) {
-	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(), m_currentLevel.getWorldData()->bossLevelData.isBossLevel));
+	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(), 
+		m_currentLevel.getWorldData()->bossLevelData.isBossLevel, 
+		m_currentLevel.getWorldData()->isObserved));
 }
 
 void LevelScreen::execOnExit(const Screen* nextScreen) {

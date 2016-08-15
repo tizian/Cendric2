@@ -47,11 +47,20 @@ void LevelItem::load(const std::string& itemID, const sf::Vector2f& position) {
 
 	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText(item.getID(), "item"), this, m_mainChar);
 	interactComponent->setInteractRange(PICKUP_RANGE);
-	interactComponent->setInteractText("ToPickup");
 	interactComponent->setOnInteract(std::bind(&LevelItem::pickup, this));
-	addComponent(interactComponent);
-	setDebugBoundingBox(COLOR_GOOD);
 
+	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
+	if (isObserved) {
+		interactComponent->setInteractText("ToSteal");
+		interactComponent->setInteractTextColor(COLOR_BAD);
+	}
+	else {
+		interactComponent->setInteractText("ToPickup");
+	}
+	
+	addComponent(interactComponent);
+
+	setDebugBoundingBox(COLOR_GOOD);
 	setPosition(position - getSpriteOffset());
 }
 

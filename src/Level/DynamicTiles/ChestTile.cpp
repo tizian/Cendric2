@@ -54,9 +54,7 @@ void ChestTile::onHit(Spell* spell) {
 	case SpellID::Unlock:
 		if (m_state == GameObjectState::Locked) {
 			if (spell->getStrength() >= m_strength) {
-				m_interactComponent->setInteractText("ToPickup");
-				m_state = GameObjectState::Unlocked;
-				setCurrentAnimation(getAnimation(m_state), false);
+				unlock();
 			}
 			spell->setDisposed();
 		}
@@ -123,7 +121,15 @@ void ChestTile::onMouseOver() {
 }
 
 void ChestTile::unlock() {
-	m_interactComponent->setInteractText("ToPickup");
+	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
+	if (isObserved) {
+		m_interactComponent->setInteractText("ToSteal");
+		m_interactComponent->setInteractTextColor(COLOR_BAD);
+	}
+	else {
+		m_interactComponent->setInteractText("ToPickup");
+	}
+
 	setState(GameObjectState::Unlocked);
 }
 

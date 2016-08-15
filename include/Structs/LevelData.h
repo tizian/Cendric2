@@ -32,4 +32,5 @@ struct LevelData : WorldData {
 	std::vector<LadderTileData> ladderTiles;
 
 	BossLevelData bossLevelData;
+	bool isObserved = false;
 };

@@ -1109,6 +1109,9 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 		else if (name.compare("weather") == 0) {
 			if (!readWeather(_property, data)) return false;
 		}
+		else if (name.compare("observed") == 0) {
+			data.isObserved = true;
+		}
 		else if (name.compare("onwin") == 0) {
 			if (!readBossLevelOnWin(_property, data)) return false;
 		}

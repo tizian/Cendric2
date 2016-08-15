@@ -123,6 +123,8 @@ item.id:sp_light,1
 item.id:ke_test_1,1
 item.id:ke_test_2,1
 item.id:ke_test_3,1
+item.id:ke_smallsilver,1
+item.id:ke_rhendal,1
 item.id:do_notemarcus,1
 item.id:do_bloodnotemarcus,1
 item.id:do_eleletter,1
