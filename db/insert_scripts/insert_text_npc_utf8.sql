@@ -3,6 +3,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_rhendal','npc','Elder Rhendal','Ältester Rhendal','Älteste Rhendal');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_innkeeper','npc','Innkeeper','Wirt','Wirt');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_vincent','npc','Vincent','Vincent','Vincent');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_vincent2','npc','Vincent','Vincent','Vincent');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_thea','npc','Thea','Thea','Thea');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_andrew','npc','Andrew','Andrew','Andrew');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_inina','npc','High Priestess Inina','Hohepriesterin Inina','Hohepriesterin Inina');

@@ -53,6 +53,7 @@ std::string TriggerableNode::exportToLua(int indent) const {
 }
 
 std::string TriggerableNode::exportToSQL() const {
+	if (m_translation == nullptr || std::string(m_translation->englishTranslation).empty()) return "";
 	std::stringstream ss;
 
 	std::string en = duplicateApostrophs(m_translation->englishTranslation);
