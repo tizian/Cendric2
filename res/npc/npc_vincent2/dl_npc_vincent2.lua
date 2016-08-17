@@ -84,25 +84,25 @@ loadDialogue = function(DL)
 			DL:addChoice(3, "DL_Choice_WhatDeal") -- Tell me more about that job.
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and DL:hasItem("gold", 50)) then 
-			DL:addChoice(5, "DL_Choice_GimmeKey50") -- Give me that key, I'll do it. (50 Gold)
+			DL:addChoice(5, "DL_Choice_GimmeKeyCheap") -- Give me that key, I'll do it. (50 Gold)
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50")) then 
-			DL:addChoice(15, "DL_Choice_GimmeKey50") -- 
+			DL:addChoice(15, "DL_Choice_GimmeKeyCheap") -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and DL:hasItem("gold", 100)) then 
-			DL:addChoice(16, "DL_Choice_GimmeKey100") -- Give me that key, I'll do it. (100 Gold)
+			DL:addChoice(16, "DL_Choice_GimmeKeyCostly") -- Give me that key, I'll do it. (100 Gold)
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100")) then 
-			DL:addChoice(17, "DL_Choice_GimmeKey100") -- 
+			DL:addChoice(17, "DL_Choice_GimmeKeyCostly") -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and DL:hasItem("gold", 150)) then 
-			DL:addChoice(18, "DL_Choice_GimmeKey150") -- Give me that key, I'll do it. (150 Gold)
+			DL:addChoice(18, "DL_Choice_GimmeKeyVCostly") -- Give me that key, I'll do it. (150 Gold)
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150")) then 
-			DL:addChoice(19, "DL_Choice_GimmeKey150") -- 
+			DL:addChoice(19, "DL_Choice_GimmeKeyVCostly") -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and not (DL:isConditionFulfilled("npc_vincent2", "key_150") or DL:isConditionFulfilled("npc_vincent2", "key_100") or DL:isConditionFulfilled("npc_vincent2", "key_50")) ) then 
-			DL:addChoice(31, "DL_Choice_GimmeKey150") -- Give me that key, I'll do it.
+			DL:addChoice(31, "DL_Choice_GimmeKeyFree") -- Give me that key, I'll do it.
 		end
 		DL:addChoice(8, "DL_Choice_NotInterested") -- I'm not interested.
 		DL:addChoice(-1, "") -- 

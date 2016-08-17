@@ -3,6 +3,6 @@
 -- what to do?
 collectibles = 
 {
-	{"qe_tearstone", 1}
+	{"qe_brokenstaff3", 1}
 }
 
