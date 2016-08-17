@@ -28,6 +28,8 @@ public:
 	void wait(int seconds);
 	// the enemy tries to move to this target as long as it is not reset.
 	void setMovingTarget(int x, int y);
+	// adds a step to the observer path (in tiles, not pixel)
+	void addStep(float x, float y);
 	// resets the moving target
 	void resetMovingTarget();
 	// sets the enemy "killed" and "looted" so that it will never appear again in this level
@@ -45,7 +47,9 @@ private:
 	luabridge::lua_State* m_L;
 
 	// return whether it was successful in loading or not
-	bool loadLua(const std::string& path);
+	// it also sets the observer steps in the scripted behavior if it finds that function
+	bool loadLua(const std::string& path, ScriptedBehavior* behavior);
+	std::string m_luaPath;
 	bool m_success = false;
 
 	bool m_hasUpdateFunc = false;

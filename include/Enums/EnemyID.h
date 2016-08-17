@@ -17,5 +17,6 @@ enum class EnemyID {
 	Boss_Zeff,
 	Boss_Wolf,
 	Book,
+	Observer,
 	MAX
 };

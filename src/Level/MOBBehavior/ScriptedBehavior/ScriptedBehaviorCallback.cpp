@@ -11,8 +11,7 @@ using namespace luabridge;
 ScriptedBehaviorCallback::ScriptedBehaviorCallback(const std::string& luaPath, Enemy* enemy) {
 	m_worldCallback = new WorldCallback(dynamic_cast<WorldScreen*>(enemy->getScreen()));
 	m_enemy = enemy;
-
-	m_success = loadLua(luaPath);
+	m_luaPath = luaPath;
 }
 
 ScriptedBehaviorCallback::~ScriptedBehaviorCallback() {
@@ -20,9 +19,10 @@ ScriptedBehaviorCallback::~ScriptedBehaviorCallback() {
 
 void ScriptedBehaviorCallback::setScriptedBehavior(ScriptedBehavior* behavior) {
 	m_scriptedBehavior = behavior;
+	m_success = loadLua(m_luaPath, behavior);
 }
 
-bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
+bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior* behavior) {
 	m_L = luaL_newstate();
 	luaL_openlibs(m_L);
 	m_worldCallback->bindFunctions(m_L);
@@ -37,6 +37,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("addHint", &ScriptedBehaviorCallback::addHint)
 		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
 		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
+		.addFunction("addStep", &ScriptedBehaviorCallback::addStep)
 		.endClass();
 
 	if (luaL_dofile(m_L, getResourcePath(path).c_str()) != 0) {
@@ -55,7 +56,16 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		m_hasDeathFunc = true;
 	}
 
+	LuaRef observer = getGlobal(m_L, "observer");
+	if (observer.isFunction()) {
+		observer(this);
+	}
+
 	return true;
+}
+
+void ScriptedBehaviorCallback::addStep(float x, float y) {
+	m_scriptedBehavior->addObserverStep(x * TILE_SIZE_F, (y + 1) * TILE_SIZE_F);
 }
 
 void ScriptedBehaviorCallback::setDisposed() {

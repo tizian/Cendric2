@@ -267,6 +267,8 @@ public:
 			return "BossZeff";
 		case EnemyID::Boss_Wolf:
 			return "BossKhajag";
+		case EnemyID::Observer:
+			return "Observer";
 		}
 	}
 

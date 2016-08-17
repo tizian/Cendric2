@@ -134,6 +134,11 @@ void ChestTile::unlock() {
 }
 
 void ChestTile::loot() {
+	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
+	if (isObserved && dynamic_cast<LevelScreen*>(m_screen)->notifyObservers()) {
+		return;
+	}
+
 	// loot, create the correct items + gold in the players inventory.
 	m_mainChar->lootItems(m_lootableItems);
 	if (m_lootableGold > 0) {

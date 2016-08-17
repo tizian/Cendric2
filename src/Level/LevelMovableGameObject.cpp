@@ -15,9 +15,7 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 	delete m_spellManager;
 	delete m_movingBehavior;
 	delete m_attackingBehavior;
-	if (m_damageNumbers) {
-		delete m_damageNumbers;
-	}
+	delete m_damageNumbers;
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
@@ -25,8 +23,8 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	updateTime(m_stunnedTime, frameTime);
 	updateTime(m_fearedTime, frameTime);
 
-	m_movingBehavior->update(frameTime);
-	m_attackingBehavior->update(frameTime);
+	if (m_movingBehavior) m_movingBehavior->update(frameTime);
+	if (m_attackingBehavior) m_attackingBehavior->update(frameTime);
 
 	m_level->collideWithDynamicTiles(this, *getBoundingBox());
 	m_spellManager->update(frameTime);

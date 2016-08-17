@@ -15,17 +15,25 @@ public:
 	~ScriptedBehavior();
 
 	void update(const sf::Time& frameTime);
+	void updateSpeechBubble(const sf::Time& frameTime);
 	void onDeath();
 	void say(const std::string& text, int seconds);
 	void wait(int seconds);
+	void addObserverStep(float x, float y);
+	void setCurrentObserverStep();
 
 	bool isError() const;
 
 protected:
+	Enemy* m_enemy;
 	SpeechBubble* m_speechBubble;
 	ScriptedBehaviorCallback m_callback;
 	sf::Time m_speechBubbleTime = sf::Time::Zero;
 	sf::Time m_scriptUpdateTime = sf::Time::Zero;
 
 	static const sf::Time SCRIPT_UPDATE_INTERVAL;
+
+	// only used by observers
+	std::vector<sf::Vector2f> m_observerSteps;
+	size_t m_currentObserverStep = std::string::npos;
 };

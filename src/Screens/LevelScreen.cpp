@@ -2,6 +2,7 @@
 #include "Screens/LoadingScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Screens/ScreenManager.h"
+#include "Level/Enemies/ObserverEnemy.h"
 
 using namespace std;
 
@@ -130,6 +131,30 @@ void LevelScreen::removeTypedBuffs(SpellID id) {
 
 void LevelScreen::notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr) {
 	m_characterCore->setQuickslot(itemId, quickslotNr);
+}
+
+bool LevelScreen::notifyObservers() {
+	if (!m_currentLevel.getWorldData()->isObserved) return false;
+
+	for (auto go : *getObjects(GameObjectType::_Enemy)) {
+		ObserverEnemy* observer = dynamic_cast<ObserverEnemy*>(go);
+		if (!observer) continue;
+
+		if (observer->notifyStealing(m_isFirstTimeStealing)) {
+			if (m_isFirstTimeStealing) {
+				m_isFirstTimeStealing = false;
+			}
+			else {
+				m_isGameOver = true;
+				addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
+				m_interface->hideAll();
+				// todo: set level coords of jail!
+			}
+			return true;
+		}
+	}
+
+	return false;
 }
 
 LevelMainCharacter* LevelScreen::getMainCharacter() const {
@@ -318,7 +343,7 @@ void LevelScreen::handleBossDefeated(const sf::Time& frameTime) {
 
 void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	// handle game over
-	if (!m_mainChar->isDead()) return;
+	if (!m_isGameOver && !m_mainChar->isDead()) return;
 	if (m_isGameOver) {
 		if (m_respawnWaitTime == sf::Time::Zero) return;
 		updateTime(m_respawnWaitTime, frameTime);

@@ -30,7 +30,7 @@ void EnemyMovingBehavior::handleMovementInput() {
 		if (m_movingTarget->y < center.y && std::abs(m_movingTarget->y - center.y) > 10.f) {
 			m_movingDirectionY = -1;
 		}
-		else if (m_movingTarget->y > center.x && std::abs(m_movingTarget->y - center.y) > 10.f) {
+		else if (m_movingTarget->y > center.y && std::abs(m_movingTarget->y - center.y) > 10.f) {
 			m_movingDirectionY = 1;
 		}
 		else {

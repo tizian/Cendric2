@@ -65,6 +65,11 @@ void LevelItem::load(const std::string& itemID, const sf::Vector2f& position) {
 }
 
 void LevelItem::pickup() {
+	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
+	if (isObserved && dynamic_cast<LevelScreen*>(m_screen)->notifyObservers()) {
+		return;
+	}
+
 	// pickup, create the correct item or correct amount of gold in the players inventory.
 	if (m_itemType == ItemType::Gold) {
 		m_mainChar->addGold(m_goldValue);

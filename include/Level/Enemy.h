@@ -109,6 +109,7 @@ protected:
 	int m_objectID = -1;
 	bool m_isUnique = false;
 	bool m_isLooted = false;
+	bool m_isHPBarVisible = true;
 
 	// AI
 	EnemyState m_enemyState = EnemyState::Idle;
