@@ -462,9 +462,9 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_KeyCost0
-	translation.en:You remember the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
-	translation.de:Erinnerst du dich an den Schnaps, den du ihm gegeben hast? Es war ein Schlafpulver... ihm den Schlüssel zu entwenden war das reinste Kinderspiel.
-	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä hesch? Es isch es Schlofpulver drin gsi. Ihm de Schlüssel abzluchse isch es Chinderspiel gsi.
+	translation.en:You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
+	translation.de:Erinnerst du dich an den Schnaps, den du ihm gegeben hast? Ich habe etwas Schlafpulver reingemixt... ihm den Schlüssel zu entwenden war das reinste Kinderspiel.
+	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä hesch? Ich han es Schlofpulver dri ta. Ihm de Schlüssel abzluchse isch bubieifach gsi.
 	[
 		# Link node, tag is next tag
 		tag:29

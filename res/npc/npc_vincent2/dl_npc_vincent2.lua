@@ -181,7 +181,7 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(28, 29, "DL_Vincent_KeyCost0") -- You remember the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
+				DL:createNPCNode(28, 29, "DL_Vincent_KeyCost0") -- You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
 				DL:addNode()
 
 

@@ -909,7 +909,7 @@
   <object id="228" x="550" y="1702" width="24" height="240"/>
  </objectgroup>
  <objectgroup name="trigger">
-  <object id="219" x="199" y="3318" width="50" height="31">
+  <object id="219" x="170" y="3288" width="104" height="61">
    <properties>
     <property name="map entry" value="res/map/meadows/meadows.tmx,3360,3030"/>
     <property name="persistent" value=""/>
