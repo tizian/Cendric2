@@ -334,6 +334,7 @@ void ResourceManager::loadLevelResources() {
 	loadTexture(GlobalResource::TEX_TEXT_GAMEOVER, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_TEXT_GAMEPAUSED, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_TEXT_DEFEATED, ResourceType::Level);
+	loadTexture(GlobalResource::TEX_TEXT_ARRESTED, ResourceType::Level);
 	// load level gui resources
 	loadTexture(GlobalResource::TEX_GUI_SPEECHBUBBLE_POINTER, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_GUI_HEALTHBAR_MAINCHAR_BORDER, ResourceType::Level);

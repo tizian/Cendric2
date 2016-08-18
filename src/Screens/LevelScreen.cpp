@@ -146,7 +146,7 @@ bool LevelScreen::notifyObservers() {
 			}
 			else {
 				m_isGameOver = true;
-				addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
+				addScreenOverlay(ScreenOverlay::createArrestedScreenOverlay());
 				m_interface->hideAll();
 				// todo: set level coords of jail!
 			}

@@ -51,6 +51,7 @@ const std::string GlobalResource::TEX_SCREEN_OVERLAY_FEARED = "res/assets/screen
 const std::string GlobalResource::TEX_TEXT_GAMEOVER = "res/assets/screens/text_gameover.png";
 const std::string GlobalResource::TEX_TEXT_GAMEPAUSED = "res/assets/screens/text_gamepaused.png";
 const std::string GlobalResource::TEX_TEXT_DEFEATED = "res/assets/screens/text_defeated.png";
+const std::string GlobalResource::TEX_TEXT_ARRESTED = "res/assets/screens/text_arrested.png";
 const std::string GlobalResource::TEX_GUI_SPEECHBUBBLE_POINTER = "res/assets/gui/speechbubble_pointer.png";
 const std::string GlobalResource::TEX_GUI_HEALTHBAR_MAINCHAR_BORDER = "res/assets/gui/healthbar_mainChar_border.png";
 const std::string GlobalResource::TEX_GUI_HEALTHBAR_ENEMY_BORDER = "res/assets/gui/healthbar_enemy_border.png";

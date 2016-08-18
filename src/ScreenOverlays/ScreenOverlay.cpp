@@ -320,3 +320,28 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 
 	return hintScreenOverlay;
 }
+
+ScreenOverlay* ScreenOverlay::createArrestedScreenOverlay() {
+	TextureScreenOverlay* arrestedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
+	arrestedScreenOverlay->setPermanent(true);
+
+	arrestedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_GAMEOVER));
+
+	const sf::Texture* text = g_resourceManager->getTexture(GlobalResource::TEX_TEXT_ARRESTED);
+	arrestedScreenOverlay->setSpriteTexture(text);
+	arrestedScreenOverlay->setSpriteScale(sf::Vector2f(4.f, 4.f));
+	arrestedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
+
+	Language language = g_resourceManager->getConfiguration().language;
+	if (language == Language::Lang_EN) {
+		arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
+	}
+	else if (language == Language::Lang_DE) {
+		arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
+	}
+	else if (language == Language::Lang_CH) {
+		arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
+	}
+
+	return arrestedScreenOverlay;
+}

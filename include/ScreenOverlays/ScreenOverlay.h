@@ -43,6 +43,7 @@ public:
 	static ScreenOverlay* createGameOverScreenOverlay();
 	static ScreenOverlay* createGamePausedScreenOverlay();
 	static ScreenOverlay* createEnemyDefeatedScreenOverlay(std::map<std::string, int>& items, int gold);
+	static ScreenOverlay* createArrestedScreenOverlay();
 
 protected: 
 	float m_scale;
