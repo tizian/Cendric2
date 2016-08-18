@@ -1,9 +1,10 @@
 #include "GUI/BookWindow.h"
-#include <map>
+#include "GUI/GUIConstants.h"
 
 const float BookWindow::WIDTH = WINDOW_WIDTH / 3.f;
 const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TOP;
-const std::string SOUND_PATH = "res/sound/gui/page_turn.ogg";
+const float BookWindow::MARGIN = 50.f;
+const std::string BookWindow::SOUND_PATH = "res/sound/gui/page_turn.ogg";
 
 BookWindow::BookWindow(const BookData& data) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, HEIGHT),
@@ -12,10 +13,6 @@ BookWindow::BookWindow(const BookData& data) : Window(
 	COLOR_DARK_BROWN) // ornament 
 {
 	m_data = data;
-
-	std::map<char, int> charMap;
-
-	charMap.insert(std::make_pair('A', 0));
 
 	m_leftArrow = new ArrowButton(false);
 	m_leftArrow->setMainColor(COLOR_DARK_BROWN);
@@ -37,10 +34,10 @@ BookWindow::BookWindow(const BookData& data) : Window(
 	}
 	else {
 		// Init book title
-		m_bookTitle.setCharacterSize(24);
+		m_bookTitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 		m_bookTitle.setColor(COLOR_DARK_BROWN);
 		m_bookTitle.setTextStyle(TextStyle::Shadowed);
-		m_bookTitle.setString(g_textProvider->getText(m_data.title, "book"));
+		m_bookTitle.setString(g_textProvider->getText(m_data.title, "document"));
 		m_bookTitle.setTextAlignment(TextAlignment::Center);
 
 		setPage(-1);
@@ -108,13 +105,13 @@ void BookWindow::setPage(int index) {
 	m_leftArrow->setEnabled((!m_data.title.empty() && m_currentPage > -1) || m_currentPage > 0);
 
 	if (m_currentPage >= 0) {
-		m_title.setString(g_textProvider->getText(m_data.pages.at(m_currentPage).title, "book"));
-		m_content.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).content, "book",
-			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * GUIConstants::LEFT + 10)));
+		m_title.setString(g_textProvider->getText(m_data.pages.at(m_currentPage).title, "document"));
+		m_content.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).content, "document",
+			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
 
 		m_title.setPosition(getPosition() + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
 		m_content.setPosition(
-			getPosition() + sf::Vector2f(GUIConstants::LEFT,
+			getPosition() + sf::Vector2f(MARGIN,
 				m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
 	}
 }
@@ -128,6 +125,6 @@ void BookWindow::setPosition(const sf::Vector2f& pos) {
 	m_bookTitle.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_bookTitle.getLocalBounds().width, 0.3f * HEIGHT));
 	m_title.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
 	m_content.setPosition(
-		pos + sf::Vector2f(GUIConstants::LEFT, 
+		pos + sf::Vector2f(MARGIN,
 			m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
 }

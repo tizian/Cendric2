@@ -262,6 +262,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_aquamarinering', 'item_desc', 'There is a coldness radiating from its blue stone.','Der blaue Stein strahlt eine Kälte aus.','De blau Stei strahlt e Chälti uus.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_aquamarinering', 'eq_ring', 100, 300, 30);
 INSERT INTO item_attribute (item_id, dmg_ice, critical) values ('eq_aquamarinering', 5, 1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_aquamarinering', -12, -37, 8, 8);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_aquamarinering', 1, 500, 100, 50, 50);
 
 -- Iron Ring
 

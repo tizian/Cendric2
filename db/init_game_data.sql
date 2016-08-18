@@ -13,6 +13,7 @@ DROP TABLE text;
 DROP TABLE levelitem_light;
 DROP TABLE levelitem_frame;
 DROP TABLE levelitem;
+DROP TABLE item_document_page;
 DROP TABLE item_weapon_slot;
 DROP TABLE item_weapon;
 DROP TABLE item_equipment_light;
@@ -72,6 +73,15 @@ CREATE TABLE item_attribute(
 	res_shadow INTEGER NOT NULL DEFAULT 0,
 	res_light INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY (item_id),
+	FOREIGN KEY(item_id) REFERENCES item(item_id)
+);
+
+CREATE TABLE item_document_page(
+	item_id VARCHAR(50) NOT NULL, 
+	page_nr INTEGER NOT NULL,
+	title VARCHAR(50) NOT NULL DEFAULT "",
+	content VARCHAR(50) NOT NULL DEFAULT "",
+	PRIMARY KEY (item_id, page_nr),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 );
 

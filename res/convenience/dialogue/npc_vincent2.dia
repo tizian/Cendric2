@@ -602,7 +602,7 @@ npc.id:npc_vincent2
 	translation.ch:
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {1
@@ -646,7 +646,7 @@ npc.id:npc_vincent2
 	translation.ch:
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {1

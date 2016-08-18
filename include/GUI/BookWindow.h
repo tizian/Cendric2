@@ -3,7 +3,6 @@
 #include "global.h"
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
-#include "GUI/GUIConstants.h"
 #include "GUI/ArrowButton.h"
 #include "Structs/BookData.h"
 
@@ -22,6 +21,8 @@ public:
 
 	static const float WIDTH;
 	static const float HEIGHT;
+	static const float MARGIN;
+	static const std::string SOUND_PATH;
 
 private:
 	BookData m_data;

@@ -242,7 +242,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(33, -1, "DL_Vincent_ChestIsObserved") -- 
+			DL:createNPCNode(33, -2, "DL_Vincent_ChestIsObserved") -- 
 			DL:changeQuestState("elder_chest", "started")
 			DL:addNode()
 
@@ -262,7 +262,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(34, -1, "DL_Vincent_ChestIsObserved") -- 
+			DL:createNPCNode(34, -2, "DL_Vincent_ChestIsObserved") -- 
 			DL:changeQuestState("elder_chest", "started")
 			DL:addNode()
 

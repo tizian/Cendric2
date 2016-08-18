@@ -6,9 +6,11 @@
 #include "Level/LevelInterface.h"
 #include "WeatherSystem.h"
 #include "GUI/ProgressLog.h"
+#include "Structs/BookData.h"
 
 class Item;
 class Trigger;
+class BookWindow;
 
 // ancestor for level or map screen
 class WorldScreen : public Screen {
@@ -21,6 +23,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget);
 	void updateProgressLog(const sf::Time& frameTime);
+	void setBook(const BookData* bookData);
 
 	// notify permanent item consumed -> change in core, display overlay and progresslog and reload inventory.
 	void notifyPermanentItemConsumed(const Item* item);
@@ -95,6 +98,11 @@ protected:
 
 	// sound
 	sf::Sound m_pickupSound;
+
+	// book / document window
+	void handleBookWindow(const sf::Time& frameTime);
+	BookWindow* m_bookWindow = nullptr;
+	bool m_bookWindowDisposed = false;
 
 private:
 	void updateOverlayQueue();

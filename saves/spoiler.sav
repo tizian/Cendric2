@@ -129,6 +129,7 @@ item.id:do_notemarcus,1
 item.id:do_bloodnotemarcus,1
 item.id:do_eleletter,1
 item.id:do_elemap,1
+item.id:do_elderdiary,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:eq_back_necrot3

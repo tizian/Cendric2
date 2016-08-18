@@ -70,6 +70,7 @@ private:
 
 	sf::RenderTexture m_particleRenderTexture;
 
+	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);
 	void handleBossDefeated(const sf::Time& frameTime);
 

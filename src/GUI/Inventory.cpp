@@ -1,12 +1,13 @@
 #include "GUI/Inventory.h"
-#include "Level/LevelMainCharacter.h"
-#include "Level/LevelInterface.h"
-#include "Map/MapInterface.h"
-#include "Map/MerchantInterface.h"
 #include "GUI/GUIConstants.h"
 #include "GUI/SlotClone.h"
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
+#include "Level/LevelMainCharacter.h"
+#include "Level/LevelInterface.h"
+#include "Map/MapInterface.h"
+#include "Map/MerchantInterface.h"
+#include "Structs/BookData.h"
 #include "GlobalResource.h"
 
 const int Inventory::SLOT_COUNT_X = 5;
@@ -123,7 +124,6 @@ void Inventory::init() {
 
 void Inventory::setPosition(const sf::Vector2f& position) {
 	hideDescription();
-	hideDocument();
 	deselectCurrentSlot();
 
 	m_position = position;
@@ -164,7 +164,6 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 Inventory::~Inventory() {
 	delete m_window;
 	delete m_descriptionWindow;
-	delete m_documentWindow;
 	delete m_equipment;
 	delete m_currentClone;
 	delete m_tabBar;
@@ -367,7 +366,6 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 	m_selectedSlotId.first = selectedSlotId;
 	m_selectedSlotId.second = type;
 	InventorySlot* selectedSlot = getSelectedSlot();
-	hideDocument();
 	if (selectedSlot != nullptr) {
 		selectedSlot->select();
 		showDescription(selectedSlot->getItem());
@@ -479,9 +477,6 @@ void Inventory::render(sf::RenderTarget& target) {
 	m_tabBar->render(target);
 
 	m_descriptionWindow->render(target);
-	if (m_documentWindow != nullptr) {
-		m_documentWindow->render(target);
-	}
 
 	m_equipment->render(target);
 	if (m_currentClone != nullptr) {
@@ -543,17 +538,28 @@ void Inventory::learnSpell(const Item* item) {
 }
 
 void Inventory::showDocument(const Item* item) {
-	if (item == nullptr) return;
-	delete m_documentWindow;
-	m_documentWindow = new DocumentDescriptionWindow(item);
-
-	sf::Vector2f pos = sf::Vector2f(
-		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,
-		m_window->getPosition().y);
-	if (m_descriptionWindow->isVisible()) {
-		pos.x += ItemDescriptionWindow::WIDTH + WINDOW_MARGIN;
+	if (item == nullptr || !item->isDocument()) return;
+	
+	BookData bookData;
+	for (auto& bean : item->getDocumentPageBeans()) {
+		if (bean.page_nr == -1) {
+			// this is the title
+			bookData.title = bean.title;
+		}
+		else {
+			BookPage page;
+			page.title = bean.title;
+			page.content = bean.content;
+			bookData.pages.push_back(page);
+		}
 	}
-	m_documentWindow->setPosition(pos);
+
+	if (m_mapInterface) {
+		m_mapInterface->getScreen()->setBook(&bookData);
+	}
+	else if (m_levelInterface) {
+		m_levelInterface->getScreen()->setBook(&bookData);
+	}
 }
 
 void Inventory::showDescription(const Item* item) {
@@ -564,29 +570,14 @@ void Inventory::showDescription(const Item* item) {
 		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,
 		m_window->getPosition().y);
 	m_descriptionWindow->setPosition(pos);
-	if (m_documentWindow != nullptr) {
-		pos.x += ItemDescriptionWindow::WIDTH + WINDOW_MARGIN;
-		m_documentWindow->setPosition(pos);
-	}
 }
 
 void Inventory::hideDescription() {
 	m_descriptionWindow->hide();
-	if (m_documentWindow != nullptr) {
-		m_documentWindow->setPosition(
-			m_documentWindow->getPosition() -
-			sf::Vector2f(ItemDescriptionWindow::WIDTH + WINDOW_MARGIN, 0.f));
-	}
-}
-
-void Inventory::hideDocument() {
-	delete m_documentWindow;
-	m_documentWindow = nullptr;
 }
 
 void Inventory::selectTab(ItemType type) {
 	hideDescription();
-	hideDocument();
 	deselectCurrentSlot();
 	m_currentTab = type;
 	switch (type) {
@@ -639,7 +630,6 @@ void Inventory::reload() {
 	// reload items
 	clearAllSlots();
 	hideDescription();
-	hideDocument();
 	for (auto& itemData : m_core->getData().items) {
 		Item* item = g_resourceManager->getItem(itemData.first);
 		if (item == nullptr || m_typeMap.find(item->getType()) == m_typeMap.end()) continue;

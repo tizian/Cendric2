@@ -86,7 +86,7 @@ void ObserverEnemy::loadAttributes() {
 }
 
 bool ObserverEnemy::notifyStealing(bool isFirstTime) {
-	if (m_state != GameObjectState::Observing) {
+	if (m_state == GameObjectState::Idle) {
 		return false;
 	}
 
@@ -160,7 +160,8 @@ void ObserverEnemy::loadAnimation() {
 
 	loadParticleSystem();
 
-	LightComponent* lightComponent = new LightComponent(LightData(sf::Vector2f(), m_observedRange * 2, 1.0f), this);
+	LightComponent* lightComponent = new LightComponent(LightData(
+		sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), m_observedRange * 2, 1.0f), this);
 	addComponent(lightComponent);
 }
 

@@ -3,6 +3,7 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/ScreenManager.h"
 #include "Level/Enemies/ObserverEnemy.h"
+#include "GUI/BookWindow.h"
 
 using namespace std;
 
@@ -146,7 +147,8 @@ bool LevelScreen::notifyObservers() {
 			}
 			else {
 				m_isGameOver = true;
-				addScreenOverlay(ScreenOverlay::createArrestedScreenOverlay());
+				m_respawnWaitTime = sf::seconds(6.0f);
+				addObject(ScreenOverlay::createArrestedScreenOverlay());
 				m_interface->hideAll();
 				// todo: set level coords of jail!
 			}
@@ -183,6 +185,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	updateTooltipText(frameTime);
 
 	if (!m_isPaused) {
+		handleBookWindow(frameTime);
 		WorldScreen::execUpdate(frameTime);
 
 		// sort Movable Tiles
@@ -341,6 +344,16 @@ void LevelScreen::handleBossDefeated(const sf::Time& frameTime) {
 	return;
 }
 
+void LevelScreen::handleBookWindow(const sf::Time& frameTime) {
+	if (m_bookWindow == nullptr) return;
+
+	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
+		delete m_bookWindow;
+		m_bookWindow = nullptr;
+		m_interface->getInventory()->show();
+	}
+}
+
 void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	// handle game over
 	if (!m_isGameOver && !m_mainChar->isDead()) return;
@@ -355,7 +368,7 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	}
 
 	m_isGameOver = true;
-	addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
+	addObject(ScreenOverlay::createGameOverScreenOverlay());
 	m_interface->hideAll();
 }
 

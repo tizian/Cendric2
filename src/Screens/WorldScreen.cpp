@@ -1,5 +1,6 @@
 #include "Screens/WorldScreen.h"
 #include "Screens/LoadingScreen.h"
+#include "GUI/BookWindow.h"
 #include "Item.h"
 #include "Trigger.h"
 
@@ -272,6 +273,27 @@ void WorldScreen::execOnExit(const Screen* nextScreen) {
 	m_overlayQueue.clear();
 }
 
+void WorldScreen::setBook(const BookData* bookData) {
+	m_interface->hideAll();
+
+	m_bookWindow = new BookWindow(*bookData);
+	m_bookWindowDisposed = false;
+	m_bookWindow->addCloseButton([&]() {
+		m_bookWindowDisposed = true;
+	});
+}
+
+void WorldScreen::handleBookWindow(const sf::Time& frameTime) {
+	if (m_bookWindow == nullptr) return;
+	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
+		delete m_bookWindow;
+		m_bookWindow = nullptr;
+	}
+	updateProgressLog(frameTime);
+	updateTooltipText(frameTime);
+	updateObjects(GameObjectType::_Light, frameTime);
+}
+
 void WorldScreen::updateProgressLog(const sf::Time& frameTime) {
 	m_progressLog->update(frameTime);
 }
@@ -283,4 +305,8 @@ void WorldScreen::render(sf::RenderTarget& renderTarget) {
 
 void WorldScreen::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	m_interface->renderAfterForeground(renderTarget);
+
+	if (m_bookWindow != nullptr) {
+		m_bookWindow->render(renderTarget);
+	}
 }

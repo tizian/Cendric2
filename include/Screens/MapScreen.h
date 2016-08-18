@@ -8,9 +8,7 @@
 #include "Screens/LoadingScreen.h"
 #include "GUI/DialogueWindow.h"
 #include "GUI/CookingWindow.h"
-#include "GUI/BookWindow.h"
 #include "Map/MapInterface.h"
-#include "Structs/BookData.h"
 
 class MapScreen : public WorldScreen {
 public:
@@ -24,7 +22,6 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void renderEquipment(sf::RenderTarget& renderTarget);
 	void setDialogue(NPC* npc);
-	void setBook(const BookData* bookData);
 	void setCooking();
 
 	void execOnEnter(const Screen* previousScreen) override;
@@ -53,11 +50,7 @@ private:
 	MapMainCharacter* m_mainChar;
 	DialogueWindow* m_dialogueWindow = nullptr;
 	CookingWindow* m_cookingWindow = nullptr;
-	BookWindow* m_bookWindow = nullptr;
-
-	bool m_bookWindowDisposed;
 
 	void handleDialogueWindow(const sf::Time& frameTime);
 	void handleCookingWindow(const sf::Time& frameTime);
-	void handleBookWindow(const sf::Time& frameTime);
 };
