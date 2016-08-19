@@ -325,7 +325,7 @@ ScreenOverlay* ScreenOverlay::createArrestedScreenOverlay() {
 	TextureScreenOverlay* arrestedScreenOverlay = new TextureScreenOverlay(sf::seconds(1.f), sf::seconds(2.f));
 	arrestedScreenOverlay->setPermanent(true);
 
-	arrestedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_GAMEOVER));
+	arrestedScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
 
 	const sf::Texture* text = g_resourceManager->getTexture(GlobalResource::TEX_TEXT_ARRESTED);
 	arrestedScreenOverlay->setSpriteTexture(text);
