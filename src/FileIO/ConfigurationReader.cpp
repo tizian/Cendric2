@@ -10,7 +10,7 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 	data = DEFAULT_CONFIGURATION;
 
 	string line;
-	ifstream configuration(getResourcePath(GlobalResource::CONFIGURATION_PATH));
+	ifstream configuration(getDocumentsPath(GlobalResource::CONFIGURATION_PATH));
 	bool noError = true;
 	if (configuration.is_open()) {
 		while (getline(configuration, line)) {
