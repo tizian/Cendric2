@@ -3,6 +3,7 @@
 #include "global.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehaviorCallback.h"
 #include "GUI/SpeechBubble.h"
+#include "Structs/RoutineStep.h"
 
 class CharacterCore;
 class Enemy;
@@ -19,8 +20,8 @@ public:
 	void onDeath();
 	void say(const std::string& text, int seconds);
 	void wait(int seconds);
-	void addObserverStep(float x, float y);
-	void setCurrentObserverStep();
+	void addRoutineStep(const RoutineStep& step);
+	void setCurrentRoutineStep();
 
 	bool isError() const;
 
@@ -33,7 +34,8 @@ protected:
 
 	static const sf::Time SCRIPT_UPDATE_INTERVAL;
 
-	// only used by observers
-	std::vector<sf::Vector2f> m_observerSteps;
-	size_t m_currentObserverStep = std::string::npos;
+	// if this is filled, the behavior will only do these steps
+	std::vector<RoutineStep> m_routineSteps;
+	size_t m_currentRoutineStep = std::string::npos;
+	sf::Time m_waitingTime = sf::Time::Zero;
 };

@@ -72,7 +72,7 @@ void ObserverEnemy::setObserverIdle() {
 	m_movingBehavior->setMaxVelocityYUp(SPEED_IDLE);
 	m_movingBehavior->setMaxVelocityX(SPEED_IDLE);
 	setState(GameObjectState::Idle);
-	m_scriptedBehavior->setCurrentObserverStep();
+	m_scriptedBehavior->setCurrentRoutineStep();
 }
 
 void ObserverEnemy::render(sf::RenderTarget& target) {

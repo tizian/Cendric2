@@ -4,23 +4,10 @@
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Structs/DialogueNode.h"
+#include "Structs/RoutineStep.h"
 
 class GameScreen;
 class DialogueWindow;
-
-enum class RoutineState {
-	VOID,
-	Waiting,
-	GoingTo,
-	Disappearing
-};
-
-struct RoutineStep {
-	RoutineState state;
-	sf::Time time;
-	sf::Vector2f goal;
-};
-
 class NPC;
 
 // A routine of a npcs behavior

@@ -1,6 +1,8 @@
 -- Behavior for observer (1) in the level elderbackroom
 
-observer = function(O) 
-	O:addStep(15, 20)
-	O:addStep(25, 20)
+routine = function(O) 
+	O:gotoTile(15, 20)
+	O:gotoTile(25, 20)
+	O:wait(1)
+	O:say("Test", 3)
 end
