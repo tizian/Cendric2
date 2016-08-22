@@ -2,6 +2,11 @@
 
 #include "global.h"
 
+struct TranslationData {
+	std::string tag;
+	std::string englishTranslation;
+};
+
 // a class that parses cendric insert scripts to a format our translater uses
 // and back
 class InsertScriptParser {

@@ -23,12 +23,12 @@ void InsertScriptParser::showParseMenu() {
 }
 
 void InsertScriptParser::parseInsertScript() const {
-	std::vector<std::string> englishTranslations;
+	std::vector<TranslationData> translations;
 
 	// read that file
 	bool isStillOpen = false;
 	std::string line;
-	std::string currentTranslation;
+	TranslationData currentTranslation;
 	std::ifstream inputFile(m_inputPath);
 	if (inputFile.is_open()) {
 		while (getline(inputFile, line)) {
@@ -40,20 +40,20 @@ void InsertScriptParser::parseInsertScript() const {
 					// this is a multiline translation, append everything until the next single '
 					size_t nextDelimiter = line.find('\'');
 					if (nextDelimiter == std::string::npos) {
-						currentTranslation.append(line);
-						currentTranslation.append("\n");
+						currentTranslation.englishTranslation.append(line);
+						currentTranslation.englishTranslation.append("\n");
 						break;
 					}
 					// is it an escaped apostroph?
 					if (line.size() > nextDelimiter + 1 && line.at(nextDelimiter + 1) == '\'') {
 						// it is 
-						currentTranslation += line.substr(0, nextDelimiter + 2);
+						currentTranslation.englishTranslation += line.substr(0, nextDelimiter + 2);
 						line = line.substr(nextDelimiter + 2);
 					} 
 					else {
 						// it isn't. Let's end this.
-						currentTranslation += line.substr(0, nextDelimiter);
-						englishTranslations.push_back(currentTranslation);
+						currentTranslation.englishTranslation += line.substr(0, nextDelimiter);
+						translations.push_back(currentTranslation);
 						isStillOpen = false;
 						break;
 					}
@@ -61,11 +61,26 @@ void InsertScriptParser::parseInsertScript() const {
 				continue;
 			}
 
-			currentTranslation = "";
+			currentTranslation = TranslationData();
+
+			// get the tag
+			size_t nextDelimiter = line.find('\'');
+			if (nextDelimiter == std::string::npos) {
+				continue;
+			}
+			line = line.substr(nextDelimiter + 1);
+
+			nextDelimiter = line.find('\'');
+			if (nextDelimiter == std::string::npos) {
+				continue;
+			}
+
+			currentTranslation.tag = line.substr(0, nextDelimiter);
 
 			bool notFound = false;
-			for (int i = 0; i < 3; ++i) {
-				size_t nextDelimiter = line.find('\'');
+
+			for (int i = 0; i < 4; ++i) {
+				nextDelimiter = line.find('\'');
 				if (nextDelimiter == std::string::npos) {
 					notFound = true;
 					break;
@@ -76,23 +91,23 @@ void InsertScriptParser::parseInsertScript() const {
 			if (notFound) continue;
 
 			while (true) {
-				size_t nextDelimiter = line.find('\'');
+				nextDelimiter = line.find('\'');
 				if (nextDelimiter == std::string::npos) {
 					isStillOpen = true;
-					currentTranslation.append(line);
-					currentTranslation.append("\n");
+					currentTranslation.englishTranslation.append(line);
+					currentTranslation.englishTranslation.append("\n");
 					break;
 				}
 				// is it an escaped apostroph?
 				if (line.size() > nextDelimiter + 1 && line.at(nextDelimiter + 1) == '\'') {
 					// it is 
-					currentTranslation += line.substr(0, nextDelimiter + 2);
+					currentTranslation.englishTranslation += line.substr(0, nextDelimiter + 2);
 					line = line.substr(nextDelimiter + 2);
 				}
 				else {
 					// it isn't. Let's end this.
-					currentTranslation += line.substr(0, nextDelimiter);
-					englishTranslations.push_back(currentTranslation);
+					currentTranslation.englishTranslation += line.substr(0, nextDelimiter);
+					translations.push_back(currentTranslation);
 					break;
 				}
 			}
@@ -110,8 +125,8 @@ void InsertScriptParser::parseInsertScript() const {
 	if (outputFile.is_open()) {
 		outputFile << writeParserHeader(); 
 
-		for (auto& str : englishTranslations) {
-			outputFile << "'" << str << "', ''\n";
+		for (auto& trans : translations) {
+			outputFile << "'" << trans.tag << "', '" << trans.englishTranslation << "', ''\n";
 		}
 
 		outputFile.close();
@@ -125,7 +140,7 @@ void InsertScriptParser::parseInsertScript() const {
 
 std::string InsertScriptParser::writeParserHeader() const {
 	std::stringstream ss;
-	ss << "-- File format: '<English Translation>', '<Spanish Translation>'\n";
+	ss << "-- File format: '<Tag>', '<English Translation>', '<Spanish Translation>'\n";
 	ss << "-- Escape apostrophs in the translations with ''\n";
 	ss << "\n";
 	return ss.str();
