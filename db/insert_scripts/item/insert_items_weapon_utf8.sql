@@ -51,14 +51,33 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Claw
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item','Iron Claw', 'Eisenklaue','Isechlaue');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item_desc', '...','...','...');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_claw', 'eq_weapon', 250, 250, 60);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item_desc', 'The curved sharp blades and its range create a terrible weapon.','Die gebogenen scharfen Klingen und ihre Reichweite machen sie zu einer fürchterlichen Waffe.','Di bogene scharfe Klinge und iri Riichwiiti mached si zunere fürchterliche Waffe.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_claw', 'eq_weapon', 250, 250, 100);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_shadow, dmg_ice) values ('we_claw', 10, 15, 5, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_claw', 'res/assets/equipment/weapon/spritesheet_weapon_claw.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_claw.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_claw', 600, 10, 45, 80, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_claw', 800, 10, 45, 80, 10);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 1, 'elemental', 1);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 2, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 3, 'necromancy', 3);
+
+-- Enchanted Dagger
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_enchanteddagger', 'item','Enchanted Dagger', 'Verzauberter Dolch','Verzauberete Dolch');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_enchanteddagger', 'item_desc', 'This dagger was smuggled into the prison of Gandria.','Dieser Dolch wurde in das Gefängnis von Gandria geschmuggelt.','De Dolch isch is Gfängnis vo Gandria gschmugglet worde.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_enchanteddagger', 'eq_weapon', 550, 500, 50);
+INSERT INTO item_attribute (item_id, max_health, critical) values ('we_enchanteddagger', 5, 8);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_enchanteddagger', 'res/assets/equipment/weapon/spritesheet_weapon_enchanteddagger.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_enchanteddagger.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_enchanteddagger', 800, 10, 35, 70, 6);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_enchanteddagger', 1, 'elemental', 2);
+
+-- Pickaxe
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pickaxe', 'item','Pickaxe', 'Spitzhacke','Pickel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pickaxe', 'item_desc', 'Is used to mine ore.','Wird gebraucht, um Erz abzubauen.','Da demit chame Erz abbaue.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pickaxe', 'eq_weapon', 50, 550, 20);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, critical) values ('we_pickaxe', 3, 1, 1);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_pickaxe', 'res/assets/equipment/weapon/spritesheet_weapon_pickaxe.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_pickaxe.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pickaxe', 700, 10, 35, 70, 5);
 
 -- Pike of Light
 
@@ -124,7 +143,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item', 'Mace of the Order','Streitkolben des Ordens','Striitcholbe vom Orde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item_desc', 'This weapon is mostly used by Paladins of the Order.','Diese Waffe wird meistens von den Paladinen des Ordens getragen.', 'Die Waffe wird meistens vo de Paladin vom Orde treit.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_ordermace', 'eq_weapon', 400, 350, 50);
-INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_ordermace', 7, 5);
+INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_ordermace', 5, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_ordermace', 'res/assets/equipment/weapon/spritesheet_weapon_ordermace.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_ordermace.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_ordermace', 800, 10, 35, 70, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_ordermace', 1, 'divine', 1);

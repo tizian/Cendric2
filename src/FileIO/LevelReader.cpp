@@ -112,14 +112,14 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 					}
 					chestData.lightData = lightData;
 				}
-				else if (itemText.compare("gold") == 0 || itemText.compare("Gold") == 0) {
+				else if (itemText.compare("gold") == 0) {
 					int amount;
 					result = item->QueryIntAttribute("value", &amount);
 					XMLCheckResult(result);
 
 					items.second += amount;
 				}
-				else if (itemText.compare("strength") == 0 || itemText.compare("Strength") == 0) {
+				else if (itemText.compare("strength") == 0) {
 					int amount;
 					result = item->QueryIntAttribute("value", &amount);
 					XMLCheckResult(result);
@@ -130,13 +130,31 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 					}
 					chestData.chestStrength = amount;
 				}
-				else if (itemText.compare("key") == 0 || itemText.compare("Key") == 0) {
+				else if (itemText.compare("key") == 0) {
 					std::string keyItemID = item->Attribute("value");
 					if (keyItemID.empty()) {
 						logError("XML file could not be read, key itemID is not specified.");
 						return false;
 					}
 					chestData.keyItemID = keyItemID;
+				}
+				else if (itemText.compare("condition progress") == 0) {
+
+					std::string conditionProgress = item->Attribute("value");
+					if (conditionProgress.empty()) {
+						logError("XML file could not be read, chest condition is empty.");
+						return false;
+					}
+
+					size_t pos = 0;
+					if ((pos = conditionProgress.find(",")) == std::string::npos) {
+						logError("XML file could not be read, chest condition progress value must be two strings, seperated by a comma.");
+						return false;
+					}
+
+					chestData.conditionProgress.first = conditionProgress.substr(0, pos);
+					conditionProgress.erase(0, pos + 1);
+					chestData.conditionProgress.second = conditionProgress;
 				}
 				else {
 					int amount;
@@ -1090,6 +1108,9 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 		}
 		else if (name.compare("weather") == 0) {
 			if (!readWeather(_property, data)) return false;
+		}
+		else if (name.compare("observed") == 0) {
+			data.isObserved = true;
 		}
 		else if (name.compare("onwin") == 0) {
 			if (!readBossLevelOnWin(_property, data)) return false;

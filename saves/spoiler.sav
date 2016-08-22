@@ -27,6 +27,8 @@ item.id:eq_body_necrot3,1
 item.id:eq_defaultarmor,1
 item.id:eq_prisonerclothes,1
 item.id:eq_demonback,1
+item.id:eq_icescarf,1
+item.id:eq_icehat,1
 item.id:eq_head_divinet1,1
 item.id:eq_head_divinet2,1
 item.id:eq_head_divinet3,1
@@ -50,6 +52,7 @@ item.id:eq_wizardhatice,1
 item.id:eq_wizardhatlight,1
 item.id:eq_wizardhatshadow,1
 item.id:eq_travelhat,1
+item.id:eq_icearmor,1
 item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
@@ -86,6 +89,7 @@ item.id:mi_wolf_fur,1
 item.id:mi_firerat_fur,1
 item.id:mi_stone,1
 item.id:mi_corrupt_stone,1
+item.id:mi_ironore,1
 item.id:mi_firstguardianheart,1
 item.id:pe_feudalfire,1
 item.id:pe_glassoffeudalfire,1
@@ -116,14 +120,19 @@ item.id:we_zeffssword,1
 item.id:we_ordermace,1
 item.id:we_tearstaff,1
 item.id:we_firestaff,1
+item.id:we_enchanteddagger,1
+item.id:we_pickaxe,1
 item.id:sp_light,1
 item.id:ke_test_1,1
 item.id:ke_test_2,1
 item.id:ke_test_3,1
+item.id:ke_smallsilver,1
+item.id:ke_rhendal,1
 item.id:do_notemarcus,1
 item.id:do_bloodnotemarcus,1
 item.id:do_eleletter,1
 item.id:do_elemap,1
+item.id:do_elderdiary,1
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 # equipment:
 equipped.back:eq_back_necrot3

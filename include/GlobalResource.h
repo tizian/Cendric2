@@ -59,6 +59,7 @@ public:
 	static const std::string TEX_TEXT_GAMEOVER;
 	static const std::string TEX_TEXT_GAMEPAUSED;
 	static const std::string TEX_TEXT_DEFEATED;
+	static const std::string TEX_TEXT_ARRESTED;
 	// level resources (gui)
 	static const std::string TEX_GUI_SPEECHBUBBLE_POINTER;
 	static const std::string TEX_GUI_HEALTHBAR_MAINCHAR_BORDER;
@@ -101,6 +102,7 @@ public:
 	static const std::string TEX_GUI_BUTTON_ROUND;
 	static const std::string TEX_GUI_BUTTON_ROUND_SELECTED;
 	static const std::string TEX_GUI_TAB_ICONS;
+	static const std::string TEX_GUI_TAB_ICONS_SELECTED;
 	static const std::string SOUND_GUI_MENUCURSOR;
 	static const std::string SOUND_GUI_PICKUP;
 	static const std::string SOUND_GUI_OPENWINDOW;

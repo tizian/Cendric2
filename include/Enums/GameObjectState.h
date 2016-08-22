@@ -36,5 +36,7 @@ enum class GameObjectState {
 	Active, // used by checkpoint tiles
 	On, // used by the lever and the switch tiles
 	Off, // used by the lever and the switch tiles
-	Trembling // used by unstable tiles
+	Trembling, // used by unstable tiles
+	Observing, // used by observer enemies
+	Triggered // used by observer enemies
 };

@@ -3,6 +3,7 @@
 #include "global.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehaviorCallback.h"
 #include "GUI/SpeechBubble.h"
+#include "Structs/RoutineStep.h"
 
 class CharacterCore;
 class Enemy;
@@ -15,17 +16,26 @@ public:
 	~ScriptedBehavior();
 
 	void update(const sf::Time& frameTime);
+	void updateSpeechBubble(const sf::Time& frameTime);
 	void onDeath();
 	void say(const std::string& text, int seconds);
 	void wait(int seconds);
+	void addRoutineStep(const RoutineStep& step);
+	void setCurrentRoutineStep();
 
 	bool isError() const;
 
 protected:
+	Enemy* m_enemy;
 	SpeechBubble* m_speechBubble;
 	ScriptedBehaviorCallback m_callback;
 	sf::Time m_speechBubbleTime = sf::Time::Zero;
 	sf::Time m_scriptUpdateTime = sf::Time::Zero;
 
 	static const sf::Time SCRIPT_UPDATE_INTERVAL;
+
+	// if this is filled, the behavior will only do these steps
+	std::vector<RoutineStep> m_routineSteps;
+	size_t m_currentRoutineStep = std::string::npos;
+	sf::Time m_waitingTime = sf::Time::Zero;
 };

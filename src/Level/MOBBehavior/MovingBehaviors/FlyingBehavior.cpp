@@ -7,6 +7,8 @@ FlyingBehavior::FlyingBehavior(Enemy* enemy) :
 	EnemyMovingBehavior(enemy) {
 
 	m_isWalkingBehavior = false;
+	m_dampingAirPerS = 0.1f;
+	m_dampingGroundPerS = 0.7f;
 };
 
 void FlyingBehavior::makeRandomDecision() {

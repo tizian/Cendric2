@@ -51,6 +51,7 @@ void Enemy::load() {
 	m_interactComponent->setInteractable(false);
 	addComponent(m_interactComponent);
 
+	delete m_damageNumbers;
 	m_damageNumbers = new DamageNumbers(this->isAlly());
 }
 
@@ -66,7 +67,7 @@ void Enemy::onHit(Spell* spell) {
 	}
 
 	const MovableGameObject* owner = spell->getOwner();
-	if (owner != nullptr && owner->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (m_isHPBarVisible && owner != nullptr && owner->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
 		m_mainChar->setLastHitEnemy(this);
 	}
 
@@ -75,10 +76,12 @@ void Enemy::onHit(Spell* spell) {
 	m_recoveringTime = getConfiguredRecoveringTime();
 }
 
-void Enemy::renderAfterForeground(sf::RenderTarget &renderTarget) {
+void Enemy::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	LevelMovableGameObject::renderAfterForeground(renderTarget);
 	m_buffBar->render(renderTarget);
-	renderTarget.draw(m_hpBar);
+	if (m_isHPBarVisible) {
+		renderTarget.draw(m_hpBar);
+	}
 	if (m_isTargetedEnemy) {
 		renderTarget.draw(m_targetSprite);
 	}
@@ -105,6 +108,7 @@ void Enemy::update(const sf::Time& frameTime) {
 }
 
 void Enemy::updateHpBar() {
+	if (!m_isHPBarVisible) return;
 	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
 	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
 }
@@ -114,11 +118,8 @@ void Enemy::loadBehavior() {
 	// cast the two behavior components so that we only have to cast them once.
 	m_enemyAttackingBehavior = dynamic_cast<EnemyAttackingBehavior*>(m_attackingBehavior);
 	m_enemyMovingBehavior = dynamic_cast<EnemyMovingBehavior*>(m_movingBehavior);
-	if (m_enemyAttackingBehavior == nullptr || m_enemyMovingBehavior == nullptr) {
-		g_logger->logError("Enemy", "Enemies can only have valid enemy behaviors!");
-	}
 	// hp bar fill color is dependent on attacking behavior
-	m_hpBar.setFillColor(m_enemyAttackingBehavior->getConfiguredHealthColor());
+	m_hpBar.setFillColor(m_enemyAttackingBehavior ? m_enemyAttackingBehavior->getConfiguredHealthColor() : sf::Color::Yellow);
 	updateHpBar();
 }
 
@@ -333,7 +334,7 @@ void Enemy::onRightClick() {
 			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 		}
 	}
-	else if (!m_isDead && !isAlly()) {
+	else if (!m_isDead && !isAlly() && m_isHPBarVisible) {
 		m_mainChar->setTargetEnemy(this);
 	}
 	g_inputController->lockAction();

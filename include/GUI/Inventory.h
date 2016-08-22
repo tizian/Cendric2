@@ -7,7 +7,6 @@
 #include "Window.h"
 #include "GUI/InventorySlot.h"
 #include "GUI/ItemDescriptionWindow.h"
-#include "GUI/DocumentDescriptionWindow.h"
 #include "GUI/TexturedTabBar.h"
 #include "GUI/InventoryEquipment.h"
 
@@ -114,11 +113,9 @@ private:
 	void handleLevelDrop();
 
 	ItemDescriptionWindow* m_descriptionWindow = nullptr;
-	DocumentDescriptionWindow* m_documentWindow = nullptr;
 	void showDescription(const Item* item);
 	void hideDescription();
 	void showDocument(const Item* item);
-	void hideDocument();
 	void convertItem(const Item* item);
 	void learnSpell(const Item* item);
 

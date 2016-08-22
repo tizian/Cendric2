@@ -35,6 +35,11 @@ Tizian
 Haab
 
 <<< Music >>>
+
+-- Susanne Aubert --
+
+"Meadows Theme"
+
 -- Isa --
 
 "Ratcave"
@@ -81,7 +86,7 @@ Isa
 Tizian
 
 <<< Spanish Localization >>>
-Juan José Flores
+Juan José Flores González
 
 <<< Proof Reading >>>
 Daniel Josephy Hernández
@@ -90,7 +95,8 @@ Daniel Josephy Hernández
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
-Milan Bombsch, Rafael Häuselmann, Nick Pützer
+Milan Bombsch, Rafael Häuselmann, Nick Pützer,
+Dani Saguer
 
 ---
 
@@ -160,12 +166,16 @@ Tizian
 Haab
 
 <<< Musik >>>
+
+-- Susanne Aubert --
+
+"Meadows Theme"
+
 -- Isa --
 
 "Ratcave"
 
 "Howling Caverns"
-
 
 ---
 
@@ -207,7 +217,7 @@ Isa
 Tizian
 
 <<< Spanische Übersetzungen >>>
-Juan José Flores
+Juan José Flores González
 
 <<< Korrekturlesen >>>
 Daniel Josephy Hernández
@@ -216,7 +226,8 @@ Daniel Josephy Hernández
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
-Milan Bombsch, Rafael Häuselmann, Nick Pützer
+Milan Bombsch, Rafael Häuselmann, Nick Pützer,
+Dani Saguer
 
 ---
 
@@ -284,15 +295,19 @@ Tizian
 Haab
 
 <<< Musig >>>
+
+-- Susanne Aubert --
+
+"Meadows Theme"
+
 -- Isa --
 
 "Ratcave"
 
 "Howling Caverns"
 
----
-
 -- Eric Matyas --
+
 "Magical Discovery"
 
 "Dusk"
@@ -319,11 +334,6 @@ http://www.matthewpablo.com
 
 ---
 
-Featuring Music by Matthew Pablo
-http://www.matthewpablo.com
-
----
-
 <<< Sound Effekte vo OpenGameArt.org >>>
 Water Splash - Mike Koenig
 Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
@@ -335,7 +345,7 @@ Isa
 Tizian
 
 <<< Spanischi Übersetzige >>>
-Juan José Flores
+Juan José Flores González
 
 <<< Korrekturläser >>>
 Daniel Josephy Hernández
@@ -344,7 +354,8 @@ Daniel Josephy Hernández
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
-Milan Bombsch, Rafael Häuselmann, Nick Pützer
+Milan Bombsch, Rafael Häuselmann, Nick Pützer,
+Dani Saguer
 
 ---
 

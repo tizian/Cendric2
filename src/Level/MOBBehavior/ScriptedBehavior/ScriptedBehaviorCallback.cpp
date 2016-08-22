@@ -4,6 +4,7 @@
 #include "Level/Enemy.h"
 #include "Screens/WorldScreen.h"
 #include "Callbacks/WorldCallback.h"
+#include "Structs/RoutineStep.h"
 
 using namespace std;
 using namespace luabridge;
@@ -11,8 +12,7 @@ using namespace luabridge;
 ScriptedBehaviorCallback::ScriptedBehaviorCallback(const std::string& luaPath, Enemy* enemy) {
 	m_worldCallback = new WorldCallback(dynamic_cast<WorldScreen*>(enemy->getScreen()));
 	m_enemy = enemy;
-
-	m_success = loadLua(luaPath);
+	m_luaPath = luaPath;
 }
 
 ScriptedBehaviorCallback::~ScriptedBehaviorCallback() {
@@ -20,9 +20,10 @@ ScriptedBehaviorCallback::~ScriptedBehaviorCallback() {
 
 void ScriptedBehaviorCallback::setScriptedBehavior(ScriptedBehavior* behavior) {
 	m_scriptedBehavior = behavior;
+	m_success = loadLua(m_luaPath, behavior);
 }
 
-bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
+bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior* behavior) {
 	m_L = luaL_newstate();
 	luaL_openlibs(m_L);
 	m_worldCallback->bindFunctions(m_L);
@@ -37,6 +38,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		.addFunction("addHint", &ScriptedBehaviorCallback::addHint)
 		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
 		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
+		.addFunction("gotoTile", &ScriptedBehaviorCallback::gotoTile)
 		.endClass();
 
 	if (luaL_dofile(m_L, getResourcePath(path).c_str()) != 0) {
@@ -55,23 +57,50 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path) {
 		m_hasDeathFunc = true;
 	}
 
+	LuaRef routine = getGlobal(m_L, "routine");
+	if (routine.isFunction()) {
+		m_isRoutineFunction = true;
+		routine(this);
+		m_isRoutineFunction = false;
+	}
+
 	return true;
 }
 
+void ScriptedBehaviorCallback::gotoTile(float x, float y) {
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::GoingTo;
+		step.goal.x = x * TILE_SIZE_F;
+		step.goal.y = (y + 1) * TILE_SIZE_F;
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+}
+
 void ScriptedBehaviorCallback::setDisposed() {
-	m_enemy->notifyKilled();
-	m_enemy->notifyLooted();
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::Disappearing;
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		m_enemy->notifyKilled();
+		m_enemy->notifyLooted();
+	}
 }
 
 void ScriptedBehaviorCallback::leaveLevel() {
+	if (m_isRoutineFunction) return;
 	m_enemy->setDisposed();
 }
 
 void ScriptedBehaviorCallback::setMovingTarget(int x, int y) {
+	if (m_isRoutineFunction) return;
 	m_enemy->setMovingTarget(x, y);
 }
 
 void ScriptedBehaviorCallback::resetMovingTarget() {
+	if (m_isRoutineFunction) return;
 	m_enemy->resetMovingTarget();
 }
 
@@ -104,6 +133,7 @@ void ScriptedBehaviorCallback::onDeath() {
 }
 
 void ScriptedBehaviorCallback::addHint(const std::string& hint) {
+	if (m_isRoutineFunction) return;
 	dynamic_cast<WorldScreen*>(m_enemy->getScreen())->notifyHintAdded(hint);
 }
 
@@ -116,11 +146,30 @@ int ScriptedBehaviorCallback::getPosY() const {
 }
 
 void ScriptedBehaviorCallback::say(const std::string& text, int seconds) {
-	m_scriptedBehavior->say(text, seconds);
+	if (seconds < 1 || text.empty()) return;
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::Saying;
+		step.text = text;
+		step.time = sf::seconds(static_cast<float>(seconds));
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		m_scriptedBehavior->say(text, seconds);
+	}
 }
 
 void ScriptedBehaviorCallback::wait(int seconds) {
-	m_scriptedBehavior->wait(seconds);
+	if (seconds < 1) return;
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::Waiting;
+		step.time = sf::seconds(static_cast<float>(seconds));
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		m_scriptedBehavior->wait(seconds);
+	}
 }
 
 

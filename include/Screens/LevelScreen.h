@@ -29,6 +29,9 @@ public:
 	void removeTypedBuffs(SpellID id);
 
 	void notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr);
+	// called by level items and chests. It returns true if an observer is near enough and could have seen
+	// how the main char steals something. It will not be looted then and the observer will warn cendric / jail 
+	bool notifyObservers();
 
 	// called by the loading screen. the dynamic tiles & light in level
 	void loadForRenderTexture();
@@ -55,6 +58,7 @@ private:
 	bool m_isGameOver = false;
 	bool m_isBossDefeated = false;
 	bool m_isPaused = false;
+	bool m_isFirstTimeStealing = true;
 	sf::Time m_bossDefeatedWaitTime = sf::seconds(8.0f);
 	sf::Time m_respawnWaitTime = sf::seconds(2.5f);
 	YesOrNoForm* m_yesOrNoForm = nullptr;
@@ -66,6 +70,7 @@ private:
 
 	sf::RenderTexture m_particleRenderTexture;
 
+	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);
 	void handleBossDefeated(const sf::Time& frameTime);
 

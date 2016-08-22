@@ -21,6 +21,7 @@ void Item::initBeans(const std::string& itemID) {
 	m_attributeData.create(g_databaseManager->getItemAttributeBean(itemID));
 	m_itemWeaponBean = g_databaseManager->getItemWeaponBean(itemID);
 	m_itemWeaponSlotBeans = g_databaseManager->getItemWeaponSlotBeans(itemID);
+	m_itemDocumentPageBeans = g_databaseManager->getItemDocumentPageBeans(itemID);
 }
 
 Item::~Item() {
@@ -52,6 +53,10 @@ const sf::Time& Item::getFoodDuration() const {
 
 const std::vector<ItemConvertibleBean>& Item::getConvertibleBeans() const {
 	return m_itemConvertibleBeans;
+}
+
+const std::vector<ItemDocumentPageBean>& Item::getDocumentPageBeans() const {
+	return m_itemDocumentPageBeans;
 }
 
 const ItemSpellBean& Item::getSpellBean() const {
@@ -87,12 +92,27 @@ void Item::checkItem() {
 	}
 	if (m_levelItemBean.status == BeanStatus::Filled && m_levelItemFrameBeans.size() > 0) {
 		m_isLevelitem = true;
+		for (auto& bean : m_levelItemFrameBeans) {
+			if (bean.status != BeanStatus::Filled) {
+				m_isLevelitem = false;
+				break;
+			}
+		}
 	}
 	if (m_itemEquipmentBean.status == BeanStatus::Filled && isEquipmentType(m_itemBean.item_type)) {
 		m_isEquipment = true;
 	}
 	if (m_isEquipment && m_itemEquipmentLightBean.status == BeanStatus::Filled) {
 		m_isEquipmentLighted = true;
+	}
+	if (!m_itemDocumentPageBeans.empty()) {
+		m_isDocument = true;
+		for (auto& bean : m_itemDocumentPageBeans) {
+			if (bean.status != BeanStatus::Filled) {
+				m_isDocument = false;
+				break;
+			}
+		}
 	}
 	if (m_isLevelitem && m_levelitemLightBean.status == BeanStatus::Filled) {
 		m_isLevelitemLighted = true;
@@ -114,6 +134,10 @@ bool Item::isValid() const {
 
 bool Item::isConsumable() const {
 	return m_isConsumable;
+}
+
+bool Item::isDocument() const {
+	return m_isDocument;
 }
 
 bool Item::isWeapon() const {

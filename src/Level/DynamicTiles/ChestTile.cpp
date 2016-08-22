@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "Screens/LevelScreen.h"
 
 using namespace std;
 
@@ -53,9 +54,7 @@ void ChestTile::onHit(Spell* spell) {
 	case SpellID::Unlock:
 		if (m_state == GameObjectState::Locked) {
 			if (spell->getStrength() >= m_strength) {
-				m_interactComponent->setInteractText("ToPickup");
-				m_state = GameObjectState::Unlocked;
-				setCurrentAnimation(getAnimation(m_state), false);
+				unlock();
 			}
 			spell->setDisposed();
 		}
@@ -110,6 +109,7 @@ void ChestTile::setChestData(const ChestData& data) {
 		m_lightComponent = new LightComponent(data.lightData, this);
 		addComponent(m_lightComponent);
 	}
+	m_conditionProgress = data.conditionProgress;
 }
 
 void ChestTile::onMouseOver() {
@@ -121,17 +121,36 @@ void ChestTile::onMouseOver() {
 }
 
 void ChestTile::unlock() {
-	m_interactComponent->setInteractText("ToPickup");
+	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
+	if (isObserved) {
+		m_interactComponent->setInteractText("ToSteal");
+		m_interactComponent->setInteractTextColor(COLOR_BAD);
+	}
+	else {
+		m_interactComponent->setInteractText("ToPickup");
+	}
+
 	setState(GameObjectState::Unlocked);
 }
 
 void ChestTile::loot() {
+	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
+	if (isObserved && dynamic_cast<LevelScreen*>(m_screen)->notifyObservers()) {
+		return;
+	}
+
 	// loot, create the correct items + gold in the players inventory.
 	m_mainChar->lootItems(m_lootableItems);
-	if (m_lootableGold > 0)
+	if (m_lootableGold > 0) {
 		m_mainChar->addGold(m_lootableGold);
+	}
+	if (!m_conditionProgress.first.empty() && !m_conditionProgress.second.empty()) {
+		dynamic_cast<LevelScreen*>(m_screen)->notifyConditionAdded(m_conditionProgress.first, m_conditionProgress.second);
+	}
+	
 	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
 	m_interactComponent->setInteractable(false);
+
 	if (m_lightComponent != nullptr) {
 		m_lightComponent->setVisible(false);
 	}

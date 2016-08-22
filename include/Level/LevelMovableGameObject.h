@@ -94,12 +94,12 @@ protected:
 	bool m_isDead = false;
 	bool m_isImmortal = false; // this mob can't die (but takes damage)
 	bool m_isInvincible = false; // this mob won't take any damage
-	const Level* m_level;
+	const Level* m_level = nullptr;
 
-	SpellManager* m_spellManager;
+	SpellManager* m_spellManager = nullptr;
 
 	bool m_displayDamageNumbers;
-	DamageNumbers* m_damageNumbers;
+	DamageNumbers* m_damageNumbers = nullptr;
 
 	// store attributes given by food. if their time runs out, they get removed from the total attributes.
 	std::pair<sf::Time, AttributeData> m_foodAttributes;

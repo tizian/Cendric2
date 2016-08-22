@@ -67,6 +67,7 @@ void GUITabButton::update(const sf::Time& frameTime) {
 		m_isPressed = false;
 		if (!m_isActive) {
 			m_background.setFillColor(m_backgroundColor);
+			m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS));
 		}
 	}
 	m_isClicked = false;
@@ -88,10 +89,12 @@ void GUITabButton::setActive(bool active) {
 	if (m_isActive) {
 		m_background.setFillColor(m_activeColor);
 		m_border.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_BUTTON_ROUND_SELECTED));
+		m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS_SELECTED));
 	}
 	else {
 		m_background.setFillColor(m_backgroundColor);
 		m_border.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_BUTTON_ROUND));
+		m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS));
 	}
 }
 
@@ -119,6 +122,7 @@ void GUITabButton::onMouseOver() {
 	m_isMouseOver = true;
 	if (!m_isActive) {
 		m_background.setFillColor(m_highlightColor);
+		m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS_SELECTED));
 	}
 }
 

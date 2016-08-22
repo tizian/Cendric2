@@ -68,7 +68,7 @@ CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* att
 		name.setString(g_textProvider->getText(LABELS[i]) + ":");
 		m_nameTexts.push_back(name);
 
-		icon.setTextureRect(sf::IntRect(0, i * 18, 18, 18));
+		icon.setTextureRect(sf::IntRect(0, static_cast<int>(i) * 18, 18, 18));
 		icon.setPosition(sf::Vector2f(LEFT + WIDTH - 160.f, yOffset + 0.5f * (textHeight - 18)));
 		m_statIcons.push_back(icon);
 

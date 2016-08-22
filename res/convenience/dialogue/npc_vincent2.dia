@@ -1,0 +1,706 @@
+# dia file for dialogue for npc: npc_vincent2
+
+npc.id:npc_vincent2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_vincent", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:DL:isQuestState("spoiled_fire", "started") and not DL:isConditionFulfilled("npc_rhendal", "spoiled_schnapps")
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:DL:isQuestState("spoiled_fire", "started") and DL:isConditionFulfilled("npc_rhendal", "spoiled_schnapps")
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_vincent2", "talked") and DL:isQuestState("spoiled_fire", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:not DL:isConditionFulfilled("npc_vincent2", "talked") and DL:isConditionFulfilled("npc_vincent", "disgruntled")
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		condition:not DL:isConditionFulfilled("npc_vincent2", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:DL:isQuestState("elder_chest", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent", "talked")
+	trigger:DL:addConditionProgress("npc_vincent2", "talked")
+	trigger:DL:addConditionProgress("npc_vincent2", "key_50")
+	# translation: 
+	translation.tag:DL_Vincent_NotTalked
+	translation.en:Hey you, psst! You look like you could use some gold. Interested in a ... special job?
+	translation.de:Hey du, psst! Du siehst aus, als könntest du etwas Gold gut gebrauchen. Interessiert an einem ... speziellen Job?
+	translation.ch:Hey du, psst! Du gsesch us, als chöntsch chli Gold guet bruuche. Interessiert amne ... spezielle Job?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_DoYourDuty
+	translation.en:You remember that little deal we had in the tavern? You'd better do your job soon.
+	translation.de:Erinnerst du dich an diese kleine Abmachung, die wir in der Taverne hatten? Du machst jetzt besser deine Arbeit.
+	translation.ch:Erinnerisch dich a die chliini Abmachig womer ide Taverne gmacht hend? Gang ez besser und mach dini Arbet.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:changeQuestState("spoiled_fire", "completed")
+	trigger:DL:addGold(50)
+	trigger:DL:addReputationProgress("thief", 10)
+	# translation: 
+	translation.tag:DL_NPC_TaskFulfilled
+	translation.en:Oh, it's you. I know that you have carried out my task. Very good. You might be of use.
+	translation.de:Oh, du bist es. Deine Aufgabe hast du offensichtlich erfüllt. Sehr gut. Du könntest noch von Nutzen sein.
+	translation.ch:Oh, du bisches. Du hesch dini Ufgab offesichtlich erledigt. Sehr guet. Du chöntsch na bruuchbar si.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent2", "talked")
+	# translation: 
+	translation.tag:DL_Vincent_FurtherJob
+	translation.en:Interested in another job?
+	translation.de:Interesse an einem weiteren Job?
+	translation.ch:Interesse amne nöchste Job?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent2", "talked")
+	# translation: 
+	translation.tag:DL_Vincent_YouAgainGood
+	translation.en:Hey. Good to see you here. My plan has worked out. Interested in another job?
+	translation.de:Hey. Schön, dich hier zu sehen. Mein Plan ist aufgegangen. Interesse an einem weiteren Job?
+	translation.ch:Hey. Guet bisch du ide Stadt. Min Plan isch ufgange. Interesse amne wiitere Job?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent2", "talked")
+	trigger:DL:addConditionProgress("npc_vincent2", "key_150")
+	# translation: 
+	translation.tag:DL_Vincent_Disgruntled
+	translation.en:Oh... you again. Y'know, I'd offered you an awesome job, if you hadn't been so agressive. If you want another chance, it will cost you something.
+	translation.de:Oh... du schon wieder. Weisst du, ich hätte dir einen unschlagbar guten Job angeboten, wenn du nicht so aggressiv gewesen wärst... Wenn du eine zweite Chance willst, kostet es dich was.
+	translation.ch:Oh... du scho wieder. Weisch, ich het der en unschlagbar guete Job abote, wenn du nid so aggressiv gsi wärsch... Wennd e zweiti Chance wetsch, chosteds für dich chli me.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent2", "talked")
+	trigger:DL:addConditionProgress("npc_vincent2", "key_100")
+	# translation: 
+	translation.tag:DL_Vincent_NotCooperated
+	translation.en:Oh look. The boy who wasn't interested. Maybe a second chance for a job, huh?
+	translation.de:Na sieh mal an. Der Junge, der nicht interessiert war. Wie wär's mit einer zweiten Chance für einen Job?
+	translation.ch:Ja lueg mal da. De Bueb wo nid interessiert gsi isch. Wie wärs mitere zweite Chance für en Job?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_vincent2", "job_talked")
+		# translation: 
+		translation.tag:DL_Choice_WhatDeal
+		translation.en:Tell me more about that job.
+		translation.de:Erzähl mir mehr über diesen Job.
+		translation.ch:Verzell mer me vo dem Job.
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and DL:hasItem("gold", 50)
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyCheap
+		translation.en:Give me that key, I'll do it. (50 Gold)
+		translation.de:Gib mir diesen Schlüssel, ich machs. (50 Gold)
+		translation.ch:Gib mer de Schlüssel, ich machs. (50 Gold)
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50")
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyCheap
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and DL:hasItem("gold", 100)
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyCostly
+		translation.en:Give me that key, I'll do it. (100 Gold)
+		translation.de:Gib mir diesen Schlüssel, ich machs. (100 Gold)
+		translation.ch:Gib mer de Schlüssel, ich machs. (100 Gold)
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100")
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyCostly
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and DL:hasItem("gold", 150)
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyVCostly
+		translation.en:Give me that key, I'll do it. (150 Gold)
+		translation.de:Gib mir diesen Schlüssel, ich machs. (150 Gold)
+		translation.ch:Gib mer de Schlüssel, ich machs. (150 Gold)
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150")
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyVCostly
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:31
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and not (DL:isConditionFulfilled("npc_vincent2", "key_150") or DL:isConditionFulfilled("npc_vincent2", "key_100") or DL:isConditionFulfilled("npc_vincent2", "key_50")) 
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyFree
+		translation.en:Give me that key, I'll do it.
+		translation.de:Gib mir diesen Schlüssel, ich machs.
+		translation.ch:Gib mer de Schlüssel, ich machs.
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_NotInterested
+		translation.en:I'm not interested.
+		translation.de:Nicht interessiert.
+		translation.ch:Interessiert mi nid.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent2", "job_talked")
+	# translation: 
+	translation.tag:DL_Vincent_ExplainDeal
+	translation.en:(Smiles and pulls out a golden key) I got this small key here. It belongs to a treasure chest. I could give it to you, if you want...
+	translation.de:(Lächelt und holt einen goldenen Schlüssel hervor) Ich habe diesen kleinen Schlössel hier. Er gehört zu einer Schatzkiste. Ich könnte ihn dir geben...
+	translation.ch:(Lächlet und holt en goldige Schlüssel füre) Ich ha da sonen chliine Schlüssel. Er ghört zunere Schatzchiste. Ich chönten dir gä...
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:isConditionFulfilled("npc_vincent2", "key_150")
+		# translation: 
+		translation.tag:DL_Cendric_WhereCatch
+		translation.en:And where is the catch?
+		translation.de:Und wo ist der Haken an der Sache?
+		translation.ch:Und wo isch de Hooge ade Sach?
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isConditionFulfilled("npc_vincent2", "key_100")
+		# translation: 
+		translation.tag:DL_Cendric_WhereCatch
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		condition:DL:isConditionFulfilled("npc_vincent2", "key_50")
+		# translation: 
+		translation.tag:DL_Cendric_WhereCatch
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		condition:not DL:isConditionFulfilled("npc_vincent2", "key_50") and not DL:isConditionFulfilled("npc_vincent2", "key_100") and not DL:isConditionFulfilled("npc_vincent2", "key_150")
+		# translation: 
+		translation.tag:DL_Cendric_WhereCatch
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_TheCatch
+	translation.en:Hehe, I knew you would ask. Well, the treasure chest doesn't belong to me, so to speak - it belongs to the Elder Rhendal.
+	translation.de:Hehe, ich wusste, dass du das fragen würdest. Nungut. Die Schatzkiste gehört nicht mir, wenn man es genau nimmt - sie gehört dem Dorfältesten Rhendal.
+	translation.ch:Hehe, ich ha gwüsst, dass du das froge wirsch. Ja denn. Also die Schatzchiste ghört nid mir, wenmes gnau nimmt - si ghört em Dorfälteste Rhendal.
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_KeyCost150
+	translation.en:I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
+	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 150 Goldstücke, als Ausgleich für meine Mühen.
+	translation.ch:Ich ha ihm de Schlüssel abluchse möse, während er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das ke Problem gsi. Aber jetzt kosted dich das 150 Goldstück, zum mini Müe kompensiere.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_Treasure
+	translation.en:But I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
+	translation.de:Aber ich will nur, dass du mir einen speziellen blauen Stein aus seiner Truhe holst. Den Rest darfst du behalten.
+	translation.ch:Aber ich wett nur, dass du mir en spezielle blaue Stei us de True holsch. De Rest chasch selber phalte.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_TheCatch
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_KeyCost100
+	translation.en:I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
+	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 100 Goldstücke, als Ausgleich für meine Mühen.
+	translation.ch:Ich ha ihm de Schlüssel abluchse möse, während er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das ke Problem gsi. Aber jetzt kosted dich das 100 Goldstück, zum mini Müe kompensiere.
+	[
+		# Link node, tag is next tag
+		tag:25
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_Treasure
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_TheCatch
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_KeyCost50
+	translation.en:I had to steal the key from him. So, a small fee of 50 golden coins for the key would be a good compensation.
+	translation.de:Ich musste ihm den Schlüssel stehlen. Deshalb muss ich eine kleine Entschädigung von 50 Goldstücken für den Schlüssel verlangen.
+	translation.ch:Ich ha ihm de Schlüssel möse abluchse. Drum wer e chliini Entschädigung vo 50 Goldstück für de Schlüssel agmesse.
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_Treasure
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_TheCatch
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_KeyCost0
+	translation.en:You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
+	translation.de:Erinnerst du dich an den Schnaps, den du ihm gegeben hast? Ich habe etwas Schlafpulver reingemixt... ihm den Schlüssel zu entwenden war das reinste Kinderspiel.
+	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä hesch? Ich han es Schlofpulver dri ta. Ihm de Schlüssel abzluchse isch bubieifach gsi.
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_Treasure
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:removeGold(50)
+	trigger:DL:addItem("ke_rhendal", 1)
+	# translation: 
+	translation.tag:DL_Vincent_StartElderQuest
+	translation.en:A good choice. Here you go.
+	translation.de:Eine gute Wahl. Hier hast du ihn.
+	translation.ch:E gueti Wahl. Da heschen.
+	[
+		# Link node, tag is next tag
+		tag:30
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	trigger:DL:changeQuestState("elder_chest", "started")
+	# translation: 
+	translation.tag:DL_Vincent_ChestIsObserved
+	translation.en:The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they won't catch you.
+	translation.de:Die Kiste ist in einem Geheimraum im Haus des Ältesten. Oh, und sie ist wahrscheinlich von Beobachter-Zauber beschützt. Pass also auf, dass die dich nicht erwischen.
+	translation.ch:D'Chischte isch imne Gheimruum vom Huus vom Älteste. Oh, und si wird wahrschinli vo Beobachter-Zauber bewacht. Pass also uf, dass die dich nid verwütsched.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_NotEnoughGold
+	translation.en:Come back when you have enough gold.
+	translation.de:Komm wieder wenn du genug Gold hast.
+	translation.ch:Chum wider wend gnueg Gold hesch.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:removeGold(100)
+	trigger:DL:addItem("ke_rhendal", 1)
+	# translation: 
+	translation.tag:DL_Vincent_StartElderQuest
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:32
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	trigger:DL:changeQuestState("elder_chest", "started")
+	# translation: 
+	translation.tag:DL_Vincent_ChestIsObserved
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_NotEnoughGold
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:removeGold(150)
+	trigger:DL:addItem("ke_rhendal", 1)
+	# translation: 
+	translation.tag:DL_Vincent_StartElderQuest
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	trigger:DL:changeQuestState("elder_chest", "started")
+	# translation: 
+	translation.tag:DL_Vincent_ChestIsObserved
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_NotEnoughGold
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	trigger:DL:addItem("ke_rhendal", 1)
+	# translation: 
+	translation.tag:DL_Vincent_StartElderQuest
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:34
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	trigger:DL:changeQuestState("elder_chest", "started")
+	# translation: 
+	translation.tag:DL_Vincent_ChestIsObserved
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent", "talked")
+	trigger:DL:addConditionProgress("npc_vincent2", "talked")
+	# translation: 
+	translation.tag:DL_Vincent_Pity
+	translation.en:What a pity.
+	translation.de:Wie schade.
+	translation.ch:Sehr schad.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [35] Choice Node
+	tag:35
+	[
+		# Link node, tag is next tag
+		tag:36
+		condition:not DL:isConditionFulfilled("npc_vincent2", "observer_spells")
+		# translation: 
+		translation.tag:DL_Choice_ObserverSpells
+		translation.en:What are "observer spells"?
+		translation.de:Was sind "Beobachter-Zauber"?
+		translation.ch:Was sind "Beobachter-Zauber"?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_CU
+		translation.en:See you later.
+		translation.de:Bis später.
+		translation.ch:Bis spöter.
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent2", "observer_spells")
+	trigger:DL:addHint("ObserverSpell")
+	# translation: 
+	translation.tag:DL_Vincent_ObserverSpells
+	translation.en:A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. And this won't be a nice experience, I can tell you that.
+	translation.de:Eine hässliche Form der Magie. Die Leute stellen sie in ihre Häuser, damit niemand etwas entwenden kann. Aber diese Zauber sehen auch nicht alles... (grinst) Aber wenn sie dich erwischen, kommst du ins Gefängnis, und das ist nicht gerade angenehm, kann ich dir sagen.
+	translation.ch:E hässlichi Form vode Magie. D''Lüt dönd die i iri Hüser demit niemert öppis chluppe cha. Aber die Zauber gsehnd au nid alles (grinst). Aber wenn si dich verwütsched, denn steckeds dich id Chiste... und da isch nid grad ahgnehm, da chani der sege. 
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

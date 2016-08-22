@@ -89,7 +89,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(13, -2, "DL_Harek_BrokenStaffComplete2") -- ... And finished. Here you go!
 		DL:changeQuestState("broken_staff", "completed")
-		DL:addItem("eq_tearstaff", 1)
+		DL:addItem("we_tearstaff", 1)
 		DL:addNode()
 
 	end

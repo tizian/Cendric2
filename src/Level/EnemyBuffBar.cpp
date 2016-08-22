@@ -48,7 +48,7 @@ void EnemyBuffBar::update(const sf::Time& frameTime) {
 			buffIt = m_buffs.erase(buffIt);
 		}
 		else {
-			buffIt++;
+			++buffIt;
 		}
 	}
 	calculateBuffPositions();
@@ -60,7 +60,7 @@ void EnemyBuffBar::calculateBuffPositions() {
 	const sf::FloatRect* bb = m_enemy->getBoundingBox();
 	sf::Vector2f position(
 		bb->left + bb->width / 2.f - BUFF_SIZE / 2.f,
-		bb->top - m_enemy->getConfiguredDistanceToHPBar() - BUFFBAR_OFFSET_Y);
+		bb->top - m_enemy->getConfiguredDistanceToHPBar() - BUFFBAR_OFFSET_Y - BUFF_SIZE);
 	for (auto& buff : m_buffs) {
 		buff.second.setPosition(position);
 		position.y -= BUFF_SIZE;

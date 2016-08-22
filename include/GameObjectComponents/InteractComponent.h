@@ -18,6 +18,7 @@ public:
 	void setOnInteract(const std::function<void()>& agent);
 	void interact();
 	void setInteractText(const std::string& textKey);
+	void setInteractTextColor(const sf::Color& color);
 	void setInteractRange(float range);
 	void setFocused(bool focused);
 	void setInteractable(bool interactable);

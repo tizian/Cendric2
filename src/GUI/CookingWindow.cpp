@@ -278,7 +278,7 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 		if (nr == 0) {
 			text += g_textProvider->getText("NothingToCook") + " ";
 		}
-		m_text.setString(text + g_textProvider->getText("CancelCooking"));
+		m_text.setString(text + "[" + g_textProvider->getText("Cancel") + "]");
 	}
 	else {
 		std::string textString = g_textProvider->getText(cookedItemID, "item");

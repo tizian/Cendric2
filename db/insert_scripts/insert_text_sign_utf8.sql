@@ -7,3 +7,7 @@ Felssturz','ACHTUNG
 Felssturz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TryIceMagic','sign','Try ice magic','Versuch''s mit Eismagie','Probier''s mit Iismagie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedLight','sign','Need Light...','Brauchst Licht...','Bruuchsch es Liechtli...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElonaGrave','sign','Here lies my dear Elona
+1036-1103','Hier ruht meine teure Elona
+1036-1103','Da rueht mini lieb Elona
+1036-1103');

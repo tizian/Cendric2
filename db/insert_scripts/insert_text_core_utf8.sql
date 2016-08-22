@@ -9,7 +9,6 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('BackToCheckpo
 INSERT INTO text (text_id, english, german, swiss_german) values ('BackToMenu','Menu','Menu','Menu');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Book','Book','Buch','Buech');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Cancel','Cancel','Abbrechen','Abbreche');
-INSERT INTO text (text_id, english, german, swiss_german) values ('CancelCooking','[Cancel]','[Abbrechen]','[Abbreche]');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotEquipInLevel','You cannot equip items inside a level!','Gegenstände können nicht in einem Level ausgerüstet werden!','Gegeständ chönd nid imne Level agleit werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumePermanentInLevel','You cannot consume permanent items inside a level!','Gegenstände mit permanenten Boni können nicht in einem Level verwendet werden!','Gegeständ mit permanente Boni chönd nid imne Level verbruucht werde!');
 INSERT INTO text (text_id, english, german, swiss_german) values ('CannotConsumeItemInMap','You cannot consume food items on a map!','Verzehrbare Gegenstände können nicht auf einer Karte verwendet werden!','Ässbari Gegeständ chönd nid ufere Charte verbruucht werde!');
@@ -32,7 +31,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Critical','Cr
 INSERT INTO text (text_id, english, german, swiss_german) values ('CriticalHitChance','Critical Hit Chance','Kritische Trefferchance','Kritischi Trefferchance');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Damage','Damage','Schaden','Schade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DamageType','Damage Type','Schadenstyp','Schadetyp');
-INSERT INTO text (text_id, english, german, swiss_german) values ('DamagePerSecond','Damage per second','Schaden pro Sekunde','Schade pro Sekunde');
+INSERT INTO text (text_id, english, german, swiss_german) values ('DamagePerSecond','Damage per Second','Schaden pro Sekunde','Schade pro Sekunde');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Default','Default','Standardwert','Standardwert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Delete','Delete','Löschen','Lösche');
 INSERT INTO text (text_id, english, german, swiss_german) values ('DisplayMode','Display Mode','Anzeigemodus','Aazeigemodus');
@@ -65,7 +64,6 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('FireResistanc
 INSERT INTO text (text_id, english, german, swiss_german) values ('FirstSpell','1. Spell','1. Zauber','1. Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('FourthSpell','4. Spell','4. Zauber','4. Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Fullscreen','Fullscreen','Vollbild','Vollbild');
-INSERT INTO text (text_id, english, german, swiss_german) values ('GamePaused','Game Paused','Spiel pausiert','Spiel pausiert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GameSaved','Game saved','Spiel gespeichert','Spiel gspeicheret');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Gems','Gems','Edelsteine','Edelstei');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GemSockets','Gem Sockets','Edelstein Sockel','Edelstei Sockel');
@@ -107,7 +105,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('LockpickLevel
 INSERT INTO text (text_id, english, german, swiss_german) values ('Map','Map','Karte','Charte');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxFPS','Max. FPS','Max. FPS','Max. FPS');
 INSERT INTO text (text_id, english, german, swiss_german) values ('MaxHealthPoints','Max. Health','Max. Lebensenergie','Max. Lebensenergie');
-INSERT INTO text (text_id, english, german, swiss_german) values ('MessageNewSaveGame','Please enter the name for your new save game (at most 24 characters)','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen)','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche)');
+INSERT INTO text (text_id, english, german, swiss_german) values ('MessageNewSaveGame','Please enter the name for your new save game (at most 24 characters).','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen).','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche).');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Meta','Meta','Meta','Meta');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Miscellaneous','Miscellaneous','Plunder','Grümpel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt');
@@ -129,16 +127,17 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('NoSpells','No
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoQuests','No quests found.','Keine Quests gefunden.','Kei Quests gfunde.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoHints','No hints learned.','Keine Tipps gelernt.','Kei Tipps glernt.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoSaves','No saves found.','Kein Speicherstand gefunden.','Kein Speicherstand gfunde.');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Observed','Observed','Beobachtet','Beobachtet', 'Observado');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Off','Off','Aus','Uus');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Okay','Okay','Okay','Okee');
 INSERT INTO text (text_id, english, german, swiss_german) values ('On','On','An','Ii');
-INSERT INTO text (text_id, english, german, swiss_german) values ('OperationFailed','Operation failed','Operation fehlgeschlagen','Die Operation isch id Hose');
+INSERT INTO text (text_id, english, german, swiss_german) values ('OperationFailed','Operation failed.','Operation fehlgeschlagen.','Die Operation isch id Hose.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Options','Options','Einstellungen','Iistellige');
 INSERT INTO text (text_id, english, german, swiss_german) values ('OutOfRange','Out of range','Ich muss näher ran','Da isch z''wiit weg');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Pending','Pending','Ausstehend','Nanig erfüllt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Permanent','Permanent','Permanent','Permanent');
 INSERT INTO text (text_id, english, german, swiss_german) values ('PhysicalDamage','Physical Damage','Physischer Schaden','Physische Schade');
-INSERT INTO text (text_id, english, german, swiss_german) values ('PressAnyKey','<?>','<?>','<?>');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PressAnyKey','<?>','<?>','<?>','<?>');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Price','Price','Preis','Priis');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Quest','Quest','Quest','Quest');
 INSERT INTO text (text_id, english, german, swiss_german) values ('QuestionDeleteSaveGame','Do you really want to delete this save game?','Willst du diesen Speicherstand wirklich löschen?','Wetsch de Speicherstand würkli lösche?');
@@ -154,8 +153,8 @@ Ungespeicherter Fortschritt geht verloren.','Neus Spiel starte?
 Ungspeicherete Fortschritt isch futsch.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('QuestItems','Quest Items','Questgegenstände','Questgegeständ');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Quickcast','Quickcast','Schnellzaubern','Schnellzaubere');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Quickload','Quick load','Schnell laden','Schnell lade');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Quicksave','Quick save','Schnell speichern','Schnell speichere');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Quickload','Quick Load','Schnell Laden','Schnell Lade');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Quicksave','Quick Save','Schnell Speichern','Schnell Speichere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Quickslot1','Quick Slot 1','Schnellwahl 1','Schnellwahl 1');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Quickslot2','Quick Slot 2','Schnellwahl 2','Schnellwahl 2');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Range','Range','Reichweite','Riichwiiti');
@@ -166,7 +165,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Reset','Reset
 INSERT INTO text (text_id, english, german, swiss_german) values ('Resume','Resume','Spiel fortsetzen','Zrugg zum Spiel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Save','Save','Speichern','Speichere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SaveGame','Save Game','Spiel speichern','Spiel speichere');
-INSERT INTO text (text_id, english, german, swiss_german) values ('SavegameDeleted','Save game successfully deleted','Speicherstand erfolgreich gelöscht','Speicherstand isch glöscht');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SavegameDeleted','Save game successfully deleted.','Speicherstand erfolgreich gelöscht.','Speicherstand isch glöscht.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SecondSpell','2. Spell','2. Zauber','2. Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowDamage','Shadow Damage','Schattenschaden','Schatteschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowResistance','Shadow Resistance','Schattenresistenz','Schatteresistenz');
@@ -181,7 +180,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('SpellAureola'
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellAureolaDesc','Sends balls of light in all directions, if they hit an enemy they will return to Cendric and heal him.','Schickt Lichtbälle in alle Richtungen, die zurückkehren und Cendric heilen, falls sie einen Gegner treffen.','Schickt Liechtbäll in all Richtige, wo zruggchömed und de Cendric heiled wenn si en Gegner troffe hend.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Spellbook','Spellbook','Zauberbuch','Zauberbuech');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellDivineShield','Divine Shield','Göttlicher Schild','Göttlichs Schild');
-INSERT INTO text (text_id, english, german, swiss_german) values ('SpellDivineShieldDesc','Grants a shield that enhances Cendrics Resistance and heals him once.','Umhüllt Cendric mit einem Schild, der ihn einmalig heilt und für eine gewisse Dauer seine Resistenzen erhöht.','Umhüllt de Cendric mitme Schild wo ihn eimalig heilt und sini Resistenze für e gwüssi Ziit erhöht.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellDivineShieldDesc','Grants a shield that enhances Cendrics resistances and heals him once.','Umhüllt Cendric mit einem Schild, der ihn einmalig heilt und für eine gewisse Dauer seine Resistenzen erhöht.','Umhüllt de Cendric mitme Schild wo ihn eimalig heilt und sini Resistenze für e gwüssi Ziit erhöht.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellFear','Fear','Furcht','Angscht');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellFearDesc','Enemies will flee in terror for a certain duration if the spell is strong enough.','Gegner fliehen für eine gewisse Zeit, allerdings nur, wenn der Zauber genug stark für sie ist.','Gegner flüchtet für e gwüssi Ziit, aber nur, wenn de Zauber gnueg starch isch für si.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellFireBall','Fireball','Feuerball','Füürball');
@@ -195,9 +194,9 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLight','
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLightDesc','There shall be light!','Es werde Licht!','Chasch chli heller mache, bitte?');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellIcyAmbushDesc','Cendric throws an enchanted dagger that deals big damage when it hits an enemy, stuns it and enemies in range and ports Cendric to its location.','Cendric wirft einen verzauberten Dolch, der eine grosse Menge Schaden verursacht, wenn er einen Gegner trifft und Cendric an dessen Stelle teleportiert. Gegner im Umkreis werden betäubt.','De Cendric wirft en verzauberte Dolch wo viel Schade amne Gegner macht und Gegner im Umkreis betäubt. De Cendric wird ad Stell vom troffene Gegner teleportiert.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeech','Leech','Lebensraub','Lebesraub');
-INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeechDesc','Sends out leeching spells that damage enemies and return with heal to Cendric if they hit an enemy.','Schickt lebensraubende Zauber aus, die zu Cendric zurückkehren, um ihn zu heilen, falls sie einen Gegner getroffen haben.','Schickt lebensraubendi Zauber uus wo zum Cendric zruggchömed zum ihn heile falls si en Gegner troffe hend.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeechDesc','Sends out leeching spells that damage enemies and return to Cendric to heal  him if they hit an enemy.','Schickt lebensraubende Zauber aus, die zu Cendric zurückkehren, um ihn zu heilen, falls sie einen Gegner getroffen haben.','Schickt lebensraubendi Zauber uus wo zum Cendric zruggchömed zum ihn heile falls si en Gegner troffe hend.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeapOfFaith','Leap of Faith','Glaubenssprung','Glaubessprung');
-INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeapOfFaithDesc','A holy power flows through Cendric, enabling him to jump higher and fall slower for a  certain duration.','Eine heilige Kraft durchströmt Cendric, die ihn höher springen und langsamer fallen lässt.','E heiligi Kraft durchströmt de Cendric, mit dere er höcher springe und langsamer falle chan.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('SpellLeapOfFaithDesc','A holy power flows through Cendric, enabling him to jump higher and fall slower for a certain duration.','Eine heilige Kraft durchströmt Cendric, die ihn höher springen und langsamer fallen lässt.','E heiligi Kraft durchströmt de Cendric, mit dere er höcher springe und langsamer falle chan.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellShadowTrap','Shadow Trap','Schattenfalle','Schattefalle');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellShadowTrapDesc','Cendric places a shadow trap on the ground that stuns enemies and deals damage over time when triggered.','Cendric platziert eine Schattenfalle am Boden, die Gegner betäubt und Schaden über Zeit verursacht, wenn sie ausgelöst wird.','De Cendric setzt e Schattefalle uf de Bode wo Gegner betäubt und Schade über Ziit macht wenn si usglöst wird.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SpellRaiseTheDead','Raise The Dead','Tote Erwecken','Toti Erwecke');
@@ -248,6 +247,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('ToLoot','to l
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToActivate','to activate','- aktivieren','zum aktiviere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToRead','to read','- lesen','zum läse');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToSwitch','to toggle','- umschalten','zum drucke');
+INSERT INTO text (text_id, english, german, swiss_german) values ('ToSteal','to steal','- stehlen','zum chlaue');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToOpen','to open','- öffnen', 'zum ufmache');
 INSERT INTO text (text_id, english, german, swiss_german) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Fireplace','Fireplace','Kochstelle','Chochstell');

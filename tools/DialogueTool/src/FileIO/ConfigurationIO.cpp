@@ -8,6 +8,8 @@ const std::string ConfigurationIO::CONFIGURATION_PATH = "dialogue_tool.ini";
 const std::string ConfigurationIO::SQL_PATH = "path.sql";
 const std::string ConfigurationIO::NPC_PATH = "path.npc";
 const std::string ConfigurationIO::DIALOGUE_PATH =  "path.dialogue";
+const std::string ConfigurationIO::PARSE_IN = "parse.in";
+const std::string ConfigurationIO::PARSE_OUT = "parse.out";
 
 bool ConfigurationIO::loadConfiguration() {
 	Configuration data = DEFAULT_CONFIGURATION;
@@ -28,6 +30,12 @@ bool ConfigurationIO::loadConfiguration() {
 			}
 			else if (line.compare(0, DIALOGUE_PATH.size(), DIALOGUE_PATH) == 0) {
 				noError = readPath(data.dialogueFolder, line);
+			}
+			else if (line.compare(0, PARSE_IN.size(), PARSE_IN) == 0) {
+				noError = readPath(data.parseFileIn, line);
+			}
+			else if (line.compare(0, PARSE_OUT.size(), PARSE_OUT) == 0) {
+				noError = readPath(data.parseFileOut, line);
 			}
 			else {
 				ERROR("[Configuration]: Unknown tag found in configuration file in line: " + line);
@@ -72,6 +80,8 @@ bool ConfigurationIO::saveConfiguration() {
 		configuration << writePath(G_CONF.npcFolder, NPC_PATH);
 		configuration << writePath(G_CONF.sqlFolder, SQL_PATH);
 		configuration << writePath(G_CONF.dialogueFolder, DIALOGUE_PATH);
+		configuration << writePath(G_CONF.parseFileIn, PARSE_IN);
+		configuration << writePath(G_CONF.parseFileOut, PARSE_OUT);
 
 		configuration.close();
 	}

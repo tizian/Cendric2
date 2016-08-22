@@ -2,6 +2,8 @@
 #include "Screens/LoadingScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Screens/ScreenManager.h"
+#include "Level/Enemies/ObserverEnemy.h"
+#include "GUI/BookWindow.h"
 
 using namespace std;
 
@@ -99,7 +101,9 @@ void LevelScreen::quicksave() {
 }
 
 void LevelScreen::execOnEnter(const Screen* previousScreen) {
-	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(), m_currentLevel.getWorldData()->bossLevelData.isBossLevel));
+	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(), 
+		m_currentLevel.getWorldData()->bossLevelData.isBossLevel, 
+		m_currentLevel.getWorldData()->isObserved));
 }
 
 void LevelScreen::execOnExit(const Screen* nextScreen) {
@@ -130,6 +134,31 @@ void LevelScreen::notifyQuickSlotAssignment(const std::string& itemId, int quick
 	m_characterCore->setQuickslot(itemId, quickslotNr);
 }
 
+bool LevelScreen::notifyObservers() {
+	if (!m_currentLevel.getWorldData()->isObserved) return false;
+
+	for (auto go : *getObjects(GameObjectType::_Enemy)) {
+		ObserverEnemy* observer = dynamic_cast<ObserverEnemy*>(go);
+		if (!observer) continue;
+
+		if (observer->notifyStealing(m_isFirstTimeStealing)) {
+			if (m_isFirstTimeStealing) {
+				m_isFirstTimeStealing = false;
+			}
+			else {
+				m_isGameOver = true;
+				m_respawnWaitTime = sf::seconds(6.0f);
+				addObject(ScreenOverlay::createArrestedScreenOverlay());
+				m_interface->hideAll();
+				// todo: set level coords of jail!
+			}
+			return true;
+		}
+	}
+
+	return false;
+}
+
 LevelMainCharacter* LevelScreen::getMainCharacter() const {
 	return m_mainChar;
 }
@@ -156,6 +185,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	updateTooltipText(frameTime);
 
 	if (!m_isPaused) {
+		handleBookWindow(frameTime);
 		WorldScreen::execUpdate(frameTime);
 
 		// sort Movable Tiles
@@ -314,9 +344,19 @@ void LevelScreen::handleBossDefeated(const sf::Time& frameTime) {
 	return;
 }
 
+void LevelScreen::handleBookWindow(const sf::Time& frameTime) {
+	if (m_bookWindow == nullptr) return;
+
+	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
+		delete m_bookWindow;
+		m_bookWindow = nullptr;
+		m_interface->getInventory()->show();
+	}
+}
+
 void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	// handle game over
-	if (!m_mainChar->isDead()) return;
+	if (!m_isGameOver && !m_mainChar->isDead()) return;
 	if (m_isGameOver) {
 		if (m_respawnWaitTime == sf::Time::Zero) return;
 		updateTime(m_respawnWaitTime, frameTime);
@@ -328,7 +368,7 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	}
 
 	m_isGameOver = true;
-	addScreenOverlay(ScreenOverlay::createGameOverScreenOverlay());
+	addObject(ScreenOverlay::createGameOverScreenOverlay());
 	m_interface->hideAll();
 }
 

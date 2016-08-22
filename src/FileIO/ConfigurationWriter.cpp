@@ -4,7 +4,8 @@
 using namespace std;
 
 bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
-	ofstream configuration(GlobalResource::CONFIGURATION_PATH, ios::trunc);
+	std::string path = getDocumentsPath(GlobalResource::CONFIGURATION_PATH);
+	ofstream configuration(path, ios::trunc);
 	if (configuration.is_open()) {
 		configuration << writeConfigurationHeader();
 		configuration << writeSoundOn(data);
@@ -25,7 +26,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration.close();
 	}
 	else {
-		g_logger->logError("ConfigurationWriter", "Unable to open file: " + GlobalResource::CONFIGURATION_PATH);
+		g_logger->logError("ConfigurationWriter", "Unable to open file: " + path);
 		return false;
 	}
 	return true;

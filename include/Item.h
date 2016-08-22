@@ -14,6 +14,7 @@
 #include "Beans/ItemFoodBean.h"
 #include "Beans/ItemWeaponBean.h"
 #include "Beans/ItemWeaponSlotBean.h"
+#include "Beans/ItemDocumentPageBean.h"
 #include "Beans/LevelitemBean.h"
 #include "Beans/LevelitemFrameBean.h"
 #include "Beans/LevelitemLightBean.h"
@@ -47,6 +48,9 @@ public:
 	// getter for convertible beans
 	const std::vector<ItemConvertibleBean>& getConvertibleBeans() const;
 
+	// getter for document beans
+	const std::vector<ItemDocumentPageBean>& getDocumentPageBeans() const;
+
 	// getter for spell bean
 	const ItemSpellBean& getSpellBean() const;
 
@@ -58,8 +62,10 @@ public:
 	bool isConvertible() const;
 	// returns whether this item is a spell
 	bool isSpell() const;
-	// returns whether this item is a weapon and it is valid
+	// returns whether this item is a weapon and is valid
 	bool isWeapon() const;
+	// returns whether this item has at least one page and is valid
+	bool isDocument() const;
 	// returns whether this item is a levelitem with frames and is valid
 	bool isLevelitem() const;
 	// returns whether this item is an equipment item and is valid
@@ -84,12 +90,14 @@ protected:
 	AttributeData m_attributeData;
 	ItemWeaponBean m_itemWeaponBean;
 	std::vector<ItemWeaponSlotBean> m_itemWeaponSlotBeans;
+	std::vector<ItemDocumentPageBean> m_itemDocumentPageBeans;
 
 	void checkItem();
 	void initBeans(const std::string& itemID);
 
 	bool m_isValid = false;
 	bool m_isConsumable = false;
+	bool m_isDocument = false;
 	bool m_isWeapon = false;
 	bool m_isLevelitem = false;
 	bool m_isLevelitemLighted = false;

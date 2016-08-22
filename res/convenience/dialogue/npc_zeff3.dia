@@ -1,0 +1,140 @@
+# dia file for dialogue for npc: npc_zeff3
+
+npc.id:npc_zeff3
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_zeff3", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Zeff_WelcomeBack
+	translation.en:Ah, it's you. Welcome to Gandria. A beautiful city, isn't it.
+	translation.de:Ah, du bist es. Willkommen in Gandria. Eine schöne Stadt, nicht wahr.
+	translation.ch:Ah, du bisches. Willkomme in Gandria. E schöni Stadt, gell.
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_zeff3", "talked")
+	trigger:DL:addItem("eq_icehat", 1)
+	# translation: 
+	translation.tag:DL_Zeff_IGotHat
+	translation.en:You're lucky, I've just finished the hat I promised you. Thanks again for saving me.
+	translation.de:Du hast Glück, ich habe den Hut, den ich dir versprochen habe, gerade jetzt fertiggestellt. Danke nochmals, dass du mich gerettet hast.
+	translation.ch:Du hesch Glück, ich ha de Huet, woni dir versproche ha, grad fertig becho. Danke namal dasd mich gretted hesch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_Trade
+		translation.en:What do you have to offer? [TRADE]
+		translation.de:Was hast du im Angebot? [HANDELN]
+		translation.ch:Was hesch so im Agebot? [HANDLE]
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_Leatherworking
+		translation.en:Could you craft something for me?
+		translation.de:Könntest du mir etwas anfertigen?
+		translation.ch:Chöntsch du mir öppis afertige?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_End
+		translation.en:See you later.
+		translation.de:Bis später.
+		translation.ch:Bis spöter.
+	]
+}
+{4
+	# [7] Trade Node
+	tag:7
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Zeff_Leatherworking
+	translation.en:Sure, if you got a fur for me?
+	translation.de:Natürlich, wenn du ein Fell für mich dabei hast?
+	translation.ch:Sicher, wenn du es Fell für mich debii hesch?
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{2
+	# [5] Choice Node
+	tag:5
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:hasItem("mi_firerat_fur", 1)
+		# translation: 
+		translation.tag:DL_Choice_FireRatFur
+		translation.en:Scarf of the Fire Rat (1 Fur of a Fire Rat)
+		translation.de:Schal der Feuerratte (1 Fell einer Feuerratte)
+		translation.ch:Füürratte Halstuech (1 Fell vonere Füürratte)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_NothingToCraft
+		translation.en:I'll come back later. [BACK]
+		translation.de:Ich komme später wieder. [ZURÜCK]
+		translation.ch:Ich chum spöter namal. [ZRUGG]
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:gotoNode(5)
+	trigger:DL:removeItem("mi_firerat_fur", 1)
+	trigger:DL:addItem("eq_fireratscarf", 1)
+	# translation: 
+	translation.tag:DL_Zeff_FireRatFur
+	translation.en:The fur of a fire rat, how nice. It has the ability to protect you against fire.
+	translation.de:Das Fell einer Feuerratte, wie hübsch. Es hat die Eigenschaft, dich vor Feuer zu schützen.
+	translation.ch:Es Fell vonere Füürratte, we hübsch. Es het d''Eigeschaft, dich vor Füür z'schütze.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

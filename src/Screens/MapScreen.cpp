@@ -4,6 +4,7 @@
 #include "Map/MapMainCharacterLoader.h"
 #include "Screens/ScreenManager.h"
 #include "ScreenOverlays/ScreenOverlay.h"
+#include "GUI/BookWindow.h"
 
 using namespace std;
 
@@ -163,17 +164,6 @@ void MapScreen::setDialogue(NPC* npc) {
 	m_dialogueWindow->load(npc, this);
 }
 
-void MapScreen::setBook(const BookData* bookData) {
-	clearOverlays();
-	m_interface->hideAll();
-
-	m_bookWindow = new BookWindow(*bookData);
-	m_bookWindowDisposed = false;
-	m_bookWindow->addCloseButton([&]() {
-		m_bookWindowDisposed = true;
-	});
-}
-
 void MapScreen::setCooking() {
 	clearOverlays();
 
@@ -245,9 +235,6 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	if (m_cookingWindow != nullptr) {
 		m_cookingWindow->render(renderTarget);
 	}
-	if (m_bookWindow != nullptr) {
-		m_bookWindow->render(renderTarget);
-	}
 
 	renderTarget.setView(adjustedView);
 }
@@ -268,17 +255,6 @@ void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
 	if (!m_dialogueWindow->updateDialogue(frameTime)) {
 		delete m_dialogueWindow;
 		m_dialogueWindow = nullptr;
-	}
-	updateProgressLog(frameTime);
-	updateTooltipText(frameTime);
-	updateObjects(GameObjectType::_Light, frameTime);
-}
-
-void MapScreen::handleBookWindow(const sf::Time& frameTime) {
-	if (m_bookWindow == nullptr) return;
-	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
-		delete m_bookWindow;
-		m_bookWindow = nullptr;
 	}
 	updateProgressLog(frameTime);
 	updateTooltipText(frameTime);

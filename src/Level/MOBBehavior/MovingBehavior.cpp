@@ -63,9 +63,10 @@ void MovingBehavior::calculateUnboundedVelocity(const sf::Time& frameTime, sf::V
 	// distinguish damping in the air and at the ground
 	float dampingPerSec = (m_mob->getVelocity().y == 0.0f) ? m_dampingGroundPerS : m_dampingAirPerS;
 	// don't damp when there is active acceleration 
-	if (m_mob->getAcceleration().x != 0.0f) dampingPerSec = 0;
-	nextVel.x = (m_mob->getVelocity().x + m_mob->getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSec, frameTime.asSeconds());
-	nextVel.y = m_mob->getVelocity().y + m_mob->getAcceleration().y * frameTime.asSeconds();
+	float dampingPerSecX = (m_mob->getAcceleration().x != 0.0f) ? 0.f : dampingPerSec;
+	float dampingPerSecY = (m_mob->getAcceleration().y != 0.0f) ? 0.f : dampingPerSec;
+	nextVel.x = (m_mob->getVelocity().x + m_mob->getAcceleration().x * frameTime.asSeconds()) * pow(1 - dampingPerSecX, frameTime.asSeconds());
+	nextVel.y = (m_mob->getVelocity().y + m_mob->getAcceleration().y * frameTime.asSeconds()) * pow(1 - dampingPerSecY, frameTime.asSeconds());
 }
 
 void MovingBehavior::setFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking) {

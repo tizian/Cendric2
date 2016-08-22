@@ -97,6 +97,7 @@ std::string LinkNode::exportToDia(int indentationLevel) const {
 
 std::string LinkNode::exportToSQL() const {
 	if (translation == nullptr) return "";
+	if (std::string(translation->englishTranslation).empty()) return "";
 	std::stringstream ss;
 
 	std::string en = duplicateApostrophs(translation->englishTranslation);
