@@ -1,0 +1,1 @@
+INSERT INTO text (text_id, english, german, swiss_german) values ('ToMine','to mine','- abbauen', 'zum abbaue');
