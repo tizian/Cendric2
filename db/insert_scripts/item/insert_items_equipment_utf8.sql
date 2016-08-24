@@ -215,6 +215,14 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire, res_ice) values ('eq_leatherarmor', 10, 5, 3, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_leatherarmor', 'res/assets/equipment/body/spritesheet_body_leatherarmor.png', 'res/assets/equipment/body/spritesheet_map_body_leatherarmor.png');
 
+-- Prisoner''s Clothes
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_prisonerclothes', 'item', 'Prisoner''s Clothes','Sträflingskleidung','Ströflingschleider');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_prisonerclothes', 'item_desc', 'These rags are worn by the prisoners in the mines of Gandria.','Diese Lumpen werden von den Häftlingen in den Minen von Gandria getragen.','Die verluuste Lumpe werded vo Häftling ide Mine vo Gandria treit.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_prisonerclothes', 'eq_body', 100, 550, 8);
+INSERT INTO item_attribute (item_id, res_physical) values ('eq_prisonerclothes', 1);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_prisonerclothes', 'res/assets/equipment/body/spritesheet_body_prisonerclothes.png', 'res/assets/equipment/body/spritesheet_map_body_prisonerclothes.png');
+
 -- Default Armour
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_defaultarmor', 'item', 'Grey Cloth Armour','Graue Stoffrüstung','Graui Stoffrüschtig');
