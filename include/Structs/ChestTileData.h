@@ -5,7 +5,7 @@
 
 #include "Structs/LightData.h"
 
-struct ChestData {
+struct ChestTileData {
 	int objectID;
 	sf::Vector2f spawnPosition;
 	int skinNr;

@@ -89,6 +89,17 @@ void ScriptedBehaviorCallback::setDisposed() {
 	}
 }
 
+void ScriptedBehaviorCallback::executeFightAnimation() {
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::Animation;
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		m_enemy->executeDefaultFightAnimation(true);
+	}
+}
+
 void ScriptedBehaviorCallback::leaveLevel() {
 	if (m_isRoutineFunction) return;
 	m_enemy->setDisposed();

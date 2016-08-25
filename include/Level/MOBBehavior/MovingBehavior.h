@@ -46,7 +46,9 @@ public:
 	// choose a value between 0.9 for really slow halting and 1.0f for aprupt halting.
 	void setDampingGroundPerS(float damping);
 	void setDampingAirPerS(float damping);
-	void setFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking);
+	void executeFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking);
+	void executeDefaultFightAnimation(bool isBlocking);
+	void setDefaultFightAnimation(const sf::Time& animationTime, GameObjectState animation);
 	virtual void setFacingRight(bool value);
 
 	float getGravity() const;
@@ -89,4 +91,7 @@ protected:
 	// as long as this time is not sf::Time::Zero, the mob will have the fighting animation. 
 	sf::Time m_fightAnimationTime = sf::Time::Zero;
 	GameObjectState m_fightAnimationState = GameObjectState::Fighting;
+
+	sf::Time m_defaultFightAnimationTime = sf::Time::Zero;
+	GameObjectState m_defaultFightAnimationState = GameObjectState::Fighting;
 };

@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 #include "GUI/LootWindow.h"
-#include "Structs/ChestData.h"
+#include "Structs/ChestTileData.h"
 
 class LevelMainCharacter;
 class InteractComponent;
@@ -21,7 +21,7 @@ public:
 	void onMouseOver() override;
 	void loot();
 	
-	void setChestData(const ChestData& data);
+	void setChestData(const ChestTileData& data);
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Chest; }
 
 private:

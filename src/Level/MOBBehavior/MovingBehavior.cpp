@@ -69,11 +69,23 @@ void MovingBehavior::calculateUnboundedVelocity(const sf::Time& frameTime, sf::V
 	nextVel.y = (m_mob->getVelocity().y + m_mob->getAcceleration().y * frameTime.asSeconds()) * pow(1 - dampingPerSecY, frameTime.asSeconds());
 }
 
-void MovingBehavior::setFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking) {
+void MovingBehavior::setDefaultFightAnimation(const sf::Time& animationTime, GameObjectState animation) {
+	m_defaultFightAnimationTime = animationTime;
+	m_defaultFightAnimationState = animation;
+}
+
+void MovingBehavior::executeFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking) {
 	if (animationTime == sf::Time::Zero || animation == GameObjectState::VOID) return;
 	m_isBlockingSpell = isBlocking;
 	m_fightAnimationTime = animationTime;
 	m_fightAnimationState = animation;
+}
+
+void MovingBehavior::executeDefaultFightAnimation(bool isBlocking) {
+	if (m_defaultFightAnimationTime == sf::Time::Zero || m_defaultFightAnimationState == GameObjectState::VOID) return;
+	m_isBlockingSpell = isBlocking;
+	m_fightAnimationTime = m_defaultFightAnimationTime;
+	m_fightAnimationState = m_defaultFightAnimationState;
 }
 
 void MovingBehavior::setFacingRight(bool value) {

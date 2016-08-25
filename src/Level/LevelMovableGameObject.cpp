@@ -243,8 +243,12 @@ void LevelMovableGameObject::clearSpells(bool clearAll) {
 	}
 }
 
-void LevelMovableGameObject::setFightAnimation(const sf::Time& animationTime, GameObjectState fightAnimation, bool isBlocking) {
-	m_movingBehavior->setFightAnimation(animationTime, fightAnimation, isBlocking);
+void LevelMovableGameObject::executeDefaultFightAnimation(bool isBlocking) {
+	m_movingBehavior->executeDefaultFightAnimation(isBlocking);
+}
+
+void LevelMovableGameObject::executeFightAnimation(const sf::Time& fightAnimationTime, GameObjectState animation, bool isBlocking) {
+	m_movingBehavior->executeFightAnimation(fightAnimationTime, animation, isBlocking);
 }
 
 const Level* LevelMovableGameObject::getLevel() const {

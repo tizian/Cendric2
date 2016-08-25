@@ -42,6 +42,8 @@ public:
 	// leaves the level
 	//  can only be used in update function (for now)
 	void leaveLevel();
+	// executes a blocking fight animation (uses the default fight animation) for that mob.
+	void executeFightAnimation();
 	// adds a hint to the screen
 	// can only be used in update function(for now)
 	void addHint(const std::string& hint);

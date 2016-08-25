@@ -25,5 +25,6 @@ enum class LevelDynamicTileID {
 	Particle,
 	Ladder,
 	Oneway,
+	Resource,
 	MAX
 };

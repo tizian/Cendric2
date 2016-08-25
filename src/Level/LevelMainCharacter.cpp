@@ -22,6 +22,11 @@ void LevelMainCharacter::load() {
 	loadBehavior();
 
 	m_damageNumbers = new DamageNumbers(this->isAlly());
+
+	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
+		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();
+		m_movingBehavior->setDefaultFightAnimation(spellData.fightingTime, spellData.fightAnimation);
+	}
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime) {

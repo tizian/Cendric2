@@ -27,7 +27,7 @@ void SpellCreator::update(const sf::Time& frametime) {
 
 		if (!m_owner->isDead()) {
 			execExecuteSpell(m_currentTarget);
-			m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+			m_owner->executeFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
 			m_isReady = true;
 		}
 	}
@@ -39,12 +39,12 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_currentTarget = target;
 		m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
-		m_owner->setFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
+		m_owner->executeFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
 		return;
 	}
 
 	execExecuteSpell(target);
-	m_owner->setFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+	m_owner->executeFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
 	m_isReady = true;
 }
 

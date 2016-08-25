@@ -91,7 +91,7 @@ void ChestTile::update(const sf::Time& frameTime) {
 	m_showLootWindow = m_interactComponent->isInteractable() && (m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips));
 }
 
-void ChestTile::setChestData(const ChestData& data) {
+void ChestTile::setChestData(const ChestTileData& data) {
 	m_objectID = data.objectID;
 	if (data.chestStrength >= 0 && data.chestStrength <= 5) {
 		m_strength = data.chestStrength;

@@ -133,6 +133,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Okay','Okay',
 INSERT INTO text (text_id, english, german, swiss_german) values ('On','On','An','Ii');
 INSERT INTO text (text_id, english, german, swiss_german) values ('OperationFailed','Operation failed.','Operation fehlgeschlagen.','Die Operation isch id Hose.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Options','Options','Einstellungen','Iistellige');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Ore','Ore','Erz','Erz');
 INSERT INTO text (text_id, english, german, swiss_german) values ('OutOfRange','Out of range','Ich muss näher ran','Da isch z''wiit weg');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Pending','Pending','Ausstehend','Nanig erfüllt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Permanent','Permanent','Permanent','Permanent');

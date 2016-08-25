@@ -32,8 +32,8 @@ enum class GameObjectState {
 	Unlocked, // used by chest tile
 	Burning, // used by torch tile
 	Crumbling, // used by crumbly block tile
-	Broken, // used by shooting tiles
-	Active, // used by checkpoint tiles
+	Broken, // used by shooting tiles and resource tiles
+	Active, // used by checkpoint tiles and resource tiles
 	On, // used by the lever and the switch tiles
 	Off, // used by the lever and the switch tiles
 	Trembling, // used by unstable tiles

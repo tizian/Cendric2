@@ -90,7 +90,7 @@ void ScriptedBehavior::setCurrentRoutineStep() {
 		m_speechBubbleTime = step.time;
 		break;
 	case RoutineState::Animation:
-		m_enemy->getMovingBehavior()->setFightAnimation(step.time, GameObjectState::Fighting, false);
+		m_enemy->executeDefaultFightAnimation(true);
 		break;
 	case RoutineState::Disappearing:
 		m_enemy->notifyKilled();
