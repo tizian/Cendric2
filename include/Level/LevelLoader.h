@@ -32,8 +32,6 @@ public:
 private:
 	// loads chest tiles out of level data and adds them directly to the screen
 	void loadChestTiles(LevelData& data, LevelScreen* screen) const;
-	// loads resource tiles out of level data and adds them directly to the screen
-	void loadResourceTiles(LevelData& data, LevelScreen* screen) const;
 	// loads modifier tiles out of level data and adds them directly to the screen
 	void loadModifierTiles(LevelData& data, LevelScreen* screen) const;
 	// loads jumping tiles out of level data and adds them directly to the screen

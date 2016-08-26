@@ -22,11 +22,6 @@ void LevelMainCharacter::load() {
 	loadBehavior();
 
 	m_damageNumbers = new DamageNumbers(this->isAlly());
-
-	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
-		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();
-		m_movingBehavior->setDefaultFightAnimation(spellData.fightingTime, spellData.fightAnimation);
-	}
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime) {
@@ -186,6 +181,11 @@ void LevelMainCharacter::loadWeapon() {
 		m_spellManager->addSpell(newBean, spellModifiers);
 	}
 	m_spellManager->setCurrentSpell(0);
+
+	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
+		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();
+		m_movingBehavior->setDefaultFightAnimation(spellData.fightingTime, spellData.fightAnimation);
+	}
 }
 
 void LevelMainCharacter::setPosition(const sf::Vector2f& pos) {

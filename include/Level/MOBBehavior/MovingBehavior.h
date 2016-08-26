@@ -47,7 +47,8 @@ public:
 	void setDampingGroundPerS(float damping);
 	void setDampingAirPerS(float damping);
 	void executeFightAnimation(const sf::Time& animationTime, GameObjectState animation, bool isBlocking);
-	void executeDefaultFightAnimation(bool isBlocking);
+	// returns the time this animation takes
+	sf::Time executeDefaultFightAnimation(bool isBlocking, int times = 1);
 	void setDefaultFightAnimation(const sf::Time& animationTime, GameObjectState animation);
 	virtual void setFacingRight(bool value);
 

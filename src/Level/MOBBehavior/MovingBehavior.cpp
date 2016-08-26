@@ -81,11 +81,12 @@ void MovingBehavior::executeFightAnimation(const sf::Time& animationTime, GameOb
 	m_fightAnimationState = animation;
 }
 
-void MovingBehavior::executeDefaultFightAnimation(bool isBlocking) {
-	if (m_defaultFightAnimationTime == sf::Time::Zero || m_defaultFightAnimationState == GameObjectState::VOID) return;
+sf::Time MovingBehavior::executeDefaultFightAnimation(bool isBlocking, int times) {
+	if (m_defaultFightAnimationTime == sf::Time::Zero || m_defaultFightAnimationState == GameObjectState::VOID) return sf::Time::Zero;
 	m_isBlockingSpell = isBlocking;
-	m_fightAnimationTime = m_defaultFightAnimationTime;
+	m_fightAnimationTime = static_cast<float>(times) * m_defaultFightAnimationTime;
 	m_fightAnimationState = m_defaultFightAnimationState;
+	return m_fightAnimationTime;
 }
 
 void MovingBehavior::setFacingRight(bool value) {

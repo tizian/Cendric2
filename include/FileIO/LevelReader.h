@@ -36,7 +36,6 @@ private:
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;
 	
 	bool readObjects(tinyxml2::XMLElement* map, LevelData& data) const;
-	bool readResourceTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readChestTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readModifierTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readMovingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;

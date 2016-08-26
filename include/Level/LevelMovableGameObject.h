@@ -30,8 +30,8 @@ public:
 	void addHeal(int heal, bool overTime);
 	// sets the dead bool and sets the attribute health to zero.
 	virtual void setDead();
-	// executes the fight animation of this mob (using the default fight animation)
-	void executeDefaultFightAnimation(bool isBlocking);
+	// executes the fight animation of this mob (using the default fight animation) and returns the time of that animation
+	sf::Time executeDefaultFightAnimation(bool isBlocking, int times = 1);
 	// executes the fight animation of this mob 
 	void executeFightAnimation(const sf::Time& fightAnimationTime, GameObjectState animation, bool isBlocking);
 	// the mob consumes a food and gets its bonus attributes for its duration. they may also be negative.

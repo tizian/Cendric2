@@ -50,28 +50,6 @@ void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
 	}
 }
 
-void LevelLoader::loadResourceTiles(LevelData& data, LevelScreen* screen) const {
-	LevelMainCharacter* mainCharacter = screen->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("LevelLoader", "Could not find main character of game screen");
-		return;
-	}
-
-	for (auto& it : data.resourceTiles) {
-		ResourceTile* resourceTile = nullptr;
-
-		resourceTile = new ResourceTile(screen);
-		resourceTile->init();
-		resourceTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		resourceTile->loadResources();
-		resourceTile->loadAnimation(it.skinNr);
-		resourceTile->setResourceTileData(it);
-		resourceTile->setPosition(it.spawnPosition + resourceTile->getPositionOffset());
-		screen->addObject(resourceTile);
-	}
-}
-
-
 void LevelLoader::loadJumpingTiles(LevelData& data, LevelScreen* screen) const {
 	for (auto& jumpingData : data.jumpingTiles) {
 
@@ -221,7 +199,6 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 
 	loadModifierTiles(data, screen);
 	loadChestTiles(data, screen);
-	loadResourceTiles(data, screen);
 	loadLeverTiles(data, screen);
 	loadJumpingTiles(data, screen);
 	loadSignTiles(data, screen);

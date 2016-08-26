@@ -9,7 +9,6 @@
 #include "Structs/LeverData.h"
 #include "Structs/EnemyData.h"
 #include "Structs/ChestTileData.h"
-#include "Structs/ResourceTileData.h"
 #include "Structs/ModifierTileData.h"
 #include "Structs/MovingTileData.h"
 #include "Structs/JumpingTileData.h"
@@ -27,7 +26,6 @@ struct LevelData : WorldData {
 
 	std::vector<EnemyData> enemies;
 	std::vector<ChestTileData> chests;
-	std::vector<ResourceTileData> resourceTiles;
 	std::vector<ModifierTileData> modifiers;
 	std::vector<JumpingTileData> jumpingTiles;
 	std::vector<SignData> signTiles;
