@@ -20,3 +20,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_cityguard2','npc','City Guard','Stadtwache','Stadtwach');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_stephen','npc','Stephen','Stephen','Stephen');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_harek','npc','Harek','Harek','Harek');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_edgar','npc','Overseer Edgar','Aufseher Edgar','Ufseher Edgar');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_ironbell','npc','Ironbell','Ironbell','Ironbell');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_tizian','npc','Tizian','Tizian','Tizian');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jenkins','npc','Jenkins','Jenkins','Jenkins');
