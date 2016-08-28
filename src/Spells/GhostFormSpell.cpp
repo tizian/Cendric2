@@ -130,49 +130,20 @@ void GhostFormSpell::updateParticleSystemPosition() {
 
 void GhostFormSpell::loadMask() {
 	if (m_mob->getConfiguredType() != GameObjectType::_LevelMainCharacter || m_mask != nullptr) return;
+
+	m_mask = new LevelEquipment(m_mainChar);
+	ItemEquipmentBean itemBean;
+	itemBean.texture_path = m_data.spritesheetPath;
+	itemBean.frames_walk = 8;
+	itemBean.frames_idle = 1;
+	itemBean.frames_jump = 1;
+	itemBean.frames_fight = 5;
+	itemBean.frames_climb1 = 1;
+	itemBean.frames_climb2 = 1;
+	itemBean.status = BeanStatus::Filled;
+
+	m_mask->load(&itemBean, nullptr, ItemType::VOID);
 	
-	std::map<GameObjectState, std::vector<sf::IntRect>> texturePositions;
-	for (int i = 0; i < 8; ++i) {
-		texturePositions[GameObjectState::Walking].push_back(sf::IntRect(i * 120, 0, 120, 120));
-	}
-	for (int i = 0; i < 2; ++i) {
-		texturePositions[GameObjectState::Idle].push_back(sf::IntRect(960 + i * 120, 0, 120, 120));
-	}
-	for (int i = 0; i < 2; ++i) {
-		texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(1200 + i * 120, 0, 120, 120));
-	}
-	for (int i = 0; i < 5; ++i) {
-		texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(1440 + i * 120, 0, 120, 120));
-	}
-	for (int i = 0; i < 2; ++i) {
-		texturePositions[GameObjectState::Climbing_1].push_back(sf::IntRect(2040 + i * 120, 0, 120, 120));
-	}
-	for (int i = 0; i < 2; ++i) {
-		texturePositions[GameObjectState::Climbing_2].push_back(sf::IntRect(2280 + i * 120, 0, 120, 120));
-	}
-
-	LevelEquipment* levelEquipment = new LevelEquipment(m_mainChar);
-	levelEquipment->setBoundingBox(sf::FloatRect(0, 0, 120, 120));
-	for (auto& ani : texturePositions) {
-		Animation* animation = new Animation();
-		if (ani.first == GameObjectState::Fighting) {
-			animation->setFrameTime(sf::milliseconds(70));
-		}
-		else if (ani.first == GameObjectState::Jumping) {
-			animation->setFrameTime(sf::milliseconds(200));
-		}
-		animation->setSpriteSheet(g_resourceManager->getTexture(m_data.spritesheetPath));
-		for (auto& frame : ani.second) {
-			animation->addFrame(frame);
-		}
-		levelEquipment->addAnimation(ani.first, animation);
-	}
-
-	// initial values
-	levelEquipment->setHasTexture();
-	levelEquipment->setCurrentAnimation(levelEquipment->getAnimation(GameObjectState::Idle), false);
-	levelEquipment->playCurrentAnimation(true);
-	levelEquipment->setCopyingMainCharColor(false);
-	m_mask = levelEquipment;
-	m_screen->addObject(levelEquipment);
+	m_mask->setCopyingMainCharColor(false);
+	m_screen->addObject(m_mask);
 }

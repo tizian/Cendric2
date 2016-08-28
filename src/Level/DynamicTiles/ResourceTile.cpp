@@ -1,5 +1,6 @@
 #include "Level/DynamicTiles/ResourceTile.h"
 #include "Level/LevelMainCharacter.h"
+#include "Level/LevelEquipment.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
@@ -19,16 +20,35 @@ void ResourceTile::init() {
 
 void ResourceTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
-	if (m_lootTime > sf::Time::Zero) {
-		updateTime(m_lootTime, frameTime);
-		if (m_lootTime == sf::Time::Zero) {
-			// add loot and set looted.
-			m_mainChar->lootItems(m_lootableItems);
-			if (m_lootableGold > 0) {
-				m_mainChar->addGold(m_lootableGold);
-			}
-			setState(GameObjectState::Broken);
+	if (m_lootTime == sf::Time::Zero) return;
+
+	updateTime(m_lootTime, frameTime);
+	if (m_lootTime > sf::Time::Zero) return;
+
+	// add loot and set looted.
+	m_mainChar->lootItems(m_lootableItems);
+	if (m_lootableGold > 0) {
+		m_mainChar->addGold(m_lootableGold);
+	}
+	setState(GameObjectState::Broken);
+
+	// remove the current tool visualization 
+	for (auto go : *m_screen->getObjects(GameObjectType::_Equipment)) {
+		LevelEquipment* levelEquipment = dynamic_cast<LevelEquipment*>(go);
+		if (levelEquipment != nullptr && levelEquipment->getItemType() == ItemType::Equipment_weapon) {
+			levelEquipment->setDisposed();
 		}
+	}
+
+	// add the visualization for the currentWeapon
+	auto& equippedItems = m_screen->getCharacterCore()->getData().equippedItems;
+	if (equippedItems.find(ItemType::Equipment_weapon) == equippedItems.end()) return;
+	
+	const Item* weapon = g_resourceManager->getItem(equippedItems.at(ItemType::Equipment_weapon));
+	if (weapon != nullptr && weapon->isEquipmentItem()) {
+		LevelEquipment* weaponEquipment = new LevelEquipment(m_mainChar);
+		weaponEquipment->load(&weapon->getEquipmentBean(), &weapon->getEquipmentLightBean(), ItemType::Equipment_weapon);
+		m_screen->addObject(weaponEquipment);
 	}
 }
 
@@ -74,6 +94,20 @@ void ResourceTile::loot() {
 	}
 	// loot, set blocking for that time
 	m_lootTime = m_mainChar->executeDefaultFightAnimation(true, 3);
+	// remove the current weapon visualization 
+	for (auto go : *m_screen->getObjects(GameObjectType::_Equipment)) {
+		LevelEquipment* levelEquipment = dynamic_cast<LevelEquipment*>(go);
+		if (levelEquipment != nullptr && levelEquipment->getItemType() == ItemType::Equipment_weapon) {
+			levelEquipment->setDisposed();
+		}
+	}
+	// add the visualization for the tool
+	const Item* toolItem = g_resourceManager->getItem(m_toolItemID);
+	if (toolItem != nullptr && toolItem->isEquipmentItem()) {
+		LevelEquipment* tool = new LevelEquipment(m_mainChar);
+		tool->load(&toolItem->getEquipmentBean(), &toolItem->getEquipmentLightBean(), ItemType::Equipment_weapon);
+		m_screen->addObject(tool);
+	}
 
 	m_interactComponent->setInteractable(false);
 }

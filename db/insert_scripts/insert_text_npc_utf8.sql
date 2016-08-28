@@ -24,3 +24,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_ironbell','npc','Ironbell','Ironbell','Ironbell');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_tizian','npc','Tizian','Tizian','Tizian');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jenkins','npc','Jenkins','Jenkins','Jenkins');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_yorick','npc','Skeleton','Skelett','Skelett');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_morris','npc','Morris','Morris','Morris');

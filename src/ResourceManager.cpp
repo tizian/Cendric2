@@ -170,8 +170,11 @@ Item* ResourceManager::getItem(const std::string& itemID) {
 	if (m_items.find(itemID) == m_items.end()) {
 		Item* item = new Item(itemID);
 		m_items.insert({ itemID, item });
-		if (!item->isValid())
+		if (!item->isValid()) {
 			g_logger->logError("ResourceManager", "Item not loaded, unknown id: " + itemID);
+			delete item;
+			return nullptr;
+		}
 	}
 	return m_items.at(itemID);
 }

@@ -58,6 +58,7 @@ public:
 	sf::SoundBuffer* getSoundBuffer(const std::string& filename);
 	sf::Font* getFont(const std::string& filename);
 	BitmapFont* getBitmapFont(const std::string& filename);
+	// be aware that this will return nullptr in case of an invalid item.
 	Item* getItem(const std::string& itemID);
 
 	const std::pair<ErrorID, std::string>* pollError() const;
