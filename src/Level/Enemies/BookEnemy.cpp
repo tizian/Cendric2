@@ -19,7 +19,6 @@ void BookEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 BookEnemy::BookEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load();
 }
 
 void BookEnemy::update(const sf::Time& frameTime) {
@@ -121,7 +120,7 @@ sf::Time BookEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(rand() % 4 + 2));
 }
 
-void BookEnemy::loadAnimation() {
+void BookEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 70.f, 50.f));
 	setSpriteOffset(sf::Vector2f(-20.f, -7.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

@@ -20,7 +20,6 @@ void RatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) co
 RatEnemy::RatEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load();
 }
 
 void RatEnemy::loadAttributes() {
@@ -85,7 +84,7 @@ bool RatEnemy::getFleeCondition() const {
 	return m_attributes.currentHealthPoints < m_attributes.maxHealthPoints / 3;
 }
 
-void RatEnemy::loadAnimation() {
+void RatEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

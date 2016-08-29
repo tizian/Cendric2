@@ -13,8 +13,6 @@ public:
 	~GargoyleEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
-	void loadAnimation() override;
-	void loadAnimation(int skinNr);
 	void setDead() override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
@@ -40,6 +38,7 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
+	void loadAnimation(int skinNr) override;
 
 	int m_spellStrength = 1;
 	int m_spellAdditionalDamage = 0;

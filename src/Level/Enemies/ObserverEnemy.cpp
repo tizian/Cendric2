@@ -3,6 +3,7 @@
 #include "GameObjectComponents/LightComponent.h"
 #include "Level/MOBBehavior/MovingBehaviors/ObserverBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+#include "Level/MOBBehavior/AttackingBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Observer, ObserverEnemy)
@@ -20,7 +21,6 @@ ObserverEnemy::ObserverEnemy(const Level* level, Screen* screen) :
 	m_isHPBarVisible = false;
 
 	m_observedRange = 100.f;
-	load();
 }
 
 void ObserverEnemy::update(const sf::Time& frameTime) {
@@ -42,7 +42,7 @@ void ObserverEnemy::update(const sf::Time& frameTime) {
 	}
 	else if (m_state == GameObjectState::Idle && m_scriptedBehavior != nullptr) {
 		m_scriptedBehavior->update(frameTime);
-		if (dist(m_mainChar->getPosition(), getPosition()) <= m_observedRange) {
+		if (AttackingBehavior::isInAggroRange(m_mainChar, this, m_observedRange)) {
 			setObserverChasing();
 		}
 	}
@@ -132,7 +132,11 @@ sf::Time ObserverEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(rand() % 10 + 5));
 }
 
-void ObserverEnemy::loadAnimation() {
+int ObserverEnemy::getMentalStrength() const {
+	return 3;
+}
+
+void ObserverEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 40.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 

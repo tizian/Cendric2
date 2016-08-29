@@ -34,7 +34,6 @@ void CairnEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) 
 CairnEnemy::CairnEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load();
 }
 
 void CairnEnemy::loadAttributes() {
@@ -72,7 +71,7 @@ void CairnEnemy::handleAttackInput() {
 	}
 }
 
-void CairnEnemy::loadAnimation() {
+void CairnEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 88.f));
 	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

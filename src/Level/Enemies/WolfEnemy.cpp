@@ -22,7 +22,6 @@ void WolfEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 WolfEnemy::WolfEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load();
 }
 
 void WolfEnemy::loadAttributes() {
@@ -70,7 +69,7 @@ void WolfEnemy::handleAttackInput() {
 	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
 
-void WolfEnemy::loadAnimation() {
+void WolfEnemy::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 106.f, 55.f));
 	setSpriteOffset(sf::Vector2f(-17.f, -45.f));

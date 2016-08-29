@@ -16,8 +16,6 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
-	void loadAnimation() override;
-
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 
@@ -35,6 +33,7 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
+	void loadAnimation(int skinNr) override;
 
 	particles::TextureParticleSystem* m_ps;
 	particles::ParticleSpawner* m_particleSpawner;

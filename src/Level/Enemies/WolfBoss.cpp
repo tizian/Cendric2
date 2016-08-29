@@ -31,7 +31,6 @@ float WolfBoss::getConfiguredDistanceToHPBar() const {
 WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load();
 	m_interactComponent->setTooltipHeight(70.f);
 	m_isInvincible = true;
 	m_isAlwaysUpdate = true;
@@ -149,7 +148,7 @@ void WolfBoss::update(const sf::Time& frameTime) {
 	}
 }
 
-void WolfBoss::loadAnimation() {
+void WolfBoss::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 200.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-50.f, -160.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

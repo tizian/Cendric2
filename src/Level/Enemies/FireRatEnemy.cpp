@@ -22,7 +22,6 @@ void FireRatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold
 FireRatEnemy::FireRatEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load();
 }
 
 void FireRatEnemy::loadAttributes() {
@@ -67,7 +66,7 @@ void FireRatEnemy::handleAttackInput() {
 	}
 }
 
-void FireRatEnemy::loadAnimation() {
+void FireRatEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

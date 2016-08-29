@@ -6,36 +6,27 @@
 #include "Screens/Screen.h"
 #include "Particles/ParticleSystem.h"
 
-// An observer that can put the main character in jail. It is invincible and will only attack Cendric if he steals something
-class ObserverEnemy : public virtual Enemy {
+// A warden that will kill the main character on sight.
+class WardenEnemy : public virtual Enemy {
 public:
-	ObserverEnemy(const Level* level, Screen* screen);
-	~ObserverEnemy() {}
+	WardenEnemy(const Level* level, Screen* screen);
+	~WardenEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
-	// returns whether this observer sees the main char. (called at time of stealing)
-	// if it's the first time he was caught stealing, the observer will react with a warning
-	bool notifyStealing(bool isFirstTime);
-
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
-
-	sf::Time getConfiguredWaitingTime() const override;
-	sf::Time getConfiguredChasingTime() const override;
-
-	int getMentalStrength() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {};
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {};
 
-	EnemyID getEnemyID() const override { return EnemyID::Observer; }
+	int getMentalStrength() const override;
+	EnemyID getEnemyID() const override { return EnemyID::Warden; }
 	
 protected:
 	std::string getSpritePath() const override;
 
-	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
 	void loadAttributes() override;
 	void loadSpells() override {};
 	void loadAnimation(int skinNr) override;
@@ -48,11 +39,6 @@ private:
 
 	particles::TextureParticleSystem* m_ps;
 	particles::ParticleSpawner* m_particleSpawner;
-	particles::ColorGenerator* m_colGen;
-
-	void setObserverChasing();
-	void setObserverIdle();
-	void setObserverTriggered();
 
 	static const float SPEED_IDLE;
 	static const float SPEED_CHASING;

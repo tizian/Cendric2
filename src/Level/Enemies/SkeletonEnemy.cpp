@@ -19,7 +19,6 @@ void SkeletonEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 SkeletonEnemy::SkeletonEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load();
 }
 
 void SkeletonEnemy::loadAttributes() {
@@ -52,7 +51,7 @@ void SkeletonEnemy::handleAttackInput() {
 	}
 }
 
-void SkeletonEnemy::loadAnimation() {
+void SkeletonEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 135.f));
 	setSpriteOffset(sf::Vector2f(-35.f, -15.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

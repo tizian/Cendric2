@@ -7,4 +7,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Go
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Argh', 'speech','Aaargh!','Aaargh!','Aaargh!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ObserverWarning', 'speech','Stop! Don''t try this again.','Stopp! Versuch das nicht nochmal.','Stop! Probier das nid namal.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ObserverTriggered', 'speech','Thief caught!','Dieb erwischt!','Dieb verwütscht!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('WardenTriggered', 'speech','Trespasser eliminated!','Eindringling eliminiert!','Iidringling eliminiert!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Test', 'speech','Test','Test','Test');

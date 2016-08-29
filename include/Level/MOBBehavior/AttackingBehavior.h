@@ -4,6 +4,8 @@
 #include "Level/LevelMovableGameObject.h"
 #include "Level/LevelMainCharacter.h"
 
+class Enemy;
+
 // An enemy attacking behavior
 class AttackingBehavior {
 public:
@@ -15,6 +17,8 @@ public:
 	virtual void handleAttackInput();
 
 	void setAttackInput(const std::function<void()>& agent);
+
+	static bool isInAggroRange(const LevelMainCharacter* mainChar, const Enemy* enemy, float aggroRange);
 
 protected:
 	LevelMovableGameObject* m_mob;

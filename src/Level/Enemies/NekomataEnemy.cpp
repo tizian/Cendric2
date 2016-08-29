@@ -22,7 +22,6 @@ void NekomataEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 NekomataEnemy::NekomataEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load();
 }
 
 NekomataEnemy::~NekomataEnemy() {
@@ -116,7 +115,7 @@ void NekomataEnemy::handleAttackInput() {
 	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
 
-void NekomataEnemy::loadAnimation() {
+void NekomataEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 90.f, 60.f));
 	setSpriteOffset(sf::Vector2f(-20.f, -10.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

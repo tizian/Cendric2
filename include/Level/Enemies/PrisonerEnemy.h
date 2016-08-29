@@ -6,20 +6,17 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-// will be refactored to talking / scriptable / npc enemy sometime :)
-class HunterEnemy : public Enemy {
+class PrisonerEnemy : public Enemy {
 public:
-	HunterEnemy(const Level* level, Screen* screen);
-	~HunterEnemy() {}
-
-	int getMentalStrength() const override;
+	PrisonerEnemy(const Level* level, Screen* screen);
+	~PrisonerEnemy() {}
 
 	float getConfiguredDistanceToHPBar() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {}
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {}
 
-	EnemyID getEnemyID() const override { return EnemyID::Hunter; }
+	EnemyID getEnemyID() const override { return EnemyID::Prisoner; }
 
 protected:
 	std::string getSpritePath() const override;

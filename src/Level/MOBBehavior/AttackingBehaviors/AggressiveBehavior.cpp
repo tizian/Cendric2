@@ -20,23 +20,7 @@ void AggressiveBehavior::updateAggro() {
 	}
 	if (m_enemy->getEnemyState() != EnemyState::Idle) return;
 
-	bool isInAggroRange = false;
-
-	// handle main character aggro
-	float invisibilityScaler = 1.f;
-	int invLevel = m_mainChar->getInvisibilityLevel();
-	int mentalStr = m_enemy->getMentalStrength();
-	if (invLevel == 0) {
-		invisibilityScaler = 1.f;
-	}
-	else if (invLevel > mentalStr) {
-		invisibilityScaler = 0.f;
-	}
-	else {
-		invisibilityScaler = 1.f / (2 * (6 - mentalStr)) + 1.f / (invLevel + 1);
-	}
-	isInAggroRange = distToTarget() < (getAggroRange() * invisibilityScaler);
-	if (isInAggroRange) {
+	if (AttackingBehavior::isInAggroRange(m_mainChar, m_enemy, m_aggroRange)) {
 		m_enemy->setChasing();
 		return;
 	}

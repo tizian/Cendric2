@@ -27,7 +27,7 @@ public:
 	Enemy(const Level* level, Screen* screen);
 	virtual ~Enemy();
 
-	void load();
+	void load(int skinNr);
 
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onRightClick() override;
@@ -98,7 +98,7 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	virtual void loadSpells() = 0;
 	// loads the animation
-	virtual void loadAnimation() = 0;
+	virtual void loadAnimation(int skinNr) = 0;
 	// loads/updates hp bar
 	virtual void updateHpBar();
 	// updates the hp bar after loading the behavior

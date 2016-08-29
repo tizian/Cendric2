@@ -17,7 +17,6 @@ public:
 
 	void onHit(Spell* spell) override;
 
-	void loadAnimation() override;
 	void setDead() override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
@@ -38,6 +37,7 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
+	void loadAnimation(int skinNr) override;
 
 	void loadParticleSystem();
 

@@ -670,6 +670,13 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					enemyData.isBoss = true;
 					enemyData.isUnique = true;
 				}
+				else if (itemText.compare("skinnr") == 0) {
+					int skinNr;
+					result = item->QueryIntAttribute("value", &skinNr);
+					XMLCheckResult(result);
+
+					enemyData.skinNr = skinNr;
+				}
 				else if (itemText.compare("luapath") == 0) {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {

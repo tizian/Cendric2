@@ -20,7 +20,6 @@ void WispEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 WispEnemy::WispEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load();
 }
 
 void WispEnemy::loadAttributes() {
@@ -100,7 +99,7 @@ sf::Time WispEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(rand() % 4 + 2));
 }
 
-void WispEnemy::loadAnimation() {
+void WispEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 20.f, 20.f));
 	setSpriteOffset(sf::Vector2f(-30.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

@@ -46,7 +46,7 @@ void AllyWalkingBehavior::execHandleMovementInput() {
 
 		sf::Vector2f mainCharCenter = m_mainChar->getCenter();
 
-		float approachingDistance = (std::abs(m_enemy->getVelocity().x) > 0.f) ? (m_approachingDistance - 10.f) : m_approachingDistance;
+		float approachingDistance = (std::abs(m_enemy->getVelocity().x) > 0.f) ? (m_approachingDistance - 5.f) : m_approachingDistance;
 
 		if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > approachingDistance) {
 			m_movingDirectionX = -1;

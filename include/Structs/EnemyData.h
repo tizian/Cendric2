@@ -8,6 +8,7 @@
 struct EnemyData {
 	EnemyID id;
 	int objectID;
+	int skinNr = 0;
 	sf::Vector2f spawnPosition;
 	std::vector<std::pair<std::string, std::string>> questTargets;
 	std::pair<std::string, std::string> questCondition;

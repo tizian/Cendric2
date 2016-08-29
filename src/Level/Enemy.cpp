@@ -36,9 +36,9 @@ Enemy::~Enemy() {
 	delete m_scriptedBehavior;
 }
 
-void Enemy::load() {
+void Enemy::load(int skinNr) {
 	loadResources();
-	loadAnimation();
+	loadAnimation(skinNr);
 	loadAttributes();
 	loadSpells();
 	loadBehavior();

@@ -21,7 +21,6 @@ void GargoyleEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 GargoyleEnemy::GargoyleEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load();
 }
 
 void GargoyleEnemy::update(const sf::Time& frameTime) {
@@ -135,10 +134,6 @@ sf::Time GargoyleEnemy::getConfiguredWaitingTime() const {
 
 sf::Time GargoyleEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(5));
-}
-
-void GargoyleEnemy::loadAnimation() {
-	loadAnimation(0);
 }
 
 void GargoyleEnemy::loadAnimation(int skinNr) {

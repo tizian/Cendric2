@@ -11,7 +11,6 @@ public:
 	ZeffBoss(const Level* level, Screen* screen);
 	virtual ~ZeffBoss();
 
-	void loadAnimation() override;
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 
@@ -34,6 +33,7 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
+	void loadAnimation(int skinNr) override;
 	// particles & death
 	void loadParticleSystem();
 	void updateParticleSystemPosition();

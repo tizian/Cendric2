@@ -26,7 +26,6 @@ void ZeffBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) co
 ZeffBoss::ZeffBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	load();
 
 	// Make boss hp bar appear from the start
 	m_mainChar->setLastHitEnemy(this);
@@ -109,7 +108,7 @@ void ZeffBoss::update(const sf::Time& frameTime) {
 	}
 }
 
-void ZeffBoss::loadAnimation() {
+void ZeffBoss::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 120.f));
 	setSpriteOffset(sf::Vector2f(-30.f, -20.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

@@ -11,8 +11,6 @@ public:
 	SkeletonEnemy(const Level* level, Screen* screen);
 	~SkeletonEnemy() {}
 
-	void loadAnimation() override;
-
 	int getMentalStrength() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
@@ -29,4 +27,5 @@ protected:
 	void loadAttributes() override;
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
+	void loadAnimation(int skinNr) override;
 };

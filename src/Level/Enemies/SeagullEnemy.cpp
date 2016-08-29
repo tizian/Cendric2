@@ -21,7 +21,6 @@ void SeagullEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold
 SeagullEnemy::SeagullEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load();
 }
 
 void SeagullEnemy::loadAttributes() {
@@ -95,7 +94,7 @@ sf::Time SeagullEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(rand() % 6 + 2));
 }
 
-void SeagullEnemy::loadAnimation() {
+void SeagullEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());

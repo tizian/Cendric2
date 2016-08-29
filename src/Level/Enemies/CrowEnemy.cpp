@@ -20,7 +20,6 @@ void CrowEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 CrowEnemy::CrowEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-	load();
 }
 
 void CrowEnemy::loadAttributes() {
@@ -95,7 +94,7 @@ sf::Time CrowEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(rand() % 4 + 2));
 }
 
-void CrowEnemy::loadAnimation() {
+void CrowEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
