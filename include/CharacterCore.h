@@ -120,6 +120,8 @@ public:
 	bool isTriggerTriggered(const std::string& world, int triggerID);
 	// returns whether cendric has at least the given amount of items of this key in his inventory and/or equipped.
 	bool hasItem(const std::string& itemID, int amount) const;
+	// returns whether cendric has at least the given amount of items of this key in the stored items
+	bool hasStoredItem(const std::string& itemID, int amount) const;
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.
 	MerchantData getMerchantData(const std::string& merchantID);
 	// sets the merchant data of this merchant id
@@ -145,6 +147,14 @@ public:
 	// mark as autosave
 	void setAutosave(bool value);
 
+	// stores all items in the inventory temporarily and leaves the player only with a pickaxe and prisoners clothes
+	void setCharacterJailed();
+	// returns a list with all stored items and clears the corresponding vector
+	std::map<std::string, int> retrieveStoredItems();
+	// returns a the stored gold and sets it to 0
+	int retrieveStoredGold();
+
+
 protected:
 	// protected constructor for copying
 	CharacterCore(const CharacterCoreData& data);
@@ -160,6 +170,10 @@ private:
 	void addItem(const std::string& item, int quantity);
 	// removes item(s) to the data
 	void removeItem(const std::string& item, int quantity);
+	// adds item(s) to the stored data
+	void addStoredItem(const std::string& item, int quantity);
+	// removes item(s) to the stored data
+	void removeStoredItem(const std::string& item, int quantity);
 
 	// base attributes plus the attributes of all currently equipped items
 	AttributeData m_totalAttributes;

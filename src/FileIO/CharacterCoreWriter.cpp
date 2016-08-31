@@ -31,6 +31,8 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeAttributes(data);
 		savefile << writeGold(data);
 		savefile << writeItemID(data);
+		savefile << writeStoredGold(data);
+		savefile << writeStoredItemID(data);
 		savefile << writeEquippedWeaponSlots(data);
 		savefile << writeEquippedItems(data);
 		savefile << writeWeaponConfigurations(data);
@@ -268,6 +270,10 @@ std::string CharacterCoreWriter::writeGold(const CharacterCoreData& data) const 
 	return string(GOLD) + ":" + to_string(data.gold) + "\n";
 }
 
+std::string CharacterCoreWriter::writeStoredGold(const CharacterCoreData& data) const {
+	return string(STORED_GOLD) + ":" + to_string(data.storedGold) + "\n";
+}
+
 std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data) const {
 	string quests = "# quest states:\n";
 
@@ -447,6 +453,22 @@ std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) cons
 	}
 	return items;
 }
+
+std::string CharacterCoreWriter::writeStoredItemID(const CharacterCoreData& data) const {
+	string items = "# stored items:\n";
+
+	for (auto& it : data.storedItems) {
+		string item = string(STORED_ITEM_ID);
+		item.append(":");
+		item.append(it.first);
+		item.append(",");
+		item.append(to_string(it.second));
+		item.append("\n");
+		items.append(item);
+	}
+	return items;
+}
+
 std::string CharacterCoreWriter::writeEquippedWeaponSlots(const CharacterCoreData& data) const {
 	string weaponSlots = "# weapon slots. it is always: spell ID+, (modifier type, level)*:\n";
 	for (auto& it : data.equippedWeaponSlots) {

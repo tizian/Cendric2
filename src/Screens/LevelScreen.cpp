@@ -150,7 +150,7 @@ bool LevelScreen::notifyObservers() {
 				m_respawnWaitTime = sf::seconds(6.0f);
 				addObject(ScreenOverlay::createArrestedScreenOverlay());
 				m_interface->hideAll();
-				// todo: set level coords of jail!
+				m_characterCore->setCharacterJailed();
 			}
 			return true;
 		}

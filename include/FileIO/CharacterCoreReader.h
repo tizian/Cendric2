@@ -52,6 +52,8 @@ private:
 
 	bool readGold(char* start, char* end, CharacterCoreData& data) const;
 	bool readItemID(char* start, char* end, CharacterCoreData& data) const;
+	bool readStoredGold(char* start, char* end, CharacterCoreData& data) const;
+	bool readStoredItemID(char* start, char* end, CharacterCoreData& data) const;
 	bool readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const;
 	bool readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const;
 	bool readWeaponConfigurations(char* start, char* end, CharacterCoreData& data) const;

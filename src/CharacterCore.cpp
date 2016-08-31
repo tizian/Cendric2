@@ -1,6 +1,8 @@
 #include "CharacterCore.h"
 #include "Item.h"
 #include "FileIO/MerchantLoader.h"
+#include "Beans/PortBean.h"
+#include "DatabaseManager.h"
 #include "GlobalResource.h"
 
 using namespace std;
@@ -66,12 +68,15 @@ void CharacterCore::loadNew() {
 	// start map & position when a new game is loaded
 	m_isNew = true;
 	m_data.isInLevel = false;
-	m_data.currentMap = "res/map/meadows/meadows.tmx";
-	m_data.currentMapPosition = sf::Vector2f(1850.f, 700.f);
+
+	PortBean port = g_databaseManager->getPortBean("start");
+	m_data.currentMap = port.map_id;
+	m_data.currentMapPosition = port.map_pos;
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.critical = 5;
-	m_data.equippedItems.at(ItemType::Equipment_body) = "eq_defaultarmor";
+	m_data.equippedItems.at(ItemType::Equipment_body) = port.armor_id;
+	m_data.equippedItems.at(ItemType::Equipment_weapon) = port.weapon_id;
 	setQuestState("who_am_i", QuestState::Started);
 	m_stopwatch.restart();
 	g_resourceManager->deleteItemResources();
@@ -363,6 +368,21 @@ bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID)
 	return true;
 }
 
+bool CharacterCore::hasStoredItem(const std::string& itemID, int amount) const {
+	if (itemID.empty()) return false;
+
+	if (itemID.compare("gold") == 0) {
+		// check for gold
+		return m_data.storedGold >= amount;
+	}
+
+	int foundAmount = 0;
+	if (m_data.storedItems.find(itemID) != m_data.storedItems.end())
+		foundAmount += m_data.storedItems.at(itemID);
+
+	return foundAmount >= amount;
+}
+
 bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
 	if (itemID.empty()) return false;
 
@@ -377,7 +397,7 @@ bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
 			foundAmount++;
 		}
 	}
-	
+
 	if (m_data.items.find(itemID) != m_data.items.end())
 		foundAmount += m_data.items.at(itemID);
 
@@ -407,11 +427,11 @@ void CharacterCore::addPermanentAttributes(const AttributeData& attributes) {
 
 void CharacterCore::learnModifier(const SpellModifier& modifier) {
 	if (m_data.modfiersLearned.find(modifier.type) == m_data.modfiersLearned.end()) {
-		m_data.modfiersLearned.insert({ modifier.type, modifier.level});
+		m_data.modfiersLearned.insert({ modifier.type, modifier.level });
 	}
 	else {
 		m_data.modfiersLearned[modifier.type] = std::max(m_data.modfiersLearned[modifier.type], modifier.level);
-	}	
+	}
 }
 
 void CharacterCore::learnHint(const std::string& hintKey) {
@@ -466,7 +486,7 @@ void CharacterCore::removeGold(int gold) {
 
 void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 	if (itemID.empty()) return;
-	
+
 	if (itemID.compare("gold") == 0) {
 		if (amount < 0) {
 			removeGold(-amount);
@@ -486,8 +506,9 @@ void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 }
 
 void CharacterCore::addItem(const std::string& item, int quantity) {
+	if (item.empty()) return;
 	auto it = m_data.items.find(item);
-	
+
 	if (it != m_data.items.end()) {
 		m_data.items.at(item) = m_data.items.at(item) + quantity;
 	}
@@ -497,6 +518,7 @@ void CharacterCore::addItem(const std::string& item, int quantity) {
 }
 
 void CharacterCore::removeItem(const std::string& item, int quantity) {
+	if (item.empty()) return;
 	int quantityEreased = 0;
 
 	auto it = m_data.items.find(item);
@@ -520,6 +542,30 @@ void CharacterCore::removeItem(const std::string& item, int quantity) {
 				++quantityEreased;
 			}
 			if (quantityEreased == quantity) break;
+		}
+	}
+}
+
+void CharacterCore::addStoredItem(const std::string& item, int quantity) {
+	if (item.empty()) return;
+	auto it = m_data.storedItems.find(item);
+
+	if (it != m_data.storedItems.end()) {
+		m_data.storedItems.at(item) = m_data.storedItems.at(item) + quantity;
+	}
+	else {
+		m_data.storedItems.insert({ item, quantity });
+	}
+}
+
+void CharacterCore::removeStoredItem(const std::string& item, int quantity) {
+	if (item.empty()) return;
+	auto it = m_data.storedItems.find(item);
+
+	if (it != m_data.storedItems.end()) {
+		m_data.storedItems.at(item) = m_data.storedItems.at(item) - quantity;
+		if (m_data.storedItems.at(item) <= 0) {
+			m_data.storedItems.erase(item);
 		}
 	}
 }
@@ -565,7 +611,7 @@ void CharacterCore::addSpell(SpellID id, int slotNr) {
 	}
 
 	while (static_cast<int>(m_data.equippedWeaponSlots.size()) < slotNr + 1) {
-		m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>({SpellID::VOID, std::vector<SpellModifier>()}));
+		m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>({ SpellID::VOID, std::vector<SpellModifier>() }));
 	}
 
 	m_data.equippedWeaponSlots.at(slotNr).first = id;
@@ -661,4 +707,52 @@ bool CharacterCore::isAutosave() {
 
 void CharacterCore::setAutosave(bool value) {
 	m_isAutosave = value;
+}
+
+void CharacterCore::setCharacterJailed() {
+	PortBean port = g_databaseManager->getPortBean("prison");
+	m_data.isInLevel = false;
+	m_data.currentMap = port.map_id;
+	m_data.currentMapPosition = port.map_pos;
+
+	// store the gold
+	m_data.storedGold += m_data.gold;
+	m_data.gold = 0;
+
+	// store the items
+	for (auto& it : m_data.items) {
+		if (m_data.storedItems.find(it.first) == m_data.storedItems.end()) {
+			m_data.storedItems.insert({ it.first, it.second });
+		}
+		else {
+			m_data.storedItems.at(it.first) += it.second;
+		}
+	}
+	m_data.items.clear();
+
+	// store the equipment
+	for (auto& it : m_data.equippedItems) {
+		addStoredItem(it.second, 1);
+		it.second.clear();
+	}
+
+	// if the items already exists, they will not be given anew.
+	removeStoredItem(port.weapon_id, 1);
+	removeStoredItem(port.armor_id, 1);
+
+	// equip the new armor.
+	m_data.equippedItems.at(ItemType::Equipment_body) = port.armor_id;
+	m_data.equippedItems.at(ItemType::Equipment_weapon) = port.weapon_id;
+}
+
+std::map<std::string, int> CharacterCore::retrieveStoredItems() {
+	std::map<std::string, int> storedItems = m_data.storedItems;
+	m_data.storedItems.clear();
+	return storedItems;
+}
+
+int CharacterCore::retrieveStoredGold() {
+	int gold = m_data.storedGold;
+	m_data.storedGold = 0;
+	return gold;
 }

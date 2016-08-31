@@ -43,7 +43,7 @@ void WolfBoss::loadAttributes() {
 	m_attributes.setHealth(150);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 50;
-	m_attributes.critical = 20;
+	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
 }
 

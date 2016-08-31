@@ -59,9 +59,11 @@ struct CharacterCoreData {
 
 	// items & equipment
 	int gold;
+	int storedGold;
 	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;
 	std::map<ItemType, std::string> equippedItems;
 	std::map<std::string, int> items;
+	std::map<std::string, int> storedItems;
 
 	// weapon configurations
 	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>> weaponConfigurations;
@@ -101,8 +103,10 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, WeatherData>(),
 	ZERO_ATTRIBUTES,
 	0,
+	0,
 	std::vector<std::pair<SpellID, std::vector<SpellModifier>>>(),
 	std::map<ItemType, std::string>(),
+	std::map<std::string, int>(),
 	std::map<std::string, int>(),
 	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>>(),
 	"",

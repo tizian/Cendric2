@@ -186,6 +186,14 @@ bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& da
 	return true;
 }
 
+bool CharacterCoreReader::readStoredGold(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	data.storedGold = atoi(startData);
+	return true;
+}
+
 bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	startData = gotoNextChar(start, end, ':');
@@ -300,6 +308,24 @@ bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& 
 	startData++;
 	int amount = atoi(startData);
 	data.items.insert({ id, amount });
+	return true;
+}
+
+bool CharacterCoreReader::readStoredItemID(char* start, char* end, CharacterCoreData& data) const {
+	char* startData;
+	startData = gotoNextChar(start, end, ':');
+	startData++;
+	string id(startData);
+	int count = countToNextChar(startData, end, ',');
+	if (count == -1) {
+		return false;
+	}
+	id = id.substr(0, count);
+
+	startData = gotoNextChar(startData, end, ',');
+	startData++;
+	int amount = atoi(startData);
+	data.storedItems.insert({ id, amount });
 	return true;
 }
 
@@ -1042,9 +1068,19 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 			noError = readGold(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
+		else if (strncmp(pos, STORED_GOLD, strlen(STORED_GOLD)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(STORED_GOLD));
+			noError = readStoredGold(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
 		else if (strncmp(pos, ITEM_ID, strlen(ITEM_ID)) == 0) {
 			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(ITEM_ID));
 			noError = readItemID(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, STORED_ITEM_ID, strlen(STORED_ITEM_ID)) == 0) {
+			g_logger->log(LogLevel::Verbose, "CharacterCoreReader", "found tag " + std::string(STORED_ITEM_ID));
+			noError = readStoredItemID(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, EQUIPPED_SPELLSLOT, strlen(EQUIPPED_SPELLSLOT)) == 0) {
