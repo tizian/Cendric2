@@ -10,7 +10,7 @@ PRAGMA encoding="UTF-8";
 PRAGMA foreign_keys = ON;
 
 DROP TABLE text;
-DROP TABLE port;
+DROP TABLE spawn;
 DROP TABLE levelitem_light;
 DROP TABLE levelitem_frame;
 DROP TABLE levelitem;
@@ -184,14 +184,14 @@ CREATE TABLE levelitem_light(
 	FOREIGN KEY(item_id) REFERENCES levelitem(item_id)
 );
 
-CREATE TABLE port(
-	port_id VARCHAR(50) NOT NULL, 
+CREATE TABLE spawn (
+	spawn_id VARCHAR(50) NOT NULL, 
 	map_id VARCHAR(100) NOT NULL,
 	map_x INTEGER NOT NULL,
 	map_y INTEGER NOT NULL,
 	weapon_id VARCHAR(50) NOT NULL DEFAULT '', 
 	armor_id VARCHAR(50) NOT NULL DEFAULT '', 
-	PRIMARY KEY(port_id ASC),
+	PRIMARY KEY(spawn_id ASC),
 	FOREIGN KEY(weapon_id) REFERENCES item(item_id),
 	FOREIGN KEY(armor_id) REFERENCES item(item_id)
 );

@@ -14,7 +14,7 @@
 #include "Beans/LevelitemFrameBean.h"
 #include "Beans/LevelitemLightBean.h"
 #include "Beans/TextBean.h"
-#include "Beans/PortBean.h"
+#include "Beans/SpawnBean.h"
 
 DatabaseManager *g_databaseManager;
 
@@ -714,15 +714,15 @@ bool DatabaseManager::itemExists(const std::string& item_id) const {
 	return exists;
 }
 
-PortBean DatabaseManager::getPortBean(const std::string& port_id) const {
-	PortBean bean;
+SpawnBean DatabaseManager::getSpawnBean(const std::string& spawn_id) const {
+	SpawnBean bean;
 	sqlite3_stmt *statement;
-	std::string query = "SELECT * FROM port WHERE port_id = '" + port_id + "';";
+	std::string query = "SELECT * FROM spawn WHERE spawn_id = '" + spawn_id + "';";
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
 		if (cols != 6) {
-			g_logger->logError("DatabaseManager::getPortBean", "number of returned columns must be 6");
+			g_logger->logError("DatabaseManager::getSpawnBean", "number of returned columns must be 6");
 			return bean;
 		}
 		int result = 0;
@@ -730,7 +730,7 @@ PortBean DatabaseManager::getPortBean(const std::string& port_id) const {
 			result = sqlite3_step(statement);
 
 			if (result == SQLITE_ROW) {
-				bean.port_id = std::string((char*)sqlite3_column_text(statement, 0));
+				bean.spawn_id = std::string((char*)sqlite3_column_text(statement, 0));
 				bean.map_id = std::string((char*)sqlite3_column_text(statement, 1));
 				bean.map_pos.x = static_cast<float>(sqlite3_column_int(statement, 2));
 				bean.map_pos.y = static_cast<float>(sqlite3_column_int(statement, 3));

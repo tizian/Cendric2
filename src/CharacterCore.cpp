@@ -1,7 +1,7 @@
 #include "CharacterCore.h"
 #include "Item.h"
 #include "FileIO/MerchantLoader.h"
-#include "Beans/PortBean.h"
+#include "Beans/SpawnBean.h"
 #include "DatabaseManager.h"
 #include "GlobalResource.h"
 
@@ -69,14 +69,16 @@ void CharacterCore::loadNew() {
 	m_isNew = true;
 	m_data.isInLevel = false;
 
-	PortBean port = g_databaseManager->getPortBean("start");
-	m_data.currentMap = port.map_id;
-	m_data.currentMapPosition = port.map_pos;
+	SpawnBean spawn = g_databaseManager->getSpawnBean("start");
+	m_data.currentMap = spawn.map_id;
+	m_data.currentMapPosition = spawn.map_pos;
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.critical = 5;
-	m_data.equippedItems.at(ItemType::Equipment_body) = port.armor_id;
-	m_data.equippedItems.at(ItemType::Equipment_weapon) = port.weapon_id;
+	addItem(spawn.armor_id, 1);
+	addItem(spawn.weapon_id, 1);
+	equipItem(spawn.armor_id, ItemType::Equipment_body);
+	equipItem(spawn.weapon_id, ItemType::Equipment_weapon);
 	setQuestState("who_am_i", QuestState::Started);
 	m_stopwatch.restart();
 	g_resourceManager->deleteItemResources();
@@ -710,10 +712,10 @@ void CharacterCore::setAutosave(bool value) {
 }
 
 void CharacterCore::setCharacterJailed() {
-	PortBean port = g_databaseManager->getPortBean("prison");
+	SpawnBean spawn = g_databaseManager->getSpawnBean("prison");
 	m_data.isInLevel = false;
-	m_data.currentMap = port.map_id;
-	m_data.currentMapPosition = port.map_pos;
+	m_data.currentMap = spawn.map_id;
+	m_data.currentMapPosition = spawn.map_pos;
 
 	// store the gold
 	m_data.storedGold += m_data.gold;
@@ -737,12 +739,14 @@ void CharacterCore::setCharacterJailed() {
 	}
 
 	// if the items already exists, they will not be given anew.
-	removeStoredItem(port.weapon_id, 1);
-	removeStoredItem(port.armor_id, 1);
+	removeStoredItem(spawn.weapon_id, 1);
+	removeStoredItem(spawn.armor_id, 1);
 
 	// equip the new armor.
-	m_data.equippedItems.at(ItemType::Equipment_body) = port.armor_id;
-	m_data.equippedItems.at(ItemType::Equipment_weapon) = port.weapon_id;
+	addItem(spawn.armor_id, 1);
+	addItem(spawn.weapon_id, 1);
+	equipItem(spawn.armor_id, ItemType::Equipment_body);
+	equipItem(spawn.weapon_id, ItemType::Equipment_weapon);
 }
 
 std::map<std::string, int> CharacterCore::retrieveStoredItems() {

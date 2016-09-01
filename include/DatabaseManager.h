@@ -19,7 +19,7 @@ struct ItemDocumentPageBean;
 struct LevelitemBean;
 struct LevelitemFrameBean;
 struct LevelitemLightBean;
-struct PortBean;
+struct SpawnBean;
 
 typedef std::vector<std::vector<std::string>> ResultSet;
 
@@ -47,7 +47,7 @@ public:
 	LevelitemFrameBean getLevelitemFrameBean(const std::string& item_id, int frame_nr) const;
 	std::vector<LevelitemFrameBean> getLevelitemFrameBeans(const std::string& item_id) const;
 	LevelitemLightBean getLevelitemLightBean(const std::string& item_id) const;
-	PortBean getPortBean(const std::string& port_id) const;
+	SpawnBean getSpawnBean(const std::string& spawn_id) const;
 
 	bool itemExists(const std::string& item_id) const;
 
