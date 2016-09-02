@@ -147,7 +147,7 @@ bool LevelScreen::notifyObservers() {
 			}
 			else {
 				m_isGameOver = true;
-				m_respawnWaitTime = sf::seconds(6.0f);
+				m_respawnWaitTime = sf::seconds(5.0f);
 				addObject(ScreenOverlay::createArrestedScreenOverlay());
 				m_interface->hideAll();
 				m_characterCore->setCharacterJailed();
