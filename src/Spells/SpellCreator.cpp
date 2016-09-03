@@ -198,12 +198,14 @@ void SpellCreator::updateDamageAndHeal(SpellData& bean, const AttributeData* att
 
 	// add critical hit to damage
 	int chance = rand() % 100 + 1;
-	if (chance <= attributes->criticalHitChance) {
+	if (bean.damage > 0 && chance <= attributes->criticalHitChance) {
+		bean.critical = true;
 		bean.damage *= 2;
 	}
 	// add critical hit to heal
 	chance = rand() % 100 + 1;
-	if (chance <= attributes->criticalHitChance) {
+	if (bean.heal > 0 && chance <= attributes->criticalHitChance) {
+		bean.critical = true;
 		bean.heal *= 2;
 	}
 }

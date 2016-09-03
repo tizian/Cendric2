@@ -83,10 +83,10 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 			sf::Vector2f numberPos = sf::Vector2f(pos.x + 0.5f * size.x, pos.y);
 
 			if (m_attributes.healthRegenerationPerS > 0 && m_damageNumbers) {
-				m_damageNumbers->emitNumber(m_attributes.healthRegenerationPerS, numberPos, DamageNumberType::HealOverTime);
+				m_damageNumbers->emitNumber(m_attributes.healthRegenerationPerS, numberPos, DamageNumberType::HealOverTime, false);
 			}
 			else if (m_attributes.healthRegenerationPerS < 0) {
-				m_damageNumbers->emitNumber(std::abs(m_attributes.healthRegenerationPerS), numberPos, DamageNumberType::DamageOverTime);
+				m_damageNumbers->emitNumber(std::abs(m_attributes.healthRegenerationPerS), numberPos, DamageNumberType::DamageOverTime, false);
 			}
 		}
 
@@ -101,7 +101,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 		int prevSecond = static_cast<int>(std::floor(m_dots[i].duration.asSeconds()));
 		m_dots[i].duration -= frameTime;
 		int thisSecond = std::max(-1, static_cast<int>(std::floor(m_dots[i].duration.asSeconds())));
-		addDamage(m_dots[i].damage * (prevSecond - thisSecond), m_dots[i].damageType, true);
+		addDamage(m_dots[i].damage * (prevSecond - thisSecond), m_dots[i].damageType, true, false);
 		if (m_dots[i].duration <= sf::Time::Zero) {
 			m_dots.erase(m_dots.begin() + i);
 		}
@@ -120,7 +120,7 @@ void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTim
 	m_movingBehavior->calculateUnboundedVelocity(frameTime, nextVel);
 }
 
-void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool overTime) {
+void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool overTime, bool critical) {
 	int damage = 0;
 	switch (damageType) {
 	case DamageType::Physical:
@@ -148,10 +148,10 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool 
 		const sf::Vector2f& pos = getPosition();
 		const sf::Vector2f& size = getSize();
 		if (m_isInvincible) {
-			m_damageNumbers->emitNumber(0, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
+			m_damageNumbers->emitNumber(0, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage, false);
 			return;
 		}
-		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage);
+		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage, critical);
 	}
 
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
@@ -169,13 +169,13 @@ void LevelMovableGameObject::addDamageOverTime(DamageOverTimeData& data) {
 	m_dots.push_back(data);
 }
 
-void LevelMovableGameObject::addHeal(int heal, bool overTime) {
+void LevelMovableGameObject::addHeal(int heal, bool overTime, bool critical) {
 	if (m_isDead || heal <= 0) return;
 
 	if (m_damageNumbers) {
 		const sf::Vector2f& pos = getPosition();
 		const sf::Vector2f& size = getSize();
-		m_damageNumbers->emitNumber(heal, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::HealOverTime : DamageNumberType::Heal);
+		m_damageNumbers->emitNumber(heal, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::HealOverTime : DamageNumberType::Heal, critical);
 	}
 
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints + heal));
@@ -199,7 +199,7 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 
 	spell->execOnHit(this);
 	if (spell->getDamageType() == DamageType::VOID) return;
-	addDamage(spell->getDamage(), spell->getDamageType(), false);
+	addDamage(spell->getDamage(), spell->getDamageType(), false, spell->isCritical());
 	if (spell->getDamagePerSecond() > 0.f && spell->getDuration() > sf::Time::Zero) {
 		DamageOverTimeData data;
 		data.damage = spell->getDamagePerSecond();

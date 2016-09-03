@@ -279,6 +279,10 @@ bool Spell::isAttachedToMob() const {
 	return m_data.attachedToMob;
 }
 
+bool Spell::isCritical() const {
+	return m_data.critical;
+}
+
 int Spell::getDamage() const {
 	return m_data.damage;
 }

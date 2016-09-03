@@ -17,5 +17,5 @@ void BuffSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 	
-	m_owner->addHeal(newSpell->getHeal(), false);
+	m_owner->addHeal(newSpell->getHeal(), false, newSpell->isCritical());
 }

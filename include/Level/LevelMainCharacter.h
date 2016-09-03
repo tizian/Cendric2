@@ -32,7 +32,7 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);
-	void addDamage(int damage, DamageType damageType, bool overTime) override;
+	void addDamage(int damage, DamageType damageType, bool overTime, bool critical) override;
 	void addDamageOverTime(DamageOverTimeData& data) override;
 	void setFeared(const sf::Time& fearedTime) override;
 	void setStunned(const sf::Time& stunnedTime) override;
