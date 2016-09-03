@@ -140,27 +140,105 @@ void ObserverEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 40.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
+	// Idle animation
+
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, 0, 50, 40));
+	for (int i = 0; i < 16; ++i) {
+		idleAnimation->addFrame(sf::IntRect(0*50, 0, 50, 40));
+	}
+	idleAnimation->addFrame(sf::IntRect(1*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(2*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(3*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(2*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(1*50, 0, 50, 40));
+	for (int i = 0; i < 4; ++i) {
+		idleAnimation->addFrame(sf::IntRect(0*50, 0, 50, 40));
+	}
+	idleAnimation->addFrame(sf::IntRect(4*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(5*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(6*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(5*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(4*50, 0, 50, 40));
+	for (int i = 0; i < 12; ++i) {
+		idleAnimation->addFrame(sf::IntRect(0*50, 0, 50, 40));
+	}
+	idleAnimation->addFrame(sf::IntRect(7*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(8*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(9*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(9*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(8*50, 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect(7*50, 0, 50, 40));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
+	// Observing animation
+
 	Animation* observingAnimation = new Animation();
 	observingAnimation->setSpriteSheet(tex);
-	observingAnimation->addFrame(sf::IntRect(50, 0, 50, 40));
+	for (int i = 0; i < 16; ++i) {
+		observingAnimation->addFrame(sf::IntRect(10*50 + 0*50, 0, 50, 40));
+	}
+	observingAnimation->addFrame(sf::IntRect(10*50 + 1*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 2*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 3*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 2*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 1*50, 0, 50, 40));
+	for (int i = 0; i < 4; ++i) {
+		observingAnimation->addFrame(sf::IntRect(10*50 + 0*50, 0, 50, 40));
+	}
+	observingAnimation->addFrame(sf::IntRect(10*50 + 4*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 5*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 6*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 5*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 4*50, 0, 50, 40));
+	for (int i = 0; i < 12; ++i) {
+		observingAnimation->addFrame(sf::IntRect(10*50 + 0*50, 0, 50, 40));
+	}
+	observingAnimation->addFrame(sf::IntRect(10*50 + 7*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 8*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 9*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 9*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 8*50, 0, 50, 40));
+	observingAnimation->addFrame(sf::IntRect(10*50 + 7*50, 0, 50, 40));
 
 	addAnimation(GameObjectState::Observing, observingAnimation);
 
+	// Triggered animation
+
 	Animation* triggeredAnimation = new Animation();
 	triggeredAnimation->setSpriteSheet(tex);
-	triggeredAnimation->addFrame(sf::IntRect(100, 0, 50, 40));
+	for (int i = 0; i < 16; ++i) {
+		triggeredAnimation->addFrame(sf::IntRect(20*50 + 0*50, 0, 50, 40));
+	}
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 1*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 2*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 3*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 2*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 1*50, 0, 50, 40));
+	for (int i = 0; i < 4; ++i) {
+		triggeredAnimation->addFrame(sf::IntRect(20*50 + 0*50, 0, 50, 40));
+	}
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 4*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 5*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 6*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 5*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 4*50, 0, 50, 40));
+	for (int i = 0; i < 12; ++i) {
+		triggeredAnimation->addFrame(sf::IntRect(20*50 + 0*50, 0, 50, 40));
+	}
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 7*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 8*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 9*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 9*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 8*50, 0, 50, 40));
+	triggeredAnimation->addFrame(sf::IntRect(20*50 + 7*50, 0, 50, 40));
 
 	addAnimation(GameObjectState::Triggered, triggeredAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);
-	playCurrentAnimation(false);
+	playCurrentAnimation(true);
 
 	loadParticleSystem();
 
