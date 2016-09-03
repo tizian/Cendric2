@@ -26,6 +26,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("isConditionFulfilled", &WorldCallback::isConditionFulfilled)
 		.addFunction("isQuestConditionFulfilled", &WorldCallback::isQuestConditionFulfilled)
 		.addFunction("hasItem", &WorldCallback::hasItem)
+		.addFunction("getItemAmount", &WorldCallback::getItemAmount)
 		.addFunction("getReputation", &WorldCallback::getReputation)
 		// commands
 		.addFunction("changeQuestState", &WorldCallback::changeQuestState)
@@ -95,13 +96,17 @@ int WorldCallback::getReputation(const std::string& fractionID) const {
 	return m_core->getReputation(frac);
 }
 
-bool WorldCallback::hasItem(const std::string& item, int amount) const {
-	if (item.empty() || amount < 1) {
+bool WorldCallback::hasItem(const std::string& itemID, int amount) const {
+	if (itemID.empty() || amount < 1) {
 		g_logger->logError("WorldCallback", "Item key cannot be empty and amount has to be > 0");
 		return false;
 	}
 
-	return m_core->hasItem(item, amount);
+	return m_core->hasItem(itemID, amount);
+}
+
+int WorldCallback::getItemAmount(const std::string& itemID) const {
+	return m_core->getItemAmount(itemID);
 }
 
 void WorldCallback::changeQuestState(const std::string& questID, const std::string& state) const {

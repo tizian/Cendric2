@@ -22,6 +22,7 @@ public:
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const { return m_worldCallback->isConditionFulfilled(conditionType, condition); }
 	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const { return m_worldCallback->isQuestConditionFulfilled(quest, condition); }
 	bool hasItem(const std::string& item, int amount) const { return m_worldCallback->hasItem(item, amount); }
+	int getItemAmount(const std::string& item) const { return m_worldCallback->getItemAmount(item); }
 	int getReputation(const std::string& fractionID) const { return m_worldCallback->getReputation(fractionID); }
 
 	// methods to create a node
@@ -49,6 +50,7 @@ public:
 
 	// special node properties
 	void addChoice(int nextTag, const std::string& text);
+	void addItemChoice(int nextTag, const std::string& text, const std::string& itemID, int amount);
 	void gotoNode(int node);
 
 	// finally, adding the node to the dialogue

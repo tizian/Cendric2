@@ -24,7 +24,8 @@ public:
 
 	// other queries
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
-	bool hasItem(const std::string& item, int amount) const; // this can also query gold. with item id "gold"
+	bool hasItem(const std::string& itemID, int amount) const; // this can also query gold. with item id "gold"
+	int getItemAmount(const std::string& itemID) const; // this can also query gold. with item id "gold"
 	int getReputation(const std::string& fractionID) const;
 
 	// commands to be executed by triggers

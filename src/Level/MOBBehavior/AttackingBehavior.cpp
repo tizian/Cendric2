@@ -39,4 +39,3 @@ bool AttackingBehavior::isInAggroRange(const LevelMainCharacter* mainChar, const
 
 	return dist(enemy->getCenter(), mainChar->getCenter()) < (aggroRange * invisibilityScaler);
 }
-

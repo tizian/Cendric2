@@ -42,9 +42,9 @@ void Toolbar::notifyNewDialogue() {
 	}
 	else {
 		m_nodeWindow->setNode(G_DIA->getStartNode());
+		strcpy(m_dialogueName, G_DIA->getDialogueName().c_str());
+		strcpy(m_dialogueID, G_DIA->getNpcID().c_str());
 	}
-	strcpy(m_dialogueName, G_DIA->getDialogueName().c_str());
-	strcpy(m_dialogueID, G_DIA->getNpcID().c_str());
 }
 
 void Toolbar::update() {

@@ -32,14 +32,36 @@ std::string ChoiceNode::exportToLua(int indent) const {
 	for (auto child : m_children) {
 
 		if (child->condition == nullptr) {
-			ss << tabs(indent) << "DL:addChoice(" + std::to_string(child->getNextTag()) + ", \"" + child->translation->tag + "\")";
-			ss << " -- "<< child->translation->englishTranslation << "\n";
+			if (child->translation->itemAmount > 0) {
+				ss << tabs(indent) << "DL:addItemChoice(" + std::to_string(child->getNextTag()) +
+					", \"" + child->translation->tag +
+					"\", \"" + child->translation->itemID +
+					"\", " + std::to_string(child->translation->itemAmount) +
+					")";
+				ss << " -- " << child->translation->englishTranslation << "\n";
+			}
+			else {
+				ss << tabs(indent) << "DL:addChoice(" + std::to_string(child->getNextTag()) + ", \"" + child->translation->tag + "\")";
+				ss << " -- " << child->translation->englishTranslation << "\n";
+			}
 		}
 		else {
-			ss << tabs(indent) << "if (" << child->condition->exportToLua() << ") then \n";
-			ss << tabs(indent + 1) << "DL:addChoice(" + std::to_string(child->getNextTag()) + ", \"" + child->translation->tag + "\")";
-			ss << " -- " << child->translation->englishTranslation << "\n";
-			ss << tabs(indent) << "end\n";
+			if (child->translation->itemAmount > 0) {
+				ss << tabs(indent) << "if (" << child->condition->exportToLua() << ") then \n";
+				ss << tabs(indent) << "DL:addItemChoice(" + std::to_string(child->getNextTag()) +
+					", \"" + child->translation->tag +
+					"\", \"" + child->translation->itemID +
+					"\", " + std::to_string(child->translation->itemAmount) +
+					")";
+				ss << " -- " << child->translation->englishTranslation << "\n";
+				ss << tabs(indent) << "end\n";
+			}
+			else {
+				ss << tabs(indent) << "if (" << child->condition->exportToLua() << ") then \n";
+				ss << tabs(indent + 1) << "DL:addChoice(" + std::to_string(child->getNextTag()) + ", \"" + child->translation->tag + "\")";
+				ss << " -- " << child->translation->englishTranslation << "\n";
+				ss << tabs(indent) << "end\n";
+			}
 		}
 	}
 

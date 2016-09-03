@@ -1,3 +1,7 @@
+-- Gold
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gold', 'item', 'Gold','Gold','Gold');
+
 -- Gold - Three Coins
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('go_threecoins', 'item', 'A few coins','Ein paar Münzen','Es paar Münze');

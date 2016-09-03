@@ -15,5 +15,8 @@ void TranslationWindow::update() {
 	ImGui::InputText("English", m_translation->englishTranslation, IM_ARRAYSIZE(m_translation->englishTranslation));
 	ImGui::InputText("German", m_translation->germanTranslation, IM_ARRAYSIZE(m_translation->germanTranslation));
 	ImGui::InputText("Swiss German", m_translation->swissgermanTranslation, IM_ARRAYSIZE(m_translation->swissgermanTranslation));
+	ImGui::Spacing();
+	ImGui::InputText("Item ID", m_translation->itemID, IM_ARRAYSIZE(m_translation->itemID));
+	ImGui::InputInt("Item Amount", &m_translation->itemAmount);
 	ImGui::End();
 }

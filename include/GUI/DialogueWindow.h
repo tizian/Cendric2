@@ -16,7 +16,7 @@ class ScrollHelper;
 
 class DialogueOption : public GameObject {
 public:
-	DialogueOption(const std::string& text, const std::string& dialogueID, bool isEnd = false);
+	DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, bool isEnd = false);
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
@@ -44,7 +44,7 @@ public:
 
 	void setNPCTalking(const std::string& text);
 	void setCendricTalking(const std::string& text);
-	void setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices);
+	void setDialogueChoice(const std::vector<std::pair<ChoiceTranslation, int>>& choices);
 	void setNPCTrading(const std::string& text);
 	void setPosition(const sf::Vector2f& pos) override;
 
