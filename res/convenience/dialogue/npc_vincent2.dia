@@ -173,70 +173,82 @@ npc.id:npc_vincent2
 		tag:5
 		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and DL:hasItem("gold", 50)
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyCheap
-		translation.en:Give me that key, I'll do it. (50 Gold)
-		translation.de:Gib mir diesen Schlüssel, ich machs. (50 Gold)
-		translation.ch:Gib mer de Schlüssel, ich machs. (50 Gold)
+		translation.tag:DL_Choice_GimmeKey
+		translation.en:Give me that key, I'll do it.
+		translation.de:Gib mir diesen Schlüssel, ich machs.
+		translation.ch:Gib mer de Schlüssel, ich machs.
+		translation.item.id:gold
+		translation.item.amount:50
 	]
 	[
 		# Link node, tag is next tag
 		tag:15
 		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50")
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyCheap
+		translation.tag:DL_Choice_GimmeKey
 		translation.en:
 		translation.de:
 		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:50
 	]
 	[
 		# Link node, tag is next tag
 		tag:16
 		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and DL:hasItem("gold", 100)
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyCostly
-		translation.en:Give me that key, I'll do it. (100 Gold)
-		translation.de:Gib mir diesen Schlüssel, ich machs. (100 Gold)
-		translation.ch:Gib mer de Schlüssel, ich machs. (100 Gold)
+		translation.tag:DL_Choice_GimmeKey
+		translation.en:
+		translation.de:
+		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:100
 	]
 	[
 		# Link node, tag is next tag
 		tag:17
 		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100")
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyCostly
+		translation.tag:DL_Choice_GimmeKey
 		translation.en:
 		translation.de:
 		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:100
 	]
 	[
 		# Link node, tag is next tag
 		tag:18
 		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and DL:hasItem("gold", 150)
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyVCostly
-		translation.en:Give me that key, I'll do it. (150 Gold)
-		translation.de:Gib mir diesen Schlüssel, ich machs. (150 Gold)
-		translation.ch:Gib mer de Schlüssel, ich machs. (150 Gold)
+		translation.tag:DL_Choice_GimmeKey
+		translation.en:
+		translation.de:
+		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:150
 	]
 	[
 		# Link node, tag is next tag
 		tag:19
 		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150")
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyVCostly
+		translation.tag:DL_Choice_GimmeKey
 		translation.en:
 		translation.de:
 		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:150
 	]
 	[
 		# Link node, tag is next tag
 		tag:31
 		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and not (DL:isConditionFulfilled("npc_vincent2", "key_150") or DL:isConditionFulfilled("npc_vincent2", "key_100") or DL:isConditionFulfilled("npc_vincent2", "key_50")) 
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyFree
-		translation.en:Give me that key, I'll do it.
-		translation.de:Gib mir diesen Schlüssel, ich machs.
-		translation.ch:Gib mer de Schlüssel, ich machs.
+		translation.tag:DL_Choice_GimmeKey
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 	[
 		# Link node, tag is next tag

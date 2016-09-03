@@ -14,20 +14,19 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount) {
 
 	if (itemID.compare("gold") == 0) {
 		m_type = ItemType::Gold;
-		m_tooltipWindow.setText(g_textProvider->getText("Gold"));
 
 		m_iconTextureRect = sf::IntRect(0, 0, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 
 	} else {
-
 		Item* item = g_resourceManager->getItem(itemID);
 		if (item == nullptr)
 			return;
 		m_type = item->getType();
-		m_tooltipWindow.setText(g_textProvider->getText(itemID, "item"));
 
 		m_iconTextureRect = sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 	}
+
+	m_tooltipWindow.setText(g_textProvider->getText(itemID, "item"));
 
 	m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_ITEMS);
 

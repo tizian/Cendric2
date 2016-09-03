@@ -118,9 +118,13 @@ public:
 	bool isEnemyLooted(const std::string& levelID, int objectID) const;
 	// was a trigger already triggered?
 	bool isTriggerTriggered(const std::string& world, int triggerID);
-	// returns whether cendric has at least the given amount of items of this key in his inventory and/or equipped.
+	// returns the amount of items of this key in his inventory and/or equipped. Also works for gold with itemID "gold".
+	int getItemAmount(const std::string& itemID) const;
+	// returns the amount of items of this key in the stored items. Also works for gold with itemID "gold".
+	int getStoredItemAmount(const std::string& itemID) const;
+	// returns whether cendric has at least the given amount of items of this key in his inventory and/or equipped. Also works for gold with itemID "gold".
 	bool hasItem(const std::string& itemID, int amount) const;
-	// returns whether cendric has at least the given amount of items of this key in the stored items
+	// returns whether cendric has at least the given amount of items of this key in the stored items. Also works for gold with itemID "gold".
 	bool hasStoredItem(const std::string& itemID, int amount) const;
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.
 	MerchantData getMerchantData(const std::string& merchantID);

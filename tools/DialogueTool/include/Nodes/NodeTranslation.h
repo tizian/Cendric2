@@ -10,4 +10,6 @@ struct NodeTranslation {
 	char englishTranslation[MAX_DIALOGUE_SIZE];
 	char germanTranslation[MAX_DIALOGUE_SIZE];
 	char swissgermanTranslation[MAX_DIALOGUE_SIZE];
+	char itemID[50];
+	int itemAmount = -1;
 };

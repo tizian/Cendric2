@@ -7,4 +7,5 @@ NodeTranslation::NodeTranslation(int nodeTag, const std::string& tag_) {
 	strcpy(englishTranslation, "");
 	strcpy(germanTranslation, "");
 	strcpy(swissgermanTranslation, "");
+	strcpy(itemID, "");
 }

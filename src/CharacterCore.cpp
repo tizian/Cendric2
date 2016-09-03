@@ -370,27 +370,11 @@ bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID)
 	return true;
 }
 
-bool CharacterCore::hasStoredItem(const std::string& itemID, int amount) const {
-	if (itemID.empty()) return false;
+int CharacterCore::getItemAmount(const std::string& itemID) const {
+	if (itemID.empty()) return 0;
 
 	if (itemID.compare("gold") == 0) {
-		// check for gold
-		return m_data.storedGold >= amount;
-	}
-
-	int foundAmount = 0;
-	if (m_data.storedItems.find(itemID) != m_data.storedItems.end())
-		foundAmount += m_data.storedItems.at(itemID);
-
-	return foundAmount >= amount;
-}
-
-bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
-	if (itemID.empty()) return false;
-
-	if (itemID.compare("gold") == 0) {
-		// check for gold
-		return m_data.gold >= amount;
+		return m_data.gold;
 	}
 
 	int foundAmount = 0;
@@ -403,7 +387,33 @@ bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
 	if (m_data.items.find(itemID) != m_data.items.end())
 		foundAmount += m_data.items.at(itemID);
 
-	return foundAmount >= amount;
+	return foundAmount;
+}
+
+int CharacterCore::getStoredItemAmount(const std::string& itemID) const {
+	if (itemID.empty()) return 0;
+
+	if (itemID.compare("gold") == 0) {
+		return m_data.storedGold;
+	}
+
+	int foundAmount = 0;
+	if (m_data.storedItems.find(itemID) != m_data.storedItems.end())
+		foundAmount += m_data.storedItems.at(itemID);
+
+	return foundAmount;
+}
+
+bool CharacterCore::hasStoredItem(const std::string& itemID, int amount) const {
+	if (amount <= 0) return false;
+
+	return getStoredItemAmount(itemID) >= amount;
+}
+
+bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
+	if (amount <= 0) return false;
+
+	return getItemAmount(itemID) >= amount;
 }
 
 const CharacterCoreData& CharacterCore::getData() const {

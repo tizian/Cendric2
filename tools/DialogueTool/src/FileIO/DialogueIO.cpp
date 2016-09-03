@@ -25,6 +25,8 @@ const std::string DialogueIO::TRANSLATION_TAG = "translation.tag";
 const std::string DialogueIO::TRANSLATION_EN = "translation.en";
 const std::string DialogueIO::TRANSLATION_DE = "translation.de";
 const std::string DialogueIO::TRANSLATION_CH = "translation.ch";
+const std::string DialogueIO::TRANSLATION_ITEM_ID = "translation.item.id";
+const std::string DialogueIO::TRANSLATION_ITEM_AMOUNT = "translation.item.amount";
 const std::string DialogueIO::CONDITION = "condition";
 
 static inline void ltrim(std::string& s) {
@@ -367,6 +369,19 @@ bool DialogueIO::addLinkTranslation(LinkNode* node, const std::string& line) {
 	else if (line.compare(0, TRANSLATION_CH.size(), TRANSLATION_CH) == 0 && translation.size() < MAX_DIALOGUE_SIZE) {
 		strcpy(node->translation->swissgermanTranslation, translation.c_str());
 	}
+	else if (line.compare(0, TRANSLATION_ITEM_ID.size(), TRANSLATION_ITEM_ID) == 0 && translation.size() < 50) {
+		strcpy(node->translation->itemID, translation.c_str());
+	}
+	else if (line.compare(0, TRANSLATION_ITEM_AMOUNT.size(), TRANSLATION_ITEM_AMOUNT) == 0) {
+		int amount = atoi(translation.c_str());
+		if (amount > 0) {
+			node->translation->itemAmount = amount;
+		}
+		else {
+			ERROR("[DialogueIO]: translation item amount is <= 0");
+			return false;
+		}
+	}
 	else {
 		ERROR("[DialogueIO]: translation could not be read, wrong tag or too long to fit.");
 		return false;
@@ -475,5 +490,3 @@ void DialogueIO::writeNode(DialogueNode* node, std::string& stack, int indentati
 		writeNode(child->nextNode, stack, indentation);
 	}
 }
-
-

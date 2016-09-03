@@ -691,7 +691,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					result = item->QueryIntAttribute("value", &amount);
 					XMLCheckResult(result);
 
-					if (itemText.compare("gold") == 0 || itemText.compare("Gold") == 0) {
+					if (itemText.compare("gold") == 0) {
 						items.second += amount;
 					}
 					else {

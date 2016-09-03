@@ -13,6 +13,13 @@ enum class DialogueNodeType {
 	Trade
 };
 
+struct ChoiceTranslation {
+	// the translation of this choice
+	std::string text;
+	// if this is filled, the translation will be added to the translation of the choice.
+	std::pair<std::string, int> item;
+};
+
 struct DialogueNode {
 	// the dialogue tag
 	int tag;
@@ -24,10 +31,10 @@ struct DialogueNode {
 	int reloadTag = -1;
 	// dialogue node type
 	DialogueNodeType type;
-	// it is an empty string if this is a choice
+	// the translation of this node
 	std::string text;
 	// this is an empty vector if it is not a choice
-	std::vector<std::pair<std::string, int>> choices;
+	std::vector<std::pair<ChoiceTranslation, int>> choices;
 	// this is empty if it is not a trade
 	std::string merchantID;
 	// the content of this node, may be 0-n elements

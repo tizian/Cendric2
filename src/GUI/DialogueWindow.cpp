@@ -119,7 +119,7 @@ void DialogueWindow::setNPCTrading(const std::string& text) {
 	setPosition(sf::Vector2f(LEFT, TOP + HEIGHT + 50.f));
 }
 
-void DialogueWindow::setDialogueChoice(const std::vector<std::pair<std::string, int>>& choices) {
+void DialogueWindow::setDialogueChoice(const std::vector<std::pair<ChoiceTranslation, int>>& choices) {
 	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 	m_dialogueText->setString("");
@@ -345,8 +345,11 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 
 // Dialogue Option
 
-DialogueOption::DialogueOption(const std::string& text, const std::string& dialogueID, bool isEnd) {
-	std::string textString = g_textProvider->getText(text, dialogueID);
+DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, bool isEnd) {
+	std::string textString = g_textProvider->getText(trans.text, dialogueID);
+	if (!trans.item.first.empty()) {
+		textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item") + ")");
+	}
 	if (isEnd) {
 		textString.append(textString.empty() ? g_textProvider->getText("DialogueEnd") : " " + g_textProvider->getText("DialogueEnd"));
 	}

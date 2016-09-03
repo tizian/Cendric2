@@ -91,6 +91,11 @@ std::string LinkNode::exportToDia(int indentationLevel) const {
 		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_EN + ":" + replaceNewlines(translation->englishTranslation) + "\n");
 		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_DE + ":" + replaceNewlines(translation->germanTranslation) + "\n");
 		diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CH + ":" + replaceNewlines(translation->swissgermanTranslation) + "\n");
+
+		if (translation->itemAmount > 0) {
+			diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_ITEM_ID + ":" + translation->itemID + "\n");
+			diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_ITEM_AMOUNT + ":" + std::to_string(translation->itemAmount) + "\n");
+		}
 	}
 	return diaExport;
 }

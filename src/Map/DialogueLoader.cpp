@@ -24,12 +24,14 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isConditionFulfilled", &DialogueLoader::isConditionFulfilled)
 		.addFunction("isQuestConditionFulfilled", &DialogueLoader::isQuestConditionFulfilled)
 		.addFunction("hasItem", &DialogueLoader::hasItem)
+		.addFunction("getItemAmount", &DialogueLoader::getItemAmount)
 		.addFunction("getReputation", &DialogueLoader::getReputation)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)
 		.addFunction("createTradeNode", &DialogueLoader::createTradeNode)
 		.addFunction("addChoice", &DialogueLoader::addChoice)
+		.addFunction("addItemChoice", &DialogueLoader::addItemChoice)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
 		.addFunction("addQuestDescription", &DialogueLoader::addQuestDescription)
@@ -76,7 +78,25 @@ void DialogueLoader::addChoice(int nextTag, const std::string& text) {
 		g_logger->logError("DialogueLoader", "Cannot add choice: No choice node created.");
 		return;
 	}
-	m_currentNode->choices.push_back(std::pair<std::string, int>(text, nextTag));
+	ChoiceTranslation trans;
+	trans.text = text;
+	m_currentNode->choices.push_back(std::pair<ChoiceTranslation, int>(trans, nextTag));
+}
+
+void DialogueLoader::addItemChoice(int nextTag, const std::string& text, const std::string& itemID, int amount) {
+	if (m_currentNode == nullptr || m_currentNode->type != DialogueNodeType::Choice) {
+		g_logger->logError("DialogueLoader", "Cannot add choice: No choice node created.");
+		return;
+	}
+	if (itemID.empty() || amount <= 0) {
+		g_logger->logError("DialogueLoader", "Cannot add item choice: Item ID empty or amount <= 0.");
+		return;
+	}
+	ChoiceTranslation trans;
+	trans.text = text;
+	trans.item.first = itemID;
+	trans.item.second = amount;
+	m_currentNode->choices.push_back(std::pair<ChoiceTranslation, int>(trans, nextTag));
 }
 
 void DialogueLoader::changeQuestState(const std::string& questID, const std::string& state) {

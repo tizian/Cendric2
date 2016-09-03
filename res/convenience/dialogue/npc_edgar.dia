@@ -1,0 +1,265 @@
+# dia file for dialogue for npc: npc_edgar
+
+npc.id:npc_edgar
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_edgar", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_edgar", "talked")
+	# translation: 
+	translation.tag:DL_Edgar_WhatDoWeHave
+	translation.en:Well, well, look at that. Another filthy thief, caught by our observer spells. I hope you enjoy your stay. He he he.
+	translation.de:Was haben wir denn hier. Noch so ein dreckiger Dieb, der von unseren Beobachter-Zaubern hierher gebracht wurde. Ich hoffe, du geniesst deinen Aufenthalt hier. Hrhr.
+	translation.ch:Ja lueg mal, wa hemmer denn da. Nomol so en Dieb wo vo üsne Beobachter-Zauber daane verfrachtet worde isch. Ich hoffe, du gnüssisch din Ufenthalt da. Hrhr.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_edgar", "my_things")
+		# translation: 
+		translation.tag:DL_Choice_WhereAreMyThings
+		translation.en:Where are my belongings?
+		translation.de:Wo sind meine Sachen?
+		translation.ch:Wo sind mini Sache?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_edgar", "how_getout")
+		# translation: 
+		translation.tag:DL_Choice_HowGetout
+		translation.en:How can I get released?
+		translation.de:Wie kann ich wieder freigelassen werden?
+		translation.ch:Wie chani wider usegla werde?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:not DL:isConditionFulfilled("npc_edgar", "hungry")
+		# translation: 
+		translation.tag:DL_Choice_ImHungry
+		translation.en:I'm hungry, can I get something?
+		translation.de:Ich habe Hunger, krieg ich was?
+		translation.ch:Ich han Hunger, bechumi öppis?
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isConditionFulfilled("npc_edgar", "hungry") and not DL:isConditionFulfilled("npc_edgar", "hungry_again")
+		# translation: 
+		translation.tag:DL_Choice_ImStillHungry
+		translation.en:I'm still hungry.
+		translation.de:Ich habe immer noch Hunger.
+		translation.ch:Ich han immerna Hunger.
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:isConditionFulfilled("npc_edgar", "how_getout") and not DL:isConditionFulfilled("npc_edgar", "pickaxe")
+		# translation: 
+		translation.tag:DL_Choice_HowGold
+		translation.en:How can I earn the gold to redeem myself?
+		translation.de:Wie kann ich Gold verdienen, um mich freizukaufen?
+		translation.ch:We chani Gold verdiene zum mich freichaufe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:hasItem("mi_ironore", 1)
+		# translation: 
+		translation.tag:DL_Choice_IronOre
+		translation.en:I got some iron ore for you.
+		translation.de:Ich habe etwas Eisenerz für dich.
+		translation.ch:Ich han chli Isenerz für dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:DL:isConditionFulfilled("npc_edgar", "pickaxe") and and not DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") < 200)
+		# translation: 
+		translation.tag:DL_Choice_IHaveGold
+		translation.en:Please let me out.
+		translation.de:Lass mich bitte raus.
+		translation.ch:Lah mich bitte use.
+		translation.item.id:gold
+		translation.item.amount:200
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") >= 200)
+		# translation: 
+		translation.tag:DL_Choice_IHaveGold
+		translation.en:
+		translation.de:
+		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:200
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Edgar_YourThings
+	translation.en:Did you really think we'd leave a mage his weapon? The only thing you'll need here is a pickaxe anyway.
+	translation.de:Hast du wirklich gedacht, wir lassen einem Magier seine Waffe? Eine Spitzhacke ist sowieso das einzige, was du hier brauchen wirst.
+	translation.ch:Hesch würkli denkt, mer lönd emne Magier sini Waffe? Es einzig wod da bruchsch isch sowiso nur din Pickel.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_edgar", "my_things")
+	# translation: 
+	translation.tag:DL_Edgar_YourThings2
+	translation.en:But your old belongings are stored safely. You'll get them back on the day you're released.
+	translation.de:Aber deine alten Habseligkeiten sind bei uns sicher aufbewahrt. Du kriegst sie wieder, wenn du hier entlassen wirst.
+	translation.ch:Aber dini alte Sache sind bi üs guet ufghobe. Du bechunsch si wider a dem Tag womer dich da entlönd.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_edgar", "how_getout")
+	# translation: 
+	translation.tag:DL_Edgar_HowGetout
+	translation.en:You will have to work in the mines until you can redeem yourself. Gandria won't pay a single coin for you filthy criminals.
+	translation.de:Du wirst in den Minen arbeiten, bis du dich freikaufen kannst. Gandria wird keine einzige Münze für euch Abschaum bezahlen.
+	translation.ch:Du wirsch ide Mine schaffe möse bis dich freichaufe chasch. Gandria wird ke einzigi Münze für eu Schlufis zahle.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_edgar", "hungry")
+	trigger:DL:addItem("fo_bread", 2)
+	trigger:DL:addItem("fo_water", 1)
+	# translation: 
+	translation.tag:DL_Edgar_WaterAndBread
+	translation.en:Sure, here you go. You better get used to it, you won't get anything else for a long time.
+	translation.de:Sicher, hier hast du was. Gewöhn dich besser dran, du wirst für eine lange Zeit nichts anderes kriegen.
+	translation.ch:Sicher, nimm das. Gwöhn dich besser dra, bechunsch für e langi Ziit nüt anders.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_edgar", "hungry_again")
+	# translation: 
+	translation.tag:DL_Edgar_HungryAgain
+	translation.en:You already got your ration. Now get out of my sight!
+	translation.de:Du hast deine Ration bereits bekommen. Jetzt geh mir aus den Augen.
+	translation.ch:Du hesch dini Ration scho becho. Verpiss dich ez besser.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_edgar", "pickaxe")
+	trigger:DL:addItem("we_pickaxe", 1)
+	trigger:DL:equipItem("we_pickaxe")
+	# translation: 
+	translation.tag:DL_Edgar_Pickaxe
+	translation.en:Here, take this pickaxe and mine iron ore in the mines. You can then sell it to me until you have enough gold to be released.
+	translation.de:Hier, nimm diese Spitzhacke und bau Eisenerz in den Minen ab. Das kannst du mir verkaufen, bis du genügend Gold hast, um hier rauszukommen.
+	translation.ch:Da, nimm die Spitzhacke und bau Iseerz ide Mine ab. Da chaschmer denn verchaufe bis gnueg Gold hesch zum da usecho.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Edgar_Ironore
+	translation.en:Thank you. Here is your pay.
+	translation.de:Danke. Hier, dein Lohn.
+	translation.ch:Danke. Da, din Lohn.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Edgar_NotEnoughGold
+	translation.en:You don't have enough gold. Go and work a bit more.
+	translation.de:Du hast nicht genügend Gold. Geh und arbeite noch ein bisschen.
+	translation.ch:Du hesch nid gnueg Gold. Gang na bitz go schaffe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:removeGold(200)
+	# translation: 
+	translation.tag:DL_Edgar_YoureReleased
+	translation.en:Okay, that's enough. You're free to go. I hope I won't see you here again.
+	translation.de:Okay, das ist genug. Du kannst jetzt gehen. Ich hoffe bloss, dass ich dich hier nie mehr sehen muss.
+	translation.ch:Guet, da isch gnueg. Du chasch ez ga. Ich hoff eifach dasi dich da nie me gse mun.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
