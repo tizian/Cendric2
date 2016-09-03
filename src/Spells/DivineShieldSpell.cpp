@@ -28,7 +28,7 @@ void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 
 	Spell::load(bean, mob, target);
 	m_mob->addAttributes(m_data.duration, m_additionalResistance);
-	m_mob->addHeal(getHeal(), false);
+	m_mob->addHeal(getHeal(), false, isCritical());
 
 	LightData lightData(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.5f), sf::Vector2f(100.f, 150.f), 0.2f);
 	addComponent(new LightComponent(lightData, this));

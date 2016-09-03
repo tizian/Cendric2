@@ -25,9 +25,9 @@ public:
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 	virtual void onHit(Spell* spell);
 	// adds damage to the attribute health. this damage can't be negative
-	virtual void addDamage(int damage, DamageType damageType, bool overTime);
+	virtual void addDamage(int damage, DamageType damageType, bool overTime, bool critical);
 	// adds heal to the attribute health. the heal can't be negative
-	void addHeal(int heal, bool overTime);
+	void addHeal(int heal, bool overTime, bool critical);
 	// sets the dead bool and sets the attribute health to zero.
 	virtual void setDead();
 	// executes the fight animation of this mob (using the default fight animation) and returns the time of that animation

@@ -7,7 +7,7 @@ BuffSpell::BuffSpell(const AttributeData& buff) : Spell() {
 void BuffSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
 	m_mob->addAttributes(m_data.duration, m_buff);
-	m_mob->addHeal(getHeal(), false);
+	m_mob->addHeal(getHeal(), false, isCritical());
 }
 
 void BuffSpell::update(const sf::Time& frameTime) {
@@ -34,7 +34,7 @@ void BuffSpell::execOnHit(LevelMovableGameObject* target) {
 		Enemy* owner = dynamic_cast<Enemy*>(m_mob);
 		if (enemy->getEnemyID() == owner->getEnemyID()) {
 			enemy->addAttributes(m_data.duration, m_buff);
-			enemy->addHeal(getHeal(), false);
+			enemy->addHeal(getHeal(), false, isCritical());
 			setDisposed();
 		}
 	}

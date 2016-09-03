@@ -35,6 +35,7 @@ public:
 
 	// if true, the spell sprite will be rotated accordingly. default is true.
 	virtual bool getConfiguredRotateSprite() const;
+	bool isCritical() const;
 	int getDamage() const;
 	int getDamagePerSecond() const;
 	int getHeal() const;

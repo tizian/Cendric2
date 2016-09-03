@@ -26,13 +26,17 @@ public:
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& target);
 
-	void emitNumber(int value, const sf::Vector2f& position, DamageNumberType type);
+	void emitNumber(int value, const sf::Vector2f& position, DamageNumberType type, bool critical);
 
 private:
+	void emitString(std::string str, const sf::Vector2f& position, DamageNumberType type);
+
 	static const int MAX_NUMBERS;
-	static const float OFFSET;
+	static const float START_OFFSET;
 	static const float DISTANCE;
 	static const float TIME;
+
+	float offset;
 
 	std::vector<DamageNumberData> m_data;
 	int m_nextIndex;
