@@ -33,6 +33,7 @@ protected:
 	void updateParticleSystem(const sf::Time& frameTime) override;
 
 private:
+	void setAnimationTextureY(int y);
 	void setObserverChasing();
 	void setObserverIdle();
 	void setObserverTriggered();

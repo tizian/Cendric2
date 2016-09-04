@@ -52,6 +52,7 @@ void ObserverEnemy::setObserverChasing() {
 	m_enemyMovingBehavior->setMaxVelocityYUp(SPEED_CHASING);
 	m_enemyMovingBehavior->setMaxVelocityX(SPEED_CHASING);
 	m_wardenState = WardenState::Observing;
+	setAnimationTextureY(40);
 	m_enemyMovingBehavior->resetMovingTarget();
 	setChasing();
 }
@@ -61,6 +62,7 @@ void ObserverEnemy::setObserverTriggered() {
 	m_enemyMovingBehavior->setMaxVelocityYUp(SPEED_CHASING);
 	m_enemyMovingBehavior->setMaxVelocityX(SPEED_CHASING);
 	m_wardenState = WardenState::Triggered;
+	setAnimationTextureY(80);
 	m_enemyMovingBehavior->resetMovingTarget();
 	setWaiting();
 }
@@ -69,7 +71,9 @@ void ObserverEnemy::setObserverIdle() {
 	m_movingBehavior->setMaxVelocityYDown(SPEED_IDLE);
 	m_movingBehavior->setMaxVelocityYUp(SPEED_IDLE);
 	m_movingBehavior->setMaxVelocityX(SPEED_IDLE);
+	setAnimationTextureY(0);
 	m_wardenState = WardenState::Idle;
+	
 	m_scriptedBehavior->setCurrentRoutineStep();
 }
 
@@ -159,6 +163,27 @@ void ObserverEnemy::loadAnimation(int skinNr) {
 	LightComponent* lightComponent = new LightComponent(LightData(
 		sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), m_observedRange * 2, 1.0f), this);
 	addComponent(lightComponent);
+}
+
+void ObserverEnemy::setAnimationTextureY(int y) {
+	const Animation* idleAnimation = getAnimation(GameObjectState::Idle);
+	size_t animationSize = idleAnimation->getSize();
+	for (size_t frame = 0; frame < animationSize; ++frame) {
+		// oh no, a const cast? shame on me.
+		((sf::IntRect&)idleAnimation->getFrame(frame)).top = y;
+	}
+
+	const Animation* blinkingAnimation = getAnimation(GameObjectState::Blinking);
+	animationSize = blinkingAnimation->getSize();
+	for (size_t frame = 0; frame < animationSize; ++frame) {
+		((sf::IntRect&)blinkingAnimation->getFrame(frame)).top = y;
+	}
+
+	const Animation* lookingAnimation = getAnimation(GameObjectState::Looking);
+	animationSize = lookingAnimation->getSize();
+	for (size_t frame = 0; frame < animationSize; ++frame) {
+		((sf::IntRect&)lookingAnimation->getFrame(frame)).top = y;
+	}
 }
 
 void ObserverEnemy::updateParticleSystem(const sf::Time& frameTime) {
