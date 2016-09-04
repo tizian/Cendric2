@@ -36,6 +36,10 @@ const sf::Time& Animation::getFrameTime() const {
 	return m_frameTime;
 }
 
+const sf::Time Animation::getAnimationTime() const {
+	return sf::milliseconds(static_cast<int>(m_frames.size()) * m_frameTime.asMilliseconds());
+}
+
 const sf::IntRect& Animation::getFrame(size_t n) const {
 	return m_frames[n];
 }

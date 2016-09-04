@@ -81,7 +81,7 @@ void DamageNumbers::emitString(std::string str, const sf::Vector2f& position, Da
 	data.time = 0.f;
 	data.text->setString(str);
 
-	float characterSize;
+	int characterSize;
 	if (type == DamageNumberType::DamageOverTime || type == DamageNumberType::HealOverTime) {
 		characterSize = GUIConstants::CHARACTER_SIZE_M;
 	}

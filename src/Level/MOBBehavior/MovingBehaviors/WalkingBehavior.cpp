@@ -137,7 +137,7 @@ void WalkingBehavior::makeRandomDecision() {
 	m_movingDirectionX = rand() % 3 - 1;
 }
 
-void WalkingBehavior::updateAnimation() {
+void WalkingBehavior::updateAnimation(const sf::Time& frameTime) {
 	// calculate new game state and set animation.
 
 	GameObjectState newState = GameObjectState::Idle;

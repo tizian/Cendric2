@@ -12,7 +12,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void execHandleMovementInput() override;
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
-	void updateAnimation() override;
+	void updateAnimation(const sf::Time& frameTime) override;
 	void setFacingRight(bool value) override;
 
 private:

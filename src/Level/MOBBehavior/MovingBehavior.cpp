@@ -30,7 +30,7 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 
 	// update animation
 	updateTime(m_fightAnimationTime, frameTime);
-	updateAnimation();
+	updateAnimation(frameTime);
 }
 
 void MovingBehavior::handleDefaultAcceleration() {

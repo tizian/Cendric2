@@ -144,7 +144,7 @@ void UserMovingBehavior::handleMovementInput() {
 	m_mainChar->setAcceleration(sf::Vector2f(newAccelerationX, m_isClimbing ? 0.f : (m_isFlippedGravity ? -m_gravity : m_gravity)));
 }
 
-void UserMovingBehavior::updateAnimation() {
+void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	// calculate new game state and set animation.
 
 	GameObjectState newState = GameObjectState::Idle;

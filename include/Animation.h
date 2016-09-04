@@ -44,6 +44,7 @@ public:
 	std::size_t getSize() const;
 	const sf::IntRect& getFrame(std::size_t n) const;
 	const sf::Time& getFrameTime() const;
+	const sf::Time getAnimationTime() const;
 	bool isLooped() const;
 
 private:

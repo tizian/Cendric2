@@ -82,7 +82,7 @@ void WolfBossMovingBehavior::setFacingRight(bool value) {
 	m_chargeMovingDirection = m_movingDirectionX;
 }
 
-void WolfBossMovingBehavior::updateAnimation() {
+void WolfBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	// calculate new game state and set animation.
 
 	GameObjectState newState = GameObjectState::Idle;

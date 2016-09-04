@@ -15,7 +15,7 @@ public:
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void handleMovementInput() override;
 	void handleDefaultAcceleration() override;
-	void updateAnimation() override;
+	void updateAnimation(const sf::Time& frameTime) override;
 
 private:
 	// makes it easier to jump

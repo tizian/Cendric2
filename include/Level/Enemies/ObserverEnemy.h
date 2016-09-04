@@ -5,9 +5,10 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 #include "Particles/ParticleSystem.h"
+#include "Level/Enemies/WardenEnemy.h"
 
 // An observer that can put the main character in jail. It is invincible and will only attack Cendric if he steals something
-class ObserverEnemy : public virtual Enemy {
+class ObserverEnemy : public virtual WardenEnemy {
 public:
 	ObserverEnemy(const Level* level, Screen* screen);
 	~ObserverEnemy() {}
@@ -19,41 +20,20 @@ public:
 	// if it's the first time he was caught stealing, the observer will react with a warning
 	bool notifyStealing(bool isFirstTime);
 
-	MovingBehavior* createMovingBehavior(bool asAlly) override;
-	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
-
 	sf::Time getConfiguredWaitingTime() const override;
 	sf::Time getConfiguredChasingTime() const override;
-
-	int getMentalStrength() const override;
-
-	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {};
-	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {};
 
 	EnemyID getEnemyID() const override { return EnemyID::Observer; }
 	
 protected:
 	std::string getSpritePath() const override;
 
-	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
-	void loadAttributes() override;
-	void loadSpells() override {};
 	void loadAnimation(int skinNr) override;
-
-	void loadParticleSystem();
-	void updateParticleSystem(const sf::Time& frameTime);
+	void loadParticleSystem() override;
+	void updateParticleSystem(const sf::Time& frameTime) override;
 
 private:
-	float m_observedRange;
-
-	particles::TextureParticleSystem* m_ps;
-	particles::ParticleSpawner* m_particleSpawner;
-	particles::ColorGenerator* m_colGen;
-
 	void setObserverChasing();
 	void setObserverIdle();
 	void setObserverTriggered();
-
-	static const float SPEED_IDLE;
-	static const float SPEED_CHASING;
 };

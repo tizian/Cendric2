@@ -1,7 +1,7 @@
 #include "Level/Enemies/WardenEnemy.h"
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/LightComponent.h"
-#include "Level/MOBBehavior/MovingBehaviors/ObserverBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/WardenBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Level/MOBBehavior/AttackingBehavior.h"
 #include "Registrar.h"
@@ -31,7 +31,7 @@ void WardenEnemy::update(const sf::Time& frameTime) {
 		if (AttackingBehavior::isInAggroRange(m_mainChar, this, m_observedRange)) {
 			m_scriptedBehavior->say("WardenTriggered", 3);
 			m_mainChar->setDead();
-			setState(GameObjectState::Triggered);
+			m_wardenState = WardenState::Triggered;
 		}
 	}
 
@@ -49,16 +49,12 @@ void WardenEnemy::loadAttributes() {
 }
 
 MovingBehavior* WardenEnemy::createMovingBehavior(bool asAlly) {
-	ObserverBehavior* behavior = new ObserverBehavior(this);
+	WardenBehavior* behavior = new WardenBehavior(this);
 	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(SPEED_IDLE);
 	behavior->setMaxVelocityYUp(SPEED_IDLE);
 	behavior->setMaxVelocityX(SPEED_IDLE);
 	return behavior;
-}
-
-int WardenEnemy::getMentalStrength() const {
-	return 3;
 }
 
 AttackingBehavior* WardenEnemy::createAttackingBehavior(bool asAlly) {
@@ -70,6 +66,7 @@ void WardenEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
+	// Idle animation
 	Animation* idleAnimation = new Animation(sf::milliseconds(150));
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; ++i) {
@@ -79,14 +76,17 @@ void WardenEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation* triggeredAnimation = new Animation(sf::milliseconds(150));
-	triggeredAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 3; ++i) {
-		triggeredAnimation->addFrame(sf::IntRect(i * 50, 0, 50, 50));
-	}
-	triggeredAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
+	// Blinking animation TODO
+	Animation* blinkingAnimation = new Animation(sf::milliseconds(150));
+	blinkingAnimation->setSpriteSheet(tex);
+	blinkingAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
+	addAnimation(GameObjectState::Blinking, blinkingAnimation);
 
-	addAnimation(GameObjectState::Triggered, triggeredAnimation);
+	// Looking animation TODO
+	Animation* lookingAnimation = new Animation(sf::milliseconds(150));
+	lookingAnimation->setSpriteSheet(tex);
+	lookingAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
+	addAnimation(GameObjectState::Looking, lookingAnimation);
 	
 	// initial values
 	setState(GameObjectState::Idle);
@@ -107,6 +107,7 @@ void WardenEnemy::updateParticleSystem(const sf::Time& frameTime) {
 }
 
 void WardenEnemy::loadParticleSystem() {
+	delete m_ps;
 	m_ps = new particles::TextureParticleSystem(200, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	m_ps->additiveBlendMode = true;
 	m_ps->emitRate = 80.f;
@@ -123,11 +124,11 @@ void WardenEnemy::loadParticleSystem() {
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 2.f;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(200, 40, 40, 200);
-	colGen->maxStartCol = sf::Color(200, 100, 50, 200);
-	colGen->minEndCol = sf::Color(0, 0, 0, 0);
-	colGen->maxEndCol = sf::Color(200, 100, 100, 0);
+	m_colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	m_colGen->minStartCol = sf::Color(200, 40, 40, 200);
+	m_colGen->maxStartCol = sf::Color(200, 100, 50, 200);
+	m_colGen->minEndCol = sf::Color(0, 0, 0, 0);
+	m_colGen->maxEndCol = sf::Color(200, 100, 100, 0);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 0.f;

@@ -112,7 +112,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
-void FlyingBehavior::updateAnimation() {
+void FlyingBehavior::updateAnimation(const sf::Time& frameTime) {
 	// calculate new game state and set animation.
 
 	GameObjectState newState = GameObjectState::Idle;

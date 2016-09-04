@@ -12,7 +12,7 @@ public:
 
 	virtual void update(const sf::Time& frameTime);
 	// update animation based on the current velocity + grounded
-	virtual void updateAnimation() = 0;
+	virtual void updateAnimation(const sf::Time& frameTime) = 0;
 
 	virtual void checkCollisions(const sf::Vector2f& nextPosition) = 0;
 	

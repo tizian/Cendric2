@@ -12,7 +12,7 @@ public:
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void makeRandomDecision() override;
-	void updateAnimation() override;
+	void updateAnimation(const sf::Time& frameTime) override;
 	void calculateJumpHeight();
 
 	void setDistanceToAbyss(float distance);

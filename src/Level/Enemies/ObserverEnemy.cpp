@@ -1,19 +1,17 @@
 #include "Level/Enemies/ObserverEnemy.h"
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/LightComponent.h"
-#include "Level/MOBBehavior/MovingBehaviors/ObserverBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/WardenBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Level/MOBBehavior/AttackingBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Observer, ObserverEnemy)
 
-const float ObserverEnemy::SPEED_IDLE = 50.f;
-const float ObserverEnemy::SPEED_CHASING = 150.f;
-
 ObserverEnemy::ObserverEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
-	Enemy(level, screen) {
+	Enemy(level, screen),
+	WardenEnemy(level, screen) {
 
 	m_isInvincible = true;
 	m_isAlwaysUpdate = true;
@@ -26,21 +24,21 @@ ObserverEnemy::ObserverEnemy(const Level* level, Screen* screen) :
 void ObserverEnemy::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
 
-	if (m_state == GameObjectState::Observing) {
+	if (m_wardenState == WardenState::Observing) {
 		updateTime(m_chasingTime, frameTime);
 		m_scriptedBehavior->updateSpeechBubble(frameTime);
 		if (m_chasingTime == sf::Time::Zero) {
 			setObserverIdle();
 		}
 	}
-	if (m_state == GameObjectState::Triggered) {
+	if (m_wardenState == WardenState::Triggered) {
 		updateTime(m_waitingTime, frameTime);
 		m_scriptedBehavior->updateSpeechBubble(frameTime);
 		if (m_waitingTime == sf::Time::Zero) {
 			setObserverIdle();
 		}
 	}
-	else if (m_state == GameObjectState::Idle && m_scriptedBehavior != nullptr) {
+	else if (m_wardenState == WardenState::Idle && m_scriptedBehavior != nullptr) {
 		m_scriptedBehavior->update(frameTime);
 		if (AttackingBehavior::isInAggroRange(m_mainChar, this, m_observedRange)) {
 			setObserverChasing();
@@ -53,7 +51,7 @@ void ObserverEnemy::setObserverChasing() {
 	m_enemyMovingBehavior->setMaxVelocityYDown(SPEED_CHASING);
 	m_enemyMovingBehavior->setMaxVelocityYUp(SPEED_CHASING);
 	m_enemyMovingBehavior->setMaxVelocityX(SPEED_CHASING);
-	setState(GameObjectState::Observing);
+	m_wardenState = WardenState::Observing;
 	m_enemyMovingBehavior->resetMovingTarget();
 	setChasing();
 }
@@ -62,7 +60,7 @@ void ObserverEnemy::setObserverTriggered() {
 	m_enemyMovingBehavior->setMaxVelocityYDown(SPEED_CHASING);
 	m_enemyMovingBehavior->setMaxVelocityYUp(SPEED_CHASING);
 	m_enemyMovingBehavior->setMaxVelocityX(SPEED_CHASING);
-	setState(GameObjectState::Triggered);
+	m_wardenState = WardenState::Triggered;
 	m_enemyMovingBehavior->resetMovingTarget();
 	setWaiting();
 }
@@ -71,7 +69,7 @@ void ObserverEnemy::setObserverIdle() {
 	m_movingBehavior->setMaxVelocityYDown(SPEED_IDLE);
 	m_movingBehavior->setMaxVelocityYUp(SPEED_IDLE);
 	m_movingBehavior->setMaxVelocityX(SPEED_IDLE);
-	setState(GameObjectState::Idle);
+	m_wardenState = WardenState::Idle;
 	m_scriptedBehavior->setCurrentRoutineStep();
 }
 
@@ -80,13 +78,8 @@ void ObserverEnemy::render(sf::RenderTarget& target) {
 	Enemy::render(target);
 }
 
-void ObserverEnemy::loadAttributes() {
-	m_attributes.setHealth(1);
-	m_attributes.calculateAttributes();
-}
-
 bool ObserverEnemy::notifyStealing(bool isFirstTime) {
-	if (m_state == GameObjectState::Idle) {
+	if (m_wardenState == WardenState::Idle) {
 		return false;
 	}
 
@@ -110,20 +103,6 @@ bool ObserverEnemy::notifyStealing(bool isFirstTime) {
 	return true;
 }
 
-MovingBehavior* ObserverEnemy::createMovingBehavior(bool asAlly) {
-	ObserverBehavior* behavior = new ObserverBehavior(this);
-	behavior->setApproachingDistance(100.f);
-	behavior->setMaxVelocityYDown(SPEED_IDLE);
-	behavior->setMaxVelocityYUp(SPEED_IDLE);
-	behavior->setMaxVelocityX(SPEED_IDLE);
-	return behavior;
-}
-
-AttackingBehavior* ObserverEnemy::createAttackingBehavior(bool asAlly) {
-	// observers can't attack
-	return nullptr;
-}
-
 sf::Time ObserverEnemy::getConfiguredWaitingTime() const {
 	return sf::seconds(3.f);
 }
@@ -132,109 +111,44 @@ sf::Time ObserverEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(rand() % 10 + 5));
 }
 
-int ObserverEnemy::getMentalStrength() const {
-	return 3;
-}
-
 void ObserverEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 40.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	// Idle animation
-
-	Animation* idleAnimation = new Animation();
+	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 16; ++i) {
-		idleAnimation->addFrame(sf::IntRect(0*50, 0, 50, 40));
-	}
-	idleAnimation->addFrame(sf::IntRect(1*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(2*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(3*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(2*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(1*50, 0, 50, 40));
-	for (int i = 0; i < 4; ++i) {
-		idleAnimation->addFrame(sf::IntRect(0*50, 0, 50, 40));
-	}
-	idleAnimation->addFrame(sf::IntRect(4*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(5*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(6*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(5*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(4*50, 0, 50, 40));
-	for (int i = 0; i < 12; ++i) {
-		idleAnimation->addFrame(sf::IntRect(0*50, 0, 50, 40));
-	}
-	idleAnimation->addFrame(sf::IntRect(7*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(8*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(9*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(9*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(8*50, 0, 50, 40));
-	idleAnimation->addFrame(sf::IntRect(7*50, 0, 50, 40));
-
+	idleAnimation->addFrame(sf::IntRect(0 , 0, 50, 40));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	// Observing animation
+	// Blinking animation
+	Animation* blinkingAnimation = new Animation();
+	blinkingAnimation->setSpriteSheet(tex);
+	blinkingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 40));
+	blinkingAnimation->addFrame(sf::IntRect(8 * 50, 0, 50, 40));
+	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 40));
+	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 40));
+	blinkingAnimation->addFrame(sf::IntRect(8 * 50, 0, 50, 40));
+	blinkingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 40));
+	addAnimation(GameObjectState::Blinking, blinkingAnimation);
 
-	Animation* observingAnimation = new Animation();
-	observingAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 16; ++i) {
-		observingAnimation->addFrame(sf::IntRect(10*50 + 0*50, 0, 50, 40));
-	}
-	observingAnimation->addFrame(sf::IntRect(10*50 + 1*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 2*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 3*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 2*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 1*50, 0, 50, 40));
+	// Looking Animation
+	Animation* lookingAnimation = new Animation();
+	lookingAnimation->setSpriteSheet(tex);
+	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(3 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 40));
 	for (int i = 0; i < 4; ++i) {
-		observingAnimation->addFrame(sf::IntRect(10*50 + 0*50, 0, 50, 40));
+		lookingAnimation->addFrame(sf::IntRect(0 * 50, 0, 50, 40));
 	}
-	observingAnimation->addFrame(sf::IntRect(10*50 + 4*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 5*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 6*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 5*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 4*50, 0, 50, 40));
-	for (int i = 0; i < 12; ++i) {
-		observingAnimation->addFrame(sf::IntRect(10*50 + 0*50, 0, 50, 40));
-	}
-	observingAnimation->addFrame(sf::IntRect(10*50 + 7*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 8*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 9*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 9*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 8*50, 0, 50, 40));
-	observingAnimation->addFrame(sf::IntRect(10*50 + 7*50, 0, 50, 40));
-
-	addAnimation(GameObjectState::Observing, observingAnimation);
-
-	// Triggered animation
-
-	Animation* triggeredAnimation = new Animation();
-	triggeredAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 16; ++i) {
-		triggeredAnimation->addFrame(sf::IntRect(20*50 + 0*50, 0, 50, 40));
-	}
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 1*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 2*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 3*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 2*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 1*50, 0, 50, 40));
-	for (int i = 0; i < 4; ++i) {
-		triggeredAnimation->addFrame(sf::IntRect(20*50 + 0*50, 0, 50, 40));
-	}
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 4*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 5*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 6*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 5*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 4*50, 0, 50, 40));
-	for (int i = 0; i < 12; ++i) {
-		triggeredAnimation->addFrame(sf::IntRect(20*50 + 0*50, 0, 50, 40));
-	}
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 7*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 8*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 9*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 9*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 8*50, 0, 50, 40));
-	triggeredAnimation->addFrame(sf::IntRect(20*50 + 7*50, 0, 50, 40));
-
-	addAnimation(GameObjectState::Triggered, triggeredAnimation);
+	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(6 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 40));
+	addAnimation(GameObjectState::Looking, lookingAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);
@@ -248,65 +162,27 @@ void ObserverEnemy::loadAnimation(int skinNr) {
 }
 
 void ObserverEnemy::updateParticleSystem(const sf::Time& frameTime) {
-	m_particleSpawner->center.x = getPosition().x + 0.5f * getBoundingBox()->width;
-	m_particleSpawner->center.y = getPosition().y + 0.5f * getBoundingBox()->height;
-
-	m_colGen->minStartCol = m_state == GameObjectState::Idle ?
-		sf::Color(40, 40, 200, 200) : m_state == GameObjectState::Observing ?
+	m_colGen->minStartCol = m_wardenState == WardenState::Idle ?
+		sf::Color(40, 40, 200, 200) : m_wardenState == WardenState::Observing ?
 		sf::Color(200, 100, 50, 200) :
 		sf::Color(255, 50, 50, 200);
 
-	m_colGen->maxStartCol = m_state == GameObjectState::Idle ?
-		sf::Color(100, 100, 255, 200) : m_state == GameObjectState::Observing ?
+	m_colGen->maxStartCol = m_wardenState == WardenState::Idle ?
+		sf::Color(100, 100, 255, 200) : m_wardenState == WardenState::Observing ?
 		sf::Color(250, 150, 100, 200) :
 		sf::Color(255, 100, 100, 200);
 
-	m_colGen->maxEndCol = m_state == GameObjectState::Idle ?
-		sf::Color(100, 100, 200, 0) : m_state == GameObjectState::Observing ?
+	m_colGen->maxEndCol = m_wardenState == WardenState::Idle ?
+		sf::Color(100, 100, 200, 0) : m_wardenState == WardenState::Observing ?
 		sf::Color(150, 100, 50, 0) :
 		sf::Color(200, 100, 100, 0);
 
-	m_ps->update(frameTime);
+	WardenEnemy::updateParticleSystem(frameTime);
 }
 
 void ObserverEnemy::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(200, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 80.f;
-
-	// Generators
-	auto posGen = m_ps->addSpawner<particles::CircleSpawner>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->radius = sf::Vector2f(m_observedRange / 2.f, m_observedRange / 2.f);
-	m_particleSpawner = posGen;
-
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 10.f;
-	sizeGen->maxStartSize = 20.f;
-	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 2.f;
-
-	m_colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	m_colGen->minStartCol = sf::Color(40, 40, 200, 200);
-	m_colGen->maxStartCol = sf::Color(200, 100, 50, 200);
-	m_colGen->minEndCol = sf::Color(0, 0, 0, 0);
-	m_colGen->maxEndCol = sf::Color(200, 100, 100, 0);
-
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = 0.f;
-	velGen->maxAngle = 360.f;
-	velGen->minStartSpeed = 1.f;
-	velGen->maxStartSpeed = 2.f;
-
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 1.f;
-	timeGen->maxTime = 2.f;
-
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	WardenEnemy::loadParticleSystem();
+	m_ps->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
 }
 
 std::string ObserverEnemy::getSpritePath() const {
