@@ -33,6 +33,14 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 		m_npc->setDisposed();
 		return;
 	}
+	else if (currentStep.state == RoutineState::ReloadLock) {
+		m_npc->setReloadEnabled(false);
+		updateStep = true;
+	}
+	else if (currentStep.state == RoutineState::ReloadUnlock) {
+		m_npc->setReloadEnabled(true);
+		updateStep = true;
+	}
 	else if (currentStep.state == RoutineState::Waiting) {
 		m_remainingStepTime -= frameTime;
 		if (m_remainingStepTime <= sf::Time::Zero) {

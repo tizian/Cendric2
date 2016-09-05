@@ -25,7 +25,7 @@ public:
 	void setTalkingActive(bool active);
 	void setTalkingActiveForce(bool active);
 	void setTalkingEnabled(bool enabled);
-	void setReloadEnabled(bool enabled);
+	void setReloadLocked(bool locked);
 
 private:
 	bool m_isInitial = true;

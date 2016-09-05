@@ -29,7 +29,7 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("setTalkingActive", &NPCRoutineLoader::setTalkingActive)
 		.addFunction("setTalkingActiveForce", &NPCRoutineLoader::setTalkingActiveForce)
 		.addFunction("setTalkingEnabled", &NPCRoutineLoader::setTalkingEnabled)
-		.addFunction("setReloadEnabled", &NPCRoutineLoader::setReloadEnabled)
+		.addFunction("setReloadLocked", &NPCRoutineLoader::setReloadLocked)
 		.endClass();
 
 	if (luaL_dofile(L, getResourcePath(m_routine.getID()).c_str()) != 0) {
@@ -89,8 +89,10 @@ void NPCRoutineLoader::setTalkingEnabled(bool enabled) {
 	m_routine.getNPC()->setTalkingEnabled(enabled);
 }
 
-void NPCRoutineLoader::setReloadEnabled(bool enabled) {
-	m_routine.getNPC()->setReloadEnabled(enabled);
+void NPCRoutineLoader::setReloadLocked(bool locked) {
+	RoutineStep step;
+	step.state = locked ? RoutineState::ReloadLock : RoutineState::ReloadUnlock;
+	m_routine.addStep(step);
 }
 
 void NPCRoutineLoader::setTilePosition(float x, float y) {

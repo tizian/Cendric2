@@ -9,6 +9,8 @@ enum class RoutineState {
 	Saying,
 	Animation,
 	Disappearing,
+	ReloadLock,
+	ReloadUnlock
 };
 
 struct RoutineStep {

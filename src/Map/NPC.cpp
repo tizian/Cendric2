@@ -157,6 +157,7 @@ void NPC::setDialogueID(const std::string& id) {
 void NPC::checkCollisionWithMainChar() {
 	if (m_NPCdata.talkingActive && dist(getCenter(), m_mainChar->getCenter()) <= TALKING_RANGE) {
 		trySetDialogue();
+		m_NPCdata.talkingActive = false;
 	}
 }
 

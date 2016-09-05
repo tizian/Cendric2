@@ -20,7 +20,7 @@ loadRoutine = function(R, W)
 	elseif (W:isConditionFulfilled("npc_vincent","talked") and (not W:isConditionFulfilled("npc_vincent", "cooperated") or W:isQuestState("spoiled_fire", "completed"))) then
 		
 		-- vincent is leaving....
-		R:setReloadEnabled(false)
+		R:setReloadLocked(true)
 		R:setTilePosition(13.5,20)
 		R:goToTile(10.2,10)
 		R:goToTile(13.5,10)

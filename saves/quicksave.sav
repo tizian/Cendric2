@@ -1,21 +1,20 @@
 # time played, in seconds
-time.played:5675
+time.played:5720
 savegame.name:Quicksave
-savegame.date:1472910457
+savegame.date:1473113074
 level.id:res/level/elderbackroom/elderbackroom.tmx
 level.position:1300.000000,1170.000000
 is.in.level:0
 map.id:res/map/gandriaprison/gandriaprison.tmx
-map.position:665.192078,362.069458
+map.position:601.902405,355.154114
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
-gold:0
+gold:200
 # items in inventory:
 item.id:fo_bread,2
 item.id:fo_water,1
-item.id:mi_ironore,300
 stored.gold:253
 # stored items:
 stored.item.id:co_mediumpouch,1
@@ -53,10 +52,9 @@ equipped.head:
 equipped.neck:
 equipped.ring1:
 equipped.ring2:
-equipped.weapon:we_pickaxe
+equipped.weapon:
 # weapon configurations:
 weapon.configs:we_ordermace;2,4,1;
-weapon.configs:we_pickaxe;
 weapon.configs:we_torch;
 # quickslot assignments:
 quickslot:1,fo_lesserhealingpotion
@@ -92,6 +90,7 @@ items.looted:res/level/howlingcaverns/howlingcaverns.tmx,628,753,957,963,1116,12
 items.looted:res/level/ratcave/ratcave.tmx,667,734,738,762,763,1076,1200,1744,1758
 items.looted:res/level/rockfall/rockfall.tmx,894,1006
 # chests looted in level:
+items.looted:res/level/elderbackroom/elderbackroom.tmx
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/elderhome/elderhome.tmx
 waypoints.unlocked:res/map/gandria/gandria.tmx
@@ -152,7 +151,7 @@ progress.condition:boss,BossKhajag
 progress.condition:default,bridge_crossed,gandria_open,tutorial_complete
 progress.condition:npc_andrew,bridge,mages,what_are_you_doing,who_are_you
 progress.condition:npc_cityguard,gates_closed,letin_zeff,stranger,talked,zeff
-progress.condition:npc_edgar,how_getout,hungry,hungry_again,my_things,pickaxe,talked
+progress.condition:npc_edgar,hungry,hungry_again,my_things,talked
 progress.condition:npc_edmond,puzzle_solved,talked_after_tutorial,talked_to,who_am_i
 progress.condition:npc_ingrid,meat_given,who_am_i,who_are_you
 progress.condition:npc_inina,aura,farmers,hi,learned_light,mage,mark,mark_getrid,mark_whatis,mark_whowould,missing_people,power_weakened,shrine,what_doing,whats_reward,where_light,where_search

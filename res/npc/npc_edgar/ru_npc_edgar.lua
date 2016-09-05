@@ -6,10 +6,12 @@ loadRoutine = function(R, W)
 		
 		R:setTalkingActive(true) 
 		R:setTilePosition(18,7)
+		R:setReloadLocked(true)
 		R:goToTile(18,9)
 		R:goToTile(14,4)
 		R:goToTile(13,4)
 		R:goToTile(13,4.1)
+		R:setReloadLocked(false)
 		
 	else
 	
