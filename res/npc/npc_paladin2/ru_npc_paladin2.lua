@@ -9,11 +9,13 @@ loadRoutine = function(R, W)
 		R:setTilePosition(44.5,52.5)
 		R:goToTile(44.5,52.6)
 		
+		R:setReloadEnabled(false)
 		R:setLooped(false)
 		
 	else
 		
 		R:setTilePosition(44,54)
+		R:setReloadEnabled(false)
 
 		R:wait(5000)	
 		R:goToTile(44,54)

@@ -1,0 +1,592 @@
+# dia file for dialogue for npc: npc_morris
+
+npc.id:npc_morris
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_morris", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_morris", "game")
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_morris", "rules")
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		# translation: 
+		translation.tag:DL_Choice_Hi
+		translation.en:Hi, I'm new here.
+		translation.de:Hi, ich bin neu hier.
+		translation.ch:Hi, ich bi neu da.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_morris", "talked")
+	# translation: 
+	translation.tag:DL_Morris_IAm
+	translation.en:Ah, a new prisoner. And what brought you here?
+	translation.de:Ah, ein Neuer. Und wieso bist du denn hier gelandet?
+	translation.ch:Ah, en Neue. Und weso bisch du denn da glandet?
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_Stole
+		translation.en:I stole something.
+		translation.de:Ich habe etwas gestohlen.
+		translation.ch:Ich ha öppis klaut.
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_Murdered
+		translation.en:I've murdered someone.
+		translation.de:Ich habe jemanden ermordet.
+		translation.ch:Ich han öppert abgmurkst.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_Innocent
+		translation.en:I'm innocent!
+		translation.de:Ich bin unschuldig!
+		translation.ch:Ich bi unschuldig!
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_NoneBusiness
+		translation.en:That's none of your business.
+		translation.de:Das geht dich nichts an.
+		translation.ch:Das goht dich nüt ah.
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_Stole
+	translation.en:Yes, the observer spells can be trouble, I can tell from my own experience.
+	translation.de:Ja, die Beobachter-Zauber können wirklich mühsam sein, musste ich auch schon erfahren.
+	translation.ch:Ja, d'Beobachter-Zauber chönd würkli müesam si, hani au scho möse erfahre.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_Murdered
+	translation.en:Funny, you don't like someone that is capable of murdering people. But I'll watch my back. (Grins)
+	translation.de:Lustig, du siehst nicht aus wie jemand, der Leute ermordet. Aber ich werde wohl besser auf meinen Rücken aufpassen. (Grinst)
+	translation.ch:Lustig, du gsesch nid us we öpper, wo Lüt killt. Aber ich pass glaub besser chli uf mit dir, he. (Grinst)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_Innocent
+	translation.en:Aren't we all?
+	translation.de:Sind wir das nicht alle?
+	translation.ch:Simmer das nid alli?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_NoneBusiness
+	translation.en:Oh well. Must be something really bad then. (Rolls his eyes)
+	translation.de:Hm. Muss ja was ganz schlimmes sein, was. (Rollt seine Augen)
+	translation.ch:Hm, mu ja was ganz schlimms si, he. (Rollt sini Auge)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [8] Choice Node
+	tag:8
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_WhatBroughtYou
+		translation.en:And why are you here?
+		translation.de:Und wieso bist du da?
+		translation.ch:Und weso bisch du da?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_MyCrime
+	translation.en:This and that. Pilferage, gambling, fraud... Oh, and beating up the guy who snitched on me.
+	translation.de:Dies und das. Diebstahl, Glücksspiele, Betrug... Oh, und ich habe den Typen verprügelt, der mich verraten hat.
+	translation.ch:Chli dies und das. Diebstahl, Glücksspiel, Betrug... Oh, und ich ha de Typ zemegschlage, wo mi verpfiffe het.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_morris", "game")
+	# translation: 
+	translation.tag:DL_Morris_Game
+	translation.en:Speaking of gambling, I still offer some fun to the prisoners here. Interested?
+	translation.de:Wenn wir gerade von Glücksspielen reden, ich habe noch immer etwas Spass für die Gefangenen hier im Angebot. Interessiert?
+	translation.ch:Apropos Glücksspiel, ich büte immer na chli Spass ah für di Gfangene da. Interessiert?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [11] Choice Node
+	tag:11
+	[
+		# Link node, tag is next tag
+		tag:12
+		# translation: 
+		translation.tag:DL_Choice_GameRules
+		translation.en:How does your game work?
+		translation.de:Wie funktioniert dein Spiel?
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_morris", "game")
+	# translation: 
+	translation.tag:DL_Morris_GameRules
+	translation.en:It's pretty simple. See this coin? You bet a certain amount of gold on head or tails, I toss it. If you're correct with your guess, I double your gold. Otherwise, I keep it.
+	translation.de:Es ist ziemlich einfach. Siehst du diese Münze? Du setzt einen bestimmten Betrag auf Kopf oder Zahl. Dann werfe ich die Münze. Falls du gewinnst, verdopple ich dir deinen Einsatz. Falls nicht, behalte ich ihn. 
+	translation.ch:Es isch zimli eifach. Gsesch die Münze? Du setzisch en gwüsse Goldbetrag uf Chopf oder Zahl. Denn wirfi si und wend richtig grate hesch verdoppli din Isatz. Und wenn nid, phalti en.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [13] Choice Node
+	tag:13
+	[
+		# Link node, tag is next tag
+		tag:14
+		# translation: 
+		translation.tag:DL_Choice_IWantPlay
+		translation.en:I want to play...
+		translation.de:Ich will spielen...
+		translation.ch:Ich will spile...
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_-1
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{2
+	# [14] Choice Node
+	tag:14
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:hasItem("gold", 20)
+		# translation: 
+		translation.tag:DL_Choice_Gold
+		translation.en:
+		translation.de:
+		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:20
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:hasItem("gold", 50)
+		# translation: 
+		translation.tag:DL_Choice_Gold
+		translation.en:
+		translation.de:
+		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:50
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		condition:DL:hasItem("gold", 100) and not DL:isConditionFulfilled("npc_morris", "dagger")
+		# translation: 
+		translation.tag:DL_Choice_Gold
+		translation.en:... Here is my bet.
+		translation.de:... Hier ist mein Einsatz.
+		translation.ch:... Da isch min Isatz.
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		# translation: 
+		translation.tag:DL_Choice_NotEnoughGold
+		translation.en:I'll come back later.
+		translation.de:Ich komme später wieder.
+		translation.ch:Ich chume spöter wider.
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:removeGold(20)
+	# translation: 
+	translation.tag:DL_Morris_HeadOrTails
+	translation.en:Fine. Head or tails?
+	translation.de:Gut. Kopf oder Zahl?
+	translation.ch:Guet. Chopf oder Zahl?
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{2
+	# [16] Choice Node
+	tag:16
+	[
+		# Link node, tag is next tag
+		tag:17
+		# translation: 
+		translation.tag:DL_Choice_Head
+		translation.en:Head.
+		translation.de:Kopf.
+		translation.ch:Chopf.
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		# translation: 
+		translation.tag:DL_Choice_Tails
+		translation.en:Tails.
+		translation.de:Zahl.
+		translation.ch:Zahl.
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:(Morris tosses the coin...)
+	translation.de:(Morris wirft die Münze...)
+	translation.ch:(De Morris wirft d'Münze...)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:removeGold(50)
+	# translation: 
+	translation.tag:DL_Morris_HeadOrTails
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{2
+	# [23] Choice Node
+	tag:23
+	[
+		# Link node, tag is next tag
+		tag:24
+		# translation: 
+		translation.tag:DL_Choice_Head
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
+		# translation: 
+		translation.tag:DL_Choice_Tails
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_HeadOrTails
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{2
+	# [26] Choice Node
+	tag:26
+	[
+		# Link node, tag is next tag
+		tag:28
+		# translation: 
+		translation.tag:DL_Choice_Head
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:29
+		# translation: 
+		translation.tag:DL_Choice_Tails
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:removeGold(100)
+	# translation: 
+	translation.tag:DL_Morris_DaggerBet
+	translation.en:That's a really high bet. I don't have enough gold, but I put my dagger then, it's worth more than 100 gold.
+	translation.de:Das ist ein ziemlich hoher Einsatz. Ich habe nicht genügend Gold, aber ich setze meinen Dolch dafür. Er ist mehr wert als 100 Gold.
+	translation.ch:Das isch en zimli hoche Isatz. Ich ha nid gnueg Gold, aber ich setz min Dolch. De isch me wert als 100 Gold.
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_HeadOrTails
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{2
+	# [27] Choice Node
+	tag:27
+	[
+		# Link node, tag is next tag
+		tag:30
+		# translation: 
+		translation.tag:DL_Choice_Head
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:31
+		# translation: 
+		translation.tag:DL_Choice_Tails
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_TossCoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
