@@ -1,12 +1,11 @@
 -- Dialogue for NPC "npc_morris"
 
-
-
 loadDialogue = function(DL) 
 
 	-- morris' coin toss.
 	math.randomseed(os.time())
-	local head = (math.random(0, 1) == 0)
+	local isWinUnfair = (math.random(0, 100) < 40)
+	local isWinFair = (math.random(0, 1) < 1)
 	local headNode = -1
 	local tailsNode = -1
 
@@ -45,7 +44,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(5, -2, "DL_Morris_Murdered") -- Funny, you don't like someone that is capable of murdering people. But I'll watch my back. (Grins)
+		DL:createNPCNode(5, -2, "DL_Morris_Murdered") -- Funny, you don't look like someone that is capable of murdering people. But I'll watch my back. (Grins)
 		DL:addNode()
 
 
@@ -122,12 +121,12 @@ loadDialogue = function(DL)
 		DL:addChoice(18, "DL_Choice_Tails") -- Tails.
 		DL:addNode()
 		
-		if (head) then
+		if (isWinUnfair) then
 			headNode = 201
-			tailsNode = 203
+			tailsNode = 204
 		else
 			headNode = 202
-			tailsNode = 204
+			tailsNode = 203
 		end
 
 		DL:createNPCNode(17, headNode, "DL_Morris_TossCoin") -- (Morris tosses the coin...)
@@ -168,7 +167,7 @@ loadDialogue = function(DL)
 		DL:addChoice(25, "DL_Choice_Tails") -- 
 		DL:addNode()
 		
-		if (head) then
+		if (isWinUnfair) then
 			headNode = 501
 			tailsNode = 503
 		else
@@ -218,12 +217,12 @@ loadDialogue = function(DL)
 		DL:addChoice(29, "DL_Choice_Tails") -- 
 		DL:addNode()
 		
-		if (head) then
+		if (isWinFair) then
 			headNode = 1001
-			tailsNode = 1003
+			tailsNode = 1004
 		else
 			headNode = 1002
-			tailsNode = 1004
+			tailsNode = 1003
 		end
 
 		DL:createNPCNode(28, -1, "DL_Morris_TossCoin") -- 

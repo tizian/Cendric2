@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="230">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="231">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -912,6 +912,12 @@
   <object id="219" x="170" y="3288" width="104" height="61">
    <properties>
     <property name="map entry" value="res/map/meadows/meadows.tmx,3360,3030"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="230" x="305" y="1920.5" width="93" height="42">
+   <properties>
+    <property name="level entry" value="res/level/gandriamines/gandriamines.tmx,335,1660"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

@@ -98,3 +98,11 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_ironore', 'misc', 200, 500, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_ironore', 0, -35, 30, 15);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_ironore', 1, 500, 50, 50, 50);
+
+-- Shiny Stone
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_shinystone', 'item', 'Shiny Stone','Funkelnder Stein','Funklige Stei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_shinystone', 'item_desc', 'What a beautiful stone. A merchant might pay a lot for this.','Welch schöner Stein. Ein Händler könnte einiges dafür bezahlen.','Wa füren schöne Stei. En Händler chönt einiges defür zahle.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_shinystone', 'misc', 150, 550, 10);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_shinystone', -25, -40, 10, 25);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_shinystone', 1, 500, 150, 50, 50);

@@ -11,3 +11,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('El
 1036-1103','Hier ruht meine teure Elona
 1036-1103','Da rueht mini lieb Elona
 1036-1103');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoTrespassing','sign','No trespassing!','Kein Durchgang!','Ken Durchgang!');

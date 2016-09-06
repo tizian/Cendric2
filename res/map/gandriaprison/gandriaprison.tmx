@@ -244,7 +244,7 @@
  <objectgroup name="trigger">
   <object id="128" x="320" y="222" width="62.5" height="50">
    <properties>
-    <property name="level entry" value="res/level/gandriaminse/gandriamines.tmx,1300,1170"/>
+    <property name="level entry" value="res/level/gandriamines/gandriamines.tmx,4280,1360"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

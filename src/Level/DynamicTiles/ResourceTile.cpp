@@ -84,7 +84,11 @@ void ResourceTile::initializeResource(int skinNr) {
 	m_toolItemID = "we_pickaxe";
 
 	int oreAmount = rand() % 2 + 1;
+	bool hasShinyStone = rand() % 100 > 90;
 	m_lootableItems.insert({ "mi_ironore", oreAmount });
+	if (hasShinyStone) {
+		m_lootableItems.insert({ "mi_shinystone", 1 });
+	}
 }
 
 void ResourceTile::loot() {
