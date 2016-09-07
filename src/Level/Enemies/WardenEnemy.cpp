@@ -67,30 +67,43 @@ void WardenEnemy::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	// Idle animation
-	Animation* idleAnimation = new Animation(sf::milliseconds(150));
+	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 3; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * 50, 0, 50, 50));
-	}
-	idleAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
-
+	idleAnimation->addFrame(sf::IntRect(0, 0, 50, 50));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	// Blinking animation TODO
-	Animation* blinkingAnimation = new Animation(sf::milliseconds(150));
+	// Blinking animation
+	Animation* blinkingAnimation = new Animation();
 	blinkingAnimation->setSpriteSheet(tex);
-	blinkingAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
+	blinkingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 50));
+	blinkingAnimation->addFrame(sf::IntRect(8 * 50, 0, 50, 50));
+	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 50));
+	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 50));
+	blinkingAnimation->addFrame(sf::IntRect(8 * 50, 0, 50, 50));
+	blinkingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 50));
 	addAnimation(GameObjectState::Blinking, blinkingAnimation);
 
-	// Looking animation TODO
-	Animation* lookingAnimation = new Animation(sf::milliseconds(150));
+	// Looking Animation
+	Animation* lookingAnimation = new Animation();
 	lookingAnimation->setSpriteSheet(tex);
-	lookingAnimation->addFrame(sf::IntRect(50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(3 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
+	for (int i = 0; i < 4; ++i) {
+		lookingAnimation->addFrame(sf::IntRect(0 * 50, 0, 50, 40));
+	}
+	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(6 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 50));
 	addAnimation(GameObjectState::Looking, lookingAnimation);
 	
 	// initial values
 	setState(GameObjectState::Idle);
-	playCurrentAnimation(false);
+	playCurrentAnimation(true);
 
 	loadParticleSystem();
 
