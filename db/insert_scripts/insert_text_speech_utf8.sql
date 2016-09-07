@@ -9,3 +9,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ob
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ObserverTriggered', 'speech','Thief caught!','Dieb erwischt!','Dieb verwütscht!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('WardenTriggered', 'speech','Trespasser eliminated!','Eindringling eliminiert!','Iidringling eliminiert!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Test', 'speech','Test','Test','Test');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SoExhausted', 'speech','I''m so exhausted...','Ich bin so müde...','Ich bi so kabutt...');

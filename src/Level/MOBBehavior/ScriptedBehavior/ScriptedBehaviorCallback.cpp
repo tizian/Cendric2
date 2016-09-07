@@ -38,6 +38,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior
 		.addFunction("addHint", &ScriptedBehaviorCallback::addHint)
 		.addFunction("setMovingTarget", &ScriptedBehaviorCallback::setMovingTarget)
 		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
+		.addFunction("executeFightAnimation", &ScriptedBehaviorCallback::executeFightAnimation)
 		.addFunction("gotoTile", &ScriptedBehaviorCallback::gotoTile)
 		.endClass();
 

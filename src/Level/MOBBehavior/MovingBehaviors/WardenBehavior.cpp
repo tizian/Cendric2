@@ -52,7 +52,7 @@ void WardenBehavior::updateAnimation(const sf::Time& frameTime) {
 }
 
 sf::Time WardenBehavior::getIdleTime() const {
-	int milliseconds = rand() % 4000 + 100;
+	int milliseconds = rand() % 4000 + 1000;
 	return sf::milliseconds(milliseconds);
 }
 
