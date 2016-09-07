@@ -17,11 +17,11 @@ QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key 
 	m_itemID = itemID;
 	m_key = key;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, ICON_SIZE, ICON_SIZE));
 	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
-	m_amountText.setCharacterSize(8);
+	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
 
 	m_keyText.setString(key != Key::VOID ?

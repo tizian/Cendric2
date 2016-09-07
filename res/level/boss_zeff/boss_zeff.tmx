@@ -154,7 +154,7 @@
   <object id="20" gid="793" x="656" y="593" width="50" height="50">
    <properties>
     <property name="boss" value=""/>
-    <property name="luapath" value="res/behavior/zeff.lua"/>
+    <property name="luapath" value="res/level/boss_zeff/zeff.lua"/>
     <property name="questcondition" value="monster_problem,monster_banished"/>
    </properties>
   </object>

@@ -132,8 +132,8 @@ void WardenEnemy::loadParticleSystem() {
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 10.f;
-	sizeGen->maxStartSize = 20.f;
+	sizeGen->minStartSize = 15.f;
+	sizeGen->maxStartSize = 30.f;
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 2.f;
 
