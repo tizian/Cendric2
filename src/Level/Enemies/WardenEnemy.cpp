@@ -92,7 +92,7 @@ void WardenEnemy::loadAnimation(int skinNr) {
 	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 50));
 	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
 	for (int i = 0; i < 4; ++i) {
-		lookingAnimation->addFrame(sf::IntRect(0 * 50, 0, 50, 40));
+		lookingAnimation->addFrame(sf::IntRect(0 * 50, 0, 50, 50));
 	}
 	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 50));
 	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 50));
