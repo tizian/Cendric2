@@ -49,6 +49,7 @@ void Enemy::load(int skinNr) {
 	m_interactComponent->setInteractText("ToLoot");
 	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
 	m_interactComponent->setInteractable(false);
+	m_interactComponent->setTooltipHeight(getConfiguredDistanceToHPBar() - GUIConstants::CHARACTER_SIZE_S);
 	addComponent(m_interactComponent);
 
 	delete m_damageNumbers;
@@ -351,6 +352,9 @@ void Enemy::setScriptedBehavior(const std::string& luaPath) {
 	if (m_scriptedBehavior->isError()) {
 		delete m_scriptedBehavior;
 		m_scriptedBehavior = nullptr;
+	}
+	else {
+		m_isAlwaysUpdate = true;
 	}
 }
 
