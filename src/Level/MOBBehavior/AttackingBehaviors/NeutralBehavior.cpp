@@ -10,5 +10,5 @@ sf::Color NeutralBehavior::getConfiguredHealthColor() const {
 }
 
 void NeutralBehavior::updateAggro() {
-	// TODO: check for stealing cendric.
+	// nop
 }

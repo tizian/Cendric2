@@ -44,6 +44,10 @@ public:
 	void leaveLevel();
 	// executes a blocking fight animation (uses the default fight animation) for that mob.
 	void executeFightAnimation();
+	// change animation to facing right
+	void setFacingRight();
+	// change animation to facing left
+	void setFacingLeft();
 	// adds a hint to the screen
 	// can only be used in update function(for now)
 	void addHint(const std::string& hint);

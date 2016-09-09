@@ -10,7 +10,8 @@ enum class RoutineState {
 	Animation,
 	Disappearing,
 	ReloadLock,
-	ReloadUnlock
+	ReloadUnlock,
+	FacingDirection
 };
 
 struct RoutineStep {

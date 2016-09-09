@@ -73,6 +73,11 @@ void ResourceTile::loadAnimation(int skinNr) {
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(false);
 
+	if (skinNr == 3|| skinNr == 4) {
+		// shift them a bit
+		setSpriteOffset(sf::Vector2f((skinNr == 3) ? -10.f : 10.f, 0.f));
+	}
+
 	initializeResource(skinNr);
 }
 

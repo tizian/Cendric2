@@ -41,6 +41,15 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 		m_npc->setReloadEnabled(true);
 		updateStep = true;
 	}
+	else if (currentStep.state == RoutineState::FacingDirection) {
+		m_npc->setState(
+			currentStep.goal.x < 0 ? GameObjectState::Idle_left :
+			currentStep.goal.x > 0 ? GameObjectState::Idle_right : 
+			currentStep.goal.y < 0 ? GameObjectState::Idle_down :
+			GameObjectState::Idle_down
+		);
+		updateStep = true;
+	}
 	else if (currentStep.state == RoutineState::Waiting) {
 		m_remainingStepTime -= frameTime;
 		if (m_remainingStepTime <= sf::Time::Zero) {

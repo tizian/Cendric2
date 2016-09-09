@@ -33,6 +33,8 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior
 		.addFunction("getPosY", &ScriptedBehaviorCallback::getPosY)
 		.addFunction("say", &ScriptedBehaviorCallback::say)
 		.addFunction("wait", &ScriptedBehaviorCallback::wait)
+		.addFunction("setFacingLeft", &ScriptedBehaviorCallback::setFacingLeft)
+		.addFunction("setFacingRight", &ScriptedBehaviorCallback::setFacingRight)
 		.addFunction("setDisposed", &ScriptedBehaviorCallback::setDisposed)
 		.addFunction("leaveLevel", &ScriptedBehaviorCallback::leaveLevel)
 		.addFunction("addHint", &ScriptedBehaviorCallback::addHint)
@@ -98,6 +100,30 @@ void ScriptedBehaviorCallback::executeFightAnimation() {
 	}
 	else {
 		m_enemy->executeDefaultFightAnimation(true);
+	}
+}
+
+void ScriptedBehaviorCallback::setFacingLeft() {
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::FacingDirection;
+		step.goal = sf::Vector2f(-1.f, 0.f);
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		m_enemy->setFacingRight(false);
+	}
+}
+
+void ScriptedBehaviorCallback::setFacingRight() {
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::FacingDirection;
+		step.goal = sf::Vector2f(1.f, 0.f);
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		m_enemy->setFacingRight(true);
 	}
 }
 

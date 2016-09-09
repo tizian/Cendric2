@@ -18,6 +18,10 @@ public:
 	// methods to call in lua script
 	void setTilePosition(float x, float y);
 	void setTilePositionForce(float x, float y);
+	void setFacingUp();
+	void setFacingDown();
+	void setFacingRight();
+	void setFacingLeft();
 	void setDisposed();
 	void wait(int milliseconds);
 	void goToTile(float x, float y);

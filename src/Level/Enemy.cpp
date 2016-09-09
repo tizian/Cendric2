@@ -2,6 +2,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/EnemyMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/EnemyAttackingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
@@ -277,10 +278,12 @@ void Enemy::setAlly(const sf::Time& ttl) {
 	delete m_attackingBehavior;
 	m_attackingBehavior = createAttackingBehavior(true);
 	AllyBehavior* allyBehavior = dynamic_cast<AllyBehavior*>(m_attackingBehavior);
+
 	if (allyBehavior == nullptr) {
-		g_logger->logError("Enemy::setAlly", "Enemy can't be risen as an ally, no AllyBehavior created.");
+		g_logger->logError("Enemy::setAlly", "Enemy can't be risen as an ally, no AllyBehavior or NeutralBehavior created.");
 		return;
 	}
+
 	allyBehavior->setTimeToLive(ttl);
 	m_enemyAttackingBehavior = allyBehavior;
 	m_hpBar.setFillColor(m_enemyAttackingBehavior->getConfiguredHealthColor());

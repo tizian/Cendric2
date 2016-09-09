@@ -92,6 +92,9 @@ void ScriptedBehavior::setCurrentRoutineStep() {
 	case RoutineState::Animation:
 		m_enemy->executeDefaultFightAnimation(true);
 		break;
+	case RoutineState::FacingDirection:
+		m_enemy->setFacingRight(step.goal.x > 0);
+		break;
 	case RoutineState::Disappearing:
 		m_enemy->notifyKilled();
 		m_enemy->notifyLooted();

@@ -1,7 +1,7 @@
 #include "Level/Enemies/PrisonerEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/NeutralWalkingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Prisoner, PrisonerEnemy)
@@ -15,6 +15,9 @@ void PrisonerEnemy::loadAttributes() {
 	m_attributes.setHealth(200);
 	m_attributes.resistancePhysical = 2;
 	m_attributes.calculateAttributes();
+
+	m_isInvincible = true;
+	m_isImmortal = true;
 }
 
 void PrisonerEnemy::loadSpells() {
@@ -23,8 +26,6 @@ void PrisonerEnemy::loadSpells() {
 	
 	m_spellManager->addSpell(chop);
 	m_spellManager->setCurrentSpell(0);
-
-	setAlly(sf::Time::Zero);
 }
 
 float PrisonerEnemy::getConfiguredDistanceToHPBar() const {
@@ -83,7 +84,7 @@ void PrisonerEnemy::loadAnimation(int skinNr) {
 MovingBehavior* PrisonerEnemy::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 
-	behavior = new AllyWalkingBehavior(this);
+	behavior = new NeutralWalkingBehavior(this);
 
 	behavior->setDistanceToAbyss(10.f);
 	behavior->setApproachingDistance(100.f);
@@ -97,7 +98,7 @@ MovingBehavior* PrisonerEnemy::createMovingBehavior(bool asAlly) {
 AttackingBehavior* PrisonerEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 
-	behavior = new AllyBehavior(this);
+	behavior = new NeutralBehavior(this);
 	behavior->setAggroRange(20.f);
 	behavior->setAttackInput(std::bind(&PrisonerEnemy::handleAttackInput, this));
 	return behavior;

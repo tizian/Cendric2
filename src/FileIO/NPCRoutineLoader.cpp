@@ -25,6 +25,10 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("setLooped", &NPCRoutineLoader::setLooped)
 		.addFunction("setTilePosition", &NPCRoutineLoader::setTilePosition)
 		.addFunction("setTilePositionForce", &NPCRoutineLoader::setTilePositionForce)
+		.addFunction("setFacingUp", &NPCRoutineLoader::setFacingUp)
+		.addFunction("setFacingDown", &NPCRoutineLoader::setFacingDown)
+		.addFunction("setFacingLeft", &NPCRoutineLoader::setFacingLeft)
+		.addFunction("setFacingRight", &NPCRoutineLoader::setFacingRight)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
 		.addFunction("setTalkingActive", &NPCRoutineLoader::setTalkingActive)
 		.addFunction("setTalkingActiveForce", &NPCRoutineLoader::setTalkingActiveForce)
@@ -92,6 +96,34 @@ void NPCRoutineLoader::setTalkingEnabled(bool enabled) {
 void NPCRoutineLoader::setReloadLocked(bool locked) {
 	RoutineStep step;
 	step.state = locked ? RoutineState::ReloadLock : RoutineState::ReloadUnlock;
+	m_routine.addStep(step);
+}
+
+void NPCRoutineLoader::setFacingRight() {
+	RoutineStep step;
+	step.state = RoutineState::FacingDirection;
+	step.goal = sf::Vector2f(1.f, 0.f);
+	m_routine.addStep(step);
+}
+
+void NPCRoutineLoader::setFacingLeft() {
+	RoutineStep step;
+	step.state = RoutineState::FacingDirection;
+	step.goal = sf::Vector2f(-1.f, 0.f);
+	m_routine.addStep(step);
+}
+
+void NPCRoutineLoader::setFacingUp() {
+	RoutineStep step;
+	step.state = RoutineState::FacingDirection;
+	step.goal = sf::Vector2f(0.f, -1.f);
+	m_routine.addStep(step);
+}
+
+void NPCRoutineLoader::setFacingDown() {
+	RoutineStep step;
+	step.state = RoutineState::FacingDirection;
+	step.goal = sf::Vector2f(0.f, 1.f);
 	m_routine.addStep(step);
 }
 
