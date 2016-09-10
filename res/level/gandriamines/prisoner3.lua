@@ -1,8 +1,8 @@
 -- Behavior for prisoner (2) in the level gandriamines
 
 routine = function(O) 
-	O:gotoTile(89.5, 17.1)
-	O:setFacingRight()
+	O:gotoTile(72.0, 32.1)
+	O:setFacingLeft()
 	
 	for i = 1, 3 do 
 		O:executeFightAnimation()

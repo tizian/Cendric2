@@ -88,9 +88,6 @@ bool MapReader::checkData(MapData& data) const {
 			logError("a map npc has no spritesheet path.");
 			return false;
 		}
-		if (it.routineID.empty()) {
-			g_logger->logWarning("MapReader","a map npc has no routine.");
-		}
 	}
 
 	return true;
