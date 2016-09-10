@@ -2,13 +2,22 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/NeutralWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
+#include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Prisoner, PrisonerEnemy)
 
 PrisonerEnemy::PrisonerEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
-    Enemy(level, screen) {
+	Enemy(level, screen) {
+}
+
+void PrisonerEnemy::update(const sf::Time& frameTime) {
+	Enemy::update(frameTime);
+	updateTime(m_timeToSpeech, frameTime);
+	if (m_timeToSpeech == sf::Time::Zero) {
+		m_timeToSpeech = sf::seconds(5.f);
+	}
 }
 
 void PrisonerEnemy::loadAttributes() {
@@ -23,7 +32,7 @@ void PrisonerEnemy::loadAttributes() {
 void PrisonerEnemy::loadSpells() {
 	SpellData chop = SpellData::getSpellData(SpellID::Chop);
 	chop.damage = 10;
-	
+
 	m_spellManager->addSpell(chop);
 	m_spellManager->setCurrentSpell(0);
 }
@@ -106,4 +115,11 @@ AttackingBehavior* PrisonerEnemy::createAttackingBehavior(bool asAlly) {
 
 std::string PrisonerEnemy::getSpritePath() const {
 	return "res/assets/enemies/spritesheet_enemy_prisoner.png";
+}
+
+void PrisonerEnemy::onHit(Spell* spell) {
+	if (m_timeToSpeech == sf::Time::Zero && m_scriptedBehavior != nullptr) {
+		m_scriptedBehavior->say("WatchIt", 3);
+	}
+	Enemy::onHit(spell);
 }

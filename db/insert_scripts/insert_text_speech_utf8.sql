@@ -10,3 +10,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ob
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('WardenTriggered', 'speech','Trespasser eliminated!','Eindringling eliminiert!','Iidringling eliminiert!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Test', 'speech','Test','Test','Test');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SoExhausted', 'speech','I''m so exhausted...','Ich bin so müde...','Ich bi so kabutt...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('WorkWork', 'speech','Work, always work...','Arbeit, immer Arbeit...','Schaffe, immer schaffe...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('WatchIt', 'speech','Hey, watch it!','Hey, pass auf!','He, pass uf!');

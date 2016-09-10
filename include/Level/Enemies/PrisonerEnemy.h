@@ -11,10 +11,12 @@ public:
 	PrisonerEnemy(const Level* level, Screen* screen);
 	~PrisonerEnemy() {}
 
+	void update(const sf::Time& frameTime) override;
 	float getConfiguredDistanceToHPBar() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {}
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {}
+	void onHit(Spell* spell) override;
 
 	EnemyID getEnemyID() const override { return EnemyID::Prisoner; }
 
@@ -28,4 +30,7 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+
+private:
+	sf::Time m_timeToSpeech = sf::Time::Zero;
 };
