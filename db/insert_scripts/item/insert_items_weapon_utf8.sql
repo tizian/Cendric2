@@ -78,6 +78,8 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, critical) values ('we_pickaxe', 3, 1, 1);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_pickaxe', 'res/assets/equipment/weapon/spritesheet_weapon_pickaxe.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_pickaxe.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pickaxe', 700, 10, 35, 70, 5);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_pickaxe', 0, -15, 30, 35);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_pickaxe', 1, 500, 250, 50, 50);
 
 -- Pike of Light
 
