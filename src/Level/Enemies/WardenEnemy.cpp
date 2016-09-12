@@ -26,7 +26,7 @@ WardenEnemy::WardenEnemy(const Level* level, Screen* screen) :
 void WardenEnemy::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
 
-	if (m_state == GameObjectState::Idle && m_scriptedBehavior != nullptr) {
+	if (m_wardenState == WardenState::Idle && m_scriptedBehavior != nullptr) {
 		m_scriptedBehavior->update(frameTime);
 		if (AttackingBehavior::isInAggroRange(m_mainChar, this, m_observedRange)) {
 			m_scriptedBehavior->say("WardenTriggered", 3);

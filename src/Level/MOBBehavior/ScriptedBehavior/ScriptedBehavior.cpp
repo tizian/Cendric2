@@ -40,7 +40,7 @@ void ScriptedBehavior::update(const sf::Time& frameTime) {
 		const RoutineStep& step = m_routineSteps.at(m_currentRoutineStep);
 		switch (step.state) {
 		case RoutineState::GoingTo:
-			if (dist(m_enemy->getCenter(), step.goal) < 10.f) {
+			if (dist(m_enemy->getCenter(), step.goal) < 15.f) {
 				m_currentRoutineStep = (m_currentRoutineStep + 1) % m_routineSteps.size();
 				setCurrentRoutineStep();
 			}

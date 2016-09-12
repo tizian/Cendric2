@@ -84,31 +84,36 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 		// check if we're still on our ladder
 		if (!m_mob->getBoundingBox()->intersects(*m_currentLadder->getBoundingBox())) {
 			stopClimbing();
+			checkLadders();
 		}
 	}
 	else {
 		// check if a climbing just started
 		if (!(g_inputController->isKeyJustPressed(Key::Up) || g_inputController->isKeyJustPressed(Key::Down))) return;
 
-		for (auto& go : *(m_mob->getScreen()->getObjects(GameObjectType::_DynamicTile))) {
-			LadderTile* tile = dynamic_cast<LadderTile*>(go);
-			if (tile && tile->isViewable() &&
-				tile->getBoundingBox()->intersects(*m_mob->getBoundingBox())) {
+		checkLadders();
+	}
+}
 
-				float climbingY = tile->getClimbingPositionY(m_mob);
+void UserMovingBehavior::checkLadders() {
+	for (auto& go : *(m_mob->getScreen()->getObjects(GameObjectType::_DynamicTile))) {
+		LadderTile* tile = dynamic_cast<LadderTile*>(go);
+		if (tile && tile->isViewable() &&
+			tile->getBoundingBox()->intersects(*m_mob->getBoundingBox())) {
 
-				WorldCollisionQueryRecord rec;
-				rec.boundingBox = *(m_mob->getBoundingBox());
-				rec.boundingBox.top = climbingY;
-				rec.ignoreDynamicTiles = m_mob->isIgnoreDynamicTiles();
+			float climbingY = tile->getClimbingPositionY(m_mob);
 
-				if (m_mob->getLevel()->collides(rec)) {
-					g_logger->logWarning("UserMovingBehavior", "Cannot start climbing on this ladder, it would stuck the mob.");
-					return;
-				}
+			WorldCollisionQueryRecord rec;
+			rec.boundingBox = *(m_mob->getBoundingBox());
+			rec.boundingBox.top = climbingY;
+			rec.ignoreDynamicTiles = m_mob->isIgnoreDynamicTiles();
 
-				startClimbing(tile, climbingY);
+			if (m_mob->getLevel()->collides(rec)) {
+				g_logger->logWarning("UserMovingBehavior", "Cannot start climbing on this ladder, it would stuck the mob.");
+				return;
 			}
+
+			startClimbing(tile, climbingY);
 		}
 	}
 }

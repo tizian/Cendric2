@@ -16,6 +16,7 @@ void EnemyMovingBehavior::setFacingRight(bool value) {
 void EnemyMovingBehavior::handleMovementInput() {
 	if (m_movingTarget != nullptr) {
 		sf::Vector2f center = m_enemy->getCenter();
+
 		// the enemy tries to get near its target
 		if (m_movingTarget->x < center.x && std::abs(m_movingTarget->x - center.x) > 10.f) {
 			m_movingDirectionX = -1;

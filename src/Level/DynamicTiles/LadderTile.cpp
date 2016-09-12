@@ -92,7 +92,7 @@ void LadderTile::setPosition(const sf::Vector2f& position) {
 float LadderTile::getClimbingPositionY(GameObject* object) const {
 	float goHeight = object->getBoundingBox()->height;
 	float ladderBottom = getPosition().y + getBoundingBox()->height;
-	float goBottom = object->getPosition().y + goHeight;
+	float goBottom = std::round(object->getPosition().y + goHeight);
 
 	int goDiff = static_cast<int>(std::round(ladderBottom - goBottom));
 	goDiff = goDiff % LADDER_STEP;
