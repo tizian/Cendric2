@@ -12,6 +12,8 @@ BookWindow::BookWindow(const BookData& data) : Window(
 	COLOR_LIGHT_BROWN, // back
 	COLOR_DARK_BROWN) // ornament 
 {
+	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);
+
 	m_data = data;
 
 	m_leftArrow = new ArrowButton(false);
@@ -50,8 +52,6 @@ BookWindow::BookWindow(const BookData& data) : Window(
 	m_content.setColor(COLOR_BLACK);
 
 	setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - WIDTH), 0.5f * (WINDOW_HEIGHT - HEIGHT)));
-
-	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);
 }
 
 BookWindow::~BookWindow() {

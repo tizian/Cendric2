@@ -233,9 +233,12 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		--  winning head
-		DL:createNPCNode(1001, -2, "DL_Morris_WinHeadDagger") -- Head! You win. I guess I have to leave you my beloved dagger then. Take good care of it.
+		DL:createNPCNode(1001, 1005, "DL_Morris_WinHeadDagger") -- Head! You win. I guess I have to leave you my beloved dagger then.
 		DL:addConditionProgress("npc_morris", "dagger")
 		DL:addItem("we_enchanteddagger", 1)
+		DL:addNode()
+		
+		DL:createNPCNode(1005, -2, "DL_Morris_WinDagger2") -- You can't imagine what it took to sneak that in... Well, take good care of it.
 		DL:addNode()
 		
 		--  losing head
@@ -243,7 +246,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		--  winning tails
-		DL:createNPCNode(1004, -2, "DL_Morris_WinTailsDagger") -- Tails! You win. I guess I have to leave you my beloved dagger then. Take good care of it.
+		DL:createNPCNode(1004, 1005, "DL_Morris_WinTailsDagger") -- Tails! You win. I guess I have to leave you my beloved dagger then. Take good care of it.
 		DL:addConditionProgress("npc_morris", "dagger")
 		DL:addItem("we_enchanteddagger", 1)
 		DL:addNode()

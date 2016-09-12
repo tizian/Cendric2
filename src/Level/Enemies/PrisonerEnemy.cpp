@@ -15,9 +15,6 @@ PrisonerEnemy::PrisonerEnemy(const Level* level, Screen* screen) :
 void PrisonerEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
 	updateTime(m_timeToSpeech, frameTime);
-	if (m_timeToSpeech == sf::Time::Zero) {
-		m_timeToSpeech = sf::seconds(5.f);
-	}
 }
 
 void PrisonerEnemy::loadAttributes() {
@@ -120,6 +117,7 @@ std::string PrisonerEnemy::getSpritePath() const {
 void PrisonerEnemy::onHit(Spell* spell) {
 	if (m_timeToSpeech == sf::Time::Zero && m_scriptedBehavior != nullptr) {
 		m_scriptedBehavior->say("WatchIt", 3);
+		m_timeToSpeech = sf::seconds(5.f);
 	}
 	Enemy::onHit(spell);
 }
