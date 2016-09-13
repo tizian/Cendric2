@@ -1,6 +1,6 @@
 -- Dialogue for NPC "npc_edgar"
 
-requiredGold = 200
+requiredGold = 300
 
 loadDialogue = function(DL) 
 
@@ -113,8 +113,19 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") >= requiredGold)) then 
 
-		DL:createNPCNode(11, -1, "DL_Edgar_YoureReleased") -- Okay, that's enough. You're free to go. I hope I won't see you here again.
+		DL:createNPCNode(11, 12, "DL_Edgar_YoureReleased") -- Okay, that's enough.
 		DL:removeGold(requiredGold)
+		DL:addNode()
+		
+		DL:createNPCNode(12, 13, "DL_Edgar_YoureReleased2") -- Here, you can have your old belongings back.
+		-- DL:addStoredItems()
+		DL:addNode()
+		
+		DL:createNPCNode(13, 14, "DL_Edgar_YoureReleased3") -- You're free to go. I hope I won't see you here again.
+		DL:addNode()
+		
+		DL:createNPCNode(14, -1, "") -- 
+		DL:startMap("res/map/gandria/gandria.tmx", 665, 1200)
 		DL:addNode()
 
 	end

@@ -175,11 +175,11 @@ loadDialogue = function(DL)
 			tailsNode = 504
 		end
 
-		DL:createNPCNode(24, -1, "DL_Morris_TossCoin") -- 
+		DL:createNPCNode(24, headNode, "DL_Morris_TossCoin") -- 
 		DL:addNode()
 
 
-		DL:createNPCNode(25, -1, "DL_Morris_TossCoin") -- 
+		DL:createNPCNode(25, tailsNode, "DL_Morris_TossCoin") -- 
 		DL:addNode()
 		
 		--  winning head
@@ -225,11 +225,11 @@ loadDialogue = function(DL)
 			tailsNode = 1003
 		end
 
-		DL:createNPCNode(28, -1, "DL_Morris_TossCoin") -- 
+		DL:createNPCNode(28, headNode, "DL_Morris_TossCoin") -- 
 		DL:addNode()
 
 
-		DL:createNPCNode(29, -1, "DL_Morris_TossCoin") -- 
+		DL:createNPCNode(29, tailsNode, "DL_Morris_TossCoin") -- 
 		DL:addNode()
 		
 		--  winning head
