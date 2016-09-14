@@ -15,8 +15,14 @@ loadDialogue = function(DL)
 		DL:setRoot(13) 
 	elseif (DL:isQuestState("elder_chest", "void")) then 
 		DL:setRoot(2) 
-	else 
+	elseif (DL:isQuestState("elder_chest", "started")) then 
 		DL:setRoot(35) 
+	elseif (DL:isQuestState("elder_chest", "completed") and not DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
+		DL:setRoot(39) 
+	elseif (DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
+		DL:setRoot(41) 
+	else 
+		DL:setRoot(-1) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_vincent", "talked")) then 
@@ -276,19 +282,62 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:isQuestState("elder_chest", "started")) then 
 
-	DL:createChoiceNode(35)
-	if (not DL:isConditionFulfilled("npc_vincent2", "observer_spells")) then 
-		DL:addChoice(36, "DL_Choice_ObserverSpells") -- What are "observer spells"?
+		DL:createChoiceNode(35)
+		if (not DL:isConditionFulfilled("npc_vincent2", "observer_spells")) then 
+			DL:addChoice(36, "DL_Choice_ObserverSpells") -- What are "observer spells"?
+		end
+		if (DL:isQuestState("elder_chest", "started") and DL:isConditionFulfilled("npc_vincent2", "rhendal_chest_looted")) then 
+			DL:addChoice(37, "DL_Choice_FoundChest") -- I got the gem from the Elder's chest...
+		end
+		DL:addChoice(-1, "DL_Choice_CU") -- See you later.
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_vincent2", "observer_spells")) then 
+
+			DL:createNPCNode(36, -2, "DL_Vincent_ObserverSpells") -- A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. And this won't be a nice experience, I can tell you that.
+			DL:addConditionProgress("npc_vincent2", "observer_spells")
+			DL:addHint("ObserverSpell")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("elder_chest", "started") and DL:isConditionFulfilled("npc_vincent2", "rhendal_chest_looted")) then 
+
+			DL:createNPCNode(37, 38, "DL_Vincent_OpenedTheChest") -- Hehe, I knew you'd succeed. But I don't want that stone anyway, you can keep it as your reward.
+			DL:addNode()
+
+
+			DL:createNPCNode(38, -2, "DL_Vincent_StealingFitsYou") -- Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuable things.
+			DL:changeQuestState("elder_chest", "completed")
+			DL:addReputationProgress("thief", 5)
+			DL:addNode()
+
+		end
+
 	end
-	DL:addChoice(-1, "DL_Choice_CU") -- See you later.
-	DL:addNode()
 
-	if (not DL:isConditionFulfilled("npc_vincent2", "observer_spells")) then 
+	if (DL:isQuestState("elder_chest", "completed") and not DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
 
-		DL:createNPCNode(36, -2, "DL_Vincent_ObserverSpells") -- A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. And this won't be a nice experience, I can tell you that.
-		DL:addConditionProgress("npc_vincent2", "observer_spells")
-		DL:addHint("ObserverSpell")
+		DL:createChoiceNode(39)
+		DL:addChoice(40, "DL_Choice_TeachMe") -- Teach me.
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(40, -2, "DL_Vincent_TeachUnlock") -- Of course. Just read this scroll and I can offer your more work in this... domain. (Grins) 
+		DL:addItem("sp_unlock", 1)
+		DL:addConditionProgress("npc_vincent2", "second_quest")
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
+
+		DL:createChoiceNode(41)
+		DL:addChoice(-1, "DL_Choice_SecondQuest") -- I'm ready for your new job.
+		DL:addChoice(-1, "DL_Choice_-1") -- 
 		DL:addNode()
 
 	end

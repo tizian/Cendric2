@@ -110,6 +110,16 @@ npc.id:npc_harek
 	]
 	[
 		# Link node, tag is next tag
+		tag:14
+		condition:DL:isQuestState("ice_armor", "started") and DL:isQuestComplete("ice_armor")
+		# translation: 
+		translation.tag:DL_Choice_GotIronOre
+		translation.en:I got the iron ore for you.
+		translation.de:Ich habe das Eisenerz für dich.
+		translation.ch:Ich hans Iseerz für dich.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -248,6 +258,38 @@ npc.id:npc_harek
 	translation.en:... And finished. Here you go!
 	translation.de:... Und fertig. Hier hast du ihn!
 	translation.ch:... Und fertig. Da heschen!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:removeItem("mi_firstguardianheart", 1)
+	trigger:DL:removeItem("mi_ironore", 10)
+	# translation: 
+	translation.tag:DL_Harek_SmithMagicArmor
+	translation.en:Very good. (Harek takes the ingredients and starts hammering on his anvil furiously...)
+	translation.de:Sehr gut. (Harek nimmt die Materialien und beginnt, wie wild auf seinem Amboss herumzuhämmern...)
+	translation.ch:Sehr guet. (De Harek nimmt d''Zuetate und fangt ah we wild uf sim Amboss umezhämmere...)
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:changeQuestState("ice_armor", "completed")
+	trigger:DL:addItem("eq_icearmor", 1)
+	# translation: 
+	translation.tag:DL_Harek_SmithMagicArmor2
+	translation.en:Here you go. Splendid, isn't it.
+	translation.de:Hier ist sie. Prächtig, nicht wahr.
+	translation.ch:Da isch si. Prächtig, gell.
 	[
 		# Link node, tag is next tag
 		tag:-2

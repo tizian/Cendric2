@@ -27,7 +27,7 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(4)
-	DL:addChoice(5, "DL_Choice_Trade") -- Show me your wares.
+	DL:addChoice(5, "DL_Choice_Trade") -- Show me your wares. [TRADE]
 	if (DL:isQuestState("ice_armor", "void") and DL:hasItem("mi_firstguardianheart", 1)) then 
 		DL:addChoice(6, "DL_Choice_RivetArmor") -- Could you smith me a special armour?
 	end
@@ -36,6 +36,9 @@ loadDialogue = function(DL)
 	end
 	if (DL:isQuestState("broken_staff", "started") and DL:isQuestComplete("broken_staff")) then 
 		DL:addChoice(12, "DL_Choice_BrokenStaffComplete") -- I got all the parts of the broken staff.
+	end
+	if (DL:isQuestState("ice_armor", "started") and DL:isQuestComplete("ice_armor")) then 
+		DL:addChoice(14, "DL_Choice_GotIronOre") -- I got the iron ore for you.
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -64,7 +67,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(10, -2, "DL_Harek_NiceStone2") -- On the other hand, I still need some iron ore. If you could bring me some from the mine of Gandria, I'll smith you your armour right away!
+		DL:createNPCNode(10, -2, "DL_Harek_NiceStone2") -- However, I still need some iron ore. If you could bring me some from the mine of Gandria, I'll smith you your armour right away!
 		DL:changeQuestState("ice_armor", "started")
 		DL:addNode()
 
@@ -90,6 +93,21 @@ loadDialogue = function(DL)
 		DL:createNPCNode(13, -2, "DL_Harek_BrokenStaffComplete2") -- ... And finished. Here you go!
 		DL:changeQuestState("broken_staff", "completed")
 		DL:addItem("we_tearstaff", 1)
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("ice_armor", "started") and DL:isQuestComplete("ice_armor")) then 
+
+		DL:createNPCNode(14, 15, "DL_Harek_SmithMagicArmor") -- Very good. (Harek takes the ingredients and starts hammering on his anvil furiously...)
+		DL:removeItem("mi_firstguardianheart", 1)
+		DL:removeItem("mi_ironore", 10)
+		DL:addNode()
+
+
+		DL:createNPCNode(15, -2, "DL_Harek_SmithMagicArmor2") -- Here you go. Splendid, isn't it.
+		DL:changeQuestState("ice_armor", "completed")
+		DL:addItem("eq_icearmor", 1)
 		DL:addNode()
 
 	end

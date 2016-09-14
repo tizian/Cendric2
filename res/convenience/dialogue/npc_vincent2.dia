@@ -43,6 +43,21 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:35
+		condition:DL:isQuestState("elder_chest", "started")
+	]
+	[
+		# Link node, tag is next tag
+		tag:39
+		condition:DL:isQuestState("elder_chest", "completed") and not DL:isConditionFulfilled("npc_vincent2", "second_quest")
+	]
+	[
+		# Link node, tag is next tag
+		tag:41
+		condition:DL:isConditionFulfilled("npc_vincent2", "second_quest")
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1
@@ -692,6 +707,16 @@ npc.id:npc_vincent2
 	]
 	[
 		# Link node, tag is next tag
+		tag:37
+		condition:DL:isQuestState("elder_chest", "started") and DL:isConditionFulfilled("npc_vincent2", "rhendal_chest_looted")
+		# translation: 
+		translation.tag:DL_Choice_FoundChest
+		translation.en:I got the gem from the Elder's chest...
+		translation.de:Ich habe den Edelstein aus der Truhe des Ältesten...
+		translation.ch:Ich han de Edelstei us de True vom Älteste...
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:DL_Choice_CU
@@ -714,5 +739,95 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{1
+	# [37] NPC Node
+	tag:37
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_OpenedTheChest
+	translation.en:Hehe, I knew you'd succeed. But I don't want that stone anyway, you can keep it as your reward.
+	translation.de:Hehe, ich wusste dass du es schaffen würdest. Aber ich will diesen Stein gar nicht, du kannst ihn behalten - als deine Belohnung.
+	translation.ch:Hehe, ich ha gwüsst dases schaffsch. Aber ich wett de Stei gar nid... Chaschen phalte - als dini Belohnig.
+	[
+		# Link node, tag is next tag
+		tag:38
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	trigger:DL:changeQuestState("elder_chest", "completed")
+	trigger:DL:addReputationProgress("thief", 5)
+	# translation: 
+	translation.tag:DL_Vincent_StealingFitsYou
+	translation.en:Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuable things.
+	translation.de:Es scheint dir ja nicht viel auszumachen, die Habseligkeiten anderer Leute zu nehmen. Ich könnte dir beibringen, wie du an noch wertvollere Dinge kommen kannst.
+	translation.ch:Es schiint dir ja nid viel uszmache, d'Habseligkeite vo andere Lüt zne. Ich chönt dir bibringe wied no a wertvolleri Sache cho chasch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [39] Choice Node
+	tag:39
+	[
+		# Link node, tag is next tag
+		tag:40
+		# translation: 
+		translation.tag:DL_Choice_TeachMe
+		translation.en:Teach me.
+		translation.de:Bring es mir bei.
+		translation.ch:Brings mer bi.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	trigger:DL:addItem("sp_unlock", 1)
+	trigger:DL:addConditionProgress("npc_vincent2", "second_quest")
+	# translation: 
+	translation.tag:DL_Vincent_TeachUnlock
+	translation.en:Of course. Just read this scroll and I can offer your more work in this... domain. (Grins) 
+	translation.de:Natürlich. Lies einfach diese Schriftrolle und ich kann dir einen weiteren Auftrag anbieten, falls du noch an Arbeit in diesem... Bereich interessiert bist. (Grinst)
+	translation.ch:Natürlich. Lies eifach die Schriftrolle und ich chan dir na en wiitere Job abüte, fallsd immer na a Arbet i dem... Bereich interessiert bisch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [41] Choice Node
+	tag:41
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_SecondQuest
+		translation.en:I'm ready for your new job.
+		translation.de:Ich bin bereit für den neuen Auftrag.
+		translation.ch:Ich bi parat für de neu Job.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_-1
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }

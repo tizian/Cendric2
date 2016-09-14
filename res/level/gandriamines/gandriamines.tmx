@@ -1602,8 +1602,7 @@
     <property name="text" value="DeathAhead"/>
    </properties>
   </object>
-  <object id="88" gid="728" x="1587" y="622.333" width="50" height="50"/>
-  <object id="89" gid="728" x="1587" y="622.333" width="50" height="50">
+  <object id="89" gid="728" x="1585" y="625" width="50" height="50">
    <properties>
     <property name="text" value="HoldRight"/>
    </properties>
