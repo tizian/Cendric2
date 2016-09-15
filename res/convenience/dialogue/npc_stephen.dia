@@ -13,6 +13,11 @@ npc.id:npc_stephen
 	[
 		# Link node, tag is next tag
 		tag:2
+		condition:not DL:isConditionFulfilled("npc_stephen", "lloyd")
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
 	]
 }
 {1
@@ -76,6 +81,16 @@ npc.id:npc_stephen
 		translation.en:I don't have time for this.
 		translation.de:Ich habe keine Zeit für das.
 		translation.ch:Ich han grad ke Ziit für das.
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:DL:isConditionFulfilled("npc_stephen", "who_are_you") and DL:hasItem("qe_recommendationletter")
+		# translation: 
+		translation.tag:DL_Choice_Lloyd
+		translation.en:I need to talk to some "Lloyd" here... (Show the letter)
+		translation.de:Ich muss hier mit so einem "Lloyd" reden... (Brief zeigen)
+		translation.ch:Ich mu da mit somne "Lloyd" rede... (Brief zeige)
 	]
 	[
 		# Link node, tag is next tag
@@ -217,5 +232,121 @@ npc.id:npc_stephen
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:removeItem("qe_recommendationletter", 1)
+	trigger:DL:addConditionProgress("npc_stephen", "lloyd")
+	# translation: 
+	translation.tag:DL_Stephen_Laughter
+	translation.en:(Stephen takes the letter and then starts laughing uncontrollably)
+	translation.de:(Stephen nimmt den Brief und beginnt, unbeherrscht zu lachen)
+	translation.ch:(De Stephen nimmt de Brief und fangt denn völlig unkontrolliert ah lache.)
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Stephen_PieceOfPaper
+	translation.en:And you thought this piece of paper will bring you to him? That's truly ridiculous.
+	translation.de:Und du hast gedacht, dieser Papierfetzen wird dich zu ihm bringen? Das ist lächerlich.
+	translation.ch:Und du hesch würkli denkt, dass de Papierfetze dich zu ihm bringe wird? Da isch lächerlich.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{2
+	# [14] Choice Node
+	tag:14
+	[
+		# Link node, tag is next tag
+		tag:15
+		# translation: 
+		translation.tag:DL_Choice_Urgent
+		translation.en:But it's urgent!
+		translation.de:Aber es ist dringend!
+		translation.ch:Aber es isch dringend!
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		# translation: 
+		translation.tag:DL_Choice_Inina
+		translation.en:But this letter is from the High Priestess Inina!
+		translation.de:Aber dieser Brief ist von der Hohepriesterin Inina!
+		translation.ch:Aber de Brief isch vode Hohepriesterin Inina!
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
+		# translation: 
+		translation.tag:DL_Choice_Intimidate
+		translation.en:Just let me to him and no one gets hurt.
+		translation.de:Lass mich einfach zu ihm und niemand wird verletzt.
+		translation.ch:Lah mich eifach zu ihm und niemert wird verletzt.
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Stephen_Urgent
+	translation.en:Sure it is. But there are other urgent things too. Like what you'll have to do to get your letter back.
+	translation.de:Natürlich. Aber es gibt auch andere dringende Sachen. So wie das, was du für mich zu erledigen hast, wenn du deinen Brief wieder willst.
+	translation.ch:Natürlich. Aber es git au anderi dringendi Sache. So we da, wa du für mich erledige muesch, wend din Brief wider wetsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Stephen_Inina
+	translation.en:Good for you. But you can't talk to her either until you've taken care of my tiny problem. Then you'll get your letter back.
+	translation.de:Schön für dich. Aber du kannst auch nicht mit ihr sprechen bis du eine kleine Sache für mich erledigt hast. Dann wirst du deinen Brief zurück kriegen.
+	translation.ch:Schön für dich. Aber du chasch au nid mit ihre rede bis du e chlini Sach für mich erledigt hesch. Denn bechunsch au din Brief wieder.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Stephen_Intimidate
+	translation.en:Ah, you're a tough boy aren't you. But I think I'll have to keep your letter for a while - until you've taken care of some problem of mine...
+	translation.de:Ah, du bist ein harter Junge, nicht wahr. Aber ich glaube, ich muss deinen Brief noch ein bisschen behalten - bis du eine Sache für mich erledigt hast.
+	translation.ch:Ah, du bisch en herte Siech, he. Aber ich mu din Brief glaub na bitz phalte - bis du so e Sach für mich erledigt hesch...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [18] Choice Node
+	tag:18
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }
