@@ -22,6 +22,8 @@ public:
 	void loadNpcs(MapData& data, MapScreen* screen) const;
 	// loads books out of map data and adds them directly to the screen
 	void loadBooks(MapData& data, MapScreen* screen) const;
+	// loads doors out of map data and adds them directly to the screen
+	void loadDoors(MapData& data, MapScreen* screen) const;
 	// loads signs out of map data and adds them directly to the screen
 	void loadSigns(MapData& data, MapScreen* screen) const;
 	// loads lights out of map data and adds them directly to the screen

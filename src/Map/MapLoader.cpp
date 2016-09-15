@@ -7,6 +7,7 @@
 #include "ObjectFactory.h"
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "Map/DynamicTiles/BookTile.h"
+#include "Map/DynamicTiles/DoorMapTile.h"
 #include "Map/DynamicTiles/SignMapTile.h"
 #include "Trigger.h"
 
@@ -30,6 +31,20 @@ void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
 		book->loadAnimation(it.skinNr);
 
 		screen->addObject(book);
+	}
+}
+
+void MapLoader::loadDoors(MapData& data, MapScreen* screen) const {
+	// calculate doors
+	for (auto& it : data.doors) {
+		DoorMapTile* door = new DoorMapTile(it, screen);
+		door->init();
+		door->setPosition(it.position + door->getPositionOffset());
+		door->setDebugBoundingBox(COLOR_NEUTRAL);
+		door->loadResources();
+		door->loadAnimation(it.skinNr);
+
+		screen->addObject(door);
 	}
 }
 

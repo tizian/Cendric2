@@ -229,6 +229,9 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 		else if (name.find("book") != std::string::npos) {
 			if (!readBooks(objectgroup, data)) return false;
 		}
+		else if (name.find("door") != std::string::npos) {
+			if (!readDoors(objectgroup, data)) return false;
+		}
 		else if (name.find("sign") != std::string::npos) {
 			if (!readSigns(objectgroup, data)) return false;
 		}
@@ -330,6 +333,119 @@ bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 	return true;
 }
 
+bool MapReader::readDoors(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+
+		int x;
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int gid;
+		result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int offset = static_cast<int>(MapDynamicTileID::Door) + m_firstGidDynamicTiles - 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+
+		DoorData door;
+
+		door.skinNr = skinNr;
+		door.position.x = static_cast<float>(x);
+		door.position.y = static_cast<float>(y) - TILE_SIZE_F;
+
+		// sign properties
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+			while (_property != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = _property->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+
+				std::string attrText = textAttr;
+
+				// Keys
+				if (attrText.compare("key") == 0) {
+					std::string keyItemID = _property->Attribute("value");
+					if (keyItemID.empty()) {
+						logError("XML file could not be read, key itemID is not specified.");
+						return false;
+					}
+					door.keyItemID = keyItemID;
+				}
+
+				// Conditions
+				std::string name = textAttr;
+
+				bool isNotCondition = false;
+				if (name.compare("not conditions") == 0) {
+					isNotCondition = true;
+				}
+				else if (name.compare("conditions") != 0) {
+					_property = _property->NextSiblingElement("property");
+					continue;
+				}
+
+				textAttr = _property->Attribute("value");
+				if (textAttr == nullptr) {
+					g_logger->logWarning("WorldReader", "property 'conditions' or 'not conditions' on door properties has no content.");
+					continue;
+				}
+
+				std::string conditions = textAttr;
+
+				size_t pos = 0;
+
+				while (!conditions.empty()) {
+					if ((pos = conditions.find(",")) == std::string::npos) {
+						logError("Door conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
+						continue;
+					}
+
+					std::string conditionType = conditions.substr(0, pos);
+					conditions.erase(0, pos + 1);
+					std::string conditionName;
+
+					if ((pos = conditions.find(",")) != std::string::npos) {
+						conditionName = conditions.substr(0, pos);
+						conditions.erase(0, pos + 1);
+					}
+					else {
+						conditionName = conditions;
+						conditions.clear();
+					}
+
+					Condition condition;
+					condition.type = conditionType;
+					condition.name = conditionName;
+
+					if (isNotCondition) {
+						condition.negative = false;
+					}
+					else {
+						condition.negative = true;
+					}
+				}
+
+				_property = _property->NextSiblingElement("property");
+			}
+		}
+
+		data.doors.push_back(door);
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
 bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, MapData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
@@ -356,7 +472,7 @@ bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 		sign.position.x = static_cast<float>(x);
 		sign.position.y = static_cast<float>(y) - TILE_SIZE_F;
 
-		// npc properties
+		// sign properties
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties != nullptr) {
 			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
