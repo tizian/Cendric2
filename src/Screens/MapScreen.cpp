@@ -1,6 +1,7 @@
 #include "Screens/MapScreen.h"
 #include "Screens/MenuScreen.h"
 #include "Map/NPC.h"
+#include "Map/DynamicTiles/DoorMapTile.h"
 #include "Map/MapMainCharacterLoader.h"
 #include "Screens/ScreenManager.h"
 #include "ScreenOverlays/ScreenOverlay.h"
@@ -95,6 +96,9 @@ void MapScreen::notifyConditionAdded(const std::string& conditionType, const std
 	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
 			npc->notifyReloadNeeded();
+		}
+		else if (DoorMapTile* door = dynamic_cast<DoorMapTile*>(it)) {
+			door->notifyReloadNeeded();
 		}
 	}
 }

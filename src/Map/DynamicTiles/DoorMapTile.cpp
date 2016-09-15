@@ -12,18 +12,30 @@ DoorMapTile::DoorMapTile(const DoorData& data, MapScreen* mapScreen) : MapDynami
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Door"), this, m_mainChar);
 	m_interactComponent->setInteractRange(OPEN_RANGE);
 	m_interactComponent->setInteractText("ToOpen");
-	m_interactComponent->setOnInteract(std::bind(&DoorMapTile::onInteract, this));
+	m_interactComponent->setOnInteract(std::bind(&DoorMapTile::onRightClick, this));
 	addComponent(m_interactComponent);
 
 	m_isCollidable = true;
+	m_open = false;
 }
 
-void DoorMapTile::onInteract() {
-
+void DoorMapTile::open() {
+	m_open = true;
+	m_isCollidable = false;
+	setState(GameObjectState::Open);
+	m_interactComponent->setInteractable(false);
 }
 
 void DoorMapTile::update(const sf::Time& frameTime) {
-	m_interactComponent->setInteractable(true);
+	if (m_state == GameObjectState::Closed) {
+		m_interactComponent->setInteractable(true);
+	}
+
+	if (m_reloadNeeded) {
+		reloadConditions();
+		m_reloadNeeded = false;
+	}
+
 	MapDynamicTile::update(frameTime);
 }
 
@@ -35,14 +47,26 @@ void DoorMapTile::init() {
 
 void DoorMapTile::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
-	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	Animation* openAnimation = new Animation();
+	openAnimation->setSpriteSheet(tex);
+	openAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
-	addAnimation(GameObjectState::Idle, idleAnimation);
+	addAnimation(GameObjectState::Open, openAnimation);
+
+	Animation* closedAnimation = new Animation();
+	closedAnimation->setSpriteSheet(tex);
+	closedAnimation->addFrame(sf::IntRect(TILE_SIZE, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+
+	addAnimation(GameObjectState::Closed, closedAnimation);
 
 	// initial values
-	setState(GameObjectState::Idle);
+	if (m_open) {
+		setState(GameObjectState::Open);
+	}
+	else {
+		setState(GameObjectState::Closed);
+	}
+	
 	playCurrentAnimation(false);
 }
 
@@ -57,6 +81,60 @@ void DoorMapTile::setPosition(const sf::Vector2f& pos) {
 void DoorMapTile::onMouseOver() {
 	setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
 	m_interactComponent->setInteractable(false);
+}
+
+void DoorMapTile::onRightClick() {
+	if (m_open) return;
+
+	// check if the door is in range
+	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
+
+	if (!inRange) {
+		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+	}
+	else if (m_state == GameObjectState::Closed && m_data.keyItemID.empty()) {
+		open();
+		g_inputController->lockAction();
+	}
+	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
+		open();
+
+		std::string tooltipText = g_textProvider->getText("Used");
+		tooltipText.append(g_textProvider->getText(m_data.keyItemID, "item"));
+		m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
+
+		g_inputController->lockAction();
+	}
+	else {
+		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
+	}
+}
+
+void DoorMapTile::reloadConditions() {
+	CharacterCore* core = m_screen->getCharacterCore();
+
+	bool open = true;
+	for (auto& condition : m_data.conditions) {
+		if (condition.negative && core->isConditionFulfilled(condition.type, condition.name)) {
+			open = false;
+		}
+		else if (!condition.negative && !core->isConditionFulfilled(condition.type, condition.name)) {
+			open = false;
+		}
+	}
+
+	if (open) {
+		m_isCollidable = false;
+		m_open = true;
+	}
+	else {
+		m_isCollidable = true;
+		m_open = false;
+	}
+}
+
+void DoorMapTile::notifyReloadNeeded() {
+	m_reloadNeeded = true;
 }
 
 void DoorMapTile::renderAfterForeground(sf::RenderTarget& renderTarget) {

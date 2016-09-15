@@ -1434,6 +1434,10 @@
   </object>
  </objectgroup>
  <objectgroup name="door">
-  <object id="225" gid="1351" x="3000" y="3139" width="50" height="50"/>
+  <object id="225" gid="1351" x="3000" y="3139" width="50" height="50">
+   <properties>
+    <property name="key" value="ke_rhendal"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -38,5 +38,7 @@ enum class GameObjectState {
 	Off, // used by the lever and the switch tiles
 	Trembling, // used by unstable tiles
 	Blinking, // used by observer/warden enemies
-	Looking // used by observer/warden enemies
+	Looking, // used by observer/warden enemies
+	Open,	// used by door tiles
+	Closed	// used by door tiles
 };

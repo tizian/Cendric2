@@ -19,16 +19,22 @@ public:
 	void loadAnimation(int skinNr) override;
 	void setPosition(const sf::Vector2f& pos) override;
 	void onMouseOver() override;
+	void onRightClick() override;
 
+	void notifyReloadNeeded();
+	
 	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Door; }
 
 private:
 	std::string getSpritePath() const override;
-	void onInteract();
+	void reloadConditions();
+	void open();
 
 private:
 	DoorData m_data;
 	InteractComponent* m_interactComponent;
+	bool m_open;
+	bool m_reloadNeeded = false;
 
 	static const float OPEN_RANGE;
 	static const float TOOLTIP_TOP;
