@@ -85,7 +85,7 @@ npc.id:npc_stephen
 	[
 		# Link node, tag is next tag
 		tag:12
-		condition:DL:isConditionFulfilled("npc_stephen", "who_are_you") and DL:hasItem("qe_recommendationletter")
+		condition:DL:isConditionFulfilled("npc_stephen", "who_are_you") and DL:hasItem("qe_recommendationletter", 1)
 		# translation: 
 		translation.tag:DL_Choice_Lloyd
 		translation.en:I need to talk to some "Lloyd" here... (Show the letter)
@@ -342,11 +342,35 @@ npc.id:npc_stephen
 	tag:18
 	[
 		# Link node, tag is next tag
+		tag:19
+		# translation: 
+		translation.tag:DL_Choice_OpenGate
+		translation.en:Open the damn gate!
+		translation.de:Öffne die verdammte Tür!
+		translation.ch:Mach du verdammt Türe uf!
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:addConditionProgress("default", "innerwall_open")
+	# translation: 
+	translation.tag:DL_Stephen_Sure
+	translation.en:Sure.
+	translation.de:Sicher.
+	translation.ch:Sicher.
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }

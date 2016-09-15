@@ -97,7 +97,10 @@ void MapScreen::notifyConditionAdded(const std::string& conditionType, const std
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
 			npc->notifyReloadNeeded();
 		}
-		else if (DoorMapTile* door = dynamic_cast<DoorMapTile*>(it)) {
+	}
+
+	for (auto& it : *getObjects(GameObjectType::_DynamicTile)) {
+		if (DoorMapTile* door = dynamic_cast<DoorMapTile*>(it)) {
 			door->notifyReloadNeeded();
 		}
 	}
