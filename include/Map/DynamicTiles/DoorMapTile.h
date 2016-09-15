@@ -20,7 +20,6 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	void onMouseOver() override;
 
-	GameObjectType getConfiguredType() const override;
 	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Door; }
 
 private:

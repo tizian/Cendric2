@@ -1,5 +1,6 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
+#include "Map/MapDynamicTile.h"
 
 Map::Map() : World() {
 	m_worldData = &m_mapData;
@@ -48,6 +49,7 @@ void Map::loadForRenderTexture() {
 	loader.loadBooks(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 	loader.loadDoors(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 	loader.loadSigns(m_mapData, dynamic_cast<MapScreen*>(m_screen));
+	m_dynamicTiles = m_screen->getObjects(GameObjectType::_DynamicTile);
 }
 
 void Map::setWorldView(sf::RenderTarget& target, const sf::Vector2f& center) const {
@@ -85,10 +87,22 @@ bool Map::collides(WorldCollisionQueryRecord& rec) const {
 		}
 	}
 
+	// and triangles
 	for (auto& triangle : m_mapData.collidableTriangles) {
 		if (triangle.intersects(rec.boundingBox)) {
 			rec.collides = true;
 			rec.noSafePos = true;
+		}
+	}
+
+	// check collidable dynamic tiles
+	for (GameObject* go : *m_dynamicTiles) {
+		MapDynamicTile* tile = dynamic_cast<MapDynamicTile*>(go);
+
+		if (rec.ignoreDynamicTiles) continue;
+		const sf::FloatRect& tileBB = *tile->getBoundingBox();
+		if (tile != rec.excludedGameObject && tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+			calculateCollisionLocations(rec, tileBB);
 		}
 	}
 	

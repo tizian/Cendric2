@@ -7,7 +7,7 @@ MapDynamicTile::MapDynamicTile(MapScreen* mapScreen) : AnimatedGameObject() {
 	m_mainChar = mapScreen->getMainCharacter();
 }
 
-bool MapDynamicTile::getIsCollidable() const {
+bool MapDynamicTile::isCollidable() const {
 	return m_isCollidable;
 }
 

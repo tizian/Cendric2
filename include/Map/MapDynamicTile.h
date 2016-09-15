@@ -28,7 +28,7 @@ public:
 	void setPositionOffset(const sf::Vector2f& offset);
 
 	const sf::Vector2f& getPositionOffset() const;
-	virtual bool getIsCollidable() const;
+	bool isCollidable() const;
 	GameObjectType getConfiguredType() const override;
 	virtual MapDynamicTileID getDynamicTileID() const = 0;
 

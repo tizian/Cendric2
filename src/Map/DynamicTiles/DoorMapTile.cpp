@@ -62,7 +62,3 @@ void DoorMapTile::onMouseOver() {
 void DoorMapTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	MapDynamicTile::renderAfterForeground(renderTarget);
 }
-
-GameObjectType DoorMapTile::getConfiguredType() const {
-	return GameObjectType::_ForegroundDynamicTile;
-}

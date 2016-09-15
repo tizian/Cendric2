@@ -27,4 +27,6 @@ public:
 private:
 	// data loaded by the map loader
 	MapData m_mapData;
+
+	std::vector<GameObject*>* m_dynamicTiles;
 };
