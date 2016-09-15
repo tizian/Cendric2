@@ -429,11 +429,13 @@ bool MapReader::readDoors(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 					condition.name = conditionName;
 
 					if (isNotCondition) {
-						condition.negative = false;
-					}
-					else {
 						condition.negative = true;
 					}
+					else {
+						condition.negative = false;
+					}
+
+					door.conditions.push_back(condition);
 				}
 
 				_property = _property->NextSiblingElement("property");

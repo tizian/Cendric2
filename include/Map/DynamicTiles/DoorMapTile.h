@@ -13,7 +13,6 @@ public:
 	DoorMapTile(const DoorData& data, MapScreen* mapScreen);
 
 	void update(const sf::Time& frameTime) override;
-	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 
 	void init() override;
 	void loadAnimation(int skinNr) override;
@@ -29,6 +28,7 @@ private:
 	std::string getSpritePath() const override;
 	void reloadConditions();
 	void open();
+	void close();
 
 private:
 	DoorData m_data;
@@ -38,5 +38,4 @@ private:
 	bool m_conditionsFulfilled;
 
 	static const float OPEN_RANGE;
-	static const float TOOLTIP_TOP;
 };

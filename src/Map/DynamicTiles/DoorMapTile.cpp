@@ -3,7 +3,6 @@
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
 
-const float DoorMapTile::TOOLTIP_TOP = 20.f;
 const float DoorMapTile::OPEN_RANGE = 50.f;
 
 DoorMapTile::DoorMapTile(const DoorData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
@@ -16,9 +15,6 @@ DoorMapTile::DoorMapTile(const DoorData& data, MapScreen* mapScreen) : MapDynami
 	addComponent(m_interactComponent);
 
 	reloadConditions();
-	if (m_conditionsFulfilled && m_data.keyItemID.empty()) {
-		open();
-	}
 }
 
 void DoorMapTile::open() {
@@ -26,6 +22,13 @@ void DoorMapTile::open() {
 	m_isCollidable = false;
 	setState(GameObjectState::Open);
 	m_interactComponent->setInteractable(false);
+}
+
+void DoorMapTile::close() {
+	m_open = false;
+	m_isCollidable = true;
+	setState(GameObjectState::Closed);
+	m_interactComponent->setInteractable(true);
 }
 
 void DoorMapTile::update(const sf::Time& frameTime) {
@@ -65,14 +68,6 @@ void DoorMapTile::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Closed, closedAnimation);
 
-	// initial values
-	if (m_open) {
-		setState(GameObjectState::Open);
-	}
-	else {
-		setState(GameObjectState::Closed);
-	}
-	
 	playCurrentAnimation(false);
 }
 
@@ -117,21 +112,24 @@ void DoorMapTile::reloadConditions() {
 
 	bool conditionsFulfilled = true;
 	for (auto& condition : m_data.conditions) {
-		if (condition.negative && core->isConditionFulfilled(condition.type, condition.name)) {
-			conditionsFulfilled = false;
+		if (condition.negative) {
+			conditionsFulfilled = conditionsFulfilled && !core->isConditionFulfilled(condition.type, condition.name);
 		}
-		else if (!condition.negative && !core->isConditionFulfilled(condition.type, condition.name)) {
-			conditionsFulfilled = false;
+		else if (!condition.negative) {
+			conditionsFulfilled = conditionsFulfilled && core->isConditionFulfilled(condition.type, condition.name);
 		}
 	}
 
 	m_conditionsFulfilled = conditionsFulfilled;
+
+	if (m_conditionsFulfilled && m_data.keyItemID.empty()) {
+		open();
+	}
+	else {
+		close();
+	}
 }
 
 void DoorMapTile::notifyReloadNeeded() {
 	m_reloadNeeded = true;
-}
-
-void DoorMapTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
-	MapDynamicTile::renderAfterForeground(renderTarget);
 }
