@@ -829,7 +829,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="80" height="70">
+ <layer name="collidable" width="80" height="70" visible="0">
   <data encoding="csv">
 0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -963,13 +963,13 @@
  <objectgroup name="door">
   <object id="233" gid="2344" x="950" y="1100" width="50" height="50">
    <properties>
+    <property name="conditions" value="default,innerwall_open"/>
     <property name="key" value="ke_rhendal"/>
-    <property name="not conditions" value="default,innerwall_open"/>
    </properties>
   </object>
   <object id="234" gid="2344" x="1150" y="1100" width="50" height="50">
    <properties>
-    <property name="not conditions" value="default,innerwall_open"/>
+    <property name="conditions" value="default,innerwall_open"/>
    </properties>
   </object>
  </objectgroup>
