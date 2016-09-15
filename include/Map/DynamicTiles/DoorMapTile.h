@@ -35,6 +35,7 @@ private:
 	InteractComponent* m_interactComponent;
 	bool m_open;
 	bool m_reloadNeeded = false;
+	bool m_conditionsFulfilled;
 
 	static const float OPEN_RANGE;
 	static const float TOOLTIP_TOP;

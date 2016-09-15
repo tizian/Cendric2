@@ -15,8 +15,10 @@ DoorMapTile::DoorMapTile(const DoorData& data, MapScreen* mapScreen) : MapDynami
 	m_interactComponent->setOnInteract(std::bind(&DoorMapTile::onRightClick, this));
 	addComponent(m_interactComponent);
 
-	m_isCollidable = true;
-	m_open = false;
+	reloadConditions();
+	if (m_conditionsFulfilled && m_data.keyItemID.empty()) {
+		open();
+	}
 }
 
 void DoorMapTile::open() {
@@ -29,6 +31,10 @@ void DoorMapTile::open() {
 void DoorMapTile::update(const sf::Time& frameTime) {
 	if (m_state == GameObjectState::Closed) {
 		m_interactComponent->setInteractable(true);
+	}
+	
+	if (!m_conditionsFulfilled) {
+		m_interactComponent->setInteractable(false);
 	}
 
 	if (m_reloadNeeded) {
@@ -84,17 +90,13 @@ void DoorMapTile::onMouseOver() {
 }
 
 void DoorMapTile::onRightClick() {
-	if (m_open) return;
+	if (m_open || !m_conditionsFulfilled) return;
 
 	// check if the door is in range
 	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
 
 	if (!inRange) {
 		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
-	}
-	else if (m_state == GameObjectState::Closed && m_data.keyItemID.empty()) {
-		open();
-		g_inputController->lockAction();
 	}
 	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
 		open();
@@ -113,24 +115,17 @@ void DoorMapTile::onRightClick() {
 void DoorMapTile::reloadConditions() {
 	CharacterCore* core = m_screen->getCharacterCore();
 
-	bool open = true;
+	bool conditionsFulfilled = true;
 	for (auto& condition : m_data.conditions) {
 		if (condition.negative && core->isConditionFulfilled(condition.type, condition.name)) {
-			open = false;
+			conditionsFulfilled = false;
 		}
 		else if (!condition.negative && !core->isConditionFulfilled(condition.type, condition.name)) {
-			open = false;
+			conditionsFulfilled = false;
 		}
 	}
 
-	if (open) {
-		m_isCollidable = false;
-		m_open = true;
-	}
-	else {
-		m_isCollidable = true;
-		m_open = false;
-	}
+	m_conditionsFulfilled = conditionsFulfilled;
 }
 
 void DoorMapTile::notifyReloadNeeded() {
