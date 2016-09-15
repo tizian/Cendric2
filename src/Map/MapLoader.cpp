@@ -37,12 +37,13 @@ void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
 void MapLoader::loadDoors(MapData& data, MapScreen* screen) const {
 	// calculate doors
 	for (auto& it : data.doors) {
-		DoorMapTile* door = new DoorMapTile(it, screen);
+		DoorMapTile* door = new DoorMapTile(screen);
 		door->init();
 		door->setPosition(it.position + door->getPositionOffset());
 		door->setDebugBoundingBox(COLOR_NEUTRAL);
 		door->loadResources();
 		door->loadAnimation(it.skinNr);
+		door->setDoorData(it);
 
 		screen->addObject(door);
 	}

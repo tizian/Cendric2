@@ -66,6 +66,7 @@ void InteractComponent::setInteractRange(float range) {
 
 void InteractComponent::setInteractable(bool interactable) {
 	m_isInteractable = interactable;
+	m_useInteractiveColor = interactable;
 }
 
 void InteractComponent::setFocused(bool focused) {
