@@ -7,5 +7,6 @@ enum class MapDynamicTileID {
 	Waypoint,
 	Book,
 	Sign,
+	Door,
 	MAX
 };

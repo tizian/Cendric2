@@ -41,6 +41,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('DisplayHints'
 INSERT INTO text (text_id, english, german, swiss_german) values ('Divine','Divine','Heilig','Heilig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Documents','Documents','Schriftstücke','Dokument');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Done','Done','Erfüllt','Erfüllt');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Door','Door','Tür','Türe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Duration','Duration','Dauer','Duur');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Elemental','Elemental','Elementar','Elementar');
 INSERT INTO text (text_id, english, german, swiss_german) values ('English','English','Englisch','Englisch');

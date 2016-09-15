@@ -6,6 +6,7 @@
 #include "Structs/NPCData.h"
 #include "Structs/MapDynamicTileData.h"
 #include "Structs/BookData.h"
+#include "Structs/DoorData.h"
 #include "Structs/SignData.h"
 #include "FloatTriangle.h"
 
@@ -15,6 +16,7 @@ struct MapData : WorldData {
 
 	std::vector<NPCData> npcs;
 	std::vector<BookData> books;
+	std::vector<DoorData> doors;
 	std::vector<SignData> signs;
 	std::vector<sf::FloatRect> collidableRects;
 	std::vector<FloatTriangle> collidableTriangles;
