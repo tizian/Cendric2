@@ -8,5 +8,6 @@ enum class MapDynamicTileID {
 	Book,
 	Sign,
 	Door,
+	Chest,
 	MAX
 };

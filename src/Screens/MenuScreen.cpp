@@ -54,7 +54,7 @@ void MenuScreen::execUpdate(const sf::Time& frameTime) {
 
 void MenuScreen::setAllButtonsEnabled(bool value) {
 	Screen::setAllButtonsEnabled(value);
-	m_saveGameButton->setEnabled(value && (m_characterCore != nullptr));
+	m_saveGameButton->setEnabled(value && (m_characterCore != nullptr && !m_characterCore->isAutosave()));
 }
 
 void MenuScreen::render(sf::RenderTarget& renderTarget) {
@@ -119,7 +119,7 @@ void MenuScreen::execOnEnter(const Screen* previousScreen) {
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("SaveGame");
-	button->setEnabled(m_characterCore != nullptr);
+	button->setEnabled(m_characterCore != nullptr && !m_characterCore->isAutosave());
 	button->setOnClick(std::bind(&MenuScreen::onSaveGame, this));
 	m_saveGameButton = button;
 	addObject(button);
@@ -193,6 +193,7 @@ void MenuScreen::onExit() {
 
 void MenuScreen::onResume() {
 	m_screenManager->resumeBackupScreen();
+	m_characterCore->setAutosave(false);
 }
 
 void MenuScreen::onNewGame() {

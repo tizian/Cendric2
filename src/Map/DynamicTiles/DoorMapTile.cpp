@@ -66,7 +66,7 @@ void DoorMapTile::loadAnimation(int skinNr) {
 }
 
 std::string DoorMapTile::getSpritePath() const {
-	return "res/assets/map_dynamic_tiles/spritesheet_tiles_doors.png";
+	return "res/assets/map_dynamic_tiles/spritesheet_tiles_door.png";
 }
 
 void DoorMapTile::onRightClick() {

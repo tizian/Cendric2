@@ -710,10 +710,6 @@ bool CharacterCore::isNewGame() {
 }
 
 bool CharacterCore::isAutosave() {
-	if (m_isAutosave) {
-		m_isAutosave = false;
-		return true;
-	}
 	return m_isAutosave;
 }
 
