@@ -19,3 +19,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('El
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Gandria','location','Gandria','Gandria','Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaPrison','location','Prison of Gandria','Verlies von Gandria','Gfängnis vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaMines','location','Mines of Gandria','Minen von Gandria','Mine vo Gandria');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaBarracks','location','Barracks','Kaserne','Kaserne');

@@ -126,13 +126,71 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(18)
-	DL:addChoice(19, "DL_Choice_OpenGate") -- Open the damn gate!
+	if (DL:isQuestState("stephens_helmet", "void")) then 
+		DL:addChoice(19, "DL_Choice_TellmeQuest") -- (Sigh) Okay, what should I do for you?
+	end
+	if (DL:isQuestState("stephens_helmet", "started") and DL:isQuestComplete("stephens_helmet")) then 
+		DL:addChoice(21, "DL_Choice_GotHelmet") -- I got your helmet, now give me that letter back.
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
+	if (DL:isQuestState("stephens_helmet", "void")) then 
 
-	DL:createNPCNode(19, -1, "DL_Stephen_Sure") -- Sure.
-	DL:addConditionProgress("default", "innerwall_open")
-	DL:addNode()
+		DL:createNPCNode(19, 20, "DL_Stephen_HelmetQuest") -- I got a little bit drunk last night and lost my helmet to some shady guys in the tavern. I'm pretty sure that they belong to the dirty thief guild.
+		DL:changeQuestState("stephens_helmet", "started")
+		DL:addNode()
+
+
+		DL:createNPCNode(20, -2, "DL_Stephen_HelmetQuest2") -- I need someone that doesn't look like he belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("stephens_helmet", "started") and DL:isQuestComplete("stephens_helmet")) then 
+
+		DL:createNPCNode(21, 22, "DL_Stephen_GotHelmet") -- Very good! Give it to me!
+		DL:addNode()
+
+
+		DL:createChoiceNode(22)
+		DL:addChoice(23, "DL_Choice_FirstLetter") -- Give me the letter first.
+		DL:addChoice(27, "DL_Choice_GiveHelmet") -- Okay, here you go.
+		DL:addNode()
+
+
+		DL:createNPCNode(23, 24, "DL_Stephen_GivesLetter") -- Okay okay, here you go. You can speak with Commander Lloyd. And now give me my helmet!
+		DL:addItem("qe_recommendationletter", 1)
+		DL:addConditionProgress("default", "barracks_open")
+		DL:changeQuestState("stephens_helmet", "completed")
+		DL:addNode()
+
+
+		DL:createChoiceNode(24)
+		DL:addChoice(27, "DL_Choice_GiveHelmet") -- 
+		DL:addChoice(25, "DL_Choice_NoHelmet") -- You wish.
+		DL:addNode()
+
+
+		DL:createNPCNode(25, 26, "DL_Stephen_Angry") -- Grr, you little... You'll pay for this! If Lloyd hears about this...
+		DL:addReputationProgress("thief", 5)
+		DL:addNode()
+
+
+		DL:createChoiceNode(26)
+		DL:addChoice(-1, "DL_Choice_CommanderLloyd") -- It's "Commander" Lloyd.
+		DL:addChoice(-1, "DL_Choice_DontDrinkMuch") -- Well, it's your fault if you drink too much.
+		DL:addNode()
+
+
+		DL:createNPCNode(27, -1, "DL_Stephen_GotoLloyd") -- Perfect. Here is your letter. You can now go and see Commander Lloyd.
+		DL:addItem("qe_recommendationletter", 1)
+		DL:addConditionProgress("default", "barracks_open")
+		DL:removeItem("eq_stephenhelmet", 1)
+		DL:addReputationProgress("cleric", 5)
+		e("stephens_helmet", "completed")
+		DL:addNode()
+
+	end
 
 end

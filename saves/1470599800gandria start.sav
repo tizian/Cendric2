@@ -13,6 +13,7 @@ map.position:236.591537,2866.637939
 attributes:100,0,0,5,0,0,0,0,0,0,0,0,0,0
 gold:253
 # items in inventory:
+item.id:eq_stephenhelmet,1
 item.id:co_mediumpouch,1
 item.id:do_bloodnotemarcus,1
 item.id:do_notemarcus,1

@@ -343,11 +343,22 @@ npc.id:npc_stephen
 	[
 		# Link node, tag is next tag
 		tag:19
+		condition:DL:isQuestState("stephens_helmet", "void")
 		# translation: 
-		translation.tag:DL_Choice_OpenGate
-		translation.en:Open the damn gate!
-		translation.de:Öffne die verdammte Tür!
-		translation.ch:Mach du verdammt Türe uf!
+		translation.tag:DL_Choice_TellmeQuest
+		translation.en:(Sigh) Okay, what should I do for you?
+		translation.de:(Seufz) Okay, was soll ich für dich tun?
+		translation.ch:(Süüfz) Okay, wa söll ich für dich mache?
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		condition:DL:isQuestState("stephens_helmet", "started") and DL:isQuestComplete("stephens_helmet")
+		# translation: 
+		translation.tag:DL_Choice_GotHelmet
+		translation.en:I got your helmet, now give me that letter back.
+		translation.de:Ich habe deinen Helm, gib mir jetzt meinen Brief wieder.
+		translation.ch:Ich ha din Helm, gibmer ez min Brief wider.
 	]
 	[
 		# Link node, tag is next tag
@@ -363,12 +374,157 @@ npc.id:npc_stephen
 	# [19] NPC Node
 	tag:19
 	# triggers: 
-	trigger:DL:addConditionProgress("default", "innerwall_open")
+	trigger:DL:changeQuestState("stephens_helmet", "started")
 	# translation: 
-	translation.tag:DL_Stephen_Sure
-	translation.en:Sure.
-	translation.de:Sicher.
-	translation.ch:Sicher.
+	translation.tag:DL_Stephen_HelmetQuest
+	translation.en:I got a little bit drunk last night and lost my helmet to some shady guys in the tavern. I'm pretty sure that they belong to the dirty thief guild.
+	translation.de:Ich habe letzte Nacht ein bisschen über den Durst getrunken und meinen Helm an ein paar zwielichtige Gestalten in der Taverne verloren. Ich bin mir ziemlich sicher, dass sie zur dreckigen Diebesgilde gehören.
+	translation.ch:Ich ha letzt Nacht chli z'viel trunke und ha min Helm a paar komischi Gstalte ide Taverne verlore. Bimer zimli sicher dass si zude dreckige Diebesgilde ghöred.
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Stephen_HelmetQuest2
+	translation.en:I need someone that doesn't look like he belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
+	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt. Wenn du es schaffst, gebe ich dir dein Stück Papier wieder.
+	translation.ch:Ich bruch öpper wo nid usgseht als würer zum Orde ghöre, öpper we dich, womer min Helm wider holt. Wend das anebringsch, chasch din Papierfötzel wider ha.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Stephen_GotHelmet
+	translation.en:Very good! Give it to me!
+	translation.de:Sehr gut! Gib ihn mir!
+	translation.ch:Sehr guet! Giben mir!
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{2
+	# [22] Choice Node
+	tag:22
+	[
+		# Link node, tag is next tag
+		tag:23
+		# translation: 
+		translation.tag:DL_Choice_FirstLetter
+		translation.en:Give me the letter first.
+		translation.de:Gib mir zuerst den Brief.
+		translation.ch:Gibmer zersch de Brief.
+	]
+	[
+		# Link node, tag is next tag
+		tag:27
+		# translation: 
+		translation.tag:DL_Choice_GiveHelmet
+		translation.en:Okay, here you go.
+		translation.de:Okay, da hast du ihn.
+		translation.ch:Okay, da heschen.
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	trigger:DL:addItem("qe_recommendationletter", 1)
+	trigger:DL:addConditionProgress("default", "barracks_open")
+	trigger:DL:changeQuestState("stephens_helmet", "completed")
+	# translation: 
+	translation.tag:DL_Stephen_GivesLetter
+	translation.en:Okay okay, here you go. You can speak with Commander Lloyd. And now give me my helmet!
+	translation.de:Okay okay, da hast du ihn wieder. Du kannst jetzt von mir aus mit Kommandant Lloyd sprechen. Und jetzt gib mir meinen Helm!
+	translation.ch:Okay okay, da heschen wider. Du chasch ez vo mir us mitem Kommandant Lloyd rede. Und ez gimmer min Helm!
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{2
+	# [24] Choice Node
+	tag:24
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_GiveHelmet
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
+		# translation: 
+		translation.tag:DL_Choice_NoHelmet
+		translation.en:You wish.
+		translation.de:Hättest du wohl gern.
+		translation.ch:Hetsch wohl gern.
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:addReputationProgress("thief", 5)
+	# translation: 
+	translation.tag:DL_Stephen_Angry
+	translation.en:Grr, you little... You'll pay for this! If Lloyd hears about this...
+	translation.de:Grr, du kleiner... Dafür wirst du noch bezahlen! Wenn Lloyd davon erfährt...
+	translation.ch:Grr, du chliine... Dafür wirsch na zahle! Wenn de Lloyd devo ghört...
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{2
+	# [26] Choice Node
+	tag:26
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_CommanderLloyd
+		translation.en:It's "Commander" Lloyd.
+		translation.de:Es heisst "Kommandant" Lloyd.
+		translation.ch:Es heisst "Kommandant" Lloyd.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_DontDrinkMuch
+		translation.en:Well, it's your fault if you drink too much.
+		translation.de:Es ist dein Fehler wenn du zu viel trinkst.
+		translation.ch:Es isch dis Problem wenn du zviel trinksch.
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	trigger:DL:addItem("qe_recommendationletter", 1)
+	trigger:DL:addConditionProgress("default", "barracks_open")
+	trigger:DL:removeItem("eq_stephenhelmet", 1)
+	trigger:DL:addReputationProgress("cleric", 5)
+	trigger:e("stephens_helmet", "completed")
+	# translation: 
+	translation.tag:DL_Stephen_GotoLloyd
+	translation.en:Perfect. Here is your letter. You can now go and see Commander Lloyd.
+	translation.de:Perfekt. Hier ist dein Brief. Du kannst jetzt zu Kommandant Lloyd gehen.
+	translation.ch:Perfekt. Da isch din Brief. Du chasch ez zum Kommandant Lloyd.
 	[
 		# Link node, tag is next tag
 		tag:-1

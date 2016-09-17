@@ -37,9 +37,7 @@ void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
 			continue;
 		}
 
-		ChestTile* chestTile = nullptr;
-
-		chestTile = new ChestTile(screen);
+		ChestLevelTile* chestTile = new ChestLevelTile(screen);
 		chestTile->init();	
 		chestTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		chestTile->loadResources();

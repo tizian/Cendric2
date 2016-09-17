@@ -13,21 +13,27 @@
 
 class MapScreen;
 
-// helper class used by the map to load npcs
+// static helper class used by the map to load npcs
 class MapLoader {
 public:
+	static void loadAfterMainChar(MapData& data, MapScreen* screen);
+	static void loadForRenderTexture(MapData& data, MapScreen* screen);
+
+private:
 	// loads dynamic tiles out of map data and adds them directly to the screen.
-	void loadDynamicTiles(MapData& data, MapScreen* screen) const;
+	static void loadDynamicTiles(MapData& data, MapScreen* screen);
 	// loads npcs out of map data and adds them directly to the screen
-	void loadNpcs(MapData& data, MapScreen* screen) const;
+	static void loadNpcs(MapData& data, MapScreen* screen);
 	// loads books out of map data and adds them directly to the screen
-	void loadBooks(MapData& data, MapScreen* screen) const;
+	static void loadBooks(MapData& data, MapScreen* screen);
 	// loads doors out of map data and adds them directly to the screen
-	void loadDoors(MapData& data, MapScreen* screen) const;
+	static void loadDoors(MapData& data, MapScreen* screen);
+	// loads chests out of map data and adds them directly to the screen
+	static void loadChests(MapData& data, MapScreen* screen);
 	// loads signs out of map data and adds them directly to the screen
-	void loadSigns(MapData& data, MapScreen* screen) const;
+	static void loadSigns(MapData& data, MapScreen* screen);
 	// loads lights out of map data and adds them directly to the screen
-	void loadLights(MapData& data, MapScreen* screen) const;
+	static void loadLights(MapData& data, MapScreen* screen);
 	// loads triggers out of map data and adds them directly to the screen
-	void loadTriggers(MapData& data, MapScreen* screen) const;
+	static void loadTriggers(MapData& data, MapScreen* screen);
 };

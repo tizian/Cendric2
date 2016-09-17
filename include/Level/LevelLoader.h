@@ -8,7 +8,7 @@
 #include "Enums/LevelDynamicTileID.h"
 #include "Enums/EnemyID.h"
 
-#include "Level/DynamicTiles/ChestTile.h"
+#include "Level/DynamicTiles/ChestLevelTile.h"
 #include "Level/DynamicTiles/LeverTile.h"
 #include "Level/DynamicTiles/SwitchableTile.h"
 

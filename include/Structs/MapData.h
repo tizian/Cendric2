@@ -8,6 +8,7 @@
 #include "Structs/BookData.h"
 #include "Structs/DoorData.h"
 #include "Structs/SignData.h"
+#include "Structs/ChestTileData.h"
 #include "FloatTriangle.h"
 
 struct MapData : WorldData {
@@ -18,6 +19,7 @@ struct MapData : WorldData {
 	std::vector<BookData> books;
 	std::vector<DoorData> doors;
 	std::vector<SignData> signs;
+	std::vector<ChestTileData> chests;
 	std::vector<sf::FloatRect> collidableRects;
 	std::vector<FloatTriangle> collidableTriangles;
 

@@ -9,9 +9,24 @@
 #include "Map/DynamicTiles/BookTile.h"
 #include "Map/DynamicTiles/DoorMapTile.h"
 #include "Map/DynamicTiles/SignMapTile.h"
+#include "Map/DynamicTiles/ChestMapTile.h"
 #include "Trigger.h"
 
-void MapLoader::loadNpcs(MapData& data, MapScreen* screen) const {
+void MapLoader::loadForRenderTexture(MapData& data, MapScreen* screen) {
+	loadLights(data, screen);
+	loadDynamicTiles(data, screen);
+	loadBooks(data, screen);
+	loadDoors(data, screen);
+	loadSigns(data, screen);
+	loadChests(data, screen);
+}
+
+void MapLoader::loadAfterMainChar(MapData& data, MapScreen* screen) {
+	loadNpcs(data, screen);
+	loadTriggers(data, screen);
+}
+
+void MapLoader::loadNpcs(MapData& data, MapScreen* screen) {
 	// calculate npcs
 	for (auto& it : data.npcs) {
 		NPC* mapNPC = new NPC(screen);
@@ -20,7 +35,7 @@ void MapLoader::loadNpcs(MapData& data, MapScreen* screen) const {
 	}
 }
 
-void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
+void MapLoader::loadBooks(MapData& data, MapScreen* screen) {
 	// calculate books
 	for (auto& it : data.books) {
 		BookTile* book = new BookTile(it, screen);
@@ -34,7 +49,7 @@ void MapLoader::loadBooks(MapData& data, MapScreen* screen) const {
 	}
 }
 
-void MapLoader::loadDoors(MapData& data, MapScreen* screen) const {
+void MapLoader::loadDoors(MapData& data, MapScreen* screen) {
 	// calculate doors
 	for (auto& it : data.doors) {
 		DoorMapTile* door = new DoorMapTile(screen);
@@ -49,7 +64,23 @@ void MapLoader::loadDoors(MapData& data, MapScreen* screen) const {
 	}
 }
 
-void MapLoader::loadSigns(MapData& data, MapScreen* screen) const {
+void MapLoader::loadChests(MapData& data, MapScreen* screen) {
+	// calculate doors
+	for (auto& it : data.chests) {
+		ChestMapTile* chest = new ChestMapTile(screen);
+		
+		chest->init();
+		chest->setDebugBoundingBox(COLOR_NEUTRAL);
+		chest->loadResources();
+		chest->loadAnimation(it.skinNr);
+		chest->setChestData(it);
+		chest->setPosition(it.spawnPosition + chest->getPositionOffset());
+
+		screen->addObject(chest);
+	}
+}
+
+void MapLoader::loadSigns(MapData& data, MapScreen* screen) {
 	// calculate signs
 	for (auto& it : data.signs) {
 		SignMapTile* sign = new SignMapTile(it, screen);
@@ -63,7 +94,7 @@ void MapLoader::loadSigns(MapData& data, MapScreen* screen) const {
 	}
 }
 
-void MapLoader::loadLights(MapData& data, MapScreen* screen) const {
+void MapLoader::loadLights(MapData& data, MapScreen* screen) {
 	// calculate lights
 	for (auto& it : data.lights) {
 		LightObject* lightObject = new LightObject(it);
@@ -71,7 +102,7 @@ void MapLoader::loadLights(MapData& data, MapScreen* screen) const {
 	}
 }
 
-void MapLoader::loadTriggers(MapData& data, MapScreen* screen) const {
+void MapLoader::loadTriggers(MapData& data, MapScreen* screen) {
 	for (auto& it : data.triggers) {
 		if (screen->getCharacterCore()->isTriggerTriggered(it.worldID, it.objectID))
 			continue;
@@ -81,7 +112,7 @@ void MapLoader::loadTriggers(MapData& data, MapScreen* screen) const {
 	}
 }
 
-void MapLoader::loadDynamicTiles(MapData& data, MapScreen* screen) const {
+void MapLoader::loadDynamicTiles(MapData& data, MapScreen* screen) {
 	for (auto& it : data.dynamicTiles) {
 		MapDynamicTile* tile = ObjectFactory::Instance()->createMapDynamicTile(it.id, screen);
 		if (tile == nullptr) {

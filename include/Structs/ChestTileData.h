@@ -12,6 +12,7 @@ struct ChestTileData {
 	int chestStrength = 0;
 	bool isOpen = false;
 	bool isPermanent = false;
+	bool isStoredItems = false;
 	std::string keyItemID = "";
 	std::string tooltipText = "";
 	LightData lightData;

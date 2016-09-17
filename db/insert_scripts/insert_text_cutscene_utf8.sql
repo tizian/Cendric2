@@ -26,7 +26,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ce
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Chapter2', 'cutscene','- The City of Gandria -','- Gandria -','- Gandria -');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Guard:OpenTheGates', 'cutscene','Open the gates!','Öffnet das Tor!','Mached s''Tor uf!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Well', 'cutscene','Well...','...','...','...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Velius:SecurityMeasures', 'cutscene','It seems like I''d have to strengthen the security measures.','Es scheint, als müsste ich weitere Sicherheitsvorkehrungen treffen.','Es gseht us, als möst ich na für me Sicherheitsmassnahme sorge.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Velius:SecurityMeasures', 'cutscene','It seems like I''ll have to strengthen the security measures.','Es scheint, als müsste ich weitere Sicherheitsvorkehrungen treffen.','Es gseht us, als möst ich na für me Sicherheitsmassnahme sorge.');
 
 
 

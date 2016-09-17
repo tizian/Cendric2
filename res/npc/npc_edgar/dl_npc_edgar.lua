@@ -35,7 +35,7 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_edgar", "how_getout") and not DL:isConditionFulfilled("npc_edgar", "pickaxe")) then 
 		DL:addChoice(8, "DL_Choice_HowGold") -- How can I earn the gold to redeem myself?
 	end
-	if (DL:hasItem("mi_ironore", 1)) then 
+	if (DL:getItemAmount("gold") < requiredGold and DL:hasItem("mi_ironore", 1)) then 
 		DL:addItemChoice(9, "DL_Choice_IronOre", "mi_ironore", DL:getItemAmount("mi_ironore")) -- I got some iron ore for you.
 	end
 	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") < requiredGold)) then 
@@ -95,11 +95,11 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:hasItem("mi_ironore", 1)) then 
+	if (DL:getItemAmount("gold") < requiredGold and DL:hasItem("mi_ironore", 1)) then 
 
 		DL:createNPCNode(9, -2, "DL_Edgar_Ironore") -- Thank you. Here is your pay.
 		DL:removeItem("mi_ironore", DL:getItemAmount("mi_ironore"))
-		DL:addGold(math.min(requiredGold, DL:getItemAmount("mi_ironore") * 10))
+		DL:addGold(math.min(requiredGold - DL:getItemAmount("gold"), DL:getItemAmount("mi_ironore") * 10))
 		DL:addNode()
 
 	end
@@ -117,15 +117,14 @@ loadDialogue = function(DL)
 		DL:removeGold(requiredGold)
 		DL:addNode()
 		
-		DL:createNPCNode(12, 13, "DL_Edgar_YoureReleased2") -- Here, you can have your old belongings back.
-		-- DL:addStoredItems()
+		DL:createNPCNode(12, 13, "DL_Edgar_YoureReleased2") -- You're free to go. I hope I won't see you here again.
 		DL:addNode()
 		
-		DL:createNPCNode(13, 14, "DL_Edgar_YoureReleased3") -- You're free to go. I hope I won't see you here again.
+		DL:createNPCNode(13, 14, "DL_Edgar_YoureReleased3") -- You can fetch your old belongings from the chest in the barracks.
 		DL:addNode()
 		
 		DL:createNPCNode(14, -1, "") -- 
-		DL:startMap("res/map/gandria/gandria.tmx", 665, 1200)
+		DL:startMap("res/map/gandriabarracks/gandriabarracks.tmx", 265, 110)
 		DL:addNode()
 
 	end

@@ -16,16 +16,16 @@ loadRoutine = function(R, W)
 		R:goToTile(21.5,42)
 		R:goToTile(21.5,42)
 		R:goToTile(19,42)
-		R:goToTile(19,23)
-		R:setFacingDown()
+		R:goToTile(19,24)
+		R:goToTile(13,24)
+		R:goToTile(13,23.5)
+		R:setDisposed()
 		
-		ReloadLocked(false)
+		R:setReloadLocked(false)
 
-	else
+	else 
 	
-		R:setLooped(false)
-		R:setTilePosition(19,23)
-		R:setFacingDown()
+		R:setDisposed()
 		
 	end 
 

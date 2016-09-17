@@ -37,18 +37,11 @@ void Map::dispose() {
 }
 
 void Map::loadAfterMainChar() {
-	MapLoader loader;
-	loader.loadNpcs(m_mapData, dynamic_cast<MapScreen*>(m_screen));
-	loader.loadTriggers(m_mapData, dynamic_cast<MapScreen*>(m_screen));
+	MapLoader::loadAfterMainChar(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 }
 
 void Map::loadForRenderTexture() {
-	MapLoader loader;
-	loader.loadLights(m_mapData, dynamic_cast<MapScreen*>(m_screen));
-	loader.loadDynamicTiles(m_mapData, dynamic_cast<MapScreen*>(m_screen));
-	loader.loadBooks(m_mapData, dynamic_cast<MapScreen*>(m_screen));
-	loader.loadDoors(m_mapData, dynamic_cast<MapScreen*>(m_screen));
-	loader.loadSigns(m_mapData, dynamic_cast<MapScreen*>(m_screen));
+	MapLoader::loadForRenderTexture(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 	m_dynamicTiles = m_screen->getObjects(GameObjectType::_DynamicTile);
 }
 

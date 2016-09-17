@@ -1,3 +1,11 @@
+-- Stephen's Helmet
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stephenhelmet', 'item', 'Stephen''s Helmet','Stephen''s Helm','Em Stephen sin Helm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stephenhelmet', 'item_desc', 'This helmet belongs to the paladin Stephen.','Dieser Helm gehört dem Paladin Stephen.','De Helm ghört em Paladin Stephen.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_stephenhelmet', 'eq_head', 200, 550, 50);
+INSERT INTO item_attribute (item_id, res_physical, res_fire, dmg_light) values ('eq_stephenhelmet', 8, 2, 3);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_stephenhelmet', 'res/assets/equipment/head/spritesheet_head_stephenhelmet.png', 'res/assets/equipment/head/spritesheet_map_head_stephenhelmet.png');
+
 -- Ice Hat
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icehat', 'item', 'Zeff''s Masterpiece','Zeff''s Meisterwerk','Em Zeff sis Meisterwerk');

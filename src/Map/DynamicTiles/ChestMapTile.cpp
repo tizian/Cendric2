@@ -3,14 +3,14 @@
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
 
-const float ChestMapTile::RANGE = 100.f;
+const float ChestMapTile::PICKUP_RANGE = 100.f;
 
 ChestMapTile::ChestMapTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
-	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText("Chest"), this, m_mainChar);
-	interactComponent->setInteractRange(RANGE);
-	interactComponent->setInteractText("ToLoot");
-	interactComponent->setOnInteract(std::bind(&ChestMapTile::loot, this));
-	addComponent(interactComponent);
+	m_interactComponent = new InteractComponent(g_textProvider->getText("Chest"), this, m_mainChar);
+	m_interactComponent->setInteractRange(PICKUP_RANGE);
+	m_interactComponent->setInteractText("ToOpen");
+	m_interactComponent->setOnInteract(std::bind(&ChestMapTile::onRightClick, this));
+	addComponent(m_interactComponent);
 }
 
 void ChestMapTile::init() {
@@ -18,16 +18,39 @@ void ChestMapTile::init() {
 }
 
 void ChestMapTile::loadAnimation(int skinNr) {
+	m_isCollidable = false;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
-	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
-	addAnimation(GameObjectState::Idle, idleAnimation);
+	Animation* closedAnimation = new Animation(sf::seconds(10.f));
+	closedAnimation->setSpriteSheet(tex);
+	closedAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+
+	addAnimation(GameObjectState::Locked, closedAnimation);
+
+	Animation* openAnimation = new Animation(sf::seconds(10.f));
+	openAnimation->setSpriteSheet(tex);
+	openAnimation->addFrame(sf::IntRect(TILE_SIZE, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+
+	addAnimation(GameObjectState::Unlocked, openAnimation);
 
 	// initial values
-	setState(GameObjectState::Idle);
+	m_state = GameObjectState::Locked;
+	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(false);
+}
+
+void ChestMapTile::setChestData(const ChestTileData& data) {
+	m_data = data;
+	if (m_data.chestStrength < 0 || m_data.chestStrength > 5) {
+		m_data.chestStrength = 0;
+	}
+
+	if (data.isOpen) {
+		unlock();
+	}
+	if (!data.tooltipText.empty()) {
+		m_interactComponent->setTooltipText(g_textProvider->getText(data.tooltipText, "chest"));
+	}
 }
 
 void ChestMapTile::onLeftClick() {
@@ -35,17 +58,76 @@ void ChestMapTile::onLeftClick() {
 }
 
 void ChestMapTile::onRightClick() {
-	// check if chest is in range
-	if (dist(m_mainChar->getCenter(), getCenter()) <= RANGE) {
-		loot();
+	// check if the chest is in range
+	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE;
+
+	if (m_state == GameObjectState::Unlocked) {
+		if (inRange) {
+			loot();
+		}
+		else {
+			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		}
+		g_inputController->lockAction();
+	}
+	else if (m_data.chestStrength == 0 && m_state == GameObjectState::Locked) {
+		if (inRange) {
+			unlock();
+		}
+		else {
+			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		}
+		g_inputController->lockAction();
+	}
+	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
+		if (inRange) {
+			unlock();
+			std::string tooltipText = g_textProvider->getText("Used");
+			tooltipText.append(g_textProvider->getText(m_data.keyItemID, "item"));
+			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
+		}
+		else {
+			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		}
+		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
 	}
 }
 
 void ChestMapTile::loot() {
-	// TODO
+	MapScreen* screen = dynamic_cast<MapScreen*>(m_screen);
+
+	if (m_data.isStoredItems) {
+		auto items = screen->getCharacterCore()->retrieveStoredItems();
+		for (auto& item : items) {
+			screen->notifyItemChange(item.first, item.second);
+		}
+		screen->notifyItemChange("gold", screen->getCharacterCore()->retrieveStoredGold());
+		
+	}
+	else {
+		for (auto& item : m_data.loot.first) {
+			screen->notifyItemChange(item.first, item.second);
+		}
+		screen->notifyItemChange("gold", m_data.loot.second);
+	}
+	
+	if (!m_data.conditionProgress.first.empty() && !m_data.conditionProgress.second.empty()) {
+		screen->notifyConditionAdded(m_data.conditionProgress.first, m_data.conditionProgress.second);
+	}
+
+	m_interactComponent->setInteractable(false);
+
+	if (!m_data.isPermanent) {
+		setDisposed();
+	}
+}
+
+void ChestMapTile::unlock() {
+	m_interactComponent->setInteractText("ToPickup");
+	setState(GameObjectState::Unlocked);
 }
 
 std::string ChestMapTile::getSpritePath() const {

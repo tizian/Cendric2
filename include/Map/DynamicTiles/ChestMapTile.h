@@ -2,6 +2,9 @@
 
 #include "global.h"
 #include "Map/MapDynamicTile.h"
+#include "Structs/ChestTileData.h"
+
+class InteractComponent;
 
 // a chest/chest like object that can be looted on the map, it is currently only used to retrieve stored data.
 class ChestMapTile : public MapDynamicTile {
@@ -13,10 +16,15 @@ public:
 	void onLeftClick() override;
 	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Chest; }
 
-private:
-	void loot();
+	void setChestData(const ChestTileData& data);
 
 private:
+	void loot();
+	void unlock();
+
+private:
+	ChestTileData m_data;
+	InteractComponent* m_interactComponent = nullptr;
 	std::string getSpritePath() const override;
-	static const float RANGE;
+	static const float PICKUP_RANGE;
 };

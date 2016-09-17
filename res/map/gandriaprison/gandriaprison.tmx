@@ -247,7 +247,6 @@
   <object id="131" gid="388" x="948" y="227" width="50" height="50">
    <properties>
     <property name="id" value="npc_yorick"/>
-    <property name="routineid" value=""/>
    </properties>
   </object>
   <object id="132" gid="386" x="649" y="252" width="50" height="50">
