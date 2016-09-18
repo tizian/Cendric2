@@ -31,7 +31,7 @@ npc.id:npc_harek
 		# Link node, tag is next tag
 		tag:-1
 		# translation: 
-		translation.tag:DL_Choice_-1
+		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:

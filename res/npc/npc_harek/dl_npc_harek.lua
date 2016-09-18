@@ -11,7 +11,7 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(1)
 		DL:addChoice(2, "DL_Choice_WhoAreYou") -- Are you the blacksmith here?
-		DL:addChoice(-1, "DL_Choice_-1") -- 
+		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 
