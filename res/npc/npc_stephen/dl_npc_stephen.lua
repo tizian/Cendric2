@@ -188,7 +188,7 @@ loadDialogue = function(DL)
 		DL:addConditionProgress("default", "barracks_open")
 		DL:removeItem("eq_stephenhelmet", 1)
 		DL:addReputationProgress("cleric", 5)
-		e("stephens_helmet", "completed")
+		DL:changeQuestState("stephens_helmet", "completed")
 		DL:addNode()
 
 	end
