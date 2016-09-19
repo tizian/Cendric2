@@ -17,6 +17,8 @@ void ShiftableTile::init() {
 
 void ShiftableTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
+	std::string destructibleTileTex = "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png";
+	g_resourceManager->loadTexture(destructibleTileTex, ResourceType::Level);
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
@@ -26,7 +28,7 @@ void ShiftableTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* crumblingAnimation = new Animation();
-	crumblingAnimation->setSpriteSheet(tex);
+	crumblingAnimation->setSpriteSheet(g_resourceManager->getTexture(destructibleTileTex));
 	for (int i = 1; i < 5; i++) {
 		crumblingAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
