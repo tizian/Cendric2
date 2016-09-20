@@ -82,7 +82,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Hints','Hints
 INSERT INTO text (text_id, english, german, swiss_german) values ('HolyPower','Holy Power','Heilige Kraft','Heiligi Chraft');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceDamage','Ice Damage','Eisschaden','Iisschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IceResistance','Ice Resistance','Eisresistenz','Iisresistenz');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Screenshot','Screenshot','Bildschirmfoto','Bildschirmföteli');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Immune','Immune','Immun','Immun');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Interact','Interact','Interagieren','Interagiere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Inventory','Inventory','Inventar','Inventar');
 INSERT INTO text (text_id, english, german, swiss_german) values ('IsLocked','Is locked!','Ist verschlossen!','Da isch abgschlosse!');
@@ -168,6 +168,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Resume','Resu
 INSERT INTO text (text_id, english, german, swiss_german) values ('Save','Save','Speichern','Speichere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SaveGame','Save Game','Spiel speichern','Spiel speichere');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SavegameDeleted','Save game successfully deleted.','Speicherstand erfolgreich gelöscht.','Speicherstand isch glöscht.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Screenshot','Screenshot','Bildschirmfoto','Bildschirmföteli');
 INSERT INTO text (text_id, english, german, swiss_german) values ('SecondSpell','2. Spell','2. Zauber','2. Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowDamage','Shadow Damage','Schattenschaden','Schatteschade');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ShadowResistance','Shadow Resistance','Schattenresistenz','Schatteresistenz');

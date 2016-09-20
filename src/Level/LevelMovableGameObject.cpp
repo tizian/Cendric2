@@ -148,7 +148,7 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool 
 		const sf::Vector2f& pos = getPosition();
 		const sf::Vector2f& size = getSize();
 		if (m_isInvincible) {
-			m_damageNumbers->emitNumber(0, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage, false);
+			m_damageNumbers->emitString(g_textProvider->getText("Immune"), sf::Vector2f(pos.x + 0.5f * size.x, pos.y), DamageNumberType::DamageOverTime);
 			return;
 		}
 		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage, critical);
@@ -365,4 +365,3 @@ float LevelMovableGameObject::getConfiguredMaxVelocityYDown() const {
 float LevelMovableGameObject::getConfiguredMaxVelocityYUp() const {
 	return m_movingBehavior->getMaxVelocityYUp();
 }
-

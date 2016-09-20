@@ -27,10 +27,9 @@ public:
 	void render(sf::RenderTarget& target);
 
 	void emitNumber(int value, const sf::Vector2f& position, DamageNumberType type, bool critical);
-
-private:
 	void emitString(std::string str, const sf::Vector2f& position, DamageNumberType type);
 
+private:
 	static const int MAX_NUMBERS;
 	static const float START_OFFSET;
 	static const float DISTANCE;
