@@ -1,12 +1,7 @@
 #pragma once
 
 #include "global.h"
-
-struct Condition {
-	bool negative;
-	std::string type;
-	std::string name;
-};
+#include "Structs/Condition.h"
 
 struct DoorData {
 	int skinNr;

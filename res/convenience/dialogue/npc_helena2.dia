@@ -1,0 +1,124 @@
+# dia file for dialogue for npc: npc_helena2
+
+npc.id:npc_helena2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_helena2", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_helena2", "talked")
+	# translation: 
+	translation.tag:DL_Helena_Hello
+	translation.en:Hey, hey you! You're back? I thought you'll never return and pay for your room.
+	translation.de:Hey, hey du! Du bist zurück? Ich dachte, du würdest nicht mehr auftauchen und dein Zimmer bezahlen
+	translation.ch:Hey, hey du! Du bisch zrugg? Ich ha denkt du würsch nümme uftauche und dis Zimmer zale.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_helena2", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_helena2", "room")
+		# translation: 
+		translation.tag:DL_Choice
+		translation.en:What room?
+		translation.de:Was für ein Zimmer?
+		translation.ch:Was füres Zimmer?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:DL:isConditionFulfilled("npc_helena2", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_HowYouKnow
+		translation.en:You know me?
+		translation.de:Du kennst mich?
+		translation.ch:Du kennsch mich?
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_helena2", "who_are_you")
+	# translation: 
+	translation.tag:DL_Helena_Helena
+	translation.en:I'm Helena, the innkeeper of this tavern. We've met before!
+	translation.de:Ich bin Helena, die Wirtin dieser Taverne. Wir haben uns schon mal getroffen!
+	translation.ch:Ich bi d'Helena, d'Wirtin vo dere Taverne. Mer sind üs schomal begegnet!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_helena2", "room")
+	# translation: 
+	translation.tag:DL_Helena_Room
+	translation.en:Your room in this inn, of course?
+	translation.de:Dein Zimmer in diesem Gasthaus?
+	translation.ch:Dis Zimmer i dem Gaschthuus?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Helena_ComeIn
+	translation.en:Yes, I do! But it's been a while. I thought you're already long gone.
+	translation.de:Na klar! Aber es ist schon eine Weile her... Ich dachte, du wärst schon über alle Berge.
+	translation.ch:Natürlich! Aber es isch scho es Wiili her.. Ha denkt du bisch scho über alli Berge.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_ComeIn2
+	translation.en:So, why don't you come in and I tell you everything inside.
+	translation.de:Aber komm doch einfach rein und ich erzähl dir dann alles.
+	translation.ch:Aber chum doch eifach ie und ich verzell der denn alles.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

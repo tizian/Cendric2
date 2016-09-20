@@ -7,6 +7,7 @@
 #include "WeatherSystem.h"
 #include "GUI/ProgressLog.h"
 #include "Structs/BookData.h"
+#include "Structs/Condition.h"
 
 class Item;
 class Trigger;
@@ -43,7 +44,7 @@ public:
 	// notify description added -> add to core, display text
 	void notifyQuestDescriptionAdded(const std::string& questID, int descriptionID);
 	// notify condition added -> add to core, reload everything that needs a reload when conditions are added
-	virtual void notifyConditionAdded(const std::string& conditionType, const std::string& condition);
+	virtual void notifyConditionAdded(const Condition& condition);
 	// notify spell learned -> add overlay and add to core.
 	void notifySpellLearned(SpellID id);
 	// notify modifier learned -> add overlay and add to core.

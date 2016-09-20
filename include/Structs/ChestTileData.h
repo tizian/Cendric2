@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Structs/LightData.h"
+#include "Structs/Condition.h"
 
 struct ChestTileData {
 	int objectID;
@@ -17,5 +18,5 @@ struct ChestTileData {
 	std::string tooltipText = "";
 	LightData lightData;
 	std::pair<std::map<std::string, int>, int> loot;
-	std::pair<std::string, std::string> conditionProgress;
+	Condition conditionProgress;
 };

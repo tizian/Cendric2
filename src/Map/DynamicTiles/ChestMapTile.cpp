@@ -114,8 +114,8 @@ void ChestMapTile::loot() {
 		screen->notifyItemChange("gold", m_data.loot.second);
 	}
 	
-	if (!m_data.conditionProgress.first.empty() && !m_data.conditionProgress.second.empty()) {
-		screen->notifyConditionAdded(m_data.conditionProgress.first, m_data.conditionProgress.second);
+	if (!m_data.conditionProgress.type.empty() && !m_data.conditionProgress.name.empty()) {
+		screen->notifyConditionAdded(m_data.conditionProgress);
 	}
 
 	m_interactComponent->setInteractable(false);

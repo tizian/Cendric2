@@ -6,9 +6,13 @@
 void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* screen) {
 	if (!content.isValid() || screen == nullptr) return;
 	switch (content.type) {
-	case TriggerContentType::ConditionProgress:
-		screen->notifyConditionAdded(content.s1, content.s2);
+	case TriggerContentType::ConditionProgress: {
+		Condition cond;
+		cond.type = content.s1;
+		cond.name = content.s2;
+		screen->notifyConditionAdded(cond);
 		break;
+	}
 	case TriggerContentType::GoldChange:
 		screen->notifyItemChange("gold", content.i1);
 		break;

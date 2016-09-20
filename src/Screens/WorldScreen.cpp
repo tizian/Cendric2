@@ -141,8 +141,8 @@ void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int de
 	m_interface->reloadQuestLog();
 }
 
-void WorldScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
-	getCharacterCore()->setConditionFulfilled(conditionType, condition);
+void WorldScreen::notifyConditionAdded(const Condition& condition) {
+	getCharacterCore()->setConditionFulfilled(condition.type, condition.name);
 	reloadTriggers();
 }
 

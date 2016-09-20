@@ -91,8 +91,8 @@ void MapScreen::execOnEnter(const Screen* previousScreen) {
 	}
 }
 
-void MapScreen::notifyConditionAdded(const std::string& conditionType, const std::string& condition) {
-	WorldScreen::notifyConditionAdded(conditionType, condition);
+void MapScreen::notifyConditionAdded(const Condition& condition) {
+	WorldScreen::notifyConditionAdded(condition);
 	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
 			npc->notifyReloadNeeded();

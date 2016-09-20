@@ -370,9 +370,9 @@ bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, MapData& data) con
 						return false;
 					}
 
-					chestData.conditionProgress.first = conditionProgress.substr(0, pos);
+					chestData.conditionProgress.type = conditionProgress.substr(0, pos);
 					conditionProgress.erase(0, pos + 1);
-					chestData.conditionProgress.second = conditionProgress;
+					chestData.conditionProgress.name = conditionProgress;
 				}
 				else {
 					int amount;

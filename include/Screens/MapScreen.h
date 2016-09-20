@@ -26,7 +26,7 @@ public:
 
 	void execOnEnter(const Screen* previousScreen) override;
 	void execOnExit(const Screen* nextScreen) override;
-	void notifyConditionAdded(const std::string& conditionType, const std::string& condition) override;
+	void notifyConditionAdded(const Condition& condition) override;
 	void notifyItemEquip(const std::string& itemID, ItemType type) override;
 
 	const Map* getWorld() const override;

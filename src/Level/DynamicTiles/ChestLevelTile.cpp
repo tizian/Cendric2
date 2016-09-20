@@ -140,8 +140,8 @@ void ChestLevelTile::loot() {
 	m_mainChar->lootItems(m_data.loot.first);
 	m_mainChar->addGold(m_data.loot.second);
 
-	if (!m_data.conditionProgress.first.empty() && !m_data.conditionProgress.second.empty()) {
-		dynamic_cast<LevelScreen*>(m_screen)->notifyConditionAdded(m_data.conditionProgress.first, m_data.conditionProgress.second);
+	if (!m_data.conditionProgress.type.empty() && !m_data.conditionProgress.name.empty()) {
+		dynamic_cast<LevelScreen*>(m_screen)->notifyConditionAdded(m_data.conditionProgress);
 	}
 	
 	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_data.objectID);
