@@ -15,7 +15,7 @@ loadDialogue = function(DL)
 		DL:addChoice(10, "DL_Choice_Sheep") -- About your sheep...
 	end
 	if (DL:isConditionFulfilled("npc_tristan", "merchant")) then
-		DL:addChoice(50, "DL_Choice_Trade") -- Show me your wares. [TRADE]
+		DL:addChoice(50, "DL_Choice_Trade") -- Show me your wares.
 	end 
 	
 	DL:addChoice(-1, "DL_Choice_Bye") -- Bye.  

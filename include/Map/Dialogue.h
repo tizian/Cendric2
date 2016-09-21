@@ -20,6 +20,7 @@ public:
 	// returns whether the current dialogue is a choice node and one of them is an ending option
 	bool isEndable() const;
 	bool hasNode(int tag) const;
+	bool isTradeNode(int nodeTag) const;
 
 private:
 	WorldScreen* m_screen;

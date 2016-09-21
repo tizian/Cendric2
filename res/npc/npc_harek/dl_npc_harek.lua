@@ -27,7 +27,7 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(4)
-	DL:addChoice(5, "DL_Choice_Trade") -- Show me your wares. [TRADE]
+	DL:addChoice(5, "DL_Choice_Trade") -- Show me your wares.
 	if (DL:isQuestState("ice_armor", "void") and DL:hasItem("mi_firstguardianheart", 1)) then 
 		DL:addChoice(6, "DL_Choice_RivetArmor") -- Could you smith me a special armour?
 	end

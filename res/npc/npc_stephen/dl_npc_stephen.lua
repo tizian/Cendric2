@@ -178,8 +178,11 @@ loadDialogue = function(DL)
 
 
 		DL:createChoiceNode(26)
-		DL:addChoice(-1, "DL_Choice_CommanderLloyd") -- It's "Commander" Lloyd.
-		DL:addChoice(-1, "DL_Choice_DontDrinkMuch") -- Well, it's your fault if you drink too much.
+		DL:addChoice(28, "DL_Choice_CommanderLloyd") -- It's "Commander" Lloyd.
+		DL:addChoice(28, "DL_Choice_DontDrinkMuch") -- Well, it's your fault if you drink too much.
+		DL:addNode()
+		
+		DL:createNPCNode(28, -1, "DL_Stephen_GetOut") -- Just get out of my sight!
 		DL:addNode()
 
 

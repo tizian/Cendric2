@@ -74,9 +74,9 @@ npc.id:npc_harek
 		tag:5
 		# translation: 
 		translation.tag:DL_Choice_Trade
-		translation.en:Show me your wares. [TRADE]
-		translation.de:Zeig mir deine Waren. [HANDELN]
-		translation.ch:Zeig mir dini Ware. [TRADE]
+		translation.en:Show me your wares.
+		translation.de:Zeig mir deine Waren.
+		translation.ch:Zeig mir dini Ware.
 	]
 	[
 		# Link node, tag is next tag

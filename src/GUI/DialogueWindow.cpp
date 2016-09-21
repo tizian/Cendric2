@@ -125,11 +125,20 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<ChoiceTransla
 	m_dialogueText->setString("");
 	m_speakerSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE));
 	m_speakerText->setString(CENDRIC_NAME);
+
 	for (size_t i = 0; i < choices.size(); ++i) {
-		DialogueOption option(choices[i].first, m_dialogueTextID, choices[i].second == -1);
+		DialogueOptionType optionType = DialogueOptionType::Default;
+		if (choices[i].second == -1) {
+			optionType = DialogueOptionType::End;
+		}
+		else if (m_dialogue->isTradeNode(choices[i].second)) {
+			optionType = DialogueOptionType::Trade;
+		}
+		DialogueOption option(choices[i].first, m_dialogueTextID, optionType);
 		option.deselect();
 		m_options.push_back(option);
 	}
+
 	m_chosenOption = 0;
 	m_options[m_chosenOption].select();
 }
@@ -345,14 +354,23 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 
 // Dialogue Option
 
-DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, bool isEnd) {
+DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type) {
 	std::string textString = g_textProvider->getText(trans.text, dialogueID);
 	if (!trans.item.first.empty()) {
 		textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item") + ")");
 	}
-	if (isEnd) {
+
+	switch (type) {
+	case DialogueOptionType::End:
 		textString.append(textString.empty() ? g_textProvider->getText("DialogueEnd") : " " + g_textProvider->getText("DialogueEnd"));
+		break;
+	case DialogueOptionType::Trade:
+		textString.append(textString.empty() ? g_textProvider->getText("DialogueTrade") : " " + g_textProvider->getText("DialogueTrade"));
+		break;
+	default:
+		break;
 	}
+
 	m_text.setString(textString);
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_text.setColor(COLOR_WHITE);

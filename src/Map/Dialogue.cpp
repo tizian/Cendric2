@@ -60,6 +60,12 @@ bool Dialogue::hasNode(int tag) const {
 	return m_nodes.find(tag) != m_nodes.end();
 }
 
+bool Dialogue::isTradeNode(int nodeTag) const {
+	if (!hasNode(nodeTag)) return false;
+	const DialogueNode* nextNode = &m_nodes.at(nodeTag);
+	return nextNode->type == DialogueNodeType::Trade;
+}
+
 void Dialogue::setRoot(int root) {
 	if (!hasNode(root)) {
 		g_logger->logWarning("Dialogue", "Node with tag [" + std::to_string(root) + "] does not exist in the tree and cannot be set as root.");

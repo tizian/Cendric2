@@ -14,9 +14,15 @@ class NPC;
 class ScrollBar;
 class ScrollHelper;
 
+enum class DialogueOptionType {
+	Default,
+	End,
+	Trade
+};
+
 class DialogueOption : public GameObject {
 public:
-	DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, bool isEnd = false);
+	DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type);
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
