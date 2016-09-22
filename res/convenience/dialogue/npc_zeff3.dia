@@ -53,9 +53,9 @@ npc.id:npc_zeff3
 		tag:7
 		# translation: 
 		translation.tag:DL_Choice_Trade
-		translation.en:What do you have to offer? [TRADE]
-		translation.de:Was hast du im Angebot? [HANDELN]
-		translation.ch:Was hesch so im Agebot? [HANDLE]
+		translation.en:What do you have to offer?
+		translation.de:Was hast du im Angebot?
+		translation.ch:Was hesch so im Agebot?
 	]
 	[
 		# Link node, tag is next tag

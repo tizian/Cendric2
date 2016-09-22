@@ -22,7 +22,7 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(3)
-	DL:addChoice(7, "DL_Choice_Trade") -- What do you have to offer? [TRADE]
+	DL:addChoice(7, "DL_Choice_Trade") -- What do you have to offer?
 	DL:addChoice(4, "DL_Choice_Leatherworking") -- Could you craft something for me?
 	DL:addChoice(-1, "DL_Choice_End") -- See you later.
 	DL:addNode()
