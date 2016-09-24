@@ -44,3 +44,4 @@ INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelba
 INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'do_elemap');
 INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'do_eleletter');
 INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'eq_travelhat');
+INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'ke_jonathan');

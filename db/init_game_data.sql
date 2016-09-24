@@ -15,6 +15,7 @@ DROP TABLE levelitem_light;
 DROP TABLE levelitem_frame;
 DROP TABLE levelitem;
 DROP TABLE item_document_page;
+DROP TABLE item_document_quest;
 DROP TABLE item_weapon_slot;
 DROP TABLE item_weapon;
 DROP TABLE item_equipment_light;
@@ -83,6 +84,15 @@ CREATE TABLE item_document_page(
 	title VARCHAR(50) NOT NULL DEFAULT "",
 	content VARCHAR(50) NOT NULL DEFAULT "",
 	PRIMARY KEY (item_id, page_nr),
+	FOREIGN KEY(item_id) REFERENCES item(item_id)
+);
+
+CREATE TABLE item_document_quest(
+	item_id VARCHAR(50) NOT NULL, 
+	quest_name VARCHAR(50) NOT NULL, 
+	quest_state VARCHAR(50) NOT NULL DEFAULT "",
+	quest_desc INTEGER NOT NULL DEFAULT -1,
+	PRIMARY KEY (item_id),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 );
 
