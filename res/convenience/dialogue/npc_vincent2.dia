@@ -735,7 +735,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_ObserverSpells
 	translation.en:A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. And this won't be a nice experience, I can tell you that.
 	translation.de:Eine hässliche Form der Magie. Die Leute stellen sie in ihre Häuser, damit niemand etwas entwenden kann. Aber diese Zauber sehen auch nicht alles... (grinst) Aber wenn sie dich erwischen, kommst du ins Gefängnis, und das ist nicht gerade angenehm, kann ich dir sagen.
-	translation.ch:E hässlichi Form vode Magie. D''Lüt dönd die i iri Hüser demit niemert öppis chluppe cha. Aber die Zauber gsehnd au nid alles (grinst). Aber wenn si dich verwütsched, denn steckeds dich id Chiste... und da isch nid grad ahgnehm, da chani der sege. 
+	translation.ch:E hässlichi Form vode Magie. D'Lüt dönd die i iri Hüser demit niemert öppis chluppe cha. Aber die Zauber gsehnd au nid alles (grinst). Aber wenn si dich verwütsched, denn steckeds dich id Chiste... und da isch nid grad ahgnehm, da chani der sege. 
 	[
 		# Link node, tag is next tag
 		tag:-2

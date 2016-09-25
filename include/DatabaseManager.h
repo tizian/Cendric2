@@ -16,6 +16,7 @@ struct ItemFoodBean;
 struct ItemWeaponBean;
 struct ItemWeaponSlotBean;
 struct ItemDocumentPageBean;
+struct ItemDocumentQuestBean;
 struct LevelitemBean;
 struct LevelitemFrameBean;
 struct LevelitemLightBean;
@@ -43,6 +44,7 @@ public:
 	ItemWeaponSlotBean getItemWeaponslotBean(const std::string& item_id, int slot_nr) const;
 	std::vector<ItemWeaponSlotBean> getItemWeaponSlotBeans(const std::string& item_id) const;
 	std::vector<ItemDocumentPageBean> getItemDocumentPageBeans(const std::string& item_id) const;
+	ItemDocumentQuestBean getItemDocumentQuestBean(const std::string& item_id) const;
 	LevelitemBean getLevelitemBean(const std::string& item_id) const;
 	LevelitemFrameBean getLevelitemFrameBean(const std::string& item_id, int frame_nr) const;
 	std::vector<LevelitemFrameBean> getLevelitemFrameBeans(const std::string& item_id) const;

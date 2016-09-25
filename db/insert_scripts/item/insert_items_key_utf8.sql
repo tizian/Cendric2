@@ -30,6 +30,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 
 -- Mysterious Iron Key (Jonathan's Door Key)
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_jonathan', 'key', 250, 550, -1);
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathan', 'item', 'Mysterious Iron Key','Mysteriöser Eisenschlüssel','Mysteriöse Iseschlüssel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathan', 'item_desc', 'I''ve found this key in my old travel bag. It seems to belong to a door.','Diesen Schlüssel habe ich bei meinen alten Sachen gefunden. Er gehört vermutlich zu einer Türe.','De Schlüssel hani bi mine alte Sache gfunde. Er ghört glaub zunere Türe.');
+--INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_jonathan', 'key', 250, 550, -1);
+--INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathan', 'item', 'Mysterious Iron Key','Mysteriöser Eisenschlüssel','Mysteriöse Iseschlüssel');
+--INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathan', 'item_desc', 'I''ve found this key in my old travel bag. It seems to belong to a door.','Diesen Schlüssel habe ich bei meinen alten Sachen gefunden. Er gehört vermutlich zu einer Türe.','De Schlüssel hani bi mine alte Sache gfunde. Er ghört glaub zunere Türe.');

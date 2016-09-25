@@ -10,6 +10,7 @@
 #include "Beans/ItemWeaponBean.h"
 #include "Beans/ItemWeaponSlotBean.h"
 #include "Beans/ItemDocumentPageBean.h"
+#include "Beans/ItemDocumentQuestBean.h"
 #include "Beans/LevelitemBean.h"
 #include "Beans/LevelitemFrameBean.h"
 #include "Beans/LevelitemLightBean.h"
@@ -530,6 +531,41 @@ std::vector<ItemDocumentPageBean> DatabaseManager::getItemDocumentPageBeans(cons
 	checkError();
 
 	return beans;
+}
+
+ItemDocumentQuestBean DatabaseManager::getItemDocumentQuestBean(const std::string& item_id) const {
+	ItemDocumentQuestBean bean;
+	sqlite3_stmt* statement;
+	std::string query = "SELECT * FROM item_document_quest WHERE item_id = '" + item_id + "';";
+
+	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
+		int cols = sqlite3_column_count(statement);
+		if (cols != 4) {
+			g_logger->logError("DatabaseManager::getItemDocumentQuestBean", "number of returned columns must be 4");
+			return bean;
+		}
+		int result = 0;
+		while (true) {
+			result = sqlite3_step(statement);
+
+			if (result == SQLITE_ROW) {
+				bean.item_id = std::string((char*)sqlite3_column_text(statement, 0));
+				bean.quest_name = std::string((char*)sqlite3_column_text(statement, 1));
+				bean.quest_state = std::string((char*)sqlite3_column_text(statement, 2));
+				bean.quest_desc = sqlite3_column_int(statement, 1);
+				bean.status = BeanStatus::Filled;
+			}
+			else {
+				break;
+			}
+		}
+
+		sqlite3_finalize(statement);
+	}
+
+	checkError();
+
+	return bean;
 }
 
 std::vector<ItemWeaponSlotBean> DatabaseManager::getItemWeaponSlotBeans(const std::string& item_id) const {
