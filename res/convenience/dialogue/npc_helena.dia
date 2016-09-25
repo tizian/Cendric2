@@ -63,7 +63,7 @@ npc.id:npc_helena
 	trigger:DL:addConditionProgress("npc_helena", "talked")
 	# translation: 
 	translation.tag:DL_Helena_TellMe2
-	translation.en:You were in quite a hurry, only left your luggage here and then you rushed out again to fetch something from the ship you forgot... And I've never seen you again.
+	translation.en:You were in quite a hurry, only left your luggage here and then you rushed out again to fetch something you forgot from the ship... And I've never seen you again.
 	translation.de:Du warst ziemlich im Stress, hast nur dein Gepäck hier gelassen und bist dann wieder hinausgestürmt, weil du noch etwas auf dem Schiff vergessen hattest... Und dann bist du nicht mehr aufgetaucht.
 	translation.ch:Du bisch zimli im Stress gsi, hesch nur dis Züg rasch da anebracht und bisch den wieder usegrennt welld öppis ufem Schiff vergässe hesch... Und denn bisch nümm uftaucht.
 	[

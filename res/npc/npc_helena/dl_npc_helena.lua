@@ -21,7 +21,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_Helena_TellMe2") -- You were in quite a hurry, only left your luggage here and then you rushed out again to fetch something from the ship you forgot... And I've never seen you again.
+		DL:createNPCNode(3, -2, "DL_Helena_TellMe2") -- You were in quite a hurry, only left your luggage here and then you rushed out again to fetch something you forgot from the ship... And I've never seen you again.
 		DL:addConditionProgress("npc_helena", "talked")
 		DL:addNode()
 
