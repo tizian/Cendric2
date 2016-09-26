@@ -5,6 +5,7 @@
 struct BookPage {
 	std::string title;
 	std::string content;
+	std::string texturePath;
 };
 
 struct BookData {

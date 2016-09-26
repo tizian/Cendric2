@@ -550,15 +550,23 @@ void Inventory::showDocument(const Item* item) {
 			BookPage page;
 			page.title = bean.title;
 			page.content = bean.content;
+			page.texturePath = bean.texture_path;
 			bookData.pages.push_back(page);
 		}
 	}
 
-	if (m_mapInterface) {
-		m_mapInterface->getScreen()->setBook(&bookData);
-	}
-	else if (m_levelInterface) {
-		m_levelInterface->getScreen()->setBook(&bookData);
+	WorldScreen* worldScreen = getInterface()->getScreen();
+	worldScreen->setBook(&bookData);
+
+	// handle possible quest related conditions on this document
+	if (item->getDocumentQuestBean().status == BeanStatus::Filled) {
+		const ItemDocumentQuestBean& bean = item->getDocumentQuestBean();
+		if (bean.quest_desc > 0) {
+			worldScreen->notifyQuestDescriptionAdded(bean.quest_name, bean.quest_desc);
+		}
+		if (!bean.quest_state.empty()) {
+			worldScreen->notifyQuestStateChanged(bean.quest_name, resolveQuestState(bean.quest_state));
+		}
 	}
 }
 

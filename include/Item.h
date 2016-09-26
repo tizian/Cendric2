@@ -15,6 +15,7 @@
 #include "Beans/ItemWeaponBean.h"
 #include "Beans/ItemWeaponSlotBean.h"
 #include "Beans/ItemDocumentPageBean.h"
+#include "Beans/ItemDocumentQuestBean.h"
 #include "Beans/LevelitemBean.h"
 #include "Beans/LevelitemFrameBean.h"
 #include "Beans/LevelitemLightBean.h"
@@ -50,6 +51,7 @@ public:
 
 	// getter for document beans
 	const std::vector<ItemDocumentPageBean>& getDocumentPageBeans() const;
+	const ItemDocumentQuestBean& getDocumentQuestBean() const;
 
 	// getter for spell bean
 	const ItemSpellBean& getSpellBean() const;
@@ -91,6 +93,7 @@ protected:
 	ItemWeaponBean m_itemWeaponBean;
 	std::vector<ItemWeaponSlotBean> m_itemWeaponSlotBeans;
 	std::vector<ItemDocumentPageBean> m_itemDocumentPageBeans;
+	ItemDocumentQuestBean m_itemDocumentQuestBean;
 
 	void checkItem();
 	void initBeans(const std::string& itemID);

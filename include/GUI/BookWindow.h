@@ -17,7 +17,6 @@ public:
 	// returns true as long as the book is open and false as soon as the player closes it
 	bool updateWindow(const sf::Time frameTime);
 	void setPosition(const sf::Vector2f& pos) override;
-	void setPage(int index);
 
 	static const float WIDTH;
 	static const float HEIGHT;
@@ -36,6 +35,9 @@ private:
 
 	// -1 is the title page, may be empty.
 	int m_currentPage = -1;
+	void setPage(int index);
 
 	sf::Sound m_sound;
+	sf::Sprite m_sprite;
+	bool m_showSprite = false;
 };

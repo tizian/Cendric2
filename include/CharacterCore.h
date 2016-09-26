@@ -31,7 +31,8 @@ public:
 	const Weapon* getWeapon();
 
 	QuestState getQuestState(const std::string& id) const;
-	void setQuestState(const std::string& id, QuestState state);
+	// sets the quest state of a certain quest. Returns whether the operation was successful.
+	bool setQuestState(const std::string& id, QuestState state);
 	void setQuickslot(const std::string& item, int nr);
 	// loads a new game with a new core and default attributes
 	void loadNew();
@@ -107,10 +108,10 @@ public:
 	void setQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 	// is a quest condition for a certain quest fulfilled?
 	bool isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const;
-	// set a condition fulfilled
-	void setConditionFulfilled(const std::string& conditionType, const std::string& condition);
-	// unlock a certain quest description
-	void unlockQuestDescription(const std::string& questID, int descriptionID);
+	// set a condition fulfilled. Returns whether the operation was successful.
+	bool setConditionFulfilled(const std::string& conditionType, const std::string& condition);
+	// unlock a certain quest description. Returns whether the operation was successful.
+	bool unlockQuestDescription(const std::string& questID, int descriptionID);
 	// is a condition fulfilled?
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	// is a enemy in a certain level dead?

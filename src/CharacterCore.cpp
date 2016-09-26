@@ -100,22 +100,26 @@ QuestState CharacterCore::getQuestState(const std::string& id) const {
 	return QuestState::VOID;
 }
 
-void CharacterCore::setQuestState(const std::string& id, QuestState state) {
+bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
 	if (state == QuestState::Started && m_data.questStates.find(id) == m_data.questStates.end()) {
 		QuestData newQuest = QuestLoader::loadQuest(id);
 		if (newQuest.id.empty()) {
 			g_logger->logError("CharacterCore", "Could not load quest: " + id);
-			return;
+			return false;
 		}
 		m_quests.insert({ newQuest.id, newQuest });
 		m_data.questStates.insert({ id, state });
-		return;
+		return true;
 	}
 	if (state != QuestState::Started && m_data.questStates.find(id) != m_data.questStates.end()) {
+		if (m_data.questStates[id] == state) {
+			return false;
+		}
 		m_data.questStates[id] = state;
-		return;
+		return true;
 	}
 	g_logger->logError("CharacterCore", "Cannot change quest state for quest: " + id + ". Either the quest has already started (and cannot be started again) or the quest has not yet started and needs to be started first.");
+	return false;
 }
 
 void CharacterCore::setQuickslot(const std::string& item, int nr) {
@@ -330,18 +334,20 @@ bool CharacterCore::isQuestConditionFulfilled(const std::string& questID, const 
 	return m_data.questConditionProgress.at(questID).find(condition) != m_data.questConditionProgress.at(questID).end();
 }
 
-void CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
+bool CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
 	if (m_data.conditionProgress.find(conditionType) == m_data.conditionProgress.end()) {
 		m_data.conditionProgress.insert({ conditionType, std::set<std::string>() });
 	}
-	m_data.conditionProgress.at(conditionType).insert(condition);
+	auto ret = m_data.conditionProgress.at(conditionType).insert(condition);
+	return ret.second;
 }
 
-void CharacterCore::unlockQuestDescription(const std::string& questID, int descriptionID) {
+bool CharacterCore::unlockQuestDescription(const std::string& questID, int descriptionID) {
 	if (m_data.questDescriptionProgress.find(questID) == m_data.questDescriptionProgress.end()) {
 		m_data.questDescriptionProgress.insert({ questID, std::set<int>() });
 	}
-	m_data.questDescriptionProgress.at(questID).insert(descriptionID);
+	auto ret = m_data.questDescriptionProgress.at(questID).insert(descriptionID);
+	return ret.second;
 }
 
 bool CharacterCore::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {

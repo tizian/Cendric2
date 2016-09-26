@@ -9,4 +9,5 @@ struct ItemDocumentPageBean : DatabaseBean {
 	int page_nr;
 	std::string title;
 	std::string content;
+	std::string texture_path;
 };

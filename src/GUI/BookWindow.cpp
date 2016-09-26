@@ -12,9 +12,14 @@ BookWindow::BookWindow(const BookData& data) : Window(
 	COLOR_LIGHT_BROWN, // back
 	COLOR_DARK_BROWN) // ornament 
 {
-	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);
-
 	m_data = data;
+
+	// load resources
+	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);
+	for (auto& page : m_data.pages) {
+		if (page.texturePath.empty()) continue;
+		g_resourceManager->loadTexture(page.texturePath, ResourceType::Unique, this);
+	}
 
 	m_leftArrow = new ArrowButton(false);
 	m_leftArrow->setMainColor(COLOR_DARK_BROWN);
@@ -29,6 +34,12 @@ BookWindow::BookWindow(const BookData& data) : Window(
 		BookPage page;
 		m_data.pages.push_back(page);
 	}
+
+	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	m_title.setColor(COLOR_DARK_BROWN);
+
+	m_content.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_content.setColor(COLOR_BLACK);
 
 	// select first page
 	if (m_data.title.empty()) {
@@ -45,12 +56,6 @@ BookWindow::BookWindow(const BookData& data) : Window(
 		setPage(-1);
 	}
 
-	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
-	m_title.setColor(COLOR_DARK_BROWN);
-
-	m_content.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_content.setColor(COLOR_BLACK);
-
 	setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - WIDTH), 0.5f * (WINDOW_HEIGHT - HEIGHT)));
 }
 
@@ -66,6 +71,9 @@ void BookWindow::render(sf::RenderTarget& renderTarget) {
 		renderTarget.draw(m_bookTitle);
 	}
 	else {
+		if (m_showSprite) {
+			renderTarget.draw(m_sprite);
+		}
 		renderTarget.draw(m_title);
 		renderTarget.draw(m_content);
 	}
@@ -87,10 +95,12 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Left) || m_leftArrow->isClicked()) {
 		g_inputController->lockAction();
 		setPage(m_currentPage - 1);
+		setPosition(getPosition());
 	}
 	else if (g_inputController->isKeyJustPressed(Key::Right) || m_rightArrow->isClicked()) {
 		g_inputController->lockAction();
 		setPage(m_currentPage + 1);
+		setPosition(getPosition());
 	}
 
 	return true;
@@ -109,10 +119,17 @@ void BookWindow::setPage(int index) {
 		m_content.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).content, "document",
 			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
 
-		m_title.setPosition(getPosition() + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
-		m_content.setPosition(
-			getPosition() + sf::Vector2f(MARGIN,
-				m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
+		if (sf::Texture* tex = g_resourceManager->getTexture(m_data.pages.at(m_currentPage).texturePath)) {
+			m_sprite.setTexture(*tex, true);
+			m_showSprite = true;
+		}
+		else {
+			m_showSprite = false;
+		}
+	}
+	else {
+		// title page has no texture.
+		m_showSprite = false;
 	}
 }
 
@@ -127,4 +144,10 @@ void BookWindow::setPosition(const sf::Vector2f& pos) {
 	m_content.setPosition(
 		pos + sf::Vector2f(MARGIN,
 			m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
+
+	if (m_showSprite) {
+		m_sprite.setPosition(pos + sf::Vector2f(
+			0.5f * (WIDTH - m_sprite.getTextureRect().width),
+			0.5f * (HEIGHT - m_sprite.getTextureRect().height)));
+	}
 }

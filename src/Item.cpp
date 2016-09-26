@@ -22,6 +22,7 @@ void Item::initBeans(const std::string& itemID) {
 	m_itemWeaponBean = g_databaseManager->getItemWeaponBean(itemID);
 	m_itemWeaponSlotBeans = g_databaseManager->getItemWeaponSlotBeans(itemID);
 	m_itemDocumentPageBeans = g_databaseManager->getItemDocumentPageBeans(itemID);
+	m_itemDocumentQuestBean = g_databaseManager->getItemDocumentQuestBean(itemID);
 }
 
 Item::~Item() {
@@ -57,6 +58,10 @@ const std::vector<ItemConvertibleBean>& Item::getConvertibleBeans() const {
 
 const std::vector<ItemDocumentPageBean>& Item::getDocumentPageBeans() const {
 	return m_itemDocumentPageBeans;
+}
+
+const ItemDocumentQuestBean& Item::getDocumentQuestBean() const {
+	return m_itemDocumentQuestBean;
 }
 
 const ItemSpellBean& Item::getSpellBean() const {

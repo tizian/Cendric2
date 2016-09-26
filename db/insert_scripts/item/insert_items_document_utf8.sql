@@ -55,18 +55,39 @@ Verwandelt...
 		umzingled, ich mun kämpfe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_bloodnotemarcus', 'document', 450, 400, -1);
 
--- Letter (Elementalists Letter)
+-- Wrinkled Letter (Elementalists Letter)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_eleletter', 'item', 'Letter','Brief','Brief');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_eleletter', 'item', 'Wrinkled Letter','Zerknitterter Brief','Verknitterete Brief');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_eleletter', 'item_desc', 'I found this letter in the old travel bag that belonged to me once.','Ich habe diesen Brief in dem alten Reiserucksack gefunden, der einmal mir gehört hat.','Ich ha de Brief im alte Reiserucksack gfunde, wo mal mir ghört het.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_eleletter', 'document', 500, 300, -1);
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_eleletter', 'a_new_trace', 1);
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_eleletter', 1, 'EleLetter');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('EleLetter', 'document',
+'To the Novice Cendric
 
--- Map (Elementalists Map)
+The situation turned out to be more serious than we had previously expected. It is of crucial importance that you hand the map to the Elementalist Jonathan who lives in Gandria. Try to provide your best possible support in that matter.
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item', 'Map','Karte','Charte');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', '...','...','...');
+Signed
+Grand Magister Cyrus',
+'An den Novizen Cendric
+
+Die Situation hat sich als ernster entpuppt als wir bisher angenommen hatten. Es ist von äusserster Wichtigkeit, dass du den Brief dem Elementarmagier Jonathan überbringst, der in Gandria lebt. Unterstütze ihn in dieser Sache so gut wie dir nur möglich ist.
+
+Gezeichnet
+Grossmagister Cyrus',
+'A de Novize Cendric
+
+D''Situation isch ernster als mer bis jetzt agno hend. Es isch üsserst wichtig, dass du de Brief em Elementarmagier Jonathan bringsch wo in Gandria lebt. Unterstütz ihn i dere Sach so guet we dir möglich isch.
+
+Zeichnet
+Grossmagister Cyrus');
+
+-- Wrinkled Map (Elementalists Map)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item', 'Wrinkled Map','Zerknitterte Karte','Verknittereti Charte');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', 'A red cross marks a location on the map - maybe a treasure?','Ein rotes Kreuz markiert einen Ort darauf - vielleicht einen Schatz?','Es rots Chrüz markiert en Ort druf - vilicht en Schatz?');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_elemap', 'document', 550, 400, -1);
+INSERT INTO item_document_page(item_id, page_nr, texture_path) values ('do_elemap', 1, 'res/assets/items/elemap.png');
 
 -- Rhendal's Diary
 

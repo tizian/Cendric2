@@ -52,6 +52,7 @@ WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
 WorldScreen::~WorldScreen() {
 	delete m_interface;
 	delete m_progressLog;
+	delete m_bookWindow;
 	for (auto& overlay : m_overlayQueue) {
 		delete overlay;
 	}
@@ -117,11 +118,13 @@ void WorldScreen::notifyQuestTargetKilled(const std::string& questID, const std:
 }
 
 void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState state) {
-	getCharacterCore()->setQuestState(questID, state);
-	m_progressLog->addQuestStateChanged(questID, state);
-	addScreenOverlay(ScreenOverlay::createQuestScreenOverlay(questID, state));
-	m_interface->reloadQuestLog();
+	if (getCharacterCore()->setQuestState(questID, state)) {
+		m_progressLog->addQuestStateChanged(questID, state);
+		addScreenOverlay(ScreenOverlay::createQuestScreenOverlay(questID, state));
+		m_interface->reloadQuestLog();
+	}
 }
+	
 
 void WorldScreen::notifySpellLearned(SpellID id) {
 	getCharacterCore()->learnSpell(id);
@@ -136,14 +139,16 @@ void WorldScreen::notifyModifierLearned(const SpellModifier& modifier) {
 }
 
 void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int descriptionID) {
-	getCharacterCore()->unlockQuestDescription(questID, descriptionID);
-	m_progressLog->addQuestDescriptionAdded(questID);
-	m_interface->reloadQuestLog();
+	if (getCharacterCore()->unlockQuestDescription(questID, descriptionID)) {
+		m_progressLog->addQuestDescriptionAdded(questID);
+		m_interface->reloadQuestLog();
+	}
 }
 
 void WorldScreen::notifyConditionAdded(const Condition& condition) {
-	getCharacterCore()->setConditionFulfilled(condition.type, condition.name);
-	reloadTriggers();
+	if (getCharacterCore()->setConditionFulfilled(condition.type, condition.name)) {
+		reloadTriggers();
+	}
 }
 
 void WorldScreen::notifyReputationAdded(FractionID fraction, int amount) {
@@ -276,6 +281,7 @@ void WorldScreen::execOnExit(const Screen* nextScreen) {
 void WorldScreen::setBook(const BookData* bookData) {
 	m_interface->hideAll();
 
+	delete m_bookWindow;
 	m_bookWindow = new BookWindow(*bookData);
 	m_bookWindowDisposed = false;
 	m_bookWindow->addCloseButton([&]() {
