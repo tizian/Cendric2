@@ -101,8 +101,8 @@ void LevelScreen::quicksave() {
 }
 
 void LevelScreen::execOnEnter(const Screen* previousScreen) {
-	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(), 
-		m_currentLevel.getWorldData()->bossLevelData.isBossLevel, 
+	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(),
+		m_currentLevel.getWorldData()->bossLevelData.isBossLevel,
 		m_currentLevel.getWorldData()->isObserved));
 }
 
@@ -157,6 +157,11 @@ bool LevelScreen::notifyObservers() {
 	}
 
 	return false;
+}
+
+void LevelScreen::toggleGodmode() {
+	WorldScreen::toggleGodmode();
+	m_mainChar->setGodmode(g_resourceManager->getConfiguration().isGodmode);
 }
 
 LevelMainCharacter* LevelScreen::getMainCharacter() const {

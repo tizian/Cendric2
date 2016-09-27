@@ -22,6 +22,8 @@ void LevelMainCharacter::load() {
 	loadBehavior();
 
 	m_damageNumbers = new DamageNumbers(this->isAlly());
+
+	setGodmode(g_resourceManager->getConfiguration().isGodmode);
 }
 
 void LevelMainCharacter::update(const sf::Time& frameTime) {
@@ -226,6 +228,11 @@ void LevelMainCharacter::setDead() {
 
 void LevelMainCharacter::setQuickcast(bool quickcast) {
 	m_isQuickcast = quickcast;
+}
+
+void LevelMainCharacter::setGodmode(bool godmode) {
+	m_isInvincible = godmode;
+	m_isImmortal = godmode;
 }
 
 void LevelMainCharacter::addDamageOverTime(DamageOverTimeData& data) {

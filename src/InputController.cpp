@@ -183,6 +183,7 @@ void InputController::startReadingText() {
 }
 
 void InputController::stopReadingText() {
+	m_readText.clear();
 	m_isReadText = false;
 }
 

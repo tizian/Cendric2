@@ -10,6 +10,7 @@
 class HintDescriptionWindow;
 class ScrollBar;
 class ScrollHelper;
+class WorldScreen;
 
 // a hint entry in the hints tab
 class HintEntry : public GameObject {
@@ -40,7 +41,7 @@ private:
 // for the attributes, it takes them directly from the level main character (level) or the core (map)
 class CharacterInfo {
 public:
-	CharacterInfo(const CharacterCore* core, const AttributeData* attributes);
+	CharacterInfo(WorldScreen* screen, const AttributeData* attributes);
 	~CharacterInfo();
 
 	void show();
@@ -74,6 +75,7 @@ public:
 	static const float HEIGHT;
 
 private:
+	WorldScreen* m_screen;
 	const CharacterCore* m_core;
 	const AttributeData* m_attributes;
 	bool m_isVisible = false;

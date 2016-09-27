@@ -3,6 +3,9 @@
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
 #include "GlobalResource.h"
+#include "Screens/WorldScreen.h"
+
+static const std::string GODMODE_CHEAT = "god";
 
 const float CharacterInfo::TOP = GUIConstants::TOP;
 const float CharacterInfo::LEFT = GUIConstants::LEFT;
@@ -42,8 +45,9 @@ const std::vector<std::string> CharacterInfo::LABELS = {
 	"LightResistance",
 };
 
-CharacterInfo::CharacterInfo(const CharacterCore* core, const AttributeData* attributes) {
-	m_core = core;
+CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attributes) {
+	m_screen = screen;
+	m_core = screen->getCharacterCore();
 	m_attributes = attributes;
 
 	BitmapText name;
@@ -285,18 +289,18 @@ void CharacterInfo::updateAttributes() {
 
 	// health
 	std::string health = std::to_string(m_attributes->currentHealthPoints) +
-						 "/" +
-						 std::to_string(m_attributes->maxHealthPoints);
+		"/" +
+		std::to_string(m_attributes->maxHealthPoints);
 	attributes.push_back(health);
 
 	// health regeneration
 	std::string healthRegen = std::to_string(m_attributes->healthRegenerationPerS)
-							  + "/s";
+		+ "/s";
 	attributes.push_back(healthRegen);
 
 	// crit
 	std::string crit = std::to_string(m_attributes->criticalHitChance) +
-					   "%";
+		"%";
 	attributes.push_back(crit);
 
 	// cooldown reduction
@@ -347,7 +351,7 @@ void CharacterInfo::updateReputation() {
 	m_reputationTexts.clear();
 
 	float yOffset = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y + GUIConstants::CHARACTER_SIZE_M;
-	
+
 	if (m_core->getData().reputationProgress.empty()) {
 		BitmapText noRep;
 		noRep.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -357,7 +361,7 @@ void CharacterInfo::updateReputation() {
 		m_reputationTexts.push_back(noRep);
 		return;
 	}
-	
+
 	for (auto const& rep : m_core->getData().reputationProgress) {
 		BitmapText title;
 		title.setString(g_textProvider->getText(EnumNames::getFractionIDName(rep.first)) + ": " + std::to_string(rep.second));
@@ -414,6 +418,7 @@ void CharacterInfo::selectEntry(HintEntry* entry) {
 
 void CharacterInfo::show() {
 	m_isVisible = true;
+	g_inputController->startReadingText();
 }
 
 void CharacterInfo::hide() {
@@ -424,6 +429,17 @@ void CharacterInfo::hide() {
 		m_selectedEntry = nullptr;
 	}
 	m_scrollBar->setScrollPosition(0.f);
+
+	// handle GODMODE
+	std::string read = g_inputController->getReadText();
+	if (!read.empty()) {
+		read.pop_back();
+		if (GODMODE_CHEAT.compare(read) == 0) {
+			m_screen->toggleGodmode();
+		}
+	}
+	
+	g_inputController->stopReadingText();
 }
 
 // <<< HINT ENTRY >>>

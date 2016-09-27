@@ -32,6 +32,7 @@ public:
 	// called by level items and chests. It returns true if an observer is near enough and could have seen
 	// how the main char steals something. It will not be looted then and the observer will warn cendric / jail 
 	bool notifyObservers();
+	void toggleGodmode() override;
 
 	// called by the loading screen. the dynamic tiles & light in level
 	void loadForRenderTexture();

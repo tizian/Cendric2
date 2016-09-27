@@ -172,6 +172,17 @@ void WorldScreen::reloadTriggers() {
 	}
 }
 
+void WorldScreen::toggleGodmode() {
+	if (!g_resourceManager->getConfiguration().isGodmode) {
+		g_resourceManager->getConfiguration().isGodmode = true;
+		setTooltipText("GodmodeActivated", sf::Color::Magenta, true);
+	}
+	else {
+		g_resourceManager->getConfiguration().isGodmode = false;
+		setTooltipText("GodmodeDeactivated", sf::Color::Magenta, true);
+	}
+}
+
 void WorldScreen::reloadTrigger(Trigger* trigger) const {
 	if (trigger->getData().condition.empty()) {
 		trigger->getData().isTriggerable = true;

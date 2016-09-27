@@ -38,6 +38,7 @@ public:
 	void setStunned(const sf::Time& stunnedTime) override;
 	void setDead() override;
 	void setQuickcast(bool quickcast);
+	void setGodmode(bool godmode);
 	// adds the item to the players inventory
 	void lootItem(const std::string& item, int quantity) const;
 	void lootItems(std::map<std::string, int>& items) const;

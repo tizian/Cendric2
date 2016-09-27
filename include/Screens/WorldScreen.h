@@ -53,6 +53,8 @@ public:
 	void notifyReputationAdded(FractionID fraction, int amount);
 	// notify reputation added
 	void notifyHintAdded(const std::string& hintKey);
+	// notifies that the godmode property has changed
+	virtual void toggleGodmode();
 	// reload all triggers, based on their conditions
 	void reloadTriggers();
 	// reloads a certain trigger

@@ -71,6 +71,8 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Gems','Gems',
 INSERT INTO text (text_id, english, german, swiss_german) values ('GemSockets','Gem Sockets','Edelstein Sockel','Edelstei Sockel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GemSocket','Gem Socket','Edelstein Sockel','Edelstei Sockel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('German','German','Deutsch','Düütsch');
+INSERT INTO text (text_id, english, german, swiss_german) values ('GodmodeActivated','Godmode activated','Godmode aktiviert','Godmode aktiviert');
+INSERT INTO text (text_id, english, german, swiss_german) values ('GodmodeDeactivated','Godmode deactivated','Godmode deaktiviert','Godmode deaktiviert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Gold','Gold','Gold','Gold');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GoldValue','Gold Value','Goldwert','Goldwert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Haste','Haste','Schnelligkeit','Schnelligkeit');
