@@ -28,8 +28,8 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_rhendal', 'item', 'Rhendal''s Chest Key','Rhendals Truhenschlüssel','Em Rhendal sin Trueschlüssel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_rhendal', 'item_desc', 'Vincent gave me this key. It belongs to the chest of the Elder.','Vincent hat mir diesen Schlüssel gegeben. Er passt in das Schloss der Truhe des Dorfältesten.','De Vincent het mer de Schlüssel gä. Er passt is Schloss vode True vom Dorfälteste.');
 
--- Mysterious Iron Key (Jonathan's Door Key)
+-- Iron Key (Key to the basement in the basilisk inn)
 
---INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_jonathan', 'key', 250, 550, -1);
---INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathan', 'item', 'Mysterious Iron Key','Mysteriöser Eisenschlüssel','Mysteriöse Iseschlüssel');
---INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathan', 'item_desc', 'I''ve found this key in my old travel bag. It seems to belong to a door.','Diesen Schlüssel habe ich bei meinen alten Sachen gefunden. Er gehört vermutlich zu einer Türe.','De Schlüssel hani bi mine alte Sache gfunde. Er ghört glaub zunere Türe.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tavernbasement', 'key', 250, 550, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tavernbasement', 'item', 'Iron Key','Eisenschlüssel','Iseschlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tavernbasement', 'item_desc', 'The key to the basement of the Basilisk Inn.','Der Schlüssel zum Keller des Gasthauses zum Basilisken.','De Schlüssel zum Chäller vom  Gasthuus zum Basilisk.');
