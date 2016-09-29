@@ -56,6 +56,7 @@ loadDialogue = function(DL)
 		DL:createNPCNode(9, -2, "DL_Helena_Luggage3") -- It's your old bag... Useless stuff inside, but it's all I have left. You don't have to worry about the rent of your room, of course.
 		DL:addItem("co_travelbag", 1)
 		DL:addConditionProgress("npc_helena", "old_things")
+		DL:changeQuestState("a_new_trace", "started")
 		DL:addNode()
 
 	end

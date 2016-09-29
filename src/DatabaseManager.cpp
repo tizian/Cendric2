@@ -553,7 +553,7 @@ ItemDocumentQuestBean DatabaseManager::getItemDocumentQuestBean(const std::strin
 				bean.item_id = std::string((char*)sqlite3_column_text(statement, 0));
 				bean.quest_name = std::string((char*)sqlite3_column_text(statement, 1));
 				bean.quest_state = std::string((char*)sqlite3_column_text(statement, 2));
-				bean.quest_desc = sqlite3_column_int(statement, 1);
+				bean.quest_desc = sqlite3_column_int(statement, 3);
 				bean.status = BeanStatus::Filled;
 			}
 			else {

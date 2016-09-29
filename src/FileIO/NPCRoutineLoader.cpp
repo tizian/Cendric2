@@ -137,6 +137,10 @@ void NPCRoutineLoader::setTilePositionForce(float x, float y) {
 }
 
 void NPCRoutineLoader::setDisposed() {
+	if (m_isInitial) {
+		m_routine.getNPC()->setDisposed();
+		return;
+	}
 	RoutineStep step;
 	step.state = RoutineState::Disappearing;
 	m_routine.addStep(step);

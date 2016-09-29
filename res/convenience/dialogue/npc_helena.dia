@@ -143,6 +143,7 @@ npc.id:npc_helena
 	# triggers: 
 	trigger:DL:addItem("co_travelbag", 1)
 	trigger:DL:addConditionProgress("npc_helena", "old_things")
+	trigger:DL:changeQuestState("a_new_trace", "started")
 	# translation: 
 	translation.tag:DL_Helena_Luggage3
 	translation.en:It's your old bag... Useless stuff inside, but it's all I have left. You don't have to worry about the rent of your room, of course.

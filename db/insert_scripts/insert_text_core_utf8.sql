@@ -93,6 +93,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Journal','Jou
 INSERT INTO text (text_id, english, german, swiss_german) values ('Jump','Jump','Springen','Springe');
 INSERT INTO text (text_id, english, german, swiss_german) values ('KeyBindings','Key Bindings','Tastaturbelegung','Tastaturbelegig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('KeyReserved','This key is reserved and cannot be selected.','Diese Taste ist reserviert und kann nicht gewählt werden.','Die Taste isch reserviert und derf me nid bruche.');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Keys','Keys','Schlüssel','Schlüssel');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Killed','Killed','Getötet','Killt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Feared','Feared','Verängstigt','Verängstigt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Stunned','Stunned','Betäubt','Betäubt');

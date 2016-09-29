@@ -16,7 +16,7 @@ const int Inventory::SLOT_COUNT_Y = 6;
 const float Inventory::ICON_MARGIN = 8.f;
 const float Inventory::WINDOW_MARGIN = 6.f;
 
-const sf::Vector2f Inventory::BUTTON_SIZE = sf::Vector2f(InventorySlot::SIZE + 10.f, 45.f);
+const sf::Vector2f Inventory::BUTTON_SIZE = sf::Vector2f(50.f + 10.f, 35.f + 10.f);  // the 10.f is for the margin, 50x35 is the size of the texture
 
 const float Inventory::SCROLL_WINDOW_LEFT = GUIConstants::TEXT_OFFSET;
 const float Inventory::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y;
@@ -80,7 +80,7 @@ void Inventory::init() {
 		{ ItemType::Document, &m_documentItems },
 		{ ItemType::Spell, &m_documentItems },
 		{ ItemType::Quest, &m_questItems },
-		{ ItemType::Key, &m_questItems },
+		{ ItemType::Key, &m_keyItems },
 		{ ItemType::Equipment_back, &m_equipmentItems },
 		{ ItemType::Equipment_body, &m_equipmentItems },
 		{ ItemType::Equipment_head, &m_equipmentItems },
@@ -91,7 +91,7 @@ void Inventory::init() {
 	});
 
 	// tabbar
-	int nTabs = 5;
+	int nTabs = 6;
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
 
@@ -99,8 +99,8 @@ void Inventory::init() {
 
 	int textureOffset = 0;
 	for (int i = 0; i < nTabs; ++i) {
-		m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_INVENTORYTABS), sf::IntRect(textureOffset, 0, 60, 35));
-		textureOffset += 60;
+		m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_INVENTORYTABS), sf::IntRect(textureOffset, 0, 50, 35));
+		textureOffset += 50;
 	}
 
 	// init scrolling
@@ -177,6 +177,7 @@ void Inventory::clearAllSlots() {
 	m_equipmentItems.clear();
 	m_questItems.clear();
 	m_documentItems.clear();
+	m_keyItems.clear();
 	m_miscItems.clear();
 	m_selectedSlotId.first = "";
 }
@@ -327,9 +328,11 @@ void Inventory::update(const sf::Time& frameTime) {
 	}
 	else if (activeIndex == 3) {
 		type = ItemType::Quest;
-
 	}
 	else if (activeIndex == 4) {
+		type = ItemType::Key;
+	}
+	else if (activeIndex == 5) {
 		type = ItemType::Misc;
 	}
 
@@ -600,6 +603,9 @@ void Inventory::selectTab(ItemType type) {
 		break;
 	case ItemType::Quest:
 		m_selectedTabText.setString(g_textProvider->getText("QuestItems"));
+		break;
+	case ItemType::Key:
+		m_selectedTabText.setString(g_textProvider->getText("Keys"));
 		break;
 	case ItemType::Misc:
 		m_selectedTabText.setString(g_textProvider->getText("Miscellaneous"));
