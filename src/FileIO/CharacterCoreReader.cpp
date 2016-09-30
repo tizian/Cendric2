@@ -342,6 +342,9 @@ bool CharacterCoreReader::readWeather(char* start, char* end, CharacterCoreData&
 	char* endData = gotoNextChar(start, end, '\n');
 	endData++;
 	startData = gotoNextChar(start, endData, ':');
+	if (startData == nullptr) {
+		return false;
+	}
 	startData++;
 
 	string id(startData);

@@ -31,7 +31,7 @@ float WolfBoss::getConfiguredDistanceToHPBar() const {
 WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-	m_interactComponent->setTooltipHeight(70.f);
+	
 	m_isInvincible = true;
 	m_isAlwaysUpdate = true;
 
