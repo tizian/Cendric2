@@ -247,7 +247,7 @@
   </object>
  </objectgroup>
  <objectgroup name="book">
-  <object id="127" gid="399" x="549" y="360" width="50" height="50">
+  <object id="127" gid="399" x="550" y="360" width="50" height="50">
    <properties>
     <property name="page1" value="TitleRhendalMagic1,ContentRhendalMagic1"/>
     <property name="page2" value="ContentRhendalMagic2"/>

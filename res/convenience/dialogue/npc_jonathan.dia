@@ -18,6 +18,11 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:11
+		condition:DL:isQuestState("essence_of_fire", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
 	]
 }
 {1
@@ -213,6 +218,26 @@ npc.id:npc_jonathan
 	]
 	[
 		# Link node, tag is next tag
+		tag:15
+		condition:DL:isConditionFulfilled("npc_jonathan", "elementalist") and not DL:isConditionFulfilled("npc_jonathan", "prove_yourself")
+		# translation: 
+		translation.tag:DL_Choice_WhatShouldWeDo
+		translation.en:And what should we do now?
+		translation.de:Und was sollten wir jetzt tun?
+		translation.ch:Und wa sölemer jetz mache?
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:DL:isConditionFulfilled("npc_jonathan", "prove_yourself")
+		# translation: 
+		translation.tag:DL_Choice_ProveMyself
+		translation.en:How can I prove myself?
+		translation.de:Wie kann ich mich beweisen?
+		translation.ch:We chan ich mich bewiise?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -260,9 +285,91 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Affinity
 	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells he can learn. We elementalists are lucky - we are able to understand the whole spectrum of magic.
 	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magietyp geboren. Dieser bestimmt, welche Zauber er erlernen kann. Wir Elementarmagier haben Glück - wir können das gesammte Spektrum der Magie verstehen.
-	translation.ch:Jede Magier wird mit enere gwüsse Aktivität zumne Magietyp gebore. De bestimmt, weli Zauber er lerne chan. Mir Elementarmagier hend Glück - mir chönd es ganze Spektrum vode Magie verstah.
+	translation.ch:Jede Magier wird mit enere gwüsse Affinität zumne Magietyp gebore. De bestimmt, weli Zauber er lerne chan. Mir Elementarmagier hend Glück - mir chönd es ganze Spektrum vode Magie verstah.
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_NextStep
+	translation.en:Hm. I knew that Cyrus was going to send me one of his students to support my research here. But to be honest, I hoped for someone who is a bit more...
+	translation.de:Hm. Ich wusste, dass mir Cyrus einer seiner Studenten zur Unterstützung meiner Forschungen schicken würde. Aber um ehrlich zu sein, habe ich mit jemandem gerechnet, der etwas mehr...
+	translation.ch:Hm. Ich ha scho gwüsst, dass de Cyrus mir eine vo sine Studente schicke wird. Aber zum ehrlich si, ich ha mit öpperem grechnet wo chli me... 
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "prove_yourself")
+	# translation: 
+	translation.tag:DL_Jonathan_NextStep2
+	translation.en:...qualified. Also, someone who lost his memory is suspicious. Before I let you in on my studies, you should first prove that you're a worthy elementalist.
+	translation.de:...qualifiziert ist. Ausserdem ist jemand, der sein Gedächnis verloren hat, ein bisschen verdächtig. Bevor ich dich in meine Forschungen einweihe, musst du beweisen, dass du ein würdiger Elementarmagier bist.
+	translation.ch:...qualifiziert isch. Usserdem isch öpper, wo sis Gedächnis verlore het, scho zimli verdächtig. Bevor ich dich i mini Forschige iweihe, muesch zersch bewiise, dass du en würdige Elementarmagier bisch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_FireballQuest
+	translation.en:Every mage is able to learn how to summon an iceball, it's an easy spell. Controlling fire, on the other hand, is considered nearly impossible for mages without an elemental affinity.
+	translation.de:Jeder Magier kann lernen, wie man einen Eisball beschwört. Feuer zu kontrollieren ist für Magier ohne eine Affinität zur Elementarmagie aber fast unmöglich.
+	translation.ch:Jede Magier cha lerne, we me en Iisball beschwört. Füür z'kontrolliere isch aber für en Magier ohni Affinität zur Elementarmagie fascht unmöglich.
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:addItem("ke_jonathanbasement", 1)
+	trigger:DL:changeQuestState("essence_of_fire", "started")
+	# translation: 
+	translation.tag:DL_Jonathan_FireballQuest2
+	translation.en:Some fire rats from the sewers recently invaded the laboratory in my basement. Find a way to lure them and collect the essence of fire from their lungs. Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
+	translation.de:Ein paar Feuerratten aus der Kanalisation sind in mein Labor in meinem Keller eingedrungen. Finde heraus, wie du sie anlocken kannst und bringe mir die Essenzen des Feuers aus ihren Lungen. Wenn du zurück bist, werde ich sehen, ob ich dir beibringen kann, wie man einen Feuerball beschwört.
+	translation.ch:Es paar Füürratte us de Kanalisation sind i mis Labor i mim Chäller idrunge. Find use, wed si alocke chasch und bring mer d'Füüressenze us ihrne Lunge. Denn wirdi mal luege, obi der biibringe cha, weme en Füürball beschwört.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [17] Choice Node
+	tag:17
+	[
+		# Link node, tag is next tag
+		tag:-1
+		condition:DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")
+		# translation: 
+		translation.tag:DL_Choice_GotFireEssence
+		translation.en:I got the essences of fire for you.
+		translation.de:Ich habe die Essenzen des Feuers für dich.
+		translation.ch:Ich han d'Füüressenze für dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_CU
+		translation.en:See you later.
+		translation.de:Bis später.
+		translation.ch:Bis spöter.
 	]
 }

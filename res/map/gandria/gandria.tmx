@@ -953,7 +953,7 @@
   </object>
   <object id="241" x="1900" y="2487.5" width="50" height="35">
    <properties>
-    <property name="map entry" value="res/map/jonathanhome/jonathanhome.tmx,460,670"/>
+    <property name="map entry" value="res/map/jonathanhome/jonathanhome.tmx,660,670"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

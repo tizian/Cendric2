@@ -107,6 +107,7 @@ item.id:qe_compass,1
 item.id:qe_brokenstaff1,1
 item.id:qe_brokenstaff2,1
 item.id:qe_brokenstaff3,1
+item.id:qe_fireessence,1
 item.id:we_claw,1
 item.id:we_hawthorn,1
 item.id:we_icestaff,1
@@ -132,6 +133,7 @@ item.id:ke_test_3,1
 item.id:ke_smallsilver,1
 item.id:ke_rhendal,1
 item.id:ke_tavernbasement,1
+item.id:ke_jonathanbasement,1
 item.id:do_notemarcus,1
 item.id:do_bloodnotemarcus,1
 item.id:do_eleletter,1

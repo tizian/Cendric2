@@ -21,3 +21,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ga
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaMines','location','Mines of Gandria','Minen von Gandria','Mine vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaBarracks','location','Barracks','Kaserne','Kaserne');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaTavern','location','Basilisk Inn','Gasthaus zum Basilisken','Gaschthuus zum Basilisk');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JonathanHome','location','Jonathan''s House','Jonathan''s Haus','Huus vom Jonathan');
+

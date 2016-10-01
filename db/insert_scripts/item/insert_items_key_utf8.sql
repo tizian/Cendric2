@@ -32,4 +32,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tavernbasement', 'key', 250, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tavernbasement', 'item', 'Iron Key','Eisenschlüssel','Iseschlüssel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tavernbasement', 'item_desc', 'The key to the basement of the Basilisk Inn.','Der Schlüssel zum Keller des Gasthauses zum Basilisken.','De Schlüssel zum Chäller vom  Gasthuus zum Basilisk.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tavernbasement', 'item_desc', 'The key to the basement of the Basilisk Inn.','Der Schlüssel zum Keller des Gasthauses zum Basilisken.','De Schlüssel zum Chäller vom Gasthuus zum Basilisk.');
+
+-- Basement Key (Key to the basement of Jonathan's house)
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_jonathanbasement', 'key', 300, 550, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item', 'Basement Key','Kellerschlüssel','Chällerschlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item_desc', 'The key to the basement of Jonathans House.','Der Schlüssel zum Keller von Jonathans Haus.','De Schlüssel zum Chäller vom Huus vom Jonathan.');

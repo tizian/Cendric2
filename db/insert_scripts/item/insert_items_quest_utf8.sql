@@ -60,3 +60,9 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_brokenstaff3', 'item', 'Tear Stone','Tränenstein','Tränestei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_brokenstaff3', 'item_desc', 'A tear shaped stone which focuses magic energy around it. Would fit perfectly into a staff head.','Ein tränenförmiger Stein, der die Magie um sich herum konzentriert. Er würde perfekt in einen Stabkopf passen.','En träneförmige Stei wo d''Magie um sich konzentriert. Er wür perfekt inen Stabchopf passe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_brokenstaff3', 'quest', 550, 50, -1);
+
+-- Essence of Fire
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireessence', 'item', 'Essence of Fire','Essenz des Feuers','Füüressenz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireessence', 'item_desc', 'From the lungs of a fire rat.','Aus den Lungen einer Feuerratte.','Us de Lunge vonere Füürratte');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_fireessence', 'quest', 550, 350, -1);
