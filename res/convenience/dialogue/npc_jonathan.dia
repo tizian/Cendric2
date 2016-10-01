@@ -1,0 +1,268 @@
+# dia file for dialogue for npc: npc_jonathan
+
+npc.id:npc_jonathan
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_jonathan", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isQuestState("a_new_trace", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "talked")
+	# translation: 
+	translation.tag:DL_Jonathan_WalkIntoHouse
+	translation.en:Hey, what are you doing here? You can't just walk into other people's houses.
+	translation.de:Hey, was machst du hier? Du kannst nicht einfach in die Häuser anderer Leute reinspazieren.
+	translation.ch:Hey, was machsch du da? Du chasch nid eifach id Hüser vo fremde Lüt iespaziere!
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_DoorWasOpen
+		translation.en:But... the door was open.
+		translation.de:Aber... die Türe war offen.
+		translation.ch:Aber... d'Türe isch offe gsi.
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_LookingForYou
+		translation.en:I was looking for you.
+		translation.de:Ich habe nach dir gesucht.
+		translation.ch:Ich ha dich gsuecht.
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_NoExcuNdse
+	translation.en:Well, that's not really an excuse. Why are you here?
+	translation.de:Na, das ist nicht wirklich eine Ausrede. Wieso bist du hier?
+	translation.ch:Ja guet, aber da isch nid würkli en Usred. Weso bisch da?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WhatDoYouWant
+	translation.en:What do you want from me then?
+	translation.de:Was willst du denn von mir?
+	translation.ch:Was wetsch denn vo mir?
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [5] Choice Node
+	tag:5
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:hasItem("do_eleletter", 1)
+		# translation: 
+		translation.tag:DL_Choice_Letter
+		translation.en:Someone wants me to meet you. (Show the letter)
+		translation.de:Jemand will, dass ich dich treffe. (Brief zeigen)
+		translation.ch:Öppert will, dass ich dich triff. (Brief zeige)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_Leave
+		translation.en:I was just about to leave.
+		translation.de:Ich wollte gerade wieder gehen.
+		translation.ch:Ich bi ja scho wider weg.
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_Letter
+	translation.en:(Reads the letter carefully) Cyrus! So good to hear from him. So, you're from the academy? How are things going there? And what did Cyrus find out?
+	translation.de:(Liest den Brief sorgfältig) Cyrus! Es ist gut, von ihm zu hören. Du kommst also von der Akademie? Ist dort alles in Ordnung? Und was hat Cyrus herausgefunden?
+	translation.ch:(List de Brief sorgfältig) Cyrus! Es isch guet, vo ihm z'ghöre. Du chunsch also vode Akademie? Was het de Cyrus denn usegfunde?
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{2
+	# [7] Choice Node
+	tag:7
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_Disappoint
+		translation.en:I'm sorry to disappoint you...
+		translation.de:Ich muss dich leider enttäuschen...
+		translation.ch:Ich mu dich leider enttüsche...
+	]
+}
+{3
+	# [8] Cendric Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_TellsTheStory
+	translation.en:(Cendric tells the story about losing his memory and getting here)
+	translation.de:(Cendric erzählt die Geschichte wie er sein Gedächnis verlor und hier gelandet ist)
+	translation.ch:(Cendric verzellt d'Gschicht we er sis Gedächnis verlore het und da glandet isch)
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_Wow
+	translation.en:Wow... Losing the your whole memory is pretty unusual, even for a mage.
+	translation.de:Wow... Das ganze Gedächnis zu verlieren ist ziemlich ungewöhnlich, auch für einen Magier.
+	translation.ch:Wow... Es ganz Gedächnis z'verlüre isch zimli ungwöhnlich, au füren Magier.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:changeQuestState("a_new_trace", "completed")
+	# translation: 
+	translation.tag:DL_Jonathan_Wow2
+	translation.en:And summoning an iceball is the only spell you remember, right? It's good you came here. We will solve this together.
+	translation.de:Und einen Eisball zu beschwören ist der einzige Zauber, an den du dich erinnerst, ja? Es ist gut, dass du zu mir gekommen bist. Wir werden das zusammen lösen.
+	translation.ch:Und en Iisball z'beschwöre isch de einzig Zauber wod na chasch, gell. Es isch guet bisch zu mir cho. Mir werded das zeme uflöse.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [11] Choice Node
+	tag:11
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:not DL:isConditionFulfilled("npc_jonathan", "academy")
+		# translation: 
+		translation.tag:DL_Choice_Academy
+		translation.en:What academy are you talking about?
+		translation.de:Von was für einer Akademie sprichst du?
+		translation.ch:Vo wa fürere Akademie redsch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		condition:DL:isConditionFulfilled("npc_jonathan", "academy") and not DL:isConditionFulfilled("npc_jonathan", "elementalist")
+		# translation: 
+		translation.tag:DL_Choice_Elementalists
+		translation.en:What are elementalists?
+		translation.de:Was sind Elementarmagier?
+		translation.ch:Was sind Elementarmagier?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isConditionFulfilled("npc_jonathan", "elementalist") and not DL:isConditionFulfilled("npc_jonathan", "affinity")
+		# translation: 
+		translation.tag:DL_Choice_Affinity
+		translation.en:What does "affinity" mean?
+		translation.de:Was bedeutet "Affinität"?
+		translation.ch:Was heisst "Affinität"?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "academy")
+	# translation: 
+	translation.tag:DL_Jonathan_Academy
+	translation.en:The only academy in Admantris where elementalists are educated. It is situated on the other side of the sea. You have obviously studied there.
+	translation.de:Die einzige Akademie in Admantris, die Elementarmagier ausbildet. Sie befindet sich auf der anderen Seite des Meeres. Du hast offensichtlich dort studiert.
+	translation.ch:Di einzig Akademie in Admantris wo Elementarmagier usbildet. Si liit uf de andere Siite vom Meer. Du hesch offesichtlich det studiert.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "elementalist")
+	# translation: 
+	translation.tag:DL_Jonathan_Elementalists
+	translation.en:Mages with an affinity to elemental magic. There are not too much left in Admantris, but I'm one of them... and you are - probably - too.
+	translation.de:Magier mit einer Affinität zur Elementarmagie. Es gibt nicht mehr viele davon in Admantris aber ich bin einer von ihnen... und du - wahrscheinlich - auch.
+	translation.ch:Magier mit enere Affinität zude Elementarmagie. Es git nüm so viel devo in Admantris, aber ich bi eine... und du - wahrschinli - au.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "affinity")
+	# translation: 
+	translation.tag:DL_Jonathan_Affinity
+	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells he can learn. We elementalists are lucky - we are able to understand the whole spectrum of magic.
+	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magietyp geboren. Dieser bestimmt, welche Zauber er erlernen kann. Wir Elementarmagier haben Glück - wir können das gesammte Spektrum der Magie verstehen.
+	translation.ch:Jede Magier wird mit enere gwüsse Aktivität zumne Magietyp gebore. De bestimmt, weli Zauber er lerne chan. Mir Elementarmagier hend Glück - mir chönd es ganze Spektrum vode Magie verstah.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

@@ -223,7 +223,7 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('Strength','St
 INSERT INTO text (text_id, english, german, swiss_german) values ('SwissGerman','Swiss German','Schweizerdeutsch','Schwiizerdüütsch');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ThirdSpell','3. Spell','3. Zauber','3. Zauber');
 INSERT INTO text (text_id, english, german, swiss_german) values ('ToggleTooltips','Toggle Tooltips','Tooltips anzeigen/verbergen','Tooltips zeige/verstecke');
-INSERT INTO text (text_id, english, german, swiss_german) values ('Twilight','Twilight','Zwielicht','Zwieliecht');
+INSERT INTO text (text_id, english, german, swiss_german) values ('Twilight','Twilight','Zwielicht','Dämmerig');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Type','Type','Typ','Typ');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Unknown','Unknown','Unbekannt','Unbekannt');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Unsalable','Cannot be sold','Unverkäuflich','Unverchäuflich');
