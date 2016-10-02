@@ -97,8 +97,8 @@ void DoorMapTile::reloadConditions() {
 
 	bool conditionsFulfilled = true;
 	for (auto& condition : m_data.conditions) {
-		if (condition.negative && core->isConditionFulfilled(condition.type, condition.name)
-			|| !condition.negative && !core->isConditionFulfilled(condition.type, condition.name)) {
+		if ((condition.negative && core->isConditionFulfilled(condition.type, condition.name))
+			|| (!condition.negative && !core->isConditionFulfilled(condition.type, condition.name))) {
 			conditionsFulfilled = false;
 			break;
 		}
