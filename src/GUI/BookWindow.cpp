@@ -50,7 +50,8 @@ BookWindow::BookWindow(const BookData& data) : Window(
 		m_bookTitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 		m_bookTitle.setColor(COLOR_DARK_BROWN);
 		m_bookTitle.setTextStyle(TextStyle::Shadowed);
-		m_bookTitle.setString(g_textProvider->getText(m_data.title, "document"));
+		m_bookTitle.setString(g_textProvider->getCroppedText(m_data.title, "document",
+			GUIConstants::CHARACTER_SIZE_XL, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
 		m_bookTitle.setTextAlignment(TextAlignment::Center);
 
 		setPage(-1);
@@ -115,7 +116,8 @@ void BookWindow::setPage(int index) {
 	m_leftArrow->setEnabled((!m_data.title.empty() && m_currentPage > -1) || m_currentPage > 0);
 
 	if (m_currentPage >= 0) {
-		m_title.setString(g_textProvider->getText(m_data.pages.at(m_currentPage).title, "document"));
+		m_title.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).title, "document",
+		    GUIConstants::CHARACTER_SIZE_L, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
 		m_content.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).content, "document",
 			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
 
