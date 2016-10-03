@@ -28,7 +28,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(4, -1, "DL_Jonathan_WhatDoYouWant") -- What do you want from me then?
+		DL:createNPCNode(4, -2, "DL_Jonathan_WhatDoYouWant") -- What do you want from me then?
 		DL:addNode()
 
 	end

@@ -87,7 +87,7 @@ npc.id:npc_jonathan
 	translation.ch:Was wetsch denn vo mir?
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {2

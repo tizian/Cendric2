@@ -31,14 +31,14 @@ struct LinkNode {
 	// returns the tag of the next node (can be -1 for end or -2 for reload)
 	int getNextTag() const;
 
-	int nextType = static_cast<int>(DialogueNodeType::End);
+	int nextType = static_cast<int>(DialogueNodeType::Start);
 	DialogueNode* nextNode = nullptr;
 	bool isReload = false;
 
 	NodeCondition* condition = nullptr;
 	NodeTranslation* translation = nullptr; // used for choice nodes
 	int currentPreselectedCondition = 0;
-	int currentPreselectedNodetype = 0;
+	int currentPreselectedNodetype = static_cast<int>(DialogueNodeType::Start);
 
 	// only used for IO, otherwise call getNextTag()
 	int ioNextTag;
