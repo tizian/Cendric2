@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="242">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="243">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -954,6 +954,12 @@
   <object id="241" x="1900" y="2487.5" width="50" height="35">
    <properties>
     <property name="map entry" value="res/map/jonathanhome/jonathanhome.tmx,660,670"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="242" x="950" y="2835" width="50" height="35">
+   <properties>
+    <property name="map entry" value="res/map/syrahhome/syrahhome.tmx,665,650"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
