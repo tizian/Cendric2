@@ -38,6 +38,8 @@ void TrampolineTile::loadAnimation(int skinNr) {
 	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 3, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 2, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 5, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	m_jumpingTime = jumpingAnimation->getAnimationTime();
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);

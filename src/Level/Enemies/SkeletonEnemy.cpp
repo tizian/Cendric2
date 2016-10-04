@@ -23,7 +23,6 @@ SkeletonEnemy::SkeletonEnemy(const Level* level, Screen* screen) :
 
 void SkeletonEnemy::loadAttributes() {
 	m_attributes.setHealth(100);
-	m_attributes.resistanceIce = 0;
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceShadow = 30;
 	m_attributes.calculateAttributes();

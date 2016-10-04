@@ -27,7 +27,7 @@ public:
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {};
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {};
 
-	int getMentalStrength() const override { return 3; }
+	int getMentalStrength() const override { return 4; }
 	EnemyID getEnemyID() const override { return EnemyID::Warden; }
 	WardenState getWardenState() const { return m_wardenState; }
 	

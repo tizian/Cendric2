@@ -58,6 +58,7 @@ void BookEnemy::loadAttributes() {
 void BookEnemy::loadSpells() {
 	SpellData pageSpell = SpellData::getSpellData(SpellID::RotatingProjectile);
 	pageSpell.isDynamicTileEffect = false;
+	pageSpell.damage = 3;
 	pageSpell.fightingTime = sf::seconds(0.f);
 	pageSpell.castingTime = sf::seconds(0.f);
 	pageSpell.castingAnimation = GameObjectState::VOID;

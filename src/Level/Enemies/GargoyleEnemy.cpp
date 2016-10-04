@@ -40,7 +40,7 @@ void GargoyleEnemy::setSummoned(int strength, int damage, int count, const sf::T
 
 void GargoyleEnemy::loadAttributes() {
 	m_attributes.setHealth(200);
-	m_attributes.resistancePhysical = 20;
+	m_attributes.resistancePhysical = 40;
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceLight = -10;
 	m_attributes.resistanceIce = 30;

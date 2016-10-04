@@ -311,7 +311,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(38, -2, "DL_Vincent_StealingFitsYou") -- Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuable things.
 			DL:changeQuestState("elder_chest", "completed")
-			DL:addReputationProgress("thief", 5)
+			DL:addReputationProgress("thief", 10)
 			DL:addNode()
 
 		end
