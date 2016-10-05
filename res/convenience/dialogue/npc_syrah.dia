@@ -1,0 +1,70 @@
+# dia file for dialogue for npc: npc_syrah
+
+npc.id:npc_syrah
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_syrah", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "talked")
+	# translation: 
+	translation.tag:DL_Syrah_Greeting
+	translation.en:Well hello there! You look like you could use some potions made by the infamous alchemist Syrah. A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
+	translation.de:Na hallo! Du siehst aus als könntest du ein paar Tränke von der berühmt-berüchtigten Alchemistin Syrah gebrauchen. Ob Liebestrank oder Haarfarbe - es gibt fast nichts was ich nicht zusammenbrauen könnte.
+	translation.ch:Ja hallo! Du gsesch us als chöntisch du paar Tränk vode berüemt-berüchtigte Alchemistin Syrah bruche. Ob Liebestrank oder Haarfarb - es git fast nüt woni nid chönt zememischle.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:DL:isQuestState("the_mark", "started") and DL:isQuestState("the_mark_2", "void")
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		condition:
+		# translation: 
+		translation.tag:DL_Choice_-1
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_3
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
