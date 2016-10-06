@@ -27,7 +27,7 @@ npc.id:npc_syrah
 	translation.ch:Ja hallo! Du gsesch us als chöntisch du paar Tränk vode berüemt-berüchtigte Alchemistin Syrah bruche. Ob Liebestrank oder Haarfarb - es git fast nüt woni nid chönt zememischle.
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {2
@@ -36,19 +36,57 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:3
-		condition:DL:isQuestState("the_mark", "started") and DL:isQuestState("the_mark_2", "void")
+		condition:DL:isQuestState("the_mark", "started") and DL:isQuestState("questionable_method", "void")
 		# translation: 
-		translation.tag:
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_Mark
+		translation.en:Can you remove this curse? (Show the mark)
+		translation.de:Kannst du diesen Fluch aufheben? (Mal zeigen)
+		translation.ch:Chasch du de Fluech wegmache? (Zeiche zeige)
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:isQuestState("questionable_method", "started") and not DL:isConditionFulfilled("npc_syrah", "sewers")
+		# translation: 
+		translation.tag:DL_Choice_Sewers
+		translation.en:How can I get to the sewers?
+		translation.de:Wie komme ich in die Kanalisation?
+		translation.ch:We chumi id Kanalisation?
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isQuestState("questionable_method", "void") and not DL:isConditionFulfilled("npc_syrah", "mark_seen")
+		# translation: 
+		translation.tag:DL_Choice_MarkSeen
+		translation.en:Where have you already seen this mark?
+		translation.de:Wo hast du dieses Mal schon mal gesehen? 
+		translation.ch:Wo hesch das Zeiche schomal gse?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_CanYouBrew
+		translation.en:Can you brew something for me?
+		translation.de:Kannst du mir etwas brauen?
+		translation.ch:Chaschmer öppis zemebraue?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_syrah", "Choice-1")
+		# translation: 
+		translation.tag:DL_Choice_Trade
+		translation.en:Show me your potions.
+		translation.de:Zeig mir deine Tränke.
+		translation.ch:Zeig mer dini Tränk.
 	]
 	[
 		# Link node, tag is next tag
 		tag:-1
-		condition:
 		# translation: 
-		translation.tag:DL_Choice_-1
+		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
@@ -59,10 +97,132 @@ npc.id:npc_syrah
 	tag:3
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_3
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Syrah_Mark
+	translation.en:(Syrah eyes the mark carefully) Hm. I've seen this mark before. Definitely a tracking curse. But it's one of the strongest I've ever seen.
+	translation.de:(Syrah betrachtet das Mal sorgfältig) Hm. Ich habe dieses Mal schon mal gesehen. Ganz klar ein Aufspür-Zauber. Aber einer der stärksten, die ich je gesehen habe.
+	translation.ch:(Syrah luegt s'Zeiche vorsichtig ah) Hm. Ich ha da Zeiche schomal gse. Ganz klar en Ufspür-Zauber. Aber eine vode stärchste woni je gseh han.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_Mark2
+	translation.en:That's not going to be easy. But if you help me to gather some ingredients, I think I can try to remove or at least weaken the curse.
+	translation.de:Das wird nicht einfach. Aber wenn du mir hilfst, die Zutaten zu besorgen, kann ich versuchen, den Fluch zu entfernen oder zumindest zu schwächen.
+	translation.ch:Da wird nid eifach. Aber wennd mer hilfsch zum d'Zuetate z'bsorge chani versueche, de Fluech z'enferne oder mindestens z'schwäche.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:changeQuestState("questionable_method", "started")
+	# translation: 
+	translation.tag:DL_Syrah_Mark3
+	translation.en:(Syrah pulls a green book out of her shelf and browses in it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can find all of this in the sewers.
+	translation.de:(Syrah zieht ein grünes Buch aus ihrem Regal und blättert darin) Ich brauche nur ein paar Knochen, ein wenig Blut einer Fledermaus und das Herz einer Feuerratte. Ich denke, das kannst du alles in der Kanalisation von Gandria bekommen.
+	translation.ch:(D'Syrah zieht es grüens Buech us irem Regal und blätteret drin) Ich bruch nur es paar Chnoche, e chli Bluet vonere Fledermuus und es Herz vonere Füürratte. Ich denk da sötsch alles ide Kanalisation vo Gandria becho.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "sewers")
+	# translation: 
+	translation.tag:DL_Syrah_Sewers
+	translation.en:Some houses have a basement with a connection to the sewers. I think there's also a door near the harbour that leads down.
+	translation.de:Ein paar Häuser haben in ihrem Keller eine Verbindung zur Kanalisation. Ich glaube, es gibt auch eine Türe in der Nähe des Hafens die dort runter führt.
+	translation.ch:Es paar Hüser hend i ihrem Chäller e Verbindig zude Kanalisation. Ich glaub es git au e Türe ide Nöchi vom Hafe wo det abe führt.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addQuestDescription("the_mark", 3)
+	trigger:DL:addConditionProgress("npc_syrah", "mark_seen")
+	# translation: 
+	translation.tag:DL_Syrah_MarkSeen
+	translation.en:Hm, let me think. There was this strange guy in the Basilisk Inn, he had the same or a similar mark. But no one could understand what he wanted to say, he only talked rubbish.
+	translation.de:Hm, lass mich nachdenken. Da war dieser komische Typ im Gasthaus zum Basilisken, der hatte ein ähnliches oder das gleiche Zeichen. Es hat ihn aber niemand wirklich verstanden, er hat nur sinnloses Geschwatz von sich gegeben.
+	translation.ch:Hm, lah mich überlege. Da isch de komisch Typ im Gasthuus zum Basilisk gsi, de het es ähnlichs oder es gliche Zeiche gha. Es het aber niemert würkli verstande waner wet sege, er het nur komisches Zügs babbelet.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_BrewSomething
+	translation.en:Sure, if you got the ingredients?
+	translation.de:Sicher, wenn du die Zutaten hast?
+	translation.ch:Sicher, wennd d'Zuetate hesch?
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{2
+	# [9] Choice Node
+	tag:9
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:DL:hasItem("fo_healingherb", 1) and DL:hasItem("fo_water", 1)
+		# translation: 
+		translation.tag:DL_Choice_LesserHealingPotion
+		translation.en:$fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
+		translation.de:$fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
+		translation.ch:$fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_ComeBackLater
+		translation.en:I'll come back later [BACK]
+		translation.de:Ich komme später wieder [ZURÜCK]
+		translation.ch:Ich chume spöter wider [ZRUGG]
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:removeItem("fo_water", 1)
+	trigger:DL:removeItem("fo_healingherb", 1)
+	trigger:DL:addItem("fo_lesserhealingpotion", 1)
+	# translation: 
+	translation.tag:DL_Syrah_HereYouGo
+	translation.en:Thanks. Here you go.
+	translation.de:Danke. Hier, für dich.
+	translation.ch:Danke. Da, nimms.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{4
+	# [11] Trade Node
+	tag:11
 	[
 		# Link node, tag is next tag
 		tag:-1

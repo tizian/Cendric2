@@ -32,6 +32,27 @@ std::string TextProvider::getText(const std::string& key, const std::string& typ
 	return rs[0][0];
 }
 
+std::string TextProvider::replaceItemVariables(const std::string& text) {
+	std::string remainingText = text;
+	std::size_t varPos = remainingText.find('$');
+	std::string parsedString = "";
+	while (varPos != std::string::npos) {
+		parsedString.append(remainingText.substr(0, varPos));
+		remainingText = remainingText.substr(varPos + 1);
+		varPos = remainingText.find('$'); 
+		if (varPos == std::string::npos) {
+			g_logger->logError("TextProvider", "missing closing $ of item id to parse.");
+			break;
+		}
+		std::string itemId = remainingText.substr(0, varPos);
+		parsedString.append(getText(itemId, "item"));
+		remainingText = remainingText.substr(varPos + 1);
+		varPos = remainingText.find('$');
+	}
+	parsedString.append(remainingText);
+	return parsedString;
+}
+
 std::string TextProvider::getCroppedText(const std::string& key, int characterSize, int maxWidth) {
 	return getCroppedText(key, "core", characterSize, maxWidth);
 }

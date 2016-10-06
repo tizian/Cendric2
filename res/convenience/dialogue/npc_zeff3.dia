@@ -107,9 +107,9 @@ npc.id:npc_zeff3
 		condition:DL:hasItem("mi_firerat_fur", 1)
 		# translation: 
 		translation.tag:DL_Choice_FireRatFur
-		translation.en:Scarf of the Fire Rat
-		translation.de:Schal der Feuerratte
-		translation.ch:Füürratte Halstuech
+		translation.en:$eq_fireratscarf$
+		translation.de:$eq_fireratscarf$
+		translation.ch:$eq_fireratscarf$
 		translation.item.id:mi_firerat_fur
 		translation.item.amount:1
 	]

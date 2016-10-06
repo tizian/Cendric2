@@ -125,7 +125,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item_desc', 'Heals wounds.','Heilt Wunden.','Heilt Wunde.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_healingherb', 'consumable', 50, 50, 5);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_healingherb', 5);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_healingherb', 10);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_healingherb', 7);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_healingherb', -10, 0, 30, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_healingherb', 1, 50, 50, 50, 50);
 
