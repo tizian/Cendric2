@@ -45,7 +45,7 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 		m_npc->setState(
 			currentStep.goal.x < 0 ? GameObjectState::Idle_left :
 			currentStep.goal.x > 0 ? GameObjectState::Idle_right : 
-			currentStep.goal.y < 0 ? GameObjectState::Idle_down :
+			currentStep.goal.y < 0 ? GameObjectState::Idle_up :
 			GameObjectState::Idle_down
 		);
 		updateStep = true;

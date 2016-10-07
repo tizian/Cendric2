@@ -33,7 +33,7 @@ struct LinkNode {
 
 	int nextType = static_cast<int>(DialogueNodeType::Start);
 	DialogueNode* nextNode = nullptr;
-	bool isReload = false;
+	bool isReload = true;
 
 	NodeCondition* condition = nullptr;
 	NodeTranslation* translation = nullptr; // used for choice nodes

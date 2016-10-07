@@ -66,3 +66,21 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireessence', 'item', 'Essence of Fire','Essenz des Feuers','Füüressenz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireessence', 'item_desc', 'From the lungs of a fire rat.','Aus den Lungen einer Feuerratte.','Us de Lunge vonere Füürratte');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_fireessence', 'quest', 550, 350, -1);
+
+-- Heart of a Fire Rat
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireratheart', 'item', 'Heart of a Fire Rat','Feuerrattenherz','Füürratteherz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireratheart', 'item_desc', 'Eww!','Igitt!','Wää!');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_fireratheart', 'quest', 300, 300, -1);
+
+-- Blood of a Bat
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_batblood', 'item', 'Blood of a Bat','Fledermausblut','Fledermuusbluet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_batblood', 'item_desc', 'A small vial containing a few drops of blood.','Eine kleine Phiole mit ein paar Tropfen Blut darin.','E chliini Phiole mit paar Tropfe Bluet drin.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_batblood', 'quest', 400, 550, -1);
+
+-- Bone
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_bone', 'item', 'Bone','Knochen','Chnoche');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_bone', 'item_desc', 'I really don''t want to know what kind of bone it is.','Ich will wirklich nicht wissen was das für ein Knochen ist.','Ich wett würkli gar nid wüsse wa da füren Chnoche isch.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_bone', 'quest', 450, 550, -1);

@@ -75,7 +75,6 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:11
-		condition:not DL:isConditionFulfilled("npc_syrah", "Choice-1")
 		# translation: 
 		translation.tag:DL_Choice_Trade
 		translation.en:Show me your potions.
@@ -132,7 +131,7 @@ npc.id:npc_syrah
 	translation.ch:(D'Syrah zieht es grüens Buech us irem Regal und blätteret drin) Ich bruch nur es paar Chnoche, e chli Bluet vonere Fledermuus und es Herz vonere Füürratte. Ich denk da sötsch alles ide Kanalisation vo Gandria becho.
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {1
@@ -147,7 +146,7 @@ npc.id:npc_syrah
 	translation.ch:Es paar Hüser hend i ihrem Chäller e Verbindig zude Kanalisation. Ich glaub es git au e Türe ide Nöchi vom Hafe wo det abe führt.
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {1
@@ -163,7 +162,7 @@ npc.id:npc_syrah
 	translation.ch:Hm, lah mich überlege. Da isch de komisch Typ im Gasthuus zum Basilisk gsi, de het es ähnlichs oder es gliche Zeiche gha. Es het aber niemert würkli verstande waner wet sege, er het nur komisches Zügs babbelet.
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {1
@@ -195,6 +194,66 @@ npc.id:npc_syrah
 	]
 	[
 		# Link node, tag is next tag
+		tag:12
+		condition:DL:hasItem("fo_healingherb", 2) and DL:hasItem("fo_water", 1)
+		# translation: 
+		translation.tag:DL_Choice_MediumHealingPotion
+		translation.en:$fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
+		translation.de:$fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
+		translation.ch:$fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		condition:DL:hasItem("fo_healingherb", 3) and DL:hasItem("fo_water", 1)
+		# translation: 
+		translation.tag:DL_Choice_GreaterHealingPotion
+		translation.en:$fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
+		translation.de:$fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
+		translation.ch:$fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:hasItem("fo_redhat", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
+		# translation: 
+		translation.tag:DL_Choice_ElixirFire
+		translation.en:$pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.de:$pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.ch:$pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:hasItem("fo_glowingshroom", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
+		# translation: 
+		translation.tag:DL_Choice_ElixirLight
+		translation.en:$pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.de:$pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.ch:$pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:DL:hasItem("fo_caveberry", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
+		# translation: 
+		translation.tag:DL_Choice_ElixirShadow
+		translation.en:$pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.de:$pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.ch:$pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
+		condition:DL:hasItem("fo_windrose", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
+		# translation: 
+		translation.tag:DL_Choice_ElixirIce
+		translation.en:$pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.de:$pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.ch:$pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-2
 		# translation: 
 		translation.tag:DL_Choice_ComeBackLater
@@ -220,11 +279,117 @@ npc.id:npc_syrah
 		tag:-2
 	]
 }
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:removeItem("fo_water", 1)
+	trigger:DL:removeItem("fo_healingherb", 2)
+	trigger:DL:addItem("fo_mediumhealingpotion", 1)
+	# translation: 
+	translation.tag:DL_Syrah_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:removeItem("fo_water", 1)
+	trigger:DL:removeItem("fo_healingherb", 3)
+	trigger:DL:addItem("fo_greaterhealingpotion", 1)
+	# translation: 
+	translation.tag:DL_Syrah_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:removeItem("fo_wine", 1)
+	trigger:DL:removeItem("fo_stormweed", 1)
+	trigger:DL:removeItem("fo_redhat", 1)
+	trigger:DL:addItem("pe_elixirfire", 1)
+	# translation: 
+	translation.tag:DL_Syrah_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:removeItem("fo_wine", 1)
+	trigger:DL:removeItem("fo_stormweed", 1)
+	trigger:DL:removeItem("fo_glowingshroom", 1)
+	trigger:DL:addItem("pe_elixirlight", 1)
+	# translation: 
+	translation.tag:DL_Syrah_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:removeItem("fo_wine", 1)
+	trigger:DL:removeItem("fo_stormweed", 1)
+	trigger:DL:removeItem("fo_caveberry", 1)
+	trigger:DL:addItem("pe_elixirshadow", 1)
+	# translation: 
+	translation.tag:DL_Syrah_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:removeItem("fo_wine", 1)
+	trigger:DL:removeItem("fo_stormweed", 1)
+	trigger:DL:removeItem("fo_windrose", 1)
+	trigger:DL:addItem("pe_elixirice", 1)
+	# translation: 
+	translation.tag:DL_Syrah_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
 {4
 	# [11] Trade Node
 	tag:11
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }

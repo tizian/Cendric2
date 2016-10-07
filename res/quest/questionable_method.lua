@@ -1,4 +1,4 @@
--- lua script for quest questionable_methods
+-- lua script for quest questionable_method
 
 -- what to do?
 collectibles = 

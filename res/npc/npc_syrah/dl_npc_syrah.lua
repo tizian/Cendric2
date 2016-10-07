@@ -27,9 +27,7 @@ loadDialogue = function(DL)
 		DL:addChoice(7, "DL_Choice_MarkSeen") -- Where have you already seen this mark?
 	end
 	DL:addChoice(8, "DL_Choice_CanYouBrew") -- Can you brew something for me?
-	if (not DL:isConditionFulfilled("npc_syrah", "Choice-1")) then 
-		DL:addChoice(11, "DL_Choice_Trade") -- Show me your potions.
-	end
+	DL:addChoice(11, "DL_Choice_Trade") -- Show me your potions.
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -43,7 +41,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(5, -1, "DL_Syrah_Mark3") -- (Syrah pulls a green book out of her shelf and browses in it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can find all of this in the sewers.
+		DL:createNPCNode(5, -2, "DL_Syrah_Mark3") -- (Syrah pulls a green book out of her shelf and browses in it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can find all of this in the sewers.
 		DL:changeQuestState("questionable_method", "started")
 		DL:addNode()
 
@@ -51,7 +49,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("questionable_method", "started") and not DL:isConditionFulfilled("npc_syrah", "sewers")) then 
 
-		DL:createNPCNode(6, -1, "DL_Syrah_Sewers") -- Some houses have a basement with a connection to the sewers. I think there's also a door near the harbour that leads down.
+		DL:createNPCNode(6, -2, "DL_Syrah_Sewers") -- Some houses have a basement with a connection to the sewers. I think there's also a door near the harbour that leads down.
 		DL:addConditionProgress("npc_syrah", "sewers")
 		DL:addNode()
 
@@ -59,7 +57,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isQuestState("questionable_method", "void") and not DL:isConditionFulfilled("npc_syrah", "mark_seen")) then 
 
-		DL:createNPCNode(7, -1, "DL_Syrah_MarkSeen") -- Hm, let me think. There was this strange guy in the Basilisk Inn, he had the same or a similar mark. But no one could understand what he wanted to say, he only talked rubbish.
+		DL:createNPCNode(7, -2, "DL_Syrah_MarkSeen") -- Hm, let me think. There was this strange guy in the Basilisk Inn, he had the same or a similar mark. But no one could understand what he wanted to say, he only talked rubbish.
 		DL:addQuestDescription("the_mark", 3)
 		DL:addConditionProgress("npc_syrah", "mark_seen")
 		DL:addNode()
@@ -75,6 +73,24 @@ loadDialogue = function(DL)
 	if (DL:hasItem("fo_healingherb", 1) and DL:hasItem("fo_water", 1)) then 
 		DL:addChoice(10, "DL_Choice_LesserHealingPotion") -- $fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
 	end
+	if (DL:hasItem("fo_healingherb", 2) and DL:hasItem("fo_water", 1)) then 
+		DL:addChoice(12, "DL_Choice_MediumHealingPotion") -- $fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
+	end
+	if (DL:hasItem("fo_healingherb", 3) and DL:hasItem("fo_water", 1)) then 
+		DL:addChoice(13, "DL_Choice_GreaterHealingPotion") -- $fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
+	end
+	if (DL:hasItem("fo_redhat", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+		DL:addChoice(14, "DL_Choice_ElixirFire") -- $pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
+	end
+	if (DL:hasItem("fo_glowingshroom", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+		DL:addChoice(15, "DL_Choice_ElixirLight") -- $pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
+	end
+	if (DL:hasItem("fo_caveberry", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+		DL:addChoice(16, "DL_Choice_ElixirShadow") -- $pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
+	end
+	if (DL:hasItem("fo_windrose", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+		DL:addChoice(17, "DL_Choice_ElixirIce") -- $pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
+	end
 	DL:addChoice(-2, "DL_Choice_ComeBackLater") -- I'll come back later [BACK]
 	DL:addNode()
 
@@ -88,11 +104,72 @@ loadDialogue = function(DL)
 
 	end
 
-	if (not DL:isConditionFulfilled("npc_syrah", "Choice-1")) then 
+	if (DL:hasItem("fo_healingherb", 2) and DL:hasItem("fo_water", 1)) then 
 
-		DL:createTradeNode(11, -1)
+		DL:createNPCNode(12, -2, "DL_Syrah_HereYouGo") -- 
+		DL:removeItem("fo_water", 1)
+		DL:removeItem("fo_healingherb", 2)
+		DL:addItem("fo_mediumhealingpotion", 1)
 		DL:addNode()
 
 	end
+
+	if (DL:hasItem("fo_healingherb", 3) and DL:hasItem("fo_water", 1)) then 
+
+		DL:createNPCNode(13, -2, "DL_Syrah_HereYouGo") -- 
+		DL:removeItem("fo_water", 1)
+		DL:removeItem("fo_healingherb", 3)
+		DL:addItem("fo_greaterhealingpotion", 1)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("fo_redhat", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+
+		DL:createNPCNode(14, -2, "DL_Syrah_HereYouGo") -- 
+		DL:removeItem("fo_wine", 1)
+		DL:removeItem("fo_stormweed", 1)
+		DL:removeItem("fo_redhat", 1)
+		DL:addItem("pe_elixirfire", 1)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("fo_glowingshroom", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+
+		DL:createNPCNode(15, -2, "DL_Syrah_HereYouGo") -- 
+		DL:removeItem("fo_wine", 1)
+		DL:removeItem("fo_stormweed", 1)
+		DL:removeItem("fo_glowingshroom", 1)
+		DL:addItem("pe_elixirlight", 1)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("fo_caveberry", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+
+		DL:createNPCNode(16, -2, "DL_Syrah_HereYouGo") -- 
+		DL:removeItem("fo_wine", 1)
+		DL:removeItem("fo_stormweed", 1)
+		DL:removeItem("fo_caveberry", 1)
+		DL:addItem("pe_elixirshadow", 1)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("fo_windrose", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+
+		DL:createNPCNode(17, -2, "DL_Syrah_HereYouGo") -- 
+		DL:removeItem("fo_wine", 1)
+		DL:removeItem("fo_stormweed", 1)
+		DL:removeItem("fo_windrose", 1)
+		DL:addItem("pe_elixirice", 1)
+		DL:addNode()
+
+	end
+
+
+	DL:createTradeNode(11, -2)
+	DL:addNode()
 
 end
