@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="188">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="189">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
@@ -277,6 +277,15 @@
   <object id="152" gid="421" x="800" y="549" width="50" height="50">
    <properties>
     <property name="key" value="ke_syrahbasement"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="book">
+  <object id="188" gid="399" x="550" y="308" width="50" height="50">
+   <properties>
+    <property name="page1" value="TitleBookPotions1,ContentBookPotions1"/>
+    <property name="page2" value="TitleBookPotions2,ContentBookPotions2"/>
+    <property name="title" value="BookPotions"/>
    </properties>
   </object>
  </objectgroup>

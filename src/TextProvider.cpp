@@ -19,7 +19,7 @@ std::string TextProvider::getText(const std::string& key) {
 	return getText(key, "core");
 }
 
-std::string TextProvider::getText(const std::string& key, const std::string& type) {
+std::string TextProvider::getText(const std::string& key, const std::string& type, bool isReplaceItemVariables) {
 	if (key.empty()) return "";
 
 	std::string query = "SELECT " + m_language + " FROM text WHERE text_id = '" + key + "' AND text_type = '" + type + "' LIMIT 1;";
@@ -29,15 +29,23 @@ std::string TextProvider::getText(const std::string& key, const std::string& typ
 		g_logger->logWarning("TranslationReader", "Tried to get missing translation for key: " + key + " with type " + type);
 		return "(undefined text " + key + ")";
 	}
+
+	if (isReplaceItemVariables) {
+		replaceItemVariables(rs[0][0]);
+	}
 	return rs[0][0];
 }
 
-std::string TextProvider::replaceItemVariables(const std::string& text) {
+void TextProvider::replaceItemVariables(std::string& text) {
+	if (text.find('$') == std::string::npos) {
+		// nothing to do
+		return;
+	}
 	std::string remainingText = text;
 	std::size_t varPos = remainingText.find('$');
-	std::string parsedString = "";
+	text.clear();
 	while (varPos != std::string::npos) {
-		parsedString.append(remainingText.substr(0, varPos));
+		text.append(remainingText.substr(0, varPos));
 		remainingText = remainingText.substr(varPos + 1);
 		varPos = remainingText.find('$'); 
 		if (varPos == std::string::npos) {
@@ -45,12 +53,11 @@ std::string TextProvider::replaceItemVariables(const std::string& text) {
 			break;
 		}
 		std::string itemId = remainingText.substr(0, varPos);
-		parsedString.append(getText(itemId, "item"));
+		text.append(getText(itemId, "item", false));
 		remainingText = remainingText.substr(varPos + 1);
 		varPos = remainingText.find('$');
 	}
-	parsedString.append(remainingText);
-	return parsedString;
+	text.append(remainingText);
 }
 
 std::string TextProvider::getCroppedText(const std::string& key, int characterSize, int maxWidth) {

@@ -355,7 +355,7 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 // Dialogue Option
 
 DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type) {
-	std::string textString = g_textProvider->replaceItemVariables(g_textProvider->getText(trans.text, dialogueID));
+	std::string textString = g_textProvider->getText(trans.text, dialogueID);
 	if (!trans.item.first.empty()) {
 		textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item") + ")");
 	}

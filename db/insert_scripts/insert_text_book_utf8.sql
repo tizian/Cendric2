@@ -29,6 +29,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 Aber so interessant und nützlich die Magie auch sein mag, es gibt viele Menschen, welche sich vor ihr fürchten. Das ist natürlich völlig verständlich, auch ich selbst bin skeptisch, wenn ich sehe, für was sie verwendet werden kann. Trotzdem habe ich immer noch vor, mich für den Rest meines Lebens den Studien dieses äusserst interessanten Themas zu widmen.','Me chan die Eigeschafte au so für sich nutze, ohni d''Magie direkt z''kontrolliere.
 
 Aber so interessant und nützlich d''Magie au sii mag, es git viel Lüüt, wo de Bammel hend devor. Da isch natürli völlig verständlich, au ich bin emel skeptisch, wenn ich gse, für was me si so bruuche chan. Trotzdem hani immerna vor, de Rest vo mim Läbe mitem Studium vo dem üsserst interessante Thema z''widme.');
+
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookSchoolsOfMagic','document','The Schools of Magic','Die Schulen der Magie','D''Schuele vode Magie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleSchoolsOfMagic1','document','Elemental Magic','Elementarmagie','Elementarmagie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentSchoolsOfMagic1','document','Elemental magic is the art of controlling the elements of nature. It is the first type of magic that was discovered and therefore sometimes referred to as primal magic. 
@@ -44,3 +45,134 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ti
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentSchoolsOfMagic3','document','Necromancy is a branch of magic which deals with demons and death itself. The practicing of that magic is not accepted in general, although the research in this area has helped advancing the science of magic.','Nekromantie ist ein Zweig der Magie der sich mit Dämonen und dem Tod selbst befasst. Das Ausüben dieser Magie ist generell nicht akzeptiert, obwohl die Forschung in diesem Bereich die Wissenschaft der Magie weit vorangetrieben hat.','Nekromantie isch en Zwiig vode Magie wo sich mit Dämone und em Tod selber befasst. Es Usüebe vo dere Magie isch generell nid akzeptiert, obwohl d''Forschig i dem Bereich d''Wüsseschaft vode Magie wiit voratribe het.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleSchoolsOfMagic4','document','Twilight Magic','Magie des Zwielichts','Dämmerigsmagie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentSchoolsOfMagic4','document','The art of twilight or shadow magic has not been thoroughly investigated yet. But we know that it''s used to hide in and attack from the shadows.','Die Kunst der Zwielicht oder Schattenmagie wurde bis jetzt noch nicht gründlich erforscht. Aber wir wissen, dass sie genutzt wird, um sich in den Schatten zu verstecken und daraus anzugreifen.','D''Kunst vode Dämmerigs- oder Schattemagie isch bis ez nanig gründlich erforscht worde. Aber mer wüssed, dass si brucht wird, zum sich ide Schatte z''verstecke und drus aazgrife.');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookPotions','document','Magic Potions','Magische Tränke','Magischi Tränk');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookPotions1','document','Healing Potions','Heiltränke','Heiltränk');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookPotions1','document',
+
+'$fo_lesserhealingpotion$  
+---
+1 $fo_healingherb$
+1 $fo_water$
+
+
+$fo_mediumhealingpotion$ 
+---
+2 $fo_healingherb$
+1 $fo_water$
+
+
+$fo_greaterhealingpotion$
+---
+3 $fo_healingherb$
+1 $fo_water$','$fo_lesserhealingpotion$  
+---
+1 $fo_healingherb$
+1 $fo_water$
+
+
+$fo_mediumhealingpotion$ 
+---
+2 $fo_healingherb$
+1 $fo_water$
+
+
+$fo_greaterhealingpotion$
+---
+3 $fo_healingherb$
+1 $fo_water$','$fo_lesserhealingpotion$  
+---
+1 $fo_healingherb$
+1 $fo_water$
+
+
+$fo_mediumhealingpotion$ 
+---
+2 $fo_healingherb$
+1 $fo_water$
+
+
+$fo_greaterhealingpotion$
+---
+3 $fo_healingherb$
+1 $fo_water$');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookPotions2','document','Permanent Potions','Permanente Tränke','Permanenti Tränk');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookPotions2','document',
+'$pe_elixirfire$
+---
+1 $fo_redhat$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirlight$
+---
+1 $fo_glowingshroom$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirshadow$
+---
+1 $fo_caveberry$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirice$
+---
+1 $fo_windrose$
+1 $fo_stormweed$
+1 $fo_wine$',
+'$pe_elixirfire$
+---
+1 $fo_redhat$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirlight$
+---
+1 $fo_glowingshroom$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirshadow$
+---
+1 $fo_caveberry$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirice$
+---
+1 $fo_windrose$
+1 $fo_stormweed$
+1 $fo_wine$',
+'$pe_elixirfire$
+---
+1 $fo_redhat$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirlight$
+---
+1 $fo_glowingshroom$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirshadow$
+---
+1 $fo_caveberry$
+1 $fo_stormweed$
+1 $fo_wine$
+
+
+$pe_elixirice$
+---
+1 $fo_windrose$
+1 $fo_stormweed$
+1 $fo_wine$');

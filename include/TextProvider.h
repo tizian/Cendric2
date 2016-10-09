@@ -12,9 +12,8 @@ public:
 
 	// this assumes a text of type "core"
 	std::string getText(const std::string& key);
-	std::string getText(const std::string& key, const std::string& type);
-	// replaces the item variables marked with $item_id$ in the text
-	std::string replaceItemVariables(const std::string& text);
+	std::string getText(const std::string& key, const std::string& type, bool isReplaceItemVariables = true);
+	
 	// adds newline characters to the string where needed. Don't call this too often as
 	// it calculates the newline characters new every time you call it. It assumes a text of type "core"
 	std::string getCroppedText(const std::string& key, int characterSize, int maxWidth);
@@ -25,4 +24,6 @@ public:
 
 private:
 	std::string m_language = "english";
+	// replaces the item variables marked with $item_id$ in the text
+	void replaceItemVariables(std::string& text);
 };
