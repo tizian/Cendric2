@@ -2,7 +2,7 @@
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item', 'Note','Notiz','Notiz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notemarcus', 'item_desc', 'I''ve found this note nailed to a post in the Howling Caverns.','Diese Notiz habe ich in den Heulenden Höhlen gefunden, an einen Pfosten genagelt.','Die Notiz hani anen Pfoste gnaglet gfunde, ide Hüülende Höhle.');
-INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notemarcus', 1, 'NoteMarcus');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notemarcus', 0, 'NoteMarcus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteMarcus', 'document', 'To whoever reads this: Beware!
 
 These caverns are full of traps, I only made it with a lot of luck to where I am now. The five levers are designed to kill you if you pull the wrong one. Use the last one first and the first one last and leave the others untouched.
@@ -30,7 +30,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_bloodnotemarcus', 'item', 'Bloodstained Note','Blutverschmierte Notiz','Bluetverschmierti Notiz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_bloodnotemarcus', 'item_desc', 'Paladin Marcus must have scribbled those words on this sheet of paper before he was killed.','Paladin Marcus muss das hingekritzelt haben, bevor er getötet wurde.','De Paladin Marcus mun das anekritzlet ha bevor er töted worde isch.');
-INSERT INTO item_document_page(item_id, page_nr, content) values ('do_bloodnotemarcus', 1, 'BloodNoteMarcus');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_bloodnotemarcus', 0, 'BloodNoteMarcus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BloodNoteMarcus', 'document', 'The beast! Transforms...
 
  Humans into wolves
@@ -61,7 +61,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_eleletter', 'item_desc', 'I found this letter in the old travel bag that belonged to me once.','Ich habe diesen Brief in dem alten Reiserucksack gefunden, der einmal mir gehört hat.','Ich ha de Brief im alte Reiserucksack gfunde, wo mal mir ghört het.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_eleletter', 'document', 500, 300, -1);
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_eleletter', 'a_new_trace', 1);
-INSERT INTO item_document_page(item_id, page_nr, content) values ('do_eleletter', 1, 'EleLetter');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_eleletter', 0, 'EleLetter');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('EleLetter', 'document',
 'To the Novice Cendric
 
@@ -87,16 +87,16 @@ Grossmagister Cyrus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item', 'Wrinkled Map','Zerknitterte Karte','Verknittereti Charte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', 'A red cross marks a location on the map - maybe a treasure?','Ein rotes Kreuz markiert einen Ort darauf - vielleicht einen Schatz?','Es rots Chrüz markiert en Ort druf - vilicht en Schatz?');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_elemap', 'document', 550, 400, -1);
-INSERT INTO item_document_page(item_id, page_nr, texture_path) values ('do_elemap', 1, 'res/assets/items/elemap.png');
+INSERT INTO item_document_page(item_id, page_nr, texture_path) values ('do_elemap', 0, 'res/assets/items/elemap.png');
 
 -- Rhendal's Diary
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elderdiary', 'item', 'Rhendal''s Diary','Rhendals Tagebuch','Es Tagebuech vom Rhendal');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elderdiary', 'item_desc', 'It is disrespectful to open a stranger''s diary.','Es ist unhöflich, ein fremdes Tagebuch zu öffnen.','Es isch unhöflich, imne fremde Tagebuech z''nuusche.');
-INSERT INTO item_document_page(item_id, page_nr, title) values ('do_elderdiary', -1, 'ElderDiaryTitle');
-INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_elderdiary', 0, 'ElderDiaryTitle1', 'ElderDiaryContent1');
-INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_elderdiary', 1, 'ElderDiaryTitle2', 'ElderDiaryContent2');
-INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_elderdiary', 2, 'ElderDiaryTitle3', 'ElderDiaryContent3');
+INSERT INTO item_document_page(item_id, page_nr, title) values ('do_elderdiary', 0, 'ElderDiaryTitle');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_elderdiary', 1, 'ElderDiaryTitle1', 'ElderDiaryContent1');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_elderdiary', 2, 'ElderDiaryTitle2', 'ElderDiaryContent2');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_elderdiary', 3, 'ElderDiaryTitle3', 'ElderDiaryContent3');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryTitle', 'document', 'Diary', 'Tagebuch', 'Tagebuech');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryTitle1', 'document', 'Day 212, 1103', 'Tag 212, 1103', 'Tag 212, 1103');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryContent1', 'document', 'My dear Elona has still not returned. It''s unusual that she stays in the Stone Garden for such a long time. Maybe she found a new place where rare herbs grow?', 'Meine teure Elona ist immer noch nicht zurück. Es ist ungewöhnlich, dass sie so lange im Steingarten bleibt. Vielleicht hat sie eine neue Stelle gefunden, an der seltene Kräuter wachsen?', 'Mini Elona isch immer nanig heicho. Es isch ungwöhnlich, das si so lang im Steigarte bliibt. Vilicht het si e neui Stell gfunde, wo seltenigi Krütli wachsed?');

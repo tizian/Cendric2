@@ -84,6 +84,7 @@ CREATE TABLE item_document_page(
 	title VARCHAR(50) NOT NULL DEFAULT "",
 	content VARCHAR(50) NOT NULL DEFAULT "",
 	texture_path VARCHAR(100) NOT NULL DEFAULT "",
+	content_alignment VARCHAR(6) NOT NULL DEFAULT "left",
 	PRIMARY KEY (item_id, page_nr),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 );

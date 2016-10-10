@@ -289,11 +289,11 @@ void WorldScreen::execOnExit(const Screen* nextScreen) {
 	m_overlayQueue.clear();
 }
 
-void WorldScreen::setBook(const BookData* bookData) {
+void WorldScreen::setBook(const Item& document) {
 	m_interface->hideAll();
 
 	delete m_bookWindow;
-	m_bookWindow = new BookWindow(*bookData);
+	m_bookWindow = new BookWindow(document);
 	m_bookWindowDisposed = false;
 	m_bookWindow->addCloseButton([&]() {
 		m_bookWindowDisposed = true;

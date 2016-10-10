@@ -503,8 +503,8 @@ std::vector<ItemDocumentPageBean> DatabaseManager::getItemDocumentPageBeans(cons
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 5) {
-			g_logger->logError("DatabaseManager::getItemDocumentPageBeans", "number of returned columns must be 4");
+		if (cols != 6) {
+			g_logger->logError("DatabaseManager::getItemDocumentPageBeans", "number of returned columns must be 6");
 			return beans;
 		}
 		int result = 0;
@@ -518,6 +518,7 @@ std::vector<ItemDocumentPageBean> DatabaseManager::getItemDocumentPageBeans(cons
 				bean.title = std::string((char*)sqlite3_column_text(statement, 2));
 				bean.content = std::string((char*)sqlite3_column_text(statement, 3));
 				bean.texture_path = std::string((char*)sqlite3_column_text(statement, 4));
+				bean.content_alignment = resolveTextAlignment((char*)sqlite3_column_text(statement, 5));
 				bean.status = BeanStatus::Filled;
 				beans.push_back(bean);
 			}

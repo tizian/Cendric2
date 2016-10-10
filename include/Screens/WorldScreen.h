@@ -24,7 +24,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget);
 	void updateProgressLog(const sf::Time& frameTime);
-	void setBook(const BookData* bookData);
+	void setBook(const Item& document);
 
 	// notify permanent item consumed -> change in core, display overlay and progresslog and reload inventory.
 	void notifyPermanentItemConsumed(const Item* item);

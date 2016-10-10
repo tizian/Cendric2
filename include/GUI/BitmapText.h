@@ -10,6 +10,13 @@ enum class TextAlignment {
 	Right
 };
 
+inline static TextAlignment resolveTextAlignment(const std::string& alignment) {
+	if (alignment.compare("left") == 0) return TextAlignment::Left;
+	if (alignment.compare("right") == 0) return TextAlignment::Right;
+	if (alignment.compare("center") == 0) return TextAlignment::Center;
+	return TextAlignment::Left;
+}
+
 enum class TextStyle {
 	Default,
 	Shadowed

@@ -432,40 +432,14 @@ bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 				}
 				std::string attrText = textAttr;
 
-				if (attrText.compare("title") == 0) {
+				if (attrText.compare("id") == 0) {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						logError("XML file could not be read, parsing of book id failed.");
 						return false;
 					}
-					book.title = textAttr;
-				}
-				else if (attrText.find("page") != string::npos) {
-					textAttr = nullptr;
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					
-					std::string tex = textAttr;
-
-					BookPage page;
-
-					size_t pos = 0;
-					if ((pos = tex.find(",")) == std::string::npos) {
-						// this page has only content, no title.
-						page.content = tex;
-					}
-					else {
-						// this page has content and a title
-						page.title = tex.substr(0, pos);
-						tex.erase(0, pos + 1);
-						page.content = tex;
-					}
-					
-					book.pages.push_back(page);
+					book.id = textAttr;
 				}
 				
 				_property = _property->NextSiblingElement("property");

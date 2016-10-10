@@ -6,7 +6,7 @@
   <property name="name" value="JonathanHome"/>
   <property name="tilesetpath" value="res/map/jonathanhome/tileset_map_jonathanhome.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_jonathanhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
+ <tileset firstgid="1" name="tileset_map_jonathanhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
   <image source="tileset_map_jonathanhome.png" width="1000" height="1000"/>
   <tile id="206">
    <properties>
@@ -54,10 +54,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -265,12 +265,8 @@
  </objectgroup>
  <objectgroup name="book">
   <object id="177" gid="399" x="500" y="310" width="50" height="50">
-  <properties>
-    <property name="page1" value="TitleSchoolsOfMagic1,ContentSchoolsOfMagic1"/>
-    <property name="page2" value="TitleSchoolsOfMagic2,ContentSchoolsOfMagic2"/>
-	<property name="page3" value="TitleSchoolsOfMagic3,ContentSchoolsOfMagic3"/>
-	<property name="page4" value="TitleSchoolsOfMagic4,ContentSchoolsOfMagic4"/>
-    <property name="title" value="BookSchoolsOfMagic"/>
+   <properties>
+    <property name="id" value="bo_schoolsofmagic"/>
    </properties>
   </object>
  </objectgroup>

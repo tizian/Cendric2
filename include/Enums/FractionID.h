@@ -12,7 +12,7 @@ enum class FractionID {
 	MAX,
 };
 
-inline FractionID resolveFractionID(const std::string& id) {
+inline static FractionID resolveFractionID(const std::string& id) {
 	if (id.compare("elementalist") == 0) return FractionID::Elementalist;
 	if (id.compare("cleric") == 0) return FractionID::Cleric;
 	if (id.compare("necromancer") == 0) return FractionID::Necromancer;

@@ -3,7 +3,7 @@
 
 char* Reader::gotoNextChar(char* buffer, char* end, char goal) const {
 	while (buffer < end && *buffer != goal) {
-		buffer++;
+		++buffer;
 	}
 
 	// goal not found
@@ -17,8 +17,8 @@ char* Reader::gotoNextChar(char* buffer, char* end, char goal) const {
 int Reader::countToNextChar(char* buffer, char* end, char goal) const {
 	int count = 0;
 	while (buffer < end && *buffer != goal) {
-		buffer++;
-		count++;
+		++buffer;
+		++count;
 	}
 
 	// goal not found

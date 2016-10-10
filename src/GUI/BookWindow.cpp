@@ -1,24 +1,26 @@
 #include "GUI/BookWindow.h"
 #include "GUI/GUIConstants.h"
+#include "Item.h"
 
 const float BookWindow::WIDTH = WINDOW_WIDTH / 3.f;
 const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TOP;
 const float BookWindow::MARGIN = 50.f;
 const std::string BookWindow::SOUND_PATH = "res/sound/gui/page_turn.ogg";
 
-BookWindow::BookWindow(const BookData& data) : Window(
+BookWindow::BookWindow(const Item& item) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, HEIGHT),
 	GUIOrnamentStyle::LARGE,
 	COLOR_LIGHT_BROWN, // back
-	COLOR_DARK_BROWN) // ornament 
-{
-	m_data = data;
+	COLOR_DARK_BROWN), // ornament 
+	m_item(item) {
+	auto const& pages = m_item.getDocumentPageBeans();
+	assert(pages.size() > 0 && "A document has to have at least one page!");
 
 	// load resources
 	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);
-	for (auto& page : m_data.pages) {
-		if (page.texturePath.empty()) continue;
-		g_resourceManager->loadTexture(page.texturePath, ResourceType::Unique, this);
+	for (auto const& page : pages) {
+		if (page.texture_path.empty()) continue;
+		g_resourceManager->loadTexture(page.texture_path, ResourceType::Unique, this);
 	}
 
 	m_leftArrow = new ArrowButton(false);
@@ -29,35 +31,19 @@ BookWindow::BookWindow(const BookData& data) : Window(
 	m_rightArrow->setMainColor(COLOR_DARK_BROWN);
 	m_rightArrow->setMouseoverColor(COLOR_WHITE);
 
-	if (m_data.title.empty() && m_data.pages.empty()) {
-		// this book has no pages. let's give it one.
-		BookPage page;
-		m_data.pages.push_back(page);
-	}
-
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setColor(COLOR_DARK_BROWN);
+
+	m_bookTitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
+	m_bookTitle.setColor(COLOR_DARK_BROWN);
+	m_bookTitle.setTextStyle(TextStyle::Shadowed);
+	m_bookTitle.setTextAlignment(TextAlignment::Center);
 
 	m_content.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_content.setColor(COLOR_BLACK);
 
-	// select first page
-	if (m_data.title.empty()) {
-		setPage(0);
-	}
-	else {
-		// Init book title
-		m_bookTitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
-		m_bookTitle.setColor(COLOR_DARK_BROWN);
-		m_bookTitle.setTextStyle(TextStyle::Shadowed);
-		m_bookTitle.setString(g_textProvider->getCroppedText(m_data.title, "document",
-			GUIConstants::CHARACTER_SIZE_XL, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
-		m_bookTitle.setTextAlignment(TextAlignment::Center);
-
-		setPage(-1);
-	}
-
 	setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - WIDTH), 0.5f * (WINDOW_HEIGHT - HEIGHT)));
+	setPage(0);
 }
 
 BookWindow::~BookWindow() {
@@ -68,16 +54,13 @@ BookWindow::~BookWindow() {
 
 void BookWindow::render(sf::RenderTarget& renderTarget) {
 	Window::render(renderTarget);
-	if (m_currentPage == -1) {
-		renderTarget.draw(m_bookTitle);
+
+	if (m_showSprite) {
+		renderTarget.draw(m_sprite);
 	}
-	else {
-		if (m_showSprite) {
-			renderTarget.draw(m_sprite);
-		}
-		renderTarget.draw(m_title);
-		renderTarget.draw(m_content);
-	}
+	renderTarget.draw(m_bookTitle);
+	renderTarget.draw(m_title);
+	renderTarget.draw(m_content);
 
 	m_leftArrow->render(renderTarget);
 	m_rightArrow->render(renderTarget);
@@ -109,30 +92,40 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 
 void BookWindow::setPage(int index) {
 	g_resourceManager->playSound(m_sound, SOUND_PATH);
-	if (m_data.title.empty() && index < 0) return;
-	if (index < -1 || index + 1 > static_cast<int>(m_data.pages.size())) return;
+	auto const& pages = m_item.getDocumentPageBeans();
+	if (index < 0 || index > pages.size() - 1) return;
+
 	m_currentPage = index;
-	m_rightArrow->setEnabled(m_currentPage + 1 < static_cast<int>(m_data.pages.size()));
-	m_leftArrow->setEnabled((!m_data.title.empty() && m_currentPage > -1) || m_currentPage > 0);
-
-	if (m_currentPage >= 0) {
-		m_title.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).title, "document",
-		    GUIConstants::CHARACTER_SIZE_L, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
-		m_content.setString(g_textProvider->getCroppedText(m_data.pages.at(m_currentPage).content, "document",
-			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
-
-		if (sf::Texture* tex = g_resourceManager->getTexture(m_data.pages.at(m_currentPage).texturePath)) {
-			m_sprite.setTexture(*tex, true);
-			m_showSprite = true;
-		}
-		else {
-			m_showSprite = false;
-		}
+	auto const& page = pages.at(m_currentPage);
+	if (!page.title.empty() && page.content.empty()) {
+		// handle a title page
+		m_bookTitle.setString(g_textProvider->getCroppedText(page.title, "document",
+			GUIConstants::CHARACTER_SIZE_XL, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
+		m_title.setString("");
+		m_content.setString("");
 	}
 	else {
-		// title page has no texture.
+		// handle a normal page
+		m_title.setString(g_textProvider->getCroppedText(page.title, "document",
+			GUIConstants::CHARACTER_SIZE_L, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
+		m_content.setString(g_textProvider->getCroppedText(page.content, "document",
+			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
+		m_content.setTextAlignment(page.content_alignment);
+		m_bookTitle.setString("");
+	}
+
+	// handle texture
+	if (sf::Texture* tex = g_resourceManager->getTexture(page.texture_path)) {
+		m_sprite.setTexture(*tex, true);
+		m_showSprite = true;
+	}
+	else {
 		m_showSprite = false;
 	}
+
+	m_rightArrow->setEnabled(m_currentPage + 1 < static_cast<int>(pages.size()));
+	m_leftArrow->setEnabled(m_currentPage > 0);
+	setPosition(getPosition());
 }
 
 void BookWindow::setPosition(const sf::Vector2f& pos) {
@@ -143,8 +136,13 @@ void BookWindow::setPosition(const sf::Vector2f& pos) {
 
 	m_bookTitle.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_bookTitle.getLocalBounds().width, 0.3f * HEIGHT));
 	m_title.setPosition(pos + sf::Vector2f(0.5f * WIDTH - 0.5f * m_title.getLocalBounds().width, GUIConstants::TOP));
+
+	TextAlignment alignment = m_content.getTextAlignment();
+	float contentX = (alignment == TextAlignment::Left) ? MARGIN :
+		(alignment == TextAlignment::Right) ? WIDTH - m_content.getBounds().width - MARGIN :
+		(WIDTH - m_content.getBounds().width) * 0.5f;
 	m_content.setPosition(
-		pos + sf::Vector2f(MARGIN,
+		pos + sf::Vector2f(contentX,
 			m_title.getString().empty() ? GUIConstants::TOP : GUIConstants::TOP + 3 * GUIConstants::CHARACTER_SIZE_L));
 
 	if (m_showSprite) {

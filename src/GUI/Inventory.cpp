@@ -542,24 +542,9 @@ void Inventory::learnSpell(const Item* item) {
 
 void Inventory::showDocument(const Item* item) {
 	if (item == nullptr || !item->isDocument()) return;
-	
-	BookData bookData;
-	for (auto& bean : item->getDocumentPageBeans()) {
-		if (bean.page_nr == -1) {
-			// this is the title
-			bookData.title = bean.title;
-		}
-		else {
-			BookPage page;
-			page.title = bean.title;
-			page.content = bean.content;
-			page.texturePath = bean.texture_path;
-			bookData.pages.push_back(page);
-		}
-	}
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
-	worldScreen->setBook(&bookData);
+	worldScreen->setBook(*item);
 
 	// handle possible quest related conditions on this document
 	if (item->getDocumentQuestBean().status == BeanStatus::Filled) {

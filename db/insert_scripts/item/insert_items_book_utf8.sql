@@ -1,3 +1,11 @@
+-- Rhendal's Book about Magic
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('bo_rhendalmagic', 'document', 500, 500, -1);
+INSERT INTO item_document_page(item_id, page_nr, title) values ('bo_rhendalmagic', 0, 'BookRhendalMagic');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 1, 'TitleRhendalMagic1', 'ContentRhendalMagic1');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 2, 'TitleRhendalMagic2', 'ContentRhendalMagic2');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 3, 'TitleRhendalMagic3', 'ContentRhendalMagic3');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 4, 'TitleRhendalMagic4', 'ContentRhendalMagic4');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookRhendalMagic','document','Thoughts on
 Magic
 - Rhendal','Gedanken zu
@@ -30,6 +38,14 @@ Aber so interessant und nützlich die Magie auch sein mag, es gibt viele Mensche
 
 Aber so interessant und nützlich d''Magie au sii mag, es git viel Lüüt, wo de Bammel hend devor. Da isch natürli völlig verständlich, au ich bin emel skeptisch, wenn ich gse, für was me si so bruuche chan. Trotzdem hani immerna vor, de Rest vo mim Läbe mitem Studium vo dem üsserst interessante Thema z''widme.');
 
+-- Jonathans Book about Schools of Magic
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('bo_schoolsofmagic', 'document', 500, 500, -1);
+INSERT INTO item_document_page(item_id, page_nr, title) values ('bo_schoolsofmagic', 0, 'BookSchoolsOfMagic');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_schoolsofmagic', 1, 'TitleSchoolsOfMagic1', 'ContentSchoolsOfMagic1');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_schoolsofmagic', 2, 'TitleSchoolsOfMagic2', 'ContentSchoolsOfMagic2');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_schoolsofmagic', 3, 'TitleSchoolsOfMagic3', 'ContentSchoolsOfMagic3');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_schoolsofmagic', 4, 'TitleSchoolsOfMagic4', 'ContentSchoolsOfMagic4');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookSchoolsOfMagic','document','The Schools of Magic','Die Schulen der Magie','D''Schuele vode Magie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleSchoolsOfMagic1','document','Elemental Magic','Elementarmagie','Elementarmagie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentSchoolsOfMagic1','document','Elemental magic is the art of controlling the elements of nature. It is the first type of magic that was discovered and therefore sometimes referred to as primal magic. 
@@ -46,6 +62,12 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleSchoolsOfMagic4','document','Twilight Magic','Magie des Zwielichts','Dämmerigsmagie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentSchoolsOfMagic4','document','The art of twilight or shadow magic has not been thoroughly investigated yet. But we know that it''s used to hide in and attack from the shadows.','Die Kunst der Zwielicht oder Schattenmagie wurde bis jetzt noch nicht gründlich erforscht. Aber wir wissen, dass sie genutzt wird, um sich in den Schatten zu verstecken und daraus anzugreifen.','D''Kunst vode Dämmerigs- oder Schattemagie isch bis ez nanig gründlich erforscht worde. Aber mer wüssed, dass si brucht wird, zum sich ide Schatte z''verstecke und drus aazgrife.');
 
+-- Syrah's Book about Potions
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('bo_potions', 'document', 500, 500, -1);
+INSERT INTO item_document_page(item_id, page_nr, title) values ('bo_potions', 0, 'BookPotions');
+INSERT INTO item_document_page(item_id, page_nr, title, content, content_alignment) values ('bo_potions', 1, 'TitleBookPotions1', 'ContentBookPotions1', 'center');
+INSERT INTO item_document_page(item_id, page_nr, title, content, content_alignment) values ('bo_potions', 2, 'TitleBookPotions2', 'ContentBookPotions2', 'center');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookPotions','document','Magic Potions','Magische Tränke','Magischi Tränk');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookPotions1','document','Healing Potions','Heiltränke','Heiltränk');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookPotions1','document',

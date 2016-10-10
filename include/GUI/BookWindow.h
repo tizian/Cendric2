@@ -10,7 +10,7 @@ class MapScreen;
 
 class BookWindow : public Window {
 public:
-	BookWindow(const BookData& data);
+	BookWindow(const Item& item);
 	~BookWindow();
 
 	void render(sf::RenderTarget& renderTarget) override;
@@ -24,7 +24,7 @@ public:
 	static const std::string SOUND_PATH;
 
 private:
-	BookData m_data;
+	const Item& m_item;
 
 	ArrowButton* m_leftArrow;
 	ArrowButton* m_rightArrow;

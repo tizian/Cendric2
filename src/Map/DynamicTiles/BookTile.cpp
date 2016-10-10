@@ -51,7 +51,10 @@ void BookTile::onRightClick() {
 }
 
 void BookTile::startReading() {
-	dynamic_cast<MapScreen*>(m_screen)->setBook(&m_data);
+	const Item* item = g_resourceManager->getItem(m_data.id);
+	if (item == nullptr || !item->isDocument()) return;
+
+	dynamic_cast<MapScreen*>(m_screen)->setBook(*item);
 }
 
 std::string BookTile::getSpritePath() const {
