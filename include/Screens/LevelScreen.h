@@ -70,6 +70,7 @@ private:
 	ScreenOverlay* m_gamePausedOverlay = nullptr;
 
 	sf::RenderTexture m_particleRenderTexture;
+	void flushParticleTexture(sf::RenderTarget& renderTarget, const sf::View& oldView);
 
 	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);
