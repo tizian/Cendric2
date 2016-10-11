@@ -106,3 +106,11 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_shinystone', 'misc', 150, 550, 10);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_shinystone', -25, -40, 10, 25);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_shinystone', 1, 500, 150, 50, 50);
+
+-- Sextant
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_sextant', 'item', 'Sextant','Sextant','Sextant');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_sextant', 'item_desc', 'I have no clue how this thing works, but it seems to be made from massive gold.','Ich habe keine Ahnung wie dieses Ding funktioniert, aber es scheint aus massivem Gold zu sein.','Ich ha ken Plan we das Dingens funktioniert, aber es isch glaub us massivem Gold.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_sextant', 'misc', 500, 550, 100);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_sextant', -5, -20, 40, 35);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_sextant', 1, 550, 0, 50, 100);

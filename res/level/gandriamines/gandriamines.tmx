@@ -1673,11 +1673,6 @@
     <property name="skinnr" value="2"/>
    </properties>
   </object>
-  <object id="109" gid="951" x="429" y="1737" width="50" height="50">
-   <properties>
-    <property name="skinnr" value="1"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="moving platform">
   <object id="62" gid="633" x="3200" y="1500" width="50" height="50">

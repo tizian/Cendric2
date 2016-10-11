@@ -16,8 +16,10 @@ public:
 	void handleMovementInput() override;
 	void handleDefaultAcceleration() override;
 	void updateAnimation(const sf::Time& frameTime) override;
+	void setJumpVelocity(float velocity);
 
 private:
+	float m_jumpVelocity = 0.f;
 	// makes it easier to jump
 	static const sf::Time JUMP_GRACE_TIME;
 	sf::Time m_jumpGraceTime = sf::Time::Zero;

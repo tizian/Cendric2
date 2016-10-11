@@ -142,7 +142,7 @@ void UserMovingBehavior::handleMovementInput() {
 		}
 		if (!m_isClimbing && g_inputController->isKeyJustPressed(Key::Jump) && (m_isGrounded || m_jumpGraceTime > sf::Time::Zero)) {
 			m_jumpGraceTime = sf::Time::Zero;
-			m_mainChar->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp); // first jump vel will always be max y vel. 
+			m_mainChar->setVelocityY(m_isFlippedGravity ? m_jumpVelocity : -m_jumpVelocity);
 		}
 	}
 
@@ -178,4 +178,8 @@ void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 		else
 			m_mainChar->loopCurrentAnimation(false);
 	}
+}
+
+void UserMovingBehavior::setJumpVelocity(float velocity) {
+	m_jumpVelocity = velocity;
 }

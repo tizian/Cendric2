@@ -15,6 +15,7 @@ public:
 
 private:
 	std::string getSpritePath() const override;
+	std::string getSoundPath() const override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
 
 	const float GRAVITY_ACCELERATION = 1000.f;
@@ -24,4 +25,5 @@ private:
 	sf::Time m_crumblingTime;
 	sf::Time m_jumpingTime;
 	sf::FloatRect m_jumpingRegion;
+	sf::Sound m_sound;
 };

@@ -12,11 +12,11 @@ TrampolineTile::TrampolineTile(LevelScreen* levelScreen) :
 }
 
 void TrampolineTile::init() {
-	float jumpingRegionHeight = 2.f;
-	setSpriteOffset(sf::Vector2f(0.f, -jumpingRegionHeight));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F - jumpingRegionHeight));
-	m_jumpingRegion.width = TILE_SIZE_F;
-	m_jumpingRegion.height = jumpingRegionHeight;
+	m_jumpingRegion.width = 40.f;
+	m_jumpingRegion.height = 2.f;
+	setPositionOffset(sf::Vector2f(5.f, 15.f));
+	setSpriteOffset(sf::Vector2f(-5.f, -15.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, m_jumpingRegion.width, 35.f));
 }
 
 void TrampolineTile::loadAnimation(int skinNr) {
@@ -39,7 +39,7 @@ void TrampolineTile::loadAnimation(int skinNr) {
 	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 2, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 5, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 4, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	m_jumpingTime = jumpingAnimation->getAnimationTime();
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
@@ -94,7 +94,8 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 
 	// check for main character
 	if (m_state == GameObjectState::Idle && m_mainChar->getBoundingBox()->intersects(m_jumpingRegion)) {
-		m_mainChar->setAccelerationY(-2000.f);
+		g_resourceManager->playSound(m_sound, getSoundPath());
+		m_mainChar->setVelocityY(-800.f);
 		setState(GameObjectState::Jumping);
 		m_jumpingTime = getAnimation(GameObjectState::Jumping)->getAnimationTime();
 	}
@@ -119,6 +120,10 @@ void TrampolineTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::V
 
 std::string TrampolineTile::getSpritePath() const {
 	return "res/assets/level_dynamic_tiles/spritesheet_tiles_trampoline.png";
+}
+
+std::string TrampolineTile::getSoundPath() const {
+	return "res/sound/tile/trampoline.ogg";
 }
 
 

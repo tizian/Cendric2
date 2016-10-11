@@ -144,7 +144,7 @@ MovingBehavior* FireRatEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(10.f);
 	behavior->setMaxVelocityYDown(400.f);
-	
+
 	if (m_isBurning && !asAlly) {
 		behavior->setMaxVelocityYUp(0.f);
 		behavior->setMaxVelocityX(0.f);
@@ -200,6 +200,13 @@ void FireRatEnemy::render(sf::RenderTarget& target) {
 	else {
 		Enemy::render(target);
 	}
+}
+
+void FireRatEnemy::renderAfterForeground(sf::RenderTarget& target) {
+	if (m_ps != nullptr) {
+		return;
+	}
+	Enemy::renderAfterForeground(target);
 }
 
 void FireRatEnemy::update(const sf::Time& frameTime) {

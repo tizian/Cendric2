@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="178">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="181">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
   <property name="name" value="JonathanHome"/>
   <property name="tilesetpath" value="res/map/jonathanhome/tileset_map_jonathanhome.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_jonathanhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_map_jonathanhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_map_jonathanhome.png" width="1000" height="1000"/>
   <tile id="206">
    <properties>
@@ -54,10 +54,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -248,6 +248,13 @@
   <object id="174" x="754" y="399" width="45" height="40"/>
   <object id="176" x="829" y="355" width="40" height="193"/>
  </objectgroup>
+ <objectgroup name="door">
+  <object id="152" gid="421" x="450" y="550" width="50" height="50">
+   <properties>
+    <property name="key" value="ke_jonathanbasement"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="trigger">
   <object id="126" x="650" y="719" width="51" height="29">
    <properties>
@@ -255,11 +262,10 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="door">
-  <object id="152" gid="421" x="450" y="550" width="50" height="50">
+  <object id="180" x="450" y="500" width="50" height="25">
    <properties>
-    <property name="key" value="ke_jonathanbasement"/>
+    <property name="level entry" value="res/level/jonathanslab/jonathanslab.tmx,2750,200"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
  </objectgroup>
