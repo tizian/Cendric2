@@ -17,3 +17,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Observer','enemy','Observer Spell','Beobachter-Zauber','Beobachter-Zauber');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Warden','enemy','Warden Spell','Wächter-Zauber','Wächter-Zauber');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Prisoner','enemy','Prisoner','Gefangener','Gfangene');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ooze','enemy','Ooze','Schleim','Schleim');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bat','enemy','Bat','Fledermaus','Flädermuus');

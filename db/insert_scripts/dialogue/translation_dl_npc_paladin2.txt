@@ -1,0 +1,13 @@
+-- File format: '<Tag>', '<English Translation>', '<Spanish Translation>'
+-- Escape apostrophs in the translations with ''
+
+'DL_Paladin2_WhatIsIt', 'What is it?', ''
+'DL_Choice_WhatAreYouDoing', 'What are you doing here?', ''
+'DL_Choice_Mage', 'Are you a mage?', ''
+'DL_Choice_WhatIsDuty', 'What is the Priestess'' duty?', ''
+'DL_Choice_Bye', 'See you.', ''
+'DL_Paladin2_AskHer', 'I got no time to chit-chat. Go and ask her yourself. But you better show her some respect, we''re watching you.', ''
+'DL_Paladin2_GuardingInina', 'We''re making sure that our High Priestess can fulfill her duty in peace.', ''
+'DL_Paladin1_Mage', 'Of course. You can''t get the rank of a paladin while being a mere commoner.', ''
+'DL_Choice_WhereIsInina', 'Where is Inina?', ''
+'DL_Paladin2_WhereInina', 'She''s gone back to Gandria. Someone''s got to find out how and why this beast came so close to the city.', ''

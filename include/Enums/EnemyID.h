@@ -20,5 +20,6 @@ enum class EnemyID {
 	Observer,
 	Warden,
 	Prisoner,
+	Ooze,
 	MAX
 };

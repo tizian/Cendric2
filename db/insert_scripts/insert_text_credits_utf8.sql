@@ -46,6 +46,8 @@ Haab
 
 "Howling Caverns"
 
+"House Theme"
+
 ---
 
 -- Eric Matyas --
@@ -177,6 +179,8 @@ Haab
 
 "Howling Caverns"
 
+"House Theme"
+
 ---
 
 -- Eric Matyas --
@@ -305,6 +309,8 @@ Haab
 "Ratcave"
 
 "Howling Caverns"
+
+"House Theme"
 
 -- Eric Matyas --
 

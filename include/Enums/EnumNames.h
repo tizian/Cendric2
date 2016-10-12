@@ -273,6 +273,8 @@ public:
 			return "Warden";
 		case EnemyID::Prisoner:
 			return "Prisoner";
+		case EnemyID::Ooze:
+			return "Ooze";
 		}
 	}
 

@@ -189,7 +189,7 @@ loadDialogue = function(DL)
 				DL:addChoice(43, "DL_Choice_WhatsInForMe") -- What's in for me if I find him?
 			end
 			if (DL:isQuestComplete("missing_paladin")) then
-				DL:addChoice(44, "DL_Choice_FoundPaladin") -- I found the Paladin. He's dead. [Give the pendant]
+				DL:addChoice(44, "DL_Choice_FoundPaladin") -- I found the Paladin. He's dead. (Give the pendant)
 			end
 			DL:addChoice(-2, "DL_Choice_Back") -- [BACK]
 			DL:addNode()

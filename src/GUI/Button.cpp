@@ -109,10 +109,7 @@ void Button::update(const sf::Time& frameTime) {
 }
 
 void Button::setText(const std::string& text, const sf::Color& color, int charSize) {
-	m_text = BitmapText(g_textProvider->getText(text));
-
-	setTextColor(color);
-	setCharacterSize(charSize);
+	setTextRaw(g_textProvider->getText(text), color, charSize);
 }
 
 void Button::setText(const std::string& text) {
@@ -125,6 +122,10 @@ void Button::setText(const std::string& text, int charSize) {
 
 void Button::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
 	m_text = BitmapText(text);
+	float usedWidth = charSize * static_cast<int>(BitmapText::transform(text).length()) + 30.f;
+	if (usedWidth > m_boundingBox.width) {
+		setSize(sf::Vector2f(usedWidth, m_boundingBox.height));
+	}
 
 	setTextColor(color);
 	setCharacterSize(charSize);

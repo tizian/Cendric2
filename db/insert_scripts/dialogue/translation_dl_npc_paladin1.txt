@@ -1,0 +1,11 @@
+-- File format: '<Tag>', '<English Translation>', '<Spanish Translation>'
+-- Escape apostrophs in the translations with ''
+
+'DL_Paladin1_Hm', '(Grumpy) Hmmm?', ''
+'DL_Choice_WhoAreYou', 'Who are you?', ''
+'DL_Choice_Armor', 'Nice armour you got there...', ''
+'DL_Choice_Paladin', 'How is it like to be a paladin?', ''
+'DL_Choice_Bye', 'Nevermind...', ''
+'DL_Paladin1_IAm', 'I''m a paladin of the Eternal Light, serving our lord and king Logan the Second.', ''
+'DL_Paladin1_Armor', 'Ye, right? But you''ll need to work hard to get something like this, so don''t even think about it.', ''
+'DL_Paladin1_PissedOff', 'How is it like to be a little pain in the neck like you?', ''

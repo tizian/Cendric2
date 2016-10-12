@@ -136,7 +136,6 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	// keyboard mappings button
 	Button* button = new Button(sf::FloatRect(distFromLeft, distFromTop, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("KeyBindings");
-	button->setCharacterSize(12);
 	button->setOnClick(std::bind(&OptionsScreen::onKeybindings, this));
 	addObject(button);
 
