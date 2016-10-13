@@ -28,7 +28,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Cool
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Count','Count','Anzahl','Aazahl','Conteo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Credits','Credits','Mitwirkende','Credits','Créditos');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Critical','Critical','Kritisch','Kritisch','Crítico');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('CriticalHitChance','Critical Hit Chance','Kritische Trefferchance','Kritischi Trefferchance','Posibilidad de golpe crítico');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('CriticalHitChance','Critical Hit Chance','Kritische Trefferchance','Kritischi Trefferchance','Chance de golpe crítico');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Damage','Damage','Schaden','Schade','Daño');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DamageType','Damage Type','Schadenstyp','Schadetyp','Tipo de daño');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DamagePerSecond','Damage per Second','Schaden pro Sekunde','Schade pro Sekunde','Daño por segundo');
@@ -44,7 +44,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Docu
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Done','Done','Erfüllt','Erfüllt','Terminada');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Door','Door','Tür','Türe','Puerta');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Duration','Duration','Dauer','Duur','Duración');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Elemental','Elemental','Elementar','Elementar','Esencial');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Elemental','Elemental','Elementar','Elementar','Elementar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('English','English','Englisch','Englisch','Inglés');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('EqBack','Back','Rücken','Rugge','Espalda');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('EqBody','Chest','Brust','Bruscht','Pecho');
@@ -113,7 +113,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MaxH
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MessageNewSaveGame','Please enter the name for your new saved game (at most 24 characters).','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen).','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche).','Favor introduzca el nombre para su nueva partida guardada (máximo 24 caracteres).');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Meta','Meta','Meta','Meta','Meta');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Miscellaneous','Miscellaneous','Plunder','Grümpel','Otros');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt','Joya aprendida');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt','Gema aprendida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SpellLearned','Spell learned','Zauber erlernt','Zauber glernt','Hechizo aprendido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveDown','Move down','Nach unten bewegen','Abelaufe','Bajar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveLeft','Move left','Nach links laufen','Links laufe','Ir a la izquierda');
@@ -134,7 +134,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoHi
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoSaves','No saves found.','Kein Speicherstand gefunden.','Kein Speicherstand gfunde.','No hay partidas guardadas.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Observed','Observed','Beobachtet','Beobachtet','Observado');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Off','Off','Aus','Uus','Apagar');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Okay','Okay','Okay','Okee','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Okay','Okay','Okay','Okee','Aceptar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('On','On','An','Ii','Encendido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('OperationFailed','Operation failed.','Operation fehlgeschlagen.','Die Operation isch id Hose.','Operación fallida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Options','Options','Einstellungen','Iistellige','Opciones');

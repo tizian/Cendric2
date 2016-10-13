@@ -1,4 +1,5 @@
 #include "Level/DynamicTiles/DisappearingTile.h"
+#include "Level/LevelMainCharacter.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
 
@@ -9,8 +10,9 @@ DisappearingTile::DisappearingTile(LevelScreen* levelScreen) :
 }
 
 void DisappearingTile::init() {
-	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE) - 2.f, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	m_checkBoundingBox.width = TILE_SIZE_F + 2.f;
+	m_checkBoundingBox.height = TILE_SIZE_F + 2.f;
 }
 
 void DisappearingTile::loadAnimation(int skinNr) {
@@ -61,7 +63,21 @@ void DisappearingTile::update(const sf::Time& frameTime) {
 		}
 	}
 	
+	checkForMainCharacter();
 	LevelDynamicTile::update(frameTime);
+}
+
+void DisappearingTile::checkForMainCharacter() {
+	if (m_isTouched) return;
+	if (m_mainChar->getBoundingBox()->intersects(m_checkBoundingBox)) {
+		m_isTouched = true;
+	}
+}
+
+void DisappearingTile::setPosition(const sf::Vector2f& pos) {
+	LevelDynamicTile::setPosition(pos);
+	m_checkBoundingBox.left = pos.x - 1.f;
+	m_checkBoundingBox.top = pos.y - 1.f;
 }
 
 void DisappearingTile::onHit(Spell* spell) {
@@ -74,12 +90,6 @@ void DisappearingTile::onHit(Spell* spell) {
 	default:
 		break;
 	}
-}
-
-void DisappearingTile::onHit(LevelMovableGameObject* mob) {
-	if (m_isTouched) return;
-	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
-	m_isTouched = true;
 }
 
 std::string DisappearingTile::getSpritePath() const {

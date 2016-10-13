@@ -14,7 +14,7 @@ UnstableTile::UnstableTile(LevelScreen* levelScreen) :
 
 void UnstableTile::init() {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE) - 2.f, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 2.f, TILE_SIZE_F));
 }
 
 void UnstableTile::loadAnimation(int skinNr) {

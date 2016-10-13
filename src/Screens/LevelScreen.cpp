@@ -45,23 +45,34 @@ void LevelScreen::load() {
 		}
 	}
 
-	m_resumeButton = new Button(sf::FloatRect(450, 350, 400, 50), GUIOrnamentStyle::MEDIUM);
+	m_resumeButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
 	m_resumeButton->setVisible(false);
 	m_resumeButton->setOnClick(std::bind(&LevelScreen::onResume, this));
 	addObject(m_resumeButton);
 
-	m_retryButton = new Button(sf::FloatRect(450, 410, 400, 50), GUIOrnamentStyle::MEDIUM);
+	m_retryButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_retryButton->setText("BackToCheckpoint");
 	m_retryButton->setVisible(false);
 	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
 	addObject(m_retryButton);
 
-	m_backToMenuButton = new Button(sf::FloatRect(450, 470, 400, 50), GUIOrnamentStyle::MEDIUM);
+	m_backToMenuButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_backToMenuButton->setText("BackToMenu");
 	m_backToMenuButton->setVisible(false);
 	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));
 	addObject(m_backToMenuButton);
+
+	// synchronize and center buttons
+	sf::Vector2f buttonSize(0.f, 50.f);
+	buttonSize.x = std::max(std::max(m_retryButton->getSize().x, m_resumeButton->getSize().x), m_backToMenuButton->getSize().x);
+	float offsetLeft = (WINDOW_WIDTH - buttonSize.x) * 0.5f;
+	m_resumeButton->setSize(buttonSize);
+	m_resumeButton->setPosition(sf::Vector2f(offsetLeft, 350.f));
+	m_retryButton->setSize(buttonSize);
+	m_retryButton->setPosition(sf::Vector2f(offsetLeft, 410.f));
+	m_backToMenuButton->setSize(buttonSize);
+	m_backToMenuButton->setPosition(sf::Vector2f(offsetLeft, 470.f));
 
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 

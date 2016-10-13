@@ -49,7 +49,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	// displayMode
 	m_displayModeSelector = new ArrowSelector();
 	m_displayModeSelector->setLabelText("DisplayMode");
-	for (int mode = 1; mode < static_cast<int>(Language::MAX); ++mode) {
+	for (int mode = 1; mode < static_cast<int>(DisplayMode::MAX); ++mode) {
 		m_displayModeSelector->addOption(EnumNames::getDisplayModeName(static_cast<DisplayMode>(mode)));
 	}
 	m_displayModeSelector->setOptionIndex(static_cast<int>(g_resourceManager->getConfiguration().displayMode) - 1);

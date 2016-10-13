@@ -87,7 +87,7 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 
 				cutsceneStep.texts.push_back(cutsceneText);
 
-				j++;
+				++j;
 				text = texts[j];
 			}
 
@@ -121,6 +121,9 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 					else if (language == Language::Lang_CH) {
 						key = "ch";
 					}
+					else if (language == Language::LANG_ES) {
+						key = "es";
+					}
 
 					LuaRef imagePathLang = imagePath[key];
 
@@ -142,7 +145,7 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 
 				cutsceneStep.images.push_back(cutsceneImage);
 
-				j++;
+				++j;
 				image = images[j];
 			}
 
@@ -156,7 +159,7 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
 			}
 
 			cutsceneData.steps.push_back(cutsceneStep);
-			i++;
+			++i;
 			step = steps[i];
 		}
 	}

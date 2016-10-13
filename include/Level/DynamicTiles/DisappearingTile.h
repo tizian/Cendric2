@@ -16,12 +16,13 @@ public:
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
-	void onHit(LevelMovableGameObject* mob) override;
 	void update(const sf::Time& frameTime) override;
+	void setPosition(const sf::Vector2f& pos) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Disappearing; }
 
 private:
 	std::string getSpritePath() const override;
+	void checkForMainCharacter();
 
 	// when Cendric touches the tile, this time starts to run out
 	// its starting time is defined per skin
@@ -29,4 +30,5 @@ private:
 	sf::Time m_criticalTime;
 	sf::Time m_startCriticalTime;
 	void initCriticalTime(int skinNr);
+	sf::FloatRect m_checkBoundingBox;
 };

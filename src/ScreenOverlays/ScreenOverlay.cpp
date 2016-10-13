@@ -212,15 +212,9 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	gameOverScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
 
 	Language language = g_resourceManager->getConfiguration().language;
-	if (language == Language::Lang_EN) {
-		gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
-	}
-	else if (language == Language::Lang_DE) {
-		gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
-	}
-	else if (language == Language::Lang_CH) {
-		gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
-	}
+	gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 
+		(static_cast<int>(language) - 1) * 60, 
+		static_cast<int>(text->getSize().x), 60));
 
 	return gameOverScreenOverlay;
 }
@@ -243,6 +237,9 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 	else if (language == Language::Lang_DE || language == Language::Lang_CH) {
 		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
 	}
+	else if (language == Language::LANG_ES) {
+		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
+	}
 
 	return gamePausedScreenOverlay;
 }
@@ -258,15 +255,9 @@ ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay(std::map<std::str
 	enemyDefeatedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 3.f * text->getSize().x), 200.f - 0.5f * 3.f * 60.f));
 
 	Language language = g_resourceManager->getConfiguration().language;
-	if (language == Language::Lang_EN) {
-		enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
-	}
-	else if (language == Language::Lang_DE) {
-		enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
-	}
-	else if (language == Language::Lang_CH) {
-		enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
-	}
+	enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0,
+		(static_cast<int>(language) - 1) * 60,
+		static_cast<int>(text->getSize().x), 60));
 
 	enemyDefeatedScreenOverlay->setLoot(items, gold);
 	return enemyDefeatedScreenOverlay;
@@ -333,15 +324,9 @@ ScreenOverlay* ScreenOverlay::createArrestedScreenOverlay() {
 	arrestedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
 
 	Language language = g_resourceManager->getConfiguration().language;
-	if (language == Language::Lang_EN) {
-		arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
-	}
-	else if (language == Language::Lang_DE) {
-		arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
-	}
-	else if (language == Language::Lang_CH) {
-		arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
-	}
+	arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0,
+		(static_cast<int>(language) - 1) * 60,
+		static_cast<int>(text->getSize().x), 60));
 
 	return arrestedScreenOverlay;
 }

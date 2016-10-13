@@ -45,7 +45,7 @@ steps = {
 		},
 		images = {
 			{path="black.png", vel=0, angle=0},
-			{path = {en="chapter2_en.png", de="chapter2_de.png", ch="chapter2_de.png"}, vel=0, angle=0}
+			{path = {en="chapter2_en.png", de="chapter2_de.png", ch="chapter2_de.png", es="chapter2_es.png"}, vel=0, angle=0}
 		},
 		fadetime=1.0
 	}
