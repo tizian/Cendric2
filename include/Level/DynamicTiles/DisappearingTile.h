@@ -1,0 +1,32 @@
+#pragma once
+
+#include "global.h"
+#include "Level/LevelDynamicTile.h"
+
+// skins
+// 0: 0.25s
+// 1: 0.5s
+// 2: 1s
+// 3: 2s
+
+// a tile that disappears after a certain time as soon as cendric touches it.
+class DisappearingTile : public virtual LevelDynamicTile {
+public:
+	DisappearingTile(LevelScreen* levelScreen);
+	void init() override;
+	void loadAnimation(int skinNr) override;
+	void onHit(Spell* spell) override;
+	void onHit(LevelMovableGameObject* mob) override;
+	void update(const sf::Time& frameTime) override;
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Disappearing; }
+
+private:
+	std::string getSpritePath() const override;
+
+	// when Cendric touches the tile, this time starts to run out
+	// its starting time is defined per skin
+	bool m_isTouched = false;
+	sf::Time m_criticalTime;
+	sf::Time m_startCriticalTime;
+	void initCriticalTime(int skinNr);
+};

@@ -27,5 +27,6 @@ enum class LevelDynamicTileID {
 	Oneway,
 	Resource,
 	Trampoline,
+	Disappearing,
 	MAX
 };
