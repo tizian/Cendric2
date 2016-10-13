@@ -68,7 +68,9 @@ void ModifierTile::setPosition(const sf::Vector2f& pos) {
 void ModifierTile::render(sf::RenderTarget& target) {
 	if (m_isFirstRenderIteration) {
 		AnimatedGameObject::render(target);
-		m_ps->render(target);
+		sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleRenderTexture();
+		particleTarget.setView(target.getView());
+		m_ps->render(particleTarget);
 		m_isFirstRenderIteration = false;
 	}
 	else {

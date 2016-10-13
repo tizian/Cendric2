@@ -44,7 +44,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Docu
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Done','Done','Erfüllt','Erfüllt','Terminada');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Door','Door','Tür','Türe','Puerta');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Duration','Duration','Dauer','Duur','Duración');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Elemental','Elemental','Elementar','Elementar','Elementar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Elemental','Elemental','Elementar','Elementar','Elemental');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('English','English','Englisch','Englisch','Inglés');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('EqBack','Back','Rücken','Rugge','Espalda');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('EqBody','Chest','Brust','Bruscht','Pecho');

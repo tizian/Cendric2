@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
+#include "Particles/ParticleSystem.h"
 
 // skins
 // 0: 0.25s
@@ -17,6 +18,7 @@ public:
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& target) override;
 	void setPosition(const sf::Vector2f& pos) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Disappearing; }
 
@@ -29,6 +31,12 @@ private:
 	bool m_isTouched = false;
 	sf::Time m_criticalTime;
 	sf::Time m_startCriticalTime;
-	void initCriticalTime(int skinNr);
+	void initForSkinNr(int skinNr);
 	sf::FloatRect m_checkBoundingBox;
+
+	// particle system
+	void loadParticleSystem();
+	particles::TextureParticleSystem* m_ps = nullptr;
+	particles::ParticleSpawner* m_particleSpawner = nullptr;
+	particles::ColorGenerator* m_colorGenerator = nullptr;
 };
