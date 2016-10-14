@@ -15,3 +15,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('No
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DangerCollapse','sign','Danger of Collapse!','Einsturzgefahr!','Iisturzgfohr!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DeathAhead','sign','Death ahead...','Tod voraus...','Tod voruus...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('HoldRight','sign','Hold right','Rechts halten','Rechts halte');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('FrozenPlatforms','sign','Frozen platforms
+won''t move.','Gefrorene Plattformen
+bewegen sich nicht.','Gfroreni Plattforme
+beweged sich nid.');

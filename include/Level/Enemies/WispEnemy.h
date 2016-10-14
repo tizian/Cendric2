@@ -6,6 +6,10 @@
 #include "Screens/Screen.h"
 
 // A flying mysterious wisp
+
+// skins:
+// 0: ghostly wisp
+// 1: fiery wisp
 class WispEnemy : public Enemy {
 public:
 	WispEnemy(const Level* level, Screen* screen);
@@ -30,4 +34,5 @@ private:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+	int m_skinNr;
 };

@@ -25,19 +25,26 @@ WispEnemy::WispEnemy(const Level* level, Screen* screen) :
 void WispEnemy::loadAttributes() {
 	m_attributes.setHealth(5);
 	m_attributes.resistanceLight = 10000;
-	m_attributes.resistanceShadow = 10000;
+
+	if (m_skinNr == 0) {
+		m_attributes.resistanceShadow = 10000;
+	}
+	else if (m_skinNr == 1) {
+		m_attributes.resistanceFire = 10000;
+	}
+	
 	m_attributes.calculateAttributes();
 }
 
 void WispEnemy::loadSpells() {
 	SpellData shadowAureola = SpellData::getSpellData(SpellID::Aureola);
-	shadowAureola.skinNr = 1;
+	shadowAureola.skinNr = m_skinNr + 1;
 	shadowAureola.damage = 5;
 	shadowAureola.isStunning = false;
-	shadowAureola.damagePerSecond = 5;
+	shadowAureola.damagePerSecond = m_skinNr + 5;
 	shadowAureola.duration = sf::seconds(3.f);
 	shadowAureola.cooldown = sf::seconds(5.f);
-	shadowAureola.damageType = DamageType::Shadow;
+	shadowAureola.damageType = m_skinNr == 0 ? DamageType::Shadow : DamageType::Fire;
 	shadowAureola.range = 200.f;
 	shadowAureola.speed = 150.f;
 	shadowAureola.fightingTime = sf::milliseconds(8 * 100);
@@ -100,6 +107,7 @@ sf::Time WispEnemy::getConfiguredChasingTime() const {
 }
 
 void WispEnemy::loadAnimation(int skinNr) {
+	m_skinNr = skinNr;
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 20.f, 20.f));
 	setSpriteOffset(sf::Vector2f(-30.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -107,10 +115,10 @@ void WispEnemy::loadAnimation(int skinNr) {
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; i++) {
-		flyingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 80));
+		flyingAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
 	for (int i = 3; i > -1; i--) {
-		flyingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 80));
+		flyingAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
@@ -118,10 +126,10 @@ void WispEnemy::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; i++) {
-		idleAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 80));
+		idleAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
 	for (int i = 3; i > -1; i--) {
-		idleAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 80));
+		idleAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -129,7 +137,7 @@ void WispEnemy::loadAnimation(int skinNr) {
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; i++) {
-		fightingAnimation->addFrame(sf::IntRect(i * 80, 80, 80, 80));
+		fightingAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240 + 80, 80, 80));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
@@ -137,7 +145,7 @@ void WispEnemy::loadAnimation(int skinNr) {
 	Animation* deadAnimation = new Animation(sf::seconds(0.2f));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 2; i++) {
-		deadAnimation->addFrame(sf::IntRect(i * 80, 160, 80, 80));
+		deadAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240 + 160, 80, 80));
 	}
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
