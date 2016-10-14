@@ -3,12 +3,13 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 #include "Particles/ParticleSystem.h"
+#include "CustomParticleUpdaters.h"
 
 // skins
-// 0: 0.25s
-// 1: 0.5s
-// 2: 1s
-// 3: 2s
+// 1: 0.25s
+// 2: 0.5s
+// 3: 1s
+// 4: 2s
 
 // a tile that disappears after a certain time as soon as cendric touches it.
 class DisappearingTile : public virtual LevelDynamicTile {
@@ -30,7 +31,7 @@ private:
 	// its starting time is defined per skin
 	bool m_isTouched = false;
 	sf::Time m_criticalTime;
-	sf::Time m_startCriticalTime;
+	sf::Color m_skinColor;
 	void initForSkinNr(int skinNr);
 	sf::FloatRect m_checkBoundingBox;
 
@@ -38,5 +39,5 @@ private:
 	void loadParticleSystem();
 	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
-	particles::ColorGenerator* m_colorGenerator = nullptr;
+	particles::FadingColorUpdater* m_colorUpdater = nullptr;
 };

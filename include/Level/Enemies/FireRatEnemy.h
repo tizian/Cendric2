@@ -22,7 +22,6 @@ public:
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 	void onHit(Spell* spell) override;
 	void render(sf::RenderTarget& target) override;
-	void renderAfterForeground(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
 

@@ -202,13 +202,6 @@ void FireRatEnemy::render(sf::RenderTarget& target) {
 	}
 }
 
-void FireRatEnemy::renderAfterForeground(sf::RenderTarget& target) {
-	if (m_ps != nullptr) {
-		return;
-	}
-	Enemy::renderAfterForeground(target);
-}
-
 void FireRatEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
 	if (m_ps != nullptr) {

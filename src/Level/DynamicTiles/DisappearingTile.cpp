@@ -39,30 +39,29 @@ void DisappearingTile::loadAnimation(int skinNr) {
 
 void DisappearingTile::initForSkinNr(int skinNr) {
 	switch (skinNr) {
-	case 0:
-		m_startCriticalTime = sf::seconds(0.25f);
-		break;
 	case 1:
-		m_startCriticalTime = sf::seconds(0.5f);
+		m_skinColor = sf::Color(156, 145, 188, 200);
+		m_criticalTime = sf::seconds(0.25f);
 		break;
 	case 2:
-		m_startCriticalTime = sf::seconds(1.f);
+		m_skinColor = sf::Color(188, 145, 145);
+		m_criticalTime = sf::seconds(0.5f);
 		break;
 	case 3:
+		m_skinColor = sf::Color(188, 173, 145, 200);
+		m_criticalTime = sf::seconds(1.f);
+		break;
+	case 4:
 	default:
-		m_startCriticalTime = sf::seconds(2.f);
+		m_skinColor = sf::Color(161, 188, 145, 200);
+		m_criticalTime = sf::seconds(2.f);
 		break;
 	}
-
-	m_criticalTime = m_startCriticalTime;
 }
 
 void DisappearingTile::update(const sf::Time& frameTime) {
 	if (m_isTouched) {
 		updateTime(m_criticalTime, frameTime);
-		int newAlpha = static_cast<int>(m_criticalTime.asSeconds() / m_startCriticalTime.asSeconds() * 255.f);
-		m_colorGenerator->maxStartCol.a = newAlpha;
-		m_colorGenerator->minStartCol.a = newAlpha;
 		if (m_criticalTime == sf::Time::Zero) {
 			setDisposed();
 		}
@@ -85,6 +84,7 @@ void DisappearingTile::checkForMainCharacter() {
 	if (m_mainChar->getBoundingBox()->intersects(m_checkBoundingBox)) {
 		m_isTouched = true;
 		m_ps->emitRate = 0.f;
+		m_colorUpdater->setFading(m_criticalTime.asSeconds());
 	}
 }
 
@@ -116,8 +116,8 @@ std::string DisappearingTile::getSpritePath() const {
 
 void DisappearingTile::loadParticleSystem() {
 	g_resourceManager->getTexture(getSpritePath())->setSmooth(true);
-	m_ps = new particles::TextureParticleSystem(100, g_resourceManager->getTexture(getSpritePath()));
-	m_ps->emitRate = 20.f;
+	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(getSpritePath()));
+	m_ps->emitRate = 10.f;
 
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
@@ -126,31 +126,30 @@ void DisappearingTile::loadParticleSystem() {
 	m_particleSpawner = posGen;
 
 	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 10.f;
-	sizeGen->maxStartSize = 30.f;
-	sizeGen->minEndSize = 10.f;
-	sizeGen->maxEndSize = 30.f;
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 30.f;
+	sizeGen->maxEndSize = 40.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = COLOR_WHITE;
-	colGen->maxStartCol = COLOR_WHITE;
-	colGen->minEndCol = sf::Color(255, 255, 255, 0);
-	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
-	m_colorGenerator = colGen;
+	colGen->minStartCol = m_skinColor;
+	colGen->maxStartCol = m_skinColor;
+	colGen->minEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 0);
+	colGen->maxEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 0);
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
-	velGen->minStartSpeed = 5.f;
-	velGen->maxStartSpeed = 10.f;
+	velGen->minStartSpeed = 0.f;
+	velGen->maxStartSpeed = 2.f;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 3.f;
-	timeGen->maxTime = 5.f;
+	timeGen->minTime = 4.f;
+	timeGen->maxTime = 6.f;
 
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
+	m_colorUpdater = m_ps->addUpdater<particles::FadingColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
 	m_ps->addUpdater<particles::SizeUpdater>();
 }
