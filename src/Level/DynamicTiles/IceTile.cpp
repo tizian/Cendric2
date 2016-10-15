@@ -18,7 +18,7 @@ void IceTile::loadAnimation(int skinNr) {
 	for (int i = 0; i < 2; i++) {
 		idleAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
-			BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
+			BORDER + skinNr * (2 * BORDER + TILE_SIZE),
 			TILE_SIZE,
 			TILE_SIZE));
 	}

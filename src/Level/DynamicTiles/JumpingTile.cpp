@@ -28,7 +28,7 @@ void JumpingTile::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; ++i) {
-		idleAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		idleAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -37,14 +37,14 @@ void JumpingTile::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	if (skinNr == 2) { // fireball
+	if (skinNr == 1) { // fireball
 		m_damage.damageType = DamageType::Fire;
 		m_isMelting = true;
 		addComponent(new LightComponent(LightData(
 			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f),
 			sf::Vector2f(100.f, 150.f)), this));
 	}
-	else if (skinNr == 3) { // glowing magic-infused shadow piranha
+	else if (skinNr == 2) { // glowing magic-infused shadow piranha
 		m_damage.damageType = DamageType::Shadow;
 		addComponent(new LightComponent(LightData(
 			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f), 

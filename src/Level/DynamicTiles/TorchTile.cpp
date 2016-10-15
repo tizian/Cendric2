@@ -21,14 +21,14 @@ void TorchTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * textureHeight, TILE_SIZE, 2 * TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(0, skinNr * textureHeight, TILE_SIZE, 2 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* burningAnimation = new Animation(sf::seconds(0.12f));
 	burningAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 9; i++) {
-		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
+		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * textureHeight, TILE_SIZE, textureHeight));
 	}
 
 	addAnimation(GameObjectState::Burning, burningAnimation);

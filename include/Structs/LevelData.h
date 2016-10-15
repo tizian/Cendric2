@@ -18,7 +18,6 @@
 
 struct LevelData : WorldData {
 	std::vector<BackgroundLayer> backgroundLayers;
-	std::vector<std::pair<LevelDynamicTileID, std::vector<int>>> dynamicTileLayers;
 	std::vector<LevelDynamicTileData> dynamicTiles;
 	std::vector<AnimatedTileData> animatedTiles;
 	std::vector<LeverData> levers;

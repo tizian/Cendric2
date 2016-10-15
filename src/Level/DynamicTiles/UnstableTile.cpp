@@ -23,14 +23,14 @@ void UnstableTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER + (skinNr * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* tremblingAnimation = new Animation(sf::seconds(0.1f));
 	tremblingAnimation->setSpriteSheet(tex);
-	tremblingAnimation->addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
-	tremblingAnimation->addFrame(sf::IntRect(BORDER + 2 * (2 * BORDER + TILE_SIZE), BORDER + ((skinNr - 1) * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
+	tremblingAnimation->addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER + (skinNr * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
+	tremblingAnimation->addFrame(sf::IntRect(BORDER + 2 * (2 * BORDER + TILE_SIZE), BORDER + (skinNr * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Trembling, tremblingAnimation);
 

@@ -62,7 +62,7 @@ void ShootingTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -74,7 +74,7 @@ void ShootingTile::loadAnimation(int skinNr) {
 	default:
 		// the turning wheel
 		for (int i = 0; i < 4; ++i) {
-			activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+			activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		}
 		break;
 	case 2:
@@ -82,10 +82,10 @@ void ShootingTile::loadAnimation(int skinNr) {
 	case 4:
 	case 5:
 		// fire flowers
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 2, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 3, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 2, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 3, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		activeAnimation->setLooped(false);
 		break;
 	}
@@ -94,13 +94,13 @@ void ShootingTile::loadAnimation(int skinNr) {
 
 	Animation* brokenAnimation = new Animation();
 	brokenAnimation->setSpriteSheet(tex);
-	brokenAnimation->addFrame(sf::IntRect(TILE_SIZE * 4, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	brokenAnimation->addFrame(sf::IntRect(TILE_SIZE * 4, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Broken, brokenAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(TILE_SIZE * 5, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	deadAnimation->addFrame(sf::IntRect(TILE_SIZE * 5, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
@@ -147,7 +147,7 @@ void ShootingTile::update(const sf::Time& frameTime) {
 
 void ShootingTile::executeSpells() {
 	switch (m_skinNr) {
-	case 1:
+	case 0:
 	default:
 	{
 		ProjectileSpell* spell1 = new ProjectileSpell();
@@ -158,28 +158,28 @@ void ShootingTile::executeSpells() {
 		m_screen->addObject(spell2);
 		break;
 	}
-	case 2:
+	case 1:
 	{
 		FireBallSpell* spell = new FireBallSpell();
 		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y));
 		m_screen->addObject(spell);
 		break;
 	}
-	case 3:
+	case 2:
 	{
 		FireBallSpell* spell = new FireBallSpell();
 		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height));
 		m_screen->addObject(spell);
 		break;
 	}
-	case 4:
+	case 3:
 	{
 		FireBallSpell* spell = new FireBallSpell();
 		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width, getPosition().y + getBoundingBox()->height / 2.f));
 		m_screen->addObject(spell);
 		break;
 	}
-	case 5:
+	case 4:
 	{
 		FireBallSpell* spell = new FireBallSpell();
 		spell->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->height / 2.f));

@@ -58,13 +58,13 @@ void ResourceTile::loadAnimation(int skinNr) {
 
 	Animation* activeAnimation = new Animation(sf::seconds(10.f));
 	activeAnimation->setSpriteSheet(tex);
-	activeAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	activeAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
 	Animation* lootedAnimation = new Animation(sf::seconds(10.f));
 	lootedAnimation->setSpriteSheet(tex);
-	lootedAnimation->addFrame(sf::IntRect(TILE_SIZE, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	lootedAnimation->addFrame(sf::IntRect(TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Broken, lootedAnimation);
 
@@ -73,9 +73,9 @@ void ResourceTile::loadAnimation(int skinNr) {
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(false);
 
-	if (skinNr == 3|| skinNr == 4) {
+	if (skinNr == 2|| skinNr == 3) {
 		// shift them a bit
-		setSpriteOffset(sf::Vector2f((skinNr == 3) ? -10.f : 10.f, 0.f));
+		setSpriteOffset(sf::Vector2f((skinNr == 2) ? -10.f : 10.f, 0.f));
 	}
 
 	initializeResource(skinNr);

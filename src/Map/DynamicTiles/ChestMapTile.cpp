@@ -23,13 +23,13 @@ void ChestMapTile::loadAnimation(int skinNr) {
 
 	Animation* closedAnimation = new Animation(sf::seconds(10.f));
 	closedAnimation->setSpriteSheet(tex);
-	closedAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	closedAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Locked, closedAnimation);
 
 	Animation* openAnimation = new Animation(sf::seconds(10.f));
 	openAnimation->setSpriteSheet(tex);
-	openAnimation->addFrame(sf::IntRect(TILE_SIZE, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	openAnimation->addFrame(sf::IntRect(TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Unlocked, openAnimation);
 

@@ -31,7 +31,8 @@ private:
 	bool readItemIDs(tinyxml2::XMLElement* firstTile);
 
 	bool readLayers(tinyxml2::XMLElement* map, LevelData& data) const;
-	bool readDynamicTileLayer(LevelDynamicTileID id, const std::string& layer, LevelData& data) const;
+	bool readDynamicTileLayer(const std::string& layer, LevelData& data) const;
+	bool readFluidLayer(const std::string& layer, LevelData& data) const;
 	bool readLeverLayer(const std::string& layer, LevelData& data) const;
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;
 	
@@ -50,9 +51,6 @@ private:
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data) const;
-
-	// \brief update data to prepare it for the level
-	void updateData(LevelData& data) const;
 
 	std::map<int, std::string> m_levelItemMap;
 

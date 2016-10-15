@@ -15,7 +15,7 @@ void DestructibleTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(BORDER, skinNr * (2 * BORDER + TILE_SIZE) + BORDER, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -24,7 +24,7 @@ void DestructibleTile::loadAnimation(int skinNr) {
 	for (int i = 1; i < 5; i++) {
 		crumblingAnimation->addFrame(sf::IntRect(
 			BORDER + i * (2 * BORDER + TILE_SIZE),
-			BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
+			BORDER + skinNr * (2 * BORDER + TILE_SIZE),
 			TILE_SIZE,
 			TILE_SIZE));
 	}

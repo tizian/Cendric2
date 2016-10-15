@@ -174,13 +174,19 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 			return;
 		}
 
+		if (it.id != LevelDynamicTileID::Fluid) {
+			it.position = sf::Vector2f(
+				(it.spawnPosition % data.mapSize.x) * TILE_SIZE_F,
+				(it.spawnPosition / data.mapSize.x) * TILE_SIZE_F);
+		}
+
 		// special behavior
 		switch (it.id) {
 		case LevelDynamicTileID::Fluid:
 			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
 			break;
 		case LevelDynamicTileID::Falling:
-			(dynamic_cast<FallingTile*>(tile))->setInitialHeight((it.position + tile->getPositionOffset()).y);
+			(dynamic_cast<FallingTile*>(tile))->setInitialHeight(it.position.y + tile->getPositionOffset().y);
 			break;
 		default:
 			break;

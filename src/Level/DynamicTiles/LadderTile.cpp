@@ -24,19 +24,19 @@ void LadderTile::loadAnimation(int skinNr) {
 	length++;
 	int tilepart = 2 - length % 3;
 
-	sprite.setTextureRect(sf::IntRect((skinNr - 1) * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(skinNr * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
 	m_sprites.push_back(sprite);
 	length--;
 
 	while (length > 1) {
-		sprite.setTextureRect(sf::IntRect((skinNr - 1) * TILE_SIZE, TILE_SIZE + tilepart * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect(skinNr * TILE_SIZE, TILE_SIZE + tilepart * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		m_sprites.push_back(sprite);
 
 		tilepart = (tilepart + 1) % 3;
 		length--;
 	}
 
-	sprite.setTextureRect(sf::IntRect((skinNr - 1) * TILE_SIZE, 4 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(skinNr * TILE_SIZE, 4 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	m_sprites.push_back(sprite);
 
 	// load arrow

@@ -12,7 +12,6 @@
 #include "FloatTriangle.h"
 
 struct MapData : WorldData {
-	std::vector<std::pair<MapDynamicTileID, std::vector<int>>> dynamicTileLayers;
 	std::vector<MapDynamicTileData> dynamicTiles;
 
 	std::vector<NPCData> npcs;

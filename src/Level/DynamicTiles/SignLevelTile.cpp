@@ -47,7 +47,7 @@ void SignLevelTile::loadAnimation(int skinNr) {
 	std::string path = getSpritePath();
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

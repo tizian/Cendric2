@@ -19,7 +19,7 @@ void SwitchableTile::loadAnimation(int skinNr) {
 	onAnimation->setSpriteSheet(tex);
 	onAnimation->addFrame(sf::IntRect(
 		BORDER,
-		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
+		BORDER + skinNr * (2 * BORDER + TILE_SIZE),
 		TILE_SIZE,
 		TILE_SIZE));
 
@@ -29,7 +29,7 @@ void SwitchableTile::loadAnimation(int skinNr) {
 	offAnimation->setSpriteSheet(tex);
 	offAnimation->addFrame(sf::IntRect(
 		BORDER + (2 * BORDER + TILE_SIZE),
-		BORDER + (skinNr - 1) * (2 * BORDER + TILE_SIZE),
+		BORDER + skinNr * (2 * BORDER + TILE_SIZE),
 		TILE_SIZE,
 		TILE_SIZE));
 

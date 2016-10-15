@@ -15,7 +15,7 @@ void SpikesTopTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.0f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * TILE_SIZE * 2, TILE_SIZE, TILE_SIZE * 2));
+	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE * 2, TILE_SIZE, TILE_SIZE * 2));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

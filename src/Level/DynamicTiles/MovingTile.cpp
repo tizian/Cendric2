@@ -46,7 +46,7 @@ void MovingTile::loadAnimation(int skinNr) {
 	sprite.setTexture(*tex);
 
 	if (length == 1) {
-		sprite.setTextureRect(sf::IntRect(150, skinNr * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect(150, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
 		m_normalSprites.push_back(sprite);
 
 		sprite.setTextureRect(sf::IntRect(150, 0, TILE_SIZE, 2 * TILE_SIZE));
@@ -54,7 +54,7 @@ void MovingTile::loadAnimation(int skinNr) {
 		return;
 	}
 
-	sprite.setTextureRect(sf::IntRect(0, skinNr * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(0, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
 	m_normalSprites.push_back(sprite);
 
 	sprite.setTextureRect(sf::IntRect(0, 0, TILE_SIZE, 2 * TILE_SIZE));
@@ -62,7 +62,7 @@ void MovingTile::loadAnimation(int skinNr) {
 	length--;
 
 	while (length > 1) {
-		sprite.setTextureRect(sf::IntRect(50, skinNr * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect(50, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
 		m_normalSprites.push_back(sprite);
 
 		sprite.setTextureRect(sf::IntRect(50, 0, TILE_SIZE, 2 * TILE_SIZE));
@@ -70,7 +70,7 @@ void MovingTile::loadAnimation(int skinNr) {
 		length--;
 	}
 
-	sprite.setTextureRect(sf::IntRect(100, skinNr * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(100, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
 	m_normalSprites.push_back(sprite);
 
 	sprite.setTextureRect(sf::IntRect(100, 0, TILE_SIZE, 2 * TILE_SIZE));

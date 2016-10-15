@@ -65,16 +65,6 @@ bool MapReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_) c
 
 bool MapReader::checkData(MapData& data) const {
 	if (!WorldReader::checkData(data)) return false;
-	for (size_t i = 0; i < data.dynamicTileLayers.size(); ++i) {
-		if (data.dynamicTileLayers[i].first == MapDynamicTileID::VOID) {
-			logError("map dynamic tile ID not recognized");
-			return false;
-		}
-		if (data.dynamicTileLayers[i].second.empty() || static_cast<int>(data.dynamicTileLayers[i].second.size()) != data.mapSize.x * data.mapSize.y) {
-			logError("dynamic tile layer has not correct size (map size)");
-			return false;
-		}
-	}
 	for (auto& it : data.npcs) {
 		if (it.id.empty()) {
 			logError("a map npc has no id.");
@@ -272,7 +262,7 @@ bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, MapData& data) con
 		XMLCheckResult(result);
 
 		int offset = static_cast<int>(MapDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
 
 		ChestTileData chestData;
 		chestData.skinNr = skinNr;
@@ -411,7 +401,7 @@ bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 		XMLCheckResult(result);
 
 		int offset = static_cast<int>(MapDynamicTileID::Book) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
 
 		BookData book;
 
@@ -470,7 +460,7 @@ bool MapReader::readDoors(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 		XMLCheckResult(result);
 
 		int offset = static_cast<int>(MapDynamicTileID::Door) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
 
 		DoorData door;
 
@@ -585,7 +575,7 @@ bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 		XMLCheckResult(result);
 
 		int offset = static_cast<int>(MapDynamicTileID::Sign) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT) + 1;
+		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
 
 		SignData sign;
 
@@ -646,7 +636,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 
 		npc.objectID = id;
 		npc.position.x = static_cast<float>(x);
-		npc.position.y = static_cast<float>(y);
+		npc.position.y = static_cast<float>(y) - TILE_SIZE_F;
 
 		// npc properties
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -748,25 +738,42 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 	return true;
 }
 
-bool MapReader::readDynamicTileLayer(MapDynamicTileID id, const std::string& layer, MapData& data) const {
+bool MapReader::readDynamicTileLayer(const std::string& layer, MapData& data) const {
 	std::string layerData = layer;
-	int offset = static_cast<int>(id) + m_firstGidDynamicTiles - 1;
-	size_t pos = 0;
-	std::vector<int> dynamicTileLayer;
-	int skinNr;
-	while ((pos = layerData.find(",")) != std::string::npos) {
-		skinNr = std::stoi(layerData.substr(0, pos));
-		if (skinNr != 0 && ((skinNr - offset) % DYNAMIC_TILE_COUNT) != 0) {
-			logError("Dynamic Tile with ID: " + std::to_string(skinNr) + " is not allowed on this layer!");
-			return false;
+	size_t pos = layerData.find(",");
+	int id;
+	int position = 0;
+	bool lastIteration = true;
+	while (pos != std::string::npos || lastIteration) {
+		if (pos == std::string::npos) {
+			lastIteration = false;
+			id = std::stoi(layerData);
 		}
-		dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
-		layerData.erase(0, pos + 1);
-	}
-	skinNr = std::stoi(layerData);
-	dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
+		else {
+			id = std::stoi(layerData.substr(0, pos));
+			layerData.erase(0, pos + 1);
+			pos = layerData.find(",");
+		}
+		
+		if (id != 0) {
+			id -= m_firstGidDynamicTiles;
+			MapDynamicTileID tileId = static_cast<MapDynamicTileID>(id % DYNAMIC_TILE_COUNT + 1);
+			int skinNr = id / DYNAMIC_TILE_COUNT;
+			if (tileId <= MapDynamicTileID::VOID || tileId >= MapDynamicTileID::MAX) {
+				logError("Unknown dynamic tile id found on dynamic layer: " + std::to_string(id));
+				return false;
+			}
 
-	data.dynamicTileLayers.push_back(std::pair<MapDynamicTileID, std::vector<int>>(id, dynamicTileLayer));
+			MapDynamicTileData tileData;
+			tileData.id = tileId;
+			tileData.skinNr = skinNr;
+			tileData.spawnPosition = position;
+
+			data.dynamicTiles.push_back(tileData);
+		}
+
+		++position;
+	}
 
 	return true;
 }
@@ -808,11 +815,8 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
 		}
-		else if (name.find("dynamic cooking") != std::string::npos) {
-			if (!readDynamicTileLayer(MapDynamicTileID::Cooking, layerData, data)) return false;
-		}
-		else if (name.find("dynamic waypoint") != std::string::npos) {
-			if (!readDynamicTileLayer(MapDynamicTileID::Waypoint, layerData, data)) return false;
+		else if (name.find("dynamic") != std::string::npos) {
+			if (!readDynamicTileLayer(layerData, data)) return false;
 		}
 		else {
 			logError("Layer with unknown name found in map.");
@@ -969,32 +973,4 @@ bool MapReader::readFirstGridIDs(tinyxml2::XMLElement* map, MapData& data) {
 		return false;
 	}
 	return true;
-}
-
-void MapReader::updateData(MapData& data) const {
-	WorldReader::updateData(data);
-
-	// update dynamic tiles
-	for (auto& layer : data.dynamicTileLayers) {
-		MapDynamicTileID id = layer.first;
-
-		for (int y = 0; y < data.mapSize.y; ++y) {
-			for (int x = 0; x < data.mapSize.x; ++x) {
-				int skinNr = layer.second[y * data.mapSize.x + x];
-				if (skinNr != 0) {
-					MapDynamicTileData mdtData;
-					mdtData.id = id;
-					mdtData.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
-					mdtData.skinNr = skinNr;
-					mdtData.spawnPosition = y * data.mapSize.x + x;
-					data.dynamicTiles.push_back(mdtData);
-				}
-			}
-		}
-	}
-
-	for (auto& npc : data.npcs) {
-		// why? why does tiled do that to our objects?
-		npc.position.y -= TILE_SIZE_F;
-	}
 }

@@ -39,19 +39,19 @@ void DisappearingTile::loadAnimation(int skinNr) {
 
 void DisappearingTile::initForSkinNr(int skinNr) {
 	switch (skinNr) {
-	case 1:
+	case 0:
 		m_skinColor = sf::Color(156, 145, 188, 200);
 		m_criticalTime = sf::seconds(0.25f);
 		break;
-	case 2:
+	case 1:
 		m_skinColor = sf::Color(188, 145, 145);
 		m_criticalTime = sf::seconds(0.5f);
 		break;
-	case 3:
+	case 2:
 		m_skinColor = sf::Color(188, 173, 145, 200);
 		m_criticalTime = sf::seconds(1.f);
 		break;
-	case 4:
+	case 3:
 	default:
 		m_skinColor = sf::Color(161, 188, 145, 200);
 		m_criticalTime = sf::seconds(2.f);

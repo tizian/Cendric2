@@ -34,7 +34,7 @@ void CookingTile::loadAnimation(int skinNr) {
 	Animation* burningAnimation = new Animation(sf::seconds(0.15f));
 	burningAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, (skinNr - 1) * textureHeight, TILE_SIZE, textureHeight));
+		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * textureHeight, TILE_SIZE, textureHeight));
 	}
 
 	addAnimation(GameObjectState::Burning, burningAnimation);

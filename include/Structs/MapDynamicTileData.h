@@ -6,7 +6,6 @@
 
 struct MapDynamicTileData {
 	MapDynamicTileID id;
-	sf::Vector2f position;
 	int spawnPosition;
 	int skinNr;
 };

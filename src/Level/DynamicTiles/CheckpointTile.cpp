@@ -29,16 +29,16 @@ void CheckpointTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, (skinNr - 1) * 80, 80, 80));
+	idleAnimation->addFrame(sf::IntRect(0, skinNr * 80, 80, 80));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* activatedAnimation = new Animation(sf::seconds(0.2f));
 	activatedAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 5; i++) {
-		activatedAnimation->addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
+		activatedAnimation->addFrame(sf::IntRect(i * 80, skinNr * 80, 80, 80));
 	}
 	for (int i = 3; i > 0; i--) {
-		activatedAnimation->addFrame(sf::IntRect(i * 80, (skinNr - 1) * 80, 80, 80));
+		activatedAnimation->addFrame(sf::IntRect(i * 80, skinNr * 80, 80, 80));
 	}
 	addAnimation(GameObjectState::Active, activatedAnimation);
 
@@ -107,4 +107,3 @@ std::string CheckpointTile::getSpritePath() const {
 std::string CheckpointTile::getSoundPath() const {
 	return "res/sound/tile/gargoyle.ogg";
 }
-

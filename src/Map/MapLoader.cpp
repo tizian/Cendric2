@@ -116,12 +116,15 @@ void MapLoader::loadDynamicTiles(MapData& data, MapScreen* screen) {
 	for (auto& it : data.dynamicTiles) {
 		MapDynamicTile* tile = ObjectFactory::Instance()->createMapDynamicTile(it.id, screen);
 		if (tile == nullptr) {
-			g_logger->logError("MapLoader", "Dynamic tile was not loaded, unknown id.");
-			return;
+			g_logger->logError("MapLoader", "Dynamic tile was not loaded, id not registered:" + std::to_string(static_cast<int>(it.id)));
+			continue;
 		}
 
 		tile->init();
-		tile->setPosition(it.position + tile->getPositionOffset());
+		tile->setPosition(sf::Vector2f(
+			(it.spawnPosition % data.mapSize.x) * TILE_SIZE_F,
+			(it.spawnPosition / data.mapSize.x) * TILE_SIZE_F) +
+			tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		tile->loadResources();
 		tile->loadAnimation(it.skinNr);
