@@ -31,6 +31,7 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 
 	switch (type) {
 	case BuffType::Food:
+	default:
 		m_outside.setFillColor(COLOR_GOOD);
 		texture = g_resourceManager->getTexture(GlobalResource::TEX_ITEMS);
 		break;
@@ -40,8 +41,6 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	case BuffType::DamageOverTime:
 		m_outside.setFillColor(COLOR_BAD);
 		texture = g_resourceManager->getTexture(GlobalResource::TEX_DAMAGETYPES);
-		break;
-	default:
 		break;
 	}
 	

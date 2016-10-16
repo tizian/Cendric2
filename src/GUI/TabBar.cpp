@@ -30,7 +30,7 @@ TabBar::~TabBar() {
 void TabBar::setPosition(const sf::Vector2f& position) {
 	GameObject::setPosition(position);
 	m_activeOverlay.setPosition(position);
-	for (int i = 0; i < m_tabButtons.size(); ++i) {
+	for (size_t i = 0; i < m_tabButtons.size(); ++i) {
 		m_tabButtons[i]->setPosition(position + sf::Vector2f(i * (m_tabWidth - TabButton::ALIGNMENT_OFFSET), 0.f));
 	}
 }

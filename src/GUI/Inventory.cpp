@@ -332,7 +332,7 @@ void Inventory::update(const sf::Time& frameTime) {
 	else if (activeIndex == 4) {
 		type = ItemType::Key;
 	}
-	else if (activeIndex == 5) {
+	else {
 		type = ItemType::Misc;
 	}
 
