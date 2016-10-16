@@ -1,9 +1,7 @@
 #include "Level/Enemies/OozeEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
-#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveCreepingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Ooze, OozeEnemy)
@@ -45,30 +43,19 @@ void OozeEnemy::loadSpells() {
 }
 
 MovingBehavior* OozeEnemy::createMovingBehavior(bool asAlly) {
-	WalkingBehavior* behavior;
-	if (asAlly) {
-		behavior = new AllyWalkingBehavior(this);
-	}
-	else {
-		behavior = new AggressiveWalkingBehavior(this);
-	}
-	behavior->setDistanceToAbyss(20.f);
+	CreepingBehavior* behavior = new AggressiveCreepingBehavior(this);
+	
 	behavior->setApproachingDistance(10.f);
 	behavior->setMaxVelocityYDown(400.f);
 	behavior->setMaxVelocityYUp(400.f);
 	behavior->setMaxVelocityX(50.f);
-	behavior->calculateJumpHeight();
+
 	return behavior;
 }
 
 AttackingBehavior* OozeEnemy::createAttackingBehavior(bool asAlly) {
-	EnemyAttackingBehavior* behavior;
-	if (asAlly) {
-		behavior = new AllyBehavior(this);
-	}
-	else {
-		behavior = new AggressiveBehavior(this);
-	}
+	EnemyAttackingBehavior* behavior = new AggressiveBehavior(this);
+
 	behavior->setAggroRange(300.f);
 	behavior->setAttackInput(std::bind(&OozeEnemy::handleAttackInput, this));
 	return behavior;

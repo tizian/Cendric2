@@ -19,6 +19,7 @@ public:
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
 	EnemyID getEnemyID() const override { return EnemyID::Ooze; }
+	int getMentalStrength() const override { return 4; }
 
 protected:
 	std::string getSpritePath() const override;
