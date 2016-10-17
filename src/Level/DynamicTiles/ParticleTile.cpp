@@ -20,9 +20,11 @@ void ParticleTile::init() {
 	m_isCollidable = false;
 }
 
-void ParticleTile::loadAnimation(int skinNr) {
+void ParticleTile::loadAnimation(int skinNr_) {
 	// initial values
 	m_state = GameObjectState::Idle;
+	int skinNr = skinNr_ / 2;
+	m_isForegroundTile = skinNr_ % 2 != 0;
 
 	if (skinNr == 0 || skinNr == 1) {
 		addComponent(new LightComponent(LightData(
@@ -50,7 +52,9 @@ void ParticleTile::setPosition(const sf::Vector2f& pos) {
 
 void ParticleTile::render(sf::RenderTarget& target) {
 	if (m_isFirstRenderIteration) {
-		sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleRenderTexture();
+		sf::RenderTarget& particleTarget = m_isForegroundTile ? 
+			dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture() : 
+			dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 		particleTarget.setView(target.getView());
 		m_ps->render(particleTarget);
 		GameObject::render(target);

@@ -6,7 +6,7 @@ set(CMAKE_BUILD_TYPE Release)
 
 option(CENDRIC_APPLE_BUILD_APP_BUNDLE "Build .app bundle on Mac platform?" OFF)
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
-option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool?" OFF)
+option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool?" ON)
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
 

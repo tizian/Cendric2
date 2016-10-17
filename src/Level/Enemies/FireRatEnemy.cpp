@@ -192,7 +192,7 @@ void FireRatEnemy::onHit(Spell* spell) {
 
 void FireRatEnemy::render(sf::RenderTarget& target) {
 	if (m_ps != nullptr) {
-		sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleRenderTexture();
+		sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 		particleTarget.setView(target.getView());
 		m_ps->render(particleTarget);
 		GameObject::render(target);

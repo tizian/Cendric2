@@ -46,7 +46,9 @@ public:
 	const Level* getWorld() const override;
 	const LevelData* getWorldData() const override;
 
-	sf::RenderTexture& getParticleRenderTexture();
+	// extra render textures for particles using additive blend
+	sf::RenderTexture& getParticleFGRenderTexture();
+	sf::RenderTexture& getParticleBGRenderTexture();
 
 private:
 	void quicksave() override;
@@ -69,8 +71,9 @@ private:
 
 	ScreenOverlay* m_gamePausedOverlay = nullptr;
 
-	sf::RenderTexture m_particleRenderTexture;
-	void flushParticleTexture(sf::RenderTarget& renderTarget, const sf::View& oldView);
+	sf::RenderTexture m_particleBGRenderTexture;
+	sf::RenderTexture m_particleFGRenderTexture;
+	void flushParticleTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView);
 
 	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);

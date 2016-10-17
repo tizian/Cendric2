@@ -74,7 +74,7 @@ void DisappearingTile::update(const sf::Time& frameTime) {
 
 void DisappearingTile::render(sf::RenderTarget& target) {
 	LevelDynamicTile::render(target);
-	sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleRenderTexture();
+	sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture();
 	particleTarget.setView(target.getView());
 	m_ps->render(particleTarget);
 }

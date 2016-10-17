@@ -9,7 +9,8 @@ using namespace std;
 
 LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : WorldScreen(core) {
 	m_levelID = levelID;
-	m_particleRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_particleBGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_particleFGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void LevelScreen::loadForRenderTexture() {
@@ -187,8 +188,12 @@ const LevelData* LevelScreen::getWorldData() const {
 	return m_currentLevel.getWorldData();
 }
 
-sf::RenderTexture& LevelScreen::getParticleRenderTexture() {
-	return m_particleRenderTexture;
+sf::RenderTexture& LevelScreen::getParticleBGRenderTexture() {
+	return m_particleBGRenderTexture;
+}
+
+sf::RenderTexture& LevelScreen::getParticleFGRenderTexture() {
+	return m_particleFGRenderTexture;
 }
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
@@ -250,17 +255,16 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void LevelScreen::flushParticleTexture(sf::RenderTarget& renderTarget, const sf::View& oldView) {
-	m_particleRenderTexture.display();
-	m_sprite.setTexture(m_particleRenderTexture.getTexture());
+void LevelScreen::flushParticleTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView) {
+	renderTexture.display();
+	m_sprite.setTexture(renderTexture.getTexture());
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite);
 	renderTarget.setView(oldView);
-	m_particleRenderTexture.clear(sf::Color(0, 0, 0, 0));
+	renderTexture.clear(sf::Color(0, 0, 0, 0));
 }
 
 void LevelScreen::render(sf::RenderTarget& renderTarget) {
-	m_particleRenderTexture.clear(sf::Color(0, 0, 0, 0));
 	sf::Vector2f focus = m_mainChar->getCenter();
 
 	// Render level background and content to window				(Normal level background rendered)
@@ -270,13 +274,13 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	sf::View oldView = renderTarget.getView();
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_MovableTile, renderTarget);
-	flushParticleTexture(renderTarget, oldView);
+	flushParticleTexture(renderTarget, m_particleBGRenderTexture, oldView);
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 	renderObjects(GameObjectType::_LevelMainCharacter, renderTarget);
 	renderObjects(GameObjectType::_Equipment, renderTarget);
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
-	flushParticleTexture(renderTarget, oldView);
+	flushParticleTexture(renderTarget, m_particleFGRenderTexture, oldView);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
 

@@ -26,6 +26,7 @@ public:
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Particle; }
 
 private:
+	bool m_isForegroundTile = false;
 	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::AimedVelocityGenerator* m_velGenerator = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
