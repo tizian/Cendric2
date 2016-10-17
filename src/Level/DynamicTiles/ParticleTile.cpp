@@ -24,7 +24,7 @@ void ParticleTile::loadAnimation(int skinNr) {
 	// initial values
 	m_state = GameObjectState::Idle;
 
-	if (skinNr == 1 || skinNr == 2) {
+	if (skinNr == 0 || skinNr == 1) {
 		addComponent(new LightComponent(LightData(
 			sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.5f),
 			sf::Vector2f(200.f, 250.f), 0.6f), this));
@@ -53,6 +53,7 @@ void ParticleTile::render(sf::RenderTarget& target) {
 		sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleRenderTexture();
 		particleTarget.setView(target.getView());
 		m_ps->render(particleTarget);
+		GameObject::render(target);
 		m_isFirstRenderIteration = false;
 	}
 	else {

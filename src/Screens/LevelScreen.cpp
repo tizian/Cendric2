@@ -260,6 +260,7 @@ void LevelScreen::flushParticleTexture(sf::RenderTarget& renderTarget, const sf:
 }
 
 void LevelScreen::render(sf::RenderTarget& renderTarget) {
+	m_particleRenderTexture.clear(sf::Color(0, 0, 0, 0));
 	sf::Vector2f focus = m_mainChar->getCenter();
 
 	// Render level background and content to window				(Normal level background rendered)
