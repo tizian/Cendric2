@@ -60,6 +60,7 @@ public:
 	SpellManager* getSpellManager() const;
 	AttackingBehavior* getAttackingBehavior() const;
 	MovingBehavior* getMovingBehavior() const;
+	AnimatedSprite& getAnimatedSprite();
 	const AttributeData* getAttributes() const;
 	int getActiveSpellCount() const;
 	const Level* getLevel() const;

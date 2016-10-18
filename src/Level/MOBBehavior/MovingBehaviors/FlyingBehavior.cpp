@@ -6,7 +6,6 @@ FlyingBehavior::FlyingBehavior(Enemy* enemy) :
 	MovingBehavior(enemy),
 	EnemyMovingBehavior(enemy) {
 
-	m_isWalkingBehavior = false;
 	m_dampingAirPerS = 0.1f;
 	m_dampingGroundPerS = 0.7f;
 };
@@ -24,6 +23,15 @@ void FlyingBehavior::handleDefaultAcceleration() {
 
 	float newAccelerationX = m_mob->getAcceleration().x;
 	m_mob->setAcceleration(sf::Vector2f(newAccelerationX, 0.f));
+}
+
+void FlyingBehavior::handleTrueAcceleration() {
+	float newAccelerationY = m_movingDirectionY * m_walkAcceleration;
+	float newAccelerationX = m_enemy->getAcceleration().x + m_movingDirectionX * m_walkAcceleration;
+
+	m_nextIsFacingRight = (m_movingDirectionX == 0) ? m_nextIsFacingRight : (m_movingDirectionX == 1);
+
+	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
 }
 
 void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {

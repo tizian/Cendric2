@@ -7,7 +7,6 @@
 WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 	MovingBehavior(enemy),
 	EnemyMovingBehavior(enemy) {
-	m_isWalkingBehavior = true;
 }
 
 bool WalkingBehavior::doAIJump(bool onlyJump) {
@@ -113,6 +112,15 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (m_jumps && m_movingDirectionX == 0) {
 		m_movingDirectionX = m_isFacingRight ? 1 : -1;
 	}
+}
+
+void WalkingBehavior::handleTrueAcceleration() {
+	float newAccelerationY = m_isFlippedGravity ? -m_gravity : m_gravity;
+	float newAccelerationX = m_enemy->getAcceleration().x + m_movingDirectionX * m_walkAcceleration;
+	
+	m_nextIsFacingRight = (m_movingDirectionX == 0) ? m_nextIsFacingRight : (m_movingDirectionX == 1);
+
+	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
 }
 
 void WalkingBehavior::calculateJumpHeight() {

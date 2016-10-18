@@ -333,6 +333,10 @@ AttackingBehavior* LevelMovableGameObject::getAttackingBehavior() const {
 	return m_attackingBehavior;
 }
 
+AnimatedSprite& LevelMovableGameObject::getAnimatedSprite() {
+	return m_animatedSprite;
+}
+
 const AttributeData* LevelMovableGameObject::getAttributes() const {
 	return &m_attributes;
 }

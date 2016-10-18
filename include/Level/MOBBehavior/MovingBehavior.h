@@ -23,7 +23,7 @@ public:
 	virtual void handleDefaultAcceleration();
 
 	// gravity flip (used for anti gravity spell)
-	void flipGravity();
+	virtual void flipGravity();
 	// change gravity (used for leap of faith spell)
 	void setGravityScale(float scale);
 	// change x speed (used for ghost spell)
@@ -55,7 +55,7 @@ public:
 	float getGravity() const;
 	bool isGrounded() const;
 	bool isFacingRight() const;
-	bool isUpsideDown() const;
+	virtual bool isUpsideDown() const;
 	virtual bool isReady() const;
 	bool isIgnoreDynamicTiles() const;
 	

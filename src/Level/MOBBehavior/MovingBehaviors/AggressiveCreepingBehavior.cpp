@@ -15,18 +15,36 @@ void AggressiveCreepingBehavior::execHandleMovementInput() {
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
 	if (m_isGrounded && hasTarget && m_enemy->getEnemyState() == EnemyState::Chasing) {
 		// the enemy tries to get near its target
-		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_movingDirectionX = -1;
-		}
-		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_movingDirectionX = 1;
+		if (isCreepingOnX()) {
+			if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
+				m_movingDirectionX = -1;
+			}
+			else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
+				m_movingDirectionX = 1;
+			}
+			else {
+				m_movingDirectionX = 0;
+			}
 		}
 		else {
-			m_movingDirectionX = 0;
+			if (targetCenter.y < center.y && std::abs(targetCenter.y - center.y) > m_approachingDistance) {
+				m_movingDirectionY = -1;
+			}
+			else if (targetCenter.y > center.y && std::abs(targetCenter.y - center.y) > m_approachingDistance) {
+				m_movingDirectionY = 1;
+			}
+			else {
+				m_movingDirectionY = 0;
+			}
 		}
 	}
 	else if (m_isGrounded && hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
 		// the enemy tries to get away from its target
-		m_movingDirectionX = targetCenter.x < center.x ? 1 : -1;
+		if (isCreepingOnX()) {
+			m_movingDirectionX = targetCenter.x < center.x ? 1 : -1;
+		}
+		else {
+			m_movingDirectionY = targetCenter.y < center.y ? 1 : -1;
+		}
 	}
 }

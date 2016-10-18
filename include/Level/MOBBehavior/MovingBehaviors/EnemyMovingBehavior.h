@@ -13,9 +13,7 @@ public:
 	virtual void makeRandomDecision() = 0;
 	// the distance from the center of the enemy to the center of the main char at which the enemy approaches its target.
 	void setApproachingDistance(float distance);
-
 	void handleMovementInput() override;
-	virtual void execHandleMovementInput() = 0;
 	void setFacingRight(bool value) override;
 
 	// sets the target where an enemy wants to go to. As long as this is not reset, 
@@ -26,7 +24,6 @@ public:
 protected:
 	Enemy* m_enemy;
 	float m_approachingDistance = 0.f;
-	bool m_isWalkingBehavior = true;
 
 	sf::Vector2f* m_movingTarget = nullptr;
 
@@ -34,4 +31,7 @@ protected:
 	int m_movingDirectionX = 0;
 	// 0 means stand still, 1 move down, -1 move up
 	int m_movingDirectionY = 0;
+
+	virtual void execHandleMovementInput() = 0;
+	virtual void handleTrueAcceleration() = 0;
 };

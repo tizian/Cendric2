@@ -8,9 +8,9 @@ AnimatedGameObject::~AnimatedGameObject() {
 	m_animations.clear();
 }
 
-void AnimatedGameObject::setCurrentAnimation(const Animation *animation, bool isFlipped, bool force) {
+void AnimatedGameObject::setCurrentAnimation(const Animation *animation, bool isFlippedX, bool force) {
 	if (animation == nullptr || (m_isAnimationLocked && !force)) return;
-	m_animatedSprite.setFlippedX(isFlipped);
+	m_animatedSprite.setFlippedX(isFlippedX);
 	m_animatedSprite.setAnimation(animation);
 	if (force)
 		m_isAnimationLocked = true;
@@ -112,4 +112,3 @@ void AnimatedGameObject::setSpriteColor(const sf::Color& color, const sf::Time& 
 	m_coloredTime = time;
 	m_currentSpriteColor = color;
 }
-

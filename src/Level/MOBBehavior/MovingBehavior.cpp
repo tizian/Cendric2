@@ -227,9 +227,10 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 		// reset moving parent
 		rec.movingParent = nullptr;
 		collidesY = level.collides(rec);
-		m_mob->setMovingParent(rec.movingParent);
+		
 		if (collidesY) {
 			if (isFalling) {
+				m_mob->setMovingParent(rec.movingParent);
 				m_isGrounded = true;
 			}
 			m_mob->setAccelerationY(0.f);

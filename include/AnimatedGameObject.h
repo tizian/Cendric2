@@ -25,7 +25,7 @@ public:
 
 	virtual void setPosition(const sf::Vector2f& pos) override;
 	// if force is set to true, the animation gets locked until "unlockAnimation" is called.
-	void setCurrentAnimation(const Animation* animation, bool isFlipped, bool force = false);
+	void setCurrentAnimation(const Animation* animation, bool isFlippedX = false, bool force = false);
 	void setSpriteOffset(const sf::Vector2f& spriteOffset);
 	void unlockAnimation();
 	// angle is in radian

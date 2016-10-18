@@ -42,16 +42,7 @@ void EnemyMovingBehavior::handleMovementInput() {
 		execHandleMovementInput();
 	}
 
-	float newAccelerationX = m_enemy->getAcceleration().x;
-	m_nextIsFacingRight = (m_movingDirectionX == 0) ? m_nextIsFacingRight : (m_movingDirectionX == 1);
-
-	newAccelerationX += m_movingDirectionX * m_walkAcceleration;
-
-	float newAccelerationY = m_isWalkingBehavior ?
-		(m_isFlippedGravity ? -m_gravity : m_gravity) :
-		m_movingDirectionY * m_walkAcceleration;
-
-	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
+	handleTrueAcceleration();
 }
 
 void EnemyMovingBehavior::setApproachingDistance(float distance) {

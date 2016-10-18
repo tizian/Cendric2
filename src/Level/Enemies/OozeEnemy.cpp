@@ -33,7 +33,10 @@ void OozeEnemy::loadSpells() {
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(500);
 	chopSpell.damage = 5;
-	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
+	chopSpell.damageType = DamageType::Shadow;
+	chopSpell.damagePerSecond = 5;
+	chopSpell.duration = sf::seconds(1.f);
+	chopSpell.boundingBox = *getBoundingBox();
 	chopSpell.fightingTime = sf::milliseconds(4 * 80);
 	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 	chopSpell.fightAnimation = GameObjectState::Idle;
@@ -56,7 +59,7 @@ MovingBehavior* OozeEnemy::createMovingBehavior(bool asAlly) {
 AttackingBehavior* OozeEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior = new AggressiveBehavior(this);
 
-	behavior->setAggroRange(300.f);
+	behavior->setAggroRange(100.f);
 	behavior->setAttackInput(std::bind(&OozeEnemy::handleAttackInput, this));
 	return behavior;
 }
@@ -126,4 +129,16 @@ void OozeEnemy::loadAnimation(int skinNr) {
 
 std::string OozeEnemy::getSpritePath() const {
 	return "res/assets/enemies/spritesheet_enemy_ooze.png";
+}
+
+sf::Time OozeEnemy::getConfiguredRandomDecisionTime() const {
+	return sf::seconds(4);
+}
+
+sf::Time OozeEnemy::getConfiguredWaitingTime() const {
+	return sf::seconds(static_cast<float>(rand() % 2));
+}
+
+sf::Time OozeEnemy::getConfiguredChasingTime() const {
+	return sf::seconds(static_cast<float>(2));
 }

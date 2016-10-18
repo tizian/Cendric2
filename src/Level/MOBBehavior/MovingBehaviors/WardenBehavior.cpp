@@ -8,7 +8,6 @@ WardenBehavior::WardenBehavior(WardenEnemy* enemy) :
 	EnemyMovingBehavior(enemy) {
 
 	m_warden = enemy;
-	m_isWalkingBehavior = false;
 	m_dampingAirPerS = 0.5f;
 	m_dampingGroundPerS = 0.7f;
 }
@@ -21,6 +20,10 @@ void WardenBehavior::makeRandomDecision() {
 void WardenBehavior::handleDefaultAcceleration() {
 	float newAccelerationX = m_mob->getAcceleration().x;
 	m_mob->setAcceleration(sf::Vector2f(newAccelerationX, 0.f));
+}
+
+void WardenBehavior::handleTrueAcceleration() {
+	// nop, wardens always have a moving target.
 }
 
 void WardenBehavior::checkCollisions(const sf::Vector2f& nextPosition) {

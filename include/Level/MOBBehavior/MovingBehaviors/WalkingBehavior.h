@@ -22,6 +22,7 @@ public:
 
 protected:
 	AIWalkingQueryRecord m_aiRecord;
+	void handleTrueAcceleration() override;
 
 	// this function returns whether an ai jump has been calculated.
 	// check the ai Record for further details if this function returns true.

@@ -20,6 +20,9 @@ public:
 
 	EnemyID getEnemyID() const override { return EnemyID::Ooze; }
 	int getMentalStrength() const override { return 4; }
+	sf::Time getConfiguredRandomDecisionTime() const override; 
+	sf::Time getConfiguredChasingTime() const override;
+	sf::Time getConfiguredWaitingTime() const override;
 
 protected:
 	std::string getSpritePath() const override;

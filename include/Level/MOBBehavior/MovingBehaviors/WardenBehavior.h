@@ -15,10 +15,12 @@ public:
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void updateAnimation(const sf::Time& frameTime) override;
 	void makeRandomDecision() override;
-	void handleDefaultAcceleration() override;
 
 private:
 	WardenEnemy* m_warden;
+
+	void handleDefaultAcceleration() override;
+	void handleTrueAcceleration() override;
 
 	// returns a random idle time between blinking and looking around
 	sf::Time getIdleTime() const;

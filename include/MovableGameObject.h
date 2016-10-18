@@ -7,7 +7,7 @@
 
 class MovingTile;
 
-// A movable game object with physics.  Abstract class
+// A movable game object with physics. Abstract class
 class MovableGameObject : public virtual AnimatedGameObject {
 public:
 	MovableGameObject();
