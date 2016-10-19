@@ -40,5 +40,6 @@ enum class GameObjectState {
 	Blinking, // used by observer/warden enemies
 	Looking, // used by observer/warden enemies
 	Open,	// used by door tiles
-	Closed	// used by door tiles
+	Closed,	// used by door tiles
+	Hanging // used by bat enemies
 };

@@ -275,6 +275,8 @@ public:
 			return "Prisoner";
 		case EnemyID::Ooze:
 			return "Ooze";
+		case EnemyID::Bat:
+			return "Bat";
 		}
 	}
 

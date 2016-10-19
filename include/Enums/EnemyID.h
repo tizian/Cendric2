@@ -21,5 +21,6 @@ enum class EnemyID {
 	Warden,
 	Prisoner,
 	Ooze,
+	Bat,
 	MAX
 };
