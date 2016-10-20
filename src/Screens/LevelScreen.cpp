@@ -58,6 +58,12 @@ void LevelScreen::load() {
 	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
 	addObject(m_retryButton);
 
+	m_backToMapButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
+	m_backToMapButton->setText("BackToMap");
+	m_backToMapButton->setVisible(false);
+	m_backToMapButton->setOnClick(std::bind(&LevelScreen::onBackToMap, this));
+	addObject(m_backToMapButton);
+
 	m_backToMenuButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_backToMenuButton->setText("BackToMenu");
 	m_backToMenuButton->setVisible(false);
@@ -66,14 +72,17 @@ void LevelScreen::load() {
 
 	// synchronize and center buttons
 	sf::Vector2f buttonSize(0.f, 50.f);
-	buttonSize.x = std::max(std::max(m_retryButton->getSize().x, m_resumeButton->getSize().x), m_backToMenuButton->getSize().x);
+	buttonSize.x = std::max(std::max(std::max(m_retryButton->getSize().x, m_resumeButton->getSize().x),
+		m_backToMenuButton->getSize().x), m_backToMapButton->getSize().x);
 	float offsetLeft = (WINDOW_WIDTH - buttonSize.x) * 0.5f;
 	m_resumeButton->setSize(buttonSize);
 	m_resumeButton->setPosition(sf::Vector2f(offsetLeft, 350.f));
-	m_retryButton->setSize(buttonSize);
-	m_retryButton->setPosition(sf::Vector2f(offsetLeft, 410.f));
 	m_backToMenuButton->setSize(buttonSize);
-	m_backToMenuButton->setPosition(sf::Vector2f(offsetLeft, 470.f));
+	m_backToMenuButton->setPosition(sf::Vector2f(offsetLeft, 410.f));
+	m_retryButton->setSize(buttonSize);
+	m_retryButton->setPosition(sf::Vector2f(offsetLeft, 470.f));
+	m_backToMapButton->setSize(buttonSize);
+	m_backToMapButton->setPosition(sf::Vector2f(offsetLeft, 530.f));
 
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 
@@ -249,9 +258,10 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 			m_gamePausedOverlay->setPermanent(false);
 		}
 
-		m_retryButton->setVisible(m_isPaused);
-		m_backToMenuButton->setVisible(m_isPaused);
 		m_resumeButton->setVisible(m_isPaused);
+		m_backToMenuButton->setVisible(m_isPaused);
+		m_backToMapButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->bossLevelData.isBossLevel);
+		m_retryButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->bossLevelData.isBossLevel);
 	}
 }
 
@@ -421,10 +431,17 @@ void LevelScreen::onBackToCheckpoint() {
 	setNextScreen(new LoadingScreen(m_characterCore));
 }
 
+void LevelScreen::onBackToMap() {
+	dynamic_cast<LevelInterface*>(m_interface)->clearConsumedFood();
+	m_characterCore->setInLevel(false);
+	setNextScreen(new LoadingScreen(m_characterCore));
+}
+
 void LevelScreen::onResume() {
 	m_retryButton->setVisible(false);
 	m_backToMenuButton->setVisible(false);
 	m_resumeButton->setVisible(false);
+	m_backToMapButton->setVisible(false);
 	m_isPaused = false;
 	m_gamePausedOverlay->setPermanent(false);
 }

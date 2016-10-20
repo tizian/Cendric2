@@ -6,6 +6,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('And'
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Armor','Armour','Rüstung','Rüschtig','Armadura');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Back','Back','Zurück','Zrugg','Regresar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint','Regresar al punto de control');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToMap','Leave level','Level verlassen','Usem Level gah','');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToMenu','Menu','Menu','Menu','Menú');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Book','Book','Buch','Buech','Libro');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Cancel','Cancel','Abbrechen','Abbreche','Cancelar');

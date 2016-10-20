@@ -600,6 +600,10 @@ void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& le
 	m_data.isInLevel = true;
 }
 
+void CharacterCore::setInLevel(bool inLevel) {
+	m_data.isInLevel = inLevel;
+}
+
 void CharacterCore::removeModifier(int slotNr, int modifierNr) {
 	if (slotNr < 0 || slotNr + 1 > static_cast<int>(m_data.equippedWeaponSlots.size())) return;
 	std::vector<SpellModifier>& modifiers = m_data.equippedWeaponSlots.at(slotNr).second;

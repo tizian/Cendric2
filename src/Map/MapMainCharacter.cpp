@@ -1,4 +1,5 @@
 #include "Map/MapMainCharacter.h"
+#include "Map/DynamicTiles/DoorMapTile.h"
 #include "Screens/MapScreen.h"
 
 MapMainCharacter::MapMainCharacter(Map* map) : MapMovableGameObject(map) {
@@ -60,8 +61,8 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
-void MapMainCharacter::render(sf::RenderTarget& target) { 
-	MapMovableGameObject::render(target); 
+void MapMainCharacter::render(sf::RenderTarget& target) {
+	MapMovableGameObject::render(target);
 	dynamic_cast<MapScreen*>(m_screen)->renderEquipment(target);
 }
 
