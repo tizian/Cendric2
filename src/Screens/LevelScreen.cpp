@@ -432,7 +432,6 @@ void LevelScreen::onBackToCheckpoint() {
 }
 
 void LevelScreen::onBackToMap() {
-	dynamic_cast<LevelInterface*>(m_interface)->clearConsumedFood();
 	m_characterCore->setInLevel(false);
 	setNextScreen(new LoadingScreen(m_characterCore));
 }

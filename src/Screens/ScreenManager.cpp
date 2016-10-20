@@ -83,6 +83,7 @@ void ScreenManager::setErrorScreen() {
 	if (m_isErrorScreen) return;
 	m_currentScreen->onExit(nullptr);
 	Screen* nextScreen = new ErrorScreen(m_currentScreen->getCharacterCore());
+	nextScreen->setScreenManager(this);
 	nextScreen->onEnter(m_currentScreen);
 	delete m_currentScreen;
 	m_currentScreen = nextScreen;
