@@ -22,7 +22,7 @@ BatEnemy::BatEnemy(const Level* level, Screen* screen) :
 }
 
 void BatEnemy::loadAttributes() {
-	m_attributes.setHealth(100);
+	m_attributes.setHealth(30);
 	m_attributes.resistancePhysical = 10;
 	m_attributes.resistanceShadow = 20;
 	m_attributes.critical = 10;
