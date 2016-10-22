@@ -15,7 +15,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 -- Fireball
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_fireball', 'spell', 150, 400, -1);
-INSERT INTO item_spell (item_id, spell_id) values ('sp_unlock', 3);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_fireball', 3);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fireball', 'item','Scroll - Fireball','Schriftrolle - Feuerball','Schriftrolle - Füürball', 'Pergamino - Bola de fuego');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fireball', 'item_desc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','The good old fireball. Burns enemies and melts ice.','Der gute alte Feuerball. Verbrennt Gegner und schmilzt Eis.','De guet alt Füürball. Verbrennt Gegner und schmelzt Iis.','La siempre leal bola de fuego. Quema enemigos y derrite el hielo.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fireball', 'item_desc','The good old fireball. Burns enemies and melts ice.','Der gute alte Feuerball. Verbrennt Gegner und schmilzt Eis.','De guet alt Füürball. Verbrennt Gegner und schmelzt Iis.','La siempre leal bola de fuego. Quema enemigos y derrite el hielo.');
 
