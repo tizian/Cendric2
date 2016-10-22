@@ -36,15 +36,16 @@ loadDialogue = function(DL)
 	if (not DL:isQuestState("a_new_trace", "completed")) then 
 
 		DL:createChoiceNode(5)
-		if (DL:hasItem("do_eleletter", 1)) then 
-			DL:addChoice(6, "DL_Choice_Letter") -- Someone wants me to meet you. (Show the letter)
+		if (DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)) then 
+			DL:addChoice(6, "DL_Choice_Letter") -- Someone wants me to meet you. (Show the letter and give the map)
 		end
 		DL:addChoice(-1, "DL_Choice_Leave") -- I was just about to leave.
 		DL:addNode()
 
-		if (DL:hasItem("do_eleletter", 1)) then 
+		if (DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)) then 
 
 			DL:createNPCNode(6, 7, "DL_Jonathan_Letter") -- (Reads the letter carefully) Cyrus! So good to hear from him. So, you're from the academy? How are things going there? And what did Cyrus find out?
+			DL:removeItem("do_elemap", 1)
 			DL:addNode()
 
 
@@ -144,12 +145,41 @@ loadDialogue = function(DL)
 
 	DL:createChoiceNode(17)
 	if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
-		DL:addChoice(-1, "DL_Choice_GotFireEssence") -- I got the essences of fire for you.
+		DL:addChoice(20, "DL_Choice_GotFireEssence") -- I got the essences of fire for you.
+	end
+	if (DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)) then 
+		DL:addChoice(22, "DL_Choice_LearntFireball") -- I've read the scroll.
 	end
 	DL:addChoice(-1, "DL_Choice_CU") -- See you later.
 	DL:addNode()
 
 	if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
+
+		DL:createNPCNode(20, 21, "DL_Jonathan_EssenceComplete") -- Very good. Maybe you can still become a decent elementalist.
+		DL:changeQuestState("essence_of_fire", "completed")
+		DL:removeItem("qe_fireessence", 10)
+		DL:addNode()
+
+
+		DL:createNPCNode(21, -1, "DL_Jonathan_EssenceComplete2") -- Here, take this scroll and read it. Talk to me when you've learned the spell.
+		DL:addItem("sp_fireball", 1)
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)) then 
+
+		DL:createNPCNode(22, 23, "DL_Jonathan_LearnedFireball") -- And you've already acquired its knowledge. I think we're ready to get started then.
+		DL:addNode()
+
+
+		DL:createNPCNode(23, 24, "DL_Jonathan_LearnedFireball2") -- My research focuses on the old, forgotten knowledge of the first elementalists. But lately, I get the impression that someone is trying to disturb my work.
+		DL:addNode()
+
+
+		DL:createNPCNode(24, -2, "DL_Jonathan_LearnedFireball3") -- 
+		DL:addNode()
+
 	end
 
 end

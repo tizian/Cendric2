@@ -96,12 +96,12 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:6
-		condition:DL:hasItem("do_eleletter", 1)
+		condition:DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)
 		# translation: 
 		translation.tag:DL_Choice_Letter
-		translation.en:Someone wants me to meet you. (Show the letter)
-		translation.de:Jemand will, dass ich dich treffe. (Brief zeigen)
-		translation.ch:Öppert will, dass ich dich triff. (Brief zeige)
+		translation.en:Someone wants me to meet you. (Show the letter and give the map)
+		translation.de:Jemand will, dass ich dich treffe. (Brief zeigen und Karte geben)
+		translation.ch:Öppert will, dass ich dich triff. (Brief zeige und Chartä ge)
 	]
 	[
 		# Link node, tag is next tag
@@ -117,6 +117,7 @@ npc.id:npc_jonathan
 	# [6] NPC Node
 	tag:6
 	# triggers: 
+	trigger:DL:removeItem("do_elemap", 1)
 	# translation: 
 	translation.tag:DL_Jonathan_Letter
 	translation.en:(Reads the letter carefully) Cyrus! So good to hear from him. So, you're from the academy? How are things going there? And what did Cyrus find out?
@@ -355,7 +356,7 @@ npc.id:npc_jonathan
 	tag:17
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:20
 		condition:DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")
 		# translation: 
 		translation.tag:DL_Choice_GotFireEssence
@@ -365,11 +366,94 @@ npc.id:npc_jonathan
 	]
 	[
 		# Link node, tag is next tag
+		tag:22
+		condition:DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)
+		# translation: 
+		translation.tag:DL_Choice_LearntFireball
+		translation.en:I've read the scroll.
+		translation.de:Ich habe die Schriftrolle gelesen.
+		translation.ch:Ich han d'Schriftrolle gläse.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:DL_Choice_CU
 		translation.en:See you later.
 		translation.de:Bis später.
 		translation.ch:Bis spöter.
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:changeQuestState("essence_of_fire", "completed")
+	trigger:DL:removeItem("qe_fireessence", 10)
+	# translation: 
+	translation.tag:DL_Jonathan_EssenceComplete
+	translation.en:Very good. Maybe you can still become a decent elementalist.
+	translation.de:Sehr gut. Vielleicht können wir doch noch einen anständigen Elementarmagier aus dir machen.
+	translation.ch:Sehr guet. Vilicht chömmer ja doch na en aständige Elementarmagier us dir mache.
+	[
+		# Link node, tag is next tag
+		tag:21
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addItem("sp_fireball", 1)
+	# translation: 
+	translation.tag:DL_Jonathan_EssenceComplete2
+	translation.en:Here, take this scroll and read it. Talk to me when you've learned the spell.
+	translation.de:Hier, nimm diese Schriftrolle und lies sie. Sprich wieder mit mir wenn du den Zauber erlernt hast.
+	translation.ch:Da, nimm die Schriftrolle und lies si. Red wider mit mir wend de Zauber glernt hesch.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_LearnedFireball
+	translation.en:And you've already acquired its knowledge. I think we're ready to get started then.
+	translation.de:Und du hast ihr Wissen bereits erlangt. Ich denke, wir können nun anfangen.
+	translation.ch:Und du hesches au scho tscheggt. Ich denk, mer chönd denn grad afange.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_LearnedFireball2
+	translation.en:My research focuses on the old, forgotten knowledge of the first elementalists. But lately, I get the impression that someone is trying to disturb my work.
+	translation.de:Ich forsche an dem alten, vergessenen Wissen der ersten Elementarmagier. Aber je länger je mehr habe ich das Gefühl, dass jemand versucht, meine Arbeit zu stören.
+	translation.ch:Ich forsche am alte, vergessene Wüsse vode erste Elementarmager. Aber je länger je me hanis Gfühl, dass öpper probiert, mini Arbet z'störe.
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_LearnedFireball3
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

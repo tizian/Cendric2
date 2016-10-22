@@ -10,6 +10,8 @@ REGISTER_ENEMY(EnemyID::Bat, BatEnemy)
 
 void BatEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = 2;
+	if (rand() % 2 > 0)
+		loot.insert({ "mi_teeth", 1 });
 }
 
 void BatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {

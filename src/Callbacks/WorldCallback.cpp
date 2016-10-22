@@ -105,6 +105,10 @@ bool WorldCallback::hasItem(const std::string& itemID, int amount) const {
 	return m_core->hasItem(itemID, amount);
 }
 
+bool WorldCallback::isSpellLearned(int spellID) {
+	return m_core->isSpellLearned(static_cast<SpellID>(spellID));
+}
+
 int WorldCallback::getItemAmount(const std::string& itemID) const {
 	return m_core->getItemAmount(itemID);
 }

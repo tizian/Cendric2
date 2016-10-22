@@ -65,7 +65,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireessence', 'item', 'Essence of Fire','Essenz des Feuers','Füüressenz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_fireessence', 'item_desc', 'From the lungs of a fire rat.','Aus den Lungen einer Feuerratte.','Us de Lunge vonere Füürratte');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_fireessence', 'quest', 550, 350, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_fireessence', 'quest', 350, 550, -1);
 
 -- Heart of a Fire Rat
 

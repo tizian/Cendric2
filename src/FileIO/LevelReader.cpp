@@ -857,11 +857,11 @@ bool LevelReader::readFluidLayer(const std::string& layer, LevelData& data) cons
 			logError("Dynamic Tile with ID: " + std::to_string(skinNr) + " is not allowed on this layer!");
 			return false;
 		}
-		dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT));
+		dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
 		layerData.erase(0, pos + 1);
 	}
 	skinNr = std::stoi(layerData);
-	dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT));
+	dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
 
 	// process layer
 
@@ -899,7 +899,7 @@ bool LevelReader::readFluidLayer(const std::string& layer, LevelData& data) cons
 
 				// Fill in info
 				ldtData.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
-				ldtData.skinNr = skinNr;
+				ldtData.skinNr = skinNr - 1;
 				ldtData.spawnPosition = y * data.mapSize.x + x;
 				ldtData.size = sf::Vector2f(width * TILE_SIZE_F, height * TILE_SIZE_F);
 				data.dynamicTiles.push_back(ldtData);

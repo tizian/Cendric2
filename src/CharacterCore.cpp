@@ -334,6 +334,17 @@ bool CharacterCore::isQuestConditionFulfilled(const std::string& questID, const 
 	return m_data.questConditionProgress.at(questID).find(condition) != m_data.questConditionProgress.at(questID).end();
 }
 
+bool CharacterCore::isSpellLearned(SpellID id) {
+	for (auto& type : m_data.spellsLearned) {
+		for (auto spell : type.second) {
+			if (spell == id) {
+				return true;
+			}
+		}
+	}
+	return false;
+} 
+
 bool CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
 	if (m_data.conditionProgress.find(conditionType) == m_data.conditionProgress.end()) {
 		m_data.conditionProgress.insert({ conditionType, std::set<std::string>() });

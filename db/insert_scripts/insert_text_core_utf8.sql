@@ -148,7 +148,6 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Pres
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Price','Price','Preis','Priis','Precio');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Quest','Quest','Quest','Quest','Misión');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('QuestionDeleteSaveGame','Do you really want to delete this save game?','Willst du diesen Speicherstand wirklich löschen?','Wetsch de Speicherstand würkli lösche?','¿Realmente quieres eliminar la partida guardada?');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('QuestionGoBackToCheckpoint','Your progress since the last checkpoint will be lost. Continue?','Dein Fortschritt seit dem letzten Kontrollpunkt geht verloren. Fortfahren?','Din Fortschritt sitt em letzte Checkpoint gaht verlore. Egal?','Perderás el progreso desde el último punto de control. ¿Continuar?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('QuestionLoadGame','Load game?
 All unsaved progress will be lost.','Spiel laden?
 Ungespeicherter Fortschritt geht verloren.','Spiel lade?

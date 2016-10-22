@@ -444,16 +444,3 @@ void LevelScreen::onResume() {
 	m_isPaused = false;
 	m_gamePausedOverlay->setPermanent(false);
 }
-
-void LevelScreen::onRetry() {
-	delete m_yesOrNoForm;
-	float width = 450;
-	float height = 200;
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
-	m_yesOrNoForm->setMessage("QuestionGoBackToCheckpoint");
-	m_yesOrNoForm->setOnNoClicked(std::bind(&LevelScreen::onNo, this));
-	m_yesOrNoForm->setOnYesClicked(std::bind(&LevelScreen::onYesToCheckpoint, this));
-	addObject(m_yesOrNoForm);
-	setAllButtonsEnabled(false);
-	m_isPaused = false;
-}

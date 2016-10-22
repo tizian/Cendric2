@@ -86,7 +86,6 @@ private:
 	void onBackToCheckpoint();
 	void onBackToMenu();
 	void onBackToMap();
-	void onRetry();
 	void onResume();
 
 	void cleanUp();

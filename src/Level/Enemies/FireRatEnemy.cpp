@@ -32,7 +32,7 @@ FireRatEnemy::~FireRatEnemy() {
 
 void FireRatEnemy::loadAttributes() {
 	m_attributes.setHealth(40);
-	m_attributes.resistanceIce = -20;
+	m_attributes.resistanceIce = -50;
 	m_attributes.resistanceFire = 1000;
 	m_attributes.calculateAttributes();
 }
