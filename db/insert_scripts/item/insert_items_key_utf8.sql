@@ -39,3 +39,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_jonathanbasement', 'key', 300, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item', 'Basement Key','Kellerschlüssel','Chällerschlüssel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item_desc', 'The key to the basement of Jonathans House.','Der Schlüssel zum Keller von Jonathans Haus.','De Schlüssel zum Chäller vom Huus vom Jonathan.');
+
+-- Rusty Key (Key to the thieves' guild)
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_thiefguild', 'key', 550, 550, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_thiefguild', 'item', 'Rusty Key','Rostiger Schlüssel','Rostige Schlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_thiefguild', 'item_desc', 'This key is partly corroded.','Dieser Schlüssel wurde teilweise von Rost zerfressen.','De Schlüssel isch es bitz vom Rost zerfresse worde.');
