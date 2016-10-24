@@ -12,6 +12,7 @@
 #include "Level/DynamicTiles/SignLevelTile.h"
 #include "Level/DynamicTiles/LadderTile.h"
 #include "Level/DynamicTiles/ResourceTile.h"
+#include "Level/DynamicTiles/DoorLevelTile.h"
 #include "Trigger.h"
 
 using namespace std;
@@ -61,6 +62,22 @@ void LevelLoader::loadJumpingTiles(LevelData& data, LevelScreen* screen) const {
 		jumpingTile->setPosition(jumpingData.spawnPosition);
 
 		screen->addObject(jumpingTile);
+	}
+}
+
+void LevelLoader::loadDoorTiles(LevelData& data, LevelScreen* screen) const {
+	for (auto& doorData : data.doors) {
+
+		DoorLevelTile* doorTile = new DoorLevelTile(screen);
+
+		doorTile->setDoorData(doorData);
+		doorTile->init();
+		doorTile->setDebugBoundingBox(COLOR_NEUTRAL);
+		doorTile->loadResources();
+		doorTile->loadAnimation(doorData.skinNr);
+		doorTile->setPosition(doorData.position);
+
+		screen->addObject(doorTile);
 	}
 }
 
@@ -207,6 +224,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 	loadJumpingTiles(data, screen);
 	loadSignTiles(data, screen);
 	loadLadderTiles(data, screen);
+	loadDoorTiles(data, screen);
 }
 
 void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {

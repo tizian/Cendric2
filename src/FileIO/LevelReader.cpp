@@ -366,6 +366,94 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 	return true;
 }
 
+bool LevelReader::readDoorTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+	int offset = static_cast<int>(LevelDynamicTileID::Door) + m_firstGidDynamicTiles - 1;
+
+	while (object != nullptr) {
+
+		int gid;
+		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		if ((gid - offset) % DYNAMIC_TILE_COUNT != 0) {
+			logError("Wrong tile on door layer, gid=" + std::to_string(gid));
+			return false;
+		}
+
+		DoorData doorData;
+		doorData.position = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
+		doorData.skinNr = ((gid - offset) / DYNAMIC_TILE_COUNT);
+
+		// modifier type and level
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
+			while (property_ != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = property_->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string propertyText = textAttr;
+
+				if (propertyText.compare("collidable") == 0) {
+					doorData.isCollidable = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
+				
+				if (propertyText.compare("key") == 0) {
+					std::string keyItemID = property_->Attribute("value");
+					if (keyItemID.empty()) {
+						logError("XML file could not be read, door key itemID is not specified.");
+						return false;
+					}
+					doorData.keyItemID = keyItemID;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
+
+				int amount;
+				result = property_->QueryIntAttribute("value", &amount);
+				XMLCheckResult(result);
+
+				if (propertyText.compare("width") == 0) {
+					if (amount < 1 || amount > 2) {
+						logError("Door tile width must be between 1 and 2");
+						return false;
+					}
+					doorData.tileWidth = amount;
+				}
+				else if (propertyText.compare("strength") == 0) {
+					if (amount < 0 || amount > 4) {
+						logError("Door tile strength must be between 0 and 4");
+						return false;
+					}
+					doorData.strength = amount;
+				}
+				
+				property_ = property_->NextSiblingElement("property");
+			}
+		}
+
+		object = object->NextSiblingElement("object");
+		data.doors.push_back(doorData);
+	}
+
+	return true;
+}
+
 bool LevelReader::readJumpingTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
@@ -754,6 +842,9 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 		}
 		else if (name.find("trigger") != std::string::npos) {
 			if (!readTriggers(objectgroup, data)) return false;
+		}
+		else if (name.find("door") != std::string::npos) {
+			if (!readDoorTiles(objectgroup, data)) return false;
 		}
 		else {
 			g_logger->logError("LevelReader", "Objectgroup with unknown name found in level: " + name);

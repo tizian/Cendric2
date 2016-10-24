@@ -1,41 +1,41 @@
 #include "Level/DynamicTiles/DoorLevelTile.h"
+#include "GameObjectComponents/InteractComponent.h"
+#include "Level/LevelMainCharacter.h"
+#include "Trigger.h"
 #include "Spells/Spell.h"
-#include "Registrar.h"
 
-REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Door, DoorLevelTile)
+const float DoorLevelTile::OPEN_RANGE = 100.f;
 
 void DoorLevelTile::init() {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F * m_doorData.tileWidth, 3 * TILE_SIZE_F));
+
+	m_interactComponent = new InteractComponent(g_textProvider->getText("Door"), this, m_mainChar);
+	m_interactComponent->setInteractRange(OPEN_RANGE);
+	m_interactComponent->setInteractText("ToOpen");
+	m_interactComponent->setOnInteract(std::bind(&DoorLevelTile::onRightClick, this));
+	addComponent(m_interactComponent);
 }
 
 void DoorLevelTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
-	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(BORDER, skinNr * (2 * BORDER + TILE_SIZE) + BORDER, TILE_SIZE, TILE_SIZE));
+	Animation* closedAnimation = new Animation();
+	closedAnimation->setSpriteSheet(tex);
+	closedAnimation->addFrame(sf::IntRect(0, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_doorData.tileWidth, 3 * TILE_SIZE));
 
-	addAnimation(GameObjectState::Idle, idleAnimation);
+	addAnimation(GameObjectState::Closed, closedAnimation);
 
-	Animation* crumblingAnimation = new Animation();
-	crumblingAnimation->setSpriteSheet(tex);
-	for (int i = 1; i < 5; i++) {
-		crumblingAnimation->addFrame(sf::IntRect(
-			BORDER + i * (2 * BORDER + TILE_SIZE),
-			BORDER + skinNr * (2 * BORDER + TILE_SIZE),
-			TILE_SIZE,
-			TILE_SIZE));
-	}
-	crumblingAnimation->setLooped(false);
+	Animation* openAnimation = new Animation();
+	openAnimation->setSpriteSheet(tex);
+	openAnimation->addFrame(sf::IntRect(TILE_SIZE * m_doorData.tileWidth, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_doorData.tileWidth, 3 * TILE_SIZE));
 
-	addAnimation(GameObjectState::Crumbling, crumblingAnimation);
+	addAnimation(GameObjectState::Open, openAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
-	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
-	playCurrentAnimation(true);
+	close();
+	playCurrentAnimation(false);
 }
 
 void DoorLevelTile::update(const sf::Time& frameTime) {
@@ -43,12 +43,77 @@ void DoorLevelTile::update(const sf::Time& frameTime) {
 }
 
 void DoorLevelTile::onHit(Spell* spell) {
-	switch (spell->getSpellID()) {
-	default:
-		break;
+	if (m_isOpen || spell->getSpellID() != SpellID::Unlock) {
+		return;
+	}
+	
+	if (spell->getStrength() >= m_doorData.strength) {
+		open();
+	}
+	spell->setDisposed();
+}
+
+void DoorLevelTile::onRightClick() {
+	if (m_isOpen) return;
+
+	// check if the door is in range
+	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
+
+	if (!inRange) {
+		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+	}
+	else if (!m_doorData.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_doorData.keyItemID, 1)) {
+		open();
+
+		std::string tooltipText = g_textProvider->getText("Used");
+		tooltipText.append(g_textProvider->getText(m_doorData.keyItemID, "item"));
+		m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
+
+		g_inputController->lockAction();
+	}
+	else {
+		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
 	}
 }
 
+void DoorLevelTile::open() {
+	m_isOpen = true;
+	m_isCollidable = false;
+	m_isStrictlyCollidable = false;
+	setState(GameObjectState::Open);
+	m_interactComponent->setInteractable(false);
+
+	// unlock keyguarded triggers (which are level exits)
+	for (auto& it : *m_screen->getObjects(GameObjectType::_Overlay)) {
+		if (Trigger* trigger = dynamic_cast<Trigger*>(it)) {
+			if (trigger->getData().isKeyGuarded && m_boundingBox.intersects(*trigger->getBoundingBox())) {
+				trigger->getData().isTriggerable = true;
+			}
+		}
+	}
+}
+
+void DoorLevelTile::close() {
+	m_isOpen = false;
+	m_isCollidable = m_doorData.isCollidable;
+	m_isStrictlyCollidable = m_doorData.isCollidable;
+	setState(GameObjectState::Closed);
+	m_interactComponent->setInteractable(true);
+
+	// lock keyguarded triggers (which are level exits)
+	for (auto& it : *m_screen->getObjects(GameObjectType::_Overlay)) {
+		if (Trigger* trigger = dynamic_cast<Trigger*>(it)) {
+			if (trigger->getData().isKeyGuarded && m_boundingBox.intersects(*trigger->getBoundingBox())) {
+				trigger->getData().isTriggerable = false;
+			}
+		}
+	}
+}
+
+void DoorLevelTile::setDoorData(const DoorData& data) {
+	m_doorData = data;
+}
+
 std::string DoorLevelTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png";
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_door.png";
 }

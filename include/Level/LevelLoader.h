@@ -36,6 +36,8 @@ private:
 	void loadModifierTiles(LevelData& data, LevelScreen* screen) const;
 	// loads jumping tiles out of level data and adds them directly to the screen
 	void loadJumpingTiles(LevelData& data, LevelScreen* screen) const;
+	// loads door tiles out of level data and adds them directly to the screen
+	void loadDoorTiles(LevelData& data, LevelScreen* screen) const;
 	// loads sign tiles out of level data and adds them directly to the screen
 	void loadSignTiles(LevelData& data, LevelScreen* screen) const;
 	// loads ladder tiles out of level data and adds them directly to the screen

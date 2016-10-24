@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="150">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="153">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/well/layer_inf.png"/>
   <property name="dimming" value="0.5"/>
@@ -563,9 +563,31 @@
   <object id="149" x="46" y="359" width="95" height="191">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/gandria/gandria.tmx,0,0"/>
+    <property name="map entry" value="res/map/gandria/gandria.tmx,885,1920"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="door">
+  <object id="150" gid="555" x="750" y="1050" width="50" height="50">
+   <properties>
+    <property name="collidable" value=""/>
+    <property name="key" value="ke_thiefguild"/>
+    <property name="strength" value="1"/>
+    <property name="width" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="moving platform">
+  <object id="151" gid="693" x="450" y="1200" width="50" height="50">
+   <properties>
+    <property name="direction" value="0"/>
+    <property name="distance" value="800"/>
+    <property name="inactive" value=""/>
+    <property name="size" value="1"/>
+    <property name="speed" value="100"/>
+   </properties>
+  </object>
+  <object id="152" gid="539" x="700" y="1100" width="50" height="50"/>
  </objectgroup>
 </map>

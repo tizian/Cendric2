@@ -398,11 +398,10 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.duration = sf::seconds(3);
 	fireBall.needsTarget = true;
 	fireBall.isDynamicTileEffect = true;
-	fireBall.damage = 10;
+	fireBall.damage = 15;
 	fireBall.speed = 300.f;
 
 	fireBall.countModifierAddition = 1;
-	fireBall.damageModifierAddition = 20;
 	fireBall.reflectModifierAddition = 1;
 	fireBall.speedModifierAddition = 100.f;
 
@@ -423,11 +422,10 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.activeDuration = sf::seconds(5);
 	iceBall.isDynamicTileEffect = true;
 	iceBall.needsTarget = true;
-	iceBall.damage = 6;
+	iceBall.damage = 10;
 	iceBall.speed = 250.f;
 
 	iceBall.countModifierAddition = 1;
-	iceBall.damageModifierAddition = 20;
 	iceBall.reflectModifierAddition = 1;
 	iceBall.speedModifierAddition = 100.f;
 
@@ -446,7 +444,7 @@ SpellData SpellData::getDivineShieldSpellData() {
 	divineShield.spellOffset = sf::Vector2f(-49.f, 0.f);
 	divineShield.duration = sf::seconds(3);
 	divineShield.activeDuration = divineShield.duration;
-	divineShield.heal = 20;
+	divineShield.heal = 30;
 	divineShield.attachedToMob = true;
 	divineShield.fightAnimation = GameObjectState::VOID;
 
@@ -489,13 +487,12 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.duration = sf::seconds(1.f);
 	aureola.isStunning = true;
 	aureola.ccStrength = 1;
-	aureola.damage = 10;
-	aureola.heal = 10;
+	aureola.damage = 20;
+	aureola.heal = 20;
 	aureola.speed = 300.f;
 	aureola.range = 150.f;
 
 	aureola.countModifierAddition = 2;
-	aureola.damageModifierAddition = 10;
 	aureola.speedModifierAddition = 100.f;
 	aureola.rangeModifierAddition = 100.f;
 	aureola.durationModifierAddition = sf::seconds(0.5f);
@@ -583,11 +580,10 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.attachedToMob = true;
 	windGust.isDynamicTileEffect = true;
 	windGust.damageType = DamageType::Ice;
-	windGust.damagePerSecond = 5;
+	windGust.damagePerSecond = 8;
 	windGust.ccStrength = 1;
 	windGust.strength = 1;
 
-	windGust.damageModifierAddition = 5;
 	windGust.rangeModifierAddition = 50.f;
 	windGust.durationModifierAddition = sf::seconds(1);
 
@@ -607,11 +603,10 @@ SpellData SpellData::getLeechSpellData() {
 	leech.damageType = DamageType::Shadow;
 	leech.activeDuration = sf::seconds(5);
 	leech.needsTarget = true;
-	leech.damage = 10;
+	leech.damage = 15;
 	leech.speed = 150.f;
 
 	leech.countModifierAddition = 1;
-	leech.damageModifierAddition = 10;
 	leech.reflectModifierAddition = 1;
 	leech.speedModifierAddition = 50.f;
 
@@ -637,7 +632,6 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.isStunning = true;
 	icyAmbush.ccStrength = 1;
 	
-	icyAmbush.damageModifierAddition = 50;
 	icyAmbush.reflectModifierAddition = 1;
 	icyAmbush.rangeModifierAddition = 200.f;
 	icyAmbush.durationModifierAddition = sf::seconds(0.5f);
@@ -662,7 +656,6 @@ SpellData SpellData::getFlashSpellData() {
 	flash.spellOffset = sf::Vector2f(-50.f, -20.f);
 	flash.fightAnimation = GameObjectState::VOID;
 
-	flash.damageModifierAddition = 20;
 	flash.rangeModifierAddition = 100.f;
 
 	return flash;
@@ -698,7 +691,7 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.cooldown = sf::seconds(10);
 	holyFire.range = 100.f;
 	holyFire.boundingBox = sf::FloatRect(0, 0, 2 * holyFire.range, 2 * holyFire.range);
-	holyFire.damagePerSecond = 5;
+	holyFire.damagePerSecond = 10;
 	holyFire.damageType = DamageType::Light;
 	holyFire.duration = sf::seconds(2);
 	holyFire.activeDuration = sf::seconds(3);
@@ -706,7 +699,6 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.fightAnimation = GameObjectState::VOID;
 	holyFire.spellOffset = sf::Vector2f(-holyFire.range, -holyFire.range);
 
-	holyFire.damageModifierAddition = 10;
 	holyFire.durationModifierAddition = sf::seconds(1);
 	holyFire.rangeModifierAddition = 50.f;
 
@@ -808,13 +800,12 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.divergenceAngle = 0.2f;
 	shadowTrap.damageType = DamageType::Shadow;
 	shadowTrap.activeDuration = sf::seconds(15);
-	shadowTrap.damagePerSecond = 5;
+	shadowTrap.damagePerSecond = 10;
 	shadowTrap.duration = sf::seconds(3);
 	shadowTrap.isStunning = true;
 	shadowTrap.ccStrength = 1;
 	shadowTrap.fightAnimation = GameObjectState::VOID;
 
-	shadowTrap.damageModifierAddition = 5;
 	shadowTrap.durationModifierAddition = sf::seconds(1);
 
 	return shadowTrap;
@@ -834,7 +825,6 @@ SpellData SpellData::getSummonGargoyleSpellData() {
 	summonGargoyle.ccStrength = 1;
 	summonGargoyle.fightAnimation = GameObjectState::VOID;
 
-	summonGargoyle.damageModifierAddition = 10;
 	summonGargoyle.durationModifierAddition = sf::seconds(20);
 	summonGargoyle.countModifierAddition = 1;
 
@@ -858,12 +848,7 @@ SpellData SpellData::getRaiseTheDeadSpellData() {
 	raiseTheDead.strength = 1;
 
 	raiseTheDead.rangeModifierAddition = 150.f;
-	raiseTheDead.damageModifierAddition = 5;
 	raiseTheDead.durationModifierAddition = sf::seconds(20.f);
 
 	return raiseTheDead;
 }
-
-
-
-

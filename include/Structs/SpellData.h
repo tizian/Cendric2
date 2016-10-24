@@ -55,7 +55,6 @@ struct SpellData {
 
 	float divergenceAngle;
 	float rangeModifierAddition;
-	int damageModifierAddition;
 	float speedModifierAddition;
 	int countModifierAddition;
 	int reflectModifierAddition;
@@ -141,7 +140,6 @@ const struct SpellData EMPTY_SPELL =
 
 	0.f,
 	0.f,
-	0,
 	0,
 	0,
 	0,

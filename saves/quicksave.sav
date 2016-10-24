@@ -37,6 +37,7 @@ item.id:fo_rawmeat,7
 item.id:fo_roastedmeat,14
 item.id:fo_water,1
 item.id:ke_jonathanbasement,1
+item.id:ke_thiefguild,1
 item.id:mi_candleholder,1
 item.id:mi_feather,1
 item.id:mi_firstguardianheart,1
@@ -208,7 +209,7 @@ merchant.state:npc_innkeeper,0,1.600000,eq_ironring,1,fo_apple,5,fo_beer,10,fo_b
 merchant.state:npc_syrah,0,1.600000,fo_caveberries,2,fo_greaterhealingpotion,2,fo_healingherb,5,fo_lesserhealingpotion,3,fo_mediumhealingpotion,3,fo_physalis,2,fo_redhat,1,fo_stormweed,1,fo_water,10,fo_windrose,1,fo_wine,10,pe_elixirshadow,1
 merchant.state:npc_tristan,0,1.600000,fo_apple,3,fo_cheese,4,fo_ham,2,fo_healingherb,5,fo_milk,6,fo_sausage,3
 # spells learned:
-spell.learned:1,2
+spell.learned:1,2,3
 spell.learned:4,17
 # modifiers learned:
 modifier.learned:3,1

@@ -28,6 +28,8 @@ void Trigger::update(const sf::Time& frameTime) {
 	m_time += frameTime;
 	m_showSprite = false;
 
+	if (!m_data.isTriggerable) return;
+
 	bool intersects = m_mainChar->getBoundingBox()->intersects(m_data.triggerRect);
 	if (m_data.isKeyGuarded && intersects) {
 		m_showSprite = intersects;
@@ -44,7 +46,6 @@ void Trigger::update(const sf::Time& frameTime) {
 		m_isOnTrigger = false;
 	}
 	if (m_isOnTrigger) return;
-	if (!m_data.isTriggerable) return;
 	if (m_data.isKeyGuarded && !g_inputController->isKeyJustPressed(Key::Up)) {
 		return;
 	}

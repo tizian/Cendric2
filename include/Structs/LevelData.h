@@ -15,6 +15,7 @@
 #include "Structs/SignData.h"
 #include "Structs/LadderTileData.h"
 #include "Structs/BossLevelData.h"
+#include "Structs/DoorData.h"
 
 struct LevelData : WorldData {
 	std::vector<BackgroundLayer> backgroundLayers;
@@ -29,6 +30,7 @@ struct LevelData : WorldData {
 	std::vector<JumpingTileData> jumpingTiles;
 	std::vector<SignData> signTiles;
 	std::vector<LadderTileData> ladderTiles;
+	std::vector<DoorData> doors;
 
 	BossLevelData bossLevelData;
 	bool isObserved = false;
