@@ -7,15 +7,18 @@
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
+	m_targetManager = new TargetManager();
 	m_isQuickcast = g_resourceManager->getConfiguration().isQuickcast;
 }
 
 LevelMainCharacter::~LevelMainCharacter() {
 	m_spellKeyMap.clear();
 	delete m_ps;
+	delete m_targetManager;
 }
 
 void LevelMainCharacter::load() {
+	m_targetManager->setMainCharacter(this);
 	m_isAlwaysUpdate = true;
 	loadResources();
 	loadAnimation();
@@ -39,27 +42,21 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 		return;
 	}
 
-	// Remove target if right-clicked anywhere
-	if (g_inputController->isMouseClickedRight()) {
-		setTargetEnemy(nullptr);
-	}
-
-	// enemy no longer targeted if it moves out of view
-	if (m_targetedEnemy && !m_targetedEnemy->isViewable()) {
-		setTargetEnemy(nullptr);
-	}
-	if (m_lastHitEnemy && !m_lastHitEnemy->isViewable()) {
-		setLastHitEnemy(nullptr);
-	}
-
+	m_targetManager->update(frameTime);
 	MainCharacter::handleInteraction();
+}
+
+void LevelMainCharacter::onHit(Spell* spell) {
+	LevelMovableGameObject::onHit(spell);
+	if (!m_targetManager->getCurrentTargetEnemy()) {
+		m_targetManager->setTargetEnemy(const_cast<Enemy*>(dynamic_cast<const Enemy*>(spell->getOwner())));
+	}
 }
 
 void LevelMainCharacter::render(sf::RenderTarget& target) {
 	LevelMovableGameObject::render(target);
 	if (m_isDead) m_ps->render(target);
 }
-
 
 MovingBehavior* LevelMainCharacter::createMovingBehavior(bool asAlly) {
 	UserMovingBehavior* behavior = new UserMovingBehavior(this);
@@ -82,9 +79,11 @@ void LevelMainCharacter::handleAttackInput() {
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 
-	sf::Vector2f target = m_targetedEnemy != nullptr ? 
+	bool isMousePressed = g_inputController->isMouseJustPressedLeft();
+
+	sf::Vector2f target = !isMousePressed && m_targetManager->getCurrentTargetEnemy() != nullptr ? 
 		// Target lock
-		m_targetedEnemy->getCenter() :
+		m_targetManager->getCurrentTargetEnemy()->getCenter() :
 		g_inputController->getMousePosition();
 
 	// update current spell
@@ -101,11 +100,12 @@ void LevelMainCharacter::handleAttackInput() {
 				m_spellManager->setAndExecuteSpell(it.second);
 			}
 			g_inputController->lockAction();
+			return;
 		}
 	}
 
 	// handle attack input
-	if (g_inputController->isMouseJustPressedLeft()) {
+	if (isMousePressed) {
 		m_spellManager->executeCurrentSpell(target);
 		g_inputController->lockAction();
 		if (m_invisibilityLevel > 0) {
@@ -324,6 +324,10 @@ void LevelMainCharacter::loadAnimation() {
 	loadParticleSystem();
 }
 
+TargetManager& LevelMainCharacter::getTargetManager() {
+	return *m_targetManager;
+}
+
 GameObjectType LevelMainCharacter::getConfiguredType() const {
 	return GameObjectType::_LevelMainCharacter;
 }
@@ -366,26 +370,6 @@ void LevelMainCharacter::removeGold(int gold) const {
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange("gold", -gold);
 	}
-}
-
-void LevelMainCharacter::setTargetEnemy(Enemy* enemy) {
-	if (m_targetedEnemy) m_targetedEnemy->setTargeted(false);
-	m_targetedEnemy = enemy;
-	if (m_targetedEnemy) m_targetedEnemy->setTargeted(true);
-}
-
-Enemy* LevelMainCharacter::getCurrentTargetEnemy() const {
-	return m_targetedEnemy;
-}
-
-void LevelMainCharacter::setLastHitEnemy(Enemy* enemy) {
-	if (m_lastHitEnemy) m_lastHitEnemy->setLastHit(false);
-	m_lastHitEnemy = enemy;
-	if (m_lastHitEnemy) m_lastHitEnemy->setLastHit(true);
-}
-
-Enemy* LevelMainCharacter::getLastHitEnemy() const {
-	return m_lastHitEnemy;
 }
 
 bool LevelMainCharacter::isAlly() const {

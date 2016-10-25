@@ -95,7 +95,12 @@ void HealthBar::setName(const std::string& name) {
 	m_name.setPosition(m_barLeft + 0.5f * (m_barWidth - bounds.width), m_barTop + BAR_HEIGHT + 10.f);
 }
 
+void HealthBar::setVisible(bool visible) {
+	m_isVisible = visible;
+}
+
 void HealthBar::render(sf::RenderTarget& target) {
+	if (!m_isVisible) return;
 	target.draw(m_bar);
 	target.draw(m_hitOverlay);
 	target.draw(m_border);

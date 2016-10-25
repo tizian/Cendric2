@@ -161,6 +161,5 @@ private:
 	bool m_isBoss = false;
 	// is this enemy currently targeted by the main character
 	bool m_isTargetedEnemy = false;
-	bool m_isLastHitEnemy = false;
 	sf::Sprite m_targetSprite;
 };

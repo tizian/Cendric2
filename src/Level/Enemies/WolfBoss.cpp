@@ -34,9 +34,6 @@ WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	
 	m_isInvincible = true;
 	m_isAlwaysUpdate = true;
-
-	// Make boss hp bar appear from the start
-	m_mainChar->setLastHitEnemy(this);
 }
 
 void WolfBoss::loadAttributes() {

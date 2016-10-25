@@ -235,5 +235,3 @@ bool InputController::isScrolledUp() const {
 bool InputController::isScrolledDown() const {
 	return isKeyJustPressed(Key::Down) || isMouseWheelScrolledDown();
 }
-
-

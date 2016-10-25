@@ -8,6 +8,7 @@
 #include "Screens/Screen.h"
 #include "CharacterCore.h"
 #include "MainCharacter.h"
+#include "TargetManager.h"
 
 // Cendric in a level
 class LevelMainCharacter : public virtual LevelMovableGameObject, public virtual MainCharacter {
@@ -19,6 +20,7 @@ public:
 	void load();
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
+	void onHit(Spell* spell) override;
 
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableGameObject::renderAfterForeground(target); }
@@ -49,15 +51,11 @@ public:
 	bool isAlly() const override;
 	bool isClimbing() const;
 
-	void setTargetEnemy(Enemy* enemy);
-	Enemy* getCurrentTargetEnemy() const;
-	void setLastHitEnemy(Enemy* enemy);
-	Enemy* getLastHitEnemy() const;
-
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
 
 	GameObjectType getConfiguredType() const override;
+	TargetManager& getTargetManager();
 
 protected:
 	std::string getSpritePath() const override;
@@ -73,13 +71,11 @@ private:
 
 private:
 	CharacterCore* m_core;
+	TargetManager* m_targetManager;
 	
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;
-
-	Enemy* m_targetedEnemy = nullptr;
-	Enemy* m_lastHitEnemy = nullptr;
 
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);

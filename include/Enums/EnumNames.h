@@ -334,6 +334,8 @@ public:
 			return "MoveUp";
 		case Key::ToggleTooltips:
 			return "ToggleTooltips";
+		case Key::SwitchTarget:
+			return "SwitchTarget";
 		case Key::Screenshot:
 			return "Screenshot";
 		}

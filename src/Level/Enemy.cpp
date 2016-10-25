@@ -74,9 +74,6 @@ void Enemy::onHit(Spell* spell) {
 	}
 
 	const MovableGameObject* owner = spell->getOwner();
-	if (m_isHPBarVisible && owner != nullptr && owner->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
-		m_mainChar->setLastHitEnemy(this);
-	}
 
 	LevelMovableGameObject::onHit(spell);
 	m_chasingTime = getConfiguredChasingTime();
@@ -344,7 +341,7 @@ void Enemy::onRightClick() {
 		}
 	}
 	else if (!m_isDead && !isAlly() && m_isHPBarVisible) {
-		m_mainChar->setTargetEnemy(this);
+		m_mainChar->getTargetManager().setTargetEnemy(this);
 	}
 	g_inputController->lockAction();
 }
@@ -371,10 +368,7 @@ void Enemy::setDead() {
 	m_buffBar->clear();
 
 	if (m_isTargetedEnemy) {
-		m_mainChar->setTargetEnemy(nullptr);
-	}
-	if (m_isLastHitEnemy) {
-		m_mainChar->setLastHitEnemy(nullptr);
+		m_mainChar->getTargetManager().setTargetEnemy(nullptr);
 	}
 
 	if (isAlly()) {
@@ -433,8 +427,4 @@ void Enemy::resetMovingTarget() {
 
 void Enemy::setTargeted(bool targeted) {
 	m_isTargetedEnemy = targeted;
-}
-
-void Enemy::setLastHit(bool lastHit) {
-	m_isLastHitEnemy = lastHit;
 }

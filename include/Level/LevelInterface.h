@@ -40,6 +40,8 @@ public:
 	void notifyCharacterInfo();
 	// returns if an enemy health bar is currently displayed
 	bool isEnemyHealthBarDisplayed();
+	// sets the whose healthbar should be displayed
+	void setEnemyForHealthBar(const Enemy* enemy);
 
 	void render(sf::RenderTarget& target) override;
 	void renderAfterForeground(sf::RenderTarget& target) override;

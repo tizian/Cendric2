@@ -112,6 +112,10 @@ void LevelScreen::notifyBossKilled(std::map<std::string, int>& items, int gold) 
 	m_isBossDefeated = true;
 }
 
+void LevelScreen::setEnemyForHealthBar(const Enemy* enemy) {
+	dynamic_cast<LevelInterface*>(m_interface)->setEnemyForHealthBar(enemy);
+}
+
 void LevelScreen::clearConsumedFood() {
 	dynamic_cast<LevelInterface*>(m_interface)->clearConsumedFood();
 }

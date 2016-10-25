@@ -23,6 +23,7 @@ public:
 	const AttributeData* getAttributes() const;
 	void setAttributes(const AttributeData* attributes);
 	void setName(const std::string& name);
+	void setVisible(bool visible);
 
 private:
 	const AttributeData* m_attributes;
@@ -35,6 +36,7 @@ private:
 	sf::Time m_waitTime;
 	sf::Time m_shrinkTime;
 
+	bool m_isVisible = true;
 	bool m_showTooltip = false;
 	TooltipWindow m_tooltipWindow;
 

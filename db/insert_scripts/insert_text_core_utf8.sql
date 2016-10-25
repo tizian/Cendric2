@@ -249,6 +249,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Spel
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SpellInvisibility','Invisibility','Unsichtbarkeit','Unsichtbarkeit','Invisibilidad');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SpellInvisibilityDesc','Renders Cendric invisible for a certain duration for certain enemies','Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.','Hace invisible a Cendric ante algunos enemigos por cierto tiempo.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToInteract','to interact','- interagieren','zum interagiere','para interactuar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SwitchTarget','Switch target','Ziel wechseln','Ziel ändere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToTalk','to talk','- reden','zum rede','para hablar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToCook','to cook','- kochen','zum choche','para cocinar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToPickup','to pickup','- aufnehmen','zum neh','para recoger');

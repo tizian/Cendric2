@@ -56,7 +56,8 @@ std::map < Key, sf::Keyboard::Key >(
 	{ Key::FifthSpell, sf::Keyboard::Num5 },
 	{ Key::QuickSlot1, sf::Keyboard::Num6 },
 	{ Key::QuickSlot2, sf::Keyboard::Num7 },
-	{ Key::ToggleTooltips, sf::Keyboard::Tab },
+	{ Key::ToggleTooltips, sf::Keyboard::LAlt },
+	{ Key::SwitchTarget, sf::Keyboard::Tab },
 	{ Key::Screenshot, sf::Keyboard::F10 },
 	{ Key::Debug, sf::Keyboard::F11 }
 });
@@ -97,6 +98,7 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 		{ Key::QuickSlot1, sf::Keyboard::Numpad6 },
 		{ Key::QuickSlot2, sf::Keyboard::Numpad7 },
 		{ Key::ToggleTooltips, sf::Keyboard::KeyCount },
+		{ Key::SwitchTarget, sf::Keyboard::KeyCount },
 		{ Key::Screenshot, sf::Keyboard::KeyCount },
 		{ Key::Debug, sf::Keyboard::KeyCount }
 	}),

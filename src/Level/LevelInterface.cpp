@@ -18,9 +18,11 @@ m_character(character) {
 	if (level->getWorldData()->bossLevelData.isBossLevel) {
 		// Assume first enemy in level is boss
 		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Boss);
+		m_enemyHealthBar->setVisible(true);
 	}
 	else {
 		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Enemy);
+		m_enemyHealthBar->setVisible(false);
 	}
 }
 
@@ -43,9 +45,7 @@ void LevelInterface::render(sf::RenderTarget& target) {
 	m_buffBar->render(target);
 
 	m_mainCharHealthBar->render(target);
-	if (m_character->getCurrentTargetEnemy() || m_character->getLastHitEnemy()) {
-		m_enemyHealthBar->render(target);
-	}
+	m_enemyHealthBar->render(target);
 	
 	m_spellSelection->render(target);
 	m_quickSlotBar->render(target);
@@ -69,21 +69,22 @@ void LevelInterface::update(const sf::Time& frameTime) {
 	WorldInterface::update(frameTime);
 
 	m_mainCharHealthBar->update(frameTime);
-	Enemy* targetEnemy = m_character->getCurrentTargetEnemy();
-	Enemy* lastHitEnemy = m_character->getLastHitEnemy();
-	if (targetEnemy) {
-		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyName(targetEnemy->getEnemyID()), "enemy"));
-		m_enemyHealthBar->setAttributes(targetEnemy->getAttributes());
-	}
-	else if (lastHitEnemy) {
-		m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyName(lastHitEnemy->getEnemyID()), "enemy"));
-		m_enemyHealthBar->setAttributes(lastHitEnemy->getAttributes());
-	}
 	m_enemyHealthBar->update(frameTime);
 
 	m_buffBar->update(frameTime);
 	m_spellSelection->update(frameTime);
 	m_quickSlotBar->update(frameTime);
+}
+
+void LevelInterface::setEnemyForHealthBar(const Enemy* enemy) {
+	if (enemy == nullptr) {
+		m_enemyHealthBar->setVisible(false);
+		m_enemyHealthBar->setAttributes(nullptr);
+		return;
+	}
+	m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyName(enemy->getEnemyID()), "enemy"));
+	m_enemyHealthBar->setAttributes(enemy->getAttributes());
+	m_enemyHealthBar->setVisible(true);
 }
 
 BuffBar& LevelInterface::getBuffBar() {

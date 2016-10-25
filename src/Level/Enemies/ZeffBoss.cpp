@@ -26,9 +26,6 @@ void ZeffBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) co
 ZeffBoss::ZeffBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-
-	// Make boss hp bar appear from the start
-	m_mainChar->setLastHitEnemy(this);
 }
 
 void ZeffBoss::loadAttributes() {
