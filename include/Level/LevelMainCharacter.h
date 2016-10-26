@@ -55,7 +55,7 @@ public:
 	int getInvisibilityLevel() const;
 
 	GameObjectType getConfiguredType() const override;
-	TargetManager& getTargetManager();
+	TargetManager& getTargetManager() const;
 
 protected:
 	std::string getSpritePath() const override;

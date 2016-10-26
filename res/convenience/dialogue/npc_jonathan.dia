@@ -435,9 +435,9 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_LearnedFireball2
-	translation.en:My research focuses on the old, forgotten knowledge of the first elementalists. But lately, I get the impression that someone is trying to disturb my work.
-	translation.de:Ich forsche an dem alten, vergessenen Wissen der ersten Elementarmagier. Aber je länger je mehr habe ich das Gefühl, dass jemand versucht, meine Arbeit zu stören.
-	translation.ch:Ich forsche am alte, vergessene Wüsse vode erste Elementarmager. Aber je länger je me hanis Gfühl, dass öpper probiert, mini Arbet z'störe.
+	translation.en:My research focuses on the old, forgotten knowledge of the first elementalists. I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
+	translation.de:Ich forsche an dem alten, vergessenen Wissen der ersten Elementarmagier. Ich habe bereits herausgefunden, dass sie früher Zauber kannten, die weit mächtiger sind, als alle Elementarmagie, die wir heute kennen.
+	translation.ch:Ich forsche am alte, vergessene Wüsse vode erste Elementarmager. Ich han scho usegfunde, das si früener viel mächtigeri Zauber kennt hend, als alli Elementarmagie, womer hüt so bruched.
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -449,9 +449,23 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_LearnedFireball3
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.en:I've found evidence that there's an abandoned site of the first Elementalists somewhere near Gandria, that's why I'm working here.
+	translation.de:Ich habe Beweise gefunden, dass es irgendwo in der Nähe der Stadt Gandria eine verlassene Stätte der ersten Elementarmagier gibt, deshalb arbeite ich hier.
+	translation.ch:Ich han Bewiis gfunde, dass es irgendwo ide Nöchi vo Gandria en verlassene Ort git wo di erste Elementarmagier gläbt hend, drum schaffi au da.
+	[
+		# Link node, tag is next tag
+		tag:25
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_LearnedFireball4
+	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lay there. But there's only one small problem with that map...
+	translation.de:Ich bin mir ziemlich sicher dass diese Karte, die Cyrus mir geschickt hat, der Schlüssel ist, um diesen Ort zu finden. Allerdings gibt es da ein kleines Problem mit dieser Karte...
+	translation.ch:Ich bi mer zimli sicher dass die Charte, wo de Cyrus mir gschickt het, de Schlüssel isch zum de Ort z'finde. Es git da aber es chlises Problem mit dere Charte...
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -324,7 +324,7 @@ void LevelMainCharacter::loadAnimation() {
 	loadParticleSystem();
 }
 
-TargetManager& LevelMainCharacter::getTargetManager() {
+TargetManager& LevelMainCharacter::getTargetManager() const {
 	return *m_targetManager;
 }
 

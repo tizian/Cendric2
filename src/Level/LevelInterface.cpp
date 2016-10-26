@@ -18,12 +18,11 @@ m_character(character) {
 	if (level->getWorldData()->bossLevelData.isBossLevel) {
 		// Assume first enemy in level is boss
 		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Boss);
-		m_enemyHealthBar->setVisible(true);
 	}
 	else {
 		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Enemy);
-		m_enemyHealthBar->setVisible(false);
 	}
+	m_enemyHealthBar->setVisible(false);
 }
 
 LevelInterface::~LevelInterface() {

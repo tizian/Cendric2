@@ -73,7 +73,11 @@ void Enemy::onHit(Spell* spell) {
 		return;
 	}
 
-	const MovableGameObject* owner = spell->getOwner();
+	if (const LevelMainCharacter* owner = dynamic_cast<const LevelMainCharacter*>(spell->getOwner())) {
+		if (!owner->getTargetManager().getCurrentTargetEnemy()) {
+			owner->getTargetManager().setTargetEnemy(this);
+		}
+	}
 
 	LevelMovableGameObject::onHit(spell);
 	m_chasingTime = getConfiguredChasingTime();

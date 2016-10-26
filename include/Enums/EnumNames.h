@@ -93,14 +93,11 @@ public:
 		switch (id) {
 		default:
 		case FractionID::MAX:
-		case FractionID::VOID:
 			return "Unknown";
+		case FractionID::VOID:
+			return "NoGuild";
 		case FractionID::Cleric:
 			return "cleric";
-		case FractionID::Druid:
-			return "druid";
-		case FractionID::Elementalist:
-			return "elementalist";
 		case FractionID::Necromancer:
 			return "necromancer";
 		case FractionID::Thief:

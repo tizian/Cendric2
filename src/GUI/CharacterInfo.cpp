@@ -255,6 +255,8 @@ void CharacterInfo::render(sf::RenderTarget& target) {
 		}
 	}
 	else if (m_tabBar->getActiveTabIndex() == 1) {
+		target.draw(m_guild);
+		target.draw(m_guildSprite);
 		for (auto& text : m_reputationTexts) {
 			target.draw(text);
 		}
@@ -351,11 +353,37 @@ void CharacterInfo::updateReputation() {
 	m_reputationTexts.clear();
 
 	float yOffset = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y + GUIConstants::CHARACTER_SIZE_M;
+	float xOffset = 3 * GUIConstants::TEXT_OFFSET + GUIConstants::LEFT;
+
+	std::string currentGuild;
+	currentGuild.append(g_textProvider->getText("Guild"));
+	currentGuild.append(": ");
+	currentGuild.append(g_textProvider->getText(EnumNames::getFractionIDName(m_core->getData().guild)));
+	m_guild.setString(currentGuild);
+	m_guild.setPosition(xOffset, yOffset);
+	m_guild.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+
+	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
+	
+	auto* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUILDICONS);
+	int texHeight = 100;
+	if (tex != nullptr)
+		m_guildSprite.setTexture(*tex);
+	m_guildSprite.setPosition(xOffset, yOffset);
+	if (m_core->getData().guild == FractionID::VOID) {
+		m_guildSprite.setTextureRect(sf::IntRect());
+	}
+	else {
+		m_guildSprite.setTextureRect(sf::IntRect(texHeight * (static_cast<int>(m_core->getData().guild) - 1), 0, texHeight, texHeight));
+		yOffset += texHeight;
+	}
+
+	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
 
 	if (m_core->getData().reputationProgress.empty()) {
 		BitmapText noRep;
 		noRep.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-		noRep.setPosition(2 * GUIConstants::TEXT_OFFSET + GUIConstants::LEFT, yOffset);
+		noRep.setPosition(xOffset, yOffset);
 		noRep.setColor(COLOR_LIGHT_PURPLE);
 		noRep.setString(g_textProvider->getCroppedText("NoReputation", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 2 * GUIConstants::TEXT_OFFSET)));
 		m_reputationTexts.push_back(noRep);
@@ -366,7 +394,7 @@ void CharacterInfo::updateReputation() {
 		BitmapText title;
 		title.setString(g_textProvider->getText(EnumNames::getFractionIDName(rep.first)) + ": " + std::to_string(rep.second));
 		title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-		title.setPosition(2 * GUIConstants::TEXT_OFFSET + GUIConstants::LEFT, yOffset);
+		title.setPosition(xOffset, yOffset);
 		title.setColor(COLOR_WHITE);
 		m_reputationTexts.push_back(title);
 
@@ -377,7 +405,7 @@ void CharacterInfo::updateReputation() {
 			(rep.second >= 75 ? "100" : rep.second >= 50 ? "75" : rep.second >= 25 ? "50" : "25");
 		subtitle.setString(g_textProvider->getCroppedText(key, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 2 * GUIConstants::TEXT_OFFSET)));
 		subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-		subtitle.setPosition(2 * GUIConstants::TEXT_OFFSET + GUIConstants::LEFT, yOffset);
+		subtitle.setPosition(xOffset, yOffset);
 		subtitle.setColor(COLOR_LIGHT_PURPLE);
 		m_reputationTexts.push_back(subtitle);
 

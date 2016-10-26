@@ -89,6 +89,8 @@ private:
 	std::vector<BitmapText> m_nameTexts;
 	std::vector<BitmapText> m_attributeTexts;
 
+	BitmapText m_guild;
+	sf::Sprite m_guildSprite;
 	std::vector<BitmapText> m_reputationTexts;
 
 	std::vector<HintEntry> m_hintEntries;
@@ -97,7 +99,7 @@ private:
 
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;
-	ScrollHelper *m_scrollHelper = nullptr;
+	ScrollHelper* m_scrollHelper = nullptr;
 
 	HintDescriptionWindow* m_descriptionWindow = nullptr;
 

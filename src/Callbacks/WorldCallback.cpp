@@ -28,6 +28,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("hasItem", &WorldCallback::hasItem)
 		.addFunction("getItemAmount", &WorldCallback::getItemAmount)
 		.addFunction("getReputation", &WorldCallback::getReputation)
+		.addFunction("getGuild", &WorldCallback::getGuild)
 		// commands
 		.addFunction("changeQuestState", &WorldCallback::changeQuestState)
 		.addFunction("addQuestProgress", &WorldCallback::addQuestProgress)
@@ -94,6 +95,13 @@ int WorldCallback::getReputation(const std::string& fractionID) const {
 		return false;
 	}
 	return m_core->getReputation(frac);
+}
+
+std::string WorldCallback::getGuild() const {
+	if (m_core->getData().guild == FractionID::VOID) {
+		return "void";
+	}
+	return EnumNames::getFractionIDName(m_core->getData().guild);
 }
 
 bool WorldCallback::hasItem(const std::string& itemID, int amount) const {

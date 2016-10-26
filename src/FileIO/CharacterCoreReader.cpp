@@ -455,6 +455,24 @@ bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreD
 	return true;
 }
 
+bool CharacterCoreReader::readGuild(char* start, char* end, CharacterCoreData& data) const {
+	char* startData = gotoNextChar(start, end, ':');
+	startData++;
+	string fractionName(startData);
+	int count = countToNextChar(startData, end, '\n');
+	if (count == -1) {
+		return false;
+	}
+	fractionName = fractionName.substr(0, count);
+
+	FractionID id = resolveFractionID(fractionName);
+	if (id == FractionID::VOID) {
+		return true;
+	}
+	data.guild = id;
+	return true;
+}
+
 bool CharacterCoreReader::readReputationProgress(char* start, char* end, CharacterCoreData& data) const {
 	char* startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -467,8 +485,8 @@ bool CharacterCoreReader::readReputationProgress(char* start, char* end, Charact
 
 	FractionID id = resolveFractionID(fractionName);
 	if (id == FractionID::VOID) {
-		g_logger->logError("CharacterCoreReader", "Fraction ID not recognized: " + fractionName);
-		return false;
+		g_logger->logWarning("CharacterCoreReader", "Fraction ID not recognized: " + fractionName);
+		return true;
 	}
 
 	startData = gotoNextChar(startData, end, ',');
@@ -1098,6 +1116,10 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		}
 		else if (strncmp(pos, HINT_LEARNED, strlen(HINT_LEARNED)) == 0) {
 			noError = readLearnedHints(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, GUILD, strlen(GUILD)) == 0) {
+			noError = readGuild(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, REPUTATION_PROGRESS, strlen(REPUTATION_PROGRESS)) == 0) {

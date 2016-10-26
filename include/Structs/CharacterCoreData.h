@@ -7,6 +7,7 @@
 #include "Enums/QuestState.h"
 #include "Enums/SpellID.h"
 #include "Enums/SpellType.h"
+#include "Enums/FractionID.h"
 
 #include "Structs/SpellModifier.h"
 #include "Structs/AttributeData.h"
@@ -20,6 +21,7 @@ struct CharacterCoreData {
 	std::time_t dateSaved;
 
 	// position & progress
+	FractionID guild;
 	bool isInLevel;
 	std::string currentMap;
 	sf::Vector2f currentMapPosition;
@@ -78,6 +80,7 @@ const CharacterCoreData DEFAULT_CORE
 	sf::Time::Zero,
 	"",
 	time(nullptr),
+	FractionID::VOID,
 	false,
 	"",
 	sf::Vector2f(),

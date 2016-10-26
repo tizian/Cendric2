@@ -253,7 +253,6 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("broken_bridge", "started") and DL:isQuestComplete("broken_bridge")) then
 		DL:createNPCNode(90, 91, "DL_Rhendal_ThankForSchnaps") -- Oh, perfect, thank you. So you managed to cross the river. Hmm, a truly special drink. Do you want some? 
 		DL:changeQuestState("broken_bridge", "completed")
-		DL:addReputationProgress("druid", 10)
 		DL:removeItem("pe_feudalfire", 1)
 		DL:addNode()
 		
@@ -264,7 +263,6 @@ loadDialogue = function(DL)
 		
 		DL:createNPCNode(92, 93, "DL_Rhendal_GivesSchnapps") -- Yes, that's the right decision. Here, take a glass.
 		DL:addItem("pe_glassoffeudalfire", 1)
-		DL:addReputationProgress("druid", 5)
 		DL:addNode()
 		
 		DL:createCendricNode(93, -2, "DL_Cendric_Thanks") -- Thanks.
@@ -275,7 +273,6 @@ loadDialogue = function(DL)
 		
 	elseif (DL:hasItem("qe_spoiledfeudalfire", 1)) then
 		DL:createNPCNode(90, 91, "DL_Rhendal_ThankForSchnaps") -- Oh, perfect, thank you. So you managed to cross the river. Hmm, a truly special drink. Do you want some? 
-		DL:addReputationProgress("druid", 5)
 		DL:addConditionProgress("npc_rhendal", "spoiled_schnapps")
 		DL:removeItem("qe_spoiledfeudalfire", 1)
 		DL:addNode()

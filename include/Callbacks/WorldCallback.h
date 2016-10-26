@@ -28,6 +28,7 @@ public:
 	bool isSpellLearned(int spellID);
 	int getItemAmount(const std::string& itemID) const; // this can also query gold. with item id "gold"
 	int getReputation(const std::string& fractionID) const;
+	std::string getGuild() const;
 
 	// commands to be executed by triggers
 	void changeQuestState(const std::string& questID, const std::string& state) const;
@@ -46,7 +47,7 @@ public:
 	void startMap(const std::string& mapID, int x, int y) const;
 	void startCutscene(const std::string& cutsceneID) const;
 
-	// commands to spawn entities
+	// TODO commands to spawn entities
 
 	// this works only on a map
 	void spawnNPC(const std::string& npcID, int x, int y) const;

@@ -49,6 +49,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeQuestProgressConditions(data);
 		savefile << writeQuestProgressDescription(data);
 		savefile << writeProgressConditions(data);
+		savefile << writeGuild(data);
 		savefile << writeReputationProgress(data);
 		savefile << writeMerchandStates(data);
 		savefile << writeSpellsLearned(data);
@@ -301,6 +302,17 @@ std::string CharacterCoreWriter::writeHintsLearned(const CharacterCoreData& data
 	}
 
 	return hintList;
+}
+
+std::string CharacterCoreWriter::writeGuild(const CharacterCoreData& data) const {
+	string guild = "# guild:\n";
+
+	guild.append(string(GUILD));
+	guild.append(":");
+	guild.append(EnumNames::getFractionIDName(data.guild));
+	guild.append("\n");
+
+	return guild;
 }
 
 std::string CharacterCoreWriter::writeReputationProgress(const CharacterCoreData& data) const {
