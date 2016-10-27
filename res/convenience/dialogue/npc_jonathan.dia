@@ -23,6 +23,11 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:17
+		condition:not DL:isConditionFulfilled("npc_jonathan", "decipher_map")
+	]
+	[
+		# Link node, tag is next tag
+		tag:27
 	]
 }
 {1
@@ -466,6 +471,98 @@ npc.id:npc_jonathan
 	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lay there. But there's only one small problem with that map...
 	translation.de:Ich bin mir ziemlich sicher dass diese Karte, die Cyrus mir geschickt hat, der Schlüssel ist, um diesen Ort zu finden. Allerdings gibt es da ein kleines Problem mit dieser Karte...
 	translation.ch:Ich bi mer zimli sicher dass die Charte, wo de Cyrus mir gschickt het, de Schlüssel isch zum de Ort z'finde. Es git da aber es chlises Problem mit dere Charte...
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "decipher_map")
+	# translation: 
+	translation.tag:DL_Jonathan_LearnedFireball5
+	translation.en:To decipher it, elemental magic is not sufficient. But elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
+	translation.de:Elementarmagie alleine reicht nicht, um sie zu entschlüsseln. Kombiniert mit einem anderen Typ der Magie müsste man den Schutzzauber aber brechen können.
+	translation.ch:Elementarmagie elei langt nid zum si entschlüssle. Zeme mit enere andere Magieart sötmes aber anebringe, de Schutzzauber z'breche.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [27] Choice Node
+	tag:27
+	[
+		# Link node, tag is next tag
+		tag:28
+		condition:not DL:isConditionFulfilled("npc_jonathan", "another_mage")
+		# translation: 
+		translation.tag:DL_Choice_AnotherMage
+		translation.en:So, should we ask another mage to help us?
+		translation.de:Sollten wir also einen weiteren Magier um Hilfe bitten?
+		translation.ch:Söttemer also en andere Magier um Hilf bitte?
+	]
+	[
+		# Link node, tag is next tag
+		tag:29
+		condition:not DL:isConditionFulfilled("npc_jonathan", "what_about_you")
+		# translation: 
+		translation.tag:DL_Choice_WhatAboutYou
+		translation.en:What about you? Don't you know some other spells?
+		translation.de:Was ist mit dir? Kennst du keine anderen Zauber?
+		translation.ch:Was isch mit dir? Kennsch du ke anderi Zauber?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_-2
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "another_mage")
+	# translation: 
+	translation.tag:DL_Jonathan_AnotherMage
+	translation.en:To be honest, I don't really trust any other mage in the city. The less people know about this map, the better.
+	translation.de:Um ehrlich zu sein traue ich keinem anderen Magier in der Stadt. Je weniger Leute von dieser Karte wissen, desto besser.
+	translation.ch:Zum ehrlich si trau ich kem andere Magier i dere Stadt. Je weniger Lüt vo dere Charte wüssed, desto besser.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "what_about_you")
+	# translation: 
+	translation.tag:DL_Jonathan_WhatAboutYou
+	translation.en:Although we elementalists can learn every type of magic, I've always focused my studies on elemental magic only. 
+	translation.de:Obwohl wir Elementarmagier jede Magieart erlernen können, habe ich mich bisher nur mit Elementarmagie beschäftigt.
+	translation.ch:Obwohl mir Elementarmagier jedi Magieart lerne chönd, hani mich bis ez nur mit Elementarmagie beschäftigt.
+	[
+		# Link node, tag is next tag
+		tag:30
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WhatAboutYou2
+	translation.en:And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citicens of Gandria. Someone like you.
+	translation.de:Und jetzt ist es zu riskant für mich, etwas neues zu lernen. Nein, ich brauche jemanden, dessen Gesicht hier in Gandria nicht so bekannt ist. Jemanden wie dich.
+	translation.ch:Und jetz isches zu riskant für mich zum öppis neus z'lerne. Nei, ich bruch öpper mitme unbekanntere Gsicht da in Gandria. Öppert we dich.
 	[
 		# Link node, tag is next tag
 		tag:-2
