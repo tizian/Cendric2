@@ -7,8 +7,10 @@ loadDialogue = function(DL)
 		DL:setRoot(5) 
 	elseif (DL:isQuestState("essence_of_fire", "void")) then 
 		DL:setRoot(11) 
-	else 
+	elseif (not DL:isConditionFulfilled("npc_jonathan", "decipher_map")) then 
 		DL:setRoot(17) 
+	else 
+		DL:setRoot(27) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "talked")) then 
@@ -142,42 +144,110 @@ loadDialogue = function(DL)
 
 	end
 
+	if (not DL:isConditionFulfilled("npc_jonathan", "decipher_map")) then 
 
-	DL:createChoiceNode(17)
-	if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
-		DL:addChoice(20, "DL_Choice_GotFireEssence") -- I got the essences of fire for you.
+		DL:createChoiceNode(17)
+		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
+			DL:addChoice(20, "DL_Choice_GotFireEssence") -- I got the essences of fire for you.
+		end
+		if (DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)) then 
+			DL:addChoice(22, "DL_Choice_LearntFireball") -- I've read the scroll.
+		end
+		DL:addChoice(-1, "DL_Choice_CU") -- See you later.
+		DL:addNode()
+
+		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
+
+			DL:createNPCNode(20, 21, "DL_Jonathan_EssenceComplete") -- Very good. Maybe you can still become a decent elementalist.
+			DL:changeQuestState("essence_of_fire", "completed")
+			DL:removeItem("qe_fireessence", 10)
+			DL:addNode()
+
+
+			DL:createNPCNode(21, -1, "DL_Jonathan_EssenceComplete2") -- Here, take this scroll and read it. Talk to me when you've learned the spell.
+			DL:addItem("sp_fireball", 1)
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)) then 
+
+			DL:createNPCNode(22, 23, "DL_Jonathan_LearnedFireball") -- And you've already acquired its knowledge. I think we're ready to get started then.
+			DL:addNode()
+
+
+			DL:createNPCNode(23, 24, "DL_Jonathan_LearnedFireball2") -- My research focuses on the old, forgotten knowledge of the first elementalists. I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
+			DL:addNode()
+
+
+			DL:createNPCNode(24, 25, "DL_Jonathan_LearnedFireball3") -- I've found evidence that there's an abandoned site of the first Elementalists somewhere near Gandria, that's why I'm working here.
+			DL:addNode()
+
+
+			DL:createNPCNode(25, 26, "DL_Jonathan_LearnedFireball4") -- I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lay there. But there's only one small problem with that map...
+			DL:addNode()
+
+
+			DL:createNPCNode(26, -2, "DL_Jonathan_LearnedFireball5") -- To decipher it, elemental magic is not sufficient. But elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
+			DL:addConditionProgress("npc_jonathan", "decipher_map")
+			DL:addNode()
+
+		end
+
 	end
-	if (DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)) then 
-		DL:addChoice(22, "DL_Choice_LearntFireball") -- I've read the scroll.
+
+
+	DL:createChoiceNode(27)
+	if (not DL:isConditionFulfilled("npc_jonathan", "another_mage")) then 
+		DL:addChoice(28, "DL_Choice_AnotherMage") -- So, should we ask another mage to help us?
 	end
-	DL:addChoice(-1, "DL_Choice_CU") -- See you later.
+	if (not DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+		DL:addChoice(29, "DL_Choice_WhatAboutYou") -- What about you? Don't you know some other spells?
+	end
+	if (not DL:isConditionFulfilled("npc_jonathan", "break_protection")) then 
+		DL:addChoice(31, "DL_Choice_BreakingProtection") -- Do you think breaking a protection spell is a good idea?
+	end
+	if (not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+		DL:addChoice(32, "DL_Choice_WhyRisky") -- Why is that risky for you?
+	end
 	DL:addNode()
 
-	if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "another_mage")) then 
 
-		DL:createNPCNode(20, 21, "DL_Jonathan_EssenceComplete") -- Very good. Maybe you can still become a decent elementalist.
-		DL:changeQuestState("essence_of_fire", "completed")
-		DL:removeItem("qe_fireessence", 10)
-		DL:addNode()
-
-
-		DL:createNPCNode(21, -1, "DL_Jonathan_EssenceComplete2") -- Here, take this scroll and read it. Talk to me when you've learned the spell.
-		DL:addItem("sp_fireball", 1)
+		DL:createNPCNode(28, -2, "DL_Jonathan_AnotherMage") -- To be honest, I don't really trust any other mage in the city. The less people know about this map, the better.
+		DL:addConditionProgress("npc_jonathan", "another_mage")
 		DL:addNode()
 
 	end
 
-	if (DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)) then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
 
-		DL:createNPCNode(22, 23, "DL_Jonathan_LearnedFireball") -- And you've already acquired its knowledge. I think we're ready to get started then.
+		DL:createNPCNode(29, 30, "DL_Jonathan_WhatAboutYou") -- Although we elementalists can learn every type of magic, I've always focused my studies on elemental magic only. 
+		DL:addConditionProgress("npc_jonathan", "what_about_you")
 		DL:addNode()
 
 
-		DL:createNPCNode(23, 24, "DL_Jonathan_LearnedFireball2") -- My research focuses on the old, forgotten knowledge of the first elementalists. But lately, I get the impression that someone is trying to disturb my work.
+		DL:createNPCNode(30, -2, "DL_Jonathan_WhatAboutYou2") -- And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citicens of Gandria. Someone like you.
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_jonathan", "break_protection")) then 
+
+		DL:createNPCNode(31, -2, "DL_Jonathan_BreakingProtection") -- You mean, there's a good reason for this spell? Well, if there is, we'll find out soon enough.
+		DL:addConditionProgress("npc_jonathan", "break_protection")
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+
+		DL:createNPCNode(32, 33, "DL_Jonathan_WhyRisky") -- It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
+		DL:addConditionProgress("npc_jonathan", "why_risky")
 		DL:addNode()
 
 
-		DL:createNPCNode(24, -2, "DL_Jonathan_LearnedFireball3") -- 
+		DL:createNPCNode(33, -2, "DL_Jonathan_WhyRisky2") -- It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
 		DL:addNode()
 
 	end

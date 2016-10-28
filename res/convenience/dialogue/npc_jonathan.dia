@@ -516,12 +516,23 @@ npc.id:npc_jonathan
 	]
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:31
+		condition:not DL:isConditionFulfilled("npc_jonathan", "break_protection")
 		# translation: 
-		translation.tag:DL_Choice_-2
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_BreakingProtection
+		translation.en:Do you think breaking a protection spell is a good idea?
+		translation.de:Denkst du es ist eine gute Idee, einen Schutzzauber zu brechen?
+		translation.ch:Denksch denn es seg e gueti Idee, en Schutzzauber z'breche?
+	]
+	[
+		# Link node, tag is next tag
+		tag:32
+		condition:not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")
+		# translation: 
+		translation.tag:DL_Choice_WhyRisky
+		translation.en:Why is that risky for you?
+		translation.de:Wieso ist das riskant für dich?
+		translation.ch:Weso isch da riskant für dich?
 	]
 }
 {1
@@ -563,6 +574,50 @@ npc.id:npc_jonathan
 	translation.en:And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citicens of Gandria. Someone like you.
 	translation.de:Und jetzt ist es zu riskant für mich, etwas neues zu lernen. Nein, ich brauche jemanden, dessen Gesicht hier in Gandria nicht so bekannt ist. Jemanden wie dich.
 	translation.ch:Und jetz isches zu riskant für mich zum öppis neus z'lerne. Nei, ich bruch öpper mitme unbekanntere Gsicht da in Gandria. Öppert we dich.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "break_protection")
+	# translation: 
+	translation.tag:DL_Jonathan_BreakingProtection
+	translation.en:You mean, there's a good reason for this spell? Well, if there is, we'll find out soon enough.
+	translation.de:Du meinst, es gibt einen guten Grund für diesen Zauber? Wenn es den gibt, werden wir es früh genug herausfinden.
+	translation.ch:Du meinsch, es git en guete Grund für de Zauber? Ja wens de git, denn findemer da scho gnueg früe use.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "why_risky")
+	# translation: 
+	translation.tag:DL_Jonathan_WhyRisky
+	translation.en:It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
+	translation.de:Es ist einfach so dass ich in letzter Zeit immer mehr das Gefühl habe, dass jemand versucht, meine Arbeit zu stören. Forschungsnotizen und Leute verschwinden plötzlich... Ich denke nicht dass du eine Ausnahme warst.
+	translation.ch:Es isch eifach so, dass ich i letzter Ziit immer me es Gfühl ha, dass öppert probiert, mini Arbet z'störe. Forschigsnotize und Lüt verschwinded plötzlich... Ich denk nid dass du e Usnahm gsi bisch.
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WhyRisky2
+	translation.en:It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
+	translation.de:Rausgehen scheint keine gute Idee für mich zu sein bis diese Stadt wieder normal ist.
+	translation.ch:Usega isch glaub eifach ke gueti Idee für mich bis die Stadt wider normal isch.
 	[
 		# Link node, tag is next tag
 		tag:-2
