@@ -617,7 +617,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhyRisky2
 	translation.en:It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
 	translation.de:Rausgehen scheint keine gute Idee für mich zu sein bis diese Stadt wieder normal ist.
-	translation.ch:Usega isch glaub eifach ke gueti Idee für mich bis die Stadt wider normal isch.
+	translation.ch:Usega isch glaub eifach ke gueti Idee für mich bis die Stadt wider chli normaler isch.
 	[
 		# Link node, tag is next tag
 		tag:-2
