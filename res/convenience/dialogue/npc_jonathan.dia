@@ -28,6 +28,11 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:27
+		condition:DL:isQuestState("join_a_guild", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:36
 	]
 }
 {1
@@ -483,7 +488,7 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "decipher_map")
 	# translation: 
 	translation.tag:DL_Jonathan_LearnedFireball5
-	translation.en:To decipher it, elemental magic is not sufficient. But elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
+	translation.en:To decipher it, elemental magic is not sufficient. But using elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
 	translation.de:Elementarmagie alleine reicht nicht, um sie zu entschlüsseln. Kombiniert mit einem anderen Typ der Magie müsste man den Schutzzauber aber brechen können.
 	translation.ch:Elementarmagie elei langt nid zum si entschlüssle. Zeme mit enere andere Magieart sötmes aber anebringe, de Schutzzauber z'breche.
 	[
@@ -534,6 +539,16 @@ npc.id:npc_jonathan
 		translation.de:Wieso ist das riskant für dich?
 		translation.ch:Weso isch da riskant für dich?
 	]
+	[
+		# Link node, tag is next tag
+		tag:34
+		condition:DL:isConditionFulfilled("npc_jonathan", "what_about_you")
+		# translation: 
+		translation.tag:DL_Choice_WhatShouldIDo
+		translation.en:I see. So, what should I do?
+		translation.de:Alles klar. Was muss ich also tun?
+		translation.ch:Alles klar. Wa mueni also mache?
+	]
 }
 {1
 	# [28] NPC Node
@@ -571,7 +586,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_WhatAboutYou2
-	translation.en:And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citicens of Gandria. Someone like you.
+	translation.en:And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citizens of Gandria. Someone like you.
 	translation.de:Und jetzt ist es zu riskant für mich, etwas neues zu lernen. Nein, ich brauche jemanden, dessen Gesicht hier in Gandria nicht so bekannt ist. Jemanden wie dich.
 	translation.ch:Und jetz isches zu riskant für mich zum öppis neus z'lerne. Nei, ich bruch öpper mitme unbekanntere Gsicht da in Gandria. Öppert we dich.
 	[
@@ -618,6 +633,151 @@ npc.id:npc_jonathan
 	translation.en:It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
 	translation.de:Rausgehen scheint keine gute Idee für mich zu sein bis diese Stadt wieder normal ist.
 	translation.ch:Usega isch glaub eifach ke gueti Idee für mich bis die Stadt wider chli normaler isch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WhatShouldIDo
+	translation.en:You'll have to learn another type of magic. There are - as far as I know - three mage guilds in Gandria, each focusing on another domain of magic.
+	translation.de:Du wirst eine neue Magieart lernen müssen. In Gandria gibt es - soweit ich weiss - drei Magiergilden, von denen sich jede auf einen anderen Bereich der Magie spezilisiert.
+	translation.ch:Du wirsch e neui Magieart lerne möse. In Gandria gits - sowiit ich weiss - drü verschideni Magiergilde, vo dene sich jedi ufen andere Bereich vode Magie spezialisiert.
+	[
+		# Link node, tag is next tag
+		tag:35
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	trigger:DL:changeQuestState("join_a_guild", "started")
+	# translation: 
+	translation.tag:DL_Jonathan_WhatShouldIDo2
+	translation.en:I guess you already know one of the guilds: The Clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
+	translation.de:Ich nehme an, du kennst bereits eine der Gilden: Die Kleriker. Es gibt aber auch Magier in dieser Stadt, die Nekromantie oder Dämmerungsmagie praktizieren, du musst sie nur finden.
+	translation.ch:Ich denke, du kensch scho eini vode Gilde: D'Kleriker. Es git aber au Magier i dere Stadt, wo Nekromantie oder Dämmerigsmagie praktiziered, du muesch si nur finde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [36] Choice Node
+	tag:36
+	[
+		# Link node, tag is next tag
+		tag:38
+		condition:not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)
+		# translation: 
+		translation.tag:DL_Choice_WhyGuild
+		translation.en:I already know some divine magic. (Summon a light)
+		translation.de:Ich kann bereits heilige Magie. (Ein Licht beschwören)
+		translation.ch:Ich cha aber scho chli heiligi Magie. (Es Liechtli beschwöre)
+	]
+	[
+		# Link node, tag is next tag
+		tag:37
+		condition:not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")
+		# translation: 
+		translation.tag:DL_Choice_WhereNecromancers
+		translation.en:How can I find the Necromancers?
+		translation.de:Wie kann ich die Nekromanten finden?
+		translation.ch:We chan ich d'Nekromante finde?
+	]
+	[
+		# Link node, tag is next tag
+		tag:39
+		condition:not DL:isConditionFulfilled("npc_jonathan", "where_thieves")
+		# translation: 
+		translation.tag:DL_Choice_WhereThieves
+		translation.en:Where can I learn some twilight magic?
+		translation.de:Wo kann ich Dämmerungsmagie lernen?
+		translation.ch:Wo chani Dämmerigsmagie lerne?
+	]
+	[
+		# Link node, tag is next tag
+		tag:40
+		condition:not DL:isConditionFulfilled("npc_jonathan", "where_clerics")
+		# translation: 
+		translation.tag:DL_Choice_WhereClerics
+		translation.en:What if I wanted to join the Clerics?
+		translation.de:Und wenn ich den Klerikern beitreten will?
+		translation.ch:Und wenn ich zude Kleriker wett?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "light")
+	# translation: 
+	translation.tag:DL_Jonathan_Light
+	translation.en:We can't decipher the map using some simple magic. And they will only teach you the powerful spells if they trust you.
+	translation.de:Wir können die Karte nicht mit trivialer Magie entschlüsseln. Und die mächtigen Zauber werden sie dir nur beibringen, wenn sie dir vertrauen.
+	translation.ch:Mir chönd die Charte nid mit trivialer Magie entschlüssle. Und si werded dir di mächtige Zauber erst bibringe, wenn si dir vertraued.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [37] NPC Node
+	tag:37
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "where_necromancers")
+	trigger:DL:addQuestDescription("join_a_guild", 1)
+	# translation: 
+	translation.tag:DL_Jonathan_WhereNecromancers
+	translation.en:They need to stay hidden because their magic is not allowed in Gandria. But if I were you, I'd ask the alchemist Syrah, she seems to know some people.
+	translation.de:Sie dürfen sich nicht öffentlich zeigen weil ihre Magie in Gandria verboten ist. Wenn ich dich wäre, würde ich die Alchemistin Syrah fragen, sie hat wahrscheinlich Kontakte.
+	translation.ch:Si dörfed sich nid öffentlich zeige well iri Magie in Gandria verbote isch. Wenn ich dich wer würi aber mal d'Alchemistin Syrah fröge, si kennt da so Lüt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [39] NPC Node
+	tag:39
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "where_thieves")
+	trigger:DL:addQuestDescription("join_a_guild", 2)
+	# translation: 
+	translation.tag:DL_Jonathan_WhereThieves
+	translation.en:Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
+	translation.de:Magier die sich mit Dämmerungsmagie beschäftigen sind meistens einfach Diebe. Ich würde in der Kanalisation von Gandria mit der Suche beginnen.
+	translation.ch:Magier wo sich mit Dämmerigsmagie beschäftiged sind meistens eifach Dieb. Ich wür ide Kanalisation vo Gandria afange sueche.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "where_clerics")
+	trigger:DL:addQuestDescription("join_a_guild", 3)
+	# translation: 
+	translation.tag:DL_Jonathan_WhereClerics
+	translation.en:Try to gain the trust of their leader and convince them of your skills.
+	translation.de:Versuch, das Vertrauen ihres Anführers zu gewinnen und überzeug sie von deinen Fähigkeiten.
+	translation.ch:Probier, es Vertraue vo ihrem Aführer z'becho und zeig ihne wad so druf hesch.
 	[
 		# Link node, tag is next tag
 		tag:-2

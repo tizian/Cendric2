@@ -53,11 +53,6 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:41
-		condition:DL:isConditionFulfilled("npc_vincent2", "second_quest")
-	]
-	[
-		# Link node, tag is next tag
-		tag:-1
 	]
 }
 {1
@@ -803,7 +798,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_TeachUnlock
 	translation.en:Of course. Just read this scroll and I can offer your more work in this... domain. (Grins) 
 	translation.de:Natürlich. Lies einfach diese Schriftrolle und ich kann dir einen weiteren Auftrag anbieten, falls du noch an Arbeit in diesem... Bereich interessiert bist. (Grinst)
-	translation.ch:Natürlich. Lies eifach die Schriftrolle und ich chan dir na en wiitere Job abüte, fallsd immer na a Arbet i dem... Bereich interessiert bisch.
+	translation.ch:Natürlich. Lies eifach die Schriftrolle und ich chan dir na en wiitere Job abüte, fallsd immer na a Arbet i dem... Bereich interessiert bisch. (Grinst)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -814,7 +809,7 @@ npc.id:npc_vincent2
 	tag:41
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:42
 		# translation: 
 		translation.tag:DL_Choice_SecondQuest
 		translation.en:I'm ready for your new job.
@@ -825,9 +820,37 @@ npc.id:npc_vincent2
 		# Link node, tag is next tag
 		tag:-1
 		# translation: 
-		translation.tag:DL_Choice_-1
+		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_SecondQuest
+	translation.en:Good. This time, the stakes are a little bit higher. 
+	translation.de:Gut. Dieses Mal steht ein bisschen mehr auf dem Spiel.
+	translation.ch:Guet. Damol staht chli me ufem Spiel.
+	[
+		# Link node, tag is next tag
+		tag:43
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_43
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

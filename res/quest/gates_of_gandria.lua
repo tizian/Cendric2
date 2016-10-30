@@ -1,3 +1,2 @@
--- lua script for main quest gates_of_gandria
-
+main_quest = true
 -- empty quest

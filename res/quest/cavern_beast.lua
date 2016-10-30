@@ -1,6 +1,5 @@
--- lua script for kill quest cavern_beast
+main_quest = true
 
--- what to do?
 targets = 
 {
 	{"CavernBeast", 1}

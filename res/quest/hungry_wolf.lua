@@ -1,6 +1,3 @@
--- lua script for quest hungry_wolf
-
--- what to do?
 collectibles = 
 {
 	{"fo_rawmeat", 3},

@@ -1216,7 +1216,7 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="218" x="2145.12" y="575" width="17.75" height="14">
+  <object id="218" x="1908.12" y="648" width="17.75" height="14">
    <properties>
     <property name="level entry" value="res/level/forest/forest.tmx,2180,3210"/>
     <property name="persistent" value=""/>

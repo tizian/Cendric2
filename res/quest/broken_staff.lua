@@ -1,6 +1,3 @@
--- lua script for quest broken_staff
-
--- what to do?
 collectibles = 
 {
 	{"qe_brokenstaff1", 1},

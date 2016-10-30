@@ -1,6 +1,5 @@
--- lua script for quest clerics_recommendation
+main_quest = true
 
--- what to do?
 collectibles = 
 {
 	{"qe_recommendationletter", 1}

@@ -1,6 +1,5 @@
--- lua script for main quest the_mark
+main_quest = true
 
--- what to do?
 conditions = {
 	"information_gathered",
 }

@@ -1,6 +1,5 @@
--- lua script for main quest who_am_i
+main_quest = true
 
--- what to do?
 conditions = {
 "information_gathered",
 }

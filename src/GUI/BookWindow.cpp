@@ -148,6 +148,6 @@ void BookWindow::setPosition(const sf::Vector2f& pos) {
 	if (m_showSprite) {
 		m_sprite.setPosition(pos + sf::Vector2f(
 			0.5f * (WIDTH - m_sprite.getTextureRect().width),
-			0.5f * (HEIGHT - m_sprite.getTextureRect().height)));
+			0.5f * (HEIGHT - 50.f - m_sprite.getTextureRect().height)));
 	}
 }

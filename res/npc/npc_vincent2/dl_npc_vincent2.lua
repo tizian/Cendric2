@@ -19,10 +19,8 @@ loadDialogue = function(DL)
 		DL:setRoot(35) 
 	elseif (DL:isQuestState("elder_chest", "completed") and not DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
 		DL:setRoot(39) 
-	elseif (DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
-		DL:setRoot(41) 
 	else 
-		DL:setRoot(-1) 
+		DL:setRoot(41) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_vincent", "talked")) then 
@@ -311,7 +309,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(38, -2, "DL_Vincent_StealingFitsYou") -- Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuable things.
 			DL:changeQuestState("elder_chest", "completed")
-			DL:addReputationProgress("thief", 10)
+			DL:addReputationProgress("thief", 5)
 			DL:addNode()
 
 		end
@@ -333,13 +331,18 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
 
-		DL:createChoiceNode(41)
-		DL:addChoice(-1, "DL_Choice_SecondQuest") -- I'm ready for your new job.
-		DL:addChoice(-1, "DL_Choice_-1") -- 
-		DL:addNode()
+	DL:createChoiceNode(41)
+	DL:addChoice(42, "DL_Choice_SecondQuest") -- I'm ready for your new job.
+	DL:addChoice(-1, "") -- 
+	DL:addNode()
 
-	end
+
+	DL:createNPCNode(42, 43, "DL_Vincent_SecondQuest") -- Good. This time, the stakes are a little bit higher. 
+	DL:addNode()
+
+
+	DL:createNPCNode(43, -2, "DL_NPC_43") -- 
+	DL:addNode()
 
 end

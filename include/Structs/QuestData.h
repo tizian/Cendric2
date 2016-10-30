@@ -7,6 +7,7 @@
 
 struct QuestData {
 	std::string id;
+	bool isMainQuest = false;
 
 	// collect quest: which items must be collected and how many of them?
 	// first element is the item id, the second the amount

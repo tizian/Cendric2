@@ -9,8 +9,10 @@ loadDialogue = function(DL)
 		DL:setRoot(11) 
 	elseif (not DL:isConditionFulfilled("npc_jonathan", "decipher_map")) then 
 		DL:setRoot(17) 
-	else 
+	elseif (DL:isQuestState("join_a_guild", "void")) then 
 		DL:setRoot(27) 
+	else 
+		DL:setRoot(36) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "talked")) then 
@@ -188,7 +190,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(26, -2, "DL_Jonathan_LearnedFireball5") -- To decipher it, elemental magic is not sufficient. But elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
+			DL:createNPCNode(26, -2, "DL_Jonathan_LearnedFireball5") -- To decipher it, elemental magic is not sufficient. But using elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
 			DL:addConditionProgress("npc_jonathan", "decipher_map")
 			DL:addNode()
 
@@ -196,58 +198,128 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:isQuestState("join_a_guild", "void")) then 
 
-	DL:createChoiceNode(27)
-	if (not DL:isConditionFulfilled("npc_jonathan", "another_mage")) then 
-		DL:addChoice(28, "DL_Choice_AnotherMage") -- So, should we ask another mage to help us?
+		DL:createChoiceNode(27)
+		if (not DL:isConditionFulfilled("npc_jonathan", "another_mage")) then 
+			DL:addChoice(28, "DL_Choice_AnotherMage") -- So, should we ask another mage to help us?
+		end
+		if (not DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+			DL:addChoice(29, "DL_Choice_WhatAboutYou") -- What about you? Don't you know some other spells?
+		end
+		if (not DL:isConditionFulfilled("npc_jonathan", "break_protection")) then 
+			DL:addChoice(31, "DL_Choice_BreakingProtection") -- Do you think breaking a protection spell is a good idea?
+		end
+		if (not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+			DL:addChoice(32, "DL_Choice_WhyRisky") -- Why is that risky for you?
+		end
+		if (DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+			DL:addChoice(34, "DL_Choice_WhatShouldIDo") -- I see. So, what should I do?
+		end
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "another_mage")) then 
+
+			DL:createNPCNode(28, -2, "DL_Jonathan_AnotherMage") -- To be honest, I don't really trust any other mage in the city. The less people know about this map, the better.
+			DL:addConditionProgress("npc_jonathan", "another_mage")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+
+			DL:createNPCNode(29, 30, "DL_Jonathan_WhatAboutYou") -- Although we elementalists can learn every type of magic, I've always focused my studies on elemental magic only. 
+			DL:addConditionProgress("npc_jonathan", "what_about_you")
+			DL:addNode()
+
+
+			DL:createNPCNode(30, -2, "DL_Jonathan_WhatAboutYou2") -- And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citizens of Gandria. Someone like you.
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "break_protection")) then 
+
+			DL:createNPCNode(31, -2, "DL_Jonathan_BreakingProtection") -- You mean, there's a good reason for this spell? Well, if there is, we'll find out soon enough.
+			DL:addConditionProgress("npc_jonathan", "break_protection")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+
+			DL:createNPCNode(32, 33, "DL_Jonathan_WhyRisky") -- It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
+			DL:addConditionProgress("npc_jonathan", "why_risky")
+			DL:addNode()
+
+
+			DL:createNPCNode(33, -2, "DL_Jonathan_WhyRisky2") -- It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
+			DL:addNode()
+
+		end
+
+		if (DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+
+			DL:createNPCNode(34, 35, "DL_Jonathan_WhatShouldIDo") -- You'll have to learn another type of magic. There are - as far as I know - three mage guilds in Gandria, each focusing on another domain of magic.
+			DL:addNode()
+
+
+			DL:createNPCNode(35, -2, "DL_Jonathan_WhatShouldIDo2") -- I guess you already know one of the guilds: The Clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
+			DL:changeQuestState("join_a_guild", "started")
+			DL:addNode()
+
+		end
+
 	end
-	if (not DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
-		DL:addChoice(29, "DL_Choice_WhatAboutYou") -- What about you? Don't you know some other spells?
+
+
+	DL:createChoiceNode(36)
+	if (not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)) then 
+		DL:addChoice(38, "DL_Choice_WhyGuild") -- I already know some divine magic. (Summon a light)
 	end
-	if (not DL:isConditionFulfilled("npc_jonathan", "break_protection")) then 
-		DL:addChoice(31, "DL_Choice_BreakingProtection") -- Do you think breaking a protection spell is a good idea?
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")) then 
+		DL:addChoice(37, "DL_Choice_WhereNecromancers") -- How can I find the Necromancers?
 	end
-	if (not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
-		DL:addChoice(32, "DL_Choice_WhyRisky") -- Why is that risky for you?
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_thieves")) then 
+		DL:addChoice(39, "DL_Choice_WhereThieves") -- Where can I learn some twilight magic?
 	end
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_clerics")) then 
+		DL:addChoice(40, "DL_Choice_WhereClerics") -- What if I wanted to join the Clerics?
+	end
+	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
-	if (not DL:isConditionFulfilled("npc_jonathan", "another_mage")) then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)) then 
 
-		DL:createNPCNode(28, -2, "DL_Jonathan_AnotherMage") -- To be honest, I don't really trust any other mage in the city. The less people know about this map, the better.
-		DL:addConditionProgress("npc_jonathan", "another_mage")
+		DL:createNPCNode(38, -2, "DL_Jonathan_Light") -- We can't decipher the map using some simple magic. And they will only teach you the powerful spells if they trust you.
+		DL:addConditionProgress("npc_jonathan", "light")
 		DL:addNode()
 
 	end
 
-	if (not DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")) then 
 
-		DL:createNPCNode(29, 30, "DL_Jonathan_WhatAboutYou") -- Although we elementalists can learn every type of magic, I've always focused my studies on elemental magic only. 
-		DL:addConditionProgress("npc_jonathan", "what_about_you")
-		DL:addNode()
-
-
-		DL:createNPCNode(30, -2, "DL_Jonathan_WhatAboutYou2") -- And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citicens of Gandria. Someone like you.
+		DL:createNPCNode(37, -2, "DL_Jonathan_WhereNecromancers") -- They need to stay hidden because their magic is not allowed in Gandria. But if I were you, I'd ask the alchemist Syrah, she seems to know some people.
+		DL:addConditionProgress("npc_jonathan", "where_necromancers")
+		DL:addQuestDescription("join_a_guild", 1)
 		DL:addNode()
 
 	end
 
-	if (not DL:isConditionFulfilled("npc_jonathan", "break_protection")) then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_thieves")) then 
 
-		DL:createNPCNode(31, -2, "DL_Jonathan_BreakingProtection") -- You mean, there's a good reason for this spell? Well, if there is, we'll find out soon enough.
-		DL:addConditionProgress("npc_jonathan", "break_protection")
+		DL:createNPCNode(39, -2, "DL_Jonathan_WhereThieves") -- Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
+		DL:addConditionProgress("npc_jonathan", "where_thieves")
+		DL:addQuestDescription("join_a_guild", 2)
 		DL:addNode()
 
 	end
 
-	if (not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_clerics")) then 
 
-		DL:createNPCNode(32, 33, "DL_Jonathan_WhyRisky") -- It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
-		DL:addConditionProgress("npc_jonathan", "why_risky")
-		DL:addNode()
-
-
-		DL:createNPCNode(33, -2, "DL_Jonathan_WhyRisky2") -- It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
+		DL:createNPCNode(40, -2, "DL_Jonathan_WhereClerics") -- Try to gain the trust of their leader and convince them of your skills.
+		DL:addConditionProgress("npc_jonathan", "where_clerics")
+		DL:addQuestDescription("join_a_guild", 3)
 		DL:addNode()
 
 	end

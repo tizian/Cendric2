@@ -21,6 +21,11 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 
 	lua_pcall(L, 0, 0, 0);
 
+	LuaRef mainQuest = getGlobal(L, "main_quest");
+	if (mainQuest.isBoolean()) {
+		questData.isMainQuest = mainQuest.cast<bool>();
+	}
+
 	LuaRef targets = getGlobal(L, "targets");
 	if (targets.isTable()) {
 		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.

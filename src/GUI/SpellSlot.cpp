@@ -28,11 +28,11 @@ SpellSlot::SpellSlot(SpellType type) {
 	initSpellSlot();
 }
 
-SpellSlot::SpellSlot(SpellID id) {
+SpellSlot::SpellSlot(SpellID id, bool isMeta) {
 	m_spellID = id;
 	const SpellData& bean = SpellData::getSpellData(id);
 	m_iconTextureRect = bean.iconTextureRect;
-	m_spellType = bean.spellType;
+	m_spellType = isMeta ? SpellType::Meta : bean.spellType;
 	m_isChopSlot = (id == SpellID::Chop);
 	m_inputKeyID = Key::VOID;
 	m_isEmpty = false;

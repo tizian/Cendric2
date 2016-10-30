@@ -50,7 +50,7 @@ void WeaponWindow::reload() {
 			spellSlot = SpellSlot(it.spellSlot.spellType);
 		}
 		else {
-			spellSlot = SpellSlot(it.spellSlot.spellID);
+			spellSlot = SpellSlot(it.spellSlot.spellID, it.spellSlot.spellType == SpellType::Meta);
 		}
 		spellSlot.setPosition(sf::Vector2f(xOffset, yOffset));
 		spellSlot.setNr(slotNr);

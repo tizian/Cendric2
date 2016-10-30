@@ -1,6 +1,5 @@
--- lua script for main quest missing_paladin
+main_quest = true
 
--- what to do?
 collectibles = 
 {
 	{"eq_lightpendant", 1}

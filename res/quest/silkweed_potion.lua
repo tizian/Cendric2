@@ -1,6 +1,5 @@
--- lua script for quest silkweed_potion
+main_quest = true
 
--- what to do?
 collectibles = 
 {
 	{"qe_silkweed", 1}

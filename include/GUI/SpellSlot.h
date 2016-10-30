@@ -13,8 +13,8 @@ class SpellSlot : public Slot {
 public:
 	// creates an empty spell slot with type "type"
 	SpellSlot(SpellType type = SpellType::VOID);
-	// creates a filled spell slot for a spell with id "id"
-	SpellSlot(SpellID id);
+	// creates a filled spell slot for a spell with id "id". "Meta" marks a meta slot which holds any spell type.
+	SpellSlot(SpellID id, bool isMeta = false);
 	// creates a filled spell slot for a spell with data "data"
 	SpellSlot(const SpellData& data);
 

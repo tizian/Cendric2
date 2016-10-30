@@ -1,6 +1,3 @@
--- lua script for quest ice_armor
-
--- what to do?
 collectibles = 
 {
 	{"mi_firstguardianheart", 1},
