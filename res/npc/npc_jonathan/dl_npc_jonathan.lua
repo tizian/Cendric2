@@ -291,7 +291,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)) then 
 
-		DL:createNPCNode(38, -2, "DL_Jonathan_Light") -- We can't decipher the map using some simple magic. And they will only teach you the powerful spells if they trust you.
+		DL:createNPCNode(38, -2, "DL_Jonathan_Light") -- We can't decipher the map using some simple magic. You'll have to gain the trust of one of the three guilds in order to learn more advanced magic.
 		DL:addConditionProgress("npc_jonathan", "light")
 		DL:addNode()
 
