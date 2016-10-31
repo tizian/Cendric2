@@ -1,5 +1,6 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/CutsceneScreen.h"
+#include "Screens/KeyBindingsScreen.h"
 #include "Screens/ScreenManager.h"
 #include "GUI/GUIConstants.h"
 
@@ -92,8 +93,8 @@ void MenuScreen::execOnEnter(const Screen* previousScreen) {
 	float buttonHeight = 50.f;
 	float buttonWidth = 300.f;
 	float xOffset = (WINDOW_WIDTH - buttonWidth) / 2.f;
-	float yOffset = 220.f;
-	float addYOffset = 60.f;
+	float yOffset = 200.f;
+	float addYOffset = 55.f;
 
 	// add buttons
 	Button* button;
@@ -128,6 +129,12 @@ void MenuScreen::execOnEnter(const Screen* previousScreen) {
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("Options");
 	button->setOnClick(std::bind(&MenuScreen::onOptions, this));
+	addObject(button);
+	yOffset += addYOffset;
+
+	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button->setText("KeyBindingsShort");
+	button->setOnClick(std::bind(&MenuScreen::onKeybindings, this));
 	addObject(button);
 	yOffset += addYOffset;
 
@@ -228,6 +235,10 @@ void MenuScreen::onSaveGame() {
 
 void MenuScreen::onOptions() {
 	setNextScreen(new OptionsScreen(m_characterCore));
+}
+
+void MenuScreen::onKeybindings() {
+	setNextScreen(new KeyBindingsScreen(m_characterCore));
 }
 
 void MenuScreen::onCredits() {

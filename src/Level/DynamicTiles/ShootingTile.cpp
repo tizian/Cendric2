@@ -18,7 +18,7 @@ void ShootingTile::init() {
 
 void ShootingTile::loadSpells() {
 	switch (m_skinNr) {
-	case 1:
+	case 0:
 	default:
 	{
 		m_spellData = SpellData::getSpellData(SpellID::Projectile);
@@ -31,10 +31,10 @@ void ShootingTile::loadSpells() {
 		m_cooldown = sf::seconds(5.f);
 		break;
 	}
+	case 1:
 	case 2:
 	case 3:
 	case 4:
-	case 5:
 	{
 		m_spellData = SpellData::getSpellData(SpellID::FireBall);
 		m_spellData.duration = sf::seconds(3.f);
@@ -70,17 +70,17 @@ void ShootingTile::loadAnimation(int skinNr) {
 	activeAnimation->setSpriteSheet(tex);
 
 	switch (skinNr) {
-	case 1:
+	case 0:
 	default:
 		// the turning wheel
 		for (int i = 0; i < 4; ++i) {
 			activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		}
 		break;
+	case 1:
 	case 2:
 	case 3:
 	case 4:
-	case 5:
 		// fire flowers
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));

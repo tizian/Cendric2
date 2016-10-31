@@ -1,5 +1,5 @@
 #include "Screens/KeyBindingsScreen.h"
-#include "Screens/OptionsScreen.h"
+#include "Screens/MenuScreen.h"
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
 #include "GlobalResource.h"
@@ -252,7 +252,7 @@ void KeyBindingsScreen::execOnExit(const Screen *nextScreen) {
 }
 
 void KeyBindingsScreen::onBack() {
-	setNextScreen(new OptionsScreen(m_characterCore));
+	setNextScreen(new MenuScreen(m_characterCore));
 }
 
 void KeyBindingsScreen::onApply() {

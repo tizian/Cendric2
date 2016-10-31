@@ -54,5 +54,6 @@ private:
 	void onLoadGame();
 	void onSaveGame();
 	void onOptions();
+	void onKeybindings();
 	void onCredits();
 };

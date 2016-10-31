@@ -40,5 +40,4 @@ private:
 	// button agents
 	void onBack();
 	void onApply();
-	void onKeybindings();
 };

@@ -95,6 +95,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLo
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Journal','Journal','Tagebuch','Tagebuech','Diario');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Jump','Jump','Springen','Springe','Saltar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('KeyBindings','Key Bindings','Tastaturbelegung','Tastaturbelegig','Teclas configurables');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('KeyBindingsShort','Key Bindings','Tastaturbelegung','Tastaturbelegig','Teclas config.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('KeyReserved','This key is reserved and cannot be selected.','Diese Taste ist reserviert und kann nicht gewählt werden.','Die Taste isch reserviert und derf me nid bruche.','Tecla en uso. No puede ser seleccionada.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Keys','Keys','Schlüssel','Schlüssel','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Killed','Killed','Getötet','Killt','Asesinado');

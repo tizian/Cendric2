@@ -38,6 +38,7 @@ void Game::reloadWindow() {
 	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
 	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
+	m_mainWindow.setFramerateLimit(30);
 
 	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
 
