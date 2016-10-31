@@ -8,7 +8,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
-// A simple ugly checkbox 
+// A simple checkbox 
 class Checkbox : public GameObject {
 public:
 	Checkbox();
@@ -33,6 +33,7 @@ public:
 	void setCharacterSize(int size);
 	void setTextColor(const sf::Color& color);
 
+	void setOnClick(const std::function<void()>& agent);
 	// a checkbox can only be clicked if its enabled. also, the margin color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
 	void setVisible(bool value);
@@ -71,4 +72,9 @@ protected:
 
 	static const float SIDE_LENGTH;
 	static const float CENTER_SIZE;
+
+private:
+	std::function<void()> m_executeOnClick;
+	// placeholder for agents
+	void nop() const {};
 };

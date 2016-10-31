@@ -21,12 +21,16 @@ Checkbox::Checkbox() :
 
 	setBoundingBox(m_background.getLocalBounds());
 	setInputInDefaultView(true);
+
+	// agent placeholder
+	m_executeOnClick = std::bind(&Checkbox::nop, this);
 }
 
 void Checkbox::onLeftClick() {
 	if (m_isEnabled && m_isPressed) {
 		m_isPressed = false;
 		setChecked(!m_isChecked);
+		m_executeOnClick();
 		g_inputController->lockAction();
 	}
 }
@@ -186,4 +190,8 @@ bool Checkbox::isChecked() const {
 
 GameObjectType Checkbox::getConfiguredType() const {
 	return GameObjectType::_Button;
+}
+
+void Checkbox::setOnClick(const std::function<void()>& agent) {
+	m_executeOnClick = agent;
 }

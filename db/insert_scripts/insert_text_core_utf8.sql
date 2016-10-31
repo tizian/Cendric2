@@ -107,6 +107,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Leve
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Lever','Lever','Hebel','Hebel','Palanca');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LightDamage','Light Damage','Lichtschaden','Liechtschade','Daño de luz');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LightResistance','Light Resistance','Lichtresistenz','Liechtresistenz','Resistencia a la luz');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LimitFPS','Limit FPS','FPS limitieren','FPS limitiere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Load','Load','Laden','Lade','Cargar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LoadGame','Load Game','Spiel laden','Spiel lade','Cargar partida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Loading','Loading...','Lädt...','Es ladet...','Cargando...');

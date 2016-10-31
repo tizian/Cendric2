@@ -7,3 +7,4 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Back
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SwitchTarget','Switch target','Ziel wechseln','Ziel ändere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Guild','Guild','Gilde','Gilde','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoGuild','No Guild','Keine Gilde','Kei Gilde','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LimitFPS','Limit FPS','FPS limitieren','FPS limitiere','?');

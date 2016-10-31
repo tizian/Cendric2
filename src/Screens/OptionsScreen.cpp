@@ -56,7 +56,17 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_displayModeSelector->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	addObject(m_displayModeSelector);
 
-	distFromTop = distFromTop + 200;
+	distFromTop = distFromTop + 120;
+
+	// sound	
+	m_soundCheckbox = new Checkbox();
+	m_soundCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_soundCheckbox->setChecked(g_resourceManager->getConfiguration().isSoundOn);
+	m_soundCheckbox->setText("Sound");
+	m_soundCheckbox->setOnClick(std::bind(&OptionsScreen::checkSoundSlider, this));
+	addObject(m_soundCheckbox);
+
+	distFromTop = distFromTop + 80;
 
 	m_volumeSoundSlider = new Slider(0, 100);
 	string volumeText = g_textProvider->getText("SoundVolume");
@@ -75,6 +85,8 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_volumeMusicSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeMusic);
 	m_volumeMusicSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	addObject(m_volumeMusicSlider);
+
+	checkSoundSlider();
 
 	distFromTop = 150.f;
 	distFromLeft = WINDOW_WIDTH / 2.f + 150.f;
@@ -121,15 +133,6 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_vSyncCheckbox->setChecked(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_vSyncCheckbox->setText("VSync");
 	addObject(m_vSyncCheckbox);
-
-	distFromTop = distFromTop + 50;
-
-	// sound	
-	m_soundCheckbox = new Checkbox();
-	m_soundCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	m_soundCheckbox->setChecked(g_resourceManager->getConfiguration().isSoundOn);
-	m_soundCheckbox->setText("Sound");
-	addObject(m_soundCheckbox);
 
 	// back
 	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
@@ -191,4 +194,13 @@ void OptionsScreen::onApply() {
 	if (languageChanged || soundChanged) {
 		m_screenManager->clearBackupScreen();
 	}
+}
+
+void OptionsScreen::checkSoundSlider() {
+	m_volumeSoundSlider->setEnabled(m_soundCheckbox->isChecked());
+	m_volumeMusicSlider->setEnabled(m_soundCheckbox->isChecked());
+}
+
+void OptionsScreen::checkFPSSlider() {
+
 }

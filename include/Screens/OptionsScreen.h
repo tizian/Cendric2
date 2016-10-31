@@ -40,4 +40,6 @@ private:
 	// button agents
 	void onBack();
 	void onApply();
+	void checkSoundSlider();
+	void checkFPSSlider();
 };
