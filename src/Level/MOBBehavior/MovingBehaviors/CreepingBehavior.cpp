@@ -254,8 +254,10 @@ void CreepingBehavior::checkCreepingXYDirection(const sf::Vector2f& nextPosition
 		}
 	}
 
-	if (isCreepingOnX() && std::abs(m_mob->getVelocity().y) > 0.f || !isCreepingOnX() && std::abs(m_mob->getVelocity().x) > 0.f)
+	if ((isCreepingOnX() && std::abs(m_mob->getVelocity().y) > 0.f) ||
+	    (!isCreepingOnX() && std::abs(m_mob->getVelocity().x) > 0.f)) {
 		m_isGrounded = false;
+	}
 
 	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
 		(isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height)) {
@@ -296,8 +298,8 @@ void CreepingBehavior::updateAnimation(const sf::Time& frameTime) {
 	else if (!m_isGrounded) {
 		newState = GameObjectState::Jumping;
 	}
-	else if (isCreepingOnX() && std::abs(m_enemy->getVelocity().x) > 20.f ||
-		!isCreepingOnX() && std::abs(m_enemy->getVelocity().y) > 20.f) {
+	else if ((isCreepingOnX() && std::abs(m_enemy->getVelocity().x) > 20.f) ||
+		(!isCreepingOnX() && std::abs(m_enemy->getVelocity().y) > 20.f)) {
 		newState = GameObjectState::Walking;
 	}
 
@@ -314,10 +316,10 @@ bool CreepingBehavior::isCreepingOnX() const {
 }
 
 bool CreepingBehavior::isFallingDown(bool isMovingDown, bool isMovingRight) const {
-	return isMovingDown && m_creepingDirection == CreepingDirection::Bottom ||
-		!isMovingDown && m_creepingDirection == CreepingDirection::Top ||
-		isMovingRight && m_creepingDirection == CreepingDirection::Right ||
-		!isMovingRight && m_creepingDirection == CreepingDirection::Left;
+	return (isMovingDown && m_creepingDirection == CreepingDirection::Bottom) ||
+		(!isMovingDown && m_creepingDirection == CreepingDirection::Top) ||
+		(isMovingRight && m_creepingDirection == CreepingDirection::Right) ||
+		(!isMovingRight && m_creepingDirection == CreepingDirection::Left);
 }
 
 void CreepingBehavior::setCreepingDirection(CreepingDirection dir) {

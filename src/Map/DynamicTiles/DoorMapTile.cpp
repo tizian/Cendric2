@@ -106,7 +106,7 @@ void DoorMapTile::reloadConditions() {
 
 	m_isConditionsFulfilled = conditionsFulfilled;
 
-	if (m_isConditionsFulfilled && m_data.keyItemID.empty() 
+	if ((m_isConditionsFulfilled && m_data.keyItemID.empty())
 		|| m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
 		open();
 	}

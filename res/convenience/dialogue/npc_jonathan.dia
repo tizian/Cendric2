@@ -727,9 +727,9 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "light")
 	# translation: 
 	translation.tag:DL_Jonathan_Light
-	translation.en:We can't decipher the map using some simple magic. And they will only teach you the powerful spells if they trust you.
-	translation.de:Wir können die Karte nicht mit trivialer Magie entschlüsseln. Und die mächtigen Zauber werden sie dir nur beibringen, wenn sie dir vertrauen.
-	translation.ch:Mir chönd die Charte nid mit trivialer Magie entschlüssle. Und si werded dir di mächtige Zauber erst bibringe, wenn si dir vertraued.
+	translation.en:We can't decipher the map using some simple magic. You'll have to gain the trust of one of the three guilds in order to learn more advanced magic.
+	translation.de:Wir können die Karte nicht mit trivialer Magie entschlüsseln. Du musst eine der drei Gilden dazu bringen dir zu vertrauen, damit sie dir mächtigere Magie beibringen.
+	translation.ch:Mir chönd die Charte nid mit trivialer Magie entschlüssle. Du muesch eini vode drei Gildene dezue bringe dir z'vertraue, dass sie dir mächtigeri Magie biibringed.
 	[
 		# Link node, tag is next tag
 		tag:-2
