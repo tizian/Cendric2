@@ -116,7 +116,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_displayDamageNumbersCheckbox->setText("DisplayDamageNumbers");
 	addObject(m_displayDamageNumbersCheckbox);
 
-	distFromTop = distFromTop + 50;
+	distFromTop = distFromTop + 100;
 
 	// smoothing
 	m_smoothingCheckbox = new Checkbox();
@@ -133,6 +133,26 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_vSyncCheckbox->setChecked(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_vSyncCheckbox->setText("VSync");
 	addObject(m_vSyncCheckbox);
+
+	distFromTop = distFromTop + 50;
+
+	// limit fps 
+	m_limitFPSCheckbox = new Checkbox();
+	m_limitFPSCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_limitFPSCheckbox->setChecked(g_resourceManager->getConfiguration().isFPSLimited);
+	m_limitFPSCheckbox->setOnClick(std::bind(&OptionsScreen::checkFPSSlider, this));
+	m_limitFPSCheckbox->setText("LimitFPS");
+	addObject(m_limitFPSCheckbox);
+
+	distFromTop = distFromTop + 80;
+
+	m_maxFPSSlider = new Slider(30, 100);
+	m_maxFPSSlider->setText("MaxFPS");
+	m_maxFPSSlider->setSliderPosition(g_resourceManager->getConfiguration().maxFPS);
+	m_maxFPSSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	addObject(m_maxFPSSlider);
+
+	checkFPSSlider();
 
 	// back
 	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
@@ -163,6 +183,8 @@ void OptionsScreen::onApply() {
 	bool screenChanged = config.displayMode != mode;
 	screenChanged = screenChanged || config.isVSyncEnabled != m_vSyncCheckbox->isChecked();
 	screenChanged = screenChanged || config.isSmoothing != m_smoothingCheckbox->isChecked();
+	screenChanged = screenChanged || config.isFPSLimited != m_limitFPSCheckbox->isChecked();
+	screenChanged = screenChanged || config.maxFPS != m_maxFPSSlider->getSliderPosition();
 	Language language = static_cast<Language>(m_languageSelector->getChosenOptionIndex() + 1);
 	bool languageChanged = config.language != language;
 	bool soundOn = m_soundCheckbox->isChecked();
@@ -178,6 +200,8 @@ void OptionsScreen::onApply() {
 	config.isDisplayDamageNumbers = m_displayDamageNumbersCheckbox->isChecked();
 	config.isSmoothing = m_smoothingCheckbox->isChecked();
 	config.isVSyncEnabled = m_vSyncCheckbox->isChecked();
+	config.isFPSLimited = m_limitFPSCheckbox->isChecked();
+	config.maxFPS = m_maxFPSSlider->getSliderPosition();
 	config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
 	config.volumeSound = m_volumeSoundSlider->getSliderPosition();
 
@@ -202,5 +226,5 @@ void OptionsScreen::checkSoundSlider() {
 }
 
 void OptionsScreen::checkFPSSlider() {
-
+	m_maxFPSSlider->setEnabled(m_limitFPSCheckbox->isChecked());
 }

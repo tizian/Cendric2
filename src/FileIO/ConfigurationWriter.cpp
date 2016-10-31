@@ -19,6 +19,8 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeVSyncOn(data);
+		configuration << writeFPSLimitOn(data);
+		configuration << writeFPSMax(data);
 		configuration << writeSmoothingOn(data);
 		configuration << writeDebugModeOn(data);
 		configuration << writeDebugRenderingOn(data);
@@ -48,6 +50,11 @@ std::string ConfigurationWriter::writeConfigurationHeader() const {
 std::string ConfigurationWriter::writeSoundOn(const ConfigurationData& data) const {
 	string soundOn = "# 0 means sound off, 1 means sound on\n";
 	return soundOn.append(string(SOUND_ON) + ":" + (data.isSoundOn ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeFPSLimitOn(const ConfigurationData& data) const {
+	string limitOn = "# 0 means fps limit off, 1 means fps limit on\n";
+	return limitOn.append(string(FPS_LIMIT_ON) + ":" + (data.isFPSLimited ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data) const {
@@ -92,6 +99,10 @@ std::string ConfigurationWriter::writeSoundVolumeMusic(const ConfigurationData& 
 	return soundVolume.append(string(SOUND_VOLUME_MUSIC) + ":" + to_string(data.volumeMusic) + "\n");
 }
 
+std::string ConfigurationWriter::writeFPSMax(const ConfigurationData& data) const {
+	string fpsLimit = "# this is the fps limit (acceptable max fps values are 30 - 100)\n";
+	return fpsLimit.append(string(FPS_MAX) + ":" + to_string(data.maxFPS) + "\n");
+}
 
 std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const {
 	string language = "# 1 for EN, 2 for DE, 3 for CH\n";

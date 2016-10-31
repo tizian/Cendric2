@@ -35,14 +35,16 @@ void Game::reloadWindow() {
 		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
 	}
 
+	auto& conf = g_resourceManager->getConfiguration();
+
 	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
-	m_mainWindow.setVerticalSyncEnabled(g_resourceManager->getConfiguration().isVSyncEnabled);
+	m_mainWindow.setVerticalSyncEnabled(conf.isVSyncEnabled);
 	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
-	m_mainWindow.setFramerateLimit(30);
+	m_mainWindow.setFramerateLimit(conf.isFPSLimited ? conf.maxFPS : 0);
 
-	m_renderTexture.setSmooth(g_resourceManager->getConfiguration().isSmoothing);
+	m_renderTexture.setSmooth(conf.isSmoothing);
 
-	g_resourceManager->getConfiguration().isWindowReload = false;
+	conf.isWindowReload = false;
 
 	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
 	g_renderWindow = &m_mainWindow;

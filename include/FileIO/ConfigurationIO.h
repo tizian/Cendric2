@@ -8,6 +8,8 @@ protected:
 	const char* LANGUAGE = "language";
 	const char* DISPLAYMODE = "displaymode";
 	const char* VSYNC_ON = "vsync.on";
+	const char* FPS_LIMIT_ON = "fps.limit.on";
+	const char* FPS_MAX = "fps.max";
 	const char* SOUND_ON = "sound.on";
 	const char* SOUND_VOLUME_MUSIC = "sound.volume.music";
 	const char* SOUND_VOLUME_SOUND = "sound.volume.sound";

@@ -16,6 +16,8 @@ struct ConfigurationData {
 	// in percent
 	int volumeMusic;
 	bool isVSyncEnabled;
+	bool isFPSLimited;
+	int maxFPS;
 	std::map<Key, sf::Keyboard::Key> mainKeyMap;
 	// important: the alternative key map can't be seen, saved or changed by the user.
 	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
@@ -69,6 +71,8 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 	100,
 	100,
 	true,
+	false,
+	60,
 	DEFAULT_KEYMAP,
 	std::map < Key, sf::Keyboard::Key >(
 	{

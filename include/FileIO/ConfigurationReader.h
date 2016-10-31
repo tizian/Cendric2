@@ -26,6 +26,8 @@ private:
 	bool readSoundVolumeSound(const std::string& line, ConfigurationData& data) const;
 	bool readSoundOn(const std::string& line, ConfigurationData& data) const;
 	bool readVSyncOn(const std::string& line, ConfigurationData& data) const;
+	bool readFPSLimitOn(const std::string& line, ConfigurationData& data) const;
+	bool readFPSMax(const std::string& line, ConfigurationData& data) const;
 
 	bool readQuickcastOn(const std::string& line, ConfigurationData& data) const;
 	bool readHintsOn(const std::string& line, ConfigurationData& data) const;

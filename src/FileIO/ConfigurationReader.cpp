@@ -18,59 +18,51 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				continue;
 			}
 			else if (line.compare(0, strlen(LANGUAGE), string(LANGUAGE)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(LANGUAGE));
 				noError = readLanguage(line, data);
 			}
 			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), string(MAIN_INPUT_MAPPING)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(MAIN_INPUT_MAPPING));
 				noError = readMainInputMapping(line, data);
 			}
 			else if (line.compare(0, strlen(ALTERNATIVE_INPUT_MAPPING), string(ALTERNATIVE_INPUT_MAPPING)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(ALTERNATIVE_INPUT_MAPPING));
 				noError = readAlternativeInputMapping(line, data);
 			}
 			else if (line.compare(0, strlen(VSYNC_ON), string(VSYNC_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(VSYNC_ON));
 				noError = readVSyncOn(line, data);
 			}
+			else if (line.compare(0, strlen(FPS_LIMIT_ON), string(FPS_LIMIT_ON)) == 0) {
+				noError = readFPSLimitOn(line, data);
+			}
+			else if (line.compare(0, strlen(FPS_MAX), string(FPS_MAX)) == 0) {
+				noError = readFPSMax(line, data);
+			}
 			else if (line.compare(0, strlen(SOUND_ON), string(SOUND_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_ON));
 				noError = readSoundOn(line, data);
 			}
 			else if (line.compare(0, strlen(SOUND_VOLUME_MUSIC), string(SOUND_VOLUME_MUSIC)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_VOLUME_MUSIC));
 				noError = readSoundVolumeMusic(line, data);
 			}
 			else if (line.compare(0, strlen(SOUND_VOLUME_SOUND), string(SOUND_VOLUME_SOUND)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SOUND_VOLUME_SOUND));
 				noError = readSoundVolumeSound(line, data);
 			}
 			else if (line.compare(0, strlen(QUICKCAST_ON), string(QUICKCAST_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(QUICKCAST_ON));
 				noError = readQuickcastOn(line, data);
 			}
 			else if (line.compare(0, strlen(HINTS_ON), string(HINTS_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(HINTS_ON));
 				noError = readHintsOn(line, data);
 			}
 			else if (line.compare(0, strlen(DAMAGENUMBERS_ON), string(DAMAGENUMBERS_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DAMAGENUMBERS_ON));
 				noError = readDamageNumbersOn(line, data);
 			}
 			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGMODE_ON));
 				noError = readDebugModeOn(line, data);
 			}
 			else if (line.compare(0, strlen(DEBUGRENDERING_ON), string(DEBUGRENDERING_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DEBUGRENDERING_ON));
 				noError = readDebugRenderingOn(line, data);
 			}
 			else if (line.compare(0, strlen(SMOOTHING_ON), string(SMOOTHING_ON)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(SMOOTHING_ON));
 				noError = readSmoothingOn(line, data);
 			}
 			else if (line.compare(0, strlen(DISPLAYMODE), string(DISPLAYMODE)) == 0) {
-				g_logger->log(LogLevel::Verbose, "ConfigurationReader", "found tag " + std::string(DISPLAYMODE));
 				noError = readDisplayMode(line, data);
 			}
 			else {
@@ -191,6 +183,21 @@ bool ConfigurationReader::readSoundVolumeSound(const std::string& line, Configur
 	return true;
 }
 
+bool ConfigurationReader::readFPSMax(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after fps max tag or no value after colon");
+		return false;
+	}
+	int fps = atoi(line.substr(colon + 1).c_str());
+	if (fps > 100 || fps < 30) {
+		g_logger->logWarning("ConfigurationReader", "Max FPS has an invalid value, is left unchanged.");
+		return true;
+	}
+	data.maxFPS = fps;
+	return true;
+}
+
 bool ConfigurationReader::readSoundOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
 	if (colon == string::npos || line.length() < colon + 1) {
@@ -199,6 +206,17 @@ bool ConfigurationReader::readSoundOn(const std::string& line, ConfigurationData
 	}
 	bool soundOn = (atoi(line.substr(colon + 1).c_str()) != 0);
 	data.isSoundOn = soundOn;
+	return true;
+}
+
+bool ConfigurationReader::readFPSLimitOn(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after fps limit on tag or no value after colon.");
+		return false;
+	}
+	bool fpsLimitOn = (atoi(line.substr(colon + 1).c_str()) != 0);
+	data.isFPSLimited = fpsLimitOn;
 	return true;
 }
 

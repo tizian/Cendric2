@@ -94,6 +94,11 @@ void BitmapText::setColor(const sf::Color& color) {
 	init();	// TODO: could only replace vertex color attributes instead of all vertex data
 }
 
+void BitmapText::setColorAlpha(sf::Uint8 alpha) {
+	m_color.a = alpha;
+	init();	// TODO: could only replace vertex color attributes instead of all vertex data
+}
+
 const sf::Color& BitmapText::getColor() const {
 	return m_color;
 }

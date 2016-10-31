@@ -61,11 +61,11 @@ void Slider::setSliderPosition(int pos) {
 	if (pos < m_minPosition) pos = m_minPosition;
 	if (pos > m_maxPosition) pos = m_maxPosition;
 
-	m_sliderPosition = pos;
+	m_sliderPosition = pos ;
 
 	// update knob
 	int length = m_maxPosition - m_minPosition;
-	float xPos = (float)m_sliderPosition / (float)length * WIDTH;
+	float xPos = (float)(m_sliderPosition - m_minPosition) / (float)length * WIDTH;
 	m_knob.setPosition(sf::Vector2f(getBoundingBox()->left + xPos, getBoundingBox()->top + HEIGHT / 2.f));
 
 	// update filler
@@ -102,7 +102,7 @@ int Slider::calculateSliderPosition(float mousePosX) const {
 	float xOffset = mousePosX - getBoundingBox()->left;
 	// map the offset onto the values
 	int length = m_maxPosition - m_minPosition;
-	return static_cast<int>(length * xOffset / WIDTH);
+	return static_cast<int>(length * xOffset / WIDTH) + m_minPosition;
 }
 
 void Slider::setPosition(const sf::Vector2f& pos) {
@@ -160,11 +160,9 @@ void Slider::setEnabled(bool enabled) {
 		m_filler.getFillColor().g,
 		m_filler.getFillColor().b,
 		m_isEnabled ? 255 : 100));
-	m_titleText.setColor(sf::Color(
-		m_titleText.getColor().r,
-		m_titleText.getColor().g,
-		m_titleText.getColor().b,
-		m_isEnabled ? 255 : 100));
+	m_titleText.setColorAlpha(m_isEnabled ? 255 : 100);
+	m_minText.setColorAlpha(m_isEnabled ? 255 : 100);
+	m_maxText.setColorAlpha(m_isEnabled ? 255 : 100);
 }
 
 void Slider::setVisible(bool value) {
