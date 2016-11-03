@@ -19,8 +19,10 @@ loadDialogue = function(DL)
 		DL:setRoot(35) 
 	elseif (DL:isQuestState("elder_chest", "completed") and not DL:isConditionFulfilled("npc_vincent2", "second_quest")) then 
 		DL:setRoot(39) 
-	else 
+	elseif (DL:isQuestState("invis_recipe", "void")) then 
 		DL:setRoot(41) 
+	else 
+		DL:setRoot(45) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_vincent", "talked")) then 
@@ -331,18 +333,31 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:isQuestState("invis_recipe", "void")) then 
 
-	DL:createChoiceNode(41)
-	DL:addChoice(42, "DL_Choice_SecondQuest") -- I'm ready for your new job.
+		DL:createChoiceNode(41)
+		DL:addChoice(42, "DL_Choice_SecondQuest") -- I'm ready for your new job.
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(42, 43, "DL_Vincent_SecondQuest") -- Good. This time, the stakes are a little bit higher. We know that a certain mage Syrah knows how to brew a potion that can render you invisible.
+		DL:addNode()
+
+
+		DL:createNPCNode(43, 44, "DL_Vincent_SecondQuest2") -- A very useful ability, isn't it. The only problem is, that she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
+		DL:addNode()
+
+
+		DL:createNPCNode(44, -2, "DL_Vincent_SecondQuest3") -- There must be a way to get into her basement - by taking a shortcut through the sewers. Find this way and get that recipe for us. If you manage to do that, you'll maybe get to know what "us" really means.
+		DL:changeQuestState("invis_recipe", "started")
+		DL:addNode()
+
+	end
+
+
+	DL:createChoiceNode(45)
 	DL:addChoice(-1, "") -- 
-	DL:addNode()
-
-
-	DL:createNPCNode(42, 43, "DL_Vincent_SecondQuest") -- Good. This time, the stakes are a little bit higher. 
-	DL:addNode()
-
-
-	DL:createNPCNode(43, -2, "DL_NPC_43") -- 
 	DL:addNode()
 
 end
