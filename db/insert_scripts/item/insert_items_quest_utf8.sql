@@ -29,9 +29,6 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_recommendationletter', 'item', 'Letter of Recommendation','Empfehlungsschreiben','Empfehligsschriibe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_recommendationletter', 'item_desc', 'A letter of recommendation from the High Priestess Inina. It is sealed.','Ein Empfehlungsschreiben der Hohepriesterin Inina. Es ist versiegelt.','Es Empfehligsschriibe vode Hohepriesterin Inina. Es isch versiglet.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_recommendationletter', 'quest', 200, 0, -1);
--- Levelitem not used here, values are commented out for later use.
---INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_recommendationletter', 0, -30, 50, 20);
---INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_recommendationletter', 1, 150, 0, 50, 50);
 
 -- Compass
 
@@ -84,3 +81,11 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_bone', 'item', 'Bone','Knochen','Chnoche');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_bone', 'item_desc', 'I really don''t want to know what kind of bone it is.','Ich will wirklich nicht wissen was das für ein Knochen ist.','Ich wett würkli gar nid wüsse wa da füren Chnoche isch.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_bone', 'quest', 450, 550, -1);
+
+-- Recipe: Invisibility Potion 
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_invisrecipe', 'item', 'Recipe: Invisibility Potion','Rezept: Unsichtbarkeitstrank','Rezept: Unsichtbarkeitstrank');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_invisrecipe', 'item_desc', 'I stole this recipe from Syrah''s basement.','Dieses Rezept habe ich aus Syrah''s Keller entwendet.','Da Rezept hani us de Syrah ihrem Chäller klaut.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_invisrecipe', 'quest', 600, 0, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_invisrecipe', 0, -30, 50, 20);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_invisrecipe', 1, 150, 0, 50, 50);

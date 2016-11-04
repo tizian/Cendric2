@@ -165,11 +165,7 @@ void Checkbox::setEnabled(bool enabled) {
 		m_ornament.getColor().g,
 		m_ornament.getColor().b,
 		m_isEnabled ? 255 : 100));
-	m_text.setColor(sf::Color(
-		m_text.getColor().r, 
-		m_text.getColor().g, 
-		m_text.getColor().b, 
-		m_isEnabled ? 255 : 100));
+	m_text.setColorAlpha(m_isEnabled ? 255 : 100);
 }
 
 void Checkbox::setVisible(bool value) {

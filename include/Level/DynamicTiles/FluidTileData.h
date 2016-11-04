@@ -9,6 +9,7 @@ enum class FluidTileType {
 	Water,
 	Lava,
 	ShallowWater,
+	Poison,
 	MAX
 };
 
@@ -67,5 +68,19 @@ const FluidTileData SHALLOW_WATER
 	sf::Color(20, 50, 100, 128),
 	false,
 	false,
+	"res/sound/tile/water_splash.ogg"
+};
+
+const FluidTileData POISON
+{
+	FluidTileType::Poison,
+	1.1f,
+	0.0f,
+	1.0f,
+	30.f,
+	1.f,
+	sf::Color(50, 100, 20, 128),
+	true,
+	true,
 	"res/sound/tile/water_splash.ogg"
 };

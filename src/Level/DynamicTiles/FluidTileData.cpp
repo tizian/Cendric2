@@ -8,6 +8,8 @@ FluidTileData FluidTileData::getData(int skinNr) {
 		return LAVA;
 	case 2:
 		return SHALLOW_WATER;
+	case 3:
+		return POISON;
 	default:
 		g_logger->logError("FluidTileData", "Could not find parameters for fluid skin with skin nr " + std::to_string(skinNr));
 		return WATER;

@@ -53,6 +53,11 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:41
+		condition:DL:isQuestState("invis_recipe", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:45
 	]
 }
 {1
@@ -832,9 +837,9 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuest
-	translation.en:Good. This time, the stakes are a little bit higher. 
-	translation.de:Gut. Dieses Mal steht ein bisschen mehr auf dem Spiel.
-	translation.ch:Guet. Damol staht chli me ufem Spiel.
+	translation.en:Good. This time, the stakes are a little bit higher. We know that a certain mage Syrah knows how to brew a potion that can render you invisible.
+	translation.de:Gut. Dieses Mal steht ein bisschen mehr auf dem Spiel. Wir wissen, dass eine gewisse Magierin Syrah weiss, wie man einen Trank braut, der einen unsichtbar macht.
+	translation.ch:Guet. Damol staht chli me ufem Spiel. Mir wüssed, dass e gwüssi Magierin Syrah weiss, weme en Trank zemebraut, wo eim unsichbar macht.
 	[
 		# Link node, tag is next tag
 		tag:43
@@ -845,12 +850,40 @@ npc.id:npc_vincent2
 	tag:43
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_43
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Vincent_SecondQuest2
+	translation.en:A very useful ability, isn't it. The only problem is, that she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
+	translation.de:Eine äusserst nützliche Fähligkeit, nicht wahr. Das einzige Problem ist, dass sie uns dieses Wissen vorenthalten will. Sie lässt uns also keine andere Wahl, wir müssen dieses Rezept ohne ihre Einwilligung nehmen. 
+	translation.ch:E zimli nützlichi Fähigkeit, gell. Es einzig Problem isch dass si üs umsverrecke nid sege wett wes gaht. Also blibt üs ke anderi Wahl als das Rezept halt eifach so z'ne.
+	[
+		# Link node, tag is next tag
+		tag:44
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	trigger:DL:changeQuestState("invis_recipe", "started")
+	# translation: 
+	translation.tag:DL_Vincent_SecondQuest3
+	translation.en:There must be a way to get into her basement - by taking a shortcut through the sewers. Find this way and get that recipe for us. If you manage to do that, you'll maybe get to know what "us" really means.
+	translation.de:Es muss einen Weg geben, in ihren Keller zu kommen - wenn man eine Abkürzung über die Kanalisation nimmt. Finde diesen Weg und bring uns dieses Rezept. Wenn dir das gelingt, werde ich dir vielleicht erzählen, wer denn "uns" überhaupt ist.
+	translation.ch:Es mun en Weg ge, in ihre Chäller z'cho, wenme en Abchürzig überd Kanalisation nimmt. Find de Weg und bring üs das Rezept. Wenn du das schaffsch, den chani der vilicht verzelle, wer "üs" überhaupt isch.
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{2
+	# [45] Choice Node
+	tag:45
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }

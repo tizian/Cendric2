@@ -32,13 +32,15 @@ void DoorLevelTile::loadAnimation(int skinNr) {
 	openAnimation->addFrame(sf::IntRect(TILE_SIZE * m_doorData.tileWidth, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_doorData.tileWidth, 3 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Open, openAnimation);
-
-	// initial values
-	close();
-	playCurrentAnimation(false);
 }
 
 void DoorLevelTile::update(const sf::Time& frameTime) {
+	if (!m_isInitialized) {
+		close();
+		playCurrentAnimation(false);
+		m_isInitialized;
+	}
+
 	LevelDynamicTile::update(frameTime);
 }
 

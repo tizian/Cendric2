@@ -26,6 +26,7 @@ private:
 	DoorData m_doorData;
 	InteractComponent* m_interactComponent;
 	bool m_isOpen;
+	bool m_isInitialized = false;
 
 	static const float OPEN_RANGE;
 };
