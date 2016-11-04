@@ -2,6 +2,11 @@
 
 loadRoutine = function(R, W)
 
+	if (DL:isQuestState("invis_recipe", "completed") or DL:isQuestState("invis_recipe", "failed")) then
+		R:setDisposed()
+		return
+	end
+
 	if (not W:isConditionFulfilled("npc_vincent2", "talked") and not W:isQuestState("spoiled_fire", "started")) then 
 		R:setTalkingActive(true) 
 	end 

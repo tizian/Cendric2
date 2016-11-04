@@ -357,7 +357,21 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(45)
+	if (DL:isQuestState("invis_recipe", "started") and DL:isQuestComplete("invis_recipe")) then 
+		DL:addChoice(46, "DL_Choice_IGotRecipe") -- I got the recipe for you.
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
+
+	if (DL:isQuestState("invis_recipe", "started") and DL:isQuestComplete("invis_recipe")) then 
+
+		DL:createNPCNode(46, -1, "DL_Vincent_SecondQuestDone") -- Very well. I knew you have talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
+		DL:changeQuestState("invis_recipe", "completed")
+		DL:removeItem("qe_invisrecipe", 1)
+		DL:addItem("ke_thiefguild", 1)
+		DL:addReputationProgress("thief", 10)
+		DL:addNode()
+
+	end
 
 end

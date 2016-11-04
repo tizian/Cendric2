@@ -3,6 +3,8 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_syrah", "talked")) then 
 		DL:setRoot(1) 
+	elseif (DL:hasItem("qe_invisrecipe", 1) and not DL:isConditionFulfilled("npc_syrah", "invis_recipe")) then 
+		DL:setRoot(18) 
 	else 
 		DL:setRoot(2) 
 	end 
@@ -11,6 +13,32 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(1, -2, "DL_Syrah_Greeting") -- Well hello there! You look like you could use some potions made by the infamous alchemist Syrah. A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
 		DL:addConditionProgress("npc_syrah", "talked")
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("qe_invisrecipe", 1) and not DL:isConditionFulfilled("npc_syrah", "invis_recipe")) then 
+
+		DL:createNPCNode(18, 19, "DL_Syrah_InvisRecipe") -- Oh, hello. There's a certain recipe missing from my basement. Do you know something about it?
+		DL:addNode()
+
+
+		DL:createChoiceNode(19)
+		DL:addChoice(20, "DL_Choice_IBroughtItBack") -- Yes. I got it back for you. (Give the recipe)
+		DL:addChoice(21, "DL_Choice_IKnowNothing") -- No, sorry.
+		DL:addNode()
+
+
+		DL:createNPCNode(20, -2, "DL_Syrah_IBroughtItBack") -- Wow, thank you. You know, that really means a lot to me. I won't ask where you got that though. (Winks)
+		DL:removeItem("qe_invisrecipe", 1)
+		DL:addReputationProgress("necromancer", 10)
+		DL:changeQuestState("invis_recipe", "failed")
+		DL:addConditionProgress("npc_syrah", "invis_recipe")
+		DL:addNode()
+
+
+		DL:createNPCNode(21, -2, "DL_Syrah_IKnowNothing") -- What a pity.
+		DL:addConditionProgress("npc_syrah", "invis_recipe")
 		DL:addNode()
 
 	end

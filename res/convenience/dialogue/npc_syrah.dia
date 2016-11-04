@@ -12,6 +12,11 @@ npc.id:npc_syrah
 	]
 	[
 		# Link node, tag is next tag
+		tag:18
+		condition:DL:hasItem("qe_invisrecipe", 1) and not DL:isConditionFulfilled("npc_syrah", "invis_recipe")
+	]
+	[
+		# Link node, tag is next tag
 		tag:2
 	]
 }
@@ -25,6 +30,75 @@ npc.id:npc_syrah
 	translation.en:Well hello there! You look like you could use some potions made by the infamous alchemist Syrah. A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
 	translation.de:Na hallo! Du siehst aus als könntest du ein paar Tränke von der berühmt-berüchtigten Alchemistin Syrah gebrauchen. Ob Liebestrank oder Haarfarbe - es gibt fast nichts was ich nicht zusammenbrauen könnte.
 	translation.ch:Ja hallo! Du gsesch us als chöntisch du paar Tränk vode berüemt-berüchtigte Alchemistin Syrah bruche. Ob Liebestrank oder Haarfarb - es git fast nüt woni nid chönt zememischle.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_InvisRecipe
+	translation.en:Oh, hello. There's a certain recipe missing from my basement. Do you know something about it?
+	translation.de:Oh, hallo. Sag mal... Es fehlt ein bestimmtes Rezept aus meinem Keller. Weisst du etwas über diese Sache?
+	translation.ch:Oh hallo. Du, seg emal... Es fehlt es gwüsses Rezept us mim Chäller. Weisch du öppis über die Sach?
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{2
+	# [19] Choice Node
+	tag:19
+	[
+		# Link node, tag is next tag
+		tag:20
+		# translation: 
+		translation.tag:DL_Choice_IBroughtItBack
+		translation.en:Yes. I got it back for you. (Give the recipe)
+		translation.de:Ja. Ich hab es dir zurück gebracht. (Rezept geben)
+		translation.ch:Ja. Ich has der zrugg bracht. (Rezept gä)
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		# translation: 
+		translation.tag:DL_Choice_IKnowNothing
+		translation.en:No, sorry.
+		translation.de:Nein, sorry.
+		translation.ch:Nei, sorry.
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:removeItem("qe_invisrecipe", 1)
+	trigger:DL:addReputationProgress("necromancer", 10)
+	trigger:DL:changeQuestState("invis_recipe", "failed")
+	trigger:DL:addConditionProgress("npc_syrah", "invis_recipe")
+	# translation: 
+	translation.tag:DL_Syrah_IBroughtItBack
+	translation.en:Wow, thank you. You know, that really means a lot to me. I won't ask where you got that though. (Winks)
+	translation.de:Wow, danke. Weisst du, das bedeutet mir wirklich ne Menge. Ich frag gar nicht erst, wie du das geschafft hast. (Zwinkert)
+	translation.ch:Wow, merci. Weisch, da bedüütet mer würkli viel. Ich frög gar nid erst, wed da becho hesch. (Zwinkeret)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "invis_recipe")
+	# translation: 
+	translation.tag:DL_Syrah_IKnowNothing
+	translation.en:What a pity.
+	translation.de:Schade.
+	translation.ch:Schad.
 	[
 		# Link node, tag is next tag
 		tag:-2

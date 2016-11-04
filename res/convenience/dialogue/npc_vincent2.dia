@@ -879,11 +879,39 @@ npc.id:npc_vincent2
 	tag:45
 	[
 		# Link node, tag is next tag
+		tag:46
+		condition:DL:isQuestState("invis_recipe", "started") and DL:isQuestComplete("invis_recipe")
+		# translation: 
+		translation.tag:DL_Choice_IGotRecipe
+		translation.en:I got the recipe for you.
+		translation.de:Ich habe das Rezept für dich.
+		translation.ch:Ich hans Rezept für dich.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [46] NPC Node
+	tag:46
+	# triggers: 
+	trigger:DL:changeQuestState("invis_recipe", "completed")
+	trigger:DL:removeItem("qe_invisrecipe", 1)
+	trigger:DL:addItem("ke_thiefguild", 1)
+	trigger:DL:addReputationProgress("thief", 10)
+	# translation: 
+	translation.tag:DL_Vincent_SecondQuestDone
+	translation.en:Very well. I knew you have talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
+	translation.de:Sehr gut. Ich wusste, dass du Talent hast. Falls du noch mehr dieser nützlichen Zauber lernen willst, nimm diesen Schlüssel und finde die Tür, die er öffnet.
+	translation.ch:Sehr guet. Ich ha gwüsst, dass du Talent hesch. Falls du na me vo dere nützliche Magie lerne wetsch, nimm de Schlüssel und find d'Türe, woner ufmacht.
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
