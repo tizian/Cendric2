@@ -13,6 +13,8 @@ CharacterCore::CharacterCore() {
 	for (ItemType type = ItemType::Equipment_head; type <= ItemType::Equipment_back; type = static_cast<ItemType>((int)type + 1)) {
 		m_data.equippedItems.insert({ type, "" });
 	}
+
+	m_partyHandler = new PartyHandler();
 }
 
 CharacterCore::CharacterCore(const CharacterCoreData& data) {
@@ -21,6 +23,8 @@ CharacterCore::CharacterCore(const CharacterCoreData& data) {
 	loadWeapon();
 	reloadAttributes();
 	loadQuests();
+
+	m_partyHandler = new PartyHandler();
 }
 
 CharacterCore* CharacterCore::createFromThis() {
@@ -30,6 +34,7 @@ CharacterCore* CharacterCore::createFromThis() {
 
 CharacterCore::~CharacterCore() {
 	delete m_weapon;
+	delete m_partyHandler;
 }
 
 bool CharacterCore::load(const std::string& fileName) {

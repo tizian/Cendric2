@@ -244,6 +244,14 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 	return gamePausedScreenOverlay;
 }
 
+ScreenOverlay* ScreenOverlay::createPartyLockedScreenOverlay() {
+	TextureScreenOverlay* partyScreenOverlay = new TextureScreenOverlay(sf::milliseconds(1), sf::seconds(0.1f));
+	partyScreenOverlay->setPermanent(true);
+	partyScreenOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
+	
+	return partyScreenOverlay;
+}
+
 ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay(std::map<std::string, int>& items, int gold) {
 	EnemyDefeatedScreenOverlay* enemyDefeatedScreenOverlay = new EnemyDefeatedScreenOverlay(sf::seconds(3.f), sf::seconds(2.f));
 

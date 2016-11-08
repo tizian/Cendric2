@@ -124,7 +124,7 @@ template<typename T> void ResourceManager::loadResource(std::map<std::string, T*
 	// search project's main directory
 	if (resource->loadFromFile(getResourcePath(filename))) {
 		holder[filename] = resource;
-		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": loading " + typeName);
+		g_logger->logVerbose("ResourceManager", getResourcePath(std::string(filename)) + ": loading " + typeName);
 
 		switch (type) {
 		case ResourceType::Unique:
@@ -222,7 +222,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (textureIt != m_textures.end()) {
 		delete textureIt->second;
 		m_textures.erase(textureIt);
-		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing texture");
+		g_logger->logVerbose("ResourceManager", getResourcePath(std::string(filename)) + ": releasing texture");
 		return;
 	}
 
@@ -231,7 +231,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (fontIt != m_fonts.end()) {
 		delete fontIt->second;
 		m_fonts.erase(fontIt);
-		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing font");
+		g_logger->logVerbose("ResourceManager", getResourcePath(std::string(filename)) + ": releasing font");
 		return;
 	}
 
@@ -240,7 +240,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (bitmapFontIt != m_bitmapFonts.end()) {
 		delete bitmapFontIt->second;
 		m_bitmapFonts.erase(bitmapFontIt);
-		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing bitmap font");
+		g_logger->logVerbose("ResourceManager", getResourcePath(std::string(filename)) + ": releasing bitmap font");
 		return;
 	}
 
@@ -249,7 +249,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	if (soundBufferIt != m_soundBuffers.end()) {
 		delete soundBufferIt->second;
 		m_soundBuffers.erase(soundBufferIt);
-		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": releasing soundbuffer");
+		g_logger->logVerbose("ResourceManager", getResourcePath(std::string(filename)) + ": releasing soundbuffer");
 		return;
 	}
 }

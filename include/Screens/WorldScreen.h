@@ -8,6 +8,7 @@
 #include "GUI/ProgressLog.h"
 #include "Structs/BookData.h"
 #include "Structs/Condition.h"
+#include "GUI/NewSaveGameForm.h"
 
 class Item;
 class Trigger;
@@ -107,6 +108,16 @@ protected:
 	BookWindow* m_bookWindow = nullptr;
 	bool m_bookWindowDisposed = false;
 
+	// party handling
+	bool m_isPartyActive = false;
+	ScreenOverlay* m_partyLockOverlay = nullptr;
+	NewSaveGameForm* m_partyForm = nullptr;
+	BitmapText m_partyScore;
+	BitmapText m_partyName;
+	BitmapText m_partyTime;
+	void onIDEntered();
+
 private:
+	void updateParty(const sf::Time& frameTime);
 	void updateOverlayQueue();
 };

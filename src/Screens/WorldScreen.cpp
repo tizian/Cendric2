@@ -192,6 +192,23 @@ void WorldScreen::reloadTrigger(Trigger* trigger) const {
 	trigger->getData().isTriggerable = getCharacterCore()->isConditionFulfilled("trigger", trigger->getData().condition);
 }
 
+void WorldScreen::updateParty(const sf::Time& frameTime) {
+	if (!m_isPartyActive) return;
+	auto& timeLeft = m_characterCore->getPartyHandler().getData().timeLeft;
+	updateTime(timeLeft, frameTime);
+
+	// format string
+	int seconds = static_cast<int>(std::round(timeLeft.asSeconds()));
+	int minutes = seconds / 60;
+	seconds = seconds % 60;
+	m_partyTime.setString(std::to_string(minutes) + ":" + std::to_string(seconds));
+
+	if (timeLeft == sf::Time::Zero) {
+		m_isPartyActive = false;
+		m_characterCore->getPartyHandler().endCurrentSession();
+	}
+}
+
 void WorldScreen::updateOverlayQueue() {
 	if (m_overlayQueue.empty()) return;
 	if (!getObjects(GameObjectType::_ScreenOverlay)->empty()) return;
@@ -223,6 +240,21 @@ void WorldScreen::loadWeather() {
 }
 
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
+	if (!m_isPartyActive) {
+		if (!m_partyForm) {
+			float width = 450;
+			float height = 230;
+			m_partyForm = new NewSaveGameForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+			m_partyForm->setOnOkClicked(std::bind(&WorldScreen::onIDEntered, this));
+			addObject(m_partyForm);
+			setAllButtonsEnabled(false);
+		}
+	}
+
+	if (m_partyLockOverlay) {
+		m_partyLockOverlay->update(frameTime);
+	}
+
 	updateOverlayQueue();
 	
 	m_interface->update(frameTime);
@@ -275,6 +307,10 @@ void WorldScreen::quickload() {
 		setNextScreen(new LoadingScreen(newCharacterCore));
 		return;
 	}
+}
+
+void WorldScreen::onIDEntered() {
+
 }
 
 void WorldScreen::quicksave() {

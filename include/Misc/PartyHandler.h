@@ -17,6 +17,9 @@ public:
 	PartyHandler();
 	~PartyHandler();
 
+	// returns the name of the user if the given ID is still available
+	// returns an empty string if not.
+	std::string checkID(int userID);
 	// starts the timer for a new user
 	// assert that the old data has been written down.
 	void startNewSession(int userID, const std::string& userName);

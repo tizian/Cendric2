@@ -19,6 +19,7 @@ public:
 	void logError(const std::string& source, const std::string& message) const;
 	void logWarning(const std::string& source, const std::string& message) const;
 	void logInfo(const std::string& source, const std::string& message) const;
+	void logVerbose(const std::string& source, const std::string& message) const;
 	// logs the message with importance level. The source should describe the calling class and/or method.
 	void log(LogLevel level, const std::string& source, const std::string& message) const;
 	// sets the log level to 'level'. The log will only output messages, that have importance 'level' or higher.

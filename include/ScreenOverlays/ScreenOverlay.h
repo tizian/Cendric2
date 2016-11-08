@@ -42,6 +42,7 @@ public:
 	static ScreenOverlay* createModifierLearnedScreenOverlay(const SpellModifier& modifier);
 	static ScreenOverlay* createGameOverScreenOverlay();
 	static ScreenOverlay* createGamePausedScreenOverlay();
+	static ScreenOverlay* createPartyLockedScreenOverlay();
 	static ScreenOverlay* createEnemyDefeatedScreenOverlay(std::map<std::string, int>& items, int gold);
 	static ScreenOverlay* createArrestedScreenOverlay();
 

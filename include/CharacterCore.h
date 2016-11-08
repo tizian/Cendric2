@@ -14,6 +14,7 @@
 #include "Structs/CharacterCoreData.h"
 #include "Structs/Condition.h"
 #include "ScreenOverlays/ScreenOverlay.h"
+#include "Misc/PartyHandler.h"
 
 class ScreenManager;
 
@@ -164,6 +165,9 @@ public:
 	// returns a the stored gold and sets it to 0
 	int retrieveStoredGold();
 
+	// party handling
+	PartyHandler& getPartyHandler() { return *m_partyHandler };
+
 
 protected:
 	// protected constructor for copying
@@ -197,4 +201,6 @@ private:
 
 	bool m_isNew = false;
 	bool m_isAutosave = false;
+
+	PartyHandler* m_partyHandler = nullptr;
 };

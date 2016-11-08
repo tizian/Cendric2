@@ -5,7 +5,7 @@ using namespace std;
 Logger* g_logger;
 
 Logger::Logger() {
-	m_logLevel = LogLevel::Warning;
+	m_logLevel = LogLevel::Info;
 }
 
 void Logger::log(LogLevel level, const std::string& source, const std::string& message) const {
@@ -51,6 +51,10 @@ void Logger::logWarning(const std::string& source, const std::string& message) c
 
 void Logger::logInfo(const std::string& source, const std::string& message) const {
 	log(LogLevel::Info, source, message);
+}
+
+void Logger::logVerbose(const std::string& source, const std::string& message) const {
+	log(LogLevel::Verbose, source, message);
 }
 
 void Logger::setLogLevel(LogLevel level) {
