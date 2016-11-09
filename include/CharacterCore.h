@@ -166,8 +166,7 @@ public:
 	int retrieveStoredGold();
 
 	// party handling
-	PartyHandler& getPartyHandler() { return *m_partyHandler };
-
+	PartyHandler& getPartyHandler() { return *m_partyHandler; };
 
 protected:
 	// protected constructor for copying

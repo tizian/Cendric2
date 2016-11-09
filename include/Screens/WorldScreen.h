@@ -8,7 +8,7 @@
 #include "GUI/ProgressLog.h"
 #include "Structs/BookData.h"
 #include "Structs/Condition.h"
-#include "GUI/NewSaveGameForm.h"
+#include "Misc/PartyForm.h"
 
 class Item;
 class Trigger;
@@ -111,13 +111,13 @@ protected:
 	// party handling
 	bool m_isPartyActive = false;
 	ScreenOverlay* m_partyLockOverlay = nullptr;
-	NewSaveGameForm* m_partyForm = nullptr;
+	PartyForm* m_partyForm = nullptr;
 	BitmapText m_partyScore;
 	BitmapText m_partyName;
 	BitmapText m_partyTime;
 	void onIDEntered();
+	void updateParty(const sf::Time& frameTime);
 
 private:
-	void updateParty(const sf::Time& frameTime);
 	void updateOverlayQueue();
 };

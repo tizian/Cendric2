@@ -125,7 +125,6 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 	}
 }
 	
-
 void WorldScreen::notifySpellLearned(SpellID id) {
 	getCharacterCore()->learnSpell(id);
 	addScreenOverlay(ScreenOverlay::createSpellLearnedScreenOverlay(id));
@@ -193,7 +192,28 @@ void WorldScreen::reloadTrigger(Trigger* trigger) const {
 }
 
 void WorldScreen::updateParty(const sf::Time& frameTime) {
-	if (!m_isPartyActive) return;
+	if (!m_isPartyActive) {
+		if (!m_partyLockOverlay) {
+			m_partyLockOverlay = ScreenOverlay::createPartyLockedScreenOverlay();
+		}
+		if (!m_partyForm) {
+			float width = 450;
+			float height = 230;
+			m_partyForm = new PartyForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+			m_partyForm->setOnOkClicked(std::bind(&WorldScreen::onIDEntered, this));
+			addObject(m_partyForm);
+			setAllButtonsEnabled(false);
+		}
+
+		if (m_partyLockOverlay) {
+			m_partyLockOverlay->update(frameTime);
+		}
+		if (m_partyForm) {
+			m_partyForm->update(frameTime);
+		}
+		return;
+	}
+
 	auto& timeLeft = m_characterCore->getPartyHandler().getData().timeLeft;
 	updateTime(timeLeft, frameTime);
 
@@ -240,21 +260,6 @@ void WorldScreen::loadWeather() {
 }
 
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
-	if (!m_isPartyActive) {
-		if (!m_partyForm) {
-			float width = 450;
-			float height = 230;
-			m_partyForm = new NewSaveGameForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
-			m_partyForm->setOnOkClicked(std::bind(&WorldScreen::onIDEntered, this));
-			addObject(m_partyForm);
-			setAllButtonsEnabled(false);
-		}
-	}
-
-	if (m_partyLockOverlay) {
-		m_partyLockOverlay->update(frameTime);
-	}
-
 	updateOverlayQueue();
 	
 	m_interface->update(frameTime);
@@ -310,7 +315,19 @@ void WorldScreen::quickload() {
 }
 
 void WorldScreen::onIDEntered() {
+	int newID = std::atoi(m_partyForm->getEnteredString().c_str());
+	std::string userName = m_characterCore->getPartyHandler().checkID(newID);
+	if (userName.empty()) {
+		m_partyForm = nullptr;
+		return;
+	}
 
+	m_partyLockOverlay->setPermanent(false);
+	m_partyLockOverlay = nullptr;
+
+	m_characterCore->getPartyHandler().startNewSession(newID, userName);
+
+	m_isPartyActive = true;
 }
 
 void WorldScreen::quicksave() {

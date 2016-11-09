@@ -210,6 +210,9 @@ sf::RenderTexture& LevelScreen::getParticleFGRenderTexture() {
 }
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
+	WorldScreen::updateParty(frameTime);
+	if (!m_isPartyActive) return;
+
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 	handleGameOver(frameTime);
 	handleBossDefeated(frameTime);
@@ -350,6 +353,9 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	}
 	if (m_gamePausedOverlay) {
 		m_gamePausedOverlay->render(renderTarget);
+	}
+	if (m_partyLockOverlay) {
+		m_partyLockOverlay->render(renderTarget);
 	}
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget);

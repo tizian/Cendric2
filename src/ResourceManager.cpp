@@ -66,6 +66,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_SPELLBOOKTABS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_GEMS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SCREEN_OVERLAY, ResourceType::Global);
 
 	// load gui resources
 	loadTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE, ResourceType::Global);
@@ -332,7 +333,6 @@ void ResourceManager::loadLevelResources() {
 	loadTexture(GlobalResource::TEX_DEBUFF_FEAR, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_DEBUFF_STUN, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_SCREEN_GAMEOVER, ResourceType::Level);
-	loadTexture(GlobalResource::TEX_SCREEN_OVERLAY, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_SCREEN_OVERLAY_STUNNED, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_SCREEN_OVERLAY_FEARED, ResourceType::Level);
 	loadTexture(GlobalResource::TEX_TEXT_GAMEOVER, ResourceType::Level);

@@ -14,6 +14,9 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScree
 }
 
 void MapScreen::execUpdate(const sf::Time& frameTime) {
+	WorldScreen::updateParty(frameTime);
+	if (!m_isPartyActive) return;
+
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 	if (m_currentMap.getWorldData()->explorable) {
 		updateFogOfWar();
@@ -241,6 +244,12 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	}
 	if (m_cookingWindow != nullptr) {
 		m_cookingWindow->render(renderTarget);
+	}
+	if (m_partyLockOverlay) {
+		m_partyLockOverlay->render(renderTarget);
+	}
+	if (m_partyForm) {
+		m_partyForm->render(renderTarget);
 	}
 
 	renderTarget.setView(adjustedView);

@@ -116,6 +116,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Map'
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MaxFPS','Max. FPS','Max. FPS','Max. FPS','FPS máximos');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MaxHealthPoints','Max. Health','Max. Lebensenergie','Max. Lebensenergie','Salud máxima');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MessageNewSaveGame','Please enter the name for your new saved game (at most 24 characters).','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen).','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche).','Favor introduzca el nombre para su nueva partida guardada (máximo 24 caracteres).');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MessageEnterPartyID','Enter your Bruchbude Party ID','Bitte gib deine Bruchbude Party ID ein.','Bitte gib dini Bruchbude Party ID ii.', 'Please do not play in Spanish!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Meta','Meta','Meta','Meta','Meta');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Miscellaneous','Miscellaneous','Plunder','Grümpel','Otros');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt','Gema aprendida');
