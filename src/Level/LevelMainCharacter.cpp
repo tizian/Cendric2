@@ -224,6 +224,7 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 
 void LevelMainCharacter::setDead() {
 	if (m_isDead) return;
+	m_core->getPartyHandler().notifyPartyScore(PartyScore::DEATH);
 	LevelMovableGameObject::setDead();
 }
 

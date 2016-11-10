@@ -201,6 +201,10 @@ void WorldScreen::initParty() {
 	m_partyName.setColor(COLOR_BAD);
 	m_partyName.setTextStyle(TextStyle::Shadowed);
 	m_partyName.setPosition(pos);
+	if (m_characterCore->getPartyHandler().getData().isPartyActive) {
+		m_partyName.setString(m_characterCore->getPartyHandler().getData().name);
+	}
+
 	pos.y += posOffset;
 
 	m_partyTime.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);

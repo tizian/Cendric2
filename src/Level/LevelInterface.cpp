@@ -128,6 +128,7 @@ void LevelInterface::consumeItem(const std::string& itemID) {
 	m_consumedFood[item->getID()] += 1;
 
 	m_screen->notifyItemChange(item->getID(), -1);
+	m_screen->getCharacterCore()->getPartyHandler().notifyPartyScore(PartyScore::ITEM_USED);
 	m_quickSlotBar->reload();
 }
 
