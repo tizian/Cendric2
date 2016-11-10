@@ -47,6 +47,8 @@ WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
 	m_foregroundLayerShader.loadFromMemory(vertexShader, foregroundFragmentShader);
 
 	setTooltipPositionTop(true);
+
+	initParty();
 }
 
 WorldScreen::~WorldScreen() {
@@ -191,8 +193,30 @@ void WorldScreen::reloadTrigger(Trigger* trigger) const {
 	trigger->getData().isTriggerable = getCharacterCore()->isConditionFulfilled("trigger", trigger->getData().condition);
 }
 
+void WorldScreen::initParty() {
+	sf::Vector2f pos(10.f, 50.f);
+	float posOffset = GUIConstants::CHARACTER_SIZE_L + 10;
+
+	m_partyName.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	m_partyName.setColor(COLOR_BAD);
+	m_partyName.setTextStyle(TextStyle::Shadowed);
+	m_partyName.setPosition(pos);
+	pos.y += posOffset;
+
+	m_partyTime.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	m_partyTime.setColor(COLOR_BAD);
+	m_partyTime.setTextStyle(TextStyle::Shadowed);
+	m_partyTime.setPosition(pos);
+	pos.y += posOffset;
+
+	m_partyScore.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	m_partyScore.setColor(COLOR_BAD);
+	m_partyScore.setTextStyle(TextStyle::Shadowed);
+	m_partyScore.setPosition(pos);
+}
+
 void WorldScreen::updateParty(const sf::Time& frameTime) {
-	if (!m_isPartyActive) {
+	if (!m_characterCore->getPartyHandler().getData().isPartyActive) {
 		if (!m_partyLockOverlay) {
 			m_partyLockOverlay = ScreenOverlay::createPartyLockedScreenOverlay();
 		}
@@ -222,9 +246,9 @@ void WorldScreen::updateParty(const sf::Time& frameTime) {
 	int minutes = seconds / 60;
 	seconds = seconds % 60;
 	m_partyTime.setString(std::to_string(minutes) + ":" + std::to_string(seconds));
+	m_partyScore.setString(std::to_string(m_characterCore->getPartyHandler().getData().score));
 
 	if (timeLeft == sf::Time::Zero) {
-		m_isPartyActive = false;
 		m_characterCore->getPartyHandler().endCurrentSession();
 	}
 }
@@ -316,9 +340,9 @@ void WorldScreen::quickload() {
 
 void WorldScreen::onIDEntered() {
 	int newID = std::atoi(m_partyForm->getEnteredString().c_str());
+	m_partyForm = nullptr;
 	std::string userName = m_characterCore->getPartyHandler().checkID(newID);
 	if (userName.empty()) {
-		m_partyForm = nullptr;
 		return;
 	}
 
@@ -327,7 +351,7 @@ void WorldScreen::onIDEntered() {
 
 	m_characterCore->getPartyHandler().startNewSession(newID, userName);
 
-	m_isPartyActive = true;
+	m_partyName.setString(userName);
 }
 
 void WorldScreen::quicksave() {
@@ -371,6 +395,10 @@ void WorldScreen::updateProgressLog(const sf::Time& frameTime) {
 void WorldScreen::render(sf::RenderTarget& renderTarget) {
 	m_progressLog->render(renderTarget);
 	m_interface->render(renderTarget);
+
+	renderTarget.draw(m_partyName);
+	renderTarget.draw(m_partyScore);
+	renderTarget.draw(m_partyTime);
 }
 
 void WorldScreen::renderAfterForeground(sf::RenderTarget& renderTarget) {

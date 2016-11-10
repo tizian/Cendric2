@@ -121,6 +121,12 @@ bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
 			return false;
 		}
 		m_data.questStates[id] = state;
+		if (state == QuestState::Completed) {
+			m_partyHandler->notifyPartyScore(PartyScore::QUEST_COMPLETED);
+		} 
+		if (state == QuestState::Failed) {
+			m_partyHandler->notifyPartyScore(PartyScore::QUEST_FAILED);
+		}
 		return true;
 	}
 	g_logger->logError("CharacterCore", "Cannot change quest state for quest: " + id + ". Either the quest has already started (and cannot be started again) or the quest has not yet started and needs to be started first.");
@@ -236,10 +242,12 @@ void CharacterCore::setEnemyLooted(const std::string& level, int pos) {
 
 void CharacterCore::setItemLooted(const std::string& level, int pos) {
 	m_data.itemsLooted.at(level).insert(pos);
+	m_partyHandler->notifyPartyScore(PartyScore::ITEM_LOOTED);
 }
 
 void CharacterCore::setChestLooted(const std::string& level, int pos) {
 	m_data.chestsLooted.at(level).insert(pos);
+	m_partyHandler->notifyPartyScore(PartyScore::CHEST_LOOTED);
 }
 
 void CharacterCore::setTriggerTriggered(const std::string& world, int pos) {
@@ -355,6 +363,9 @@ bool CharacterCore::setConditionFulfilled(const std::string& conditionType, cons
 		m_data.conditionProgress.insert({ conditionType, std::set<std::string>() });
 	}
 	auto ret = m_data.conditionProgress.at(conditionType).insert(condition);
+	if (ret.second) {
+		m_partyHandler->notifyPartyScore(PartyScore::CONDITION_ADDED);
+	}
 	return ret.second;
 }
 
@@ -363,6 +374,9 @@ bool CharacterCore::unlockQuestDescription(const std::string& questID, int descr
 		m_data.questDescriptionProgress.insert({ questID, std::set<int>() });
 	}
 	auto ret = m_data.questDescriptionProgress.at(questID).insert(descriptionID);
+	if (ret.second) {
+		m_partyHandler->notifyPartyScore(PartyScore::QUEST_DESCRIPTION_ADDED);
+	}
 	return ret.second;
 }
 
@@ -456,6 +470,7 @@ void CharacterCore::setMerchantData(const std::string& merchantID, const Merchan
 
 void CharacterCore::addPermanentAttributes(const AttributeData& attributes) {
 	m_data.attributes.addBean(attributes);
+	m_partyHandler->notifyPartyScore(PartyScore::PERMANENT_ATTRIBUTES);
 	reloadAttributes();
 }
 
@@ -464,6 +479,7 @@ void CharacterCore::learnModifier(const SpellModifier& modifier) {
 		m_data.modfiersLearned.insert({ modifier.type, modifier.level });
 	}
 	else {
+		m_partyHandler->notifyPartyScore(PartyScore::MODIFIER_LEARNED);
 		m_data.modfiersLearned[modifier.type] = std::max(m_data.modfiersLearned[modifier.type], modifier.level);
 	}
 }
@@ -493,6 +509,7 @@ void CharacterCore::addReputation(FractionID fraction, int amount) {
 	}
 
 	m_data.reputationProgress.at(fraction) = std::min(100, m_data.reputationProgress.at(fraction) + amount);
+	m_partyHandler->notifyPartyScore(PartyScore::REPUTATION_ADDED);
 }
 
 int CharacterCore::getReputation(FractionID fraction) const {
@@ -695,6 +712,7 @@ void CharacterCore::learnSpell(SpellID id) {
 		m_data.spellsLearned.insert({ type, std::set<SpellID>() });
 	}
 	m_data.spellsLearned.at(type).insert(id);
+	m_partyHandler->notifyPartyScore(PartyScore::SPELL_LEARNED);
 }
 
 void CharacterCore::equipItem(const std::string& item, ItemType type) {

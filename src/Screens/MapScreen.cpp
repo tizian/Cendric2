@@ -15,7 +15,7 @@ MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScree
 
 void MapScreen::execUpdate(const sf::Time& frameTime) {
 	WorldScreen::updateParty(frameTime);
-	if (!m_isPartyActive) return;
+	if (!m_characterCore->getPartyHandler().getData().isPartyActive) return;
 
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 	if (m_currentMap.getWorldData()->explorable) {

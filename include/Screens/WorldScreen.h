@@ -109,7 +109,6 @@ protected:
 	bool m_bookWindowDisposed = false;
 
 	// party handling
-	bool m_isPartyActive = false;
 	ScreenOverlay* m_partyLockOverlay = nullptr;
 	PartyForm* m_partyForm = nullptr;
 	BitmapText m_partyScore;
@@ -117,6 +116,7 @@ protected:
 	BitmapText m_partyTime;
 	void onIDEntered();
 	void updateParty(const sf::Time& frameTime);
+	void initParty();
 
 private:
 	void updateOverlayQueue();

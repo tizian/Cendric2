@@ -26,7 +26,7 @@ std::string PartyHandler::checkID(int userID) {
 	std::string userName = "";
 	sqlite3_stmt* statement;
 
-	std::string query = "SELECT name FROM users WHERE cendric_locked = 0 AND user_id = " + std::to_string(userID) + ";";
+	std::string query = "SELECT name FROM users WHERE NOT(cendric_locked) AND user_id = " + std::to_string(userID) + ";";
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
@@ -54,7 +54,7 @@ std::string PartyHandler::checkID(int userID) {
 }
 
 void PartyHandler::startNewSession(int userID, const std::string& userName) {
-	if (m_data.currentID != -1) {
+	if (m_data.isPartyActive) {
 		g_logger->logError("PartyHandler", "Can't start new session, old one is still running!");
 		return;
 	}
@@ -63,6 +63,7 @@ void PartyHandler::startNewSession(int userID, const std::string& userName) {
 	m_data.name = userName;
 	m_data.timeLeft = PARTY_TIME;
 	m_data.score = 0;
+	m_data.isPartyActive = true;
 }
 
 void PartyHandler::initDatabase() {
@@ -77,7 +78,7 @@ void PartyHandler::initDatabase() {
 }
 
 void PartyHandler::endCurrentSession() {
-	if (m_data.currentID == -1) {
+	if (!m_data.isPartyActive) {
 		g_logger->logError("PartyHandler", "No session to end.");
 		return;
 	}
@@ -99,6 +100,62 @@ void PartyHandler::endCurrentSession() {
 		g_logger->logError("PartyHandler", "Unable to open file: " + std::string(OUTPUT_PATH));
 	}
 
-	m_data.currentID = -1;
+	m_data.isPartyActive = false;
+}
+
+void PartyHandler::notifyPartyScore(PartyScore score) {
+	switch (score) {
+	default: 
+		break;
+	case PartyScore::BOSS_DEFEATED:
+		m_data.score += 30;
+		break;
+	case PartyScore::CONDITION_ADDED:
+		m_data.score += 2;
+		break;
+	case PartyScore::DEATH:
+		m_data.score -= 5;
+		break;
+	case PartyScore::ENEMY_DEFEATED:
+		m_data.score += 2;
+		break;
+	case PartyScore::ENEMY_DEFEATED_FIRST:
+		m_data.score += 3;
+		break;
+	case PartyScore::ITEM_LOOTED:
+		m_data.score += 1;
+		break;
+	case PartyScore::ITEM_USED:
+		m_data.score -= 1;
+		break;
+	case PartyScore::MODIFIER_LEARNED:
+		m_data.score += 20;
+		break;
+	case PartyScore::QUEST_COMPLETED:
+		m_data.score += 10;
+		break;
+	case PartyScore::QUEST_FAILED:
+		m_data.score -= 5;
+		break;
+	case PartyScore::QUEST_DESCRIPTION_ADDED:
+		m_data.score += 2;
+		break;
+	case PartyScore::REPUTATION_ADDED:
+		m_data.score += 5;
+		break;
+	case PartyScore::SPELL_LEARNED:
+		m_data.score += 10;
+		break;
+	case PartyScore::PERMANENT_ATTRIBUTES:
+		m_data.score += 1;
+		break;
+	case PartyScore::CHEST_LOOTED:
+		m_data.score += 5;
+		break;
+	}
+
+	if (m_data.score < 0) {
+		m_data.score = 0;
+	}
 }
 

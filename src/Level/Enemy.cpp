@@ -380,8 +380,14 @@ void Enemy::setDead() {
 		return;
 	}
 
+	auto& handler = m_screen->getCharacterCore()->getPartyHandler();
+
 	if (m_isUnique) {
 		notifyKilled();
+		handler.notifyPartyScore(PartyScore::ENEMY_DEFEATED_FIRST);
+	}
+	else {
+		handler.notifyPartyScore(PartyScore::ENEMY_DEFEATED);
 	}
 
 	if (m_scriptedBehavior != nullptr) {
@@ -397,6 +403,7 @@ void Enemy::setDead() {
 
 		// TODO: what if we have multiple bosses?
 		dynamic_cast<LevelScreen*>(m_screen)->notifyBossKilled(m_lootableItems, m_lootableGold);
+		handler.notifyPartyScore(PartyScore::BOSS_DEFEATED);
 	}
 	else {
 		m_interactComponent->setInteractable(true);
@@ -405,6 +412,7 @@ void Enemy::setDead() {
 
 void Enemy::notifyLooted() {
 	m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_objectID);
+	m_screen->getCharacterCore()->getPartyHandler().notifyPartyScore(PartyScore::ITEM_LOOTED);
 	m_isLooted = true;
 }
 

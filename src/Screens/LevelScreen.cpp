@@ -210,8 +210,10 @@ sf::RenderTexture& LevelScreen::getParticleFGRenderTexture() {
 }
 
 void LevelScreen::execUpdate(const sf::Time& frameTime) {
-	WorldScreen::updateParty(frameTime);
-	if (!m_isPartyActive) return;
+	if (!m_isPaused) {
+		WorldScreen::updateParty(frameTime);
+		if (!m_characterCore->getPartyHandler().getData().isPartyActive) return;
+	}
 
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 	handleGameOver(frameTime);

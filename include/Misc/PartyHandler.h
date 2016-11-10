@@ -5,7 +5,26 @@
 
 // overkill party timed feature
 
+enum PartyScore {
+	ENEMY_DEFEATED_FIRST,
+	ENEMY_DEFEATED,
+	BOSS_DEFEATED,
+	ITEM_LOOTED,
+	MODIFIER_LEARNED,
+	SPELL_LEARNED,
+	QUEST_COMPLETED,
+	QUEST_FAILED,
+	REPUTATION_ADDED,
+	ITEM_USED,
+	CONDITION_ADDED,
+	QUEST_DESCRIPTION_ADDED,
+	DEATH,
+	PERMANENT_ATTRIBUTES,
+	CHEST_LOOTED
+};
+
 struct PartyData {
+	bool isPartyActive = false;
 	int currentID = -1;
 	int score = 0;
 	sf::Time timeLeft;
@@ -24,6 +43,7 @@ public:
 	// assert that the old data has been written down.
 	void startNewSession(int userID, const std::string& userName);
 	void endCurrentSession();
+	void notifyPartyScore(PartyScore score);
 
 	// add file io
 	// add db managing (only read)
