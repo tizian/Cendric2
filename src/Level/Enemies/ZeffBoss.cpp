@@ -215,6 +215,7 @@ void ZeffBoss::render(sf::RenderTarget& target) {
 
 void ZeffBoss::setDead() {
 	if (m_isDead) return;
+	m_screen->getCharacterCore()->getPartyHandler().notifyPartyScore(PartyScore::YOU_MONSTER);
 	Enemy::setDead();
 	updateParticleSystemPosition();
 }

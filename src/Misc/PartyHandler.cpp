@@ -152,6 +152,9 @@ void PartyHandler::notifyPartyScore(PartyScore score) {
 	case PartyScore::CHEST_LOOTED:
 		m_data.score += 5;
 		break;
+	case PartyScore::YOU_MONSTER:
+		m_data.score -= 5;
+		break;
 	}
 
 	if (m_data.score < 0) {

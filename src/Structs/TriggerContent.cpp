@@ -18,6 +18,7 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		break;
 	case TriggerContentType::ItemChange:
 		screen->notifyItemChange(content.s1, content.i1);
+		screen->getCharacterCore()->getPartyHandler().notifyPartyScore(PartyScore::ITEM_LOOTED);
 		break;
 	case TriggerContentType::Hint:
 		screen->notifyHintAdded(content.s1);
