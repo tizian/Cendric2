@@ -59,7 +59,7 @@ const std::string& PartyForm::getEnteredString() const {
 void PartyForm::update(const sf::Time& frameTime) {
 	m_enteredString = g_inputController->getReadText();
 	m_enteredStringText.setString(m_enteredString);
-	m_okButton->setEnabled(m_enteredString.size() < 3 && m_enteredString.size() > 0);
+	m_okButton->setEnabled(m_enteredString.size() < 5 && m_enteredString.size() > 0);
 	m_okButton->update(frameTime);
 
 	if (m_okButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
