@@ -124,7 +124,6 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 		m_interface->reloadQuestLog();
 	}
 }
-	
 
 void WorldScreen::notifySpellLearned(SpellID id) {
 	getCharacterCore()->learnSpell(id);
