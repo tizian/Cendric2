@@ -38,7 +38,7 @@ void DoorLevelTile::update(const sf::Time& frameTime) {
 	if (!m_isInitialized) {
 		close();
 		playCurrentAnimation(false);
-		m_isInitialized;
+		m_isInitialized = true;
 	}
 
 	LevelDynamicTile::update(frameTime);
