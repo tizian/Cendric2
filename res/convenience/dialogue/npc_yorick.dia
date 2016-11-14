@@ -1,0 +1,50 @@
+# dia file for dialogue for npc: npc_yorick
+
+npc.id:npc_yorick
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:not DL:isConditionFulfilled("npc_yorick", "alas")
+		# translation: 
+		translation.tag:DL_Choice_Alas
+		translation.en:Alas, poor Yorick!
+		translation.de:Ach armer Yorick!
+		translation.ch:Ach arme Yorick!
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_yorick", "alas")
+	# translation: 
+	translation.tag:DL_Yorick_Alas
+	translation.en:...
+	translation.de:...
+	translation.ch:...
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
