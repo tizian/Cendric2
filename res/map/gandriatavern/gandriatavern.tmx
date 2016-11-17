@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="167">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="170">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -140,6 +140,21 @@
   <object id="151" gid="382" x="351" y="546" width="50" height="50">
    <properties>
     <property name="id" value="npc_helena"/>
+   </properties>
+  </object>
+  <object id="167" gid="391" x="1000" y="250" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_jeremy"/>
+   </properties>
+  </object>
+  <object id="168" gid="392" x="1050" y="300" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_roy"/>
+   </properties>
+  </object>
+  <object id="169" gid="393" x="950" y="300" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_morgiana"/>
    </properties>
   </object>
  </objectgroup>

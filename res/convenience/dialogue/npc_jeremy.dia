@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_jeremy
+
+npc.id:npc_jeremy
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_Nothing
+	translation.en:...
+	translation.de:...
+	translation.ch:...
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

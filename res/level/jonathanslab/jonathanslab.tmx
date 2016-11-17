@@ -709,6 +709,7 @@
     <property name="eq_rubyring" value="1"/>
     <property name="fo_mediumhealingpotion" value="1"/>
     <property name="gold" value="10"/>
+    <property name="we_firestaff" value="1"/>
    </properties>
   </object>
  </objectgroup>

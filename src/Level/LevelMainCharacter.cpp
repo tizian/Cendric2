@@ -2,6 +2,7 @@
 #include "Screens/LevelScreen.h"
 #include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
+#include "ScreenOverlays/TextureScreenOverlay.h"
 #include "Level/DamageNumbers.h"
 #include "GlobalResource.h"
 
@@ -29,8 +30,22 @@ void LevelMainCharacter::load() {
 	setGodmode(g_resourceManager->getConfiguration().isGodmode);
 }
 
+void LevelMainCharacter::updateDamagedOverlay() {
+	if (!m_damagedScreenOverlay && !m_isDead && static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints < 0.2f) {
+		m_damagedScreenOverlay = new TextureScreenOverlay(sf::seconds(0.1f), sf::seconds(0.1f));
+		m_damagedScreenOverlay->setPermanent(true);
+		dynamic_cast<TextureScreenOverlay*>(m_damagedScreenOverlay)->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY_DAMAGED));
+		m_screen->addObject(m_damagedScreenOverlay);
+	}
+	else if (m_damagedScreenOverlay && (m_isDead || static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints >= 0.2f)) {
+		m_damagedScreenOverlay->setPermanent(false);
+		m_damagedScreenOverlay = nullptr;
+	}
+}
+
 void LevelMainCharacter::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
+	updateDamagedOverlay();
 	if (m_isDead) {
 		m_ps->update(frameTime);
 		updateTime(m_fadingTime, frameTime);

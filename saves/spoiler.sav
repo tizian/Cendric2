@@ -54,6 +54,7 @@ item.id:eq_wizardhatlight,1
 item.id:eq_wizardhatshadow,1
 item.id:eq_travelhat,1
 item.id:eq_icearmor,1
+item.id:eq_mercenarybandana,1
 item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2

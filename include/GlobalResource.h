@@ -57,6 +57,7 @@ public:
 	static const std::string TEX_SCREEN_OVERLAY;
 	static const std::string TEX_SCREEN_OVERLAY_STUNNED;
 	static const std::string TEX_SCREEN_OVERLAY_FEARED;
+	static const std::string TEX_SCREEN_OVERLAY_DAMAGED;
 	static const std::string TEX_TEXT_GAMEOVER;
 	static const std::string TEX_TEXT_GAMEPAUSED;
 	static const std::string TEX_TEXT_DEFEATED;

@@ -86,6 +86,14 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire) values ('eq_bandana', 5, 1, 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_bandana', 'res/assets/equipment/head/spritesheet_head_bandana.png', 'res/assets/equipment/head/spritesheet_map_head_bandana.png');
 
+-- Mercenary Bandana
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_mercenarybandana', 'item', 'Mercenary Bandana','Söldnerkopftuch','Söldner Chopftuech');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_mercenarybandana', 'item_desc', 'They shouldn''t have messed with me.','Sie hätten sich nicht mit mir anlegen sollen.','Si heted sich nid mit mir alege söle.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_mercenarybandana', 'eq_head', 600, 50, 40);
+INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire, dmg_shadow) values ('eq_mercenarybandana', 7, 2, 2, 1);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_mercenarybandana', 'res/assets/equipment/head/spritesheet_head_eq_mercenarybandana.png', 'res/assets/equipment/head/spritesheet_map_head_eq_mercenarybandana.png');
+
 -- Scarf of the Fire Rat
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_fireratscarf', 'item', 'Scarf of the Fire Rat','Schal der Feuerratte','Füürratte Halstuech');
