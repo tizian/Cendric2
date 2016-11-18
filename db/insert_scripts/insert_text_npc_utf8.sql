@@ -34,4 +34,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_lloyd','npc','Commander Lloyd','Kommandant Lloyd','Kommandant Lloyd');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_morgiana','npc','Morgiana "The Butcher"','Morgiana "Die Metzgerin"','"Metzgerin" Morgiana');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_roy','npc','Roy "The Demon"','Roy "Der Dämon"','"Dämon" Roy');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jeremy','npc','Jeremy "The Fox"','Jeremy "Der Fuchs"','"Fuchs" Jeremy');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jeremy','npc','Jeremy "The Fox" Siek','Jeremy "Der Fuchs" Siek','Jeremy "De Fuchs" Siek');
