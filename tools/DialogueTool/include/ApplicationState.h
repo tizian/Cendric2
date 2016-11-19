@@ -17,7 +17,7 @@ struct Configuration {
 
 const struct Configuration DEFAULT_CONFIGURATION {
 	"res/npc",
-	"res/db/insert_scripts/dialogue",
+	"db/insert_scripts/dialogue",
 	"res/convenience/dialogue"
 };
 

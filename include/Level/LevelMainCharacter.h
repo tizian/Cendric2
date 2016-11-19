@@ -68,9 +68,11 @@ private:
 	void handleAttackInput();
 
 	void loadParticleSystem();
+	void updateDamagedOverlay();
 
 private:
 	CharacterCore* m_core;
+	ScreenOverlay* m_damagedScreenOverlay = nullptr;
 	TargetManager* m_targetManager;
 	
 	std::map<Key, int> m_spellKeyMap;

@@ -35,7 +35,6 @@ public:
 	void setReloadEnabled(bool enabled);
 	// this npc will reload its routine in the next update
 	void notifyReloadNeeded();
-	
 
 	GameObjectType getConfiguredType() const override;
 	const NPCData& getNPCData() const;

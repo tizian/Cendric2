@@ -25,3 +25,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Jo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SyrahHome','location','Syrah''s House','Syrah''s Haus','Huus vode Syrah');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JonathansLab','location','Jonathan''s Laboratory','Jonathan''s Laboratorium','Laboratorium vom Jonathan');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Well','location','Well','Ziehbrunnen','Ziebrunne');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaSewers','location','Sewers of Gandria','Kanalisation von Gandria','Kanalisation vo Gandria');

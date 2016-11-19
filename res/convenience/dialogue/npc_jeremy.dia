@@ -1,0 +1,162 @@
+# dia file for dialogue for npc: npc_jeremy
+
+npc.id:npc_jeremy
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:DL:isQuestState("stephens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")
+		# translation: 
+		translation.tag:DL_Choice_Helmet
+		translation.en:Do you know something about the helmet of a certain paladin?
+		translation.de:Weisst du etwas über den Helm eines gewissen Paladins?
+		translation.ch:Weisch du öppis über de Helm vomne gwüsse Paladin?
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_jeremy", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you guys?
+		translation.de:Wer seid ihr?
+		translation.ch:Wer sind ihr Lütlis?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_Helmet
+	translation.en:Oh, you mean that pathetic paladin that gambled away everything he had? I'll have to disappoint you, we don't have that helmet anymore.
+	translation.de:Oh, du meinst diesen erbärmlichen Paladin der alles verspielt hat? Ich muss dich enttäuschen, diesen Helm haben wir nicht mehr.
+	translation.ch:Oh, du meinsch de erbärmlich Paladin wo alles verzockt het? Da muni di enttüsche, de Helm hämmer nümme.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addQuestDescription("stephens_helmet", 1)
+	trigger:DL:addConditionProgress("npc_jeremy", "helmet")
+	# translation: 
+	translation.tag:DL_Jeremy_Helmet2
+	translation.en:We lost it somewhere in the sewers of Gandria. Good luck finding it there, between the nasty rats and oozes...
+	translation.de:Wir haben ihn irgendwo in der Kanalisation von Gandria verloren. Viel Spass, wenn du ihn dort finden willst, zwischen all den hässlichen Ratten und Schleimen.
+	translation.ch:Mir henden irgendwo ide Kanalisation vo Gandria verlore. Viel Spass wenden det finde wetsch, zwüsched all de grusige Ratte und Schleimlis.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jeremy", "who_are_you")
+	# translation: 
+	translation.tag:DL_Jeremy_WhoAreYou
+	translation.en:Just some mercenaries. None of your business, buddy.
+	translation.de:Nur ein paar Söldner. Geht dich nichts an, Kumpel.
+	translation.ch:Bloss es paar Söldner. Gaht dich nüt ah, Kolleg.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_NotYourBuddy
+		translation.en:I'm not your buddy, guy.
+		translation.de:Ich bin dich dein Kumpel, Alter.
+		translation.ch:Ich bi nid din Kolleg, Alte.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_Okay
+		translation.en:Okay...
+		translation.de:Okay...
+		translation.ch:Okay...
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_NotYourGuy
+	translation.en:I'm not your guy, friend.
+	translation.de:Ich bin nicht dein Alter, Freund.
+	translation.ch:Ich bi nid din Alte, Homie.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{2
+	# [6] Choice Node
+	tag:6
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_NotYourFriend
+		translation.en:I'm not your friend, pal.
+		translation.de:Ich bin nicht dein Freund, Kumpel.
+		translation.ch:Ich bi nid din Homie, Kolleg.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_Okay
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_EndDialogue
+	translation.en:(Glares at you fiercely)
+	translation.de:(Starrt dich wütend an)
+	translation.ch:(Starrt dich hässig ah)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

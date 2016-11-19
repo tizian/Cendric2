@@ -126,7 +126,7 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 		m_interface->reloadQuestLog();
 	}
 }
-	
+
 void WorldScreen::notifySpellLearned(SpellID id) {
 	getCharacterCore()->learnSpell(id);
 	addScreenOverlay(ScreenOverlay::createSpellLearnedScreenOverlay(id));
@@ -300,8 +300,10 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 
 		std::string file = getDocumentsPath(GlobalResource::SCREENSHOT_FOLDER) + string(buff) + ".png";
 
-		sf::Image image = g_renderWindow->capture();
-		image.saveToFile(file);
+		sf::Texture tex;
+		tex.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+		tex.update(*g_renderWindow);
+		tex.copyToImage().saveToFile(file);
 
 		std::string logString = "Saved screenshot under \"" + file + "\".";
 		g_logger->logInfo("WorldScreen", logString);

@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_morgiana
+
+npc.id:npc_morgiana
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morgiana_WhatchaLookingAt
+	translation.en:Whatcha looking at, eh?
+	translation.de:Was guckst du, he?
+	translation.ch:Was luegsch, hä?
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
