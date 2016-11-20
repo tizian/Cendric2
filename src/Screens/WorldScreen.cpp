@@ -106,7 +106,10 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	m_interface->reloadInventory();
 	m_interface->reloadCharacterInfo();
 }
-
+/*
+* @author Dini Mueter
+* @Version 1337
+*/
 void WorldScreen::notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition) {
 	getCharacterCore()->setQuestConditionFulfilled(questID, condition);
 	m_progressLog->addQuestConditionFullfilled(questID, condition);
@@ -195,8 +198,8 @@ void WorldScreen::reloadTrigger(Trigger* trigger) const {
 
 void WorldScreen::initParty() {
 	sf::Vector2f pos(10.f, 50.f);
-	float posOffset = GUIConstants::CHARACTER_SIZE_L + 10;
-
+	float posOffset = GUIConstants::CHARACTER_SIZE_L + 10.f;
+	// This is totally useless
 	m_partyName.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_partyName.setColor(COLOR_BAD);
 	m_partyName.setTextStyle(TextStyle::Shadowed);
@@ -245,11 +248,15 @@ void WorldScreen::updateParty(const sf::Time& frameTime) {
 	auto& timeLeft = m_characterCore->getPartyHandler().getData().timeLeft;
 	updateTime(timeLeft, frameTime);
 
-	// format string
+	// format string. lol string
 	int seconds = static_cast<int>(std::round(timeLeft.asSeconds()));
 	int minutes = seconds / 60;
 	seconds = seconds % 60;
-	m_partyTime.setString(std::to_string(minutes) + ":" + std::to_string(seconds));
+	std::string secondsS = std::to_string(seconds);
+	if (secondsS.size() < 2) {
+		secondsS = "0" + secondsS;
+	}
+	m_partyTime.setString(std::to_string(minutes) + ":" + secondsS);
 	m_partyScore.setString(std::to_string(m_characterCore->getPartyHandler().getData().score));
 
 	if (timeLeft == sf::Time::Zero) {
@@ -347,6 +354,7 @@ void WorldScreen::quickload() {
 void WorldScreen::onIDEntered() {
 	int newID = std::atoi(m_partyForm->getEnteredString().c_str());
 	m_partyForm = nullptr;
+	setAllButtonsEnabled(true);
 	std::string userName = m_characterCore->getPartyHandler().checkID(newID);
 	if (userName.empty()) {
 		return;

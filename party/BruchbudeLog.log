@@ -1,0 +1,852 @@
+Nov 19, 2016 8:11:02 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 12;
+Nov 19, 2016 8:11:18 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 19;
+Nov 19, 2016 8:11:48 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 3;
+Nov 19, 2016 8:13:02 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 3;
+Nov 19, 2016 8:13:12 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 19;
+Nov 19, 2016 8:25:09 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 0, beers = 0, drinks = 1, shots = 0 where user_id = 12;
+Nov 19, 2016 8:29:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 8:30:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 8:30:47 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 14;
+Nov 19, 2016 8:34:12 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 11;
+Nov 19, 2016 8:34:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 3, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 9;
+Nov 19, 2016 8:35:19 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 10;
+Nov 19, 2016 8:36:45 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 0, beers = 2, drinks = 0, shots = 0 where user_id = 3;
+Nov 19, 2016 8:36:50 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 8:37:16 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 14;
+Nov 19, 2016 8:39:01 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 56 WHERE NOT cendric_locked AND user_id = 10;
+Nov 19, 2016 8:42:05 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 13;
+Nov 19, 2016 8:43:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 16;
+Nov 19, 2016 8:44:25 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 8:44:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 8:46:38 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 20;
+Nov 19, 2016 8:47:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 13;
+Nov 19, 2016 8:48:16 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 8:49:14 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 8:55:32 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 3, challenge = 0, beers = 0, drinks = 2, shots = 0 where user_id = 9;
+Nov 19, 2016 8:55:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 2, shots = 0 where user_id = 10;
+Nov 19, 2016 8:55:44 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 0, beers = 0, drinks = 2, shots = 0 where user_id = 11;
+Nov 19, 2016 9:02:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 27;
+Nov 19, 2016 9:02:44 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 28;
+Nov 19, 2016 9:03:26 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 26;
+Nov 19, 2016 9:03:43 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 18;
+Nov 19, 2016 9:03:50 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 17;
+Nov 19, 2016 9:04:01 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 15;
+Nov 19, 2016 9:06:20 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 9:09:05 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 26;
+Nov 19, 2016 9:09:38 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 25;
+Nov 19, 2016 9:09:49 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 2;
+Nov 19, 2016 9:10:17 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 26;
+Nov 19, 2016 9:10:43 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 0, drinks = 3, shots = 0 where user_id = 10;
+Nov 19, 2016 9:12:57 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 0, drinks = 1, shots = 0 where user_id = 15;
+Nov 19, 2016 9:13:07 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 9:14:37 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 18;
+Nov 19, 2016 9:15:07 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 0, beers = 1, drinks = 1, shots = 0 where user_id = 19;
+Nov 19, 2016 9:15:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 0, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 9:15:47 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 2, drinks = 0, shots = 0 where user_id = 26;
+Nov 19, 2016 9:15:59 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 1, drinks = 1, shots = 0 where user_id = 15;
+Nov 19, 2016 9:16:09 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 25;
+Nov 19, 2016 9:18:58 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 0, beers = 1, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:19:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 2, drinks = 1, shots = 0 where user_id = 26;
+Nov 19, 2016 9:27:38 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 27;
+Nov 19, 2016 9:28:41 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 70 WHERE NOT cendric_locked AND user_id = 26;
+Nov 19, 2016 9:29:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 0, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:30:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 1, drinks = 1, shots = 0 where user_id = 13;
+Nov 19, 2016 9:30:10 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 0, beers = 2, drinks = 1, shots = 0 where user_id = 26;
+Nov 19, 2016 9:31:30 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 8;
+Nov 19, 2016 9:31:40 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 29;
+Nov 19, 2016 9:33:52 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 0, beers = 2, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:34:16 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 2, drinks = 0, shots = 0 where user_id = 27;
+Nov 19, 2016 9:34:20 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 2, drinks = 0, shots = 0 where user_id = 28;
+Nov 19, 2016 9:34:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 2, drinks = 0, shots = 1 where user_id = 28;
+Nov 19, 2016 9:35:08 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 9:36:36 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 33 WHERE NOT cendric_locked AND user_id = 25;
+Nov 19, 2016 9:37:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 0, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:38:54 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 1, drinks = 2, shots = 0 where user_id = 13;
+Nov 19, 2016 9:39:53 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 1, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:40:27 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 2, beers = 2, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:40:29 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 2, beers = 2, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:40:30 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 2, beers = 2, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:42:11 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 7, beers = 2, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:42:32 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 9:42:45 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 0, beers = 1, drinks = 0, shots = 0 where user_id = 2;
+Nov 19, 2016 9:42:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 3, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:43:26 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 2, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:44:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 10, beers = 2, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:44:12 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 59 WHERE NOT cendric_locked AND user_id = 7;
+Nov 19, 2016 9:45:06 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 0, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:46:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 0, beers = 2, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 9:46:12 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 5, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:47:19 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 1, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 9:47:28 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 6, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:47:53 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 10, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:49:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 9, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:49:24 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 13, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:49:33 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 14, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:50:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 12, beers = 2, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:50:39 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 11, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:50:43 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 16, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:51:27 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 60 WHERE NOT cendric_locked AND user_id = 23;
+Nov 19, 2016 9:51:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 3, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 9:51:38 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 2, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 9:52:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 13, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:52:06 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 13, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:52:06 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 13, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:53:02 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 2, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:53:06 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 2, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:53:29 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 4, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 9:53:40 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 12, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:53:45 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 3, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:53:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 3, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:54:05 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 6, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 9:54:32 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 17, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:55:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 6, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:55:39 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 21, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:56:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 15, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:56:26 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 3, beers = 1, drinks = 2, shots = 0 where user_id = 13;
+Nov 19, 2016 9:56:27 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 3, beers = 1, drinks = 2, shots = 0 where user_id = 13;
+Nov 19, 2016 9:56:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 24, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:56:47 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 17, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:56:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 15, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 9:57:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 25, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 9:57:39 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 1, beers = 2, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 9:57:49 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 19, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:58:10 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 5, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 9:58:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 5, beers = 2, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 9:59:12 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 9, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 9:59:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 9, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 9:59:17 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 22, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 9:59:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 9, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 9:59:55 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 6, beers = 2, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 9:59:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 6, beers = 2, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 10:00:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 0, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:00:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 17, beers = 0, drinks = 1, shots = 0 where user_id = 18;
+Nov 19, 2016 10:01:52 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 13, beers = 2, drinks = 1, shots = 0 where user_id = 25;
+Nov 19, 2016 10:02:01 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 26, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 10:02:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 0, beers = 2, drinks = 1, shots = 0 where user_id = 19;
+Nov 19, 2016 10:02:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 1, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:03:17 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 2, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:03:54 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 33, beers = 1, drinks = 2, shots = 0 where user_id = 15;
+Nov 19, 2016 10:04:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 33, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:04:33 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 3, challenge = 2, beers = 0, drinks = 3, shots = 0 where user_id = 9;
+Nov 19, 2016 10:04:43 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 28, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 10:04:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 20, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:05:02 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 3, beers = 0, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:05:14 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 3, beers = 0, drinks = 1, shots = 0 where user_id = 29;
+Nov 19, 2016 10:05:15 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 4, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:05:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 4, beers = 1, drinks = 0, shots = 0 where user_id = 2;
+Nov 19, 2016 10:05:58 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 30, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 10:06:19 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 21, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:06:44 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 23, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:08:05 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 36, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:08:18 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 7, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:10:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 10, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:11:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 6, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 10:11:17 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 13, beers = 2, drinks = 2, shots = 0 where user_id = 25;
+Nov 19, 2016 10:11:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 3, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 10:11:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 0, beers = 2, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 10:11:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 5, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 10:12:29 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 10, beers = 2, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 10:12:32 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 9 WHERE NOT cendric_locked AND user_id = 2;
+Nov 19, 2016 10:12:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 7, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 10:12:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 11, beers = 2, drinks = 0, shots = 0 where user_id = 5;
+Nov 19, 2016 10:12:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 24, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:12:43 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 40, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:12:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 9, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 10:13:30 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 12, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:14:18 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 26, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:15:40 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 13, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:15:49 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 4, beers = 1, drinks = 2, shots = 0 where user_id = 13;
+Nov 19, 2016 10:16:05 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 2, beers = 2, drinks = 1, shots = 0 where user_id = 19;
+Nov 19, 2016 10:16:45 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 18, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:17:02 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 3, beers = 1, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:17:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 3, beers = 1, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:17:27 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 14, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:17:33 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 44, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:17:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 44, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:17:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 46, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:18:02 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 16, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:18:52 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 48, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:19:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 31, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:19:37 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 5 WHERE NOT cendric_locked AND user_id = 27;
+Nov 19, 2016 10:19:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 52, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:20:40 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 3, beers = 1, drinks = 0, shots = 0 where user_id = 14;
+Nov 19, 2016 10:20:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 7, beers = 1, drinks = 0, shots = 0 where user_id = 2;
+Nov 19, 2016 10:20:51 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 32, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:22:29 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 33, beers = 3, drinks = 2, shots = 0 where user_id = 26;
+Nov 19, 2016 10:22:39 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 6, beers = 1, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:23:19 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 34, beers = 0, drinks = 2, shots = 0 where user_id = 18;
+Nov 19, 2016 10:23:58 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 8, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:24:12 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 12, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 10:24:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 13, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:24:59 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 14, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 10:25:14 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 19, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:25:38 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 21, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:26:27 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 8 WHERE NOT cendric_locked AND user_id = 28;
+Nov 19, 2016 10:26:44 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 23, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:27:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 7, beers = 1, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:27:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 4, beers = 0, drinks = 1, shots = 0 where user_id = 29;
+Nov 19, 2016 10:27:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 9, beers = 1, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:27:59 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 14, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:28:16 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 11, beers = 2, drinks = 1, shots = 0 where user_id = 5;
+Nov 19, 2016 10:28:17 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 11, beers = 2, drinks = 1, shots = 0 where user_id = 5;
+Nov 19, 2016 10:28:37 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 25, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:29:29 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 55, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:30:26 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 16, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:31:18 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 11, beers = 1, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:31:33 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 6, beers = 1, drinks = 1, shots = 0 where user_id = 29;
+Nov 19, 2016 10:32:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 7, beers = 1, drinks = 1, shots = 0 where user_id = 29;
+Nov 19, 2016 10:33:10 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 11, beers = 1, drinks = 0, shots = 0 where user_id = 2;
+Nov 19, 2016 10:33:22 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 13, beers = 2, drinks = 3, shots = 0 where user_id = 25;
+Nov 19, 2016 10:33:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 58, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:33:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 58, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:34:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 14, beers = 1, drinks = 1, shots = 0 where user_id = 8;
+Nov 19, 2016 10:34:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 10, beers = 1, drinks = 1, shots = 0 where user_id = 29;
+Nov 19, 2016 10:35:31 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 29, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:35:54 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 17, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 10:35:58 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 15, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 10:36:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 20, beers = 0, drinks = 2, shots = 0 where user_id = 12;
+Nov 19, 2016 10:36:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 21, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:36:44 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 23, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:36:44 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 23, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:37:00 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 17, beers = 2, drinks = 3, shots = 0 where user_id = 25;
+Nov 19, 2016 10:37:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 19, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 10:37:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 19, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 10:37:31 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 7, beers = 2, drinks = 2, shots = 0 where user_id = 19;
+Nov 19, 2016 10:37:54 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 38, beers = 0, drinks = 3, shots = 0 where user_id = 18;
+Nov 19, 2016 10:38:01 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 40, beers = 0, drinks = 3, shots = 0 where user_id = 18;
+Nov 19, 2016 10:38:06 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 9, beers = 2, drinks = 2, shots = 0 where user_id = 19;
+Nov 19, 2016 10:42:08 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 25, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:42:12 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 17, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 10:42:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 17, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 19, 2016 10:43:01 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 31, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:43:07 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 79 WHERE NOT cendric_locked AND user_id = 12;
+Nov 19, 2016 10:43:20 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 33, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:44:30 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 0, beers = 3, drinks = 0, shots = 0 where user_id = 27;
+Nov 19, 2016 10:45:15 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 5, beers = 1, drinks = 0, shots = 0 where user_id = 14;
+Nov 19, 2016 10:45:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 21, beers = 0, drinks = 0, shots = 0 where user_id = 23;
+Nov 19, 2016 10:45:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 26, beers = 0, drinks = 3, shots = 0 where user_id = 12;
+Nov 19, 2016 10:45:49 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 13, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 10:47:08 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 13, beers = 1, drinks = 0, shots = 0 where user_id = 2;
+Nov 19, 2016 10:47:09 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 3, challenge = 2, beers = 0, drinks = 4, shots = 0 where user_id = 9;
+Nov 19, 2016 10:47:18 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 15, beers = 1, drinks = 0, shots = 0 where user_id = 2;
+Nov 19, 2016 10:48:23 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 27, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:48:49 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 42, beers = 0, drinks = 3, shots = 0 where user_id = 18;
+Nov 19, 2016 10:48:54 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 42, beers = 0, drinks = 4, shots = 0 where user_id = 18;
+Nov 19, 2016 10:49:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 23, beers = 0, drinks = 1, shots = 0 where user_id = 23;
+Nov 19, 2016 10:49:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 23, beers = 0, drinks = 1, shots = 0 where user_id = 23;
+Nov 19, 2016 10:49:09 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 14, beers = 1, drinks = 2, shots = 0 where user_id = 8;
+Nov 19, 2016 10:49:17 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 10, beers = 1, drinks = 2, shots = 0 where user_id = 29;
+Nov 19, 2016 10:50:12 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 0, beers = 3, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 10:50:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 11, beers = 4, drinks = 1, shots = 0 where user_id = 5;
+Nov 19, 2016 10:50:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 0, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 10:50:43 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 0, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 10:50:52 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 15, beers = 2, drinks = 1, shots = 0 where user_id = 2;
+Nov 19, 2016 10:52:21 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 60, beers = 1, drinks = 3, shots = 0 where user_id = 15;
+Nov 19, 2016 10:53:07 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 56 WHERE NOT cendric_locked AND user_id = 31;
+Nov 19, 2016 10:53:14 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 17, beers = 1, drinks = 2, shots = 0 where user_id = 8;
+Nov 19, 2016 10:53:31 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 19, beers = 1, drinks = 2, shots = 0 where user_id = 8;
+Nov 19, 2016 10:53:39 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 15, beers = 1, drinks = 2, shots = 0 where user_id = 29;
+Nov 19, 2016 10:53:48 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 46, beers = 0, drinks = 4, shots = 0 where user_id = 18;
+Nov 19, 2016 10:54:16 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 46, beers = 0, drinks = 5, shots = 0 where user_id = 18;
+Nov 19, 2016 10:54:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 19, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 10:54:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 15, beers = 1, drinks = 3, shots = 0 where user_id = 29;
+Nov 19, 2016 10:54:55 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 3, challenge = 8, beers = 0, drinks = 4, shots = 0 where user_id = 9;
+Nov 19, 2016 10:56:05 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 4, beers = 2, drinks = 1, shots = 1 where user_id = 28;
+Nov 19, 2016 10:57:11 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 22, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 10:57:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 28, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:57:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 27, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 10:57:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 36, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 10:57:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 24, beers = 0, drinks = 1, shots = 0 where user_id = 23;
+Nov 19, 2016 10:57:57 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 24, beers = 0, drinks = 1, shots = 0 where user_id = 23;
+Nov 19, 2016 10:58:20 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 18, beers = 1, drinks = 3, shots = 0 where user_id = 29;
+Nov 19, 2016 10:59:30 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 39, beers = 1, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 11:00:37 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 58 WHERE NOT cendric_locked AND user_id = 15;
+Nov 19, 2016 11:01:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 14, beers = 2, drinks = 1, shots = 0 where user_id = 2;
+Nov 19, 2016 11:01:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 19, beers = 1, drinks = 3, shots = 0 where user_id = 29;
+Nov 19, 2016 11:02:01 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 49, beers = 0, drinks = 5, shots = 0 where user_id = 18;
+Nov 19, 2016 11:02:08 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 25, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 11:02:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 52, beers = 0, drinks = 5, shots = 0 where user_id = 18;
+Nov 19, 2016 11:02:43 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 4, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:03:07 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 60, beers = 1, drinks = 4, shots = 0 where user_id = 15;
+Nov 19, 2016 11:03:51 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 30, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 11:03:54 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 6, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:04:11 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 39, beers = 2, drinks = 0, shots = 0 where user_id = 31;
+Nov 19, 2016 11:04:51 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 19, beers = 2, drinks = 4, shots = 0 where user_id = 25;
+Nov 19, 2016 11:04:52 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 19, beers = 2, drinks = 4, shots = 0 where user_id = 25;
+Nov 19, 2016 11:04:55 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 20, beers = 2, drinks = 4, shots = 0 where user_id = 25;
+Nov 19, 2016 11:05:11 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 22, beers = 1, drinks = 4, shots = 0 where user_id = 29;
+Nov 19, 2016 11:05:20 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 14, beers = 2, drinks = 2, shots = 0 where user_id = 2;
+Nov 19, 2016 11:06:30 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 33, beers = 3, drinks = 3, shots = 0 where user_id = 26;
+Nov 19, 2016 11:06:37 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 11, beers = 5, drinks = 1, shots = 0 where user_id = 5;
+Nov 19, 2016 11:06:48 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 25, beers = 1, drinks = 4, shots = 0 where user_id = 29;
+Nov 19, 2016 11:06:59 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 32, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 11:07:39 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 1;
+Nov 19, 2016 11:10:00 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 33, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 11:10:00 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 33, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 11:10:07 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 7, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 11:10:09 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 7, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 11:10:09 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 7, beers = 0, drinks = 1, shots = 0 where user_id = 17;
+Nov 19, 2016 11:10:25 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 55, beers = 0, drinks = 5, shots = 0 where user_id = 18;
+Nov 19, 2016 11:10:39 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 35, beers = 1, drinks = 3, shots = 0 where user_id = 8;
+Nov 19, 2016 11:11:22 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 25, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 19, 2016 11:12:20 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 21, beers = 2, drinks = 4, shots = 0 where user_id = 25;
+Nov 19, 2016 11:13:04 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 23, beers = 2, drinks = 4, shots = 0 where user_id = 25;
+Nov 19, 2016 11:14:48 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 55, beers = 1, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:15:27 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 7 WHERE NOT cendric_locked AND user_id = -1;
+Nov 19, 2016 11:15:48 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 28, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 19, 2016 11:15:57 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 16, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:23:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 66, beers = 1, drinks = 4, shots = 0 where user_id = 15;
+Nov 19, 2016 11:26:27 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 0 WHERE NOT cendric_locked AND user_id = 18;
+Nov 19, 2016 11:29:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 57, beers = 1, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:30:31 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 60, beers = 1, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:30:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 20, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:31:35 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 26, beers = 0, drinks = 1, shots = 0 where user_id = 23;
+Nov 19, 2016 11:32:05 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 62, beers = 1, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:33:07 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 29, beers = 1, drinks = 0, shots = 0 where user_id = 7;
+Nov 19, 2016 11:34:02 PM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 34 WHERE NOT cendric_locked AND user_id = 29;
+Nov 19, 2016 11:34:06 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 35, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:34:26 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 40, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:34:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 67, beers = 1, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:34:46 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 25, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:35:10 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 27, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:35:40 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 42, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:35:53 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 7, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:35:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 12, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:36:40 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 44, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:37:15 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 32, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:37:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 17, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:38:32 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 45, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:39:28 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 47, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:41:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 18, challenge = 27, beers = 0, drinks = 1, shots = 0 where user_id = 23;
+Nov 19, 2016 11:41:17 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 66, beers = 1, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:41:30 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 35, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:41:34 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 36, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:41:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 21, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:41:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 21, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:41:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 21, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:41:45 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 6, beers = 1, drinks = 0, shots = 0 where user_id = 14;
+Nov 19, 2016 11:44:52 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 48, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:45:03 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 29, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 19, 2016 11:49:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 69, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:54:36 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 76, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:54:41 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 42, beers = 2, drinks = 3, shots = 0 where user_id = 19;
+Nov 19, 2016 11:54:42 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 50, beers = 1, drinks = 4, shots = 0 where user_id = 8;
+Nov 19, 2016 11:54:50 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 27, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 19, 2016 11:54:53 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 2, beers = 1, drinks = 0, shots = 0 where user_id = 20;
+Nov 19, 2016 11:55:13 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 13, beers = 5, drinks = 1, shots = 0 where user_id = 5;
+Nov 19, 2016 11:55:24 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 6, beers = 1, drinks = 0, shots = 0 where user_id = 14;
+Nov 19, 2016 11:57:56 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 42, beers = 2, drinks = 4, shots = 1 where user_id = 19;
+Nov 19, 2016 11:58:55 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 2, beers = 3, drinks = 0, shots = 0 where user_id = 27;
+Nov 19, 2016 11:59:02 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 78, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 19, 2016 11:59:25 PM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 2, beers = 4, drinks = 1, shots = 0 where user_id = 27;
+Nov 20, 2016 12:01:24 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 80, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 12:01:58 AM DatabaseManager addUser
+INFORMATION: INSERT INTO users (name) values ('Vale');
+Nov 20, 2016 12:02:09 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 3, challenge = 0, beers = 0, drinks = 0, shots = 0 where user_id = 35;
+Nov 20, 2016 12:03:38 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 44, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:04:01 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 32, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 20, 2016 12:04:36 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 50, beers = 1, drinks = 5, shots = 0 where user_id = 8;
+Nov 20, 2016 12:05:47 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 52, beers = 1, drinks = 5, shots = 0 where user_id = 8;
+Nov 20, 2016 12:05:53 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 44, beers = 2, drinks = 4, shots = 1 where user_id = 19;
+Nov 20, 2016 12:05:54 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 44, beers = 2, drinks = 4, shots = 1 where user_id = 19;
+Nov 20, 2016 12:06:00 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 30, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 20, 2016 12:06:27 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 3, beers = 4, drinks = 2, shots = 0 where user_id = 27;
+Nov 20, 2016 12:06:36 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 3, beers = 4, drinks = 2, shots = 0 where user_id = 27;
+Nov 20, 2016 12:07:43 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 20, beers = 1, drinks = 0, shots = 0 where user_id = 6;
+Nov 20, 2016 12:08:06 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 20, beers = 3, drinks = 0, shots = 0 where user_id = 6;
+Nov 20, 2016 12:12:10 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 49, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:13:10 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 53, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:14:29 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 14, challenge = 29, beers = 2, drinks = 0, shots = 0 where user_id = 7;
+Nov 20, 2016 12:15:10 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 5, beers = 4, drinks = 2, shots = 2 where user_id = 27;
+Nov 20, 2016 12:15:19 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 5, beers = 4, drinks = 2, shots = 1 where user_id = 27;
+Nov 20, 2016 12:17:36 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 55, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:17:44 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 54, beers = 1, drinks = 5, shots = 0 where user_id = 8;
+Nov 20, 2016 12:18:51 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 33, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 20, 2016 12:18:56 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 58, beers = 1, drinks = 5, shots = 0 where user_id = 8;
+Nov 20, 2016 12:20:19 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 60, beers = 1, drinks = 5, shots = 0 where user_id = 8;
+Nov 20, 2016 12:20:40 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 61, beers = 1, drinks = 5, shots = 0 where user_id = 8;
+Nov 20, 2016 12:21:07 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 61, beers = 1, drinks = 6, shots = 0 where user_id = 8;
+Nov 20, 2016 12:22:51 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 84, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 12:24:10 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 89, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 12:24:17 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 57, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:24:30 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 59, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:26:32 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 34, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 20, 2016 12:26:43 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 61, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:28:17 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 91, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 12:29:42 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 20, challenge = 13, beers = 5, drinks = 1, shots = 0 where user_id = 5;
+Nov 20, 2016 12:30:24 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 37, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 20, 2016 12:30:39 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 64, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:31:30 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 63, beers = 1, drinks = 6, shots = 0 where user_id = 8;
+Nov 20, 2016 12:33:24 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 65, beers = 2, drinks = 1, shots = 0 where user_id = 31;
+Nov 20, 2016 12:34:14 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 39, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 20, 2016 12:34:19 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 35, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 20, 2016 12:34:19 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 5, challenge = 35, beers = 4, drinks = 1, shots = 0 where user_id = 3;
+Nov 20, 2016 12:38:05 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 11, beers = 4, drinks = 2, shots = 1 where user_id = 27;
+Nov 20, 2016 12:43:23 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 65, beers = 2, drinks = 1, shots = 1 where user_id = 31;
+Nov 20, 2016 12:51:48 AM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 100 WHERE NOT cendric_locked AND user_id = 8;
+Nov 20, 2016 12:53:30 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 96, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 12:53:32 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 96, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 12:55:11 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 63, beers = 1, drinks = 7, shots = 0 where user_id = 8;
+Nov 20, 2016 12:55:12 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 63, beers = 1, drinks = 6, shots = 0 where user_id = 8;
+Nov 20, 2016 12:55:14 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 63, beers = 1, drinks = 6, shots = 0 where user_id = 8;
+Nov 20, 2016 12:55:52 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 40, beers = 1, drinks = 5, shots = 0 where user_id = 29;
+Nov 20, 2016 12:59:33 AM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 170 WHERE NOT cendric_locked AND user_id = 19;
+Nov 20, 2016 12:59:51 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 97, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:00:41 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 12, beers = 4, drinks = 2, shots = 1 where user_id = 27;
+Nov 20, 2016 1:02:00 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 99, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:02:07 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 14, beers = 4, drinks = 2, shots = 1 where user_id = 27;
+Nov 20, 2016 1:02:34 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 46, beers = 2, drinks = 4, shots = 1 where user_id = 19;
+Nov 20, 2016 1:03:34 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 46, beers = 3, drinks = 4, shots = 1 where user_id = 19;
+Nov 20, 2016 1:03:35 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 47, beers = 3, drinks = 4, shots = 1 where user_id = 19;
+Nov 20, 2016 1:05:22 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 67, beers = 1, drinks = 6, shots = 0 where user_id = 8;
+Nov 20, 2016 1:05:43 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 99, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:06:25 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 99, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:06:39 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 15, challenge = 69, beers = 2, drinks = 1, shots = 1 where user_id = 31;
+Nov 20, 2016 1:07:06 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 102, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:08:43 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 18, beers = 4, drinks = 2, shots = 1 where user_id = 27;
+Nov 20, 2016 1:09:13 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 69, beers = 1, drinks = 6, shots = 0 where user_id = 8;
+Nov 20, 2016 1:09:50 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 104, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:10:03 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 105, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:12:26 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 69, beers = 1, drinks = 7, shots = 0 where user_id = 8;
+Nov 20, 2016 1:12:41 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 106, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:13:09 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 20, beers = 4, drinks = 2, shots = 1 where user_id = 27;
+Nov 20, 2016 1:13:24 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 6, beers = 2, drinks = 1, shots = 1 where user_id = 28;
+Nov 20, 2016 1:15:49 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 22, beers = 4, drinks = 2, shots = 1 where user_id = 27;
+Nov 20, 2016 1:17:09 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 19, challenge = 69, beers = 1, drinks = 8, shots = 0 where user_id = 8;
+Nov 20, 2016 1:20:48 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 108, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:21:28 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 0, challenge = 2, beers = 0, drinks = 0, shots = 0 where user_id = 2;
+Nov 20, 2016 1:25:43 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 24, beers = 4, drinks = 3, shots = 1 where user_id = 27;
+Nov 20, 2016 1:29:28 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 2, challenge = 110, beers = 2, drinks = 6, shots = 0 where user_id = 18;
+Nov 20, 2016 1:31:19 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 16, challenge = 2, beers = 0, drinks = 0, shots = 0 where user_id = 2;
+Nov 20, 2016 1:31:22 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 2, beers = 0, drinks = 0, shots = 0 where user_id = 2;
+Nov 20, 2016 1:31:29 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 17, challenge = 2, beers = 2, drinks = 4, shots = 0 where user_id = 2;
+Nov 20, 2016 1:37:56 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 12, challenge = 49, beers = 3, drinks = 4, shots = 1 where user_id = 19;
+Nov 20, 2016 1:49:43 AM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 166 WHERE NOT cendric_locked AND user_id = -1;
+Nov 20, 2016 1:56:08 AM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 208 WHERE NOT cendric_locked AND user_id = -1;
+Nov 20, 2016 2:11:23 AM DatabaseManager addCendricScore
+INFORMATION: UPDATE users SET cendric_locked = 1, cendric = 0 WHERE NOT cendric_locked AND user_id = -1;
+Nov 20, 2016 2:21:13 AM DatabaseManager updateValues
+INFORMATION: UPDATE users SET outfit = 1, challenge = 31, beers = 4, drinks = 3, shots = 1 where user_id = 27;
