@@ -22,7 +22,7 @@ Die Magie an sich gibt es schon, so weit wir uns zurückerinnern können und wir
 
 D''Magie selber gits scho, so wiit mer üs zrugg bsinne möged und mer sind üs nid sicher, wo si genau her chunt.');
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentRhendalMagic2','document','There are explanations, of course, and the probably most famous one is the theory the Clerics are spreading. They believe to know that their "Eternal Light" has gifted us with that power, and that the "Enlighted" are the chosen ones who can make use of that divine energy.
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentRhendalMagic2','document','There are explanations, of course, and the probably most famous one is the theory the clerics are spreading. They believe to know that their "Eternal Light" has gifted us with that power, and that the "Enlighted" are the chosen ones who can make use of that divine energy.
 
 A problem with this theory is that not only the ones who believe in this "God of Light" are able to use magic. Magic comes in quite different forms, but the Clerics consider any other form as inferior. This narrow minded thinking is what discourages me to have a deeper conversation with them. I feel that magic is more than that.','Es gibt natürlich Erklärungen dazu, und die vermutlich bekannteste ist die Theorie, welche die Kleriker verbreiten. Sie glauben zu wissen, dass ihr "Ewiges Licht" uns diese Kraft vermacht hat und dass die "Erleuchteten" die Erwählten sind, die diese göttliche Kraft nutzen können.
 

@@ -1,0 +1,227 @@
+-- File format: '<Tag>', '<English Translation>', '<Spanish Translation>'
+-- Escape apostrophs in the translations with ''
+
+-- convertible items
+
+-- Shell
+'co_shell', 'Shell',''
+'co_shell', 'Can be opened and contains a pearl, if you''re lucky.',''
+-- Small Pouch
+'co_smallpouch', 'Small Pouch',''
+'co_smallpouch', 'A pouch with a few jingling coins.',''
+-- Medium Pouch
+'co_mediumpouch', 'Leather Pouch',''
+'co_mediumpouch', 'The pouch is filled with coins.',''
+-- Big Pouch
+'co_bigpouch', 'Big Pouch',''
+'co_bigpouch', 'The pouch is bulging with golden coins.',''
+-- Old Travel Bag
+'co_travelbag', 'Old Travel Bag',''
+'co_travelbag', 'I wonder what''s inside?',''
+
+-- food items
+
+-- Cheese
+'fo_cheese', 'Cheese', ''
+'fo_cheese', 'Smelly.', ''
+-- Bread
+'fo_bread', 'Bread', ''
+'fo_bread', 'An ordinary loaf of bread.', ''
+-- Water
+'fo_water', 'Water bottle', ''
+'fo_water', 'Fresh clear water.', ''
+-- Apple
+'fo_apple', 'Apple', ''
+'fo_apple', 'Fresh and juicy.', ''
+-- Cave Berries
+'fo_caveberry', 'Cave Berries', ''
+'fo_caveberry', 'Sweet, but its pip is poisonous.', ''
+-- Wind Rose (this item is a plant and resembles the symbol you have on maps that is also called a "wind rose". I don't know how it is in Spanish though.)
+'fo_windrose', 'Wind Rose', ''
+'fo_windrose', 'A rare herb that grants incredible reflexes when eaten.', ''
+-- Devil's Berry
+'fo_devilberry', 'Devil''s Berry', ''
+'fo_devilberry', 'Eating those will increase all resistances dramatically. But at a price...', ''
+-- Storm Weed
+'fo_stormweed', 'Storm Weed', ''
+'fo_stormweed', 'Is only fully effective as a component of a potion.', ''
+-- Red Hat (a mushroom)
+'fo_redhat', 'Red Hat', ''
+'fo_redhat', 'Mildly toxic.', ''
+-- Milk
+'fo_milk', 'Milk', ''
+'fo_milk', 'Milk is good for your bones.', ''
+-- Physalis
+'fo_physalis', 'Physalis', ''
+'fo_physalis', 'Looks tasty.', ''
+-- Glowing Shroom
+'fo_glowingshroom', 'Glowing shroom', ''
+'fo_glowingshroom', 'It still glows...', ''
+-- Healing Herb
+'fo_healingherb', 'Healing herb', ''
+'fo_healingherb', 'Heals wounds.', ''
+-- Lesser Healing Potion
+'fo_lesserhealingpotion', 'Lesser Healing Potion', ''
+'fo_lesserhealingpotion', 'Heals small wounds and scratches.', ''
+-- Medium Healing Potion
+'fo_mediumhealingpotion', 'Medium Healing Potion', ''
+'fo_mediumhealingpotion', 'Heals most moderate injuries.', ''
+-- Greater Healing Potion
+'fo_greaterhealingpotion', 'Greater Healing Potion', ''
+'fo_greaterhealingpotion', 'Heals nearly everything.', ''
+-- Ultimate Healing Potion
+'fo_ultimatehealingpotion', 'Ultimate Healing Potion', ''
+'fo_ultimatehealingpotion', 'Ultimate healing power!', ''
+-- Roasted Meat
+'fo_roastedmeat', 'Roasted Meat', ''
+'fo_roastedmeat', 'A juicy piece of meat, seared, just as it should be.', ''
+-- Raw Meat
+'fo_rawmeat', 'Raw Meat', ''
+'fo_rawmeat', 'Would taste better if it was roasted on a fire.', ''
+-- Raw Fish
+'fo_rawfish', 'Raw Fish', ''
+'fo_rawfish', 'I should cook this better first.', ''
+-- Fish Soup
+'fo_fishsoup', 'Fish Soup', ''
+'fo_fishsoup', 'Hot and delicious.', ''
+-- Wine
+'fo_wine', 'Wine', ''
+'fo_wine', 'A noble wine.', ''
+-- Beer
+'fo_beer', 'Beer', ''
+'fo_beer', 'Should be consumed in moderation.', ''
+-- Sausage
+'fo_sausage', 'Sausage', ''
+'fo_sausage', 'Tasty.', ''
+-- Ham
+'fo_ham', 'Ham', ''
+'fo_ham', 'A juicy ham.', ''
+
+-- equipment items
+
+-- Stephen's Helmet
+'eq_stephenhelmet', 'Stephen''s Helmet',''
+'eq_stephenhelmet', 'This helmet belongs to the paladin Stephen.',''
+-- Ice Hat
+'eq_icehat', 'Zeff''s Masterpiece', ''
+'eq_icehat', 'Zeff crafted this hat for me in return for saving him.', ''
+-- Ice Armour
+'eq_icearmor', 'Icy Armour', ''
+'eq_icearmor', 'Harek crafted this armour from the remains of Khajag.', ''
+-- Ice Cloak
+'eq_icescarf', 'Icy Cloak', ''
+'eq_icescarf', 'Shiny fragments of Khajag''s heart decorate this cloak.', ''
+-- Blue Wizard Hat (for the wizardhats, you have to translate the description only once, they are the same.)
+'eq_wizardhatice', 'Blue wizardhat', ''
+'eq_wizardhatice', 'A perfect fit for a mage.', ''
+-- Red Wizard Hat
+'eq_wizardhatfire', 'Red wizardhat', ''
+'eq_wizardhatfire', 'A perfect fit for a mage.', ''
+-- White Wizard Hat
+'eq_wizardhatlight', 'White wizardhat', ''
+'eq_wizardhatlight', 'A perfect fit for a mage.', ''
+-- Grey Wizard Hat
+'eq_wizardhatshadow', 'Grey wizardhat', ''
+'eq_wizardhatshadow', 'A perfect fit for a mage.', ''
+-- Oversized Hat
+'eq_oversizedhat', 'Oversized Hat', ''
+'eq_oversizedhat', 'This hat is way too big for me.', ''
+-- Travel Hat
+'eq_travelhat', 'Travel Hat', ''
+'eq_travelhat', 'This hat belonged to me once.', ''
+-- Bandana
+'eq_bandana', 'Green Bandana', ''
+'eq_bandana', 'The cloth is a bit tattered but it can still be worn.', ''
+-- Mercenary Bandana
+'eq_mercenarybandana', 'Mercenary Bandana', ''
+'eq_mercenarybandana', 'They shouldn''t have messed with me.', ''
+-- Scarf of the Fire Rat (This is an Inu Yasha reference, maybe you know that story. It is not really relevant for the translation though.)
+'eq_fireratscarf', 'Scarf of the Fire Rat', ''
+'eq_fireratscarf', 'This scarf is made from the fur of a fire rat. The wearer is protected from both heat and flame.', ''
+-- Demon Back
+'eq_demonback', 'Demon Cape', ''
+'eq_demonback', 'Cape worn by demon hunters.', ''
+-- Demon Head
+'eq_demonhead', 'Demon Helmet', ''
+'eq_demonhead', 'Helmet worn by demon hunters.', ''
+-- Demon Body
+'eq_demonbody', 'Demon Armour', ''
+'eq_demonbody', 'Armour worn by demon hunters.', ''
+-- Nekomata Back
+'eq_nekomataback', 'Nekomata Cloak', ''
+'eq_nekomataback', 'Both an experienced hunter and a skilled leatherworker are involved in the creation of such a cape.', ''
+-- Nekomata Head
+'eq_nekomatahead', 'Nekomata Head', ''
+'eq_nekomatahead', 'Looking in the eyes of a Nekomata can fill the bravest warriors with terror.', ''
+-- Necro T3 Head
+'eq_head_necrot3', 'Shadow Cowl', ''
+'eq_head_necrot3', 'Shields perfectly against any light.', ''
+-- Necro T3 Back
+'eq_back_necrot3', 'Shadow Cloak', ''
+'eq_back_necrot3', 'A pliant piece of cloth.', ''
+-- Necro T3 Body
+'eq_body_necrot3', 'Horned Scalemail', ''
+'eq_body_necrot3', 'Only those who have proven themselves worthy to the necromancers of Admantris are allowed to wear that piece of armour.', ''
+-- Divine T1 Back
+'eq_back_divinet1', 'Cover of the Recruit', ''
+'eq_back_divinet1', 'The white cloth shields its wearer against dark magic.', ''
+-- Divine T2 Back
+'eq_back_divinet2', 'Cover of the Order', ''
+'eq_back_divinet2', 'A noble cape with nice ornaments.', ''
+-- Divine T3 Back
+'eq_back_divinet3', 'Cover of the Enlighted', ''
+'eq_back_divinet3', 'Worn by the high priests of the order.', ''
+-- Divine T1 Head
+'eq_head_divinet1', 'Circlet of the Recruit', ''
+'eq_head_divinet1', 'Simple but elegant.', ''
+-- Divine T2 Head
+'eq_head_divinet2', 'Circlet of the Order', ''
+'eq_head_divinet2', 'Wearing this headpiece shows devotion to the Eternal Light.', ''
+-- Divine T3 Head (The formulation of the description seems a bit weird to me, maybe you can check/enhance it?)
+'eq_head_divinet3', 'Circlet of the Enlighted', ''
+'eq_head_divinet3', 'The majestic wings give the wearer of this headpiece a sublime appearance.', ''
+-- Crown
+'eq_crown', 'Crown', ''
+'eq_crown', 'Golden and shiny.', ''
+-- Leather Armour
+'eq_leatherarmor', 'Leather Armour', ''
+'eq_leatherarmor', 'The reinforced leather protects from attacks.', ''
+-- Prisoner''s Clothes
+'eq_prisonerclothes', 'Prisoner''s Clothes', ''
+'eq_prisonerclothes', 'These rags are worn by the prisoners in the mines of Gandria.', ''
+-- Default Armour
+'eq_defaultarmor', 'Grey Cloth Armour', ''
+'eq_defaultarmor', 'I wore that piece of cloth when I lost my memory.', ''
+-- Rafi's Hat (an easteregg, maybe it won't even appear in the final game. It's from our time and that's why it's "strange.")
+'eq_rafishat', 'Rafi''s Hat', ''
+'eq_rafishat', 'What a strange hat...', ''
+-- Hunter's Hat (you don't have to pay attention to the rhyme, Tizian had fun writing this description. It doesn't rhyme in German and Swiss German.)
+'eq_huntershat', 'Hunter''s Hat', ''
+'eq_huntershat', 'A brown leather hat with a red feather. Protects its wearer from foul weather.', ''
+-- Twilight T1 Head
+'eq_head_twilightt1', 'Blue Headband', ''
+'eq_head_twilightt1', 'Worn by daredevils and sneaky thieves.', ''
+-- Ruby Ring
+'eq_rubyring', 'Ruby Ring', ''
+'eq_rubyring', 'The small ruby sparkles.', ''
+-- Aquamarine Ring
+'eq_aquamarinering', 'Aquamarine Ring', ''
+'eq_aquamarinering', 'There is a coldness radiating from its blue stone.', ''
+-- Iron Ring
+'eq_ironring', 'Iron Ring', ''
+'eq_ironring', 'Looks quite chunky.', ''
+-- Eye of the Moon
+'eq_eyeofthemoon', 'The Eye of the Moon', ''
+'eq_eyeofthemoon', 'Many legends surround this mysterious necklace.', ''
+-- Silver Necklace
+'eq_silvernecklace', 'Silver Necklace', ''
+'eq_silvernecklace', 'The small chain links shine.', ''
+-- Ruby Necklace
+'eq_rubynecklace', 'Ruby Necklace', ''
+'eq_rubynecklace', 'The ruby feels warm, as if it had been worn lately.', ''
+-- Star Talisman
+'eq_startalisman', 'Star Talisman', ''
+'eq_startalisman', 'The small gems that form the star are sharp and spiky.', ''
+-- Light-Touched Pendant
+'eq_lightpendant', 'Light-Touched Pendant', ''
+'eq_lightpendant', 'The pendant shines for those who believe in the Eternal Light. This trinket belonged to the High Priestess Inina.', ''
