@@ -44,7 +44,7 @@ void WispEnemy::loadSpells() {
 	shadowAureola.damagePerSecond = m_skinNr + 5;
 	shadowAureola.duration = sf::seconds(3.f);
 	shadowAureola.cooldown = sf::seconds(5.f);
-	shadowAureola.damageType = m_skinNr == 0 ? DamageType::Shadow : DamageType::Fire;
+	shadowAureola.damageType = m_skinNr == 1 ? DamageType::Fire : DamageType::Shadow;
 	shadowAureola.range = 200.f;
 	shadowAureola.speed = 150.f;
 	shadowAureola.fightingTime = sf::milliseconds(8 * 100);

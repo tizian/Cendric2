@@ -7,6 +7,7 @@
 // 0: default, holy skin
 // 1: shadow wisp skin 
 // 2: fiery wisp skin
+// 3: toxic wisp skin
 class AureolaSpell : public Spell {
 public:
 	AureolaSpell() {}
