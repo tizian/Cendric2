@@ -9,6 +9,7 @@
 // available skins:
 // 1: fire
 // 2: blue fire
+// 3: toxic water
 class ParticleTile : public LevelDynamicTile {
 public:
 	ParticleTile(LevelScreen* levelScreen);
@@ -27,9 +28,12 @@ public:
 
 private:
 	bool m_isForegroundTile = false;
+	sf::Vector2f m_particlePosOffset;
 	particles::TextureParticleSystem* m_ps = nullptr;
-	particles::AimedVelocityGenerator* m_velGenerator = nullptr;
+	particles::ParticleGenerator* m_velGenerator = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
 
+	void loadFlameParticles(int skinNr);
+	void loadWaterParticles(int skinNr);
 	void loadParticleSystem(int skinNr);
 };

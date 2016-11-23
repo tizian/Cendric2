@@ -45,15 +45,16 @@ void ParticleTile::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 
 	if (m_particleSpawner == nullptr) return;
-	m_particleSpawner->center.x = getPosition().x + 0.5f * getBoundingBox()->width;
-	m_particleSpawner->center.y = getPosition().y + 0.5f * getBoundingBox()->height;
-	m_velGenerator->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	m_particleSpawner->center = getPosition() + m_particlePosOffset;
+	if (auto velGen = dynamic_cast<particles::AimedVelocityGenerator*>(m_velGenerator)) {
+		velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	}
 }
 
 void ParticleTile::render(sf::RenderTarget& target) {
 	if (m_isFirstRenderIteration) {
-		sf::RenderTarget& particleTarget = m_isForegroundTile ? 
-			dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture() : 
+		sf::RenderTarget& particleTarget = m_isForegroundTile ?
+			dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture() :
 			dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 		particleTarget.setView(target.getView());
 		m_ps->render(particleTarget);
@@ -73,7 +74,52 @@ void ParticleTile::onHit(Spell* spell) {
 	// nop?
 }
 
-void ParticleTile::loadParticleSystem(int skinNr) {
+void ParticleTile::loadWaterParticles(int skinNr) {
+	m_particlePosOffset = sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height);
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_DROP)->setSmooth(true);
+	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_DROP));
+	m_ps->additiveBlendMode = false;
+	m_ps->emitRate = 100.f;
+
+	// Generators
+	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
+	posGen->center = getPosition() + m_particlePosOffset;
+	posGen->size = sf::Vector2f(30.f, 20.f);
+	m_particleSpawner = posGen;
+
+	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 20.f;
+
+	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+
+	colGen->minStartCol = sf::Color(60, 110, 40);
+	colGen->maxStartCol = sf::Color(80, 100, 50);
+	colGen->minEndCol = sf::Color(60, 80, 40, 100);
+	colGen->maxEndCol = sf::Color(110, 140, 80, 100);
+
+	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	velGen->minStartSpeed = 30.f;
+	velGen->maxStartSpeed = 50.f;
+	velGen->minAngle = 180.f;
+	velGen->maxAngle = 180.f;
+	m_velGenerator = velGen;
+
+	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	timeGen->minTime = 1.0f;
+	timeGen->maxTime = 2.0f;
+
+	// Updaters
+	m_ps->addUpdater<particles::TimeUpdater>();
+	m_ps->addUpdater<particles::ColorUpdater>();
+	m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::SizeUpdater>();
+}
+
+void ParticleTile::loadFlameParticles(int skinNr) {
+	m_particlePosOffset = sf::Vector2f(0.5f * getBoundingBox()->width, 0.5f * getBoundingBox()->height);
 	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
 	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	m_ps->additiveBlendMode = true;
@@ -81,7 +127,7 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
-	posGen->center = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y + 0.5f * getBoundingBox()->height);
+	posGen->center = getPosition() + m_particlePosOffset;
 	posGen->size = sf::Vector2f(40.f, 0.f);
 	m_particleSpawner = posGen;
 
@@ -95,13 +141,13 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 
 	switch (skinNr) {
 	default:
-	case 1:
+	case 0:
 		colGen->minStartCol = sf::Color(255, 160, 64);
 		colGen->maxStartCol = sf::Color(255, 160, 64);
 		colGen->minEndCol = sf::Color(255, 0, 0, 200);
 		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
 		break;
-	case 2:
+	case 1:
 		colGen->minStartCol = sf::Color(100, 146, 186);
 		colGen->maxStartCol = sf::Color(100, 146, 186);
 		colGen->minEndCol = sf::Color(20, 83, 255, 200);
@@ -124,4 +170,16 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
 	m_ps->addUpdater<particles::SizeUpdater>();
+}
+
+void ParticleTile::loadParticleSystem(int skinNr) {
+	switch (skinNr) {
+	case 0:
+	case 1:
+		loadFlameParticles(skinNr);
+		break;
+	case 2:
+	default:
+		loadWaterParticles(skinNr);
+	}
 }

@@ -77,7 +77,7 @@ const FluidTileData POISON
 	1.1f,
 	0.0f,
 	1.0f,
-	30.f,
+	40.f,
 	1.f,
 	sf::Color(50, 100, 20, 128),
 	true,
