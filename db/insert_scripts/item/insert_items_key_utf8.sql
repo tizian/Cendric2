@@ -38,10 +38,22 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_jonathanbasement', 'key', 300, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item', 'Basement Key','Kellerschlüssel','Chällerschlüssel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item_desc', 'The key to the basement of Jonathans House.','Der Schlüssel zum Keller von Jonathans Haus.','De Schlüssel zum Chäller vom Huus vom Jonathan.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item_desc', 'The key to the basement of Jonathans house.','Der Schlüssel zum Keller von Jonathans Haus.','De Schlüssel zum Chäller vom Huus vom Jonathan.');
+
+-- Basement Key (Key to the basement of Syrah's house)
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_syrahbasement', 'key', 600, 150, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_syrahbasement', 'item', 'Basement Key','Kellerschlüssel','Chällerschlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_syrahbasement', 'item_desc', 'The key to the basement of Syrah''s house.','Der Schlüssel zum Keller von Syrahs Haus.','De Schlüssel zum Chäller vom Huus vode Syrah.');
 
 -- Rusty Key (Key to the thieves' guild)
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_thiefguild', 'key', 550, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_thiefguild', 'item', 'Rusty Key','Rostiger Schlüssel','Rostige Schlüssel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_thiefguild', 'item_desc', 'This key is partly corroded.','Dieser Schlüssel wurde teilweise von Rost zerfressen.','De Schlüssel isch es bitz vom Rost zerfresse worde.');
+
+-- Sewer Key 
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_sewerkey', 'key', 600, 150, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_sewerkey', 'item', 'Sewer Key','Schlüssel zur Kanalisation','Kanalisations-Schlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_sewerkey', 'item_desc', 'Opens doors in the sewers of Gandria.','Öffnet Türen in der Kanalisation von Gandria.','Macht Türe ide Kanalisation vo Gandria uf.');
