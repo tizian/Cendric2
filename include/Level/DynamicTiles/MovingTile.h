@@ -33,8 +33,9 @@ public:
 private:
 	void updateRelativeVelocity(const sf::Time& frameTime) override;
 	std::string getSpritePath() const override;
-	void setFrozen(bool frozen);
+	void setFrozen(bool frozen, bool permanent = false);
 	bool m_isFrozen;
+	bool m_isPermanentlyFrozen;
 	bool m_isActive;
 	sf::Vector2f m_currentVelocity;
 	sf::Time m_distanceTime;

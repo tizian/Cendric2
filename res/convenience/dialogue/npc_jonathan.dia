@@ -659,7 +659,7 @@ npc.id:npc_jonathan
 	trigger:DL:changeQuestState("join_a_guild", "started")
 	# translation: 
 	translation.tag:DL_Jonathan_WhatShouldIDo2
-	translation.en:I guess you already know one of the guilds: The Clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
+	translation.en:I guess you already know one of the guilds: The clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
 	translation.de:Ich nehme an, du kennst bereits eine der Gilden: Die Kleriker. Es gibt aber auch Magier in dieser Stadt, die Nekromantie oder Dämmerungsmagie praktizieren, du musst sie nur finden.
 	translation.ch:Ich denke, du kensch scho eini vode Gilde: D'Kleriker. Es git aber au Magier i dere Stadt, wo Nekromantie oder Dämmerigsmagie praktiziered, du muesch si nur finde.
 	[
@@ -686,7 +686,7 @@ npc.id:npc_jonathan
 		condition:not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")
 		# translation: 
 		translation.tag:DL_Choice_WhereNecromancers
-		translation.en:How can I find the Necromancers?
+		translation.en:How can I find the necromancers?
 		translation.de:Wie kann ich die Nekromanten finden?
 		translation.ch:We chan ich d'Nekromante finde?
 	]
@@ -706,7 +706,7 @@ npc.id:npc_jonathan
 		condition:not DL:isConditionFulfilled("npc_jonathan", "where_clerics")
 		# translation: 
 		translation.tag:DL_Choice_WhereClerics
-		translation.en:What if I wanted to join the Clerics?
+		translation.en:What if I wanted to join the clerics?
 		translation.de:Und wenn ich den Klerikern beitreten will?
 		translation.ch:Und wenn ich zude Kleriker wett?
 	]

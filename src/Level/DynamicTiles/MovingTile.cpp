@@ -26,7 +26,7 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 	m_distanceTime = data.speed == 0 ? sf::Time::Zero : sf::seconds(static_cast<float>(data.distance) / static_cast<float>(data.speed));
 	m_timeUntilTurn = m_distanceTime;
 
-	setFrozen(data.isFrozen);
+	setFrozen(data.isFrozen, true);
 	setInitialState(data.isActive);
 
 	m_isOneWay = data.isOneWay;
@@ -79,7 +79,9 @@ void MovingTile::loadAnimation(int skinNr) {
 
 void MovingTile::update(const sf::Time& frameTime) {
 	if (m_isFrozen) {
-		updateTime(m_frozenTime, frameTime);
+		if (!m_isPermanentlyFrozen) {
+			updateTime(m_frozenTime, frameTime);
+		}
 		if (m_frozenTime == sf::Time::Zero) {
 			setFrozen(false);
 			return;
@@ -159,8 +161,9 @@ void MovingTile::onHit(Spell* spell) {
 	}
 }
 
-void MovingTile::setFrozen(bool frozen) {
+void MovingTile::setFrozen(bool frozen, bool permanent) {
 	m_isFrozen = frozen;
+	m_isPermanentlyFrozen = permanent;
 	m_relativeVelocity = m_isFrozen || !m_isActive ? sf::Vector2f() : m_currentVelocity;
 	setPosition(getPosition());
 	if (m_isFrozen) {
