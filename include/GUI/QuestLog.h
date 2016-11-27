@@ -19,13 +19,14 @@ class ScrollHelper;
 // a quest entry in the quest log
 class QuestEntry : public GameObject {
 public:
-	QuestEntry(const std::string& questID);
+	QuestEntry(const std::string& questID, bool isMainQuest);
 
 	void render(sf::RenderTarget& renderTarget) override;
+	void update(const sf::Time& frameTime) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
 	void onLeftJustPressed() override;
-	void setColor(const sf::Color& color);
+	void onMouseOver() override;
 	void select();
 	void deselect();
 	bool isClicked();
@@ -35,6 +36,8 @@ public:
 private:
 	bool m_isSelected = false;
 	bool m_isClicked = false;
+	bool m_isMouseover = false;
+	bool m_isMainQuest;
 	BitmapText m_name;
 
 	std::string m_questID;

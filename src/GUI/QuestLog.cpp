@@ -115,19 +115,6 @@ void QuestLog::update(const sf::Time& frameTime) {
 
 	m_scrollBar->update(frameTime);
 
-	for (size_t i = 0; i < m_stateMap[m_currentTab]->size(); ++i) {
-		QuestEntry& entry = m_stateMap[m_currentTab]->at(i);
-		if (m_selectedEntry && m_selectedEntry->getQuestID() == entry.getQuestID()) {
-			entry.setColor(COLOR_WHITE);
-		}
-		else if (g_inputController->isMouseOver(entry.getBoundingBox(), true)) {
-			entry.setColor(COLOR_LIGHT_PURPLE);
-		}
-		else {
-			entry.setColor(COLOR_GREY);
-		}
-	}
-
 	// check whether an entry was selected
 	for (auto& it : *(m_stateMap[m_currentTab])) {
 		sf::Vector2f pos = it.getPosition();
@@ -250,11 +237,32 @@ void QuestLog::reload() {
 	m_scrollBar->scroll(0);
 
 	clearAllEntries();
+	std::vector<std::pair<QuestState, std::string>> mainQuests;
+	std::vector<std::pair<QuestState, std::string>> nonMainQuests;
 
 	for (auto& it : m_core->getData().questStates) {
 		if (m_stateMap[it.second] == nullptr) continue;
-		m_stateMap[it.second]->push_back(QuestEntry(it.first));
-		if (it.first.compare(m_selectedQuestID) == 0 && m_currentTab != it.second) {
+		const QuestData* data = m_core->getQuestData(it.first);
+		if (!data) continue;
+		if (data->isMainQuest) {
+			mainQuests.push_back(std::pair<QuestState, std::string>(it.second, it.first));
+		}
+		else {
+			nonMainQuests.push_back(std::pair<QuestState, std::string>(it.second, it.first));
+		}
+	}
+
+	for (auto& it : mainQuests) {
+		m_stateMap[it.first]->push_back(QuestEntry(it.second, true));
+		if (it.second.compare(m_selectedQuestID) == 0 && m_currentTab != it.first) {
+			// assure that an item that is not in the current tab can never be selected
+			hideDescription();
+		}
+	}
+
+	for (auto& it : nonMainQuests) {
+		m_stateMap[it.first]->push_back(QuestEntry(it.second, false));
+		if (it.second.compare(m_selectedQuestID) == 0 && m_currentTab != it.first) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
 		}
@@ -280,12 +288,12 @@ void QuestLog::hide() {
 
 // <<< QUEST ENTRY >>>
 
-QuestEntry::QuestEntry(const std::string& questID) {
+QuestEntry::QuestEntry(const std::string& questID, bool isMainQuest) {
 	m_questID = questID;
+	m_isMainQuest = isMainQuest;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_name.setColor(COLOR_WHITE);
 
-	std::string questTitle = "> " + g_textProvider->getText(questID, "quest");
+	std::string questTitle = "> " + g_textProvider->getText(m_questID, "quest");
 	if (questTitle.size() > QuestLog::MAX_ENTRY_LENGTH_CHARACTERS) {
 		questTitle = questTitle.substr(0, QuestLog::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
 	}
@@ -293,6 +301,21 @@ QuestEntry::QuestEntry(const std::string& questID) {
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
+}
+
+void QuestEntry::update(const sf::Time& frameTime) {
+	m_isMouseover = false;
+	m_isClicked = false;
+	GameObject::update(frameTime);
+	if (m_isMouseover) {
+		m_name.setColor(COLOR_LIGHT_PURPLE);
+	}
+	else if (m_isSelected) {
+		m_name.setColor(COLOR_WHITE);
+	}
+	else {
+		m_name.setColor(m_isMainQuest ? sf::Color(220, 180, 180) : sf::Color(180, 180, 180));
+	}
 }
 
 const std::string& QuestEntry::getQuestID() const {
@@ -313,18 +336,15 @@ void QuestEntry::onLeftJustPressed() {
 	m_isClicked = true;
 }
 
-void QuestEntry::setColor(const sf::Color& color) {
-	m_name.setColor(color);
+void QuestEntry::onMouseOver() {
+	m_isMouseover = true;
 }
 
 bool QuestEntry::isClicked() {
-	bool wasClicked = m_isClicked;
-	m_isClicked = false;
-	return wasClicked;
+	return m_isClicked;
 }
 
 void QuestEntry::select() {
-	m_name.setColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -333,7 +353,6 @@ GameObjectType QuestEntry::getConfiguredType() const {
 }
 
 void QuestEntry::deselect() {
-	m_name.setColor(COLOR_GREY);
 	m_isSelected = false;
 }
 
