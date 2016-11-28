@@ -17,7 +17,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firestaff', 'item', 'Fire Staff','Feuerstab','Füürstab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firestaff', 'item_desc', 'The ruby stone reflects different shades of red.','Der grosse Rubinkopf leuchtet in warmen Rottönen.', 'De gross Rubinchopf lüüchtet in warme Rottön.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firestaff', 'eq_weapon', 50, 150, 120);
-INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire) values ('we_firestaff', 10, 5, 10);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire) values ('we_firestaff', 10, 5, 8);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firestaff', 'res/assets/equipment/weapon/spritesheet_weapon_firestaff.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_firestaff.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firestaff', 600, 10, 45, 80, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firestaff', 1, 'elemental', 2);
@@ -28,7 +28,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_tearstaff', 'item', 'Tear Staff','Tränenstab','Tränestab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_tearstaff', 'item_desc', 'A tear shaped aquamarine decorates the head of this staff.','Ein tränenförmiger Aquamarin ziert den Kopf dieses Stabes.', 'En träneförmige Aquamarin ziert de Chopf vo dem Stab.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_tearstaff', 'eq_weapon', 550, 350, 150);
-INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_ice) values ('we_tearstaff', 10, 5, 15);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_ice) values ('we_tearstaff', 10, 5, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_tearstaff', 'res/assets/equipment/weapon/spritesheet_weapon_tearstaff.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_tearstaff.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_tearstaff', 600, 10, 45, 80, 10);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_tearstaff', 1, 'elemental', 2);

@@ -56,7 +56,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 
 -- Sewer Key 
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_sewerkey', 'key', 600, 150, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_sewerkey', 'key', 600, 100, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_sewerkey', 'item', 'Sewer Key','Schlüssel zur Kanalisation','Kanalisations-Schlüssel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_sewerkey', 'item_desc', 'Opens doors in the sewers of Gandria.','Öffnet Türen in der Kanalisation von Gandria.','Macht Türe ide Kanalisation vo Gandria uf.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_sewerkey', -6, -38, 32, 12);
