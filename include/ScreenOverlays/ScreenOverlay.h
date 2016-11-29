@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-
 #include "global.h"
 #include "GUI/BitmapText.h"
 #include "GameObject.h"

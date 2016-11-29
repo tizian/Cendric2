@@ -94,14 +94,14 @@ const Weapon* CharacterCore::getWeapon() {
 }
 
 QuestState CharacterCore::getQuestState(const std::string& id) const {
-	if (m_data.questStates.find(id) != m_data.questStates.end()) {
+	if (contains(m_data.questStates, id)) {
 		return m_data.questStates.at(id);
 	}
 	return QuestState::VOID;
 }
 
 bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
-	if (state == QuestState::Started && m_data.questStates.find(id) == m_data.questStates.end()) {
+	if (state == QuestState::Started && !contains(m_data.questStates, id)) {
 		QuestData newQuest = QuestLoader::loadQuest(id);
 		if (newQuest.id.empty()) {
 			g_logger->logError("CharacterCore", "Could not load quest: " + id);
@@ -111,7 +111,7 @@ bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
 		m_data.questStates.insert({ id, state });
 		return true;
 	}
-	if (state != QuestState::Started && m_data.questStates.find(id) != m_data.questStates.end()) {
+	if (state != QuestState::Started && contains(m_data.questStates, id)) {
 		if (m_data.questStates[id] == state) {
 			return false;
 		}
@@ -246,7 +246,7 @@ void CharacterCore::setWaypointUnlocked(const std::string& map, int pos) {
 }
 
 const QuestData* CharacterCore::getQuestData(const std::string& questID) const {
-	if (m_quests.find(questID) == m_quests.end()) {
+	if (!contains(m_quests, questID)) {
 		g_logger->logError("CharacterCore", "Quest: " + questID + " has no quest data!");
 		return nullptr;
 	}
@@ -254,16 +254,16 @@ const QuestData* CharacterCore::getQuestData(const std::string& questID) const {
 }
 
 int CharacterCore::getNumberOfTargetsKilled(const std::string& questID, const std::string& name) const {
-	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end() ||
-		m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end()) {
+	if (!contains(m_data.questTargetProgress, questID) ||
+		!contains(m_data.questTargetProgress.at(questID), name)) {
 		return 0;
 	}
 	return m_data.questTargetProgress.at(questID).at(name);
 }
 
 int CharacterCore::getNumberOfTotalTargets(const std::string& questID, const std::string& name) const {
-	if (m_quests.find(questID) == m_quests.end() ||
-		m_quests.at(questID).targets.find(name) == m_quests.at(questID).targets.end()) {
+	if (!contains(m_quests, questID) ||
+		!contains(m_quests.at(questID).targets, name)) {
 		return 0;
 	}
 	return m_quests.at(questID).targets.at(name);
@@ -271,7 +271,7 @@ int CharacterCore::getNumberOfTotalTargets(const std::string& questID, const std
 
 bool CharacterCore::isQuestComplete(const std::string& questID) const {
 	if (getQuestState(questID) != QuestState::Started) return false;
-	if (m_quests.find(questID) == m_quests.end()) {
+	if (!contains(m_quests, questID)) {
 		g_logger->logError("CharacterCore", "Quest: " + questID + " has no quest data!");
 		return false;
 	}
@@ -279,20 +279,20 @@ bool CharacterCore::isQuestComplete(const std::string& questID) const {
 
 	// check quest conditions
 	if (!data.conditions.empty()) {
-		if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end())
+		if (!contains(m_data.questConditionProgress, questID))
 			return false;
 		for (auto& it : data.conditions) {
-			if (m_data.questConditionProgress.at(questID).find(it) == m_data.questConditionProgress.at(questID).end())
+			if (!contains(m_data.questConditionProgress.at(questID), it))
 				return false;
 		}
 	}
 
 	// check quest targets
 	if (!data.targets.empty()) {
-		if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end())
+		if (!contains(m_data.questTargetProgress, questID))
 			return false;
 		for (auto& it : data.targets) {
-			if (m_data.questTargetProgress.at(questID).find(it.first) == m_data.questTargetProgress.at(questID).end())
+			if (!contains(m_data.questTargetProgress.at(questID), it.first))
 				return false;
 			if (m_data.questTargetProgress.at(questID).at(it.first) < it.second)
 				return false;
@@ -311,27 +311,27 @@ bool CharacterCore::isQuestComplete(const std::string& questID) const {
 }
 
 void CharacterCore::setQuestTargetKilled(const std::string& questID, const std::string& name) {
-	if (m_data.questTargetProgress.find(questID) == m_data.questTargetProgress.end()) {
+	if (!contains(m_data.questTargetProgress, questID)) {
 		m_data.questTargetProgress.insert({ questID, std::map<std::string, int>() });
 	}
-	if (m_data.questTargetProgress.at(questID).find(name) == m_data.questTargetProgress.at(questID).end()) {
+	if (!contains(m_data.questTargetProgress.at(questID), name)) {
 		m_data.questTargetProgress.at(questID).insert({ name, 0 });
 	}
 	m_data.questTargetProgress.at(questID).at(name) = m_data.questTargetProgress.at(questID).at(name) + 1;
 }
 
 void CharacterCore::setQuestConditionFulfilled(const std::string& questID, const std::string& condition) {
-	if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end()) {
+	if (!contains(m_data.questConditionProgress, questID)) {
 		m_data.questConditionProgress.insert({ questID, std::set<std::string>() });
 	}
 	m_data.questConditionProgress.at(questID).insert(condition);
 }
 
 bool CharacterCore::isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const {
-	if (m_data.questConditionProgress.find(questID) == m_data.questConditionProgress.end()) {
+	if (!contains(m_data.questConditionProgress, questID)) {
 		return false;
 	}
-	return m_data.questConditionProgress.at(questID).find(condition) != m_data.questConditionProgress.at(questID).end();
+	return contains(m_data.questConditionProgress.at(questID), condition);
 }
 
 bool CharacterCore::isSpellLearned(SpellID id) {
@@ -346,44 +346,44 @@ bool CharacterCore::isSpellLearned(SpellID id) {
 } 
 
 bool CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
-	if (m_data.conditionProgress.find(conditionType) == m_data.conditionProgress.end()) {
+	if (!contains(m_data.conditionProgress, conditionType)) {
 		m_data.conditionProgress.insert({ conditionType, std::set<std::string>() });
 	}
-	auto ret = m_data.conditionProgress.at(conditionType).insert(condition);
+	auto& ret = m_data.conditionProgress.at(conditionType).insert(condition);
 	return ret.second;
 }
 
 bool CharacterCore::unlockQuestDescription(const std::string& questID, int descriptionID) {
-	if (m_data.questDescriptionProgress.find(questID) == m_data.questDescriptionProgress.end()) {
+	if (!contains(m_data.questDescriptionProgress, questID)) {
 		m_data.questDescriptionProgress.insert({ questID, std::set<int>() });
 	}
-	auto ret = m_data.questDescriptionProgress.at(questID).insert(descriptionID);
+	auto& ret = m_data.questDescriptionProgress.at(questID).insert(descriptionID);
 	return ret.second;
 }
 
 bool CharacterCore::isConditionFulfilled(const std::string& conditionType, const std::string& condition) const {
-	if (m_data.conditionProgress.find(conditionType) == m_data.conditionProgress.end()) {
+	if (!contains(m_data.conditionProgress, conditionType)) {
 		return false;
 	}
-	const std::set<std::string>& conditions = m_data.conditionProgress.at(conditionType);
-	return (conditions.find(condition) != conditions.end());
+
+	return contains(m_data.conditionProgress.at(conditionType), condition);
 }
 
 bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) const {
-	if (m_data.enemiesKilled.find(levelID) == m_data.enemiesKilled.end()) return false;
-	if (m_data.enemiesKilled.at(levelID).find(objectID) == m_data.enemiesKilled.at(levelID).end()) return false;
+	if (!contains(m_data.enemiesKilled, levelID)) return false;
+	if (!contains(m_data.enemiesKilled.at(levelID), objectID)) return false;
 	return true;
 }
 
 bool CharacterCore::isEnemyLooted(const std::string& levelID, int objectID) const {
-	if (m_data.enemiesLooted.find(levelID) == m_data.enemiesLooted.end()) return false;
-	if (m_data.enemiesLooted.at(levelID).find(objectID) == m_data.enemiesLooted.at(levelID).end()) return false;
+	if (!contains(m_data.enemiesLooted, levelID)) return false;
+	if (!contains(m_data.enemiesLooted.at(levelID), objectID)) return false;
 	return true;
 }
 
 bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID) {
-	if (m_data.triggersTriggered.find(worldID) == m_data.triggersTriggered.end()) return false;
-	if (m_data.triggersTriggered.at(worldID).find(objectID) == m_data.triggersTriggered.at(worldID).end()) return false;
+	if (!contains(m_data.triggersTriggered, worldID)) return false;
+	if (!contains(m_data.triggersTriggered.at(worldID), objectID)) return false;
 	return true;
 }
 
@@ -401,7 +401,7 @@ int CharacterCore::getItemAmount(const std::string& itemID) const {
 		}
 	}
 
-	if (m_data.items.find(itemID) != m_data.items.end())
+	if (contains(m_data.items, itemID))
 		foundAmount += m_data.items.at(itemID);
 
 	return foundAmount;
@@ -415,7 +415,7 @@ int CharacterCore::getStoredItemAmount(const std::string& itemID) const {
 	}
 
 	int foundAmount = 0;
-	if (m_data.storedItems.find(itemID) != m_data.storedItems.end())
+	if (contains(m_data.storedItems, itemID))
 		foundAmount += m_data.storedItems.at(itemID);
 
 	return foundAmount;
@@ -438,7 +438,7 @@ const CharacterCoreData& CharacterCore::getData() const {
 }
 
 MerchantData CharacterCore::getMerchantData(const std::string& merchantID) {
-	if (m_data.merchantStates.find(merchantID) != m_data.merchantStates.end()) {
+	if (contains(m_data.merchantStates, merchantID)) {
 		return m_data.merchantStates.at(merchantID);
 	}
 
@@ -455,7 +455,7 @@ void CharacterCore::addPermanentAttributes(const AttributeData& attributes) {
 }
 
 void CharacterCore::learnModifier(const SpellModifier& modifier) {
-	if (m_data.modfiersLearned.find(modifier.type) == m_data.modfiersLearned.end()) {
+	if (!contains(m_data.modfiersLearned, modifier.type)) {
 		m_data.modfiersLearned.insert({ modifier.type, modifier.level });
 	}
 	else {
@@ -464,7 +464,7 @@ void CharacterCore::learnModifier(const SpellModifier& modifier) {
 }
 
 void CharacterCore::learnHint(const std::string& hintKey) {
-	if (std::find(m_data.hintsLearned.begin(), m_data.hintsLearned.end(), hintKey) == m_data.hintsLearned.end()) {
+	if (!contains(m_data.hintsLearned, hintKey)) {
 		m_data.hintsLearned.push_back(hintKey);
 	}
 }
@@ -474,7 +474,7 @@ void CharacterCore::setWeather(const std::string& worldID, const WeatherData& da
 }
 
 const WeatherData* CharacterCore::getWeather(const std::string& worldID) const {
-	if (m_data.currentWeather.find(worldID) == m_data.currentWeather.end()) {
+	if (!contains(m_data.currentWeather, worldID)) {
 		return nullptr;
 	}
 	return &m_data.currentWeather.at(worldID);
@@ -483,7 +483,7 @@ const WeatherData* CharacterCore::getWeather(const std::string& worldID) const {
 void CharacterCore::addReputation(FractionID fraction, int amount) {
 	if (fraction == FractionID::VOID || amount < 0) return;
 
-	if (m_data.reputationProgress.find(fraction) == m_data.reputationProgress.end()) {
+	if (!contains(m_data.reputationProgress, fraction)) {
 		m_data.reputationProgress.insert({ fraction, 0 });
 	}
 
@@ -491,7 +491,7 @@ void CharacterCore::addReputation(FractionID fraction, int amount) {
 }
 
 int CharacterCore::getReputation(FractionID fraction) const {
-	if (m_data.reputationProgress.find(fraction) == m_data.reputationProgress.end())
+	if (!contains(m_data.reputationProgress, fraction))
 		return 0;
 
 	return m_data.reputationProgress.at(fraction);
@@ -536,9 +536,8 @@ void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 
 void CharacterCore::addItem(const std::string& item, int quantity) {
 	if (item.empty()) return;
-	auto it = m_data.items.find(item);
 
-	if (it != m_data.items.end()) {
+	if (contains(m_data.items, item)) {
 		m_data.items.at(item) = m_data.items.at(item) + quantity;
 	}
 	else {
@@ -550,9 +549,7 @@ void CharacterCore::removeItem(const std::string& item, int quantity) {
 	if (item.empty()) return;
 	int quantityEreased = 0;
 
-	auto it = m_data.items.find(item);
-
-	if (it != m_data.items.end()) {
+	if (contains(m_data.items, item)) {
 		m_data.items.at(item) = m_data.items.at(item) - quantity;
 		if (m_data.items.at(item) <= 0) {
 			quantityEreased = quantity + m_data.items.at(item);
@@ -577,9 +574,8 @@ void CharacterCore::removeItem(const std::string& item, int quantity) {
 
 void CharacterCore::addStoredItem(const std::string& item, int quantity) {
 	if (item.empty()) return;
-	auto it = m_data.storedItems.find(item);
 
-	if (it != m_data.storedItems.end()) {
+	if (contains(m_data.storedItems, item)) {
 		m_data.storedItems.at(item) = m_data.storedItems.at(item) + quantity;
 	}
 	else {
@@ -589,9 +585,8 @@ void CharacterCore::addStoredItem(const std::string& item, int quantity) {
 
 void CharacterCore::removeStoredItem(const std::string& item, int quantity) {
 	if (item.empty()) return;
-	auto it = m_data.storedItems.find(item);
 
-	if (it != m_data.storedItems.end()) {
+	if (contains(m_data.storedItems, item)) {
 		m_data.storedItems.at(item) = m_data.storedItems.at(item) - quantity;
 		if (m_data.storedItems.at(item) <= 0) {
 			m_data.storedItems.erase(item);
@@ -686,15 +681,16 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int m
 
 void CharacterCore::learnSpell(SpellID id) {
 	SpellType type = SpellData::getSpellData(id).spellType;
-	if (m_data.spellsLearned.find(type) == m_data.spellsLearned.end()) {
+	if (!contains(m_data.spellsLearned, type)) {
 		m_data.spellsLearned.insert({ type, std::set<SpellID>() });
 	}
 	m_data.spellsLearned.at(type).insert(id);
 }
 
 void CharacterCore::equipItem(const std::string& item, ItemType type) {
-	if (m_data.equippedItems.find(type) == m_data.equippedItems.end())
+	if (!contains(m_data.equippedItems, type))
 		return;
+
 	std::string oldItem = m_data.equippedItems.at(type);
 	m_data.equippedItems.at(type) = item;
 
@@ -702,7 +698,7 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 	if (type == ItemType::Equipment_weapon) {
 		m_data.equippedWeaponSlots.clear();
 		loadWeapon();
-		if (m_weapon && m_data.weaponConfigurations.find(m_weapon->getID()) != m_data.weaponConfigurations.end()) {
+		if (m_weapon && contains(m_data.weaponConfigurations, m_weapon->getID())) {
 			m_data.equippedWeaponSlots = m_data.weaponConfigurations[m_weapon->getID()];
 		}
 		else if (item.empty()) {
@@ -750,7 +746,7 @@ void CharacterCore::setCharacterJailed() {
 
 	// store the items
 	for (auto& it : m_data.items) {
-		if (m_data.storedItems.find(it.first) == m_data.storedItems.end()) {
+		if (!contains(m_data.storedItems, it.first)) {
 			m_data.storedItems.insert({ it.first, it.second });
 		}
 		else {

@@ -88,7 +88,7 @@ void QuickSlot::consume() {
 
 void QuickSlot::reload() {
 	// check if item exists
-	if (m_itemID.empty() || m_core->getItems()->find(m_itemID) == m_core->getItems()->end()) {
+	if (m_itemID.empty() || !contains(*m_core->getItems(), m_itemID)) {
 		// the slot is empty
 		m_isEmpty = true;
 		m_iconRect.setTextureRect(sf::IntRect(0, 0, 0, 0));

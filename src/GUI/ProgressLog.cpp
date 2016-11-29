@@ -88,6 +88,18 @@ void ProgressLog::addQuestConditionFullfilled(const std::string& questID, const 
 	calculatePositions();
 }
 
+void ProgressLog::addQuestItemCollected(const std::string& questID, const std::string& itemID, int currentAmount, int goalAmount) {
+	if (m_core->getQuestState(questID) != QuestState::Started) return;
+
+	std::string text = g_textProvider->getText(itemID, "item");
+	text.append(" (");
+	text.append(std::to_string(std::min(currentAmount, goalAmount)) + "/" + std::to_string(goalAmount) + ")");
+
+	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, COLOR_WHITE));
+
+	calculatePositions();
+}
+
 void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::string& name) {
 	if (m_core->getQuestState(questID) != QuestState::Started) return;
 
@@ -97,11 +109,11 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 	int goal = m_core->getNumberOfTotalTargets(questID, name);
 	if (m_core->getQuestData(questID) != nullptr) {
 		const QuestData* data = m_core->getQuestData(questID);
-		if (data->targets.find(name) != data->targets.end())
+		if (contains(data->targets, name))
 			goal = data->targets.at(name);
 	}
-	if (m_core->getData().questTargetProgress.find(questID) != m_core->getData().questTargetProgress.end() &&
-		m_core->getData().questTargetProgress.at(questID).find(name) != m_core->getData().questTargetProgress.at(questID).end()) {
+	if (contains(m_core->getData().questTargetProgress, questID) &&
+		contains(m_core->getData().questTargetProgress.at(questID), name)) {
 		progress = m_core->getData().questTargetProgress.at(questID).at(name);
 	}
 	text.append(std::to_string(progress) + "/" + std::to_string(goal) + ")");

@@ -1,9 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <map>
-#include <set>
+#include "global.h"
 
 struct QuestData {
 	std::string id;

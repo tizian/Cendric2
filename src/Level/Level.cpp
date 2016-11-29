@@ -235,7 +235,7 @@ bool Level::collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const st
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tiles.find(tile->getDynamicTileID()) != tiles.end() &&
+		if (contains(tiles, tile->getDynamicTileID()) &&
 			epsIntersect(tileBB, boundingBox)) {
 			return true;
 		}
@@ -243,7 +243,7 @@ bool Level::collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const st
 	for (auto& it : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tiles.find(tile->getDynamicTileID()) != tiles.end() &&
+		if (contains(tiles, tile->getDynamicTileID()) &&
 			epsIntersect(tileBB, boundingBox)) {
 			return true;
 		}

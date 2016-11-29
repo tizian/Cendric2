@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 #include "global.h"
 #include "GameObject.h"
 #include "ResourceManager.h"

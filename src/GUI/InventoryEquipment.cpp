@@ -46,7 +46,7 @@ void InventoryEquipment::setPosition(const sf::Vector2f& position) {
 	float yOffset = position.y + YOFFSET + InventorySlot::ICON_OFFSET;
 
 	for (auto type : m_types) {
-		if (m_slots.find(type) == m_slots.end()) continue;
+		if (!contains(m_slots, type)) continue;
 		m_slots.at(type).setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += InventorySlot::SIZE + MARGIN;
 	}
@@ -84,7 +84,7 @@ void InventoryEquipment::renderAfterForeground(sf::RenderTarget& target) {
 }
 
 void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
-	if (m_slots.find(type) == m_slots.end()) return;
+	if (!contains(m_slots, type)) return;
 	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2) {
 		if (highlight) {
 			m_slots.at(ItemType::Equipment_ring_1).highlight();
@@ -107,25 +107,25 @@ void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 
 void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	if (item == nullptr) return;
-	const InventorySlot* is = static_cast<const InventorySlot* >(item->getOriginalSlot());
-	if (m_slots.find(is->getItemType()) == m_slots.end()) return;
-	if (is->getItemType() == ItemType::Equipment_ring_1 || is->getItemType() == ItemType::Equipment_ring_2) {
+	const InventorySlot* slot = static_cast<const InventorySlot* >(item->getOriginalSlot());
+	if (!contains(m_slots, slot->getItemType())) return;
+	if (slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2) {
 		if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
-			m_screen->notifyItemEquip(is->getItemID(), ItemType::Equipment_ring_1);
+			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
 		}
 		else if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
-			m_screen->notifyItemEquip(is->getItemID(), ItemType::Equipment_ring_2);
+			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
 		}
 	}
-	else if (item->getBoundingBox()->intersects(*(m_slots.at(is->getItemType()).getBoundingBox()))) {
-		m_screen->notifyItemEquip(is->getItemID(), is->getItemType());
+	else if (item->getBoundingBox()->intersects(*(m_slots.at(slot->getItemType()).getBoundingBox()))) {
+		m_screen->notifyItemEquip(slot->getItemID(), slot->getItemType());
 	}
 }
 
 void InventoryEquipment::equipItem(const InventorySlot* slot) {
 	if (slot == nullptr) return;
 
-	if (m_slots.find(slot->getItemType()) == m_slots.end()) return;
+	if (!contains(m_slots, slot->getItemType())) return;
 	if (slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2) {
 		if (m_slots.at(ItemType::Equipment_ring_1).isEmpty()) {
 			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
@@ -152,7 +152,7 @@ InventorySlot* InventoryEquipment::getSelectedSlot() {
 }
 
 InventorySlot* InventoryEquipment::getSelectedSlot(ItemType type) {
-	if (m_slots.find(type) == m_slots.end()) return nullptr;
+	if (!contains(m_slots, type)) return nullptr;
 	return &m_slots.at(type);
 }
 

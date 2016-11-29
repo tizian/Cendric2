@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-
 #include "global.h"
 #include "Spells/Spell.h"
 #include "InputController.h"

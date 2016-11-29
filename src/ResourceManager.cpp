@@ -113,7 +113,7 @@ void ResourceManager::init() {
 
 template<typename T> void ResourceManager::loadResource(std::map<std::string, T*>& holder, const std::string& typeName, const std::string& filename, ResourceType type, void* owner) {
 	if (filename.empty()) return;
-	if (holder.find(filename) != holder.end()) return; // resource already loaded
+	if (contains(holder, filename)) return; // resource already loaded
 
 	if (type == ResourceType::Unique && owner == nullptr) {
 		g_logger->logError("ResourceManager", typeName + " could not be registered as unique, owner not set: " + getResourcePath(std::string(filename)));
@@ -169,7 +169,7 @@ void ResourceManager::loadBitmapFont(const std::string& filename, ResourceType t
 
 Item* ResourceManager::getItem(const std::string& itemID) {
 	if (itemID.empty()) return nullptr;
-	if (m_items.find(itemID) == m_items.end()) {
+	if (!contains(m_items, itemID)) {
 		Item* item = new Item(itemID);
 		if (!item->isValid()) {
 			g_logger->logError("ResourceManager", "Item not loaded, unknown id: " + itemID);
@@ -257,7 +257,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 
 void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, bool force, bool loop, float scale) {
 	if (!m_configuration.isSoundOn || filename.empty()) return;
-	if (m_soundBuffers.find(filename) == m_soundBuffers.end()) {
+	if (!contains(m_soundBuffers, filename)) {
 		g_logger->logError("ResourceManager", "Cannot play sound: '" + filename + "', sound not loaded!");
 		return;
 	}

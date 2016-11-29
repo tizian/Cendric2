@@ -1,8 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <set>
+#include "global.h"
 
 #include "Enums/QuestState.h"
 #include "Enums/SpellID.h"

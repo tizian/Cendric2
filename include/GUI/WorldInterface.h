@@ -22,7 +22,7 @@ public:
 	// reloads the inventory for the items that have changed. if the string equals "gold", reloads gold
 	// if the string is empty, it does a full reload (heavy operation, only us this when equipment or more than one item changed)
 	virtual void reloadInventory(const std::string& changeditemID = "");
-	// reloads the quest log 
+	// reloads the quest log
 	virtual void reloadQuestLog();
 	// reload the character info
 	virtual void reloadCharacterInfo();

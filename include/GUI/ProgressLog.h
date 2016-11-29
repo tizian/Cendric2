@@ -69,6 +69,7 @@ public:
 	void addItemConversionProgress(const std::string& oldItemID, const std::string& newItemID);
 	void addQuestConditionFullfilled(const std::string& questID, const std::string& condition);
 	void addQuestTargetKilled(const std::string& questID, const std::string& name);
+	void addQuestItemCollected(const std::string& questID, const std::string& itemID, int currentAmount, int goalAmount);
 	void addQuestStateChanged(const std::string& questID, QuestState state);
 	void addQuestDescriptionAdded(const std::string& questID);
 	void addReputationAdded(FractionID fraction, int amount);

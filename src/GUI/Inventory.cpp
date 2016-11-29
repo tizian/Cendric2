@@ -187,8 +187,8 @@ InventorySlot* Inventory::getSelectedSlot() const {
 	if (m_selectedSlotId.second != ItemType::VOID) {
 		return m_equipment->getSelectedSlot(m_selectedSlotId.second);
 	}
-	if (m_typeMap.find(m_currentTab) == m_typeMap.end()) return nullptr;
-	if (m_typeMap.at(m_currentTab)->find(m_selectedSlotId.first) == m_typeMap.at(m_currentTab)->end()) return nullptr;
+	if (!contains(m_typeMap, m_currentTab)) return nullptr;
+	if (!contains(*m_typeMap.at(m_currentTab), m_selectedSlotId.first)) return nullptr;
 	return &m_typeMap.at(m_currentTab)->at(m_selectedSlotId.first);
 }
 
@@ -209,13 +209,13 @@ void Inventory::notifyChange(const std::string& itemID) {
 	}
 	ItemBean bean = g_databaseManager->getItemBean(itemID);
 	if (bean.status != BeanStatus::Filled) return;
-	if (m_typeMap.find(bean.item_type) == m_typeMap.end()) return;
+	if (!contains(m_typeMap, bean.item_type)) return;
 
 	std::map<std::string, InventorySlot>* tab = m_typeMap.at(bean.item_type);
 
 	// search for the slot
-	if (tab->find(bean.item_id) != tab->end()) {
-		if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) {
+	if (contains(*tab, bean.item_id)) {
+		if (!contains(m_core->getData().items, itemID)) {
 			// the item was removed. check if it is selected.
 			if (m_selectedSlotId.first.compare(bean.item_id) == 0) {
 				deselectCurrentSlot();
@@ -230,7 +230,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	}
 
 	// the slot for that item has not been found. The slot is added with the current amount in the core
-	if (m_core->getData().items.find(itemID) == m_core->getData().items.end()) return;
+	if (!contains(m_core->getData().items, itemID)) return;
 
 	(*tab).insert({ bean.item_id, InventorySlot(itemID, m_core->getData().items.at(itemID)) });
 
@@ -631,7 +631,7 @@ void Inventory::reload() {
 	hideDescription();
 	for (auto& itemData : m_core->getData().items) {
 		Item* item = g_resourceManager->getItem(itemData.first);
-		if (item == nullptr || m_typeMap.find(item->getType()) == m_typeMap.end()) continue;
+		if (item == nullptr || !contains(m_typeMap, item->getType())) continue;
 		m_typeMap.at(item->getType())->insert({ item->getID(), InventorySlot(item->getID(), itemData.second) });
 	}
 

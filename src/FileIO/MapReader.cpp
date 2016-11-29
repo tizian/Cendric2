@@ -861,7 +861,7 @@ bool MapReader::readBackgroundTileLayer(const std::string& layer, MapData& data)
 	while ((pos = layerData.find(",")) != std::string::npos) {
 		int tileID = std::stoi(layerData.substr(0, pos));
 
-		if (m_tileColliderMap.find(tileID) != m_tileColliderMap.end()) {
+		if (contains(m_tileColliderMap, tileID)) {
 			for (auto const& colliderRect : m_tileColliderMap.at(tileID)) {
 				sf::FloatRect collider = colliderRect;
 				collider.left += x * TILE_SIZE_F;

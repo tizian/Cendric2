@@ -21,7 +21,7 @@ void AnimatedGameObject::unlockAnimation() {
 }
 
 void AnimatedGameObject::addAnimation(GameObjectState state, Animation* animation) {
-	if (m_animations.find(state) != m_animations.end()) {
+	if (contains(m_animations, state)) {
 		delete m_animations.at(state);
 		m_animations[state] = animation;
 		return;
@@ -30,7 +30,7 @@ void AnimatedGameObject::addAnimation(GameObjectState state, Animation* animatio
 }
 
 const Animation* AnimatedGameObject::getAnimation(GameObjectState state) const {
-	if (m_animations.find(state) == m_animations.end())
+	if (!contains(m_animations, state))
 		return nullptr;
 	return m_animations.at(state);
 }

@@ -145,14 +145,14 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
 
 	// init text and button objects once
 	for (auto& it : m_selectedKeys) {
-		if (INVISIBLE_KEYS.find(it.first) != INVISIBLE_KEYS.end()) continue;
+		if (contains(INVISIBLE_KEYS, it.first)) continue;
 		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
 		keyText->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		m_keyTexts[it.first] = keyText;
 
 		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
 		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
-		if (UNMODIFIABLE_KEYS.find(it.first) != UNMODIFIABLE_KEYS.end()) {
+		if (contains(UNMODIFIABLE_KEYS, it.first)) {
 			keyButton->setEnabled(false);
 		}
 		m_keyButtons[it.first] = std::pair<Button*, sf::Keyboard::Key>(keyButton, it.second);
@@ -200,7 +200,7 @@ void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
 }
 
 bool KeyBindingsScreen::trySetKeyBinding(Key key, sf::Keyboard::Key keyboardKey) {
-	if (RESERVED_KEYS.find(keyboardKey) != RESERVED_KEYS.end()) {
+	if (contains(RESERVED_KEYS, keyboardKey)) {
 		reload();
 		return false;
 	}
@@ -218,7 +218,7 @@ void KeyBindingsScreen::reload() {
 
 	// keyboard mappings
 	for (auto& it : m_selectedKeys) {
-		if (INVISIBLE_KEYS.find(it.first) != INVISIBLE_KEYS.end()) continue;
+		if (contains(INVISIBLE_KEYS, it.first)) continue;
 
 		Button* keyButton = m_keyButtons[it.first].first;
 		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-
 #include "global.h"
 #include "ResourceManager.h"
 #include "FileIO/CharacterCoreReader.h"

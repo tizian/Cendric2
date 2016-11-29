@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const std::string vertexShader = \
+static const std::string vertexShader = \
 "void main()" \
 "{" \
 "    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;" \
@@ -14,7 +14,7 @@ const std::string vertexShader = \
 "    gl_FrontColor = gl_Color;" \
 "}";
 
-const std::string lightFragmentShader = \
+static const std::string lightFragmentShader = \
 "uniform sampler2D texture;" \
 "uniform float ambientLevel;" \
 "" \
@@ -25,7 +25,7 @@ const std::string lightFragmentShader = \
 "    gl_FragColor = vec4(0.0, 0.0, 0.0, lightLevel);" \
 "}";
 
-const std::string foregroundFragmentShader = \
+static const std::string foregroundFragmentShader = \
 "uniform sampler2D texture;" \
 "uniform float ambientLevel;" \
 "" \
@@ -79,6 +79,7 @@ void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	m_interface->reloadInventory(itemID);
 	m_interface->reloadQuestLog();
 	m_interface->reloadCharacterInfo();
+	checkMonitoredQuestItems(itemID, amount);
 }
 
 void WorldScreen::notifyItemConversion(const std::string& oldItemID, const std::string& newItemID, int amount) {
@@ -89,6 +90,7 @@ void WorldScreen::notifyItemConversion(const std::string& oldItemID, const std::
 	m_interface->reloadInventory(newItemID);
 	m_interface->reloadQuestLog();
 	m_interface->reloadCharacterInfo();
+	checkMonitoredQuestItems(newItemID, amount);
 }
 
 void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
@@ -122,6 +124,9 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 		m_progressLog->addQuestStateChanged(questID, state);
 		addScreenOverlay(ScreenOverlay::createQuestScreenOverlay(questID, state));
 		m_interface->reloadQuestLog();
+
+		// check quests for quest items that will be monitored
+		updateMonitoredQuestItems();
 	}
 }
 
@@ -218,6 +223,41 @@ void WorldScreen::loadWeather() {
 	}
 	else {
 		m_weatherSystem->load(&worldData->weather, isLevel);
+	}
+}
+
+void WorldScreen::updateMonitoredQuestItems() {
+	m_monitoredQuestItems.clear();
+	for (auto& it : getCharacterCore()->getData().questStates) {
+		if (it.second != QuestState::Started) continue;
+
+		const QuestData* data = getCharacterCore()->getQuestData(it.first);
+		if (data == nullptr) continue;
+
+		for (auto& item : data->collectibles) {
+			if (!contains(m_monitoredQuestItems, item.first)) {
+				m_monitoredQuestItems.insert({ item.first, std::set<std::string>() });
+			}
+			m_monitoredQuestItems.at(item.first).insert(data->id);
+		}
+	}
+} 
+
+void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount) {
+	if (amount <= 0) return;
+	auto& it = m_monitoredQuestItems.find(itemID);
+	if (it == m_monitoredQuestItems.end()) return;
+
+	for (auto& questID : it->second) {
+		const QuestData* data = getCharacterCore()->getQuestData(questID);
+		if (data == nullptr) continue;
+		for (auto& collectible : data->collectibles) {
+			if (itemID.compare(collectible.first) != 0) continue;
+			int currentItemAmount = getCharacterCore()->getItems()->at(itemID);
+			if (currentItemAmount - amount >= collectible.second) continue;
+			
+			m_progressLog->addQuestItemCollected(questID, itemID, currentItemAmount, collectible.second);
+		}
 	}
 }
 

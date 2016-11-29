@@ -34,7 +34,7 @@ void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
 
 	// create chests if they are not looted yet
 	for (auto& it : data.chests) {
-		if (coreData.chestsLooted.at(data.id).find(it.objectID) != coreData.chestsLooted.at(data.id).end()) {
+		if (contains(coreData.chestsLooted.at(data.id), it.objectID)) {
 			continue;
 		}
 
@@ -116,7 +116,7 @@ void LevelLoader::loadModifierTiles(LevelData& data, LevelScreen* screen) const 
 
 	// create modifier tiles if they are not learned yet
 	for (auto& modifierData : data.modifiers) {
-		if (coreData.modfiersLearned.find(modifierData.modifier.type) != coreData.modfiersLearned.end()
+		if (contains(coreData.modfiersLearned, modifierData.modifier.type)
 			&& coreData.modfiersLearned.at(modifierData.modifier.type) >= modifierData.modifier.level) {
 			continue;
 		}
@@ -235,7 +235,7 @@ void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {
 	// calculate level positions and create them if they are not looted yet
 	for (size_t i = 0; i < data.levelItems.size(); ++i) {
 		auto& it = data.levelItems.at(i);
-		if (!it.empty() && (coreData.itemsLooted.at(data.id).find(static_cast<int>(i)) == coreData.itemsLooted.at(data.id).end())) {
+		if (!it.empty() && !contains(coreData.itemsLooted.at(data.id), static_cast<int>(i))) {
 			sf::Vector2f position(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			ItemBean item = g_databaseManager->getItemBean(it);
 			if (item.status == BeanStatus::NotSet) {

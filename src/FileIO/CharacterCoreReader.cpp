@@ -602,7 +602,7 @@ bool CharacterCoreReader::readProgressConditions(char* start, char* end, Charact
 	}
 	progressType = progressType.substr(0, count);
 
-	if (data.conditionProgress.find(progressType) != data.conditionProgress.end()) {
+	if (contains(data.conditionProgress, progressType)) {
 		g_logger->logError("CharacterCoreReader", "Duplicate condition progress type encountered: " + progressType);
 		return false;
 	}

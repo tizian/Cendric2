@@ -1,7 +1,5 @@
 #pragma once
 
-#include <set>
-
 #include "global.h"
 #include "FileIO/Reader.h"
 #include "FileIO/ConfigurationIO.h"

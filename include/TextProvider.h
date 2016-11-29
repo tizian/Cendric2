@@ -4,8 +4,6 @@
 #include "Logger.h"
 #include "Enums/Language.h"
 
-#include <map>
-
 class TextProvider {
 public:
 	TextProvider();

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <vector>
-#include <map>
-
 #include "global.h"
 #include "Screens/Screen.h"
 #include "Level/LevelMainCharacter.h"

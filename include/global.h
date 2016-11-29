@@ -8,6 +8,9 @@
 #include <iostream>
 #include <cmath>
 #include <functional>
+#include <set>
+#include <map>
+#include <vector>
 // #define NDEBUG; // uncomment this for final version
 #include <assert.h>
 
@@ -68,6 +71,21 @@ inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
 	sf::FloatRect intersection;
 	if (!rect1.intersects(rect2, intersection)) return false;
 	return (intersection.width > Epsilon && intersection.height > Epsilon);
+}
+
+template <typename T>
+inline bool contains(const std::set<T>& c, T item) {
+	return c.find(item) != c.end();
+}
+
+template <typename T, typename U>
+inline bool contains(const std::map<T, U>& c, T item) {
+	return c.find(item) != c.end();
+}
+
+template <typename T>
+inline bool contains(const std::vector<T>& c, T item) {
+	return std::find(c.begin(), c.end(), item) != c.end();
 }
 
 // convenience method for updating time values 

@@ -82,8 +82,8 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	if (bean.status != BeanStatus::Filled) return;
 
 	// search for the slot
-	if (m_items.find(bean.item_id) != m_items.end()) {
-		if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) {
+	if (contains(m_items, bean.item_id)) {
+		if (!contains(m_interface->getMerchantData().wares, itemID)) {
 			// the item was removed. check if it is selected.
 			if (m_selectedSlotId.compare(bean.item_id) == 0) {
 				deselectCurrentSlot();
@@ -98,7 +98,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	}
 
 	// the slot for that item has not been found. The slot is added with the current amount in the core
-	if (m_interface->getMerchantData().wares.find(itemID) == m_interface->getMerchantData().wares.end()) return;
+	if (!contains(m_interface->getMerchantData().wares, itemID)) return;
 
 	m_items.insert({ bean.item_id, InventorySlot(bean.item_id, m_interface->getMerchantData().wares.at(itemID)) });
 
@@ -163,7 +163,7 @@ void MerchantWindow::deselectCurrentSlot() {
 
 InventorySlot* MerchantWindow::getSelectedSlot() {
 	if (m_selectedSlotId.empty()) return nullptr;
-	if (m_items.find(m_selectedSlotId) == m_items.end()) return nullptr;
+	if (!contains(m_items, m_selectedSlotId)) return nullptr;
 	return &m_items.at(m_selectedSlotId);
 }
 

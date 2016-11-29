@@ -33,7 +33,7 @@ void MerchantInterface::sellItem(const Item* item) {
 	}
 	std::string id = item->getID();
 	m_screen->notifyItemChange("gold", item->getValue());
-	if (m_data.wares.find(id) == m_data.wares.end()) {
+	if (!contains(m_data.wares, id)) {
 		m_data.wares.insert({ id, 1 });
 	}
 	else {
@@ -54,7 +54,7 @@ void MerchantInterface::buyItem(const Item* item) {
 	std::string id = item->getID();
 	m_screen->notifyItemChange("gold", -(int)std::ceil(m_data.multiplier * item->getValue()));
 	m_screen->notifyItemChange(id, 1);
-	if (m_data.wares.find(id) != m_data.wares.end()) {
+	if (contains(m_data.wares, id)) {
 		int amount = m_data.wares.at(id);
 		amount--;
 		if (amount <= 0) {

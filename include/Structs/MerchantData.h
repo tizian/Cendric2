@@ -1,8 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <map>
-
+#include "global.h"
 #include "Enums/FractionID.h"
 
 struct MerchantData {

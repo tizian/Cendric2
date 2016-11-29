@@ -240,8 +240,7 @@ void CookingWindow::updateScrolling(const sf::Time& frameTime) {
 }
 
 void CookingWindow::cookItem(const std::string& itemID) {
-	const auto& it = m_screen->getCharacterCore()->getItems()->find(itemID);
-	if (it == m_screen->getCharacterCore()->getItems()->end()) {
+	if (!contains(*m_screen->getCharacterCore()->getItems(), itemID)) {
 		g_logger->logError("CookingWindow", "Item to cook not found in character core!");
 		return;
 	}

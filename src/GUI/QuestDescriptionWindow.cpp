@@ -48,7 +48,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		GUIConstants::CHARACTER_SIZE_S,
 		static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 	
-	if (m_core->getData().questDescriptionProgress.find(questID) != m_core->getData().questDescriptionProgress.end()) {
+	if (contains(m_core->getData().questDescriptionProgress, questID)) {
 		const std::set<int>& unlockedDescriptions = m_core->getData().questDescriptionProgress.at(questID);
 		for (auto& it : unlockedDescriptions) {
 			description.append("\n\n");
@@ -109,7 +109,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		if (m_core->getQuestState(questID) == QuestState::Completed) {
 			progress = goal;
 		}
-		else if (m_core->getData().items.find(it.first) != m_core->getData().items.end()) {
+		else if (contains(m_core->getData().items, it.first)) {
 			progress = m_core->getData().items.at(it.first);
 		}
 		collectible.append(to_string(progress) + "/" + to_string(goal));
@@ -129,10 +129,9 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		condition.append(g_textProvider->getText(it, "quest_condition"));
 		condition.append(": ");
 
-		if ((m_core->getQuestState(questID) == QuestState::Completed)
-			||
-			(m_core->getData().questConditionProgress.find(questID) != m_core->getData().questConditionProgress.end() &&
-			m_core->getData().questConditionProgress.at(questID).find(it) != m_core->getData().questConditionProgress.at(questID).end())) {
+		if ((m_core->getQuestState(questID) == QuestState::Completed) ||
+			contains(m_core->getData().questConditionProgress, questID) &&
+			contains(m_core->getData().questConditionProgress.at(questID), it)) {
 			condition.append(g_textProvider->getText("Done"));
 			conditionText.setColor(COLOR_GOOD);
 		}

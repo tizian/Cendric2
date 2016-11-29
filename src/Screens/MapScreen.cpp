@@ -72,6 +72,7 @@ void MapScreen::load() {
 
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
+	updateMonitoredQuestItems();
 
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 
@@ -84,7 +85,7 @@ void MapScreen::execOnEnter(const Screen* previousScreen) {
 
 	if (m_currentMap.getWorldData()->explorable) {
 		std::map<std::string, std::vector<bool>>& tilesExplored = m_characterCore->getExploredTiles();
-		if (tilesExplored.find(m_mapID) == tilesExplored.end()) {
+		if (!contains(tilesExplored, m_mapID)) {
 			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
 			tilesExplored[m_mapID] = std::vector<bool>(size.x * size.y, false);
 		}

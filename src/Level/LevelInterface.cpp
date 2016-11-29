@@ -122,7 +122,7 @@ void LevelInterface::consumeItem(const std::string& itemID) {
 		item->getID(),
 		item->getAttributes());
 
-	if (m_consumedFood.find(item->getID()) == m_consumedFood.end()) {
+	if (!contains(m_consumedFood, item->getID())) {
 		m_consumedFood.insert({ item->getID(), 0 });
 	}
 	m_consumedFood[item->getID()] += 1;

@@ -28,9 +28,9 @@ public:
 
 	// notify permanent item consumed -> change in core, display overlay and progresslog and reload inventory.
 	void notifyPermanentItemConsumed(const Item* item);
-	// notify item change -> change in core, display text and reload inventory. Also reload quest log.
+	// notify item change -> change in core, display text and reload inventory. Also reload quest log and check for monitored quest items.
 	void notifyItemChange(const std::string& itemID, int amount);
-	// notify item conversion -> change in core, display text and reload inventory. Also reload quest log.
+	// notify item conversion -> change in core, display text and reload inventory. Also reload quest log and check for monitored quest items.
 	void notifyItemConversion(const std::string& oldItemID, const std::string& newItemID, int amount);
 	// notify item equip -> change in core, reload inventory and character info.
 	// if the second argument is not given (void, default), it gets determined in this method
@@ -39,7 +39,7 @@ public:
 	void notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 	// notify quest target killed -> change in core, display text and reload quest log
 	void notifyQuestTargetKilled(const std::string& questID, const std::string& name);
-	// notify quest state changed -> change in core, display text and reload quest log
+	// notify quest state changed -> change in core, display text and reload quest log. Also update quest items to monitor
 	void notifyQuestStateChanged(const std::string& questID, QuestState state);
 	// notify description added -> add to core, display text
 	void notifyQuestDescriptionAdded(const std::string& questID, int descriptionID);
@@ -106,6 +106,11 @@ protected:
 	void handleBookWindow(const sf::Time& frameTime);
 	BookWindow* m_bookWindow = nullptr;
 	bool m_bookWindowDisposed = false;
+
+	// quest item monitoring
+	std::map<std::string, std::set<std::string>> m_monitoredQuestItems;
+	void updateMonitoredQuestItems();
+	void checkMonitoredQuestItems(const std::string& itemID, int amount);
 
 private:
 	void updateOverlayQueue();

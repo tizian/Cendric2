@@ -96,7 +96,7 @@ bool Weapon::addModifier(int slotNr, int modifierNr, const SpellModifier& modifi
 	// check if this spell allows a modifier of this type
 	if (modifier.type != SpellModifierType::VOID) {
 		std::vector<SpellModifierType> allowedModifiers = SpellData::getAllowedModifiers(m_weaponSlots.at(slotNr).spellSlot.spellID);
-		if (std::find(allowedModifiers.begin(), allowedModifiers.end(), modifier.type) == allowedModifiers.end()) {
+		if (!contains(allowedModifiers, modifier.type)) {
 			g_logger->logWarning("Weapon::addModifier", "This modifier is not allowed for the spell!");
 			return false;
 		}

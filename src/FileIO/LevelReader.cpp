@@ -874,7 +874,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 
 		id = id - m_firstGidItems;
 		
-		if (m_levelItemMap.find(id) == m_levelItemMap.end()) {
+		if (!contains(m_levelItemMap, id)) {
 			logError("Level item ID not recognized: " + std::to_string(id));
 			return false;
 		}
@@ -886,7 +886,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 	id = std::stoi(layerData);
 	if (id > 0) {
 		id = id - m_firstGidItems;
-		if (m_levelItemMap.find(id) == m_levelItemMap.end()) {
+		if (!contains(m_levelItemMap, id)) {
 			logError("Level item ID not recognized: " + std::to_string(id));
 			return false;
 		}

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 #include "global.h"
 #include "ResourceManager.h"
 #include "Structs/WorldData.h"

@@ -34,6 +34,7 @@ void LevelScreen::load() {
 	m_interface = new LevelInterface(this, m_mainChar);
 	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
 	dynamic_cast<LevelInterface*>(m_interface)->setPermanentCore(m_characterCore);
+	updateMonitoredQuestItems();
 
 	// handle boss level
 	const BossLevelData& data = m_currentLevel.getWorldData()->bossLevelData;

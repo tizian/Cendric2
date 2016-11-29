@@ -1,8 +1,5 @@
 #pragma once
 
-#include <vector>
-#include <math.h>
-
 #include "global.h"
 #include "TileMap.h"
 #include "ResourceManager.h"

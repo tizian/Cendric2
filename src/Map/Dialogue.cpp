@@ -57,7 +57,7 @@ bool Dialogue::updateWindow() {
 }
 
 bool Dialogue::hasNode(int tag) const {
-	return m_nodes.find(tag) != m_nodes.end();
+	return contains(m_nodes, tag);
 }
 
 bool Dialogue::isTradeNode(int nodeTag) const {

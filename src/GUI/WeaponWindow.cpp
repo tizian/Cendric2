@@ -318,7 +318,7 @@ void WeaponWindow::highlightSpellSlots(SpellType type, bool highlight) {
 void WeaponWindow::highlightModifierSlots(SpellModifierType type, bool highlight) {
 	for (auto& it : m_weaponSlots) {
 		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first.getSpellID());
-		if (!highlight || std::find(allowedMods.begin(), allowedMods.end(), type) != allowedMods.end()) {
+		if (!highlight || contains(allowedMods, type)) {
 			for (auto& it2 : it.second) {
 				if (highlight) {
 					it2.highlight();
@@ -338,8 +338,7 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 
 	for (auto& it : m_weaponSlots) {
 		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first.getSpellID());
-		bool isModifierAllowed = std::find(allowedMods.begin(), allowedMods.end(), modifier.type) != allowedMods.end();
-		if (!isModifierAllowed) continue;
+		if (!contains(allowedMods, modifier.type)) continue;
 		for (auto& modifierSlot : it.second) {
 			if (clone->getBoundingBox()->intersects(*modifierSlot.getBoundingBox())) {
 				m_core->addModifier(ms->getModifier(), modifierSlot.getSpellSlotNr(), modifierSlot.getNr());
