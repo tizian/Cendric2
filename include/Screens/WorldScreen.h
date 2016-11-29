@@ -24,7 +24,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget);
 	void updateProgressLog(const sf::Time& frameTime);
-	void setBook(const Item& document);
+	void setBook(const Item& document, bool isReopenInventory = false);
 
 	// notify permanent item consumed -> change in core, display overlay and progresslog and reload inventory.
 	void notifyPermanentItemConsumed(const Item* item);
@@ -106,6 +106,7 @@ protected:
 	void handleBookWindow(const sf::Time& frameTime);
 	BookWindow* m_bookWindow = nullptr;
 	bool m_bookWindowDisposed = false;
+	bool m_isReopenInventory = false;
 
 	// quest item monitoring
 	std::map<std::string, std::set<std::string>> m_monitoredQuestItems;
