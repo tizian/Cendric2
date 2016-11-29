@@ -544,7 +544,7 @@ void Inventory::showDocument(const Item* item) {
 	if (item == nullptr || !item->isDocument()) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
-	worldScreen->setBook(*item);
+	worldScreen->setBook(*item, true);
 
 	// handle possible quest related conditions on this document
 	if (item->getDocumentQuestBean().status == BeanStatus::Filled) {
