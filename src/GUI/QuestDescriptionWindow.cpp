@@ -130,8 +130,8 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		condition.append(": ");
 
 		if ((m_core->getQuestState(questID) == QuestState::Completed) ||
-			contains(m_core->getData().questConditionProgress, questID) &&
-			contains(m_core->getData().questConditionProgress.at(questID), it)) {
+			(contains(m_core->getData().questConditionProgress, questID) &&
+			contains(m_core->getData().questConditionProgress.at(questID), it))) {
 			condition.append(g_textProvider->getText("Done"));
 			conditionText.setColor(COLOR_GOOD);
 		}

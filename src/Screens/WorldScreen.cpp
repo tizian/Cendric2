@@ -245,7 +245,7 @@ void WorldScreen::updateMonitoredQuestItems() {
 
 void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount) {
 	if (amount <= 0) return;
-	auto& it = m_monitoredQuestItems.find(itemID);
+	const auto& it = m_monitoredQuestItems.find(itemID);
 	if (it == m_monitoredQuestItems.end()) return;
 
 	for (auto& questID : it->second) {
@@ -330,8 +330,9 @@ void WorldScreen::execOnExit(const Screen* nextScreen) {
 	m_overlayQueue.clear();
 }
 
-void WorldScreen::setBook(const Item& document) {
+void WorldScreen::setBook(const Item& document, bool isReopenInventory) {
 	m_interface->hideAll();
+	m_isReopenInventory = isReopenInventory;
 
 	delete m_bookWindow;
 	m_bookWindow = new BookWindow(document);
@@ -346,6 +347,10 @@ void WorldScreen::handleBookWindow(const sf::Time& frameTime) {
 	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
 		delete m_bookWindow;
 		m_bookWindow = nullptr;
+		if (m_isReopenInventory) {
+			m_interface->getInventory()->show();
+			m_isReopenInventory = false;
+		}
 	}
 	updateProgressLog(frameTime);
 	updateTooltipText(frameTime);
