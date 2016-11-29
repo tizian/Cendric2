@@ -245,7 +245,7 @@ void WorldScreen::updateMonitoredQuestItems() {
 
 void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount) {
 	if (amount <= 0) return;
-	auto& it = m_monitoredQuestItems.find(itemID);
+	const auto& it = m_monitoredQuestItems.find(itemID);
 	if (it == m_monitoredQuestItems.end()) return;
 
 	for (auto& questID : it->second) {
