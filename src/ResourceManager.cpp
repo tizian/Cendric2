@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const size_t ResourceManager::SOUND_POOL_SIZE = 5;
+
 ResourceManager* g_resourceManager;
 
 ResourceManager::ResourceManager() : m_currentError({ ErrorID::VOID, "" }) {
@@ -104,10 +106,18 @@ void ResourceManager::init() {
 	loadSoundbuffer(GlobalResource::SOUND_GUI_MENUCURSOR, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_PICKUP, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_OPENWINDOW, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_GUI_QUESTPROGRESS, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_MISC_UNLOCK, ResourceType::Global);
 
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration)) {
 		m_configuration = DEFAULT_CONFIGURATION;
+	}
+
+	// init sound pool
+	for (int i = 0; i < SOUND_POOL_SIZE; ++i) {
+		m_soundPool.push_back(sf::Sound());
+		m_nextSoundIndex = 0;
 	}
 }
 
@@ -255,15 +265,25 @@ void ResourceManager::deleteResource(const std::string& filename) {
 	}
 }
 
+void ResourceManager::playSound(const std::string& filename, bool loop, float scale) {
+	if (!m_configuration.isSoundOn || filename.empty()) return;
+
+	sf::Sound& sound = m_soundPool[m_nextSoundIndex];
+	m_nextSoundIndex = (m_nextSoundIndex + 1) % SOUND_POOL_SIZE;
+
+	playSound(sound, filename, true, loop, scale);
+}
+
 void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, bool force, bool loop, float scale) {
 	if (!m_configuration.isSoundOn || filename.empty()) return;
 	if (!contains(m_soundBuffers, filename)) {
 		g_logger->logError("ResourceManager", "Cannot play sound: '" + filename + "', sound not loaded!");
 		return;
 	}
+
 	// don't play the sound if it's already playing and we're not forcing
 	if (!force && sound.getStatus() == sf::SoundSource::Status::Playing) return;
-
+	
 	sound.setBuffer(*getSoundBuffer(filename));
 	scale = clamp(scale, 0.f, 1.f);
 	sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);

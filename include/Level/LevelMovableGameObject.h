@@ -90,6 +90,7 @@ protected:
 	// behavior strategies aka "components"
 	virtual MovingBehavior* createMovingBehavior(bool asAlly = false) = 0;
 	virtual AttackingBehavior* createAttackingBehavior(bool asAlly = false) = 0;
+	bool collides(const sf::Vector2f& nextPos) const override;
 
 	MovingBehavior* m_movingBehavior = nullptr;
 	AttackingBehavior* m_attackingBehavior = nullptr;
@@ -125,6 +126,4 @@ protected:
 	// can be empty if the mob has no sprite.
 	virtual std::string getSpritePath() const { return ""; }
 	virtual std::string getDeathSoundPath() const { return ""; }
-
-	sf::Sound m_deathSound;
 };

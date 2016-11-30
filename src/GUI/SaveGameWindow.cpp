@@ -165,7 +165,7 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 	if (oldEntry != m_chosenEntry) {
 		m_entries[oldEntry]->deselect();
 		m_entries[m_chosenEntry]->select();
-		g_resourceManager->playSound(m_sound, GlobalResource::SOUND_GUI_MENUCURSOR, true);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_MENUCURSOR);
 	}
 	if (g_inputController->isSelected()) {
 		m_isChosen = true;

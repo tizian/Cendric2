@@ -37,7 +37,6 @@ private:
 	int m_currentPage = -1;
 	void setPage(int index);
 
-	sf::Sound m_sound;
 	sf::Sprite m_sprite;
 	bool m_showSprite = false;
 };

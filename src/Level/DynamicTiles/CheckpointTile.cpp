@@ -95,7 +95,7 @@ void CheckpointTile::onLeftClick() {
 void CheckpointTile::setActive(bool active, bool playSound) {
 	setState(active ? GameObjectState::Active : GameObjectState::Idle);
 	if (active && playSound) {
-		g_resourceManager->playSound(m_sound, getSoundPath());
+		g_resourceManager->playSound(getSoundPath());
 	} 
 	m_interactComponent->setInteractable(!active);
 }

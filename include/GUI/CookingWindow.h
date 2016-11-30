@@ -66,8 +66,6 @@ private:
 	BitmapText m_title;
 	
 	MapScreen* m_screen = nullptr;
-
-	sf::Sound m_sound;
 	
 	// the time it waits from key active to scrolling
 	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);

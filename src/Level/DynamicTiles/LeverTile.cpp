@@ -86,7 +86,7 @@ void LeverTile::switchLever() {
 		setState(GameObjectState::Off) : 
 		setState(GameObjectState::On);
 
-	g_resourceManager->playSound(m_sound, getSoundPath());
+	g_resourceManager->playSound(getSoundPath());
 
 	for (auto& tile : m_dependentTiles) {
 		tile->switchTile();

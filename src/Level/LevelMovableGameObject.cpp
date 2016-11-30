@@ -193,9 +193,7 @@ void LevelMovableGameObject::setStunned(const sf::Time& stunnedTime) {
 }
 
 void LevelMovableGameObject::onHit(Spell* spell) {
-	if (m_isDead) {
-		return;
-	}
+	if (m_isDead) return;
 
 	spell->execOnHit(this);
 	if (spell->getDamageType() == DamageType::VOID) return;
@@ -216,7 +214,7 @@ void LevelMovableGameObject::setDead() {
 	clearSpells(false);
 	m_attributes.currentHealthPoints = 0;
 	m_isDead = true;
-	g_resourceManager->playSound(m_deathSound, getDeathSoundPath(), true);
+	g_resourceManager->playSound(getDeathSoundPath());
 }
 
 int LevelMovableGameObject::getActiveSpellCount() const {
@@ -293,6 +291,16 @@ void LevelMovableGameObject::setReady() {
 
 void LevelMovableGameObject::setInvincible(bool value) {
 	m_isInvincible = value;
+}
+
+bool LevelMovableGameObject::collides(const sf::Vector2f& nextPos) const {
+	WorldCollisionQueryRecord rec;
+	rec.ignoreDynamicTiles = isIgnoreDynamicTiles();
+	sf::FloatRect nextBoundingBox = *getBoundingBox();
+	nextBoundingBox.left = nextPos.x;
+	nextBoundingBox.top = nextPos.y;
+	rec.boundingBox = nextBoundingBox;
+	return m_level->collides(rec);
 }
 
 void LevelMovableGameObject::loadBehavior() {

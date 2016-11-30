@@ -122,7 +122,7 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 	if (oldOption != m_chosenOption) {
 		m_options[oldOption].deselect();
 		m_options[m_chosenOption].select();
-		g_resourceManager->playSound(m_sound, GlobalResource::SOUND_GUI_MENUCURSOR, true);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_MENUCURSOR);
 	}
 
 	calculateEntryPositions();

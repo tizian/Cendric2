@@ -99,9 +99,6 @@ protected:
 	WeatherSystem* m_weatherSystem = nullptr;
 	void loadWeather();
 
-	// sound
-	sf::Sound m_pickupSound;
-
 	// book / document window
 	void handleBookWindow(const sf::Time& frameTime);
 	BookWindow* m_bookWindow = nullptr;

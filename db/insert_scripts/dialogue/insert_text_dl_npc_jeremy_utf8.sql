@@ -6,5 +6,5 @@ INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_NotYourBuddy', 'dl_npc_jeremy', 'I''m not your buddy, guy.', 'Ich bin dich dein Kumpel, Alter.', 'Ich bi nid din Kolleg, Alte.');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_Okay', 'dl_npc_jeremy', 'Okay...', 'Okay...', 'Okay...');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Jeremy_NotYourGuy', 'dl_npc_jeremy', 'I''m not your guy, friend.', 'Ich bin nicht dein Alter, Freund.', 'Ich bi nid din Alte, Homie.');
-INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_NotYourFriend', 'dl_npc_jeremy', 'I''m not your friend, pal.', 'Ich bin nicht dein Freund, Kumpel.', 'Ich bi nid din Homie, Kolleg.');
-INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Jeremy_EndDialogue', 'dl_npc_jeremy', '(Glares at you fiercely)', '(Starrt dich wütend an)', '(Starrt dich hässig ah)');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_NotYourFriend', 'dl_npc_jeremy', 'I''m not your friend, buddy.', 'Ich bin nicht dein Freund, Kumpel.', 'Ich bi nid din Homie, Kolleg.');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Jeremy_Nothing', 'dl_npc_jeremy', '...', '...', '...');

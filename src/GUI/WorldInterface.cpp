@@ -79,7 +79,7 @@ void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::CharacterInfo)) {
 		if (!m_characterInfo->isVisible()) {
 			hideAll();
-			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+			g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_characterInfo->show();
 			m_sidebar->show(GUIElement::Character);
 		}
@@ -95,7 +95,7 @@ void WorldInterface::updateCharacterInfo(const sf::Time& frameTime) {
 	}
 	else if (!m_characterInfo->isVisible() && m_sidebar->getActiveElement() == GUIElement::Character) {
 		hideAll();
-		g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 		m_characterInfo->show();
 		m_sidebar->show(GUIElement::Character);
 	}
@@ -107,7 +107,7 @@ void WorldInterface::updateSpellbook(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Spellbook)) {
 		if (!m_spellbook->isVisible()) {
 			hideAll();
-			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+			g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_spellbook->show();
 			m_sidebar->show(GUIElement::Spellbook);
 		}
@@ -123,7 +123,7 @@ void WorldInterface::updateSpellbook(const sf::Time& frameTime) {
 	}
 	else if (!m_spellbook->isVisible() && m_sidebar->getActiveElement() == GUIElement::Spellbook) {
 		hideAll();
-		g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 		m_spellbook->show();
 		m_sidebar->show(GUIElement::Spellbook);
 	}
@@ -135,7 +135,7 @@ void WorldInterface::updateInventory(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Inventory)) {
 		if (!m_inventory->isVisible()) {
 			hideAll();
-			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+			g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_inventory->show();
 			m_sidebar->show(GUIElement::Inventory);
 		}
@@ -151,7 +151,7 @@ void WorldInterface::updateInventory(const sf::Time& frameTime) {
 	}
 	else if (!m_inventory->isVisible() && m_sidebar->getActiveElement() == GUIElement::Inventory) {
 		hideAll();
-		g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 		m_inventory->show();
 		m_sidebar->show(GUIElement::Inventory);
 	}
@@ -163,7 +163,7 @@ void WorldInterface::updateQuestLog(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Journal)) {
 		if (!m_questLog->isVisible()) {
 			hideAll();
-			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+			g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_questLog->show();
 			m_sidebar->show(GUIElement::Journal);
 		}
@@ -179,7 +179,7 @@ void WorldInterface::updateQuestLog(const sf::Time& frameTime) {
 	}
 	else if (!m_questLog->isVisible() && m_sidebar->getActiveElement() == GUIElement::Journal) {
 		hideAll();
-		g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 		m_questLog->show();
 		m_sidebar->show(GUIElement::Journal);
 	}

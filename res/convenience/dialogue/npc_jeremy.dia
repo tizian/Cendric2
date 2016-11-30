@@ -8,6 +8,11 @@ npc.id:npc_jeremy
 	[
 		# Link node, tag is next tag
 		tag:1
+		condition:DL:isConditionFulfilled("npc_jeremy", "who_are_you") == DL:isConditionFulfilled("npc_jeremy", "buddy_guy")
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
 	]
 }
 {2
@@ -85,15 +90,15 @@ npc.id:npc_jeremy
 	translation.ch:Bloss es paar Söldner. Gaht dich nüt ah, Kolleg.
 	[
 		# Link node, tag is next tag
-		tag:4
+		tag:-2
 	]
 }
 {2
-	# [4] Choice Node
-	tag:4
+	# [9] Choice Node
+	tag:9
 	[
 		# Link node, tag is next tag
-		tag:5
+		tag:10
 		# translation: 
 		translation.tag:DL_Choice_NotYourBuddy
 		translation.en:I'm not your buddy, guy.
@@ -102,7 +107,7 @@ npc.id:npc_jeremy
 	]
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:11
 		# translation: 
 		translation.tag:DL_Choice_Okay
 		translation.en:Okay...
@@ -111,8 +116,8 @@ npc.id:npc_jeremy
 	]
 }
 {1
-	# [5] NPC Node
-	tag:5
+	# [10] NPC Node
+	tag:10
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jeremy_NotYourGuy
@@ -121,24 +126,24 @@ npc.id:npc_jeremy
 	translation.ch:Ich bi nid din Alte, Homie.
 	[
 		# Link node, tag is next tag
-		tag:6
+		tag:12
 	]
 }
 {2
-	# [6] Choice Node
-	tag:6
+	# [12] Choice Node
+	tag:12
 	[
 		# Link node, tag is next tag
-		tag:7
+		tag:13
 		# translation: 
 		translation.tag:DL_Choice_NotYourFriend
-		translation.en:I'm not your friend, pal.
+		translation.en:I'm not your friend, buddy.
 		translation.de:Ich bin nicht dein Freund, Kumpel.
 		translation.ch:Ich bi nid din Homie, Kolleg.
 	]
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:14
 		# translation: 
 		translation.tag:DL_Choice_Okay
 		translation.en:
@@ -147,14 +152,95 @@ npc.id:npc_jeremy
 	]
 }
 {1
-	# [7] NPC Node
-	tag:7
+	# [13] NPC Node
+	tag:13
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Jeremy_EndDialogue
-	translation.en:(Glares at you fiercely)
-	translation.de:(Starrt dich wütend an)
-	translation.ch:(Starrt dich hässig ah)
+	translation.tag:DL_Choice_NotYourBuddy
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Jeremy_NotYourGuy
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_Okay
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Choice_NotYourFriend
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jeremy", "buddy_guy")
+	# translation: 
+	translation.tag:DL_Jeremy_Nothing
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jeremy", "buddy_guy")
+	# translation: 
+	translation.tag:DL_Jeremy_Nothing
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jeremy", "buddy_guy")
+	# translation: 
+	translation.tag:DL_Jeremy_Nothing
+	translation.en:...
+	translation.de:...
+	translation.ch:...
 	[
 		# Link node, tag is next tag
 		tag:-1

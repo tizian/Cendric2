@@ -2,9 +2,12 @@
 #include "Level/DynamicTiles/MovingTile.h"
 #include "Level/Level.h"
 
+static const std::string CRUMBLING_SOUND_PATH = "res/sound/tile/crumble.ogg";
+
 LevelMovableTile::LevelMovableTile(LevelScreen* levelScreen) : 
 	LevelDynamicTile(levelScreen), 
 	MovableGameObject() {
+	g_resourceManager->loadSoundbuffer(CRUMBLING_SOUND_PATH, ResourceType::Level);
 }
 
 GameObjectType LevelMovableTile::getConfiguredType() const {
@@ -16,6 +19,8 @@ void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	sf::Vector2f oldPos = getPosition();
 	MovableGameObject::updateRelativeVelocity(frameTime);
 	sf::Vector2f posDiff = getPosition() - oldPos;
+
+	if (posDiff.x == 0 && posDiff.y == 0) return;
 
 	sf::FloatRect newBoundingBoxX = m_boundingBox;
 	newBoundingBoxX.top -= posDiff.y;
@@ -165,6 +170,7 @@ void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		setVelocity(sf::Vector2f(0.f, 0.f));
 		setAcceleration(sf::Vector2f(0.f, 0.f));
 		setState(GameObjectState::Crumbling);
+		g_resourceManager->playSound(CRUMBLING_SOUND_PATH);
 		m_isCollidable = false;
 	}
 }

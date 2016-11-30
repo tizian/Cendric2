@@ -22,6 +22,5 @@ private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
 	static const float ACTIVATE_RANGE;
-	sf::Sound m_sound;
 	InteractComponent* m_interactComponent;
 };

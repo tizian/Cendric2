@@ -51,6 +51,7 @@ void DoorLevelTile::onHit(Spell* spell) {
 	
 	if (spell->getStrength() >= m_doorData.strength) {
 		open();
+		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 	}
 	spell->setDisposed();
 }
@@ -66,6 +67,7 @@ void DoorLevelTile::onRightClick() {
 	}
 	else if (!m_doorData.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_doorData.keyItemID, 1)) {
 		open();
+		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 
 		std::string tooltipText = g_textProvider->getText("Used");
 		tooltipText.append(g_textProvider->getText(m_doorData.keyItemID, "item"));

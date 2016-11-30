@@ -41,7 +41,6 @@ protected:
 	void loadParticleSystem();
 	void updateParticleSystemPosition();
 
-	sf::Sound m_sound;
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);
 

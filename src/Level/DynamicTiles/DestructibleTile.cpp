@@ -54,7 +54,7 @@ void DestructibleTile::onHit(Spell* spell) {
 	case SpellID::Projectile:
 		if (m_state == GameObjectState::Idle) {
 			m_state = GameObjectState::Crumbling;
-			g_resourceManager->playSound(m_sound, getSoundPath());
+			g_resourceManager->playSound(getSoundPath());
 			setCurrentAnimation(getAnimation(m_state), false);
 			m_isCollidable = false;
 			spell->setDisposed();

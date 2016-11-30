@@ -16,5 +16,4 @@ private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
 	sf::Time m_crumblingTime = sf::seconds(0.4f);
-	sf::Sound m_sound;
 };

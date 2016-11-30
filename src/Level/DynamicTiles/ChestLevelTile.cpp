@@ -127,6 +127,7 @@ void ChestLevelTile::unlock() {
 		m_interactComponent->setInteractText("ToPickup");
 	}
 
+	g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 	setState(GameObjectState::Unlocked);
 }
 

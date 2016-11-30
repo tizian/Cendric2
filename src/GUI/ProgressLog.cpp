@@ -127,6 +127,7 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 	std::string text = g_textProvider->getText(questID,  "quest") + ": ";
 	text.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
 	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL));
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_QUESTPROGRESS);
 
 	calculatePositions();
 }
@@ -135,6 +136,7 @@ void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
 	std::string text = g_textProvider->getText(questID, "quest") + ": ";
 	text.append(g_textProvider->getText("NewJournalEntry"));
 	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, COLOR_NEUTRAL));
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_QUESTPROGRESS);
 
 	calculatePositions();
 }

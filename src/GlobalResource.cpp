@@ -99,3 +99,5 @@ const std::string GlobalResource::TEX_GUI_TAB_ICONS_SELECTED = "res/assets/gui/g
 const std::string GlobalResource::SOUND_GUI_MENUCURSOR = "res/sound/gui/menu_cursor.ogg";
 const std::string GlobalResource::SOUND_GUI_PICKUP = "res/sound/item/pickup_gold.ogg";
 const std::string GlobalResource::SOUND_GUI_OPENWINDOW = "res/sound/gui/window_open.ogg";
+const std::string GlobalResource::SOUND_GUI_QUESTPROGRESS = "res/sound/gui/quest_progress.ogg";
+const std::string GlobalResource::SOUND_MISC_UNLOCK = "res/sound/tile/unlock.ogg";

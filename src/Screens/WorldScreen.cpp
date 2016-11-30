@@ -72,7 +72,7 @@ void WorldScreen::notifyPermanentItemConsumed(const Item* item) {
 void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	if (amount == 0) return;
 	if (amount > 0) {
-		g_resourceManager->playSound(m_pickupSound, GlobalResource::SOUND_GUI_PICKUP, true);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_PICKUP);
 	}
 	getCharacterCore()->notifyItemChange(itemID, amount);
 	m_progressLog->addItemProgress(itemID, amount);

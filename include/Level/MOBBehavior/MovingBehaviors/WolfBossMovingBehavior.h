@@ -21,5 +21,4 @@ private:
 	sf::Time m_standupTime = sf::Time::Zero;
 
 	int m_chargeMovingDirection = 1;
-	sf::Sound m_sound;
 };

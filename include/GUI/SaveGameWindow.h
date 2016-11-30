@@ -77,9 +77,6 @@ private:
 	bool m_isChosen = false;
 	bool m_isEnabled = true;
 
-	// the menu sound
-	sf::Sound m_sound;
-
 	BitmapText m_emptyText;
 
 	SlicedSprite m_scrollWindow;

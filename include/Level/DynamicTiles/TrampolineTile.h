@@ -25,5 +25,4 @@ private:
 	sf::Time m_crumblingTime;
 	sf::Time m_jumpingTime;
 	sf::FloatRect m_jumpingRegion;
-	sf::Sound m_sound;
 };

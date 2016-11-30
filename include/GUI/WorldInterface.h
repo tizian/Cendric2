@@ -44,8 +44,6 @@ protected:
 	WorldScreen* m_screen;
 	CharacterCore* m_core;
 
-	sf::Sound m_openSound;
-
 	// <<< GUI TAB SIDEBAR >>>
 	GUITabBar* m_sidebar = nullptr;
 	void updateSidebar(const sf::Time& frameTime);

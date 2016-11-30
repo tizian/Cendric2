@@ -102,7 +102,7 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 		rec.ignoreDynamicTiles = m_mainChar->isIgnoreDynamicTiles();
 		// only set the main char up if it wouldn't collide
 		if (!getLevel()->collides(rec)) {
-			g_resourceManager->playSound(m_sound, getSoundPath());
+			g_resourceManager->playSound(getSoundPath());
 			m_mainChar->setVelocityY(-800.f);
 			m_mainChar->setAccelerationY(0.f);
 			m_mainChar->setPositionY(nextBB.top);

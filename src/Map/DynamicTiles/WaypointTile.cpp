@@ -47,7 +47,7 @@ void WaypointTile::update(const sf::Time& frameTime) {
 	if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
 		m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition);
 		m_screen->setTooltipText("WaypointActivated", COLOR_GOOD, true);
-		g_resourceManager->playSound(m_sound, getSoundPath());
+		g_resourceManager->playSound(getSoundPath());
 		setActive();
 	}
 }
@@ -66,7 +66,7 @@ void WaypointTile::onRightClick() {
 		getPosition().x + TILE_SIZE_F * 0.5f - bb.width * 0.5f,
 		getPosition().y - bb.height + TILE_SIZE_F * 0.5f
 		));
-	g_resourceManager->playSound(m_sound, getSoundPath(), true);
+	g_resourceManager->playSound(getSoundPath());
 }
 
 void WaypointTile::setActive() {

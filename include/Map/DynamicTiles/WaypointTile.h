@@ -22,5 +22,4 @@ private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
 	int m_spawnPosition = -1;
-	sf::Sound m_sound;
 };

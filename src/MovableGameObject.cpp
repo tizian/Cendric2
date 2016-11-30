@@ -51,7 +51,9 @@ void MovableGameObject::updateRelativeVelocity(const sf::Time& frameTime) {
 	sf::Vector2f nextPos = getPosition();
 	if (!m_isLockedRelativeVelocityX) nextPos.x += m_movingParent->getRelativeVelocity().x * frameTime.asSeconds();
 	if (!m_isLockedRelativeVelocityY) nextPos.y += m_movingParent->getRelativeVelocity().y * frameTime.asSeconds();
-	setPosition(nextPos);
+	if (!collides(nextPos)) {
+		setPosition(nextPos);
+	}
 	m_isLockedRelativeVelocityX = false;
 	m_isLockedRelativeVelocityY = false;
 }

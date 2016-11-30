@@ -221,7 +221,6 @@ progress.condition:npc_ingrid,meat_given,who_am_i,who_are_you
 progress.condition:npc_inina,aura,farmers,hi,learned_light,mage,mark,mark_getrid,mark_whatis,mark_whowould,missing_people,power_weakened,shrine,what_doing,whats_reward,where_light,where_search
 progress.condition:npc_innkeeper,asked_for_feudal_fire,bought_feudal_fire,first_rumor,second_rumor,wrong_name
 progress.condition:npc_ivo,ask_tristan,gandria,merchant,sheep_asked,who_are_you
-progress.condition:npc_jeremy,who_are_you
 progress.condition:npc_jonathan,academy,affinity,another_mage,break_protection,decipher_map,elementalist,light,prove_yourself,talked,what_about_you
 progress.condition:npc_paladin1,armor,who_are_you
 progress.condition:npc_rhendal,hawthorn_staff,potion_drunk,spoiled_schnapps,talked,talked_about_schnapps,the_mark,what_is_a_mage

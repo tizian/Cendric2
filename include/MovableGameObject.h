@@ -44,6 +44,7 @@ public:
 
 protected:
 	virtual void updateRelativeVelocity(const sf::Time& frameTime);
+	virtual bool collides(const sf::Vector2f& nextPos) const { return false; }
 	virtual float getConfiguredMaxVelocityYUp() const;
 	virtual float getConfiguredMaxVelocityYDown() const;
 	virtual float getConfiguredMaxVelocityX() const;

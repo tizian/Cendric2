@@ -106,7 +106,12 @@ public:
 	static const std::string TEX_GUI_BUTTON_ROUND_SELECTED;
 	static const std::string TEX_GUI_TAB_ICONS;
 	static const std::string TEX_GUI_TAB_ICONS_SELECTED;
+
+	// sound
 	static const std::string SOUND_GUI_MENUCURSOR;
 	static const std::string SOUND_GUI_PICKUP;
 	static const std::string SOUND_GUI_OPENWINDOW;
+	static const std::string SOUND_GUI_QUESTPROGRESS;
+
+	static const std::string SOUND_MISC_UNLOCK;
 };

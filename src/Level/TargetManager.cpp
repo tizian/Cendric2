@@ -34,7 +34,7 @@ void TargetManager::update(const sf::Time& frameTime) {
 		float currentDistance = TARGET_RANGE;
 		for (auto& go : *m_screen->getObjects(GameObjectType::_Enemy)) {
 			if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
-				if (enemy->isAlly() || enemy->isDead()) continue;
+				if (enemy->isAlly() || enemy->isDead() || enemy->isDisposed()) continue;
 				float distance = dist(enemy->getCenter(), m_mainChar->getCenter());
 				if (distance < currentDistance && 
 					m_previousTargets.find(enemy) == m_previousTargets.end()) {
@@ -48,7 +48,12 @@ void TargetManager::update(const sf::Time& frameTime) {
 }
 
 void TargetManager::setTargetEnemy(Enemy* enemy) {
-	if (m_targetedEnemy) m_targetedEnemy->setTargeted(false);
+	if (enemy && (enemy->isDead() || enemy->isDisposed())) {
+		enemy = nullptr;
+	}
+	if (m_targetedEnemy) {
+		m_targetedEnemy->setTargeted(false);
+	}
 	m_targetedEnemy = enemy;
 	if (m_targetedEnemy) {
 		m_targetedEnemy->setTargeted(true);

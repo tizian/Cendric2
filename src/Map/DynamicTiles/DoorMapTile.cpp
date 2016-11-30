@@ -80,6 +80,7 @@ void DoorMapTile::onRightClick() {
 	}
 	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
 		open();
+		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 
 		std::string tooltipText = g_textProvider->getText("Used");
 		tooltipText.append(g_textProvider->getText(m_data.keyItemID, "item"));

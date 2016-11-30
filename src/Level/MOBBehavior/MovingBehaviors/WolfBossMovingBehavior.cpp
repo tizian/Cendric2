@@ -53,7 +53,7 @@ void WolfBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		m_tripOverTime = TRIPOVER_TIME;
 		m_enemy->clearSpells(true);
 		m_fightAnimationTime = sf::Time::Zero;
-		g_resourceManager->playSound(m_sound, CRASH_SOUNDPATH, true);
+		g_resourceManager->playSound(CRASH_SOUNDPATH);
 	}
 }
 

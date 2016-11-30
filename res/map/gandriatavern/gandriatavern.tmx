@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="170">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="171">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -289,6 +289,11 @@
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,1415,2550"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="170" x="400" y="650" width="100" height="50">
+   <properties>
+    <property name="weather" value="res/map/gandria/gandria.tmx,70,"/>
    </properties>
   </object>
  </objectgroup>

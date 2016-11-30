@@ -50,7 +50,7 @@ void MapInterface::updateMapOverlay(const sf::Time& frameTime) {
 	if (g_inputController->isKeyJustPressed(Key::Map)) {
 		if (!m_mapOverlay->isVisible()) {
 			hideAll();
-			g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+			g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 			m_mapOverlay->show();
 			m_sidebar->show(GUIElement::Map);
 		}
@@ -66,7 +66,7 @@ void MapInterface::updateMapOverlay(const sf::Time& frameTime) {
 	}
 	else if (!m_mapOverlay->isVisible() && m_sidebar->getActiveElement() == GUIElement::Map) {
 		hideAll();
-		g_resourceManager->playSound(m_openSound, GlobalResource::SOUND_GUI_OPENWINDOW);
+		g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 		m_mapOverlay->show();
 		m_sidebar->show(GUIElement::Map);
 	}

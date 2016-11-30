@@ -91,7 +91,7 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 }
 
 void BookWindow::setPage(int index) {
-	g_resourceManager->playSound(m_sound, SOUND_PATH);
+	g_resourceManager->playSound(SOUND_PATH);
 	auto const& pages = m_item.getDocumentPageBeans();
 	if (index < 0 || index > static_cast<int>(pages.size()) - 1) return;
 
