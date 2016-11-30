@@ -93,11 +93,22 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 	MovableGameObject::update(frameTime);
 
 	// check for main character
-	if (m_state == GameObjectState::Idle && m_mainChar->getBoundingBox()->intersects(m_jumpingRegion)) {
-		g_resourceManager->playSound(m_sound, getSoundPath());
-		m_mainChar->setVelocityY(-800.f);
-		setState(GameObjectState::Jumping);
-		m_jumpingTime = getAnimation(GameObjectState::Jumping)->getAnimationTime();
+	auto const& mbb = *m_mainChar->getBoundingBox();
+	if (m_state == GameObjectState::Idle && mbb.intersects(m_jumpingRegion)) {
+		auto nextBB = mbb;
+		nextBB.top = m_jumpingRegion.top - nextBB.height;
+		WorldCollisionQueryRecord rec;
+		rec.boundingBox = nextBB;
+		rec.ignoreDynamicTiles = m_mainChar->isIgnoreDynamicTiles();
+		// only set the main char up if it wouldn't collide
+		if (!getLevel()->collides(rec)) {
+			g_resourceManager->playSound(m_sound, getSoundPath());
+			m_mainChar->setVelocityY(-800.f);
+			m_mainChar->setAccelerationY(0.f);
+			m_mainChar->setPositionY(nextBB.top);
+			setState(GameObjectState::Jumping);
+			m_jumpingTime = getAnimation(GameObjectState::Jumping)->getAnimationTime();
+		}
 	}
 
 	if (m_boundingBox.top + m_boundingBox.height > (m_level->getWorldRect().top + m_level->getWorldRect().height)) {
