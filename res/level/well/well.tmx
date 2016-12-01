@@ -630,7 +630,7 @@
   <object id="156" x="765" y="1330" width="70" height="110">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/gandria/gandria.tmx,885,1920"/>
+    <property name="map entry" value="res/map/gandriasewers/gandriasewers.tmx,115,100"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
