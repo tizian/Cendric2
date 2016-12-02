@@ -180,7 +180,7 @@
   </tile>
   <tile id="96">
    <properties>
-    <property name="id" value="eq_inconspicuousdagger"/>
+    <property name="id" value="we_inconspicuousdagger"/>
    </properties>
   </tile>
   <tile id="106">

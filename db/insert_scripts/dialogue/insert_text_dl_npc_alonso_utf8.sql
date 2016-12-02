@@ -1,0 +1,2 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Alonso_Hi', 'dl_npc_alonso', 'Sausages! Cheese! Ham! Cheap and fresh! ', 'Würste! Käse! Schinken! Billig und frisch!', 'Würstli! Chääs! Schinke! Billig und frisch!');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_ShowYourWares', 'dl_npc_alonso', 'Show me your wares.', 'Zeig mir deine Waren.', 'Zeig mer dini War.');

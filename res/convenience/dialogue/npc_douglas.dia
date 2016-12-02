@@ -1,0 +1,62 @@
+# dia file for dialogue for npc: npc_douglas
+
+npc.id:npc_douglas
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_douglas", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_douglas", "talked")
+	# translation: 
+	translation.tag:DL_Douglas_Hi
+	translation.en:Hey you! You look like you could use some new armour! Come and take a look!
+	translation.de:Hey du! Du siehst aus, als könntest du eine neue Rüstung gebrauchen! Komm und schau sie dir an!
+	translation.ch:Hey du! Du gsesch us, als chöntsch e neui Rüstig bruche! Chum und lueg si dir ah!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_ShowYourWares
+		translation.en:Show me your armour.
+		translation.de:Zeig mir deine Rüstungen.
+		translation.ch:Zeig mer dini Rüstige.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{4
+	# [3] Trade Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

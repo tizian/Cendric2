@@ -1,0 +1,2 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Douglas_Hi', 'dl_npc_douglas', 'Hey you! You look like you could use some new armour! Come and take a look!', 'Hey du! Du siehst aus, als könntest du eine neue Rüstung gebrauchen! Komm und schau sie dir an!', 'Hey du! Du gsesch us, als chöntsch e neui Rüstig bruche! Chum und lueg si dir ah!');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_ShowYourWares', 'dl_npc_douglas', 'Show me your armour.', 'Zeig mir deine Rüstungen.', 'Zeig mer dini Rüstige.');

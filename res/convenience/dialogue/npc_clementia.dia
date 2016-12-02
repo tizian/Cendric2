@@ -1,0 +1,62 @@
+# dia file for dialogue for npc: npc_clementia
+
+npc.id:npc_clementia
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_clementia", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_clementia", "talked")
+	# translation: 
+	translation.tag:DL_Clementia_Hi
+	translation.en:Oh, hello there! If you're looking for the finest weapons here in Gandria, you're lucky - here they are!
+	translation.de:Oh, hallo! Wenn du nach den besten Waffen in Gandria suchst, hast du Glück - hier sind sie!
+	translation.ch:Oh, hallo du! Wenn du di bestä Waffe in Gandria suechsch hesch Glück - da sind si!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_ShowYourWeapons
+		translation.en:Show me your weapons.
+		translation.de:Zeig mir deine Waffen.
+		translation.ch:Zeig mir dini Waffä.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{4
+	# [3] Trade Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

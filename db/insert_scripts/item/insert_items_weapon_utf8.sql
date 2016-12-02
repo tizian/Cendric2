@@ -73,15 +73,15 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Inconspicuous Dagger
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_inconspicuousdagger', 'item','Inconspicuous Dagger', 'Unscheinbarer Dolch','Unschiinbare Dolch');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_inconspicuousdagger', 'item_desc', 'A very small blade, but something about it seems magic.','Eine sehr kleine Klinge, doch etwas an ihm scheint magisch.','E sehr chlini Klinge, aber er het öppis magisches.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_inconspicuousdagger', 'eq_weapon', 600, 200, 40);
-INSERT INTO item_attribute (item_id, shadow_damage, critical) values ('eq_inconspicuousdagger', 3, 8);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_inconspicuousdagger', 'res/assets/equipment/weapon/spritesheet_weapon_eq_inconspicuousdagger.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_eq_inconspicuousdagger.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_enchanteddagger', 800, 10, 30, 70, 7);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('eq_inconspicuousdagger', 1, 'twilight', 1);
-INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_inconspicuousdagger', -14, -16, 17, 34);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_inconspicuousdagger', 1, 0, 200, 50, 50);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_inconspicuousdagger', 'item','Inconspicuous Dagger', 'Unscheinbarer Dolch','Unschiinbare Dolch');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_inconspicuousdagger', 'item_desc', 'A very small blade, but something about it seems magic.','Eine sehr kleine Klinge, doch etwas an ihm scheint magisch.','E sehr chlini Klinge, aber er het öppis magisches.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_inconspicuousdagger', 'eq_weapon', 600, 200, 40);
+INSERT INTO item_attribute (item_id, shadow_damage, critical) values ('we_inconspicuousdagger', 3, 8);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_inconspicuousdagger', 'res/assets/equipment/weapon/spritesheet_weapon_we_inconspicuousdagger.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_we_inconspicuousdagger.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_inconspicuousdagger', 800, 10, 30, 70, 7);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_inconspicuousdagger', 1, 'twilight', 1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_inconspicuousdagger', -14, -16, 17, 34);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_inconspicuousdagger', 1, 0, 200, 50, 50);
 
 -- Pickaxe
 

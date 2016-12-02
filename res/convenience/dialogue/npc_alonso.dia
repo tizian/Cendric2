@@ -1,0 +1,62 @@
+# dia file for dialogue for npc: npc_alonso
+
+npc.id:npc_alonso
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_alonso", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_alonso", "talked")
+	# translation: 
+	translation.tag:DL_Alonso_Hi
+	translation.en:Sausages! Cheese! Ham! Cheap and fresh! 
+	translation.de:Würste! Käse! Schinken! Billig und frisch!
+	translation.ch:Würstli! Chääs! Schinke! Billig und frisch!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_ShowYourWares
+		translation.en:Show me your wares.
+		translation.de:Zeig mir deine Waren.
+		translation.ch:Zeig mer dini War.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{4
+	# [3] Trade Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
