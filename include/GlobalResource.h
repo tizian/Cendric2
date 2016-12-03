@@ -114,4 +114,7 @@ public:
 	static const std::string SOUND_GUI_QUESTPROGRESS;
 
 	static const std::string SOUND_MISC_UNLOCK;
+
+	// music
+	static const std::string MUSIC_MAIN;
 };

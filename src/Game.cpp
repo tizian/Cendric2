@@ -95,6 +95,7 @@ void Game::run() {
 
 		// game updates
 		m_screenManager->update(frameTime);
+		g_resourceManager->updateMusic(frameTime);
 		if (m_screenManager->isQuitRequested()) {
 			m_running = false;
 		}

@@ -13,6 +13,28 @@
 
 class Item;
 
+struct BackgroundMusic {
+	BackgroundMusic() {
+		currentMusic = new sf::Music();
+		previousMusic = new sf::Music();
+		fadingTime = sf::Time::Zero;
+		isFading = false;
+	}
+
+	~BackgroundMusic() {
+		delete currentMusic;
+		delete previousMusic;
+	}
+
+	std::string path;
+	sf::Music* currentMusic;
+	sf::Music* previousMusic;
+	sf::Time fadingTime;
+	bool isFading;
+	
+	const sf::Time FADING_TIME = sf::seconds(1.5f);
+};
+
 class ResourceManager {
 public:
 	ResourceManager();
@@ -37,11 +59,13 @@ public:
 	void playSound(sf::Sound& sound, const std::string& filename, bool force, bool loop = false, float scale = 1.f);
 	// streams a music and applies the current configuration to it (sound on/off, volume), starts and loops it.
 	// if the music is already playing, it won't do anything.
-	// if another music is playing, it will stop that and start the new one.
+	// if another music is playing, it will stop that fade in the new one.
 	// the playing offset and looping are optional parameters.
-	void playMusic(const std::string& filename, bool looping = true, const sf::Time& playingOffset = sf::Time::Zero);
+	void playMusic(const std::string& filename, bool looping = true);
 	// stops the background music
 	void stopMusic();
+	void updateMusic(const sf::Time& frameTime);
+	void notifyVolumeChanged();
 
 	// loads a texture found at filename. If the resource type is Unique, the owner must be specified.
 	void loadTexture(const std::string& filename, ResourceType type, void* owner = nullptr);
@@ -85,7 +109,7 @@ private:
 	size_t m_nextSoundIndex;
 	static const size_t SOUND_POOL_SIZE;
 	// the current background music and its path
-	std::pair<std::string, sf::Music> m_currentMusic;
+	BackgroundMusic m_music;
 	// this pair stores resource errors and gets checked in every game loop iteration. mostly and hopefully void.
 	std::pair<ErrorID, std::string> m_currentError;
 	// configuration can be manipulated by the user

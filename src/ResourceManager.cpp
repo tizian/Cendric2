@@ -291,26 +291,45 @@ void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, b
 	sound.play();
 }
 
-void ResourceManager::playMusic(const std::string& filename, bool looping, const sf::Time& playingOffset) {
+void ResourceManager::playMusic(const std::string& filename, bool looping) {
 	if (!m_configuration.isSoundOn || filename.empty()) return;
-	if (m_currentMusic.first.compare(filename) == 0) return; // already playing
-	m_currentMusic.second.stop();
-	if (filename.empty()) return;
-	if (m_currentMusic.second.openFromFile(getResourcePath(filename))) {
-		m_currentMusic.second.setLoop(looping);
-		m_currentMusic.second.setVolume(static_cast<float>(m_configuration.volumeMusic));
-		m_currentMusic.second.play();
-		if (playingOffset < m_currentMusic.second.getDuration())
-			m_currentMusic.second.setPlayingOffset(playingOffset);
+	if (m_music.path.compare(filename) == 0) return; // already playing
+	delete m_music.previousMusic;
+	m_music.previousMusic = m_music.currentMusic;
+	m_music.currentMusic = new sf::Music();
+	if (m_music.currentMusic->openFromFile(getResourcePath(filename))) {
+		m_music.currentMusic->setLoop(looping);
+		m_music.currentMusic->setVolume(0.f);
+		m_music.currentMusic->play();
+		m_music.fadingTime = m_music.FADING_TIME;
+		m_music.isFading = true;
+		m_music.path = filename;
 	}
 	else {
 		g_logger->logError("ResourceManager", "Could not read music from file: " + getResourcePath(filename));
 	}
 }
 
+void ResourceManager::updateMusic(const sf::Time& frameTime) {
+	updateTime(m_music.fadingTime, frameTime);
+	if (!m_configuration.isSoundOn || !m_music.isFading) return;
+	if (m_music.fadingTime == sf::Time::Zero) {
+		m_music.isFading = false;
+	}
+	float newScale = m_music.fadingTime / m_music.FADING_TIME;
+	m_music.previousMusic->setVolume(newScale * m_configuration.volumeMusic);
+	m_music.currentMusic->setVolume((1.f - newScale) * m_configuration.volumeMusic);
+}
+
+void ResourceManager::notifyVolumeChanged() {
+	m_music.previousMusic->setVolume(0.f);
+	m_music.currentMusic->setVolume(!m_configuration.isSoundOn ? 0.f : static_cast<float>(m_configuration.volumeMusic));
+}
+
 void ResourceManager::stopMusic() {
-	m_currentMusic.second.stop();
-	m_currentMusic.first.clear();
+	m_music.currentMusic->stop();
+	m_music.previousMusic->stop();
+	m_music.path.clear();
 }
 
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {
