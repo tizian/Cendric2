@@ -27,6 +27,7 @@ namespace particles
 
 		// start the fading timer (in seconds)
 		void setFading(float timeToFade);
+		void resetColor();
 
 	private:
 		float m_timeToFade;

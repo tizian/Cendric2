@@ -42,6 +42,10 @@ void ResourceManager::init() {
 	loadBitmapFont(GlobalResource::FONT_8_SHADOWED, ResourceType::Global);
 	loadBitmapFont(GlobalResource::FONT_12, ResourceType::Global);
 	loadBitmapFont(GlobalResource::FONT_12_SHADOWED, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SPLASH_BG, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SPLASH_FG, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SPLASH_LOGO, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_SCREEN_LOADING, ResourceType::Global);
 
 	// load particle resources
 	loadTexture(GlobalResource::TEX_PARTICLE_CIRCLE, ResourceType::Global);
@@ -324,12 +328,6 @@ void ResourceManager::updateMusic(const sf::Time& frameTime) {
 void ResourceManager::notifyVolumeChanged() {
 	m_music.previousMusic->setVolume(0.f);
 	m_music.currentMusic->setVolume(!m_configuration.isSoundOn ? 0.f : static_cast<float>(m_configuration.volumeMusic));
-}
-
-void ResourceManager::stopMusic() {
-	m_music.currentMusic->stop();
-	m_music.previousMusic->stop();
-	m_music.path.clear();
 }
 
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {

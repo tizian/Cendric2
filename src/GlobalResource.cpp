@@ -13,6 +13,11 @@ const std::string GlobalResource::FONT_8_SHADOWED = "res/fonts/bitmap_font_8_sha
 const std::string GlobalResource::FONT_12 = "res/fonts/bitmap_font_12_default.png";
 const std::string GlobalResource::FONT_12_SHADOWED = "res/fonts/bitmap_font_12_shadowed.png";
 
+const std::string GlobalResource::TEX_SPLASH_BG = "res/assets/screens/screen_menu_bg.png";
+const std::string GlobalResource::TEX_SPLASH_FG = "res/assets/screens/screen_menu_fg.png";
+const std::string GlobalResource::TEX_SPLASH_LOGO = "res/assets/screens/logo.png";
+const std::string GlobalResource::TEX_SCREEN_LOADING = "res/assets/screens/screen_loading.png";
+
 const std::string GlobalResource::TEX_PARTICLE_CIRCLE = "res/assets/particles/circle.png";
 const std::string GlobalResource::TEX_PARTICLE_BLOB = "res/assets/particles/blob.png";
 const std::string GlobalResource::TEX_PARTICLE_LONGBLOB = "res/assets/particles/longblob.png";

@@ -92,7 +92,6 @@ void LevelScreen::load() {
 }
 
 void LevelScreen::cleanUp() {
-	g_resourceManager->stopMusic();
 	m_currentLevel.dispose();
 }
 

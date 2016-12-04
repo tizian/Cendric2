@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="189">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="190">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
   <property name="name" value="SyrahHome"/>
   <property name="tilesetpath" value="res/map/syrahhome/tileset_map_syrahhome.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_syrahhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
+ <tileset firstgid="1" name="tileset_map_syrahhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
   <image source="tileset_map_syrahhome.png" width="1000" height="1000"/>
   <tile id="206">
    <properties>
@@ -54,10 +54,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35">
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
+ <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -266,9 +266,15 @@
   <object id="185" x="449" y="296" width="31" height="43"/>
  </objectgroup>
  <objectgroup name="trigger">
-  <object id="126" x="650" y="719" width="51" height="29">
+  <object id="126" x="650" y="720" width="50" height="30">
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,965,2900"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="189" x="800" y="500" width="50" height="30">
+   <properties>
+    <property name="level entry" value="res/level/syrahbasement/syrahbasement.tmx,1810,260"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

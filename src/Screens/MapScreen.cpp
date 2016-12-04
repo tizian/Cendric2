@@ -114,7 +114,6 @@ void MapScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 
 void MapScreen::execOnExit(const Screen* nextScreen) {
 	WorldScreen::execOnExit(nextScreen);
-	g_resourceManager->stopMusic();
 	m_currentMap.dispose();
 	clearOverlays();
 }

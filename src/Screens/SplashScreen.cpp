@@ -3,20 +3,12 @@
 
 using namespace particles;
 
-const std::string SPRITE_PATH_BG = "res/assets/screens/screen_menu_bg.png";
-const std::string SPRITE_PATH_FG = "res/assets/screens/screen_menu_fg.png";
-const std::string SPRITE_PATH_LOGO = "res/assets/screens/logo.png";
-
 SplashScreen::SplashScreen() : Screen(nullptr) {
-	g_resourceManager->loadTexture(SPRITE_PATH_BG, ResourceType::Global);
-	g_resourceManager->loadTexture(SPRITE_PATH_FG, ResourceType::Global);
-	g_resourceManager->loadTexture(SPRITE_PATH_LOGO, ResourceType::Global);
-
-	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_BG)));
-	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_FG)));
+	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG)));
+	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_FG)));
 
 	float scale = 5.f;
-	sf::Texture* tex = g_resourceManager->getTexture(SPRITE_PATH_LOGO);
+	sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_LOGO);
 	m_logoSprite = sf::Sprite(*tex);
 	m_logoSprite.setScale(sf::Vector2f(scale, scale));
 	m_logoSprite.setPosition(0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 0.5f * (WINDOW_HEIGHT - scale * tex->getSize().y));

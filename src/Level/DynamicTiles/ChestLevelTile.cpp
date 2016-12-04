@@ -52,7 +52,7 @@ void ChestLevelTile::onHit(Spell* spell) {
 	case SpellID::Unlock:
 		if (m_state == GameObjectState::Locked) {
 			if (spell->getStrength() >= m_data.chestStrength) {
-				unlock();
+				unlock(true);
 			}
 			spell->setDisposed();
 		}
@@ -98,7 +98,7 @@ void ChestLevelTile::setChestData(const ChestTileData& data) {
 	setLoot(data.loot.first, data.loot.second);
 	
 	if (data.isOpen) {
-		unlock();
+		unlock(false);
 	}
 	if (!data.tooltipText.empty()) {
 		m_interactComponent->setTooltipText(g_textProvider->getText(data.tooltipText, "chest"));
@@ -117,7 +117,7 @@ void ChestLevelTile::onMouseOver() {
 	}
 }
 
-void ChestLevelTile::unlock() {
+void ChestLevelTile::unlock(bool soundOn) {
 	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
 	if (isObserved) {
 		m_interactComponent->setInteractText("ToSteal");
@@ -127,7 +127,7 @@ void ChestLevelTile::unlock() {
 		m_interactComponent->setInteractText("ToPickup");
 	}
 
-	g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
+	if (soundOn) g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 	setState(GameObjectState::Unlocked);
 }
 
@@ -173,7 +173,7 @@ void ChestLevelTile::onRightClick() {
 	}
 	else if (m_data.chestStrength == 0 && m_state == GameObjectState::Locked) {
 		if (inRange) {
-			unlock();
+			unlock(true);
 		}
 		else {
 			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
@@ -182,7 +182,7 @@ void ChestLevelTile::onRightClick() {
 	}
 	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
 		if (inRange) {
-			unlock();
+			unlock(true);
 			std::string tooltipText = g_textProvider->getText("Used");
 			tooltipText.append(g_textProvider->getText(m_data.keyItemID, "item"));
 			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);

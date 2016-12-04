@@ -20,6 +20,7 @@ public:
 private:
 	bool m_isRendered = false;
 	BitmapText* m_title = nullptr;
+	sf::Sprite m_screenSprite;
 
 	LevelScreen* m_levelToLoad = nullptr;
 	MapScreen* m_mapToLoad = nullptr;

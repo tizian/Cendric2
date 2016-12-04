@@ -28,7 +28,7 @@ private:
 	std::string getSpritePath() const override;
 	ChestTileData m_data;
 	void setLoot(const std::map<std::string, int>& items, int gold);
-	void unlock();
+	void unlock(bool soundOn);
 
 	InteractComponent* m_interactComponent = nullptr;
 	// The light will disappear (set invisible) on looted.

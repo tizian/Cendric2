@@ -19,6 +19,11 @@ public:
 	static const std::string FONT_12;
 	static const std::string FONT_12_SHADOWED;
 
+	static const std::string TEX_SPLASH_BG;
+	static const std::string TEX_SPLASH_FG;
+	static const std::string TEX_SPLASH_LOGO;
+	static const std::string TEX_SCREEN_LOADING;
+
 	static const std::string TEX_PARTICLE_CIRCLE;
 	static const std::string TEX_PARTICLE_BLOB;
 	static const std::string TEX_PARTICLE_LONGBLOB;

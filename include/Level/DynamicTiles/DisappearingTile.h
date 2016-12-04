@@ -12,6 +12,7 @@
 // 3: 2s
 
 // a tile that disappears after a certain time as soon as cendric touches it.
+// these tiles respawn.
 class DisappearingTile : public virtual LevelDynamicTile {
 public:
 	DisappearingTile(LevelScreen* levelScreen);
@@ -32,7 +33,8 @@ private:
 	bool m_isTouched = false;
 	sf::Time m_criticalTime;
 	sf::Color m_skinColor;
-	void initForSkinNr(int skinNr);
+	int m_skinNr;
+	void initForSkinNr();
 	sf::FloatRect m_checkBoundingBox;
 
 	// particle system
@@ -40,4 +42,8 @@ private:
 	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
 	particles::FadingColorUpdater* m_colorUpdater = nullptr;
+
+	static const sf::Time RESPAWN_TIME;
+	sf::Time m_respawnTime = sf::Time::Zero;
+	void respawn();
 };

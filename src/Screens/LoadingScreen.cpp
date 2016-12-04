@@ -50,10 +50,13 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 
 void LoadingScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
+	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(*m_title);
 }
 
 void LoadingScreen::execOnEnter(const Screen *previousScreen) {
+	// background
+	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_LOADING)));
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Loading"));
 	m_title->setTextStyle(TextStyle::Shadowed);

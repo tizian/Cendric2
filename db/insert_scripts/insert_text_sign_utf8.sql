@@ -20,3 +20,4 @@ won''t move.','Gefrorene Plattformen
 bewegen sich nicht.','Gfroreni Plattforme
 beweged sich nid.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedFire','sign','Need fire...','Brauchst Feuer...','Bruuchsch es Füürli...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GetOut','sign','Get out!','Hau ab!','Use mit dir!');

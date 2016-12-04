@@ -6,6 +6,8 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Disappearing, DisappearingTile)
 
+const sf::Time DisappearingTile::RESPAWN_TIME = sf::seconds(10.f);
+
 DisappearingTile::DisappearingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen) {
 }
@@ -33,12 +35,13 @@ void DisappearingTile::loadAnimation(int skinNr) {
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
-	initForSkinNr(skinNr);
+	m_skinNr = skinNr;
+	initForSkinNr();
 	loadParticleSystem();
 }
 
-void DisappearingTile::initForSkinNr(int skinNr) {
-	switch (skinNr) {
+void DisappearingTile::initForSkinNr() {
+	switch (m_skinNr) {
 	case 0:
 		m_skinColor = sf::Color(156, 145, 188, 200);
 		m_criticalTime = sf::seconds(0.1f);
@@ -63,13 +66,38 @@ void DisappearingTile::update(const sf::Time& frameTime) {
 	if (m_isTouched) {
 		updateTime(m_criticalTime, frameTime);
 		if (m_criticalTime == sf::Time::Zero) {
-			setDisposed();
+			m_isCollidable = false;
+			m_respawnTime = RESPAWN_TIME;
+			m_isTouched = false;
+		}
+	}
+
+	if (m_respawnTime > sf::Time::Zero) {
+		updateTime(m_respawnTime, frameTime);
+		if (m_respawnTime == sf::Time::Zero) {
+			respawn();
 		}
 	}
 
 	checkForMainCharacter();
 	LevelDynamicTile::update(frameTime);
 	m_ps->update(frameTime);
+}
+
+void DisappearingTile::respawn() {
+	// check for collidable
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *getBoundingBox();
+	if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
+		g_logger->logInfo("DisappearingTile::respawn", "Cannot respawn this tile as it would stuck a MOB or a movable tile!");
+		m_respawnTime = RESPAWN_TIME;
+		return;
+	}
+
+	m_isCollidable = true;
+	m_ps->emitRate = 10.f;
+	m_colorUpdater->resetColor();
+	initForSkinNr();
 }
 
 void DisappearingTile::render(sf::RenderTarget& target) {

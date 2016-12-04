@@ -44,6 +44,10 @@ namespace particles
 		m_initialTimeToFade = timeToFade;
 		m_timeToFade = timeToFade;
 	}
+
+	void FadingColorUpdater::resetColor() {
+		m_isFading = false;
+	}
 }
 
 

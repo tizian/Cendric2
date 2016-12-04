@@ -5,7 +5,7 @@ velocity = 30
 loadRoutine = function(R, W)
 
 	if (W:isConditionFulfilled("npc_syrah","talked")) then
-		R:setTalkingActive(false)
+		R:setTalkingActive(W:hasItem("qe_invisrecipe", 1) and not W:isConditionFulfilled("npc_syrah", "invis_recipe"))
 		R:setReloadLocked(true)
 		R:setTilePosition(13,11)
 		

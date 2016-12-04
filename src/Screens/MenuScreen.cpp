@@ -6,16 +6,12 @@
 
 using namespace std;
 
-const std::string SPRITE_PATH_BG = "res/assets/screens/screen_menu_bg.png";
-const std::string SPRITE_PATH_FG = "res/assets/screens/screen_menu_fg.png";
-const std::string SPRITE_PATH_LOGO = "res/assets/screens/logo.png";
-
 MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
-	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_BG)));
-	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(SPRITE_PATH_FG)));
+	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG)));
+	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_FG)));
 
 	float scale = 4.f;
-	sf::Texture* tex = g_resourceManager->getTexture(SPRITE_PATH_LOGO);
+	sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_LOGO);
 	m_logoSprite = sf::Sprite(*tex);
 	m_logoSprite.setScale(sf::Vector2f(scale, scale));
 	m_logoSprite.setPosition(0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 30.f);

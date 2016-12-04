@@ -26,3 +26,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Sy
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JonathansLab','location','Jonathan''s Laboratory','Jonathan''s Laboratorium','Laboratorium vom Jonathan');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Well','location','Well','Ziehbrunnen','Ziebrunne');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaSewers','location','Sewers of Gandria','Kanalisation von Gandria','Kanalisation vo Gandria');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SyrahBasement','location','Syrah''s Basement','Syrah''s Keller','Chäller vode Syrah');

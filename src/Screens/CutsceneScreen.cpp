@@ -44,5 +44,4 @@ void CutsceneScreen::render(sf::RenderTarget& renderTarget) {
 
 void CutsceneScreen::execOnExit(const Screen *nextScreen) {
 	delete m_cutscene;
-	g_resourceManager->stopMusic();
 }

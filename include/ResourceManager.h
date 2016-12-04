@@ -62,8 +62,6 @@ public:
 	// if another music is playing, it will stop that fade in the new one.
 	// the playing offset and looping are optional parameters.
 	void playMusic(const std::string& filename, bool looping = true);
-	// stops the background music
-	void stopMusic();
 	void updateMusic(const sf::Time& frameTime);
 	void notifyVolumeChanged();
 
