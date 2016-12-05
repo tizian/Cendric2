@@ -719,7 +719,7 @@
   </object>
  </objectgroup>
  <objectgroup name="sign">
-  <object id="30" gid="608" x="3288" y="1282" width="50" height="50">
+  <object id="30" gid="608" x="3288" y="1297" width="50" height="50">
    <properties>
     <property name="text" value="NeedFire"/>
    </properties>

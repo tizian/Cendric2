@@ -76,12 +76,24 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_inconspicuousdagger', 'item','Inconspicuous Dagger', 'Unscheinbarer Dolch','Unschiinbare Dolch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_inconspicuousdagger', 'item_desc', 'A very small blade, but something about it seems magic.','Eine sehr kleine Klinge, doch etwas an ihm scheint magisch.','E sehr chlini Klinge, aber er het öppis magisches.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_inconspicuousdagger', 'eq_weapon', 600, 200, 40);
-INSERT INTO item_attribute (item_id, shadow_damage, critical) values ('we_inconspicuousdagger', 3, 8);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_inconspicuousdagger', 'res/assets/equipment/weapon/spritesheet_weapon_we_inconspicuousdagger.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_we_inconspicuousdagger.png');
+INSERT INTO item_attribute (item_id, dmg_shadow, critical) values ('we_inconspicuousdagger', 3, 8);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_inconspicuousdagger', 'res/assets/equipment/weapon/spritesheet_weapon_inconspicuousdagger.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_inconspicuousdagger.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_inconspicuousdagger', 800, 10, 30, 70, 7);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_inconspicuousdagger', 1, 'twilight', 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_inconspicuousdagger', -14, -16, 17, 34);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_inconspicuousdagger', 1, 0, 200, 50, 50);
+
+-- Herbalist's Blade
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_herbalistblade', 'item','Herbalist''s Blade', 'Klinge der Kräuterhexe','Krütlihäx-Klinge');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_herbalistblade', 'item_desc', 'This sickle could be used to collect herbs, but it makes also a fine weapon.','Diese Sichel könnte zum Kräutersammeln verwendet werden, aber sie gibt auch eine gute Waffe ab.','Die Sichle chöntme zum Krütli sammle bruche, aber si git au e gueti Waffe ab.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_herbalistblade', 'eq_weapon', 600, 300, 40);
+INSERT INTO item_attribute (item_id, dmg_shadow, dmg_ice, critical) values ('we_herbalistblade', 2, 2, 7);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_herbalistblade', 'res/assets/equipment/weapon/spritesheet_weapon_herbalistblade.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_herbalistblade.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_herbalistblade', 800, 10, 40, 70, 8);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_herbalistblade', 1, 'necromancy', 1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_herbalistblade', 0, 0, 39, 57);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_herbalistblade', 1, 200, 300, 50, 100);
 
 -- Pickaxe
 

@@ -308,6 +308,15 @@ INSERT INTO item_attribute (item_id, max_health, dmg_physical) values ('eq_ironr
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_ironring', -12, -37, 8, 8);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_ironring', 1, 300, 100, 50, 50);
 
+-- Bone Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bonering', 'item', 'Bone Ring','Knochenring','Chnochering');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bonering', 'item_desc', 'Made from smoothed bones.','Aus geschliffenen Knochen gefertigt.','Us gschliffene Chnoche gmacht.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bonering', 'eq_ring', 600, 250, 25);
+INSERT INTO item_attribute (item_id, max_health, dmg_shadow) values ('eq_bonering', -10, 10);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_bonering', -3, -39, 19, 14);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_bonering', 1, 250, 300, 50, 50);
+
 -- Eye of the Moon
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item', 'The Eye of the Moon','Das Auge des Mondes','Es Mondaug');
