@@ -336,22 +336,27 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("invis_recipe", "void")) then 
 
 		DL:createChoiceNode(41)
-		DL:addChoice(42, "DL_Choice_SecondQuest") -- I'm ready for your new job.
+		if (DL:isSpellLearned(7)) then 
+			DL:addChoice(42, "DL_Choice_SecondQuest") -- I'm ready for your new job.
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
+		if (DL:isSpellLearned(7)) then 
 
-		DL:createNPCNode(42, 43, "DL_Vincent_SecondQuest") -- Good. This time, the stakes are a little bit higher. We know that a certain mage Syrah knows how to brew a potion that can render you invisible.
-		DL:addNode()
-
-
-		DL:createNPCNode(43, 44, "DL_Vincent_SecondQuest2") -- A very useful ability, isn't it. The only problem is, that she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
-		DL:addNode()
+			DL:createNPCNode(42, 43, "DL_Vincent_SecondQuest") -- Good. This time, the stakes are a little bit higher. We know that a certain mage Syrah knows how to brew a potion that can render you invisible.
+			DL:addNode()
 
 
-		DL:createNPCNode(44, -2, "DL_Vincent_SecondQuest3") -- There must be a way to get into her basement - by taking a shortcut through the sewers. Find this way and get that recipe for us. If you manage to do that, you'll maybe get to know what "us" really means.
-		DL:changeQuestState("invis_recipe", "started")
-		DL:addNode()
+			DL:createNPCNode(43, 44, "DL_Vincent_SecondQuest2") -- A very useful ability, isn't it. The only problem is, that she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
+			DL:addNode()
+
+
+			DL:createNPCNode(44, -2, "DL_Vincent_SecondQuest3") -- There must be a way to get into her basement - by taking a shortcut through the sewers. Find this way and get that recipe for us. If you manage to do that, you'll maybe get to know what "us" really means.
+			DL:changeQuestState("invis_recipe", "started")
+			DL:addNode()
+
+		end
 
 	end
 

@@ -91,9 +91,24 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_ice, critical) values ('we_herbalistblade', 2, 2, 7);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_herbalistblade', 'res/assets/equipment/weapon/spritesheet_weapon_herbalistblade.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_herbalistblade.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_herbalistblade', 800, 10, 40, 70, 8);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_herbalistblade', 1, 'necromancy', 1);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_herbalistblade', 1, 'necromancy', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_herbalistblade', 2, 'elemental', 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_herbalistblade', 0, 0, 39, 57);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_herbalistblade', 1, 200, 300, 50, 100);
+
+-- Double Sickle (name not final...)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item','Double Sickle', 'Doppelsichel','Doppelsichle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item_desc', '...','...','...');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle', 'eq_weapon', 600, 350, 250);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, dmg_fire, critical) values ('we_doublesickle', 3, 10, 5, 3, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle', 350, 90, 80, -45, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 2, 'necromancy', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 3, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 4, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 5, 'meta', 2);
 
 -- Pickaxe
 

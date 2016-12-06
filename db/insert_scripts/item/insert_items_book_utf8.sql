@@ -3,9 +3,9 @@
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('bo_rhendalmagic', 'document', 500, 500, -1);
 INSERT INTO item_document_page(item_id, page_nr, title) values ('bo_rhendalmagic', 0, 'BookRhendalMagic');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 1, 'TitleRhendalMagic1', 'ContentRhendalMagic1');
-INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 2, 'TitleRhendalMagic2', 'ContentRhendalMagic2');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 2, '', 'ContentRhendalMagic2');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 3, 'TitleRhendalMagic3', 'ContentRhendalMagic3');
-INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 4, 'TitleRhendalMagic4', 'ContentRhendalMagic4');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 4, '', 'ContentRhendalMagic4');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookRhendalMagic','document','Thoughts on
 Magic
 - Rhendal','Gedanken zu

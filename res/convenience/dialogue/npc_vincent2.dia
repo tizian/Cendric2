@@ -815,6 +815,7 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:42
+		condition:DL:isSpellLearned(7)
 		# translation: 
 		translation.tag:DL_Choice_SecondQuest
 		translation.en:I'm ready for your new job.

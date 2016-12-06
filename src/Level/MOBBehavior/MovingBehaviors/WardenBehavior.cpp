@@ -23,7 +23,10 @@ void WardenBehavior::handleDefaultAcceleration() {
 }
 
 void WardenBehavior::handleTrueAcceleration() {
-	// nop, wardens always have a moving target.
+	float newAccelerationY = m_movingDirectionY * m_walkAcceleration;
+	float newAccelerationX = m_movingDirectionX * m_walkAcceleration;
+
+	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
 }
 
 void WardenBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
