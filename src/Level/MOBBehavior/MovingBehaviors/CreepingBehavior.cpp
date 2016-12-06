@@ -67,7 +67,7 @@ void CreepingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool collidesY;
 	checkCreepingXYDirection(nextPosition, collidesX, collidesY);
 	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
-	if (m_mob->getLevel()->collidesWithEvilTiles(nextBoundingBox)) {
+	if (m_mob->getLevel()->collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
 		return;
