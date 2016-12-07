@@ -25,6 +25,7 @@ public:
 	bool hasItem(const std::string& item, int amount) const { return m_worldCallback->hasItem(item, amount); }
 	int getItemAmount(const std::string& item) const { return m_worldCallback->getItemAmount(item); }
 	int getReputation(const std::string& fractionID) const { return m_worldCallback->getReputation(fractionID); }
+	std::string getGuild() const { return m_worldCallback->getGuild(); }
 
 	// methods to create a node
 	void createCendricNode(int tag, int nextTag, const std::string& text);

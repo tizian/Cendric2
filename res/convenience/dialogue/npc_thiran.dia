@@ -1,0 +1,134 @@
+# dia file for dialogue for npc: npc_thiran
+
+npc.id:npc_thiran
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_thiran", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_thiran", "talked")
+	# translation: 
+	translation.tag:DL_Thiran_WhoAreYou
+	translation.en:I'm Thiran, quartermaster of the clerics. What can I do for you?
+	translation.de:Ich bin Thiran, Rüstmeister der Kleriker. Was kann ich für dich tun?
+	translation.ch:Ich bi de Thiran, de Rüstmeister vode Kleriker. Was chani für dich mache?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_Wares
+		translation.en:Show me your wares.
+		translation.de:Zeig mir deine Waren.
+		translation.ch:Wa hesch so im Agebot?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:DL:getGuild() ~= "cleric"
+		# translation: 
+		translation.tag:DL_Choice_Learn
+		translation.en:Can you teach me some spells?
+		translation.de:Kannst du mir Zauber beibringen?
+		translation.ch:Chasch du mir Zauber bibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:getGuild() == "cleric" and DL:getReputation("cleric") >= 30 and not DL:isConditionFulfilled("npc_thiran", "first_spell")
+		# translation: 
+		translation.tag:DL_Choice_Learn
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{4
+	# [4] Trade Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Thiran_NoTeaching
+	translation.en:No, I only share my knowledge with members of the order.
+	translation.de:Nein, ich gebe mein Wissen nur an Mitglieder des Ordens weiter.
+	translation.ch:Nei, ich chan nur Lüt wo zum Orde ghöred öppis bibringe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_thiran", "first_spell")
+	trigger:DL:addItem("sp_holyfire", 1)
+	# translation: 
+	translation.tag:DL_Thiran_YesTeachingFirst
+	translation.en:Yes, as you've chosen the way of the Eternal Light, I can grant you access to its magic. Here, take this scroll and learn how to unleash the wrath of light.
+	translation.de:Ja, da du den Weg des Ewigen Lichts eingeschlagen hast, kann ich dir Zugang zu seiner Magie gewähren. Hier, nimm diese Schriftrolle und lerne, wie man den Zorn des Lichts entfesselt.
+	translation.ch:Ja, well du de Weg vom Ewige Liecht igschlage hesch chani der sini Magie  bibringe. Da, nimm die Schriftrolle und lern weme de Zorn vom Liecht entfesslet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

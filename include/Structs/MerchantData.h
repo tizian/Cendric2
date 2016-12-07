@@ -10,4 +10,6 @@ struct MerchantData {
 
 	// the wares the npc offers for sale
 	std::map<std::string, int> wares;
+	// reputation needed to buy an item (default 0)
+	std::map<std::string, int> reputation;
 };

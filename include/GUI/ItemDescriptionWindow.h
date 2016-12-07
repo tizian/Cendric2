@@ -28,12 +28,15 @@ public:
 
 protected:
 	virtual std::string getGoldText(const Item& item) const;
+	virtual std::string getReputationText(const Item& item) const;
+	bool m_isReputationReached = false;
 
 private:
 	BitmapText m_titleText;
 	BitmapText m_descriptionText;
 	BitmapText m_whiteText;
 	BitmapText m_coloredText;
+	BitmapText m_reputationText;
 
 	bool m_isVisible = false;
 };

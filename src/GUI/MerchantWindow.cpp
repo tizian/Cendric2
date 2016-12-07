@@ -35,7 +35,7 @@ void MerchantWindow::init() {
 
 	m_window->addCloseButton(std::bind(&MerchantWindow::completeTrade, this));
 
-	m_descriptionWindow = new MerchantItemDescriptionWindow(m_interface->getMerchantData().multiplier);
+	m_descriptionWindow = new MerchantItemDescriptionWindow(m_interface->getMerchantData());
 
 	// init text
 	m_title.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
@@ -192,6 +192,7 @@ void MerchantWindow::renderAfterForeground(sf::RenderTarget& target) {
 
 void MerchantWindow::showDescription(const Item* item) {
 	if (item == nullptr) return;
+	m_descriptionWindow->setReputation(m_interface->getReputation(item), m_interface->isReputationReached(item));
 	m_descriptionWindow->load(*item);
 	m_descriptionWindow->show();
 	sf::Vector2f pos = sf::Vector2f(

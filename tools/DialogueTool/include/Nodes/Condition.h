@@ -9,6 +9,8 @@ enum class ConditionType {
 	QuestComplete,
 	HasItem,
 	GetReputation,
+	GetGuild,
+	IsSpellLearned,
 	MAX
 };
 

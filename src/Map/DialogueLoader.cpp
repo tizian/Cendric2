@@ -27,6 +27,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("hasItem", &DialogueLoader::hasItem)
 		.addFunction("getItemAmount", &DialogueLoader::getItemAmount)
 		.addFunction("getReputation", &DialogueLoader::getReputation)
+		.addFunction("getGuild", &DialogueLoader::getGuild)
 		.addFunction("createCendricNode", &DialogueLoader::createCendricNode)
 		.addFunction("createNPCNode", &DialogueLoader::createNPCNode)
 		.addFunction("createChoiceNode", &DialogueLoader::createChoiceNode)

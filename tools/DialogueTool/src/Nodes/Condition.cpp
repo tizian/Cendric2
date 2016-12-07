@@ -1,7 +1,7 @@
 #include "Nodes/Condition.h"
 
 const char* Condition::CONDITION_TYPES =
-"Condition\0Quest State\0Quest Complete\0Has Item\0Get Reputation\0\0";
+"Condition\0Quest State\0Quest Complete\0Has Item\0Get Reputation\0Get Guild\0Is Spell Learned\0\0";
 
 std::string Condition::exportToLua() const {
 	switch (type) {
@@ -15,6 +15,10 @@ std::string Condition::exportToLua() const {
 		return "DL:isQuestState(\"" + s1 + "\", \"" + s2 + "\")";
 	case ConditionType::GetReputation:
 		return "DL:getReputation(\"" + s1 + "\")";
+	case ConditionType::GetGuild:
+		return "DL:getGuild()";
+	case ConditionType::IsSpellLearned:
+		return "DL:isSpellLearned(\"" + std::to_string(i1) + "\")";
 	default:
 		break;
 	}

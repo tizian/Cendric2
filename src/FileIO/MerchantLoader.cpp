@@ -52,5 +52,22 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) {
 		}
 	}
 
+	LuaRef reputation = getGlobal(L, "reputation");
+	if (reputation.isTable()) {
+		int i = 1; 
+		LuaRef element = reputation[i];
+		while (!element.isNil()) {
+			LuaRef name = element[1];
+			LuaRef amount = element[2];
+			if (!name.isString() || !amount.isNumber()) {
+				g_logger->logError("MerchantLoader", "File [" + filename + "]: reputation table not resolved, no name or reputation or of wrong type.");
+				return merchantData;
+			}
+			merchantData.reputation.insert({ name.cast<std::string>(), amount.cast<int>() });
+			i++;
+			element = reputation[i];
+		}
+	}
+
 	return merchantData;
 }

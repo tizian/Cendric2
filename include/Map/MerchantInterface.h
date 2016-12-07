@@ -26,6 +26,8 @@ public:
 	// saves the data to the core and exits
 	void completeTrade();
 	bool isCancelled();
+	int getReputation(const Item* item) const;
+	bool isReputationReached(const Item* item) const;
 
 private:
 	bool m_isCancelled = false;

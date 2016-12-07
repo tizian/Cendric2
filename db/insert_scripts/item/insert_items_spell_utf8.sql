@@ -5,6 +5,13 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_light', 17);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_light', 'item', 'Scroll - Light','Schriftrolle - Licht','Schriftrolle - Liecht', 'Pergamino - Resplandor');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_light', 'item_desc', 'There shall be light!','Es werde Licht!','Chasch chli heller mache, bitte?', '¡Hágase la luz!');
 
+-- Holy Fire
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_holyfire', 'spell', 300, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_holyfire', 18);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_holyfire', 'item', 'Scroll - Holy Fire','Schriftrolle - Heiliges Feuer','Schriftrolle - Heiligs Füür', 'Pergamino - Fuego divino');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_holyfire', 'item_desc', 'Cendric summons a holy fire that burns enemies in range.','Cendric beschwört ein heiliges Feuer, das Gegner in der Nähe verbrennt.','De Cendric beschwört es heiligs Füür wo Gegner ide Nöchi verbrennt.','Cendric convoca a un fuego divino que quema a enemigos al alcance.');
+
 -- Summon Picklock
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_unlock', 'spell', 200, 400, -1);

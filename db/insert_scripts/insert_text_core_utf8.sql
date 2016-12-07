@@ -131,6 +131,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewJ
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('No','No','Nein','Nai','No');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoQuicksaveExists','No quick save exists','Kein Schnelllade-Speicherstand existiert','Kein Schnelllade-Speicherstand existiert','No existe guardado rápido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!','¡No hay suficiente oro!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughReputation','Not enough reputation!','Nicht genügend Ruf!','Nid gnueg Ruef!','¡No hay suficiente reputación!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToSay','There''s nothing to talk about.','Es gibt nichts zu sagen.','Es git nüt zum rede.','No hay de qué hablar.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoWeapon','No weapon','Keine Waffe','Kei Waffe','Sin arma');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoSpells','No spells learned.','Keine Zauber gelernt.','Kei Zauber glernt.','Sin hechizos aprendidos.');

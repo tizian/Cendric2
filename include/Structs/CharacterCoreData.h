@@ -35,7 +35,7 @@ struct CharacterCoreData {
 
 	// quest & npc progress
 	std::map<std::string, std::set<std::string>> conditionProgress;
-	std::map<std::string, MerchantData> merchantStates;
+	std::map<std::string, std::map<std::string, int>> merchantStates;
 	std::map<std::string, QuestState> questStates;
 	std::map<std::string, std::map<std::string, int>> questTargetProgress;
 	std::map<std::string, std::set<std::string>> questConditionProgress;
@@ -92,7 +92,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::vector<bool>>(),
 	std::map<std::string, std::set<std::string>>(),
-	std::map<std::string, MerchantData>(),
+	std::map<std::string, std::map<std::string, int>>(),
 	std::map<std::string, QuestState>(),
 	std::map<std::string, std::map<std::string, int>>(),
 	std::map<std::string, std::set<std::string>>(),

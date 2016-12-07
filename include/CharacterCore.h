@@ -132,8 +132,8 @@ public:
 	bool hasStoredItem(const std::string& itemID, int amount) const;
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.
 	MerchantData getMerchantData(const std::string& merchantID);
-	// sets the merchant data of this merchant id
-	void setMerchantData(const std::string& merchantID, const MerchantData& data);
+	// sets the merchant wares of this merchant id
+	void setMerchantData(const std::string& merchantID, const std::map<std::string, int>& wares);
 	// learns the spell with id "spellID"
 	void learnSpell(SpellID spellID);
 	// learns this modifier

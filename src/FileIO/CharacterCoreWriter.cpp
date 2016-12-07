@@ -51,7 +51,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeProgressConditions(data);
 		savefile << writeGuild(data);
 		savefile << writeReputationProgress(data);
-		savefile << writeMerchandStates(data);
+		savefile << writeMerchantStates(data);
 		savefile << writeSpellsLearned(data);
 		savefile << writeModifiersLearned(data);
 		savefile << writeHintsLearned(data);
@@ -347,19 +347,15 @@ std::string CharacterCoreWriter::writeWeather(const CharacterCoreData& data) con
 	return currentWeather;
 }
 
-std::string CharacterCoreWriter::writeMerchandStates(const CharacterCoreData& data) const {
-	string states = "# merchand states:\n";
+std::string CharacterCoreWriter::writeMerchantStates(const CharacterCoreData& data) const {
+	string states = "# merchant states:\n";
 
 	for (auto& it : data.merchantStates) {
 		string merchant = string(MERCHANT_STATE);
 		merchant.append(":");
 		merchant.append(it.first);
-		merchant.append(",");
-		merchant.append(to_string((int)(it.second.fraction)));
-		merchant.append(",");
-		merchant.append(to_string(it.second.multiplier));
 
-		for (auto& it2 : it.second.wares) {
+		for (auto& it2 : it.second) {
 			merchant.append(",");
 			merchant.append(it2.first);
 			merchant.append(",");

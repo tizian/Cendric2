@@ -43,6 +43,10 @@ std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
 	return text;
 }
 
+std::string ItemDescriptionWindow::getReputationText(const Item& item) const {
+	return "";
+}
+
 void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
 
@@ -60,6 +64,7 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 
 	m_whiteText.setPosition(pos);
 	m_coloredText.setPosition(pos);
+	m_reputationText.setPosition(pos);
 }
 
 void ItemDescriptionWindow::load(const Item& item) {
@@ -69,6 +74,7 @@ void ItemDescriptionWindow::load(const Item& item) {
 	int lines = 0;
 	std::string white = "";
 	std::string colored = "";
+	std::string reputation = "";
 
 	if (item.getType() == ItemType::Permanent) {
 		colored.append(g_textProvider->getText("Permanent"));
@@ -149,6 +155,17 @@ void ItemDescriptionWindow::load(const Item& item) {
 	white.append(getGoldText(item));
 	lines++;
 
+	std::string repText = getReputationText(item);
+	if (!repText.empty()) {
+		for (int i = 0; i < lines; ++i) {
+			reputation.append("\n");
+		}
+		reputation.append(repText);
+		m_reputationText.setColor(m_isReputationReached ? COLOR_GOOD : COLOR_NEUTRAL);
+		lines++;
+	}
+
+	m_reputationText.setString(reputation);
 	m_whiteText.setString(white);
 	m_coloredText.setString(colored);
 
@@ -168,6 +185,7 @@ void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_descriptionText);
 	renderTarget.draw(m_whiteText);
 	renderTarget.draw(m_coloredText);
+	renderTarget.draw(m_reputationText);
 }
 
 void ItemDescriptionWindow::show() {

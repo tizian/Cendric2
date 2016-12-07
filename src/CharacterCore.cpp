@@ -438,15 +438,16 @@ const CharacterCoreData& CharacterCore::getData() const {
 }
 
 MerchantData CharacterCore::getMerchantData(const std::string& merchantID) {
+	MerchantData& data = MerchantLoader::loadMerchant(merchantID);
 	if (contains(m_data.merchantStates, merchantID)) {
-		return m_data.merchantStates.at(merchantID);
+		data.wares = m_data.merchantStates.at(merchantID);
 	}
 
-	return MerchantLoader::loadMerchant(merchantID);
+	return data;
 }
 
-void CharacterCore::setMerchantData(const std::string& merchantID, const MerchantData& data) {
-	m_data.merchantStates[merchantID] = data;
+void CharacterCore::setMerchantData(const std::string& merchantID, const std::map<std::string, int>& wares) {
+	m_data.merchantStates[merchantID] = wares;
 }
 
 void CharacterCore::addPermanentAttributes(const AttributeData& attributes) {

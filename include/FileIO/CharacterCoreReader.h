@@ -33,7 +33,7 @@ private:
 	bool readTriggersTriggered(char* start, char* end, CharacterCoreData& data) const;
 	bool readTilesExplored(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestStates(char* start, char* end, CharacterCoreData& data) const;
-	bool readMerchandState(char* start, char* end, CharacterCoreData& data) const;
+	bool readMerchantState(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const;
 	bool readQuestProgressDescription(char* start, char* end, CharacterCoreData& data) const;

@@ -369,7 +369,7 @@ bool CharacterCoreReader::readWeather(char* start, char* end, CharacterCoreData&
 	return true;
 }
 
-bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readMerchantState(char* start, char* end, CharacterCoreData& data) const {
 	char* startData;
 	char* endData = gotoNextChar(start, end, '\n');
 	endData++;
@@ -384,24 +384,6 @@ bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCor
 	id = id.substr(0, count);
 
 	startData = gotoNextChar(start, endData, ',');
-	startData++;
-
-	FractionID fraction = (FractionID)(atoi(startData));
-	if (fraction < FractionID::VOID || fraction >= FractionID::MAX) {
-		g_logger->logError("CharacterCoreReader", "FractionID not resolved " + to_string((int)fraction));
-		return false;
-	}
-
-	startData = gotoNextChar(startData, endData, ',');
-	startData++;
-
-	float multiplier = (float)(atof(startData));
-	if (multiplier < 1.f) {
-		g_logger->logError("CharacterCoreReader", "Multiplier value not allowed " + to_string(multiplier));
-		return false;
-	}
-
-	startData = gotoNextChar(startData, endData, ',');
 
 	std::map<std::string, int> wares;
 	while (startData != NULL) {
@@ -425,12 +407,7 @@ bool CharacterCoreReader::readMerchandState(char* start, char* end, CharacterCor
 		startData = gotoNextChar(startData, endData, ',');
 	}
 
-	MerchantData merchandData;
-	merchandData.wares = wares;
-	merchandData.fraction = fraction;
-	merchandData.multiplier = multiplier;
-
-	data.merchantStates.insert({ id, merchandData });
+	data.merchantStates.insert({ id, wares });
 	return true;
 }
 
@@ -1103,7 +1080,7 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, MERCHANT_STATE, strlen(MERCHANT_STATE)) == 0) {
-			noError = readMerchandState(pos, end, data);
+			noError = readMerchantState(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, SPELL_LEARNED, strlen(SPELL_LEARNED)) == 0) {

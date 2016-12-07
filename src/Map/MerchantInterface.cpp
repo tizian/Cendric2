@@ -21,7 +21,7 @@ void MerchantInterface::completeTrade() {
 	if (m_screen->getInventory() != nullptr) {
 		m_screen->getInventory()->stopTrading();
 	}
-	m_core->setMerchantData(m_merchantID, m_data);
+	m_core->setMerchantData(m_merchantID, m_data.wares);
 	m_isCancelled = true;
 }
 
@@ -49,6 +49,10 @@ void MerchantInterface::buyItem(const Item* item) {
 	if (item == nullptr) return;
 	if (m_core->getData().gold < (int)std::ceil(m_data.multiplier * item->getValue())) {
 		m_screen->setTooltipText("NotEnoughGold", COLOR_BAD, true);
+		return;
+	}
+	if (!isReputationReached(item)) {
+		m_screen->setTooltipText("NotEnoughReputation", COLOR_BAD, true);
 		return;
 	}
 	std::string id = item->getID();
@@ -94,5 +98,16 @@ const MerchantData& MerchantInterface::getMerchantData() const {
 
 const std::string& MerchantInterface::getMerchantID() const {
 	return m_merchantID;
+}
+
+int MerchantInterface::getReputation(const Item* item) const {
+	if (contains(m_data.reputation, item->getID())) {
+		return m_data.reputation.at(item->getID());
+	}
+	return 0;
+}
+
+bool MerchantInterface::isReputationReached(const Item* item) const {
+	return m_core->getReputation(m_data.fraction) >= getReputation(item);
 }
 
