@@ -992,17 +992,17 @@
   <properties>
    <property name="text" value="HoldRight"/>
   </properties>
-  <object id="65" gid="728" x="3086" y="2280" width="50" height="50">
+  <object id="65" gid="728" x="3099" y="2280" width="50" height="50">
    <properties>
     <property name="text" value="DangerCollapse"/>
    </properties>
   </object>
-  <object id="85" gid="848" x="2239" y="671.667" width="50" height="50">
+  <object id="85" gid="848" x="2249" y="675.667" width="50" height="50">
    <properties>
     <property name="text" value="NoTrespassing"/>
    </properties>
   </object>
-  <object id="86" gid="848" x="2137.67" y="924.333" width="50" height="50">
+  <object id="86" gid="848" x="2147.67" y="930.333" width="50" height="50">
    <properties>
     <property name="text" value="DeathAhead"/>
    </properties>

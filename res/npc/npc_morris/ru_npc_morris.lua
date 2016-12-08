@@ -3,7 +3,7 @@
 loadRoutine = function(R, W)
 
 	R:setTilePosition(5,11)
-	R:setReloadLocked(true)
+	R:setReloadEnabled(false)
 	
 	R:wait(3000)
 	R:goToTile(6,11)

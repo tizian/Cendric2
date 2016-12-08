@@ -316,7 +316,7 @@
 </data>
  </layer>
  <objectgroup name="sign">
-  <object id="87" gid="440" x="438" y="796" width="50" height="50">
+  <object id="87" gid="440" x="449" y="784" width="50" height="50">
    <properties>
     <property name="text" value="DangerRockfall"/>
    </properties>
