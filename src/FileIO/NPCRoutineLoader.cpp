@@ -30,6 +30,7 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("setFacingLeft", &NPCRoutineLoader::setFacingLeft)
 		.addFunction("setFacingRight", &NPCRoutineLoader::setFacingRight)
 		.addFunction("setDisposed", &NPCRoutineLoader::setDisposed)
+		.addFunction("setDisposedStep", &NPCRoutineLoader::setDisposedStep)
 		.addFunction("setTalkingActive", &NPCRoutineLoader::setTalkingActive)
 		.addFunction("setTalkingActiveForce", &NPCRoutineLoader::setTalkingActiveForce)
 		.addFunction("setTalkingEnabled", &NPCRoutineLoader::setTalkingEnabled)
@@ -136,13 +137,17 @@ void NPCRoutineLoader::setTilePositionForce(float x, float y) {
 	m_routine.getNPC()->setPosition(sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F));
 }
 
+void NPCRoutineLoader::setDisposedStep() {
+	RoutineStep step;
+	step.state = RoutineState::Disappearing;
+	m_routine.addStep(step);
+}
+
 void NPCRoutineLoader::setDisposed() {
 	if (m_isInitial) {
 		m_routine.getNPC()->setDisposed();
 		return;
 	}
-	RoutineStep step;
-	step.state = RoutineState::Disappearing;
-	m_routine.addStep(step);
+	setDisposedStep();
 }
 
