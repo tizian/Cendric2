@@ -1,0 +1,181 @@
+# dia file for dialogue for npc: npc_lloyd
+
+npc.id:npc_lloyd
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not L:isConditionFulfilled("npc_lloyd", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_HelloUnpolite
+		translation.en:Hi.
+		translation.de:Servus.
+		translation.ch:Sali du.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_HelloMediumPolite
+		translation.en:Hello, Lloyd.
+		translation.de:Hallo, Lloyd.
+		translation.ch:Hallo, Lloyd.
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_HelloPolite
+		translation.en:All hail, Commander Lloyd.
+		translation.de:Seid gegrüsst, Kommandant Lloyd.
+		translation.ch:Grüezi wohl, Kommandant Lloyd.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "talked")
+	# translation: 
+	translation.tag:DL_Lloyd_HelloUnpolite
+	translation.en:(Lloyd glares down at you, clearly not pleased) What do you want? Keep it short.
+	translation.de:(Lloyd starrt auf dich herunter, sichtlich verärgert) Was willst du? Fasse dich kurz.
+	translation.ch:(De Lloyd starrt uf dich abe, zimlich apisst) Was wetsch? Halt dich churz. 
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "talked")
+	# translation: 
+	translation.tag:DL_Lloyd_HelloUnpolite
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "talked")
+	trigger:DL:addReputationProgress("cleric", 5)
+	# translation: 
+	translation.tag:DL_Lloyd_HelloPolite
+	translation.en:(Lloyd nods to you) Hello, young mage. What brings you to me?
+	translation.de:(Lloyd nickt dir zu) Hallo, junger Magier. Was führt dich zu mir?
+	translation.ch:(De Lloyd nickt dir zue) Hallo, junge Magier. Was führt dich zu mir?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:DL:isQuestState("clerics_recommendation", "started") and DL:isQuestComplete("clerics_recommendation")
+		# translation: 
+		translation.tag:DL_Choice_RecommendationQuest
+		translation.en:I got this from Inina for you. (Give letter)
+		translation.de:Ich habe diesen Brief von Inina für dich. (Brief geben)
+		translation.ch:Ich ha de Brief vode Inina für dich. (Brief gä)
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isConditionFulfilled("npc_lloyd", "want_cleric")
+		# translation: 
+		translation.tag:DL_Choice_IWantToJoin
+		translation.en:I want to become a cleric.
+		translation.de:Ich will ein Kleriker werden.
+		translation.ch:Ich will en Kleriker werde.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:changeQuestState("clerics_recommendation", "completed")
+	trigger:DL:addReputationProgress("cleric", 5)
+	# translation: 
+	translation.tag:DL_Lloyd_ReadLetter
+	translation.en:(Lloyd reads the letter) Hm, interesting. Thank you for helping us with that problem.
+	translation.de:(Lloyd liest den Brief) Hm, interessant. Danke, dass du uns bei diesem Problem geholfen hast.
+	translation.ch:(De Lloyd list de Brief) Hm, interessant. Danke, dass üs mit dem Problem gholfe hesch.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_ReadLetter2
+	translation.en:Inina seems to think a great deal of you. She wants you to join the clerics and help her find out where that monster came from.
+	translation.de:Inina scheint ja viel von dir zu halten. Sie möchte, dass du den Klerikern beitrittst und ihr dann hilfst, herauszufinden, woher dieses Monster gekommen ist.
+	translation.ch:D'Inina schiint ja einiges vo dir z'halte. Si wett, dass du de Kleriker biitrittsch und ihre denn usefinde hilfsch, woher das Monster cho isch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "want_cleric")
+	# translation: 
+	translation.tag:DL_Lloyd_NoCleric
+	translation.en:Well, you may be a mage, but why should I trust you? Also, we don't really need new recruits at the moment.
+	translation.de:Nun, du magst zwar ein Magier sein, aber wieso sollte ich dir vertrauen? Ausserdem brauchen wir momentan nicht wirklich neue Rekruten.
+	translation.ch:Naja, du bisch zwar en Magier, aber weso söt ich dir traue? Mir bruched momentan grad eh ke neui Rekrute.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
