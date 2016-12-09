@@ -53,6 +53,6 @@ loadRoutine = function(R, W)
 
 	
 	R:wait(1000)
-	R:setDisposed()
+	R:setDisposedStep()
 	
 end	

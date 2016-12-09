@@ -6,7 +6,7 @@
   <property name="name" value="GandriaTavern"/>
   <property name="tilesetpath" value="res/map/gandriatavern/tileset_map_gandriatavern.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_gandriatavern" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
+ <tileset firstgid="1" name="tileset_map_gandriatavern" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361">
   <image source="tileset_map_gandriatavern.png" width="1000" height="1000"/>
   <tile id="206">
    <properties>
@@ -54,10 +54,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -293,12 +293,12 @@
   </object>
   <object id="170" x="400" y="650" width="100" height="50">
    <properties>
-    <property name="weather" value="res/map/gandria/gandria.tmx,70,"/>
+    <property name="weather" value="res/map/gandria/gandria.tmx,60,"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="door">
-  <object id="152" gid="421" x="600" y="500" width="50" height="50">
+  <object id="152" gid="456" x="600" y="500" width="50" height="50">
    <properties>
     <property name="key" value="ke_tavernbasement"/>
    </properties>

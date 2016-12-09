@@ -3,7 +3,11 @@
 
 *Cendric* is a 2D RPG Platformer game in which players explore a world by completing levels and quests.
 
-The game is currently in development. See http://cendric.ch for more information about its development process.
+The game is currently in development. See http://en.sfml-dev.org/forums/index.php?topic=19740 for more information about its development process.
+
+## Screenshots
+
+For the newest screenshots, check out http://cendric.ch/screenshots.
 
 ## Gameplay
 
@@ -22,9 +26,9 @@ Cendric moves through the world on a 2D map and interacts with NPCs to trade or 
 
 Pre-alpha builds are available for Windows x64, Mac and Ubuntu. However, feel free to try and compile *Cendric* on any platform.
 
-[Cendric v0.3.0b](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0b_win64.zip) (Windows x64)
+[Cendric v0.3.2](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.2_win64.zip) (Windows x64)
 
-[Cendric v0.3.0b](https://github.com/tizian/Cendric2/releases/download/v0.3.0/cendric_v0.3.0b_mac.zip) (Mac OS X)
+[Cendric v0.3.1a](https://github.com/tizian/Cendric2/releases/download/v0.3.0/cendric_v0.3.1a_mac.zip) (Mac OS X)
 
 [Cendric v0.3.0](https://github.com/tizian/Cendric2/releases/download/v0.3.0/Cendric_v0.3.0_ubuntu.tar.gz) (Ubuntu)
 

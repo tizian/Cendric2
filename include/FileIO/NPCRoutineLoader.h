@@ -23,6 +23,7 @@ public:
 	void setFacingRight();
 	void setFacingLeft();
 	void setDisposed();
+	void setDisposedStep();
 	void wait(int milliseconds);
 	void goToTile(float x, float y);
 	void setLooped(bool looped);
