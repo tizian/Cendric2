@@ -438,7 +438,7 @@ const CharacterCoreData& CharacterCore::getData() const {
 }
 
 MerchantData CharacterCore::getMerchantData(const std::string& merchantID) {
-	MerchantData&& data = MerchantLoader::loadMerchant(merchantID);
+	MerchantData data = MerchantLoader::loadMerchant(merchantID);
 	if (contains(m_data.merchantStates, merchantID)) {
 		data.wares = m_data.merchantStates.at(merchantID);
 	}
