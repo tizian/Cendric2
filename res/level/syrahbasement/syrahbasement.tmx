@@ -736,12 +736,12 @@
   </object>
  </objectgroup>
  <objectgroup name="moving platform">
-  <object id="121" gid="633" x="450" y="1100" width="50" height="50">
+  <object id="121" gid="633" x="450" y="1150" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
-    <property name="distance" value="300"/>
+    <property name="distance" value="350"/>
     <property name="size" value="1"/>
-    <property name="speed" value="70"/>
+    <property name="speed" value="80"/>
    </properties>
   </object>
   <object id="156" gid="633" x="650" y="750" width="50" height="50">
