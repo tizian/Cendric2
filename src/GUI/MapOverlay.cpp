@@ -6,7 +6,7 @@
 #include "GlobalResource.h"
 
 float MapOverlay::TOP = 30.f;
-float MapOverlay::LEFT = 30.f;
+float MapOverlay::LEFT = GUIConstants::LEFT;
 
 MapOverlay::MapOverlay(MapScreen* screen) :
 	// copy those maps
@@ -18,17 +18,20 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 
 	const Map& map = *m_screen->getWorld();
 
+	const float MAX_WIDTH = WINDOW_WIDTH - 2 * LEFT;
+	const float MAX_HEIGHT = WINDOW_HEIGHT - 2 * TOP;
+
 	sf::Vector2f mapSize(map.getWorldRect().width, map.getWorldRect().height);
 	// check out the limiting factor for our scale
-	if (mapSize.x / WINDOW_WIDTH > mapSize.y / WINDOW_HEIGHT) {
-		m_boundingBox.width = WINDOW_WIDTH - 2 * LEFT;
+	if (mapSize.x / MAX_WIDTH > mapSize.y / MAX_HEIGHT) {
+		m_boundingBox.width = MAX_WIDTH;
 		m_scale = m_boundingBox.width / mapSize.x;
 		m_boundingBox.height = m_scale * mapSize.y;
 		m_boundingBox.left = LEFT;
 		m_boundingBox.top = (WINDOW_HEIGHT - m_boundingBox.height) / 2.f;
 	}
 	else {
-		m_boundingBox.height = WINDOW_HEIGHT - 2 * TOP;
+		m_boundingBox.height = MAX_HEIGHT;
 		m_scale = m_boundingBox.height / mapSize.y;
 		m_boundingBox.width = m_scale * mapSize.x;
 		m_boundingBox.top = TOP;

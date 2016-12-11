@@ -360,7 +360,7 @@ void CharacterInfo::updateReputation() {
 	currentGuild.append(": ");
 	currentGuild.append(g_textProvider->getText(EnumNames::getFractionIDName(m_core->getData().guild)));
 	m_guild.setString(currentGuild);
-	m_guild.setPosition(xOffset, yOffset);
+	m_guild.setPosition(LEFT + (WIDTH - m_guild.getLocalBounds().width) * 0.5f, yOffset);
 	m_guild.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
@@ -369,7 +369,7 @@ void CharacterInfo::updateReputation() {
 	int texHeight = 100;
 	if (tex != nullptr)
 		m_guildSprite.setTexture(*tex);
-	m_guildSprite.setPosition(xOffset, yOffset);
+	m_guildSprite.setPosition(LEFT + (WIDTH - 100) * 0.5f, yOffset);
 	if (m_core->getData().guild == FractionID::VOID) {
 		m_guildSprite.setTextureRect(sf::IntRect());
 	}
