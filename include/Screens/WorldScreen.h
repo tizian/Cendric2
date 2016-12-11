@@ -51,6 +51,8 @@ public:
 	void notifyModifierLearned(const SpellModifier& modifier);
 	// notify reputation added
 	void notifyReputationAdded(FractionID fraction, int amount);
+	// notify guild joined
+	void notifyGuildSet(FractionID fraction);
 	// notify reputation added
 	void notifyHintAdded(const std::string& hintKey);
 	// notifies that the godmode property has changed

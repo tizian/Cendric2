@@ -46,6 +46,7 @@ public:
 	void addGold(int amount);
 	void removeGold(int amount);
 	void learnSpell(int spellID);
+	void setGuild(const std::string& guild);
 	void startLevel(const std::string& levelID, int x, int y);
 	void startMap(const std::string& mapID, int x, int y);
 	void startCutscene(const std::string& cutsceneID);

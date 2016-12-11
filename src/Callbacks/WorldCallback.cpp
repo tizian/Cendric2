@@ -44,6 +44,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("startLevel", &WorldCallback::startLevel)
 		.addFunction("startMap", &WorldCallback::startMap)
 		.addFunction("startCutscene", &WorldCallback::startCutscene)
+		.addFunction("setGuild", &WorldCallback::setGuild)
 		.addFunction("learnSpell", &WorldCallback::learnSpell)
 		// spawners
 		.addFunction("spawnNPC", &WorldCallback::spawnNPC)
@@ -167,6 +168,10 @@ void WorldCallback::removeGold(int amount) const {
 
 void WorldCallback::learnSpell(int spellID) const {
 	TriggerContent::executeTrigger(TriggerContent::learnSpell(spellID), m_screen);
+}
+
+void WorldCallback::setGuild(const std::string& guild) const {
+	TriggerContent::executeTrigger(TriggerContent::setGuild(guild), m_screen);
 }
 
 void WorldCallback::startLevel(const std::string& levelID, int x, int y) const {

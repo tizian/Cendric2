@@ -491,6 +491,10 @@ void CharacterCore::addReputation(FractionID fraction, int amount) {
 	m_data.reputationProgress.at(fraction) = std::min(100, m_data.reputationProgress.at(fraction) + amount);
 }
 
+void CharacterCore::setGuild(FractionID fraction) {
+	m_data.guild = fraction;
+}
+
 int CharacterCore::getReputation(FractionID fraction) const {
 	if (!contains(m_data.reputationProgress, fraction))
 		return 0;

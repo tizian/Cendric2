@@ -43,11 +43,10 @@ public:
 	void addGold(int amount) const;
 	void removeGold(int amount) const;
 	void learnSpell(int spellID) const;
+	void setGuild(const std::string& guild) const;
 	void startLevel(const std::string& levelID, int x, int y) const;
 	void startMap(const std::string& mapID, int x, int y) const;
 	void startCutscene(const std::string& cutsceneID) const;
-
-	// TODO commands to spawn entities
 
 	// this works only on a map
 	void spawnNPC(const std::string& npcID, int x, int y) const;

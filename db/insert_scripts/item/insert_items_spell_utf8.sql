@@ -12,6 +12,13 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_holyfire', 18);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_holyfire', 'item', 'Scroll - Holy Fire','Schriftrolle - Heiliges Feuer','Schriftrolle - Heiligs Füür', 'Pergamino - Fuego divino');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_holyfire', 'item_desc', 'Cendric summons a holy fire that burns enemies in range.','Cendric beschwört ein heiliges Feuer, das Gegner in der Nähe verbrennt.','De Cendric beschwört es heiligs Füür wo Gegner ide Nöchi verbrennt.','Cendric convoca a un fuego divino que quema a enemigos al alcance.');
 
+-- Divine Shield
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_divineshield', 'spell', 300, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_divineshield', 19);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_divineshield', 'item', 'Scroll - Divine Shield','Schriftrolle - Göttlicher Schild','Schriftrolle - Göttlichs Schild', 'Pergamino - Escudo divino');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_divineshield', 'item_desc', 'Grants a shield that enhances Cendrics resistances and heals him once.','Umhüllt Cendric mit einem Schild, der ihn einmalig heilt und für eine gewisse Dauer seine Resistenzen erhöht.','Umhüllt de Cendric mitme Schild wo ihn eimalig heilt und sini Resistenze für e gwüssi Ziit erhöht.','Otorga un escudo que aumenta la resistencia de Cendric y lo cura una vez.');
+
 -- Summon Picklock
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_unlock', 'spell', 200, 400, -1);

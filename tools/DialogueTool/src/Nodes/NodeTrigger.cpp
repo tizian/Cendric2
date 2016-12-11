@@ -1,6 +1,6 @@
 #include "Nodes/NodeTrigger.h"
 
-const char* NodeTrigger::TRIGGER_TYPES = "Change Quest State\0Add Quest Progress\0Add Quest Description\0Add Condition Progress\0Add Reputation Progress\0Add Hint\0Add Item\0Equip Item\0Remove Item\0Add Gold\0Remove Gold\0Learn Spell\0Start Level\0Start Map\0Start Cutscene\0Go To Node\0\0";
+const char* NodeTrigger::TRIGGER_TYPES = "Change Quest State\0Add Quest Progress\0Add Quest Description\0Add Condition Progress\0Add Reputation Progress\0Add Hint\0Add Item\0Equip Item\0Remove Item\0Add Gold\0Remove Gold\0Learn Spell\0Start Level\0Start Map\0Start Cutscene\0Set Guild\0Go To Node\0\0";
 
 NodeTrigger::NodeTrigger(TriggerType type_) {
 	type = type_;
@@ -43,6 +43,8 @@ std::string NodeTrigger::exportToLua() const {
 		return "DL:startMap(\"" + s1 + "\", " + std::to_string(i1) + ", " + std::to_string(i2) + ")";
 	case TriggerType::StartCutscene:
 		return "DL:startCutscene(\"" + s1 + "\")";
+	case TriggerType::SetGuild:
+		return "DL:setGuild(\"" + s1 + "\")";
 	case TriggerType::gotoNode:
 		return "DL:gotoNode(" + std::to_string(i1) + ")";
 	default:

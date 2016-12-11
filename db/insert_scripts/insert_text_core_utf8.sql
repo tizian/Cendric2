@@ -77,6 +77,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Godm
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Gold','Gold','Gold','Gold','Oro');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('GoldValue','Gold Value','Goldwert','Goldwert','Valor en oro');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Guild','Guild','Gilde','Gilde','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('GuildJoined','Guild joined','Gilde beigetreten','Gilde biitrette','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoGuild','No Guild','Keine Gilde','Kei Gilde','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Haste','Haste','Schnelligkeit','Schnelligkeit','Agilidad');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Heal','Heal','Heilung','Heilig','Sanar');

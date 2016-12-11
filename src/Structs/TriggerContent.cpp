@@ -45,6 +45,9 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 	case TriggerContentType::ReputationProgress:
 		screen->notifyReputationAdded(static_cast<FractionID>(content.i1), content.i2);
 		break;
+	case TriggerContentType::SetGuild:
+		screen->notifyGuildSet(static_cast<FractionID>(content.i1));
+		break;
 	case TriggerContentType::MapEntry:
 		screen->exitWorld();
 		screen->getCharacterCore()->setMap(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);
@@ -227,6 +230,17 @@ TriggerContent TriggerContent::learnSpell(int id) {
 	}
 	TriggerContent content(TriggerContentType::LearnSpell);
 	content.i1 = id;
+	return content;
+}
+
+TriggerContent TriggerContent::setGuild(const std::string& guild) {
+	FractionID fractionID = resolveFractionID(guild);
+	if (fractionID == FractionID::VOID) {
+		g_logger->logError("TriggerContent", "Cannot set guild, guild id not recognized: " + guild);
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::SetGuild);
+	content.i1 = static_cast<int>(fractionID);
 	return content;
 }
 

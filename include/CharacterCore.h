@@ -146,6 +146,8 @@ public:
 	const WeatherData* getWeather(const std::string& worldID) const;
 	// adds reputation to the corresponding fraction id
 	void addReputation(FractionID fraction, int amount);
+	// sets a guild
+	void setGuild(FractionID fraction);
 	// queries the reputation for the corresponding fraction
 	int getReputation(FractionID fraction) const;
 	// is this a new character core? (new game)

@@ -8,11 +8,21 @@ npc.id:npc_lloyd
 	[
 		# Link node, tag is next tag
 		tag:3
-		condition:not L:isConditionFulfilled("npc_lloyd", "talked")
+		condition:not DL:isConditionFulfilled("npc_lloyd", "talked")
 	]
 	[
 		# Link node, tag is next tag
 		tag:1
+		condition:DL:isQuestState("further_investigation", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:not DL:isConditionFulfilled("npc_lloyd", "guild")
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
 	]
 }
 {2
@@ -47,7 +57,7 @@ npc.id:npc_lloyd
 	]
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
@@ -62,8 +72,8 @@ npc.id:npc_lloyd
 	trigger:DL:addConditionProgress("npc_lloyd", "talked")
 	# translation: 
 	translation.tag:DL_Lloyd_HelloUnpolite
-	translation.en:(Lloyd glares down at you, clearly not pleased) What do you want? Keep it short.
-	translation.de:(Lloyd starrt auf dich herunter, sichtlich verärgert) Was willst du? Fasse dich kurz.
+	translation.en:(Lloyd glares down at you, clearly displeased) What do you want? Keep it short.
+	translation.de:(Lloyd starrt auf dich herunter, sichtlich verärgert) Was willst du? Fass dich kurz.
 	translation.ch:(De Lloyd starrt uf dich abe, zimlich apisst) Was wetsch? Halt dich churz. 
 	[
 		# Link node, tag is next tag
@@ -161,6 +171,21 @@ npc.id:npc_lloyd
 	translation.ch:D'Inina schiint ja einiges vo dir z'halte. Si wett, dass du de Kleriker biitrittsch und ihre denn usefinde hilfsch, woher das Monster cho isch.
 	[
 		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:changeQuestState("further_investigation", "started")
+	# translation: 
+	translation.tag:DL_Lloyd_ReadLetter3
+	translation.en:You two should go back to the place where you defeated that monster and look for hints.
+	translation.de:Ihr zwei solltet zurück an den Ort, wo du das Monster besiegt hast, um nach Hinweisen zu suchen.
+	translation.ch:Ihr zwei söted zrugg a de Ort, wo du dem Viech de Gar us gmach hesch, zum nach Hiiwis sueche.
+	[
+		# Link node, tag is next tag
 		tag:-2
 	]
 }
@@ -171,11 +196,189 @@ npc.id:npc_lloyd
 	trigger:DL:addConditionProgress("npc_lloyd", "want_cleric")
 	# translation: 
 	translation.tag:DL_Lloyd_NoCleric
-	translation.en:Well, you may be a mage, but why should I trust you? Also, we don't really need new recruits at the moment.
-	translation.de:Nun, du magst zwar ein Magier sein, aber wieso sollte ich dir vertrauen? Ausserdem brauchen wir momentan nicht wirklich neue Rekruten.
-	translation.ch:Naja, du bisch zwar en Magier, aber weso söt ich dir traue? Mir bruched momentan grad eh ke neui Rekrute.
+	translation.en:Well, you may be a mage, but why should I trust you? We can't just take anyone.
+	translation.de:Nun, du magst zwar ein Magier sein, aber wieso sollte ich dir vertrauen? Wir können nicht einfach jeden aufnehmen.
+	translation.ch:Naja, du bisch zwar en Magier, aber weso söt ich dir traue? Mir chönd nid jede x-beliebig bi üs ufne.
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{2
+	# [10] Choice Node
+	tag:10
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:not DL:isConditionFulfilled("npc_lloyd", "one_guild")
+		# translation: 
+		translation.tag:DL_Choice_OneGuild
+		translation.en:What if I want to join another guild?
+		translation.de:Was ist, wenn ich einer anderen Gilde beitreten will?
+		translation.ch:Was isch, weni enere andere Gilde biitrette wet?
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:not DL:isConditionFulfilled("npc_lloyd", "what_if_join")
+		# translation: 
+		translation.tag:DL_Choice_WhatIfIJoin
+		translation.en:What happens if I join you?
+		translation.de:Was passiert, wenn ich euch beitrete?
+		translation.ch:Was passiert, weni eu biitrete?
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:DL:getGuild() == "void"
+		# translation: 
+		translation.tag:DL_Choice_IWantToJoin
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:getGuild() ~= "void" 
+		# translation: 
+		translation.tag:DL_Choice_IWantToJoin
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "one_guild")
+	# translation: 
+	translation.tag:DL_Lloyd_OneGuild
+	translation.en:That's for you to decide. But make your decision carefully, as you may only join one guild.
+	translation.de:Das musst du selbst wissen. Aber entscheide überlegt, da du nur einer Gilde beitreten kannst.
+	translation.ch:Da muesch selber wüsse. Aber entscheid dich guet, well du nur zu einere Gilde ghöre chasch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "what_if_join")
+	# translation: 
+	translation.tag:DL_Lloyd_WhatIfIJoin
+	translation.en:You'll get to learn divine magic. Also, we'll give you a job that will bring you gold and honour.
+	translation.de:Du würdest heilige Magie erlernen. Ausserdem kannst du Aufträge für uns erledigen, die dir Gold und Ehre einbringen.
+	translation.ch:Du würsch heiligi Magie lerne. Usserdem chasch Ufträg für üs erledige, wo der Gold und Ehr gend.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_JoinQuestion
+	translation.en:Alright, young mage. If you want to join the order of the clerics, you'll have to swear the oath of the Eternal Light.
+	translation.de:Gut, junger Magier. Wenn du dem Orden der Kleriker beitreten willst, musst du den Eid des Ewigen Lichts ablegen.
+	translation.ch:Guet, junge Magier. Wenn du em Orde vode Kleriker bitrette wetsch, muesch de Eid vom Ewige Liecht ablege.
+	[
+		# Link node, tag is next tag
+		tag:18
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_JoinQuestion2
+	translation.en:Promise to use your magic to heal and protect the innocent and to punish the ones who do not follow the path of the light.
+	translation.de:Versprich, dass du deine Magie einsetzen wirst, um die Unschuldigen zu schützen und zu heilen und diejenigen zu bestrafen, die vom Pfad des Lichts abgekommen sind.
+	translation.ch:Versprich, dass dini Magie bruche wirsch, zum di Unschuldige heile und beschütze und die zbestrafe, wo vom Pfad vom Liecht abcho sind.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{2
+	# [13] Choice Node
+	tag:13
+	[
+		# Link node, tag is next tag
+		tag:14
+		# translation: 
+		translation.tag:DL_Choice_Promise
+		translation.en:I promise. [JOIN THE CLERICS]
+		translation.de:Ich verspreche es. [DEN KLERIKERN BEITRETEN]
+		translation.ch:Ich versprichs. [DE KLERIKER BIITRETE]
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_Rethink
+		translation.en:I need more time to think about this.
+		translation.de:Ich muss das nochmal überdenken.
+		translation.ch:Ich mun das nomol überdenke.
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "guild")
+	trigger:DL:addReputationProgress("cleric", 10)
+	trigger:DL:setGuild("cleric")
+	# translation: 
+	translation.tag:DL_Lloyd_JointClerics
+	translation.en:I now declare you a mage of the Order of the Clerics. May the Eternal Light guide thee. 
+	translation.de:Ich mache dich nun zu einem Magier des Ordens der Kleriker. Möge das Ewige Licht dich führen.
+	translation.ch:Ich mach dich ez zumne Magier vom Orde vode Kleriker. Es Ewige Liecht söll dich führe.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "guild")
+	# translation: 
+	translation.tag:DL_Lloyd_AnotherGuild
+	translation.en:I'm sorry, but I see that you have already chosen another path. I still hope you'll use your magic for to do good. 
+	translation.de:Tut mir leid, aber ich sehe, dass du bereits einen anderen Weg gewählt hast. Ich hoffe, du benutzt deine Magie dennoch für das Gute.
+	translation.ch:Sorry, aber ich gse dass du scho en andere Weg gwählt hesch. Ich hoff dass du dini Magie trotzdem fürs Guete bruchsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [17] Choice Node
+	tag:17
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }

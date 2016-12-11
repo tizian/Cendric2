@@ -151,6 +151,16 @@ void ProgressLog::addReputationAdded(FractionID fraction, int amount) {
 	calculatePositions();
 }
 
+void ProgressLog::addGuildJoined(FractionID fraction) {
+	std::string text = g_textProvider->getText("GuildJoined");
+	text.append(": ");
+	text.append(g_textProvider->getText(EnumNames::getFractionIDName(fraction)));
+
+	m_logTexts.push_back(ProgressLogEntry::createReputationEntry(text, COLOR_NEUTRAL));
+
+	calculatePositions();
+}
+
 void ProgressLog::setYOffset(float yOffset) {
 	m_yOffset = yOffset;
 }

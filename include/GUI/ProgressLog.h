@@ -73,6 +73,7 @@ public:
 	void addQuestStateChanged(const std::string& questID, QuestState state);
 	void addQuestDescriptionAdded(const std::string& questID);
 	void addReputationAdded(FractionID fraction, int amount);
+	void addGuildJoined(FractionID fraction);
 
 	void setYOffset(float yOffset);
 	void setVisible(bool visible);

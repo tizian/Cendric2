@@ -22,6 +22,7 @@ enum class TriggerContentType {
 	LearnSpell,
 	LearnModifier,
 	Weather,
+	SetGuild,
 	MAX,
 };
 
@@ -42,7 +43,7 @@ struct TriggerContent {
 	// executes the trigger on the given world screen
 	static void executeTrigger(const TriggerContent& content, WorldScreen* screen);
 
-	// creates trigger content for the given events. Returns nullptr if something fails.
+	// creates trigger content for the given events. 
 	static TriggerContent changeQuestState(const std::string& questID, const std::string& state);
 	static TriggerContent addQuestProgress(const std::string& questID, const std::string& progress);
 	static TriggerContent addQuestDescription(const std::string& questID, int descriptionID);
@@ -55,6 +56,7 @@ struct TriggerContent {
 	static TriggerContent addGold(int amount);
 	static TriggerContent removeGold(int amount);
 	static TriggerContent learnSpell(int spellID);
+	static TriggerContent setGuild(const std::string& guild);
 	static TriggerContent startLevel(const std::string& levelID, int x, int y);
 	static TriggerContent startMap(const std::string& mapID, int x, int y);
 	static TriggerContent startCutscene(const std::string& cutsceneID);

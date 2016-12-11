@@ -77,9 +77,29 @@ npc.id:npc_thiran
 	[
 		# Link node, tag is next tag
 		tag:6
-		condition:DL:getGuild() == "cleric" and DL:getReputation("cleric") >= 30 and not DL:isConditionFulfilled("npc_thiran", "first_spell")
+		condition:DL:getGuild() == "cleric" and not DL:isConditionFulfilled("npc_thiran", "first_spell")
 		# translation: 
 		translation.tag:DL_Choice_Learn
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
+		# translation: 
+		translation.tag:DL_Choice_SecondSpell
+		translation.en:Can you teach me more spells?
+		translation.de:Kannst du mir noch mehr Zauber beibringen?
+		translation.ch:Chasch mer na me Zauber bibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
+		# translation: 
+		translation.tag:DL_Choice_SecondSpell
 		translation.en:
 		translation.de:
 		translation.ch:
@@ -127,6 +147,36 @@ npc.id:npc_thiran
 	translation.en:Yes, as you've chosen the way of the Eternal Light, I can grant you access to its magic. Here, take this scroll and learn how to unleash the wrath of light.
 	translation.de:Ja, da du den Weg des Ewigen Lichts eingeschlagen hast, kann ich dir Zugang zu seiner Magie gewähren. Hier, nimm diese Schriftrolle und lerne, wie man den Zorn des Lichts entfesselt.
 	translation.ch:Ja, well du de Weg vom Ewige Liecht igschlage hesch chani der sini Magie  bibringe. Da, nimm die Schriftrolle und lern weme de Zorn vom Liecht entfesslet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Thiran_NoFurtherSpell
+	translation.en:Not yet. I'm going to teach you another spell when you've worked for us.
+	translation.de:Noch nicht. Ich werde dir einen weiteren Zauber beibringen, wenn du für uns gearbeitet hast.
+	translation.ch:Nonid. Ich cha der en negste Zauber zeige wennd chli für üs gschaffet hesch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addItem("sp_divineshield", 1)
+	trigger:DL:addConditionProgress("npc_thiran", "second_spell")
+	# translation: 
+	translation.tag:DL_Thiran_SecondSpell
+	translation.en:Yes, you've proven yourself worthy to learn more divine magic. Here you go.
+	translation.de:Ja, du hast dich als würdig erwiesen um mehr heilige Magie zu erlernen. Hier, nimm.
+	translation.ch:Ja, du hesch dich als würdig erwise zum me heiligi Magie lerne. Da, nimm.
 	[
 		# Link node, tag is next tag
 		tag:-2

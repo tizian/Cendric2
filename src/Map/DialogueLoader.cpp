@@ -49,6 +49,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("startMap", &DialogueLoader::startMap)
 		.addFunction("startCutscene", &DialogueLoader::startCutscene)
 		.addFunction("learnSpell", &DialogueLoader::learnSpell)
+		.addFunction("setGuild", &DialogueLoader::setGuild)
 		.addFunction("gotoNode", &DialogueLoader::gotoNode)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
 		.addFunction("addNode", &DialogueLoader::addNode)
@@ -207,6 +208,16 @@ void DialogueLoader::learnSpell(int id) {
 		return;
 	}
 	TriggerContent content = TriggerContent::learnSpell(id);
+	if (content.isValid()) m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::setGuild(const std::string& guild) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot join guild: no node created.");
+		return;
+	}
+
+	TriggerContent content = TriggerContent::setGuild(guild);
 	if (content.isValid()) m_currentNode->content.push_back(content);
 }
 

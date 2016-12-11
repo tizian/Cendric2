@@ -162,6 +162,16 @@ void WorldScreen::notifyReputationAdded(FractionID fraction, int amount) {
 	m_interface->reloadCharacterInfo();
 }
 
+void WorldScreen::notifyGuildSet(FractionID fraction) {
+	if (fraction == FractionID::VOID || getCharacterCore()->getData().guild == fraction) return;
+	getCharacterCore()->setGuild(fraction);
+	m_progressLog->addGuildJoined(fraction);
+	// TODO [tiz] here!
+	//addScreenOverlay(ScreenOverlay::createGuildJoinedOverlay(fraction));
+
+	m_interface->reloadCharacterInfo();
+}
+
 void WorldScreen::notifyHintAdded(const std::string& hintKey) {
 	addScreenOverlay(ScreenOverlay::createHintScreenOverlay(hintKey));
 	getCharacterCore()->learnHint(hintKey);

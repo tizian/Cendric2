@@ -21,6 +21,7 @@ enum class TriggerType {
 	StartLevel,
 	StartMap,
 	StartCutscene,
+	SetGuild,
 	gotoNode,
 	MAX
 };
