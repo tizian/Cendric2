@@ -35,6 +35,8 @@ item.id:eq_head_divinet2,1
 item.id:eq_head_divinet3,1
 item.id:eq_head_necrot3,1
 item.id:eq_head_twilightt1,1
+item.id:eq_head_twilightt2,1
+item.id:eq_head_twilightt3,1
 item.id:eq_crown,1
 item.id:eq_huntershat,1
 item.id:eq_ironring,1

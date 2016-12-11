@@ -206,7 +206,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet1', 'item', 'Circlet of the Recruit','Reif des Rekruten','Reif vom Rekrute');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet1', 'item_desc', 'Simple but elegant.','Schlicht aber elegant.','Schlicht aber elegant.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet1', 'eq_head', 50, 500, 100);
-INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet1', 8, 6, 5, 6, 8, 3, 6);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet1', 5, 4, 1, 4, 4, 3, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_divinet1', 'res/assets/equipment/head/spritesheet_head_divinet1.png', 'res/assets/equipment/head/spritesheet_map_head_divinet1.png');
 
 -- Divine T2 Head
@@ -214,7 +214,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet2', 'item', 'Circlet of the Order','Reif des Ordens','Reif vom Orde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet2', 'item_desc', 'Wearing this headpiece shows devotion to the Eternal Light.','Diesen Reif zu tragen zeigt Hingabe zum Ewigen Licht.','De Reif z''träge zeigt, dasme em Ewige Liecht hiigä isch.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet2', 'eq_head', 100, 500, 200);
-INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet2', 15, 12, 10, 12, 16, 6, 12);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet2', 10, 8, 2, 8, 8, 6, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_divinet2', 'res/assets/equipment/head/spritesheet_head_divinet2.png', 'res/assets/equipment/head/spritesheet_map_head_divinet2.png');
 
 -- Divine T3 Head
@@ -222,8 +222,32 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item', 'Circlet of the Enlighted','Reif des Erleuchteten','Reif vom Erlüüchtete');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item_desc', 'The majestic wings give the wearer of this headpiece a sublime appearance.','Die majestätischen Flügel lassen den Träger dieses Reifs erhaben wirken.','Di majestätische Flügel lönd de Träger vo dem Reif erhabe würke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet3', 'eq_head', 150, 500, 400);
-INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet3', 30, 24, 20, 24, 32, 12, 24);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet3', 20, 16, 4, 15, 15, 12, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_divinet3', 'res/assets/equipment/head/spritesheet_head_divinet3.png', 'res/assets/equipment/head/spritesheet_map_head_divinet3.png');
+
+-- Twilight T1 Head
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt1', 'item', 'Headband of the Prowler','Stirnband des Herumtreibers','Streuner-Stirnband');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt1', 'item_desc', 'Worn by daredevils and sneaky thieves.','Wird gerne von Draufgängern und hinterhältigen Dieben getragen.','Wird gern vo Drufgänger und schliichigem Diebesgsindel treit.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt1', 'eq_head', 100, 250, 100);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_head_twilightt1', 4, 5, 2, 5, 3, 2, 5);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_twilightt1', 'res/assets/equipment/head/spritesheet_head_twilightt1.png', 'res/assets/equipment/head/spritesheet_map_head_twilightt1.png');
+
+-- Twilight T2 Head
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt2', 'item', 'Mask of the Marauder','Maske des Plünderers','Plünderer-Maske');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt2', 'item_desc', 'Perfect if one doesn''t want to be recognized.','Perfekt wenn man nicht erkannt werden will.','Perfekt wenme nid erkennt werde wett.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt2', 'eq_head', 600, 400, 200);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_head_twilightt2', 8, 8, 4, 10, 6, 5, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_twilightt2', 'res/assets/equipment/head/spritesheet_head_twilightt2.png', 'res/assets/equipment/head/spritesheet_map_head_twilightt2.png');
+
+-- Twilight T3 Head
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt3', 'item', 'Hood of the Shadow Stalker','Kapuze des Schattenläufers','Schatteläufer-Kapuze');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt3', 'item_desc', 'This hood is only worn by the most talented thieves of the guild.','Diese Kapuze wird nur von den talentiertesten Dieben der Gilde getragen.','Die Kabuze wird nur vode talentiertiste Diebe vode Gilde treit.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt3', 'eq_head', 600, 450, 400);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_head_twilightt3', 15, 10, 8, 20, 12, 15, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_twilightt3', 'res/assets/equipment/head/spritesheet_head_twilightt3.png', 'res/assets/equipment/head/spritesheet_map_head_twilightt3.png');
 
 -- Crown
 
@@ -272,14 +296,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_huntershat', 'eq_head', 50, 250, 20);
 INSERT INTO item_attribute (item_id, haste, critical, res_light, res_physical, dmg_physical) values ('eq_huntershat', 2, 2, 10, 3, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_huntershat', 'res/assets/equipment/head/spritesheet_head_huntershat.png', 'res/assets/equipment/head/spritesheet_map_head_huntershat.png');
-
--- Twilight T1 Head
-
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt1', 'item', 'Blue Headband','Blaues Stirnband','Blaus Stirnband');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_twilightt1', 'item_desc', 'Worn by daredevils and sneaky thieves.','Wird gerne von Draufgängern und hinterhältigen Dieben getragen.','Wird gern vo Drufgänger und schliichigem Diebesgsindel treit.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt1', 'eq_head', 100, 250, 30);
-INSERT INTO item_attribute (item_id, haste, critical, res_fire) values ('eq_head_twilightt1', 3, 2, 5);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_twilightt1', 'res/assets/equipment/head/spritesheet_head_twilightt1.png', 'res/assets/equipment/head/spritesheet_map_head_twilightt1.png');
 
 -- Ruby Ring
 
