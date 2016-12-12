@@ -2,10 +2,9 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="50" tileheight="50" nextobjectid="21">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_zeff/layer_inf.png"/>
+  <property name="bosslevel" value=""/>
   <property name="dimming" value="0.5"/>
   <property name="name" value="BossZeff"/>
-  <property name="onlose" value="map,res/map/meadows/meadows.tmx,1060,1025"/>
-  <property name="onwin" value="map,res/map/meadows/meadows.tmx,1060,1025"/>
   <property name="tilesetpath" value="res/level/boss_zeff/tileset_level_boss_zeff.png"/>
   <property name="weather" value="rain"/>
  </properties>

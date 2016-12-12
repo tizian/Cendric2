@@ -23,6 +23,8 @@ enum class TriggerContentType {
 	LearnModifier,
 	Weather,
 	SetGuild,
+	SetLevel,
+	SetMap,
 	MAX,
 };
 
@@ -59,5 +61,7 @@ struct TriggerContent {
 	static TriggerContent setGuild(const std::string& guild);
 	static TriggerContent startLevel(const std::string& levelID, int x, int y);
 	static TriggerContent startMap(const std::string& mapID, int x, int y);
+	static TriggerContent setLevel(const std::string& levelID, int x, int y);
+	static TriggerContent setMap(const std::string& mapID, int x, int y);
 	static TriggerContent startCutscene(const std::string& cutsceneID);
 };

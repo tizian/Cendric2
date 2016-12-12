@@ -14,7 +14,6 @@
 #include "Structs/JumpingTileData.h"
 #include "Structs/SignData.h"
 #include "Structs/LadderTileData.h"
-#include "Structs/BossLevelData.h"
 #include "Structs/DoorData.h"
 
 struct LevelData : WorldData {
@@ -32,6 +31,6 @@ struct LevelData : WorldData {
 	std::vector<LadderTileData> ladderTiles;
 	std::vector<DoorData> doors;
 
-	BossLevelData bossLevelData;
+	bool isBossLevel = false;
 	bool isObserved = false;
 };

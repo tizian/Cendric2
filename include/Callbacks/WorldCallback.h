@@ -46,6 +46,8 @@ public:
 	void setGuild(const std::string& guild) const;
 	void startLevel(const std::string& levelID, int x, int y) const;
 	void startMap(const std::string& mapID, int x, int y) const;
+	void setLevel(const std::string& levelID, int x, int y) const;
+	void setMap(const std::string& mapID, int x, int y) const;
 	void startCutscene(const std::string& cutsceneID) const;
 
 	// this works only on a map

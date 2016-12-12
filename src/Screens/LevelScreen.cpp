@@ -36,17 +36,6 @@ void LevelScreen::load() {
 	dynamic_cast<LevelInterface*>(m_interface)->setPermanentCore(m_characterCore);
 	updateMonitoredQuestItems();
 
-	// handle boss level
-	const BossLevelData& data = m_currentLevel.getWorldData()->bossLevelData;
-	if (data.isBossLevel) {
-		if (data.isOnLoseLevel) {
-			m_characterCore->setLevel(data.onLosePosition, data.onLoseWorld);
-		}
-		else {
-			m_characterCore->setMap(data.onLosePosition, data.onLoseWorld);
-		}
-	}
-
 	m_resumeButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
 	m_resumeButton->setVisible(false);
@@ -127,7 +116,7 @@ void LevelScreen::quicksave() {
 
 void LevelScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(),
-		m_currentLevel.getWorldData()->bossLevelData.isBossLevel,
+		m_currentLevel.getWorldData()->isBossLevel,
 		m_currentLevel.getWorldData()->isObserved));
 }
 
@@ -264,8 +253,8 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 
 		m_resumeButton->setVisible(m_isPaused);
 		m_backToMenuButton->setVisible(m_isPaused);
-		m_backToMapButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->bossLevelData.isBossLevel);
-		m_retryButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->bossLevelData.isBossLevel);
+		m_backToMapButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->isBossLevel);
+		m_retryButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->isBossLevel);
 	}
 }
 
@@ -368,13 +357,7 @@ void LevelScreen::handleBossDefeated(const sf::Time& frameTime) {
 	updateTime(m_bossDefeatedWaitTime, frameTime);
 	if (m_bossDefeatedWaitTime == sf::Time::Zero) {
 
-		const BossLevelData& data = getWorldData()->bossLevelData;
-		if (data.isOnWinLevel) {
-			m_characterCore->setLevel(data.onWinPosition, data.onWinWorld);
-		}
-		else {
-			m_characterCore->setMap(data.onWinPosition, data.onWinWorld);
-		}
+		// TODO set!
 
 		onBackToCheckpoint();
 	}

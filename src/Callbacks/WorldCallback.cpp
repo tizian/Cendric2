@@ -43,6 +43,8 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("removeGold", &WorldCallback::removeGold)
 		.addFunction("startLevel", &WorldCallback::startLevel)
 		.addFunction("startMap", &WorldCallback::startMap)
+		.addFunction("setLevel", &WorldCallback::setLevel)
+		.addFunction("setMap", &WorldCallback::setMap)
 		.addFunction("startCutscene", &WorldCallback::startCutscene)
 		.addFunction("setGuild", &WorldCallback::setGuild)
 		.addFunction("learnSpell", &WorldCallback::learnSpell)
@@ -182,6 +184,14 @@ void WorldCallback::startMap(const std::string& mapID, int x, int y) const {
 	TriggerContent::executeTrigger(TriggerContent::startMap(mapID, x, y), m_screen);
 }
 
+void WorldCallback::setLevel(const std::string& levelID, int x, int y) const {
+	TriggerContent::executeTrigger(TriggerContent::setLevel(levelID, x, y), m_screen);
+}
+
+void WorldCallback::setMap(const std::string& mapID, int x, int y) const {
+	TriggerContent::executeTrigger(TriggerContent::setMap(mapID, x, y), m_screen);
+}
+
 void WorldCallback::startCutscene(const std::string& cutsceneID) const {
 	TriggerContent::executeTrigger(TriggerContent::startCutscene(cutsceneID), m_screen);
 }
@@ -240,6 +250,3 @@ void WorldCallback::spawnEnemy(int enemyID, int x, int y) const {
 	
 	levelScreen->addObject(enemy);
 }
-
-
-

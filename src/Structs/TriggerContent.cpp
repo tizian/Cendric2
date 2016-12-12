@@ -58,6 +58,12 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		screen->getCharacterCore()->setLevel(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);
 		screen->setNextScreen(new LoadingScreen(screen->getCharacterCore()));
 		break;
+	case TriggerContentType::SetMap:
+		screen->getCharacterCore()->setMap(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);
+		break;
+	case TriggerContentType::SetLevel:
+		screen->getCharacterCore()->setLevel(sf::Vector2f(static_cast<float>(content.i1), static_cast<float>(content.i2)), content.s1);
+		break;
 	case TriggerContentType::Cutscene:
 		screen->exitWorld();
 		screen->setNextScreen(new CutsceneScreen(screen->getCharacterCore(), content.s1));
@@ -262,6 +268,30 @@ TriggerContent TriggerContent::startMap(const std::string& mapID, int x, int y) 
 		return TriggerContent();
 	}
 	TriggerContent content(TriggerContentType::MapEntry);
+	content.s1 = mapID;
+	content.i1 = x;
+	content.i2 = y;
+	return content;
+}
+
+TriggerContent TriggerContent::setLevel(const std::string& levelID, int x, int y) {
+	if (levelID.empty() || x <= 0 || y <= 0) {
+		g_logger->logError("TriggerContent", "Level ID cannot be empty and the spawn position (x and y) must be > 0");
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::SetLevel);
+	content.s1 = levelID;
+	content.i1 = x;
+	content.i2 = y;
+	return content;
+}
+
+TriggerContent TriggerContent::setMap(const std::string& mapID, int x, int y) {
+	if (mapID.empty() || x <= 0 || y <= 0) {
+		g_logger->logError("TriggerContent", "Map ID cannot be empty and the spawn position (x and y) must be > 0");
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::SetMap);
 	content.s1 = mapID;
 	content.i1 = x;
 	content.i2 = y;

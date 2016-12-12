@@ -263,7 +263,7 @@ progress.condition:trigger,tutorial_started
 # guild:
 guild:NoGuild
 # reputation progress:
-reputation.progress:cleric,25
+reputation.progress:cleric,20
 reputation.progress:thief,15
 # merchant states:
 merchant.state:npc_harek,eq_ironring,1,we_claw,1,we_pickaxe,1,we_rustysword,2,we_simplesword,1
