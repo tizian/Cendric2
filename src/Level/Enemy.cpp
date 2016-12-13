@@ -249,8 +249,8 @@ void Enemy::setFleeing() {
 }
 
 void Enemy::setLoot(const std::map<string, int>& items, int gold) {
-	m_lootableItems = items;
-	m_lootableGold = gold;
+	m_reward.lootableItems = items;
+	m_reward.lootableGold = gold;
 	delete m_lootWindow;
 	m_lootWindow = nullptr;
 	if (items.empty() && gold <= 0) return;
@@ -259,11 +259,11 @@ void Enemy::setLoot(const std::map<string, int>& items, int gold) {
 }
 
 void Enemy::addQuestTarget(const std::pair<std::string, std::string>& questtarget) {
-	m_questTargets.push_back(questtarget);
+	m_reward.questTargets.push_back(questtarget);
 }
 
-void Enemy::setQuestCondition(const std::pair<std::string, std::string>& questcondition) {
-	m_questCondition = questcondition;
+void Enemy::addQuestCondition(const std::pair<std::string, std::string>& questcondition) {
+	m_reward.questConditions.push_back(questcondition);
 }
 
 void Enemy::setObjectID(int id) {
@@ -328,8 +328,8 @@ void Enemy::onMouseOver() {
 
 void Enemy::loot() {
 	if (m_isLooted) return;
-	m_mainChar->lootItems(m_lootableItems);
-	m_mainChar->addGold(m_lootableGold);
+	m_mainChar->lootItems(m_reward.lootableItems);
+	m_mainChar->addGold(m_reward.lootableGold);
 	notifyLooted();
 	setDisposed();
 }
@@ -389,14 +389,10 @@ void Enemy::setDead() {
 	}
 
 	if (m_isBoss) {
-		// loot (but without set disposed)
-		m_mainChar->lootItems(m_lootableItems);
-		m_mainChar->addGold(m_lootableGold);
-		notifyLooted();
+		m_isLooted = true;
 		m_interactComponent->setInteractable(false);
 
-		// TODO: what if we have multiple bosses?
-		dynamic_cast<LevelScreen*>(m_screen)->notifyBossKilled(m_lootableItems, m_lootableGold);
+		dynamic_cast<LevelScreen*>(m_screen)->notifyBossKilled(m_reward);
 	}
 	else {
 		m_interactComponent->setInteractable(true);
@@ -411,13 +407,11 @@ void Enemy::notifyLooted() {
 void Enemy::notifyKilled() {
 	if (m_screen->getCharacterCore()->isEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID)) return;
 	m_screen->getCharacterCore()->setEnemyKilled(m_mainChar->getLevel()->getID(), m_objectID);
-	for (auto& target : m_questTargets) {
-		if (!target.first.empty()) {
-			dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(target.first, target.second);
-		}
+	for (auto& target : m_reward.questTargets) {
+		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestTargetKilled(target.first, target.second);
 	}
-	if (!m_questCondition.first.empty()) {
-		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestConditionFulfilled(m_questCondition.first, m_questCondition.second);
+	for (auto& condition : m_reward.questConditions) {
+		dynamic_cast<LevelScreen*>(m_screen)->notifyQuestConditionFulfilled(condition.first, condition.second);
 	}
 }
 

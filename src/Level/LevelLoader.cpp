@@ -294,7 +294,7 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 		
 		// set quest condition
 		if (!it.questCondition.first.empty()) {
-			enemy->setQuestCondition(it.questCondition);
+			enemy->addQuestCondition(it.questCondition);
 		}
 
 		// calculate loot.

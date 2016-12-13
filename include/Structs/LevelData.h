@@ -31,6 +31,7 @@ struct LevelData : WorldData {
 	std::vector<LadderTileData> ladderTiles;
 	std::vector<DoorData> doors;
 
+	std::string bossLevelPath;
 	bool isBossLevel = false;
 	bool isObserved = false;
 };

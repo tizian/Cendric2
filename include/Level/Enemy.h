@@ -21,6 +21,18 @@ class EnemyAttackingBehavior;
 class ScriptedBehavior;
 class InteractComponent;
 
+// the reward the player gets when this enemy is killed.
+// includes loot and quest conditions.
+struct EnemyReward {
+	// quest targets for this enemy
+	std::vector<std::pair<std::string, std::string>> questTargets;
+	// is this enemies death a condition for a quest?
+	std::vector<std::pair<std::string, std::string>> questConditions;
+	// lootable items 
+	std::map<std::string, int> lootableItems;
+	int lootableGold = 0;
+};
+
 // An enemy in a level
 class Enemy : public virtual LevelMovableGameObject {
 public:
@@ -40,7 +52,7 @@ public:
 	void addDamageOverTime(DamageOverTimeData& data) override;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void addQuestTarget(const std::pair<std::string, std::string>& questtarget);
-	void setQuestCondition(const std::pair<std::string, std::string>& questtarget);
+	void addQuestCondition(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
 	void setBoss(bool value);
 	void setScriptedBehavior(const std::string& luaPath);
@@ -141,19 +153,12 @@ private:
 	sf::RectangleShape m_hpBar;
 	static const float HP_BAR_HEIGHT;
 
-	// lootable items 
-	std::map<std::string, int> m_lootableItems;
-	int m_lootableGold;
 	LootWindow* m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
 
-	// quest targets for this enemy
-	std::vector<std::pair<std::string, std::string>> m_questTargets;
-	// is this enemies death a condition for a quest?
-	std::pair<std::string, std::string> m_questCondition;
-
 	// the enemy can only be looted if the main char is in this range
 	static const float PICKUP_RANGE;
+	EnemyReward m_reward;
 
 	EnemyBuffBar* m_buffBar = nullptr;
 

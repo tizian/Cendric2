@@ -2,8 +2,6 @@
 #include "Screens/LevelScreen.h"
 #include "Level/DynamicTiles/MovingTile.h"
 
-using namespace std;
-
 Level::Level() : World() {
 	m_worldData = &m_levelData;
 	m_camera = new SpeedupPullCamera();
@@ -22,6 +20,7 @@ Level::Level() : World() {
 
 Level::~Level() {
 	delete m_camera;
+	delete m_bossLevel;
 }
 
 void Level::dispose() {
@@ -43,6 +42,12 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 	m_levelData.id = id;
 	if (!reader.readLevel(id, m_levelData, m_screen->getCharacterCore())) {
 		return false;
+	}
+	if (m_levelData.isBossLevel) {
+		m_bossLevel = new BossLevel(screen);
+		if (!m_bossLevel->loadLua(m_levelData.bossLevelPath)) {
+			return false;
+		}
 	}
 
 	// adjust weather
@@ -283,5 +288,16 @@ void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::Float
 		if (tileBB.intersects(checkBB)) {
 			tile->onHit(mob);
 		}
+	}
+}
+
+void Level::executeBossEnding(bool win) {
+	if (m_bossLevel == nullptr) return;
+
+	if (win) {
+		m_bossLevel->executeOnWin();
+	}
+	else {
+		m_bossLevel->executeOnLose();
 	}
 }

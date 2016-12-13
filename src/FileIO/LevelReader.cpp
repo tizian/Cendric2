@@ -756,7 +756,6 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				}
 				else if (itemText.compare("boss") == 0) {
 					enemyData.isBoss = true;
-					enemyData.isUnique = true;
 				}
 				else if (itemText.compare("skinnr") == 0) {
 					int skinNr;
@@ -1260,7 +1259,7 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 			data.isObserved = true;
 		}
 		else if (name.compare("bosslevel") == 0) {
-			data.isBossLevel = true;
+			if (!readBosslevel(_property, data)) return false;
 		}
 		else {
 			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
@@ -1303,6 +1302,21 @@ bool LevelReader::readBackgroundLayers(tinyxml2::XMLElement* _property, WorldDat
 		layer.load(backgroundLayer, distance);
 		data->backgroundLayers.push_back(layer);
 	}
+
+	return true;
+}
+
+bool LevelReader::readBosslevel(tinyxml2::XMLElement* _property, WorldData& data_) const {
+	LevelData* data = static_cast<LevelData*>(&data_);
+	if (data == nullptr) return false;
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr) {
+		logError("XML file could not be read, no value attribute found (map->properties->property->name=bosslevel).");
+		return false;
+	}
+	data->bossLevelPath = textAttr;
+	data->isBossLevel = true;
 
 	return true;
 }

@@ -6,7 +6,6 @@
 #include "Callbacks/WorldCallback.h"
 #include "Structs/RoutineStep.h"
 
-using namespace std;
 using namespace luabridge;
 
 ScriptedBehaviorCallback::ScriptedBehaviorCallback(const std::string& luaPath, Enemy* enemy) {

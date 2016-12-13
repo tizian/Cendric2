@@ -108,12 +108,14 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 }
 
 void WorldScreen::notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition) {
+	if (questID.empty() || condition.empty()) return;
 	getCharacterCore()->setQuestConditionFulfilled(questID, condition);
 	m_progressLog->addQuestConditionFullfilled(questID, condition);
 	m_interface->reloadQuestLog();
 }
 
 void WorldScreen::notifyQuestTargetKilled(const std::string& questID, const std::string& name) {
+	if (questID.empty() || name.empty()) return;
 	getCharacterCore()->setQuestTargetKilled(questID, name);
 	m_progressLog->addQuestTargetKilled(questID, name);
 	m_interface->reloadQuestLog();

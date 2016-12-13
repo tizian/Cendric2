@@ -15,13 +15,11 @@ m_character(character) {
 	m_mainCharHealthBar = new HealthBar(character->getAttributes(), HealthBarStyle::MainCharacter);
 
 	const Level* level = dynamic_cast<const Level*>(screen->getWorld());
-	if (level->getWorldData()->isBossLevel) {
-		// Assume first enemy in level is boss
-		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Boss);
-	}
-	else {
-		m_enemyHealthBar = new HealthBar(nullptr, HealthBarStyle::Enemy);
-	}
+
+	m_enemyHealthBar = new HealthBar(nullptr, level->getWorldData()->isBossLevel ? 
+		HealthBarStyle::Boss : 
+		HealthBarStyle::Enemy);
+
 	m_enemyHealthBar->setVisible(false);
 }
 

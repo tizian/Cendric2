@@ -4,6 +4,7 @@
 #include "BackgroundLayer.h"
 #include "FileIO/LevelReader.h"
 #include "Level/LevelDynamicTile.h"
+#include "Level/BossLevel.h"
 #include "LevelLoader.h"
 #include "SpeedupPullCamera.h"
 #include "Structs/AIWalkingQueryRecord.h"
@@ -46,11 +47,15 @@ public:
 	const std::vector<GameObject*>* getDynamicTiles() const;
 	const LevelData* getWorldData() const;
 
+	// executes the boss ending, either win=true or else if the player loses.
+	void executeBossEnding(bool win);
+
 private:
 	// data loaded by the level loader
 	LevelData m_levelData;
 	std::vector<GameObject*>* m_dynamicTiles;
 	std::vector<GameObject*>* m_movableTiles;
+	BossLevel* m_bossLevel = nullptr;
 
 	// checks for collisions with those specific tiles
 	bool collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const;

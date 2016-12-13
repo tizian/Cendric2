@@ -57,7 +57,7 @@ private:
 	Enemy* m_enemy;
 	ScriptedBehavior* m_scriptedBehavior;
 	WorldCallback* m_worldCallback;
-	luabridge::lua_State* m_L;
+	luabridge::lua_State* m_L = nullptr;
 
 	// return whether it was successful in loading or not
 	// it also sets the observer steps in the scripted behavior if it finds that function

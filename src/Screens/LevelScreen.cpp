@@ -95,8 +95,46 @@ void LevelScreen::notifyBackFromMenu() {
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 }
 
-void LevelScreen::notifyBossKilled(std::map<std::string, int>& items, int gold) {
-	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay(items, gold));
+void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
+	m_bossRewards.lootableGold += reward.lootableGold;
+	for (auto& it : reward.lootableItems) {
+		if (!contains(m_bossRewards.lootableItems, it.first)) {
+			m_bossRewards.lootableItems.insert(std::make_pair(it.first, 0));
+		}
+		m_bossRewards.lootableItems[it.first] += it.second;
+	}
+	for (auto& it : reward.questConditions) {
+		m_bossRewards.questConditions.push_back(it);
+	}
+	for (auto& it : reward.questTargets) {
+		m_bossRewards.questTargets.push_back(it);
+	}
+	
+	// was this the last boss?
+	for (auto* go : *getObjects(GameObjectType::_Enemy)) {
+		if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
+			if (enemy->isBoss() && !enemy->isDead()) {
+				return;
+			}
+		}
+	}
+
+	// this was the last boss!
+	for (auto& target : m_bossRewards.questTargets) {
+		notifyQuestTargetKilled(target.first, target.second);
+	}
+	for (auto& condition : m_bossRewards.questConditions) {
+		notifyQuestConditionFulfilled(condition.first, condition.second);
+	}
+	for (auto& item : m_bossRewards.lootableItems) {
+		notifyItemChange(item.first, item.second);
+	}
+
+	notifyItemChange("gold", m_bossRewards.lootableGold);
+
+	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay(m_bossRewards.lootableItems, m_bossRewards.lootableGold));
+	m_currentLevel.executeBossEnding(true);
+
 	m_interface->hideAll();
 	m_isBossDefeated = true;
 }
@@ -356,9 +394,6 @@ void LevelScreen::handleBossDefeated(const sf::Time& frameTime) {
 	if (m_bossDefeatedWaitTime == sf::Time::Zero) return;
 	updateTime(m_bossDefeatedWaitTime, frameTime);
 	if (m_bossDefeatedWaitTime == sf::Time::Zero) {
-
-		// TODO set!
-
 		onBackToCheckpoint();
 	}
 	return;
@@ -388,6 +423,7 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	}
 
 	m_isGameOver = true;
+	m_currentLevel.executeBossEnding(false);
 	addObject(ScreenOverlay::createGameOverScreenOverlay());
 	m_interface->hideAll();
 }

@@ -39,7 +39,7 @@ public:
 
 	bool exitWorld() override;
 	void notifyBackFromMenu() override;
-	void notifyBossKilled(std::map<std::string, int>& items, int gold);
+	void notifyBossKilled(const EnemyReward& reward);
 	void setEnemyForHealthBar(const Enemy* enemy);
 	void clearConsumedFood();
 
@@ -80,6 +80,7 @@ private:
 	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);
 	void handleBossDefeated(const sf::Time& frameTime);
+	EnemyReward m_bossRewards;
 
 	// pretty little agents to give to our yes or no form and buttons
 	void onNo();
