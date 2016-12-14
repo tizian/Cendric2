@@ -5,9 +5,7 @@
 #include "Level/Enemies/ObserverEnemy.h"
 #include "GUI/BookWindow.h"
 
-using namespace std;
-
-LevelScreen::LevelScreen(const string& levelID, CharacterCore* core) : WorldScreen(core) {
+LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : WorldScreen(core) {
 	m_levelID = levelID;
 	m_particleBGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_particleFGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -19,7 +17,7 @@ void LevelScreen::loadForRenderTexture() {
 
 void LevelScreen::load() {
 	if (!(m_currentLevel.load(m_levelID, this))) {
-		string errormsg = m_levelID + ": file corrupted!";
+		std::string errormsg = m_levelID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}

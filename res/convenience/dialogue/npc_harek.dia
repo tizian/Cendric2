@@ -120,6 +120,16 @@ npc.id:npc_harek
 	]
 	[
 		# Link node, tag is next tag
+		tag:16
+		condition:DL:isQuestState("ice_armor", "completed")
+		# translation: 
+		translation.tag:DL_Choice_Craft
+		translation.en:Could you craft something for me?
+		translation.de:Könntest du mir etwas anfertigen?
+		translation.ch:Chöntsch du mir öppis herstelle?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -290,6 +300,74 @@ npc.id:npc_harek
 	translation.en:Here you go. Splendid, isn't it.
 	translation.de:Hier ist sie. Prächtig, nicht wahr.
 	translation.ch:Da isch si. Prächtig, gell.
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_SmithMagicArmor3
+	translation.en:You can always come back to me if you find other special materials, I'd love working with them.
+	translation.de:Du kannst immer wieder zu mir kommen wenn du spezielles Material findest - Es ist interessant, es zu verarbeiten.
+	translation.ch:Du chasch immer wider zu mir cho wend speziells Material findsch - Es isch interessant, demit z'schaffe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_Craft
+	translation.en:Sure, did you find some special materials?
+	translation.de:Sicher, hast du spezielle Materialen gefunden?
+	translation.ch:Sicher, hesch denn speziells Material gfunde?
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{2
+	# [17] Choice Node
+	tag:17
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:DL:hasItem("mi_icecrystal", 1) and DL:hasItem("mi_ironore", 2)
+		# translation: 
+		translation.tag:DL_Choice_IceScarf
+		translation.en:1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
+		translation.de:1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
+		translation.ch:1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_NoMaterial
+		translation.en:I'll come back later. [BACK]
+		translation.de:Ich komme später wieder. [ZURÜCK]
+		translation.ch:Ich chume spöter wider. [ZRUGG]
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:removeItem("mi_icecrystal", 1)
+	trigger:DL:removeItem("mi_ironore", 2)
+	trigger:DL:addItem("eq_icescarf", 1)
+	# translation: 
+	translation.tag:DL_Harek_IceScarf
+	translation.en:An exeptionally beautiful stone! I can truly craft something magical from that.
+	translation.de:Ein aussergewöhnlich schöner Stein! Daraus kann ich wahrlich etwas magisches herstellen.
+	translation.ch:En ussergwöhnlich schöne Stei! Da drus chani wohrlich öppis schöns mache.
 	[
 		# Link node, tag is next tag
 		tag:-2

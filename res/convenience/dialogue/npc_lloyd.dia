@@ -179,6 +179,7 @@ npc.id:npc_lloyd
 	tag:9
 	# triggers: 
 	trigger:DL:changeQuestState("further_investigation", "started")
+	trigger:DL:addConditionProgress("default", "second_boss_open")
 	# translation: 
 	translation.tag:DL_Lloyd_ReadLetter3
 	translation.en:You two should go back to the place where you defeated that monster and look for hints.

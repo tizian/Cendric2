@@ -64,6 +64,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(9, -2, "DL_Lloyd_ReadLetter3") -- You two should go back to the place where you defeated that monster and look for hints.
 			DL:changeQuestState("further_investigation", "started")
+			DL:addConditionProgress("default", "second_boss_open")
 			DL:addNode()
 
 		end

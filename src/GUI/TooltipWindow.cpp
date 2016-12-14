@@ -7,7 +7,7 @@ const int TooltipWindow::MAX_WIDTH = 150;
 
 TooltipWindow::TooltipWindow() : Window(
 	sf::FloatRect(), GUIOrnamentStyle::NONE, 
-	sf::Color(0, 0, 0, 70),
+	sf::Color(0, 0, 0, 200),
 	COLOR_WHITE) 
 {
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);

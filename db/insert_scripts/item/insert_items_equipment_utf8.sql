@@ -27,14 +27,14 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Ice Cloak
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icescarf', 'item', 'Icy Cloak','Eisiger Umhang','Iisige Umhang');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icescarf', 'item_desc', 'Shiny fragments of Khajag''s heart decorate this cloak.','Glänzende Fragmente von Khajags Herz zieren diesen Umhang.','Glänzigi Fragment vom Khajag sim Herz ziered de Umhang.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icescarf', 'item_desc', 'Shiny fragments of a magical ice crystal decorate this cloak.','Glänzende Fragmente eines magischen Eiskristalls zieren diesen Umhang.','Glänzigi Fragment vomne magische IIskristall ziered de Umhang.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_icescarf', 'eq_back', 300, 500, 40);
 INSERT INTO item_attribute (item_id, res_ice, res_physical, dmg_ice) values ('eq_icescarf', 3, 1, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump, frames_idle) values ('eq_icescarf', 'res/assets/equipment/back/spritesheet_back_icescarf.png', 'res/assets/equipment/back/spritesheet_map_back_icescarf.png', 6, 6);
 
 -- Blue Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatice', 'item', 'Blue wizardhat','Blauer Spitzhut','Blaue Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatice', 'item', 'Blue Wizardhat','Blauer Spitzhut','Blaue Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatice', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatice', 'eq_head', 500, 100, 30);
 INSERT INTO item_attribute (item_id, dmg_ice, res_physical, res_ice) values ('eq_wizardhatice', 5, 1, 2);
@@ -44,7 +44,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Red Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatfire', 'item', 'Red wizardhat','Roter Spitzhut','Rote Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatfire', 'item', 'Red Wizardhat','Roter Spitzhut','Rote Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatfire', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatfire', 'eq_head', 500, 150, 30);
 INSERT INTO item_attribute (item_id, dmg_fire, res_physical, res_fire) values ('eq_wizardhatfire', 5, 1, 2);
@@ -54,7 +54,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- White Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatlight', 'item', 'White wizardhat','Weisser Spitzhut','Wiisse Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatlight', 'item', 'White Wizardhat','Weisser Spitzhut','Wiisse Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatlight', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatlight', 'eq_head', 500, 200, 30);
 INSERT INTO item_attribute (item_id, dmg_light, res_physical, res_light) values ('eq_wizardhatlight', 5, 1, 2);
@@ -64,7 +64,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Grey Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatshadow', 'item', 'Grey wizardhat','Grauer Spitzhut','Graue Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatshadow', 'item', 'Grey Wizardhat','Grauer Spitzhut','Graue Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatshadow', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wizardhatshadow', 'eq_head', 500, 250, 30);
 INSERT INTO item_attribute (item_id, max_health, res_shadow, res_shadow) values ('eq_wizardhatshadow', 5, 1, 2);
@@ -181,24 +181,24 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet1', 'item', 'Cover of the Recruit','Überwurf des Rekruten','Überwurf vom Rekrut');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet1', 'item_desc', 'The white cloth shields its wearer against dark magic.','Der weisse Stoff schützt seinen Träger vor dunkler Magie.','De wiss Stoff schützt sin Träger vor dunkler Magie.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet1', 'eq_back', 0, 450, 50);
-INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet1', 4, 3, 2, 3, 4, 2, 3);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet1', 'eq_back', 0, 450, 80);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet1', 4, 3, 1, 3, 4, 2, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_back_divinet1', 'res/assets/equipment/back/spritesheet_back_divinet1.png', 'res/assets/equipment/back/spritesheet_map_back_divinet1.png', 3);
 
 -- Divine T2 Back
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet2', 'item', 'Cover of the Order','Überwurf des Ordens','Überwurf vom Orde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet2', 'item_desc', 'A noble cape with nice ornaments.','Ein nobler Umhang mit hübschen Ornamenten.','En noble Umhang mit hübsche Ornamentli.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet2', 'eq_back', 0, 500, 100);
-INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet2', 8, 6, 5, 6, 8, 3, 6);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet2', 'eq_back', 0, 500, 160);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet2', 8, 6, 2, 6, 8, 3, 6);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_back_divinet2', 'res/assets/equipment/back/spritesheet_back_divinet2.png', 'res/assets/equipment/back/spritesheet_map_back_divinet2.png', 3);
 
 -- Divine T3 Back
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet3', 'item', 'Cover of the Enlighted','Überwurf des Erleuchteten','Überwurf vom Erlüüchtete');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet3', 'item_desc', 'Worn by the high priests of the order.','Wird von den Hohepriestern des Ordens getragen.','Wird vode Hohespriester vom Orde treit.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet3', 'eq_back', 0, 550, 200);
-INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet3', 15, 12, 10, 12, 16, 6, 12);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet3', 'eq_back', 0, 550, 300);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet3', 15, 12, 4, 12, 16, 6, 12);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_back_divinet3', 'res/assets/equipment/back/spritesheet_back_divinet3.png', 'res/assets/equipment/back/spritesheet_map_back_divinet3.png', 3);
 
 -- Divine T1 Head
@@ -248,6 +248,30 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt3', 'eq_head', 600, 450, 400);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_head_twilightt3', 15, 10, 8, 20, 12, 15, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_twilightt3', 'res/assets/equipment/head/spritesheet_head_twilightt3.png', 'res/assets/equipment/head/spritesheet_map_head_twilightt3.png');
+
+-- Twilight T1 Back
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt1', 'item', 'Scarf of the Prowler','Schal des Herumtreibers','Streuner-Halstuech');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt1', 'item_desc', 'Simple, 	inconspicuous and convenient.','Einfach, unauffällig und praktisch.','Eifach, unuffällig und praktisch.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_twilightt1', 'eq_back', 0, 600, 80);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_back_twilightt1', 4, 2, 2, 4, 3, 2, 3);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_twilightt1', 'res/assets/equipment/back/spritesheet_back_twilightt1.png', 'res/assets/equipment/back/spritesheet_map_back_twilightt1.png');
+
+-- Twilight T2 Back
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt2', 'item', 'Cloak of the Marauder','Umhang des Plünderers','Plünderer-Umhang');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt2', 'item_desc', 'Mages wearing this kind of cloak are usually up to no good.','Magier, die diese Art von Umhang tragen sind haben meistens nichts gutes vor.','Magier, wo die Art vo Umhang träged, hend meistens nüt liebs im Sinn.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_twilightt2', 'eq_back', 50, 600, 160);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_back_twilightt2', 8, 6, 4, 6, 8, 3, 6);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_twilightt2', 'res/assets/equipment/back/spritesheet_back_twilightt2.png', 'res/assets/equipment/back/spritesheet_map_back_twilightt2.png');
+
+-- Twilight T3 Back
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt3', 'item', 'Cover of the Shadow Stalker','Überwurf des Schattenläufers','Schatteläufer-Überwurf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt3', 'item_desc', 'The sharp blades on the tails of this cloak are still reminiscent of its original owner.','Die scharfen Klingen an den Enden dieses Umhangs erinnern immer noch an seinen ursprünglichen Besitzer.','Di scharfe Messer ade Spitze vo dem Umhang erinnered immer na a de, dem er emol ghört het.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_twilightt3', 'eq_back', 100, 600, 300);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_back_twilightt3', 15, 12, 8, 12, 16, 6, 12);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_twilightt3', 'res/assets/equipment/back/spritesheet_back_twilightt3.png', 'res/assets/equipment/back/spritesheet_map_back_twilightt3.png');
 
 -- Crown
 

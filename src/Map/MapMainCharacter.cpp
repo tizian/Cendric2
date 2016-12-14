@@ -4,6 +4,11 @@
 
 MapMainCharacter::MapMainCharacter(Map* map) : MapMovableGameObject(map) {
 	load();
+
+	m_inputMap.insert({ Key::Left, sf::Vector2f(-WALK_ACCELERATION, 0.f) });
+	m_inputMap.insert({ Key::Right, sf::Vector2f(WALK_ACCELERATION, 0.f) });
+	m_inputMap.insert({ Key::Down, sf::Vector2f(0.f, WALK_ACCELERATION) });
+	m_inputMap.insert({ Key::Up, sf::Vector2f(0.f, -WALK_ACCELERATION) });
 }
 
 MapMainCharacter::~MapMainCharacter() {
@@ -67,23 +72,20 @@ void MapMainCharacter::render(sf::RenderTarget& target) {
 }
 
 void MapMainCharacter::handleInput() {
-	float newAccelerationX = 0.f;
-	float newAccelerationY = 0.f;
-
-	if (g_inputController->isKeyActive(Key::Left)) {
-		newAccelerationX -= WALK_ACCELERATION;
-	}
-	else if (g_inputController->isKeyActive(Key::Right)) {
-		newAccelerationX += WALK_ACCELERATION;
-	}
-	else if (g_inputController->isKeyActive(Key::Up)) {
-		newAccelerationY -= WALK_ACCELERATION;
-	}
-	else if (g_inputController->isKeyActive(Key::Down)) {
-		newAccelerationY += WALK_ACCELERATION;
+	for (auto& it : m_inputMap) {
+		if (g_inputController->isKeyJustPressed(it.first)) {
+			m_currentInput = it.first;
+			break;
+		}
 	}
 
-	setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
+	if (m_currentInput != Key::VOID && g_inputController->isKeyActive(m_currentInput)) {
+		setAcceleration(m_inputMap[m_currentInput]);
+	}
+	else {
+		m_currentInput = Key::VOID;
+		setAcceleration(sf::Vector2f(0.f, 0.f));
+	}
 }
 
 void MapMainCharacter::load() {

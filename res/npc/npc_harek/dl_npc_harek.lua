@@ -40,6 +40,9 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("ice_armor", "started") and DL:isQuestComplete("ice_armor")) then 
 		DL:addChoice(14, "DL_Choice_GotIronOre") -- I got the iron ore for you.
 	end
+	if (DL:isQuestState("ice_armor", "completed")) then 
+		DL:addChoice(16, "DL_Choice_Craft") -- Could you craft something for me?
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -105,10 +108,39 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(15, -2, "DL_Harek_SmithMagicArmor2") -- Here you go. Splendid, isn't it.
+		DL:createNPCNode(15, 19, "DL_Harek_SmithMagicArmor2") -- Here you go. Splendid, isn't it.
 		DL:changeQuestState("ice_armor", "completed")
 		DL:addItem("eq_icearmor", 1)
 		DL:addNode()
+
+
+		DL:createNPCNode(19, -2, "DL_Harek_SmithMagicArmor3") -- You can always come back to me if you find other special materials, I'd love working with them.
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("ice_armor", "completed")) then 
+
+		DL:createNPCNode(16, 17, "DL_Harek_Craft") -- Sure, did you find some special materials?
+		DL:addNode()
+
+
+		DL:createChoiceNode(17)
+		if (DL:hasItem("mi_icecrystal", 1) and DL:hasItem("mi_ironore", 2)) then 
+			DL:addChoice(18, "DL_Choice_IceScarf") -- 1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
+		end
+		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
+		DL:addNode()
+
+		if (DL:hasItem("mi_icecrystal", 1) and DL:hasItem("mi_ironore", 2)) then 
+
+			DL:createNPCNode(18, -2, "DL_Harek_IceScarf") -- An exeptionally beautiful stone! I can truly craft something magical from that.
+			DL:removeItem("mi_icecrystal", 1)
+			DL:removeItem("mi_ironore", 2)
+			DL:addItem("eq_icescarf", 1)
+			DL:addNode()
+
+		end
 
 	end
 

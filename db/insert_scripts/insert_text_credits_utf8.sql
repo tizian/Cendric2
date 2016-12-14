@@ -98,7 +98,7 @@ Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
-Dani Saguer, Manwe
+Dani Saguer, Manwe, Niklas Munkes
 
 ---
 
@@ -231,7 +231,7 @@ Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
-Dani Saguer, Manwe
+Dani Saguer, Manwe, Niklas Munkes
 
 ---
 
@@ -361,7 +361,7 @@ Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
-Dani Saguer, Manwe
+Dani Saguer, Manwe, Niklas Munkes
 
 ---
 
