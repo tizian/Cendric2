@@ -75,6 +75,7 @@ void MapMainCharacter::handleInput() {
 	for (auto& it : m_inputMap) {
 		if (g_inputController->isKeyJustPressed(it.first)) {
 			m_currentInput = it.first;
+			m_isCurrentInputActive = true;
 			break;
 		}
 	}
@@ -83,6 +84,17 @@ void MapMainCharacter::handleInput() {
 		setAcceleration(m_inputMap[m_currentInput]);
 	}
 	else {
+		if (m_isCurrentInputActive) {
+			m_isCurrentInputActive = false;
+			for (auto& it : m_inputMap) {
+				if (g_inputController->isKeyActive(it.first)) {
+					m_currentInput = it.first;
+					m_isCurrentInputActive = true;
+					setAcceleration(m_inputMap[m_currentInput]);
+					return;
+				}
+			}
+		}
 		m_currentInput = Key::VOID;
 		setAcceleration(sf::Vector2f(0.f, 0.f));
 	}

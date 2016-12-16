@@ -70,7 +70,7 @@ std::string DoorMapTile::getSpritePath() const {
 }
 
 void DoorMapTile::onRightClick() {
-	if (m_isOpen || !m_isConditionsFulfilled) return;
+	if (m_isOpen) return;
 
 	// check if the door is in range
 	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
@@ -78,7 +78,7 @@ void DoorMapTile::onRightClick() {
 	if (!inRange) {
 		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
 	}
-	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
+	else if (m_isConditionsFulfilled && !m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
 		open();
 		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 
