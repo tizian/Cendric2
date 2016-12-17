@@ -21,6 +21,8 @@ loadDialogue = function(DL)
 		DL:setRoot(39) 
 	elseif (DL:isQuestState("invis_recipe", "void")) then 
 		DL:setRoot(41) 
+	elseif (DL:isQuestState("invis_recipe", "failed") and not  DL:isConditionFulfilled("npc_vincent2", "trusted_failed")) then 
+		DL:setRoot(47) 
 	else 
 		DL:setRoot(45) 
 	end 
@@ -360,6 +362,14 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:isQuestState("invis_recipe", "failed") and not  DL:isConditionFulfilled("npc_vincent2", "trusted_failed")) then 
+
+		DL:createNPCNode(47, -2, "DL_Vincent2_Disappointed") -- Hm. I trusted you and you failed me.
+		DL:addConditionProgress("npc_vincent2", "trusted_failed")
+		DL:addNode()
+
+	end
+
 
 	DL:createChoiceNode(45)
 	if (DL:isQuestState("invis_recipe", "started") and DL:isQuestComplete("invis_recipe")) then 
@@ -375,6 +385,7 @@ loadDialogue = function(DL)
 		DL:removeItem("qe_invisrecipe", 1)
 		DL:addItem("ke_thiefguild", 1)
 		DL:addReputationProgress("thief", 10)
+		DL:addConditionProgress("default", "thieves_open")
 		DL:addNode()
 
 	end

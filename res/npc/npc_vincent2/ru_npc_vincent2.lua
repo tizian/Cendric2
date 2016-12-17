@@ -2,7 +2,7 @@
 
 loadRoutine = function(R, W)
 
-	if (W:isQuestState("invis_recipe", "completed") or W:isQuestState("invis_recipe", "failed")) then
+	if (W:isConditionFulfilled("default", "thieves_open")) then
 		R:setDisposed()
 		return
 	end

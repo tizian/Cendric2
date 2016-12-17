@@ -57,6 +57,11 @@ npc.id:npc_vincent2
 	]
 	[
 		# Link node, tag is next tag
+		tag:47
+		condition:DL:isQuestState("invis_recipe", "failed") and not  DL:isConditionFulfilled("npc_vincent2", "trusted_failed")
+	]
+	[
+		# Link node, tag is next tag
 		tag:45
 	]
 }
@@ -875,6 +880,21 @@ npc.id:npc_vincent2
 		tag:-2
 	]
 }
+{1
+	# [47] NPC Node
+	tag:47
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent2", "trusted_failed")
+	# translation: 
+	translation.tag:DL_Vincent2_Disappointed
+	translation.en:Hm. I trusted you and you failed me.
+	translation.de:Hm. Ich habe dir wohl umsonst vertraut.
+	translation.ch:Hm. Ich ha der glaub umesuscht vertraut.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
 {2
 	# [45] Choice Node
 	tag:45
@@ -906,6 +926,7 @@ npc.id:npc_vincent2
 	trigger:DL:removeItem("qe_invisrecipe", 1)
 	trigger:DL:addItem("ke_thiefguild", 1)
 	trigger:DL:addReputationProgress("thief", 10)
+	trigger:DL:addConditionProgress("default", "thieves_open")
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuestDone
 	translation.en:Very well. I knew you have talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
