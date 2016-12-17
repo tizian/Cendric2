@@ -896,7 +896,7 @@
   </object>
   <object id="235" x="1670" y="3285" width="105" height="61">
    <properties>
-    <property name="map entry" value="res/map/meadows/meadows.tmx,3360,3030"/>
+    <property name="map entry" value="res/map/marshland/marshland.tmx,1365,150"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

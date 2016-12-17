@@ -27,4 +27,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Jo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Well','location','Well','Ziehbrunnen','Ziebrunne');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaSewers','location','Sewers of Gandria','Kanalisation von Gandria','Kanalisation vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SyrahBasement','location','Syrah''s Basement','Syrah''s Keller','Chäller vode Syrah');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Marshland','location','The Marshland','Die Marschen','Es Ried');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Marshland','location','The Marshland','Sumpfland','Sumpfland');
