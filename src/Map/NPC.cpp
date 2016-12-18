@@ -83,7 +83,9 @@ void NPC::load(const NPCData& data) {
 
 	setPosition(data.position);
 
-	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText(data.id, "npc"), this, m_mainChar);
+	std::string cleanId = data.id;
+	cleanId.erase(std::remove_if(cleanId.begin(), cleanId.end(), &isdigit), cleanId.end());
+	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText(cleanId, "npc"), this, m_mainChar);
 	interactComponent->setInteractRange(TALKING_RANGE);
 	interactComponent->setInteractText("ToTalk");
 	interactComponent->setOnInteract(std::bind(&NPC::trySetDialogue, this));

@@ -639,7 +639,7 @@
   <object id="150" gid="585" x="750" y="1350" width="50" height="50">
    <properties>
     <property name="key" value="ke_thiefguild"/>
-    <property name="strength" value="5"/>
+    <property name="strength" value="4"/>
     <property name="width" value="2"/>
    </properties>
   </object>

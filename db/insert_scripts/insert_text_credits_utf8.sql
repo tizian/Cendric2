@@ -48,6 +48,8 @@ Haab
 
 "House Theme"
 
+"Menu Theme"
+
 ---
 
 -- Eric Matyas --
@@ -106,7 +108,10 @@ Some tiles are based on Celianna''s tilesets
 
 ---
 
-Inspired by GOTHIC from Piranha Bytes
+Inspired by
+GOTHIC from Piranha Bytes
+and
+DARK SOULS from From Software
 
 ---
 
@@ -181,6 +186,8 @@ Haab
 
 "House Theme"
 
+"Menu Theme"
+
 ---
 
 -- Eric Matyas --
@@ -238,8 +245,10 @@ Dani Saguer, Manwe, Niklas Munkes
 Einige Tiles basieren auf Celianna''s Tilesets
 
 ---
-
-Inspiriert von GOTHIC von Piranha Bytes
+Inspiriert von
+GOTHIC von Piranha Bytes
+und 
+DARK SOULS von From Software
 
 ---
 
@@ -312,6 +321,8 @@ Haab
 
 "House Theme"
 
+"Menu Theme"
+
 -- Eric Matyas --
 
 "Magical Discovery"
@@ -369,7 +380,10 @@ Gewüssi Tiles basiered uf Celianna''s Tilesets
 
 ---
 
-Inspiriert vo GOTHIC vo Piranha Bytes
+Inspiriert vo 
+GOTHIC vo Piranha Bytes
+und 
+DARK SOULS vo From Software
 
 ---
 
