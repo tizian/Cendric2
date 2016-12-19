@@ -105,6 +105,16 @@ public:
 		}
 	}
 
+	static std::string getShortFractionIDName(FractionID id) {
+		switch (id) {
+		case FractionID::MAX:
+		case FractionID::VOID:
+			return "Unknown";
+		default:
+			return getFractionIDName(id) + "_short";
+		}
+	}
+
 	static std::string getDamageTypeName(DamageType type) {
 		switch (type) {
 		default:

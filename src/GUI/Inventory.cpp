@@ -263,6 +263,8 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 		m_levelInterface->consumeItem(clicked->getItemID());
 	else if (clicked->getItemType() == ItemType::Document)
 		showDocument(clicked->getItem());
+	else if (clicked->getItemType() == ItemType::Spell)
+		learnSpell(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Permanent)
 		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", COLOR_BAD, true);
 	else if (clicked->getItemType() == ItemType::Convertible)

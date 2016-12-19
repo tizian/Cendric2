@@ -343,6 +343,7 @@ npc.id:npc_lloyd
 	tag:14
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_lloyd", "guild")
+	trigger:DL:addConditionProgress("default", "cleric")
 	trigger:DL:addReputationProgress("cleric", 10)
 	trigger:DL:setGuild("cleric")
 	# translation: 

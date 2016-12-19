@@ -1,0 +1,271 @@
+# dia file for dialogue for npc: npc_vincent3
+
+npc.id:npc_vincent3
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_vincent3", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "talked")
+	# translation: 
+	translation.tag:DL_Vincent_Welcome
+	translation.en:So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.
+	translation.de:Du hast also den Weg zu uns gefunden. Willkommen im Versteck der Schattenläufer.
+	translation.ch:Du hesch also de Weg zu üs gfunde. Willkomme im Versteck vode Schatteläufer.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_vincent3", "shadowstalkers")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are the "Shadow Stalkers"?
+		translation.de:Wer sind die "Schattenläufer"?
+		translation.ch:Wer sind d'"Schatteläufer"?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_vincent3", "why_hiding")
+		# translation: 
+		translation.tag:DL_Choice_WhyHiding
+		translation.en:Why are you hiding?
+		translation.de:Wieso versteckt ihr euch?
+		translation.ch:Weso verstecked ihr eu?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:isConditionFulfilled("npc_vincent3", "why_hiding") and not DL:isConditionFulfilled("npc_vincent3", "inform_clerics")
+		# translation: 
+		translation.tag:DL_Choice_InformClerics
+		translation.en:What if I just inform the clerics about your little hideout?
+		translation.de:Was wenn ich den Klerikern einfach von eurem kleinen Versteck erzähle?
+		translation.ch:Was wenn ich de Kleriker eifach vo eurem chline Versteck verzell?
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and not DL:isConditionFulfilled("npc_vincent3", "who_guild")
+		# translation: 
+		translation.tag:DL_Choice_WhoInGuild
+		translation.en:Who belongs to this guild?
+		translation.de:Wer gehört alles zur Gilde?
+		translation.ch:Wer ghört alles zude Gilde?
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and not DL:isConditionFulfilled("npc_vincent3", "one_guild")
+		# translation: 
+		translation.tag:DL_Choice_OneGuild
+		translation.en:What if I want to join another guild?
+		translation.de:Was ist, wenn ich einer anderen Gilde beitreten will?
+		translation.ch:Was isch, weni enere andere Gilde biitrette wet?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and not DL:isConditionFulfilled("npc_vincent3", "what_if_join")
+		# translation: 
+		translation.tag:DL_Choice_WhatIfJoin
+		translation.en:Why should I join you?
+		translation.de:Wieso sollte ich euch beitreten?
+		translation.ch:Weso söti eu biitrette?
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_vincent3", "guild")
+		# translation: 
+		translation.tag:DL_Choice_IWantJoin
+		translation.en:I want to join the guild.
+		translation.de:Ich möchte der Gilde beitreten.
+		translation.ch:Ich möcht dere Gilde biitrete.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		condition:not DL:isConditionFulfilled("npc_vincent3", "Choice-2")
+		# translation: 
+		translation.tag:DL_Choice_-2
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_WhoAreYou
+	translation.en:We are a guild that focuses on twilight magic and the benefits it brings us.
+	translation.de:Wir sind eine Gilde, die sich mit Dämmerungsmagie beschäftigt und mit den Vorteilen, die sie uns bringt.
+	translation.ch:Mir sind e Gilde wo sich mit Dämmerigsmagie beschäftigt und de Vorteil, wos üs bringt.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_WhoAreYou2
+	translation.en:You seem to have an affinity to this type of magic, as you've mastered the art of summoning a picklock incredibly fast.
+	translation.de:Du scheinst eine Affinität für diese Magie zu besitzen, da du unglaublich schnell gelernt hast, wie man einen Dietrich beschwört.
+	translation.ch:Du hesch ebe glaub e Affinität für die Magie, welld unglaublich schnell glernt hesch, weme en Dietrich beschwört.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "shadowstalkers")
+	# translation: 
+	translation.tag:DL_Vincent_WhoAreYou3
+	translation.en:Joining us could uncover your hidden talents...
+	translation.de:Uns beizutreten könnte deine verborgenen Talente zum Vorschein bringen...
+	translation.ch:Üs biiztrete chönt dini verborgene Talent fürebringe...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_WhyHiding
+	translation.en:You see what's going on in this city, right? Mages who don't study "divine" magic are frowned upon.
+	translation.de:Dir ist schon klar was in dieser Stadt passiert? Magier die keine "heilige" Magie studieren, sind nicht gerne gesehen.
+	translation.ch:Dir isch scho klar wa i dere Stadt passiert? Magier wo kei "heiligi" Magie studiered sind nid so gern gse.
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "why_hiding")
+	# translation: 
+	translation.tag:DL_Vincent_WhyHiding2
+	translation.en:Twilight and elemental magic are tolerated though in contrast to necromancy - but still, the paladins don't like what we're doing with our magic.
+	translation.de:Dämmerungs- und Elementarmagie werden jedoch toleriert, im Gegensatz zu Nekromantie. Trotzdem mögen die Paladine nicht, was wir mit unserer Magie anstellen.
+	translation.ch:Dämmerigs- und Elementarmagie werded aber toleriert, im Gegesatz zu Nekromantie. D'Paladin hend aber trotzdem nid gern wa mir mit üsere Magie so astelled.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "inform_clerics")
+	# translation: 
+	translation.tag:DL_Vincent_InformClerics
+	translation.en:By the time the clerics would arrive here, we'd be gone and you - well, your body - would be floating around in the sewers.
+	translation.de:Bis die Kleriker hier unten wären, wären wir schon lange weg und du - beziehungsweise deine Leiche - würde in den Kanälen treiben.
+	translation.ch:Bis d'Kleriker da unne wäred, wäred mir scho lang über alli Berge und du - also dini Leiche - wür ufem Abwasser triibe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "who_guild")
+	# translation: 
+	translation.tag:DL_Vincent_WhoInGuild
+	translation.en:Do I look like I'm going to tell you that? Maybe if you'd join us.
+	translation.de:Sehe ich so aus als würde ich dir das erzählen? Vielleicht, wenn du uns beitrittst.
+	translation.ch:Gse ich so us als würi dir das verzelle? Vilicht wend üs bitrittsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "one_guild")
+	# translation: 
+	translation.tag:DL_Vincent_OneGuild
+	translation.en:You'd be missing a great opportunity. But that's your choice.
+	translation.de:Du würdest etwas verpassen. Aber das ist deine Wahl.
+	translation.ch:Du würsch öppis verpasse. Aber das isch dini Wahl.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "what_if_join")
+	# translation: 
+	translation.tag:DL_Vincent_WhatIfJoin
+	translation.en:You'll get to learn twilight magic and besides that, you're going to get rich.
+	translation.de:Du wirst Dämmerungsmagie lernen und nebenbei noch reich werden.
+	translation.ch:Du wirsch Dämmerigsmagie lerne und usserdem na riich werde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Choice_IWantJoin
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

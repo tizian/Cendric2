@@ -11,11 +11,11 @@ void ProjectileSpell::load(const SpellData& data, LevelDynamicTile* tile, const 
 }
 
 void ProjectileSpell::init(const SpellData& data) {
-	setSpriteOffset(sf::Vector2f(-19.f, 1.f));
+	setSpriteOffset(sf::Vector2f(-35.f, -2.f));
 
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 9, 48, 9));
+	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 15, 80, 15));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

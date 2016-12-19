@@ -25,7 +25,7 @@ std::string MerchantItemDescriptionWindow::getReputationText(const Item& item) c
 	std::string text;
 	text.append(g_textProvider->getText("Reputation"));
 	text.append(" (");
-	text.append(g_textProvider->getText(EnumNames::getFractionIDName(m_fraction)));
+	text.append(g_textProvider->getText(EnumNames::getShortFractionIDName(m_fraction)));
 	text.append("): ");
 	text.append(std::to_string(m_reputation));
 
