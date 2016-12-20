@@ -1,0 +1,2 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Nuray_Congratulations', 'dl_npc_nuray', 'So you''re new here. Well done. Vincent won''t let everyone join us.', 'Du bist also der neue hier. Gut gemacht. Vincent lässt nicht einfach jeden beitreten.', 'Du bisch also de neu da. Guet gmacht. De Vincent laht nid eifach jede bitrette.');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_WhoAreYou', 'dl_npc_nuray', 'Wer bist du?', 'Wer bisch du?', 'Wer bisch du?');

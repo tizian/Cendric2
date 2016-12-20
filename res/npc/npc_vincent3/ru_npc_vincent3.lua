@@ -2,6 +2,8 @@
 
 loadRoutine = function(R, W)
 
+	R:setReloadEnabled(false)
+	
 	if (not W:isConditionFulfilled("npc_vincent3", "talked")) then 
 		R:setTalkingActive(true) 
 		R:setTilePosition(2,3)

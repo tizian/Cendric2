@@ -335,7 +335,7 @@ npc.id:npc_lloyd
 		translation.tag:DL_Choice_Rethink
 		translation.en:I need more time to think about this.
 		translation.de:Ich muss das nochmal überdenken.
-		translation.ch:Ich mun das nomol überdenke.
+		translation.ch:Ich mun do nomol drüber nadenke.
 	]
 }
 {1

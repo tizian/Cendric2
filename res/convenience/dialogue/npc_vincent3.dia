@@ -13,6 +13,16 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:2
+		condition:not DL:isConditionFulfilled("npc_vincent3", "guild")
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:DL:getGuild() == "thief"
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
 	]
 }
 {1
@@ -105,10 +115,10 @@ npc.id:npc_vincent3
 	]
 	[
 		# Link node, tag is next tag
-		tag:-2
-		condition:not DL:isConditionFulfilled("npc_vincent3", "Choice-2")
+		tag:13
+		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() == "void"
 		# translation: 
-		translation.tag:DL_Choice_-2
+		translation.tag:DL_Choice_IWantJoin
 		translation.en:
 		translation.de:
 		translation.ch:
@@ -259,13 +269,170 @@ npc.id:npc_vincent3
 	# [12] NPC Node
 	tag:12
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "guild")
 	# translation: 
-	translation.tag:DL_Choice_IWantJoin
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Vincent_CantJoin
+	translation.en:You've already made your decision. What a waste...
+	translation.de:Du hast deine Entscheidung bereits getroffen. Was für eine Verschwendung...
+	translation.ch:Du hesch dini Entscheidig scho troffe. Was füre Verschwendig...
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_Join
+	translation.en:Good. You want to become a brother of the Shadow Stalkers, pledge your loyality to the guild and learn the ways of the shadows?
+	translation.de:Gut. Willst du ein Bruder der Schattenläufer werden, schwörst der Gilde deine Treue und lernst die Wege der Schatten? 
+	translation.ch:Guet. Wetsch du en Brueder vode Schatteläufer werde, schwörsch dini Treui zude Gilde und lernsch d'Wäg vode Schatte?
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{2
+	# [14] Choice Node
+	tag:14
+	[
+		# Link node, tag is next tag
+		tag:15
+		# translation: 
+		translation.tag:DL_Choice_IJoin
+		translation.en:Yes. [JOIN THE SHADOW STALKERS]
+		translation.de:Ja. [DEN SCHATTENLÄUFERN BEITRETEN]
+		translation.ch:Jo. [DE SCHATTELÄUFER BIITRETE]
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_Rethink
+		translation.en:I need more time to think about this.
+		translation.de:Ich muss das nochmal überdenken.
+		translation.ch:Ich mun do nomol drüber nadenke.
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "guild")
+	trigger:DL:addConditionProgress("default", "thief")
+	trigger:DL:addReputationProgress("thief", 10)
+	trigger:DL:setGuild("thief")
+	# translation: 
+	translation.tag:DL_Vincent_DeclareThief
+	translation.en:You won't regret this. Welcome in our guild, shadow stalker.
+	translation.de:Das wirst du nicht bereuen. Willkommen in unserer Gilde, Schattenläufer.
+	translation.ch:Das wirsch nid bereue. Willkomme i üsere Gilde, Schatteläufer.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [16] Choice Node
+	tag:16
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:not DL:isConditionFulfilled("npc_vincent3", "first_spell")
+		# translation: 
+		translation.tag:DL_Choice_TeachSpells
+		translation.en:Can you teach me some spells?
+		translation.de:Kannst du mir Zauber beibringen?
+		translation.ch:Chasch du mir Zauber bibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputationProgress("thief") < 50
+		# translation: 
+		translation.tag:DL_Choice_TeachMore
+		translation.en:Can you teach me more spells?
+		translation.de:Kannst du mir noch mehr Zauber beibringen?
+		translation.ch:Chasch mer na me Zauber bibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		condition:DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputationProgress("thief") >= 50
+		# translation: 
+		translation.tag:DL_Choice_TeachMore
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "first_spell")
+	trigger:DL:addItem("sp_shadowtrap", 1)
+	# translation: 
+	translation.tag:DL_Vincent_FirstSpell
+	translation.en:Yes, I will teach you. Take this scroll and learn how to summon a deadly trap.
+	translation.de:Ja, kann ich. Nimm diese Schriftrolle und lerne wie man eine tödliche Falle beschwört.
+	translation.ch:Ja, chani. Nimm die Schriftrolle und lern weme e tödlichi Falle beschwört.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_NoSpellReputation
+	translation.en:Maybe later. First, you need to show us that you can handle this kind of magic.
+	translation.de:Vielleicht später. Erst musst du uns zeigen, dass du auch mit dieser Magie umgehen kannst.
+	translation.ch:Vilicht spöter. Zersch muesch üs mal zeige das au öppis chasch demit afange.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:addItem("sp_invisibility", 1)
+	trigger:DL:addConditionProgress("npc_vincent3", "second_spell")
+	# translation: 
+	translation.tag:DL_Vincent_SecondSpell
+	translation.en:Yes. You've proven yourself useful enough to learn how to be one with the shadows...
+	translation.de:Ja. Du hast dich als nützlich genug erwiesen um zu lernen, wie man mit den Schatten verschmilzt...
+	translation.ch:Ja. Du hesch dich als nützlich gnueg erwise zum lerne, weme mit de Schatte verschmilzt...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [17] Choice Node
+	tag:17
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }

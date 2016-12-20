@@ -2,7 +2,7 @@
 
 loadRoutine = function(R, W)
 
-	if (not W:isConditionFulfilled("npc_nuray", "talked")) then 
+	if (W:getGuild() == "thief" and not W:isConditionFulfilled("npc_nuray", "congrats")) then 
 		R:setTalkingActive(true) 
 	end 
 	

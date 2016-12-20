@@ -9,8 +9,8 @@ enum class SpellID {
 	// Elemental (Default spells)
 	IceBall,
 	FireBall,
-	Telekinesis,
 	WindGust,
+	Telekinesis,
 	AntiGravity,
 
 	// Twilight

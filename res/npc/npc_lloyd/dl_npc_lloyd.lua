@@ -131,6 +131,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(14, -1, "DL_Lloyd_JointClerics") -- I now declare you a mage of the Order of the Clerics. May the Eternal Light guide thee. 
 			DL:addConditionProgress("npc_lloyd", "guild")
+			DL:addConditionProgress("default", "cleric")
 			DL:addReputationProgress("cleric", 10)
 			DL:setGuild("cleric")
 			DL:addNode()

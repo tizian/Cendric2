@@ -26,6 +26,20 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_unlock', 7);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_unlock', 'item','Scroll - Summon Picklock','Schriftrolle - Dietrich beschwören','Schriftrolle - Dietrich beschwöre', 'Pergamino - Convocación de ganzúa');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_unlock', 'item_desc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Beschwört einen Dietrich, der verschlossene Truhen knackt, sofern die Stärke des Zaubers ausreicht.','Beschwört en Dietrich ane wo e verschlosseni Chischte knackt sofern de Zauber gnueg starch isch für die Chischte.', 'Convoca a una ganzúa que puede abrir cofres si es lo suficientemente fuerte para el cofre.');
 
+-- Shadow Trap
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_shadowtrap', 'spell', 200, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_shadowtrap', 8);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_shadowtrap', 'item','Scroll - Shadow Trap','Schriftrolle - Schattenfalle','Schriftrolle - Schattefalle', 'Pergamino - Trampa de sombra');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_shadowtrap', 'item_desc','Cendric places a shadow trap on the ground that stuns enemies and deals damage over time when triggered.','Cendric platziert eine Schattenfalle am Boden, die Gegner betäubt und Schaden über Zeit verursacht, wenn sie ausgelöst wird.','De Cendric setzt e Schattefalle uf de Bode wo Gegner betäubt und Schade über Ziit macht wenn si usglöst wird.','Cendric coloca una trampa de sombra en el piso, la cual, al activarse, aturde a los enemigos y ocasiona daño por cierto tiempo.');
+
+-- Invisibility
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_invisibility', 'spell', 200, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_invisibility', 9);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item','Scroll - Invisibility','Schriftrolle - Unsichtbarkeit','Schriftrolle - Unsichtbarkeit', 'Pergamino - Invisibilidad');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item_desc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Renders Cendric invisible for a certain duration for certain enemies','Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.','Hace invisible a Cendric ante algunos enemigos por cierto tiempo.');
+
 -- Fireball
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_fireball', 'spell', 150, 400, -1);
