@@ -325,9 +325,9 @@ npc.id:npc_harek
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Harek_Craft
-	translation.en:Sure, did you find some special materials?
-	translation.de:Sicher, hast du spezielle Materialen gefunden?
-	translation.ch:Sicher, hesch denn speziells Material gfunde?
+	translation.en:Sure, did you find some special materials and some iron ore?
+	translation.de:Sicher, hast du spezielle Materialen und etwas Eisenerz gefunden?
+	translation.ch:Sicher, hesch denn speziells Material und chli Iseerz gfunde?
 	[
 		# Link node, tag is next tag
 		tag:17

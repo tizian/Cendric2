@@ -121,7 +121,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("ice_armor", "completed")) then 
 
-		DL:createNPCNode(16, 17, "DL_Harek_Craft") -- Sure, did you find some special materials?
+		DL:createNPCNode(16, 17, "DL_Harek_Craft") -- Sure, did you find some special materials and some iron ore?
 		DL:addNode()
 
 

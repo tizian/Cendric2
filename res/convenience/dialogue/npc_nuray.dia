@@ -61,26 +61,12 @@ npc.id:npc_nuray
 	# [3] NPC Node
 	tag:3
 	# triggers: 
-	# translation: 
-	translation.tag:DL_Nuray_WhoAreYou
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:5
-	]
-}
-{1
-	# [5] NPC Node
-	tag:5
-	# triggers: 
 	trigger:DL:addConditionProgress("npc_nuray", "who_are_you")
 	# translation: 
-	translation.tag:DL_Nuray_WhoAreYou2
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Nuray_WhoAreYou
+	translation.en:I'm Nuray and I can sell you armour if you're interested.
+	translation.de:Ich bin Nuray und ich kann dir Rüstungen verkaufen, wenn du möchtest.
+	translation.ch:Ich bi d'Nuray und ich cha dir Rüstige verchaufe wend wetsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -91,11 +77,67 @@ npc.id:npc_nuray
 	tag:4
 	[
 		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isConditionFulfilled("npc_nuray", "spells")
+		# translation: 
+		translation.tag:DL_Choice_Spells
+		translation.en:Can you teach me some spells?
+		translation.de:Kannst du mir Zauber beibringen?
+		translation.ch:Chasch du mir Zauber biibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_Trade
+		translation.en:Show me your wares.
+		translation.de:Zeig mir deine Waren.
+		translation.ch:Zeig mer dini Ware.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Nuray_Spells
+	translation.en:Hehe, no, I'm no mage. 
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_nuray", "spells")
+	# translation: 
+	translation.tag:DL_Nuray_Spells2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{4
+	# [6] Trade Node
+	tag:6
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
