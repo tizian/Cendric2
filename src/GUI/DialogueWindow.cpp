@@ -92,9 +92,7 @@ void DialogueWindow::setNPC(NPC* npc) {
 	m_npc = npc;
 	m_npcID = m_npc->getNPCData().id;
 	m_dialogueTextID = m_npc->getNPCData().textType;
-	std::string cleanId = m_npcID;
-	cleanId.erase(std::remove_if(cleanId.begin(), cleanId.end(), &isdigit), cleanId.end());
-	m_npcName = g_textProvider->getText(cleanId, "npc");
+	m_npcName = g_textProvider->getText(removeDigits(m_npcID), "npc");
 }
 
 void DialogueWindow::setNPCTalking(const std::string& text) {

@@ -73,6 +73,12 @@ inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
 	return (intersection.width > Epsilon && intersection.height > Epsilon);
 }
 
+inline std::string removeDigits(const std::string& s) {
+	std::string removed = s;
+	removed.erase(std::remove_if(removed.begin(), removed.end(), [](char c) {return isdigit(c); }), removed.end());
+	return removed;
+}
+
 template <typename T>
 inline bool contains(const std::set<T>& c, T item) {
 	return c.find(item) != c.end();
