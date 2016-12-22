@@ -22,23 +22,24 @@ SkeletonRogueEnemy::SkeletonRogueEnemy(const Level* level, Screen* screen) :
 }
 
 void SkeletonRogueEnemy::loadAttributes() {
-	m_attributes.setHealth(100);
+	m_attributes.setHealth(80);
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceShadow = 30;
+	m_attributes.critical = 33;
 	m_attributes.calculateAttributes();
 }
 
 void SkeletonRogueEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 40;
+	chopSpell.damage = 20;
 	chopSpell.duration = sf::seconds(2.f);
 	chopSpell.damagePerSecond = 10;
-	chopSpell.activeDuration = sf::milliseconds(5 * 70);
-	chopSpell.cooldown = sf::milliseconds(2000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 80);
-	chopSpell.spellOffset = sf::Vector2f(10.f, 0.f);
-	chopSpell.fightingTime = sf::milliseconds(5 * 70);
-	chopSpell.castingTime = sf::milliseconds(3 * 70);
+	chopSpell.activeDuration = sf::milliseconds(4 * 70);
+	chopSpell.cooldown = sf::milliseconds(1000);
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 90);
+	chopSpell.spellOffset = sf::Vector2f(10.f, -10.f);
+	chopSpell.fightingTime = sf::milliseconds(4 * 70);
+	chopSpell.castingTime = sf::milliseconds(4 * 70);
 	
 	m_spellManager->addSpell(chopSpell);
 
@@ -46,7 +47,7 @@ void SkeletonRogueEnemy::loadSpells() {
 }
 
 void SkeletonRogueEnemy::handleAttackInput() {
-	if (m_enemyAttackingBehavior->distToTarget() < 180.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 120.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
@@ -76,7 +77,7 @@ void SkeletonRogueEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation* deadAnimation = new Animation(sf::milliseconds(50));
+	Animation* deadAnimation = new Animation(sf::milliseconds(70));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 15; ++i) {
 		deadAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
@@ -87,16 +88,18 @@ void SkeletonRogueEnemy::loadAnimation(int skinNr) {
 	Animation* fightingStartAnimation = new Animation(sf::milliseconds(70));
 	fightingStartAnimation->setSpriteSheet(tex);
 	fightingStartAnimation->addFrame(sf::IntRect(15 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
 	fightingStartAnimation->addFrame(sf::IntRect(16 * 120, skinNr * 120, 120, 120));
+	fightingStartAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
+	fightingStartAnimation->addFrame(sf::IntRect(18* 120, skinNr * 120, 120, 120));
 
 	addAnimation(GameObjectState::Casting, fightingStartAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 16; i < 21; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
-	}
+	fightingAnimation->addFrame(sf::IntRect(18 * 120, skinNr * 120, 120, 120));
+	fightingAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
+	fightingAnimation->addFrame(sf::IntRect(19 * 120, skinNr * 120, 120, 120));
+	fightingAnimation->addFrame(sf::IntRect(20 * 120, skinNr * 120, 120, 120));
 	
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -113,11 +116,11 @@ MovingBehavior* SkeletonRogueEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
-	behavior->setDistanceToAbyss(100.f);
+	behavior->setDistanceToAbyss(80.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(150.f);
+	behavior->setMaxVelocityX(200.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }

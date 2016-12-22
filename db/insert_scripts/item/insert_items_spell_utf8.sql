@@ -40,6 +40,15 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_invisibility', 9);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item','Scroll - Invisibility','Schriftrolle - Unsichtbarkeit','Schriftrolle - Unsichtbarkeit', 'Pergamino - Invisibilidad');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item_desc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Renders Cendric invisible for a certain duration for certain enemies','Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.','Hace invisible a Cendric ante algunos enemigos por cierto tiempo.');
 
+-- Fear
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_fear', 'spell', 250, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_fear', 12);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fear', 'item','Scroll - Fear','Schriftrolle - Furcht','Schriftrolle - Angscht', 'Pergamino - Temor');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fear', 'item_desc','Enemies will flee in terror for a certain duration if the spell is strong enough.','Gegner fliehen für eine gewisse Zeit, allerdings nur, wenn der Zauber genug stark für sie ist.','Gegner flüchtet für e gwüssi Ziit, aber nur, wenn de Zauber gnueg starch isch für si.','Si el hechizo es suficientemente fuerte, los enemigos huirán aterrorizados por un lapso de tiempo.');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_fear', 0, -30, 50, 20);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_fear', 1, 150, 0, 50, 50);
+
 -- Fireball
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_fireball', 'spell', 150, 400, -1);

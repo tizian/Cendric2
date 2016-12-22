@@ -25,16 +25,15 @@ void SkeletonDefaultEnemy::loadAttributes() {
 	m_attributes.setHealth(100);
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceShadow = 30;
+	m_attributes.critical = 10;
 	m_attributes.calculateAttributes();
 }
 
 void SkeletonDefaultEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 40;
-	chopSpell.duration = sf::seconds(2.f);
-	chopSpell.damagePerSecond = 10;
+	chopSpell.damage = 20;
 	chopSpell.activeDuration = sf::milliseconds(5 * 70);
-	chopSpell.cooldown = sf::milliseconds(2000);
+	chopSpell.cooldown = sf::seconds(2.f);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 80);
 	chopSpell.spellOffset = sf::Vector2f(10.f, 0.f);
 	chopSpell.fightingTime = sf::milliseconds(5 * 70);
@@ -46,7 +45,7 @@ void SkeletonDefaultEnemy::loadSpells() {
 }
 
 void SkeletonDefaultEnemy::handleAttackInput() {
-	if (m_enemyAttackingBehavior->distToTarget() < 180.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 120.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
@@ -54,6 +53,7 @@ void SkeletonDefaultEnemy::handleAttackInput() {
 void SkeletonDefaultEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
+	
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
@@ -76,7 +76,7 @@ void SkeletonDefaultEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation* deadAnimation = new Animation(sf::milliseconds(50));
+	Animation* deadAnimation = new Animation(sf::milliseconds(70));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 15; ++i) {
 		deadAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
@@ -113,7 +113,7 @@ MovingBehavior* SkeletonDefaultEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
-	behavior->setDistanceToAbyss(100.f);
+	behavior->setDistanceToAbyss(80.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
@@ -136,7 +136,7 @@ AttackingBehavior* SkeletonDefaultEnemy::createAttackingBehavior(bool asAlly) {
 }
 
 int SkeletonDefaultEnemy::getMentalStrength() const {
-	return 2;
+	return 1;
 }
 
 std::string SkeletonDefaultEnemy::getSpritePath() const {

@@ -5,6 +5,7 @@
 #include "Level/Level.h"
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
+#include "GameObjectComponents/LightComponent.h"
 
 class SkeletonShieldEnemy : public Enemy {
 public:
@@ -15,8 +16,11 @@ public:
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
+	void onHit(Spell* spell) override;
+	void setDead() override;
 
 	EnemyID getEnemyID() const override { return EnemyID::Skeleton_Shield; }
+	float getConfiguredDistanceToHPBar() const override { return 40.f; }
 
 protected:
 	std::string getSpritePath() const override;
@@ -28,4 +32,8 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+
+	LightComponent* m_lightComponent = nullptr;
+	bool m_isHiding = false;
+	void initializeHiding(bool asAlly);
 };

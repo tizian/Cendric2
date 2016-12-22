@@ -17,6 +17,7 @@ public:
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
 	EnemyID getEnemyID() const override { return EnemyID::Skeleton_Archer; }
+	float getConfiguredDistanceToHPBar() const override { return 40.f; }
 
 protected:
 	std::string getSpritePath() const override;

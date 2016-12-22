@@ -15,7 +15,7 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 	calculateNextVelocity(frameTime, m_velocity);
 	AnimatedGameObject::update(frameTime);
 	if (m_isDebugRendering && m_debugInfo) {
-		m_debugInfo->setString("x: " + std::to_string(getPosition().x) + " y: " + std::to_string(getPosition().y));
+		m_debugInfo->setString("x: " + std::to_string(static_cast<int>(getPosition().x)) + " y: " + std::to_string(static_cast<int>(getPosition().y)));
 		m_debugInfo->setPosition(getPosition() + sf::Vector2f(0.f, -30.f));
 	}
 }

@@ -2,7 +2,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ra
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('FireRat','enemy','Fire Rat','Feuerratte','Füürratte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Nekomata','enemy','Nekomata','Nekomata','Nekomata');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Crow','enemy','Crow','Krähe','Raab');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SkeletonDefault','enemy','Mister Boney-Pants Guy','Skelett','Skelett');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SkeletonDefault','enemy','Skeleton','Skelett','Skelett');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SkeletonArcher','enemy','Skeleton Archer','Skelettschütze','Skelett-Bögeler');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SkeletonMage','enemy','Skeleton Mage','Skelettmagier','Skelett-Magier');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SkeletonRogue','enemy','Skeleton Rogue','Skelettschurke','Skelett-Schuft');

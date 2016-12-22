@@ -22,9 +22,11 @@ SkeletonWarriorEnemy::SkeletonWarriorEnemy(const Level* level, Screen* screen) :
 }
 
 void SkeletonWarriorEnemy::loadAttributes() {
-	m_attributes.setHealth(100);
-	m_attributes.resistanceFire = 30;
-	m_attributes.resistanceShadow = 30;
+	m_attributes.setHealth(150);
+	m_attributes.resistanceFire = 50;
+	m_attributes.resistanceShadow = 50;
+	m_attributes.resistancePhysical = 50;
+	m_attributes.critical = 10;
 	m_attributes.calculateAttributes();
 }
 
@@ -33,12 +35,12 @@ void SkeletonWarriorEnemy::loadSpells() {
 	chopSpell.damage = 40;
 	chopSpell.duration = sf::seconds(2.f);
 	chopSpell.damagePerSecond = 10;
-	chopSpell.activeDuration = sf::milliseconds(5 * 70);
-	chopSpell.cooldown = sf::milliseconds(2000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 80);
-	chopSpell.spellOffset = sf::Vector2f(10.f, 0.f);
-	chopSpell.fightingTime = sf::milliseconds(5 * 70);
-	chopSpell.castingTime = sf::milliseconds(3 * 70);
+	chopSpell.activeDuration = sf::milliseconds(300);
+	chopSpell.cooldown = sf::seconds(2.f);
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 80);
+	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
+	chopSpell.castingTime = sf::milliseconds(300);
+	chopSpell.fightingTime = sf::milliseconds(300);
 	
 	m_spellManager->addSpell(chopSpell);
 
@@ -46,7 +48,7 @@ void SkeletonWarriorEnemy::loadSpells() {
 }
 
 void SkeletonWarriorEnemy::handleAttackInput() {
-	if (m_enemyAttackingBehavior->distToTarget() < 180.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 140.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
@@ -76,7 +78,7 @@ void SkeletonWarriorEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation* deadAnimation = new Animation(sf::milliseconds(50));
+	Animation* deadAnimation = new Animation(sf::milliseconds(70));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 15; ++i) {
 		deadAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
@@ -84,19 +86,20 @@ void SkeletonWarriorEnemy::loadAnimation(int skinNr) {
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	Animation* fightingStartAnimation = new Animation(sf::milliseconds(70));
+	Animation* fightingStartAnimation = new Animation();
 	fightingStartAnimation->setSpriteSheet(tex);
-	fightingStartAnimation->addFrame(sf::IntRect(15 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(16 * 120, skinNr * 120, 120, 120));
+	for (int i = 15; i < 18; ++i) {
+		fightingStartAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
+	}
 
 	addAnimation(GameObjectState::Casting, fightingStartAnimation);
 
-	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
+	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 16; i < 21; ++i) {
+	for (int i = 18; i < 20; ++i) {
 		fightingAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
 	}
+	fightingAnimation->setLooped(false);
 	
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -113,11 +116,11 @@ MovingBehavior* SkeletonWarriorEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
-	behavior->setDistanceToAbyss(100.f);
+	behavior->setDistanceToAbyss(80.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(150.f);
+	behavior->setMaxVelocityX(180.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
@@ -130,7 +133,7 @@ AttackingBehavior* SkeletonWarriorEnemy::createAttackingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveBehavior(this);
 	}
-	behavior->setAggroRange(800.f);
+	behavior->setAggroRange(700.f);
 	behavior->setAttackInput(std::bind(&SkeletonWarriorEnemy::handleAttackInput, this));
 	return behavior;
 }

@@ -114,10 +114,10 @@ void WispEnemy::loadAnimation(int skinNr) {
 
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; ++i) {
 		flyingAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
-	for (int i = 3; i > -1; i--) {
+	for (int i = 3; i > -1; --i) {
 		flyingAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
 
@@ -125,10 +125,10 @@ void WispEnemy::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; ++i) {
 		idleAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
-	for (int i = 3; i > -1; i--) {
+	for (int i = 3; i > -1; --i) {
 		idleAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240, 80, 80));
 	}
 
@@ -136,7 +136,7 @@ void WispEnemy::loadAnimation(int skinNr) {
 
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; ++i) {
 		fightingAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240 + 80, 80, 80));
 	}
 
@@ -144,7 +144,7 @@ void WispEnemy::loadAnimation(int skinNr) {
 
 	Animation* deadAnimation = new Animation(sf::seconds(0.2f));
 	deadAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; ++i) {
 		deadAnimation->addFrame(sf::IntRect(i * 80, skinNr * 240 + 160, 80, 80));
 	}
 

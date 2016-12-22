@@ -41,5 +41,6 @@ enum class GameObjectState {
 	Looking, // used by observer/warden enemies
 	Open,	// used by door tiles
 	Closed,	// used by door tiles
-	Hanging // used by bat enemies
+	Hanging, // used by bat enemies
+	Hiding // used by shielded skeleton enemies
 };

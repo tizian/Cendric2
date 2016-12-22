@@ -25,28 +25,27 @@ void SkeletonArcherEnemy::loadAttributes() {
 	m_attributes.setHealth(100);
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceShadow = 30;
+	m_attributes.critical = 10;
 	m_attributes.calculateAttributes();
 }
 
 void SkeletonArcherEnemy::loadSpells() {
-	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 40;
-	chopSpell.duration = sf::seconds(2.f);
-	chopSpell.damagePerSecond = 10;
-	chopSpell.activeDuration = sf::milliseconds(5 * 70);
-	chopSpell.cooldown = sf::milliseconds(2000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 80);
-	chopSpell.spellOffset = sf::Vector2f(10.f, 0.f);
-	chopSpell.fightingTime = sf::milliseconds(5 * 70);
-	chopSpell.castingTime = sf::milliseconds(3 * 70);
+	SpellData arrowSpell = SpellData::getSpellData(SpellID::Projectile);
+	arrowSpell.damage = 20;
+	arrowSpell.duration = sf::seconds(2.f);
+	arrowSpell.damagePerSecond = 5;
+	arrowSpell.cooldown = sf::milliseconds(2000);
+	arrowSpell.fightingTime = sf::milliseconds(400);
+	arrowSpell.castingTime = sf::milliseconds(500);
+	arrowSpell.isBlocking = true;
 	
-	m_spellManager->addSpell(chopSpell);
+	m_spellManager->addSpell(arrowSpell);
 
-	m_spellManager->setCurrentSpell(0); // chop
+	m_spellManager->setCurrentSpell(0); // arrow (projectile)
 }
 
 void SkeletonArcherEnemy::handleAttackInput() {
-	if (m_enemyAttackingBehavior->distToTarget() < 180.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 600.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
@@ -76,7 +75,7 @@ void SkeletonArcherEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation* deadAnimation = new Animation(sf::milliseconds(50));
+	Animation* deadAnimation = new Animation(sf::milliseconds(70));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 15; ++i) {
 		deadAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
@@ -84,19 +83,19 @@ void SkeletonArcherEnemy::loadAnimation(int skinNr) {
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	Animation* fightingStartAnimation = new Animation(sf::milliseconds(70));
+	Animation* fightingStartAnimation = new Animation();
 	fightingStartAnimation->setSpriteSheet(tex);
 	fightingStartAnimation->addFrame(sf::IntRect(15 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
 	fightingStartAnimation->addFrame(sf::IntRect(16 * 120, skinNr * 120, 120, 120));
+	fightingStartAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
+	fightingStartAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, fightingStartAnimation);
 
-	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
+	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 16; i < 21; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
-	}
+	fightingAnimation->addFrame(sf::IntRect(18 * 120, skinNr * 120, 120, 120));
+	fightingAnimation->setLooped(false);
 	
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -114,7 +113,7 @@ MovingBehavior* SkeletonArcherEnemy::createMovingBehavior(bool asAlly) {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(30.f);
+	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(150.f);
@@ -130,7 +129,7 @@ AttackingBehavior* SkeletonArcherEnemy::createAttackingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveBehavior(this);
 	}
-	behavior->setAggroRange(800.f);
+	behavior->setAggroRange(1000.f);
 	behavior->setAttackInput(std::bind(&SkeletonArcherEnemy::handleAttackInput, this));
 	return behavior;
 }
