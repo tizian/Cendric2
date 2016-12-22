@@ -6,6 +6,7 @@ loadRoutine = function(R, W)
 	
 		R:setTalkingActive(true) 
 		R:setLooped(false)
+		R:setReloadEnabled(true)
 		R:setTilePosition(4,61.7)
 		R:goToTile(4,63)
 
@@ -22,11 +23,7 @@ loadRoutine = function(R, W)
 		R:goToTile(13,24)
 		R:goToTile(13,23.5)
 		R:setDisposed()
-		
-		R:setReloadEnabled(true)
-	
-		R:setDisposed()
-		
+
 	end 
 
 end	

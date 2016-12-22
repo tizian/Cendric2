@@ -5,6 +5,7 @@ velocity = 50
 loadRoutine = function(R, W)
 
 	R:setTilePosition(11,8)
+	R:setReloadEnabled(true)
 	R:setLooped(false)
 	
 	if (not W:isConditionFulfilled("npc_rhendal", "talked")) then

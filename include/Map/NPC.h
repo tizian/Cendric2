@@ -48,7 +48,7 @@ private:
 
 	const float TALKING_RANGE = 100.f;
 	bool m_routineReloadNeeded = false;
-	bool m_routineReloadEnabled = true;
+	bool m_routineReloadEnabled = false;
 
 	void trySetDialogue();
 	void turnToMainchar();

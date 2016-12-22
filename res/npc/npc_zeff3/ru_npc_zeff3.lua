@@ -3,6 +3,7 @@ loadRoutine = function(R, W)
 
 	if (not W:isConditionFulfilled("npc_zeff", "zeff_gone")) then
 		R:setDisposed()
+		return
 	end
 	
 	R:setTilePosition(9.5,49.7)

@@ -11,7 +11,6 @@ struct NPCData {
 	sf::FloatRect boundingBox;
 	std::string spritesheetpath;
 	std::string routineID;
-	
 
 	// dialogue
 	bool talkingActive; // the npc will talk without being clicked at when in range

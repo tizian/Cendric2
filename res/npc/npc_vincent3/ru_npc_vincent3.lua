@@ -8,10 +8,12 @@ loadRoutine = function(R, W)
 		R:setTalkingActive(true) 
 		R:setTilePosition(2,3)
 		R:setFacingUp()
+		R:setReloadEnabled(true)
 		return
 	end 
 	
 	R:setTilePosition(6,3)
+	R:setReloadEnabled(false)
 	R:setFacingDown()
 	
 	R:wait(5000)

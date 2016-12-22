@@ -6,10 +6,10 @@ loadRoutine = function(R, W)
 
 	if (W:isConditionFulfilled("default","gandria_open")) then
 		R:setDisposed()
+		return
 	end
 
 	R:setTilePosition(44,52)
-	R:setReloadEnabled(false)
 
 	R:wait(4000)	
 	R:goToTile(43,52)

@@ -7,7 +7,6 @@ loadRoutine = function(R, W)
 		
 			if (W:isConditionFulfilled("npc_edmond", "talked_after_tutorial")) then
 				R:setTilePosition(57, 17)
-				R:setReloadEnabled(false)
 
 				R:goToTile(57,17)
 				R:goToTile(65,17)
@@ -37,6 +36,7 @@ loadRoutine = function(R, W)
 			
 		else
 			R:setTalkingActive(true)
+			R:setReloadEnabled(true)
 			R:setTilePosition(44, 17)
 			
 			R:wait(1000)

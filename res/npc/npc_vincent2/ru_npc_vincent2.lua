@@ -11,7 +11,9 @@ loadRoutine = function(R, W)
 		R:setTalkingActive(true) 
 	end 
 	
+	R:setReloadEnabled(false)
 	R:setTilePosition(5,51.5)
+	
 
 	R:goToTile(15,51.5)
 	R:wait(1000)

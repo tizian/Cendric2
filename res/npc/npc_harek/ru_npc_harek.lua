@@ -2,7 +2,6 @@
 
 loadRoutine = function(R, W)
 
-	
 	R:setTilePosition(3,50.7)
 	
 	R:goToTile(3.7,50.6)

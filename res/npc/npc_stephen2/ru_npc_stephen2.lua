@@ -18,6 +18,7 @@ loadRoutine = function(R, W)
 	end 
 	
 	R:setTilePosition(5,9)
+	R:setReloadEnabled(true)
 
 	R:goToTile(5,9)
 	R:goToTile(5,11)

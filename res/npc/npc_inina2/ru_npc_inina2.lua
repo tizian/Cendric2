@@ -6,12 +6,14 @@ loadRoutine = function(R, W)
 
 	if (not W:isConditionFulfilled("default","second_boss_open") or W:isConditionFulfilled("boss","SecondBoss")) then
 		R:setDisposed()
+		return
 	end
 	
 	if (not W:isConditionFulfilled("npc_inina2","talked")) then
 		R:setTilePosition(6,17)
 		R:setFacingDown()
 		R:setLooped(false)
+		R:setReloadEnabled(true)
 		return
 	end
 

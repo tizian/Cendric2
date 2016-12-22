@@ -15,6 +15,7 @@ loadRoutine = function(R, W)
 		R:goToTile(15,10)
 		
 		R:setTalkingActiveForce(true)
+		R:setReloadEnabled(true)
 		R:setLooped(false)
 		
 	elseif (W:isConditionFulfilled("npc_vincent","talked") and (not W:isConditionFulfilled("npc_vincent", "cooperated") or W:isQuestState("spoiled_fire", "completed"))) then
@@ -25,6 +26,7 @@ loadRoutine = function(R, W)
 		R:goToTile(10.2,10)
 		R:goToTile(13.5,10)
 		R:goToTile(13.5,20)
+		R:setDisposedStep()
 		W:addConditionProgress("npc_vincent", "vincent_gone")
 
 	else
@@ -35,6 +37,7 @@ loadRoutine = function(R, W)
 		R:goToTile(11.2,7.5)
 		
 		R:setLooped(true)
+		R:setReloadEnabled(true)
 	end
 
 end	

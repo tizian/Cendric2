@@ -7,7 +7,6 @@ loadRoutine = function(R, W)
 	end 
 	
 	R:setTilePosition(13,3)
-	R:setReloadEnabled(false)
 	
 	R:setFacingRight()
 	R:wait(10000)
