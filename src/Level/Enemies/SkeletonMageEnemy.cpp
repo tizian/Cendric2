@@ -105,7 +105,7 @@ void SkeletonMageEnemy::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
-MovingBehavior* SkeletonDefaultEnemy::createMovingBehavior(bool asAlly) {
+MovingBehavior* SkeletonMageEnemy::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	if (asAlly) {
 		behavior = new AllyWalkingBehavior(this);

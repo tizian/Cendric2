@@ -6,17 +6,17 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class SkeletonDefaultEnemy : public Enemy {
+class SkeletonRogueEnemy : public Enemy {
 public:
-	SkeletonDefaultEnemy(const Level* level, Screen* screen);
-	~SkeletonDefaultEnemy() {}
+	SkeletonRogueEnemy(const Level* level, Screen* screen);
+	~SkeletonRogueEnemy() {}
 
 	int getMentalStrength() const override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
-	EnemyID getEnemyID() const override { return EnemyID::Skeleton_Default; }
+	EnemyID getEnemyID() const override { return EnemyID::Skeleton_Rogue; }
 
 protected:
 	std::string getSpritePath() const override;

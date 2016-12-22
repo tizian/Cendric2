@@ -1,4 +1,4 @@
-#include "Level/Enemies/SkeletonEnemy.h"
+#include "Level/Enemies/SkeletonShieldEnemy.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
@@ -6,29 +6,29 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 
-REGISTER_ENEMY(EnemyID::Skeleton_Default, SkeletonDefaultEnemy)
+REGISTER_ENEMY(EnemyID::Skeleton_Shield, SkeletonShieldEnemy)
 
-void SkeletonDefaultEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
+void SkeletonShieldEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = rand() % 30 + 10;
 }
 
-void SkeletonDefaultEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
+void SkeletonShieldEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = rand() % 3 + 1;
 }
 
-SkeletonDefaultEnemy::SkeletonDefaultEnemy(const Level* level, Screen* screen) :
+SkeletonShieldEnemy::SkeletonShieldEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 }
 
-void SkeletonDefaultEnemy::loadAttributes() {
+void SkeletonShieldEnemy::loadAttributes() {
 	m_attributes.setHealth(100);
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceShadow = 30;
 	m_attributes.calculateAttributes();
 }
 
-void SkeletonDefaultEnemy::loadSpells() {
+void SkeletonShieldEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 40;
 	chopSpell.duration = sf::seconds(2.f);
@@ -45,13 +45,13 @@ void SkeletonDefaultEnemy::loadSpells() {
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
-void SkeletonDefaultEnemy::handleAttackInput() {
+void SkeletonShieldEnemy::handleAttackInput() {
 	if (m_enemyAttackingBehavior->distToTarget() < 180.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 }
 
-void SkeletonDefaultEnemy::loadAnimation(int skinNr) {
+void SkeletonShieldEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -105,7 +105,7 @@ void SkeletonDefaultEnemy::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
-MovingBehavior* SkeletonDefaultEnemy::createMovingBehavior(bool asAlly) {
+MovingBehavior* SkeletonShieldEnemy::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	if (asAlly) {
 		behavior = new AllyWalkingBehavior(this);
@@ -122,7 +122,7 @@ MovingBehavior* SkeletonDefaultEnemy::createMovingBehavior(bool asAlly) {
 	return behavior;
 }
 
-AttackingBehavior* SkeletonDefaultEnemy::createAttackingBehavior(bool asAlly) {
+AttackingBehavior* SkeletonShieldEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 	if (asAlly) {
 		behavior = new AllyBehavior(this);
@@ -131,15 +131,15 @@ AttackingBehavior* SkeletonDefaultEnemy::createAttackingBehavior(bool asAlly) {
 		behavior = new AggressiveBehavior(this);
 	}
 	behavior->setAggroRange(800.f);
-	behavior->setAttackInput(std::bind(&SkeletonDefaultEnemy::handleAttackInput, this));
+	behavior->setAttackInput(std::bind(&SkeletonShieldEnemy::handleAttackInput, this));
 	return behavior;
 }
 
-int SkeletonDefaultEnemy::getMentalStrength() const {
+int SkeletonShieldEnemy::getMentalStrength() const {
 	return 2;
 }
 
-std::string SkeletonDefaultEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_skeletondefault.png";
+std::string SkeletonShieldEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_skeletondshield.png";
 }
 
