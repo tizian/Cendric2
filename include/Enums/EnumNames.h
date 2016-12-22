@@ -254,8 +254,8 @@ public:
 			return "Nekomata";
 		case EnemyID::Crow:
 			return "Crow";
-		case EnemyID::Skeleton:
-			return "Skeleton";
+		case EnemyID::Skeleton_Default:
+			return "SkeletonDefault";
 		case EnemyID::Gargoyle:
 			return "Gargoyle";
 		case EnemyID::Hunter:
@@ -284,6 +284,16 @@ public:
 			return "Ooze";
 		case EnemyID::Bat:
 			return "Bat";
+		case EnemyID::Skeleton_Archer:
+			return "SkeletonArcher";
+		case EnemyID::Skeleton_Mage:
+			return "SkeletonMage";
+		case EnemyID::Skeleton_Rogue:
+			return "SkeletonRogue";
+		case EnemyID::Skeleton_Shield:
+			return "SkeletonShield";
+		case EnemyID::Skeleton_Warrior:
+			return "SkeletonWarrior";
 		}
 	}
 

@@ -7,7 +7,7 @@ enum class EnemyID {
 	FireRat,
 	Nekomata,
 	Crow,
-	Skeleton,
+	Skeleton_Default,
 	Gargoyle,
 	Hunter,
 	Wisp,
@@ -22,5 +22,10 @@ enum class EnemyID {
 	Prisoner,
 	Ooze,
 	Bat,
+	Skeleton_Archer,
+	Skeleton_Mage,
+	Skeleton_Rogue,
+	Skeleton_Shield,
+	Skeleton_Warrior,
 	MAX
 };
