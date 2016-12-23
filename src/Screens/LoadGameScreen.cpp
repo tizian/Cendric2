@@ -109,7 +109,7 @@ void LoadGameScreen::onYesDeleteSaveGame() {
 	}
 	else {
 		g_logger->logError("SaveGameScreen", "Savegame could not be deleted");
-		setTooltipText("OperationFailed", COLOR_BAD, true);
+		setNegativeTooltip("OperationFailed");
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);

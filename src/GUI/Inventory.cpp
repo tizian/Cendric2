@@ -248,7 +248,7 @@ void Inventory::handleMapRightClick(const InventorySlot* clicked) {
 	else if (clicked->getItemType() == ItemType::Spell)
 		learnSpell(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Consumable)
-		m_mapInterface->getScreen()->setTooltipText("CannotConsumeItemInMap", COLOR_BAD, true);
+		m_mapInterface->getScreen()->setNegativeTooltip("CannotConsumeItemInMap");
 	else if (clicked->getItemType() == ItemType::Permanent)
 		dynamic_cast<WorldScreen*>(m_mapInterface->getScreen())->notifyPermanentItemConsumed(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Convertible)
@@ -266,11 +266,11 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 	else if (clicked->getItemType() == ItemType::Spell)
 		learnSpell(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Permanent)
-		m_levelInterface->getScreen()->setTooltipText("CannotConsumePermanentInLevel", COLOR_BAD, true);
+		m_levelInterface->getScreen()->setNegativeTooltip("CannotConsumePermanentInLevel");
 	else if (clicked->getItemType() == ItemType::Convertible)
 		convertItem(clicked->getItem());
 	else if (Item::isEquipmentType(clicked->getItemType()))
-		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
+		m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
 }
 
 
@@ -285,7 +285,7 @@ void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) {
 	if (m_levelInterface == nullptr || clicked == nullptr) return;
 
 	if (Item::isEquipmentType(clicked->getItemType()))
-		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
+		m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
 	else if (clicked->getItemType() == ItemType::Consumable)
 		m_levelInterface->equipConsumable(clicked->getItemID());
 }
@@ -423,7 +423,7 @@ void Inventory::handleLevelDrop() {
 		m_levelInterface->highlightQuickslots(false);
 	}
 	else if (m_isEquipmentSlotDragged || Item::isEquipmentType(type)) {
-		m_levelInterface->getScreen()->setTooltipText("CannotEquipInLevel", COLOR_BAD, true);
+		m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
 	}
 }
 

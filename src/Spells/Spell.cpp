@@ -91,6 +91,9 @@ void Spell::execOnHit(LevelMovableGameObject* target) {
 	}
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
 		if (enemy->getMentalStrength() >= m_data.ccStrength) {
+			if (getSpellID() == SpellID::Fear) {
+				m_screen->setNegativeTooltip("NotEnoughStrength");
+			}
 			return;
 		}
 	}

@@ -88,7 +88,7 @@ void LevelItem::onRightClick() {
 		pickup();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 	}
 	g_inputController->lockAction();
 }

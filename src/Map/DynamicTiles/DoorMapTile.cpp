@@ -76,7 +76,7 @@ void DoorMapTile::onRightClick() {
 	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
 
 	if (!inRange) {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 	}
 	else if (m_isConditionsFulfilled && !m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
 		open();
@@ -89,7 +89,7 @@ void DoorMapTile::onRightClick() {
 		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("IsLocked");
 	}
 }
 

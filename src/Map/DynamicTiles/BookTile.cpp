@@ -46,7 +46,7 @@ void BookTile::onRightClick() {
 		startReading();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 	}
 }
 

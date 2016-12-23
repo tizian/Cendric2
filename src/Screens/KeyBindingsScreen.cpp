@@ -51,7 +51,7 @@ void KeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 	}
 	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedKey() != sf::Keyboard::Unknown) {
 		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedKey())) {
-			setTooltipText("KeyReserved", COLOR_BAD, true);
+			setNegativeTooltip("KeyReserved");
 		}
 	}
 

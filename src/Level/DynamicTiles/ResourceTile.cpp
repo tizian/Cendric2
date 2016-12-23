@@ -98,7 +98,7 @@ void ResourceTile::initializeResource(int skinNr) {
 
 void ResourceTile::loot() {
 	if (!m_screen->getCharacterCore()->hasItem(m_toolItemID, 1)) {
-		m_screen->setTooltipText(m_noToolMessage, COLOR_BAD, true);
+		m_screen->setNegativeTooltip(m_noToolMessage);
 		return;
 	}
 	// loot, set blocking for that time
@@ -124,7 +124,7 @@ void ResourceTile::loot() {
 void ResourceTile::onRightClick() {
 	if (m_mainChar->isDead()) return;
 	if (!m_interactComponent->isInteractable()) {
-		m_screen->setTooltipText("NothingToGain", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("NothingToGain");
 		return;
 	}
 
@@ -134,7 +134,7 @@ void ResourceTile::onRightClick() {
 		loot();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 	}
 	g_inputController->lockAction();
 }

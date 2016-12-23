@@ -792,6 +792,8 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.id = SpellID::ShadowTrap;
 	shadowTrap.spellType = SpellType::Twilight;
 	shadowTrap.spritesheetPath = "res/assets/spells/spritesheet_spell_shadowtrap.png";
+	shadowTrap.soundPath = "res/sound/spell/trap.ogg";
+	shadowTrap.isSoundLooping = false;
 	shadowTrap.iconTextureRect = sf::IntRect(50, 50, 50, 50);
 
 	shadowTrap.cooldown = sf::seconds(10);

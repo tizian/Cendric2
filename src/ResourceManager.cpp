@@ -111,6 +111,7 @@ void ResourceManager::init() {
 	loadSoundbuffer(GlobalResource::SOUND_GUI_PICKUP, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_OPENWINDOW, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_QUESTPROGRESS, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_GUI_NEGATIVE, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_MISC_UNLOCK, ResourceType::Global);
 
 	ConfigurationReader reader;

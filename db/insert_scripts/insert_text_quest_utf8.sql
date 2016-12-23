@@ -89,3 +89,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('further_investigation','quest','Further Investigation','Weitere Ermittlungen','Wiiteri Untersuechige','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('further_investigation', 'quest_desc','Lloyd wants me to join Inina for further investigation regarding the case with the wolf monster.','Lloyd möchte, dass ich Inina bei weiteren Ermittlungen bei der Sache mit dem Wolfmonster helfe.', 'De Lloyd wett, dass ich de Inina bi wiitere Untersuechige bide Sach mitem Wolfmonster hilf.','?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('receiver','quest','The Receiver','Der Hehler','De Hehler','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('receiver', 'quest_desc','If I ask Douglas on the market square for the price of his monocle, I''ll get a good price for my stolen goods.','Wenn ich Douglas nach dem Preis für sein Monokel frage, kann ich bei ihm meine Sachen für einen guten Preis loswerden.', 'Wenn ich de Douglas nach em Priis für sis Monokel frog, chani bi ihm mini Sache für en guete Priis loswerde.','?');

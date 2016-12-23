@@ -54,6 +54,9 @@ void ChestLevelTile::onHit(Spell* spell) {
 			if (spell->getStrength() >= m_data.chestStrength) {
 				unlock(true);
 			}
+			else {
+				m_screen->setNegativeTooltip("NotEnoughStrength");
+			}
 			spell->setDisposed();
 		}
 		break;
@@ -96,7 +99,7 @@ void ChestLevelTile::setChestData(const ChestTileData& data) {
 	}
 
 	setLoot(data.loot.first, data.loot.second);
-	
+
 	if (data.isOpen) {
 		unlock(false);
 	}
@@ -144,7 +147,7 @@ void ChestLevelTile::loot() {
 	if (!m_data.conditionProgress.type.empty() && !m_data.conditionProgress.name.empty()) {
 		dynamic_cast<LevelScreen*>(m_screen)->notifyConditionAdded(m_data.conditionProgress);
 	}
-	
+
 	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_data.objectID);
 	m_interactComponent->setInteractable(false);
 
@@ -158,7 +161,7 @@ void ChestLevelTile::loot() {
 
 void ChestLevelTile::onRightClick() {
 	if (m_mainChar->isDead() || !m_interactComponent->isInteractable()) return;
-	
+
 	// check if the chest is in range
 	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE;
 
@@ -167,7 +170,7 @@ void ChestLevelTile::onRightClick() {
 			loot();
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("OutOfRange");
 		}
 		g_inputController->lockAction();
 	}
@@ -176,7 +179,7 @@ void ChestLevelTile::onRightClick() {
 			unlock(true);
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("OutOfRange");
 		}
 		g_inputController->lockAction();
 	}
@@ -188,12 +191,12 @@ void ChestLevelTile::onRightClick() {
 			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("OutOfRange");
 		}
 		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("IsLocked");
 	}
 }
 

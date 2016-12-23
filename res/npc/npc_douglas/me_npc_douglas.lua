@@ -1,4 +1,4 @@
--- lua script for merchand 'Douglas'
+-- lua script for merchand and receiver 'Douglas'
 wares = 
 {
 	{"eq_wizardhatfire", 1},
@@ -12,5 +12,7 @@ wares =
 }
 
 multiplier = 2.0
+receiver_condition = {"default", "receiver_douglas"}
+receiver_multiplier = 1.2
 
 

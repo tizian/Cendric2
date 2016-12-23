@@ -9,7 +9,7 @@ std::string FearSpellCreator::getStrengthModifierName() const {
 }
 
 void FearSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
-	SpellData spellData= m_spellData;
+	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
 	int div = 0;
 	int sign = 1;

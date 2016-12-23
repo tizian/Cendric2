@@ -60,7 +60,7 @@ void CheckpointTile::onLeftClick() {
 	if (m_state == GameObjectState::Active) return;
 	g_inputController->lockAction();
 	if (dist(m_mainChar->getCenter(), getCenter()) > ACTIVATE_RANGE) {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 		return;
 	}
 

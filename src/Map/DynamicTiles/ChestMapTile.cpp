@@ -66,7 +66,7 @@ void ChestMapTile::onRightClick() {
 			loot();
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("OutOfRange");
 		}
 		g_inputController->lockAction();
 	}
@@ -75,7 +75,7 @@ void ChestMapTile::onRightClick() {
 			unlock();
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("OutOfRange");
 		}
 		g_inputController->lockAction();
 	}
@@ -87,12 +87,12 @@ void ChestMapTile::onRightClick() {
 			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("OutOfRange");
 		}
 		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("IsLocked");
 	}
 }
 

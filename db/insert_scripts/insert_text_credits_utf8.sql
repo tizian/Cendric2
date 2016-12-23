@@ -40,6 +40,8 @@ Haab
 
 "Meadows Theme"
 
+---
+
 -- Isa --
 
 "Ratcave"
@@ -80,8 +82,8 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effects from OpenGameArt.org >>>
-Water Splash - Mike Koenig
-Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+Featuring sounds from Mike Koenig
+Featuring sounds from Little Robot Sound Factory
 
 <<< Level & Map Design >>>
 Isa
@@ -178,6 +180,8 @@ Haab
 
 "Meadows Theme"
 
+---
+
 -- Isa --
 
 "Ratcave"
@@ -218,8 +222,8 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effekte von OpenGameArt.org >>>
-Water Splash - Mike Koenig
-Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+Mit Sound von Mike Koenig
+Mit Sound von Little Robot Sound Factory
 
 <<< Level & Karten Design >>>
 Isa
@@ -313,6 +317,8 @@ Haab
 
 "Meadows Theme"
 
+---
+
 -- Isa --
 
 "Ratcave"
@@ -352,8 +358,8 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effekte vo OpenGameArt.org >>>
-Water Splash - Mike Koenig
-Teleport, Open GUI, Gold Pickup - Little Robot Sound Factory
+Mit Sound vom Mike Koenig
+Mit Sound vo Little Robot Sound Factory
 
 <<< Level & Chartä Design >>>
 Isa

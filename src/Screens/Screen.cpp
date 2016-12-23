@@ -180,6 +180,11 @@ void Screen::setTooltipText(const string& textKey, const sf::Color& color, bool 
 	setTooltipTextRaw(g_textProvider->getText(textKey), color, isOverride);
 }
 
+void Screen::setNegativeTooltip(const std::string& textKey) {
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_NEGATIVE);
+	setTooltipText(textKey, COLOR_BAD, true);
+}
+
 void Screen::renderTooltipText(sf::RenderTarget& target) const {
 	sf::View oldView = target.getView();
 	target.setView(target.getDefaultView());

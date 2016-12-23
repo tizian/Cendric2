@@ -2,6 +2,7 @@
 #include "Map/MapMainCharacter.h"
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "GameObjectComponents/LightComponent.h"
 
 NPC::NPC(MapScreen* mapScreen) : MapMovableGameObject(mapScreen->getWorld()) {
 	m_screen = mapScreen;
@@ -96,6 +97,10 @@ void NPC::load(const NPCData& data) {
 		setTalkingEnabled(true);
 		m_routine.load(data.routineID, this);
 	}
+
+	if (data.lightData.radius.x > 0.f && data.lightData.radius.y > 0) {
+		addComponent(new LightComponent(data.lightData, this));
+	}
 }
 
 void NPC::reloadRoutine() {
@@ -116,7 +121,7 @@ void NPC::onRightClick() {
 		trySetDialogue();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 	}
 }
 
@@ -163,7 +168,7 @@ void NPC::checkCollisionWithMainChar() {
 
 void NPC::trySetDialogue() {
 	if (m_NPCdata.dialogueID.empty() || !m_NPCdata.talkingEnabled) {
-		m_screen->setTooltipText("NothingToSay", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("NothingToSay");
 		return;
 	}
 	MapScreen* mapScreen = dynamic_cast<MapScreen*>(m_screen);

@@ -341,7 +341,7 @@ void Enemy::onRightClick() {
 			loot();
 		}
 		else {
-			m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("OutOfRange");
 		}
 	}
 	else if (!m_isDead && !isAlly() && m_isHPBarVisible) {

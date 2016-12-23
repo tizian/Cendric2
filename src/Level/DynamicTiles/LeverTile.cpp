@@ -65,7 +65,7 @@ void LeverTile::onRightClick() {
 		switchLever();
 	}
 	else {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 	}
 	g_inputController->lockAction();
 }
@@ -77,7 +77,7 @@ void LeverTile::setDependentTiles(const std::vector<LeverDependentTile*>& depend
 void LeverTile::switchLever() {
 	for (auto& tile : m_dependentTiles) {
 		if (!tile->isSwitchable()) {
-			m_screen->setTooltipText("LeverStuck", COLOR_BAD, true);
+			m_screen->setNegativeTooltip("LeverStuck");
 			return;
 		}
 	}

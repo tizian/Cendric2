@@ -1,0 +1,45 @@
+# dia file for dialogue for npc: npc_morton
+
+npc.id:npc_morton
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_morton", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_morton", "talked")
+	# translation: 
+	translation.tag:DL_Morton_BeGone
+	translation.en:What are you doing here? You're disturbing the peace of the dead. Be gone!
+	translation.de:Was machst du hier? Du störst die Ruhe der Toten. Hinfort mit dir.
+	translation.ch:Was machsch du da? Du störsch d'Rueh vode Tote. Husch, furt mit dir!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}

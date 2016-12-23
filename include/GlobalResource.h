@@ -117,6 +117,7 @@ public:
 	static const std::string SOUND_GUI_PICKUP;
 	static const std::string SOUND_GUI_OPENWINDOW;
 	static const std::string SOUND_GUI_QUESTPROGRESS;
+	static const std::string SOUND_GUI_NEGATIVE;
 
 	static const std::string SOUND_MISC_UNLOCK;
 

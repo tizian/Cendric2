@@ -38,7 +38,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_invisibility', 'spell', 200, 400, -1);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_invisibility', 9);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item','Scroll - Invisibility','Schriftrolle - Unsichtbarkeit','Schriftrolle - Unsichtbarkeit', 'Pergamino - Invisibilidad');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item_desc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Renders Cendric invisible for a certain duration for certain enemies','Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.','Hace invisible a Cendric ante algunos enemigos por cierto tiempo.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item_desc','Renders Cendric invisible for a certain duration for certain enemies','Cendric wird unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Cendric wird unsichtbar für e gwüssi Ziit und gwüssi Gegner.','Hace invisible a Cendric ante algunos enemigos por cierto tiempo.');
 
 -- Fear
 

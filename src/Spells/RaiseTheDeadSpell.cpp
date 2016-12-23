@@ -23,6 +23,7 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	Enemy* enemy = dynamic_cast<Enemy*>(target);
 	if (enemy == nullptr) return;
 	if (enemy->getMentalStrength() >= m_data.strength) {
+		m_screen->setNegativeTooltip("NotEnoughStrength");
 		setDisposed();
 		return;
 	}

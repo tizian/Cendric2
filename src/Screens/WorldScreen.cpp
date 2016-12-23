@@ -319,7 +319,7 @@ void WorldScreen::quickload() {
 	CharacterCore* newCharacterCore = new CharacterCore();
 	if (!newCharacterCore->quickload()) {
 		// no quicksave exists
-		setTooltipText("NoQuicksaveExists", COLOR_BAD, true);
+		setNegativeTooltip("NoQuicksaveExists");
 		delete newCharacterCore;
 	}
 	else {

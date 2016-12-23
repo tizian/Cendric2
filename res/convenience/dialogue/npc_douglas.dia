@@ -44,6 +44,16 @@ npc.id:npc_douglas
 	]
 	[
 		# Link node, tag is next tag
+		tag:4
+		condition:DL:isQuestState("receiver", "started")
+		# translation: 
+		translation.tag:DL_Choice_Receiver
+		translation.en:How much is your monocle?
+		translation.de:Wie viel kostet dein Monokel?
+		translation.ch:Wevil chostet dis Monokel?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -55,6 +65,23 @@ npc.id:npc_douglas
 {4
 	# [3] Trade Node
 	tag:3
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:changeQuestState("receiver", "completed")
+	trigger:DL:addConditionProgress("default", "receiver_douglas")
+	trigger:DL:addReputationProgress("thief", 5)
+	# translation: 
+	translation.tag:DL_Douglas_Receiver
+	translation.en:(Grins) That's priceless.
+	translation.de:(Grinst) Das ist unbezahlbar.
+	translation.ch:(Grinst) Da isch unbezahlbar.
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -28,11 +28,11 @@ void MerchantInterface::completeTrade() {
 void MerchantInterface::sellItem(const Item* item) {
 	if (item == nullptr) return;
 	if (item->getValue() < 0) {
-		m_screen->setTooltipText("Unsalable", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("Unsalable");
 		return;
 	}
 	std::string id = item->getID();
-	m_screen->notifyItemChange("gold", item->getValue());
+	m_screen->notifyItemChange("gold", (int)std::ceil(m_data.receiver_multiplier * item->getValue()));
 	if (!contains(m_data.wares, id)) {
 		m_data.wares.insert({ id, 1 });
 	}
@@ -48,11 +48,11 @@ void MerchantInterface::sellItem(const Item* item) {
 void MerchantInterface::buyItem(const Item* item) {
 	if (item == nullptr) return;
 	if (m_core->getData().gold < (int)std::ceil(m_data.multiplier * item->getValue())) {
-		m_screen->setTooltipText("NotEnoughGold", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("NotEnoughGold");
 		return;
 	}
 	if (!isReputationReached(item)) {
-		m_screen->setTooltipText("NotEnoughReputation", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("NotEnoughReputation");
 		return;
 	}
 	std::string id = item->getID();

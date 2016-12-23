@@ -1,10 +1,10 @@
 #include "FileIO/MerchantLoader.h"
 #include "GlobalResource.h"
+#include "CharacterCore.h"
 
-using namespace std;
 using namespace luabridge;
 
-MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) {
+MerchantData MerchantLoader::loadMerchant(const std::string& merchantID, const CharacterCore* core) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 
@@ -27,6 +27,25 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) {
 		}
 		else {
 			merchantData.multiplier = mult;
+		}
+	}
+
+	// handle receiver
+	LuaRef receiver_condition = getGlobal(L, "receiver_condition");
+	if (receiver_condition.isTable()) {
+		LuaRef conditionType = receiver_condition[1];
+		LuaRef condition = receiver_condition[2];
+		if (!conditionType.isString() || !conditionType.isString()) {
+			g_logger->logError("MerchantLoader", "File [" + filename + "]: merchant condition table not resolved, wrong types.");
+			return merchantData;
+		}
+
+		if (core->isConditionFulfilled(conditionType.cast<std::string>(), condition.cast<std::string>())) {
+			LuaRef receiver_multiplier = getGlobal(L, "receiver_multiplier");
+			if (receiver_multiplier.isNumber()) {
+				float mult = receiver_multiplier.cast<float>();
+				merchantData.receiver_multiplier = mult;
+			}
 		}
 	}
 
@@ -54,7 +73,7 @@ MerchantData MerchantLoader::loadMerchant(const std::string& merchantID) {
 
 	LuaRef reputation = getGlobal(L, "reputation");
 	if (reputation.isTable()) {
-		int i = 1; 
+		int i = 1;
 		LuaRef element = reputation[i];
 		while (!element.isNil()) {
 			LuaRef name = element[1];

@@ -40,6 +40,8 @@ public:
 	// sets the tooltip text to the translated 'textKey' and display it at the tooltip position thats always at the bootom mid of the screen
 	// if override is set, this new text will display anyway, regardless of what other text is displaying.
 	void setTooltipText(const std::string& textKey, const sf::Color& color, bool isOverride);
+	// sets a negative tooltip text (red, override and plays the negative soundeffect)
+	void setNegativeTooltip(const std::string& textKey);
 	// sets the tooltip text but without translating it
 	void setTooltipTextRaw(const std::string& text, const sf::Color& color, bool isOverride);
 	// updates the tooltip text in 'm_tooltipText'. used so tooltip texts don't get stuck.

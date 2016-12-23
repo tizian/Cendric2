@@ -25,11 +25,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(3, 5, "DL_Nuray_WhoAreYou") -- 
-		DL:addNode()
-
-
-		DL:createNPCNode(5, -2, "DL_Nuray_WhoAreYou2") -- 
+		DL:createNPCNode(3, -2, "DL_Nuray_WhoAreYou") -- I'm Nuray and I can sell you armour if you're interested.
 		DL:addConditionProgress("npc_nuray", "who_are_you")
 		DL:addNode()
 
@@ -37,7 +33,53 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(4)
+	if (not DL:isConditionFulfilled("npc_nuray", "spells")) then 
+		DL:addChoice(7, "DL_Choice_Spells") -- Can you teach me some spells?
+	end
+	DL:addChoice(6, "DL_Choice_Trade") -- Show me your wares.
+	if (not DL:isConditionFulfilled("npc_nuray", "leader")) then 
+		DL:addChoice(5, "DL_Choice_Leader") -- Is Vincent the leader of the guild?
+	end
+	if (DL:getGuild() == "thief" and DL:isQuestState("receiver", "void")) then 
+		DL:addChoice(9, "DL_Choice_Receiver") -- Can I sell you my valuable stuff?
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
+
+	if (not DL:isConditionFulfilled("npc_nuray", "spells")) then 
+
+		DL:createNPCNode(7, 8, "DL_Nuray_Spells") -- No, I'm no mage. I'm the only one in my family born without this... curse.
+		DL:addNode()
+
+
+		DL:createNPCNode(8, -2, "DL_Nuray_Spells2") -- But I'm quite okay without it. (Points at her daggers)
+		DL:addConditionProgress("npc_nuray", "spells")
+		DL:addNode()
+
+	end
+
+
+	DL:createTradeNode(6, -2)
+	DL:addNode()
+
+	if (not DL:isConditionFulfilled("npc_nuray", "leader")) then 
+
+		DL:createNPCNode(5, -2, "DL_Nuray_Leader") -- (Smiles) No, we don't really have a "leader". Just people with more prestige than others. 
+		DL:addConditionProgress("npc_nuray", "leader")
+		DL:addNode()
+
+	end
+
+	if (DL:getGuild() == "thief" and DL:isQuestState("receiver", "void")) then 
+
+		DL:createNPCNode(9, 10, "DL_Nuray_Receiver") -- You're looking for a receiver, eh. I'm not your girl then, but talk to Douglas on the market square.
+		DL:addNode()
+
+
+		DL:createNPCNode(10, -2, "DL_Nuray_Receiver2") -- Just ask him how much his monocle costs and he'll know what's up.
+		DL:changeQuestState("receiver", "started")
+		DL:addNode()
+
+	end
 
 end

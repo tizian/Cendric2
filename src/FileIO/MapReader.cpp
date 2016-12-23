@@ -706,6 +706,21 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.dialoguetexture = textAttr;
 				}
+				else if (attrText.compare("light") == 0) {
+
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+
+					std::string value = textAttr;
+					LightData lightData;
+					if (!resolveLightString(value, lightData)) {
+						return false;
+					}
+					npc.lightData = lightData;
+				}
 				else if (attrText.compare("boundingbox") == 0) {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");

@@ -18,11 +18,24 @@ loadDialogue = function(DL)
 
 	DL:createChoiceNode(2)
 	DL:addChoice(3, "DL_Choice_ShowYourWares") -- Show me your armour.
+	if (DL:isQuestState("receiver", "started")) then 
+		DL:addChoice(4, "DL_Choice_Receiver") -- How much is your monocle?
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
 
 	DL:createTradeNode(3, -2)
 	DL:addNode()
+
+	if (DL:isQuestState("receiver", "started")) then 
+
+		DL:createNPCNode(4, -2, "DL_Douglas_Receiver") -- (Grins) That's priceless.
+		DL:changeQuestState("receiver", "completed")
+		DL:addConditionProgress("default", "receiver_douglas")
+		DL:addReputationProgress("thief", 5)
+		DL:addNode()
+
+	end
 
 end

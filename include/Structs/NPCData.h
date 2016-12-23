@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Structs/LightData.h"
 
 struct NPCData {
 	// npc on map
@@ -11,6 +12,7 @@ struct NPCData {
 	sf::FloatRect boundingBox;
 	std::string spritesheetpath;
 	std::string routineID;
+	LightData lightData;
 
 	// dialogue
 	bool talkingActive; // the npc will talk without being clicked at when in range
@@ -30,6 +32,7 @@ const struct NPCData DEFAULT_NPC =
 	sf::FloatRect(0.f, 0.f, 50.f, 50.f),
 	"",
 	"",
+	LightData(),
 
 	false,
 	true,

@@ -1,0 +1,1 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Morton_BeGone', 'dl_npc_morton', 'What are you doing here? You''re disturbing the peace of the dead. Be gone!', 'Was machst du hier? Du störst die Ruhe der Toten. Hinfort mit dir.', 'Was machsch du da? Du störsch d''Rueh vode Tote. Husch, furt mit dir!');

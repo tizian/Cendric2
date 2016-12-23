@@ -102,7 +102,7 @@ void SaveGameScreen::onYesOverwriteSaveGame() {
 	}
 	else {
 		g_logger->logError("SaveGameScreen", "Savegame could not be saved");
-		setTooltipText("OperationFailed", COLOR_BAD, true);
+		setNegativeTooltip("OperationFailed");
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);
@@ -115,7 +115,7 @@ void SaveGameScreen::onYesDeleteSaveGame() {
 	}
 	else {
 		g_logger->logError("SaveGameScreen", "Savegame could not be deleted");
-		setTooltipText("OperationFailed", COLOR_BAD, true);
+		setNegativeTooltip("OperationFailed");
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);
@@ -145,7 +145,7 @@ void SaveGameScreen::onYesNewSaveGame() {
 	}
 	else {
 		g_logger->logError("SaveGameScreen", "Savegame could not be created");
-		setTooltipText("OperationFailed", COLOR_BAD, true);
+		setNegativeTooltip("OperationFailed");
 	}
 	m_saveGameWindow->reload();
 	setAllButtonsEnabled(true);

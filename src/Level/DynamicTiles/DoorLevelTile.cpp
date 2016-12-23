@@ -53,6 +53,9 @@ void DoorLevelTile::onHit(Spell* spell) {
 		open();
 		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 	}
+	else {
+		m_screen->setNegativeTooltip("NotEnoughStrength");
+	}
 	spell->setDisposed();
 }
 
@@ -63,7 +66,7 @@ void DoorLevelTile::onRightClick() {
 	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
 
 	if (!inRange) {
-		m_screen->setTooltipText("OutOfRange", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("OutOfRange");
 	}
 	else if (!m_doorData.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_doorData.keyItemID, 1)) {
 		open();
@@ -76,7 +79,7 @@ void DoorLevelTile::onRightClick() {
 		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setTooltipText("IsLocked", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("IsLocked");
 	}
 }
 

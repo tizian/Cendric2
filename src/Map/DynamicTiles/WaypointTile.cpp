@@ -58,7 +58,7 @@ void WaypointTile::onLeftClick() {
 
 void WaypointTile::onRightClick() {
 	if (m_state == GameObjectState::Idle) {
-		m_screen->setTooltipText("WaypointNotActive", COLOR_BAD, true);
+		m_screen->setNegativeTooltip("WaypointNotActive");
 		return;
 	}
 	const sf::FloatRect& bb = *m_mainChar->getBoundingBox();

@@ -32,3 +32,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_douglas','npc','Douglas','Douglas','Douglas');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_thiran','npc','Thiran','Thiran','Thiran');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_nuray','npc','Nuray','Nuray','Nuray');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_morton','npc','Grave Digger Morton','Totengräber Morton','Totegräber Morton');

@@ -96,6 +96,26 @@ npc.id:npc_nuray
 	]
 	[
 		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_nuray", "leader")
+		# translation: 
+		translation.tag:DL_Choice_Leader
+		translation.en:Is Vincent the leader of the guild?
+		translation.de:Ist Vincent der Anführer der Gilde?
+		translation.ch:Isch de Vincent de Aführer vode Gilde?
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:DL:getGuild() == "thief" and DL:isQuestState("receiver", "void")
+		# translation: 
+		translation.tag:DL_Choice_Receiver
+		translation.en:Can I sell you my valuable stuff?
+		translation.de:Kann ich bei dir wertvolle Dinge loswerden?
+		translation.ch:Chan ich bi dir wertvolli Sache loswerde?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -110,9 +130,9 @@ npc.id:npc_nuray
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Nuray_Spells
-	translation.en:Hehe, no, I'm no mage. 
-	translation.de:
-	translation.ch:
+	translation.en:No, I'm no mage. I'm the only one in my family born without this... curse.
+	translation.de:Nein, ich bin keine Magierin. Ich bin die einzige in meiner Familie, die ohne diesen... Fluch geboren wurde.
+	translation.ch:Nei, ich bi ke Magierin. Ich bi di einzig i minere Familie wo ohni de... Fluech gebore worde isch.
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -125,9 +145,9 @@ npc.id:npc_nuray
 	trigger:DL:addConditionProgress("npc_nuray", "spells")
 	# translation: 
 	translation.tag:DL_Nuray_Spells2
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.en:But I'm quite okay without it. (Points at her daggers)
+	translation.de:Aber ich komme auch ohne ziemlich gut klar. (Zeigt auf ihre Dolche)
+	translation.ch:Aber ich chum au ohni ganz guet z'schlag. (Zeigt uf iri Dölch)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -136,6 +156,50 @@ npc.id:npc_nuray
 {4
 	# [6] Trade Node
 	tag:6
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_nuray", "leader")
+	# translation: 
+	translation.tag:DL_Nuray_Leader
+	translation.en:(Smiles) No, we don't really have a "leader". Just people with more prestige than others. 
+	translation.de:(Lächelt) Nein, wir haben nicht wirklich einen "Anführer". Nur Leute mit mehr Ansehen als andere.
+	translation.ch:(Lächlet) Nei, mir hend nid würkli en "Aführer". Eifach Lüt wo me Ruef hend we anderi.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Nuray_Receiver
+	translation.en:You're looking for a receiver, eh. I'm not your girl then, but talk to Douglas on the market square.
+	translation.de:Du suchst also einen Hehler, eh. Ich bin es nicht, aber du kannst ja mal mit Douglas auf dem Markt sprechen.
+	translation.ch:Du suechsch also en Hehler, he. Ich bis nid, aber du chasch ja mal mitem Douglas ufem Markt rede.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:changeQuestState("receiver", "started")
+	# translation: 
+	translation.tag:DL_Nuray_Receiver2
+	translation.en:Just ask him how much his monocle costs and he'll know what's up.
+	translation.de:Frag ihn einfach wie viel sein Monokel kostet und er weiss, was du möchtest.
+	translation.ch:Frög in eifach wevil sis Monokel chostet und er weiss was Sach isch.
 	[
 		# Link node, tag is next tag
 		tag:-2
