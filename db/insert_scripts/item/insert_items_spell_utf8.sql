@@ -49,6 +49,13 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_fear', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_fear', 1, 150, 0, 50, 50);
 
+-- Leech
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_leech', 'spell', 250, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_leech', 13);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_leech', 'item','Scroll - Leech','Schriftrolle - Lebensraub','Schriftrolle - Lebensraub', 'Pergamino - Sanguijuela');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_leech', 'item_desc','Sends out leeching spells that damage enemies and return to Cendric to heal  him if they hit an enemy.','Schickt lebensraubende Zauber aus, die zu Cendric zurückkehren, um ihn zu heilen, falls sie einen Gegner getroffen haben.','Schickt lebensraubendi Zauber uus wo zum Cendric zruggchömed zum ihn heile falls si en Gegner troffe hend.','Envía un hechizo de sanguijuelas que dañan a los enemigos y regresan a Cendric para curarlo cuando golpean a un enemigo.');
+
 -- Fireball
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_fireball', 'spell', 150, 400, -1);

@@ -148,6 +148,7 @@ item.id:sp_unlock,1
 item.id:sp_shadowtrap,1
 item.id:sp_invisibility,1
 item.id:sp_fear,1
+item.id:sp_leech,1
 item.id:sp_fireball,1
 item.id:ke_test_1,1
 item.id:ke_test_2,1
