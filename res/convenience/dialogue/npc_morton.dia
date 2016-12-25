@@ -35,11 +35,50 @@ npc.id:npc_morton
 	tag:2
 	[
 		# Link node, tag is next tag
+		tag:3
+		condition:DL:isQuestState("favor_for_a_favor", "started") and not DL:isConditionFulfilled("npc_morton", "crypt_open")
+		# translation: 
+		translation.tag:DL_Choice_Syrah
+		translation.en:Syrah sent me. I need to go into that crypt.
+		translation.de:Syrah schickt mich. Ich muss in diese Krypta.
+		translation.ch:D'Syrah het mich gschickt. Ich mun i die Krypta.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morton_Syrah
+	translation.en:Ah, Syrah. (Morton stares at you) Why does she always hire guys like you. 
+	translation.de:Ah, Syrah. (Morton starrt dich an) Wieso heuert sie auch immer Typen wie dich für ihre Aufträge an.
+	translation.ch:Ah, d'Syrah. (De Morton starrt dich ah) Weso stellt si au immer so Type we dich ah.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_morton", "crypt_open")
+	# translation: 
+	translation.tag:DL_Morton_Syrah2
+	translation.en:(Sighs) You can go in. But hurry up and don't touch anything you don't need.
+	translation.de:(Seufzt) Du kannst rein. Aber beeil dich und fass nichts an, das du nicht brauchst.
+	translation.ch:(Süüfzet) Du chasch ie. Aber mach chli schnell und lang nüt ah wod nid bruchsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

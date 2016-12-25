@@ -82,6 +82,12 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_bone', 'item_desc', 'I really don''t want to know what kind of bone it is.','Ich will wirklich nicht wissen was das für ein Knochen ist.','Ich wett würkli gar nid wüsse wa da füren Chnoche isch.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_bone', 'quest', 450, 550, -1);
 
+-- Cinderbloom
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_cinderbloom', 'item', 'Cinderbloom','Aschenblüte','Zündelblueme');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_cinderbloom', 'item_desc', 'It only prospers on the grave of someone that died in a fire.','Sie gedeiht nur auf dem Grab von jemandem, der im Feuer verendet ist.','Si wachst nur uf em Grab vo öpperem vo imne Füür gstorbe isch.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_cinderbloom', 'quest', 150, 600, -1);
+
 -- Recipe: Invisibility Potion 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_invisrecipe', 'item', 'Recipe: Invisibility Potion','Rezept: Unsichtbarkeitstrank','Rezept: Unsichtbarkeitstrank');

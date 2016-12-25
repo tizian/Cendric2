@@ -139,6 +139,26 @@ npc.id:npc_syrah
 	]
 	[
 		# Link node, tag is next tag
+		tag:22
+		condition:(DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))
+		# translation: 
+		translation.tag:DL_Choice_MarkQuestDone
+		translation.en:I got what you wanted. (Give ingredients)
+		translation.de:Ich habe was du brauchst. (Zutaten geben)
+		translation.ch:Ich han was du bruchsch. (Zuetate gä)
+	]
+	[
+		# Link node, tag is next tag
+		tag:31
+		condition:DL:isQuestState("questionable_method", "completed") and DL:isQuestState("favor_for_a_favor", "void")
+		# translation: 
+		translation.tag:DL_Choice_FavourQuestStart
+		translation.en:What kind of favour should that be?
+		translation.de:Was für ein Gefallen soll das sein?
+		translation.ch:Was füren Gfalle söl das si?
+	]
+	[
+		# Link node, tag is next tag
 		tag:8
 		# translation: 
 		translation.tag:DL_Choice_CanYouBrew
@@ -237,6 +257,208 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	trigger:DL:changeQuestState("questionable_method", "completed")
+	trigger:DL:addReputationProgress("necromancer", 10)
+	trigger:DL:removeItem("qe_fireratheart", 1)
+	trigger:DL:removeItem("qe_batblood", 2)
+	trigger:DL:removeItem("qe_bone", 3)
+	# translation: 
+	translation.tag:DL_Syrah_MarkQuestDone
+	translation.en:Ah, perfect. Now let's get started.
+	translation.de:Ah, perfekt. Dann lass uns anfangen.
+	translation.ch:Ah, perfekt. Denn fömmer mal ah.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_MarkQuestDone2
+	translation.en:(Syrah places the bones in a circle around the fire rat's heart.) Come.
+	translation.de:(Syrah ordnet die Knochen kreisförmig um das Feuerrattenherz an.) Komm.
+	translation.ch:(D'Syrah ordnet d'Chnoche kreisförmig ums Füürratteherz ah.) Chum.
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{2
+	# [24] Choice Node
+	tag:24
+	[
+		# Link node, tag is next tag
+		tag:25
+		# translation: 
+		translation.tag:DL_Choice_OkayMark
+		translation.en:Let's get this over with.
+		translation.de:Bringen wir's hinter uns.
+		translation.ch:Bringemers hinter üs.
+	]
+	[
+		# Link node, tag is next tag
+		tag:26
+		condition:not DL:isConditionFulfilled("npc_syrah", "come_here")
+		# translation: 
+		translation.tag:DL_Choice_NotOkayMark
+		translation.en:I'm not sure if this is a good idea.
+		translation.de:Ich weiss nicht ob das eine gute Idee ist.
+		translation.ch:Ich weiss nid ob da so e gueti Idee isch.
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "helper2")
+	# translation: 
+	translation.tag:DL_Syrah_RelieveCurse
+	translation.en:(Syrah grabs your arm and drags you into the circle.)
+	translation.de:(Syrah packt dich am Arm und zieht dich in den Kreis.)
+	translation.ch:(D'Syrah packt dich am Arm und zieht dich in Kreis.)
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_RelieveCurse2
+	translation.en:(She takes the blood and pours it over the mark, while murmuring some words.)
+	translation.de:(Sie nimmt das Blut und lässt es über das Mal rinnen, während sie ein paar Worte murmelt.)
+	translation.ch:(Si nimmts Bluet und lahts über s'Zeiche rinne während si öppis murmlet.)
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_RelieveCurse3
+	translation.en:See? I think it worked. I don't feel much of this strange magic anymore. 
+	translation.de:Siehst du? Ich denke, es hat funktioniert. Ich spüre nicht mehr viel von dieser seltsamen Magie.
+	translation.ch:Gsesch. Ich glaub es het funktioniert. Ich gspür nüm viel vo dere komische Magie.
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	trigger:DL:addQuestDescription("the_mark", 4)
+	# translation: 
+	translation.tag:DL_Syrah_RelieveCurse4
+	translation.en:Hm. It's still visible. You'll have to seek out who did this to you. But now you can find him before he finds you. (Giggles)
+	translation.de:Hm. Es ist immer noch sichtbar. Du solltest denjenigen ausfindig machen, der dir das angetan hat. Doch jetzt kannst du ihn finden, bevor er es tut. (Kichert)
+	translation.ch:Hm. Me gsehts immerna. Du sötsch de sueche, wo dir das ahto het. Und ez chasch ihn finde, bevor er s'tuet. (Gigglet)
+	[
+		# Link node, tag is next tag
+		tag:30
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_DoMeAFavour
+	translation.en:But now, as I've done you a favour, you should do me one too, I think.
+	translation.de:Aber jetzt wo ich dir einen Gefallen getan habe, solltest du mir auch einen machen.
+	translation.ch:Aber jetz, woni dir en Gfalle gmacht ha, sötsch mer au eine mache.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "come_here")
+	trigger:DL:gotoNode(24)
+	trigger:DL:addConditionProgress("npc_syrah", "helper1")
+	# translation: 
+	translation.tag:DL_Choice_NotOkayMark2
+	translation.en:I'm only trying to help you! You want to be relieved from your curse, right? Now come here.
+	translation.de:Ich versuch doch nur, dir zu helfen! Du willst von diesem Fluch befreit werden, oder? Jetzt komm her.
+	translation.ch:Ich probier doch nur, dir z'helfe! Du wetsch doch vo dem Fluech befreit si, oder? Ez chum.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_FavourQuestStart
+	translation.en:There's a graveyard just outside the city, in the marshlands, where people are buried that were not welcome in the city - mostly criminals.
+	translation.de:Es gibt einen Friedhof im Sumpfland direkt vor der Stadt. Dort liegen die Leute begraben, die in der Stadt nicht erwünscht waren - vor allem Verbrecher.
+	translation.ch:Es git en Fridhof im Sumpfland direkt vor de Stadt, wo d'Lüt begrabe sind wo ide Stadt nid willkomme gsi sind - vor allem Verbrecher.
+	[
+		# Link node, tag is next tag
+		tag:32
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_FavourQuestStart2
+	translation.en:I need a special flower, the cinderbloom, for one of my potions. It only grows on graves of people who have died in a fire. 
+	translation.de:Ich brauche eine spezielle Blume, die Aschenblüte, aus der Krypta dort. Sie wächst nur auf dem Grab von Leuten, die in einem Feuer umgekommen sind.
+	translation.ch:Ich bruch e spezielli Blueme, d'Zündelblueme. Si wachst nur uf de Gräber vo Lüt, wo im Füür gstorbe sind.
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_FavourQuestStart3
+	translation.en:I'm sure that you can find that flower there - mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
+	translation.de:Ich bin mir sicher dass du diese Blume dort finden kannst - Magier, die Magie "missbrauchen" werden meistens auf dem Scheiterhaufen verbrennt und was auch immer übrig bleibt, wird in diese Krypta geschafft.
+	translation.ch:Ich bimer sicher, dass du die Blueme det finde chasch - Magier wo Magie "missbruched" werded meistens ufem Schiiterhufe verbrennt und wa au immer übrig bliibt wird i die Krypa verfrachtet.
+	[
+		# Link node, tag is next tag
+		tag:34
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	trigger:DL:changeQuestState("favor_for_a_favor", "started")
+	# translation: 
+	translation.tag:DL_Syrah_FavourQuestStart4
+	translation.en:Oh, and if you happen to meet the grave digger Morton, he's a good friend of mine. Just tell him I sent you, and he'll let you in.
+	translation.de:Oh, und wenn du dem Totengräber Morton begegnen solltest, sag ihm einfach, dass ich dich geschickt habe, und er wird dich hinein lassen.
+	translation.ch:Oh, und wennd em Totegräber Morton begegne sötsch, segem eifach dass ich dich gschickt han, denn sötter dich ieloh.
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1

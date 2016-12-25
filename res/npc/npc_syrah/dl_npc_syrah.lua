@@ -54,6 +54,12 @@ loadDialogue = function(DL)
 	if (not DL:isQuestState("questionable_method", "void") and not DL:isConditionFulfilled("npc_syrah", "mark_seen")) then 
 		DL:addChoice(7, "DL_Choice_MarkSeen") -- Where have you already seen this mark?
 	end
+	if ((DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))) then 
+		DL:addChoice(22, "DL_Choice_MarkQuestDone") -- I got what you wanted. (Give ingredients)
+	end
+	if (DL:isQuestState("questionable_method", "completed") and DL:isQuestState("favor_for_a_favor", "void")) then 
+		DL:addChoice(31, "DL_Choice_FavourQuestStart") -- What kind of favour should that be?
+	end
 	DL:addChoice(8, "DL_Choice_CanYouBrew") -- Can you brew something for me?
 	DL:addChoice(11, "DL_Choice_Trade") -- Show me your potions.
 	DL:addChoice(-1, "") -- 
@@ -88,6 +94,82 @@ loadDialogue = function(DL)
 		DL:createNPCNode(7, -2, "DL_Syrah_MarkSeen") -- Hm, let me think. There was this strange guy in the Basilisk Inn, he had the same or a similar mark. But no one could understand what he wanted to say, he only talked rubbish.
 		DL:addQuestDescription("the_mark", 3)
 		DL:addConditionProgress("npc_syrah", "mark_seen")
+		DL:addNode()
+
+	end
+
+	if ((DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))) then 
+
+		DL:createNPCNode(22, 23, "DL_Syrah_MarkQuestDone") -- Ah, perfect. Now let's get started.
+		DL:changeQuestState("questionable_method", "completed")
+		DL:addReputationProgress("necromancer", 10)
+		DL:removeItem("qe_fireratheart", 1)
+		DL:removeItem("qe_batblood", 2)
+		DL:removeItem("qe_bone", 3)
+		DL:addNode()
+
+
+		DL:createNPCNode(23, 24, "DL_Syrah_MarkQuestDone2") -- (Syrah places the bones in a circle around the fire rat's heart.) Come.
+		DL:addNode()
+
+
+		DL:createChoiceNode(24)
+		DL:addChoice(25, "DL_Choice_OkayMark") -- Let's get this over with.
+		if (not DL:isConditionFulfilled("npc_syrah", "come_here")) then 
+			DL:addChoice(26, "DL_Choice_NotOkayMark") -- I'm not sure if this is a good idea.
+		end
+		DL:addNode()
+
+
+		DL:createNPCNode(25, 27, "DL_Syrah_RelieveCurse") -- (Syrah grabs your arm and drags you into the circle.)
+		DL:addConditionProgress("npc_syrah", "helper2")
+		DL:addNode()
+
+
+		DL:createNPCNode(27, 28, "DL_Syrah_RelieveCurse2") -- (She takes the blood and pours it over the mark, while murmuring some words.)
+		DL:addNode()
+
+
+		DL:createNPCNode(28, 29, "DL_Syrah_RelieveCurse3") -- See? I think it worked. I don't feel much of this strange magic anymore. 
+		DL:addNode()
+
+
+		DL:createNPCNode(29, 30, "DL_Syrah_RelieveCurse4") -- Hm. It's still visible. You'll have to seek out who did this to you. But now you can find him before he finds you. (Giggles)
+		DL:addQuestDescription("the_mark", 4)
+		DL:addNode()
+
+
+		DL:createNPCNode(30, -2, "DL_Syrah_DoMeAFavour") -- But now, as I've done you a favour, you should do me one too, I think.
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_syrah", "come_here")) then 
+
+			DL:createNPCNode(26, -2, "DL_Choice_NotOkayMark2") -- I'm only trying to help you! You want to be relieved from your curse, right? Now come here.
+			DL:addConditionProgress("npc_syrah", "come_here")
+			DL:gotoNode(24)
+			DL:addConditionProgress("npc_syrah", "helper1")
+			DL:addNode()
+
+		end
+
+	end
+
+	if (DL:isQuestState("questionable_method", "completed") and DL:isQuestState("favor_for_a_favor", "void")) then 
+
+		DL:createNPCNode(31, 32, "DL_Syrah_FavourQuestStart") -- There's a graveyard just outside the city, in the marshlands, where people are buried that were not welcome in the city - mostly criminals.
+		DL:addNode()
+
+
+		DL:createNPCNode(32, 33, "DL_Syrah_FavourQuestStart2") -- I need a special flower, the cinderbloom, for one of my potions. It only grows on graves of people who have died in a fire. 
+		DL:addNode()
+
+
+		DL:createNPCNode(33, 34, "DL_Syrah_FavourQuestStart3") -- I'm sure that you can find that flower there - mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
+		DL:addNode()
+
+
+		DL:createNPCNode(34, -1, "DL_Syrah_FavourQuestStart4") -- Oh, and if you happen to meet the grave digger Morton, he's a good friend of mine. Just tell him I sent you, and he'll let you in.
+		DL:changeQuestState("favor_for_a_favor", "started")
 		DL:addNode()
 
 	end
