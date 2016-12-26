@@ -10,6 +10,8 @@
 // 1: fire
 // 2: blue fire
 // 3: toxic water
+// 4: green fire
+// 5: green embers
 class ParticleTile : public LevelDynamicTile {
 public:
 	ParticleTile(LevelScreen* levelScreen);
@@ -35,5 +37,6 @@ private:
 
 	void loadFlameParticles(int skinNr);
 	void loadWaterParticles(int skinNr);
+	void loadEmberParticles(int skinNr);
 	void loadParticleSystem(int skinNr);
 };

@@ -346,24 +346,6 @@ bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, MapData& data) con
 					}
 					chestData.keyItemID = keyItemID;
 				}
-				else if (itemText.compare("condition progress") == 0) {
-
-					std::string conditionProgress = item->Attribute("value");
-					if (conditionProgress.empty()) {
-						logError("XML file could not be read, chest condition is empty.");
-						return false;
-					}
-
-					size_t pos = 0;
-					if ((pos = conditionProgress.find(",")) == std::string::npos) {
-						logError("XML file could not be read, chest condition progress value must be two strings, seperated by a comma.");
-						return false;
-					}
-
-					chestData.conditionProgress.type = conditionProgress.substr(0, pos);
-					conditionProgress.erase(0, pos + 1);
-					chestData.conditionProgress.name = conditionProgress;
-				}
 				else {
 					int amount;
 					result = item->QueryIntAttribute("value", &amount);

@@ -138,23 +138,15 @@ bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& d
 					}
 					chestData.keyItemID = keyItemID;
 				}
-				else if (itemText.compare("condition progress") == 0) {
+				else if (itemText.compare("luapath") == 0) {
 
-					std::string conditionProgress = item->Attribute("value");
-					if (conditionProgress.empty()) {
-						logError("XML file could not be read, chest condition is empty.");
+					std::string path = item->Attribute("value");
+					if (path.empty()) {
+						logError("XML file could not be read, luapath is empty.");
 						return false;
 					}
 
-					size_t pos = 0;
-					if ((pos = conditionProgress.find(",")) == std::string::npos) {
-						logError("XML file could not be read, chest condition progress value must be two strings, seperated by a comma.");
-						return false;
-					}
-
-					chestData.conditionProgress.type = conditionProgress.substr(0, pos);
-					conditionProgress.erase(0, pos + 1);
-					chestData.conditionProgress.name = conditionProgress;
+					chestData.luapath = path;
 				}
 				else {
 					int amount;

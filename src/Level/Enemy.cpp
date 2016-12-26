@@ -400,7 +400,9 @@ void Enemy::setDead() {
 }
 
 void Enemy::notifyLooted() {
-	m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_objectID);
+	if (m_objectID >= 0) {
+		m_screen->getCharacterCore()->setEnemyLooted(m_mainChar->getLevel()->getID(), m_objectID);
+	}
 	m_isLooted = true;
 }
 

@@ -3,8 +3,14 @@
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "Screens/LevelScreen.h"
+#include "Callbacks/WorldCallback.h"
 
 using namespace std;
+using namespace luabridge;
+
+ChestLevelTile::~ChestLevelTile() { 
+	delete m_worldCallback; 
+}
 
 void ChestLevelTile::init() {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
@@ -37,6 +43,27 @@ void ChestLevelTile::loadAnimation(int skinNr) {
 	m_state = GameObjectState::Locked;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(false);
+}
+
+bool ChestLevelTile::loadLua() {
+	if (m_data.luapath.empty()) {
+		return true;
+	}
+	m_L = luaL_newstate();
+	luaL_openlibs(m_L);
+	delete m_worldCallback;
+	m_worldCallback = new WorldCallback(dynamic_cast<WorldScreen*>(m_screen));
+	m_worldCallback->bindFunctions(m_L);
+
+	if (luaL_dofile(m_L, getResourcePath(m_data.luapath).c_str()) != 0) {
+		g_logger->logError("ChestLevelTile", "Cannot read lua script: " + getResourcePath(m_data.luapath));
+		m_L = nullptr;
+		delete m_worldCallback;
+		m_worldCallback = nullptr;
+		return false;
+	}
+
+	return true;
 }
 
 void ChestLevelTile::setLoot(const std::map<std::string, int>& items, int gold) {
@@ -110,6 +137,8 @@ void ChestLevelTile::setChestData(const ChestTileData& data) {
 		m_lightComponent = new LightComponent(data.lightData, this);
 		addComponent(m_lightComponent);
 	}
+
+	loadLua();
 }
 
 void ChestLevelTile::onMouseOver() {
@@ -144,9 +173,8 @@ void ChestLevelTile::loot() {
 	m_mainChar->lootItems(m_data.loot.first);
 	m_mainChar->addGold(m_data.loot.second);
 
-	if (!m_data.conditionProgress.type.empty() && !m_data.conditionProgress.name.empty()) {
-		dynamic_cast<LevelScreen*>(m_screen)->notifyConditionAdded(m_data.conditionProgress);
-	}
+	// execute the script if it exists
+	executeOnLoot();
 
 	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_data.objectID);
 	m_interactComponent->setInteractable(false);
@@ -156,6 +184,21 @@ void ChestLevelTile::loot() {
 	}
 	if (!m_data.isPermanent) {
 		setDisposed();
+	}
+}
+
+void ChestLevelTile::executeOnLoot() const {
+	if (m_L == nullptr) return;
+	LuaRef onLoot = getGlobal(m_L, "onLoot");
+	if (!onLoot.isFunction()) {
+		return;
+	}
+
+	try {
+		onLoot(m_worldCallback);
+	}
+	catch (LuaException const& e) {
+		g_logger->logError("ChestLevelTile", "LuaException: " + std::string(e.what()));
 	}
 }
 

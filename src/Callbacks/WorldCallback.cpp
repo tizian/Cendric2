@@ -215,23 +215,29 @@ void WorldCallback::spawnNPC(const std::string& npcID, int x, int y) const {
 	mapScreen->addObject(mapNPC);
 }
 
-void WorldCallback::spawnEnemy(int enemyID, int x, int y) const {
+void WorldCallback::spawnEnemy(lua_State* state) const {
 	LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen);
 	if (levelScreen == nullptr) {
 		g_logger->logError("WorldCallback", "A enemy can only be spawned in a level.");
 		return;
 	}
 
-	EnemyID id = static_cast<EnemyID>(enemyID);
-	if (id <= EnemyID::VOID || id >= EnemyID::MAX) {
-		g_logger->logError("WorldCallback", "Enemy id: " + std::to_string(enemyID) + " is not valid.");
+	luabridge::LuaRef param = luabridge::LuaRef::fromStack(state, 2);
+	if (!param.isTable()) {
+		g_logger->logError("WorldCallback", "spawnEnemy() has no table argument in luascript!");
 		return;
 	}
 
-	Enemy* enemy = nullptr;
-	enemy = ObjectFactory::Instance()->createEnemy(id, levelScreen->getWorld(), levelScreen);
-	if (enemy == nullptr) {
-		g_logger->logError("WorldCallback", "Enemy was could not be spawned, unknown id.");
+	// resolve and set enemy ID
+	LuaRef idRef = param["id"];
+	if (!idRef.isNumber()) {
+		g_logger->logError("WorldCallback", "spawnEnemy() has no id!");
+		return;
+	}
+	
+	EnemyID id = static_cast<EnemyID>(idRef.cast<int>());
+	if (id <= EnemyID::VOID || id >= EnemyID::MAX) {
+		g_logger->logError("WorldCallback", "Enemy id: " + std::to_string(static_cast<int>(id)) + " is not valid.");
 		return;
 	}
 
@@ -239,10 +245,57 @@ void WorldCallback::spawnEnemy(int enemyID, int x, int y) const {
 	std::map<std::string, int> loot;
 	int gold = 0;
 
-	enemy->insertRespawnLoot(loot, gold);
+	LuaRef lootRef = param["loot"];
+	if (lootRef.isTable()) {
+		int i = 1;
+		LuaRef lootElement = lootRef[i];
+		while (!lootElement.isNil()) {
+			LuaRef itemIDRef = lootElement["id"];
+			LuaRef amountRef = lootElement["amount"];
+
+			if (!itemIDRef.isString() || !amountRef.isNumber()) {
+				g_logger->logError("WorldCallback", "Enemy was could not be spawned, loot item id or loot amount has wrong type.");
+				return;
+			}
+
+			std::string itemID = itemIDRef.cast<std::string>();
+			if (itemID.compare("gold") == 0) {
+				gold = amountRef.cast<int>();
+			}
+			else {
+				loot.insert({ itemIDRef.cast<std::string>(), amountRef.cast<int>() });
+			}
+
+			lootElement = lootRef[++i];
+		}
+	}
+
+	// calculate position
+	LuaRef positionRef = param["position"];
+	if (!positionRef.isTable()) {
+		g_logger->logError("WorldCallback", "spawnEnemy() has no position!");
+		return;
+	}
+
+	LuaRef posXRef = positionRef["x"];
+	LuaRef posYRef = positionRef["y"];
+	
+	if (!posXRef.isNumber() || !posYRef.isNumber()) {
+		g_logger->logError("WorldCallback", "spawnEnemy() wrong position types for x and y!");
+		return;
+	}
+
+	Enemy* enemy = nullptr;
+	enemy = ObjectFactory::Instance()->createEnemy(id, levelScreen->getWorld(), levelScreen);
+	if (enemy == nullptr) {
+		g_logger->logError("WorldCallback", "Enemy could not be spawned, unknown id.");
+		return;
+	}
+	enemy->load(0);
+
 	enemy->setLoot(loot, gold);
 
-	enemy->setPosition(sf::Vector2f(static_cast<float>(x), static_cast<float>(y)));
+	enemy->setPosition(sf::Vector2f(posXRef.cast<float>(), posYRef.cast<float>()));
 	enemy->setObjectID(-1);
 	enemy->setUnique(false);
 	enemy->setBoss(false);

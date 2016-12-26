@@ -53,7 +53,7 @@ public:
 	// this works only on a map
 	void spawnNPC(const std::string& npcID, int x, int y) const;
 	// this works only in a level
-	void spawnEnemy(int enemyID, int x, int y) const;
+	void spawnEnemy(luabridge::lua_State* state) const;
 
 private:
 	CharacterCore* m_core;

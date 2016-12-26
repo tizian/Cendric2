@@ -26,12 +26,6 @@ void ParticleTile::loadAnimation(int skinNr_) {
 	int skinNr = skinNr_ / 2;
 	m_isForegroundTile = skinNr_ % 2 != 0;
 
-	if (skinNr == 0 || skinNr == 1) {
-		addComponent(new LightComponent(LightData(
-			sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.5f),
-			sf::Vector2f(200.f, 250.f), 0.6f), this));
-	}
-
 	loadParticleSystem(skinNr);
 }
 
@@ -118,6 +112,55 @@ void ParticleTile::loadWaterParticles(int skinNr) {
 	m_ps->addUpdater<particles::SizeUpdater>();
 }
 
+void ParticleTile::loadEmberParticles(int skinNr) {
+	m_particlePosOffset = sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height);
+	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_DROP)->setSmooth(true);
+	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
+	m_ps->additiveBlendMode = true;
+	m_ps->emitRate = 5.f;
+
+	// Generators
+	auto posGen = m_ps->addSpawner<particles::DiskSpawner>();
+	posGen->center = getPosition() + m_particlePosOffset;
+	posGen->radius = 30.f;
+	m_particleSpawner = posGen;
+
+	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 0.f;
+	sizeGen->maxEndSize = 0.f;
+
+	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+
+	colGen->minStartCol = sf::Color(110, 255, 100);
+	colGen->maxStartCol = sf::Color(110, 255, 100);
+	colGen->minEndCol = sf::Color(20, 200, 0, 200);
+	colGen->maxEndCol = sf::Color(20, 200, 0, 200);
+
+	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	velGen->minStartSpeed = 20.f;
+	velGen->maxStartSpeed = 30.f;
+	velGen->minAngle = -10.f;
+	velGen->maxAngle = 10.f;
+	m_velGenerator = velGen;
+
+	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	timeGen->minTime = 4.0f;
+	timeGen->maxTime = 6.0f;
+
+	// Updaters
+	m_ps->addUpdater<particles::TimeUpdater>();
+	m_ps->addUpdater<particles::ColorUpdater>();
+	m_ps->addUpdater<particles::EulerUpdater>();
+	m_ps->addUpdater<particles::SizeUpdater>();
+
+	// light
+	addComponent(new LightComponent(LightData(
+		sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.2f),
+		sf::Vector2f(200.f, 300.f), 0.3f), this));
+}
+
 void ParticleTile::loadFlameParticles(int skinNr) {
 	m_particlePosOffset = sf::Vector2f(0.5f * getBoundingBox()->width, 0.5f * getBoundingBox()->height);
 	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
@@ -153,6 +196,12 @@ void ParticleTile::loadFlameParticles(int skinNr) {
 		colGen->minEndCol = sf::Color(20, 83, 255, 200);
 		colGen->maxEndCol = sf::Color(20, 83, 255, 200);
 		break;
+	case 3:
+		colGen->minStartCol = sf::Color(110, 255, 100);
+		colGen->maxStartCol = sf::Color(110, 255, 100);
+		colGen->minEndCol = sf::Color(20, 200, 0, 200);
+		colGen->maxEndCol = sf::Color(20, 200, 0, 200);
+		break;
 	}
 
 	auto velGen = m_ps->addGenerator<particles::AimedVelocityGenerator>();
@@ -170,16 +219,24 @@ void ParticleTile::loadFlameParticles(int skinNr) {
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
 	m_ps->addUpdater<particles::SizeUpdater>();
+
+	// light
+	addComponent(new LightComponent(LightData(
+		sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.5f),
+		sf::Vector2f(200.f, 250.f), 0.6f), this));
 }
 
 void ParticleTile::loadParticleSystem(int skinNr) {
 	switch (skinNr) {
 	case 0:
 	case 1:
+	case 3:
 		loadFlameParticles(skinNr);
 		break;
 	case 2:
-	default:
 		loadWaterParticles(skinNr);
+	case 4:
+	default:
+		loadEmberParticles(skinNr);
 	}
 }

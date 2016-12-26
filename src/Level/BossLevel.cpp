@@ -9,6 +9,7 @@ BossLevel::BossLevel(WorldScreen* screen) {
 }
 
 BossLevel::~BossLevel() {
+	delete m_worldCallback;
 }
 
 bool BossLevel::loadLua(const std::string& luaPath) {
