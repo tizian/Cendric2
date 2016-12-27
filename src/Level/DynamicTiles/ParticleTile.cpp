@@ -197,10 +197,10 @@ void ParticleTile::loadFlameParticles(int skinNr) {
 		colGen->maxEndCol = sf::Color(20, 83, 255, 200);
 		break;
 	case 3:
-		colGen->minStartCol = sf::Color(110, 255, 100);
-		colGen->maxStartCol = sf::Color(110, 255, 100);
-		colGen->minEndCol = sf::Color(20, 200, 0, 200);
-		colGen->maxEndCol = sf::Color(20, 200, 0, 200);
+		colGen->minStartCol = sf::Color(110, 230, 100);
+		colGen->maxStartCol = sf::Color(110, 230, 100);
+		colGen->minEndCol = sf::Color(20, 150, 10, 200);
+		colGen->maxEndCol = sf::Color(20, 150, 10, 200);
 		break;
 	}
 

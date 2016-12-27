@@ -8,7 +8,7 @@
   <property name="tilesetpath" value="res/map/marshland/tileset_map_marshland.png"/>
   <property name="weather" value="rain"/>
  </properties>
- <tileset firstgid="1" name="tileset_map_marshland" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="2304" columns="48">
+ <tileset firstgid="1" name="tileset_map_marshland" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="2304">
   <image source="tileset_map_marshland.png" width="2500" height="2500"/>
   <tile id="17">
    <objectgroup draworder="index">
@@ -71,13 +71,13 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="2305" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
+ <tileset firstgid="2305" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="2375" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="2375" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
- <tileset firstgid="2475" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
+ <tileset firstgid="2475" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311">
   <image source="../meadows/tileset_map_meadows.png" width="1200" height="3000"/>
   <tile id="25">
    <objectgroup draworder="index">
@@ -177,7 +177,7 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="3786" name="tileset_map_gandria" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="2304" columns="48">
+ <tileset firstgid="3786" name="tileset_map_gandria" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="2304">
   <image source="../gandria/tileset_map_gandria.png" width="2500" height="2500"/>
   <tile id="17">
    <objectgroup draworder="index">
@@ -825,7 +825,7 @@
   </object>
   <object id="276" x="550" y="390" width="50" height="30">
    <properties>
-    <property name="level entry" value="res/level/smallcrypt/smallcrypt.tmx,100,100"/>
+    <property name="level entry" value="res/level/smallcrypt/smallcrypt.tmx,305,460"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

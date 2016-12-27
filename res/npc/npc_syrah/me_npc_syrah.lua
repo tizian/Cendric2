@@ -1,6 +1,7 @@
 -- lua script for merchand 'Syrah'
 wares = 
 {
+	{"we_herbalistblade", 1},
 	{"fo_wine", 10},
 	{"fo_water", 10},
 	{"fo_healingherb", 5},
