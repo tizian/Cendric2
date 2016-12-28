@@ -7,7 +7,7 @@ AggressiveWalkingBehavior::AggressiveWalkingBehavior(Enemy* enemy) :
 }
 
 void AggressiveWalkingBehavior::execHandleMovementInput() {
-	if (m_enemy->getEnemyState() == EnemyState::Recovering)
+	if (m_enemy->getEnemyState() == EnemyState::Recovering || m_walksBlindly)
 		return;
 	// movement AI
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;

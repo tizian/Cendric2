@@ -1,4 +1,4 @@
--- chest (1) in level smallcrypt                                        
+-- chest (3) in level smallcrypt                                        
 
 onLoot = function(W) 
 	local enemyData = {
@@ -6,7 +6,7 @@ onLoot = function(W)
 		loot = {
 				{id="gold", amount=2},
 			},
-		position = {x=1310, y=610}
+		position = {x=1760, y=610}
 	}
 	W:spawnEnemy(enemyData)
 end

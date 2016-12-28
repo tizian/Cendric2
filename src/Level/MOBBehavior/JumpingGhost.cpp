@@ -32,10 +32,10 @@ void JumpingGhost::update(const sf::Time& frameTime) {
 }
 
 float JumpingGhost::calculateJump() {
-	const sf::Time fixedTimestep = sf::seconds(0.1f);
+	const sf::Time fixedTimestep = sf::seconds(0.05f);
 	float landingPosY = -1.f;
 
-	for (int i = 1; i < 20; ++i) {
+	for (int i = 1; i < 40; ++i) {
 		update(fixedTimestep);
 		if (m_record.collides) {
 

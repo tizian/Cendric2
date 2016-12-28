@@ -19,6 +19,7 @@ Cutscene::Cutscene(std::string& id) {
 	for (auto& step : m_data.steps) {
 		for (auto& img : step.images) {
 			g_resourceManager->loadTexture(img.imagePath, ResourceType::Unique, this);
+			g_resourceManager->getTexture(img.imagePath)->setSmooth(true);
 		}
 	}
 

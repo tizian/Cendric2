@@ -21,6 +21,7 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 
 		WorldCollisionQueryRecord rec;
 		rec.boundingBox = bb;
+		rec.collisionDirection = m_isFlippedGravity ? CollisionDirection::Up : CollisionDirection::Down;
 		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 		if (m_enemy->getLevel()->collides(rec)) return false;
 	} 

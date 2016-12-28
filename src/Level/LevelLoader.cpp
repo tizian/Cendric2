@@ -240,7 +240,7 @@ void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {
 			ItemBean item = g_databaseManager->getItemBean(it);
 			if (item.status == BeanStatus::NotSet) {
 				// unexpected error
-				g_logger->logError("LevelLoader", "Level item was not loaded, unknown id.");
+				g_logger->logError("LevelLoader", "Level item was not loaded, unknown id: " + it);
 				return;
 			}
 

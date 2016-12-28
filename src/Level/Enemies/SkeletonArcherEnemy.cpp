@@ -9,7 +9,10 @@
 REGISTER_ENEMY(EnemyID::Skeleton_Archer, SkeletonArcherEnemy)
 
 void SkeletonArcherEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	gold = rand() % 30 + 10;
+	gold = rand() % 10 + 2;
+
+	if (rand() % 100 > 80)
+		loot.insert({ "fo_lesserhealingpotion", 1 });
 }
 
 void SkeletonArcherEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
@@ -112,7 +115,7 @@ MovingBehavior* SkeletonArcherEnemy::createMovingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveWalkingBehavior(this);
 	}
-	behavior->setDistanceToAbyss(100.f);
+	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);

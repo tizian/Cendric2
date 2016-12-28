@@ -9,7 +9,10 @@
 REGISTER_ENEMY(EnemyID::Skeleton_Shield, SkeletonShieldEnemy)
 
 void SkeletonShieldEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	gold = rand() % 30 + 10;
+	gold = rand() % 10 + 2;
+
+	if (rand() % 100 > 80)
+		loot.insert({ "fo_lesserhealingpotion", 1 });
 }
 
 void SkeletonShieldEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
@@ -117,7 +120,7 @@ MovingBehavior* SkeletonShieldEnemy::createMovingBehavior(bool asAlly) {
 		behavior->setMaxVelocityYUp(0.f);
 		behavior->setMaxVelocityX(0.f);
 	}
-	behavior->setDistanceToAbyss(80.f);
+	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(30.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->calculateJumpHeight();
