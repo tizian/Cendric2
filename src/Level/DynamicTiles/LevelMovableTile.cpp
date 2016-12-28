@@ -77,6 +77,16 @@ void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	}
 }
 
+bool LevelMovableTile::collides(const sf::Vector2f& nextPos) const {
+	WorldCollisionQueryRecord rec;
+	rec.excludedGameObject = const_cast<LevelMovableTile*>(this);
+	sf::FloatRect nextBoundingBox = *getBoundingBox();
+	nextBoundingBox.left = nextPos.x;
+	nextBoundingBox.top = nextPos.y;
+	rec.boundingBox = nextBoundingBox;
+	return m_level->collides(rec);
+}
+
 void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::Vector2f oldPosition = getPosition();
 	const sf::FloatRect& bb = *getBoundingBox();

@@ -30,6 +30,9 @@ public:
 	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); }
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Moving; } 
 
+protected:
+	bool collides(const sf::Vector2f& nextPos) const override { return false; }
+
 private:
 	void updateRelativeVelocity(const sf::Time& frameTime) override;
 	std::string getSpritePath() const override;
