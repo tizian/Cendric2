@@ -161,7 +161,7 @@ void CharacterCore::reloadAttributes() {
 	for (auto& it : m_data.equippedItems) {
 		if (it.second.empty()) continue;
 		Item* item = g_resourceManager->getItem(it.second);
-		if (item == nullptr || !item->isEquipmentItem()) continue;
+		if (item == nullptr) continue;
 		m_totalAttributes.addBean(item->getAttributes());
 	}
 	m_totalAttributes.currentHealthPoints = m_totalAttributes.maxHealthPoints;

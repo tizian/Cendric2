@@ -76,12 +76,6 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, bb.width, bb.height);
 
-	if (m_level->collidesWithAvoidableTiles(nextBoundingBox)) {
-		m_record.collides = true;
-		m_record.evilTile = true;
-		return;
-	}
-
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_aiRec.ignoreDynamicTiles;
 
@@ -163,6 +157,14 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
 		(isMovingDown && nextBoundingBoxY.top > m_level->getWorldRect().top + m_level->getWorldRect().height)) {
+		m_record.collides = true;
+		m_record.evilTile = true;
+		return;
+	}
+
+	nextBoundingBox.left = nextBoundingBoxX.left;
+	nextBoundingBox.top = nextBoundingBoxY.top;
+	if (m_level->collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_record.collides = true;
 		m_record.evilTile = true;
 		return;

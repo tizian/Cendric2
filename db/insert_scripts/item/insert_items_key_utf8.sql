@@ -52,7 +52,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_thiefguild', 'key', 550, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_thiefguild', 'item', 'Rusty Key','Rostiger Schlüssel','Rostige Schlüssel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_thiefguild', 'item_desc', 'This key is partly corroded.','Dieser Schlüssel wurde teilweise von Rost zerfressen.','De Schlüssel isch es bitz vom Rost zerfresse worde.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_thiefguild', 'item_desc', 'This key is partly corroded.','Dieser Schlüssel wurde teilweise von Rost zerfressen.','De Schlüssel isch es bitz vom Rost aknaberet worde.');
 
 -- Sewer Key 
 
