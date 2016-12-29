@@ -18,8 +18,8 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Ice Armour
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icearmor', 'item', 'Icy Armour','Eisige Rüstung','Iisigi Rüstig');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icearmor', 'item_desc', 'Harek crafted this armour from the remains of Khajag.','Harek schmiedete diese Rüstung aus den Überbleibseln von Khajag.','De Harek het die Rüstig us de Überbliibsel vom Khajag gschmiedet.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icearmor', 'item', 'Icy Armour','Eisige Rüstung','Iisigi Rüschtig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icearmor', 'item_desc', 'Harek crafted this armour from the remains of Khajag.','Harek schmiedete diese Rüstung aus den Überbleibseln von Khajag.','De Harek het die Rüschtig us de Überbliibsel vom Khajag gschmiedet.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_icearmor', 'eq_body', 350, 500, 70);
 INSERT INTO item_attribute (item_id, dmg_ice, res_physical, res_ice, critical) values ('eq_icearmor', 5, 10, 3, 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_icearmor', 'res/assets/equipment/body/spritesheet_body_icearmor.png', 'res/assets/equipment/body/spritesheet_map_body_icearmor.png');
@@ -272,6 +272,30 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_twilightt3', 'eq_back', 100, 600, 300);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_back_twilightt3', 15, 12, 8, 12, 16, 6, 12);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_twilightt3', 'res/assets/equipment/back/spritesheet_back_twilightt3.png', 'res/assets/equipment/back/spritesheet_map_back_twilightt3.png');
+
+-- Twilight T1 Body
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt1', 'item', 'Prowler Vest','Weste des Herumtreibers','Streuner-Weste');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt1', 'item_desc', 'A very light and confortable armour.','Eine sehr leichte und bequeme Rüstung.','E sehr liechti und bequemi Rüschtig.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_twilightt1', 'eq_body', 200, 600, 100);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_body_twilightt1', 5, 5, 2, 5, 3, 10, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_twilightt1', 'res/assets/equipment/body/spritesheet_body_twilightt1.png', 'res/assets/equipment/body/spritesheet_map_body_twilightt1.png');
+
+-- Twilight T2 Body
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt2', 'item', 'Marauder Jerkin','Wams des Plünderers','Plünderer-Wams');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt2', 'item_desc', 'Be one with the shadows.','Sei eins mit den Schatten.','Sig eis mit de Schatte.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_twilightt2', 'eq_body', 250, 600, 200);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_body_twilightt2', 10, 8, 5, 8, 6, 20, 15);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_twilightt2', 'res/assets/equipment/body/spritesheet_body_twilightt2.png', 'res/assets/equipment/body/spritesheet_map_body_twilightt2.png');
+
+-- Twilight T3 Body
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt3', 'item', 'Shadow Stalker Armour','Rüstung des Schattenläufers','Schatteläufer-Rüschtig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt3', 'item_desc', 'They''ll never know what hit them.','Sie werden dich nicht kommen sehen.','Wenn si dich gsehnd isches scho z''spat.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_twilightt3', 'eq_body', 300, 600, 400);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_body_twilightt3', 20, 15, 10, 15, 10, 50, 30);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_twilightt3', 'res/assets/equipment/body/spritesheet_body_twilightt3.png', 'res/assets/equipment/body/spritesheet_map_body_twilightt3.png');
 
 -- Crown
 

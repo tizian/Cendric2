@@ -28,6 +28,9 @@ item.id:eq_back_twilightt3,1
 item.id:eq_bandana,1
 item.id:eq_stephenhelmet,1
 item.id:eq_body_necrot3,1
+item.id:eq_body_twilightt1,1
+item.id:eq_body_twilightt2,1
+item.id:eq_body_twilightt3,1
 item.id:eq_defaultarmor,1
 item.id:eq_prisonerclothes,1
 item.id:eq_demonback,1
@@ -121,7 +124,7 @@ item.id:qe_batblood,1
 item.id:qe_fireratheart,1
 item.id:qe_bone,1
 item.id:qe_invisrecipe,1
-item.id:qe_firebloom,1
+item.id:qe_cinderbloom,1
 item.id:we_claw,1
 item.id:we_hawthorn,1
 item.id:we_icestaff,1
