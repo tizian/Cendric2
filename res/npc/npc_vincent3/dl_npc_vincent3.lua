@@ -134,6 +134,8 @@ loadDialogue = function(DL)
 			DL:addConditionProgress("default", "thief")
 			DL:addReputationProgress("thief", 10)
 			DL:setGuild("thief")
+			DL:addItem("eq_body_twilightt1", 1)
+			DL:equipItem("eq_body_twilightt1")
 			DL:addNode()
 
 		end
@@ -146,10 +148,10 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_vincent3", "first_spell")) then 
 			DL:addChoice(18, "DL_Choice_TeachSpells") -- Can you teach me some spells?
 		end
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputationProgress("thief") < 50) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") < 50) then 
 			DL:addChoice(19, "DL_Choice_TeachMore") -- Can you teach me more spells?
 		end
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputationProgress("thief") >= 50) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") >= 50) then 
 			DL:addChoice(20, "DL_Choice_TeachMore") -- 
 		end
 		DL:addChoice(-1, "") -- 
@@ -164,14 +166,14 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputationProgress("thief") < 50) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") < 50) then 
 
 			DL:createNPCNode(19, -2, "DL_Vincent_NoSpellReputation") -- Maybe later. First, you need to show us that you can handle this kind of magic.
 			DL:addNode()
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputationProgress("thief") >= 50) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") >= 50) then 
 
 			DL:createNPCNode(20, -2, "DL_Vincent_SecondSpell") -- Yes. You've proven yourself useful enough to learn how to be one with the shadows...
 			DL:addItem("sp_invisibility", 1)
