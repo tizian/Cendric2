@@ -134,6 +134,8 @@ loadDialogue = function(DL)
 			DL:addConditionProgress("default", "cleric")
 			DL:addReputationProgress("cleric", 10)
 			DL:setGuild("cleric")
+			DL:addItem("eq_body_divinet1", 1)
+			DL:equipItem("eq_body_divinet1")
 			DL:addNode()
 
 		end
