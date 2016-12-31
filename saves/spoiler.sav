@@ -31,6 +31,9 @@ item.id:eq_body_necrot3,1
 item.id:eq_body_twilightt1,1
 item.id:eq_body_twilightt2,1
 item.id:eq_body_twilightt3,1
+item.id:eq_body_divinet1,1
+item.id:eq_body_divinet2,1
+item.id:eq_body_divinet3,1
 item.id:eq_defaultarmor,1
 item.id:eq_prisonerclothes,1
 item.id:eq_demonback,1

@@ -179,31 +179,31 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Divine T1 Back
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet1', 'item', 'Cover of the Recruit','Überwurf des Rekruten','Überwurf vom Rekrut');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet1', 'item_desc', 'The white cloth shields its wearer against dark magic.','Der weisse Stoff schützt seinen Träger vor dunkler Magie.','De wiss Stoff schützt sin Träger vor dunkler Magie.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet1', 'item', 'Cover of the Recruit','Überwurf des Rekruten','Rekrute-Überwurf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet1', 'item_desc', 'The grey cloth shields its wearer against dark magic.','Der graue Stoff schützt seinen Träger vor dunkler Magie.','De grau Stoff schützt sin Träger vor dunkler Magie.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet1', 'eq_back', 0, 450, 80);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet1', 4, 3, 1, 3, 4, 2, 3);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_back_divinet1', 'res/assets/equipment/back/spritesheet_back_divinet1.png', 'res/assets/equipment/back/spritesheet_map_back_divinet1.png', 3);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_divinet1', 'res/assets/equipment/back/spritesheet_back_divinet1.png', 'res/assets/equipment/back/spritesheet_map_back_divinet1.png');
 
 -- Divine T2 Back
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet2', 'item', 'Cover of the Order','Überwurf des Ordens','Überwurf vom Orde');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet2', 'item', 'Cover of the Order','Überwurf des Ordens','Ordens-Überwurf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet2', 'item_desc', 'A noble cape with nice ornaments.','Ein nobler Umhang mit hübschen Ornamenten.','En noble Umhang mit hübsche Ornamentli.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet2', 'eq_back', 0, 500, 160);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet2', 8, 6, 2, 6, 8, 3, 6);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_back_divinet2', 'res/assets/equipment/back/spritesheet_back_divinet2.png', 'res/assets/equipment/back/spritesheet_map_back_divinet2.png', 3);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_divinet2', 'res/assets/equipment/back/spritesheet_back_divinet2.png', 'res/assets/equipment/back/spritesheet_map_back_divinet2.png');
 
 -- Divine T3 Back
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet3', 'item', 'Cover of the Enlighted','Überwurf des Erleuchteten','Überwurf vom Erlüüchtete');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet3', 'item', 'Cover of the Enlighted','Überwurf des Erleuchteten','Erlüüchtete-Überwurf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_divinet3', 'item_desc', 'Worn by the high priests of the order.','Wird von den Hohepriestern des Ordens getragen.','Wird vode Hohespriester vom Orde treit.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_divinet3', 'eq_back', 0, 550, 300);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_back_divinet3', 15, 12, 4, 12, 16, 6, 12);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_back_divinet3', 'res/assets/equipment/back/spritesheet_back_divinet3.png', 'res/assets/equipment/back/spritesheet_map_back_divinet3.png', 3);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_divinet3', 'res/assets/equipment/back/spritesheet_back_divinet3.png', 'res/assets/equipment/back/spritesheet_map_back_divinet3.png');
 
 -- Divine T1 Head
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet1', 'item', 'Circlet of the Recruit','Reif des Rekruten','Reif vom Rekrute');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet1', 'item', 'Circlet of the Recruit','Reif des Rekruten','Rekrute-Reif');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet1', 'item_desc', 'Simple but elegant.','Schlicht aber elegant.','Schlicht aber elegant.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet1', 'eq_head', 50, 500, 100);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet1', 5, 4, 1, 4, 4, 3, 5);
@@ -211,7 +211,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Divine T2 Head
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet2', 'item', 'Circlet of the Order','Reif des Ordens','Reif vom Orde');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet2', 'item', 'Circlet of the Order','Reif des Ordens','Ordens-Reif');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet2', 'item_desc', 'Wearing this headpiece shows devotion to the Eternal Light.','Diesen Reif zu tragen zeigt Hingabe zum Ewigen Licht.','De Reif z''träge zeigt, dasme em Ewige Liecht hiigä isch.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet2', 'eq_head', 100, 500, 200);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet2', 10, 8, 2, 8, 8, 6, 10);
@@ -219,11 +219,35 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Divine T3 Head
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item', 'Circlet of the Enlighted','Reif des Erleuchteten','Reif vom Erlüüchtete');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item', 'Circlet of the Enlighted','Reif des Erleuchteten','Erlüüchtete-Reif');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_divinet3', 'item_desc', 'The majestic wings give the wearer of this headpiece a sublime appearance.','Die majestätischen Flügel lassen den Träger dieses Reifs erhaben wirken.','Di majestätische Flügel lönd de Träger vo dem Reif erhabe würke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_divinet3', 'eq_head', 150, 500, 400);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_head_divinet3', 20, 16, 4, 15, 15, 12, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_divinet3', 'res/assets/equipment/head/spritesheet_head_divinet3.png', 'res/assets/equipment/head/spritesheet_map_head_divinet3.png');
+
+-- Divine T1 Body
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet1', 'item', 'Tunic of the Recruit','Tunika des Rekruten','Rekrute-Tunika');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet1', 'item_desc', 'A light but noble armour.','Eine leichte und dennoch edle Rüstung.','E liechti und trotzdem edli Rüschtig.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_divinet1', 'eq_body', 350, 600, 100);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_body_divinet1', 10, 2, 2, 4, 4, 10, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_divinet1', 'res/assets/equipment/body/spritesheet_body_divinet1.png', 'res/assets/equipment/body/spritesheet_map_body_divinet1.png');
+
+-- Divine T2 Body
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet2', 'item', 'Robes of the Order','Roben des Orden','Ordens-Robe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet2', 'item_desc', 'Worn by the priests of the order.','Wird von den Priestern des Ordens getragen.','Wird vode Priester vom Orde treit.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_divinet2', 'eq_body', 400, 600, 200);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_body_divinet2', 20, 4, 4, 8, 8, 20, 15);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_divinet2', 'res/assets/equipment/body/spritesheet_body_divinet2.png', 'res/assets/equipment/body/spritesheet_map_body_divinet2.png');
+
+-- Divine T3 Body
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet3', 'item', 'Vestments of the Enlighted','Gewänder des Erleuchteten','Erlüüchtete-Gwand');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet3', 'item_desc', 'The golden plates on this armour shine.','Die goldenen Platten an dieser Rüstung strahlen.','Di goldige Platte a dere Rüschtig strahled.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_divinet3', 'eq_body', 450, 600, 400);
+INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_fire, dmg_light, res_physical, res_light) values ('eq_body_divinet3', 50, 8, 6, 16, 20, 50, 30);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_divinet3', 'res/assets/equipment/body/spritesheet_body_divinet3.png', 'res/assets/equipment/body/spritesheet_map_body_divinet3.png');
 
 -- Twilight T1 Head
 
@@ -232,6 +256,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_twilightt1', 'eq_head', 100, 250, 100);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_head_twilightt1', 4, 5, 2, 5, 3, 2, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_twilightt1', 'res/assets/equipment/head/spritesheet_head_twilightt1.png', 'res/assets/equipment/head/spritesheet_map_head_twilightt1.png');
+
 
 -- Twilight T2 Head
 
