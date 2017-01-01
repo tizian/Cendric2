@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="50" tileheight="50" nextobjectid="143">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="50" tileheight="50" nextobjectid="148">
  <properties>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/house.ogg"/>
@@ -314,7 +314,28 @@
  <objectgroup name="collidable">
   <object id="142" x="1100" y="300" width="100" height="38"/>
  </objectgroup>
- <objectgroup name="npc"/>
+ <objectgroup name="npc">
+  <object id="143" gid="363" x="400" y="800" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_robert"/>
+   </properties>
+  </object>
+  <object id="145" gid="399" x="1000" y="250" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_lua"/>
+   </properties>
+  </object>
+  <object id="146" gid="401" x="200" y="200" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_luiz"/>
+   </properties>
+  </object>
+  <object id="147" gid="400" x="800" y="850" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_waldemar"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="trigger">
   <object id="128" x="100" y="850" width="50" height="50">
    <properties>

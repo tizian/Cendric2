@@ -15,9 +15,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_stephen','npc','Stephen','Stephen','Stephen');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_harek','npc','Harek','Harek','Harek');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_edgar','npc','Overseer Edgar','Aufseher Edgar','Ufseher Edgar');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_ironbell','npc','Ironbell','Ironbell','Ironbell');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_tizian','npc','Tizian','Tizian','Tizian');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jenkins','npc','Jenkins','Jenkins','Jenkins');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_leeroy','npc','Paladin Leeroy','Paladin Leeroy','Paladin Leeroy');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_yorick','npc','Skeleton','Skelett','Skelett');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_morris','npc','Morris','Morris','Morris');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_helena','npc','Helena','Helena','Helena');
@@ -33,3 +31,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_thiran','npc','Thiran','Thiran','Thiran');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_nuray','npc','Nuray','Nuray','Nuray');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_morton','npc','Grave Digger Morton','Totengräber Morton','Totegräber Morton');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_robert','npc','Robert','Robert','Robert');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_lua','npc','Lua','Lua','Lua');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_waldemar','npc','Waldemar','Waldemar','Waldemar');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_luiz','npc','Luiz','Luiz','Luiz');
