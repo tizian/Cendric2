@@ -2,34 +2,47 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(Cendric)
 
-set(CMAKE_BUILD_TYPE Release)
-
-option(CENDRIC_APPLE_BUILD_APP_BUNDLE "Build .app bundle on Mac platform?" OFF)
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
 option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool?" ON)
 
-add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
-
-if(WIN32)
-	include(CheckCXXCompilerFlag)
-	CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-	CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
-	if(COMPILER_SUPPORTS_CXX11)
-	    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-	elseif(COMPILER_SUPPORTS_CXX0X)
-	    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-	else()
-	        message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-	endif()
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
-else()
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
+    message(FATAL_ERROR
+        "Seems like some of the required dependencies are missing. "
+        "This can happen if you did not clone the project with the --recursive flag. "
+        "It is possible to recover by calling \"git submodule update --init --recursive\""
+    )
 endif()
 
+include(CheckCXXCompilerFlag)
+
+if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Setting build type to 'Release' as none was specified.")
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+option(SFML_BUILD_FRAMEWORKS "" ON)
+add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
+
 if (MSVC)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
-  add_definitions (/D "_CRT_SECURE_NO_WARNINGS")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+    add_definitions (/D "_CRT_SECURE_NO_WARNINGS")
+endif()
+
+# enable modern c++ on clang or gcc
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    CHECK_CXX_COMPILER_FLAG("-std=c++14" HAS_CPP14_FLAG)
+    CHECK_CXX_COMPILER_FLAG("-std=c++11" HAS_CPP11_FLAG)
+
+    if (HAS_CPP14_FLAG)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    elseif (HAS_CPP11_FLAG)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    else()
+        message(FATAL_ERROR "Unsupported compiler. At least C++11 support is required.")
+    endif()
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 endif()
 
 file(GLOB_RECURSE Cendric_FILES
@@ -46,7 +59,9 @@ if (WIN32)
 		${Cendric_FILES}
 		${PROJECT_SOURCE_DIR}/res/info.rc
 	)
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND CENDRIC_APPLE_BUILD_APP_BUNDLE)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	add_definitions("-DAPPLE_APP_BUILD")
+
 	add_executable(Cendric MACOSX_BUNDLE
 		${Cendric_FILES}
 		${PROJECT_SOURCE_DIR}/res/icon.icns
@@ -77,6 +92,10 @@ target_include_directories(Cendric PRIVATE
 if (APPLE)
 	set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/info.plist)
 	set_source_files_properties(res/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+	file(COPY cendric.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
+	file(COPY db/game_data.db DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources/db)
+	file(COPY res DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
+	file(COPY saves DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
 endif()
 
 if (WIN32 AND CENDRIC_BUILD_SQLITE_SHELL)
