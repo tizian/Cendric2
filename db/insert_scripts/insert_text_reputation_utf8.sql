@@ -1,6 +1,6 @@
 INSERT INTO text (text_id, english, german, swiss_german) values ('NoReputation','No one has ever heard of you.','Niemand hat je von dir gehört.','Niemert schert sich en Dreck um dich.');
 
-INSERT INTO text (text_id, english, german, swiss_german) values ('necromancer','Necromancers','Nekromanten','Nekromante');
+INSERT INTO text (text_id, english, german, swiss_german) values ('necromancer','Guardians of Wisdom','Hüter des Wissens','Hüeter vom Wüsse');
 INSERT INTO text (text_id, english, german, swiss_german) values ('necromancer_short','Necromancers','Nekromanten','Nekromante');
 INSERT INTO text (text_id, english, german, swiss_german) values ('necromancer_25','You are unworthy in the eyes of the Necromancers','Du bist unwürdig in den Augen der Nekromanten.','Du bisch unwürdig ide Auge vode Nekromante.');
 INSERT INTO text (text_id, english, german, swiss_german) values ('necromancer_50','You''ve caught the interest of the Necromancers.','Du hast das Interesse der Nekromanten geweckt.','Du hesch es Interesse vode Nekromante gweckt.');
