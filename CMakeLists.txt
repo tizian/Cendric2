@@ -21,7 +21,10 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
-option(SFML_BUILD_FRAMEWORKS "" ON)
+if (APPLE)
+	option(SFML_BUILD_FRAMEWORKS "" ON)
+endif()
+
 add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
 
 if (MSVC)
