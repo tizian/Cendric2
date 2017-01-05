@@ -5,6 +5,8 @@ loadDialogue = function(DL)
 		DL:setRoot(3) 
 	elseif (DL:isQuestState("further_investigation", "void")) then 
 		DL:setRoot(1) 
+	elseif (DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_lloyd", "guild")) then 
+		DL:setRoot(19) 
 	elseif (not DL:isConditionFulfilled("npc_lloyd", "guild")) then 
 		DL:setRoot(10) 
 	else 
@@ -79,6 +81,14 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_lloyd", "guild")) then 
+
+		DL:createNPCNode(19, -2, "DL_Lloyd_AnotherGuild") -- I'm sorry, but I see that you have already chosen another path. I still hope you'll use your magic for to do good.
+		DL:addConditionProgress("npc_lloyd", "guild")
+		DL:addNode()
+
+	end
+
 	if (not DL:isConditionFulfilled("npc_lloyd", "guild")) then 
 
 		DL:createChoiceNode(10)
@@ -88,12 +98,7 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_lloyd", "what_if_join")) then 
 			DL:addChoice(16, "DL_Choice_WhatIfIJoin") -- What happens if I join you?
 		end
-		if (DL:getGuild() == "void") then 
-			DL:addChoice(12, "DL_Choice_IWantToJoin") -- 
-		end
-		if (DL:getGuild() ~= "void" ) then 
-			DL:addChoice(11, "DL_Choice_IWantToJoin") -- 
-		end
+		DL:addChoice(12, "DL_Choice_IWantToJoin") -- 
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -113,40 +118,29 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:getGuild() == "void") then 
 
-			DL:createNPCNode(12, 18, "DL_Lloyd_JoinQuestion") -- Alright, young mage. If you want to join the order of the clerics, you'll have to swear the oath of the Eternal Light.
-			DL:addNode()
-
-
-			DL:createNPCNode(18, 13, "DL_Lloyd_JoinQuestion2") -- Promise to use your magic to heal and protect the innocent and to punish the ones who do not follow the path of the light.
-			DL:addNode()
+		DL:createNPCNode(12, 18, "DL_Lloyd_JoinQuestion") -- Alright, young mage. If you want to join the order of the clerics, you'll have to swear the oath of the Eternal Light.
+		DL:addNode()
 
 
-			DL:createChoiceNode(13)
-			DL:addChoice(14, "DL_Choice_Promise") -- I promise. [JOIN THE CLERICS]
-			DL:addChoice(-2, "DL_Choice_Rethink") -- I need more time to think about this.
-			DL:addNode()
+		DL:createNPCNode(18, 13, "DL_Lloyd_JoinQuestion2") -- Promise to use your magic to heal and protect the innocent and to punish the ones who do not follow the path of the light.
+		DL:addNode()
 
 
-			DL:createNPCNode(14, -1, "DL_Lloyd_JointClerics") -- I now declare you a mage of the Order of the Clerics. May the Eternal Light guide thee. 
-			DL:addConditionProgress("npc_lloyd", "guild")
-			DL:addConditionProgress("default", "cleric")
-			DL:addReputationProgress("cleric", 10)
-			DL:setGuild("cleric")
-			DL:addItem("eq_body_divinet1", 1)
-			DL:equipItem("eq_body_divinet1")
-			DL:addNode()
+		DL:createChoiceNode(13)
+		DL:addChoice(14, "DL_Choice_Promise") -- I promise. [JOIN THE CLERICS]
+		DL:addChoice(-2, "DL_Choice_Rethink") -- I need more time to think about this.
+		DL:addNode()
 
-		end
 
-		if (DL:getGuild() ~= "void" ) then 
-
-			DL:createNPCNode(11, -2, "DL_Lloyd_AnotherGuild") -- I'm sorry, but I see that you have already chosen another path. I still hope you'll use your magic for to do good. 
-			DL:addConditionProgress("npc_lloyd", "guild")
-			DL:addNode()
-
-		end
+		DL:createNPCNode(14, -1, "DL_Lloyd_JointClerics") -- I now declare you a mage of the Order of the Clerics. May the Eternal Light guide thee. 
+		DL:addConditionProgress("npc_lloyd", "guild")
+		DL:addConditionProgress("default", "cleric")
+		DL:addReputationProgress("cleric", 10)
+		DL:setGuild("cleric")
+		DL:addItem("eq_body_divinet1", 1)
+		DL:equipItem("eq_body_divinet1")
+		DL:addNode()
 
 	end
 

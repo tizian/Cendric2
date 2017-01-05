@@ -171,7 +171,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Necro T1 Back
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot1', 'item', 'Adept''s Cover','Adeptenüberwurf','Adepte-Überwurf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot1', 'item', 'Novice''s Cover','Novizenüberwurf','Novize-Überwurf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot1', 'item_desc', 'A short decorative cape.','Ein kurzer Zierumhang.','En churze Zierumhang');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_necrot1', 'eq_back', 150, 650, 80);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_ice, res_physical, res_light, res_shadow) values ('eq_back_necrot1', 5, 2, 1, 3, 2, 1, 2, 2);
@@ -179,8 +179,8 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Necro T2 Back
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot2', 'item', 'Scholar''s Cover','Gelehrtenüberwurf','Gelehrte-Überwurf');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot2', 'item_desc', '...','...','...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot2', 'item', 'Adept''s Cover','Adeptenüberwurf','Adepte-Überwurf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_necrot2', 'item_desc', 'Magic symbols and ornaments decorate this cape.','Magische Zeichen und Ornamente zieren diesen Umhang.','Magischi Zeiche und Ornamentli ziered de Umhang.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_necrot2', 'eq_back', 200, 650, 160);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_ice, res_physical, res_light, res_shadow) values ('eq_back_necrot2', 10, 4, 2, 6, 4, 4, 5, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_necrot2', 'res/assets/equipment/back/spritesheet_back_necrot2.png', 'res/assets/equipment/back/spritesheet_map_back_necrot2.png');
@@ -195,16 +195,16 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Necro T1 Body
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot1', 'item', 'Adept''s Clothing','Adeptenkleider','Adepte-Chleider');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot1', 'item_desc', 'Worn by the adepts of the circle.','Wird von den Adepten des Zirkels getragen.','Wird vo de Adepte vom Zirkel treit.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot1', 'item', 'Novice''s Clothing','Novizenkleidung','Novize-Chleider');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot1', 'item_desc', 'Worn by the novices of the circle.','Wird von den Novizen des Zirkels getragen.','Wird vo de Novize vom Zirkel treit.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_necrot1', 'eq_body', 500, 600, 100);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_ice, res_physical, res_light, res_shadow) values ('eq_body_necrot1', 15, 2, 2, 4, 4, 10, 5, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_necrot1', 'res/assets/equipment/body/spritesheet_body_necrot1.png', 'res/assets/equipment/body/spritesheet_map_body_necrot1.png');
 
 -- Necro T2 Body
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot2', 'item', 'Scholar''s Robes','Gelehrtenroben','Gelehrte-Robe');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot2', 'item_desc', '...','...','...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot2', 'item', 'Adept''s Robes','Adeptenroben','Adepte-Robe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot2', 'item_desc', 'For knowledge itself is power.','Denn Wissen selbst ist Macht.','Well Wüsse elei isch Macht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_body_necrot2', 'eq_body', 550, 600, 200);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_ice, res_physical, res_light, res_shadow) values ('eq_body_necrot2', 30, 4, 4, 8, 8, 20, 10, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_necrot2', 'res/assets/equipment/body/spritesheet_body_necrot2.png', 'res/assets/equipment/body/spritesheet_map_body_necrot2.png');
@@ -236,7 +236,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Necro T3 Head
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item', 'Bone Mask','Knochenmaske','Chnoche-Maske');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item_desc', 'Protects it''s wearer against pestilence.','Schützt ihren Träger gegen Seuchen.','Schützt ire Träger gege Süüchene.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item_desc', 'An indispensable utensil for a necromancer. Protects it''s wearer against pestilence.','Ein unverzichtbares Utensil für einen Nekromanten. Schützt ihren Träger gegen Seuchen.','Es unverzichtbars Teili für en Nekromant. Schützt ire Träger gege Süüchene.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_necrot3', 'eq_head', 100, 650, 400);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_ice, res_physical, res_light, res_shadow) values ('eq_head_necrot3', 30, 15, 4, 15, 15, 20, 15, 15);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_necrot3', 'res/assets/equipment/head/spritesheet_head_necrot3.png', 'res/assets/equipment/head/spritesheet_map_head_necrot3.png');

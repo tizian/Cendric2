@@ -12,6 +12,11 @@ npc.id:npc_vincent3
 	]
 	[
 		# Link node, tag is next tag
+		tag:21
+		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_vincent3", "guild")
+	]
+	[
+		# Link node, tag is next tag
 		tag:2
 		condition:not DL:isConditionFulfilled("npc_vincent3", "guild")
 	]
@@ -35,6 +40,21 @@ npc.id:npc_vincent3
 	translation.en:So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.
 	translation.de:Du hast also den Weg zu uns gefunden. Willkommen im Versteck der Schattenläufer.
 	translation.ch:Du hesch also de Weg zu üs gfunde. Willkomme im Versteck vode Schatteläufer.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "guild")
+	# translation: 
+	translation.tag:DL_Vincent_CantJoin
+	translation.en:You've already made your decision. What a waste...
+	translation.de:Du hast deine Entscheidung bereits getroffen. Was für eine Verschwendung...
+	translation.ch:Du hesch dini Entscheidig scho troffe. Was füre Verschwendig...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -105,18 +125,8 @@ npc.id:npc_vincent3
 	]
 	[
 		# Link node, tag is next tag
-		tag:12
-		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_vincent3", "guild")
-		# translation: 
-		translation.tag:DL_Choice_IWantJoin
-		translation.en:I want to join the guild.
-		translation.de:Ich möchte der Gilde beitreten.
-		translation.ch:Ich möcht dere Gilde biitrete.
-	]
-	[
-		# Link node, tag is next tag
 		tag:13
-		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() == "void"
+		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers")
 		# translation: 
 		translation.tag:DL_Choice_IWantJoin
 		translation.en:
@@ -260,21 +270,6 @@ npc.id:npc_vincent3
 	translation.en:You'll get to learn twilight magic and besides that, you're going to get rich.
 	translation.de:Du wirst Dämmerungsmagie lernen und nebenbei noch reich werden.
 	translation.ch:Du wirsch Dämmerigsmagie lerne und usserdem na riich werde.
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [12] NPC Node
-	tag:12
-	# triggers: 
-	trigger:DL:addConditionProgress("npc_vincent3", "guild")
-	# translation: 
-	translation.tag:DL_Vincent_CantJoin
-	translation.en:You've already made your decision. What a waste...
-	translation.de:Du hast deine Entscheidung bereits getroffen. Was für eine Verschwendung...
-	translation.ch:Du hesch dini Entscheidig scho troffe. Was füre Verschwendig...
 	[
 		# Link node, tag is next tag
 		tag:-2

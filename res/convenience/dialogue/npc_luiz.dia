@@ -1,0 +1,474 @@
+# dia file for dialogue for npc: npc_luiz
+
+npc.id:npc_luiz
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_luiz", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:isConditionFulfilled("npc_luiz", "learn") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_luiz", "guild")
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_luiz", "guild")
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:getGuild() == "necromancer"
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "talked")
+	# translation: 
+	translation.tag:DL_Luiz_FirstTalk
+	translation.en:Syrah was right about sending you here. 
+	translation.de:Syrah hatte also recht damit, dich hierherzuschicken.
+	translation.ch:D'Syrah het also recht demit gha, dass sie dich da ane gschickt het.
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_FirstTalk2
+	translation.en:Nothing kept you from following your way - not even using a forbidden spell.
+	translation.de:Du hast deinen Weg unbeirrt fortgesetzt, auch wenn du dafür verbotene Magie einsetzen musstest.
+	translation.ch:Du bisch trotzdem uf dim Weg blibe, au wend defür verboteni Magie hesch möse bruche.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_FirstTalk3
+	translation.en:So, if you're eager to learn more, you're welcome in these halls. 
+	translation.de:Wenn du also noch mehr lernen willst, bist du in diesen Hallen willkommen.
+	translation.ch:Wend also na me lerne wetsch, bisch i dene Halle willkomme.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_Forbidden
+		translation.en:I didn't know this was forbidden.
+		translation.de:Ich wusste nicht, dass das verboten war.
+		translation.ch:Ich ha nid gwüsst dass das verbote isch.
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_Test
+		translation.en:Was this some kind of test?
+		translation.de:War das eine Prüfung?
+		translation.ch:Isch das enart e Prüefig gsi?
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_Forbidden
+	translation.en:Well, it shouldn't be. Still, mages hang when they are caught using necromancy.
+	translation.de:Nun, das sollte es natürlich nicht sein. Trotzdem werden noch immer Magier gehängt wenn sie beim ausüben von Nekromantie erwischt werden.
+	translation.ch:Naja, es söt natürli nid verbote si. Trotzdem werded immerna Magier ufghänkt wens mit Nekromantie verwütscht werded.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_Test
+	translation.en:Yes - and you passed. Necromancy is not trivial, I'm impressed.
+	translation.de:Ja - und du hast bestanden. Nekromantie ist nicht einfach, ich bin beeindruckt.
+	translation.ch:Ja - und du hesch bestande. Nekromantie isch nid eifach, ich bi beiidruckt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "guild")
+	# translation: 
+	translation.tag:DL_Luiz_YouJoinedOtherGuild
+	translation.en:I see, you've already made your choice. Suit yourself.
+	translation.de:Ich sehe, du hast dich bereits entschieden. Wie du willst.
+	translation.ch:Ich gse, du hesch dich scho entschide. We du wetsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [8] Choice Node
+	tag:8
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:not DL:isConditionFulfilled("npc_luiz", "forbidden")
+		# translation: 
+		translation.tag:DL_Choice_ForbiddenMagic
+		translation.en:Why is it forbidden to use necromancy?
+		translation.de:Wieso ist Nekromantie verboten?
+		translation.ch:Wieso isch Nekromantie verbote?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_luiz", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Are you the leader here?
+		translation.de:Bist du der Anführer hier?
+		translation.ch:Bisch du de Aführer da?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_luiz", "learn")
+		# translation: 
+		translation.tag:DL_Choice_Learn
+		translation.en:Where can I learn more?
+		translation.de:Wo kann ich mehr lernen?
+		translation.ch:Wo chani meh lerne?
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		condition:DL:isConditionFulfilled("npc_luiz", "learn") and not DL:isConditionFulfilled("npc_luiz", "what_if_join")
+		# translation: 
+		translation.tag:DL_Choice_WhatIfJoin
+		translation.en:Why should I join you?
+		translation.de:Wieso sollte ich euch beitreten?
+		translation.ch:Weso sötti eu biitrette?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isConditionFulfilled("npc_luiz", "learn") and not DL:isConditionFulfilled("npc_luiz", "other_guild")
+		# translation: 
+		translation.tag:DL_Choice_OtherGuild
+		translation.en:What if I want to join another guild?
+		translation.de:Was, wenn ich einer anderen Gilde beitreten möchte?
+		translation.ch:Was, weni enere andere Gilde biitrette wett?
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:DL:isConditionFulfilled("npc_luiz", "learn")
+		# translation: 
+		translation.tag:DL_Choice_WantToJoin
+		translation.en:I want to join you.
+		translation.de:Ich möchte euch beitreten.
+		translation.ch:Ich wett bi eu mitmache.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_ForbiddenMagic
+	translation.en:People are afraid of things they don't know - it's just like being afraid of the dark.
+	translation.de:Menschen fürchten sich vor Dingen, die sie nicht kennen - genau wie sie Angst vor der Dunkelheit haben.
+	translation.ch:Mensche hend Angscht vor de Sache wo si nid kenned - genau so wi si Angst vor de Dunkelheit hend.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "forbidden")
+	# translation: 
+	translation.tag:DL_Luiz_ForbiddenMagic2
+	translation.en:But where there is light, there is also shadow. One cannot just ignore them. But we can explore and study them until they are no longer alien.
+	translation.de:Aber wo Licht ist sind auch Schatten, man kann sie nicht einfach ignorieren. Man kann sie aber erforschen und kennen lernen, bis sie einem nicht mehr fremd sind.
+	translation.ch:Aber wo Liecht isch sind au Schatte, me cha si nid eifach ignoriere. Aber me cha si erforsche und kennelerne, bis si eim nüme so fremd sind.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "who_are_you")
+	# translation: 
+	translation.tag:DL_Luiz_WhoAreYou
+	translation.en:Yes. I'm Luiz, the leader of the circle. We make sure that this banned magic won't be forgotten.
+	translation.de:Ja. Ich bin Luiz, der Anführer des Zirkels. Wir stellen sicher, dass diese verbannte Magie nicht vergessen wird. 
+	translation.ch:Jo. Ich bi de Luiz, de Aführer vom Zirkel. Mir lueged, dass die verbannt Magie nid vergesse wird.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_Learn
+	translation.en:I'm pleased to hear that you want to learn more.
+	translation.de:Es freut mich, dass du mehr lernen möchtest.
+	translation.ch:Es freut mich, dass du meh lerne wetsch. 
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "learn")
+	# translation: 
+	translation.tag:DL_Luiz_Learn
+	translation.en:Everyone who makes it to these halls should be able to learn. You may use the library and if you want to learn more spells, you should consider joining us.
+	translation.de:Jeder, der es bis in diese Hallen schafft, sollte etwas lernen dürfen. Du kannst die Bibliothek benutzen und wenn du mehr Zauber lernen möchtest, kannst du uns beitreten.
+	translation.ch:Jede, wos bis i die Halle schafft, sött öppis lerne dörfe. Du chasch d'Bibliothek bruche und wend me Zauber lerne wetsch, chasch üs biitrette.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "what_if_join")
+	# translation: 
+	translation.tag:DL_Luiz_WhatIfJoin
+	translation.en:You will learn what necromancy has to offer. We can teach you powerful spells if you help us with our research.
+	translation.de:Du wirst lernen, was Nekromantie zu bieten hat. Wir können dir mächtige Zauber beibringen wenn du uns bei unserer Forschung unterstützt.
+	translation.ch:Du wirsch lerne, was Nekromantie so z'büüte het. Mir chönd dir mächtigi Zauber biibringe wenn du üs mit üsere Forschig hilfsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "other_guild")
+	# translation: 
+	translation.tag:DL_Luiz_OtherGuild
+	translation.en:I won't object. Everybody should be able to learn whatever they want to learn.
+	translation.de:Da habe ich nichts dagegen. Jeder sollte das lernen können, was ihn interessiert.
+	translation.ch:Do hani nüt degege. Jede söt das lerne chöne wo ihn interessiert.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_WantToJoin
+	translation.en:You want to learn the forbidden magic and devote yourself to the mysteries of necromancy?
+	translation.de:Du möchtest die verbotene Magie erlernen und verschreibst dich den Geheimnissen der Nerkomantie?
+	translation.ch:Du möchtisch di verboteni Magie lerne und verschriibsch dich de Gheimnis vode Nekromantie?
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{2
+	# [17] Choice Node
+	tag:17
+	[
+		# Link node, tag is next tag
+		tag:18
+		# translation: 
+		translation.tag:DL_Choice_JoinNecromancers
+		translation.en:Yes. [JOIN THE NECROMANCERS]
+		translation.de:Ja. [DEN NEKROMANTEN BEITRETEN]
+		translation.ch:Jo. [DE NEKROMANTE BIITRETE]
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_INeedToThink
+		translation.en:I still need time to think about this.
+		translation.de:Ich brauche noch etwas Zeit um darüber nachzudenken.
+		translation.ch:Ich bruch namal chli Ziit zum drüber nodenke.
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "guild")
+	trigger:DL:addConditionProgress("default", "necromancer")
+	trigger:DL:addReputationProgress("necromancer", 10)
+	trigger:DL:setGuild("necromancer")
+	trigger:DL:addItem("eq_body_necrot1", 1)
+	trigger:DL:equipItem("eq_body_necrot1")
+	# translation: 
+	translation.tag:DL_Luiz_JoinNecromancers
+	translation.en:Very well. Welcome to the circle, novice. May your knowledge always grow.
+	translation.de:Sehr gut. Willkommen im Zirkel, Novize. Möge dein Wissen immer wachsen.
+	translation.ch:Sehr guet. Willkomme im Zirkel, Novize. Uf das dis Wüsse immer wachse wird.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [19] Choice Node
+	tag:19
+	[
+		# Link node, tag is next tag
+		tag:21
+		condition:not DL:isConditionFulfilled("npc_luiz", "first_spell")
+		# translation: 
+		translation.tag:DL_Choice_TeachSpells
+		translation.en:Can you teach me some spells?
+		translation.de:Kannst du mir Zauber beibringen?
+		translation.ch:Chasch du mir Zauber bibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:22
+		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 50
+		# translation: 
+		translation.tag:DL_Choice_TeachMore
+		translation.en:Can you teach me more spells?
+		translation.de:Kannst du mir noch mehr Zauber beibringen?
+		translation.ch:Chasch mer na me Zauber bibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:23
+		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") >= 50
+		# translation: 
+		translation.tag:DL_Choice_TeachMore
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "first_spell")
+	trigger:DL:addItem("sp_leech", 1)
+	# translation: 
+	translation.tag:DL_Luiz_FirstSpell
+	translation.en:Yes, you may learn how to drain the life energy from your enemies, novice. 
+	translation.de:Ja, du darfst erlernen wie man die Lebensenergie eines Gegners entzieht, Novize.
+	translation.ch:Ja, du derfsch lerne weme d'Lebensenergie vomne Gegner absuugt, Novize.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_NoSpellReputation
+	translation.en:You're not ready for that. Help us with our studies, and you will get the experience needed for more powerful spells.
+	translation.de:Du bist dazu noch nicht bereit. Hilf uns mit unseren Forschungen und du wirst die Erfahrung erlangen, die für die mächtigeren Zauber nötig ist.
+	translation.ch:Da bisch nanig parat defür. Hilf üs mit üsne Forschige und du wirsch die Erfahrig becho wod bruchsch zum mit de mächtigere Zauber umga.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	trigger:DL:addItem("sp_raisethedead", 1)
+	trigger:DL:addConditionProgress("npc_luiz", "second_spell")
+	# translation: 
+	translation.tag:DL_Luiz_SecondSpell
+	translation.en:Yes, you've earned the experience to learn how to raise the dead...
+	translation.de:Ja, du hast nun die nötige Erfahrung um zu erlernen, wie man die Toten erweckt...
+	translation.ch:Jo, du hesch ez di nötig Erfahrig zum lerne, weme di Tote erweckt...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [20] Choice Node
+	tag:20
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}

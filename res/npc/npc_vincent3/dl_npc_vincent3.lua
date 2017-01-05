@@ -3,6 +3,8 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_vincent3", "talked")) then 
 		DL:setRoot(1) 
+	elseif (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_vincent3", "guild")) then 
+		DL:setRoot(21) 
 	elseif (not DL:isConditionFulfilled("npc_vincent3", "guild")) then 
 		DL:setRoot(2) 
 	elseif (DL:getGuild() == "thief") then 
@@ -15,6 +17,14 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(1, -2, "DL_Vincent_Welcome") -- So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.
 		DL:addConditionProgress("npc_vincent3", "talked")
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_vincent3", "guild")) then 
+
+		DL:createNPCNode(21, -2, "DL_Vincent_CantJoin") -- You've already made your decision. What a waste...
+		DL:addConditionProgress("npc_vincent3", "guild")
 		DL:addNode()
 
 	end
@@ -40,10 +50,7 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and not DL:isConditionFulfilled("npc_vincent3", "what_if_join")) then 
 			DL:addChoice(11, "DL_Choice_WhatIfJoin") -- Why should I join you?
 		end
-		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_vincent3", "guild")) then 
-			DL:addChoice(12, "DL_Choice_IWantJoin") -- I want to join the guild.
-		end
-		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() == "void") then 
+		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers")) then 
 			DL:addChoice(13, "DL_Choice_IWantJoin") -- 
 		end
 		DL:addChoice(-1, "") -- 
@@ -109,15 +116,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_vincent3", "guild")) then 
-
-			DL:createNPCNode(12, -2, "DL_Vincent_CantJoin") -- You've already made your decision. What a waste...
-			DL:addConditionProgress("npc_vincent3", "guild")
-			DL:addNode()
-
-		end
-
-		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers") and DL:getGuild() == "void") then 
+		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers")) then 
 
 			DL:createNPCNode(13, 14, "DL_Vincent_Join") -- Good. You want to become a brother of the Shadow Stalkers, pledge your loyality to the guild and learn the ways of the shadows?
 			DL:addNode()

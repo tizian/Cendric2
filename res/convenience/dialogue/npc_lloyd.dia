@@ -17,6 +17,11 @@ npc.id:npc_lloyd
 	]
 	[
 		# Link node, tag is next tag
+		tag:19
+		condition:DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_lloyd", "guild")
+	]
+	[
+		# Link node, tag is next tag
 		tag:10
 		condition:not DL:isConditionFulfilled("npc_lloyd", "guild")
 	]
@@ -205,6 +210,21 @@ npc.id:npc_lloyd
 		tag:-2
 	]
 }
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "guild")
+	# translation: 
+	translation.tag:DL_Lloyd_AnotherGuild
+	translation.en:I'm sorry, but I see that you have already chosen another path. I still hope you'll use your magic for to do good.
+	translation.de:Tut mir leid, aber ich sehe, dass du bereits einen anderen Weg gewählt hast. Ich hoffe, du benutzt deine Magie dennoch für das Gute.
+	translation.ch:Sorry, aber ich gse dass du scho en andere Weg gwählt hesch. Ich hoff dass du dini Magie trotzdem fürs Guete bruchsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
 {2
 	# [10] Choice Node
 	tag:10
@@ -231,17 +251,6 @@ npc.id:npc_lloyd
 	[
 		# Link node, tag is next tag
 		tag:12
-		condition:DL:getGuild() == "void"
-		# translation: 
-		translation.tag:DL_Choice_IWantToJoin
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-	[
-		# Link node, tag is next tag
-		tag:11
-		condition:DL:getGuild() ~= "void" 
 		# translation: 
 		translation.tag:DL_Choice_IWantToJoin
 		translation.en:
@@ -356,21 +365,6 @@ npc.id:npc_lloyd
 	[
 		# Link node, tag is next tag
 		tag:-1
-	]
-}
-{1
-	# [11] NPC Node
-	tag:11
-	# triggers: 
-	trigger:DL:addConditionProgress("npc_lloyd", "guild")
-	# translation: 
-	translation.tag:DL_Lloyd_AnotherGuild
-	translation.en:I'm sorry, but I see that you have already chosen another path. I still hope you'll use your magic for to do good. 
-	translation.de:Tut mir leid, aber ich sehe, dass du bereits einen anderen Weg gewählt hast. Ich hoffe, du benutzt deine Magie dennoch für das Gute.
-	translation.ch:Sorry, aber ich gse dass du scho en andere Weg gwählt hesch. Ich hoff dass du dini Magie trotzdem fürs Guete bruchsch.
-	[
-		# Link node, tag is next tag
-		tag:-2
 	]
 }
 {2
