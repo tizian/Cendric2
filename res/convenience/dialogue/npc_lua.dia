@@ -1,0 +1,185 @@
+# dia file for dialogue for npc: npc_lua
+
+npc.id:npc_lua
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_lua", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lua", "talked")
+	# translation: 
+	translation.tag:DL_Lua_Hello
+	translation.en:Oh, hello. It's very uncommon to see a mage with such a special aura. You're an elementalist, right?
+	translation.de:Oh, hallo. Es ist ziemlich unüblich, einen Magier mit einer solch speziellen Aura zu treffen. Du bist ein Elementarmagier, nicht wahr?
+	translation.ch:Oh, hallo. Es isch zimli ungwöhnlich, en Magier mit sonere spezielle Aura z'treffe. Du bisch en Elementarmagier, gell?
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_Elementalist
+		translation.en:Yes, you're right. How do you know?
+		translation.de:Ja, bin ich. Woher weisst du das?
+		translation.ch:Ja, bini. Woher weisch du das?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_Flirt
+		translation.en:It's also uncommon to meet such a beautiful lady here.
+		translation.de:Es ist auch unüblich, hier so eine hübsche Dame zu treffen.
+		translation.ch:Es isch au ungwöhnlich, da sone hübschi Dame z'treffe.
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lua_Elementalist
+	translation.en:I'm a clairvoyant. (Smiles mysteriously)
+	translation.de:Ich bin eine Sehende. (Lächelt geheimnisvoll)
+	translation.ch:Ich bin e Sehendi. (Lächlet gheimnisvoll)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lua", "flirt")
+	# translation: 
+	translation.tag:DL_Lua_Flirt
+	translation.en:(Blushes) Oh, thank you. What a pity, my skills as a clairvoyant only show me your aura, not your thoughts.
+	translation.de:(Errötet) Oh, danke. Wie schade, meine Fähigkeiten als Sehende enthüllen nur deine Aura, nicht aber deine Gedanken.
+	translation.ch:(Errötet) Oh, danke. We schad, mini Fähigkeite als Sehendi enthülled nur dini Aura, aber nid dini Gedanke.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [5] Choice Node
+	tag:5
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:not DL:isConditionFulfilled("npc_lua", "clairvoyant")
+		# translation: 
+		translation.tag:DL_Choice_Clairvoyant
+		translation.en:What does it mean to be a clairvoyant?
+		translation.de:Was bedeutet es, eine Sehende zu sein?
+		translation.ch:Was heissts, e Sehendi z'sii?
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isConditionFulfilled("npc_lua", "clairvoyant") and not DL:isConditionFulfilled("npc_lua", "my_aura")
+		# translation: 
+		translation.tag:DL_Choice_MyAura
+		translation.en:What colour does my aura have then?
+		translation.de:Was für eine Farbe hat dann meine Aura?
+		translation.ch:Wa füre Farb het denn mini Aura?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_lua", "no_necromancer")
+		# translation: 
+		translation.tag:DL_Choice_NoNecromancer
+		translation.en:You don't look like a necromancer...
+		translation.de:Du siehst nicht gerade wie ein Nekromant aus...
+		translation.ch:Du gsesch nid grad we en Nekromant us...
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lua", "clairvoyant")
+	# translation: 
+	translation.tag:DL_Lua_Clairvoyant
+	translation.en:Most mages only feel the power of someone's aura. People like me can see their colour - the mage's affinity to a type of magic.
+	translation.de:Die meisten Magier spüren nur die Kraft von Auren. Leute wie ich sehen aber ihre Farbe - die Affinität eines Magiers zu einem Zweig der Magie.
+	translation.ch:Di meiste Magier spüred nur d'Chraft von Aurene. Lüt wi ich gsend aber ihri Farb - d'Affinität vom Magier zunere gwüsse Art vode Magie.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lua", "my_aura")
+	# translation: 
+	translation.tag:DL_Lua_MyAura
+	translation.en:For me, it appears in a fiery red. Exceptionally beautiful to look at.
+	translation.de:Für mich erscheint sie in einem feurigen Rot. Ein aussergewöhnlich schöner Anblick. 
+	translation.ch:Für mich erschiint si imne Füürrot. Würkli ussergwöhnlich schön zum aluege.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lua", "no_necromancer")
+	# translation: 
+	translation.tag:DL_Lua_NoNecromancer
+	translation.en:Just because I don't wear their robes? Well, to be honest, I just came here to read.
+	translation.de:Einfach weil ich nicht ihre Roben trage? Nun, um ehrlich zu sein, bin ich einfach zum lesen hergekommen.
+	translation.ch:Eifach weli nid ihri Robe aha? Oke, weni ehrlich bi bini au nur da zum läse.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lua_NoNecromancer2
+	translation.en:I love this library. So much knowledge that would be burned by the clerics if they got a chance...
+	translation.de:Ich liebe diese Bibliothek. So viel Wissen, welches von den Klerikern verbrannt werden würde, wenn es ihnen möglich wäre.
+	translation.ch:Ich lieb die Bibliothek. So viel Wüsse wo vode Kleriker verbrennt werde wür, wenns d'Möglichkeit dezue hetted.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

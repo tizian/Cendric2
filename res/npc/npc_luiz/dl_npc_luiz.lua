@@ -101,7 +101,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(12, -2, "DL_Luiz_Learn") -- Everyone who makes it to these halls should be able to learn. You may use the library and if you want to learn more spells, you should consider joining us.
+			DL:createNPCNode(12, -2, "DL_Luiz_Learn2") -- Everyone who makes it to these halls should be able to learn. You may use the library and if you want to learn more spells, you should consider joining us.
 			DL:addConditionProgress("npc_luiz", "learn")
 			DL:addNode()
 

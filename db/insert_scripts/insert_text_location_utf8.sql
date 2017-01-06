@@ -29,4 +29,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ga
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SyrahBasement','location','Syrah''s Basement','Syrah''s Keller','Chäller vode Syrah');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Marshland','location','The Marshland','Sumpfland','Sumpfland');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SmallCrypt','location','Crypt of the Outcast','Krypta der Ausgestossenen','Krypta vode Usgstossene');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NecroHalls','location','Halls of the Guardians','Halle der Wächter','Halle vode Wächter');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NecroHall','location','Halls of the Guardians','Halle der Wächter','Halle vode Wächter');

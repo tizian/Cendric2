@@ -1,0 +1,134 @@
+# dia file for dialogue for npc: npc_robert
+
+npc.id:npc_robert
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:DL:getGuild() == "necromancer" and not DL:isConditionFulfilled("npc_robert", "congrats")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert", "congrats")
+	# translation: 
+	translation.tag:DL_Robert_Congrats
+	translation.en:Oh, so you're the new one here! I hope we can be friends then.
+	translation.de:Oh, du bist also der Neue hier! Ich hoffe, wir können dann Freunde sein.
+	translation.ch:Oh, du bisch also de Neu da! Ich hoff, mir chönd Kollege si.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_robert", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert", "who_are_you")
+	# translation: 
+	translation.tag:DL_Robert_WhoAreYou
+	translation.en:I'm Robert, you can call me Bob. 
+	translation.de:Ich bin Robert, du kannst mich auch Bob nennen.
+	translation.ch:Ich bide Robert, du chaschmer au Bob sege.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_WhoAreYou2
+	translation.en:I'm new here, but already working like crazy to become a good Necromancer. Luiz says I have talent.
+	translation.de:Ich bin neu hier, aber strenge mich schon sehr an, ein guter Nekromant zu werden. Luiz sagt, ich hätte Talent.
+	translation.ch:Ich bi neu da aber ich streng mi also scho sehr ah zum en guete Nekromant z'werde. De Luiz seit zumindest, ich heb Talent.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{2
+	# [5] Choice Node
+	tag:5
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_YouHaveTalent
+		translation.en:I'm sure you'll do great.
+		translation.de:Du wirst es bestimmt weit bringen.
+		translation.ch:Du wirsches sicher guet mache.
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_NoTalent
+		translation.en:At least someone who thinks that way.
+		translation.de:Wenigstens denkt jemand so.
+		translation.ch:Wenigstens öpper, he.
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_YouHaveTalent
+	translation.en:Thank you. I guess you could learn a lot too, maybe with a bit more time.
+	translation.de:Danke. Ich denke du könntest auch vieles lernen, vielleicht mit ein bisschen mehr Zeit.
+	translation.ch:Danke. Ich denk du chöntsch au viel lerne, vilicht mit chli me Ziit.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_NoTalent
+	translation.en:Better than no one. Looking at you...
+	translation.de:Besser als niemand und ich sehe dich an...
+	translation.ch:Besser als niemert weni mer dich so alueg...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

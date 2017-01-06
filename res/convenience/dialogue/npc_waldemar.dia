@@ -1,0 +1,87 @@
+# dia file for dialogue for npc: npc_waldemar
+
+npc.id:npc_waldemar
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_waldemar", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_waldemar", "talked")
+	# translation: 
+	translation.tag:DL_Waldemar_ANewFace
+	translation.en:Ah, a new face. Interested in buying some armour?
+	translation.de:Ah, ein neues Gesicht. Interessiert an Rüstungen?
+	translation.ch:Ah, es neus Gsicht. Interessiert a es paar Rüschige?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_waldemar", "beak")
+		# translation: 
+		translation.tag:DL_Choice_Mask
+		translation.en:What's up with that... beak?
+		translation.de:Was ist mit diesem... Schnabel?
+		translation.ch:Was isch mit dem... Schnabel?
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_Trade
+		translation.en:What do you have to offer?
+		translation.de:Was hast du im Angebot?
+		translation.ch:Was hesch so az'büüte?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_waldemar", "beak")
+	# translation: 
+	translation.tag:DL_Waldemar_Beak
+	translation.en:A very useful mask when dealing with little pests. (Grins)
+	translation.de:Eine sehr nützliche Maske wenn man mit Seuchen arbeitet. (Grinst)
+	translation.ch:E sehr nützlichi Maske wenme mit Süüche schafft. (Grinst)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{4
+	# [3] Trade Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
