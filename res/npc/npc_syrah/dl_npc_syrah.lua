@@ -31,7 +31,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(20, -2, "DL_Syrah_IBroughtItBack") -- Wow, thank you. You know, that really means a lot to me. I won't ask where you got that though. (Winks)
 		DL:removeItem("qe_invisrecipe", 1)
-		DL:addReputationProgress("necromancer", 10)
+		DL:addReputationProgress("necromancer", 5)
 		DL:changeQuestState("invis_recipe", "failed")
 		DL:addConditionProgress("npc_syrah", "invis_recipe")
 		DL:addNode()
@@ -59,6 +59,12 @@ loadDialogue = function(DL)
 	end
 	if (DL:isQuestState("questionable_method", "completed") and DL:isQuestState("favor_for_a_favor", "void")) then 
 		DL:addChoice(31, "DL_Choice_FavourQuestStart") -- What kind of favour should that be?
+	end
+	if (DL:isQuestState("favor_for_a_favor", "started") and DL:isQuestComplete("favor_for_a_favor")) then 
+		DL:addChoice(35, "DL_Choice_CompleteFavor") -- I got the cinderbloom for you.
+	end
+	if (DL:isConditionFulfilled("npc_luiz", "talked") and not DL:isConditionFulfilled("npc_syrah", "necromancers_found")) then 
+		DL:addChoice(36, "DL_Choice_NecromancersFound") -- So you're a necromancer.
 	end
 	DL:addChoice(8, "DL_Choice_CanYouBrew") -- Can you brew something for me?
 	DL:addChoice(11, "DL_Choice_Trade") -- Show me your potions.
@@ -170,6 +176,26 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(34, -1, "DL_Syrah_FavourQuestStart4") -- Oh, and if you happen to meet the grave digger Morton, he's a good friend of mine. Just tell him I sent you, and he'll let you in.
 		DL:changeQuestState("favor_for_a_favor", "started")
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("favor_for_a_favor", "started") and DL:isQuestComplete("favor_for_a_favor")) then 
+
+		DL:createNPCNode(35, -2, "DL_Syrah_CompleteFavor") -- Thank you so much, that's very kind of you. Here, take a potion for your effort.
+		DL:removeItem("qe_cinderbloom", 1)
+		DL:addReputationProgress("necromancer", 10)
+		DL:changeQuestState("favor_for_a_favor", "completed")
+		DL:addItem("fo_greaterhealingpotion", 1)
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_luiz", "talked") and not DL:isConditionFulfilled("npc_syrah", "necromancers_found")) then 
+
+		DL:createNPCNode(36, -2, "DL_Syrah_NecromancersFound") -- Hehe. Glad to hear you've found Luiz and his crew. Keep it to yourself and you'll make some really good friends.
+		DL:addConditionProgress("npc_syrah", "necromancers_found")
+		DL:addReputationProgress("necromancer", 5)
 		DL:addNode()
 
 	end

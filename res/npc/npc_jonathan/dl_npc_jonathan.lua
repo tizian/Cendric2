@@ -11,8 +11,12 @@ loadDialogue = function(DL)
 		DL:setRoot(17) 
 	elseif (DL:isQuestState("join_a_guild", "void")) then 
 		DL:setRoot(27) 
-	else 
+	elseif (DL:getGuild() == "void") then 
 		DL:setRoot(36) 
+	elseif (DL:isQuestState("join_a_guild", "started")) then 
+		DL:setRoot(41) 
+	else 
+		DL:setRoot(45) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "talked")) then 
@@ -264,7 +268,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(35, -2, "DL_Jonathan_WhatShouldIDo2") -- I guess you already know one of the guilds: The Clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
+			DL:createNPCNode(35, -2, "DL_Jonathan_WhatShouldIDo2") -- I guess you already know one of the guilds: The clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
 			DL:changeQuestState("join_a_guild", "started")
 			DL:addNode()
 
@@ -272,56 +276,105 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:getGuild() == "void") then 
 
-	DL:createChoiceNode(36)
-	if (not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)) then 
-		DL:addChoice(38, "DL_Choice_WhyGuild") -- I already know some divine magic. (Summon a light)
+		DL:createChoiceNode(36)
+		if (not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)) then 
+			DL:addChoice(38, "DL_Choice_WhyGuild") -- I already know some divine magic. (Summon a light)
+		end
+		if (not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")) then 
+			DL:addChoice(37, "DL_Choice_WhereNecromancers") -- How can I find the necromancers?
+		end
+		if (not DL:isConditionFulfilled("npc_jonathan", "where_thieves")) then 
+			DL:addChoice(39, "DL_Choice_WhereThieves") -- Where can I learn some twilight magic?
+		end
+		if (not DL:isConditionFulfilled("npc_jonathan", "where_clerics")) then 
+			DL:addChoice(40, "DL_Choice_WhereClerics") -- What if I wanted to join the clerics?
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)) then 
+
+			DL:createNPCNode(38, -2, "DL_Jonathan_Light") -- We can't decipher the map using some simple magic. You'll have to gain the trust of one of the three guilds in order to learn more advanced magic.
+			DL:addConditionProgress("npc_jonathan", "light")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")) then 
+
+			DL:createNPCNode(37, -2, "DL_Jonathan_WhereNecromancers") -- They need to stay hidden because their magic is not allowed in Gandria. But if I were you, I'd ask the alchemist Syrah, she seems to know some people.
+			DL:addConditionProgress("npc_jonathan", "where_necromancers")
+			DL:addQuestDescription("join_a_guild", 1)
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "where_thieves")) then 
+
+			DL:createNPCNode(39, -2, "DL_Jonathan_WhereThieves") -- Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
+			DL:addConditionProgress("npc_jonathan", "where_thieves")
+			DL:addQuestDescription("join_a_guild", 2)
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "where_clerics")) then 
+
+			DL:createNPCNode(40, -2, "DL_Jonathan_WhereClerics") -- Try to gain the trust of their leader and convince them of your skills.
+			DL:addConditionProgress("npc_jonathan", "where_clerics")
+			DL:addQuestDescription("join_a_guild", 3)
+			DL:addNode()
+
+		end
+
 	end
-	if (not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")) then 
-		DL:addChoice(37, "DL_Choice_WhereNecromancers") -- How can I find the Necromancers?
+
+	if (DL:isQuestState("join_a_guild", "started")) then 
+
+		DL:createChoiceNode(41)
+		if (DL:getGuild() == "cleric") then 
+			DL:addChoice(42, "DL_Choice_JoinedClerics") -- I'm now a member of the Order of the Eternal Light.
+		end
+		if (DL:getGuild() == "thief") then 
+			DL:addChoice(43, "DL_Choice_JoinedThieves") -- I now belong to the Shadow Stalkers.
+		end
+		if (DL:getGuild() == "necromancer") then 
+			DL:addChoice(44, "DL_Choice_JoinedNecromancers") -- I'm now a member of the necromancers.
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:getGuild() == "cleric") then 
+
+			DL:createNPCNode(42, -2, "DL_Jonathan_JoinedClerics") -- Maybe the safest choice...
+			DL:changeQuestState("join_a_guild", "completed")
+			DL:addNode()
+
+		end
+
+		if (DL:getGuild() == "thief") then 
+
+			DL:createNPCNode(43, -2, "DL_Jonathan_JoinedThieves") -- The underground of Gandria, eh. Just don't try to steal MY things.
+			DL:changeQuestState("join_a_guild", "completed")
+			DL:addNode()
+
+		end
+
+		if (DL:getGuild() == "necromancer") then 
+
+			DL:createNPCNode(44, -2, "DL_Jonathan_JoinedNecromancers") -- I didn't expect you'd go there. An interesting choice, indeed.
+			DL:changeQuestState("join_a_guild", "completed")
+			DL:addNode()
+
+		end
+
 	end
-	if (not DL:isConditionFulfilled("npc_jonathan", "where_thieves")) then 
-		DL:addChoice(39, "DL_Choice_WhereThieves") -- Where can I learn some twilight magic?
-	end
-	if (not DL:isConditionFulfilled("npc_jonathan", "where_clerics")) then 
-		DL:addChoice(40, "DL_Choice_WhereClerics") -- What if I wanted to join the Clerics?
-	end
+
+
+	DL:createChoiceNode(45)
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
-
-	if (not DL:isConditionFulfilled("npc_jonathan", "light") and DL:isSpellLearned(17)) then 
-
-		DL:createNPCNode(38, -2, "DL_Jonathan_Light") -- We can't decipher the map using some simple magic. You'll have to gain the trust of one of the three guilds in order to learn more advanced magic.
-		DL:addConditionProgress("npc_jonathan", "light")
-		DL:addNode()
-
-	end
-
-	if (not DL:isConditionFulfilled("npc_jonathan", "where_necromancers")) then 
-
-		DL:createNPCNode(37, -2, "DL_Jonathan_WhereNecromancers") -- They need to stay hidden because their magic is not allowed in Gandria. But if I were you, I'd ask the alchemist Syrah, she seems to know some people.
-		DL:addConditionProgress("npc_jonathan", "where_necromancers")
-		DL:addQuestDescription("join_a_guild", 1)
-		DL:addNode()
-
-	end
-
-	if (not DL:isConditionFulfilled("npc_jonathan", "where_thieves")) then 
-
-		DL:createNPCNode(39, -2, "DL_Jonathan_WhereThieves") -- Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
-		DL:addConditionProgress("npc_jonathan", "where_thieves")
-		DL:addQuestDescription("join_a_guild", 2)
-		DL:addNode()
-
-	end
-
-	if (not DL:isConditionFulfilled("npc_jonathan", "where_clerics")) then 
-
-		DL:createNPCNode(40, -2, "DL_Jonathan_WhereClerics") -- Try to gain the trust of their leader and convince them of your skills.
-		DL:addConditionProgress("npc_jonathan", "where_clerics")
-		DL:addQuestDescription("join_a_guild", 3)
-		DL:addNode()
-
-	end
 
 end

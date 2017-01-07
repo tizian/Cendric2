@@ -2,6 +2,10 @@
 
 loadRoutine = function(R, W)
 
+	if (W:isSpellLearned(12) and not W:isConditionFulfilled("npc_morton", "necromancers")) then
+		R:setTalkingActive(true)
+	end
+
 	R:setTilePosition(11,9)
 	
 	R:setFacingDown()

@@ -76,7 +76,7 @@ npc.id:npc_syrah
 	tag:20
 	# triggers: 
 	trigger:DL:removeItem("qe_invisrecipe", 1)
-	trigger:DL:addReputationProgress("necromancer", 10)
+	trigger:DL:addReputationProgress("necromancer", 5)
 	trigger:DL:changeQuestState("invis_recipe", "failed")
 	trigger:DL:addConditionProgress("npc_syrah", "invis_recipe")
 	# translation: 
@@ -156,6 +156,26 @@ npc.id:npc_syrah
 		translation.en:What kind of favour should that be?
 		translation.de:Was für ein Gefallen soll das sein?
 		translation.ch:Was füren Gfalle söl das si?
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
+		condition:DL:isQuestState("favor_for_a_favor", "started") and DL:isQuestComplete("favor_for_a_favor")
+		# translation: 
+		translation.tag:DL_Choice_CompleteFavor
+		translation.en:I got the cinderbloom for you.
+		translation.de:Ich habe die Aschenblüte für dich.
+		translation.ch:Ich han d'Zündelblueme für dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:36
+		condition:DL:isConditionFulfilled("npc_luiz", "talked") and not DL:isConditionFulfilled("npc_syrah", "necromancers_found")
+		# translation: 
+		translation.tag:DL_Choice_NecromancersFound
+		translation.en:So you're a necromancer.
+		translation.de:Du bist also eine Nekromantin.
+		translation.ch:Du bisch also e Nekromantin.
 	]
 	[
 		# Link node, tag is next tag
@@ -459,6 +479,40 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	trigger:DL:removeItem("qe_cinderbloom", 1)
+	trigger:DL:addReputationProgress("necromancer", 10)
+	trigger:DL:changeQuestState("favor_for_a_favor", "completed")
+	trigger:DL:addItem("fo_greaterhealingpotion", 1)
+	# translation: 
+	translation.tag:DL_Syrah_CompleteFavor
+	translation.en:Thank you so much, that's very kind of you. Here, take a potion for your effort.
+	translation.de:Danke vielmals, das ist sehr lieb von dir. Nimm noch einen Trank für deine Mühen.
+	translation.ch:Danke tusig, da isch sehr lieb vo dir. Nimm na en Trank für dini Müe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "necromancers_found")
+	trigger:DL:addReputationProgress("necromancer", 5)
+	# translation: 
+	translation.tag:DL_Syrah_NecromancersFound
+	translation.en:Hehe. Glad to hear you've found Luiz and his crew. Keep it to yourself and you'll make some really good friends.
+	translation.de:Hihi. Schön, dass du Luiz und seine Crew gefunden hast. Behalt es für dich und du wirst dir ein paar wirklich gute neue Freunde machen.
+	translation.ch:Hihi. Schön, dass de Luiz und sini Crew gfunde hesch. Bhalts eifach für dich und du wirsch es paar würkli gueti neui Kollege ha.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {1
