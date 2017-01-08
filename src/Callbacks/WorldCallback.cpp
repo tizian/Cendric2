@@ -26,6 +26,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("isConditionFulfilled", &WorldCallback::isConditionFulfilled)
 		.addFunction("isQuestConditionFulfilled", &WorldCallback::isQuestConditionFulfilled)
 		.addFunction("hasItem", &WorldCallback::hasItem)
+		.addFunction("isSpellLearned", &WorldCallback::isSpellLearned)
 		.addFunction("getItemAmount", &WorldCallback::getItemAmount)
 		.addFunction("getReputation", &WorldCallback::getReputation)
 		.addFunction("getGuild", &WorldCallback::getGuild)

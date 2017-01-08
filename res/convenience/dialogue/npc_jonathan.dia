@@ -33,6 +33,16 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:36
+		condition:DL:getGuild() == "void"
+	]
+	[
+		# Link node, tag is next tag
+		tag:41
+		condition:DL:isQuestState("join_a_guild", "started")
+	]
+	[
+		# Link node, tag is next tag
+		tag:45
 	]
 }
 {1
@@ -781,5 +791,106 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{2
+	# [41] Choice Node
+	tag:41
+	[
+		# Link node, tag is next tag
+		tag:42
+		condition:DL:getGuild() == "cleric"
+		# translation: 
+		translation.tag:DL_Choice_JoinedClerics
+		translation.en:I'm now a member of the Order of the Eternal Light.
+		translation.de:Ich bin jetzt ein Mitglied des Ordens des Ewigen Lichts.
+		translation.ch:Ich bi ez es Mitglied vom Orde vom Ewige Liecht.
+	]
+	[
+		# Link node, tag is next tag
+		tag:43
+		condition:DL:getGuild() == "thief"
+		# translation: 
+		translation.tag:DL_Choice_JoinedThieves
+		translation.en:I now belong to the Shadow Stalkers.
+		translation.de:Ich gehöre jetzt zu den Schattenläufern.
+		translation.ch:Ich ghör ez zude Schatteläufer.
+	]
+	[
+		# Link node, tag is next tag
+		tag:44
+		condition:DL:getGuild() == "necromancer"
+		# translation: 
+		translation.tag:DL_Choice_JoinedNecromancers
+		translation.en:I'm now a member of the necromancers.
+		translation.de:Ich gehöre jetzt zu den Nekromanten.
+		translation.ch:Ich ghör ez zude Nekromante.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	trigger:DL:changeQuestState("join_a_guild", "completed")
+	# translation: 
+	translation.tag:DL_Jonathan_JoinedClerics
+	translation.en:Maybe the safest choice...
+	translation.de:Wahrscheinlich die sicherste Wahl...
+	translation.ch:Wohrschindlich di sicherst Wahl...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	trigger:DL:changeQuestState("join_a_guild", "completed")
+	# translation: 
+	translation.tag:DL_Jonathan_JoinedThieves
+	translation.en:The underground of Gandria, eh. Just don't try to steal MY things.
+	translation.de:Der Untergrund von Gandria, heh. Versuch einfach nicht, meine Sachen zu stehlen.
+	translation.ch:De Untergrund vo Gandria, he. Probier eifach nid, mini Sache z'chlaue.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	trigger:DL:changeQuestState("join_a_guild", "completed")
+	# translation: 
+	translation.tag:DL_Jonathan_JoinedNecromancers
+	translation.en:I didn't expect you'd go there. An interesting choice, indeed.
+	translation.de:Ich hätte nicht erwartet, dass du dort hin gehst. Eine interessante Wahl.
+	translation.ch:Ich hätt nid erwartet, dass du det ane gasch. E interessanti Wahl.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [45] Choice Node
+	tag:45
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }

@@ -144,7 +144,7 @@ void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
 void ProgressLog::addReputationAdded(FractionID fraction, int amount) {
 	if (amount <= 0) return;
 
-	std::string text = g_textProvider->getText(EnumNames::getFractionIDName(fraction)) + ": ";
+	std::string text = g_textProvider->getText(EnumNames::getShortFractionIDName(fraction)) + ": ";
 	text.append("+" + std::to_string(amount));
 	m_logTexts.push_back(ProgressLogEntry::createReputationEntry(text, COLOR_NEUTRAL));
 

@@ -219,7 +219,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Necro T1 Head
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot1', 'item', 'Adept''s Cowl','Adeptengugel','Adepte-Gugle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot1', 'item', 'Novice''s Cowl','Novizengugel','Novize-Gugle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot1', 'item_desc', 'Shields perfectly against any light.','Schirmt perfekt jedwedes Licht ab.','Schirmt perfekt ab gege Liecht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_necrot1', 'eq_head', 0, 650, 100);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_ice, res_physical, res_light, res_shadow) values ('eq_head_necrot1', 8, 4, 1, 4, 4, 5, 4, 4);
@@ -227,7 +227,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Necro T2 Head
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot2', 'item', 'Scholar''s Cowl','Gelehrtengugel','Gelehrte-Gugle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot2', 'item', 'Adept''s Cowl','Adeptengugel','Adepte-Gugle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot2', 'item_desc', 'Those spikes look menacing.','Diese Stacheln sehen bedrohlich aus.','Die Stachle gsehnd zum fürchte us.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_head_necrot2', 'eq_head', 50, 650, 200);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_ice, res_physical, res_light, res_shadow) values ('eq_head_necrot2', 15, 8, 2, 8, 8, 10, 8, 8);
