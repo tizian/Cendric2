@@ -72,7 +72,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookPotions1','document','Healing Potions','Heiltränke','Heiltränk');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookPotions1','document',
 
-'$fo_lesserhealingpotion$  
+'$fo_lesserhealingpotion$ 
 ---
 1 $fo_healingherb$
 1 $fo_water$
@@ -87,7 +87,7 @@ $fo_mediumhealingpotion$
 $fo_greaterhealingpotion$
 ---
 3 $fo_healingherb$
-1 $fo_water$','$fo_lesserhealingpotion$  
+1 $fo_water$','$fo_lesserhealingpotion$ 
 ---
 1 $fo_healingherb$
 1 $fo_water$
@@ -102,7 +102,7 @@ $fo_mediumhealingpotion$
 $fo_greaterhealingpotion$
 ---
 3 $fo_healingherb$
-1 $fo_water$','$fo_lesserhealingpotion$  
+1 $fo_water$','$fo_lesserhealingpotion$ 
 ---
 1 $fo_healingherb$
 1 $fo_water$

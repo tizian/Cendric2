@@ -63,7 +63,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Pile of gargoyle dust
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item', 'Pile of gargoyle dust','Häufchen von Gargoylestaub','Es Hüüfeli Gargoylestaub');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pityful pile of dust.','War einmal ein mächtiges Steimonster  und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pityful pile of dust.','War einmal ein mächtiges Steimonster und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_gargoyle_dust', 'misc', 350, 0, 20);
 
 -- Teeth

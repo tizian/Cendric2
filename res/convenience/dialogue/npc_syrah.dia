@@ -415,7 +415,7 @@ npc.id:npc_syrah
 	trigger:DL:gotoNode(24)
 	trigger:DL:addConditionProgress("npc_syrah", "helper1")
 	# translation: 
-	translation.tag:DL_Choice_NotOkayMark2
+	translation.tag:DL_Syrah_NotOkayMark2
 	translation.en:I'm only trying to help you! You want to be relieved from your curse, right? Now come here.
 	translation.de:Ich versuch doch nur, dir zu helfen! Du willst von diesem Fluch befreit werden, oder? Jetzt komm her.
 	translation.ch:Ich probier doch nur, dir z'helfe! Du wetsch doch vo dem Fluech befreit si, oder? Ez chum.

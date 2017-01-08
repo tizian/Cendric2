@@ -150,7 +150,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_syrah", "come_here")) then 
 
-			DL:createNPCNode(26, -2, "DL_Choice_NotOkayMark2") -- I'm only trying to help you! You want to be relieved from your curse, right? Now come here.
+			DL:createNPCNode(26, -2, "DL_Syrah_NotOkayMark2") -- I'm only trying to help you! You want to be relieved from your curse, right? Now come here.
 			DL:addConditionProgress("npc_syrah", "come_here")
 			DL:gotoNode(24)
 			DL:addConditionProgress("npc_syrah", "helper1")
