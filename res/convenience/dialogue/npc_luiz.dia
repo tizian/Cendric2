@@ -275,7 +275,7 @@ npc.id:npc_luiz
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_luiz", "learn")
 	# translation: 
-	translation.tag:DL_Luiz_Learn
+	translation.tag:DL_Luiz_Learn2
 	translation.en:Everyone who makes it to these halls should be able to learn. You may use the library and if you want to learn more spells, you should consider joining us.
 	translation.de:Jeder, der es bis in diese Hallen schafft, sollte etwas lernen dürfen. Du kannst die Bibliothek benutzen und wenn du mehr Zauber lernen möchtest, kannst du uns beitreten.
 	translation.ch:Jede, wos bis i die Halle schafft, sött öppis lerne dörfe. Du chasch d'Bibliothek bruche und wend me Zauber lerne wetsch, chasch üs biitrette.
