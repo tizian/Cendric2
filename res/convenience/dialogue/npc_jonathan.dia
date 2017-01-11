@@ -38,11 +38,6 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:41
-		condition:DL:isQuestState("join_a_guild", "started")
-	]
-	[
-		# Link node, tag is next tag
-		tag:45
 	]
 }
 {1
@@ -843,12 +838,56 @@ npc.id:npc_jonathan
 	trigger:DL:changeQuestState("join_a_guild", "completed")
 	# translation: 
 	translation.tag:DL_Jonathan_JoinedClerics
-	translation.en:Maybe the safest choice...
-	translation.de:Wahrscheinlich die sicherste Wahl...
-	translation.ch:Wohrschindlich di sicherst Wahl...
+	translation.en:Maybe the most reasonable choice...
+	translation.de:Wahrscheinlich die vernünftigste Wahl...
+	translation.ch:Wohrschindli di vernünftigst Wahl...
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:46
+	]
+}
+{1
+	# [46] NPC Node
+	tag:46
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_GoodJobGuild
+	translation.en:Well, good job on joining a mage guid. I wasn't able to decrypt your map with just elemental magic.
+	translation.de:Gut, dass du eine Magiergilde gefunden hast. Ich konnte deine Karte bis jetzt nicht mit Elementarmagie entschlüsseln.
+	translation.ch:Guet, dass e Magiergilde gfunde hesch. Bis ez hanis nanig gschafft, dini Charte mit bloss Elementarmagie z'entschlüssle.
+	[
+		# Link node, tag is next tag
+		tag:49
+	]
+}
+{1
+	# [49] NPC Node
+	tag:49
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_CombinedSkillsDivine
+	translation.en:But combined with your divine magic, it could work.
+	translation.de:Aber zusammen mit deiner heiligen Magie könnte es funktionieren.
+	translation.ch:Aber zeme mit dinere heilige Magie chönts funktioniere.
+	[
+		# Link node, tag is next tag
+		tag:52
+	]
+}
+{1
+	# [52] NPC Node
+	tag:52
+	# triggers: 
+	trigger:DL:startCutscene("map_decrypt/map_decrypt_divine")
+	trigger:DL:addConditionProgress("default", "chapter3")
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1
@@ -863,7 +902,51 @@ npc.id:npc_jonathan
 	translation.ch:De Untergrund vo Gandria, he. Probier eifach nid, mini Sache z'chlaue.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:47
+	]
+}
+{1
+	# [47] NPC Node
+	tag:47
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_GoodJobGuild
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:50
+	]
+}
+{1
+	# [50] NPC Node
+	tag:50
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_CombinedSkillsTwilight
+	translation.en:But combined with your twilight magic, it could work.
+	translation.de:Aber zusammen mit deiner Zwielichtsmagie könnte es funktionieren.
+	translation.ch:Aber zeme mit dinere Dämmerigsmagie chönts funktioniere.
+	[
+		# Link node, tag is next tag
+		tag:53
+	]
+}
+{1
+	# [53] NPC Node
+	tag:53
+	# triggers: 
+	trigger:DL:startCutscene("map_decrypt/map_decrypt_twilight")
+	trigger:DL:addConditionProgress("default", "chapter3")
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1
@@ -878,19 +961,50 @@ npc.id:npc_jonathan
 	translation.ch:Ich hätt nid erwartet, dass du det ane gasch. E interessanti Wahl.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:48
 	]
 }
-{2
-	# [45] Choice Node
-	tag:45
+{1
+	# [48] NPC Node
+	tag:48
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_GoodJobGuild
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:51
+	]
+}
+{1
+	# [51] NPC Node
+	tag:51
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_CombinedSkillsNecro
+	translation.en:But combined with your necromancy, it could work.
+	translation.de:Aber zusammen mit deiner Nekromantie könnte es funktionieren.
+	translation.ch:Aber zeme mit dinere Nekromantie chönts funktioniere.
+	[
+		# Link node, tag is next tag
+		tag:54
+	]
+}
+{1
+	# [54] NPC Node
+	tag:54
+	# triggers: 
+	trigger:DL:addConditionProgress("default", "chapter3")
+	trigger:DL:startCutscene("map_decrypt/map_decrypt_necro")
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-1
-		# translation: 
-		translation.tag:
-		translation.en:
-		translation.de:
-		translation.ch:
 	]
 }

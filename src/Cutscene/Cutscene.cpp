@@ -19,6 +19,10 @@ Cutscene::Cutscene(std::string& id) {
 	for (auto& step : m_data.steps) {
 		for (auto& img : step.images) {
 			g_resourceManager->loadTexture(img.imagePath, ResourceType::Unique, this);
+			if (g_resourceManager->getTexture(img.imagePath) == nullptr) {
+				g_logger->logError("Cutscene", "Cutscene image not found at path: " + img.imagePath);
+				continue;
+			}
 			g_resourceManager->getTexture(img.imagePath)->setSmooth(true);
 		}
 	}

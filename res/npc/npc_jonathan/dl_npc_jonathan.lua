@@ -13,10 +13,8 @@ loadDialogue = function(DL)
 		DL:setRoot(27) 
 	elseif (DL:getGuild() == "void") then 
 		DL:setRoot(36) 
-	elseif (DL:isQuestState("join_a_guild", "started")) then 
-		DL:setRoot(41) 
 	else 
-		DL:setRoot(45) 
+		DL:setRoot(41) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "talked")) then 
@@ -331,50 +329,84 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isQuestState("join_a_guild", "started")) then 
 
-		DL:createChoiceNode(41)
-		if (DL:getGuild() == "cleric") then 
-			DL:addChoice(42, "DL_Choice_JoinedClerics") -- I'm now a member of the Order of the Eternal Light.
-		end
-		if (DL:getGuild() == "thief") then 
-			DL:addChoice(43, "DL_Choice_JoinedThieves") -- I now belong to the Shadow Stalkers.
-		end
-		if (DL:getGuild() == "necromancer") then 
-			DL:addChoice(44, "DL_Choice_JoinedNecromancers") -- I'm now a member of the necromancers.
-		end
-		DL:addChoice(-1, "") -- 
+	DL:createChoiceNode(41)
+	if (DL:getGuild() == "cleric") then 
+		DL:addChoice(42, "DL_Choice_JoinedClerics") -- I'm now a member of the Order of the Eternal Light.
+	end
+	if (DL:getGuild() == "thief") then 
+		DL:addChoice(43, "DL_Choice_JoinedThieves") -- I now belong to the Shadow Stalkers.
+	end
+	if (DL:getGuild() == "necromancer") then 
+		DL:addChoice(44, "DL_Choice_JoinedNecromancers") -- I'm now a member of the necromancers.
+	end
+	DL:addChoice(-1, "") -- 
+	DL:addNode()
+
+	if (DL:getGuild() == "cleric") then 
+
+		DL:createNPCNode(42, 46, "DL_Jonathan_JoinedClerics") -- Maybe the most reasonable choice...
+		DL:changeQuestState("join_a_guild", "completed")
 		DL:addNode()
 
-		if (DL:getGuild() == "cleric") then 
 
-			DL:createNPCNode(42, -2, "DL_Jonathan_JoinedClerics") -- Maybe the safest choice...
-			DL:changeQuestState("join_a_guild", "completed")
-			DL:addNode()
+		DL:createNPCNode(46, 49, "DL_Jonathan_GoodJobGuild") -- Well, good job on joining a mage guid. I wasn't able to decrypt your map with just elemental magic.
+		DL:addNode()
 
-		end
 
-		if (DL:getGuild() == "thief") then 
+		DL:createNPCNode(49, 52, "DL_Jonathan_CombinedSkillsDivine") -- But combined with your divine magic, it could work.
+		DL:addNode()
 
-			DL:createNPCNode(43, -2, "DL_Jonathan_JoinedThieves") -- The underground of Gandria, eh. Just don't try to steal MY things.
-			DL:changeQuestState("join_a_guild", "completed")
-			DL:addNode()
 
-		end
-
-		if (DL:getGuild() == "necromancer") then 
-
-			DL:createNPCNode(44, -2, "DL_Jonathan_JoinedNecromancers") -- I didn't expect you'd go there. An interesting choice, indeed.
-			DL:changeQuestState("join_a_guild", "completed")
-			DL:addNode()
-
-		end
+		DL:createNPCNode(52, -1, "") -- 
+		DL:startCutscene("map_decrypt/map_decrypt_divine")
+		DL:addConditionProgress("default", "chapter3")
+		DL:addNode()
 
 	end
 
+	if (DL:getGuild() == "thief") then 
 
-	DL:createChoiceNode(45)
-	DL:addChoice(-1, "") -- 
-	DL:addNode()
+		DL:createNPCNode(43, 47, "DL_Jonathan_JoinedThieves") -- The underground of Gandria, eh. Just don't try to steal MY things.
+		DL:changeQuestState("join_a_guild", "completed")
+		DL:addNode()
+
+
+		DL:createNPCNode(47, 50, "DL_Jonathan_GoodJobGuild") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(50, 53, "DL_Jonathan_CombinedSkillsTwilight") -- But combined with your twilight magic, it could work.
+		DL:addNode()
+
+
+		DL:createNPCNode(53, -1, "") -- 
+		DL:startCutscene("map_decrypt/map_decrypt_twilight")
+		DL:addConditionProgress("default", "chapter3")
+		DL:addNode()
+
+	end
+
+	if (DL:getGuild() == "necromancer") then 
+
+		DL:createNPCNode(44, 48, "DL_Jonathan_JoinedNecromancers") -- I didn't expect you'd go there. An interesting choice, indeed.
+		DL:changeQuestState("join_a_guild", "completed")
+		DL:addNode()
+
+
+		DL:createNPCNode(48, 51, "DL_Jonathan_GoodJobGuild") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(51, 54, "DL_Jonathan_CombinedSkillsNecro") -- But combined with your necromancy, it could work.
+		DL:addNode()
+
+
+		DL:createNPCNode(54, -1, "") -- 
+		DL:addConditionProgress("default", "chapter3")
+		DL:startCutscene("map_decrypt/map_decrypt_necro")
+		DL:addNode()
+
+	end
 
 end

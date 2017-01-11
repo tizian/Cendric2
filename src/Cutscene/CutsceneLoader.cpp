@@ -7,15 +7,27 @@ using namespace luabridge;
 
 const std::string CutsceneLoader::CUTSCENE_FOLDER = "res/cutscene/";
 
-CutsceneData CutsceneLoader::loadCutscene(const std::string& cutsceneID) {
+CutsceneData CutsceneLoader::loadCutscene(const std::string& _cutsceneID) {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 
 	CutsceneData cutsceneData;
 	cutsceneData.id = "";
 
-	std::string foldername = CUTSCENE_FOLDER + cutsceneID + "/";
-	std::string filename = getResourcePath(CUTSCENE_FOLDER) + cutsceneID + "/" + cutsceneID + ".lua";
+	std::string cutsceneID;
+	std::string cutsceneSubfolder;
+	size_t slashPos = _cutsceneID.find("/");
+	if (slashPos != string::npos) {
+		cutsceneSubfolder = _cutsceneID.substr(0, slashPos);
+		cutsceneID = _cutsceneID.substr(slashPos + 1);
+	}
+	else {
+		cutsceneID = _cutsceneID;
+		cutsceneSubfolder = _cutsceneID;
+	}
+
+	std::string foldername = getResourcePath(CUTSCENE_FOLDER) + cutsceneSubfolder + "/";
+	std::string filename = foldername + cutsceneID + ".lua";
 
 	if (luaL_dofile(L, filename.c_str()) != 0) {
 		g_logger->logError("CutsceneLoader", "Cannot read lua script: " + filename);
