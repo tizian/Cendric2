@@ -1,0 +1,69 @@
+# dia file for dialogue for npc: npc_citizen1
+
+npc.id:npc_citizen1
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_Where
+		translation.en:Excuse me, where is...
+		translation.de:Entschuldigung, wo ist...
+		translation.ch:Sorry, wo isch...
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+		# translation: 
+		translation.tag:DL_Choice_About
+		translation.en:Could you tell me something about...
+		translation.de:Könntest du mir etwas sagen über...
+		translation.ch:Chöntsch mer öppis verzelle über...
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}

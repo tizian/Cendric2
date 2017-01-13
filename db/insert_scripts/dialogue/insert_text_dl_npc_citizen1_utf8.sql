@@ -1,0 +1,2 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_Where', 'dl_npc_citizen1', 'Excuse me, where is...', 'Entschuldigung, wo ist...', 'Sorry, wo isch...');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_About', 'dl_npc_citizen1', 'Could you tell me something about...', 'Könntest du mir etwas sagen über...', 'Chöntsch mer öppis verzelle über...');

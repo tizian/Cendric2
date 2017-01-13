@@ -38,6 +38,16 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:41
+		condition:not DL:isConditionFulfilled("default", "chapter3")
+	]
+	[
+		# Link node, tag is next tag
+		tag:45
+		condition:DL:isQuestState("element_master") == "void"
+	]
+	[
+		# Link node, tag is next tag
+		tag:57
 	]
 }
 {1
@@ -1006,5 +1016,168 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [45] NPC Node
+	tag:45
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_StartElementMaster
+	translation.en:I knew they would not make it easy for us. Like they really don't want to be found.
+	translation.de:Ich wusste sie würden es uns nicht einfach machen. Als wollten sie nicht gefunden werden.
+	translation.ch:Ich ha gwüsst si würdeds üs nid eifach mache. We wenn si gar nid gfunde werde wend.
+	[
+		# Link node, tag is next tag
+		tag:55
+	]
+}
+{1
+	# [55] NPC Node
+	tag:55
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_StartElementMaster2
+	translation.en:But we need to discover the secret they're hiding. Fire, Water, Air, Earth... You already know about the first two.
+	translation.de:Aber wir müssen das Geheimnis lüften, das sie vor uns verstecken. Wasser, Feuer, Luft, Erde... Die ersten zwei kennst du bereits.
+	translation.ch:Aber mir mönd s'Gheimnis lüfte wo si vor üs verstecked. Füür, Wasser, Luft, Erde... Di erste zwei kennsch scho.
+	[
+		# Link node, tag is next tag
+		tag:56
+	]
+}
+{1
+	# [56] NPC Node
+	tag:56
+	# triggers: 
+	trigger:DL:changeQuestState("element_master", "started")
+	# translation: 
+	translation.tag:DL_Jonathan_StartElementMaster3
+	translation.en:You need to learn how to control air and earth then. Together, we will find them.
+	translation.de:Du musst also noch lernen, wie man Luft und Erde kontrolliert. Zusammen werden wir sie finden.
+	translation.ch:Du muesch also no lerne, weme Luft und Erde kontrolliert. Zeme werdemer si finde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [57] Choice Node
+	tag:57
+	[
+		# Link node, tag is next tag
+		tag:58
+		condition:not DL:isConditionFulfilled("npc_jonathan", "where_spells")
+		# translation: 
+		translation.tag:DL_Choice_WhereSpells
+		translation.en:Can you teach me those spells?
+		translation.de:Kannst du mir diese Zauber beibringen?
+		translation.ch:Chasch du mir die Zauber biibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:59
+		condition:not DL:isConditionFulfilled("npc_jonathan", "you_learn")
+		# translation: 
+		translation.tag:DL_Choice_YouLearn
+		translation.en:Why don't you learn those spells yourself?
+		translation.de:Wieso lernst du diese Zauber nicht selber?
+		translation.ch:Wieso lernsch du die Zauber nid selber?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [58] NPC Node
+	tag:58
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WhereSpells
+	translation.en:No, I don't know much about air or earth spells. You need to find them yourself.
+	translation.de:Nein, ich weiss nicht viel über Luft- oder Erdzauber. Du musst sie selbst finden.
+	translation.ch:Nei, ich weiss nid viel über Luft- oder Erdzauber. Du muesch si selber finde.
+	[
+		# Link node, tag is next tag
+		tag:62
+	]
+}
+{1
+	# [62] NPC Node
+	tag:62
+	# triggers: 
+	trigger:DL:addQuestDescription("element_master", 1)
+	trigger:DL:addConditionProgress("npc_jonathan", "where_spells")
+	# translation: 
+	translation.tag:DL_Jonathan_WhereSpells2
+	translation.en:I've heard that the lighthouse keeper Jack has a problem with a wind-monster. That may help you with learning some wind magic.
+	translation.de:Ich habe gehört dass der Leuchtturmwächter Jack ein Problem mit einem Windmonster hat. Das könnte dir helfen, etwas über das Element zu lernen.
+	translation.ch:Ich ha ghört dass de Lüüchtturmwächter Jack es Problem mitme Windmonster het. Das chönt der helfe, öppis über Windmagie z'lerne.
+	[
+		# Link node, tag is next tag
+		tag:63
+	]
+}
+{1
+	# [63] NPC Node
+	tag:63
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WhereSpells3
+	translation.en:I assume you can find Jack in the brothel...
+	translation.de:Ich glaube, du kannst Jack im Bordell finden...
+	translation.ch:Ich glaub, du chasch de Jack im Bordell finde...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [59] NPC Node
+	tag:59
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_YouLearn
+	translation.en:My focus are only fire spells. Also, I don't feel safe going out of my house anymore.
+	translation.de:Ich konzentriere mich nur auf Feuerzauber. Ausserdem fühle ich mich ausserhalb meines Hauses nicht mehr sicher.
+	translation.ch:Ich konzentrier mich nur uf Füürzauber. Usserdem fühli mi usse a mim Huus nümme sicher.
+	[
+		# Link node, tag is next tag
+		tag:60
+	]
+}
+{1
+	# [60] NPC Node
+	tag:60
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_YouLearn2
+	translation.en:I'm pretty sure I'm being watched - Someone followed me lately on my way home. 
+	translation.de:Ich bin mir ziemlich sicher dass ich beobachtet werde - Jemand folgte mir kürzlich auf dem Weg nach Hause.
+	translation.ch:Ich bimer zimli sicher dassi beobachted wird - Öpper ischmer letzins ufem Weg hei nagloffe.
+	[
+		# Link node, tag is next tag
+		tag:61
+	]
+}
+{1
+	# [61] NPC Node
+	tag:61
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jonathan", "you_lern")
+	# translation: 
+	translation.tag:DL_Jonathan_YouLearn3
+	translation.en:And with all the people disappearing... No, no, I leave this to you.
+	translation.de:Und mit all den Leuten die verschwinden... Nein, nein, das überlass ich dir.
+	translation.ch:Und mit all dene Lüt wo verschwinded... Nei, nei, das überlahn ich dir.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

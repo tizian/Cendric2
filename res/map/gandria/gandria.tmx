@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="281">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="286">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -1088,6 +1088,32 @@
   <object id="275" gid="2339" x="1525" y="2100" width="50" height="50">
    <properties>
     <property name="id" value="npc_clementia"/>
+   </properties>
+  </object>
+  <object id="282" gid="2349" x="300" y="3000" width="50" height="50">
+   <properties>
+    <property name="dialogueid" value="res/npc/npc_citizen1/npc_citizen.lua"/>
+    <property name="id" value="npc_citizenf2"/>
+    <property name="texttype" value="dl_npc_citizen1"/>
+   </properties>
+  </object>
+  <object id="283" gid="2347" x="3400" y="2700" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_citizen2"/>
+	<property name="dialogueid" value="res/npc/npc_citizen1/npc_citizen1.lua"/>
+	<property name="texttype" value="dl_npc_citizen1"/>
+   </properties>
+  </object>
+  <object id="284" gid="2348" x="1799" y="1100" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_citizenf1"/>
+	<property name="dialogueid" value="res/npc/npc_citizen1/npc_citizen1.lua"/>
+	<property name="texttype" value="dl_npc_citizen1"/>
+   </properties>
+  </object>
+  <object id="285" gid="2346" x="1150" y="1800" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_citizen1"/>
    </properties>
   </object>
  </objectgroup>

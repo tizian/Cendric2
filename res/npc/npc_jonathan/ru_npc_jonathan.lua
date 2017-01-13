@@ -4,6 +4,13 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
+	if (W:getQuestState("element_master") == "void" and W:isConditionFulfilled("default", "chapter3")) then
+		R:setTilePosition(9,7)
+		R:setTalkingActive(false)
+		R:setReloadEnabled(true)
+		return
+	end
+
 	if (W:isConditionFulfilled("npc_jonathan","talked")) then
 		R:setTalkingActive(false)
 		R:setReloadEnabled(false)

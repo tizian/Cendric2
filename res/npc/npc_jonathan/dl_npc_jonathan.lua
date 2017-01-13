@@ -13,8 +13,12 @@ loadDialogue = function(DL)
 		DL:setRoot(27) 
 	elseif (DL:getGuild() == "void") then 
 		DL:setRoot(36) 
-	else 
+	elseif (not DL:isConditionFulfilled("default", "chapter3")) then 
 		DL:setRoot(41) 
+	elseif (DL:isQuestState("element_master") == "void") then 
+		DL:setRoot(45) 
+	else 
+		DL:setRoot(57) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "talked")) then 
@@ -329,82 +333,145 @@ loadDialogue = function(DL)
 
 	end
 
+	if (not DL:isConditionFulfilled("default", "chapter3")) then 
 
-	DL:createChoiceNode(41)
-	if (DL:getGuild() == "cleric") then 
-		DL:addChoice(42, "DL_Choice_JoinedClerics") -- I'm now a member of the Order of the Eternal Light.
+		DL:createChoiceNode(41)
+		if (DL:getGuild() == "cleric") then 
+			DL:addChoice(42, "DL_Choice_JoinedClerics") -- I'm now a member of the Order of the Eternal Light.
+		end
+		if (DL:getGuild() == "thief") then 
+			DL:addChoice(43, "DL_Choice_JoinedThieves") -- I now belong to the Shadow Stalkers.
+		end
+		if (DL:getGuild() == "necromancer") then 
+			DL:addChoice(44, "DL_Choice_JoinedNecromancers") -- I'm now a member of the necromancers.
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:getGuild() == "cleric") then 
+
+			DL:createNPCNode(42, 46, "DL_Jonathan_JoinedClerics") -- Maybe the most reasonable choice...
+			DL:changeQuestState("join_a_guild", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(46, 49, "DL_Jonathan_GoodJobGuild") -- Well, good job on joining a mage guid. I wasn't able to decrypt your map with just elemental magic.
+			DL:addNode()
+
+
+			DL:createNPCNode(49, 52, "DL_Jonathan_CombinedSkillsDivine") -- But combined with your divine magic, it could work.
+			DL:addNode()
+
+
+			DL:createNPCNode(52, -1, "") -- 
+			DL:startCutscene("map_decrypt/map_decrypt_divine")
+			DL:addConditionProgress("default", "chapter3")
+			DL:addNode()
+
+		end
+
+		if (DL:getGuild() == "thief") then 
+
+			DL:createNPCNode(43, 47, "DL_Jonathan_JoinedThieves") -- The underground of Gandria, eh. Just don't try to steal MY things.
+			DL:changeQuestState("join_a_guild", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(47, 50, "DL_Jonathan_GoodJobGuild") -- 
+			DL:addNode()
+
+
+			DL:createNPCNode(50, 53, "DL_Jonathan_CombinedSkillsTwilight") -- But combined with your twilight magic, it could work.
+			DL:addNode()
+
+
+			DL:createNPCNode(53, -1, "") -- 
+			DL:startCutscene("map_decrypt/map_decrypt_twilight")
+			DL:addConditionProgress("default", "chapter3")
+			DL:addNode()
+
+		end
+
+		if (DL:getGuild() == "necromancer") then 
+
+			DL:createNPCNode(44, 48, "DL_Jonathan_JoinedNecromancers") -- I didn't expect you'd go there. An interesting choice, indeed.
+			DL:changeQuestState("join_a_guild", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(48, 51, "DL_Jonathan_GoodJobGuild") -- 
+			DL:addNode()
+
+
+			DL:createNPCNode(51, 54, "DL_Jonathan_CombinedSkillsNecro") -- But combined with your necromancy, it could work.
+			DL:addNode()
+
+
+			DL:createNPCNode(54, -1, "") -- 
+			DL:addConditionProgress("default", "chapter3")
+			DL:startCutscene("map_decrypt/map_decrypt_necro")
+			DL:addNode()
+
+		end
+
 	end
-	if (DL:getGuild() == "thief") then 
-		DL:addChoice(43, "DL_Choice_JoinedThieves") -- I now belong to the Shadow Stalkers.
+
+	if (DL:isQuestState("element_master") == "void") then 
+
+		DL:createNPCNode(45, 55, "DL_Jonathan_StartElementMaster") -- I knew they would not make it easy for us. Like they really don't want to be found.
+		DL:addNode()
+
+
+		DL:createNPCNode(55, 56, "DL_Jonathan_StartElementMaster2") -- But we need to discover the secret they're hiding. Fire, Water, Air, Earth... You already know about the first two.
+		DL:addNode()
+
+
+		DL:createNPCNode(56, -2, "DL_Jonathan_StartElementMaster3") -- You need to learn how to control air and earth then. Together, we will find them.
+		DL:changeQuestState("element_master", "started")
+		DL:addNode()
+
 	end
-	if (DL:getGuild() == "necromancer") then 
-		DL:addChoice(44, "DL_Choice_JoinedNecromancers") -- I'm now a member of the necromancers.
+
+
+	DL:createChoiceNode(57)
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_spells")) then 
+		DL:addChoice(58, "DL_Choice_WhereSpells") -- Can you teach me those spells?
+	end
+	if (not DL:isConditionFulfilled("npc_jonathan", "you_learn")) then 
+		DL:addChoice(59, "DL_Choice_YouLearn") -- Why don't you learn those spells yourself?
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
-	if (DL:getGuild() == "cleric") then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "where_spells")) then 
 
-		DL:createNPCNode(42, 46, "DL_Jonathan_JoinedClerics") -- Maybe the most reasonable choice...
-		DL:changeQuestState("join_a_guild", "completed")
+		DL:createNPCNode(58, 62, "DL_Jonathan_WhereSpells") -- No, I don't know much about air or earth spells. You need to find them yourself.
 		DL:addNode()
 
 
-		DL:createNPCNode(46, 49, "DL_Jonathan_GoodJobGuild") -- Well, good job on joining a mage guid. I wasn't able to decrypt your map with just elemental magic.
+		DL:createNPCNode(62, 63, "DL_Jonathan_WhereSpells2") -- I've heard that the lighthouse keeper Jack has a problem with a wind-monster. That may help you with learning some wind magic.
+		DL:addQuestDescription("element_master", 1)
+		DL:addConditionProgress("npc_jonathan", "where_spells")
 		DL:addNode()
 
 
-		DL:createNPCNode(49, 52, "DL_Jonathan_CombinedSkillsDivine") -- But combined with your divine magic, it could work.
-		DL:addNode()
-
-
-		DL:createNPCNode(52, -1, "") -- 
-		DL:startCutscene("map_decrypt/map_decrypt_divine")
-		DL:addConditionProgress("default", "chapter3")
+		DL:createNPCNode(63, -2, "DL_Jonathan_WhereSpells3") -- I assume you can find Jack in the brothel...
 		DL:addNode()
 
 	end
 
-	if (DL:getGuild() == "thief") then 
+	if (not DL:isConditionFulfilled("npc_jonathan", "you_learn")) then 
 
-		DL:createNPCNode(43, 47, "DL_Jonathan_JoinedThieves") -- The underground of Gandria, eh. Just don't try to steal MY things.
-		DL:changeQuestState("join_a_guild", "completed")
+		DL:createNPCNode(59, 60, "DL_Jonathan_YouLearn") -- My focus are only fire spells. Also, I don't feel safe going out of my house anymore.
 		DL:addNode()
 
 
-		DL:createNPCNode(47, 50, "DL_Jonathan_GoodJobGuild") -- 
+		DL:createNPCNode(60, 61, "DL_Jonathan_YouLearn2") -- I'm pretty sure I'm being watched - Someone followed me lately on my way home. 
 		DL:addNode()
 
 
-		DL:createNPCNode(50, 53, "DL_Jonathan_CombinedSkillsTwilight") -- But combined with your twilight magic, it could work.
-		DL:addNode()
-
-
-		DL:createNPCNode(53, -1, "") -- 
-		DL:startCutscene("map_decrypt/map_decrypt_twilight")
-		DL:addConditionProgress("default", "chapter3")
-		DL:addNode()
-
-	end
-
-	if (DL:getGuild() == "necromancer") then 
-
-		DL:createNPCNode(44, 48, "DL_Jonathan_JoinedNecromancers") -- I didn't expect you'd go there. An interesting choice, indeed.
-		DL:changeQuestState("join_a_guild", "completed")
-		DL:addNode()
-
-
-		DL:createNPCNode(48, 51, "DL_Jonathan_GoodJobGuild") -- 
-		DL:addNode()
-
-
-		DL:createNPCNode(51, 54, "DL_Jonathan_CombinedSkillsNecro") -- But combined with your necromancy, it could work.
-		DL:addNode()
-
-
-		DL:createNPCNode(54, -1, "") -- 
-		DL:addConditionProgress("default", "chapter3")
-		DL:startCutscene("map_decrypt/map_decrypt_necro")
+		DL:createNPCNode(61, -2, "DL_Jonathan_YouLearn3") -- And with all the people disappearing... No, no, I leave this to you.
+		DL:addConditionProgress("npc_jonathan", "you_lern")
 		DL:addNode()
 
 	end
