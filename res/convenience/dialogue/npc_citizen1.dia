@@ -33,7 +33,7 @@ npc.id:npc_citizen1
 	]
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
@@ -65,11 +65,22 @@ npc.id:npc_citizen1
 	[
 		# Link node, tag is next tag
 		tag:8
+		condition:DL:isConditionFulfilled("npc_zeff", "zeff_gone")
 		# translation: 
 		translation.tag:DL_Choice_WhereLeatherworker
 		translation.en:... a leatherworker?
-		translation.de:... einen Kürschner?
+		translation.de:... einen Lederer?
 		translation.ch:... en Lederer?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_zeff", "zeff_gone")
+		# translation: 
+		translation.tag:DL_Choice_WhereLeatherworker
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -121,11 +132,12 @@ npc.id:npc_citizen1
 	# [6] NPC Node
 	tag:6
 	# triggers: 
+	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_NPC_6
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Citizen_WhereBlacksmith
+	translation.en:Our best blacksmith is Harek. You can find him in the artisans district, in the southwest part of Gandria.
+	translation.de:Unser bester Schmied ist Harek. Du findest ihn im Handwerkerviertel, im südwestlichen Teil von Gandria.
+	translation.ch:Üse best Schmied isch de Harek. Du findschen im Handwerkerviertel, im Südweste vo Gandria.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -135,11 +147,12 @@ npc.id:npc_citizen1
 	# [9] NPC Node
 	tag:9
 	# triggers: 
+	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_NPC_9
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Citizen_WhereAlchemist
+	translation.en:You're looking for Syrah. Her house is near the artisans district, in the southern part of Gandria.
+	translation.de:Du suchst Syrah. Ihr Haus ist in der Nähe des Handwerkerviertels, im südlichen Teil von Gandria.
+	translation.ch:Du suechsch d'Syrah. Ihres Huus isch ide Nöchi vom Handwerkerviertel, im südliche Teil vo Gandria.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -149,11 +162,27 @@ npc.id:npc_citizen1
 	# [8] NPC Node
 	tag:8
 	# triggers: 
+	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_NPC_8
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Choice_ZeffHere
+	translation.en:The leatherworker Zeff has his workshop in the artisans district. Although being transformed into a wolf-human, he's still knows his craft.
+	translation.de:Der Lederer Zeff hat seine Werkstatt im Handwerkerviertel. Obwohl er in einen Wolfsmenschen verwandelt wurde, beherrscht er sein Handwerk immer noch.
+	translation.ch:De Lederer Zeff het sini Werkstatt im Handwerkerviertel. Sini Fähigkeite hend nid unter sinere Verwandlig inen Wolfsmensch glitte.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:gotoNode(3)
+	# translation: 
+	translation.tag:DL_Choice_ZeffGone
+	translation.en:We had a leatherworker once in our city, but he disappeared. Nobody knows what happened to him.
+	translation.de:Wir hatten mal einen Lederer in unserer Stadt, aber er ist verschwunden. Niemand weiss, was ihm zugestossen ist.
+	translation.ch:Mir hend mal en Lederer i üsere Stadt gha, aber er isch verschwunde. Niemert weiss, wa mit ihm passiert isch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -163,11 +192,12 @@ npc.id:npc_citizen1
 	# [4] NPC Node
 	tag:4
 	# triggers: 
+	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_NPC_4
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Citizen_WhereTavern
+	translation.en:The "Basilisk Inn" is in between the artisans district and the harbour, near the market square.
+	translation.de:Das "Gasthaus zum Basilisken" ist zwischen dem Handwerkerviertel und dem Hafen, in der Nähe des Marktplatzes.
+	translation.ch:S'"Gaschthuus zum Basilisk" isch zwüsche em Handwerkerviertel und em Hafe, ide Nöchi vom Marktplatz.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -177,11 +207,12 @@ npc.id:npc_citizen1
 	# [5] NPC Node
 	tag:5
 	# triggers: 
+	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_NPC_5
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Citizen_WhereBarracks
+	translation.en:The barracks are near the gates of the inner city wall, on the other side of the river.
+	translation.de:Die Kaserne ist in der Nähe des Tors der inneren Stadtmauer, auf der anderen Seite des Flusses.
+	translation.ch:D'Kaserne isch ide Nöchi vom Tor vode innere Stadtmuur, uf de andere Siite vom Fluss.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -191,11 +222,12 @@ npc.id:npc_citizen1
 	# [7] NPC Node
 	tag:7
 	# triggers: 
+	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_NPC_7
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Citizen_WhereCathedral
+	translation.en:The cathedral is in the northern part of Gandria, on the other side of the river.
+	translation.de:Die Kathedrale ist im nördlichen Teil von Gandria, auf der anderen Seite des Flusses.
+	translation.ch:D'Kathedrale isch im nördliche Teil vo Gandria, uf de andere Siite vom Fluss.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -205,11 +237,12 @@ npc.id:npc_citizen1
 	# [10] NPC Node
 	tag:10
 	# triggers: 
+	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_NPC_10
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Citizen_WhereBrothel
+	translation.en:Ehm... The brothel is in the harbour district.
+	translation.de:Ehm... Das Bordell ist im Hafenviertel.
+	translation.ch:Ehm... Es Bordell isch im Hafeviertel.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -220,11 +253,121 @@ npc.id:npc_citizen1
 	tag:2
 	[
 		# Link node, tag is next tag
+		tag:14
+		# translation: 
+		translation.tag:DL_Choice_AboutGandria
+		translation.en:... Gandria?
+		translation.de:... Gandria?
+		translation.ch:... Gandria?
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		# translation: 
+		translation.tag:DL_Choice_AboutKing
+		translation.en:... the king?
+		translation.de:... den König?
+		translation.ch:... de König?
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		# translation: 
+		translation.tag:DL_Choice_AboutMages
+		translation.en:... mages?
+		translation.de:... Magier?
+		translation.ch:... Magier?
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		# translation: 
+		translation.tag:DL_Choice_AboutNecromany
+		translation.en:... Necromancy?
+		translation.de:... Nekromantie?
+		translation.ch:... Nekromantie?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:gotoNode(2)
+	# translation: 
+	translation.tag:DL_Citizen_AboutGandria
+	translation.en:Gandria is not only the capital of Admantris, it plays also an important economic role as a port. 
+	translation.de:Gandria ist nicht nur die Hauptstadt von Admantris sondern hat auch eine bedeutende wirtschaftliche Rolle als Hafenstadt.
+	translation.ch:Gandria isch nid nur d'Hauptstadt vo Admantris sondern het au e wichtigi wirtschaftlichi Rolle als Hafestadt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:gotoNode(2)
+	# translation: 
+	translation.tag:DL_Citizen_AboutKing
+	translation.en:We don't know much about our king, Logan the Third. He has only recently ascended the throne.
+	translation.de:Wir wissen nicht viel über unseren König, Logan den Dritten. Er hat den Thron erst kürzlich bestiegen.
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Citizen_AboutMages
+	translation.en:Mages rule our city. Most of the people in the militia know magic and the king has always been a mage as far as I can remember.
+	translation.de:Magier regieren unsere Stadt. Die meisten Leute der Miliz beherrschen Magie und der König war schon immer ein Magier, soweit ich mich erinnern kann.
+	translation.ch:D'Magier regiered üsi Stadt. Di meiste Lüt ide Miliz beherrsched Magie und de König isch au scho immer en Magier gsi sowiit ich weiss.
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:gotoNode(2)
+	# translation: 
+	translation.tag:DL_Citizen_AboutMages2
+	translation.en:It's hard being a commoner in a world ruled by magic.
+	translation.de:Es ist nicht einfach, ein Gewöhnlicher zu sein in einer Welt, die von Magie regiert wird.
+	translation.ch:Es isch nid eifach en Gwöhnliche z'sii inere Welt wo vo Magie regiert wird.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:gotoNode(2)
+	# translation: 
+	translation.tag:DL_Citizen_AboutNecromany
+	translation.en:Hush! We don't talk about that.
+	translation.de:Psst! Wir reden nicht über das.
+	translation.ch:Psht! Mir reded nid über das.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
