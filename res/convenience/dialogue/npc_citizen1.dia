@@ -18,9 +18,9 @@ npc.id:npc_citizen1
 		tag:3
 		# translation: 
 		translation.tag:DL_Choice_Where
-		translation.en:Excuse me, where is...
-		translation.de:Entschuldigung, wo ist...
-		translation.ch:Sorry, wo isch...
+		translation.en:Excuse me, where can I find...
+		translation.de:Entschuldigung, wo finde ich...
+		translation.ch:Sorry, wo find ich...
 	]
 	[
 		# Link node, tag is next tag
@@ -46,12 +46,173 @@ npc.id:npc_citizen1
 	tag:3
 	[
 		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_WhereBlacksmith
+		translation.en:... a blacksmith?
+		translation.de:... einen Schmied?
+		translation.ch:... en Schmied?
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_WhereAlchemist
+		translation.en:... an alchemist?
+		translation.de:... einen Alchemisten?
+		translation.ch:... en Alchemist?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_WhereLeatherworker
+		translation.en:... a leatherworker?
+		translation.de:... einen Kürschner?
+		translation.ch:... en Lederer?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_WhereTavern
+		translation.en:... the tavern?
+		translation.de:... die Taverne?
+		translation.ch:... d'Taverne?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_WhereBarracks
+		translation.en:... the barracks?
+		translation.de:... die Kaserne?
+		translation.ch:... d'Kaserne?
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_WhereCathedral
+		translation.en:... the cathedral?
+		translation.de:... die Kathedrale?
+		translation.ch:... d'Kathedrale?
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		# translation: 
+		translation.tag:DL_Choice_WhereBrothel
+		translation.en:... the brothel?
+		translation.de:... das Bordell?
+		translation.ch:... es Bordell?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_6
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_9
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_8
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_4
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_5
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_7
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_10
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {2
