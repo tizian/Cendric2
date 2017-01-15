@@ -24,11 +24,11 @@ Cendric moves through the world on a 2D map and interacts with NPCs to trade or 
 
 ## Current stable build
 
-Pre-alpha builds are available for Windows x64, Mac and Ubuntu. However, feel free to try and compile *Cendric* on any platform.
+Pre-alpha builds are available for Windows x64, macOS and Ubuntu. However, feel free to try and compile *Cendric* on any platform.
 
 [Cendric v0.4.0](https://github.com/tizian/Cendric2/releases/download/v0.4.0/Cendric_v0.4.0_win64.zip) (Windows x64)
 
-[Cendric v0.3.1a](https://github.com/tizian/Cendric2/releases/download/v0.3.0/cendric_v0.3.1a_mac.zip) (Mac OS X)
+[Cendric v0.3.1a](https://github.com/tizian/Cendric2/releases/download/v0.4.0/Cendric_v0.4.0_mac.zip) (macOS)
 
 [Cendric v0.4.0](https://github.com/tizian/Cendric2/releases/download/v0.4.0/Cendric_v0.4.0_ubuntu.tar.gz) (Ubuntu)
 
