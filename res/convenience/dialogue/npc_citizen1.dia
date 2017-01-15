@@ -321,7 +321,7 @@ npc.id:npc_citizen1
 	translation.tag:DL_Citizen_AboutKing
 	translation.en:We don't know much about our king, Logan the Third. He has only recently ascended the throne.
 	translation.de:Wir wissen nicht viel über unseren König, Logan den Dritten. Er hat den Thron erst kürzlich bestiegen.
-	translation.ch:
+	translation.ch:Mir wüssed nid viel über üsen König, de Logan de Dritt. Er isch erst sit churzem ufem Thron.
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -24,3 +24,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedWind','sign','Need wind...','Brauchst Wind...','Bruuchsch es Lüftli...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GetOut','sign','Get out!','Hau ab!','Use mit dir!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Danger','sign','Danger!','Gefahr!','Gföhrlich!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('UnderConstruction','sign','This level is under construction!','Dieses Level ist im Bau!','Da Level isch im Bau!');

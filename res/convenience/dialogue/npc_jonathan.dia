@@ -43,7 +43,7 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:45
-		condition:DL:isQuestState("element_master") == "void"
+		condition:DL:isQuestState("element_master", "void")
 	]
 	[
 		# Link node, tag is next tag
@@ -1170,7 +1170,7 @@ npc.id:npc_jonathan
 	# [61] NPC Node
 	tag:61
 	# triggers: 
-	trigger:DL:addConditionProgress("npc_jonathan", "you_lern")
+	trigger:DL:addConditionProgress("npc_jonathan", "you_learn")
 	# translation: 
 	translation.tag:DL_Jonathan_YouLearn3
 	translation.en:And with all the people disappearing... No, no, I leave this to you.

@@ -1092,21 +1092,21 @@
   </object>
   <object id="282" gid="2349" x="300" y="3000" width="50" height="50">
    <properties>
-    <property name="dialogueid" value="res/npc/npc_citizen1/npc_citizen.lua"/>
+    <property name="dialogueid" value="res/npc/npc_citizen1/dl_npc_citizen1.lua"/>
     <property name="id" value="npc_citizenf2"/>
     <property name="texttype" value="dl_npc_citizen1"/>
    </properties>
   </object>
   <object id="283" gid="2347" x="3400" y="2700" width="50" height="50">
    <properties>
-    <property name="dialogueid" value="res/npc/npc_citizen1/npc_citizen1.lua"/>
+    <property name="dialogueid" value="res/npc/npc_citizen1/dl_npc_citizen1.lua"/>
     <property name="id" value="npc_citizen2"/>
     <property name="texttype" value="dl_npc_citizen1"/>
    </properties>
   </object>
   <object id="284" gid="2348" x="1799" y="1100" width="50" height="50">
    <properties>
-    <property name="dialogueid" value="res/npc/npc_citizen1/npc_citizen1.lua"/>
+    <property name="dialogueid" value="res/npc/npc_citizen1/dl_npc_citizen1.lua"/>
     <property name="id" value="npc_citizenf1"/>
     <property name="texttype" value="dl_npc_citizen1"/>
    </properties>

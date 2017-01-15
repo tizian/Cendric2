@@ -54,7 +54,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item','Iron Claw', 'Eisenklaue','Isechlaue');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item_desc', 'The curved sharp blades and its range create a terrible weapon.','Die gebogenen scharfen Klingen und ihre Reichweite machen sie zu einer fürchterlichen Waffe.','Di bogene scharfe Klinge und iri Riichwiiti mached si zunere fürchterliche Waffe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_claw', 'eq_weapon', 250, 250, 100);
-INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_shadow, dmg_ice) values ('we_claw', 10, 15, 5, 5);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_shadow, dmg_ice) values ('we_claw', 10, 8, 5, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_claw', 'res/assets/equipment/weapon/spritesheet_weapon_claw.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_claw.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_claw', 800, 10, 45, 80, 10);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 1, 'elemental', 1);

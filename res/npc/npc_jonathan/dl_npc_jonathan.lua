@@ -15,7 +15,7 @@ loadDialogue = function(DL)
 		DL:setRoot(36) 
 	elseif (not DL:isConditionFulfilled("default", "chapter3")) then 
 		DL:setRoot(41) 
-	elseif (DL:isQuestState("element_master") == "void") then 
+	elseif (DL:isQuestState("element_master", "void")) then 
 		DL:setRoot(45) 
 	else 
 		DL:setRoot(57) 
@@ -416,7 +416,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isQuestState("element_master") == "void") then 
+	if (DL:isQuestState("element_master", "void")) then 
 
 		DL:createNPCNode(45, 55, "DL_Jonathan_StartElementMaster") -- I knew they would not make it easy for us. Like they really don't want to be found.
 		DL:addNode()
@@ -471,7 +471,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(61, -2, "DL_Jonathan_YouLearn3") -- And with all the people disappearing... No, no, I leave this to you.
-		DL:addConditionProgress("npc_jonathan", "you_lern")
+		DL:addConditionProgress("npc_jonathan", "you_learn")
 		DL:addNode()
 
 	end
