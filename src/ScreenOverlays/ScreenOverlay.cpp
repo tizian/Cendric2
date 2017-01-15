@@ -362,7 +362,7 @@ ScreenOverlay* ScreenOverlay::createGuildJoinedScreenOverlay(FractionID id) {
 		guildScreenOverlay->setSubtitleColor(COLOR_TWILIGHT);
 	}
 
-	sf::IntRect texRect((static_cast<int>(id) - 1) * 146, 0, 146, 173);
+	sf::IntRect texRect((static_cast<int>(id) - 1) * 146, 0, 146, 162);
 	guildScreenOverlay->setSpriteTextureRect(texRect);
 
 	sf::Vector2f scale(2.f, 2.f);
