@@ -171,8 +171,7 @@ void WorldScreen::notifyGuildSet(FractionID fraction) {
 	if (fraction == FractionID::VOID || getCharacterCore()->getData().guild == fraction) return;
 	getCharacterCore()->setGuild(fraction);
 	m_progressLog->addGuildJoined(fraction);
-	// TODO [tiz] here!
-	//addScreenOverlay(ScreenOverlay::createGuildJoinedOverlay(fraction));
+	addScreenOverlay(ScreenOverlay::createGuildJoinedScreenOverlay(fraction));
 
 	m_interface->reloadCharacterInfo();
 }

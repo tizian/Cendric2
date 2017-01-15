@@ -68,7 +68,8 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_LEVELITEMS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_SPELLICONS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_SPELLSCROLL, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_GUILDICONS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUILD_ICONS, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_GUILD_BANNERS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_INVENTORYTABS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_SPELLBOOKTABS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS, ResourceType::Global);

@@ -45,7 +45,8 @@ public:
 	static const std::string TEX_SPELLSCROLL;
 	static const std::string TEX_INVENTORYTABS;
 	static const std::string TEX_SPELLBOOKTABS;
-	static const std::string TEX_GUILDICONS;
+	static const std::string TEX_GUILD_ICONS;
+	static const std::string TEX_GUILD_BANNERS;
 	static const std::string TEX_EQUIPMENTPLACEHOLDERS;
 	static const std::string TEX_GEMS;
 	

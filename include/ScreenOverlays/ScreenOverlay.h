@@ -4,6 +4,7 @@
 #include "GUI/BitmapText.h"
 #include "GameObject.h"
 #include "ResourceManager.h"
+#include "Enums/FractionID.h"
 #include "Enums/QuestState.h"
 #include "Enums/SpellID.h"
 #include "Structs/SpellModifier.h"
@@ -23,6 +24,7 @@ public:
 	void setTitleRaw(const std::string& text);
 	void setTitleCharacterSize(int characterSize);
 	void setTitleColor(const sf::Color& color);
+	void setTextPosition(float percentage = 0.3f);
 	void setSubtitle(const std::string& textKey, const std::string& textType = "core");
 	void setSubtitleRaw(const std::string& text);
 	void setSubtitleCharacterSize(int characterSize);
@@ -42,9 +44,11 @@ public:
 	static ScreenOverlay* createGamePausedScreenOverlay();
 	static ScreenOverlay* createEnemyDefeatedScreenOverlay(std::map<std::string, int>& items, int gold);
 	static ScreenOverlay* createArrestedScreenOverlay();
+	static ScreenOverlay* createGuildJoinedScreenOverlay(FractionID id);
 
-protected: 
+protected:
 	float m_scale;
+	float m_textPositionPercentage;
 	bool m_isPermanent;
 
 	BitmapText m_title;

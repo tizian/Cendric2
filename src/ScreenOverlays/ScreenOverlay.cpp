@@ -30,6 +30,8 @@ void ScreenOverlay::load() {
 	m_subtitle.setTextStyle(TextStyle::Shadowed);
 	m_subtitle.setTextAlignment(TextAlignment::Center);
 
+	m_textPositionPercentage = 0.3f;
+
 	m_fadeInTimer = m_fadeTime;
 	m_fadeOutTimer = m_fadeTime;
 
@@ -109,9 +111,13 @@ void ScreenOverlay::setSubtitleColor(const sf::Color& color) {
 	m_subtitle.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(m_scale * 255)));
 }
 
+void ScreenOverlay::setTextPosition(float percentage) {
+	m_textPositionPercentage = percentage;
+}
+
 void ScreenOverlay::repositionText() {
 	const sf::FloatRect& titleBounds = m_title.getLocalBounds();
-	m_title.setPosition(0.5f * (WINDOW_WIDTH - titleBounds.width), 0.3f * (WINDOW_HEIGHT - titleBounds.height));
+	m_title.setPosition(0.5f * (WINDOW_WIDTH - titleBounds.width), m_textPositionPercentage * (WINDOW_HEIGHT - titleBounds.height));
 	const sf::FloatRect& subtitleBounds = m_subtitle.getLocalBounds();
 	m_subtitle.setPosition(0.5f * (WINDOW_WIDTH - subtitleBounds.width), m_title.getPosition().y + titleBounds.height + subtitleBounds.height);
 }
@@ -329,4 +335,41 @@ ScreenOverlay* ScreenOverlay::createArrestedScreenOverlay() {
 		static_cast<int>(text->getSize().x), 60));
 
 	return arrestedScreenOverlay;
+}
+
+ScreenOverlay* ScreenOverlay::createGuildJoinedScreenOverlay(FractionID id) {
+	TextureScreenOverlay* guildScreenOverlay = new TextureScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
+
+	guildScreenOverlay->setTextPosition(0.15f);
+
+	guildScreenOverlay->setTitleColor(COLOR_WHITE);
+	guildScreenOverlay->setTitleCharacterSize(32);
+
+	guildScreenOverlay->setTitle("GuildJoined");
+
+	guildScreenOverlay->setSubtitleCharacterSize(32);
+	guildScreenOverlay->setSubtitle(EnumNames::getFractionIDName(id));
+
+	guildScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUILD_BANNERS));
+
+	if (id == FractionID::Cleric) {
+		guildScreenOverlay->setSubtitleColor(COLOR_DIVINE);
+	}
+	else if (id == FractionID::Necromancer) {
+		guildScreenOverlay->setSubtitleColor(COLOR_NECROMANCY);
+	}
+	else if (id == FractionID::Thief) {
+		guildScreenOverlay->setSubtitleColor(COLOR_TWILIGHT);
+	}
+
+	sf::IntRect texRect((static_cast<int>(id) - 1) * 146, 0, 146, 173);
+	guildScreenOverlay->setSpriteTextureRect(texRect);
+
+	sf::Vector2f scale(2.f, 2.f);
+	guildScreenOverlay->setSpriteScale(scale);
+
+	sf::Vector2f pos(0.5f * (WINDOW_WIDTH - 2.f * 146), 0.35f * (WINDOW_HEIGHT - 50));
+	guildScreenOverlay->setSpritePosition(pos);
+
+	return guildScreenOverlay;
 }

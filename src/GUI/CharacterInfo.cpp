@@ -365,7 +365,7 @@ void CharacterInfo::updateReputation() {
 
 	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
 	
-	auto* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUILDICONS);
+	auto* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUILD_ICONS);
 	int texHeight = 100;
 	if (tex != nullptr)
 		m_guildSprite.setTexture(*tex);
