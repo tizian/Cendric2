@@ -25,6 +25,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("isQuestComplete", &WorldCallback::isQuestComplete)
 		.addFunction("isConditionFulfilled", &WorldCallback::isConditionFulfilled)
 		.addFunction("isQuestConditionFulfilled", &WorldCallback::isQuestConditionFulfilled)
+		.addFunction("isQuestDescriptionUnlocked", &WorldCallback::isQuestDescriptionUnlocked)
 		.addFunction("hasItem", &WorldCallback::hasItem)
 		.addFunction("isSpellLearned", &WorldCallback::isSpellLearned)
 		.addFunction("getItemAmount", &WorldCallback::getItemAmount)
@@ -90,6 +91,14 @@ bool WorldCallback::isQuestConditionFulfilled(const std::string& quest, const st
 		return false;
 	}
 	return m_core->isQuestConditionFulfilled(quest, condition);
+}
+
+bool WorldCallback::isQuestDescriptionUnlocked(const std::string& quest, int description) const {
+	if (quest.empty()) {
+		g_logger->logError("WorldCallback", "Quest ID cannot be empty.");
+		return false;
+	}
+	return m_core->isQuestDescriptionUnlocked(quest, description);
 }
 
 int WorldCallback::getReputation(const std::string& fractionID) const {

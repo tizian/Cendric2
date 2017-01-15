@@ -14,6 +14,7 @@ public:
 protected:
 	std::string getGoldText(const Item& item) const override;
 	std::string getReputationText(const Item& item) const override;
+	std::string getInteractionText(const Item& item) const override;
 
 private:
 	float m_goldMultiplier;

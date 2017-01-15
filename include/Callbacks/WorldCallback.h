@@ -21,6 +21,7 @@ public:
 	bool isQuestState(const std::string& questID, const std::string& state) const;
 	bool isQuestComplete(const std::string& questID) const;
 	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const;
+	bool isQuestDescriptionUnlocked(const std::string& quest, int description) const;
 
 	// other queries
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;

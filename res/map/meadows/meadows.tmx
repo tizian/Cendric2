@@ -50,6 +50,9 @@
    <objectgroup draworder="index"/>
   </tile>
   <tile id="404">
+   <properties>
+    <property name="light" value="25,50,250,200,1.0"/>
+   </properties>
    <animation>
     <frame tileid="404" duration="100"/>
     <frame tileid="405" duration="100"/>
@@ -1298,13 +1301,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="light" visible="0">
-  <object id="49" x="2195.75" y="793.75" width="254.25" height="207.25">
-   <ellipse/>
-  </object>
-  <object id="57" x="1802.88" y="44.375" width="254.25" height="207.25">
-   <ellipse/>
-  </object>
+ <objectgroup name="light">
   <object id="124" x="733" y="1468" width="174" height="201">
    <ellipse/>
   </object>

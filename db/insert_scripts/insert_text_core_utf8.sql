@@ -178,6 +178,9 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Refl
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Reputation','Reputation','Ruf','Ruef','Reputación');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Reset','Reset','Zurücksetzen','Zruggsetze','Reiniciar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Resume','Resume','Spiel fortsetzen','Zrugg zum Spiel','Continuar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickOpen','Right click to open','Rechtsklicken zum Öffnen','Rechtsklicke zum ufmache','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickLearn','Right click to learn','Rechtsklicken zum Lernen','Rechtsklicke zum lerne','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickRead','Right click to read','Rechtsklicken zum Lesen','Rechtsklicke zum läse','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Save','Save','Speichern','Speichere','Guardar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SaveGame','Save Game','Spiel speichern','Spiel speichere','Guardar partida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SavegameDeleted','Save game successfully deleted.','Speicherstand erfolgreich gelöscht.','Speicherstand isch glöscht.','Partida guardada eliminada satisfactoriamente.');

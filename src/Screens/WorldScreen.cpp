@@ -134,8 +134,11 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 
 void WorldScreen::notifySpellLearned(SpellID id) {
 	getCharacterCore()->learnSpell(id);
+	
+	m_overlayQueue.clear();
 	addScreenOverlay(ScreenOverlay::createSpellLearnedScreenOverlay(id));
 	m_interface->reloadSpellBook();
+	m_interface->hideAll();
 }
 
 void WorldScreen::notifyModifierLearned(const SpellModifier& modifier) {

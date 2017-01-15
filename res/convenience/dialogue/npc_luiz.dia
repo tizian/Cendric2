@@ -360,6 +360,7 @@ npc.id:npc_luiz
 	trigger:DL:setGuild("necromancer")
 	trigger:DL:addItem("eq_body_necrot1", 1)
 	trigger:DL:equipItem("eq_body_necrot1")
+	trigger:DL:addQuestDescription("join_a_guild", 4)
 	# translation: 
 	translation.tag:DL_Luiz_JoinNecromancers
 	translation.en:Very well. Welcome to the circle, novice. May your knowledge always grow.

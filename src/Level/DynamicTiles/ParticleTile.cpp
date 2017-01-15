@@ -235,8 +235,10 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 		break;
 	case 2:
 		loadWaterParticles(skinNr);
+		break;
 	case 4:
 	default:
 		loadEmberParticles(skinNr);
+		break;
 	}
 }

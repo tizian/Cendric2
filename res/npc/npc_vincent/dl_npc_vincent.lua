@@ -92,6 +92,7 @@ loadDialogue = function(DL)
 			
 				DL:createNPCNode(0, -1, "DL_Vincent_GoodJob") -- I know that you have carried out my task. Very good. You might be of use. 
 				DL:changeQuestState("spoiled_fire", "completed")
+				DL:addConditionProgress("npc_vincent","quest_done")
 				DL:addGold(50)
 				DL:addReputationProgress("thief", 10)
 				DL:addNode()

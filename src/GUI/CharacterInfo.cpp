@@ -385,7 +385,7 @@ void CharacterInfo::updateReputation() {
 		noRep.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		noRep.setPosition(xOffset, yOffset);
 		noRep.setColor(COLOR_LIGHT_PURPLE);
-		noRep.setString(g_textProvider->getCroppedText("NoReputation", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 2 * GUIConstants::TEXT_OFFSET)));
+		noRep.setString(g_textProvider->getCroppedText("NoReputation", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET)));
 		m_reputationTexts.push_back(noRep);
 		return;
 	}
@@ -403,7 +403,7 @@ void CharacterInfo::updateReputation() {
 		BitmapText subtitle;
 		std::string key = EnumNames::getFractionIDName(rep.first) + "_" +
 			(rep.second >= 75 ? "100" : rep.second >= 50 ? "75" : rep.second >= 25 ? "50" : "25");
-		subtitle.setString(g_textProvider->getCroppedText(key, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 2 * GUIConstants::TEXT_OFFSET)));
+		subtitle.setString(g_textProvider->getCroppedText(key, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET)));
 		subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		subtitle.setPosition(xOffset, yOffset);
 		subtitle.setColor(COLOR_LIGHT_PURPLE);

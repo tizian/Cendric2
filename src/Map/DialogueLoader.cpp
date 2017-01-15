@@ -23,6 +23,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isQuestComplete", &DialogueLoader::isQuestComplete)
 		.addFunction("isConditionFulfilled", &DialogueLoader::isConditionFulfilled)
 		.addFunction("isQuestConditionFulfilled", &DialogueLoader::isQuestConditionFulfilled)
+		.addFunction("isQuestDescriptionUnlocked", &DialogueLoader::isQuestDescriptionUnlocked)
 		.addFunction("isSpellLearned", &DialogueLoader::isSpellLearned)
 		.addFunction("hasItem", &DialogueLoader::hasItem)
 		.addFunction("getItemAmount", &DialogueLoader::getItemAmount)

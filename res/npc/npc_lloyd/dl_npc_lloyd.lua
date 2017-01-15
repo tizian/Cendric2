@@ -140,6 +140,7 @@ loadDialogue = function(DL)
 		DL:setGuild("cleric")
 		DL:addItem("eq_body_divinet1", 1)
 		DL:equipItem("eq_body_divinet1")
+		DL:addQuestDescription("join_a_guild", 4)
 		DL:addNode()
 
 	end

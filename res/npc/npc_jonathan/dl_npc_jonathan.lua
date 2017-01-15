@@ -46,13 +46,13 @@ loadDialogue = function(DL)
 	if (not DL:isQuestState("a_new_trace", "completed")) then 
 
 		DL:createChoiceNode(5)
-		if (DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)) then 
+		if (DL:isQuestDescriptionUnlocked("a_new_trace",1) and DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)) then 
 			DL:addChoice(6, "DL_Choice_Letter") -- Someone wants me to meet you. (Show the letter and give the map)
 		end
 		DL:addChoice(-1, "DL_Choice_Leave") -- I was just about to leave.
 		DL:addNode()
 
-		if (DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)) then 
+		if (DL:isQuestDescriptionUnlocked("a_new_trace",1) and DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)) then 
 
 			DL:createNPCNode(6, 7, "DL_Jonathan_Letter") -- (Reads the letter carefully) Cyrus! So good to hear from him. So, you're from the academy? How are things going there? And what did Cyrus find out?
 			DL:removeItem("do_elemap", 1)

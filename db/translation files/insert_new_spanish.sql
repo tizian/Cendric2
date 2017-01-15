@@ -10,3 +10,6 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Guil
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LimitFPS','Limit FPS','FPS limitieren','FPS limitiere','?');
 -- when trying to open a chest/door or to revive / fear an enemy with a spell.
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughStrength','The spell is not strong enough!','Der Zauber ist nicht genügend stark!','De Zauber isch nid gnueg starch!','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickOpen','Right click to open','Rechtsklicken zum Öffnen','Rechtsklicke zum ufmache','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickLearn','Right click to learn','Rechtsklicken zum Lernen','Rechtsklicke zum lerne','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickRead','Right click to read','Rechtsklicken zum Lesen','Rechtsklicke zum läse','?');

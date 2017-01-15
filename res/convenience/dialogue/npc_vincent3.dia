@@ -129,9 +129,9 @@ npc.id:npc_vincent3
 		condition:DL:isConditionFulfilled("npc_vincent3", "shadowstalkers")
 		# translation: 
 		translation.tag:DL_Choice_IWantJoin
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.en:I want to join you.
+		translation.de:Ich möchte euch beitreten.
+		translation.ch:Ich wett eu biitrette.
 	]
 	[
 		# Link node, tag is next tag
@@ -321,6 +321,7 @@ npc.id:npc_vincent3
 	trigger:DL:setGuild("thief")
 	trigger:DL:addItem("eq_body_twilightt1", 1)
 	trigger:DL:equipItem("eq_body_twilightt1")
+	trigger:DL:addQuestDescription("join_a_guild", 4)
 	# translation: 
 	translation.tag:DL_Vincent_DeclareThief
 	translation.en:You won't regret this. Welcome in our guild, shadow stalker.

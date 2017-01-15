@@ -357,6 +357,7 @@ npc.id:npc_lloyd
 	trigger:DL:setGuild("cleric")
 	trigger:DL:addItem("eq_body_divinet1", 1)
 	trigger:DL:equipItem("eq_body_divinet1")
+	trigger:DL:addQuestDescription("join_a_guild", 4)
 	# translation: 
 	translation.tag:DL_Lloyd_JointClerics
 	translation.en:I now declare you a mage of the Order of the Clerics. May the Eternal Light guide thee. 

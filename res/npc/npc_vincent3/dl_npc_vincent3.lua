@@ -51,7 +51,7 @@ loadDialogue = function(DL)
 			DL:addChoice(11, "DL_Choice_WhatIfJoin") -- Why should I join you?
 		end
 		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers")) then 
-			DL:addChoice(13, "DL_Choice_IWantJoin") -- 
+			DL:addChoice(13, "DL_Choice_IWantJoin") -- I want to join you.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
@@ -135,6 +135,7 @@ loadDialogue = function(DL)
 			DL:setGuild("thief")
 			DL:addItem("eq_body_twilightt1", 1)
 			DL:equipItem("eq_body_twilightt1")
+			DL:addQuestDescription("join_a_guild", 4)
 			DL:addNode()
 
 		end

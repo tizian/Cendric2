@@ -31,6 +31,9 @@ ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 
 	m_whiteText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_coloredText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	
+	m_interactionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_interactionText.setColor(COLOR_NEUTRAL);
 }
 
 ItemDescriptionWindow::~ItemDescriptionWindow() {}
@@ -45,6 +48,22 @@ std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
 
 std::string ItemDescriptionWindow::getReputationText(const Item& item) const {
 	return "";
+}
+
+std::string ItemDescriptionWindow::getInteractionText(const Item& item) const {
+	std::string interactionText;
+
+	if (item.getType() == ItemType::Document) {
+		interactionText = g_textProvider->getText("RightClickRead");
+	}
+	else if (item.getType() == ItemType::Convertible) {
+		interactionText = g_textProvider->getText("RightClickOpen");
+	}
+	else if (item.getType() == ItemType::Spell) {
+		interactionText = g_textProvider->getText("RightClickLearn");
+	}
+
+	return interactionText;
 }
 
 void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
@@ -65,6 +84,7 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	m_whiteText.setPosition(pos);
 	m_coloredText.setPosition(pos);
 	m_reputationText.setPosition(pos);
+	m_interactionText.setPosition(pos);
 }
 
 void ItemDescriptionWindow::load(const Item& item) {
@@ -75,6 +95,7 @@ void ItemDescriptionWindow::load(const Item& item) {
 	std::string white = "";
 	std::string colored = "";
 	std::string reputation = "";
+	std::string interaction = "";
 
 	if (item.getType() == ItemType::Permanent) {
 		colored.append(g_textProvider->getText("Permanent"));
@@ -165,6 +186,16 @@ void ItemDescriptionWindow::load(const Item& item) {
 		lines++;
 	}
 
+	std::string intText = getInteractionText(item);
+	if (!intText.empty()) {
+		for (int i = 0; i < lines; ++i) {
+			interaction.append("\n");
+		}
+		interaction.append(intText);
+		lines++;
+	}
+
+	m_interactionText.setString(interaction);
 	m_reputationText.setString(reputation);
 	m_whiteText.setString(white);
 	m_coloredText.setString(colored);
@@ -186,6 +217,7 @@ void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_whiteText);
 	renderTarget.draw(m_coloredText);
 	renderTarget.draw(m_reputationText);
+	renderTarget.draw(m_interactionText);
 }
 
 void ItemDescriptionWindow::show() {

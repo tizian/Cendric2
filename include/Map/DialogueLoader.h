@@ -21,6 +21,7 @@ public:
 	bool isQuestComplete(const std::string& questID) const { return m_worldCallback->isQuestComplete(questID); }
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const { return m_worldCallback->isConditionFulfilled(conditionType, condition); }
 	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const { return m_worldCallback->isQuestConditionFulfilled(quest, condition); }
+	bool isQuestDescriptionUnlocked(const std::string& quest, int description) const { return m_worldCallback->isQuestDescriptionUnlocked(quest, description); }
 	bool isSpellLearned(int spellID) const { return m_worldCallback->isSpellLearned(spellID); }
 	bool hasItem(const std::string& item, int amount) const { return m_worldCallback->hasItem(item, amount); }
 	int getItemAmount(const std::string& item) const { return m_worldCallback->getItemAmount(item); }

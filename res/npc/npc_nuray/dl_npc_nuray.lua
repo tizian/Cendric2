@@ -20,7 +20,7 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_nuray", "who_are_you")) then 
 
 		DL:createChoiceNode(2)
-		DL:addChoice(3, "DL_Choice_WhoAreYou") -- Wer bist du?
+		DL:addChoice(3, "DL_Choice_WhoAreYou") -- Who are you?
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 

@@ -142,6 +142,7 @@ loadDialogue = function(DL)
 			DL:setGuild("necromancer")
 			DL:addItem("eq_body_necrot1", 1)
 			DL:equipItem("eq_body_necrot1")
+			DL:addQuestDescription("join_a_guild", 4)
 			DL:addNode()
 
 		end

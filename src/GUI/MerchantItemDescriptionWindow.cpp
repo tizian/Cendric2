@@ -31,3 +31,7 @@ std::string MerchantItemDescriptionWindow::getReputationText(const Item& item) c
 
 	return text;
 }
+
+std::string MerchantItemDescriptionWindow::getInteractionText(const Item& item) const {
+	return "";
+}

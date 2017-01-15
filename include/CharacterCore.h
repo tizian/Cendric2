@@ -108,6 +108,8 @@ public:
 	void setQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 	// is a quest condition for a certain quest fulfilled?
 	bool isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const;
+	// is a quest description for a certain quest unlocked?
+	bool isQuestDescriptionUnlocked(const std::string& questID, int description) const;
 	// is a spell learned?
 	bool isSpellLearned(SpellID id);
 	// set a condition fulfilled. Returns whether the operation was successful.

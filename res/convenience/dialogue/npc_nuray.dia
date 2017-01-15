@@ -43,7 +43,7 @@ npc.id:npc_nuray
 		tag:3
 		# translation: 
 		translation.tag:DL_Choice_WhoAreYou
-		translation.en:Wer bist du?
+		translation.en:Who are you?
 		translation.de:Wer bisch du?
 		translation.ch:Wer bisch du?
 	]

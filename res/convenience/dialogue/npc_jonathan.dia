@@ -121,7 +121,7 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:6
-		condition:DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)
+		condition:DL:isQuestDescriptionUnlocked("a_new_trace",1) and DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)
 		# translation: 
 		translation.tag:DL_Choice_Letter
 		translation.en:Someone wants me to meet you. (Show the letter and give the map)

@@ -334,6 +334,13 @@ bool CharacterCore::isQuestConditionFulfilled(const std::string& questID, const 
 	return contains(m_data.questConditionProgress.at(questID), condition);
 }
 
+bool CharacterCore::isQuestDescriptionUnlocked(const std::string& questID, int description) const {
+	if (!contains(m_data.questDescriptionProgress, questID)) {
+		return false;
+	}
+	return contains(m_data.questDescriptionProgress.at(questID), description);
+}
+
 bool CharacterCore::isSpellLearned(SpellID id) {
 	for (auto& type : m_data.spellsLearned) {
 		for (auto spell : type.second) {

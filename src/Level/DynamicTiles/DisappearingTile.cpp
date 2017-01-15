@@ -6,7 +6,7 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Disappearing, DisappearingTile)
 
-const sf::Time DisappearingTile::RESPAWN_TIME = sf::seconds(10.f);
+const sf::Time DisappearingTile::RESPAWN_TIME = sf::seconds(5.f);
 
 DisappearingTile::DisappearingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen) {

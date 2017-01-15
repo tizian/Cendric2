@@ -1,0 +1,74 @@
+# dia file for dialogue for npc: npc_inina2
+
+npc.id:npc_inina2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_inina2", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Inina_StrangePassage
+	translation.en:Startling, isn't it? Those caverns led directly into the sewers of Gandria, without us noticing it.
+	translation.de:Erschreckend, oder? Diese Höhlen haben direkt in die Kanalisation von Gandria geführt, ohne dass wir davon wussten.
+	translation.ch:Krass, gell? Die Höhle hend direkt id Kanalisation vo Gandria gführt, ohni dasmer öppis devo gwüsst hend.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Inina_StrangePassage2
+	translation.en:I've tried to follow the passage over there, but it has been blocked somehow.
+	translation.de:Ich habe bereits probiert, diesem Gang dort drüben zu folgen, aber er wurde irgendwie blockiert.
+	translation.ch:Ich ha scho probiert dem Gang dete z'folge, aber er isch irgendwie blockiert worde.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_inina2", "talked")
+	trigger:DL:addQuestDescription("further_investigation", 1)
+	# translation: 
+	translation.tag:DL_Inina_StrangePassage3
+	translation.en:I don't know a spell that could push through this blockade. Maybe you could succeed?
+	translation.de:Ich kenne keinen Zauber der diese Blockade wegdrücken könnte. Vielleicht gelingt es dir ja?
+	translation.ch:Ich kenn ken Zauber wo die Blockade wegdrucke chönt. Vilicht glingts dir ja?
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
