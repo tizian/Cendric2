@@ -44,6 +44,9 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") >= requiredGold)) then 
 		DL:addItemChoice(11, "DL_Choice_IHaveGold", "gold", requiredGold) -- 
 	end
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and not DL:hasItem("we_pickaxe", 1)) then 
+		DL:addChoice(15, "DL_Choice_AnotherPickaxe") -- I need another pickaxe...
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -127,6 +130,15 @@ loadDialogue = function(DL)
 		DL:startMap("res/map/gandriabarracks/gandriabarracks.tmx", 265, 110)
 		DL:addNode()
 
+	end
+	
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and not DL:hasItem("we_pickaxe", 1)) then 
+
+		DL:createNPCNode(15, -1, "DL_Edgar_AnotherPickaxe") -- Here. Now go and work!
+		DL:addItem("we_pickaxe", 1)
+		DL:equipItem("we_pickaxe")
+		DL:addNode()
+		
 	end
 
 end

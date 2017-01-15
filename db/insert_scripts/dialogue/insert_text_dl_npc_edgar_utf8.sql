@@ -17,4 +17,6 @@ INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Edgar_YoureReleased', 'dl_npc_edgar', 'Okay, that''s enough.', 'Okay, das ist genug.', 'Guet, da isch gnueg.');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Edgar_YoureReleased2', 'dl_npc_edgar', 'You''re free to go. I hope I won''t see you here again.', 'Du kannst jetzt gehen. Ich hoffe bloss, dass ich dich hier nie mehr sehen muss.', 'Du chasch ez ga. Ich hoff eifach dasi dich da nie me gse mun.');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Edgar_YoureReleased3', 'dl_npc_edgar', 'You can fetch your old belongings from the chest in the barracks.', 'Du kannst deine alten Habseligkeiten aus der Truhe in der Kaserne holen.', 'Du chasch dini alte Sache us de True ide Kaserne hole.');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_AnotherPickaxe', 'dl_npc_edgar', 'I need another pickaxe...', 'Ich brauche nochmals eine Spitzhacke...', 'Ich bruuch namal en Pickel...');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Edgar_AnotherPickaxe', 'dl_npc_edgar', 'Here. Now go and work!', 'Hier. Jetzt geh arbeiten!', 'Do. Ez gang go schaffe!');
 
