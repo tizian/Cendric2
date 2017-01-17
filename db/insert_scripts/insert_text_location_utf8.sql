@@ -32,3 +32,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Sm
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NecroHall','location','Halls of the Guardians','Halle der Wächter','Halle vode Wächter');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Storeroom','location','Storeroom','Vorratskammer','Vorrotschammere');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ForgottenPassage','location','The Forgotten Passage','Der Vergessene Durchgang','De Vergässeni Durchgang');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JackLighthouse','location','Jack''s Lighthouse','Jacks Leuchtturm','De Lüüchtturm vom Jack');

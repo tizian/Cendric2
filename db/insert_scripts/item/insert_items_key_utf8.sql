@@ -61,3 +61,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_sewerkey', 'item_desc', 'Opens certain doors in the sewers of Gandria.','Öffnet gewisse Türen in der Kanalisation von Gandria.','Macht gwüssi Türe ide Kanalisation vo Gandria uf.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_sewerkey', -6, -38, 32, 12);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('ke_sewerkey', 1, 500, 200, 50, 50);
+
+-- Lighthouse Key
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_lighthouse', 'key', 600, 550, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_lighthouse', 'item', 'Lighthouse Key','Leuchtturm-Schlüssel','Lüüchtturm-Schlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_lighthouse', 'item_desc', 'The key of Jack''s Lighthouse.','Der Schlüssel von Jack''s Leuchtturm.','De Schlüssel vom Jack sim Lüüchtturm.');

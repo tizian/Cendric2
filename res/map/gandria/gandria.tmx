@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="288">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="290">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -1037,6 +1037,12 @@
   <object id="267" x="2600" y="2890" width="50" height="30">
    <properties>
     <property name="map entry" value="res/map/gandriasewers/gandriasewers.tmx,1165,1150"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="289" x="3450" y="2190" width="50" height="35">
+   <properties>
+    <property name="level entry" value="res/level/jacklighthouse/jacklighthouse.tmx,1505,3110"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
