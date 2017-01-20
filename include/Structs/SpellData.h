@@ -98,6 +98,7 @@ private:
 	static SpellData getReturningProjectileSpellData();
 	static SpellData getBoomerangSpellData();
 	static SpellData getRotatingProjectileData();
+	static SpellData getTargetingProjectileData();
 };
 
 const struct SpellData EMPTY_SPELL =

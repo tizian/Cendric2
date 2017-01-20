@@ -1,7 +1,7 @@
 Animation.h / AnimatedSprite.h
 Source: https://github.com/LaurentGomila/SFML/wiki/Source%3A-AnimatedSprite
 
-SMFL Tutorials
+SFML Tutorials
 Source: http://www.sfml-dev.org/tutorials/2.2/
 
 StackExchange:

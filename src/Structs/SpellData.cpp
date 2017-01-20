@@ -8,6 +8,7 @@
 #include "Spells/TransformBeamSpell.h"
 #include "Spells/ReturningProjectileSpell.h"
 #include "Spells/RotatingProjectileSpell.h"
+#include "Spells/TargetingProjectileSpell.h"
 #include "Spells/BoomerangSpell.h"
 #include "SpellCreators/DivineShieldSpellCreator.h"
 #include "SpellCreators/AureolaSpellCreator.h"
@@ -216,6 +217,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 	case SpellID::RotatingProjectile:
 		creator = new DefaultSpellCreator<RotatingProjectileSpell>(data, owner);
 		break;
+	case SpellID::TargetingProjectile:
+		creator = new DefaultSpellCreator<TargetingProjectileSpell>(data, owner);
+		break;
 	default:
 		return nullptr;
 	}
@@ -279,6 +283,8 @@ SpellData SpellData::getSpellData(SpellID id) {
 		return getRotatingProjectileData();
 	case SpellID::Buff:
 		return getBuffSpellData();
+	case SpellID::TargetingProjectile:
+		return getTargetingProjectileData();
 	default:
 		return EMPTY_SPELL;
 	}
@@ -355,6 +361,23 @@ SpellData SpellData::getRotatingProjectileData() {
 	projectile.activeDuration = sf::seconds(6);
 	projectile.needsTarget = true;
 	projectile.isDynamicTileEffect = true;
+	projectile.damage = 3;
+	projectile.speed = 600.f;
+
+	return projectile;
+}
+
+SpellData SpellData::getTargetingProjectileData() {
+	SpellData projectile = EMPTY_SPELL;
+	projectile.id = SpellID::TargetingProjectile;
+	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_targetingprojectile.png";
+
+	projectile.cooldown = sf::seconds(1);
+	projectile.boundingBox = sf::FloatRect(0, 0, 19, 19);
+	projectile.divergenceAngle = 0.2f;
+	projectile.damageType = DamageType::Physical;
+	projectile.activeDuration = sf::seconds(6);
+	projectile.needsTarget = true;
 	projectile.damage = 3;
 	projectile.speed = 600.f;
 
