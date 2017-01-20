@@ -380,7 +380,7 @@ void Enemy::setDead() {
 		return;
 	}
 
-	if (m_isUnique) {
+	if (m_isUnique && !m_isBoss) {
 		notifyKilled();
 	}
 

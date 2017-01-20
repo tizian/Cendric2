@@ -48,7 +48,7 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target) {
 	}
 
 	// spell has been cast. set cooldown.
-	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellData().cooldown * m_owner->getAttributes()->cooldownMultiplier;
+  	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellData().cooldown * m_owner->getAttributes()->cooldownMultiplier;
 	m_coolDownMap[m_currentSpell] = cooldown;
 	m_spellMap[m_currentSpell]->executeSpell(target);
 	if (m_spellSelection != nullptr) {

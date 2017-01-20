@@ -27,7 +27,7 @@ void ReturningProjectileSpell::calculateUnboundedVelocity(const sf::Time& frameT
 	if (m_isReturning && m_mob != nullptr) {
 		// a returning projectile spell will chase its owner.
 		sf::Vector2f dir = m_mob->getCenter() - getPosition();
-		float abs = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+		float abs = norm(dir);
 		dir = dir / abs * m_absVel;
 		nextVel.x = dir.x;
 		nextVel.y = dir.y;

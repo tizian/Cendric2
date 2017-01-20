@@ -24,3 +24,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Wa
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Prisoner','enemy','Prisoner','Gefangener','Gfangene');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ooze','enemy','Ooze','Schleim','Schleim');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bat','enemy','Bat','Fledermaus','Flädermuus');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElysiaFledgling','enemy','Elysia''s Fledgling','Elysia''s Küken','Bibeli vode Elysia');
