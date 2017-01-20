@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="290">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="291">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -923,11 +923,6 @@
     <property name="key" value="ke_sewerkey"/>
    </properties>
   </object>
-  <object id="276" gid="2399" x="2700" y="2540" width="50" height="50">
-   <properties>
-    <property name="conditions" value="default,brothel_open"/>
-   </properties>
-  </object>
   <object id="277" gid="2419" x="3450" y="2250" width="50" height="50">
    <properties>
     <property name="key" value="ke_lighthouse"/>
@@ -1043,6 +1038,12 @@
   <object id="289" x="3450" y="2190" width="50" height="35">
    <properties>
     <property name="level entry" value="res/level/jacklighthouse/jacklighthouse.tmx,1505,3110"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="290" x="2700" y="2490" width="50" height="35">
+   <properties>
+    <property name="map entry" value="res/map/gandriabrothel/gandriabrothel.tmx,440,670"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
