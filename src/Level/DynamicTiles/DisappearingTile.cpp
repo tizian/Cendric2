@@ -51,7 +51,7 @@ void DisappearingTile::initForSkinNr() {
 		m_criticalTime = sf::seconds(0.5f);
 		break;
 	case 2:
-		m_skinColor = sf::Color(188, 173, 145, 200);
+		m_skinColor = sf::Color(150, 175, 200, 200);
 		m_criticalTime = sf::seconds(1.f);
 		break;
 	case 3:

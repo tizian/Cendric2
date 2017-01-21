@@ -40,7 +40,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_travelbag', 'item_desc', 'I wonder what''s inside?','Was ist da wohl drin?','Wa isch do echt drin?');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_travelbag', 'convertible', 500, 350, -1);
 INSERT INTO item_convertible (item_id, convertible_item_id, convertible_amount) values ('co_travelbag', 'gold', 5);
-INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'qe_compass');
 INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'do_elemap');
 INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'do_eleletter');
 INSERT INTO item_convertible (item_id, convertible_item_id) values ('co_travelbag', 'eq_travelhat');

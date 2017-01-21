@@ -33,8 +33,10 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Compass
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_compass', 'item', 'Compass', 'Kompass', 'Kompass');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_compass', 'item_desc', 'A golden compass I found with my old belongings. It still works.', 'Ein goldener Kompass, den ich bei meinen alten Habseligkeiten gefunden habe. Er funktioniert noch.', 'En goldige Kompass woni bi mine alte Sache gfunde ha. Er tuet na.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_compass', 'item_desc', 'A golden compass. It still works.', 'Ein goldener Kompass. Er funktioniert noch.', 'En goldige Kompass. Er tuet na.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_compass', 'quest', 500, 400, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_compass', -15, -35, 20, 15);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_compass', 1, 550, 250, 50, 50);
 
 -- Broken Shaft (part 1 of the broken staff)
 
