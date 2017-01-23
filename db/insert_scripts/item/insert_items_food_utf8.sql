@@ -189,6 +189,34 @@ INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) va
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rawmeat', -7, -26, 40, 24);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rawmeat', 1, 150, 100, 50, 50);
 
+-- Roasted Chicken
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_chicken', 'item', 'Roasted Chicken','Gebratenes Geflügel','Brotes Poulet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_chicken', 'item_desc', 'Crispy outside and tender inside.','Aussen knusprig und innen zart.','Usse chnuschperig und inine zart.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_chicken', 'consumable', 450, 650, 3);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical, haste) values ('fo_chicken', 5, 3, 10);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_chicken', -5, -36, 40, 14);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_chicken', 1, 600, 300, 50, 50);
+
+-- Raw Chicken
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawchicken', 'item', 'Raw Chicken','Rohes Geflügel','Rohs Poulet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawchicken', 'item_desc', 'Should not be eaten raw.','Sollte nicht roh verzehrt werden.','Das sötme nid roh esse.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_rawchicken', 'consumable', 400, 650, 2);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical, haste) values ('fo_rawchicken', -1, -1, -5);
+INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) values ('fo_rawchicken', 10, 1, 'fo_chicken');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rawchicken', -5, -36, 40, 14);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rawchicken', 1, 550, 300, 50, 50);
+
+
+-- Fish Soup
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item', 'Fish Soup', 'Fischsuppe', 'Fischsuppe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item_desc', 'Hot and delicious.', 'Heiss und lecker.', 'Heiss und gluschtig.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_fishsoup', 'consumable', 400, 100, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice) values ('fo_fishsoup', 6, 8);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_fishsoup', 10);
+
 -- Raw Fish
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item', 'Raw Fish', 'Roher Fisch', 'Rohe Fisch');
@@ -199,13 +227,6 @@ INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) va
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rawfish', 0, -30, 50, 35);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rawfish', 1, 50, 200, 50, 100);
 
--- Fish Soup
-
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item', 'Fish Soup', 'Fischsuppe', 'Fischsuppe');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item_desc', 'Hot and delicious.', 'Heiss und lecker.', 'Heiss und gluschtig.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_fishsoup', 'consumable', 400, 100, 5);
-INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice) values ('fo_fishsoup', 6, 8);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_fishsoup', 10);
 
 -- Wine
 

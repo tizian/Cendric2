@@ -99,6 +99,10 @@ item.id:fo_sausage,1
 item.id:fo_water,1
 item.id:fo_wine,1
 item.id:fo_milk,1
+item.id:fo_rawchicken,1
+item.id:fo_chicken,1
+item.id:fo_egg,1
+item.id:fo_omelette,1
 item.id:mi_candleholder,1
 item.id:mi_feather,1
 item.id:mi_gargoyle_dust,1
