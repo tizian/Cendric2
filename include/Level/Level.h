@@ -61,8 +61,8 @@ private:
 	bool collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
 
 	SpeedupPullCamera* m_camera;
-	const float CAMERA_WINDOW_WIDTH = 200.f;
-	const float CAMERA_WINDOW_HEIGHT = 200.f;
+	static const float CAMERA_WINDOW_WIDTH;
+	static const float CAMERA_WINDOW_HEIGHT;
 
 	std::set<LevelDynamicTileID> m_avoidableTiles;
 	std::set<LevelDynamicTileID> m_evilTiles;

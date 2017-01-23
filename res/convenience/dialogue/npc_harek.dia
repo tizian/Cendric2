@@ -348,6 +348,16 @@ npc.id:npc_harek
 	]
 	[
 		# Link node, tag is next tag
+		tag:20
+		condition:DL:hasItem("mi_pearlpile", 1) and DL:hasItem("mi_ironore", 3)
+		# translation: 
+		translation.tag:DL_Choice_PearlSabre
+		translation.en:1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
+		translation.de:1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
+		translation.ch:1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-2
 		# translation: 
 		translation.tag:DL_Choice_NoMaterial
@@ -368,6 +378,23 @@ npc.id:npc_harek
 	translation.en:An exeptionally beautiful stone! I can truly craft something magical from that.
 	translation.de:Ein aussergewöhnlich schöner Stein! Daraus kann ich wahrlich etwas magisches herstellen.
 	translation.ch:En ussergwöhnlich schöne Stei! Da drus chani wohrlich öppis schöns mache.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:removeItem("mi_pearlpile", 1)
+	trigger:DL:removeItem("mi_ironore", 3)
+	trigger:DL:addItem("we_pearlsabre", 1)
+	# translation: 
+	translation.tag:DL_Harek_PearlSabre
+	translation.en:Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
+	translation.de:Magische Perlen! Es ist lange her seit ich solche in den Händen gehalten habe... Die werden einen hübschen Säbel abgeben.
+	translation.ch:Magischi Perle! Es isch lang her sit ich sonigi ide Händ gha ha... Die werded en prima Säbel ge.
 	[
 		# Link node, tag is next tag
 		tag:-2

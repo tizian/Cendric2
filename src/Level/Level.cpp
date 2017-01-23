@@ -2,6 +2,10 @@
 #include "Screens/LevelScreen.h"
 #include "Level/DynamicTiles/MovingTile.h"
 
+const float Level::CAMERA_WINDOW_HEIGHT = 200.f;
+const float Level::CAMERA_WINDOW_WIDTH = 200.f;
+
+
 Level::Level() : World() {
 	m_worldData = &m_levelData;
 	m_camera = new SpeedupPullCamera();

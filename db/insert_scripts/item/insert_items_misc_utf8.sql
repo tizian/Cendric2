@@ -102,6 +102,12 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone', 'misc', 300, 350, 28);
 
+-- Pile of Magical Pearls
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearlpile', 'item', 'Pile of Magical Pearls','Haufen Magischer Perlen','Es Hüüfli Magischi Perle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearlpile', 'item_desc', 'Maybe someone could use these pearls to craft something.','Vielleicht könnte jemand aus diesen Perlen etwas herstellen.','Vilicht chönt öpper us dene Perle öppis herstelle.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearlpile', 'misc', 300, 650, 50);
+
 -- Iron Ore
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item', 'Iron Ore','Eisenerz','Iseerz');

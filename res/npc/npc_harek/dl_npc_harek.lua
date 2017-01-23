@@ -129,6 +129,9 @@ loadDialogue = function(DL)
 		if (DL:hasItem("mi_icecrystal", 1) and DL:hasItem("mi_ironore", 2)) then 
 			DL:addChoice(18, "DL_Choice_IceScarf") -- 1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
 		end
+		if (DL:hasItem("mi_pearlpile", 1) and DL:hasItem("mi_ironore", 3)) then 
+			DL:addChoice(20, "DL_Choice_PearlSabre") -- 1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
+		end
 		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
 		DL:addNode()
 
@@ -138,6 +141,16 @@ loadDialogue = function(DL)
 			DL:removeItem("mi_icecrystal", 1)
 			DL:removeItem("mi_ironore", 2)
 			DL:addItem("eq_icescarf", 1)
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("mi_pearlpile", 1) and DL:hasItem("mi_ironore", 3)) then 
+
+			DL:createNPCNode(20, -2, "DL_Harek_PearlSabre") -- Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
+			DL:removeItem("mi_pearlpile", 1)
+			DL:removeItem("mi_ironore", 3)
+			DL:addItem("we_pearlsabre", 1)
 			DL:addNode()
 
 		end
