@@ -10,7 +10,8 @@ REGISTER_ENEMY(EnemyID::Crow, CrowEnemy)
 
 void CrowEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	loot.insert({ "mi_feather", 1 });
-	gold = 2;
+	loot.insert({ "fo_egg", 1 });
+	gold = rand() % 3 + 1;
 }
 
 void CrowEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {

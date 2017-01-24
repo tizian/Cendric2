@@ -452,6 +452,7 @@ loadDialogue = function(DL)
 		DL:createNPCNode(62, 63, "DL_Jonathan_WhereSpells2") -- I've heard that the lighthouse keeper Jack has a problem with a wind-monster. That may help you with learning some wind magic.
 		DL:addQuestDescription("element_master", 1)
 		DL:addConditionProgress("npc_jonathan", "where_spells")
+		DL:addConditionProgress("default", "brothel_open")
 		DL:addNode()
 
 

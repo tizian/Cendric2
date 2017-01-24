@@ -30,10 +30,10 @@ loadDialogue = function(DL)
 	if (DL:getGuild() == "cleric" and not DL:isConditionFulfilled("npc_thiran", "first_spell")) then 
 		DL:addChoice(6, "DL_Choice_Learn") -- 
 	end
-	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
+	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
 		DL:addChoice(7, "DL_Choice_SecondSpell") -- Can you teach me more spells?
 	end
-	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
+	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
 		DL:addChoice(8, "DL_Choice_SecondSpell") -- 
 	end
 	DL:addChoice(-1, "") -- 
@@ -59,14 +59,14 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
+	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
 
 		DL:createNPCNode(7, -2, "DL_Thiran_NoFurtherSpell") -- Not yet. I'm going to teach you another spell when you've worked for us.
 		DL:addNode()
 
 	end
 
-	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
+	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")) then 
 
 		DL:createNPCNode(8, -2, "DL_Thiran_SecondSpell") -- Yes, you've proven yourself worthy to learn more divine magic. Here you go.
 		DL:addItem("sp_divineshield", 1)

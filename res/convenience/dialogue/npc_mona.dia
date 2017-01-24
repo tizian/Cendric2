@@ -1,0 +1,176 @@
+# dia file for dialogue for npc: npc_mona
+
+npc.id:npc_mona
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_mona", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Mona_Hi
+	translation.en:Oh, a new guest. Welcome to the Red Pearl.
+	translation.de:Oh, ein neuer Gast. Willkommen in der Roten Perle.
+	translation.ch:Oh, en neue Gast. Willkomme ide Rote Perle.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "talked")
+	# translation: 
+	translation.tag:DL_Mona_Hi2
+	translation.en:If you got gold and are respectful to my girls, you can have an extraordinary time here. (Smiles)
+	translation.de:Wenn du Gold hast und respektvoll mit meinen Mädels umgehst, kannst du hier eine aussergewöhnliche Zeit geniessen. (Lächelt)
+	translation.ch:Wenn du Gold hesch und respektvoll mit mine Meitli umgasch, chasch da e sehr ussergwöhnlichi Ziit gnüsse. (Lächlet)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_mona", "upper_floor")
+		# translation: 
+		translation.tag:DL_Choice_UpperFloor
+		translation.en:How can I get to the upper floor?
+		translation.de:Wie komme ich in den oberen Stock?
+		translation.ch:We chumi in obere Stocke?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:isConditionFulfilled("npc_mona", "upper_floor") and not DL:isConditionFulfilled("npc_mona", "gate_open") and not DL:hasItem("gold", 100)
+		# translation: 
+		translation.tag:DL_Choice_OpenGate
+		translation.en:Let me go to the upper floor. (100 $gold$)
+		translation.de:Lass mich in den oberen Stock. (100 $gold$)
+		translation.ch:Lah min in obere Stock. (100 $gold$)
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:isConditionFulfilled("npc_mona", "upper_floor") and not DL:isConditionFulfilled("npc_mona", "gate_open") and DL:hasItem("gold", 100)
+		# translation: 
+		translation.tag:DL_Choice_OpenGate
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isConditionFulfilled("npc_mona", "upper_floor") and not DL:isConditionFulfilled("npc_mona", "only_meet") and not DL:isConditionFulfilled("npc_mona", "gate_open")
+		# translation: 
+		translation.tag:DL_Choice_OnlyMeet
+		translation.en:I only need to talk to someone briefly.
+		translation.de:Ich muss nur kurz mit jemandem sprechen.
+		translation.ch:Ich mu nur churz mit öpperem rede.
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_Trade
+		translation.en:Can I get a drink here?
+		translation.de:Krieg ich hier etwas zu trinken?
+		translation.ch:Bechumi da öppis zum trinke?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "upper_floor")
+	# translation: 
+	translation.tag:DL_Mona_UpperFloor
+	translation.en:I'll open the gate for you for a small compensation so you can enjoy the show.
+	translation.de:Für eine kleine Entschädigung öffne ich dir die Türe und du kannst dir die Vorführung ansehen.
+	translation.ch:Für e chliini Entschädigung mach ich dir das Törli uf und du chasch der d'Vorstellig aluege.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Mona_OpenGate
+	translation.en:You don't have enough gold.
+	translation.de:Du hast nicht genügend Gold.
+	translation.ch:Du hesch nid gnueg Gold.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:removeItem("gold", 100)
+	trigger:DL:addConditionProgress("npc_mona", "gate_open")
+	# translation: 
+	translation.tag:DL_Mona_OpenGate
+	translation.en:Sure, have fun.
+	translation.de:Sicher, viel Spass.
+	translation.ch:Sicher, viel Spass.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "only_meet")
+	# translation: 
+	translation.tag:DL_Mona_OnlyMeet
+	translation.en:Then you can wait until they leave again. If you go up there, you'll have to pay.
+	translation.de:Dann musst du warten bis sie wieder gehen. Wenn du nach oben willst, musst du zahlen.
+	translation.ch:Denn muesch hald warte bis si wieder gönd. Wend uega wetsch muesch au zahle.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{4
+	# [4] Trade Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

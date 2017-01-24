@@ -195,6 +195,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_chicken', 'item_desc', 'Crispy outside and tender inside.','Aussen knusprig und innen zart.','Usse chnuschperig und inine zart.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_chicken', 'consumable', 450, 650, 3);
 INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical, haste) values ('fo_chicken', 5, 3, 10);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_chicken', 10);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_chicken', -5, -36, 40, 14);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_chicken', 1, 600, 300, 50, 50);
 
@@ -208,6 +209,23 @@ INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) va
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rawchicken', -5, -36, 40, 14);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rawchicken', 1, 550, 300, 50, 50);
 
+-- Egg
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_egg', 'item', 'Egg','Ei','Ei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_egg', 'item_desc', 'Can be used as a cooking ingredient.','Kann als Kochzutat verwendet werden.','Chame zum choche bruche.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_egg', 'consumable', 500, 650, 2);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_egg', 2, 10);
+INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) values ('fo_egg', 5, 1, 'fo_omelette');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_egg', -18, -31, 15, 19);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_egg', 1, 500, 300, 50, 50);
+
+-- Omelette
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_omelette', 'item', 'Omelette','Pfannkuchen','Omelette');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_omelette', 'item_desc', 'Delicious taste and strengthening effect.','Schmeckt lecker und hat einen stärkenden Effekt.','Isch fein und het en stärchende Effekt.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_omelette', 'consumable', 550, 650, 3);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical, res_physical) values ('fo_omelette', 3, 10, 20);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_omelette', 10);
 
 -- Fish Soup
 

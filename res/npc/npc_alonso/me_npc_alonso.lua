@@ -12,6 +12,8 @@ wares =
 	{"fo_lesserhealingpotion", 1},
 	{"fo_healingherb", 3},
 	{"fo_roastedmeat", 3},
+	{"fo_chicken", 5},
+	{"fo_egg", 5},
 	{"fo_rawfish", 3},
 	{"fo_rawmeat", 5},
 	{"fo_fishsoup", 2},

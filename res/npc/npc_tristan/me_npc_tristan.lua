@@ -5,6 +5,8 @@ wares =
 	{"fo_cheese", 4},
 	{"fo_apple", 3},
 	{"fo_sausage", 5},
+	{"fo_rawchicken", 5},
+	{"fo_egg", 2},
 	{"fo_ham", 3},
 	{"fo_healingherb", 5},
 	{"we_torch", 1},

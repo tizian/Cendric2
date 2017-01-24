@@ -10,6 +10,9 @@ REGISTER_ENEMY(EnemyID::Elysia_Fledgling, ElysiaFledglingEnemy)
 
 void ElysiaFledglingEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
 	loot.insert({ "mi_feather", rand() % 3 + 1 });
+	loot.insert({ "fo_rawchicken", 1 });
+	if (rand() % 2 == 0)
+		loot.insert({ "fo_egg", 1 });
 }
 
 void ElysiaFledglingEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {

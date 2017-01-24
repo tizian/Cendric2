@@ -6,7 +6,7 @@ loadRoutine = function(R, W)
 
 	if (W:isQuestState("element_master", "void") and W:isConditionFulfilled("default", "chapter3")) then
 		R:setTilePosition(9,7)
-		R:setTalkingActive(false)
+		R:setTalkingActive(true)
 		R:setReloadEnabled(true)
 		return
 	end
@@ -32,7 +32,7 @@ loadRoutine = function(R, W)
 		R:wait(5000)
 		R:goToTile(11,7)
 	else
-		R:setTalkingActive(true)
+		R:setTalkingActive(false)
 		R:setReloadEnabled(true)
 		R:setTilePosition(11,12)
 		R:setFacingDown()

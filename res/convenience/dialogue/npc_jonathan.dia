@@ -1114,6 +1114,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	trigger:DL:addQuestDescription("element_master", 1)
 	trigger:DL:addConditionProgress("npc_jonathan", "where_spells")
+	trigger:DL:addConditionProgress("default", "brothel_open")
 	# translation: 
 	translation.tag:DL_Jonathan_WhereSpells2
 	translation.en:I've heard that the lighthouse keeper Jack has a problem with a wind-monster. That may help you with learning some wind magic.

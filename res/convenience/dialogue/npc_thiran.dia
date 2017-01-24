@@ -87,7 +87,7 @@ npc.id:npc_thiran
 	[
 		# Link node, tag is next tag
 		tag:7
-		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
+		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
 		# translation: 
 		translation.tag:DL_Choice_SecondSpell
 		translation.en:Can you teach me more spells?
@@ -97,7 +97,7 @@ npc.id:npc_thiran
 	[
 		# Link node, tag is next tag
 		tag:8
-		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputationProgress("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
+		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
 		# translation: 
 		translation.tag:DL_Choice_SecondSpell
 		translation.en:
