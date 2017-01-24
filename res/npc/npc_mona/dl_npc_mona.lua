@@ -47,7 +47,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_mona", "upper_floor") and not DL:isConditionFulfilled("npc_mona", "gate_open") and not DL:hasItem("gold", 100)) then 
 
-		DL:createNPCNode(6, -2, "DL_Mona_OpenGate") -- You don't have enough gold.
+		DL:createNPCNode(6, -2, "DL_Mona_OpenGateNot") -- You don't have enough gold.
 		DL:addNode()
 
 	end

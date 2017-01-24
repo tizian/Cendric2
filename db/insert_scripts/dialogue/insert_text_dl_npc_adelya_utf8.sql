@@ -1,0 +1,1 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Adelya_BeGone', 'dl_npc_adelya', 'Don''t talk to me! Can''t you see I''m busy?', 'Sprich mich nicht an! Siehst du nicht dass ich beschäftigt bin?', 'Red nid mit mir! Gsesch nid dasi beschäftigt bin?');

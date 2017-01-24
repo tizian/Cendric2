@@ -126,7 +126,7 @@ npc.id:npc_mona
 	tag:6
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Mona_OpenGate
+	translation.tag:DL_Mona_OpenGateNot
 	translation.en:You don't have enough gold.
 	translation.de:Du hast nicht genügend Gold.
 	translation.ch:Du hesch nid gnueg Gold.
