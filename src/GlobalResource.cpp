@@ -108,4 +108,4 @@ const std::string GlobalResource::SOUND_GUI_OPENWINDOW = "res/sound/gui/window_o
 const std::string GlobalResource::SOUND_GUI_QUESTPROGRESS = "res/sound/gui/quest_progress.ogg";
 const std::string GlobalResource::SOUND_GUI_NEGATIVE = "res/sound/gui/negative.ogg";
 const std::string GlobalResource::SOUND_MISC_UNLOCK = "res/sound/tile/unlock.ogg";
-const std::string GlobalResource::MUSIC_MAIN = "res/music/main_placeholder.ogg";
+const std::string GlobalResource::MUSIC_MAIN = "res/music/menu_theme.ogg";

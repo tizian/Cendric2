@@ -3,7 +3,7 @@
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
-  <property name="musicpath" value="res/music/meadows.ogg"/>
+  <property name="musicpath" value="res/music/marshland.ogg"/>
   <property name="name" value="Marshland"/>
   <property name="tilesetpath" value="res/map/marshland/tileset_map_marshland.png"/>
   <property name="weather" value="rain"/>

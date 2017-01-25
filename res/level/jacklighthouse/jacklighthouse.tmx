@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/jacklighthouse/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
-  <property name="musicpath" value="res/music/main_placeholder.ogg"/>
+  <property name="musicpath" value="res/music/lighthouse.ogg"/>
   <property name="name" value="JackLighthouse"/>
   <property name="tilesetpath" value="res/level/jacklighthouse/tileset_level_jacklighthouse.png"/>
  </properties>
