@@ -8,11 +8,30 @@ npc.id:npc_jack
 	[
 		# Link node, tag is next tag
 		tag:1
+		condition:not DL:isConditionFulfilled("npc_jack", "who_are_you")
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_jack", "elysia")
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
 	]
 }
 {2
 	# [1] Choice Node
 	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -21,5 +40,206 @@ npc.id:npc_jack
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jack", "who_are_you")
+	# translation: 
+	translation.tag:DL_Jack_WhoAreYou
+	translation.en:I'm Jack. Usually I'd sit in my lighthouse instead of this bawdy house here.
+	translation.de:Ich bin Jack. Normalerweise wär ich ja in meinem Leuchtturm und nicht hier bei den Dirnen.
+	translation.ch:Ich bi de Jack. Normalerwiis wäri ja i mim Lüüchtturm und nid da i dem Puff.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jack_WhoAreYou2
+	translation.en:But I can't go back as long as that thing flies around there.
+	translation.de:Aber ich kann nicht zurück solange dieses Viech dort herumschwirrt.
+	translation.ch:Aber i de chani nid zrugg solang das Viech det umeflügt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_Elysia
+		translation.en:What is this "thing" you're talking about?
+		translation.de:Von was für einem "Viech" sprichst du?
+		translation.ch:Was füre "Viech" isches denn?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jack", "elysia")
+	# translation: 
+	translation.tag:DL_Jack_Elysia
+	translation.en:It looks like a huge bird and is also sounding like one, its shrieks are unbearable.
+	translation.de:Es sieht aus wie ein riesiger Vogel und tönt auch wie einer, sein Gekreische ist nicht auszuhalten.
+	translation.ch:Es gseht us wenen riesige Vogel und tönt au we eine, sis Umegekreische chame schier nid ushalte.
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jack_Elysia2
+	translation.en:I tried to shoo it away using my frying pan, but it just snatched it away from me and devoured it.
+	translation.de:Ich habe versucht, ihn mit meiner Bratpfanne zu verscheuchen, aber er hat sie mir entrissen und verschluckt.
+	translation.ch:Ich ha probiert, en mitere Pfanne z'verschüüche, aber er het si mer us de Hand grisse und verschluckt.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jack_Elysia3
+	translation.en:It was a really good frying pan, what a shame...
+	translation.de:Schade um die gute Pfanne...
+	translation.ch:Isch chli schad um die guet Pfanne...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [9] Choice Node
+	tag:9
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:not DL:isConditionFulfilled("npc_jack", "why_not_clerics")
+		# translation: 
+		translation.tag:DL_Choice_WhyNotClerics
+		translation.en:Why didn't you ask the paladins for help?
+		translation.de:Wieso hast du nicht die Paladine um Hilfe gefragt?
+		translation.ch:Weso hesch nid d'Paladin um Hilf gfrögt?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:isQuestState("kill_elysia", "void")
+		# translation: 
+		translation.tag:DL_Choice_HelpJack
+		translation.en:I could take care of that problem.
+		translation.de:Ich könnte mich um dieses Problem kümmern.
+		translation.ch:Ich chönt mich um da Problem kümmere.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jack_WhyNotClerics
+	translation.en:Oh, I did! But that sneaky chicken wouldn't show up when they looked for it.
+	translation.de:Oh, das habe ich! Aber dieses hinterhältige Federvieh wollte sich nicht zeigen als sie es gesucht haben.
+	translation.ch:Oh, das hani! Aber da hinterhältig Federviechli het sich nid wele zeige wo si go luege sind.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jack", "why_not_clerics")
+	# translation: 
+	translation.tag:DL_Jack_WhyNotClerics2
+	translation.en:Now they just won't believe me anymore. But I really don't want to end up as bird food, I just hope it will leave my lighthouse soon.
+	translation.de:Jetzt glauben sie mir einfach nicht mehr. Aber ich möchte wirklich nicht als Vogelfutter enden - hoffentlich macht er es sich nicht gemütlich in meinem Turm.
+	translation.ch:Jetzt glaubed si mer eifach nüm. Aber ich wet echt nid als Vogelfueter ende, drum hoffi er flügt bald wieder weg.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jack_HelpJack
+	translation.en:Really? You'd do me a big favour!
+	translation.de:Wirklich? Du würdest mir einen grossen Gefallen tun!
+	translation.ch:Würkli? Du würsch mer en grosse Gfalle mache!
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addItem("ke_lighthouse", 1)
+	trigger:DL:addQuestDescription("element_master", 2)
+	# translation: 
+	translation.tag:DL_Jack_HelpJack2
+	translation.en:Here, take the key to my lighthouse. I locked it to prevent people from getting eaten.
+	translation.de:Da, nimm den Schlüssel zu meinem Leuchtturm. Ich hatte ihn zugeschlossen damit niemand gefressen wird.
+	translation.ch:Do, nimm de Schlüssel zu mim Lüüchtturm. Ich hanen abgschlosse damit niemert ufgfresse wird.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:changeQuestState("kill_elysia", "started")
+	# translation: 
+	translation.tag:DL_Jack_HelpJack3
+	translation.en:Oh, and while you're on it, it would be awesome if you could get me my frying pan back.
+	translation.de:Oh und wenn du schon dabei bist, es wäre toll wenn du mir meine Pfanne wiederbringen könntest.
+	translation.ch:Oh und wend grad debi bisch, es wär würkli toll wend mer mini Pfanne zrugghole chöntsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

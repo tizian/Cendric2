@@ -116,7 +116,7 @@ npc.id:npc_citizen1
 		translation.tag:DL_Choice_WhereBrothel
 		translation.en:... the brothel?
 		translation.de:... das Bordell?
-		translation.ch:... es Bordell?
+		translation.ch:... es Puff?
 	]
 	[
 		# Link node, tag is next tag

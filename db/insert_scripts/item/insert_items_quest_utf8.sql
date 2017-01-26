@@ -97,3 +97,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_invisrecipe', 'quest', 600, 0, -1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_invisrecipe', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_invisrecipe', 1, 150, 0, 50, 50);
+
+-- Frying Pan
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item', 'Frying Pan','Bratpfanne','Brotpfanne');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item_desc', 'Jack''s beloved frying pan.','Jack''s geliebte Bratpfanne.', 'Em Jack sini gliebt Brotpfanne.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_jackpan', 'quest', 600, 650, -1);

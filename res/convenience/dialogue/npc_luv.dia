@@ -1,0 +1,270 @@
+# dia file for dialogue for npc: npc_luv
+
+npc.id:npc_luv
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not (DL:isConditionFulfilled("npc_lee", "what_doing") and DL:isConditionFulfilled("npc_luv", "who_are_you"))
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_leeluv", "second_rant")
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:not DL:isConditionFulfilled("npc_luv", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luv", "who_are_you")
+	# translation: 
+	translation.tag:DL_Luv_WhoAreYou
+	translation.en:I'm Luv, a sailor. Normally, I'd sail on the sea instead of sitting here.
+	translation.de:Ich bin Luv, ein Matrose. Normalerweise würde ich übers Meer segeln statt hier zu versauern.
+	translation.ch:Ich bi de Luv, en Matros. Normalerwiis würi übers Meer segle statt do z'vergammle.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luv_WhoAreYou2
+	translation.en:And if it wasn't for that idiot Lee, I would still be with my crew on our ship.
+	translation.de:Und wenn dieser Idiot Lee nicht wäre, würde ich immer noch mit meiner Crew auf unserem Schiff sein.
+	translation.ch:Und wenn de Idiot Lee nid wär, würdi immer no mit minere Crew ufem Schiff si.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_lee", "first_rant") and not DL:isConditionFulfilled("npc_luv", "first_rant")
+		# translation: 
+		translation.tag:DL_Choice_FirstRant
+		translation.en:Your mate told me you're the one to blame.
+		translation.de:Dein Kumpel hat gesagt du seist Schuld an eurem Schlamassel.
+		translation.ch:Din Kolleg het gseit du segsch Schuld a eurem Schlamassel.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:isConditionFulfilled("npc_lee", "first_rant")
+		# translation: 
+		translation.tag:DL_Choice_SecondRant
+		translation.en:Your mate says you shouldn't have gotten drunk.
+		translation.de:Dein Kumpel sagt du hättest dich nicht betrinken sollen.
+		translation.ch:Din Kolleg seit du hetsch dich nid betrinke söle.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luv", "first_rant")
+	# translation: 
+	translation.tag:DL_Luv_OtherSays
+	translation.en:Oh yeah, did he? Well you can tell him that we would have made it if he wasn't drunk when our ship cast off.
+	translation.de:Ach ja, hat er das? Du kannst ihm sagen er hätte sich nicht betrinken sollen als unser Schiff abgelegt hat.
+	translation.ch:Ach jo, heter das? Du chaschem sege er het sich halt nid betrinke söle wo üses Schiff abgleit het.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_leeluv", "second_rant")
+	# translation: 
+	translation.tag:DL_Luv_SecondRant
+	translation.en:Pha! If he wouldn't have slept when our captain called our sailors back, we wouldn't have missed it either!
+	translation.de:Pha! Hätte er nicht geschlafen als unser Kapitän die Matrosen zurück aufs Schiff gerufen hat, hätten wir es auch nicht verpasst!
+	translation.ch:Pha! Wener nid pennt het wo üse Kapitän d'Matrose zrugg ufs Schiff gruefe het, hetemers au nid verpasst!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [7] Choice Node
+	tag:7
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_leeluv", "calm_down")
+		# translation: 
+		translation.tag:DL_Choice_CalmDown
+		translation.en:I think you both should calm down.
+		translation.de:Ich denke ihr beide solltet euch beruhigen.
+		translation.ch:Ich denk ihr beidi söted eu beruhige.
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:isConditionFulfilled("npc_leeluv", "calm_down") and DL:isQuestState("lee_and_luv", "void")
+		# translation: 
+		translation.tag:DL_Choice_HelpYou
+		translation.en:Maybe I could help you.
+		translation.de:Vielleicht kann ich euch helfen.
+		translation.ch:Vilicht chani eu helfe.
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:DL:isQuestState("lee_and_luv", "started") and DL:isQuestComplete("lee_and_luv")
+		# translation: 
+		translation.tag:DL_Choice_QuestComplete
+		translation.en:I got a compass for you.
+		translation.de:Ich habe einen Kompass für euch.
+		translation.ch:Ich hanen Kompass für eu.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luv_CalmDown
+	translation.en:Yes maybe you're right. This doesn't bring us anywhere.
+	translation.de:Ja vielleicht hast du recht. Das bringt uns auch nicht weiter.
+	translation.ch:Jo vilicht hesch recht. Da bringt üs au nid wiiter.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luv_CalmDown2
+	translation.en:We know where our captain wanted to sail and we could buy a small boat here.
+	translation.de:Wir wissen wo unser Kapitän hinwollte und wir könnten hier auch ein kleines Boot kaufen.
+	translation.ch:Mir wüssed wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_leeluv", "calm_down")
+	# translation: 
+	translation.tag:DL_Luv_CalmDown3
+	translation.en:But to sail over the sea, we'd need a compass and nobody in this damn city seems to have one.
+	translation.de:Doch um über das Meer zu segeln bräuchten wir einen Kompass und niemand in dieser verfluchten Stadt scheint einen zu haben.
+	translation.ch:Aber zum übers Meer sägle brüchtemer en Kompass und niemert i dere verfluechte Stadt het eine.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:changeQuestState("lee_and_luv", "started")
+	# translation: 
+	translation.tag:DL_Luv_HelpYou
+	translation.en:Yes maybe. If you could get us a working compass, we'd give you all we have left.
+	translation.de:Ja vielleicht. Wenn du uns einen funktionierenden Kompass besorgen kannst, werden wir dir alles geben, was wir noch haben.
+	translation.ch:Jo vilicht. Wenn du üs en funktionierende Kompass bringsch, gemmer der alles womer na hend.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:changeQuestState("lee_and_luv", "complete")
+	trigger:DL:addConditionProgress("npc_leeluv", "gone")
+	trigger:DL:removeItem("qe_compass", 1)
+	# translation: 
+	translation.tag:DL_Luv_QuestComplete
+	translation.en:Awesome! Thank you so much, I can't wait to set sails! 
+	translation.de:Grossartig! Danke vielmals, ich kann es kaum erwarten, wieder in die See zu stechen!
+	translation.ch:Super! Danke tusig, chas chuum erwarte wieder is Meer z'steche!
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:addItem("mi_pearlpile", 1)
+	# translation: 
+	translation.tag:DL_Luv_QuestComplete2
+	translation.en:Here, take this pile of magical pearls we found, they are worth a lot here!
+	translation.de:Hier, nimm diesen Haufen magischer Perlen, die wir gefunden haben, sie sind hier eine Menge wert.
+	translation.ch:Do, nimm de Huufe magischi Perle womer gfunde hend, si sind do richtig viel wert.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
