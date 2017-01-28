@@ -113,15 +113,15 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 
 		if (m_level->collides(rec)) {
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
+			setPositionY(rec.safeTop);
+			
 			if (isFalling) {
 				m_record.collides = true;
 				m_record.direction = rec.collisionDirection;
 				m_record.savePosY = rec.safeTop;
-				return;
 			}
-			setAccelerationY(0.f);
-			setVelocityY(0.f);
-			setPositionY(rec.safeTop);
 		}
 	}
 	else {
@@ -130,15 +130,15 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 
 		if (m_level->collides(rec)) {
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
+			setPositionY(rec.safeTop);
+			
 			if (isFalling) {
 				m_record.collides = true;
 				m_record.direction = rec.collisionDirection;
 				m_record.savePosY = rec.safeTop;
-				return;
 			}
-			setAccelerationY(0.f);
-			setVelocityY(0.f);
-			setPositionY(rec.safeTop);
 		}
 		else {
 			nextBoundingBoxX.top = nextPosition.y;
@@ -154,6 +154,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setPositionX(rec.safeLeft);
 		}
 	}
+
+	if (m_record.collides) return;
 
 	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
 		(isMovingDown && nextBoundingBoxY.top > m_level->getWorldRect().top + m_level->getWorldRect().height)) {

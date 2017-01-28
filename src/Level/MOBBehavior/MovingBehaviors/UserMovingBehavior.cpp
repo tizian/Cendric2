@@ -12,7 +12,6 @@ UserMovingBehavior::UserMovingBehavior(LevelMainCharacter* mainChar) : MovingBeh
 }
 
 void UserMovingBehavior::update(const sf::Time& frameTime) {
-	if (m_mainChar->isDead()) return;
 	updateTime(m_jumpGraceTime, frameTime);
 	bool wasGrounded = m_isGrounded;
 	MovingBehavior::update(frameTime);
