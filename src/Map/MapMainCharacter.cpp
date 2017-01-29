@@ -9,6 +9,8 @@ MapMainCharacter::MapMainCharacter(Map* map) : MapMovableGameObject(map) {
 	m_inputMap.insert({ Key::Right, sf::Vector2f(WALK_ACCELERATION, 0.f) });
 	m_inputMap.insert({ Key::Down, sf::Vector2f(0.f, WALK_ACCELERATION) });
 	m_inputMap.insert({ Key::Up, sf::Vector2f(0.f, -WALK_ACCELERATION) });
+
+	m_isAlwaysUpdate = true;
 }
 
 MapMainCharacter::~MapMainCharacter() {
@@ -103,7 +105,7 @@ void MapMainCharacter::handleInput() {
 void MapMainCharacter::load() {
 	g_resourceManager->loadTexture(getSpritePath(), ResourceType::Map);
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
-	m_isAlwaysUpdate = true;
+	
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 18.f, 15.f));
 	setSpriteOffset(sf::Vector2f(-16.f, -35.f));
 

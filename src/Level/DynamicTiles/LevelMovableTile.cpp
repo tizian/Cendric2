@@ -8,6 +8,7 @@ LevelMovableTile::LevelMovableTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen), 
 	MovableGameObject() {
 	g_resourceManager->loadSoundbuffer(CRUMBLING_SOUND_PATH, ResourceType::Level);
+	m_isAlwaysUpdate = true;
 }
 
 GameObjectType LevelMovableTile::getConfiguredType() const {

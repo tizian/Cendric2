@@ -9,6 +9,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Jumping, JumpingTile)
 JumpingTile::JumpingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),
 	MovableGameObject() {
+	m_isAlwaysUpdate = true;
 }
 
 void JumpingTile::init() {
@@ -18,7 +19,6 @@ void JumpingTile::init() {
 	m_damage.damageType = DamageType::Physical;
 	m_damage.duration = sf::seconds(4.f);
 	m_damage.damage = 10;
-	m_isAlwaysUpdate = true;
 }
 
 void JumpingTile::loadAnimation(int skinNr) {

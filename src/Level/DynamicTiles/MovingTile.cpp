@@ -33,7 +33,6 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 }
 
 void MovingTile::init() {
-	m_isAlwaysUpdate = true;
 	m_isCollidable = true;
 	m_isStrictlyCollidable = true;
 }

@@ -10,6 +10,7 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 	m_spellManager = new SpellManager(this);
 	m_targetManager = new TargetManager();
 	m_isQuickcast = g_resourceManager->getConfiguration().isQuickcast;
+	m_isAlwaysUpdate = true;
 }
 
 LevelMainCharacter::~LevelMainCharacter() {
@@ -20,7 +21,6 @@ LevelMainCharacter::~LevelMainCharacter() {
 
 void LevelMainCharacter::load() {
 	m_targetManager->setMainCharacter(this);
-	m_isAlwaysUpdate = true;
 	loadResources();
 	loadAnimation();
 	loadBehavior();
