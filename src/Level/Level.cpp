@@ -16,10 +16,12 @@ Level::Level() : World() {
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);
 	m_avoidableTiles.insert(LevelDynamicTileID::Falling);
 	m_avoidableTiles.insert(LevelDynamicTileID::Fluid);
+	m_avoidableTiles.insert(LevelDynamicTileID::Damaging);
 
 	m_evilTiles.insert(LevelDynamicTileID::SpikesTop);
 	m_evilTiles.insert(LevelDynamicTileID::SpikesBottom);
 	m_evilTiles.insert(LevelDynamicTileID::Falling);
+	m_evilTiles.insert(LevelDynamicTileID::Damaging);
 }
 
 Level::~Level() {

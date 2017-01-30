@@ -29,5 +29,6 @@ enum class LevelDynamicTileID {
 	Trampoline,
 	Disappearing,
 	Door,
+	Damaging,
 	MAX
 };

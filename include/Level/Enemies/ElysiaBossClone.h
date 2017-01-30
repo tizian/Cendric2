@@ -6,18 +6,16 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class ElysiaBoss : public Enemy {
+class ElysiaBossClone : public Enemy {
 public:
-	ElysiaBoss(const Level* level, Screen* screen);
-	~ElysiaBoss();
+	ElysiaBossClone(const Level* level, Screen* screen);
+	~ElysiaBossClone();
 
-	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 
 	int getMentalStrength() const override;
 	float getConfiguredDistanceToHPBar() const override;
 	sf::Time getConfiguredWaitingTime() const override;
-	void setDead() override;
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
@@ -26,7 +24,6 @@ public:
 
 protected:
 	std::string getSpritePath() const override;
-	std::string getDeathSoundPath() const override;
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 	void handleAttackInput();
@@ -35,13 +32,6 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
-	// particles & death
-	void loadParticleSystem();
-	void updateParticleSystemPosition();
 
-	sf::Time m_fadingTime = sf::seconds(2.f);
-	sf::Time m_particleTime = sf::seconds(2.f);
-
-	particles::TextureParticleSystem* m_ps = nullptr;
-	particles::ParticleSpawner* m_particleSpawner = nullptr;
+	bool hasReachedMainchar;
 };

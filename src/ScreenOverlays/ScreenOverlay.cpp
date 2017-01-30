@@ -24,7 +24,7 @@ void ScreenOverlay::load() {
 	m_title.setCharacterSize(40);
 	m_title.setTextStyle(TextStyle::Shadowed);
 	m_title.setTextAlignment(TextAlignment::Center);
-		
+
 	m_subtitle.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
 	m_subtitle.setCharacterSize(32);
 	m_subtitle.setTextStyle(TextStyle::Shadowed);
@@ -61,7 +61,7 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 		setDisposed();
 		return;
 	}
-	
+
 	m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(m_scale * 255)));
 	m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (sf::Uint8)(m_scale * 255)));
 }
@@ -142,7 +142,7 @@ ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questI
 }
 
 ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& locationKey, bool isBossLevel, bool isObserved) {
-	ScreenOverlay* locationScreenOverlay = new ScreenOverlay(sf::seconds(isBossLevel ? 2.f : 1.f), sf::seconds(isBossLevel? 1.f : 0.5f));
+	ScreenOverlay* locationScreenOverlay = new ScreenOverlay(sf::seconds(isBossLevel ? 2.f : 1.f), sf::seconds(isBossLevel ? 1.f : 0.5f));
 
 	locationScreenOverlay->setTitle(locationKey, "location");
 	if (isObserved) {
@@ -150,7 +150,7 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 		locationScreenOverlay->setSubtitleRaw(subtitle);
 		locationScreenOverlay->setSubtitleColor(COLOR_BAD);
 	}
-	
+
 	return locationScreenOverlay;
 }
 
@@ -218,8 +218,8 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	gameOverScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
 
 	Language language = g_resourceManager->getConfiguration().language;
-	gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 
-		(static_cast<int>(language) - 1) * 60, 
+	gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0,
+		(static_cast<int>(language) - 1) * 60,
 		static_cast<int>(text->getSize().x), 60));
 
 	return gameOverScreenOverlay;
@@ -311,7 +311,7 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 	hintScreenOverlay->setSubtitleCharacterSize(characterSize);
 
 	std::string hintText = getHintDescription(hintKey);
-	
+
 	hintText = g_textProvider->getCroppedString(hintText, characterSize, static_cast<int>(0.4f * WINDOW_WIDTH));
 	hintScreenOverlay->setSubtitleRaw(hintText);
 

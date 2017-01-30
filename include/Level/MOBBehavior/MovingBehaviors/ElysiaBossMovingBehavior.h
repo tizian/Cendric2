@@ -9,5 +9,6 @@ public:
 	ElysiaBossMovingBehavior(Enemy* enemy);
 
 	void update(const sf::Time& frameTime) override;
+	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void execHandleMovementInput() override;
 };

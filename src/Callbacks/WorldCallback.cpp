@@ -244,7 +244,7 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 		g_logger->logError("WorldCallback", "spawnEnemy() has no id!");
 		return;
 	}
-	
+
 	EnemyID id = static_cast<EnemyID>(idRef.cast<int>());
 	if (id <= EnemyID::VOID || id >= EnemyID::MAX) {
 		g_logger->logError("WorldCallback", "Enemy id: " + std::to_string(static_cast<int>(id)) + " is not valid.");
@@ -289,11 +289,14 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 
 	LuaRef posXRef = positionRef["x"];
 	LuaRef posYRef = positionRef["y"];
-	
+
 	if (!posXRef.isNumber() || !posYRef.isNumber()) {
 		g_logger->logError("WorldCallback", "spawnEnemy() wrong position types for x and y!");
 		return;
 	}
+
+	// resolve luapath
+	LuaRef lpath = param["luapath"];
 
 	Enemy* enemy = nullptr;
 	enemy = ObjectFactory::Instance()->createEnemy(id, levelScreen->getWorld(), levelScreen);
@@ -310,6 +313,10 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 	enemy->setUnique(false);
 	enemy->setBoss(false);
 	enemy->setDebugBoundingBox(sf::Color::Magenta);
-	
+
+	if (lpath.isString()) {
+		enemy->setScriptedBehavior(lpath.cast<std::string>());
+	}
+
 	levelScreen->addObject(enemy);
 }

@@ -12,6 +12,7 @@ bool MovingBehavior::isReady() const {
 }
 
 void MovingBehavior::update(const sf::Time& frameTime) {
+	if (!m_isEnabled) return;
 	if (!m_isCollisionTilt) {
 
 		if (isReady()) {
@@ -97,6 +98,10 @@ void MovingBehavior::setFacingRight(bool value) {
 void MovingBehavior::setReady() {
 	m_isBlockingSpell = false;
 	m_fightAnimationTime = sf::Time::Zero;
+}
+
+void MovingBehavior::setEnabled(bool enabled) {
+	m_isEnabled = enabled;
 }
 
 void MovingBehavior::flipGravity() {

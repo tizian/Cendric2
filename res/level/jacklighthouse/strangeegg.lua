@@ -2,8 +2,9 @@
 
 onLoot = function(W) 
 	local enemyData = {
-		id = 26,
-		position = {x=1360, y=1200}
+		id = 27,
+		position = {x=2330, y=840},
+		luapath = "res/level/jacklighthouse/elysia.lua",
 	}
 	W:spawnEnemy(enemyData)
 	W:addConditionProgress("default","elysia_intro")

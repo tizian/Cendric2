@@ -7,10 +7,8 @@ ElysiaBossMovingBehavior::ElysiaBossMovingBehavior(Enemy* enemy) :
 }
 
 void ElysiaBossMovingBehavior::execHandleMovementInput() {
-	// TODO
+	// Elysia is spawned twice, once as a boss and once as a "ingame cutscene"
 	// movement AI
-	if (m_enemy->getEnemyState() == EnemyState::Recovering)
-		return;
 
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
 	sf::Vector2f center = m_enemy->getCenter();
@@ -42,6 +40,10 @@ void ElysiaBossMovingBehavior::execHandleMovementInput() {
 		m_movingDirectionX = (targetCenter.x < center.x) ? 1 : -1;
 		m_movingDirectionY = (targetCenter.y < center.y) ? 1 : -1;
 	}
+}
+
+void ElysiaBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
+	// elysia doesn't care!
 }
 
 void ElysiaBossMovingBehavior::update(const sf::Time& frameTime) {

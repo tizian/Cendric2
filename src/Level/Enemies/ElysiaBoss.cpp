@@ -24,7 +24,7 @@ void ElysiaBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) 
 }
 
 float ElysiaBoss::getConfiguredDistanceToHPBar() const {
-	return 60.f;
+	return 50.f;
 }
 
 ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
@@ -137,9 +137,9 @@ MovingBehavior* ElysiaBoss::createMovingBehavior(bool asAlly) {
 
 	behavior = new ElysiaBossMovingBehavior(this);
 	behavior->setApproachingDistance(10000.f);
-	behavior->setMaxVelocityYDown(500.f);
-	behavior->setMaxVelocityYUp(500.f);
-	behavior->setMaxVelocityX(500.f);
+	behavior->setMaxVelocityYDown(300.f);
+	behavior->setMaxVelocityYUp(300.f);
+	behavior->setMaxVelocityX(300.f);
 	return behavior;
 }
 

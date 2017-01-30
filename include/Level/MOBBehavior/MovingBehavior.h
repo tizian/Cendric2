@@ -32,6 +32,8 @@ public:
 	virtual void setIgnoreDynamicTiles(bool value);
 	// recovers from all fighting animations/fighting times/casting times and is ready again (cooldowns don't recover and climbing properties don't, too)
 	void setReady();
+	// set enabled/disabled
+	void setEnabled(bool enabled);
 
 	void setMaxVelocityX(float vel);
 	void setMaxVelocityYUp(float vel);
@@ -75,6 +77,7 @@ protected:
 	bool m_isGrounded = false;
 	bool m_isFlippedGravity = false;
 	bool m_isBlockingSpell = false;
+	bool m_isEnabled = true;
 	float m_gravity = 1000.f;
 	float m_walkAcceleration = 1500.f;
 	float m_configuredGravity = 1000.f;

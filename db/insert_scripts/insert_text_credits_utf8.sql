@@ -82,8 +82,9 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effects from OpenGameArt.org >>>
-Featuring sounds from Mike Koenig
-Featuring sounds from Little Robot Sound Factory
+Mike Koenig
+Little Robot Sound Factory
+pla1554alaska
 
 <<< Level & Map Design >>>
 Isa
@@ -222,8 +223,9 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effekte von OpenGameArt.org >>>
-Mit Sound von Mike Koenig
-Mit Sound von Little Robot Sound Factory
+Mike Koenig
+Little Robot Sound Factory
+pla1554alaska
 
 <<< Level & Karten Design >>>
 Isa
@@ -358,8 +360,9 @@ http://www.matthewpablo.com
 ---
 
 <<< Sound Effekte vo OpenGameArt.org >>>
-Mit Sound vom Mike Koenig
-Mit Sound vo Little Robot Sound Factory
+Mike Koenig
+Little Robot Sound Factory
+pla1554alaska
 
 <<< Level & Chartä Design >>>
 Isa
