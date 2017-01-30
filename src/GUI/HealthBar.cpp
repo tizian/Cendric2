@@ -90,7 +90,7 @@ void HealthBar::setAttributes(const AttributeData* attributes) {
 }
 
 void HealthBar::setName(const std::string& name) {
-	m_name.setString(name);
+	m_name.setString(g_textProvider->getCroppedString(name, m_name.getCharacterSize(), static_cast<int>(m_barWidth + 20.f)));
 	sf::FloatRect bounds = m_name.getBounds();
 	m_name.setPosition(m_barLeft + 0.5f * (m_barWidth - bounds.width), m_barTop + BAR_HEIGHT + 10.f);
 }

@@ -16,7 +16,10 @@ void BackgroundLayer::load(string& filename, float distance) {
 	m_fileName = filename;
 	m_distance = distance;
 	g_resourceManager->loadTexture(m_fileName, ResourceType::Unique, this);
-	m_sprite = sf::Sprite((*g_resourceManager->getTexture(m_fileName)));
+	const sf::Texture* tex = g_resourceManager->getTexture(m_fileName);
+	if (tex) {
+		m_sprite = sf::Sprite(*tex);
+	}
 }
 
 void BackgroundLayer::render(sf::RenderTarget& target, sf::RenderStates states) const {

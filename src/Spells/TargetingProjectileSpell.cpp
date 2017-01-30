@@ -91,7 +91,3 @@ void TargetingProjectileSpell::updateParticleSystemPosition() {
 	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
 	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }
-
-
-
-

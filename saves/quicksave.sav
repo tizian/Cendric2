@@ -1,9 +1,9 @@
 # time played, in seconds
-time.played:13311
+time.played:13340
 savegame.name:Quicksave
-savegame.date:1485616055
+savegame.date:1485733488
 level.id:res/level/jacklighthouse/jacklighthouse.tmx
-level.position:1760.000000,1360.000000
+level.position:1360.000000,1460.000000
 is.in.level:1
 map.id:res/map/gandria/gandria.tmx
 map.position:3467.126709,2222.486816

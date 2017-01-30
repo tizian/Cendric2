@@ -9,7 +9,7 @@
 class FlyingBehavior : public virtual EnemyMovingBehavior {
 public:
 	FlyingBehavior(Enemy* enemy);
-	~FlyingBehavior() {};
+	virtual ~FlyingBehavior() {};
 
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void updateAnimation(const sf::Time& frameTime) override;

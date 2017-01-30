@@ -720,7 +720,7 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.activeDuration = sf::seconds(3);
 	holyFire.attachedToMob = true;
 	holyFire.fightAnimation = GameObjectState::VOID;
-	holyFire.spellOffset = sf::Vector2f(-holyFire.range, -holyFire.range);
+	holyFire.spellOffset = sf::Vector2f(-1.5f * holyFire.range, -holyFire.range);
 
 	holyFire.durationModifierAddition = sf::seconds(1);
 	holyFire.rangeModifierAddition = 50.f;

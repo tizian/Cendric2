@@ -25,3 +25,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Pr
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ooze','enemy','Ooze','Schleim','Schleim');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bat','enemy','Bat','Fledermaus','Flädermuus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElysiaFledgling','enemy','Elysia''s Fledgling','Elysia''s Küken','Bibeli vode Elysia');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossElysia','enemy','Elysia, Envoy of the Storm','Elysia, Gesandte des Sturms','Elysia, Gsandti vom Sturm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Elysia','enemy','Huge Bird','Riesiger Vogel','Riesige Vogel');

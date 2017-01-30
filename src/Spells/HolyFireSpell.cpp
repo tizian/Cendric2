@@ -9,7 +9,7 @@ HolyFireSpell::~HolyFireSpell() {
 void HolyFireSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
 
-	LightData lightData(sf::Vector2f(bean.range, bean.range), bean.range);
+	LightData lightData(sf::Vector2f(bean.range, bean.range), bean.range * 2.f, 0.5f);
 	addComponent(new LightComponent(lightData, this));
 	loadParticleSystem();
 }

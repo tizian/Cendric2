@@ -296,6 +296,8 @@ public:
 			return "SkeletonWarrior";
 		case EnemyID::Elysia_Fledgling:
 			return "ElysiaFledgling";
+		case EnemyID::Boss_Elysia:
+			return "BossElysia";
 		}
 	}
 

@@ -28,5 +28,6 @@ enum class EnemyID {
 	Skeleton_Shield,
 	Skeleton_Warrior,
 	Elysia_Fledgling,
+	Boss_Elysia,
 	MAX
 };
