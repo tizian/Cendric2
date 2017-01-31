@@ -199,7 +199,7 @@ std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data
 	string chestsLooted = "# chests looted in level:\n";
 
 	for (auto& it : data.chestsLooted) {
-		string chestLooted = string(ITEMS_LOOTED);
+		string chestLooted = string(CHESTS_LOOTED);
 		chestLooted.append(":");
 		chestLooted.append(it.first);
 		for (auto it2 : it.second) {

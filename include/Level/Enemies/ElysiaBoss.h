@@ -6,6 +6,14 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
+enum ElysiaBossState {
+	Projectile,
+	PreNosedive,
+	Nosedive,
+	PreThunderstorm,
+	Thunderstorm
+};
+
 class ElysiaBoss : public Enemy {
 public:
 	ElysiaBoss(const Level* level, Screen* screen);
@@ -23,6 +31,8 @@ public:
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Elysia; }
+	ElysiaBossState getBossState() const { return m_bossState; }
+	void setBossState(ElysiaBossState state) { m_bossState = state; }
 
 protected:
 	std::string getSpritePath() const override;
@@ -44,4 +54,6 @@ protected:
 
 	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
+
+	ElysiaBossState m_bossState;
 };

@@ -710,7 +710,7 @@
  </layer>
  <layer name="dynamic before boss" width="60" height="80">
   <properties>
-   <property name="conditions not" value="boss,elysia"/>
+   <property name="not conditions" value="boss,BossElysia"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -797,7 +797,7 @@
  </layer>
  <layer name="dynamic after boss" width="60" height="80">
   <properties>
-   <property name="conditions" value="boss,elysia"/>
+   <property name="conditions" value="boss,BossElysia"/>
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1351,7 +1351,7 @@
  <objectgroup name="trigger after boss intro">
   <properties>
    <property name="conditions" value="default,elysia_intro"/>
-   <property name="conditions not" value="boss,elysia"/>
+   <property name="not conditions" value="boss,BossElysia"/>
   </properties>
   <object id="157" x="1475" y="1448" width="50" height="100">
    <properties>

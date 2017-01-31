@@ -1,6 +1,6 @@
 #include "Level/Enemies/ElysiaBossClone.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/ElysiaBossMovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveFlyingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
@@ -130,7 +130,8 @@ void ElysiaBossClone::loadAnimation(int skinNr) {
 MovingBehavior* ElysiaBossClone::createMovingBehavior(bool asAlly) {
 	FlyingBehavior* behavior;
 
-	behavior = new ElysiaBossMovingBehavior(this);
+	behavior = new AggressiveFlyingBehavior(this);
+	behavior->setCollisionsEnabled(false);
 	behavior->setApproachingDistance(0.f);
 	behavior->setMaxVelocityYDown(200.f);
 	behavior->setMaxVelocityYUp(300.f);

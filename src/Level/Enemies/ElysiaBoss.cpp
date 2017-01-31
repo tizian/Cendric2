@@ -9,8 +9,7 @@
 REGISTER_ENEMY(EnemyID::Boss_Elysia, ElysiaBoss)
 
 void ElysiaBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	gold = 50;
-	//loot.insert({ "mi_firstguardianheart", 1 });
+	loot.insert({ "qe_jackpan", 1 });
 	loot.insert({ "fo_rawchicken", 2 });
 	loot.insert({ "fo_egg", 1 });
 }
@@ -31,12 +30,12 @@ ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	
-	m_isInvincible = true;
 	m_isAlwaysUpdate = true;
+	m_bossState = ElysiaBossState::Projectile;
 }
 
 void ElysiaBoss::loadAttributes() {
-	m_attributes.setHealth(150);
+	m_attributes.setHealth(1);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 50;
 	m_attributes.critical = 0;
@@ -44,22 +43,64 @@ void ElysiaBoss::loadAttributes() {
 }
 
 void ElysiaBoss::loadSpells() {
+	SpellData projectile = SpellData::getSpellData(SpellID::TargetingProjectile);
+	projectile.cooldown = sf::seconds(5);
+	projectile.activeDuration = sf::seconds(10.f);
+	projectile.damageType = DamageType::Ice;
+	projectile.damage = 20;
+	projectile.damagePerSecond = 5;
+	projectile.speed = 400;
+	projectile.count = 3;
+	projectile.strength = 1;
+	projectile.divergenceAngle = 0.4f;
+	projectile.duration = sf::seconds(2.f);
+	projectile.fightingTime = sf::seconds(0.f);
+	projectile.castingTime = sf::milliseconds(12 * 100);
+	projectile.spellOffset = sf::Vector2f(40.f, -40.f);
+
+	m_spellManager->addSpell(projectile);
+
+	projectile.cooldown = sf::seconds(8);
+	projectile.activeDuration = sf::seconds(10.f);
+	projectile.damageType = DamageType::Shadow;
+	projectile.damage = 10;
+	projectile.damagePerSecond = 4;
+	projectile.speed = 400;
+	projectile.count = 1;
+	projectile.strength = 2;
+	projectile.duration = sf::seconds(3.f);
+	projectile.isStunning = true;
+	projectile.skinNr = 1;
+	projectile.castingTime = sf::milliseconds(6 * 100);
+	projectile.castingAnimation = GameObjectState::Casting2;
+
+	m_spellManager->addSpell(projectile);
+
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 50;
-	chopSpell.activeDuration = sf::seconds(0.2f);
+	chopSpell.damage = 80;
+	chopSpell.activeDuration = sf::seconds(5.f);
 	chopSpell.cooldown = sf::seconds(10.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 140);
-	chopSpell.spellOffset = sf::Vector2f(-20.f, -50.f);
-	chopSpell.fightingTime = sf::seconds(0.2f);
-	chopSpell.fightAnimation = GameObjectState::Fighting;
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 80, 50);
+	chopSpell.spellOffset = sf::Vector2f(-40.f, 0.f);
+	chopSpell.fightingTime = sf::seconds(0);
 
 	m_spellManager->addSpell(chopSpell);
 
-	m_spellManager->setCurrentSpell(0); // chop
+	m_spellManager->setCurrentSpell(0); // targeting projectile
+
+	m_spellManager->setGlobalCooldown(sf::seconds(2.f));
 }
 
 void ElysiaBoss::handleAttackInput() {
-	// TODO
+	switch (m_bossState) {
+	case ElysiaBossState::Projectile:
+		m_spellManager->setCurrentSpell(rand() % 2); // stun or projectile
+		break;
+	case ElysiaBossState::Nosedive:
+		m_spellManager->setCurrentSpell(3); // chop
+	default:
+		return;
+	}
 	
 	m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 }
@@ -114,10 +155,31 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	// casting before thunder attack
+	Animation* casting3Animation = new Animation();
+	casting3Animation->setSpriteSheet(tex);
+	for (int i = 0; i < 6; ++i) {
+		casting3Animation->addFrame(sf::IntRect(i * width, height, width, height));
+	}
+
+	addAnimation(GameObjectState::Casting3, casting3Animation);
+
+	// casting before projectile attack
+	Animation* castingAnimation = new Animation();
+	castingAnimation->setSpriteSheet(tex);
+	for (int i = 0; i < 6; ++i) {
+		castingAnimation->addFrame(sf::IntRect(i * width, 2 * height, width, height));
+	}
+	for (int i = 0; i < 6; ++i) {
+		castingAnimation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+	}
+
+	addAnimation(GameObjectState::Casting, castingAnimation);
+
+	// casting before stunning projectile attack
 	Animation* casting2Animation = new Animation();
 	casting2Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * width, height, width, height));
+		casting2Animation->addFrame(sf::IntRect(i * width, 4 * height, width, height));
 	}
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
@@ -136,10 +198,10 @@ MovingBehavior* ElysiaBoss::createMovingBehavior(bool asAlly) {
 	FlyingBehavior* behavior;
 
 	behavior = new ElysiaBossMovingBehavior(this);
-	behavior->setApproachingDistance(10000.f);
-	behavior->setMaxVelocityYDown(300.f);
+	behavior->setApproachingDistance(300.f);
+	behavior->setMaxVelocityYDown(200.f);
 	behavior->setMaxVelocityYUp(300.f);
-	behavior->setMaxVelocityX(300.f);
+	behavior->setMaxVelocityX(200.f);
 	return behavior;
 }
 
@@ -167,7 +229,10 @@ int ElysiaBoss::getMentalStrength() const {
 }
 
 sf::Time ElysiaBoss::getConfiguredWaitingTime() const {
-	return sf::Time::Zero;
+	if (m_bossState == ElysiaBossState::Projectile) {
+		return sf::seconds(1);
+	}
+	return sf::seconds(0);
 }
 
 void ElysiaBoss::updateParticleSystemPosition() {

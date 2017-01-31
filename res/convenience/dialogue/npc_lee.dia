@@ -240,7 +240,7 @@ npc.id:npc_lee
 	# [12] NPC Node
 	tag:12
 	# triggers: 
-	trigger:DL:changeQuestState("lee_and_luv", "complete")
+	trigger:DL:changeQuestState("lee_and_luv", "completed")
 	trigger:DL:addConditionProgress("npc_leeluv", "gone")
 	trigger:DL:removeItem("qe_compass", 1)
 	# translation: 

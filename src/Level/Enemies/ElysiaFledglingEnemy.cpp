@@ -55,6 +55,7 @@ void ElysiaFledglingEnemy::loadSpells() {
 	projectile.damagePerSecond = 5;
 	projectile.speed = 300;
 	projectile.duration = sf::seconds(2.f);
+	projectile.strength = 1;
 	projectile.castingTime = sf::milliseconds(8 * 100);
 	projectile.fightingTime = sf::milliseconds(3 * 100);
 	projectile.spellOffset = sf::Vector2f(0.f, -40.f);

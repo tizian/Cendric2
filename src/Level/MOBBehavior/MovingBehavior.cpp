@@ -25,8 +25,11 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 		sf::Vector2f nextPosition;
 		m_mob->calculateNextPosition(frameTime, nextPosition);
 		sf::Vector2f oldPosition = m_mob->getPosition();
-		checkCollisions(nextPosition);
-		checkForCollisionTilt(oldPosition);
+
+		if (m_isCollisionEnabled) {
+			checkCollisions(nextPosition);
+			checkForCollisionTilt(oldPosition);
+		}
 	}
 
 	// update animation
@@ -102,6 +105,10 @@ void MovingBehavior::setReady() {
 
 void MovingBehavior::setEnabled(bool enabled) {
 	m_isEnabled = enabled;
+}
+
+void MovingBehavior::setCollisionsEnabled(bool enabled) {
+	m_isCollisionEnabled = enabled;
 }
 
 void MovingBehavior::flipGravity() {

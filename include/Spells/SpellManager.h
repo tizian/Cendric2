@@ -34,12 +34,18 @@ public:
 	// sets all spells in the map allied / not allied
 	void setSpellsAllied(bool value);
 
+	// sets the global cooldown, it is initially zero
+	void setGlobalCooldown(const sf::Time& cooldown);
+
 private:
 
 	int m_currentSpell;
 	std::vector<sf::Time> m_coolDownMap;
 	std::vector<SpellCreator*> m_spellMap;
 	LevelMovableGameObject* m_owner;
+
+	sf::Time m_globalCooldown;
+	sf::Time m_remainingGlobalCooldown;
 
 	// only used by the level main character to show the spells in its interface
 	SpellSelection* m_spellSelection = nullptr;

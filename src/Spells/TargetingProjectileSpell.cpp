@@ -37,7 +37,7 @@ void TargetingProjectileSpell::update(const sf::Time& frameTime) {
 	sf::Vector2f dir = m_mainChar->getCenter() - getPosition();
 	float abs = norm(dir);
 	dir = dir / abs;
-	m_acceleration = dir * m_data.speed;
+	m_acceleration = dir * (m_data.speed * m_data.strength);
 
 	setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 }

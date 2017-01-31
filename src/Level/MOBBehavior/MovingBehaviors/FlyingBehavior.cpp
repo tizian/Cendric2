@@ -43,18 +43,26 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	sf::FloatRect nextBoundingBox(nextPosition.x , nextPosition.y, bb.width, bb.height);
+
+	bool isMovingDown = nextPosition.y > bb.top;
+	bool isMovingRight = nextPosition.x > bb.left;
+	bool isMovingY = nextPosition.y != bb.top;
+	bool isMovingX = nextPosition.x != bb.left;
 	
 	if (level.collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
+		if (isMovingX) {
+			m_movingDirectionX = isMovingRight ? -1 : 1;
+		}
+		if (isMovingY) {
+			m_movingDirectionY = isMovingDown ? -1 : 1;
+		}
 		return;
 	}
 
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
-
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
 
 	// should we use strategy 2: try y direction first, then x direction?
 	bool tryYfirst = false;
@@ -76,6 +84,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_mob->setAccelerationX(0.f);
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);
+			m_movingDirectionX = isMovingRight ? -1 : 1;
 			nextBoundingBoxY.left = rec.safeLeft;
 		}
 		else {
@@ -90,6 +99,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_mob->setAccelerationY(0.f);
 			m_mob->setVelocityY(0.f);
 			m_mob->setPositionY(rec.safeTop);
+			m_movingDirectionY = isMovingDown ? -1 : 1;
 		}
 	}
 	else {
@@ -102,6 +112,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_mob->setVelocityY(0.f);
 			m_mob->setPositionY(rec.safeTop);
 			nextBoundingBoxX.top = rec.safeTop;
+			m_movingDirectionY = isMovingDown ? -1 : 1;
 		}
 		else {
 			nextBoundingBoxX.top = nextPosition.y;
@@ -116,6 +127,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_mob->setAccelerationX(0.f);
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);
+			m_movingDirectionX = isMovingRight ? -1 : 1;
 		}
 	}
 }

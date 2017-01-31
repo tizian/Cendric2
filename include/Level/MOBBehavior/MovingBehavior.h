@@ -34,6 +34,8 @@ public:
 	void setReady();
 	// set enabled/disabled
 	void setEnabled(bool enabled);
+	// set collisions enabled/disabled
+	void setCollisionsEnabled(bool enabled);
 
 	void setMaxVelocityX(float vel);
 	void setMaxVelocityYUp(float vel);
@@ -78,6 +80,7 @@ protected:
 	bool m_isFlippedGravity = false;
 	bool m_isBlockingSpell = false;
 	bool m_isEnabled = true;
+	bool m_isCollisionEnabled = true;
 	float m_gravity = 1000.f;
 	float m_walkAcceleration = 1500.f;
 	float m_configuredGravity = 1000.f;

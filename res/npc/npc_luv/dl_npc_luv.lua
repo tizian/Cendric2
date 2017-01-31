@@ -103,7 +103,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("lee_and_luv", "started") and DL:isQuestComplete("lee_and_luv")) then 
 
 		DL:createNPCNode(12, 13, "DL_Luv_QuestComplete") -- Awesome! Thank you so much, I can't wait to set sails! 
-		DL:changeQuestState("lee_and_luv", "complete")
+		DL:changeQuestState("lee_and_luv", "completed")
 		DL:addConditionProgress("npc_leeluv", "gone")
 		DL:removeItem("qe_compass", 1)
 		DL:addNode()

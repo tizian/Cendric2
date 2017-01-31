@@ -30,6 +30,10 @@ void SpellManager::setSpellsAllied(bool value) {
 	}
 }
 
+void SpellManager::setGlobalCooldown(const sf::Time& cooldown) {
+	m_globalCooldown = cooldown;
+}
+
 void SpellManager::addSpell(const SpellData& spell) {
 	addSpell(spell, std::vector<SpellModifier>());
 }
@@ -40,6 +44,7 @@ void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModif
 }
 
 void SpellManager::executeCurrentSpell(const sf::Vector2f& target) {
+	if (m_remainingGlobalCooldown.asMilliseconds() != 0) return;
 	if (m_currentSpell == -1 || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
 	if (!m_owner->isReady()) return;
 	for (auto& spellcreator : m_spellMap) {
@@ -50,6 +55,7 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target) {
 	// spell has been cast. set cooldown.
   	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellData().cooldown * m_owner->getAttributes()->cooldownMultiplier;
 	m_coolDownMap[m_currentSpell] = cooldown;
+	m_remainingGlobalCooldown = m_globalCooldown;
 	m_spellMap[m_currentSpell]->executeSpell(target);
 	if (m_spellSelection != nullptr) {
 		m_spellSelection->activateSlot(m_currentSpell, cooldown);
@@ -57,6 +63,8 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target) {
 }
 
 void SpellManager::update(sf::Time frameTime) {
+	// update global cooldown
+	updateTime(m_remainingGlobalCooldown, frameTime);
 	// update cooldown map
 	for (auto& it : m_coolDownMap) {
 		updateTime(it, frameTime);

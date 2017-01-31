@@ -380,6 +380,7 @@ SpellData SpellData::getTargetingProjectileData() {
 	projectile.needsTarget = true;
 	projectile.damage = 3;
 	projectile.speed = 600.f;
+	projectile.strength = 1; // how fast it follows its target
 
 	return projectile;
 }
