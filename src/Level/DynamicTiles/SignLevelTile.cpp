@@ -2,6 +2,8 @@
 #include "Registrar.h"
 #include "Screens/WorldScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Screens/LevelScreen.h"
+#include "GUI/Hints.h"
 
 const float SignLevelTile::TOOLTIP_TOP = 20.f;
 const float SignLevelTile::READ_RANGE = 50.f;
@@ -9,7 +11,14 @@ const sf::Time SignLevelTile::TOOLTIP_WINDOW_TIME = sf::seconds(3.f);
 
 SignLevelTile::SignLevelTile(const SignData& data, LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_data = data;
-	m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
+	if (m_data.isHint) {
+		m_tooltipWindow.setText(getHintDescription(m_data.text));
+		levelScreen->getCharacterCore()->learnHint(data.text);
+	}
+	else {
+		m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
+	}
+	
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
 	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 	m_showTooltip = false;

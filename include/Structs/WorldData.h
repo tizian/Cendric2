@@ -6,6 +6,8 @@
 #include "Structs/LightData.h"
 #include "Structs/TriggerData.h"
 #include "Structs/WeatherData.h"
+#include "Structs/SignData.h"
+#include "Structs/ChestTileData.h"
 
 struct WorldData {
 	virtual ~WorldData() {};
@@ -25,6 +27,8 @@ struct WorldData {
 
 	std::vector<LightData> lights;
 	std::vector<TriggerData> triggers;
+	std::vector<SignData> signs;
+	std::vector<ChestTileData> chests;
 	
 	sf::FloatRect mapRect;
 	WeatherData weather;

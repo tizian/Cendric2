@@ -15,6 +15,8 @@ struct TriggerData {
 	bool isKeyGuarded = false;
 	// is the condition fulfilled? This property gets updated when a condition changes.
 	bool isTriggerable = false;
+	// is this trigger forced? if true, it gets immediately executed even if the player spawns on it
+	bool isForced = false;
 	// a trigger condition, saved with the conditionkey "trigger". For now, only can be set.
 	std::string condition; 
 	// the content of this trigger, will get executed on trigger.

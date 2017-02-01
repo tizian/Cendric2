@@ -108,9 +108,9 @@ bool MapReader::readCollidableObjectLayer(tinyxml2::XMLElement* objectgroup, Map
 			XMLCheckResult(result);
 
 			data.collidableRects.push_back(sf::FloatRect(
-				static_cast<float>(x), 
+				static_cast<float>(x),
 				static_cast<float>(y),
-				static_cast<float>(width), 
+				static_cast<float>(width),
 				static_cast<float>(height)));
 
 			object = object->NextSiblingElement("object");
@@ -181,7 +181,7 @@ bool MapReader::readCollidableObjectLayer(tinyxml2::XMLElement* objectgroup, Map
 		points.erase(0, pos + 1);
 
 		v3.y = static_cast<float>(atoi(points.c_str()) + y);
-		
+
 		data.collidableTriangles.push_back(FloatTriangle(v1, v2, v3));
 
 		object = object->NextSiblingElement("object");
@@ -241,127 +241,15 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, MapData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+	if (!WorldReader::readChests(objectgroup, data)) return false;
 
-	while (object != nullptr) {
-		int id;
-		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
-		XMLCheckResult(result);
+	int offset = static_cast<int>(MapDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
 
-		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int x;
-		result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int offset = static_cast<int>(MapDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
-
-		ChestTileData chestData;
-		chestData.skinNr = skinNr;
-		chestData.objectID = id;
-		chestData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
-
-		// chest loot
-		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
-		std::pair<std::map<std::string, int>, int> items;
-		items.second = 0;
-
-		if (loot != nullptr) {
-			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
-			while (item != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = item->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-
-				std::string itemText = textAttr;
-
-				if (itemText.compare("permanent") == 0) {
-					chestData.isPermanent = true;
-				}
-				else if (itemText.compare("open") == 0) {
-					chestData.isOpen = true;
-				}
-				else if (itemText.compare("storeditems") == 0) {
-					chestData.isStoredItems = true;
-				}
-				else if (itemText.compare("text") == 0) {
-
-					textAttr = item->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					chestData.tooltipText = textAttr;
-
-				}
-				else if (itemText.compare("light") == 0) {
-
-					textAttr = item->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-
-					std::string value = textAttr;
-					LightData lightData;
-					if (!resolveLightString(value, lightData)) {
-						return false;
-					}
-					chestData.lightData = lightData;
-				}
-				else if (itemText.compare("gold") == 0) {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					items.second += amount;
-				}
-				else if (itemText.compare("strength") == 0) {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					if (amount < 0 || amount > 5) {
-						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 5).");
-						return false;
-					}
-					chestData.chestStrength = amount;
-				}
-				else if (itemText.compare("key") == 0) {
-					std::string keyItemID = item->Attribute("value");
-					if (keyItemID.empty()) {
-						logError("XML file could not be read, key itemID is not specified.");
-						return false;
-					}
-					chestData.keyItemID = keyItemID;
-				}
-				else {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					items.first.insert({ itemText, amount });
-				}
-
-				item = item->NextSiblingElement("property");
-			}
-		}
-		chestData.loot = items;
-		data.chests.push_back(chestData);
-
-		object = object->NextSiblingElement("object");
+	for (auto& chest : data.chests) {
+		chest.skinNr = (chest.skinNr == 0) ? 0 : ((chest.skinNr - offset) / DYNAMIC_TILE_COUNT);
 	}
+
 	return true;
 }
 
@@ -413,7 +301,7 @@ bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 					}
 					book.id = textAttr;
 				}
-				
+
 				_property = _property->NextSiblingElement("property");
 			}
 		}
@@ -539,62 +427,15 @@ bool MapReader::readDoors(tinyxml2::XMLElement* objectgroup, MapData& data) cons
 	return true;
 }
 
-bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, MapData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+	if (!WorldReader::readSigns(objectgroup, data)) return false;
 
-	while (object != nullptr) {
+	int offset = static_cast<int>(MapDynamicTileID::Sign) + m_firstGidDynamicTiles - 1;
 
-		int x;
-		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int offset = static_cast<int>(MapDynamicTileID::Sign) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
-
-		SignData sign;
-
-		sign.skinNr = skinNr;
-		sign.position.x = static_cast<float>(x);
-		sign.position.y = static_cast<float>(y) - TILE_SIZE_F;
-
-		// sign properties
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-		if (properties != nullptr) {
-			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-			while (_property != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = _property->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-				std::string attrText = textAttr;
-
-				if (attrText.compare("text") == 0) {
-					textAttr = nullptr;
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					sign.text = textAttr;
-				}
-				
-				_property = _property->NextSiblingElement("property");
-			}
-		}
-
-		data.signs.push_back(sign);
-		object = object->NextSiblingElement("object");
+	for (auto& sign : data.signs) {
+		sign.skinNr = (sign.skinNr == 0) ? 0 : ((sign.skinNr - offset) / DYNAMIC_TILE_COUNT);
 	}
+
 	return true;
 }
 
@@ -751,7 +592,7 @@ bool MapReader::readDynamicTileLayer(const std::string& layer, MapData& data) co
 			layerData.erase(0, pos + 1);
 			pos = layerData.find(",");
 		}
-		
+
 		if (id != 0) {
 			id -= m_firstGidDynamicTiles;
 			MapDynamicTileID tileId = static_cast<MapDynamicTileID>(id % DYNAMIC_TILE_COUNT + 1);
@@ -887,7 +728,7 @@ bool MapReader::readBackgroundTileLayer(const std::string& layer, MapData& data)
 
 bool MapReader::readCollidableTiles(tinyxml2::XMLElement* firstTile) {
 	m_tileColliderMap.clear();
-	
+
 	tinyxml2::XMLElement* tile = firstTile;
 
 	while (tile != nullptr) {
@@ -908,7 +749,7 @@ bool MapReader::readCollidableTiles(tinyxml2::XMLElement* firstTile) {
 		while (collider != nullptr) {
 			sf::FloatRect colliderRect;
 			int res;
-			
+
 			result = collider->QueryIntAttribute("x", &res);
 			XMLCheckResult(result);
 			colliderRect.left = static_cast<float>(res);

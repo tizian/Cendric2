@@ -19,6 +19,10 @@ Trigger::Trigger(WorldScreen* screen, const TriggerData& data) {
 		m_sprite.setPosition(xPos, 0.f);	
 	}
 
+	if (m_data.isForced) {
+		m_isOnTrigger = false;
+	}
+
 	setBoundingBox(data.triggerRect);
 	setDebugBoundingBox(sf::Color::Magenta);
 }

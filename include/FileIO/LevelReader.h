@@ -37,11 +37,11 @@ private:
 	
 	bool readObjects(tinyxml2::XMLElement* map, LevelData& data) const;
 	bool readDoorTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
-	bool readChestTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readChests(tinyxml2::XMLElement* objects, WorldData& data) const override;
 	bool readModifierTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readMovingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readJumpingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
-	bool readSignTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readSigns(tinyxml2::XMLElement* objects, WorldData& data) const override;
 	bool readLadderTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
 

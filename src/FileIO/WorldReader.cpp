@@ -182,6 +182,16 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.s1 = textAttr;
 					trigger.content.push_back(content);
 				}
+				else if (name.compare("learn spell") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, learn spell value property not found.");
+						return false;
+					}
+					TriggerContent content(TriggerContentType::LearnSpell);
+					content.i1 = std::atoi(textAttr);
+					trigger.content.push_back(content);
+				}
 				else if (name.compare("condition progress") == 0) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -307,6 +317,9 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 				else if (name.compare("persistent") == 0) {
 					trigger.isPersistent = true;
 				}
+				else if (name.compare("forced") == 0) {
+					trigger.isForced = true;
+				}
 				else if (name.compare("keyguarded") == 0) {
 					trigger.isKeyGuarded = true;
 				}
@@ -324,6 +337,197 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 	return true;
 }
 
+bool WorldReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+
+		int gid;
+		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		SignData sign;
+		sign.skinNr = gid;
+		sign.position.x = static_cast<float>(x);
+		sign.position.y = static_cast<float>(y) - TILE_SIZE_F;
+
+		// modifier type and level
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
+			while (property_ != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = property_->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+				std::string attrText = textAttr;
+				
+				if (attrText.compare("hint") == 0) {
+					sign.isHint = true;
+				}
+				if (attrText.compare("text") == 0 || sign.isHint) {
+					if (attrText.compare("hint"))
+					textAttr = nullptr;
+					textAttr = property_->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					sign.text = textAttr;
+				}
+
+				property_ = property_->NextSiblingElement("property");
+			}
+		}
+
+		data.signs.push_back(sign);
+
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
+
+bool WorldReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+		int id;
+		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
+		XMLCheckResult(result);
+
+		int gid;
+		result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		int x;
+		result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		ChestTileData chestData;
+		chestData.skinNr = gid;
+		chestData.objectID = id;
+		chestData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
+
+		// chest loot
+		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
+		std::pair<std::map<std::string, int>, int> items;
+		items.second = 0;
+
+		if (loot != nullptr) {
+			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
+			while (item != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = item->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
+					return false;
+				}
+
+				std::string itemText = textAttr;
+
+				if (itemText.compare("permanent") == 0) {
+					chestData.isPermanent = true;
+				}
+				else if (itemText.compare("open") == 0) {
+					chestData.isOpen = true;
+				}
+				else if (itemText.compare("storeditems") == 0) {
+					chestData.isStoredItems = true;
+				}
+				else if (itemText.compare("text") == 0) {
+
+					textAttr = item->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+					chestData.tooltipText = textAttr;
+
+				}
+				else if (itemText.compare("light") == 0) {
+
+					textAttr = item->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
+						return false;
+					}
+
+					std::string value = textAttr;
+					LightData lightData;
+					if (!resolveLightString(value, lightData)) {
+						return false;
+					}
+					chestData.lightData = lightData;
+				}
+				else if (itemText.compare("gold") == 0) {
+					int amount;
+					result = item->QueryIntAttribute("value", &amount);
+					XMLCheckResult(result);
+
+					items.second += amount;
+				}
+				else if (itemText.compare("strength") == 0) {
+					int amount;
+					result = item->QueryIntAttribute("value", &amount);
+					XMLCheckResult(result);
+
+					if (amount < 0 || amount > 5) {
+						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 5).");
+						return false;
+					}
+					chestData.chestStrength = amount;
+				}
+				else if (itemText.compare("key") == 0) {
+					std::string keyItemID = item->Attribute("value");
+					if (keyItemID.empty()) {
+						logError("XML file could not be read, key itemID is not specified.");
+						return false;
+					}
+					chestData.keyItemID = keyItemID;
+				}
+				else if (itemText.compare("luapath") == 0) {
+
+					std::string path = item->Attribute("value");
+					if (path.empty()) {
+						logError("XML file could not be read, luapath is empty.");
+						return false;
+					}
+
+					chestData.luapath = path;
+				}
+				else {
+					int amount;
+					result = item->QueryIntAttribute("value", &amount);
+					XMLCheckResult(result);
+
+					items.first.insert({ itemText, amount });
+				}
+
+				item = item->NextSiblingElement("property");
+			}
+		}
+		chestData.loot = items;
+		data.chests.push_back(chestData);
+
+		object = object->NextSiblingElement("object");
+	}
+	return true;
+}
 
 bool WorldReader::readBackgroundTileLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;

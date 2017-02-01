@@ -36,134 +36,15 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data, const 
 	return true;
 }
 
-bool LevelReader::readChestTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+bool LevelReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+	if (!WorldReader::readChests(objectgroup, data)) return false;
 
-	while (object != nullptr) {
-		int id;
-		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
-		XMLCheckResult(result);
+	int offset = static_cast<int>(LevelDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
 
-		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int x;
-		result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int offset = static_cast<int>(LevelDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
-
-		ChestTileData chestData;
-		chestData.skinNr = skinNr;
-		chestData.objectID = id;
-		chestData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
-
-		// chest loot
-		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
-		std::pair<std::map<std::string, int>, int> items;
-		items.second = 0;
-
-		if (loot != nullptr) {
-			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
-			while (item != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = item->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-
-				std::string itemText = textAttr;
-
-				if (itemText.compare("permanent") == 0) {
-					chestData.isPermanent = true;
-				}
-				else if (itemText.compare("open") == 0) {
-					chestData.isOpen = true;
-				}
-				else if (itemText.compare("text") == 0) {
-
-					textAttr = item->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					chestData.tooltipText = textAttr;
-
-				}
-				else if (itemText.compare("light") == 0) {
-
-					textAttr = item->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					
-					std::string value = textAttr;
-					LightData lightData;
-					if (!resolveLightString(value, lightData)) {
-						return false;
-					}
-					chestData.lightData = lightData;
-				}
-				else if (itemText.compare("gold") == 0) {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					items.second += amount;
-				}
-				else if (itemText.compare("strength") == 0) {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					if (amount < 0 || amount > 5) {
-						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 5).");
-						return false;
-					}
-					chestData.chestStrength = amount;
-				}
-				else if (itemText.compare("key") == 0) {
-					std::string keyItemID = item->Attribute("value");
-					if (keyItemID.empty()) {
-						logError("XML file could not be read, key itemID is not specified.");
-						return false;
-					}
-					chestData.keyItemID = keyItemID;
-				}
-				else if (itemText.compare("luapath") == 0) {
-
-					std::string path = item->Attribute("value");
-					if (path.empty()) {
-						logError("XML file could not be read, luapath is empty.");
-						return false;
-					}
-
-					chestData.luapath = path;
-				}
-				else {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					items.first.insert({ itemText, amount });
-				}
-
-				item = item->NextSiblingElement("property");
-			}
-		}
-		chestData.loot = items;
-		data.chests.push_back(chestData);
-
-		object = object->NextSiblingElement("object");
+	for (auto& chest : data.chests) {
+		chest.skinNr = (chest.skinNr == 0) ? 0 : ((chest.skinNr - offset) / DYNAMIC_TILE_COUNT);
 	}
+
 	return true;
 }
 
@@ -610,63 +491,15 @@ bool LevelReader::readLadderTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 	return true;
 }
 
-bool LevelReader::readSignTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+bool LevelReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+	if (!WorldReader::readSigns(objectgroup, data)) return false;
 
-	while (object != nullptr) {
+	int offset = static_cast<int>(LevelDynamicTileID::Sign) + m_firstGidDynamicTiles - 1;
 
-		int gid;
-		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int x;
-		result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int offset = static_cast<int>(LevelDynamicTileID::Sign) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
-
-		SignData sign;
-		sign.skinNr = skinNr;
-		sign.position.x = static_cast<float>(x);
-		sign.position.y = static_cast<float>(y) - TILE_SIZE_F;
-
-		// modifier type and level
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-
-		if (properties != nullptr) {
-			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
-			while (property_ != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = property_->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-				std::string attrText = textAttr;
-
-				if (attrText.compare("text") == 0) {
-					textAttr = nullptr;
-					textAttr = property_->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					sign.text = textAttr;
-				}
-
-				property_ = property_->NextSiblingElement("property");
-			}
-		}
-
-		data.signTiles.push_back(sign);
-
-		object = object->NextSiblingElement("object");
+	for (auto& sign : data.signs) {
+		sign.skinNr = (sign.skinNr == 0) ? 0 : ((sign.skinNr - offset) / DYNAMIC_TILE_COUNT);
 	}
+	
 	return true;
 }
 
@@ -811,7 +644,7 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 			if (!readEnemies(objectgroup, data)) return false;
 		}
 		else if (name.find("chest") != std::string::npos) {
-			if (!readChestTiles(objectgroup, data)) return false;
+			if (!readChests(objectgroup, data)) return false;
 		}
 		else if (name.find("modifier") != std::string::npos) {
 			if (!readModifierTiles(objectgroup, data)) return false;
@@ -823,7 +656,7 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 			if (!readJumpingTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("sign") != std::string::npos) {
-			if (!readSignTiles(objectgroup, data)) return false;
+			if (!readSigns(objectgroup, data)) return false;
 		}
 		else if (name.find("ladder") != std::string::npos) {
 			if (!readLadderTiles(objectgroup, data)) return false;

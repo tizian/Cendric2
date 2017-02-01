@@ -82,7 +82,7 @@ void LevelLoader::loadDoorTiles(LevelData& data, LevelScreen* screen) const {
 }
 
 void LevelLoader::loadSignTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& signData : data.signTiles) {
+	for (auto& signData : data.signs) {
 
 		SignLevelTile* signTile = new SignLevelTile(signData, screen);
 

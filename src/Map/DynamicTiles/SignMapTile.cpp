@@ -2,6 +2,7 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "GUI/Hints.h"
 
 const float SignMapTile::TOOLTIP_TOP = 20.f;
 const float SignMapTile::READ_RANGE = 50.f;
@@ -9,7 +10,15 @@ const sf::Time SignMapTile::TOOLTIP_WINDOW_TIME = sf::seconds(3.f);
 
 SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_data = data;
-	m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
+
+	if (m_data.isHint) {
+		m_tooltipWindow.setText(getHintDescription(m_data.text));
+		mapScreen->getCharacterCore()->learnHint(data.text);
+	}
+	else {
+		m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
+	}
+
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
 	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 	m_showTooltip = false;
