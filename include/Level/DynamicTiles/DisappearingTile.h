@@ -9,7 +9,8 @@
 // 0: 0.25s
 // 1: 0.5s
 // 2: 1s
-// 3: 2s
+// 3: 1.5s
+// 4: 2s
 
 // a tile that disappears after a certain time as soon as cendric touches it.
 // these tiles respawn.

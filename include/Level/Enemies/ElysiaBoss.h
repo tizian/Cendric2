@@ -11,6 +11,7 @@ enum ElysiaBossState {
 	PreNosedive,
 	Nosedive,
 	PreThunderstorm,
+	ThunderstormUp,
 	Thunderstorm
 };
 

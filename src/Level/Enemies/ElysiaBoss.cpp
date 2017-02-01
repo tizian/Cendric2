@@ -35,10 +35,10 @@ ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
 }
 
 void ElysiaBoss::loadAttributes() {
-	m_attributes.setHealth(1);
-	m_attributes.resistanceIce = -20;
-	m_attributes.resistancePhysical = 50;
-	m_attributes.critical = 0;
+	m_attributes.setHealth(800);
+	m_attributes.resistanceIce = 200;
+	m_attributes.resistanceFire = 50;
+	m_attributes.critical = 20;
 	m_attributes.calculateAttributes();
 }
 
@@ -97,7 +97,8 @@ void ElysiaBoss::handleAttackInput() {
 		m_spellManager->setCurrentSpell(rand() % 2); // stun or projectile
 		break;
 	case ElysiaBossState::Nosedive:
-		m_spellManager->setCurrentSpell(3); // chop
+		m_spellManager->setCurrentSpell(2); // chop
+		break;
 	default:
 		return;
 	}
@@ -198,9 +199,9 @@ MovingBehavior* ElysiaBoss::createMovingBehavior(bool asAlly) {
 	FlyingBehavior* behavior;
 
 	behavior = new ElysiaBossMovingBehavior(this);
-	behavior->setApproachingDistance(300.f);
+	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(200.f);
-	behavior->setMaxVelocityYUp(300.f);
+	behavior->setMaxVelocityYUp(200.f);
 	behavior->setMaxVelocityX(200.f);
 	return behavior;
 }
