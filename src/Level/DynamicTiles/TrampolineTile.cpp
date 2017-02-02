@@ -96,7 +96,7 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 	auto const& mbb = *m_mainChar->getBoundingBox();
 	if (m_state == GameObjectState::Idle && mbb.intersects(m_jumpingRegion)) {
 		auto nextBB = mbb;
-		nextBB.top = m_jumpingRegion.top - nextBB.height;
+		nextBB.top = m_jumpingRegion.top - nextBB.height - 10.f;
 		WorldCollisionQueryRecord rec;
 		rec.boundingBox = nextBB;
 		rec.ignoreDynamicTiles = m_mainChar->isIgnoreDynamicTiles();

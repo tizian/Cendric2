@@ -90,7 +90,7 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 
 void LevelEquipment::setPosition(const sf::Vector2f& position) {
 	if (m_lightComponent != nullptr) {
-		m_lightComponent->flipLightOffsetX(!m_isFacingRight);
+		m_lightComponent->flipLightOffsetX(m_isFacingRight);
 	}
 	AnimatedGameObject::setPosition(position);
 }
