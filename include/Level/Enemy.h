@@ -96,9 +96,9 @@ public:
 	virtual bool getFleeCondition() const;
 
 	// the default loot of a mob, can be looted when first killed (&looted)
-	virtual void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const = 0;
+	virtual void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {};
 	// less loot, that can be still looted after a mob is looted 2-N times.
-	virtual void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const = 0;
+	virtual void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {};
 
 	virtual EnemyID getEnemyID() const = 0;
 

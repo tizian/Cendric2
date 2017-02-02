@@ -29,12 +29,6 @@ ElysiaBossClone::~ElysiaBossClone() {
 	g_resourceManager->deleteUniqueResources(this);
 }
 
-void ElysiaBossClone::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-}
-
-void ElysiaBossClone::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
-}
-
 float ElysiaBossClone::getConfiguredDistanceToHPBar() const {
 	return 50.f;
 }

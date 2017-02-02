@@ -522,6 +522,10 @@
   <object id="159" gid="1230" x="750" y="750" width="50" height="50">
    <properties>
     <property name="boss" value=""/>
+    <property name="fo_egg" value="1"/>
+    <property name="fo_rawchicken" value="2"/>
+    <property name="mi_elysiatail" value="1"/>
+    <property name="qe_jackpan" value="1"/>
     <property name="questtarget" value="kill_elysia,Elysia"/>
    </properties>
   </object>

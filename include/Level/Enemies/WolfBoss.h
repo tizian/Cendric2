@@ -19,9 +19,6 @@ public:
 	sf::Time getConfiguredWaitingTime() const override;
 	void setDead() override;
 
-	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
-	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
-
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Wolf; }
 
 	static const std::string TRANSFORM_SPRITEPATH;

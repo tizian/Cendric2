@@ -10,18 +10,8 @@ REGISTER_ENEMY(EnemyID::Boss_Wolf, WolfBoss)
 
 const std::string WolfBoss::TRANSFORM_SPRITEPATH = "res/assets/cendric/cendric_transform_wolf.png";
 
-void WolfBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	gold = 50;
-	loot.insert({ "mi_firstguardianheart", 1 });
-	loot.insert({ "fo_ham", 2 });
-}
-
 WolfBoss::~WolfBoss() {
 	delete m_ps;
-}
-
-void WolfBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
-	// nothing
 }
 
 float WolfBoss::getConfiguredDistanceToHPBar() const {

@@ -9,18 +9,8 @@
 
 REGISTER_ENEMY(EnemyID::Boss_Zeff, ZeffBoss)
 
-void ZeffBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	gold = 50;
-	loot.insert({ "we_zeffssword", 1 });
-	loot.insert({ "fo_ham", 2 });
-}
-
 ZeffBoss::~ZeffBoss() {
 	delete m_ps;
-}
-
-void ZeffBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
-	// nothing
 }
 
 ZeffBoss::ZeffBoss(const Level* level, Screen* screen) :

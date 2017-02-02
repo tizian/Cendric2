@@ -8,19 +8,8 @@
 
 REGISTER_ENEMY(EnemyID::Boss_Elysia, ElysiaBoss)
 
-void ElysiaBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const {
-	loot.insert({ "qe_jackpan", 1 });
-	loot.insert({ "fo_rawchicken", 2 });
-	loot.insert({ "fo_egg", 1 });
-	loot.insert({ "mi_elysiatail", 1 });
-}
-
 ElysiaBoss::~ElysiaBoss() {
 	delete m_ps;
-}
-
-void ElysiaBoss::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
-	// nothing
 }
 
 float ElysiaBoss::getConfiguredDistanceToHPBar() const {
