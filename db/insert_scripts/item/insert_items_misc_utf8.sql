@@ -36,6 +36,12 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_icecrystal', 2, 450, 300, 50, 50);
 INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y) values ('mi_icecrystal', 25, 40, 350, 300);
 
+-- Elysia's Tail Feathers
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_elysiatail', 'item', 'Elysia''s Tail Feathers','Elysia''s Schwanzfedern','Schwanzfädere vode Elysia');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_elysiatail', 'item_desc', 'This tail was cut from the storm bird Elysia. Maybe someone could craft something from it.','Dieser Schwanz wurde dem Sturmvogel Elysia abgehackt. Vielleicht könnte jemand etwas daraus anfertigen.','De Schwanz isch em Sturmvogel Elysia abghackt worde. Vilicht chönt öpper öppis drus herstelle.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_elysiatail', 'misc', 650, 50, -1);
+
 -- Teeth of a Nekomata
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_teeth', 'item', 'Fangs of a Nekomata','Zähne einer Nekomata','Fangzää vonere Nekomata');

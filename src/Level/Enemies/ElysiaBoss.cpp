@@ -12,6 +12,7 @@ void ElysiaBoss::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) 
 	loot.insert({ "qe_jackpan", 1 });
 	loot.insert({ "fo_rawchicken", 2 });
 	loot.insert({ "fo_egg", 1 });
+	loot.insert({ "mi_elysiatail", 1 });
 }
 
 ElysiaBoss::~ElysiaBoss() {

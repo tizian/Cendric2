@@ -121,6 +121,7 @@ item.id:mi_ironore,1
 item.id:mi_sextant,1
 item.id:mi_icecrystal,1
 item.id:mi_firstguardianheart,1
+item.id:mi_elysiatail,1
 item.id:mi_pearlpile,1
 item.id:pe_feudalfire,1
 item.id:pe_glassoffeudalfire,1
@@ -164,6 +165,7 @@ item.id:we_herbalistblade,1
 item.id:we_doublesickle,1
 item.id:we_pickaxe,1
 item.id:we_pearlsabre,1
+item.id:we_lightningpike,1
 item.id:sp_light,1
 item.id:sp_holyfire,1
 item.id:sp_divineshield,1

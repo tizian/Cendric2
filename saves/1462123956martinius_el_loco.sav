@@ -65,6 +65,7 @@ item.id:mi_shinystone,2
 item.id:mi_silverplate,2
 item.id:mi_teeth,5
 item.id:mi_wolf_fur,4
+item.id:mi_elysiatail,1
 item.id:qe_brokenstaff1,1
 item.id:qe_compass,1
 item.id:qe_jackpan,1
@@ -317,7 +318,7 @@ merchant.state:npc_tristan,0,1,fo_apple,3,fo_cheese,4,fo_ham,2,fo_healingherb,5,
 merchant.state:npc_waldemar,eq_back_necrot1,1,eq_back_necrot2,1,eq_back_necrot3,1,eq_body_necrot1,1,eq_body_necrot2,1,eq_body_necrot3,1,eq_head_necrot1,1,eq_head_necrot2,1,eq_head_necrot3,1,fo_lesserhealingpotion,20
 merchant.state:npc_zeff3,0,1,eq_huntershat,1,eq_leatherarmor,1,mi_wolf_fur,2
 # spells learned:
-spell.learned:1,2,3
+spell.learned:1,2,3,4
 spell.learned:3,12
 spell.learned:4,17
 # modifiers learned:

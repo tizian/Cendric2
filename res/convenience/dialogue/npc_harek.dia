@@ -358,6 +358,16 @@ npc.id:npc_harek
 	]
 	[
 		# Link node, tag is next tag
+		tag:21
+		condition:DL:hasItem("mi_elysiatail", 1) and DL:hasItem("mi_ironore", 5)
+		# translation: 
+		translation.tag:DL_Choice_LightningPike
+		translation.en:1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
+		translation.de:1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
+		translation.ch:1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-2
 		# translation: 
 		translation.tag:DL_Choice_NoMaterial
@@ -395,6 +405,23 @@ npc.id:npc_harek
 	translation.en:Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
 	translation.de:Magische Perlen! Es ist lange her seit ich solche in den Händen gehalten habe... Die werden einen hübschen Säbel abgeben.
 	translation.ch:Magischi Perle! Es isch lang her sit ich sonigi ide Händ gha ha... Die werded en prima Säbel ge.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:removeItem("mi_ironore", 5)
+	trigger:DL:removeItem("mi_elysiatail", 1)
+	trigger:DL:addItem("we_lightningpike", 1)
+	# translation: 
+	translation.tag:DL_Harek_LightningPike
+	translation.en:The tail feathers of a storm bird? Great material for a magical lightning pike.
+	translation.de:Die Schwanzfedern eines Sturmvogels? Ein hervorragendes Material für einen magischen Blitzspeer.
+	translation.ch:D'Schwanzfedere vomne Sturmvogel? Es usgzeichnets Material für en magische Blitzspeer.
 	[
 		# Link node, tag is next tag
 		tag:-2

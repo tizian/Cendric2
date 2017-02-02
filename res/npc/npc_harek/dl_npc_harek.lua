@@ -132,6 +132,9 @@ loadDialogue = function(DL)
 		if (DL:hasItem("mi_pearlpile", 1) and DL:hasItem("mi_ironore", 3)) then 
 			DL:addChoice(20, "DL_Choice_PearlSabre") -- 1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
 		end
+		if (DL:hasItem("mi_elysiatail", 1) and DL:hasItem("mi_ironore", 5)) then 
+			DL:addChoice(21, "DL_Choice_LightningPike") -- 1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
+		end
 		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
 		DL:addNode()
 
@@ -151,6 +154,16 @@ loadDialogue = function(DL)
 			DL:removeItem("mi_pearlpile", 1)
 			DL:removeItem("mi_ironore", 3)
 			DL:addItem("we_pearlsabre", 1)
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("mi_elysiatail", 1) and DL:hasItem("mi_ironore", 5)) then 
+
+			DL:createNPCNode(21, -2, "DL_Harek_LightningPike") -- The tail feathers of a storm bird? Great material for a magical lightning pike.
+			DL:removeItem("mi_ironore", 5)
+			DL:removeItem("mi_elysiatail", 1)
+			DL:addItem("we_lightningpike", 1)
 			DL:addNode()
 
 		end
