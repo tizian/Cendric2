@@ -280,7 +280,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(mapEntry.c_str());
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("weather") == 0) {
+				else if (name.find("weather") != std::string::npos) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, hint value property not found.");

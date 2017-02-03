@@ -291,14 +291,10 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="170" x="400" y="650" width="100" height="50">
-   <properties>
-    <property name="weather" value="res/map/gandria/gandria.tmx,60,"/>
-   </properties>
-  </object>
   <object id="171" x="400" y="647" width="100" height="50">
    <properties>
     <property name="weather" value="res/map/meadows/meadows.tmx,60,"/>
+    <property name="weather 2" value="res/map/gandria/gandria.tmx,60,"/>
    </properties>
   </object>
  </objectgroup>

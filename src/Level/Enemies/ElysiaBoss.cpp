@@ -68,8 +68,8 @@ void ElysiaBoss::loadSpells() {
 
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 80;
-	chopSpell.activeDuration = sf::seconds(5.f);
-	chopSpell.cooldown = sf::seconds(10.f);
+	chopSpell.activeDuration = sf::seconds(1.5f);
+	chopSpell.cooldown = sf::seconds(4.f);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 80, 50);
 	chopSpell.spellOffset = sf::Vector2f(-40.f, 0.f);
 	chopSpell.fightingTime = sf::seconds(0);

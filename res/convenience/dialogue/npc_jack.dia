@@ -116,7 +116,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_Elysia2
 	translation.en:I tried to shoo it away using my frying pan, but it just snatched it away from me and devoured it.
 	translation.de:Ich habe versucht, ihn mit meiner Bratpfanne zu verscheuchen, aber er hat sie mir entrissen und verschluckt.
-	translation.ch:Ich ha probiert, en mitere Pfanne z'verschüüche, aber er het si mer us de Hand grisse und verschluckt.
+	translation.ch:Ich ha probiert, en mitere Bratpfanne z'verschüüche, aber er het si mer us de Hand grisse und verschluckt.
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -158,6 +158,16 @@ npc.id:npc_jack
 		translation.en:I could take care of that problem.
 		translation.de:Ich könnte mich um dieses Problem kümmern.
 		translation.ch:Ich chönt mich um da Problem kümmere.
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isQuestState("kill_elysia", "started") and DL:isQuestComplete("kill_elysia")
+		# translation: 
+		translation.tag:DL_Choice_ElysiaKilled
+		translation.en:I've found your frying pan.
+		translation.de:Ich habe deine Bratpfanne gefunden.
+		translation.ch:Ich ha dini Bratpfanne gfunde.
 	]
 	[
 		# Link node, tag is next tag
@@ -241,5 +251,51 @@ npc.id:npc_jack
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:removeItem("qe_jackpan", 1)
+	# translation: 
+	translation.tag:DL_Jack_ElysiaKilled
+	translation.en:You really did it! That's my good old pan.
+	translation.de:Du hast es wirklich geschafft! Das ist meine gute alte Pfanne.
+	translation.ch:Du hesches würkli gschafft! Da isch mini guet alt Pfanne.
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:changeQuestState("kill_elysia", "completed")
+	# translation: 
+	translation.tag:DL_Jack_ElysiaKilled2
+	translation.en:Now that that chicken's gone, I can finally go back to my lighthouse.
+	translation.de:Jetzt wo dieses Federvieh weg ist kann ich endlich wieder in meinen Turm.
+	translation.ch:Jetzt wo das Federviech weg isch chani endlich wieder i min Turm zrugg.
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:addGold(50)
+	trigger:DL:addConditionProgress("npc_jack","jack_back")
+	# translation: 
+	translation.tag:DL_Jack_ElysiaKilled3
+	translation.en:Here, take the gold I was going to spend here, I don't need it anymore.
+	translation.de:Hier, nimm das Gold dass ich hier ausgeben wollte, jetzt brauch ich's nicht mehr.
+	translation.ch:Da, nimm's Gold woni da ha wele usge, da bruchi ez nüm.
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }

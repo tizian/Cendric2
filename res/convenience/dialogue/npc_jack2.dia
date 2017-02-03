@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_jack2
+
+npc.id:npc_jack2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jack_BeautifulDay
+	translation.en:It's a beautiful day for an old sea bear, ain't it.
+	translation.de:Ein wunderschöner Tag für einen alten Seebären, nicht wahr.
+	translation.ch:En wunderschöne Tag für en alte Seebär, gell.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

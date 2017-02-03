@@ -50,7 +50,7 @@ INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_
 
 -- Lightning Pike
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_lightningpike', 'item', 'Lightning Pike','Blitzspeer','Blitzspeer');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_lightningpike', 'item', 'Lightning Pike','Blitzlanze','Blitzlanze');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_lightningpike', 'item_desc', 'Made from the tail of a storm bird.','Aus dem Schwanz eines Sturmvogels gefertigt.', 'Usem Schwanz vomne Sturmvogel gmacht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_lightningpike', 'eq_weapon', 650, 0, 60);
 INSERT INTO item_attribute (item_id, max_health, critical, dmg_physical, dmg_light) values ('we_lightningpike', 8, 4, 4, 8);

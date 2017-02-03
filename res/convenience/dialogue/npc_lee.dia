@@ -17,6 +17,11 @@ npc.id:npc_lee
 	]
 	[
 		# Link node, tag is next tag
+		tag:14
+		condition:DL:isConditionFulfilled("npc_lee", "thanks") and not DL:isConditionFulfilled("npc_leeluv", "thanks")
+	]
+	[
+		# Link node, tag is next tag
 		tag:7
 	]
 }
@@ -135,6 +140,21 @@ npc.id:npc_lee
 		tag:-2
 	]
 }
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_leeluv", "thanks")
+	# translation: 
+	translation.tag:DL_Lee_Thanks
+	translation.en:Thanks!
+	translation.de:Danke!
+	translation.ch:Danke!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
 {2
 	# [7] Choice Node
 	tag:7
@@ -243,6 +263,7 @@ npc.id:npc_lee
 	trigger:DL:changeQuestState("lee_and_luv", "completed")
 	trigger:DL:addConditionProgress("npc_leeluv", "gone")
 	trigger:DL:removeItem("qe_compass", 1)
+	trigger:DL:addConditionProgress("npc_luv", "thanks")
 	# translation: 
 	translation.tag:DL_Lee_QuestComplete
 	translation.en:Awesome! Thank you so much, I can't wait to set sails! 

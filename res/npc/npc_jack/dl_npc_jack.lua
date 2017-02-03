@@ -57,6 +57,9 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("kill_elysia", "void")) then 
 		DL:addChoice(11, "DL_Choice_HelpJack") -- I could take care of that problem.
 	end
+	if (DL:isQuestState("kill_elysia", "started") and DL:isQuestComplete("kill_elysia")) then 
+		DL:addChoice(14, "DL_Choice_ElysiaKilled") -- I've found your frying pan.
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -86,6 +89,25 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(13, -2, "DL_Jack_HelpJack3") -- Oh, and while you're on it, it would be awesome if you could get me my frying pan back.
 		DL:changeQuestState("kill_elysia", "started")
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("kill_elysia", "started") and DL:isQuestComplete("kill_elysia")) then 
+
+		DL:createNPCNode(14, 15, "DL_Jack_ElysiaKilled") -- You really did it! That's my good old pan.
+		DL:removeItem("qe_jackpan", 1)
+		DL:addNode()
+
+
+		DL:createNPCNode(15, 16, "DL_Jack_ElysiaKilled2") -- Now that that chicken's gone, I can finally go back to my lighthouse.
+		DL:changeQuestState("kill_elysia", "completed")
+		DL:addNode()
+
+
+		DL:createNPCNode(16, -1, "DL_Jack_ElysiaKilled3") -- Here, take the gold I was going to spend here, I don't need it anymore.
+		DL:addGold(50)
+		DL:addConditionProgress("npc_jack","jack_back")
 		DL:addNode()
 
 	end

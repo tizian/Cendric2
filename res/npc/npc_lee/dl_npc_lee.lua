@@ -5,6 +5,8 @@ loadDialogue = function(DL)
 		DL:setRoot(1) 
 	elseif (not DL:isConditionFulfilled("npc_leeluv", "second_rant")) then 
 		DL:setRoot(4) 
+	elseif (DL:isConditionFulfilled("npc_lee", "thanks") and not DL:isConditionFulfilled("npc_leeluv", "thanks")) then 
+		DL:setRoot(14) 
 	else 
 		DL:setRoot(7) 
 	end 
@@ -62,6 +64,14 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:isConditionFulfilled("npc_lee", "thanks") and not DL:isConditionFulfilled("npc_leeluv", "thanks")) then 
+
+		DL:createNPCNode(14, -1, "DL_Lee_Thanks") -- Thanks!
+		DL:addConditionProgress("npc_leeluv", "thanks")
+		DL:addNode()
+
+	end
+
 
 	DL:createChoiceNode(7)
 	if (not DL:isConditionFulfilled("npc_leeluv", "calm_down")) then 
@@ -106,6 +116,7 @@ loadDialogue = function(DL)
 		DL:changeQuestState("lee_and_luv", "completed")
 		DL:addConditionProgress("npc_leeluv", "gone")
 		DL:removeItem("qe_compass", 1)
+		DL:addConditionProgress("npc_luv", "thanks")
 		DL:addNode()
 
 

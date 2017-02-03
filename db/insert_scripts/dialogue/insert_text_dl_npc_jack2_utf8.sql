@@ -1,0 +1,1 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Jack_BeautifulDay', 'dl_npc_jack2', 'It''s a beautiful day for an old sea bear, ain''t it.', 'Ein wunderschöner Tag für einen alten Seebären, nicht wahr.', 'En wunderschöne Tag für en alte Seebär, gell.');
