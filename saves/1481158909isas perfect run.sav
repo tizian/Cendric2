@@ -318,7 +318,7 @@ merchant.state:npc_thiran,eq_back_divinet2,1,eq_back_divinet3,1,eq_head_divinet2
 merchant.state:npc_tristan,fo_apple,3,fo_cheese,4,fo_ham,3,fo_healingherb,5,fo_milk,6,fo_sausage,5,we_torch,1
 merchant.state:npc_waldemar,eq_back_necrot1,1,eq_back_necrot2,1,eq_back_necrot3,1,eq_body_necrot1,1,eq_body_necrot2,1,eq_body_necrot3,1,eq_head_necrot1,1,eq_head_necrot2,1,eq_head_necrot3,1,fo_lesserhealingpotion,20
 # spells learned:
-spell.learned:1,2,3
+spell.learned:1,2,3,4
 spell.learned:2,7
 spell.learned:3,12
 spell.learned:4,17,18
@@ -328,6 +328,7 @@ modifier.learned:2,1
 modifier.learned:3,1
 modifier.learned:4,1
 modifier.learned:5,1
+modifier.learned:6,1
 # hints learned:
 hint.learned:MapMove
 hint.learned:Journal

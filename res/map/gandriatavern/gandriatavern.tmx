@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="172">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="173">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -295,6 +295,12 @@
    <properties>
     <property name="weather" value="res/map/meadows/meadows.tmx,60,"/>
     <property name="weather 2" value="res/map/gandria/gandria.tmx,60,"/>
+   </properties>
+  </object>
+  <object id="172" x="600" y="450" width="50" height="30">
+   <properties>
+    <property name="level entry" value="res/level/storeroom/storeroom.tmx,710,210"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
  </objectgroup>
