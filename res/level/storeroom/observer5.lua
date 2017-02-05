@@ -1,0 +1,22 @@
+-- Behavior for observer (5) in the level storeroom
+
+routine = function(O) 
+	O:gotoTile(9, 21)
+	O:gotoTile(1.5, 21)
+	O:gotoTile(1.5, 16)
+	O:gotoTile(8, 16)
+	O:gotoTile(8, 10)
+	O:gotoTile(11, 10)
+	O:wait(5)
+	O:gotoTile(7.5, 10)
+	O:gotoTile(7.5, 8)
+	O:gotoTile(3, 8)
+	O:gotoTile(7.5, 8)
+	O:gotoTile(7.5, 10)
+	O:wait(5)
+	O:gotoTile(11, 10)
+	O:gotoTile(8, 10)
+	O:gotoTile(8, 16)
+	O:gotoTile(1.5, 16)
+	O:gotoTile(1.5, 21)
+end

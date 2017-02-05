@@ -77,8 +77,8 @@ void WindGustSpell::loadParticleSystem() {
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minAngle = 90 + -20.f;
 	velGen->maxAngle = 90 + 20.f;
-	velGen->minStartSpeed = m_pushAcceleration;
-	velGen->maxStartSpeed = m_pushAcceleration;
+	velGen->minStartSpeed = m_pushAcceleration * 1.5f;
+	velGen->maxStartSpeed = m_pushAcceleration * 1.5f;
 	m_velGenerator = velGen;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();

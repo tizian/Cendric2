@@ -83,6 +83,7 @@ void ScriptedBehavior::setCurrentRoutineStep() {
 		break;
 	case RoutineState::Waiting:
 		m_waitingTime = step.time;
+		m_enemy->setVelocity(sf::Vector2f(0.f, 0.f));
 		break;
 	case RoutineState::Saying:
 		m_speechBubble->setText(step.text);
