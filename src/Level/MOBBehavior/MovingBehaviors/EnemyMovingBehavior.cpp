@@ -26,6 +26,7 @@ void EnemyMovingBehavior::handleMovementInput() {
 		}
 		else {
 			m_movingDirectionX = 0;
+			m_enemy->setVelocity(sf::Vector2f(0.f , m_enemy->getVelocity().y));
 		}
 
 		if (m_movingTarget->y < center.y && std::abs(m_movingTarget->y - center.y) > 10.f) {
@@ -36,6 +37,7 @@ void EnemyMovingBehavior::handleMovementInput() {
 		}
 		else {
 			m_movingDirectionY = 0;
+			m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
 		}
 	}
 	else {
@@ -57,4 +59,7 @@ void EnemyMovingBehavior::setMovingTarget(int x, int y) {
 void EnemyMovingBehavior::resetMovingTarget() {
 	delete m_movingTarget;
 	m_movingTarget = nullptr;
+	m_movingDirectionX = 0;
+	m_movingDirectionY = 0;
+	m_enemy->setVelocity(sf::Vector2f(0.f, 0.f));
 }

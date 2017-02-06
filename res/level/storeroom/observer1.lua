@@ -2,7 +2,7 @@
 
 routine = function(O) 
 	O:wait(3)
-	O:gotoTile(16, 10)
+	O:gotoTile(16.5, 9.5)
 	O:wait(3)
-	O:gotoTile(19, 10)
+	O:gotoTile(19.5, 9.5)
 end
