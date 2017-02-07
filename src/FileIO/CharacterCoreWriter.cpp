@@ -1,7 +1,6 @@
 #include "FileIO/CharacterCoreWriter.h"
 #include "Enums/EnumNames.h"
-
-using namespace std;
+#include "Misc/CBit.h"
 
 bool CharacterCoreWriter::createFile(const std::string& filename) const {
 	if (std::ifstream(filename)) {
@@ -18,7 +17,7 @@ bool CharacterCoreWriter::createFile(const std::string& filename) const {
 }
 
 bool CharacterCoreWriter::saveToFile(const std::string& filename, const CharacterCoreData& data) const {
-	ofstream savefile(filename, ios::trunc);
+	std::ofstream savefile(filename, std::ios::trunc);
 	if (savefile.is_open()) {
 		savefile << writeTimePlayed(data);
 		savefile << writeSaveGameName(data);
@@ -60,54 +59,54 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile.close();
 	}
 	else {
-		g_logger->logError("CharacterCoreWriter", "Unable to open file: " + string(filename));
+		g_logger->logError("CharacterCoreWriter", "Unable to open file: " + std::string(filename));
 		return false;
 	}
 	return true;
 }
 
 std::string CharacterCoreWriter::writeTimePlayed(const CharacterCoreData& data) const {
-	string timePlayed = "# time played, in seconds\n";
-	return timePlayed.append(string(TIME_PLAYED) + ":" + to_string(static_cast<int>(std::floor(data.timePlayed.asSeconds()))) + "\n");
+	std::string timePlayed = "# time played, in seconds\n";
+	return timePlayed.append(std::string(TIME_PLAYED) + ":" + std::to_string(static_cast<int>(std::floor(data.timePlayed.asSeconds()))) + "\n");
 }
 
 std::string CharacterCoreWriter::writeSaveGameName(const CharacterCoreData& data) const {
-	return string(SAVE_GAME_NAME) + ":" + data.saveGameName + "\n";
+	return std::string(SAVE_GAME_NAME) + ":" + data.saveGameName + "\n";
 }
 
 std::string CharacterCoreWriter::writeDateSaved(const CharacterCoreData& data) const {
-	return string(DATE_SAVED) + ":" + to_string(data.dateSaved) + "\n";
+	return std::string(DATE_SAVED) + ":" + std::to_string(data.dateSaved) + "\n";
 }
 
 std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const {
-	return string(MAP_ID) + ":" + data.currentMap + "\n";
+	return std::string(MAP_ID) + ":" + data.currentMap + "\n";
 }
 
 std::string CharacterCoreWriter::writeIsInLevel(const CharacterCoreData& data) const {
-	return string(IS_IN_LEVEL) + ":" + (data.isInLevel ? "1" : "0") + "\n";
+	return std::string(IS_IN_LEVEL) + ":" + (data.isInLevel ? "1" : "0") + "\n";
 }
 
 std::string CharacterCoreWriter::writeMapPosition(const CharacterCoreData& data) const {
-	return string(MAP_POSITION) + ":" + to_string(data.currentMapPosition.x) + "," + to_string(data.currentMapPosition.y) + "\n";
+	return std::string(MAP_POSITION) + ":" + std::to_string(data.currentMapPosition.x) + "," + std::to_string(data.currentMapPosition.y) + "\n";
 }
 
 std::string CharacterCoreWriter::writeLevelID(const CharacterCoreData& data) const {
-	return string(LEVEL_ID) + ":" + data.currentLevel + "\n";
+	return std::string(LEVEL_ID) + ":" + data.currentLevel + "\n";
 }
 
 std::string CharacterCoreWriter::writeLevelPosition(const CharacterCoreData& data) const {
-	return string(LEVEL_POSITION) + ":" + to_string(data.currentLevelPosition.x) + "," + to_string(data.currentLevelPosition.y) + "\n";
+	return std::string(LEVEL_POSITION) + ":" + std::to_string(data.currentLevelPosition.x) + "," + std::to_string(data.currentLevelPosition.y) + "\n";
 }
 
 std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& data) const {
-	string enemiesKilled = "# enemies killed in level:\n";
+	std::string enemiesKilled = "# enemies killed in level:\n";
 
 	for (auto& it : data.enemiesKilled) {
-		string enemyKilled = string(ENEMIES_KILLED);
+		std::string enemyKilled = std::string(ENEMIES_KILLED);
 		enemyKilled.append(":");
 		enemyKilled.append(it.first);
 		for (auto it2 : it.second) {
-			enemyKilled.append("," + to_string(it2));
+			enemyKilled.append("," + std::to_string(it2));
 		}
 		enemyKilled.append("\n");
 		enemiesKilled.append(enemyKilled);
@@ -116,14 +115,14 @@ std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& dat
 }
 
 std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& data) const {
-	string enemiesLooted = "# enemies looted in level:\n";
+	std::string enemiesLooted = "# enemies looted in level:\n";
 
 	for (auto& it : data.enemiesLooted) {
-		string enemyLooted = string(ENEMIES_LOOTED);
+		std::string enemyLooted = std::string(ENEMIES_LOOTED);
 		enemyLooted.append(":");
 		enemyLooted.append(it.first);
 		for (auto it2 : it.second) {
-			enemyLooted.append("," + to_string(it2));
+			enemyLooted.append("," + std::to_string(it2));
 		}
 		enemyLooted.append("\n");
 		enemiesLooted.append(enemyLooted);
@@ -132,14 +131,14 @@ std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& dat
 }
 
 std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data) const {
-	string itemsLooted = "# items looted in level:\n";
+	std::string itemsLooted = "# items looted in level:\n";
 
 	for (auto& it : data.itemsLooted) {
-		string itemLooted = string(ITEMS_LOOTED);
+		std::string itemLooted = std::string(ITEMS_LOOTED);
 		itemLooted.append(":");
 		itemLooted.append(it.first);
 		for (auto it2 : it.second) {
-			itemLooted.append("," + to_string(it2));
+			itemLooted.append("," + std::to_string(it2));
 		}
 		itemLooted.append("\n");
 		itemsLooted.append(itemLooted);
@@ -148,14 +147,14 @@ std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data)
 }
 
 std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData& data) const {
-	string waypointsUnlocked = "# waypoints unlocked in map:\n";
+	std::string waypointsUnlocked = "# waypoints unlocked in map:\n";
 
 	for (auto& it : data.waypointsUnlocked) {
-		string waypointUnlocked = string(WAYPOINTS_UNLOCKED);
+		std::string waypointUnlocked = std::string(WAYPOINTS_UNLOCKED);
 		waypointUnlocked.append(":");
 		waypointUnlocked.append(it.first);
 		for (auto it2 : it.second) {
-			waypointUnlocked.append("," + to_string(it2));
+			waypointUnlocked.append("," + std::to_string(it2));
 		}
 		waypointUnlocked.append("\n");
 		waypointsUnlocked.append(waypointUnlocked);
@@ -164,14 +163,14 @@ std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData&
 }
 
 std::string CharacterCoreWriter::writeTriggersTriggered(const CharacterCoreData& data) const {
-	string triggersTriggered = "# triggers triggered in world:\n";
+	std::string triggersTriggered = "# triggers triggered in world:\n";
 
 	for (auto& it : data.triggersTriggered) {
-		string triggerTriggered = string(TRIGGERS_TRIGGERED);
+		std::string triggerTriggered = std::string(TRIGGERS_TRIGGERED);
 		triggerTriggered.append(":");
 		triggerTriggered.append(it.first);
 		for (auto it2 : it.second) {
-			triggerTriggered.append("," + to_string(it2));
+			triggerTriggered.append("," + std::to_string(it2));
 		}
 		triggerTriggered.append("\n");
 		triggersTriggered.append(triggerTriggered);
@@ -180,15 +179,35 @@ std::string CharacterCoreWriter::writeTriggersTriggered(const CharacterCoreData&
 }
 
 std::string CharacterCoreWriter::writeTilesExplored(const CharacterCoreData& data) const {
-	string tilesExplored = "# tiles explored in world:\n";
+	std::string tilesExplored = "# tiles explored in world:\n";
 
 	for (auto& it : data.tilesExplored) {
-		string tiles = string(TILES_EXPLORED);
+		std::string tiles = std::string(TILES_EXPLORED);
 		tiles.append(":");
 		tiles.append(it.first);
-		for (auto it2 : it.second) {
-			tiles.append("," + to_string(it2));
+		tiles.append(",");
+		CBits byte;
+		int iterations = static_cast<int>(std::floor(it.second.size() / 8.f) * 8);
+		int i = 0;
+
+		for (; i < iterations; i += 8) {
+			byte.bits.b0 = it.second[i + 0];
+			byte.bits.b1 = it.second[i + 1];
+			byte.bits.b2 = it.second[i + 2];
+			byte.bits.b3 = it.second[i + 3];
+			byte.bits.b4 = it.second[i + 4];
+			byte.bits.b5 = it.second[i + 5];
+			byte.bits.b6 = it.second[i + 6];
+			byte.bits.b7 = it.second[i + 7];
+			tiles += byte.byte;
 		}
+
+		tiles.append(",");
+
+		for (; i < it.second.size(); ++i) {
+			tiles.append(std::to_string(it.second[i]));
+		}
+
 		tiles.append("\n");
 		tilesExplored.append(tiles);
 	}
@@ -196,14 +215,14 @@ std::string CharacterCoreWriter::writeTilesExplored(const CharacterCoreData& dat
 }
 
 std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data) const {
-	string chestsLooted = "# chests looted in level:\n";
+	std::string chestsLooted = "# chests looted in level:\n";
 
 	for (auto& it : data.chestsLooted) {
-		string chestLooted = string(CHESTS_LOOTED);
+		std::string chestLooted = std::string(CHESTS_LOOTED);
 		chestLooted.append(":");
 		chestLooted.append(it.first);
 		for (auto it2 : it.second) {
-			chestLooted.append("," + to_string(it2));
+			chestLooted.append("," + std::to_string(it2));
 		}
 		chestLooted.append("\n");
 		chestsLooted.append(chestLooted);
@@ -212,14 +231,14 @@ std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data
 }
 
 std::string CharacterCoreWriter::writeSpellsLearned(const CharacterCoreData& data) const {
-	string spellsLearned = "# spells learned:\n";
+	std::string spellsLearned = "# spells learned:\n";
 
 	for (auto& it : data.spellsLearned) {
-		string spellLearned = string(SPELL_LEARNED);
+		std::string spellLearned = std::string(SPELL_LEARNED);
 		spellLearned.append(":");
 		spellLearned.append(std::to_string(static_cast<int>(it.first)));
 		for (auto it2 : it.second) {
-			spellLearned.append("," + to_string(static_cast<int>(it2)));
+			spellLearned.append("," + std::to_string(static_cast<int>(it2)));
 		}
 		spellLearned.append("\n");
 		spellsLearned.append(spellLearned);
@@ -228,10 +247,10 @@ std::string CharacterCoreWriter::writeSpellsLearned(const CharacterCoreData& dat
 }
 
 std::string CharacterCoreWriter::writeModifiersLearned(const CharacterCoreData& data) const {
-	string modifiersLearned = "# modifiers learned:\n";
+	std::string modifiersLearned = "# modifiers learned:\n";
 
 	for (auto& it : data.modfiersLearned) {
-		string modifierLearned = string(MODIFIER_LEARNED);
+		std::string modifierLearned = std::string(MODIFIER_LEARNED);
 		modifierLearned.append(":");
 		modifierLearned.append(std::to_string(static_cast<int>(it.first)));
 		modifierLearned.append(",");
@@ -243,47 +262,47 @@ std::string CharacterCoreWriter::writeModifiersLearned(const CharacterCoreData& 
 }
 
 std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) const {
-	string orderComment = "# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, \n# damagePhysical, damageFire, damageIce, damageShadow, damageLight, \n# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. \n";
-	string attributeString = orderComment.append(string(ATTRIBUTES));
+	std::string orderComment = "# in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, \n# damagePhysical, damageFire, damageIce, damageShadow, damageLight, \n# resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. \n";
+	std::string attributeString = orderComment.append(std::string(ATTRIBUTES));
 	attributeString.append(":");
-	attributeString.append(to_string(data.attributes.maxHealthPoints) + ",");
-	attributeString.append(to_string(data.attributes.healthRegenerationPerS) + ",");
-	attributeString.append(to_string(data.attributes.haste) + ",");
-	attributeString.append(to_string(data.attributes.critical) + ",");
+	attributeString.append(std::to_string(data.attributes.maxHealthPoints) + ",");
+	attributeString.append(std::to_string(data.attributes.healthRegenerationPerS) + ",");
+	attributeString.append(std::to_string(data.attributes.haste) + ",");
+	attributeString.append(std::to_string(data.attributes.critical) + ",");
 
-	attributeString.append(to_string(data.attributes.damagePhysical) + ",");
-	attributeString.append(to_string(data.attributes.damageFire) + ",");
-	attributeString.append(to_string(data.attributes.damageIce) + ",");
-	attributeString.append(to_string(data.attributes.damageShadow) + ",");
-	attributeString.append(to_string(data.attributes.damageLight) + ",");
+	attributeString.append(std::to_string(data.attributes.damagePhysical) + ",");
+	attributeString.append(std::to_string(data.attributes.damageFire) + ",");
+	attributeString.append(std::to_string(data.attributes.damageIce) + ",");
+	attributeString.append(std::to_string(data.attributes.damageShadow) + ",");
+	attributeString.append(std::to_string(data.attributes.damageLight) + ",");
 
-	attributeString.append(to_string(data.attributes.resistancePhysical) + ",");
-	attributeString.append(to_string(data.attributes.resistanceFire) + ",");
-	attributeString.append(to_string(data.attributes.resistanceIce) + ",");
-	attributeString.append(to_string(data.attributes.resistanceShadow) + ",");
-	attributeString.append(to_string(data.attributes.resistanceLight));
+	attributeString.append(std::to_string(data.attributes.resistancePhysical) + ",");
+	attributeString.append(std::to_string(data.attributes.resistanceFire) + ",");
+	attributeString.append(std::to_string(data.attributes.resistanceIce) + ",");
+	attributeString.append(std::to_string(data.attributes.resistanceShadow) + ",");
+	attributeString.append(std::to_string(data.attributes.resistanceLight));
 	attributeString.append("\n");
 
 	return attributeString;
 }
 
 std::string CharacterCoreWriter::writeGold(const CharacterCoreData& data) const {
-	return string(GOLD) + ":" + to_string(data.gold) + "\n";
+	return std::string(GOLD) + ":" + std::to_string(data.gold) + "\n";
 }
 
 std::string CharacterCoreWriter::writeStoredGold(const CharacterCoreData& data) const {
-	return string(STORED_GOLD) + ":" + to_string(data.storedGold) + "\n";
+	return std::string(STORED_GOLD) + ":" + std::to_string(data.storedGold) + "\n";
 }
 
 std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data) const {
-	string quests = "# quest states:\n";
+	std::string quests = "# quest states:\n";
 
 	for (auto& it : data.questStates) {
-		string quest = string(QUEST_STATE);
+		std::string quest = std::string(QUEST_STATE);
 		quest.append(":");
 		quest.append(it.first);
 		quest.append(",");
-		quest.append(to_string(static_cast<int>(it.second)));
+		quest.append(std::to_string(static_cast<int>(it.second)));
 		quest.append("\n");
 		quests.append(quest);
 	}
@@ -291,10 +310,10 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 }
 
 std::string CharacterCoreWriter::writeHintsLearned(const CharacterCoreData& data) const {
-	string hintList = "# hints learned:\n";
+	std::string hintList = "# hints learned:\n";
 
 	for (auto& it : data.hintsLearned) {
-		string hint = string(HINT_LEARNED);
+		std::string hint = std::string(HINT_LEARNED);
 		hint.append(":");
 		hint.append(it);
 		hint.append("\n");
@@ -305,9 +324,9 @@ std::string CharacterCoreWriter::writeHintsLearned(const CharacterCoreData& data
 }
 
 std::string CharacterCoreWriter::writeGuild(const CharacterCoreData& data) const {
-	string guild = "# guild:\n";
+	std::string guild = "# guild:\n";
 
-	guild.append(string(GUILD));
+	guild.append(std::string(GUILD));
 	guild.append(":");
 	guild.append(EnumNames::getFractionIDName(data.guild));
 	guild.append("\n");
@@ -316,14 +335,14 @@ std::string CharacterCoreWriter::writeGuild(const CharacterCoreData& data) const
 }
 
 std::string CharacterCoreWriter::writeReputationProgress(const CharacterCoreData& data) const {
-	string reputationProgress = "# reputation progress:\n";
+	std::string reputationProgress = "# reputation progress:\n";
 
 	for (auto& it : data.reputationProgress) {
-		string reputation = string(REPUTATION_PROGRESS);
+		std::string reputation = std::string(REPUTATION_PROGRESS);
 		reputation.append(":");
 		reputation.append(EnumNames::getFractionIDName(it.first));
 		reputation.append(",");
-		reputation.append(to_string(it.second));
+		reputation.append(std::to_string(it.second));
 		reputation.append("\n");
 		reputationProgress.append(reputation);
 	}
@@ -331,14 +350,14 @@ std::string CharacterCoreWriter::writeReputationProgress(const CharacterCoreData
 }
 
 std::string CharacterCoreWriter::writeWeather(const CharacterCoreData& data) const {
-	string currentWeather = "# current weather:\n";
+	std::string currentWeather = "# current weather:\n";
 
 	for (auto& it : data.currentWeather) {
-		string weather = string(WEATHER);
+		std::string weather = std::string(WEATHER);
 		weather.append(":");
 		weather.append(it.first);
 		weather.append(",");
-		weather.append(to_string(it.second.dimming));
+		weather.append(std::to_string(it.second.dimming));
 		weather.append(",");
 		weather.append(it.second.weather);
 		weather.append("\n");
@@ -348,10 +367,10 @@ std::string CharacterCoreWriter::writeWeather(const CharacterCoreData& data) con
 }
 
 std::string CharacterCoreWriter::writeMerchantStates(const CharacterCoreData& data) const {
-	string states = "# merchant states:\n";
+	std::string states = "# merchant states:\n";
 
 	for (auto& it : data.merchantStates) {
-		string merchant = string(MERCHANT_STATE);
+		std::string merchant = std::string(MERCHANT_STATE);
 		merchant.append(":");
 		merchant.append(it.first);
 
@@ -359,7 +378,7 @@ std::string CharacterCoreWriter::writeMerchantStates(const CharacterCoreData& da
 			merchant.append(",");
 			merchant.append(it2.first);
 			merchant.append(",");
-			merchant.append(to_string(it2.second));
+			merchant.append(std::to_string(it2.second));
 		}
 
 		merchant.append("\n");
@@ -369,17 +388,17 @@ std::string CharacterCoreWriter::writeMerchantStates(const CharacterCoreData& da
 }
 
 std::string CharacterCoreWriter::writeQuestProgressTargets(const CharacterCoreData& data) const {
-	string quests = "# quest targets killed:\n";
+	std::string quests = "# quest targets killed:\n";
 
 	for (auto& it : data.questTargetProgress) {
-		string quest = string(QUEST_PROGRESS_TARGET);
+		std::string quest = std::string(QUEST_PROGRESS_TARGET);
 		quest.append(":");
 		quest.append(it.first);
 		for (auto& it2 : it.second) {
 			quest.append(",");
 			quest.append(it2.first);
 			quest.append(",");
-			quest.append(to_string(static_cast<int>(it2.second)));
+			quest.append(std::to_string(static_cast<int>(it2.second)));
 		}
 		quest.append("\n");
 		quests.append(quest);
@@ -388,11 +407,11 @@ std::string CharacterCoreWriter::writeQuestProgressTargets(const CharacterCoreDa
 }
 
 std::string CharacterCoreWriter::writeQuestProgressConditions(const CharacterCoreData& data) const {
-	string quests = "# quest conditions fulfilled:\n";
+	std::string quests = "# quest conditions fulfilled:\n";
 
 	for (auto& it : data.questConditionProgress) {
 		if (it.second.empty()) continue;
-		string quest = string(QUEST_PROGRESS_CONDITION);
+		std::string quest = std::string(QUEST_PROGRESS_CONDITION);
 		quest.append(":");
 		quest.append(it.first);
 		for (auto& it2 : it.second) {
@@ -406,11 +425,11 @@ std::string CharacterCoreWriter::writeQuestProgressConditions(const CharacterCor
 }
 
 std::string CharacterCoreWriter::writeQuestProgressDescription(const CharacterCoreData& data) const {
-	string quests = "# quest descriptions unlocked:\n";
+	std::string quests = "# quest descriptions unlocked:\n";
 
 	for (auto& it : data.questDescriptionProgress) {
 		if (it.second.empty()) continue;
-		string quest = string(QUEST_PROGRESS_DESCRIPTION);
+		std::string quest = std::string(QUEST_PROGRESS_DESCRIPTION);
 		quest.append(":");
 		quest.append(it.first);
 		for (auto& it2 : it.second) {
@@ -424,7 +443,7 @@ std::string CharacterCoreWriter::writeQuestProgressDescription(const CharacterCo
 }
 
 std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData& data) const {
-	string progress = "# conditions of a certain type fulfilled:\n";
+	std::string progress = "# conditions of a certain type fulfilled:\n";
 	if (data.conditionProgress.empty()) {
 		return progress;
 	}
@@ -432,7 +451,7 @@ std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData
 	for (auto& progressType : data.conditionProgress) {
 		if (progressType.second.empty()) continue;
 
-		progress.append(string(PROGRESS_CONDITION));
+		progress.append(std::string(PROGRESS_CONDITION));
 		progress.append(":");
 		progress.append(progressType.first);
 		
@@ -448,14 +467,14 @@ std::string CharacterCoreWriter::writeProgressConditions(const CharacterCoreData
 }
 
 std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) const {
-	string items = "# items in inventory:\n";
+	std::string items = "# items in inventory:\n";
 
 	for (auto& it : data.items) {
-		string item = string(ITEM_ID);
+		std::string item = std::string(ITEM_ID);
 		item.append(":");
 		item.append(it.first);
 		item.append(",");
-		item.append(to_string(it.second));
+		item.append(std::to_string(it.second));
 		item.append("\n");
 		items.append(item);
 	}
@@ -463,14 +482,14 @@ std::string CharacterCoreWriter::writeItemID(const CharacterCoreData& data) cons
 }
 
 std::string CharacterCoreWriter::writeStoredItemID(const CharacterCoreData& data) const {
-	string items = "# stored items:\n";
+	std::string items = "# stored items:\n";
 
 	for (auto& it : data.storedItems) {
-		string item = string(STORED_ITEM_ID);
+		std::string item = std::string(STORED_ITEM_ID);
 		item.append(":");
 		item.append(it.first);
 		item.append(",");
-		item.append(to_string(it.second));
+		item.append(std::to_string(it.second));
 		item.append("\n");
 		items.append(item);
 	}
@@ -478,14 +497,14 @@ std::string CharacterCoreWriter::writeStoredItemID(const CharacterCoreData& data
 }
 
 std::string CharacterCoreWriter::writeEquippedWeaponSlots(const CharacterCoreData& data) const {
-	string weaponSlots = "# weapon slots. it is always: spell ID+, (modifier type, level)*:\n";
+	std::string weaponSlots = "# weapon slots. it is always: spell ID+, (modifier type, level)*:\n";
 	for (auto& it : data.equippedWeaponSlots) {
-		weaponSlots.append(string(EQUIPPED_SPELLSLOT) + ":");
-		weaponSlots.append(to_string(static_cast<int>(it.first)));
+		weaponSlots.append(std::string(EQUIPPED_SPELLSLOT) + ":");
+		weaponSlots.append(std::to_string(static_cast<int>(it.first)));
 		for (auto& it2 : it.second) {
 			weaponSlots.append(",");
-			weaponSlots.append(to_string(static_cast<int>(it2.type)) + ",");
-			weaponSlots.append(to_string(it2.level));
+			weaponSlots.append(std::to_string(static_cast<int>(it2.type)) + ",");
+			weaponSlots.append(std::to_string(it2.level));
 		}
 		weaponSlots.append("\n");
 	}
@@ -493,33 +512,33 @@ std::string CharacterCoreWriter::writeEquippedWeaponSlots(const CharacterCoreDat
 }
 
 std::string CharacterCoreWriter::writeEquippedItems(const CharacterCoreData& data) const {
-	string equipment = "# equipment:\n";
+	std::string equipment = "# equipment:\n";
 
-	equipment.append(string(EQUIPPED_BACK) + ":" + data.equippedItems.at(ItemType::Equipment_back) + "\n");
-	equipment.append(string(EQUIPPED_BODY) + ":" + data.equippedItems.at(ItemType::Equipment_body) + "\n");
-	equipment.append(string(EQUIPPED_HEAD) + ":" + data.equippedItems.at(ItemType::Equipment_head) + "\n");
-	equipment.append(string(EQUIPPED_NECK) + ":" + data.equippedItems.at(ItemType::Equipment_neck) + "\n");
-	equipment.append(string(EQUIPPED_RING_1) + ":" + data.equippedItems.at(ItemType::Equipment_ring_1) + "\n");
-	equipment.append(string(EQUIPPED_RING_2) + ":" + data.equippedItems.at(ItemType::Equipment_ring_2) + "\n");
-	equipment.append(string(EQUIPPED_WEAPON) + ":" + data.equippedItems.at(ItemType::Equipment_weapon) + "\n");
+	equipment.append(std::string(EQUIPPED_BACK) + ":" + data.equippedItems.at(ItemType::Equipment_back) + "\n");
+	equipment.append(std::string(EQUIPPED_BODY) + ":" + data.equippedItems.at(ItemType::Equipment_body) + "\n");
+	equipment.append(std::string(EQUIPPED_HEAD) + ":" + data.equippedItems.at(ItemType::Equipment_head) + "\n");
+	equipment.append(std::string(EQUIPPED_NECK) + ":" + data.equippedItems.at(ItemType::Equipment_neck) + "\n");
+	equipment.append(std::string(EQUIPPED_RING_1) + ":" + data.equippedItems.at(ItemType::Equipment_ring_1) + "\n");
+	equipment.append(std::string(EQUIPPED_RING_2) + ":" + data.equippedItems.at(ItemType::Equipment_ring_2) + "\n");
+	equipment.append(std::string(EQUIPPED_WEAPON) + ":" + data.equippedItems.at(ItemType::Equipment_weapon) + "\n");
 
 	return equipment;
 }
 
 std::string CharacterCoreWriter::writeWeaponConfigurations(const CharacterCoreData& data) const {
-	string weaponConfigs = "# weapon configurations:\n";
+	std::string weaponConfigs = "# weapon configurations:\n";
 
 	for (auto& it : data.weaponConfigurations) {
-		weaponConfigs.append(string(WEAPON_CONFIGS) + ":");
+		weaponConfigs.append(std::string(WEAPON_CONFIGS) + ":");
 		weaponConfigs.append(it.first);
 		weaponConfigs.append(";");
 
 		for (auto it2 = it.second.begin(); it2 != it.second.end(); ++it2) {
-			weaponConfigs.append(to_string(static_cast<int>(it2->first)));
+			weaponConfigs.append(std::to_string(static_cast<int>(it2->first)));
 			for (auto& it3 : it2->second) {
 				weaponConfigs.append(",");
-				weaponConfigs.append(to_string(static_cast<int>(it3.type)) + ",");
-				weaponConfigs.append(to_string(it3.level));
+				weaponConfigs.append(std::to_string(static_cast<int>(it3.type)) + ",");
+				weaponConfigs.append(std::to_string(it3.level));
 			}
 			weaponConfigs.append(";");
 		}
@@ -530,10 +549,10 @@ std::string CharacterCoreWriter::writeWeaponConfigurations(const CharacterCoreDa
 }
 
 std::string CharacterCoreWriter::writeQuickslots(const CharacterCoreData& data) const {
-	string quickslots = "# quickslot assignments:\n";
+	std::string quickslots = "# quickslot assignments:\n";
 
-	quickslots.append(string(QUICKSLOT) + ":1," + data.quickSlot1 + "\n");
-	quickslots.append(string(QUICKSLOT) + ":2," + data.quickSlot2 + "\n");
+	quickslots.append(std::string(QUICKSLOT) + ":1," + data.quickSlot1 + "\n");
+	quickslots.append(std::string(QUICKSLOT) + ":2," + data.quickSlot2 + "\n");
 
 	return quickslots;
 }

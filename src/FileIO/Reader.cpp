@@ -14,6 +14,15 @@ char* Reader::gotoNextChar(char* buffer, char* end, char goal) const {
 	return buffer;
 }
 
+char* Reader::gotoNextChar(char* buffer, char* end) const {
+	if (buffer < end) {
+		++buffer;
+		return buffer;
+	}
+
+	return nullptr;
+}
+
 int Reader::countToNextChar(char* buffer, char* end, char goal) const {
 	int count = 0;
 	while (buffer < end && *buffer != goal) {
