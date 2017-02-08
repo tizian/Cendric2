@@ -30,5 +30,6 @@ enum class EnemyID {
 	Elysia_Fledgling,
 	Boss_Elysia,
 	Elysia_Clone,
+	Dragonwhelp,
 	MAX
 };

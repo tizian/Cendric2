@@ -38,3 +38,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 Envoy of the Storm','Boss: Elysia,
 Gesandte des Sturms','Boss: Elysia, 
 Gsandti vom Sturm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SwampBridge','location','The Bridge in the Swamp','Die Brücke im Sumpf','D''Brugg im Sumpf');

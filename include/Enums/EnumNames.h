@@ -298,6 +298,8 @@ public:
 			return "ElysiaFledgling";
 		case EnemyID::Boss_Elysia:
 			return "BossElysia";
+		case EnemyID::Dragonwhelp:
+			return "DragonWhelp";
 		}
 	}
 
