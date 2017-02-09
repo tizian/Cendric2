@@ -137,3 +137,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_sextant', 'misc', 500, 550, 100);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_sextant', -5, -20, 40, 35);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_sextant', 1, 550, 0, 50, 100);
+
+-- Dragon Skull
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_dragonskull', 'item', 'Dragon Skull','Drachenschädel','Dracheschädel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_dragonskull', 'item_desc', 'This one will no longer breathe fire.','Der spuckt kein Feuer mehr.','De spuckt kei Füür me.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_dragonskull', 'misc', 0, 200, 10);
