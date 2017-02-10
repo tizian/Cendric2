@@ -5,11 +5,13 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-// A flying bat
-class BatEnemy : public Enemy {
+// A hatching dragon whelp
+class DragonWhelpEnemy : public Enemy {
 public:
-	BatEnemy(const Level* level, Screen* screen);
-	~BatEnemy() {}
+	DragonWhelpEnemy(const Level* level, Screen* screen);
+	~DragonWhelpEnemy() {}
+
+	void update(const sf::Time& frameTime) override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
@@ -20,7 +22,7 @@ public:
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override;
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
-	EnemyID getEnemyID() const override { return EnemyID::Bat; }
+	EnemyID getEnemyID() const override { return EnemyID::Dragonwhelp; }
 	void onHit(Spell* spell) override;
 	void setDead() override;
 	
@@ -34,5 +36,7 @@ protected:
 	void loadAnimation(int skinNr) override;
 	void setActive();
 
-	bool m_isHanging;
+	bool m_isEgg;
+
+	sf::Time m_hatchingTime = sf::Time::Zero;
 };

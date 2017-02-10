@@ -21,6 +21,11 @@ void AnimatedGameObject::unlockAnimation() {
 }
 
 void AnimatedGameObject::addAnimation(GameObjectState state, Animation* animation) {
+	if (animation->getAnimationTime() == sf::Time::Zero) {
+		delete animation;
+		g_logger->logError("AnimatedGameObject", "Can't add an animation with no frames or 0 duration!");
+		return;
+	}
 	if (contains(m_animations, state)) {
 		delete m_animations.at(state);
 		m_animations[state] = animation;

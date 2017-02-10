@@ -42,5 +42,7 @@ enum class GameObjectState {
 	Open,	// used by door tiles
 	Closed,	// used by door tiles
 	Hanging, // used by bat enemies
-	Hiding // used by shielded skeleton enemies
+	Hiding, // used by shielded skeleton enemies
+	Inactive, // used by the dragon whelp enemy
+	Hatching, // used by the dragon whelp enemy
 };

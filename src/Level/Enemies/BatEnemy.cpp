@@ -69,6 +69,7 @@ AttackingBehavior* BatEnemy::createAttackingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveBehavior(this);
 	}
+	m_isHanging = !asAlly;
 	behavior->setAggroRange(300.f);
 	behavior->setAttackInput(std::bind(&BatEnemy::handleAttackInput, this));
 	return behavior;
@@ -77,6 +78,12 @@ AttackingBehavior* BatEnemy::createAttackingBehavior(bool asAlly) {
 void BatEnemy::onHit(Spell* spell) {
 	Enemy::onHit(spell);
 	setActive();
+}
+
+void BatEnemy::setDead() {
+	if (m_isDead) return;
+	setActive();
+	Enemy::setDead();
 }
 
 void BatEnemy::setActive() {
