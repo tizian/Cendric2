@@ -55,6 +55,7 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("clerics_recommendation", "started") and DL:isQuestComplete("clerics_recommendation")) then 
 
 			DL:createNPCNode(2, 8, "DL_Lloyd_ReadLetter") -- (Lloyd reads the letter) Hm, interesting. Thank you for helping us with that problem.
+			DL:removeItem("qe_recommendationletter",1)
 			DL:changeQuestState("clerics_recommendation", "completed")
 			DL:addReputationProgress("cleric", 5)
 			DL:addNode()

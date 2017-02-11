@@ -153,6 +153,7 @@ npc.id:npc_lloyd
 	# [2] NPC Node
 	tag:2
 	# triggers: 
+	trigger:DL:removeItem("qe_recommendationletter",1)
 	trigger:DL:changeQuestState("clerics_recommendation", "completed")
 	trigger:DL:addReputationProgress("cleric", 5)
 	# translation: 

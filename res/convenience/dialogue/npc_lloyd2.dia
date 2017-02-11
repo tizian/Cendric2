@@ -1,0 +1,257 @@
+# dia file for dialogue for npc: npc_lloyd2
+
+npc.id:npc_lloyd2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:DL:isQuestState("further_investigation", "void") and not DL:isConditionFulfilled("npc_lloyd2", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:not DL:isConditionFulfilled("npc_lloyd2", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_lloyd2", "going_on")
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:not DL:isConditionFulfilled("npc_lloyd2", "hurry_up")
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_WhatsGoingOn
+	translation.en:By the Eternal Light! What's going on here?
+	translation.de:Beim Ewigen Licht! Was ist hier eigentlich los?
+	translation.ch:Was - bim Ewige Liecht - lauft do eigentlich?
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{3
+	# [3] Cendric Node
+	tag:3
+	# triggers: 
+	trigger:DL:removeItem("qe_recommendationletter", 1)
+	# translation: 
+	translation.tag:DL_Cendric_WasLookingForYou
+	translation.en:Commander Lloyd, what a coincidence! I was looking for you to give you this letter from Inina.
+	translation.de:Kommandant Lloyd, was für ein Zufall! Ich habe dich gesucht um dir diesen Brief von Inina zu überreichen.
+	translation.ch:Kommandant Lloyd, jo sonen Zuefall! Ich ha dir eh de Brief do vode Inina gä wele.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:changeQuestState("clerics_recommendation", "completed")
+	trigger:DL:addReputationProgress("cleric", 5)
+	# translation: 
+	translation.tag:DL_Lloyd_ReadLetter
+	translation.en:(Lloyd reads the letter) Hm, interesting. Thank you for helping us with that problem.
+	translation.de:(Lloyd liest den Brief) Hm, interessant. Danke, dass du uns bei diesem Problem geholfen hast.
+	translation.ch:(De Lloyd list de Brief) Hm, interessant. Danke, dass üs mit dem Problem gholfe hesch.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "guild")
+	# translation: 
+	translation.tag:DL_Lloyd_ReadLetter2
+	translation.en:Inina wanted you to join the Clerics, but you've already made another decision.
+	translation.de:Inina wollte, dass du den Klerikern beitrittst, doch du hast dich bereits anders entschieden.
+	translation.ch:D'Inina het wele dass du de Kleriker biitrittsch, doch du hesch dich scho andersch entschide.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:changeQuestState("further_investigation", "started")
+	trigger:DL:addConditionProgress("default", "second_boss_open")
+	# translation: 
+	translation.tag:DL_Lloyd_ReadLetter3
+	translation.en:She also wrote that she needs your help again, looking for hints that could help us find out where that beast came from.
+	translation.de:Sie schreibt auch dass sie nochmals deine Hilfe benötigt, beim Suchen von weiteren Hinweisen, wo diese Biest hergekommen ist.
+	translation.ch:Si schriibt au dass si nomol dini Hilf bruucht, bim Sueche vo wiitere Hiiwis wo das Biescht hercho isch.
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd2", "talked")
+	# translation: 
+	translation.tag:DL_Lloyd_ReadLetter4
+	translation.en:But first, back to that lighthouse, what was going on there?
+	translation.de:Aber zuerst zurück zu diesem Leuchtturm, was ist dort passiert?
+	translation.ch:Aber zersch zrugg zu dem Lüüchtturm, was isch det passiert?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd2", "talked")
+	# translation: 
+	translation.tag:DL_Lloyd_WhatsGoingOn
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [8] Choice Node
+	tag:8
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_KillBird
+		translation.en:I had to slay a monstrous bird.
+		translation.de:Ich musste einen monströsen Vogel erledigen.
+		translation.ch:Ich ha en monströse Vogel möse bodige.
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		# translation: 
+		translation.tag:DL_Choice_NothingImportant
+		translation.en:Nothing of interest. I just enjoyed the thunderstorm.
+		translation.de:Nichts interessantes. Ich hatte nur ein wenig Spass mit dem Gewitter.
+		translation.ch:Nüt interessants. Ich ha nur chli Spass gha mitem Gwitter.
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:isConditionFulfilled("npc_jack", "why_not_clerics")
+		# translation: 
+		translation.tag:DL_Choice_YourJob
+		translation.en:Technically, I only did what you were supposed to do.
+		translation.de:Eigentlich habe ich eure Arbeit gemacht.
+		translation.ch:Eigentli hani eure Job gmacht.
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd2", "going_on")
+	# translation: 
+	translation.tag:DL_Lloyd_KillBird
+	translation.en:Hm, Jack told me about that monster, but we've never seen it. Good job on hunting it down.
+	translation.de:Hm, Jack hat mir von diesem Monster erzählt, aber wir haben es nie gesehen. Gute Arbeit.
+	translation.ch:Hm, de Jack het mer vo dem Monster verzellt, aber mir hends nie gse. Guet gmacht.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd2", "going_on")
+	# translation: 
+	translation.tag:DL_Lloyd_NothingImportant
+	translation.en:Hmm. It seemed to be a quite extraordinary thunderstorm. But if you say so...
+	translation.de:Hmm. Das war ein ziemlich aussergewöhnliches Gewitter. Aber wenn du meinst...
+	translation.ch:Hmm. Das isch es zimlich ussergwöhnlichs Gwitter gsi. Aber wend meinsch...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd2", "going_on")
+	# translation: 
+	translation.tag:DL_Lloyd_YourJob
+	translation.en:Which means that you've slain that bird Jack told us about? Good job on hunting it down.
+	translation.de:Du hast also diesen Vogel erledigt, von dem uns Jack erzählt hat? Gute Arbeit.
+	translation.ch:Du hesch also de Vogel erledigt vo dem de Jack üs verzellt het? Guet gmacht.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_HurryUp
+	translation.en:Nevertheless, Inina still needs your help discovering the strange caverns. She's been away for too long now.
+	translation.de:Trotzdem braucht Inina immer noch deine Hilfe was das Erkunden dieser seltsamen Höhlen angeht. Sie ist jetzt schon zu lange weg.
+	translation.ch:Trotzdem brucht d'Inina immer na dini Hilf bim Erforsche vo dene komische Höhle. Si isch ez scho zu lang weg.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd2", "hurry_up")
+	# translation: 
+	translation.tag:DL_Lloyd_HurryUp2
+	translation.en:I want you to immediately go back to the caverns and support her. That's not a request!
+	translation.de:Ich will dass du ohne weitere Abstecher zurück zu den Höhlen gehst und sie unterstützt. Das ist keine Bitte!
+	translation.ch:Ich wett dass du ohni wiiteri Abstecher zrugg id Höhlene gasch und si unterstützisch. Das isch kei Bitt!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [13] Choice Node
+	tag:13
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
