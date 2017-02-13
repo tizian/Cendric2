@@ -440,6 +440,9 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_jonathan", "you_learn")) then 
 		DL:addChoice(59, "DL_Choice_YouLearn") -- Why don't you learn those spells yourself?
 	end
+	if (not DL:isConditionFulfilled("npc_jonathan", "bird_slain") and DL:isSpellLearned("4")) then 
+		DL:addChoice(64, "DL_Choice_BirdSlain") -- I've slain the wind monster.
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -473,6 +476,27 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(61, -2, "DL_Jonathan_YouLearn3") -- And with all the people disappearing... No, no, I leave this to you.
 		DL:addConditionProgress("npc_jonathan", "you_learn")
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_jonathan", "bird_slain") and DL:isSpellLearned("4")) then 
+
+		DL:createNPCNode(64, 65, "DL_Jonathan_BirdSlain") -- And you've managed to absorb its magical powers. Well done.
+		DL:addNode()
+
+
+		DL:createNPCNode(65, 66, "DL_Jonathan_BirdSlain2") -- Now there's only one element left - earth.
+		DL:addNode()
+
+
+		DL:createNPCNode(66, 67, "DL_Jonathan_BirdSlain3") -- If I remember correctly, there was an old swamp hag who knew some earth spells.
+		DL:addNode()
+
+
+		DL:createNPCNode(67, -2, "DL_Jonathan_BirdSlain4") -- You should go to the marshlands in the South and talk to her.
+		DL:addQuestDescription("element_master", 4)
+		DL:addConditionProgress("npc_jonathan", "bird_slain")
 		DL:addNode()
 
 	end

@@ -133,10 +133,21 @@ void ParticleTile::loadEmberParticles(int skinNr) {
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 
-	colGen->minStartCol = sf::Color(110, 255, 100);
-	colGen->maxStartCol = sf::Color(110, 255, 100);
-	colGen->minEndCol = sf::Color(20, 200, 0, 200);
-	colGen->maxEndCol = sf::Color(20, 200, 0, 200);
+	switch (skinNr) {
+	default:
+	case 4:
+		colGen->minStartCol = sf::Color(110, 255, 100);
+		colGen->maxStartCol = sf::Color(110, 255, 100);
+		colGen->minEndCol = sf::Color(20, 200, 0, 200);
+		colGen->maxEndCol = sf::Color(20, 200, 0, 200);
+		break;
+	case 5:
+		colGen->minStartCol = sf::Color(190, 120, 180);
+		colGen->maxStartCol = sf::Color(200, 140, 190);
+		colGen->minEndCol = sf::Color(230, 140, 200, 200);
+		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
+		break;
+	}
 
 	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
 	velGen->minStartSpeed = 20.f;
@@ -237,6 +248,7 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 		loadWaterParticles(skinNr);
 		break;
 	case 4:
+	case 5:
 	default:
 		loadEmberParticles(skinNr);
 		break;

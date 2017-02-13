@@ -12,6 +12,7 @@
 // 3: toxic water
 // 4: green fire
 // 5: green embers
+// 6: purple embers
 class ParticleTile : public LevelDynamicTile {
 public:
 	ParticleTile(LevelScreen* levelScreen);
