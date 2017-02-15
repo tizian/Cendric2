@@ -3,6 +3,9 @@
 #include "global.h"
 #include "Level/DynamicTiles/LevelMovableTile.h"
 
+// available skins:
+// 0: default mushroom
+// 1: default mushroom, shifted half a tile
 class TrampolineTile : public virtual LevelMovableTile {
 public:
 	TrampolineTile(LevelScreen* levelScreen);
@@ -13,6 +16,8 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Trampoline; }
 
+	float getConfiguredMaxVelocityX() const override { return 200.f; }
+
 private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
@@ -21,6 +26,8 @@ private:
 	const float GRAVITY_ACCELERATION = 1000.f;
 	const float DAMPING_AIR = 0.7f;
 	const float DAMPING_GROUND = 0.999f;
+
+	float m_pushAcceleration = 0.f;
 
 	sf::Time m_crumblingTime;
 	sf::Time m_jumpingTime;

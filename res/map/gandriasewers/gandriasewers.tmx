@@ -598,7 +598,7 @@
   </object>
   <object id="301" x="150" y="640" width="50" height="30">
    <properties>
-    <property name="level entry" value="res/level/forgottenpassage/forgottenpassage.tmx,160,1710"/>
+    <property name="level entry" value="res/level/forgottenpassage/forgottenpassage.tmx,260,1710"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

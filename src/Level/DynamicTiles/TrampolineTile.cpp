@@ -20,6 +20,11 @@ void TrampolineTile::init() {
 }
 
 void TrampolineTile::loadAnimation(int skinNr) {
+	if (skinNr == 1) {
+		setPositionOffset(sf::Vector2f(5.f + TILE_SIZE_F * 0.5f, 15.f));
+		skinNr = 0;
+	}
+
 	m_isCollidable = true;
 	std::string destructibleTileTex = "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png";
 	g_resourceManager->loadTexture(destructibleTileTex, ResourceType::Level);
@@ -86,15 +91,16 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 		}
 	}
 
-	setAcceleration(sf::Vector2f(0.f, GRAVITY_ACCELERATION));
+	setAcceleration(sf::Vector2f(m_pushAcceleration, GRAVITY_ACCELERATION));
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
+	m_pushAcceleration = 0.f;
 
 	// check for main character
 	auto const& mbb = *m_mainChar->getBoundingBox();
-	if (m_state == GameObjectState::Idle && mbb.intersects(m_jumpingRegion)) {
+	if (!m_mainChar->isDead() && m_state == GameObjectState::Idle && mbb.intersects(m_jumpingRegion)) {
 		auto nextBB = mbb;
 		nextBB.top = m_jumpingRegion.top - nextBB.height - 10.f;
 		WorldCollisionQueryRecord rec;
@@ -117,7 +123,21 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 }
 
 void TrampolineTile::onHit(Spell* spell) {
-	// nop (yet?)
+	switch (spell->getSpellID()) {
+	case SpellID::WindGust: {
+		float pushAcceleration = dynamic_cast<WindGustSpell*>(spell)->getPushAcceleration();
+		// determine the direction of the windgust by the position of its owner.
+		if (spell->getOwner()->getPosition().x < getPosition().x) {
+			m_pushAcceleration = pushAcceleration;
+		}
+		else {
+			m_pushAcceleration = -pushAcceleration;
+		}
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 void TrampolineTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {

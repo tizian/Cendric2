@@ -12,6 +12,8 @@ public:
 	void update(const sf::Time& frameTime) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Shiftable; }
 
+	float getConfiguredMaxVelocityX() const override { return 200.f; }
+
 private:
 	std::string getSpritePath() const override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;

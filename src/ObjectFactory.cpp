@@ -29,6 +29,7 @@ void ObjectFactory::registerLevelDynamicTile(LevelDynamicTileID id, LevelDynamic
 
 LevelDynamicTile* ObjectFactory::createLevelDynamicTile(LevelDynamicTileID id, LevelScreen* levelScreen) {
 	LevelDynamicTile* instance = nullptr;
+
 	const auto& it = levelDynamicTileRegistry.find(id);
 	if (it != levelDynamicTileRegistry.end()) {
 		instance = it->second(levelScreen);

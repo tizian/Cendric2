@@ -69,3 +69,11 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_lighthouse', 'key', 600, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_lighthouse', 'item', 'Lighthouse Key','Leuchtturm-Schlüssel','Lüüchtturm-Schlüssel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_lighthouse', 'item_desc', 'The key to Jack''s Lighthouse.','Der Schlüssel von Jack''s Leuchtturm.','De Schlüssel vom Jack sim Lüüchtturm.');
+
+-- Ornate Key (Key to the forgotten passage)
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_forgottenpassage', 'key', 650, 100, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_forgottenpassage', 'item', 'Ornate Key','Verschnörkelter Kanalisation','Verschnörklete Schlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_forgottenpassage', 'item_desc', 'I found this key in the forgotten passage in the sewers.','Diesen Schlüssel habe ich im vergessenen Durchgang in der Kanalisation gefunden','De Schlüssel hani im vergessene Durchgang ide Kanalisation gfunde.');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_forgottenpassage', -6, -38, 32, 12);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('ke_forgottenpassage', 1, 500, 200, 50, 50);

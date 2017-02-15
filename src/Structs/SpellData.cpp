@@ -596,7 +596,7 @@ SpellData SpellData::getWindGustSpellData() {
 
 	windGust.iconTextureRect = sf::IntRect(150, 0, 50, 50);
 	windGust.cooldown = sf::seconds(3);
-	windGust.range = 80.f;
+	windGust.range = 105.f;
 	windGust.boundingBox = sf::FloatRect(0.f, 0.f, windGust.range, 60.f);
 	windGust.spellOffset = sf::Vector2f(10.f, 10.f);
 	windGust.duration = sf::seconds(1);
