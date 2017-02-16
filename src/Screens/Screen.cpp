@@ -3,8 +3,6 @@
 #include "Screens/ScreenManager.h"
 #include "GUI/GUIConstants.h"
 
-using namespace std;
-
 #define VIEW_MARGIN 20.f;
 
 inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundingBox) {
@@ -23,9 +21,9 @@ inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundi
 Screen::Screen(CharacterCore* core) {
 	m_characterCore = core;
 
-	m_objects = vector<vector<GameObject*>>();
+	m_objects = std::vector<std::vector<GameObject*>>();
 	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1)) {
-		vector<GameObject*> newVector;
+		std::vector<GameObject*> newVector;
 		m_objects.push_back(newVector);
 	}
 }
@@ -47,7 +45,7 @@ void Screen::update(const sf::Time& frameTime) {
 	m_toAdd.clear();
 }
 
-vector<GameObject*>* Screen::getObjects(GameObjectType type) {
+std::vector<GameObject*>* Screen::getObjects(GameObjectType type) {
 	return &m_objects[type];
 }
 
@@ -87,7 +85,7 @@ void Screen::deleteDisposedObjects() {
 }
 
 void Screen::setAllButtonsEnabled(bool value) {
-	vector<GameObject*>* buttons = getObjects(GameObjectType::_Button);
+	std::vector<GameObject*>* buttons = getObjects(GameObjectType::_Button);
 	for (auto it : *buttons) {
 		Button* button = dynamic_cast<Button*>(it);
 		if (button != nullptr) {
@@ -161,7 +159,7 @@ const BitmapText* Screen::getTooltipText() const {
 	return &m_tooltipText;
 }
 
-void Screen::setTooltipTextRaw(const string& text, const sf::Color& color, bool isOverride) {
+void Screen::setTooltipTextRaw(const std::string& text, const sf::Color& color, bool isOverride) {
 	if (m_tooltipTime > sf::Time::Zero && !isOverride) {
 		// another text is still displaying
 		return;
@@ -176,7 +174,7 @@ void Screen::setTooltipTextRaw(const string& text, const sf::Color& color, bool 
 	m_tooltipTime = sf::seconds(1.f + 0.06f * static_cast<float>(text.length()));
 }
 
-void Screen::setTooltipText(const string& textKey, const sf::Color& color, bool isOverride) {
+void Screen::setTooltipText(const std::string& textKey, const sf::Color& color, bool isOverride) {
 	setTooltipTextRaw(g_textProvider->getText(textKey), color, isOverride);
 }
 
@@ -206,7 +204,7 @@ void Screen::updateTooltipText(const sf::Time& frameTime) {
 		if (m_tooltipTime <= sf::Time::Zero) // yes, sf::Time can be negative.
 		{
 			// reset tooltip text
-			m_tooltipText = BitmapText();
+			m_tooltipText.setString("");
 			m_tooltipTime = sf::Time::Zero;
 		}
 	}
