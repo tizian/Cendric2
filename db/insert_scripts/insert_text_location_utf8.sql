@@ -40,3 +40,7 @@ Gesandte des Sturms','Boss: Elysia,
 Gsandti vom Sturm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SwampBridge','location','The Bridge in the Swamp','Die Brücke im Sumpf','D''Brugg im Sumpf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GandriaCathedral','location','Cathedral','Kathedrale','Kathedrale');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossJanus','location','Boss: Janus,
+Guardian of the Sewers','Boss: Janus,
+Wächter der Kanalisation','Boss: Janus, 
+Wächter vode Kanalisation');

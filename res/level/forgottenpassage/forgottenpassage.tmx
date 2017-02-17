@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="89">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="91">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/forgottenpassage/layer_inf.png,3.0,res/level/forgottenpassage/layer_3.png,2.0,res/level/forgottenpassage/layer_2.png"/>
   <property name="dimming" value="0.5"/>
@@ -378,7 +378,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,192,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,27,28,28,28,28,28,28,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,175,0,0,0,0,175,0,0,0,0,
 0,0,231,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,175,0,0,0,0,175,0,0,0,0,
-0,0,254,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,175,0,0,0,0,175,0,0,0,0,
+0,0,254,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,216,0,0,0,0,0,0,0,0,0,0,0,0,0,175,0,0,0,0,175,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,289,290,291,0,0,0,0,0,0,0,0,0,0,0,0,0,255,256,0,0,0,175,0,0,0,0,175,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,312,313,314,30,0,30,0,0,0,0,0,0,0,0,0,0,278,279,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,90,91,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -973,6 +973,13 @@
    <properties>
     <property name="keyguarded" value=""/>
     <property name="map entry" value="res/map/gandriasewers/gandriasewers.tmx,165,700"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="90" x="1550" y="700" width="50" height="100">
+   <properties>
+    <property name="keyguarded" value=""/>
+    <property name="level entry" value="res/level/boss_janus/boss_janus.tmx,1560,510"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

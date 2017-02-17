@@ -17,7 +17,7 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data, const 
 	m_core = core;
 	tinyxml2::XMLDocument xmlDoc;
 	tinyxml2::XMLError result = xmlDoc.LoadFile(getResourcePath(fileName).c_str());
-	XMLCheckResult(result);
+		XMLCheckResult(result);
 
 	tinyxml2::XMLElement* map = xmlDoc.FirstChildElement("map");
 	if (map == nullptr) {
