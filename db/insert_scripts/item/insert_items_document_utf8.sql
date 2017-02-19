@@ -105,7 +105,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('El
 
 Tomorrow, I''ll start searching for her.', 'Ich mache mir Sorgen, obwohl sie eine gute Magierin ist und sich selbst verteidigen kann. Ich werde nicht noch länger hier sitzen und warten. 
 
-Morgen werde ich nach ihr suchen.', 'Ich mach mer Sorge, obwohl si e gueti Magierin isch und sich selber verteidige cha. Ich wird nid na langer da sitze und warte. 
+Morgen werde ich nach ihr suchen.', 'Ich mach mer Sorge, obwohl si e gueti Magierin isch und sich selber verteidige cha. Ich wird nid na länger da sitze und warte. 
 
 Morn wirdi nach ire sueche.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryTitle3', 'document', 'Day 218, 1103', 'Tag 218, 1103', 'Tag 218, 1103');

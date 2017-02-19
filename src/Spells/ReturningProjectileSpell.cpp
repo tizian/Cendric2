@@ -44,6 +44,7 @@ void ReturningProjectileSpell::checkCollisions(const sf::Vector2f& nextPosition)
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 	WorldCollisionQueryRecord rec;
+	rec.collisionDirection = CollisionDirection::Down;
 
 	bool isMovingY = nextPosition.y != getBoundingBox()->top;
 	bool isMovingX = nextPosition.x != getBoundingBox()->left;

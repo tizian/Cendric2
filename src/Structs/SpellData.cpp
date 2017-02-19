@@ -599,7 +599,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.range = 105.f;
 	windGust.boundingBox = sf::FloatRect(0.f, 0.f, windGust.range, 60.f);
 	windGust.spellOffset = sf::Vector2f(10.f, 10.f);
-	windGust.duration = sf::seconds(1);
+	windGust.duration = sf::seconds(1.f);
 	windGust.activeDuration = windGust.duration;
 	windGust.attachedToMob = true;
 	windGust.isDynamicTileEffect = true;
@@ -609,7 +609,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.strength = 1;
 
 	windGust.rangeModifierAddition = 50.f;
-	windGust.durationModifierAddition = sf::seconds(1);
+	windGust.durationModifierAddition = sf::seconds(0.5f);
 
 	return windGust;
 }
