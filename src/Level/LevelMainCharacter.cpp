@@ -106,6 +106,7 @@ void LevelMainCharacter::handleAttackInput() {
 		if (g_inputController->isKeyJustPressed(it.first)) {
 			if (m_isQuickcast) {
 				m_spellManager->setCurrentSpell(it.second);
+				m_core->setWeaponSpell(it.first);
 				m_spellManager->executeCurrentSpell(target);
 				if (m_invisibilityLevel > 0) {
 					setInvisibilityLevel(0);
@@ -113,6 +114,7 @@ void LevelMainCharacter::handleAttackInput() {
 			}
 			else {
 				m_spellManager->setAndExecuteSpell(it.second);
+				m_core->setWeaponSpell(it.first);
 			}
 			g_inputController->lockAction();
 			return;
@@ -198,7 +200,7 @@ void LevelMainCharacter::loadWeapon() {
 		}
 		m_spellManager->addSpell(newBean, spellModifiers);
 	}
-	m_spellManager->setCurrentSpell(0);
+	m_spellManager->setCurrentSpell(getSpellFromKey(m_core->getData().weaponSpell));
 
 	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
 		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();
@@ -434,4 +436,22 @@ void LevelMainCharacter::loadParticleSystem() {
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
 	m_ps->addUpdater<particles::SizeUpdater>();
+}
+
+int LevelMainCharacter::getSpellFromKey(Key key) {
+	switch (key) {
+	case Key::Chop:
+	default:
+		return 0;
+	case Key::FirstSpell:
+		return 1;
+	case Key::SecondSpell:
+		return 2;
+	case Key::ThirdSpell:
+		return 3;
+	case Key::FourthSpell:
+		return 4;
+	case Key::FifthSpell:
+		return 5;
+	}
 }

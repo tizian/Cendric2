@@ -35,6 +35,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeEquippedWeaponSlots(data);
 		savefile << writeEquippedItems(data);
 		savefile << writeWeaponConfigurations(data);
+		savefile << writeWeaponSpell(data);
 		savefile << writeQuickslots(data);
 		savefile << writeEnemiesKilled(data);
 		savefile << writeEnemiesLooted(data);
@@ -523,6 +524,10 @@ std::string CharacterCoreWriter::writeEquippedItems(const CharacterCoreData& dat
 	equipment.append(std::string(EQUIPPED_WEAPON) + ":" + data.equippedItems.at(ItemType::Equipment_weapon) + "\n");
 
 	return equipment;
+}
+
+std::string CharacterCoreWriter::writeWeaponSpell(const CharacterCoreData& data) const {
+	return std::string(WEAPON_SPELL) + ":" + std::to_string(static_cast<int>(data.weaponSpell)) + "\n";
 }
 
 std::string CharacterCoreWriter::writeWeaponConfigurations(const CharacterCoreData& data) const {

@@ -502,6 +502,10 @@ void CharacterCore::setGuild(FractionID fraction) {
 	m_data.guild = fraction;
 }
 
+void CharacterCore::setWeaponSpell(Key key) {
+	m_data.weaponSpell = key;
+}
+
 int CharacterCore::getReputation(FractionID fraction) const {
 	if (!contains(m_data.reputationProgress, fraction))
 		return 0;

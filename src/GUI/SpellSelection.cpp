@@ -4,6 +4,7 @@ SpellSelection::SpellSelection(SpellManager* manager) {
 	m_spellManager = manager;
 	m_spellManager->setSpellSelection(this);
 	reload();
+	selectSlot(m_spellManager->getSelectedSpell());
 }
 
 SpellSelection::~SpellSelection() {

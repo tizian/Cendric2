@@ -18,7 +18,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 
 The magic itself has been there as long as we can remember and we''re not entirely sure where it originates from.','Das erste, was man verstehen muss, wenn man sich mit diesem Thema beschäftigt, ist die Allumfänglichkeit der Magie. Es ist eine Energie, die durch diese Welt fliesst, durch die Erde, die Luft und durch jedes lebendige Wesen. Die Magie ist allerdings nicht gleichverteilt im Raum, sie konzentriert sich in magischen Artefakten oder an speziellen Orten.
 
-Die Magie an sich gibt es schon, so weit wir uns zurückerinnern können und wir sind uns nicht sicher, wo sie ihren Ursprung genommen hat.','Es erste womer mönd versto, wennmer üs mit dere Materie befassed, isch, dass Magie allumfänglich isch. Es isch e Energie wo dur die Welt flüsst, dur d''Erde, dur d''Luft und dur jedes lebendige Wäse. D''Magie isch allerdings nid gliichverteilt im Ruum, si konzentriert sich in magische Artefakt oder an spezielle Ort.
+Die Magie an sich gibt es schon, so weit wir uns zurückerinnern können und wir sind uns nicht sicher, wo sie ihren Ursprung genommen hat.','S''erste womer mönd versto, wennmer üs mit dere Materie befassed, isch, dass Magie allumfänglich isch. Es isch e Energie wo dur die Welt flüsst, dur d''Erde, dur d''Luft und dur jedes lebendige Wäse. D''Magie isch allerdings nid gliichverteilt im Ruum, si konzentriert sich in magische Artefakt oder an spezielle Ort.
 
 D''Magie selber gits scho, so wiit mer üs zrugg bsinne möged und mer sind üs nid sicher, wo si genau her chunt.');
 

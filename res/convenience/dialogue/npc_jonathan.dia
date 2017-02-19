@@ -462,7 +462,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_LearnedFireball2
 	translation.en:My research focuses on the old, forgotten knowledge of the first elementalists. I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
 	translation.de:Ich forsche an dem alten, vergessenen Wissen der ersten Elementarmagier. Ich habe bereits herausgefunden, dass sie früher Zauber kannten, die weit mächtiger sind, als alle Elementarmagie, die wir heute kennen.
-	translation.ch:Ich forsche am alte, vergessene Wüsse vode erste Elementarmager. Ich han scho usegfunde, das si früener viel mächtigeri Zauber kennt hend, als alli Elementarmagie, womer hüt so bruched.
+	translation.ch:Ich forsche am alte, vergessene Wüsse vode erste Elementarmagier. Ich han scho usegfunde, das si früener viel mächtigeri Zauber kennt hend, als alli Elementarmagie, womer hüt so bruched.
 	[
 		# Link node, tag is next tag
 		tag:24

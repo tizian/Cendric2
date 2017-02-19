@@ -66,6 +66,17 @@ bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCore
 	return true;
 }
 
+bool CharacterCoreReader::readWeaponSpell(char* start, char* end, CharacterCoreData& data) const {
+	char* startData = gotoNextChar(start, end, ':');
+	startData++;
+	Key x = static_cast<Key>(atoi(startData));
+	if (x <= Key::VOID || x > Key::MAX) {
+		return false;
+	}
+	data.weaponSpell = x;
+	return true;
+}
+
 bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, CharacterCoreData& data) const {
 	char* startData = gotoNextChar(start, end, ':');
 	startData++;
@@ -1084,6 +1095,10 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 		}
 		else if (strncmp(pos, WEAPON_CONFIGS, strlen(WEAPON_CONFIGS)) == 0) {
 			noError = readWeaponConfigurations(pos, end, data);
+			pos = gotoNextChar(pos, end, '\n');
+		}
+		else if (strncmp(pos, WEAPON_SPELL, strlen(WEAPON_SPELL)) == 0) {
+			noError = readWeaponSpell(pos, end, data);
 			pos = gotoNextChar(pos, end, '\n');
 		}
 		else if (strncmp(pos, QUICKSLOT, strlen(QUICKSLOT)) == 0) {

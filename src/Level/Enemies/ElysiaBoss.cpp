@@ -223,6 +223,7 @@ sf::Time ElysiaBoss::getConfiguredWaitingTime() const {
 	if (m_bossState == ElysiaBossState::Projectile) {
 		return sf::seconds(1);
 	}
+
 	return sf::seconds(0);
 }
 

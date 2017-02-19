@@ -6,6 +6,7 @@
 #include "Enums/SpellID.h"
 #include "Enums/SpellType.h"
 #include "Enums/FractionID.h"
+#include "Enums/Key.h"
 
 #include "Structs/SpellModifier.h"
 #include "Structs/AttributeData.h"
@@ -67,6 +68,7 @@ struct CharacterCoreData {
 
 	// weapon configurations
 	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>> weaponConfigurations;
+	Key weaponSpell;
 
 	// quickslot assignment
 	std::string quickSlot1;
@@ -110,6 +112,7 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, int>(),
 	std::map<std::string, int>(),
 	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>>(),
+	Key::Chop,
 	"",
-	"",
+	""
 };

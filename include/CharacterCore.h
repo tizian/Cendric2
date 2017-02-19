@@ -150,6 +150,8 @@ public:
 	void addReputation(FractionID fraction, int amount);
 	// sets a guild
 	void setGuild(FractionID fraction);
+	// sets the key for the currently selected spell.
+	void setWeaponSpell(Key key);
 	// queries the reputation for the corresponding fraction
 	int getReputation(FractionID fraction) const;
 	// is this a new character core? (new game)

@@ -37,6 +37,8 @@ public:
 	// sets the global cooldown, it is initially zero
 	void setGlobalCooldown(const sf::Time& cooldown);
 
+	int getSelectedSpell();
+
 private:
 
 	int m_currentSpell;

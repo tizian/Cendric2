@@ -171,7 +171,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Roasted Meat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_roastedmeat', 'item', 'Roasted Meat','Gebratenes Fleisch','Brotes Fleisch');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_roastedmeat', 'item', 'Roasted Meat','Gebratenes Fleisch','Brötlets Fleisch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_roastedmeat', 'item_desc', 'A juicy piece of meat, seared, just as it should be.','Ein saftiges Stück Fleisch, kurz angebraten, wie es sein soll.','Es saftigs Stück Fleisch, churz abrote, genau wes sii söt.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_roastedmeat', 'consumable', 250, 50, 4);
 INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_roastedmeat', 10, 7);
@@ -191,7 +191,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Roasted Chicken
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_chicken', 'item', 'Roasted Chicken','Gebratenes Geflügel','Brotes Poulet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_chicken', 'item', 'Roasted Chicken','Gebratenes Geflügel','Brötlets Poulet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_chicken', 'item_desc', 'Crispy outside and tender inside.','Aussen knusprig und innen zart.','Usse chnuschperig und inine zart.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_chicken', 'consumable', 450, 650, 3);
 INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical, haste) values ('fo_chicken', 5, 3, 10);

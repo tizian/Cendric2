@@ -20,6 +20,10 @@ void SpellManager::clearSpells() {
 	m_coolDownMap.clear();
 }
 
+int SpellManager::getSelectedSpell() {
+	return m_currentSpell;
+}
+
 void SpellManager::setSpellSelection(SpellSelection* selection) {
 	m_spellSelection = selection;
 }

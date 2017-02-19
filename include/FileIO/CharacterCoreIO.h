@@ -55,6 +55,7 @@ protected:
 
 	// weapon configurations
 	const char* WEAPON_CONFIGS = "weapon.configs";
+	const char* WEAPON_SPELL = "weapon.spell";
 
 	// quickslot assignment
 	const char* QUICKSLOT = "quickslot";

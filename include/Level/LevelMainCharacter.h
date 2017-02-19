@@ -69,6 +69,7 @@ private:
 
 	void loadParticleSystem();
 	void updateDamagedOverlay();
+	int getSpellFromKey(Key key);
 
 private:
 	CharacterCore* m_core;
