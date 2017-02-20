@@ -3,6 +3,113 @@
 
 #include <cstring>
 
+#define INT_AFTER_COMMA(s, i) if (!readIntAfterComma(s, &i)) return false;
+#define FLOAT_AFTER_COMMA(s, f) if (!readFloatAfterComma(s, &f)) return false;
+
+CharacterCoreReader::CharacterCoreReader() {
+	initReadMap();
+}
+
+void CharacterCoreReader::initReadMap() {
+	m_readMap.insert({ TIME_PLAYED,  &CharacterCoreReader::readTimePlayed });
+	m_readMap.insert({ SAVE_GAME_NAME,  &CharacterCoreReader::readSavegameName });
+	m_readMap.insert({ DATE_SAVED,  &CharacterCoreReader::readSavegameDate });
+	m_readMap.insert({ ATTRIBUTES,  &CharacterCoreReader::readAttributes });
+	m_readMap.insert({ MAP_ID,  &CharacterCoreReader::readMapID });
+	m_readMap.insert({ MAP_POSITION,  &CharacterCoreReader::readMapPosition });
+	m_readMap.insert({ LEVEL_ID,  &CharacterCoreReader::readLevelID });
+	m_readMap.insert({ LEVEL_POSITION,  &CharacterCoreReader::readLevelPosition });
+	m_readMap.insert({ ENEMIES_KILLED,  &CharacterCoreReader::readEnemiesKilled });
+	m_readMap.insert({ ENEMIES_LOOTED,  &CharacterCoreReader::readEnemiesLooted });
+	m_readMap.insert({ ITEMS_LOOTED,  &CharacterCoreReader::readItemsLooted });
+	m_readMap.insert({ CHESTS_LOOTED,  &CharacterCoreReader::readChestsLooted });
+	m_readMap.insert({ WAYPOINTS_UNLOCKED,  &CharacterCoreReader::readWaypointsUnlocked });
+	m_readMap.insert({ TRIGGERS_TRIGGERED,  &CharacterCoreReader::readTriggersTriggered });
+	m_readMap.insert({ TILES_EXPLORED,  &CharacterCoreReader::readTilesExplored });
+	m_readMap.insert({ QUEST_STATE,  &CharacterCoreReader::readQuestStates });
+	m_readMap.insert({ QUEST_PROGRESS_TARGET,  &CharacterCoreReader::readQuestProgressTargets });
+	m_readMap.insert({ QUEST_PROGRESS_CONDITION,  &CharacterCoreReader::readQuestProgressConditions });
+	m_readMap.insert({ QUEST_PROGRESS_DESCRIPTION,  &CharacterCoreReader::readQuestProgressDescription });
+	m_readMap.insert({ PROGRESS_CONDITION,  &CharacterCoreReader::readProgressConditions });
+	m_readMap.insert({ GOLD,  &CharacterCoreReader::readGold });
+	m_readMap.insert({ STORED_GOLD,  &CharacterCoreReader::readStoredGold });
+	m_readMap.insert({ ITEM_ID,  &CharacterCoreReader::readItemID });
+	m_readMap.insert({ STORED_ITEM_ID,  &CharacterCoreReader::readStoredItemID });
+	m_readMap.insert({ EQUIPPED_SPELLSLOT,  &CharacterCoreReader::readEquippedWeaponSlots });
+	m_readMap.insert({ EQUIPPED_WEAPON,  &CharacterCoreReader::readEquippedWeapon });
+	m_readMap.insert({ EQUIPPED_BODY,  &CharacterCoreReader::readEquippedBody });
+	m_readMap.insert({ EQUIPPED_RING_1,  &CharacterCoreReader::readEquippedRing1 });
+	m_readMap.insert({ EQUIPPED_RING_2,  &CharacterCoreReader::readEquippedRing2 });
+	m_readMap.insert({ EQUIPPED_NECK,  &CharacterCoreReader::readEquippedNeck });
+	m_readMap.insert({ EQUIPPED_BACK,  &CharacterCoreReader::readEquippedBack });
+	m_readMap.insert({ EQUIPPED_HEAD,  &CharacterCoreReader::readEquippedHead });
+	m_readMap.insert({ WEAPON_CONFIGS,  &CharacterCoreReader::readWeaponConfigurations });
+	m_readMap.insert({ WEAPON_SPELL,  &CharacterCoreReader::readWeaponSpell });
+	m_readMap.insert({ QUICKSLOT,  &CharacterCoreReader::readQuickslot });
+	m_readMap.insert({ IS_IN_LEVEL,  &CharacterCoreReader::readIsInLevel });
+	m_readMap.insert({ MERCHANT_STATE,  &CharacterCoreReader::readMerchantState });
+	m_readMap.insert({ SPELL_LEARNED,  &CharacterCoreReader::readLearnedSpells });
+	m_readMap.insert({ MODIFIER_LEARNED,  &CharacterCoreReader::readLearnedModifiers });
+	m_readMap.insert({ HINT_LEARNED,  &CharacterCoreReader::readLearnedHints });
+	m_readMap.insert({ GUILD,  &CharacterCoreReader::readGuild });
+	m_readMap.insert({ REPUTATION_PROGRESS,  &CharacterCoreReader::readReputationProgress });
+	m_readMap.insert({ WEATHER,  &CharacterCoreReader::readWeather });
+}
+
+bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
+	std::string line;
+	std::ifstream saveFile(filename);
+
+	if (!saveFile.is_open()) {
+		g_logger->logError("CharacterCoreReader", "Error at opening file " + filename);
+		return false;
+	}
+
+	std::size_t colonPos;
+	std::string tag;
+	bool noError = true;
+
+	while (std::getline(saveFile, line)) {
+		if (line.empty() || line.at(0) == COMMENT_MARKER) continue;
+
+		colonPos = line.find(':');
+		if (colonPos == std::string::npos) continue;
+
+		tag = line.substr(0, colonPos);
+
+		auto mapIt = m_readMap.find(tag);
+
+		if (mapIt == m_readMap.end()) {
+			g_logger->logError("CharacterCoreReader", "Unknown tag found in save file: " + tag);
+			return false;
+		}
+
+		line = line.substr(colonPos + 1);
+		if (line.empty()) {
+			continue;
+		}
+
+		if (!(*this.*(mapIt->second))(line, data)) {
+			noError = false;
+			break;
+		}
+
+		if (onlySaveGame && m_stopReading && noError) {
+			saveFile.close();
+			return true;
+		}
+	}
+
+	saveFile.close();
+
+	// check data
+	if (!noError || !checkData(data)) {
+		return false;
+	}
+
+	return true;
+}
+
 bool CharacterCoreReader::checkData(CharacterCoreData& data) const {
 	if (data.currentMapPosition.x < 0 || data.currentMapPosition.y < 0) {
 		g_logger->logError("CharacterCoreReader", "Error in savegame data : map position negative");
@@ -42,34 +149,20 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const {
 	return true;
 }
 
-bool CharacterCoreReader::readTimePlayed(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	int x = atoi(startData);
-	if (x < 0) {
-		return false;
-	}
+bool CharacterCoreReader::readTimePlayed(std::string& line, CharacterCoreData& data) const {
+	int x;
+	if (!readPositiveInt(line, &x)) return false;
 	data.timePlayed = sf::seconds(static_cast<float>(x));
 	return true;
 }
 
-bool CharacterCoreReader::readSavegameName(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string name(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	name = name.substr(0, count);
-	data.saveGameName = name;
+bool CharacterCoreReader::readSavegameName(std::string& line, CharacterCoreData& data) const {
+	data.saveGameName = line;
 	return true;
 }
 
-bool CharacterCoreReader::readWeaponSpell(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	Key x = static_cast<Key>(atoi(startData));
+bool CharacterCoreReader::readWeaponSpell(std::string& line, CharacterCoreData& data) const {
+	Key x = static_cast<Key>(stoi(line));
 	if (x <= Key::VOID || x > Key::MAX) {
 		return false;
 	}
@@ -77,53 +170,45 @@ bool CharacterCoreReader::readWeaponSpell(char* start, char* end, CharacterCoreD
 	return true;
 }
 
-bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
+bool CharacterCoreReader::readWeaponConfigurations(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(';');
+	if (pos == std::string::npos) return false;
 
-	std::string itemID(startData);
-	int count = countToNextChar(startData, end, ';');
-	if (count == -1) {
-		return false;
-	}
-	itemID = itemID.substr(0, count);
+	std::string itemID = line.substr(0, pos);
+	std::vector<WeaponSlot> equippedWeaponSlots;
 
-	char* endData = gotoNextChar(startData, end, '\n');
-	if (endData == nullptr) return false;
+	line = line.substr(pos + 1);
 
-	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;
+	while (!line.empty()) {
+		pos = line.find(';');
 
-	while (startData != nullptr && startData < endData) {
-		startData = gotoNextChar(startData, endData, ';');
-		startData++;
-
-		if (*startData == '\n') break;
-
-		SpellID spell = static_cast<SpellID>(atoi(startData));
+		if (pos == std::string::npos || line.size() == 1) break;
+		
+		SpellID spell = static_cast<SpellID>(stoi(line));
 		if (spell < SpellID::VOID || spell >= SpellID::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + std::to_string(static_cast<int>(spell)));
 			return false;
 		}
-		
-		char* startSpellData = gotoNextChar(startData, endData, ',');
 
-		char* endSpellData = gotoNextChar(startData, endData, ';');
-		if (endSpellData == nullptr) return false;
+		size_t startSpellData = line.find(',');
+		size_t endSpellData = line.find(';');
 
-		if (startSpellData == nullptr || startSpellData > endSpellData) continue;
+		if (endSpellData == std::string::npos) return false;
+		if (startSpellData == std::string::npos || startSpellData > endSpellData) continue;
 
 		std::vector<SpellModifier> modifiers;
 
-		while (startSpellData != nullptr && startSpellData < endSpellData) {
-			startSpellData++;
-			SpellModifierType type = static_cast<SpellModifierType>(atoi(startSpellData));
+		while (startSpellData != std::string::npos && startSpellData < endSpellData) {
+			line = line.substr(startSpellData + 1);
+			SpellModifierType type = static_cast<SpellModifierType>(std::stoi(line));
 			if (type < SpellModifierType::VOID || type >= SpellModifierType::MAX) {
 				g_logger->logError("CharacterCoreReader", "Spell Modifier type not recognized: " + std::to_string(static_cast<int>(type)));
 				return false;
 			}
-			startSpellData = gotoNextChar(startSpellData, endSpellData, ',');
-			startSpellData++;
-			int level = atoi(startSpellData);
+
+			startSpellData = line.find(',');
+			line = line.substr(startSpellData + 1);
+			int level = std::stoi(line);
 			if (level < 1 || level > 3) {
 				if (type == SpellModifierType::VOID) {
 					level = 0;
@@ -133,16 +218,18 @@ bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, Chara
 					return false;
 				}
 			}
+
 			SpellModifier modifier;
 			modifier.type = type;
 			modifier.level = level;
 			modifiers.push_back(modifier);
 
-			startSpellData = gotoNextChar(startSpellData, endSpellData, ',');
+			startSpellData = line.find(',');
+			endSpellData = line.find(';');
 		}
 
-		equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(spell, modifiers));
-
+		line = line.substr(endSpellData + 1);
+		equippedWeaponSlots.push_back(WeaponSlot(spell, modifiers));
 	}
 
 	data.weaponConfigurations[itemID] = equippedWeaponSlots;
@@ -150,309 +237,190 @@ bool CharacterCoreReader::readWeaponConfigurations(char* start, char* end, Chara
 	return true;
 }
 
-bool CharacterCoreReader::readQuickslot(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	int nr = atoi(startData);
+bool CharacterCoreReader::readQuickslot(std::string& line, CharacterCoreData& data) const {
+	int nr = std::stoi(line);
 	if (nr < 1 || nr > 2) {
 		g_logger->logError("CharacterCoreReader::readQuickslot", "Quickslot nr not valid.");
 		return false;
 	}
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	std::string item(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	item = item.substr(0, count);
+
+	std::size_t pos = line.find(',');
+
+	if (pos == std::string::npos) return false;
+	line = line.substr(pos + 1);
 
 	if (nr == 1) {
-		data.quickSlot1 = item;
+		data.quickSlot1 = line;
 	}
 	else {
-		data.quickSlot2 = item;
+		data.quickSlot2 = line;
 	}
 	return true;
 }
 
-bool CharacterCoreReader::readSavegameDate(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	data.dateSaved = (atol(startData));
+bool CharacterCoreReader::readSavegameDate(std::string& line, CharacterCoreData& data) const {
+	data.dateSaved = (std::stol(line));
+	const_cast<bool&>(m_stopReading) = true;
 	return true;
 }
 
-bool CharacterCoreReader::readGold(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	data.gold = atoi(startData);
+bool CharacterCoreReader::readGold(std::string& line, CharacterCoreData& data) const {
+	return readPositiveInt(line, &data.gold);
+}
+
+bool CharacterCoreReader::readStoredGold(std::string& line, CharacterCoreData& data) const {
+	return readPositiveInt(line, &data.storedGold);
+}
+
+bool CharacterCoreReader::readMapID(std::string& line, CharacterCoreData& data) const {
+	data.currentMap = line;
 	return true;
 }
 
-bool CharacterCoreReader::readStoredGold(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	data.storedGold = atoi(startData);
+bool CharacterCoreReader::readMapPosition(std::string& line, CharacterCoreData& data) const {
+	data.currentMapPosition.x = static_cast<float>(std::stof(line));
+	FLOAT_AFTER_COMMA(line, data.currentMapPosition.y);
 	return true;
 }
 
-bool CharacterCoreReader::readMapID(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string id(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	id = id.substr(0, count);
-	data.currentMap = id;
+bool CharacterCoreReader::readLevelID(std::string& line, CharacterCoreData& data) const {
+	data.currentLevel = line;
 	return true;
 }
 
-bool CharacterCoreReader::readMapPosition(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	float x = static_cast<float>(atof(startData));
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float y = static_cast<float>(atof(startData));
-	data.currentMapPosition = sf::Vector2f(x, y);
+bool CharacterCoreReader::readLevelPosition(std::string& line, CharacterCoreData& data) const {
+	data.currentLevelPosition.x = static_cast<float>(std::stof(line));
+	FLOAT_AFTER_COMMA(line, data.currentLevelPosition.y);
 	return true;
 }
 
-bool CharacterCoreReader::readLevelID(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string id(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	id = id.substr(0, count);
-	data.currentLevel = id;
+bool CharacterCoreReader::readAttributes(std::string& line, CharacterCoreData& data) const {
+	data.attributes.maxHealthPoints = std::stoi(line);
+	INT_AFTER_COMMA(line, data.attributes.healthRegenerationPerS);
+	INT_AFTER_COMMA(line, data.attributes.haste);
+	INT_AFTER_COMMA(line, data.attributes.critical);
+	INT_AFTER_COMMA(line, data.attributes.damagePhysical);
+	INT_AFTER_COMMA(line, data.attributes.damageFire);
+	INT_AFTER_COMMA(line, data.attributes.damageIce);
+	INT_AFTER_COMMA(line, data.attributes.damageShadow);
+	INT_AFTER_COMMA(line, data.attributes.damageLight);
+	INT_AFTER_COMMA(line, data.attributes.resistancePhysical);
+	INT_AFTER_COMMA(line, data.attributes.resistanceFire);
+	INT_AFTER_COMMA(line, data.attributes.resistanceIce);
+	INT_AFTER_COMMA(line, data.attributes.resistanceShadow);
+	INT_AFTER_COMMA(line, data.attributes.resistanceLight);
 	return true;
 }
 
-bool CharacterCoreReader::readLevelPosition(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	float x = static_cast<float>(atof(startData));
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	float y = static_cast<float>(atof(startData));
-	data.currentLevelPosition = sf::Vector2f(x, y);
-	return true;
-}
+bool CharacterCoreReader::readItemID(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-bool CharacterCoreReader::readAttributes(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	data.attributes.maxHealthPoints = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.healthRegenerationPerS = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.haste = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.critical = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.damagePhysical = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.damageFire = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.damageIce = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.damageShadow = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.damageLight = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.resistancePhysical = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.resistanceFire = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.resistanceIce = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.resistanceShadow = atoi(startData);
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	data.attributes.resistanceLight = atoi(startData);
-	return true;
-}
+	std::string id = line.substr(0, pos);
+	int amount = 0;
+	INT_AFTER_COMMA(line, amount);
+	if (amount <= 0) return false;
 
-bool CharacterCoreReader::readItemID(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string id(startData);
-	int count = countToNextChar(startData, end, ',');
-	if (count == -1) {
-		return false;
-	}
-	id = id.substr(0, count);
-
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	int amount = atoi(startData);
 	data.items.insert({ id, amount });
 	return true;
 }
 
-bool CharacterCoreReader::readStoredItemID(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string id(startData);
-	int count = countToNextChar(startData, end, ',');
-	if (count == -1) {
-		return false;
-	}
-	id = id.substr(0, count);
+bool CharacterCoreReader::readStoredItemID(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	int amount = atoi(startData);
+	std::string id = line.substr(0, pos);
+	int amount = 0;
+	INT_AFTER_COMMA(line, amount);
+	if (amount <= 0) return false;
+
 	data.storedItems.insert({ id, amount });
 	return true;
 }
 
-bool CharacterCoreReader::readIsInLevel(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	data.isInLevel = atoi(startData) == 1;
+bool CharacterCoreReader::readIsInLevel(std::string& line, CharacterCoreData& data) const {
+	data.isInLevel = std::stoi(line) == 1;
 	return true;
 }
 
-bool CharacterCoreReader::readWeather(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	endData++;
-	startData = gotoNextChar(start, endData, ':');
-	if (startData == nullptr) {
-		return false;
-	}
-	startData++;
+bool CharacterCoreReader::readWeather(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-	std::string id(startData);
-	int count = countToNextChar(startData, end, ',');
-	if (count == -1) {
-		return false;
-	}
-	id = id.substr(0, count);
+	std::string id = line.substr(0, pos);
+	float dimming = 0.f;
 
-	startData = gotoNextChar(start, endData, ',');
-	startData++;
-
-	float dimming = (float)(atof(startData));
+	FLOAT_AFTER_COMMA(line, dimming);
 	if (dimming < 0.f || dimming > 1.f) {
 		g_logger->logError("CharacterCoreReader", "Weather could not be read: Dimming has to be between 0.f and 1.f!");
 		return false;
 	}
 
-	startData = gotoNextChar(startData, endData, ',');
+	pos = line.find(',');
+	if (pos == std::string::npos) return false;
 
-	std::string weather = "";
-	if (startData != NULL) {
-		startData++;
-		std::string name(startData);
-		count = countToNextChar(startData, endData, '\n');
-		if (count == -1) {
-			return false;
-		}
-		weather = name.substr(0, count);
-	}
+	line = line.substr(pos + 1);
 
 	WeatherData weatherData;
 	weatherData.dimming = dimming;
-	weatherData.weather = weather;
+	weatherData.weather = line;
 
 	data.currentWeather.insert({ id, weatherData });
 	return true;
 }
 
-bool CharacterCoreReader::readMerchantState(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	endData++;
-	startData = gotoNextChar(start, endData, ':');
-	startData++;
+bool CharacterCoreReader::readMerchantState(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-	std::string id(startData);
-	int count = countToNextChar(startData, end, ',');
-	if (count == -1) {
-		return false;
-	}
-	id = id.substr(0, count);
-
-	startData = gotoNextChar(start, endData, ',');
-
+	std::string id = line.substr(0, pos);
 	std::map<std::string, int> wares;
-	while (startData != NULL) {
-		startData++;
-		std::string name(startData);
-		count = countToNextChar(startData, endData, ',');
-		if (count == -1) {
-			return false;
-		}
-		name = name.substr(0, count);
 
-		startData = gotoNextChar(startData, endData, ',');
-		startData++;
+	line = line.substr(pos + 1);
 
-		int amount = atoi(startData);
-		if (amount <= 0) {
-			return false;
-		}
+	pos = line.find(',');
+
+	while (pos != std::string::npos) {
+		std::string name = line.substr(0, pos);
+		int amount;
+		INT_AFTER_COMMA(line, amount);
+
+		if (amount <= 0) return false;
 
 		wares.insert({ name, amount });
-		startData = gotoNextChar(startData, endData, ',');
+		pos = line.find(',');
+
+		if (pos == std::string::npos) {
+			break;
+		}
+
+		line = line.substr(pos + 1);
+		pos = line.find(',');
 	}
 
 	data.merchantStates.insert({ id, wares });
 	return true;
 }
 
-bool CharacterCoreReader::readQuestStates(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string questID(startData);
-	int count = countToNextChar(startData, end, ',');
-	if (count == -1) {
-		return false;
-	}
-	questID = questID.substr(0, count);
+bool CharacterCoreReader::readQuestStates(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	QuestState state = static_cast<QuestState>(atoi(startData));
+	std::string questID = line.substr(0, pos);
+	int questState;
+	INT_AFTER_COMMA(line, questState);
+
+	QuestState state = static_cast<QuestState>(questState);
 	if (state <= QuestState::VOID || state >= QuestState::MAX) {
-		g_logger->logError("CharacterCoreReader", "Quest State not recognized: " + std::to_string(static_cast<int>(state)));
+		g_logger->logError("CharacterCoreReader", "Quest State not recognized: " + std::to_string(questState));
 		return false;
 	}
 	data.questStates.insert({ questID, state });
 	return true;
 }
 
-bool CharacterCoreReader::readGuild(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string fractionName(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	fractionName = fractionName.substr(0, count);
-
-	FractionID id = resolveFractionID(fractionName);
+bool CharacterCoreReader::readGuild(std::string& line, CharacterCoreData& data) const {
+	FractionID id = resolveFractionID(line);
 	if (id == FractionID::VOID) {
 		return true;
 	}
@@ -460,15 +428,11 @@ bool CharacterCoreReader::readGuild(char* start, char* end, CharacterCoreData& d
 	return true;
 }
 
-bool CharacterCoreReader::readReputationProgress(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string fractionName(startData);
-	int count = countToNextChar(startData, end, ',');
-	if (count == -1) {
-		return false;
-	}
-	fractionName = fractionName.substr(0, count);
+bool CharacterCoreReader::readReputationProgress(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
+
+	std::string fractionName = line.substr(0, pos);
 
 	FractionID id = resolveFractionID(fractionName);
 	if (id == FractionID::VOID) {
@@ -476,10 +440,8 @@ bool CharacterCoreReader::readReputationProgress(char* start, char* end, Charact
 		return true;
 	}
 
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	
-	int reputation = atoi(startData);
+	int reputation;
+	INT_AFTER_COMMA(line, reputation);
 	if (reputation < 0 || reputation > 100) {
 		g_logger->logError("CharacterCoreReader", "Reputation for " + fractionName + " could not be read, it has to be between 0 and 100");
 		return false;
@@ -489,219 +451,161 @@ bool CharacterCoreReader::readReputationProgress(char* start, char* end, Charact
 	return true;
 }
 
-bool CharacterCoreReader::readQuestProgressConditions(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	endData++;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string questID(startData);
-	int count = countToNextChar(startData, endData, ',');
-	if (count == -1) {
-		return false;
-	}
-	questID = questID.substr(0, count);
+bool CharacterCoreReader::readQuestProgressConditions(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-	startData = gotoNextChar(startData, endData, ',');
-	startData++;
+	std::string questID = line.substr(0, pos);
+	line = line.substr(pos + 1);
 
 	std::set<std::string> conditions;
-	while (startData != NULL) {
-		std::string condition(startData);
-		count = countToNextChar(startData, endData, ',');
-		if (count == -1) {
-			count = countToNextChar(startData, endData, '\n');
-			if (count == -1) {
-				return false;
-			}
-			conditions.insert(condition.substr(0, count));
+	while (!line.empty()) {
+		pos = line.find(',');
+
+		if (pos == std::string::npos) {
+			conditions.insert(line);
 			break;
 		}
-		conditions.insert(condition.substr(0, count));
-		startData = gotoNextChar(startData, endData, ',');
-		startData++;
+
+		conditions.insert(line.substr(0, pos));
+		line = line.substr(pos + 1);
 	}
 
 	data.questConditionProgress.insert({ questID, conditions });
 	return true;
 }
 
-bool CharacterCoreReader::readQuestProgressDescription(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	endData++;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string questID(startData);
-	int count = countToNextChar(startData, endData, ',');
-	if (count == -1) {
-		return false;
-	}
-	questID = questID.substr(0, count);
+bool CharacterCoreReader::readQuestProgressDescription(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-	startData = gotoNextChar(startData, endData, ',');
-	startData++;
+	std::string questID = line.substr(0, pos);
+	line = line.substr(pos + 1);
 
 	std::set<int> descriptions;
-	while (startData != NULL) {
-		std::string description(startData);
-		count = countToNextChar(startData, endData, ',');
-		if (count == -1) {
-			count = countToNextChar(startData, endData, '\n');
-			if (count == -1) {
-				return false;
-			}
+	while (!line.empty()) {
 
-			description = description.substr(0, count);
-			int descriptionID = atoi(description.c_str());
-			if (descriptionID < 1) {
-				g_logger->logError("CharacterCoreReader", "Cannot insert quest description id:" + description);
-				return false;
-			}
-			descriptions.insert(descriptionID);
-			break;
-		}
-		description = description.substr(0, count);
-		int descriptionID = atoi(description.c_str());
-		if (descriptionID < 1) {
-			g_logger->logError("CharacterCoreReader", "Cannot insert quest description id:" + description);
+		int desc = std::stoi(line);
+		if (desc < 1) {
+			g_logger->logError("CharacterCoreReader", "Cannot insert quest description id:" + desc);
 			return false;
 		}
-		descriptions.insert(descriptionID);
-		startData = gotoNextChar(startData, endData, ',');
-		startData++;
+
+		descriptions.insert(desc);
+
+		pos = line.find(',');
+		if (pos == std::string::npos) {
+			break;
+		}
+		line = line.substr(pos + 1);
 	}
 
 	data.questDescriptionProgress.insert({ questID, descriptions });
 	return true;
 }
 
-bool CharacterCoreReader::readProgressConditions(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	endData++;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string progressType(startData);
-	int count = countToNextChar(startData, endData, ',');
-	if (count == -1) {
-		return false;
-	}
-	progressType = progressType.substr(0, count);
+bool CharacterCoreReader::readProgressConditions(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
+
+	std::string progressType = line.substr(0, pos);
+	line = line.substr(pos + 1);
 
 	if (contains(data.conditionProgress, progressType)) {
 		g_logger->logError("CharacterCoreReader", "Duplicate condition progress type encountered: " + progressType);
 		return false;
 	}
 
-	startData = gotoNextChar(startData, endData, ',');
-	
 	std::set<std::string> conditions;
-	while (startData != NULL) {
-		std::string condition(startData);
-		int count = countToNextChar(startData, endData, ',');
-		if (count == -1) {
-			count = countToNextChar(startData, endData, '\n');
-			if (count == -1) {
-				return false;
-			}
-			conditions.insert(condition.substr(0, count));
+	while (!line.empty()) {
+		pos = line.find(',');
+
+		if (pos == std::string::npos) {
+			conditions.insert(line);
 			break;
 		}
-		condition = condition.substr(0, count);
-		if (!condition.empty()) conditions.insert(condition);
-		startData = gotoNextChar(startData, endData, ',');
-		startData++;
+
+		conditions.insert(line.substr(0, pos));
+		line = line.substr(pos + 1);
 	}
 
 	data.conditionProgress.insert({ progressType, conditions });
 	return true;
 }
 
-bool CharacterCoreReader::readQuestProgressTargets(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	endData++;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string questID(startData);
-	int count = countToNextChar(startData, endData, ',');
-	if (count == -1) {
-		return false;
-	}
-	questID = questID.substr(0, count);
+bool CharacterCoreReader::readQuestProgressTargets(std::string& line, CharacterCoreData& data) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
 
-	startData = gotoNextChar(startData, endData, ',');
+	std::string questID = line.substr(0, pos);
+	line = line.substr(pos + 1);
+
+	pos = line.find(',');
 
 	std::map<std::string, int> targets;
-	while (startData != NULL) {
-		startData++;
-		std::string name(startData);
-		count = countToNextChar(startData, endData, ',');
-		if (count == -1) {
-			return false;
-		}
-		name = name.substr(0, count);
+	while (pos != std::string::npos) {
+		std::string name = line.substr(0, pos);
+		int amount;
 
-		startData = gotoNextChar(startData, endData, ',');
-		startData++;
+		INT_AFTER_COMMA(line, amount);
 
-		int amount = atoi(startData);
-		if (amount == 0) {
+		if (amount <= 0) {
 			return false;
 		}
 
 		targets.insert({ name, amount });
-		startData = gotoNextChar(startData, endData, ',');
+
+		pos = line.find(',');
+
+		if (pos == std::string::npos) {
+			break;
+		}
+
+		line = line.substr(pos + 1);
+		pos = line.find(',');
 	}
 
 	data.questTargetProgress.insert({ questID, targets });
 	return true;
 }
 
-bool CharacterCoreReader::readLearnedSpells(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	startData = gotoNextChar(start, endData, ':');
-	startData++;
-
-	SpellType type = static_cast<SpellType>(atoi(startData));
+bool CharacterCoreReader::readLearnedSpells(std::string& line, CharacterCoreData& data) const {
+	SpellType type = static_cast<SpellType>(std::stoi(line));
 	if (type <= SpellType::VOID || type >= SpellType::MAX) {
 		g_logger->logError("CharacterCoreReader", "Spell type not recognized: " + std::to_string(static_cast<int>(type)));
 		return false;
 	}
 
-	startData = gotoNextChar(startData, endData, ',');
-
 	std::set<SpellID> learnedSpells;
-	while (startData != NULL) {
-		startData++;
-		SpellID id = static_cast<SpellID>(atoi(startData));
+
+	std::size_t pos = line.find(',');
+
+	while (pos != std::string::npos) {
+		line = line.substr(pos + 1);
+
+		SpellID id = static_cast<SpellID>(std::stoi(line));
 		if (id <= SpellID::VOID || id >= SpellID::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell id not recognized: " + std::to_string(static_cast<int>(id)));
 			return false;
 		}
 		learnedSpells.insert(id);
-		startData = gotoNextChar(startData, endData, ',');
+		pos = line.find(',');
 	}
 
 	data.spellsLearned.insert({ type, learnedSpells });
 	return true;
 }
 
-bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, CharacterCoreData& data) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-
-	SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
+bool CharacterCoreReader::readLearnedModifiers(std::string& line, CharacterCoreData& data) const {
+	SpellModifierType type = static_cast<SpellModifierType>(std::stoi(line));
 	if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX) {
 		g_logger->logError("CharacterCoreReader", "Spell modifier type not recognized: " + std::to_string(static_cast<int>(type)));
 		return false;
 	}
 
-	startData = gotoNextChar(startData, end, ',');
-	startData++;
-	int level = atoi(startData);
+	int level;
+	INT_AFTER_COMMA(line, level);
+
 	if (level < 1 || level > 3) {
 		g_logger->logError("CharacterCoreReader", "Spell modifier type level is not between 1 and 3");
 		return false;
@@ -711,65 +615,66 @@ bool CharacterCoreReader::readLearnedModifiers(char* start, char* end, Character
 	return true;
 }
 
-bool CharacterCoreReader::readLearnedHints(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	char* endData = gotoNextChar(start, end, '\n');
-	endData++;
-	startData = gotoNextChar(start, endData, ':');
-	startData++;
-
-	std::string hintKey(startData);
-	int count = countToNextChar(startData, endData, '\n');
-	if (count == -1) {
-		return false;
-	}
-	hintKey = hintKey.substr(0, count);
-
-	data.hintsLearned.push_back(hintKey);
+bool CharacterCoreReader::readLearnedHints(std::string& line, CharacterCoreData& data) const {
+	data.hintsLearned.push_back(line);
 	return true;
 }
 
-bool CharacterCoreReader::readEquippedItem(char* start, char* end, CharacterCoreData& data, ItemType type) const {
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
-	std::string item(startData);
-	int count = countToNextChar(startData, end, '\n');
-	if (count == -1) {
-		return false;
-	}
-	item = item.substr(0, count);
-	data.equippedItems.at(type) = item;
+bool CharacterCoreReader::readEquippedWeapon(std::string& line, CharacterCoreData& data) const {
+	data.equippedItems.at(ItemType::Equipment_weapon) = line;
 	return true;
 }
 
-bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, CharacterCoreData& data) const {
-	char* startData;
-	startData = gotoNextChar(start, end, ':');
-	startData++;
+bool CharacterCoreReader::readEquippedHead(std::string& line, CharacterCoreData& data) const {
+	data.equippedItems.at(ItemType::Equipment_head) = line;
+	return true;
+}
 
-	SpellID spell = static_cast<SpellID>(atoi(startData));
+bool CharacterCoreReader::readEquippedNeck(std::string& line, CharacterCoreData& data) const {
+	data.equippedItems.at(ItemType::Equipment_neck) = line;
+	return true;
+}
+	
+bool CharacterCoreReader::readEquippedBody(std::string& line, CharacterCoreData& data) const {
+	data.equippedItems.at(ItemType::Equipment_body) = line;
+	return true;
+}
+
+bool CharacterCoreReader::readEquippedBack(std::string& line, CharacterCoreData& data) const {
+	data.equippedItems.at(ItemType::Equipment_back) = line;
+	return true;
+}
+
+bool CharacterCoreReader::readEquippedRing1(std::string& line, CharacterCoreData& data) const {
+	data.equippedItems.at(ItemType::Equipment_ring_1) = line;
+	return true;
+}
+
+bool CharacterCoreReader::readEquippedRing2(std::string& line, CharacterCoreData& data) const {
+	data.equippedItems.at(ItemType::Equipment_ring_2) = line;
+	return true;
+}
+
+bool CharacterCoreReader::readEquippedWeaponSlots(std::string& line, CharacterCoreData& data) const {
+	SpellID spell = static_cast<SpellID>(std::stoi(line));
 	if (spell < SpellID::VOID || spell >= SpellID::MAX) {
 		g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + std::to_string(static_cast<int>(spell)));
 		return false;
 	}
 
-	char* endData = gotoNextChar(startData, end, '\n');
-	if (endData == nullptr) return false;
-
 	std::vector<SpellModifier> modifiers;
+	std::size_t pos = line.find(',');
 
-	startData = gotoNextChar(startData, end, ',');
-	while (startData != nullptr && startData < endData) {
-		startData++;
-		SpellModifierType type = static_cast<SpellModifierType>(atoi(startData));
+	while (pos != std::string::npos) {
+		line = line.substr(pos + 1);
+		SpellModifierType type = static_cast<SpellModifierType>(std::stoi(line));
 		if (type < SpellModifierType::VOID || type >= SpellModifierType::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell Modifier type not recognized: " + std::to_string(static_cast<int>(type)));
 			return false;
 		}
-		startData = gotoNextChar(startData, end, ',');
-		startData++;
-		int level = atoi(startData);
+
+		int level;
+		INT_AFTER_COMMA(line, level);
 		if (level < 1 || level > 3) {
 			if (type == SpellModifierType::VOID) {
 				level = 0;
@@ -779,12 +684,13 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 				return false;
 			}
 		}
+
 		SpellModifier modifier;
 		modifier.type = type;
 		modifier.level = level;
 		modifiers.push_back(modifier);
 
-		startData = gotoNextChar(startData, end, ',');
+		pos = line.find(',');
 	}
 
 	data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(spell, modifiers));
@@ -792,371 +698,107 @@ bool CharacterCoreReader::readEquippedWeaponSlots(char* start, char* end, Charac
 	return true;
 }
 
-bool CharacterCoreReader::readLevelStateLayer(char* start, char* end, std::set<int>& layer, std::string& id) const {
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	char* endData = gotoNextChar(startData, end, '\n');
-	endData++;
-	std::string levelID(startData);
-	int count = countToNextChar(startData, endData, ',');
-	int count2 = countToNextChar(startData, endData, '\n');
-	if (count == -1 && count2 == -1) {
-		return false;
-	}
-
-	if (count != -1) {
-		id = levelID.substr(0, count);
-		startData = gotoNextChar(start, endData, ',');
-		startData++;
-
-		while (startData != NULL) {
-			layer.insert(atoi(startData));
-			startData = gotoNextChar(startData, endData, ',');
-			if (startData != NULL) {
-				startData++;
-			}
-		}
-	}
-	else {
-		id = levelID.substr(0, count2);
+bool CharacterCoreReader::readLevelStateLayer(std::string& line, std::set<int>& layer, std::string& id) const {
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos) {
+		id = line;
 		layer.clear();
+		return true;
 	}
+
+	id = line.substr(0, pos);
+
+	while (pos != std::string::npos) {
+		line = line.substr(pos + 1);
+		layer.insert(std::stoi(line));
+		pos = line.find(',');
+	}
+
 	return true;
 }
 
-bool CharacterCoreReader::readEnemiesKilled(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readEnemiesKilled(std::string& line, CharacterCoreData& data) const {
 	std::set<int> layer;
 	std::string id;
-	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.enemiesKilled.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readEnemiesLooted(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readEnemiesLooted(std::string& line, CharacterCoreData& data) const {
 	std::set<int> layer;
 	std::string id;
-	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.enemiesLooted.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readItemsLooted(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readItemsLooted(std::string& line, CharacterCoreData& data) const {
 	std::set<int> layer;
 	std::string id;
-	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.itemsLooted.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readChestsLooted(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readChestsLooted(std::string& line, CharacterCoreData& data) const {
 	std::set<int> layer;
 	std::string id;
-	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.chestsLooted.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readWaypointsUnlocked(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readWaypointsUnlocked(std::string& line, CharacterCoreData& data) const {
 	std::set<int> layer;
 	std::string id;
-	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.waypointsUnlocked.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readTriggersTriggered(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readTriggersTriggered(std::string& line, CharacterCoreData& data) const {
 	std::set<int> layer;
 	std::string id;
-	if (!readLevelStateLayer(start, end, layer, id)) return false;
+	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.triggersTriggered.insert({ id, layer });
 	return true;
 }
 
-bool CharacterCoreReader::readTilesExplored(char* start, char* end, CharacterCoreData& data) const {
+bool CharacterCoreReader::readTilesExplored(std::string& line, CharacterCoreData& data) const {
 	std::vector<bool> tiles;
-	std::string id;
 
-	char* startData = gotoNextChar(start, end, ':');
-	startData++;
-	char* endData = gotoNextChar(startData, end, '\n');
-	endData++;
-	std::string levelID(startData);
-	int count = countToNextChar(startData, endData, ',');
-	int count2 = countToNextChar(startData, endData, '\n');
-	if (count == -1 && count2 == -1) {
-		return false;
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos || pos == 0) return false;
+
+	std::string levelID = line.substr(0, pos);
+	line = line.substr(pos + 1);
+
+	pos = line.find(',');
+	if (pos == std::string::npos) return false;
+
+	CBits byte;
+
+	for (int i = 0; i < static_cast<int>(pos); ++i) {
+		byte.byte = line.at(i);
+
+		tiles.push_back(byte.bits.b0);
+		tiles.push_back(byte.bits.b1);
+		tiles.push_back(byte.bits.b2);
+		tiles.push_back(byte.bits.b3);
+		tiles.push_back(byte.bits.b4);
+		tiles.push_back(byte.bits.b5);
+		tiles.push_back(byte.bits.b6);
+		tiles.push_back(byte.bits.b7);
 	}
 
-	if (count != -1) {
-		id = levelID.substr(0, count);
-		startData = gotoNextChar(start, endData, ',');
-		startData++;
-		count = countToNextChar(startData, endData, ',');
-		CBits byte;
+	line = line.substr(pos + 1);
 
-		for (int i = 0; i < count; ++i) {
-			byte.byte = *startData;
-
-			tiles.push_back(byte.bits.b0);
-			tiles.push_back(byte.bits.b1);
-			tiles.push_back(byte.bits.b2);
-			tiles.push_back(byte.bits.b3);
-			tiles.push_back(byte.bits.b4);
-			tiles.push_back(byte.bits.b5);
-			tiles.push_back(byte.bits.b6);
-			tiles.push_back(byte.bits.b7);
-			startData++;
-		}
-
-		startData = gotoNextChar(startData, endData, ',');
-		startData = gotoNextChar(startData, endData);
-
-		while (startData != NULL) {
-			tiles.push_back(atoi(startData) == 1);
-			startData = gotoNextChar(startData, endData);
-		}
-	}
-	else {
-		id = levelID.substr(0, count2);
-		tiles.clear();
+	while (!line.empty()) {
+		tiles.push_back(std::stoi(line) == 1);
+		line.erase(0, 1);
 	}
 
-	data.tilesExplored.insert({ id, tiles });
-	return true;
-}
-
-bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
-	FILE* savFile;
-	savFile = fopen(filename.c_str(), "r");
-
-	if (savFile == NULL) {
-		g_logger->logError("CharacterCoreReader", "Error at opening file " + filename);
-		return false;
-	}
-
-	// obtain file size
-	long fileSize;
-	long returnedFileSize;
-
-	fseek(savFile, 0, SEEK_END);
-	fileSize = ftell(savFile);
-	rewind(savFile);
-
-	// huge buffer array
-	char* charBuffer = new char[fileSize];
-
-	// fill buffer array
-	returnedFileSize = static_cast<long>(fread(charBuffer, sizeof(char), fileSize, savFile));
-
-	long bufferContentLength = returnedFileSize;
-
-	char* pos = charBuffer;
-	char* end = charBuffer + bufferContentLength;
-
-	bool noError = true;
-
-	// read defined tags
-	while (pos < end) {
-		if (*pos == COMMENT_MARKER || *pos == '\n') {
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, TIME_PLAYED, strlen(TIME_PLAYED)) == 0) {
-			noError = readTimePlayed(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, SAVE_GAME_NAME, strlen(SAVE_GAME_NAME)) == 0) {
-			noError = readSavegameName(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, DATE_SAVED, strlen(DATE_SAVED)) == 0) {
-			noError = readSavegameDate(pos, end, data);
-			if (onlySaveGame) {
-				std::fclose(savFile);
-				delete[] charBuffer;
-				return noError;
-			}
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, ATTRIBUTES, strlen(ATTRIBUTES)) == 0) {
-			noError = readAttributes(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, MAP_ID, strlen(MAP_ID)) == 0) {
-			noError = readMapID(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, MAP_POSITION, strlen(MAP_POSITION)) == 0) {
-			noError = readMapPosition(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, LEVEL_ID, strlen(LEVEL_ID)) == 0) {
-			noError = readLevelID(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, LEVEL_POSITION, strlen(LEVEL_POSITION)) == 0) {
-			noError = readLevelPosition(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, ENEMIES_KILLED, strlen(ENEMIES_KILLED)) == 0) {
-			noError = readEnemiesKilled(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, ENEMIES_LOOTED, strlen(ENEMIES_LOOTED)) == 0) {
-			noError = readEnemiesLooted(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, ITEMS_LOOTED, strlen(ITEMS_LOOTED)) == 0) {
-			noError = readItemsLooted(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, CHESTS_LOOTED, strlen(CHESTS_LOOTED)) == 0) {
-			noError = readChestsLooted(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, WAYPOINTS_UNLOCKED, strlen(WAYPOINTS_UNLOCKED)) == 0) {
-			noError = readWaypointsUnlocked(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, TRIGGERS_TRIGGERED, strlen(TRIGGERS_TRIGGERED)) == 0) {
-			noError = readTriggersTriggered(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, TILES_EXPLORED, strlen(TILES_EXPLORED)) == 0) {
-			noError = readTilesExplored(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, QUEST_STATE, strlen(QUEST_STATE)) == 0) {
-			noError = readQuestStates(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, QUEST_PROGRESS_TARGET, strlen(QUEST_PROGRESS_TARGET)) == 0) {
-			noError = readQuestProgressTargets(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, QUEST_PROGRESS_CONDITION, strlen(QUEST_PROGRESS_CONDITION)) == 0) {
-			noError = readQuestProgressConditions(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, QUEST_PROGRESS_DESCRIPTION, strlen(QUEST_PROGRESS_DESCRIPTION)) == 0) {
-			noError = readQuestProgressDescription(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, PROGRESS_CONDITION, strlen(PROGRESS_CONDITION)) == 0) {
-			noError = readProgressConditions(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, GOLD, strlen(GOLD)) == 0) {
-			noError = readGold(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, STORED_GOLD, strlen(STORED_GOLD)) == 0) {
-			noError = readStoredGold(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, ITEM_ID, strlen(ITEM_ID)) == 0) {
-			noError = readItemID(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, STORED_ITEM_ID, strlen(STORED_ITEM_ID)) == 0) {
-			noError = readStoredItemID(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_SPELLSLOT, strlen(EQUIPPED_SPELLSLOT)) == 0) {
-			noError = readEquippedWeaponSlots(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_WEAPON, strlen(EQUIPPED_WEAPON)) == 0) {
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_weapon);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_BODY, strlen(EQUIPPED_BODY)) == 0) {
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_body);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_RING_1, strlen(EQUIPPED_RING_1)) == 0) {
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_ring_1);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_RING_2, strlen(EQUIPPED_RING_2)) == 0) {
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_ring_2);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_NECK, strlen(EQUIPPED_NECK)) == 0) {
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_neck);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_BACK, strlen(EQUIPPED_BACK)) == 0) {
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_back);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, EQUIPPED_HEAD, strlen(EQUIPPED_HEAD)) == 0) {
-			noError = readEquippedItem(pos, end, data, ItemType::Equipment_head);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, WEAPON_CONFIGS, strlen(WEAPON_CONFIGS)) == 0) {
-			noError = readWeaponConfigurations(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, WEAPON_SPELL, strlen(WEAPON_SPELL)) == 0) {
-			noError = readWeaponSpell(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, QUICKSLOT, strlen(QUICKSLOT)) == 0) {
-			noError = readQuickslot(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, IS_IN_LEVEL, strlen(IS_IN_LEVEL)) == 0) {
-			noError = readIsInLevel(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, MERCHANT_STATE, strlen(MERCHANT_STATE)) == 0) {
-			noError = readMerchantState(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, SPELL_LEARNED, strlen(SPELL_LEARNED)) == 0) {
-			noError = readLearnedSpells(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, MODIFIER_LEARNED, strlen(MODIFIER_LEARNED)) == 0) {
-			noError = readLearnedModifiers(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, HINT_LEARNED, strlen(HINT_LEARNED)) == 0) {
-			noError = readLearnedHints(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, GUILD, strlen(GUILD)) == 0) {
-			noError = readGuild(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, REPUTATION_PROGRESS, strlen(REPUTATION_PROGRESS)) == 0) {
-			noError = readReputationProgress(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else if (strncmp(pos, WEATHER, strlen(WEATHER)) == 0) {
-			noError = readWeather(pos, end, data);
-			pos = gotoNextChar(pos, end, '\n');
-		}
-		else {
-			g_logger->logError("CharacterCoreReader", "unknown tag found in file " + filename);
-			return false;
-		}
-
-		if (pos == NULL || !noError) {
-			// reached end of file or error happened
-			break;
-		}
-
-		pos++;
-	}
-
-	std::fclose(savFile);
-	delete[] charBuffer;
-
-	// check data
-	if (!noError || !checkData(data)) {
-		return false;
-	}
-
+	data.tilesExplored.insert({ levelID, tiles });
 	return true;
 }

@@ -1304,6 +1304,7 @@
    <properties>
     <property name="forced" value=""/>
     <property name="hint" value="MapMove"/>
+    <property name="quest state" value="who_am_i,started"/>
    </properties>
   </object>
  </objectgroup>

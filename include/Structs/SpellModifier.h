@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Enums/SpellID.h"
+
 // if someone asks, they are arranged according to the wavelengths of their respective color. 
 enum class SpellModifierType {
 	VOID,
@@ -68,3 +70,5 @@ const SpellModifier EMPTY_SPELLMODIFIER
 	SpellModifierType::VOID,
 	0
 };
+
+typedef std::pair<SpellID, std::vector<SpellModifier>> WeaponSlot;

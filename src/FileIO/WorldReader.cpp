@@ -314,6 +314,34 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 
 					trigger.content.push_back(content);
 				}
+				else if (name.find("quest state") != std::string::npos) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, hint value property not found.");
+						return false;
+					}
+
+					std::string questID = textAttr;
+
+					size_t pos = 0;
+					if ((pos = questID.find(",")) == std::string::npos) {
+						logError("XML file could not be read, quest state trigger value must be two comma separated strings (quest id, quest state)");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::QuestStateChange);
+					content.s1 = questID.substr(0, pos);
+					questID.erase(0, pos + 1);
+
+					QuestState state = resolveQuestState(questID);
+					if (state <= QuestState::VOID || state >= QuestState::MAX) {
+						logError("Quest State not resolved: " + std::to_string(static_cast<int>(state)));
+					}
+
+					content.i1 = static_cast<int>(state);
+
+					trigger.content.push_back(content);
+				}
 				else if (name.compare("persistent") == 0) {
 					trigger.isPersistent = true;
 				}

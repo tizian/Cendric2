@@ -3,7 +3,6 @@
 #include "global.h"
 
 #include "Enums/QuestState.h"
-#include "Enums/SpellID.h"
 #include "Enums/SpellType.h"
 #include "Enums/FractionID.h"
 #include "Enums/Key.h"
@@ -61,13 +60,13 @@ struct CharacterCoreData {
 	// items & equipment
 	int gold;
 	int storedGold;
-	std::vector<std::pair<SpellID, std::vector<SpellModifier>>> equippedWeaponSlots;
+	std::vector<WeaponSlot> equippedWeaponSlots;
 	std::map<ItemType, std::string> equippedItems;
 	std::map<std::string, int> items;
 	std::map<std::string, int> storedItems;
 
 	// weapon configurations
-	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>> weaponConfigurations;
+	std::map<std::string, std::vector<WeaponSlot>> weaponConfigurations;
 	Key weaponSpell;
 
 	// quickslot assignment
@@ -107,11 +106,11 @@ const CharacterCoreData DEFAULT_CORE
 	ZERO_ATTRIBUTES,
 	0,
 	0,
-	std::vector<std::pair<SpellID, std::vector<SpellModifier>>>(),
+	std::vector<WeaponSlot>(),
 	std::map<ItemType, std::string>(),
 	std::map<std::string, int>(),
 	std::map<std::string, int>(),
-	std::map<std::string, std::vector<std::pair<SpellID, std::vector<SpellModifier>>>>(),
+	std::map<std::string, std::vector<WeaponSlot>>(),
 	Key::Chop,
 	"",
 	""

@@ -79,7 +79,6 @@ void CharacterCore::loadNew() {
 	addItem(spawn.weapon_id, 1);
 	equipItem(spawn.armor_id, ItemType::Equipment_body);
 	equipItem(spawn.weapon_id, ItemType::Equipment_weapon);
-	setQuestState("who_am_i", QuestState::Started);
 	m_stopwatch.restart();
 	g_resourceManager->deleteItemResources();
 	reloadAttributes();

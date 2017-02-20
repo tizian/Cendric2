@@ -5,15 +5,15 @@ worldy = 440
 steps = {
 	{
 		texts = {
-			{str="Elder:HereDrink", 	time=2},
-			{str="Elder:ItWillReveal", time=4},
-			{str="Elder:TakeWater", time=4}
+			{str="Elder:HereDrink", 	time=4},
+			{str="Elder:ItWillReveal", time=5},
+			{str="Elder:TakeWater", time=5}
 
 		},
 		images = {
 			{path="1_i_1.png", vel=0,  angle=0},
-			{path="1_i_2.png", vel=7, angle=90},
-			{path="1_i_3.png", vel=12, angle=90},
+			{path="1_i_2.png", vel=5, angle=90},
+			{path="1_i_3.png", vel=8, angle=90},
 		}
 	},
 	{
