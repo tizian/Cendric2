@@ -20,9 +20,6 @@ Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 
 	m_positionDefault = sf::Vector2f(box.left, box.top);
 	setPosition(m_positionDefault);
-
-	// agent placeholder
-	m_executeOnClick = std::bind(&Button::nop, this);
 }
 
 void Button::onLeftClick() {

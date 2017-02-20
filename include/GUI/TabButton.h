@@ -67,7 +67,5 @@ protected:
 	sf::Color m_highlightColor = COLOR_PURPLE;
 
 private:
-	std::function<void()> m_executeOnClick;
-	// placeholder for agents
-	void nop() const;
+	std::function<void()> m_executeOnClick = NOP;
 };

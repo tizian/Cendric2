@@ -36,8 +36,6 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_savegameNameText.setPosition(sf::Vector2f(2 * DIST_FROM_BORDER, box.height - (buttonHeight + DIST_FROM_BORDER + 50)) + getPosition());
 
 	g_inputController->startReadingText();
-	
-	m_executeOnOk = std::bind(&NewSaveGameForm::nop, this);
 }
 
 NewSaveGameForm::~NewSaveGameForm() {

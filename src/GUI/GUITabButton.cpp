@@ -21,9 +21,6 @@ GUITabButton::GUITabButton(GUIElement element) {
 	setInputInDefaultView(true);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE - 2 * OFFSET, SIZE - 2 * OFFSET));
 
-	// agent placeholder
-	m_executeOnClick = std::bind(&GUITabButton::nop, this);
-
 	Key key;
 	if (element == GUIElement::Character) {
 		key = Key::CharacterInfo;
@@ -140,8 +137,4 @@ GUIElement GUITabButton::getElement() const {
 
 GameObjectType GUITabButton::getConfiguredType() const {
 	return GameObjectType::_Button;
-}
-
-void GUITabButton::nop() const {
-
 }

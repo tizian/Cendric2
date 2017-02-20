@@ -21,9 +21,6 @@ Checkbox::Checkbox() :
 
 	setBoundingBox(m_background.getLocalBounds());
 	setInputInDefaultView(true);
-
-	// agent placeholder
-	m_executeOnClick = std::bind(&Checkbox::nop, this);
 }
 
 void Checkbox::onLeftClick() {

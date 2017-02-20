@@ -22,6 +22,8 @@
 
 #define Epsilon 1e-3f
 
+#define NOP []() {}
+
 inline float radToDeg(float rad) {
 	return rad * (180.f / M_PI);
 }

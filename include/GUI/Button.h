@@ -92,7 +92,5 @@ protected:
 	BitmapText m_text;
 
 private:
-	std::function<void()> m_executeOnClick;
-	// placeholder for agents
-	void nop() const {};
+	std::function<void()> m_executeOnClick = [](){};
 };

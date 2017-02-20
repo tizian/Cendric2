@@ -21,9 +21,6 @@ TabButton::TabButton(const sf::FloatRect& box) {
 
 	m_isActive = false;
 
-	// agent placeholder
-	m_executeOnClick = std::bind(&TabButton::nop, this);
-
 	setPosition(sf::Vector2f(box.left, box.top));
 }
 
@@ -163,8 +160,4 @@ GameObjectType TabButton::getConfiguredType() const {
 
 void TabButton::setOnClick(const std::function<void()>& agent) {
 	m_executeOnClick = agent;
-}
-
-void TabButton::nop() const {
-	// nop
 }

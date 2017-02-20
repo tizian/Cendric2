@@ -27,14 +27,10 @@ public:
 	bool isInteractable() const;
 
 private:
-	// placeholder for agents
-	void nop() const {};
-
-private:
 	bool m_isInteractable;
 	bool m_isFocused;
 	float m_interactRange;
 	MainCharacter* m_mainChar;
 	BitmapText m_interactText;
-	std::function<void()> m_executeOnInteract;
+	std::function<void()> m_executeOnInteract = NOP;
 };

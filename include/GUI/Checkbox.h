@@ -74,7 +74,5 @@ protected:
 	static const float CENTER_SIZE;
 
 private:
-	std::function<void()> m_executeOnClick;
-	// placeholder for agents
-	void nop() const {};
+	std::function<void()> m_executeOnClick = NOP;
 };
